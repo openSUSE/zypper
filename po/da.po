@@ -13,15 +13,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: zypp\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-09-25 15:48+0200\n"
-"PO-Revision-Date: 2008-04-23 17:20+0200\n"
+"POT-Creation-Date: 2008-10-08 17:27+0200\n"
+"PO-Revision-Date: 2008-10-22 15:12+0200\n"
 "Last-Translator: Martin Schlander <mschlander@opensuse.org>\n"
-"Language-Team:  <opensuse-translation@opensuse.org>\n"
+"Language-Team: Danish <opensuse-translation@opensuse.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: KBabel 1.11.4\n"
+"X-Generator: Lokalize 0.2\n"
 
 #: ../zypp/solver/detail/SATResolver.cc:981
 msgid ""
@@ -31,24 +31,22 @@ msgstr ""
 "\n"
 "ikke-installérbare tilbydere: "
 
-#: ../zypp/media/MediaException.cc:214
+#: ../zypp/media/MediaException.cc:266
 #, c-format
 msgid " SSL certificate problem, verify that the CA cert is OK for '%s'."
 msgstr " SSL-certifikatproblem. Tjek at CA-certifikatet er OK for '%s'."
 
 #: ../zypp/target/TargetImpl.cc:85
-#, fuzzy
 msgid " executed"
-msgstr "Udfør"
+msgstr " afviklet"
 
 #: ../zypp/target/TargetImpl.cc:107
-#, fuzzy
 msgid " execution failed"
-msgstr "Afvikling af DBI fejlede: %s"
+msgstr " afvikling fejlede"
 
 #: ../zypp/target/TargetImpl.cc:193
 msgid " execution skipped while aborting"
-msgstr ""
+msgstr " afvikling skippet under afbrydelse"
 
 #: ../zypp/solver/detail/SATResolver.cc:928
 #, c-format
@@ -58,17 +56,12 @@ msgstr "%s konflikter med %s, der tilbydes af %s"
 #: ../zypp/solver/detail/SATResolver.cc:914
 #, c-format
 msgid "%s is not installable"
-msgstr "%s er ikke installérbar"
+msgstr "%s kan ikke installeres"
 
 #: ../zypp/solver/detail/SATResolver.cc:933
 #, c-format
 msgid "%s obsoletes %s provided by %s"
 msgstr "%s forælder %s, der tilbydes af %s"
-
-#: ../zypp/target/rpm/RpmDb.cc:2216
-#, c-format
-msgid "%s remove failed"
-msgstr "Fjernelse af %s mislykkedes"
 
 #: ../zypp/solver/detail/SATResolver.cc:969
 #, c-format
@@ -95,18 +88,14 @@ msgstr "Acoli"
 msgid "Adangme"
 msgstr "Adangme"
 
-#: ../zypp/RepoManager.cc:1181
+#: ../zypp/RepoManager.cc:1184
 #, c-format
 msgid "Adding repository '%s'"
 msgstr "Tilføjer softwarekilden '%s'"
 
 #: ../zypp/VendorSupportOptions.cc:29
 msgid "Additional Customer Contract Necessary"
-msgstr ""
-
-#: ../zypp/target/rpm/RpmDb.cc:2092 ../zypp/target/rpm/RpmDb.cc:2230
-msgid "Additional rpm output:"
-msgstr "Yderligere rpm output:"
+msgstr "Yderligere kundekontrakt nødvendig"
 
 #. language code: ady
 #: ../zypp/LanguageCode.cc:248
@@ -203,7 +192,7 @@ msgstr "Amharic"
 
 #: ../zypp/VendorSupportOptions.cc:54
 msgid "An additional customer contract is necessary for getting support."
-msgstr ""
+msgstr "En yderligere kundekontrakt er nødvendig for at få support."
 
 # AD
 #: ../zypp/CountryCode.cc:224
@@ -332,7 +321,8 @@ msgstr "Østrig"
 msgid "Austronesian (Other)"
 msgstr "Austronesisk (Malayo-Polynesisk)"
 
-#: ../zypp/media/MediaCurl.cc:1615
+#. !\todo add comma to the message for the next release
+#: ../zypp/media/MediaCurl.cc:1619
 #, c-format
 msgid "Authentication required for '%s'"
 msgstr "Autentificering påkrævet for '%s'"
@@ -613,7 +603,7 @@ msgstr "Brunei Darussalam"
 msgid "Buginese"
 msgstr "Buginesisk"
 
-#: ../zypp/RepoManager.cc:976
+#: ../zypp/RepoManager.cc:977
 #, c-format
 msgid "Building repository '%s' cache"
 msgstr "Opbygger cache for softwarekilden '%s'"
@@ -675,23 +665,23 @@ msgstr "Kan ikke oprette sat-pulje."
 msgid "Can't acquire the mutex lock"
 msgstr "Mutex-lås kan ikke hentes"
 
-#: ../zypp/ExternalProgram.cc:245
+#: ../zypp/ExternalProgram.cc:301
 #, c-format
 msgid "Can't chdir to '/' inside chroot (%s)."
 msgstr "Kan ikke skifte mappe til '/' indenfor chroot (%s)."
 
-#: ../zypp/ExternalProgram.cc:238
+#: ../zypp/ExternalProgram.cc:294
 #, c-format
 msgid "Can't chroot to '%s' (%s)."
 msgstr "Kan ikke skifte rodmappe til '%s' (%s)."
 
 #. don't want to get here
-#: ../zypp/ExternalProgram.cc:259
+#: ../zypp/ExternalProgram.cc:315
 #, c-format
 msgid "Can't exec '%s' (%s)."
 msgstr "Kan ikke eksekvere '%s' (%s)."
 
-#: ../zypp/ExternalProgram.cc:267
+#: ../zypp/ExternalProgram.cc:323
 #, c-format
 msgid "Can't fork (%s)."
 msgstr "Kan ikke forgrene (%s)."
@@ -709,12 +699,12 @@ msgstr "Rekursive mutex-attributter kan ikke initialiseres"
 msgid "Can't open lock file: %s"
 msgstr "Kan ikke åbne låsefilen: %s"
 
-#: ../zypp/ExternalProgram.cc:174
+#: ../zypp/ExternalProgram.cc:230
 #, c-format
 msgid "Can't open pipe (%s)."
 msgstr "Kan ikke åbne dataledning (%s)."
 
-#: ../zypp/ExternalProgram.cc:163
+#: ../zypp/ExternalProgram.cc:219
 #, c-format
 msgid "Can't open pty (%s)."
 msgstr "Kunne ikke åbne pseudo-terminal: %s."
@@ -742,14 +732,19 @@ msgstr "Canada"
 msgid "Cannot create public key %s from %s keyring to file %s"
 msgstr "Kan ikke oprette den offentlige nøgle %s fra %s til filen %s"
 
-#: ../zypp/media/MediaException.cc:182
+#: ../zypp/media/MediaException.cc:234
 msgid "Cannot eject any media"
 msgstr "Kan ikke skubbe noget medie ud"
 
-#: ../zypp/media/MediaException.cc:184
+#: ../zypp/media/MediaException.cc:236
 #, c-format
 msgid "Cannot eject media '%s'"
 msgstr "Kan ikke skubbe mediet '%s' ud"
+
+#: ../zypp/media/MediaException.cc:273
+#, c-format
+msgid "Cannot find available loop device to mount the image file from '%s'"
+msgstr "Kan ikke finde tilgængelig løkkeenhed til at montere imagefilen fra '%s'"
 
 #: ../zypp/media/MediaException.cc:67
 #, c-format
@@ -926,16 +921,16 @@ msgstr "Kokosøerne"
 msgid "Colombia"
 msgstr "Colombia"
 
-#: ../zypp/ExternalProgram.cc:346
+#: ../zypp/ExternalProgram.cc:402
 #, c-format
 msgid "Command exited with status %d."
 msgstr "Kommando afsluttet med status %d."
 
-#: ../zypp/ExternalProgram.cc:371
+#: ../zypp/ExternalProgram.cc:427
 msgid "Command exited with unknown error."
 msgstr "Kommando afsluttet med ukendt fejl"
 
-#: ../zypp/ExternalProgram.cc:366
+#: ../zypp/ExternalProgram.cc:422
 #, c-format
 msgid "Command was killed by signal %d (%s)."
 msgstr "Kommando dræbtes af signalet %d (%s)."
@@ -1125,7 +1120,13 @@ msgstr "Dominica"
 msgid "Dominican Republic"
 msgstr "Dominikanske Republik"
 
-#: ../zypp/media/MediaException.cc:152
+#. TranslatorExplanation: curl is the name of a library, don't translate
+#: ../zypp/media/MediaException.cc:92 ../zypp/media/MediaException.cc:100
+#, c-format
+msgid "Download (Metalink curl) initialization failed for '%s'"
+msgstr "Download (Metalink curl) initialisering fejlede for '%s'"
+
+#: ../zypp/media/MediaException.cc:168
 #, c-format
 msgid ""
 "Download (curl) error for '%s':\n"
@@ -1142,6 +1143,14 @@ msgstr ""
 msgid "Download (curl) initialization failed for '%s'"
 msgstr "Download (curl) initialisering fejlede for '%s'"
 
+#: ../zypp/media/MediaException.cc:186 ../zypp/media/MediaException.cc:204
+#, c-format
+msgid ""
+"Download (metalink curl) error for '%s':\n"
+"Error code: %s\n"
+"Error message: %s\n"
+msgstr "Download (metalink curl)-fejl for '%s':\n Fejlkode: %s\n Fejlmeddelelse: %s\n"
+
 #. language code: dra
 #: ../zypp/LanguageCode.cc:470
 msgid "Dravidian (Other)"
@@ -1156,7 +1165,7 @@ msgstr "Duala"
 #: ../zypp/CheckSum.cc:97
 #, c-format
 msgid "Dubious type '%s' for %u byte checksum '%s'"
-msgstr "Tvivlsom type '%s' for %u byte tjeksum '%s'"
+msgstr "Tvivlsom type '%s' for %u byte checksum '%s'"
 
 #. language code: dut nld nl
 #: ../zypp/LanguageCode.cc:478 ../zypp/LanguageCode.cc:480
@@ -1220,15 +1229,15 @@ msgstr "El Salvador"
 msgid "Elamite"
 msgstr "Elamitisk"
 
-#: ../zypp/media/MediaException.cc:135
+#: ../zypp/media/MediaException.cc:151
 msgid "Empty destination in URI"
 msgstr "Tom destination i URI"
 
-#: ../zypp/media/MediaException.cc:130
+#: ../zypp/media/MediaException.cc:146
 msgid "Empty filesystem in URI"
 msgstr "Tomt filsystem i URI"
 
-#: ../zypp/media/MediaException.cc:125
+#: ../zypp/media/MediaException.cc:141
 msgid "Empty host name in URI"
 msgstr "Tomt værtsmaskinenavn i URI"
 
@@ -1264,10 +1273,16 @@ msgid "Eritrea"
 msgstr "Eritrea"
 
 #. TranslatorExplanation: curl is the name of a library, don't translate
-#: ../zypp/media/MediaException.cc:161
+#: ../zypp/media/MediaException.cc:177
 #, c-format
 msgid "Error occurred while setting download (curl) options for '%s':"
 msgstr "Fejl opstod under indstilling af download (curl)-valgmuligheder for '%s':"
+
+#. TranslatorExplanation: curl is the name of a library, don't translate
+#: ../zypp/media/MediaException.cc:195 ../zypp/media/MediaException.cc:213
+#, c-format
+msgid "Error occurred while setting download (metalink curl) options for '%s':"
+msgstr "Fejl opstod under indstilling af download (metalink curl)-valgmuligheder for '%s':"
 
 # SY
 # fuzzy
@@ -1379,7 +1394,7 @@ msgid ""
 "File %s does not have a checksum.\n"
 "Use the file anyway?"
 msgstr ""
-"Filen %s har ikke en checksum.\n"
+"Filen %s har ingen checksum.\n"
 "Vil du bruge den alligevel?"
 
 #: ../devel/devel.mvidner/installation_sources.cc:85
@@ -1389,9 +1404,9 @@ msgid ""
 "%s|%s|%s\n"
 "Use the file anyway?"
 msgstr ""
-"Filen %s er signeret med følgende nøgle:\n"
+"Filen %s bestod ikke integritetstjekt med følgende nøgle:\n"
 "%s|%s|%s\n"
-" Vil du bruge den alligevel?"
+"Vil du bruge filen alligevel?"
 
 #: ../devel/devel.mvidner/installation_sources.cc:117
 #, c-format
@@ -1402,7 +1417,7 @@ msgid ""
 msgstr ""
 "Filen %s har en ugyldig checksum.\n"
 "Forventede %s, fandt %s\n"
-" Vil du bruge den alligevel?"
+"Vil du bruge filen alligevel?"
 
 #: ../devel/devel.mvidner/installation_sources.cc:108
 #, c-format
@@ -1758,7 +1773,7 @@ msgstr "Hausa"
 
 #: ../zypp/solver/detail/SATResolver.cc:910
 msgid "Have you enabled all requested repositories?"
-msgstr ""
+msgstr "Har du aktiveret alle anmodede softwarekilder?"
 
 #. language code: haw
 #: ../zypp/LanguageCode.cc:594
@@ -2007,10 +2022,6 @@ msgstr "Ugyldig portkomponent '%s'"
 #, c-format
 msgid "Invalid regular expression '%s': regcomp returned %d"
 msgstr "Ugyldigt regulært udtryk '%s': Regcomp returnerede %d"
-
-#: ../zypp/media/MediaCurl.cc:1612
-msgid "Invalid user name or password."
-msgstr "Ugyldigt brugernavn eller adgangskode."
 
 # IR
 # fuzzy
@@ -2375,15 +2386,15 @@ msgstr "Lesotho"
 
 #: ../zypp/VendorSupportOptions.cc:20
 msgid "Level 1"
-msgstr ""
+msgstr "Niveau 1"
 
 #: ../zypp/VendorSupportOptions.cc:23
 msgid "Level 2"
-msgstr ""
+msgstr "Niveau 2"
 
 #: ../zypp/VendorSupportOptions.cc:26
 msgid "Level 3"
-msgstr ""
+msgstr "Niveau 3"
 
 #. language code: lez
 #: ../zypp/LanguageCode.cc:744
@@ -2570,7 +2581,7 @@ msgstr "Malaysia"
 msgid "Maldives"
 msgstr "Maldiverne"
 
-#: ../zypp/media/MediaException.cc:115
+#: ../zypp/media/MediaException.cc:131
 msgid "Malformed URI"
 msgstr "Dårligt formeret URI"
 
@@ -2690,12 +2701,12 @@ msgstr "Mayanske sprog"
 msgid "Mayotte"
 msgstr "Mayotte"
 
-#: ../zypp/media/MediaException.cc:169
+#: ../zypp/media/MediaException.cc:221
 #, c-format
 msgid "Media source '%s' does not contain the desired medium"
 msgstr "Mediekilden '%s' indeholder ikke det ønskede medie"
 
-#: ../zypp/media/MediaException.cc:175
+#: ../zypp/media/MediaException.cc:227
 #, c-format
 msgid "Medium '%s' is in use by another instance"
 msgstr "Mediet '%s' er i brug af en anden instans"
@@ -2707,7 +2718,7 @@ msgstr "Medie er ikke tilknyttet"
 #: ../zypp/media/MediaException.cc:53
 #, c-format
 msgid "Medium not opened when trying to perform action '%s'."
-msgstr "Mediet åbnede ikke under forsøg på at udføre handlingen '%s'."
+msgstr "Mediet åbnedes ikke under forsøg på at udføre handlingen '%s'."
 
 #. language code: men
 #: ../zypp/LanguageCode.cc:808
@@ -3082,9 +3093,9 @@ msgstr "Oman"
 #: ../zypp/parser/RepoindexFileReader.cc:116
 #, c-format
 msgid "One or both of '%s' or '%s' attributes is required."
-msgstr ""
+msgstr "En af eller begge '%s'- og '%s'-attributterne er påkrævet."
 
-#: ../zypp/media/MediaException.cc:145
+#: ../zypp/media/MediaException.cc:161
 msgid "Operation not supported by medium"
 msgstr "Operationen understøttes ikke af medie"
 
@@ -3117,10 +3128,10 @@ msgid "Otomian Languages"
 msgstr "Otomianske sprog"
 
 #. TranslatorExplanation %s = package being checked for integrity
-#: ../zypp/repo/PackageProvider.cc:243
+#: ../zypp/repo/PackageProvider.cc:247
 #, c-format
-msgid "Package %s fails integrity check. Do you want to retry?"
-msgstr "Pakken %s bestod ikke integritetstjek. Vil du forsøge igen?"
+msgid "Package %s seems to be corrupted during transfer. Do you want to retry retrieval?"
+msgstr "Pakken %s lader til at være blevet defekt under overførslen. Vil du forsøge at hente den igen?"
 
 #. language code: pal
 #: ../zypp/LanguageCode.cc:926
@@ -3195,17 +3206,17 @@ msgstr "Papuan-Australsk (Andre)"
 msgid "Paraguay"
 msgstr "Paraguay"
 
-#: ../zypp/media/MediaException.cc:106
+#: ../zypp/media/MediaException.cc:122
 #, c-format
 msgid "Path '%s' on medium '%s' is not a directory."
 msgstr "Stien '%s' på mediet '%s' er ikke en mappe."
 
-#: ../zypp/media/MediaException.cc:98
+#: ../zypp/media/MediaException.cc:114
 #, c-format
 msgid "Path '%s' on medium '%s' is not a file."
 msgstr "Stien '%s' på mediet '%s' er ikke en fil."
 
-#: ../zypp/media/MediaException.cc:200
+#: ../zypp/media/MediaException.cc:252
 #, c-format
 msgid "Permission to access '%s' denied."
 msgstr "Adgangstilladelse til '%s' nægtet."
@@ -3277,15 +3288,15 @@ msgstr "Prakritsprog"
 
 #: ../zypp/VendorSupportOptions.cc:45
 msgid "Problem determination, which means technical support designed to provide compatibility information, installation assistance, usage support, on-going maintenance and basic troubleshooting. Level 1 Support is not intended to correct product defect errors."
-msgstr ""
+msgstr "Problembestemmelse, som betyder teknisk support designet til at give kompatibilitetsinformation, installationsassistance, brugssupport, løbende vedligeholdelse og basal fejlsøgning. Niveau 1-support er ikke beregnet til at rette produktfejl."
 
 #: ../zypp/VendorSupportOptions.cc:48
 msgid "Problem isolation, which means technical support designed to duplicate customer problems, isolate problem area and provide resolution for problems not resolved by Level 1 Support."
-msgstr ""
+msgstr "Problemisolering, som betyder teknisk support designet til at duplikere kundeproblemer, isolere problemområdet og levere løsning på problemer som ikke løses af niveau 1-support."
 
 #: ../zypp/VendorSupportOptions.cc:51
 msgid "Problem resolution, which means technical support designed to resolve complex problems by engaging engineering in resolution of product defects which have been identified by Level 2 Support."
-msgstr ""
+msgstr "Problemløsning, som betyder teknisk support designet til at løse komplekse problemer ved at inddrage udvikling i løsning af produktfejl som er blevet identificeret af niveau 2-support."
 
 #. language code: pro
 #: ../zypp/LanguageCode.cc:956
@@ -3318,8 +3329,9 @@ msgid "Query string parsing not supported for this URL"
 msgstr "Fortolkning af forespørgselsstreng er ikke understøttet af denne URL"
 
 #. TranslatorExplanation after semicolon is error message
-#: ../zypp/target/rpm/RpmDb.cc:892 ../zypp/target/rpm/RpmDb.cc:2080
-#: ../zypp/target/rpm/RpmDb.cc:2221
+#. TranslatorExplanation the colon is followed by an error message
+#: ../zypp/target/rpm/RpmDb.cc:892 ../zypp/target/rpm/RpmDb.cc:2081
+#: ../zypp/target/rpm/RpmDb.cc:2217
 msgid "RPM failed: "
 msgstr "RPM fejlede: "
 
@@ -3350,15 +3362,15 @@ msgstr "Rarotongansk"
 msgid "Relative path not allowed if authority exists"
 msgstr "Relativ sti er ikke tilladt hvis autoritet eksisterer"
 
-#: ../zypp/RepoManager.cc:1311
+#: ../zypp/RepoManager.cc:1314
 #, c-format
 msgid "Removing repository '%s'"
 msgstr "Fjerner softwarekilden '%s'"
 
 #: ../zypp/parser/RepoindexFileReader.cc:128
-#, fuzzy, c-format
+#, c-format
 msgid "Required attribute '%s' is missing."
-msgstr "Påkrævet fil mangler: "
+msgstr "Den påkrævede attribut '%s' mangler."
 
 # RE
 #. :QAT:634:
@@ -3847,17 +3859,19 @@ msgstr "Syrien"
 msgid "Syriac"
 msgstr "Syrisk"
 
-#: ../zypp/media/MediaException.cc:91
+#: ../zypp/media/MediaException.cc:107
 #, c-format
 msgid "System exception '%s' on medium '%s'."
 msgstr "Systemundtagelse '%s' på mediet '%s'."
 
 #: ../zypp/ZYppFactory.cc:361
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "System management is locked by the application with pid %d (%s).\n"
 "Please close this application before trying again."
-msgstr "Systemhåndtering låses af programmet med pid %d. Luk dette program, før du prøver igen."
+msgstr ""
+"Systemhåndtering låses af programmet med pid %d (%s).\n"
+" Luk dette program, før du prøver igen."
 
 #. language code: tgl tl
 #: ../zypp/LanguageCode.cc:1108
@@ -3936,12 +3950,11 @@ msgstr "Thailand"
 
 #: ../zypp/VendorSupportOptions.cc:39
 msgid "The level of support is unspecified"
-msgstr ""
+msgstr "Supportniveau er ikke angivet"
 
 #: ../zypp/VendorSupportOptions.cc:42
-#, fuzzy
 msgid "The vendor does not provide support."
-msgstr "Disken eksisterer ikke."
+msgstr "Leverandøren yder ikke support."
 
 #: ../zypp/base/InterProcessMutex.cc:139
 msgid "This action is being run by another program already."
@@ -3950,7 +3963,7 @@ msgstr "Denne handling køres allerede af et andet program."
 #: ../zypp/solver/detail/SATResolver.cc:1118
 #: ../zypp/solver/detail/SATResolver.cc:1136
 msgid "This request will break your system!"
-msgstr ""
+msgstr "Denne anmodning vil ødelægge dit system!"
 
 # TW
 # fuzzy
@@ -3971,7 +3984,7 @@ msgstr "Tigre"
 msgid "Tigrinya"
 msgstr "Tigrinya"
 
-#: ../zypp/media/MediaException.cc:207
+#: ../zypp/media/MediaException.cc:259
 #, c-format
 msgid "Timeout exceed when access '%s'."
 msgstr "Tidsfrist udløber, når '%s' tilgås."
@@ -4200,9 +4213,8 @@ msgid "United States Minor Outlying Islands"
 msgstr "Fjerne, mindre øer, USA"
 
 #: ../zypp/target/TargetImpl.cc:877
-#, fuzzy
 msgid "Unknown Distribution"
-msgstr "Ukendt 'list'-valgmulighed"
+msgstr "Ukendt distribution"
 
 #: ../zypp/CountryCode.cc:135
 msgid "Unknown country: "
@@ -4214,14 +4226,14 @@ msgstr "Ukendt sprog: "
 
 #: ../zypp/VendorSupportOptions.cc:56
 msgid "Unknown support option. Description not available"
-msgstr ""
+msgstr "Ukendt support-mulighed. Beskrivelse ikke tilgængelig"
 
 #: ../zypp/media/MediaUserAuth.cc:123
 #, c-format
 msgid "Unsupported HTTP authentication method '%s'"
-msgstr "Ikke understøttet HTTP autentificeringsmetode '%s'"
+msgstr "Ikke-understøttet HTTP autentificeringsmetode '%s'"
 
-#: ../zypp/media/MediaException.cc:140
+#: ../zypp/media/MediaException.cc:156
 #, c-format
 msgid "Unsupported URI scheme in '%s'."
 msgstr "Ikke-understøttet URI-skema i '%s'."
@@ -4235,7 +4247,7 @@ msgid ""
 msgstr ""
 "Ikke-pålidelig nøgle blev fundet:\n"
 "%s|%s|%s\n"
-" Har du tillid til nøglen?"
+"Vil du betro nøglen?"
 
 #. language code: hsb
 #: ../zypp/LanguageCode.cc:612
@@ -4270,7 +4282,7 @@ msgstr "URL-oversigt tillader ikke et brugernavn"
 
 #: ../zypp/url/UrlBase.cc:820
 msgid "Url scheme is a required component"
-msgstr "Url-oversigt er en påkrævet komponent"
+msgstr "URL-oversigt er en påkrævet komponent"
 
 #: ../zypp/url/UrlBase.cc:1010
 msgid "Url scheme requires a host component"
@@ -4303,7 +4315,7 @@ msgstr "Vai"
 #. we will throw this later if no URL checks out fine
 #: ../zypp/RepoManager.cc:789
 msgid "Valid metadata not found at specified URL(s)"
-msgstr "Ingen gyldig metadata fundet på specificerede URL(s)"
+msgstr "Ingen gyldig metadata fundet på specificerede URL(er)"
 
 # VU
 #. :VNM:704:
@@ -4483,11 +4495,11 @@ msgstr "Zulu"
 msgid "Zuni"
 msgstr "Zuni"
 
-#: ../zypp/repo/PackageProvider.cc:194
+#: ../zypp/repo/PackageProvider.cc:195
 msgid "applydeltarpm check failed."
 msgstr "applydeltarpm-kontrol mislykkedes."
 
-#: ../zypp/repo/PackageProvider.cc:208
+#: ../zypp/repo/PackageProvider.cc:212
 msgid "applydeltarpm failed."
 msgstr "applydeltarpm mislykkedes."
 
@@ -4505,7 +4517,7 @@ msgstr "kan ikke installere både %s og %s"
 msgid "conflicting requests"
 msgstr "modstridende forespørgsler"
 
-#: ../zypp/target/rpm/RpmDb.cc:2374
+#: ../zypp/target/rpm/RpmDb.cc:2369
 #, c-format
 msgid "created backup %s"
 msgstr "backup %s blev oprettet"
@@ -4558,7 +4570,7 @@ msgstr "nedgradering af %s til %s"
 #: ../zypp/solver/detail/SATResolver.cc:1119
 #: ../zypp/solver/detail/SATResolver.cc:1137
 msgid "ignore the warning of a broken system"
-msgstr ""
+msgstr "Ignorér advarslen om et ødelagt system"
 
 #: ../zypp/solver/detail/SATResolver.cc:1202
 #, c-format
@@ -4575,7 +4587,7 @@ msgstr ""
 
 #: ../zypp/VendorSupportOptions.cc:31
 msgid "invalid"
-msgstr ""
+msgstr "ugyldig"
 
 #: ../zypp/solver/detail/SATResolver.cc:1061
 #: ../zypp/solver/detail/SATResolver.cc:1104
@@ -4627,10 +4639,6 @@ msgstr ""
 "rpm oprettet %s som %s.\n"
 "Her er de første 25 linjer af forskelle:\n"
 
-#: ../zypp/target/rpm/RpmDb.cc:2077 ../zypp/target/rpm/RpmDb.cc:2218
-msgid "rpm output:"
-msgstr "rpm output:"
-
 #. %s = filenames
 #: ../zypp/target/rpm/RpmDb.cc:2062
 #, c-format
@@ -4648,9 +4656,8 @@ msgstr ""
 "Her er de første 25 linjer af forskelle:\n"
 
 #: ../zypp/solver/detail/SATResolver.cc:906
-#, fuzzy
 msgid "some dependency problem"
-msgstr "Kan ikke installere %s grundet afhængighedsproblemer"
+msgstr "et eller andet afhængighedsproblem"
 
 #: ../zypp/solver/detail/SATResolver.cc:983
 msgid "uninstallable providers: "
@@ -4661,9 +4668,20 @@ msgid "unknown"
 msgstr "ukendt"
 
 #: ../zypp/VendorSupportOptions.cc:17
-#, fuzzy
 msgid "unsupported"
-msgstr " - ikke understøttet"
+msgstr "ikke-supporteret"
+
+#~ msgid "%s remove failed"
+#~ msgstr "Fjernelse af %s mislykkedes"
+
+#~ msgid "Additional rpm output:"
+#~ msgstr "Yderligere rpm-output:"
+
+#~ msgid "Invalid user name or password."
+#~ msgstr "Ugyldigt brugernavn eller adgangskode."
+
+#~ msgid "rpm output:"
+#~ msgstr "rpm-output:"
 
 #~ msgid "%s install failed"
 #~ msgstr "Installation af %s mislykkedes"
@@ -4674,20 +4692,3 @@ msgstr " - ikke understøttet"
 #~ msgid "%s remove ok"
 #~ msgstr "%s fjernelse ok"
 
-#, fuzzy
-#~ msgid "Download (Metalink curl) initialization failed for '%s'"
-#~ msgstr "Download (curl) initialisering fejlede for '%s'"
-
-#, fuzzy
-#~ msgid ""
-#~ "Download (metalink curl) error for '%s':\n"
-#~ "Error code: %s\n"
-#~ "Error message: %s\n"
-#~ msgstr ""
-#~ "Download (curl)-fejl for '%s':\n"
-#~ "Fejlkode: %s\n"
-#~ "Fejlmeddelelse: %s\n"
-
-#, fuzzy
-#~ msgid "Error occurred while setting download (metalink curl) options for '%s':"
-#~ msgstr "Fejl opstod under indstilling af download (curl)-valgmuligheder for '%s':"

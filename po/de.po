@@ -1,3 +1,4 @@
+# translation of zypp.de.po to German
 # translation of zypp.de.po to
 # @TITLE@
 # Copyright (C) 2006, SUSE Linux GmbH, Nuremberg
@@ -7,18 +8,20 @@
 # Lars Vogdt <lrupp@suse.de>, 2007.
 # Stephan Kulow <coolo@kde.org>, 2007.
 # Marko Schugardt <mail.sapex@gmx.de>, 2008.
+# Michael Skiba <trans@michael-skiba.de>, 2008.
 msgid ""
 msgstr ""
 "Project-Id-Version: zypp.de\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-09-25 15:48+0200\n"
-"PO-Revision-Date: Fri Sep 26 15:20:31 UTC 2008\n"
-"Last-Translator: Marko Schugardt <mail.sapex@gmx.de>\n"
+"POT-Creation-Date: 2008-10-08 17:27+0200\n"
+"PO-Revision-Date: 2008-10-23 16:54+0200\n"
+"Last-Translator: Michael Skiba <trans@michael-skiba.de>\n"
 "Language-Team: German <opensuse-translation-de@opensuse.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Generator: KBabel 1.11.4\n"
 
 #: ../zypp/solver/detail/SATResolver.cc:981
 msgid ""
@@ -28,7 +31,7 @@ msgstr ""
 "\n"
 "uninstallierbare Anbieter: "
 
-#: ../zypp/media/MediaException.cc:214
+#: ../zypp/media/MediaException.cc:266
 #, c-format
 msgid " SSL certificate problem, verify that the CA cert is OK for '%s'."
 msgstr " SSL-Zertifikat-Problem, überprüfen Sie, ob das CA-Zertifikat für '%s' in Ordnung ist."
@@ -60,11 +63,6 @@ msgstr "%s ist nicht installierbar"
 msgid "%s obsoletes %s provided by %s"
 msgstr "%s macht %s obsolet durch Anbieten von %s"
 
-#: ../zypp/target/rpm/RpmDb.cc:2216
-#, c-format
-msgid "%s remove failed"
-msgstr "Fehler beim Entfernen von %s"
-
 #: ../zypp/solver/detail/SATResolver.cc:969
 #, c-format
 msgid "%s requires %s, but this requirement cannot be provided"
@@ -90,7 +88,7 @@ msgstr "Acholi-Sprache"
 msgid "Adangme"
 msgstr "Adangme-Sprache"
 
-#: ../zypp/RepoManager.cc:1181
+#: ../zypp/RepoManager.cc:1184
 #, c-format
 msgid "Adding repository '%s'"
 msgstr "Füge Repository '%s' hinzu"
@@ -98,10 +96,6 @@ msgstr "Füge Repository '%s' hinzu"
 #: ../zypp/VendorSupportOptions.cc:29
 msgid "Additional Customer Contract Necessary"
 msgstr "Zusätzlicher Kundenvertrag notwendig"
-
-#: ../zypp/target/rpm/RpmDb.cc:2092 ../zypp/target/rpm/RpmDb.cc:2230
-msgid "Additional rpm output:"
-msgstr "Zusätzliche rpm-Ausgabe:"
 
 #. language code: ady
 #: ../zypp/LanguageCode.cc:248
@@ -316,7 +310,8 @@ msgstr "Österreich"
 msgid "Austronesian (Other)"
 msgstr "Andere austronesische Sprachen"
 
-#: ../zypp/media/MediaCurl.cc:1615
+#. !\todo add comma to the message for the next release
+#: ../zypp/media/MediaCurl.cc:1619
 #, c-format
 msgid "Authentication required for '%s'"
 msgstr "Authentifizierung benötigt für '%s'"
@@ -580,7 +575,7 @@ msgstr "Brunei Darussalam"
 msgid "Buginese"
 msgstr "Bugi-Sprache"
 
-#: ../zypp/RepoManager.cc:976
+#: ../zypp/RepoManager.cc:977
 #, c-format
 msgid "Building repository '%s' cache"
 msgstr "Erzeuge Zwischenspeicher für Repository '%s'"
@@ -638,23 +633,23 @@ msgstr "Kann keinen Sat-Pool erstellen."
 msgid "Can't acquire the mutex lock"
 msgstr "Mutex-Sperre kann nicht abgerufen werden"
 
-#: ../zypp/ExternalProgram.cc:245
+#: ../zypp/ExternalProgram.cc:301
 #, c-format
 msgid "Can't chdir to '/' inside chroot (%s)."
 msgstr "Kann nicht zu '/' innerhalb des Chroot (%s) wechseln."
 
-#: ../zypp/ExternalProgram.cc:238
+#: ../zypp/ExternalProgram.cc:294
 #, c-format
 msgid "Can't chroot to '%s' (%s)."
 msgstr "Kann nicht zu '%s' (%s) chroot'en."
 
 #. don't want to get here
-#: ../zypp/ExternalProgram.cc:259
+#: ../zypp/ExternalProgram.cc:315
 #, c-format
 msgid "Can't exec '%s' (%s)."
 msgstr "Kann '%s' (%s) nicht ausführen."
 
-#: ../zypp/ExternalProgram.cc:267
+#: ../zypp/ExternalProgram.cc:323
 #, c-format
 msgid "Can't fork (%s)."
 msgstr "Kann nicht abzweigen (%s)."
@@ -672,12 +667,12 @@ msgstr "Rekursiver Mutex kann nicht initialisiert werden"
 msgid "Can't open lock file: %s"
 msgstr "Kann Sperrdatei %s nicht öffnen"
 
-#: ../zypp/ExternalProgram.cc:174
+#: ../zypp/ExternalProgram.cc:230
 #, c-format
 msgid "Can't open pipe (%s)."
 msgstr "Kann Pipe (%s) nicht öffnen."
 
-#: ../zypp/ExternalProgram.cc:163
+#: ../zypp/ExternalProgram.cc:219
 #, c-format
 msgid "Can't open pty (%s)."
 msgstr "Kann PTY nicht öffnen (%s)."
@@ -705,14 +700,19 @@ msgstr "Kanada"
 msgid "Cannot create public key %s from %s keyring to file %s"
 msgstr "Kann den öffentlichen Schlüssel %s vom Schlüsselring %s zu Datei %s nicht erstellen"
 
-#: ../zypp/media/MediaException.cc:182
+#: ../zypp/media/MediaException.cc:234
 msgid "Cannot eject any media"
 msgstr "Kann kein Medium auswerfen"
 
-#: ../zypp/media/MediaException.cc:184
+#: ../zypp/media/MediaException.cc:236
 #, c-format
 msgid "Cannot eject media '%s'"
 msgstr "Kann Medium '%s' nicht auswerfen"
+
+#: ../zypp/media/MediaException.cc:273
+#, c-format
+msgid "Cannot find available loop device to mount the image file from '%s'"
+msgstr ""
 
 #: ../zypp/media/MediaException.cc:67
 #, c-format
@@ -881,16 +881,16 @@ msgstr "Kokosinseln"
 msgid "Colombia"
 msgstr "Kolumbien"
 
-#: ../zypp/ExternalProgram.cc:346
+#: ../zypp/ExternalProgram.cc:402
 #, c-format
 msgid "Command exited with status %d."
 msgstr "Kommando mit Status %d beendet."
 
-#: ../zypp/ExternalProgram.cc:371
+#: ../zypp/ExternalProgram.cc:427
 msgid "Command exited with unknown error."
 msgstr "Kommando mit unbekanntem Fehler beendet."
 
-#: ../zypp/ExternalProgram.cc:366
+#: ../zypp/ExternalProgram.cc:422
 #, c-format
 msgid "Command was killed by signal %d (%s)."
 msgstr "Kommando wurde mit Signal %d (%s) beendet."
@@ -1071,7 +1071,13 @@ msgstr "Dominica"
 msgid "Dominican Republic"
 msgstr "Dominikanische Republik"
 
-#: ../zypp/media/MediaException.cc:152
+#. TranslatorExplanation: curl is the name of a library, don't translate
+#: ../zypp/media/MediaException.cc:92 ../zypp/media/MediaException.cc:100
+#, c-format
+msgid "Download (Metalink curl) initialization failed for '%s'"
+msgstr "Initialisierung des Herunterladens (Metalink-Curl) für '%s' fehlgeschlagen"
+
+#: ../zypp/media/MediaException.cc:168
 #, c-format
 msgid ""
 "Download (curl) error for '%s':\n"
@@ -1087,6 +1093,17 @@ msgstr ""
 #, c-format
 msgid "Download (curl) initialization failed for '%s'"
 msgstr "Initialisierung des Downloads (curl) für '%s' fehlgeschlagen"
+
+#: ../zypp/media/MediaException.cc:186 ../zypp/media/MediaException.cc:204
+#, c-format
+msgid ""
+"Download (metalink curl) error for '%s':\n"
+"Error code: %s\n"
+"Error message: %s\n"
+msgstr ""
+"Fehler beim Herunterladen (Metalink-Curl) für '%s':\n"
+"Fehlerkode: %s\n"
+"Fehlermeldung: %s\n"
 
 #. language code: dra
 #: ../zypp/LanguageCode.cc:470
@@ -1164,15 +1181,15 @@ msgstr "El Salvador"
 msgid "Elamite"
 msgstr "Elamisch"
 
-#: ../zypp/media/MediaException.cc:135
+#: ../zypp/media/MediaException.cc:151
 msgid "Empty destination in URI"
 msgstr "Leerer Ursprung in URI"
 
-#: ../zypp/media/MediaException.cc:130
+#: ../zypp/media/MediaException.cc:146
 msgid "Empty filesystem in URI"
 msgstr "Leeres Dateisystem in URI"
 
-#: ../zypp/media/MediaException.cc:125
+#: ../zypp/media/MediaException.cc:141
 msgid "Empty host name in URI"
 msgstr "Leerer Hostname in URI"
 
@@ -1206,10 +1223,16 @@ msgid "Eritrea"
 msgstr "Eritrea"
 
 #. TranslatorExplanation: curl is the name of a library, don't translate
-#: ../zypp/media/MediaException.cc:161
+#: ../zypp/media/MediaException.cc:177
 #, c-format
 msgid "Error occurred while setting download (curl) options for '%s':"
 msgstr "Beim Setzen der Download-Optionen (curl) für '%s' trat ein Fehler auf:"
+
+#. TranslatorExplanation: curl is the name of a library, don't translate
+#: ../zypp/media/MediaException.cc:195 ../zypp/media/MediaException.cc:213
+#, c-format
+msgid "Error occurred while setting download (metalink curl) options for '%s':"
+msgstr "Fehler trat auf beim Setzen der Optionen des Herunterladens (Curl) für '%s':"
 
 #. language code: myv
 #: ../zypp/LanguageCode.cc:850
@@ -1924,10 +1947,6 @@ msgstr "Unzulässige Portkomponente '%s'"
 msgid "Invalid regular expression '%s': regcomp returned %d"
 msgstr "Ungültiger regulärer Ausdruck '%s': regcomp gab %d wieder"
 
-#: ../zypp/media/MediaCurl.cc:1612
-msgid "Invalid user name or password."
-msgstr "Ungültiger Benutzername oder ungültiges Passwort."
-
 #. :IRQ:368:
 #: ../zypp/CountryCode.cc:329
 msgid "Iran"
@@ -2460,7 +2479,7 @@ msgstr "Malaysia"
 msgid "Maldives"
 msgstr "Malediven"
 
-#: ../zypp/media/MediaException.cc:115
+#: ../zypp/media/MediaException.cc:131
 msgid "Malformed URI"
 msgstr "Missgebildete URI"
 
@@ -2569,12 +2588,12 @@ msgstr "Maya-Sprachen"
 msgid "Mayotte"
 msgstr "Mayotte"
 
-#: ../zypp/media/MediaException.cc:169
+#: ../zypp/media/MediaException.cc:221
 #, c-format
 msgid "Media source '%s' does not contain the desired medium"
 msgstr "Medienquelle '%s' enthält nicht das gewünschte Medium"
 
-#: ../zypp/media/MediaException.cc:175
+#: ../zypp/media/MediaException.cc:227
 #, c-format
 msgid "Medium '%s' is in use by another instance"
 msgstr "Medium '%s' wird gerade von einer anderen Instanz benutzt"
@@ -2938,7 +2957,7 @@ msgstr "Oman"
 msgid "One or both of '%s' or '%s' attributes is required."
 msgstr "Eine oder beide der Eigenschaften '%s' oder '%s' sind notwendig."
 
-#: ../zypp/media/MediaException.cc:145
+#: ../zypp/media/MediaException.cc:161
 msgid "Operation not supported by medium"
 msgstr "Operation wird durch das Medium nicht unterstützt"
 
@@ -2968,9 +2987,9 @@ msgid "Otomian Languages"
 msgstr "Otomangue-Sprachen"
 
 #. TranslatorExplanation %s = package being checked for integrity
-#: ../zypp/repo/PackageProvider.cc:243
-#, c-format
-msgid "Package %s fails integrity check. Do you want to retry?"
+#: ../zypp/repo/PackageProvider.cc:247
+#, fuzzy, c-format
+msgid "Package %s seems to be corrupted during transfer. Do you want to retry retrieval?"
 msgstr "Paket %s besteht Integritätsprüfung nicht. Wollen Sie es erneut versuchen?"
 
 #. language code: pal
@@ -3043,17 +3062,17 @@ msgstr "Andere Papuasprachen"
 msgid "Paraguay"
 msgstr "Paraguay"
 
-#: ../zypp/media/MediaException.cc:106
+#: ../zypp/media/MediaException.cc:122
 #, c-format
 msgid "Path '%s' on medium '%s' is not a directory."
 msgstr "Pfad '%s' auf Medium '%s' ist kein Verzeichnis."
 
-#: ../zypp/media/MediaException.cc:98
+#: ../zypp/media/MediaException.cc:114
 #, c-format
 msgid "Path '%s' on medium '%s' is not a file."
 msgstr "Pfad '%s' auf Medium '%s' ist keine Datei."
 
-#: ../zypp/media/MediaException.cc:200
+#: ../zypp/media/MediaException.cc:252
 #, c-format
 msgid "Permission to access '%s' denied."
 msgstr "Zugriffserlaubnis auf '%s' verweigert."
@@ -3125,26 +3144,15 @@ msgstr "Prâkrit"
 
 #: ../zypp/VendorSupportOptions.cc:45
 msgid "Problem determination, which means technical support designed to provide compatibility information, installation assistance, usage support, on-going maintenance and basic troubleshooting. Level 1 Support is not intended to correct product defect errors."
-msgstr ""
-"Problembestimmung bedeutet, technische Unterstützung, die entworfen wurde,"
-"um Kompatibilitätsinformationen, Installationsassistenz, Anwendungsunterstützung,"
-"fortlaufende Aufrechterhaltung und grundlegende Hilfe bei Fehlersuche anzubieten."
-"Level-1-Unterstützung beabsichtigt nicht, Produktdefektfehler zu beheben."
+msgstr "Problembestimmung bedeutet, technische Unterstützung, die entworfen wurde,um Kompatibilitätsinformationen, Installationsassistenz, Anwendungsunterstützung,fortlaufende Aufrechterhaltung und grundlegende Hilfe bei Fehlersuche anzubieten.Level-1-Unterstützung beabsichtigt nicht, Produktdefektfehler zu beheben."
 
 #: ../zypp/VendorSupportOptions.cc:48
 msgid "Problem isolation, which means technical support designed to duplicate customer problems, isolate problem area and provide resolution for problems not resolved by Level 1 Support."
-msgstr ""
-"Problemisolation bedeutet, technische Unterstützung, die entworfen wurde,"
-"um Kundenprobleme zu vervielfältigen, Problembereiche zu isolieren und"
-"Lösungen für Probleme anzubieten, die nicht von der Level-1-Unterstützung"
-"gelöst wurden."
+msgstr "Problemisolation bedeutet, technische Unterstützung, die entworfen wurde,um Kundenprobleme zu vervielfältigen, Problembereiche zu isolieren undLösungen für Probleme anzubieten, die nicht von der Level-1-Unterstützunggelöst wurden."
 
 #: ../zypp/VendorSupportOptions.cc:51
 msgid "Problem resolution, which means technical support designed to resolve complex problems by engaging engineering in resolution of product defects which have been identified by Level 2 Support."
-msgstr ""
-"Problemlösung bedeutet, technische Unterstützung, die entworfen wurde,"
-"um komplexe Probleme zu lösen, durch verbindliche Technik bei der Lösung von"
-"Produktdefekten, die nicht von der Level-2-Unterstützung gelöst wurden."
+msgstr "Problemlösung bedeutet, technische Unterstützung, die entworfen wurde,um komplexe Probleme zu lösen, durch verbindliche Technik bei der Lösung vonProduktdefekten, die nicht von der Level-2-Unterstützung gelöst wurden."
 
 #. language code: pro
 #: ../zypp/LanguageCode.cc:956
@@ -3176,8 +3184,9 @@ msgid "Query string parsing not supported for this URL"
 msgstr "Die Analyse von Anfragezeichenketten wird für diese URL nicht unterstützt"
 
 #. TranslatorExplanation after semicolon is error message
-#: ../zypp/target/rpm/RpmDb.cc:892 ../zypp/target/rpm/RpmDb.cc:2080
-#: ../zypp/target/rpm/RpmDb.cc:2221
+#. TranslatorExplanation the colon is followed by an error message
+#: ../zypp/target/rpm/RpmDb.cc:892 ../zypp/target/rpm/RpmDb.cc:2081
+#: ../zypp/target/rpm/RpmDb.cc:2217
 msgid "RPM failed: "
 msgstr "RPM fehlgeschlagen: "
 
@@ -3205,7 +3214,7 @@ msgstr "Rarotonganisch"
 msgid "Relative path not allowed if authority exists"
 msgstr "Relativer Pfad nicht erlaubt, wenn Zertifizierungsstelle vorhanden"
 
-#: ../zypp/RepoManager.cc:1311
+#: ../zypp/RepoManager.cc:1314
 #, c-format
 msgid "Removing repository '%s'"
 msgstr "Entferne Repository '%s'"
@@ -3665,7 +3674,7 @@ msgstr "Syrien"
 msgid "Syriac"
 msgstr "Syrisch"
 
-#: ../zypp/media/MediaException.cc:91
+#: ../zypp/media/MediaException.cc:107
 #, c-format
 msgid "System exception '%s' on medium '%s'."
 msgstr "Systemausnahme '%s' auf Medium '%s'."
@@ -3786,7 +3795,7 @@ msgstr "Tigre-Sprache"
 msgid "Tigrinya"
 msgstr "Tigrinja-Sprache"
 
-#: ../zypp/media/MediaException.cc:207
+#: ../zypp/media/MediaException.cc:259
 #, c-format
 msgid "Timeout exceed when access '%s'."
 msgstr "Zeitüberschreitung beim Zugriff auf '%s'."
@@ -4020,7 +4029,7 @@ msgstr "Unbekannte Unterstützungsoption. Beschreibung nicht verfügbar"
 msgid "Unsupported HTTP authentication method '%s'"
 msgstr "Nicht unterstützte HTTP-Authentifizierungsmethode '%s'"
 
-#: ../zypp/media/MediaException.cc:140
+#: ../zypp/media/MediaException.cc:156
 #, c-format
 msgid "Unsupported URI scheme in '%s'."
 msgstr "Nicht unterstütztes URI-Schema in '%s'."
@@ -4269,11 +4278,11 @@ msgstr "Zulu-Sprache"
 msgid "Zuni"
 msgstr "Zuni-Sprache"
 
-#: ../zypp/repo/PackageProvider.cc:194
+#: ../zypp/repo/PackageProvider.cc:195
 msgid "applydeltarpm check failed."
 msgstr "applydeltarpm-Prüfung fehlgeschlagen."
 
-#: ../zypp/repo/PackageProvider.cc:208
+#: ../zypp/repo/PackageProvider.cc:212
 msgid "applydeltarpm failed."
 msgstr "applydeltarpm fehlgeschlagen."
 
@@ -4291,7 +4300,7 @@ msgstr "Kann beides nicht installieren, %s und %s"
 msgid "conflicting requests"
 msgstr "kollidierende Anfragen"
 
-#: ../zypp/target/rpm/RpmDb.cc:2374
+#: ../zypp/target/rpm/RpmDb.cc:2369
 #, c-format
 msgid "created backup %s"
 msgstr "Sicherung %s erstellt"
@@ -4413,10 +4422,6 @@ msgstr ""
 "rpm hat %s als %s erstellt.\n"
 "Hier die ersten 25 Zeilen mit Unterschieden:\n"
 
-#: ../zypp/target/rpm/RpmDb.cc:2077 ../zypp/target/rpm/RpmDb.cc:2218
-msgid "rpm output:"
-msgstr "rpm-Ausgabe:"
-
 #. %s = filenames
 #: ../zypp/target/rpm/RpmDb.cc:2062
 #, c-format
@@ -4449,414 +4454,3 @@ msgstr "Unbekannt"
 msgid "unsupported"
 msgstr "nicht unterstützt"
 
-#~ msgid "%s install failed"
-#~ msgstr "Fehler bei der Installation von %s"
-
-#~ msgid "%s installed ok"
-#~ msgstr "%s ordnungsgemäß installiert"
-
-#~ msgid "%s remove ok"
-#~ msgstr "%s ordnungsgemäß entfernt"
-
-#~ msgid "Download (Metalink curl) initialization failed for '%s'"
-#~ msgstr "Initialisierung des Herunterladens (Metalink-Curl) für '%s' fehlgeschlagen"
-
-#~ msgid ""
-#~ "Download (metalink curl) error for '%s':\n"
-#~ "Error code: %s\n"
-#~ "Error message: %s\n"
-#~ msgstr ""
-#~ "Fehler beim Herunterladen (Metalink-Curl) für '%s':\n"
-#~ "Fehlerkode: %s\n"
-#~ "Fehlermeldung: %s\n"
-
-#~ msgid "Error occurred while setting download (metalink curl) options for '%s':"
-#~ msgstr "Fehler trat auf beim Setzen der Optionen des Herunterladens (Curl) für '%s':"
-
-#~ msgid "%s provides this dependency, but would change the architecture of the installed item"
-#~ msgstr "%s stellt diese Abhängigkeit zur Verfügung, ändert aber die Architektur des installierten Elements"
-
-#~ msgid "%s provides this dependency, but would change the vendor of the installed item"
-#~ msgstr "%s stellt diese Abhängigkeit zur Verfügung, ändert aber den Anbieter des installierten Elements"
-
-#~ msgid "Do not install or delete the resolvables concerned"
-#~ msgstr "Betreffende auflösbare Objekte nicht installieren oder löschen"
-
-#~ msgid "Ignore that %s is already set to install"
-#~ msgstr "Ignorieren, dass %s bereits für die Installation festgelegt wurde"
-
-#~ msgid "Ignore the obsolete %s in %s"
-#~ msgstr "Veraltete %s in %s ignorieren"
-
-#~ msgid "Ignore this conflict of %s"
-#~ msgstr "Diesen Konflikt von %s ignorieren"
-
-#~ msgid "Ignore this requirement just here"
-#~ msgstr "Anforderung nur hier ignorieren"
-
-#~ msgid "Install %s although it would change the architecture"
-#~ msgstr "%s installieren, auch wenn sich die Architektur dadurch ändert"
-
-#~ msgid "Install %s although it would change the vendor"
-#~ msgstr "%s installieren, auch wenn sich der Anbieter dadurch ändert"
-
-#~ msgid "Install missing resolvables"
-#~ msgstr "Fehlende auflösbare Objekte installieren"
-
-#~ msgid "Keep resolvables"
-#~ msgstr "Auflösbare Objekte behalten"
-
-#~ msgid "Unlock these resolvables"
-#~ msgstr "Entsperren dieser auflösbaren Objekte"
-
-#~ msgid "delete %s"
-#~ msgstr "%s löschen"
-
-#~ msgid "install %s"
-#~ msgstr "Installation von %s"
-
-#~ msgid "unlock %s"
-#~ msgstr "%s entsperren"
-
-#~ msgid "unlock all resolvables"
-#~ msgstr "Entsperren aller auflösbaren Objekte"
-
-#~ msgid "Can't add solvables to norepo."
-#~ msgstr "Kann die auflösbaren Objekte nicht zu norepo hinzufügen."
-
-#~ msgid "Can't open solv-file: "
-#~ msgstr "Kann die Solv-Datei nicht öffnen."
-
-#~ msgid "Can't set RepoInfo for norepo."
-#~ msgstr "Kann kein RepoInfo für norepo setzen."
-
-#~ msgid "Error reading solv-file: "
-#~ msgstr "Fehler beim Lesen der Solv-Datei: "
-
-#~ msgid "Path Parameter parsing not supported for this URL"
-#~ msgstr "Die Analyse von Pfadparametern wird für diese URL nicht unterstützt"
-
-#~ msgid "Path parameter parsing not supported for this URL"
-#~ msgstr "Die Analyse von Pfadparametern wird für diese URL nicht unterstützt"
-
-#~ msgid "RepoInfo alias (%s) does not match repository name (%s)"
-#~ msgstr "RepoInfo-Alias (%s) passt nicht zum Namen des Repositorys (%s)"
-
-#~ msgid "Reading '%s' repository cache"
-#~ msgstr "Lese '%s' Repository Cache"
-
-#~ msgid "Reading patch and delta rpms from '%s' repository cache"
-#~ msgstr "Lese Patch- und Delta-RPMs vom '%s' Repository Cache."
-
-#~ msgid "Cleaning repository '%s' cache"
-#~ msgstr "Säubere Cache für Repository '%s'"
-
-#~ msgid "Reading repository '%s' cache"
-#~ msgstr "Lese Cache für Repository '%s'"
-
-#~ msgid "Software management is already running."
-#~ msgstr "Software-Management wird bereits ausgeführt."
-
-#~ msgid "%s is replaced by %s"
-#~ msgstr "%s ersetzt durch %s"
-
-#~ msgid "%s replaced by %s"
-#~ msgstr "%s ersetzt durch %s"
-
-#~ msgid "%s will be deleted by the user.\n"
-#~ msgstr "%s wird durch Benutzerinteraktion gelöscht.\n"
-
-#~ msgid "%s will be deleted by another application. (ApplLow/ApplHigh)\n"
-#~ msgstr "%s werden durch ein anderes Programm gelöscht.\n"
-
-#~ msgid "%s will be installed by the user.\n"
-#~ msgstr "%s wird vom Benutzer installiert.\n"
-
-#~ msgid "%s will be installed by another application. (ApplLow/ApplHigh)\n"
-#~ msgstr "%s wird durch ein andere Programm installiert.\n"
-
-#~ msgid "No valid solution found within %d seconds"
-#~ msgstr "Es wurde keine eindeutige Lösung innerhalb von %d Sekunden gefunden."
-
-#~ msgid "The solver has reached a defined timout"
-#~ msgstr "Die Lösung konnte nicht in der definierten Zeit gefunden werden"
-
-#~ msgid "No valid solution found with just resolvables of best architecture."
-#~ msgstr "Wenn nur Abhängigkeiten der besten Architektur verwendet werden, wird keine eindeutige Lösung gefunden."
-
-#~ msgid "With this run only resolvables with the best architecture have been regarded.\n"
-#~ msgstr "Bei diesem Lösungsversuch wurden nur Abhängigkeiten in der besten Architektur berücksichtigt.\n"
-
-#~ msgid "Regarding all possible resolvables takes time, but can come to a valid result."
-#~ msgstr "Alle auflösbaren Objekte zu berücksichtigen braucht viel Zeit, kann aber zu einem besseren Ergebnis führen."
-
-#~ msgid "Invalid information"
-#~ msgstr "Ungültige Informationen"
-
-#~ msgid "%s is needed by other resolvables"
-#~ msgstr "%s wird von anderen auflösbaren Objekten benötigt."
-
-#~ msgid ""
-#~ "%s is needed by:\n"
-#~ "%s"
-#~ msgstr ""
-#~ "%s wird benötigt von:\n"
-#~ "%s"
-
-#~ msgid "%s conflicts with other resolvables"
-#~ msgstr "%s steht in Konflikt mit anderen auflösbaren Objekten"
-
-#~ msgid ""
-#~ "%s conflicts with:\n"
-#~ "%s"
-#~ msgstr ""
-#~ "%s steht in Konflikt mit:\n"
-#~ "%s"
-
-#~ msgid "%s obsoletes other resolvables"
-#~ msgstr "%s ersetzt andere auflösbare Objekte"
-
-#~ msgid "%s obsoletes:%s"
-#~ msgstr "%s ersetzt:%s"
-
-#~ msgid ""
-#~ "\n"
-#~ "These resolvables will be deleted from the system."
-#~ msgstr ""
-#~ "\n"
-#~ "Diese auflösbaren Objekte werden aus dem System gelöscht."
-
-#~ msgid "%s depends on other resolvables"
-#~ msgstr "%s hängt von anderen auflösbaren Objekten ab"
-
-#~ msgid "%s depends on %s"
-#~ msgstr "%s hängt von %s ab"
-
-#~ msgid "%s depends on:%s"
-#~ msgstr "%s ist abhängig von:%s"
-
-#~ msgid "Child of"
-#~ msgstr "Untergeordnetes Element von"
-
-#~ msgid ""
-#~ "\n"
-#~ "There is no resource available which supports this requirement."
-#~ msgstr ""
-#~ "\n"
-#~ "Es ist kein Objekt verfügbar, das diese Anforderung unterstützt."
-
-#~ msgid "Due to the problems described above/below, this resolution will not solve all dependencies"
-#~ msgstr "Aufgrund der oben/unten beschriebenen Problemen löst diese Auflösung nicht alle Abhängigkeiten"
-
-#~ msgid "Cannot install %s, because it is conflicting with %s"
-#~ msgstr "Installation von %s aufgrund eines Konflikts mit %s nicht möglich"
-
-#~ msgid "%s is not installed and has been marked as uninstallable"
-#~ msgstr "%s ist nicht installiert und als nicht installierbar gekennzeichnet"
-
-#~ msgid "%s has unfulfilled requirements"
-#~ msgstr "Unerfüllbare Anforderungen von %s"
-
-#~ msgid "%s has missing dependencies"
-#~ msgstr "Fehlende Abhängigkeiten von %s"
-
-#~ msgid "%s cannot be installed due to missing dependencies"
-#~ msgstr "%s kann aufgrund fehlender Abhängigkeiten nicht installiert werden"
-
-#~ msgid "%s fulfills dependencies of %s but will be uninstalled"
-#~ msgstr "%s erfüllt die Abhängigkeiten von %s, wird jedoch deinstalliert"
-
-#~ msgid "%s fulfills dependencies of %s but will be kept on your system"
-#~ msgstr "%s erfüllt die Abhängigkeiten von %s, wird jedoch in Ihrem System beibehalten"
-
-#~ msgid "No need to install %s"
-#~ msgstr "%s muss nicht installiert werden"
-
-#~ msgid "Cannot install %s to fulfill the dependencies of %s"
-#~ msgstr "Installation von %s zur Erfüllung der Abhängigkeiten von %s nicht möglich"
-
-#~ msgid "Cannot install %s to fulfil the dependencies of %s"
-#~ msgstr "Installation von %s zur Erfüllung der Abhängigkeiten von %s nicht möglich"
-
-#~ msgid "%s will not be uninstalled, because it is still required"
-#~ msgstr "%s wird nicht deinstalliert; es wird noch immer benötigt"
-
-#~ msgid "%s obsoletes %s. But %s cannot be deleted, because it is locked."
-#~ msgstr "%s ersetzt %s. %s kann aber nicht gelöscht werden, weil es gesperrt ist."
-
-#~ msgid "Cannot install %s, because it is conflicting"
-#~ msgstr "Installation von %s aufgrund eines Konflikts nicht möglich"
-
-#~ msgid "%s is uninstallable due to conflicts with %s"
-#~ msgstr "%s kann nicht installiert werden aufgrund von Konflikten mit %s"
-
-#~ msgid "Requirememt %s cannot be fulfilled."
-#~ msgstr "Anforderung %s kann nicht erfüllt werden."
-
-#~ msgid "for requiring %s for %s when upgrading %s"
-#~ msgstr "für die Voraussetzung von %s für %s beim Aufrüsten von %s"
-
-#~ msgid "%s is lacking the requirement %s"
-#~ msgstr "%s fehlt die Anforderung %s"
-
-#~ msgid ", Action: "
-#~ msgstr ", Aktion:"
-
-#~ msgid ", Trigger: "
-#~ msgstr ", Auslöser:"
-
-#~ msgid "package"
-#~ msgstr "Paket"
-
-#~ msgid "selection"
-#~ msgstr "Auswahl"
-
-#~ msgid "pattern"
-#~ msgstr "Schema"
-
-#~ msgid "product"
-#~ msgstr "Produkt"
-
-#~ msgid "patch"
-#~ msgstr "Patch"
-
-#~ msgid "script"
-#~ msgstr "Skript"
-
-#~ msgid "message"
-#~ msgstr "Meldung"
-
-#~ msgid "atom"
-#~ msgstr "atom"
-
-#~ msgid "system"
-#~ msgstr "System"
-
-#~ msgid "Resolvable"
-#~ msgstr "Auflösbar"
-
-#~ msgid "Marking this resolution attempt as invalid."
-#~ msgstr "Dieser Auflösungsversuch wird als ungültig gekennzeichnet."
-
-#~ msgid "Marking resolvable %s as uninstallable"
-#~ msgstr "Auflösbares Objekt %s wird als nicht installierbar gekennzeichnet"
-
-#~ msgid "%s is scheduled to be installed, but this is impossible due to dependency problems."
-#~ msgstr "Installation von %s ist geplant, es ist jedoch aufgrund von Abhängigkeitsproblemen nicht möglich."
-
-#~ msgid "Can't install %s since it is already marked as needed to be uninstalled"
-#~ msgstr "%s kann nicht installiert werden, da es schon für die Deinstallation gekennzeichnet ist"
-
-#~ msgid "Can't install %s, because it does not apply to this system."
-#~ msgstr "Installation von %s nicht möglich; da es nicht für dieses System gilt."
-
-#~ msgid "Can't install %s, because %s is already marked as needed to for installation"
-#~ msgstr "%s kann nicht installiert werden, da %s bereits für die Installation gekennzeichnet ist"
-
-#~ msgid "This would invalidate %s."
-#~ msgstr "Dies würde %s ungültig machen."
-
-#~ msgid "Establishing %s"
-#~ msgstr "Festlegen von %s"
-
-#~ msgid "Installing %s"
-#~ msgstr "Installation von %s"
-
-#~ msgid "Skipping %s: already installed"
-#~ msgstr "%s wird übersprungen: bereits installiert"
-
-#~ msgid "There are no alternative providers of %s installed"
-#~ msgstr "Es sind keine alternativen Anbieter von %s verfügbar"
-
-#~ msgid "for %s"
-#~ msgstr "für %s"
-
-#~ msgid "Upgrading to %s to avoid removing %s is not possible."
-#~ msgstr "Es ist nicht möglich, auf %s aufzurüsten, um das Entfernen von %s zu vermeiden."
-
-#~ msgid "%s provides %s, but is scheduled to be uninstalled."
-#~ msgstr "%s stellt %s zur Verfügung, soll jedoch planmäßig deinstalliert werden."
-
-#~ msgid "%s provides %s, but another version of that %s is already installed."
-#~ msgstr "%s stellt %s zur Verfügung; es ist jedoch bereits eine andere Version des entsprechenden %s installiert."
-
-#~ msgid "%s provides %s, but it is uninstallable.  Try installing it on its own for more details."
-#~ msgstr "%s stellt %s zur Verfügung, ist aber nicht installierbar.  Versuchen Sie das Objekt separat zu installieren, um weitere Details zu erhalten."
-
-#~ msgid "%s provides %s, but it is locked."
-#~ msgstr "%s stellt %s zur Verfügung, ist aber gesperrt."
-
-#~ msgid "%s provides %s,  but is scheduled to be kept."
-#~ msgstr "%s stellt %s zur Verfügung, soll jedoch planmäßig beibehalten werden."
-
-#~ msgid "%s provides %s, but has another architecture."
-#~ msgstr "%s stellt %s zur Verfügung, hat aber eine andere Architektur"
-
-#~ msgid "%s provides %s, but has another vendor (%s)."
-#~ msgstr "%s stellt %s zur Verfügung, hat aber einen anderen Anbieter (%s)"
-
-#~ msgid "Can't satisfy requirement %s for %s"
-#~ msgstr "Anforderung %s für %s kann nicht erfüllt werden"
-
-#~ msgid "%s is required by another resolvable selected for installation, so it won't be unlinked."
-#~ msgstr "%s wird von einem anderen zu installierenden auflösbaren Objekt benötigt. Demzufolge wird die Verbindung nicht aufgehoben."
-
-#~ msgid "%s is required by another installed resolvable, so it won't be unlinked."
-#~ msgstr "%s wird von anderem installierten auflösbaren Objekt benötigt. Demzufolge wird die Verbindung nicht aufgehoben."
-
-#~ msgid "%s is locked and cannot be uninstalled."
-#~ msgstr "%s ist gesperrt und kann nicht deinstalliert werden."
-
-#~ msgid "A conflict over %s (%s) requires the removal of %s which is scheduled for installation"
-#~ msgstr "Aufgrund eines Konflikts mit %s (%s) muss das zu installierende %s entfernt werden"
-
-#~ msgid "Marking %s as uninstallable due to conflicts over %s"
-#~ msgstr "%s wird aufgrund von Konflikten mit %s als nicht installierbar gekennzeichnet"
-
-#~ msgid "from %s"
-#~ msgstr "von %s"
-
-#~ msgid " Error!"
-#~ msgstr "Fehler!"
-
-#~ msgid " Important!"
-#~ msgstr "Wichtig!"
-
-#~ msgid "Make a solver run with ALL possibilities."
-#~ msgstr "Versuche eine Lösung zu finden, die ALLE Möglichkeiten berücksichtigt."
-
-#~ msgid "Regarding all resolvables with a compatible architecture."
-#~ msgstr "Bezieht sich auf auflösbare Objekte mit kompatibler Architektur."
-
-#~ msgid "Make a solver run with best architecture only."
-#~ msgstr "Versuche eine Lösung zu finden, die nur die beste Architektur berücksichtigt."
-
-#~ msgid "Regarding resolvables with best architecture only."
-#~ msgstr "Bezieht sich auf auflösbare Objekte mit ausschließlich der besten Architektur."
-
-#~ msgid "%s depended on %s"
-#~ msgstr "%s abhängig von %s"
-
-#~ msgid "%s is recommended by %s"
-#~ msgstr "%s wird empfohlen von %s"
-
-#~ msgid "%s is suggested by %s"
-#~ msgstr "%s wird vorgeschlagen von %s"
-
-#~ msgid "%s will be evaluated for installation (freshened) by %s"
-#~ msgstr "%s wird zur Installation in Betracht gezogen (als Ergänzung) von %s"
-
-#~ msgid "%s is enhanced by %s"
-#~ msgstr "%s wird verbessert durch %s"
-
-#~ msgid "%s is supplemented by %s"
-#~ msgstr "%s wird ergänzt durch %s"
-
-#~ msgid "%s part of %s"
-#~ msgstr "%s ist Teil von %s"
-
-#~ msgid "Double timeout"
-#~ msgstr "Doppelte Zeitüberschreitung"
-
-#~ msgid "Start the next solver run with doubled timeout."
-#~ msgstr "Starte nächsten Lösungsversuch mit doppelter Zeit."

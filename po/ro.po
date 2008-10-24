@@ -1,42 +1,38 @@
-# translation of zypp.ro.po to
-# Romanian message file for YaST2 (@memory@).
-# Copyright (C) 2005 SUSE Linux Products GmbH.
-# Copyright (C) 2003 SuSE Linux AG.
-#
+# Andrei Cipu <traduceri@strainu.ro>, 2008
 msgid ""
 msgstr ""
-"Project-Id-Version: zypp.ro\n"
+"Project-Id-Version: OpenSUSE\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-09-25 15:48+0200\n"
-"PO-Revision-Date: 2008-07-12 23:35+0200\n"
-"Last-Translator: Andrei Cipu <strainu10@gmail.com>\n"
-"Language-Team:  <en@li.org>\n"
+"POT-Creation-Date: 2008-10-08 17:27+0200\n"
+"PO-Revision-Date: 2008-10-09 13:33+0200\n"
+"Last-Translator: Andrei Cipu <traduceri@strainu.ro>\n"
+"Language-Team: Romanian <LL@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: KBabel 1.11.4\n"
+"Plural-Forms: nplurals=3; plural=n==1 ? 0 : (n==0 || (n%100 > 0 && n%100 < 20)) ? 1 : 2;\n"
+"X-Generator: Narro 0.9.2 on http://narro.i18n.ro\n"
 
 #: ../zypp/solver/detail/SATResolver.cc:981
 msgid ""
 "\n"
 "uninstallable providers: "
 msgstr ""
+"\n"
+"furnizori ce pot fi dezinstalați: "
 
-#: ../zypp/media/MediaException.cc:214
+#: ../zypp/media/MediaException.cc:266
 #, c-format
 msgid " SSL certificate problem, verify that the CA cert is OK for '%s'."
 msgstr "Problemă de certificat SSL, verificați dacă certificatul autorității de certificare este OK pentru '%s'."
 
 #: ../zypp/target/TargetImpl.cc:85
-#, fuzzy
 msgid " executed"
-msgstr "Execută"
+msgstr " executat"
 
 #: ../zypp/target/TargetImpl.cc:107
-#, fuzzy
 msgid " execution failed"
-msgstr "Execuţia DBI a eşuat: %s"
+msgstr " execuție eșuată"
 
 #: ../zypp/target/TargetImpl.cc:193
 msgid " execution skipped while aborting"
@@ -45,7 +41,7 @@ msgstr ""
 #: ../zypp/solver/detail/SATResolver.cc:928
 #, c-format
 msgid "%s conflicts with %s provided by %s"
-msgstr ""
+msgstr "%s intră în conflict cu %s pus la dispoziție de %s"
 
 #: ../zypp/solver/detail/SATResolver.cc:914
 #, c-format
@@ -56,11 +52,6 @@ msgstr "%s nu este instalabil"
 #, c-format
 msgid "%s obsoletes %s provided by %s"
 msgstr "%s înlocuiește %s oferit de %s"
-
-#: ../zypp/target/rpm/RpmDb.cc:2216
-#, c-format
-msgid "%s remove failed"
-msgstr "Îndepărtarea %s a eșuat"
 
 #: ../zypp/solver/detail/SATResolver.cc:969
 #, c-format
@@ -87,7 +78,7 @@ msgstr "Acoli"
 msgid "Adangme"
 msgstr "Adangme"
 
-#: ../zypp/RepoManager.cc:1181
+#: ../zypp/RepoManager.cc:1184
 #, c-format
 msgid "Adding repository '%s'"
 msgstr "Adaug sursa de instalare '%s'"
@@ -95,10 +86,6 @@ msgstr "Adaug sursa de instalare '%s'"
 #: ../zypp/VendorSupportOptions.cc:29
 msgid "Additional Customer Contract Necessary"
 msgstr ""
-
-#: ../zypp/target/rpm/RpmDb.cc:2092 ../zypp/target/rpm/RpmDb.cc:2230
-msgid "Additional rpm output:"
-msgstr "Ieșiri rpm adiționale:"
 
 #. language code: ady
 #: ../zypp/LanguageCode.cc:248
@@ -188,7 +175,7 @@ msgstr "Samoa americană"
 #. language code: amh am
 #: ../zypp/LanguageCode.cc:272
 msgid "Amharic"
-msgstr ""
+msgstr "Amharică"
 
 #: ../zypp/VendorSupportOptions.cc:54
 msgid "An additional customer contract is necessary for getting support."
@@ -221,7 +208,7 @@ msgstr "Antigua și Barbuda"
 #. language code: apa
 #: ../zypp/LanguageCode.cc:276
 msgid "Apache Languages"
-msgstr ""
+msgstr "Limbi apache"
 
 #. language code: ara ar
 #: ../zypp/LanguageCode.cc:278
@@ -246,7 +233,7 @@ msgstr "Arapaho"
 #. language code: arn
 #: ../zypp/LanguageCode.cc:288
 msgid "Araucanian"
-msgstr ""
+msgstr "Araucaniană"
 
 #. language code: arw
 #: ../zypp/LanguageCode.cc:294
@@ -281,7 +268,7 @@ msgstr "Aruba"
 #. language code: asm as
 #: ../zypp/LanguageCode.cc:296
 msgid "Assamese"
-msgstr ""
+msgstr "Asameză"
 
 #. language code: ast
 #: ../zypp/LanguageCode.cc:298
@@ -291,7 +278,7 @@ msgstr "Asturiană"
 #. language code: ath
 #: ../zypp/LanguageCode.cc:300
 msgid "Athapascan Languages"
-msgstr ""
+msgstr "Limbi athapascane"
 
 #. :AUT:040:
 #: ../zypp/CountryCode.cc:237
@@ -313,7 +300,8 @@ msgstr "Austria"
 msgid "Austronesian (Other)"
 msgstr "Austroneziană (alta)"
 
-#: ../zypp/media/MediaCurl.cc:1615
+#. !\todo add comma to the message for the next release
+#: ../zypp/media/MediaCurl.cc:1619
 #, c-format
 msgid "Authentication required for '%s'"
 msgstr "Pentru '%s' este necesară autentificarea"
@@ -540,7 +528,7 @@ msgstr "Botswana"
 #. :BTN:064:
 #: ../zypp/CountryCode.cc:256
 msgid "Bouvet Island"
-msgstr ""
+msgstr "Insula Bouvet"
 
 #. language code: bra
 #: ../zypp/LanguageCode.cc:360
@@ -577,10 +565,10 @@ msgstr "Brunei Darussalam"
 msgid "Buginese"
 msgstr "Buginese"
 
-#: ../zypp/RepoManager.cc:976
+#: ../zypp/RepoManager.cc:977
 #, c-format
 msgid "Building repository '%s' cache"
-msgstr ""
+msgstr "Construirea cache-ului sursei '% s'"
 
 #. :BFA:854:
 #: ../zypp/CountryCode.cc:246
@@ -633,28 +621,28 @@ msgstr "Nu pot crea sat-pool."
 
 #: ../zypp/thread/Mutex.cc:77
 msgid "Can't acquire the mutex lock"
-msgstr ""
+msgstr "Nu pot obține zăvorul mutex-ului"
 
-#: ../zypp/ExternalProgram.cc:245
+#: ../zypp/ExternalProgram.cc:301
 #, c-format
 msgid "Can't chdir to '/' inside chroot (%s)."
 msgstr "Nu pot efectua chdir spre '/' în chroot (%s)."
 
-#: ../zypp/ExternalProgram.cc:238
+#: ../zypp/ExternalProgram.cc:294
 #, c-format
 msgid "Can't chroot to '%s' (%s)."
 msgstr ""
 
 #. don't want to get here
-#: ../zypp/ExternalProgram.cc:259
+#: ../zypp/ExternalProgram.cc:315
 #, c-format
 msgid "Can't exec '%s' (%s)."
 msgstr "Nu pot executa '%s' (%s)."
 
-#: ../zypp/ExternalProgram.cc:267
+#: ../zypp/ExternalProgram.cc:323
 #, c-format
 msgid "Can't fork (%s)."
-msgstr ""
+msgstr "Nu pot crea un proces nou (%s)."
 
 #: ../zypp/thread/Mutex.cc:33
 msgid "Can't initialize mutex attributes"
@@ -667,14 +655,14 @@ msgstr "Nu pot inițializa mutex-ul recursiv"
 #: ../zypp/base/InterProcessMutex.cc:79
 #, c-format
 msgid "Can't open lock file: %s"
-msgstr ""
+msgstr "Nu pot deschide fișierul zăvor: %s"
 
-#: ../zypp/ExternalProgram.cc:174
+#: ../zypp/ExternalProgram.cc:230
 #, c-format
 msgid "Can't open pipe (%s)."
-msgstr ""
+msgstr "Nu pot deschide pipe-ul (%s)."
 
-#: ../zypp/ExternalProgram.cc:163
+#: ../zypp/ExternalProgram.cc:219
 #, c-format
 msgid "Can't open pty (%s)."
 msgstr "Nu pot deschide pty (%s)."
@@ -682,11 +670,11 @@ msgstr "Nu pot deschide pty (%s)."
 #: ../zypp/repo/RepoProvideFile.cc:216
 #, c-format
 msgid "Can't provide file '%s' from repository '%s'"
-msgstr ""
+msgstr "Nu pot oferi fișierul '%s' din sursa '%s'"
 
 #: ../zypp/thread/Mutex.cc:87
 msgid "Can't release the mutex lock"
-msgstr ""
+msgstr "Nu pot elibera zăvorul mutex-ului"
 
 #: ../zypp/thread/Mutex.cc:40
 msgid "Can't set recursive mutex attribute"
@@ -700,16 +688,21 @@ msgstr "Canada"
 #: ../zypp/KeyRing.cc:285
 #, c-format
 msgid "Cannot create public key %s from %s keyring to file %s"
-msgstr ""
+msgstr "Nu pot crea cheia publică %s din keyring-ul %s pe fișierul %s"
 
-#: ../zypp/media/MediaException.cc:182
+#: ../zypp/media/MediaException.cc:234
 msgid "Cannot eject any media"
 msgstr "Nu pot ejecta nici un mediu"
 
-#: ../zypp/media/MediaException.cc:184
+#: ../zypp/media/MediaException.cc:236
 #, c-format
 msgid "Cannot eject media '%s'"
 msgstr "Nu pot ejecta mediul '%s'"
+
+#: ../zypp/media/MediaException.cc:273
+#, c-format
+msgid "Cannot find available loop device to mount the image file from '%s'"
+msgstr ""
 
 #: ../zypp/media/MediaException.cc:67
 #, c-format
@@ -878,16 +871,16 @@ msgstr "Insulele Cocos (Keeling)"
 msgid "Colombia"
 msgstr "Columbia"
 
-#: ../zypp/ExternalProgram.cc:346
+#: ../zypp/ExternalProgram.cc:402
 #, c-format
 msgid "Command exited with status %d."
 msgstr "Comandă finalizată cu starea %d."
 
-#: ../zypp/ExternalProgram.cc:371
+#: ../zypp/ExternalProgram.cc:427
 msgid "Command exited with unknown error."
 msgstr "Comandă finalizată cu eroare necunoscută."
 
-#: ../zypp/ExternalProgram.cc:366
+#: ../zypp/ExternalProgram.cc:422
 #, c-format
 msgid "Command was killed by signal %d (%s)."
 msgstr "Comanda a fost oprită de semnalul %d(%s)."
@@ -895,7 +888,7 @@ msgstr "Comanda a fost oprită de semnalul %d(%s)."
 #. :KIR:296:
 #: ../zypp/CountryCode.cc:339
 msgid "Comoros"
-msgstr ""
+msgstr "Insulele Comore"
 
 #. :CCK:166:
 #. :CAF:140:
@@ -986,7 +979,7 @@ msgstr "Cuba"
 #. language code: cus
 #: ../zypp/LanguageCode.cc:444
 msgid "Cushitic (Other)"
-msgstr ""
+msgstr "Cuștică (alta)"
 
 #. :CXR:162:
 #: ../zypp/CountryCode.cc:277
@@ -1068,7 +1061,13 @@ msgstr "Dominica"
 msgid "Dominican Republic"
 msgstr "Republica Dominicană"
 
-#: ../zypp/media/MediaException.cc:152
+#. TranslatorExplanation: curl is the name of a library, don't translate
+#: ../zypp/media/MediaException.cc:92 ../zypp/media/MediaException.cc:100
+#, fuzzy, c-format
+msgid "Download (Metalink curl) initialization failed for '%s'"
+msgstr "Inițializarea download-ului (curl) a eșuat pentru '%s'"
+
+#: ../zypp/media/MediaException.cc:168
 #, c-format
 msgid ""
 "Download (curl) error for '%s':\n"
@@ -1084,6 +1083,17 @@ msgstr ""
 #, c-format
 msgid "Download (curl) initialization failed for '%s'"
 msgstr "Inițializarea download-ului (curl) a eșuat pentru '%s'"
+
+#: ../zypp/media/MediaException.cc:186 ../zypp/media/MediaException.cc:204
+#, fuzzy, c-format
+msgid ""
+"Download (metalink curl) error for '%s':\n"
+"Error code: %s\n"
+"Error message: %s\n"
+msgstr ""
+"Eroare de descărcare (curl) pentru '%s':\n"
+"Cod eroare: %s\n"
+"Mesaj eroare: %s\n"
 
 #. language code: dra
 #: ../zypp/LanguageCode.cc:470
@@ -1109,7 +1119,7 @@ msgstr "Olandeză"
 #. language code: dum
 #: ../zypp/LanguageCode.cc:476
 msgid "Dutch, Middle (ca.1050-1350)"
-msgstr ""
+msgstr "Olandeză medievală (cca. 1050-1350)"
 
 #. language code: dyu
 #: ../zypp/LanguageCode.cc:482
@@ -1119,7 +1129,7 @@ msgstr "Dyula"
 #. language code: dzo dz
 #: ../zypp/LanguageCode.cc:484
 msgid "Dzongkha"
-msgstr ""
+msgstr "Dzongkha (Bhutan)"
 
 #. :TON:776:
 #: ../zypp/CountryCode.cc:439
@@ -1161,15 +1171,15 @@ msgstr "El Salvador"
 msgid "Elamite"
 msgstr "Elamită"
 
-#: ../zypp/media/MediaException.cc:135
+#: ../zypp/media/MediaException.cc:151
 msgid "Empty destination in URI"
 msgstr "Destinație vidă în URI"
 
-#: ../zypp/media/MediaException.cc:130
+#: ../zypp/media/MediaException.cc:146
 msgid "Empty filesystem in URI"
 msgstr "Sistem de fișiere vid în URI"
 
-#: ../zypp/media/MediaException.cc:125
+#: ../zypp/media/MediaException.cc:141
 msgid "Empty host name in URI"
 msgstr "Nume de gazdă vid în URI"
 
@@ -1185,7 +1195,7 @@ msgstr "Engleză"
 #. language code: enm
 #: ../zypp/LanguageCode.cc:496
 msgid "English, Middle (1100-1500)"
-msgstr ""
+msgstr "Engleză medievală (1100-1500)"
 
 #. language code: ang
 #: ../zypp/LanguageCode.cc:274
@@ -1203,15 +1213,21 @@ msgid "Eritrea"
 msgstr "Eritreea"
 
 #. TranslatorExplanation: curl is the name of a library, don't translate
-#: ../zypp/media/MediaException.cc:161
+#: ../zypp/media/MediaException.cc:177
 #, c-format
 msgid "Error occurred while setting download (curl) options for '%s':"
+msgstr "A apărut o eroare la setarea opțiunilor de download (curl) pentru '%s':"
+
+#. TranslatorExplanation: curl is the name of a library, don't translate
+#: ../zypp/media/MediaException.cc:195 ../zypp/media/MediaException.cc:213
+#, fuzzy, c-format
+msgid "Error occurred while setting download (metalink curl) options for '%s':"
 msgstr "A apărut o eroare la setarea opțiunilor de download (curl) pentru '%s':"
 
 #. language code: myv
 #: ../zypp/LanguageCode.cc:850
 msgid "Erzya"
-msgstr ""
+msgstr "Erzia"
 
 #. language code: epo eo
 #: ../zypp/LanguageCode.cc:498
@@ -1263,7 +1279,7 @@ msgid "Failed to remove public key %s: %s"
 msgstr "Îndepărtarea cheii publice %s a eșuat: %s"
 
 #: ../zypp/media/MediaException.cc:41
-#, fuzzy, c-format
+#, c-format
 msgid "Failed to unmount %s"
 msgstr "Demontarea %s a eșuat"
 
@@ -1295,7 +1311,7 @@ msgstr "Feroeză"
 #. :FLK:238:
 #: ../zypp/CountryCode.cc:295
 msgid "Federated States of Micronesia"
-msgstr ""
+msgstr "Micronezia"
 
 #. :FIN:246:
 #: ../zypp/CountryCode.cc:293
@@ -1414,22 +1430,22 @@ msgstr "Franceză"
 #. :GEO:268:
 #: ../zypp/CountryCode.cc:303
 msgid "French Guiana"
-msgstr ""
+msgstr "Guiana franceză"
 
 #. :PER:604:
 #: ../zypp/CountryCode.cc:393
 msgid "French Polynesia"
-msgstr ""
+msgstr "Polinezia franceză"
 
 #. :TCD:148:
 #: ../zypp/CountryCode.cc:431
 msgid "French Southern Territories"
-msgstr ""
+msgstr "Teritoriile Franceze Sudice"
 
 #. language code: frm
 #: ../zypp/LanguageCode.cc:526
 msgid "French, Middle (ca.1400-1600)"
-msgstr ""
+msgstr "Franceză medievală (cca.1400-1600)"
 
 #. language code: fro
 #: ../zypp/LanguageCode.cc:528
@@ -1439,7 +1455,7 @@ msgstr "Franceză veche (842-cca.1400)"
 #. language code: fry fy
 #: ../zypp/LanguageCode.cc:530
 msgid "Frisian"
-msgstr ""
+msgstr "Friziană"
 
 #. language code: fur
 #: ../zypp/LanguageCode.cc:534
@@ -1464,7 +1480,7 @@ msgstr "Gabon"
 #. language code: gla gd
 #: ../zypp/LanguageCode.cc:556
 msgid "Gaelic"
-msgstr ""
+msgstr "Galică"
 
 #. language code: glg gl
 #: ../zypp/LanguageCode.cc:560
@@ -1518,12 +1534,12 @@ msgstr "Germană"
 #. language code: gmh
 #: ../zypp/LanguageCode.cc:564
 msgid "German, Middle High (ca.1050-1500)"
-msgstr ""
+msgstr "Germană medievală (cca. 1050-1500)"
 
 #. language code: goh
 #: ../zypp/LanguageCode.cc:566
 msgid "German, Old High (ca.750-1050)"
-msgstr ""
+msgstr "Germană veche (cca. 750-1050)"
 
 #. language code: gem
 #: ../zypp/LanguageCode.cc:542
@@ -1598,7 +1614,7 @@ msgstr "Grenada"
 #. :GIN:324:
 #: ../zypp/CountryCode.cc:309
 msgid "Guadeloupe"
-msgstr ""
+msgstr "Guadelupa"
 
 #. :GTM:320:
 #: ../zypp/CountryCode.cc:314
@@ -1679,7 +1695,7 @@ msgstr "Hausa"
 
 #: ../zypp/solver/detail/SATResolver.cc:910
 msgid "Have you enabled all requested repositories?"
-msgstr ""
+msgstr "Ați activat toate sursele cerute?"
 
 #. language code: haw
 #: ../zypp/LanguageCode.cc:594
@@ -1689,7 +1705,7 @@ msgstr "Hawaiiană"
 #. :HKG:344:
 #: ../zypp/CountryCode.cc:318
 msgid "Heard Island and McDonald Islands"
-msgstr ""
+msgstr "Insula Heard și Insulele McDonald"
 
 #. language code: heb he
 #: ../zypp/LanguageCode.cc:596
@@ -1714,7 +1730,7 @@ msgstr "Himachali"
 #. language code: hin hi
 #: ../zypp/LanguageCode.cc:604
 msgid "Hindi"
-msgstr ""
+msgstr "Hindusă"
 
 #. language code: hmo ho
 #: ../zypp/LanguageCode.cc:610
@@ -1795,7 +1811,7 @@ msgstr "Igbo"
 #: ../zypp/solver/detail/ProblemSolutionIgnore.cc:52
 #, c-format
 msgid "Ignore some dependencies of %s"
-msgstr ""
+msgstr "Ignoră unele dependențe ale %s"
 
 #. language code: ijo
 #: ../zypp/LanguageCode.cc:630
@@ -1810,7 +1826,7 @@ msgstr "Iloko"
 #. language code: smn
 #: ../zypp/LanguageCode.cc:1046
 msgid "Inari Sami"
-msgstr ""
+msgstr "Sami inari"
 
 #. :ISR:376:
 #: ../zypp/CountryCode.cc:326
@@ -1820,7 +1836,7 @@ msgstr "India"
 #. language code: inc
 #: ../zypp/LanguageCode.cc:640
 msgid "Indic (Other)"
-msgstr ""
+msgstr "Indiană (alta)"
 
 #. language code: ine
 #: ../zypp/LanguageCode.cc:644
@@ -1840,7 +1856,7 @@ msgstr "Indoneziană"
 #. language code: inh
 #: ../zypp/LanguageCode.cc:646
 msgid "Ingush"
-msgstr ""
+msgstr "Ingușă"
 
 #: ../zypp/target/TargetImpl.cc:603 ../zypp/target/TargetImpl.cc:843
 msgid "Installation has been aborted as directed."
@@ -1864,7 +1880,7 @@ msgstr "Inuktitut"
 #. language code: ipk ik
 #: ../zypp/LanguageCode.cc:648
 msgid "Inupiaq"
-msgstr ""
+msgstr "Inupiaq"
 
 #: ../zypp/url/UrlBase.cc:180
 #, c-format
@@ -1919,11 +1935,7 @@ msgstr "Componentă port invalidă '%s'"
 #: ../zypp/PoolQuery.cc:443
 #, c-format
 msgid "Invalid regular expression '%s': regcomp returned %d"
-msgstr ""
-
-#: ../zypp/media/MediaCurl.cc:1612
-msgid "Invalid user name or password."
-msgstr "Nume de utilizator sau parolă invalidă."
+msgstr "'%s' este o expresie regulată invalidă: regcomp a întors %d"
 
 #. :IRQ:368:
 #: ../zypp/CountryCode.cc:329
@@ -1953,7 +1965,7 @@ msgstr "Irlandeză"
 #. language code: mga
 #: ../zypp/LanguageCode.cc:810
 msgid "Irish, Middle (900-1200)"
-msgstr ""
+msgstr "Irlandeză medievală (900-1200)"
 
 #. language code: sga
 #: ../zypp/LanguageCode.cc:1016
@@ -2018,12 +2030,12 @@ msgstr "Iudeo-persiană"
 #. language code: kbd
 #: ../zypp/LanguageCode.cc:688
 msgid "Kabardian"
-msgstr ""
+msgstr "Kabardian"
 
 #. language code: kab
 #: ../zypp/LanguageCode.cc:668
 msgid "Kabyle"
-msgstr ""
+msgstr "Kabyle"
 
 #. language code: kac
 #: ../zypp/LanguageCode.cc:670
@@ -2088,7 +2100,7 @@ msgstr "Kawi"
 #. language code: kaz kk
 #: ../zypp/LanguageCode.cc:686
 msgid "Kazakh"
-msgstr ""
+msgstr "Kazahă"
 
 #. :CYM:136:
 #: ../zypp/CountryCode.cc:345
@@ -2098,7 +2110,7 @@ msgstr "Kazahstan"
 #. :JPN:392:
 #: ../zypp/CountryCode.cc:335
 msgid "Kenya"
-msgstr ""
+msgstr "Kenia"
 
 #. language code: kha
 #: ../zypp/LanguageCode.cc:690
@@ -2108,7 +2120,7 @@ msgstr "Khasi"
 #. language code: khm km
 #: ../zypp/LanguageCode.cc:694
 msgid "Khmer"
-msgstr ""
+msgstr "Kmeră"
 
 #. language code: khi
 #: ../zypp/LanguageCode.cc:692
@@ -2118,7 +2130,7 @@ msgstr "Khoisan (alta)"
 #. language code: kho
 #: ../zypp/LanguageCode.cc:696
 msgid "Khotanese"
-msgstr ""
+msgstr "Khotaneză"
 
 #. language code: kik ki
 #: ../zypp/LanguageCode.cc:698
@@ -2133,7 +2145,7 @@ msgstr "Kimbundu"
 #. language code: kin rw
 #: ../zypp/LanguageCode.cc:700
 msgid "Kinyarwanda"
-msgstr ""
+msgstr "Kinyarwanda"
 
 #. language code: kir ky
 #: ../zypp/LanguageCode.cc:702
@@ -2173,7 +2185,7 @@ msgstr "Coreeană"
 #. language code: kos
 #: ../zypp/LanguageCode.cc:714
 msgid "Kosraean"
-msgstr ""
+msgstr "Kosraeană"
 
 #. language code: kpe
 #: ../zypp/LanguageCode.cc:716
@@ -2193,7 +2205,7 @@ msgstr "Kuanyama"
 #. language code: kum
 #: ../zypp/LanguageCode.cc:726
 msgid "Kumyk"
-msgstr ""
+msgstr "Kumyk"
 
 #. language code: kur ku
 #: ../zypp/LanguageCode.cc:728
@@ -2203,7 +2215,7 @@ msgstr "Kurdă"
 #. language code: kru
 #: ../zypp/LanguageCode.cc:722
 msgid "Kurukh"
-msgstr ""
+msgstr "Kurukh"
 
 #. language code: kut
 #: ../zypp/LanguageCode.cc:730
@@ -2223,7 +2235,7 @@ msgstr "Kârgâzstan"
 #. language code: lad
 #: ../zypp/LanguageCode.cc:732
 msgid "Ladino"
-msgstr ""
+msgstr "Ladino"
 
 #. language code: lah
 #: ../zypp/LanguageCode.cc:734
@@ -2238,7 +2250,7 @@ msgstr "Lamba"
 #. language code: lao lo
 #: ../zypp/LanguageCode.cc:738
 msgid "Lao"
-msgstr ""
+msgstr "Laoțiană"
 
 #. :KAZ:398:
 #: ../zypp/CountryCode.cc:346
@@ -2272,20 +2284,20 @@ msgstr "Lesotho"
 
 #: ../zypp/VendorSupportOptions.cc:20
 msgid "Level 1"
-msgstr ""
+msgstr "Nivelul 1"
 
 #: ../zypp/VendorSupportOptions.cc:23
 msgid "Level 2"
-msgstr ""
+msgstr "Nivelul 2"
 
 #: ../zypp/VendorSupportOptions.cc:26
 msgid "Level 3"
-msgstr ""
+msgstr "Nivelul 3"
 
 #. language code: lez
 #: ../zypp/LanguageCode.cc:744
 msgid "Lezghian"
-msgstr ""
+msgstr "Lezghiană"
 
 #. :LKA:144:
 #: ../zypp/CountryCode.cc:351
@@ -2360,7 +2372,7 @@ msgstr "Luiseno"
 #. language code: smj
 #: ../zypp/LanguageCode.cc:1044
 msgid "Lule Sami"
-msgstr ""
+msgstr "Sami lule"
 
 #. language code: lun
 #: ../zypp/LanguageCode.cc:766
@@ -2410,7 +2422,7 @@ msgstr "Madagascar"
 #. language code: mad
 #: ../zypp/LanguageCode.cc:776
 msgid "Madurese"
-msgstr ""
+msgstr "Madurese"
 
 #. language code: mag
 #: ../zypp/LanguageCode.cc:778
@@ -2440,7 +2452,7 @@ msgstr "Malawi"
 #. language code: may msa ms
 #: ../zypp/LanguageCode.cc:800 ../zypp/LanguageCode.cc:802
 msgid "Malay"
-msgstr ""
+msgstr "Malaeziană"
 
 #. language code: mal ml
 #: ../zypp/LanguageCode.cc:786
@@ -2457,9 +2469,9 @@ msgstr "Malaezia"
 msgid "Maldives"
 msgstr "Maldive"
 
-#: ../zypp/media/MediaException.cc:115
+#: ../zypp/media/MediaException.cc:131
 msgid "Malformed URI"
-msgstr ""
+msgstr "URI Invalid"
 
 #. :MKD:807:
 #: ../zypp/CountryCode.cc:363
@@ -2566,12 +2578,12 @@ msgstr "Limbi maya"
 msgid "Mayotte"
 msgstr "Mayotte"
 
-#: ../zypp/media/MediaException.cc:169
+#: ../zypp/media/MediaException.cc:221
 #, c-format
 msgid "Media source '%s' does not contain the desired medium"
-msgstr ""
+msgstr "Sursa '%s' nu conține mediul dorit"
 
-#: ../zypp/media/MediaException.cc:175
+#: ../zypp/media/MediaException.cc:227
 #, c-format
 msgid "Medium '%s' is in use by another instance"
 msgstr "Mediul '%s' este utilizat momentan de o altă instanță"
@@ -2693,7 +2705,7 @@ msgstr "Limbi multiple"
 #. language code: mun
 #: ../zypp/LanguageCode.cc:840
 msgid "Munda languages"
-msgstr ""
+msgstr "Limbile Munda"
 
 #. :MLI:466:
 #: ../zypp/CountryCode.cc:364
@@ -2754,7 +2766,7 @@ msgstr "Nepal Bhasa"
 #. language code: nep ne
 #: ../zypp/LanguageCode.cc:870
 msgid "Nepali"
-msgstr ""
+msgstr "Nepaleză"
 
 #. :NIC:558:
 #: ../zypp/CountryCode.cc:384
@@ -2794,7 +2806,7 @@ msgstr "Niger"
 #. language code: nic
 #: ../zypp/LanguageCode.cc:876
 msgid "Niger-Kordofanian (Other)"
-msgstr ""
+msgstr "Niger-Kordofanian (alta)"
 
 #. :NFK:574:
 #: ../zypp/CountryCode.cc:382
@@ -2839,7 +2851,7 @@ msgstr "Insula Norfolk"
 #. language code: non
 #: ../zypp/LanguageCode.cc:886
 msgid "Norse, Old"
-msgstr ""
+msgstr "Scandinavă veche"
 
 #. language code: nai
 #: ../zypp/LanguageCode.cc:854
@@ -2854,12 +2866,12 @@ msgstr "Coreea de Nord"
 #. :MAC:446:
 #: ../zypp/CountryCode.cc:367
 msgid "Northern Mariana Islands"
-msgstr ""
+msgstr "Insulele Mariana de Nord"
 
 #. language code: sme se
 #: ../zypp/LanguageCode.cc:1040
 msgid "Northern Sami"
-msgstr ""
+msgstr "Sami nordică"
 
 #. language code: nso
 #: ../zypp/LanguageCode.cc:890
@@ -2893,7 +2905,7 @@ msgstr "Nu este o unitate CDROM"
 #. language code: nub
 #: ../zypp/LanguageCode.cc:892
 msgid "Nubian Languages"
-msgstr ""
+msgstr "Limbi nubiene"
 
 #. language code: nym
 #: ../zypp/LanguageCode.cc:898
@@ -2933,9 +2945,9 @@ msgstr "Oman"
 #: ../zypp/parser/RepoindexFileReader.cc:116
 #, c-format
 msgid "One or both of '%s' or '%s' attributes is required."
-msgstr ""
+msgstr "Unul sau ambele din atributele '%s' și '%s' sunt necesare."
 
-#: ../zypp/media/MediaException.cc:145
+#: ../zypp/media/MediaException.cc:161
 msgid "Operation not supported by medium"
 msgstr "Operația nu este suportată de mediu"
 
@@ -2957,17 +2969,17 @@ msgstr "Osage"
 #. language code: oss os
 #: ../zypp/LanguageCode.cc:916
 msgid "Ossetian"
-msgstr ""
+msgstr "Osetă"
 
 #. language code: oto
 #: ../zypp/LanguageCode.cc:920
 msgid "Otomian Languages"
-msgstr ""
+msgstr "Limbi otomiene"
 
 #. TranslatorExplanation %s = package being checked for integrity
-#: ../zypp/repo/PackageProvider.cc:243
-#, c-format
-msgid "Package %s fails integrity check. Do you want to retry?"
+#: ../zypp/repo/PackageProvider.cc:247
+#, fuzzy, c-format
+msgid "Package %s seems to be corrupted during transfer. Do you want to retry retrieval?"
 msgstr "Pachetul %s a așuat la verificarea integrității. Doriți să încercați din nou?"
 
 #. language code: pal
@@ -2993,7 +3005,7 @@ msgstr "Palauană"
 #. :PRI:630:
 #: ../zypp/CountryCode.cc:401
 msgid "Palestinian Territory"
-msgstr ""
+msgstr "Teritoriile palestiniene"
 
 #. language code: pli pi
 #: ../zypp/LanguageCode.cc:946
@@ -3018,7 +3030,7 @@ msgstr ""
 #. language code: pan pa
 #: ../zypp/LanguageCode.cc:930
 msgid "Panjabi"
-msgstr ""
+msgstr "Panjabi"
 
 #. language code: pap
 #: ../zypp/LanguageCode.cc:932
@@ -3033,24 +3045,24 @@ msgstr "Papua Noua Guinee"
 #. language code: paa
 #: ../zypp/LanguageCode.cc:922
 msgid "Papuan (Other)"
-msgstr ""
+msgstr "Papua (alta)"
 
 #. :PLW:585:
 #: ../zypp/CountryCode.cc:404
 msgid "Paraguay"
 msgstr "Paraguay"
 
-#: ../zypp/media/MediaException.cc:106
+#: ../zypp/media/MediaException.cc:122
 #, c-format
 msgid "Path '%s' on medium '%s' is not a directory."
 msgstr "Calea '%s' de pe mediul '%s' nu este un director."
 
-#: ../zypp/media/MediaException.cc:98
+#: ../zypp/media/MediaException.cc:114
 #, c-format
 msgid "Path '%s' on medium '%s' is not a file."
 msgstr "Calea '%s' de pe mediul '%s' nu este un fișier."
 
-#: ../zypp/media/MediaException.cc:200
+#: ../zypp/media/MediaException.cc:252
 #, c-format
 msgid "Permission to access '%s' denied."
 msgstr "Accesul la '%s' a fost interzis."
@@ -3063,7 +3075,7 @@ msgstr "Persană"
 #. language code: peo
 #: ../zypp/LanguageCode.cc:936
 msgid "Persian, Old (ca.600-400 B.C.)"
-msgstr ""
+msgstr "Persană veche (cca. 600-400 î.e.n.)"
 
 #. :PAN:591:
 #: ../zypp/CountryCode.cc:392
@@ -3093,7 +3105,7 @@ msgstr "Pitcairn"
 #. language code: pon
 #: ../zypp/LanguageCode.cc:950
 msgid "Pohnpeian"
-msgstr ""
+msgstr "Pohnpeian"
 
 #. :PAK:586:
 #: ../zypp/CountryCode.cc:397
@@ -3122,11 +3134,11 @@ msgstr "Limbi prakrite"
 
 #: ../zypp/VendorSupportOptions.cc:45
 msgid "Problem determination, which means technical support designed to provide compatibility information, installation assistance, usage support, on-going maintenance and basic troubleshooting. Level 1 Support is not intended to correct product defect errors."
-msgstr ""
+msgstr "Determinarea problemei, ceea ce înseamnă suport tehnic menit să ofere informații de compatibilitate, asistență la instalare, suport la utilizare, mentenanță curentă și rezolvarea problemelor simple. Suportul de nivel 1 nu este menit să corecteze erori ale produsului."
 
 #: ../zypp/VendorSupportOptions.cc:48
 msgid "Problem isolation, which means technical support designed to duplicate customer problems, isolate problem area and provide resolution for problems not resolved by Level 1 Support."
-msgstr ""
+msgstr "Izolarea problemei, ceea ce înseamnă suport tehnic menit să reproducă problemele clienților, să izoleze zona cu probleme și să ofere soluții pentru probleme nerezolvate de suportul de nivel 1."
 
 #: ../zypp/VendorSupportOptions.cc:51
 msgid "Problem resolution, which means technical support designed to resolve complex problems by engaging engineering in resolution of product defects which have been identified by Level 2 Support."
@@ -3162,8 +3174,9 @@ msgid "Query string parsing not supported for this URL"
 msgstr "Pentru acest URL nu este suportată parcurgerea unui șir de interogare"
 
 #. TranslatorExplanation after semicolon is error message
-#: ../zypp/target/rpm/RpmDb.cc:892 ../zypp/target/rpm/RpmDb.cc:2080
-#: ../zypp/target/rpm/RpmDb.cc:2221
+#. TranslatorExplanation the colon is followed by an error message
+#: ../zypp/target/rpm/RpmDb.cc:892 ../zypp/target/rpm/RpmDb.cc:2081
+#: ../zypp/target/rpm/RpmDb.cc:2217
 msgid "RPM failed: "
 msgstr "RPM a eșuat:"
 
@@ -3191,15 +3204,15 @@ msgstr "Rarotongan"
 msgid "Relative path not allowed if authority exists"
 msgstr "Calea relativă nu este permisă dacă autoritatea există"
 
-#: ../zypp/RepoManager.cc:1311
+#: ../zypp/RepoManager.cc:1314
 #, c-format
 msgid "Removing repository '%s'"
 msgstr "Îndepărtez sursa de instalare '%s'"
 
 #: ../zypp/parser/RepoindexFileReader.cc:128
-#, fuzzy, c-format
+#, c-format
 msgid "Required attribute '%s' is missing."
-msgstr "Lipsește un fișier necesar: "
+msgstr "Atributul necesar '%s' lipsește."
 
 #. :QAT:634:
 #: ../zypp/CountryCode.cc:406
@@ -3269,12 +3282,12 @@ msgstr "Saint Pierre și Miquelon"
 #. :VAT:336:
 #: ../zypp/CountryCode.cc:452
 msgid "Saint Vincent and the Grenadines"
-msgstr ""
+msgstr "Sfântul Vincent și Grenadine"
 
 #. language code: sal
 #: ../zypp/LanguageCode.cc:990
 msgid "Salishan Languages"
-msgstr ""
+msgstr "Limbi salishan"
 
 #. language code: sam
 #: ../zypp/LanguageCode.cc:992
@@ -3344,7 +3357,7 @@ msgstr "Arabia Saudită"
 #. language code: sco
 #: ../zypp/LanguageCode.cc:1006
 msgid "Scots"
-msgstr ""
+msgstr "Scots"
 
 #. language code: sel
 #: ../zypp/LanguageCode.cc:1012
@@ -3454,12 +3467,12 @@ msgstr "Limbi siouan"
 #. language code: sms
 #: ../zypp/LanguageCode.cc:1050
 msgid "Skolt Sami"
-msgstr ""
+msgstr "Sami skolt"
 
 #. language code: den
 #: ../zypp/LanguageCode.cc:460
 msgid "Slave (Athapascan)"
-msgstr ""
+msgstr "Slave (Athapascan)"
 
 #. language code: sla
 #: ../zypp/LanguageCode.cc:1030
@@ -3489,7 +3502,7 @@ msgstr "Slovenă"
 #. language code: sog
 #: ../zypp/LanguageCode.cc:1058
 msgid "Sogdian"
-msgstr ""
+msgstr "Sogdiană"
 
 #. :SAU:682:
 #: ../zypp/CountryCode.cc:411
@@ -3651,17 +3664,19 @@ msgstr "Siria"
 msgid "Syriac"
 msgstr "Siriacă"
 
-#: ../zypp/media/MediaException.cc:91
+#: ../zypp/media/MediaException.cc:107
 #, c-format
 msgid "System exception '%s' on medium '%s'."
 msgstr "Excepție sistem '%s' pe mediul '%s'."
 
 #: ../zypp/ZYppFactory.cc:361
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "System management is locked by the application with pid %d (%s).\n"
 "Please close this application before trying again."
-msgstr "Gestiunea sistem este blocată de aplicația cu pid-ul %d. Închideți această aplicație înainte de a încerca din nou."
+msgstr ""
+"Managementul sistemului este blocat de aplicația cu pid-ul %d (%s).\n"
+"Vă rugăm să închideți această aplicație înainte de a reîncerca."
 
 #. language code: tgl tl
 #: ../zypp/LanguageCode.cc:1108
@@ -3740,12 +3755,11 @@ msgstr "Tailanda"
 
 #: ../zypp/VendorSupportOptions.cc:39
 msgid "The level of support is unspecified"
-msgstr ""
+msgstr "Nivelul de suport este nespecificat"
 
 #: ../zypp/VendorSupportOptions.cc:42
-#, fuzzy
 msgid "The vendor does not provide support."
-msgstr "Discul nu există."
+msgstr "Vânzătorul nu oferă suport."
 
 #: ../zypp/base/InterProcessMutex.cc:139
 msgid "This action is being run by another program already."
@@ -3754,7 +3768,7 @@ msgstr "Această acțiune este rulată deja de alt program."
 #: ../zypp/solver/detail/SATResolver.cc:1118
 #: ../zypp/solver/detail/SATResolver.cc:1136
 msgid "This request will break your system!"
-msgstr ""
+msgstr "Această cerere vă va afecta sistemul!"
 
 #. language code: tib bod bo
 #: ../zypp/LanguageCode.cc:1112 ../zypp/LanguageCode.cc:1114
@@ -3771,7 +3785,7 @@ msgstr "Tigre"
 msgid "Tigrinya"
 msgstr "Tigrinya"
 
-#: ../zypp/media/MediaException.cc:207
+#: ../zypp/media/MediaException.cc:259
 #, c-format
 msgid "Timeout exceed when access '%s'."
 msgstr "Timp de așteptare depășit la accesarea '%s'."
@@ -3921,7 +3935,7 @@ msgstr "Uganda"
 #. language code: uga
 #: ../zypp/LanguageCode.cc:1160
 msgid "Ugaritic"
-msgstr ""
+msgstr "Ugaritică"
 
 #. language code: uig ug
 #: ../zypp/LanguageCode.cc:1162
@@ -3982,12 +3996,11 @@ msgstr "Statele Unite"
 #. :UGA:800:
 #: ../zypp/CountryCode.cc:447
 msgid "United States Minor Outlying Islands"
-msgstr ""
+msgstr "Insulele minore din afara Statelor Unite"
 
 #: ../zypp/target/TargetImpl.cc:877
-#, fuzzy
 msgid "Unknown Distribution"
-msgstr "Distribuţie: %1\n"
+msgstr "Distribuție necunoscută"
 
 #: ../zypp/CountryCode.cc:135
 msgid "Unknown country: "
@@ -3999,14 +4012,14 @@ msgstr "Limbă necunoscută: "
 
 #: ../zypp/VendorSupportOptions.cc:56
 msgid "Unknown support option. Description not available"
-msgstr ""
+msgstr "Opțiune de suport necunoscută. Descrierea nu este disponibilă"
 
 #: ../zypp/media/MediaUserAuth.cc:123
 #, c-format
 msgid "Unsupported HTTP authentication method '%s'"
 msgstr "Metodă de autentificare HTTP nesuportată '%s'"
 
-#: ../zypp/media/MediaException.cc:140
+#: ../zypp/media/MediaException.cc:156
 #, c-format
 msgid "Unsupported URI scheme in '%s'."
 msgstr "Schemă URI nesuportată în '%s'."
@@ -4073,7 +4086,7 @@ msgstr "Uruguay"
 #. language code: uzb uz
 #: ../zypp/LanguageCode.cc:1172
 msgid "Uzbek"
-msgstr ""
+msgstr "Uzbecă"
 
 #. :URY:858:
 #: ../zypp/CountryCode.cc:450
@@ -4128,7 +4141,7 @@ msgstr "Volapuk"
 #. language code: vot
 #: ../zypp/LanguageCode.cc:1182
 msgid "Votic"
-msgstr ""
+msgstr "Votică"
 
 #. language code: wak
 #: ../zypp/LanguageCode.cc:1184
@@ -4163,12 +4176,12 @@ msgstr "Washo"
 #. language code: wel cym cy
 #: ../zypp/LanguageCode.cc:1192 ../zypp/LanguageCode.cc:1194
 msgid "Welsh"
-msgstr ""
+msgstr "Galeză"
 
 #. :EGY:818:
 #: ../zypp/CountryCode.cc:288
 msgid "Western Sahara"
-msgstr ""
+msgstr "Sahara Occidentală"
 
 #. language code: wol wo
 #: ../zypp/LanguageCode.cc:1200
@@ -4255,11 +4268,11 @@ msgstr "Zulu"
 msgid "Zuni"
 msgstr "Zuni"
 
-#: ../zypp/repo/PackageProvider.cc:194
+#: ../zypp/repo/PackageProvider.cc:195
 msgid "applydeltarpm check failed."
 msgstr "verificarea applydeltarpm a eșuat."
 
-#: ../zypp/repo/PackageProvider.cc:208
+#: ../zypp/repo/PackageProvider.cc:212
 msgid "applydeltarpm failed."
 msgstr "applydeltarpm a eșuat."
 
@@ -4277,7 +4290,7 @@ msgstr "nu pot instala %s și %s împreună"
 msgid "conflicting requests"
 msgstr "cereri ce intră în conflict"
 
-#: ../zypp/target/rpm/RpmDb.cc:2374
+#: ../zypp/target/rpm/RpmDb.cc:2369
 #, c-format
 msgid "created backup %s"
 msgstr "backup %s creat"
@@ -4289,7 +4302,7 @@ msgstr "deinstalarea %s"
 
 #: ../zypp/solver/detail/SATResolver.cc:971
 msgid "deleted providers: "
-msgstr ""
+msgstr "furnizori șterși: "
 
 #: ../zypp/solver/detail/SATResolver.cc:1139
 #, c-format
@@ -4330,7 +4343,7 @@ msgstr "downgrade %s la %s"
 #: ../zypp/solver/detail/SATResolver.cc:1119
 #: ../zypp/solver/detail/SATResolver.cc:1137
 msgid "ignore the warning of a broken system"
-msgstr ""
+msgstr "ignoră avertismentul privitor la stricarea sistemului"
 
 #: ../zypp/solver/detail/SATResolver.cc:1202
 #, c-format
@@ -4347,7 +4360,7 @@ msgstr ""
 
 #: ../zypp/VendorSupportOptions.cc:31
 msgid "invalid"
-msgstr ""
+msgstr "invalid"
 
 #: ../zypp/solver/detail/SATResolver.cc:1061
 #: ../zypp/solver/detail/SATResolver.cc:1104
@@ -4399,10 +4412,6 @@ msgstr ""
 "rpm a creat %s ca %s.\n"
 "Acestea sunt primele 25 de linii diferite:\n"
 
-#: ../zypp/target/rpm/RpmDb.cc:2077 ../zypp/target/rpm/RpmDb.cc:2218
-msgid "rpm output:"
-msgstr "ieșiri rpm:"
-
 #. %s = filenames
 #: ../zypp/target/rpm/RpmDb.cc:2062
 #, c-format
@@ -4420,236 +4429,29 @@ msgstr ""
 "Acestea sunt primele 25 de linii diferite:\n"
 
 #: ../zypp/solver/detail/SATResolver.cc:906
-#, fuzzy
 msgid "some dependency problem"
-msgstr "Nu pot instala %s din cauza unor probleme de dependenţe"
+msgstr "o problemă de dependențe"
 
 #: ../zypp/solver/detail/SATResolver.cc:983
 msgid "uninstallable providers: "
-msgstr ""
+msgstr "furnizori dezinstalabili: "
 
 #: ../zypp/VendorSupportOptions.cc:14
 msgid "unknown"
 msgstr "necunoscut"
 
 #: ../zypp/VendorSupportOptions.cc:17
-#, fuzzy
 msgid "unsupported"
-msgstr " - nesuportat"
+msgstr "nesuportat"
 
-#~ msgid "%s install failed"
-#~ msgstr "Instalarea %s a eșuat"
+#~ msgid "%s remove failed"
+#~ msgstr "Îndepărtarea %s a eșuat"
 
-#~ msgid "%s installed ok"
-#~ msgstr "%s instalat cu succes"
+#~ msgid "Additional rpm output:"
+#~ msgstr "Ieșiri rpm adiționale:"
 
-#~ msgid "%s remove ok"
-#~ msgstr "%s îndepărtat cu succes"
+#~ msgid "Invalid user name or password."
+#~ msgstr "Nume de utilizator sau parolă invalidă."
 
-#, fuzzy
-#~ msgid "Download (Metalink curl) initialization failed for '%s'"
-#~ msgstr "Inițializarea download-ului (curl) a eșuat pentru '%s'"
-
-#, fuzzy
-#~ msgid ""
-#~ "Download (metalink curl) error for '%s':\n"
-#~ "Error code: %s\n"
-#~ "Error message: %s\n"
-#~ msgstr ""
-#~ "Eroare de descărcare (curl) pentru '%s':\n"
-#~ "Cod eroare: %s\n"
-#~ "Mesaj eroare: %s\n"
-
-#, fuzzy
-#~ msgid "Error occurred while setting download (metalink curl) options for '%s':"
-#~ msgstr "A apărut o eroare la setarea opțiunilor de download (curl) pentru '%s':"
-
-#~ msgid "%s provides this dependency, but would change the vendor of the installed item"
-#~ msgstr "%s furnizează această dependenţă, dar va modifica vânzătorul elementului instalat"
-
-#, fuzzy
-#~ msgid "Do not install or delete the resolvables concerned"
-#~ msgstr "%1 intră în conflict cu %2"
-
-#, fuzzy
-#~ msgid "Ignore that %s is already set to install"
-#~ msgstr "Directorul %1 se află deja în listă."
-
-#, fuzzy
-#~ msgid "Ignore the obsolete %s in %s"
-#~ msgstr "%1 intră în conflict cu %2"
-
-#, fuzzy
-#~ msgid "Ignore this conflict of %s"
-#~ msgstr "%1 intră în conflict cu %2"
-
-#~ msgid "Ignore this requirement just here"
-#~ msgstr "Ignoră această cerinţă doar aici"
-
-#, fuzzy
-#~ msgid "Install missing resolvables"
-#~ msgstr "Instalez driver-ul..."
-
-#, fuzzy
-#~ msgid "Keep resolvables"
-#~ msgstr "Instalez driver-ul..."
-
-#, fuzzy
-#~ msgid "Unlock these resolvables"
-#~ msgstr "%1 intră în conflict cu %2"
-
-#~ msgid "delete %s"
-#~ msgstr "şterge %s"
-
-#~ msgid "install %s"
-#~ msgstr "instalează %s"
-
-#~ msgid "unlock %s"
-#~ msgstr "deblochează %s"
-
-#, fuzzy
-#~ msgid "unlock all resolvables"
-#~ msgstr "%1 intră în conflict cu %2"
-
-#, fuzzy
-#~ msgid "Can't open solv-file: "
-#~ msgstr "Nu pot deschide fişierul %1."
-
-#, fuzzy
-#~ msgid "Error reading solv-file: "
-#~ msgstr "Eroare la citirea sectorului %u."
-
-#~ msgid "%s is replaced by %s"
-#~ msgstr "%s este înlocuit de %s"
-
-#~ msgid "%s replaced by %s"
-#~ msgstr "%s înlocuit de %s"
-
-#~ msgid "%s will be deleted by the user.\n"
-#~ msgstr "%s va fi şters de către utilizator.\n"
-
-#~ msgid "%s will be deleted by another application. (ApplLow/ApplHigh)\n"
-#~ msgstr "%s va fi şters de către altă aplicaţie. (ApplLow/ApplHigh)\n"
-
-#~ msgid "%s will be installed by the user.\n"
-#~ msgstr "%s va fi instalat de către utilizator.\n"
-
-#~ msgid "%s will be installed by another application. (ApplLow/ApplHigh)\n"
-#~ msgstr "%s va fi instalat de către altă aplicaţie. (ApplLow/ApplHigh)\n"
-
-#~ msgid "Invalid information"
-#~ msgstr "Informaţii invalide"
-
-#, fuzzy
-#~ msgid "%s conflicts with other resolvables"
-#~ msgstr "%1 intră în conflict cu %2"
-
-#~ msgid ""
-#~ "%s conflicts with:\n"
-#~ "%s"
-#~ msgstr ""
-#~ "%s intră în conflict cu:\n"
-#~ "%s"
-
-#~ msgid "%s depends on %s"
-#~ msgstr "%s depinde de %s"
-
-#~ msgid "%s depends on:%s"
-#~ msgstr "%s depinde de:%s"
-
-#~ msgid "Cannot install %s, because it is conflicting with %s"
-#~ msgstr "Nu pot instala %s deoarece intră în conflict cu %s"
-
-#~ msgid "%s is not installed and has been marked as uninstallable"
-#~ msgstr "%s nu este instalat şi a fost marcat ca neinstalabil"
-
-#~ msgid "%s has missing dependencies"
-#~ msgstr "%s are dependenţe lipsă"
-
-#~ msgid "%s cannot be installed due to missing dependencies"
-#~ msgstr "%s nu poate fin instalat din cauza lipsei unor dependenţe"
-
-#, fuzzy
-#~ msgid "No need to install %s"
-#~ msgstr "Instalare automată"
-
-#~ msgid "%s will not be uninstalled, because it is still required"
-#~ msgstr "%s nu va fi deinstalat deoarece mai este necesar"
-
-#~ msgid "Cannot install %s, because it is conflicting"
-#~ msgstr "Nu pot instala %s deoarece generează conflicte"
-
-#~ msgid "%s is uninstallable due to conflicts with %s"
-#~ msgstr "%s nu este instalabil deoarece intră în conflict cu %s"
-
-#~ msgid ", Action: "
-#~ msgstr ", Acţiune: "
-
-#~ msgid "package"
-#~ msgstr "pachet"
-
-#~ msgid "selection"
-#~ msgstr "selecţie"
-
-#~ msgid "product"
-#~ msgstr "produs"
-
-#~ msgid "patch"
-#~ msgstr "petic"
-
-#~ msgid "script"
-#~ msgstr "script"
-
-#~ msgid "message"
-#~ msgstr "mesaj"
-
-#~ msgid "system"
-#~ msgstr "sistem"
-
-#~ msgid "Can't install %s, because %s is already marked as needed to for installation"
-#~ msgstr "Nu pot instala %s deoarece %s este deja marcat ca necesar pentru instalare"
-
-#~ msgid "Establishing %s"
-#~ msgstr "Stabilesc %s"
-
-#~ msgid "Installing %s"
-#~ msgstr "Instalez %s"
-
-#~ msgid "Skipping %s: already installed"
-#~ msgstr "Omit %s: deja instalat"
-
-#~ msgid "for %s"
-#~ msgstr "pentru %s"
-
-#~ msgid "%s provides %s, but is scheduled to be uninstalled."
-#~ msgstr "%s furnizează %s, dar este programat pentru deinstalare."
-
-#~ msgid "%s provides %s, but another version of that %s is already installed."
-#~ msgstr "%s dfurnizează %s, dar o altă versiune a acestui %s este deja instalată."
-
-#~ msgid "%s provides %s, but it is locked."
-#~ msgstr "%s furnizează %s, dar este blocat."
-
-#~ msgid "%s provides %s, but has another vendor (%s)."
-#~ msgstr "%s furnizează %s, dar are alt vânzător (%s)."
-
-#~ msgid "Can't satisfy requirement %s for %s"
-#~ msgstr "Nu pot satisface cerinţa %s pentru %s"
-
-#~ msgid "%s is locked and cannot be uninstalled."
-#~ msgstr "%s este blocat şi nu poate fi deinstalat."
-
-#~ msgid " Error!"
-#~ msgstr " Eroare!"
-
-#~ msgid " Important!"
-#~ msgstr " Important!"
-
-#~ msgid "%s is suggested by %s"
-#~ msgstr "%s este sugerat de %s"
-
-#~ msgid "%s is enhanced by %s"
-#~ msgstr "%s este îmbunătăţit de %s"
-
-#~ msgid "%s part of %s"
-#~ msgstr "%s parte a %s"
+#~ msgid "rpm output:"
+#~ msgstr "ieșiri rpm:"

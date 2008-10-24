@@ -1,4 +1,4 @@
-# translation of zypp.po to Brazilian Portuguese
+# translation of zypp.pt_BR.po to Brazilian Portuguese
 # Portugese (Brasilian) message file for YaST2 (@memory@).
 # Copyright (C) 2005 SUSE Linux Products GmbH.
 # Copyright (C) 2002 SuSE Linux AG.
@@ -10,16 +10,16 @@
 # Luiz Fernando Ranghetti <elchevive68@gmail.com>, 2008.
 msgid ""
 msgstr ""
-"Project-Id-Version: zypp\n"
+"Project-Id-Version: zypp.pt_BR\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-09-25 15:48+0200\n"
-"PO-Revision-Date: 2008-10-02 23:07-0300\n"
-"Last-Translator: Luiz Fernando Ranghetti <elchevive68@gmail.com>\n"
+"POT-Creation-Date: 2008-10-08 17:27+0200\n"
+"PO-Revision-Date: 2008-10-22 12:22-0300\n"
+"Last-Translator: Isis Binder <isis.binder@gmail.com>\n"
 "Language-Team: Brazilian Portuguese <opensuse-pt@opensuse.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=2; plural=n>1\n"
+"Plural-Forms: nplurals=2; plural=(n > 1);\n"
 "X-Generator: KBabel 1.11.4\n"
 "X-Poedit-Language: Portuguese\n"
 "X-Poedit-Country: BRAZIL\n"
@@ -33,7 +33,7 @@ msgstr ""
 "\n"
 "fornecedores de não-instaláveis: "
 
-#: ../zypp/media/MediaException.cc:214
+#: ../zypp/media/MediaException.cc:266
 #, c-format
 msgid " SSL certificate problem, verify that the CA cert is OK for '%s'."
 msgstr " Problema no certificado SSL, verifique se a certificação CA está correta para '%s'."
@@ -65,11 +65,6 @@ msgstr "%s não pode ser instalado"
 msgid "%s obsoletes %s provided by %s"
 msgstr "%s torna obsoleto %s, fornecido por %s"
 
-#: ../zypp/target/rpm/RpmDb.cc:2216
-#, c-format
-msgid "%s remove failed"
-msgstr "Falha na remoção de %s"
-
 #: ../zypp/solver/detail/SATResolver.cc:969
 #, c-format
 msgid "%s requires %s, but this requirement cannot be provided"
@@ -95,7 +90,7 @@ msgstr "Acoli"
 msgid "Adangme"
 msgstr "Circassiano"
 
-#: ../zypp/RepoManager.cc:1181
+#: ../zypp/RepoManager.cc:1184
 #, c-format
 msgid "Adding repository '%s'"
 msgstr "Adicionando o repositório '%s'"
@@ -103,11 +98,6 @@ msgstr "Adicionando o repositório '%s'"
 #: ../zypp/VendorSupportOptions.cc:29
 msgid "Additional Customer Contract Necessary"
 msgstr "Contrato adicional do consumidor necessário"
-
-#: ../zypp/target/rpm/RpmDb.cc:2092
-#: ../zypp/target/rpm/RpmDb.cc:2230
-msgid "Additional rpm output:"
-msgstr "Saída de rpm adicional:"
 
 #. language code: ady
 #: ../zypp/LanguageCode.cc:248
@@ -324,7 +314,8 @@ msgstr "Áustria"
 msgid "Austronesian (Other)"
 msgstr "Austronésio (outros)"
 
-#: ../zypp/media/MediaCurl.cc:1615
+#. !\todo add comma to the message for the next release
+#: ../zypp/media/MediaCurl.cc:1619
 #, c-format
 msgid "Authentication required for '%s'"
 msgstr "Autenticação necessária para '%s'"
@@ -589,7 +580,7 @@ msgstr "Brunei"
 msgid "Buginese"
 msgstr "Buginês"
 
-#: ../zypp/RepoManager.cc:976
+#: ../zypp/RepoManager.cc:977
 #, c-format
 msgid "Building repository '%s' cache"
 msgstr "Construindo o cache do repositório '%s'"
@@ -648,23 +639,23 @@ msgstr "Não foi possível criar o sat-pool."
 msgid "Can't acquire the mutex lock"
 msgstr "Não foi possível adquirir o bloqueio mutex"
 
-#: ../zypp/ExternalProgram.cc:245
+#: ../zypp/ExternalProgram.cc:301
 #, c-format
 msgid "Can't chdir to '/' inside chroot (%s)."
-msgstr "Não foi possível alterar o diretório para '/' dentro do chroot (%s)"
+msgstr "Não foi possível alterar o diretório para '/' dentro do chroot (%s)."
 
-#: ../zypp/ExternalProgram.cc:238
+#: ../zypp/ExternalProgram.cc:294
 #, c-format
 msgid "Can't chroot to '%s' (%s)."
 msgstr "Não foi possível executar o chroot em '%s' (%s)."
 
 #. don't want to get here
-#: ../zypp/ExternalProgram.cc:259
+#: ../zypp/ExternalProgram.cc:315
 #, c-format
 msgid "Can't exec '%s' (%s)."
-msgstr "Não foi possível executar '%s' (%s)"
+msgstr "Não foi possível executar '%s' (%s)."
 
-#: ../zypp/ExternalProgram.cc:267
+#: ../zypp/ExternalProgram.cc:323
 #, c-format
 msgid "Can't fork (%s)."
 msgstr "Não foi possível dividir (%s)."
@@ -682,12 +673,12 @@ msgstr "Não foi possível inicializar o mutex recursivo"
 msgid "Can't open lock file: %s"
 msgstr "Não foi possível abrir o arquivo de trava: %s"
 
-#: ../zypp/ExternalProgram.cc:174
+#: ../zypp/ExternalProgram.cc:230
 #, c-format
 msgid "Can't open pipe (%s)."
 msgstr "Não foi possível abrir o pipe (%s)."
 
-#: ../zypp/ExternalProgram.cc:163
+#: ../zypp/ExternalProgram.cc:219
 #, c-format
 msgid "Can't open pty (%s)."
 msgstr "Não foi possível abrir o pty (%s)."
@@ -715,14 +706,19 @@ msgstr "Canadá"
 msgid "Cannot create public key %s from %s keyring to file %s"
 msgstr "Não foi possível criar a chave pública %s do gerenciador de chaves %s para o arquivo %s"
 
-#: ../zypp/media/MediaException.cc:182
+#: ../zypp/media/MediaException.cc:234
 msgid "Cannot eject any media"
-msgstr "Não foi possível ejetar qualquer mídia."
+msgstr "Não foi possível ejetar qualquer mídia"
 
-#: ../zypp/media/MediaException.cc:184
+#: ../zypp/media/MediaException.cc:236
 #, c-format
 msgid "Cannot eject media '%s'"
 msgstr "Não foi possível ejetar a mídia '%s'"
+
+#: ../zypp/media/MediaException.cc:273
+#, c-format
+msgid "Cannot find available loop device to mount the image file from '%s'"
+msgstr "Não é possível encontrar um dispositivo loop disponível para montar o arquivo de imagem de '%s'"
 
 #: ../zypp/media/MediaException.cc:67
 #, c-format
@@ -880,7 +876,7 @@ msgstr "Chuvash"
 #. language code: nwc
 #: ../zypp/LanguageCode.cc:894
 msgid "Classical Newari"
-msgstr "Newari Clássico"
+msgstr "Newari clássico"
 
 #. :CAN:124:
 #: ../zypp/CountryCode.cc:261
@@ -892,16 +888,16 @@ msgstr "Ilhas Cocos (Keeling)"
 msgid "Colombia"
 msgstr "Colômbia"
 
-#: ../zypp/ExternalProgram.cc:346
+#: ../zypp/ExternalProgram.cc:402
 #, c-format
 msgid "Command exited with status %d."
 msgstr "O comando encerrou com status %d."
 
-#: ../zypp/ExternalProgram.cc:371
+#: ../zypp/ExternalProgram.cc:427
 msgid "Command exited with unknown error."
 msgstr "O comando encerrou com erro desconhecido."
 
-#: ../zypp/ExternalProgram.cc:366
+#: ../zypp/ExternalProgram.cc:422
 #, c-format
 msgid "Command was killed by signal %d (%s)."
 msgstr "Comando foi morto pelo sinal %d (%s)."
@@ -1085,7 +1081,14 @@ msgstr "Dominica"
 msgid "Dominican Republic"
 msgstr "República Dominicana"
 
-#: ../zypp/media/MediaException.cc:152
+#. TranslatorExplanation: curl is the name of a library, don't translate
+#: ../zypp/media/MediaException.cc:92
+#: ../zypp/media/MediaException.cc:100
+#, c-format
+msgid "Download (Metalink curl) initialization failed for '%s'"
+msgstr "Falha na inicialização do download (Metalink curl) para '%s'"
+
+#: ../zypp/media/MediaException.cc:168
 #, c-format
 msgid ""
 "Download (curl) error for '%s':\n"
@@ -1101,6 +1104,18 @@ msgstr ""
 #, c-format
 msgid "Download (curl) initialization failed for '%s'"
 msgstr "Falha na inicialização do download (curl) para '%s'"
+
+#: ../zypp/media/MediaException.cc:186
+#: ../zypp/media/MediaException.cc:204
+#, c-format
+msgid ""
+"Download (metalink curl) error for '%s':\n"
+"Error code: %s\n"
+"Error message: %s\n"
+msgstr ""
+"Erro de download (metalink curl) para '%s':\n"
+"Código de erro: %s\n"
+"Mensagem de erro: %s\n"
 
 #. language code: dra
 #: ../zypp/LanguageCode.cc:470
@@ -1179,15 +1194,15 @@ msgstr "El Salvador"
 msgid "Elamite"
 msgstr "Elamita"
 
-#: ../zypp/media/MediaException.cc:135
+#: ../zypp/media/MediaException.cc:151
 msgid "Empty destination in URI"
 msgstr "Destino vazio na URL"
 
-#: ../zypp/media/MediaException.cc:130
+#: ../zypp/media/MediaException.cc:146
 msgid "Empty filesystem in URI"
 msgstr "Sistema de arquivos vazios na URL"
 
-#: ../zypp/media/MediaException.cc:125
+#: ../zypp/media/MediaException.cc:141
 msgid "Empty host name in URI"
 msgstr "Nome de host vazio na URL"
 
@@ -1221,10 +1236,17 @@ msgid "Eritrea"
 msgstr "Eritréia"
 
 #. TranslatorExplanation: curl is the name of a library, don't translate
-#: ../zypp/media/MediaException.cc:161
+#: ../zypp/media/MediaException.cc:177
 #, c-format
 msgid "Error occurred while setting download (curl) options for '%s':"
 msgstr "Erro ao configurar as opções de download (curl) para '%s':"
+
+#. TranslatorExplanation: curl is the name of a library, don't translate
+#: ../zypp/media/MediaException.cc:195
+#: ../zypp/media/MediaException.cc:213
+#, c-format
+msgid "Error occurred while setting download (metalink curl) options for '%s':"
+msgstr "Erro ao configurar as opções de download (metalink curl) para '%s':"
 
 #. language code: myv
 #: ../zypp/LanguageCode.cc:850
@@ -1273,17 +1295,17 @@ msgstr "Falha ao importar chave pública do arquivo %s: %s"
 #: ../zypp/media/MediaException.cc:31
 #, c-format
 msgid "Failed to mount %s on %s"
-msgstr "Falha ao montar %s em %s."
+msgstr "Falha ao montar %s em %s"
 
 #: ../zypp/target/rpm/RpmDb.cc:1143
 #, c-format
 msgid "Failed to remove public key %s: %s"
-msgstr "falha ao remover chave pública %s: %s."
+msgstr "falha ao remover chave pública %s: %s"
 
 #: ../zypp/media/MediaException.cc:41
 #, c-format
 msgid "Failed to unmount %s"
-msgstr "Falha ao desmontar %s."
+msgstr "Falha ao desmontar %s"
 
 #. :FJI:242:
 #: ../zypp/CountryCode.cc:294
@@ -1453,7 +1475,7 @@ msgstr "Francês medieval (aprox. 1400-1600)"
 #. language code: fro
 #: ../zypp/LanguageCode.cc:528
 msgid "French, Old (842-ca.1400)"
-msgstr "Francês antigo (842-aprox. 1400)"
+msgstr "Francês antigo (aprox. 842-1400)"
 
 #. language code: fry fy
 #: ../zypp/LanguageCode.cc:530
@@ -1605,7 +1627,7 @@ msgstr "Grego antigo (até 1453)"
 #: ../zypp/LanguageCode.cc:578
 #: ../zypp/LanguageCode.cc:580
 msgid "Greek, Modern (1453-)"
-msgstr "Grego Moderno (1453-Presente)"
+msgstr "Grego moderno (após 1453)"
 
 #. :GIB:292:
 #: ../zypp/CountryCode.cc:306
@@ -1747,7 +1769,7 @@ msgstr "Hiri Motu"
 #. TranslatorExplanation followed by the list of error messages that lead to this exception
 #: ../zypp/base/Exception.cc:89
 msgid "History:"
-msgstr "Histórico"
+msgstr "Histórico:"
 
 #. language code: hit
 #: ../zypp/LanguageCode.cc:606
@@ -1945,10 +1967,6 @@ msgstr "Componente de porta inválido '%s'"
 #, c-format
 msgid "Invalid regular expression '%s': regcomp returned %d"
 msgstr "Expressão regular inválida '%s': o regcomp retornou %d"
-
-#: ../zypp/media/MediaCurl.cc:1612
-msgid "Invalid user name or password."
-msgstr "Nome de usuário ou senha inválido."
 
 #. :IRQ:368:
 #: ../zypp/CountryCode.cc:329
@@ -2484,7 +2502,7 @@ msgstr "Malásia"
 msgid "Maldives"
 msgstr "Maldivas"
 
-#: ../zypp/media/MediaException.cc:115
+#: ../zypp/media/MediaException.cc:131
 msgid "Malformed URI"
 msgstr "URL mal formada"
 
@@ -2594,12 +2612,12 @@ msgstr "Línguas maias"
 msgid "Mayotte"
 msgstr "Mayotte"
 
-#: ../zypp/media/MediaException.cc:169
+#: ../zypp/media/MediaException.cc:221
 #, c-format
 msgid "Media source '%s' does not contain the desired medium"
 msgstr "A mídia fonte '%s' não contém a mídia desejada"
 
-#: ../zypp/media/MediaException.cc:175
+#: ../zypp/media/MediaException.cc:227
 #, c-format
 msgid "Medium '%s' is in use by another instance"
 msgstr "A mídia '%s' está sendo usado por outra instância"
@@ -2621,7 +2639,7 @@ msgstr "Mende"
 #. :FRA:250:
 #: ../zypp/CountryCode.cc:298
 msgid "Metropolitan France"
-msgstr "França Metropolitana"
+msgstr "França metropolitana"
 
 #. :MWI:454:
 #: ../zypp/CountryCode.cc:375
@@ -2850,7 +2868,7 @@ msgstr "Niueano"
 #: ../zypp/LanguageCode.cc:225
 #: ../zypp/CountryCode.cc:215
 msgid "No Code"
-msgstr "Sem Código"
+msgstr "Sem código"
 
 #: ../zypp/repo/RepoProvideFile.cc:222
 msgid "No url in repository."
@@ -2965,7 +2983,7 @@ msgstr "Omã"
 msgid "One or both of '%s' or '%s' attributes is required."
 msgstr "Um ou ambos os atributos '%s' ou '%s' são necessários."
 
-#: ../zypp/media/MediaException.cc:145
+#: ../zypp/media/MediaException.cc:161
 msgid "Operation not supported by medium"
 msgstr "Operação não suportada pela mídia"
 
@@ -2995,10 +3013,10 @@ msgid "Otomian Languages"
 msgstr "Línguas otomianas"
 
 #. TranslatorExplanation %s = package being checked for integrity
-#: ../zypp/repo/PackageProvider.cc:243
+#: ../zypp/repo/PackageProvider.cc:247
 #, c-format
-msgid "Package %s fails integrity check. Do you want to retry?"
-msgstr "Falha na verificação de integridade do  pacote %s. Deseja tentar novamente?"
+msgid "Package %s seems to be corrupted during transfer. Do you want to retry retrieval?"
+msgstr "O pacote %s parece ter sido corrompido durante a transferência. Deseja tentar novamente?"
 
 #. language code: pal
 #: ../zypp/LanguageCode.cc:926
@@ -3070,17 +3088,17 @@ msgstr "Papua (outros)"
 msgid "Paraguay"
 msgstr "Paraguai"
 
-#: ../zypp/media/MediaException.cc:106
+#: ../zypp/media/MediaException.cc:122
 #, c-format
 msgid "Path '%s' on medium '%s' is not a directory."
 msgstr "O caminho '%s' na mídia '%s' não é um diretório."
 
-#: ../zypp/media/MediaException.cc:98
+#: ../zypp/media/MediaException.cc:114
 #, c-format
 msgid "Path '%s' on medium '%s' is not a file."
 msgstr "O caminho '%s' na mídia '%s' não é um arquivo."
 
-#: ../zypp/media/MediaException.cc:200
+#: ../zypp/media/MediaException.cc:252
 #, c-format
 msgid "Permission to access '%s' denied."
 msgstr "Permissão para acessar '%s' negada."
@@ -3194,9 +3212,10 @@ msgid "Query string parsing not supported for this URL"
 msgstr "A análise de strings de consulta não é suportada para este URL"
 
 #. TranslatorExplanation after semicolon is error message
+#. TranslatorExplanation the colon is followed by an error message
 #: ../zypp/target/rpm/RpmDb.cc:892
-#: ../zypp/target/rpm/RpmDb.cc:2080
-#: ../zypp/target/rpm/RpmDb.cc:2221
+#: ../zypp/target/rpm/RpmDb.cc:2081
+#: ../zypp/target/rpm/RpmDb.cc:2217
 msgid "RPM failed: "
 msgstr "Falha no RPM: "
 
@@ -3225,7 +3244,7 @@ msgstr "Rarotonganês"
 msgid "Relative path not allowed if authority exists"
 msgstr "Caminho relativo não permitido se existir autoridade"
 
-#: ../zypp/RepoManager.cc:1311
+#: ../zypp/RepoManager.cc:1314
 #, c-format
 msgid "Removing repository '%s'"
 msgstr "Removendo o repositório '%s'"
@@ -3233,7 +3252,7 @@ msgstr "Removendo o repositório '%s'"
 #: ../zypp/parser/RepoindexFileReader.cc:128
 #, c-format
 msgid "Required attribute '%s' is missing."
-msgstr "Atributo necessário  '%s' faltando."
+msgstr "Atributo necessário '%s' faltando."
 
 #. :QAT:634:
 #: ../zypp/CountryCode.cc:406
@@ -3455,7 +3474,7 @@ msgstr "Linguagens de sinais"
 #: ../zypp/KeyRing.cc:597
 #, c-format
 msgid "Signature file %s not found"
-msgstr "Arquivo de assinatura %s não encontrado."
+msgstr "O arquivo de assinatura %s não foi encontrado"
 
 #. language code: bla
 #: ../zypp/LanguageCode.cc:354
@@ -3688,7 +3707,7 @@ msgstr "Síria"
 msgid "Syriac"
 msgstr "Siríaco"
 
-#: ../zypp/media/MediaException.cc:91
+#: ../zypp/media/MediaException.cc:107
 #, c-format
 msgid "System exception '%s' on medium '%s'."
 msgstr "Exceção do sistema '%s' na mídia '%s'."
@@ -3810,7 +3829,7 @@ msgstr "Tigré"
 msgid "Tigrinya"
 msgstr "Tigrínio"
 
-#: ../zypp/media/MediaException.cc:207
+#: ../zypp/media/MediaException.cc:259
 #, c-format
 msgid "Timeout exceed when access '%s'."
 msgstr "Limite de tempo excedido ao acessar '%s'."
@@ -4032,11 +4051,11 @@ msgstr "Distribuição desconhecida"
 
 #: ../zypp/CountryCode.cc:135
 msgid "Unknown country: "
-msgstr "País desconhecido:"
+msgstr "País desconhecido: "
 
 #: ../zypp/LanguageCode.cc:145
 msgid "Unknown language: "
-msgstr "Idioma desconhecido:"
+msgstr "Idioma desconhecido: "
 
 #: ../zypp/VendorSupportOptions.cc:56
 msgid "Unknown support option. Description not available"
@@ -4045,9 +4064,9 @@ msgstr "Opção de suporte desconhecida. A descrição não está disponível"
 #: ../zypp/media/MediaUserAuth.cc:123
 #, c-format
 msgid "Unsupported HTTP authentication method '%s'"
-msgstr "Método de autenticação HTTP '%s'  não suportado."
+msgstr "Método de autenticação HTTP '%s' não suportado"
 
-#: ../zypp/media/MediaException.cc:140
+#: ../zypp/media/MediaException.cc:156
 #, c-format
 msgid "Unsupported URI scheme in '%s'."
 msgstr "Esquema de URL não suportada em '%s'."
@@ -4129,7 +4148,7 @@ msgstr "Vai"
 #. we will throw this later if no URL checks out fine
 #: ../zypp/RepoManager.cc:789
 msgid "Valid metadata not found at specified URL(s)"
-msgstr "Metadados válidos não encontrados na(s) URL(s) especificada(s)."
+msgstr "Metadados válidos não encontrados na(s) URL(s) especificada(s)"
 
 #. :VNM:704:
 #: ../zypp/CountryCode.cc:457
@@ -4297,11 +4316,11 @@ msgstr "Zulu"
 msgid "Zuni"
 msgstr "Zunhi"
 
-#: ../zypp/repo/PackageProvider.cc:194
+#: ../zypp/repo/PackageProvider.cc:195
 msgid "applydeltarpm check failed."
 msgstr "Falha na verificação de applydeltarpm."
 
-#: ../zypp/repo/PackageProvider.cc:208
+#: ../zypp/repo/PackageProvider.cc:212
 msgid "applydeltarpm failed."
 msgstr "Falha de applydeltarpm."
 
@@ -4319,7 +4338,7 @@ msgstr "Não foi possível instalar ambos (%s e %s)"
 msgid "conflicting requests"
 msgstr "pedidos conflitantes"
 
-#: ../zypp/target/rpm/RpmDb.cc:2374
+#: ../zypp/target/rpm/RpmDb.cc:2369
 #, c-format
 msgid "created backup %s"
 msgstr "backup %s criado"
@@ -4441,11 +4460,6 @@ msgstr ""
 "rpm criou %s como %s.\n"
 "Aqui estão as 25 primeiras linhas de diferença:\n"
 
-#: ../zypp/target/rpm/RpmDb.cc:2077
-#: ../zypp/target/rpm/RpmDb.cc:2218
-msgid "rpm output:"
-msgstr "saída de rpm:"
-
 #. %s = filenames
 #: ../zypp/target/rpm/RpmDb.cc:2062
 #, c-format
@@ -4468,7 +4482,7 @@ msgstr "algum problema de dependência"
 
 #: ../zypp/solver/detail/SATResolver.cc:983
 msgid "uninstallable providers: "
-msgstr "fornecedores de não-instaláveis:"
+msgstr "fornecedores não-instaláveis: "
 
 #: ../zypp/VendorSupportOptions.cc:14
 msgid "unknown"
@@ -4478,28 +4492,12 @@ msgstr "desconhecido"
 msgid "unsupported"
 msgstr "não suportado"
 
-#~ msgid "%s install failed"
-#~ msgstr "Falha na instalação de %s"
-#~ msgid "%s installed ok"
-#~ msgstr "%s instalado com êxito"
-#~ msgid "%s remove ok"
-#~ msgstr "%s removido com êxito"
-
-#, fuzzy
-#~ msgid "Download (Metalink curl) initialization failed for '%s'"
-#~ msgstr "Falha na inicialização do download (curl) para '%s'"
-
-#, fuzzy
-#~ msgid ""
-#~ "Download (metalink curl) error for '%s':\n"
-#~ "Error code: %s\n"
-#~ "Error message: %s\n"
-#~ msgstr ""
-#~ "Erro de download (curl) para '%s':\n"
-#~ "Código de erro: %s\n"
-#~ "Mensagem de erro: %s\n"
-
-#, fuzzy
-#~ msgid "Error occurred while setting download (metalink curl) options for '%s':"
-#~ msgstr "Erro ao configurar as opções de download (curl) para '%s':"
+#~ msgid "%s remove failed"
+#~ msgstr "Falha na remoção de %s"
+#~ msgid "Additional rpm output:"
+#~ msgstr "Saída de rpm adicional:"
+#~ msgid "Invalid user name or password."
+#~ msgstr "Nome de usuário ou senha inválido."
+#~ msgid "rpm output:"
+#~ msgstr "saída de rpm:"
 

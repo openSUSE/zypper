@@ -16,7 +16,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: zypp\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-09-25 15:48+0200\n"
+"POT-Creation-Date: 2008-10-08 17:27+0200\n"
 "PO-Revision-Date: 2008-08-11 11:57+0200\n"
 "Last-Translator: Marek Stopka <mstopka@opensuse.org>\n"
 "Language-Team: czech <cs@li.org>\n"
@@ -34,7 +34,7 @@ msgstr ""
 "\n"
 "neodinstalovatelní poskytovatelé: "
 
-#: ../zypp/media/MediaException.cc:214
+#: ../zypp/media/MediaException.cc:266
 #, c-format
 msgid " SSL certificate problem, verify that the CA cert is OK for '%s'."
 msgstr "Problém s SSL certifikátem, ověřte, že je certifikát certifikační autority pro '%s' v pořádku."
@@ -66,11 +66,6 @@ msgstr "%s nelze nainstalovat"
 msgid "%s obsoletes %s provided by %s"
 msgstr "%s zastaralý %s poskytovaný %s"
 
-#: ../zypp/target/rpm/RpmDb.cc:2216
-#, c-format
-msgid "%s remove failed"
-msgstr "Odstranění %s se nezdařilo"
-
 #: ../zypp/solver/detail/SATResolver.cc:969
 #, c-format
 msgid "%s requires %s, but this requirement cannot be provided"
@@ -96,7 +91,7 @@ msgstr "Acoli"
 msgid "Adangme"
 msgstr "Adangme"
 
-#: ../zypp/RepoManager.cc:1181
+#: ../zypp/RepoManager.cc:1184
 #, c-format
 msgid "Adding repository '%s'"
 msgstr "Přidává se repozitář '%s'"
@@ -104,10 +99,6 @@ msgstr "Přidává se repozitář '%s'"
 #: ../zypp/VendorSupportOptions.cc:29
 msgid "Additional Customer Contract Necessary"
 msgstr ""
-
-#: ../zypp/target/rpm/RpmDb.cc:2092 ../zypp/target/rpm/RpmDb.cc:2230
-msgid "Additional rpm output:"
-msgstr "Další výstup programu rpm:"
 
 #. language code: ady
 #: ../zypp/LanguageCode.cc:248
@@ -334,7 +325,8 @@ msgstr "Rakousko"
 msgid "Austronesian (Other)"
 msgstr "Austronéské (jiné)"
 
-#: ../zypp/media/MediaCurl.cc:1615
+#. !\todo add comma to the message for the next release
+#: ../zypp/media/MediaCurl.cc:1619
 #, c-format
 msgid "Authentication required for '%s'"
 msgstr "Pro '%s' je vyžadováno ověřování"
@@ -614,7 +606,7 @@ msgstr "Brunej Darussalam"
 msgid "Buginese"
 msgstr "Bugiština"
 
-#: ../zypp/RepoManager.cc:976
+#: ../zypp/RepoManager.cc:977
 #, c-format
 msgid "Building repository '%s' cache"
 msgstr "Vytváří se vyrovnávací paměť repozitáře '%s'"
@@ -676,23 +668,23 @@ msgstr "Nemohu vytvořit sat-pool."
 msgid "Can't acquire the mutex lock"
 msgstr "Nelze získat zámek mutex."
 
-#: ../zypp/ExternalProgram.cc:245
+#: ../zypp/ExternalProgram.cc:301
 #, c-format
 msgid "Can't chdir to '/' inside chroot (%s)."
 msgstr "Nemůžu změnit adresář na '/' uvnitř chrootu (%s)."
 
-#: ../zypp/ExternalProgram.cc:238
+#: ../zypp/ExternalProgram.cc:294
 #, c-format
 msgid "Can't chroot to '%s' (%s)."
 msgstr "Nemůžu změnit kořenový adresář na '%s' (%s)."
 
 #. don't want to get here
-#: ../zypp/ExternalProgram.cc:259
+#: ../zypp/ExternalProgram.cc:315
 #, c-format
 msgid "Can't exec '%s' (%s)."
 msgstr "Nemůžu spustit '%s' (%s)."
 
-#: ../zypp/ExternalProgram.cc:267
+#: ../zypp/ExternalProgram.cc:323
 #, c-format
 msgid "Can't fork (%s)."
 msgstr "Nelze forknout (%s)."
@@ -710,12 +702,12 @@ msgstr "Nelze inicializovat rekurzivní mutex."
 msgid "Can't open lock file: %s"
 msgstr "Nelze otevřít soubor zámku: %s"
 
-#: ../zypp/ExternalProgram.cc:174
+#: ../zypp/ExternalProgram.cc:230
 #, c-format
 msgid "Can't open pipe (%s)."
 msgstr "Nelze otevřít rouru (%s)."
 
-#: ../zypp/ExternalProgram.cc:163
+#: ../zypp/ExternalProgram.cc:219
 #, c-format
 msgid "Can't open pty (%s)."
 msgstr "Nelze otevřít pty (%s)."
@@ -743,14 +735,19 @@ msgstr "Kanada"
 msgid "Cannot create public key %s from %s keyring to file %s"
 msgstr "Nemůžu vytvořit veřejný klíč %s z klíčenky %s do souboru %s"
 
-#: ../zypp/media/MediaException.cc:182
+#: ../zypp/media/MediaException.cc:234
 msgid "Cannot eject any media"
 msgstr "Nemůžu vysunout žádné médium"
 
-#: ../zypp/media/MediaException.cc:184
+#: ../zypp/media/MediaException.cc:236
 #, c-format
 msgid "Cannot eject media '%s'"
 msgstr "Nemůžu vysunout médium '%s'"
+
+#: ../zypp/media/MediaException.cc:273
+#, c-format
+msgid "Cannot find available loop device to mount the image file from '%s'"
+msgstr ""
 
 #: ../zypp/media/MediaException.cc:67
 #, c-format
@@ -926,16 +923,16 @@ msgstr "Kokosový ostrov"
 msgid "Colombia"
 msgstr "Kolumbie"
 
-#: ../zypp/ExternalProgram.cc:346
+#: ../zypp/ExternalProgram.cc:402
 #, c-format
 msgid "Command exited with status %d."
 msgstr "Příkaz byl ukončen s kódem %d."
 
-#: ../zypp/ExternalProgram.cc:371
+#: ../zypp/ExternalProgram.cc:427
 msgid "Command exited with unknown error."
 msgstr "Příkaz byl ukončen s neznámou chybou."
 
-#: ../zypp/ExternalProgram.cc:366
+#: ../zypp/ExternalProgram.cc:422
 #, c-format
 msgid "Command was killed by signal %d (%s)."
 msgstr "Příkaz byl zabit signálem %d (%s)."
@@ -1123,7 +1120,13 @@ msgstr "Dominika"
 msgid "Dominican Republic"
 msgstr "Dominikánská republika"
 
-#: ../zypp/media/MediaException.cc:152
+#. TranslatorExplanation: curl is the name of a library, don't translate
+#: ../zypp/media/MediaException.cc:92 ../zypp/media/MediaException.cc:100
+#, fuzzy, c-format
+msgid "Download (Metalink curl) initialization failed for '%s'"
+msgstr "Inicializace stažení (curl) '%s' selhala"
+
+#: ../zypp/media/MediaException.cc:168
 #, c-format
 msgid ""
 "Download (curl) error for '%s':\n"
@@ -1139,6 +1142,17 @@ msgstr ""
 #, c-format
 msgid "Download (curl) initialization failed for '%s'"
 msgstr "Inicializace stažení (curl) '%s' selhala"
+
+#: ../zypp/media/MediaException.cc:186 ../zypp/media/MediaException.cc:204
+#, fuzzy, c-format
+msgid ""
+"Download (metalink curl) error for '%s':\n"
+"Error code: %s\n"
+"Error message: %s\n"
+msgstr ""
+"Stažení (curl) '%s' selhalo:\n"
+"Chybový kód: %s\n"
+"Chybová zpráva: %s\n"
 
 #. language code: dra
 #: ../zypp/LanguageCode.cc:470
@@ -1217,15 +1231,15 @@ msgstr "Salvador"
 msgid "Elamite"
 msgstr "Elamština"
 
-#: ../zypp/media/MediaException.cc:135
+#: ../zypp/media/MediaException.cc:151
 msgid "Empty destination in URI"
 msgstr "Chybí cíl v URI"
 
-#: ../zypp/media/MediaException.cc:130
+#: ../zypp/media/MediaException.cc:146
 msgid "Empty filesystem in URI"
 msgstr "Prázdný souborový systém v URI"
 
-#: ../zypp/media/MediaException.cc:125
+#: ../zypp/media/MediaException.cc:141
 msgid "Empty host name in URI"
 msgstr "Není vyplněno hostname v URI"
 
@@ -1261,9 +1275,15 @@ msgid "Eritrea"
 msgstr "Eritrea"
 
 #. TranslatorExplanation: curl is the name of a library, don't translate
-#: ../zypp/media/MediaException.cc:161
+#: ../zypp/media/MediaException.cc:177
 #, c-format
 msgid "Error occurred while setting download (curl) options for '%s':"
+msgstr "Během stahování nastavení pro  '%s' došlo chybě:"
+
+#. TranslatorExplanation: curl is the name of a library, don't translate
+#: ../zypp/media/MediaException.cc:195 ../zypp/media/MediaException.cc:213
+#, fuzzy, c-format
+msgid "Error occurred while setting download (metalink curl) options for '%s':"
 msgstr "Během stahování nastavení pro  '%s' došlo chybě:"
 
 # SY
@@ -2007,10 +2027,6 @@ msgstr "Neplatná součást portu %s"
 msgid "Invalid regular expression '%s': regcomp returned %d"
 msgstr "Chybný regulární výraz '%s': regcomp vrátil %d"
 
-#: ../zypp/media/MediaCurl.cc:1612
-msgid "Invalid user name or password."
-msgstr "Neplatné uživatelské jméno nebo heslo."
-
 # IR
 # fuzzy
 #. :IRQ:368:
@@ -2568,7 +2584,7 @@ msgstr "Malajsie"
 msgid "Maldives"
 msgstr "Mali"
 
-#: ../zypp/media/MediaException.cc:115
+#: ../zypp/media/MediaException.cc:131
 msgid "Malformed URI"
 msgstr "Zdeformované URI"
 
@@ -2688,12 +2704,12 @@ msgstr "Mayské jazyky"
 msgid "Mayotte"
 msgstr "Mayotte"
 
-#: ../zypp/media/MediaException.cc:169
+#: ../zypp/media/MediaException.cc:221
 #, c-format
 msgid "Media source '%s' does not contain the desired medium"
 msgstr "Zdroj média \"%s\" neobsahuje požadované médium"
 
-#: ../zypp/media/MediaException.cc:175
+#: ../zypp/media/MediaException.cc:227
 #, c-format
 msgid "Medium '%s' is in use by another instance"
 msgstr "Médium '%s' je používáno jinou instancí"
@@ -3088,7 +3104,7 @@ msgstr "Omán"
 msgid "One or both of '%s' or '%s' attributes is required."
 msgstr ""
 
-#: ../zypp/media/MediaException.cc:145
+#: ../zypp/media/MediaException.cc:161
 msgid "Operation not supported by medium"
 msgstr "Operace není médiem podporována"
 
@@ -3120,9 +3136,9 @@ msgid "Otomian Languages"
 msgstr "Osmanské jazyky"
 
 #. TranslatorExplanation %s = package being checked for integrity
-#: ../zypp/repo/PackageProvider.cc:243
-#, c-format
-msgid "Package %s fails integrity check. Do you want to retry?"
+#: ../zypp/repo/PackageProvider.cc:247
+#, fuzzy, c-format
+msgid "Package %s seems to be corrupted during transfer. Do you want to retry retrieval?"
 msgstr "Kontrola integrity balíčku %s se nezdařila. Chcete pokus opakovat?"
 
 #. language code: pal
@@ -3197,17 +3213,17 @@ msgstr "Papuánština (jiné)"
 msgid "Paraguay"
 msgstr "Paraguay"
 
-#: ../zypp/media/MediaException.cc:106
+#: ../zypp/media/MediaException.cc:122
 #, c-format
 msgid "Path '%s' on medium '%s' is not a directory."
 msgstr "Cesta '%s' na médiu '%s' není adresářem."
 
-#: ../zypp/media/MediaException.cc:98
+#: ../zypp/media/MediaException.cc:114
 #, c-format
 msgid "Path '%s' on medium '%s' is not a file."
 msgstr "Cesta '%s' na médiu '%s' není souborem."
 
-#: ../zypp/media/MediaException.cc:200
+#: ../zypp/media/MediaException.cc:252
 #, c-format
 msgid "Permission to access '%s' denied."
 msgstr "Přístup k '%s' byl zamítnut."
@@ -3319,8 +3335,9 @@ msgid "Query string parsing not supported for this URL"
 msgstr "Pro toto URL není podporována analýza řetězce dotazu."
 
 #. TranslatorExplanation after semicolon is error message
-#: ../zypp/target/rpm/RpmDb.cc:892 ../zypp/target/rpm/RpmDb.cc:2080
-#: ../zypp/target/rpm/RpmDb.cc:2221
+#. TranslatorExplanation the colon is followed by an error message
+#: ../zypp/target/rpm/RpmDb.cc:892 ../zypp/target/rpm/RpmDb.cc:2081
+#: ../zypp/target/rpm/RpmDb.cc:2217
 msgid "RPM failed: "
 msgstr "RPM selhalo: "
 
@@ -3350,7 +3367,7 @@ msgstr "Rarotongánština (tahitština Velikonočního ostrova - Rapa-Nui)"
 msgid "Relative path not allowed if authority exists"
 msgstr "Relativní cesta není povolena, pokud existuje autorita"
 
-#: ../zypp/RepoManager.cc:1311
+#: ../zypp/RepoManager.cc:1314
 #, c-format
 msgid "Removing repository '%s'"
 msgstr "Odebírá se repozitář '%s'"
@@ -3845,7 +3862,7 @@ msgstr "Sýrie"
 msgid "Syriac"
 msgstr "Syrština"
 
-#: ../zypp/media/MediaException.cc:91
+#: ../zypp/media/MediaException.cc:107
 #, c-format
 msgid "System exception '%s' on medium '%s'."
 msgstr "Systémová výjimka '%s' na médiu '%s'."
@@ -3966,7 +3983,7 @@ msgstr "Tigre"
 msgid "Tigrinya"
 msgstr "Tigriňňa"
 
-#: ../zypp/media/MediaException.cc:207
+#: ../zypp/media/MediaException.cc:259
 #, c-format
 msgid "Timeout exceed when access '%s'."
 msgstr "Během přístupu k '%s' byl dosažen časový limit."
@@ -4213,7 +4230,7 @@ msgstr ""
 msgid "Unsupported HTTP authentication method '%s'"
 msgstr "Nepodporovaná HTTP ověřovací metoda '%s'"
 
-#: ../zypp/media/MediaException.cc:140
+#: ../zypp/media/MediaException.cc:156
 #, c-format
 msgid "Unsupported URI scheme in '%s'."
 msgstr "Nepodporované URI ve schématu '%s'."
@@ -4473,11 +4490,11 @@ msgstr "Zulu"
 msgid "Zuni"
 msgstr "Zuni"
 
-#: ../zypp/repo/PackageProvider.cc:194
+#: ../zypp/repo/PackageProvider.cc:195
 msgid "applydeltarpm check failed."
 msgstr "Kontrola aplikování delta RPM se nezdařila."
 
-#: ../zypp/repo/PackageProvider.cc:208
+#: ../zypp/repo/PackageProvider.cc:212
 msgid "applydeltarpm failed."
 msgstr "Aplikování delta RPM se nezdařilo."
 
@@ -4495,7 +4512,7 @@ msgstr "Nelze nainstalovat %s a zároveň %s"
 msgid "conflicting requests"
 msgstr "protichůdné požadavky"
 
-#: ../zypp/target/rpm/RpmDb.cc:2374
+#: ../zypp/target/rpm/RpmDb.cc:2369
 #, c-format
 msgid "created backup %s"
 msgstr "vytvořena záloha %s"
@@ -4617,10 +4634,6 @@ msgstr ""
 "Program rpm vytvořil %s jako %s.\n"
 "Prvních odlišných 25 řádek:\n"
 
-#: ../zypp/target/rpm/RpmDb.cc:2077 ../zypp/target/rpm/RpmDb.cc:2218
-msgid "rpm output:"
-msgstr "Výstup programu rpm:"
-
 #. %s = filenames
 #: ../zypp/target/rpm/RpmDb.cc:2062
 #, c-format
@@ -4654,6 +4667,18 @@ msgstr "neznámý"
 msgid "unsupported"
 msgstr " - není podporováno"
 
+#~ msgid "%s remove failed"
+#~ msgstr "Odstranění %s se nezdařilo"
+
+#~ msgid "Additional rpm output:"
+#~ msgstr "Další výstup programu rpm:"
+
+#~ msgid "Invalid user name or password."
+#~ msgstr "Neplatné uživatelské jméno nebo heslo."
+
+#~ msgid "rpm output:"
+#~ msgstr "Výstup programu rpm:"
+
 #~ msgid "%s install failed"
 #~ msgstr "Instalace %s selhala"
 
@@ -4663,21 +4688,3 @@ msgstr " - není podporováno"
 
 #~ msgid "%s remove ok"
 #~ msgstr "%s odstranění ok"
-
-#, fuzzy
-#~ msgid "Download (Metalink curl) initialization failed for '%s'"
-#~ msgstr "Inicializace stažení (curl) '%s' selhala"
-
-#, fuzzy
-#~ msgid ""
-#~ "Download (metalink curl) error for '%s':\n"
-#~ "Error code: %s\n"
-#~ "Error message: %s\n"
-#~ msgstr ""
-#~ "Stažení (curl) '%s' selhalo:\n"
-#~ "Chybový kód: %s\n"
-#~ "Chybová zpráva: %s\n"
-
-#, fuzzy
-#~ msgid "Error occurred while setting download (metalink curl) options for '%s':"
-#~ msgstr "Během stahování nastavení pro  '%s' došlo chybě:"

@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: @PACKAGE@\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-09-25 15:48+0200\n"
+"POT-Creation-Date: 2008-10-08 17:27+0200\n"
 "PO-Revision-Date: 2005-07-29 15:37+0530\n"
 "Last-Translator: Priyavert Sharma<priyavert.sharma@agreeya.com>\n"
 "Language-Team: AgreeYa Solutions <linux_team@agreeya.com>\n"
@@ -19,7 +19,7 @@ msgid ""
 "uninstallable providers: "
 msgstr "%s এর কোনও বিকল্প স্থাপনযোগ্য প্রদানকারী নেই"
 
-#: ../zypp/media/MediaException.cc:214
+#: ../zypp/media/MediaException.cc:266
 #, c-format
 msgid " SSL certificate problem, verify that the CA cert is OK for '%s'."
 msgstr ""
@@ -53,11 +53,6 @@ msgstr "ইনস্টল করা হয় নি"
 msgid "%s obsoletes %s provided by %s"
 msgstr "%s %sকে প্রাচীন করে দিয়েছে"
 
-#: ../zypp/target/rpm/RpmDb.cc:2216
-#, c-format
-msgid "%s remove failed"
-msgstr "%s অপসারণ ব্যর্থ হয়েছে"
-
 #: ../zypp/solver/detail/SATResolver.cc:969
 #, c-format
 msgid "%s requires %s, but this requirement cannot be provided"
@@ -83,7 +78,7 @@ msgstr "আকোলি"
 msgid "Adangme"
 msgstr "পরিসীমা"
 
-#: ../zypp/RepoManager.cc:1181
+#: ../zypp/RepoManager.cc:1184
 #, c-format
 msgid "Adding repository '%s'"
 msgstr ""
@@ -91,10 +86,6 @@ msgstr ""
 #: ../zypp/VendorSupportOptions.cc:29
 msgid "Additional Customer Contract Necessary"
 msgstr ""
-
-#: ../zypp/target/rpm/RpmDb.cc:2092 ../zypp/target/rpm/RpmDb.cc:2230
-msgid "Additional rpm output:"
-msgstr "অতিরিক্ত তথ্য"
 
 #. language code: ady
 #: ../zypp/LanguageCode.cc:248
@@ -309,7 +300,8 @@ msgstr "অস্ট্রিয়া"
 msgid "Austronesian (Other)"
 msgstr "অস্ট্রোনেশিয়ান (অন্যান্য)"
 
-#: ../zypp/media/MediaCurl.cc:1615
+#. !\todo add comma to the message for the next release
+#: ../zypp/media/MediaCurl.cc:1619
 #, fuzzy, c-format
 msgid "Authentication required for '%s'"
 msgstr "সত্যতা যাচাইয়ের ধরন"
@@ -573,7 +565,7 @@ msgstr "ব্রুনেই দারুসসালাম"
 msgid "Buginese"
 msgstr "বুগিনিজ"
 
-#: ../zypp/RepoManager.cc:976
+#: ../zypp/RepoManager.cc:977
 #, c-format
 msgid "Building repository '%s' cache"
 msgstr ""
@@ -632,23 +624,23 @@ msgstr "ফাইল তৈরী করা যাচ্ছে না"
 msgid "Can't acquire the mutex lock"
 msgstr "মিউটেক্স লক অর্জন করতে পারে না"
 
-#: ../zypp/ExternalProgram.cc:245
+#: ../zypp/ExternalProgram.cc:301
 #, c-format
 msgid "Can't chdir to '/' inside chroot (%s)."
 msgstr ""
 
-#: ../zypp/ExternalProgram.cc:238
+#: ../zypp/ExternalProgram.cc:294
 #, c-format
 msgid "Can't chroot to '%s' (%s)."
 msgstr ""
 
 #. don't want to get here
-#: ../zypp/ExternalProgram.cc:259
+#: ../zypp/ExternalProgram.cc:315
 #, c-format
 msgid "Can't exec '%s' (%s)."
 msgstr ""
 
-#: ../zypp/ExternalProgram.cc:267
+#: ../zypp/ExternalProgram.cc:323
 #, fuzzy, c-format
 msgid "Can't fork (%s)."
 msgstr "%s খুঁজে পায় না।"
@@ -666,12 +658,12 @@ msgstr "রিকার্সিভ মিউটেক্স চালু কর
 msgid "Can't open lock file: %s"
 msgstr "ফাইল খোলা যাচ্ছে না %1."
 
-#: ../zypp/ExternalProgram.cc:174
+#: ../zypp/ExternalProgram.cc:230
 #, fuzzy, c-format
 msgid "Can't open pipe (%s)."
 msgstr "ফাইল খোলা যাচ্ছে না %1."
 
-#: ../zypp/ExternalProgram.cc:163
+#: ../zypp/ExternalProgram.cc:219
 #, fuzzy, c-format
 msgid "Can't open pty (%s)."
 msgstr "Couldn't open file: %s."
@@ -699,14 +691,19 @@ msgstr "কানাডা"
 msgid "Cannot create public key %s from %s keyring to file %s"
 msgstr ""
 
-#: ../zypp/media/MediaException.cc:182
+#: ../zypp/media/MediaException.cc:234
 msgid "Cannot eject any media"
 msgstr ""
 
-#: ../zypp/media/MediaException.cc:184
+#: ../zypp/media/MediaException.cc:236
 #, fuzzy, c-format
 msgid "Cannot eject media '%s'"
 msgstr "'%s' ডেস্কটপ বস্তু খুলতে পারে না"
+
+#: ../zypp/media/MediaException.cc:273
+#, c-format
+msgid "Cannot find available loop device to mount the image file from '%s'"
+msgstr ""
 
 #: ../zypp/media/MediaException.cc:67
 #, fuzzy, c-format
@@ -875,17 +872,17 @@ msgstr "কোকোস (কিলিং) দ্বীপপুঞ্জ"
 msgid "Colombia"
 msgstr "কলম্বিয়া"
 
-#: ../zypp/ExternalProgram.cc:346
+#: ../zypp/ExternalProgram.cc:402
 #, c-format
 msgid "Command exited with status %d."
 msgstr ""
 
-#: ../zypp/ExternalProgram.cc:371
+#: ../zypp/ExternalProgram.cc:427
 #, fuzzy
 msgid "Command exited with unknown error."
 msgstr "সংযোগ সাধনের সময়ে আদেশ সম্পন্ন হয়েছে"
 
-#: ../zypp/ExternalProgram.cc:366
+#: ../zypp/ExternalProgram.cc:422
 #, c-format
 msgid "Command was killed by signal %d (%s)."
 msgstr ""
@@ -1066,7 +1063,13 @@ msgstr "রোমানিয়া"
 msgid "Dominican Republic"
 msgstr "ডোমেনিকান প্রজাতন্ত্র"
 
-#: ../zypp/media/MediaException.cc:152
+#. TranslatorExplanation: curl is the name of a library, don't translate
+#: ../zypp/media/MediaException.cc:92 ../zypp/media/MediaException.cc:100
+#, c-format
+msgid "Download (Metalink curl) initialization failed for '%s'"
+msgstr ""
+
+#: ../zypp/media/MediaException.cc:168
 #, c-format
 msgid ""
 "Download (curl) error for '%s':\n"
@@ -1078,6 +1081,14 @@ msgstr ""
 #: ../zypp/media/MediaException.cc:84
 #, c-format
 msgid "Download (curl) initialization failed for '%s'"
+msgstr ""
+
+#: ../zypp/media/MediaException.cc:186 ../zypp/media/MediaException.cc:204
+#, c-format
+msgid ""
+"Download (metalink curl) error for '%s':\n"
+"Error code: %s\n"
+"Error message: %s\n"
 msgstr ""
 
 #. language code: dra
@@ -1156,15 +1167,15 @@ msgstr "এল সালভাদর"
 msgid "Elamite"
 msgstr "এলামাইট"
 
-#: ../zypp/media/MediaException.cc:135
+#: ../zypp/media/MediaException.cc:151
 msgid "Empty destination in URI"
 msgstr ""
 
-#: ../zypp/media/MediaException.cc:130
+#: ../zypp/media/MediaException.cc:146
 msgid "Empty filesystem in URI"
 msgstr ""
 
-#: ../zypp/media/MediaException.cc:125
+#: ../zypp/media/MediaException.cc:141
 #, fuzzy
 msgid "Empty host name in URI"
 msgstr " CA নাম শূণ্য"
@@ -1199,9 +1210,15 @@ msgid "Eritrea"
 msgstr "ইরিট্রিয়া"
 
 #. TranslatorExplanation: curl is the name of a library, don't translate
-#: ../zypp/media/MediaException.cc:161
+#: ../zypp/media/MediaException.cc:177
 #, c-format
 msgid "Error occurred while setting download (curl) options for '%s':"
+msgstr ""
+
+#. TranslatorExplanation: curl is the name of a library, don't translate
+#: ../zypp/media/MediaException.cc:195 ../zypp/media/MediaException.cc:213
+#, c-format
+msgid "Error occurred while setting download (metalink curl) options for '%s':"
 msgstr ""
 
 #. language code: myv
@@ -1918,11 +1935,6 @@ msgstr "অবৈধ পোর্ট কম্পোনেন্ট '%s' "
 msgid "Invalid regular expression '%s': regcomp returned %d"
 msgstr ""
 
-#: ../zypp/media/MediaCurl.cc:1612
-#, fuzzy
-msgid "Invalid user name or password."
-msgstr "পাসওয়ার্ড পরিবর্তন"
-
 #. :IRQ:368:
 #: ../zypp/CountryCode.cc:329
 msgid "Iran"
@@ -2455,7 +2467,7 @@ msgstr "মালয়শিয়া"
 msgid "Maldives"
 msgstr "মালদ্বীপ"
 
-#: ../zypp/media/MediaException.cc:115
+#: ../zypp/media/MediaException.cc:131
 msgid "Malformed URI"
 msgstr ""
 
@@ -2564,12 +2576,12 @@ msgstr "ভাষা সংরক্ষন করা হচ্ছে..."
 msgid "Mayotte"
 msgstr "মেয়ট"
 
-#: ../zypp/media/MediaException.cc:169
+#: ../zypp/media/MediaException.cc:221
 #, c-format
 msgid "Media source '%s' does not contain the desired medium"
 msgstr ""
 
-#: ../zypp/media/MediaException.cc:175
+#: ../zypp/media/MediaException.cc:227
 #, c-format
 msgid "Medium '%s' is in use by another instance"
 msgstr ""
@@ -2934,7 +2946,7 @@ msgstr "ওমান"
 msgid "One or both of '%s' or '%s' attributes is required."
 msgstr ""
 
-#: ../zypp/media/MediaException.cc:145
+#: ../zypp/media/MediaException.cc:161
 msgid "Operation not supported by medium"
 msgstr ""
 
@@ -2964,9 +2976,9 @@ msgid "Otomian Languages"
 msgstr "ভাষা সংরক্ষন করা হচ্ছে..."
 
 #. TranslatorExplanation %s = package being checked for integrity
-#: ../zypp/repo/PackageProvider.cc:243
+#: ../zypp/repo/PackageProvider.cc:247
 #, fuzzy, c-format
-msgid "Package %s fails integrity check. Do you want to retry?"
+msgid "Package %s seems to be corrupted during transfer. Do you want to retry retrieval?"
 msgstr "%s প্যাকেজের শুদ্ধতা যাচাই ব্যর্থ হয়েছে। আপনি কি এটাকে পুনরায় ডাউনলোড করার চেষ্টা করতে  চান?"
 
 #. language code: pal
@@ -3039,17 +3051,17 @@ msgstr "পাপুয়ান (অন্যান্য)"
 msgid "Paraguay"
 msgstr "প্যারাগুয়ে"
 
-#: ../zypp/media/MediaException.cc:106
+#: ../zypp/media/MediaException.cc:122
 #, fuzzy, c-format
 msgid "Path '%s' on medium '%s' is not a directory."
 msgstr "%1 ডায়রেক্টরি না"
 
-#: ../zypp/media/MediaException.cc:98
+#: ../zypp/media/MediaException.cc:114
 #, c-format
 msgid "Path '%s' on medium '%s' is not a file."
 msgstr ""
 
-#: ../zypp/media/MediaException.cc:200
+#: ../zypp/media/MediaException.cc:252
 #, fuzzy, c-format
 msgid "Permission to access '%s' denied."
 msgstr "অনুমতি প্রত্যাখ্যাত"
@@ -3161,8 +3173,9 @@ msgid "Query string parsing not supported for this URL"
 msgstr "এই URL এর জন্যে স্ট্রিং পার্সিং সমর্থিত নয়"
 
 #. TranslatorExplanation after semicolon is error message
-#: ../zypp/target/rpm/RpmDb.cc:892 ../zypp/target/rpm/RpmDb.cc:2080
-#: ../zypp/target/rpm/RpmDb.cc:2221
+#. TranslatorExplanation the colon is followed by an error message
+#: ../zypp/target/rpm/RpmDb.cc:892 ../zypp/target/rpm/RpmDb.cc:2081
+#: ../zypp/target/rpm/RpmDb.cc:2217
 #, fuzzy
 msgid "RPM failed: "
 msgstr "ব্যর্থ"
@@ -3191,7 +3204,7 @@ msgstr "রারোটোংগান"
 msgid "Relative path not allowed if authority exists"
 msgstr "অথরিটি বিদ্যমান থাকলে রিলেটিভ পথের অনুমতি নেই"
 
-#: ../zypp/RepoManager.cc:1311
+#: ../zypp/RepoManager.cc:1314
 #, fuzzy, c-format
 msgid "Removing repository '%s'"
 msgstr "সংস্থান পুনঃস্থাপন করছে"
@@ -3651,7 +3664,7 @@ msgstr "সিরিয়া"
 msgid "Syriac"
 msgstr "সার্ভিস"
 
-#: ../zypp/media/MediaException.cc:91
+#: ../zypp/media/MediaException.cc:107
 #, c-format
 msgid "System exception '%s' on medium '%s'."
 msgstr ""
@@ -3771,7 +3784,7 @@ msgstr "ট্রী"
 msgid "Tigrinya"
 msgstr "টাইগ্রিনিয়া"
 
-#: ../zypp/media/MediaException.cc:207
+#: ../zypp/media/MediaException.cc:259
 #, c-format
 msgid "Timeout exceed when access '%s'."
 msgstr ""
@@ -4006,7 +4019,7 @@ msgstr ""
 msgid "Unsupported HTTP authentication method '%s'"
 msgstr ""
 
-#: ../zypp/media/MediaException.cc:140
+#: ../zypp/media/MediaException.cc:156
 #, fuzzy, c-format
 msgid "Unsupported URI scheme in '%s'."
 msgstr "অবৈধ URL প্রকল্প '%1'৷"
@@ -4255,11 +4268,11 @@ msgstr "জুলু"
 msgid "Zuni"
 msgstr "জুনি"
 
-#: ../zypp/repo/PackageProvider.cc:194
+#: ../zypp/repo/PackageProvider.cc:195
 msgid "applydeltarpm check failed."
 msgstr "applydeltarpm যাচাই ব্যর্থ হয়েছে।"
 
-#: ../zypp/repo/PackageProvider.cc:208
+#: ../zypp/repo/PackageProvider.cc:212
 msgid "applydeltarpm failed."
 msgstr "applydeltarpm ব্যর্থ হয়েছে।"
 
@@ -4278,7 +4291,7 @@ msgstr "in/ssTklইনস্টল করা যাবে না"
 msgid "conflicting requests"
 msgstr "এর সাথে সংযোগের অনুরোধ: "
 
-#: ../zypp/target/rpm/RpmDb.cc:2374
+#: ../zypp/target/rpm/RpmDb.cc:2369
 #, c-format
 msgid "created backup %s"
 msgstr "%s ব্যাকআপ তৈরী করছে"
@@ -4397,10 +4410,6 @@ msgstr ""
 "rpm %s কে %sরূপে তৈরি করেছিল।\n"
 "এখানে পার্থক্যের প্রথম ২৫ টি লাইন দেওয়া আছে:\n"
 
-#: ../zypp/target/rpm/RpmDb.cc:2077 ../zypp/target/rpm/RpmDb.cc:2218
-msgid "rpm output:"
-msgstr "rpm  আউটপুট"
-
 #. %s = filenames
 #: ../zypp/target/rpm/RpmDb.cc:2062
 #, fuzzy, c-format
@@ -4434,6 +4443,19 @@ msgstr "অজানা"
 #: ../zypp/VendorSupportOptions.cc:17
 msgid "unsupported"
 msgstr ""
+
+#~ msgid "%s remove failed"
+#~ msgstr "%s অপসারণ ব্যর্থ হয়েছে"
+
+#~ msgid "Additional rpm output:"
+#~ msgstr "অতিরিক্ত তথ্য"
+
+#, fuzzy
+#~ msgid "Invalid user name or password."
+#~ msgstr "পাসওয়ার্ড পরিবর্তন"
+
+#~ msgid "rpm output:"
+#~ msgstr "rpm  আউটপুট"
 
 #~ msgid "%s install failed"
 #~ msgstr "%s ইন্সটল ব্যর্থ হয়েছে "

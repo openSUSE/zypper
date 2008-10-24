@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: zypp\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-09-25 15:48+0200\n"
+"POT-Creation-Date: 2008-10-08 17:27+0200\n"
 "PO-Revision-Date: 2006-11-03 12:03\n"
 "Last-Translator: Novell Language <language@novell.com>\n"
 "Language-Team: Novell Language <language@novell.com>\n"
@@ -20,7 +20,7 @@ msgid ""
 "uninstallable providers: "
 msgstr "Abekho abanye abaphakeli abafakiwe be-%s"
 
-#: ../zypp/media/MediaException.cc:214
+#: ../zypp/media/MediaException.cc:266
 #, c-format
 msgid " SSL certificate problem, verify that the CA cert is OK for '%s'."
 msgstr ""
@@ -54,11 +54,6 @@ msgstr "alufakiwe"
 msgid "%s obsoletes %s provided by %s"
 msgstr "%s yenza zingasebenzi %s"
 
-#: ../zypp/target/rpm/RpmDb.cc:2216
-#, c-format
-msgid "%s remove failed"
-msgstr "Ukususa i-%s akuphumelelanga"
-
 #: ../zypp/solver/detail/SATResolver.cc:969
 #, c-format
 msgid "%s requires %s, but this requirement cannot be provided"
@@ -84,7 +79,7 @@ msgstr "Isi-Acoli"
 msgid "Adangme"
 msgstr "Isi-Adangme"
 
-#: ../zypp/RepoManager.cc:1181
+#: ../zypp/RepoManager.cc:1184
 #, c-format
 msgid "Adding repository '%s'"
 msgstr ""
@@ -92,10 +87,6 @@ msgstr ""
 #: ../zypp/VendorSupportOptions.cc:29
 msgid "Additional Customer Contract Necessary"
 msgstr ""
-
-#: ../zypp/target/rpm/RpmDb.cc:2092 ../zypp/target/rpm/RpmDb.cc:2230
-msgid "Additional rpm output:"
-msgstr "Okunye okukhishiwe kwe-rpm:"
 
 #. language code: ady
 #: ../zypp/LanguageCode.cc:248
@@ -310,7 +301,8 @@ msgstr "Austria"
 msgid "Austronesian (Other)"
 msgstr "Isi-Austronesia (Esinye)"
 
-#: ../zypp/media/MediaCurl.cc:1615
+#. !\todo add comma to the message for the next release
+#: ../zypp/media/MediaCurl.cc:1619
 #, c-format
 msgid "Authentication required for '%s'"
 msgstr ""
@@ -574,7 +566,7 @@ msgstr "Brunei Darussalam"
 msgid "Buginese"
 msgstr "IsiBuginese"
 
-#: ../zypp/RepoManager.cc:976
+#: ../zypp/RepoManager.cc:977
 #, c-format
 msgid "Building repository '%s' cache"
 msgstr ""
@@ -633,23 +625,23 @@ msgstr "Ayikwazi ukwakha ifayela."
 msgid "Can't acquire the mutex lock"
 msgstr "Ayikwazi ukuthola isihluthulelo se-mutex"
 
-#: ../zypp/ExternalProgram.cc:245
+#: ../zypp/ExternalProgram.cc:301
 #, c-format
 msgid "Can't chdir to '/' inside chroot (%s)."
 msgstr ""
 
-#: ../zypp/ExternalProgram.cc:238
+#: ../zypp/ExternalProgram.cc:294
 #, c-format
 msgid "Can't chroot to '%s' (%s)."
 msgstr ""
 
 #. don't want to get here
-#: ../zypp/ExternalProgram.cc:259
+#: ../zypp/ExternalProgram.cc:315
 #, c-format
 msgid "Can't exec '%s' (%s)."
 msgstr ""
 
-#: ../zypp/ExternalProgram.cc:267
+#: ../zypp/ExternalProgram.cc:323
 #, fuzzy, c-format
 msgid "Can't fork (%s)."
 msgstr "Ayiyitholi i-%s."
@@ -667,12 +659,12 @@ msgstr "Ayikwazi ukulungiselela ukuqalisa i-recursive mutex"
 msgid "Can't open lock file: %s"
 msgstr "Ayikwazi ukuvula ifayela %1."
 
-#: ../zypp/ExternalProgram.cc:174
+#: ../zypp/ExternalProgram.cc:230
 #, fuzzy, c-format
 msgid "Can't open pipe (%s)."
 msgstr "Ayikwazi ukuvula ifayela %1."
 
-#: ../zypp/ExternalProgram.cc:163
+#: ../zypp/ExternalProgram.cc:219
 #, fuzzy, c-format
 msgid "Can't open pty (%s)."
 msgstr "Couldn't open file: %s."
@@ -700,14 +692,19 @@ msgstr "Canada"
 msgid "Cannot create public key %s from %s keyring to file %s"
 msgstr ""
 
-#: ../zypp/media/MediaException.cc:182
+#: ../zypp/media/MediaException.cc:234
 msgid "Cannot eject any media"
 msgstr ""
 
-#: ../zypp/media/MediaException.cc:184
+#: ../zypp/media/MediaException.cc:236
 #, fuzzy, c-format
 msgid "Cannot eject media '%s'"
 msgstr "Ayikwazi ukuvula into esesendlalelweni (desktop) '%s'"
+
+#: ../zypp/media/MediaException.cc:273
+#, c-format
+msgid "Cannot find available loop device to mount the image file from '%s'"
+msgstr ""
 
 #: ../zypp/media/MediaException.cc:67
 #, fuzzy, c-format
@@ -876,17 +873,17 @@ msgstr "Cocos (Keeling) Islands"
 msgid "Colombia"
 msgstr "Colombia"
 
-#: ../zypp/ExternalProgram.cc:346
+#: ../zypp/ExternalProgram.cc:402
 #, c-format
 msgid "Command exited with status %d."
 msgstr ""
 
-#: ../zypp/ExternalProgram.cc:371
+#: ../zypp/ExternalProgram.cc:427
 #, fuzzy
 msgid "Command exited with unknown error."
 msgstr "Ikhomandi ekhishwa lapho ixhumeka"
 
-#: ../zypp/ExternalProgram.cc:366
+#: ../zypp/ExternalProgram.cc:422
 #, c-format
 msgid "Command was killed by signal %d (%s)."
 msgstr ""
@@ -1067,7 +1064,13 @@ msgstr "Dominica"
 msgid "Dominican Republic"
 msgstr "Dominican Republic"
 
-#: ../zypp/media/MediaException.cc:152
+#. TranslatorExplanation: curl is the name of a library, don't translate
+#: ../zypp/media/MediaException.cc:92 ../zypp/media/MediaException.cc:100
+#, c-format
+msgid "Download (Metalink curl) initialization failed for '%s'"
+msgstr ""
+
+#: ../zypp/media/MediaException.cc:168
 #, c-format
 msgid ""
 "Download (curl) error for '%s':\n"
@@ -1079,6 +1082,14 @@ msgstr ""
 #: ../zypp/media/MediaException.cc:84
 #, c-format
 msgid "Download (curl) initialization failed for '%s'"
+msgstr ""
+
+#: ../zypp/media/MediaException.cc:186 ../zypp/media/MediaException.cc:204
+#, c-format
+msgid ""
+"Download (metalink curl) error for '%s':\n"
+"Error code: %s\n"
+"Error message: %s\n"
 msgstr ""
 
 #. language code: dra
@@ -1157,15 +1168,15 @@ msgstr "El Salvador"
 msgid "Elamite"
 msgstr "Isi-Elami"
 
-#: ../zypp/media/MediaException.cc:135
+#: ../zypp/media/MediaException.cc:151
 msgid "Empty destination in URI"
 msgstr ""
 
-#: ../zypp/media/MediaException.cc:130
+#: ../zypp/media/MediaException.cc:146
 msgid "Empty filesystem in URI"
 msgstr ""
 
-#: ../zypp/media/MediaException.cc:125
+#: ../zypp/media/MediaException.cc:141
 #, fuzzy
 msgid "Empty host name in URI"
 msgstr "Igama le-CA elingenalutho"
@@ -1200,9 +1211,15 @@ msgid "Eritrea"
 msgstr "Eritrea"
 
 #. TranslatorExplanation: curl is the name of a library, don't translate
-#: ../zypp/media/MediaException.cc:161
+#: ../zypp/media/MediaException.cc:177
 #, c-format
 msgid "Error occurred while setting download (curl) options for '%s':"
+msgstr ""
+
+#. TranslatorExplanation: curl is the name of a library, don't translate
+#: ../zypp/media/MediaException.cc:195 ../zypp/media/MediaException.cc:213
+#, c-format
+msgid "Error occurred while setting download (metalink curl) options for '%s':"
 msgstr ""
 
 #. language code: myv
@@ -1921,11 +1938,6 @@ msgstr "Ingxenyana engekho emthethweni '%s'"
 msgid "Invalid regular expression '%s': regcomp returned %d"
 msgstr ""
 
-#: ../zypp/media/MediaCurl.cc:1612
-#, fuzzy
-msgid "Invalid user name or password."
-msgstr "Iphasiwedi ye-CA engekho emthethweni."
-
 #. :IRQ:368:
 #: ../zypp/CountryCode.cc:329
 msgid "Iran"
@@ -2458,7 +2470,7 @@ msgstr "Malaysia"
 msgid "Maldives"
 msgstr "Maldives"
 
-#: ../zypp/media/MediaException.cc:115
+#: ../zypp/media/MediaException.cc:131
 msgid "Malformed URI"
 msgstr ""
 
@@ -2567,12 +2579,12 @@ msgstr "Izilimi ZamaMaya"
 msgid "Mayotte"
 msgstr "Mayotte"
 
-#: ../zypp/media/MediaException.cc:169
+#: ../zypp/media/MediaException.cc:221
 #, c-format
 msgid "Media source '%s' does not contain the desired medium"
 msgstr ""
 
-#: ../zypp/media/MediaException.cc:175
+#: ../zypp/media/MediaException.cc:227
 #, c-format
 msgid "Medium '%s' is in use by another instance"
 msgstr ""
@@ -2937,7 +2949,7 @@ msgstr "Oman"
 msgid "One or both of '%s' or '%s' attributes is required."
 msgstr ""
 
-#: ../zypp/media/MediaException.cc:145
+#: ../zypp/media/MediaException.cc:161
 msgid "Operation not supported by medium"
 msgstr ""
 
@@ -2967,9 +2979,9 @@ msgid "Otomian Languages"
 msgstr "Izilimi Zama-Otomia"
 
 #. TranslatorExplanation %s = package being checked for integrity
-#: ../zypp/repo/PackageProvider.cc:243
+#: ../zypp/repo/PackageProvider.cc:247
 #, fuzzy, c-format
-msgid "Package %s fails integrity check. Do you want to retry?"
+msgid "Package %s seems to be corrupted during transfer. Do you want to retry retrieval?"
 msgstr "Iphakheji %s ihlulekile lapho ihlolwa ukuthembeka. Ufuna ukuphinde uzame ukuyilanda futhi?"
 
 #. language code: pal
@@ -3042,17 +3054,17 @@ msgstr "IsiPapua (Esinye)"
 msgid "Paraguay"
 msgstr "Paraguay"
 
-#: ../zypp/media/MediaException.cc:106
+#: ../zypp/media/MediaException.cc:122
 #, fuzzy, c-format
 msgid "Path '%s' on medium '%s' is not a directory."
 msgstr "I-%1 ayiyona i-directory."
 
-#: ../zypp/media/MediaException.cc:98
+#: ../zypp/media/MediaException.cc:114
 #, c-format
 msgid "Path '%s' on medium '%s' is not a file."
 msgstr ""
 
-#: ../zypp/media/MediaException.cc:200
+#: ../zypp/media/MediaException.cc:252
 #, fuzzy, c-format
 msgid "Permission to access '%s' denied."
 msgstr "Izimvume zinqatshiwe"
@@ -3164,8 +3176,9 @@ msgid "Query string parsing not supported for this URL"
 msgstr "Ukucazwa kohlu lwemibuzo akusekelwa kule-URL"
 
 #. TranslatorExplanation after semicolon is error message
-#: ../zypp/target/rpm/RpmDb.cc:892 ../zypp/target/rpm/RpmDb.cc:2080
-#: ../zypp/target/rpm/RpmDb.cc:2221
+#. TranslatorExplanation the colon is followed by an error message
+#: ../zypp/target/rpm/RpmDb.cc:892 ../zypp/target/rpm/RpmDb.cc:2081
+#: ../zypp/target/rpm/RpmDb.cc:2217
 #, fuzzy
 msgid "RPM failed: "
 msgstr "ayiphumelelanga"
@@ -3194,7 +3207,7 @@ msgstr "IsiRarotonga"
 msgid "Relative path not allowed if authority exists"
 msgstr "Umgudu ongaphelele awuvunyelwe uma kunegunya"
 
-#: ../zypp/RepoManager.cc:1311
+#: ../zypp/RepoManager.cc:1314
 #, fuzzy, c-format
 msgid "Removing repository '%s'"
 msgstr "Ukubuyisela imithombo yokwaziswa"
@@ -3654,7 +3667,7 @@ msgstr "Syria"
 msgid "Syriac"
 msgstr "IsiSyria"
 
-#: ../zypp/media/MediaException.cc:91
+#: ../zypp/media/MediaException.cc:107
 #, c-format
 msgid "System exception '%s' on medium '%s'."
 msgstr ""
@@ -3775,7 +3788,7 @@ msgstr "IsiTigre"
 msgid "Tigrinya"
 msgstr "IsiTigrinya"
 
-#: ../zypp/media/MediaException.cc:207
+#: ../zypp/media/MediaException.cc:259
 #, c-format
 msgid "Timeout exceed when access '%s'."
 msgstr ""
@@ -4010,7 +4023,7 @@ msgstr ""
 msgid "Unsupported HTTP authentication method '%s'"
 msgstr ""
 
-#: ../zypp/media/MediaException.cc:140
+#: ../zypp/media/MediaException.cc:156
 #, fuzzy, c-format
 msgid "Unsupported URI scheme in '%s'."
 msgstr "Uhlelo '%1' lwe-URL engekho emthethweni."
@@ -4259,11 +4272,11 @@ msgstr "IsiZulu"
 msgid "Zuni"
 msgstr "IsiZuni"
 
-#: ../zypp/repo/PackageProvider.cc:194
+#: ../zypp/repo/PackageProvider.cc:195
 msgid "applydeltarpm check failed."
 msgstr "ukuhlola i-applydeltarpm kuhlulekile."
 
-#: ../zypp/repo/PackageProvider.cc:208
+#: ../zypp/repo/PackageProvider.cc:212
 msgid "applydeltarpm failed."
 msgstr "i-applydeltarpm ihlulekile."
 
@@ -4282,7 +4295,7 @@ msgstr "Ayikwazi ukufaka %s"
 msgid "conflicting requests"
 msgstr "Isicelo Sokuxhuma kwi-:"
 
-#: ../zypp/target/rpm/RpmDb.cc:2374
+#: ../zypp/target/rpm/RpmDb.cc:2369
 #, c-format
 msgid "created backup %s"
 msgstr "yakhe i-backup %s"
@@ -4401,10 +4414,6 @@ msgstr ""
 "I-rpm yakhe i-%s njenge-%s.\n"
 "Nansi imigqa yokuqala engu-25 yomehluko:\n"
 
-#: ../zypp/target/rpm/RpmDb.cc:2077 ../zypp/target/rpm/RpmDb.cc:2218
-msgid "rpm output:"
-msgstr "okukhishiwe kwe-rpm:"
-
 #. %s = filenames
 #: ../zypp/target/rpm/RpmDb.cc:2062
 #, fuzzy, c-format
@@ -4438,6 +4447,19 @@ msgstr "akwaziwa"
 #: ../zypp/VendorSupportOptions.cc:17
 msgid "unsupported"
 msgstr ""
+
+#~ msgid "%s remove failed"
+#~ msgstr "Ukususa i-%s akuphumelelanga"
+
+#~ msgid "Additional rpm output:"
+#~ msgstr "Okunye okukhishiwe kwe-rpm:"
+
+#, fuzzy
+#~ msgid "Invalid user name or password."
+#~ msgstr "Iphasiwedi ye-CA engekho emthethweni."
+
+#~ msgid "rpm output:"
+#~ msgstr "okukhishiwe kwe-rpm:"
 
 #~ msgid "%s install failed"
 #~ msgstr "ukufakwa kwe-%s akuphumelelanga"

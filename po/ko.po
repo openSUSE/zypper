@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: zypp.ko\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-09-25 15:48+0200\n"
-"PO-Revision-Date: 2008-08-14 15:12+0900\n"
+"POT-Creation-Date: 2008-10-08 17:27+0200\n"
+"PO-Revision-Date: 2008-10-06 16:09+0900\n"
 "Last-Translator: YunSeok Choi <xein@naver.com>\n"
 "Language-Team: Korean <xein@naver.com>\n"
 "MIME-Version: 1.0\n"
@@ -28,7 +28,7 @@ msgstr ""
 "\n"
 "설치 불가능한 제공자: "
 
-#: ../zypp/media/MediaException.cc:214
+#: ../zypp/media/MediaException.cc:266
 #, c-format
 msgid " SSL certificate problem, verify that the CA cert is OK for '%s'."
 msgstr " SSL 인증서에 문제, '%s'에 임해서 증명 기관에 문제가 있는지 확인 해보세요."
@@ -60,11 +60,6 @@ msgstr "%s 는 설치 할 수 없음"
 msgid "%s obsoletes %s provided by %s"
 msgstr "%s 는 %s(%s에 의해 제공되는) 를 폐기"
 
-#: ../zypp/target/rpm/RpmDb.cc:2216
-#, c-format
-msgid "%s remove failed"
-msgstr "%s 제거 실패"
-
 #: ../zypp/solver/detail/SATResolver.cc:969
 #, c-format
 msgid "%s requires %s, but this requirement cannot be provided"
@@ -92,7 +87,7 @@ msgstr "아촐리어"
 msgid "Adangme"
 msgstr "아당메어"
 
-#: ../zypp/RepoManager.cc:1181
+#: ../zypp/RepoManager.cc:1184
 #, c-format
 msgid "Adding repository '%s'"
 msgstr "'%s' 저장소 추가 중"
@@ -100,11 +95,6 @@ msgstr "'%s' 저장소 추가 중"
 #: ../zypp/VendorSupportOptions.cc:29
 msgid "Additional Customer Contract Necessary"
 msgstr ""
-
-#  dialog caption
-#: ../zypp/target/rpm/RpmDb.cc:2092 ../zypp/target/rpm/RpmDb.cc:2230
-msgid "Additional rpm output:"
-msgstr "추가 RPM 출력:"
 
 #. language code: ady
 #: ../zypp/LanguageCode.cc:248
@@ -334,7 +324,8 @@ msgstr "오스트리아"
 msgid "Austronesian (Other)"
 msgstr "오스트로네시아어족 (기타)"
 
-#: ../zypp/media/MediaCurl.cc:1615
+#. !\todo add comma to the message for the next release
+#: ../zypp/media/MediaCurl.cc:1619
 #, c-format
 msgid "Authentication required for '%s'"
 msgstr "%s 에 대한 인증 요청"
@@ -605,7 +596,7 @@ msgstr "브루나이"
 msgid "Buginese"
 msgstr "부기어"
 
-#: ../zypp/RepoManager.cc:976
+#: ../zypp/RepoManager.cc:977
 #, c-format
 msgid "Building repository '%s' cache"
 msgstr "'%s' 저장소 캐시 빌드 중"
@@ -665,23 +656,23 @@ msgstr "sat-pool을 작성 할 수 없습니다."
 msgid "Can't acquire the mutex lock"
 msgstr "상호 배타 기능의 권리를 취득 할 수 없음"
 
-#: ../zypp/ExternalProgram.cc:245
+#: ../zypp/ExternalProgram.cc:301
 #, c-format
 msgid "Can't chdir to '/' inside chroot (%s)."
 msgstr "chroot (%s) 환경에 '/' 로 이동 할 수 없습니다."
 
-#: ../zypp/ExternalProgram.cc:238
+#: ../zypp/ExternalProgram.cc:294
 #, c-format
 msgid "Can't chroot to '%s' (%s)."
 msgstr "'%s' (%s)에 chroot 할 수 없습니다."
 
 #. don't want to get here
-#: ../zypp/ExternalProgram.cc:259
+#: ../zypp/ExternalProgram.cc:315
 #, c-format
 msgid "Can't exec '%s' (%s)."
 msgstr "'%s' (%s)를 실행 할 수 없습니다."
 
-#: ../zypp/ExternalProgram.cc:267
+#: ../zypp/ExternalProgram.cc:323
 #, c-format
 msgid "Can't fork (%s)."
 msgstr "fork (%s) 할 수 없습니다."
@@ -699,12 +690,12 @@ msgstr "재귀 상호 배타 기능을 초기화 할 수 없음"
 msgid "Can't open lock file: %s"
 msgstr "잠긴 파일을 열 수 없음: %s"
 
-#: ../zypp/ExternalProgram.cc:174
+#: ../zypp/ExternalProgram.cc:230
 #, c-format
 msgid "Can't open pipe (%s)."
 msgstr "pipe (%s)를 열 수 없습니다."
 
-#: ../zypp/ExternalProgram.cc:163
+#: ../zypp/ExternalProgram.cc:219
 #, c-format
 msgid "Can't open pty (%s)."
 msgstr "pty (%s)를 열 수 없습니다."
@@ -732,15 +723,20 @@ msgstr "캐나다"
 msgid "Cannot create public key %s from %s keyring to file %s"
 msgstr "공개 키 %s(%s 키링으로 부터)를 %s 파일에 생성 할 수 없음"
 
-#: ../zypp/media/MediaException.cc:182
+#: ../zypp/media/MediaException.cc:234
 msgid "Cannot eject any media"
 msgstr "미디어를 꺼낼 수 없음"
 
 #  Frame title for installation target hard disk / partition(s)
-#: ../zypp/media/MediaException.cc:184
+#: ../zypp/media/MediaException.cc:236
 #, c-format
 msgid "Cannot eject media '%s'"
 msgstr "'%s' 미디어를 꺼낼 수 없음"
+
+#: ../zypp/media/MediaException.cc:273
+#, c-format
+msgid "Cannot find available loop device to mount the image file from '%s'"
+msgstr ""
 
 #  Frame title for installation target hard disk / partition(s)
 #: ../zypp/media/MediaException.cc:67
@@ -916,16 +912,16 @@ msgstr "코코스 (킬링) 제도"
 msgid "Colombia"
 msgstr "콜롬비아"
 
-#: ../zypp/ExternalProgram.cc:346
+#: ../zypp/ExternalProgram.cc:402
 #, c-format
 msgid "Command exited with status %d."
 msgstr "상태 %d로 명령이 종료되었습니다."
 
-#: ../zypp/ExternalProgram.cc:371
+#: ../zypp/ExternalProgram.cc:427
 msgid "Command exited with unknown error."
 msgstr "알 수 없는 오류로 명령이 종료되었습니다."
 
-#: ../zypp/ExternalProgram.cc:366
+#: ../zypp/ExternalProgram.cc:422
 #, c-format
 msgid "Command was killed by signal %d (%s)."
 msgstr "명령은 시그널 %d (%s)로 죽였습니다."
@@ -1112,7 +1108,13 @@ msgstr "도미니카"
 msgid "Dominican Republic"
 msgstr "도미니카 공화국"
 
-#: ../zypp/media/MediaException.cc:152
+#. TranslatorExplanation: curl is the name of a library, don't translate
+#: ../zypp/media/MediaException.cc:92 ../zypp/media/MediaException.cc:100
+#, fuzzy, c-format
+msgid "Download (Metalink curl) initialization failed for '%s'"
+msgstr "'%s' 애 대한 다운로드 (curl) 초기화에 실패"
+
+#: ../zypp/media/MediaException.cc:168
 #, c-format
 msgid ""
 "Download (curl) error for '%s':\n"
@@ -1128,6 +1130,17 @@ msgstr ""
 #, c-format
 msgid "Download (curl) initialization failed for '%s'"
 msgstr "'%s' 애 대한 다운로드 (curl) 초기화에 실패"
+
+#: ../zypp/media/MediaException.cc:186 ../zypp/media/MediaException.cc:204
+#, fuzzy, c-format
+msgid ""
+"Download (metalink curl) error for '%s':\n"
+"Error code: %s\n"
+"Error message: %s\n"
+msgstr ""
+"'%s' 에 대한 다운로드 (curl) 오류 :\n"
+"오류 코드: %s\n"
+"오류 메시지: %s\n"
 
 #. language code: dra
 #: ../zypp/LanguageCode.cc:470
@@ -1207,15 +1220,15 @@ msgstr "엘살바도르"
 msgid "Elamite"
 msgstr "엘람어"
 
-#: ../zypp/media/MediaException.cc:135
+#: ../zypp/media/MediaException.cc:151
 msgid "Empty destination in URI"
 msgstr "URI 에 목표가 비어있음"
 
-#: ../zypp/media/MediaException.cc:130
+#: ../zypp/media/MediaException.cc:146
 msgid "Empty filesystem in URI"
 msgstr "URI 에 파일시스템이 비어있음"
 
-#: ../zypp/media/MediaException.cc:125
+#: ../zypp/media/MediaException.cc:141
 msgid "Empty host name in URI"
 msgstr "URI 에 호스트 이름이 비어있음"
 
@@ -1249,9 +1262,15 @@ msgid "Eritrea"
 msgstr "에리트레아"
 
 #. TranslatorExplanation: curl is the name of a library, don't translate
-#: ../zypp/media/MediaException.cc:161
+#: ../zypp/media/MediaException.cc:177
 #, c-format
 msgid "Error occurred while setting download (curl) options for '%s':"
+msgstr "'%s'의 다운로드 (curl) 옵션을 설정 할 때 오류 발생:"
+
+#. TranslatorExplanation: curl is the name of a library, don't translate
+#: ../zypp/media/MediaException.cc:195 ../zypp/media/MediaException.cc:213
+#, fuzzy, c-format
+msgid "Error occurred while setting download (metalink curl) options for '%s':"
 msgstr "'%s'의 다운로드 (curl) 옵션을 설정 할 때 오류 발생:"
 
 #. language code: myv
@@ -1744,7 +1763,6 @@ msgid "Hausa"
 msgstr "하우사어"
 
 #: ../zypp/solver/detail/SATResolver.cc:910
-#, fuzzy
 msgid "Have you enabled all requested repositories?"
 msgstr "요청한 모든 저장소를 활성화 하시겠습니까?"
 
@@ -1991,10 +2009,6 @@ msgstr "잘못된 포트 부분 '%s'"
 #, c-format
 msgid "Invalid regular expression '%s': regcomp returned %d"
 msgstr "잘못된 정규 표현 '%s': regcomp 는 %d 를 반환"
-
-#: ../zypp/media/MediaCurl.cc:1612
-msgid "Invalid user name or password."
-msgstr "잘못된 사용자 이름과 열쇠글입니다."
 
 # IR
 # fuzzy
@@ -2358,15 +2372,15 @@ msgstr "레소토"
 
 #: ../zypp/VendorSupportOptions.cc:20
 msgid "Level 1"
-msgstr ""
+msgstr "단계 1"
 
 #: ../zypp/VendorSupportOptions.cc:23
 msgid "Level 2"
-msgstr ""
+msgstr "단계 2"
 
 #: ../zypp/VendorSupportOptions.cc:26
 msgid "Level 3"
-msgstr ""
+msgstr "단계 3"
 
 #. language code: lez
 #: ../zypp/LanguageCode.cc:744
@@ -2557,7 +2571,7 @@ msgstr "말레이시아"
 msgid "Maldives"
 msgstr "말리"
 
-#: ../zypp/media/MediaException.cc:115
+#: ../zypp/media/MediaException.cc:131
 msgid "Malformed URI"
 msgstr "올바르지 않은 URI"
 
@@ -2693,12 +2707,12 @@ msgstr "마야어족"
 msgid "Mayotte"
 msgstr "마요트"
 
-#: ../zypp/media/MediaException.cc:169
+#: ../zypp/media/MediaException.cc:221
 #, c-format
 msgid "Media source '%s' does not contain the desired medium"
 msgstr "'%s' 미디어 소스에는 필요한 매체가 없음"
 
-#: ../zypp/media/MediaException.cc:175
+#: ../zypp/media/MediaException.cc:227
 #, c-format
 msgid "Medium '%s' is in use by another instance"
 msgstr "매체 '%s' 는 다른 프로그램에 의해 사용되고 있음"
@@ -3087,7 +3101,7 @@ msgstr "오만"
 msgid "One or both of '%s' or '%s' attributes is required."
 msgstr ""
 
-#: ../zypp/media/MediaException.cc:145
+#: ../zypp/media/MediaException.cc:161
 msgid "Operation not supported by medium"
 msgstr "조작은 매체를 지원하지 않음"
 
@@ -3120,9 +3134,9 @@ msgid "Otomian Languages"
 msgstr "오토미어군"
 
 #. TranslatorExplanation %s = package being checked for integrity
-#: ../zypp/repo/PackageProvider.cc:243
-#, c-format
-msgid "Package %s fails integrity check. Do you want to retry?"
+#: ../zypp/repo/PackageProvider.cc:247
+#, fuzzy, c-format
+msgid "Package %s seems to be corrupted during transfer. Do you want to retry retrieval?"
 msgstr "%s 꾸러미의 무결성 확인에 실패했습니다. 재시도 하시겠습니까?"
 
 #. language code: pal
@@ -3196,17 +3210,17 @@ msgstr "파푸아 제어 (기타)"
 msgid "Paraguay"
 msgstr "파라과이"
 
-#: ../zypp/media/MediaException.cc:106
+#: ../zypp/media/MediaException.cc:122
 #, c-format
 msgid "Path '%s' on medium '%s' is not a directory."
 msgstr "경로 '%s'('%s' 매체의) 는 디렉토리가 아닙니다."
 
-#: ../zypp/media/MediaException.cc:98
+#: ../zypp/media/MediaException.cc:114
 #, c-format
 msgid "Path '%s' on medium '%s' is not a file."
 msgstr "'%s' 경로('%s'매체의)는 파일이 아닙니다."
 
-#: ../zypp/media/MediaException.cc:200
+#: ../zypp/media/MediaException.cc:252
 #, c-format
 msgid "Permission to access '%s' denied."
 msgstr "'%s' 에 접근할 권한이 없습니다."
@@ -3318,8 +3332,9 @@ msgid "Query string parsing not supported for this URL"
 msgstr "이 URL에 대한 쿼리 문자 해석은 지원되지 않음"
 
 #. TranslatorExplanation after semicolon is error message
-#: ../zypp/target/rpm/RpmDb.cc:892 ../zypp/target/rpm/RpmDb.cc:2080
-#: ../zypp/target/rpm/RpmDb.cc:2221
+#. TranslatorExplanation the colon is followed by an error message
+#: ../zypp/target/rpm/RpmDb.cc:892 ../zypp/target/rpm/RpmDb.cc:2081
+#: ../zypp/target/rpm/RpmDb.cc:2217
 msgid "RPM failed: "
 msgstr "RPM 실패함: "
 
@@ -3350,15 +3365,15 @@ msgstr "라로통가어"
 msgid "Relative path not allowed if authority exists"
 msgstr "권한 부분이 존재하는 경우 상대 경로는 허용되지 않음"
 
-#: ../zypp/RepoManager.cc:1311
+#: ../zypp/RepoManager.cc:1314
 #, c-format
 msgid "Removing repository '%s'"
 msgstr "'%s' 저장소 제거 중"
 
 #: ../zypp/parser/RepoindexFileReader.cc:128
-#, fuzzy, c-format
+#, c-format
 msgid "Required attribute '%s' is missing."
-msgstr "필요한 파일이 없음: "
+msgstr "필요한 '%s' 속성이 빠졌습니다."
 
 #. :QAT:634:
 #: ../zypp/CountryCode.cc:406
@@ -3825,17 +3840,19 @@ msgstr "수리남"
 msgid "Syriac"
 msgstr "시리아어"
 
-#: ../zypp/media/MediaException.cc:91
+#: ../zypp/media/MediaException.cc:107
 #, c-format
 msgid "System exception '%s' on medium '%s'."
 msgstr "시스템 예외 '%s' 가 '%s' 에서 발생했습니다."
 
 #: ../zypp/ZYppFactory.cc:361
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "System management is locked by the application with pid %d (%s).\n"
 "Please close this application before trying again."
-msgstr "시스템 관리는 프로세스 ID %d 에 의해 잠겨 있습니다. 재실행 하기 전에 응용프로그램을 종료하세요."
+msgstr ""
+"시스템 관리는 응용프로그램 pid %d (%s) 에 의해 잠겨 있습니다.\n"
+"재실행 하기 전에 응용프로그램을 종료하세요."
 
 #. language code: tgl tl
 #: ../zypp/LanguageCode.cc:1108
@@ -3921,7 +3938,7 @@ msgstr ""
 
 #: ../zypp/VendorSupportOptions.cc:42
 msgid "The vendor does not provide support."
-msgstr ""
+msgstr "제조사가 지원을 제공하지 않습니다."
 
 #: ../zypp/base/InterProcessMutex.cc:139
 msgid "This action is being run by another program already."
@@ -3930,7 +3947,7 @@ msgstr "이 동작은 다른 프로그램으로 실행되고 있습니다."
 #: ../zypp/solver/detail/SATResolver.cc:1118
 #: ../zypp/solver/detail/SATResolver.cc:1136
 msgid "This request will break your system!"
-msgstr ""
+msgstr "이 요구사항은 시스템을 부술 수 있습니다!"
 
 # TW
 # fuzzy
@@ -3950,7 +3967,7 @@ msgstr "티그레어"
 msgid "Tigrinya"
 msgstr "티그리냐어"
 
-#: ../zypp/media/MediaException.cc:207
+#: ../zypp/media/MediaException.cc:259
 #, c-format
 msgid "Timeout exceed when access '%s'."
 msgstr "'%s'에 접근 할 때 마감 시간이 되었습니다."
@@ -4186,14 +4203,14 @@ msgstr "알 수 없는 언어: "
 
 #: ../zypp/VendorSupportOptions.cc:56
 msgid "Unknown support option. Description not available"
-msgstr ""
+msgstr "알 수 없는 지원 옵션입니다. 설명을 사용할 수 없음"
 
 #: ../zypp/media/MediaUserAuth.cc:123
 #, c-format
 msgid "Unsupported HTTP authentication method '%s'"
 msgstr "지원하지 않는 HTTP 인증 방식 '%s'"
 
-#: ../zypp/media/MediaException.cc:140
+#: ../zypp/media/MediaException.cc:156
 #, c-format
 msgid "Unsupported URI scheme in '%s'."
 msgstr "'%s' 내에 지원되지 않는 URI 스키마가 있습니다."
@@ -4452,11 +4469,11 @@ msgstr "줄루"
 msgid "Zuni"
 msgstr "주니어"
 
-#: ../zypp/repo/PackageProvider.cc:194
+#: ../zypp/repo/PackageProvider.cc:195
 msgid "applydeltarpm check failed."
 msgstr "applydeltarpm 확인에 실패했습니다."
 
-#: ../zypp/repo/PackageProvider.cc:208
+#: ../zypp/repo/PackageProvider.cc:212
 msgid "applydeltarpm failed."
 msgstr "applydeltarpm 가 실패했습니다."
 
@@ -4475,7 +4492,7 @@ msgstr "%s 와 %s 둘다 모두 설치 할 수 없음"
 msgid "conflicting requests"
 msgstr "요구가 모순됨"
 
-#: ../zypp/target/rpm/RpmDb.cc:2374
+#: ../zypp/target/rpm/RpmDb.cc:2369
 #, c-format
 msgid "created backup %s"
 msgstr "%s 백업을 만듬"
@@ -4548,7 +4565,7 @@ msgstr ""
 
 #: ../zypp/VendorSupportOptions.cc:31
 msgid "invalid"
-msgstr ""
+msgstr "잘못됨"
 
 #: ../zypp/solver/detail/SATResolver.cc:1061
 #: ../zypp/solver/detail/SATResolver.cc:1104
@@ -4600,10 +4617,6 @@ msgstr ""
 "RPM은 %s 를 %s 로 만들었습니다.\n"
 "다음은 최초 25 행의 다른점입니다:\n"
 
-#: ../zypp/target/rpm/RpmDb.cc:2077 ../zypp/target/rpm/RpmDb.cc:2218
-msgid "rpm output:"
-msgstr "RPM 출력:"
-
 #. %s = filenames
 #: ../zypp/target/rpm/RpmDb.cc:2062
 #, c-format
@@ -4635,7 +4648,20 @@ msgstr "알수없음"
 
 #: ../zypp/VendorSupportOptions.cc:17
 msgid "unsupported"
-msgstr ""
+msgstr "지원하지 않음"
+
+#~ msgid "%s remove failed"
+#~ msgstr "%s 제거 실패"
+
+#  dialog caption
+#~ msgid "Additional rpm output:"
+#~ msgstr "추가 RPM 출력:"
+
+#~ msgid "Invalid user name or password."
+#~ msgstr "잘못된 사용자 이름과 열쇠글입니다."
+
+#~ msgid "rpm output:"
+#~ msgstr "RPM 출력:"
 
 #~ msgid "%s install failed"
 #~ msgstr "%s 설치 실패"
@@ -4645,24 +4671,6 @@ msgstr ""
 
 #~ msgid "%s remove ok"
 #~ msgstr "%s 제거 완료"
-
-#, fuzzy
-#~ msgid "Download (Metalink curl) initialization failed for '%s'"
-#~ msgstr "'%s' 애 대한 다운로드 (curl) 초기화에 실패"
-
-#, fuzzy
-#~ msgid ""
-#~ "Download (metalink curl) error for '%s':\n"
-#~ "Error code: %s\n"
-#~ "Error message: %s\n"
-#~ msgstr ""
-#~ "'%s' 에 대한 다운로드 (curl) 오류 :\n"
-#~ "오류 코드: %s\n"
-#~ "오류 메시지: %s\n"
-
-#, fuzzy
-#~ msgid "Error occurred while setting download (metalink curl) options for '%s':"
-#~ msgstr "'%s'의 다운로드 (curl) 옵션을 설정 할 때 오류 발생:"
 
 #, fuzzy
 #~ msgid "Do not install or delete the resolvables concerned"

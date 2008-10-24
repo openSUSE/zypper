@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: zypp.fr\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-09-25 15:48+0200\n"
+"POT-Creation-Date: 2008-10-08 17:27+0200\n"
 "PO-Revision-Date: 2008-09-25 21:08+0200\n"
 "Last-Translator: Rémy Marquis <remy.marquis@gmail.com>\n"
 "Language-Team: French Team <opensuse-fr@opensuse.org>\n"
@@ -31,7 +31,7 @@ msgstr ""
 "\n"
 "fournisseurs pas installables: "
 
-#: ../zypp/media/MediaException.cc:214
+#: ../zypp/media/MediaException.cc:266
 #, c-format
 msgid " SSL certificate problem, verify that the CA cert is OK for '%s'."
 msgstr "Problème de certificat SSL, vérifiez que le certificat CA est OK pour '%s'."
@@ -65,12 +65,6 @@ msgstr "%s n'est pas installable"
 msgid "%s obsoletes %s provided by %s"
 msgstr "%s rend obsolète %s fourni par %s"
 
-# TLABEL partitioning_2002_01_04_0147__99
-#: ../zypp/target/rpm/RpmDb.cc:2216
-#, c-format
-msgid "%s remove failed"
-msgstr "Échec de la désinstallation de %s"
-
 #: ../zypp/solver/detail/SATResolver.cc:969
 #, c-format
 msgid "%s requires %s, but this requirement cannot be provided"
@@ -96,7 +90,7 @@ msgstr "Acoli"
 msgid "Adangme"
 msgstr "Adangme"
 
-#: ../zypp/RepoManager.cc:1181
+#: ../zypp/RepoManager.cc:1184
 #, c-format
 msgid "Adding repository '%s'"
 msgstr "Ajout du dépôt '%s'"
@@ -104,11 +98,6 @@ msgstr "Ajout du dépôt '%s'"
 #: ../zypp/VendorSupportOptions.cc:29
 msgid "Additional Customer Contract Necessary"
 msgstr "Contrat Client additionnel nécessaire"
-
-# TLABEL firewall_2002_03_14_2340__51
-#: ../zypp/target/rpm/RpmDb.cc:2092 ../zypp/target/rpm/RpmDb.cc:2230
-msgid "Additional rpm output:"
-msgstr "Sortie rpm supplémentaire:"
 
 #. language code: ady
 #: ../zypp/LanguageCode.cc:248
@@ -323,7 +312,8 @@ msgstr "Autriche"
 msgid "Austronesian (Other)"
 msgstr "Malayo-polynésiennes (autres langues)"
 
-#: ../zypp/media/MediaCurl.cc:1615
+#. !\todo add comma to the message for the next release
+#: ../zypp/media/MediaCurl.cc:1619
 #, c-format
 msgid "Authentication required for '%s'"
 msgstr "Authentification requise pour '%s'"
@@ -587,7 +577,7 @@ msgstr "Brunei"
 msgid "Buginese"
 msgstr "Bugi"
 
-#: ../zypp/RepoManager.cc:976
+#: ../zypp/RepoManager.cc:977
 #, c-format
 msgid "Building repository '%s' cache"
 msgstr "Construction du cache du dépôt '%s'"
@@ -645,24 +635,24 @@ msgstr "Impossible de créer le pool-sat."
 msgid "Can't acquire the mutex lock"
 msgstr "Impossible d'acquérir le verrouillage mutex"
 
-#: ../zypp/ExternalProgram.cc:245
+#: ../zypp/ExternalProgram.cc:301
 #, c-format
 msgid "Can't chdir to '/' inside chroot (%s)."
 msgstr "Impossible de chdir à '/' dans un chroot (%s)."
 
-#: ../zypp/ExternalProgram.cc:238
+#: ../zypp/ExternalProgram.cc:294
 #, c-format
 msgid "Can't chroot to '%s' (%s)."
 msgstr "Impossible de chrooter dans '%s' (%s)."
 
 #. don't want to get here
-#: ../zypp/ExternalProgram.cc:259
+#: ../zypp/ExternalProgram.cc:315
 #, c-format
 msgid "Can't exec '%s' (%s)."
 msgstr "Impossible d'exécuter '%s' (%s)."
 
 # TLABEL printconf_2002_03_14_2340__110
-#: ../zypp/ExternalProgram.cc:267
+#: ../zypp/ExternalProgram.cc:323
 #, c-format
 msgid "Can't fork (%s)."
 msgstr "Impossible de forker (%s)."
@@ -680,13 +670,13 @@ msgstr "Impossible d'initialiser l'attribut mutex récursif"
 msgid "Can't open lock file: %s"
 msgstr "Impossible d'ouvrir le fichier verrouillé: %s"
 
-#: ../zypp/ExternalProgram.cc:174
+#: ../zypp/ExternalProgram.cc:230
 #, c-format
 msgid "Can't open pipe (%s)."
 msgstr "Impossible d'ouvrir le pipe (%s)."
 
 # TLABEL backup_2002_03_14_2340__125
-#: ../zypp/ExternalProgram.cc:163
+#: ../zypp/ExternalProgram.cc:219
 #, c-format
 msgid "Can't open pty (%s)."
 msgstr "Impossible d'ouvrir pty (%s)."
@@ -715,14 +705,19 @@ msgid "Cannot create public key %s from %s keyring to file %s"
 msgstr "Impossible de créer la clé publiqe %s du porteclé %s dans le fichier %s"
 
 # TLABEL profile-manager_2002_08_07_0216__9
-#: ../zypp/media/MediaException.cc:182
+#: ../zypp/media/MediaException.cc:234
 msgid "Cannot eject any media"
 msgstr "Impossible d'éjecter les media"
 
-#: ../zypp/media/MediaException.cc:184
+#: ../zypp/media/MediaException.cc:236
 #, c-format
 msgid "Cannot eject media '%s'"
 msgstr "Impossible d'éjecter le media '%s'"
+
+#: ../zypp/media/MediaException.cc:273
+#, c-format
+msgid "Cannot find available loop device to mount the image file from '%s'"
+msgstr ""
 
 #: ../zypp/media/MediaException.cc:67
 #, c-format
@@ -892,16 +887,16 @@ msgstr "Îles Cocos (Keeling)"
 msgid "Colombia"
 msgstr "Colombie"
 
-#: ../zypp/ExternalProgram.cc:346
+#: ../zypp/ExternalProgram.cc:402
 #, c-format
 msgid "Command exited with status %d."
 msgstr "La commande s'est terminée avec le status %d."
 
-#: ../zypp/ExternalProgram.cc:371
+#: ../zypp/ExternalProgram.cc:427
 msgid "Command exited with unknown error."
 msgstr "La commande s'est terminée à cause d'une erreur inconnue."
 
-#: ../zypp/ExternalProgram.cc:366
+#: ../zypp/ExternalProgram.cc:422
 #, c-format
 msgid "Command was killed by signal %d (%s)."
 msgstr "La command a été tuée par le signal %d (%s)."
@@ -1082,7 +1077,13 @@ msgstr "Dominique"
 msgid "Dominican Republic"
 msgstr "République Dominicaine"
 
-#: ../zypp/media/MediaException.cc:152
+#. TranslatorExplanation: curl is the name of a library, don't translate
+#: ../zypp/media/MediaException.cc:92 ../zypp/media/MediaException.cc:100
+#, c-format
+msgid "Download (Metalink curl) initialization failed for '%s'"
+msgstr "Échec de l'initialisation du téléchagement (Metalink curl) pour '%s'"
+
+#: ../zypp/media/MediaException.cc:168
 #, c-format
 msgid ""
 "Download (curl) error for '%s':\n"
@@ -1098,6 +1099,17 @@ msgstr ""
 #, c-format
 msgid "Download (curl) initialization failed for '%s'"
 msgstr "Échec de l'initialisation du téléchagement (curl) pour '%s'"
+
+#: ../zypp/media/MediaException.cc:186 ../zypp/media/MediaException.cc:204
+#, c-format
+msgid ""
+"Download (metalink curl) error for '%s':\n"
+"Error code: %s\n"
+"Error message: %s\n"
+msgstr ""
+"Erreur de téléchargement (metalink curl) pour '%s':\n"
+"Code erreur: %s\n"
+"Message erreur: %s\n"
 
 #. language code: dra
 #: ../zypp/LanguageCode.cc:470
@@ -1175,15 +1187,15 @@ msgstr "El Salvador"
 msgid "Elamite"
 msgstr "Élamite"
 
-#: ../zypp/media/MediaException.cc:135
+#: ../zypp/media/MediaException.cc:151
 msgid "Empty destination in URI"
 msgstr "Destination vide dans l'URI"
 
-#: ../zypp/media/MediaException.cc:130
+#: ../zypp/media/MediaException.cc:146
 msgid "Empty filesystem in URI"
 msgstr "Système de fichier vide dans l'URI"
 
-#: ../zypp/media/MediaException.cc:125
+#: ../zypp/media/MediaException.cc:141
 msgid "Empty host name in URI"
 msgstr "Nom d'hôte vide dans l'URI"
 
@@ -1217,10 +1229,16 @@ msgid "Eritrea"
 msgstr "Erythrée"
 
 #. TranslatorExplanation: curl is the name of a library, don't translate
-#: ../zypp/media/MediaException.cc:161
+#: ../zypp/media/MediaException.cc:177
 #, c-format
 msgid "Error occurred while setting download (curl) options for '%s':"
 msgstr "Erreur survenue pendant la définition des options de téléchargement (curl) pour '%s':"
+
+#. TranslatorExplanation: curl is the name of a library, don't translate
+#: ../zypp/media/MediaException.cc:195 ../zypp/media/MediaException.cc:213
+#, c-format
+msgid "Error occurred while setting download (metalink curl) options for '%s':"
+msgstr "Erreur survenue pendant la définition des options de téléchargement (metalink curl) pour '%s':"
 
 #. language code: myv
 #: ../zypp/LanguageCode.cc:850
@@ -1938,10 +1956,6 @@ msgstr "Composant de port non valide '%s' "
 msgid "Invalid regular expression '%s': regcomp returned %d"
 msgstr "Expression régulière '%s' invalide : regcomp a retourné %d"
 
-#: ../zypp/media/MediaCurl.cc:1612
-msgid "Invalid user name or password."
-msgstr "Mot de passe ou nom d'utilisateur invalide."
-
 #. :IRQ:368:
 #: ../zypp/CountryCode.cc:329
 msgid "Iran"
@@ -2475,7 +2489,7 @@ msgstr "Malaisie"
 msgid "Maldives"
 msgstr "Maldives"
 
-#: ../zypp/media/MediaException.cc:115
+#: ../zypp/media/MediaException.cc:131
 msgid "Malformed URI"
 msgstr "URI malformé"
 
@@ -2584,12 +2598,12 @@ msgstr "Langues maya"
 msgid "Mayotte"
 msgstr "Mayotte"
 
-#: ../zypp/media/MediaException.cc:169
+#: ../zypp/media/MediaException.cc:221
 #, c-format
 msgid "Media source '%s' does not contain the desired medium"
 msgstr "Le media source '%s' ne contient pas le contenu désiré"
 
-#: ../zypp/media/MediaException.cc:175
+#: ../zypp/media/MediaException.cc:227
 #, c-format
 msgid "Medium '%s' is in use by another instance"
 msgstr "Le medium '%s' est en utilisation par une autre instance"
@@ -2953,7 +2967,7 @@ msgstr "Oman"
 msgid "One or both of '%s' or '%s' attributes is required."
 msgstr "Au moins un des attributs '%s' ou '%s' est requis."
 
-#: ../zypp/media/MediaException.cc:145
+#: ../zypp/media/MediaException.cc:161
 msgid "Operation not supported by medium"
 msgstr "Operation non supportée par le medium"
 
@@ -2983,9 +2997,9 @@ msgid "Otomian Languages"
 msgstr "Langues otomangues"
 
 #. TranslatorExplanation %s = package being checked for integrity
-#: ../zypp/repo/PackageProvider.cc:243
-#, c-format
-msgid "Package %s fails integrity check. Do you want to retry?"
+#: ../zypp/repo/PackageProvider.cc:247
+#, fuzzy, c-format
+msgid "Package %s seems to be corrupted during transfer. Do you want to retry retrieval?"
 msgstr "Échec de la vérification de l'intégrité du paquet %s. Souhaitez-vous essayer à nouveau?"
 
 #. language code: pal
@@ -3058,17 +3072,17 @@ msgstr "Papoues (autres langues)"
 msgid "Paraguay"
 msgstr "Paraguay"
 
-#: ../zypp/media/MediaException.cc:106
+#: ../zypp/media/MediaException.cc:122
 #, c-format
 msgid "Path '%s' on medium '%s' is not a directory."
 msgstr "Le chemin '%s' sur le medium '%s' n'est pas un répertoire."
 
-#: ../zypp/media/MediaException.cc:98
+#: ../zypp/media/MediaException.cc:114
 #, c-format
 msgid "Path '%s' on medium '%s' is not a file."
 msgstr "Le chemin '%s' sur le medium '%s' n'est pas un fichier."
 
-#: ../zypp/media/MediaException.cc:200
+#: ../zypp/media/MediaException.cc:252
 #, c-format
 msgid "Permission to access '%s' denied."
 msgstr "Autorisation d'accès à '%s' refusée."
@@ -3180,8 +3194,9 @@ msgid "Query string parsing not supported for this URL"
 msgstr "Analyse de la chaîne de requête non prise en charge pour cette URL"
 
 #. TranslatorExplanation after semicolon is error message
-#: ../zypp/target/rpm/RpmDb.cc:892 ../zypp/target/rpm/RpmDb.cc:2080
-#: ../zypp/target/rpm/RpmDb.cc:2221
+#. TranslatorExplanation the colon is followed by an error message
+#: ../zypp/target/rpm/RpmDb.cc:892 ../zypp/target/rpm/RpmDb.cc:2081
+#: ../zypp/target/rpm/RpmDb.cc:2217
 msgid "RPM failed: "
 msgstr "Echec RPM:"
 
@@ -3209,7 +3224,7 @@ msgstr "Rarotonga"
 msgid "Relative path not allowed if authority exists"
 msgstr "Chemin relatif non autorisé en présence d'une autorité"
 
-#: ../zypp/RepoManager.cc:1311
+#: ../zypp/RepoManager.cc:1314
 #, c-format
 msgid "Removing repository '%s'"
 msgstr "Suppression du dépôt'%s'"
@@ -3670,7 +3685,7 @@ msgstr "Syrie"
 msgid "Syriac"
 msgstr "Syriaque"
 
-#: ../zypp/media/MediaException.cc:91
+#: ../zypp/media/MediaException.cc:107
 #, c-format
 msgid "System exception '%s' on medium '%s'."
 msgstr "Exception système '%s' sur le medium '%s'."
@@ -3791,7 +3806,7 @@ msgstr "Tigre"
 msgid "Tigrinya"
 msgstr "Tigrigna"
 
-#: ../zypp/media/MediaException.cc:207
+#: ../zypp/media/MediaException.cc:259
 #, c-format
 msgid "Timeout exceed when access '%s'."
 msgstr "Timeout dépassé lors de l'accès à '%s'."
@@ -4026,7 +4041,7 @@ msgstr "Option de support inconnue. La description n'est pas disponible."
 msgid "Unsupported HTTP authentication method '%s'"
 msgstr "Méthode d'autentification HTTP '%s' non supportée"
 
-#: ../zypp/media/MediaException.cc:140
+#: ../zypp/media/MediaException.cc:156
 #, c-format
 msgid "Unsupported URI scheme in '%s'."
 msgstr "Schéma d'URL '%s' non supporté."
@@ -4275,11 +4290,11 @@ msgstr "Zoulou"
 msgid "Zuni"
 msgstr "Zuni"
 
-#: ../zypp/repo/PackageProvider.cc:194
+#: ../zypp/repo/PackageProvider.cc:195
 msgid "applydeltarpm check failed."
 msgstr "La vérification d'applydeltarpm a échoué."
 
-#: ../zypp/repo/PackageProvider.cc:208
+#: ../zypp/repo/PackageProvider.cc:212
 msgid "applydeltarpm failed."
 msgstr "applydeltarpm a échoué."
 
@@ -4300,7 +4315,7 @@ msgid "conflicting requests"
 msgstr "requêtes conflictuelles"
 
 # TLABEL backup_2002_03_14_2340__102
-#: ../zypp/target/rpm/RpmDb.cc:2374
+#: ../zypp/target/rpm/RpmDb.cc:2369
 #, c-format
 msgid "created backup %s"
 msgstr "sauvegarde %s créée"
@@ -4425,11 +4440,6 @@ msgstr ""
 "rpm a créé %s sous le nom de %s.\n"
 "Voici les 25 premières lignes qui diffèrent:\n"
 
-# TLABEL firewall_2002_03_14_2340__2
-#: ../zypp/target/rpm/RpmDb.cc:2077 ../zypp/target/rpm/RpmDb.cc:2218
-msgid "rpm output:"
-msgstr "sortie rpm:"
-
 #. %s = filenames
 #: ../zypp/target/rpm/RpmDb.cc:2062
 #, c-format
@@ -4463,6 +4473,21 @@ msgstr "inconnu"
 msgid "unsupported"
 msgstr "non pris en charge"
 
+# TLABEL partitioning_2002_01_04_0147__99
+#~ msgid "%s remove failed"
+#~ msgstr "Échec de la désinstallation de %s"
+
+# TLABEL firewall_2002_03_14_2340__51
+#~ msgid "Additional rpm output:"
+#~ msgstr "Sortie rpm supplémentaire:"
+
+#~ msgid "Invalid user name or password."
+#~ msgstr "Mot de passe ou nom d'utilisateur invalide."
+
+# TLABEL firewall_2002_03_14_2340__2
+#~ msgid "rpm output:"
+#~ msgstr "sortie rpm:"
+
 # TLABEL online_update_2002_01_04_0147__112
 #~ msgid "%s install failed"
 #~ msgstr "Échec de l'installation de %s"
@@ -4474,21 +4499,6 @@ msgstr "non pris en charge"
 #~ msgid "%s remove ok"
 #~ msgstr "Réussite de la désinstallation de %s"
 
-#~ msgid "Download (Metalink curl) initialization failed for '%s'"
-#~ msgstr "Échec de l'initialisation du téléchagement (Metalink curl) pour '%s'"
-
-#~ msgid ""
-#~ "Download (metalink curl) error for '%s':\n"
-#~ "Error code: %s\n"
-#~ "Error message: %s\n"
-#~ msgstr ""
-#~ "Erreur de téléchargement (metalink curl) pour '%s':\n"
-#~ "Code erreur: %s\n"
-#~ "Message erreur: %s\n"
-
-#~ msgid "Error occurred while setting download (metalink curl) options for '%s':"
-#~ msgstr "Erreur survenue pendant la définition des options de téléchargement (metalink curl) pour '%s':"
-
 #~ msgid "%s provides this dependency, but would change the architecture of the installed item"
 #~ msgstr "%s offre cette dépendance, mais changerait l'architecture de l'élément installé"
 
@@ -4497,4 +4507,3 @@ msgstr "non pris en charge"
 
 #~ msgid "Do not install or delete the resolvables concerned"
 #~ msgstr "Ne pas installer ou supprimer les élements concernés"
-

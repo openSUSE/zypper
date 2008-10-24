@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: YaST (@memory@)\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-09-25 15:48+0200\n"
+"POT-Creation-Date: 2008-10-08 17:27+0200\n"
 "PO-Revision-Date: 2008-06-02 02:15+0800\n"
 "Last-Translator: Thruth Wang <lihaow@opera.com>\n"
 "Language-Team: Simplified Chinese\n"
@@ -26,7 +26,7 @@ msgstr ""
 "\n"
 "不可安装的提供者："
 
-#: ../zypp/media/MediaException.cc:214
+#: ../zypp/media/MediaException.cc:266
 #, c-format
 msgid " SSL certificate problem, verify that the CA cert is OK for '%s'."
 msgstr " SSL 认证问题，请确认'%s'的 CA 认证是队的。"
@@ -60,11 +60,6 @@ msgstr "%s 不能安装"
 msgid "%s obsoletes %s provided by %s"
 msgstr "%1$s 淘汰 %3$s 提供的 %2$s"
 
-#: ../zypp/target/rpm/RpmDb.cc:2216
-#, c-format
-msgid "%s remove failed"
-msgstr "%s 去除失败"
-
 #: ../zypp/solver/detail/SATResolver.cc:969
 #, c-format
 msgid "%s requires %s, but this requirement cannot be provided"
@@ -90,7 +85,7 @@ msgstr "阿乔利语"
 msgid "Adangme"
 msgstr "阿当梅语"
 
-#: ../zypp/RepoManager.cc:1181
+#: ../zypp/RepoManager.cc:1184
 #, c-format
 msgid "Adding repository '%s'"
 msgstr "正在添加安装源 '%s'"
@@ -98,10 +93,6 @@ msgstr "正在添加安装源 '%s'"
 #: ../zypp/VendorSupportOptions.cc:29
 msgid "Additional Customer Contract Necessary"
 msgstr ""
-
-#: ../zypp/target/rpm/RpmDb.cc:2092 ../zypp/target/rpm/RpmDb.cc:2230
-msgid "Additional rpm output:"
-msgstr "其他 rpm 输出："
 
 #. language code: ady
 #: ../zypp/LanguageCode.cc:248
@@ -316,7 +307,8 @@ msgstr "奥地利"
 msgid "Austronesian (Other)"
 msgstr "澳斯特罗尼西亚诸语言（其它）"
 
-#: ../zypp/media/MediaCurl.cc:1615
+#. !\todo add comma to the message for the next release
+#: ../zypp/media/MediaCurl.cc:1619
 #, c-format
 msgid "Authentication required for '%s'"
 msgstr "'%s' 需要身份验证"
@@ -580,7 +572,7 @@ msgstr "文莱达鲁萨兰国"
 msgid "Buginese"
 msgstr "布吉语"
 
-#: ../zypp/RepoManager.cc:976
+#: ../zypp/RepoManager.cc:977
 #, c-format
 msgid "Building repository '%s' cache"
 msgstr "正在构建 '%s' 安装源缓存"
@@ -638,23 +630,23 @@ msgstr "无法创建 sat-pool。"
 msgid "Can't acquire the mutex lock"
 msgstr "无法获取 mutex 锁定"
 
-#: ../zypp/ExternalProgram.cc:245
+#: ../zypp/ExternalProgram.cc:301
 #, c-format
 msgid "Can't chdir to '/' inside chroot (%s)."
 msgstr "chroot (%s) 不能切换目录到 '/'"
 
-#: ../zypp/ExternalProgram.cc:238
+#: ../zypp/ExternalProgram.cc:294
 #, c-format
 msgid "Can't chroot to '%s' (%s)."
 msgstr "不能 chroot 到 '%s' (%s)"
 
 #. don't want to get here
-#: ../zypp/ExternalProgram.cc:259
+#: ../zypp/ExternalProgram.cc:315
 #, c-format
 msgid "Can't exec '%s' (%s)."
 msgstr "不能执行 '%s' (%s)"
 
-#: ../zypp/ExternalProgram.cc:267
+#: ../zypp/ExternalProgram.cc:323
 #, c-format
 msgid "Can't fork (%s)."
 msgstr "不能够派生 (%s)。"
@@ -672,12 +664,12 @@ msgstr "无法初始化递归的 mutex"
 msgid "Can't open lock file: %s"
 msgstr "无法打开锁定文件：%s。"
 
-#: ../zypp/ExternalProgram.cc:174
+#: ../zypp/ExternalProgram.cc:230
 #, c-format
 msgid "Can't open pipe (%s)."
 msgstr "无法打开管道 (%s)。"
 
-#: ../zypp/ExternalProgram.cc:163
+#: ../zypp/ExternalProgram.cc:219
 #, c-format
 msgid "Can't open pty (%s)."
 msgstr "无法打开 pty (%s)."
@@ -705,14 +697,19 @@ msgstr "加拿大"
 msgid "Cannot create public key %s from %s keyring to file %s"
 msgstr "不能从密钥环 %2$s 创建密钥 %1$s 到文件 %3$s"
 
-#: ../zypp/media/MediaException.cc:182
+#: ../zypp/media/MediaException.cc:234
 msgid "Cannot eject any media"
 msgstr "不能弹出任何介质。"
 
-#: ../zypp/media/MediaException.cc:184
+#: ../zypp/media/MediaException.cc:236
 #, c-format
 msgid "Cannot eject media '%s'"
 msgstr "无法弹出介质'%s'"
+
+#: ../zypp/media/MediaException.cc:273
+#, c-format
+msgid "Cannot find available loop device to mount the image file from '%s'"
+msgstr ""
 
 #: ../zypp/media/MediaException.cc:67
 #, c-format
@@ -881,16 +878,16 @@ msgstr "科科斯（基林）群岛"
 msgid "Colombia"
 msgstr "哥伦比亚"
 
-#: ../zypp/ExternalProgram.cc:346
+#: ../zypp/ExternalProgram.cc:402
 #, c-format
 msgid "Command exited with status %d."
 msgstr "命令退出状态 %d。"
 
-#: ../zypp/ExternalProgram.cc:371
+#: ../zypp/ExternalProgram.cc:427
 msgid "Command exited with unknown error."
 msgstr "命令以未知错误退出。"
 
-#: ../zypp/ExternalProgram.cc:366
+#: ../zypp/ExternalProgram.cc:422
 #, c-format
 msgid "Command was killed by signal %d (%s)."
 msgstr "命令被信号 %d (%s) 杀死。"
@@ -1071,7 +1068,13 @@ msgstr "多米尼加"
 msgid "Dominican Republic"
 msgstr "多米尼加共和国"
 
-#: ../zypp/media/MediaException.cc:152
+#. TranslatorExplanation: curl is the name of a library, don't translate
+#: ../zypp/media/MediaException.cc:92 ../zypp/media/MediaException.cc:100
+#, fuzzy, c-format
+msgid "Download (Metalink curl) initialization failed for '%s'"
+msgstr "下载(curl) '%s' 时初始化失败。"
+
+#: ../zypp/media/MediaException.cc:168
 #, c-format
 msgid ""
 "Download (curl) error for '%s':\n"
@@ -1087,6 +1090,17 @@ msgstr ""
 #, c-format
 msgid "Download (curl) initialization failed for '%s'"
 msgstr "下载(curl) '%s' 时初始化失败。"
+
+#: ../zypp/media/MediaException.cc:186 ../zypp/media/MediaException.cc:204
+#, fuzzy, c-format
+msgid ""
+"Download (metalink curl) error for '%s':\n"
+"Error code: %s\n"
+"Error message: %s\n"
+msgstr ""
+"对于'%s'的下载(curl)错误：\n"
+"错误代码：%s\n"
+"错误信息：%s\n"
 
 #. language code: dra
 #: ../zypp/LanguageCode.cc:470
@@ -1164,15 +1178,15 @@ msgstr "萨尔瓦多"
 msgid "Elamite"
 msgstr "艾拉米特语"
 
-#: ../zypp/media/MediaException.cc:135
+#: ../zypp/media/MediaException.cc:151
 msgid "Empty destination in URI"
 msgstr "URL 目标为空"
 
-#: ../zypp/media/MediaException.cc:130
+#: ../zypp/media/MediaException.cc:146
 msgid "Empty filesystem in URI"
 msgstr "URI 文件系统为空"
 
-#: ../zypp/media/MediaException.cc:125
+#: ../zypp/media/MediaException.cc:141
 msgid "Empty host name in URI"
 msgstr "URI 中的主机名为空"
 
@@ -1206,9 +1220,15 @@ msgid "Eritrea"
 msgstr "厄立特里亚"
 
 #. TranslatorExplanation: curl is the name of a library, don't translate
-#: ../zypp/media/MediaException.cc:161
+#: ../zypp/media/MediaException.cc:177
 #, c-format
 msgid "Error occurred while setting download (curl) options for '%s':"
+msgstr "为'%s'设置下载(curl)选项时出错："
+
+#. TranslatorExplanation: curl is the name of a library, don't translate
+#: ../zypp/media/MediaException.cc:195 ../zypp/media/MediaException.cc:213
+#, fuzzy, c-format
+msgid "Error occurred while setting download (metalink curl) options for '%s':"
 msgstr "为'%s'设置下载(curl)选项时出错："
 
 #. language code: myv
@@ -1923,10 +1943,6 @@ msgstr "无效的端口组件'%s'"
 msgid "Invalid regular expression '%s': regcomp returned %d"
 msgstr "无效的正则表达式'%s'：regcomp 返回 %d"
 
-#: ../zypp/media/MediaCurl.cc:1612
-msgid "Invalid user name or password."
-msgstr "无效用户名或密码。"
-
 #. :IRQ:368:
 #: ../zypp/CountryCode.cc:329
 msgid "Iran"
@@ -2459,7 +2475,7 @@ msgstr "马来群岛"
 msgid "Maldives"
 msgstr "马尔代夫"
 
-#: ../zypp/media/MediaException.cc:115
+#: ../zypp/media/MediaException.cc:131
 msgid "Malformed URI"
 msgstr "错误的 URI"
 
@@ -2568,12 +2584,12 @@ msgstr "玛雅诸语言"
 msgid "Mayotte"
 msgstr "马约特岛"
 
-#: ../zypp/media/MediaException.cc:169
+#: ../zypp/media/MediaException.cc:221
 #, c-format
 msgid "Media source '%s' does not contain the desired medium"
 msgstr "媒体源'%s'不包含需要的介质"
 
-#: ../zypp/media/MediaException.cc:175
+#: ../zypp/media/MediaException.cc:227
 #, c-format
 msgid "Medium '%s' is in use by another instance"
 msgstr "介质'%s'被另外一个实例使用着"
@@ -2937,7 +2953,7 @@ msgstr "阿曼"
 msgid "One or both of '%s' or '%s' attributes is required."
 msgstr ""
 
-#: ../zypp/media/MediaException.cc:145
+#: ../zypp/media/MediaException.cc:161
 msgid "Operation not supported by medium"
 msgstr "介质不支持此操作"
 
@@ -2967,9 +2983,9 @@ msgid "Otomian Languages"
 msgstr "奥托米诸语言"
 
 #. TranslatorExplanation %s = package being checked for integrity
-#: ../zypp/repo/PackageProvider.cc:243
-#, c-format
-msgid "Package %s fails integrity check. Do you want to retry?"
+#: ../zypp/repo/PackageProvider.cc:247
+#, fuzzy, c-format
+msgid "Package %s seems to be corrupted during transfer. Do you want to retry retrieval?"
 msgstr "%s 包未能通过完整性检查。是否要重试下载它？"
 
 #. language code: pal
@@ -3042,17 +3058,17 @@ msgstr "巴布亚诸语言（其它）"
 msgid "Paraguay"
 msgstr "巴拉圭"
 
-#: ../zypp/media/MediaException.cc:106
+#: ../zypp/media/MediaException.cc:122
 #, c-format
 msgid "Path '%s' on medium '%s' is not a directory."
 msgstr "路径'%s'在介质'%s'上不是一个目录。"
 
-#: ../zypp/media/MediaException.cc:98
+#: ../zypp/media/MediaException.cc:114
 #, c-format
 msgid "Path '%s' on medium '%s' is not a file."
 msgstr "路径'%s'在介质'%s'上不是一个文件。"
 
-#: ../zypp/media/MediaException.cc:200
+#: ../zypp/media/MediaException.cc:252
 #, c-format
 msgid "Permission to access '%s' denied."
 msgstr "访问'%s'的权限被拒绝。"
@@ -3164,8 +3180,9 @@ msgid "Query string parsing not supported for this URL"
 msgstr "不支持对此 URL 的查询字符串进行语法分析"
 
 #. TranslatorExplanation after semicolon is error message
-#: ../zypp/target/rpm/RpmDb.cc:892 ../zypp/target/rpm/RpmDb.cc:2080
-#: ../zypp/target/rpm/RpmDb.cc:2221
+#. TranslatorExplanation the colon is followed by an error message
+#: ../zypp/target/rpm/RpmDb.cc:892 ../zypp/target/rpm/RpmDb.cc:2081
+#: ../zypp/target/rpm/RpmDb.cc:2217
 msgid "RPM failed: "
 msgstr "RPM 失败："
 
@@ -3193,7 +3210,7 @@ msgstr "拉罗汤加语"
 msgid "Relative path not allowed if authority exists"
 msgstr "如果存在认证，则不允许相对路径"
 
-#: ../zypp/RepoManager.cc:1311
+#: ../zypp/RepoManager.cc:1314
 #, c-format
 msgid "Removing repository '%s'"
 msgstr "正在移除安装源 '%s'"
@@ -3653,7 +3670,7 @@ msgstr "叙利亚共和国"
 msgid "Syriac"
 msgstr "古叙利亚语"
 
-#: ../zypp/media/MediaException.cc:91
+#: ../zypp/media/MediaException.cc:107
 #, c-format
 msgid "System exception '%s' on medium '%s'."
 msgstr "系统例外 '%s'  于介质 '%s'。"
@@ -3773,7 +3790,7 @@ msgstr "提格雷语"
 msgid "Tigrinya"
 msgstr "提格里尼亚语"
 
-#: ../zypp/media/MediaException.cc:207
+#: ../zypp/media/MediaException.cc:259
 #, c-format
 msgid "Timeout exceed when access '%s'."
 msgstr "访问'%s'超时。"
@@ -4008,7 +4025,7 @@ msgstr ""
 msgid "Unsupported HTTP authentication method '%s'"
 msgstr "不支持 HTTP 认证方法 '%s'"
 
-#: ../zypp/media/MediaException.cc:140
+#: ../zypp/media/MediaException.cc:156
 #, c-format
 msgid "Unsupported URI scheme in '%s'."
 msgstr "不支持'%s'中的 URI 方案。"
@@ -4257,11 +4274,11 @@ msgstr "祖鲁语"
 msgid "Zuni"
 msgstr "祖尼语"
 
-#: ../zypp/repo/PackageProvider.cc:194
+#: ../zypp/repo/PackageProvider.cc:195
 msgid "applydeltarpm check failed."
 msgstr "Applydeltarpm 检查已失败。"
 
-#: ../zypp/repo/PackageProvider.cc:208
+#: ../zypp/repo/PackageProvider.cc:212
 msgid "applydeltarpm failed."
 msgstr "Applydeltarpm 已失败。"
 
@@ -4279,7 +4296,7 @@ msgstr "无法安装 %s 和 %s"
 msgid "conflicting requests"
 msgstr "冲突的请求"
 
-#: ../zypp/target/rpm/RpmDb.cc:2374
+#: ../zypp/target/rpm/RpmDb.cc:2369
 #, c-format
 msgid "created backup %s"
 msgstr "已创建备份 %s"
@@ -4400,10 +4417,6 @@ msgstr ""
 "rpm 已将 %s 创建为 %s。\n"
 "以下是前 25 行差异：\n"
 
-#: ../zypp/target/rpm/RpmDb.cc:2077 ../zypp/target/rpm/RpmDb.cc:2218
-msgid "rpm output:"
-msgstr "rpm 输出："
-
 #. %s = filenames
 #: ../zypp/target/rpm/RpmDb.cc:2062
 #, c-format
@@ -4438,6 +4451,18 @@ msgstr "未知"
 msgid "unsupported"
 msgstr "- 不支持"
 
+#~ msgid "%s remove failed"
+#~ msgstr "%s 去除失败"
+
+#~ msgid "Additional rpm output:"
+#~ msgstr "其他 rpm 输出："
+
+#~ msgid "Invalid user name or password."
+#~ msgstr "无效用户名或密码。"
+
+#~ msgid "rpm output:"
+#~ msgstr "rpm 输出："
+
 #~ msgid "%s install failed"
 #~ msgstr "%s 安装失败"
 
@@ -4446,21 +4471,3 @@ msgstr "- 不支持"
 
 #~ msgid "%s remove ok"
 #~ msgstr "%s 去除成功"
-
-#, fuzzy
-#~ msgid "Download (Metalink curl) initialization failed for '%s'"
-#~ msgstr "下载(curl) '%s' 时初始化失败。"
-
-#, fuzzy
-#~ msgid ""
-#~ "Download (metalink curl) error for '%s':\n"
-#~ "Error code: %s\n"
-#~ "Error message: %s\n"
-#~ msgstr ""
-#~ "对于'%s'的下载(curl)错误：\n"
-#~ "错误代码：%s\n"
-#~ "错误信息：%s\n"
-
-#, fuzzy
-#~ msgid "Error occurred while setting download (metalink curl) options for '%s':"
-#~ msgstr "为'%s'设置下载(curl)选项时出错："

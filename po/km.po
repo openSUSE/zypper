@@ -9,8 +9,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: zypp.km\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-09-25 15:48+0200\n"
-"PO-Revision-Date: 2008-09-25 15:22+0700\n"
+"POT-Creation-Date: 2008-10-08 17:27+0200\n"
+"PO-Revision-Date: 2008-10-23 11:40+0700\n"
 "Last-Translator: Khoem Sokhem <khoemsokhem@khmeros.info>\n"
 "Language-Team: Khmer <support@khmeros.info>\n"
 "MIME-Version: 1.0\n"
@@ -27,7 +27,7 @@ msgstr ""
 "\n"
 "លុបក្រុមហ៊ុនផ្ដល់ ៖ "
 
-#: ../zypp/media/MediaException.cc:214
+#: ../zypp/media/MediaException.cc:266
 #, c-format
 msgid " SSL certificate problem, verify that the CA cert is OK for '%s'."
 msgstr " បញ្ហា​វិញ្ញាបនបត្រ SSL ផ្ទៀងផ្ទាត់​ថា​វិញ្ញាបនបត្រ CA គឺ​ត្រឹមត្រូវ​សម្រាប់ '%s'."
@@ -59,11 +59,6 @@ msgstr "%s មិនអាច​ដំឡើងបាន"
 msgid "%s obsoletes %s provided by %s"
 msgstr "%s លែងប្រើ %s ដែល​ផ្ដល់ដោយ %s"
 
-#: ../zypp/target/rpm/RpmDb.cc:2216
-#, c-format
-msgid "%s remove failed"
-msgstr "បរាជ័យ​ក្នុងការ​យក %s ចេញ"
-
 #: ../zypp/solver/detail/SATResolver.cc:969
 #, c-format
 msgid "%s requires %s, but this requirement cannot be provided"
@@ -89,7 +84,7 @@ msgstr "អាកូលី"
 msgid "Adangme"
 msgstr "អាដង់ម៉េ"
 
-#: ../zypp/RepoManager.cc:1181
+#: ../zypp/RepoManager.cc:1184
 #, c-format
 msgid "Adding repository '%s'"
 msgstr "កំពុង​បន្ថែម​ឃ្លាំង '%s'"
@@ -97,10 +92,6 @@ msgstr "កំពុង​បន្ថែម​ឃ្លាំង '%s'"
 #: ../zypp/VendorSupportOptions.cc:29
 msgid "Additional Customer Contract Necessary"
 msgstr "ចាំបាច់​កិច្ចសន្យា​អតិថិជន​បន្ថែម"
-
-#: ../zypp/target/rpm/RpmDb.cc:2092 ../zypp/target/rpm/RpmDb.cc:2230
-msgid "Additional rpm output:"
-msgstr "លទ្ធផល rpm បន្ថែមទៀត ៖"
 
 #. language code: ady
 #: ../zypp/LanguageCode.cc:248
@@ -315,7 +306,8 @@ msgstr "អូទ្រីស"
 msgid "Austronesian (Other)"
 msgstr "អូស្ត្រូណេស៊ី (ផ្សេង​ទៀត)"
 
-#: ../zypp/media/MediaCurl.cc:1615
+#. !\todo add comma to the message for the next release
+#: ../zypp/media/MediaCurl.cc:1619
 #, c-format
 msgid "Authentication required for '%s'"
 msgstr "បាន​ទាមទារ​ការ​ផ្ទៀងផ្ទាត់​ភាព​ត្រឹមត្រូវ​សម្រាប់ '%s'"
@@ -579,7 +571,7 @@ msgstr "ប៊្រុយណេ ដារូសាឡាម"
 msgid "Buginese"
 msgstr "ប៊ុយហ្គីណេសេ"
 
-#: ../zypp/RepoManager.cc:976
+#: ../zypp/RepoManager.cc:977
 #, c-format
 msgid "Building repository '%s' cache"
 msgstr "កំពុង​ស្ថាបនា​ឃ្លាំង '%s'"
@@ -637,23 +629,23 @@ msgstr "មិនអាច​បង្កើត sat-pool បានទេ ។"
 msgid "Can't acquire the mutex lock"
 msgstr "មិនអាច​យក​សោ mutex បានឡើយ"
 
-#: ../zypp/ExternalProgram.cc:245
+#: ../zypp/ExternalProgram.cc:301
 #, c-format
 msgid "Can't chdir to '/' inside chroot (%s)."
 msgstr "មិនអាច chdir ទៅ '/' ក្នុង chroot (%s) បានទេ ។"
 
-#: ../zypp/ExternalProgram.cc:238
+#: ../zypp/ExternalProgram.cc:294
 #, c-format
 msgid "Can't chroot to '%s' (%s)."
 msgstr "មិនអាច chroot ទៅ '%s' (%s) បានទេ ។"
 
 #. don't want to get here
-#: ../zypp/ExternalProgram.cc:259
+#: ../zypp/ExternalProgram.cc:315
 #, c-format
 msgid "Can't exec '%s' (%s)."
 msgstr "មិនអាច​ប្រតិបត្តិ '%s' (%s) បានទេ ។"
 
-#: ../zypp/ExternalProgram.cc:267
+#: ../zypp/ExternalProgram.cc:323
 #, c-format
 msgid "Can't fork (%s)."
 msgstr "មិនអាច​បែងចែក (%s) បានទេ ។"
@@ -671,12 +663,12 @@ msgstr "មិនអាច​ចាប់ផ្ដើម mutex ហៅខ្ល�
 msgid "Can't open lock file: %s"
 msgstr "មិនអាច​បើក​ឯកសារ​សោ ៖ %s"
 
-#: ../zypp/ExternalProgram.cc:174
+#: ../zypp/ExternalProgram.cc:230
 #, c-format
 msgid "Can't open pipe (%s)."
 msgstr "មិនអាច​បើក​បំពង់ (%s) ។"
 
-#: ../zypp/ExternalProgram.cc:163
+#: ../zypp/ExternalProgram.cc:219
 #, c-format
 msgid "Can't open pty (%s)."
 msgstr "មិនអាច​បើក pty (%s) ។"
@@ -704,14 +696,19 @@ msgstr "កាណាដា"
 msgid "Cannot create public key %s from %s keyring to file %s"
 msgstr "មិនអាច​បង្កើត​សោ​សាធារណៈ %s ពី keyring %s ទៅ​ឯកសារ %s បានទេ"
 
-#: ../zypp/media/MediaException.cc:182
+#: ../zypp/media/MediaException.cc:234
 msgid "Cannot eject any media"
 msgstr "មិនអាច​ច្រាន​ឧបករណ៍​ផ្ទុក​ណាមួយ​ចេញ​ឡើយ"
 
-#: ../zypp/media/MediaException.cc:184
+#: ../zypp/media/MediaException.cc:236
 #, c-format
 msgid "Cannot eject media '%s'"
 msgstr "មិនអាច​ច្រាន​ឧបករណ៍​ផ្ទុក '%s' ចេញបានទេ"
+
+#: ../zypp/media/MediaException.cc:273
+#, c-format
+msgid "Cannot find available loop device to mount the image file from '%s'"
+msgstr "មិន​អាច​រក​ឧបករណ៍​ដែល​មាន​ដើម្បីម៉ោន​ឯកសារ​រូបភាព​ពី '%s'"
 
 #: ../zypp/media/MediaException.cc:67
 #, c-format
@@ -880,16 +877,16 @@ msgstr "កោះ Cocos (Keeling)"
 msgid "Colombia"
 msgstr "កូឡុំប៊ី"
 
-#: ../zypp/ExternalProgram.cc:346
+#: ../zypp/ExternalProgram.cc:402
 #, c-format
 msgid "Command exited with status %d."
 msgstr "ពាក្យ​បញ្ជា​បាន​ចេញ​ដោយ​ស្ថានភាព %d ។"
 
-#: ../zypp/ExternalProgram.cc:371
+#: ../zypp/ExternalProgram.cc:427
 msgid "Command exited with unknown error."
 msgstr "ពាក្យ​បញ្ជា​បាន​ចេញ ដោយ​មាន​កំហុស​មិន​ស្គាល់ ។"
 
-#: ../zypp/ExternalProgram.cc:366
+#: ../zypp/ExternalProgram.cc:422
 #, c-format
 msgid "Command was killed by signal %d (%s)."
 msgstr "ពាក្យ​បញ្ជា​ត្រូវ​បាន​ផ្ដាច់​ដោយ​សញ្ញា %d (%s) ។"
@@ -1070,7 +1067,13 @@ msgstr "ដូមីនីកា"
 msgid "Dominican Republic"
 msgstr "សាធារណរដ្ឋ​ដូមីនីកែន"
 
-#: ../zypp/media/MediaException.cc:152
+#. TranslatorExplanation: curl is the name of a library, don't translate
+#: ../zypp/media/MediaException.cc:92 ../zypp/media/MediaException.cc:100
+#, c-format
+msgid "Download (Metalink curl) initialization failed for '%s'"
+msgstr "បានបរាជ័យ​ក្នុងកា​រចាប់ផ្ដើម (Metalink curl) សម្រាប់ '%s'"
+
+#: ../zypp/media/MediaException.cc:168
 #, c-format
 msgid ""
 "Download (curl) error for '%s':\n"
@@ -1086,6 +1089,17 @@ msgstr ""
 #, c-format
 msgid "Download (curl) initialization failed for '%s'"
 msgstr "ទាញយក​ការ​ចាប់ផ្ដើម​បាន​បរាជ័យ​សម្រាប់ '%s'"
+
+#: ../zypp/media/MediaException.cc:186 ../zypp/media/MediaException.cc:204
+#, c-format
+msgid ""
+"Download (metalink curl) error for '%s':\n"
+"Error code: %s\n"
+"Error message: %s\n"
+msgstr ""
+"កំហុស​ក្នុងការ​ទាញយក (metalink curl) សម្រាប់ '%s' ៖\n"
+"កូដ​កំហុស ៖ %s\n"
+"សារ​កំហុស ៖ %s\n"
 
 #. language code: dra
 #: ../zypp/LanguageCode.cc:470
@@ -1163,15 +1177,15 @@ msgstr "អែលសាល់វ៉ាឌ័រ"
 msgid "Elamite"
 msgstr "អេឡាម៊ិតេ"
 
-#: ../zypp/media/MediaException.cc:135
+#: ../zypp/media/MediaException.cc:151
 msgid "Empty destination in URI"
 msgstr "គោលដៅ​ទទេ​នៅ​ក្នុង URI"
 
-#: ../zypp/media/MediaException.cc:130
+#: ../zypp/media/MediaException.cc:146
 msgid "Empty filesystem in URI"
 msgstr "ប្រព័ន្ធ​ឯកសា​ទទេ​នៅ​ក្នុង URI"
 
-#: ../zypp/media/MediaException.cc:125
+#: ../zypp/media/MediaException.cc:141
 msgid "Empty host name in URI"
 msgstr "ឈ្មោះ​ម៉ាស៊ីន​ទទេ​ក្នុង URI"
 
@@ -1205,10 +1219,16 @@ msgid "Eritrea"
 msgstr "អេរីទ្រា"
 
 #. TranslatorExplanation: curl is the name of a library, don't translate
-#: ../zypp/media/MediaException.cc:161
+#: ../zypp/media/MediaException.cc:177
 #, c-format
 msgid "Error occurred while setting download (curl) options for '%s':"
 msgstr "កំហុស​នៅពេល​កំណត់​ជម្រើស​ទាញយក​សម្រាប់ '%s' ៖"
+
+#. TranslatorExplanation: curl is the name of a library, don't translate
+#: ../zypp/media/MediaException.cc:195 ../zypp/media/MediaException.cc:213
+#, c-format
+msgid "Error occurred while setting download (metalink curl) options for '%s':"
+msgstr "កំហុស​បានកើតឡើង​ខណៈពេល​កំណត់​​ជម្រើស​ទាញយក (metalink curl) សម្រាប់ '%s' ៖"
 
 #. language code: myv
 #: ../zypp/LanguageCode.cc:850
@@ -1923,10 +1943,6 @@ msgstr "សមាសភាគ​ច្រក​មិន​ត្រឹមត្
 msgid "Invalid regular expression '%s': regcomp returned %d"
 msgstr "កន្សោម​ធម្មតា​មិនត្រឹមត្រូវ '%s' ៖ regcomp បាន​ត្រឡប់ %d"
 
-#: ../zypp/media/MediaCurl.cc:1612
-msgid "Invalid user name or password."
-msgstr "ឈ្មោះ​អ្នកប្រើ ឬ​ពាក្យ​សម្ងាត់ មិន​ត្រឹមត្រូវ ។"
-
 #. :IRQ:368:
 #: ../zypp/CountryCode.cc:329
 msgid "Iran"
@@ -2459,7 +2475,7 @@ msgstr "ម៉ាឡេស៊ី"
 msgid "Maldives"
 msgstr "ម៉ាល់ឌីវ"
 
-#: ../zypp/media/MediaException.cc:115
+#: ../zypp/media/MediaException.cc:131
 msgid "Malformed URI"
 msgstr "URI មាន​ទ្រង់ទ្រាយ​មិនត្រឹមត្រូវ"
 
@@ -2568,12 +2584,12 @@ msgstr "ភាសា​ម៉ាអ៊ីយ៉ាន"
 msgid "Mayotte"
 msgstr "ម៉ាយុត"
 
-#: ../zypp/media/MediaException.cc:169
+#: ../zypp/media/MediaException.cc:221
 #, c-format
 msgid "Media source '%s' does not contain the desired medium"
 msgstr "ប្រភព​ឧបករណ៍​ផ្ទុក '%s' មិនមាន​ឧបករណ៍​ផ្ទុក​ដែល​ត្រូវការ​ទេ"
 
-#: ../zypp/media/MediaException.cc:175
+#: ../zypp/media/MediaException.cc:227
 #, c-format
 msgid "Medium '%s' is in use by another instance"
 msgstr "ឧបករណ៍​ផ្ទុក '%s' គឺ​កំពុង​ប្រើ​ដោយ​ឧបករណ៍​ផ្សេង"
@@ -2937,7 +2953,7 @@ msgstr "អូម៉ង់"
 msgid "One or both of '%s' or '%s' attributes is required."
 msgstr "បាន​ទាមទារ​គុណលក្ខណៈ​មួយ ឬ​ពីរ​របស់ '%s' ឬ '%s' ។"
 
-#: ../zypp/media/MediaException.cc:145
+#: ../zypp/media/MediaException.cc:161
 msgid "Operation not supported by medium"
 msgstr "ប្រតិបត្តិការ​មិនបាន​គាំទ្រ​ដោយ​ឧបករណ៍​ផ្ទុក​ទេ"
 
@@ -2967,10 +2983,10 @@ msgid "Otomian Languages"
 msgstr "ភាសា​អូតូមីយ៉ាន"
 
 #. TranslatorExplanation %s = package being checked for integrity
-#: ../zypp/repo/PackageProvider.cc:243
+#: ../zypp/repo/PackageProvider.cc:247
 #, c-format
-msgid "Package %s fails integrity check. Do you want to retry?"
-msgstr "កញ្ចប់ %s បរាជ័យ​ក្នុង​ការ​ពិនិត្យ​ភាព​ត្រឹមត្រូវ ។ តើអ្នក​ចង់​ព្យាយាម​ម្ដងទៀត​ឬទេ ?"
+msgid "Package %s seems to be corrupted during transfer. Do you want to retry retrieval?"
+msgstr "កញ្ចប់ %s ហាក់​បីជា​​ខូច​ក្នុងការ​ផ្ទេរ ។ តើ​អ្នកចង់​ព្យាយាម​ម្ដង​ទៀត​ទេ ?"
 
 #. language code: pal
 #: ../zypp/LanguageCode.cc:926
@@ -3042,17 +3058,17 @@ msgstr "ប៉ាពុយអាន (ផ្សេង​ទៀត)"
 msgid "Paraguay"
 msgstr "ប៉ារ៉ាហ្គាយ"
 
-#: ../zypp/media/MediaException.cc:106
+#: ../zypp/media/MediaException.cc:122
 #, c-format
 msgid "Path '%s' on medium '%s' is not a directory."
 msgstr "ផ្លូវ '%s' នៅលើ​ឧបករណ៍​ផ្ទុក '%s' មិនមែន​ជា​ថត​ទេ ។"
 
-#: ../zypp/media/MediaException.cc:98
+#: ../zypp/media/MediaException.cc:114
 #, c-format
 msgid "Path '%s' on medium '%s' is not a file."
 msgstr "ផ្លូវ '%s' នៅលើ​ឧបករណ៍​ផ្ទុក '%s' មិនមែន​ជា​ឯកសារ​ទេ ។"
 
-#: ../zypp/media/MediaException.cc:200
+#: ../zypp/media/MediaException.cc:252
 #, c-format
 msgid "Permission to access '%s' denied."
 msgstr "សិទ្ធិ​ចូល​ដំណើរការ​ទៅ '%s' បាន​បដិសេធ ។"
@@ -3164,8 +3180,9 @@ msgid "Query string parsing not supported for this URL"
 msgstr "មិនបាន​គាំទ្រ​ការញែក​ខ្សែអក្សរ​សំណួរ​សម្រាប់ URL នេះ​ឡើយ"
 
 #. TranslatorExplanation after semicolon is error message
-#: ../zypp/target/rpm/RpmDb.cc:892 ../zypp/target/rpm/RpmDb.cc:2080
-#: ../zypp/target/rpm/RpmDb.cc:2221
+#. TranslatorExplanation the colon is followed by an error message
+#: ../zypp/target/rpm/RpmDb.cc:892 ../zypp/target/rpm/RpmDb.cc:2081
+#: ../zypp/target/rpm/RpmDb.cc:2217
 msgid "RPM failed: "
 msgstr "RPM បាន​បរាជ័យ ៖ "
 
@@ -3193,7 +3210,7 @@ msgstr "រ៉ារ៉ូតុងហ្គង់"
 msgid "Relative path not allowed if authority exists"
 msgstr "មិនបាន​អនុញ្ញាត​ផ្លូវ​ដែល​ទាក់ទង​ទេ ប្រសិន​បើ​មាន​អាជ្ញាធរ"
 
-#: ../zypp/RepoManager.cc:1311
+#: ../zypp/RepoManager.cc:1314
 #, c-format
 msgid "Removing repository '%s'"
 msgstr "យក​ឃ្លាំង '%s' ចេញ"
@@ -3653,7 +3670,7 @@ msgstr "ស៊ីរី"
 msgid "Syriac"
 msgstr "ស៊ីរី"
 
-#: ../zypp/media/MediaException.cc:91
+#: ../zypp/media/MediaException.cc:107
 #, c-format
 msgid "System exception '%s' on medium '%s'."
 msgstr "ករណី​លើកលែង​ប្រព័ន្ធ '%s' នៅលើ​ឧបករណ៍​ផ្ទុក '%s' ។"
@@ -3774,7 +3791,7 @@ msgstr "ធីហ្គ្រី"
 msgid "Tigrinya"
 msgstr "ទី​គ្រីនយ៉ា"
 
-#: ../zypp/media/MediaException.cc:207
+#: ../zypp/media/MediaException.cc:259
 #, c-format
 msgid "Timeout exceed when access '%s'."
 msgstr "អស់ពេល នៅពេល​ចូល​ដំណើរការ '%s' ។"
@@ -4010,7 +4027,7 @@ msgstr "មិន​ស្គាល់​ជម្រើស​គាំទ្រ
 msgid "Unsupported HTTP authentication method '%s'"
 msgstr "មិនបាន​គាំទ្រ​វិធីសាស្ត្រ​ផ្ទៀងផ្ទាត់​ភាពត្រឹមត្រូវ HTTP '%s' ឡើយ"
 
-#: ../zypp/media/MediaException.cc:140
+#: ../zypp/media/MediaException.cc:156
 #, c-format
 msgid "Unsupported URI scheme in '%s'."
 msgstr "គ្រោងការណ៍ URI ដែល​មិនបាន​គាំទ្រ​នៅ​ក្នុង '%s' ។"
@@ -4259,11 +4276,11 @@ msgstr "ហ្ស៊ូលូ"
 msgid "Zuni"
 msgstr "ហ្ស៊ូនី"
 
-#: ../zypp/repo/PackageProvider.cc:194
+#: ../zypp/repo/PackageProvider.cc:195
 msgid "applydeltarpm check failed."
 msgstr "ការ​ពិនិត្យ applydeltarpm បាន​បរាជ័យ ។"
 
-#: ../zypp/repo/PackageProvider.cc:208
+#: ../zypp/repo/PackageProvider.cc:212
 msgid "applydeltarpm failed."
 msgstr "applydeltarpm បាន​បរាជ័យ ។"
 
@@ -4281,7 +4298,7 @@ msgstr "មិនអាច​ដំឡើង​ទាំង %s និង %s"
 msgid "conflicting requests"
 msgstr "សំណើ​ការ​ប៉ះទង្គិច"
 
-#: ../zypp/target/rpm/RpmDb.cc:2374
+#: ../zypp/target/rpm/RpmDb.cc:2369
 #, c-format
 msgid "created backup %s"
 msgstr "បាន​បង្កើត​ព័ត៌មាន​បម្រុង %s"
@@ -4403,10 +4420,6 @@ msgstr ""
 "rpm បាន​កំណត់ %s ជា %s ។\n"
 "នេះ​ជា​បន្ទាត់ ២៥ ជួរ​ដំបូង​ខុសគ្នា ៖​\n"
 
-#: ../zypp/target/rpm/RpmDb.cc:2077 ../zypp/target/rpm/RpmDb.cc:2218
-msgid "rpm output:"
-msgstr "លទ្ធផល rpm ៖"
-
 #. %s = filenames
 #: ../zypp/target/rpm/RpmDb.cc:2062
 #, c-format
@@ -4439,11 +4452,3 @@ msgstr "មិន​ស្គាល់"
 msgid "unsupported"
 msgstr "មិន​បានគាំទ្រ"
 
-#~ msgid "%s install failed"
-#~ msgstr "ការ​ដំឡើង %s បាន​បរាជ័យ"
-
-#~ msgid "%s installed ok"
-#~ msgstr "បាន​ដំឡើង %s ដោយ​ជោគជ័យ"
-
-#~ msgid "%s remove ok"
-#~ msgstr "បាន​យក %s ចេញ​ដោយ​ជោគជ័យ"
