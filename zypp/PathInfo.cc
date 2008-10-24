@@ -18,9 +18,6 @@
 #include <fstream>
 #include <iomanip>
 
-#include <boost/filesystem/operations.hpp>
-#include <boost/filesystem/exception.hpp>
-
 #include "zypp/base/Logger.h"
 #include "zypp/base/String.h"
 #include "zypp/base/IOStream.h"
@@ -598,13 +595,13 @@ namespace zypp
     //	METHOD NAME : readdir
     //	METHOD TYPE : int
     //
-    
+
     bool DirEntry::operator==( const DirEntry &rhs ) const
     {
       // if one of the types is not known, use the name only
       if ( type == FT_NOT_AVAIL || rhs.type == FT_NOT_AVAIL )
         return ( name == rhs.name );
-      return ((name == rhs.name ) && (type == rhs.type)); 
+      return ((name == rhs.name ) && (type == rhs.type));
     }
 
     int readdir( DirContent & retlist, const Pathname & path,
