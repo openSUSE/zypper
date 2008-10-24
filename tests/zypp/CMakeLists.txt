@@ -26,6 +26,7 @@ ADD_TESTS(
   RepoManager
   RepoStatus
   ResKind
+  ResStatus
   Target
   Url
   Vendor
