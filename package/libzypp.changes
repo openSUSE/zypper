@@ -2,6 +2,7 @@
 Fri Oct 24 10:29:19 CEST 2008 - schubi@suse.de
 
 - Taking "unlock" instead of setTransact(false) in the solutions (bnc #436923)
+- revision 11468
 
 -------------------------------------------------------------------
 Wed Oct 22 14:33:10 CEST 2008 - ma@suse.de
