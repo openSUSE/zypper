@@ -420,7 +420,27 @@ void install_remove(Zypper & zypper,
 {
   if (args.empty())
     return;
-  
+
+  if (kind == ResKind::patch && !install_not_remove)
+  {
+    zypper.out().error(
+        _("Cannot uninstall patches."),
+        _("Installed status of a patch is determined solely based on its dependencies.\n"
+          "Patches are not installed in sense of copied files, database records,\n"
+          "or similar."));
+    zypper.setExitCode(ZYPPER_EXIT_ERR_INVALID_ARGS);
+    throw ExitRequestException("not implemented");
+  }
+
+  if (kind == ResKind::pattern && !install_not_remove)
+  {
+    //! \todo define and implement pattern removal (bnc #407040)
+    zypper.out().error(
+        _("Uninstallation of a pattern is currently not defined and implemented."));
+    zypper.setExitCode(ZYPPER_EXIT_ERR_INVALID_ARGS);
+    throw ExitRequestException("not implemented");
+  }
+
   bool force_by_capability = zypper.cOpts().count("capability");
   bool force_by_name = zypper.cOpts().count("name");
   bool force = zypper.cOpts().count("force");
@@ -431,7 +451,7 @@ void install_remove(Zypper & zypper,
   {
     zypper.out().error(boost::str(
       format(_("%s contradicts %s")) % "--capability" % (force? "--force" : "--name")));
-    
+
     zypper.setExitCode(ZYPPER_EXIT_ERR_INVALID_ARGS);
     ZYPP_THROW(ExitRequestException());
   }
@@ -498,7 +518,7 @@ void install_remove(Zypper & zypper,
       zypper.setExitCode(ZYPPER_EXIT_ERR_INVALID_ARGS);
       ZYPP_THROW(ExitRequestException());
     }
-    
+
 
     // is version specified?
     by_capability = str.find_first_of("=<>") != string::npos;
@@ -579,7 +599,7 @@ void install_remove(Zypper & zypper,
 
     // is the provider already installed?
     bool installed = false;
-    string provider; 
+    string provider;
     for_(solvit, q.poolItemBegin(), q.poolItemEnd())
     {
       if (traits::isPseudoInstalled(solvit->resolvable()->kind()))
@@ -588,7 +608,7 @@ void install_remove(Zypper & zypper,
         installed = solvit->status().isInstalled();
       if (installed)
       {
-        provider = solvit->resolvable()->name(); 
+        provider = solvit->resolvable()->name();
         break;
       }
     }

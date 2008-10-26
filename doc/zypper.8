@@ -138,7 +138,10 @@ to experiment with it.
 
 .TP
 .B info (if) <name> ...
-Displays full info for the specified packages.
+Displays detailed informaion about the specified packages.
+
+For each specified package, zypper finds the best available version in defined
+repositories and shows information for this package.
 
 .TP
 .I \-r, \-\-repo <alias|#|URI>
@@ -291,7 +294,15 @@ Create solver test case for debugging. See the install command for details.
 Remove (uninstall) packages.
 
 The packages can be selected by their name or by a capability they provide.
-For details see the install command
+For details on package selection see the install command description.
+
+Since \fBpatches\fR are not installed in sense of copying files or recording
+a database entry, they cannot be uninstalled, even though zypper shows
+them as installed. The installed status is determined solely based on
+the installed status of its required dependencies. If these dependencies
+are satisified, the patch is rendered installed.
+
+Uninstallation of \fBpatterns\fR is currently not implemented.
 
 .TP
 \fI\-r, \-\-repo\fR <alias|#|URI>		
