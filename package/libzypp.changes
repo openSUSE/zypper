@@ -1,4 +1,9 @@
 -------------------------------------------------------------------
+Sun Oct 26 14:53:56 CET 2008 - coolo@suse.de
+
+- adding svn r11488 to fix compile of PackageKit
+
+-------------------------------------------------------------------
 Fri Oct 24 18:12:34 CEST 2008 - ma@suse.de
 
 - Remove error prone methods from OnMediaLocation API to prevent 
