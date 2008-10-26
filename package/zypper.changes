@@ -1,4 +1,12 @@
 -------------------------------------------------------------------
+Sun Oct 26 16:11:44 CET 2008 - jkupec@suse.cz
+
+- 'rm -t patch' now tells the user that patches can't get
+  uninstalled (bnc #402640). The same for patterns, untill pattern
+  removal is defined and implemented.
+- r11491
+
+-------------------------------------------------------------------
 Thu Oct 23 14:29:38 CEST 2008 - jkupec@suse.cz
 
 - more appropriate 'accept key' dialog (bnc #436794)
