@@ -318,6 +318,7 @@ SET( zypp_parser_SRCS
   parser/RepoFileReader.cc
   parser/RepoindexFileReader.cc
   parser/ServiceFileReader.cc
+  parser/ProductFileReader.cc
 )
 
 SET( zypp_parser_HEADERS
@@ -329,6 +330,7 @@ SET( zypp_parser_HEADERS
   parser/xml_escape_parser.hpp
   parser/RepoindexFileReader.h
   parser/ServiceFileReader.h
+  parser/ProductFileReader.h
 )
 
 INSTALL(  FILES

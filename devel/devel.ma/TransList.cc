@@ -28,9 +28,7 @@
 #include "zypp/parser/xml/ParseDef.h"
 #include "zypp/parser/xml/ParseDefConsume.h"
 
-#include "zypp/ZYppFactory.h"
-#include "zypp/SysContent.h"
-
+#include "zypp/parser/ProductFileReader.h"
 
 using namespace std;
 using namespace zypp;
@@ -178,26 +176,11 @@ namespace zypp
 } // namespace zypp
 ///////////////////////////////////////////////////////////////////
 
-///////////////////////////////////////////////////////////////////
-namespace zypp
-{ /////////////////////////////////////////////////////////////////
-  ///////////////////////////////////////////////////////////////////
-  namespace syscontent
-  { /////////////////////////////////////////////////////////////////
-    std::ostream & operator<<( std::ostream & str, const Reader::Entry & obj )
-    {
-      str << "[" << obj.kind() << "]"
-          << " " << obj.name()
-          << "-" << obj.edition()
-          << "." << obj.arch();
-      return str;
-    }
-    /////////////////////////////////////////////////////////////////
-  } // namespace syscontent
-  ///////////////////////////////////////////////////////////////////
-  /////////////////////////////////////////////////////////////////
-} // namespace zypp
-///////////////////////////////////////////////////////////////////
+bool Consumer( const parser::ProductFileData & data_r )
+{
+  MIL << data_r << endl;
+  return true;
+}
 
 /******************************************************************
 **
@@ -208,6 +191,12 @@ int main( int argc, char * argv[] )
 {
   INT << "===[START]==========================================" << endl;
 
+  {
+    Measure x( "PARSE" );
+    USR << parser::ProductFileReader::scanDir( &Consumer, sysRoot / "etc/products.d" ) << endl;
+  }
+
+#if 0
   bool write = false;
   bool read = true;
 
@@ -257,7 +246,7 @@ int main( int argc, char * argv[] )
 
       for_each( contentR.begin(), contentR.end(), Print() );
     }
-
+#endif
   INT << "===[END]============================================" << endl << endl;
   zypp::base::LogControl::instance().logNothing();
   return 0;
