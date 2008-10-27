@@ -13,7 +13,6 @@
 #define ZYPP_BASE_LOGCONTROL_H
 
 #include <iosfwd>
-#include <iostream>
 
 #include "zypp/base/Logger.h"
 #include "zypp/base/PtrTypes.h"
@@ -56,13 +55,13 @@ namespace zypp
     /** \ref LineWriter to stdout. */
     struct StdoutLineWriter : public StreamLineWriter
     {
-      StdoutLineWriter() : StreamLineWriter( std::cout ) {}
+      StdoutLineWriter();
     };
 
     /** \ref LineWriter to stderr. */
     struct StderrLineWriter : public StreamLineWriter
     {
-      StderrLineWriter() : StreamLineWriter( std::cerr ) {}
+      StderrLineWriter();
     };
 
     /** \ref LineWriter to file.

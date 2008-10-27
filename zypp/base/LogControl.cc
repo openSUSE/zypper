@@ -30,6 +30,14 @@ namespace zypp
   namespace log
   { /////////////////////////////////////////////////////////////////
 
+    StdoutLineWriter::StdoutLineWriter()
+      : StreamLineWriter( std::cout )
+    {}
+
+    StderrLineWriter::StderrLineWriter()
+      : StreamLineWriter( std::cerr )
+    {}
+
     FileLineWriter::FileLineWriter( const Pathname & file_r, mode_t mode_r )
     {
       if ( file_r == Pathname("-") )
