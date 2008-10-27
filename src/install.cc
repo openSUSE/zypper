@@ -511,12 +511,34 @@ void install_remove(Zypper & zypper,
     if ((pos = str.rfind('.')) != string::npos)
     {
       arch = str.substr(pos + 1);
-      str = str.substr(0, pos);
+      //str = str.substr(0, pos);
       if (Arch(arch).isBuiltIn())
-         force_by_name = true; // until there is a solver API for this
+      {
+        if (force_by_name)
+        {
+          zypper.out().error(
+            _("Specifying architecture when selecting packages by name"
+              " is not implemented."));
+          zypper.setExitCode(ZYPPER_EXIT_ERR_INVALID_ARGS);
+          throw ExitRequestException();
+        }
+
+        // name.arch is a valid capability since libzypp-4.15.0 (bnc #305445)
+        by_capability = true;
+      }
       else
+      {
         DBG << "Unknown arch (" << arch << ") in package " << str
-          << ", will treat it like capability name." << endl;
+            << ", will treat it like part of the name" << endl;
+        /*
+        zypper.out().error(
+            str::form(_("Unknown architecture '%s'"), arch.c_str()),
+            _("When selecting packages by name, the last dot character must be followed\n"
+              "by a valid architecture code."));
+        zypper.setExitCode(ZYPPER_EXIT_ERR_INVALID_ARGS);
+        throw ExitRequestException();
+        */
+      }
     }
 
     // mark by name by force

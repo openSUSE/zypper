@@ -876,6 +876,8 @@ void Zypper::processCommandOptions()
     _command_help = str::form(_(
       // TranslatorExplanation the first %s = "package, patch, pattern, product"
       //  and the second %s = "package"
+      //! \todo A capability is NAME[.ARCH][OP<VERSION>] now,
+      //!  the help text will be changed after release
       "install (in) [options] <capability|rpm_file_uri> ...\n"
       "\n"
       "Install packages with specified capabilities or RPM files with"

@@ -158,8 +158,9 @@ Install or update packages.
 
 The packages can be selected by their name or by a capability they provide.
 
-Capability is: NAME, or "NAME[OP<EDITION>]", where OP is <, <=, =, >=, or > and
-EDITION is VERSION[-RELEASE], for example: zypper=0.8.8-2.
+Capability is: NAME, or "NAME[.ARCH][OP<EDITION>]", where ARCH is architecture
+code, OP is <, <=, =, >=, or > and EDITION is VERSION[-RELEASE].
+For example: zypper=0.8.8-2.
 
 The NAME component of a capability is not only a package name but any symbol
 provided by packages: /bin/vi, libcurl.so.3, perl(Time::ParseDate).
@@ -169,6 +170,11 @@ for example: zypper\\>0.8.10 or 'zypper>0.8.10'
 If EDITION is not specified, the newest installable version will be installed.
 This also means that if the package is already installed and newer versions
 are available, it will get upgraded to the newest installable version.
+
+If ARCH is not specified, or the last dot of the capability name string is not
+followed by known architecture, the solver will treat the whole string
+as a capability name. If the ARCH is know, the solver will try to choose
+a package with the best compatible architecture to the one specified.
 
 Zypper is also able to install plain RPM files while trying to satisfy their
 dependencies using packages from defined repositories. You can install a plain
