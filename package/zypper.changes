@@ -1,4 +1,11 @@
 -------------------------------------------------------------------
+Mon Oct 27 18:23:15 CET 2008 - jkupec@suse.cz
+
+- translations update
+- r11515
+- 0.12.11
+
+-------------------------------------------------------------------
 Mon Oct 27 17:16:17 CET 2008 - jkupec@suse.cz
 
 - use /dev/tty for input, instead of stdin
