@@ -103,9 +103,9 @@ namespace zypp
       ~Reader();
 
     public:
-      
-      /** 
-       *  If the cuurent node is not empty, advances the reader to the next
+
+      /**
+       *  If the curent node is not empty, advances the reader to the next
        *  node, and returns the value
        *
        * \note if the node has a xml subtree you will probably jump to that node
@@ -113,7 +113,7 @@ namespace zypp
        * has no XML subtree.
        */
       XmlString nodeText();
-     
+
       /** */
       bool nextNode();
 
