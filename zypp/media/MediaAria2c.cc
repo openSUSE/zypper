@@ -173,15 +173,6 @@ void MediaAria2c::attachTo (bool next)
    // clear last arguments
    _args.clear();   
 
-   _args.push_back(_aria2cPath.asString());        
-   _args.push_back("--summary-interval=1");
-   _args.push_back("--follow-metalink=mem");
-   _args.push_back("--check-integrity=true");
-
-   // add the anonymous id.
-   _args.push_back(str::form("--header=\"%s\"", anonymousIdHeader() ));
-   
-
   if ( next )
     ZYPP_THROW(MediaNotSupportedException(_url));
 
@@ -207,6 +198,9 @@ void MediaAria2c::attachTo (bool next)
   _args.push_back("--follow-metalink=mem");
   _args.push_back( "--check-integrity=true");
   
+   // add the anonymous id.
+   _args.push_back(str::form("--header=\"%s\"", anonymousIdHeader() ));
+
   // TODO add debug option
    
   // Transfer timeout

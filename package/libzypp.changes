@@ -1,4 +1,9 @@
 -------------------------------------------------------------------
+Mon Oct 27 10:51:01 CET 2008 - dmacvicar@suse.de
+
+- fix broken aria2c command line (bnc#438971) 
+
+-------------------------------------------------------------------
 Sun Oct 26 14:53:56 CET 2008 - coolo@suse.de
 
 - adding svn r11488 to fix compile of PackageKit
