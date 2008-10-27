@@ -5,7 +5,7 @@
 #define BOOST_TEST_MODULE PoolQuery
 
 /////////////////////////////////////////////////////////////////////////////
-static TestSetup test( "/tmp/x", Arch_x86_64 );
+static TestSetup test( Arch_x86_64 );
 
 BOOST_AUTO_TEST_CASE(pool_query_init)
 {
