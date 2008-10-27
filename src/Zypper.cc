@@ -513,7 +513,7 @@ void Zypper::processGlobalOptions()
   if (gopts.count("no-remote"))
   {
     _gopts.no_remote = true;
-    out().info(_("Remote repos disabled."), Out::HIGH);
+    out().info(_("Remote repositories disabled."), Out::HIGH);
     MIL << "No remote repos." << endl;
   }
 
