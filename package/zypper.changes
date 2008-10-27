@@ -1,4 +1,13 @@
 -------------------------------------------------------------------
+Mon Oct 27 14:07:00 CET 2008 - jkupec@suse.cz
+
+- --no-cd global option added to ignore CD/DVD repositories
+  (bnc #336211)
+- --no-remote global option added to ignore remote (downloading)
+  repositories
+- r11503
+
+-------------------------------------------------------------------
 Sun Oct 26 16:11:44 CET 2008 - jkupec@suse.cz
 
 - 'rm -t patch' now tells the user that patches can't get
