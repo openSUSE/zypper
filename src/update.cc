@@ -171,7 +171,7 @@ static void list_patch_updates(Zypper & zypper)
         tr << patch->repoInfo().name();
         tr << res->name () << res->edition ().asString();
         tr << patch->category();
-        tr <<  _("Needed");        
+        tr <<  _("Needed");
 
         if (patch->restartSuggested ())
           pm_tbl << tr;
@@ -204,7 +204,7 @@ static void list_patch_updates(Zypper & zypper)
 
 /*
  * Collect items, select the best edition.
- * This is used to find the best available or installed pool item from a set. 
+ * This is used to find the best available or installed pool item from a set.
  */
 class SaveBetterEdition : public zypp::resfilter::PoolItemFilterFunctor
 {
@@ -228,7 +228,7 @@ public:
 
 // does not allow changing the arch (#222140).
 PoolItem
-findUpdateItem( const ResPool & pool, PoolItem item )
+findUpdateItem( const ResPool & pool, const PoolItem item )
 {
   SaveBetterEdition info;
 
@@ -244,6 +244,26 @@ findUpdateItem( const ResPool & pool, PoolItem item )
 
   XXX << "findUpdateItem(" << item << ") => " << info.best;
   return info.best;
+}
+
+PoolItem
+findTheBest( const ResPool & pool, const ui::Selectable & s)
+{
+  PoolItem theone;
+  if (s.installedEmpty())
+    theone = findUpdateItem(God->pool(), *s.availableBegin());
+  else
+    theone = findUpdateItem(God->pool(), *s.installedBegin());
+
+  if (!theone)
+  {
+    if (s.installedEmpty())
+      theone = *s.availableBegin();
+    else
+      theone = *s.installedBegin();
+  }
+
+  return theone;
 }
 
 // ----------------------------------------------------------------------------
@@ -575,7 +595,7 @@ mark_patch_updates( Zypper & zypper, bool skip_interactive )
     {
       DBG << "marking all needed patches" << endl;
 
-      for_(it, God->pool().proxy().byKindBegin(ResKind::patch), 
+      for_(it, God->pool().proxy().byKindBegin(ResKind::patch),
                God->pool().proxy().byKindEnd  (ResKind::patch))
       {
         if (mark_patch_update((*it)->candidateObj(), skip_interactive, ignore_affects_pm))
@@ -590,7 +610,7 @@ mark_patch_updates( Zypper & zypper, bool skip_interactive )
         PoolQuery q;
         q.addKind(ResKind::patch);
         q.addAttribute(sat::SolvAttr::name, *it);
-        //! \todo should we look for patches requiring packages with matching name instead? 
+        //! \todo should we look for patches requiring packages with matching name instead?
         //q.addAttribute(sat::SolvAttr::require, *it);
         q.setMatchGlob();
 
@@ -650,7 +670,7 @@ void mark_updates(Zypper & zypper, const ResKindSet & kinds, bool skip_interacti
           invokeOnEach (candidates.begin(), candidates.end(), require_item_update);
         else
           invokeOnEach (candidates.begin(), candidates.end(), mark_item_install);
-      } 
+      }
     }
   }
   // treat arguments as package names (+allow wildcards)
@@ -666,7 +686,7 @@ void mark_updates(Zypper & zypper, const ResKindSet & kinds, bool skip_interacti
         q.addAttribute(sat::SolvAttr::name, *it);
         q.setMatchGlob();
         q.setInstalledOnly();
-  
+
         if (q.empty())
         {
           if (it->find_first_of("?*") != string::npos) // wildcards used
@@ -684,14 +704,7 @@ void mark_updates(Zypper & zypper, const ResKindSet & kinds, bool skip_interacti
 #if USE_THE_ONE
             PoolItem theone = s.theObj();
 #else
-            PoolItem theone;
-            
-            if (s->installedEmpty())
-              theone = *s->availableBegin();
-            else
-              theone = findUpdateItem(God->pool(), *s->installedBegin());
-            if (!theone)
-              theone = *s->installedBegin();
+            PoolItem theone = findTheBest(God->pool(), *s);
 #endif
 
             if (equalNVRA(*s->installedObj().resolvable(), *theone.resolvable()))

@@ -1,5 +1,5 @@
 #include <boost/format.hpp>
-
+//#include <iostream>
 #include "zypp/ZYppFactory.h"
 #include "zypp/base/Logger.h"
 #include "zypp/base/Algorithm.h"
@@ -35,26 +35,34 @@ static PoolItem findInstalledItemInRepos(const PoolItem & installed)
   return result;
 }
 
-// TODO edition, arch ?
-static void mark_for_install(Zypper & zypper,
+// TODO edition - need solver API
+static void
+mark_for_install(Zypper & zypper,
                       const ResObject::Kind &kind,
-                      const std::string &name,
-                      const std::string & repo = "")
+                      const string &name,
+                      const string & repo = "",
+                      const string & arch = "")
 {
   // name and kind match:
-  DBG << "Iterating over [" << kind << "]" << name << endl;
+  DBG << "Iterating over [" << kind << "] " << name;
+  if (!repo.empty())
+    DBG << ", repo: " << repo;
+  if (!arch.empty())
+    DBG << ", arch: " << arch;
+  DBG << "...";
 
   PoolQuery q;
   q.addAttribute(sat::SolvAttr::name, name);
   if (!repo.empty())
     q.addRepo(repo);
+  if (!arch.empty())
+    q.addAttribute(sat::SolvAttr::arch, arch);
   q.setCaseSensitive(false);
   q.setMatchExact();
 
-  DBG << "... done" << endl;
-
   if (q.empty())
   {
+    DBG << "... done" << endl;
     zypper.out().error(
       // translators: meaning a package %s or provider of capability %s
       str::form(_("'%s' not found"), name.c_str()));
@@ -66,36 +74,24 @@ static void mark_for_install(Zypper & zypper,
   }
 
   ui::Selectable::Ptr s = *q.selectableBegin();
+  DBG << "... done" << endl;
+/*
+  for_(it, s->installedBegin(), s->installedEnd())
+  { cout << *it << endl; }
+  for_(it, s->availableBegin(), s->availableEnd())
+  { cout << *it << endl; }
+*/
   bool force = copts.count("force");
+
 
 #if USE_THE_ONE
   PoolItem candidate = s->candidateObj();
 #else
-  PoolItem candidate = findUpdateItem(God->pool(), s->installedObj());
-  if (!candidate)
-  {
-    if (force)
-    {
-      candidate = findInstalledItemInRepos(s->installedObj());
-      if (!candidate)
-      {
-        zypper.out().info(str::form(
-            // translators: %s-%s.%s is name-version.arch
-            _("Package %s-%s.%s not found in repositories, cannot reinstall."),
-            s->name().c_str(), s->installedObj().resolvable()->edition().c_str(),
-            s->installedObj().resolvable()->arch().c_str()));
-        zypper.setExitCode(ZYPPER_EXIT_ERR_ZYPP);
-        return;
-      }
-    }
-    else
-      candidate = s->installedObj();
-  }
+  PoolItem candidate = findTheBest(God->pool(), *s);
 #endif
 
   if (s->installedObj() &&
-      s->installedObj().resolvable()->edition() == candidate.resolvable()->edition() &&
-      s->installedObj().resolvable()->arch() == candidate.resolvable()->arch() &&
+      equalNVRA(*s->installedObj().resolvable(), *candidate.resolvable()) &&
       !force)
   {
     // if it is broken install anyway, even if it is installed
@@ -108,12 +104,32 @@ static void mark_for_install(Zypper & zypper,
         _("skipping %s '%s' (the newest version already installed)"))
         % kind_to_string_localized(kind,1) % name));
   }
-  else if (!candidate.status().setToBeInstalled(zypp::ResStatus::USER) && !force)
+  else
   {
-      zypper.out().error(boost::str(
-        format(_("Failed to add '%s' to the list of packages to be installed."))
-        % name));
-      ERR << "Could not set " << name << " as to-be-installed" << endl;
+    if (force && !s->installedEmpty())
+    {
+      PoolItem repoitem = findInstalledItemInRepos(s->installedObj());
+      if (!repoitem)
+      {
+        zypper.out().info(str::form(
+            // translators: %s-%s.%s is name-version.arch
+            _("Package %s-%s.%s not found in repositories, cannot reinstall."),
+            s->name().c_str(), s->installedObj().resolvable()->edition().c_str(),
+            s->installedObj().resolvable()->arch().c_str()));
+        zypper.setExitCode(ZYPPER_EXIT_ERR_ZYPP);
+        return;
+      }
+      else if (candidate.status().isInstalled())
+        candidate = repoitem;
+    }
+
+    if (!candidate.status().setToBeInstalled(zypp::ResStatus::USER) && !force)
+    {
+        zypper.out().error(boost::str(
+          format(_("Failed to add '%s' to the list of packages to be installed."))
+          % name));
+        ERR << "Could not set " << name << " as to-be-installed" << endl;
+    }
   }
 }
 
@@ -177,10 +193,11 @@ mark_by_name (Zypper & zypper,
               bool install_not_remove,
               const ResObject::Kind &kind,
               const string &name,
-              const string & repo = "")
+              const string & repo = "",
+              const string & arch = "")
 {
   if (install_not_remove)
-    mark_for_install(zypper, kind, name, repo);
+    mark_for_install(zypper, kind, name, repo, arch);
   else
     mark_for_uninstall(zypper, kind, name);
 }
@@ -281,14 +298,7 @@ mark_selectable(Zypper & zypper,
 #if USE_THE_ONE
   PoolItem theone = s.theObj();
 #else
-  PoolItem theone;
-  if (s.installedEmpty())
-    theone = *s.availableBegin();
-  else
-    theone = findUpdateItem(God->pool(), *s.installedBegin());
-
-  if (!theone)
-    theone = *s.installedBegin();
+  PoolItem theone = findTheBest(God->pool(), s);
 #endif
 
   DBG << "the One: " << theone << endl;
@@ -497,14 +507,22 @@ void install_remove(Zypper & zypper,
       force_by_name = true; // until there is a solver API for this
     }
 
-    //! \todo force arch with '.' or '@'???
-    if ((pos = str.find('.')) != string::npos)
-    { }
+    // force arch with '.'
+    if ((pos = str.rfind('.')) != string::npos)
+    {
+      arch = str.substr(pos + 1);
+      str = str.substr(0, pos);
+      if (Arch(arch).isBuiltIn())
+         force_by_name = true; // until there is a solver API for this
+      else
+        DBG << "Unknown arch (" << arch << ") in package " << str
+          << ", will treat it like capability name." << endl;
+    }
 
     // mark by name by force
     if (force_by_name)
     {
-      mark_by_name (zypper, install_not_remove, kind, str, repo);
+      mark_by_name (zypper, install_not_remove, kind, str, repo, arch);
       continue;
     }
 
