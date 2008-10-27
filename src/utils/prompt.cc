@@ -1,6 +1,7 @@
 #include <ctype.h>
 #include <iostream>
 #include <sstream>
+#include <fstream>
 #include <poll.h>
 #include <readline/readline.h>
 //#include <unistd.h>
@@ -36,12 +37,12 @@ PromptOptions::~PromptOptions()
 
 void PromptOptions::setOptions(const std::string & option_str, unsigned int default_opt)
 {
-  zypp::str::split(option_str, back_inserter(_options), "/"); 
+  zypp::str::split(option_str, back_inserter(_options), "/");
 
   if (_options.size() <= default_opt)
     INT << "Invalid default option index " << default_opt << endl;
   else
-    _default = default_opt; 
+    _default = default_opt;
 }
 
 const string PromptOptions::optionString() const
@@ -55,7 +56,7 @@ const string PromptOptions::optionString() const
   }
   for (unsigned int i = 1; it != options().end(); ++it, i++)
     option_str += "/" + (defaultOpt() == i ? zypp::str::toUpper(*it) : *it);
-  
+
   if (!_opt_help.empty())
     option_str += "/?";
 
@@ -97,7 +98,7 @@ int read_action_ari_with_timeout (PromptId pid, unsigned timeout,
   }
 
   out.info (_("Abort, retry, ignore?\n"));
-  
+
   //FIXME XML output
   cout << endl;
 
@@ -138,7 +139,7 @@ int read_action_ari_with_timeout (PromptId pid, unsigned timeout,
     sleep(1);
     timeout--;
   }
-  
+
   return default_action;
 }
 
@@ -187,7 +188,10 @@ unsigned int get_prompt_reply(Zypper & zypper,
     return poptions.defaultOpt();
   }
 
-  istream & stm = cin;
+  // open a terminal for input (bnc #436963)
+  ifstream stm("/dev/tty", ifstream::in);
+  // istream & stm = cin;
+
   bool is_yn_prompt =
     poptions.options().size() == 2 &&
     poptions.options()[0] == _("yes") &&
@@ -225,7 +229,7 @@ unsigned int get_prompt_reply(Zypper & zypper,
       for (unsigned int i = 0; i < poptions.options().size(); i++)
       {
         DBG << "index: " << i << " option: "
-            << poptions.options()[i] << endl; 
+            << poptions.options()[i] << endl;
         if (poptions.options()[i] == zypp::str::toLower(reply))
         {
           reply_int = i;
@@ -252,18 +256,23 @@ unsigned int get_prompt_reply(Zypper & zypper,
     zypper.out().prompt(pid, s.str(), poptions);
   }
 
-  if (!stmgood)
+  // if we cannot read input or it is at EOF (bnc #436963), exit
+  if (!stmgood || stm.eof())
   {
-    WAR << "Could not read the answer, returning the default: "
-        << poptions.options()[poptions.defaultOpt()] << " (" << reply_int << ")"
-        << endl;
-    return poptions.defaultOpt();
+    WAR << "Could not read the answer - bad stream or EOF" << endl;
+    zypper.out().error(
+        "Cannot read input: bad stream or EOF.",
+        zypp::str::form(_(
+"If you run zypper without a terminal, use '%s' global\n"
+"option to make zypper use default answers to prompts."
+        ), "--non-interactive"));
+    throw ExitRequestException("Cannot read input. Bad stream or EOF.");
   }
 
   if (reply.empty())
     MIL << "reply empty, returning the default: "
         << poptions.options()[poptions.defaultOpt()] << " (" << reply_int << ")"
-        << endl; 
+        << endl;
   else
     MIL << "reply: " << reply << " (" << reply_int << ")" << endl;
 
@@ -289,7 +298,7 @@ string get_text(const string & prompt, const string & prefilled)
 {
   // A static variable for holding the line.
   static char * line_read = NULL;
-  
+
   prefill = prefilled.c_str();
 
   /* If the buffer has already been allocated,
@@ -310,7 +319,7 @@ string get_text(const string & prompt, const string & prefilled)
   return string();
 }
 
-static int silent_getch ( void ) 
+static int silent_getch ( void )
 {
   int ch;
   struct termios oldt, newt;
@@ -334,7 +343,7 @@ string get_password()
   char pw[20];
   unsigned i = 0;
 
-  while ((ch = silent_getch()) != EOF 
+  while ((ch = silent_getch()) != EOF
           && ch != '\n'
           && ch != '\r'
           && i < sizeof(pw) - 1)
