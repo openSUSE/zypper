@@ -123,7 +123,7 @@ const char *const MediaAria2c::agentString()
 
   static const std::string _value(
     str::form(
-       "ZYpp %s (aria2c %s) %s"
+       "ZYpp %s (%s) %s"
        , VERSION
        , MediaAria2c::_aria2cVersion.c_str()
        , target ? target->targetDistribution().c_str() : ""
@@ -193,13 +193,13 @@ void MediaAria2c::attachTo (bool next)
 
   // Build the aria command.
   _args.push_back(_aria2cPath.asString());
-  _args.push_back(str::form("--user-agent=\"%s\"", agentString()));
+  _args.push_back(str::form("--user-agent=%s", agentString()));
   _args.push_back("--summary-interval=1");
   _args.push_back("--follow-metalink=mem");
   _args.push_back( "--check-integrity=true");
   
    // add the anonymous id.
-   _args.push_back(str::form("--header=\"%s\"", anonymousIdHeader() ));
+   _args.push_back(str::form("--header=%s", anonymousIdHeader() ));
 
   // TODO add debug option
    
@@ -238,28 +238,24 @@ void MediaAria2c::attachTo (bool next)
   {
      if ( _url.getScheme() == "ftp" )
      { 
-       _args.push_back("--ftp-user");
-       _args.push_back(_url.getUsername());
+         _args.push_back(str::form("--ftp-user=%s", _url.getUsername().c_str() ));
      }
      else if ( _url.getScheme() == "http" ||
                _url.getScheme() == "https" )
     {
-      _args.push_back("--http-user");
-      _args.push_back(_url.getUsername());
+        _args.push_back(str::form("--http-user=%s", _url.getUsername().c_str() ));
     }
      
     if ( _url.getPassword().size() )
     {
       if ( _url.getScheme() == "ftp" )
       { 
-        _args.push_back("--ftp-passwd");
-        _args.push_back(_url.getPassword());
+          _args.push_back(str::form("--ftp-passwd=%s", _url.getPassword().c_str() ));
       }
       else if ( _url.getScheme() == "http" ||
                _url.getScheme() == "https" )
       {
-        _args.push_back("--http-passwd");
-        _args.push_back(_url.getPassword());
+          _args.push_back(str::form("--http-passwd=%s", _url.getPassword().c_str() ));
       }
     }
   }
@@ -336,8 +332,7 @@ void MediaAria2c::attachTo (bool next)
 
   if ( ! _proxy.empty() )
   {
-    _args.push_back("-—http-proxy");
-    _args.push_back(_proxy);
+      _args.push_back(str::form("--http-proxy=%s", _proxy.c_str() ));
 
      /*---------------------------------------------------------------*
      CURLOPT_PROXYUSERPWD: [user name]:[password]
@@ -349,22 +344,18 @@ void MediaAria2c::attachTo (bool next)
     _proxyuserpwd = _url.getQueryParam( "proxyuser" );
 
     if ( ! _proxyuserpwd.empty() ) {
-      _args.push_back("-—http-proxy-user");
-      _args.push_back(_proxyuserpwd);
+        _args.push_back(str::form("--http-proxy-user=%s", _proxyuserpwd.c_str() ));
       
       string proxypassword( _url.getQueryParam( "proxypassword" ) );
       if ( ! proxypassword.empty() ) {
-        _args.push_back("-—http-proxy-passwd");
-        _args.push_back(proxypassword);
+          _args.push_back(str::form("--http-proxy-passwd=%s", proxypassword.c_str() ));
       }
     }
   }
 
-  _currentCookieFile = _cookieFile.asString();
-  _args.push_back("-—load-cookies");
-  _args.push_back(_currentCookieFile);
-
-  // NOTE cookie jar?
+  //_currentCookieFile = _cookieFile.asString();
+  //_args.push_back(str::form("--load-cookies=%s", _currentCookieFile.c_str()));
+  //NOTE cookie jar?
 
   // FIXME: need a derived class to propelly compare url's
   MediaSourceRef media( new MediaSource(_url.getScheme(), _url.asString()));
@@ -431,7 +422,7 @@ void MediaAria2c::getFileCopy( const Pathname & filename , const Pathname & targ
   bool retry = false;
 
   ExternalProgram::Arguments args = _args;
-  args.push_back(str::form("--dir=\"%s\"", target.dirname().c_str()));
+  args.push_back(str::form("--dir=%s", target.dirname().c_str()));
   args.push_back(fileurl.asString());
   
   do
@@ -608,7 +599,7 @@ std::string MediaAria2c::getAria2cVersion()
 
     std::string vResponse = aria.receiveLine();
     aria.close();
-    return vResponse;
+    return str::trim(vResponse);
 }
 
 #define ARIA_DEFAULT_BINARY "/usr/bin/aria2c"
