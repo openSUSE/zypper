@@ -117,7 +117,6 @@ cd build
 make install DESTDIR=$RPM_BUILD_ROOT
 make -C doc/autodoc install DESTDIR=$RPM_BUILD_ROOT
 mkdir -p $RPM_BUILD_ROOT/etc/zypp/repos.d
-mkdir -p $RPM_BUILD_ROOT/etc/zypp/products.d
 mkdir -p $RPM_BUILD_ROOT/etc/zypp/services.d
 mkdir -p $RPM_BUILD_ROOT/%{_var}/lib/zypp
 mkdir -p $RPM_BUILD_ROOT/%{_var}/log/zypp
@@ -207,6 +206,7 @@ rm -rf "$RPM_BUILD_ROOT"
 %defattr(-,root,root)
 %dir               /etc/zypp
 %dir               /etc/zypp/repos.d
+%dir               /etc/zypp/services.d
 %config(noreplace) /etc/zypp/zypp.conf
 %config(noreplace) /etc/zypp/systemCheck
 %config(noreplace) %{_sysconfdir}/logrotate.d/zypp-history.lr

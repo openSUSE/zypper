@@ -317,7 +317,6 @@ SET( zypp_parser_SRCS
   parser/IniDict.cc
   parser/RepoFileReader.cc
   parser/RepoindexFileReader.cc
-  parser/ProductConfReader.cc
   parser/ServiceFileReader.cc
 )
 
@@ -327,7 +326,6 @@ SET( zypp_parser_HEADERS
   parser/IniDict.h
   parser/ParserProgress.h
   parser/RepoFileReader.h
-  parser/ProductConfReader.h
   parser/xml_escape_parser.hpp
   parser/RepoindexFileReader.h
   parser/ServiceFileReader.h

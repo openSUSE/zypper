@@ -45,8 +45,6 @@
 #include "zypp/PoolQuery.h"
 #include "zypp/ServiceInfo.h"
 
-#include "zypp/parser/ProductConfReader.h"
-
 #include <boost/mpl/int.hpp>
 
 using namespace std;
