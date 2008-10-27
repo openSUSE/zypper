@@ -1,4 +1,12 @@
 -------------------------------------------------------------------
+Mon Oct 27 15:15:57 CET 2008 - jkupec@suse.cz
+
+- force installation by capability if name.arch is specified
+  (bnc #305445)
+- complain if installing by --name and arch is specified
+- r11506
+
+-------------------------------------------------------------------
 Mon Oct 27 14:07:00 CET 2008 - jkupec@suse.cz
 
 - --no-cd global option added to ignore CD/DVD repositories
