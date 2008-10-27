@@ -23,6 +23,28 @@ using namespace boost::unit_test;
 
 #define DATADIR (Pathname(TESTS_SRC_DIR) + "/zypp/data/Fetcher/remote-site")
 
+BOOST_AUTO_TEST_CASE(fetcher_simple)
+{
+    MediaSetAccess media( (DATADIR).asUrl(), "/" );
+    Fetcher fetcher;
+    
+    {
+        filesystem::TmpDir dest;
+        OnMediaLocation loc("/complexdir/subdir1/subdir1-file1.txt");
+        loc.setChecksum(CheckSum::sha1("f1d2d2f924e986ac86fdf7b36c94bcdf32beec15"));
+        fetcher.enqueueDigested(loc);
+        fetcher.start(dest.path(), media);
+        fetcher.reset();
+        // now we break the checksum and it should fail
+        loc.setChecksum(CheckSum::sha1("f1d2d2f924e986ac86fdf7b36c94bcdf32beec16"));
+        fetcher.enqueueDigested(loc);
+        BOOST_CHECK_THROW( fetcher.start( dest.path(), media ), Exception);
+        fetcher.reset();
+
+    }
+    
+}
+
 BOOST_AUTO_TEST_CASE(fetcher)
 {
   MediaSetAccess media( ( DATADIR).asUrl(), "/" );

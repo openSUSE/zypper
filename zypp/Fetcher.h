@@ -76,6 +76,23 @@ namespace zypp
     virtual ~Fetcher();
 
   public:
+
+
+   /**
+    * Adds an index containing metadata (for example
+    * checksums ) that will be retrieved and read
+    * before the job processing starts.
+    *
+    * Nothing will be transfered or checked
+    * until \ref start() is called.
+    *
+    * The index is relative to the media path, and
+    * the listed files too.
+    *
+    */
+    void addIndex( const OnMediaLocation &resource );
+   
+
    /**
     * Enqueue a object for transferal, they will not
     * be transfered until \ref start() is called

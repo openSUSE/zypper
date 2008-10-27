@@ -14,6 +14,7 @@
 #include <list>
 #include <map>
 
+#include "zypp/base/Flags.h"
 #include "zypp/base/Easy.h"
 #include "zypp/base/Logger.h"
 #include "zypp/base/PtrTypes.h"
@@ -30,12 +31,27 @@ namespace zypp
 { /////////////////////////////////////////////////////////////////
 
   /**
+   * class that represents indexes which add metadata
+   * to fetcher jobs and therefore need to be retrieved
+   * in advance.
+   */
+  struct FetcherIndex
+  {
+    FetcherIndex( const OnMediaLocation &loc )
+      : location(loc)
+    {
+    }
+      
+    OnMediaLocation location;
+  };
+  typedef shared_ptr<FetcherIndex> FetcherIndex_Ptr;
+      
+  /**
    * Class to encapsulate the \ref OnMediaLocation object
    * and the \ref FileChecker together
    */
   struct FetcherJob
   {
-
     FetcherJob( const OnMediaLocation &loc )
       : location(loc)
       , directory(false)
@@ -43,7 +59,7 @@ namespace zypp
     {
       //MIL << location << endl;
     }
-
+    
     ~FetcherJob()
     {
       //MIL << location << " | * " << checkers.size() << endl;
@@ -77,7 +93,8 @@ namespace zypp
     ~Impl() {
       MIL << endl;
      }
-
+      
+      void addIndex( const OnMediaLocation &resource );
       void enqueue( const OnMediaLocation &resource, const FileChecker &checker = FileChecker()  );
       void enqueueDir( const OnMediaLocation &resource, bool recursive, const FileChecker &checker = FileChecker() );
       void enqueueDigested( const OnMediaLocation &resource, const FileChecker &checker = FileChecker() );
@@ -94,6 +111,20 @@ namespace zypp
       return _nullimpl;
     }
   private:
+      /**
+       * download the indexes and reads them
+       */
+      void readIndexes( MediaSetAccess &media, const Pathname &dest_dir);
+
+      /**
+       * reads a downloaded index file and updates internal
+       * attributes table
+       *
+       * The index lists files relative to a directory, which is
+       * normally the same as the index file is located.
+       */
+      void readIndex( const Pathname &index, const Pathname &basedir );
+      
       /**
        * tries to provide the file represented by job into dest_dir by
        * looking at the cache. If success, returns true, and the desired
@@ -123,8 +154,11 @@ namespace zypp
     Impl * clone() const
     { return new Impl( *this ); }
 
-    std::list<FetcherJob_Ptr> _resources;
-    std::list<Pathname> _caches;
+    list<FetcherJob_Ptr> _resources;
+    list<FetcherIndex_Ptr> _indexes;
+    list<Pathname> _caches;
+    // checksums read from the indexes
+    map<string, CheckSum> _checksums;
   };
   ///////////////////////////////////////////////////////////////////
 
@@ -161,9 +195,19 @@ namespace zypp
     _resources.push_back(job);
   }
 
+  void Fetcher::Impl::addIndex( const OnMediaLocation &resource )
+  {
+      MIL << "adding index " << resource << endl;
+      FetcherIndex_Ptr index;
+      index.reset(new FetcherIndex(resource));
+      _indexes.push_back(index);
+  }
+
+
   void Fetcher::Impl::reset()
   {
     _resources.clear();
+    _indexes.clear();
   }
 
   void Fetcher::Impl::addCachePath( const Pathname &cache_dir )
@@ -240,14 +284,16 @@ namespace zypp
     } // iterate over caches
     return false;
   }
-
+    
     void Fetcher::Impl::validate( const OnMediaLocation &resource, const Pathname &dest_dir, const list<FileChecker> &checkers )
   {
     // no matter where did we got the file, try to validate it:
     Pathname localfile = dest_dir + resource.filename();
     // call the checker function
-    try {
+    try
+    {
       MIL << "Checking job [" << localfile << "] (" << checkers.size() << " checkers )" << endl;
+
       for ( list<FileChecker>::const_iterator it = checkers.begin();
             it != checkers.end();
             ++it )
@@ -287,93 +333,17 @@ namespace zypp
       filesystem::DirContent content;
       media.dirInfo( content, resource.filename(), false /* dots */, resource.medianr());
 
-      filesystem::DirEntry shafile, shasig, shakey;
+      // only try to add an index if it exists
+      filesystem::DirEntry shafile;
       shafile.name = "SHA1SUMS"; shafile.type = filesystem::FT_FILE;
-      shasig.name = "SHA1SUMS.asc"; shasig.type = filesystem::FT_FILE;
-      shakey.name = "SHA1SUMS.key"; shakey.type = filesystem::FT_FILE;
-
-      // create a new fetcher with a different state to transfer the
-      // file containing checksums and its signature
-      Fetcher fetcher;
-      // signature checker for SHA1SUMS. We havent got the signature from
-      // the nextwork yet.
-      SignatureFileChecker sigchecker;
-
-      // now try to find the SHA1SUMS signature
-      if ( find(content.begin(), content.end(), shasig)
-           != content.end() )
-      {
-          MIL << "found checksums signature file: " << shasig.name << endl;
-          // TODO refactor with OnMediaLocation::extend or something
-          fetcher.enqueue( OnMediaLocation(resource.filename() + shasig.name, resource.medianr()).setOptional(true) );
-          assert_dir(dest_dir + resource.filename());
-          fetcher.start( dest_dir, media );
-
-          // if we get the signature, update the checker
-          sigchecker = SignatureFileChecker(dest_dir + resource.filename() + shasig.name);
-          fetcher.reset();
-      }
-      else
-          MIL << "no signature for " << shafile.name << endl;
-
-      // look for the SHA1SUMS.key file
-      if ( find(content.begin(), content.end(), shakey)
-           != content.end() )
-      {
-          MIL << "found public key file: " << shakey.name << endl;
-          fetcher.enqueue( OnMediaLocation(resource.filename() + shakey.name, resource.medianr()).setOptional(true) );
-          assert_dir(dest_dir + resource.filename());
-          fetcher.start( dest_dir, media );
-          fetcher.reset();
-          KeyContext context;
-          sigchecker.addPublicKey(dest_dir + resource.filename() + shakey.name, context);
-      }
-
-      // look for the SHA1SUMS public key file
-      if ( find(content.begin(), content.end(), shafile)
-           != content.end() )
-      {
-          MIL << "found checksums file: " << shafile.name << endl;
-          fetcher.enqueue( OnMediaLocation(resource.filename() + shafile.name, resource.medianr()).setOptional(true) );
-          assert_dir(dest_dir + resource.filename());
-          fetcher.start( dest_dir, media );
-          fetcher.reset();
-      }
-
-      // hash table to store checksums
-      map<string, CheckSum> checksums;
-
-      // look for the SHA1SUMS file
-      if ( find(content.begin(), content.end(), shafile) != content.end() )
-      {
-          MIL << "found checksums file: " << shafile.name << endl;
-          fetcher.enqueue( OnMediaLocation(
-                               resource.filename() + shafile.name,
-                               resource.medianr()).setOptional(true),
-                           FileChecker(sigchecker) );
-          assert_dir(dest_dir + resource.filename());
-          fetcher.start( dest_dir + resource.filename(), media );
-          fetcher.reset();
-
-          // now read the SHA1SUMS file
-          Pathname pShafile = dest_dir + resource.filename() + shafile.name;
-          std::ifstream in( pShafile.c_str() );
-          string buffer;
-          if ( ! in.fail() )
-          {
-              while ( getline(in, buffer) )
-              {
-                  vector<string> words;
-                  str::split( buffer, back_inserter(words) );
-                  if ( words.size() != 2 )
-                      ZYPP_THROW(Exception("Wrong format for SHA1SUMS file"));
-                  //MIL << "check: '" << words[0] << "' | '" << words[1] << "'" << endl;
-                  if ( ! words[1].empty() )
-                      checksums[words[1]] = CheckSum::sha1(words[0]);
-              }
-          }
-          else
-              ZYPP_THROW(Exception("Can't open SHA1SUMS file: " + pShafile.asString()));
+      if ( find( content.begin(), content.end(), shafile ) != content.end() )
+      {              
+          // add the index of this directory
+          OnMediaLocation indexloc(resource);
+          indexloc.changeFilename(resource.filename() + "SHA1SUMS");
+          addIndex(indexloc);
+          // we need to read it now
+          readIndexes(media, dest_dir);
       }
 
       for ( filesystem::DirContent::const_iterator it = content.begin();
@@ -391,17 +361,17 @@ namespace zypp
           case filesystem::FT_NOT_AVAIL: // old directory.yast contains no typeinfo at all
           case filesystem::FT_FILE:
           {
-              CheckSum checksum;
-              if ( checksums.find(it->name) != checksums.end() )
-                  checksum = checksums[it->name];
+              CheckSum chksm(resource.checksum());              
+              if ( _checksums.find(filename.asString()) != _checksums.end() )
+              {
+                  // the checksum can be replaced with the one in the index.
+                  chksm = _checksums[filename.asString()];
+                  //MIL << "resource " << filename << " has checksum in the index file." << endl;
+              }
+              else
+                  WAR << "Resource " << filename << " has no checksum in the index either." << endl;
 
-              // create a resource from the file
-              // if checksum was not available we will have a empty
-              // checksum, which will end in a validation anyway
-              // warning the user that there is no checksum
-              enqueueDigested(OnMediaLocation(filename, resource.medianr())
-                              .setChecksum(checksum));
-
+              enqueueDigested(OnMediaLocation(filename, resource.medianr()).setChecksum(chksm));
               break;
           }
           case filesystem::FT_DIR: // newer directory.yast contain at least directory info
@@ -455,12 +425,90 @@ namespace zypp
     }
   }
 
+    void Fetcher::Impl::readIndex( const Pathname &index, const Pathname &basedir )
+  {
+      std::ifstream in( index.c_str() );
+      string buffer;
+      if ( ! in.fail() )
+      {
+          while ( getline(in, buffer) )
+          {
+              vector<string> words;
+              str::split( buffer, back_inserter(words) );
+              if ( words.size() != 2 )
+                  ZYPP_THROW(Exception("Wrong format for SHA1SUMS file"));
+              //MIL << "check: '" << words[0] << "' | '" << words[1] << "'" << endl;
+              if ( ! words[1].empty() )
+                  _checksums[(basedir + words[1]).asString()] = CheckSum::sha1(words[0]);
+          }
+      }
+      else
+          ZYPP_THROW(Exception("Can't open SHA1SUMS file: " + index.asString()));
+  }
+    
+  void Fetcher::Impl::readIndexes( MediaSetAccess &media, const Pathname &dest_dir)
+  {
+      // if there is no indexes, then just return to avoid
+      // the directory listing
+      if ( _indexes.empty() )
+      {
+          MIL << "No indexes to read." << endl;
+          return;
+      }
+
+      // create a new fetcher with a different state to transfer the
+      // file containing checksums and its signature
+      Fetcher fetcher;
+      // signature checker for index. We havent got the signature from
+      // the nextwork yet.
+      SignatureFileChecker sigchecker;
+      
+      for ( list<FetcherIndex_Ptr>::const_iterator it_idx = _indexes.begin();
+            it_idx != _indexes.end(); ++it_idx )
+      {
+          MIL << "reading index " << (*it_idx)->location << endl;
+          // build the name of the index and the signature
+          OnMediaLocation idxloc((*it_idx)->location);
+          OnMediaLocation sigloc((*it_idx)->location.setOptional(true));
+          OnMediaLocation keyloc((*it_idx)->location.setOptional(true));
+
+          // calculate signature and key name
+          sigloc.changeFilename( sigloc.filename().extend(".asc") );
+          keyloc.changeFilename( keyloc.filename().extend(".key") );
+
+          //assert_dir(dest_dir + idxloc.filename().dirname());
+
+          // transfer the signature
+          fetcher.enqueue(sigloc);
+          fetcher.start( dest_dir, media );
+          // if we get the signature, update the checker
+          sigchecker = SignatureFileChecker(dest_dir + sigloc.filename());
+          fetcher.reset();
+          
+          // now the key
+          fetcher.enqueue(keyloc);
+          fetcher.start( dest_dir, media );
+          fetcher.reset();
+
+          // now the index itself
+          fetcher.enqueue( idxloc, FileChecker(sigchecker) );
+          fetcher.start( dest_dir, media );
+          fetcher.reset();
+
+          // now we have the indexes in dest_dir
+          readIndex( dest_dir + idxloc.filename(), idxloc.filename().dirname() );
+      }
+      MIL << "done reading indexes" << endl;
+  }
+    
   void Fetcher::Impl::start( const Pathname &dest_dir,
                              MediaSetAccess &media,
                              const ProgressData::ReceiverFnc & progress_receiver )
   {
     ProgressData progress(_resources.size());
     progress.sendTo(progress_receiver);
+
+    readIndexes(media, dest_dir);
 
     for ( list<FetcherJob_Ptr>::const_iterator it_res = _resources.begin(); it_res != _resources.end(); ++it_res )
     {
@@ -526,6 +574,12 @@ namespace zypp
   {
       _pimpl->enqueueDir(resource, recursive, checker);
   }
+
+  void Fetcher::addIndex( const OnMediaLocation &resource )
+  {
+    _pimpl->addIndex(resource);
+  }
+
 
   void Fetcher::enqueue( const OnMediaLocation &resource, const FileChecker &checker  )
   {
