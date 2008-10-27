@@ -1,4 +1,12 @@
 -------------------------------------------------------------------
+Mon Oct 27 17:16:17 CET 2008 - jkupec@suse.cz
+
+- use /dev/tty for input, instead of stdin
+- do not return default value in prompts, if user input
+  is expected and EOF received (bnc #436963)
+- r11509
+
+-------------------------------------------------------------------
 Mon Oct 27 15:15:57 CET 2008 - jkupec@suse.cz
 
 - force installation by capability if name.arch is specified
