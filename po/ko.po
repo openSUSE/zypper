@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: zypper.ko\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-10-14 12:07+0200\n"
+"POT-Creation-Date: 2008-10-27 18:08+0100\n"
 "PO-Revision-Date: 2008-10-09 17:23+0900\n"
 "Last-Translator: YunSeok Choi <xein@naver.com>\n"
 "Language-Team: Korean <xein@naver.com>\n"
@@ -92,64 +92,66 @@ msgstr "키 지문: %s"
 msgid "Repository: %s"
 msgstr "저장소: %s"
 
-#: ../src/callbacks/keyring.h:149
-msgid "Do you want to trust the key?"
-msgstr "키를 신뢰하십니까?"
+#. translators: this message is shown after showing description of the key
+#: ../src/callbacks/keyring.h:150
+msgid "Do you want to reject the key, trust temporarily, or trust always?"
+msgstr ""
 
-#. translators: n/t/i stands for doNttrust/TrustTemporarily/Import
+#. translators: r/t/a stands for Reject/TrustTemporarily/trustAlways(import)
 #. translate to whatever is appropriate for your language
 #. The anserws must be separated by slash characters '/' and must
-#. correspond to donttrust/trusttemporarily/import in that order.
+#. correspond to reject/trusttemporarily/trustalways in that order.
 #. The answers should be lower case letters.
-#: ../src/callbacks/keyring.h:161
-msgid "n/t/i"
-msgstr "n/t/i"
+#: ../src/callbacks/keyring.h:162
+msgid "r/t/a/"
+msgstr ""
 
-#. translators: the same as n/t/i, but without 'i'
-#: ../src/callbacks/keyring.h:164
-msgid "n/t"
+#. translators: the same as r/t/a, but without 'a'
+#: ../src/callbacks/keyring.h:165
+#, fuzzy
+msgid "r/t"
 msgstr "n/t"
 
-#. translators: help text for the 'n' option in the 'n/t/i' prompt
-#: ../src/callbacks/keyring.h:166
+#. translators: help text for the 'r' option in the 'r/t/a' prompt
+#: ../src/callbacks/keyring.h:167
 msgid "Don't trust the key."
 msgstr "이 키를 신뢰하지 않습니다."
 
-#. translators: help text for the 't' option in the 'n/t/i' prompt
-#: ../src/callbacks/keyring.h:168
+#. translators: help text for the 't' option in the 'r/t/a' prompt
+#: ../src/callbacks/keyring.h:169
 msgid "Trust the key temporarily."
 msgstr ""
 
-#. translators: help text for the 'i' option in the 'n/t/i' prompt
-#: ../src/callbacks/keyring.h:171
+#. translators: help text for the 'a' option in the 'r/t/a' prompt
+#: ../src/callbacks/keyring.h:172
 msgid "Trust the key and import it into trusted keyring."
 msgstr "키를 신뢰하고 키링으로 가져옵니까?"
 
-#: ../src/callbacks/keyring.h:205
+#: ../src/callbacks/keyring.h:206
 #, c-format
 msgid "Ignoring failed signature verification for file '%s'!"
 msgstr "'%s' 파일에 대한 서명 검증 실패를 무시하는 중입니다!"
 
-#: ../src/callbacks/keyring.h:208
+#: ../src/callbacks/keyring.h:209
 #, c-format
 msgid "Ignoring failed signature verification for file '%s' from repository '%s'!"
 msgstr "'%s' 파일(저장소'%s'의)에 대한 서명 검증 실패를 무시하는 중입니다!"
 
-#: ../src/callbacks/keyring.h:213
+#: ../src/callbacks/keyring.h:214
 msgid "Double-check this is not caused by some malicious changes in the file!"
 msgstr "파일에 악의적인 변경 내용이 없는지 다시한번 확인하세요!"
 
-#: ../src/callbacks/keyring.h:223
+#: ../src/callbacks/keyring.h:224
 #, c-format
 msgid "Signature verification failed for file '%s'."
 msgstr "'%s' 파일에 대한 서명 검증에 실패했습니다."
 
-#: ../src/callbacks/keyring.h:226
+#: ../src/callbacks/keyring.h:227
 #, c-format
 msgid "Signature verification failed for file '%s' from repository '%s'."
 msgstr "'%s' 파일(저장소 '%s' 의)에 대한 서명 검증에 실패햇습니다."
 
-#: ../src/callbacks/keyring.h:231
+#: ../src/callbacks/keyring.h:232
 msgid ""
 "Warning: This might be caused by a malicious change in the file!\n"
 "Continuing might be risky. Continue anyway?"
@@ -157,28 +159,28 @@ msgstr ""
 "경고: 파일을 악의적으로 변경했을 가능성이 있습니다!\n"
 "계속하면 위험할 수 있습니다. 계속합니까?"
 
-#: ../src/callbacks/keyring.h:255
+#: ../src/callbacks/keyring.h:256
 #, c-format
 msgid "No digest for file %s."
 msgstr "%s 파일에 대한 요약이 없습니다."
 
-#: ../src/callbacks/keyring.h:255 ../src/callbacks/keyring.h:265
-#: ../src/callbacks/keyring.h:287 ../src/callbacks/rpm.h:61
+#: ../src/callbacks/keyring.h:256 ../src/callbacks/keyring.h:266
+#: ../src/callbacks/keyring.h:288 ../src/callbacks/rpm.h:61
 #: ../src/solve-commit.cc:1033 ../src/solve-commit.cc:1057
 msgid "Continue?"
 msgstr "계속합니까?"
 
-#: ../src/callbacks/keyring.h:264
+#: ../src/callbacks/keyring.h:265
 #, c-format
 msgid "Unknown digest %s for file %s."
 msgstr "알 수 없는 요약 %s(%s 파일의)."
 
-#: ../src/callbacks/keyring.h:279
+#: ../src/callbacks/keyring.h:280
 #, c-format
 msgid "Ignoring failed digest verification for %s (expected %s, found %s)."
 msgstr "%s (%s이어야 하지만, %s 입니다) 에 대한 다이제스트 검증에 실패를 무시 중입니다."
 
-#: ../src/callbacks/keyring.h:286
+#: ../src/callbacks/keyring.h:287
 #, c-format
 msgid "Digest verification failed for %s. Expected %s, found %s."
 msgstr "%s 에 대한 다이제스트 검증에 실패 했습니다. %s이어야 하지만, %s 입니다."
@@ -381,16 +383,16 @@ msgstr "설치됨: "
 #. enabled?
 #. autorefresh?
 #: ../src/info.cc:157 ../src/info.cc:214 ../src/info.cc:220 ../src/info.cc:222
-#: ../src/info.cc:279 ../src/repos.cc:712 ../src/repos.cc:714
-#: ../src/repos.cc:1313 ../src/repos.cc:1315 ../src/repos.cc:1991
-#: ../src/repos.cc:1993 ../src/solve-commit.cc:855
+#: ../src/info.cc:279 ../src/repos.cc:735 ../src/repos.cc:737
+#: ../src/repos.cc:1336 ../src/repos.cc:1338 ../src/repos.cc:2014
+#: ../src/repos.cc:2016 ../src/solve-commit.cc:855
 msgid "Yes"
 msgstr "예"
 
 #: ../src/info.cc:157 ../src/info.cc:214 ../src/info.cc:220 ../src/info.cc:222
-#: ../src/info.cc:279 ../src/repos.cc:712 ../src/repos.cc:714
-#: ../src/repos.cc:1313 ../src/repos.cc:1315 ../src/repos.cc:1991
-#: ../src/repos.cc:1993 ../src/solve-commit.cc:855
+#: ../src/info.cc:279 ../src/repos.cc:735 ../src/repos.cc:737
+#: ../src/repos.cc:1336 ../src/repos.cc:1338 ../src/repos.cc:2014
+#: ../src/repos.cc:2016 ../src/solve-commit.cc:855
 msgid "No"
 msgstr "아니요"
 
@@ -461,25 +463,25 @@ msgstr "제안"
 #. TranslatorExplanation S stands for Status
 #: ../src/info.cc:289 ../src/search.cc:38 ../src/search.cc:54
 #: ../src/search.cc:214 ../src/search.cc:385 ../src/search.cc:441
-#: ../src/search.cc:533 ../src/update.cc:377
+#: ../src/search.cc:533 ../src/update.cc:397
 msgid "S"
 msgstr "S"
 
 # src/isdn/complex.ycp:266 src/modem/complex.ycp:207
 # src/provider/complex.ycp:186
 #. translators: name (general header)
-#: ../src/info.cc:289 ../src/locks.cc:39 ../src/repos.cc:632
-#: ../src/repos.cc:681 ../src/repos.cc:2058 ../src/search.cc:44
+#: ../src/info.cc:289 ../src/locks.cc:39 ../src/repos.cc:655
+#: ../src/repos.cc:704 ../src/repos.cc:2081 ../src/search.cc:44
 #: ../src/search.cc:56 ../src/search.cc:215 ../src/search.cc:264
 #: ../src/search.cc:386 ../src/search.cc:447 ../src/search.cc:534
-#: ../src/update.cc:152 ../src/update.cc:385 ../src/Zypper.cc:3950
+#: ../src/update.cc:152 ../src/update.cc:405 ../src/Zypper.cc:3973
 msgid "Name"
 msgstr "이름"
 
 #. translators: type (general header)
 #. translators: product type (addon/base) (rug calls it Category)
-#: ../src/info.cc:289 ../src/locks.cc:43 ../src/repos.cc:632
-#: ../src/repos.cc:690 ../src/repos.cc:2066 ../src/search.cc:58
+#: ../src/info.cc:289 ../src/locks.cc:43 ../src/repos.cc:655
+#: ../src/repos.cc:713 ../src/repos.cc:2089 ../src/search.cc:58
 #: ../src/search.cc:218 ../src/search.cc:541
 msgid "Type"
 msgstr "형식"
@@ -518,70 +520,89 @@ msgid "Short Name"
 msgstr "짧은 이름"
 
 #. translators: meaning a package %s or provider of capability %s
-#: ../src/install.cc:60 ../src/install.cc:166
+#: ../src/install.cc:68 ../src/install.cc:182
 #, c-format
 msgid "'%s' not found"
 msgstr "'%s'를 찾을 수 없음"
 
-#. translators: %s-%s.%s is name-version.arch
-#: ../src/install.cc:84
-#, c-format
-msgid "Package %s-%s.%s not found in repositories, cannot reinstall."
-msgstr ""
-
 #. translators: e.g. skipping package 'zypper' (the newest version already installed)
 #. ! \todo capitalize the first letter
-#: ../src/install.cc:108
+#: ../src/install.cc:104
 #, c-format
 msgid "skipping %s '%s' (the newest version already installed)"
 msgstr "%s '%s' 를 생략 중 (최신 버전이 이미 설치되어 있음)"
 
-#: ../src/install.cc:114
+#. translators: %s-%s.%s is name-version.arch
+#: ../src/install.cc:116
+#, c-format
+msgid "Package %s-%s.%s not found in repositories, cannot reinstall."
+msgstr ""
+
+#: ../src/install.cc:129
 #, c-format
 msgid "Failed to add '%s' to the list of packages to be installed."
 msgstr "설치할 꾸러미 목록에 '%s' 를 추가하는데 실패했습니다."
 
-#: ../src/install.cc:136
+#: ../src/install.cc:152
 #, c-format
 msgid "Failed to add '%s' to the list of packages to be removed."
 msgstr "제거할 꾸러미 목록에 '%s' 를 추가하는데 실패했습니다."
 
-#: ../src/install.cc:363 ../src/install.cc:601
+#: ../src/install.cc:373 ../src/install.cc:659
 #, c-format
 msgid "'%s' is already installed."
 msgstr "'%s' 는 이미 설치되어 있습니다."
 
 #. translators: meaning a package %s or provider of capability %s
-#: ../src/install.cc:403 ../src/install.cc:615
+#: ../src/install.cc:413 ../src/install.cc:673
 #, c-format
 msgid "'%s' is not installed."
 msgstr "'%s'가 설치되지 않았습니다."
 
-#: ../src/install.cc:433
+#: ../src/install.cc:437
+#, fuzzy
+msgid "Cannot uninstall patches."
+msgstr "꾸러미 설치제거 명령"
+
+#: ../src/install.cc:438
+msgid ""
+"Installed status of a patch is determined solely based on its dependencies.\n"
+"Patches are not installed in sense of copied files, database records,\n"
+"or similar."
+msgstr ""
+
+#: ../src/install.cc:449
+msgid "Uninstallation of a pattern is currently not defined and implemented."
+msgstr ""
+
+#: ../src/install.cc:463
 #, c-format
 msgid "%s contradicts %s"
 msgstr "%s 는 %s 를 부정"
 
 #. translators: meaning --force with --capability
-#: ../src/install.cc:442
+#: ../src/install.cc:472
 #, c-format
 msgid "%s cannot currently be used with %s"
 msgstr "%s 는 현재 사용되고 있는 %s 와 함께 사용할 수 없음"
 
-#. FIXME show a message here, after string freeze
-#. zypper.out().error(boost::str(format(_("%s is not a valid package or capability name.") % str));
-#: ../src/install.cc:497 ../src/Zypper.cc:3063
-msgid "No valid arguments specified."
-msgstr "올바른 인수가 지정되어 있지 않습니다."
+#: ../src/install.cc:520
+msgid "Specifying architecture when selecting packages by name is not implemented."
+msgstr ""
+
+#: ../src/install.cc:555
+#, fuzzy, c-format
+msgid "'%s' is not a valid package or capability name."
+msgstr "'%s' 는 잘못된 서비스 유형입니다."
 
 #. translators: meaning a package %s or provider of capability %s
-#: ../src/install.cc:572
+#: ../src/install.cc:630
 #, c-format
 msgid "'%s' not found."
 msgstr "'%s'를 찾을 수 없습니다."
 
 #. translators: %s are package names
-#: ../src/install.cc:605
+#: ../src/install.cc:663
 #, c-format
 msgid "'%s' providing '%s' is already installed."
 msgstr "'%s' 를 제공하는 '%s' 는 이미 설치되어 있습니다."
@@ -599,7 +620,7 @@ msgstr "(다수)"
 
 #. translators: catalog (rug's word for repository) (header)
 #: ../src/locks.cc:41 ../src/search.cc:40 ../src/search.cc:263
-#: ../src/update.cc:151 ../src/update.cc:379
+#: ../src/update.cc:151 ../src/update.cc:399
 msgid "Catalog"
 msgstr "목록"
 
@@ -609,7 +630,7 @@ msgstr "중요도"
 
 #. translators: package's repository (header)
 #: ../src/locks.cc:43 ../src/search.cc:64 ../src/search.cc:388
-#: ../src/search.cc:446 ../src/update.cc:151 ../src/update.cc:379
+#: ../src/search.cc:446 ../src/update.cc:151 ../src/update.cc:399
 msgid "Repository"
 msgstr "저장소"
 
@@ -651,7 +672,7 @@ msgid "Problem removing the package lock:"
 msgstr "꾸러미 잠금 제거 중 문제 발생:"
 
 #. translators: this will show up if you press ctrl+c twice outside of zypper shell
-#: ../src/main.cc:44
+#: ../src/main.cc:38
 msgid "OK OK! Exiting immediately..."
 msgstr "네~ 네~ 지금 종료하는 중입니다..."
 
@@ -799,8 +820,8 @@ msgstr "'%s' 저장소 데이터를 갱신하는 중..."
 msgid "Problem retrieving files from '%s'."
 msgstr "'%s' 로 부터 파일 다운로드 중 문제."
 
-#: ../src/repos.cc:160 ../src/repos.cc:2838 ../src/solve-commit.cc:1109
-#: ../src/solve-commit.cc:1132 ../src/solve-commit.cc:1164
+#: ../src/repos.cc:160 ../src/repos.cc:2861 ../src/solve-commit.cc:1109
+#: ../src/solve-commit.cc:1137 ../src/solve-commit.cc:1169
 msgid "Please see the above error message for a hint."
 msgstr "힌트로 앞의 오류 메시지를 읽어주세요."
 
@@ -866,571 +887,576 @@ msgstr "별명, 번호 또는 URI로 '%s' 저장소를 찾을 수 없습니다."
 msgid "Use '%s' to get the list of defined repositories."
 msgstr "'%s' 를 이용하여 정의된 저장소의 목록을 출력할 수 있습니다."
 
-#: ../src/repos.cc:504 ../src/repos.cc:540
+#: ../src/repos.cc:490 ../src/repos.cc:497
+#, fuzzy, c-format
+msgid "Ignoring repository '%s' because of '%s' option."
+msgstr "오류로 인해 '%s' 저장소를 청소할 수 없습니다."
+
+#: ../src/repos.cc:527 ../src/repos.cc:563
 #, c-format
 msgid "Disabling repository '%s' because of the above error."
 msgstr "앞의 오류로 인해 '%s' 저장소가 비활성화 되어 있습니다."
 
-#: ../src/repos.cc:522
+#: ../src/repos.cc:545
 #, c-format
 msgid "Repository '%s' is out-of-date. You can run 'zypper refresh' as root to update it."
 msgstr "'%s' 저장소는 너무 오래 되었습니다. root 권한으로 'zypper refresh' 를 사용하여 업데이트할 수 있습니다."
 
-#: ../src/repos.cc:557
+#: ../src/repos.cc:580
 #, c-format
 msgid "The metadata cache needs to be built for the '%s' repository. You can run 'zypper refresh' as root to do this."
 msgstr "'%s' 저장소 에 대한 메타데이터 캐시 빌드가 필요합니다. root 권한으로 'zypper refresh' 를 실행하세요."
 
-#: ../src/repos.cc:564
+#: ../src/repos.cc:587
 #, c-format
 msgid "Disabling repository '%s'."
 msgstr "'%s' 저장소를 비활성화 합니다."
 
-#: ../src/repos.cc:601
+#: ../src/repos.cc:624
 msgid "Initializing Target"
 msgstr "대상 초기화 중"
 
-#: ../src/repos.cc:610
+#: ../src/repos.cc:633
 msgid "Target initialization failed:"
 msgstr "대상 초기화에 실패:"
 
-#: ../src/repos.cc:612 ../src/Zypper.cc:3320
+#: ../src/repos.cc:635 ../src/Zypper.cc:3343
 msgid "Running 'zypper refresh' as root might resolve the problem."
 msgstr "'zypper refresh' 를 root로 실행하여 문제를 해결할 수 있습니다."
 
 #. translators: patch status (installed, uninstalled, needed)
-#: ../src/repos.cc:632 ../src/search.cc:269 ../src/update.cc:152
+#: ../src/repos.cc:655 ../src/search.cc:269 ../src/update.cc:152
 msgid "Status"
 msgstr "상태"
 
 #. status
 #. rug's status (active, pending => active, disabled <= enabled, disabled)
 #. this is probably the closest possible compatibility arrangement
-#: ../src/repos.cc:649
+#: ../src/repos.cc:672
 msgid "Active"
 msgstr "작동"
 
 #  translators: service status radio button label
 #  translators: server module status
-#: ../src/repos.cc:649
+#: ../src/repos.cc:672
 msgid "Disabled"
 msgstr "비활성화"
 
 #  Translators: table column headings
-#: ../src/repos.cc:680 ../src/repos.cc:2057 ../src/Zypper.cc:3950
+#: ../src/repos.cc:703 ../src/repos.cc:2080 ../src/Zypper.cc:3973
 msgid "Alias"
 msgstr "별명"
 
 #. TranslatorExplanation used as e.g. "Enabled: Yes"
-#: ../src/repos.cc:682 ../src/repos.cc:1313 ../src/repos.cc:2059
+#: ../src/repos.cc:705 ../src/repos.cc:1336 ../src/repos.cc:2082
 msgid "Enabled"
 msgstr "활성화"
 
 #. translators: 'zypper repos' column - whether autorefresh is enabled for the repository
-#: ../src/repos.cc:684 ../src/repos.cc:2061
+#: ../src/repos.cc:707 ../src/repos.cc:2084
 msgid "Refresh"
 msgstr "새로 고침"
 
 #. translators: repository priority (in zypper repos -p or -d)
-#: ../src/repos.cc:688 ../src/repos.cc:2065
+#: ../src/repos.cc:711 ../src/repos.cc:2088
 msgid "Priority"
 msgstr "우선순위"
 
-#: ../src/repos.cc:692 ../src/repos.cc:2068
+#: ../src/repos.cc:715 ../src/repos.cc:2091
 msgid "URI"
 msgstr "URI"
 
-#: ../src/repos.cc:694
+#: ../src/repos.cc:717
 msgid "Service"
 msgstr "서비스"
 
-#: ../src/repos.cc:738
+#: ../src/repos.cc:761
 msgid "No repositories defined. Use the 'zypper addrepo' command to add one or more repositories."
 msgstr "정의된 저장소가 없습니다. 'zypper addrepo' 를 사용하여 저장소를 한개이상 추가하세요."
 
-#: ../src/repos.cc:814 ../src/repos.cc:886 ../src/repos.cc:1056
+#: ../src/repos.cc:837 ../src/repos.cc:909 ../src/repos.cc:1079
 msgid "Error reading repositories:"
 msgstr "저장소 읽는 중 오류:"
 
-#: ../src/repos.cc:842 ../src/repos.cc:2190
+#: ../src/repos.cc:865 ../src/repos.cc:2213
 #, c-format
 msgid "Can't open %s for writing."
 msgstr "기록하기 위해 %s 를(을) 열 수 없습니다."
 
-#: ../src/repos.cc:844 ../src/repos.cc:2192
+#: ../src/repos.cc:867 ../src/repos.cc:2215
 msgid "Maybe you do not have write permissions?"
 msgstr "아마도 쓰기 권한이 없는 것 같습니다?"
 
-#: ../src/repos.cc:851 ../src/repos.cc:2199
+#: ../src/repos.cc:874 ../src/repos.cc:2222
 #, c-format
 msgid "Repositories have been successfully exported to %s."
 msgstr "%s 로 저장소가 성공적으로 출력되었습니다."
 
-#: ../src/repos.cc:904 ../src/repos.cc:1074
+#: ../src/repos.cc:927 ../src/repos.cc:1097
 msgid "Specified repositories: "
 msgstr "지정된 저장소: "
 
-#: ../src/repos.cc:943
+#: ../src/repos.cc:966
 #, c-format
 msgid "Skipping disabled repository '%s'"
 msgstr "비활성화 저장소 '%s' 를 생략 중"
 
-#: ../src/repos.cc:958
+#: ../src/repos.cc:981
 #, c-format
 msgid "Skipping repository '%s' because of the above error."
 msgstr "앞의 오류로 인해 '%s' 저장소를 생략 합니다."
 
-#: ../src/repos.cc:973
+#: ../src/repos.cc:996
 #, c-format
 msgid "Use '%s' or '%s' commands to add or enable repositories."
 msgstr "'%s' 나 '%s' 명령을 사용하여 저장소를 추가 또는 활성화 시킵니다."
 
-#: ../src/repos.cc:976
+#: ../src/repos.cc:999
 msgid "Specified repositories are not enabled or defined."
 msgstr "지정한 저장소는 정의되지 않았거나 활성화 되어 있지 않습니다."
 
-#: ../src/repos.cc:978
+#: ../src/repos.cc:1001
 msgid "There are no enabled repositories defined."
 msgstr "활성화 되어 있는 저장소가 정의되어 있지 않습니다."
 
-#: ../src/repos.cc:982
+#: ../src/repos.cc:1005
 msgid "Could not refresh the repositories because of errors."
 msgstr "오류로 인해 저장소를 새로 고칠 수 없습니다."
 
-#: ../src/repos.cc:988
+#: ../src/repos.cc:1011
 msgid "Some of the repositories have not been refreshed because of an error."
 msgstr "오류로 인해 몇몇 저장소는 새로 고쳐지지 않았습니다."
 
-#: ../src/repos.cc:993
+#: ../src/repos.cc:1016
 msgid "Specified repositories have been refreshed."
 msgstr "지정한 저장소가 새로 고쳐졌습니다."
 
-#: ../src/repos.cc:995
+#: ../src/repos.cc:1018
 msgid "All repositories have been refreshed."
 msgstr "모든 저장소가 새로 고쳐졌습니다."
 
-#: ../src/repos.cc:1131
+#: ../src/repos.cc:1154
 #, c-format
 msgid "Cleaning metadata cache for '%s'."
 msgstr "'%s' 의 메타데이터의 캐시를 지우는 중입니다."
 
-#: ../src/repos.cc:1138
+#: ../src/repos.cc:1161
 #, c-format
 msgid "Cleaning raw metadata cache for '%s'."
 msgstr "'%s' 의 가공되지 않는 메타데이터 캐시를 지우는 중입니다."
 
 #. translators: meaning the cached rpm files
-#: ../src/repos.cc:1146
+#: ../src/repos.cc:1169
 #, c-format
 msgid "Cleaning packages for '%s'."
 msgstr "Cleaning packages for '%s' 에 대한 꾸러미를 청소 중입니다."
 
-#: ../src/repos.cc:1154
+#: ../src/repos.cc:1177
 #, c-format
 msgid "Cannot clean repository '%s' because of an error."
 msgstr "오류로 인해 '%s' 저장소를 청소할 수 없습니다."
 
 #  progress stages
-#: ../src/repos.cc:1168
+#: ../src/repos.cc:1191
 msgid "Cleaning installed packages cache."
 msgstr "설치된 꾸러미 캐시를 지우는 중입니다."
 
-#: ../src/repos.cc:1176
+#: ../src/repos.cc:1199
 msgid "Cannot clean installed packages cache because of an error."
 msgstr "오류로 인해 설치된 꾸러미 캐시를 청소할 수 없습니다."
 
-#: ../src/repos.cc:1184
+#: ../src/repos.cc:1207
 msgid "Could not clean the repositories because of errors."
 msgstr "오류로 인해 저장소를 청소할 수 없습니다."
 
-#: ../src/repos.cc:1191
+#: ../src/repos.cc:1214
 msgid "Some of the repositories have not been cleaned up because of an error."
 msgstr "오류로 인해 몇몇 저장소를 청소할 수 없었습니다."
 
-#: ../src/repos.cc:1196
+#: ../src/repos.cc:1219
 msgid "Specified repositories have been cleaned up."
 msgstr "지정한 저장소의 캐시를 지웠습니다."
 
-#: ../src/repos.cc:1198
+#: ../src/repos.cc:1221
 msgid "All repositories have been cleaned up."
 msgstr "모든 저장소가 청소 되었습니다."
 
-#: ../src/repos.cc:1238
+#: ../src/repos.cc:1261
 msgid "This is a changeable read-only media (CD/DVD), disabling autorefresh."
 msgstr "이것은 교환 가능한 읽기 전용 미디어(CD/DVD)입니다. 자동 새로고침을 비활성화 합니다."
 
-#: ../src/repos.cc:1259 ../src/repos.cc:1520
+#: ../src/repos.cc:1282 ../src/repos.cc:1543
 #, c-format
 msgid "Repository named '%s' already exists. Please use another alias."
 msgstr "'%s' 이름의 저장소는 이미 있습니다. 다른 별병을 사용해주세요."
 
-#: ../src/repos.cc:1270
+#: ../src/repos.cc:1293
 msgid "Could not determine the type of the repository. Please check if the defined URIs (see below) point to a valid repository:"
 msgstr "저장소의 형식을 구분할 수 없습니다. 정의한 URI 가 저장소의 올바른 위치를 가르키고 있는지 확인해주세요:"
 
-#: ../src/repos.cc:1277 ../src/Zypper.cc:2397
+#: ../src/repos.cc:1300 ../src/Zypper.cc:2420
 msgid "Can't find a valid repository at given location:"
 msgstr "주어진 위치에서 올바른 저장소를 찾을 수 없습니다:"
 
-#: ../src/repos.cc:1286
+#: ../src/repos.cc:1309
 msgid "Problem transferring repository data from specified URI:"
 msgstr "지정한 URI로 부터 저장소 데이터 전송에 문제:"
 
-#: ../src/repos.cc:1287
+#: ../src/repos.cc:1310
 msgid "Please check whether the specified URI is accessible."
 msgstr "지정한 URI 에 접근이 가능한지 확인해주세요."
 
-#: ../src/repos.cc:1295
+#: ../src/repos.cc:1318
 msgid "Unknown problem when adding repository:"
 msgstr "저장소 추가 중 알 수 없는 문제:"
 
-#: ../src/repos.cc:1301
+#: ../src/repos.cc:1324
 #, c-format
 msgid "Repository '%s' successfully added"
 msgstr "'%s' 저장소를 성공적으로 추가"
 
 #. TranslatorExplanation used as e.g. "Autorefresh: Yes"
-#: ../src/repos.cc:1315
+#: ../src/repos.cc:1338
 msgid "Autorefresh"
 msgstr "자동 새로 고침"
 
-#: ../src/repos.cc:1330
+#: ../src/repos.cc:1353
 #, c-format
 msgid "Reading data from '%s' media"
 msgstr "'%s' 미디어로부터 데이터를 읽는 중"
 
-#: ../src/repos.cc:1337
+#: ../src/repos.cc:1360
 #, c-format
 msgid "Problem reading data from '%s' media"
 msgstr "'%s' 미디어로부터 데이터를 읽는 중 문제"
 
-#: ../src/repos.cc:1338
+#: ../src/repos.cc:1361
 msgid "Please check if your installation media is valid and readable."
 msgstr "설치 미디어가 올바른지 그리고 읽기가 가능한지 확인해주세요."
 
-#: ../src/repos.cc:1403
+#: ../src/repos.cc:1426
 msgid "Problem accessing the file at the specified URI"
 msgstr "지정한 URI 의 파일 접근에 문제"
 
-#: ../src/repos.cc:1404
+#: ../src/repos.cc:1427
 msgid "Please check if the URI is valid and accessible."
 msgstr "URI 가 올바른지 접근이 가능한지 확인해주세요."
 
-#: ../src/repos.cc:1412
+#: ../src/repos.cc:1435
 msgid "Problem parsing the file at the specified URI"
 msgstr "지정한 URI의 파일 구문 분석에 문제"
 
 #. TranslatorExplanation don't translate the URI if the URI itself is not translated.
 #. Also don't translate the '.repo' string.
-#: ../src/repos.cc:1415
+#: ../src/repos.cc:1438
 msgid "Is it a .repo file? See http://en.opensuse.org/Standards/RepoInfo for details."
 msgstr "그것은 .repo 파일입니까? http://en.opensuse.org/Standards/RepoInfo 에서 자세한 내용을 살펴보세요."
 
-#: ../src/repos.cc:1423
+#: ../src/repos.cc:1446
 msgid "Problem encountered while trying to read the file at the specified URI"
 msgstr "지정한 URI 에 있는 파일을 읽을 때 문제 발생"
 
-#: ../src/repos.cc:1437
+#: ../src/repos.cc:1460
 msgid "Repository with no alias defined found in the file, skipping."
 msgstr "파일에 정의된 별명이 없는 저장소가 발견되었습니다. 생략 중입니다."
 
-#: ../src/repos.cc:1444
+#: ../src/repos.cc:1467
 #, c-format
 msgid "Repository '%s' has no URI defined, skipping."
 msgstr "'%s' 저장소에는 URI가 설정되어 있지 않음, 생략합니다."
 
-#: ../src/repos.cc:1484
+#: ../src/repos.cc:1507
 #, c-format
 msgid "Repository '%s' has been removed."
 msgstr "'%s' 저장소가 제거되었습니다."
 
-#: ../src/repos.cc:1503
+#: ../src/repos.cc:1526
 #, c-format
 msgid "Cannot change alias of '%s' repository. The repository belongs to service '%s' which is responsible for setting its alias."
 msgstr "'%s' 저장소의 별칭을 변경할 수 없습니다. 저장소는 '%s' 서비스의 별칭 설정에 따릅니다."
 
-#: ../src/repos.cc:1514
+#: ../src/repos.cc:1537
 #, c-format
 msgid "Repository '%s' renamed to '%s'."
 msgstr "'%s' 저장소가 '%s' 로 이름이 변경되었습니다."
 
-#: ../src/repos.cc:1526 ../src/repos.cc:1746
+#: ../src/repos.cc:1549 ../src/repos.cc:1769
 msgid "Error while modifying the repository:"
 msgstr "저장소 수정하는 동안 오류:"
 
-#: ../src/repos.cc:1527
+#: ../src/repos.cc:1550
 #, c-format
 msgid "Leaving repository '%s' unchanged."
 msgstr "'%s' 저장소를 바꾸지 않은 채로 놔둡니다."
 
-#: ../src/repos.cc:1664
+#: ../src/repos.cc:1687
 #, c-format
 msgid "Invalid priority '%s'. Use a positive integer number. The greater the number, the lower the priority."
 msgstr "잘못된 '%s' 우선순위 입니다. 양의 정수를 사용하세요. 작은 순번 우선입니다."
 
-#: ../src/repos.cc:1672
+#: ../src/repos.cc:1695
 #, c-format
 msgid "Repository '%s' priority has been left unchanged (%d)"
 msgstr "'%s' 저장소의 우선순위를 변경하지 않았음 (%d)"
 
-#: ../src/repos.cc:1698
+#: ../src/repos.cc:1721
 #, c-format
 msgid "Repository '%s' has been sucessfully enabled."
 msgstr "'%s' 저장소가 성공적으로 활성화 되었습니다."
 
-#: ../src/repos.cc:1701
+#: ../src/repos.cc:1724
 #, c-format
 msgid "Repository '%s' has been sucessfully disabled."
 msgstr "'%s' 저장소가 성공적으로 비활성화 되었습니다."
 
-#: ../src/repos.cc:1708
+#: ../src/repos.cc:1731
 #, c-format
 msgid "Autorefresh has been enabled for repository '%s'."
 msgstr "'%s' 저장소의 자동 새로 고침을 활성화 시켰습니다."
 
-#: ../src/repos.cc:1711
+#: ../src/repos.cc:1734
 #, c-format
 msgid "Autorefresh has been disabled for repository '%s'."
 msgstr "'%s' 저장소의 자동 새로 고침을 비활성화 시켰습니다."
 
-#: ../src/repos.cc:1718
+#: ../src/repos.cc:1741
 #, c-format
 msgid "RPM files caching has been enabled for repository '%s'."
 msgstr "'%s' 저장소의 RPM 파일 캐시 설정을 활성화 시켰습니다."
 
-#: ../src/repos.cc:1721
+#: ../src/repos.cc:1744
 #, c-format
 msgid "RPM files caching has been disabled for repository '%s'."
 msgstr "'%s' 저장소의 RPM 파일 캐시 설정을 비활성화 시켰습니다."
 
-#: ../src/repos.cc:1727
+#: ../src/repos.cc:1750
 #, c-format
 msgid "Repository '%s' priority has been set to %d."
 msgstr "'%s' 저장소의 우선순위가 %d로 지정 되었습니다."
 
-#: ../src/repos.cc:1733
+#: ../src/repos.cc:1756
 #, c-format
 msgid "Name of repository '%s' has been set to '%s'."
 msgstr "'%s' 저장소의 이름이 '%s'로 지정 되었습니다."
 
-#: ../src/repos.cc:1739
+#: ../src/repos.cc:1762
 #, c-format
 msgid "Nothing to change for repository '%s'."
 msgstr "'%s' 저장소 변경된 부분이 없습니다."
 
-#: ../src/repos.cc:1747
+#: ../src/repos.cc:1770
 #, c-format
 msgid "Leaving repository %s unchanged."
 msgstr "%s 저장소를 바꾸지 않은 채로 놔둡니다."
 
-#: ../src/repos.cc:1785
+#: ../src/repos.cc:1808
 msgid "Error reading services:"
 msgstr "서비스 읽는 중 오류:"
 
-#: ../src/repos.cc:1874
+#: ../src/repos.cc:1897
 #, c-format
 msgid "Service '%s' not found by its alias, number, or URI."
 msgstr "별칭, 번호 또는 URI 로 '%s' 서비스를 찾을 수 없습니다."
 
-#: ../src/repos.cc:1878
+#: ../src/repos.cc:1901
 #, c-format
 msgid "Use '%s' to get the list of defined services."
 msgstr "'%s' 를 이용하여 정의된 서비스의 목록을 출력할 수 있습니다."
 
-#: ../src/repos.cc:2104
+#: ../src/repos.cc:2127
 #, c-format
 msgid "No services defined. Use the '%s' command to add one or more services."
 msgstr "정의된 서비스가 없습니다. '%s' 를 사용하여 저장소를 한개이상 추가하세요."
 
-#: ../src/repos.cc:2230
+#: ../src/repos.cc:2253
 #, c-format
 msgid "Service aliased '%s' already exists. Please use another alias."
 msgstr "서비스 '%s' 별칭은 이미 있습니다. 다른 별칭을 사용해주세요."
 
 #  progress stages
-#: ../src/repos.cc:2240
+#: ../src/repos.cc:2263
 #, c-format
 msgid "Error occured while adding service '%s'."
 msgstr "'%s' 서비스를 추가하는 도중 오류가 발생했습니다."
 
-#: ../src/repos.cc:2246
+#: ../src/repos.cc:2269
 #, c-format
 msgid "Service '%s' has been successfully added."
 msgstr "'%s' 서비스가 성공적으로 추가 되었습니다."
 
-#: ../src/repos.cc:2285
+#: ../src/repos.cc:2308
 #, c-format
 msgid "Removing service '%s':"
 msgstr "'%s' 서비스 제거 중:"
 
-#: ../src/repos.cc:2288
+#: ../src/repos.cc:2311
 #, c-format
 msgid "Service '%s' has been removed."
 msgstr "'%s' 서비스가 제거되었습니다."
 
-#: ../src/repos.cc:2304
+#: ../src/repos.cc:2327
 #, c-format
 msgid "Refreshing service '%s'."
 msgstr "'%s' 서비스를 새로 고치는 중입니다."
 
-#: ../src/repos.cc:2313
+#: ../src/repos.cc:2336
 #, fuzzy, c-format
 msgid "Problem retrieving the repository index file for service '%s':"
 msgstr "VPN 연결 '%s' 얻는데 오류"
 
-#: ../src/repos.cc:2315
+#: ../src/repos.cc:2338
 msgid "Check if the URI is valid and accessible."
 msgstr "URI 가 올바른지, 접근이 가능한지 확인하세요."
 
-#: ../src/repos.cc:2373
+#: ../src/repos.cc:2396
 #, c-format
 msgid "Skipping disabled service '%s'"
 msgstr "비활성화 '%s' 서비스를 생략 중"
 
-#: ../src/repos.cc:2419
+#: ../src/repos.cc:2442
 #, c-format
 msgid "Skipping service '%s' because of the above error."
 msgstr "앞의 오류로 인해 '%s' 서비스를 생략 합니다."
 
-#: ../src/repos.cc:2434
+#: ../src/repos.cc:2457
 #, c-format
 msgid "Use '%s' or '%s' commands to add or enable services."
 msgstr "'%s' 나 '%s' 명령을 사용하여 서비스를 추가 또는 활성화 시킵니다."
 
-#: ../src/repos.cc:2437
+#: ../src/repos.cc:2460
 msgid "Specified services are not enabled or defined."
 msgstr "지정한 서비스는 정의되지 않았거나 활성화 되어 있지 않습니다."
 
-#: ../src/repos.cc:2439
+#: ../src/repos.cc:2462
 msgid "There are no enabled services defined."
 msgstr "활성화되어 있는 정의된 서비스가 없습니다."
 
-#: ../src/repos.cc:2443
+#: ../src/repos.cc:2466
 msgid "Could not refresh the services because of errors."
 msgstr "오류로 인해 서비스를 새로 고칠 수 없습니다."
 
-#: ../src/repos.cc:2449
+#: ../src/repos.cc:2472
 msgid "Some of the services have not been refreshed because of an error."
 msgstr "오류로 인해 몇몇 서비스는 새로 고쳐지지 않았습니다."
 
-#: ../src/repos.cc:2454
+#: ../src/repos.cc:2477
 msgid "Specified services have been refreshed."
 msgstr "지정한 서비스가 새로 고쳐졌습니다."
 
-#: ../src/repos.cc:2456
+#: ../src/repos.cc:2479
 msgid "All services have been refreshed."
 msgstr "모든 서비스가 새로 고쳐졌습니다."
 
-#: ../src/repos.cc:2578
+#: ../src/repos.cc:2601
 #, c-format
 msgid "Service '%s' has been sucessfully enabled."
 msgstr "'%s' 서비스가 성공적으로 활성화 되었습니다."
 
-#: ../src/repos.cc:2581
+#: ../src/repos.cc:2604
 #, c-format
 msgid "Service '%s' has been sucessfully disabled."
 msgstr "'%s' 서비스가 성공적으로 비활성화 되었습니다."
 
-#: ../src/repos.cc:2588
+#: ../src/repos.cc:2611
 #, c-format
 msgid "Autorefresh has been enabled for service '%s'."
 msgstr "'%s' 서비스의 자동 새로 고침을 활성화 시켰습니다."
 
-#: ../src/repos.cc:2591
+#: ../src/repos.cc:2614
 #, c-format
 msgid "Autorefresh has been disabled for service '%s'."
 msgstr "'%s' 서비스의 자동 새로 고침을 비활성화 시켰습니다."
 
-#: ../src/repos.cc:2597
+#: ../src/repos.cc:2620
 #, c-format
 msgid "Name of service '%s' has been set to '%s'."
 msgstr "'%s' 서비스의 이름이 '%s' 로 지정 되었습니다."
 
-#: ../src/repos.cc:2603
+#: ../src/repos.cc:2626
 #, c-format
 msgid "Repository '%s' has been added to enabled repositories of service '%s'"
 msgid_plural "Repositories '%s' have been added to enabled repositories of service '%s'"
 msgstr[0] "'%s' 저장소가 활성화된 '%s' 서비스의 저장소에 추가되었음"
 
-#: ../src/repos.cc:2611
+#: ../src/repos.cc:2634
 #, c-format
 msgid "Repository '%s' has been added to disabled repositories of service '%s'"
 msgid_plural "Repositories '%s' have been added to disabled repositories of service '%s'"
 msgstr[0] "'%s' 저장소가 비활성화된 '%s' 서비스의 저장소에 추가되었음"
 
-#: ../src/repos.cc:2619
+#: ../src/repos.cc:2642
 #, c-format
 msgid "Repository '%s' has been removed from enabled repositories of service '%s'"
 msgid_plural "Repositories '%s' have been removed from enabled repositories of service '%s'"
 msgstr[0] "'%s' 저장소가 활성화된 '%s' 서비스의 저장소에서 제거되었음"
 
-#: ../src/repos.cc:2627
+#: ../src/repos.cc:2650
 #, c-format
 msgid "Repository '%s' has been removed from disabled repositories of service '%s'"
 msgid_plural "Repositories '%s' have been removed from disabled repositories of service '%s'"
 msgstr[0] "'%s' 저장소가 비활성화된 '%s' 서비스의 저장소에서 제거되었음"
 
-#: ../src/repos.cc:2636
+#: ../src/repos.cc:2659
 #, c-format
 msgid "Nothing to change for service '%s'."
 msgstr "'%s' 서비스에 대해 변경된 부분이 없습니다."
 
-#: ../src/repos.cc:2643
+#: ../src/repos.cc:2666
 msgid "Error while modifying the service:"
 msgstr "서비스 수정하는 동안 오류:"
 
-#: ../src/repos.cc:2644
+#: ../src/repos.cc:2667
 #, c-format
 msgid "Leaving service %s unchanged."
 msgstr "%s 서비스를 바꾸지 않은 채로 놔둡니다."
 
-#: ../src/repos.cc:2751
+#: ../src/repos.cc:2774
 msgid "Loading repository data..."
 msgstr "저장소 데이터를 불러오는 중..."
 
-#: ../src/repos.cc:2769
+#: ../src/repos.cc:2792
 #, c-format
 msgid "Retrieving repository '%s' data..."
 msgstr "'%s' 저장소 데이터를 갱신하는 중..."
 
-#: ../src/repos.cc:2776
+#: ../src/repos.cc:2799
 #, c-format
 msgid "Repository '%s' not cached. Caching..."
 msgstr "'%s' 저장소가 캐시되지 않았습니다. 캐시 중..."
 
-#: ../src/repos.cc:2783 ../src/repos.cc:2811
+#: ../src/repos.cc:2806 ../src/repos.cc:2834
 #, c-format
 msgid "Problem loading data from '%s'"
 msgstr "'%s' 로 부터 데이터를 불러오기에 문제"
 
-#: ../src/repos.cc:2784 ../src/repos.cc:2817
+#: ../src/repos.cc:2807 ../src/repos.cc:2840
 #, c-format
 msgid "Resolvables from '%s' not loaded because of error."
 msgstr "오류로 인해 '%s' 로 부터의 해결방법을 불러 올 수 없습니다."
 
-#: ../src/repos.cc:2800
+#: ../src/repos.cc:2823
 #, c-format
 msgid "Repository '%s' appears to outdated. Consider using a different mirror or server."
 msgstr "'%s' 저장소가 오래된것 같습니다. 다른 미러 또는 서버를 사용하시길 권장합니다."
 
 #. translators: the first %s is 'zypper refresh' and the second 'zypper clean -m'
-#: ../src/repos.cc:2813
+#: ../src/repos.cc:2836
 #, c-format
 msgid "Try '%s', or even '%s' before doing so."
 msgstr "시행하기 전에 '%s' 나 '%s' 를 시험해보세요."
 
 #  progress stages
-#: ../src/repos.cc:2826
+#: ../src/repos.cc:2849
 msgid "Reading installed packages..."
 msgstr "설치된 꾸러미를 읽는 중..."
 
 #  progress stages
-#: ../src/repos.cc:2837
+#: ../src/repos.cc:2860
 msgid "Problem occured while reading the installed packages:"
 msgstr "설치된 꾸러미를 읽는 도중에 문제가 발생:"
 
 #. list name, exact match
-#: ../src/repos.cc:2852
+#: ../src/repos.cc:2875
 msgid ""
 "ZENworks Management Daemon is running.\n"
 "WARNING: this command will not synchronize changes.\n"
@@ -1441,7 +1467,7 @@ msgstr ""
 "rug 또는 yast2 를 사용 하세요."
 
 #. translators: Bundle is a term used in rug. See rug for how to translate it.
-#: ../src/search.cc:42 ../src/search.cc:444 ../src/update.cc:382
+#: ../src/search.cc:42 ../src/search.cc:444 ../src/update.cc:402
 msgid "Bundle"
 msgstr "번들"
 
@@ -1449,13 +1475,13 @@ msgstr "번들"
 #. best_effort does not know version or arch yet
 #: ../src/search.cc:46 ../src/search.cc:60 ../src/search.cc:265
 #: ../src/search.cc:386 ../src/search.cc:447 ../src/search.cc:535
-#: ../src/update.cc:152 ../src/update.cc:387
+#: ../src/update.cc:152 ../src/update.cc:407
 msgid "Version"
 msgstr "버전"
 
 #. translators: package architecture (header)
 #: ../src/search.cc:48 ../src/search.cc:62 ../src/search.cc:447
-#: ../src/update.cc:387
+#: ../src/update.cc:407
 msgid "Arch"
 msgstr "Arch"
 
@@ -1476,7 +1502,7 @@ msgstr "필요한 패치 없음."
 msgid "No patterns found."
 msgstr "찾은 패턴이 없습니다."
 
-#: ../src/search.cc:497 ../src/Zypper.cc:3278
+#: ../src/search.cc:497 ../src/Zypper.cc:3301
 msgid "No packages found."
 msgstr "찾은 꾸러미가 없습니다."
 
@@ -1819,19 +1845,19 @@ msgstr "확정하는 중"
 msgid "(dry run)"
 msgstr "(테스트)"
 
-#: ../src/solve-commit.cc:1108 ../src/solve-commit.cc:1142
+#: ../src/solve-commit.cc:1108 ../src/solve-commit.cc:1147
 #, fuzzy
 msgid "Problem retrieving the package file from the repository:"
 msgstr "저장소로부터 꾸러미 파일 다운로드에 문제:"
 
 #. translators: the first %s is 'zypper refresh' and the second
 #. is repo allias
-#: ../src/solve-commit.cc:1138
+#: ../src/solve-commit.cc:1143
 #, c-format
 msgid "Repository '%s' is out of date. Running '%s' might help."
 msgstr "저장소 '%s' 는 유통기한이 지났습니다. '%s' 를 실행하세요."
 
-#: ../src/solve-commit.cc:1150
+#: ../src/solve-commit.cc:1155
 msgid ""
 "The package integrity check failed. This may be a problem with the repository or media. Try one of the following:\n"
 "\n"
@@ -1847,15 +1873,15 @@ msgstr ""
 "- 다른 설치 미디어를 사용(손상된 경우)\n"
 "- 다른 저장소를 사용"
 
-#: ../src/solve-commit.cc:1163
+#: ../src/solve-commit.cc:1168
 msgid "Problem occured during or after installation or removal of packages:"
 msgstr "꾸러미 설치 후 또는 제거할때 문제가 발생:"
 
-#: ../src/solve-commit.cc:1183
+#: ../src/solve-commit.cc:1188
 msgid "One of installed patches requires reboot of your machine. Reboot as soon as possible."
 msgstr "설치된 패치는 컴퓨터 재부팅을 필요로 합니다. 가능한 빨리 재부팅 해주세요."
 
-#: ../src/solve-commit.cc:1187
+#: ../src/solve-commit.cc:1192
 msgid "One of installed patches affects the package manager itself. Run this command once more to install any other needed patches."
 msgstr "설치된 패치에는 꾸러미 관리 시스템에 대한 변경사항이 포함되어 있습니다. 이 명령을 실행하여 나머지 필요한 패치를 설치하세요."
 
@@ -1885,58 +1911,58 @@ msgstr ""
 "이것들은 업데이트 소프트웨어 자신에게 영향을 주는 업데이트 전용입니다.\n"
 "기타 업데이트를 사용할 수 있습니다.\n"
 
-#: ../src/update.cc:198 ../src/update.cc:428
+#: ../src/update.cc:198 ../src/update.cc:448
 msgid "No updates found."
 msgstr "업데이트 없음."
 
-#: ../src/update.cc:313
+#: ../src/update.cc:333
 msgid "Package updates"
 msgstr "꾸러미 업데이트"
 
-#: ../src/update.cc:315
+#: ../src/update.cc:335
 msgid "Patches"
 msgstr "패치"
 
-#: ../src/update.cc:317
+#: ../src/update.cc:337
 msgid "Pattern updates"
 msgstr "패턴 업데이트"
 
-#: ../src/update.cc:319
+#: ../src/update.cc:339
 msgid "Product updates"
 msgstr "제품 업데이트"
 
-#: ../src/update.cc:492
+#: ../src/update.cc:512
 #, c-format
 msgid "Cannot parse '%s < %s'"
 msgstr "'%s < %s' 처리를할 수 없음"
 
 #. translators: %s is the name of a patch
-#: ../src/update.cc:548
+#: ../src/update.cc:568
 #, c-format
 msgid "'%s' is interactive, skipping."
 msgstr "'%s' 는 대화형입니다. 생략 합니다."
 
-#: ../src/update.cc:603
+#: ../src/update.cc:623
 #, c-format
 msgid "No patches matching '%s' found."
 msgstr "'%s' 와 일치하는 패치가 없습니다."
 
-#: ../src/update.cc:606
+#: ../src/update.cc:626
 #, c-format
 msgid "Patch '%s' not found."
 msgstr "'%s' 패치를 찾을 수 없습니다."
 
-#: ../src/update.cc:674
+#: ../src/update.cc:694
 #, c-format
 msgid "No packages matching '%s' are installed."
 msgstr "'%s' 에 해당하는 꾸러미는 설치되고 있지 않습니다."
 
-#: ../src/update.cc:677
+#: ../src/update.cc:697
 #, c-format
 msgid "Package '%s' is not installed."
 msgstr "'%s' 꾸러미는 설치되지 않았습니다."
 
-#: ../src/update.cc:701
+#: ../src/update.cc:714
 #, c-format
 msgid "No update candidate for '%s'."
 msgstr "'%s' 에 대한 업데이트 후보가 없습니다."
@@ -1966,7 +1992,7 @@ msgid "See http://en.opensuse.org/Zypper#Troubleshooting for instructions."
 msgstr "http://en.opensuse.org/Zypper#Troubleshooting 을 참조해 주세요."
 
 #: ../src/utils/messages.cc:40 ../src/utils/messages.cc:50
-#: ../src/utils/messages.cc:68 ../src/Zypper.cc:3654
+#: ../src/utils/messages.cc:68 ../src/Zypper.cc:3677
 msgid "Usage"
 msgstr "사용법"
 
@@ -1974,7 +2000,7 @@ msgstr "사용법"
 msgid "Too many arguments."
 msgstr "인수가 너무 많습니다."
 
-#: ../src/utils/messages.cc:48 ../src/Zypper.cc:2683 ../src/Zypper.cc:3651
+#: ../src/utils/messages.cc:48 ../src/Zypper.cc:2706 ../src/Zypper.cc:3674
 msgid "Required argument missing."
 msgstr "필요한 인수가 누락되었습니다."
 
@@ -2057,38 +2083,38 @@ msgstr "파일에 접근이 가능한지 확인해주세요."
 msgid "Cannot parse capability '%s'."
 msgstr "'%s' 기능을 처리할 수 없습니다."
 
-#: ../src/utils/pager.cc:30
+#: ../src/utils/pager.cc:35
 #, c-format
 msgid "Press '%c' to exit the pager."
 msgstr "'%c' 를 누르면 페이저를 종료합니다."
 
-#: ../src/utils/pager.cc:40
+#: ../src/utils/pager.cc:47
 msgid "Use arrows or pgUp/pgDown keys to scroll the text by lines or pages."
 msgstr "화살표 또는 페이지업/다운 키로 문장이나 쪽을 아래위로 움직입니다."
 
-#: ../src/utils/pager.cc:44
+#: ../src/utils/pager.cc:51
 msgid "Use the Enter or Space key to scroll the text by lines or pages."
 msgstr "엔터나 스페이스 키로 문장이나 쪽을 움직입니다."
 
 #. ----------------------------------------------------------------------------
-#: ../src/utils/prompt.cc:87
+#: ../src/utils/prompt.cc:88
 msgid "abort"
 msgstr "중단"
 
-#: ../src/utils/prompt.cc:87
+#: ../src/utils/prompt.cc:88
 msgid "retry"
 msgstr "재시도"
 
 #  combo box item
-#: ../src/utils/prompt.cc:87
+#: ../src/utils/prompt.cc:88
 msgid "ignore"
 msgstr "무시"
 
-#: ../src/utils/prompt.cc:99
+#: ../src/utils/prompt.cc:100
 msgid "Abort, retry, ignore?\n"
 msgstr "중단(A), 재시도(R), 무시?(I)\n"
 
-#: ../src/utils/prompt.cc:134
+#: ../src/utils/prompt.cc:135
 #, c-format
 msgid "autoselect %s after %u "
 msgstr "%s(%u 의 뒤에) 를 자동 선택"
@@ -2099,54 +2125,61 @@ msgstr "%s(%u 의 뒤에) 를 자동 선택"
 #. the answers must be separated by slash characters '/' and must
 #. correspond to abort/retry/ignore in that order.
 #. The answers should be lower case letters.
-#: ../src/utils/prompt.cc:158
+#: ../src/utils/prompt.cc:159
 msgid "a/r/i"
 msgstr "a/r/i"
 
-#: ../src/utils/prompt.cc:159
+#: ../src/utils/prompt.cc:160
 msgid "Abort, retry, ignore?"
 msgstr "중단(A), 재시도(R), 무시(I)?"
 
-#: ../src/utils/prompt.cc:168 ../src/utils/prompt.cc:193
-#: ../src/utils/prompt.cc:249
+#: ../src/utils/prompt.cc:169 ../src/utils/prompt.cc:197
+#: ../src/utils/prompt.cc:253
 msgid "yes"
 msgstr "예"
 
-#: ../src/utils/prompt.cc:168 ../src/utils/prompt.cc:194
-#: ../src/utils/prompt.cc:249
+#: ../src/utils/prompt.cc:169 ../src/utils/prompt.cc:198
+#: ../src/utils/prompt.cc:253
 msgid "no"
 msgstr "아니요"
 
-#: ../src/utils/prompt.cc:241
+#: ../src/utils/prompt.cc:245
 #, c-format
 msgid "Invalid answer '%s'."
 msgstr "'%s' 는 잘못된 대답입니다."
 
 #. TranslatorExplanation don't translate the 'y' and 'n', they can always be used as answers.
 #. The second and the third %s is the translated 'yes' and 'no' string (lowercase).
-#: ../src/utils/prompt.cc:248
+#: ../src/utils/prompt.cc:252
 #, c-format
 msgid "Enter 'y' for '%s' or 'n' for '%s' if nothing else works for you."
 msgstr "잘 동작하지 않는 경우, '%s' 에는 'y' 를 '%s' 에는 'n' 을 입력해주세요."
 
+#: ../src/utils/prompt.cc:266
+#, c-format
+msgid ""
+"If you run zypper without a terminal, use '%s' global\n"
+"option to make zypper use default answers to prompts."
+msgstr ""
+
 #. TranslatorExplanation These are reasons for various failures.
-#: ../src/utils/prompt.h:112
+#: ../src/utils/prompt.h:125
 msgid "Not found"
 msgstr "찾을 수 없음"
 
-#: ../src/utils/prompt.h:112
+#: ../src/utils/prompt.h:125
 msgid "I/O error"
 msgstr "I/O 오류"
 
-#: ../src/utils/prompt.h:112
+#: ../src/utils/prompt.h:125
 msgid "Invalid object"
 msgstr "잘못된 개체"
 
-#: ../src/utils/prompt.h:119
+#: ../src/utils/prompt.h:132
 msgid "Error"
 msgstr "오류"
 
-#: ../src/Zypper.cc:154
+#: ../src/Zypper.cc:153
 msgid ""
 "  Global Options:\n"
 "\t--help, -h\t\tHelp.\n"
@@ -2182,7 +2215,7 @@ msgstr ""
 "\t--cache-dir, -C <dir>\t대체 메타데이터 캐시 디릭토리를 사용합니다.\n"
 "\t--raw-cache-dir <dir>\t대체 raw 메타데이터 캐시 디렉토리를 사용합니다.\n"
 
-#: ../src/Zypper.cc:172
+#: ../src/Zypper.cc:171
 msgid ""
 "     Repository Options:\n"
 "\t--no-gpg-checks\t\tIgnore GPG check failures and continue.\n"
@@ -2196,7 +2229,14 @@ msgstr ""
 "\t--disable-repositories\t저장소로 부터 메타데이터를 읽지 않습니다.\n"
 "\t--no-refresh\t\t저장소 갱신을 하지 않습니다.\n"
 
-#: ../src/Zypper.cc:179
+#. translators: these belong to Repository Options main help text
+#: ../src/Zypper.cc:178
+msgid ""
+"\t--no-cd\t\t\tIgnore CD/DVD repositories.\n"
+"\t--no-remote\t\tIgnore remote repositories.\n"
+msgstr ""
+
+#: ../src/Zypper.cc:182
 msgid ""
 "     Target Options:\n"
 "\t--root, -R <dir>\tOperate on a different root directory.\n"
@@ -2208,7 +2248,7 @@ msgstr ""
 "\t--disable-system-resolvables\n"
 "\t\t\t\t시스템에 설치된 꾸러미를 읽지 않습니다.\n"
 
-#: ../src/Zypper.cc:186
+#: ../src/Zypper.cc:189
 msgid ""
 "  Commands:\n"
 "\thelp, ?\t\t\tPrint help.\n"
@@ -2218,7 +2258,7 @@ msgstr ""
 "\thelp, ?\t\t\t도움말 출력.\n"
 "\tshell, sh\t\t한번만 다중 명령 적용.\n"
 
-#: ../src/Zypper.cc:191
+#: ../src/Zypper.cc:194
 msgid ""
 "     Repository Management:\n"
 "\trepos, lr\t\tList all defined repositories.\n"
@@ -2238,7 +2278,7 @@ msgstr ""
 "\trefresh, ref\t\t모든 저장소를 새로 고칩니다.\n"
 "\tclean\t\t\t내부 캐시를 청소합니다.\n"
 
-#: ../src/Zypper.cc:201
+#: ../src/Zypper.cc:204
 msgid ""
 "     Service Management:\n"
 "\tservices, ls\t\tList all defined services.\n"
@@ -2254,7 +2294,7 @@ msgstr ""
 "\tremoveservice, rs\t지정한 서비스를 제거합니다.\n"
 "\trefresh-services, refs\t모든 서비스를 새로 고칩니다.\n"
 
-#: ../src/Zypper.cc:209
+#: ../src/Zypper.cc:212
 msgid ""
 "     Software Management:\n"
 "\tinstall, in\t\tInstall packages.\n"
@@ -2275,7 +2315,7 @@ msgstr ""
 "\t\t\t\t새로 추가된 설치된 꾸러미의 권장 꾸러미를 \n"
 "\t\t\t\t설치합니다.\n"
 
-#: ../src/Zypper.cc:220
+#: ../src/Zypper.cc:223
 msgid ""
 "     Update Management:\n"
 "\tupdate, up\t\tUpdate installed packages with newer versions.\n"
@@ -2293,7 +2333,7 @@ msgstr ""
 "\tdist-upgrade, dup\t배포판 업그레이드를 진행합니다.\n"
 "\tpatch-check, pchk\t패치를 확인합니다.\n"
 
-#: ../src/Zypper.cc:229
+#: ../src/Zypper.cc:232
 msgid ""
 "     Querying:\n"
 "\tsearch, se\t\tSearch for packages matching a pattern.\n"
@@ -2319,7 +2359,7 @@ msgstr ""
 "\tproducts, pd\t\t사용가능한 제품 목록입니다.\n"
 "\twhat-provides, wp\t지정한 설정 조건의 꾸러미 목록입니다.\n"
 
-#: ../src/Zypper.cc:244
+#: ../src/Zypper.cc:247
 msgid ""
 "     Package Locks:\n"
 "\taddlock, al\t\tAdd a package lock.\n"
@@ -2331,7 +2371,7 @@ msgstr ""
 "\tremovelock, rl\t\t꾸러미 잠금을 제거합니다.\n"
 "\tlocks, ll\t\t현재 잠겨있는 꾸러미 목록입니다.\n"
 
-#: ../src/Zypper.cc:250
+#: ../src/Zypper.cc:253
 msgid ""
 "     Other Commands:\n"
 "\tversioncmp, vcmp\tCompare two version strings.\n"
@@ -2345,7 +2385,7 @@ msgstr ""
 "\tlicenses\t\t설치된 꾸러미의 EULA 및 사용권을 \n"
 "\t\t\t\t인쇄합니다.\n"
 
-#: ../src/Zypper.cc:258
+#: ../src/Zypper.cc:261
 msgid ""
 "  Usage:\n"
 "\tzypper [--global-options] <command> [--command-options] [arguments]\n"
@@ -2355,70 +2395,82 @@ msgstr ""
 
 #. translators: %s is "help" or "zypper help" depending on whether
 #. zypper shell is running or not
-#: ../src/Zypper.cc:283
+#: ../src/Zypper.cc:286
 #, c-format
 msgid "Type '%s' to get a list of global options and commands."
 msgstr "'%s'를 입력하면 전체 옵션 및 명령의 목록을 가져옵니다."
 
 #. translators: %s is "help" or "zypper help" depending on whether
 #. zypper shell is running or not
-#: ../src/Zypper.cc:292
+#: ../src/Zypper.cc:295
 #, c-format
 msgid "Type '%s' to get command-specific help."
 msgstr "'%s'를 입력하면 좀더 구체적인 명령어 도움말을 가져옵니다."
 
-#: ../src/Zypper.cc:393
+#: ../src/Zypper.cc:398
 #, c-format
 msgid "Verbosity: %d"
 msgstr "출력방식: %d"
 
-#: ../src/Zypper.cc:407
+#: ../src/Zypper.cc:412
 #, c-format
 msgid "Invalid table style %d."
 msgstr "잘못된 테이블 모양 %d 입니다."
 
-#: ../src/Zypper.cc:408
+#: ../src/Zypper.cc:413
 #, c-format
 msgid "Use an integer number from %d to %d"
 msgstr "%d 부터 %d 까지 정수를 사용"
 
-#: ../src/Zypper.cc:439
+#: ../src/Zypper.cc:444
 msgid "Entering non-interactive mode."
 msgstr "비대화형 모드로 진입하는 중입니다."
 
-#: ../src/Zypper.cc:445
+#: ../src/Zypper.cc:450
 msgid "Entering 'no-gpg-checks' mode."
 msgstr "'GPG 확인 안함' 모드로 진입하는 중입니다."
 
-#: ../src/Zypper.cc:456
+#: ../src/Zypper.cc:461
 msgid "The path specified in the --root option must be absolute."
 msgstr "--root 옵션으로 지정한 경로는 절대 경로이어야 합니다."
 
-#: ../src/Zypper.cc:485
+#: ../src/Zypper.cc:490
 msgid "Repositories disabled, using the database of installed packages only."
 msgstr "저장소가 비활성화 상태입니다. 설치된 꾸러미의 데이터베이스만 사용합니다."
 
-#: ../src/Zypper.cc:497
+#: ../src/Zypper.cc:502
 msgid "Autorefresh disabled."
 msgstr "자동 새로고침 사용안함."
 
-#: ../src/Zypper.cc:504
+#: ../src/Zypper.cc:509
+#, fuzzy
+msgid "CD/DVD repositories disabled."
+msgstr "자동 새로고침 사용안함."
+
+#: ../src/Zypper.cc:516
+#, fuzzy
+msgid "Remote repositories disabled."
+msgstr "자동 새로고침 사용안함."
+
+#: ../src/Zypper.cc:523
 msgid "Ignoring installed resolvables."
 msgstr "설치된 해결방법을 무시하는 중입니다."
 
 #. TranslatorExplanation The %s is "--plus-repo"
-#: ../src/Zypper.cc:599
+#: ../src/Zypper.cc:618
 #, c-format
 msgid "The %s option has no effect here, ignoring."
 msgstr "%s 옵션은 여기에서는 아무작용 안합니다. 무시 중입니다."
 
-#: ../src/Zypper.cc:776
+#: ../src/Zypper.cc:795
 msgid "Unexpected exception."
 msgstr "예기치않은 예외가 발생했습니다."
 
 #. TranslatorExplanation the first %s = "package, patch, pattern, product"
 #. and the second %s = "package"
-#: ../src/Zypper.cc:860
+#. ! \todo A capability is NAME[.ARCH][OP<VERSION>] now,
+#. !  the help text will be changed after release
+#: ../src/Zypper.cc:881
 #, c-format
 msgid ""
 "install (in) [options] <capability|rpm_file_uri> ...\n"
@@ -2461,7 +2513,7 @@ msgstr ""
 
 #. TranslatorExplanation the first %s = "package, patch, pattern, product"
 #. and the second %s = "package"
-#: ../src/Zypper.cc:909
+#: ../src/Zypper.cc:930
 #, c-format
 msgid ""
 "remove (rm) [options] <capability> ...\n"
@@ -2494,7 +2546,7 @@ msgstr ""
 "    --force-resolution          해결방법 찾기를 강제로 진행합니다(보다 적극적인 동작).\n"
 "-D, --dry-run                   실제로 제거 하지않고 제거 테스트만 진행합니다.\n"
 
-#: ../src/Zypper.cc:939
+#: ../src/Zypper.cc:960
 msgid ""
 "source-install (si) [options] <name> ...\n"
 "\n"
@@ -2514,7 +2566,7 @@ msgstr ""
 "-D, --no-build-deps      의존성 빌드를 설치하지 않습니다.\n"
 "-r, --repo <alias|#|URI> 지정한 저장소로부터만 꾸러미를 설치합니다.\n"
 
-#: ../src/Zypper.cc:967
+#: ../src/Zypper.cc:988
 msgid ""
 "verify (ve) [options]\n"
 "\n"
@@ -2534,7 +2586,7 @@ msgstr ""
 "-D, --dry-run            복구 검사를 진행하고 시스템에는 아무런 조작을 하지 않습니다.\n"
 "-r, --repo <alias|#|URI> 지정한 저장소에서를 사용하여 누락된 꾸러미를 설치 합니다.\n"
 
-#: ../src/Zypper.cc:991
+#: ../src/Zypper.cc:1012
 msgid ""
 "install-new-recommends (inr) [options]\n"
 "\n"
@@ -2555,7 +2607,7 @@ msgstr ""
 "    --debug-solver       디버깅용 해결 테스트 케이스를 작성합니다.\n"
 
 #. TranslatorExplanation the %s = "yast2, rpm-md, plaindir"
-#: ../src/Zypper.cc:1018
+#: ../src/Zypper.cc:1039
 #, c-format
 msgid ""
 "addservice (as) [options] <URI> <alias>\n"
@@ -2578,7 +2630,7 @@ msgstr ""
 
 #. TranslatorExplanation the %s = "yast2, rpm-md, plaindir"
 #. TODO
-#: ../src/Zypper.cc:1042
+#: ../src/Zypper.cc:1063
 msgid ""
 "removeservice (rs) [options] <alias|#|URI>\n"
 "\n"
@@ -2597,7 +2649,7 @@ msgstr ""
 "    --loose-query  URI의 쿼리 문자열을 무시합니다.\n"
 
 #. translators: %s is "--all" and "--all"
-#: ../src/Zypper.cc:1078
+#: ../src/Zypper.cc:1099
 #, c-format
 msgid ""
 "modifyservice (ms) <options> <alias|#|URI>\n"
@@ -2650,7 +2702,7 @@ msgstr ""
 "-t, --remote                   모든 원격 서비스 변경사항을 적용합니다.\n"
 "-m, --medium-type <유형>       지정된 유형의 서비스 변경사항을 적용합니다.\n"
 
-#: ../src/Zypper.cc:1126
+#: ../src/Zypper.cc:1147
 msgid ""
 "services (ls) [options]\n"
 "\n"
@@ -2678,7 +2730,7 @@ msgstr ""
 "-U, --sort-by-uri         URI 로 목록을 정리합니다.\n"
 "-N, --sort-by-name        이름으로 목록을 정리합니다.\n"
 
-#: ../src/Zypper.cc:1152
+#: ../src/Zypper.cc:1173
 msgid ""
 "refresh-services (refs) [options]\n"
 "\n"
@@ -2695,7 +2747,7 @@ msgstr ""
 "-r, --with-repos      저장소도 새로 고칩니다.\n"
 
 #. TranslatorExplanation the %s = "yast2, rpm-md, plaindir"
-#: ../src/Zypper.cc:1180
+#: ../src/Zypper.cc:1201
 #, c-format
 msgid ""
 "addrepo (ar) [options] <URI> <alias>\n"
@@ -2732,7 +2784,7 @@ msgstr ""
 
 #. translators: this is just a rug compatiblity command
 #. translators: this is just a rug-compatiblity command
-#: ../src/Zypper.cc:1229 ../src/Zypper.cc:2106
+#: ../src/Zypper.cc:1250 ../src/Zypper.cc:2127
 msgid ""
 "list-resolvables (lr)\n"
 "\n"
@@ -2742,7 +2794,7 @@ msgstr ""
 "\n"
 "사용가능한 해결방법 형식 목록입니다.\n"
 
-#: ../src/Zypper.cc:1237
+#: ../src/Zypper.cc:1258
 msgid ""
 "repos (lr) [options]\n"
 "\n"
@@ -2773,11 +2825,11 @@ msgstr ""
 "-N, --sort-by-name        목록을 이름순으로 정리합니다.\n"
 
 #. translators: this option belongs to 'lr' command help
-#: ../src/Zypper.cc:1252
+#: ../src/Zypper.cc:1273
 msgid "-s, --service             Show also alias of parent service.\n"
 msgstr ""
 
-#: ../src/Zypper.cc:1267
+#: ../src/Zypper.cc:1288
 msgid ""
 "removerepo (rr) [options] <alias|#|URI>\n"
 "\n"
@@ -2795,7 +2847,7 @@ msgstr ""
 "    --loose-auth   URI의 사용자 인증 데이터는 무시합니다.\n"
 "    --loose-query  URI의 쿼리 문자열을 무시합니다.\n"
 
-#: ../src/Zypper.cc:1286
+#: ../src/Zypper.cc:1307
 msgid ""
 "renamerepo (nr) [options] <alias|#|URI> <new-alias>\n"
 "\n"
@@ -2811,7 +2863,7 @@ msgstr ""
 
 #. translators: %s is "--all|--remote|--local|--medium-type"
 #. and "--all, --remote, --local, --medium-type"
-#: ../src/Zypper.cc:1317
+#: ../src/Zypper.cc:1338
 #, c-format
 msgid ""
 "modifyrepo (mr) <options> <alias|#|URI>\n"
@@ -2856,7 +2908,7 @@ msgstr ""
 "-t, --remote              변경사항을 모든 원격 저장소에 적용하니다.\n"
 "-m, --medium-type <형식>  변경사항을 지정한 형식의 저장소에 적용합니다.\n"
 
-#: ../src/Zypper.cc:1357
+#: ../src/Zypper.cc:1378
 msgid ""
 "refresh (ref) [alias|#|URI] ...\n"
 "\n"
@@ -2884,7 +2936,7 @@ msgstr ""
 "-r, --repo <별칭|#|URI> 지정한 저장소만 새로 고칩니다.\n"
 "-s, --services           저장소를 새로 고치기전에 서비스를 새로 고칩니다.\n"
 
-#: ../src/Zypper.cc:1386
+#: ../src/Zypper.cc:1407
 msgid ""
 "clean [alias|#|URI] ...\n"
 "\n"
@@ -2908,7 +2960,7 @@ msgstr ""
 
 #. TranslatorExplanation the first %s = "package, patch, pattern, product"
 #. and the second %s = "patch"
-#: ../src/Zypper.cc:1415
+#: ../src/Zypper.cc:1436
 #, c-format
 msgid ""
 "list-updates (lu) [options]\n"
@@ -2943,7 +2995,7 @@ msgstr ""
 
 #. TranslatorExplanation the first %s = "package, patch, pattern, product"
 #. and the second %s = "patch"
-#: ../src/Zypper.cc:1466
+#: ../src/Zypper.cc:1487
 #, c-format
 msgid ""
 "update (up) [options] ...\n"
@@ -2990,7 +3042,7 @@ msgstr ""
 "    --force-resolution          강제로 해결 방법을 찾습니다(보다 적극적인 동작).\n"
 "-D, --dry-run                   업데이트를 테스트만 하고 실제 아무것도 하지 않습니다.\n"
 
-#: ../src/Zypper.cc:1505
+#: ../src/Zypper.cc:1526
 msgid ""
 "patch [options]\n"
 "\n"
@@ -3020,7 +3072,7 @@ msgstr ""
 "    --debug-solver              해결 처리에 대해 디버그를 합니다.\n"
 "-D, --dry-run                   업데이트를 테스트만 하고 실제 업데이트 하지 않습니다.\n"
 
-#: ../src/Zypper.cc:1531
+#: ../src/Zypper.cc:1552
 msgid ""
 "list-patches (lp) [options]\n"
 "\n"
@@ -3037,7 +3089,7 @@ msgstr ""
 "\n"
 "-r, --repo <별칭|#|URI>  지정한 저장소로부터만 패치 목록을 확인합니다.\n"
 
-#: ../src/Zypper.cc:1556
+#: ../src/Zypper.cc:1577
 msgid ""
 "dist-upgrade (dup) [options]\n"
 "\n"
@@ -3065,7 +3117,7 @@ msgstr ""
 "    --debug-solver              해결 처리에 대해 디버그를 합니다.\n"
 "-D, --dry-run                   업그레이드를 테스트만 하고 실제 업그레이드 하지 않습니다.\n"
 
-#: ../src/Zypper.cc:1598
+#: ../src/Zypper.cc:1619
 msgid ""
 "search (se) [options] [querystring] ...\n"
 "\n"
@@ -3113,7 +3165,7 @@ msgstr ""
 "\n"
 "검색어에는 * 와 ? 의 특수문자도 지정할 수 있습니다.\n"
 
-#: ../src/Zypper.cc:1635
+#: ../src/Zypper.cc:1656
 msgid ""
 "patch-check (pchk) [options]\n"
 "\n"
@@ -3131,7 +3183,7 @@ msgstr ""
 "\n"
 "-r, --repo <별명|#|URI>  지정한 저장소에 있는 패치만 확인합니다.\n"
 
-#: ../src/Zypper.cc:1657
+#: ../src/Zypper.cc:1678
 msgid ""
 "patches (pch) [repository] ...\n"
 "\n"
@@ -3149,7 +3201,7 @@ msgstr ""
 "\n"
 "-r, --repo <별명|#|URI>  저장소를 지정하는 다른 방법입니다.\n"
 
-#: ../src/Zypper.cc:1684
+#: ../src/Zypper.cc:1705
 msgid ""
 "packages (pa) [options] [repository] ...\n"
 "\n"
@@ -3175,7 +3227,7 @@ msgstr ""
 "-N, --sort-by-name        꾸러미 이름으로 목록을 정리합니다.\n"
 "-R, --sort-by-repo        저장소 이름으로 목록을 정리합니다.\n"
 
-#: ../src/Zypper.cc:1712
+#: ../src/Zypper.cc:1733
 msgid ""
 "patterns (pt) [options] [repository] ...\n"
 "\n"
@@ -3197,7 +3249,7 @@ msgstr ""
 "-i, --installed-only      설치된 패턴만 표시합니다.\n"
 "-u, --uninstalled-only    설치되어 있지 않은 패턴만 표시합니다.\n"
 
-#: ../src/Zypper.cc:1738
+#: ../src/Zypper.cc:1759
 msgid ""
 "products (pd) [options] [repository] ...\n"
 "\n"
@@ -3219,7 +3271,7 @@ msgstr ""
 "-i, --installed-only      설치된 제품만 표시합니다.\n"
 "-u, --uninstalled-only    설치되어 있지 않은 제품만 표시합니다.\n"
 
-#: ../src/Zypper.cc:1763
+#: ../src/Zypper.cc:1784
 #, c-format
 msgid ""
 "info (if) [options] <name> ...\n"
@@ -3240,7 +3292,7 @@ msgstr ""
 "-t, --type <형식>         꾸러미의 형식(%s)을 지정합니다.\n"
 "                          기본: %s."
 
-#: ../src/Zypper.cc:1786
+#: ../src/Zypper.cc:1807
 #, c-format
 msgid ""
 "patch-info <patchname> ...\n"
@@ -3255,7 +3307,7 @@ msgstr ""
 "\n"
 "이것은 '%s'와 같은 의미로, RUG와의 호환성 확보를 위해 준비되었습니다.\n"
 
-#: ../src/Zypper.cc:1805
+#: ../src/Zypper.cc:1826
 #, c-format
 msgid ""
 "pattern-info <pattern_name> ...\n"
@@ -3270,7 +3322,7 @@ msgstr ""
 "\n"
 "이것은 '%s'와 같은 의미로, RUG와의 호환성 확보를 위해 준비되었습니다.\n"
 
-#: ../src/Zypper.cc:1824
+#: ../src/Zypper.cc:1845
 #, c-format
 msgid ""
 "product-info <product_name> ...\n"
@@ -3285,7 +3337,7 @@ msgstr ""
 "\n"
 "이것은 '%s'와 같은 의미로, RUG와의 호환성 확보를 위해 준비되었습니다.\n"
 
-#: ../src/Zypper.cc:1841
+#: ../src/Zypper.cc:1862
 msgid ""
 "what-provides (wp) <capability>\n"
 "\n"
@@ -3299,7 +3351,7 @@ msgstr ""
 "\n"
 "이 명령에 추가 옵션은 없습니다.\n"
 
-#: ../src/Zypper.cc:1892
+#: ../src/Zypper.cc:1913
 msgid ""
 "moo\n"
 "\n"
@@ -3313,7 +3365,7 @@ msgstr ""
 "\n"
 "이 명령에는 추가 옵션이 없습니다.\n"
 
-#: ../src/Zypper.cc:1914
+#: ../src/Zypper.cc:1935
 #, c-format
 msgid ""
 "addlock (al) [options] <packagename> ...\n"
@@ -3334,7 +3386,7 @@ msgstr ""
 "-t, --type <형식>         꾸러미의 형식(%s)을 지정합니다.\n"
 "                          기본: %s.\n"
 
-#: ../src/Zypper.cc:1940
+#: ../src/Zypper.cc:1961
 #, c-format
 msgid ""
 "removelock (rl) [options] <lock-number|packagename> ...\n"
@@ -3351,7 +3403,7 @@ msgstr ""
 "  명령 옵션:\n"
 "-r, --repo <별칭|#|URI>  지정한 저장소의 잠금만 제거합니다.\n"
 
-#: ../src/Zypper.cc:1960
+#: ../src/Zypper.cc:1981
 msgid ""
 "locks (ll)\n"
 "\n"
@@ -3365,7 +3417,7 @@ msgstr ""
 "\n"
 "이 명령에는 추가 옵션이 없습니다.\n"
 
-#: ../src/Zypper.cc:2000
+#: ../src/Zypper.cc:2021
 msgid ""
 "targetos (tos)\n"
 "\n"
@@ -3379,7 +3431,7 @@ msgstr ""
 "\n"
 "이 명령에는 추가 옵션이 없습니다.\n"
 
-#: ../src/Zypper.cc:2019
+#: ../src/Zypper.cc:2040
 msgid ""
 "versioncmp (vcmp) <version1> <version2>\n"
 "\n"
@@ -3395,7 +3447,7 @@ msgstr ""
 "  명령 옵션:\n"
 "-m, --match  릴리즈 번호가 없을 때는 어떤 릴리즈라도 상관 없이 처리합니다.\n"
 
-#: ../src/Zypper.cc:2038
+#: ../src/Zypper.cc:2059
 msgid ""
 "licenses\n"
 "\n"
@@ -3409,7 +3461,7 @@ msgstr ""
 "\n"
 "이 명령에는 추가 옵션이 없습니다.\n"
 
-#: ../src/Zypper.cc:2055
+#: ../src/Zypper.cc:2076
 msgid ""
 "quit (exit, ^D)\n"
 "\n"
@@ -3423,7 +3475,7 @@ msgstr ""
 "\n"
 "이 명령에는 추가 옵션이 없습니다.\n"
 
-#: ../src/Zypper.cc:2072
+#: ../src/Zypper.cc:2093
 msgid ""
 "shell (sh)\n"
 "\n"
@@ -3438,7 +3490,7 @@ msgstr ""
 "이 명령에는 추가 옵션이 없습니다.\n"
 
 #. translators: this is just a rug-compatiblity command
-#: ../src/Zypper.cc:2090
+#: ../src/Zypper.cc:2111
 msgid ""
 "service-types (st)\n"
 "\n"
@@ -3451,7 +3503,7 @@ msgstr ""
 #. trunslators: this is a rug-compatibility command (equivalent of
 #. 'zypper addrepo -t plaindir URI'). You can refer to rug's translations
 #. for how to translate specific terms like channel or service if in doubt.
-#: ../src/Zypper.cc:2128
+#: ../src/Zypper.cc:2149
 msgid ""
 "mount\n"
 "\n"
@@ -3471,7 +3523,7 @@ msgstr ""
 "-n, --name <이름>    서비스의 이름을 지정합니다.\n"
 "-r, --recurse        하위 디렉토리도 검색합니다.\n"
 
-#: ../src/Zypper.cc:2159
+#: ../src/Zypper.cc:2180
 #, c-format
 msgid ""
 "patch-search [options] [querystring...]\n"
@@ -3483,7 +3535,7 @@ msgstr ""
 "지정한 검색어로 패치를 검색합니다. 이것은 '%s'와 같은 의미를 가지는 RUG의 호환기능 입니다. zypper의 man페이지에서 자세한 내용을 살펴보세요.\n"
 
 #. translators: this is just a rug-compatiblity command
-#: ../src/Zypper.cc:2177
+#: ../src/Zypper.cc:2198
 msgid ""
 "ping [options]\n"
 "\n"
@@ -3491,16 +3543,16 @@ msgid ""
 "It is provided for compatibility with rug.\n"
 msgstr ""
 
-#: ../src/Zypper.cc:2191 ../src/Zypper.cc:3936
+#: ../src/Zypper.cc:2212 ../src/Zypper.cc:3959
 msgid "Unexpected program flow."
 msgstr "예기치 않은 프로그램 흐름입니다."
 
-#: ../src/Zypper.cc:2215
+#: ../src/Zypper.cc:2236
 msgid "Non-option program arguments: "
 msgstr "옵션 이외의 프로그램 인수:"
 
 #. TranslatorExplanation this is a hedgehog, paint another animal, if you want
-#: ../src/Zypper.cc:2275
+#: ../src/Zypper.cc:2298
 msgid ""
 "   \\\\\\\\\\\n"
 "  \\\\\\\\\\\\\\__o\n"
@@ -3510,30 +3562,30 @@ msgstr ""
 "  \\\\\\\\\\\\\\__o\n"
 "__\\\\\\\\\\\\\\'/_"
 
-#: ../src/Zypper.cc:2302
+#: ../src/Zypper.cc:2325
 msgid "Root privileges are required for refreshing services."
 msgstr "시스템 서비스를 새로 고치려면 루트 권한이 필요합니다."
 
-#: ../src/Zypper.cc:2329 ../src/Zypper.cc:2676
+#: ../src/Zypper.cc:2352 ../src/Zypper.cc:2699
 msgid "Root privileges are required for modifying system services."
 msgstr "시스템 서비스를 수정하려면 루트 권한이 필요합니다."
 
-#: ../src/Zypper.cc:2398
+#: ../src/Zypper.cc:2421
 #, fuzzy
 msgid "Could not determine the type of the repository. Check if the specified URI points to a valid repository."
 msgstr "저장소의 형식을 구분할 수 없습니다. 정의한 URI 가 저장소의 올바른 위치를 가르키고 있는지 확인해주세요:"
 
-#: ../src/Zypper.cc:2430
+#: ../src/Zypper.cc:2453
 #, c-format
 msgid "'%s' is not a valid service type."
 msgstr "'%s' 는 잘못된 서비스 유형입니다."
 
-#: ../src/Zypper.cc:2432
+#: ../src/Zypper.cc:2455
 #, c-format
 msgid "See '%s' or '%s' to get a list of known service types."
 msgstr "'%s' 또는 '%s' 를 확인하여 알려진 서비스 형식의 목록을 가져옵니다."
 
-#: ../src/Zypper.cc:2449
+#: ../src/Zypper.cc:2472
 msgid "Root privileges are required for modifying services."
 msgstr "서비스를 수정하려면 루트 권한이 필요합니다."
 
@@ -3541,190 +3593,200 @@ msgstr "서비스를 수정하려면 루트 권한이 필요합니다."
 #. followed by ms command help text which will explain it
 #. translators: aggregate option is e.g. "--all". This message will be
 #. followed by mr command help text which will explain it
-#: ../src/Zypper.cc:2461 ../src/Zypper.cc:2829
+#: ../src/Zypper.cc:2484 ../src/Zypper.cc:2852
 msgid "Alias or an aggregate option is required."
 msgstr "별명 또는 통합 옵션을 지정할 필요가 있습니다."
 
-#: ../src/Zypper.cc:2495
+#: ../src/Zypper.cc:2518
 #, c-format
 msgid "Service '%s' not found."
 msgstr "'%s' 서비스를 찾지 못했습니다."
 
-#: ../src/Zypper.cc:2531 ../src/Zypper.cc:2675 ../src/Zypper.cc:2761
-#: ../src/Zypper.cc:2817
+#: ../src/Zypper.cc:2554 ../src/Zypper.cc:2698 ../src/Zypper.cc:2784
+#: ../src/Zypper.cc:2840
 msgid "Root privileges are required for modifying system repositories."
 msgstr "시스템 저장소를 수정하려면 root 권한이 필요합니다."
 
-#: ../src/Zypper.cc:2580 ../src/Zypper.cc:2937
+#: ../src/Zypper.cc:2603 ../src/Zypper.cc:2960
 msgid "Too few arguments."
 msgstr "인수가 너무 적습니다."
 
-#: ../src/Zypper.cc:2604
+#: ../src/Zypper.cc:2627
 msgid "If only one argument is used, it must be a URI pointing to a .repo file."
 msgstr "한 개의 인수만 지정 한경우 .repo 파일이 있는 URI를 지정해야 합니다."
 
-#: ../src/Zypper.cc:2630
+#: ../src/Zypper.cc:2653
 #, c-format
 msgid "Cannot use %s together with %s. Using the %s setting."
 msgstr "%s와 %s를 동시에 사용할 수 없습니다. %s의 설정을 사용합니다."
 
-#: ../src/Zypper.cc:2653
+#: ../src/Zypper.cc:2676
 msgid "Specified type is not a valid repository type:"
 msgstr "지정한 형식은 잘못된 저장소 형식입니다:"
 
-#: ../src/Zypper.cc:2655
+#: ../src/Zypper.cc:2678
 #, c-format
 msgid "See '%s' or '%s' to get a list of known repository types."
 msgstr "'%s' 또는 '%s' 를 확인하여 알려진 저장소 형식의 목록을 가져옵니다."
 
 #. translators: %s is the supplied command line argument which
 #. for which no repository counterpart was found
-#: ../src/Zypper.cc:2711
+#: ../src/Zypper.cc:2734
 #, c-format
 msgid "Repository '%s' not found by alias, number or URI."
 msgstr "별칭, 번호 또는 URI 에서 '%s' 저장소를 찾을 수 없습니다."
 
 #. translators: %s is the supplied command line argument which
 #. for which no service counterpart was found
-#: ../src/Zypper.cc:2734
+#: ../src/Zypper.cc:2757
 #, c-format
 msgid "Service '%s' not found by alias, number or URI."
 msgstr "별칭, 번호 또는 URI 에서 '%s' 서비스를 찾을 수 없습니다."
 
-#: ../src/Zypper.cc:2768
+#: ../src/Zypper.cc:2791
 msgid "Too few arguments. At least URI and alias are required."
 msgstr "인수가 너무 적습니다. 적어도 URI와 별명을 지정할 필요가 있습니다."
 
-#: ../src/Zypper.cc:2793
+#: ../src/Zypper.cc:2816
 #, c-format
 msgid "Repository '%s' not found."
 msgstr "'%s' 저장소를 찾을 수 없습니다."
 
-#: ../src/Zypper.cc:2859
+#: ../src/Zypper.cc:2882
 #, c-format
 msgid "Repository %s not found."
 msgstr "저장소 %s 를 찾을 수 없습니다."
 
-#: ../src/Zypper.cc:2877
+#: ../src/Zypper.cc:2900
 msgid "Root privileges are required for refreshing system repositories."
 msgstr "시스템 저장소를 새로 고치려면 root 권한이 필요합니다."
 
-#: ../src/Zypper.cc:2884
+#: ../src/Zypper.cc:2907
 #, c-format
 msgid "The '%s' global option has no effect here."
 msgstr "'%s' 글로벌 옵션은 여기에서는 동작하지 않습니다."
 
-#: ../src/Zypper.cc:2892
+#: ../src/Zypper.cc:2915
 #, c-format
 msgid "Arguments are not allowed if '%s' is used."
 msgstr ""
 
-#: ../src/Zypper.cc:2918
+#: ../src/Zypper.cc:2941
 msgid "Root privileges are required for cleaning local caches."
 msgstr "내부 캐시를 청소하려면 root 권한이 필요합니다."
 
-#: ../src/Zypper.cc:2938
+#: ../src/Zypper.cc:2961
 msgid "At least one package name is required."
 msgstr "적어도 한 개의 꾸러미 이름을 지정할 필요가 있습니다."
 
-#: ../src/Zypper.cc:2952
+#: ../src/Zypper.cc:2975
 msgid "Root privileges are required for installing or uninstalling packages."
 msgstr "꾸러미 설치/제거에는 root 권한이 필요합니다."
 
-#: ../src/Zypper.cc:2967
+#: ../src/Zypper.cc:2990
 #, c-format
 msgid "Unknown package type: %s"
 msgstr "알 수 없는 꾸러미 형식: %s"
 
-#: ../src/Zypper.cc:2987
+#: ../src/Zypper.cc:3010
 #, c-format
 msgid "'%s' looks like an RPM file. Will try to download it."
 msgstr "'%s' 는 RPM 파일과 같습니다. 다운로드 합니다."
 
-#: ../src/Zypper.cc:3000
+#: ../src/Zypper.cc:3023
 #, c-format
 msgid "Problem with the RPM file specified as '%s', skipping."
 msgstr "'%s'로 지정한 RPM 파일에 문제가 있음, 생략합니다."
 
-#: ../src/Zypper.cc:3023
+#: ../src/Zypper.cc:3046
 #, c-format
 msgid "Problem reading the RPM header of %s. Is it an RPM file?"
 msgstr "%s의 RPM 헤더를 읽어들일때 문제가 있음. RPM 파일이 맞습니까?"
 
-#: ../src/Zypper.cc:3048
+#: ../src/Zypper.cc:3071
 msgid "Plain RPM files cache"
 msgstr "Plain RPM 파일 캐시"
 
-#: ../src/Zypper.cc:3077 ../src/Zypper.cc:3155
+#: ../src/Zypper.cc:3086
+msgid "No valid arguments specified."
+msgstr "올바른 인수가 지정되어 있지 않습니다."
+
+#: ../src/Zypper.cc:3100 ../src/Zypper.cc:3178
 msgid "Warning: No repositories defined. Operating only with the installed resolvables. Nothing can be installed."
 msgstr "주의: 저장소가 설정되어 있지 않습니다. 설치 확인한 부분만 조작할 수 있습니다. 설치 한것이 없습니다."
 
-#: ../src/Zypper.cc:3106
+#: ../src/Zypper.cc:3129
 msgid "Source package name is a required argument."
 msgstr "소스 꾸러미 이름의 지정이 필요 합니다."
 
-#: ../src/Zypper.cc:3212 ../src/Zypper.cc:3472 ../src/Zypper.cc:3556
-#: ../src/Zypper.cc:3679 ../src/Zypper.cc:3747
+#: ../src/Zypper.cc:3235 ../src/Zypper.cc:3495 ../src/Zypper.cc:3579
+#: ../src/Zypper.cc:3702 ../src/Zypper.cc:3770
 #, c-format
 msgid "Unknown package type '%s'."
 msgstr "알 수 없는 '%s' 꾸러미 형식 입니다."
 
-#: ../src/Zypper.cc:3318
+#: ../src/Zypper.cc:3341
 msgid "Problem occurred initializing or executing the search query"
 msgstr "초기화 또는 검색어를 검색 중에 문제가 발생 했습니다."
 
-#: ../src/Zypper.cc:3319
+#: ../src/Zypper.cc:3342
 msgid "See the above message for a hint."
 msgstr "위의 메시지에 대한 힌트를 봅니다."
 
 #. translators: Running as 'rug', cannot use 'best-effort' option.
-#: ../src/Zypper.cc:3491 ../src/Zypper.cc:3574
+#: ../src/Zypper.cc:3514 ../src/Zypper.cc:3597
 #, c-format
 msgid "Running as '%s', cannot use '%s' option."
 msgstr "'%s' 실행으로 '%s' 옵션을 사용할 수 없습니다."
 
-#: ../src/Zypper.cc:3519
+#: ../src/Zypper.cc:3542
 msgid "Root privileges are required for updating packages."
 msgstr "꾸러미 업데이트에는 root 권한이 필요합니다."
 
-#: ../src/Zypper.cc:3612
+#: ../src/Zypper.cc:3635
 msgid "Root privileges are required for performing a distribution upgrade."
 msgstr "배포판 업그레이드 처리를 하려면 root 권한이 필요합니다."
 
-#: ../src/Zypper.cc:3709 ../src/Zypper.cc:3770
+#: ../src/Zypper.cc:3732 ../src/Zypper.cc:3793
 msgid "Root privileges are required for adding of package locks."
 msgstr "꾸러미 잠금 추가에는 root 권한이 필요합니다."
 
-#: ../src/Zypper.cc:3878
+#: ../src/Zypper.cc:3901
 #, c-format
 msgid "%s matches %s"
 msgstr "%s 는 %s 와 일치"
 
-#: ../src/Zypper.cc:3880
+#: ../src/Zypper.cc:3903
 #, c-format
 msgid "%s is newer than %s"
 msgstr "%s 는 %s 보다 최신"
 
-#: ../src/Zypper.cc:3882
+#: ../src/Zypper.cc:3905
 #, c-format
 msgid "%s is older than %s"
 msgstr "%s 는 %s 구버전"
 
-#: ../src/Zypper.cc:3921
+#: ../src/Zypper.cc:3944
 msgid "This command only makes sense in the zypper shell."
 msgstr "이 명령은 Zypper 쉘 안에서만 의미가 있습니다."
 
-#: ../src/Zypper.cc:3933
+#: ../src/Zypper.cc:3956
 msgid "You already are running zypper's shell."
 msgstr "이미 Zypper 쉘에 진입해 있습니다."
 
-#: ../src/Zypper.cc:3950
+#: ../src/Zypper.cc:3973
 msgid "Description"
 msgstr "설명"
 
-#: ../src/Zypper.cc:4014
+#: ../src/Zypper.cc:4037
 msgid "Resolvable Type"
 msgstr "해결방법 종류"
+
+#~ msgid "Do you want to trust the key?"
+#~ msgstr "키를 신뢰하십니까?"
+
+#~ msgid "n/t/i"
+#~ msgstr "n/t/i"
 
 #~ msgid "Running as 'rug', can't do 'best-effort' approach to update."
 #~ msgstr "'rug' 실행으로 'best-effort' 업데이트 접근을 할 수 없습니다."

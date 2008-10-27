@@ -14,14 +14,14 @@ msgid ""
 msgstr ""
 "Project-Id-Version: zypper\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-10-14 12:07+0200\n"
-"PO-Revision-Date: 2008-10-12 15:29+0100\n"
-"Last-Translator: Jan Madsen <jan.madsen.pt@gmail.com>\n"
-"Language-Team: dansk <opensuse-translation@opensuse.org>\n"
+"POT-Creation-Date: 2008-10-27 18:08+0100\n"
+"PO-Revision-Date: 2008-10-15 13:10+0200\n"
+"Last-Translator: Martin Schlander <mschlander@opensuse.org>\n"
+"Language-Team: Danish <opensuse-translation@opensuse.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: KBabel 1.11.4\n"
+"X-Generator: Lokalize 0.2\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
 #: ../src/callbacks/keyring.h:48
@@ -96,67 +96,68 @@ msgstr "Nøgles fingeraftryk: %s"
 msgid "Repository: %s"
 msgstr "Softwarekilde: %s"
 
-# power-off message
-#: ../src/callbacks/keyring.h:149
-msgid "Do you want to trust the key?"
-msgstr "Vil du betro nøglen?"
+#. translators: this message is shown after showing description of the key
+#: ../src/callbacks/keyring.h:150
+msgid "Do you want to reject the key, trust temporarily, or trust always?"
+msgstr ""
 
-#. translators: n/t/i stands for doNttrust/TrustTemporarily/Import
+#. translators: r/t/a stands for Reject/TrustTemporarily/trustAlways(import)
 #. translate to whatever is appropriate for your language
 #. The anserws must be separated by slash characters '/' and must
-#. correspond to donttrust/trusttemporarily/import in that order.
+#. correspond to reject/trusttemporarily/trustalways in that order.
 #. The answers should be lower case letters.
-#: ../src/callbacks/keyring.h:161
-msgid "n/t/i"
-msgstr "n/m/i"
+#: ../src/callbacks/keyring.h:162
+msgid "r/t/a/"
+msgstr ""
 
-#. translators: the same as n/t/i, but without 'i'
-#: ../src/callbacks/keyring.h:164
-msgid "n/t"
+#. translators: the same as r/t/a, but without 'a'
+#: ../src/callbacks/keyring.h:165
+#, fuzzy
+msgid "r/t"
 msgstr "n/m"
 
-#. translators: help text for the 'n' option in the 'n/t/i' prompt
-#: ../src/callbacks/keyring.h:166
+#. translators: help text for the 'r' option in the 'r/t/a' prompt
+#: ../src/callbacks/keyring.h:167
 msgid "Don't trust the key."
 msgstr "Betro ikke nøglen."
 
-#. translators: help text for the 't' option in the 'n/t/i' prompt
-#: ../src/callbacks/keyring.h:168
+#. translators: help text for the 't' option in the 'r/t/a' prompt
+#: ../src/callbacks/keyring.h:169
 msgid "Trust the key temporarily."
 msgstr "Betro nøglen midlertidigt."
 
-#. translators: help text for the 'i' option in the 'n/t/i' prompt
-#: ../src/callbacks/keyring.h:171
+#. translators: help text for the 'a' option in the 'r/t/a' prompt
+#: ../src/callbacks/keyring.h:172
 msgid "Trust the key and import it into trusted keyring."
 msgstr "Betro nøglen og importér den til betroet nøglering?"
 
-#: ../src/callbacks/keyring.h:205
+#: ../src/callbacks/keyring.h:206
 #, c-format
 msgid "Ignoring failed signature verification for file '%s'!"
 msgstr "Ignorerer fejlet signaturverifikation for filen '%s'!"
 
-#: ../src/callbacks/keyring.h:208
+#: ../src/callbacks/keyring.h:209
 #, c-format
 msgid "Ignoring failed signature verification for file '%s' from repository '%s'!"
 msgstr "Ignorerer fejlet signaturverifikation for filen '%s' fra softwarekilden '%s'!"
 
-#: ../src/callbacks/keyring.h:213
+#: ../src/callbacks/keyring.h:214
 msgid "Double-check this is not caused by some malicious changes in the file!"
 msgstr "Dobbelttjek at dette ikke er forårsaget af ondsindede ændringer af filen!"
 
 # %s is either BOOTP or DHCP
-#: ../src/callbacks/keyring.h:223
+#: ../src/callbacks/keyring.h:224
 #, c-format
 msgid "Signature verification failed for file '%s'."
 msgstr "Signaturverifikation fejlede for filen '%s'."
 
-#: ../src/callbacks/keyring.h:226
+#: ../src/callbacks/keyring.h:227
 #, c-format
 msgid "Signature verification failed for file '%s' from repository '%s'."
 msgstr "Signaturverifikation fejlede for filen '%s' fra softwarekilden '%s'."
 
 # %s is either BOOTP or DHCP
-#: ../src/callbacks/keyring.h:231
+#: ../src/callbacks/keyring.h:232
 msgid ""
 "Warning: This might be caused by a malicious change in the file!\n"
 "Continuing might be risky. Continue anyway?"
@@ -164,29 +165,29 @@ msgstr ""
 "Advarsel: Dette kan forårsages af ondsindede ændringer i filen!\n"
 "Det kan være risikabelt at gå videre! Vil du fortsætte alligevel?"
 
-#: ../src/callbacks/keyring.h:255
+#: ../src/callbacks/keyring.h:256
 #, c-format
 msgid "No digest for file %s."
 msgstr "Ingen digest for filen %s."
 
-#: ../src/callbacks/keyring.h:255 ../src/callbacks/keyring.h:265
-#: ../src/callbacks/keyring.h:287 ../src/callbacks/rpm.h:61
+#: ../src/callbacks/keyring.h:256 ../src/callbacks/keyring.h:266
+#: ../src/callbacks/keyring.h:288 ../src/callbacks/rpm.h:61
 #: ../src/solve-commit.cc:1033 ../src/solve-commit.cc:1057
 msgid "Continue?"
 msgstr "Vil du fortsætte?"
 
-#: ../src/callbacks/keyring.h:264
+#: ../src/callbacks/keyring.h:265
 #, c-format
 msgid "Unknown digest %s for file %s."
 msgstr "Ukendt digest %s for filen %s."
 
-#: ../src/callbacks/keyring.h:279
+#: ../src/callbacks/keyring.h:280
 #, c-format
 msgid "Ignoring failed digest verification for %s (expected %s, found %s)."
 msgstr "Ignorerer fejlet digest-verifikation for %s (forventede %s, fandt %s)."
 
 # %s is either BOOTP or DHCP
-#: ../src/callbacks/keyring.h:286
+#: ../src/callbacks/keyring.h:287
 #, c-format
 msgid "Digest verification failed for %s. Expected %s, found %s."
 msgstr "Digest-verifikation fejlede for %s. Forventede %s, fandt %s."
@@ -383,16 +384,16 @@ msgstr "Installeret: "
 #. enabled?
 #. autorefresh?
 #: ../src/info.cc:157 ../src/info.cc:214 ../src/info.cc:220 ../src/info.cc:222
-#: ../src/info.cc:279 ../src/repos.cc:712 ../src/repos.cc:714
-#: ../src/repos.cc:1313 ../src/repos.cc:1315 ../src/repos.cc:1991
-#: ../src/repos.cc:1993 ../src/solve-commit.cc:855
+#: ../src/info.cc:279 ../src/repos.cc:735 ../src/repos.cc:737
+#: ../src/repos.cc:1336 ../src/repos.cc:1338 ../src/repos.cc:2014
+#: ../src/repos.cc:2016 ../src/solve-commit.cc:855
 msgid "Yes"
 msgstr "Ja"
 
 #: ../src/info.cc:157 ../src/info.cc:214 ../src/info.cc:220 ../src/info.cc:222
-#: ../src/info.cc:279 ../src/repos.cc:712 ../src/repos.cc:714
-#: ../src/repos.cc:1313 ../src/repos.cc:1315 ../src/repos.cc:1991
-#: ../src/repos.cc:1993 ../src/solve-commit.cc:855
+#: ../src/info.cc:279 ../src/repos.cc:735 ../src/repos.cc:737
+#: ../src/repos.cc:1336 ../src/repos.cc:1338 ../src/repos.cc:2014
+#: ../src/repos.cc:2016 ../src/solve-commit.cc:855
 msgid "No"
 msgstr "Nej"
 
@@ -465,23 +466,23 @@ msgstr "Foreslået"
 #. TranslatorExplanation S stands for Status
 #: ../src/info.cc:289 ../src/search.cc:38 ../src/search.cc:54
 #: ../src/search.cc:214 ../src/search.cc:385 ../src/search.cc:441
-#: ../src/search.cc:533 ../src/update.cc:377
+#: ../src/search.cc:533 ../src/update.cc:397
 msgid "S"
 msgstr "S"
 
 #. translators: name (general header)
-#: ../src/info.cc:289 ../src/locks.cc:39 ../src/repos.cc:632
-#: ../src/repos.cc:681 ../src/repos.cc:2058 ../src/search.cc:44
+#: ../src/info.cc:289 ../src/locks.cc:39 ../src/repos.cc:655
+#: ../src/repos.cc:704 ../src/repos.cc:2081 ../src/search.cc:44
 #: ../src/search.cc:56 ../src/search.cc:215 ../src/search.cc:264
 #: ../src/search.cc:386 ../src/search.cc:447 ../src/search.cc:534
-#: ../src/update.cc:152 ../src/update.cc:385 ../src/Zypper.cc:3950
+#: ../src/update.cc:152 ../src/update.cc:405 ../src/Zypper.cc:3973
 msgid "Name"
 msgstr "Navn"
 
 #. translators: type (general header)
 #. translators: product type (addon/base) (rug calls it Category)
-#: ../src/info.cc:289 ../src/locks.cc:43 ../src/repos.cc:632
-#: ../src/repos.cc:690 ../src/repos.cc:2066 ../src/search.cc:58
+#: ../src/info.cc:289 ../src/locks.cc:43 ../src/repos.cc:655
+#: ../src/repos.cc:713 ../src/repos.cc:2089 ../src/search.cc:58
 #: ../src/search.cc:218 ../src/search.cc:541
 msgid "Type"
 msgstr "Type"
@@ -518,70 +519,89 @@ msgid "Short Name"
 msgstr "Kort navn"
 
 #. translators: meaning a package %s or provider of capability %s
-#: ../src/install.cc:60 ../src/install.cc:166
+#: ../src/install.cc:68 ../src/install.cc:182
 #, c-format
 msgid "'%s' not found"
 msgstr "'%s' ikke fundet"
 
-#. translators: %s-%s.%s is name-version.arch
-#: ../src/install.cc:84
-#, c-format
-msgid "Package %s-%s.%s not found in repositories, cannot reinstall."
-msgstr ""
-
 #. translators: e.g. skipping package 'zypper' (the newest version already installed)
 #. ! \todo capitalize the first letter
-#: ../src/install.cc:108
+#: ../src/install.cc:104
 #, c-format
 msgid "skipping %s '%s' (the newest version already installed)"
 msgstr "skipper %s'%s' (den nyeste version er allerede installeret)"
 
-#: ../src/install.cc:114
+#. translators: %s-%s.%s is name-version.arch
+#: ../src/install.cc:116
+#, c-format
+msgid "Package %s-%s.%s not found in repositories, cannot reinstall."
+msgstr "Pakken %s-%s.%s blev ikke fundet på softwarekilderne. Kan ikke geninstallere."
+
+#: ../src/install.cc:129
 #, c-format
 msgid "Failed to add '%s' to the list of packages to be installed."
 msgstr "Tilføjelse af '%s' til listen over pakker, der skal installeres, fejlede."
 
-#: ../src/install.cc:136
+#: ../src/install.cc:152
 #, c-format
 msgid "Failed to add '%s' to the list of packages to be removed."
 msgstr "Tilføjelse af '%s' til listen over pakker, der skal slettes, fejlede."
 
-#: ../src/install.cc:363 ../src/install.cc:601
+#: ../src/install.cc:373 ../src/install.cc:659
 #, c-format
 msgid "'%s' is already installed."
 msgstr "'%s' er allerede installeret."
 
 #. translators: meaning a package %s or provider of capability %s
-#: ../src/install.cc:403 ../src/install.cc:615
+#: ../src/install.cc:413 ../src/install.cc:673
 #, c-format
 msgid "'%s' is not installed."
 msgstr "'%s' er ikke installeret."
 
-#: ../src/install.cc:433
+#: ../src/install.cc:437
+#, fuzzy
+msgid "Cannot uninstall patches."
+msgstr "%s kan ikke installeres"
+
+#: ../src/install.cc:438
+msgid ""
+"Installed status of a patch is determined solely based on its dependencies.\n"
+"Patches are not installed in sense of copied files, database records,\n"
+"or similar."
+msgstr ""
+
+#: ../src/install.cc:449
+msgid "Uninstallation of a pattern is currently not defined and implemented."
+msgstr ""
+
+#: ../src/install.cc:463
 #, c-format
 msgid "%s contradicts %s"
 msgstr "%s modsiger %s"
 
 #. translators: meaning --force with --capability
-#: ../src/install.cc:442
+#: ../src/install.cc:472
 #, c-format
 msgid "%s cannot currently be used with %s"
 msgstr "%s kan i øjeblikket ikke bruges med %s"
 
-#. FIXME show a message here, after string freeze
-#. zypper.out().error(boost::str(format(_("%s is not a valid package or capability name.") % str));
-#: ../src/install.cc:497 ../src/Zypper.cc:3063
-msgid "No valid arguments specified."
-msgstr "Ingen gyldige argumenter angivet."
+#: ../src/install.cc:520
+msgid "Specifying architecture when selecting packages by name is not implemented."
+msgstr ""
+
+#: ../src/install.cc:555
+#, fuzzy, c-format
+msgid "'%s' is not a valid package or capability name."
+msgstr "`%s' er ikke en gyldig tjenestetype."
 
 #. translators: meaning a package %s or provider of capability %s
-#: ../src/install.cc:572
+#: ../src/install.cc:630
 #, c-format
 msgid "'%s' not found."
 msgstr "'%s' ikke fundet."
 
 #. translators: %s are package names
-#: ../src/install.cc:605
+#: ../src/install.cc:663
 #, c-format
 msgid "'%s' providing '%s' is already installed."
 msgstr "'%s', som leverer '%s', er allerede installeret."
@@ -599,7 +619,7 @@ msgstr "(flere)"
 
 #. translators: catalog (rug's word for repository) (header)
 #: ../src/locks.cc:41 ../src/search.cc:40 ../src/search.cc:263
-#: ../src/update.cc:151 ../src/update.cc:379
+#: ../src/update.cc:151 ../src/update.cc:399
 msgid "Catalog"
 msgstr "Katalog"
 
@@ -609,7 +629,7 @@ msgstr "Vigtighed"
 
 #. translators: package's repository (header)
 #: ../src/locks.cc:43 ../src/search.cc:64 ../src/search.cc:388
-#: ../src/search.cc:446 ../src/update.cc:151 ../src/update.cc:379
+#: ../src/search.cc:446 ../src/update.cc:151 ../src/update.cc:399
 msgid "Repository"
 msgstr "Softwarekilde"
 
@@ -651,7 +671,7 @@ msgid "Problem removing the package lock:"
 msgstr "Problem med at fjerne pakkelåsen:"
 
 #. translators: this will show up if you press ctrl+c twice outside of zypper shell
-#: ../src/main.cc:44
+#: ../src/main.cc:38
 msgid "OK OK! Exiting immediately..."
 msgstr "OK OK! Afbryder straks..."
 
@@ -798,8 +818,8 @@ msgstr "Henter metadata fra softwarekilden '%s'"
 msgid "Problem retrieving files from '%s'."
 msgstr "Problem med at hente filer fra '%s'."
 
-#: ../src/repos.cc:160 ../src/repos.cc:2838 ../src/solve-commit.cc:1109
-#: ../src/solve-commit.cc:1132 ../src/solve-commit.cc:1164
+#: ../src/repos.cc:160 ../src/repos.cc:2861 ../src/solve-commit.cc:1109
+#: ../src/solve-commit.cc:1137 ../src/solve-commit.cc:1169
 msgid "Please see the above error message for a hint."
 msgstr "Se fejlmeddelelsen ovenfor for at få et tip."
 
@@ -865,570 +885,575 @@ msgstr "Softwarekilden '%s' blev ikke fundet ved dens alias, nummer eller URI."
 msgid "Use '%s' to get the list of defined repositories."
 msgstr "Brug '%s' for at få en liste over angivne softwarekilder."
 
-#: ../src/repos.cc:504 ../src/repos.cc:540
+#: ../src/repos.cc:490 ../src/repos.cc:497
+#, fuzzy, c-format
+msgid "Ignoring repository '%s' because of '%s' option."
+msgstr "Kan ikke rydde softwarekilden '%s' pga. en fejl."
+
+#: ../src/repos.cc:527 ../src/repos.cc:563
 #, c-format
 msgid "Disabling repository '%s' because of the above error."
 msgstr "Deaktiverer softwarekilden '%s' pga. ovennævnte fejl."
 
-#: ../src/repos.cc:522
+#: ../src/repos.cc:545
 #, c-format
 msgid "Repository '%s' is out-of-date. You can run 'zypper refresh' as root to update it."
 msgstr "Softwarekilden '%s' er uddateret. Du kan køre 'zypper refresh' som root for at ajourføre den."
 
-#: ../src/repos.cc:557
+#: ../src/repos.cc:580
 #, c-format
 msgid "The metadata cache needs to be built for the '%s' repository. You can run 'zypper refresh' as root to do this."
 msgstr "Metadata-cachen skal opbygges for softwarekilden '%s'. Du kan køre 'zypper refresh' som root for at gøre dette."
 
-#: ../src/repos.cc:564
+#: ../src/repos.cc:587
 #, c-format
 msgid "Disabling repository '%s'."
 msgstr "Deaktiverer softwarekilden '%s'."
 
-#: ../src/repos.cc:601
+#: ../src/repos.cc:624
 msgid "Initializing Target"
 msgstr "Initialiserer målet"
 
-#: ../src/repos.cc:610
+#: ../src/repos.cc:633
 msgid "Target initialization failed:"
 msgstr "Initialisering af målet fejlede:"
 
-#: ../src/repos.cc:612 ../src/Zypper.cc:3320
+#: ../src/repos.cc:635 ../src/Zypper.cc:3343
 msgid "Running 'zypper refresh' as root might resolve the problem."
 msgstr "At køre 'zypper refresh' som root kan måske løse problemet."
 
 #. translators: patch status (installed, uninstalled, needed)
-#: ../src/repos.cc:632 ../src/search.cc:269 ../src/update.cc:152
+#: ../src/repos.cc:655 ../src/search.cc:269 ../src/update.cc:152
 msgid "Status"
 msgstr "Status"
 
 #. status
 #. rug's status (active, pending => active, disabled <= enabled, disabled)
 #. this is probably the closest possible compatibility arrangement
-#: ../src/repos.cc:649
+#: ../src/repos.cc:672
 msgid "Active"
 msgstr "Aktiv"
 
-#: ../src/repos.cc:649
+#: ../src/repos.cc:672
 msgid "Disabled"
 msgstr "Deaktiveret"
 
-#: ../src/repos.cc:680 ../src/repos.cc:2057 ../src/Zypper.cc:3950
+#: ../src/repos.cc:703 ../src/repos.cc:2080 ../src/Zypper.cc:3973
 msgid "Alias"
 msgstr "Alias"
 
 #. TranslatorExplanation used as e.g. "Enabled: Yes"
-#: ../src/repos.cc:682 ../src/repos.cc:1313 ../src/repos.cc:2059
+#: ../src/repos.cc:705 ../src/repos.cc:1336 ../src/repos.cc:2082
 msgid "Enabled"
 msgstr "Aktiveret"
 
 #. translators: 'zypper repos' column - whether autorefresh is enabled for the repository
-#: ../src/repos.cc:684 ../src/repos.cc:2061
+#: ../src/repos.cc:707 ../src/repos.cc:2084
 msgid "Refresh"
 msgstr "Genopfrisk"
 
 #. translators: repository priority (in zypper repos -p or -d)
-#: ../src/repos.cc:688 ../src/repos.cc:2065
+#: ../src/repos.cc:711 ../src/repos.cc:2088
 msgid "Priority"
 msgstr "Prioritet"
 
-#: ../src/repos.cc:692 ../src/repos.cc:2068
+#: ../src/repos.cc:715 ../src/repos.cc:2091
 msgid "URI"
 msgstr "URI"
 
-#: ../src/repos.cc:694
+#: ../src/repos.cc:717
 msgid "Service"
 msgstr "Tjeneste"
 
-#: ../src/repos.cc:738
+#: ../src/repos.cc:761
 msgid "No repositories defined. Use the 'zypper addrepo' command to add one or more repositories."
 msgstr "Ingen softwarekilder angivet. Brug kommandoen 'zypper addrepo' for at tilføje en eller flere softwarekilder."
 
-#: ../src/repos.cc:814 ../src/repos.cc:886 ../src/repos.cc:1056
+#: ../src/repos.cc:837 ../src/repos.cc:909 ../src/repos.cc:1079
 msgid "Error reading repositories:"
 msgstr "Fejl under læsning af softwarekilder:"
 
-#: ../src/repos.cc:842 ../src/repos.cc:2190
+#: ../src/repos.cc:865 ../src/repos.cc:2213
 #, c-format
 msgid "Can't open %s for writing."
 msgstr "Kan ikke åbne %s til skrivning."
 
-#: ../src/repos.cc:844 ../src/repos.cc:2192
+#: ../src/repos.cc:867 ../src/repos.cc:2215
 msgid "Maybe you do not have write permissions?"
 msgstr "Måske har du ikke skrivetilladelse?"
 
-#: ../src/repos.cc:851 ../src/repos.cc:2199
+#: ../src/repos.cc:874 ../src/repos.cc:2222
 #, c-format
 msgid "Repositories have been successfully exported to %s."
 msgstr "Softwarekilder er eksporteret til %s."
 
-#: ../src/repos.cc:904 ../src/repos.cc:1074
+#: ../src/repos.cc:927 ../src/repos.cc:1097
 msgid "Specified repositories: "
 msgstr "Angivne softwarekilder: "
 
-#: ../src/repos.cc:943
+#: ../src/repos.cc:966
 #, c-format
 msgid "Skipping disabled repository '%s'"
 msgstr "Skipper den deaktiverede softwarekilde '%s'"
 
-#: ../src/repos.cc:958
+#: ../src/repos.cc:981
 #, c-format
 msgid "Skipping repository '%s' because of the above error."
 msgstr "Skipper softwarekilden '%s' pga. den ovennævnte fejl."
 
-#: ../src/repos.cc:973
+#: ../src/repos.cc:996
 #, c-format
 msgid "Use '%s' or '%s' commands to add or enable repositories."
 msgstr "Brug kommandoerne '%s' eller '%s' for at tilføje eller aktivere softwarekilder."
 
-#: ../src/repos.cc:976
+#: ../src/repos.cc:999
 msgid "Specified repositories are not enabled or defined."
 msgstr "Angivne softwarekilder er ikke aktiverede eller definerede."
 
-#: ../src/repos.cc:978
+#: ../src/repos.cc:1001
 msgid "There are no enabled repositories defined."
 msgstr "Der er ingen aktiverede softwarekilder angivet."
 
-#: ../src/repos.cc:982
+#: ../src/repos.cc:1005
 msgid "Could not refresh the repositories because of errors."
 msgstr "Kunne ikke genopfriske softwarekilderne pga. fejl."
 
-#: ../src/repos.cc:988
+#: ../src/repos.cc:1011
 msgid "Some of the repositories have not been refreshed because of an error."
 msgstr "Nogle af softwarekilderne blev ikke genopfrisket pga. en fejl."
 
-#: ../src/repos.cc:993
+#: ../src/repos.cc:1016
 msgid "Specified repositories have been refreshed."
 msgstr "Angivne softwarekilder blev genopfrisket."
 
-#: ../src/repos.cc:995
+#: ../src/repos.cc:1018
 msgid "All repositories have been refreshed."
 msgstr "Alle softwarekilder blev genopfrisket."
 
-#: ../src/repos.cc:1131
+#: ../src/repos.cc:1154
 #, c-format
 msgid "Cleaning metadata cache for '%s'."
 msgstr "Rydder metadata-cache for '%s'."
 
-#: ../src/repos.cc:1138
+#: ../src/repos.cc:1161
 #, c-format
 msgid "Cleaning raw metadata cache for '%s'."
 msgstr "Rydder 'raw' metadata-cache for '%s'."
 
 #. translators: meaning the cached rpm files
-#: ../src/repos.cc:1146
+#: ../src/repos.cc:1169
 #, c-format
 msgid "Cleaning packages for '%s'."
 msgstr "Rydder pakker for '%s'."
 
-#: ../src/repos.cc:1154
+#: ../src/repos.cc:1177
 #, c-format
 msgid "Cannot clean repository '%s' because of an error."
 msgstr "Kan ikke rydde softwarekilden '%s' pga. en fejl."
 
 #
-#: ../src/repos.cc:1168
+#: ../src/repos.cc:1191
 msgid "Cleaning installed packages cache."
 msgstr "Rydder cache for installerede pakker."
 
-#: ../src/repos.cc:1176
+#: ../src/repos.cc:1199
 msgid "Cannot clean installed packages cache because of an error."
 msgstr "Kan ikke rydde cache for installerede pakker pga. en fejl."
 
-#: ../src/repos.cc:1184
+#: ../src/repos.cc:1207
 msgid "Could not clean the repositories because of errors."
 msgstr "Kunne ikke rydde softwarekilderne pga. fejl."
 
-#: ../src/repos.cc:1191
+#: ../src/repos.cc:1214
 msgid "Some of the repositories have not been cleaned up because of an error."
 msgstr "Nogle af softwarekilderne blev ikke ryddet pga. en fejl."
 
-#: ../src/repos.cc:1196
+#: ../src/repos.cc:1219
 msgid "Specified repositories have been cleaned up."
 msgstr "De angivne softwarekilder blev ryddet."
 
-#: ../src/repos.cc:1198
+#: ../src/repos.cc:1221
 msgid "All repositories have been cleaned up."
 msgstr "Alle softwarekilder blev ryddet."
 
-#: ../src/repos.cc:1238
+#: ../src/repos.cc:1261
 msgid "This is a changeable read-only media (CD/DVD), disabling autorefresh."
 msgstr "Dette er et udskifteligt kun-læsbart medie (CD/DVD), deaktiverer automatisk genopfriskning."
 
-#: ../src/repos.cc:1259 ../src/repos.cc:1520
+#: ../src/repos.cc:1282 ../src/repos.cc:1543
 #, c-format
 msgid "Repository named '%s' already exists. Please use another alias."
 msgstr "En softwarekilde ved navn '%s' eksisterer allerede. Brug et andet alias."
 
-#: ../src/repos.cc:1270
+#: ../src/repos.cc:1293
 msgid "Could not determine the type of the repository. Please check if the defined URIs (see below) point to a valid repository:"
 msgstr "Kunne ikke fastslå typen af softwarekilden. Tjek om de definerede URIer (se nedenfor) peger på en gyldig softwarekilde:"
 
-#: ../src/repos.cc:1277 ../src/Zypper.cc:2397
+#: ../src/repos.cc:1300 ../src/Zypper.cc:2420
 msgid "Can't find a valid repository at given location:"
 msgstr "Kan ikke finde en gyldig softwarekilde på den givne placering:"
 
-#: ../src/repos.cc:1286
+#: ../src/repos.cc:1309
 msgid "Problem transferring repository data from specified URI:"
 msgstr "Problem med at overføre softwarekilde-data fra den angivne URI."
 
-#: ../src/repos.cc:1287
+#: ../src/repos.cc:1310
 msgid "Please check whether the specified URI is accessible."
 msgstr "Tjek om den angivne URI er tilgængelig."
 
-#: ../src/repos.cc:1295
+#: ../src/repos.cc:1318
 msgid "Unknown problem when adding repository:"
 msgstr "Ukendt problem under tilføjelse af softwarekilde:"
 
-#: ../src/repos.cc:1301
+#: ../src/repos.cc:1324
 #, c-format
 msgid "Repository '%s' successfully added"
 msgstr "Softwarekilden '%s' tilføjet"
 
 #. TranslatorExplanation used as e.g. "Autorefresh: Yes"
-#: ../src/repos.cc:1315
+#: ../src/repos.cc:1338
 msgid "Autorefresh"
 msgstr "Automatisk genopfrisk"
 
-#: ../src/repos.cc:1330
+#: ../src/repos.cc:1353
 #, c-format
 msgid "Reading data from '%s' media"
 msgstr "Læser data fra mediet '%s'"
 
-#: ../src/repos.cc:1337
+#: ../src/repos.cc:1360
 #, c-format
 msgid "Problem reading data from '%s' media"
 msgstr "Problem med at læse data fra mediet '%s'"
 
-#: ../src/repos.cc:1338
+#: ../src/repos.cc:1361
 msgid "Please check if your installation media is valid and readable."
 msgstr "Tjek om dit installationsmedie er gyldigt og læsbart."
 
-#: ../src/repos.cc:1403
+#: ../src/repos.cc:1426
 msgid "Problem accessing the file at the specified URI"
 msgstr "Problem med at tilgå filen på den angivne URI"
 
-#: ../src/repos.cc:1404
+#: ../src/repos.cc:1427
 msgid "Please check if the URI is valid and accessible."
 msgstr "Tjek om URIen er gyldig og tilgængelig."
 
-#: ../src/repos.cc:1412
+#: ../src/repos.cc:1435
 msgid "Problem parsing the file at the specified URI"
 msgstr "Problem med fortolkning af filen på den angivne URI"
 
 #. TranslatorExplanation don't translate the URI if the URI itself is not translated.
 #. Also don't translate the '.repo' string.
-#: ../src/repos.cc:1415
+#: ../src/repos.cc:1438
 msgid "Is it a .repo file? See http://en.opensuse.org/Standards/RepoInfo for details."
 msgstr "Er det en .repo-fil? Se detaljer på http://en.opensuse.org/Standards/RepoInfo."
 
-#: ../src/repos.cc:1423
+#: ../src/repos.cc:1446
 msgid "Problem encountered while trying to read the file at the specified URI"
 msgstr "Problem opstod under forsøg på at læse filen på den angivne URI"
 
-#: ../src/repos.cc:1437
+#: ../src/repos.cc:1460
 msgid "Repository with no alias defined found in the file, skipping."
 msgstr "Softwarekilde uden angivet alias blev fundet i filen. Skipper."
 
-#: ../src/repos.cc:1444
+#: ../src/repos.cc:1467
 #, c-format
 msgid "Repository '%s' has no URI defined, skipping."
 msgstr "Softwarekilden '%s' har ikke en URI defineret. Skipper."
 
-#: ../src/repos.cc:1484
+#: ../src/repos.cc:1507
 #, c-format
 msgid "Repository '%s' has been removed."
 msgstr "Softwarekilden '%s' blev fjernet."
 
-#: ../src/repos.cc:1503
+#: ../src/repos.cc:1526
 #, c-format
 msgid "Cannot change alias of '%s' repository. The repository belongs to service '%s' which is responsible for setting its alias."
 msgstr "Kan ikke ændre alias for softwarekilden '%s'. Softwarekilden tilhører tjenesten '%s', der er ansvarlig for indstilling af dets alias."
 
-#: ../src/repos.cc:1514
+#: ../src/repos.cc:1537
 #, c-format
 msgid "Repository '%s' renamed to '%s'."
 msgstr "Softwarekilden '%s' er omdøbt til '%s'."
 
-#: ../src/repos.cc:1526 ../src/repos.cc:1746
+#: ../src/repos.cc:1549 ../src/repos.cc:1769
 msgid "Error while modifying the repository:"
 msgstr "Fejl under ændring af softwarekilde:"
 
-#: ../src/repos.cc:1527
+#: ../src/repos.cc:1550
 #, c-format
 msgid "Leaving repository '%s' unchanged."
 msgstr "Lader softwarekilden '%s' være uændret."
 
-#: ../src/repos.cc:1664
+#: ../src/repos.cc:1687
 #, c-format
 msgid "Invalid priority '%s'. Use a positive integer number. The greater the number, the lower the priority."
 msgstr "Prioriteten '%s' er ugyldig. Brug et positivt heltal. Højere tal betyder lavere prioritet."
 
-#: ../src/repos.cc:1672
+#: ../src/repos.cc:1695
 #, c-format
 msgid "Repository '%s' priority has been left unchanged (%d)"
 msgstr "Prioritet af softwarekilden '%s' forblev uændret (%d)"
 
-#: ../src/repos.cc:1698
+#: ../src/repos.cc:1721
 #, c-format
 msgid "Repository '%s' has been sucessfully enabled."
 msgstr "Softwarekilden '%s' blev aktiveret."
 
-#: ../src/repos.cc:1701
+#: ../src/repos.cc:1724
 #, c-format
 msgid "Repository '%s' has been sucessfully disabled."
 msgstr "Softwarekilden '%s' blev deaktiveret."
 
-#: ../src/repos.cc:1708
+#: ../src/repos.cc:1731
 #, c-format
 msgid "Autorefresh has been enabled for repository '%s'."
 msgstr "Automatisk genopfriskning blev aktiveret for softwarekilden '%s'."
 
-#: ../src/repos.cc:1711
+#: ../src/repos.cc:1734
 #, c-format
 msgid "Autorefresh has been disabled for repository '%s'."
 msgstr "Automatisk genopfriskning blev deaktiveret for softwarekilden '%s'."
 
-#: ../src/repos.cc:1718
+#: ../src/repos.cc:1741
 #, c-format
 msgid "RPM files caching has been enabled for repository '%s'."
 msgstr "Caching af RPM-filer blev aktiveret for softwarekilden '%s'."
 
-#: ../src/repos.cc:1721
+#: ../src/repos.cc:1744
 #, c-format
 msgid "RPM files caching has been disabled for repository '%s'."
 msgstr "Caching af RPM-filer blev deaktiveret for softwarekilden '%s'."
 
-#: ../src/repos.cc:1727
+#: ../src/repos.cc:1750
 #, c-format
 msgid "Repository '%s' priority has been set to %d."
 msgstr "Prioritet for softwarekilden '%s' blev sat til %d."
 
-#: ../src/repos.cc:1733
+#: ../src/repos.cc:1756
 #, c-format
 msgid "Name of repository '%s' has been set to '%s'."
 msgstr "Navnet på softwarekilden '%s' blev sat til '%s'."
 
-#: ../src/repos.cc:1739
+#: ../src/repos.cc:1762
 #, c-format
 msgid "Nothing to change for repository '%s'."
 msgstr "Intet at ændre for softwarekilden '%s'"
 
-#: ../src/repos.cc:1747
+#: ../src/repos.cc:1770
 #, c-format
 msgid "Leaving repository %s unchanged."
 msgstr "Lader softwarekilden %s forblive uændret."
 
-#: ../src/repos.cc:1785
+#: ../src/repos.cc:1808
 msgid "Error reading services:"
 msgstr "Fejl under læsning af tjenester:"
 
-#: ../src/repos.cc:1874
+#: ../src/repos.cc:1897
 #, c-format
 msgid "Service '%s' not found by its alias, number, or URI."
 msgstr "Tjenesten '%s' blev ikke fundet ved dens alias, nummer eller URI."
 
-#: ../src/repos.cc:1878
+#: ../src/repos.cc:1901
 #, c-format
 msgid "Use '%s' to get the list of defined services."
 msgstr "Brug '%s' for at få en liste over angivne tjenester."
 
-#: ../src/repos.cc:2104
+#: ../src/repos.cc:2127
 #, c-format
 msgid "No services defined. Use the '%s' command to add one or more services."
 msgstr "Ingen softwarekilder angivet. Brug kommandoen '%s' for at tilføje en eller flere tjenester."
 
-#: ../src/repos.cc:2230
+#: ../src/repos.cc:2253
 #, c-format
 msgid "Service aliased '%s' already exists. Please use another alias."
 msgstr "Tjeneste med alias '%s' eksisterer allerede. Brug et andet alias."
 
-#: ../src/repos.cc:2240
+#: ../src/repos.cc:2263
 #, c-format
 msgid "Error occured while adding service '%s'."
 msgstr "Fejl opstod under tilføjelse af tjenesten '%s'."
 
-#: ../src/repos.cc:2246
+#: ../src/repos.cc:2269
 #, c-format
 msgid "Service '%s' has been successfully added."
 msgstr "Tjenesten '%s' er blevet tilføjet."
 
-#: ../src/repos.cc:2285
+#: ../src/repos.cc:2308
 #, c-format
 msgid "Removing service '%s':"
 msgstr "Fjerner tjenesten '%s'."
 
-#: ../src/repos.cc:2288
+#: ../src/repos.cc:2311
 #, c-format
 msgid "Service '%s' has been removed."
 msgstr "Tjenesten '%s' blev fjernet."
 
-#: ../src/repos.cc:2304
+#: ../src/repos.cc:2327
 #, c-format
 msgid "Refreshing service '%s'."
 msgstr "Genopfrisker tjenesten '%s'."
 
-#: ../src/repos.cc:2313
+#: ../src/repos.cc:2336
 #, c-format
 msgid "Problem retrieving the repository index file for service '%s':"
 msgstr "Problem med at hente indeksfilen over softwarekilder for tjenesten '%s':"
 
-#: ../src/repos.cc:2315
+#: ../src/repos.cc:2338
 msgid "Check if the URI is valid and accessible."
 msgstr "Tjek om URIen er gyldig og tilgængelig."
 
-#: ../src/repos.cc:2373
+#: ../src/repos.cc:2396
 #, c-format
 msgid "Skipping disabled service '%s'"
 msgstr "Skipper den deaktiverede tjeneste '%s'"
 
-#: ../src/repos.cc:2419
+#: ../src/repos.cc:2442
 #, c-format
 msgid "Skipping service '%s' because of the above error."
 msgstr "Skipper tjenesten '%s' pga. den ovennævnte fejl."
 
-#: ../src/repos.cc:2434
+#: ../src/repos.cc:2457
 #, c-format
 msgid "Use '%s' or '%s' commands to add or enable services."
 msgstr "Brug kommandoerne '%s' eller '%s' for at tilføje eller aktivere tjenester."
 
-#: ../src/repos.cc:2437
+#: ../src/repos.cc:2460
 msgid "Specified services are not enabled or defined."
 msgstr "Angivne tjenester er ikke aktiverede eller definerede."
 
-#: ../src/repos.cc:2439
+#: ../src/repos.cc:2462
 msgid "There are no enabled services defined."
 msgstr "Der er ingen aktiverede tjenester angivet."
 
-#: ../src/repos.cc:2443
+#: ../src/repos.cc:2466
 msgid "Could not refresh the services because of errors."
 msgstr "Kunne ikke genopfriske tjenesterne pga. fejl."
 
-#: ../src/repos.cc:2449
+#: ../src/repos.cc:2472
 msgid "Some of the services have not been refreshed because of an error."
 msgstr "Nogle af tjenesterne blev ikke genopfrisket pga. en fejl."
 
-#: ../src/repos.cc:2454
+#: ../src/repos.cc:2477
 msgid "Specified services have been refreshed."
 msgstr "Angivne tjenester blev genopfrisket."
 
-#: ../src/repos.cc:2456
+#: ../src/repos.cc:2479
 msgid "All services have been refreshed."
 msgstr "Alle tjenester blev genopfrisket."
 
-#: ../src/repos.cc:2578
+#: ../src/repos.cc:2601
 #, c-format
 msgid "Service '%s' has been sucessfully enabled."
 msgstr "Tjenesten '%s' blev aktiveret."
 
-#: ../src/repos.cc:2581
+#: ../src/repos.cc:2604
 #, c-format
 msgid "Service '%s' has been sucessfully disabled."
 msgstr "Tjenesten '%s' blev deaktiveret."
 
-#: ../src/repos.cc:2588
+#: ../src/repos.cc:2611
 #, c-format
 msgid "Autorefresh has been enabled for service '%s'."
 msgstr "Automatisk genopfriskning blev aktiveret for tjenesten '%s'."
 
-#: ../src/repos.cc:2591
+#: ../src/repos.cc:2614
 #, c-format
 msgid "Autorefresh has been disabled for service '%s'."
 msgstr "Automatisk genopfriskning blev deaktiveret for tjenesten '%s'."
 
-#: ../src/repos.cc:2597
+#: ../src/repos.cc:2620
 #, c-format
 msgid "Name of service '%s' has been set to '%s'."
 msgstr "Navnet på tjenesten '%s' blev sat til '%s'."
 
-#: ../src/repos.cc:2603
+#: ../src/repos.cc:2626
 #, c-format
 msgid "Repository '%s' has been added to enabled repositories of service '%s'"
 msgid_plural "Repositories '%s' have been added to enabled repositories of service '%s'"
 msgstr[0] "Softwarekilden '%s' blev føjet til aktiverede softwarekilder for tjenesten '%s'"
 msgstr[1] "Softwarekilderne '%s' blev føjet til aktiverede softwarekilder for tjenesten '%s'"
 
-#: ../src/repos.cc:2611
+#: ../src/repos.cc:2634
 #, c-format
 msgid "Repository '%s' has been added to disabled repositories of service '%s'"
 msgid_plural "Repositories '%s' have been added to disabled repositories of service '%s'"
 msgstr[0] "Softwarekilden '%s' blev føjet til ikke-aktiverede softwarekilder for tjenesten '%s'"
 msgstr[1] "Softwarekilderne '%s' blev føjet til ikke-aktiverede softwarekilder for tjenesten '%s'"
 
-#: ../src/repos.cc:2619
+#: ../src/repos.cc:2642
 #, c-format
 msgid "Repository '%s' has been removed from enabled repositories of service '%s'"
 msgid_plural "Repositories '%s' have been removed from enabled repositories of service '%s'"
 msgstr[0] "Softwarekilden '%s' blev fjernet fra aktiverede softwarekilder for tjenesten '%s'"
 msgstr[1] "Softwarekilderne '%s' blev fjernet fra aktiverede softwarekilder for tjenesten '%s'"
 
-#: ../src/repos.cc:2627
+#: ../src/repos.cc:2650
 #, c-format
 msgid "Repository '%s' has been removed from disabled repositories of service '%s'"
 msgid_plural "Repositories '%s' have been removed from disabled repositories of service '%s'"
 msgstr[0] "Softwarekilden '%s' blev fjernet fra ikke-aktiverede softwarekilder for tjenesten '%s'"
 msgstr[1] "Softwarekilderne '%s' blev fjernet fra ikke-aktiverede softwarekilder for tjenesten '%s'"
 
-#: ../src/repos.cc:2636
+#: ../src/repos.cc:2659
 #, c-format
 msgid "Nothing to change for service '%s'."
 msgstr "Intet at ændre for tjenesten '%s'."
 
-#: ../src/repos.cc:2643
+#: ../src/repos.cc:2666
 msgid "Error while modifying the service:"
 msgstr "Fejl under ændring af tjenesten:"
 
-#: ../src/repos.cc:2644
+#: ../src/repos.cc:2667
 #, c-format
 msgid "Leaving service %s unchanged."
 msgstr "Lader tjenesten %s forblive uændret."
 
-#: ../src/repos.cc:2751
+#: ../src/repos.cc:2774
 msgid "Loading repository data..."
 msgstr "Indlæser softwarekildedata..."
 
-#: ../src/repos.cc:2769
+#: ../src/repos.cc:2792
 #, c-format
 msgid "Retrieving repository '%s' data..."
 msgstr "Henter data for softwarekilden '%s'..."
 
-#: ../src/repos.cc:2776
+#: ../src/repos.cc:2799
 #, c-format
 msgid "Repository '%s' not cached. Caching..."
 msgstr "Softwarekilden '%s' er ikke cachet. Cacher..."
 
-#: ../src/repos.cc:2783 ../src/repos.cc:2811
+#: ../src/repos.cc:2806 ../src/repos.cc:2834
 #, c-format
 msgid "Problem loading data from '%s'"
 msgstr "Problem med indlæsning af data fra '%s'"
 
-#: ../src/repos.cc:2784 ../src/repos.cc:2817
+#: ../src/repos.cc:2807 ../src/repos.cc:2840
 #, c-format
 msgid "Resolvables from '%s' not loaded because of error."
 msgstr "Resolvables fra '%s' er ikke indlæst pga. fejl."
 
-#: ../src/repos.cc:2800
+#: ../src/repos.cc:2823
 #, c-format
 msgid "Repository '%s' appears to outdated. Consider using a different mirror or server."
 msgstr "Softwarekilden '%s' er tilsyneladende uddateret. Overvej at bruge andet spejl eller server."
 
 #. translators: the first %s is 'zypper refresh' and the second 'zypper clean -m'
-#: ../src/repos.cc:2813
+#: ../src/repos.cc:2836
 #, c-format
 msgid "Try '%s', or even '%s' before doing so."
 msgstr "Forsøg '%s', eller måske endda '%s' før du gør det."
 
 #
-#: ../src/repos.cc:2826
+#: ../src/repos.cc:2849
 msgid "Reading installed packages..."
 msgstr "Læser installerede pakker..."
 
-#: ../src/repos.cc:2837
+#: ../src/repos.cc:2860
 msgid "Problem occured while reading the installed packages:"
 msgstr "Et problem opstod under læsning af de installerede pakker:"
 
 #. list name, exact match
-#: ../src/repos.cc:2852
+#: ../src/repos.cc:2875
 msgid ""
 "ZENworks Management Daemon is running.\n"
 "WARNING: this command will not synchronize changes.\n"
@@ -1439,7 +1464,7 @@ msgstr ""
 "Brug rug eller yast2 til dette."
 
 #. translators: Bundle is a term used in rug. See rug for how to translate it.
-#: ../src/search.cc:42 ../src/search.cc:444 ../src/update.cc:382
+#: ../src/search.cc:42 ../src/search.cc:444 ../src/update.cc:402
 msgid "Bundle"
 msgstr "Bundt"
 
@@ -1447,13 +1472,13 @@ msgstr "Bundt"
 #. best_effort does not know version or arch yet
 #: ../src/search.cc:46 ../src/search.cc:60 ../src/search.cc:265
 #: ../src/search.cc:386 ../src/search.cc:447 ../src/search.cc:535
-#: ../src/update.cc:152 ../src/update.cc:387
+#: ../src/update.cc:152 ../src/update.cc:407
 msgid "Version"
 msgstr "Version"
 
 #. translators: package architecture (header)
 #: ../src/search.cc:48 ../src/search.cc:62 ../src/search.cc:447
-#: ../src/update.cc:387
+#: ../src/update.cc:407
 msgid "Arch"
 msgstr "Arkitektur"
 
@@ -1477,7 +1502,7 @@ msgid "No patterns found."
 msgstr "Ingen mønstre fundet."
 
 #
-#: ../src/search.cc:497 ../src/Zypper.cc:3278
+#: ../src/search.cc:497 ../src/Zypper.cc:3301
 msgid "No packages found."
 msgstr "Ingen pakker fundet."
 
@@ -1854,18 +1879,18 @@ msgstr "udfører"
 msgid "(dry run)"
 msgstr "(testkørsel)"
 
-#: ../src/solve-commit.cc:1108 ../src/solve-commit.cc:1142
+#: ../src/solve-commit.cc:1108 ../src/solve-commit.cc:1147
 msgid "Problem retrieving the package file from the repository:"
 msgstr "Problem med at hente pakkefilen fra softwarekilden:"
 
 #. translators: the first %s is 'zypper refresh' and the second
 #. is repo allias
-#: ../src/solve-commit.cc:1138
+#: ../src/solve-commit.cc:1143
 #, c-format
 msgid "Repository '%s' is out of date. Running '%s' might help."
 msgstr "Softwarekilden '%s' er uddateret. Det vil måske hjælpe at køre '%s'."
 
-#: ../src/solve-commit.cc:1150
+#: ../src/solve-commit.cc:1155
 msgid ""
 "The package integrity check failed. This may be a problem with the repository or media. Try one of the following:\n"
 "\n"
@@ -1881,15 +1906,15 @@ msgstr ""
 "- brug et andet installationsmedie ( f.eks. hvis det er beskadiget)\n"
 "- brug en anden softwarekilde"
 
-#: ../src/solve-commit.cc:1163
+#: ../src/solve-commit.cc:1168
 msgid "Problem occured during or after installation or removal of packages:"
 msgstr "Der opstod en problem under eller efter installation eller fjernelse af pakker:"
 
-#: ../src/solve-commit.cc:1183
+#: ../src/solve-commit.cc:1188
 msgid "One of installed patches requires reboot of your machine. Reboot as soon as possible."
 msgstr "En af de installerede rettelser kræver genstart af din maskine. Genstart hurtigst muligt."
 
-#: ../src/solve-commit.cc:1187
+#: ../src/solve-commit.cc:1192
 msgid "One of installed patches affects the package manager itself. Run this command once more to install any other needed patches."
 msgstr "En af de installerede rettelser påvirker selve pakkehåndteringen. Kør denne kommando en gang mere for at installere andre nødvendige rettelser."
 
@@ -1922,58 +1947,58 @@ msgstr ""
 "Der er også andre opdateringer tilgængelige.\n"
 
 #
-#: ../src/update.cc:198 ../src/update.cc:428
+#: ../src/update.cc:198 ../src/update.cc:448
 msgid "No updates found."
 msgstr "Ingen opdateringer fundet."
 
-#: ../src/update.cc:313
+#: ../src/update.cc:333
 msgid "Package updates"
 msgstr "Pakkeopdateringer"
 
-#: ../src/update.cc:315
+#: ../src/update.cc:335
 msgid "Patches"
 msgstr "Rettelser"
 
-#: ../src/update.cc:317
+#: ../src/update.cc:337
 msgid "Pattern updates"
 msgstr "Mønsteropdateringer"
 
-#: ../src/update.cc:319
+#: ../src/update.cc:339
 msgid "Product updates"
 msgstr "Produktopdateringer"
 
-#: ../src/update.cc:492
+#: ../src/update.cc:512
 #, c-format
 msgid "Cannot parse '%s < %s'"
 msgstr "Kan ikke fortolke '%s < %s'"
 
 #. translators: %s is the name of a patch
-#: ../src/update.cc:548
+#: ../src/update.cc:568
 #, c-format
 msgid "'%s' is interactive, skipping."
 msgstr "'%s' er interaktiv, skipper."
 
-#: ../src/update.cc:603
+#: ../src/update.cc:623
 #, c-format
 msgid "No patches matching '%s' found."
 msgstr "Ingen rettelser, som matcher '%s', blev fundet."
 
-#: ../src/update.cc:606
+#: ../src/update.cc:626
 #, c-format
 msgid "Patch '%s' not found."
 msgstr "Rettelsen '%s' blev ikke fundet."
 
-#: ../src/update.cc:674
+#: ../src/update.cc:694
 #, c-format
 msgid "No packages matching '%s' are installed."
 msgstr "Ingen pakker, som matcher '%s', er installeret."
 
-#: ../src/update.cc:677
+#: ../src/update.cc:697
 #, c-format
 msgid "Package '%s' is not installed."
 msgstr "Pakken '%s' er ikke installeret."
 
-#: ../src/update.cc:701
+#: ../src/update.cc:714
 #, c-format
 msgid "No update candidate for '%s'."
 msgstr "Ingen opdateringskandidat til '%s'."
@@ -2003,7 +2028,7 @@ msgid "See http://en.opensuse.org/Zypper#Troubleshooting for instructions."
 msgstr "Du kan få vejledning på http://en.opensuse.org/Zypper#Troubleshooting"
 
 #: ../src/utils/messages.cc:40 ../src/utils/messages.cc:50
-#: ../src/utils/messages.cc:68 ../src/Zypper.cc:3654
+#: ../src/utils/messages.cc:68 ../src/Zypper.cc:3677
 msgid "Usage"
 msgstr "Brug"
 
@@ -2011,7 +2036,7 @@ msgstr "Brug"
 msgid "Too many arguments."
 msgstr "For mange argumenter."
 
-#: ../src/utils/messages.cc:48 ../src/Zypper.cc:2683 ../src/Zypper.cc:3651
+#: ../src/utils/messages.cc:48 ../src/Zypper.cc:2706 ../src/Zypper.cc:3674
 msgid "Required argument missing."
 msgstr "Krævet argument mangler."
 
@@ -2099,37 +2124,37 @@ msgstr "Tjek om filen er tilgængelig."
 msgid "Cannot parse capability '%s'."
 msgstr "Kan ikke fortolke kapabilitet '%s'."
 
-#: ../src/utils/pager.cc:30
+#: ../src/utils/pager.cc:35
 #, c-format
 msgid "Press '%c' to exit the pager."
 msgstr "Tryk '%c' for at afslutte pageren."
 
-#: ../src/utils/pager.cc:40
+#: ../src/utils/pager.cc:47
 msgid "Use arrows or pgUp/pgDown keys to scroll the text by lines or pages."
 msgstr "Brug pile- eller page up/down-taster for at rulle i teksten ved linjer eller sider."
 
-#: ../src/utils/pager.cc:44
+#: ../src/utils/pager.cc:51
 msgid "Use the Enter or Space key to scroll the text by lines or pages."
 msgstr "Brug retur- eller mellemrumstasten til at rulle i teksten ved linjer eller sider."
 
 #. ----------------------------------------------------------------------------
-#: ../src/utils/prompt.cc:87
+#: ../src/utils/prompt.cc:88
 msgid "abort"
 msgstr "afbryd"
 
-#: ../src/utils/prompt.cc:87
+#: ../src/utils/prompt.cc:88
 msgid "retry"
 msgstr "forsøg igen"
 
-#: ../src/utils/prompt.cc:87
+#: ../src/utils/prompt.cc:88
 msgid "ignore"
 msgstr "ignorér"
 
-#: ../src/utils/prompt.cc:99
+#: ../src/utils/prompt.cc:100
 msgid "Abort, retry, ignore?\n"
 msgstr "Afbryd, forsøg igen, ignorér?\n"
 
-#: ../src/utils/prompt.cc:134
+#: ../src/utils/prompt.cc:135
 #, c-format
 msgid "autoselect %s after %u "
 msgstr "vælg automatisk %s efter %u "
@@ -2140,55 +2165,62 @@ msgstr "vælg automatisk %s efter %u "
 #. the answers must be separated by slash characters '/' and must
 #. correspond to abort/retry/ignore in that order.
 #. The answers should be lower case letters.
-#: ../src/utils/prompt.cc:158
+#: ../src/utils/prompt.cc:159
 msgid "a/r/i"
 msgstr "a/f/i"
 
-#: ../src/utils/prompt.cc:159
+#: ../src/utils/prompt.cc:160
 msgid "Abort, retry, ignore?"
 msgstr "Afbryd, Forsøg igen, Ignorér?"
 
-#: ../src/utils/prompt.cc:168 ../src/utils/prompt.cc:193
-#: ../src/utils/prompt.cc:249
+#: ../src/utils/prompt.cc:169 ../src/utils/prompt.cc:197
+#: ../src/utils/prompt.cc:253
 msgid "yes"
 msgstr "ja"
 
-#: ../src/utils/prompt.cc:168 ../src/utils/prompt.cc:194
-#: ../src/utils/prompt.cc:249
+#: ../src/utils/prompt.cc:169 ../src/utils/prompt.cc:198
+#: ../src/utils/prompt.cc:253
 msgid "no"
 msgstr "nej"
 
-#: ../src/utils/prompt.cc:241
+#: ../src/utils/prompt.cc:245
 #, c-format
 msgid "Invalid answer '%s'."
 msgstr "Ugyldigt svar '%s'."
 
 #. TranslatorExplanation don't translate the 'y' and 'n', they can always be used as answers.
 #. The second and the third %s is the translated 'yes' and 'no' string (lowercase).
-#: ../src/utils/prompt.cc:248
+#: ../src/utils/prompt.cc:252
 #, c-format
 msgid "Enter 'y' for '%s' or 'n' for '%s' if nothing else works for you."
 msgstr "Tast 'y' for '%s' eller 'n' for '%s' hvis intet andet virker for dig."
 
+#: ../src/utils/prompt.cc:266
+#, c-format
+msgid ""
+"If you run zypper without a terminal, use '%s' global\n"
+"option to make zypper use default answers to prompts."
+msgstr ""
+
 #. TranslatorExplanation These are reasons for various failures.
-#: ../src/utils/prompt.h:112
+#: ../src/utils/prompt.h:125
 msgid "Not found"
 msgstr "Ikke fundet"
 
 # error box title
-#: ../src/utils/prompt.h:112
+#: ../src/utils/prompt.h:125
 msgid "I/O error"
 msgstr "I/O-fejl"
 
-#: ../src/utils/prompt.h:112
+#: ../src/utils/prompt.h:125
 msgid "Invalid object"
 msgstr "Ugyldigt objekt"
 
-#: ../src/utils/prompt.h:119
+#: ../src/utils/prompt.h:132
 msgid "Error"
 msgstr "Fejl"
 
-#: ../src/Zypper.cc:154
+#: ../src/Zypper.cc:153
 msgid ""
 "  Global Options:\n"
 "\t--help, -h\t\tHelp.\n"
@@ -2224,7 +2256,7 @@ msgstr ""
 "\t--cache-dir, -C <dir>\tBrug alternativ mappe med meta-data cache-database.\n"
 "\t--raw-cache-dir <dir>\tBrug alternativ mappe med rå meta-data-cache.\n"
 
-#: ../src/Zypper.cc:172
+#: ../src/Zypper.cc:171
 msgid ""
 "     Repository Options:\n"
 "\t--no-gpg-checks\t\tIgnore GPG check failures and continue.\n"
@@ -2238,7 +2270,14 @@ msgstr ""
 "\t--disable-repositories\tLæs ikke meta-data fra softwarekilder.\n"
 "\t--no-refresh\t\tGenopfrisk ikke softwarekilderne.\n"
 
-#: ../src/Zypper.cc:179
+#. translators: these belong to Repository Options main help text
+#: ../src/Zypper.cc:178
+msgid ""
+"\t--no-cd\t\t\tIgnore CD/DVD repositories.\n"
+"\t--no-remote\t\tIgnore remote repositories.\n"
+msgstr ""
+
+#: ../src/Zypper.cc:182
 msgid ""
 "     Target Options:\n"
 "\t--root, -R <dir>\tOperate on a different root directory.\n"
@@ -2250,7 +2289,7 @@ msgstr ""
 "\t--disable-system-resolvables\n"
 "\t\t\t\tLæs ikke installerede resolvables.\n"
 
-#: ../src/Zypper.cc:186
+#: ../src/Zypper.cc:189
 msgid ""
 "  Commands:\n"
 "\thelp, ?\t\t\tPrint help.\n"
@@ -2260,7 +2299,7 @@ msgstr ""
 "\thelp, ?\t\t\tSkriv hjælpevejledning.\n"
 "\tshell, sh\t\tAcceptér flere kommandoer på én gang.\n"
 
-#: ../src/Zypper.cc:191
+#: ../src/Zypper.cc:194
 msgid ""
 "     Repository Management:\n"
 "\trepos, lr\t\tList all defined repositories.\n"
@@ -2280,7 +2319,7 @@ msgstr ""
 "\trefresh, ref\t\tGenopfrisk alle softwarekilder.\n"
 "\tclean\t\t\tRyd lokale cacher.\n"
 
-#: ../src/Zypper.cc:201
+#: ../src/Zypper.cc:204
 msgid ""
 "     Service Management:\n"
 "\tservices, ls\t\tList all defined services.\n"
@@ -2296,7 +2335,7 @@ msgstr ""
 "\tremoveservice, rs\tFjern angiven tjeneste.\n"
 "\trefresh-services, refs\tGenopfrisk alle tjenester.\n"
 
-#: ../src/Zypper.cc:209
+#: ../src/Zypper.cc:212
 msgid ""
 "     Software Management:\n"
 "\tinstall, in\t\tInstall packages.\n"
@@ -2318,7 +2357,7 @@ msgstr ""
 "\t\t\t\tInstallér nyligt tilføjede pakker, der anbefales\n"
 "\t\t\t\taf installerede pakker.\n"
 
-#: ../src/Zypper.cc:220
+#: ../src/Zypper.cc:223
 msgid ""
 "     Update Management:\n"
 "\tupdate, up\t\tUpdate installed packages with newer versions.\n"
@@ -2336,7 +2375,7 @@ msgstr ""
 "\tdist-upgrade, dup\tUdfør en distributionsopgradering.\n"
 "\tpatch-check, pchk\tTjek efter rettelser.\n"
 
-#: ../src/Zypper.cc:229
+#: ../src/Zypper.cc:232
 msgid ""
 "     Querying:\n"
 "\tsearch, se\t\tSearch for packages matching a pattern.\n"
@@ -2362,7 +2401,7 @@ msgstr ""
 "\tproducts, pd\t\tVis liste over alle tilgængelige produkter.\n"
 "\twhat-provides, wp\tVis liste over pakker, der lever den angivne kapabilitet.\n"
 
-#: ../src/Zypper.cc:244
+#: ../src/Zypper.cc:247
 msgid ""
 "     Package Locks:\n"
 "\taddlock, al\t\tAdd a package lock.\n"
@@ -2374,7 +2413,7 @@ msgstr ""
 "\tremovelock, rl\t\tFjern en pakkelås.\n"
 "\tlocks, ll\t\tVis liste over nuværende pakkelåse.\n"
 
-#: ../src/Zypper.cc:250
+#: ../src/Zypper.cc:253
 msgid ""
 "     Other Commands:\n"
 "\tversioncmp, vcmp\tCompare two version strings.\n"
@@ -2388,7 +2427,7 @@ msgstr ""
 "\tlicenses\t\tSkriv rapport om installerede pakkers\n"
 "\t\t\t\tlicenser og EULAer.\n"
 
-#: ../src/Zypper.cc:258
+#: ../src/Zypper.cc:261
 msgid ""
 "  Usage:\n"
 "\tzypper [--global-options] <command> [--command-options] [arguments]\n"
@@ -2398,70 +2437,82 @@ msgstr ""
 
 #. translators: %s is "help" or "zypper help" depending on whether
 #. zypper shell is running or not
-#: ../src/Zypper.cc:283
+#: ../src/Zypper.cc:286
 #, c-format
 msgid "Type '%s' to get a list of global options and commands."
 msgstr "Indtast '%s' for at få en liste over globale valgmuligheder og kommandoer."
 
 #. translators: %s is "help" or "zypper help" depending on whether
 #. zypper shell is running or not
-#: ../src/Zypper.cc:292
+#: ../src/Zypper.cc:295
 #, c-format
 msgid "Type '%s' to get command-specific help."
 msgstr "Indtast '%s' for at få kommandospecifik hjælp."
 
-#: ../src/Zypper.cc:393
+#: ../src/Zypper.cc:398
 #, c-format
 msgid "Verbosity: %d"
 msgstr "Informationsniveau: %d"
 
-#: ../src/Zypper.cc:407
+#: ../src/Zypper.cc:412
 #, c-format
 msgid "Invalid table style %d."
 msgstr "Ugyldig tabelstil %d."
 
-#: ../src/Zypper.cc:408
+#: ../src/Zypper.cc:413
 #, c-format
 msgid "Use an integer number from %d to %d"
 msgstr "Benyt et heltal fra %d til %d"
 
-#: ../src/Zypper.cc:439
+#: ../src/Zypper.cc:444
 msgid "Entering non-interactive mode."
 msgstr "Går i ikke-interaktiv tilstand."
 
-#: ../src/Zypper.cc:445
+#: ../src/Zypper.cc:450
 msgid "Entering 'no-gpg-checks' mode."
 msgstr "Går i 'ingen GPG-tjek'-tilstand."
 
-#: ../src/Zypper.cc:456
+#: ../src/Zypper.cc:461
 msgid "The path specified in the --root option must be absolute."
 msgstr "Søgestien, angivet i --root-valgmuligheden, skal være absolut."
 
-#: ../src/Zypper.cc:485
+#: ../src/Zypper.cc:490
 msgid "Repositories disabled, using the database of installed packages only."
 msgstr "Softwarekilder deaktiveret, bruger kun database over installerede pakker."
 
-#: ../src/Zypper.cc:497
+#: ../src/Zypper.cc:502
 msgid "Autorefresh disabled."
 msgstr "Automatisk genopfrisk deaktiveret."
 
-#: ../src/Zypper.cc:504
+#: ../src/Zypper.cc:509
+#, fuzzy
+msgid "CD/DVD repositories disabled."
+msgstr "Automatisk genopfrisk deaktiveret."
+
+#: ../src/Zypper.cc:516
+#, fuzzy
+msgid "Remote repositories disabled."
+msgstr "Automatisk genopfrisk deaktiveret."
+
+#: ../src/Zypper.cc:523
 msgid "Ignoring installed resolvables."
 msgstr "Ignorerer installerede resolvables."
 
 #. TranslatorExplanation The %s is "--plus-repo"
-#: ../src/Zypper.cc:599
+#: ../src/Zypper.cc:618
 #, c-format
 msgid "The %s option has no effect here, ignoring."
 msgstr "Valgmuligheden %s har ingen virkning her. Den ignoreres."
 
-#: ../src/Zypper.cc:776
+#: ../src/Zypper.cc:795
 msgid "Unexpected exception."
 msgstr "Uventet undtagelse."
 
 #. TranslatorExplanation the first %s = "package, patch, pattern, product"
 #. and the second %s = "package"
-#: ../src/Zypper.cc:860
+#. ! \todo A capability is NAME[.ARCH][OP<VERSION>] now,
+#. !  the help text will be changed after release
+#: ../src/Zypper.cc:881
 #, c-format
 msgid ""
 "install (in) [options] <capability|rpm_file_uri> ...\n"
@@ -2504,7 +2555,7 @@ msgstr ""
 
 #. TranslatorExplanation the first %s = "package, patch, pattern, product"
 #. and the second %s = "package"
-#: ../src/Zypper.cc:909
+#: ../src/Zypper.cc:930
 #, c-format
 msgid ""
 "remove (rm) [options] <capability> ...\n"
@@ -2537,7 +2588,7 @@ msgstr ""
 "    --force-resolution          Tving afhængighedsløseren til at finde en løsning (omend aggressiv).\n"
 "-D, --dry-run                   Test fjernelse, uden at udføre den.\n"
 
-#: ../src/Zypper.cc:939
+#: ../src/Zypper.cc:960
 msgid ""
 "source-install (si) [options] <name> ...\n"
 "\n"
@@ -2557,7 +2608,7 @@ msgstr ""
 "-D, --no-build-deps      Installér ikke bygningsafhængigheder.\n"
 "-r, --repo <alias|#|URI> Installér kun pakker fra angivne softwarekilder.\n"
 
-#: ../src/Zypper.cc:967
+#: ../src/Zypper.cc:988
 msgid ""
 "verify (ve) [options]\n"
 "\n"
@@ -2577,7 +2628,7 @@ msgstr ""
 "-D, --dry-run            Test reparationen, uden faktisk at udføre noget på systemet.\n"
 "-r, --repo <alias|#|URI> Brug kun angivne softwarekilder, til at installere manglende pakker.\n"
 
-#: ../src/Zypper.cc:991
+#: ../src/Zypper.cc:1012
 msgid ""
 "install-new-recommends (inr) [options]\n"
 "\n"
@@ -2598,7 +2649,7 @@ msgstr ""
 "    --debug-solver       Opret solver test case til fejlsøgning.\n"
 
 #. TranslatorExplanation the %s = "yast2, rpm-md, plaindir"
-#: ../src/Zypper.cc:1018
+#: ../src/Zypper.cc:1039
 #, c-format
 msgid ""
 "addservice (as) [options] <URI> <alias>\n"
@@ -2621,7 +2672,7 @@ msgstr ""
 
 #. TranslatorExplanation the %s = "yast2, rpm-md, plaindir"
 #. TODO
-#: ../src/Zypper.cc:1042
+#: ../src/Zypper.cc:1063
 msgid ""
 "removeservice (rs) [options] <alias|#|URI>\n"
 "\n"
@@ -2640,7 +2691,7 @@ msgstr ""
 "    --loose-query  Ignorér forespørgsels-streng i URI.\n"
 
 #. translators: %s is "--all" and "--all"
-#: ../src/Zypper.cc:1078
+#: ../src/Zypper.cc:1099
 #, c-format
 msgid ""
 "modifyservice (ms) <options> <alias|#|URI>\n"
@@ -2692,7 +2743,7 @@ msgstr ""
 "-t, --remote              Anvend ændringer på alle eksterne tjenester.\n"
 "-m, --medium-type <type>  Anvend ændringer på alle tjenester af angiven type.\n"
 
-#: ../src/Zypper.cc:1126
+#: ../src/Zypper.cc:1147
 msgid ""
 "services (ls) [options]\n"
 "\n"
@@ -2720,7 +2771,7 @@ msgstr ""
 "-U, --sort-by-uri         Sortér listen efter URI.\n"
 "-N, --sort-by-name        Sortér listen efter navn.\n"
 
-#: ../src/Zypper.cc:1152
+#: ../src/Zypper.cc:1173
 msgid ""
 "refresh-services (refs) [options]\n"
 "\n"
@@ -2737,7 +2788,7 @@ msgstr ""
 "-r, --with-repos      Genopfrisk også softwarekilder.\n"
 
 #. TranslatorExplanation the %s = "yast2, rpm-md, plaindir"
-#: ../src/Zypper.cc:1180
+#: ../src/Zypper.cc:1201
 #, c-format
 msgid ""
 "addrepo (ar) [options] <URI> <alias>\n"
@@ -2774,7 +2825,7 @@ msgstr ""
 
 #. translators: this is just a rug compatiblity command
 #. translators: this is just a rug-compatiblity command
-#: ../src/Zypper.cc:1229 ../src/Zypper.cc:2106
+#: ../src/Zypper.cc:1250 ../src/Zypper.cc:2127
 msgid ""
 "list-resolvables (lr)\n"
 "\n"
@@ -2784,7 +2835,7 @@ msgstr ""
 "\n"
 "Vis liste over tilgængelige typer af resolvables.\n"
 
-#: ../src/Zypper.cc:1237
+#: ../src/Zypper.cc:1258
 msgid ""
 "repos (lr) [options]\n"
 "\n"
@@ -2815,11 +2866,11 @@ msgstr ""
 "-N, --sort-by-name        Sortér listen efter navn.\n"
 
 #. translators: this option belongs to 'lr' command help
-#: ../src/Zypper.cc:1252
+#: ../src/Zypper.cc:1273
 msgid "-s, --service             Show also alias of parent service.\n"
-msgstr ""
+msgstr "-s, --service             Vis også alias for forældertjeneste.\n"
 
-#: ../src/Zypper.cc:1267
+#: ../src/Zypper.cc:1288
 msgid ""
 "removerepo (rr) [options] <alias|#|URI>\n"
 "\n"
@@ -2837,7 +2888,7 @@ msgstr ""
 "    --loose-auth  Ignorér bruger-autentifikationsdata i URI.\n"
 "    --loose-query  Ignorér forespørgsels-streng i URI.\n"
 
-#: ../src/Zypper.cc:1286
+#: ../src/Zypper.cc:1307
 msgid ""
 "renamerepo (nr) [options] <alias|#|URI> <new-alias>\n"
 "\n"
@@ -2853,7 +2904,7 @@ msgstr ""
 
 #. translators: %s is "--all|--remote|--local|--medium-type"
 #. and "--all, --remote, --local, --medium-type"
-#: ../src/Zypper.cc:1317
+#: ../src/Zypper.cc:1338
 #, c-format
 msgid ""
 "modifyrepo (mr) <options> <alias|#|URI>\n"
@@ -2897,7 +2948,7 @@ msgstr ""
 "-t, --remote              Anvend ændringer på alle eksterne softwarekilder.\n"
 "-m, --medium-type <type>  Anvend ændringer på alle softwarekilder af angiven type.\n"
 
-#: ../src/Zypper.cc:1357
+#: ../src/Zypper.cc:1378
 msgid ""
 "refresh (ref) [alias|#|URI] ...\n"
 "\n"
@@ -2925,7 +2976,7 @@ msgstr ""
 "-r, --repo <alias|#|URI> Genopfrisk kun angivne softwarekilder.\n"
 "-s, --services           Genopfrisk også tjenester før genopfriskning af softwarekilder.\n"
 
-#: ../src/Zypper.cc:1386
+#: ../src/Zypper.cc:1407
 msgid ""
 "clean [alias|#|URI] ...\n"
 "\n"
@@ -2949,7 +3000,7 @@ msgstr ""
 
 #. TranslatorExplanation the first %s = "package, patch, pattern, product"
 #. and the second %s = "patch"
-#: ../src/Zypper.cc:1415
+#: ../src/Zypper.cc:1436
 #, c-format
 msgid ""
 "list-updates (lu) [options]\n"
@@ -2984,7 +3035,7 @@ msgstr ""
 
 #. TranslatorExplanation the first %s = "package, patch, pattern, product"
 #. and the second %s = "patch"
-#: ../src/Zypper.cc:1466
+#: ../src/Zypper.cc:1487
 #, c-format
 msgid ""
 "update (up) [options] ...\n"
@@ -3030,7 +3081,7 @@ msgstr ""
 "    --force-resolution          Tving afhængighedsløseren til at finde en løsning (omend aggressiv).\n"
 "-D, --dry-run                   Test opdateringen, uden at opdatere.\n"
 
-#: ../src/Zypper.cc:1505
+#: ../src/Zypper.cc:1526
 msgid ""
 "patch [options]\n"
 "\n"
@@ -3060,7 +3111,7 @@ msgstr ""
 "    --debug-solver              Opret solver-test-case til fejlsøgning.\n"
 "-D, --dry-run                   Test opdateringen, uden at opdatere.\n"
 
-#: ../src/Zypper.cc:1531
+#: ../src/Zypper.cc:1552
 msgid ""
 "list-patches (lp) [options]\n"
 "\n"
@@ -3076,7 +3127,7 @@ msgstr ""
 "  Kommandovalgmuligheder:\n"
 "-r, --repo <alias|#|URI>        Vis kun liste fra den angivne softwarekilde.\n"
 
-#: ../src/Zypper.cc:1556
+#: ../src/Zypper.cc:1577
 msgid ""
 "dist-upgrade (dup) [options]\n"
 "\n"
@@ -3104,7 +3155,7 @@ msgstr ""
 "    --debug-solver              Opret solver-test-case til fejlsøgning.\n"
 "-D, --dry-run                   Test opgraderingen, uden at opgradere.\n"
 
-#: ../src/Zypper.cc:1598
+#: ../src/Zypper.cc:1619
 msgid ""
 "search (se) [options] [querystring] ...\n"
 "\n"
@@ -3152,7 +3203,7 @@ msgstr ""
 " \n"
 "Wildcardene  * og ? kan også bruges i søgestrenge.\n"
 
-#: ../src/Zypper.cc:1635
+#: ../src/Zypper.cc:1656
 msgid ""
 "patch-check (pchk) [options]\n"
 "\n"
@@ -3170,7 +3221,7 @@ msgstr ""
 "\n"
 "-r, --repo <alias|#|URI>  Tjek kun efter rettelser i den angivne softwarekilde.\n"
 
-#: ../src/Zypper.cc:1657
+#: ../src/Zypper.cc:1678
 msgid ""
 "patches (pch) [repository] ...\n"
 "\n"
@@ -3188,7 +3239,7 @@ msgstr ""
 "\n"
 "-r, --repo <alias|#|URI>  Blot en anden måde at angive softwarekilde på.\n"
 
-#: ../src/Zypper.cc:1684
+#: ../src/Zypper.cc:1705
 msgid ""
 "packages (pa) [options] [repository] ...\n"
 "\n"
@@ -3214,7 +3265,7 @@ msgstr ""
 "-N, --sort-by-name        Sortér listen efter pakkenavn.\n"
 "-R, --sort-by-repo        Sortér listen efter softwarekilde.\n"
 
-#: ../src/Zypper.cc:1712
+#: ../src/Zypper.cc:1733
 msgid ""
 "patterns (pt) [options] [repository] ...\n"
 "\n"
@@ -3236,7 +3287,7 @@ msgstr ""
 "-i, --installed-only      Vis kun installerede mønstre.\n"
 "-u, --uninstalled-only    Vis kun mønstre, som ikke er installerede.\n"
 
-#: ../src/Zypper.cc:1738
+#: ../src/Zypper.cc:1759
 msgid ""
 "products (pd) [options] [repository] ...\n"
 "\n"
@@ -3258,7 +3309,7 @@ msgstr ""
 "-i, --installed-only      Vis kun installerede produkter.\n"
 "-u, --uninstalled-only    Vis kun produkter som ikke er installerede.\n"
 
-#: ../src/Zypper.cc:1763
+#: ../src/Zypper.cc:1784
 #, c-format
 msgid ""
 "info (if) [options] <name> ...\n"
@@ -3279,7 +3330,7 @@ msgstr ""
 "-t, --type <type>         Type af pakke (%s).\n"
 "                          Standard: %s."
 
-#: ../src/Zypper.cc:1786
+#: ../src/Zypper.cc:1807
 #, c-format
 msgid ""
 "patch-info <patchname> ...\n"
@@ -3294,7 +3345,7 @@ msgstr ""
 "\n"
 "Dette er et alias til rug-kompatibilitet for '%s'.\n"
 
-#: ../src/Zypper.cc:1805
+#: ../src/Zypper.cc:1826
 #, c-format
 msgid ""
 "pattern-info <pattern_name> ...\n"
@@ -3309,7 +3360,7 @@ msgstr ""
 "\n"
 "Dette er et alias til rug-kompatibilitet for '%s'.\n"
 
-#: ../src/Zypper.cc:1824
+#: ../src/Zypper.cc:1845
 #, c-format
 msgid ""
 "product-info <product_name> ...\n"
@@ -3324,7 +3375,7 @@ msgstr ""
 "\n"
 "Dette er et alias til rug-kompatibilitet for '%s'.\n"
 
-#: ../src/Zypper.cc:1841
+#: ../src/Zypper.cc:1862
 msgid ""
 "what-provides (wp) <capability>\n"
 "\n"
@@ -3338,7 +3389,7 @@ msgstr ""
 "\n"
 "Denne kommando har ingen yderligere valgmuligheder.\n"
 
-#: ../src/Zypper.cc:1892
+#: ../src/Zypper.cc:1913
 msgid ""
 "moo\n"
 "\n"
@@ -3352,7 +3403,7 @@ msgstr ""
 "\n"
 "Denne kommando har ingen yderligere valgmuligheder.\n"
 
-#: ../src/Zypper.cc:1914
+#: ../src/Zypper.cc:1935
 #, c-format
 msgid ""
 "addlock (al) [options] <packagename> ...\n"
@@ -3373,7 +3424,7 @@ msgstr ""
 "-t, --type <type>         Type af pakke (%s).\n"
 "                          Standard: %s.\n"
 
-#: ../src/Zypper.cc:1940
+#: ../src/Zypper.cc:1961
 #, c-format
 msgid ""
 "removelock (rl) [options] <lock-number|packagename> ...\n"
@@ -3390,7 +3441,7 @@ msgstr ""
 "  Kommandovalgmuligheder.\n"
 "-r, --repo <alias|#|URI>  Fjern kun låse med angivet softwarekilde.\n"
 
-#: ../src/Zypper.cc:1960
+#: ../src/Zypper.cc:1981
 msgid ""
 "locks (ll)\n"
 "\n"
@@ -3404,7 +3455,7 @@ msgstr ""
 "\n"
 "Denne kommando har ingen yderligere valgmuligheder.\n"
 
-#: ../src/Zypper.cc:2000
+#: ../src/Zypper.cc:2021
 msgid ""
 "targetos (tos)\n"
 "\n"
@@ -3418,7 +3469,7 @@ msgstr ""
 "\n"
 "Denne kommando har ingen yderligere valgmuligheder.\n"
 
-#: ../src/Zypper.cc:2019
+#: ../src/Zypper.cc:2040
 msgid ""
 "versioncmp (vcmp) <version1> <version2>\n"
 "\n"
@@ -3434,7 +3485,7 @@ msgstr ""
 "  Kommandovalgmuligheder:\n"
 "-m, --match  Opfatter manglende udgivelsesnummer som enhver udgivelse.\n"
 
-#: ../src/Zypper.cc:2038
+#: ../src/Zypper.cc:2059
 msgid ""
 "licenses\n"
 "\n"
@@ -3448,7 +3499,7 @@ msgstr ""
 "\n"
 "Denne kommando har ingen yderligere valgmuligheder.\n"
 
-#: ../src/Zypper.cc:2055
+#: ../src/Zypper.cc:2076
 msgid ""
 "quit (exit, ^D)\n"
 "\n"
@@ -3462,7 +3513,7 @@ msgstr ""
 "\n"
 "Denne kommando har ingen yderligere valgmuligheder.\n"
 
-#: ../src/Zypper.cc:2072
+#: ../src/Zypper.cc:2093
 msgid ""
 "shell (sh)\n"
 "\n"
@@ -3477,7 +3528,7 @@ msgstr ""
 "Denne kommando har ingen yderligere valgmuligheder.\n"
 
 #. translators: this is just a rug-compatiblity command
-#: ../src/Zypper.cc:2090
+#: ../src/Zypper.cc:2111
 msgid ""
 "service-types (st)\n"
 "\n"
@@ -3490,7 +3541,7 @@ msgstr ""
 #. trunslators: this is a rug-compatibility command (equivalent of
 #. 'zypper addrepo -t plaindir URI'). You can refer to rug's translations
 #. for how to translate specific terms like channel or service if in doubt.
-#: ../src/Zypper.cc:2128
+#: ../src/Zypper.cc:2149
 msgid ""
 "mount\n"
 "\n"
@@ -3510,7 +3561,7 @@ msgstr ""
 "-n, --name <navn>    Bruger en given streng som tjeneste-navn.\n"
 "-r, --recurse        Går ind i undermapper.\n"
 
-#: ../src/Zypper.cc:2159
+#: ../src/Zypper.cc:2180
 #, c-format
 msgid ""
 "patch-search [options] [querystring...]\n"
@@ -3522,24 +3573,28 @@ msgstr ""
 "Søger efter rettelser, der matcher en given streng. Dette er et alias til rug-kompatibilitet for '%s'. Se zyppers manualside for detaljer.\n"
 
 #. translators: this is just a rug-compatiblity command
-#: ../src/Zypper.cc:2177
+#: ../src/Zypper.cc:2198
 msgid ""
 "ping [options]\n"
 "\n"
 "This command has dummy implementation which always returns 0.\n"
 "It is provided for compatibility with rug.\n"
 msgstr ""
+"ping [valgmuligheder]\n"
+" \n"
+" Denne kommando har en attrap-implementation som altid returnerer 0.\n"
+" Den leveres pga. kompatibilitet med rug.\n"
 
-#: ../src/Zypper.cc:2191 ../src/Zypper.cc:3936
+#: ../src/Zypper.cc:2212 ../src/Zypper.cc:3959
 msgid "Unexpected program flow."
 msgstr "Uventet programforløb."
 
-#: ../src/Zypper.cc:2215
+#: ../src/Zypper.cc:2236
 msgid "Non-option program arguments: "
 msgstr "Programargumenter uden valgmulighed: "
 
 #. TranslatorExplanation this is a hedgehog, paint another animal, if you want
-#: ../src/Zypper.cc:2275
+#: ../src/Zypper.cc:2298
 msgid ""
 "   \\\\\\\\\\\n"
 "  \\\\\\\\\\\\\\__o\n"
@@ -3572,30 +3627,29 @@ msgstr ""
 "    #@@@@@@@@#                                       \n"
 "      +@@@@#` "
 
-#: ../src/Zypper.cc:2302
+#: ../src/Zypper.cc:2325
 msgid "Root privileges are required for refreshing services."
 msgstr "Root-rettigheder kræves for at genopfriske tjenester."
 
-#: ../src/Zypper.cc:2329 ../src/Zypper.cc:2676
+#: ../src/Zypper.cc:2352 ../src/Zypper.cc:2699
 msgid "Root privileges are required for modifying system services."
 msgstr "Root-rettigheder kræves for at ændre systemtjenester."
 
-#: ../src/Zypper.cc:2398
-#, fuzzy
+#: ../src/Zypper.cc:2421
 msgid "Could not determine the type of the repository. Check if the specified URI points to a valid repository."
-msgstr "Kunne ikke fastslå typen af softwarekilden. Tjek om de definerede URIer (se nedenfor) peger på en gyldig softwarekilde:"
+msgstr "Kunne ikke fastslå typen af softwarekilden. Tjek om den angivne URI peger på en gyldig softwarekilde."
 
-#: ../src/Zypper.cc:2430
+#: ../src/Zypper.cc:2453
 #, c-format
 msgid "'%s' is not a valid service type."
 msgstr "`%s' er ikke en gyldig tjenestetype."
 
-#: ../src/Zypper.cc:2432
+#: ../src/Zypper.cc:2455
 #, c-format
 msgid "See '%s' or '%s' to get a list of known service types."
 msgstr "Se '%s' eller '%s' for at få en liste over kendte tjenestetyper."
 
-#: ../src/Zypper.cc:2449
+#: ../src/Zypper.cc:2472
 msgid "Root privileges are required for modifying services."
 msgstr "Root-rettigheder kræves for at ændre tjenester."
 
@@ -3603,187 +3657,198 @@ msgstr "Root-rettigheder kræves for at ændre tjenester."
 #. followed by ms command help text which will explain it
 #. translators: aggregate option is e.g. "--all". This message will be
 #. followed by mr command help text which will explain it
-#: ../src/Zypper.cc:2461 ../src/Zypper.cc:2829
+#: ../src/Zypper.cc:2484 ../src/Zypper.cc:2852
 msgid "Alias or an aggregate option is required."
 msgstr "Alias eller en samlet valgmulighed kræves."
 
-#: ../src/Zypper.cc:2495
+#: ../src/Zypper.cc:2518
 #, c-format
 msgid "Service '%s' not found."
 msgstr "Tjenesten '%s' blev ikke fundet."
 
-#: ../src/Zypper.cc:2531 ../src/Zypper.cc:2675 ../src/Zypper.cc:2761
-#: ../src/Zypper.cc:2817
+#: ../src/Zypper.cc:2554 ../src/Zypper.cc:2698 ../src/Zypper.cc:2784
+#: ../src/Zypper.cc:2840
 msgid "Root privileges are required for modifying system repositories."
 msgstr "Root-rettigheder kræves for at ændre systemets softwarekilder."
 
-#: ../src/Zypper.cc:2580 ../src/Zypper.cc:2937
+#: ../src/Zypper.cc:2603 ../src/Zypper.cc:2960
 msgid "Too few arguments."
 msgstr "For få argumenter."
 
-#: ../src/Zypper.cc:2604
+#: ../src/Zypper.cc:2627
 msgid "If only one argument is used, it must be a URI pointing to a .repo file."
 msgstr "Hvis der kun anvendes ét argument, skal det være en URI, der peger på en .repo-fil."
 
-#: ../src/Zypper.cc:2630
+#: ../src/Zypper.cc:2653
 #, c-format
 msgid "Cannot use %s together with %s. Using the %s setting."
 msgstr "Kan ikke bruge %s sammen med %s. Bruger indstillingen %s."
 
-#: ../src/Zypper.cc:2653
+#: ../src/Zypper.cc:2676
 msgid "Specified type is not a valid repository type:"
 msgstr "Den angivne type er ikke en gyldig type af softwarekilde:"
 
-#: ../src/Zypper.cc:2655
+#: ../src/Zypper.cc:2678
 #, c-format
 msgid "See '%s' or '%s' to get a list of known repository types."
 msgstr "Se '%s' eller '%s' for at få en liste over kendte typer af softwarekilder."
 
 #. translators: %s is the supplied command line argument which
 #. for which no repository counterpart was found
-#: ../src/Zypper.cc:2711
+#: ../src/Zypper.cc:2734
 #, c-format
 msgid "Repository '%s' not found by alias, number or URI."
 msgstr "Softwarekilden '%s' blev ikke fundet ved alias, nummer eller URI."
 
 #. translators: %s is the supplied command line argument which
 #. for which no service counterpart was found
-#: ../src/Zypper.cc:2734
+#: ../src/Zypper.cc:2757
 #, c-format
 msgid "Service '%s' not found by alias, number or URI."
 msgstr "Tjenesten '%s' blev ikke fundet ved alias, nummer eller URI."
 
-#: ../src/Zypper.cc:2768
+#: ../src/Zypper.cc:2791
 msgid "Too few arguments. At least URI and alias are required."
 msgstr "For få argumenter. Der kræves mindst URI og alias."
 
-#: ../src/Zypper.cc:2793
+#: ../src/Zypper.cc:2816
 #, c-format
 msgid "Repository '%s' not found."
 msgstr "Softwarekilden '%s' blev ikke fundet."
 
-#: ../src/Zypper.cc:2859
+#: ../src/Zypper.cc:2882
 #, c-format
 msgid "Repository %s not found."
 msgstr "Softwarekilden %s blev ikke fundet."
 
-#: ../src/Zypper.cc:2877
+#: ../src/Zypper.cc:2900
 msgid "Root privileges are required for refreshing system repositories."
 msgstr "Der kræves root-rettigheder for at genopfriske systemets softwarekilder."
 
-#: ../src/Zypper.cc:2884
+#: ../src/Zypper.cc:2907
 #, c-format
 msgid "The '%s' global option has no effect here."
 msgstr "Den globale valgmulighed '%s' har ingen virkning her."
 
-#: ../src/Zypper.cc:2892
+#: ../src/Zypper.cc:2915
 #, c-format
 msgid "Arguments are not allowed if '%s' is used."
 msgstr "Argumenter tillades ikke, hvis '%s' anvendes."
 
-#: ../src/Zypper.cc:2918
+#: ../src/Zypper.cc:2941
 msgid "Root privileges are required for cleaning local caches."
 msgstr "Der kræves root-rettigheder for at rydde lokal cache."
 
-#: ../src/Zypper.cc:2938
+#: ../src/Zypper.cc:2961
 msgid "At least one package name is required."
 msgstr "Mindst ét pakkenavn kræves."
 
-#: ../src/Zypper.cc:2952
+#: ../src/Zypper.cc:2975
 msgid "Root privileges are required for installing or uninstalling packages."
 msgstr "Der kræves root-rettigheder for at installere eller afinstallere pakker."
 
-#: ../src/Zypper.cc:2967
+#: ../src/Zypper.cc:2990
 #, c-format
 msgid "Unknown package type: %s"
 msgstr "Ukendt pakketype: %s"
 
-#: ../src/Zypper.cc:2987
+#: ../src/Zypper.cc:3010
 #, c-format
 msgid "'%s' looks like an RPM file. Will try to download it."
 msgstr "'%s' ligner en RPM-fil. Vil forsøge at downloade den."
 
-#: ../src/Zypper.cc:3000
+#: ../src/Zypper.cc:3023
 #, c-format
 msgid "Problem with the RPM file specified as '%s', skipping."
 msgstr "Problem med RPM-filen angivet som '%s'. Skipper."
 
-#: ../src/Zypper.cc:3023
+#: ../src/Zypper.cc:3046
 #, c-format
 msgid "Problem reading the RPM header of %s. Is it an RPM file?"
 msgstr "Problem med at læse RPM-header for %s. Er det en RPM-fil?"
 
-#: ../src/Zypper.cc:3048
+#: ../src/Zypper.cc:3071
 msgid "Plain RPM files cache"
 msgstr "Cache for rene RPM-filer"
 
-#: ../src/Zypper.cc:3077 ../src/Zypper.cc:3155
+#: ../src/Zypper.cc:3086
+msgid "No valid arguments specified."
+msgstr "Ingen gyldige argumenter angivet."
+
+#: ../src/Zypper.cc:3100 ../src/Zypper.cc:3178
 msgid "Warning: No repositories defined. Operating only with the installed resolvables. Nothing can be installed."
 msgstr "Advarsel: Ingen softwarekilder angivet. Der anvendes kun installerede resolvables. Intet kan installeres."
 
-#: ../src/Zypper.cc:3106
+#: ../src/Zypper.cc:3129
 msgid "Source package name is a required argument."
 msgstr "Kildepakkens navn er et krævet argument."
 
-#: ../src/Zypper.cc:3212 ../src/Zypper.cc:3472 ../src/Zypper.cc:3556
-#: ../src/Zypper.cc:3679 ../src/Zypper.cc:3747
+#: ../src/Zypper.cc:3235 ../src/Zypper.cc:3495 ../src/Zypper.cc:3579
+#: ../src/Zypper.cc:3702 ../src/Zypper.cc:3770
 #, c-format
 msgid "Unknown package type '%s'."
 msgstr "Ukendt pakketype '%s'."
 
-#: ../src/Zypper.cc:3318
+#: ../src/Zypper.cc:3341
 msgid "Problem occurred initializing or executing the search query"
 msgstr "Problem opstod under initialisering eller udførsel af søgeforespørgslen"
 
-#: ../src/Zypper.cc:3319
+#: ../src/Zypper.cc:3342
 msgid "See the above message for a hint."
 msgstr "Se meddelelsen ovenfor for at få et tip."
 
 #. translators: Running as 'rug', cannot use 'best-effort' option.
-#: ../src/Zypper.cc:3491 ../src/Zypper.cc:3574
+#: ../src/Zypper.cc:3514 ../src/Zypper.cc:3597
 #, c-format
 msgid "Running as '%s', cannot use '%s' option."
 msgstr "Kører som '%s'. Kan ikke bruge valgmuligheden '%s'."
 
-#: ../src/Zypper.cc:3519
+#: ../src/Zypper.cc:3542
 msgid "Root privileges are required for updating packages."
 msgstr "Der kræves root-rettigheder for at opdatere pakker."
 
-#: ../src/Zypper.cc:3612
+#: ../src/Zypper.cc:3635
 msgid "Root privileges are required for performing a distribution upgrade."
 msgstr "Der kræves root-rettigheder for at udføre en opgradering af distributionen."
 
-#: ../src/Zypper.cc:3709 ../src/Zypper.cc:3770
+#: ../src/Zypper.cc:3732 ../src/Zypper.cc:3793
 msgid "Root privileges are required for adding of package locks."
 msgstr "Der kræves root-rettigheder for at tilføje pakkelåse."
 
-#: ../src/Zypper.cc:3878
+#: ../src/Zypper.cc:3901
 #, c-format
 msgid "%s matches %s"
 msgstr "%s matcher %s"
 
-#: ../src/Zypper.cc:3880
+#: ../src/Zypper.cc:3903
 #, c-format
 msgid "%s is newer than %s"
 msgstr "%s er nyere end %s"
 
-#: ../src/Zypper.cc:3882
+#: ../src/Zypper.cc:3905
 #, c-format
 msgid "%s is older than %s"
 msgstr "%s er ældre end %s"
 
-#: ../src/Zypper.cc:3921
+#: ../src/Zypper.cc:3944
 msgid "This command only makes sense in the zypper shell."
 msgstr "Denne kommando giver kun mening i zyppers skal."
 
-#: ../src/Zypper.cc:3933
+#: ../src/Zypper.cc:3956
 msgid "You already are running zypper's shell."
 msgstr "Du kører allerede zyppers skal."
 
-#: ../src/Zypper.cc:3950
+#: ../src/Zypper.cc:3973
 msgid "Description"
 msgstr "Beskrivelse"
 
-#: ../src/Zypper.cc:4014
+#: ../src/Zypper.cc:4037
 msgid "Resolvable Type"
 msgstr "Type af resolvable"
+
+# power-off message
+#~ msgid "Do you want to trust the key?"
+#~ msgstr "Vil du betro nøglen?"
+
+#~ msgid "n/t/i"
+#~ msgstr "n/m/i"
