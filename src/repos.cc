@@ -60,7 +60,7 @@ static bool refresh_raw_metadata(Zypper & zypper,
                                  const RepoInfo & repo,
                                  bool force_download)
 {
-  RuntimeData & gData = zypper.runtimeData(); 
+  RuntimeData & gData = zypper.runtimeData();
   gData.current_repo = repo;
   bool do_refresh = false;
   string & plabel = zypper.runtimeData().raw_refresh_progress_label;
@@ -479,6 +479,29 @@ static void do_init_repos(Zypper & zypper, const Container & container)
     }
   }
 
+  bool no_cd = zypper.globalOpts().no_cd;
+  bool no_remote = zypper.globalOpts().no_remote;
+  for (list<RepoInfo>::iterator it = gData.repos.begin(); it !=  gData.repos.end();)
+  {
+    if (no_cd && (it->baseUrlsBegin()->getScheme() == "cd"
+                  || it->baseUrlsBegin()->getScheme() == "dvd"))
+    {
+      zypper.out().info(str::form(
+          _("Ignoring repository '%s' because of '%s' option."),
+          it->name().c_str(), "no-cd"));
+      gData.repos.erase(it++);
+    }
+    if (no_remote && MediaAccess::downloads(*it->baseUrlsBegin()))
+    {
+      zypper.out().info(str::form(
+          _("Ignoring repository '%s' because of '%s' option."),
+          it->name().c_str(), "no-remote"));
+      gData.repos.erase(it++);
+    }
+    else
+      ++it;
+  }
+
   for (std::list<RepoInfo>::iterator it = gData.repos.begin();
        it !=  gData.repos.end(); ++it)
   {
@@ -801,7 +824,7 @@ void print_repos_to(const std::list<zypp::RepoInfo> &repos, ostream & out)
 void list_repos(Zypper & zypper)
 {
   RepoManager & manager = zypper.repoManager();
-  RuntimeData & gData = zypper.runtimeData(); 
+  RuntimeData & gData = zypper.runtimeData();
   list<RepoInfo> repos;
 
   try
@@ -1222,7 +1245,7 @@ std::string timestamp ()
 void add_repo(Zypper & zypper, RepoInfo & repo)
 {
   RepoManager & manager = zypper.repoManager();
-  RuntimeData & gData = zypper.runtimeData(); 
+  RuntimeData & gData = zypper.runtimeData();
 
   bool is_cd = true;
   for(RepoInfo::urls_const_iterator it = repo.baseUrlsBegin();
@@ -1490,13 +1513,13 @@ void remove_repo(Zypper & zypper, const RepoInfo & repoinfo)
 
 void rename_repo(Zypper & zypper,
                  const std::string & alias, const std::string & newalias)
-{ 
+{
   RepoManager & manager = zypper.repoManager();
 
   try
   {
     RepoInfo repo(manager.getRepositoryInfo(alias));
-    
+
     if (!repo.service().empty())
     {
       zypper.out().error(str::form(
@@ -1548,7 +1571,7 @@ void modify_repos_by_option( Zypper & zypper )
     }
     return; //no more repository is possible
   }
-  
+
   if ( copts.count("local") )
   {
     for_(it, repos.begin(),repos.end())
@@ -1726,7 +1749,7 @@ void modify_repo(Zypper & zypper, const string & alias)
         zypper.out().info(boost::str(format(
           _("Repository '%s' priority has been set to %d.")) % alias % prio));
       }
-      
+
       if (!name.empty())
       {
         zypper.out().info(boost::str(format(
@@ -1805,7 +1828,7 @@ bool match_service(Zypper & zypper, string str, RepoInfoBase_Ptr & service_ptr)
     {
       // match by alias or number
       found = (*known_it)->alias() == str || tmp == number;
-      
+
       // match by URL
       if (!found)
       {
@@ -1819,7 +1842,7 @@ bool match_service(Zypper & zypper, string str, RepoInfoBase_Ptr & service_ptr)
         if (zypper.cOpts().count("loose-query"))
           urlview = urlview - url::ViewOptions::WITH_QUERY_STR;
 
-        ServiceInfo_Ptr s_ptr = dynamic_pointer_cast<ServiceInfo>(*known_it); 
+        ServiceInfo_Ptr s_ptr = dynamic_pointer_cast<ServiceInfo>(*known_it);
 
         if (!(urlview.has(url::ViewOptions::WITH_PASSWORD)
             && urlview.has(url::ViewOptions::WITH_QUERY_STR)))
@@ -1909,7 +1932,7 @@ void get_services( Zypper & zypper,
       ServiceInfo_Ptr s_ptr = dynamic_pointer_cast<ServiceInfo>(*serv_it);
       ServiceInfo_Ptr current_service_ptr = dynamic_pointer_cast<ServiceInfo>(service);
 
-      // one is a service, the other is a repo 
+      // one is a service, the other is a repo
       if (s_ptr && !current_service_ptr)
         continue;
 
@@ -1959,7 +1982,7 @@ enum ServiceListFlagsBits
   SF_SHOW_URI        = 1,
   SF_SHOW_PRIO       = 1 << 1,
   SF_SHOW_WITH_REPOS = 1 << 2,
-  SF_SERVICE_REPO    = 1 << 15  
+  SF_SERVICE_REPO    = 1 << 15
 };
 
 ZYPP_DECLARE_FLAGS(ServiceListFlags,ServiceListFlagsBits);
@@ -2132,10 +2155,10 @@ static void print_service_list(Zypper & zypper,
 static void print_xml_service_list(Zypper & zypper,
                                    const list<RepoInfoBase_Ptr> & services)
 {
-  //string type = 
-  
+  //string type =
+
   cout << "<service-list>" << endl;
-  
+
 
   ServiceInfo_Ptr s_ptr;
   for (list<RepoInfoBase_Ptr>::const_iterator it = services.begin();
@@ -2326,7 +2349,7 @@ void refresh_services(Zypper & zypper)
   MIL << "going to refresh services" << endl;
 
   ServiceList services = get_all_services(zypper);
-  
+
   // get the list of repos specified on the command line ...
   ServiceList specified;
   list<string> not_found;
@@ -2371,7 +2394,7 @@ void refresh_services(Zypper & zypper)
       {
         string msg = boost::str(
           format(_("Skipping disabled service '%s'")) % service_ptr->name());
-        DBG << "skipping disabled service '" << service_ptr->alias() << "'" << endl; 
+        DBG << "skipping disabled service '" << service_ptr->alias() << "'" << endl;
 
         if (specified.empty())
           zypper.out().info(msg, Out::HIGH);
@@ -2426,7 +2449,7 @@ void refresh_services(Zypper & zypper)
   }
   else
     enabled_service_count = 0;
-  
+
   // print the result message
   if (enabled_service_count == 0)
   {
@@ -2474,7 +2497,7 @@ void modify_service(Zypper & zypper, const string & alias)
   {
     RepoManager & manager = zypper.repoManager();
     ServiceInfo srv(manager.getService(alias));
-    
+
     bool chnaged_enabled = false;
     bool changed_autoref = false;
 
@@ -2504,7 +2527,7 @@ void modify_service(Zypper & zypper, const string & alias)
     set<string> artodisable;
     set<string> rrtoenable;
     set<string> rrtodisable;
-    
+
     // RIS repos to enable
     if (zypper.cOpts().count("cl-to-enable"))
     {
@@ -2657,7 +2680,7 @@ void modify_services_by_option( Zypper & zypper )
 
   ServiceInfo_Ptr sptr;
   RepoInfo_Ptr    rptr;
-  
+
   if ( copts.count("all") )
   {
     for_(it, known.begin(), known.end())
@@ -2746,10 +2769,10 @@ void load_resolvables(Zypper & zypper)
 void load_repo_resolvables(Zypper & zypper)
 {
   RepoManager & manager = zypper.repoManager();
-  RuntimeData & gData = zypper.runtimeData(); 
+  RuntimeData & gData = zypper.runtimeData();
 
   zypper.out().info(_("Loading repository data..."));
-  
+
   for (std::list<RepoInfo>::iterator it = gData.repos.begin();
        it !=  gData.repos.end(); ++it)
   {
@@ -2795,7 +2818,7 @@ void load_repo_resolvables(Zypper & zypper)
       if ( robj != Repository::noRepository &&
            robj.maybeOutdated() )
       {
-        
+
        zypper.out().warning(boost::str(format(
               _("Repository '%s' appears to outdated. Consider using a different mirror or server."))
               % repo.name()), Out::QUIET);

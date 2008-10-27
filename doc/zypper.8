@@ -1108,6 +1108,14 @@ packages (if \-\-disable\-system\-resolvables was not specified).
 Do not auto-refresh repositories (ignore the auto-refresh setting). Useful to save
 time when doing operations like search, if there is not a need to have
 a completely up to date metadata.
+.TP
+.I \ \ \ \ \-\-no\-cd
+Ignore CD/DVD repositories. When this option is specified, zypper acts as if
+the CD/DVD repositories were not defined at all.
+.TP
+.I \ \ \ \ \-\-no\-remote
+Ignore remote repositories like http, ftp, smb and similar. When this option
+is specified, zypper acts as if the remote repositories were not defined at all.
 .LP
 Target Options:
 .TP

@@ -168,12 +168,16 @@ void print_main_help(Zypper & zypper)
     "\t--raw-cache-dir <dir>\tUse alternative raw meta-data cache directory.\n"
   );
 
-  static string help_global_source_options = _("     Repository Options:\n"
+  static string help_global_repo_options = string(_("     Repository Options:\n"
     "\t--no-gpg-checks\t\tIgnore GPG check failures and continue.\n"
     "\t--plus-repo, -p <URI>\tUse an additional repository.\n"
     "\t--disable-repositories\tDo not read meta-data from repositories.\n"
     "\t--no-refresh\t\tDo not refresh the repositories.\n"
-  );
+  )) + string(_(
+    // translators: these belong to Repository Options main help text
+    "\t--no-cd\t\t\tIgnore CD/DVD repositories.\n"
+    "\t--no-remote\t\tIgnore remote repositories.\n"
+  ));
 
   static string help_global_target_options = _("     Target Options:\n"
     "\t--root, -R <dir>\tOperate on a different root directory.\n"
@@ -260,7 +264,7 @@ void print_main_help(Zypper & zypper)
 
   zypper.out().info(help_usage, Out::QUIET);
   zypper.out().info(help_global_options, Out::QUIET);
-  zypper.out().info(help_global_source_options, Out::QUIET);
+  zypper.out().info(help_global_repo_options, Out::QUIET);
   zypper.out().info(help_global_target_options, Out::QUIET);
   zypper.out().info(help_commands, Out::QUIET);
   zypper.out().info(help_repo_commands, Out::QUIET);
@@ -329,6 +333,8 @@ void Zypper::processGlobalOptions()
     {"plus-repo",                  required_argument, 0, 'p'},
     {"disable-repositories",       no_argument,       0,  0 },
     {"no-refresh",                 no_argument,       0,  0 },
+    {"no-cd",                      no_argument,       0,  0 },
+    {"no-remote",                  no_argument,       0,  0 },
     {"xmlout",                     no_argument,       0, 'x'},
     {0, 0, 0, 0}
   };
@@ -495,6 +501,20 @@ void Zypper::processGlobalOptions()
     _gopts.no_refresh = true;
     out().info(_("Autorefresh disabled."), Out::HIGH);
     MIL << "Autorefresh disabled." << endl;
+  }
+
+  if (gopts.count("no-cd"))
+  {
+    _gopts.no_cd = true;
+    out().info(_("CD/DVD repositories disabled."), Out::HIGH);
+    MIL << "No CD/DVD repos." << endl;
+  }
+
+  if (gopts.count("no-remote"))
+  {
+    _gopts.no_remote = true;
+    out().info(_("Remote repos disabled."), Out::HIGH);
+    MIL << "No remote repos." << endl;
   }
 
   if (gopts.count("disable-system-resolvables"))
@@ -732,7 +752,7 @@ void Zypper::shellCleanup()
 
   // runtime data
   _rdata.current_repo = RepoInfo();
-  
+
   // cause the RepoManager to be reinitialized
   _rm.reset();
 
@@ -1048,7 +1068,7 @@ void Zypper::processCommandOptions()
     );
     break;
   }
-  
+
   case ZypperCommand::MODIFY_SERVICE_e:
   {
     static struct option service_modify_options[] = {
@@ -1100,7 +1120,7 @@ void Zypper::processCommandOptions()
       "-m, --medium-type <type>       Apply changes to services of specified type.\n"
     ), "--all|--remote|--local|--medium-type"
      , "--all, --remote, --local, --medium-type");
-    // ---------|---------|---------|---------|---------|---------|---------|---------    
+    // ---------|---------|---------|---------|---------|---------|---------|---------
     break;
   }
 
@@ -3479,7 +3499,7 @@ void Zypper::doCommand()
     }
     else if (command() == ZypperCommand::LIST_PATCHES)
       kinds.insert(ResKind::patch);
-    else      
+    else
       kinds.insert(ResKind::package);
 
     bool best_effort = copts.count( "best-effort" );
@@ -3825,9 +3845,9 @@ void Zypper::doCommand()
 
     break;
   }
-  
+
   // ----------------------------(utils/others)--------------------------------
-  
+
   case ZypperCommand::TARGET_OS_e:
   {
     if (runningHelp()) { out().info(_command_help, Out::QUIET); return; }
@@ -3836,7 +3856,7 @@ void Zypper::doCommand()
     init_target(*this);
 
     out().info(God->target()->targetDistribution());
-    
+
     break;
   }
 
@@ -3856,7 +3876,7 @@ void Zypper::doCommand()
       setExitCode(ZYPPER_EXIT_ERR_INVALID_ARGS);
       return;
     }
-    
+
     Edition lhs(_arguments[0]);
     Edition rhs(_arguments[1]);
 

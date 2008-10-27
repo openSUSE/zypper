@@ -17,7 +17,7 @@
 #include "zypp/TriBool.h"
 
 #include "zypp/RepoInfo.h"
-#include "zypp/RepoManager.h" // for RepoManagerOptions 
+#include "zypp/RepoManager.h" // for RepoManagerOptions
 #include "zypp/SrcPackage.h"
 
 #include "Command.h"
@@ -35,7 +35,7 @@ struct GlobalOptions
 {
   GlobalOptions()
   :
-  verbosity(0),  
+  verbosity(0),
   disable_system_sources(false),
   disable_system_resolvables(false),
   is_rug_compatible(false),
@@ -43,6 +43,8 @@ struct GlobalOptions
   no_gpg_checks(false),
   machine_readable(false),
   no_refresh(false),
+  no_cd(false),
+  no_remote(false),
   root_dir("/"),
   no_abbrev(false),
   terse(false),
@@ -54,7 +56,7 @@ struct GlobalOptions
   /**
    * Level of the amount of output.
    *
-   * <ul> 
+   * <ul>
    * <li>-1 quiet</li>
    * <li> 0 normal (default)</li>
    * <li> 1 verbose</li>
@@ -70,6 +72,10 @@ struct GlobalOptions
   bool machine_readable;
   /** Whether to disable autorefresh. */
   bool no_refresh;
+  /** Whether to ignore cd/dvd repos) */
+  bool no_cd;
+  /** Whether to ignore remote (http, ...) repos */
+  bool no_remote;
   std::string root_dir;
   zypp::RepoManagerOptions rm_options;
   bool no_abbrev;
@@ -137,7 +143,7 @@ struct RuntimeData
 
   unsigned int commit_pkgs_total;
   unsigned int commit_pkg_current;
-  
+
   bool seen_verify_hint;
   bool action_rpm_download;
 };
@@ -150,7 +156,7 @@ public:
   typedef zypp::RW_pointer<Zypper,zypp::rw_pointer::Scoped<Zypper> > Ptr;
   typedef std::vector<std::string>  ArgList;
 
-  static Ptr & instance(); 
+  static Ptr & instance();
 
   int main(int argc, char ** argv);
 
@@ -166,13 +172,13 @@ public:
   zypp::RepoManager & repoManager()
   { if (!_rm) _rm.reset(new zypp::RepoManager(_gopts.rm_options)); return *_rm; }
   int exitCode() const { return _exit_code; }
-  void setExitCode(int exit) { _exit_code = exit; } 
+  void setExitCode(int exit) { _exit_code = exit; }
   bool runningShell() const { return _running_shell; }
   bool runningHelp() const { return _running_help; }
-  bool exitRequested() const { return _exit_requested; } 
+  bool exitRequested() const { return _exit_requested; }
   void requestExit() { _exit_requested = true; }
 
-  int argc() { return _running_shell ? _sh_argc : _argc; } 
+  int argc() { return _running_shell ? _sh_argc : _argc; }
   char ** argv() { return _running_shell ? _sh_argv : _argv; }
 
   void cleanup();
