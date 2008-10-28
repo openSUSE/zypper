@@ -203,9 +203,9 @@ const char *const MediaCurl::anonymousIdHeader()
   }
 
   static const std::string _value(
-      str::form(
-          "X-ZYpp-AnonymousUniqueId: %s",
-          target ? target->anonymousUniqueId().c_str() : "" )
+      str::trim( str::form(
+          "X-ZYpp-AnonymousId: %s",
+          target ? target->anonymousUniqueId().c_str() : "" ) )
   );
   return _value.c_str();
 }
@@ -244,7 +244,8 @@ MediaCurl::MediaCurl( const Url &      url_r,
     : MediaHandler( url_r, attach_point_hint_r,
                     "/", // urlpath at attachpoint
                     true ), // does_download
-      _curl( NULL )
+      _curl( NULL ),
+      _customHeaders(0L)
 {
   _curlError[0] = '\0';
   _curlDebug = 0L;
@@ -491,18 +492,7 @@ void MediaCurl::attachTo (bool next)
       disconnectFrom();
       ZYPP_THROW(MediaCurlSetOptException(_url, _curlError));
     }
-
-    // now add the anonymous id header
-    curl_slist *chunk = NULL;
-    chunk = curl_slist_append(chunk, anonymousIdHeader());
-    ret = curl_easy_setopt ( _curl, CURLOPT_HTTPHEADER, chunk );
-    curl_slist_free_all(chunk);
     
-    if ( ret != 0) {
-      disconnectFrom();
-      ZYPP_THROW(MediaCurlSetOptException(_url, _curlError));
-    }
-
   }
 
 
@@ -714,6 +704,14 @@ void MediaCurl::attachTo (bool next)
     ZYPP_THROW(MediaCurlSetOptException(_url, _curlError));
   }
 
+  // now add the anonymous id header
+  _customHeaders = curl_slist_append(_customHeaders, anonymousIdHeader());
+  ret = curl_easy_setopt ( _curl, CURLOPT_HTTPHEADER, _customHeaders );
+    
+  if ( ret != 0) {
+    disconnectFrom();
+    ZYPP_THROW(MediaCurlSetOptException(_url, _curlError));
+  }
 
   // FIXME: need a derived class to propelly compare url's
   MediaSourceRef media( new MediaSource(_url.getScheme(), _url.asString()));
@@ -734,6 +732,12 @@ MediaCurl::checkAttachPoint(const Pathname &apoint) const
 //
 void MediaCurl::disconnectFrom()
 {
+  if ( _customHeaders )
+  {
+    curl_slist_free_all(_customHeaders);
+    _customHeaders = 0L;
+  }
+    
   if ( _curl )
   {
     curl_easy_cleanup( _curl );

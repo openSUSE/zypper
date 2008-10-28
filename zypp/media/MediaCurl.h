@@ -114,6 +114,7 @@ class MediaCurl : public MediaHandler {
     CURL *_curl;
     char _curlError[ CURL_ERROR_SIZE ];
     long _curlDebug;
+    curl_slist *_customHeaders;
 
     mutable std::string _userpwd;
     std::string _proxy;

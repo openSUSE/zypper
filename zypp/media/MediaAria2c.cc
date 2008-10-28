@@ -98,12 +98,12 @@ const char *const MediaAria2c::anonymousIdHeader()
 
   static const std::string _value(
       str::form(
-          "X-ZYpp-AnonymousUniqueId: %s",
+          "X-Zypp-AnonymousId: %s",
           target ? target->anonymousUniqueId().c_str() : "" )
   );
   return _value.c_str();
 }
-      
+
 const char *const MediaAria2c::agentString()
 {
   // we need to add the release and identifier to the
