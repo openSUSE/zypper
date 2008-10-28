@@ -69,9 +69,6 @@ FillSearchTableSolvable::FillSearchTableSolvable(
 
 bool FillSearchTableSolvable::operator()(const zypp::ui::Selectable::constPtr & s) const
 {
-  static bool show_installed;
-  show_installed = true;
-
   // show available objects
   for_(it, s->availableBegin(), s->availableEnd())
   {
@@ -84,7 +81,7 @@ bool FillSearchTableSolvable::operator()(const zypp::ui::Selectable::constPtr & 
     if (zypp::traits::isPseudoInstalled(s->kind()))
     {
       // patches/patterns are installed if satisfied
-      if (pi->kind() != zypp::ResKind::srcpackage && pi.isSatisfied()) 
+      if (pi->kind() != zypp::ResKind::srcpackage && pi.isSatisfied())
       {
         // show only not installed
         if (_inst_notinst == false)
@@ -117,7 +114,6 @@ bool FillSearchTableSolvable::operator()(const zypp::ui::Selectable::constPtr & 
           if (equalNVRA(*instit->resolvable(), *pi.resolvable()))
           {
             installed = true;
-            show_installed = false;
             break;
           }
         }
@@ -164,41 +160,49 @@ bool FillSearchTableSolvable::operator()(const zypp::ui::Selectable::constPtr & 
   if (_inst_notinst == false)
     return true;
 
-  // show installed objects only if there is no counterpart in repos
-  if (show_installed || s->availableEmpty())
+  // now list the system packages
+  for_(it, s->installedBegin(), s->installedEnd())
   {
-    for_(it, s->installedBegin(), s->installedEnd())
-    {
-      TableRow row;
-      zypp::PoolItem pi = *it;
-      row << "i";
-      if (_gopts.is_rug_compatible)
+    // show installed objects only if there is no counterpart in repos
+    bool has_counterpart = false;
+    for_(ait, s->availableBegin(), s->availableEnd())
+      if (equalNVRA(*it->resolvable(), *ait->resolvable()))
       {
-        row
-          << _("System Packages")
-          // TODO what about rug's Bundle?
-          << ""
-          << pi->name()
-          << pi->edition().asString()
-          << pi->arch().asString();
+        has_counterpart = true;
+        break;
       }
-      else
-      {
-        row
-          << pi->name()
-          << kind_to_string_localized(pi->kind(), 1)
-          << pi->edition().asString()
-          << pi->arch().asString()
-          << (string("(") + _("System Packages") + ")");
-      }
+    if (has_counterpart)
+      continue;
 
-      *_table << row;pi->repository().info().name();
+    TableRow row;
+    zypp::PoolItem pi = *it;
+    row << "i";
+    if (_gopts.is_rug_compatible)
+    {
+      row
+        << _("System Packages")
+        // TODO what about rug's Bundle?
+        << ""
+        << pi->name()
+        << pi->edition().asString()
+        << pi->arch().asString();
     }
+    else
+    {
+      row
+        << pi->name()
+        << kind_to_string_localized(pi->kind(), 1)
+        << pi->edition().asString()
+        << pi->arch().asString()
+        << (string("(") + _("System Packages") + ")");
+    }
+
+    *_table << row;pi->repository().info().name();
   }
 
-  //! \todo mainain an internal plaindir repo named "Local Packages"
+  //! \todo maintain an internal plaindir repo named "Local Packages"
   // for plain rpms (as rug does). ?
-  
+
   return true;
 }
 
@@ -283,7 +287,7 @@ bool FillPatchesTable::operator()(const zypp::PoolItem & pi) const
   TableRow row;
 
   zypp::Patch::constPtr patch = zypp::asKind<zypp::Patch>(pi.resolvable());
-  
+
   row
     << pi->repository().info().name()
     << pi->name()
@@ -303,7 +307,7 @@ string selectable_search_repo_str(const ui::Selectable & s)
 
   // show available objects
   for_(it, s.availableBegin(), s.availableEnd())
-  {      
+  {
     if (repostr.empty())
       repostr = (*it)->repository().info().name();
     else if (repostr != (*it)->repository().info().name())
@@ -323,7 +327,7 @@ static string string_weak_status(const ResStatus & rs)
     return _("Recommended");
   if (rs.isSuggested())
     return _("Suggested");
-  return ""; 
+  return "";
 }
 
 
@@ -385,7 +389,7 @@ static void list_pattern_table(Zypper & zypper)
   th << _("S");
   th << _("Name") << _("Version");
   if (!zypper.globalOpts().is_rug_compatible)
-    th << _("Repository") << _("Dependency"); 
+    th << _("Repository") << _("Dependency");
   tbl << th;
 
   bool installed_only = zypper.cOpts().count("installed-only");
@@ -404,7 +408,7 @@ static void list_pattern_table(Zypper & zypper)
     Pattern::constPtr pattern = asKind<Pattern>(it->resolvable());
 
     TableRow tr;
-    tr << (it->isSatisfied() ? "i" : ""); 
+    tr << (it->isSatisfied() ? "i" : "");
     tr << pattern->name () << pattern->edition().asString();
     if (!zypper.globalOpts().is_rug_compatible)
     {
@@ -446,7 +450,7 @@ void list_packages(Zypper & zypper)
     th << _("Repository");
   th << _("Name") << _("Version") << _("Arch");
   tbl << th;
-  
+
   bool installed_only = zypper.cOpts().count("installed-only");
   bool notinst_only = zypper.cOpts().count("uninstalled-only");
 
