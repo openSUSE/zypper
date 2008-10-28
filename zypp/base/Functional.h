@@ -383,6 +383,33 @@ namespace zypp
     { return GetLast<_Tp>( result_r ); }
 
 
+    /** Store all results found to some output_iterator.
+     * \code
+     * std::vector<parser::ProductFileData> result;
+     * parser::ProductFileReader::scanDir( functor::getAll( std::back_inserter( result ) ),
+                                           sysRoot / "etc/products.d" );
+     * \endcode
+     */
+    template<class _OutputIterator>
+    struct GetAll
+    {
+      GetAll( _OutputIterator result_r )
+        : _result( result_r )
+      {}
+
+      template<class _Tp>
+      bool operator()(  const _Tp & val_r ) const
+      { *(_result++) = val_r; return true; }
+
+      private:
+        mutable _OutputIterator _result;
+    };
+
+    /** Convenience function for creating \ref GetAll. */
+    template<class _OutputIterator>
+    GetAll<_OutputIterator> getAll( _OutputIterator result_r )
+    { return GetAll<_OutputIterator>( result_r ); }
+
     //@}
     ///////////////////////////////////////////////////////////////////
 
