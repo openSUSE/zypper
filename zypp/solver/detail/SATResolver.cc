@@ -1186,7 +1186,20 @@ SATResolver::problems ()
 			    sd = mapSolvable (rp);
 
 			PoolItem itemFrom = _pool.find (s);
-			if (rp)
+			if (s == sd && _solv->distupgrade)
+			{
+			    PoolItem poolItem = _pool.find (s);
+			    if (poolItem) {
+				problemSolution->addSingleAction (poolItem, KEEP);
+				string description = str::form (_("keep %s"), solvable2str(pool, s.get()));
+				MIL << description << endl;
+				problemSolution->addDescription (description);
+			    } else {
+				ERR << "SOLVER_INSTALL_SOLVABLE: No item found for " << id2str(pool, s.get()->name) << "-"
+				    <<  id2str(pool, s.get()->evr) << "." <<  id2str(pool, s.get()->arch) << endl;
+			    }
+			}
+			else if (rp)
 			{
 			    int gotone = 0;
 
