@@ -15,7 +15,7 @@ msgstr ""
 "Project-Id-Version: zypper\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2008-10-27 18:08+0100\n"
-"PO-Revision-Date: 2008-10-15 13:10+0200\n"
+"PO-Revision-Date: 2008-10-27 21:36+0100\n"
 "Last-Translator: Martin Schlander <mschlander@opensuse.org>\n"
 "Language-Team: Danish <opensuse-translation@opensuse.org>\n"
 "MIME-Version: 1.0\n"
@@ -99,7 +99,7 @@ msgstr "Softwarekilde: %s"
 #. translators: this message is shown after showing description of the key
 #: ../src/callbacks/keyring.h:150
 msgid "Do you want to reject the key, trust temporarily, or trust always?"
-msgstr ""
+msgstr "Vil du afvise nøglen, betro den midlertidigt, eller betro den permanent?"
 
 #. translators: r/t/a stands for Reject/TrustTemporarily/trustAlways(import)
 #. translate to whatever is appropriate for your language
@@ -108,13 +108,12 @@ msgstr ""
 #. The answers should be lower case letters.
 #: ../src/callbacks/keyring.h:162
 msgid "r/t/a/"
-msgstr ""
+msgstr "a/m/p/"
 
 #. translators: the same as r/t/a, but without 'a'
 #: ../src/callbacks/keyring.h:165
-#, fuzzy
 msgid "r/t"
-msgstr "n/m"
+msgstr "a/m"
 
 #. translators: help text for the 'r' option in the 'r/t/a' prompt
 #: ../src/callbacks/keyring.h:167
@@ -559,20 +558,19 @@ msgid "'%s' is not installed."
 msgstr "'%s' er ikke installeret."
 
 #: ../src/install.cc:437
-#, fuzzy
 msgid "Cannot uninstall patches."
-msgstr "%s kan ikke installeres"
+msgstr "Kan ikke afinstallere rettelser."
 
 #: ../src/install.cc:438
 msgid ""
 "Installed status of a patch is determined solely based on its dependencies.\n"
 "Patches are not installed in sense of copied files, database records,\n"
 "or similar."
-msgstr ""
+msgstr "Installationsstatus for en rettelse bestemmes alene baseret på dens afhængigheder.\n Rettelser installeres ikke i betydningen af kopierede filer, databaseindgange,\n eller lignende."
 
 #: ../src/install.cc:449
 msgid "Uninstallation of a pattern is currently not defined and implemented."
-msgstr ""
+msgstr "Afinstallation af et mønster er endnu ikke defineret og implementeret."
 
 #: ../src/install.cc:463
 #, c-format
@@ -587,12 +585,12 @@ msgstr "%s kan i øjeblikket ikke bruges med %s"
 
 #: ../src/install.cc:520
 msgid "Specifying architecture when selecting packages by name is not implemented."
-msgstr ""
+msgstr "Angivelse af arkitektur når pakke vælges ved navn er endnu ikke implementeret."
 
 #: ../src/install.cc:555
-#, fuzzy, c-format
+#, c-format
 msgid "'%s' is not a valid package or capability name."
-msgstr "`%s' er ikke en gyldig tjenestetype."
+msgstr "`%s' er ikke et gyldigt pakke- eller kapabilitetsnavn."
 
 #. translators: meaning a package %s or provider of capability %s
 #: ../src/install.cc:630
@@ -886,9 +884,9 @@ msgid "Use '%s' to get the list of defined repositories."
 msgstr "Brug '%s' for at få en liste over angivne softwarekilder."
 
 #: ../src/repos.cc:490 ../src/repos.cc:497
-#, fuzzy, c-format
+#, c-format
 msgid "Ignoring repository '%s' because of '%s' option."
-msgstr "Kan ikke rydde softwarekilden '%s' pga. en fejl."
+msgstr "Ignorerer softwarekilden '%s' pga. valgmuligheden '%s'."
 
 #: ../src/repos.cc:527 ../src/repos.cc:563
 #, c-format
@@ -2200,7 +2198,7 @@ msgstr "Tast 'y' for '%s' eller 'n' for '%s' hvis intet andet virker for dig."
 msgid ""
 "If you run zypper without a terminal, use '%s' global\n"
 "option to make zypper use default answers to prompts."
-msgstr ""
+msgstr "Hvis du kører zypper uden en terminal, brug den globale\n valgmulighed '%s', til at få zypper til at bruge standardsvar på spørgsmål."
 
 #. TranslatorExplanation These are reasons for various failures.
 #: ../src/utils/prompt.h:125
@@ -2275,7 +2273,7 @@ msgstr ""
 msgid ""
 "\t--no-cd\t\t\tIgnore CD/DVD repositories.\n"
 "\t--no-remote\t\tIgnore remote repositories.\n"
-msgstr ""
+msgstr "\t--no-cd\t\t\tIgnorér CD-/DVD-softwarekilder.\n \t--no-remote\t\tIgnorér eksterne softwarekilder.\n"
 
 #: ../src/Zypper.cc:182
 msgid ""
@@ -2485,14 +2483,12 @@ msgid "Autorefresh disabled."
 msgstr "Automatisk genopfrisk deaktiveret."
 
 #: ../src/Zypper.cc:509
-#, fuzzy
 msgid "CD/DVD repositories disabled."
-msgstr "Automatisk genopfrisk deaktiveret."
+msgstr "CD-/DVD-softwarekilder deaktiverede."
 
 #: ../src/Zypper.cc:516
-#, fuzzy
 msgid "Remote repositories disabled."
-msgstr "Automatisk genopfrisk deaktiveret."
+msgstr "Eksterne softwarekilder deaktiverede."
 
 #: ../src/Zypper.cc:523
 msgid "Ignoring installed resolvables."
@@ -3852,3 +3848,4 @@ msgstr "Type af resolvable"
 
 #~ msgid "n/t/i"
 #~ msgstr "n/m/i"
+

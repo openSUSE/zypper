@@ -10,7 +10,7 @@ msgstr ""
 "Project-Id-Version: zypper\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2008-10-27 18:08+0100\n"
-"PO-Revision-Date: 2008-10-20 12:22+0200\n"
+"PO-Revision-Date: 2008-10-27 23:37+0100\n"
 "Last-Translator: Andrea Florio <andrea@opensuse.org>\n"
 "Language-Team: italian <opensuse-translation@opensuse.org>\n"
 "MIME-Version: 1.0\n"
@@ -94,7 +94,7 @@ msgstr "Sorgente di installazione: %s"
 #. translators: this message is shown after showing description of the key
 #: ../src/callbacks/keyring.h:150
 msgid "Do you want to reject the key, trust temporarily, or trust always?"
-msgstr ""
+msgstr "Vuoi rifiutare la chiave, fidarti temporaneamente, o fidarti definitivamente?"
 
 #. translators: r/t/a stands for Reject/TrustTemporarily/trustAlways(import)
 #. translate to whatever is appropriate for your language
@@ -103,13 +103,12 @@ msgstr ""
 #. The answers should be lower case letters.
 #: ../src/callbacks/keyring.h:162
 msgid "r/t/a/"
-msgstr ""
+msgstr "r/t/d"
 
 #. translators: the same as r/t/a, but without 'a'
 #: ../src/callbacks/keyring.h:165
-#, fuzzy
 msgid "r/t"
-msgstr "n/f"
+msgstr "r/t"
 
 #. translators: help text for the 'r' option in the 'r/t/a' prompt
 #: ../src/callbacks/keyring.h:167
@@ -554,9 +553,8 @@ msgstr "'%s' non è installato"
 
 # TLABEL modules/inst_target_part.ycp:680
 #: ../src/install.cc:437
-#, fuzzy
 msgid "Cannot uninstall patches."
-msgstr "Impossibile installare %s"
+msgstr "Impossibile disinstallare le patch."
 
 #: ../src/install.cc:438
 msgid ""
@@ -564,10 +562,13 @@ msgid ""
 "Patches are not installed in sense of copied files, database records,\n"
 "or similar."
 msgstr ""
+"Lo stato di installazione di una patch è determinanto solamente in base alle sue dipendenze.\n"
+"Le patch non sono installate nel senso di file copiati, aggiunte al database,\n"
+"o simili."
 
 #: ../src/install.cc:449
 msgid "Uninstallation of a pattern is currently not defined and implemented."
-msgstr ""
+msgstr "La disinstallazione di un modello non è al momento definita ed implementata."
 
 #: ../src/install.cc:463
 #, c-format
@@ -582,12 +583,12 @@ msgstr "%s non può essere usata al momento con %s"
 
 #: ../src/install.cc:520
 msgid "Specifying architecture when selecting packages by name is not implemented."
-msgstr ""
+msgstr "Specificare l'architettura quando si seleziona un pacchetto per nome non è implementato."
 
 #: ../src/install.cc:555
-#, fuzzy, c-format
+#, c-format
 msgid "'%s' is not a valid package or capability name."
-msgstr "'%s' non è un è un tipo di servizio valido."
+msgstr "'%s' non è un è un nome di pacchetto o di possibilità valido."
 
 #. translators: meaning a package %s or provider of capability %s
 #: ../src/install.cc:630
@@ -881,9 +882,9 @@ msgid "Use '%s' to get the list of defined repositories."
 msgstr "Usare '%s' per ottenere una lista delle sorgenti di installazione definite."
 
 #: ../src/repos.cc:490 ../src/repos.cc:497
-#, fuzzy, c-format
+#, c-format
 msgid "Ignoring repository '%s' because of '%s' option."
-msgstr "Impossibile pulire la sorgente di installazione '%s' a causa dell'errore."
+msgstr "Ignoro la sorgente di installazione '%s' a causa dell'opzione '%s'."
 
 #: ../src/repos.cc:527 ../src/repos.cc:563
 #, c-format
@@ -2200,6 +2201,8 @@ msgid ""
 "If you run zypper without a terminal, use '%s' global\n"
 "option to make zypper use default answers to prompts."
 msgstr ""
+"Se utilizzi zypper senza un terminale, usa l'opzione globale\n"
+"'%s' per far usare a zypper le risposte di default ai prompt."
 
 #. TranslatorExplanation These are reasons for various failures.
 #: ../src/utils/prompt.h:125
@@ -2275,6 +2278,8 @@ msgid ""
 "\t--no-cd\t\t\tIgnore CD/DVD repositories.\n"
 "\t--no-remote\t\tIgnore remote repositories.\n"
 msgstr ""
+"\t--no-cd\t\t\tIgnora sorgenti di installazione su CD/DVD.\n"
+"\t--no-remote\t\tIgnora sorgenti di installazione remote.\n"
 
 #: ../src/Zypper.cc:182
 msgid ""
@@ -2484,14 +2489,12 @@ msgid "Autorefresh disabled."
 msgstr "Aggiornamento automaticamento disabilitato."
 
 #: ../src/Zypper.cc:509
-#, fuzzy
 msgid "CD/DVD repositories disabled."
-msgstr "Aggiornamento automaticamento disabilitato."
+msgstr "Sorgenti di installazione su CD/DVD disabilitate."
 
 #: ../src/Zypper.cc:516
-#, fuzzy
 msgid "Remote repositories disabled."
-msgstr "Aggiornamento automaticamento disabilitato."
+msgstr "Sorgenti di installazione remote disabilitate."
 
 #: ../src/Zypper.cc:523
 msgid "Ignoring installed resolvables."
@@ -3847,9 +3850,3 @@ msgstr "Descrizione"
 msgid "Resolvable Type"
 msgstr "Tipo di risolvibile"
 
-# power-off message
-#~ msgid "Do you want to trust the key?"
-#~ msgstr "Vuoi fidarti di questa chiave?"
-
-#~ msgid "n/t/i"
-#~ msgstr "n/f/i"

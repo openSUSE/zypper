@@ -13,7 +13,7 @@ msgstr ""
 "Project-Id-Version: zypper.uk\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2008-10-27 18:08+0100\n"
-"PO-Revision-Date: 2008-10-21 14:40-0700\n"
+"PO-Revision-Date: 2008-10-27 21:58-0700\n"
 "Last-Translator: Ivan Petrouchtchak <fr.ivan@ukrainian-orthodox.org>\n"
 "Language-Team: Ukrainian <translation@linux.org.ua>\n"
 "MIME-Version: 1.0\n"
@@ -97,7 +97,7 @@ msgstr "Сховище: %s"
 #. translators: this message is shown after showing description of the key
 #: ../src/callbacks/keyring.h:150
 msgid "Do you want to reject the key, trust temporarily, or trust always?"
-msgstr ""
+msgstr "Відкинути ключ, прийняти тимчасово чи прийняти на постійно?"
 
 #. translators: r/t/a stands for Reject/TrustTemporarily/trustAlways(import)
 #. translate to whatever is appropriate for your language
@@ -106,13 +106,12 @@ msgstr ""
 #. The answers should be lower case letters.
 #: ../src/callbacks/keyring.h:162
 msgid "r/t/a/"
-msgstr ""
+msgstr "в/т/п/"
 
 #. translators: the same as r/t/a, but without 'a'
 #: ../src/callbacks/keyring.h:165
-#, fuzzy
 msgid "r/t"
-msgstr "n/t"
+msgstr "в/т"
 
 #. translators: help text for the 'r' option in the 'r/t/a' prompt
 #: ../src/callbacks/keyring.h:167
@@ -552,9 +551,8 @@ msgid "'%s' is not installed."
 msgstr "«%s» не встановлено."
 
 #: ../src/install.cc:437
-#, fuzzy
 msgid "Cannot uninstall patches."
-msgstr "Неможливо встановити %s"
+msgstr "Неможливо прибрати пакунки."
 
 #: ../src/install.cc:438
 msgid ""
@@ -562,10 +560,13 @@ msgid ""
 "Patches are not installed in sense of copied files, database records,\n"
 "or similar."
 msgstr ""
+"Стан встановлення латки визначається тільки на основі його залежностей.\n"
+"Латки не встановлюються в значенні копіювання файлів, записів баз даних,\n"
+"чи чогось подібного."
 
 #: ../src/install.cc:449
 msgid "Uninstallation of a pattern is currently not defined and implemented."
-msgstr ""
+msgstr "Вилучення шаблона в даний час не визначено і не впроваджено."
 
 #: ../src/install.cc:463
 #, c-format
@@ -580,12 +581,12 @@ msgstr "%s на даний момент не може використовува
 
 #: ../src/install.cc:520
 msgid "Specifying architecture when selecting packages by name is not implemented."
-msgstr ""
+msgstr "Вказування архітектури при вибиранні пакунків за назвою — не впроваджено."
 
 #: ../src/install.cc:555
-#, fuzzy, c-format
+#, c-format
 msgid "'%s' is not a valid package or capability name."
-msgstr "«%s» не є чинним типом служби."
+msgstr "«%s» не є чинною назвою пакунка або функціональності."
 
 #. translators: meaning a package %s or provider of capability %s
 #: ../src/install.cc:630
@@ -880,9 +881,9 @@ msgid "Use '%s' to get the list of defined repositories."
 msgstr "Вживайте «%s», щоб отримати список визначених сховищ."
 
 #: ../src/repos.cc:490 ../src/repos.cc:497
-#, fuzzy, c-format
+#, c-format
 msgid "Ignoring repository '%s' because of '%s' option."
-msgstr "Неможливо очистити сховище «%s» через помилку."
+msgstr "Ігнорується сховище «%s» через параметр «%s»."
 
 #: ../src/repos.cc:527 ../src/repos.cc:563
 #, c-format
@@ -2233,6 +2234,8 @@ msgid ""
 "If you run zypper without a terminal, use '%s' global\n"
 "option to make zypper use default answers to prompts."
 msgstr ""
+"Коли ви запускаєте zypper без термінала, вживайте глобальний\n"
+"параметр «%s», щоб zypper давала типові відповіді на запити."
 
 #. TranslatorExplanation These are reasons for various failures.
 #: ../src/utils/prompt.h:125
@@ -2308,6 +2311,8 @@ msgid ""
 "\t--no-cd\t\t\tIgnore CD/DVD repositories.\n"
 "\t--no-remote\t\tIgnore remote repositories.\n"
 msgstr ""
+"\t--no-cd\t\t\tІгнорувати сховища КД/DVD.\n"
+"\t--no-remote\t\tІгнорувати віддалені сховища.\n"
 
 #: ../src/Zypper.cc:182
 msgid ""
@@ -2399,9 +2404,15 @@ msgid ""
 "\tdist-upgrade, dup\tPerform a distribution upgrade.\n"
 "\tpatch-check, pchk\tCheck for patches.\n"
 msgstr ""
+"     Керування оновленнями:\n"
+"\tupdate, up\t\tОновити встановлені пакунки до новіших версій.\n"
+"\tlist-updates, lu\tНадати список длоступних оновлень.\n"
+"\tpatch\t\t\tВстановити потрібні латки.\n"
+"\tlist-patches, lp\tНадати список потрібних латок.\n"
+"\tdist-upgrade, dup\tВиконати оновлення дистрибутиву.\n"
+"\tpatch-check, pchk\tПеревірити наявність латок оновлення.\n"
 
 #: ../src/Zypper.cc:232
-#, fuzzy
 msgid ""
 "     Querying:\n"
 "\tsearch, se\t\tSearch for packages matching a pattern.\n"
@@ -2417,17 +2428,15 @@ msgid ""
 msgstr ""
 "\tЗапити:\n"
 "\tsearch, se\t\tШукати пакунки, що відповідають шаблону.\n"
-"\tinfo, if\t\tШукати повну інформацію щодо вказані пакунки.\n"
+"\tinfo, if\t\tШукати повну інформацію щодо вказаних пакунків.\n"
 "\tpatch-info\t\tШукати повну інформацію щодо вказаних латок.\n"
 "\tpattern-info\t\tШукати повну інформацію щодо вказаних шаблонів.\n"
 "\tproduct-info\t\tШукати повну інформацію щодо вказаних продуктів.\n"
-"\tpatch-check, pchk\tПеревірити наявність латок.\n"
-"\tlist-updates, lu\tНадати список доступних оновлень.\n"
 "\tpatches, pch\t\tНадати список доступних латок.\n"
 "\tpackages, pa\t\tНадати список доступних пакунків.\n"
 "\tpatterns, pt\t\tНадати список доступних шаблонів.\n"
 "\tproducts, pd\t\tНадати список доступних продуктів.\n"
-"\twhat-provides, wp\tНадати список пакунків, що надають програми для певної мети.\n"
+"\twhat-provides, wp\tНадати список пакунків, що надають певну функціональність.\n"
 
 #: ../src/Zypper.cc:247
 msgid ""
@@ -2449,6 +2458,11 @@ msgid ""
 "\tlicenses\t\tPrint report about licenses and EULAs of\n"
 "\t\t\t\tinstalled packages.\n"
 msgstr ""
+"     Інші команди:\n"
+"\tversioncmp, vcmp\tПорівняти два рядки версій.\n"
+"\ttargetos, tos\t\tПоказати рядок ІД операційної системи цілі.\n"
+"\tlicenses\t\tПоказати ліцензії і угоди для\n"
+"\t\t\t\tвстановлених пакунків.\n"
 
 #: ../src/Zypper.cc:261
 msgid ""
@@ -2508,14 +2522,12 @@ msgid "Autorefresh disabled."
 msgstr "Автоосвіження вимкнено."
 
 #: ../src/Zypper.cc:509
-#, fuzzy
 msgid "CD/DVD repositories disabled."
-msgstr "Автоосвіження вимкнено."
+msgstr "Сховища КД/DVD вимкнено."
 
 #: ../src/Zypper.cc:516
-#, fuzzy
 msgid "Remote repositories disabled."
-msgstr "Автоосвіження вимкнено."
+msgstr "Віддалені сховища вимкнено."
 
 #: ../src/Zypper.cc:523
 msgid "Ignoring installed resolvables."
@@ -2536,7 +2548,7 @@ msgstr "Непередбачений виняток."
 #. ! \todo A capability is NAME[.ARCH][OP<VERSION>] now,
 #. !  the help text will be changed after release
 #: ../src/Zypper.cc:881
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "install (in) [options] <capability|rpm_file_uri> ...\n"
 "\n"
@@ -2557,27 +2569,28 @@ msgid ""
 "    --force-resolution          Force the solver to find a solution (even an agressive).\n"
 "-D, --dry-run                   Test the installation, do not actually install.\n"
 msgstr ""
-"install (in) [параметри] <версія|ідентифікатор_rpm_файла> ...\n"
+"install (in) [параметри] <функціональність|uri_rpm_файла> ...\n"
 "\n"
-"Встановити залежності з визначеними версіями або файли RPM у визначеному місці. Версією може бути НАЗВА[ОПЕРАТОР<VERSION>], де ОПЕРАТОР є одним зі знаків порівняння <, <=, =, >=, >.\n"
+"Встановити пакунки з визначеною функціональністю або файли RPM у визначеному місці. Функціональністю може бути НАЗВА[ДІЯ<VERSION>], де ДІЯ є одним зі знаків порівняння <, <=, =, >=, >.\n"
 "\n"
 "  Параметри команди:\n"
-"-r, --repo <псевдонім|#|URI>        Встановити залежності лише з вказаного сховища.\n"
+"-r, --repo <псевдонім|#|URI>        Встановити пакунки лише з вказаного сховища.\n"
 "-t, --type <тип>               Тип залежностей (%s)\n"
 "                                Типово: %s\n"
-"-n, --name                      Вибрати залежності за назвою, а не версією\n"
-"-C, --capability                Вибрати залежності за версією\n"
-"-f, --force                     Встановити, навіть якщо елемент вже було встановлено (перевстановити)\n"
-"-l, --auto-agree-with-licenses  Автоматично відповісти 'так' на запитання про згоду з правилами ліцензування.\n"
+"-n, --name                      Вибрати пакунки за назвою, а не функціональністю.\n"
+"-C, --capability                Вибрати залежності за функціональністю.\n"
+"-f, --force                     Встановити, навіть якщо елемент вже було встановлено (перевстановити).\n"
+"-l, --auto-agree-with-licenses  Автоматично відповісти «так» на запитання про згоду з ліцензіями.\n"
 "                                Щоб дізнатися більше, виконайте команду «man zypper».\n"
 "    --debug-solver              Створити тестовий приклад для зневадження розв’язуючої програми\n"
-"-R, --force-resolution <on|off> Примусити розв’язуючу програму знайти розв’язок (навіть неточний)\n"
+"-R, --no-force-resolution       Не примушувати розв’язуючу програму знайти вирішення.\n"
+"    --force-resolution          Примусити розв’язуючу програму знайти вирішення (навіть, неточне).\n"
 "-D, --dry-run                   Випробувати можливість встановлення, не встановлювати насправді\n"
 
 #. TranslatorExplanation the first %s = "package, patch, pattern, product"
 #. and the second %s = "package"
 #: ../src/Zypper.cc:930
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "remove (rm) [options] <capability> ...\n"
 "\n"
@@ -2594,18 +2607,20 @@ msgid ""
 "    --force-resolution          Force the solver to find a solution (even an agressive).\n"
 "-D, --dry-run                   Test the removal, do not actually remove.\n"
 msgstr ""
-"remove (rm) [параметри] <версія> ...\n"
+"remove (rm) [параметри] <capability> ...\n"
 "\n"
-"Вилучити залежності визначених версій. Версією може бути запис у вигляді НАЗВА[ОПЕРАЦІЯ<VERSION>], де ОПЕРАЦІЄЮ є знаки порівняння <, <=, =, >=, >.\n"
+"Вилучити пакунки з вказаною функціональністю. Функціональністю може бути запис\n"
+"у вигляді НАЗВА[ДІЯ<VERSION>], де ДІЄЮ є знаки порівняння <, <=, =, >=, >.\n"
 "\n"
 "  Параметри команди:\n"
-"-r, --repo <псевдонім|#|URI>        Виконувати операції лише з залежностями з вказаного сховища.\n"
-"-t, --type <тип>               Тип залежності (%s)\n"
-"                                Default: %s\n"
-"-n, --name                      Вибрати залежності за назвою, а не за версією\n"
-"-C, --capability                Вибрати залежності за версією\n"
-"    --debug-solver              Створити тестовий приклад для зневадження розв’язуючої програми\n"
-"-R, --force-resolution <on|off> Примусити розв’язуючу програму знайти розв’язок (навіть неточний)\n"
+"-r, --repo <псевдонім|#|URI>        Виконувати дії лише з пакунками з вказаного сховища.\n"
+"-t, --type <тип>               Тип пакунка (%s)\n"
+"                                Типовий: %s\n"
+"-n, --name                      Вибрати пакунки за назвою, а не за функціональністю.\n"
+"-C, --capability                Вибрати пакунки за функціональністю.\n"
+"    --debug-solver              Створити тестовий приклад для зневадження розв’язуючої програми.\n"
+"-R, --no-force-resolution       Не примушувати розв’язуючу програму знайти вирішення.\n"
+"    --force-resolution          Примусити розв’язуючу програму знайти вирішення (навіть, неточне).\n"
 "-D, --dry-run                   Випробувати можливість вилучення, не вилучати насправді\n"
 
 #: ../src/Zypper.cc:960
@@ -2809,7 +2824,7 @@ msgstr ""
 
 #. TranslatorExplanation the %s = "yast2, rpm-md, plaindir"
 #: ../src/Zypper.cc:1201
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "addrepo (ar) [options] <URI> <alias>\n"
 "addrepo (ar) [options] <FILE.repo>\n"
@@ -2833,14 +2848,15 @@ msgstr ""
 "Додати до системи сховище. Сховище можна вказати адресою URI або прочитати з вказаного файла .repo (можна віддаленого).\n"
 "\n"
 "  Параметри команди:\n"
-"-r, --repo <FILE.repo>  Прочитати URL і псевдонім з файла (навіть, віддаленого)\n"
-"-t, --type <ТИП>        Тип сховища (%s)\n"
+"-r, --repo <FILE.repo>  Ще один спосіб вказати файл .repo (навіть, віддалений)\n"
+"-t, --type <TYPE>        Тип сховища (%s)\n"
 "-d, --disabled               Додати сховище як вимкнене\n"
 "-c, --check             Зондувати URI\n"
 "-C, --no-check          Не зондувати URI, прозондувати його під час освіження.\n"
 "-n, --name              Вказати описову назву сховища.\n"
 "-k, --keep-packages     Увімкнути кешування файлів RPM.\n"
 "-K, --no-keep-packages  Вимкнути кешування файлів RPM.\n"
+"-f, --refresh           Увімкнути автоосвіження сховища.\n"
 
 #. translators: this is just a rug compatiblity command
 #. translators: this is just a rug-compatiblity command
@@ -3838,9 +3854,3 @@ msgstr "Опис"
 msgid "Resolvable Type"
 msgstr "Тип розв’язувача"
 
-# power-off message
-#~ msgid "Do you want to trust the key?"
-#~ msgstr "Довіряти цьому ключу?"
-
-#~ msgid "n/t/i"
-#~ msgstr "n/t/i"

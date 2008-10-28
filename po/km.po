@@ -1,4 +1,4 @@
-# translation of zypper.km.po to Khmer
+# translation of zypper.po to khmer
 # @TITLE@
 # Copyright (C) 2006, SUSE Linux GmbH, Nuremberg
 # This file is distributed under the same license as @PACKAGE@ package. FIRST
@@ -7,12 +7,12 @@
 # Khoem Sokhem <khoemsokhem@khmeros.info>, 2007, 2008.
 msgid ""
 msgstr ""
-"Project-Id-Version: zypper.km\n"
+"Project-Id-Version: zypper\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2008-10-27 18:08+0100\n"
-"PO-Revision-Date: 2008-10-15 09:13+0700\n"
-"Last-Translator: Khoem Sokhem <khoemsokhem@khmeros.info>\n"
-"Language-Team: Khmer <support@khmeros.info>\n"
+"PO-Revision-Date: 2008-10-28 10:37+0700\n"
+"Last-Translator: Auk Piseth <piseth_dv@khmeros.info>\n"
+"Language-Team: khmer <support@khmeros.info>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -94,7 +94,7 @@ msgstr "ឃ្លាំង ៖ %s"
 #. translators: this message is shown after showing description of the key
 #: ../src/callbacks/keyring.h:150
 msgid "Do you want to reject the key, trust temporarily, or trust always?"
-msgstr ""
+msgstr "តើ​អ្នក​ចង់​បដិសេធ​សោ ទុកចិត្ត​បណ្ដោះ​អាសន្ន ឬ​ទុកចិត្ត​រហូត ?"
 
 #. translators: r/t/a stands for Reject/TrustTemporarily/trustAlways(import)
 #. translate to whatever is appropriate for your language
@@ -103,13 +103,12 @@ msgstr ""
 #. The answers should be lower case letters.
 #: ../src/callbacks/keyring.h:162
 msgid "r/t/a/"
-msgstr ""
+msgstr "r/t/a/"
 
 #. translators: the same as r/t/a, but without 'a'
 #: ../src/callbacks/keyring.h:165
-#, fuzzy
 msgid "r/t"
-msgstr "n/t"
+msgstr "r/t"
 
 #. translators: help text for the 'r' option in the 'r/t/a' prompt
 #: ../src/callbacks/keyring.h:167
@@ -548,9 +547,8 @@ msgid "'%s' is not installed."
 msgstr "'%s' មិនទាន់​បាន​ដំឡើង​ទេ ។"
 
 #: ../src/install.cc:437
-#, fuzzy
 msgid "Cannot uninstall patches."
-msgstr "មិន​អាច​ដំឡើង %s"
+msgstr "មិនអាច​លុប​បំណះ​បានទេ ។"
 
 #: ../src/install.cc:438
 msgid ""
@@ -558,10 +556,13 @@ msgid ""
 "Patches are not installed in sense of copied files, database records,\n"
 "or similar."
 msgstr ""
+"បាន​ដំឡើង​ស្ថានភាព​នៃ​បំណះ ត្រូវបាន​កំណត់​ដោយ​មាន​មូលដ្ឋាន​លើ​ភាពអាស្រ័យ​របស់​វា ។\n"
+"បំណះ​មិនត្រូវបាន​ដំឡើង​នៅ​ក្នុង​ឯកសារ​ដែល​បាន​ចម្លង មូលដ្ឋាន​ទិន្នន័យ កំណត់ត្រា\n"
+"ឬ​អ្វី​ផ្សេងទៀត​ដែល​ស្រដៀង​គ្នា ។"
 
 #: ../src/install.cc:449
 msgid "Uninstallation of a pattern is currently not defined and implemented."
-msgstr ""
+msgstr "ការ​លុប​លំនាំ គឺ​មិន​ត្រូវ​បាន​កំណត់ ឬ​ប្រតិបត្តិ​នៅពេល​បច្ចុប្បន្ន​ទេ ។"
 
 #: ../src/install.cc:463
 #, c-format
@@ -576,12 +577,12 @@ msgstr "បច្ចុប្បន្ន %s មិនអាច​ប្រើ�
 
 #: ../src/install.cc:520
 msgid "Specifying architecture when selecting packages by name is not implemented."
-msgstr ""
+msgstr "ការ​បញ្ជាក់​ស្ថាបត្យកម្ម នៅពេល​ដែល​ជ្រើស​កញ្ចប់​តាម​ឈ្មោះ​គឺ​មិន​ត្រូវបាន​ប្រតិបត្តិ​ទេ ។"
 
 #: ../src/install.cc:555
-#, fuzzy, c-format
+#, c-format
 msgid "'%s' is not a valid package or capability name."
-msgstr "'%s' មិន​មែន​ជា​ប្រភេទ​សេវា​ដែល​ត្រឹមត្រូវ​ទេ ។"
+msgstr "'%s' មិនមែន​ជា​កញ្ចប់​ត្រឹមត្រូវ​ទេ ឬ​សមត្ថភាព ។"
 
 #. translators: meaning a package %s or provider of capability %s
 #: ../src/install.cc:630
@@ -872,9 +873,9 @@ msgid "Use '%s' to get the list of defined repositories."
 msgstr "ប្រើ '%s' ដើម្បី​ទទួល​បញ្ជី​របស់​ឃ្លាំង​ដែល​បានកំណត់ ។"
 
 #: ../src/repos.cc:490 ../src/repos.cc:497
-#, fuzzy, c-format
+#, c-format
 msgid "Ignoring repository '%s' because of '%s' option."
-msgstr "មិនអាច​ជម្រះ​ឃ្លាំង '%s' បានទេ ព្រោះ​មាន​កំហុស ។"
+msgstr "មិនអើពើ​នឹង​ឃ្លាំង '%s' ដោយសារ​ជម្រើស '%s' ។"
 
 #: ../src/repos.cc:527 ../src/repos.cc:563
 #, c-format
@@ -2135,6 +2136,8 @@ msgid ""
 "If you run zypper without a terminal, use '%s' global\n"
 "option to make zypper use default answers to prompts."
 msgstr ""
+"ប្រសិន​បើ​អ្នក​ដំណើរការ zypper ដោ​មិន​ប្រើ​ស្ថានីយ៍ គឺ​ត្រូវ​ប្រើ​ជម្រើស​សកល '%s'\n"
+"ដើម្បី​ធ្វើ​ឲ្យ zypper ប្រើ​ចម្លើយ​លំនាំដើម​ទៅ​ប្រអប់​បញ្ចូល ។"
 
 #. TranslatorExplanation These are reasons for various failures.
 #: ../src/utils/prompt.h:125
@@ -2210,6 +2213,8 @@ msgid ""
 "\t--no-cd\t\t\tIgnore CD/DVD repositories.\n"
 "\t--no-remote\t\tIgnore remote repositories.\n"
 msgstr ""
+"\t--no-cd\t\t\tមិនអើពើ​នឹង​ឃ្លាំង ស៊ីឌី/ឌីវីឌី ។\n"
+"\t--no-remote\t\tមិន​អើពើ​នឹង​ឃ្លាំង​ពី​ចម្ងាយ ។\n"
 
 #: ../src/Zypper.cc:182
 msgid ""
@@ -2419,14 +2424,12 @@ msgid "Autorefresh disabled."
 msgstr "បាន​បិទ​​ការ​ធ្វើ​ឲ្យស្រស់​ស្វ័យ​ប្រវត្តិ ។"
 
 #: ../src/Zypper.cc:509
-#, fuzzy
 msgid "CD/DVD repositories disabled."
-msgstr "បាន​បិទ​​ការ​ធ្វើ​ឲ្យស្រស់​ស្វ័យ​ប្រវត្តិ ។"
+msgstr "បាន​បិទ​ឃ្លាំង​ស៊ីឌី/ឌីវីឌី ។"
 
 #: ../src/Zypper.cc:516
-#, fuzzy
 msgid "Remote repositories disabled."
-msgstr "បាន​បិទ​​ការ​ធ្វើ​ឲ្យស្រស់​ស្វ័យ​ប្រវត្តិ ។"
+msgstr "បាន​បិទ​ឃ្លាំង​ពី​ចម្ងាយ ។"
 
 #: ../src/Zypper.cc:523
 msgid "Ignoring installed resolvables."
@@ -3759,9 +3762,3 @@ msgstr "សេចក្តី​ពិពណ៌នា"
 msgid "Resolvable Type"
 msgstr "ប្រភេទ​កញ្ចប់​ដោះស្រាយ"
 
-# power-off message
-#~ msgid "Do you want to trust the key?"
-#~ msgstr "តើ​អ្នក​ចង់​ជឿជាក់​លើ​សោ​ដែរឬទេ ?"
-
-#~ msgid "n/t/i"
-#~ msgstr "n/t/i"
