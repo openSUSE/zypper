@@ -1,4 +1,10 @@
 -------------------------------------------------------------------
+Tue Oct 28 22:01:40 CET 2008 - dmacvicar@suse.de
+
+- don't free the header before curl_perform as curl does not
+  copy it. (bnc#439532)
+
+-------------------------------------------------------------------
 Tue Oct 28 16:47:36 CET 2008 - ma@suse.de
 
 - Add 'arm' architectures.
