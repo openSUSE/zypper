@@ -356,7 +356,6 @@ struct SATCollectTransact : public resfilter::PoolItemFilterFunctor
 	bool by_solver = (status.isBySolver() || status.isByApplLow());
 
 	if (by_solver) {
-	    _XDEBUG("Resetting " << item );
 	    item.status().resetTransact( ResStatus::APPL_LOW );// clear any solver/establish transactions
 	    return true;				// back out here, dont re-queue former solver result
 	}
