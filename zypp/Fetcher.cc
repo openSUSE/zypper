@@ -14,7 +14,6 @@
 #include <list>
 #include <map>
 
-#include "zypp/base/Flags.h"
 #include "zypp/base/Easy.h"
 #include "zypp/base/Logger.h"
 #include "zypp/base/PtrTypes.h"
@@ -23,6 +22,8 @@
 #include "zypp/Fetcher.h"
 #include "zypp/CheckSum.h"
 #include "zypp/base/UserRequestException.h"
+#include "zypp/parser/susetags/ContentFileReader.h"
+#include "zypp/parser/susetags/RepoIndex.h"
 
 using namespace std;
 
@@ -89,11 +90,15 @@ namespace zypp
   {
     friend std::ostream & operator<<( std::ostream & str, const Fetcher::Impl & obj );
   public:
-    Impl() {}
+      Impl();
+      
     ~Impl() {
       MIL << endl;
      }
       
+      void setOptions( Fetcher::Options options );
+      Fetcher::Options options() const;
+
       void addIndex( const OnMediaLocation &resource );
       void enqueue( const OnMediaLocation &resource, const FileChecker &checker = FileChecker()  );
       void enqueueDir( const OnMediaLocation &resource, bool recursive, const FileChecker &checker = FileChecker() );
@@ -124,6 +129,12 @@ namespace zypp
        * normally the same as the index file is located.
        */
       void readIndex( const Pathname &index, const Pathname &basedir );
+
+      /** specific version of \ref readIndex for SHA1SUMS file */
+      void readSha1sumsIndex( const Pathname &index, const Pathname &basedir );
+      
+      /** specific version of \ref readIndex for SHA1SUMS file */
+      void readContentFileIndex( const Pathname &index, const Pathname &basedir );
       
       /**
        * tries to provide the file represented by job into dest_dir by
@@ -159,6 +170,7 @@ namespace zypp
     list<Pathname> _caches;
     // checksums read from the indexes
     map<string, CheckSum> _checksums;
+    Fetcher::Options _options;      
   };
   ///////////////////////////////////////////////////////////////////
 
@@ -172,7 +184,18 @@ namespace zypp
       job->checkers.push_back(checker);
     _resources.push_back(job);
   }
-
+   
+  Fetcher::Impl::Impl()
+      : _options(0)
+  {
+  }
+    
+  void Fetcher::Impl::setOptions( Fetcher::Options options )
+  { _options = options; }
+    
+  Fetcher::Options Fetcher::Impl::options() const
+  { return _options; }
+    
   void Fetcher::Impl::enqueueDir( const OnMediaLocation &resource,
                                   bool recursive,
                                   const FileChecker &checker )
@@ -425,7 +448,46 @@ namespace zypp
     }
   }
 
-    void Fetcher::Impl::readIndex( const Pathname &index, const Pathname &basedir )
+  // helper class to consume a content file
+  struct ContentReaderHelper : public parser::susetags::ContentFileReader
+  {
+    ContentReaderHelper()
+    {
+      setRepoIndexConsumer( bind( &ContentReaderHelper::consumeIndex, this, _1 ) );
+    }
+        
+    void consumeIndex( const parser::susetags::RepoIndex_Ptr & data_r )
+    { _repoindex = data_r; }
+
+    parser::susetags::RepoIndex_Ptr _repoindex;
+  };
+
+  // generic function for reading indexes
+  void Fetcher::Impl::readIndex( const Pathname &index, const Pathname &basedir )
+  {
+    if ( index.basename() == "SHA1SUMS" )
+      readSha1sumsIndex(index, basedir);
+    else if ( index.basename() == "content" )
+      readContentFileIndex(index, basedir);
+    else
+      WAR << index << ": index file format not known" << endl;
+  }
+
+  // reads a content file index
+  void Fetcher::Impl::readContentFileIndex( const Pathname &index, const Pathname &basedir )
+  {
+      ContentReaderHelper reader;
+      reader.parse(index);
+      MIL << index << " contains " << reader._repoindex->mediaFileChecksums.size() << " checksums." << endl;
+      for_( it, reader._repoindex->mediaFileChecksums.begin(), reader._repoindex->mediaFileChecksums.end() )
+      {
+          // content file entries don't start with /
+          _checksums[(basedir + it->first).asString()] = it->second;
+      }
+  }
+
+  // reads a SHA1SUMS file index
+  void Fetcher::Impl::readSha1sumsIndex( const Pathname &index, const Pathname &basedir )
   {
       std::ifstream in( index.c_str() );
       string buffer;
@@ -522,6 +584,20 @@ namespace zypp
 
       provideToDest(media, (*it_res)->location, dest_dir);
 
+      // if the checksum is empty, but the checksum is in one of the
+      // indexes checksum, then add a checker
+      if ( (*it_res)->location.checksum().empty() )
+      {
+          if ( _checksums.find((*it_res)->location.filename().asString()) 
+               != _checksums.end() )
+          {
+              // the checksum can be replaced with the one in the index.
+              CheckSum chksm = _checksums[(*it_res)->location.filename().asString()];
+              ChecksumFileChecker digest_check(chksm);    
+              (*it_res)->checkers.push_back(digest_check);
+          }
+      }
+      
       // validate job, this throws if not valid
       validate((*it_res)->location, dest_dir, (*it_res)->checkers);
 
@@ -562,6 +638,16 @@ namespace zypp
   //
   Fetcher::~Fetcher()
   {}
+
+  void Fetcher::setOptions( Fetcher::Options options )
+  {
+    _pimpl->setOptions(options);
+  }
+    
+  Fetcher::Options Fetcher::options() const
+  {
+    return _pimpl->options();
+  }
 
   void Fetcher::enqueueDigested( const OnMediaLocation &resource, const FileChecker &checker )
   {

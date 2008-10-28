@@ -1,0 +1,3 @@
+HASH SHA1 f1d2d2f924e986ac86fdf7b36c94bcdf32beec15 subdir1/subdir1-file1.txt
+HASH SHA1 e242ed3bffccdf271b7fbaf34ed72d089537b42f subdir1/subdir1-file2.txt
+HASH SHA1 f572d396fae9206628714fb2ce00f72e94f2258f subdir2/subdir2-file1.txt

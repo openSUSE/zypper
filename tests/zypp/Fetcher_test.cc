@@ -23,28 +23,6 @@ using namespace boost::unit_test;
 
 #define DATADIR (Pathname(TESTS_SRC_DIR) + "/zypp/data/Fetcher/remote-site")
 
-BOOST_AUTO_TEST_CASE(fetcher_simple)
-{
-    MediaSetAccess media( (DATADIR).asUrl(), "/" );
-    Fetcher fetcher;
-    
-    {
-        filesystem::TmpDir dest;
-        OnMediaLocation loc("/complexdir/subdir1/subdir1-file1.txt");
-        loc.setChecksum(CheckSum::sha1("f1d2d2f924e986ac86fdf7b36c94bcdf32beec15"));
-        fetcher.enqueueDigested(loc);
-        fetcher.start(dest.path(), media);
-        fetcher.reset();
-        // now we break the checksum and it should fail
-        loc.setChecksum(CheckSum::sha1("f1d2d2f924e986ac86fdf7b36c94bcdf32beec16"));
-        fetcher.enqueueDigested(loc);
-        BOOST_CHECK_THROW( fetcher.start( dest.path(), media ), Exception);
-        fetcher.reset();
-
-    }
-    
-}
-
 BOOST_AUTO_TEST_CASE(fetcher)
 {
   MediaSetAccess media( ( DATADIR).asUrl(), "/" );
@@ -98,6 +76,68 @@ BOOST_AUTO_TEST_CASE(fetcher)
   }
 
   //MIL << fetcher;
+}
+
+BOOST_AUTO_TEST_CASE(fetcher_simple)
+{
+    MediaSetAccess media( (DATADIR).asUrl(), "/" );
+    Fetcher fetcher;
+    
+    {
+        filesystem::TmpDir dest;
+        OnMediaLocation loc("/complexdir/subdir1/subdir1-file1.txt");
+        loc.setChecksum(CheckSum::sha1("f1d2d2f924e986ac86fdf7b36c94bcdf32beec15"));
+        fetcher.enqueueDigested(loc);
+        fetcher.start(dest.path(), media);
+        fetcher.reset();
+        // now we break the checksum and it should fail
+        loc.setChecksum(CheckSum::sha1("f1d2d2f924e986ac86fdf7b36c94bcdf32beec16"));
+        fetcher.enqueueDigested(loc);
+        BOOST_CHECK_THROW( fetcher.start( dest.path(), media ), Exception);
+        fetcher.reset();
+
+    }
+    
+}
+
+BOOST_AUTO_TEST_CASE(content_index)
+{
+  MediaSetAccess media( ( DATADIR).asUrl(), "/" );
+  Fetcher fetcher;
+
+  // test transfering one file by setting the index
+  {
+        filesystem::TmpDir dest;
+        OnMediaLocation loc("/contentindex/subdir1/subdir1-file1.txt");
+        // trust the key manually
+        getZYpp()->keyRing()->importKey(PublicKey(DATADIR + "/contentindex/content.key"), true);
+        fetcher.addIndex(OnMediaLocation("/contentindex/content", 1));       
+        fetcher.enqueue(loc);
+        fetcher.start(dest.path(), media);
+        fetcher.reset();
+  }
+
+}
+
+BOOST_AUTO_TEST_CASE(content_index_broken)
+{
+  MediaSetAccess media( ( DATADIR).asUrl(), "/" );
+  Fetcher fetcher;
+
+  {
+        filesystem::TmpDir dest;
+        OnMediaLocation loc("/contentindex-broken-digest/subdir1/subdir1-file1.txt",1);
+        // key was already imported as trusted
+        fetcher.addIndex(OnMediaLocation("/contentindex-broken-digest/content", 1));
+        fetcher.enqueue(loc);
+        fetcher.start(dest.path(), media);
+        fetcher.reset();
+        // now retrieve a file that is modified, so the checksum has to fail
+        loc = OnMediaLocation("/contentindex-broken-digest/subdir1/subdir1-file2.txt",1);
+        fetcher.enqueue(loc);
+        BOOST_CHECK_THROW( fetcher.start( dest.path(), media ), Exception);
+        fetcher.reset();
+  }
 }
 
 BOOST_AUTO_TEST_CASE(fetcher_remove)

@@ -15,6 +15,7 @@
 #include <iosfwd>
 #include <list>
 
+#include "zypp/base/Flags.h"
 #include "zypp/base/PtrTypes.h"
 #include "zypp/Pathname.h"
 #include "zypp/Url.h"
@@ -41,7 +42,7 @@ namespace zypp
   * \code
   * MediaSetAccess access(url, path);
   * Fetcher fetcher;
-  * fetcher.enqueue( OnMediaLocation().filename("/content") );
+  * fetcher.enqueue( OnMediaLocation().setLocation("/somefile") );
   * fetcher.addCachePath("/tmp/cache")
   * fetcher.start( "/download-dir, access );
   * fetcher.reset();
@@ -60,16 +61,67 @@ namespace zypp
   *
   * If you need to use more than one checker
   * \see CompositeFileChecker
+  *
+  * Additionally, you can automatically enqueue a job
+  * with a checksum checker by using \ref enqueueDigested
+  * which will use the \ref OnMediaLocation checksum
+  * automatically.
+  *
+  * \code
+  * location.setChecksum(CheckSum("sha1", "...."));
+  * fetcher.enqueueDigested(location);
+  * \endcode
+  *
+  * \note If the checksum of the location is empty, but
+  * \ref enqueueDigested is used, then the user will get a
+  * warning that the file has no checksum.
+  *
+  * Additionally, Fetcher supports checking the downloaded
+  * content by using signed indexes on the remote side.
+  *
+  * \code
+  * MediaSetAccess access(url, path);
+  * Fetcher fetcher;
+  * fetcher.addIndex(OnMediaLocation("/content"));
+  * fetcher.enqueue( OnMediaLocation().setLocation("/somefile") );
+  * fetcher.start( "/download-dir, access );
+  * fetcher.reset();
+  * \endcode
+  *
+  *
   */
   class Fetcher
   {
     friend std::ostream & operator<<( std::ostream & str,
                                       const Fetcher & obj );
-
   public:
     /** Implementation  */
     class Impl;
   public:
+
+    /**
+     * Various option flags to change behavior
+     */
+    enum Option
+    {
+      /**
+       * If a content file is found, it is
+       * downloaded and read.
+       */
+      AutoAddContentFileIndexes = 0x0001,
+      /**
+       * If a SHA1SUMS file is found, it is
+       * downloaded and read.
+       */
+      AutoAddSha1sumsIndexes = 0x0002,
+      /**
+       * If a content or SHA1SUMS file is found, 
+       * it is downloaded and read.
+       */
+      AutoAddIndexes = 0x0001 | 0x0002,
+    };
+    ZYPP_DECLARE_FLAGS(Options, Option);
+
     /** Default ctor */
     Fetcher();
     /** Dtor */
@@ -77,6 +129,17 @@ namespace zypp
 
   public:
 
+   /**
+    * Set the Fetcher options
+    * \see Fetcher::Options
+    */
+    void setOptions( Options options );
+
+   /**
+    * Get current options
+    * \see Fetcher::Options
+    */
+    Options options() const;
 
    /**
     * Adds an index containing metadata (for example
@@ -89,10 +152,21 @@ namespace zypp
     * The index is relative to the media path, and
     * the listed files too.
     *
+    * Indexes in the SHA1SUM format, and YaST
+    * content file
+    *
+    * The file has to be signed or the user will be
+    * warned that the file is unsigned. You can
+    * place the signature next to the file adding the
+    * .asc extension.
+    *
+    * If you expect the key to not to be in the target
+    * system, then you can place it next to the index
+    * using adding the .key extension.
+    *
     */
     void addIndex( const OnMediaLocation &resource );
    
-
    /**
     * Enqueue a object for transferal, they will not
     * be transfered until \ref start() is called
@@ -172,13 +246,14 @@ namespace zypp
     */
     void start( const Pathname &dest_dir,
                 MediaSetAccess &media,
-                 const ProgressData::ReceiverFnc & progress = ProgressData::ReceiverFnc() );
+                const ProgressData::ReceiverFnc & progress = ProgressData::ReceiverFnc() );
 
   private:
     /** Pointer to implementation */
     RWCOW_pointer<Impl> _pimpl;
   };
   ///////////////////////////////////////////////////////////////////
+  ZYPP_DECLARE_OPERATORS_FOR_FLAGS(Fetcher::Options);
 
   /** \relates Fetcher Stream output */
   std::ostream & operator<<( std::ostream & str, const Fetcher & obj );
