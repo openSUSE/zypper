@@ -19,6 +19,7 @@
 #include "zypp/base/PtrTypes.h"
 #include "zypp/base/Deprecated.h"
 
+#include "zypp/Product.h"
 #include "zypp/Pathname.h"
 #include "zypp/ResPool.h"
 
@@ -103,6 +104,24 @@ namespace zypp
 
     /** return the last modification date of the target */
     Date timestamp() const;
+
+    /**
+     * returns the target base installed product, also known as
+     * the distribution or platform.
+     *
+     * returns 0 if there is no base installed product in the
+     * pool.
+     *
+     * \note this method requires the target to be loaded,
+     * otherwise it will return 0 as no product is found.
+     *
+     * if you require some base product attributes when the
+     * target is not loaded into the pool, see
+     * \ref targetDistribution , \ref targetDistributionRelease
+     * and \ref distributionVersion that obtain the data 
+     * on demand from the installed product information.
+     */
+    Product::constPtr baseProduct() const;
 
     /** \name Base product and registration. */
     //@{

@@ -185,7 +185,7 @@ namespace zypp {
 
 Pathname MediaCurl::_cookieFile = "/var/lib/YaST2/cookies";
 
-const char *const MediaCurl::anonymousIdHeader()
+static const char *const anonymousIdHeader()
 {
   // we need to add the release and identifier to the
   // agent string.
@@ -209,8 +209,8 @@ const char *const MediaCurl::anonymousIdHeader()
   );
   return _value.c_str();
 }
-      
-const char *const MediaCurl::agentString()
+     
+static const char *const agentString()
 {
   // we need to add the release and identifier to the
   // agent string.
@@ -706,6 +706,7 @@ void MediaCurl::attachTo (bool next)
 
   // now add the anonymous id header
   _customHeaders = curl_slist_append(_customHeaders, anonymousIdHeader());
+  
   ret = curl_easy_setopt ( _curl, CURLOPT_HTTPHEADER, _customHeaders );
     
   if ( ret != 0) {

@@ -109,6 +109,10 @@ namespace zypp
   std::string Target::distributionVersion() const
   { return _pimpl->distributionVersion(); }
 
+  Product::constPtr Target::baseProduct() const
+  { return _pimpl->baseProduct(); }
+    
+
   /////////////////////////////////////////////////////////////////
 } // namespace zypp
 ///////////////////////////////////////////////////////////////////

@@ -138,6 +138,9 @@ namespace zypp
       /** return the last modification date of the target */
       Date timestamp() const;
 
+      /** \copydoc Target::baseProduct() */
+      Product::constPtr baseProduct() const;
+
       /** \copydoc Target::release() */
       std::string release() const;
 

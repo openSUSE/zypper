@@ -79,7 +79,7 @@ MediaAria2c::existsAria2cmd()
         return false;
 }
 
-const char *const MediaAria2c::anonymousIdHeader()
+static const char *const anonymousIdHeader()
 {
   // we need to add the release and identifier to the
   // agent string.
@@ -200,7 +200,6 @@ void MediaAria2c::attachTo (bool next)
   
    // add the anonymous id.
    _args.push_back(str::form("--header=%s", anonymousIdHeader() ));
-
   // TODO add debug option
    
   // Transfer timeout

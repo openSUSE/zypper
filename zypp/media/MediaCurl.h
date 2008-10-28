@@ -94,13 +94,6 @@ class MediaCurl : public MediaHandler {
 
     static int progressCallback( void *clientp, double dltotal, double dlnow,
                                  double ultotal, double ulnow );
-
-    /** The user agent string */
-    static const char *const agentString();
-
-    /** anonymous id header used to count unique users */
-    static const char *const anonymousIdHeader();
-
   private:
     /**
      * Return a comma separated list of available authentication methods

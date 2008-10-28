@@ -936,6 +936,22 @@ namespace zypp
       }
     }
 
+    Product::constPtr TargetImpl::baseProduct() const
+    {
+      ResPool pool(ResPool::instance());
+      for_( it, pool.byKindBegin<Product>(), pool.byKindEnd<Product>() )
+      {
+        Product::constPtr p = asKind<Product>((*it).resolvable());  
+        if ( p && (*it).status().isInstalled() )
+        {
+          if ( p->isTargetDistribution() )
+            return p;
+        }      
+      }
+        
+      return 0L;
+    }  
+
     std::string TargetImpl::targetDistribution() const
     { return rpmdb2solvAttr( "register.target", _root ); }
 
