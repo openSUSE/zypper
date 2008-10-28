@@ -1,4 +1,10 @@
 -------------------------------------------------------------------
+Tue Oct 28 16:47:36 CET 2008 - ma@suse.de
+
+- Add 'arm' architectures.
+- revision 11525
+
+-------------------------------------------------------------------
 Tue Oct 28 10:07:13 CET 2008 - schubi@suse.de
 
 - regarding "keep obsolete" in the solutions (bnc #439134)

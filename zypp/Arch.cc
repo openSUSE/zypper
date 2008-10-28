@@ -168,6 +168,14 @@ namespace zypp
     DEF_BUILTIN( sparcv9 );
     DEF_BUILTIN( sparcv8 );
     DEF_BUILTIN( sparc );
+
+    DEF_BUILTIN( armv6l );
+    DEF_BUILTIN( armv5tejl );
+    DEF_BUILTIN( armv5tel );
+    DEF_BUILTIN( armv5l );
+    DEF_BUILTIN( armv4tl );
+    DEF_BUILTIN( armv4l );
+    DEF_BUILTIN( armv3l );
 #undef DEF_BUILTIN
 
     ///////////////////////////////////////////////////////////////////
@@ -263,6 +271,14 @@ namespace zypp
         //
         defCompatibleWith( _sparcv9,	_noarch,_sparc );
         defCompatibleWith( _sparc64,	_noarch,_sparc,_sparcv9 );
+
+        defCompatibleWith( _armv3l,	_noarch );
+        defCompatibleWith( _armv4l,	_noarch,_armv3l );
+        defCompatibleWith( _armv4tl,	_noarch,_armv3l,_armv4l );
+        defCompatibleWith( _armv5l,	_noarch,_armv3l,_armv4l,_armv4tl );
+        defCompatibleWith( _armv5tel,	_noarch,_armv3l,_armv4l,_armv4tl,_armv5l );
+        defCompatibleWith( _armv5tejl,	_noarch,_armv3l,_armv4l,_armv4tl,_armv5l,_armv5tel );
+        defCompatibleWith( _armv6l,	_noarch,_armv3l,_armv4l,_armv4tl,_armv5l,_armv5tel,_armv5tejl );
         //
         ///////////////////////////////////////////////////////////////////
         //dumpOn( USR ) << endl;
@@ -356,6 +372,14 @@ namespace zypp
   const Arch Arch_sparcv9( _sparcv9 );
   const Arch Arch_sparcv8( _sparcv8 );
   const Arch Arch_sparc  ( _sparc );
+
+  const Arch Arch_armv6l   ( _armv6l );
+  const Arch Arch_armv5tejl( _armv5tejl );
+  const Arch Arch_armv5tel ( _armv5tel );
+  const Arch Arch_armv5l   ( _armv5l );
+  const Arch Arch_armv4tl  ( _armv4tl );
+  const Arch Arch_armv4l   ( _armv4l );
+  const Arch Arch_armv3l   ( _armv3l );
 
   ///////////////////////////////////////////////////////////////////
   //

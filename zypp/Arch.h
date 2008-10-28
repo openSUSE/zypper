@@ -206,6 +206,22 @@ namespace zypp
   extern const Arch Arch_sparcv8;
   /** \relates Arch */
   extern const Arch Arch_sparc;
+
+  /** \relates Arch */
+  extern const Arch Arch_armv6l;
+  /** \relates Arch */
+  extern const Arch Arch_armv5tejl;
+  /** \relates Arch */
+  extern const Arch Arch_armv5tel;
+  /** \relates Arch */
+  extern const Arch Arch_armv5l;
+  /** \relates Arch */
+  extern const Arch Arch_armv4tl;
+  /** \relates Arch */
+  extern const Arch Arch_armv4l;
+  /** \relates Arch */
+  extern const Arch Arch_armv3l;
+
   //@}
 
   ///////////////////////////////////////////////////////////////////
