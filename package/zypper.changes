@@ -1,4 +1,11 @@
 -------------------------------------------------------------------
+Tue Oct 28 15:36:42 CET 2008 - jkupec@suse.cz
+
+- fixed se -s to show multiple installed version of the same
+  package
+- r11523
+
+-------------------------------------------------------------------
 Tue Oct 28 10:29:10 CET 2008 - jkupec@suse.cz
 
 - translations update
