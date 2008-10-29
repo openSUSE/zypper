@@ -1,4 +1,10 @@
 -------------------------------------------------------------------
+Wed Oct 29 12:51:55 CET 2008 - ma@suse.de
+
+- Add 'sh4' architectures.
+- revision 11534
+
+-------------------------------------------------------------------
 Tue Oct 28 22:01:40 CET 2008 - dmacvicar@suse.de
 
 - don't free the header before curl_perform as curl does not

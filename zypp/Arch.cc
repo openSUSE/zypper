@@ -136,7 +136,12 @@ namespace zypp
   { /////////////////////////////////////////////////////////////////
 
     // builtin architecture STRING VALUES
-#define DEF_BUILTIN(A) const IdString  _##A( #A )
+    //
+    // For arch 'foo' this macro defines:
+    // const IdString  _foo( "foo" );     // to be used in defCompatibleWith below!
+    // const Arch      Arch_foo( _foo );
+    //
+#define DEF_BUILTIN(A) const IdString  _##A( #A ); const Arch Arch_##A( _##A )
     DEF_BUILTIN( noarch );
 
     DEF_BUILTIN( i386 );
@@ -176,6 +181,11 @@ namespace zypp
     DEF_BUILTIN( armv4tl );
     DEF_BUILTIN( armv4l );
     DEF_BUILTIN( armv3l );
+
+    DEF_BUILTIN( sh3 );
+
+    DEF_BUILTIN( sh4 );
+    DEF_BUILTIN( sh4a );
 #undef DEF_BUILTIN
 
     ///////////////////////////////////////////////////////////////////
@@ -271,7 +281,7 @@ namespace zypp
         //
         defCompatibleWith( _sparcv9,	_noarch,_sparc );
         defCompatibleWith( _sparc64,	_noarch,_sparc,_sparcv9 );
-
+        //
         defCompatibleWith( _armv3l,	_noarch );
         defCompatibleWith( _armv4l,	_noarch,_armv3l );
         defCompatibleWith( _armv4tl,	_noarch,_armv3l,_armv4l );
@@ -279,6 +289,11 @@ namespace zypp
         defCompatibleWith( _armv5tel,	_noarch,_armv3l,_armv4l,_armv4tl,_armv5l );
         defCompatibleWith( _armv5tejl,	_noarch,_armv3l,_armv4l,_armv4tl,_armv5l,_armv5tel );
         defCompatibleWith( _armv6l,	_noarch,_armv3l,_armv4l,_armv4tl,_armv5l,_armv5tel,_armv5tejl );
+        //
+        defCompatibleWith( _sh3,	_noarch );
+        //
+        defCompatibleWith( _sh4,	_noarch );
+        defCompatibleWith( _sh4a,	_noarch,_sh4 );
         //
         ///////////////////////////////////////////////////////////////////
         //dumpOn( USR ) << endl;
@@ -341,45 +356,8 @@ namespace zypp
 
   const Arch Arch_empty ( IdString::Empty );
 
-  const Arch Arch_noarch( _noarch );
-
-  const Arch Arch_pentium4( _pentium4 );
-  const Arch Arch_pentium3( _pentium3 );
-
-  const Arch Arch_x86_64( _x86_64 );
-  const Arch Arch_athlon( _athlon );
-  const Arch Arch_i686  ( _i686 );
-  const Arch Arch_i586  ( _i586 );
-  const Arch Arch_i486  ( _i486 );
-  const Arch Arch_i386  ( _i386 );
-
-  const Arch Arch_s390x ( _s390x );
-  const Arch Arch_s390  ( _s390 );
-
-  const Arch Arch_ppc64 ( _ppc64 );
-  const Arch Arch_ppc   ( _ppc );
-
-  const Arch Arch_ia64  ( _ia64 );
-
-  const Arch Arch_alphaev67 ( _alphaev67 );
-  const Arch Arch_alphaev6  ( _alphaev6 );
-  const Arch Arch_alphapca56( _alphapca56 );
-  const Arch Arch_alphaev56 ( _alphaev56 );
-  const Arch Arch_alphaev5  ( _alphaev5 );
-  const Arch Arch_alpha     ( _alpha );
-
-  const Arch Arch_sparc64( _sparc64 );
-  const Arch Arch_sparcv9( _sparcv9 );
-  const Arch Arch_sparcv8( _sparcv8 );
-  const Arch Arch_sparc  ( _sparc );
-
-  const Arch Arch_armv6l   ( _armv6l );
-  const Arch Arch_armv5tejl( _armv5tejl );
-  const Arch Arch_armv5tel ( _armv5tel );
-  const Arch Arch_armv5l   ( _armv5l );
-  const Arch Arch_armv4tl  ( _armv4tl );
-  const Arch Arch_armv4l   ( _armv4l );
-  const Arch Arch_armv3l   ( _armv3l );
+  // all other Arch_* constants are defined via
+  // the DEF_BUILTIN macro. See Above.
 
   ///////////////////////////////////////////////////////////////////
   //

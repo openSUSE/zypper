@@ -222,6 +222,13 @@ namespace zypp
   /** \relates Arch */
   extern const Arch Arch_armv3l;
 
+   /** \relates Arch */
+  extern const Arch Arch_sh3;
+
+  /** \relates Arch */
+  extern const Arch Arch_sh4;
+  /** \relates Arch */
+  extern const Arch Arch_sh4a;
   //@}
 
   ///////////////////////////////////////////////////////////////////
