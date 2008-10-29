@@ -10,7 +10,7 @@
  *
 */
 #include <iostream>
-#include <set>
+#include <list>
 
 #include "zypp/base/Logger.h"
 #include "zypp/base/NonCopyable.h"
@@ -110,7 +110,14 @@ namespace zypp
   /** \relates Arch::CompatEntry Stream output */
   inline std::ostream & operator<<( std::ostream & str, const Arch::CompatEntry & obj )
   {
-    return str << str::form( "%-15s ", obj._archStr.c_str() ) << obj._idBit << ' '
+    Arch::CompatEntry::CompatBits bit( obj._idBit );
+    unsigned bitnum = 0;
+    while ( bit )
+    {
+      ++bitnum;
+      bit >>= 1;
+    }
+    return str << str::form( "%-15s ", obj._archStr.c_str() ) << str::numstring(bitnum,2) << ' '
                << obj._compatBits << ' ' << obj._compatScore;
   }
 
@@ -232,10 +239,18 @@ namespace zypp
       const_iterator end() const
       { return _compatSet.end(); }
 
+      struct DumpOnCompare
+      {
+        int operator()( const CompatEntry & lhs,  const CompatEntry & rhs ) const
+        { return lhs._idBit.value() < rhs._idBit.value(); }
+      };
+
       std::ostream & dumpOn( std::ostream & str ) const
       {
         str << "ArchCompatSet:";
-        for ( const_iterator it = _compatSet.begin(); it != _compatSet.end(); ++it )
+        std::list<CompatEntry> ov( _compatSet.begin(), _compatSet.end() );
+        ov.sort( DumpOnCompare() );
+        for_( it, ov.begin(), ov.end() )
           {
             str << endl << ' ' << *it;
           }
@@ -298,7 +313,7 @@ namespace zypp
         defCompatibleWith( _sh4a,	_noarch,_sh4 );
         //
         ///////////////////////////////////////////////////////////////////
-        dumpOn( USR ) << endl;
+        //dumpOn( USR ) << endl;
       }
 
     private:
