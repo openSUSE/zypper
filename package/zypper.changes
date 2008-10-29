@@ -1,4 +1,11 @@
 -------------------------------------------------------------------
+Wed Oct 29 03:45:58 CET 2008 - jkupec@suse.cz
+
+- fix reporting of unknown options in a short options bunch
+  argument (e.g. -asdf) (bnc #299375)
+- r11531
+
+-------------------------------------------------------------------
 Tue Oct 28 15:36:42 CET 2008 - jkupec@suse.cz
 
 - fixed se -s to show multiple installed version of the same
