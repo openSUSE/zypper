@@ -131,13 +131,19 @@ ZYPP_DEFINE_ID_HASHABLE( zypp::Arch::CompatEntry );
 namespace zypp
 { /////////////////////////////////////////////////////////////////
 
-    // builtin architecture STRING VALUES
+  ///////////////////////////////////////////////////////////////////
+  namespace
+  { /////////////////////////////////////////////////////////////////
+
+    // Builtin architecture STRING VALUES to be
+    // used in defCompatibleWith below!
     //
-    // For arch 'foo' this macro defines:
-    // const IdString  _foo( "foo" );     // to be used in defCompatibleWith below!
-    // const Arch      Arch_foo( _foo );
+    // const IdString  _foo( "foo" );
     //
-#define DEF_BUILTIN(A) namespace { const IdString  _##A( #A ); } const Arch Arch_##A( _##A )
+    // NOTE: Builtin CLASS Arch CONSTANTS are defined below.
+    //       You have to change them accordingly.
+    //
+#define DEF_BUILTIN(A) const IdString  _##A( #A );
     DEF_BUILTIN( noarch );
 
     DEF_BUILTIN( i386 );
@@ -183,10 +189,6 @@ namespace zypp
     DEF_BUILTIN( sh4 );
     DEF_BUILTIN( sh4a );
 #undef DEF_BUILTIN
-
-  ///////////////////////////////////////////////////////////////////
-  namespace
-  { /////////////////////////////////////////////////////////////////
 
     ///////////////////////////////////////////////////////////////////
     //
@@ -355,9 +357,50 @@ namespace zypp
   ///////////////////////////////////////////////////////////////////
 
   const Arch Arch_empty ( IdString::Empty );
+  const Arch Arch_noarch( _noarch );
 
-  // all other Arch_* constants are defined via
-  // the DEF_BUILTIN macro. See Above.
+  const Arch Arch_i386( _i386 );
+  const Arch Arch_i486( _i486 );
+  const Arch Arch_i586( _i586 );
+  const Arch Arch_i686( _i686 );
+  const Arch Arch_athlon( _athlon );
+  const Arch Arch_x86_64( _x86_64 );
+
+  const Arch Arch_pentium3( _pentium3 );
+  const Arch Arch_pentium4( _pentium4 );
+
+  const Arch Arch_s390( _s390 );
+  const Arch Arch_s390x( _s390x );
+
+  const Arch Arch_ppc( _ppc );
+  const Arch Arch_ppc64( _ppc64 );
+
+  const Arch Arch_ia64( _ia64 );
+
+  const Arch Arch_alphaev67( _alphaev67 );
+  const Arch Arch_alphaev6( _alphaev6 );
+  const Arch Arch_alphapca56( _alphapca56 );
+  const Arch Arch_alphaev56( _alphaev56 );
+  const Arch Arch_alphaev5( _alphaev5 );
+  const Arch Arch_alpha( _alpha );
+
+  const Arch Arch_sparc64( _sparc64 );
+  const Arch Arch_sparcv9( _sparcv9 );
+  const Arch Arch_sparcv8( _sparcv8 );
+  const Arch Arch_sparc( _sparc );
+
+  const Arch Arch_armv6l( _armv6l );
+  const Arch Arch_armv5tejl( _armv5tejl );
+  const Arch Arch_armv5tel( _armv5tel );
+  const Arch Arch_armv5l( _armv5l );
+  const Arch Arch_armv4tl( _armv4tl );
+  const Arch Arch_armv4l( _armv4l );
+  const Arch Arch_armv3l( _armv3l );
+
+  const Arch Arch_sh3( _sh3 );
+
+  const Arch Arch_sh4( _sh4 );
+  const Arch Arch_sh4a( _sh4a );
 
   ///////////////////////////////////////////////////////////////////
   //

@@ -44,6 +44,10 @@ namespace zypp
         /** Ctor takes ownership of \c allocated_r. */
         ProductFileData( Impl * allocated_r = 0 );
 
+        /** Whether this is an empty object without valid data. */
+        bool empty() const
+        { return name().empty(); }
+
       public:
         IdString    vendor()  const;
         IdString    name()    const;
@@ -95,13 +99,21 @@ namespace zypp
     //	CLASS NAME : ProductFileReader
     //
     /** Parser for /etc/products.d enries (just relevant entires).
+     *
+     * \code
+     * #include "zypp/base/Functional.h" // functor::getAll
+     *
+     * std::vector<ProductFileData> result;
+     * ProductFileReader::scanDir( functor::getAll( std::back_inserter( result ) ),
+     *                             "/etc/products.d" );
+     * \endcode
      */
     class ProductFileReader
     {
     public:
       /** Callback being invoked for each \ref ProductFileData parsed.
        * Return \c false to stop parsing.
-      */
+       */
       typedef function<bool( const ProductFileData & )> Consumer;
 
     public:
@@ -139,9 +151,9 @@ namespace zypp
        */
       static bool scanDir( const Consumer & consumer_r, const Pathname & dir_r );
 
-       /** Parse one file (or symlink) and return the  \ref ProductFileData parsed.
-        */
-      static ProductFileData scanFile( const Pathname & dir_r );
+      /** Parse one file (or symlink) and return the  \ref ProductFileData parsed.
+       */
+      static ProductFileData scanFile( const Pathname & file_r );
 
    private:
       Consumer _consumer;

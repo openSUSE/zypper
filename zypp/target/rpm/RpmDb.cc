@@ -45,6 +45,7 @@
 #include "zypp/TmpPath.h"
 #include "zypp/KeyRing.h"
 #include "zypp/ZYppFactory.h"
+#include "zypp/ZConfig.h"
 
 using namespace std;
 using namespace zypp::filesystem;
@@ -2000,7 +2001,12 @@ void RpmDb::doInstallPackage( const Pathname & filename, RpmInstFlags flags, cal
     opts.push_back("-i");
   else
     opts.push_back("-U");
+
   opts.push_back("--percent");
+
+  // ZConfig defines cross-arch installation
+  if ( ! ZConfig::instance.systemArchitecture().compatibleWith( ZConfig::instance.defaultSystemArchitecture() ) )
+    opts.push_back("--ignorearch");
 
   if (flags & RPMINST_NODIGEST)
     opts.push_back("--nodigest");

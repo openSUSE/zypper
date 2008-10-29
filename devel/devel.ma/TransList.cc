@@ -182,6 +182,8 @@ bool Consumer( const parser::ProductFileData & data_r )
   return true;
 }
 
+#include "zypp/base/Functional.h"
+
 /******************************************************************
 **
 **      FUNCTION NAME : main
@@ -193,7 +195,16 @@ int main( int argc, char * argv[] )
 
   {
     Measure x( "PARSE" );
-    USR << parser::ProductFileReader::scanDir( &Consumer, sysRoot / "etc/products.d" ) << endl;
+
+    parser::ProductFileData              val;
+    std::vector<parser::ProductFileData> result;
+
+    parser::ProductFileReader::scanDir( functor::getFirst( val ),
+                                        //functor::getAll( std::back_inserter( result ) ),
+                                        sysRoot / "etc/products.d" );
+
+    USR << val << endl;
+    USR << result << endl;
   }
 
 #if 0

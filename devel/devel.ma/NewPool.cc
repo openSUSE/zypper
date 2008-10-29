@@ -609,6 +609,10 @@ try {
   }
 
 
+  MIL << Arch_ppc.compatibleWith( Arch_x86_64 ) << endl;
+  MIL << Arch_i586.compatibleWith( Arch_x86_64 ) << endl;
+
+
 #if 0
   getZYpp()->resolver()->addRequire( Capability("amarok") );
   solve();

@@ -12,10 +12,12 @@
 #include <iostream>
 #include "zypp/base/Logger.h"
 #include "zypp/base/Exception.h"
+#include "zypp/base/Functional.h"
 
 #include "zypp/PathInfo.h"
 
 #include "zypp/parser/ProductFileReader.h"
+#include "zypp/parser/xml/ParseDef.h"
 #include "zypp/parser/xml/Reader.h"
 
 using std::endl;
@@ -93,11 +95,11 @@ namespace zypp
 
     std::ostream & operator<<( std::ostream & str, const ProductFileData & obj )
     {
-      str << str::form( "|product|%s|%s|%s|%s|",
+      str << str::form( "|product|%s|%s|%s|%s|%p",
                         obj.name().c_str(),
                         obj.edition().c_str(),
                         obj.arch().c_str(),
-                        obj.vendor().c_str() );
+                        obj.vendor().c_str(), (const void *)&obj );
       return str;
     }
 
@@ -106,16 +108,50 @@ namespace zypp
     // class ProductFileReader
     //
     /////////////////////////////////////////////////////////////////
+
     bool consumeNode( xml::Reader & reader_r )
     {
       //DBG << *reader_r << endl;
       return true;
     }
 
+    struct ProductNode : public xml::ParseDef
+    {
+      ProductNode( Mode mode_r )
+      : ParseDef( "product", mode_r )
+      {
+        (*this)("ident",       OPTIONAL)
+               ("onsys",       OPTIONAL)
+               ;
+
+        (*this)["ident"]
+               ("name",        OPTIONAL)
+               ("version",     OPTIONAL)
+               ("description", OPTIONAL)
+               ("created",     OPTIONAL)
+               ;
+
+        (*this)["onsys"]
+               ("entry",       MULTIPLE_OPTIONAL)
+               ;
+      }
+    };
+
     bool ProductFileReader::parse( const InputStream & input_r ) const
     {
-      INT << "+++" << input_r << endl;
+      MIL << "+++" << input_r << endl;
       bool ret = true;
+      xml::ParseDef::_debug = true;
+
+      xml::Reader reader( input_r );
+
+      ProductNode rootNode( xml::ParseDef::MANDTAORY );
+      rootNode.take( reader );
+      ret = false;
+
+      MIL << "---" << ret << " - " << input_r << endl;
+      return ret;
+
       try
       {
         xml::Reader reader( input_r );
@@ -126,13 +162,24 @@ namespace zypp
         // parse error
         ERR << err << endl;
       }
-      INT << "---" << ret << " - " << input_r << endl;
+
+      if ( _consumer )
+      {
+        static unsigned idx = 0;
+
+        ProductFileData::Impl * i = new ProductFileData::Impl;
+        i->_name = IdString( str::numstring( ++idx, 4 ) );
+        ret = _consumer( i );
+      }
+
+      MIL << "---" << ret << " - " << input_r << endl;
       return ret;
     }
 
+    /////////////////////////////////////////////////////////////////
+
     bool ProductFileReader::scanDir( const Consumer & consumer_r, const Pathname & dir_r )
     {
-      DBG << "+++ scanDir " << dir_r << endl;
       std::list<Pathname> retlist;
       int res = filesystem::readdir( retlist, dir_r, /*dots*/false );
       if ( res != 0 )
@@ -149,13 +196,21 @@ namespace zypp
           return false; // consumer_r request to stop parsing.
         }
       }
-      DBG << "--- scanDir " << dir_r << endl;
       return true;
     }
 
-    ProductFileData ProductFileReader::scanFile( const Pathname & dir_r )
+    ProductFileData ProductFileReader::scanFile( const Pathname & file_r )
     {
-    }
+      if ( ! PathInfo( file_r ).isFile() )
+      {
+        WAR << "scanFile " << PathInfo( file_r ) << " is no t a file." << endl;
+        return ProductFileData();
+      }
+
+      ProductFileData ret;
+      ProductFileReader reader( functor::getFirst( ret ), file_r );
+      return ret;
+   }
 
     /////////////////////////////////////////////////////////////////
   } // namespace parser
