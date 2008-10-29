@@ -1,4 +1,11 @@
 -------------------------------------------------------------------
+Wed Oct 29 14:14:16 CET 2008 - jkupec@suse.cz
+
+- throw a MediaTimeoutException also on http 504 (gateway timeout)
+  (bnc #425035)
+- revision 11535
+
+-------------------------------------------------------------------
 Wed Oct 29 12:51:55 CET 2008 - ma@suse.de
 
 - Add 'sh4' architectures.
