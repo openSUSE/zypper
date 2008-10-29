@@ -38,7 +38,7 @@ namespace zypp
     /** Bitfield for architecture IDs and compatBits relation.
      * \note Need one bit for each builtin Arch.
     */
-    typedef bit::BitField<uint32_t> CompatBits;
+    typedef bit::BitField<uint64_t> CompatBits;
 
     CompatEntry( const std::string & archStr_r,
                  CompatBits::IntT idBit_r = 1 )
