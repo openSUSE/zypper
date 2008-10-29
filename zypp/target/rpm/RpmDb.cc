@@ -2005,7 +2005,7 @@ void RpmDb::doInstallPackage( const Pathname & filename, RpmInstFlags flags, cal
   opts.push_back("--percent");
 
   // ZConfig defines cross-arch installation
-  if ( ! ZConfig::instance.systemArchitecture().compatibleWith( ZConfig::instance.defaultSystemArchitecture() ) )
+  if ( ! ZConfig::instance().systemArchitecture().compatibleWith( ZConfig::instance().defaultSystemArchitecture() ) )
     opts.push_back("--ignorearch");
 
   if (flags & RPMINST_NODIGEST)
