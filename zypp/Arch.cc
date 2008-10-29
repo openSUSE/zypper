@@ -131,17 +131,13 @@ ZYPP_DEFINE_ID_HASHABLE( zypp::Arch::CompatEntry );
 namespace zypp
 { /////////////////////////////////////////////////////////////////
 
-  ///////////////////////////////////////////////////////////////////
-  namespace
-  { /////////////////////////////////////////////////////////////////
-
     // builtin architecture STRING VALUES
     //
     // For arch 'foo' this macro defines:
     // const IdString  _foo( "foo" );     // to be used in defCompatibleWith below!
     // const Arch      Arch_foo( _foo );
     //
-#define DEF_BUILTIN(A) const IdString  _##A( #A ); const Arch Arch_##A( _##A )
+#define DEF_BUILTIN(A) namespace { const IdString  _##A( #A ); } const Arch Arch_##A( _##A )
     DEF_BUILTIN( noarch );
 
     DEF_BUILTIN( i386 );
@@ -187,6 +183,10 @@ namespace zypp
     DEF_BUILTIN( sh4 );
     DEF_BUILTIN( sh4a );
 #undef DEF_BUILTIN
+
+  ///////////////////////////////////////////////////////////////////
+  namespace
+  { /////////////////////////////////////////////////////////////////
 
     ///////////////////////////////////////////////////////////////////
     //
