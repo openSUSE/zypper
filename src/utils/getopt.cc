@@ -44,17 +44,46 @@ parsed_opts parse_options (int argc, char **argv,
   string optstring = longopts2optstring (longopts);
   short2long_t short2long = make_short2long (longopts);
 
+  // optind in the previous loop
+  int optind_prev = optind;
+  // short option position in a short option bunch argument ('-xyz')
+  unsigned short_pos = 0;
   while (1) {
     int option_index = 0;
-    optc = getopt_long (argc, argv, optstring.c_str (),
-			longopts, &option_index);
+    optc = getopt_long(argc, argv, optstring.c_str (), longopts, &option_index);
     if (optc == -1)
-      break;			// options done
+      break; // options done
+
+    if (optind == optind_prev)
+      ++short_pos;
 
     switch (optc) {
     case '?':
+      // For '-garbage' argument, with 'a', 'b', and 'e' as known options,
+      // getopt_long reports 'a', 'b', and 'e' as known options.
+      // The rest ends here and it is either the last one from previous argument
+      // (short_pos + 1 points to it), or the short_pos one from the current
+      // argument. (bnc #299375)
+
+      // wrong option in the last argument
+      cerr << _("Unknown option ") << "'";
+
+      if (optind != optind_prev)
+      {
+        // last argument was a short option bunch, report only the last one
+        if (short_pos)
+          cerr << *(argv[optind - 1] + short_pos+1);
+        else
+          cerr << argv[optind - 1];
+      }
+      // wrong option in current argument, which is a short option bunch
+      else
+        cerr << *(argv[optind] + short_pos);
+
+      cerr << "'" << endl;
+
+      // tell the caller there have been uknown options encountered
       result["_unknown"].push_back("");
-      cerr << _("Unknown option ") << argv[optind - 1] << endl;
       break;
     case ':':
       cerr << _("Missing argument for ") << argv[optind - 1] << endl;
@@ -70,6 +99,10 @@ parsed_opts parse_options (int argc, char **argv,
 	value.push_back ("");
       break;
     }
+
+    if (optind != optind_prev)
+      short_pos = 0;
+    optind_prev = optind;
   }
   return result;
 }
