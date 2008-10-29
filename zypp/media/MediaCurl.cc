@@ -492,7 +492,7 @@ void MediaCurl::attachTo (bool next)
       disconnectFrom();
       ZYPP_THROW(MediaCurlSetOptException(_url, _curlError));
     }
-    
+
   }
 
 
@@ -1058,6 +1058,11 @@ bool MediaCurl::doGetDoesFileExist( const Pathname & filename ) const
               ));
             }
             else
+            if (httpReturnCode == 504) // gateway timeout
+            {
+              ZYPP_THROW(MediaTimeoutException(url));
+            }
+            else
             if ( httpReturnCode == 403) // access denied
             {
                ZYPP_THROW(MediaForbiddenException(url));
@@ -1280,6 +1285,11 @@ void MediaCurl::doGetFileCopy( const Pathname & filename , const Pathname & targ
                 ZYPP_THROW(MediaUnauthorizedException(
                   url, "Login failed.", _curlError, auth_hint
                 ));
+              }
+              else
+              if (httpReturnCode == 504) // gateway timeout
+              {
+                ZYPP_THROW(MediaTimeoutException(url));
               }
               else
               if ( httpReturnCode == 403)
@@ -1662,7 +1672,7 @@ bool MediaCurl::authenticate(const string & availAuthTypes, bool firstTry) const
 
     string prompt_msg = boost::str(boost::format(
       //!\todo add comma to the message for the next release
-      _("Authentication required for '%s'")) % _url.asString()); 
+      _("Authentication required for '%s'")) % _url.asString());
 
     // set available authentication types from the exception
     // might be needed in prompt
@@ -1684,7 +1694,7 @@ bool MediaCurl::authenticate(const string & availAuthTypes, bool firstTry) const
            *  back to repoinfo or dont store urls with username
            *  (and either forbid more repos with the same url and different
            *  user, or return a set of credentials from CM and try them one
-           *  by one) 
+           *  by one)
            */
       }
     }
