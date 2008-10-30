@@ -1,4 +1,10 @@
 -------------------------------------------------------------------
+Thu Oct 30 10:25:16 CET 2008 - jkupec@suse.cz
+
+- fixed pager process (for viewing licenses) handling (bnc #439786)
+- r11543
+
+-------------------------------------------------------------------
 Wed Oct 29 03:45:58 CET 2008 - jkupec@suse.cz
 
 - fix reporting of unknown options in a short options bunch
