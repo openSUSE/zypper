@@ -415,7 +415,7 @@ void get_repos(Zypper & zypper,
 /**
  * Say "Repository %s not found" for all strings in \a not_found list.
  */
-static void report_unknown_repos(Out & out, list<string> not_found)
+void report_unknown_repos(Out & out, list<string> not_found)
 {
   for_(it, not_found.begin(), not_found.end())
     out.error(boost::str(format(

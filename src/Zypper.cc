@@ -852,6 +852,7 @@ void Zypper::processCommandOptions()
       {"repo",                      required_argument, 0, 'r'},
       // rug compatibility option, we have --repo
       {"catalog",                   required_argument, 0, 'c'},
+      {"from",                      required_argument, 0,  0 },
       {"type",                      required_argument, 0, 't'},
       // the default (ignored)
       {"name",                      no_argument,       0, 'n'},
@@ -869,6 +870,8 @@ void Zypper::processCommandOptions()
       // rug uses -N shorthand
       {"dry-run",                   no_argument,       0, 'N'},
       {"no-recommends",             no_argument,       0,  0 },
+      // rug compatibility - will mark all packages for installation (like 'in *')
+      {"entire-catalog",            required_argument, 0,  0 },
       {"help",                      no_argument,       0, 'h'},
       {0, 0, 0, 0}
     };
@@ -2955,10 +2958,11 @@ void Zypper::doCommand()
   {
     if (runningHelp()) { out().info(_command_help, Out::QUIET); return; }
 
-    if (_arguments.size() < 1)
+    if (_arguments.size() < 1 && !_copts.count("entire-catalog"))
     {
-      out().error(string(_("Too few arguments.")) + " " +
-          _("At least one package name is required.") + "\n");
+      out().error(
+          _("Too few arguments."),
+          _("At least one package name is required."));
       out().info(_command_help);
       setExitCode(ZYPPER_EXIT_ERR_INVALID_ARGS);
       return;
@@ -2982,6 +2986,16 @@ void Zypper::doCommand()
     if (copts.count("no-confirm"))
       _gopts.non_interactive = true;
 
+    // rug compatibility code
+    parsed_opts::const_iterator optit;
+    if ((optit = _copts.find("entire-catalog")) != _copts.end())
+    {
+      if (!_arguments.empty())
+        out().warning(_("Ingoring arguments, marking the entire repository."));
+      _arguments.clear();
+      _arguments.push_back("*");
+      _copts["from"] = _copts["entire-catalog"];
+    }
 
     // read resolvable type
     string skind = copts.count("type")?  copts["type"].front() : "package";

@@ -8,6 +8,8 @@
 #ifndef ZMART_SOURCES_H
 #define ZMART_SOURCES_H
 
+#include <list>
+
 #include "zypp/TriBool.h"
 #include "zypp/Url.h"
 #include "zypp/RepoInfo.h"
@@ -20,16 +22,23 @@
 /**
  * The same as \ref init_repos(), but allows to specify repos to initialize.
  *
- * \param zypper    The zypper instance. 
+ * \param zypper    The zypper instance.
  * \param container A string container of identifier (alias|#|URI) to init.
   */
 template <typename Container>
 void init_repos(Zypper & zypper, const Container & container = Container());
 
+template<typename T>
+void get_repos(Zypper & zypper,
+               const T & begin, const T & end,
+               std::list<zypp::RepoInfo> & repos, std::list<std::string> & not_found);
+
+void report_unknown_repos(Out & out, std::list<std::string> not_found);
+
 /**
  * Reads known enabled repositories and stores them in gData.
  * This command also refreshes repos with auto-refresh enabled.
- * 
+ *
  * sets exit status to
  *  - ZYPPER_EXIT_ERR_INVALID_ARGS if --repo does not specify a valid repository,
  *  - ZYPPER_EXIT_ERR_ZYPP on error
@@ -60,7 +69,7 @@ void clean_repos(Zypper & zypper);
 
 /**
  * Try match given string with any known repository.
- * 
+ *
  * \param str string to match
  * \param repo pointer to fill with found repository
  * \return success if respository is found
@@ -70,11 +79,11 @@ bool match_repo(Zypper & zypper, const std::string str, zypp::RepoInfo *repo);
 
 /**
  * Add repository specified by \url to system repositories.
- * 
+ *
  * \param url Valid URL of the repository.
  * \param alias
  * \param type
- * \param enabled     Whether the repo should be enabled   
+ * \param enabled     Whether the repo should be enabled
  * \param autorefresh Whether the repo should have autorefresh turned on
  */
 void add_repo_by_url(Zypper & zypper,
@@ -89,9 +98,9 @@ void add_repo_by_url(Zypper & zypper,
  * Add repository specified in given repo file on \a repo_file_url. All repos
  * will be added enabled and with autorefresh turned on. The enabled and
  * autorefresh values provided in the files will be ignored.
- * 
+ *
  * \param repo_file_url Valid URL of the repo file.
- * \param enabled     Whether the repo should be enabled   
+ * \param enabled     Whether the repo should be enabled
  * \param autorefresh Whether the repo should have autorefresh turned on
  */
 void add_repo_from_file(Zypper & zypper,
@@ -102,7 +111,7 @@ void add_repo_from_file(Zypper & zypper,
 
 
 /**
- * Add repository specified by \repo to system repositories. 
+ * Add repository specified by \repo to system repositories.
  */
 void add_repo(Zypper & zypper, zypp::RepoInfo & repo);
 
@@ -119,14 +128,14 @@ void rename_repo(Zypper & zypper,
 
 /**
  * Modify repository properties.
- * 
+ *
  * \param alias repository alias
  */
 void modify_repo(Zypper & zypper, const std::string & alias);
 
 /**
  * Modify all repositories properties.
- * 
+ *
  */
 void modify_all_repos(Zypper & zypper);
 
@@ -159,7 +168,7 @@ bool match_service(Zypper & zypper,
 void modify_services_by_option( Zypper & zypper );
 
 /**
- * Initialize rpm database on target, if not already initialized. 
+ * Initialize rpm database on target, if not already initialized.
  */
 void init_target(Zypper & zypper);
 
@@ -173,12 +182,12 @@ void load_resolvables(Zypper & zypper);
 
 /**
  * Reads resolvables from the RPM database (installed resolvables) into the pool.
- * 
+ *
  */
 void load_target_resolvables(Zypper & zypper);
 
 /**
- * Reads resolvables from the repository solv cache. 
+ * Reads resolvables from the repository solv cache.
  */
 void load_repo_resolvables(Zypper & zypper);
 
@@ -186,7 +195,7 @@ void load_repo_resolvables(Zypper & zypper);
 /**
  * If ZMD process found, notify user that ZMD is running and that changes
  * to repositories will not be synchronized with it. To be used with commands
- * manipulating repositories like <tt>addrepo</tt> or <tt>rmrepo</tt>. 
+ * manipulating repositories like <tt>addrepo</tt> or <tt>rmrepo</tt>.
  */
 void warn_if_zmd();
 

@@ -11,6 +11,7 @@
 
 #include "install.h"
 #include "update.h"
+#include "repos.h"
 
 using namespace std;
 using namespace zypp;
@@ -41,7 +42,8 @@ mark_for_install(Zypper & zypper,
                       const ResObject::Kind &kind,
                       const string &name,
                       const string & repo = "",
-                      const string & arch = "")
+                      const string & arch = "",
+                      bool report_already_installed = true)
 {
   // name and kind match:
   DBG << "Iterating over [" << kind << "] " << name;
@@ -53,6 +55,7 @@ mark_for_install(Zypper & zypper,
 
   PoolQuery q;
   q.addAttribute(sat::SolvAttr::name, name);
+  q.addKind(kind);
   if (!repo.empty())
     q.addRepo(repo);
   if (!arch.empty())
@@ -60,7 +63,8 @@ mark_for_install(Zypper & zypper,
   q.setCaseSensitive(false);
   q.setMatchExact();
 
-  if (q.empty())
+//  if (q.empty())
+  if (q.begin() == q.end())
   {
     DBG << "... done" << endl;
     zypper.out().error(
@@ -97,7 +101,7 @@ mark_for_install(Zypper & zypper,
     // if it is broken install anyway, even if it is installed
     if (candidate.isBroken())
       candidate.status().setToBeInstalled(zypp::ResStatus::USER);
-    else
+    else if (report_already_installed)
       zypper.out().info(boost::str(format(
         // translators: e.g. skipping package 'zypper' (the newest version already installed)
         //! \todo capitalize the first letter
@@ -194,10 +198,11 @@ mark_by_name (Zypper & zypper,
               const ResObject::Kind &kind,
               const string &name,
               const string & repo = "",
-              const string & arch = "")
+              const string & arch = "",
+              bool report_already_installed = true) // might be a CLI option
 {
   if (install_not_remove)
-    mark_for_install(zypper, kind, name, repo, arch);
+    mark_for_install(zypper, kind, name, repo, arch, report_already_installed);
   else
     mark_for_uninstall(zypper, kind, name);
 }
@@ -477,6 +482,54 @@ void install_remove(Zypper & zypper,
 
   Zypper::ArgList argsnew;
   install_remove_preprocess_args(args, argsnew);
+
+  // --from
+
+  parsed_opts::const_iterator optit;
+  if (install_not_remove &&
+      (optit = zypper.cOpts().find("from")) != zypper.cOpts().end())
+  {
+    list<string> not_found;
+    list<RepoInfo> repos;
+    get_repos(zypper, optit->second.begin(), optit->second.end(), repos, not_found);
+    if (!not_found.empty())
+    {
+      report_unknown_repos(zypper.out(), not_found);
+      zypper.setExitCode(ZYPPER_EXIT_ERR_INVALID_ARGS);
+      return;
+    }
+
+    // for each argument search (glob) & mark
+    for_(strit, argsnew.begin(), argsnew.end())
+    {
+      bool found = false;
+      for_(it, repos.begin(), repos.end())
+      {
+        PoolQuery q;
+        q.addAttribute(sat::SolvAttr::name, *strit);
+        q.setMatchGlob();
+        q.addRepo(it->alias());
+        q.addKind(kind);
+
+        for_(sit, q.selectableBegin(), q.selectableEnd())
+        {
+          mark_by_name(zypper, true, kind, (*sit)->name(), it->alias(), "", false);
+          found = true;
+        }
+      }
+
+      if (!found)
+      {
+        // translators: meaning a package %s or provider of capability %s
+        zypper.out().error(str::form(_("'%s' not found."), strit->c_str()));
+        WAR << str::form("'%s' not found", strit->c_str()) << endl;
+        zypper.setExitCode(ZYPPER_EXIT_INF_CAP_NOT_FOUND);
+        if (zypper.globalOpts().non_interactive)
+          ZYPP_THROW(ExitRequestException());
+      }
+    }
+    return;
+  }
 
   string str, arch, repo;
   bool by_capability;
