@@ -17,8 +17,10 @@
 #include "zypp/TmpPath.h"
 #include "zypp/Pathname.h"
 #include "zypp/PathInfo.h"
+#include "zypp/ExternalProgram.h"
 
 #include "../main.h"
+#include "Zypper.h"
 
 #include "pager.h"
 
@@ -41,15 +43,10 @@ static string pager_help_exit(const string & pager)
 
 static string pager_help_navigation(const string & pager)
 {
-  string endfour = pager.substr(pager.size()-4,4);
-  if (endfour == "less")
-  {
+  if (pager.rfind("less") == pager.size() - 5)
     return _("Use arrows or pgUp/pgDown keys to scroll the text by lines or pages.");
-  }
-  else if (endfour == "more")
-  {
+  else if (pager.rfind("more") == pager.size() - 5)
     return _("Use the Enter or Space key to scroll the text by lines or pages.");
-  }
   return string();
 }
 
@@ -60,7 +57,9 @@ static bool show_in_pager(const string & pager, const Pathname & file)
   ostringstream cmdline;
   cmdline << "'" << pager << "' '" << file << "'";
 
-  switch(fork())
+  string errmsg;
+  pid_t pid;
+  switch(pid = fork())
   {
   case -1:
     WAR << "fork failed" << endl;
@@ -69,12 +68,48 @@ static bool show_in_pager(const string & pager, const Pathname & file)
   case 0:
     execlp("sh","sh","-c",cmdline.str().c_str(),(char *)0);
     WAR << "exec failed with " << strerror(errno) << endl;
-    exit(1); // cannot return false here, because here is another process
-             // so only kill myself
-             //! \todo FIXME proper exit code, message?
+    // exit, cannot return false here, because this is another process
+    //! \todo FIXME different exit code + message
+    exit(ZYPPER_EXIT_ERR_BUG);
 
-  default: 
-    wait(0); //wait until pager end to disallow possibly terminal collision
+  default:
+    DBG << "Executed pager process (pid: " << pid << ")" << endl;
+
+    // wait until pager exits
+    int status = 0;
+    int ret;
+    do
+    {
+      ret = waitpid(pid, &status, 0);
+    }
+    while (ret == -1 && errno == EINTR);
+
+    if (WIFEXITED (status))
+    {
+      status = WEXITSTATUS (status);
+      if (status)
+      {
+        DBG << "Pid " << pid << " exited with status " << status << endl;
+        return false;
+      }
+      else
+        DBG << "Pid " << pid << " successfully completed" << endl;
+    }
+    else if (WIFSIGNALED (status))
+    {
+      status = WTERMSIG (status);
+      WAR << "Pid " << pid << " was killed by signal " << status
+          << " (" << strsignal(status);
+      if (WCOREDUMP (status))
+        WAR << ", core dumped";
+      WAR << ")" << endl;
+      return false;
+    }
+    else
+    {
+      ERR << "Pid " << pid << " exited with unknown error" << endl;
+      return false;
+    }
   }
 
   return true;
@@ -84,8 +119,8 @@ static bool show_in_pager(const string & pager, const Pathname & file)
 
 bool show_text_in_pager(const string & text, const string & intro)
 {
-  const char* envpager = getenv("PAGER");
-  if (!envpager)
+  const char* envpager = ::getenv("PAGER");
+  if (!envpager || ::strlen(envpager) == 0)
     envpager = "more"; // basic posix default, must be in PATH
   string pager(envpager);
 
@@ -118,8 +153,8 @@ bool show_text_in_pager(const string & text, const string & intro)
 
 bool show_file_in_pager(const Pathname & file, const string & intro)
 {
-  const char* envpager = getenv("PAGER");
-  if (!envpager)
+  const char* envpager = ::getenv("PAGER");
+  if (!envpager || ::strlen(envpager) == 0)
     envpager = "more"; // basic posix default, must be in PATH
   string pager(envpager);
 
