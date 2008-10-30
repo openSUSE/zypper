@@ -1,4 +1,13 @@
 -------------------------------------------------------------------
+Thu Oct 30 18:27:29 CET 2008 - jkupec@suse.cz
+
+- --from added to install command to mark packages for installation
+  (by glob/name) from specified repos
+- --entire-catalog option for rug compatibility
+  (does 'zypper in --from repo '*') (bnc #439806)
+- r11552
+
+-------------------------------------------------------------------
 Thu Oct 30 10:25:16 CET 2008 - jkupec@suse.cz
 
 - fixed pager process (for viewing licenses) handling (bnc #439786)
