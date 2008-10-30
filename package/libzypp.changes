@@ -1,4 +1,12 @@
 -------------------------------------------------------------------
+Thu Oct 30 14:24:57 CET 2008 - schubi@suse.de
+
+- solutions: keep/lock will be done by APPL_HIGH. So they will not be
+  saved in the lockfiles
+- "keep obsolete" will be handled with lock by APPL_HIGH (bnc #439134)
+- revision  11549 
+
+-------------------------------------------------------------------
 Wed Oct 29 14:14:16 CET 2008 - jkupec@suse.cz
 
 - throw a MediaTimeoutException also on http 504 (gateway timeout)
