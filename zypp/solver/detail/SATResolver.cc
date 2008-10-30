@@ -280,15 +280,15 @@ SATSolutionToPool (PoolItem item, const ResStatus & status, const ResStatus::Tra
     // installation/deletion
     if (status.isToBeInstalled()) {
 	r = item.status().setToBeInstalled (causer);
-	_XDEBUG("SATSolutionToPool(" << item << ", " << status << ") install !" << r);
+	_XDEBUG("SATSolutionToPool install returns " << item << ", " << r);
     }
     else if (status.isToBeUninstalledDueToUpgrade()) {
 	r = item.status().setToBeUninstalledDueToUpgrade (causer);
-	_XDEBUG("SATSolutionToPool(" << item << ", " << status << ") upgrade !" << r);
+	_XDEBUG("SATSolutionToPool upgrade returns " << item << ", " <<  r);
     }
     else if (status.isToBeUninstalled()) {
 	r = item.status().setToBeUninstalled (causer);
-	_XDEBUG("SATSolutionToPool(" << item << ", " << status << ") remove !" << r);
+	_XDEBUG("SATSolutionToPool remove returns " << item << ", " <<  r);
     }
 
     return;
@@ -1189,7 +1189,7 @@ SATResolver::problems ()
 			{
 			    PoolItem poolItem = _pool.find (s);
 			    if (poolItem) {
-				problemSolution->addSingleAction (poolItem, KEEP);
+				problemSolution->addSingleAction (poolItem, LOCK); // for solver reason: NOT weak lock.
 				string description = str::form (_("keep %s"), solvable2str(pool, s.get()));
 				MIL << description << endl;
 				problemSolution->addDescription (description);

@@ -365,7 +365,7 @@ namespace zypp
            return true;
         }
       // Here: Lock status is to be changed:
-      if ( causer_r != USER )
+      if ( causer_r != USER && causer_r != APPL_HIGH)
         return false;
       // Setting no transact removes an existing lock,
       // or brings this into KEEP_STATE, and we apply the lock.

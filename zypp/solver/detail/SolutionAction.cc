@@ -65,6 +65,7 @@ TransactionSolutionAction::dumpOn( ostream& os) const
 	case INSTALL:			os << "Install " << _item; break;
 	case REMOVE:			os << "Remove " << _item; break;
 	case UNLOCK:			os << "Unlock " << _item; break;
+    	case LOCK:			os << "Lock " << _item; break;
 	case REMOVE_EXTRA_REQUIRE:	os << "Remove require " << _capability; break;
 	case REMOVE_EXTRA_CONFLICT:	os << "Remove conflict " << _capability; break;
 	case ADD_SOLVE_QUEUE_ITEM:	os << "Add SolveQueueItem " <<  _solverQueueItem; break;
@@ -132,7 +133,8 @@ TransactionSolutionAction::execute(Resolver & resolver) const
     bool ret = true;
     switch (action()) {
 	case KEEP:
-    	    ret = _item.status().setTransact (false, ResStatus::USER);
+	    _item.status().resetTransact (ResStatus::USER);
+    	    ret = _item.status().setTransact (false, ResStatus::APPL_HIGH); // APPL_HIGH: Locking should not be saved permanently
 	    break;
 	case INSTALL:
 	    if (_item.status().isToBeUninstalled())
@@ -153,6 +155,11 @@ TransactionSolutionAction::execute(Resolver & resolver) const
 	    ret = _item.status().setLock (false, ResStatus::USER);
 	    if (!ret) ERR << "Cannot unlock " << _item << endl;
 	    break;
+	case LOCK:
+    	    _item.status().resetTransact (ResStatus::USER);
+	    ret = _item.status().setLock (true, ResStatus::APPL_HIGH); // APPL_HIGH: Locking should not be saved permanently
+	    if (!ret) ERR << "Cannot lock " << _item << endl;
+	    break;	    
 	case REMOVE_EXTRA_REQUIRE:
 	    resolver.removeExtraRequire (_capability);
 	    break;

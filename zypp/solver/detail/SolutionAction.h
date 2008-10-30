@@ -69,6 +69,7 @@ namespace zypp
 	    INSTALL,
 	    REMOVE,
 	    UNLOCK,
+	    LOCK,
 	    REMOVE_EXTRA_REQUIRE,
 	    REMOVE_EXTRA_CONFLICT,
 	    ADD_SOLVE_QUEUE_ITEM,
