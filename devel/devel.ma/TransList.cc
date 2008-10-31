@@ -196,15 +196,11 @@ int main( int argc, char * argv[] )
   {
     Measure x( "PARSE" );
 
-    parser::ProductFileData              val;
     std::vector<parser::ProductFileData> result;
-
-    parser::ProductFileReader::scanDir( functor::getFirst( val ),
-                                        //functor::getAll( std::back_inserter( result ) ),
+    parser::ProductFileReader::scanDir( functor::getAll( std::back_inserter( result ) ),
                                         sysRoot / "etc/products.d" );
 
-    USR << val << endl;
-    USR << result << endl;
+    MIL << "Products: " << result << endl;
   }
 
 #if 0

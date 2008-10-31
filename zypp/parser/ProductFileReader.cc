@@ -101,12 +101,17 @@ namespace zypp
                         obj.edition().c_str(),
                         obj.arch().c_str(),
                         obj.vendor().c_str() );
+      if ( ! obj.upgrades().empty() )
+      {
+        for_( it, obj.upgrades().begin(), obj.upgrades().end() )
+          str << endl << "    " << *it;
+      }
       return str;
     }
 
     std::ostream & operator<<( std::ostream & str, const ProductFileData::Upgrade & obj )
     {
-      str << str::form( "  |upgrade|%s|",
+      str << str::form( "|upgrade|%s|",
                         obj.name().c_str() );
       return str;
     }
