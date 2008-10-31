@@ -61,9 +61,10 @@ namespace zypp
       /** Test whether the lock status differs from the remembered UserLockQuery bit. */
       static int diffLock( const ResStatus & status_r )
       {
-        if ( status_r.isLocked() == status_r.isUserLockQueryMatch() )
+        bool userLock( status_r.isUserLocked() );
+        if ( userLock == status_r.isUserLockQueryMatch() )
           return 0;
-        return status_r.isLocked() ? 1 : -1;
+        return userLock ? 1 : -1;
       }
 
     };

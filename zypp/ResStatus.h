@@ -253,6 +253,9 @@ namespace zypp
     bool isLocked() const
     { return fieldValueIs<TransactField>( LOCKED ); }
 
+    bool isUserLocked() const
+    { return isLocked() && isByUser(); }
+
     bool isSoftLocked( TransactByValue causer_r = USER ) const
     { return isKept() && fieldValueIs<TransactByField>( causer_r ); }
 

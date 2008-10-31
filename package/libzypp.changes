@@ -1,4 +1,10 @@
 -------------------------------------------------------------------
+Fri Oct 31 14:01:57 CET 2008 - ma@suse.de
+
+- Do not save solver locks (by APPL_HIGH).
+- revision 11558
+
+-------------------------------------------------------------------
 Fri Oct 31 13:53:39 CET 2008 - dmacvicar@suse.de
 
 - fetcher.setOptions( Fetcher::AutoAddIndexes ) allows
