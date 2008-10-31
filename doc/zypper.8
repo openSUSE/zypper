@@ -90,7 +90,7 @@ messages to be run or shown during installation of the update.
 \- group of packages which are necessary to install a product
 .LP
 Throughout this manual we will refer to resolvables simply as \fIpackages\fR
-and to resolvable types as \fIpackages types\fR.
+and to resolvable types as \fIpackage types\fR.
 
 
 .SH "COMMANDS"
@@ -130,8 +130,8 @@ Exit the shell using "exit", "quit", or Ctrl-D.
 
 The shell support is not complete
 so expect bugs there. However, there's no urgent need to use the shell
-since libzypp became so fast (opensSUSE 11.0), but still, you're welcome
-to experiment with it.
+since libzypp became so fast thanks to the SAT solver and its tools
+(opensSUSE 11.0), but still, you're welcome to experiment with it.
 
 
 .SS Package Management Commands
@@ -144,7 +144,7 @@ For each specified package, zypper finds the best available version in defined
 repositories and shows information for this package.
 
 .TP
-.I \-r, \-\-repo <alias|#|URI>
+\fI\-r, \-\-repo\fR <alias|#|URI>
 Work only with the repository specified by the alias, number or URI. This
 option can be used multiple times.
 .TP
@@ -173,8 +173,14 @@ are available, it will get upgraded to the newest installable version.
 
 If ARCH is not specified, or the last dot of the capability name string is not
 followed by known architecture, the solver will treat the whole string
-as a capability name. If the ARCH is know, the solver will try to choose
-a package with the best compatible architecture to the one specified.
+as a capability name. If the ARCH is known, the solver will select a package
+matching that architecture and complain if such package cannot be found.
+
+Zypper will report packages that it cannot find. Further, in interactive
+mode, zypper proceeds with installation of the rest of requested packages,
+and it will abort immediately in non-interactive mode. In both cases
+zypper returns ZYPPER_EXIT_INF_CAP_NOT_FOUND after finishing
+the operation.
 
 Zypper is also able to install plain RPM files while trying to satisfy their
 dependencies using packages from defined repositories. You can install a plain
@@ -203,8 +209,8 @@ interpretation as a command option.
 
 .TP
 \fI\-r, \-\-repo\fR <alias|#|URI>
-Install packages only from the repository specified by the alias, number or URI.
-This option can be used multiple times.
+Work only with the repository specified by the alias, number or URI. This
+option can be used multiple times.
 .TP
 \fI\-t, \-\-type\fR <type>
 Type of package (default: package). See the beginning of this subsection for the list
@@ -215,6 +221,12 @@ Select packages by their name, don't try to select by capabilities.
 .TP
 .I \-f, \-\-force
 Install even if the item is already installed (reinstall)
+.TP
+.I \ \ \ \ \-\-from <alias|#|URI>
+Select packages from specified repository. If strings specified as arguments
+to the install command match packages in repositories specified in this option,
+they will be marked for installation. This option currently implies
+\fI\-\-name\fR, but allows using wildcards for specifying packages.
 .TP
 .I \-C, \-\-capability
 Select packages by capabilities.
@@ -243,6 +255,7 @@ non-interactive mode. If this option is specified, it takes the preference.
 Test the installation, do not actually install any package. This option will
 add the \-\-test option to the rpm commands run by the install command.
 
+
 .TP
 .B source-install (si) <name> ...
 Install specified source packages and their build dependencies.
@@ -256,9 +269,9 @@ Install only build dependencies of specified packages.
 .I \-D, \-\-no\-build\-deps
 Don't install build dependencies.
 .TP
-.I \-r, \-\-repo <alias|#|URI>
-Install packages only from specified repositories.
-This option can be used multiple times.
+\fI\-r, \-\-repo\fR <alias|#|URI>
+Work only with the repository specified by the alias, number or URI. This
+option can be used multiple times.
 
 .TP
 .B verify (ve) [options]
@@ -271,8 +284,9 @@ to install or remove to fix them.
 .I \-D, \-\-dry-run
 Test the repair, do not actually do anything to the system.
 .TP
-.I \-r, \-\-repo <alias|#|URI>
-Use only specified repositories to install missing packages.
+\fI\-r, \-\-repo\fR <alias|#|URI>
+Work only with the repository specified by the alias, number or URI. This
+option can be used multiple times.
 .TP
 .I \ \ \ \ \-\-debug\-solver
 Create solver test case for debugging. See the install command for details.
@@ -284,8 +298,9 @@ This can typically be used to install language packages recently added
 to repositories or drivers for newly added hardware.
 
 .TP
-.I \-r, \-\-repo <alias|#|URI>
-Use only specified repositories to install packages.
+\fI\-r, \-\-repo\fR <alias|#|URI>
+Work only with the repository specified by the alias, number or URI. This
+option can be used multiple times.
 .TP
 .I \-D, \-\-dry-run
 Test the installation, do not actually install anything.
@@ -311,9 +326,9 @@ are satisified, the patch is rendered installed.
 Uninstallation of \fBpatterns\fR is currently not implemented.
 
 .TP
-\fI\-r, \-\-repo\fR <alias|#|URI>		
-Operate only with packages from repository specified by alias, number or URI.
-This option can be used multiple times.
+\fI\-r, \-\-repo\fR <alias|#|URI>
+Work only with the repository specified by the alias, number or URI. This
+option can be used multiple times.
 .TP
 \fI\-t, -\-type\fR <type>
 Type of package (default: package). See the beginning of this subsection for the list
@@ -362,8 +377,8 @@ Type of package (default: package). See Package Managemet Commands subsection
 for the list of available package types.
 .TP
 \fI\-r, \-\-repo\fR <alias|#|URI>
-List only updates from the repository specified by the alias, number or URI.
-This option can be used multiple times.
+Work only with the repository specified by the alias, number or URI. This
+option can be used multiple times.
 .TP
 .I \-a, \-\-all
 List all packages for which newer versions are available, regardles whether
@@ -391,8 +406,8 @@ Type of package (default: package). See Package Management Commands subsection
 for the list of available package types.
 .TP
 \fI\-r, \-\-repo\fR <alias|#|URI>
-Limit updates to repository specified by alias, number or URI.
-This option can be used multiple times.
+Work only with the repository specified by the alias, number or URI. This
+option can be used multiple times.
 .TP
 .I     \-\-skip\-interactive
 This will skip interactive patches, that is, those that need reboot,
@@ -439,9 +454,9 @@ be listed.
 This command is similar to 'zypper list-updates -t patch'.
 
 .TP
-.I \-r, --repo <alias|#|URI>
-List only patches from the specified repository.
-
+\fI\-r, \-\-repo\fR <alias|#|URI>
+Work only with the repository specified by the alias, number or URI. This
+option can be used multiple times.
 
 .TP
 .B patch [options]
@@ -453,8 +468,9 @@ be installed first and you will be asked to run the \fBpatch\fR command again.
 This command is similar to 'zypper update -t patch'.
 
 .TP
-.I \-r, \-\-repo <alias|#|URI>
-Work only with specified repository.
+\fI\-r, \-\-repo\fR <alias|#|URI>
+Work only with the repository specified by the alias, number or URI. This
+option can be used multiple times.
 .TP
 .I \-\-skip\-interactive
 Skip interactive patches.
@@ -477,8 +493,8 @@ and product updates, etc.
 
 .TP
 \fI\-r, \-\-repo\fR <alias|#|URI>
-Limit updates to repository specified by alias, number or URI.
-This option can be used multiple times.
+Work only with the repository specified by the alias, number or URI. This
+option can be used multiple times.
 .TP
 .I \-l, \-\-auto\-agree\-with\-licenses
 Automatically say 'yes' to third party license confirmation prompt. By using this option, you choose to agree with licenses of all third-party software this command will install. This option is particularly useful for administators installing the same set of packages on multiple machines (by an automated process) and have the licenses confirmed before.
@@ -536,9 +552,9 @@ Show only packages that are not currently installed.
 Search only for packages of specified type. See the beginning of the subsection for the list of available package types.
 Multiple \-t option are allowed.
 .TP
-.I \-r, \-\-repo <alias|#|URI>
-Search only in the repository specified by the alias, number or URI.		
-Multiple \-r options are allowed.
+\fI\-r, \-\-repo\fR <alias|#|URI>
+Work only with the repository specified by the alias, number or URI. This
+option can be used multiple times.
 .TP
 .I \ \ \ \ \-\-sort\-by\-name
 Sort packages by name (default).
@@ -602,9 +618,9 @@ This option can be used multiple times.
 List patches. Lists all patches that are available, including
 installed and not applicable ones.
 .TP
-.I \-r, \-\-repo <alias|#|URI>
-Check for patches only in the repository specified by the alias, number or URI.
-This option can be used multiple times.
+\fI\-r, \-\-repo\fR <alias|#|URI>
+Work only with the repository specified by the alias, number or URI. This
+option can be used multiple times.
 
 .SS Repository Management
 
@@ -1290,6 +1306,10 @@ This option is not available in rug and zypper uses the 'force-resolution'
 solver mode by default when running in rug-compatible mode. However, it is
 possible to turn the forcing of resolution off using this option even in
 rug-compatible mode.
+.TP
+.I      \-\-entire\-catalog <catalog>
+This option servers for marking all packages from specified catalog for
+installation. This is achieved by simulating 'zypper in --from <repo> '*''.
 .RE
 
 .TP

@@ -901,7 +901,9 @@ void Zypper::processCommandOptions()
       "-R, --no-force-resolution       Do not force the solver to find solution, let it ask.\n"
       "    --force-resolution          Force the solver to find a solution (even an agressive).\n"
       "-D, --dry-run                   Test the installation, do not actually install.\n"
-    ), "package, patch, pattern, product", "package");
+    ), "package, patch, pattern, product", "package") + string(_(
+      // translators: this option belongs to 'install' command
+      "    --from <alias|#|URI>        Select packages only from specified repository.\n"));
     break;
   }
 
@@ -1038,7 +1040,8 @@ void Zypper::processCommandOptions()
     };
     specific_options = service_add_options;
     _command_help = str::form(_(
-      // TranslatorExplanation the %s = "yast2, rpm-md, plaindir"
+      // translators: the %s = "ris" (the only service type currently supported)
+      //! \todo s/--name/--name <name> after 11.1 release.
       "addservice (as) [options] <URI> <alias>\n"
       "\n"
       "Add a repository index service to the system.\n"
@@ -1200,7 +1203,8 @@ void Zypper::processCommandOptions()
     };
     specific_options = service_add_options;
     _command_help = str::form(_(
-      // TranslatorExplanation the %s = "yast2, rpm-md, plaindir"
+      // translators: the %s = "yast2, rpm-md, plaindir"
+      //! \todo s/--name/--name <name> after 11.1 release.
       "addrepo (ar) [options] <URI> <alias>\n"
       "addrepo (ar) [options] <FILE.repo>\n"
       "\n"
@@ -1338,6 +1342,7 @@ void Zypper::processCommandOptions()
     _command_help = str::form(_(
       // translators: %s is "--all|--remote|--local|--medium-type"
       // and "--all, --remote, --local, --medium-type"
+      //! \todo s/<1-99>/<#> after 11.1 release.
       "modifyrepo (mr) <options> <alias|#|URI>\n"
       "modifyrepo (mr) <options> <%s>\n"
       "\n"
@@ -2058,6 +2063,7 @@ void Zypper::processCommandOptions()
       {0, 0, 0, 0}
     };
     specific_options = options;
+    //! \todo s/Licenses/licenses, s/EULA/EULAs
     _command_help = _(
       "licenses\n"
       "\n"
@@ -2472,7 +2478,7 @@ void Zypper::doCommand()
     if (geteuid() != 0 && !globalOpts().changedRoot)
     {
       out().error(
-        _("Root privileges are required for modifying services."));
+        _("Root privileges are required for modifying system services."));
       setExitCode(ZYPPER_EXIT_ERR_PRIVILEGES);
       return;
     }
@@ -2991,6 +2997,8 @@ void Zypper::doCommand()
     if ((optit = _copts.find("entire-catalog")) != _copts.end())
     {
       if (!_arguments.empty())
+        // translators: rug related message, shown if
+        // 'zypper in --entire-catalog foorepo someargument' is specified
         out().warning(_("Ingoring arguments, marking the entire repository."));
       _arguments.clear();
       _arguments.push_back("*");
