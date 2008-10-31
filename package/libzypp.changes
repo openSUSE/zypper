@@ -1,4 +1,11 @@
 -------------------------------------------------------------------
+Fri Oct 31 13:53:39 CET 2008 - dmacvicar@suse.de
+
+- fetcher.setOptions( Fetcher::AutoAddIndexes ) allows
+  for automatic signed index discovery.
+- enqueueDir with checksum checking s now enqueueDigestedDir
+
+-------------------------------------------------------------------
 Thu Oct 30 14:24:57 CET 2008 - schubi@suse.de
 
 - solutions: keep/lock will be done by APPL_HIGH. So they will not be
