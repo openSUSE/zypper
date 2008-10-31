@@ -13,6 +13,7 @@
 #include <list>
 
 #include "zypp/base/Logger.h"
+#include "zypp/base/Exception.h"
 #include "zypp/base/NonCopyable.h"
 #include "zypp/base/Tr1hash.h"
 #include "zypp/Arch.h"
@@ -37,6 +38,7 @@ namespace zypp
   {
     /** Bitfield for architecture IDs and compatBits relation.
      * \note Need one bit for each builtin Arch.
+     * \todo Migrate to some infinite BitField
     */
     typedef bit::BitField<uint64_t> CompatBits;
 
@@ -149,6 +151,9 @@ namespace zypp
     //
     // NOTE: Builtin CLASS Arch CONSTANTS are defined below.
     //       You have to change them accordingly.
+    //
+    // NOTE: Thake care CompatBits::IntT is able to provide one
+    //       bit for each architectue.
     //
 #define DEF_BUILTIN(A) const IdString  _##A( #A );
     DEF_BUILTIN( noarch );
@@ -313,7 +318,7 @@ namespace zypp
         defCompatibleWith( _sh4a,	_noarch,_sh4 );
         //
         ///////////////////////////////////////////////////////////////////
-        //dumpOn( USR ) << endl;
+        // dumpOn( USR ) << endl;
       }
 
     private:
@@ -324,8 +329,13 @@ namespace zypp
       */
       CompatBits::IntT nextIdBit() const
       {
+        if ( CompatBits::size == _compatSet.size() )
+        {
+          // Provide more bits in CompatBits::IntT
+          INT << "Need more than " << CompatBits::size << " bits to encode architectures." << endl;
+          ZYPP_THROW( Exception("Need more bits to encode architectures.") );
+        }
         CompatBits::IntT nextBit = CompatBits::IntT(1) << (_compatSet.size());
-        assert( nextBit ); // need more bits in CompatBits::IntT
         return nextBit;
       }
 
