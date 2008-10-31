@@ -140,6 +140,7 @@ namespace zypp
 
     public:
       ParseDef( const std::string & name_r, Mode mode_r );
+      ParseDef( const std::string & name_r, Mode mode_r, const shared_ptr<ParseDefConsume> & target_r );
 
       virtual ~ParseDef();
 
@@ -166,6 +167,9 @@ namespace zypp
       ParseDef & addNode( const std::string & name_r, Mode mode_r )
       { ParseDef tmp( name_r, mode_r ); return addNode( tmp ); }
 
+      ParseDef & addNode( const std::string & name_r, Mode mode_r, const shared_ptr<ParseDefConsume> & target_r )
+      { ParseDef tmp( name_r, mode_r, target_r ); return addNode( tmp ); }
+
       /** Add subnode definition.
        * \see addNode.
        */
@@ -174,6 +178,9 @@ namespace zypp
 
       ParseDef & operator()( const std::string & name_r, Mode mode_r )
       { return addNode( name_r, mode_r ); }
+
+      ParseDef & operator()( const std::string & name_r, Mode mode_r, const shared_ptr<ParseDefConsume> & target_r )
+      { return addNode( name_r, mode_r, target_r ); }
 
       /** Get subnode by name.
        * \throws ParseDefBuildException if no subnode with \a name_r exists.

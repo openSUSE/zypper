@@ -117,7 +117,7 @@ namespace zypp
     void ParseDefConsumeRedirect::doneSubnode ( const Node & _node )
     {
       if ( _target )
-        _target->startSubnode( _node );
+        _target->doneSubnode( _node );
     }
 
     ///////////////////////////////////////////////////////////////////

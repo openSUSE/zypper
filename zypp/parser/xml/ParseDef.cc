@@ -132,11 +132,14 @@ namespace zypp
       typedef std::map<std::string, ImplPtr> SubNodes;
 
     public:
-      Impl( const std::string & name_r, Mode mode_r )
+      Impl( const std::string & name_r, Mode mode_r, const shared_ptr<ParseDefConsume> & target_r = shared_ptr<ParseDefConsume>() )
       : _name( name_r )
       , _mode( mode_r )
       , _parent( NULL )
-      {}
+      {
+        if ( target_r )
+          _callback.setRedirect( target_r );
+      }
 
       ~Impl()
       {
@@ -286,7 +289,8 @@ namespace zypp
                       }
                     else
                       {
-                        WAR << "Skip unknown node " << *reader_r << " in "<< *this << endl;
+                        if ( ParseDef::_debug )
+                          WAR << "Skip unknown node " << *reader_r << " in "<< *this << endl;
                         skipNode( reader_r );
                       }
                   }
@@ -382,6 +386,10 @@ namespace zypp
     //
     ParseDef::ParseDef( const std::string & name_r, Mode mode_r )
     : _pimpl( new Impl( name_r, mode_r ) )
+    {}
+
+    ParseDef::ParseDef( const std::string & name_r, Mode mode_r, const shared_ptr<ParseDefConsume> & target_r )
+    : _pimpl( new Impl( name_r, mode_r, target_r ) )
     {}
 
     ParseDef::ParseDef( const shared_ptr<Impl> & pimpl_r )
