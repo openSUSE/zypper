@@ -94,6 +94,9 @@ namespace zypp
     /** \relates  ProductFileData Stream output */
     std::ostream & operator<<( std::ostream & str, const ProductFileData & obj );
 
+    /** \relates  ProductFileData::Upgrade Stream output */
+    std::ostream & operator<<( std::ostream & str, const ProductFileData::Upgrade & obj );
+
     ///////////////////////////////////////////////////////////////////
     //
     //	CLASS NAME : ProductFileReader

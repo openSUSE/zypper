@@ -18,6 +18,7 @@
 
 #include "zypp/parser/ProductFileReader.h"
 #include "zypp/parser/xml/ParseDef.h"
+#include "zypp/parser/xml/ParseDefConsume.h"
 #include "zypp/parser/xml/Reader.h"
 
 using std::endl;
@@ -95,81 +96,141 @@ namespace zypp
 
     std::ostream & operator<<( std::ostream & str, const ProductFileData & obj )
     {
-      str << str::form( "|product|%s|%s|%s|%s|%p",
+      str << str::form( "|product|%s|%s|%s|%s|",
                         obj.name().c_str(),
                         obj.edition().c_str(),
                         obj.arch().c_str(),
-                        obj.vendor().c_str(), (const void *)&obj );
+                        obj.vendor().c_str() );
       return str;
     }
 
+    std::ostream & operator<<( std::ostream & str, const ProductFileData::Upgrade & obj )
+    {
+      str << str::form( "  |upgrade|%s|",
+                        obj.name().c_str() );
+      return str;
+    }
     /////////////////////////////////////////////////////////////////
     //
     // class ProductFileReader
     //
     /////////////////////////////////////////////////////////////////
 
-    bool consumeNode( xml::Reader & reader_r )
+    /** Assign types constructible from \c char* */
+    template <class _Val>
+    struct ConsumeVal : public xml::ParseDefConsume
     {
-      //DBG << *reader_r << endl;
-      return true;
-    }
+      ConsumeVal( _Val & value_r )
+        : _value( &value_r )
+      {}
 
-    struct ProductNode : public xml::ParseDef
-    {
-      ProductNode( Mode mode_r )
-      : ParseDef( "product", mode_r )
+      virtual void text( const xml::Node & node_r )
       {
-        (*this)("ident",       OPTIONAL)
-               ("onsys",       OPTIONAL)
-               ;
-
-        (*this)["ident"]
-               ("name",        OPTIONAL)
-               ("version",     OPTIONAL)
-               ("description", OPTIONAL)
-               ("created",     OPTIONAL)
-               ;
-
-        (*this)["onsys"]
-               ("entry",       MULTIPLE_OPTIONAL)
-               ;
+        *_value = _Val( node_r.value().c_str() );
       }
+
+      private:
+      _Val * _value;
+    };
+
+    template <class _Val>
+    shared_ptr<xml::ParseDefConsume> consumeVal( _Val & value_r )
+    { return shared_ptr<xml::ParseDefConsume>( new ConsumeVal<_Val>( value_r ) ); }
+
+    /////////////////////////////////////////////////////////////////
+
+    struct ProductNode : public xml::ParseDef, public xml::ParseDefConsume
+    {
+      ProductNode( ProductFileData::Impl & pdata_r )
+        : ParseDef( "product", MANDTAORY )
+        , _pdata( pdata_r )
+      {
+        (*this)
+            ("vendor",        OPTIONAL,  consumeVal( _pdata._vendor ) )
+            ("name",          MANDTAORY, consumeVal( _pdata._name ) )
+            ("version",       OPTIONAL,  consumeVal( _version ) )
+            ("release",       OPTIONAL,  consumeVal( _release ) )
+            ("arch",          OPTIONAL,  consumeVal( _pdata._arch ) )
+            ("productline",   OPTIONAL,  consumeVal( _pdata._productline ) )
+            ("register",      OPTIONAL)
+            ("updaterepokey", OPTIONAL,  consumeVal( _pdata._updaterepokey ) )
+            ("upgrades",      OPTIONAL)
+            ;
+
+        (*this)["register"]
+            ("target",        OPTIONAL,  consumeVal( _pdata._registerTarget ) )
+            ("release",       OPTIONAL,  consumeVal( _pdata._registerRelease ) )
+            ;
+
+        (*this)["upgrades"]
+            ("upgrade",       MULTIPLE_OPTIONAL)
+            ;
+
+        (*this)["upgrades"]["upgrade"]
+            ("name",          OPTIONAL,  consumeVal( _upgrade._name ) )
+            ("summary",       OPTIONAL,  consumeVal( _upgrade._summary ) )
+            ("repository",    OPTIONAL,  consumeVal( _upgrade._product ) )
+            ("notify",        OPTIONAL)  // need consume to bool!
+            ("status",        OPTIONAL,  consumeVal( _upgrade._status ) )
+            ;
+
+        // not a clean way to collect the END_ELEMENT calls, but
+        // works for this case. NEEDS CLEANUP!
+        setConsumer( *this );
+        (*this)["upgrades"].setConsumer( *this );
+       }
+
+       virtual void done ( const xml::Node & _node )
+       {
+         //SEC << "DONE.... " << _node.localName() << endl;
+         if ( _node.localName() == name() )
+         {
+           // this END node
+           _pdata._edition = Edition( _version, _release );
+         }
+         else if ( _node.localName() == "upgrade" )
+         {
+           // collect upgrade
+           ProductFileData::Upgrade cdata( new ProductFileData::Upgrade::Impl( _upgrade ) );
+           _pdata._upgrades.push_back( cdata );
+         }
+       }
+
+       ProductFileData::Impl & _pdata;
+
+       std::string             _version;
+       std::string             _release;
+
+       ProductFileData::Upgrade::Impl _upgrade;
     };
 
     bool ProductFileReader::parse( const InputStream & input_r ) const
     {
       MIL << "+++" << input_r << endl;
       bool ret = true;
-      xml::ParseDef::_debug = true;
 
-      xml::Reader reader( input_r );
-
-      ProductNode rootNode( xml::ParseDef::MANDTAORY );
-      rootNode.take( reader );
-      ret = false;
-
-      MIL << "---" << ret << " - " << input_r << endl;
-      return ret;
+      ProductFileData::Impl * pdataImpl = 0;
+      ProductFileData pdata( (pdataImpl = new ProductFileData::Impl) );
 
       try
       {
+        //xml::ParseDef::_debug = true;
         xml::Reader reader( input_r );
-        ret = reader.foreachNode( consumeNode );
+        ProductNode rootNode( *pdataImpl );
+        rootNode.take( reader );
+
       }
       catch ( const Exception & err )
       {
         // parse error
         ERR << err << endl;
+        ERR << "---" << ret << " - " << input_r << endl;
+        return ret;
       }
 
       if ( _consumer )
       {
-        static unsigned idx = 0;
-
-        ProductFileData::Impl * i = new ProductFileData::Impl;
-        i->_name = IdString( str::numstring( ++idx, 4 ) );
-        ret = _consumer( i );
+        ret = _consumer( pdata );
       }
 
       MIL << "---" << ret << " - " << input_r << endl;
