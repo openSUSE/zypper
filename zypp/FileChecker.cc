@@ -29,7 +29,7 @@ namespace zypp
 
   void ChecksumFileChecker::operator()( const Pathname &file ) const
   {
-    MIL << "checking " << file << " file against checksum '" << _checksum << "'" << endl;
+      //MIL << "checking " << file << " file against checksum '" << _checksum << "'" << endl;
     callback::SendReport<DigestReport> report;
     CheckSum real_checksum( _checksum.type(), filesystem::checksum( file, _checksum.type() ));
     
@@ -43,7 +43,7 @@ namespace zypp
       }
       else
       {
-        ZYPP_THROW( FileCheckException( "No checksum available for " + file.basename() ) );
+        ZYPP_THROW( FileCheckException( file.basename() + " has no checksum" ) );
       }
     }
     else
@@ -57,7 +57,7 @@ namespace zypp
         }
         else
         {
-          ZYPP_THROW( FileCheckException( "Wrong checksum for "  + file.basename() ) );
+          ZYPP_THROW( FileCheckException( file.basename() + " has wrong checksum" ) );
         }
       }
     }

@@ -24,6 +24,7 @@ ADD_TESTS(
   RWPtr
   RepoInfo
   RepoManager
+  Reports
   RepoStatus
   ResKind
   ResStatus

@@ -23,27 +23,31 @@ using namespace boost::unit_test;
 
 #define DATADIR (Pathname(TESTS_SRC_DIR) + "/zypp/data/Fetcher/remote-site")
 
-BOOST_AUTO_TEST_CASE(fetcher)
+BOOST_AUTO_TEST_CASE(fetcher_enqueuedir_noindex)
 {
   MediaSetAccess media( ( DATADIR).asUrl(), "/" );
-  Fetcher fetcher;
-
   // Now test that without trusting it, it should throw
   // do the test by trusting the SHA1SUMS file signature key
   {
       filesystem::TmpDir dest;
-
+      Fetcher fetcher;
       fetcher.enqueueDir(OnMediaLocation("/complexdir"), true);
-      BOOST_CHECK_THROW( fetcher.start( dest.path(), media ), Exception);
+      fetcher.start( dest.path(), media );
       fetcher.reset();
   }
+}
 
+BOOST_AUTO_TEST_CASE(fetcher_enqueuedir_autoindex)
+{
+  MediaSetAccess media( ( DATADIR).asUrl(), "/" );
   // do the test by trusting the SHA1SUMS file signature key
   {
       filesystem::TmpDir dest;
 
       // add the key as trusted
       getZYpp()->keyRing()->importKey(PublicKey(DATADIR + "/complexdir/subdir1/SHA1SUMS.key"), true);
+      Fetcher fetcher;
+      fetcher.setOptions( Fetcher::AutoAddIndexes );
       fetcher.enqueueDir(OnMediaLocation("/complexdir"), true);
       fetcher.start( dest.path(), media );
 
@@ -54,22 +58,81 @@ BOOST_AUTO_TEST_CASE(fetcher)
 
       fetcher.reset();
   }
+}
 
+BOOST_AUTO_TEST_CASE(fetcher_enqueue_digested_dir_autoindex)
+{
+  MediaSetAccess media( ( DATADIR).asUrl(), "/" );
   // do the test by trusting the SHA1SUMS file signature key but with a broken file
   {
       filesystem::TmpDir dest;
-
+      Fetcher fetcher;
       // add the key as trusted
       getZYpp()->keyRing()->importKey(PublicKey(DATADIR + "/complexdir-broken/subdir1/SHA1SUMS.key"), true);
+      fetcher.setOptions( Fetcher::AutoAddIndexes );
+      fetcher.enqueueDigestedDir(OnMediaLocation("/complexdir-broken"), true);
+      BOOST_CHECK_THROW( fetcher.start( dest.path(), media ), FileCheckException);
+      fetcher.reset();
+  }
+}
+
+BOOST_AUTO_TEST_CASE(fetcher_enqueuebrokendir_noindex)
+{
+  MediaSetAccess media( ( DATADIR).asUrl(), "/" );
+  // do the test by trusting the SHA1SUMS file signature key but with a broken file
+  {
+      filesystem::TmpDir dest;
+      Fetcher fetcher;
+      // add the key as trusted
+      getZYpp()->keyRing()->importKey(PublicKey(DATADIR + "/complexdir-broken/subdir1/SHA1SUMS.key"), true);
+      fetcher.enqueueDir(OnMediaLocation("/complexdir-broken"), true);
+      // this should not throw as we provided no indexes and the
+      // enqueue is not digested
+      fetcher.start( dest.path(), media );
+      fetcher.reset();
+  }
+}
+
+BOOST_AUTO_TEST_CASE(fetcher_enqueuebrokendir_index)
+{
+  MediaSetAccess media( ( DATADIR).asUrl(), "/" );
+  // do the test by trusting the SHA1SUMS file signature key but with a broken file
+  {
+      filesystem::TmpDir dest;
+      Fetcher fetcher;
+      // add the key as trusted
+      getZYpp()->keyRing()->importKey(PublicKey(DATADIR + "/complexdir-broken/subdir1/SHA1SUMS.key"), true);
+      fetcher.setOptions( Fetcher::AutoAddIndexes );
       fetcher.enqueueDir(OnMediaLocation("/complexdir-broken"), true);
       BOOST_CHECK_THROW( fetcher.start( dest.path(), media ), Exception);
       fetcher.reset();
   }
+}
 
 
+BOOST_AUTO_TEST_CASE(fetcher_enqueue_digested_brokendir_with_index)
+{
+  MediaSetAccess media( ( DATADIR).asUrl(), "/" );
+  // do the test by trusting the SHA1SUMS file signature key but with a broken file
   {
       filesystem::TmpDir dest;
+      Fetcher fetcher;
+      // add the key as trusted
+      getZYpp()->keyRing()->importKey(PublicKey(DATADIR + "/complexdir-broken/subdir1/SHA1SUMS.key"), true);
+      fetcher.setOptions( Fetcher::AutoAddIndexes );
+      fetcher.enqueueDigestedDir(OnMediaLocation("/complexdir-broken"), true);
+      BOOST_CHECK_THROW( fetcher.start( dest.path(), media ), Exception);
+      fetcher.reset();
+  }
+}
 
+
+BOOST_AUTO_TEST_CASE(fetcher_enqueuefile_noindex)
+{
+  MediaSetAccess media( ( DATADIR).asUrl(), "/" );
+  {
+      filesystem::TmpDir dest;
+      Fetcher fetcher;
       fetcher.enqueue(OnMediaLocation("/file-1.txt"));
       fetcher.start( dest.path(), media );
       BOOST_CHECK( PathInfo(dest.path() + "/file-1.txt").isExist() );
@@ -97,7 +160,6 @@ BOOST_AUTO_TEST_CASE(fetcher_simple)
         fetcher.reset();
 
     }
-    
 }
 
 BOOST_AUTO_TEST_CASE(content_index)
@@ -119,7 +181,7 @@ BOOST_AUTO_TEST_CASE(content_index)
 
 }
 
-BOOST_AUTO_TEST_CASE(content_index_broken)
+BOOST_AUTO_TEST_CASE(enqueue_broken_content_index)
 {
   MediaSetAccess media( ( DATADIR).asUrl(), "/" );
   Fetcher fetcher;
@@ -140,6 +202,48 @@ BOOST_AUTO_TEST_CASE(content_index_broken)
   }
 }
 
+BOOST_AUTO_TEST_CASE(enqueue_digested_broken_content_index)
+{
+  MediaSetAccess media( ( DATADIR).asUrl(), "/" );
+  Fetcher fetcher;
+
+  {
+        filesystem::TmpDir dest;
+        OnMediaLocation loc("/contentindex-broken-digest/subdir1/subdir1-file1.txt",1);
+        // key was already imported as trusted
+        fetcher.addIndex(OnMediaLocation("/contentindex-broken-digest/content", 1));
+        fetcher.enqueueDigested(loc);
+        fetcher.start(dest.path(), media);
+        fetcher.reset();
+        // now retrieve a file that is modified, so the checksum has to fail
+        loc = OnMediaLocation("/contentindex-broken-digest/subdir1/subdir1-file2.txt",1);
+        fetcher.enqueueDigested(loc);
+        BOOST_CHECK_THROW( fetcher.start( dest.path(), media ), Exception);
+        fetcher.reset();
+  }
+}
+
+BOOST_AUTO_TEST_CASE(enqueue_broken_content_noindex)
+{
+  MediaSetAccess media( ( DATADIR).asUrl(), "/" );
+  Fetcher fetcher;
+
+  {
+        filesystem::TmpDir dest;
+        OnMediaLocation loc("/contentindex-broken-digest/subdir1/subdir1-file1.txt",1);
+        // key was already imported as trusted
+        fetcher.enqueue(loc);
+        fetcher.start(dest.path(), media);
+        fetcher.reset();
+        // now retrieve a file that is modified, so the checksum has to fail
+        loc = OnMediaLocation("/contentindex-broken-digest/subdir1/subdir1-file2.txt",1);
+        fetcher.enqueue(loc);
+        fetcher.start( dest.path(), media );
+        fetcher.reset();
+  }
+}
+
+
 BOOST_AUTO_TEST_CASE(fetcher_remove)
 {
   // at this point the key is already trusted
@@ -154,6 +258,8 @@ BOOST_AUTO_TEST_CASE(fetcher_remove)
       Fetcher fetcher;
       filesystem::TmpDir dest;
 
+      // auto add the SHA1SUMS
+      fetcher.setOptions( Fetcher::AutoAddIndexes );
       fetcher.enqueueDir(OnMediaLocation("/complexdir"), true);
       fetcher.start( dest.path(), media );
 
