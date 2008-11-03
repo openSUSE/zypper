@@ -34,6 +34,11 @@ BOOST_AUTO_TEST_CASE(fetcher_enqueuedir_noindex)
       fetcher.enqueueDir(OnMediaLocation("/complexdir"), true);
       fetcher.start( dest.path(), media );
       fetcher.reset();
+
+      BOOST_CHECK( PathInfo(dest.path() + "/complexdir/subdir2").isExist() );
+      BOOST_CHECK( PathInfo(dest.path() + "/complexdir/subdir2/subdir2-file1.txt").isExist() );
+      BOOST_CHECK( PathInfo(dest.path() + "/complexdir/subdir1/subdir1-file1.txt").isExist() );
+      BOOST_CHECK( PathInfo(dest.path() + "/complexdir/subdir1/subdir1-file2.txt").isExist() );
   }
 }
 
@@ -90,6 +95,12 @@ BOOST_AUTO_TEST_CASE(fetcher_enqueuebrokendir_noindex)
       // enqueue is not digested
       fetcher.start( dest.path(), media );
       fetcher.reset();
+
+      BOOST_CHECK( PathInfo(dest.path() + "/complexdir-broken/subdir2").isExist() );
+      BOOST_CHECK( PathInfo(dest.path() + "/complexdir-broken/subdir2/subdir2-file1.txt").isExist() );
+      BOOST_CHECK( PathInfo(dest.path() + "/complexdir-broken/subdir1/subdir1-file1.txt").isExist() );
+      BOOST_CHECK( PathInfo(dest.path() + "/complexdir-broken/subdir1/subdir1-file2.txt").isExist() );
+
   }
 }
 
@@ -177,6 +188,7 @@ BOOST_AUTO_TEST_CASE(content_index)
         fetcher.enqueue(loc);
         fetcher.start(dest.path(), media);
         fetcher.reset();
+        BOOST_CHECK( PathInfo(dest.path() + "/contentindex/subdir1/subdir1-file1.txt").isExist() );
   }
 
 }
@@ -194,6 +206,8 @@ BOOST_AUTO_TEST_CASE(enqueue_broken_content_index)
         fetcher.enqueue(loc);
         fetcher.start(dest.path(), media);
         fetcher.reset();
+        BOOST_CHECK( PathInfo(dest.path() + "/contentindex-broken-digest/subdir1/subdir1-file1.txt").isExist() );
+
         // now retrieve a file that is modified, so the checksum has to fail
         loc = OnMediaLocation("/contentindex-broken-digest/subdir1/subdir1-file2.txt",1);
         fetcher.enqueue(loc);
@@ -240,6 +254,8 @@ BOOST_AUTO_TEST_CASE(enqueue_broken_content_noindex)
         fetcher.enqueue(loc);
         fetcher.start( dest.path(), media );
         fetcher.reset();
+        BOOST_CHECK( PathInfo(dest.path() + "/contentindex-broken-digest/subdir1/subdir1-file2.txt").isExist() );
+
   }
 }
 
@@ -264,6 +280,12 @@ BOOST_AUTO_TEST_CASE(fetcher_remove)
       fetcher.start( dest.path(), media );
 
       fetcher.reset();
+
+      BOOST_CHECK( PathInfo(dest.path() + "/complexdir/subdir2").isExist() );
+      BOOST_CHECK( PathInfo(dest.path() + "/complexdir/subdir2/subdir2-file1.txt").isExist() );
+      BOOST_CHECK( PathInfo(dest.path() + "/complexdir/subdir1/subdir1-file1.txt").isExist() );
+      BOOST_CHECK( PathInfo(dest.path() + "/complexdir/subdir1/subdir1-file2.txt").isExist() );
+
 
       fetcher.enqueueDir(OnMediaLocation("/complexdir-broken"), true);
       BOOST_CHECK_THROW( fetcher.start( dest.path(), media ), Exception);
