@@ -1,4 +1,18 @@
 -------------------------------------------------------------------
+Mon Nov  3 15:30:53 CET 2008 - dmacvicar@suse.de
+
+- merge contributions by Jon Nelson, the patches resolve 
+  the following issues:
+- disable the "Pragma: nocache" header which is automatically 
+  used by curl.
+  re-enables the use of a caching http proxy (like squid or others) 
+  and corrects (bnc #326208)
+- don't generate an If-Modified-Since header if we don't have a
+  previous file to work with
+- don't generate a Proxy-Authenticate header if one is not called 
+  for.
+
+-------------------------------------------------------------------
 Fri Oct 31 14:01:57 CET 2008 - ma@suse.de
 
 - Do not save solver locks (by APPL_HIGH).

@@ -658,10 +658,12 @@ void MediaCurl::attachTo (bool next)
     }
 
     _proxyuserpwd = unEscape( _proxyuserpwd );
-    ret = curl_easy_setopt( _curl, CURLOPT_PROXYUSERPWD, _proxyuserpwd.c_str() );
-    if ( ret != 0 ) {
-      disconnectFrom();
-      ZYPP_THROW(MediaCurlSetOptException(_url, _curlError));
+    if ( ! _proxyuserpwd.empty() ) {
+        ret = curl_easy_setopt( _curl, CURLOPT_PROXYUSERPWD, _proxyuserpwd.c_str() );
+        if ( ret != 0 ) {
+            disconnectFrom();
+            ZYPP_THROW(MediaCurlSetOptException(_url, _curlError));
+        }
     }
   }
 
@@ -704,8 +706,18 @@ void MediaCurl::attachTo (bool next)
     ZYPP_THROW(MediaCurlSetOptException(_url, _curlError));
   }
 
+  _customHeaders = curl_slist_append(_customHeaders, "Pragma:");
+
+  if ( !_customHeaders ) {
+      ZYPP_THROW(MediaCurlInitException(_url));
+  }
+
   // now add the anonymous id header
   _customHeaders = curl_slist_append(_customHeaders, anonymousIdHeader());
+
+  if ( !_customHeaders ) {
+      ZYPP_THROW(MediaCurlInitException(_url));
+  }
   
   ret = curl_easy_setopt ( _curl, CURLOPT_HTTPHEADER, _customHeaders );
     
@@ -1192,9 +1204,11 @@ void MediaCurl::doGetFileCopy( const Pathname & filename , const Pathname & targ
     }
 
     // set IFMODSINCE time condition (no download if not modified)
-    curl_easy_setopt(_curl, CURLOPT_TIMECONDITION, CURL_TIMECOND_IFMODSINCE);
-    curl_easy_setopt(_curl, CURLOPT_TIMEVALUE, PathInfo(target).mtime());
-
+    if( PathInfo(target).isExist() ) {
+        curl_easy_setopt(_curl, CURLOPT_TIMECONDITION, CURL_TIMECOND_IFMODSINCE);
+        curl_easy_setopt(_curl, CURLOPT_TIMEVALUE, PathInfo(target).mtime());
+    }
+    
     string destNew = target.asString() + ".new.zypp.XXXXXX";
     char *buf = ::strdup( destNew.c_str());
     if( !buf)
