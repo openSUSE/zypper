@@ -1,11 +1,11 @@
 ADD_DEFINITIONS (
-  -DPACKAGE=\\\"${PACKAGE}\\\"
-  -DLOCALEDIR=\\\"${INSTALL_PREFIX}/share/locale\\\"
+  -DPACKAGE="${PACKAGE}"
+  -DLOCALEDIR="${INSTALL_PREFIX}/share/locale"
 )
 
 MESSAGE ( "** Locale dir is ${INSTALL_PREFIX}/share/locale" )
 
-INCLUDE_DIRECTORIES(${CMAKE_SOURCE_DIR}/src)
+INCLUDE_DIRECTORIES(${ZYPPER_SOURCE_DIR}/src)
 
 SET (zypper_HEADERS
   Zypper.h

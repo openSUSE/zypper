@@ -1,19 +1,20 @@
-PROJECT( zypper C CXX )
-SET( PACKAGE zypper )
+CMAKE_MINIMUM_REQUIRED(VERSION 2.6)
+PROJECT( ZYPPER C CXX )
+SET( PACKAGE "zypper" )
 
 # where to look first for cmake modules, before ${CMAKE_ROOT}/Modules/ is checked
 SET( CMAKE_MODULE_PATH
   ${ZYPP_PREFIX}/share/cmake/Modules
-  ${CMAKE_SOURCE_DIR}/cmake/modules
+  ${ZYPPER_SOURCE_DIR}/cmake/modules
   ${CMAKE_MODULE_PATH}
 )
 INCLUDE(ZyppCommon)
 
 # VERSION
-INCLUDE( ${CMAKE_SOURCE_DIR}/VERSION.cmake )
+INCLUDE( ${ZYPPER_SOURCE_DIR}/VERSION.cmake )
 SET( VERSION "${VERSION_MAJOR}.${VERSION_MINOR}.${VERSION_PATCH}" )
 ADD_DEFINITIONS( -D_FILE_OFFSET_BITS=64 )
-ADD_DEFINITIONS( -DVERSION=\\\"${VERSION}\\\" )
+ADD_DEFINITIONS( -DVERSION="${VERSION}" )
 
 SET( CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -g -O2 -Wall -Woverloaded-virtual -fstack-protector" )
 SET( CMAKE_C_FLAGS   "${CMAKE_C_FLAGS}   -g -O2 -Wall -fstack-protector" )
