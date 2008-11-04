@@ -1,5 +1,5 @@
 
-INCLUDE_DIRECTORIES( ${CMAKE_SOURCE_DIR}/vendor/shttpd )
+INCLUDE_DIRECTORIES( ${LIBZYPP_SOURCE_DIR}/vendor/shttpd )
 
 ADD_LIBRARY(zypp_test_utils
  TestSetup.h

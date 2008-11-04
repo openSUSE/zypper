@@ -1,7 +1,7 @@
-PROJECT(libzypp)
+PROJECT(LIBZYPP)
 SET( PACKAGE "libzypp" )
 # where to look first for cmake modules, before ${CMAKE_ROOT}/Modules/ is checked
-SET( CMAKE_MODULE_PATH ${CMAKE_SOURCE_DIR}/cmake/modules )
+SET( CMAKE_MODULE_PATH ${LIBZYPP_SOURCE_DIR}/cmake/modules )
 cmake_minimum_required(VERSION 2.6)
 
 # allow name libraries by name mixed with full
@@ -11,7 +11,7 @@ if(COMMAND cmake_policy)
 endif(COMMAND cmake_policy)
 
 INCLUDE(ZyppCommon)
-INCLUDE( ${CMAKE_SOURCE_DIR}/VERSION.cmake )
+INCLUDE( ${LIBZYPP_SOURCE_DIR}/VERSION.cmake )
 
 MATH( EXPR LIBZYPP_CURRENT "${LIBZYPP_MAJOR} * 100 + ${LIBZYPP_MINOR}" )
 MATH( EXPR LIBZYPP_AGE     "${LIBZYPP_MINOR} - ${LIBZYPP_COMPATMINOR}" )
@@ -127,12 +127,12 @@ MESSAGE(STATUS "soname: ${LIBZYPP_VERSION_INFO}")
 MESSAGE(STATUS "version: ${VERSION}")
 
 MESSAGE(STATUS "Writing pkg-config file...")
-CONFIGURE_FILE(${CMAKE_SOURCE_DIR}/libzypp.pc.cmake ${CMAKE_BINARY_DIR}/libzypp.pc @ONLY)
-INSTALL( FILES ${CMAKE_BINARY_DIR}/libzypp.pc DESTINATION ${LIB_INSTALL_DIR}/pkgconfig )
+CONFIGURE_FILE(${LIBZYPP_SOURCE_DIR}/libzypp.pc.cmake ${LIBZYPP_BINARY_DIR}/libzypp.pc @ONLY)
+INSTALL( FILES ${LIBZYPP_BINARY_DIR}/libzypp.pc DESTINATION ${LIB_INSTALL_DIR}/pkgconfig )
 
 MESSAGE(STATUS "FindZypp.cmake will be installed in ${CMAKE_INSTALL_PREFIX}/share/cmake/Modules")
-INSTALL( FILES ${CMAKE_SOURCE_DIR}/cmake/modules/FindZypp.cmake DESTINATION ${CMAKE_INSTALL_PREFIX}/share/cmake/Modules )
-INSTALL( FILES ${CMAKE_SOURCE_DIR}/cmake/modules/ZyppCommon.cmake DESTINATION ${CMAKE_INSTALL_PREFIX}/share/cmake/Modules )
+INSTALL( FILES ${LIBZYPP_SOURCE_DIR}/cmake/modules/FindZypp.cmake DESTINATION ${CMAKE_INSTALL_PREFIX}/share/cmake/Modules )
+INSTALL( FILES ${LIBZYPP_SOURCE_DIR}/cmake/modules/ZyppCommon.cmake DESTINATION ${CMAKE_INSTALL_PREFIX}/share/cmake/Modules )
 
 ####################################################################
 # config templates
@@ -140,14 +140,14 @@ INSTALL( FILES ${CMAKE_SOURCE_DIR}/cmake/modules/ZyppCommon.cmake DESTINATION ${
 ####################################################################
 
 MESSAGE(STATUS "zypp.conf will be installed in ${SYSCONFDIR}/zypp")
-INSTALL( FILES ${CMAKE_SOURCE_DIR}/zypp.conf DESTINATION ${SYSCONFDIR}/zypp )
+INSTALL( FILES ${LIBZYPP_SOURCE_DIR}/zypp.conf DESTINATION ${SYSCONFDIR}/zypp )
 
 #install systemCheck
 MESSAGE(STATUS "systemCheck will be installed in ${SYSCONFDIR}/zypp")
-INSTALL( FILES ${CMAKE_SOURCE_DIR}/systemCheck DESTINATION ${SYSCONFDIR}/zypp )
+INSTALL( FILES ${LIBZYPP_SOURCE_DIR}/systemCheck DESTINATION ${SYSCONFDIR}/zypp )
 
 # logrotate config file
-INSTALL( FILES ${CMAKE_SOURCE_DIR}/zypp-history.lr DESTINATION ${SYSCONFDIR}/logrotate.d )
+INSTALL( FILES ${LIBZYPP_SOURCE_DIR}/zypp-history.lr DESTINATION ${SYSCONFDIR}/logrotate.d )
 
 ####################################################################
 # SUBDIRECTORIES                                                   #
