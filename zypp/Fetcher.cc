@@ -133,7 +133,7 @@ namespace zypp
       /**
        * download the indexes and reads them
        */
-      void readIndexes( MediaSetAccess &media, const Pathname &dest_dir);
+      void downloadAndReadIndexList( MediaSetAccess &media, const Pathname &dest_dir);
 
       /**
        * reads a downloaded index file and updates internal
@@ -149,6 +149,9 @@ namespace zypp
       
       /** specific version of \ref readIndex for SHA1SUMS file */
       void readContentFileIndex( const Pathname &index, const Pathname &basedir );
+      
+      /** reads the content of a directory but keeps a cache **/
+      void getDirectoryContent( MediaSetAccess &media, const OnMediaLocation &resource, filesystem::DirContent &content );
       
       /**
        * tries to provide the file represented by job into dest_dir by
@@ -192,6 +195,9 @@ namespace zypp
     list<Pathname> _caches;
     // checksums read from the indexes
     map<string, CheckSum> _checksums;
+    // cache of dir contents
+    map<string, filesystem::DirContent> _dircontent;
+      
     Fetcher::Options _options;      
   };
   ///////////////////////////////////////////////////////////////////
@@ -269,6 +275,8 @@ namespace zypp
   {
     _resources.clear();
     _indexes.clear();
+    _checksums.clear();
+    _dircontent.clear();
   }
 
   void Fetcher::Impl::addCachePath( const Pathname &cache_dir )
@@ -404,7 +412,7 @@ namespace zypp
               indexloc.changeFilename(resource.filename() + "SHA1SUMS");
               addIndex(indexloc);
               // we need to read it now
-              readIndexes(media, dest_dir);
+              downloadAndReadIndexList(media, dest_dir);
           }
       }
       if ( _options & AutoAddContentFileIndexes )
@@ -419,8 +427,31 @@ namespace zypp
               indexloc.changeFilename(resource.filename() + "content");
               addIndex(indexloc);
               // we need to read it now
-              readIndexes(media, dest_dir);
+              downloadAndReadIndexList(media, dest_dir);
           }
+      }
+  }
+
+  void Fetcher::Impl::getDirectoryContent( MediaSetAccess &media,
+                                           const OnMediaLocation &resource,
+                                           filesystem::DirContent &content )
+  {
+      if ( _dircontent.find(resource.filename().asString()) 
+           != _dircontent.end() )
+      {
+          filesystem::DirContent filled(_dircontent[resource.filename().asString()]);
+          
+          std::copy(filled.begin(), filled.end(), std::back_inserter(content));
+      }
+      else
+      {
+          filesystem::DirContent tofill;
+          media.dirInfo( tofill,
+                         resource.filename(),
+                         false /* dots */,
+                         resource.medianr());
+          std::copy(tofill.begin(), tofill.end(), std::back_inserter(content));
+          _dircontent[resource.filename().asString()] = tofill;
       }
   }
     
@@ -432,7 +463,7 @@ namespace zypp
       // individual transfer jobs
       MIL << "Adding directory " << resource.filename() << endl;
       filesystem::DirContent content;
-      media.dirInfo( content, resource.filename(), false /* dots */, resource.medianr());
+      getDirectoryContent(media, resource, content);
       
       // this method test for the option flags so indexes are added
       // only if the options are enabled
@@ -462,6 +493,7 @@ namespace zypp
               }
               else
                   WAR << "Resource " << filename << " has no checksum in the index either." << endl;
+
               if ( flags & FetcherJob::AlwaysVerifyChecksum )
                   enqueueDigested(OnMediaLocation(filename, resource.medianr()).setChecksum(chksm));
               else
@@ -499,6 +531,12 @@ namespace zypp
               ZYPP_THROW( Exception("Can't create " + dest_full_path.dirname().asString()));
         if ( filesystem::copy(tmp_file, dest_full_path ) != 0 )
         {
+          if ( ! PathInfo(tmp_file).isExist() )
+              ERR << tmp_file << " does not exist" << endl;
+          if ( ! PathInfo(dest_full_path.dirname()).isExist() )
+              ERR << dest_full_path.dirname() << " does not exist" << endl;
+
+          media.releaseFile(resource); //not needed anymore, only eat space
           ZYPP_THROW( Exception("Can't copy " + tmp_file.asString() + " to " + dest_dir.asString()));
         }
 
@@ -582,7 +620,7 @@ namespace zypp
   // this method takes all the user pointed indexes, gets them and also tries to
   // download their signature, and verify them. After that, its parses each one
   // to fill the checksum cache.
-  void Fetcher::Impl::readIndexes( MediaSetAccess &media, const Pathname &dest_dir)
+  void Fetcher::Impl::downloadAndReadIndexList( MediaSetAccess &media, const Pathname &dest_dir)
   {
       // if there is no indexes, then just return to avoid
       // the directory listing
@@ -646,7 +684,7 @@ namespace zypp
     ProgressData progress(_resources.size());
     progress.sendTo(progress_receiver);
 
-    readIndexes(media, dest_dir);
+    downloadAndReadIndexList(media, dest_dir);
 
     for ( list<FetcherJob_Ptr>::const_iterator it_res = _resources.begin(); it_res != _resources.end(); ++it_res )
     {
@@ -657,6 +695,26 @@ namespace zypp
           addDirJobs(media, location, dest_dir, (*it_res)->flags);
           continue;
       }
+
+      // may be this code can be factored out
+      // together with the autodiscovery of indexes
+      // of addDirJobs
+      if ( ( _options & AutoAddSha1sumsIndexes ) ||
+           ( _options & AutoAddContentFileIndexes ) )
+      {
+          // if auto indexing is enabled, then we need to read the
+          // index for each file. We look only in the directory
+          // where the file is. this is expensive of course.
+          filesystem::DirContent content;
+          getDirectoryContent(media, (*it_res)->location.filename().dirname(), content);
+          // this method test for the option flags so indexes are added
+          // only if the options are enabled
+          MIL << "Autodiscovering signed indexes on '"
+              << (*it_res)->location.filename().dirname() << "' for '"
+              << (*it_res)->location.filename() << "'" << endl;
+          
+          autoaddIndexes(content, media, (*it_res)->location.filename().dirname(), dest_dir);
+      }        
 
       provideToDest(media, (*it_res)->location, dest_dir);
 
