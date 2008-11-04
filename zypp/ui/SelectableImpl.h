@@ -267,10 +267,15 @@ namespace zypp
     inline std::ostream & dumpOn( std::ostream & str, const Selectable::Impl & obj )
     {
       str << '[' << obj.kind() << ']' << obj.name() << ": " << obj.status() << endl;
+      if ( obj.candidateObj() )
+        str << "(C " << obj.candidateObj() << ")" << endl;
+      else
+        str << "(C NONE )" << endl;
       dumpRange( str << "  (I " << obj.installedSize() << ") ", obj.installedBegin(), obj.installedEnd() );
       if ( obj.installedEmpty() )
         str << endl << " ";
       dumpRange( str << " (A " << obj.availableSize() << ") ", obj.availableBegin(), obj.availableEnd() ) << endl;
+      
       return str;
     }
     /////////////////////////////////////////////////////////////////
