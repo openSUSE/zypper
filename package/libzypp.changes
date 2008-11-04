@@ -1,4 +1,11 @@
 -------------------------------------------------------------------
+Tue Nov  4 13:21:35 CET 2008 - jkupec@suse.cz
+
+- handle MediaTimeoutException also in MediaSetAccess::provideFile()
+  (bnc #439983)
+- revision 11568
+
+-------------------------------------------------------------------
 Mon Nov  3 15:30:53 CET 2008 - dmacvicar@suse.de
 
 - merge contributions by Jon Nelson, the patches resolve 
