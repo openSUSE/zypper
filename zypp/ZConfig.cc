@@ -125,6 +125,8 @@ namespace zypp
         }
       }
       MIL << "Default text locale is '" << ret << "'" << endl;
+#warning HACK AROUND BOOST_TEST_CATCH_SYSTEM_ERRORS
+      setenv( "BOOST_TEST_CATCH_SYSTEM_ERRORS", "no", 1 );
       return ret;
     }
 
