@@ -24,6 +24,7 @@
 #include "zypp/base/Iterator.h"
 #include "zypp/base/Gettext.h"
 #include "zypp/base/IOStream.h"
+#include "zypp/base/Functional.h"
 #include "zypp/base/UserRequestException.h"
 
 #include "zypp/ZConfig.h"
@@ -52,7 +53,7 @@
 
 #include "zypp/sat/Pool.h"
 
-using std::endl;
+using namespace std;
 
 ///////////////////////////////////////////////////////////////////
 namespace zypp
@@ -294,54 +295,121 @@ namespace zypp
 
       HistoryLog::setRoot(_root);
 
-      // create the anonymous unique id
-      // this value is used for statistics
-      Pathname idpath( home() / "AnonymousUniqueId");
+      createAnonymousId();
 
-      if ( ! PathInfo( idpath ).isExist() )
-      {
-          MIL << "creating anonymous unique id" << endl;
-
-          // if the file does not exist we need to generate the uuid file
-          const char* argv[] =
-          {
-              "/usr/bin/uuidgen",
-              "-r",
-              "-t",
-              NULL
-          };
-
-          ExternalProgram prog( argv,
-                                ExternalProgram::Normal_Stderr,
-                                false, -1, true);
-          std::string line;
-          std::ofstream idfile;
-          // make sure the path exists
-          filesystem::assert_dir( home() );
-          idfile.open( idpath.c_str() );
-
-          if ( idfile.good() )
-          {
-              for(line = prog.receiveLine();
-                  ! line.empty();
-                  line = prog.receiveLine() )
-              {
-                  MIL << line << endl;
-
-                  idfile << line;
-              }
-              prog.close();
-          }
-          else
-          {
-              // FIXME, should we ignore the error?
-              ZYPP_THROW(Exception("Can't open anonymous id file '" + idpath.asString() + "' for writing"));
-          }
-      }
 
       MIL << "Initialized target on " << _root << endl;
     }
 
+    /**
+     * generates a random id using uuidgen
+     */
+    static string generateRandomId()
+    {
+      string id;
+      const char* argv[] =
+      {
+         "/usr/bin/uuidgen",
+         "-r",
+         "-t",
+         NULL
+      };
+
+      ExternalProgram prog( argv,
+                            ExternalProgram::Normal_Stderr,
+                            false, -1, true);
+      std::string line;
+      for(line = prog.receiveLine();
+          ! line.empty();
+          line = prog.receiveLine() )
+      {
+          MIL << line << endl;
+          id = line;
+          break;
+      }
+      prog.close();
+      return id;
+    }
+    
+    /**
+     * updates the content of \p filename
+     * if \p condition is true, setting the content
+     * the the value returned by \p value
+     */
+    void updateFileContent( const Pathname &filename,
+                            boost::function<bool ()> condition,
+                            boost::function<string ()> value )
+    {
+        string val = value();
+        // if the value is empty, then just dont
+        // do anything, regardless of the condition
+        if ( val.empty() )
+            return;
+
+        if ( condition() )
+        {
+            MIL << "updating '" << filename << "' content." << endl;
+
+            // if the file does not exist we need to generate the uuid file
+        
+            std::ofstream filestr;
+            // make sure the path exists
+            filesystem::assert_dir( filename.dirname() );
+            filestr.open( filename.c_str() );
+
+            if ( filestr.good() )
+            {    
+                filestr << val;
+                filestr.close();
+            }
+            else
+            {
+                // FIXME, should we ignore the error?
+                ZYPP_THROW(Exception("Can't openfile '" + filename.asString() + "' for writing"));
+            }
+        }
+    }
+        
+    /** helper functor */
+    static bool fileMissing( const Pathname &pathname )
+    {
+        return ! PathInfo(pathname).isExist();
+    }
+                            
+    void TargetImpl::createAnonymousId() const
+    {
+      
+      // create the anonymous unique id
+      // this value is used for statistics
+      Pathname idpath( home() / "AnonymousUniqueId");
+      
+      updateFileContent( idpath,
+                         boost::bind(fileMissing, idpath),
+                         generateRandomId );
+    }
+      
+    void TargetImpl::createLastBaseProductFlavorCache() const
+    {
+      // create the anonymous unique id
+      // this value is used for statistics
+      Pathname flavorpath( home() / "LastBaseProductFlavor");
+
+      // is there a product
+      Product::constPtr p = baseProduct();
+      if ( ! p )
+      {
+          WAR << "No base product, can't create flavor cache" << endl;
+          return;
+      }
+      
+      string flavor = p->flavor();
+      
+      //updateFileContent( flavorpath,
+      //                   // only if flavor is not empty
+      //                   ( flavor.empty() ? functor::False() : functor::True() ),
+      //                   flavor );
+    }
+      
     ///////////////////////////////////////////////////////////////////
     //
     //	METHOD NAME : TargetImpl::~TargetImpl

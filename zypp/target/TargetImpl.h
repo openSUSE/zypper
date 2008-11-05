@@ -70,6 +70,17 @@ namespace zypp
       /** Null implementation */
       static TargetImpl_Ptr nullimpl();
 
+      /** 
+       * generates the unique anonymous id which is called
+       * when creating the target
+       */
+      void createAnonymousId() const;
+
+      /**
+       * generates a cache of the last product flavor
+       */
+      void createLastBaseProductFlavorCache() const;
+
       void load();
 
       void unload();
