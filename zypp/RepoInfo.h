@@ -111,6 +111,11 @@ namespace zypp
        */
       urls_const_iterator baseUrlsEnd() const;
       /**
+       * Pars pro toto: The first repository url
+       */
+      Url url() const
+      { return( baseUrlsEmpty() ? Url() : *baseUrlsBegin()); }
+      /**
        * A Url under which the metadata are located, or a set of mirrors.
        *
        * This can't be empty in order the repository to be valid

@@ -36,26 +36,24 @@ namespace zypp
      */
     class RepoException : public Exception
     {
-    public:
-      /** Default ctor */
-      RepoException();
-      /** Ctor */
-      RepoException( const std::string & msg_r );
+      public:
+        RepoException();
+        RepoException( const std::string & msg_r );
+        RepoException( const RepoInfo & info );
+        RepoException( const RepoInfo & info, const std::string & msg_r );
+        virtual ~RepoException() throw();
 
-      RepoException( const RepoInfo & info );
+        RepoInfo info()
+        { return _info; }
 
-      RepoException( const RepoInfo & info, const std::string & msg_r );
+        std::string alias()
+        { return info().alias(); }
 
-      virtual ~RepoException() throw() {}
+      protected:
+        virtual std::ostream & dumpOn( std::ostream & str ) const;
 
-      RepoInfo info()
-      { return _info; }
-
-    protected:
-      virtual std::ostream & dumpOn( std::ostream & str ) const;
-
-    private:
-      RepoInfo _info;
+      private:
+        RepoInfo _info;
     };
     ///////////////////////////////////////////////////////////////////
 
@@ -66,9 +64,11 @@ namespace zypp
      */
     class RepoNotCachedException : public RepoException
     {
-    public:
-      RepoNotCachedException( const RepoInfo& info );
-      RepoNotCachedException( const RepoInfo& info, const std::string & msg_r );
+      public:
+        RepoNotCachedException();
+        RepoNotCachedException( const std::string & msg_r );
+        RepoNotCachedException( const RepoInfo & info );
+        RepoNotCachedException( const RepoInfo & info, const std::string & msg_r );
     };
 
     /**
@@ -78,13 +78,10 @@ namespace zypp
     class RepoNoUrlException : public RepoException
     {
       public:
-      RepoNoUrlException()
-      {}
-
-      RepoNoUrlException( const RepoInfo &info)
-        : RepoException(info)
-        {}
-
+        RepoNoUrlException();
+        RepoNoUrlException( const std::string & msg_r );
+        RepoNoUrlException( const RepoInfo & info );
+        RepoNoUrlException( const RepoInfo & info, const std::string & msg_r );
     };
 
     /**
@@ -93,7 +90,11 @@ namespace zypp
      */
     class RepoNoAliasException : public RepoException
     {
-
+      public:
+        RepoNoAliasException();
+        RepoNoAliasException( const std::string & msg_r );
+        RepoNoAliasException( const RepoInfo & info );
+        RepoNoAliasException( const RepoInfo & info, const std::string & msg_r );
     };
 
     /**
@@ -102,10 +103,11 @@ namespace zypp
      */
     class RepoNotFoundException : public RepoException
     {
-    public:
-      RepoNotFoundException( const RepoInfo &info)
-        : RepoException(info)
-      {}
+      public:
+        RepoNotFoundException();
+        RepoNotFoundException( const std::string & msg_r );
+        RepoNotFoundException( const RepoInfo & info );
+        RepoNotFoundException( const RepoInfo & info, const std::string & msg_r );
     };
 
     /**
@@ -114,18 +116,11 @@ namespace zypp
      */
     class RepoAlreadyExistsException : public RepoException
     {
-    public:
-      RepoAlreadyExistsException( const RepoInfo &info,
-                                  const std::string & msg_r )
-        : RepoException(info,msg_r)
-      {}
-
-      RepoAlreadyExistsException( const RepoInfo &info )
-        : RepoException(info)
-      {}
-
-      std::string alias()
-      { return info().alias(); }
+      public:
+        RepoAlreadyExistsException();
+        RepoAlreadyExistsException( const std::string & msg_r );
+        RepoAlreadyExistsException( const RepoInfo & info );
+        RepoAlreadyExistsException( const RepoInfo & info, const std::string & msg_r );
     };
 
     /**
@@ -134,16 +129,11 @@ namespace zypp
      */
     class RepoUnknownTypeException : public RepoException
     {
-    public:
-      RepoUnknownTypeException( const std::string & msg_r )
-        : RepoException(msg_r)
-      {}
-
-      RepoUnknownTypeException( const RepoInfo &info );
-
-      RepoUnknownTypeException()
-      {}
-
+      public:
+        RepoUnknownTypeException();
+        RepoUnknownTypeException( const std::string & msg_r );
+        RepoUnknownTypeException( const RepoInfo & info );
+        RepoUnknownTypeException( const RepoInfo & info, const std::string & msg_r );
     };
 
     /**
@@ -152,13 +142,11 @@ namespace zypp
      */
     class RepoMetadataException : public RepoException
     {
-    public:
-      RepoMetadataException( const RepoInfo &info)
-        : RepoException(info)
-      {}
-
-      RepoMetadataException()
-      {}
+      public:
+        RepoMetadataException();
+        RepoMetadataException( const std::string & msg_r );
+        RepoMetadataException( const RepoInfo & info );
+        RepoMetadataException( const RepoInfo & info, const std::string & msg_r );
     };
 
     //@}
@@ -184,7 +172,10 @@ namespace zypp
         ServiceInfo service()
         { return _service; }
 
-      protected:
+        std::string alias()
+        { return service().alias(); }
+
+     protected:
         virtual std::ostream & dumpOn( std::ostream & str ) const;
 
       private:

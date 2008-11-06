@@ -10,7 +10,6 @@
  *
 */
 #include <iostream>
-//#include "zypp/base/Logger.h"
 #include "zypp/repo/RepoException.h"
 #include "zypp/base/String.h"
 
@@ -41,29 +40,36 @@ namespace zypp
     : Exception( "Repo exception" ), _info( info )
     {}
 
-    RepoException::RepoException( const RepoInfo & info,
-        const std::string& msg_r )
+    RepoException::RepoException( const RepoInfo & info, const std::string& msg_r )
     : Exception( msg_r ), _info( info )
     {}
 
-    RepoNotCachedException::RepoNotCachedException( const RepoInfo& info )
-    : RepoException( info, "Repository not Cached" )
-    {}
-
-    RepoNotCachedException::RepoNotCachedException(  const RepoInfo& info,
-        const std::string & msg_r )
-    : RepoException( info, msg_r )
-    {}
-
-    RepoUnknownTypeException::RepoUnknownTypeException( const RepoInfo &info)
-    : RepoException( info,
-        str::form("Cannot determine type for repository %s.",info.alias().c_str()))
+    RepoException::~RepoException() throw()
     {}
 
     std::ostream & RepoException::dumpOn( std::ostream & str ) const
     {
+      str << "[" << _info.alias() << "|" << _info.url() << "] ";
       return Exception::dumpOn( str );
     }
+
+    ///////////////////////////////////////////////////////////////////
+
+#define DEF_CTORS( CLASS, MSG ) \
+    CLASS::CLASS()                                                        : RepoException( MSG ) {} \
+    CLASS::CLASS( const std::string & msg_r )                             : RepoException( msg_r ) {} \
+    CLASS::CLASS( const RepoInfo & service_r )                            : RepoException( service_r, MSG ) {} \
+    CLASS::CLASS( const RepoInfo & service_r, const std::string & msg_r ) : RepoException( service_r, msg_r ) {}
+
+    DEF_CTORS( RepoNotCachedException,      "Repository is not cached" );
+    DEF_CTORS( RepoNoUrlException,          "Repository has no or invalid url defined." );
+    DEF_CTORS( RepoNoAliasException,        "Repository has no alias defined." );
+    DEF_CTORS( RepoNotFoundException,       "Repository not found." );
+    DEF_CTORS( RepoAlreadyExistsException,  "Repository already exists." );
+    DEF_CTORS( RepoUnknownTypeException,    "Repository type can't be determined." );
+    DEF_CTORS( RepoMetadataException,       "Repository metadata not usable." );
+
+#undef DEF_CTORS
 
     ///////////////////////////////////////////////////////////////////
     //
