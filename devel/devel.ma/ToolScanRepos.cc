@@ -14,13 +14,22 @@ int main( int argc, char * argv[] )
 
   if ( ! argc )
   {
-    cerr << "Usage: " << appname << " URL..." << endl;
-    cerr << "  Load repos from URL to test system below /tmp/" << appname << endl;
+    cerr << "Usage: " << appname << "[OPTIONS] URL..." << endl;
+    cerr << "  Load repos from URL to test system below /tmp/" << appname << "." << endl;
+    cerr << "  --nc Do not clear an existing test system but reuse it." << endl;
     return 0;
   }
 
   Pathname mroot( "/tmp/"+appname );
-  filesystem::recursive_rmdir( mroot );
+  if ( argc && argv[0] == std::string("--nc") )
+  {
+    --argc;
+    ++argv;
+  }
+  else
+  {
+    filesystem::recursive_rmdir( mroot );
+  }
   filesystem::assert_dir( mroot );
   TestSetup test( mroot, Arch_x86_64 );
 

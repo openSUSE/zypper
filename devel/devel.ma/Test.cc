@@ -1,28 +1,4 @@
 #include "Tools.h"
-#include "ExplicitMap.h"
-#include <boost/call_traits.hpp>
-
-#include <iostream>
-#include <fstream>
-#include <map>
-
-#include <zypp/base/LogControl.h>
-#include <zypp/base/LogTools.h>
-#include "zypp/base/Exception.h"
-#include "zypp/base/InputStream.h"
-#include "zypp/base/DefaultIntegral.h"
-#include <zypp/base/Function.h>
-#include <zypp/base/Iterator.h>
-
-#include <zypp/Pathname.h>
-#include <zypp/Edition.h>
-#include <zypp/CheckSum.h>
-#include <zypp/Date.h>
-
-using namespace std;
-using namespace zypp;
-
-///////////////////////////////////////////////////////////////////
 
 /******************************************************************
 **
@@ -32,6 +8,13 @@ using namespace zypp;
 int main( int argc, char * argv[] )
 {
   INT << "===[START]==========================================" << endl;
+
+  // https://bugzilla.novell.com/show_bug.cgi?id=442200
+
+  Pathname mroot( "/tmp/ToolScanRepos" );
+  TestSetup test( mroot, Arch_x86_64 );
+  test.loadRepos();
+
 
   INT << "===[END]============================================" << endl << endl;
   return 0;

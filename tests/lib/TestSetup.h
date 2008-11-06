@@ -84,6 +84,7 @@ class TestSetup
     void loadRepo( RepoInfo nrepo )
     {
       RepoManager rmanager( repomanager() );
+      rmanager.addRepository( nrepo );
       rmanager.buildCache( nrepo );
       rmanager.loadFromCache( nrepo );
     }
@@ -112,6 +113,37 @@ class TestSetup
       satpool().addRepoSolv( path_r, nrepo );
     }
 
+  public:
+    /** Load all enabled repos in repos.d to pool. */
+    void loadRepos()
+    {
+      RepoManager repoManager( repomanager() );
+      RepoInfoList repos = repoManager.knownRepositories();
+      for ( RepoInfoList::iterator it = repos.begin(); it != repos.end(); ++it )
+      {
+        RepoInfo & nrepo( *it );
+        USR << nrepo << endl;
+
+        if ( ! nrepo.enabled() )
+          continue;
+
+        if ( ! repoManager.isCached( nrepo ) || nrepo.type() == repo::RepoType::RPMPLAINDIR )
+        {
+          if ( repoManager.isCached( nrepo ) )
+          {
+            USR << "cleanCache" << endl;
+            repoManager.cleanCache( nrepo );
+          }
+          //USR << "refreshMetadata" << endl;
+          //repoManager.refreshMetadata( nrepo );
+          USR << "buildCache" << endl;
+          repoManager.buildCache( nrepo );
+        }
+        USR << "Create from cache" << endl;
+        repoManager.loadFromCache( nrepo );
+      }
+
+    }
   private:
     void _ctor( const Pathname & rootdir_r, const Arch & sysarch_r )
     {

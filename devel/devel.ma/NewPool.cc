@@ -501,8 +501,8 @@ try {
         getZYpp()->initializeTarget( sysRoot );
       }
       getZYpp()->target()->load();
-      USR << getZYpp()->target()->targetDistribution() << endl;
-      USR << getZYpp()->target()->targetDistributionRelease() << endl;
+      USR << "targetDistribution:        " << getZYpp()->target()->targetDistribution() << endl;
+      USR << "targetDistributionRelease: " << getZYpp()->target()->targetDistributionRelease() << endl;
       dumpRange( USR << "Product ", pool.byKindBegin<Product>(), pool.byKindEnd<Product>() ) << endl;
     }
   }
