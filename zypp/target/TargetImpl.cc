@@ -330,7 +330,7 @@ namespace zypp
       prog.close();
       return id;
     }
-    
+
     /**
      * updates the content of \p filename
      * if \p condition is true, setting the content
@@ -351,14 +351,14 @@ namespace zypp
             MIL << "updating '" << filename << "' content." << endl;
 
             // if the file does not exist we need to generate the uuid file
-        
+
             std::ofstream filestr;
             // make sure the path exists
             filesystem::assert_dir( filename.dirname() );
             filestr.open( filename.c_str() );
 
             if ( filestr.good() )
-            {    
+            {
                 filestr << val;
                 filestr.close();
             }
@@ -369,25 +369,25 @@ namespace zypp
             }
         }
     }
-        
+
     /** helper functor */
     static bool fileMissing( const Pathname &pathname )
     {
         return ! PathInfo(pathname).isExist();
     }
-                            
+
     void TargetImpl::createAnonymousId() const
     {
-      
+
       // create the anonymous unique id
       // this value is used for statistics
       Pathname idpath( home() / "AnonymousUniqueId");
-      
+
       updateFileContent( idpath,
                          boost::bind(fileMissing, idpath),
                          generateRandomId );
     }
-      
+
     void TargetImpl::createLastBaseProductFlavorCache() const
     {
       // create the anonymous unique id
@@ -401,15 +401,15 @@ namespace zypp
           WAR << "No base product, can't create flavor cache" << endl;
           return;
       }
-      
+
       string flavor = p->flavor();
-      
+
       //updateFileContent( flavorpath,
       //                   // only if flavor is not empty
       //                   ( flavor.empty() ? functor::False() : functor::True() ),
       //                   flavor );
     }
-      
+
     ///////////////////////////////////////////////////////////////////
     //
     //	METHOD NAME : TargetImpl::~TargetImpl
@@ -1009,16 +1009,12 @@ namespace zypp
       ResPool pool(ResPool::instance());
       for_( it, pool.byKindBegin<Product>(), pool.byKindEnd<Product>() )
       {
-        Product::constPtr p = asKind<Product>((*it).resolvable());  
-        if ( p && (*it).status().isInstalled() )
-        {
-          if ( p->isTargetDistribution() )
-            return p;
-        }      
+        Product::constPtr p = (*it)->asKind<Product>();
+        if ( p->isTargetDistribution() )
+          return p;
       }
-        
       return 0L;
-    }  
+    }
 
     std::string TargetImpl::targetDistribution() const
     { return rpmdb2solvAttr( "register.target", _root ); }
