@@ -1331,6 +1331,22 @@ void SATResolver::setSystemRequirements()
 	queue_push( &(_jobQueue), iter->id() );
 	MIL << "SYSTEM Conflicts " << *iter << endl;
     }
+
+    // try to prefer none architecture change if possible
+    // So the architecture of the "rpm" package should be prefered
+    Capability cap("rpm");
+    sat::WhatProvides rpmProviders(cap);
+    for_( iter2, rpmProviders.begin(), rpmProviders.end() ) {
+	PoolItem provider = ResPool::instance().find(*iter2);
+	if (provider.status().isInstalled()) {
+	    queue_push(&(_jobQueue), SOLVER_INSTALL|SOLVABLE_NAME|SOLVER_ESSENTIAL);
+	    sat::detail::IdType nid = IdString( provider->name() ).id();
+	    queue_push(&(_jobQueue), rel2id(_SATPool,
+					    nid,
+					    provider->arch().id(), REL_ARCH, true));	    
+	}
+    }
+    
 }
 
 
