@@ -1,4 +1,10 @@
 -------------------------------------------------------------------
+Thu Nov  6 16:23:03 CET 2008 - schubi@suse.de
+
+- added flag: ignorealreadyrecommended to the testcases (bnc #432136)
+- revsion 11539 
+
+-------------------------------------------------------------------
 Thu Nov  6 09:41:48 CET 2008 - schubi@suse.de
 
 - Adding rule rpm-arch for installed rpm package in order to avoid 
