@@ -44,6 +44,8 @@
 #include "zypp/target/rpm/librpmDb.h"
 #include "zypp/target/CommitPackageCache.h"
 
+#include "zypp/parser/ProductFileReader.h"
+
 #include "zypp/pool/GetResolvablesToInsDel.h"
 #include "zypp/solver/detail/Helper.h"
 
@@ -978,32 +980,6 @@ namespace zypp
 
     ///////////////////////////////////////////////////////////////////
 
-    namespace
-    {
-      std::string rpmdb2solvAttr( const std::string & attr_r, const Pathname & root_r )
-      {
-        std::ostringstream cmd;
-        cmd << "rpmdb2solv";
-        cmd << " -n";
-        if ( ! root_r.empty() )
-          cmd << " -r '" << root_r << "'";
-        cmd << " -p '" << Pathname::assertprefix( root_r, "/etc/products.d" ) << "'";
-        cmd << " -a " << attr_r;
-
-        MIL << "Executing: " << cmd << endl;
-        ExternalProgram prog( cmd.str(), ExternalProgram::Discard_Stderr );
-        for ( std::string output( prog.receiveLine() ); output.length(); output = prog.receiveLine() )
-        {
-          return str::trim(output);
-        }
-
-        int ret = prog.close();
-        WAR << "Got no output from rpmdb2solv (returned " << ret << ")." << endl;
-
-        return std::string();
-      }
-    }
-
     Product::constPtr TargetImpl::baseProduct() const
     {
       ResPool pool(ResPool::instance());
@@ -1016,17 +992,38 @@ namespace zypp
       return 0L;
     }
 
+    namespace
+    {
+      parser::ProductFileData baseproductdata( const Pathname & root_r )
+      {
+        PathInfo baseproduct( Pathname::assertprefix( root_r, "/etc/products.d/baseproduct" ) );
+        if ( baseproduct.isFile() )
+        {
+          try
+          {
+            return parser::ProductFileReader::scanFile( baseproduct.path() );
+          }
+          catch ( const Exception & excpt )
+          {
+            ZYPP_CAUGHT( excpt );
+          }
+        }
+        return parser::ProductFileData();
+      }
+
+    }
+
     std::string TargetImpl::targetDistribution() const
-    { return rpmdb2solvAttr( "register.target", _root ); }
+    { return baseproductdata( _root ).registerTarget(); }
 
     std::string TargetImpl::targetDistributionRelease() const
-    { return rpmdb2solvAttr( "register.release", _root ); }
+    { return baseproductdata( _root ).registerRelease(); }
 
     std::string TargetImpl::distributionVersion() const
     {
       if ( _distributionVersion.empty() )
       {
-        _distributionVersion = rpmdb2solvAttr( "releasever", _root );
+        _distributionVersion = baseproductdata( _root ).edition().version();
         if ( !_distributionVersion.empty() )
           MIL << "Remember distributionVersion = '" << _distributionVersion << "'" << endl;
       }
