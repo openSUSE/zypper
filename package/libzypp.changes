@@ -1,4 +1,11 @@
 -------------------------------------------------------------------
+Thu Nov  6 09:41:48 CET 2008 - schubi@suse.de
+
+- Adding rule rpm-arch for installed rpm package in order to avoid 
+  unneeded architecture change. (bnc #441004)
+- revision 11585
+
+-------------------------------------------------------------------
 Tue Nov  4 13:21:35 CET 2008 - jkupec@suse.cz
 
 - handle MediaTimeoutException also in MediaSetAccess::provideFile()
