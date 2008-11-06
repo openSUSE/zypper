@@ -385,9 +385,17 @@ namespace zypp
       // this value is used for statistics
       Pathname idpath( home() / "AnonymousUniqueId");
 
-      updateFileContent( idpath,
-                         boost::bind(fileMissing, idpath),
-                         generateRandomId );
+      try
+      {   
+        updateFileContent( idpath,
+                           boost::bind(fileMissing, idpath),
+                           generateRandomId );
+      }
+      catch ( const Exception &e )
+      {
+        WAR << "Can't create anonymous id file" << endl;
+      }
+      
     }
 
     void TargetImpl::createLastDistributionFlavorCache() const
@@ -405,11 +413,20 @@ namespace zypp
       }
 
       string flavor = p->flavor();
-
-      updateFileContent( flavorpath,
-                         // only if flavor is not empty
-                         functor::Constant<bool>( ! flavor.empty() ),
-                         functor::Constant<string>(flavor) );
+      
+      try
+      {
+          
+        updateFileContent( flavorpath,
+                           // only if flavor is not empty
+                           functor::Constant<bool>( ! flavor.empty() ),
+                           functor::Constant<string>(flavor) );
+      }
+      catch ( const Exception &e )
+      {
+        WAR << "Can't create flavor cache" << endl;
+        return;
+      }
     }
 
     ///////////////////////////////////////////////////////////////////
