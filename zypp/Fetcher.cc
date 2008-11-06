@@ -136,6 +136,11 @@ namespace zypp
       void downloadAndReadIndexList( MediaSetAccess &media, const Pathname &dest_dir);
 
       /**
+       * download the indexes and reads them
+       */
+      void downloadIndex( MediaSetAccess &media, const OnMediaLocation &resource, const Pathname &dest_dir);
+
+      /**
        * reads a downloaded index file and updates internal
        * attributes table
        *
@@ -616,7 +621,52 @@ namespace zypp
       else
           ZYPP_THROW(Exception("Can't open SHA1SUMS file: " + index.asString()));
   }
+
+  void Fetcher::Impl::downloadIndex( MediaSetAccess &media, const OnMediaLocation &resource, const Pathname &dest_dir)
+  {
+    MIL << "downloading index " << resource << endl;
     
+    // create a new fetcher with a different state to transfer the
+    // file containing checksums and its signature
+    Fetcher fetcher;
+    // signature checker for index. We havent got the signature from
+    // the nextwork yet.
+    SignatureFileChecker sigchecker;
+      
+    // build the name of the index and the signature
+    OnMediaLocation idxloc(resource);
+    OnMediaLocation sigloc(resource);
+    OnMediaLocation keyloc(resource);
+
+    // we should not fail the download if those don't exists
+    // the checking will warn later
+    sigloc.setOptional(true);
+    keyloc.setOptional(true);
+        
+    // calculate signature and key name
+    sigloc.changeFilename( sigloc.filename().extend(".asc") );
+    keyloc.changeFilename( keyloc.filename().extend(".key") );
+          
+    //assert_dir(dest_dir + idxloc.filename().dirname());
+          
+    // transfer the signature
+    fetcher.enqueue(sigloc);
+    fetcher.start( dest_dir, media );
+    // if we get the signature, update the checker
+    sigchecker = SignatureFileChecker(dest_dir + sigloc.filename());
+    fetcher.reset();
+          
+    // now the key
+    fetcher.enqueue(keyloc);
+    fetcher.start( dest_dir, media );
+    fetcher.reset();
+          
+    // now the index itself
+    fetcher.enqueue( idxloc, FileChecker(sigchecker) );
+    fetcher.start( dest_dir, media );
+    fetcher.reset();
+ }
+
   // this method takes all the user pointed indexes, gets them and also tries to
   // download their signature, and verify them. After that, its parses each one
   // to fill the checksum cache.
@@ -630,47 +680,12 @@ namespace zypp
           return;
       }
 
-      // create a new fetcher with a different state to transfer the
-      // file containing checksums and its signature
-      Fetcher fetcher;
-      // signature checker for index. We havent got the signature from
-      // the nextwork yet.
-      SignatureFileChecker sigchecker;
-      
       for ( list<FetcherIndex_Ptr>::const_iterator it_idx = _indexes.begin();
             it_idx != _indexes.end(); ++it_idx )
       {
-          MIL << "reading index " << (*it_idx)->location << endl;
-          // build the name of the index and the signature
-          OnMediaLocation idxloc((*it_idx)->location);
-          OnMediaLocation sigloc((*it_idx)->location.setOptional(true));
-          OnMediaLocation keyloc((*it_idx)->location.setOptional(true));
-
-          // calculate signature and key name
-          sigloc.changeFilename( sigloc.filename().extend(".asc") );
-          keyloc.changeFilename( keyloc.filename().extend(".key") );
-
-          //assert_dir(dest_dir + idxloc.filename().dirname());
-
-          // transfer the signature
-          fetcher.enqueue(sigloc);
-          fetcher.start( dest_dir, media );
-          // if we get the signature, update the checker
-          sigchecker = SignatureFileChecker(dest_dir + sigloc.filename());
-          fetcher.reset();
-          
-          // now the key
-          fetcher.enqueue(keyloc);
-          fetcher.start( dest_dir, media );
-          fetcher.reset();
-
-          // now the index itself
-          fetcher.enqueue( idxloc, FileChecker(sigchecker) );
-          fetcher.start( dest_dir, media );
-          fetcher.reset();
-
+          downloadIndex( media, (*it_idx)->location, dest_dir );
           // now we have the indexes in dest_dir
-          readIndex( dest_dir + idxloc.filename(), idxloc.filename().dirname() );
+          readIndex( dest_dir + (*it_idx)->location.filename(), (*it_idx)->location.filename().dirname() );
       }
       MIL << "done reading indexes" << endl;
   }
@@ -714,6 +729,17 @@ namespace zypp
               << (*it_res)->location.filename() << "'" << endl;
           
           autoaddIndexes(content, media, (*it_res)->location.filename().dirname(), dest_dir);
+
+          // also look in the root of the media
+          content.clear();
+          getDirectoryContent(media, Pathname("/"), content);
+          // this method test for the option flags so indexes are added
+          // only if the options are enabled
+          MIL << "Autodiscovering signed indexes on '"
+              << "/" << "' for '"
+              << (*it_res)->location.filename() << "'" << endl;
+          
+          autoaddIndexes(content, media, Pathname("/"), dest_dir);
       }        
 
       provideToDest(media, (*it_res)->location, dest_dir);
