@@ -104,6 +104,31 @@ static const char *const anonymousIdHeader()
   return _value.c_str();
 }
 
+static const char *const distributionFlavorHeader()
+{
+  // we need to add the release and identifier to the
+  // agent string.
+  // The target could be not initialized, and then this information
+  // is not available.
+  Target_Ptr target;
+  // FIXME this has to go away as soon as the target
+  // does not throw when not initialized.
+  try {
+      target = zypp::getZYpp()->target();
+  }
+  catch ( const Exception &e )
+  {
+      // nothing to do
+  }
+
+  static const std::string _value(
+      str::trim( str::form(
+          "X-ZYpp-DistributionFlavor: %s",
+          target ? target->distributionFlavor().c_str() : "" ) )
+  );
+  return _value.c_str();
+}
+
 const char *const MediaAria2c::agentString()
 {
   // we need to add the release and identifier to the
@@ -200,6 +225,7 @@ void MediaAria2c::attachTo (bool next)
   
    // add the anonymous id.
    _args.push_back(str::form("--header=%s", anonymousIdHeader() ));
+   _args.push_back(str::form("--header=%s", distributionFlavorHeader() ));
   // TODO add debug option
    
   // Transfer timeout

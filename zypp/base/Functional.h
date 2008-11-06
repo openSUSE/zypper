@@ -214,6 +214,29 @@ namespace zypp
     */
     //@{
 
+    /* functor that always returns a copied
+       value */
+    template<class T>
+    struct Constant
+    {
+      Constant( const T &value )
+        : _value(value)
+      {}
+
+      template<class _Tp>
+      T operator()( _Tp ) const
+      { return _value; }
+
+      T operator()() const
+      { return _value; }
+
+      T _value;
+    };
+
+    template<class T>
+    inline Constant<T> constant( const T &value )
+    { return Constant<T>(value); }
+
     /** Logical functor always \c true.
     */
     struct True

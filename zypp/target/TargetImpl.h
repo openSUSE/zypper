@@ -79,7 +79,7 @@ namespace zypp
       /**
        * generates a cache of the last product flavor
        */
-      void createLastBaseProductFlavorCache() const;
+      void createLastDistributionFlavorCache() const;
 
       void load();
 
@@ -163,6 +163,9 @@ namespace zypp
 
       /** \copydoc Target::distributionVersion()*/
       std::string distributionVersion() const;
+
+      /** \copydoc Target::distributionFlavor() */
+      std::string distributionFlavor() const;
 
     protected:
       /** Path to the target */

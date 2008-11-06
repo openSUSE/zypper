@@ -97,6 +97,9 @@ namespace zypp
   std::string Target::release() const
   { return _pimpl->release(); }
 
+  std::string Target::distributionFlavor() const
+  { return _pimpl->distributionFlavor(); }
+
   std::string Target::targetDistribution() const
   { return _pimpl->targetDistribution(); }
 

@@ -390,26 +390,26 @@ namespace zypp
                          generateRandomId );
     }
 
-    void TargetImpl::createLastBaseProductFlavorCache() const
+    void TargetImpl::createLastDistributionFlavorCache() const
     {
       // create the anonymous unique id
       // this value is used for statistics
-      Pathname flavorpath( home() / "LastBaseProductFlavor");
+      Pathname flavorpath( home() / "LastDistributionFlavor");
 
       // is there a product
       Product::constPtr p = baseProduct();
       if ( ! p )
       {
-          WAR << "No base product, can't create flavor cache" << endl;
+          WAR << "No base product, I won't create flavor cache" << endl;
           return;
       }
 
       string flavor = p->flavor();
 
-      //updateFileContent( flavorpath,
-      //                   // only if flavor is not empty
-      //                   ( flavor.empty() ? functor::False() : functor::True() ),
-      //                   flavor );
+      updateFileContent( flavorpath,
+                         // only if flavor is not empty
+                         functor::Constant<bool>( ! flavor.empty() ),
+                         functor::Constant<string>(flavor) );
     }
 
     ///////////////////////////////////////////////////////////////////
@@ -587,7 +587,9 @@ namespace zypp
           ResPool::instance().setHardLockQueries( hardLocks );
         }
       }
-
+      
+      // now that the target is loaded, we can cache the flavor
+      createLastDistributionFlavorCache();
 
       MIL << "Target loaded: " << system.solvablesSize() << " resolvables" << endl;
     }
@@ -1028,6 +1030,18 @@ namespace zypp
           MIL << "Remember distributionVersion = '" << _distributionVersion << "'" << endl;
       }
       return _distributionVersion;
+    }
+
+    std::string TargetImpl::distributionFlavor() const
+    {
+        std::ifstream idfile( ( home() / "LastDistributionFlavor" ).c_str() );
+        for( iostr::EachLine in( idfile ); in; in.next() )
+        {
+            std::string line( str::trim( *in ) );
+            if ( ! line.empty() )
+                return line;
+        }
+        return std::string();
     }
 
     ///////////////////////////////////////////////////////////////////

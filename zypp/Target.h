@@ -153,6 +153,15 @@ namespace zypp
     
 
     /**
+     * This is \flavor attribute of the installed base product
+     * but does not require the target to be loaded as it remembers
+     * the last used one. It can be empty is the target has never
+     * been loaded, as the value is not present in the system
+     * but computer from a package provides
+     */
+    std::string distributionFlavor() const;    
+    
+    /**
      * anonymous unique id
      *
      * This id is generated once and stays in the
