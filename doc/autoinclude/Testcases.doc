@@ -36,4 +36,14 @@
   You directory is used as it is and not removed at the end.
 \endverbatim
 
+\verbatim
+Boost Test Library
+http://www.boost.org/doc/libs/1_36_0/libs/test/doc/html/index.html
+
+  The Unit Test Framework
+  http://www.boost.org/doc/libs/1_36_0/libs/test/doc/html/utf.html
+
+  The UTF testing tools reference
+  http://www.boost.org/doc/libs/1_36_0/libs/test/doc/html/utf/testing-tools/reference.html
+\endverbatim
 */
