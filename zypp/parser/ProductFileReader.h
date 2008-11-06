@@ -74,7 +74,7 @@ namespace zypp
           public:
             std::string name()    const;
             std::string summary() const;
-            std::string product() const;
+            std::string repository() const;
             bool        notify()  const;
             std::string status()  const;
 

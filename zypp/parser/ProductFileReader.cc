@@ -40,7 +40,7 @@ namespace zypp
     {
       std::string                 _name;
       std::string                 _summary;
-      std::string                 _product;
+      std::string                 _repository;
       DefaultIntegral<bool,false> _notify;
       std::string                 _status;
     };
@@ -49,11 +49,11 @@ namespace zypp
       : _pimpl( allocated_r ? allocated_r : new Impl )
     {}
 
-    std::string ProductFileData::Upgrade::name()    const { return _pimpl->_name; }
-    std::string ProductFileData::Upgrade::summary() const { return _pimpl->_summary; }
-    std::string ProductFileData::Upgrade::product() const { return _pimpl->_product; }
-    bool        ProductFileData::Upgrade::notify()  const { return _pimpl->_notify; }
-    std::string ProductFileData::Upgrade::status()  const { return _pimpl->_status; }
+    std::string ProductFileData::Upgrade::name()       const { return _pimpl->_name; }
+    std::string ProductFileData::Upgrade::summary()    const { return _pimpl->_summary; }
+    std::string ProductFileData::Upgrade::repository() const { return _pimpl->_repository; }
+    bool        ProductFileData::Upgrade::notify()     const { return _pimpl->_notify; }
+    std::string ProductFileData::Upgrade::status()     const { return _pimpl->_status; }
 
     /////////////////////////////////////////////////////////////////
     //
@@ -113,7 +113,7 @@ namespace zypp
     {
       str << str::form( "|upgrade|%s|%s|%s|%s|",
                         obj.name().c_str(),
-                        obj.product().c_str(),
+                        obj.repository().c_str(),
                         obj.status().c_str(),
                         (obj.notify() ? "notify" : "noNotify") );
       return str;
@@ -154,7 +154,7 @@ namespace zypp
         (*this)["upgrades"]["upgrade"]
             ("name",          OPTIONAL,   xml::parseDefAssignText( _upgrade._name ) )
             ("summary",       OPTIONAL,   xml::parseDefAssignText( _upgrade._summary ) )
-            ("repository",    OPTIONAL,   xml::parseDefAssignText( _upgrade._product ) )
+            ("repository",    OPTIONAL,   xml::parseDefAssignText( _upgrade._repository ) )
             ("notify",        OPTIONAL,   xml::parseDefAssignText( _upgrade._notify ) )
             ("status",        OPTIONAL,   xml::parseDefAssignText( _upgrade._status ) )
             ;
@@ -251,7 +251,7 @@ namespace zypp
     {
       if ( ! PathInfo( file_r ).isFile() )
       {
-        WAR << "scanFile " << PathInfo( file_r ) << " is no t a file." << endl;
+        WAR << "scanFile " << PathInfo( file_r ) << " is not a file." << endl;
         return ProductFileData();
       }
 
