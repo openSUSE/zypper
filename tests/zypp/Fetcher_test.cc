@@ -361,9 +361,12 @@ BOOST_AUTO_TEST_CASE(enqueuedir_http_broken)
       fetcher.reset();
 
       BOOST_CHECK( PathInfo(dest.path() + "/complexdir-broken/subdir2").isExist() );
-      BOOST_CHECK( PathInfo(dest.path() + "/complexdir-broken/subdir2/subdir2-file1.txt").isExist() );
+
+      BOOST_CHECK( ! PathInfo(dest.path() + "/complexdir-broken/subdir2/subdir2-file1.txt").isExist() );
+
+      // this one got transfered before the failure, so it is there
       BOOST_CHECK( PathInfo(dest.path() + "/complexdir-broken/subdir1/subdir1-file1.txt").isExist() );
-      BOOST_CHECK( PathInfo(dest.path() + "/complexdir-broken/subdir1/subdir1-file2.txt").isExist() );
+      BOOST_CHECK( ! PathInfo(dest.path() + "/complexdir-broken/subdir1/subdir1-file2.txt").isExist() );
 
       fetcher.reset();
 
