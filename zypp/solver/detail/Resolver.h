@@ -111,7 +111,7 @@ class Resolver : public base::ReferenceCounted, private base::NonCopyable {
                                   // no recommended resolvables, language
                                   // packages, hardware packages (modalias)
 
-    bool _ignorealreadyrecommended;   //ignore recommended packages that were already recommended by the installed packages
+    bool _ignorealreadyrecommended;   //ignore recommended packages that have already been recommended by the installed packages
 
     // Additional QueueItems which has to be regarded by the solver
     // This will be used e.g. by solution actions

@@ -102,7 +102,8 @@ class  HelixControl {
 		  const LocaleSet &languages,		  
 		  const std::string & systemPath = "solver-system.xml.gz",
 		  const bool forceResolve = false,
-		  const bool onlyRequires = false);
+		  const bool onlyRequires = false,
+		  const bool ignorealreadyrecommended = false);
     HelixControl ();    
     ~HelixControl ();
 

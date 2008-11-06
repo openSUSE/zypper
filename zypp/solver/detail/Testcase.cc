@@ -352,7 +352,8 @@ bool Testcase::createTestcase(Resolver & resolver, bool dumpPool, bool runSolver
 			  pool.getRequestedLocales(),
 			  "solver-system.xml.gz",
 			  resolver.forceResolve(),
-			  resolver.onlyRequires());
+			  resolver.onlyRequires(),
+			  resolver.ignorealreadyrecommended() );
 
     for (PoolItemList::const_iterator iter = items_to_install.begin(); iter != items_to_install.end(); iter++) {
 	control.installResolvable (iter->resolvable(), iter->status());
@@ -410,7 +411,8 @@ HelixControl::HelixControl(const std::string & controlPath,
 			   const LocaleSet &languages,
 			   const std::string & systemPath,
 			   const bool forceResolve,
-			   const bool onlyRequires)
+			   const bool onlyRequires,
+			   const bool ignorealreadyrecommended)
     :dumpFile (controlPath)
 {
     file = new ofstream(controlPath.c_str());
@@ -453,6 +455,9 @@ HelixControl::HelixControl(const std::string & controlPath,
     if (onlyRequires)
 	*file << TAB << "<onlyRequires/>" << endl;
 
+    if (ignorealreadyrecommended)
+	*file << TAB << "<ignorealreadyrecommended/>" << endl;
+    
     *file << "</setup>" << endl
 	  << "<trial>" << endl
 	  << "<showpool all=\"yes\"/>" << endl;
