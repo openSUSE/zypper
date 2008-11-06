@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<product schemeversion="0">
+    <vendor>Novell</vendor>
+    <name>SUSE_SLES</name>
+    <version>11</version>
+    <release>0</release>
+    <arch>i586</arch>
+    <updaterepokey>A43242DKD</updaterepokey>
+    <summary>SUSE Linux Enterprise Server</summary>
+    <description>
+This is the Server product of the SUSE Linux Enterprise edition. It is an alternative product for the Windows Server and other UNIX Operating Systems, providing Server functionality and interoperability with UNIX servers. This is the replacement product intended to sunset SUSE Linux Enterprise Server10 which was introduced in May of 2006
+	The SUSE Linux Enterprise Server 11 addresses very large enterprises as well as 	large 	enterprises and in some ways also medium, small, government and educational needs for a 	secure, stable, reliable and high-performance operating system platform.
+	It is the core and base offering to provide a general-purpose infrastructure solution.  This 	offering is engineered, tested and proven to handle mission-critical workloads in the data 	center.
+	Developed and backed by Novell, only SUSE Linux Enterprise Server offers an open, scalable, 	high-performance data center solution that comes with application security, virtualization and 	Integrated systems management across a range of hardware architectures.
+	SUSE Linux Enterprise Server is deployable as a general-purpose server or can be tailored to 	run a variety of specialized workloads, and it offers seamless interoperability with your 	existing data center infrastructure.
+    </description>
+    <urls>
+      <url name="releasenotes">http://www.novell.com/linux/releasenotes/i586/SUSE-SLES/11/release-notes-sles.rpm</url>
+    </urls>
+
+    <upgrades>
+       <upgrade>
+         <name>openSUSE_11.1</name>
+         <summary>openSUSE 11.1</summary>
+         <repository>http://download.opensuse.org/distribution/openSUSE/11.1</repository>
+         <notify>true</notify>
+         <status>stable</status>
+       </upgrade>
+       <upgrade>
+         <name>openSUSE_Factory</name>
+         <summary>openSUSE Factory</summary>
+         <repository>http://download.opensuse.org/distribution/openSUSE/Factory</repository>
+         <notify>no</notify>
+         <status>unstable</status>
+       </upgrade>
+    </upgrades>
+
+    <register>
+        <target>sle-11-i586</target>
+        <release>whatever</release>
+    </register>
+    <buildconfig>
+        <!-- This section is needed to generate the installation media -->
+        <producttheme>SLES</producttheme>
+        <allowresolving>false</allowresolving>
+     </buildconfig>
+     <installconfig>
+        <!-- All flags needed during installation -->
+        <defaultlang>en_US</defaultlang>
+        <!-- needed for current content file -->
+        <datadir>suse</datadir>
+        <descrdir>suse/setup/descr</descrdir>
+        <references name="sles-release" version="11"/>
+        <distribution>SUSE_SLE</distribution>
+     </installconfig>
+     <runtimeconfig>
+        <!-- All Flags needed in the running system -->
+     </runtimeconfig>
+</product>
