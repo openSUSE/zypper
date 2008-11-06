@@ -57,7 +57,7 @@ class TestSetup
     { _ctor( rootdir_r, sysarch_r ); }
 
     ~TestSetup()
-    { USR << "DELETE TESTSETUP below " << _rootdir << endl; }
+    { USR << (_tmprootdir.path() == _rootdir ? "DELETE" : "KEEP") << " TESTSETUP below " << _rootdir << endl; }
 
   public:
     const Pathname & root() const { return _rootdir; }
@@ -142,8 +142,8 @@ class TestSetup
         USR << "Create from cache" << endl;
         repoManager.loadFromCache( nrepo );
       }
-
     }
+
   private:
     void _ctor( const Pathname & rootdir_r, const Arch & sysarch_r )
     {
