@@ -131,20 +131,20 @@ namespace zypp
         , _pdata( pdata_r )
       {
         (*this)
-            ("vendor",        OPTIONAL,  xml::parseDefAssignText( _pdata._vendor ) )
-            ("name",          MANDTAORY, xml::parseDefAssignText( _pdata._name ) )
-            ("version",       OPTIONAL,  xml::parseDefAssignText( _version ) )
-            ("release",       OPTIONAL,  xml::parseDefAssignText( _release ) )
-            ("arch",          OPTIONAL,  xml::parseDefAssignText( _pdata._arch ) )
-            ("productline",   OPTIONAL,  xml::parseDefAssignText( _pdata._productline ) )
+            ("vendor",        OPTIONAL,   xml::parseDefAssignText( _pdata._vendor ) )
+            ("name",          MANDTAORY,  xml::parseDefAssignText( _pdata._name ) )
+            ("version",       MANDTAORY,  xml::parseDefAssignText( _version ) )
+            ("release",       MANDTAORY,  xml::parseDefAssignText( _release ) )
+            ("arch",          MANDTAORY,  xml::parseDefAssignText( _pdata._arch ) )
+            ("productline",   OPTIONAL,   xml::parseDefAssignText( _pdata._productline ) )
             ("register",      OPTIONAL)
-            ("updaterepokey", OPTIONAL,  xml::parseDefAssignText( _pdata._updaterepokey ) )
+            ("updaterepokey", OPTIONAL,   xml::parseDefAssignText( _pdata._updaterepokey ) )
             ("upgrades",      OPTIONAL)
             ;
 
         (*this)["register"]
-            ("target",        OPTIONAL,  xml::parseDefAssignText( _pdata._registerTarget ) )
-            ("release",       OPTIONAL,  xml::parseDefAssignText( _pdata._registerRelease ) )
+            ("target",        OPTIONAL,   xml::parseDefAssignText( _pdata._registerTarget ) )
+            ("release",       OPTIONAL,   xml::parseDefAssignText( _pdata._registerRelease ) )
             ;
 
         (*this)["upgrades"]
@@ -152,11 +152,11 @@ namespace zypp
             ;
 
         (*this)["upgrades"]["upgrade"]
-            ("name",          OPTIONAL,  xml::parseDefAssignText( _upgrade._name ) )
-            ("summary",       OPTIONAL,  xml::parseDefAssignText( _upgrade._summary ) )
-            ("repository",    OPTIONAL,  xml::parseDefAssignText( _upgrade._product ) )
-            ("notify",        OPTIONAL,  xml::parseDefAssignText( _upgrade._notify ) )
-            ("status",        OPTIONAL,  xml::parseDefAssignText( _upgrade._status ) )
+            ("name",          OPTIONAL,   xml::parseDefAssignText( _upgrade._name ) )
+            ("summary",       OPTIONAL,   xml::parseDefAssignText( _upgrade._summary ) )
+            ("repository",    OPTIONAL,   xml::parseDefAssignText( _upgrade._product ) )
+            ("notify",        OPTIONAL,   xml::parseDefAssignText( _upgrade._notify ) )
+            ("status",        OPTIONAL,   xml::parseDefAssignText( _upgrade._status ) )
             ;
 
         // Not a clean way to collect the END_ELEMENT calls, but
