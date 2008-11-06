@@ -111,37 +111,17 @@ namespace zypp
 
     std::ostream & operator<<( std::ostream & str, const ProductFileData::Upgrade & obj )
     {
-      str << str::form( "|upgrade|%s|",
-                        obj.name().c_str() );
+      str << str::form( "|upgrade|%s|%s|%s|%s|",
+                        obj.name().c_str(),
+                        obj.product().c_str(),
+                        obj.status().c_str(),
+                        (obj.notify() ? "notify" : "noNotify") );
       return str;
     }
     /////////////////////////////////////////////////////////////////
     //
     // class ProductFileReader
     //
-    /////////////////////////////////////////////////////////////////
-
-    /** Assign types constructible from \c char* */
-    template <class _Val>
-    struct ConsumeVal : public xml::ParseDefConsume
-    {
-      ConsumeVal( _Val & value_r )
-        : _value( &value_r )
-      {}
-
-      virtual void text( const xml::Node & node_r )
-      {
-        *_value = _Val( node_r.value().c_str() );
-      }
-
-      private:
-      _Val * _value;
-    };
-
-    template <class _Val>
-    shared_ptr<xml::ParseDefConsume> consumeVal( _Val & value_r )
-    { return shared_ptr<xml::ParseDefConsume>( new ConsumeVal<_Val>( value_r ) ); }
-
     /////////////////////////////////////////////////////////////////
 
     struct ProductNode : public xml::ParseDef, public xml::ParseDefConsume
@@ -151,20 +131,20 @@ namespace zypp
         , _pdata( pdata_r )
       {
         (*this)
-            ("vendor",        OPTIONAL,  consumeVal( _pdata._vendor ) )
-            ("name",          MANDTAORY, consumeVal( _pdata._name ) )
-            ("version",       OPTIONAL,  consumeVal( _version ) )
-            ("release",       OPTIONAL,  consumeVal( _release ) )
-            ("arch",          OPTIONAL,  consumeVal( _pdata._arch ) )
-            ("productline",   OPTIONAL,  consumeVal( _pdata._productline ) )
+            ("vendor",        OPTIONAL,  xml::parseDefAssignText( _pdata._vendor ) )
+            ("name",          MANDTAORY, xml::parseDefAssignText( _pdata._name ) )
+            ("version",       OPTIONAL,  xml::parseDefAssignText( _version ) )
+            ("release",       OPTIONAL,  xml::parseDefAssignText( _release ) )
+            ("arch",          OPTIONAL,  xml::parseDefAssignText( _pdata._arch ) )
+            ("productline",   OPTIONAL,  xml::parseDefAssignText( _pdata._productline ) )
             ("register",      OPTIONAL)
-            ("updaterepokey", OPTIONAL,  consumeVal( _pdata._updaterepokey ) )
+            ("updaterepokey", OPTIONAL,  xml::parseDefAssignText( _pdata._updaterepokey ) )
             ("upgrades",      OPTIONAL)
             ;
 
         (*this)["register"]
-            ("target",        OPTIONAL,  consumeVal( _pdata._registerTarget ) )
-            ("release",       OPTIONAL,  consumeVal( _pdata._registerRelease ) )
+            ("target",        OPTIONAL,  xml::parseDefAssignText( _pdata._registerTarget ) )
+            ("release",       OPTIONAL,  xml::parseDefAssignText( _pdata._registerRelease ) )
             ;
 
         (*this)["upgrades"]
@@ -172,22 +152,24 @@ namespace zypp
             ;
 
         (*this)["upgrades"]["upgrade"]
-            ("name",          OPTIONAL,  consumeVal( _upgrade._name ) )
-            ("summary",       OPTIONAL,  consumeVal( _upgrade._summary ) )
-            ("repository",    OPTIONAL,  consumeVal( _upgrade._product ) )
-            ("notify",        OPTIONAL)  // need consume to bool!
-            ("status",        OPTIONAL,  consumeVal( _upgrade._status ) )
+            ("name",          OPTIONAL,  xml::parseDefAssignText( _upgrade._name ) )
+            ("summary",       OPTIONAL,  xml::parseDefAssignText( _upgrade._summary ) )
+            ("repository",    OPTIONAL,  xml::parseDefAssignText( _upgrade._product ) )
+            ("notify",        OPTIONAL,  xml::parseDefAssignText( _upgrade._notify ) )
+            ("status",        OPTIONAL,  xml::parseDefAssignText( _upgrade._status ) )
             ;
 
-        // not a clean way to collect the END_ELEMENT calls, but
+        // Not a clean way to collect the END_ELEMENT calls, but
         // works for this case. NEEDS CLEANUP!
+
+        // xml::ParseDef::_debug = true;
         setConsumer( *this );
         (*this)["upgrades"].setConsumer( *this );
        }
 
        virtual void done ( const xml::Node & _node )
        {
-         //SEC << "DONE.... " << _node.localName() << endl;
+         // SEC << "DONE.... " << _node.localName() << endl;
          if ( _node.localName() == name() )
          {
            // this END node
@@ -198,6 +180,7 @@ namespace zypp
            // collect upgrade
            ProductFileData::Upgrade cdata( new ProductFileData::Upgrade::Impl( _upgrade ) );
            _pdata._upgrades.push_back( cdata );
+           _upgrade = ProductFileData::Upgrade::Impl();
          }
        }
 
@@ -219,7 +202,6 @@ namespace zypp
 
       try
       {
-        //xml::ParseDef::_debug = true;
         xml::Reader reader( input_r );
         ProductNode rootNode( *pdataImpl );
         rootNode.take( reader );

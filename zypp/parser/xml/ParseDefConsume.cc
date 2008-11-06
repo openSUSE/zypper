@@ -158,13 +158,13 @@ namespace zypp
 
     void ParseDefConsumeCallback::startSubnode( const Node & node_r )
     {
-      if ( _start )
+      if ( _startSubnode )
         _startSubnode( node_r );
     }
 
     void ParseDefConsumeCallback::doneSubnode( const Node & node_r )
     {
-      if ( _done )
+      if ( _doneSubnode )
         _doneSubnode( node_r );
     }
 
