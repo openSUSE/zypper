@@ -163,9 +163,15 @@ namespace zypp
 
     /** Find RepoInfo by alias or return \ref RepoInfo::noRepo. */
     RepoInfo getRepo( const std::string & alias ) const;
+    /** \overload Take alias from RepoInfo. */
+    RepoInfo getRepo( const RepoInfo & info_r ) const
+    { return getRepo( info_r.alias() ); }
 
     /** Return whether there is a known repository for \c alias. */
     bool hasRepo( const std::string & alias ) const;
+    /** \overload Take alias from RepoInfo. */
+    bool hasRepo( const RepoInfo & info_r ) const
+    { return hasRepo( info_r.alias() ); }
    //@}
 
    /**
@@ -425,6 +431,10 @@ namespace zypp
     void modifyRepository( const std::string &alias,
                            const RepoInfo & newinfo,
                            const ProgressData::ReceiverFnc & progressrcv = ProgressData::ReceiverFnc() );
+    /** \overload Take alias from RepoInfo. */
+    void modifyRepository( const RepoInfo & newinfo,
+                           const ProgressData::ReceiverFnc & progressrcv = ProgressData::ReceiverFnc() )
+    { modifyRepository( newinfo.alias(), newinfo, progressrcv ); }
 
     /**
      * \short Find a matching repository info
