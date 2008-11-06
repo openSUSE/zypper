@@ -1,4 +1,4 @@
-# translation of zypp.po to suomi
+# translation of zypp.fi.po to suomi
 # translation of zypp.po to
 # translation of zypp.fi.po to
 # Copyright (C) 2005 SUSE Linux Products GmbH.
@@ -15,10 +15,10 @@
 # Jyri Palokangas <jmp@opensuse.org>, 2008.
 msgid ""
 msgstr ""
-"Project-Id-Version: zypp\n"
+"Project-Id-Version: zypp.fi\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-10-08 17:27+0200\n"
-"PO-Revision-Date: 2008-10-03 08:37+0300\n"
+"POT-Creation-Date: 2008-10-24 10:45+0200\n"
+"PO-Revision-Date: 2008-10-25 23:51+0300\n"
 "Last-Translator: Jyri Palokangas <jyri.palokangas@opensuse.org>\n"
 "Language-Team: suomi <fi@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -27,7 +27,7 @@ msgstr ""
 "Plural-Forms:  nplurals=2; plural=n != 1;\n"
 "X-Generator: KBabel 1.11.4\n"
 
-#: ../zypp/solver/detail/SATResolver.cc:981
+#: ../zypp/solver/detail/SATResolver.cc:994
 msgid ""
 "\n"
 "uninstallable providers: "
@@ -52,22 +52,22 @@ msgstr " suoritus epäonnistui"
 msgid " execution skipped while aborting"
 msgstr " suoritus ohitettiin keskeytettäessä"
 
-#: ../zypp/solver/detail/SATResolver.cc:928
+#: ../zypp/solver/detail/SATResolver.cc:941
 #, c-format
 msgid "%s conflicts with %s provided by %s"
 msgstr "%s on ristiriidassa %s (%s) kanssa"
 
-#: ../zypp/solver/detail/SATResolver.cc:914
+#: ../zypp/solver/detail/SATResolver.cc:927
 #, c-format
 msgid "%s is not installable"
 msgstr "%s ei ole asennettavissa"
 
-#: ../zypp/solver/detail/SATResolver.cc:933
+#: ../zypp/solver/detail/SATResolver.cc:946
 #, c-format
 msgid "%s obsoletes %s provided by %s"
 msgstr "%s vanhentaa %s (%s)"
 
-#: ../zypp/solver/detail/SATResolver.cc:969
+#: ../zypp/solver/detail/SATResolver.cc:982
 #, c-format
 msgid "%s requires %s, but this requirement cannot be provided"
 msgstr "%s tarvitsee %s, mutta sen asentaminen ei onnistu"
@@ -92,7 +92,7 @@ msgstr "acholi"
 msgid "Adangme"
 msgstr "adangme"
 
-#: ../zypp/RepoManager.cc:1184
+#: ../zypp/RepoManager.cc:1201
 #, c-format
 msgid "Adding repository '%s'"
 msgstr "Lisätään asennuslähdettä '%s'"
@@ -321,7 +321,7 @@ msgid "Austronesian (Other)"
 msgstr "muut austronesialaiset kielet"
 
 #. !\todo add comma to the message for the next release
-#: ../zypp/media/MediaCurl.cc:1619
+#: ../zypp/media/MediaCurl.cc:1660
 #, c-format
 msgid "Authentication required for '%s'"
 msgstr "'%s' vaatii tunnistautumisen"
@@ -603,7 +603,7 @@ msgstr "Brunei"
 msgid "Buginese"
 msgstr "bugi"
 
-#: ../zypp/RepoManager.cc:977
+#: ../zypp/RepoManager.cc:969
 #, c-format
 msgid "Building repository '%s' cache"
 msgstr "Rakennetaan asennuslähteen '%s' välimuistia"
@@ -654,7 +654,7 @@ msgstr "Kambodža"
 msgid "Cameroon"
 msgstr "Kamerun"
 
-#: ../zypp/sat/detail/PoolImpl.cc:148
+#: ../zypp/sat/detail/PoolImpl.cc:156
 msgid "Can not create sat-pool."
 msgstr "Sat-varaston luonti ei onnistu."
 
@@ -724,7 +724,7 @@ msgstr "Rekursiivisten mutex-määritteiden asetus ei onnistu"
 msgid "Canada"
 msgstr "Kanada"
 
-#: ../zypp/KeyRing.cc:285
+#: ../zypp/KeyRing.cc:277
 #, c-format
 msgid "Cannot create public key %s from %s keyring to file %s"
 msgstr "Julkisen avaimen %s luonti avainrenkaasta %s tiedostoon %s ei onnistu"
@@ -741,7 +741,7 @@ msgstr "Tietovälineen '%s' irroittaminen ei onnistu"
 #: ../zypp/media/MediaException.cc:273
 #, c-format
 msgid "Cannot find available loop device to mount the image file from '%s'"
-msgstr ""
+msgstr "Ei löydy tarvittavaa loop-laitetta kuvatiedoston '%s' liittämiseksi."
 
 #: ../zypp/media/MediaException.cc:67
 #, c-format
@@ -1115,9 +1115,9 @@ msgstr "Dominikaaninen tasavalta"
 
 #. TranslatorExplanation: curl is the name of a library, don't translate
 #: ../zypp/media/MediaException.cc:92 ../zypp/media/MediaException.cc:100
-#, fuzzy, c-format
+#, c-format
 msgid "Download (Metalink curl) initialization failed for '%s'"
-msgstr "Lataajan (curl) alustus osoitteelle '%s' epäonnistui"
+msgstr "Lataajan (Metalink curl) alustus osoitteelle '%s' epäonnistui"
 
 #: ../zypp/media/MediaException.cc:168
 #, c-format
@@ -1137,7 +1137,7 @@ msgid "Download (curl) initialization failed for '%s'"
 msgstr "Lataajan (curl) alustus osoitteelle '%s' epäonnistui"
 
 #: ../zypp/media/MediaException.cc:186 ../zypp/media/MediaException.cc:204
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Download (metalink curl) error for '%s':\n"
 "Error code: %s\n"
@@ -1145,7 +1145,7 @@ msgid ""
 msgstr ""
 "Latausvirhe (curl) %s:\n"
 "Virhekoodi: %s\n"
-"viesti: %s\n"
+"Viesti: %s\n"
 
 #. language code: dra
 #: ../zypp/LanguageCode.cc:470
@@ -1274,9 +1274,9 @@ msgstr "Virhe asetettaessa lataimen (curl) asetuksia osoitteelle '%s':"
 
 #. TranslatorExplanation: curl is the name of a library, don't translate
 #: ../zypp/media/MediaException.cc:195 ../zypp/media/MediaException.cc:213
-#, fuzzy, c-format
+#, c-format
 msgid "Error occurred while setting download (metalink curl) options for '%s':"
-msgstr "Virhe asetettaessa lataimen (curl) asetuksia osoitteelle '%s':"
+msgstr "Virhe asetettaessa lataimen (metalink curl) asetuksia osoitteelle '%s':"
 
 # SY
 #. language code: myv
@@ -1316,7 +1316,7 @@ msgstr "ewe"
 msgid "Ewondo"
 msgstr "ewondo"
 
-#: ../zypp/KeyRing.cc:587
+#: ../zypp/KeyRing.cc:579
 msgid "Failed to delete key."
 msgstr "Avaimen poisto epäonnistui."
 
@@ -1767,7 +1767,7 @@ msgstr "Hal-taltioa ei alustettu"
 msgid "Hausa"
 msgstr "hausa"
 
-#: ../zypp/solver/detail/SATResolver.cc:910
+#: ../zypp/solver/detail/SATResolver.cc:923
 msgid "Have you enabled all requested repositories?"
 msgstr "Oletko ottanut käyttöön kaikki pyydetyt asennuslähteet?"
 
@@ -2014,7 +2014,7 @@ msgstr "Virheellinen parametrikartan jaon erotin"
 msgid "Invalid port component '%s'"
 msgstr "Virheellinen porttimääritys: '%s'"
 
-#: ../zypp/PoolQuery.cc:443
+#: ../zypp/PoolQuery.cc:440
 #, c-format
 msgid "Invalid regular expression '%s': regcomp returned %d"
 msgstr "Virhe säännöllisessä lausekkeessa '%s': regcomp palautti %d"
@@ -3118,9 +3118,9 @@ msgstr "otomi-kielet"
 
 #. TranslatorExplanation %s = package being checked for integrity
 #: ../zypp/repo/PackageProvider.cc:247
-#, fuzzy, c-format
+#, c-format
 msgid "Package %s seems to be corrupted during transfer. Do you want to retry retrieval?"
-msgstr "Paketin %s yhtenäisyystarkistus epäonnistui. Yritetäänkö uudelleen?"
+msgstr "Paketti %s näytttää vioittuneen siirron aikana. Yritetäänkö uudelleen?"
 
 # ML
 #. language code: pal
@@ -3358,7 +3358,7 @@ msgstr "rarotonga"
 msgid "Relative path not allowed if authority exists"
 msgstr "Suhteellisen polun määrittäminen ei ole sallittua, jos valtuuttaja on määritetty"
 
-#: ../zypp/RepoManager.cc:1314
+#: ../zypp/RepoManager.cc:1331
 #, c-format
 msgid "Removing repository '%s'"
 msgstr "Poistetaan asennuslähdettä '%s'"
@@ -3595,7 +3595,7 @@ msgstr "Sierra Leone"
 msgid "Sign Languages"
 msgstr "viittomakielet"
 
-#: ../zypp/KeyRing.cc:597
+#: ../zypp/KeyRing.cc:589
 #, c-format
 msgid "Signature file %s not found"
 msgstr "Allekirjoitustiedostoa %s ei löydetty"
@@ -3678,7 +3678,7 @@ msgstr "sogdi"
 msgid "Solomon Islands"
 msgstr "Salomonsaaret"
 
-#: ../zypp/solver/detail/SATResolver.cc:937
+#: ../zypp/solver/detail/SATResolver.cc:950
 #, c-format
 msgid "Solvable %s conflicts with %s provided by itself"
 msgstr "%s on ristiriidassa itsensä kanssa (%s)"
@@ -3856,9 +3856,9 @@ msgstr "Järjestelmäpoikkeus '%s' tietovälineellä '%s'."
 #, c-format
 msgid ""
 "System management is locked by the application with pid %d (%s).\n"
-"Please close this application before trying again."
+"Close this application before trying again."
 msgstr ""
-"Prosessi %d (%s)on lukinnut järjestelmänhallinnan. \n"
+"Prosessi %d (%s) on lukinnut järjestelmänhallinnan. \n"
 "Sulje ohjelma ennen uutta yritystä."
 
 #. language code: tgl tl
@@ -3954,8 +3954,8 @@ msgstr "Myyjä ei tarjoa tukea."
 msgid "This action is being run by another program already."
 msgstr "Jokin toinen ohjelma suorittaa tätä toimintoa."
 
-#: ../zypp/solver/detail/SATResolver.cc:1118
-#: ../zypp/solver/detail/SATResolver.cc:1136
+#: ../zypp/solver/detail/SATResolver.cc:1131
+#: ../zypp/solver/detail/SATResolver.cc:1149
 msgid "This request will break your system!"
 msgstr "Tämä pyyntö rikkoo järjestelmän!"
 
@@ -4028,7 +4028,7 @@ msgstr "tonga (Malawi)"
 msgid "Tonga (Tonga Islands)"
 msgstr "tonga (Tonga)"
 
-#: ../zypp/KeyRing.cc:536
+#: ../zypp/KeyRing.cc:528
 #, c-format
 msgid "Tried to import not existant key %s into keyring %s"
 msgstr "Yritettiin lisätä avain %s avainrenkaaseen %s, mutta tiedostoa ei löydetty"
@@ -4306,7 +4306,7 @@ msgid "Vai"
 msgstr "vai"
 
 #. we will throw this later if no URL checks out fine
-#: ../zypp/RepoManager.cc:789
+#: ../zypp/RepoManager.cc:781
 msgid "Valid metadata not found at specified URL(s)"
 msgstr "Annetuista verkko-osoitteista ei löytynyt kelpaavia metatietoja"
 
@@ -4489,17 +4489,17 @@ msgstr "applydeltarpm-tarkistus epäonnistui."
 msgid "applydeltarpm failed."
 msgstr "applydeltarpm epäonnistui."
 
-#: ../zypp/solver/detail/SATResolver.cc:1194
+#: ../zypp/solver/detail/SATResolver.cc:1207
 #, c-format
 msgid "architecture change of %s to %s"
 msgstr "arkkitehtuurin vaihto %s -> %s"
 
-#: ../zypp/solver/detail/SATResolver.cc:923
+#: ../zypp/solver/detail/SATResolver.cc:936
 #, c-format
 msgid "cannot install both %s and %s"
 msgstr "Ei voida asentaa molempia %s ja %s"
 
-#: ../zypp/solver/detail/SATResolver.cc:903
+#: ../zypp/solver/detail/SATResolver.cc:916
 msgid "conflicting requests"
 msgstr "ristiriitaiset kyselyt"
 
@@ -4508,57 +4508,57 @@ msgstr "ristiriitaiset kyselyt"
 msgid "created backup %s"
 msgstr "luotiin varmuuskopio %s"
 
-#: ../zypp/solver/detail/SATResolver.cc:1222
+#: ../zypp/solver/detail/SATResolver.cc:1235
 #, c-format
 msgid "deinstallation of %s"
 msgstr "poista %s"
 
-#: ../zypp/solver/detail/SATResolver.cc:971
+#: ../zypp/solver/detail/SATResolver.cc:984
 msgid "deleted providers: "
 msgstr "poistetut tarjoajat: "
 
-#: ../zypp/solver/detail/SATResolver.cc:1139
+#: ../zypp/solver/detail/SATResolver.cc:1152
 #, c-format
 msgid "do not ask to delete all solvables providing %s"
 msgstr "älä kysy poistettaessa paketteja, jotka tuo %s"
 
-#: ../zypp/solver/detail/SATResolver.cc:1121
+#: ../zypp/solver/detail/SATResolver.cc:1134
 #, c-format
 msgid "do not ask to install a solvable providing %s"
 msgstr "älä kysy asennettaessa paketteja, jotka tuo %s"
 
-#: ../zypp/solver/detail/SATResolver.cc:1066
+#: ../zypp/solver/detail/SATResolver.cc:1079
 #, c-format
 msgid "do not forbid installation of %s"
 msgstr "Älä estä %s asentamista"
 
-#: ../zypp/solver/detail/SATResolver.cc:1045
-#: ../zypp/solver/detail/SATResolver.cc:1083
+#: ../zypp/solver/detail/SATResolver.cc:1058
+#: ../zypp/solver/detail/SATResolver.cc:1096
 #, c-format
 msgid "do not install %s"
 msgstr "älä asenna %s"
 
-#: ../zypp/solver/detail/SATResolver.cc:1152
+#: ../zypp/solver/detail/SATResolver.cc:1165
 #, c-format
 msgid "do not install most recent version of %s"
 msgstr "älä asenna uusinta %s"
 
-#: ../zypp/solver/detail/SATResolver.cc:1040
+#: ../zypp/solver/detail/SATResolver.cc:1053
 #, c-format
 msgid "do not keep %s installed"
 msgstr "älä pidä %s asennettuna"
 
-#: ../zypp/solver/detail/SATResolver.cc:1186
+#: ../zypp/solver/detail/SATResolver.cc:1199
 #, c-format
 msgid "downgrade of %s to %s"
 msgstr "päivitetään vanhempaan %s -> %s"
 
-#: ../zypp/solver/detail/SATResolver.cc:1119
-#: ../zypp/solver/detail/SATResolver.cc:1137
+#: ../zypp/solver/detail/SATResolver.cc:1132
+#: ../zypp/solver/detail/SATResolver.cc:1150
 msgid "ignore the warning of a broken system"
 msgstr "ohita varoitus rikkinäisestä järjestelmästä"
 
-#: ../zypp/solver/detail/SATResolver.cc:1202
+#: ../zypp/solver/detail/SATResolver.cc:1215
 #, c-format
 msgid ""
 "install %s (with vendor change)\n"
@@ -4575,8 +4575,8 @@ msgstr ""
 msgid "invalid"
 msgstr "virheellinen"
 
-#: ../zypp/solver/detail/SATResolver.cc:1061
-#: ../zypp/solver/detail/SATResolver.cc:1104
+#: ../zypp/solver/detail/SATResolver.cc:1074
+#: ../zypp/solver/detail/SATResolver.cc:1117
 #, c-format
 msgid "keep %s"
 msgstr "pidä %s"
@@ -4589,22 +4589,22 @@ msgstr "libhal_ctx_new: libhal-yhteyttä ei voitu luoda"
 msgid "libhal_set_dbus_connection: Can't set dbus connection"
 msgstr "libhal_set_dbus_connection: dbus-yhteyden asettaminen ei onnistu"
 
-#: ../zypp/solver/detail/SATResolver.cc:918
+#: ../zypp/solver/detail/SATResolver.cc:931
 #, c-format
 msgid "nothing provides %s needed by %s"
 msgstr "mikään ei tarjoa %s, jota %s tarvitsee"
 
-#: ../zypp/solver/detail/SATResolver.cc:909
+#: ../zypp/solver/detail/SATResolver.cc:922
 #, c-format
 msgid "nothing provides requested %s"
 msgstr "Mikään ei tarjoa pyydettyä %s"
 
-#: ../zypp/solver/detail/SATResolver.cc:900
+#: ../zypp/solver/detail/SATResolver.cc:913
 #, c-format
 msgid "problem with installed package %s"
 msgstr "virhe asennettaessa pakettia %s"
 
-#: ../zypp/solver/detail/SATResolver.cc:1210
+#: ../zypp/solver/detail/SATResolver.cc:1223
 #, c-format
 msgid "replacement of %s with %s"
 msgstr "Korvataan %s -> %s"
@@ -4641,11 +4641,11 @@ msgstr ""
 "rpm tallensi tiedoston %s nimellä %s.\n"
 "Tässä ensimmäiset 25 muuttunutta riviä:\n"
 
-#: ../zypp/solver/detail/SATResolver.cc:906
+#: ../zypp/solver/detail/SATResolver.cc:919
 msgid "some dependency problem"
 msgstr "jokin riippuvuusongelma"
 
-#: ../zypp/solver/detail/SATResolver.cc:983
+#: ../zypp/solver/detail/SATResolver.cc:996
 msgid "uninstallable providers: "
 msgstr "poistetut tarjoajat: "
 
@@ -4657,14 +4657,3 @@ msgstr "tuntematon"
 msgid "unsupported"
 msgstr "ei tuettu"
 
-#~ msgid "%s remove failed"
-#~ msgstr "%s poistaminen epäonnistui"
-
-#~ msgid "Additional rpm output:"
-#~ msgstr "rpm-lisätuloste:"
-
-#~ msgid "Invalid user name or password."
-#~ msgstr "Virheellinen käyttäjätunnus tai salasana."
-
-#~ msgid "rpm output:"
-#~ msgstr "rpm-tuloste:"

@@ -9,8 +9,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: zypp.km\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-10-08 17:27+0200\n"
-"PO-Revision-Date: 2008-10-23 11:40+0700\n"
+"POT-Creation-Date: 2008-10-24 10:45+0200\n"
+"PO-Revision-Date: 2008-10-27 09:04+0700\n"
 "Last-Translator: Khoem Sokhem <khoemsokhem@khmeros.info>\n"
 "Language-Team: Khmer <support@khmeros.info>\n"
 "MIME-Version: 1.0\n"
@@ -19,7 +19,7 @@ msgstr ""
 "X-Generator: KBabel 1.11.4\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
 
-#: ../zypp/solver/detail/SATResolver.cc:981
+#: ../zypp/solver/detail/SATResolver.cc:994
 msgid ""
 "\n"
 "uninstallable providers: "
@@ -44,22 +44,22 @@ msgstr " បាន​បរាជ័យ​ក្នុងកា​រប្រ�
 msgid " execution skipped while aborting"
 msgstr " ការ​ប្រតិបត្តិ​បាន​រំលង​ខណៈពេល​បោះបង់"
 
-#: ../zypp/solver/detail/SATResolver.cc:928
+#: ../zypp/solver/detail/SATResolver.cc:941
 #, c-format
 msgid "%s conflicts with %s provided by %s"
 msgstr "%s ប៉ះទង្គិច​ជាមួយ %s ដែល​បាន​ផ្ដល់​ដោយ %s"
 
-#: ../zypp/solver/detail/SATResolver.cc:914
+#: ../zypp/solver/detail/SATResolver.cc:927
 #, c-format
 msgid "%s is not installable"
 msgstr "%s មិនអាច​ដំឡើងបាន"
 
-#: ../zypp/solver/detail/SATResolver.cc:933
+#: ../zypp/solver/detail/SATResolver.cc:946
 #, c-format
 msgid "%s obsoletes %s provided by %s"
 msgstr "%s លែងប្រើ %s ដែល​ផ្ដល់ដោយ %s"
 
-#: ../zypp/solver/detail/SATResolver.cc:969
+#: ../zypp/solver/detail/SATResolver.cc:982
 #, c-format
 msgid "%s requires %s, but this requirement cannot be provided"
 msgstr "%s ត្រូវការ %s ប៉ុន្តែ​តម្រូវការ​នេះ​មិនអាច​ផ្ដល់​បានទេ"
@@ -84,7 +84,7 @@ msgstr "អាកូលី"
 msgid "Adangme"
 msgstr "អាដង់ម៉េ"
 
-#: ../zypp/RepoManager.cc:1184
+#: ../zypp/RepoManager.cc:1201
 #, c-format
 msgid "Adding repository '%s'"
 msgstr "កំពុង​បន្ថែម​ឃ្លាំង '%s'"
@@ -307,7 +307,7 @@ msgid "Austronesian (Other)"
 msgstr "អូស្ត្រូណេស៊ី (ផ្សេង​ទៀត)"
 
 #. !\todo add comma to the message for the next release
-#: ../zypp/media/MediaCurl.cc:1619
+#: ../zypp/media/MediaCurl.cc:1660
 #, c-format
 msgid "Authentication required for '%s'"
 msgstr "បាន​ទាមទារ​ការ​ផ្ទៀងផ្ទាត់​ភាព​ត្រឹមត្រូវ​សម្រាប់ '%s'"
@@ -571,7 +571,7 @@ msgstr "ប៊្រុយណេ ដារូសាឡាម"
 msgid "Buginese"
 msgstr "ប៊ុយហ្គីណេសេ"
 
-#: ../zypp/RepoManager.cc:977
+#: ../zypp/RepoManager.cc:969
 #, c-format
 msgid "Building repository '%s' cache"
 msgstr "កំពុង​ស្ថាបនា​ឃ្លាំង '%s'"
@@ -621,7 +621,7 @@ msgstr "កម្ពុជា"
 msgid "Cameroon"
 msgstr "កាមេរ៉ូន"
 
-#: ../zypp/sat/detail/PoolImpl.cc:148
+#: ../zypp/sat/detail/PoolImpl.cc:156
 msgid "Can not create sat-pool."
 msgstr "មិនអាច​បង្កើត sat-pool បានទេ ។"
 
@@ -691,7 +691,7 @@ msgstr "មិនអាច​កំណត់​គុណលក្ខណៈ mutex
 msgid "Canada"
 msgstr "កាណាដា"
 
-#: ../zypp/KeyRing.cc:285
+#: ../zypp/KeyRing.cc:277
 #, c-format
 msgid "Cannot create public key %s from %s keyring to file %s"
 msgstr "មិនអាច​បង្កើត​សោ​សាធារណៈ %s ពី keyring %s ទៅ​ឯកសារ %s បានទេ"
@@ -1265,7 +1265,7 @@ msgstr "អូវឹ"
 msgid "Ewondo"
 msgstr "អេវ៉ុងដូ"
 
-#: ../zypp/KeyRing.cc:587
+#: ../zypp/KeyRing.cc:579
 msgid "Failed to delete key."
 msgstr "បរាជ័យ​ក្នុង​ការ​លុប​សោ ។"
 
@@ -1699,7 +1699,7 @@ msgstr "HalVolume មិនបាន​ចាប់ផ្ដើម​ឡើយ"
 msgid "Hausa"
 msgstr "ហូសា"
 
-#: ../zypp/solver/detail/SATResolver.cc:910
+#: ../zypp/solver/detail/SATResolver.cc:923
 msgid "Have you enabled all requested repositories?"
 msgstr "តើ​អ្នក​បាន​បើក​ឃ្លាំង​ដែល​បាន​ស្នើ​ទាំងអស់​ហើយឬនៅ ?"
 
@@ -1938,7 +1938,7 @@ msgstr "តួអក្សរ​បំបែក​សម្រាប់​ពុ
 msgid "Invalid port component '%s'"
 msgstr "សមាសភាគ​ច្រក​មិន​ត្រឹមត្រូវ '%s'"
 
-#: ../zypp/PoolQuery.cc:443
+#: ../zypp/PoolQuery.cc:440
 #, c-format
 msgid "Invalid regular expression '%s': regcomp returned %d"
 msgstr "កន្សោម​ធម្មតា​មិនត្រឹមត្រូវ '%s' ៖ regcomp បាន​ត្រឡប់ %d"
@@ -3210,7 +3210,7 @@ msgstr "រ៉ារ៉ូតុងហ្គង់"
 msgid "Relative path not allowed if authority exists"
 msgstr "មិនបាន​អនុញ្ញាត​ផ្លូវ​ដែល​ទាក់ទង​ទេ ប្រសិន​បើ​មាន​អាជ្ញាធរ"
 
-#: ../zypp/RepoManager.cc:1314
+#: ../zypp/RepoManager.cc:1331
 #, c-format
 msgid "Removing repository '%s'"
 msgstr "យក​ឃ្លាំង '%s' ចេញ"
@@ -3435,7 +3435,7 @@ msgstr "សេរ៉ាឡេអូន"
 msgid "Sign Languages"
 msgstr "ភាសា​សញ្ញា"
 
-#: ../zypp/KeyRing.cc:597
+#: ../zypp/KeyRing.cc:589
 #, c-format
 msgid "Signature file %s not found"
 msgstr "រក​មិនឃើញ​ឯកសារ​ហត្ថលេខា %s ទេ"
@@ -3515,7 +3515,7 @@ msgstr "សូដ្យ៊ាន"
 msgid "Solomon Islands"
 msgstr "កោះ​សូឡូម៉ូន"
 
-#: ../zypp/solver/detail/SATResolver.cc:937
+#: ../zypp/solver/detail/SATResolver.cc:950
 #, c-format
 msgid "Solvable %s conflicts with %s provided by itself"
 msgstr "កញ្ចប់​ដោះស្រាយ %s ប៉ះទង្គិច​នឹង %s ដែល​បាន​ផ្ដល់​ដោយ​ខ្លួនវា​ផ្ទាល់"
@@ -3679,7 +3679,7 @@ msgstr "ករណី​លើកលែង​ប្រព័ន្ធ '%s' នៅ
 #, c-format
 msgid ""
 "System management is locked by the application with pid %d (%s).\n"
-"Please close this application before trying again."
+"Close this application before trying again."
 msgstr ""
 "កា​រគ្រប់គ្រង​ប្រព័ន្ធ​ត្រូវ​បានចាក់​សោ​ដោយ​កម្មវិធី​ដែល​មាន pid %d (%s) ។\n"
 "សូម​បិទ​កម្មវិធី​នេះ​មុន​នឹង​ព្យាយាម​ម្ដង​ទៀត ។"
@@ -3771,8 +3771,8 @@ msgstr "ក្រុមហ៊ុន​លក់​មិន​បាន​ផ្
 msgid "This action is being run by another program already."
 msgstr "អំពើ​នេះ កំពុង​រត់​ដោយ​កម្មវិធី​ផ្សេង​មួយ​ទៀត ។"
 
-#: ../zypp/solver/detail/SATResolver.cc:1118
-#: ../zypp/solver/detail/SATResolver.cc:1136
+#: ../zypp/solver/detail/SATResolver.cc:1131
+#: ../zypp/solver/detail/SATResolver.cc:1149
 msgid "This request will break your system!"
 msgstr "សំណើ​នេះ​នឹង​ធ្វើ​ឲ្យ​ប្រព័ន្ធ​របស់​អ្នក​ខូច !"
 
@@ -3842,7 +3842,7 @@ msgstr "តុងហ្គា (និយ៉ាសា)"
 msgid "Tonga (Tonga Islands)"
 msgstr "តុងហ្គា (កោះ​តុងហ្គា)"
 
-#: ../zypp/KeyRing.cc:536
+#: ../zypp/KeyRing.cc:528
 #, c-format
 msgid "Tried to import not existant key %s into keyring %s"
 msgstr "នាំចូល​សោ %s ដែល​មិនមាន​ទៅ​ក្នុង keyring %s"
@@ -4107,7 +4107,7 @@ msgid "Vai"
 msgstr "វ៉ាយ"
 
 #. we will throw this later if no URL checks out fine
-#: ../zypp/RepoManager.cc:789
+#: ../zypp/RepoManager.cc:781
 msgid "Valid metadata not found at specified URL(s)"
 msgstr "រក​មិន​ឃើញ​ទិន្នន័យ​មេតា​ដែល​ត្រឹមត្រូវ​នៅ URL ដែល​បាន​បញ្ជាក់"
 
@@ -4284,17 +4284,17 @@ msgstr "ការ​ពិនិត្យ applydeltarpm បាន​បរាជ
 msgid "applydeltarpm failed."
 msgstr "applydeltarpm បាន​បរាជ័យ ។"
 
-#: ../zypp/solver/detail/SATResolver.cc:1194
+#: ../zypp/solver/detail/SATResolver.cc:1207
 #, c-format
 msgid "architecture change of %s to %s"
 msgstr "ការ​ផ្លាស់ប្ដូរ​ស្ថាបត្យកម្ម​នៃ %s ទៅ %s"
 
-#: ../zypp/solver/detail/SATResolver.cc:923
+#: ../zypp/solver/detail/SATResolver.cc:936
 #, c-format
 msgid "cannot install both %s and %s"
 msgstr "មិនអាច​ដំឡើង​ទាំង %s និង %s"
 
-#: ../zypp/solver/detail/SATResolver.cc:903
+#: ../zypp/solver/detail/SATResolver.cc:916
 msgid "conflicting requests"
 msgstr "សំណើ​ការ​ប៉ះទង្គិច"
 
@@ -4303,57 +4303,57 @@ msgstr "សំណើ​ការ​ប៉ះទង្គិច"
 msgid "created backup %s"
 msgstr "បាន​បង្កើត​ព័ត៌មាន​បម្រុង %s"
 
-#: ../zypp/solver/detail/SATResolver.cc:1222
+#: ../zypp/solver/detail/SATResolver.cc:1235
 #, c-format
 msgid "deinstallation of %s"
 msgstr "ការ​លុប​នៃ %s"
 
-#: ../zypp/solver/detail/SATResolver.cc:971
+#: ../zypp/solver/detail/SATResolver.cc:984
 msgid "deleted providers: "
 msgstr "ក្រុមហ៊ុន​ផ្ដល់​ដែល​បាន​លុប ៖ "
 
-#: ../zypp/solver/detail/SATResolver.cc:1139
+#: ../zypp/solver/detail/SATResolver.cc:1152
 #, c-format
 msgid "do not ask to delete all solvables providing %s"
 msgstr "កុំ​ស្នើ​ឲ្យ​លុប​កញ្ចប់​ដោះស្រាយ​ទាំងអស់​ដោយ​ផ្ដល់ %s"
 
-#: ../zypp/solver/detail/SATResolver.cc:1121
+#: ../zypp/solver/detail/SATResolver.cc:1134
 #, c-format
 msgid "do not ask to install a solvable providing %s"
 msgstr "កុំ​ស្នើ​ឲ្យ​ដំឡើង​កញ្ចប់​ដោះស្រាយ​ដោយ​ផ្ដល់ %s"
 
-#: ../zypp/solver/detail/SATResolver.cc:1066
+#: ../zypp/solver/detail/SATResolver.cc:1079
 #, c-format
 msgid "do not forbid installation of %s"
 msgstr "កុំ​ហាម​ការ​ដំឡើង​នៃ %s"
 
-#: ../zypp/solver/detail/SATResolver.cc:1045
-#: ../zypp/solver/detail/SATResolver.cc:1083
+#: ../zypp/solver/detail/SATResolver.cc:1058
+#: ../zypp/solver/detail/SATResolver.cc:1096
 #, c-format
 msgid "do not install %s"
 msgstr "កុំ​ដំឡើង %s"
 
-#: ../zypp/solver/detail/SATResolver.cc:1152
+#: ../zypp/solver/detail/SATResolver.cc:1165
 #, c-format
 msgid "do not install most recent version of %s"
 msgstr "កុំ​ដំឡើង​កំណែ​ថ្មីរបស់ %s"
 
-#: ../zypp/solver/detail/SATResolver.cc:1040
+#: ../zypp/solver/detail/SATResolver.cc:1053
 #, c-format
 msgid "do not keep %s installed"
 msgstr "កុំ​ទុក %s ឲ្យ​នៅ​ដំឡើង"
 
-#: ../zypp/solver/detail/SATResolver.cc:1186
+#: ../zypp/solver/detail/SATResolver.cc:1199
 #, c-format
 msgid "downgrade of %s to %s"
 msgstr "បន្ទាប %s ទៅ %s"
 
-#: ../zypp/solver/detail/SATResolver.cc:1119
-#: ../zypp/solver/detail/SATResolver.cc:1137
+#: ../zypp/solver/detail/SATResolver.cc:1132
+#: ../zypp/solver/detail/SATResolver.cc:1150
 msgid "ignore the warning of a broken system"
 msgstr "មិនអើពើ​នឹង​ការ​ព្រមាន​របស់​ប្រព័ន្ធ​ដែល​ខូច"
 
-#: ../zypp/solver/detail/SATResolver.cc:1202
+#: ../zypp/solver/detail/SATResolver.cc:1215
 #, c-format
 msgid ""
 "install %s (with vendor change)\n"
@@ -4370,8 +4370,8 @@ msgstr ""
 msgid "invalid"
 msgstr "មិន​ត្រឹមត្រូវ"
 
-#: ../zypp/solver/detail/SATResolver.cc:1061
-#: ../zypp/solver/detail/SATResolver.cc:1104
+#: ../zypp/solver/detail/SATResolver.cc:1074
+#: ../zypp/solver/detail/SATResolver.cc:1117
 #, c-format
 msgid "keep %s"
 msgstr "រក្សា %s"
@@ -4384,22 +4384,22 @@ msgstr "libhal_ctx_new ៖ មិនអាច​បង្កើត​បរិ�
 msgid "libhal_set_dbus_connection: Can't set dbus connection"
 msgstr "libhal_set_dbus_connection ៖ មិនអាច​​កំណត់​ការ​តភ្ជាប់ dbus បានឡើយ"
 
-#: ../zypp/solver/detail/SATResolver.cc:918
+#: ../zypp/solver/detail/SATResolver.cc:931
 #, c-format
 msgid "nothing provides %s needed by %s"
 msgstr "គ្មាន​អ្វី​ផ្ដល់ %s ដែល​ត្រូវការ​ដោយ %s ទេ"
 
-#: ../zypp/solver/detail/SATResolver.cc:909
+#: ../zypp/solver/detail/SATResolver.cc:922
 #, c-format
 msgid "nothing provides requested %s"
 msgstr "គ្មាន​អ្វី​ផ្ដល់ %s ដែលបាន​ស្នើ​ទេ"
 
-#: ../zypp/solver/detail/SATResolver.cc:900
+#: ../zypp/solver/detail/SATResolver.cc:913
 #, c-format
 msgid "problem with installed package %s"
 msgstr "បញ្ហា​ជាមួយ​កញ្ចប់​ដែល​បាន​ដំឡើង %s"
 
-#: ../zypp/solver/detail/SATResolver.cc:1210
+#: ../zypp/solver/detail/SATResolver.cc:1223
 #, c-format
 msgid "replacement of %s with %s"
 msgstr "ការ​ជំនួស %s ជាមួយ %s"
@@ -4436,11 +4436,11 @@ msgstr ""
 "rpm បាន​រក្សាទុក %s ជា %s ។\n"
 "នេះ​ជា​បន្ទាត់ ២៥ ជួរ​ដំបូង​ខុសគ្នា៖\n"
 
-#: ../zypp/solver/detail/SATResolver.cc:906
+#: ../zypp/solver/detail/SATResolver.cc:919
 msgid "some dependency problem"
 msgstr "បញ្ហា​ភាព​អាស្រ័យ​មួយ​ចំនួន"
 
-#: ../zypp/solver/detail/SATResolver.cc:983
+#: ../zypp/solver/detail/SATResolver.cc:996
 msgid "uninstallable providers: "
 msgstr "ក្រុមហ៊ុន​លក់​ដែល​អាច​លុបបាន ៖ "
 

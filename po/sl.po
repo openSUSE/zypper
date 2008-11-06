@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: YaST (@memory@)\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-10-08 17:27+0200\n"
+"POT-Creation-Date: 2008-10-24 10:45+0200\n"
 "PO-Revision-Date: 2001-10-18 11:02+0200\n"
 "Last-Translator: Janez Krek <janez.krek@euroteh.si>\n"
 "Language-Team: Slovenian\n"
@@ -17,7 +17,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-#: ../zypp/solver/detail/SATResolver.cc:981
+#: ../zypp/solver/detail/SATResolver.cc:994
 msgid ""
 "\n"
 "uninstallable providers: "
@@ -42,22 +42,22 @@ msgstr "Prilagoditev %s ni bila uspešna."
 msgid " execution skipped while aborting"
 msgstr ""
 
-#: ../zypp/solver/detail/SATResolver.cc:928
+#: ../zypp/solver/detail/SATResolver.cc:941
 #, fuzzy, c-format
 msgid "%s conflicts with %s provided by %s"
 msgstr "%1 je v sporu s/z %2"
 
-#: ../zypp/solver/detail/SATResolver.cc:914
+#: ../zypp/solver/detail/SATResolver.cc:927
 #, fuzzy, c-format
 msgid "%s is not installable"
 msgstr "Namestitev ni uspela."
 
-#: ../zypp/solver/detail/SATResolver.cc:933
+#: ../zypp/solver/detail/SATResolver.cc:946
 #, c-format
 msgid "%s obsoletes %s provided by %s"
 msgstr ""
 
-#: ../zypp/solver/detail/SATResolver.cc:969
+#: ../zypp/solver/detail/SATResolver.cc:982
 #, c-format
 msgid "%s requires %s, but this requirement cannot be provided"
 msgstr ""
@@ -85,7 +85,7 @@ msgstr "Tihi način"
 msgid "Adangme"
 msgstr "Območje"
 
-#: ../zypp/RepoManager.cc:1184
+#: ../zypp/RepoManager.cc:1201
 #, c-format
 msgid "Adding repository '%s'"
 msgstr ""
@@ -333,7 +333,7 @@ msgid "Austronesian (Other)"
 msgstr ""
 
 #. !\todo add comma to the message for the next release
-#: ../zypp/media/MediaCurl.cc:1619
+#: ../zypp/media/MediaCurl.cc:1660
 #, c-format
 msgid "Authentication required for '%s'"
 msgstr ""
@@ -625,7 +625,7 @@ msgstr "Brunej"
 msgid "Buginese"
 msgstr "Kitajščina"
 
-#: ../zypp/RepoManager.cc:977
+#: ../zypp/RepoManager.cc:969
 #, c-format
 msgid "Building repository '%s' cache"
 msgstr ""
@@ -682,7 +682,7 @@ msgstr "Kambodža"
 msgid "Cameroon"
 msgstr "Kamerun"
 
-#: ../zypp/sat/detail/PoolImpl.cc:148
+#: ../zypp/sat/detail/PoolImpl.cc:156
 msgid "Can not create sat-pool."
 msgstr ""
 
@@ -752,7 +752,7 @@ msgstr ""
 msgid "Canada"
 msgstr "Kanada"
 
-#: ../zypp/KeyRing.cc:285
+#: ../zypp/KeyRing.cc:277
 #, c-format
 msgid "Cannot create public key %s from %s keyring to file %s"
 msgstr ""
@@ -1365,7 +1365,7 @@ msgstr ""
 msgid "Ewondo"
 msgstr "Konec"
 
-#: ../zypp/KeyRing.cc:587
+#: ../zypp/KeyRing.cc:579
 #, fuzzy
 msgid "Failed to delete key."
 msgstr "Napaka pri nalaganju modula \"%s\"."
@@ -1826,7 +1826,7 @@ msgstr ""
 msgid "Hausa"
 msgstr "Hausa"
 
-#: ../zypp/solver/detail/SATResolver.cc:910
+#: ../zypp/solver/detail/SATResolver.cc:923
 msgid "Have you enabled all requested repositories?"
 msgstr ""
 
@@ -2083,7 +2083,7 @@ msgstr ""
 msgid "Invalid port component '%s'"
 msgstr ""
 
-#: ../zypp/PoolQuery.cc:443
+#: ../zypp/PoolQuery.cc:440
 #, c-format
 msgid "Invalid regular expression '%s': regcomp returned %d"
 msgstr ""
@@ -3527,7 +3527,7 @@ msgstr "Preberi usmerjanje"
 msgid "Relative path not allowed if authority exists"
 msgstr ""
 
-#: ../zypp/RepoManager.cc:1314
+#: ../zypp/RepoManager.cc:1331
 #, c-format
 msgid "Removing repository '%s'"
 msgstr ""
@@ -3789,7 +3789,7 @@ msgstr "Sierra Leone"
 msgid "Sign Languages"
 msgstr "Jeziki"
 
-#: ../zypp/KeyRing.cc:597
+#: ../zypp/KeyRing.cc:589
 #, fuzzy, c-format
 msgid "Signature file %s not found"
 msgstr "KScreensaver-ja ni možno najti."
@@ -3874,7 +3874,7 @@ msgstr "Prijava"
 msgid "Solomon Islands"
 msgstr "Solomonovi otoki"
 
-#: ../zypp/solver/detail/SATResolver.cc:937
+#: ../zypp/solver/detail/SATResolver.cc:950
 #, fuzzy, c-format
 msgid "Solvable %s conflicts with %s provided by itself"
 msgstr "%1 je v sporu s/z %2"
@@ -4060,7 +4060,7 @@ msgstr ""
 #, c-format
 msgid ""
 "System management is locked by the application with pid %d (%s).\n"
-"Please close this application before trying again."
+"Close this application before trying again."
 msgstr ""
 
 #. language code: tgl tl
@@ -4160,8 +4160,8 @@ msgstr ""
 msgid "This action is being run by another program already."
 msgstr ""
 
-#: ../zypp/solver/detail/SATResolver.cc:1118
-#: ../zypp/solver/detail/SATResolver.cc:1136
+#: ../zypp/solver/detail/SATResolver.cc:1131
+#: ../zypp/solver/detail/SATResolver.cc:1149
 msgid "This request will break your system!"
 msgstr ""
 
@@ -4243,7 +4243,7 @@ msgstr ""
 msgid "Tonga (Tonga Islands)"
 msgstr "Solomonovi otoki"
 
-#: ../zypp/KeyRing.cc:536
+#: ../zypp/KeyRing.cc:528
 #, c-format
 msgid "Tried to import not existant key %s into keyring %s"
 msgstr ""
@@ -4528,7 +4528,7 @@ msgid "Vai"
 msgstr "Vi"
 
 #. we will throw this later if no URL checks out fine
-#: ../zypp/RepoManager.cc:789
+#: ../zypp/RepoManager.cc:781
 msgid "Valid metadata not found at specified URL(s)"
 msgstr ""
 
@@ -4732,17 +4732,17 @@ msgstr ""
 msgid "applydeltarpm failed."
 msgstr ""
 
-#: ../zypp/solver/detail/SATResolver.cc:1194
+#: ../zypp/solver/detail/SATResolver.cc:1207
 #, c-format
 msgid "architecture change of %s to %s"
 msgstr ""
 
-#: ../zypp/solver/detail/SATResolver.cc:923
+#: ../zypp/solver/detail/SATResolver.cc:936
 #, fuzzy, c-format
 msgid "cannot install both %s and %s"
 msgstr "Nameščam na:"
 
-#: ../zypp/solver/detail/SATResolver.cc:903
+#: ../zypp/solver/detail/SATResolver.cc:916
 msgid "conflicting requests"
 msgstr ""
 
@@ -4751,57 +4751,57 @@ msgstr ""
 msgid "created backup %s"
 msgstr "Ne Kreiraj Varnostnih Kopij"
 
-#: ../zypp/solver/detail/SATResolver.cc:1222
+#: ../zypp/solver/detail/SATResolver.cc:1235
 #, fuzzy, c-format
 msgid "deinstallation of %s"
 msgstr "Namestitev"
 
-#: ../zypp/solver/detail/SATResolver.cc:971
+#: ../zypp/solver/detail/SATResolver.cc:984
 msgid "deleted providers: "
 msgstr ""
 
-#: ../zypp/solver/detail/SATResolver.cc:1139
+#: ../zypp/solver/detail/SATResolver.cc:1152
 #, fuzzy, c-format
 msgid "do not ask to delete all solvables providing %s"
 msgstr "%1 je v sporu s/z %2"
 
-#: ../zypp/solver/detail/SATResolver.cc:1121
+#: ../zypp/solver/detail/SATResolver.cc:1134
 #, c-format
 msgid "do not ask to install a solvable providing %s"
 msgstr ""
 
-#: ../zypp/solver/detail/SATResolver.cc:1066
+#: ../zypp/solver/detail/SATResolver.cc:1079
 #, fuzzy, c-format
 msgid "do not forbid installation of %s"
 msgstr "Nameščam na:"
 
-#: ../zypp/solver/detail/SATResolver.cc:1045
-#: ../zypp/solver/detail/SATResolver.cc:1083
+#: ../zypp/solver/detail/SATResolver.cc:1058
+#: ../zypp/solver/detail/SATResolver.cc:1096
 #, fuzzy, c-format
 msgid "do not install %s"
 msgstr "Nameščam na:"
 
-#: ../zypp/solver/detail/SATResolver.cc:1152
+#: ../zypp/solver/detail/SATResolver.cc:1165
 #, c-format
 msgid "do not install most recent version of %s"
 msgstr ""
 
-#: ../zypp/solver/detail/SATResolver.cc:1040
+#: ../zypp/solver/detail/SATResolver.cc:1053
 #, fuzzy, c-format
 msgid "do not keep %s installed"
 msgstr "Nameščam na:"
 
-#: ../zypp/solver/detail/SATResolver.cc:1186
+#: ../zypp/solver/detail/SATResolver.cc:1199
 #, c-format
 msgid "downgrade of %s to %s"
 msgstr ""
 
-#: ../zypp/solver/detail/SATResolver.cc:1119
-#: ../zypp/solver/detail/SATResolver.cc:1137
+#: ../zypp/solver/detail/SATResolver.cc:1132
+#: ../zypp/solver/detail/SATResolver.cc:1150
 msgid "ignore the warning of a broken system"
 msgstr ""
 
-#: ../zypp/solver/detail/SATResolver.cc:1202
+#: ../zypp/solver/detail/SATResolver.cc:1215
 #, c-format
 msgid ""
 "install %s (with vendor change)\n"
@@ -4815,8 +4815,8 @@ msgstr ""
 msgid "invalid"
 msgstr "Namesti"
 
-#: ../zypp/solver/detail/SATResolver.cc:1061
-#: ../zypp/solver/detail/SATResolver.cc:1104
+#: ../zypp/solver/detail/SATResolver.cc:1074
+#: ../zypp/solver/detail/SATResolver.cc:1117
 #, c-format
 msgid "keep %s"
 msgstr ""
@@ -4829,22 +4829,22 @@ msgstr ""
 msgid "libhal_set_dbus_connection: Can't set dbus connection"
 msgstr ""
 
-#: ../zypp/solver/detail/SATResolver.cc:918
+#: ../zypp/solver/detail/SATResolver.cc:931
 #, c-format
 msgid "nothing provides %s needed by %s"
 msgstr ""
 
-#: ../zypp/solver/detail/SATResolver.cc:909
+#: ../zypp/solver/detail/SATResolver.cc:922
 #, c-format
 msgid "nothing provides requested %s"
 msgstr ""
 
-#: ../zypp/solver/detail/SATResolver.cc:900
+#: ../zypp/solver/detail/SATResolver.cc:913
 #, c-format
 msgid "problem with installed package %s"
 msgstr ""
 
-#: ../zypp/solver/detail/SATResolver.cc:1210
+#: ../zypp/solver/detail/SATResolver.cc:1223
 #, c-format
 msgid "replacement of %s with %s"
 msgstr ""
@@ -4877,12 +4877,12 @@ msgid ""
 "Here are the first 25 lines of difference:\n"
 msgstr ""
 
-#: ../zypp/solver/detail/SATResolver.cc:906
+#: ../zypp/solver/detail/SATResolver.cc:919
 #, fuzzy
 msgid "some dependency problem"
 msgstr "Nezadoščene odvisnosti:"
 
-#: ../zypp/solver/detail/SATResolver.cc:983
+#: ../zypp/solver/detail/SATResolver.cc:996
 #, fuzzy
 msgid "uninstallable providers: "
 msgstr "Samodejna namestitev"

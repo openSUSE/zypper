@@ -10,8 +10,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: zypp\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-10-08 17:27+0200\n"
-"PO-Revision-Date: 2008-10-22 21:18+0900\n"
+"POT-Creation-Date: 2008-10-24 10:45+0200\n"
+"PO-Revision-Date: 2008-11-05 21:21+0900\n"
 "Last-Translator: Yasuhiko Kamata <belphegor@belbel.or.jp>\n"
 "Language-Team: Japanese <opensuse-ja@opensuse.org>\n"
 "MIME-Version: 1.0\n"
@@ -20,7 +20,7 @@ msgstr ""
 "Plural-Forms: nplurals=1; plural=0;\n"
 "X-Generator: KBabel 1.11.4\n"
 
-#: ../zypp/solver/detail/SATResolver.cc:981
+#: ../zypp/solver/detail/SATResolver.cc:994
 msgid ""
 "\n"
 "uninstallable providers: "
@@ -45,22 +45,22 @@ msgstr " 実行失敗"
 msgid " execution skipped while aborting"
 msgstr " 中止しているため実行をスキップ"
 
-#: ../zypp/solver/detail/SATResolver.cc:928
+#: ../zypp/solver/detail/SATResolver.cc:941
 #, c-format
 msgid "%s conflicts with %s provided by %s"
 msgstr "%1$s は %2$s から提供されている %3$s と競合します"
 
-#: ../zypp/solver/detail/SATResolver.cc:914
+#: ../zypp/solver/detail/SATResolver.cc:927
 #, c-format
 msgid "%s is not installable"
 msgstr "%s はインストールできません"
 
-#: ../zypp/solver/detail/SATResolver.cc:933
+#: ../zypp/solver/detail/SATResolver.cc:946
 #, c-format
 msgid "%s obsoletes %s provided by %s"
 msgstr "%1$s は %3$s から提供されている %2$s を古いものとして廃棄します"
 
-#: ../zypp/solver/detail/SATResolver.cc:969
+#: ../zypp/solver/detail/SATResolver.cc:982
 #, c-format
 msgid "%s requires %s, but this requirement cannot be provided"
 msgstr "%s は %s を必要としていますが、この要求を解決する方法がありません"
@@ -85,7 +85,7 @@ msgstr "アチョリ語"
 msgid "Adangme"
 msgstr "アダングメ語"
 
-#: ../zypp/RepoManager.cc:1184
+#: ../zypp/RepoManager.cc:1201
 #, c-format
 msgid "Adding repository '%s'"
 msgstr "リポジトリ '%s' を追加しています"
@@ -308,7 +308,7 @@ msgid "Austronesian (Other)"
 msgstr "アウストロネシア語 (その他)"
 
 #. !\todo add comma to the message for the next release
-#: ../zypp/media/MediaCurl.cc:1619
+#: ../zypp/media/MediaCurl.cc:1660
 #, c-format
 msgid "Authentication required for '%s'"
 msgstr "'%s' にアクセスするにはユーザ認証が必要です"
@@ -572,10 +572,10 @@ msgstr "ブルネイダルサラーム国"
 msgid "Buginese"
 msgstr "ブギス語"
 
-#: ../zypp/RepoManager.cc:977
+#: ../zypp/RepoManager.cc:969
 #, c-format
 msgid "Building repository '%s' cache"
-msgstr "リポジトリ '%s' のキャッシュを構築中"
+msgstr "リポジトリ '%s' のキャッシュを構築しています"
 
 #. :BFA:854:
 #: ../zypp/CountryCode.cc:246
@@ -622,7 +622,7 @@ msgstr "カンボジア"
 msgid "Cameroon"
 msgstr "カメルーン"
 
-#: ../zypp/sat/detail/PoolImpl.cc:148
+#: ../zypp/sat/detail/PoolImpl.cc:156
 msgid "Can not create sat-pool."
 msgstr "sat-pool を作成できません。"
 
@@ -692,7 +692,7 @@ msgstr "再帰相互排他機能の属性を設定できません"
 msgid "Canada"
 msgstr "カナダ"
 
-#: ../zypp/KeyRing.cc:285
+#: ../zypp/KeyRing.cc:277
 #, c-format
 msgid "Cannot create public key %s from %s keyring to file %s"
 msgstr "鍵リング %2$s から公開鍵 %1$s をファイル %3$s に作成することができません"
@@ -1266,7 +1266,7 @@ msgstr "エウェ語"
 msgid "Ewondo"
 msgstr "エウォンド語"
 
-#: ../zypp/KeyRing.cc:587
+#: ../zypp/KeyRing.cc:579
 msgid "Failed to delete key."
 msgstr "キーの削除に失敗しました。"
 
@@ -1700,7 +1700,7 @@ msgstr "HalVolume が初期化されていません"
 msgid "Hausa"
 msgstr "ハウサ語"
 
-#: ../zypp/solver/detail/SATResolver.cc:910
+#: ../zypp/solver/detail/SATResolver.cc:923
 msgid "Have you enabled all requested repositories?"
 msgstr "すべての必要なリポジトリを有効化しましたか？"
 
@@ -1939,7 +1939,7 @@ msgstr "無効なパラメータマップ区切り文字"
 msgid "Invalid port component '%s'"
 msgstr "無効なポート部分 '%s'"
 
-#: ../zypp/PoolQuery.cc:443
+#: ../zypp/PoolQuery.cc:440
 #, c-format
 msgid "Invalid regular expression '%s': regcomp returned %d"
 msgstr "正規表現 '%s' が正しくありません。 regcomp は %d を返しました"
@@ -3211,7 +3211,7 @@ msgstr "ラロトンガ語"
 msgid "Relative path not allowed if authority exists"
 msgstr "権限部分が存在する場合相対パスは許可されません。 "
 
-#: ../zypp/RepoManager.cc:1314
+#: ../zypp/RepoManager.cc:1331
 #, c-format
 msgid "Removing repository '%s'"
 msgstr "リポジトリ '%s' を削除しています"
@@ -3436,7 +3436,7 @@ msgstr "シエラレオーネ"
 msgid "Sign Languages"
 msgstr "手話言語"
 
-#: ../zypp/KeyRing.cc:597
+#: ../zypp/KeyRing.cc:589
 #, c-format
 msgid "Signature file %s not found"
 msgstr "署名ファイル %s が見つかりません。"
@@ -3516,7 +3516,7 @@ msgstr "ソグディアナ語"
 msgid "Solomon Islands"
 msgstr "ソロモン諸島"
 
-#: ../zypp/solver/detail/SATResolver.cc:937
+#: ../zypp/solver/detail/SATResolver.cc:950
 #, c-format
 msgid "Solvable %s conflicts with %s provided by itself"
 msgstr "解決方法 %s は自分自身で提供している %s と競合しています"
@@ -3680,7 +3680,7 @@ msgstr "システム例外 '%s' がメディア '%s' 上で発生しました。
 #, c-format
 msgid ""
 "System management is locked by the application with pid %d (%s).\n"
-"Please close this application before trying again."
+"Close this application before trying again."
 msgstr ""
 "システム管理はプロセス ID %d (%s) によってロックされています。\n"
 "再試行する前にこのアプリケーションを終了してください。"
@@ -3772,8 +3772,8 @@ msgstr "製造元はサポートを提供していません。"
 msgid "This action is being run by another program already."
 msgstr "この作業は既に他のプログラムで実行されています。"
 
-#: ../zypp/solver/detail/SATResolver.cc:1118
-#: ../zypp/solver/detail/SATResolver.cc:1136
+#: ../zypp/solver/detail/SATResolver.cc:1131
+#: ../zypp/solver/detail/SATResolver.cc:1149
 msgid "This request will break your system!"
 msgstr "この要求はシステムを壊してしまいます！"
 
@@ -3843,7 +3843,7 @@ msgstr "トンガ語 (ニアサ)"
 msgid "Tonga (Tonga Islands)"
 msgstr "トンガ語 (トンガ諸島)"
 
-#: ../zypp/KeyRing.cc:536
+#: ../zypp/KeyRing.cc:528
 #, c-format
 msgid "Tried to import not existant key %s into keyring %s"
 msgstr "新しい鍵 %s を鍵リング %s にインポートしようとしました"
@@ -4106,7 +4106,7 @@ msgid "Vai"
 msgstr "ヴァイ語"
 
 #. we will throw this later if no URL checks out fine
-#: ../zypp/RepoManager.cc:789
+#: ../zypp/RepoManager.cc:781
 msgid "Valid metadata not found at specified URL(s)"
 msgstr "指定した URL には有効なメタデータがありません"
 
@@ -4283,17 +4283,17 @@ msgstr "applydeltarpm のチェックに失敗しました。"
 msgid "applydeltarpm failed."
 msgstr "applydeltarpm が失敗しました。"
 
-#: ../zypp/solver/detail/SATResolver.cc:1194
+#: ../zypp/solver/detail/SATResolver.cc:1207
 #, c-format
 msgid "architecture change of %s to %s"
 msgstr "アーキテクチャを %s から %s に変更"
 
-#: ../zypp/solver/detail/SATResolver.cc:923
+#: ../zypp/solver/detail/SATResolver.cc:936
 #, c-format
 msgid "cannot install both %s and %s"
 msgstr "%s と %s の両方ともインストールすることができません"
 
-#: ../zypp/solver/detail/SATResolver.cc:903
+#: ../zypp/solver/detail/SATResolver.cc:916
 msgid "conflicting requests"
 msgstr "要求が矛盾しています"
 
@@ -4302,57 +4302,57 @@ msgstr "要求が矛盾しています"
 msgid "created backup %s"
 msgstr "バックアップ %s が作成されました"
 
-#: ../zypp/solver/detail/SATResolver.cc:1222
+#: ../zypp/solver/detail/SATResolver.cc:1235
 #, c-format
 msgid "deinstallation of %s"
 msgstr "%s のアンインストール"
 
-#: ../zypp/solver/detail/SATResolver.cc:971
+#: ../zypp/solver/detail/SATResolver.cc:984
 msgid "deleted providers: "
 msgstr "削除したプロバイダ: "
 
-#: ../zypp/solver/detail/SATResolver.cc:1139
+#: ../zypp/solver/detail/SATResolver.cc:1152
 #, c-format
 msgid "do not ask to delete all solvables providing %s"
 msgstr "%s で提供される解決方法の削除について問い合わせない"
 
-#: ../zypp/solver/detail/SATResolver.cc:1121
+#: ../zypp/solver/detail/SATResolver.cc:1134
 #, c-format
 msgid "do not ask to install a solvable providing %s"
 msgstr "%s で提供される解決方法のインストールについて問い合わせない"
 
-#: ../zypp/solver/detail/SATResolver.cc:1066
+#: ../zypp/solver/detail/SATResolver.cc:1079
 #, c-format
 msgid "do not forbid installation of %s"
 msgstr "%s のインストールを禁止しない"
 
-#: ../zypp/solver/detail/SATResolver.cc:1045
-#: ../zypp/solver/detail/SATResolver.cc:1083
+#: ../zypp/solver/detail/SATResolver.cc:1058
+#: ../zypp/solver/detail/SATResolver.cc:1096
 #, c-format
 msgid "do not install %s"
 msgstr "%s をインストールしない"
 
-#: ../zypp/solver/detail/SATResolver.cc:1152
+#: ../zypp/solver/detail/SATResolver.cc:1165
 #, c-format
 msgid "do not install most recent version of %s"
 msgstr "%s の最新バージョンをインストールしない"
 
-#: ../zypp/solver/detail/SATResolver.cc:1040
+#: ../zypp/solver/detail/SATResolver.cc:1053
 #, c-format
 msgid "do not keep %s installed"
 msgstr "%s のインストールを保持しない"
 
-#: ../zypp/solver/detail/SATResolver.cc:1186
+#: ../zypp/solver/detail/SATResolver.cc:1199
 #, c-format
 msgid "downgrade of %s to %s"
 msgstr "%s を %s にダウングレードする"
 
-#: ../zypp/solver/detail/SATResolver.cc:1119
-#: ../zypp/solver/detail/SATResolver.cc:1137
+#: ../zypp/solver/detail/SATResolver.cc:1132
+#: ../zypp/solver/detail/SATResolver.cc:1150
 msgid "ignore the warning of a broken system"
 msgstr "システムが破壊される警告を無視します"
 
-#: ../zypp/solver/detail/SATResolver.cc:1202
+#: ../zypp/solver/detail/SATResolver.cc:1215
 #, c-format
 msgid ""
 "install %s (with vendor change)\n"
@@ -4369,8 +4369,8 @@ msgstr ""
 msgid "invalid"
 msgstr "無効"
 
-#: ../zypp/solver/detail/SATResolver.cc:1061
-#: ../zypp/solver/detail/SATResolver.cc:1104
+#: ../zypp/solver/detail/SATResolver.cc:1074
+#: ../zypp/solver/detail/SATResolver.cc:1117
 #, c-format
 msgid "keep %s"
 msgstr "%s を維持"
@@ -4383,22 +4383,22 @@ msgstr "libhal_ctx_new: libhal コンテキストを作成できません"
 msgid "libhal_set_dbus_connection: Can't set dbus connection"
 msgstr "libhal_set_dbus_connection: dbus 接続を設定できません"
 
-#: ../zypp/solver/detail/SATResolver.cc:918
+#: ../zypp/solver/detail/SATResolver.cc:931
 #, c-format
 msgid "nothing provides %s needed by %s"
 msgstr "%2$s で必要としている %1$s はどこからも提供されていません"
 
-#: ../zypp/solver/detail/SATResolver.cc:909
+#: ../zypp/solver/detail/SATResolver.cc:922
 #, c-format
 msgid "nothing provides requested %s"
 msgstr "要求した %s はどこからも提供されていません"
 
-#: ../zypp/solver/detail/SATResolver.cc:900
+#: ../zypp/solver/detail/SATResolver.cc:913
 #, c-format
 msgid "problem with installed package %s"
 msgstr "インストール済みのパッケージ %s に問題が発生しました。"
 
-#: ../zypp/solver/detail/SATResolver.cc:1210
+#: ../zypp/solver/detail/SATResolver.cc:1223
 #, c-format
 msgid "replacement of %s with %s"
 msgstr "%s を %s で置き換える"
@@ -4435,11 +4435,11 @@ msgstr ""
 "rpm は %s を %s として保存しました。\n"
 "以下は差異のある最初の25行です。\n"
 
-#: ../zypp/solver/detail/SATResolver.cc:906
+#: ../zypp/solver/detail/SATResolver.cc:919
 msgid "some dependency problem"
 msgstr "何らかの依存関係の問題"
 
-#: ../zypp/solver/detail/SATResolver.cc:983
+#: ../zypp/solver/detail/SATResolver.cc:996
 msgid "uninstallable providers: "
 msgstr "インストール不可能なプロバイダ: "
 

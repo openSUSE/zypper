@@ -1,5 +1,4 @@
 # translation of zypp.po to
-# translation of zypp.po to Polish
 # Polish message file for YaST2 (@memory@).
 # Copyright (C) 2005 SUSE Linux Products GmbH.
 # Copyright (C) 2003 SuSE Linux AG.
@@ -7,21 +6,22 @@
 # Wojciech Kapusta <wojciech@aviary.pl>, 2006.
 # Marek Stepien <marcoos@aviary.pl>, 2006.
 # wadim dziedzic <wdziedzic@aviary.org>, 2008.
+# Karol Sikora <karol@elektrrrus.pl>, 2008.
 msgid ""
 msgstr ""
 "Project-Id-Version: zypp\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-10-08 17:27+0200\n"
-"PO-Revision-Date: 2008-09-25 12:30+0100\n"
-"Last-Translator: Mirosław Rogoziński <miroslaw.rogozinski@gmail.com>\n"
-"Language-Team: Polish <pl@li.org>\n"
+"POT-Creation-Date: 2008-10-24 10:45+0200\n"
+"PO-Revision-Date: 2008-10-24 22:26+0200\n"
+"Last-Translator: Karol Sikora <karol@elektrrrus.pl>\n"
+"Language-Team:  <pl@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=n==1 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2;\n"
 "X-Generator: KBabel 1.11.4\n"
 
-#: ../zypp/solver/detail/SATResolver.cc:981
+#: ../zypp/solver/detail/SATResolver.cc:994
 msgid ""
 "\n"
 "uninstallable providers: "
@@ -46,22 +46,22 @@ msgstr "wykonanie nie powiodło się"
 msgid " execution skipped while aborting"
 msgstr "nie wykonano w wyniku przerwania"
 
-#: ../zypp/solver/detail/SATResolver.cc:928
+#: ../zypp/solver/detail/SATResolver.cc:941
 #, c-format
 msgid "%s conflicts with %s provided by %s"
 msgstr "%s jest w konflikcie z %s dostarczonym przez %s"
 
-#: ../zypp/solver/detail/SATResolver.cc:914
+#: ../zypp/solver/detail/SATResolver.cc:927
 #, c-format
 msgid "%s is not installable"
 msgstr "Nie da się zainstalować %s"
 
-#: ../zypp/solver/detail/SATResolver.cc:933
+#: ../zypp/solver/detail/SATResolver.cc:946
 #, c-format
 msgid "%s obsoletes %s provided by %s"
 msgstr "%s dezaktualizuje %s dostarczony przez %s"
 
-#: ../zypp/solver/detail/SATResolver.cc:969
+#: ../zypp/solver/detail/SATResolver.cc:982
 #, c-format
 msgid "%s requires %s, but this requirement cannot be provided"
 msgstr "%s wymaga %s, lecz to wymaganie nie może zostać spełnione"
@@ -86,7 +86,7 @@ msgstr "aczoli"
 msgid "Adangme"
 msgstr "adangme"
 
-#: ../zypp/RepoManager.cc:1184
+#: ../zypp/RepoManager.cc:1201
 #, c-format
 msgid "Adding repository '%s'"
 msgstr "Dodawanie repozytorium \"%s\""
@@ -315,7 +315,7 @@ msgid "Austronesian (Other)"
 msgstr "języki malajo-polinezyjskie"
 
 #. !\todo add comma to the message for the next release
-#: ../zypp/media/MediaCurl.cc:1619
+#: ../zypp/media/MediaCurl.cc:1660
 #, c-format
 msgid "Authentication required for '%s'"
 msgstr "Wymagane uwierzytelnienie dla \"%s\""
@@ -589,7 +589,7 @@ msgstr "Brunei"
 msgid "Buginese"
 msgstr "bugijski"
 
-#: ../zypp/RepoManager.cc:977
+#: ../zypp/RepoManager.cc:969
 #, c-format
 msgid "Building repository '%s' cache"
 msgstr "Budowanie pamięci podręcznej repozytorium \"%s\""
@@ -640,7 +640,7 @@ msgstr "Kambodża"
 msgid "Cameroon"
 msgstr "Kamerun"
 
-#: ../zypp/sat/detail/PoolImpl.cc:148
+#: ../zypp/sat/detail/PoolImpl.cc:156
 msgid "Can not create sat-pool."
 msgstr "Nie można utworzyć \"sat-pool\""
 
@@ -710,7 +710,7 @@ msgstr "Nie można ustawić atrybutu rekurencyjności muteksu"
 msgid "Canada"
 msgstr "Kanada"
 
-#: ../zypp/KeyRing.cc:285
+#: ../zypp/KeyRing.cc:277
 #, c-format
 msgid "Cannot create public key %s from %s keyring to file %s"
 msgstr "Nie można utworzyć klucza publicznego %s z zestawu %s do pliku %s"
@@ -727,7 +727,7 @@ msgstr "Nie można wysunąć nośnika \"%s\""
 #: ../zypp/media/MediaException.cc:273
 #, c-format
 msgid "Cannot find available loop device to mount the image file from '%s'"
-msgstr ""
+msgstr "Nie znaleziono żadnego urządzenia loop aby zamontować obraz z pliku '%s'"
 
 #: ../zypp/media/MediaException.cc:67
 #, c-format
@@ -1091,9 +1091,9 @@ msgstr "Dominikana"
 
 #. TranslatorExplanation: curl is the name of a library, don't translate
 #: ../zypp/media/MediaException.cc:92 ../zypp/media/MediaException.cc:100
-#, fuzzy, c-format
+#, c-format
 msgid "Download (Metalink curl) initialization failed for '%s'"
-msgstr "Inicjalizacja pobierania (curl) dla \"%s\" zakończona niepowodzeniem "
+msgstr "Inicjalizacja pobierania (curl) dla '%s' zakończona niepowodzeniem "
 
 #: ../zypp/media/MediaException.cc:168
 #, c-format
@@ -1113,13 +1113,13 @@ msgid "Download (curl) initialization failed for '%s'"
 msgstr "Inicjalizacja pobierania (curl) dla \"%s\" zakończona niepowodzeniem "
 
 #: ../zypp/media/MediaException.cc:186 ../zypp/media/MediaException.cc:204
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Download (metalink curl) error for '%s':\n"
 "Error code: %s\n"
 "Error message: %s\n"
 msgstr ""
-"Błąd pobierania (curl) dla \"%s\":\n"
+"Błąd pobierania (curl) dla '%s':\n"
 "Kod błędu: %s\n"
 "Komunikat błędu: %s\n"
 
@@ -1248,9 +1248,9 @@ msgstr "Wystąpił błąd podczas ustawiania opcji pobierania (curl) dla \"%s\":
 
 #. TranslatorExplanation: curl is the name of a library, don't translate
 #: ../zypp/media/MediaException.cc:195 ../zypp/media/MediaException.cc:213
-#, fuzzy, c-format
+#, c-format
 msgid "Error occurred while setting download (metalink curl) options for '%s':"
-msgstr "Napotkano błąd podczas ustawiania opcji pobierania (curl) dla \"%s\":"
+msgstr "Napotkano błąd podczas ustawiania opcji pobierania (curl) dla '%s':"
 
 #. language code: myv
 #: ../zypp/LanguageCode.cc:850
@@ -1288,7 +1288,7 @@ msgstr "ewe"
 msgid "Ewondo"
 msgstr "ewondo"
 
-#: ../zypp/KeyRing.cc:587
+#: ../zypp/KeyRing.cc:579
 msgid "Failed to delete key."
 msgstr "Usunięcie klucza nie powiodło się."
 
@@ -1725,7 +1725,7 @@ msgstr "HalVolume:  niezainicjowany."
 msgid "Hausa"
 msgstr "hausański"
 
-#: ../zypp/solver/detail/SATResolver.cc:910
+#: ../zypp/solver/detail/SATResolver.cc:923
 msgid "Have you enabled all requested repositories?"
 msgstr "Czy udostępniono wszystkie wymagane repozytoria."
 
@@ -1964,7 +1964,7 @@ msgstr "Nieprawidłowy znak parametru podziału mapy"
 msgid "Invalid port component '%s'"
 msgstr "Nieprawidłowy komponent portu '%s'"
 
-#: ../zypp/PoolQuery.cc:443
+#: ../zypp/PoolQuery.cc:440
 #, c-format
 msgid "Invalid regular expression '%s': regcomp returned %d"
 msgstr "Niepoprawne wyrażenie regularne \"%s\": regcomp zwróciło %d"
@@ -3033,9 +3033,9 @@ msgstr "języki otomiańskie"
 
 #. TranslatorExplanation %s = package being checked for integrity
 #: ../zypp/repo/PackageProvider.cc:247
-#, fuzzy, c-format
+#, c-format
 msgid "Package %s seems to be corrupted during transfer. Do you want to retry retrieval?"
-msgstr "Pakiet %s nie przeszedłe testu integralności. Czy spróbować ponownie?"
+msgstr "Pakiet %s nie przeszedł testu integralności. Czy spróbować ponownie?"
 
 #. language code: pal
 #: ../zypp/LanguageCode.cc:926
@@ -3259,7 +3259,7 @@ msgstr "rarotongański"
 msgid "Relative path not allowed if authority exists"
 msgstr "Względna ścieżka nie jest dozwolona, jeśli usługa istnieje"
 
-#: ../zypp/RepoManager.cc:1314
+#: ../zypp/RepoManager.cc:1331
 #, c-format
 msgid "Removing repository '%s'"
 msgstr "Usuwanie repozytorium '%s'"
@@ -3489,7 +3489,7 @@ msgstr "Sierra Leone"
 msgid "Sign Languages"
 msgstr "języki migowe"
 
-#: ../zypp/KeyRing.cc:597
+#: ../zypp/KeyRing.cc:589
 #, c-format
 msgid "Signature file %s not found"
 msgstr "Nie znaleziono pliku %s z sygnaturą"
@@ -3569,7 +3569,7 @@ msgstr "sogdyjski"
 msgid "Solomon Islands"
 msgstr "Wyspy Salomona"
 
-#: ../zypp/solver/detail/SATResolver.cc:937
+#: ../zypp/solver/detail/SATResolver.cc:950
 #, c-format
 msgid "Solvable %s conflicts with %s provided by itself"
 msgstr "El. rozwiązywalny %s jest w konflikcie z %s dostarczonym przez siebie"
@@ -3735,10 +3735,10 @@ msgid "System exception '%s' on medium '%s'."
 msgstr "Wyjątek systemowy '%s' na nośniku '%s'."
 
 #: ../zypp/ZYppFactory.cc:361
-#, c-format
+#, fuzzy, c-format
 msgid ""
 "System management is locked by the application with pid %d (%s).\n"
-"Please close this application before trying again."
+"Close this application before trying again."
 msgstr ""
 "Zarządzanie systemem jest zablokowane przez aplikację oznaczoną numerem pid %d (%s).\n"
 "Należy zamknąć tę aplikację i spróbowac ponownie."
@@ -3831,8 +3831,8 @@ msgstr "Producent nie zapewnia wsparcia."
 msgid "This action is being run by another program already."
 msgstr "Inny program wykonuje tę czynność."
 
-#: ../zypp/solver/detail/SATResolver.cc:1118
-#: ../zypp/solver/detail/SATResolver.cc:1136
+#: ../zypp/solver/detail/SATResolver.cc:1131
+#: ../zypp/solver/detail/SATResolver.cc:1149
 msgid "This request will break your system!"
 msgstr "Żądanie uszkodzi ten system."
 
@@ -3905,7 +3905,7 @@ msgstr "tongański (Niasa)"
 msgid "Tonga (Tonga Islands)"
 msgstr "tongański (wyspy Tonga)"
 
-#: ../zypp/KeyRing.cc:536
+#: ../zypp/KeyRing.cc:528
 #, c-format
 msgid "Tried to import not existant key %s into keyring %s"
 msgstr "Próba importu nieistniejącego klucza %s do bazy kluczy %s"
@@ -4172,7 +4172,7 @@ msgid "Vai"
 msgstr "vai"
 
 #. we will throw this later if no URL checks out fine
-#: ../zypp/RepoManager.cc:789
+#: ../zypp/RepoManager.cc:781
 msgid "Valid metadata not found at specified URL(s)"
 msgstr "Pod podanymi adresami URL nie znaleiono poprawnych metadanych."
 
@@ -4354,17 +4354,17 @@ msgstr "Sprawdzenie applydeltarpm zakończone niepowodzeniem."
 msgid "applydeltarpm failed."
 msgstr "applydeltarpm zakończone niepowodzeniem."
 
-#: ../zypp/solver/detail/SATResolver.cc:1194
+#: ../zypp/solver/detail/SATResolver.cc:1207
 #, c-format
 msgid "architecture change of %s to %s"
 msgstr "zmiana architektury %s na %s"
 
-#: ../zypp/solver/detail/SATResolver.cc:923
+#: ../zypp/solver/detail/SATResolver.cc:936
 #, c-format
 msgid "cannot install both %s and %s"
 msgstr "nie można jednocześnie zainstalować %s i %s"
 
-#: ../zypp/solver/detail/SATResolver.cc:903
+#: ../zypp/solver/detail/SATResolver.cc:916
 msgid "conflicting requests"
 msgstr "sprzeczne żądania"
 
@@ -4373,57 +4373,57 @@ msgstr "sprzeczne żądania"
 msgid "created backup %s"
 msgstr "utworzono zapasowy %s"
 
-#: ../zypp/solver/detail/SATResolver.cc:1222
+#: ../zypp/solver/detail/SATResolver.cc:1235
 #, c-format
 msgid "deinstallation of %s"
 msgstr "usunięcie %s"
 
-#: ../zypp/solver/detail/SATResolver.cc:971
+#: ../zypp/solver/detail/SATResolver.cc:984
 msgid "deleted providers: "
 msgstr "usunięci dostawcy:"
 
-#: ../zypp/solver/detail/SATResolver.cc:1139
+#: ../zypp/solver/detail/SATResolver.cc:1152
 #, c-format
 msgid "do not ask to delete all solvables providing %s"
 msgstr "nie pytaa o usunięcie wszystkich elementów rozwiązywalnych dostarczających %s"
 
-#: ../zypp/solver/detail/SATResolver.cc:1121
+#: ../zypp/solver/detail/SATResolver.cc:1134
 #, c-format
 msgid "do not ask to install a solvable providing %s"
 msgstr "nie pyta o instalację wszystkich elementów rozwiązywalnych dostarczających %s"
 
-#: ../zypp/solver/detail/SATResolver.cc:1066
+#: ../zypp/solver/detail/SATResolver.cc:1079
 #, c-format
 msgid "do not forbid installation of %s"
 msgstr "nie zakazuje instalacji %s"
 
-#: ../zypp/solver/detail/SATResolver.cc:1045
-#: ../zypp/solver/detail/SATResolver.cc:1083
+#: ../zypp/solver/detail/SATResolver.cc:1058
+#: ../zypp/solver/detail/SATResolver.cc:1096
 #, c-format
 msgid "do not install %s"
 msgstr "nie instaluje %s"
 
-#: ../zypp/solver/detail/SATResolver.cc:1152
+#: ../zypp/solver/detail/SATResolver.cc:1165
 #, c-format
 msgid "do not install most recent version of %s"
 msgstr "nie instaluje najnowszej wersji %s"
 
-#: ../zypp/solver/detail/SATResolver.cc:1040
+#: ../zypp/solver/detail/SATResolver.cc:1053
 #, c-format
 msgid "do not keep %s installed"
 msgstr "nie utrzymuje %s zainstalowanego"
 
-#: ../zypp/solver/detail/SATResolver.cc:1186
+#: ../zypp/solver/detail/SATResolver.cc:1199
 #, c-format
 msgid "downgrade of %s to %s"
 msgstr "przywraca %s do %s"
 
-#: ../zypp/solver/detail/SATResolver.cc:1119
-#: ../zypp/solver/detail/SATResolver.cc:1137
+#: ../zypp/solver/detail/SATResolver.cc:1132
+#: ../zypp/solver/detail/SATResolver.cc:1150
 msgid "ignore the warning of a broken system"
 msgstr "ignoruje ostrzeżenie o uszkodzeniu systemu"
 
-#: ../zypp/solver/detail/SATResolver.cc:1202
+#: ../zypp/solver/detail/SATResolver.cc:1215
 #, c-format
 msgid ""
 "install %s (with vendor change)\n"
@@ -4440,8 +4440,8 @@ msgstr ""
 msgid "invalid"
 msgstr "niepoprawny"
 
-#: ../zypp/solver/detail/SATResolver.cc:1061
-#: ../zypp/solver/detail/SATResolver.cc:1104
+#: ../zypp/solver/detail/SATResolver.cc:1074
+#: ../zypp/solver/detail/SATResolver.cc:1117
 #, c-format
 msgid "keep %s"
 msgstr "zachowuje %s"
@@ -4454,22 +4454,22 @@ msgstr "libhal_ctx_new: nie można utworzyć kontekstu libhal"
 msgid "libhal_set_dbus_connection: Can't set dbus connection"
 msgstr "libhal_set_dbus_connection: nie można ustanowić połączenia dbus"
 
-#: ../zypp/solver/detail/SATResolver.cc:918
+#: ../zypp/solver/detail/SATResolver.cc:931
 #, c-format
 msgid "nothing provides %s needed by %s"
 msgstr "żaden pakiet nie dostarcza %s wymaganego przez %s"
 
-#: ../zypp/solver/detail/SATResolver.cc:909
+#: ../zypp/solver/detail/SATResolver.cc:922
 #, c-format
 msgid "nothing provides requested %s"
 msgstr "żaden pakiet nie dostarcza żądanego %s"
 
-#: ../zypp/solver/detail/SATResolver.cc:900
+#: ../zypp/solver/detail/SATResolver.cc:913
 #, c-format
 msgid "problem with installed package %s"
 msgstr "problem z zainstalowanym pakietem %s"
 
-#: ../zypp/solver/detail/SATResolver.cc:1210
+#: ../zypp/solver/detail/SATResolver.cc:1223
 #, c-format
 msgid "replacement of %s with %s"
 msgstr "zamiana %s na %s"
@@ -4506,11 +4506,11 @@ msgstr ""
 "rpm zapisał %s jako %s.\n"
 "Oto pierwszych 25 linii zawierających różnicę:\n"
 
-#: ../zypp/solver/detail/SATResolver.cc:906
+#: ../zypp/solver/detail/SATResolver.cc:919
 msgid "some dependency problem"
 msgstr "problem z zależnościami"
 
-#: ../zypp/solver/detail/SATResolver.cc:983
+#: ../zypp/solver/detail/SATResolver.cc:996
 msgid "uninstallable providers: "
 msgstr "nie da się zainstalować dostawców:"
 
@@ -4521,88 +4521,3 @@ msgstr "nieznany"
 #: ../zypp/VendorSupportOptions.cc:17
 msgid "unsupported"
 msgstr "brak wsparcia"
-
-#~ msgid "%s remove failed"
-#~ msgstr "Usunięcie %s nie powiodło się"
-
-#~ msgid "Additional rpm output:"
-#~ msgstr "Dodatkowe wyjście rpm:"
-
-#~ msgid "Invalid user name or password."
-#~ msgstr "Błędna nazwa użytkownika lub hasło."
-
-#~ msgid "rpm output:"
-#~ msgstr "Zwrot rpm:"
-
-#~ msgid "%s install failed"
-#~ msgstr "Instalacja %s nie powiodła się"
-
-#~ msgid "%s installed ok"
-#~ msgstr "Pakiet %s zainstalowano poprawnie"
-
-#~ msgid "%s remove ok"
-#~ msgstr "Usunięcie %s powiodło się"
-
-#~ msgid "%s provides this dependency, but would change the architecture of the installed item"
-#~ msgstr "%s dostarcza tę zależność, ale zmieniłby architekturę zainstalowanego elementu"
-
-#~ msgid "%s provides this dependency, but would change the vendor of the installed item"
-#~ msgstr "%s dostarcza tę zależność, ale zmieniłby dostawcę zainstalowanego elementu"
-
-#~ msgid "Can't add solvables to norepo."
-#~ msgstr "Nie można dodać elementów rozwiązywalnych do \"nonrepo\"/"
-
-#~ msgid "Can't open solv-file: "
-#~ msgstr "Nie można otworzyć \"solv-file\": "
-
-#~ msgid "Can't set RepoInfo for norepo."
-#~ msgstr "Nie można ustawić RepoInfo dla norepo"
-
-#~ msgid "Do not install or delete the resolvables concerned"
-#~ msgstr "Nie instaluj ani nie usuwaj danych obiektów"
-
-#, fuzzy
-#~ msgid "Error reading solv-file: "
-#~ msgstr "Błąd odczytu repozytoriów:"
-
-#~ msgid "Ignore that %s is already set to install"
-#~ msgstr "Zignoruj fakt, że %s jest już zaznaczony do instalacji"
-
-#~ msgid "Ignore the obsolete %s in %s"
-#~ msgstr "Zignoruj dezaktualizację %s w %s"
-
-#~ msgid "Ignore this requirement just here"
-#~ msgstr "Zignoruj ten wymóg tylko tutaj"
-
-#~ msgid "Install %s although it would change the architecture"
-#~ msgstr "Zainstaluj %s pomimo, że zmieniłoby to architekturę"
-
-#~ msgid "Install %s although it would change the vendor"
-#~ msgstr "Zainstaluj %s pomimo, że zmieniłoby to dostawcę"
-
-#~ msgid "Install missing resolvables"
-#~ msgstr "Zainstaluj brakujące pakiety"
-
-#~ msgid "Keep resolvables"
-#~ msgstr "Zachowaj rozwiązywalne pakiety"
-
-#~ msgid "Path Parameter parsing not supported for this URL"
-#~ msgstr "Analiza parametru ścieżki nie jest obsługiwana dla tego URL"
-
-#~ msgid "Path parameter parsing not supported for this URL"
-#~ msgstr "Analiza parametru ścieżki nie jest obsługiwana dla tego adresu URL"
-
-#~ msgid "Unlock these resolvables"
-#~ msgstr "Odblokuj te pakiety rozwiązywalne"
-
-#~ msgid "delete %s"
-#~ msgstr "usuń %s"
-
-#~ msgid "install %s"
-#~ msgstr "zainstaluj %s"
-
-#~ msgid "unlock %s"
-#~ msgstr "odblokuj %s"
-
-#~ msgid "unlock all resolvables"
-#~ msgstr "Odblokuj wszystkie pakiety rozwiązywalne"

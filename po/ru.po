@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: zypp\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-10-08 17:27+0200\n"
+"POT-Creation-Date: 2008-10-24 10:45+0200\n"
 "PO-Revision-Date: 2008-04-27 00:54+0400\n"
 "Last-Translator: Nikolay Derkach <nderkach@gmail.com>\n"
 "Language-Team: Russian <opensuse-ru@opensuse.org>\n"
@@ -23,7 +23,7 @@ msgstr ""
 "Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
 "X-Generator: KBabel 1.11.4\n"
 
-#: ../zypp/solver/detail/SATResolver.cc:981
+#: ../zypp/solver/detail/SATResolver.cc:994
 msgid ""
 "\n"
 "uninstallable providers: "
@@ -49,22 +49,22 @@ msgstr "не удалась операция над файлами"
 msgid " execution skipped while aborting"
 msgstr ""
 
-#: ../zypp/solver/detail/SATResolver.cc:928
+#: ../zypp/solver/detail/SATResolver.cc:941
 #, c-format
 msgid "%s conflicts with %s provided by %s"
 msgstr "%s конфликтует с %s, который предоставляется %s"
 
-#: ../zypp/solver/detail/SATResolver.cc:914
+#: ../zypp/solver/detail/SATResolver.cc:927
 #, c-format
 msgid "%s is not installable"
 msgstr "%s недоступен для установки"
 
-#: ../zypp/solver/detail/SATResolver.cc:933
+#: ../zypp/solver/detail/SATResolver.cc:946
 #, c-format
 msgid "%s obsoletes %s provided by %s"
 msgstr "%s делает устаревшим %s, предоставляемый %s"
 
-#: ../zypp/solver/detail/SATResolver.cc:969
+#: ../zypp/solver/detail/SATResolver.cc:982
 #, c-format
 msgid "%s requires %s, but this requirement cannot be provided"
 msgstr "%s требует %s, но это требование не может быть удовлетворено"
@@ -91,7 +91,7 @@ msgstr "Ачоли"
 msgid "Adangme"
 msgstr "Адангме"
 
-#: ../zypp/RepoManager.cc:1184
+#: ../zypp/RepoManager.cc:1201
 #, c-format
 msgid "Adding repository '%s'"
 msgstr "Добавляется репозитарий '%s'"
@@ -324,7 +324,7 @@ msgid "Austronesian (Other)"
 msgstr "Австронезийские (другие)"
 
 #. !\todo add comma to the message for the next release
-#: ../zypp/media/MediaCurl.cc:1619
+#: ../zypp/media/MediaCurl.cc:1660
 #, c-format
 msgid "Authentication required for '%s'"
 msgstr "Необходима аутентификация для '%s'"
@@ -601,7 +601,7 @@ msgstr "Бруней-Даруссалам"
 msgid "Buginese"
 msgstr "Бугийский"
 
-#: ../zypp/RepoManager.cc:977
+#: ../zypp/RepoManager.cc:969
 #, c-format
 msgid "Building repository '%s' cache"
 msgstr "Собирается кэш репозитария '%s'"
@@ -653,7 +653,7 @@ msgstr "Камбоджа"
 msgid "Cameroon"
 msgstr "Камерун"
 
-#: ../zypp/sat/detail/PoolImpl.cc:148
+#: ../zypp/sat/detail/PoolImpl.cc:156
 msgid "Can not create sat-pool."
 msgstr "Не удаётся создать пул SAT."
 
@@ -723,7 +723,7 @@ msgstr "Не удаётся установить атрибут рекурсив
 msgid "Canada"
 msgstr "Канада"
 
-#: ../zypp/KeyRing.cc:285
+#: ../zypp/KeyRing.cc:277
 #, c-format
 msgid "Cannot create public key %s from %s keyring to file %s"
 msgstr "Невозможно записать публичный ключ %s из хранилища %s в файл %s"
@@ -1308,7 +1308,7 @@ msgstr "Эве"
 msgid "Ewondo"
 msgstr "Эвондо"
 
-#: ../zypp/KeyRing.cc:587
+#: ../zypp/KeyRing.cc:579
 msgid "Failed to delete key."
 msgstr "Не удалось удалить ключ."
 
@@ -1753,7 +1753,7 @@ msgstr "HalVolume не инициализирован"
 msgid "Hausa"
 msgstr "Хауса"
 
-#: ../zypp/solver/detail/SATResolver.cc:910
+#: ../zypp/solver/detail/SATResolver.cc:923
 msgid "Have you enabled all requested repositories?"
 msgstr ""
 
@@ -1999,7 +1999,7 @@ msgstr "Неверный символ разделителя для разбие
 msgid "Invalid port component '%s'"
 msgstr "Неверный компонент порта '%s'"
 
-#: ../zypp/PoolQuery.cc:443
+#: ../zypp/PoolQuery.cc:440
 #, c-format
 msgid "Invalid regular expression '%s': regcomp returned %d"
 msgstr "Неверное регулярное выражение '%s': regcomp вернул %d"
@@ -3328,7 +3328,7 @@ msgstr "Раротонга"
 msgid "Relative path not allowed if authority exists"
 msgstr "При наличии компонентов авторизации относительные пути указывать нельзя"
 
-#: ../zypp/RepoManager.cc:1314
+#: ../zypp/RepoManager.cc:1331
 #, c-format
 msgid "Removing repository '%s'"
 msgstr "Удаляется репозитарий '%s'"
@@ -3564,7 +3564,7 @@ msgstr "Сьерра-Леоне"
 msgid "Sign Languages"
 msgstr "Языки жестов"
 
-#: ../zypp/KeyRing.cc:597
+#: ../zypp/KeyRing.cc:589
 #, c-format
 msgid "Signature file %s not found"
 msgstr "Не найден файл подписи %s"
@@ -3644,7 +3644,7 @@ msgstr "Согдийский"
 msgid "Solomon Islands"
 msgstr "Соломоновы острова"
 
-#: ../zypp/solver/detail/SATResolver.cc:937
+#: ../zypp/solver/detail/SATResolver.cc:950
 #, c-format
 msgid "Solvable %s conflicts with %s provided by itself"
 msgstr "Объект разрешения зависимостей %s конфликтует с %s, который предоставляется им самим"
@@ -3818,7 +3818,7 @@ msgstr "Системное исключение '%s' на носителе '%s'.
 #, fuzzy, c-format
 msgid ""
 "System management is locked by the application with pid %d (%s).\n"
-"Please close this application before trying again."
+"Close this application before trying again."
 msgstr "Управление системой заблокировано приложением с pid %d. Закройте это приложение перед следующей попыткой."
 
 #. language code: tgl tl
@@ -3910,8 +3910,8 @@ msgstr "Диск не существует."
 msgid "This action is being run by another program already."
 msgstr "Это действие уже выполняется другой программой."
 
-#: ../zypp/solver/detail/SATResolver.cc:1118
-#: ../zypp/solver/detail/SATResolver.cc:1136
+#: ../zypp/solver/detail/SATResolver.cc:1131
+#: ../zypp/solver/detail/SATResolver.cc:1149
 msgid "This request will break your system!"
 msgstr ""
 
@@ -3984,7 +3984,7 @@ msgstr "Тонга (Ньяса)"
 msgid "Tonga (Tonga Islands)"
 msgstr "Тонга (Тонга Исландский)"
 
-#: ../zypp/KeyRing.cc:536
+#: ../zypp/KeyRing.cc:528
 #, c-format
 msgid "Tried to import not existant key %s into keyring %s"
 msgstr "Была произведена попытка импортировать существующий ключ %s в хранилище ключей %s"
@@ -4255,7 +4255,7 @@ msgid "Vai"
 msgstr "Ваи"
 
 #. we will throw this later if no URL checks out fine
-#: ../zypp/RepoManager.cc:789
+#: ../zypp/RepoManager.cc:781
 msgid "Valid metadata not found at specified URL(s)"
 msgstr "По указанным URL-адресам не найдено действительных метаданных"
 
@@ -4440,17 +4440,17 @@ msgstr "сбой при проверке applydeltarpm."
 msgid "applydeltarpm failed."
 msgstr "сбой в applydeltarpm."
 
-#: ../zypp/solver/detail/SATResolver.cc:1194
+#: ../zypp/solver/detail/SATResolver.cc:1207
 #, c-format
 msgid "architecture change of %s to %s"
 msgstr "изменение архитектуры %s на %s"
 
-#: ../zypp/solver/detail/SATResolver.cc:923
+#: ../zypp/solver/detail/SATResolver.cc:936
 #, c-format
 msgid "cannot install both %s and %s"
 msgstr "Не удаётся установить оба %s и %s"
 
-#: ../zypp/solver/detail/SATResolver.cc:903
+#: ../zypp/solver/detail/SATResolver.cc:916
 msgid "conflicting requests"
 msgstr "конфликтующие запросы"
 
@@ -4460,57 +4460,57 @@ msgstr "конфликтующие запросы"
 msgid "created backup %s"
 msgstr "созданная резервная копия %s"
 
-#: ../zypp/solver/detail/SATResolver.cc:1222
+#: ../zypp/solver/detail/SATResolver.cc:1235
 #, c-format
 msgid "deinstallation of %s"
 msgstr "удаление %s"
 
-#: ../zypp/solver/detail/SATResolver.cc:971
+#: ../zypp/solver/detail/SATResolver.cc:984
 msgid "deleted providers: "
 msgstr "удалённые поставщики: "
 
-#: ../zypp/solver/detail/SATResolver.cc:1139
+#: ../zypp/solver/detail/SATResolver.cc:1152
 #, c-format
 msgid "do not ask to delete all solvables providing %s"
 msgstr "не просить удалить все объекты разрешения зависимостей, предоставляющие %s"
 
-#: ../zypp/solver/detail/SATResolver.cc:1121
+#: ../zypp/solver/detail/SATResolver.cc:1134
 #, c-format
 msgid "do not ask to install a solvable providing %s"
 msgstr "не просить установить объект разрешения зависимостей, предоставляющий %s"
 
-#: ../zypp/solver/detail/SATResolver.cc:1066
+#: ../zypp/solver/detail/SATResolver.cc:1079
 #, c-format
 msgid "do not forbid installation of %s"
 msgstr "не препятствовать установке %s"
 
-#: ../zypp/solver/detail/SATResolver.cc:1045
-#: ../zypp/solver/detail/SATResolver.cc:1083
+#: ../zypp/solver/detail/SATResolver.cc:1058
+#: ../zypp/solver/detail/SATResolver.cc:1096
 #, c-format
 msgid "do not install %s"
 msgstr "не устанавливать %s"
 
-#: ../zypp/solver/detail/SATResolver.cc:1152
+#: ../zypp/solver/detail/SATResolver.cc:1165
 #, c-format
 msgid "do not install most recent version of %s"
 msgstr "не устанавливать самую последнюю версию %s"
 
-#: ../zypp/solver/detail/SATResolver.cc:1040
+#: ../zypp/solver/detail/SATResolver.cc:1053
 #, c-format
 msgid "do not keep %s installed"
 msgstr "не оставлять установленным %s"
 
-#: ../zypp/solver/detail/SATResolver.cc:1186
+#: ../zypp/solver/detail/SATResolver.cc:1199
 #, c-format
 msgid "downgrade of %s to %s"
 msgstr "обновить %s до более старой версии %s"
 
-#: ../zypp/solver/detail/SATResolver.cc:1119
-#: ../zypp/solver/detail/SATResolver.cc:1137
+#: ../zypp/solver/detail/SATResolver.cc:1132
+#: ../zypp/solver/detail/SATResolver.cc:1150
 msgid "ignore the warning of a broken system"
 msgstr ""
 
-#: ../zypp/solver/detail/SATResolver.cc:1202
+#: ../zypp/solver/detail/SATResolver.cc:1215
 #, c-format
 msgid ""
 "install %s (with vendor change)\n"
@@ -4527,8 +4527,8 @@ msgstr ""
 msgid "invalid"
 msgstr ""
 
-#: ../zypp/solver/detail/SATResolver.cc:1061
-#: ../zypp/solver/detail/SATResolver.cc:1104
+#: ../zypp/solver/detail/SATResolver.cc:1074
+#: ../zypp/solver/detail/SATResolver.cc:1117
 #, c-format
 msgid "keep %s"
 msgstr "оставить %s"
@@ -4541,22 +4541,22 @@ msgstr "libhal_ctx_new: Не удаётся создать контекст libh
 msgid "libhal_set_dbus_connection: Can't set dbus connection"
 msgstr "libhal_set_dbus_connection: не удалось установить подключение к dbus"
 
-#: ../zypp/solver/detail/SATResolver.cc:918
+#: ../zypp/solver/detail/SATResolver.cc:931
 #, c-format
 msgid "nothing provides %s needed by %s"
 msgstr "ничто не предоставляет %s, необходимый для %s"
 
-#: ../zypp/solver/detail/SATResolver.cc:909
+#: ../zypp/solver/detail/SATResolver.cc:922
 #, c-format
 msgid "nothing provides requested %s"
 msgstr "ничто не предоставляет запрошенный %s"
 
-#: ../zypp/solver/detail/SATResolver.cc:900
+#: ../zypp/solver/detail/SATResolver.cc:913
 #, c-format
 msgid "problem with installed package %s"
 msgstr "проблема в установленном пакете %s"
 
-#: ../zypp/solver/detail/SATResolver.cc:1210
+#: ../zypp/solver/detail/SATResolver.cc:1223
 #, c-format
 msgid "replacement of %s with %s"
 msgstr "замена %s на %s"
@@ -4593,12 +4593,12 @@ msgstr ""
 "rpm сохранил %s как %s.\n"
 "Первые 25 строк различий:\n"
 
-#: ../zypp/solver/detail/SATResolver.cc:906
+#: ../zypp/solver/detail/SATResolver.cc:919
 #, fuzzy
 msgid "some dependency problem"
 msgstr "Игнорировать некоторые зависимости %s"
 
-#: ../zypp/solver/detail/SATResolver.cc:983
+#: ../zypp/solver/detail/SATResolver.cc:996
 msgid "uninstallable providers: "
 msgstr "поставщики, которые невозможно установить: "
 

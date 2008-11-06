@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: YaST (@memory@)\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-10-08 17:27+0200\n"
+"POT-Creation-Date: 2008-10-24 10:45+0200\n"
 "PO-Revision-Date: 2008-01-04 08:58+0100\n"
 "Last-Translator: i18n@suse.de\n"
 "Language-Team: Thai <i18n@suse.de>\n"
@@ -14,7 +14,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
 
-#: ../zypp/solver/detail/SATResolver.cc:981
+#: ../zypp/solver/detail/SATResolver.cc:994
 #, fuzzy
 msgid ""
 "\n"
@@ -39,22 +39,22 @@ msgstr "การสร้างแฟ้มสำรองข้อมูลล
 msgid " execution skipped while aborting"
 msgstr ""
 
-#: ../zypp/solver/detail/SATResolver.cc:928
+#: ../zypp/solver/detail/SATResolver.cc:941
 #, c-format
 msgid "%s conflicts with %s provided by %s"
 msgstr ""
 
-#: ../zypp/solver/detail/SATResolver.cc:914
+#: ../zypp/solver/detail/SATResolver.cc:927
 #, fuzzy, c-format
 msgid "%s is not installable"
 msgstr "ไฟร์วอลล์ยังไม่ถูกติดตั้ง"
 
-#: ../zypp/solver/detail/SATResolver.cc:933
+#: ../zypp/solver/detail/SATResolver.cc:946
 #, c-format
 msgid "%s obsoletes %s provided by %s"
 msgstr ""
 
-#: ../zypp/solver/detail/SATResolver.cc:969
+#: ../zypp/solver/detail/SATResolver.cc:982
 #, c-format
 msgid "%s requires %s, but this requirement cannot be provided"
 msgstr ""
@@ -79,7 +79,7 @@ msgstr ""
 msgid "Adangme"
 msgstr ""
 
-#: ../zypp/RepoManager.cc:1184
+#: ../zypp/RepoManager.cc:1201
 #, fuzzy, c-format
 msgid "Adding repository '%s'"
 msgstr "กำลังเพิ่มคลังแพกเกจ %1"
@@ -311,7 +311,7 @@ msgid "Austronesian (Other)"
 msgstr ""
 
 #. !\todo add comma to the message for the next release
-#: ../zypp/media/MediaCurl.cc:1619
+#: ../zypp/media/MediaCurl.cc:1660
 #, c-format
 msgid "Authentication required for '%s'"
 msgstr ""
@@ -582,7 +582,7 @@ msgstr "บรูไนดารุสซาลาม"
 msgid "Buginese"
 msgstr ""
 
-#: ../zypp/RepoManager.cc:977
+#: ../zypp/RepoManager.cc:969
 #, fuzzy, c-format
 msgid "Building repository '%s' cache"
 msgstr "การเพิ่มคลังแพกเกจ %1 ล้มเหลว"
@@ -632,7 +632,7 @@ msgstr "กัมพูชา"
 msgid "Cameroon"
 msgstr "คาเมรูน"
 
-#: ../zypp/sat/detail/PoolImpl.cc:148
+#: ../zypp/sat/detail/PoolImpl.cc:156
 #, fuzzy
 msgid "Can not create sat-pool."
 msgstr "ไม่สามารถสร้างไดเร็กทอรี "
@@ -703,7 +703,7 @@ msgstr ""
 msgid "Canada"
 msgstr "แคนาดา"
 
-#: ../zypp/KeyRing.cc:285
+#: ../zypp/KeyRing.cc:277
 #, c-format
 msgid "Cannot create public key %s from %s keyring to file %s"
 msgstr ""
@@ -1280,7 +1280,7 @@ msgstr ""
 msgid "Ewondo"
 msgstr ""
 
-#: ../zypp/KeyRing.cc:587
+#: ../zypp/KeyRing.cc:579
 #, fuzzy
 msgid "Failed to delete key."
 msgstr "ล้มเหลวในการคืนค่าส่วน MBR ของฮาร์ดดิสก์"
@@ -1717,7 +1717,7 @@ msgstr ""
 msgid "Hausa"
 msgstr ""
 
-#: ../zypp/solver/detail/SATResolver.cc:910
+#: ../zypp/solver/detail/SATResolver.cc:923
 #, fuzzy
 msgid "Have you enabled all requested repositories?"
 msgstr "เพิ่มคลังแพกเกจแบบออนไลน์ที่เลือกไว้ทั้งหมด"
@@ -1960,7 +1960,7 @@ msgstr ""
 msgid "Invalid port component '%s'"
 msgstr "ค่าสำหรับตัวเลือก '%1' ไม่ถูกต้อง: %2"
 
-#: ../zypp/PoolQuery.cc:443
+#: ../zypp/PoolQuery.cc:440
 #, c-format
 msgid "Invalid regular expression '%s': regcomp returned %d"
 msgstr ""
@@ -3281,7 +3281,7 @@ msgstr ""
 msgid "Relative path not allowed if authority exists"
 msgstr ""
 
-#: ../zypp/RepoManager.cc:1314
+#: ../zypp/RepoManager.cc:1331
 #, fuzzy, c-format
 msgid "Removing repository '%s'"
 msgstr "กำลังตรวจคลังแพกเกจ "
@@ -3515,7 +3515,7 @@ msgstr "เซียร์ราลีโอน"
 msgid "Sign Languages"
 msgstr "เป็นก_ลุ่มภาษา"
 
-#: ../zypp/KeyRing.cc:597
+#: ../zypp/KeyRing.cc:589
 #, fuzzy, c-format
 msgid "Signature file %s not found"
 msgstr "ไม่พบแฟ้มควบคุม %1 บนสื่อการติดตั้ง"
@@ -3596,7 +3596,7 @@ msgstr ""
 msgid "Solomon Islands"
 msgstr "หมู่เกาะโซโลมอน"
 
-#: ../zypp/solver/detail/SATResolver.cc:937
+#: ../zypp/solver/detail/SATResolver.cc:950
 #, c-format
 msgid "Solvable %s conflicts with %s provided by itself"
 msgstr ""
@@ -3768,7 +3768,7 @@ msgstr ""
 #, c-format
 msgid ""
 "System management is locked by the application with pid %d (%s).\n"
-"Please close this application before trying again."
+"Close this application before trying again."
 msgstr ""
 
 #. language code: tgl tl
@@ -3862,8 +3862,8 @@ msgstr ""
 msgid "This action is being run by another program already."
 msgstr ""
 
-#: ../zypp/solver/detail/SATResolver.cc:1118
-#: ../zypp/solver/detail/SATResolver.cc:1136
+#: ../zypp/solver/detail/SATResolver.cc:1131
+#: ../zypp/solver/detail/SATResolver.cc:1149
 #, fuzzy
 msgid "This request will break your system!"
 msgstr "รุ่นนี้ถูกติดตั้งไว้บนระบบของคุณ"
@@ -3935,7 +3935,7 @@ msgstr ""
 msgid "Tonga (Tonga Islands)"
 msgstr "หมู่เกาะโซโลมอน"
 
-#: ../zypp/KeyRing.cc:536
+#: ../zypp/KeyRing.cc:528
 #, c-format
 msgid "Tried to import not existant key %s into keyring %s"
 msgstr ""
@@ -4207,7 +4207,7 @@ msgid "Vai"
 msgstr "วาติกัน"
 
 #. we will throw this later if no URL checks out fine
-#: ../zypp/RepoManager.cc:789
+#: ../zypp/RepoManager.cc:781
 msgid "Valid metadata not found at specified URL(s)"
 msgstr ""
 
@@ -4389,17 +4389,17 @@ msgstr "การตรวจความถูกต้องล้มเหล
 msgid "applydeltarpm failed."
 msgstr ""
 
-#: ../zypp/solver/detail/SATResolver.cc:1194
+#: ../zypp/solver/detail/SATResolver.cc:1207
 #, c-format
 msgid "architecture change of %s to %s"
 msgstr ""
 
-#: ../zypp/solver/detail/SATResolver.cc:923
+#: ../zypp/solver/detail/SATResolver.cc:936
 #, fuzzy, c-format
 msgid "cannot install both %s and %s"
 msgstr "ไม่ต้องติดตั้งตัวจัดการการบูตระบบใด ๆ"
 
-#: ../zypp/solver/detail/SATResolver.cc:903
+#: ../zypp/solver/detail/SATResolver.cc:916
 msgid "conflicting requests"
 msgstr ""
 
@@ -4408,58 +4408,58 @@ msgstr ""
 msgid "created backup %s"
 msgstr ""
 
-#: ../zypp/solver/detail/SATResolver.cc:1222
+#: ../zypp/solver/detail/SATResolver.cc:1235
 #, fuzzy, c-format
 msgid "deinstallation of %s"
 msgstr "บันทึกการตั้งค่าการติดตั้ง"
 
-#: ../zypp/solver/detail/SATResolver.cc:971
+#: ../zypp/solver/detail/SATResolver.cc:984
 #, fuzzy
 msgid "deleted providers: "
 msgstr "อ่านค่าของผู้ให้บริการ"
 
-#: ../zypp/solver/detail/SATResolver.cc:1139
+#: ../zypp/solver/detail/SATResolver.cc:1152
 #, c-format
 msgid "do not ask to delete all solvables providing %s"
 msgstr ""
 
-#: ../zypp/solver/detail/SATResolver.cc:1121
+#: ../zypp/solver/detail/SATResolver.cc:1134
 #, c-format
 msgid "do not ask to install a solvable providing %s"
 msgstr ""
 
-#: ../zypp/solver/detail/SATResolver.cc:1066
+#: ../zypp/solver/detail/SATResolver.cc:1079
 #, c-format
 msgid "do not forbid installation of %s"
 msgstr ""
 
-#: ../zypp/solver/detail/SATResolver.cc:1045
-#: ../zypp/solver/detail/SATResolver.cc:1083
+#: ../zypp/solver/detail/SATResolver.cc:1058
+#: ../zypp/solver/detail/SATResolver.cc:1096
 #, fuzzy, c-format
 msgid "do not install %s"
 msgstr "ไม่ต้องติดตั้ง"
 
-#: ../zypp/solver/detail/SATResolver.cc:1152
+#: ../zypp/solver/detail/SATResolver.cc:1165
 #, c-format
 msgid "do not install most recent version of %s"
 msgstr ""
 
-#: ../zypp/solver/detail/SATResolver.cc:1040
+#: ../zypp/solver/detail/SATResolver.cc:1053
 #, fuzzy, c-format
 msgid "do not keep %s installed"
 msgstr "ไม่ต้องติดตั้ง"
 
-#: ../zypp/solver/detail/SATResolver.cc:1186
+#: ../zypp/solver/detail/SATResolver.cc:1199
 #, c-format
 msgid "downgrade of %s to %s"
 msgstr ""
 
-#: ../zypp/solver/detail/SATResolver.cc:1119
-#: ../zypp/solver/detail/SATResolver.cc:1137
+#: ../zypp/solver/detail/SATResolver.cc:1132
+#: ../zypp/solver/detail/SATResolver.cc:1150
 msgid "ignore the warning of a broken system"
 msgstr ""
 
-#: ../zypp/solver/detail/SATResolver.cc:1202
+#: ../zypp/solver/detail/SATResolver.cc:1215
 #, c-format
 msgid ""
 "install %s (with vendor change)\n"
@@ -4473,8 +4473,8 @@ msgstr ""
 msgid "invalid"
 msgstr "ค่าเวลาใช้งานไม่ได้"
 
-#: ../zypp/solver/detail/SATResolver.cc:1061
-#: ../zypp/solver/detail/SATResolver.cc:1104
+#: ../zypp/solver/detail/SATResolver.cc:1074
+#: ../zypp/solver/detail/SATResolver.cc:1117
 #, c-format
 msgid "keep %s"
 msgstr ""
@@ -4487,22 +4487,22 @@ msgstr ""
 msgid "libhal_set_dbus_connection: Can't set dbus connection"
 msgstr ""
 
-#: ../zypp/solver/detail/SATResolver.cc:918
+#: ../zypp/solver/detail/SATResolver.cc:931
 #, c-format
 msgid "nothing provides %s needed by %s"
 msgstr ""
 
-#: ../zypp/solver/detail/SATResolver.cc:909
+#: ../zypp/solver/detail/SATResolver.cc:922
 #, c-format
 msgid "nothing provides requested %s"
 msgstr ""
 
-#: ../zypp/solver/detail/SATResolver.cc:900
+#: ../zypp/solver/detail/SATResolver.cc:913
 #, fuzzy, c-format
 msgid "problem with installed package %s"
 msgstr "ผิดพลาด: ไม่สามารถติดตั้งแพกเกจได้"
 
-#: ../zypp/solver/detail/SATResolver.cc:1210
+#: ../zypp/solver/detail/SATResolver.cc:1223
 #, c-format
 msgid "replacement of %s with %s"
 msgstr ""
@@ -4535,12 +4535,12 @@ msgid ""
 "Here are the first 25 lines of difference:\n"
 msgstr ""
 
-#: ../zypp/solver/detail/SATResolver.cc:906
+#: ../zypp/solver/detail/SATResolver.cc:919
 #, fuzzy
 msgid "some dependency problem"
 msgstr "การตรวจสอบการขึ้นอยู่แก่กันของระบบ ไม่พบปัญหา"
 
-#: ../zypp/solver/detail/SATResolver.cc:983
+#: ../zypp/solver/detail/SATResolver.cc:996
 #, fuzzy
 msgid "uninstallable providers: "
 msgstr "เขียนค่าของผู้ให้บริการ"

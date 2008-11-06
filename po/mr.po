@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Check hardware-2.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-10-08 17:27+0200\n"
+"POT-Creation-Date: 2008-10-24 10:45+0200\n"
 "PO-Revision-Date: 2006-11-13 12:55+0530\n"
 "Last-Translator: Priyavert Sharma <priyavert.sharma@agreeya.com>\n"
 "Language-Team: AgreeYa Solutions <linux_team@agreeya.com>\n"
@@ -12,7 +12,7 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Generator: KBabel 1.10.2\n"
 
-#: ../zypp/solver/detail/SATResolver.cc:981
+#: ../zypp/solver/detail/SATResolver.cc:994
 #, fuzzy
 msgid ""
 "\n"
@@ -38,22 +38,22 @@ msgstr "DBI Execution failed: %s"
 msgid " execution skipped while aborting"
 msgstr ""
 
-#: ../zypp/solver/detail/SATResolver.cc:928
+#: ../zypp/solver/detail/SATResolver.cc:941
 #, fuzzy, c-format
 msgid "%s conflicts with %s provided by %s"
 msgstr "%s चे %s शी पटत नाही"
 
-#: ../zypp/solver/detail/SATResolver.cc:914
+#: ../zypp/solver/detail/SATResolver.cc:927
 #, fuzzy, c-format
 msgid "%s is not installable"
 msgstr "स्थापित नसलेली"
 
-#: ../zypp/solver/detail/SATResolver.cc:933
+#: ../zypp/solver/detail/SATResolver.cc:946
 #, fuzzy, c-format
 msgid "%s obsoletes %s provided by %s"
 msgstr "%s %s ला बाजूला टाकते"
 
-#: ../zypp/solver/detail/SATResolver.cc:969
+#: ../zypp/solver/detail/SATResolver.cc:982
 #, c-format
 msgid "%s requires %s, but this requirement cannot be provided"
 msgstr ""
@@ -78,7 +78,7 @@ msgstr "अकोली"
 msgid "Adangme"
 msgstr "अडँग्मे"
 
-#: ../zypp/RepoManager.cc:1184
+#: ../zypp/RepoManager.cc:1201
 #, c-format
 msgid "Adding repository '%s'"
 msgstr ""
@@ -301,7 +301,7 @@ msgid "Austronesian (Other)"
 msgstr "ऑस्ट्रोनेशियन (अन्य)"
 
 #. !\todo add comma to the message for the next release
-#: ../zypp/media/MediaCurl.cc:1619
+#: ../zypp/media/MediaCurl.cc:1660
 #, c-format
 msgid "Authentication required for '%s'"
 msgstr ""
@@ -565,7 +565,7 @@ msgstr "ब्रुनेई दारूसलाम"
 msgid "Buginese"
 msgstr "बगिनीज"
 
-#: ../zypp/RepoManager.cc:977
+#: ../zypp/RepoManager.cc:969
 #, c-format
 msgid "Building repository '%s' cache"
 msgstr ""
@@ -615,7 +615,7 @@ msgstr "कंबोडिया"
 msgid "Cameroon"
 msgstr "कॅमेरून"
 
-#: ../zypp/sat/detail/PoolImpl.cc:148
+#: ../zypp/sat/detail/PoolImpl.cc:156
 #, fuzzy
 msgid "Can not create sat-pool."
 msgstr "फाईल निर्माण करु शकत नाही"
@@ -686,7 +686,7 @@ msgstr "रीकर्सिव्ह म्यूटेक्स अट्र�
 msgid "Canada"
 msgstr "कॅनडा"
 
-#: ../zypp/KeyRing.cc:285
+#: ../zypp/KeyRing.cc:277
 #, c-format
 msgid "Cannot create public key %s from %s keyring to file %s"
 msgstr ""
@@ -1256,7 +1256,7 @@ msgstr "इवे"
 msgid "Ewondo"
 msgstr "इवोंडो"
 
-#: ../zypp/KeyRing.cc:587
+#: ../zypp/KeyRing.cc:579
 #, fuzzy
 msgid "Failed to delete key."
 msgstr "VM सुरू करण्यात अयशस्वी."
@@ -1692,7 +1692,7 @@ msgstr "हॅलव्हाल्यूमची सुरुवात ना�
 msgid "Hausa"
 msgstr "हौसा"
 
-#: ../zypp/solver/detail/SATResolver.cc:910
+#: ../zypp/solver/detail/SATResolver.cc:923
 msgid "Have you enabled all requested repositories?"
 msgstr ""
 
@@ -1931,7 +1931,7 @@ msgstr "अवैध पॅरामीटर मॅप स्प्लिट �
 msgid "Invalid port component '%s'"
 msgstr "अवैध पोर्ट भाग %s"
 
-#: ../zypp/PoolQuery.cc:443
+#: ../zypp/PoolQuery.cc:440
 #, c-format
 msgid "Invalid regular expression '%s': regcomp returned %d"
 msgstr ""
@@ -3205,7 +3205,7 @@ msgstr "रारोटोंगन"
 msgid "Relative path not allowed if authority exists"
 msgstr "अथॉरिटी उपस्थित असेल तर सापेक्ष पाथला अनुमती नाही"
 
-#: ../zypp/RepoManager.cc:1314
+#: ../zypp/RepoManager.cc:1331
 #, fuzzy, c-format
 msgid "Removing repository '%s'"
 msgstr "रिसोर्सेस जतन करत आहे"
@@ -3430,7 +3430,7 @@ msgstr "सिएरा लिओन"
 msgid "Sign Languages"
 msgstr "खुणांची भाषा"
 
-#: ../zypp/KeyRing.cc:597
+#: ../zypp/KeyRing.cc:589
 #, fuzzy, c-format
 msgid "Signature file %s not found"
 msgstr "नोंद आढळली नाही"
@@ -3510,7 +3510,7 @@ msgstr "सॉग्डियन"
 msgid "Solomon Islands"
 msgstr "सॉलोमन बेटे"
 
-#: ../zypp/solver/detail/SATResolver.cc:937
+#: ../zypp/solver/detail/SATResolver.cc:950
 #, fuzzy, c-format
 msgid "Solvable %s conflicts with %s provided by itself"
 msgstr "%s चे %s शी पटत नाही"
@@ -3674,7 +3674,7 @@ msgstr ""
 #, c-format
 msgid ""
 "System management is locked by the application with pid %d (%s).\n"
-"Please close this application before trying again."
+"Close this application before trying again."
 msgstr ""
 
 #. language code: tgl tl
@@ -3765,8 +3765,8 @@ msgstr "डिस्क अस्तित्वात नाही"
 msgid "This action is being run by another program already."
 msgstr ""
 
-#: ../zypp/solver/detail/SATResolver.cc:1118
-#: ../zypp/solver/detail/SATResolver.cc:1136
+#: ../zypp/solver/detail/SATResolver.cc:1131
+#: ../zypp/solver/detail/SATResolver.cc:1149
 #, fuzzy
 msgid "This request will break your system!"
 msgstr "विनंती आधीपासूनच आहे."
@@ -3837,7 +3837,7 @@ msgstr "टोंगा (न्यासा)"
 msgid "Tonga (Tonga Islands)"
 msgstr "टोंगा (टोंगा बेटे)"
 
-#: ../zypp/KeyRing.cc:536
+#: ../zypp/KeyRing.cc:528
 #, c-format
 msgid "Tried to import not existant key %s into keyring %s"
 msgstr ""
@@ -4101,7 +4101,7 @@ msgid "Vai"
 msgstr "वाई"
 
 #. we will throw this later if no URL checks out fine
-#: ../zypp/RepoManager.cc:789
+#: ../zypp/RepoManager.cc:781
 msgid "Valid metadata not found at specified URL(s)"
 msgstr ""
 
@@ -4278,17 +4278,17 @@ msgstr "applydeltarpm चेक अयशस्वी"
 msgid "applydeltarpm failed."
 msgstr "applydeltarpm अयशस्वी"
 
-#: ../zypp/solver/detail/SATResolver.cc:1194
+#: ../zypp/solver/detail/SATResolver.cc:1207
 #, c-format
 msgid "architecture change of %s to %s"
 msgstr ""
 
-#: ../zypp/solver/detail/SATResolver.cc:923
+#: ../zypp/solver/detail/SATResolver.cc:936
 #, fuzzy, c-format
 msgid "cannot install both %s and %s"
 msgstr "%s स्थापित करु शकत नाही"
 
-#: ../zypp/solver/detail/SATResolver.cc:903
+#: ../zypp/solver/detail/SATResolver.cc:916
 #, fuzzy
 msgid "conflicting requests"
 msgstr "यांच्याशी कनेक्शनची रिक्वेस्ट :"
@@ -4298,58 +4298,58 @@ msgstr "यांच्याशी कनेक्शनची रिक्व�
 msgid "created backup %s"
 msgstr "बॅकअप %s  निर्माण केले"
 
-#: ../zypp/solver/detail/SATResolver.cc:1222
+#: ../zypp/solver/detail/SATResolver.cc:1235
 #, fuzzy, c-format
 msgid "deinstallation of %s"
 msgstr "स्थापना (इन्स्टॉलेशन)"
 
-#: ../zypp/solver/detail/SATResolver.cc:971
+#: ../zypp/solver/detail/SATResolver.cc:984
 #, fuzzy
 msgid "deleted providers: "
 msgstr "कोणतीही गोष्ट %s पुरवत नाही"
 
-#: ../zypp/solver/detail/SATResolver.cc:1139
+#: ../zypp/solver/detail/SATResolver.cc:1152
 #, fuzzy, c-format
 msgid "do not ask to delete all solvables providing %s"
 msgstr "संबंधित रिझॉल्व्हेबल्स स्थापित किंवा पुसून टाकू नका"
 
-#: ../zypp/solver/detail/SATResolver.cc:1121
+#: ../zypp/solver/detail/SATResolver.cc:1134
 #, fuzzy, c-format
 msgid "do not ask to install a solvable providing %s"
 msgstr "%s चे स्थापित करता येण्याजोगे प्रदाता नाहीत"
 
-#: ../zypp/solver/detail/SATResolver.cc:1066
+#: ../zypp/solver/detail/SATResolver.cc:1079
 #, fuzzy, c-format
 msgid "do not forbid installation of %s"
 msgstr "%s स्थापित करु नका"
 
-#: ../zypp/solver/detail/SATResolver.cc:1045
-#: ../zypp/solver/detail/SATResolver.cc:1083
+#: ../zypp/solver/detail/SATResolver.cc:1058
+#: ../zypp/solver/detail/SATResolver.cc:1096
 #, c-format
 msgid "do not install %s"
 msgstr "%s स्थापित करु नका"
 
-#: ../zypp/solver/detail/SATResolver.cc:1152
+#: ../zypp/solver/detail/SATResolver.cc:1165
 #, c-format
 msgid "do not install most recent version of %s"
 msgstr ""
 
-#: ../zypp/solver/detail/SATResolver.cc:1040
+#: ../zypp/solver/detail/SATResolver.cc:1053
 #, fuzzy, c-format
 msgid "do not keep %s installed"
 msgstr "स्थापित नसलेली"
 
-#: ../zypp/solver/detail/SATResolver.cc:1186
+#: ../zypp/solver/detail/SATResolver.cc:1199
 #, fuzzy, c-format
 msgid "downgrade of %s to %s"
 msgstr "% वरून % डाऊनलोड करत आहे"
 
-#: ../zypp/solver/detail/SATResolver.cc:1119
-#: ../zypp/solver/detail/SATResolver.cc:1137
+#: ../zypp/solver/detail/SATResolver.cc:1132
+#: ../zypp/solver/detail/SATResolver.cc:1150
 msgid "ignore the warning of a broken system"
 msgstr ""
 
-#: ../zypp/solver/detail/SATResolver.cc:1202
+#: ../zypp/solver/detail/SATResolver.cc:1215
 #, c-format
 msgid ""
 "install %s (with vendor change)\n"
@@ -4362,8 +4362,8 @@ msgstr ""
 msgid "invalid"
 msgstr ""
 
-#: ../zypp/solver/detail/SATResolver.cc:1061
-#: ../zypp/solver/detail/SATResolver.cc:1104
+#: ../zypp/solver/detail/SATResolver.cc:1074
+#: ../zypp/solver/detail/SATResolver.cc:1117
 #, c-format
 msgid "keep %s"
 msgstr "%s ठेवा"
@@ -4376,22 +4376,22 @@ msgstr "libhal_ctx_new: लिभाल कॉन्टेक्स निर्
 msgid "libhal_set_dbus_connection: Can't set dbus connection"
 msgstr " libhal_set_dbus_connection: डीबस कनेक्शन निश्चित करू शकत नाही"
 
-#: ../zypp/solver/detail/SATResolver.cc:918
+#: ../zypp/solver/detail/SATResolver.cc:931
 #, fuzzy, c-format
 msgid "nothing provides %s needed by %s"
 msgstr "%s ला %s ची गरज आहे"
 
-#: ../zypp/solver/detail/SATResolver.cc:909
+#: ../zypp/solver/detail/SATResolver.cc:922
 #, fuzzy, c-format
 msgid "nothing provides requested %s"
 msgstr "कोणतीही गोष्ट %s पुरवत नाही"
 
-#: ../zypp/solver/detail/SATResolver.cc:900
+#: ../zypp/solver/detail/SATResolver.cc:913
 #, fuzzy, c-format
 msgid "problem with installed package %s"
 msgstr "पॅकेजेस अस्थापित करण्याचा आदेश"
 
-#: ../zypp/solver/detail/SATResolver.cc:1210
+#: ../zypp/solver/detail/SATResolver.cc:1223
 #, c-format
 msgid "replacement of %s with %s"
 msgstr ""
@@ -4424,12 +4424,12 @@ msgid ""
 "Here are the first 25 lines of difference:\n"
 msgstr "rpm ने %s हे %s म्हणून जतन केले/nफरकाच्या या पहिल्या 25 ओळी\n"
 
-#: ../zypp/solver/detail/SATResolver.cc:906
+#: ../zypp/solver/detail/SATResolver.cc:919
 #, fuzzy
 msgid "some dependency problem"
 msgstr "अवलंबून असण्याच्या (डिपेन्डन्सी) समस्येमुळे %s स्थापित करु शकत नाही"
 
-#: ../zypp/solver/detail/SATResolver.cc:983
+#: ../zypp/solver/detail/SATResolver.cc:996
 #, fuzzy
 msgid "uninstallable providers: "
 msgstr "%s चे स्थापित करता येण्याजोगे प्रदाता नाहीत"
