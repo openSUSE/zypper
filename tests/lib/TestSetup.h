@@ -84,7 +84,10 @@ class TestSetup
     void loadRepo( RepoInfo nrepo )
     {
       RepoManager rmanager( repomanager() );
-      rmanager.addRepository( nrepo );
+      if ( rmanager.hasRepo( nrepo ) )
+        rmanager.modifyRepository( nrepo );
+      else
+        rmanager.addRepository( nrepo );
       rmanager.buildCache( nrepo );
       rmanager.loadFromCache( nrepo );
     }
