@@ -183,6 +183,7 @@ bool Consumer( const parser::ProductFileData & data_r )
 }
 
 #include "zypp/base/Functional.h"
+#include "zypp/parser/ProductFileReader.h"
 
 /******************************************************************
 **
