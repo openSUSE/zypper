@@ -1321,13 +1321,13 @@ void SATResolver::setSystemRequirements()
     CapabilitySet system_conflicts = SystemCheck::instance().conflictSystemCap();
 
     for (CapabilitySet::const_iterator iter = system_requires.begin(); iter != system_requires.end(); iter++) {
-	queue_push( &(_jobQueue), SOLVER_INSTALL_SOLVABLE_PROVIDES|SOLVER_ESSENTIAL );
+	queue_push( &(_jobQueue), SOLVER_INSTALL_SOLVABLE_PROVIDES);
 	queue_push( &(_jobQueue), iter->id() );
 	MIL << "SYSTEM Requires " << *iter << endl;
     }
 
     for (CapabilitySet::const_iterator iter = system_conflicts.begin(); iter != system_conflicts.end(); iter++) {
-	queue_push( &(_jobQueue), SOLVER_ERASE_SOLVABLE_PROVIDES|SOLVER_ESSENTIAL);
+	queue_push( &(_jobQueue), SOLVER_ERASE_SOLVABLE_PROVIDES);
 	queue_push( &(_jobQueue), iter->id() );
 	MIL << "SYSTEM Conflicts " << *iter << endl;
     }
