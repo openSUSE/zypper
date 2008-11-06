@@ -274,7 +274,7 @@ namespace zypp
     /** Parsing boolean from string.
     */
     //@{
-    /** Return \c true if str is <tt>1, true, yes, on</tt>. */
+    /** Return \c true if str is <tt>1, true, yes, on</tt> (or a nonzero number). */
     bool strToTrue( const C_Str & str );
 
     /** Return \c false if str is <tt>0, false, no, off</tt>. */
@@ -283,9 +283,21 @@ namespace zypp
     /** Parse \c str into a bool depending on the default value.
      * If the \c default is true, look for a legal \c false string.
      * If the \c default is false, look for a legal \c true string.
-    */
+     */
     inline bool strToBool( const C_Str & str, bool default_r )
     { return( default_r ? strToFalse( str ) : strToTrue( str ) ); }
+
+    /** Parse \c str into a bool if it's a legal \c true or \c false string.
+     * If \c str is not a recognized \c true or \c false string, \a return_r
+     * is left unchanged.
+     */
+    inline bool strToBoolNodefault( const C_Str & str, bool & return_r )
+    {
+      if ( strToTrue( str ) ) return (return_r = true);
+      if ( !strToFalse( str ) ) return (return_r = false);
+      return return_r;
+    }
+
     //@}
 
     /**

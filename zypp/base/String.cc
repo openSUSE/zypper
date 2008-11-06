@@ -64,6 +64,7 @@ namespace zypp
               || t == "yes"
               || t == "true"
               || t == "on"
+              || strtonum<long long>( str )
             );
     }
 

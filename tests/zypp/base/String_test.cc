@@ -92,7 +92,7 @@ BOOST_AUTO_TEST_CASE(test_escape)
   BOOST_CHECK_EQUAL( escaped, "bad\\|ass\\\\\\|worse" );
 }
 
-BOOST_AUTO_TEST_CASE(convertions)
+BOOST_AUTO_TEST_CASE(conversions)
 {
     BOOST_CHECK_EQUAL(str::numstring(42),     "42");
     BOOST_CHECK_EQUAL(str::numstring(42, 6),  "    42");
@@ -111,6 +111,62 @@ BOOST_AUTO_TEST_CASE(convertions)
     BOOST_CHECK_EQUAL(str::toLower("This IS A TeST"), "this is a test");
     BOOST_CHECK_EQUAL(str::toUpper("This IS A TeST"), "THIS IS A TEST");
     BOOST_CHECK_EQUAL(str::compareCI("TeST", "test"), 0);
+
+    BOOST_CHECK_EQUAL(str::compareCI("TeST", "test"), 0);
+    BOOST_CHECK_EQUAL(str::compareCI("TeST", "test"), 0);
+}
+
+BOOST_AUTO_TEST_CASE(conversions_to_bool)
+{
+  // true iff true-string {1,on,yes,true}
+  BOOST_CHECK_EQUAL( str::strToTrue("1"),     true );
+  BOOST_CHECK_EQUAL( str::strToTrue("42"),    true );
+  BOOST_CHECK_EQUAL( str::strToTrue("ON"),    true );
+  BOOST_CHECK_EQUAL( str::strToTrue("YES"),   true );
+  BOOST_CHECK_EQUAL( str::strToTrue("TRUE"),  true );
+  BOOST_CHECK_EQUAL( str::strToTrue("0"),     false );
+  BOOST_CHECK_EQUAL( str::strToTrue("OFF"),   false );
+  BOOST_CHECK_EQUAL( str::strToTrue("NO"),    false );
+  BOOST_CHECK_EQUAL( str::strToTrue("FALSE"), false );
+  BOOST_CHECK_EQUAL( str::strToTrue(""),      false );
+  BOOST_CHECK_EQUAL( str::strToTrue("foo"),   false );
+
+  // false iff false-string {0,off,no,false}
+  BOOST_CHECK_EQUAL( str::strToFalse("1"),     true );
+  BOOST_CHECK_EQUAL( str::strToFalse("42"),    true );
+  BOOST_CHECK_EQUAL( str::strToFalse("ON"),    true );
+  BOOST_CHECK_EQUAL( str::strToFalse("YES"),   true );
+  BOOST_CHECK_EQUAL( str::strToFalse("TRUE"),  true );
+  BOOST_CHECK_EQUAL( str::strToFalse("0"),     false );
+  BOOST_CHECK_EQUAL( str::strToFalse("OFF"),   false );
+  BOOST_CHECK_EQUAL( str::strToFalse("NO"),    false );
+  BOOST_CHECK_EQUAL( str::strToFalse("FALSE"), false );
+  BOOST_CHECK_EQUAL( str::strToFalse(""),      true );
+  BOOST_CHECK_EQUAL( str::strToFalse("foo"),   true );
+
+  // true iff true-string
+  BOOST_CHECK_EQUAL( str::strToBool("TRUE",  false), true );
+  BOOST_CHECK_EQUAL( str::strToBool("FALSE", false), false );
+  BOOST_CHECK_EQUAL( str::strToBool("",      false), false );
+  BOOST_CHECK_EQUAL( str::strToBool("foo",   false), false );
+
+  // false iff false-string
+  BOOST_CHECK_EQUAL( str::strToBool("TRUE",  true),  true );
+  BOOST_CHECK_EQUAL( str::strToBool("FALSE", true),  false );
+  BOOST_CHECK_EQUAL( str::strToBool("",      true),  true );
+  BOOST_CHECK_EQUAL( str::strToBool("foo",   true),  true );
+
+  // true/false iff true/false-string, else unchanged
+  bool ret;
+  ret = true; BOOST_CHECK_EQUAL( str::strToBoolNodefault("TRUE",  ret),  true );
+  ret = true; BOOST_CHECK_EQUAL( str::strToBoolNodefault("FALSE", ret),  false );
+  ret = true; BOOST_CHECK_EQUAL( str::strToBoolNodefault("",      ret),  true );
+  ret = true; BOOST_CHECK_EQUAL( str::strToBoolNodefault("foo",   ret),  true );
+
+  ret = false; BOOST_CHECK_EQUAL( str::strToBoolNodefault("TRUE",  ret),  true );
+  ret = false; BOOST_CHECK_EQUAL( str::strToBoolNodefault("FALSE", ret),  false );
+  ret = false; BOOST_CHECK_EQUAL( str::strToBoolNodefault("",      ret),  false );
+  ret = false; BOOST_CHECK_EQUAL( str::strToBoolNodefault("foo",   ret),  false );
 }
 
 BOOST_AUTO_TEST_CASE(operations)
