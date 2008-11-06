@@ -551,7 +551,16 @@ namespace zypp
       {
         ZYPP_CAUGHT(excpt_r);
         excpt_r.remember("Can't provide " + resource.filename().asString() + " : " + excpt_r.msg());
-        ZYPP_RETHROW(excpt_r);
+
+        if ( resource.optional() )
+        {
+            WAR << "optional resource " << resource << " could not be transfered" << endl;
+            return;
+        }
+        else
+        {            
+            ZYPP_RETHROW(excpt_r);
+        }
       }
     }
     else
@@ -653,7 +662,9 @@ namespace zypp
     fetcher.enqueue(sigloc);
     fetcher.start( dest_dir, media );
     // if we get the signature, update the checker
-    sigchecker = SignatureFileChecker(dest_dir + sigloc.filename());
+    if ( PathInfo(dest_dir + sigloc.filename()).isExist() )
+        sigchecker = SignatureFileChecker(dest_dir + sigloc.filename());
+    
     fetcher.reset();
           
     // now the key
@@ -743,6 +754,11 @@ namespace zypp
       }        
 
       provideToDest(media, (*it_res)->location, dest_dir);
+
+      // if the file was not transfered, and no exception, just
+      // return, as it was an optional file
+      if ( ! PathInfo(dest_dir + (*it_res)->location.filename()).isExist() )
+          return;
 
       // if the checksum is empty, but the checksum is in one of the
       // indexes checksum, then add a checker

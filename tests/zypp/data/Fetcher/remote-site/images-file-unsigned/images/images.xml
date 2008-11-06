@@ -1,0 +1,345 @@
+<?xml version="1.0"?>
+<!DOCTYPE images>
+<image_installation xmlns="http://www.suse.com/1.0/yast2ns" xmlns:config="http://www.suse.com/1.0/configns">
+<image_sets config:type="list" >
+  <image_set>
+    <patterns>base,enhanced_base,games,imaging,kde4,kde4_basis,multimedia,sw_management,x11,xgl</patterns>
+    <archs>i386</archs>
+    <pkg_image>kde-meta-i386.tar.lzma</pkg_image>
+    <images config:type="list">
+      <image>
+        <name>KDE [base]</name>
+        <type>tar</type>
+        <file>common-base-i386.tar.lzma</file>
+      </image>
+      <image>
+        <name>KDE [xorg]</name>
+        <type>tar</type>
+        <file>common-xorg-i386.tar.lzma</file>
+      </image>
+      <image>
+        <name>KDE [desktop]</name>
+	<type>tar</type>
+	<file>common-desktop-i386.tar.lzma</file>
+      </image>
+      <image>
+        <name>KDE</name>
+	<type>tar</type>
+	<file>kde-i386.tar.lzma</file>
+      </image>
+      <image>
+        <name>KDE [meta]</name>
+	<type>tar</type>
+	<file>kde-meta-i386.tar.lzma</file>
+      </image>
+    </images>
+  </image_set>
+  <image_set>
+    <patterns>base,enhanced_base,fonts,games,gnome,gnome_basis,imaging,multimedia,sw_management,x11,xgl</patterns>
+    <archs>i386</archs>
+    <pkg_image>gnome-meta-i386.tar.lzma</pkg_image>
+    <images config:type="list">
+      <image>
+        <name>GNOME [1]</name>
+        <type>tar</type>
+        <file>common-base-i386.tar.lzma</file>
+      </image>
+      <image>
+        <name>GNOME [2]</name>
+        <type>tar</type>
+        <file>common-xorg-i386.tar.lzma</file>
+      </image>
+      <image>
+        <name>GNOME [4]</name>
+	<type>tar</type>
+	<file>common-desktop-i386.tar.lzma</file>
+      </image>
+      <image>
+        <name>GNOME</name>
+	<type>tar</type>
+	<file>gnome-i386.tar.lzma</file>
+      </image>
+      <image>
+        <name>GNOME [meta]</name>
+	<type>tar</type>
+	<file>gnome-meta-i386.tar.lzma</file>
+      </image>
+    </images>
+  </image_set>
+  <image_set>
+    <patterns>base,enhanced_base,sw_management</patterns>
+    <archs>i386</archs>
+    <pkg_image>base-meta-i386.tar.lzma</pkg_image>
+    <images config:type="list">
+      <image>
+        <name>BASE [1]</name>
+        <type>tar</type>
+        <file>base-meta-i386.tar.lzma</file>
+      </image>
+      <image>
+        <name>BASE [2]</name>
+        <type>tar</type>
+        <file>base-i386.tar.lzma</file>
+      </image>
+      <image>
+        <name>BASE [3]</name>
+        <type>tar</type>
+        <file>common-base-i386.tar.lzma</file>
+      </image>
+    </images>
+  </image_set>
+  <image_set>
+    <patterns>base,enhanced_base,fonts,sw_management,x11</patterns>
+    <archs>i386</archs>
+    <pkg_image>x11-meta-i386.tar.lzma</pkg_image>
+    <images config:type="list">
+      <image>
+        <name>X11 [1]</name>
+        <type>tar</type>
+        <file>x11-meta-i386.tar.lzma</file>
+      </image>
+      <image>
+        <name>X11 [2]</name>
+        <type>tar</type>
+        <file>x11-i386.tar.lzma</file>
+      </image>
+      <image>
+        <name>X11 [3]</name>
+        <type>tar</type>
+        <file>common-xorg-i386.tar.lzma</file>
+      </image>
+      <image>
+        <name>X11 [4]</name>
+        <type>tar</type>
+        <file>common-base-i386.tar.lzma</file>
+      </image>
+    </images>
+  </image_set>
+  <image_set>
+    <patterns>base,enhanced_base,games,imaging,kde4,kde4_basis,multimedia,sw_management,x11,xgl</patterns>
+    <archs>x86_64</archs>
+    <pkg_image>kde-meta-x86_64.tar.lzma</pkg_image>
+    <images config:type="list">
+      <image>
+        <name>KDE [base]</name>
+        <type>tar</type>
+        <file>common-base-x86_64.tar.lzma</file>
+      </image>
+      <image>
+        <name>KDE [xorg]</name>
+        <type>tar</type>
+        <file>common-xorg-x86_64.tar.lzma</file>
+      </image>
+      <image>
+        <name>KDE [desktop]</name>
+	<type>tar</type>
+	<file>common-desktop-x86_64.tar.lzma</file>
+      </image>
+      <image>
+        <name>KDE</name>
+	<type>tar</type>
+	<file>kde-x86_64.tar.lzma</file>
+      </image>
+      <image>
+        <name>KDE [meta]</name>
+	<type>tar</type>
+	<file>kde-meta-x86_64.tar.lzma</file>
+      </image>
+    </images>
+  </image_set>
+  <image_set>
+    <patterns>base,enhanced_base,fonts,games,gnome,gnome_basis,imaging,multimedia,sw_management,x11,xgl</patterns>
+    <archs>x86_64</archs>
+    <pkg_image>gnome-meta-x86_64.tar.lzma</pkg_image>
+    <images config:type="list">
+      <image>
+        <name>GNOME [1]</name>
+        <type>tar</type>
+        <file>common-base-x86_64.tar.lzma</file>
+      </image>
+      <image>
+        <name>GNOME [2]</name>
+        <type>tar</type>
+        <file>common-xorg-x86_64.tar.lzma</file>
+      </image>
+      <image>
+        <name>GNOME [4]</name>
+	<type>tar</type>
+	<file>common-desktop-x86_64.tar.lzma</file>
+      </image>
+      <image>
+        <name>GNOME</name>
+	<type>tar</type>
+	<file>gnome-x86_64.tar.lzma</file>
+      </image>
+      <image>
+        <name>GNOME [meta]</name>
+	<type>tar</type>
+	<file>gnome-meta-x86_64.tar.lzma</file>
+      </image>
+    </images>
+  </image_set>
+  <image_set>
+    <patterns>base,enhanced_base,sw_management</patterns>
+    <archs>x86_64</archs>
+    <pkg_image>base-meta-x86_64.tar.lzma</pkg_image>
+    <images config:type="list">
+      <image>
+        <name>BASE [1]</name>
+        <type>tar</type>
+        <file>base-meta-x86_64.tar.lzma</file>
+      </image>
+      <image>
+        <name>BASE [2]</name>
+        <type>tar</type>
+        <file>base-x86_64.tar.lzma</file>
+      </image>
+      <image>
+        <name>BASE [3]</name>
+        <type>tar</type>
+        <file>common-base-x86_64.tar.lzma</file>
+      </image>
+    </images>
+  </image_set>
+  <image_set>
+    <patterns>base,enhanced_base,fonts,sw_management,x11</patterns>
+    <archs>x86_64</archs>
+    <pkg_image>x11-meta-x86_64.tar.lzma</pkg_image>
+    <images config:type="list">
+      <image>
+        <name>X11 [1]</name>
+        <type>tar</type>
+        <file>x11-meta-x86_64.tar.lzma</file>
+      </image>
+      <image>
+        <name>X11 [2]</name>
+        <type>tar</type>
+        <file>x11-x86_64.tar.lzma</file>
+      </image>
+      <image>
+        <name>X11 [3]</name>
+        <type>tar</type>
+        <file>common-xorg-x86_64.tar.lzma</file>
+      </image>
+      <image>
+        <name>X11 [4]</name>
+        <type>tar</type>
+        <file>common-base-x86_64.tar.lzma</file>
+      </image>
+    </images>
+  </image_set>
+  <image_set>
+    <patterns>base,enhanced_base,games,imaging,kde4,kde4_basis,multimedia,sw_management,x11,xgl</patterns>
+    <archs>ppc</archs>
+    <pkg_image>kde-meta-ppc.tar.lzma</pkg_image>
+    <images config:type="list">
+      <image>
+        <name>KDE [base]</name>
+        <type>tar</type>
+        <file>common-base-ppc.tar.lzma</file>
+      </image>
+      <image>
+        <name>KDE [xorg]</name>
+        <type>tar</type>
+        <file>common-xorg-ppc.tar.lzma</file>
+      </image>
+      <image>
+        <name>KDE [desktop]</name>
+	<type>tar</type>
+	<file>common-desktop-ppc.tar.lzma</file>
+      </image>
+      <image>
+        <name>KDE</name>
+	<type>tar</type>
+	<file>kde-ppc.tar.lzma</file>
+      </image>
+      <image>
+        <name>KDE [meta]</name>
+	<type>tar</type>
+	<file>kde-meta-ppc.tar.lzma</file>
+      </image>
+    </images>
+  </image_set>
+  <image_set>
+    <patterns>base,enhanced_base,fonts,games,gnome,gnome_basis,imaging,multimedia,sw_management,x11,xgl</patterns>
+    <archs>ppc</archs>
+    <pkg_image>gnome-meta-ppc.tar.lzma</pkg_image>
+    <images config:type="list">
+      <image>
+        <name>GNOME [1]</name>
+        <type>tar</type>
+        <file>common-base-ppc.tar.lzma</file>
+      </image>
+      <image>
+        <name>GNOME [2]</name>
+        <type>tar</type>
+        <file>common-xorg-ppc.tar.lzma</file>
+      </image>
+      <image>
+        <name>GNOME [4]</name>
+	<type>tar</type>
+	<file>common-desktop-ppc.tar.lzma</file>
+      </image>
+      <image>
+        <name>GNOME</name>
+	<type>tar</type>
+	<file>gnome-ppc.tar.lzma</file>
+      </image>
+      <image>
+        <name>GNOME [meta]</name>
+	<type>tar</type>
+	<file>gnome-meta-ppc.tar.lzma</file>
+      </image>
+    </images>
+  </image_set>
+  <image_set>
+    <patterns>base,enhanced_base,sw_management</patterns>
+    <archs>ppc</archs>
+    <pkg_image>base-meta-ppc.tar.lzma</pkg_image>
+    <images config:type="list">
+      <image>
+        <name>BASE [1]</name>
+        <type>tar</type>
+        <file>base-meta-ppc.tar.lzma</file>
+      </image>
+      <image>
+        <name>BASE [2]</name>
+        <type>tar</type>
+        <file>base-ppc.tar.lzma</file>
+      </image>
+      <image>
+        <name>BASE [3]</name>
+        <type>tar</type>
+        <file>common-base-ppc.tar.lzma</file>
+      </image>
+    </images>
+  </image_set>
+  <image_set>
+    <patterns>base,enhanced_base,fonts,sw_management,x11</patterns>
+    <archs>ppc</archs>
+    <pkg_image>x11-meta-ppc.tar.lzma</pkg_image>
+    <images config:type="list">
+      <image>
+        <name>X11 [1]</name>
+        <type>tar</type>
+        <file>x11-meta-ppc.tar.lzma</file>
+      </image>
+      <image>
+        <name>X11 [2]</name>
+        <type>tar</type>
+        <file>x11-ppc.tar.lzma</file>
+      </image>
+      <image>
+        <name>X11 [3]</name>
+        <type>tar</type>
+        <file>common-xorg-ppc.tar.lzma</file>
+      </image>
+      <image>
+        <name>X11 [4]</name>
+        <type>tar</type>
+        <file>common-base-ppc.tar.lzma</file>
+      </image>
+    </images>
+  </image_set>
+</image_sets>
+</image_installation>

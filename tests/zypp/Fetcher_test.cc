@@ -252,6 +252,40 @@ BOOST_AUTO_TEST_CASE(enqueue_broken_content_index)
   }
 }
 
+BOOST_AUTO_TEST_CASE(enqueue_digested_images_file_content_autoindex)
+{
+  MediaSetAccess media( ( DATADIR + "/images-file").asUrl(), "/" );
+  Fetcher fetcher;
+  filesystem::TmpDir dest;
+  {
+        OnMediaLocation loc("/images/images.xml",1);
+        fetcher.setOptions( Fetcher::AutoAddIndexes );
+        fetcher.enqueueDigested(loc);
+        fetcher.start(dest.path(), media);
+        fetcher.reset();
+        BOOST_CHECK( PathInfo(dest.path() + "/images/images.xml").isExist() );
+        fetcher.reset();
+  }
+}
+
+BOOST_AUTO_TEST_CASE(enqueue_digested_images_file_content_autoindex_unsigned)
+{
+  MediaSetAccess media( ( DATADIR + "/images-file-unsigned").asUrl(), "/" );
+  Fetcher fetcher;
+  filesystem::TmpDir dest;
+  {
+        OnMediaLocation loc("/images/images.xml",1);
+        fetcher.setOptions( Fetcher::AutoAddIndexes );
+        fetcher.enqueueDigested(loc);
+        // it should throw because unsigned file throws
+        BOOST_CHECK_THROW( fetcher.start( dest.path(), media ), FileCheckException);
+        fetcher.reset();
+        // the target file was NOT transfered
+        BOOST_CHECK( ! PathInfo(dest.path() + "/images/images.xml").isExist() );
+        fetcher.reset();
+  }
+}
+
 BOOST_AUTO_TEST_CASE(enqueue_broken_content_noindex)
 {
   MediaSetAccess media( ( DATADIR).asUrl(), "/" );
@@ -275,7 +309,7 @@ BOOST_AUTO_TEST_CASE(enqueue_broken_content_noindex)
 }
 
 
-BOOST_AUTO_TEST_CASE(fetcher_remove)
+BOOST_AUTO_TEST_CASE(enqueuedir_http)
 {
   // at this point the key is already trusted
   {
@@ -301,15 +335,42 @@ BOOST_AUTO_TEST_CASE(fetcher_remove)
       BOOST_CHECK( PathInfo(dest.path() + "/complexdir/subdir1/subdir1-file1.txt").isExist() );
       BOOST_CHECK( PathInfo(dest.path() + "/complexdir/subdir1/subdir1-file2.txt").isExist() );
 
+      web.stop();
+  }
+}
 
+BOOST_AUTO_TEST_CASE(enqueuedir_http_broken)
+{
+  // at this point the key is already trusted
+  {
+      // add the key as trusted
+      //getZYpp()->keyRing()->importKey(PublicKey(DATADIR + "/complexdir/subdir1/SHA1SUMS.key"), true);
+
+      WebServer web((Pathname(TESTS_SRC_DIR) + "/zypp/data/Fetcher/remote-site").c_str() );
+      web.start();
+
+      MediaSetAccess media( Url("http://localhost:9099"), "/" );
+      Fetcher fetcher;
+      filesystem::TmpDir dest;
+
+      // auto add the SHA1SUMS
+      fetcher.setOptions( Fetcher::AutoAddIndexes );
       fetcher.enqueueDir(OnMediaLocation("/complexdir-broken"), true);
-      BOOST_CHECK_THROW( fetcher.start( dest.path(), media ), Exception);
+      // should throw because wrong checksum
+      BOOST_CHECK_THROW( fetcher.start( dest.path(), media ), FileCheckException);
+      fetcher.reset();
+
+      BOOST_CHECK( PathInfo(dest.path() + "/complexdir-broken/subdir2").isExist() );
+      BOOST_CHECK( PathInfo(dest.path() + "/complexdir-broken/subdir2/subdir2-file1.txt").isExist() );
+      BOOST_CHECK( PathInfo(dest.path() + "/complexdir-broken/subdir1/subdir1-file1.txt").isExist() );
+      BOOST_CHECK( PathInfo(dest.path() + "/complexdir-broken/subdir1/subdir1-file2.txt").isExist() );
 
       fetcher.reset();
 
       web.stop();
   }
 }
+
 
 BOOST_AUTO_TEST_SUITE_END();
 
