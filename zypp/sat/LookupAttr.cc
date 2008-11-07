@@ -337,10 +337,13 @@ namespace zypp
           case REPOKEY_TYPE_FLEXARRAY:
             {
               std::ostringstream str;
-              dumpRange( str,
-                         transformIterator<std::string>( subBegin() ),
-                         transformIterator<std::string>( subEnd() ) );
-              return str.str();
+              str << "{" << endl;
+              for_( it, subBegin(), subEnd() )
+              {
+                str << "  " << it.inSolvAttr() << " = " << it.asString() << endl;
+              }
+              str << "}" << endl;
+             return str.str();
             }
             break;
         }
