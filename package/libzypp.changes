@@ -1,4 +1,11 @@
 -------------------------------------------------------------------
+Fri Nov  7 23:55:47 CET 2008 - ma@suse.de
+
+- Fix retrieval of patch contents and references attributes. (bnc #442200)
+- revision 11641
+- version 5.21.0 (21)
+
+-------------------------------------------------------------------
 Fri Nov  7 19:51:00 CET 2008 - ma@suse.de
 
 - Add CheckSum::asString.

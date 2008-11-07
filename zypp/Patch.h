@@ -196,15 +196,10 @@ namespace zypp
        * "bugzilla"
        */
       std::string type() const;
+
     private:
       friend class boost::iterator_core_access;
-
       int dereference() const { return 0; }
-      void increment();
-    private:
-      sat::LookupAttr::iterator _hrefit;
-      sat::LookupAttr::iterator _titleit;
-      sat::LookupAttr::iterator _typeit;
   };
 
   inline Patch::ReferenceIterator Patch::referencesBegin() const
