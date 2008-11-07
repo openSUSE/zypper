@@ -69,6 +69,9 @@ namespace zypp
     std::string checksum() const;
     bool empty() const;
 
+  public:
+    std::string asString() const;
+
   private:
     std::string _type;
     std::string _checksum;

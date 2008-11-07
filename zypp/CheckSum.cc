@@ -10,6 +10,7 @@
  *
 */
 #include <iostream>
+#include <sstream>
 
 #include "zypp/base/Logger.h"
 #include "zypp/base/Gettext.h"
@@ -130,6 +131,13 @@ namespace zypp
 
   bool CheckSum::empty() const
   { return (checksum().empty() || type().empty()); }
+
+  std::string CheckSum::asString() const
+  {
+    std::ostringstream str;
+    str << *this;
+    return str.str();
+  }
 
   std::ostream & operator<<( std::ostream & str, const CheckSum & obj )
   {
