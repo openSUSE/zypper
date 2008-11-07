@@ -102,11 +102,13 @@ namespace sat
       static const SolvAttr restartSuggested;
       static const SolvAttr reloginSuggested;
       static const SolvAttr message;
+      static const SolvAttr updateCollection;
       static const SolvAttr updateCollectionName;
       static const SolvAttr updateCollectionEvr;
       static const SolvAttr updateCollectionArch;
       static const SolvAttr updateCollectionFilename;
       static const SolvAttr updateCollectionFlags;
+      static const SolvAttr updateReference;
       static const SolvAttr updateReferenceType;
       static const SolvAttr updateReferenceHref;
       static const SolvAttr updateReferenceId;

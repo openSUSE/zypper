@@ -77,11 +77,13 @@ namespace sat
   const SolvAttr SolvAttr::restartSuggested         ( UPDATE_RESTART );
   const SolvAttr SolvAttr::reloginSuggested         ( UPDATE_RELOGIN );
   const SolvAttr SolvAttr::message                  ( UPDATE_MESSAGE );
+  const SolvAttr SolvAttr::updateCollection         ( UPDATE_COLLECTION );
   const SolvAttr SolvAttr::updateCollectionName     ( UPDATE_COLLECTION_NAME );
   const SolvAttr SolvAttr::updateCollectionEvr      ( UPDATE_COLLECTION_EVR );
   const SolvAttr SolvAttr::updateCollectionArch     ( UPDATE_COLLECTION_ARCH );
   const SolvAttr SolvAttr::updateCollectionFilename ( UPDATE_COLLECTION_FILENAME );
   const SolvAttr SolvAttr::updateCollectionFlags    ( UPDATE_COLLECTION_FLAGS );
+  const SolvAttr SolvAttr::updateReference          ( UPDATE_REFERENCE );
   const SolvAttr SolvAttr::updateReferenceType      ( UPDATE_REFERENCE_TYPE );
   const SolvAttr SolvAttr::updateReferenceHref      ( UPDATE_REFERENCE_HREF );
   const SolvAttr SolvAttr::updateReferenceId        ( UPDATE_REFERENCE_ID );
