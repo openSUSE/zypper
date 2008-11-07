@@ -962,7 +962,7 @@ void solve_and_commit (Zypper & zypper)
   bool commit_done = false;
   do
   {
-    if (zypper.runtimeData().solve_before_commit) // doUpdate was called, no need for solving
+    if (zypper.runtimeData().solve_before_commit) // e.g. doUpdate unsets this flag, no need for solving
     {
       MIL << "solving..." << endl;
 

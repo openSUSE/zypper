@@ -133,6 +133,7 @@ bool xml_list_patches ()
     }
   }
 
+  //! \todo change this from appletinfo to something general, define in xmlout.rnc
   if (patchcount == 0)
     cout << "<appletinfo status=\"no-update-repositories\"/>" << endl;
 
@@ -141,7 +142,7 @@ bool xml_list_patches ()
 
 // ----------------------------------------------------------------------------
 
-static void list_patch_updates(Zypper & zypper)
+static bool list_patch_updates(Zypper & zypper)
 {
   Table tbl;
   Table pm_tbl; // only those that affect packagemanager (restartSuggested()), they have priority
@@ -183,8 +184,10 @@ static void list_patch_updates(Zypper & zypper)
 
   // those that affect the package manager go first
   // (TODO: user option for this?)
+  bool affectpm = false;
   if (!pm_tbl.empty ())
   {
+    affectpm = true;
     if (!tbl.empty ())
       zypper.out().warning(
         _("These are only the updates affecting the updater itself.\n"
@@ -198,6 +201,8 @@ static void list_patch_updates(Zypper & zypper)
     zypper.out().info(_("No updates found."));
   else
     cout << tbl;
+
+  return affectpm;
 }
 
 // ----------------------------------------------------------------------------
@@ -350,38 +355,48 @@ void list_updates(Zypper & zypper, const ResKindSet & kinds, bool best_effort)
     cout << "<update-status version=\"0.6\">" << endl;
     cout << "<update-list>" << endl;
   }
-  bool not_affects_pkgmgr = false;
+
+  // whether some of the listed patches affects package management itself
+  // false indicates that we are not checking for patches at all
+  // (no 'zypper lp' or 'zypper lu -t patch ...'), or there are no patches
+  // affecting the package management stack
+  bool affects_pkgmgr = false;
 
   unsigned kind_size = kinds.size();
   ResKindSet localkinds = kinds;
   ResKindSet::iterator it;
 
-  // patch updates
+  // patch updates first
   it = localkinds.find(ResKind::patch);
   if(it != localkinds.end())
   {
     if (zypper.out().type() == Out::TYPE_XML)
-      not_affects_pkgmgr = !xml_list_patches();
+      affects_pkgmgr = xml_list_patches();
     else
     {
       zypper.out().info(i18n_kind_updates(*it), Out::QUIET, Out::TYPE_NORMAL);
       zypper.out().info("", Out::QUIET, Out::TYPE_NORMAL); // visual separator
-      list_patch_updates(zypper);
+      affects_pkgmgr = list_patch_updates(zypper);
     }
     localkinds.erase(it);
   }
 
-  // other kinds
-  //! \todo list package updates according to Resolver::doUpdate()
+  // list other kinds (only if there are no _patches_ affecting the package manager)
+
+  // XML output here
   if (zypper.out().type() == Out::TYPE_XML)
   {
-    if (not_affects_pkgmgr)
+    if (!affects_pkgmgr)
       xml_list_updates(localkinds);
     cout << "</update-list>" << endl;
     cout << "</update-status>" << endl;
     return;
   }
 
+  if (affects_pkgmgr)
+    return;
+
+  // normal output here
   for (it = localkinds.begin(); it != localkinds.end(); ++it)
   {
     Table tbl;
@@ -395,17 +410,18 @@ void list_updates(Zypper & zypper, const ResKindSet & kinds, bool best_effort)
     unsigned int name_col;
     // TranslatorExplanation S stands for Status
     th << _("S");
-    if (!hide_repo) {
+    if (!hide_repo)
       th << (zypper.globalOpts().is_rug_compatible ? _("Catalog") : _("Repository"));
-    }
-    if (zypper.globalOpts().is_rug_compatible) {
+
+    if (zypper.globalOpts().is_rug_compatible)
       th << _("Bundle");
-    }
+
     name_col = th.cols();
     th << _("Name");
-    if (!best_effort) {         // best_effort does not know version or arch yet
+    // best_effort does not know version or arch yet
+    if (!best_effort)
       th << _("Version") << _("Arch");
-    }
+
     tbl << th;
 
     unsigned int cols = th.cols();
