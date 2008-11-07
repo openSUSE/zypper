@@ -11,7 +11,7 @@ int main( int argc, char * argv[] )
   INT << "===[START]==========================================" << endl;
 
   // https://bugzilla.novell.com/show_bug.cgi?id=442200
-  Pathname mroot( "/tmp/ToolScanRepos" );
+  Pathname mroot( "/tmp/Bb" );
   TestSetup test( mroot, Arch_x86_64 );
   test.loadRepos();
 

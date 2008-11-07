@@ -115,6 +115,25 @@ class TestSetup
       nrepo.setAlias( alias_r.empty() ? path_r.basename() : alias_r );
       satpool().addRepoSolv( path_r, nrepo );
     }
+    /** Directly load repo from some location (url or absolute(!)path).
+     * An empty alias is guessed.
+    */
+    void loadRepo( const std::string & loc_r, const std::string & alias_r = std::string() )
+    {
+      if ( *loc_r.c_str() == '/' )
+      {
+        loadRepo( Pathname( loc_r ), alias_r );
+      }
+      else
+      {
+        loadRepo( Url( loc_r ), alias_r );
+      }
+    }
+    /** Directly load repo from some location (url or absolute(!)path).
+     * An empty alias is guessed.
+    */
+    void loadRepo( const char * loc_r, const std::string & alias_r = std::string() )
+    { loadRepo( std::string( loc_r ? loc_r : "" ), alias_r ); }
 
   public:
     /** Load all enabled repos in repos.d to pool. */
