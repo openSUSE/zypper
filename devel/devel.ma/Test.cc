@@ -20,8 +20,10 @@ int main( int argc, char * argv[] )
   {
     Patch::constPtr p( (*it)->asKind<Patch>() );
     MIL << p << endl;
-    Patch::Contents contents( p->contents() );
-    DBG << contents << endl;
+    for_( i, p->referencesBegin(), p->referencesEnd() )
+    {
+      DBG << i.href() << endl;
+    }
   }
 
 
