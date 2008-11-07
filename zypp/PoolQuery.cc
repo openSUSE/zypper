@@ -545,7 +545,7 @@ attremptycheckend:
   , _edition(pqimpl->_edition)
   , _op(pqimpl->_op)
   {
-    this->base_reference() = LookupAttr::iterator(dip_r, true); //!\todo pass chain_repos
+    this->base_reference() = LookupAttr::iterator(dip_r);
     _has_next = (*base_reference() != sat::detail::noId);
   }
 

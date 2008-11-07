@@ -24,9 +24,24 @@
 using std::endl;
 
 #if 0
-#undef  XXX
-#define XXX MIL
-#warning Remove dummy debug output defines
+#  undef  XXX
+#  define XXX MIL
+#  define XXD DBG
+#  define XXM MIL
+#  define XXW WAR
+#  define XXE ERR
+#  define XXS SEC
+#  define XXI INT
+#  define XXU USR
+#  warning Remove dummy debug output defines
+#else
+#  define XXD XXX
+#  define XXM XXX
+#  define XXW XXX
+#  define XXE XXX
+#  define XXS XXX
+#  define XXI XXX
+#  define XXU XXX
 #endif
 
 ///////////////////////////////////////////////////////////////////
@@ -41,32 +56,27 @@ namespace zypp
       if ( _attr == SolvAttr::noAttr )
         return iterator();
 
-#warning Need to call dataiterator_free
+#warning Need to call dataiterator_free, use Autodispose instead of scoped_ptr
       scoped_ptr< ::_Dataiterator> dip( new ::Dataiterator );
       // needed while LookupAttr::iterator::dip_equal does ::memcmp:
       ::memset( dip.get(), 0, sizeof(::_Dataiterator) );
-      bool chain = false;
 
       if ( _solv )
       {
-        ::dataiterator_init( dip.get(), sat::Pool::instance().get(), _solv.repository().id(),         _solv.id(), _attr.id(), 0, 0 );
-        XXX << "Solv " << _solv << endl;
+        ::dataiterator_init( dip.get(), sat::Pool::instance().get(), _solv.repository().id(), _solv.id(), _attr.id(), 0, 0 );
       }
       else if ( _repo )
       {
-        ::dataiterator_init( dip.get(), sat::Pool::instance().get(), _repo.id(),                               0, _attr.id(), 0, 0 );
-        XXX << "Repo " << _repo << endl;
+        ::dataiterator_init( dip.get(), sat::Pool::instance().get(),              _repo.id(),          0, _attr.id(), 0, 0 );
       }
       else if ( ! sat::Pool::instance().reposEmpty() )
       {
-        ::dataiterator_init( dip.get(), sat::Pool::instance().get(), sat::Pool::instance().reposBegin()->id(), 0, _attr.id(), 0, 0 );
-        chain = true;
-        XXX << "ALL " << endl;
+        ::dataiterator_init( dip.get(), sat::Pool::instance().get(),                       0,          0, _attr.id(), 0, 0 );
       }
       else
         return iterator();
 
-      return iterator( dip, chain ); // iterator takes over ownership!
+      return iterator( dip ); // iterator takes over ownership!
     }
 
     LookupAttr::iterator LookupAttr::end() const
@@ -112,9 +122,9 @@ namespace zypp
     //	CLASS NAME : LookupAttr::iterator
     //
     ///////////////////////////////////////////////////////////////////
+
     std::ostream & operator<<( std::ostream & str, const ::_Dataiterator * obj )
     {
-
       str << "::_Dataiterator(";
       if ( ! obj )
       {
@@ -122,22 +132,20 @@ namespace zypp
       }
       else
       {
-        str << '|' << obj->pool;
-        str << '|' << Repository(obj->repo);
-        str << '|' << obj->key;
-        str << '|' << obj->keyname;
-        str << '|' << obj->repodataid;
-        str << '|' << obj->solvid;
-        str << '|' << obj->repoid;
+        str << "|" << obj->pool;
+        str << "|" << Repository(obj->repo);
+        str << "|" << obj->key;
+        str << "|" << obj->keyname;
+        str << "|" << obj->repodataid;
+        str << "|" << Solvable(obj->solvid);
+        str << "|" << obj->repoid;
       }
       return str << ")";
     }
-
     std::ostream & operator<<( std::ostream & str, const scoped_ptr< ::_Dataiterator> & obj )
     {
       return str << obj.get();
     }
-
 
     ///////////////////////////////////////////////////////////////////
     // position and moving
@@ -365,7 +373,6 @@ namespace zypp
     LookupAttr::iterator::iterator( const iterator & rhs )
     : iterator_adaptor_( cloneFrom( rhs.base() ) )
     , _dip( base() )
-    , _chainRepos(rhs._chainRepos)
     {}
 
     LookupAttr::iterator & LookupAttr::iterator::operator=( const iterator & rhs )
@@ -374,19 +381,15 @@ namespace zypp
       {
         _dip.reset( cloneFrom( rhs.base() ) );
         base_reference() = _dip.get();
-        _chainRepos = rhs._chainRepos;
       }
       return *this;
     }
 
-    LookupAttr::iterator::iterator( scoped_ptr< ::_Dataiterator> & dip_r, bool chain_r )
+    LookupAttr::iterator::iterator( scoped_ptr< ::_Dataiterator> & dip_r )
     : iterator_adaptor_( dip_r.get() )
-    , _chainRepos( chain_r )
     {
       _dip.swap( dip_r ); // take ownership!
-      XXX << _dip << endl;
       increment();
-      XXX << *this << endl;
     }
 
     ///////////////////////////////////////////////////////////////////
@@ -416,21 +419,8 @@ namespace zypp
     {
       if ( _dip && ! ::dataiterator_step( _dip.get() ) )
       {
-        bool haveNext = false;
-        if ( _chainRepos )
-        {
-          Repository nextRepo( inRepo().nextInPool() );
-          if ( nextRepo )
-          {
-            ::dataiterator_jump_to_repo( _dip.get(), nextRepo.get() );
-            haveNext = ::dataiterator_step( _dip.get() );
-          }
-        }
-        if ( ! haveNext )
-        {
-          _dip.reset();
-          base_reference() = 0;
-        }
+        _dip.reset();
+        base_reference() = 0;
       }
     }
 
@@ -446,7 +436,7 @@ namespace zypp
         str << obj.inRepo();
 
       str << '<' << obj.inSolvAttr()
-          << ">(" <<  obj.solvAttrType() << ") = " << obj.asString();
+          << ">(" <<  IdString(obj.solvAttrType()) << ") = " << obj.asString();
       return str;
     }
 

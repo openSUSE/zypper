@@ -300,7 +300,7 @@ namespace zypp
          * C-tor taking over ownership of the passed scoped _Dataiterator*
          * and doing it's first iteration (::dataiterator_step)
          */
-        iterator( scoped_ptr< ::_Dataiterator> & dip_r, bool chain_r );
+        iterator( scoped_ptr< ::_Dataiterator> & dip_r );
 
       private:
         friend class boost::iterator_core_access;
@@ -326,7 +326,6 @@ namespace zypp
         { return _dip.get(); }
       private:
         scoped_ptr< ::_Dataiterator> _dip;
-        DefaultIntegral<bool,false>  _chainRepos;
     };
     ///////////////////////////////////////////////////////////////////
 
