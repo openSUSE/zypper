@@ -3,7 +3,7 @@
 
 #define LABELED(V) #V << ":\t" << V
 
-static TestSetup test( Arch_x86_64 );
+static TestSetup test( "/tmp/x", Arch_x86_64 );
 
 // Must be the first test!
 BOOST_AUTO_TEST_CASE(bnc_435838)
@@ -57,7 +57,20 @@ BOOST_AUTO_TEST_CASE(LookupAttr_existingattr)
 
 BOOST_AUTO_TEST_CASE(LookupAttr_)
 {
-//   base::LogControl::TmpLineWriter shutUp( new log::FileLineWriter( "/tmp/YLOG" ) );
-//   sat::LookupAttr q( sat::SolvAttr::name );
-//   MIL << "HI" << endl;
+  base::LogControl::TmpLineWriter shutUp( new log::FileLineWriter( "/tmp/YLOG" ) );
+  MIL << "GO" << endl;
+
+  sat::Pool satpool( test.satpool() );
+  for_( it, satpool.reposBegin(), satpool.reposEnd() )
+  {
+    SEC << endl;
+    sat::LookupAttr q( sat::SolvAttr::name, *it );
+    BOOST_CHECK_EQUAL( q.size(), it->solvablesSize() );
+    MIL << q << ' ' << q.size() << " in " << *it << endl;
+    DBG << q << endl;
+  }
+  return;
+  sat::LookupAttr q( sat::SolvAttr::name );
+  BOOST_CHECK_EQUAL( q.size(), satpool.solvablesSize() );
+  MIL << q << ' ' << q.size() << " in ALL" << endl;
 }

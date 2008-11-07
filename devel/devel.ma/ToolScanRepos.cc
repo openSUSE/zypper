@@ -6,7 +6,7 @@
 **      FUNCTION TYPE : int
 */
 int main( int argc, char * argv[] )
-{
+try {
   INT << "===[START]==========================================" << endl;
   std::string appname( Pathname::basename( argv[0] ) );
   --argc;
@@ -43,4 +43,11 @@ int main( int argc, char * argv[] )
   INT << "===[END]============================================" << endl << endl;
   return 0;
 }
-
+catch ( const Exception & exp )
+{
+  INT;
+  cerr << exp << endl << exp.historyAsString();
+  throw;
+}
+catch (...)
+{}

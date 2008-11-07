@@ -302,10 +302,10 @@ namespace zypp
          */
         iterator( scoped_ptr< ::_Dataiterator> & dip_r, bool chain_r );
 
-        ::_Dataiterator * cloneFrom( const ::_Dataiterator * rhs );
-
       private:
         friend class boost::iterator_core_access;
+
+        ::_Dataiterator * cloneFrom( const ::_Dataiterator * rhs );
 
         template <class OtherDerived, class OtherIterator, class V, class C, class R, class D>
         bool equal( const boost::iterator_adaptor<OtherDerived, OtherIterator, V, C, R, D> & rhs ) const

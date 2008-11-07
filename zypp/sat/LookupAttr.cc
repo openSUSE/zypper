@@ -23,6 +23,12 @@
 
 using std::endl;
 
+#if 0
+#undef  XXX
+#define XXX MIL
+#warning Remove dummy debug output defines
+#endif
+
 ///////////////////////////////////////////////////////////////////
 namespace zypp
 { /////////////////////////////////////////////////////////////////
@@ -42,13 +48,20 @@ namespace zypp
       bool chain = false;
 
       if ( _solv )
-        ::dataiterator_init( dip.get(), sat::Pool::instance().get(), _solv.repository().id(), _solv.id(), _attr.id(), 0, 0 );
+      {
+        ::dataiterator_init( dip.get(), sat::Pool::instance().get(), _solv.repository().id(),         _solv.id(), _attr.id(), 0, 0 );
+        XXX << "Solv " << _solv << endl;
+      }
       else if ( _repo )
-        ::dataiterator_init( dip.get(), sat::Pool::instance().get(), _repo.id(), 0, _attr.id(), 0, 0 );
+      {
+        ::dataiterator_init( dip.get(), sat::Pool::instance().get(), _repo.id(),                               0, _attr.id(), 0, 0 );
+        XXX << "Repo " << _repo << endl;
+      }
       else if ( ! sat::Pool::instance().reposEmpty() )
       {
         ::dataiterator_init( dip.get(), sat::Pool::instance().get(), sat::Pool::instance().reposBegin()->id(), 0, _attr.id(), 0, 0 );
         chain = true;
+        XXX << "ALL " << endl;
       }
       else
         return iterator();
@@ -99,6 +112,32 @@ namespace zypp
     //	CLASS NAME : LookupAttr::iterator
     //
     ///////////////////////////////////////////////////////////////////
+    std::ostream & operator<<( std::ostream & str, const ::_Dataiterator * obj )
+    {
+
+      str << "::_Dataiterator(";
+      if ( ! obj )
+      {
+        str << "NULL";
+      }
+      else
+      {
+        str << '|' << obj->pool;
+        str << '|' << Repository(obj->repo);
+        str << '|' << obj->key;
+        str << '|' << obj->keyname;
+        str << '|' << obj->repodataid;
+        str << '|' << obj->solvid;
+        str << '|' << obj->repoid;
+      }
+      return str << ")";
+    }
+
+    std::ostream & operator<<( std::ostream & str, const scoped_ptr< ::_Dataiterator> & obj )
+    {
+      return str << obj.get();
+    }
+
 
     ///////////////////////////////////////////////////////////////////
     // position and moving
@@ -345,7 +384,9 @@ namespace zypp
     , _chainRepos( chain_r )
     {
       _dip.swap( dip_r ); // take ownership!
+      XXX << _dip << endl;
       increment();
+      XXX << *this << endl;
     }
 
     ///////////////////////////////////////////////////////////////////
