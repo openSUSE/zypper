@@ -10,7 +10,7 @@ msgstr ""
 "Project-Id-Version: zypper\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2008-10-27 18:08+0100\n"
-"PO-Revision-Date: 2008-10-16 22:16+0900\n"
+"PO-Revision-Date: 2008-10-28 20:28+0900\n"
 "Last-Translator: Yasuhiko Kamata <belphegor@belbel.or.jp>\n"
 "Language-Team: Japanese <opensuse-ja@opensuse.org>\n"
 "MIME-Version: 1.0\n"
@@ -94,7 +94,7 @@ msgstr "リポジトリ: %s"
 #. translators: this message is shown after showing description of the key
 #: ../src/callbacks/keyring.h:150
 msgid "Do you want to reject the key, trust temporarily, or trust always?"
-msgstr ""
+msgstr "鍵を拒否しますか (R)？ 一時的に信頼しますか (T)？ それとも今後ずっと信頼しますか (A)？"
 
 #. translators: r/t/a stands for Reject/TrustTemporarily/trustAlways(import)
 #. translate to whatever is appropriate for your language
@@ -103,13 +103,12 @@ msgstr ""
 #. The answers should be lower case letters.
 #: ../src/callbacks/keyring.h:162
 msgid "r/t/a/"
-msgstr ""
+msgstr "r/t/a"
 
 #. translators: the same as r/t/a, but without 'a'
 #: ../src/callbacks/keyring.h:165
-#, fuzzy
 msgid "r/t"
-msgstr "n/t"
+msgstr "r/t"
 
 #. translators: help text for the 'r' option in the 'r/t/a' prompt
 #: ../src/callbacks/keyring.h:167
@@ -550,9 +549,8 @@ msgid "'%s' is not installed."
 msgstr "'%s' はインストールされていません。"
 
 #: ../src/install.cc:437
-#, fuzzy
 msgid "Cannot uninstall patches."
-msgstr "%s をインストールできません"
+msgstr "修正をアンインストールできません。"
 
 #: ../src/install.cc:438
 msgid ""
@@ -560,10 +558,12 @@ msgid ""
 "Patches are not installed in sense of copied files, database records,\n"
 "or similar."
 msgstr ""
+"修正のインストール状態は単にその依存関係でのみ決定されます。\n"
+"修正は単なるファイルコピーやデータベースレコードのような形でインストールされることはありません。"
 
 #: ../src/install.cc:449
 msgid "Uninstallation of a pattern is currently not defined and implemented."
-msgstr ""
+msgstr "パターンのアンインストールは現在定義されておらず、実装もされていません。"
 
 #: ../src/install.cc:463
 #, c-format
@@ -578,12 +578,12 @@ msgstr "%s は現在 %s と一緒に使用することができません"
 
 #: ../src/install.cc:520
 msgid "Specifying architecture when selecting packages by name is not implemented."
-msgstr ""
+msgstr "パッケージを名前で選択した場合、アーキテクチャを指定する機能は実装されていません。"
 
 #: ../src/install.cc:555
-#, fuzzy, c-format
+#, c-format
 msgid "'%s' is not a valid package or capability name."
-msgstr "'%s' は有効なサービス種類ではありません。"
+msgstr "'%s' は正しいパッケージ名でも能力名でもありません。"
 
 #. translators: meaning a package %s or provider of capability %s
 #: ../src/install.cc:630
@@ -874,9 +874,9 @@ msgid "Use '%s' to get the list of defined repositories."
 msgstr "設定したリポジトリの一覧を取得するには '%s' コマンドを使用してください。"
 
 #: ../src/repos.cc:490 ../src/repos.cc:497
-#, fuzzy, c-format
+#, c-format
 msgid "Ignoring repository '%s' because of '%s' option."
-msgstr "エラーが発生したため、リポジトリ '%s' のキャッシュ削除を行なうことができませんでした。"
+msgstr "'%2$s' オプションのため、リポジトリ '%1$s' を無視しています。"
 
 #: ../src/repos.cc:527 ../src/repos.cc:563
 #, c-format
@@ -2139,6 +2139,8 @@ msgid ""
 "If you run zypper without a terminal, use '%s' global\n"
 "option to make zypper use default answers to prompts."
 msgstr ""
+"zypper を端末無しで実行する場合、 '%s' のグローバルオプションを\n"
+"指定することで、 zypper に対して問い合わせへの既定の応答を設定することができます。"
 
 #. TranslatorExplanation These are reasons for various failures.
 #: ../src/utils/prompt.h:125
@@ -2211,6 +2213,8 @@ msgid ""
 "\t--no-cd\t\t\tIgnore CD/DVD repositories.\n"
 "\t--no-remote\t\tIgnore remote repositories.\n"
 msgstr ""
+"\t--no-cd\t\t\tCD/DVD のリポジトリを無視する\n"
+"\t--no-remote\t\tリモートのリポジトリを無視する\n"
 
 #: ../src/Zypper.cc:182
 msgid ""
@@ -2416,14 +2420,12 @@ msgid "Autorefresh disabled."
 msgstr "自動更新が無効になっています。"
 
 #: ../src/Zypper.cc:509
-#, fuzzy
 msgid "CD/DVD repositories disabled."
-msgstr "自動更新が無効になっています。"
+msgstr "CD/DVD リポジトリが無効になっています。"
 
 #: ../src/Zypper.cc:516
-#, fuzzy
 msgid "Remote repositories disabled."
-msgstr "自動更新が無効になっています。"
+msgstr "リモートリポジトリが無効になっています。"
 
 #: ../src/Zypper.cc:523
 msgid "Ignoring installed resolvables."
@@ -3757,9 +3759,3 @@ msgstr "説明"
 msgid "Resolvable Type"
 msgstr "解決方法の種類"
 
-# power-off message
-#~ msgid "Do you want to trust the key?"
-#~ msgstr "この鍵を信頼しますか？"
-
-#~ msgid "n/t/i"
-#~ msgstr "n/t/i"

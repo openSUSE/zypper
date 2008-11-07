@@ -15,13 +15,13 @@ msgstr ""
 "Project-Id-Version: zypper\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2008-10-27 18:08+0100\n"
-"PO-Revision-Date: 2008-10-27 21:36+0100\n"
-"Last-Translator: Martin Schlander <mschlander@opensuse.org>\n"
-"Language-Team: Danish <opensuse-translation@opensuse.org>\n"
+"PO-Revision-Date: 2008-10-29 21:53+0000\n"
+"Last-Translator: Jan Madsen <jan.madsen.pt@gmail.com>\n"
+"Language-Team: dansk <opensuse-translation@opensuse.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Lokalize 0.2\n"
+"X-Generator: KBabel 1.11.4\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
 #: ../src/callbacks/keyring.h:48
@@ -70,7 +70,7 @@ msgstr "Filen '%s' fra softwarekilden '%s' er signeret med en ukendt nøgle '%s'
 
 #: ../src/callbacks/keyring.h:125
 msgid "Automatically trusting the following key:"
-msgstr "Betro automatisk den følgende nøgle:"
+msgstr "Betror automatisk den følgende nøgle:"
 
 #: ../src/callbacks/keyring.h:127
 msgid "New repository or package signing key received:"
@@ -128,7 +128,7 @@ msgstr "Betro nøglen midlertidigt."
 #. translators: help text for the 'a' option in the 'r/t/a' prompt
 #: ../src/callbacks/keyring.h:172
 msgid "Trust the key and import it into trusted keyring."
-msgstr "Betro nøglen og importér den til betroet nøglering?"
+msgstr "Betro nøglen og importér den til betroet nøglering."
 
 #: ../src/callbacks/keyring.h:206
 #, c-format
@@ -528,7 +528,7 @@ msgstr "'%s' ikke fundet"
 #: ../src/install.cc:104
 #, c-format
 msgid "skipping %s '%s' (the newest version already installed)"
-msgstr "skipper %s'%s' (den nyeste version er allerede installeret)"
+msgstr "skipper %s '%s' (den nyeste version er allerede installeret)"
 
 #. translators: %s-%s.%s is name-version.arch
 #: ../src/install.cc:116
@@ -671,7 +671,7 @@ msgstr "Problem med at fjerne pakkelåsen:"
 #. translators: this will show up if you press ctrl+c twice outside of zypper shell
 #: ../src/main.cc:38
 msgid "OK OK! Exiting immediately..."
-msgstr "OK OK! Afbryder straks..."
+msgstr "OK, OK! Afbryder straks..."
 
 #. TranslatorExplanation The first %s is name of the resolvable, the second is its kind (e.g. 'zypper package')
 #: ../src/misc.cc:136
@@ -684,12 +684,12 @@ msgstr "Automatisk accept af %s %s licensaftale."
 #: ../src/misc.cc:157
 #, c-format
 msgid "In order to install '%s'%s, you must agree to terms of the following license agreement:"
-msgstr "For at installere '%s'%s, må du acceptere betingelserne i følgende licensaftale:"
+msgstr "For at installere '%s'%s, skal du acceptere betingelserne i følgende licensaftale:"
 
 #. lincense prompt
 #: ../src/misc.cc:174
 msgid "Do you agree with the terms of the license?"
-msgstr "Accepterer du licensens betingelserne?"
+msgstr "Accepterer du licensenbetingelserne?"
 
 #: ../src/misc.cc:183
 msgid "Aborting installation due to the need for license confirmation."
@@ -2285,7 +2285,7 @@ msgstr ""
 "     Valgmuligheder for mål:\n"
 "\t--root, -R <dir>\tOperér med en anden rodmappe.\n"
 "\t--disable-system-resolvables\n"
-"\t\t\t\tLæs ikke installerede resolvables.\n"
+"\t\t\t\tLæs ikke installerede pakker.\n"
 
 #: ../src/Zypper.cc:189
 msgid ""
@@ -2349,8 +2349,8 @@ msgstr ""
 "\tinstall, in\t\tInstallér pakker.\n"
 "\tremove, rm\t\tFjern pakker.\n"
 "\tverify, ve\t\tVerificér integriteten af pakkeafhængigheder.\n"
-"\tsource-install, si\tInstallér kildepakker og deres\n"
-"\t\t\t\topbygningsafhængigheder.\n"
+"\tsource-install, si\tInstallér kildekodepakker og deres\n"
+"\t\t\t\tbygningsafhængigheder.\n"
 "\tinstall-new-recommends, inr\n"
 "\t\t\t\tInstallér nyligt tilføjede pakker, der anbefales\n"
 "\t\t\t\taf installerede pakker.\n"
@@ -3841,11 +3841,4 @@ msgstr "Beskrivelse"
 #: ../src/Zypper.cc:4037
 msgid "Resolvable Type"
 msgstr "Type af resolvable"
-
-# power-off message
-#~ msgid "Do you want to trust the key?"
-#~ msgstr "Vil du betro nøglen?"
-
-#~ msgid "n/t/i"
-#~ msgstr "n/m/i"
 

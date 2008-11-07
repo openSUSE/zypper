@@ -1,4 +1,4 @@
-# translation of zypper.pt_BR.po to Brazilian Portuguese
+# translation of zypper.po to Brazilian Portuguese
 # @TITLE@
 # Copyright (C) 2006, SUSE Linux GmbH, Nuremberg
 #
@@ -6,13 +6,14 @@
 #
 # Gilberto Medeiros Nakamura <gilberto.nakamura@gmail.com>, 2007.
 # Luiz Fernando Ranghetti <elchevive68@gmail.com>, 2008.
+# Luiz Fernando Ranghetti <elchevive@opensuse.org>, 2008.
 msgid ""
 msgstr ""
-"Project-Id-Version: zypper.pt_BR\n"
+"Project-Id-Version: zypper\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2008-10-27 18:08+0100\n"
-"PO-Revision-Date: 2008-10-27 16:40-0300\n"
-"Last-Translator: Luiz Fernando Ranghetti <elchevive68@gmail.com>\n"
+"PO-Revision-Date: 2008-11-02 23:06-0200\n"
+"Last-Translator: Luiz Fernando Ranghetti <elchevive@opensuse.org>\n"
 "Language-Team: Brazilian Portuguese <opensuse-pt@opensuse.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -1550,7 +1551,7 @@ msgid ""
 "WARNING: this command will not synchronize changes.\n"
 "Use rug or yast2 for that."
 msgstr ""
-"O daemon do Gerenciador ZENworks está em execução.\n"
+"O daemon do gerenciador ZENworks está em execução.\n"
 "AVISO: este comando não sincronizará as alterações.\n"
 "Use o 'rug' ou o 'yast2' para isso."
 
@@ -2153,7 +2154,7 @@ msgstr "A opção '--%s' atualmente não tem efeito."
 #: ../src/utils/messages.cc:78
 #, c-format
 msgid "You have chosen to ignore a problem with download or installation of a package which might lead to broken dependencies of other packages. It is recommended to run '%s' after the operation has finished."
-msgstr "Você escolheu ignorar um problema com o download ou a instalação de um pacote que pode levar a quebra de dependências de outros pacotes. É recomendado executar '%s' após a operação ser finalizada."
+msgstr "Você escolheu ignorar um problema com o download ou a instalação de um pacote que pode levar a quebra de dependências de outros pacotes. É recomendado executar '%s' após a operação ser concluída."
 
 #: ../src/utils/misc.cc:87
 msgid "package"
@@ -3733,8 +3734,8 @@ msgstr ""
 " '@@@@@`     '@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@;\n"
 " @@@@;         @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@:\n"
 "`@@@+  ,@@@@+   @@@@@@@@@@@@@@@@@@@@@.  `,::,`\n"
-" ;@@@  ,@@@@@@@   @@@@@@'     #@@@@@@,\n"
-"     #@@@  @@@:,@@@@  ,@@@@'       ,@@@@@\n"
+";@@@  ,@@@@@@@   @@@@@@'     #@@@@@@,\n"
+"#@@@  @@@:,@@@@  ,@@@@'       ,@@@@@\n"
 "@@@@  @@    '@@'  @@@@         `@@@@`\n"
 "'@@@  @@:    @@@  ;@@@          .@@@;\n"
 ",@@@  @@@@@, +@@   @@@           :@@@\n"

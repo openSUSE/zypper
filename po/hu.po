@@ -1,4 +1,4 @@
-# translation of zypper.po to Hungarian
+# translation of zypper.hu.po to Hungarian
 # translation of zypper.po to
 # translation of zypper.hu.po to
 # @TITLE@
@@ -12,17 +12,17 @@
 # Novák Ervin <enovak@novell.com>, 2008.
 msgid ""
 msgstr ""
-"Project-Id-Version: zypper\n"
+"Project-Id-Version: zypper.hu\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2008-10-27 18:08+0100\n"
-"PO-Revision-Date: 2008-10-27 12:55+0100\n"
-"Last-Translator: Ervin Novak <enovak@novell.com>\n"
+"PO-Revision-Date: 2008-11-05 16:23+0100\n"
+"Last-Translator: Kalman Kemenczy <kkemenczy@novell.com>\n"
 "Language-Team: Hungarian <hu@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: KBabel 1.11.4\n"
-"Plural-Forms: Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"Plural-Forms:  nplurals=2; plural=(n != 1);\n"
 
 #: ../src/callbacks/keyring.h:48
 #, c-format
@@ -49,12 +49,12 @@ msgstr "A(z) %s fájl a(z) '%s' telepítési forrásból nincs aláírva, folyta
 #: ../src/callbacks/keyring.h:90
 #, c-format
 msgid "Accepting file '%s' signed with an unknown key '%s'."
-msgstr "Az ismeretlen azonosítójú kulccsal (%s) aláírt %s fájl elfogadása."
+msgstr "Ismeretlen azonosítójú kulccsal (%s) aláírt %s fájl elfogadása."
 
 #: ../src/callbacks/keyring.h:94
 #, c-format
 msgid "Accepting file '%s' from repository '%s' signed with an unknown key '%s'."
-msgstr "Az ismeretlen azonosítójú kulccsal (%s) aláírt %s fájl elfogadása a(z) %s telepítési forrásból."
+msgstr "Ismeretlen azonosítójú kulccsal (%s) aláírt %s fájl elfogadása a(z) %s telepítési forrásból."
 
 #. translators: the last %s is gpg key ID
 #: ../src/callbacks/keyring.h:104
@@ -99,7 +99,7 @@ msgstr "Telepítési forrás: %s"
 #. translators: this message is shown after showing description of the key
 #: ../src/callbacks/keyring.h:150
 msgid "Do you want to reject the key, trust temporarily, or trust always?"
-msgstr ""
+msgstr "Elutasítja a kulcsot, megbízik benne ideiglenesen, vagy elfogadja véglegesen?"
 
 #. translators: r/t/a stands for Reject/TrustTemporarily/trustAlways(import)
 #. translate to whatever is appropriate for your language
@@ -108,13 +108,12 @@ msgstr ""
 #. The answers should be lower case letters.
 #: ../src/callbacks/keyring.h:162
 msgid "r/t/a/"
-msgstr ""
+msgstr "e/i/v"
 
 #. translators: the same as r/t/a, but without 'a'
 #: ../src/callbacks/keyring.h:165
-#, fuzzy
 msgid "r/t"
-msgstr "n/d"
+msgstr "e/i"
 
 #. translators: help text for the 'r' option in the 'r/t/a' prompt
 #: ../src/callbacks/keyring.h:167
@@ -558,9 +557,8 @@ msgstr "'%s' nincs telepítve."
 
 # modules/inst_target_part.ycp:676
 #: ../src/install.cc:437
-#, fuzzy
 msgid "Cannot uninstall patches."
-msgstr "%s nem telepíthető"
+msgstr "A patchek nem távolíthatók el."
 
 #: ../src/install.cc:438
 msgid ""
@@ -568,10 +566,13 @@ msgid ""
 "Patches are not installed in sense of copied files, database records,\n"
 "or similar."
 msgstr ""
+"Egy patch telepítési státusza kizárólag a függőségei alapján kerül megállapításra.\n"
+"A patchek nem települnek fájlok másolása, adatbázis rekordok, vagy\n"
+"egyebek által."
 
 #: ../src/install.cc:449
 msgid "Uninstallation of a pattern is currently not defined and implemented."
-msgstr ""
+msgstr "A minták eltávolítása jelenleg nincs definiálva és megvalósítva."
 
 #: ../src/install.cc:463
 #, c-format
@@ -586,12 +587,12 @@ msgstr "%s jelenleg nem használható együtt ezzel: %s"
 
 #: ../src/install.cc:520
 msgid "Specifying architecture when selecting packages by name is not implemented."
-msgstr ""
+msgstr "Az architektúra megadása a csomagok szerinti kiválasztásánál nem megvalósított."
 
 #: ../src/install.cc:555
-#, fuzzy, c-format
+#, c-format
 msgid "'%s' is not a valid package or capability name."
-msgstr "`%s' nem érvényes szolgáltatás típus."
+msgstr "`%s' nem érvényescsomag vagy képesség neve."
 
 #. translators: meaning a package %s or provider of capability %s
 #: ../src/install.cc:630
@@ -884,9 +885,9 @@ msgid "Use '%s' to get the list of defined repositories."
 msgstr "A beállított telepítési források listájához használja a '%s' parancsot."
 
 #: ../src/repos.cc:490 ../src/repos.cc:497
-#, fuzzy, c-format
+#, c-format
 msgid "Ignoring repository '%s' because of '%s' option."
-msgstr "A(z) %s telepítési forrás frissítése során hiba történt."
+msgstr "A(z) %s telepítési forrás figyelmen kívül hagyása '%s' kapcsoló miatt."
 
 #: ../src/repos.cc:527 ../src/repos.cc:563
 #, c-format
@@ -1972,7 +1973,7 @@ msgstr "Nem dolgozható fel: '%s < %s'"
 #: ../src/update.cc:568
 #, c-format
 msgid "'%s' is interactive, skipping."
-msgstr "'%s' interacktív, kihagyásra kerül."
+msgstr "'%s' interaktív, kihagyásra kerül."
 
 #: ../src/update.cc:623
 #, c-format
@@ -2197,6 +2198,9 @@ msgid ""
 "If you run zypper without a terminal, use '%s' global\n"
 "option to make zypper use default answers to prompts."
 msgstr ""
+"Amennyiben terminál nélkül futtatja a zyppert, használja a '%s' globális\n"
+"kapcsolót, hogy a zypper az alapértelmezett válaszokat használja kérdés\n"
+"esetén."
 
 #. TranslatorExplanation These are reasons for various failures.
 #: ../src/utils/prompt.h:125
@@ -2243,7 +2247,7 @@ msgstr ""
 "\t--no-abbrev, -A\t\tNe rövidítse a szöveget a táblázatokban.\n"
 "\t--table-style, -s\tTáblastílus (integer).\n"
 "\t--rug-compatible, -r\tRug-kompatibilitás engedélyezése.\n"
-"\t--non-interactive\tNe kérdezzen semmit, az alapértelmezett válaszokat használja automatikusan.\n"
+"\t--non-interactive -n\tNe kérdezzen semmit, az alapértelmezett válaszokat használja automatikusan.\n"
 "\t--xmlout, -x\t\tVáltás XML kimenetre.\n"
 "\t--reposd-dir, -D <dir>\tTelepítési forrás definíciós fájl alternatív\n"
 " \t\t\t\tkönyvtárának használata.\n"
@@ -2270,6 +2274,8 @@ msgid ""
 "\t--no-cd\t\t\tIgnore CD/DVD repositories.\n"
 "\t--no-remote\t\tIgnore remote repositories.\n"
 msgstr ""
+"\t--no-cd\t\t\tHagyja figyelmen kívül a CD/DVD telepítési forrásokat.\n"
+"\t--no-remote\t\tHagyja figyelmen kívül a távoli telepítési forrásokat.\n"
 
 #: ../src/Zypper.cc:182
 msgid ""
@@ -2323,11 +2329,11 @@ msgid ""
 "\trefresh-services, refs\tRefresh all services.\n"
 msgstr ""
 "     Szolgáltatások kezelése:\n"
-"\tservices, lr\t\tAz összes szolgáltatás listázása.\n"
+"\tservices, lr\t\tÖsszes szolgáltatás listázása.\n"
 "\taddservice, ar\t\tÚj szolgáltatások hozzáadása.\n"
 "\tmodifyservice, rr\t\tMegadott szolgáltatások eltávolítása.\n"
 "\trenameservice, nr\t\tMegadott szolgáltatások átnevezése.\n"
-"\trefresh-services, ref\t\tSzolgáltatások frissítése.\n"
+"\trefresh-services, ref\t\tÖsszes szolgáltatás frissítése.\n"
 
 #: ../src/Zypper.cc:212
 msgid ""
@@ -2479,14 +2485,12 @@ msgid "Autorefresh disabled."
 msgstr "Automatikus frissítés kikapcsolva."
 
 #: ../src/Zypper.cc:509
-#, fuzzy
 msgid "CD/DVD repositories disabled."
-msgstr "Automatikus frissítés kikapcsolva."
+msgstr "CD/DVD telepítési források kikapcsolva."
 
 #: ../src/Zypper.cc:516
-#, fuzzy
 msgid "Remote repositories disabled."
-msgstr "Automatikus frissítés kikapcsolva."
+msgstr "Távoli telepítési források kikapcsolva."
 
 #: ../src/Zypper.cc:523
 msgid "Ignoring installed resolvables."
@@ -3613,7 +3617,7 @@ msgstr "`%s' nem érvényes szolgáltatás típus."
 #: ../src/Zypper.cc:2455
 #, c-format
 msgid "See '%s' or '%s' to get a list of known service types."
-msgstr "Az ismert szolgáltatások típusainak listázásához használja a '%s' vagy a '%s' parancsot."
+msgstr "Ismert szolgáltatások típusainak listázásához használja a '%s' vagy a '%s' parancsot."
 
 #: ../src/Zypper.cc:2472
 msgid "Root privileges are required for modifying services."
@@ -3658,7 +3662,7 @@ msgstr "A megadott típus nem érvényes telepítési forrástípus:"
 #: ../src/Zypper.cc:2678
 #, c-format
 msgid "See '%s' or '%s' to get a list of known repository types."
-msgstr "Az ismert telepítési forrás típusainak listázásához használja a '%s' vagy a '%s' parancsot."
+msgstr "Ismert telepítési forrás típusainak listázásához használja a '%s' vagy a '%s' parancsot."
 
 #. translators: %s is the supplied command line argument which
 #. for which no repository counterpart was found
@@ -3769,7 +3773,7 @@ msgstr "Tekintse meg a fent található hibaüzenetet."
 #: ../src/Zypper.cc:3514 ../src/Zypper.cc:3597
 #, c-format
 msgid "Running as '%s', cannot use '%s' option."
-msgstr "'%s'-ként futtatva nem lehet '%s' kapcsolót megadni."
+msgstr "'%s' futtatásakor nem lehet '%s' kapcsolót megadni."
 
 #: ../src/Zypper.cc:3542
 msgid "Root privileges are required for updating packages."
@@ -3814,9 +3818,3 @@ msgstr "Leírás"
 msgid "Resolvable Type"
 msgstr "feloldható típusa"
 
-# power-off message
-#~ msgid "Do you want to trust the key?"
-#~ msgstr "Megbízik a kulcsban?"
-
-#~ msgid "n/t/i"
-#~ msgstr "n/d/i"

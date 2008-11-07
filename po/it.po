@@ -10,7 +10,7 @@ msgstr ""
 "Project-Id-Version: zypper\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2008-10-27 18:08+0100\n"
-"PO-Revision-Date: 2008-10-27 23:37+0100\n"
+"PO-Revision-Date: 2008-10-28 23:47+0100\n"
 "Last-Translator: Andrea Florio <andrea@opensuse.org>\n"
 "Language-Team: italian <opensuse-translation@opensuse.org>\n"
 "MIME-Version: 1.0\n"
@@ -286,15 +286,15 @@ msgstr "Comando sconosciuto '%s'"
 
 #: ../src/info.cc:37
 msgid "Name: "
-msgstr "Nome:"
+msgstr "Nome: "
 
 #: ../src/info.cc:38
 msgid "Version: "
-msgstr "Versione:"
+msgstr "Versione: "
 
 #: ../src/info.cc:39
 msgid "Arch: "
-msgstr "Arch:"
+msgstr "Arch: "
 
 #: ../src/info.cc:40
 msgid "Vendor: "
@@ -302,11 +302,11 @@ msgstr "Marca:*"
 
 #: ../src/info.cc:45
 msgid "Summary: "
-msgstr "Indice:"
+msgstr "Indice: "
 
 #: ../src/info.cc:46
 msgid "Description: "
-msgstr "Descrizione:"
+msgstr "Descrizione: "
 
 #. TranslatorExplanation E.g. "package 'zypper' not found."
 #. ! \todo use a separate string for each kind so that it is translatable.
@@ -323,7 +323,7 @@ msgstr "Informazioni per %s %s:"
 #: ../src/info.cc:108
 #, c-format
 msgid "Info for type '%s' not implemented."
-msgstr "Info per il tipo '%s' non ancora implementate"
+msgstr "Info per il tipo '%s' non ancora implementate."
 
 #: ../src/info.cc:114
 msgid "None"
@@ -362,15 +362,15 @@ msgstr "Conflitto"
 
 #: ../src/info.cc:152 ../src/info.cc:274 ../src/info.cc:345
 msgid "Catalog: "
-msgstr "Catalogo:"
+msgstr "Catalogo: "
 
 #: ../src/info.cc:152 ../src/info.cc:274 ../src/info.cc:345
 msgid "Repository: "
-msgstr "Sorgente di installazione:"
+msgstr "Sorgente di installazione: "
 
 #: ../src/info.cc:157 ../src/info.cc:279
 msgid "Installed: "
-msgstr "Installato:"
+msgstr "Installato: "
 
 #. enabled?
 #. autorefresh?
@@ -393,7 +393,7 @@ msgstr "No"
 #. ! \todo fix this - arch?
 #: ../src/info.cc:160 ../src/info.cc:209
 msgid "Status: "
-msgstr "Stato:"
+msgstr "Stato: "
 
 #: ../src/info.cc:164
 msgid "up-to-date"
@@ -411,19 +411,19 @@ msgstr "non installato"
 
 #: ../src/info.cc:175
 msgid "Installed Size: "
-msgstr "Dimensione installata:"
+msgstr "Dimensione installata: "
 
 #: ../src/info.cc:212
 msgid "Category: "
-msgstr "Categoria:"
+msgstr "Categoria: "
 
 #: ../src/info.cc:213
 msgid "Created On: "
-msgstr "Data di creazione:"
+msgstr "Data di creazione: "
 
 #: ../src/info.cc:214
 msgid "Reboot Required: "
-msgstr "Richiesto riavvio:"
+msgstr "Richiesto riavvio: "
 
 #: ../src/info.cc:217
 msgid "Package Manager Restart Required"
@@ -431,11 +431,11 @@ msgstr "È necessario riavviare il gestore dei pacchetti"
 
 #: ../src/info.cc:219
 msgid "Restart Required: "
-msgstr "Richiesto riavvio:"
+msgstr "Richiesto riavvio: "
 
 #: ../src/info.cc:222
 msgid "Interactive: "
-msgstr "Interattivo:"
+msgstr "Interattivo: "
 
 #: ../src/info.cc:226
 msgid "Provides:"
@@ -549,7 +549,7 @@ msgstr "'%s' è già installato."
 #: ../src/install.cc:413 ../src/install.cc:673
 #, c-format
 msgid "'%s' is not installed."
-msgstr "'%s' non è installato"
+msgstr "'%s' non è installato."
 
 # TLABEL modules/inst_target_part.ycp:680
 #: ../src/install.cc:437
@@ -916,7 +916,7 @@ msgstr "Tentativo di inizializzazione fallito:"
 
 #: ../src/repos.cc:635 ../src/Zypper.cc:3343
 msgid "Running 'zypper refresh' as root might resolve the problem."
-msgstr "Lanciare 'zypper refresh' come root potrebbe risolvere il problema"
+msgstr "Lanciare 'zypper refresh' come root potrebbe risolvere il problema."
 
 #. translators: patch status (installed, uninstalled, needed)
 #: ../src/repos.cc:655 ../src/search.cc:269 ../src/update.cc:152
@@ -963,7 +963,7 @@ msgstr "Servizio"
 
 #: ../src/repos.cc:761
 msgid "No repositories defined. Use the 'zypper addrepo' command to add one or more repositories."
-msgstr "Nessuna sorgente di installazione è stata definita. Usare 'zypper addrepo' per aggiungere una o più sorgenti di installazione"
+msgstr "Nessuna sorgente di installazione è stata definita. Usare 'zypper addrepo' per aggiungere una o più sorgenti di installazione."
 
 #: ../src/repos.cc:837 ../src/repos.cc:909 ../src/repos.cc:1079
 msgid "Error reading repositories:"
@@ -985,7 +985,7 @@ msgstr "Le sorgenti di installazione sono state esportate con successo in %s."
 
 #: ../src/repos.cc:927 ../src/repos.cc:1097
 msgid "Specified repositories: "
-msgstr "Sorgenti di installazione specificate:"
+msgstr "Sorgenti di installazione specificate: "
 
 #: ../src/repos.cc:966
 #, c-format
@@ -1171,7 +1171,7 @@ msgstr "Impossibile cambiare l'alias della sorgente di installazione '%s'. La so
 #: ../src/repos.cc:1537
 #, c-format
 msgid "Repository '%s' renamed to '%s'."
-msgstr "Sorgente di installazione '%s' rinominata come '%s'"
+msgstr "Sorgente di installazione '%s' rinominata come '%s'."
 
 #: ../src/repos.cc:1549 ../src/repos.cc:1769
 msgid "Error while modifying the repository:"
@@ -1478,7 +1478,7 @@ msgstr "Versione"
 #: ../src/search.cc:48 ../src/search.cc:62 ../src/search.cc:447
 #: ../src/update.cc:407
 msgid "Arch"
-msgstr "Arch."
+msgstr "Arch"
 
 #: ../src/search.cc:178 ../src/search.cc:192
 msgid "System Packages"
@@ -1513,13 +1513,13 @@ msgstr "Non è stato trovato alcun fornitore per '%s'."
 #. translators: meaning 'dependency problem' found during solving
 #: ../src/solve-commit.cc:44
 msgid "Problem: "
-msgstr "Problema:"
+msgstr "Problema: "
 
 #. TranslatorExplanation %d is the solution number
 #: ../src/solve-commit.cc:57
 #, c-format
 msgid " Solution %d: "
-msgstr "Soluzione %d:"
+msgstr " Soluzione %d: "
 
 #: ../src/solve-commit.cc:76
 msgid "Choose the above solution using '1' or skip, retry or cancel"
@@ -1586,38 +1586,38 @@ msgstr "Risoluzione delle dipendenze in corso…"
 #: ../src/solve-commit.cc:369
 msgid "The following package is going to be upgraded:"
 msgid_plural "The following packages are going to be upgraded:"
-msgstr[0] "Il seguente pacchetto sta per essere aggiornato"
-msgstr[1] "I seguenti pacchetti stanno per essere aggiornat"
+msgstr[0] "Il seguente pacchetto sta per essere aggiornato:"
+msgstr[1] "I seguenti pacchetti stanno per essere aggiornati:"
 
 #: ../src/solve-commit.cc:374
 msgid "The following patch is going to be upgraded:"
 msgid_plural "The following patches are going to be upgraded:"
-msgstr[0] "La seguente patch sta per essere aggiornata"
-msgstr[1] "Le seguenti patch stanno per essere aggiornate"
+msgstr[0] "La seguente patch sta per essere aggiornata:"
+msgstr[1] "Le seguenti patch stanno per essere aggiornate:"
 
 #: ../src/solve-commit.cc:379
 msgid "The following pattern is going to be upgraded:"
 msgid_plural "The following patterns are going to be upgraded:"
 msgstr[0] "Il seguente modello sta per essere aggiornato:"
-msgstr[1] "I seguenti modelli stanno per essere aggiornati"
+msgstr[1] "I seguenti modelli stanno per essere aggiornati:"
 
 #: ../src/solve-commit.cc:384
 msgid "The following product is going to be upgraded:"
 msgid_plural "The following products are going to be upgraded:"
-msgstr[0] "Il seguente prodotto sta per essere aggiornato"
-msgstr[1] "I seguenti prodotti stanno per essere aggiornati"
+msgstr[0] "Il seguente prodotto sta per essere aggiornato:"
+msgstr[1] "I seguenti prodotti stanno per essere aggiornati:"
 
 #: ../src/solve-commit.cc:391
 msgid "The following package is going to be downgraded:"
 msgid_plural "The following packages are going to be downgraded:"
-msgstr[0] "Il seguente pacchetto sta per essere aggiornato"
-msgstr[1] "I seguenti pacchetti stanno per essere aggiornati"
+msgstr[0] "Il seguente pacchetto sta per essere aggiornato:"
+msgstr[1] "I seguenti pacchetti stanno per essere aggiornati:"
 
 #: ../src/solve-commit.cc:396
 msgid "The following patch is going to be downgraded:"
 msgid_plural "The following patches are going to be downgraded:"
-msgstr[0] "La seguente patch sta per essere aggiornata"
-msgstr[1] "Le seguenti patch stanno per essere aggiornate"
+msgstr[0] "La seguente patch sta per essere aggiornata:"
+msgstr[1] "Le seguenti patch stanno per essere aggiornate:"
 
 #: ../src/solve-commit.cc:401
 msgid "The following pattern is going to be downgraded:"
@@ -1754,8 +1754,8 @@ msgstr[1] "I seguenti modelli cambieranno fornitore:"
 #: ../src/solve-commit.cc:521
 msgid "The following product is going to change vendor:"
 msgid_plural "The following products are going to change vendor:"
-msgstr[0] "Il seguente prodotto cambierà fornitore"
-msgstr[1] "I seguenti prodotti cambieranno fornitore"
+msgstr[0] "Il seguente prodotto cambierà fornitore:"
+msgstr[1] "I seguenti prodotti cambieranno fornitore:"
 
 #: ../src/solve-commit.cc:529
 msgid "The following package is not supported by its vendor:"
@@ -1948,7 +1948,7 @@ msgstr "Nessun aggiornamento trovato."
 
 #: ../src/update.cc:333
 msgid "Package updates"
-msgstr "Aggiornamenti pacchetto."
+msgstr "Aggiornamenti pacchetto"
 
 #: ../src/update.cc:335
 msgid "Patches"
@@ -2186,7 +2186,7 @@ msgstr "no"
 #: ../src/utils/prompt.cc:245
 #, c-format
 msgid "Invalid answer '%s'."
-msgstr "'%s', risposta non valida"
+msgstr "'%s', risposta non valida."
 
 #. TranslatorExplanation don't translate the 'y' and 'n', they can always be used as answers.
 #. The second and the third %s is the translated 'yes' and 'no' string (lowercase).
@@ -3595,7 +3595,7 @@ msgstr "Flusso di programma inatteso."
 
 #: ../src/Zypper.cc:2236
 msgid "Non-option program arguments: "
-msgstr "Argomenti del programma senza opzioni:"
+msgstr "Argomenti del programma senza opzioni: "
 
 #. TranslatorExplanation this is a hedgehog, paint another animal, if you want
 #: ../src/Zypper.cc:2298
@@ -3795,7 +3795,7 @@ msgstr "Tipo di pacchetto sconosciuto '%s'."
 
 #: ../src/Zypper.cc:3341
 msgid "Problem occurred initializing or executing the search query"
-msgstr "Un problema è apparso inizializando o eseguendo un query di ricerca."
+msgstr "Un problema è apparso inizializando o eseguendo un query di ricerca"
 
 #: ../src/Zypper.cc:3342
 msgid "See the above message for a hint."

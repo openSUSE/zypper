@@ -103,7 +103,7 @@ msgstr "Asennuslähde: %s"
 #. translators: this message is shown after showing description of the key
 #: ../src/callbacks/keyring.h:150
 msgid "Do you want to reject the key, trust temporarily, or trust always?"
-msgstr ""
+msgstr "Haluatko evätä, luottaa tai luottaa aina avaimeen?"
 
 #. translators: r/t/a stands for Reject/TrustTemporarily/trustAlways(import)
 #. translate to whatever is appropriate for your language
@@ -112,13 +112,12 @@ msgstr ""
 #. The answers should be lower case letters.
 #: ../src/callbacks/keyring.h:162
 msgid "r/t/a/"
-msgstr ""
+msgstr "e/l/a"
 
 #. translators: the same as r/t/a, but without 'a'
 #: ../src/callbacks/keyring.h:165
-#, fuzzy
 msgid "r/t"
-msgstr "k/e"
+msgstr "e/l"
 
 #. translators: help text for the 'r' option in the 'r/t/a' prompt
 #: ../src/callbacks/keyring.h:167
@@ -557,9 +556,8 @@ msgid "'%s' is not installed."
 msgstr "'%s' ei ole asennettuna."
 
 #: ../src/install.cc:437
-#, fuzzy
 msgid "Cannot uninstall patches."
-msgstr "Ei voida asentaa %s"
+msgstr "Paikkausten poistaminen ei ei onnistu."
 
 #: ../src/install.cc:438
 msgid ""
@@ -567,10 +565,12 @@ msgid ""
 "Patches are not installed in sense of copied files, database records,\n"
 "or similar."
 msgstr ""
+"Korjauksen tila päätellään riippuvuuksista. Korjauksien tarvetta ei päätellä\n"
+"asennetuista tiedostoista tai tietokannan merkintöjen perusteella."
 
 #: ../src/install.cc:449
 msgid "Uninstallation of a pattern is currently not defined and implemented."
-msgstr ""
+msgstr "Ohjelmistoryhmän poistamista ei ole viellä totetettu."
 
 #: ../src/install.cc:463
 #, c-format
@@ -585,12 +585,12 @@ msgstr "%s ei voida käyttää %s kanssa"
 
 #: ../src/install.cc:520
 msgid "Specifying architecture when selecting packages by name is not implemented."
-msgstr ""
+msgstr "Pakettien valitsemista nimen ja arkkitehtuurin perusteella ei ole viellä toteutettu."
 
 #: ../src/install.cc:555
-#, fuzzy, c-format
+#, c-format
 msgid "'%s' is not a valid package or capability name."
-msgstr "'%s' ei ole kelvollinen asennuslähdepalvelun tyyppi."
+msgstr "'%s' ei ole kelvollinen paketin tai ominaisuuden nimi."
 
 #. translators: meaning a package %s or provider of capability %s
 #: ../src/install.cc:630
@@ -883,9 +883,9 @@ msgid "Use '%s' to get the list of defined repositories."
 msgstr "Kirjoita '%s' saadaksesi listan määritellyistä asennuslähteistä."
 
 #: ../src/repos.cc:490 ../src/repos.cc:497
-#, fuzzy, c-format
+#, c-format
 msgid "Ignoring repository '%s' because of '%s' option."
-msgstr "Asennuslähdettä '%s' ei voitu puhdistaa virheen vuoksi."
+msgstr "Asennuslähde '%s' jätettiin huomioimatta, koska parametrin '%s' takia."
 
 #: ../src/repos.cc:527 ../src/repos.cc:563
 #, c-format
@@ -2192,6 +2192,9 @@ msgid ""
 "If you run zypper without a terminal, use '%s' global\n"
 "option to make zypper use default answers to prompts."
 msgstr ""
+"Jos ajat zypperiä ilman terminaalia, käytä\n"
+"valintaa '%s' määrittääksesi zypperin\n"
+"käyttämään oletusvastauksia"
 
 #. TranslatorExplanation These are reasons for various failures.
 #: ../src/utils/prompt.h:125
@@ -2264,6 +2267,8 @@ msgid ""
 "\t--no-cd\t\t\tIgnore CD/DVD repositories.\n"
 "\t--no-remote\t\tIgnore remote repositories.\n"
 msgstr ""
+"\t--no-cd\t\t\tJätä CD/DVD -lähteet huomioimatta.\n"
+"\t--no-remote\t\tJätä verkkoasennuslähteet huomioimatta.\n"
 
 #: ../src/Zypper.cc:182
 msgid ""
@@ -2470,14 +2475,12 @@ msgid "Autorefresh disabled."
 msgstr "Automaattinen päivitys poistettu käytöstä."
 
 #: ../src/Zypper.cc:509
-#, fuzzy
 msgid "CD/DVD repositories disabled."
-msgstr "Automaattinen päivitys poistettu käytöstä."
+msgstr "CD/DVD asennuslähteet poistettiin käytöstä."
 
 #: ../src/Zypper.cc:516
-#, fuzzy
 msgid "Remote repositories disabled."
-msgstr "Automaattinen päivitys poistettu käytöstä."
+msgstr "Verkkoasennuslähteet poistettiin käytöstä."
 
 #: ../src/Zypper.cc:523
 msgid "Ignoring installed resolvables."
@@ -2856,7 +2859,7 @@ msgstr ""
 #. translators: this option belongs to 'lr' command help
 #: ../src/Zypper.cc:1273
 msgid "-s, --service             Show also alias of parent service.\n"
-msgstr ""
+msgstr "-s, --service             Näytä myös asennuslähdepalvelun alias.\n"
 
 #: ../src/Zypper.cc:1288
 msgid ""
@@ -3567,6 +3570,9 @@ msgid ""
 "This command has dummy implementation which always returns 0.\n"
 "It is provided for compatibility with rug.\n"
 msgstr ""
+"ping [valinnat]\n"
+"\n"
+"Tämä toiminto on rug-yhteensopivuustilan vuoksi ja palauttaa aina 0.\n"
 
 #: ../src/Zypper.cc:2212 ../src/Zypper.cc:3959
 msgid "Unexpected program flow."
@@ -3596,9 +3602,8 @@ msgid "Root privileges are required for modifying system services."
 msgstr "Asennuslähdepalveluiden muokkaaminen vaatii pääkäyttäjän oikeudet."
 
 #: ../src/Zypper.cc:2421
-#, fuzzy
 msgid "Could not determine the type of the repository. Check if the specified URI points to a valid repository."
-msgstr "Asennuslähteen tyyppiä ei voitu tunnistaa automaattisesti. Tarkista seuraavat olevat URL-osoitteet: "
+msgstr "Asennuslähteen tyyppiä ei voitu tunnistaa automaattisesti. Tarkista URI osoittaa asennuslähteeseen."
 
 #: ../src/Zypper.cc:2453
 #, c-format

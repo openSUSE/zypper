@@ -1,103 +1,101 @@
-# translation of zypper.po to
-# @TITLE@
+# translation of zypper.po to Slovak
+# Slovak language translation of zypper messages.
+#
 # Copyright (C) 2006, SUSE Linux GmbH, Nuremberg
 #
-# This file is distributed under the same license as @PACKAGE@ package. FIRST
-#
-# Karol Sikora <elektrrrus@gmail.com>, 2008.
-# Wadim Dziedzic <wdziedzic@aviary.pl>, 2008.
-# Paweł Filar <pawelfilar@yahoo.pl>, 2008.
-# Karol Sikora <karol@elektrrrus.pl>, 2008.
+# Ján Kupec <jkupec@suse.cz>, 2008.
+# Rastislav Krupansky <ra100@atlas.sk>, 2008.
+# Ladislav Michnovič <lmichnovic@suse.cz>, 2008.
 msgid ""
 msgstr ""
 "Project-Id-Version: zypper\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2008-10-27 18:08+0100\n"
-"PO-Revision-Date: 2008-10-25 11:47+0100\n"
-"Last-Translator: Piotr Krakowiak <piotr.krakowiak@suse.pl>\n"
-"Language-Team:  <pl@li.org>\n"
+"PO-Revision-Date: 2008-10-31 00:47+0100\n"
+"Last-Translator: Ján Kupec <jkupec@suse.cz>\n"
+"Language-Team: Slovak <sk-i18n@lists.linux.sk>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: KBabel 1.11.4\n"
-"Plural-Forms: nplurals=3; plural=n==1 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2;\n"
+"Plural-Forms: nplurals=3; plural=(n==1) ? 0 : (n>=2 && n<=4) ? 1 : 2;\n"
 
 #: ../src/callbacks/keyring.h:48
 #, c-format
 msgid "Accepting an unsigned file '%s'."
-msgstr "Zaakceptowano niepodpisany plik '%s'."
+msgstr "Prijímam nepodpísaný súbor '%s'."
 
 #: ../src/callbacks/keyring.h:52
 #, c-format
 msgid "Accepting an unsigned file '%s' from repository '%s'."
-msgstr "Zaakceptowano niepodpisany plik '%s' z repozytorium '%s'."
+msgstr "Prijímam nepodpísaný súbor '%s' z repozitára '%s'."
 
 #. TranslatorExplanation: speaking of a file
 #: ../src/callbacks/keyring.h:63
 #, c-format
 msgid "File '%s' is unsigned, continue?"
-msgstr "Plik '%s' jest niepodpisany. Kontynuować?"
+msgstr "Súbor '%s' nie je podpísaný. Pokračovať?"
 
 #. TranslatorExplanation: speaking of a file
 #: ../src/callbacks/keyring.h:67
 #, c-format
 msgid "File '%s' from repository '%s' is unsigned, continue?"
-msgstr "Plik '%s' z repozytorium '%s' jest niepodpisany. Kontynuować?"
+msgstr "Súbor '%s' z repozitára '%s' nie je podpísaný. Pokračovať?"
 
 #: ../src/callbacks/keyring.h:90
 #, c-format
 msgid "Accepting file '%s' signed with an unknown key '%s'."
-msgstr "Zaakceptowano plik %s podpisany nieznanym kluczem %s."
+msgstr "Prijímam súbor '%s' podpísaný neznámym kľúčom '%s'."
 
 #: ../src/callbacks/keyring.h:94
 #, c-format
 msgid "Accepting file '%s' from repository '%s' signed with an unknown key '%s'."
-msgstr "Zaakceptowano plik '%s' z repozytorium '%s' podpisany nieznanym kluczem %s."
+msgstr "Prijímam súbor '%s' z repozitára '%s' podpísaný neznámym kľúčom '%s'."
 
 #. translators: the last %s is gpg key ID
 #: ../src/callbacks/keyring.h:104
 #, c-format
 msgid "File '%s' is signed with an unknown key '%s'. Continue?"
-msgstr "Plik '%s' jest podpisany nieznanym kluczem '%s'. Kontynuować?"
+msgstr "Súbor '%s' je podpísaný neznámym kľúčom '%s'. Pokračovať?"
 
 #. translators: the last %s is gpg key ID
 #: ../src/callbacks/keyring.h:108
 #, c-format
 msgid "File '%s' from repository '%s' is signed with an unknown key '%s'. Continue?"
-msgstr "Plik '%s' z repozytorium '%s' jest podpisany nieznanym kluczem %s. Kontynuować?  "
+msgstr "Súbor '%s' z repozitára '%s' je podpísaný neznámym kľúčom '%s'. Pokračovať?"
 
 #: ../src/callbacks/keyring.h:125
 msgid "Automatically trusting the following key:"
-msgstr "Automatycznie ufaj podanemu kluczowi:"
+msgstr "Automaticky dôverujem nasledujúcemu kľúču:"
 
 #: ../src/callbacks/keyring.h:127
 msgid "New repository or package signing key received:"
-msgstr "Otrzymano klucz podpisu dla nowego repozytorium lub pakietu:"
+msgstr "Nový kľúč pre podpis repozitára a balíkov:"
 
 #: ../src/callbacks/keyring.h:131
 #, c-format
 msgid "Key ID: %s"
-msgstr "ID klucza: %s"
+msgstr "ID kľúča: %s"
 
 #: ../src/callbacks/keyring.h:132
 #, c-format
 msgid "Key Name: %s"
-msgstr "Nazwa klucza: %s"
+msgstr "Názov kľúča: %s"
 
 #: ../src/callbacks/keyring.h:133
 #, c-format
 msgid "Key Fingerprint: %s"
-msgstr "Odcisk klucza: %s"
+msgstr "Odtlačok kľúča: %s"
 
 #: ../src/callbacks/keyring.h:135
 #, c-format
 msgid "Repository: %s"
-msgstr "Repozytorium: %s"
+msgstr "Repozitár: %s"
 
 #. translators: this message is shown after showing description of the key
 #: ../src/callbacks/keyring.h:150
 msgid "Do you want to reject the key, trust temporarily, or trust always?"
-msgstr ""
+msgstr "Prajete si tento kľúč odmientuť, prijať dočasne alebo prijať natrvalo?"
 
 #. translators: r/t/a stands for Reject/TrustTemporarily/trustAlways(import)
 #. translate to whatever is appropriate for your language
@@ -106,94 +104,94 @@ msgstr ""
 #. The answers should be lower case letters.
 #: ../src/callbacks/keyring.h:162
 msgid "r/t/a/"
-msgstr ""
+msgstr "o/d/t"
 
 #. translators: the same as r/t/a, but without 'a'
 #: ../src/callbacks/keyring.h:165
-#, fuzzy
 msgid "r/t"
-msgstr "n/zi"
+msgstr "o/d"
 
 #. translators: help text for the 'r' option in the 'r/t/a' prompt
 #: ../src/callbacks/keyring.h:167
 msgid "Don't trust the key."
-msgstr "Nie ufaj kluczowi."
+msgstr "Odmietnuť nedôveryhodný kľúč."
 
 #. translators: help text for the 't' option in the 'r/t/a' prompt
 #: ../src/callbacks/keyring.h:169
 msgid "Trust the key temporarily."
-msgstr "Zachowaj klucz tymczasowo"
+msgstr "Dôverovať kľúču dočasne, len počas súčasného sedenia."
 
 #. translators: help text for the 'a' option in the 'r/t/a' prompt
 #: ../src/callbacks/keyring.h:172
 msgid "Trust the key and import it into trusted keyring."
-msgstr "Zaufaj kluczowi i importuj do listy zaufanych kluczy."
+msgstr "Dôverovať kľúču a importovať ho do dôveryhodného zväzku."
 
 #: ../src/callbacks/keyring.h:206
 #, c-format
 msgid "Ignoring failed signature verification for file '%s'!"
-msgstr "Zignorowano nieudaną weryfikację podpisu dla %s !"
+msgstr "Ignorujem zlyhanie overenia podpisu pre súbor '%s'!"
 
 #: ../src/callbacks/keyring.h:209
 #, c-format
 msgid "Ignoring failed signature verification for file '%s' from repository '%s'!"
-msgstr "Zignorowano nieudaną weryfikację podpisu dla %s z repozytorium '%s'!"
+msgstr "Ignorujem zlyhanie overenia podpisu pre súbor '%s' z repozitára '%s'!"
 
 #: ../src/callbacks/keyring.h:214
 msgid "Double-check this is not caused by some malicious changes in the file!"
-msgstr "Podwójne sprawdzanie nie jest spowodowane złośliwymi zmianami w pliku !"
+msgstr "Dôkladne overte, či to nie je spôsobené nejakou zámernou škodlivou zmenou v súbore!"
 
 #: ../src/callbacks/keyring.h:224
 #, c-format
 msgid "Signature verification failed for file '%s'."
-msgstr "Weryfikacja podpisu dla pliku '%s' nie powiodła się."
+msgstr "Overenie podpisu súboru '%s' zlyhalo."
 
 #: ../src/callbacks/keyring.h:227
 #, c-format
 msgid "Signature verification failed for file '%s' from repository '%s'."
-msgstr "Weryfikacja podpisu dla pliku '%s' z repozytorium '%s' nie powiodła się."
+msgstr "Overenie podpisu súboru '%s' z repozitára '%s' zlyhalo."
 
 #: ../src/callbacks/keyring.h:232
 msgid ""
 "Warning: This might be caused by a malicious change in the file!\n"
 "Continuing might be risky. Continue anyway?"
 msgstr ""
-" Uwaga: może to być spowodowane przez niebezpieczne zmiany w pliku!\n"
-" Kontynuacja wiąże się z ryzykiem. Kontynuować?"
+"Pozor: toto môže byť následok nebezpečnej zmeny v súbore!\n"
+"Pokračovanie môže byť riskantné! Pokračovať?"
 
 #: ../src/callbacks/keyring.h:256
 #, c-format
 msgid "No digest for file %s."
-msgstr "Brak podsumowania dla pliku %s."
+msgstr "Žiadny výťah (digest) pre súbor %s."
 
+# internal key used: Ok
 #: ../src/callbacks/keyring.h:256 ../src/callbacks/keyring.h:266
 #: ../src/callbacks/keyring.h:288 ../src/callbacks/rpm.h:61
 #: ../src/solve-commit.cc:1033 ../src/solve-commit.cc:1057
 msgid "Continue?"
-msgstr "Czy kontynuować?"
+msgstr "Pokračovať?"
 
 #: ../src/callbacks/keyring.h:265
 #, c-format
 msgid "Unknown digest %s for file %s."
-msgstr "Nieznane podsumowanie %s dla pliku %s."
+msgstr "Neznámy výťah (digest) %s pre súbor %s."
 
 #: ../src/callbacks/keyring.h:280
 #, c-format
 msgid "Ignoring failed digest verification for %s (expected %s, found %s)."
-msgstr "Zignorowano nieudaną weryfikację podsumowania dla %s (oczekiwano %s, napotkano %s)"
+msgstr "Ignorujem zlyhanie overenia výťahu pre súbor %s (očakávaná hodnota %s, nájdená %s)."
 
 #: ../src/callbacks/keyring.h:287
 #, c-format
 msgid "Digest verification failed for %s. Expected %s, found %s."
-msgstr "Weryfikacja podsumowania dla %s nie powiodła się. Oczekiwano %s, napotkano %s."
+msgstr "Overovanie výťahu (digest) zlyhalo pre súbor %s. Očakávaná hodnota %s, nájdená %s."
 
 #: ../src/callbacks/locks.h:29
 msgid "The following query locks some of the objects you want to unlock:"
-msgstr "To zapytanie blokuje niektóre obiekty, które mają być odblokowane:"
+msgstr "Nasledujúci dotaz zamyká niektoré z objektov, ktoré chcete odomknúť:"
 
 #: ../src/callbacks/locks.h:42
 msgid "The following query does not lock anything:"
-msgstr "To zapytanie nie blokuje niczego:"
+msgstr "Nasleudujúci dotaz nič nezamyká:"
 
 #. TranslatorExplanation translate letters 'y' and 'n' to whathever is appropriate for your language.
 #. Try to check what answers does zypper accept (it always accepts y/n at least)
@@ -202,96 +200,96 @@ msgstr "To zapytanie nie blokuje niczego:"
 #: ../src/callbacks/media.h:84
 #, c-format
 msgid "Please insert medium [%s] #%d and type 'y' to continue or 'n' to cancel the operation."
-msgstr "Proszę włożyć nośnik [%s] #%d i nacisnąć 't' aby kontynuować lub 'n' aby przerwać operację."
+msgstr "Prosím vložte médium [%s] #%d a napíšte 'a' pre pokračovanie alebo 'n' pre zrušenie operácie."
 
 #: ../src/callbacks/media.h:228 ../src/callbacks/media.h:235
 msgid "User Name"
-msgstr "Nazwa użytkownika"
+msgstr "Meno používateľa"
 
 # password dialog title
 #: ../src/callbacks/media.h:242
 msgid "Password"
-msgstr "Hasło"
+msgstr "Heslo"
 
 #: ../src/callbacks/repo.h:49
 msgid "Retrieving delta"
-msgstr "Nanoszenie różnicy"
+msgstr "Sťahujem delta balík"
 
 #. translators: this text is a progress display label e.g. "Applying delta foo [42%]"
 #: ../src/callbacks/repo.h:85
 msgid "Applying delta"
-msgstr "Nanoszenie różnicy"
+msgstr "Aplikujem delta balík"
 
 #: ../src/callbacks/repo.h:115
 msgid "Retrieving patch rpm"
-msgstr "Pobieranie poprawki"
+msgstr "Sťahujem patch rpm (záplatu)"
 
 #: ../src/callbacks/repo.h:152
 #, c-format
 msgid "Retrieving %s %s-%s.%s"
-msgstr "Pobieranie %s %s-%s.%s"
+msgstr "Sťahujem %s %s-%s.%s"
 
 #. TranslatorExplanation %s is package size like "5.6 M"
 #: ../src/callbacks/repo.h:167
 #, c-format
 msgid "(%s unpacked)"
-msgstr "(%s po zainstalowaniu)"
+msgstr "(%s po rozbalení)"
 
 #. TranslatorExplanation speaking of a script - "Running: script file name (package name, script dir)"
 #: ../src/callbacks/rpm.h:75
 #, c-format
 msgid "Running: %s  (%s, %s)"
-msgstr "Uruchomiono: %s  (%s, %s)"
+msgstr "Spúšťam: %s  (%s, %s)"
 
 #: ../src/callbacks/rpm.h:139 ../src/callbacks/rpm.h:148
 #: ../src/callbacks/rpm.h:156 ../src/callbacks/rpm.h:163
 msgid "Reading installed packages"
-msgstr "Odczytywanie zainstalowanych pakietów"
+msgstr "Načítavam nainštalované balíky"
 
 #. translators: This text is a progress display label e.g. "Removing packagename-x.x.x [42%]"
 #: ../src/callbacks/rpm.h:183
 #, c-format
 msgid "Removing %s-%s"
-msgstr "Usuwanie %s-%s"
+msgstr "Odstraňujem %s-%s"
 
 #: ../src/callbacks/rpm.h:202
 #, c-format
 msgid "Removal of %s failed:"
-msgstr "Błąd podczas usuwania %s:"
+msgstr "Zlyhalo odstraňovanie %s:"
 
 #. TranslatorExplanation --nodeps and --force are options of the rpm command, don't translate
 #. ! \todo use format
 #: ../src/callbacks/rpm.h:224
 msgid "(with --nodeps)"
-msgstr "(z --nodeps)"
+msgstr "(s --nodeps)"
 
 #: ../src/callbacks/rpm.h:224
 msgid "(with --nodeps --force)"
-msgstr "(z --nodeps --force)"
+msgstr "(s --nodeps --force)"
 
 #. TranslatorExplanation This text is a progress display label e.g. "Installing foo-1.1.2 [42%]"
 #: ../src/callbacks/rpm.h:246
 #, c-format
 msgid "Installing: %s-%s"
-msgstr "Instalowanie: %s-%s"
+msgstr "Inštalujem: %s-%s"
 
 #: ../src/callbacks/rpm.h:272
 #, c-format
 msgid "Installation of %s-%s failed:"
-msgstr "Instalacja %s-%s niepowiodła się:"
+msgstr "Inštalácia %s-%s zlyhala:"
 
 #: ../src/Command.cc:174
 #, c-format
 msgid "Unknown command '%s'"
-msgstr "Nieznane polecenie \"%s\""
+msgstr "Neznámy príkaz '%s'"
 
 #: ../src/info.cc:37
 msgid "Name: "
-msgstr "Nazwa: "
+msgstr "Názov: "
 
 #: ../src/info.cc:38
 msgid "Version: "
-msgstr "Wersja: "
+msgstr "Verzia: "
 
 #: ../src/info.cc:39
 msgid "Arch: "
@@ -299,62 +297,65 @@ msgstr "Arch: "
 
 #: ../src/info.cc:40
 msgid "Vendor: "
-msgstr "Dostawca:"
+msgstr "Výrobca: "
 
 #: ../src/info.cc:45
 msgid "Summary: "
-msgstr "Podsumowanie: "
+msgstr "Stručný popis: "
 
 #: ../src/info.cc:46
 msgid "Description: "
-msgstr "Opis: "
+msgstr "Popis:"
 
 #. TranslatorExplanation E.g. "package 'zypper' not found."
 #. ! \todo use a separate string for each kind so that it is translatable.
 #: ../src/info.cc:79
 #, c-format
 msgid "%s '%s' not found."
-msgstr "Nie znaleziono %s '%s'."
+msgstr "%s '%s' nebol nájdený(á)"
 
 #: ../src/info.cc:91
 #, c-format
 msgid "Information for %s %s:"
-msgstr "%s %s -- informacje:"
+msgstr "Informácie pre: %s %s"
 
 #: ../src/info.cc:108
 #, c-format
 msgid "Info for type '%s' not implemented."
-msgstr "Informacja '%s' nie została jeszcze zaimplementowana."
+msgstr "Informácia pre typ '%s' nie je implementovaná."
 
 #: ../src/info.cc:114
 msgid "None"
-msgstr "Brak"
+msgstr "Žiadna"
 
+#  tree node string
 #: ../src/info.cc:115
 msgid "Requires"
-msgstr "Wymaga"
+msgstr "Vyžaduje"
 
 #: ../src/info.cc:116
 msgid "Provides"
-msgstr "Dostarcza"
+msgstr "Poskytuje"
 
 #: ../src/info.cc:117
 msgid "Conflicts"
-msgstr "Konfliktuje"
+msgstr "Vylučuje"
 
+#  Maximum length: 20  characters
 #: ../src/info.cc:118
 msgid "Obsoletes"
-msgstr "Dezaktualizuje"
+msgstr "Zastaráva"
 
+#  tree node string
 #. translators: package requirements table header
 #: ../src/info.cc:120
 msgid "Requirement"
-msgstr "Wymagane"
+msgstr "Vyžaduje"
 
 #. translators: package requirements table header
 #: ../src/info.cc:122
 msgid "Provided By"
-msgstr "Dostarczony przez"
+msgstr "Poskytovateľ"
 
 #. translators: package conflicts table header
 #: ../src/info.cc:124
@@ -363,15 +364,15 @@ msgstr "Konflikt"
 
 #: ../src/info.cc:152 ../src/info.cc:274 ../src/info.cc:345
 msgid "Catalog: "
-msgstr "Katalog: "
+msgstr "Katalóg: "
 
 #: ../src/info.cc:152 ../src/info.cc:274 ../src/info.cc:345
 msgid "Repository: "
-msgstr "Repozytorium:"
+msgstr "Repozitár: "
 
 #: ../src/info.cc:157 ../src/info.cc:279
 msgid "Installed: "
-msgstr "Zainstalowano: "
+msgstr "Nainštalovaný: "
 
 #. enabled?
 #. autorefresh?
@@ -382,7 +383,7 @@ msgstr "Zainstalowano: "
 #: ../src/repos.cc:1336 ../src/repos.cc:1338 ../src/repos.cc:2014
 #: ../src/repos.cc:2016 ../src/solve-commit.cc:855
 msgid "Yes"
-msgstr "Tak"
+msgstr "Áno"
 
 #: ../src/info.cc:157 ../src/info.cc:214 ../src/info.cc:220 ../src/info.cc:222
 #: ../src/info.cc:279 ../src/repos.cc:735 ../src/repos.cc:737
@@ -394,64 +395,64 @@ msgstr "Nie"
 #. ! \todo fix this - arch?
 #: ../src/info.cc:160 ../src/info.cc:209
 msgid "Status: "
-msgstr "Status: "
+msgstr "Stav: "
 
 #: ../src/info.cc:164
 msgid "up-to-date"
-msgstr "aktualny"
+msgstr "aktuálny"
 
 #: ../src/info.cc:168
 #, c-format
 msgid "out-of-date (version %s installed)"
-msgstr "przestarzały (zainstalowana wersja to %s) "
+msgstr "zastaralý (nainštalovaná verzia: %s)"
 
 #: ../src/info.cc:173
 msgid "not installed"
-msgstr "niezainstalowany"
+msgstr "nenainštalovaný"
 
 #: ../src/info.cc:175
 msgid "Installed Size: "
-msgstr "Rozmiar po zainstalowaniu: "
+msgstr "Veľkost inštalácie: "
 
 #: ../src/info.cc:212
 msgid "Category: "
-msgstr "Kategoria:"
+msgstr "Kategória: "
 
 #: ../src/info.cc:213
 msgid "Created On: "
-msgstr "Utworzono:"
+msgstr "Dátum vytvorenia: "
 
 #: ../src/info.cc:214
 msgid "Reboot Required: "
-msgstr "Ponowne uruchomienie:"
+msgstr "Vyžaduje reštart počítača: "
 
 #: ../src/info.cc:217
 msgid "Package Manager Restart Required"
-msgstr "Wymagane ponowne uruchomienie menedżera pakietów"
+msgstr "Vyžaduje reštart správcu balíkov."
 
 #: ../src/info.cc:219
 msgid "Restart Required: "
-msgstr "Ponowne uruchomienie:"
+msgstr "Vyžaduje reštart správcu balíkov: "
 
 #: ../src/info.cc:222
 msgid "Interactive: "
-msgstr "Interktywny:"
+msgstr "Interaktívny: "
 
 #: ../src/info.cc:226
 msgid "Provides:"
-msgstr "Dostarcza:"
+msgstr "Poskytuje:"
 
 #: ../src/info.cc:235
 msgid "Requires:"
-msgstr "Wymaga:"
+msgstr "Vyžaduje:"
 
 #: ../src/info.cc:246 ../src/search.cc:323
 msgid "Recommended"
-msgstr "Zalecany"
+msgstr "Odporúčaný"
 
 #: ../src/info.cc:248 ../src/search.cc:325
 msgid "Suggested"
-msgstr "Sugerowany"
+msgstr "Navrhovaný"
 
 #. translators: S for 'installed Status'
 #. translators: S for installed Status
@@ -469,7 +470,7 @@ msgstr "S"
 #: ../src/search.cc:386 ../src/search.cc:447 ../src/search.cc:534
 #: ../src/update.cc:152 ../src/update.cc:405 ../src/Zypper.cc:3973
 msgid "Name"
-msgstr "Nazwa"
+msgstr "Názov"
 
 #. translators: type (general header)
 #. translators: product type (addon/base) (rug calls it Category)
@@ -481,79 +482,78 @@ msgstr "Typ"
 
 #: ../src/info.cc:289 ../src/search.cc:388
 msgid "Dependency"
-msgstr "Zależność"
+msgstr "Závislosť"
 
 #: ../src/info.cc:307
 msgid "Contents"
-msgstr "Zawartość"
+msgstr "Obsah"
 
 #: ../src/info.cc:309
 msgid "(empty)"
-msgstr "(pusty)"
+msgstr "(prázdny)"
 
 #. translators: patch category (recommended, security)
 #. translators: product category (the rug term)
 #: ../src/info.cc:351 ../src/search.cc:267 ../src/search.cc:538
 #: ../src/update.cc:152
 msgid "Category"
-msgstr "Kategoria"
+msgstr "Kategória"
 
 #: ../src/info.cc:352
 msgid "Flavor"
-msgstr "rodzaj"
+msgstr "Druh"
 
 #: ../src/info.cc:353 ../src/utils/misc.cc:111
 msgid "Installed"
-msgstr "Zainstalowano"
+msgstr "Nainštalovaný"
 
 #: ../src/info.cc:354
 msgid "Short Name"
-msgstr "Skrócona nazwa"
+msgstr "Krátky názov"
 
 #. translators: meaning a package %s or provider of capability %s
 #: ../src/install.cc:68 ../src/install.cc:182
 #, c-format
 msgid "'%s' not found"
-msgstr "Nie znaleziono '%s'"
+msgstr "'%s' nebol nájdený"
 
 #. translators: e.g. skipping package 'zypper' (the newest version already installed)
 #. ! \todo capitalize the first letter
 #: ../src/install.cc:104
 #, c-format
 msgid "skipping %s '%s' (the newest version already installed)"
-msgstr "Pominięto %s '%s' (najnowsza wersja jest już zainstalowana)"
+msgstr "Vynechávam: %s '%s' (novšia verzia je už nainštalovaná)."
 
 #. translators: %s-%s.%s is name-version.arch
 #: ../src/install.cc:116
 #, c-format
 msgid "Package %s-%s.%s not found in repositories, cannot reinstall."
-msgstr "Pakiet %s-%s. %s nie został znaleziony w repozytoriach, nie można instalować ponownie."
+msgstr "Balík %s-%s.%s nemôžem nájsť v repozitároch, nie je ho teda možné preinštalovať."
 
 #: ../src/install.cc:129
 #, c-format
 msgid "Failed to add '%s' to the list of packages to be installed."
-msgstr "Dodanie \"%s\" do listy pakietów przeznaczonych do instalacji nie powiodło się."
+msgstr "Balík '%s' nebolo možné pridať do zoznamu balíkov, ktoré sa majú nainštalovať."
 
 #: ../src/install.cc:152
 #, c-format
 msgid "Failed to add '%s' to the list of packages to be removed."
-msgstr "Dodanie \"%s\" do listy pakietów przeznaczonych do usunięcia nie powiodło się."
+msgstr "Nebolo možné pridať balík '%s' do zoznamu balíkov, ktoré sa majú odstrániť."
 
 #: ../src/install.cc:373 ../src/install.cc:659
 #, c-format
 msgid "'%s' is already installed."
-msgstr "'%s' jest już zainstalowany."
+msgstr "'%s' je už nainštalovaný."
 
 #. translators: meaning a package %s or provider of capability %s
 #: ../src/install.cc:413 ../src/install.cc:673
 #, c-format
 msgid "'%s' is not installed."
-msgstr "'%s' nie jest zainstalowany."
+msgstr "'%s' nie je nainštalovaný."
 
 #: ../src/install.cc:437
-#, fuzzy
 msgid "Cannot uninstall patches."
-msgstr "Czyszczenie bufora zainstalowanych pakietów."
+msgstr "Záplaty nie je možné odinštalovať."
 
 #: ../src/install.cc:438
 msgid ""
@@ -561,153 +561,155 @@ msgid ""
 "Patches are not installed in sense of copied files, database records,\n"
 "or similar."
 msgstr ""
+"Či je záplata nainštalovaná sa určuje výhradne na základe jej závislostí.\n"
+"Záplaty sa neinštalujú kopírovaním súborov, zápisom do databázy a podobne."
 
 #: ../src/install.cc:449
 msgid "Uninstallation of a pattern is currently not defined and implemented."
-msgstr ""
+msgstr "Odinštalovanie paternov nie je momentálne definované a implementované."
 
 #: ../src/install.cc:463
 #, c-format
 msgid "%s contradicts %s"
-msgstr "%s jest przeciwstawne do %s"
+msgstr "%s protirečí %s"
 
 #. translators: meaning --force with --capability
 #: ../src/install.cc:472
 #, c-format
 msgid "%s cannot currently be used with %s"
-msgstr "%s nie może być teraz użyte z %s "
+msgstr "%s nie momentálne možné použiť spolu s %s"
 
 #: ../src/install.cc:520
 msgid "Specifying architecture when selecting packages by name is not implemented."
-msgstr ""
+msgstr "Určovanie architektúry pri výbere balíkov podľa názvu nie je implementované."
 
 #: ../src/install.cc:555
-#, fuzzy, c-format
+#, c-format
 msgid "'%s' is not a valid package or capability name."
-msgstr "'%s' jest niepoprawnym typem usługi."
+msgstr "'%s' nie je platný názov balíka alebo schopnosti."
 
 #. translators: meaning a package %s or provider of capability %s
 #: ../src/install.cc:630
 #, c-format
 msgid "'%s' not found."
-msgstr "Nie znaleziono '%s'."
+msgstr "'%s' nebol nájdený."
 
 #. translators: %s are package names
 #: ../src/install.cc:663
 #, c-format
 msgid "'%s' providing '%s' is already installed."
-msgstr "'%s' dostarczający '%s' jest już zainstalowany."
+msgstr "'%s' poskytujúci '%s' je už nainštalovaný."
 
 #. translators: locks table value
 #. importance
 #: ../src/locks.cc:22 ../src/locks.cc:63 ../src/locks.cc:76
 msgid "(any)"
-msgstr "(którykolwiek)"
+msgstr "(akýkoľvek)"
 
 #. translators: locks table value
 #: ../src/locks.cc:24 ../src/locks.cc:60 ../src/search.cc:311
 msgid "(multiple)"
-msgstr "(wielokrotny)"
+msgstr "(viacero)"
 
 #. translators: catalog (rug's word for repository) (header)
 #: ../src/locks.cc:41 ../src/search.cc:40 ../src/search.cc:263
 #: ../src/update.cc:151 ../src/update.cc:399
 msgid "Catalog"
-msgstr "Katalog"
+msgstr "Katalóg"
 
 #: ../src/locks.cc:41
 msgid "Importance"
-msgstr "Ważne"
+msgstr "Dôležitosť"
 
 #. translators: package's repository (header)
 #: ../src/locks.cc:43 ../src/search.cc:64 ../src/search.cc:388
 #: ../src/search.cc:446 ../src/update.cc:151 ../src/update.cc:399
 msgid "Repository"
-msgstr "Repozytorium"
+msgstr "Repozitár"
 
 #: ../src/locks.cc:95
 msgid "There are no package locks defined."
-msgstr "Nie zdefiniowano blokad pakietów."
+msgstr "Nie sú definované žiadne zámky balíkov."
 
 #: ../src/locks.cc:102
 msgid "Error reading the locks file:"
-msgstr "Wystąpił błąd podczas odczytu pliku blokad:"
+msgstr "Chyba pri čítaní súboru so zámkami:"
 
 #: ../src/locks.cc:153
 msgid "Problem adding the package lock:"
-msgstr "Wystąpił problem podczas dodawania blokady pliku:"
+msgstr "Chyba pri pridávaní zámku balíkov:"
 
 #: ../src/locks.cc:158
 msgid "Specified lock has been successfully added."
 msgid_plural "Specified locks have been successfully added."
-msgstr[0] "Dodano wybraną blokadę."
-msgstr[1] "Dodano wybrane blokady."
-msgstr[2] "Dodano wybrane blokady."
+msgstr[0] "Zadaný zámok bol úspešne pridaný."
+msgstr[1] "Zadané zámky boli úspešne pridané."
+msgstr[2] "Zadané zámky boli úspešne pridané."
 
 #: ../src/locks.cc:181
 msgid "Specified lock has been successfully removed."
-msgstr "Wybrana blokada zostałą usunięta."
+msgstr "Zadaný zámok bol úspešne odstránený."
 
 #: ../src/locks.cc:228
 msgid "No lock has been removed."
-msgstr "Nie usunięto żadnych blokad."
+msgstr "Nebol odstránené žiadny zámok."
 
 #: ../src/locks.cc:232
 #, c-format
 msgid "%lu lock has been successfully removed."
 msgid_plural "%lu locks have been succesfully removed."
-msgstr[0] "Usunięto blokady %lu."
-msgstr[1] "Usunięto blokady %lu."
-msgstr[2] "Usunięto blokady %lu."
+msgstr[0] "'%lu' zámok bol úspešne odstránený."
+msgstr[1] "'%lu' zámky boli úspešne odstránené."
+msgstr[2] "'%lu' zámkov bolo úspešne odstránených."
 
 #: ../src/locks.cc:239
 msgid "Problem removing the package lock:"
-msgstr "Wystąpił problem podczas usuwania blokad pakietów:"
+msgstr "Chyba pri odstraňovaní zámku:"
 
 #. translators: this will show up if you press ctrl+c twice outside of zypper shell
 #: ../src/main.cc:38
 msgid "OK OK! Exiting immediately..."
-msgstr "Przyjęto!!! Natychmiastowe przerwanie..."
+msgstr "Áno áno! Už končím..."
 
 #. TranslatorExplanation The first %s is name of the resolvable, the second is its kind (e.g. 'zypper package')
 #: ../src/misc.cc:136
 #, c-format
 msgid "Automatically agreeing with %s %s license."
-msgstr "Automatycznie zaakceptowano licencję obiektu \"%s\" typu \"%s\""
+msgstr "Automaticky súhlasím s licenciou pre: %s %s."
 
 #. translators: the first %s is the name of the package, the second
 #. is " (package-type)" if other than "package" (patch/product/pattern)
 #: ../src/misc.cc:157
 #, c-format
 msgid "In order to install '%s'%s, you must agree to terms of the following license agreement:"
-msgstr "Aby zainstalować '%s'%s, należy zaakceptować warunki poniższej licencji:"
+msgstr "Pred nainštalovaním '%s' %s musíte súhlasiť so znením nasledujúcej licencie:"
 
 #. lincense prompt
 #: ../src/misc.cc:174
 msgid "Do you agree with the terms of the license?"
-msgstr "Czy zaakceptować warunki licencji?"
+msgstr "Súhlasíte so znením tejto licencie?"
 
 #: ../src/misc.cc:183
 msgid "Aborting installation due to the need for license confirmation."
-msgstr "Nie zaakceptowano licencji. Przerwano instalację."
+msgstr "Končím inštaláciu kvôli nutnosti potvrdenia súhlasu s liceniou/licenciami."
 
 #. translators: %sanslate the '--auto-agree-with-licenses',
 #. it is a command line option
 #: ../src/misc.cc:188
 #, c-format
 msgid "Please restart the operation in interactive mode and confirm your agreement with required licenses, or use the %s option."
-msgstr "Proszę wykonać operację w trybie interaktywnym i zgodzić się z warunkami licencji lub użyć opcji %s."
+msgstr "Prosím reštartujte túto operáciu v interaktívnom režime a potvrďte súhlas s požadovanými licenciami, prípadne použite voľbu %s."
 
 #. translators: e.g. "... with flash package license."
 #. ! \todo fix this to allow proper translation
 #: ../src/misc.cc:200
 #, c-format
 msgid "Aborting installation due to user disagreement with %s %s license."
-msgstr "Przerwanie instalacji z powodu braku akceptacji licencji %s %s."
+msgstr "Končím inštaláciu kvôli nesúhlasu s licenciou pre: %s %s."
 
 #: ../src/misc.cc:247
 msgid "License"
-msgstr "Licencja"
+msgstr "Licencia"
 
 #: ../src/misc.cc:265
 msgid "EULA"
@@ -715,223 +717,230 @@ msgstr "EULA"
 
 #: ../src/misc.cc:283
 msgid "SUMMARY"
-msgstr "Podsumowanie"
+msgstr "ZHRNUTIE"
 
 #: ../src/misc.cc:284
 #, c-format
 msgid "Installed packages: %d"
-msgstr "Odczytywanie zainstalowanych pakietów: %d"
+msgstr "Nainštalované balíky: %d"
 
 #: ../src/misc.cc:285
 #, c-format
 msgid "Installed packages with counterparts in repositories: %d"
-msgstr "Zainstalowane pakiety z odpowiednikami w repozytoriach: %d"
+msgstr "Nainštalované balíky s proťajškami v repozitároch: %d"
 
 #: ../src/misc.cc:286
 #, c-format
 msgid "Installed packages with EULAs: %d"
-msgstr "Zainstalowane pakiety EULA: %d"
+msgstr "Nainštalované balíky s EULA: %d"
 
 #: ../src/misc.cc:372 ../src/misc.cc:397
 #, c-format
 msgid "Source package '%s' not found."
-msgstr "Pakiet z kodem źródłowym \"%s\" nie został znaleziony."
+msgstr "Zdrojový balík '%s' nebol nájdený."
 
 #: ../src/misc.cc:407
 #, c-format
 msgid "Installing source package %s-%s"
-msgstr "Insalowanie pakietu z kodem źródłowym %s-%s"
+msgstr "Inštalujem zdrojový balík %s-%s"
 
 #: ../src/misc.cc:416
 #, c-format
 msgid "Source package %s-%s successfully installed."
-msgstr "Pakiet z kodem źródłowym %s-%s został zainstalowany pomyślnie."
+msgstr "Zdrojový balík %s-%s bol úspešne nainštalovaný."
 
 #: ../src/misc.cc:423
 #, c-format
 msgid "Problem installing source package %s-%s:"
-msgstr "Problem podczas instalacji pakietu z kodem źródłowym %s-%s"
+msgstr "Problém pri inštalovaní zdrojového balíka %s-%s:"
 
 # internal key used: Warning
 #: ../src/output/OutNormal.cc:54
 msgid "Warning: "
-msgstr "Ostrzeżenie: "
+msgstr "Pozor: "
 
 #: ../src/output/OutNormal.cc:151 ../src/output/OutNormal.cc:224
 msgid "error"
-msgstr "błąd"
+msgstr "chyba"
 
 #: ../src/output/OutNormal.cc:151 ../src/output/OutNormal.cc:224
 msgid "done"
-msgstr "zrobione"
+msgstr "hotovo"
 
 #: ../src/output/OutNormal.cc:165 ../src/output/OutNormal.cc:167
 #: ../src/output/OutNormal.cc:191 ../src/output/OutNormal.cc:217
 msgid "Retrieving:"
-msgstr "Wyszukiwanie informacji:"
+msgstr "Sťahujem:"
 
 # window title for kernel loading (see txt_load_kernel)
 #: ../src/output/OutNormal.cc:173
 msgid "starting"
-msgstr "Uruchamianie"
+msgstr "..."
 
 #: ../src/output/OutNormal.cc:250
 msgid "No help available for this prompt."
-msgstr "Nie jest dostępna pomoc dla tej wskazówki."
+msgstr "Pre tento dialóg nie je k dispozícii nápoveda."
 
 #: ../src/output/OutNormal.cc:260
 msgid "no help available for this option"
-msgstr "nie jest dostępna pomoc dla tej opcji"
+msgstr "pre túto voľbu nie je k dispozícii nápoveda"
 
 #: ../src/repos.cc:80
 #, c-format
 msgid "Checking whether to refresh metadata for %s"
-msgstr "Sprawdzanie czy trzeba odświeżyć metadane dla %s."
+msgstr "Zisťujem či je potrebné aktualizovať metadáta pre %s"
 
 #: ../src/repos.cc:102
 #, c-format
 msgid "Repository '%s' is up to date."
-msgstr "Repozytorium \"%s\" jest aktualne."
+msgstr "Repozitár '%s' je aktuálny."
 
 #: ../src/repos.cc:106
 #, c-format
 msgid "The up-to-date check of '%s' has been delayed."
-msgstr "Sprawdzenie aktualizacji '%s' zostało przełożone na później."
+msgstr "Kontrola aktuálnosti repozitára '%s' bola odložená."
 
 #: ../src/repos.cc:128
 msgid "Forcing raw metadata refresh"
-msgstr "Wymuszono odświeżenie metadanych"
+msgstr "Aktualizujem surové metadáta (vynútená aktualizácia)"
 
 #: ../src/repos.cc:135
 #, c-format
 msgid "Retrieving repository '%s' metadata"
-msgstr "Pobieranie danych repozytorium '%s'"
+msgstr "Načítavam údaje repozitára '%s'"
 
 #: ../src/repos.cc:159
 #, c-format
 msgid "Problem retrieving files from '%s'."
-msgstr "Problem podczas pobierania plików z '%s'."
+msgstr "Problém pri sťahovaní súborov z '%s'."
 
 #: ../src/repos.cc:160 ../src/repos.cc:2861 ../src/solve-commit.cc:1109
 #: ../src/solve-commit.cc:1137 ../src/solve-commit.cc:1169
 msgid "Please see the above error message for a hint."
-msgstr "Więcej informacji dostępne w powyższym komunikacie błędów."
+msgstr "Pozrite vyššie vypísanú chybu pre informáciu o jej príčine."
 
+#  If no dialog defined for this menu item (software error)
 #: ../src/repos.cc:173
 #, c-format
 msgid "No URIs defined for '%s'."
-msgstr "Nie określono URI dla '%s'."
+msgstr "Pre '%s' nie sú definované žiadne URI adresy."
 
 #. TranslatorExplanation the first %s is a .repo file path
 #: ../src/repos.cc:177
 #, c-format
 msgid "Please add one or more base URI (baseurl=URI) entries to %s for repository '%s'."
-msgstr "Proszę dodać conajmniej jeden bazowy adres URL (baseurl=URL) do pliku %s dla repozytorium '%s'."
+msgstr "Prosím, pridajte jednu alebo viac základných URI adries (baseurl=URI) do %s pre repozitár '%s'."
 
 #: ../src/repos.cc:190
 msgid "No alias defined for this repository."
-msgstr "Nie określono aliasu dla tego repozytorium."
+msgstr "Pre tento repozitár nie je definovaný alias."
 
 #: ../src/repos.cc:203
 #, c-format
 msgid "Repository '%s' is invalid."
-msgstr "Repozytorium \"%s\" jest niepoprawne."
+msgstr "Repozitár '%s' je neplatný."
 
 #: ../src/repos.cc:204
 msgid "Please check if the URIs defined for this repository are pointing to a valid repository."
-msgstr "Proszę sprawdzić, czy zdefiniowane adresy URL dla tego repozytorium wskazują na poprawne repozytorium."
+msgstr "Prosím, overte, či URI adresy definované pre tento repozitár odkazujú na platný repozitár."
 
 #: ../src/repos.cc:217
 #, c-format
 msgid "Error retrieving metadata for '%s':"
-msgstr "Błąd przetwaezania metadanych dla '%s':"
+msgstr "Chyba pri čítaní metadát pre '%s':"
 
 #: ../src/repos.cc:232
 msgid "Forcing building of repository cache"
-msgstr "Wymuszono przebudowane pamięci podręcznej repozytorium"
+msgstr "Vytváram medzipamäť repozitára (vynútené)"
 
 #: ../src/repos.cc:245
 #, c-format
 msgid "Error parsing metadata for '%s':"
-msgstr "Błąd przetwarzania metadanych dla \"%s\":"
+msgstr "Chyba pri čítaní metadát pre '%s':"
 
 #. TranslatorExplanation Don't translate the URL unless it is translated, too
 #: ../src/repos.cc:247
 msgid "This may be caused by invalid metadata in the repository, or by a bug in the metadata parser. In the latter case, or if in doubt, please, file a bug report by following instructions at http://en.opensuse.org/Zypper#Troubleshooting"
-msgstr "Może to być spowodowane przez niepoprawne metadane w repozytorium lub przez błąd w parserze metadanych. W tym drugim przypadku proszę zgłosić błąd według instrucji pod adresem http://en.opensuse.org/Zypper#Troubleshooting"
+msgstr "Chyba môže byť spôsobená nesprávnymi metadátami v repozitári alebo chybou v parseri metadát. V tom druhom prípade alebo ak si nie ste istí, nahláste prosím chybu podľa inštrukcií na adrese http://en.opensuse.org/Zypper#Troubleshooting (angl.)"
 
 #: ../src/repos.cc:261
 #, c-format
 msgid "Repository metadata for '%s' not found in local cache."
-msgstr "Metadane repozytorium \"%s\" nie zostały znalezione w pamięci podręcznej."
+msgstr "Metadáta pre '%s' neboli nájdené v miestnej medzipamäti."
 
 #: ../src/repos.cc:269
 msgid "Error building the cache:"
-msgstr "Błąd podczas budowania pamięci podręcznej:"
+msgstr "Chyba pri vytváraní medzipamäte metadát:"
 
 #: ../src/repos.cc:422
 #, c-format
 msgid "Repository '%s' not found by its alias, number, or URI."
-msgstr "Nie znaleziono repozytorium '%s' wg aliasu, numeru lub adresu URL."
+msgstr "Repozitár '%s' nebol nájdený podľa zadaného aliasu, čísla, ani URI."
 
 #: ../src/repos.cc:426
 #, c-format
 msgid "Use '%s' to get the list of defined repositories."
-msgstr "Używa '%s' by otrzymać listę zdefiniowanych repozytoriów."
+msgstr "Pre získanie zoznamu definovaných repozitárov použite príkaz '%s'."
 
 #: ../src/repos.cc:490 ../src/repos.cc:497
-#, fuzzy, c-format
+#, c-format
 msgid "Ignoring repository '%s' because of '%s' option."
-msgstr "Nie można wyczyścić repozytorium '%s\" z powodu błędu."
+msgstr "Ingorujem repozitár '%s' kvôli voľbe '%s'."
 
 #: ../src/repos.cc:527 ../src/repos.cc:563
 #, c-format
 msgid "Disabling repository '%s' because of the above error."
-msgstr "Wyłączono repozytorium \"%s\" z powodu powyższego błędu."
+msgstr "Dočasne vypínam repozitár '%s' kvôli vyššie uvedenej chybe."
 
 #: ../src/repos.cc:545
 #, c-format
 msgid "Repository '%s' is out-of-date. You can run 'zypper refresh' as root to update it."
-msgstr "Repozytorium \"%s\" jest nieaktualne. Aby je zaktualizować, należy uruchomić polecenie \"zypper refresh\" jako użytkownik root."
+msgstr "Repozitár '%s' nie je aktuálny. Aktualizovať ho môžete pomocou príkazu 'zypper refresh' ako root."
 
 #: ../src/repos.cc:580
 #, c-format
 msgid "The metadata cache needs to be built for the '%s' repository. You can run 'zypper refresh' as root to do this."
-msgstr "Repozytorium '%s' jest nieaktualne. Aby je zaktualizować, należy uruchomić polecenie 'zypper refresh' jako użytkownik root."
+msgstr "Je potrebné vytvoriť medzipamäť pre repozitár '%s'. Spraviť to môžete pomocou príkazu 'zypper refresh' ako root."
 
 #: ../src/repos.cc:587
 #, c-format
 msgid "Disabling repository '%s'."
-msgstr "Wyłącza repozytorium '%s'."
+msgstr "Vypínam repozitár '%s'."
 
 #: ../src/repos.cc:624
 msgid "Initializing Target"
-msgstr "Inicjalizacja celu"
+msgstr "Inicializujem cieľovú databázu"
 
 #: ../src/repos.cc:633
 msgid "Target initialization failed:"
-msgstr "Inicjalizacja nie powiodła się:"
+msgstr "Zlyhala inicializácia cieľa:"
 
 #: ../src/repos.cc:635 ../src/Zypper.cc:3343
 msgid "Running 'zypper refresh' as root might resolve the problem."
-msgstr "Wydanie polecenia 'zypper refresh' z prawami roota może rozwiązać problem."
+msgstr "Spustenie 'zypper refresh' pod používateľom root, by mohlo vyriešiť problém."
 
 #. translators: patch status (installed, uninstalled, needed)
 #: ../src/repos.cc:655 ../src/search.cc:269 ../src/update.cc:152
 msgid "Status"
-msgstr "Status"
+msgstr "Stav"
 
+#  Table header 5/5
+#  Table header 4/6
 #. status
 #. rug's status (active, pending => active, disabled <= enabled, disabled)
 #. this is probably the closest possible compatibility arrangement
 #: ../src/repos.cc:672
 msgid "Active"
-msgstr "Aktywny"
+msgstr "Aktívny"
 
 #: ../src/repos.cc:672
 msgid "Disabled"
-msgstr "Wyłączono"
+msgstr "Vypnutý"
 
+# printers.ycp.noloc:1270
+# printers.ycp.noloc:1270
+# printers.ycp.noloc:1270
+# printers.ycp.noloc:1270
 #: ../src/repos.cc:703 ../src/repos.cc:2080 ../src/Zypper.cc:3973
 msgid "Alias"
 msgstr "Alias"
@@ -939,514 +948,514 @@ msgstr "Alias"
 #. TranslatorExplanation used as e.g. "Enabled: Yes"
 #: ../src/repos.cc:705 ../src/repos.cc:1336 ../src/repos.cc:2082
 msgid "Enabled"
-msgstr "Włączono"
+msgstr "Zapnutý"
 
 #. translators: 'zypper repos' column - whether autorefresh is enabled for the repository
 #: ../src/repos.cc:707 ../src/repos.cc:2084
 msgid "Refresh"
-msgstr "Odśwież"
+msgstr "Samoaktual."
 
 #. translators: repository priority (in zypper repos -p or -d)
 #: ../src/repos.cc:711 ../src/repos.cc:2088
 msgid "Priority"
-msgstr "Priorytet"
+msgstr "Priorita"
 
 #: ../src/repos.cc:715 ../src/repos.cc:2091
 msgid "URI"
-msgstr "Adres URL"
+msgstr "URI"
 
 #: ../src/repos.cc:717
 msgid "Service"
-msgstr "Serwer"
+msgstr "Služba"
 
 #: ../src/repos.cc:761
 msgid "No repositories defined. Use the 'zypper addrepo' command to add one or more repositories."
-msgstr "Nie zdefiniowano żadnych repozytoriów. Aby je dodać, należy skorzystać z polecenia \"zypper addrepo\"."
+msgstr "Nie sú definované žiadne repozitáre. Pridajte jeden alebo viac repozitárov pomocou príkazu 'zypper addrepo'."
 
 #: ../src/repos.cc:837 ../src/repos.cc:909 ../src/repos.cc:1079
 msgid "Error reading repositories:"
-msgstr "Błąd odczytu repozytoriów:"
+msgstr "Chyba pri čítaní repozitárov:"
 
 #: ../src/repos.cc:865 ../src/repos.cc:2213
 #, c-format
 msgid "Can't open %s for writing."
-msgstr "Nie można otworzyć pliku %s do zapisu."
+msgstr "Nemôžem otvoriť súbor %s pre zápis."
 
 #: ../src/repos.cc:867 ../src/repos.cc:2215
 msgid "Maybe you do not have write permissions?"
-msgstr "Proszę sprawdzić prawa dostępu."
+msgstr "Pravdepodobne nemáte práva na zápis."
 
 #: ../src/repos.cc:874 ../src/repos.cc:2222
 #, c-format
 msgid "Repositories have been successfully exported to %s."
-msgstr "Repozytoria zostały wyeksportowane do \"%s\"."
+msgstr "Všetky repozitáre boli úspešne vyexportované do súboru '%s'."
 
 #: ../src/repos.cc:927 ../src/repos.cc:1097
 msgid "Specified repositories: "
-msgstr "Wybrane repozytoria:"
+msgstr "Zadané repozitáre: "
 
 #: ../src/repos.cc:966
 #, c-format
 msgid "Skipping disabled repository '%s'"
-msgstr "Pominięto wyłączone repozytorium \"%s\""
+msgstr "Vynechávam vypnutý repozitár '%s'"
 
 #: ../src/repos.cc:981
 #, c-format
 msgid "Skipping repository '%s' because of the above error."
-msgstr "Pominięto wyłączone repozytorium \"%s\" z powodu powyższego błędu."
+msgstr "Vynechávam repozitár '%s' kvôli vyššie uvedenej chybe."
 
 #: ../src/repos.cc:996
 #, c-format
 msgid "Use '%s' or '%s' commands to add or enable repositories."
-msgstr "Należy użyć '%s' lub '%s' by dodać i odblokować repozytoria."
+msgstr "Použite príkaz '%s' alebo '%s' pre pridanie alebo zapnutie repozitárov."
 
 #: ../src/repos.cc:999
 msgid "Specified repositories are not enabled or defined."
-msgstr "Podane repozytoria nie są włączone lub zdefiniowane."
+msgstr "Zadané repozitáre sú buď vypnuté alebo nie sú definované."
 
 #: ../src/repos.cc:1001
 msgid "There are no enabled repositories defined."
-msgstr "Brak zdefiniowanych włączonych repozytoriów."
+msgstr "Nie sú definované žiadne zapnuté repozitáre."
 
 #: ../src/repos.cc:1005
 msgid "Could not refresh the repositories because of errors."
-msgstr "Nie można odświeżyć repozytoriów z powodu błędów."
+msgstr "Nepodarilo sa aktualizovať repozitáre kvôli vyššie uvedenej chybe."
 
 #: ../src/repos.cc:1011
 msgid "Some of the repositories have not been refreshed because of an error."
-msgstr "Część repozytoriów nie została odświeżona z powodu błędów."
+msgstr "Niektoré repozitáre neboli aktualizované kvôli chybe."
 
 #: ../src/repos.cc:1016
 msgid "Specified repositories have been refreshed."
-msgstr "Odświeżono podane repozytoria."
+msgstr "Zadané repozitáre boli úspešne aktualizované."
 
 #: ../src/repos.cc:1018
 msgid "All repositories have been refreshed."
-msgstr "Odświeżono wszystkie repozytoria."
+msgstr "Všetky repozitáre boli úspešne aktualizované."
 
 #: ../src/repos.cc:1154
 #, c-format
 msgid "Cleaning metadata cache for '%s'."
-msgstr "Czyszczenie bufora metadanych dla '%s'."
+msgstr "Čistím medzipamať údajov repozitára '%s'."
 
 #: ../src/repos.cc:1161
 #, c-format
 msgid "Cleaning raw metadata cache for '%s'."
-msgstr "Czyszczenie bufora metadanych dla '%s'."
+msgstr "Čistím medzipamať surových údajov repozitára '%s'."
 
 #. translators: meaning the cached rpm files
 #: ../src/repos.cc:1169
 #, c-format
 msgid "Cleaning packages for '%s'."
-msgstr "Czyszczenie pakietów dla '%s'."
+msgstr "Mažem uložené RPM súbory pre '%s'."
 
 #: ../src/repos.cc:1177
 #, c-format
 msgid "Cannot clean repository '%s' because of an error."
-msgstr "Nie można wyczyścić repozytorium '%s\" z powodu błędu."
+msgstr "Nemôžem vyčistiť repozitár '%s' kvôli vyššie uvedenej chybe."
 
 #: ../src/repos.cc:1191
 msgid "Cleaning installed packages cache."
-msgstr "Czyszczenie bufora zainstalowanych pakietów."
+msgstr "Čistím medzipamäť nainštalovaných balíkov."
 
 #: ../src/repos.cc:1199
 msgid "Cannot clean installed packages cache because of an error."
-msgstr "Nie można wyczyścić bufora zainstalowanych pakietów z powodu błędu."
+msgstr "Nemôžem vyčistiť medzipamäť nainštalovaných balíkov kvôli vyššie uvedenej chybe."
 
 #: ../src/repos.cc:1207
 msgid "Could not clean the repositories because of errors."
-msgstr "Nie udało się wyczyścić repozytoriół z powodu błędów."
+msgstr "Nepodarilo sa vyčistiť repozitáre kvôli chybe."
 
 #: ../src/repos.cc:1214
 msgid "Some of the repositories have not been cleaned up because of an error."
-msgstr "Niektóre z repozytoriów nie zostały wyczyszczone z powodu błędów."
+msgstr "Niektoré repozitáre neboli vyčistené kvôli chybe."
 
 #: ../src/repos.cc:1219
 msgid "Specified repositories have been cleaned up."
-msgstr "Wybrane repozytoria zostały wyczyszczone."
+msgstr "Zadané repozitáre boli vyčistené."
 
 #: ../src/repos.cc:1221
 msgid "All repositories have been cleaned up."
-msgstr "Wszystkie repozytoria zostały wyczyszczone."
+msgstr "Všetky repozitáre boli vyčistené."
 
 #: ../src/repos.cc:1261
 msgid "This is a changeable read-only media (CD/DVD), disabling autorefresh."
-msgstr "To jest wymienny nośnik tylko do odczytu (CD/DVD). Autoodświeżanie wyłączone."
+msgstr "Toto je vymeniteľné médium len na čítanie (CD/DVD), vypínam automatickú aktualizáciu (autorefresh)."
 
 #: ../src/repos.cc:1282 ../src/repos.cc:1543
 #, c-format
 msgid "Repository named '%s' already exists. Please use another alias."
-msgstr "Repozytorium '%s' już istnieje. Proszę użyć innego aliasu."
+msgstr "Repozitár s aliasom '%s' už existuje. Prosím, použite iný alias."
 
 #: ../src/repos.cc:1293
 msgid "Could not determine the type of the repository. Please check if the defined URIs (see below) point to a valid repository:"
-msgstr "Nie można określić typu repozytorium. Proszę sprawdzić czy zdefiniowane adresy (poniżej) URL wskazują na poprawne repozytoria:"
+msgstr "Nemôžem určiť typ repozitára. Prosím overte, či definované URI adresy (viď nižšie) ukazujú na platný repozitár:"
 
 #: ../src/repos.cc:1300 ../src/Zypper.cc:2420
 msgid "Can't find a valid repository at given location:"
-msgstr "Nie można znaleźć poprawnego repozytorium w podanym miejscu:"
+msgstr "Nemôžem nájsť platný repozitár na zadanej adrese:"
 
 #: ../src/repos.cc:1309
 msgid "Problem transferring repository data from specified URI:"
-msgstr "Problem podczas przesyłania danych repozytorium spod podanego adresu URL:"
+msgstr "Problém pri prenášaní údajov repozitára zo zadanej URI adresy:"
 
 #: ../src/repos.cc:1310
 msgid "Please check whether the specified URI is accessible."
-msgstr "Proszę sprawdzić czy podany adres URL jest dostępny."
+msgstr "Prosím, overte, či je zadaná URI adresa prístupná."
 
 #: ../src/repos.cc:1318
 msgid "Unknown problem when adding repository:"
-msgstr "Nieokreślony problem podczas dodawania repozytorium:"
+msgstr "Neznáma chyba pri pridávaní repozitára:"
 
 #: ../src/repos.cc:1324
 #, c-format
 msgid "Repository '%s' successfully added"
-msgstr "Repozytorium \"%s\" zostało dodane z powodzeniem"
+msgstr "Repozitár '%s' bol úspešne pridaný"
 
 #. TranslatorExplanation used as e.g. "Autorefresh: Yes"
 #: ../src/repos.cc:1338
 msgid "Autorefresh"
-msgstr "Autoodświeżanie"
+msgstr "Autoaktualizácia"
 
 #: ../src/repos.cc:1353
 #, c-format
 msgid "Reading data from '%s' media"
-msgstr "Odczytywanie danych z nośnika \"%s\""
+msgstr "Čítam údaje z média '%s'."
 
 #: ../src/repos.cc:1360
 #, c-format
 msgid "Problem reading data from '%s' media"
-msgstr "Problem podczas odczytywania danych z nośnika \"%s\""
+msgstr "Problém pri čítaní údajov z média '%s'."
 
 #: ../src/repos.cc:1361
 msgid "Please check if your installation media is valid and readable."
-msgstr "Proszę sprawdzić czy nośnik instalacyjny jest poprawny i można go odczytać."
+msgstr "Prosím, overte či sú vaše inštalačné médiá správne a čitateľné."
 
 #: ../src/repos.cc:1426
 msgid "Problem accessing the file at the specified URI"
-msgstr "Problem z dostępem do pliku spod podanego adresu URL"
+msgstr "Problém pri prístupe k súboru na zadanej URI adrese."
 
 #: ../src/repos.cc:1427
 msgid "Please check if the URI is valid and accessible."
-msgstr "Proszę sprawdzić czy podany adres URL jest poprawny i dostępny."
+msgstr "Prosím, overte, či je zadaná URI adresa platná a prístupná."
 
 #: ../src/repos.cc:1435
 msgid "Problem parsing the file at the specified URI"
-msgstr "Problem podczas analizy pliku pod danym adresem URL"
+msgstr "Problém pri analyzovaní súboru na zadanej URI adrese."
 
 #. TranslatorExplanation don't translate the URI if the URI itself is not translated.
 #. Also don't translate the '.repo' string.
 #: ../src/repos.cc:1438
 msgid "Is it a .repo file? See http://en.opensuse.org/Standards/RepoInfo for details."
-msgstr "Czy jest to plik .repo? Szczegóły: http://en.opensuse.org/Standards/RepoInfo"
+msgstr "Overte či zadaný súbor je vo formáte .repo. Informácie o .repo súboroch nájdete na http://en.opensuse.org/Standards/RepoInfo."
 
 #: ../src/repos.cc:1446
 msgid "Problem encountered while trying to read the file at the specified URI"
-msgstr "Napotkano problem podczas próby odczytu pliku pod adresem URL"
+msgstr "Nastal problém pri čítaní súboru na zadanej URI adrese."
 
 #: ../src/repos.cc:1460
 msgid "Repository with no alias defined found in the file, skipping."
-msgstr "Znaleziono repozytorium bez określonego aliasu. Zostanie pominięte."
+msgstr "V súbore bol nájdený repozitár bez definovaného aliasu, preskakujem."
 
 #: ../src/repos.cc:1467
 #, c-format
 msgid "Repository '%s' has no URI defined, skipping."
-msgstr "Nie znaleziono repozytorium .%s. Zostanie pominięte."
+msgstr "Repozitár '%s' nemá definované žiadne URI adresy, preskakujem."
 
 #: ../src/repos.cc:1507
 #, c-format
 msgid "Repository '%s' has been removed."
-msgstr "Usunięto repozytorium '%s'."
+msgstr "Repozitár '%s' bol odstránený."
 
 #: ../src/repos.cc:1526
 #, c-format
 msgid "Cannot change alias of '%s' repository. The repository belongs to service '%s' which is responsible for setting its alias."
-msgstr "Nie można zmienić nazwy repozytorium '%s'. Repozytorium należy do usługi '%s' która jest odpowiedzialna za ustawienia tej nazwy."
+msgstr "Zmeniť alias repozitára '%s' nie je môžné. Tento repozitár patrí službe '%s', ktorá je zodpovedná za nastavenie jeho aliasu."
 
 #: ../src/repos.cc:1537
 #, c-format
 msgid "Repository '%s' renamed to '%s'."
-msgstr "Zmieniono nazwę repozytorium %s na %s."
+msgstr "Repozitár '%s' bol premenovaný na '%s'."
 
 #: ../src/repos.cc:1549 ../src/repos.cc:1769
 msgid "Error while modifying the repository:"
-msgstr "Wystąpił błąd podczas modyfikacji repozytorium."
+msgstr "Chyba pri zmene repozitára:"
 
 #: ../src/repos.cc:1550
 #, c-format
 msgid "Leaving repository '%s' unchanged."
-msgstr "Nie zmieniono repozytorium '%s'."
+msgstr "Ponechávam repozitár '%s' v nezmenenom stave."
 
 #: ../src/repos.cc:1687
 #, c-format
 msgid "Invalid priority '%s'. Use a positive integer number. The greater the number, the lower the priority."
-msgstr "Niepoprawny priorytet '%s'. Użyj dotaniej liczby całkowitej. Im wyższa jest jej wartość, tym niższy priorytet."
+msgstr "Neplatná hodnota priority '%s'. Použite kladné celé číslo. Čím vyššie číslo, tým nižšia priorita."
 
 #: ../src/repos.cc:1695
 #, c-format
 msgid "Repository '%s' priority has been left unchanged (%d)"
-msgstr "Niezmieniono priorytetu '%s' (%d)"
+msgstr "Priorita repozitára '%s' zostáva nezmenená (%d)."
 
 #: ../src/repos.cc:1721
 #, c-format
 msgid "Repository '%s' has been sucessfully enabled."
-msgstr "Oddblokowano repozytorium '%s'."
+msgstr "Repozitár '%s' bol úspešne zapnutý."
 
 #: ../src/repos.cc:1724
 #, c-format
 msgid "Repository '%s' has been sucessfully disabled."
-msgstr "Zablokowano repozytorium '%s'."
+msgstr "Repozitár '%s' bol úspešne vypnutý."
 
 #: ../src/repos.cc:1731
 #, c-format
 msgid "Autorefresh has been enabled for repository '%s'."
-msgstr "Ustawiono automatycznie odświeżanie dla repozytorium '%s'."
+msgstr "Samoaktualizácia repozitára '%s' bola zapnutá."
 
 #: ../src/repos.cc:1734
 #, c-format
 msgid "Autorefresh has been disabled for repository '%s'."
-msgstr "Zablokowano automatyczne odświeżanie repozytorium '%s'."
+msgstr "Samoaktualizácia repozitára '%s' bola vypnutá."
 
 #: ../src/repos.cc:1741
 #, c-format
 msgid "RPM files caching has been enabled for repository '%s'."
-msgstr "Odblokowano buforowanie pakietów RPM dla repozytorium '%s'. "
+msgstr "Uchovávanie RPM súborov pre repozitár '%s' bolo zapnuté."
 
 #: ../src/repos.cc:1744
 #, c-format
 msgid "RPM files caching has been disabled for repository '%s'."
-msgstr "Zablokowano buforowanie pakietów RPM dla repozytorium '%s'. "
+msgstr "Uchovávanie RPM súborov pre repozitár '%s' bolo vypnuté."
 
 #: ../src/repos.cc:1750
 #, c-format
 msgid "Repository '%s' priority has been set to %d."
-msgstr "Ustawiono priorytet repozytorium '%s' na %d."
+msgstr "Priorita repozitára '%s' bola nastavená na %d."
 
 #: ../src/repos.cc:1756
 #, c-format
 msgid "Name of repository '%s' has been set to '%s'."
-msgstr "Nazwa repozytorium '%s' to '%s'."
+msgstr "Názov repozitára '%s' bol nastavený na '%s'."
 
 #: ../src/repos.cc:1762
 #, c-format
 msgid "Nothing to change for repository '%s'."
-msgstr "Nie ma żadnych zmian dla repozytorium '%s'."
+msgstr "Na repozitári '%s' nie je potrebné nič meniť."
 
 #: ../src/repos.cc:1770
 #, c-format
 msgid "Leaving repository %s unchanged."
-msgstr "Nie zmieniono repozytorium \"%s\"."
+msgstr "Ponechávam repozitár '%s' v nezmenenom stave."
 
 #: ../src/repos.cc:1808
 msgid "Error reading services:"
-msgstr "Błąd podczas odczytu serwerów:"
+msgstr "Chyba pri načítaní služieb:"
 
 #: ../src/repos.cc:1897
 #, c-format
 msgid "Service '%s' not found by its alias, number, or URI."
-msgstr "Nie powiodło się odnalezienie repozytorium '%s' na podstawie aliasu, numeru, bądź adresu URL."
+msgstr "Služba '%s' nebola nájdený podľa zadaného aliasu, čísla, ani URI."
 
 #: ../src/repos.cc:1901
 #, c-format
 msgid "Use '%s' to get the list of defined services."
-msgstr "Należy użyć '%s' by uzyskać listę zdefiniowanych serwerów."
+msgstr "Pre získanie zoznamu definovaných služieb použite príkaz '%s'."
 
 #: ../src/repos.cc:2127
 #, c-format
 msgid "No services defined. Use the '%s' command to add one or more services."
-msgstr "Nie zdefiniowano żadnych repozytoriów. Aby je dodać, należy użyć polecenia '%s'."
+msgstr "Nie sú definované žiadne služby. Pridajte jednu alebo viac služieb pomocou príkazu '%s'."
 
 #: ../src/repos.cc:2253
 #, c-format
 msgid "Service aliased '%s' already exists. Please use another alias."
-msgstr "Repozytorium '%s' już istnieje. Proszę użyć innego aliasu."
+msgstr "Služba s aliasom '%s' už existuje. Prosím, použite iný alias."
 
 #: ../src/repos.cc:2263
 #, c-format
 msgid "Error occured while adding service '%s'."
-msgstr "Wystąpił błąd podczas odczytywania danych ze źródła instalacji '%s'."
+msgstr "Pri pridávané služby '%s' nastala chyba."
 
 #: ../src/repos.cc:2269
 #, c-format
 msgid "Service '%s' has been successfully added."
-msgstr "Pomyślnie dodano repozytorium '%s'."
+msgstr "Služba '%s' bola úspešne pridaná."
 
 #: ../src/repos.cc:2308
 #, c-format
 msgid "Removing service '%s':"
-msgstr "Usuwanie '%s':"
+msgstr "Odstraňujem službu '%s':"
 
 #: ../src/repos.cc:2311
 #, c-format
 msgid "Service '%s' has been removed."
-msgstr "Repozytorium '%s' zostało usunięte."
+msgstr "Služba '%s' bola odstránená."
 
 #: ../src/repos.cc:2327
 #, c-format
 msgid "Refreshing service '%s'."
-msgstr "Uaktualnianie serwera '%s'."
+msgstr "Aktualizujem službu '%s'."
 
 #: ../src/repos.cc:2336
 #, c-format
 msgid "Problem retrieving the repository index file for service '%s':"
-msgstr "Problem podczas przesyłania danych z repozytorium '%s':"
+msgstr "Problém pri načítaní indexu repozitárov zo služby '%s':"
 
 #: ../src/repos.cc:2338
 msgid "Check if the URI is valid and accessible."
-msgstr "Proszę sprawdzić, czy podany adres URL jest poprawny i dostępny."
+msgstr "Prosím, overte, či je zadaná URI adresa platná a prístupná."
 
 #: ../src/repos.cc:2396
 #, c-format
 msgid "Skipping disabled service '%s'"
-msgstr "Pominięto wyłączone repozytorium '%s'"
+msgstr "Vynechávam vypnutú službu '%s'"
 
 #: ../src/repos.cc:2442
 #, c-format
 msgid "Skipping service '%s' because of the above error."
-msgstr "Pominięto wyłączone repozytorium '%s' z powodu powyższego błędu."
+msgstr "Vynechávam službu '%s' kvôli vyššie uvedenej chybe."
 
 #: ../src/repos.cc:2457
 #, c-format
 msgid "Use '%s' or '%s' commands to add or enable services."
-msgstr "Należy użyć poleceń '%s' lub '%s' dodać lub uaktywnić repozytoria."
+msgstr "Použite príkaz '%s' alebo '%s' pre pridanie alebo zapnutie služieb."
 
 #: ../src/repos.cc:2460
 msgid "Specified services are not enabled or defined."
-msgstr "Podane repozytoria nie są włączone lub zdefiniowane."
+msgstr "Zadané služby sú buď vypnuté alebo nie sú definované."
 
 #: ../src/repos.cc:2462
 msgid "There are no enabled services defined."
-msgstr "Brak zdefiniowanych repozytoriów, które są włączone."
+msgstr "Nie sú definované žiadne zapnuté služby."
 
 #: ../src/repos.cc:2466
 msgid "Could not refresh the services because of errors."
-msgstr "Nie można odświeżyć repozytoriów z powodu błędów."
+msgstr "Nepodarilo sa aktualizovať zadané služby kvôli chybám."
 
 #: ../src/repos.cc:2472
 msgid "Some of the services have not been refreshed because of an error."
-msgstr "Część repozytoriów nie została odświeżona z powodu błędu."
+msgstr "Niektoré služby neboli aktualizované kvôli chybe."
 
 #: ../src/repos.cc:2477
 msgid "Specified services have been refreshed."
-msgstr "Odświeżono podane repozytoria."
+msgstr "Zadané služby boli úspešne aktualizované."
 
 #: ../src/repos.cc:2479
 msgid "All services have been refreshed."
-msgstr "Odświeżono wszystkie repozytoria."
+msgstr "Všetky služby boli úspešne aktualizované."
 
 #: ../src/repos.cc:2601
 #, c-format
 msgid "Service '%s' has been sucessfully enabled."
-msgstr "Uaktywniono repozytorium '%s'."
+msgstr "Služba '%s' bola úspešne zapnutá."
 
 #: ../src/repos.cc:2604
 #, c-format
 msgid "Service '%s' has been sucessfully disabled."
-msgstr "Zablokowano repozytorium '%s'."
+msgstr "Služba '%s' bola úspešne vypnutá."
 
 #: ../src/repos.cc:2611
 #, c-format
 msgid "Autorefresh has been enabled for service '%s'."
-msgstr "Włączono autoodświeżanie repozytorium '%s'."
+msgstr "Samoaktualizácia služby '%s' bola zapnutá."
 
 #: ../src/repos.cc:2614
 #, c-format
 msgid "Autorefresh has been disabled for service '%s'."
-msgstr "Wyłączono automatyczne odświeżanie repozytorium '%s'."
+msgstr "Samoaktualizácia služby '%s' bola vypnutá."
 
 #: ../src/repos.cc:2620
 #, c-format
 msgid "Name of service '%s' has been set to '%s'."
-msgstr "Nazwa repozytorium '%s' to '%s'."
+msgstr "Názov služby '%s' bol nastavený na '%s'."
 
 #: ../src/repos.cc:2626
 #, c-format
 msgid "Repository '%s' has been added to enabled repositories of service '%s'"
 msgid_plural "Repositories '%s' have been added to enabled repositories of service '%s'"
-msgstr[0] "Repozytorium '%s' zostało dodane do włączonych repozytoriów na '%s'"
-msgstr[1] "Repozytoria '%s' zostały dodane do włączonych repozytoriów na '%s'"
-msgstr[2] "Repozytoria '%s' zostały dodane do włączonych repozytoriów na '%s'"
+msgstr[0] "Repozitár '%s' bol pridaný medzi zapnuté repozitáre služby '%s'."
+msgstr[1] "Repozitáre '%s' boli pridané medzi zapnuté repozitáre služby '%s'."
+msgstr[2] "Repozitáre '%s' boli pridané medzi zapnuté repozitáre služby '%s'."
 
 #: ../src/repos.cc:2634
 #, c-format
 msgid "Repository '%s' has been added to disabled repositories of service '%s'"
 msgid_plural "Repositories '%s' have been added to disabled repositories of service '%s'"
-msgstr[0] "Repozytorium '%s' zostało dodane do wyłączonych repozytoriów na '%s'"
-msgstr[1] "Repozytoria '%s' zostały dodane do wyłączonych repozytoriów na '%s'"
-msgstr[2] "Repozytoria '%s' zostały dodane do wyłączonych repozytoriów na '%s'"
+msgstr[0] "Repozitár '%s' bol pridaný medzi vypnuté repozitáre služby '%s'."
+msgstr[1] "Repozitáre '%s' boli pridané medzi vypnuté repozitáre služby '%s'."
+msgstr[2] "Repozitáre '%s' boli pridané medzi vypnuté repozitáre služby '%s'."
 
 #: ../src/repos.cc:2642
 #, c-format
 msgid "Repository '%s' has been removed from enabled repositories of service '%s'"
 msgid_plural "Repositories '%s' have been removed from enabled repositories of service '%s'"
-msgstr[0] "Repozytorium '%s' zostało usunięte z włączonych repozytoriów na '%s'"
-msgstr[1] "Repozytoria '%s' zostały usunięte z włączonych repozytoriów na '%s'"
-msgstr[2] "Repozytoria '%s' zostały usunięte z włączonych repozytoriów na '%s'"
+msgstr[0] "Repozitár '%s' bol ostránený z množiny zapnutých repozitárov služby '%s'."
+msgstr[1] "Repozitáre '%s' boli ostránené z množiny zapnutých repozitárov služby '%s'."
+msgstr[2] "Repozitáre '%s' boli ostránené z množiny zapnutých repozitárov služby '%s'."
 
 #: ../src/repos.cc:2650
 #, c-format
 msgid "Repository '%s' has been removed from disabled repositories of service '%s'"
 msgid_plural "Repositories '%s' have been removed from disabled repositories of service '%s'"
-msgstr[0] "Repozytorium '%s' zostało usunięte z wyłączonych repozytoriów na '%s'"
-msgstr[1] "Repozytoria '%s' zostały usunięte z wyłączonych repozytoriów na '%s'"
-msgstr[2] "Repozytoria '%s' zostały usunięte z wyłączonych repozytoriów na '%s'"
+msgstr[0] "Repozitár '%s' bol ostránený z množiny vypnutých repozitárov služby '%s'."
+msgstr[1] "Repozitáre '%s' boli ostránené z množiny vypnutých repozitárov služby '%s'."
+msgstr[2] "Repozitáre '%s' boli ostránené z množiny vypnutých repozitárov služby '%s'."
 
 #: ../src/repos.cc:2659
 #, c-format
 msgid "Nothing to change for service '%s'."
-msgstr "Brak zmian dla repozytorium '%s'."
+msgstr "Na službe '%s' nie je potrebné nič meniť."
 
 #: ../src/repos.cc:2666
 msgid "Error while modifying the service:"
-msgstr "Wystąpił błąd podczas modyfikacji repozytorium:"
+msgstr "Chyba pri zmene služby:"
 
 #: ../src/repos.cc:2667
 #, c-format
 msgid "Leaving service %s unchanged."
-msgstr "Nie zmieniono repozytorium %s."
+msgstr "Ponechávam službu '%s' v nezmenenom stave."
 
 #: ../src/repos.cc:2774
 msgid "Loading repository data..."
-msgstr "Pobieranie danych repozytorium..."
+msgstr "Načítavam údaje repozitárov..."
 
 #: ../src/repos.cc:2792
 #, c-format
 msgid "Retrieving repository '%s' data..."
-msgstr "Pobieranie danych repozytorium \"%s\"..."
+msgstr "Načítavam údaje repozitára '%s'..."
 
 #: ../src/repos.cc:2799
 #, c-format
 msgid "Repository '%s' not cached. Caching..."
-msgstr "Brak pamięci podręcznej dla repozytorium \"%s\". Tworzenie..."
+msgstr "Repozitár '%s' nemá vytvorenú medzipamäť. Vytváram..."
 
 #: ../src/repos.cc:2806 ../src/repos.cc:2834
 #, c-format
 msgid "Problem loading data from '%s'"
-msgstr "Problem przy wczytywaniu danych z \"%s\""
+msgstr "Problém pri sťahovaní údajov z '%s'"
 
 #: ../src/repos.cc:2807 ../src/repos.cc:2840
 #, c-format
 msgid "Resolvables from '%s' not loaded because of error."
-msgstr "Pakiety z \"%s\" nie zostały wczytane z powodu błędu."
+msgstr "Balíky z repozitára '%s' neboli kvôli chybe načítané."
 
 #: ../src/repos.cc:2823
 #, c-format
 msgid "Repository '%s' appears to outdated. Consider using a different mirror or server."
-msgstr "Repozytorium '%s' może być przestarzałe. Zaleca się użycie innego repozytorium lub serwera lustrzanego."
+msgstr "Repozitár '%s' je pravdepodobne neaktuálny. Zvážte použitie iného zrkadla alebo servra."
 
 #. translators: the first %s is 'zypper refresh' and the second 'zypper clean -m'
 #: ../src/repos.cc:2836
 #, c-format
 msgid "Try '%s', or even '%s' before doing so."
-msgstr "Nalezy użyć '%s' lub nawet '%s' przed wykonaniem czynności."
+msgstr "Vyskúšajte '%s' alebo dokonca '%s' než tak urobíte."
 
 #: ../src/repos.cc:2849
 msgid "Reading installed packages..."
-msgstr "Odczyt zainstalowanych pakietów..."
+msgstr "Načítavam nainštalované balíky..."
 
 #: ../src/repos.cc:2860
 msgid "Problem occured while reading the installed packages:"
-msgstr "Wystąpił błąd podczas pobierania danych z zainstalowanych pakietów."
+msgstr "Chyba pri načítavaní nainštalovaných balíkov:"
 
 #. list name, exact match
 #: ../src/repos.cc:2875
@@ -1455,14 +1464,14 @@ msgid ""
 "WARNING: this command will not synchronize changes.\n"
 "Use rug or yast2 for that."
 msgstr ""
-"Usługa ZENworks Management Daemon jest uruchomiona.\n"
-"UWAGA: to polecenie nie zsynchronizuje zmian.\n"
-"Należy użyć rug lub yast2."
+"Bola zistená prítomnosť ZMD (ZENworks Management Daemon).\n"
+"POZOR: tento príkaz nesynchronizuje zmeny so ZENworks.\n"
+"Pre tento účel použite rug alebo yast2."
 
 #. translators: Bundle is a term used in rug. See rug for how to translate it.
 #: ../src/search.cc:42 ../src/search.cc:444 ../src/update.cc:402
 msgid "Bundle"
-msgstr "Zestaw"
+msgstr "Bundle"
 
 #. translators: package version (header)
 #. best_effort does not know version or arch yet
@@ -1470,7 +1479,7 @@ msgstr "Zestaw"
 #: ../src/search.cc:386 ../src/search.cc:447 ../src/search.cc:535
 #: ../src/update.cc:152 ../src/update.cc:407
 msgid "Version"
-msgstr "Wersja"
+msgstr "Verzia"
 
 #. translators: package architecture (header)
 #: ../src/search.cc:48 ../src/search.cc:62 ../src/search.cc:447
@@ -1480,60 +1489,60 @@ msgstr "Arch"
 
 #: ../src/search.cc:178 ../src/search.cc:192
 msgid "System Packages"
-msgstr "Pakiety systemowe"
+msgstr "Balíky v systéme"
 
 #. translators: package summary (header)
 #: ../src/search.cc:217
 msgid "Summary"
-msgstr "Podsumowanie"
+msgstr "Súhrn"
 
 #: ../src/search.cc:347
 msgid "No needed patches found."
-msgstr "Nie znaleziono potrzebnych poprawek."
+msgstr "Neboli nájdené žiadne potrebné záplaty."
 
 #: ../src/search.cc:419
 msgid "No patterns found."
-msgstr "Nie znaleziono wzorców."
+msgstr "Neboli nájdené žiadne paterny."
 
 #: ../src/search.cc:497 ../src/Zypper.cc:3301
 msgid "No packages found."
-msgstr "Nie znaleziono pakietów."
+msgstr "Neboli nájdené žiadne balíky."
 
 #: ../src/search.cc:574
 msgid "No products found."
-msgstr "Nie znaleziono produktów."
+msgstr "Neboli nájdené žiadne produkty."
 
 #: ../src/search.cc:597
 #, c-format
 msgid "No providers of '%s' found."
-msgstr "Brak dostawców '%s'."
+msgstr "Neboli nájdené žiadne balíky poskytujúce '%s'."
 
 #. translators: meaning 'dependency problem' found during solving
 #: ../src/solve-commit.cc:44
 msgid "Problem: "
-msgstr "Problem:"
+msgstr "Problém: "
 
 #. TranslatorExplanation %d is the solution number
 #: ../src/solve-commit.cc:57
 #, c-format
 msgid " Solution %d: "
-msgstr " Rozwiązanie %d: "
+msgstr " Riešenie %d: "
 
 #: ../src/solve-commit.cc:76
 msgid "Choose the above solution using '1' or skip, retry or cancel"
 msgid_plural "Choose from above solutions by number or skip, retry or cancel"
-msgstr[0] "Należy wybrać '1' by użyć powyższego rozwiązania lub można pominąć, spróbować ponownie lub przerwać"
-msgstr[1] "Należy wybrać '1' by użyć powyższych rozwiązań lub można pominąć, spróbować ponownie lub przerwać"
-msgstr[2] "Należy wybrać '1' by użyć powyższych rozwiązań lub można pominąć, spróbować ponownie lub przerwać\t"
+msgstr[0] "Zvoľte horeuvedené riešenie pomocou '1' alebo zvoľte preskočiť, znova alebo ukončiť"
+msgstr[1] "Zvoľte riešenie pomocou čísla, alebo zvoľte preskočiť, znova alebo ukončiť"
+msgstr[2] "Zvoľte riešenie pomocou čísla, alebo zvoľte preskočiť, znova alebo ukončiť"
 
 #. translators: translate 'c' to whatever you translated the 'c' in
 #. "c" and "s/r/c" strings
 #: ../src/solve-commit.cc:83
 msgid "Choose the above solution using '1' or cancel using 'c'"
 msgid_plural "Choose from above solutions by number or cancel"
-msgstr[0] "Należy  wybrać powyższe rozwiązanie wybierając '1' lub przerwać wybierając 'c'"
-msgstr[1] "Należy  wybrać powyższe rozwiązania wybierając '1' lub przerwać wybierając 'c'"
-msgstr[2] "Należy  wybrać powyższe rozwiązania wybierając '1' lub przerwać wybierając 'c'"
+msgstr[0] "Zvoľte horeuvedené riešenie pomocou '1' alebo zvoľte ukončiť pomocou 'k'."
+msgstr[1] "Zvoľte riešenie pomocou čísla, alebo zvoľte ukončiť pomocou 'k'"
+msgstr[2] "Zvoľte riešenie pomocou čísla, alebo zvoľte ukončiť pomocou 'k'"
 
 #. translators: answers for dependency problem solution input prompt:
 #. "Choose from above solutions by number or skip, retry or cancel"
@@ -1543,7 +1552,7 @@ msgstr[2] "Należy  wybrać powyższe rozwiązania wybierając '1' lub przerwać
 #. The answers should be lower case letters.
 #: ../src/solve-commit.cc:102
 msgid "s/r/c"
-msgstr "po/pn/a"
+msgstr "p/z/k"
 
 #. translators: answers for dependency problem solution input prompt:
 #. "Choose from above solutions by number or cancel"
@@ -1554,321 +1563,321 @@ msgstr "po/pn/a"
 #. please report a bug against zypper at bugzilla.novell.com, we'll try to solve it.
 #: ../src/solve-commit.cc:114
 msgid "c"
-msgstr "a"
+msgstr "k"
 
 #. continue with next problem
 #: ../src/solve-commit.cc:134
 #, c-format
 msgid "Applying solution %s"
-msgstr "Zastosowanie rozwiązania %s"
+msgstr "Aplikujem riešenie %s"
 
 #: ../src/solve-commit.cc:158
 #, c-format
 msgid "%d Problem:"
 msgid_plural "%d Problems:"
-msgstr[0] "Problem z %d:"
-msgstr[1] "Problemy z %d:"
-msgstr[2] "Problemy z %d:"
+msgstr[0] "%d problém:"
+msgstr[1] "%d problémy:"
+msgstr[2] "%d problémov:"
 
 #. should not happen! If solve() failed at least one problem must be set!
 #: ../src/solve-commit.cc:162
 msgid "Specified capability not found"
-msgstr "Nie znaleziono podanej właściwości"
+msgstr "Nebola nájdená zadaná vlastnosť."
 
 #: ../src/solve-commit.cc:173
 #, c-format
 msgid "Problem: %s"
-msgstr "Problem: %s"
+msgstr "Problém: %s"
 
 #: ../src/solve-commit.cc:188
 msgid "Resolving dependencies..."
-msgstr "Rozwiązywanie zależności..."
+msgstr "Riešim závislosti..."
 
 #: ../src/solve-commit.cc:369
 msgid "The following package is going to be upgraded:"
 msgid_plural "The following packages are going to be upgraded:"
-msgstr[0] "Zaktualizowany zostanie następujący pakiet:"
-msgstr[1] "Zaktualizowane zostaną następujące pakiety:"
-msgstr[2] "Zaktualizowane zostaną następujące pakiety:"
+msgstr[0] "Bude nainštalovaná vyššia verzia nasledujúceho balíka:"
+msgstr[1] "Budú nainštalované vyššie verzie nasledujúcich balíkov:"
+msgstr[2] "Budú nainštalované vyššie verzie nasledujúcich balíkov:"
 
 #: ../src/solve-commit.cc:374
 msgid "The following patch is going to be upgraded:"
 msgid_plural "The following patches are going to be upgraded:"
-msgstr[0] "Zaktualizowana zostanie następująca poprawka:"
-msgstr[1] "Zaktualizowane zostaną następujące poprawki:"
-msgstr[2] "Zaktualizowane zostaną następujące poprawki:"
+msgstr[0] "Bude nainštalovaná vyššia verzia nasledujúcej záplaty:"
+msgstr[1] "Budú nainštalované vyššie verzie nasledujúcich záplat:"
+msgstr[2] "Budú nainštalované vyššie verzie nasledujúcich záplat:"
 
 #: ../src/solve-commit.cc:379
 msgid "The following pattern is going to be upgraded:"
 msgid_plural "The following patterns are going to be upgraded:"
-msgstr[0] "Zaktualizowany zostanie następujący wzorzec:"
-msgstr[1] "Zaktualizowany zostanie następujący wzorzec:"
-msgstr[2] "Zaktualizowane zostaną następujące wzorce:"
+msgstr[0] "Bude nainštalovaná vyššia verzia nasledujúceho paternu:"
+msgstr[1] "Budú nainštalované vyššie verzie nasledujúcich paternov:"
+msgstr[2] "Budú nainštalované vyššie verzie nasledujúcich paternov:"
 
 #: ../src/solve-commit.cc:384
 msgid "The following product is going to be upgraded:"
 msgid_plural "The following products are going to be upgraded:"
-msgstr[0] "Zaktualizowany zostanie następujący produkt:"
-msgstr[1] "Zaktualizowane zostaną następujące produkty::"
-msgstr[2] "Zaktualizowane zostaną następujące produkty:"
+msgstr[0] "Bude nainštalovaná vyššia verzia nasledujúceho produktu:"
+msgstr[1] "Budú nainštalované vyššie verzie nasledujúcich produktov:"
+msgstr[2] "Budú nainštalované vyššie verzie nasledujúcich produktov:"
 
 #: ../src/solve-commit.cc:391
 msgid "The following package is going to be downgraded:"
 msgid_plural "The following packages are going to be downgraded:"
-msgstr[0] "Następujący pakiet zostanie przywrócone do wcześniejszej wersji:"
-msgstr[1] "Następujące pakiety zostaną przywrócone do wcześniejszej wersji:"
-msgstr[2] "Następujące pakiety zostaną przywrócone do wcześniejszej wersji:"
+msgstr[0] "Bude nainštalovaná nižšia verzia nasledujúceho balíka:"
+msgstr[1] "Budú nainštalované nižšie verzie nasledujúcich balíkov:"
+msgstr[2] "Budú nainštalované nižšie verzie nasledujúcich balíkov:"
 
 #: ../src/solve-commit.cc:396
 msgid "The following patch is going to be downgraded:"
 msgid_plural "The following patches are going to be downgraded:"
-msgstr[0] "Następujące uaktualnienie zostanie przywrócone do wcześniejszej wersji:"
-msgstr[1] "Następujące uaktualnienia zostaną przywrócone do wcześniejszej wersji:"
-msgstr[2] "Następujące uaktualnienia zostaną przywrócone do wcześniejszej wersji:"
+msgstr[0] "Bude nainštalovaná nižšia verzia nasledujúcej záplaty:"
+msgstr[1] "Budú nainštalované nižšie verzie nasledujúcich záplat:"
+msgstr[2] "Budú nainštalované nižšie verzie nasledujúcich záplat:"
 
 #: ../src/solve-commit.cc:401
 msgid "The following pattern is going to be downgraded:"
 msgid_plural "The following patterns are going to be downgraded:"
-msgstr[0] "Następujący %s zostanie przywrócone do wcześniejszej wersji:"
-msgstr[1] "Następujące %s zostaną przywrócone do wcześniejszej wersji:"
-msgstr[2] "Następujące uaktualnienie zostaną przywrócone do wcześniejszej wersji:"
+msgstr[0] "Bude nainštalovaná nižšia verzia nasledujúceho paternu:"
+msgstr[1] "Budú nainštalované nižšie verzie nasledujúcich paternov:"
+msgstr[2] "Budú nainštalované nižšie verzie nasledujúcich paternov:"
 
 #: ../src/solve-commit.cc:406
 msgid "The following product is going to be downgraded:"
 msgid_plural "The following products are going to be downgraded:"
-msgstr[0] "Następujący produkt zostanie przywrócone do wcześniejszej wersji:"
-msgstr[1] "Następujące produkty zostaną przywrócone do wcześniejszej wersji:"
-msgstr[2] "Następujące produkty zostaną przywrócone do wcześniejszej wersji:"
+msgstr[0] "Bude nainštalovaná nižšia verzia nasledujúceho produktu:"
+msgstr[1] "Budú nainštalované nižšie verzie nasledujúcich produktov:"
+msgstr[2] "Budú nainštalované nižšie verzie nasledujúcich produktov:"
 
 #: ../src/solve-commit.cc:413
 msgid "The following NEW package is going to be installed:"
 msgid_plural "The following NEW packages are going to be installed:"
-msgstr[0] "Nowy pakiet zostanie zainstalowany:"
-msgstr[1] "Nowe pakiety zostaną zainstalowane:"
-msgstr[2] "Nowe pakiety zostaną zainstalowane:"
+msgstr[0] "Bude nainštalovaný nasledujúci NOVÝ balík:"
+msgstr[1] "Budú nainštalované nasledujúce NOVÉ balíky:"
+msgstr[2] "Budú nainštalované nasledujúce NOVÉ balíky:"
 
 #: ../src/solve-commit.cc:418
 msgid "The following NEW patch is going to be installed:"
 msgid_plural "The following NEW patches are going to be installed:"
-msgstr[0] "Nowy uaktualnienie zostanie zainstalowany:"
-msgstr[1] "Nowe uaktualnienie zostaną zainstalowane:"
-msgstr[2] "Nowe uaktualnienia zostaną zainstalowane:"
+msgstr[0] "Bude nainštalovaná nasledujúca NOVÁ záplata:"
+msgstr[1] "Budú nainštalované nasledujúce NOVÉ záplaty:"
+msgstr[2] "Budú nainštalované nasledujúce NOVÉ záplaty:"
 
 #: ../src/solve-commit.cc:423
 msgid "The following NEW pattern is going to be installed:"
 msgid_plural "The following NEW patterns are going to be installed:"
-msgstr[0] "Nowy wzorzec zostanie zainstalowany:"
-msgstr[1] "Nowe wzorce zostaną zainstalowane:"
-msgstr[2] "Nowe wzorce zostaną zainstalowane:"
+msgstr[0] "Bude nainštalovaný nasledujúci NOVÝ patern:"
+msgstr[1] "Budú nainštalované nasledujúce NOVÉ paterny:"
+msgstr[2] "Budú nainštalované nasledujúce NOVÉ paterny:"
 
 #: ../src/solve-commit.cc:428
 msgid "The following NEW product is going to be installed:"
 msgid_plural "The following NEW products are going to be installed:"
-msgstr[0] "Nowy produkt zostanie zainstalowany:"
-msgstr[1] "Nowe produkty zostaną zainstalowane:"
-msgstr[2] "Noweprodukty zostaną zainstalowane:"
+msgstr[0] "Bude nainštalovaný nasledujúci NOVÝ produkt:"
+msgstr[1] "Budú nainštalované nasledujúce NOVÉ produkty:"
+msgstr[2] "Budú nainštalované nasledujúce NOVÉ produkty:"
 
 #: ../src/solve-commit.cc:433
 msgid "The following source package is going to be installed:"
 msgid_plural "The following source packages are going to be installed:"
-msgstr[0] "Następujący pakiet źródłowy zostanie zainstalowany:"
-msgstr[1] "Następujące pakiety źródłowe zostaną zainstalowane:"
-msgstr[2] "Następujące pakiety źródłowe zostaną zainstalowane:"
+msgstr[0] "Bude nainštalovaný nasledujúci NOVÝ zdrojový balík:"
+msgstr[1] "Budú nainštalované nasledujúce NOVÉ zdrojové balíky:"
+msgstr[2] "Budú nainštalované nasledujúce NOVÉ zdrojové balíky:"
 
 #: ../src/solve-commit.cc:440
 msgid "The following package is going to be reinstalled:"
 msgid_plural "The following packages are going to be reinstalled:"
-msgstr[0] "Następujący pakiet zostanie zainstalowane ponownie:"
-msgstr[1] "Następujące pakiety zostaną zainstalowane ponownie:"
-msgstr[2] "Następujące pakiety zostaną zainstalowane ponownie:"
+msgstr[0] "Nasledujúci balík bude preinštalovaný:"
+msgstr[1] "Nasledujúce balíky budú preinštalované:"
+msgstr[2] "Nasledujúce balíky budú preinštalované:"
 
 #: ../src/solve-commit.cc:445
 msgid "The following patch is going to be reinstalled:"
 msgid_plural "The following patches are going to be reinstalled:"
-msgstr[0] "Następująca aktualizacja zostanie zainstalowana ponownie:"
-msgstr[1] "Następujące aktualizacje zostaną zainstalowane ponownie:"
-msgstr[2] "Następujące aktualizacje zostaną zainstalowane ponownie:"
+msgstr[0] "Nasledujúca záplata bude preinštalovaná:"
+msgstr[1] "Nasledujúce záplaty budú preinštalované:"
+msgstr[2] "Nasledujúce záplaty budú preinštalované:"
 
 #: ../src/solve-commit.cc:450
 msgid "The following pattern is going to be reinstalled:"
 msgid_plural "The following patterns are going to be reinstalled:"
-msgstr[0] "Następujący wzorzec zostanie zainstalowany ponownie:"
-msgstr[1] "Następujące wzorce zostaną zainstalowane ponownie:"
-msgstr[2] "Następujące wzorce zostaną zainstalowane ponownie:"
+msgstr[0] "Nasledujúci patern bude preinštalovaný:"
+msgstr[1] "Nasledujúce paterny budú preinštalované:"
+msgstr[2] "Nasledujúce paterny budú preinštalované:"
 
 #: ../src/solve-commit.cc:455
 msgid "The following product is going to be reinstalled:"
 msgid_plural "The following products are going to be reinstalled:"
-msgstr[0] "Następujący produkt zostanie zainstalowany ponownie:"
-msgstr[1] "Następujące produkty zostaną zainstalowane ponownie:"
-msgstr[2] "Następujące produkty zostaną zainstalowane ponownie:"
+msgstr[0] "Nasledujúci produkt bude preinštalovaný:"
+msgstr[1] "Nasledujúce produkty budú preinštalované:"
+msgstr[2] "Nasledujúce produkty budú preinštalované:"
 
 #: ../src/solve-commit.cc:462
 msgid "The following package is going to be REMOVED:"
 msgid_plural "The following packages are going to be REMOVED:"
-msgstr[0] "Usunięty zostanie następujący pakiet:"
-msgstr[1] "Usunięte zostaną następujące pakiety:"
-msgstr[2] "Usunięte zostaną następujące pakiety:"
+msgstr[0] "Bude odstránený nasledujúci balík:"
+msgstr[1] "Budú odstránené nasledujúce balíky:"
+msgstr[2] "Budú odstránené nasledujúce balíky:"
 
 #: ../src/solve-commit.cc:467
 msgid "The following patch is going to be REMOVED:"
 msgid_plural "The following patches are going to be REMOVED:"
-msgstr[0] "Usunięta zostanie następująca aktualizacja:"
-msgstr[1] "Usunięte zostaną następujące aktualizacje:"
-msgstr[2] "Usunięte zostaną następujące aktualizacje:"
+msgstr[0] "Bude odstránená nasledujúca záplata:"
+msgstr[1] "Budú odstránené nasledujúce záplaty:"
+msgstr[2] "Budú odstránené nasledujúce záplaty:"
 
 #: ../src/solve-commit.cc:472
 msgid "The following pattern is going to be REMOVED:"
 msgid_plural "The following patterns are going to be REMOVED:"
-msgstr[0] "Usunięty zostanie następujący wzorzec:"
-msgstr[1] "Usunięte zostaną następujące wzorce:"
-msgstr[2] "Usunięte zostaną następujące wzorce:"
+msgstr[0] "Bude odstránený nasledujúci patern:"
+msgstr[1] "Budú odstránené nasledujúce paterny:"
+msgstr[2] "Budú odstránené nasledujúce paterny:"
 
 #: ../src/solve-commit.cc:477
 msgid "The following product is going to be REMOVED:"
 msgid_plural "The following products are going to be REMOVED:"
-msgstr[0] "Następujący produkt zostanie usunięty:"
-msgstr[1] "Następujące produkty zostaną usunięte:"
-msgstr[2] "Następujące produkty zostaną usunięte:"
+msgstr[0] "Bude odstránený nasledujúci produkt:"
+msgstr[1] "Budú odstránené nasledujúce produkty:"
+msgstr[2] "Budú odstránené nasledujúce produkty:"
 
 #: ../src/solve-commit.cc:484
 msgid "The following package is going to change architecture:"
 msgid_plural "The following packages are going to change architecture:"
-msgstr[0] "Zostanie zmieniona architektura następującego pakietu:"
-msgstr[1] "Zostanie zmieniona architektura następujących pakietów:"
-msgstr[2] "Zostanie zmieniona architektura następujących pakietów:"
+msgstr[0] "Nasledujúci balík zmení architektúru:"
+msgstr[1] "Nasledujúce balíky zmenia architektúru:"
+msgstr[2] "Nasledujúce balíky zmenia architektúru:"
 
 #: ../src/solve-commit.cc:489
 msgid "The following patch is going to change architecture:"
 msgid_plural "The following patches are going to change architecture:"
-msgstr[0] "Zostanie zmieniona architektura następującej aktualizacji:"
-msgstr[1] "Zostanie zmieniona architektura następujących aktualizacji:"
-msgstr[2] "Zostanie zmieniona architektura następujących aktualizacji:"
+msgstr[0] "Nasledujúca záplata zmení architektúru:"
+msgstr[1] "Nasledujúce záplaty zmenia architektúru:"
+msgstr[2] "Nasledujúce záplaty zmenia architektúru:"
 
 #: ../src/solve-commit.cc:494
 msgid "The following pattern is going to change architecture:"
 msgid_plural "The following patterns are going to change architecture:"
-msgstr[0] "Zostanie zmieniona architektura jącego wzorca:"
-msgstr[1] "Zostanie zmieniona architektura jących wzorców:"
-msgstr[2] "Zostanie zmieniona architektura jących wzorców:"
+msgstr[0] "Nasledujúci patern zmení architektúru:"
+msgstr[1] "Nasledujúce paterny zmenia architektúru:"
+msgstr[2] "Nasledujúce paterny zmenia architektúru:"
 
 #: ../src/solve-commit.cc:499
 msgid "The following product is going to change architecture:"
 msgid_plural "The following products are going to change architecture:"
-msgstr[0] "Zostanie zmieniona architektura jącego produktu:"
-msgstr[1] "Zostanie zmieniona architektura jących produktów:"
-msgstr[2] "Zostanie zmieniona architektura jących produktów:"
+msgstr[0] "Nasledujúci produkt zmení architektúru:"
+msgstr[1] "Nasledujúce produkty zmenia architektúru:"
+msgstr[2] "Nasledujúce produkty zmenia architektúru:"
 
 #: ../src/solve-commit.cc:506
 msgid "The following package is going to change vendor:"
 msgid_plural "The following packages are going to change vendor:"
-msgstr[0] "Zostanie zmieniony dostawca następującego pakietu:"
-msgstr[1] "Zostanie zmieniony dostawca następujących pakietów:"
-msgstr[2] "Zostanie zmieniony dostawca następujących pakietów:"
+msgstr[0] "Nasledujúci balík zmení dodávateľa:"
+msgstr[1] "Nasledujúce balíky zmenia dodávateľa:"
+msgstr[2] "Nasledujúce balíky zmenia dodávateľa:"
 
 #: ../src/solve-commit.cc:511
 msgid "The following patch is going to change vendor:"
 msgid_plural "The following patches are going to change vendor:"
-msgstr[0] "Zostanie zmieniony dostawca następujących uaktualnienia:"
-msgstr[1] "Zostanie zmieniony dostawca następujących uaktualnień:"
-msgstr[2] "Zostanie zmieniony dostawca następujących uaktualnień:"
+msgstr[0] "Nasledujúca záplata zmení dodávateľa:"
+msgstr[1] "Nasledujúce záplaty zmenia dodávateľa:"
+msgstr[2] "Nasledujúce záplaty zmenia dodávateľa:"
 
 #: ../src/solve-commit.cc:516
 msgid "The following pattern is going to change vendor:"
 msgid_plural "The following patterns are going to change vendor:"
-msgstr[0] "Zostanie zmieniony dostawca następującego wzorca:"
-msgstr[1] "Zostanie zmieniony dostawca następujących wzorców:"
-msgstr[2] "Zostanie zmieniony dostawca następujących wzorców:"
+msgstr[0] "Nasledujúci patern zmení dodávateľa:"
+msgstr[1] "Nasledujúce paterny zmenia dodávateľa:"
+msgstr[2] "Nasledujúce paterny zmenia dodávateľa:"
 
 #: ../src/solve-commit.cc:521
 msgid "The following product is going to change vendor:"
 msgid_plural "The following products are going to change vendor:"
-msgstr[0] "Zostanie zmieniony dostawca następującego produktu:"
-msgstr[1] "Zostanie zmieniony dostawca następujących produktów:"
-msgstr[2] "Zostanie zmieniony dostawca następujących produktów:"
+msgstr[0] "Nasledujúci produkt zmení dodávateľa:"
+msgstr[1] "Nasledujúce produkty zmenia dodávateľa:"
+msgstr[2] "Nasledujúce produkty zmenia dodávateľa:"
 
 #: ../src/solve-commit.cc:529
 msgid "The following package is not supported by its vendor:"
 msgid_plural "The following packages are not supported by their vendor:"
-msgstr[0] "Ten pakiet nie jest wspierany przez jego dostawcę:"
-msgstr[1] "Te pakiety nie są wspierane przez ich dostawcę:"
-msgstr[2] "Te pakiety nie są wspierane przez ich dostawcę:"
+msgstr[0] "Nasledujúci balík už nie je podporovaný dodávateľom:"
+msgstr[1] "Nasledujúce balíky už nie sú podporované dodávateľom:"
+msgstr[2] "Nasledujúce balíky už nie sú podporované dodávateľom:"
 
 #: ../src/solve-commit.cc:603
 msgid "Dependencies of all installed packages are satisfied."
-msgstr "Brak konfliktów zależności."
+msgstr "Závislosti všetkých balíkov sú v poriadku."
 
 #: ../src/solve-commit.cc:605
 msgid "Nothing to do."
-msgstr "Brak zadań."
+msgstr "Nie je čo vykonať."
 
 #: ../src/solve-commit.cc:610
 msgid "Some of the dependencies of installed packages are broken. In order to fix these dependencies, the following actions need to be taken:"
-msgstr "Niektóre z zależności nie zostały spełnione. Należy wykonać następujące polecenia, by je naprawić:"
+msgstr "Závislosti niektorých balíkov sú porušené. Pre ich opravu sú potrebné nasledujúce operácie:"
 
 #: ../src/solve-commit.cc:764
 #, c-format
 msgid "Overall download size: %s."
-msgstr "Całkowity rozmiar danych do pobrania: %s"
+msgstr "Celkový objem dát na stiahnutie: %s."
 
 #. TrasnlatorExplanation %s will be substituted by a byte count e.g. 212 K
 #: ../src/solve-commit.cc:769
 #, c-format
 msgid "After the operation, additional %s will be used."
-msgstr "Po wykonaniu operacji użyte zostanie dodatkowo %s."
+msgstr "Po tejto operácii bude obsadených ďalších %s."
 
 #: ../src/solve-commit.cc:772
 msgid "No additional space will be used or freed after the operation."
-msgstr "Po operacji nie będzie użyta lub uwolniona dodatkowa ptrzestrzeń na dysku."
+msgstr "Miesto obsadené balíkmi sa po tejto operácii nezmení."
 
 #. TrasnlatorExplanation %s will be substituted by a byte count e.g. 212 K
 #: ../src/solve-commit.cc:779
 #, c-format
 msgid "After the operation, %s will be freed."
-msgstr "Po wykonaniu operacji zwolnione zostanie %s."
+msgstr "Po tejto operácii sa uvoľní %s."
 
 #. translators: meaning --force-resolution and --no-force-resolution
 #: ../src/solve-commit.cc:829
 #, c-format
 msgid "%s conflicts with %s, will use the less aggressive %s"
-msgstr "%s konfliktuje z %s, zostanie użyta mniej agresywna %s"
+msgstr "Voľba %s protirečí voľbe %s, použijem menej agresívnu %s"
 
 #: ../src/solve-commit.cc:855
 msgid "Force resolution:"
-msgstr "Wymuszenie rozdzielczości:"
+msgstr "Vynucovať riešenie:"
 
 #: ../src/solve-commit.cc:911
 msgid "Verifying dependencies..."
-msgstr "Sprawdzanie zależności..."
+msgstr "Overujem závislosti..."
 
 #: ../src/solve-commit.cc:920
 msgid "Computing upgrade..."
-msgstr "Szacowanie uaktualnienia..."
+msgstr "Vypočítavam aktualizáciu..."
 
 #: ../src/solve-commit.cc:931
 msgid "Generating solver test case..."
-msgstr "Tworzenie testu dla mechanizmu zarządzania pakietami..."
+msgstr "Generujem testovací prípad pre riešiteľa závislostí..."
 
 #: ../src/solve-commit.cc:934
 #, c-format
 msgid "Solver test case generated successfully at %s."
-msgstr "Test mechanizmu rozwiązywania zależności został poprawnie wygenerowany dla %s."
+msgstr "Testovací prípad pre riešiteľa závislostí bol úspešne vygenerovaný v %s."
 
 #: ../src/solve-commit.cc:938
 msgid "Error creating the solver test case."
-msgstr "Błąd podczas tworzenia testu dla mechanizmu zarządzania pakietami."
+msgstr "Chyba pri vytváraní testovacieho prípadu pre riešiteľa závislostí."
 
 #: ../src/solve-commit.cc:977
 msgid "Computing distribution upgrade..."
-msgstr "Szacowanie uaktualnienia..."
+msgstr "Vypočítavam aktualizáciu distribúcie..."
 
 #: ../src/solve-commit.cc:983
 msgid "Resolving package dependencies..."
-msgstr "Rozwiązywanie zależności..."
+msgstr "Riešim závislosti balíkov..."
 
 #: ../src/solve-commit.cc:1009
 msgid "Root privileges are required to fix broken package dependencies."
-msgstr "Wymagane prawa administratora do naprawienia niespełnionych zależności."
+msgstr "Pre opravu porušených závislostí sú potrebné práva správcu systému (root)."
 
 #. translators: Yes / No / show Problems. This prompt will appear
 #. after install/update command summary if there will be any package
@@ -1879,41 +1888,41 @@ msgstr "Wymagane prawa administratora do naprawienia niespełnionych zależnośc
 #. The answers should be lower case letters.
 #: ../src/solve-commit.cc:1026
 msgid "y/n/p"
-msgstr "t/n/p"
+msgstr "a/n/p"
 
 #. translators: help text for 'y' option in the y/n/p prompt
 #: ../src/solve-commit.cc:1028
 msgid "Accept the summary and proceed with installation/removal of packages."
-msgstr "Akceptuje podsumowanie i kontynuuje instalację lub usunięcie pakietów."
+msgstr "Prijať návrh a pokračovať v inštalácii/odstraňovaní balíkov."
 
 #. translators: help text for 'n' option in the y/n/p prompt
 #: ../src/solve-commit.cc:1030
 msgid "Cancel the operation."
-msgstr "Przerywa. czynność."
+msgstr "Zrušiť operáciu."
 
 #. translators: help text for 'p' option in the y/n/p prompt
 #: ../src/solve-commit.cc:1032
 msgid "Restart solver in no-force-resolution mode in order to show dependency problems."
-msgstr "Należy uruchom ponownie w trybie no-force-resolution, by zobaczyć pro"
+msgstr "Znovu spustiť riešenie závislostí bez vynúteného riešenia a zobraziť problémy so závislosťami."
 
 #: ../src/solve-commit.cc:1074
 msgid "committing"
-msgstr "zatwierdzanie"
+msgstr "odovzdávam"
 
 #: ../src/solve-commit.cc:1079
 msgid "(dry run)"
-msgstr "(sprawdzanie)"
+msgstr "(beh naprázdno)"
 
 #: ../src/solve-commit.cc:1108 ../src/solve-commit.cc:1147
 msgid "Problem retrieving the package file from the repository:"
-msgstr "Problem podczas pobierania pliku pakietu z repozytorium:"
+msgstr "Problém pri sťahovaní balíka z repozitára:"
 
 #. translators: the first %s is 'zypper refresh' and the second
 #. is repo allias
 #: ../src/solve-commit.cc:1143
 #, c-format
 msgid "Repository '%s' is out of date. Running '%s' might help."
-msgstr "Repozytorium '%s' jest aktualne. Uruchomienie '%s' może pomóc."
+msgstr "Repozitár '%s' je neaktuálny. Skúste spustiť '%s'."
 
 #: ../src/solve-commit.cc:1155
 msgid ""
@@ -1924,274 +1933,272 @@ msgid ""
 "- use another installation medium (if e.g. damaged)\n"
 "- use another repository"
 msgstr ""
-"Kontrola integralności pakietu zakończona niepowodzeniem. Może to oznaczać\n"
-"problem z repozytorium lub nośnikiem. Możliwe rozwiązania:\n"
+"Kontrola integrity balíka zlyhala. Môže to byť problém repozitára alebo média. Vyskúšajte jednu z nasledujúcich možností:\n"
 "\n"
-"- ponowienie poprzedniego polecenia,\n"
-"- odświeżenie repozytorium za pomocą polecenia \"zypper refresh\",\n"
-"- użycie innego nośnika instalacyjnego,\n"
-"- użycie innego repozytorium."
+"- jednoducho skúste znova spustiť predchádzajúci príkaz\n"
+"- obnovte repozitáre pomocou 'zypper refresh'\n"
+"- použite iné inštalačné médium (ak je napr. toto poškodené)\n"
+"- použite iný repozitár"
 
 #: ../src/solve-commit.cc:1168
 msgid "Problem occured during or after installation or removal of packages:"
-msgstr "Wystąpił błąd podczas lub po instalacji lub usunięciu następujących pakietów:"
+msgstr "Počas alebo po inštalácii alebo odstraňovaní balíkov nastala chyba:"
 
 #: ../src/solve-commit.cc:1188
 msgid "One of installed patches requires reboot of your machine. Reboot as soon as possible."
-msgstr "Jedna z zainstalowanych poprawek wymaga ponownego uruchomienia komputera. Należy jak najszybciej uruchomić komputer ponownie.."
+msgstr "Jedna z nainštalovaných záplat vyžaduje reštart vášho počítača. Reštartujte čo najskôr."
 
 #: ../src/solve-commit.cc:1192
 msgid "One of installed patches affects the package manager itself. Run this command once more to install any other needed patches."
-msgstr "Jedna z zainstalowanych poprawek dotyczy menedżera pakietów. Należy uruchomić go ponownie przed dalszym użyciem."
+msgstr "Jedna z nainštalovaných záplat ovplyvňuje samotného správcu balíkov. Pre nainštalovanie prípadných ďalších záplat je potrebné zypper spustiť ešte raz."
 
 #. translators: %d is the number of needed patches
 #: ../src/update.cc:65
 #, c-format
 msgid "%d patch needed"
 msgid_plural "%d patches needed"
-msgstr[0] "%d wymagana poprawka"
-msgstr[1] " %d wymagane poprawki"
-msgstr[2] " %d wymagane poprawki"
+msgstr[0] "%d potrebná záplata"
+msgstr[1] "%d potrebné záplaty"
+msgstr[2] "%d potrebných záplat"
 
 #. translators: %d is the number of security patches
 #: ../src/update.cc:69
 #, c-format
 msgid "%d security patch"
 msgid_plural "%d security patches"
-msgstr[0] "%d poprawka bezpieczeństwa"
-msgstr[1] "%d poprawki bezpieczeństwa"
-msgstr[2] "%d poprawki bezpieczeństwa"
+msgstr[0] "%d bezpečnostná záplata"
+msgstr[1] "%d bezpečnostné záplaty"
+msgstr[2] "%d bezpečnostných záplat"
 
 #: ../src/update.cc:174 ../src/utils/misc.cc:113
 msgid "Needed"
-msgstr "Potrzebna"
+msgstr "Potrebný"
 
 #: ../src/update.cc:190
 msgid ""
 "These are only the updates affecting the updater itself.\n"
 "Other updates are available too.\n"
-msgstr ""
-"UWAGA: Te uaktualnienia dotyczą samego programu uaktualniającego.\n"
-"Dostępne są także inne uaktualnienia.\n"
+msgstr "Toto sú len aktualizácie aktualizačného softvéru. K dispozícii sú aj ďalšie aktualizácie.\n"
 
 #: ../src/update.cc:198 ../src/update.cc:448
 msgid "No updates found."
-msgstr "Nie znaleziono aktualizacji."
+msgstr "Neboli nájdené žiadne aktualizácie."
 
 #: ../src/update.cc:333
 msgid "Package updates"
-msgstr "Aktualizacje pakietów"
+msgstr "Aktualizácie balíkov"
 
 #: ../src/update.cc:335
 msgid "Patches"
-msgstr "Poprawki"
+msgstr "Záplaty"
 
 #: ../src/update.cc:337
 msgid "Pattern updates"
-msgstr "Uaktualnienia wzorców"
+msgstr "Aktualizácie paternov"
 
 #: ../src/update.cc:339
 msgid "Product updates"
-msgstr "Uaktualnienia produktu"
+msgstr "Aktualizácie produktov"
 
 #: ../src/update.cc:512
 #, c-format
 msgid "Cannot parse '%s < %s'"
-msgstr "Nie można zanalizować właściwości '%s < %s'"
+msgstr "Neplatná schopnosť '%s < %s'"
 
 #. translators: %s is the name of a patch
 #: ../src/update.cc:568
 #, c-format
 msgid "'%s' is interactive, skipping."
-msgstr "'%s' jest interaktywny, pominięto."
+msgstr "Záplata '%s' je interaktívna, preskakujem."
 
 #: ../src/update.cc:623
 #, c-format
 msgid "No patches matching '%s' found."
-msgstr "Nie znaleziono uaktualnień pasujących do '%s'."
+msgstr "Neboli nájdené žiadne záplaty vyhovujúce výrazu '%s'."
 
 #: ../src/update.cc:626
 #, c-format
 msgid "Patch '%s' not found."
-msgstr "Nie znaleziono uaktualnienia '%s'."
+msgstr "'Záplata %s' nebola nájdená."
 
 #: ../src/update.cc:694
 #, c-format
 msgid "No packages matching '%s' are installed."
-msgstr "Brak zainstalowanych pakietów pasujących do wzorca '%s'."
+msgstr "Neboli nájdené žiadne balíky vyhovujúce výrazu '%s'."
 
 #: ../src/update.cc:697
 #, c-format
 msgid "Package '%s' is not installed."
-msgstr "Pakiet '%s' nie jest zainstalowany."
+msgstr "Balík '%s' nie je nainštalovaný."
 
+#  If no dialog defined for this menu item (software error)
 #: ../src/update.cc:714
 #, c-format
 msgid "No update candidate for '%s'."
-msgstr "Brak aktualizacji dla '%s'."
+msgstr "Pre '%s' neexistuje žiadny kandidát na aktualizáciu."
 
 #: ../src/utils/getopt.cc:57
 msgid "Unknown option "
-msgstr "Nieznana opcja"
+msgstr "Neznáma voľba "
 
 #: ../src/utils/getopt.cc:60
 msgid "Missing argument for "
-msgstr "Brakujący parametr dla "
+msgstr "Chýbajúci argument pre "
 
 #. translators: speaking of two mutually contradicting command line options
 #: ../src/utils/getopt.cc:87
 #, c-format
 msgid "%s used together with %s, which contradict each other. This property will be left unchanged."
-msgstr "Użyto %s razem z %s, które się wykluczają. Własność ta pozostanie niezmieniona."
+msgstr "'%s' a '%s' si navzájom odporujú. Ponechávam túto vlastnosť bez zmeny."
 
 #: ../src/utils/messages.cc:22
 msgid "Please file a bug report about this."
-msgstr "Proszę wypełnić raport błędu w tej sprawie."
+msgstr "Prosím, pošlite správu o tejto chybe."
 
 #. TranslatorExplanation remember not to translate the URL
 #. unless you translate the actual page :)
 #: ../src/utils/messages.cc:25
 msgid "See http://en.opensuse.org/Zypper#Troubleshooting for instructions."
-msgstr "W celu uzyskania dodatkowych informacji, zajrzyj na http://en.opensuse.org/Zypper#Troubleshooting ."
+msgstr "Na adrese http://en.opensuse.org/Zypper#Troubleshooting nájdete návod ako na to."
 
 #: ../src/utils/messages.cc:40 ../src/utils/messages.cc:50
 #: ../src/utils/messages.cc:68 ../src/Zypper.cc:3677
 msgid "Usage"
-msgstr "Użycie"
+msgstr "Použitie"
 
 #: ../src/utils/messages.cc:41
 msgid "Too many arguments."
-msgstr "Zbyt wiele argumentów."
+msgstr "Príliš veľa argumentov."
 
 #: ../src/utils/messages.cc:48 ../src/Zypper.cc:2706 ../src/Zypper.cc:3674
 msgid "Required argument missing."
-msgstr "Brak wymaganego parametru."
+msgstr "Chýba vyžadovaný argument."
 
 #: ../src/utils/messages.cc:60
 #, c-format
 msgid "The '--%s' option has currently no effect."
-msgstr "Parametr '--%s' nic obecnie nie powoduje."
+msgstr "Voľba '--%s' nemá momentálne žiadny účinok."
 
 #: ../src/utils/messages.cc:78
 #, c-format
 msgid "You have chosen to ignore a problem with download or installation of a package which might lead to broken dependencies of other packages. It is recommended to run '%s' after the operation has finished."
-msgstr "Wybrano ignorowanie problemu podczas pobierania lub instalacji pakietu, co może powodować do uszkodzenia zależności innych pakietów. Zaleca się uruchomić '%s' po zakończeniu czynności."
+msgstr "Zvolili ste si ignorovať problém so sťahovaním alebo inštaláciou balíka, čo môže viesť k porušeným závislostiam iných balíkov. Odporúča sa spustiť '%s' po ukončení súčasnej operácie."
 
 #: ../src/utils/misc.cc:87
 msgid "package"
 msgid_plural "packages"
-msgstr[0] "pakiet"
-msgstr[1] "pakiety"
-msgstr[2] "pakietów"
+msgstr[0] "balík"
+msgstr[1] "balíky"
+msgstr[2] "balíkov"
 
 #: ../src/utils/misc.cc:89
 msgid "pattern"
 msgid_plural "patterns"
-msgstr[0] "wzorzec"
-msgstr[1] "wzorce"
-msgstr[2] "wzorców"
+msgstr[0] "vzor"
+msgstr[1] "vzory"
+msgstr[2] "vzorov"
 
 #: ../src/utils/misc.cc:91
 msgid "product"
 msgid_plural "product"
 msgstr[0] "produkt"
 msgstr[1] "produkty"
-msgstr[2] "produktów"
+msgstr[2] "produktov"
 
 #: ../src/utils/misc.cc:93
 msgid "patch"
 msgid_plural "patches"
-msgstr[0] "poprawka"
-msgstr[1] "poprawki"
-msgstr[2] "poprawek"
+msgstr[0] "záplata"
+msgstr[1] "záplaty"
+msgstr[2] "záplat"
 
 #: ../src/utils/misc.cc:95
 msgid "srcpackage"
 msgid_plural "srcpackages"
-msgstr[0] "pakiet źródłowy"
-msgstr[1] "pakiety źródłowe"
-msgstr[2] "pakietów źródłowych"
+msgstr[0] "zdrojový balík"
+msgstr[1] "zdrojové balíky"
+msgstr[2] "zdrojových balíkov"
 
 #. default
 #: ../src/utils/misc.cc:97
 msgid "resolvable"
 msgid_plural "resolvables"
-msgstr[0] "pakiet rozwiązywalny"
-msgstr[1] "pakiety rozwiązywalne"
-msgstr[2] "pakietów rozwiązywalnych"
+msgstr[0] "objekt"
+msgstr[1] "objekty"
+msgstr[2] "objektov"
 
 #: ../src/utils/misc.cc:106
 msgid "Unknown"
-msgstr "Nieznana opcja "
+msgstr "Neznámy"
 
 #: ../src/utils/misc.cc:118
 msgid "Not Applicable"
-msgstr "Nieodpowiednia"
+msgstr "Neaplikovateľný"
 
 #: ../src/utils/misc.cc:191
 msgid "Specified local path does not exist or is not accessible."
-msgstr "Podana ścieżka nie istnieje lub jest niedostępna."
+msgstr "Zadaná miestna cesta neexistuje alebo nie je prístupná."
 
 #: ../src/utils/misc.cc:203
 msgid "Given URI is invalid"
-msgstr "Podany adres URL jest nieprawidlowy"
+msgstr "Chybná URI adresa."
 
 #: ../src/utils/misc.cc:254
 msgid "Problem copying the specified RPM file to the cache directory."
-msgstr "Problem podczas kopiowania pliku RPM do bufora podręcznego."
+msgstr "Nastal problém pri kopírovaní zadaného RPM súboru do priečinka medzipamäte."
 
 #: ../src/utils/misc.cc:255
 msgid "Perhaps you are running out of disk space."
-msgstr "Prawdopodobnie kończy się wolne miejsce na dysku."
+msgstr "Možno nemáte dostatok miesta na disku."
 
 #: ../src/utils/misc.cc:263
 msgid "Problem retrieving the specified RPM file"
-msgstr "Problem podczas pobierania plików RPM"
+msgstr "Problém pri sťahovaní zadaného RPM súboru"
 
 #: ../src/utils/misc.cc:264
 msgid "Please check whether the file is accessible."
-msgstr "Proszę sprawdzić czy podany plik jest dostępny."
+msgstr "Prosím overte, či je súbor dostupný."
 
 #: ../src/utils/misc.cc:321
 #, c-format
 msgid "Cannot parse capability '%s'."
-msgstr "Nie można zanalizować właściwości \"%s\""
+msgstr "Nepodarilo sa prečítať kapabilitu '%s'."
 
 #: ../src/utils/pager.cc:35
 #, c-format
 msgid "Press '%c' to exit the pager."
-msgstr "Nalezy nacisnąć '%c' by opuścić program."
+msgstr "Pre ukončenie prehliadača stlačte '%c'."
 
 #: ../src/utils/pager.cc:47
 msgid "Use arrows or pgUp/pgDown keys to scroll the text by lines or pages."
-msgstr "Należy użyć strzałek lub klawiszy pgUp/pgDown by przewinąć wiersze lub całe strony."
+msgstr "Na pohyb po texte po riadkoch alebo stránkach použite šípky alebo klávesy pgUp/pgDown."
 
 #: ../src/utils/pager.cc:51
 msgid "Use the Enter or Space key to scroll the text by lines or pages."
-msgstr "Należy nacisnąć Enter lub Spację by przewinąć wiersze lub całe strony."
+msgstr "Na pohyb po texte použite klávesy Enter alebo Space."
 
 # internal key used: Cancel
 #. ----------------------------------------------------------------------------
 #: ../src/utils/prompt.cc:88
 msgid "abort"
-msgstr "Przerwij"
+msgstr "ukončiť"
 
 #: ../src/utils/prompt.cc:88
 msgid "retry"
-msgstr "spróbuj ponownie"
+msgstr "znova"
 
 #: ../src/utils/prompt.cc:88
 msgid "ignore"
-msgstr "Ignoruj"
+msgstr "ignorovať"
 
 #: ../src/utils/prompt.cc:100
 msgid "Abort, retry, ignore?\n"
-msgstr "Przerwij (a), ponów (r), ignoruj (i)?\n"
+msgstr "Ukončiť, znova, ignorovať?\n"
 
 #: ../src/utils/prompt.cc:135
 #, c-format
 msgid "autoselect %s after %u "
-msgstr "automatyczny wybór %s po %u"
+msgstr "automatická odpoveď %s po %u sekundách"
 
 #. translators: "a/r/i" are the answers to the
 #. "Abort, retry, ignore?" prompt
@@ -2201,16 +2208,16 @@ msgstr "automatyczny wybór %s po %u"
 #. The answers should be lower case letters.
 #: ../src/utils/prompt.cc:159
 msgid "a/r/i"
-msgstr "p/po/i"
+msgstr "k/z/i"
 
 #: ../src/utils/prompt.cc:160
 msgid "Abort, retry, ignore?"
-msgstr "Przerwij (a), ponów (r), ignoruj (i)?"
+msgstr "Ukončiť, znova, ignorovať?"
 
 #: ../src/utils/prompt.cc:169 ../src/utils/prompt.cc:197
 #: ../src/utils/prompt.cc:253
 msgid "yes"
-msgstr "tak"
+msgstr "áno"
 
 #: ../src/utils/prompt.cc:169 ../src/utils/prompt.cc:198
 #: ../src/utils/prompt.cc:253
@@ -2220,39 +2227,39 @@ msgstr "nie"
 #: ../src/utils/prompt.cc:245
 #, c-format
 msgid "Invalid answer '%s'."
-msgstr "Nieprawidłowa odpowiedź '%s'.."
+msgstr "Neplatná odpoveď '%s'."
 
 #. TranslatorExplanation don't translate the 'y' and 'n', they can always be used as answers.
 #. The second and the third %s is the translated 'yes' and 'no' string (lowercase).
 #: ../src/utils/prompt.cc:252
 #, c-format
 msgid "Enter 'y' for '%s' or 'n' for '%s' if nothing else works for you."
-msgstr "Proszę wybrać 'y' dla '%s' lub 'n' dla '%s' jeśli nic innego nie działa"
+msgstr "Zadajte 'y' pre '%s' alebo 'n' pre '%s', ak nič iné nefunguje."
 
 #: ../src/utils/prompt.cc:266
 #, c-format
 msgid ""
 "If you run zypper without a terminal, use '%s' global\n"
 "option to make zypper use default answers to prompts."
-msgstr ""
+msgstr "Ak spúšťate zypper bez terminálu, použite voľbu '%s' aby zypper použil prednastavené odpovede na otázky."
 
 #. TranslatorExplanation These are reasons for various failures.
 #: ../src/utils/prompt.h:125
 msgid "Not found"
-msgstr "Nie znaleziono"
+msgstr "Nenájdený"
 
 # error box title
 #: ../src/utils/prompt.h:125
 msgid "I/O error"
-msgstr "Błąd wejścia/wyjścia"
+msgstr "Chyba V/V"
 
 #: ../src/utils/prompt.h:125
 msgid "Invalid object"
-msgstr "Nieprawidłowy obiekt"
+msgstr "Neplatný objekt"
 
 #: ../src/utils/prompt.h:132
 msgid "Error"
-msgstr "Błąd"
+msgstr "Chyba"
 
 #: ../src/Zypper.cc:153
 msgid ""
@@ -2273,22 +2280,19 @@ msgid ""
 "\t--cache-dir, -C <dir>\tUse alternative meta-data cache directory.\n"
 "\t--raw-cache-dir <dir>\tUse alternative raw meta-data cache directory.\n"
 msgstr ""
-"  Opcje globalne:\n"
-"\t--help, -h\t\tPomoc\n"
-"\t--version, -V\t\tWyświetla informacje o wersji\n"
-"\t--quiet, -q\t\tTryb cichy, wyświetla tylko informacje o błędach.\n"
-"\t\t\t\tmessages.\n"
-"\t--verbose, -v\t\tWyświetla dodatkowe informacje\n"
-"\t--no-abbrev, -A\t\tNie stosowanie skrótów w tekastach w tabelach.\n"
-"\t--table-style, -s\tStyl tablicowy (liczbowy)\n"
-"\t--rug-compatible, -r\tWłącza tryb kompatybilności z rug\n"
-"\t--non-interactive\tBez zadawania pytań; automatycznie stosuje domyślne ustawienia\n"
-"\t\t\t\tautomatically.\n"
-"\t--xmlout, -x\t\tPrzełącza do wyjścia XML.\n"
-"\t--reposd-dir, -D <dir>\tUżycie alternatywnych plików definicji repozytoriów z podanego katalogu.\n"
-"\t\t\t\tdirectory.\n"
-"\t--cache-dir, -C <dir>\tUżycie meta-danych z alternatywnego katalogu pamięci podręcznej.\n"
-"\t--raw-cache-dir <dir>\tUżycie surowych meta-danych z alternatywnego katalogu pamięci podręcznej.\n"
+"  Všeobecné voľby:\n"
+"\t--help, -h\t\tPomoc.\n"
+"\t--version, -V\t\tVýpis čísla verzie.\n"
+"\t--quiet, -q\t\tPotlač normálny výstup, zobrazuj len chybové správy.\n"
+"\t--verbose, -v\t\tZvýšenie podrobnosti výstupu.\n"
+"\t--no-abbrev, -A\t\tNeskracuj text v tabuľkách.\n"
+"\t--table-style, -s\tŠtýl výstupnej tabuľky (celé číslo).\n"
+"\t--rug-compatible, -r\tZapnutie kompatibility s programom rug.\n"
+"\t--non-interactive\tNa nič sa nepýtaj, automaticky použi prednastavené odpovede.\n"
+"\t--xmlout, x\t\tZapni XML výstup.\n"
+"\t--reposd-dir, -D <dir>\tPouži alternatívny adresár pre konfiguračné súbory repozitárov.\n"
+"\t--cache-dir, -C <dir>\tPouži alternatívny adresár pre medzipamäť metadát.\n"
+"\t--raw-cache-dir <dir>\tPouži alternatívny adresár pre surové metadáta.\n"
 
 #: ../src/Zypper.cc:171
 msgid ""
@@ -2298,12 +2302,11 @@ msgid ""
 "\t--disable-repositories\tDo not read meta-data from repositories.\n"
 "\t--no-refresh\t\tDo not refresh the repositories.\n"
 msgstr ""
-"\tOpcje repozytoriów:\n"
-"\t-no-gpg-checks\t\tIgnoruje błędy podpisów GPG i kontunuje dalsze działania.\n"
-"\n"
-"--plus-repo, -p <URI>\tUżycie dodatkowego repozytorium.\n"
-"\t--disable-repositories\tNie czyta meta-danych z repozytoriów.\n"
-"\t--no-refresh\t\tNie odświeża repozytoriów.\n"
+"     Voľby pre správu repozitárov:\n"
+"\t--no-gpg-checks\t\tIgnoruj chyby súvisiace so zabezpečením pomocou GPG a pokračuj.\n"
+"\t--plus-repo, -p <URI>\tPouži prídavný repozitár.\n"
+"\t--disable-repositories\tNenačítaj metadáta z repozitárov.\n"
+"\t--no-refresh\t\tNeaktualizuj repozitáre.\n"
 
 #. translators: these belong to Repository Options main help text
 #: ../src/Zypper.cc:178
@@ -2311,6 +2314,8 @@ msgid ""
 "\t--no-cd\t\t\tIgnore CD/DVD repositories.\n"
 "\t--no-remote\t\tIgnore remote repositories.\n"
 msgstr ""
+"\t--no-cd\t\t\tIgnoruj CD/DVD repozitáre.\n"
+"\t--no-remote\t\tIgnoruj vzdialené repozitáre.\n"
 
 #: ../src/Zypper.cc:182
 msgid ""
@@ -2319,9 +2324,10 @@ msgid ""
 "\t--disable-system-resolvables\n"
 "\t\t\t\tDo not read installed packages.\n"
 msgstr ""
-"  Opcje celu:\n"
-"\t--root, -R <dir>\tPracuj na innym katalogu głównym.\n"
-"\t--disable-system-resolvables,\t\tNie pobieraj systemowych pakietów rozwiązywalnych.\n"
+"     Možnosti cieľa :\n"
+"\t--root, -R <adresár>\tPracuj v inom koreňovom adresári.\n"
+"\t--disable-system-resolvables\n "
+"\t\t\t\tNenačítaj nainštalované balíky.\n"
 
 #: ../src/Zypper.cc:189
 msgid ""
@@ -2329,9 +2335,9 @@ msgid ""
 "\thelp, ?\t\t\tPrint help.\n"
 "\tshell, sh\t\tAccept multiple commands at once.\n"
 msgstr ""
-"  Komendy:\n"
-"\thelp, ?\t\t\tWyświetla tą pomoc.\n"
-"\tshell, sh\t\tAkceptuje na raz większą ilość poleceń.\n"
+"  Príkazy:\n"
+"\thelp, ?\t\t\tZobraz nápovedu.\n"
+"\tshell, sh\t\tUmožňuje vykonať viacero príkazov počas jedného sedenia.\n"
 
 #: ../src/Zypper.cc:194
 msgid ""
@@ -2344,14 +2350,14 @@ msgid ""
 "\trefresh, ref\t\tRefresh all repositories.\n"
 "\tclean\t\t\tClean local caches.\n"
 msgstr ""
-"     Zarządzanie repozytoriami:\n"
-"\trepos, lr\t\tWyświetla wszystkie zdefiniowane repozytoria.\n"
-"\taddrepo, ar\t\tDodaje nowe repozytorium.\n"
-"\tremoverepo, rr\t\tUsuwa podane repozytorium.\n"
-"\trenamerepo, nr\t\tZmienia nazwę podanego repozytorium.\n"
-"\tmodifyrepo, mr\t\tModyfikuje podane repozytorium.\n"
-"\trefresh, ref\t\tOdświeża wszystkie repozytoria.\n"
-"\tclean\t\t\tCzyści lokalną pamięć podręczną.\n"
+"     Správa repozitárov:\n"
+"\trepos, lr\t\tVypíš zoznam všetkých definovaných repozitárov.\n"
+"\taddrepo, ar\t\tPridaj nový repozitár.\n"
+"\tremoverepo, rr\t\tOdstráň zadaný repozitár.\n"
+"\trenamerepo, nr\t\tPremenuj zadaný repozitár.\n"
+"\tmodifyrepo, mr\t\tZmeň zadaný repozitár.\n"
+"\trefresh, ref\t\tAktualizuj všetky repozitáre.\n"
+"\tclean\t\t\tVyčisti miestne medzipamäte.\n"
 
 #: ../src/Zypper.cc:204
 msgid ""
@@ -2362,12 +2368,12 @@ msgid ""
 "\tremoveservice, rs\tRemove specified service.\n"
 "\trefresh-services, refs\tRefresh all services.\n"
 msgstr ""
-"     Zarządzanie repozytoriami:\n"
-"\tservices, ls\t\tWyświetla wszystkie zdefiniowane repozytoria.\n"
-"\taddservice, as\t\tDodaje nowe repozytorium.\n"
-"\tmodifyservice, ms\tModyfikuje wybrane repozytorium.\n"
-"\tremoveservice, rs\tUsuwa wybrane repozytorium.\n"
-"\trefresh-services, refs\tUaktualnia wszystkie repozytoria.\n"
+"     Správa služieb:\n"
+"\tservices, ls\t\tVypíš zoznam všetkých definovaných služieb.\n"
+"\taddservice, as\t\tPridaj novú službu.\n"
+"\tremoveservice, rs\tOdstráň zadanú službu.\n"
+"\tmodifyservice, ms\tZmeň zadanú službu.\n"
+"\trefresh-services, refs\tAktualizuj všetky služby.\n"
 
 #: ../src/Zypper.cc:212
 msgid ""
@@ -2381,14 +2387,14 @@ msgid ""
 "\t\t\t\tInstall newly added packages recommended\n"
 "\t\t\t\tby installed packages.\n"
 msgstr ""
-"     Zarządzanie oprogramowaniem:\n"
-"\tinstall, in\t\tInstaluje pakiety.\n"
-"\tremove, rm\t\tUsuwa pakiety.\n"
-"\tverify, ve\t\tSprawdza zależnośći pakietu. \tsource-install, si\tInstaluje pakiety źródłowe i je buduje\n"
-"\n"
-"\t\t\t\tdependencies.\n"
+"     Správa softvéru:\n"
+"\tinstall, in\t\tNainštaluj balíky.\n"
+"\tremove, rm\t\tOdstráň balíky.\n"
+"\tverify, ve\t\tSkontroluj integritu závislostí nainštalovaných balíkov.\n"
+"\tsource-install, si\tNainštaluj zdrojové balíky a ich kompilačné závislosti.\n"
 "\tinstall-new-recommends, inr\n"
-" Instaluje nowo dodane pakiety zalecane dla pakietów zainstalowanych już w systemie.\n"
+"\t\t\t\tNainštaluj novopridané balíky odporúčané "
+"\t\t\t\ttými nainštalovanými.\n"
 
 #: ../src/Zypper.cc:223
 msgid ""
@@ -2400,13 +2406,13 @@ msgid ""
 "\tdist-upgrade, dup\tPerform a distribution upgrade.\n"
 "\tpatch-check, pchk\tCheck for patches.\n"
 msgstr ""
-"     Zarządzanie uaktualnieniami:\n"
-"\tupdate, up\t\tAktualizuje zainstalowane pakiety do nowszej wersji.\n"
-"\tlist-updates, lu\tLista dostępnych uaktualnień.\n"
-"\tpatch\t\t\tInstalacja potrzebnych poprawek.\n"
-"\tlist-patches, lp\tLista potrzebnych poprawek.\n"
-"\tdist-upgrade, dup\tPrzeprowadza aktualizację dystrybucji.\n"
-"\tpatch-check, pchk\tSprawdzanie czy są dostępne poprawki.\n"
+"     Sprava aktualizácií:\n"
+"\tupdate, up\t\tAktualizuj nainštalované balíky novšími verziami.\n"
+"\tlist-updates, lu\tVypíš zoznam dostupných aktualizácií.\n"
+"\tpatch\t\t\tNainštaluj potrebné záplaty.\n"
+"\tlist-patches, lp\tVypíš zoznam potrebných záplat.\n"
+"\tdist-upgrade, dup\tVykonaj aktualizáciu distribúcie.\n"
+"\tpatch-check, pchk\tZisti, či sú potrebné nejaké záplaty.\n"
 
 #: ../src/Zypper.cc:232
 msgid ""
@@ -2422,17 +2428,17 @@ msgid ""
 "\tproducts, pd\t\tList all available products.\n"
 "\twhat-provides, wp\tList packages providing specified capability.\n"
 msgstr ""
-"     Wyszukiwanie:\n"
-"\tsearch, se\t\tWyszukiwanie pakietów pasujących do wzorca.\n"
-"\tinfo, if\t\tPokazuje wszystkie informacje o podanych pakietach.\n"
-"\tpatch-info\t\tPokazuje wszystkie informacje o podanych poprawkach.\n"
-"\tpattern-info\t\tPokazuje wszystkie informacje o podanych wzorcach.\n"
-"\tproduct-info\t\tPokazuje wszystkie informacje o podanych produktach.\n"
-"\tpatches, pch\t\tPokazuje wszystkie dostępne poprawki.\n"
-"\tpackages, pa\t\tPokazuje wszystkie dostępne pakiety.\n"
-"\tpatterns, pt\t\tPokazuje wszystkie dostępne wzorce.\n"
-"\tproducts, pd\t\tPokazuje wszystkie dostępne produkty.\n"
-"\twhat-provides, wp\tPokazuje pakiety dostarczające podanych plików.\n"
+"     Vyhľadávanie:\n"
+"\tsearch, se\t\tHľadaj balíky podľa zadaných reťazcov.\n"
+"\tinfo, if\t\tZobraz podrobné informácie o balíkoch.\n"
+"\tpatch-info\t\tZobraz podrobné informácie o záplatách.\n"
+"\tpattern-info\t\tZobraz podrobné informácie o paternoch.\n"
+"\tproduct-info\t\tZobraz podrobné informácie o produktoch.\n"
+"\tpatches, pch\t\tZobraz zoznam dostupných záplat.\n"
+"\tpackages, pa\t\tZobraz zoznam dostupných balíkov.\n"
+"\tpatterns, pt\t\tZobraz zoznam dostupných paternov.\n"
+"\tproducts, pd\t\tZobraz zoznam dostupných produktov.\n"
+"\twhat-provides, wp\tZobraz zoznam balíkov, ktoré poskytujú zadanú schopnosť.\n"
 
 #: ../src/Zypper.cc:247
 msgid ""
@@ -2441,10 +2447,10 @@ msgid ""
 "\tremovelock, rl\t\tRemove a package lock.\n"
 "\tlocks, ll\t\tList current package locks.\n"
 msgstr ""
-"     Blokowanie pakietów:\n"
-"\taddlock, al\t\tDodaje blokadę na podany pakiet.\n"
-"\tremovelock, rl\t\tUsuwa blokadę z danego pakietu.\n"
-"\tlocks, ll\t\tPokazuje wszystkie aktualnie zablokowane pakiety.\n"
+"     Zámky balíkov:\n"
+"\taddlock, al\t\tPridaj zámok.\n"
+"\tremovelock, rl\t\tOdstráň zámok.\n"
+"\tlocks, ll\t\tZobraz zoznam aktuálnych zámkov.\n"
 
 #: ../src/Zypper.cc:253
 msgid ""
@@ -2454,93 +2460,89 @@ msgid ""
 "\tlicenses\t\tPrint report about licenses and EULAs of\n"
 "\t\t\t\tinstalled packages.\n"
 msgstr ""
-"\tInne polecenia:\n"
-"\tversioncmp, vcmp\tPorównanie dwóch ciągów znaków.\n"
-"\ttargetos, tos\t\tWyświetl ciąg oznaczający ID docelowego systemu operacyjnego.\n"
-"\ttargetos, tos\t\tWyświetl ciąg ID wybranego systemu operacyjnego.\n"
-"\tlicenses\t\tWyświetl raport o licencjach i EULA\n"
-"\t\t\t\tzainstalowanych pakietów.\n"
+"     Ostatné príkazy:\n"
+"\tversioncmp, vcmp\tPorovnaj dva reťazce ako verzie.\n"
+"\ttargetos, tos\t\tVypíš ID reťazec cieľového systému.\n"
+"\tlicenses\t\tZobraz správu o licenciách a EULA nainštalovaných balíkov.\n"
 
 #: ../src/Zypper.cc:261
 msgid ""
 "  Usage:\n"
 "\tzypper [--global-options] <command> [--command-options] [arguments]\n"
 msgstr ""
-"  Użycie:\n"
-"\tzypper [--opcje-globalne] <polecenia> [--opcje-poleceń] [argumenty]\n"
+"  Použitie:\n"
+"\tzypper [--všeobecné-voľby] <príkaz> [--voľby-príkazu] argumenty\n"
 
 #. translators: %s is "help" or "zypper help" depending on whether
 #. zypper shell is running or not
 #: ../src/Zypper.cc:286
 #, c-format
 msgid "Type '%s' to get a list of global options and commands."
-msgstr "Proszę wprowadzić '%s', aby zobaczyć listę wszystkich opcji globalnych i poleceń."
+msgstr "Pre získanie zoznamu všeobecných volieb a príkazov napíšte '%s'."
 
 #. translators: %s is "help" or "zypper help" depending on whether
 #. zypper shell is running or not
 #: ../src/Zypper.cc:295
 #, c-format
 msgid "Type '%s' to get command-specific help."
-msgstr "Proszę wprowadzić '%s' aby otrzymać pomoc związaną z danym poleceniem."
+msgstr "Pre získanie nápovedy k určitému príkazu napíšte '%s'."
 
 #: ../src/Zypper.cc:398
 #, c-format
 msgid "Verbosity: %d"
-msgstr "Szczegółowość: %d"
+msgstr "Úroveň podrobnosti výstupu: %d"
 
 #: ../src/Zypper.cc:412
 #, c-format
 msgid "Invalid table style %d."
-msgstr "Nieprawidłowy styl tabeli %d."
+msgstr "Nesprávny štýl tabuľky %d."
 
 #: ../src/Zypper.cc:413
 #, c-format
 msgid "Use an integer number from %d to %d"
-msgstr "Prosze użyć liczby całkowitej od %d do %d"
+msgstr "Použite celé číslo od %d do %d"
 
 #: ../src/Zypper.cc:444
 msgid "Entering non-interactive mode."
-msgstr "Rozpoczęto tryb wsadowy."
+msgstr "Zapínam neinteraktívny mód."
 
 #: ../src/Zypper.cc:450
 msgid "Entering 'no-gpg-checks' mode."
-msgstr "Rozpoczęto tryb 'bez sprawdzania gpg'."
+msgstr "Vypínam overovanie GPG podpisov."
 
 #: ../src/Zypper.cc:461
 msgid "The path specified in the --root option must be absolute."
-msgstr "Ścieżka podana jako argument opcji --root musi odnosić się do głównego drzewa katalogów."
+msgstr "Cesta zadaná vo voľbe --root musí byť absolútna."
 
 #: ../src/Zypper.cc:490
 msgid "Repositories disabled, using the database of installed packages only."
-msgstr "Repozytoria wyłączone, użyto tylko bazy zainstalowanych pakietów."
+msgstr "Repozitáre sú vypnuté, použijem len databázu nainštalovaných balíkov."
 
 #: ../src/Zypper.cc:502
 msgid "Autorefresh disabled."
-msgstr "Autoodświeżanie wyłączone."
+msgstr "Automatická aktualizácia je vypnutá."
 
 #: ../src/Zypper.cc:509
-#, fuzzy
 msgid "CD/DVD repositories disabled."
-msgstr "Autoodświeżanie wyłączone."
+msgstr "CD/DVD repozitáre sú vypnuté."
 
 #: ../src/Zypper.cc:516
-#, fuzzy
 msgid "Remote repositories disabled."
-msgstr "Autoodświeżanie wyłączone."
+msgstr "Vzdialené repozitáre sú vypnuté."
 
 #: ../src/Zypper.cc:523
 msgid "Ignoring installed resolvables."
-msgstr "Zainstalowane pakiety rozwiązywalne zostaną zignorowane."
+msgstr "Ignorujem nainštalované balíky."
 
 #. TranslatorExplanation The %s is "--plus-repo"
 #: ../src/Zypper.cc:618
 #, c-format
 msgid "The %s option has no effect here, ignoring."
-msgstr "Opcja '%s' nie dotyczy tego polecenia, została zignorowana."
+msgstr "Voľba %s tu nemá žiadny vplyv, bude ignorovaná."
 
 #: ../src/Zypper.cc:795
 msgid "Unexpected exception."
-msgstr "Niespodziewany wyjątek."
+msgstr "Neočakávaná výnimka. "
 
 #. TranslatorExplanation the first %s = "package, patch, pattern, product"
 #. and the second %s = "package"
@@ -2568,24 +2570,24 @@ msgid ""
 "    --force-resolution          Force the solver to find a solution (even an agressive).\n"
 "-D, --dry-run                   Test the installation, do not actually install.\n"
 msgstr ""
-"install (in) [opcje] <capability|rpm_file_uri> ...\n"
+"install (in) [voľby] <schopnosť|uri_rpm_súboru> ...\n"
 "\n"
-"Instaluje obiekty z określonymi możliwościami. Możliwość to NAZWA[OP<WERSJA>], gdzie OP to <, <=, =, >= lub >.\n"
+"Nainštaluj balíky so zadanými schopnosťami alebo RPM súbory zo zadaných URI adries. Schopnosť má tvar NÁZOV[.ARCH][OP<VERZIA>], kde OP je jeden z operátorov <, <=, =, >=, >.\n"
 "\n"
-"  Opcje:\n"
-"-r, --repo <alias#|URI>         Instaluje obiekty tylko z repozytorium określonego przez alias.\n"
-"-t, --type <type>               Typ obiektu (%s)\n"
-"                                Domyślnie: %s.\n"
-"-n, --name                      Wybór obiektów wg nazwy , nie wg możliwości.\n"
-"-C, --capability                Wybór obiektów wg możliwości.\n"
-"-f, --force                     Instaluje nawet gdy element jest zainstalowany (ponowna instalacja).\n"
-"-l, --auto-agree-with-licenses  Automatycznie zgadza sie na licencje firm trzecich.\n"
-"                                Więcej informacji wyświetla polecenie 'man zypper'.\n"
-"    --debug-solver              Tworzy test dla mechanizmu rozwiązywania zależności (debugowanie)\n"
-"    --no-recommends             Nie instaluje zalecanych pakietów, a tylko wymagane.\n"
-"-R, --no-force-resolution       Nie wymusza znalezienia rozwiązania, wyświetla pytania.\n"
-"    --force-resolution          Wymusza automatyczne znalezienia rozwiązania (nawet agresywnego).\n"
-"-D, --dry-run                   Test instalacji, bez instalowania pakietów.\n"
+"  Voľby príkazu:\n"
+"-r, --repo <alias|#|URI>        Pracuj len so zadaným repozitárom.\n"
+"-t, --type <typ>                Typ balíka (%s)\n"
+"                                Prednastavená hodnota: %s\n"
+"-n, --name                      Vyberaj balíky podľa názvu, nie podľa schopností.\n"
+"-C, --capability                Vyberaj balíky podľa schopností.\n"
+"-f, --force                     Inštaluj aj keď je balík už nainštalovaný (preinštaluj).\n"
+"-l, --auto-agree-with-licenses  Automaticky odpovedz 'áno' na výzvy na potvrdenie licencie tretej strany.\n"
+"                                Pre podrobnosti viď 'man zypper'.\n"
+"    --debug-solver              Vytvor testovací prípad pre riešiteľa závislostí pre účely ladenia.\n"
+"    --no-recommends             Neinštaluj odporúčané balíky, len vyžadované.\n"
+"-R, --no-force-resolution       Nevynucuj nájdenie riešenia závislostí, spýtaj sa užívateľa.\n"
+"    --force-resolution          Vynúť nájdenie riešenia závislostí, aj keby malo byť agresívne.\n"
+"-D, --dry-run                   Beh naprázdno. Len otestuj inštaláciu, ale nič skutočne neinštaluj.\n"
 
 #. TranslatorExplanation the first %s = "package, patch, pattern, product"
 #. and the second %s = "package"
@@ -2607,20 +2609,20 @@ msgid ""
 "    --force-resolution          Force the solver to find a solution (even an agressive).\n"
 "-D, --dry-run                   Test the removal, do not actually remove.\n"
 msgstr ""
-"remove (rm) [parametr] <właściwość> ...\n"
+"remove (rm) [voľby] <schopnosť> ...\n"
 "\n"
-"Usuwa obiekty o określonych właściwościach. Właściwość to NAME[OP<VERSION>], gdzie OP jest jednym z <, <=, =, >=, >.\n"
+"Odinštaluj balíky so zadanými schopnosťami. Schopnosť má tvar NÁZOV[.ARCH][OP<VERZIA>], kde OP je jeden z operátorov <, <=, =, >=, >.\n"
 "\n"
-"  Parametry polecenia:\n"
-"-r, --repo <alias|#|URI>        Działa tylko na obiektach z określonego repozytorium.\n"
-"-t, --type <type>               Type of resolvable (%s).\n"
-"                                Domyślny: %s.\n"
-"-n, --name                      Wybiera zależności na podstawie nazwy, a nie właściwości.\n"
-"-C, --capability                Wybiera zależności na podstawie właściwości.\n"
-"    --debug-solver              Tworzy test rozwiązywania zależności dla debuggowania.\n"
-"-R, --no-force-resolution       Nie wymusza rozwiązywania zależności, pozwala wybierać rozwiązania.\n"
-"    --force-resolution          Wymusza znalezienie rozwiązania (możliwa agresywna polityka).\n"
-"-D, --dry-run                   testowanie usunięcia, nie wprowadza zmian..\n"
+"  Voľby príkazu:\n"
+"-r, --repo <alias|#|URI>        Pracuj len s balíkmi zo zadaného repozitára.\n"
+"-t, --type <typ>                Typ balíka (%s)\n"
+"                                Prednastavená hodnota: %s.\n"
+"-n, --name                      Vyberaj balíky podľa názvu, nie podľa schopností.\n"
+"-C, --capability                Vyberaj balíky podľa schopností.\n"
+"    --debug-solver              Vytvor testovací prípad pre riešiteľa závislostí pre účely ladenia.\n"
+"-R, --no-force-resolution       Nevynucuj nájdenie riešenia závislostí, spýtaj sa užívateľa.\n"
+"    --force-resolution          Vynúť nájdenie riešenia závislostí, aj keby malo byť agresívne.\n"
+"-D, --dry-run                   Beh naprázdno. Len otestuj odstraňovanie, ale nič skutočne neodstráň.\n"
 
 #: ../src/Zypper.cc:960
 msgid ""
@@ -2633,14 +2635,14 @@ msgid ""
 "-D, --no-build-deps      Don't install build dependencies.\n"
 "-r, --repo <alias|#|URI> Install packages only from specified repositories.\n"
 msgstr ""
-"source-install (si) [parametr] <nazwa> ...\n"
+"source-install (si) [voľby] <názov> ...\n"
 "\n"
-"Instaluje określone pakiety źródłowe wraz z ich zależnościami.\n"
+"Nainštaluj zadané zdrojové balíky a ich kompilačné závislosti.\n"
 "\n"
-"  Parametry polecenia:\n"
-"-d, --build-deps-only    Instaluje tylko zależności dla wybranych pakietów źródłowy.\n"
-"-D, --no-build-deps      Nie instaluje pakietów źródłowych.\n"
-"-r, --repo <alias|#|URI> Instaluje pakiety tylko z określonego repozytorium.\n"
+"  Voľby príkazu:\n"
+"-d, --build-deps-only    Inštauj len kompilačné závislosti zadaných zdrojových balíkov.\n"
+"-D, --no-build-deps      Neinštaluj kompilačné závislosti.\n"
+"-r, --repo <alias|#|URI> Inštaluj len balíky zo zadaných repozitárov.\n"
 
 #: ../src/Zypper.cc:988
 msgid ""
@@ -2653,14 +2655,14 @@ msgid ""
 "-D, --dry-run            Test the repair, do not actually do anything to the system.\n"
 "-r, --repo <alias|#|URI> Use only specified repositories to install missing packages.\n"
 msgstr ""
-"verify (ve) [parametr]\n"
+"verify (ve) [voľby]\n"
 "\n"
-"Sprawdza czy czy zależności zainstalowanych pakietów są spełnione i próbuje naprawić możliwe problemy.\n"
+"Skontroluj, či sú závislosti nainštalovaných balíkov neporušené a oprav prípadné problémy.\n"
 "\n"
-"  Parametry polecenia:\n"
-"    --no-recommends      Nie instaluje zalecanych pakietów, instaluje tylko wymagane.\n"
-"-D, --dry-run            Sprawdza możliwość naprawy, żadne zmiany nie zostaną wprowadzone.\n"
-"-r, --repo <alias|#|URI> Użyje tylko określonych repozytoriów by zainstalować brakujące pakiety.\n"
+"  Voľby príkazu:\n"
+"    --no-recommends      Neinštaluj odporúčané balíky, iba vyžadované.\n"
+"-D, --dry-run            Suchý beh. Len otestuj opravu, nič v skutočnosti nevykonaj.\n"
+"-r, --repo <alias|#|URI> Pre inštaláciu chýbajúcich balíkov použi len zadaný repozitár.\n"
 
 #: ../src/Zypper.cc:1012
 msgid ""
@@ -2673,14 +2675,14 @@ msgid ""
 "-D, --dry-run            Test the installation, do not actually install anything.\n"
 "    --debug-solver       Create solver test case for debugging.\n"
 msgstr ""
-"install-new-recommends (inr) [parametry]\n"
+"install-new-recommends (inr) [voľby]\n"
 "\n"
-"Instaluje nowododane pakiety zalecane przez pakiety, które są już zainstalowane w systemie. Można użyć do instalacji nowych pakietów językówych lub sterowników dla dodanego sprzętu.\n"
+"Nainštauluj novopridané balíky odporúčané inými, už nainštalovanými. Táto funkcia sa typicky hodí na nainštalovanie nových jazykových balíkov alebo ovládačov pre nový hardvér.\n"
 "\n"
-"  Parametry polecenia:\n"
-"-r, --repo <alias|#|URI> Używa wyłącznie określonych repozytoriów by zainstalować pakiety.\n"
-"-D, --dry-run            Sprawdza możliwośc instalacji, żadne zmiany nie zostaną wprowadzone.\n"
-"    --debug-solver       Tworzy test rozwiązujący zależności niezbędny prze debuggowaniu.\n"
+"  Command options:\n"
+"-r, --repo <alias|#|URI> Pracuj len so zadaným repozitárom.\n"
+"-D, --dry-run            Suchý beh. Len otestuj inštaláciu, nič v skutočnosti neinštaluj.\n"
+"    --debug-solver       Vytvor testovací prípad pre riešiteľa závislostí pre účely ladenia.\n"
 
 #. TranslatorExplanation the %s = "yast2, rpm-md, plaindir"
 #: ../src/Zypper.cc:1039
@@ -2695,14 +2697,14 @@ msgid ""
 "-d, --disable           Add the service as disabled.\n"
 "-n, --name              Specify descriptive name for the service.\n"
 msgstr ""
-"addservice (as) [parametr] <URI> <alias>\n"
+"addservice (as) [voľby] <URI> <alias>\n"
 "\n"
-"Dodaje usługę indeksowania repozytorium do systemu.\n"
+"Pridaj do systému službu.\n"
 "\n"
-"  Parametry polecenia:\n"
-"-t, --type <TYPE>       Typ usługi (%s).\n"
-"-d, --disable           Dodaje usługę jako zablokowaną.\n"
-"-n, --name              Dodaj opis dla usługi.\n"
+"  Command options:\n"
+"-t, --type <typ>       Typ služby (%s).\n"
+"-d, --disable           Pridaj službu ako vypnutú.\n"
+"-n, --name <nazov>      Použi zadaný popisný názov pre vytváranú službu.\n"
 
 #. TranslatorExplanation the %s = "yast2, rpm-md, plaindir"
 #. TODO
@@ -2716,13 +2718,13 @@ msgid ""
 "    --loose-auth   Ignore user authentication data in the URI.\n"
 "    --loose-query  Ignore query string in the URI.\n"
 msgstr ""
-"removeservice (rs) [parametry] <alias|#|URI>\n"
+"removservice (rs) [voľby] <alias|#|URI>\n"
 "\n"
-"Usuwa określony indeksy repozytoriów z systemu.\n"
+"Odstráň službu zadanú pomocou aliasu, čísla alebo URI adresy.\n"
 "\n"
-"  Parametry polecenia:\n"
-"    --loose-auth   Ignoruje identyfikację użytkownika w adresie URL.\n"
-"    --loose-query  Ignoruje ciąg z zapytaniem w adresie URL.\n"
+"  Voľby príkazu:\n"
+"    --loose-auth   Ignoruj autentifikačné údaje v URI\n"
+"    --loose-query  Ignoruj URI parametre.\n"
 
 #. translators: %s is "--all" and "--all"
 #: ../src/Zypper.cc:1099
@@ -2753,29 +2755,29 @@ msgid ""
 "-t, --remote                   Apply changes to all remote services.\n"
 "-m, --medium-type <type>       Apply changes to services of specified type.\n"
 msgstr ""
-"modifyservice (ms) <parametry> <alias|#|URI>\n"
-"modifyservice (ms) <parametry> <%s>\n"
+"modifyservice (mr) <voľby> <alias|#|URI>\n"
+"modifyservice (mr) <voľby> <%s>\n"
 "\n"
-"Zmienia włąściwości serwerół określonych aliasem, liczbą, numerem, adresem URL, lub za pomocą opcji agregujących '%s'.\n"
+"Zmeň vlastnoti služieb zadaných pomocou aliasu, čísla alebo URI adresy alebo pomocou úhrnných volieb '%s'.\n"
 "\n"
-"  Parametry polecenia:\n"
-"-d, --disable             Wyłącza serwer (nie zostanie usunięty).\n"
-"-e, --enable              Włącza poprzednio zablokowany serwer.\n"
-"-r, --refresh             Włącza automatyczne odświeżanie serwera.\n"
-"-R, --no-refresh          Wyłącza automatyczne odświeżanie serwera.\n"
-"-n, --name                Ustawia opisową nazwę serwera.\n"
+"  Voľby príkazu:\n"
+"-d, --disable                  Vypni službu (ale neodstraňuj ju).\n"
+"-e, --enable                   Zapni službu.\n"
+"-r, --refresh                  Zapni automatickú aktualizáciu služby.\n"
+"-R, --no-refresh               Vypni automatickú aktualizáciu služby.\n"
+"-n, --name                     Nastav popisný názov služby.\n"
 "\n"
-"-i, --ar-to-enable <alias>     Add a RIS service repository to enable.\n"
-"-I, --ar-to-disable <alias>    Add a RIS service repository to disable.\n"
-"-j, --rr-to-enable <alias>     Remove a RIS service repository to enable.\n"
-"-J, --rr-to-disable <alias>    Remove a RIS service repository to disable.\n"
-"-k, --cl-to-enable             Clear the list of RIS repositories to enable.\n"
-"-K, --cl-to-disable            Clear the list of RIS repositories to disable.\n"
+"-i, --ar-to-enable <alias>     Pridaj repozitár na zapnutie (pre RIS služby).\n"
+"-I, --ar-to-disable <alias>    Pridaj repozitár na vypnutie (pre RIS služby).\n"
+"-j, --rr-to-enable <alias>     Odstráň repozitár na zapnutie (pre RIS služby).\n"
+"-J, --rr-to-disable <alias>    Odstráň repozitár na vypnutie (pre RIS služby).\n"
+"-k, --cl-to-enable             Vymaž zoznam repozitárov na zapnutie (pre RIS služby).\n"
+"-K, --cl-to-disable            Vymaž zoznam repozitárov na vypnutie (pre RIS služby).\n"
 "\n"
-"-a, --all                 Zastosuje zmiany do wszystkich serwerów.\n"
-"-l, --local               Zastosuje zmiany do wszystkich lokalnych repozytoriów.\n"
-"-t, --remote              Zastosuje zmiany do wszystkich zdalnych serwerów.\n"
-"-m, --medium-type <type>  Zastosuje zmiany do serwerół określonego typu.\n"
+"-a, --all                      Aplikuj zmeny na všetky služby.\n"
+"-l, --local                    Aplikuj zmeny na lokálne služby.\n"
+"-t, --remote                   Aplikuj zmeny na vzdialené služby.\n"
+"-m, --medium-type <type>       Aplikuj zmeny na služby na zadanom type média.\n"
 
 #: ../src/Zypper.cc:1147
 msgid ""
@@ -2792,18 +2794,19 @@ msgid ""
 "-U, --sort-by-uri         Sort the list by URI.\n"
 "-N, --sort-by-name        Sort the list by name.\n"
 msgstr ""
-"services (ls) [parametr]\n"
+"services (ls) [voľby]\n"
 "\n"
-"List defined services.\n"
+"Zobraz zoznam definovaných služieb.\n"
 "\n"
-"  Parametry polecenia:\n"
-"-u, --uri                 Wyświetla również URI.\n"
-"-p, --priority            Wyświetla również priorytet repozytoriów.\n"
-"-d, --details             Wyświetla więcej informacji, jak URI, priorytet, typ.\n"
-"-r, --with-repos          Show also repositories belonging to the services.\n"
-"-P, --sort-by-priority    Sortuje listę repozytoriów według priorytetu.\n"
-"-U, --sort-by-uri         Sortuje listę według URI.\n"
-"-N, --sort-by-name        Sortuje listę według nazwy.\n"
+"  Command options:\n"
+"-u, --uri                 Zobraz aj základnú URI adresu služieb.\n"
+"-p, --priority            Zobraz aj prioritu repozitárov.\n"
+"-d, --details             Zobraz viac informácií ako napríklad URI, priorita, typ.\n"
+"-r, --with-repos          Zobraz aj repozitáre patriace k službám.\n"
+"-U, --sort-by-uri         Zotrieď zoznam podľa URI adresy.\n"
+"-P, --sort-by-priority    Zotrieď zoznam podľa priority.\n"
+"-A, --sort-by-alias       Zotrieď zoznam podľa aliasu.\n"
+"-N, --sort-by-name        Zotrieď zoznam podľa názvu.\n"
 
 #: ../src/Zypper.cc:1173
 msgid ""
@@ -2814,12 +2817,12 @@ msgid ""
 "  Command options:\n"
 "-r, --with-repos      Refresh also repositories.\n"
 msgstr ""
-"refresh-services (refs) [parametry]\n"
+"refresh-services (refs) [voľby]\n"
 "\n"
-"Odświeża indeks wybranych repozytoriów.\n"
+"Aktualizuj definované služby.\n"
 "\n"
-"  Parametry polecenia:\n"
-"-r, --with-repos      Odświeża również repozytoria.\n"
+"  Command options:\n"
+"-r, --with-repos      Aktualizuj aj repozitáre.\n"
 
 #. TranslatorExplanation the %s = "yast2, rpm-md, plaindir"
 #: ../src/Zypper.cc:1201
@@ -2841,21 +2844,21 @@ msgid ""
 "-K, --no-keep-packages  Disable RPM files caching.\n"
 "-f, --refresh           Enable autorefresh of the repository.\n"
 msgstr ""
-"addrepo (ar) [options] <URI> <alias>\n"
-"addrepo (ar) [options] <NAZWA PLIKU.repo>\n"
+"addrepo (ar) [voľby] <URI> <alias>\n"
+"addrepo (ar) [voľby] <SÚBOR.repo>\n"
 "\n"
-"Dodaje repozytorium do systemu. Repozytorium może byc określone za pomocą URL lub może być odczytane z pliku .repo również zdalnego.\n"
+"Pridaj repozitár do systému. Repozitár je možné určiť pomocou URI adresy alebo môže byť načítaný z .repo súboru (aj vzdialeného).\n"
 "\n"
-"  Parametry polecenia:\n"
-"-r, --repo <NAZWA PLIKU.repo>  Jeszcze jeden sposób na określenie pliku .repo z którego zostaną odczytane dane.\n"
-"-t, --type <TYPE>       Typ repozytorium (%s).\n"
-"-d, --disable           Dodaje repozytorium jako wyłączone.\n"
-"-c, --check             Sprawdza adres URL.\n"
-"-C, --no-check          Nie sprawdza adresu URL, zostanie on sprawdzony później podczas odświeżania.\n"
-"-n, --name              Pozwala określić opisową nazwę repozytorium.\n"
-"-k, --keep-packages     Pozwala przechowywać pliki RPM w lokalnym buforze.\n"
-"-K, --no-keep-packages  Blokuje przechowywanie RPM w lokalnym buforze.\n"
-"-f, --refresh           Włącza automatyczne odświeżanie repozytorium.\n"
+"  Voľby príkazu:\n"
+"-r, --repo <SÚBOR.repo>  Ďalší spôsob ako určiť .repo súbor na načítanie.\n"
+"-t, --type <TYP>         Typ repozitára (%s)\n"
+"-d, --disable            Pridaný repozitár bude nastavený ako vypnutý.\n"
+"-c, --check              Skontroluj zadanú URI adresu.\n"
+"-C, --no-check           Nekontroluj zadanú URI adresu počas pridávania repozitára.\n"
+"-n, --name               Zadaj popisný názov repozitára.\n"
+"-k, --keep-packages      Zapni uchovávanie RPM súborov.\n"
+"-K, --no-keep-packages   Vypni uchovávanie RPM súborov.\n"
+"-f, --refresh            Zapni automatickú aktualizáciu.\n"
 
 #. translators: this is just a rug compatiblity command
 #. translators: this is just a rug-compatiblity command
@@ -2867,7 +2870,7 @@ msgid ""
 msgstr ""
 "list-resolvables (lr)\n"
 "\n"
-"Wyświetla dostępne typy obiektów rozwiązywalnych.\n"
+"Zobraz zoznam známych typov balíkov.\n"
 
 #: ../src/Zypper.cc:1258
 msgid ""
@@ -2885,24 +2888,24 @@ msgid ""
 "-A, --sort-by-alias       Sort the list by alias.\n"
 "-N, --sort-by-name        Sort the list by name.\n"
 msgstr ""
-"repos (lr) [parametr]\n"
+"repos (lr) [voľby]\n"
 "\n"
-"Wyświetla wszystkie zdefiniowane repozytoria.\n"
+"Zobraz zoznam definovaných repozitárov.\n"
 "\n"
-"  Parametry polecenia:\n"
-"-e, --export <FILE.repo>  Eksportuje wszystkie zdefiniowane repozytoria jako lokalny plik .repo.\n"
-"-u, --uri                 Wyświetla również podstawowy URI repozytoriów.\n"
-"-p, --priority            Wyświetla również priorytet repozytoriów.\n"
-"-d, --details             Wyświetla więcej informacji jak, URI, priorytet, typ.\n"
-"-U, --sort-by-uri         Sortuje listę według URI.\n"
-"-P, --sort-by-priority    Sortuje listę według priorytetu.\n"
-"-A, --sort-by-alias       Sortuje listę według aliasu.\n"
-"-N, --sort-by-name        Sortuje listę według nazwy.\n"
+"  Command options:\n"
+"-e, --export <SÚBOR.repo>  Exportuj všetky definované repozitáre do zadaného .repo súboru.\n"
+"-u, --uri                 Zobraz aj základnú URI adresu repozitárov.\n"
+"-p, --priority            Zobraz aj prioritu repozitárov.\n"
+"-d, --details             Zobraz viac informácií ako napríklad URI, priorita, typ.\n"
+"-U, --sort-by-uri         Zotrieď zoznam podľa URI adresy.\n"
+"-P, --sort-by-priority    Zotrieď zoznam podľa priority.\n"
+"-A, --sort-by-alias       Zotrieď zoznam podľa aliasu.\n"
+"-N, --sort-by-name        Zotrieď zoznam podľa názvu.\n"
 
 #. translators: this option belongs to 'lr' command help
 #: ../src/Zypper.cc:1273
 msgid "-s, --service             Show also alias of parent service.\n"
-msgstr "-s, --services           Pokazuje także aliasy macierzystych usług.\n"
+msgstr "-s, --service             Zobraz aj alias rodičovskej služby.\n"
 
 #: ../src/Zypper.cc:1288
 msgid ""
@@ -2914,12 +2917,13 @@ msgid ""
 "    --loose-auth   Ignore user authentication data in the URI.\n"
 "    --loose-query  Ignore query string in the URI.\n"
 msgstr ""
-"removerepo (rr) [opcje] <alias|URI>\n"
+"removerepo (rr) [voľby] <alias|#|URI>\n"
 "\n"
-"Usuwa repozytorium określone przez alias lub adres URI.\n"
-"  Opcje polecenia:\n"
-"    --loose-auth\tIgnoruje dane uwierzytelniania w adresie URI\n"
-"    --loose-query\tIgnoruje ciąg zapytania w adresie URI\n"
+"Odstráň repozitár zadaný pomocou aliasu, čísla alebo URI adresy.\n"
+"\n"
+"  Voľby príkazu:\n"
+"    --loose-auth   Ignoruj autentifikačné údaje v URI\n"
+"    --loose-query  Ignoruj URI parametre.\n"
 
 #: ../src/Zypper.cc:1307
 msgid ""
@@ -2929,11 +2933,11 @@ msgid ""
 "\n"
 "This command has no additional options.\n"
 msgstr ""
-"renamerepo [options] <alias|#|URI> <nowy-alias>\n"
+"renamerepo <alias|#|URI> <nový-alias>\n"
 "\n"
-"Przypisuje nowy alias do repozytorium określonego przez alias, numer lub adres URI.\n"
+"Priradí nový alias existujúcemu repozitáru zadanému pomocou aliasu, čísla alebo URI adresy.\n"
 "\n"
-"To polecenie nie posiada żadnych dodatkowych opcji.\n"
+"Tento príkaz nemá žiadne ďalšie voľby.\n"
 
 #. translators: %s is "--all|--remote|--local|--medium-type"
 #. and "--all, --remote, --local, --medium-type"
@@ -2961,25 +2965,24 @@ msgid ""
 "-t, --remote              Apply changes to all remote repositories.\n"
 "-m, --medium-type <type>  Apply changes to repositories of specified type.\n"
 msgstr ""
-"modifyrepo (mr) <parametry> <alias|#|URI>\n"
-"modifyrepo (mr) <paramatry> <%s>\n"
+"modifyrepo (mr) <voľby> <alias|#|URI>\n"
+"modifyrepo (mr) <voľby> <%s>\n"
 "\n"
-"Modyfikuje włąściwości repozytoriół określonych aliasem, numerem, adresem URL, lub za pomocą opcji '%s'.\n"
+"Zmeň vlastnoti repozitárov zadaných pomocou aliasu, čísla alebo URI adresy alebo pomocou úhrnných volieb '%s'.\n"
 "\n"
-"  Parametry polecenia:\n"
-"-d, --disable             Wyłącza repozytorium, ale nie usuwa go.\n"
-"-e, --enable              Włącza repozytorium.\n"
-"-r, --refresh             Włącza automatyczne odświeżanie repozytorium.\n"
-"-R, --no-refresh          Wyłącza automatyczne odświeżanie repozytorium.\n"
-"-n, --name                Ustawia opisową nazwę dla repzytorium.\n"
-"-p, --priority <1-99>     Ustawia priorytet repozytorium.\n"
-"-k, --keep-packages       Ustawia pzrechowywanie plików RPM w lokalnym buforze.\n"
-"-K, --no-keep-packages    Wyłącza buforowanie pakietów RPM w lokalnym buforze.\n"
-"\n"
-"-a, --all                 Zastosój zmiany dla wszystkich repozytoriów.\n"
-"-l, --local               Zastosój zmiany do lokalnych repozytoriów.\n"
-"-t, --remote              Zastosój zmiany do zdalnych repozytoriów.\n"
-"-m, --medium-type <type>  Zastosój zmiany do repozytoriów określonego typu.\n"
+"  Voľby príkazu:\n"
+"-d, --disable             Vypni repozitár (ale neodstraňuj ho).\n"
+"-e, --enable              Zapni repozitár.\n"
+"-r, --refresh             Zapni automatickú obnovu repozitára.\n"
+"-R, --no-refresh          Vypni automatickú obnovu repozitára.\n"
+"-n, --name                Nastav popisný názov repozitára.\n"
+"-p, --priority <hodnota>  Nastav prioritu. Viď manuálovú stránku.\n"
+"-k, --keep-packages       Zapni ponechávanie stiahnutých balíkov.\n"
+"-K, --no-keep-packages    Vypni ponechávanie stiahnutých balíkov.\n"
+"-a, --all                 Aplikuj zmeny na všetky repozitáre.\n"
+"-l, --local               Aplikuj zmeny na lokálne repozitáre.\n"
+"-t, --remote              Aplikuj zmeny na vzdialené repozitáre.\n"
+"-m, --medium-type <type>  Aplikuj zmeny na repozitáre na zadanom type média.\n"
 
 #: ../src/Zypper.cc:1378
 msgid ""
@@ -2998,16 +3001,16 @@ msgid ""
 msgstr ""
 "refresh (ref) [alias|#|URI] ...\n"
 "\n"
-"Odświeża repozytoria na podstawie aliasu, numeru, lub adresu URL. Jeżeli żadne nie będzie wybrane, zostaną odświezone wszystkie.\n"
+"Aktualizuj repozitáre zadané pomocou aliasu, čísla alebo URI adresy. Ak nie sú zadané žiadne repozitáre, aktualizujú sa všetky zapnuté repozitáre.\n"
 "\n"
-"  Parametry polecenia:\n"
-"-f, --force              Wymusza pełne odświeżenie.\n"
-"-b, --force-build        Wymusza przebudowanie bazy danych pakietów.\n"
-"-d, --force-download     Force download of raw metadata.\n"
-"-B, --build-only         Tworzy tylko bazę danych, nie po biera metadanych.\n"
-"-D, --download-only      Only download raw metadata, don't build the database.\n"
-"-r, --repo <alias|#|URI> Odświeża tylko określone repozytoria.\n"
-"-s, --services           Odświeża również serwery przed odświeżeniem repozytoriów.\n"
+"  Voľby príkazu:\n"
+"-f, --force              Vynúť úplnú aktualizáciu.\n"
+"-b, --force-build        Vynúť znovuvytvorenie databázy metadát.\n"
+"-d, --force-download     Vynúť stiahnutie surových metadát.\n"
+"-B, --build-only         Len vytvor databázu, nesťahuj metadáta.\n"
+"-D, --download-only      Len stiahni metadáta, nevytváraj databázu\n"
+"-r, --repo <alias|#|URI> Aktualizuj iba zadaný repozitár.\n"
+"-s, --services           Aktualizuj aj služby pred aktualizáciou repozitárov.\n"
 
 #: ../src/Zypper.cc:1407
 msgid ""
@@ -3021,15 +3024,15 @@ msgid ""
 "-M, --raw-metadata       Clean raw metadata cache.\n"
 "-a, --all                Clean both metadata and package caches.\n"
 msgstr ""
-"clean [alias|#|URI] ...\n"
+"clean [voľby] [alias|#|URI] ...\n"
 "\n"
-"Czyści lokalny bufor.\n"
+"Vyčisti lokálne medzipamäte.\n"
 "\n"
-"  Parametry polecenia:\n"
-"-r, --repo <alias|#|URI> Czyści tylko określone repozytoria.\n"
-"-m, --metadata           Czyści bufor metadanych.\n"
-"-M, --raw-metadata       Clean raw metadata cache.\n"
-"-a, --all                Czyści zarówno metdanych jak i pakietów.\n"
+"  Voľby príkazu:\n"
+"-r, --repo <alias|#|URI> Vyčisti len zadané repozitáre.\n"
+"-m, --metadata           Vymaž databázu metadát.\n"
+"-M, --raw-metadata       Vymaž medzipamäť surových metadát.\n"
+"-a, --all                Vymaž aj metadáta, aj uložené balíky.\n"
 
 #. TranslatorExplanation the first %s = "package, patch, pattern, product"
 #. and the second %s = "patch"
@@ -3051,20 +3054,17 @@ msgid ""
 "                              available, regardless whether they are\n"
 "                              installable or not.\n"
 msgstr ""
-"list-updates (lu) [parametry]\n"
+"list-updates (lu) [voľby]\n"
 "\n"
-"Wyświetla dostępne aktualizacje.\n"
+"Vypíš zoznam všetkých dostupných aktualizácií.\n"
 "\n"
-"  Parametry polecenia:\n"
-"-t, --type <type>               Typ rozwiązywalny (%s).\n"
-"                                Domyślny: %s.\n"
-"-r, --repo <alias|#|URI>        Wyświetla tylko aktualizacje z określonego repozytorium.\n"
-"    --best-effort               Próbuje w najlepszy sposób przeprowadzić aktualizacje.\n"
-"                                Uaktualnienia do niższych niż najnowsza wersja\n"
-"                                są dopuszczone.\n"
-"-a, --all                     Listy wszystkich pakietów dla których nowsza wersja jest\n"
-"                              dostępna, niezależnie czy są możliwe \n"
-"                              do zainstalowania.\n"
+"  Voľby príkazu:\n"
+"-t, --type <typ>          Typ balíkov (%s).\n"
+"                          Prednastavený typ: %s\n"
+"-r, --repo <alias|#|URI>  Pracuj len so zadaným repozitárom.\n"
+"    --best-effort         Uvažuj aktualizáciu najlepším možným spôsobom.\n"
+"                          Aktualizácia na nižšiu verziu, aj keď existuje vyššia\n"
+"                          je tiež prijateľná.\n"
 
 #. TranslatorExplanation the first %s = "package, patch, pattern, product"
 #. and the second %s = "patch"
@@ -3093,25 +3093,26 @@ msgid ""
 "    --force-resolution          Force the solver to find a solution (even an agressive).\n"
 "-D, --dry-run                   Test the update, do not actually update.\n"
 msgstr ""
-"update (up) [options]\n"
+"update (up) [voľby] ...\n"
 "\n"
-"Update all installed resolvables with newer versions, where applicable.\n"
+"Aktualizuj všetky nainštalované balíky na novšie dostupné verzie.\n"
 "\n"
-"  Command options:\n"
+"  Voľby príkazu:\n"
 "\n"
-"-t, --type <type>               Rodzaj pakietu (%s).\n"
-"                                Domyślny: %s.\n"
-"-r, --repo <alias|#|URI>        Ogranicz uaktualnienia do wybranego repozytorium.\n"
-"    --skip-interactive          Pomija interaktywną aktualizację.\n"
-"-l, --auto-agree-with-licenses  Autoatycznie wyraża akceptuje licencję firm trzeciech                                See man zypper for more details.\n"
-"    --best-effort               Do a 'best effort' approach to update. Updates\n"
-"                                to a lower than the latest version are\n"
-"                                also acceptable.\n"
-"    --debug-solver              Wygeneruj test rozwiązywania zależności do debugowania.\n"
-"    --no-recommends             Nie instaluj zalecanych pakietów, tylko wymagane.\n"
-"-R, --no-force-resolution       Do not force the solver to find solution, let it ask.\n"
-"    --force-resolution          Force the solver to find a solution (even an agressive).\n"
-"-D, --dry-run                   Test aktualizacji, bez faktycznego uaktualnienia pakietów.\n"
+"-t, --type <typ>                Typ balíka (%s)\n"
+"                                Prednastavený typ: %s\n"
+"-r, --repo <alias|#|URI>        Pracuj len so zadaným repozitárom.\n"
+"    --skip-interactive          Vynechaj interaktívne aktualizácie.\n"
+"-l, --auto-agree-with-licenses  Automaticky potvrď súhlas s licenciami tretích strán.\n"
+"                                Pre viac informácií viď manuálovú stránku.\n"
+"    --best-effort               Vykonaj aktualizáciu najlepším možným spôsobom.\n"
+"                                Aktualizácia na nižšiu verziu, aj keď existuje vyššia\n"
+"                                je tiež prijateľná.\n"
+"    --debug-solver              Vytvor testovací prípad pre riešiteľa závislostí pre účely ladenia.\n"
+"    --no-recommends             Neinštaluj odporúčané balíky, len vyžadované.\n"
+"-R, --no-force-resolution       Nevynucuj nájdenie riešenia závislostí, spýtaj sa užívateľa.\n"
+"    --force-resolution          Vynúť nájdenie riešenia závislostí, aj keby malo byť agresívne.\n"
+"-D, --dry-run                   Beh naprázdno. Len otestuj aktualizáciu, ale nič skutočne neaktualizuj.\n"
 
 #: ../src/Zypper.cc:1526
 msgid ""
@@ -3129,18 +3130,18 @@ msgid ""
 "    --debug-solver              Create solver test case for debugging.\n"
 "-D, --dry-run                   Test the update, do not actually update.\n"
 msgstr ""
-"patch [parametry]\n"
+"patch [voľby]\n"
 "\n"
-"Instaluje wszystkie dostępne i potrzebne poprawki.\n"
+"Nainštaluj všetky potrebné záplaty, ktoré sú k dispozícii.\n"
 "\n"
-"  parametry polecenia:\n"
+"  Voľby príkazu:\n"
 "\n"
-"-r, --repo <alias|#|URI>        Ogranicza uaktualnienie do wybranego repozytorium.\n"
-"    --skip-interactive          Skip interactive patches.\n"
-"-l, --auto-agree-with-licenses  Automatycznie akceptuje licencje firm trzecich..\n"
-"                                Więcej informacji: man zypper.\n"
-"    --debug-solver              Tworzy test rozwiązywania zalezności dla debuggowania.\n"
-"-D, --dry-run                   testuje aktualizację, zmiany nie zostaną wprowadzone.\n"
+"-r, --repo <alias|#|URI>        Pracuj len so zadaným repozitárom.\n"
+"    --skip-interactive          Vynechaj interaktívne aktualizácie.\n"
+"-l, --auto-agree-with-licenses  Automaticky potvrď súhlas s licenciami tretích strán.\n"
+"                                Pre viac informácií viď manuálovú stránku.\n"
+"    --debug-solver              Vytvor testovací prípad pre riešiteľa závislostí pre účely ladenia.\n"
+"-D, --dry-run                   Beh naprázdno. Len otestuj inštaláciu, ale nič skutočne neinštaluj.\n"
 
 #: ../src/Zypper.cc:1552
 msgid ""
@@ -3151,13 +3152,13 @@ msgid ""
 "  Command options:\n"
 "-r, --repo <alias|#|URI>        List only patches from the specified repository.\n"
 msgstr ""
-"list-patches (lp) [opcje]\n"
+"list-patches (lp) [voľby]\n"
 "\n"
-"Lista wszystkich dostępnych poprawek\n"
+"Zobraz zoznam všetkých potrebných dostupných záplat.\n"
 "\n"
-"  Opcje:\n"
+"  Voľby príkazu:\n"
 "\n"
-"-r, --repo <alias|#|URI>  Ogranicza tylko do poprawek z określonego repozytorium.\n"
+"-r, --repo <alias|#|URI>  Pracuj len so zadaným repozitárom.\n"
 
 #: ../src/Zypper.cc:1577
 msgid ""
@@ -3174,18 +3175,18 @@ msgid ""
 "    --debug-solver              Create solver test case for debugging\n"
 "-D, --dry-run                   Test the upgrade, do not actually upgrade\n"
 msgstr ""
-"dist-upgrade (dup) [parametry]\n"
+"dist-upgrade (dup) [voľby]\n"
 "\n"
-"Wykonuje uktualizację systemu.\n"
+"Vykoná aktualizáciu celej distribúcie.\n"
 "\n"
-"  parametry polecenia:\n"
+"  Voľby príkazu:\n"
 "\n"
-"-r, --repo <alias|#|URI>        Ogranicza uaktualnienie do wybranego repozytorium.\n"
-"    --no-recommends             Instaluje tylko wymagane pakiety, nie instaluje zalecanych.\n"
-"-l, --auto-agree-with-licenses  Automatycznie akceptuje licencje firm trzecich..\n"
-"                                Więcej informacji: man zypper.\n"
-"    --debug-solver              Tworzy test rozwiązywania zalezności dla debuggowania.\n"
-"-D, --dry-run                   testuje aktualizację, zmiany nie zostaną wprowadzone.\n"
+"-r, --repo <alias|#|URI>        Použi len balíky zo zadaného repozitára.\n"
+"    --no-recommends             Neinštaluj odporúčané balíky, len vyžadované.\n"
+"-l, --auto-agree-with-licenses  Automaticky potvrď súhlas s licenciami tretích strán.\n"
+"                                Pre viac informácií viď manuálovú stránku.\n"
+"    --debug-solver              Vytvor testovací prípad pre riešiteľa závislostí pre účely ladenia.\n"
+"-D, --dry-run                   Beh naprázdno. Len otestuj aktualizáciu, ale nič skutočne neaktualizuj.\n"
 
 #: ../src/Zypper.cc:1619
 msgid ""
@@ -3212,28 +3213,28 @@ msgid ""
 "\n"
 "* and ? wildcards can also be used within search strings.\n"
 msgstr ""
-"search [parametr] [zapytanie...]\n"
+"search (se) [voľby] [hľadaný-výraz] ...\n"
 "\n"
-"Szuka pakietów pasujących do podanych fraz\n"
+"Nájdi balíky podľa zadaných výrazov.\n"
 "\n"
-"  Opcje polecenia:\n"
-"    --match-all            Szuka pasujących do wszystkich fraz (domyślne)\n"
-"    --match-any            Szuka pasujących do dowolnej z podanych fraz\n"
-"    --match-substrings     Pasujące frazy mogą być fragmentami słów (domyślnie)\n"
-"    --match-words          Pasujące frazy muszą być pełnymi słowami\n"
-"    --match-exact          Szuka pakietu o dokładnie takiej nazwie jak podana fraza\n"
-"-d, --search-descriptions  Szuka także w podsumowaniu i opisach pakietów.\n"
-"-c, --case-sensitive       Rozróżnianie wielkości liter.\n"
-"-i, --installed-only       Wyświetla tylko pakiety, które są już zainstalowane.\n"
-"-u, --uninstalled-only     Wyświetla tylko pakiety, które nie są aktualnie zainstalowane.\n"
-"-t, --type <type>                 Szuka tylko pakietów określonego typu.\n"
-"-r, --repo <alias|#|URI>         Szuka tylko w repozytorium określonym przez alias.\n"
-"    --sort-by-name         Sortuje pakiety wg nazwy (domyślnie).\n"
-"    --sort-by-repo         Sortuje pakiety według repozytorium.\n"
-"-s, --details              Sprawdza każdą dostępną wersję w każdym repozytorium\n"
-"                           w odzielnej linii.\n"
+"  Voľby príkazu:\n"
+"    --match-all            Hľadaj balíky, ktoré obsahujú všetky vyhľadávané výrazy (predvolené).\n"
+"    --match-any            Hľadaj balíky, ktoré obsahujú ktorýkoľvek z vyhľadávaných výrazov.\n"
+"    --match-substrings     Hľadané výrazy môžu byť časti slov (predvolené).\n"
+"    --match-words          Hľadané výrazy predstavujú celé slová.\n"
+"    --match-exact          Hľadaný výraz sa musí presne zhodovať s názvom balíka.\n"
+"-d, --search-descriptions  Hľadaj aj v popisoch balíkov.\n"
+"-C, --case-sensitive       Rozlišuje veľké a malé písmená.\n"
+"-i, --installed-only       Hľadaj iba medzi nainštalovanými balíkami.\n"
+"-u, --uninstalled-only     Hľadaj iba medzi nenainštalovanými balíkami.\n"
+"-t, --type <typ>           Hľadaj iba balíky zadaného typu.\n"
+"-r, --repo <alias|#|URI>   Hľadaj iba balíky zo zadaného repozitára.\n"
+"    --sort-by-name         Zotrieď nájdené balíky podľa mena (predvolené).\n"
+"    --sort-by-repo         Zotrieď balíky podľa repozitára.\n"
+"-s, --details              Zobraz každú dostupnú verziu v každom repozitári\n"
+"                           na osobitnom riadku.\n"
 "\n"
-"Znaki specjalne * oraz ? mogą być używane wewnątrz fraz wyszukiwania.\n"
+"Znaky * a ? môžu byť v hľadaných výrazoch použité ako náhrada ľubovoľného reťazca alebo znaku.\n"
 
 #: ../src/Zypper.cc:1656
 msgid ""
@@ -3245,13 +3246,13 @@ msgid ""
 "\n"
 "-r, --repo <alias|#|URI>  Check for patches only in the specified repository.\n"
 msgstr ""
-"patch-check (pchk) [opcje]\n"
+"patch-check (pchk) [voľby]\n"
 "\n"
-"Wyszukuje dostępne poprawki\n"
+"Zisti, či sú k dispozícii nejaké záplaty.\n"
 "\n"
-"  Opcje:\n"
+"  Voľby príkazu:\n"
 "\n"
-"-r, --repo <alias|#|URI>  Ogranicza tylko do poprawek z określonego repozytorium.\n"
+"-r, --repo <alias|#|URI>  Hľadaj záplaty iba v zadanom repozitári.\n"
 
 #: ../src/Zypper.cc:1678
 msgid ""
@@ -3263,13 +3264,13 @@ msgid ""
 "\n"
 "-r, --repo <alias|#|URI>  Just another means to specify repository.\n"
 msgstr ""
-"patches (pch) [repository] ...\n"
+"patches\n"
 "\n"
-"Wyświetla listę wszystkich dostępnych w danym repozytorium poprawek\n"
+"Vypíš zoznam všetkých dostupných záplat.\n"
 "\n"
-"  Opcje:\n"
+"  Voľby príkazu:\n"
 "\n"
-"-r, --repo <alias|#|URI>  określa repozytorium.\n"
+"-r, --repo <alias|#|URI>  Hľadaj záplaty iba v zadanom repozitári repozitári.\n"
 
 #: ../src/Zypper.cc:1705
 msgid ""
@@ -3285,17 +3286,17 @@ msgid ""
 "-N, --sort-by-name        Sort the list by package name.\n"
 "-R, --sort-by-repo        Sort the list by repository.\n"
 msgstr ""
-"packages (pa) [parametry] [repozytorium] ...\n"
+"packages (pa) [voľby] [repozitár] ...\n"
 "\n"
-"Wyświetla listę pakietów dostępną w określonym repozytorium.\n"
+"Zobraz zoznam všetkých dostupných balíkov v zadaných repozitároch.\n"
 "\n"
-"  Parametry polecenia:\n"
+"  Voľby príkazu:\n"
 "\n"
-"-r, --repo <alias|#|URI>  Kolejny sposób określenia repozytorium.\n"
-"-i, --installed-only      Wyświetla tylko zainstalowane pakiety.\n"
-"-u, --uninstalled-only    Wyświoetla tylko pakiety, które nie są zinstalowane.\n"
-"-N, --sort-by-name        Sortuje pakiety według ich nazwy.\n"
-"-R, --sort-by-repo        Sortuje według repozytoriów.\n"
+"-r, --repo <alias|#|URI>  Len ďalší spôsob ako zadať repozitár.\n"
+"-i, --installed-only      Zobraz len nainštalované balíky.\n"
+"-u, --uninstalled-only    Zobraz len nenainštalované balíky.\n"
+"-N, --sort-by-name        Zotrieď zoznam podľa názvov.\n"
+"-R, --sort-by-repo        Zotrieď zoznam podľa repozitárov.\n"
 
 #: ../src/Zypper.cc:1733
 msgid ""
@@ -3309,15 +3310,15 @@ msgid ""
 "-i, --installed-only      Show only installed patterns.\n"
 "-u, --uninstalled-only    Show only patterns which are not installed.\n"
 msgstr ""
-"patterns (pt) [parametry] [repozytorium] ...\n"
+"patterns (pt) [voľby] [repozitár] ...\n"
 "\n"
-"Wyświetla listę wszystkich wzorców dostępnych w określonym repozytorium.\n"
+"Vypíše zoznam všetkých dostupných paternov v zdaných repozitároch.\n"
 "\n"
-"  Parametry polecenia:\n"
+"  Voľby príkazu:\n"
 "\n"
-"-r, --repo <alias|#|URI>  Kolejny sposób określenia repozytorium.\n"
-"-i, --installed-only      Wyświetla tylko zainstalowane repozytoria.\n"
-"-u, --uninstalled-only    Wyświetla listę wzorców, które nie są zinstalowane.\n"
+"-r, --repo <alias|#|URI>  Len iný spôsob ako zadať repozitár.\n"
+"-i, --installed-only      Zobraz len nainštalované paterny.\n"
+"-u, --uninstalled-only    Zobraz len nenainštalované paterny.\n"
 
 #: ../src/Zypper.cc:1759
 msgid ""
@@ -3331,15 +3332,15 @@ msgid ""
 "-i, --installed-only      Show only installed products.\n"
 "-u, --uninstalled-only    Show only products which are not installed.\n"
 msgstr ""
-"products (pd) [parametry] [repozytorium] ...\n"
+"products (pd) [voľby] [repozitár] ...\n"
 "\n"
-"Wyświetla listę produktów dostępnych w określonych repozytoriach.\n"
+"Vypíše zoznam všetkých dostupných produktov v zdaných repozitároch.\n"
 "\n"
-"  Polecenia parametry:\n"
+"  Voľby príkazu:\n"
 "\n"
-"-r, --repo <alias|#|URI>  Kolejny sposób określenia repozytorium.\n"
-"-i, --installed-only      Wyświetla zainstalowane produkty.\n"
-"-u, --uninstalled-only    Wyświetla niezainstalowane produkty.\n"
+"-r, --repo <alias|#|URI>  Len ďalší spôsob ako zadať repozitár.\n"
+"-i, --installed-only      Zobraz len nainštalované produkty.\n"
+"-u, --uninstalled-only    Zobraz len nenainštalované produkty.\n"
 
 #: ../src/Zypper.cc:1784
 #, c-format
@@ -3353,14 +3354,14 @@ msgid ""
 "-t, --type <type>         Type of package (%s).\n"
 "                          Default: %s."
 msgstr ""
-"info (if) [parametr] <nazwa> ...\n"
+"info (if) [voľby] <názov> ...\n"
 "\n"
-"Wyświetla szczegółową informację dla określonych pakietów.\n"
+"Zobraz podrobné informácie o zadaných balíkoch.\n"
 "\n"
-"  Parametry polecenia:\n"
-"-r, --repo <alias|#|URI>  Działa tylko na określonym repozytorium.\n"
-"-t, --type <type>         Typ pakietu (%s).\n"
-"                          Domyślny: %s."
+"  Command options:\n"
+"-r, --repo <alias|#|URI>  Pracuj len so zadaným repozitárom.\n"
+"-t, --type <type>         Typ balíka (%s).\n"
+"                          Prednastavený typ: %s."
 
 #: ../src/Zypper.cc:1807
 #, c-format
@@ -3371,11 +3372,11 @@ msgid ""
 "\n"
 "This is a rug compatibility alias for '%s'.\n"
 msgstr ""
-"patch-info <nazwa poprawki> ...\n"
+"patch-info <názov-záplaty> ...\n"
 "\n"
-"Wyświetla szczegółowe informacje na temat poprawek\n"
+"Zobraz podrobné informácie o zadaných záplatách.\n"
 "\n"
-"To polecenie to alias kompatybilności dla \"%s\".\n"
+"Toto je alias príkazu '%s' kvôli kompatibilite s programom rug.\n"
 
 #: ../src/Zypper.cc:1826
 #, c-format
@@ -3386,11 +3387,11 @@ msgid ""
 "\n"
 "This is a rug compatibility alias for '%s'.\n"
 msgstr ""
-"pattern-info <nazwa_wzorca> ...\n"
+"pattern-info <názov-vzoru> ...\n"
 "\n"
-"Wyświetla szczegółowe informacje na temat wzorców\n"
+"Zobrazí podrobné informácie o vzore (paterne).\n"
 "\n"
-"To polecenie to alias kompatybilności dla \"%s\".\n"
+"Toto je alias príkazu '%s' kvôli kompatibilite s programom rug.\n"
 
 #: ../src/Zypper.cc:1845
 #, c-format
@@ -3401,11 +3402,11 @@ msgid ""
 "\n"
 "This is a rug compatibility alias for '%s'.\n"
 msgstr ""
-"product-info <nazwa_produktu> ...\n"
+"produkt-info <názov-produktu> ...\n"
 "\n"
-"Wyświetla szczegółowe informacje na temat produktów.\n"
+"Zobrazí podrobné informácie o produktoch.\n"
 "\n"
-"To polecenie to alias kompatybilności dla \"%s\".\n"
+"Toto je alias príkazu '%s' kvôli kompatibilite s programom rug.\n"
 
 #: ../src/Zypper.cc:1862
 msgid ""
@@ -3415,11 +3416,11 @@ msgid ""
 "\n"
 "This command has no additional options.\n"
 msgstr ""
-"what-provides (wp) <właściwość>\n"
+"what-provides (wp) <schopnosť>\n"
 "\n"
-"Wyświetla listę pakietów według określonej właściwości.\n"
+"Zobraz zoznam balíkov poskytujúcich zadanú schopnosť.\n"
 "\n"
-"Brak innych parametrów.\n"
+"Tento príkaz nemá žiadne ďalšie voľby.\n"
 
 #: ../src/Zypper.cc:1913
 msgid ""
@@ -3431,9 +3432,9 @@ msgid ""
 msgstr ""
 "moo\n"
 "\n"
-"wyświetla zwierzę\n"
+"Zobraz zviera.\n"
 "\n"
-"To polecenie nie ma dodatkowych opcji.\n"
+"Tento príkaz nemá žiadne ďalšie voľby.\n"
 
 #: ../src/Zypper.cc:1935
 #, c-format
@@ -3447,14 +3448,15 @@ msgid ""
 "-t, --type <type>         Type of package (%s).\n"
 "                          Default: %s.\n"
 msgstr ""
-"addlock (al) [parametry] <nazwa pakietu> ...\n"
+"addlock (al) [voľby] <názov_balíka> ...\n"
 "\n"
-"Dodaje blokadę pakietu. Określa pakiety do zablokowania poprzez użycie wzorca dopasowania wieloznaczników '*' i '?'.\n"
+"Pridaj zámok. Balíky ktoré majú byť zamknuté je možné určiť presným názvom alebo s použitím znakov '*' a '?'.\n"
 "\n"
-"  Parametry polecenia:\n"
-"-r, --repo <alias|#|URI>  Ogranicza blokadę do określonego repozytorium.\n"
-"-t, --type <type>         Typ pakietu (%s).\n"
-"                          Domyślny: %s.\n"
+"  Voľby príkazu:\n"
+"\n"
+"-r, --repo <alias|#|URI>  Zamkni iba balíky zo zadaného repozitára.\n"
+"-t, --type <type>         Typ balíka (%s).\n"
+"                          Prednastavený typ: %s.\n"
 
 #: ../src/Zypper.cc:1961
 #, c-format
@@ -3466,12 +3468,13 @@ msgid ""
 "  Command options:\n"
 "-r, --repo <alias|#|URI>  Remove only locks with specified repository.\n"
 msgstr ""
-"removelock (rl) [opcję] <blokada-numer|nazwapakietu> ...\n"
+"removelock (rl) <číslo_zámku|názov_balíka> ...\n"
 "\n"
-"Usuwa blokadę pakietu. Blokada do usunięcia jest określana przez numer uzyskany przez '%s' albo przez nazwę pakietu\n"
+"Odstráň zámok. Zámok je možné určiť jeho číslom získaným pomocou príkazu '%s' alebo pomocou názvu.\n"
 "\n"
-"  Parametry polecenia:\n"
-"-r, --repo <alias|#|URI>  Ogranicza blokadę do określonego repozytorium.\n"
+"  Voľby príkazu:\n"
+"\n"
+"-r, --repo <alias|#|URI>  Odstráň iba zámky so zadaným repozitárom.\n"
 
 #: ../src/Zypper.cc:1981
 msgid ""
@@ -3483,9 +3486,9 @@ msgid ""
 msgstr ""
 "locks (ll)\n"
 "\n"
-"Wyświetla listę zablokowanych pakietów.\n"
+"Zobraz zoznam aktuálnych zámkov.\n"
 "\n"
-"Brak innych parametrów.\n"
+"Tento príkaz nemá žiadne ďalšie voľby.\n"
 
 #: ../src/Zypper.cc:2021
 msgid ""
@@ -3497,9 +3500,9 @@ msgid ""
 msgstr ""
 "targetos (tos)\n"
 "\n"
-"Wyświetla ID w postaci ciągu znaków ciągu doceloweg systemu operacyjnego.\n"
+"Vypíš identifikačný kód cieľového operačného systému.\n"
 "\n"
-"Polecenie nie posiada innych parametrów.\n"
+"Tento príkaz nemá žiadne ďalšie voľby.\n"
 
 #: ../src/Zypper.cc:2040
 msgid ""
@@ -3510,12 +3513,13 @@ msgid ""
 "  Command options:\n"
 "-m, --match  Takes missing release number as any release.\n"
 msgstr ""
-"versioncmp (vcmp) <wersja1> <wersja2>\n"
+"versioncmp (vcmp) <verzia1> <verzia2>\n"
 "\n"
-"Porównanie wersji podanych jako argumenty.\n"
+"Porovnaj zadané verzie.\n"
 "\n"
-"  Parametry polecenia:\n"
-"-m, --match  Używa brakującego numeru wydania jako dowolnego wydania.\n"
+"  Voľby príkazu:\n"
+"\n"
+"-m, --match  Berie chýbajúce číslo vydania ako akékoľvek vydanie.\n"
 
 #: ../src/Zypper.cc:2059
 msgid ""
@@ -3525,11 +3529,11 @@ msgid ""
 "\n"
 "This command has no additional options.\n"
 msgstr ""
-"licencje)\n"
+"licenses\n"
 "\n"
-"Wyświetla licencję i EULA aktualnie zainstalowanych pakietów oprogramowania.\n"
+"Vytvor správu o licenciách a EULA nainštalovaných balíkov.\n"
 "\n"
-"Brak innych parametrów.\n"
+"Tento príkaz nemá žiadne ďalšie voľby.\n"
 
 #: ../src/Zypper.cc:2076
 msgid ""
@@ -3539,11 +3543,11 @@ msgid ""
 "\n"
 "This command has no additional options.\n"
 msgstr ""
-"quit (exit, ^D)\n"
+"quit (exit,^D)\n"
 "\n"
-"Opuszcza bieżącą powłokę zypper.\n"
+"Opusti spustený zypper shell.\n"
 "\n"
-"Polecenie nie posiada innych parametrów.\n"
+"Tento príkaz nemá žiadne ďalšie voľby.\n"
 
 #: ../src/Zypper.cc:2093
 msgid ""
@@ -3555,9 +3559,9 @@ msgid ""
 msgstr ""
 "shell (sh)\n"
 "\n"
-"Uruchomienie powłoki shell pod zypperem.\n"
+"Spusti príkazový riadok (shell) zypperu.\n"
 "\n"
-"Polecenie nie posiada innych parametrów.\n"
+"Tento príkaz nemá žiadne ďalšie voľby.\n"
 
 #. translators: this is just a rug-compatiblity command
 #: ../src/Zypper.cc:2111
@@ -3568,7 +3572,7 @@ msgid ""
 msgstr ""
 "service-types (st)\n"
 "\n"
-"Lista dostępnych typów serwerów.\n"
+"Zobraz zoznam dostupných typov repozitárov pre rug.\n"
 
 #. trunslators: this is a rug-compatibility command (equivalent of
 #. 'zypper addrepo -t plaindir URI'). You can refer to rug's translations
@@ -3586,12 +3590,12 @@ msgid ""
 msgstr ""
 "mount\n"
 "\n"
-"Mountuje jako kanał katalog z pakietami RPM.\n"
+"Pripoj adresár s RPM súbormi ako repozitár.\n"
 "\n"
-"  Parametry polecenia:\n"
-"-a, --alias <alias>  Użycie określonego ciągu znaków jako aliasu.\n"
-"-n, --name <nazwa>    Użycie ciągu znaków jako nazwy.\n"
-"-r, --recurse        Schodzenie w głąb katalogów.\n"
+"  Voľby príkazu:\n"
+"-a, --alias <alias>  Použi zadaný reťazec ako alias.\n"
+"-n, --name <name>    Použi zadaný reťazec ako popisný názov.\n"
+"-r, --recurse        Vnor sa do podadresárov.\n"
 
 #: ../src/Zypper.cc:2180
 #, c-format
@@ -3600,9 +3604,9 @@ msgid ""
 "\n"
 "Search for patches matching given search strings. This is a rug-compatibility alias for '%s'. See zypper's manual page for details.\n"
 msgstr ""
-"patch-search [parametr] [wzorzec wyszukiwania...]\n"
+"patch-search [voľby] [hľadaný-výraz...]\n"
 "\n"
-"Wyszukaje poprawki zawierające dany wzorzec wyszukiwania. Jest to kompatybilność z rug pod aliasem '%s'. Szczegóły w podręczniku zypper.\n"
+"Hľadaj záplaty podľa zadaného výrazu. Tento príkaz je alias príkazu '%s' kvôli kompatibilite s programom rug. Pre viac podrobností pozrite manuálovú stránku.\n"
 
 #. translators: this is just a rug-compatiblity command
 #: ../src/Zypper.cc:2198
@@ -3612,18 +3616,18 @@ msgid ""
 "This command has dummy implementation which always returns 0.\n"
 "It is provided for compatibility with rug.\n"
 msgstr ""
-"ping [opcje]\n"
+"ping [voľby]\n"
 "\n"
-"Komenda zwracająca 0.\n"
-"Istnieje dla kompatybilności z rug.\n"
+"Tento príkaz len vždy vracia 0.\n"
+"Bol pridaný kvôli kompatibilite s programom rug.\n"
 
 #: ../src/Zypper.cc:2212 ../src/Zypper.cc:3959
 msgid "Unexpected program flow."
-msgstr "Nieoczekiwany przebieg programu"
+msgstr "Neočakávaný tok programu."
 
 #: ../src/Zypper.cc:2236
 msgid "Non-option program arguments: "
-msgstr "Parametry programu nie będące opcjami: "
+msgstr "Argumenty programu (okrem volieb): "
 
 #. TranslatorExplanation this is a hedgehog, paint another animal, if you want
 #: ../src/Zypper.cc:2298
@@ -3632,35 +3636,35 @@ msgid ""
 "  \\\\\\\\\\\\\\__o\n"
 "__\\\\\\\\\\\\\\'/_"
 msgstr ""
-" ___ ___  .---^.\n"
-"  ___ _  e. __ ,o\n"
-"           \"  \""
+"   \\(_)\\\\\n"
+"  \\\\(_(_)\\\\__o\n"
+"__\\\\\\\\\\\\\\'/_"
 
 #: ../src/Zypper.cc:2325
 msgid "Root privileges are required for refreshing services."
-msgstr "Do odświeżania repozytoriów konieczne są uprawnienia administratora."
+msgstr "Pre aktualizáciu služieb sú potrebné práva správcu systému (root)."
 
 #: ../src/Zypper.cc:2352 ../src/Zypper.cc:2699
 msgid "Root privileges are required for modifying system services."
-msgstr "Do modyfikacji repozytoriów konieczne są uprawnienia administratora."
+msgstr "Pre prácu so službami sú potrebné práva správcu systému (root)."
 
 #: ../src/Zypper.cc:2421
 msgid "Could not determine the type of the repository. Check if the specified URI points to a valid repository."
-msgstr "Nie można określić typu repozytorium. Proszę sprawdzić czy zdefiniowane adresy  URL wskazują na poprawne repozytoria."
+msgstr "Nemôžem určiť typ repozitára. Overte, či definované URI adresy (viď nižšie) ukazujú na platný repozitár."
 
 #: ../src/Zypper.cc:2453
 #, c-format
 msgid "'%s' is not a valid service type."
-msgstr "'%s' jest niepoprawnym typem usługi."
+msgstr "'%s' nie je platný typ služby."
 
 #: ../src/Zypper.cc:2455
 #, c-format
 msgid "See '%s' or '%s' to get a list of known service types."
-msgstr "Należy sprawdzić '%s' lub '%s' by uzyskać listę repozytoriów."
+msgstr "Zoznam známych typov služieb získate pomocou '%s' alebo '%s'."
 
 #: ../src/Zypper.cc:2472
 msgid "Root privileges are required for modifying services."
-msgstr "Do modyfikacji repozytoriów konieczne są uprawnienia administratora."
+msgstr "Pre prácu so službami sú potrebné práva správcu systému (root)."
 
 #. translators: aggregate option is e.g. "--all". This message will be
 #. followed by ms command help text which will explain it
@@ -3668,195 +3672,190 @@ msgstr "Do modyfikacji repozytoriów konieczne są uprawnienia administratora."
 #. followed by mr command help text which will explain it
 #: ../src/Zypper.cc:2484 ../src/Zypper.cc:2852
 msgid "Alias or an aggregate option is required."
-msgstr "Wymagany jest alias lub opcja agregatu."
+msgstr "Je nutné zadať buď alias alebo niektorú z úhrnných volieb."
 
 #: ../src/Zypper.cc:2518
 #, c-format
 msgid "Service '%s' not found."
-msgstr "Nie znaleziono serwera %s."
+msgstr "Služba '%s' nebola nájdená."
 
 #: ../src/Zypper.cc:2554 ../src/Zypper.cc:2698 ../src/Zypper.cc:2784
 #: ../src/Zypper.cc:2840
 msgid "Root privileges are required for modifying system repositories."
-msgstr "Do modyfikacji repozytoriów konieczne są uprawnienia administratora."
+msgstr "Pre prácu so systémovými repozitármi sú potrebné práva správcu systému (root)."
 
 #: ../src/Zypper.cc:2603 ../src/Zypper.cc:2960
 msgid "Too few arguments."
-msgstr "Zbyt mało parametrów."
+msgstr "Príliš málo argumentov."
 
 #: ../src/Zypper.cc:2627
 msgid "If only one argument is used, it must be a URI pointing to a .repo file."
-msgstr "Jeśli użyto tylko jednego parametru, to musi to być adres URI pliku .repo."
+msgstr "Ak je použitý iba jeden argument, musí to byť URI adresa .repo súboru."
 
 #: ../src/Zypper.cc:2653
 #, c-format
 msgid "Cannot use %s together with %s. Using the %s setting."
-msgstr "Nie można użyć %s razem z %s. Użyto ustawienia %s."
+msgstr "Nie je možné použiť %s spolu s %s. Použijem %s."
 
 #: ../src/Zypper.cc:2676
 msgid "Specified type is not a valid repository type:"
-msgstr "Podany typ repozytorium nie jest poprawny:"
+msgstr "Zadaný typ nie je platný typ repozitára:"
 
 #: ../src/Zypper.cc:2678
 #, c-format
 msgid "See '%s' or '%s' to get a list of known repository types."
-msgstr "Należy sprawdzić '%s' lub '%s' by uzyskać listę typów repozytoriów."
+msgstr "Zoznam známych typov repozitárov získate pomocou '%s' alebo '%s'."
 
 #. translators: %s is the supplied command line argument which
 #. for which no repository counterpart was found
 #: ../src/Zypper.cc:2734
 #, c-format
 msgid "Repository '%s' not found by alias, number or URI."
-msgstr "Nie znaleziono repozytorium '%s' według aliasu, numeru lub adresu URL."
+msgstr "Repozitár '%s' nebol nájdený podľa zadaného aliasu, čísla ani URI adresy."
 
 #. translators: %s is the supplied command line argument which
 #. for which no service counterpart was found
 #: ../src/Zypper.cc:2757
 #, c-format
 msgid "Service '%s' not found by alias, number or URI."
-msgstr "Nie odnaleziono serwera '%s' na podstawie aliasu, numeru, lub adresu URL."
+msgstr "Služba '%s' nebola nájdená podľa zadaného aliasu, čísla ani URI adresy."
 
 #: ../src/Zypper.cc:2791
 msgid "Too few arguments. At least URI and alias are required."
-msgstr "Zbyt mało parametrów. Wymagany jest conajmniej alias i adres URI."
+msgstr "Príliš málo argumentov. Aspoň URI adresa a alias musia byť zadané."
 
 #: ../src/Zypper.cc:2816
 #, c-format
 msgid "Repository '%s' not found."
-msgstr "Repozytorium \"%s\" nie zostało znalezione."
+msgstr "Repozitár '%s' nebol nájdený."
 
 #: ../src/Zypper.cc:2882
 #, c-format
 msgid "Repository %s not found."
-msgstr "Repozytorium \"%s\" nie zostało znalezione"
+msgstr "Repozitár '%s' nebol nájdený."
 
 #: ../src/Zypper.cc:2900
 msgid "Root privileges are required for refreshing system repositories."
-msgstr "Do odświeżania repozytoriów konieczne są uprawnienia administratora."
+msgstr "Pre aktualizáciu repozitárov sú potrebné práva správcu systému (root)."
 
 #: ../src/Zypper.cc:2907
 #, c-format
 msgid "The '%s' global option has no effect here."
-msgstr "Opcja globalna \"%s\" nie przynosi tutaj efektu."
+msgstr "Všeobecná voľba '%s' tu nemá žiadny vplyv, ignorujem ju."
 
 #: ../src/Zypper.cc:2915
 #, c-format
 msgid "Arguments are not allowed if '%s' is used."
-msgstr "Argumenty nie dozwolone gdy '%s' jest używane."
+msgstr "Argumenty príkazu nie sú povolené ak je použitá voľba '%s'."
 
 #: ../src/Zypper.cc:2941
 msgid "Root privileges are required for cleaning local caches."
-msgstr "Do czyszczenia buforów lokalnych konieczne są uprawnienia administratora."
+msgstr "Pre čistenie miestnych medzipamätí sú potrebné práva správcu systému (root)."
 
 #: ../src/Zypper.cc:2961
 msgid "At least one package name is required."
-msgstr "Wymagana jest co najmniej jedna nazwa pakietu."
+msgstr "Je nutné zadať aspoň jeden názov balíka."
 
 #: ../src/Zypper.cc:2975
 msgid "Root privileges are required for installing or uninstalling packages."
-msgstr "Do instalacji/usuwania pakietów konieczne są uprawnienia administratora."
+msgstr "Pre inštaláciu alebo odstránenie balíkov sú potrebné práva správcu systému (root)."
 
 #: ../src/Zypper.cc:2990
 #, c-format
 msgid "Unknown package type: %s"
-msgstr "Nieznany typ pakietu: %s"
+msgstr "Neznámy typ balíka: %s"
 
 #: ../src/Zypper.cc:3010
 #, c-format
 msgid "'%s' looks like an RPM file. Will try to download it."
-msgstr "\"%s\" wygląda jak plik RPM. Nastąpi próba pobrania."
+msgstr "'%s' vyzerá ako RPM súbor. Pokúsim sa ho stiahnuť."
 
 #: ../src/Zypper.cc:3023
 #, c-format
 msgid "Problem with the RPM file specified as '%s', skipping."
-msgstr "Wystąpił problem z pakietem RPM określonym jako '%s' i został pominięty."
+msgstr "Nastal problém s RPM súborom zadaným ako '%s', preskakujem."
 
 #: ../src/Zypper.cc:3046
 #, c-format
 msgid "Problem reading the RPM header of %s. Is it an RPM file?"
-msgstr "Wystąpił problem podczas odczytu nagłówka pakietu RPM %s. Czy to na pewno jest pakiet RPM?"
+msgstr "Nastal problém pri čítaní RPM hlavičky balíka %s. Je to RPM súbor?"
 
 #: ../src/Zypper.cc:3071
 msgid "Plain RPM files cache"
-msgstr "Prosty bufor pakietów RPM"
+msgstr "Medzipamäť RPM súborov"
 
 #: ../src/Zypper.cc:3086
 msgid "No valid arguments specified."
-msgstr "Nie podano prawidłowego pliku żądania."
+msgstr "Neboli zadané žiadne platné argumenty."
 
 #: ../src/Zypper.cc:3100 ../src/Zypper.cc:3178
 msgid "Warning: No repositories defined. Operating only with the installed resolvables. Nothing can be installed."
-msgstr "Ostrzeżenie: Brak repozytorów. Operacja obejmie tylko zainstalowane pakiety. Nic nowego nie może zostać zainstalowane."
+msgstr "Pozor: Nie sú definované žiadne repozitáre. Pracujem len s nainštalovanými balíkmi. Nebude možné inštalovať nové balíky."
 
 #: ../src/Zypper.cc:3129
 msgid "Source package name is a required argument."
-msgstr "Nazwa pakietu jest wymaganym parametrem."
+msgstr "Názov zdrojového balíka je povinný argument."
 
 #: ../src/Zypper.cc:3235 ../src/Zypper.cc:3495 ../src/Zypper.cc:3579
 #: ../src/Zypper.cc:3702 ../src/Zypper.cc:3770
 #, c-format
 msgid "Unknown package type '%s'."
-msgstr "Nieznany typ pakietu '%s'."
+msgstr "Neznámy typ balíka '%s'."
 
 #: ../src/Zypper.cc:3341
 msgid "Problem occurred initializing or executing the search query"
-msgstr "Wystąpił problem z inicjalizacją lub wykonaniem kwerendy "
+msgstr "Nastal problém pri inicializácii alebo spustení vyhľadávania."
 
 #: ../src/Zypper.cc:3342
 msgid "See the above message for a hint."
-msgstr "Wskazówki można znaleźć w powyższym komunikacie."
+msgstr "Pozrite predchádzajúcu správu. Poskytne vám tip o príčine chyby."
 
 #. translators: Running as 'rug', cannot use 'best-effort' option.
 #: ../src/Zypper.cc:3514 ../src/Zypper.cc:3597
 #, c-format
 msgid "Running as '%s', cannot use '%s' option."
-msgstr "Uruchomione jako '%s', nie można wykonać opcji '%s'."
+msgstr "Bežím v režime kompatibilnom s programom '%s', nemôžem použiť voľbu '%s' pre výber aktualizácií."
 
 #: ../src/Zypper.cc:3542
 msgid "Root privileges are required for updating packages."
-msgstr "Do aktualizacji pakietów konieczne są uprawnienia administratora."
+msgstr "Pre aktualizáciu balíkov sú potrebné práva správcu systému (root)."
 
 #: ../src/Zypper.cc:3635
 msgid "Root privileges are required for performing a distribution upgrade."
-msgstr "Do przeprowadzenia aktualizacji dystrybucji wymagane są uprawnienia administratora."
+msgstr "Pre kompletnú aktualizáciu systému sú potrebné práva správcu systému (root)."
 
 #: ../src/Zypper.cc:3732 ../src/Zypper.cc:3793
 msgid "Root privileges are required for adding of package locks."
-msgstr "Do zablokowania pakietów wymagane są uprawnienia administratora."
+msgstr "Pre prídávanie zámkov balíkov sú potrebné práva správcu systému (root)."
 
 #: ../src/Zypper.cc:3901
 #, c-format
 msgid "%s matches %s"
-msgstr "%s pasuje do %s"
+msgstr "%s sa zhoduje s %s"
 
 #: ../src/Zypper.cc:3903
 #, c-format
 msgid "%s is newer than %s"
-msgstr "%s jest nowsze od %s"
+msgstr "%s je novšia ako %s"
 
 #: ../src/Zypper.cc:3905
 #, c-format
 msgid "%s is older than %s"
-msgstr "%s jest starsze niż %s"
+msgstr "%s je staršia ako %s"
 
 #: ../src/Zypper.cc:3944
 msgid "This command only makes sense in the zypper shell."
-msgstr "To polecenie ma sens jedynie w powłoce zyppera."
+msgstr "Tento príkaz má zmysel iba v shelli programu zypper."
 
 #: ../src/Zypper.cc:3956
 msgid "You already are running zypper's shell."
-msgstr "Powłoka zyppera jest już uruchomiona."
+msgstr "Už sa nachádzate v shelli zypperu."
 
 #: ../src/Zypper.cc:3973
 msgid "Description"
-msgstr "Opis"
+msgstr "Popis"
 
 #: ../src/Zypper.cc:4037
 msgid "Resolvable Type"
-msgstr "Typ rozwiązywalny"
+msgstr "Typ balíka"
 
-#~ msgid "Do you want to trust the key?"
-#~ msgstr "Dodać klucz do listy zaufanych?"
-
-#~ msgid "n/t/i"
-#~ msgstr "n/z/zi"

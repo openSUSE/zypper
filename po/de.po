@@ -8,13 +8,14 @@
 # Stephan Kulow <coolo@kde.org>, 2007.
 # Michael Skiba <trans@michael-skiba.de>, 2008.
 # Marko Schugardt <mail.sapex@gmx.de>, 2008.
+#
 msgid ""
 msgstr ""
 "Project-Id-Version: zypper.de\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2008-10-27 18:08+0100\n"
-"PO-Revision-Date: 2008-10-23 16:55+0200\n"
-"Last-Translator: Michael Skiba <trans@michael-skiba.de>\n"
+"PO-Revision-Date: Tue Nov  4 12:21:54 UTC 2008\n"
+"Last-Translator: Marko Schugardt <mail.sapex@gmx.de>\n"
 "Language-Team: German <opensuse-translation-de@opensuse.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -25,46 +26,46 @@ msgstr ""
 #: ../src/callbacks/keyring.h:48
 #, c-format
 msgid "Accepting an unsigned file '%s'."
-msgstr "Akzeptiere eine unsignierte Datei '%s'."
+msgstr "Eine unsignierte Datei '%s' wird akzeptiert."
 
 #: ../src/callbacks/keyring.h:52
 #, c-format
 msgid "Accepting an unsigned file '%s' from repository '%s'."
-msgstr "Akzeptiere eine unsignierte Datei '%s' aus Repository '%s'."
+msgstr "Eine unsignierte Datei '%s' aus Repository '%s' wird akzeptiert."
 
 #. TranslatorExplanation: speaking of a file
 #: ../src/callbacks/keyring.h:63
 #, c-format
 msgid "File '%s' is unsigned, continue?"
-msgstr "'%s' ist unsigniert, trotzdem fortfahren?"
+msgstr "Datei '%s' ist unsigniert, fortfahren?"
 
 #. TranslatorExplanation: speaking of a file
 #: ../src/callbacks/keyring.h:67
 #, c-format
 msgid "File '%s' from repository '%s' is unsigned, continue?"
-msgstr "Datei '%s' aus Repository '%s' ist unsigniert, trotzdem fortfahren?"
+msgstr "Datei '%s' aus Repository '%s' ist unsigniert, fortfahren?"
 
 #: ../src/callbacks/keyring.h:90
 #, c-format
 msgid "Accepting file '%s' signed with an unknown key '%s'."
-msgstr "Akzeptiere Datei '%s', signiert mit einem unbekannten Schlüssel '%s'."
+msgstr "Datei '%s', die mit einem unbekannten Schlüssel '%s' signiert wurde, wird akzeptiert."
 
 #: ../src/callbacks/keyring.h:94
 #, c-format
 msgid "Accepting file '%s' from repository '%s' signed with an unknown key '%s'."
-msgstr "Akzeptiere Datei '%s' aus Repository '%s', signiert mit einem unbekannten Schlüssel '%s'."
+msgstr "Datei '%s' aus Repository '%s', die mit einem unbekannten Schlüssel '%s' signiert wurde, wird akzeptiert."
 
 #. translators: the last %s is gpg key ID
 #: ../src/callbacks/keyring.h:104
 #, c-format
 msgid "File '%s' is signed with an unknown key '%s'. Continue?"
-msgstr "Datei '%s' ist mit einem unbekannten Schlüssel '%s' signiert. Trotzdem fortfahren?"
+msgstr "Datei '%s' ist mit einem unbekannten Schlüssel '%s' signiert. Fortfahren?"
 
 #. translators: the last %s is gpg key ID
 #: ../src/callbacks/keyring.h:108
 #, c-format
 msgid "File '%s' from repository '%s' is signed with an unknown key '%s'. Continue?"
-msgstr "Datei '%s' aus Repository '%s' ist mit einem unbekannten Schlüssel '%s' signiert. Trotzdem fortfahren?"
+msgstr "Datei '%s' aus Repository '%s' ist mit einem unbekannten Schlüssel '%s' signiert. Fortfahren?"
 
 #: ../src/callbacks/keyring.h:125
 msgid "Automatically trusting the following key:"
@@ -97,7 +98,7 @@ msgstr "Repository: %s"
 #. translators: this message is shown after showing description of the key
 #: ../src/callbacks/keyring.h:150
 msgid "Do you want to reject the key, trust temporarily, or trust always?"
-msgstr ""
+msgstr "Wollen Sie den Schlüssel abweisen, ihm temporär oder immer vertrauen?"
 
 #. translators: r/t/a stands for Reject/TrustTemporarily/trustAlways(import)
 #. translate to whatever is appropriate for your language
@@ -106,13 +107,12 @@ msgstr ""
 #. The answers should be lower case letters.
 #: ../src/callbacks/keyring.h:162
 msgid "r/t/a/"
-msgstr ""
+msgstr "r/t/a"
 
 #. translators: the same as r/t/a, but without 'a'
 #: ../src/callbacks/keyring.h:165
-#, fuzzy
 msgid "r/t"
-msgstr "n/t"
+msgstr "r/t"
 
 #. translators: help text for the 'r' option in the 'r/t/a' prompt
 #: ../src/callbacks/keyring.h:167
@@ -132,12 +132,12 @@ msgstr "Dem Schlüssel vertrauen und in den vertrauenswürdigen Schlüsselring i
 #: ../src/callbacks/keyring.h:206
 #, c-format
 msgid "Ignoring failed signature verification for file '%s'!"
-msgstr "Ignoriere fehlgeschlagene Signaturüberprüfung für Datei '%s'!"
+msgstr "Fehlgeschlagene Signaturüberprüfung für Datei '%s' wird ignoriert!"
 
 #: ../src/callbacks/keyring.h:209
 #, c-format
 msgid "Ignoring failed signature verification for file '%s' from repository '%s'!"
-msgstr "Ignoriere fehlgeschlagene Signaturüberprüfung für Datei '%s' aus Repository '%s'!"
+msgstr "Fehlgeschlagene Signaturüberprüfung für Datei '%s' aus Repository '%s' wird ignoriert!"
 
 #: ../src/callbacks/keyring.h:214
 msgid "Double-check this is not caused by some malicious changes in the file!"
@@ -182,7 +182,7 @@ msgstr "Unbekannte Zusammenfassung %s für Datei %s."
 #: ../src/callbacks/keyring.h:280
 #, c-format
 msgid "Ignoring failed digest verification for %s (expected %s, found %s)."
-msgstr "Ignoriere fehlgeschlagene Überprüfung für %s (erwartet wurde %s, gefunden wurde %s)."
+msgstr "Fehlgeschlagene Überprüfung für %s wird ignoriert (erwartet wurde %s, gefunden wurde %s)."
 
 #: ../src/callbacks/keyring.h:287
 #, c-format
@@ -217,21 +217,21 @@ msgstr "Passwort"
 
 #: ../src/callbacks/repo.h:49
 msgid "Retrieving delta"
-msgstr "Delta abrufen"
+msgstr "Delta wird abgerufen"
 
 #. translators: this text is a progress display label e.g. "Applying delta foo [42%]"
 #: ../src/callbacks/repo.h:85
 msgid "Applying delta"
-msgstr "Delta anwenden"
+msgstr "Delta wird angewendet"
 
 #: ../src/callbacks/repo.h:115
 msgid "Retrieving patch rpm"
-msgstr "Patch-RPM abrufen"
+msgstr "Patch-RPM wird abgerufen"
 
 #: ../src/callbacks/repo.h:152
 #, c-format
 msgid "Retrieving %s %s-%s.%s"
-msgstr "%s %s-%s.%s abrufen"
+msgstr "%s %s-%s.%s wird abgerufen"
 
 #. TranslatorExplanation %s is package size like "5.6 M"
 #: ../src/callbacks/repo.h:167
@@ -248,13 +248,13 @@ msgstr "Im Betrieb: %s  (%s, %s)"
 #: ../src/callbacks/rpm.h:139 ../src/callbacks/rpm.h:148
 #: ../src/callbacks/rpm.h:156 ../src/callbacks/rpm.h:163
 msgid "Reading installed packages"
-msgstr "Lese installierte Pakete"
+msgstr "Installierte Pakete werden gelesen"
 
 #. translators: This text is a progress display label e.g. "Removing packagename-x.x.x [42%]"
 #: ../src/callbacks/rpm.h:183
 #, c-format
 msgid "Removing %s-%s"
-msgstr "Entferne %s-%s"
+msgstr "%s-%s wird entfernt"
 
 #: ../src/callbacks/rpm.h:202
 #, c-format
@@ -413,7 +413,7 @@ msgstr "nicht installiert"
 
 #: ../src/info.cc:175
 msgid "Installed Size: "
-msgstr "Größe (installiert): "
+msgstr "Installierte Größe: "
 
 #: ../src/info.cc:212
 msgid "Category: "
@@ -425,15 +425,15 @@ msgstr "Erstellt am: "
 
 #: ../src/info.cc:214
 msgid "Reboot Required: "
-msgstr "Reboot erforderlich: "
+msgstr "Neustart erforderlich: "
 
 #: ../src/info.cc:217
 msgid "Package Manager Restart Required"
-msgstr "Restart des Paketverwalters erforderlich"
+msgstr "Neustart des Paketverwalters erforderlich"
 
 #: ../src/info.cc:219
 msgid "Restart Required: "
-msgstr "Restart erforderlich: "
+msgstr "Neustart erforderlich: "
 
 #: ../src/info.cc:222
 msgid "Interactive: "
@@ -523,23 +523,23 @@ msgstr "'%s' nicht gefunden"
 #: ../src/install.cc:104
 #, c-format
 msgid "skipping %s '%s' (the newest version already installed)"
-msgstr "überspringe %s '%s' (die neueste Version ist bereits installiert)"
+msgstr "%s '%s' wird übersprungen (die neueste Version bereits installiert)"
 
 #. translators: %s-%s.%s is name-version.arch
 #: ../src/install.cc:116
 #, c-format
 msgid "Package %s-%s.%s not found in repositories, cannot reinstall."
-msgstr "Paket %s-%s.%s wurde nicht in den Repositories gefunden, neuinstallation nicht möglich"
+msgstr "Paket %s-%s.%s wurde nicht in den Repositories gefunden, Neuinstallation nicht möglich."
 
 #: ../src/install.cc:129
 #, c-format
 msgid "Failed to add '%s' to the list of packages to be installed."
-msgstr "'%s' konnte nicht zur Liste der zu installierenden Pakete hinzugefügt werden."
+msgstr "Hinzufügen von '%s' zur Liste der zu installierenden Pakete fehlgeschlagen."
 
 #: ../src/install.cc:152
 #, c-format
 msgid "Failed to add '%s' to the list of packages to be removed."
-msgstr "'%s' konnte nicht zur Liste der zu entfernenden Pakete hinzugefügt werden."
+msgstr "Hinzufügen von '%s' zur Liste der zu entfernenden Pakete fehlgeschlagen."
 
 #: ../src/install.cc:373 ../src/install.cc:659
 #, c-format
@@ -553,9 +553,8 @@ msgid "'%s' is not installed."
 msgstr "'%s' ist nicht installiert."
 
 #: ../src/install.cc:437
-#, fuzzy
 msgid "Cannot uninstall patches."
-msgstr "Installation von %s nicht möglich"
+msgstr "Patches können nicht deinstalliert werden."
 
 #: ../src/install.cc:438
 msgid ""
@@ -563,10 +562,13 @@ msgid ""
 "Patches are not installed in sense of copied files, database records,\n"
 "or similar."
 msgstr ""
+"Der Installationsstatus eines Patches basiert einzig auf seinen Abhängigkeiten.\n"
+"Patches werden nicht im Sinne von kopierten Dateien, Datenbankeinträgen\n"
+"oder ähnlichem installiert."
 
 #: ../src/install.cc:449
 msgid "Uninstallation of a pattern is currently not defined and implemented."
-msgstr ""
+msgstr "Die Deinstallation eines Schemas ist momentan nicht bestimmt und implementiert."
 
 #: ../src/install.cc:463
 #, c-format
@@ -581,12 +583,12 @@ msgstr "%s kann momentan nicht mit %s verwendet werden"
 
 #: ../src/install.cc:520
 msgid "Specifying architecture when selecting packages by name is not implemented."
-msgstr ""
+msgstr "Architektur wird festgelegt, wenn die Paketauswahl durch den Namen nicht implementiert ist."
 
 #: ../src/install.cc:555
-#, fuzzy, c-format
+#, c-format
 msgid "'%s' is not a valid package or capability name."
-msgstr "'%s' ist kein gültiger Diensttyp."
+msgstr "'%s' ist kein gültiger Paket- oder Fähigkeitsname."
 
 #. translators: meaning a package %s or provider of capability %s
 #: ../src/install.cc:630
@@ -689,14 +691,14 @@ msgstr "Stimmen Sie den Bedingungen der Lizenz zu?"
 
 #: ../src/misc.cc:183
 msgid "Aborting installation due to the need for license confirmation."
-msgstr "Breche die Installation aufgrund des Bedarfs an Lizenzzusagen ab."
+msgstr "Die Installation wird aufgrund der Notwendigkeit von Lizenzzusagen abgebrochen."
 
 #. translators: %sanslate the '--auto-agree-with-licenses',
 #. it is a command line option
 #: ../src/misc.cc:188
 #, c-format
 msgid "Please restart the operation in interactive mode and confirm your agreement with required licenses, or use the %s option."
-msgstr "Bitte starten Sie die Operation im interaktiven Modus erneut und bestätigen IhrEinverständnis mit der benötigten Lizenz oder verwenden Sie die Option %s."
+msgstr "Bitte starten Sie die Operation im interaktiven Modus erneut und bestätigen Ihr Einverständnis mit den benötigten Lizenzen oder verwenden Sie die Option %s."
 
 #. translators: e.g. "... with flash package license."
 #. ! \todo fix this to allow proper translation
@@ -715,7 +717,7 @@ msgstr "EULA"
 
 #: ../src/misc.cc:283
 msgid "SUMMARY"
-msgstr "Zusammenfassung"
+msgstr "ZUSAMMENFASSUNG"
 
 #: ../src/misc.cc:284
 #, c-format
@@ -740,7 +742,7 @@ msgstr "Quellpaket '%s' nicht gefunden."
 #: ../src/misc.cc:407
 #, c-format
 msgid "Installing source package %s-%s"
-msgstr "Installiere Quellpaket %s-%s"
+msgstr "Quellpaket %s-%s wird installiert"
 
 #: ../src/misc.cc:416
 #, c-format
@@ -785,7 +787,7 @@ msgstr "Keine Hilfe für diese Option verfügbar."
 #: ../src/repos.cc:80
 #, c-format
 msgid "Checking whether to refresh metadata for %s"
-msgstr "Überprüfe, ob die Metadaten für %s aufgefrischt werden müssen."
+msgstr "Es wird überprüft, ob die Metadaten für %s aufgefrischt werden müssen."
 
 #: ../src/repos.cc:102
 #, c-format
@@ -799,12 +801,12 @@ msgstr "Die Aktualitätsüberprüfung von '%s' wurde aufgeschoben."
 
 #: ../src/repos.cc:128
 msgid "Forcing raw metadata refresh"
-msgstr "Auffrischen der Rohmetadaten erzwingen"
+msgstr "Auffrischung der Rohmetadaten wird erzwungen"
 
 #: ../src/repos.cc:135
 #, c-format
 msgid "Retrieving repository '%s' metadata"
-msgstr "Metadaten von Repository '%s' abrufen"
+msgstr "Metadaten von Repository '%s' werden abgerufen"
 
 #: ../src/repos.cc:159
 #, c-format
@@ -879,14 +881,14 @@ msgid "Use '%s' to get the list of defined repositories."
 msgstr "Verwenden Sie '%s', um die Liste der bestimmten Repositories zu erhalten."
 
 #: ../src/repos.cc:490 ../src/repos.cc:497
-#, fuzzy, c-format
+#, c-format
 msgid "Ignoring repository '%s' because of '%s' option."
-msgstr "Kann Repository '%s' aufgrund eines Fehlers nicht bereinigen."
+msgstr "Repository '%s' wird aufgrund der Option '%s' ignoriert."
 
 #: ../src/repos.cc:527 ../src/repos.cc:563
 #, c-format
 msgid "Disabling repository '%s' because of the above error."
-msgstr "Deaktiviere Repository '%s' aufgrund des obigen Fehlers."
+msgstr "Repository '%s' wird aufgrund des obigen Fehlers deaktiviert."
 
 #: ../src/repos.cc:545
 #, c-format
@@ -901,7 +903,7 @@ msgstr "Der Metadatenzwischenspeicher muss für das Repository '%s' gebaut werde
 #: ../src/repos.cc:587
 #, c-format
 msgid "Disabling repository '%s'."
-msgstr "Deaktiviere Repository '%s'."
+msgstr "Repository '%s' wird deaktiviert."
 
 #: ../src/repos.cc:624
 msgid "Initializing Target"
@@ -913,7 +915,7 @@ msgstr "Zielinitialisierung fehlgeschlagen:"
 
 #: ../src/repos.cc:635 ../src/Zypper.cc:3343
 msgid "Running 'zypper refresh' as root might resolve the problem."
-msgstr "Ein als Root ausgeführtes 'zypper refresh' muss das Problem nicht unbedingt lösen."
+msgstr "Ein als Root ausgeführtes 'zypper refresh' könnte das Problem lösen."
 
 #. translators: patch status (installed, uninstalled, needed)
 #: ../src/repos.cc:655 ../src/search.cc:269 ../src/update.cc:152
@@ -964,12 +966,12 @@ msgstr "Keine Repositories bestimmt. Verwenden Sie das Kommando 'zypper addrepo'
 
 #: ../src/repos.cc:837 ../src/repos.cc:909 ../src/repos.cc:1079
 msgid "Error reading repositories:"
-msgstr "Fehler beim Lesen von Repositories:"
+msgstr "Fehler beim Lesen der Repositories:"
 
 #: ../src/repos.cc:865 ../src/repos.cc:2213
 #, c-format
 msgid "Can't open %s for writing."
-msgstr "Kann %s nicht zum Schreiben öffnen."
+msgstr "%s kann nicht zum Schreiben geöffnet werden."
 
 #: ../src/repos.cc:867 ../src/repos.cc:2215
 msgid "Maybe you do not have write permissions?"
@@ -987,12 +989,12 @@ msgstr "Festgelegte Repositories: "
 #: ../src/repos.cc:966
 #, c-format
 msgid "Skipping disabled repository '%s'"
-msgstr "Überspringe deaktiviertes Repository '%s'"
+msgstr "Deaktiviertes Repository '%s' wird übersprungen"
 
 #: ../src/repos.cc:981
 #, c-format
 msgid "Skipping repository '%s' because of the above error."
-msgstr "Überspringe Repository '%s' aufgrund des obigen Fehlers."
+msgstr "Repository '%s' wird aufgrund des obigen Fehlers übersprungen."
 
 #: ../src/repos.cc:996
 #, c-format
@@ -1026,35 +1028,35 @@ msgstr "Alle Repositories wurden aufgefrischt."
 #: ../src/repos.cc:1154
 #, c-format
 msgid "Cleaning metadata cache for '%s'."
-msgstr "Bereinige Metadatenzwischenspeicher für '%s'."
+msgstr "Metadatenzwischenspeicher für '%s' wird bereinigt."
 
 #: ../src/repos.cc:1161
 #, c-format
 msgid "Cleaning raw metadata cache for '%s'."
-msgstr "Bereinige Rohmetadatenzwischenspeicher für '%s'."
+msgstr "Rohmetadatenzwischenspeicher für '%s' wird bereinigt."
 
 #. translators: meaning the cached rpm files
 #: ../src/repos.cc:1169
 #, c-format
 msgid "Cleaning packages for '%s'."
-msgstr "Bereinige Pakete für '%s'."
+msgstr "Pakete für '%s' werden bereinigt."
 
 #: ../src/repos.cc:1177
 #, c-format
 msgid "Cannot clean repository '%s' because of an error."
-msgstr "Kann Repository '%s' aufgrund eines Fehlers nicht bereinigen."
+msgstr "Repository '%s' kann aufgrund eines Fehlers nicht bereinigt werden."
 
 #: ../src/repos.cc:1191
 msgid "Cleaning installed packages cache."
-msgstr "Bereinige den Zwischenspeicher der installierten Pakete."
+msgstr "Der Zwischenspeicher der installierten Pakete wird bereinigt."
 
 #: ../src/repos.cc:1199
 msgid "Cannot clean installed packages cache because of an error."
-msgstr "Kann den Zwischenspeicher der installierten Pakete aufgrund eines Fehlers nicht bereinigen."
+msgstr "Der Zwischenspeicher der installierten Pakete kann aufgrund eines Fehlers nicht bereinigt werden."
 
 #: ../src/repos.cc:1207
 msgid "Could not clean the repositories because of errors."
-msgstr "Konnte die Repositories aufgrund von Fehlern nicht bereinigen."
+msgstr "Die Repositories konnten aufgrund von Fehlern nicht bereinigt werden."
 
 #: ../src/repos.cc:1214
 msgid "Some of the repositories have not been cleaned up because of an error."
@@ -1062,7 +1064,7 @@ msgstr "Einige der Repositories wurden aufgrund eines Fehlers nicht bereinigt."
 
 #: ../src/repos.cc:1219
 msgid "Specified repositories have been cleaned up."
-msgstr "Festgelegte Repositories wurden bereinigt."
+msgstr "Die festgelegten Repositories wurden bereinigt."
 
 #: ../src/repos.cc:1221
 msgid "All repositories have been cleaned up."
@@ -1070,7 +1072,7 @@ msgstr "Alle Repositories wurden bereinigt."
 
 #: ../src/repos.cc:1261
 msgid "This is a changeable read-only media (CD/DVD), disabling autorefresh."
-msgstr "Dies ist ein nicht-beschreibbares Wechselmedium (CD/DVD), deaktiviere Autoauffrischen."
+msgstr "Dies ist ein nicht-beschreibbares Wechselmedium (CD/DVD), Autoauffrischen wird deaktiviert."
 
 #: ../src/repos.cc:1282 ../src/repos.cc:1543
 #, c-format
@@ -1079,11 +1081,11 @@ msgstr "Ein mit '%s' benanntes Repository existiert bereits. Bitte verwenden Sie
 
 #: ../src/repos.cc:1293
 msgid "Could not determine the type of the repository. Please check if the defined URIs (see below) point to a valid repository:"
-msgstr "Konnte den Typ des Repositorys nicht feststellen. Bitte überprüfen Sie, ob die bestimmten URIs (siehe unten) auf ein gültiges Repository verweisen:"
+msgstr "Der Typ des Repositorys konnte nicht festgestellt werden. Bitte überprüfen Sie, ob die bestimmten URIs (siehe unten) auf ein gültiges Repository verweisen:"
 
 #: ../src/repos.cc:1300 ../src/Zypper.cc:2420
 msgid "Can't find a valid repository at given location:"
-msgstr "Kann kein gültiges Repository unter dem festgelegten Ort finden:"
+msgstr "Ein gültiges Repository konnte an dem gegebenen Ort nicht gefunden werden:"
 
 #: ../src/repos.cc:1309
 msgid "Problem transferring repository data from specified URI:"
@@ -1110,7 +1112,7 @@ msgstr "Autoauffrischen"
 #: ../src/repos.cc:1353
 #, c-format
 msgid "Reading data from '%s' media"
-msgstr "Lese Daten von Medium '%s'"
+msgstr "Daten von Medium '%s' werden gelesen"
 
 #: ../src/repos.cc:1360
 #, c-format
@@ -1123,7 +1125,7 @@ msgstr "Bitte überprüfen Sie, ob Ihr Installationsmedium gültig und lesbar is
 
 #: ../src/repos.cc:1426
 msgid "Problem accessing the file at the specified URI"
-msgstr "Dateizugangssproblem beim festgelegten URI"
+msgstr "Dateizugriffssproblem beim festgelegten URI"
 
 #: ../src/repos.cc:1427
 msgid "Please check if the URI is valid and accessible."
@@ -1141,11 +1143,11 @@ msgstr "Ist es eine .repo-Datei? Siehe http://en.opensuse.org/Standards/RepoInfo
 
 #: ../src/repos.cc:1446
 msgid "Problem encountered while trying to read the file at the specified URI"
-msgstr "Es trat ein Problem, beim Versuch die Datei beim festgelegten URI zu lesen auf."
+msgstr "Es trat ein Problem auf, beim Versuch die Datei beim festgelegten URI zu lesen."
 
 #: ../src/repos.cc:1460
 msgid "Repository with no alias defined found in the file, skipping."
-msgstr "Repository mit keinem bestimmten Alias in der Datei gefunden, überspringe."
+msgstr "Repository mit keinem in der Datei bestimmten Alias gefunden, überspringe."
 
 #: ../src/repos.cc:1467
 #, c-format
@@ -1160,7 +1162,7 @@ msgstr "Repository '%s' wurde entfernt."
 #: ../src/repos.cc:1526
 #, c-format
 msgid "Cannot change alias of '%s' repository. The repository belongs to service '%s' which is responsible for setting its alias."
-msgstr "Kann Alias von Repository '%s' nicht ändern. Das Repository gehört zum Dienst '%s', welcher für dasSetzen seines Alias verantwortlich ist."
+msgstr "Alias von Repository '%s' kann nicht geändert werden. Das Repository gehört zum Dienst '%s', welcher für das Setzen seines Alias verantwortlich ist."
 
 #: ../src/repos.cc:1537
 #, c-format
@@ -1174,7 +1176,7 @@ msgstr "Fehler beim Modifizieren des Repositorys:"
 #: ../src/repos.cc:1550
 #, c-format
 msgid "Leaving repository '%s' unchanged."
-msgstr "Lasse Repository '%s' unverändert."
+msgstr "Repository '%s' wird nicht verändert."
 
 #: ../src/repos.cc:1687
 #, c-format
@@ -1184,7 +1186,7 @@ msgstr "Ungültige Priorität '%s'. Verwenden Sie eine positive Ganzzahl. Je gr�
 #: ../src/repos.cc:1695
 #, c-format
 msgid "Repository '%s' priority has been left unchanged (%d)"
-msgstr "Die Priorität von Repository '%s' wurde nicht verändert (%d)."
+msgstr "Die Priorität von Repository '%s' wurde nicht verändert (%d)"
 
 #: ../src/repos.cc:1721
 #, c-format
@@ -1224,7 +1226,7 @@ msgstr "Die Priorität von Repository '%s' wurde auf %d gesetzt."
 #: ../src/repos.cc:1756
 #, c-format
 msgid "Name of repository '%s' has been set to '%s'."
-msgstr "Name von Repository '%s' wurde auf '%s' gesetzt."
+msgstr "Der Name von Repository '%s' wurde auf '%s' gesetzt."
 
 #: ../src/repos.cc:1762
 #, c-format
@@ -1234,7 +1236,7 @@ msgstr "Nichts zum Ändern für Repository '%s'."
 #: ../src/repos.cc:1770
 #, c-format
 msgid "Leaving repository %s unchanged."
-msgstr "Lasse Repository %s unverändert."
+msgstr "Repository %s wird nicht verändert."
 
 #: ../src/repos.cc:1808
 msgid "Error reading services:"
@@ -1253,7 +1255,7 @@ msgstr "Verwenden Sie '%s', um die Liste der bestimmten Dienste zu erhalten."
 #: ../src/repos.cc:2127
 #, c-format
 msgid "No services defined. Use the '%s' command to add one or more services."
-msgstr "Keine Dienste bestimmt. Verwenden Sie das Kommando '%s', um einen oder mehrereDienste hinzuzufügen."
+msgstr "Keine Dienste bestimmt. Verwenden Sie das Kommando '%s', um ein oder mehrere Dienste hinzuzufügen."
 
 #: ../src/repos.cc:2253
 #, c-format
@@ -1273,7 +1275,7 @@ msgstr "Dienst '%s' wurde erfolgreich hinzugefügt."
 #: ../src/repos.cc:2308
 #, c-format
 msgid "Removing service '%s':"
-msgstr "Entferne Dienst '%s':"
+msgstr "Dienst '%s' wird entfernt:"
 
 #: ../src/repos.cc:2311
 #, c-format
@@ -1283,7 +1285,7 @@ msgstr "Dienst '%s' wurde entfernt."
 #: ../src/repos.cc:2327
 #, c-format
 msgid "Refreshing service '%s'."
-msgstr "Frische Dienst '%s' auf."
+msgstr "Dienst '%s' wird aufgefrischt."
 
 #: ../src/repos.cc:2336
 #, c-format
@@ -1297,12 +1299,12 @@ msgstr "Bitte überprüfen Sie, ob der URI gültig und zugänglich ist."
 #: ../src/repos.cc:2396
 #, c-format
 msgid "Skipping disabled service '%s'"
-msgstr "Überspringe deaktivierten Dienst '%s'"
+msgstr "Deaktivierter Dienst '%s' wird übersprungen"
 
 #: ../src/repos.cc:2442
 #, c-format
 msgid "Skipping service '%s' because of the above error."
-msgstr "Überspringe Dienst '%s' aufgrund des obigen Fehlers."
+msgstr "Dienst '%s' wird aufgrund des obigen Fehlers übersprungen."
 
 #: ../src/repos.cc:2457
 #, c-format
@@ -1398,11 +1400,11 @@ msgstr "Fehler beim Modifizieren des Dienstes:"
 #: ../src/repos.cc:2667
 #, c-format
 msgid "Leaving service %s unchanged."
-msgstr "Lasse Dienst %s unverändert."
+msgstr "Dienst %s wird nicht verändert."
 
 #: ../src/repos.cc:2774
 msgid "Loading repository data..."
-msgstr "Lade Daten des Repository..."
+msgstr "Daten des Repositorys laden..."
 
 #: ../src/repos.cc:2792
 #, c-format
@@ -1427,7 +1429,7 @@ msgstr "Auflösbare Abhängigkeiten von '%s' wurden aufgrund eines Fehlers nicht
 #: ../src/repos.cc:2823
 #, c-format
 msgid "Repository '%s' appears to outdated. Consider using a different mirror or server."
-msgstr "Repository '%s' erscheint veraltert. Ziehen Sie es in Erwägung einen anderenMirror oder Server zu verwenden."
+msgstr "Repository '%s' erscheint veraltet. Ziehen Sie es in Erwägung einen anderen Mirror oder Server zu verwenden."
 
 #. translators: the first %s is 'zypper refresh' and the second 'zypper clean -m'
 #: ../src/repos.cc:2836
@@ -1553,7 +1555,7 @@ msgstr "c"
 #: ../src/solve-commit.cc:134
 #, c-format
 msgid "Applying solution %s"
-msgstr "Wende Lösung %s an"
+msgstr "Lösung %s wird angewendet"
 
 #: ../src/solve-commit.cc:158
 #, c-format
@@ -1574,7 +1576,7 @@ msgstr "Problem: %s"
 
 #: ../src/solve-commit.cc:188
 msgid "Resolving dependencies..."
-msgstr "Löse Abhängigkeiten auf..."
+msgstr "Abhängigkeiten auflösen..."
 
 #: ../src/solve-commit.cc:369
 msgid "The following package is going to be upgraded:"
@@ -1797,19 +1799,19 @@ msgstr "%s steht in Konflikt mit %s, das weniger aggressive %s wird verwendet"
 
 #: ../src/solve-commit.cc:855
 msgid "Force resolution:"
-msgstr "Erzwinge Auflösung:"
+msgstr "Auflösung erzwingen:"
 
 #: ../src/solve-commit.cc:911
 msgid "Verifying dependencies..."
-msgstr "Überprüfe Abhängigkeiten..."
+msgstr "Abhängigkeiten überprüfen..."
 
 #: ../src/solve-commit.cc:920
 msgid "Computing upgrade..."
-msgstr "Berechne Aktualisierung..."
+msgstr "Aktualisierung berechnen..."
 
 #: ../src/solve-commit.cc:931
 msgid "Generating solver test case..."
-msgstr "Erzeuge Auflöser-Testfall..."
+msgstr "Auflöser-Testfall erzeugen..."
 
 #: ../src/solve-commit.cc:934
 #, c-format
@@ -1822,11 +1824,11 @@ msgstr "Fehler beim Erstellen des Auflöser-Testfalls."
 
 #: ../src/solve-commit.cc:977
 msgid "Computing distribution upgrade..."
-msgstr "Berechne Distributionsaktualisierung..."
+msgstr "Distributionsaktualisierung berechnen..."
 
 #: ../src/solve-commit.cc:983
 msgid "Resolving package dependencies..."
-msgstr "Löse Paketabhängigkeiten auf..."
+msgstr "Paketabhängigkeiten auflösen..."
 
 #: ../src/solve-commit.cc:1009
 msgid "Root privileges are required to fix broken package dependencies."
@@ -2034,7 +2036,7 @@ msgstr "Die Option '--%s' hat momentan keinen Effekt."
 #: ../src/utils/messages.cc:78
 #, c-format
 msgid "You have chosen to ignore a problem with download or installation of a package which might lead to broken dependencies of other packages. It is recommended to run '%s' after the operation has finished."
-msgstr "Sie haben sich dafür entschieden ein Problem, mit dem Herunterladen oder der Installation eines Pakets zu ignorieren, was möglicherweise zu beschädigten Abhängigkeiten anderer Pakete führen kann. Es wird empfohlen '%s' zu starten, nachdem die Operation beendet wurde."
+msgstr "Sie haben sich dafür entschieden ein Problem mit dem Herunterladen oder der Installation eines Pakets zu ignorieren, was möglicherweise zu beschädigten Abhängigkeiten anderer Pakete führen kann. Es wird empfohlen '%s' zu starten, nachdem die Operation beendet wurde."
 
 #: ../src/utils/misc.cc:87
 msgid "package"
@@ -2191,6 +2193,8 @@ msgid ""
 "If you run zypper without a terminal, use '%s' global\n"
 "option to make zypper use default answers to prompts."
 msgstr ""
+"Wenn Sie Zypper ohne ein Terminal ausführen, verwenden Sie die globale Option '%s',\n"
+"damit Zypper die Standardantworten bei Fragen verwendet."
 
 #. TranslatorExplanation These are reasons for various failures.
 #: ../src/utils/prompt.h:125
@@ -2266,6 +2270,8 @@ msgid ""
 "\t--no-cd\t\t\tIgnore CD/DVD repositories.\n"
 "\t--no-remote\t\tIgnore remote repositories.\n"
 msgstr ""
+"\t--no-cd\t\t\tCD/DVD-Repositories ignorieren.\n"
+"\t--no-remote\t\tEntfernte Repositories ignorieren.\n"
 
 #: ../src/Zypper.cc:182
 msgid ""
@@ -2475,14 +2481,12 @@ msgid "Autorefresh disabled."
 msgstr "Autoauffrischen deaktiviert."
 
 #: ../src/Zypper.cc:509
-#, fuzzy
 msgid "CD/DVD repositories disabled."
-msgstr "Autoauffrischen deaktiviert."
+msgstr "CD/DVD-Repositories deaktiviert."
 
 #: ../src/Zypper.cc:516
-#, fuzzy
 msgid "Remote repositories disabled."
-msgstr "Autoauffrischen deaktiviert."
+msgstr "Entfernte Repositories deaktiviert."
 
 #: ../src/Zypper.cc:523
 msgid "Ignoring installed resolvables."
@@ -2540,7 +2544,7 @@ msgstr ""
 "                                Siehe 'man zypper' für mehr Details.\n"
 "    --debug-solver              Auflöser-Testfall für das Debugging erstellen.\n"
 "    --no-recommends             Keine empfohlenen Pakete installieren, nur benötigte.\n"
-"-R, --no-force-resolution       Den Auflöser nicht zur Suche einer Lösung zwingen, lasse ihn fragen.\n"
+"-R, --no-force-resolution       Den Auflöser nicht zur Suche einer Lösung zwingen, ihn fragen lassen.\n"
 "    --force-resolution          Den Auflöser zur Suche einer Lösung zwingen (selbst eine aggressive).\n"
 "-D, --dry-run                   Die Installation proben, nicht wirklich installieren.\n"
 
@@ -2575,7 +2579,7 @@ msgstr ""
 "-n, --name                      Paket durch einfachen Namen wählen, nicht durch Fähigkeit.\n"
 "-C, --capability                Paket durch Fähigkeit wählen.\n"
 "    --debug-solver              Auflöser-Testfall für das Debugging erstellen.\n"
-"-R, --no-force-resolution       Den Auflöser nicht zur Suche einer Lösung zwingen, lasse ihn fragen.\n"
+"-R, --no-force-resolution       Den Auflöser nicht zur Suche einer Lösung zwingen, ihn fragen lassen.\n"
 "    --force-resolution          Den Auflöser zur Suche einer Lösung zwingen (selbst eine aggressive).\n"
 "-D, --dry-run                   Die Entfernung proben, nicht wirklich entfernen.\n"
 
@@ -2806,7 +2810,7 @@ msgstr ""
 "\n"
 "  Kommandooptionen:\n"
 "-r, --repo <Datei.repo> Eine zu lesende .repo-Datei festlegen.\n"
-"-t, --type <Typ>        Typ des Repository (%s).\n"
+"-t, --type <Typ>        Typ des Repositorys (%s).\n"
 "-d, --disable           Das Repository als deaktiviert hinzufügen.\n"
 "-c, --check             URI überprüfen.\n"
 "-C, --no-check          URI nicht überprüfen, später während des Auffrischens überprüfen.\n"
@@ -2861,7 +2865,7 @@ msgstr ""
 #. translators: this option belongs to 'lr' command help
 #: ../src/Zypper.cc:1273
 msgid "-s, --service             Show also alias of parent service.\n"
-msgstr ""
+msgstr "-s, --service             Auch Alias des übergeordneten Dienstes anzeigen.\n"
 
 #: ../src/Zypper.cc:1288
 msgid ""
@@ -3414,7 +3418,7 @@ msgid ""
 msgstr ""
 "addlock (al) [Optionen] <Paketname> ...\n"
 "\n"
-"Eine Paketsperre hinzufügen. Zu sperrende Pakete durch exakten Namen oder globales Muster, Verwendung der Wildcard-Zeichen '*' und '?' möglich, festlegen.\n"
+"Eine Paketsperre hinzufügen. Zu sperrende Pakete durch exakten Namen oder globales Muster festlegen, Verwendung der Wildcard-Zeichen '*' und '?' möglich.\n"
 "\n"
 "  Kommandooptionen:\n"
 "-r, --repo <Alias|#|URI>  Die Sperre auf das festgelegte Repository beschränken.\n"
@@ -3577,6 +3581,10 @@ msgid ""
 "This command has dummy implementation which always returns 0.\n"
 "It is provided for compatibility with rug.\n"
 msgstr ""
+"ping [Optionen]\n"
+"\n"
+"Dieses Kommando hat eine Dummy-Implementation, die immer 0 wiedergibt.\n"
+"Sie wird für Kompatibilität mit rug angeboten.\n"
 
 #: ../src/Zypper.cc:2212 ../src/Zypper.cc:3959
 msgid "Unexpected program flow."
@@ -3606,9 +3614,8 @@ msgid "Root privileges are required for modifying system services."
 msgstr "Zum Modifizieren der Systemdienste werden Root-Rechte benötigt."
 
 #: ../src/Zypper.cc:2421
-#, fuzzy
 msgid "Could not determine the type of the repository. Check if the specified URI points to a valid repository."
-msgstr "Konnte den Typ des Repositorys nicht feststellen. Bitte überprüfen Sie, ob die bestimmten URIs (siehe unten) auf ein gültiges Repository verweisen:"
+msgstr "Konnte den Typ des Repositorys nicht feststellen. Bitte überprüfen Sie, ob der festgelegte URI auf ein gültiges Repository verweist."
 
 #: ../src/Zypper.cc:2453
 #, c-format
@@ -3654,7 +3661,7 @@ msgstr "Wenn nur ein Argument verwendet wird, dann muss es ein zu einer .repo-Da
 #: ../src/Zypper.cc:2653
 #, c-format
 msgid "Cannot use %s together with %s. Using the %s setting."
-msgstr "Kann %s nicht zusammen mit %s verwenden. Verwende die Einstellung %s."
+msgstr "Kann %s nicht zusammen mit %s verwenden. Die Einstellung %s wird verwendet."
 
 #: ../src/Zypper.cc:2676
 msgid "Specified type is not a valid repository type:"
