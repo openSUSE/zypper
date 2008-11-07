@@ -123,30 +123,6 @@ namespace zypp
     //
     ///////////////////////////////////////////////////////////////////
 
-    std::ostream & operator<<( std::ostream & str, const ::_Dataiterator * obj )
-    {
-      str << "::_Dataiterator(";
-      if ( ! obj )
-      {
-        str << "NULL";
-      }
-      else
-      {
-        str << "|" << obj->pool;
-        str << "|" << Repository(obj->repo);
-        str << "|" << obj->key;
-        str << "|" << obj->keyname;
-        str << "|" << obj->repodataid;
-        str << "|" << Solvable(obj->solvid);
-        str << "|" << obj->repoid;
-      }
-      return str << ")";
-    }
-    std::ostream & operator<<( std::ostream & str, const scoped_ptr< ::_Dataiterator> & obj )
-    {
-      return str << obj.get();
-    }
-
     ///////////////////////////////////////////////////////////////////
     // position and moving
     ///////////////////////////////////////////////////////////////////
@@ -445,4 +421,25 @@ namespace zypp
   ///////////////////////////////////////////////////////////////////
   /////////////////////////////////////////////////////////////////
 } // namespace zypp
+///////////////////////////////////////////////////////////////////
+
+std::ostream & operator<<( std::ostream & str, const ::_Dataiterator * obj )
+{
+  str << "::_Dataiterator(";
+  if ( ! obj )
+  {
+    str << "NULL";
+  }
+  else
+  {
+    str << "|" << zypp::Repository(obj->repo);
+    str << "|" << zypp::sat::Solvable(obj->solvid);
+    str << "|" << zypp::IdString(obj->key->name);
+    str << "|" << zypp::IdString(obj->key->type);
+    str << "|" << obj->repodataid;
+    str << "|" << obj->repoid;
+  }
+  return str << ")";
+}
+
 ///////////////////////////////////////////////////////////////////

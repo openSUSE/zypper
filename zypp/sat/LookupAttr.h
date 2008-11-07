@@ -522,4 +522,12 @@ namespace zypp
   /////////////////////////////////////////////////////////////////
 } // namespace zypp
 ///////////////////////////////////////////////////////////////////
+
+/** \relates LookupAttr::iterator Stream output of the underlying iterator for debug. */
+std::ostream & operator<<( std::ostream & str, const ::_Dataiterator * obj );
+
+/** \relates LookupAttr::iterator Stream output of the underlying iterator for debug. */
+inline std::ostream & operator<<( std::ostream & str, const ::_Dataiterator & obj )
+{ return str << &obj; }
+
 #endif // ZYPP_SAT_LOOKUPATTR_H
