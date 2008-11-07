@@ -9,7 +9,6 @@
 /** \file	zypp/sat/LookupAttr.cc
  *
 */
-#include <cstring>
 #include <iostream>
 #include <sstream>
 
@@ -22,27 +21,6 @@
 #include "zypp/CheckSum.h"
 
 using std::endl;
-
-#if 0
-#  undef  XXX
-#  define XXX MIL
-#  define XXD DBG
-#  define XXM MIL
-#  define XXW WAR
-#  define XXE ERR
-#  define XXS SEC
-#  define XXI INT
-#  define XXU USR
-#  warning Remove dummy debug output defines
-#else
-#  define XXD XXX
-#  define XXM XXX
-#  define XXW XXX
-#  define XXE XXX
-#  define XXS XXX
-#  define XXI XXX
-#  define XXU XXX
-#endif
 
 ///////////////////////////////////////////////////////////////////
 namespace zypp
@@ -206,6 +184,71 @@ namespace zypp
       return false;
     }
 
+    bool LookupAttr::iterator::solvAttrSubEntry() const
+    {
+      return solvAttrType() == REPOKEY_TYPE_FLEXARRAY;
+    }
+
+    ///////////////////////////////////////////////////////////////////
+    // Iterate sub-structures.
+    ///////////////////////////////////////////////////////////////////
+
+    bool LookupAttr::iterator::subEmpty() const
+    { return( subBegin() == subEnd() ); }
+
+    LookupAttr::size_type LookupAttr::iterator::subSize() const
+    {
+      size_type c = 0;
+      for_( it, subBegin(), subEnd() )
+        ++c;
+      return c;
+    }
+
+    LookupAttr::iterator LookupAttr::iterator::subBegin() const
+    {
+      if ( ! solvAttrSubEntry() )
+        return subEnd();
+
+      // remember this position
+      ::dataiterator_setpos( _dip.get() );
+
+      // setup the new sub iterator
+      scoped_ptr< ::_Dataiterator> dip( new ::Dataiterator );
+      // needed while LookupAttr::iterator::dip_equal does ::memcmp:
+      ::memset( dip.get(), 0, sizeof(::_Dataiterator) );
+
+      ::dataiterator_init( dip.get(), sat::Pool::instance().get(), 0, SOLVID_POS, 0, 0, 0 );
+
+      return iterator( dip ); // iterator takes over ownership!
+    }
+
+    LookupAttr::iterator LookupAttr::iterator::subEnd() const
+    {
+      return iterator();
+    }
+
+    LookupAttr::iterator LookupAttr::iterator::subFind( SolvAttr attr_r ) const
+    {
+      iterator it = subBegin();
+      if ( attr_r != sat::SolvAttr::allAttr )
+      {
+        while ( it != subEnd() && it.inSolvAttr() != attr_r )
+          ++it;
+      }
+      return it;
+    }
+
+    LookupAttr::iterator LookupAttr::iterator::subFind( const C_Str & attrname_r ) const
+    {
+      if ( attrname_r.empty() )
+        return subBegin();
+
+      std::string subattr( inSolvAttr().asString() );
+      subattr += ":";
+      subattr += attrname_r;
+      return subFind( SolvAttr( subattr ) );
+    }
+
     ///////////////////////////////////////////////////////////////////
     // attr value retrieval
     ///////////////////////////////////////////////////////////////////
@@ -271,11 +314,11 @@ namespace zypp
           case REPOKEY_TYPE_CONSTANTID:
           case REPOKEY_TYPE_STR:
           case REPOKEY_TYPE_DIRSTRARRAY:
-          {
-            const char * ret( c_str() );
-            return ret ? ret : "";
-          }
-          break;
+            {
+              const char * ret( c_str() );
+              return ret ? ret : "";
+            }
+            break;
 
           case REPOKEY_TYPE_U32:
           case REPOKEY_TYPE_NUM:
@@ -286,12 +329,20 @@ namespace zypp
           case REPOKEY_TYPE_MD5:
           case REPOKEY_TYPE_SHA1:
           case REPOKEY_TYPE_SHA256:
-          {
-            std::ostringstream str;
-            str << asCheckSum();
-            return str.str();
-          }
-          break;
+            {
+              return asCheckSum().asString();
+            }
+            break;
+
+          case REPOKEY_TYPE_FLEXARRAY:
+            {
+              std::ostringstream str;
+              dumpRange( str,
+                         transformIterator<std::string>( subBegin() ),
+                         transformIterator<std::string>( subEnd() ) );
+              return str.str();
+            }
+            break;
         }
       }
       return std::string();

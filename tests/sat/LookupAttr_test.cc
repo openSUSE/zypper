@@ -2,8 +2,6 @@
 #include <zypp/sat/LookupAttr.h>
 #include <zypp/ResObjects.h>
 
-#include <zypp/sat/detail/PoolImpl.h>
-
 #define LABELED(V) #V << ":\t" << V
 
 static TestSetup test( "/tmp/x", Arch_x86_64 );
@@ -145,71 +143,37 @@ BOOST_AUTO_TEST_CASE(LookupAttr_itetate_all_attributes)
  }
 }
 
-BOOST_AUTO_TEST_CASE(LookupAttr_solvable_attribute_types)
+BOOST_AUTO_TEST_CASE(LookupAttr_solvable_attribute_substructure)
 {
-  base::LogControl::TmpLineWriter shutUp( new log::FileLineWriter( "/tmp/YLOG" ) );
-  MIL << "GO" << endl;
-
-  ResPool pool( test.pool() );
-  for_( it, pool.byKindBegin<Patch>(), pool.byKindEnd<Patch>() )
+  sat::LookupAttr q( sat::SolvAttr::updateReference );
+  BOOST_CHECK_EQUAL( q.size(), 303 );
+  for_( res, q.begin(), q.end() )
   {
-    Patch::constPtr p( (*it)->asKind<Patch>() );
-    USR << p << endl;
+    BOOST_CHECK( ! res.subEmpty() );
+    BOOST_CHECK_EQUAL( res.subSize(), 4 );
 
-    sat::LookupAttr q( sat::SolvAttr::allAttr, p->satSolvable() );
-    //sat::LookupAttr q( sat::SolvAttr("update:reference") );
-    for_( res, q.begin(), q.end() )
-    {
-      if ( //res.inSolvAttr() == sat::SolvAttr("update:reference") &&
-           res.solvAttrType() == IdString("repokey:type:flexarray").id() )
-      {
-        MIL << res << endl;
-        DBG << *res << endl;
-        ::_Dataiterator * dip = res.get();
-        INT << dip << endl;
+    BOOST_CHECK_EQUAL( res.subFind( sat::SolvAttr::allAttr ), res.subBegin() );
+    BOOST_CHECK_EQUAL( res.subFind( "" ),                     res.subBegin() );
 
-        ::dataiterator_setpos( dip );
+    BOOST_CHECK_EQUAL( res.subFind( sat::SolvAttr::updateReference ), res.subEnd() );
+    BOOST_CHECK_EQUAL( res.subFind( "noval" ),                        res.subEnd() );
 
-        ::Dataiterator di2;
-        ::dataiterator_init( &di2
-            , sat::Pool::instance().get()
-            , 0
-            , SOLVID_POS
-            , 0
-            , 0
-            , 0 );
+    BOOST_CHECK_NE( res.subFind( sat::SolvAttr::updateReferenceType ),  res.subEnd() );
+    BOOST_CHECK_NE( res.subFind( sat::SolvAttr::updateReferenceHref ),  res.subEnd() );
+    BOOST_CHECK_NE( res.subFind( sat::SolvAttr::updateReferenceId ),    res.subEnd() );
+    BOOST_CHECK_NE( res.subFind( sat::SolvAttr::updateReferenceTitle ), res.subEnd() );
 
-        while ( ::dataiterator_step( &di2 ) )
-        {
-          DBG << di2 << endl;
-        }
-      }
-    }
-    break;
+    BOOST_CHECK_EQUAL( res.subFind( sat::SolvAttr::updateReferenceType ),  res.subFind( "type" ) );
+    BOOST_CHECK_EQUAL( res.subFind( sat::SolvAttr::updateReferenceHref ),  res.subFind( "href" ) );
+    BOOST_CHECK_EQUAL( res.subFind( sat::SolvAttr::updateReferenceId ),    res.subFind( "id" ) );
+    BOOST_CHECK_EQUAL( res.subFind( sat::SolvAttr::updateReferenceTitle ), res.subFind( "title" ) );
   }
-
-  {
-    sat::LookupAttr q( sat::SolvAttr("update:reference") );
-    USR << q << " " << q.size() << endl;
-  }
-  {
-    sat::LookupAttr q( sat::SolvAttr("update:reference:href") );
-    USR << q << " " << q.size() << endl;
-  }
-
-
 }
 
-
+#if 0
 BOOST_AUTO_TEST_CASE(LookupAttr_)
 {
   base::LogControl::TmpLineWriter shutUp( new log::FileLineWriter( "/tmp/YLOG" ) );
   MIL << "GO" << endl;
 }
-
-
-
-
-
-
-
+#endif

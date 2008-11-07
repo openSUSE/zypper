@@ -113,13 +113,12 @@ namespace zypp
         size_type size() const;
 
         /** TransformIterator returning an \ref iterator vaue of type \c _ResultT. */
-        template<class _ResultT, class _AttrT> class transformIterator;
+        template<class _ResultT, class _AttrT = _ResultT> class transformIterator;
         //@}
 
       public:
         /** \name What to search. */
         //@{
-
         /** The \ref SolvAttr to search. */
         SolvAttr attr() const
         { return _attr; }
@@ -127,8 +126,8 @@ namespace zypp
         /** Set the \ref SolvAttr to search. */
         void setAttr( SolvAttr attr_r )
         { _attr = attr_r; }
-
         //@}
+
       public:
         /** \name Where to search. */
         //@{
@@ -164,8 +163,8 @@ namespace zypp
           _repo = Repository::noRepository;
           _solv = solv_r;
         }
-
         //@}
+
       private:
         SolvAttr   _attr;
         Repository _repo;
@@ -248,6 +247,66 @@ namespace zypp
 
         /** Whether this is a CheckSum attribute.*/
         bool solvAttrCheckSum() const;
+
+        /** Whether this is the entry to a sub-structure (flexarray).
+         * This is the entry to a sequence of attributes. To
+         * acces them use \ref subBegin and  \ref subEnd.
+        */
+        bool solvAttrSubEntry() const;
+        //@}
+
+        /** \name Iterate sub-structures.
+         *
+         * These are usable iff \ref solvAttrSubEntry is \c true.
+         *
+         * \code
+         * // Lookup all "update:reference" entries for a specific solvable
+         * sat::LookupAttr q( sat::SolvAttr::updateReference, p->satSolvable() );
+         * for_( res, q.begin(), q.end() )
+         * {
+         *   // List all sub values
+         *   for_( sub, res.subBegin(), res.subEnd() )
+         *   {
+         *     cout << sub.asString() << endl;
+         *   }
+         *
+         *   // Directly access c specific value:
+         *   sat::LookupAttr::iterator it( res.subFind( sat::SolvAttr::updateReferenceHref ) );
+         *   if ( it != res.subEnd() )
+         *     cout << it.asString() << endl;
+         * }
+         * \endcode
+         */
+        //@{
+        /** Wheter the sub-structure is empty. */
+        bool subEmpty() const;
+
+        /** Ammount of attributes in the sub-structure.
+         * \note This is not a cheap call. It runs the query.
+        */
+        size_type subSize() const;
+
+        /** Iterator to the begin of a sub-structure.
+         * \see \ref solvAttrSubEntry
+        */
+        iterator subBegin() const;
+        /** Iterator behind the end of a sub-structure.
+         * \see \ref solvAttrSubEntry
+        */
+        iterator subEnd() const;
+         /** Iterator pointing to the first occurance of \ref SolvAttr \a attr_r in sub-structure.
+          * If \ref sat::SolvAttr::allAttr is passed, \ref subBegin is returned.
+          * \see \ref solvAttrSubEntry
+         */
+        iterator subFind( SolvAttr attr_r ) const;
+        /** \overload Extending the current attribute name with by \c ":attrname_r".
+         *
+         * This assumes a sub-structur \c "update:reference" has attributes
+         * like \c "update:reference:type", \c "update:reference:href".
+         *
+         * If an empty \c attrname_r is passed, \ref subBegin is returned.
+        */
+        iterator subFind( const C_Str & attrname_r ) const;
         //@}
 
         /** \name Retrieving attribute values. */
