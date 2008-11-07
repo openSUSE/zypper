@@ -1,4 +1,10 @@
 -------------------------------------------------------------------
+Fri Nov  7 17:55:48 CET 2008 - ma@suse.de
+
+- revision 11631
+- version 5.20.0 (20)
+
+-------------------------------------------------------------------
 Thu Nov  6 18:35:25 CET 2008 - dmacvicar@suse.de
 
 - re-add the flavor to the http header now using a flavor
