@@ -85,16 +85,7 @@ static const char *const anonymousIdHeader()
   // agent string.
   // The target could be not initialized, and then this information
   // is not available.
-  Target_Ptr target;
-  // FIXME this has to go away as soon as the target
-  // does not throw when not initialized.
-  try {
-      target = zypp::getZYpp()->target();
-  }
-  catch ( const Exception &e )
-  {
-      // nothing to do
-  }
+  Target_Ptr target = zypp::getZYpp()->getTarget();
 
   static const std::string _value(
       str::form(
@@ -110,16 +101,7 @@ static const char *const distributionFlavorHeader()
   // agent string.
   // The target could be not initialized, and then this information
   // is not available.
-  Target_Ptr target;
-  // FIXME this has to go away as soon as the target
-  // does not throw when not initialized.
-  try {
-      target = zypp::getZYpp()->target();
-  }
-  catch ( const Exception &e )
-  {
-      // nothing to do
-  }
+  Target_Ptr target = zypp::getZYpp()->getTarget();
 
   static const std::string _value(
       str::trim( str::form(
@@ -135,16 +117,7 @@ const char *const MediaAria2c::agentString()
   // agent string.
   // The target could be not initialized, and then this information
   // is not available.
-  Target_Ptr target;
-  // FIXME this has to go away as soon as the target
-  // does not throw when not initialized.
-  try {
-      target = zypp::getZYpp()->target();
-  }
-  catch ( const Exception &e )
-  {
-      // nothing to do
-  }
+  Target_Ptr target = zypp::getZYpp()->getTarget();
 
   static const std::string _value(
     str::form(
