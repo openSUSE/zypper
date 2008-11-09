@@ -105,6 +105,7 @@ struct RuntimeData
     , commit_pkg_current(0)
     , seen_verify_hint(false)
     , action_rpm_download(false)
+    , waiting_for_input(false)
   {}
 
   std::list<zypp::RepoInfo> repos;
@@ -146,6 +147,9 @@ struct RuntimeData
 
   bool seen_verify_hint;
   bool action_rpm_download;
+
+  //! \todo move this to a separate Status struct
+  bool waiting_for_input;
 };
 
 typedef zypp::shared_ptr<zypp::RepoManager> RepoManager_Ptr;

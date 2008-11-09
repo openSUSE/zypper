@@ -30,18 +30,26 @@ void signal_handler(int sig)
           _("Use '%s' or enter '%s' to quit the shell."), "Ctrl+D", "quit") << endl;
       ::rl_reset_after_signal();
       exit(ZYPPER_EXIT_ON_SIGNAL);
-      //! \todo improve to drop to shell only 
+      //! \todo improve to drop to shell only
     }
     else*/
     {
-      // translators: this will show up if you press ctrl+c twice outside of zypper shell
+      // translators: this will show up if you press ctrl+c twice (but outside of zypper shell)
       cerr << endl << _("OK OK! Exiting immediately...") << endl;
       zypper.cleanup();
       exit(ZYPPER_EXIT_ON_SIGNAL);
     }
   }
+  else if (zypper.runtimeData().waiting_for_input)
+  {
+    zypper.cleanup();
+    exit(ZYPPER_EXIT_ON_SIGNAL);
+  }
   else
+  {
+    //! \todo cerr << endl << _("Trying to exit gracefully...") << endl;
     zypper.requestExit();
+  }
 }
 
 
@@ -71,7 +79,7 @@ int main(int argc, char **argv)
   if (::signal(SIGINT, signal_handler) == SIG_ERR)
     out.error("Failed to set SIGINT handler.");
   if (::signal(SIGTERM, signal_handler) == SIG_ERR)
-    out.error("Failed to set SIGTERM handler."); 
+    out.error("Failed to set SIGTERM handler.");
 
   try
   {

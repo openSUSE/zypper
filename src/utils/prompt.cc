@@ -188,6 +188,14 @@ unsigned int get_prompt_reply(Zypper & zypper,
     return poptions.defaultOpt();
   }
 
+  // set runtimeData().waiting_for_input flag while in this function
+  struct Bye
+  {
+    Bye(bool * flag) : _flag(flag) { *_flag = true; }
+    ~Bye() { *_flag = false; }
+    bool * _flag;
+  } say_goodbye(&zypper.runtimeData().waiting_for_input);
+
   // open a terminal for input (bnc #436963)
   ifstream stm("/dev/tty", ifstream::in);
   // istream & stm = cin;
