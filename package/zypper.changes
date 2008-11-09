@@ -1,4 +1,10 @@
 -------------------------------------------------------------------
+Sun Nov  9 11:35:56 CET 2008 - jkupec@suse.cz
+
+- exit immediately after ctrl+c in prompt (bnc #417997)
+- r11643
+
+-------------------------------------------------------------------
 Fri Nov  7 16:41:12 CET 2008 - jkupec@suse.cz
 
 - fixed listing updates in xml (bnc #441485)
