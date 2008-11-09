@@ -1,4 +1,4 @@
-#! /bin/bash
+#! /bin/sh
 #
 # Prints zypper's main help and help texts of all commands.
 #
@@ -8,9 +8,9 @@
 # Disclaimer: this script is provided for case someone finds it useful. There
 #             is absolutely no warranty that it will do what you expect.
 
-ZYPPER=/usr/bin/zypper
-GREP=/usr/bin/grep
-SED=/usr/bin/sed
+ZYPPER=zypper
+GREP=grep
+SED=sed
 
 function printline ()
 {
