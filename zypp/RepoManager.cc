@@ -50,9 +50,6 @@
 #include "zypp/ZYppCallbacks.h"
 
 #include "sat/Pool.h"
-#include "satsolver/pool.h"
-#include "satsolver/repo.h"
-#include "satsolver/repo_solv.h"
 
 using std::endl;
 using std::string;
