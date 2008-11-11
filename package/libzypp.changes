@@ -1,4 +1,11 @@
 -------------------------------------------------------------------
+Tue Nov 11 14:48:52 CET 2008 - ma@suse.de
+
+- Prevent fetcher from processing the same index file twice. (bnc #443644)
+- revision 11648
+- version 5.22.0 (21)
+
+-------------------------------------------------------------------
 Fri Nov  7 23:55:47 CET 2008 - ma@suse.de
 
 - Fix retrieval of patch contents and references attributes. (bnc #442200)

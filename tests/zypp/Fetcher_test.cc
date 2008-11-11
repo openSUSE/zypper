@@ -1,26 +1,11 @@
-#include <stdio.h>
-#include <iostream>
-#define BOOST_TEST_MODULE fetcher_test
-#include <boost/test/auto_unit_test.hpp>
-#include <boost/test/parameterized_test.hpp>
-#include <boost/test/unit_test_log.hpp>
+#include "TestSetup.h"
 
-#include "zypp/base/Logger.h"
-#include "zypp/ZYppFactory.h"
 #include "zypp/MediaSetAccess.h"
 #include "zypp/Fetcher.h"
-#include "zypp/Url.h"
-#include "zypp/TmpPath.h"
 
 #include "WebServer.h"
-#include <boost/thread.hpp>
 
-using std::cout;
-using std::endl;
-using std::string;
-using namespace zypp;
-using namespace zypp::media;
-using namespace boost::unit_test;
+#define BOOST_TEST_MODULE fetcher_test
 
 #define DATADIR (Pathname(TESTS_SRC_DIR) + "/zypp/data/Fetcher/remote-site")
 
@@ -47,6 +32,8 @@ BOOST_AUTO_TEST_CASE(fetcher_enqueuedir_noindex)
 
 BOOST_AUTO_TEST_CASE(fetcher_enqueuedir_autoindex)
 {
+  base::LogControl::TmpLineWriter shutUp( new zypp::log::FileLineWriter( "/tmp/YLOG" ) );
+  MIL << "GO" << endl;
   MediaSetAccess media( ( DATADIR).asUrl(), "/" );
   // do the test by trusting the SHA1SUMS file signature key
   {
@@ -192,7 +179,7 @@ BOOST_AUTO_TEST_CASE(fetcher_simple)
 {
     MediaSetAccess media( (DATADIR).asUrl(), "/" );
     Fetcher fetcher;
-    
+
     {
         filesystem::TmpDir dest;
         OnMediaLocation loc("/complexdir/subdir1/subdir1-file1.txt");
@@ -220,7 +207,7 @@ BOOST_AUTO_TEST_CASE(content_index)
         OnMediaLocation loc("/contentindex/subdir1/subdir1-file1.txt");
         // trust the key manually
         getZYpp()->keyRing()->importKey(PublicKey(DATADIR + "/contentindex/content.key"), true);
-        fetcher.addIndex(OnMediaLocation("/contentindex/content", 1));       
+        fetcher.addIndex(OnMediaLocation("/contentindex/content", 1));
         fetcher.enqueue(loc);
         fetcher.start(dest.path(), media);
         fetcher.reset();
