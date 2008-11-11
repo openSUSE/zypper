@@ -497,7 +497,7 @@ try {
     Measure x( "INIT TARGET" );
     {
       {
-        zypp::base::LogControl::TmpLineWriter shutUp;
+        //zypp::base::LogControl::TmpLineWriter shutUp;
         getZYpp()->initializeTarget( sysRoot );
       }
       getZYpp()->target()->load();
@@ -507,6 +507,10 @@ try {
     }
   }
 
+  ///////////////////////////////////////////////////////////////////
+  INT << "===[END]============================================" << endl << endl;
+  zypp::base::LogControl::instance().logNothing();
+  return 0;
   if ( 1 )
   {
     RepoManager repoManager( makeRepoManager( sysRoot ) );

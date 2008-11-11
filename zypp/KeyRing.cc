@@ -258,15 +258,13 @@ namespace zypp
   PublicKey KeyRing::Impl::exportKey( string id, const Pathname &keyring)
   {
     TmpFile tmp_file( _base_dir, "pubkey-"+id+"-" );
-    Pathname keyfile = tmp_file.path();
-    MIL << "Going to export key " << id << " from " << keyring << " to " << keyfile << endl;
+    MIL << "Going to export key " << id << " from " << keyring << " to " << tmp_file.path() << endl;
 
     try {
-      ofstream os(keyfile.asString().c_str());
+      ofstream os(tmp_file.path().c_str());
       dumpPublicKey( id, keyring, os );
       os.close();
-      PublicKey key(keyfile);
-      return key;
+      return PublicKey( tmp_file );
     }
     catch (BadKeyException &e)
     {
@@ -279,7 +277,7 @@ namespace zypp
     }
     catch (exception &e)
     {
-      ERR << "Cannot export key " << id << " from " << keyring << " keyring  to file " << keyfile << endl;
+      ERR << "Cannot export key " << id << " from " << keyring << " keyring  to file " << tmp_file.path() << endl;
     }
     return PublicKey();
   }
@@ -418,7 +416,7 @@ namespace zypp
         {
           MIL << "User does not want to trust key " << id << " " << key.name() << endl;
           return false;
-        } 
+        }
       }
       else
       {

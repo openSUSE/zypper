@@ -24,6 +24,8 @@
 namespace zypp
 { /////////////////////////////////////////////////////////////////
 
+  class PublicKey;
+
   /**
    * Functor signature used to check files.
    * \param file File to check.
@@ -32,7 +34,7 @@ namespace zypp
    * validate and the user don't want to continue.
    */
   typedef function<void ( const Pathname &file )> FileChecker;
-  
+
   class FileCheckException : public Exception
   {
   public:
@@ -40,21 +42,21 @@ namespace zypp
       : Exception(msg)
     {}
   };
-  
+
   class CheckSumCheckException : public FileCheckException
   {
     //TODO
   };
-  
+
   class SignatureCheckException : public FileCheckException
   {
     //TODO
   };
-  
+
   /**
    * Built in file checkers
    */
-  
+
   /**
    * \short Checks for a valid checksum and interacts with the user.
    */
@@ -76,7 +78,7 @@ namespace zypp
    private:
      CheckSum _checksum;
    };
-   
+
    /**
     * \short Checks for the validity of a signature
     */
@@ -101,7 +103,10 @@ namespace zypp
       /**
        * add a public key to the list of known keys
        */
-      void addPublicKey( const Pathname &publickey, const KeyContext & keycontext = KeyContext());
+      void addPublicKey( const PublicKey & publickey, const KeyContext & keycontext = KeyContext());
+      /** \overload Convenience taking the public keys pathname. */
+      void addPublicKey( const Pathname & publickey, const KeyContext & keycontext = KeyContext());
+
       /**
       * \short Try to validate the file
       * \param file File to validate.
@@ -124,10 +129,10 @@ namespace zypp
    public:
      void operator()( const Pathname &file )  const;
    };
-    
+
    /**
     * \short Checker composed of more checkers.
-    * 
+    *
     * Allows to create a checker composed of various
     * checkers altothether. It will only
     * validate if all the checkers validate.

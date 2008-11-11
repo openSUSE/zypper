@@ -26,6 +26,11 @@
 namespace zypp
 { /////////////////////////////////////////////////////////////////
 
+  namespace filesystem
+  {
+    class TmpFile;
+  }
+
   /**
    * Exception thrown when the supplied key is
    * not a valid gpg key
@@ -64,7 +69,9 @@ namespace zypp
   //	CLASS NAME : PublicKey
   //
   /**
-   * Class that represent a GPG Public Key
+   * Class that represent a GPG Public Key.
+   *
+   *
    */
   class PublicKey
   {
@@ -75,11 +82,28 @@ namespace zypp
     class Impl;
 
   public:
+    /** Default ctor. */
     PublicKey();
-   /** Ctor
-    * \throws when data does not make a key
-    */
-    PublicKey(const Pathname &file);
+
+    /** Ctor taking the key from a file.
+     *
+     * This is quite expensive, as a copy of the file is created and
+     * used. If you can construct PublicKey from a \ref filesystem::TmpFile,
+     * this prevents copying.
+     *
+     * \throws when data does not make a key
+     */
+    explicit
+    PublicKey( const Pathname & file );
+
+    /** Ctor reading the key from a \ref TmpFile.
+     *
+     * PublicKey holds a reference on the TmpFile providing the key.
+     *
+     * \throws when data does not make a key
+     */
+    explicit
+    PublicKey( const filesystem::TmpFile & sharedfile );
 
     ~PublicKey();
 

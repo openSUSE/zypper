@@ -32,7 +32,7 @@ namespace zypp
       //MIL << "checking " << file << " file against checksum '" << _checksum << "'" << endl;
     callback::SendReport<DigestReport> report;
     CheckSum real_checksum( _checksum.type(), filesystem::checksum( file, _checksum.type() ));
-    
+
     if ( _checksum.empty() )
     {
       MIL << "File " <<  file << " has no checksum available." << std::endl;
@@ -85,13 +85,13 @@ namespace zypp
       }
     }
   }
-  
+
   void CompositeFileChecker::add( const FileChecker &checker )
   {
     //MIL << "||# " << _checkers.size() << endl;
     _checkers.push_back(checker);
     //MIL << "||* " << _checkers.size() << endl;
-    
+
   }
 
    SignatureFileChecker::SignatureFileChecker( const Pathname &signature )
@@ -105,10 +105,12 @@ namespace zypp
   {
   }
 
-  void SignatureFileChecker::addPublicKey( const Pathname &publickey, const KeyContext & keycontext )
+  void SignatureFileChecker::addPublicKey( const Pathname & publickey, const KeyContext & keycontext )
+  { addPublicKey( PublicKey(publickey), keycontext ); }
+
+  void SignatureFileChecker::addPublicKey( const PublicKey & publickey, const KeyContext & keycontext )
   {
-    ZYpp::Ptr z = getZYpp();
-    z->keyRing()->importKey(publickey, false);
+    getZYpp()->keyRing()->importKey(publickey, false);
     _context = keycontext;
   }
 

@@ -1,4 +1,10 @@
 -------------------------------------------------------------------
+Tue Nov 11 18:36:33 CET 2008 - ma@suse.de
+
+- Avoid superfluous file copying and gpg invocation in keyring handling.
+- revision 11650
+
+-------------------------------------------------------------------
 Tue Nov 11 14:48:52 CET 2008 - ma@suse.de
 
 - Prevent fetcher from processing the same index file twice. (bnc #443644)

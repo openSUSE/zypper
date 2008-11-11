@@ -32,6 +32,8 @@ using std::endl;
 ///////////////////////////////////////////////////////////////////
 namespace zypp
 { /////////////////////////////////////////////////////////////////
+
+  /////////////////////////////////////////////////////////////////
   //
   //	CLASS NAME : PublicKey::Impl
   //
@@ -41,11 +43,23 @@ namespace zypp
     Impl()
     {}
 
-    Impl(const Pathname &file)
+    Impl( const Pathname & keyfile )
     {
-      readFromFile(file);
-      MIL << "Done reading key" << std::endl;
+      PathInfo info( keyfile );
+      MIL << "Takeing pubkey from " << keyfile << " of size " << info.size() << " and sha1 " << filesystem::checksum(keyfile, "sha1") << endl;
+
+      if ( !info.isExist() )
+        ZYPP_THROW(Exception("Can't read public key from " + keyfile.asString() + ", file not found"));
+
+      if ( copy( keyfile, _data_file.path() ) != 0 )
+        ZYPP_THROW(Exception("Can't copy public key data from " + keyfile.asString() + " to " +  _data_file.path().asString() ));
+
+      readFromFile();
     }
+
+    Impl( const filesystem::TmpFile & sharedfile )
+      : _data_file( sharedfile )
+    { readFromFile(); }
 
     public:
       /** Offer default Impl. */
@@ -55,50 +69,38 @@ namespace zypp
         return _nullimpl;
       }
 
+      std::string asString() const
+      { return "[" + id() + "-" + str::hexstring(created(),8).substr(2) + "] [" + name() + "] [" + fingerprint() + "]"; }
 
-    std::string asString() const
-    {
-      return "[" + id() + "-" + str::hexstring(created(),8).substr(2) + "] [" + name() + "] [" + fingerprint() + "]";
-    }
+      std::string armoredData() const
+      { return _data; }
 
-    std::string armoredData() const
-    { return _data; }
+      std::string id() const
+      { return _id; }
 
-    std::string id() const
-    { return _id; }
+      std::string name() const
+      { return _name; }
 
-    std::string name() const
-    { return _name; }
+      std::string fingerprint() const
+      { return _fingerprint; }
 
-    std::string fingerprint() const
-    { return _fingerprint; }
+      Date created() const
+      { return _created; }
 
-    Date created() const
-    { return _created; }
+      Date expires() const
+      { return _expires; }
 
-    Date expires() const
-    { return _expires; }
-
-    Pathname path() const
-    {
-      return _data_file.path();
-      //return _data_file;
-    }
+      Pathname path() const
+      { return _data_file.path(); }
 
     protected:
 
-     void readFromFile( const Pathname &keyfile)
-     {
+      void readFromFile()
+      {
+        PathInfo info( _data_file.path() );
+        MIL << "Reading pubkey from " << info.path() << " of size " << info.size() << " and sha1 " << filesystem::checksum(info.path(), "sha1") << endl;
 
-       PathInfo info(keyfile);
-       MIL << "Reading pubkey from " << keyfile << " of size " << info.size() << " and sha1 " << filesystem::checksum(keyfile, "sha1")<< endl;
-       if ( !info.isExist() )
-         ZYPP_THROW(Exception("Can't read public key from " + keyfile.asString() + ", file not found"));
-
-       if ( copy( keyfile, _data_file.path() ) != 0 )
-         ZYPP_THROW(Exception("Can't copy public key data from " + keyfile.asString() + " to " +  _data_file.path().asString() ));
-
-        filesystem::TmpDir dir;
+        static filesystem::TmpDir dir;
         const char* argv[] =
         {
           "gpg",
@@ -183,26 +185,29 @@ namespace zypp
         prog.close();
 
         if ( _id.size() == 0 )
-          ZYPP_THROW( BadKeyException( "File " + keyfile.asString() + " doesn't contain public key data" , keyfile ) );
+          ZYPP_THROW( BadKeyException( "File " + _data_file.path().asString() + " doesn't contain public key data" , _data_file.path() ) );
 
         //replace all escaped semicolon with real ':'
         str::replaceAll( _name, "\\x3a", ":" );
-     }
 
-  private:
-    std::string _id;
-    std::string _name;
-    std::string _fingerprint;
-    std::string _data;
-    filesystem::TmpFile _data_file;
-    Date _created;
-    Date _expires;
-    //Pathname _data_file;
-  private:
-    friend Impl * rwcowClone<Impl>( const Impl * rhs );
-    /** clone for RWCOW_pointer */
-    Impl * clone() const
-    { return new Impl( *this ); }
+        MIL << "Read pubkey from " << info.path() << ": " << asString() << endl;
+      }
+
+    private:
+      filesystem::TmpFile _data_file;
+
+      std::string _id;
+      std::string _name;
+      std::string _fingerprint;
+      std::string _data;
+      Date        _created;
+      Date        _expires;
+
+    private:
+      friend Impl * rwcowClone<Impl>( const Impl * rhs );
+      /** clone for RWCOW_pointer */
+      Impl * clone() const
+      { return new Impl( *this ); }
   };
   ///////////////////////////////////////////////////////////////////
 
@@ -215,9 +220,14 @@ namespace zypp
   : _pimpl( Impl::nullimpl() )
   {}
 
-  PublicKey::PublicKey( const Pathname &file )
+  PublicKey::PublicKey( const Pathname & file )
   : _pimpl( new Impl(file) )
   {}
+
+  PublicKey::PublicKey( const filesystem::TmpFile & sharedfile )
+  : _pimpl( new Impl(sharedfile) )
+  {}
+
   ///////////////////////////////////////////////////////////////////
   //
   //	METHOD NAME : PublicKey::~PublicKey
@@ -233,9 +243,7 @@ namespace zypp
   ///////////////////////////////////////////////////////////////////
 
   std::string PublicKey::asString() const
-  {
-    return _pimpl->asString();
-  }
+  { return _pimpl->asString(); }
 
   std::string PublicKey::armoredData() const
   { return _pimpl->armoredData(); }
