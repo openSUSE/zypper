@@ -167,6 +167,10 @@ namespace zypp
     inline Pathname operator+( const Pathname & l, const Pathname & r )
     { return Pathname::cat( l, r ); }
 
+    /** \relates Pathname */
+    inline bool operator<( const Pathname & l, const Pathname & r )
+    { return l.asString() < r.asString(); }
+
     ///////////////////////////////////////////////////////////////////
 
     /** \relates Pathname Stream output */
