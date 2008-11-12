@@ -48,7 +48,7 @@ namespace zypp
      *
      * \param filedes Name of the file (repo alias) or filename if not available
      */
-    typedef enum
+    enum KeyTrust
     {
       /**
        * User has chosen not to trust the key.
@@ -68,8 +68,7 @@ namespace zypp
        * without importing it into rpm.
        */
       KEY_TRUST_AND_IMPORT
-    }
-    KeyTrust;
+    };
 
     /**
      * Ask user to trust and/or import the key to trusted keyring.
