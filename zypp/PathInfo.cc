@@ -343,12 +343,12 @@ namespace zypp
             else
             {
               ret=errno;
-              WAR << " FAILED: mkdir " << path << ' ' << str::octstring( mode ) << " errno " << ret << endl;
+              WAR << " FAILED: mkdir " << dir << ' ' << str::octstring( mode ) << " errno " << ret << endl;
             }
           }
           else
           {
-            MIL << "mkdir " << path << ' ' << str::octstring( mode ) << endl;
+            MIL << "mkdir " << dir << ' ' << str::octstring( mode ) << endl;
           }
           lastpos = pos+1;
         }

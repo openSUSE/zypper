@@ -142,7 +142,7 @@ namespace zypp
       /** \ref DefaultAccept flags (\see \ref base::Flags) are used to
        *  define the default callback answers during signature verification.
        * \code
-       *  KeyRingReport::setDefaultAccept( KeyRing::ACCEPT_UNSIGNED_FILE | ACCEPT_VERIFICATION_FAILED );
+       *  KeyRing::setDefaultAccept( KeyRing::ACCEPT_UNSIGNED_FILE | ACCEPT_VERIFICATION_FAILED );
        * \endcode
        * \see \ref KeyRingReport.
        */
