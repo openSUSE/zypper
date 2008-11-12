@@ -99,14 +99,18 @@ BOOST_AUTO_TEST_CASE(capabilities_test)
   BOOST_CHECK_EQUAL( noe.detail().hasArch(), false );
   BOOST_CHECK_EQUAL( naoe.detail().hasArch(), true );
 
-  BOOST_REQUIRE    ( n.detail().arch().empty() );
+  BOOST_CHECK      ( n.detail().arch().empty() );
   BOOST_CHECK_EQUAL( na.detail().arch(), Arch_i386.idStr() );
-  BOOST_REQUIRE    ( noe.detail().arch().empty() );
+  BOOST_CHECK      ( noe.detail().arch().empty() );
   BOOST_CHECK_EQUAL( naoe.detail().arch(), Arch_i386.idStr() );
 
   BOOST_CHECK_EQUAL( Capability( "",     "na.me", "",   "" ), n );
   BOOST_CHECK_EQUAL( Capability( "i386", "na.me", "",   "" ), na );
   BOOST_CHECK_EQUAL( Capability( "",     "na.me", "==", "1" ), noe );
   BOOST_CHECK_EQUAL( Capability( "i386", "na.me", "==", "1" ), naoe );
+
+  // explicit arch
+  BOOST_CHECK_EQUAL( Capability( Arch_i386, "na.me" ), na );
+  BOOST_CHECK_EQUAL( Capability( Arch_i386, "na.me == 1" ), naoe );
 }
 

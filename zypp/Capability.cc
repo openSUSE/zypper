@@ -114,6 +114,7 @@ namespace zypp
     /** Full parse from string, unless Capability::PARSED.
     */
     sat::detail::IdType relFromStr( ::_Pool * pool_r,
+                                    const Arch & arch_r, // parse from name if empty
                                     const std::string & str_r, const ResKind & kind_r,
                                     Capability::CtorFlag flag_r )
     {
@@ -147,7 +148,10 @@ namespace zypp
       //else
       // not a versioned relation
 
-      return relFromStr( pool_r, name, op, ed, kind_r ); // parses for name[.arch]
+      if ( arch_r.empty() )
+        return relFromStr( pool_r, name, op, ed, kind_r ); // parses for name[.arch]
+      // else
+      return relFromStr( pool_r, arch_r, name, op, ed, kind_r );
     }
 
     /////////////////////////////////////////////////////////////////
@@ -160,19 +164,35 @@ namespace zypp
   /////////////////////////////////////////////////////////////////
 
   Capability::Capability( const char * str_r, const ResKind & prefix_r, CtorFlag flag_r )
-  : _id( relFromStr( myPool().getPool(), str_r, prefix_r, flag_r ) )
+  : _id( relFromStr( myPool().getPool(), Arch_empty, str_r, prefix_r, flag_r ) )
   {}
 
   Capability::Capability( const std::string & str_r, const ResKind & prefix_r, CtorFlag flag_r )
-  : _id( relFromStr( myPool().getPool(), str_r.c_str(), prefix_r, flag_r ) )
+  : _id( relFromStr( myPool().getPool(), Arch_empty, str_r.c_str(), prefix_r, flag_r ) )
+  {}
+
+  Capability::Capability( const Arch & arch_r, const char * str_r, const ResKind & prefix_r, CtorFlag flag_r )
+  : _id( relFromStr( myPool().getPool(), arch_r, str_r, prefix_r, flag_r ) )
+  {}
+
+  Capability::Capability( const Arch & arch_r, const std::string & str_r, const ResKind & prefix_r, CtorFlag flag_r )
+  : _id( relFromStr( myPool().getPool(), arch_r, str_r.c_str(), prefix_r, flag_r ) )
   {}
 
   Capability::Capability( const char * str_r, CtorFlag flag_r, const ResKind & prefix_r )
-  : _id( relFromStr( myPool().getPool(), str_r, prefix_r, flag_r ) )
+  : _id( relFromStr( myPool().getPool(), Arch_empty, str_r, prefix_r, flag_r ) )
   {}
 
   Capability::Capability( const std::string & str_r, CtorFlag flag_r, const ResKind & prefix_r )
-  : _id( relFromStr( myPool().getPool(), str_r, prefix_r, flag_r ) )
+  : _id( relFromStr( myPool().getPool(), Arch_empty, str_r, prefix_r, flag_r ) )
+  {}
+
+  Capability::Capability( const Arch & arch_r, const char * str_r, CtorFlag flag_r, const ResKind & prefix_r )
+  : _id( relFromStr( myPool().getPool(), arch_r, str_r, prefix_r, flag_r ) )
+  {}
+
+  Capability::Capability( const Arch & arch_r, const std::string & str_r, CtorFlag flag_r, const ResKind & prefix_r )
+  : _id( relFromStr( myPool().getPool(), arch_r, str_r, prefix_r, flag_r ) )
   {}
 
   ///////////////////////////////////////////////////////////////////

@@ -1,4 +1,11 @@
 -------------------------------------------------------------------
+Wed Nov 12 18:53:03 CET 2008 - ma@suse.de
+
+- Add Capability ctor from Arch and Name: (Arch_i386, "name") or
+  (Arch_i386, "name == 1.0").
+- revision 11669
+
+-------------------------------------------------------------------
 Wed Nov 12 14:31:20 CET 2008 - ma@suse.de
 
 - Take care to always reset CURLOPT_TIMECONDITION to prevent incomplete 

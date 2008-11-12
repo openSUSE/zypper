@@ -70,7 +70,7 @@ namespace zypp
       /** Ctor from id. */
       explicit Capability( sat::detail::IdType id_r ) : _id( id_r ) {}
 
-      /** \name Ctors parsing a Capability: <tt>"name[.arch] [op edition]"</tt>
+      /** \name Ctors parsing a Capability: <tt>"name[.arch] [op edition]"</tt> or <tt>( arch, "name [op edition]")</tt>
       */
       //@{
       /** Ctor from string.
@@ -81,11 +81,21 @@ namespace zypp
       explicit Capability( const char * str_r, const ResKind & prefix_r = ResKind(), CtorFlag flag_r = UNPARSED );
       /** \overload */
       explicit Capability( const std::string & str_r, const ResKind & prefix_r = ResKind(), CtorFlag flag_r = UNPARSED );
-      /** \overload Convenience for parsed (name only) packages. */
+      /** \overload Explicitly specify the \c arch. */
+      Capability( const Arch & arch_r, const char * str_r, const ResKind & prefix_r = ResKind(), CtorFlag flag_r = UNPARSED );
+      /** \overload Explicitly specify the \c arch. */
+      Capability( const Arch & arch_r, const std::string & str_r, const ResKind & prefix_r = ResKind(), CtorFlag flag_r = UNPARSED );
+
+      /** \overload Convenience for parsed (name only, no <tt>"[op edition]</tt>) packages: <tt>Capability( "glibc", PARSED ); */
       Capability( const char * str_r, CtorFlag flag_r, const ResKind & prefix_r = ResKind() );
       /** \overload */
       Capability( const std::string & str_r, CtorFlag flag_r, const ResKind & prefix_r = ResKind() );
+      /** \overload Explicitly specify the \c arch. */
+      Capability( const Arch & arch_r, const char * str_r, CtorFlag flag_r, const ResKind & prefix_r = ResKind() );
+      /** \overload */
+      Capability( const Arch & arch_r, const std::string & str_r, CtorFlag flag_r, const ResKind & prefix_r = ResKind() );
       //@}
+
 
       /** \name Ctors parsing a broken down Capability: <tt>( "name[.arch]", op, edition )</tt>
       */
