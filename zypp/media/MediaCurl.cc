@@ -217,7 +217,7 @@ static const char *const distributionFlavorHeader()
   return _value.c_str();
 }
 
-     
+
 static const char *const agentString()
 {
   // we need to add the release and identifier to the
@@ -225,7 +225,7 @@ static const char *const agentString()
   // The target could be not initialized, and then this information
   // is not available.
   Target_Ptr target = zypp::getZYpp()->getTarget();
- 
+
   static const std::string _value(
     str::form(
        "ZYpp %s (curl %s) %s"
@@ -726,7 +726,7 @@ void MediaCurl::attachTo (bool next)
   }
 
   ret = curl_easy_setopt ( _curl, CURLOPT_HTTPHEADER, _customHeaders );
-    
+
   if ( ret != 0) {
     disconnectFrom();
     ZYPP_THROW(MediaCurlSetOptException(_url, _curlError));
@@ -756,7 +756,7 @@ void MediaCurl::disconnectFrom()
     curl_slist_free_all(_customHeaders);
     _customHeaders = 0L;
   }
-    
+
   if ( _curl )
   {
     curl_easy_cleanup( _curl );
@@ -1210,11 +1210,17 @@ void MediaCurl::doGetFileCopy( const Pathname & filename , const Pathname & targ
     }
 
     // set IFMODSINCE time condition (no download if not modified)
-    if( PathInfo(target).isExist() ) {
-        curl_easy_setopt(_curl, CURLOPT_TIMECONDITION, CURL_TIMECOND_IFMODSINCE);
-        curl_easy_setopt(_curl, CURLOPT_TIMEVALUE, PathInfo(target).mtime());
+    if( PathInfo(target).isExist() )
+    {
+      curl_easy_setopt(_curl, CURLOPT_TIMECONDITION, CURL_TIMECOND_IFMODSINCE);
+      curl_easy_setopt(_curl, CURLOPT_TIMEVALUE, PathInfo(target).mtime());
     }
-    
+    else
+    {
+      curl_easy_setopt(_curl, CURLOPT_TIMECONDITION, CURL_TIMECOND_NONE);
+      curl_easy_setopt(_curl, CURLOPT_TIMEVALUE, 0);
+    }
+
     string destNew = target.asString() + ".new.zypp.XXXXXX";
     char *buf = ::strdup( destNew.c_str());
     if( !buf)
