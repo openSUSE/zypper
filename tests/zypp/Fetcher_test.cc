@@ -32,8 +32,6 @@ BOOST_AUTO_TEST_CASE(fetcher_enqueuedir_noindex)
 
 BOOST_AUTO_TEST_CASE(fetcher_enqueuedir_autoindex)
 {
-  base::LogControl::TmpLineWriter shutUp( new zypp::log::FileLineWriter( "/tmp/YLOG" ) );
-  MIL << "GO" << endl;
   MediaSetAccess media( ( DATADIR).asUrl(), "/" );
   // do the test by trusting the SHA1SUMS file signature key
   {
