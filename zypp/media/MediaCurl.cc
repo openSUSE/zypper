@@ -1444,7 +1444,8 @@ void MediaCurl::doGetFileCopy( const Pathname & filename , const Pathname & targ
     if (infoRet == CURLE_OK)
     {
       DBG << "HTTP response: " + str::numstring(httpReturnCode);
-      if ( httpReturnCode == 304 ) // not modified
+      if ( httpReturnCode == 304
+           || ( httpReturnCode == 213 && _url.getScheme() == "ftp" ) ) // not modified
       {
         DBG << " Not modified.";
         modified = false;
