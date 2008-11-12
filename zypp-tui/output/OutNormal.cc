@@ -20,7 +20,7 @@ using std::ostringstream;
 
 OutNormal::~OutNormal()
 {
-  
+
 }
 
 bool OutNormal::mine(Type type)
@@ -160,11 +160,9 @@ void OutNormal::dwnldProgressStart(const zypp::Url & uri)
   if (verbosity() < NORMAL)
     return;
 
-  static AliveCursor cursor;
   if (isatty(STDOUT_FILENO))
-    cout << CLEARLN << ++cursor << " " << _("Retrieving:") << " ";
-  else
-    cout << _("Retrieving:") << " ";
+    cout << CLEARLN;
+  cout << _("Retrieving:") << " ";
   if (verbosity() == DEBUG)
     cout << uri; //! \todo shorten to fit the width of the terminal
   else
@@ -178,7 +176,7 @@ void OutNormal::dwnldProgressStart(const zypp::Url & uri)
 
 void OutNormal::dwnldProgress(const zypp::Url & uri,
                               int value,
-                              long rate) 
+                              long rate)
 {
   if (verbosity() < NORMAL)
     return;
@@ -255,7 +253,7 @@ void OutNormal::promptHelp(const PromptOptions & poptions)
         it != poptions.options().end(); ++it, ++pos)
     {
       cout << *it << " - ";
-      const string & hs_r = poptions.optionHelp(pos); 
+      const string & hs_r = poptions.optionHelp(pos);
       if (hs_r.empty())
         cout << "(" << _("no help available for this option") << ")";
       else
