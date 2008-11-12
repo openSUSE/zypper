@@ -30,6 +30,7 @@ extern "C"
 #include "zypp/base/Logger.h"
 
 #include "zypp/target/modalias/Modalias.h"
+#include "zypp/PathInfo.h"
 
 
 using std::endl;
@@ -59,23 +60,38 @@ struct modalias_list {
  * If FUNC returns a non-zero return value, stop reading the directory
  * and return that value. Returns -1 if an error occurs.
  */
+
 int
-foreach_file(const char *path, int (*func)(const char *, const char *, void *),
+foreach_file_recursive(const char *path_rec, int (*func)(const char *, const char *, void *),
 	     void *arg)
 {
 	DIR *dir;
 	struct dirent *dirent;
+	char path_tmp[PATH_MAX];
 	int ret = 0;
 
-	if (!(dir = opendir(path)))
+	if (!(dir = opendir(path_rec)))
 		return -1;
 	while ((dirent = readdir(dir)) != NULL) {
 
 		if (strcmp(dirent->d_name, ".") == 0 ||
 		    strcmp(dirent->d_name, "..") == 0)
 			continue;
-		if ((ret = func(path, dirent->d_name, arg)) != 0)
-			break;
+		snprintf(path_tmp, sizeof(path_tmp), "%s/%s", path_rec, dirent->d_name);
+
+		PathInfo path(path_tmp, PathInfo::LSTAT);
+
+		if (path.isLink ()) {
+			continue;
+		}
+		if (path.isDir ()){
+			(void) foreach_file_recursive(path_tmp, func, arg);
+		}else if (path.isFile ()){
+			if ((ret = func(path_rec, dirent->d_name, arg)) != 0)
+				break;
+		}else{
+			continue;
+		}
 	}
 	if (closedir(dir) != 0)
 		return -1;
@@ -95,7 +111,10 @@ read_modalias(const char *dir, const char *file, void *arg)
 	char modalias[PATH_MAX];
 	struct modalias_list **list = (struct modalias_list **)arg, *entry;
 
-	snprintf(path, sizeof(path), "%s/%s/modalias", dir, file);
+	if (strcmp(file, "modalias") != 0){
+		return 0;
+	}
+	snprintf(path, sizeof(path), "%s/%s", dir, file);
 	if ((fd = open(path, O_RDONLY)) == -1)
 		return 0;
 	len = read(fd, modalias, sizeof(modalias) - 1);
@@ -117,38 +136,6 @@ read_modalias(const char *dir, const char *file, void *arg)
 
 out:
 	(void) close(fd);
-	return 0;
-}
-
-/*
- * Iterate over all devices on a bus (/sys/bus/BUS/devices/<*>)
- * and remembers all module aliases for those devices on
- * the linked modalias list passed in in ARG.
- */
-int
-iterate_bus(const char *dir, const char *file, void *arg)
-{
-	char path[PATH_MAX];
-
-	snprintf(path, sizeof(path), "%s/%s/devices", dir, file);
-	(void) foreach_file(path, read_modalias, arg);
-
-	return 0;
-}
-
-/*
- * Iterate over all devices in a class (/sys/class/CLASS/<*>)
- * and remembers all module aliases for those devices on
- * the linked modalias list passed in in ARG.
- */
-int
-iterate_class(const char *dir, const char *file, void *arg)
-{
-	char path[PATH_MAX];
-
-	snprintf(path, sizeof(path), "%s/%s", dir, file);
-	(void) foreach_file(path, read_modalias, arg);
-
 	return 0;
 }
 
@@ -177,11 +164,9 @@ struct Modalias::Impl
 		dir = "/sys";
 	DBG << "Using /sys directory : " << dir << endl;
 
-	snprintf(path, sizeof(path), "%s/bus", dir);
-	foreach_file( path, iterate_bus, &_modaliases );
+	snprintf(path, sizeof(path), "%s", dir);
+	foreach_file_recursive( path, read_modalias, &_modaliases );
 
-	snprintf(path, sizeof(path), "%s/class", dir);
-	foreach_file( path, iterate_class, &_modaliases );
     }
 
     /** Dtor. */

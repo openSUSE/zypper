@@ -59,7 +59,7 @@
 #   changes file. See './mkChangelog -h' for help.
 #
 SET(LIBZYPP_MAJOR "5")
-SET(LIBZYPP_COMPATMINOR "21")
+SET(LIBZYPP_COMPATMINOR "23")
 SET(LIBZYPP_MINOR "23")
 SET(LIBZYPP_PATCH "0")
 #

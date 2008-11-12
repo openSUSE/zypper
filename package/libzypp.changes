@@ -1,4 +1,10 @@
 -------------------------------------------------------------------
+Wed Nov 12 13:19:02 CET 2008 - ma@suse.de
+
+- Check for modaliases below /sys (bnc #430179)
+- revision 11653
+
+-------------------------------------------------------------------
 Tue Nov 11 18:36:33 CET 2008 - ma@suse.de
 
 - Avoid superfluous file copying and gpg invocation in keyring handling.
