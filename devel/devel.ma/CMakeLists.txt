@@ -34,7 +34,7 @@ FOREACH( loop_var MaTest NewPool DumpSolv Iorder Xml Ex Main FakePool AOUT Parse
 ENDFOREACH( loop_var )
 
 
-FOREACH( loop_var ToolScanRepos )
+FOREACH( loop_var ToolScanRepos ToolProvideSignedDir)
    ADD_EXECUTABLE( ${loop_var}
       ${loop_var}.cc
    )
