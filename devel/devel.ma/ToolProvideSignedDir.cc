@@ -18,7 +18,7 @@ int usage( const std::string & msg_r = std::string(), int exit_r = 100 )
     cerr << endl;
   }
   cerr << "Usage: " << appname << "[OPTIONS] URL..." << endl;
-  cerr << "  Load repos from URL to test system below /tmp/" << appname << "." << endl;
+  cerr << "  Load the digested directory at URL to test system below /tmp/" << appname << "." << endl;
   cerr << "  -r ROOT  Use /tmp/ROOT as location of test system (default: " << appname << ")." << endl;
   cerr << "  -c       Clear an existing test system (default)." << endl;
   cerr << "  -n       Do not clear an existing test system but reuse it." << endl;
