@@ -1,4 +1,10 @@
 -------------------------------------------------------------------
+Thu Nov 13 11:07:56 CET 2008 - schubi@suse.de
+
+- Taking care for ppc64 while distupgrade (bnc #443685)
+- revision 11670 
+
+-------------------------------------------------------------------
 Wed Nov 12 18:53:03 CET 2008 - ma@suse.de
 
 - Add Capability ctor from Arch and Name: (Arch_i386, "name") or
