@@ -3092,6 +3092,12 @@ void Zypper::doCommand()
       repo.setAlias(TMP_RPM_REPO_ALIAS);
       repo.setName(_("Plain RPM files cache"));
       repo.setKeepPackages(false);
+      // empty packages path would cause unwanted removal of installed rpms
+      // in current working directory (bnc #444897)
+      // OTOH packages path == ZYPPER_RPM_CACHE_DIR (the same as repo URI)
+      // causes cp file thesamefile, which fails silently. This may be worth
+      // fixing in libzypp.
+      repo.setPackagesPath("/tmp/zypper");
 
       // shut up zypper
       Out::Verbosity tmp = out().verbosity();
