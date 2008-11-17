@@ -1,7 +1,7 @@
 -------------------------------------------------------------------
 Mon Nov 17 13:22:50 CET 2008 - jkupec@suse.cz
 
-- avoid removing of installed local rpms (bnc #444897)
+- avoid removing of installed local rpms (bnc #445504)
 - r11689
 
 -------------------------------------------------------------------
