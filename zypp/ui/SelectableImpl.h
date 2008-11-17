@@ -212,23 +212,25 @@ namespace zypp
       PoolItem defaultCandidate() const
       {
         if ( !installedEmpty() )
+        {
+          // prefer the installed objects arch.
+          //! \todo FIXME this is semi-random(?); should rather look for such installed
+          //! object's arch which best matches the system arch
+          for ( installed_const_iterator iit = installedBegin();
+                iit != installedEnd(); ++iit )
           {
-            // prefer the installed objects arch.
-            for ( installed_const_iterator iit = installedBegin();
-                  iit != installedEnd(); ++iit )
+            for ( available_const_iterator it = availableBegin();
+                  it != availableEnd(); ++it )
             {
-                for ( available_const_iterator it = availableBegin();
-                      it != availableEnd(); ++it )
-                {
-                    if ( (*iit)->arch() == (*it)->arch() )
-                    {
-                        return (*it);
-                    }
-                }
+              if ( (*iit)->arch() == (*it)->arch() )
+              {
+                return (*it);
+              }
             }
           }
+        }
         if ( _availableItems.empty() )
-            return PoolItem();
+          return PoolItem();
 
         return *_availableItems.begin();
       }
@@ -250,6 +252,7 @@ namespace zypp
       const std::string      _name;
       InstalledItemSet       _installedItems;
       AvailableItemSet       _availableItems;
+      //! The object selected by setCandidateObj() method.
       PoolItem               _candidate;
     };
     ///////////////////////////////////////////////////////////////////
@@ -275,7 +278,7 @@ namespace zypp
       if ( obj.installedEmpty() )
         str << endl << " ";
       dumpRange( str << " (A " << obj.availableSize() << ") ", obj.availableBegin(), obj.availableEnd() ) << endl;
-      
+
       return str;
     }
     /////////////////////////////////////////////////////////////////
