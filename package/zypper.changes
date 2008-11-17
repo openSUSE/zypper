@@ -1,4 +1,10 @@
 -------------------------------------------------------------------
+Mon Nov 17 13:22:50 CET 2008 - jkupec@suse.cz
+
+- avoid removing of installed local rpms (bnc #444897)
+- r11689
+
+-------------------------------------------------------------------
 Sun Nov  9 11:35:56 CET 2008 - jkupec@suse.cz
 
 - exit immediately after ctrl+c in prompt (bnc #417997)
