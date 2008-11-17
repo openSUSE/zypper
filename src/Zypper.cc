@@ -3097,7 +3097,7 @@ void Zypper::doCommand()
       // OTOH packages path == ZYPPER_RPM_CACHE_DIR (the same as repo URI)
       // causes cp file thesamefile, which fails silently. This may be worth
       // fixing in libzypp.
-      repo.setPackagesPath("/tmp/zypper");
+      repo.setPackagesPath(runtimeData().tmpdir);
 
       // shut up zypper
       Out::Verbosity tmp = out().verbosity();

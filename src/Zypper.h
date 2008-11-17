@@ -19,6 +19,7 @@
 #include "zypp/RepoInfo.h"
 #include "zypp/RepoManager.h" // for RepoManagerOptions
 #include "zypp/SrcPackage.h"
+#include "zypp/TmpPath.h"
 
 #include "Command.h"
 #include "utils/getopt.h"
@@ -150,6 +151,9 @@ struct RuntimeData
 
   //! \todo move this to a separate Status struct
   bool waiting_for_input;
+
+  //! Temporary directory for any use. Used e.g. as packagesPath of TMP_RPM_REPO_ALIAS repository.
+  zypp::filesystem::TmpDir tmpdir;
 };
 
 typedef zypp::shared_ptr<zypp::RepoManager> RepoManager_Ptr;
