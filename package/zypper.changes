@@ -1,4 +1,12 @@
 -------------------------------------------------------------------
+Tue Nov 18 08:58:03 CET 2008 - jkupec@suse.cz
+
+- select packages to show in 'info' like the install/update command
+  does (bnc #437854) (r11701)
+- translations update
+- 1.0.0
+
+-------------------------------------------------------------------
 Mon Nov 17 13:22:50 CET 2008 - jkupec@suse.cz
 
 - avoid removing of installed local rpms (bnc #445504)

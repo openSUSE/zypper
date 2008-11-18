@@ -29,9 +29,9 @@
 #   new version in 'LAST RELEASED:', and add a
 #   note in the changes file.
 #
-SET(VERSION_MAJOR "0")
-SET(VERSION_MINOR "12")
-SET(VERSION_PATCH "12")
+SET(VERSION_MAJOR "1")
+SET(VERSION_MINOR "0")
+SET(VERSION_PATCH "0")
 
-# LAST RELEASED: 0.12.12
+# LAST RELEASED: 1.0.0
 #=======
