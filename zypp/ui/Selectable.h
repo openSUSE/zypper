@@ -119,16 +119,8 @@ namespace zypp
       /** The last Installed object. */
       PoolItem installedObj() const;
 
-      /**
-       * Returns one of available objects, specifically either the user
-       * selected candidate or a default.
-       *
-       * Default is either the first available object which has the same arch
-       * as one of the installed objects, or the first available object
-       * (if none of available arch matches the arch of the installed objects),
-       * or empty.
-       *
-       * \return a PoolItem according to the describe criteria.
+      /** The 'best' or 'most interesting' among all available objects.
+       * One that is, or is likely to be, chosen for installation.
        */
       PoolItem candidateObj() const;
 
@@ -164,12 +156,10 @@ namespace zypp
       /** \overload */
       PoolItem setCandidate( ResObject::constPtr newCandidate_r, ResStatus::TransactByValue causer_r = ResStatus::USER );
 
-      /**
-       * The object whose summary to show in the UIs.
+      /** An object you could use as pars pro toto.
        *
-       * \return the \ref candidateObj(), if not empty, or the first of installed
-       *         objects or an empty \ref PoolItem.
-       * \see candidateObj()
+       * \return the \ref candidateObj, or ,if no available objects
+       * exist, the \ref installedObj.
        */
       PoolItem theObj() const;
 

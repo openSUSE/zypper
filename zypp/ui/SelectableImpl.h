@@ -214,8 +214,6 @@ namespace zypp
         if ( !installedEmpty() )
         {
           // prefer the installed objects arch.
-          //! \todo FIXME this is semi-random(?); should rather look for such installed
-          //! object's arch which best matches the system arch
           for ( installed_const_iterator iit = installedBegin();
                 iit != installedEnd(); ++iit )
           {
