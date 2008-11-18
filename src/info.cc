@@ -18,11 +18,12 @@
 
 #include "Zypper.h"
 #include "main.h"
-#include "misc.h"
+//#include "misc.h"
 #include "Table.h"
 #include "utils/richtext.h"
 #include "utils/misc.h" // for kind_to_string_localized and string_patch_status
 #include "search.h"
+#include "update.h"
 
 #include "info.h"
 
@@ -31,6 +32,8 @@ using namespace zypp;
 using boost::format;
 
 extern ZYpp::Ptr God;
+
+#define USE_THE_ONE 0
 
 void printNVA(const ResObject::constPtr & res)
 {
@@ -56,7 +59,7 @@ void printSummaryDesc(const ResObject::constPtr & res)
 }
 
 /**
- * 
+ *
  */
 void printInfo(Zypper & zypper, const ResKind & kind)
 {
@@ -85,12 +88,12 @@ void printInfo(Zypper & zypper, const ResKind & kind)
       ui::Selectable::constPtr s = *q.selectableBegin();
       // print info
       // TranslatorExplanation E.g. "Information for package zypper:"
-      
+
       if (zypper.out().type() != Out::TYPE_XML)
       {
         cout << endl << format(_("Information for %s %s:"))
             % kind_to_string_localized(kind, 1) % *nameit;
-  
+
         cout << endl << endl;
       }
 
@@ -116,11 +119,11 @@ void printInfo(Zypper & zypper, const ResKind & kind)
     string s1 = _("Provides");
     string s2 = _("Conflicts");
     string s3 = _("Obsoletes");
-    // translators: package requirements table header 
+    // translators: package requirements table header
     string s4 = _("Requirement");
-    // translators: package requirements table header 
+    // translators: package requirements table header
     string s5 = _("Provided By");
-    // translators: package conflicts table header 
+    // translators: package conflicts table header
     string s6 = _("Conflict");
   }
 }
@@ -147,8 +150,21 @@ Copy and modify /usr/share/vim/current/gvimrc to ~/.gvimrc if needed.
  */
 void printPkgInfo(Zypper & zypper, const ui::Selectable & s)
 {
-  PoolItem theone = s.theObj();
   PoolItem installed = s.installedObj();
+
+#if USE_THE_ONE
+  PoolItem theone = s.theObj();
+#else
+  PoolItem theone;
+  if (s.installedEmpty())
+      theone = s.availableBegin() != s.availableEnd() ?
+          findUpdateItem(God->pool(), *s.availableBegin()) : PoolItem();
+  else
+    theone = findUpdateItem(God->pool(), *s.installedBegin());
+  if (!theone)
+    theone = *s.installedBegin();
+#endif
+
   cout << (zypper.globalOpts().is_rug_compatible ? _("Catalog: ") : _("Repository: "))
        << theone.resolvable()->repository().info().name() << endl;
 
@@ -199,7 +215,7 @@ patch: xv = 1448-0
 Requires:
 atom: xv = 3.10a-1091.2
 </pre>
- * 
+ *
  */
 void printPatchInfo(Zypper & zypper, const ui::Selectable & s )
 {
@@ -246,7 +262,7 @@ static string string_weak_status(const ResStatus & rs)
     return _("Recommended");
   if (rs.isSuggested())
     return _("Suggested");
-  return ""; 
+  return "";
 }
 
 /**
@@ -277,7 +293,7 @@ void printPatternInfo(Zypper & zypper, const ui::Selectable & s)
   printNVA(pool_item.resolvable());
 
   cout << _("Installed: ") << (pool_item.isSatisfied() ? _("Yes") : _("No")) << endl;
-  
+
   printSummaryDesc(pool_item.resolvable());
 
   if (zypper.globalOpts().is_rug_compatible)
@@ -286,13 +302,13 @@ void printPatternInfo(Zypper & zypper, const ui::Selectable & s)
   // show contents
   Table t;
   TableHeader th;
-  th << _("S") << _("Name") << _("Type") << _("Dependency"); 
+  th << _("S") << _("Name") << _("Type") << _("Dependency");
   t << th;
 
   //God->resolver()->solve();
 
   Pattern::constPtr pattern = asKind<Pattern>(pool_item.resolvable());
-  Pattern::Contents contents = pattern->contents(); 
+  Pattern::Contents contents = pattern->contents();
   for_(sit, contents.selectableBegin(), contents.selectableEnd())
   {
     const ui::Selectable & s = **sit;
@@ -335,7 +351,7 @@ void printProductInfo(Zypper & zypper, const ui::Selectable & s)
 
   if (zypper.out().type() == Out::TYPE_XML)
   {
-    Product::constPtr pp = asKind<Product>(pool_item.resolvable()); 
+    Product::constPtr pp = asKind<Product>(pool_item.resolvable());
     cout
       << asXML(*pp, pool_item.status().isInstalled())
       << endl;
@@ -344,9 +360,9 @@ void printProductInfo(Zypper & zypper, const ui::Selectable & s)
   {
     cout << (zypper.globalOpts().is_rug_compatible ? _("Catalog: ") : _("Repository: "))
          << pool_item.resolvable()->repository().info().name() << endl;
-  
+
     printNVA(pool_item.resolvable());
-  
+
     Product::constPtr product = asKind<Product>(pool_item.resolvable());
     cout << _("Category")   << ": " << product->type() << endl;
     cout << _("Flavor")     << ": " << product->flavor() << endl;
