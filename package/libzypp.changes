@@ -1,4 +1,11 @@
 -------------------------------------------------------------------
+Tue Nov 18 18:37:30 CET 2008 - ma@suse.de
+
+- Add class filesystem::Glob to find pathnames matching a pattern
+  by using ::glob.
+- revision 11708
+
+-------------------------------------------------------------------
 Thu Nov 13 11:07:56 CET 2008 - schubi@suse.de
 
 - Taking care for ppc64 while distupgrade (bnc #443685)

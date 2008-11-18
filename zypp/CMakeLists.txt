@@ -24,6 +24,7 @@ SET( zypp_SRCS
   ExternalProgram.cc
   Fetcher.cc
   FileChecker.cc
+  Glob.cc
   HistoryLog.cc
   IdString.cc
   KeyRing.cc
@@ -103,6 +104,7 @@ SET( zypp_HEADERS
   ExternalProgram.h
   Fetcher.h
   FileChecker.h
+  Glob.h
   HistoryLog.h
   IdString.h
   IdStringType.h
@@ -868,7 +870,7 @@ TARGET_LINK_LIBRARIES(zypp ${HAL_STORAGE_LIBRARY} )
 TARGET_LINK_LIBRARIES(zypp ${CURL_LIBRARY} )
 TARGET_LINK_LIBRARIES(zypp ${LIBXML_LIBRARY} )
 TARGET_LINK_LIBRARIES(zypp ${ZLIB_LIBRARY} )
-TARGET_LINK_LIBRARIES(zypp ${SATSOLVER_LIBRARY} )
+TARGET_LINK_LIBRARIES(zypp ${SATSOLVER_LIBRARY} ${EXPAT_LIBRARY})
 TARGET_LINK_LIBRARIES(zypp ${OPENSSL_LIBRARIES} )
 TARGET_LINK_LIBRARIES(zypp ${CRYPTO_LIBRARIES} )
 TARGET_LINK_LIBRARIES(zypp ${SIGNALS_LIBRARY} )
