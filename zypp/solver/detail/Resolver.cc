@@ -72,6 +72,7 @@ Resolver::Resolver (const ResPool & pool)
     , _testing(false)
     , _forceResolve(false)
     , _upgradeMode(false)
+    , _updateMode(false)    
     , _verifying(false)
     , _onlyRequires(indeterminate)
     , _ignorealreadyrecommended(false)
@@ -113,6 +114,7 @@ Resolver::reset (bool keepExtras )
 void
 Resolver::doUpdate()
 {
+    _updateMode = true;
     return _satResolver->doUpdate();
 }
 

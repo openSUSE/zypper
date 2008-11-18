@@ -375,6 +375,13 @@ bool Testcase::createTestcase(Resolver & resolver, bool dumpPool, bool runSolver
     control.addDependencies (SystemCheck::instance().requiredSystemCap(),
 			     SystemCheck::instance().conflictSystemCap());
 
+    if (resolver.isUpgradeMode())
+	control.distupgrade ();
+    if (resolver.isUpdateMode())
+	control.verifySystem ();
+    if (resolver.isVerifyingMode())
+	control.update();
+
     return true;
 }
 
@@ -459,8 +466,7 @@ HelixControl::HelixControl(const std::string & controlPath,
 	*file << TAB << "<ignorealreadyrecommended/>" << endl;
     
     *file << "</setup>" << endl
-	  << "<trial>" << endl
-	  << "<showpool all=\"yes\"/>" << endl;
+	  << "<trial>" << endl;
 }
 
 HelixControl::HelixControl()
@@ -523,6 +529,21 @@ void HelixControl::addDependencies (const CapabilitySet & capRequire, const Capa
     for (CapabilitySet::const_iterator iter = capConflict.begin(); iter != capConflict.end(); iter++) {
 	*file << "<addConflict " << " name=\"" << iter->asString() << "\"" << "/>" << endl;
     }
+}
+
+void HelixControl::distupgrade()
+{
+    *file << "<distupgrade/>" << endl;
+}
+
+void HelixControl::verifySystem()
+{
+    *file << "<verify/>" << endl;
+}
+
+void HelixControl::update()
+{
+    *file << "<update/>" << endl;
 }
 
 

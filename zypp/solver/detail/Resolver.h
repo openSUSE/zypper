@@ -106,6 +106,7 @@ class Resolver : public base::ReferenceCounted, private base::NonCopyable {
                                   // have unfulfilled requirements.
                                   // This behaviour is favourited by ZMD
     bool _upgradeMode;            // Resolver has been called with doUpgrade
+    bool _updateMode;            // Resolver has been called with doUpdate    
     bool _verifying;              // The system will be checked
     TriBool _onlyRequires; 	  // do install required resolvables only
                                   // no recommended resolvables, language
@@ -182,6 +183,10 @@ class Resolver : public base::ReferenceCounted, private base::NonCopyable {
 
     bool doUpgrade( zypp::UpgradeStatistics & opt_stats_r );
     PoolItemList problematicUpdateItems( void ) const;
+
+    bool isUpgradeMode(){ return _upgradeMode;};    // Resolver has been called with doUpgrade
+    bool isUpdateMode(){ return _updateMode;};      // Resolver has been called with doUpdate    
+    bool isVerifyingMode(){ return _verifying;};    // The system will be checked
 
     ResolverProblemList problems () const;
     void applySolutions (const ProblemSolutionList &solutions);

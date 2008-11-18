@@ -116,6 +116,11 @@ class  HelixControl {
     void deleteResolvable (const ResObject::constPtr &resObject,
 			   const ResStatus &status);
     void addDependencies (const CapabilitySet &capRequire, const CapabilitySet &capConflict);
+    
+    void distupgrade ();
+    void verifySystem ();
+    void update ();
+    
     std::string filename () { return dumpFile; }
 };
 	
