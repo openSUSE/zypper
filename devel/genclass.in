@@ -146,7 +146,7 @@ function genCC() {
 cat <<EOF
 $(intro $CLASS_CC)
 #include <iostream>
-//#include "zypp/base/Logger.h"
+//#include "zypp/base/LogTools.h"
 
 #include "${INCLUDE_H}"
 
