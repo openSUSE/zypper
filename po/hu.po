@@ -15,7 +15,7 @@ msgstr ""
 "Project-Id-Version: zypper.hu\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2008-10-27 18:08+0100\n"
-"PO-Revision-Date: 2008-11-05 16:23+0100\n"
+"PO-Revision-Date: 2008-11-17 14:46+0100\n"
 "Last-Translator: Kalman Kemenczy <kkemenczy@novell.com>\n"
 "Language-Team: Hungarian <hu@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -1524,16 +1524,16 @@ msgstr " %d. megoldás: "
 #: ../src/solve-commit.cc:76
 msgid "Choose the above solution using '1' or skip, retry or cancel"
 msgid_plural "Choose from above solutions by number or skip, retry or cancel"
-msgstr[0] "A fenti '1' megoldás választása, (k)ihagy, új(r)a vagy (m)égsem"
-msgstr[1] "darab, új(r)a (k)ihagy vagy (m)égsem> "
+msgstr[0] "A fenti megoldás kiválasztásához, nyomja meg az 1-es gombot, vagy kihagyhatja, újrapróbálhatja, esetleg elvetheti."
+msgstr[1] "A fenti megoldás kiválasztásához, nyomja meg a megadott számú gombot, vagy kihagyhatja, újrapróbálhatja, esetleg elvetheti."
 
 #. translators: translate 'c' to whatever you translated the 'c' in
 #. "c" and "s/r/c" strings
 #: ../src/solve-commit.cc:83
 msgid "Choose the above solution using '1' or cancel using 'c'"
 msgid_plural "Choose from above solutions by number or cancel"
-msgstr[0] "A fenti '1' megoldás választása, vagy (m)égsem"
-msgstr[1] "Választás a fenti megoldások közül a számmal, vagy (m)égsem"
+msgstr[0] "A fenti megoldás kiválasztásához, nyomja meg az 1-es gombot vagy válassza (m)égsemet."
+msgstr[1] "Válasszon a fenti megoldások közül a szám megnyomásával, vagy nyomja meg a (m)égsemet."
 
 #. translators: answers for dependency problem solution input prompt:
 #. "Choose from above solutions by number or skip, retry or cancel"
@@ -1788,7 +1788,7 @@ msgstr "A művelet után további %s kerül felhasználásra."
 
 #: ../src/solve-commit.cc:772
 msgid "No additional space will be used or freed after the operation."
-msgstr "A művelet elvégzése nem igényel, vagy szabadít fel további tárhelyet."
+msgstr "A művelet elvégzése nem igényel és nem szabadít fel további tárhelyet."
 
 #. TrasnlatorExplanation %s will be substituted by a byte count e.g. 212 K
 #: ../src/solve-commit.cc:779
