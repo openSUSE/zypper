@@ -29,6 +29,12 @@ BuildRequires:  libsatsolver-devel >= 0.12.1 openssl-devel
 BuildRequires:  boost-devel curl-devel dejagnu doxygen gcc-c++ gettext-devel graphviz hal-devel libxml2-devel
 
 %if 0%{?suse_version}
+BuildRequires:  libexpat-devel
+%else
+BuildRequires:  expat-devel
+%endif
+
+%if 0%{?suse_version}
 BuildRequires:  hicolor-icon-theme update-desktop-files rpm-devel
 Requires: uuid-runtime
 %endif
