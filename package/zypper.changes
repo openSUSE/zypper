@@ -1,4 +1,11 @@
 -------------------------------------------------------------------
+Wed Nov 19 15:57:27 CET 2008 - jkupec@suse.cz
+
+- encode user-supplied URL strings before using them in the Url object
+  (bnc #446395, bnc #444267)
+- r11722
+
+-------------------------------------------------------------------
 Tue Nov 18 08:58:03 CET 2008 - jkupec@suse.cz
 
 - select packages to show in 'info' like the install/update command
