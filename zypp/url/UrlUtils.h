@@ -18,6 +18,8 @@
 #include <vector>
 #include <map>
 
+/** Characters that are safe for URL without percent-encoding. */
+#define URL_SAFE_CHARS ":/?#[]@!$&'()*+,;="
 
 //////////////////////////////////////////////////////////////////////
 namespace zypp

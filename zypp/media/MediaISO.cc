@@ -69,16 +69,18 @@ namespace zypp
       zypp::Url   src;
       try
       {
+        // this percent-decodes the query parameter, it must be later encoded
+        // again before used in a Url object
         arg = _url.getQueryParam("url");
         if( arg.empty() && _isofile.dirname().absolute())
         {
           src = std::string("dir:///");
-          src.setPathName(_isofile.dirname().asString());
+          src.setPathName(url::encode(_isofile.dirname().asString(), URL_SAFE_CHARS));
           _isofile = _isofile.basename();
         }
         else
         {
-          src = arg;
+          src = url::encode(arg, URL_SAFE_CHARS);
         }
       }
       catch(const zypp::url::UrlException &e)
@@ -214,7 +216,7 @@ namespace zypp
         ZYPP_THROW(MediaNotSupportedException(_url));
       }
 
-      //! \todo make this thread-safe - another thread might pick up the same device 
+      //! \todo make this thread-safe - another thread might pick up the same device
       string loopdev = findUnusedLoopDevice(); // (bnc #428009)
 
       MediaSourceRef media( new MediaSource("iso",  loopdev));
