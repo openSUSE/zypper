@@ -1,4 +1,11 @@
 -------------------------------------------------------------------
+Wed Nov 19 15:49:38 CET 2008 - jkupec@suse.cz
+
+- encode user-supplied URL strings before using them in the Url object
+  (bnc #446395, bnc #444267)
+- r11720
+
+-------------------------------------------------------------------
 Wed Nov 19 15:15:14 CET 2008 - ma@suse.de
 
 - Support loading helix files.
