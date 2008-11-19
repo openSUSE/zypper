@@ -160,6 +160,30 @@ namespace zypp
 
     /////////////////////////////////////////////////////////////////
 
+    Repository Pool::addRepoHelix( const Pathname & file_r, const std::string & alias_r )
+    {
+      // Using a temporay repo! (The additional parenthesis are required.)
+      AutoDispose<Repository> tmprepo( (Repository::EraseFromPool()) );
+      *tmprepo = reposInsert( alias_r );
+      tmprepo->addHelix( file_r );
+
+      // no exceptions so we keep it:
+      tmprepo.resetDispose();
+      return tmprepo;
+    }
+
+    Repository Pool::addRepoHelix( const Pathname & file_r )
+    { return addRepoHelix( file_r, file_r.basename() ); }
+
+    Repository Pool::addRepoHelix( const Pathname & file_r, const RepoInfo & info_r )
+    {
+      Repository ret( addRepoHelix( file_r, info_r.alias() ) );
+      ret.setInfo( info_r );
+      return ret;
+    }
+
+   /////////////////////////////////////////////////////////////////
+
     void Pool::setRequestedLocales( const LocaleSet & locales_r )
     { myPool().setRequestedLocales( locales_r ); }
 

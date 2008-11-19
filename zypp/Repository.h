@@ -211,7 +211,16 @@ namespace zypp
          */
         void addSolv( const Pathname & file_r );
 
-        /** Add \c count_r new empty \ref Solvable to this \ref Repository. */
+         /** Load \ref Solvables from a helix-file.
+         * Supports loading of gzip compressed files (.gz). In case of an exception
+         * the repository remains in the \ref Pool.
+         * \throws Exception if this is \ref noRepository
+         * \throws Exception if loading the helix-file fails.
+         * \see \ref Pool::addRepoHelix and \ref Repository::EraseFromPool
+         */
+        void addHelix( const Pathname & file_r );
+
+       /** Add \c count_r new empty \ref Solvable to this \ref Repository. */
         sat::Solvable::IdType addSolvables( unsigned count_r );
         /** \overload Add only one new \ref Solvable. */
         sat::Solvable::IdType addSolvable()

@@ -120,6 +120,21 @@ namespace zypp
         Repository addRepoSolv( const Pathname & file_r, const RepoInfo & info_r );
 
       public:
+        /** Load \ref Solvables from a helix-file into a \ref Repository named \c name_r.
+         * Supports loading of gzip compressed files (.gz). In case of an exception
+         * the \ref Repository is removed from the \ref Pool.
+         * \throws Exception if loading the helix-file fails.
+         * \see \ref Repository::EraseFromPool
+        */
+        Repository addRepoHelix( const Pathname & file_r, const std::string & name_r );
+        /** \overload Using the files basename as \ref Repository name. */
+        Repository addRepoHelix( const Pathname & file_r );
+        /** \overload Using the \ref RepoInfo::alias \ref Repo name.
+         * Additionally stores the \ref RepoInfo. \See \ref Prool::setInfo.
+        */
+        Repository addRepoHelix( const Pathname & file_r, const RepoInfo & info_r );
+
+      public:
         /** Whether \ref Pool contains solvables. */
         bool solvablesEmpty() const;
 

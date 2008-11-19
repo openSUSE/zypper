@@ -258,6 +258,28 @@ namespace zypp
       MIL << *this << " after adding " << file_r << endl;
     }
 
+    void Repository::addHelix( const Pathname & file_r )
+    {
+      NO_REPOSITORY_THROW( Exception( "Can't add solvables to norepo." ) );
+
+      std::string command( file_r.extension() == ".gz" ? "zcat " : "cat " );
+      command += file_r.asString();
+
+      AutoDispose<FILE*> file( ::popen( command.c_str(), "r" ), ::pclose );
+      if ( file == NULL )
+      {
+        file.resetDispose();
+        ZYPP_THROW( Exception( "Can't open helix-file: "+file_r.asString() ) );
+      }
+
+      if ( myPool()._addHelix( _repo, file ) != 0 )
+      {
+        ZYPP_THROW( Exception( "Error reading helix-file: "+file_r.asString() ) );
+      }
+
+      MIL << *this << " after adding " << file_r << endl;
+    }
+
     sat::detail::SolvableIdType Repository::addSolvables( unsigned count_r )
     {
 	NO_REPOSITORY_THROW( Exception( "Can't add solvables to norepo.") );

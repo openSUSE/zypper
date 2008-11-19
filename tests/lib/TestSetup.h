@@ -12,6 +12,7 @@ using boost::unit_test::test_case;
 #include "zypp/ZYppFactory.h"
 #include "zypp/ZYpp.h"
 #include "zypp/TmpPath.h"
+#include "zypp/Glob.h"
 #include "zypp/PathInfo.h"
 #include "zypp/RepoManager.h"
 #include "zypp/Target.h"
@@ -38,6 +39,9 @@ using namespace zypp;
  *
  * BOOST_AUTO_TEST_CASE(WhatProvides)
  * {
+ *   // enabls loging fot the scope of this block:
+ *   // base::LogControl::TmpLineWriter shutUp( new log::FileLineWriter( "/tmp/YLOG" ) );
+ *
  *   TestSetup test( Arch_x86_64 );
  *   // test.loadTarget(); // initialize and load target
  *   test.loadRepo( TESTS_SRC_DIR"/data/openSUSE-11.1" );
@@ -79,7 +83,11 @@ class TestSetup
     /** Fake @System repo from Path. */
     void loadTargetRepo( const Pathname & path_r )
     { loadRepo( path_r, sat::Pool::systemRepoAlias() ); }
+    /** Fake @System repo from helix repo. */
+    void loadTargetHelix( const Pathname & path_r )
+    { loadHelix( path_r, sat::Pool::systemRepoAlias() ); }
 
+  public:
     /** Directly load repoinfo to pool. */
     void loadRepo( RepoInfo nrepo )
     {
@@ -134,6 +142,39 @@ class TestSetup
     */
     void loadRepo( const char * loc_r, const std::string & alias_r = std::string() )
     { loadRepo( std::string( loc_r ? loc_r : "" ), alias_r ); }
+
+  public:
+    /** Directly load a helix repo from some testcase.
+     * An empty alias is guessed.
+    */
+    void loadHelix( const Pathname & path_r, const std::string & alias_r = std::string() )
+    {
+      // .solv file is loaded directly using a faked RepoInfo
+      RepoInfo nrepo;
+      nrepo.setAlias( alias_r.empty() ? path_r.basename() : alias_r );
+      satpool().addRepoHelix( path_r, nrepo );
+    }
+
+    // Load repos included in a solver testcase.
+    void loadTestcaseRepos( const Pathname & path_r )
+    {
+      if ( ! filesystem::PathInfo( path_r ).isDir() )
+      {
+        ERR << "No dir " << filesystem::PathInfo( path_r ) << endl;
+        return;
+      }
+      filesystem::Glob files( path_r/"*{.xml,.xml.gz}", filesystem::Glob::_BRACE );
+      for_( it, files.begin(), files.end() )
+      {
+        std::string basename( Pathname::basename( *it ) );
+        if ( str::hasPrefix( basename, "solver-test.xml" ) )
+          continue; // master index currently unevaluated
+        if ( str::hasPrefix( basename, "solver-system.xml" ) )
+          loadTargetHelix( *it );
+        else
+          loadHelix( *it );
+      }
+    }
 
   public:
     /** Load all enabled repos in repos.d to pool. */

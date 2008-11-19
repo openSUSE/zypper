@@ -1,4 +1,10 @@
 -------------------------------------------------------------------
+Wed Nov 19 15:15:14 CET 2008 - ma@suse.de
+
+- Support loading helix files.
+- revision 11719
+
+-------------------------------------------------------------------
 Tue Nov 18 18:37:30 CET 2008 - ma@suse.de
 
 - Add class filesystem::Glob to find pathnames matching a pattern

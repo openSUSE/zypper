@@ -42,6 +42,13 @@ using std::endl;
 
 ///////////////////////////////////////////////////////////////////
 
+template<typename T>
+void whichType( T )
+{ INT << __PRETTY_FUNCTION__ << endl; }
+template<typename T>
+void whichType()
+{ INT << __PRETTY_FUNCTION__ << endl; }
+
 void waitForInput()
 {
   int i;

@@ -18,6 +18,7 @@ extern "C"
 #include <satsolver/solvable.h>
 #include <satsolver/poolarch.h>
 #include <satsolver/repo_solv.h>
+#include <satsolver/repo_helix.h>
 }
 #include <iosfwd>
 
@@ -109,9 +110,18 @@ namespace zypp
           */
           int _addSolv( ::_Repo * repo_r, FILE * file_r );
 
+          /** Adding helix file to a repo.
+           * Except for \c isSystemRepo_r, solvables of incompatible architecture
+           * are filtered out.
+          */
+          int _addHelix( ::_Repo * repo_r, FILE * file_r );
+
           /** Adding Solvables to a repo. */
           detail::SolvableIdType _addSolvables( ::_Repo * repo_r, unsigned count_r );
           //@}
+
+          /** Helper postprocessing the repo aftr adding solv or helix files. */
+          void _postRepoAdd( ::_Repo * repo_r );
 
         public:
           /** a \c valid \ref Solvable has a non NULL repo pointer. */

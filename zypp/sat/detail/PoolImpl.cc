@@ -260,17 +260,32 @@ namespace zypp
       int PoolImpl::_addSolv( ::_Repo * repo_r, FILE * file_r )
       {
         setDirty(__FUNCTION__, repo_r->name );
-        int ret = ::repo_add_solv( repo_r , file_r  );
-        if ( ret == 0 && ! isSystemRepo( repo_r ) )
+        int ret = ::repo_add_solv( repo_r , file_r );
+        if ( ret == 0 )
+          _postRepoAdd( repo_r );
+        return ret;
+      }
+
+      int PoolImpl::_addHelix( ::_Repo * repo_r, FILE * file_r )
+      {
+        setDirty(__FUNCTION__, repo_r->name );
+        ::repo_add_helix( repo_r , file_r, 0 ); // unfortunately void
+        _postRepoAdd( repo_r );
+        return 0;
+      }
+
+      void PoolImpl::_postRepoAdd( ::_Repo * repo_r )
+      {
+        if ( ! isSystemRepo( repo_r ) )
         {
-          // Filter out unwanted archs
+            // Filter out unwanted archs
           std::set<detail::IdType> sysids;
           {
             Arch::CompatSet sysarchs( Arch::compatSet( ZConfig::instance().systemArchitecture() ) );
             for_( it, sysarchs.begin(), sysarchs.end() )
-	       sysids.insert( it->id() );
+              sysids.insert( it->id() );
 
-            // unfortunately satsolver treats src/nosrc as architecture:
+              // unfortunately satsolver treats src/nosrc as architecture:
             sysids.insert( ARCH_SRC );
             sysids.insert( ARCH_NOSRC );
           }
@@ -279,29 +294,28 @@ namespace zypp
           unsigned       blockSize  = 0;
           for ( detail::IdType i = repo_r->start; i < repo_r->end; ++i )
           {
-            ::_Solvable * s( _pool->solvables + i );
-            if ( s->repo == repo_r && sysids.find( s->arch ) == sysids.end() )
-            {
-              // Remember an unwanted arch entry:
-              if ( ! blockBegin )
-                blockBegin = i;
-              ++blockSize;
-            }
-            else if ( blockSize )
-            {
-              // Free remembered entries
-              ::repo_free_solvable_block( repo_r, blockBegin, blockSize, /*reuseids*/false );
-              blockBegin = blockSize = 0;
-            }
+              ::_Solvable * s( _pool->solvables + i );
+              if ( s->repo == repo_r && sysids.find( s->arch ) == sysids.end() )
+              {
+                // Remember an unwanted arch entry:
+                if ( ! blockBegin )
+                  blockBegin = i;
+                ++blockSize;
+              }
+              else if ( blockSize )
+              {
+                // Free remembered entries
+                  ::repo_free_solvable_block( repo_r, blockBegin, blockSize, /*reuseids*/false );
+                  blockBegin = blockSize = 0;
+              }
           }
           if ( blockSize )
           {
-            // Free remembered entries
-            ::repo_free_solvable_block( repo_r, blockBegin, blockSize, /*reuseids*/false );
-            blockBegin = blockSize = 0;
+              // Free remembered entries
+              ::repo_free_solvable_block( repo_r, blockBegin, blockSize, /*reuseids*/false );
+              blockBegin = blockSize = 0;
           }
         }
-        return ret;
       }
 
       detail::SolvableIdType PoolImpl::_addSolvables( ::_Repo * repo_r, unsigned count_r )
