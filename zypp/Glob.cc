@@ -23,7 +23,7 @@ namespace zypp
   namespace filesystem
   { /////////////////////////////////////////////////////////////////
 
-    int Glob::add( const std::string & pattern_r, Flags flags_r )
+    int Glob::add( const char * pattern_r, Flags flags_r )
     {
       static Flags _APPEND( GLOB_APPEND ); // not published
       if ( ! flags_r )
@@ -32,7 +32,17 @@ namespace zypp
         flags_r |= _APPEND;
       else
         _result.reset( new ::glob_t );
-      return( _lastGlobReturn = ::glob( pattern_r.c_str(), flags_r, NULL, &(*_result) ) );
+      return( _lastGlobReturn = ::glob( pattern_r, flags_r, NULL, &(*_result) ) );
+    }
+
+    void Glob::clear()
+    {
+      if ( _result )
+      {
+        ::globfree( &(*_result) );
+        _result.reset();
+        _lastGlobReturn = 0;
+      }
     }
 
     /******************************************************************

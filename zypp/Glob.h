@@ -25,6 +25,8 @@ extern "C"
 #include "zypp/base/NonCopyable.h"
 #include "zypp/base/DefaultIntegral.h"
 
+#include "zypp/Pathname.h"
+
 ///////////////////////////////////////////////////////////////////
 namespace zypp
 { /////////////////////////////////////////////////////////////////
@@ -61,7 +63,7 @@ namespace zypp
             , char **                       // Base
             , value_type                    // Value
             , boost::forward_traversal_tag  // CategoryOrTraversal
-            , const value_type &            // Reference
+            , const value_type              // Reference
             >
         {
           public:
@@ -80,6 +82,8 @@ namespace zypp
               if ( base_reference() && !*(++base_reference()) )
                 base_reference() = 0;
             }
+            reference dereference() const
+            { return( base() ? *base() : 0 ); }
         };
         ///////////////////////////////////////////////////////////////////
 
@@ -109,6 +113,7 @@ namespace zypp
       public:
         /** Default ctor optionally taking the default flags.
          * The flags passed here are the default for \ref add.
+         * \see \ref setDefaultFlags
         */
         Glob( Flags flags_r = Flags() )
         : _defaultFlags( flags_r )
@@ -116,8 +121,17 @@ namespace zypp
 
         /** Ctor adding pathnames matching \a pattern_r.
          * The flags passed here are the default for \ref add.
+         * \see \ref setDefaultFlags
         */
+        explicit Glob( const Pathname & pattern_r, Flags flags_r = Flags() )
+        : _defaultFlags( flags_r )
+        { add( pattern_r, flags_r ); }
+        /** \overload */
         explicit Glob( const std::string & pattern_r, Flags flags_r = Flags() )
+        : _defaultFlags( flags_r )
+        { add( pattern_r, flags_r ); }
+        /** \overload */
+        explicit Glob( const char * pattern_r, Flags flags_r = Flags() )
         : _defaultFlags( flags_r )
         { add( pattern_r, flags_r ); }
 
@@ -127,14 +141,29 @@ namespace zypp
 
         /** Add pathnames matching \a pattern_r to the current result.
          *
-         * The flags passed here override the global default passed to
-         * the ctor. GLOB_APPEND is atomatically added to the flags if needed.
+         * Any flags passed here override the global default passed to
+         * the ctor. GLOB_APPEND is atomatically added to the flags
+         * f needed.
          *
          * This invalidates all iterators.
          * \see \ref setDefaultFlags
          * \return the value returned by ::glob().
          */
-        int add( const std::string & pattern_r, Flags flags_r = Flags() );
+        int add( const Pathname & pattern_r, Flags flags_r = Flags() )
+        { return add( pattern_r.c_str(), flags_r ); }
+        /** \overload */
+        int add( const std::string & pattern_r, Flags flags_r = Flags() )
+        { return add( pattern_r.c_str(), flags_r ); }
+        /** \overload */
+        int add( const char * pattern_r, Flags flags_r = Flags() );
+
+        /** Clear all results found so far. \ref defaultFlags remain active. */
+        void clear();
+
+        /** Clear all results and reset \ref defaultFlags. */
+        void reset( Flags flags_r = Flags() )
+        { clear(); setDefaultFlags( flags_r ); }
+
 
       public:
         /** The default flags passed to \c ::glob(). */
@@ -174,13 +203,35 @@ namespace zypp
         /** \name Collecting Glob results to some _OutputIterator
          * \code
          * std::list<Pathname> p;
-         * Glob::collect( "/bin/m*", std::back_inserter(p) );
+         * Glob::collect( "/bin/a*.dat}", std::back_inserter(p) );
+         * Glob::collect( "/bin/a*{.xml,.xml.gz}", Glob::_BRACE, std::back_inserter(p) );
          * \endcode
          */
         //@{
         /** Write glob result to some \c OutputIterator. */
         template<class _OutputIterator>
+        static int collect( const Pathname & pattern_r, _OutputIterator result_r )
+        { return collect( pattern_r.c_str(), Flags(), result_r ); }
+        /** \overload */
+        template<class _OutputIterator>
+        static int collect( const std::string & pattern_r, _OutputIterator result_r )
+        { return collect( pattern_r.c_str(), Flags(), result_r ); }
+        /** \overload */
+        template<class _OutputIterator>
+        static int collect( const char * & pattern_r, _OutputIterator result_r )
+        { return collect( pattern_r, Flags(), result_r ); }
+
+        /** \overload With \ref Flags */
+        template<class _OutputIterator>
+        static int collect( const Pathname & pattern_r, Flags flags_r, _OutputIterator result_r )
+        { return collect( pattern_r.c_str(), flags_r, result_r ); }
+        /** \overload */
+        template<class _OutputIterator>
         static int collect( const std::string & pattern_r, Flags flags_r, _OutputIterator result_r )
+        { return collect( pattern_r.c_str(), flags_r, result_r ); }
+        /** \overload */
+        template<class _OutputIterator>
+        static int collect( const char * pattern_r, Flags flags_r, _OutputIterator result_r )
         {
           Glob glob( pattern_r, flags_r );
           if ( glob.lastGlobReturn() == 0 )
@@ -188,10 +239,6 @@ namespace zypp
               (*result_r)++ = *it;
           return glob.lastGlobReturn();
         }
-        /** \overload */
-        template<class _OutputIterator>
-        static int collect( const std::string & pattern_r, _OutputIterator result_r )
-        { return collect( pattern_r, Flags(), result_r ); }
         //@}
 
       private:
@@ -203,6 +250,10 @@ namespace zypp
 
     /** \relates Glob Stream output */
     std::ostream & operator<<( std::ostream & str, const Glob & obj );
+
+    /** \relates Glob::const_iterator Stream output */
+    inline std::ostream & operator<<( std::ostream & str, const Glob::const_iterator & obj )
+    { return str << *obj; }
 
     ZYPP_DECLARE_OPERATORS_FOR_FLAGS( Glob::Flags );
 
