@@ -239,7 +239,7 @@ namespace zypp
           Glob glob( pattern_r, flags_r );
           if ( glob.lastGlobReturn() == 0 )
             for_( it, glob.begin(), glob.end() )
-              (*result_r)++ = *it;
+              (*result_r)++ = _OutputIterator::container_type::value_type(*it);
           return glob.lastGlobReturn();
         }
         //@}
