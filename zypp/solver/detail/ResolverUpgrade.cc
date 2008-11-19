@@ -70,15 +70,13 @@ Resolver::doesObsoleteItem (PoolItem candidate, PoolItem installed)
 bool
 Resolver::doUpgrade( UpgradeStatistics & opt_stats_r )
 {
-  Target_Ptr target;
-  try {
-	target = getZYpp()->target();
-  }
-  catch( const Exception & excpt_r) {
-	ERR << "Huh, no target ?";
-	ZYPP_CAUGHT(excpt_r);
-	if (!_testing) return false;		// can't continue without target
-	MIL << "Running in test mode, continuing without target" << endl;
+  Target_Ptr target( getZYpp()->getTarget() );
+  if ( ! target )
+  {
+    ERR << "Huh, no target ?" << endl;
+    if (!_testing)
+      return false;		// can't continue without target
+    MIL << "Running in test mode, continuing without target" << endl;
   }
   MIL << "target at " << target << endl;
 
