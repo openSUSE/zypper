@@ -37,6 +37,19 @@
 \endverbatim
 
 \verbatim
+  - Added support for loading helix files e.g. from testcases. This is what 
+    you need to load all repos from a solver testcase into the pool:
+
+	#include "TestSetup.h"
+	
+	BOOST_AUTO_TEST_CASE(test)
+        { 
+		TestSetup test( Arch_x86_64 );
+	  	test.loadTestcaseRepos( "/suse/ma/BUGS/153548/YaST2/solverTestcase" );
+
+\endverbatim
+
+\verbatim
 Boost Test Library
 http://www.boost.org/doc/libs/1_36_0/libs/test/doc/html/index.html
 
