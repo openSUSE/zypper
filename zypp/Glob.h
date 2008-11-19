@@ -42,7 +42,10 @@ namespace zypp
     /** Find pathnames matching a pattern.
      * \code
      * Glob glob( Glob::_BRACE );
-     * glob.add( "/somewherre/solverTestcase/ *{.xml,.xml.gz}" );
+     * glob.add( "/somewhere/solverTestcase/ *{.xml,.xml.gz}" );
+     * glob.add( "/somewhere/else/a*" );
+     * for_( it, glob.begin(), glob.end() )
+     *   ...
      * \endcode
      * \code
      * std::list<Pathname> plist;
@@ -218,7 +221,7 @@ namespace zypp
         { return collect( pattern_r.c_str(), Flags(), result_r ); }
         /** \overload */
         template<class _OutputIterator>
-        static int collect( const char * & pattern_r, _OutputIterator result_r )
+        static int collect( const char * pattern_r, _OutputIterator result_r )
         { return collect( pattern_r, Flags(), result_r ); }
 
         /** \overload With \ref Flags */
