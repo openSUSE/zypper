@@ -159,7 +159,7 @@ bool looks_like_url (const string& s)
 Url make_url (const string & url_s)
 {
   Url u;
-  string urlstr(url_s);
+  string urlstr(zypp::url::encode(url_s, URL_SAFE_CHARS));
 
   if (!url_s.empty() && !looks_like_url(url_s))
   {
