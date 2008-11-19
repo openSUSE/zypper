@@ -11,6 +11,9 @@
 */
 #ifndef ZYPP_BASE_FLAGS_H
 #define ZYPP_BASE_FLAGS_H
+
+#include "zypp/base/String.h"
+
 ///////////////////////////////////////////////////////////////////
 namespace zypp
 { /////////////////////////////////////////////////////////////////
@@ -100,6 +103,10 @@ namespace zypp
         unsigned _val;
     };
     ///////////////////////////////////////////////////////////////////
+
+    template<typename Enum>
+    inline std::ostream & operator<<( std::ostream & str, const Flags<Enum> & obj )
+    { return str << str::hexstring(obj); }
 
     /** \relates Flags */
 #define ZYPP_DECLARE_FLAGS(Name,Enum) typedef zypp::base::Flags<Enum> Name
