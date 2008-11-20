@@ -124,6 +124,10 @@ namespace sat
   const SolvAttr SolvAttr::repositoryProductCpeid( REPOSITORY_PRODUCT_CPEID );
   const SolvAttr SolvAttr::repositoryKeywords    ( REPOSITORY_KEYWORDS );
 
+  const SolvAttr SolvAttr::repositoryAddedFileProvides( REPOSITORY_ADDEDFILEPROVIDES );
+  const SolvAttr SolvAttr::repositoryRpmDbCookie      ( REPOSITORY_RPMDBCOOKIE );
+
+
 } // namespace sat
   /////////////////////////////////////////////////////////////////
 } // namespace zypp

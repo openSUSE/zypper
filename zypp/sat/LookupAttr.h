@@ -44,6 +44,13 @@ namespace zypp
      * or one \ref Solvable. \ref LookupAttr builds the query,
      * \ref LookupAttr::iterator iterates over the result.
      *
+     * Per default \ref LookupAttr looks for attributes associated with
+     * a \ref Solvable. But you may also pass \ref REPO_ATTR as
+     * \ref Location argument, to lookup attributes associated with
+     * the \ref Repository (e.g. DeltaRpm information).
+     *
+     * For convenience \see \ref LookupRepoAttr.
+     *
      * Modifying the query will not affect any running
      * iterator.
      *
@@ -71,21 +78,37 @@ namespace zypp
      *    MIL << "    " << it << endl;
      *  }
      * \endcode
+     *
+     * \code
+     *  // look for a repo attribute in the pool.
+     *  sat::LookupRepoAttr q( sat::SolvAttr::repositoryAddedFileProvides );
+     *  MIL << q << ": " << endl;
+     *  for_( it, q.begin(), q.end() )
+     *  {
+     *    MIL << "    " << it << endl;
+     *  }
+     * \endcode
      */
     class LookupAttr
     {
       public:
         typedef unsigned size_type;
 
+        /** Specify the where to look for the attribule. */
+        enum Location {
+          SOLV_ATTR = 0,  //!< Search for solvable attributes (default)
+          REPO_ATTR = -1  //!< Search for repository attributes
+        };
+
       public:
         /** Default ctor finds nothing. */
         LookupAttr();
 
         /** Lookup \ref SolvAttr in \ref Pool (all repositories). */
-        explicit LookupAttr( SolvAttr attr_r );
+        explicit LookupAttr( SolvAttr attr_r, Location = SOLV_ATTR );
 
         /** Lookup \ref SolvAttr in one\ref Repository. */
-        explicit LookupAttr( SolvAttr attr_r, Repository repo_r );
+        explicit LookupAttr( SolvAttr attr_r, Repository repo_r, Location = SOLV_ATTR );
 
         /** Lookup \ref SolvAttr in one \ref Solvable. */
         LookupAttr( SolvAttr attr_r, Solvable solv_r );
@@ -131,13 +154,13 @@ namespace zypp
         bool pool() const;
 
         /** Set search in \ref Pool (all repositories). */
-        void setPool();
+        void setPool( Location = SOLV_ATTR );
 
         /** Wheter to search in one \ref Repository. */
         Repository repo() const;
 
         /** Set search in one \ref Repository. */
-        void setRepo( Repository repo_r );
+        void setRepo( Repository repo_r, Location = SOLV_ATTR );
 
         /** Wheter to search in one \ref Solvable. */
         Solvable solvable() const;
@@ -157,6 +180,52 @@ namespace zypp
 
     /** \relates LookupAttr Verbose stream output including the query result. */
     std::ostream & dumpOn( std::ostream & str, const LookupAttr & obj );
+
+    ///////////////////////////////////////////////////////////////////
+    //
+    //	CLASS NAME : LookupRepoAttr
+    //
+    /** Lightweight repositor attribute value lookup.
+     *
+     * This is just a convenience class that overloads all
+     * \ref LookupAttr methods which take a \ref LookupAttr::Location
+     * argument and sets it to \ref REPO_ATTR.
+     *
+     * \code
+     * // look for a repo attribute in the pool:
+     * sat::LookupAttr     p( sat::SolvAttr::repositoryAddedFileProvides, sat::LookupAttr::REPO_ATTR );
+     *
+     * // Equivalent but using LookupRepoAttr:
+     * sat::LookupRepoAttr q( sat::SolvAttr::repositoryAddedFileProvides );
+     * \endcode
+     *
+     * \see \ref LookupAttr
+     */
+    class LookupRepoAttr : public LookupAttr
+    {
+      public:
+        /** \copydoc LookupAttr::LookupAttr() */
+        LookupRepoAttr()
+        {}
+        /** \copydoc LookupAttr::LookupAttr(SolvAttr) */
+        explicit LookupRepoAttr( SolvAttr attr_r )
+        : LookupAttr( attr_r, REPO_ATTR )
+        {}
+        /** \copydoc LookupAttr::LookupAttr(SolvAttr,Repository) */
+        explicit LookupRepoAttr( SolvAttr attr_r, Repository repo_r );
+
+      public:
+        /** \copydoc LookupAttr::setPool */
+        void setPool()
+        { LookupAttr::setPool( REPO_ATTR ); }
+        /** \copydoc LookupAttr::setRepo */
+        void setRepo( Repository repo_r );
+      private:
+        // Hide. You can't look inside and outside Solvables at the same time.
+        using LookupAttr::solvable;
+        using LookupAttr::setSolvable;
+    };
+    ///////////////////////////////////////////////////////////////////
 
     ///////////////////////////////////////////////////////////////////
     //

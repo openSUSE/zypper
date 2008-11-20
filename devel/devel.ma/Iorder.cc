@@ -14,6 +14,7 @@ bool upgrade()
   if ( ! rres )
   {
     ERR << "upgrade " << rres << endl;
+    getZYpp()->resolver()->problems();
     return false;
   }
   MIL << "upgrade " << rres << endl;
@@ -30,6 +31,7 @@ bool solve()
   if ( ! rres )
   {
     ERR << "resolve " << rres << endl;
+    getZYpp()->resolver()->problems();
     return false;
   }
   MIL << "resolve " << rres << endl;

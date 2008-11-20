@@ -1,4 +1,12 @@
 -------------------------------------------------------------------
+Thu Nov 20 19:30:05 CET 2008 - ma@suse.de
+
+- Enhance class LookupAttr and add convenience class LookupRepoAttr to
+  iterate those solv file attributes which are not acssociated with a 
+  solvable. E.g. product or deltarpm info.
+- revision 11754
+
+-------------------------------------------------------------------
 Wed Nov 19 15:49:38 CET 2008 - jkupec@suse.cz
 
 - encode user-supplied URL strings before using them in the Url object

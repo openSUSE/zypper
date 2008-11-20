@@ -154,6 +154,8 @@ namespace sat
       static const SolvAttr repositoryProductLabel;
       static const SolvAttr repositoryProductCpeid;
       static const SolvAttr repositoryRevision;
+      static const SolvAttr repositoryAddedFileProvides;
+      static const SolvAttr repositoryRpmDbCookie;
       //@}
 
       //@}

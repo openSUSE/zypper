@@ -30,22 +30,36 @@ namespace zypp
   namespace sat
   { /////////////////////////////////////////////////////////////////
 
+    using detail::noSolvableId;
+
     ///////////////////////////////////////////////////////////////////
     //
     //	CLASS NAME : LookupAttr::Impl
     //
     ///////////////////////////////////////////////////////////////////
-
+    /**
+     * LookupAttr implememtation.
+     *
+     * Repository and Solvable must not be set at the same time!
+     *
+     * \note When looking in pool or repo, \ref Solvable \c _solv is
+     * somewhat abused to store eiter \c Id \c 0 or \c SOLVID_META, which
+     * indicates whether the dataiterator should look into solvable or
+     * repository metadata. Remember that all \ref Solvables with an
+     * \e invalid \c Id, are treated as <tt>== Solvable::noSolvable</tt>,
+     * and in a boolean context evaluate to \c false. Thus \c noSolvable
+     * may have different \c Ids.
+     */
     class LookupAttr::Impl
     {
       public:
         Impl()
         {}
-        Impl( SolvAttr attr_r )
-        : _attr( attr_r )
+        Impl( SolvAttr attr_r, Location loc_r )
+        : _attr( attr_r ), _solv( loc_r == REPO_ATTR ? SOLVID_META : noSolvableId )
         {}
-        Impl( SolvAttr attr_r, Repository repo_r )
-        : _attr( attr_r ), _repo( repo_r )
+        Impl( SolvAttr attr_r, Repository repo_r, Location loc_r )
+        : _attr( attr_r ), _repo( repo_r ), _solv( loc_r == REPO_ATTR ? SOLVID_META : noSolvableId )
         {}
         Impl( SolvAttr attr_r, Solvable solv_r )
         : _attr( attr_r ), _solv( solv_r )
@@ -62,19 +76,19 @@ namespace zypp
         bool pool() const
         { return ! (_repo || _solv); }
 
-        void setPool()
+        void setPool( Location loc_r )
         {
           _repo = Repository::noRepository;
-          _solv = Solvable::noSolvable;
+          _solv = Solvable( loc_r == REPO_ATTR ? SOLVID_META : noSolvableId );
         }
 
         Repository repo() const
         { return _repo; }
 
-        void setRepo( Repository repo_r )
+        void setRepo( Repository repo_r, Location loc_r  )
         {
           _repo = repo_r;
-          _solv = Solvable::noSolvable;
+          _solv = Solvable( loc_r == REPO_ATTR ? SOLVID_META : noSolvableId );
         }
 
         Solvable solvable() const
@@ -102,11 +116,11 @@ namespace zypp
           }
           else if ( _repo )
           {
-            ::dataiterator_init( dip.get(), sat::Pool::instance().get(),              _repo.id(),          0, _attr.id(), 0, 0 );
+            ::dataiterator_init( dip.get(), sat::Pool::instance().get(),              _repo.id(), _solv.id(), _attr.id(), 0, 0 );
           }
           else if ( ! sat::Pool::instance().reposEmpty() )
           {
-            ::dataiterator_init( dip.get(), sat::Pool::instance().get(),                       0,          0, _attr.id(), 0, 0 );
+            ::dataiterator_init( dip.get(), sat::Pool::instance().get(),                       0, _solv.id(), _attr.id(), 0, 0 );
           }
           else
             return end();
@@ -139,12 +153,12 @@ namespace zypp
       : _pimpl( new Impl )
     {}
 
-    LookupAttr::LookupAttr( SolvAttr attr_r )
-      : _pimpl( new Impl( attr_r ) )
+    LookupAttr::LookupAttr( SolvAttr attr_r, Location loc_r )
+      : _pimpl( new Impl( attr_r, loc_r ) )
     {}
 
-    LookupAttr::LookupAttr( SolvAttr attr_r, Repository repo_r )
-      : _pimpl( new Impl( attr_r, repo_r ) )
+    LookupAttr::LookupAttr( SolvAttr attr_r, Repository repo_r, Location loc_r )
+      : _pimpl( new Impl( attr_r, repo_r, loc_r ) )
     {}
 
     LookupAttr::LookupAttr( SolvAttr attr_r, Solvable solv_r )
@@ -164,14 +178,14 @@ namespace zypp
     bool LookupAttr::pool() const
     { return _pimpl->pool(); }
 
-    void LookupAttr::setPool()
-    { _pimpl->setPool(); }
+    void LookupAttr::setPool( Location loc_r )
+    { _pimpl->setPool( loc_r ); }
 
     Repository LookupAttr::repo() const
     { return _pimpl->repo(); }
 
-    void LookupAttr::setRepo( Repository repo_r )
-    { _pimpl->setRepo( repo_r ); }
+    void LookupAttr::setRepo( Repository repo_r, Location loc_r )
+    { _pimpl->setRepo( repo_r, loc_r ); }
 
     Solvable LookupAttr::solvable() const
     { return _pimpl->solvable(); }
@@ -221,6 +235,19 @@ namespace zypp
     {
       return dumpRange( str << obj, obj.begin(), obj.end() );
     }
+
+    ///////////////////////////////////////////////////////////////////
+    //
+    //	CLASS NAME : LookupRepoAttr
+    //
+    ///////////////////////////////////////////////////////////////////
+
+    LookupRepoAttr::LookupRepoAttr( SolvAttr attr_r, Repository repo_r )
+      : LookupAttr( attr_r, repo_r, REPO_ATTR )
+    {}
+
+    void LookupRepoAttr::setRepo( Repository repo_r )
+    { LookupAttr::setRepo( repo_r, REPO_ATTR ); }
 
     ///////////////////////////////////////////////////////////////////
     //
