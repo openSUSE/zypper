@@ -17,6 +17,17 @@ int main( int argc, char * argv[] )
   test.loadRepo( "/Local/ROOT/cache/raw/11.1-update" );
   test.loadRepo( "/Local/ROOT/cache/raw/11.0-update" );
 
+  sat::Pool satpool( test.satpool() );
+  for_( it, satpool.reposBegin(), satpool.reposEnd() )
+  {
+    MIL << *it << endl;
+    DBG << it->generatedTimestamp() << endl;
+    DBG << it->suggestedExpirationTimestamp() << endl;
+  }
+
+  INT << "===[END]============================================" << endl << endl;
+  return 0;
+
   sat::LookupRepoAttr q( sat::SolvAttr::repositoryAddedFileProvides );
   USR << q << endl;
   USR << dump(q) << endl;
