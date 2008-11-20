@@ -54,142 +54,125 @@ namespace zypp
 
     std::string Repository::alias() const
     {
-	NO_REPOSITORY_RETURN( std::string() );
-	if ( ! _repo->name )
-	    return std::string();
-	return _repo->name;
+      NO_REPOSITORY_RETURN( std::string() );
+      if ( ! _repo->name )
+        return std::string();
+      return _repo->name;
     }
 
-#warning FIX to iterator
     zypp::Date Repository::generatedTimestamp() const
     {
-        ::Dataiterator di;
-        ::dataiterator_init(&di, sat::Pool::instance().get(), get(), SOLVID_META, REPOSITORY_TIMESTAMP, 0, 0);
-        if (::dataiterator_step(&di))
-        {
-            do
-            {
-                switch (di.key->name)
-                {
-                    case REPOSITORY_TIMESTAMP:
-                    {
-                        return di.kv.num;
-                        break;
-                    }
-                }
-            }
-            while (::dataiterator_step(&di));
-      }
-      else
-      {
-          if ( isSystemRepo() )
-            return 0;
-          ERR << "the attribute generated timestamp does not exist in the repo" << endl;
-      }
-
-      return Date();
+      NO_REPOSITORY_RETURN( 0 );
+      sat::LookupRepoAttr q( sat::SolvAttr::repositoryTimestamp, *this );
+      return( q.empty() ? 0 : q.begin().asUnsigned() );
     }
-
 
     zypp::Date Repository::suggestedExpirationTimestamp() const
     {
-        ::Dataiterator di;
-        ::dataiterator_init(&di, sat::Pool::instance().get(), get(), SOLVID_META, REPOSITORY_EXPIRE, 0, 0);
-        Date generated = generatedTimestamp();
-        // do not calculate over a missing generated
-        // timestamp
-        if ( generated == Date() )
-            return Date();
+      NO_REPOSITORY_RETURN( 0 );
+      Date generated = generatedTimestamp();
+      if ( ! generated )
+        return 0; // do not calculate over a missing generated timestamp
 
-        if (::dataiterator_step(&di))
-        {
-            do
-            {
-                switch (di.key->name)
-                {
-                    case REPOSITORY_EXPIRE:
-                    {
-                        return generated + di.kv.num;
-                        break;
-                    }
-                }
-            }
-            while (::dataiterator_step(&di));
-      }
-      else
-      {
-        if ( isSystemRepo() )
-            return 0;
-        ERR << "the attribute suggested expiration timestamp does not exist in the repo" << endl;
-      }
+      sat::LookupRepoAttr q( sat::SolvAttr::repositoryExpire, *this );
+      if ( q.empty() )
+        return 0;
 
-      return Date();
+      return generated + q.begin().asUnsigned();
     }
 
     Repository::Keywords Repository::keywords() const
-    { return Keywords(sat::SolvAttr::repositoryKeywords); }
+    {
+      NO_REPOSITORY_RETURN( Keywords() );
+      return Keywords( sat::SolvAttr::repositoryKeywords, *this, sat::LookupAttr::REPO_ATTR );
+    }
 
     bool Repository::maybeOutdated() const
     {
-        // system repo is not mirrored
-        if ( isSystemRepo() )
-            return false;
+      NO_REPOSITORY_RETURN( false );
+      // system repo is not mirrored
+      if ( isSystemRepo() )
+        return false;
 
-        Date suggested = suggestedExpirationTimestamp();
+      Date suggested = suggestedExpirationTimestamp();
 
-        // if no data, don't suggest
-        if ( suggested == Date() )
-            return false;
+      // if no data, don't suggest
+      if ( ! suggested )
+        return false;
 
-        return suggestedExpirationTimestamp() < Date::now();
+      return suggestedExpirationTimestamp() < Date::now();
     }
 
     bool Repository::providesUpdatesFor( const std::string &key ) const
     {
-        return false;
+      NO_REPOSITORY_RETURN( false );
+      return false;
     }
 
     bool Repository::isUpdateRepo() const
     {
-        return false;
+      NO_REPOSITORY_RETURN( false );
+      return false;
     }
 
     bool Repository::solvablesEmpty() const
     {
-	NO_REPOSITORY_RETURN( true );
-	return !_repo->nsolvables;
+      NO_REPOSITORY_RETURN( true );
+      return !_repo->nsolvables;
     }
 
     Repository::size_type Repository::solvablesSize() const
     {
-	NO_REPOSITORY_RETURN( 0 );
-	return _repo->nsolvables;
+      NO_REPOSITORY_RETURN( 0 );
+      return _repo->nsolvables;
     }
 
     Repository::SolvableIterator Repository::solvablesBegin() const
     {
-	NO_REPOSITORY_RETURN( make_filter_iterator( detail::ByRepository( *this ),
-					      sat::detail::SolvableIterator(),
-					      sat::detail::SolvableIterator() ) );
-	return make_filter_iterator( detail::ByRepository( *this ),
-				     sat::detail::SolvableIterator(_repo->start),
-				     sat::detail::SolvableIterator(_repo->end) );
+      NO_REPOSITORY_RETURN( make_filter_iterator( detail::ByRepository( *this ),
+                            sat::detail::SolvableIterator(),
+                            sat::detail::SolvableIterator() ) );
+      return make_filter_iterator( detail::ByRepository( *this ),
+                                   sat::detail::SolvableIterator(_repo->start),
+                                   sat::detail::SolvableIterator(_repo->end) );
     }
 
     Repository::SolvableIterator Repository::solvablesEnd() const
     {
-	NO_REPOSITORY_RETURN( make_filter_iterator( detail::ByRepository( *this ),
-					      sat::detail::SolvableIterator(),
-					      sat::detail::SolvableIterator() ) );
-	return make_filter_iterator(detail::ByRepository( *this ),
-				    sat::detail::SolvableIterator(_repo->end),
-				    sat::detail::SolvableIterator(_repo->end) );
+      NO_REPOSITORY_RETURN( make_filter_iterator( detail::ByRepository( *this ),
+                            sat::detail::SolvableIterator(),
+                            sat::detail::SolvableIterator() ) );
+      return make_filter_iterator(detail::ByRepository( *this ),
+                                  sat::detail::SolvableIterator(_repo->end),
+                                  sat::detail::SolvableIterator(_repo->end) );
+    }
+
+    Repository::ProductInfoIterator Repository::compatibleWithProductBegin() const
+    {
+      NO_REPOSITORY_RETURN( ProductInfoIterator() );
+      return ProductInfoIterator( sat::SolvAttr::repositoryDistros, *this );
+    }
+
+    Repository::ProductInfoIterator Repository::compatibleWithProductEnd() const
+    {
+      return ProductInfoIterator();
+    }
+
+    Repository::ProductInfoIterator Repository::updatesProductBegin() const
+    {
+      NO_REPOSITORY_RETURN( ProductInfoIterator() );
+      return ProductInfoIterator( sat::SolvAttr::repositoryUpdates, *this );
+    }
+
+    Repository::ProductInfoIterator Repository::updatesProductEnd() const
+    {
+      return ProductInfoIterator();
     }
 
     RepoInfo Repository::info() const
     {
-	NO_REPOSITORY_RETURN( RepoInfo() );
-	return myPool().repoInfo( _repo );
+      NO_REPOSITORY_RETURN( RepoInfo() );
+      return myPool().repoInfo( _repo );
     }
 
     void Repository::setInfo( const RepoInfo & info_r )
@@ -283,17 +266,6 @@ namespace zypp
 	return myPool()._addSolvables( _repo, count_r );
     }
 
-#if 0
-    Repository::ProductInfoIterator::ProductInfoIterator( const sat::Solvable & val_r,
-                                                          const sat::SolvAttr & arrayid )
-    { base_reference() = sat::LookupAttr( arrayid, val_r ).begin(); }
-
-    std::string Repository::ProductInfoIterator::label() const
-    { return base_reference().subFind( sat::SolvAttr::repositoryProductLabel ).asString(); }
-    std::string Repository::ProductInfoIterator::cpeId() const
-    { return base_reference().subFind( sat::SolvAttr::repositoryProductCpeid ).asString(); }
-#endif
-
     /******************************************************************
      **
      **	FUNCTION NAME : operator<<
@@ -308,9 +280,23 @@ namespace zypp
 		   << "{"
                    << "prio " << obj.get()->priority
 		   << ", size " << obj.solvablesSize()
-		   <<"}";
+		   << "}";
     }
 
+    ///////////////////////////////////////////////////////////////////
+    //
+    // Repository::ProductInfoIterator
+    //
+    ///////////////////////////////////////////////////////////////////
+
+    Repository::ProductInfoIterator::ProductInfoIterator( sat::SolvAttr attr_r, Repository repo_r )
+    { base_reference() = sat::LookupRepoAttr( attr_r, repo_r ).begin(); }
+
+    std::string Repository::ProductInfoIterator::label() const
+    { return base_reference().subFind( sat::SolvAttr::repositoryProductLabel ).asString(); }
+
+    std::string Repository::ProductInfoIterator::cpeId() const
+    { return base_reference().subFind( sat::SolvAttr::repositoryProductCpeid ).asString(); }
 
     /////////////////////////////////////////////////////////////////
 } // namespace zypp

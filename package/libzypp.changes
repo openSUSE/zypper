@@ -1,4 +1,11 @@
 -------------------------------------------------------------------
+Thu Nov 20 22:15:28 CET 2008 - ma@suse.de
+
+- Fix retrieval of Repository attributes like timestamps, keywords
+  and product info.
+- revision 11760
+
+-------------------------------------------------------------------
 Thu Nov 20 19:30:05 CET 2008 - ma@suse.de
 
 - Enhance class LookupAttr and add convenience class LookupRepoAttr to

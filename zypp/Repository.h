@@ -42,9 +42,8 @@ namespace zypp
         typedef filter_iterator<detail::ByRepository, sat::detail::SolvableIterator> SolvableIterator;
         typedef sat::detail::size_type size_type;
         typedef sat::detail::RepoIdType IdType;
-        typedef sat::ArrayAttr<std::string,std::string> UpdateKeys;
+
         typedef sat::ArrayAttr<std::string,std::string> Keywords;
-        typedef sat::ArrayAttr<std::string,std::string> Products;
 
     public:
         /** Default ctor creates \ref noRepository.*/
@@ -97,7 +96,7 @@ namespace zypp
          * specify when it was generated.
          *
          */
-        zypp::Date generatedTimestamp() const;
+        Date generatedTimestamp() const;
 
         /**
          * Suggested expiration timestamp.
@@ -115,7 +114,7 @@ namespace zypp
          * an expiration date.
          *
          */
-        zypp::Date suggestedExpirationTimestamp() const;
+        Date suggestedExpirationTimestamp() const;
 
         /**
          * repository keywords (tags)
@@ -276,7 +275,7 @@ namespace zypp
     inline bool operator<( const Repository & lhs, const Repository & rhs )
     { return lhs.get() < rhs.get(); }
 
-
+    ///////////////////////////////////////////////////////////////////
     /**
      * Query class for Repository related products
      *
@@ -286,9 +285,7 @@ namespace zypp
      * directly from the iterator.
      *
      * \code
-     * for ( Repository::ProductInfoIterator it = repo->compatibleWithProductBegin();
-     *       it != repo->compatibleWithProductEnd();
-     *       ++it )
+     * for_( it, repo.compatibleWithProductBegin(), repo.compatibleWithProductEnd() )
      * {
      *   cout << it.cpeid() << endl;
      * }
@@ -300,12 +297,12 @@ namespace zypp
         , sat::LookupAttr::iterator        // Base
         , int                              // Value
         , boost::forward_traversal_tag     // CategoryOrTraversal
-        , int
+        , int                              // Reference
     >
     {
       public:
-        ProductInfoIterator() {}
-        explicit ProductInfoIterator( const sat::SolvAttr & arrayid );
+        ProductInfoIterator()
+        {}
 
         /**
          * Product label
@@ -318,24 +315,18 @@ namespace zypp
          *
          * See http://cpe.mitre.org
          */
-        std::string cpeid() const;
+        std::string cpeId() const;
+
+      private:
+        friend class Repository;
+        /** Hide ctor as just a limited set of attributes is valid. */
+        explicit ProductInfoIterator( sat::SolvAttr attr_r, Repository repo_r );
 
       private:
         friend class boost::iterator_core_access;
         int dereference() const { return 0; }
     };
-
-    inline Repository::ProductInfoIterator Repository::compatibleWithProductBegin() const
-    { return ProductInfoIterator( sat::SolvAttr::repositoryDistros ); }
-
-    inline Repository::ProductInfoIterator Repository::compatibleWithProductEnd() const
-    { return ProductInfoIterator(); }
-
-    inline Repository::ProductInfoIterator Repository::updatesProductBegin() const
-    { return ProductInfoIterator( sat::SolvAttr::repositoryUpdates ); }
-
-    inline Repository::ProductInfoIterator Repository::updatesProductEnd() const
-    { return ProductInfoIterator(); }
+    ///////////////////////////////////////////////////////////////////
 
     ///////////////////////////////////////////////////////////////////
     //
