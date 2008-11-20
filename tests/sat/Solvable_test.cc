@@ -2,7 +2,6 @@
 #include <iostream>
 #include <boost/test/auto_unit_test.hpp>
 
-#include <satsolver/solvable.h>
 #include "zypp/base/Logger.h"
 #include "zypp/base/Easy.h"
 #include "zypp/Pattern.h"
@@ -30,19 +29,19 @@ BOOST_AUTO_TEST_CASE(attributes)
 {
     MIL << sat::Pool::instance();
     Repository r = sat::Pool::instance().reposFind("opensuse");
-    
+
     int c = 0;
-    
+
     for ( Repository::SolvableIterator it = r.solvablesBegin();
           it != r.solvablesEnd();
           ++it )
     {
-        sat::Solvable s = *it;    
+        sat::Solvable s = *it;
         //MIL << s.ident() << endl;
         if ( s.ident() == "pattern:apparmor" )
-        {             
+        {
             c++;
-            
+
             //  solvable 21795 (21796):
             // name: pattern:apparmor 11.0-67 i586
             // vendor: SUSE LINUX Products GmbH, Nuernberg, Germany
@@ -74,17 +73,17 @@ BOOST_AUTO_TEST_CASE(attributes)
             BOOST_CHECK_EQUAL(p->isDefault(), false);
         }
         if ( s.ident() == "pattern:default" )
-        {             
+        {
             c++;
             Pattern::Ptr p = asKind<Pattern>(makeResObject(s));
             BOOST_CHECK(p);
             BOOST_CHECK_EQUAL(p->userVisible(), false);
         }
     }
-    
+
     // check that we actually found all testeable
     // resolvables
     BOOST_CHECK_EQUAL(c, 2);
-    
-            
+
+
 }

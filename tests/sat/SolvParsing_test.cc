@@ -2,7 +2,6 @@
 #include <iostream>
 #include <boost/test/auto_unit_test.hpp>
 
-#include <satsolver/solvable.h>
 #include "zypp/base/Logger.h"
 #include "zypp/TmpPath.h"
 #include "zypp/RepoManager.h"
@@ -30,7 +29,7 @@ using namespace boost::unit_test;
  * the final object
  *
  * so the test covers both satsolver-tools
- * right insertion and parsing 
+ * right insertion and parsing
  * and libzypp ResObject and friends data
  * extraction from solv files
  */
@@ -48,7 +47,7 @@ static void init_pool_yum()
   filesystem::TmpDir tmp;
   RepoManagerOptions opts = RepoManagerOptions::makeTestSetup(tmp.path());
   RepoManager mgr(opts);
- 
+
   KeyRingTestReceiver keyring_callbacks;
   KeyRingTestSignalReceiver receiver;
 
@@ -67,23 +66,23 @@ static void init_pool_yum()
 BOOST_AUTO_TEST_CASE(attributes)
 {
     init_pool_yum();
-    MIL << sat::Pool::instance(); 
+    MIL << sat::Pool::instance();
     Repository r = sat::Pool::instance().reposFind("updates");
-    
+
     int c = 0;
-    
+
     for ( Repository::SolvableIterator it = r.solvablesBegin();
           it != r.solvablesEnd();
           ++it )
     {
-        sat::Solvable s = *it;    
+        sat::Solvable s = *it;
         //MIL << s.ident() << endl;
         if ( s.ident() == "openssl-devel" )
-        {   
+        {
             c++;
             Package::Ptr p = asKind<Package>(makeResObject(s));
             BOOST_CHECK(p);
-            
+
             //solvable 5 (6):
             //name: openssl-devel 0.9.8d-17.2 i586
             BOOST_CHECK_EQUAL(p->name(), "openssl-devel");
@@ -91,7 +90,7 @@ BOOST_AUTO_TEST_CASE(attributes)
             BOOST_CHECK_EQUAL(p->vendor(), "SUSE LINUX Products GmbH, Nuernberg, Germany");
             //solvable:checksum: 9f6a44015ad97680e9f93d0edefa1d533940479c
             BOOST_CHECK_EQUAL(p->checksum(), CheckSum::sha1("9f6a44015ad97680e9f93d0edefa1d533940479c"));
-            //solvable:summary: 
+            //solvable:summary:
             BOOST_CHECK_EQUAL(p->summary(), "Include Files and Libraries mandatory for Development.");
             //solvable:description: This package contains all necessary include files and libraries needed
             //to develop applications that require these.
@@ -120,13 +119,13 @@ BOOST_AUTO_TEST_CASE(attributes)
             //solvable:sourceevr: (void)
             //solvable:sourcename: openssl
             //solvable:headerend: 34861
-            
+
         }
     }
-    
+
     // check that we actually found all testeable
     // resolvables
     BOOST_CHECK_EQUAL(c, 1);
-    
-            
+
+
 }

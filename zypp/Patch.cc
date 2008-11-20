@@ -9,12 +9,9 @@
 /** \file zypp/Patch.cc
  *
 */
-extern "C"
-{
-#include <satsolver/repo.h>
-}
+#include <iostream>
 
-#include "zypp/base/Logger.h"
+#include "zypp/base/LogTools.h"
 #include "zypp/Patch.h"
 #include "zypp/sat/WhatProvides.h"
 
