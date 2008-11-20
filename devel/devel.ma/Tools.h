@@ -162,16 +162,19 @@ ui::Selectable::Ptr getSel( const std::string & name_r )
   return 0;
 }
 
+
+
 template<class _Res>
-PoolItem getPi( const std::string & name_r, const Edition & ed_r, const Arch & arch_r )
+PoolItem getPi( const std::string & alias_r, const std::string & name_r, const Edition & ed_r, const Arch & arch_r )
 {
   PoolItem ret;
   ResPool pool( getZYpp()->pool() );
-  for_(it, pool.byNameBegin(name_r), pool.byNameEnd(name_r) )
+  for_(it, pool.byIdentBegin<_Res>(name_r), pool.byIdentEnd<_Res>(name_r) )
   {
-    if ( !ret && isKind<_Res>( (*it).resolvable() )
-         && ( ed_r == Edition() || ed_r.match((*it)->edition()) == 0 )
-         && ( arch_r == Arch()  || arch_r == (*it)->arch()  ) )
+    if ( !ret
+         && ( ed_r.empty()    || ed_r.match((*it)->edition()) == 0 )
+         && ( arch_r.empty()  || arch_r == (*it)->arch()  )
+         && ( alias_r.empty() || alias_r == (*it)->repository().alias() ) )
     {
       ret = (*it);
       MIL << "    ->" << *it << endl;
@@ -184,14 +187,19 @@ PoolItem getPi( const std::string & name_r, const Edition & ed_r, const Arch & a
   return ret;
 }
 template<class _Res>
+PoolItem getPi( const std::string & name_r, const Edition & ed_r, const Arch & arch_r )
+{
+  return getPi<_Res>( "", name_r, ed_r, arch_r );
+}
+template<class _Res>
 PoolItem getPi( const std::string & name_r )
 {
-  return getPi<_Res>( name_r, Edition(), Arch() );
+  return getPi<_Res>( name_r, Edition(), Arch_empty );
 }
 template<class _Res>
 PoolItem getPi( const std::string & name_r, const Edition & ed_r )
 {
-  return getPi<_Res>( name_r, ed_r, Arch() );
+  return getPi<_Res>( name_r, ed_r, Arch_empty );
 }
 template<class _Res>
 PoolItem getPi( const std::string & name_r, const Arch & arch_r )

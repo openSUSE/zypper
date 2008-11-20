@@ -1,14 +1,31 @@
 #include "Tools.h"
+#include <zypp/ResObjects.h>
+
 #include "zypp/pool/GetResolvablesToInsDel.h"
 
-static TestSetup test( Arch_x86_64 );  // use x86_64 as system arch
+bool upgrade()
+{
+  bool rres = false;
+  {
+    //zypp::base::LogControl::TmpLineWriter shutUp;
+    UpgradeStatistics u;
+    rres = getZYpp()->resolver()->doUpgrade( u );
+  }
+  if ( ! rres )
+  {
+    ERR << "upgrade " << rres << endl;
+    return false;
+  }
+  MIL << "upgrade " << rres << endl;
+  return true;
+}
 
 bool solve()
 {
   bool rres = false;
   {
     //zypp::base::LogControl::TmpLineWriter shutUp;
-    rres = test.resolver().resolvePool();
+    rres = getZYpp()->resolver()->resolvePool();
   }
   if ( ! rres )
   {
@@ -19,23 +36,29 @@ bool solve()
   return true;
 }
 
+/******************************************************************
+**
+**      FUNCTION NAME : main
+**      FUNCTION TYPE : int
+*/
 int main( int argc, char * argv[] )
-try {
-  --argc;
-  ++argv;
-  zypp::base::LogControl::instance().logToStdErr();
+{
   INT << "===[START]==========================================" << endl;
 
-  test.loadTarget(); // initialize and load target
-  test.loadRepo( Url("iso:/?iso=/mounts/dist/install/openSUSE-11.1-Beta2-DONTUSE/kiwi.out.dvd-i586.iso") );
+  Pathname mroot( "/tmp/Bb" );
+  TestSetup test( mroot, Arch_ppc64 );
+  test.loadTarget();
+  test.loadTestcaseRepos( "/suse/ma/BUGS/439802/bug439802/YaST2/solverTestcase" );
 
-  ResPool    pool( test.pool() );
-  Resolver & resolver( test.resolver() );
+  //getPi<>( "", "", Edition(""), Arch("") );
+  getPi<Product>( "SUSE_SLES", Edition("11"), Arch("ppc64") ).status().setTransact( true, ResStatus::USER );
+  getPi<Package>( "sles-release", Edition("11-54.3"), Arch("ppc64") ).status().setTransact( true, ResStatus::USER );
 
-  resolver.addRequire( Capability("glibc") );
-  resolver.addRequire( Capability("zlib") );
-  resolver.addRequire( Capability("lsb-buildenv") );
-  solve();
+  ResPool pool( test.pool() );
+  vdumpPoolStats( USR << "Transacting:"<< endl,
+                  make_filter_begin<resfilter::ByTransact>(pool),
+                  make_filter_end<resfilter::ByTransact>(pool) ) << endl;
+  upgrade();
   vdumpPoolStats( USR << "Transacting:"<< endl,
                   make_filter_begin<resfilter::ByTransact>(pool),
                   make_filter_end<resfilter::ByTransact>(pool) ) << endl;
@@ -79,15 +102,7 @@ try {
                collect._toDelete.begin(), collect._toDelete.end() ) << endl;
   }
 
-  ///////////////////////////////////////////////////////////////////
   INT << "===[END]============================================" << endl << endl;
-  zypp::base::LogControl::instance().logNothing();
   return 0;
 }
-catch ( const Exception & exp )
-{
-  INT << exp << endl << exp.historyAsString();
-}
-catch (...)
-{}
 
