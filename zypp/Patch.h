@@ -171,7 +171,7 @@ namespace zypp
       , sat::LookupAttr::iterator        // Base
       , int                              // Value
       , boost::forward_traversal_tag     // CategoryOrTraversal
-      , int
+      , int                              // Reference
   >
   {
     public:
