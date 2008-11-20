@@ -136,6 +136,12 @@ namespace zypp
     //
     /** \ref LookupAttr::transformIterator based container to retrieve list attributes.
      *
+     * You may pass \ref LookupAttr::REPO_ATTR as \ref LookupAttr::Location argument,
+     * to lookup attributes associated with the \ref Repository as a whole
+     * (e.g. repository keywords).
+     *
+     * \see \ref LookupAttr for details.
+     *
      * \code
      *  typedef ArrayAttr<PackageKeyword,IdString> Keywords;
      *  Keywords k( sat::SolvAttr::keywords );
@@ -153,12 +159,12 @@ namespace zypp
         ArrayAttr()
         {}
 
-        ArrayAttr( SolvAttr attr_r )
-        : _q( attr_r )
+        ArrayAttr( SolvAttr attr_r, LookupAttr::Location loc_r = LookupAttr::SOLV_ATTR )
+        : _q( attr_r, loc_r )
         {}
 
-        ArrayAttr( SolvAttr attr_r, Repository repo_r )
-        : _q( attr_r, repo_r )
+        ArrayAttr( SolvAttr attr_r, Repository repo_r, LookupAttr::Location loc_r = LookupAttr::SOLV_ATTR )
+        : _q( attr_r, repo_r, loc_r )
         {}
 
         ArrayAttr( SolvAttr attr_r, Solvable solv_r )
@@ -190,7 +196,7 @@ namespace zypp
         }
 
       private:
-        sat::LookupAttr _q;
+        LookupAttr _q;
     };
     ///////////////////////////////////////////////////////////////////
 
