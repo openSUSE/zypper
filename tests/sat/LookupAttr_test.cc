@@ -170,6 +170,24 @@ BOOST_AUTO_TEST_CASE(LookupAttr_solvable_attribute_substructure)
   }
 }
 
+BOOST_AUTO_TEST_CASE(LookupAttr_repoattr)
+{
+  sat::LookupAttr q( sat::SolvAttr::repositoryAddedFileProvides, sat::LookupAttr::REPO_ATTR );
+  BOOST_CHECK( ! q.empty() );
+  BOOST_CHECK_EQUAL( q.size(), 264 );
+
+  sat::LookupRepoAttr p( sat::SolvAttr::repositoryAddedFileProvides );
+  BOOST_CHECK( ! p.empty() );
+  BOOST_REQUIRE_EQUAL( p.size(), q.size() );
+
+  sat::LookupRepoAttr::iterator pit( p.begin() );
+  for_( qit, q.begin(), q.end() )
+  {
+    BOOST_CHECK_EQUAL( qit, pit );
+    ++pit;
+  }
+}
+
 #if 0
 BOOST_AUTO_TEST_CASE(LookupAttr_)
 {
