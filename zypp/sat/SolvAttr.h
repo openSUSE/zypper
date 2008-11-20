@@ -148,11 +148,9 @@ namespace sat
       //@{
       static const SolvAttr repositoryTimestamp;
       static const SolvAttr repositoryExpire;
-      static const SolvAttr repositoryUpdates;
-      static const SolvAttr repositoryUpdateLabel;
-      static const SolvAttr repositoryUpdateCpeid;
       static const SolvAttr repositoryKeywords;
-      static const SolvAttr repositoryProducts;
+      static const SolvAttr repositoryUpdates;
+      static const SolvAttr repositoryDistros;
       static const SolvAttr repositoryProductLabel;
       static const SolvAttr repositoryProductCpeid;
       static const SolvAttr repositoryRevision;

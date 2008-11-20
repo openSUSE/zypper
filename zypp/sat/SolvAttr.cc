@@ -116,10 +116,10 @@ namespace sat
   // repository
   const SolvAttr SolvAttr::repositoryTimestamp   ( REPOSITORY_TIMESTAMP );
   const SolvAttr SolvAttr::repositoryExpire      ( REPOSITORY_EXPIRE );
+  /** array of repositoryProductLabel repositoryProductCpeid pairs */
   const SolvAttr SolvAttr::repositoryUpdates     ( REPOSITORY_UPDATES );
-  const SolvAttr SolvAttr::repositoryUpdateLabel ( REPOSITORY_UPDATE_LABEL );
-  const SolvAttr SolvAttr::repositoryUpdateCpeid ( REPOSITORY_UPDATE_CPEID );
-  const SolvAttr SolvAttr::repositoryProducts    ( REPOSITORY_PRODUCTS );
+  /** array of repositoryProductLabel repositoryProductCpeid pairs */
+  const SolvAttr SolvAttr::repositoryDistros     ( REPOSITORY_DISTROS );
   const SolvAttr SolvAttr::repositoryProductLabel( REPOSITORY_PRODUCT_LABEL );
   const SolvAttr SolvAttr::repositoryProductCpeid( REPOSITORY_PRODUCT_CPEID );
   const SolvAttr SolvAttr::repositoryKeywords    ( REPOSITORY_KEYWORDS );

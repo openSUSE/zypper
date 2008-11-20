@@ -129,9 +129,6 @@ namespace zypp
     Repository::Keywords Repository::keywords() const
     { return Keywords(sat::SolvAttr::repositoryKeywords); }
 
-    Repository::Products Repository::products() const
-    { return Products(sat::SolvAttr::repositoryProducts); }
-
     bool Repository::maybeOutdated() const
     {
         // system repo is not mirrored
@@ -285,6 +282,17 @@ namespace zypp
 	NO_REPOSITORY_THROW( Exception( "Can't add solvables to norepo.") );
 	return myPool()._addSolvables( _repo, count_r );
     }
+
+#if 0
+    Repository::ProductInfoIterator::ProductInfoIterator( const sat::Solvable & val_r,
+                                                          const sat::SolvAttr & arrayid )
+    { base_reference() = sat::LookupAttr( arrayid, val_r ).begin(); }
+
+    std::string Repository::ProductInfoIterator::label() const
+    { return base_reference().subFind( sat::SolvAttr::repositoryProductLabel ).asString(); }
+    std::string Repository::ProductInfoIterator::cpeId() const
+    { return base_reference().subFind( sat::SolvAttr::repositoryProductCpeid ).asString(); }
+#endif
 
     /******************************************************************
      **

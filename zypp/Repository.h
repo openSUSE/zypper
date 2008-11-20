@@ -17,6 +17,7 @@
 #include "zypp/Pathname.h"
 #include "zypp/sat/detail/PoolMember.h"
 #include "zypp/sat/Solvable.h"
+#include "zypp/sat/SolvAttr.h"
 #include "zypp/RepoInfo.h"
 #include "zypp/Date.h"
 
@@ -128,15 +129,6 @@ namespace zypp
         Keywords keywords() const;
 
         /**
-         * Products this repository claims it is
-         * built for.
-         *
-         * Products are specified using the CPE form
-         * See http://cpe.mitre.org/ for more information on CPE
-         */
-        Products products() const;
-
-        /**
          * The suggested expiration date of this repository
          * already passed
          *
@@ -172,6 +164,39 @@ namespace zypp
         /** Iterator behind the last \ref Solvable. */
         SolvableIterator solvablesEnd() const;
 
+    public:
+#if 0
+      /** Query class for Repository */
+      class ProductInfoIterator;
+
+      /**
+       * Get an iterator to the beginning of the repository
+       * compatible distros.
+       * \see Repository::ProductInfoIterator
+       */
+      ProductInfoIterator compatibleWithProductBegin() const;
+
+      /**
+       * Get an iterator to the end of the repository
+       * compatible distros.
+       * \see Repository::ProductInfoIterator
+       */
+      ProductInfoIterator compatibleWithProductEnd() const;
+
+      /**
+       * Get an iterator to the beginning of the repository
+       * compatible distros.
+       * \see Repository::ProductInfoIterator
+       */
+      ProductInfoIterator updatesProductBegin() const;
+
+      /**
+       * Get an iterator to the end of the repository
+       * compatible distros.
+       * \see Repository::ProductInfoIterator
+       */
+      ProductInfoIterator updatesProductEnd() const;
+#endif
     public:
         /** Return any associated \ref RepoInfo. */
         RepoInfo info() const;
@@ -354,4 +379,75 @@ namespace zypp
 
 #include "zypp/sat/LookupAttr.h"
 
+#if 0
+
+namespace zypp
+{
+  /**
+   * Query class for Repository related products
+   *
+   * The iterator does not provide a dereference
+   * operator so you can do * on it, but you can
+   * access the attributes of each related product
+   * directly from the iterator.
+   *
+   * \code
+   * for ( Repository::ProductInfoIterator it = repo->compatibleWithProductBegin();
+   *       it != repo->compatibleWithProductEnd();
+   *       ++it )
+   * {
+   *   cout << it.cpeid() << endl;
+   * }
+   * \endcode
+   *
+   */
+  class Repository::ProductInfoIterator : public boost::iterator_adaptor<
+      Repository::ProductInfoIterator    // Derived
+      , sat::LookupAttr::iterator        // Base
+      , int                              // Value
+      , boost::forward_traversal_tag     // CategoryOrTraversal
+      , int
+  >
+  {
+    public:
+      ProductInfoIterator() {}
+      explicit ProductInfoIterator( const sat::Solvable & val_r,
+                                    const sat::SolvAttr & arrayid );
+
+      /**
+       * Product label
+       */
+      std::string label() const;
+
+      /**
+       * The Common Platform Enumeration name
+       * for this product.
+       *
+       * See http://cpe.mitre.org
+       */
+      std::string cpeid() const;
+
+    private:
+      friend class boost::iterator_core_access;
+      int dereference() const { return 0; }
+  };
+
+  inline Repository::ProductInfoIterator Repository::compatibleWithProductBegin() const
+  { return ProductInfoIterator(satSolvable(), sat::SolvAttr::repositoryDistros); }
+
+  inline Repository::ProductInfoIterator Repository::compatibleWithProductEnd() const
+  { return ProductInfoIterator(); }
+
+  inline Repository::ProductInfoIterator Repository::updatesProductBegin() const
+  { return ProductInfoIterator(satSolvable(), , sat::SolvAttr::repositoryUpdates); }
+
+  inline Repository::ProductInfoIterator Repository::updatesProductEnd() const
+  { return ProductInfoIterator(); }
+
+
+}
+#endif
+
 #endif // ZYPP_SAT_REPOSITORY_H
+
+
