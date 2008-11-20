@@ -97,9 +97,9 @@ namespace zypp
       */
       typedef unsigned SolvableIdType;
       typedef SolvableIdType size_type;
-     /** Id to denote \ref Solvable::noSolvable. */
+      /** Id to denote \ref Solvable::noSolvable. */
       static const SolvableIdType noSolvableId( 0 );
-     /** Id to denote the usually hidden \ref Solvable::systemSolvable. */
+      /** Id to denote the usually hidden \ref Solvable::systemSolvable. */
       static const SolvableIdType systemSolvableId( 1 );
 
       /** Id type to connect \ref Repo and sat-repo. */

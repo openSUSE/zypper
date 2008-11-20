@@ -6,11 +6,11 @@
 |                         /_____||_| |_| |_|                           |
 |                                                                      |
 \---------------------------------------------------------------------*/
-/** \file	zypp/SolvAttr.h
+/** \file	zypp/sat/SolvAttr.h
  *
 */
-#ifndef ZYPP_SolvAttr_H
-#define ZYPP_SolvAttr_H
+#ifndef ZYPP_SAT_SOLVATTR_H
+#define ZYPP_SAT_SOLVATTR_H
 
 #include <iosfwd>
 #include <string>
@@ -176,4 +176,4 @@ namespace sat
 } // namespace sat
 } // namespace zypp
 ///////////////////////////////////////////////////////////////////
-#endif // ZYPP_SolvAttr_H
+#endif // ZYPP_sat_SolvAttr_H

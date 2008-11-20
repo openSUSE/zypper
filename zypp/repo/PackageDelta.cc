@@ -18,6 +18,7 @@ extern "C"
 #include "zypp/base/LogTools.h"
 
 #include "zypp/repo/PackageDelta.h"
+#include "zypp/sat/Pool.h"
 
 
 using std::endl;

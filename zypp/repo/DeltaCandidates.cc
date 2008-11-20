@@ -15,6 +15,7 @@ extern "C"
 #include "zypp/base/Logger.h"
 #include "zypp/Repository.h"
 #include "zypp/repo/DeltaCandidates.h"
+#include "zypp/sat/Pool.h"
 
 
 using std::endl;
