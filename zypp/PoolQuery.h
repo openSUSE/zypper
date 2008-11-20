@@ -12,21 +12,17 @@
 #ifndef ZYPP_POOLQUERY_H
 #define ZYPP_POOLQUERY_H
 
-#include "base/Regex.h"
+#include <iosfwd>
+#include <set>
+#include <map>
 
-#include "zypp/ResKind.h"
-#include "zypp/sat/SolvAttr.h"
-#include "zypp/sat/SolvIterMixin.h"
-#include "zypp/sat/LookupAttr.h"
-
+#include "zypp/base/Regex.h"
 #include "zypp/base/PtrTypes.h"
 #include "zypp/base/Function.h"
-#include "zypp/Edition.h"
 
-extern "C"
-{
-struct _Dataiterator;
-}
+#include "zypp/sat/SolvIterMixin.h"
+#include "zypp/sat/LookupAttr.h"
+#include "zypp/sat/Pool.h"
 
 ///////////////////////////////////////////////////////////////////
 namespace zypp
@@ -75,7 +71,7 @@ namespace zypp
    * Results of simple queries like those using one string and/or one attribute
    * and/or one repository are filtered by sat-solver's Dataiterator directly,
    * and thus it is fast.
-   * 
+   *
    * Queries with multiple strings are implemented using regexes. Queries based
    * on kinds, multiple repos, and multiple attributes are filtered inside
    * the PoolQuery, so these tend to be slower.
@@ -111,7 +107,7 @@ namespace zypp
      *         sat::Solvable objects pointing at the beginning of the query result.
      * \throws \ref Exception if the query was about to use a regex which
      *         failed to compile.
-     * 
+     *
      * \note Note that PoolQuery is derived from \ref sat::SolvIterMixin which
      *       makes PoolItem and Selectable iterators automatically available.
      * \see sat::SolvIterMixin
@@ -211,7 +207,7 @@ namespace zypp
     /**
      * Set version condition. This will filter out solvables not matching
      * <tt>solvableEdition \a op \a edition</tt>.
-     * 
+     *
      * \param edition Edition to look for.
      * \param op      Found-wanted relation operator.
      */
@@ -265,7 +261,7 @@ namespace zypp
     /**
      * Require that all of the values set by addString or addAttribute
      * match the values of respective attributes.
-     * 
+     *
      * \todo doesn't work yet, don't use this function
      */
     void setRequireAll(const bool require_all = true);
@@ -402,7 +398,7 @@ namespace zypp
   //  CLASS NAME : PoolQuery::PoolQueryIterator
   //
   /**
-   * 
+   *
    */
   class PoolQueryIterator : public boost::iterator_adaptor<
     PoolQueryIterator                  // Derived
