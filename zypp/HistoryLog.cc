@@ -38,7 +38,7 @@ namespace
   {
     static char buf[256];
     string result;
-    char * tmp = ::cuserid(buf); 
+    char * tmp = ::cuserid(buf);
     if (tmp)
     {
       result = string(tmp);
@@ -225,7 +225,7 @@ namespace zypp
   }
 
   /////////////////////////////////////////////////////////////////////////
-  
+
   void HistoryLog::install( const PoolItem & pi )
   {
     const Package::constPtr p = asKind<Package>(pi.resolvable());
@@ -250,7 +250,7 @@ namespace zypp
       << _sep << p->repoInfo().alias()                 // 7 repo alias
       << _sep << p->checksum().checksum();             // 8 checksum
 
-    _log << endl; 
+    _log << endl;
 
     //_log << pi << endl;
   }
@@ -279,7 +279,7 @@ namespace zypp
     // we don't have checksum in rpm db
     //  << _sep << p->checksum().checksum();           // x checksum
 
-    _log << endl; 
+    _log << endl;
 
     //_log << pi << endl;
   }
@@ -290,7 +290,7 @@ namespace zypp
   {
     _log
       << timestamp()                                   // 1 timestamp
-      << _sep << HistoryActionID::REPO_ADD.asString(true) // 2 action 
+      << _sep << HistoryActionID::REPO_ADD.asString(true) // 2 action
       << _sep << str::escape(repo.alias(), _sep)       // 3 alias
       // what about the rest of the URLs??
       << _sep << *repo.baseUrlsBegin()                 // 4 primary URL
@@ -302,7 +302,7 @@ namespace zypp
   {
     _log
       << timestamp()                                   // 1 timestamp
-      << _sep << HistoryActionID::REPO_REMOVE.asString(true) // 2 action 
+      << _sep << HistoryActionID::REPO_REMOVE.asString(true) // 2 action
       << _sep << str::escape(repo.alias(), _sep)       // 3 alias
       << endl;
   }
@@ -319,7 +319,7 @@ namespace zypp
         << _sep << str::escape(oldrepo.alias(), _sep)     // 3 old alias
         << _sep << str::escape(newrepo.alias(), _sep);    // 4 new alias
     }
-    
+
     if (*oldrepo.baseUrlsBegin() != *newrepo.baseUrlsBegin())
     {
       _log

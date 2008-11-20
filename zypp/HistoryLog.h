@@ -20,14 +20,14 @@ namespace zypp
 {
   class PoolItem;
   class RepoInfo;
-  
+
   ///////////////////////////////////////////////////////////////////
   //
   //  CLASS NAME : HistoryLog
   //
   /**
    * Enumeration of known history actions.
-   * 
+   *
    * \ingroup g_EnumerationClass
    */
   struct HistoryActionID
@@ -61,10 +61,11 @@ namespace zypp
 
     ID toEnum() const { return _id; }
 
-    HistoryActionID::ID parse(const std::string & strval_r);
+    static HistoryActionID::ID parse(const std::string & strval_r);
 
     const std::string & asString(bool pad = false) const;
 
+    private:
     ID _id;
   };
 
@@ -95,14 +96,19 @@ namespace zypp
    *    HistoryLog().comment(someMessage);
    *  }
    * </code>
-   * 
+   *
    * \note Take care to set proper target root dir if needed. Either pass
    *       it via the constructor, or set it via setRoot(Pathname) method.
    *       The default location of the file is determined by
    *       \ref ZConfig::historyLogPath() which defaults to
    *       /var/log/zypp/history.
-   * 
+   *
    * \see http://en.opensuse.org/Libzypp/Package_History
+   *
+   * \todo Static private stuff does not need to be mentioned here in the
+   * header (use an annon. namespace in the .cc). Appart from that the
+   * implementation as signleton is questionable. Use shared_ptr instead of
+   * handcrafted ref/unref. Manage multiple logs at different locations.
    */
   class HistoryLog
   {
@@ -131,10 +137,10 @@ namespace zypp
 
     /**
      * Set new root directory to the default history log file path.
-     * 
+     *
      * This path will be prepended to the default log file path. This should
      * be done where there is a potential that the target root has changed.
-     * 
+     *
      * \param root new root directory.
      */
     static void setRoot( const Pathname & root );
@@ -146,17 +152,17 @@ namespace zypp
 
     /**
      * Log a comment (even multiline).
-     * 
+     *
      * \param comment the comment
      * \param timestamp whether to include a timestamp at the start of the comment
      */
     void comment( const std::string & comment, bool timestamp = false );
-    
+
     /**
      * Log installation (or update) of a package.
      */
     void install( const PoolItem & pi );
-    
+
     /**
      * Log removal of a package
      */
@@ -164,24 +170,24 @@ namespace zypp
 
     /**
      * Log a newly added repository.
-     * 
+     *
      * \param repo info about the added repository
      */
     void addRepository( const RepoInfo & repo );
-    
+
     /**
      * Log recently removed repository.
-     * 
+     *
      * \param repo info about the removed repository
      */
     void removeRepository( const RepoInfo & repo );
-    
+
     /**
      * Log certain modifications to a repository.
-     * 
+     *
      * \param oldrepo info about the old repository
      * \param newrepo info about the new repository
-     */ 
+     */
     void modifyRepository( const RepoInfo & oldrepo, const RepoInfo & newrepo );
   };
   ///////////////////////////////////////////////////////////////////
