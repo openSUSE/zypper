@@ -1,4 +1,10 @@
 -------------------------------------------------------------------
+Thu Nov 20 23:59:16 CET 2008 - ma@suse.de
+
+- Fix retrieval of deltarpm info.
+- revision 11764
+
+-------------------------------------------------------------------
 Thu Nov 20 22:15:28 CET 2008 - ma@suse.de
 
 - Fix retrieval of Repository attributes like timestamps, keywords

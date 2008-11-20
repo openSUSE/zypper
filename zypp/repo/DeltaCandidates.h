@@ -64,12 +64,16 @@ namespace zypp
 
     ///////////////////////////////////////////////////////////////////
 
-    /** \relates DeltaCandidates Convenient construction. */
+    /** \relates DeltaCandidates Convenient construction.
+     * \todo templated ctor
+    */
     template<class RepoIter>
     inline DeltaCandidates makeDeltaCandidates( RepoIter begin_r, RepoIter end_r )
     { return DeltaCandidates( std::list<Repository>( begin_r, end_r ) ); }
 
-    /** \relates DeltaCandidates Convenient construction. */
+    /** \relates DeltaCandidates Convenient construction.
+     * \todo templated ctor
+     */
     template<class RepoContainer>
     inline DeltaCandidates makeDeltaCandidates( const RepoContainer & cont_r )
     { return makeDeltaCandidates( cont_r.begin(), cont_r.end() ); }

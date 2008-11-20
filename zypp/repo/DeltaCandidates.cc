@@ -8,7 +8,7 @@
 \---------------------------------------------------------------------*/
 extern "C"
 {
-#include <satsolver/repo.h>
+#include <satsolver/knownid.h>
 }
 
 #include <iostream>
@@ -31,22 +31,19 @@ namespace zypp
     /** DeltaCandidates implementation. */
     struct DeltaCandidates::Impl
     {
-
-    public:
-
-      Impl( const std::list<Repository> & repos, const std::string & pkgname = "" )
+      public:
+        Impl( const std::list<Repository> & repos, const std::string & pkgname = "" )
         : repos(repos), pkgname(pkgname)
-      {
+        {}
 
-      }
+        std::list<Repository> repos;
+        std::string pkgname;
 
-      friend Impl * rwcowClone<Impl>( const Impl * rhs );
-      /** clone for RWCOW_pointer */
-      Impl * clone() const
-      { return new Impl( *this ); }
-
-      std::list<Repository> repos;
-      std::string pkgname;
+      private:
+        friend Impl * rwcowClone<Impl>( const Impl * rhs );
+        /** clone for RWCOW_pointer */
+        Impl * clone() const
+        { return new Impl( *this ); }
     };
     ///////////////////////////////////////////////////////////////////
 
@@ -74,48 +71,28 @@ namespace zypp
     {
       std::list<DeltaRpm> candidates;
 
-      // query all repos
-      for ( std::list<Repository>::const_iterator it = _pimpl->repos.begin();
-            it != _pimpl->repos.end(); ++it )
+      DBG << "package: " << package << endl;
+      for_( rit, _pimpl->repos.begin(), _pimpl->repos.end() )
       {
-        DBG << "package: " << package << endl;
+        sat::LookupRepoAttr q( sat::SolvAttr::repositoryDeltaInfo, *rit );
+        for_( it, q.begin(), q.end() )
         {
-          ::Dataiterator di;
-          ::dataiterator_init(&di
-            , sat::Pool::instance().get()
-            , it->get()                                              // in this repo
-            , SOLVID_META                                         // in metadata
-            , REPOSITORY_DELTAINFO, 0, 0 );
-
-          while (::dataiterator_step(&di))
+          if ( _pimpl->pkgname.empty()
+               || it.subFind( sat::SolvAttr(DELTA_PACKAGE_NAME) ).asString() == _pimpl->pkgname )
           {
-              ::dataiterator_setpos( &di );
-              ::Dataiterator di2;
-              ::dataiterator_init(&di2
-                  , sat::Pool::instance().get()
-                  , it->get()                                       // in this repo
-                  , SOLVID_POS                                   // in metadata
-                  , DELTA_PACKAGE_NAME
-                  , _pimpl->pkgname.empty() ? 0 : _pimpl->pkgname.c_str()  // of this value
-                  , SEARCH_STRING);
-              while (::dataiterator_step(&di2))
-              {
-                ::dataiterator_setpos( &di );
-                DeltaRpm delta(*it, SOLVID_POS);
-                DBG << "checking delta: " << delta << endl;
-                if ( ! package
-                       || (    package->name()    == delta.name()
-                       && package->edition() == delta.edition()
-                       && package->arch()    == delta.arch() ) )
-                {
-                  DBG << "got delta candidate" << endl;
-                  candidates.push_back( delta );
-                }
-              }
+            DeltaRpm delta( it );
+            DBG << "checking delta: " << delta << endl;
+            if ( ! package
+                   || (    package->name()    == delta.name()
+                        && package->edition() == delta.edition()
+                        && package->arch()    == delta.arch() ) )
+            {
+              DBG << "got delta candidate" << endl;
+              candidates.push_back( delta );
+            }
           }
         }
       }
-
       return candidates;
     }
 

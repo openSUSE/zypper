@@ -12,7 +12,7 @@
 #include <iostream>
 extern "C"
 {
-#include <satsolver/repo.h>
+#include <satsolver/knownid.h>
 }
 
 #include "zypp/base/LogTools.h"
@@ -24,6 +24,7 @@ extern "C"
 using std::endl;
 using std::string;
 
+
 ///////////////////////////////////////////////////////////////////
 namespace zypp
 { /////////////////////////////////////////////////////////////////
@@ -31,118 +32,95 @@ namespace zypp
   namespace packagedelta
   { /////////////////////////////////////////////////////////////////
 
-
-    DeltaRpm::DeltaRpm(const Repository & repo, sat::detail::IdType extraid)
-      : _repo(repo)
+    DeltaRpm::DeltaRpm( sat::LookupAttr::iterator deltaInfo_r )
     {
-      MIL << "creating deltarpm from repo " << repo.alias() << ", id " << extraid << endl;
-      ::Dataiterator di;
-      ::dataiterator_init(&di, sat::Pool::instance().get(), repo.get(), extraid, 0, 0, 0);
-
-      string locdir;
-      string locname;
-      string locevr;
-      string locsuffix;
-      OnMediaLocation loc;
-      BaseVersion base;
-      string seqname;
-      string seqevr;
-      string seqnum;
-
-      if (::dataiterator_step(&di))
+      if ( deltaInfo_r.inSolvAttr() != sat::SolvAttr::repositoryDeltaInfo )
       {
-        do
-        {
-          switch (di.key->name)
-          {
-          case DELTA_PACKAGE_NAME:
-          {
-            setName(IdString(di.kv.id).asString());
-            break;
-          }
-          case DELTA_PACKAGE_EVR:
-          {
-            setEdition(Edition(IdString(di.kv.id).asString()));
-            break;
-          }
-          case DELTA_PACKAGE_ARCH:
-          {
-            setArch(Arch(IdString(di.kv.id).asString()));
-            break;
-          }
-          case DELTA_LOCATION_DIR:
-          {
-            locdir = IdString(di.kv.id).asString();
-            break;
-          }
-          case DELTA_LOCATION_NAME:
-          {
-            locname = IdString(di.kv.id).asString();
-            break;
-          }
-          case DELTA_LOCATION_EVR:
-          {
-            locevr = IdString(di.kv.id).asString();
-            break;
-          }
-          case DELTA_LOCATION_SUFFIX:
-          {
-            locsuffix = IdString(di.kv.id).asString();
-            break;
-          }
-          case DELTA_DOWNLOADSIZE:
-          {
-            loc.setDownloadSize(ByteCount(di.kv.num, ByteCount::K));
-            break;
-          }
-          case DELTA_CHECKSUM:
-          {
-            const char * s = ::repodata_chk2str( di.data, di.key->type, (const unsigned char*)di.kv.str );
-            if ( s )
-            {
-              CheckSum val;
-              switch ( di.key->type )
-              {
-                case REPOKEY_TYPE_MD5:    val = CheckSum::md5( s ); break;
-                case REPOKEY_TYPE_SHA1:   val = CheckSum::sha1( s ); break;
-                case REPOKEY_TYPE_SHA256: val = CheckSum::sha256( s ); break;
-              }
-              loc.setChecksum( val );
-            }
-          }
-          case DELTA_BASE_EVR:
-          {
-            base.setEdition(Edition(IdString(di.kv.id).asString()));
-            break;
-          }
-          case DELTA_SEQ_NAME:
-          {
-            seqname = IdString(di.kv.id).asString();
-            break;
-          }
-          case DELTA_SEQ_EVR:
-          {
-            seqevr = IdString(di.kv.id).asString();
-            break;
-          }
-          case DELTA_SEQ_NUM:
-          {
-            seqnum = di.kv.str;
-            break;
-          }
-          default:
-            WAR << "ingoring unknown attribute: " << IdString(di.key->name) << endl;
-          }
-        } while (::dataiterator_step(&di));
+        INT << "Illegal non-repositoryDeltaInfo iterator: " << deltaInfo_r << endl;
+        return;
       }
-      else
-        ERR << "the extra does not exist in the repo" << endl;
+      _repo = deltaInfo_r.inRepo();
 
-      //! \todo FIXME here + in sat tools
-      loc.setLocation(locdir + "/" + locname + "-" + locevr + "." + locsuffix);
-      setLocation(loc);
-      base.setSequenceinfo(seqname + "-" + seqevr + "-" + seqnum);
-      setBaseversion(base);
+      IdString locdir;
+      IdString locname;
+      IdString locevr;
+      IdString locsuffix;
+
+      IdString    seqname;
+      IdString    seqevr;
+      std::string seqnum;
+
+      for_( it, deltaInfo_r.subBegin(), deltaInfo_r.subEnd() )
+      {
+        switch ( it.inSolvAttr().id() )
+        {
+          case DELTA_PACKAGE_NAME:
+            _name = it.asString();
+            break;
+
+          case DELTA_PACKAGE_EVR:
+            _edition = Edition( it.idStr() );
+            break;
+
+          case DELTA_PACKAGE_ARCH:
+            _arch = Arch( it.idStr() );
+            break;
+
+          case DELTA_LOCATION_DIR:
+            locdir = it.idStr();
+            break;
+
+          case DELTA_LOCATION_NAME:
+            locname = it.idStr();
+            break;
+
+          case DELTA_LOCATION_EVR:
+            locevr = it.idStr();
+            break;
+
+          case DELTA_LOCATION_SUFFIX:
+            locsuffix = it.idStr();
+            break;
+
+          case DELTA_DOWNLOADSIZE:
+            _location.setDownloadSize( ByteCount( it.asUnsigned(), ByteCount::K ) );
+            break;
+
+          case DELTA_CHECKSUM:
+            _location.setChecksum( it.asCheckSum() );
+            break;
+
+          case DELTA_BASE_EVR:
+            _baseversion.setEdition( Edition( it.idStr() ) );
+            break;
+
+          case DELTA_SEQ_NAME:
+            seqname = it.idStr();
+            break;
+
+          case DELTA_SEQ_EVR:
+            seqevr = it.idStr();
+            break;
+
+          case DELTA_SEQ_NUM:
+            seqnum = it.asString();
+            break;
+
+          default:
+            WAR << "Igore unknown attribute: " << it << endl;
+        }
+      }
+
+      _location.setLocation( str::form( "%s/%s-%s.%s",
+                                        locdir.c_str(),
+                                        locname.c_str(),
+                                        locevr.c_str(),
+                                        locsuffix.c_str() ) );
+
+      _baseversion.setSequenceinfo( str::form( "%s-%s-%s",
+                                               seqname.c_str(),
+                                               seqevr.c_str(),
+                                               seqnum.c_str() ) );
     }
 
     std::ostream & operator<<( std::ostream & str, const DeltaRpm & obj )
@@ -150,10 +128,7 @@ namespace zypp
       return str
       << "DeltaRpm[" << obj.name() << "-" << obj.edition() << "." << obj.arch()
       << "](" << obj.location()
-      //<< '|' << obj.buildtime()
       << '|' << obj.baseversion().edition()
-      //<< ',' << obj.baseversion().buildtime()
-      //<< ',' << obj.baseversion().checksum()
       << ',' << obj.baseversion().sequenceinfo()
       << ')';
     }

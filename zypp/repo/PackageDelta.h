@@ -34,67 +34,55 @@ namespace zypp
     /** \todo cheap copy! (switch to RWCOW) */
     class DeltaRpm
     {
-    public:
-      class BaseVersion
-      {
       public:
-        BaseVersion()
-        {}
+        class BaseVersion
+        {
+          public:
+            BaseVersion()
+            {}
+
+          public:
+            const Edition &     edition()      const { return _edition; }
+            const std::string & sequenceinfo() const { return _sequenceinfo; }
+
+          public:
+            BaseVersion & setEdition( const Edition & val_r )          { _edition = val_r; return *this; }
+            BaseVersion & setSequenceinfo( const std::string & val_r ) { _sequenceinfo = val_r; return *this; }
+
+          private:
+            Edition     _edition;
+            std::string _sequenceinfo;
+        };
 
       public:
-        const Edition &     edition()      const { return _edition; }
-        //const Date &        buildtime()    const { return _buildtime; }
-        //const CheckSum &    checksum()     const { return _checksum; }
-        const std::string & sequenceinfo() const { return _sequenceinfo; }
+        DeltaRpm() {}
+        DeltaRpm( sat::LookupAttr::iterator deltaInfo_r );
 
       public:
-        BaseVersion & setEdition( const Edition & val_r )          { _edition = val_r; return *this; }
-        //BaseVersion & setBuildtime( const Date & val_r )           { _buildtime = val_r; return *this; }
-        //BaseVersion & setChecksum( const CheckSum & val_r )        { _checksum = val_r; return *this; }
-        BaseVersion & setSequenceinfo( const std::string & val_r ) { _sequenceinfo = val_r; return *this; }
+        /** \name Target package ident. */
+        //@{
+        const std::string &     name()         const { return _name; }
+        const Edition &         edition()      const { return _edition; }
+        const Arch &            arch()         const { return _arch; }
+        //@}
+        const OnMediaLocation & location()     const { return _location; }
+        const BaseVersion &     baseversion()  const { return _baseversion; }
+        const Repository &      repository()   const { return _repo; }
+
+      public:
+        DeltaRpm & setName( const std::string & val_r )         { _name = val_r; return *this; }
+        DeltaRpm & setEdition( const Edition & val_r )          { _edition = val_r; return *this; }
+        DeltaRpm & setArch( const Arch & val_r )                { _arch = val_r; return *this; }
+        DeltaRpm & setLocation( const OnMediaLocation & val_r ) { _location = val_r; return *this; }
+        DeltaRpm & setBaseversion( const BaseVersion & val_r )  { _baseversion = val_r; return *this; }
 
       private:
-        Edition     _edition;
-        //Date        _buildtime;
-        //CheckSum    _checksum;
-        std::string _sequenceinfo;
-      };
-
-      //typedef std::list<BaseVersion> BaseVersions;
-
-    public:
-      DeltaRpm()
-      {}
-      DeltaRpm(const Repository & repo, sat::detail::IdType id);
-
-    public:
-      /** \name Target package ident. */
-      //@{
-      const std::string &     name()         const { return _name; }
-      const Edition &         edition()      const { return _edition; }
-      const Arch &            arch()         const { return _arch; }
-      //@}
-      const OnMediaLocation & location()     const { return _location; }
-      const BaseVersion &     baseversion()  const { return _baseversion; }
-      //const Date &            buildtime()    const { return _buildtime;}
-      const Repository &      repository()   const { return _repo; }
-
-    public:
-      DeltaRpm & setName( const std::string & val_r )         { _name = val_r; return *this; }
-      DeltaRpm & setEdition( const Edition & val_r )          { _edition = val_r; return *this; }
-      DeltaRpm & setArch( const Arch & val_r )                { _arch = val_r; return *this; }
-      DeltaRpm & setLocation( const OnMediaLocation & val_r ) { _location = val_r; return *this; }
-      DeltaRpm & setBaseversion( const BaseVersion & val_r )  { _baseversion = val_r; return *this; }
-      //DeltaRpm & setBuildtime( const Date & val_r )           { _buildtime = val_r; return *this; }
-
-    private:
-      std::string     _name;
-      Edition         _edition;
-      Arch            _arch;
-      OnMediaLocation _location;
-      BaseVersion     _baseversion;
-      //Date            _buildtime;
-      Repository      _repo;
+        std::string     _name;
+        Edition         _edition;
+        Arch            _arch;
+        OnMediaLocation _location;
+        BaseVersion     _baseversion;
+        Repository      _repo;
     };
 
     /** \relates DeltaRpm Stream output. */
