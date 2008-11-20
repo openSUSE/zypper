@@ -510,6 +510,7 @@ SET( zypp_sat_HEADERS
   sat/WhatObsoletes.h
   sat/LocaleSupport.h
   sat/LookupAttr.h
+  sat/LookupAttrTools.h
   sat/SolvAttr.h
 )
 

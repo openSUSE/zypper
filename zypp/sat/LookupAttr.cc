@@ -19,6 +19,7 @@
 
 #include "zypp/sat/LookupAttr.h"
 #include "zypp/CheckSum.h"
+#include "zypp/sat/Pool.h"
 
 using std::endl;
 
@@ -29,38 +30,162 @@ namespace zypp
   namespace sat
   { /////////////////////////////////////////////////////////////////
 
-    LookupAttr::iterator LookupAttr::begin() const
+    ///////////////////////////////////////////////////////////////////
+    //
+    //	CLASS NAME : LookupAttr::Impl
+    //
+    ///////////////////////////////////////////////////////////////////
+
+    class LookupAttr::Impl
     {
-      if ( _attr == SolvAttr::noAttr )
-        return iterator();
+      public:
+        Impl()
+        {}
+        Impl( SolvAttr attr_r )
+        : _attr( attr_r )
+        {}
+        Impl( SolvAttr attr_r, Repository repo_r )
+        : _attr( attr_r ), _repo( repo_r )
+        {}
+        Impl( SolvAttr attr_r, Solvable solv_r )
+        : _attr( attr_r ), _solv( solv_r )
+        {}
+
+      public:
+        SolvAttr attr() const
+        { return _attr; }
+
+        void setAttr( SolvAttr attr_r )
+        { _attr = attr_r; }
+
+      public:
+        bool pool() const
+        { return ! (_repo || _solv); }
+
+        void setPool()
+        {
+          _repo = Repository::noRepository;
+          _solv = Solvable::noSolvable;
+        }
+
+        Repository repo() const
+        { return _repo; }
+
+        void setRepo( Repository repo_r )
+        {
+          _repo = repo_r;
+          _solv = Solvable::noSolvable;
+        }
+
+        Solvable solvable() const
+        { return _solv; }
+
+        void setSolvable( Solvable solv_r )
+        {
+          _repo = Repository::noRepository;
+          _solv = solv_r;
+        }
+
+        LookupAttr::iterator begin() const
+        {
+          if ( _attr == SolvAttr::noAttr )
+            return end();
 
 #warning Need to call dataiterator_free, use Autodispose instead of scoped_ptr
-      scoped_ptr< ::_Dataiterator> dip( new ::Dataiterator );
-      // needed while LookupAttr::iterator::dip_equal does ::memcmp:
-      ::memset( dip.get(), 0, sizeof(::_Dataiterator) );
+          scoped_ptr< ::_Dataiterator> dip( new ::Dataiterator );
+          // needed while LookupAttr::iterator::dip_equal does ::memcmp:
+          ::memset( dip.get(), 0, sizeof(::_Dataiterator) );
 
-      if ( _solv )
-      {
-        ::dataiterator_init( dip.get(), sat::Pool::instance().get(), _solv.repository().id(), _solv.id(), _attr.id(), 0, 0 );
-      }
-      else if ( _repo )
-      {
-        ::dataiterator_init( dip.get(), sat::Pool::instance().get(),              _repo.id(),          0, _attr.id(), 0, 0 );
-      }
-      else if ( ! sat::Pool::instance().reposEmpty() )
-      {
-        ::dataiterator_init( dip.get(), sat::Pool::instance().get(),                       0,          0, _attr.id(), 0, 0 );
-      }
-      else
-        return iterator();
+          if ( _solv )
+          {
+            ::dataiterator_init( dip.get(), sat::Pool::instance().get(), _solv.repository().id(), _solv.id(), _attr.id(), 0, 0 );
+          }
+          else if ( _repo )
+          {
+            ::dataiterator_init( dip.get(), sat::Pool::instance().get(),              _repo.id(),          0, _attr.id(), 0, 0 );
+          }
+          else if ( ! sat::Pool::instance().reposEmpty() )
+          {
+            ::dataiterator_init( dip.get(), sat::Pool::instance().get(),                       0,          0, _attr.id(), 0, 0 );
+          }
+          else
+            return end();
 
-      return iterator( dip ); // iterator takes over ownership!
-    }
+          return iterator( dip ); // iterator takes over ownership!
+        }
+
+        LookupAttr::iterator end() const
+        { return iterator(); }
+
+      private:
+        SolvAttr   _attr;
+        Repository _repo;
+        Solvable   _solv;
+
+      private:
+        friend Impl * rwcowClone<Impl>( const Impl * rhs );
+        /** clone for RWCOW_pointer */
+        Impl * clone() const
+        { return new Impl( *this ); }
+    };
+
+    ///////////////////////////////////////////////////////////////////
+    //
+    //	CLASS NAME : LookupAttr
+    //
+    ///////////////////////////////////////////////////////////////////
+
+    LookupAttr::LookupAttr()
+      : _pimpl( new Impl )
+    {}
+
+    LookupAttr::LookupAttr( SolvAttr attr_r )
+      : _pimpl( new Impl( attr_r ) )
+    {}
+
+    LookupAttr::LookupAttr( SolvAttr attr_r, Repository repo_r )
+      : _pimpl( new Impl( attr_r, repo_r ) )
+    {}
+
+    LookupAttr::LookupAttr( SolvAttr attr_r, Solvable solv_r )
+      : _pimpl( new Impl( attr_r, solv_r ) )
+    {}
+
+    ///////////////////////////////////////////////////////////////////
+
+    SolvAttr LookupAttr::attr() const
+    { return _pimpl->attr(); }
+
+    void LookupAttr::setAttr( SolvAttr attr_r )
+    { _pimpl->setAttr( attr_r ); }
+
+    ///////////////////////////////////////////////////////////////////
+
+    bool LookupAttr::pool() const
+    { return _pimpl->pool(); }
+
+    void LookupAttr::setPool()
+    { _pimpl->setPool(); }
+
+    Repository LookupAttr::repo() const
+    { return _pimpl->repo(); }
+
+    void LookupAttr::setRepo( Repository repo_r )
+    { _pimpl->setRepo( repo_r ); }
+
+    Solvable LookupAttr::solvable() const
+    { return _pimpl->solvable(); }
+
+    void LookupAttr::setSolvable( Solvable solv_r )
+    { _pimpl->setSolvable( solv_r ); }
+
+    ///////////////////////////////////////////////////////////////////
+
+    LookupAttr::iterator LookupAttr::begin() const
+    { return _pimpl->begin(); }
 
     LookupAttr::iterator LookupAttr::end() const
-    {
-      return iterator();
-    }
+    { return _pimpl->end(); }
 
     bool LookupAttr::empty() const
     { return begin() == end(); }
@@ -72,6 +197,8 @@ namespace zypp
         ++c;
       return c;
     }
+
+    ///////////////////////////////////////////////////////////////////
 
     std::ostream & operator<<( std::ostream & str, const LookupAttr & obj )
     {

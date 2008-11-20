@@ -16,20 +16,14 @@
 #include "zypp/base/SafeBool.h"
 #include "zypp/Pathname.h"
 #include "zypp/sat/detail/PoolMember.h"
+#include "zypp/sat/LookupAttr.h"     // LookupAttrTools.h included at EOF
 #include "zypp/sat/Solvable.h"
-#include "zypp/sat/SolvAttr.h"
 #include "zypp/RepoInfo.h"
 #include "zypp/Date.h"
 
 ///////////////////////////////////////////////////////////////////
 namespace zypp
 { /////////////////////////////////////////////////////////////////
-
-    namespace sat
-    {
-      template<class _ResultT, class _AttrT>
-      class ArrayAttr;
-    }
 
     namespace detail
     {
@@ -165,7 +159,7 @@ namespace zypp
         SolvableIterator solvablesEnd() const;
 
     public:
-#if 0
+
       /** Query class for Repository */
       class ProductInfoIterator;
 
@@ -196,7 +190,7 @@ namespace zypp
        * \see Repository::ProductInfoIterator
        */
       ProductInfoIterator updatesProductEnd() const;
-#endif
+
     public:
         /** Return any associated \ref RepoInfo. */
         RepoInfo info() const;
@@ -282,6 +276,67 @@ namespace zypp
     inline bool operator<( const Repository & lhs, const Repository & rhs )
     { return lhs.get() < rhs.get(); }
 
+
+    /**
+     * Query class for Repository related products
+     *
+     * The iterator does not provide a dereference
+     * operator so you can do * on it, but you can
+     * access the attributes of each related product
+     * directly from the iterator.
+     *
+     * \code
+     * for ( Repository::ProductInfoIterator it = repo->compatibleWithProductBegin();
+     *       it != repo->compatibleWithProductEnd();
+     *       ++it )
+     * {
+     *   cout << it.cpeid() << endl;
+     * }
+     * \endcode
+     *
+     */
+    class Repository::ProductInfoIterator : public boost::iterator_adaptor<
+        Repository::ProductInfoIterator    // Derived
+        , sat::LookupAttr::iterator        // Base
+        , int                              // Value
+        , boost::forward_traversal_tag     // CategoryOrTraversal
+        , int
+    >
+    {
+      public:
+        ProductInfoIterator() {}
+        explicit ProductInfoIterator( const sat::SolvAttr & arrayid );
+
+        /**
+         * Product label
+         */
+        std::string label() const;
+
+        /**
+         * The Common Platform Enumeration name
+         * for this product.
+         *
+         * See http://cpe.mitre.org
+         */
+        std::string cpeid() const;
+
+      private:
+        friend class boost::iterator_core_access;
+        int dereference() const { return 0; }
+    };
+
+    inline Repository::ProductInfoIterator Repository::compatibleWithProductBegin() const
+    { return ProductInfoIterator( sat::SolvAttr::repositoryDistros ); }
+
+    inline Repository::ProductInfoIterator Repository::compatibleWithProductEnd() const
+    { return ProductInfoIterator(); }
+
+    inline Repository::ProductInfoIterator Repository::updatesProductBegin() const
+    { return ProductInfoIterator( sat::SolvAttr::repositoryUpdates ); }
+
+    inline Repository::ProductInfoIterator Repository::updatesProductEnd() const
+    { return ProductInfoIterator(); }
+
     ///////////////////////////////////////////////////////////////////
     //
     //	CLASS NAME : Repository::EraseFromPool
@@ -318,6 +373,7 @@ namespace zypp
 	    { repository_r.eraseFromPool(); }
     };
     ///////////////////////////////////////////////////////////////////
+
     ///////////////////////////////////////////////////////////////////
     namespace detail
     { /////////////////////////////////////////////////////////////////
@@ -326,128 +382,57 @@ namespace zypp
       //	CLASS NAME : RepositoryIterator
       //
       /** */
-	class RepositoryIterator : public boost::iterator_adaptor<
+      class RepositoryIterator : public boost::iterator_adaptor<
 	    RepositoryIterator                            // Derived
 			   , ::_Repo **                   // Base
-			   , Repository                   // Value
+                           , Repository                   // Value
 			   , boost::forward_traversal_tag // CategoryOrTraversal
 			   , Repository                   // Reference
 			     >
-	{
+      {
         public:
-	    RepositoryIterator()
-		: RepositoryIterator::iterator_adaptor_( 0 )
-		{}
+          RepositoryIterator()
+          : RepositoryIterator::iterator_adaptor_( 0 )
+          {}
 
-	    explicit RepositoryIterator( ::_Repo ** p )
-		: RepositoryIterator::iterator_adaptor_( p )
-		{}
+          explicit RepositoryIterator( ::_Repo ** p )
+          : RepositoryIterator::iterator_adaptor_( p )
+          {}
 
         private:
-	    friend class boost::iterator_core_access;
+          friend class boost::iterator_core_access;
 
-	    Repository dereference() const
-		{ return Repository( *base() ); }
-	};
-	///////////////////////////////////////////////////////////////////
-	///////////////////////////////////////////////////////////////////
-	//
-	//	CLASS NAME : ByRepository
-	//
-	/** Functor filtering \ref Solvable by \ref Repository.*/
-	struct ByRepository
-	{
+          Repository dereference() const
+          { return Repository( *base() ); }
+      };
+      ///////////////////////////////////////////////////////////////////
+      ///////////////////////////////////////////////////////////////////
+      //
+      //	CLASS NAME : ByRepository
+      //
+      /** Functor filtering \ref Solvable by \ref Repository.*/
+      struct ByRepository
+      {
         public:
-	    ByRepository( const Repository & repository_r ) : _repository( repository_r ) {}
-	    ByRepository( sat::detail::RepoIdType id_r ) : _repository( id_r ) {}
-	    ByRepository() {}
+          ByRepository( const Repository & repository_r ) : _repository( repository_r ) {}
+          ByRepository( sat::detail::RepoIdType id_r ) : _repository( id_r ) {}
+          ByRepository() {}
 
-	    bool operator()( const sat::Solvable & slv_r ) const
-		{ return slv_r.repository() == _repository; }
+          bool operator()( const sat::Solvable & slv_r ) const
+          { return slv_r.repository() == _repository; }
 
         private:
-	    Repository _repository;
-	};
-	///////////////////////////////////////////////////////////////////
-	/////////////////////////////////////////////////////////////////
+          Repository _repository;
+      };
+      ///////////////////////////////////////////////////////////////////
+      /////////////////////////////////////////////////////////////////
     } // namespace detail
     ///////////////////////////////////////////////////////////////////
-
-    /////////////////////////////////////////////////////////////////
+  /////////////////////////////////////////////////////////////////
 } // namespace zypp
 ///////////////////////////////////////////////////////////////////
 
-#include "zypp/sat/LookupAttr.h"
-
-#if 0
-
-namespace zypp
-{
-  /**
-   * Query class for Repository related products
-   *
-   * The iterator does not provide a dereference
-   * operator so you can do * on it, but you can
-   * access the attributes of each related product
-   * directly from the iterator.
-   *
-   * \code
-   * for ( Repository::ProductInfoIterator it = repo->compatibleWithProductBegin();
-   *       it != repo->compatibleWithProductEnd();
-   *       ++it )
-   * {
-   *   cout << it.cpeid() << endl;
-   * }
-   * \endcode
-   *
-   */
-  class Repository::ProductInfoIterator : public boost::iterator_adaptor<
-      Repository::ProductInfoIterator    // Derived
-      , sat::LookupAttr::iterator        // Base
-      , int                              // Value
-      , boost::forward_traversal_tag     // CategoryOrTraversal
-      , int
-  >
-  {
-    public:
-      ProductInfoIterator() {}
-      explicit ProductInfoIterator( const sat::Solvable & val_r,
-                                    const sat::SolvAttr & arrayid );
-
-      /**
-       * Product label
-       */
-      std::string label() const;
-
-      /**
-       * The Common Platform Enumeration name
-       * for this product.
-       *
-       * See http://cpe.mitre.org
-       */
-      std::string cpeid() const;
-
-    private:
-      friend class boost::iterator_core_access;
-      int dereference() const { return 0; }
-  };
-
-  inline Repository::ProductInfoIterator Repository::compatibleWithProductBegin() const
-  { return ProductInfoIterator(satSolvable(), sat::SolvAttr::repositoryDistros); }
-
-  inline Repository::ProductInfoIterator Repository::compatibleWithProductEnd() const
-  { return ProductInfoIterator(); }
-
-  inline Repository::ProductInfoIterator Repository::updatesProductBegin() const
-  { return ProductInfoIterator(satSolvable(), , sat::SolvAttr::repositoryUpdates); }
-
-  inline Repository::ProductInfoIterator Repository::updatesProductEnd() const
-  { return ProductInfoIterator(); }
-
-
-}
-#endif
+// Late include as sat::ArrayAttr requires Repository.h
+#include "zypp/sat/LookupAttrTools.h"
 
 #endif // ZYPP_SAT_REPOSITORY_H
-
-

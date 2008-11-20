@@ -21,11 +21,15 @@ struct _Dataiterator;
 #include "zypp/base/PtrTypes.h"
 #include "zypp/base/DefaultIntegral.h"
 
-#include "zypp/sat/Pool.h"
+#include "zypp/sat/detail/PoolMember.h"
+#include "zypp/sat/SolvAttr.h"
 
 ///////////////////////////////////////////////////////////////////
 namespace zypp
 { /////////////////////////////////////////////////////////////////
+
+  class CheckSum;
+
   ///////////////////////////////////////////////////////////////////
   namespace sat
   { /////////////////////////////////////////////////////////////////
@@ -75,22 +79,16 @@ namespace zypp
 
       public:
         /** Default ctor finds nothing. */
-        LookupAttr()
-        {}
+        LookupAttr();
+
         /** Lookup \ref SolvAttr in \ref Pool (all repositories). */
-        explicit
-        LookupAttr( SolvAttr attr_r )
-        : _attr( attr_r )
-        {}
+        explicit LookupAttr( SolvAttr attr_r );
+
         /** Lookup \ref SolvAttr in one\ref Repository. */
-        explicit
-        LookupAttr( SolvAttr attr_r, Repository repo_r )
-        : _attr( attr_r ), _repo( repo_r )
-        {}
+        explicit LookupAttr( SolvAttr attr_r, Repository repo_r );
+
         /** Lookup \ref SolvAttr in one \ref Solvable. */
-        LookupAttr( SolvAttr attr_r, Solvable solv_r )
-        : _attr( attr_r ), _solv( solv_r )
-        {}
+        LookupAttr( SolvAttr attr_r, Solvable solv_r );
 
       public:
         /** \name Search result. */
@@ -120,55 +118,37 @@ namespace zypp
         /** \name What to search. */
         //@{
         /** The \ref SolvAttr to search. */
-        SolvAttr attr() const
-        { return _attr; }
+        SolvAttr attr() const;
 
         /** Set the \ref SolvAttr to search. */
-        void setAttr( SolvAttr attr_r )
-        { _attr = attr_r; }
+        void setAttr( SolvAttr attr_r );
         //@}
 
       public:
         /** \name Where to search. */
         //@{
         /** Wheter to search in \ref Pool. */
-        bool pool() const
-        { return ! (_repo || _solv); }
+        bool pool() const;
 
         /** Set search in \ref Pool (all repositories). */
-        void setPool()
-        {
-          _repo = Repository::noRepository;
-          _solv = Solvable::noSolvable;
-        }
+        void setPool();
 
         /** Wheter to search in one \ref Repository. */
-        Repository repo() const
-        { return _repo; }
+        Repository repo() const;
 
         /** Set search in one \ref Repository. */
-        void setRepo( Repository repo_r )
-        {
-          _repo = repo_r;
-          _solv = Solvable::noSolvable;
-        }
+        void setRepo( Repository repo_r );
 
         /** Wheter to search in one \ref Solvable. */
-        Solvable solvable() const
-        { return _solv; }
+        Solvable solvable() const;
 
         /** Set search in one \ref Solvable. */
-        void setSolvable( Solvable solv_r )
-         {
-          _repo = Repository::noRepository;
-          _solv = solv_r;
-        }
+        void setSolvable( Solvable solv_r );
         //@}
 
       private:
-        SolvAttr   _attr;
-        Repository _repo;
-        Solvable   _solv;
+        class Impl;
+        RWCOW_pointer<Impl> _pimpl;
     };
     ///////////////////////////////////////////////////////////////////
 
@@ -391,6 +371,10 @@ namespace zypp
     /** \relates LookupAttr::iterator Stream output. */
     std::ostream & operator<<( std::ostream & str, const LookupAttr::iterator & obj );
 
+    ///////////////////////////////////////////////////////////////////
+
+    /** \name Helpers and forward declarations from LookupAttrTools.h */
+    //@{
     template<> inline int          LookupAttr::iterator::asType<int>()          const { return asInt(); }
     template<> inline unsigned     LookupAttr::iterator::asType<unsigned>()     const { return asUnsigned(); }
     template<> inline bool         LookupAttr::iterator::asType<bool>()         const { return asBool(); }
@@ -398,182 +382,9 @@ namespace zypp
     template<> inline std::string  LookupAttr::iterator::asType<std::string>()  const { return asString(); }
     template<> inline IdString     LookupAttr::iterator::asType<IdString>()     const { return idStr(); }
 
-    ///////////////////////////////////////////////////////////////////
-    //
-    //	CLASS NAME : LookupAttr::transformIterator
-    //
-    /** TransformIterator returning an \ref iterator value of type \c _ResultT.
-     *
-     * The underlying LookupAttr::iterators value is retrieved \ref asType<_AttrT>
-     * and the returned \ref ResultT is constructed fron that value.
-     *
-     * \code
-     *   class Keywords
-     *   {
-     *     public:
-     *       Keywords( sat::Solvable solv_r )
-     *       : _q( sat::SolvAttr::keywords, solv_r )
-     *       {}
-     *
-     *     public:
-     *       typedef sat::LookupAttr::transformIterator<PackageKeyword,IdString> iterator;
-     *
-     *       iterator begin() const { return iterator( _q.begin() ); }
-     *       iterator end() const   { return iterator( _q.end() ); }
-     *
-     *     private:
-     *       sat::LookupAttr _q;
-     *   };
-     * \endcode
-     *
-     * \see \ref ArrayAttr.
-     */
-    template<class _ResultT, class _AttrT>
-    class LookupAttr::transformIterator : public boost::iterator_adaptor<
-          transformIterator<_ResultT,_AttrT> // Derived
-          , LookupAttr::iterator         // Base
-          , _ResultT                     // Value
-          , boost::forward_traversal_tag // CategoryOrTraversal
-          , _ResultT                     // Reference
-    >
-    {
-      public:
-        transformIterator()
-        {}
-
-        explicit
-        transformIterator( const LookupAttr::iterator & val_r )
-        { this->base_reference() = val_r; }
-
-      public:
-
-        /** \name Moving fast forward. */
-        //@{
-        /** On the next call to \ref operator++ advance to the next \ref SolvAttr. */
-        void nextSkipSolvAttr()
-        { this->base_reference().nextSkipSolvAttr(); }
-
-        /** On the next call to \ref operator++ advance to the next \ref Solvable. */
-        void nextSkipSolvable()
-        { this->base_reference().nextSkipSolvable(); }
-
-        /** On the next call to \ref operator++ advance to the next \ref Repository. */
-        void nextSkipRepo()
-        { this->base_reference().nextSkipRepo(); }
-
-        /** Immediately advance to the next \ref SolvAttr. */
-        void skipSolvAttr()
-        { this->base_reference().skipSolvAttr(); }
-
-        /** Immediately advance to the next \ref Solvable. */
-        void skipSolvable()
-        { this->base_reference().skipSolvable(); }
-
-        /** Immediately advance to the next \ref Repository. */
-        void skipRepo()
-        { this->base_reference().skipRepo(); }
-        //@}
-
-        /** \name Current position info. */
-        //@{
-        /** The current \ref Repository. */
-        Repository inRepo() const
-        { return this->base_reference().inRepo(); }
-
-        /** The current \ref Solvabele. */
-        Solvable inSolvable() const
-        { return this->base_reference().inSolvable(); }
-
-        /** The current \ref SolvAttr. */
-        SolvAttr inSolvAttr() const
-        { return this->base_reference().inSolvAttr(); }
-        //@}
-
-      private:
-        friend class boost::iterator_core_access;
-
-        _ResultT dereference() const
-        {
-          const LookupAttr::iterator lit( this->base_reference() );
-          return _ResultT( lit.asType<_AttrT>() );
-        }
-    };
-    ///////////////////////////////////////////////////////////////////
-
     template<class _ResultT, class _AttrT>
     class ArrayAttr;
-
-    template<class _ResultT, class _AttrT>
-    std::ostream & operator<<( std::ostream & str, const ArrayAttr<_ResultT,_AttrT> & obj );
-
-    ///////////////////////////////////////////////////////////////////
-    //
-    //	CLASS NAME : ArrayAttr
-    //
-    /** \ref LookupAttr::transformIterator based container to retrieve list attributes.
-     *
-     * \code
-     *  typedef ArrayAttr<PackageKeyword,IdString> Keywords;
-     *  Keywords k( sat::SolvAttr::keywords );
-     *  dumpRange( MIL << "All Keywords: ", k.begin(), k.end() ) << endl;
-     * \endcode
-     *
-     * \todo Maybe add some way to unify the result.
-     */
-    template<class _ResultT, class _AttrT>
-    class ArrayAttr
-    {
-      friend std::ostream & operator<< <_ResultT,_AttrT>( std::ostream & str, const ArrayAttr<_ResultT,_AttrT> & obj );
-
-      public:
-        ArrayAttr()
-        {}
-
-        ArrayAttr( SolvAttr attr_r )
-        : _q( attr_r )
-        {}
-
-        ArrayAttr( SolvAttr attr_r, Repository repo_r )
-        : _q( attr_r, repo_r )
-        {}
-
-        ArrayAttr( SolvAttr attr_r, Solvable solv_r )
-        : _q( attr_r, solv_r )
-        {}
-
-      public:
-        typedef sat::LookupAttr::transformIterator<_ResultT,_AttrT> iterator;
-
-        iterator begin() const
-        { return iterator( _q.begin() ); }
-
-        iterator end() const
-        { return iterator( _q.end() ); }
-
-        bool empty() const
-        { return _q.empty(); }
-
-      public:
-
-        iterator find( const _ResultT & key_r ) const
-        {
-          for_( it, begin(), end() )
-          {
-            if ( *it == key_r )
-              return it;
-          }
-          return end();
-        }
-
-      private:
-        sat::LookupAttr _q;
-    };
-    ///////////////////////////////////////////////////////////////////
-
-    /** \relates LookupAttr::iterator Stream output. */
-    template<class _ResultT, class _AttrT>
-    inline std::ostream & operator<<( std::ostream & str, const ArrayAttr<_ResultT,_AttrT> & obj )
-    { return dumpOn( str, obj._q); }
+    //@}
 
     /////////////////////////////////////////////////////////////////
   } // namespace sat
