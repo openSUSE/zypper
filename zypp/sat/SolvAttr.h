@@ -156,6 +156,7 @@ namespace sat
       static const SolvAttr repositoryRevision;
       static const SolvAttr repositoryAddedFileProvides;
       static const SolvAttr repositoryRpmDbCookie;
+      static const SolvAttr repositoryDeltaInfo;
       //@}
 
       //@}

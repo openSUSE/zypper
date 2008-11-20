@@ -126,7 +126,7 @@ namespace sat
 
   const SolvAttr SolvAttr::repositoryAddedFileProvides( REPOSITORY_ADDEDFILEPROVIDES );
   const SolvAttr SolvAttr::repositoryRpmDbCookie      ( REPOSITORY_RPMDBCOOKIE );
-
+  const SolvAttr SolvAttr::repositoryDeltaInfo        ( REPOSITORY_DELTAINFO );
 
 } // namespace sat
   /////////////////////////////////////////////////////////////////
