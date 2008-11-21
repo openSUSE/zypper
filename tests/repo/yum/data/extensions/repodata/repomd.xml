@@ -18,10 +18,12 @@
     <timestamp>1215823454</timestamp>
     <open-checksum type="sha">c6bd3c6099de74d97ed045163235be10ffa8a85f</open-checksum>
   </data>
+  
+  
   <data type="suseinfo">
     <location href="repodata/suseinfo.xml.gz"/>
-    <checksum type="sha">a9cf8892e8bb47ed09f05f40e42c390a943e61f5</checksum>
-    <timestamp>1222083131</timestamp>
-    <open-checksum type="sha">a3011438085ac55f06c68053201ea3ded17ee85c</open-checksum>
+    <checksum type="sha">e0b9149c1b7f48c952e9b3ea996669d8d0d9e1e8</checksum>
+    <timestamp>1227279057.0</timestamp>
+    <open-checksum type="sha">b17c055bef95bca397faffdf028cfa91dd1b24bc</open-checksum>
   </data>
 </repomd>

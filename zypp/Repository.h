@@ -125,6 +125,9 @@ namespace zypp
          * The suggested expiration date of this repository
          * already passed
          *
+         * rpm-md repositories can provide this tag using the
+         * expire extension tag:
+         * \see http://en.opensuse.org/Standards/Rpm_Metadata#SUSE_repository_info_.28suseinfo.xml.29.2C_extensions_to_repomd.xml
          */
         bool maybeOutdated() const;
 
@@ -132,18 +135,22 @@ namespace zypp
          * if the repository claims to update something then
          * it is an update repository
          *
-         * This is implemented by looking at an "update" keyword
-         * on the repository tags
+         * This is implemented by looking at the repository updates
+         * tag.
+         * \see http://en.opensuse.org/Standards/Rpm_Metadata#SUSE_repository_info_.28suseinfo.xml.29.2C_extensions_to_repomd.xml
          */
         bool isUpdateRepo() const;
 
         /**
          * wether the repository claims to update something \ref prod
-         * with key \ref cpename
+         * with key \ref cpeid
          *
-         * See http://cpe.mitre.org/ for more information on CPE
+         * \see zypp::Product::cpeId()
+         *
+         * See http://cpe.mitre.org/ for more information on the
+         * Common Platform Enumearation.
          */
-        bool providesUpdatesFor( const std::string &cpename ) const;
+        bool providesUpdatesFor( const std::string &cpeid ) const;
 
         /** Whether \ref Repository contains solvables. */
         bool solvablesEmpty() const;
@@ -165,6 +172,8 @@ namespace zypp
       /**
        * Get an iterator to the beginning of the repository
        * compatible distros.
+       * \note This is only a hint. There is no guarantee that
+       * the repository is built for that product.
        * \see Repository::ProductInfoIterator
        */
       ProductInfoIterator compatibleWithProductBegin() const;

@@ -106,13 +106,24 @@ namespace zypp
     bool Repository::providesUpdatesFor( const std::string &key ) const
     {
       NO_REPOSITORY_RETURN( false );
+
+      for_( it,
+            updatesProductBegin(),
+            updatesProductEnd() )
+      {
+        // FIXME implement real CPE matching here
+        // someday
+        if ( key == it.cpeId() )
+          return true;
+      }
+        
       return false;
     }
 
     bool Repository::isUpdateRepo() const
     {
       NO_REPOSITORY_RETURN( false );
-      return false;
+      return ( updatesProductBegin() != updatesProductEnd() );
     }
 
     bool Repository::solvablesEmpty() const
