@@ -1,4 +1,10 @@
 -------------------------------------------------------------------
+Fri Nov 21 16:56:10 CET 2008 - dmacvicar@suse.de
+
+- remove unused updaterepokey, replaced by repo
+  product information
+
+-------------------------------------------------------------------
 Fri Nov 21 15:12:52 CET 2008 - jkupec@suse.cz
 
 - fixed uninitialized value in OnMediaLocation (bnc #447010)
