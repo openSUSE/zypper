@@ -1,4 +1,10 @@
 -------------------------------------------------------------------
+Fri Nov 21 15:12:52 CET 2008 - jkupec@suse.cz
+
+- fixed uninitialized value in OnMediaLocation (bnc #447010)
+- revision 11770
+
+-------------------------------------------------------------------
 Thu Nov 20 23:59:16 CET 2008 - ma@suse.de
 
 - Fix retrieval of deltarpm info.
