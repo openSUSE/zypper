@@ -38,6 +38,7 @@ ADD_CUSTOM_COMMAND (
 ADD_CUSTOM_TARGET( doc ALL
    DEPENDS ${DOXYGEN_OUTPUT}
 )
+ADD_DEPENDENCIES(doc zypp)
 
 ADD_CUSTOM_TARGET( doc_forced
    COMMAND ${CMAKE_COMMAND} -E echo_append "Building Documentation..."
