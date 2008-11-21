@@ -10,7 +10,7 @@ static TestSetup test( Arch_x86_64 );
 BOOST_AUTO_TEST_CASE(pool_query_init)
 {
   // Abuse;) vbox as System repo:
-  test.loadTargetRepo( TESTS_SRC_DIR "/data/OBS:VirtualBox-11.1" );
+  test.loadTargetRepo( TESTS_SRC_DIR "/data/obs_virtualbox_11_1" );
   test.loadRepo( TESTS_SRC_DIR "/data/openSUSE-11.1", "opensuse" );
   test.loadRepo( TESTS_SRC_DIR "/data/OBS_zypp_svn-11.1", "zyppsvn" );
 
