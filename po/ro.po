@@ -3,7 +3,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: OpenSUSE\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-10-24 10:45+0200\n"
+"POT-Creation-Date: 2008-11-06 18:07+0100\n"
 "PO-Revision-Date: 2008-10-09 13:33+0200\n"
 "Last-Translator: Andrei Cipu <traduceri@strainu.ro>\n"
 "Language-Team: Romanian <LL@li.org>\n"
@@ -13,7 +13,7 @@ msgstr ""
 "Plural-Forms: nplurals=3; plural=n==1 ? 0 : (n==0 || (n%100 > 0 && n%100 < 20)) ? 1 : 2;\n"
 "X-Generator: Narro 0.9.2 on http://narro.i18n.ro\n"
 
-#: ../zypp/solver/detail/SATResolver.cc:994
+#: ../zypp/solver/detail/SATResolver.cc:993
 msgid ""
 "\n"
 "uninstallable providers: "
@@ -38,22 +38,22 @@ msgstr " execuție eșuată"
 msgid " execution skipped while aborting"
 msgstr ""
 
-#: ../zypp/solver/detail/SATResolver.cc:941
+#: ../zypp/solver/detail/SATResolver.cc:940
 #, c-format
 msgid "%s conflicts with %s provided by %s"
 msgstr "%s intră în conflict cu %s pus la dispoziție de %s"
 
-#: ../zypp/solver/detail/SATResolver.cc:927
+#: ../zypp/solver/detail/SATResolver.cc:926
 #, c-format
 msgid "%s is not installable"
 msgstr "%s nu este instalabil"
 
-#: ../zypp/solver/detail/SATResolver.cc:946
+#: ../zypp/solver/detail/SATResolver.cc:945
 #, c-format
 msgid "%s obsoletes %s provided by %s"
 msgstr "%s înlocuiește %s oferit de %s"
 
-#: ../zypp/solver/detail/SATResolver.cc:982
+#: ../zypp/solver/detail/SATResolver.cc:981
 #, c-format
 msgid "%s requires %s, but this requirement cannot be provided"
 msgstr "%s cere %s, dar această cerință nu poate fi furnizată"
@@ -301,7 +301,7 @@ msgid "Austronesian (Other)"
 msgstr "Austroneziană (alta)"
 
 #. !\todo add comma to the message for the next release
-#: ../zypp/media/MediaCurl.cc:1660
+#: ../zypp/media/MediaCurl.cc:1689
 #, c-format
 msgid "Authentication required for '%s'"
 msgstr "Pentru '%s' este necesară autentificarea"
@@ -776,7 +776,7 @@ msgstr "Chamorro"
 
 #. Translator: %s = name of an rpm package. A list of diffs follows
 #. this message.
-#: ../zypp/target/rpm/RpmDb.cc:1898
+#: ../zypp/target/rpm/RpmDb.cc:1899
 #, c-format
 msgid "Changed configuration files for %s:"
 msgstr "Fișiere de configurare modificate pentru %s:"
@@ -1263,7 +1263,7 @@ msgstr "Ewondo"
 msgid "Failed to delete key."
 msgstr "Ștergerea cheii a eșuat."
 
-#: ../zypp/target/rpm/RpmDb.cc:1066
+#: ../zypp/target/rpm/RpmDb.cc:1067
 #, c-format
 msgid "Failed to import public key from file %s: %s"
 msgstr "Importul cheii publice din fișierul %s a eșuat: %s"
@@ -1273,7 +1273,7 @@ msgstr "Importul cheii publice din fișierul %s a eșuat: %s"
 msgid "Failed to mount %s on %s"
 msgstr "Montarea %s pe %s a eșuat"
 
-#: ../zypp/target/rpm/RpmDb.cc:1143
+#: ../zypp/target/rpm/RpmDb.cc:1144
 #, c-format
 msgid "Failed to remove public key %s: %s"
 msgstr "Îndepărtarea cheii publice %s a eșuat: %s"
@@ -1693,7 +1693,7 @@ msgstr "HalVolume nu este inițializat"
 msgid "Hausa"
 msgstr "Hausa"
 
-#: ../zypp/solver/detail/SATResolver.cc:923
+#: ../zypp/solver/detail/SATResolver.cc:922
 msgid "Have you enabled all requested repositories?"
 msgstr "Ați activat toate sursele cerute?"
 
@@ -1858,7 +1858,7 @@ msgstr "Indoneziană"
 msgid "Ingush"
 msgstr "Ingușă"
 
-#: ../zypp/target/TargetImpl.cc:603 ../zypp/target/TargetImpl.cc:843
+#: ../zypp/target/TargetImpl.cc:603 ../zypp/target/TargetImpl.cc:874
 msgid "Installation has been aborted as directed."
 msgstr "Instalarea a fost anulată la cerere."
 
@@ -3175,8 +3175,8 @@ msgstr "Pentru acest URL nu este suportată parcurgerea unui șir de interogare"
 
 #. TranslatorExplanation after semicolon is error message
 #. TranslatorExplanation the colon is followed by an error message
-#: ../zypp/target/rpm/RpmDb.cc:892 ../zypp/target/rpm/RpmDb.cc:2081
-#: ../zypp/target/rpm/RpmDb.cc:2217
+#: ../zypp/target/rpm/RpmDb.cc:893 ../zypp/target/rpm/RpmDb.cc:2087
+#: ../zypp/target/rpm/RpmDb.cc:2223
 msgid "RPM failed: "
 msgstr "RPM a eșuat:"
 
@@ -3509,7 +3509,7 @@ msgstr "Sogdiană"
 msgid "Solomon Islands"
 msgstr "Insulele Solomon"
 
-#: ../zypp/solver/detail/SATResolver.cc:950
+#: ../zypp/solver/detail/SATResolver.cc:949
 #, c-format
 msgid "Solvable %s conflicts with %s provided by itself"
 msgstr ""
@@ -3765,8 +3765,8 @@ msgstr "Vânzătorul nu oferă suport."
 msgid "This action is being run by another program already."
 msgstr "Această acțiune este rulată deja de alt program."
 
-#: ../zypp/solver/detail/SATResolver.cc:1131
-#: ../zypp/solver/detail/SATResolver.cc:1149
+#: ../zypp/solver/detail/SATResolver.cc:1130
+#: ../zypp/solver/detail/SATResolver.cc:1148
 msgid "This request will break your system!"
 msgstr "Această cerere vă va afecta sistemul!"
 
@@ -3998,7 +3998,7 @@ msgstr "Statele Unite"
 msgid "United States Minor Outlying Islands"
 msgstr "Insulele minore din afara Statelor Unite"
 
-#: ../zypp/target/TargetImpl.cc:877
+#: ../zypp/target/TargetImpl.cc:908
 msgid "Unknown Distribution"
 msgstr "Distribuție necunoscută"
 
@@ -4276,76 +4276,76 @@ msgstr "verificarea applydeltarpm a eșuat."
 msgid "applydeltarpm failed."
 msgstr "applydeltarpm a eșuat."
 
-#: ../zypp/solver/detail/SATResolver.cc:1207
+#: ../zypp/solver/detail/SATResolver.cc:1219
 #, c-format
 msgid "architecture change of %s to %s"
 msgstr "modificare de arhitectură a %s în %s"
 
-#: ../zypp/solver/detail/SATResolver.cc:936
+#: ../zypp/solver/detail/SATResolver.cc:935
 #, c-format
 msgid "cannot install both %s and %s"
 msgstr "nu pot instala %s și %s împreună"
 
-#: ../zypp/solver/detail/SATResolver.cc:916
+#: ../zypp/solver/detail/SATResolver.cc:915
 msgid "conflicting requests"
 msgstr "cereri ce intră în conflict"
 
-#: ../zypp/target/rpm/RpmDb.cc:2369
+#: ../zypp/target/rpm/RpmDb.cc:2375
 #, c-format
 msgid "created backup %s"
 msgstr "backup %s creat"
 
-#: ../zypp/solver/detail/SATResolver.cc:1235
+#: ../zypp/solver/detail/SATResolver.cc:1247
 #, c-format
 msgid "deinstallation of %s"
 msgstr "deinstalarea %s"
 
-#: ../zypp/solver/detail/SATResolver.cc:984
+#: ../zypp/solver/detail/SATResolver.cc:983
 msgid "deleted providers: "
 msgstr "furnizori șterși: "
 
-#: ../zypp/solver/detail/SATResolver.cc:1152
+#: ../zypp/solver/detail/SATResolver.cc:1151
 #, c-format
 msgid "do not ask to delete all solvables providing %s"
 msgstr ""
 
-#: ../zypp/solver/detail/SATResolver.cc:1134
+#: ../zypp/solver/detail/SATResolver.cc:1133
 #, c-format
 msgid "do not ask to install a solvable providing %s"
 msgstr ""
 
-#: ../zypp/solver/detail/SATResolver.cc:1079
+#: ../zypp/solver/detail/SATResolver.cc:1078
 #, c-format
 msgid "do not forbid installation of %s"
 msgstr "nu interzice instalarea %s"
 
-#: ../zypp/solver/detail/SATResolver.cc:1058
-#: ../zypp/solver/detail/SATResolver.cc:1096
+#: ../zypp/solver/detail/SATResolver.cc:1057
+#: ../zypp/solver/detail/SATResolver.cc:1095
 #, c-format
 msgid "do not install %s"
 msgstr "nu instala %s"
 
-#: ../zypp/solver/detail/SATResolver.cc:1165
+#: ../zypp/solver/detail/SATResolver.cc:1164
 #, c-format
 msgid "do not install most recent version of %s"
 msgstr "nu instala cea mai recentă versiune a %s"
 
-#: ../zypp/solver/detail/SATResolver.cc:1053
+#: ../zypp/solver/detail/SATResolver.cc:1052
 #, c-format
 msgid "do not keep %s installed"
 msgstr "nu păstra %s instalat"
 
-#: ../zypp/solver/detail/SATResolver.cc:1199
+#: ../zypp/solver/detail/SATResolver.cc:1211
 #, c-format
 msgid "downgrade of %s to %s"
 msgstr "downgrade %s la %s"
 
-#: ../zypp/solver/detail/SATResolver.cc:1132
-#: ../zypp/solver/detail/SATResolver.cc:1150
+#: ../zypp/solver/detail/SATResolver.cc:1131
+#: ../zypp/solver/detail/SATResolver.cc:1149
 msgid "ignore the warning of a broken system"
 msgstr "ignoră avertismentul privitor la stricarea sistemului"
 
-#: ../zypp/solver/detail/SATResolver.cc:1215
+#: ../zypp/solver/detail/SATResolver.cc:1227
 #, c-format
 msgid ""
 "install %s (with vendor change)\n"
@@ -4362,8 +4362,10 @@ msgstr ""
 msgid "invalid"
 msgstr "invalid"
 
-#: ../zypp/solver/detail/SATResolver.cc:1074
-#: ../zypp/solver/detail/SATResolver.cc:1117
+#. for solver reason: NOT weak lock.
+#: ../zypp/solver/detail/SATResolver.cc:1073
+#: ../zypp/solver/detail/SATResolver.cc:1116
+#: ../zypp/solver/detail/SATResolver.cc:1193
 #, c-format
 msgid "keep %s"
 msgstr "păstrează %s"
@@ -4376,34 +4378,34 @@ msgstr "libhal_ctx_new: Nu pot crea contextul libhal"
 msgid "libhal_set_dbus_connection: Can't set dbus connection"
 msgstr "libhal_set_dbus_connection: Nu pot seta conexiunea dbus"
 
-#: ../zypp/solver/detail/SATResolver.cc:931
+#: ../zypp/solver/detail/SATResolver.cc:930
 #, c-format
 msgid "nothing provides %s needed by %s"
 msgstr "Nimic nu oferă %s necesar pentru %s"
 
-#: ../zypp/solver/detail/SATResolver.cc:922
+#: ../zypp/solver/detail/SATResolver.cc:921
 #, c-format
 msgid "nothing provides requested %s"
 msgstr "nimic nu oferă %s necesar"
 
-#: ../zypp/solver/detail/SATResolver.cc:913
+#: ../zypp/solver/detail/SATResolver.cc:912
 #, c-format
 msgid "problem with installed package %s"
 msgstr "problemă cu pachetul instalat %s"
 
-#: ../zypp/solver/detail/SATResolver.cc:1223
+#: ../zypp/solver/detail/SATResolver.cc:1235
 #, c-format
 msgid "replacement of %s with %s"
 msgstr "înlocuirea %s cu %s"
 
 #. %s = filenames
-#: ../zypp/target/rpm/RpmDb.cc:2067
+#: ../zypp/target/rpm/RpmDb.cc:2073
 #, c-format
 msgid "rpm created %s as %s, but it was impossible to determine the difference"
 msgstr "rpm a creat %s ca %s, dar nu a putut determina diferențele"
 
 #. %s = filenames
-#: ../zypp/target/rpm/RpmDb.cc:2069
+#: ../zypp/target/rpm/RpmDb.cc:2075
 #, c-format
 msgid ""
 "rpm created %s as %s.\n"
@@ -4413,13 +4415,13 @@ msgstr ""
 "Acestea sunt primele 25 de linii diferite:\n"
 
 #. %s = filenames
-#: ../zypp/target/rpm/RpmDb.cc:2062
+#: ../zypp/target/rpm/RpmDb.cc:2068
 #, c-format
 msgid "rpm saved %s as %s, but it was impossible to determine the difference"
 msgstr "rpm a salvat %s ca %s, dar nu a putut determina diferențele"
 
 #. %s = filenames
-#: ../zypp/target/rpm/RpmDb.cc:2064
+#: ../zypp/target/rpm/RpmDb.cc:2070
 #, c-format
 msgid ""
 "rpm saved %s as %s.\n"
@@ -4428,11 +4430,11 @@ msgstr ""
 "rpm a salvat %s ca %s.\n"
 "Acestea sunt primele 25 de linii diferite:\n"
 
-#: ../zypp/solver/detail/SATResolver.cc:919
+#: ../zypp/solver/detail/SATResolver.cc:918
 msgid "some dependency problem"
 msgstr "o problemă de dependențe"
 
-#: ../zypp/solver/detail/SATResolver.cc:996
+#: ../zypp/solver/detail/SATResolver.cc:995
 msgid "uninstallable providers: "
 msgstr "furnizori dezinstalabili: "
 

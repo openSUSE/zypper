@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: zypp\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-10-24 10:45+0200\n"
+"POT-Creation-Date: 2008-11-06 18:07+0100\n"
 "PO-Revision-Date: 2006-11-03 12:03\n"
 "Last-Translator: Novell Language <language@novell.com>\n"
 "Language-Team: Novell Language <language@novell.com>\n"
@@ -13,7 +13,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: ../zypp/solver/detail/SATResolver.cc:994
+#: ../zypp/solver/detail/SATResolver.cc:993
 #, fuzzy
 msgid ""
 "\n"
@@ -39,22 +39,22 @@ msgstr "DBI Execution failed: %s"
 msgid " execution skipped while aborting"
 msgstr ""
 
-#: ../zypp/solver/detail/SATResolver.cc:941
+#: ../zypp/solver/detail/SATResolver.cc:940
 #, fuzzy, c-format
 msgid "%s conflicts with %s provided by %s"
 msgstr "%s iimpixano ne %s"
 
-#: ../zypp/solver/detail/SATResolver.cc:927
+#: ../zypp/solver/detail/SATResolver.cc:926
 #, fuzzy, c-format
 msgid "%s is not installable"
 msgstr "ayihlohlwanga"
 
-#: ../zypp/solver/detail/SATResolver.cc:946
+#: ../zypp/solver/detail/SATResolver.cc:945
 #, fuzzy, c-format
 msgid "%s obsoletes %s provided by %s"
 msgstr "%s ziphelelwe lixehsa %s"
 
-#: ../zypp/solver/detail/SATResolver.cc:982
+#: ../zypp/solver/detail/SATResolver.cc:981
 #, c-format
 msgid "%s requires %s, but this requirement cannot be provided"
 msgstr ""
@@ -302,7 +302,7 @@ msgid "Austronesian (Other)"
 msgstr "isi-Austronesian (Esinye)"
 
 #. !\todo add comma to the message for the next release
-#: ../zypp/media/MediaCurl.cc:1660
+#: ../zypp/media/MediaCurl.cc:1689
 #, c-format
 msgid "Authentication required for '%s'"
 msgstr ""
@@ -778,7 +778,7 @@ msgstr "isi-Chamorro"
 
 #. Translator: %s = name of an rpm package. A list of diffs follows
 #. this message.
-#: ../zypp/target/rpm/RpmDb.cc:1898
+#: ../zypp/target/rpm/RpmDb.cc:1899
 #, c-format
 msgid "Changed configuration files for %s:"
 msgstr "Iifayili zobumbeko ezitshintshileyo zika%s:"
@@ -1262,7 +1262,7 @@ msgstr "isi-Ewondo"
 msgid "Failed to delete key."
 msgstr "Isilele ukuqalisa i-VM."
 
-#: ../zypp/target/rpm/RpmDb.cc:1066
+#: ../zypp/target/rpm/RpmDb.cc:1067
 #, c-format
 msgid "Failed to import public key from file %s: %s"
 msgstr ""
@@ -1272,7 +1272,7 @@ msgstr ""
 msgid "Failed to mount %s on %s"
 msgstr "Ayikwazanga kuvuleka i-%s - %s\n"
 
-#: ../zypp/target/rpm/RpmDb.cc:1143
+#: ../zypp/target/rpm/RpmDb.cc:1144
 #, fuzzy, c-format
 msgid "Failed to remove public key %s: %s"
 msgstr "Akukwazeki ukufumana iqhosha likawonkewonke."
@@ -1693,7 +1693,7 @@ msgstr "Isixa se-Hal asindululwanga"
 msgid "Hausa"
 msgstr "isi-Hausa"
 
-#: ../zypp/solver/detail/SATResolver.cc:923
+#: ../zypp/solver/detail/SATResolver.cc:922
 msgid "Have you enabled all requested repositories?"
 msgstr ""
 
@@ -1858,7 +1858,7 @@ msgstr "isi-Indonesian"
 msgid "Ingush"
 msgstr "isi-Ingush"
 
-#: ../zypp/target/TargetImpl.cc:603 ../zypp/target/TargetImpl.cc:843
+#: ../zypp/target/TargetImpl.cc:603 ../zypp/target/TargetImpl.cc:874
 msgid "Installation has been aborted as directed."
 msgstr "Ukuhlohla kuye kwalahlwa njengoko bekuyalelwe."
 
@@ -3176,8 +3176,8 @@ msgstr "Ukwahlulwa komtya wokubuzisa awuxhaswa malunga nale-URL"
 
 #. TranslatorExplanation after semicolon is error message
 #. TranslatorExplanation the colon is followed by an error message
-#: ../zypp/target/rpm/RpmDb.cc:892 ../zypp/target/rpm/RpmDb.cc:2081
-#: ../zypp/target/rpm/RpmDb.cc:2217
+#: ../zypp/target/rpm/RpmDb.cc:893 ../zypp/target/rpm/RpmDb.cc:2087
+#: ../zypp/target/rpm/RpmDb.cc:2223
 #, fuzzy
 msgid "RPM failed: "
 msgstr "isilele"
@@ -3511,7 +3511,7 @@ msgstr "isi-Sogdian"
 msgid "Solomon Islands"
 msgstr "i-Solomon Islands"
 
-#: ../zypp/solver/detail/SATResolver.cc:950
+#: ../zypp/solver/detail/SATResolver.cc:949
 #, fuzzy, c-format
 msgid "Solvable %s conflicts with %s provided by itself"
 msgstr "%s iimpixano ne %s"
@@ -3766,8 +3766,8 @@ msgstr "Idiski ayikho."
 msgid "This action is being run by another program already."
 msgstr ""
 
-#: ../zypp/solver/detail/SATResolver.cc:1131
-#: ../zypp/solver/detail/SATResolver.cc:1149
+#: ../zypp/solver/detail/SATResolver.cc:1130
+#: ../zypp/solver/detail/SATResolver.cc:1148
 #, fuzzy
 msgid "This request will break your system!"
 msgstr "Isicelo sesikhona kakade."
@@ -4000,7 +4000,7 @@ msgstr "i-United States"
 msgid "United States Minor Outlying Islands"
 msgstr "i-United States Minor Outlying Islands"
 
-#: ../zypp/target/TargetImpl.cc:877
+#: ../zypp/target/TargetImpl.cc:908
 #, fuzzy
 msgid "Unknown Distribution"
 msgstr "Isikhethwa soluhlu esingaziwa"
@@ -4279,78 +4279,78 @@ msgstr "kusilele ukukhangela ukusetyenziswa kwe-deltarpm. "
 msgid "applydeltarpm failed."
 msgstr "kusilele ukusetyenziswa kwe-deltarpm."
 
-#: ../zypp/solver/detail/SATResolver.cc:1207
+#: ../zypp/solver/detail/SATResolver.cc:1219
 #, c-format
 msgid "architecture change of %s to %s"
 msgstr ""
 
-#: ../zypp/solver/detail/SATResolver.cc:936
+#: ../zypp/solver/detail/SATResolver.cc:935
 #, fuzzy, c-format
 msgid "cannot install both %s and %s"
 msgstr "Ayikwazi kuhlohla%s "
 
-#: ../zypp/solver/detail/SATResolver.cc:916
+#: ../zypp/solver/detail/SATResolver.cc:915
 #, fuzzy
 msgid "conflicting requests"
 msgstr "Uqhagamshelo lucela uku:"
 
-#: ../zypp/target/rpm/RpmDb.cc:2369
+#: ../zypp/target/rpm/RpmDb.cc:2375
 #, c-format
 msgid "created backup %s"
 msgstr "idale ugcino olukhuselekileyo %s "
 
-#: ../zypp/solver/detail/SATResolver.cc:1235
+#: ../zypp/solver/detail/SATResolver.cc:1247
 #, fuzzy, c-format
 msgid "deinstallation of %s"
 msgstr "Ukuhlohla"
 
-#: ../zypp/solver/detail/SATResolver.cc:984
+#: ../zypp/solver/detail/SATResolver.cc:983
 #, fuzzy
 msgid "deleted providers: "
 msgstr "Akukho nanye ebonelela ngo%s "
 
-#: ../zypp/solver/detail/SATResolver.cc:1152
+#: ../zypp/solver/detail/SATResolver.cc:1151
 #, fuzzy, c-format
 msgid "do not ask to delete all solvables providing %s"
 msgstr "Ungahlohli okanye cima izicombululi ezinxulumeneyo"
 
-#: ../zypp/solver/detail/SATResolver.cc:1134
+#: ../zypp/solver/detail/SATResolver.cc:1133
 #, fuzzy, c-format
 msgid "do not ask to install a solvable providing %s"
 msgstr "Akukho baboneleli bahlohliweyo baka%s"
 
-#: ../zypp/solver/detail/SATResolver.cc:1079
+#: ../zypp/solver/detail/SATResolver.cc:1078
 #, fuzzy, c-format
 msgid "do not forbid installation of %s"
 msgstr "ungahlohli %s"
 
-#: ../zypp/solver/detail/SATResolver.cc:1058
-#: ../zypp/solver/detail/SATResolver.cc:1096
+#: ../zypp/solver/detail/SATResolver.cc:1057
+#: ../zypp/solver/detail/SATResolver.cc:1095
 #, c-format
 msgid "do not install %s"
 msgstr "ungahlohli %s"
 
-#: ../zypp/solver/detail/SATResolver.cc:1165
+#: ../zypp/solver/detail/SATResolver.cc:1164
 #, c-format
 msgid "do not install most recent version of %s"
 msgstr ""
 
-#: ../zypp/solver/detail/SATResolver.cc:1053
+#: ../zypp/solver/detail/SATResolver.cc:1052
 #, fuzzy, c-format
 msgid "do not keep %s installed"
 msgstr "ayihlohlwanga"
 
-#: ../zypp/solver/detail/SATResolver.cc:1199
+#: ../zypp/solver/detail/SATResolver.cc:1211
 #, fuzzy, c-format
 msgid "downgrade of %s to %s"
 msgstr "Ikhuphele%s ukusuka ku%s"
 
-#: ../zypp/solver/detail/SATResolver.cc:1132
-#: ../zypp/solver/detail/SATResolver.cc:1150
+#: ../zypp/solver/detail/SATResolver.cc:1131
+#: ../zypp/solver/detail/SATResolver.cc:1149
 msgid "ignore the warning of a broken system"
 msgstr ""
 
-#: ../zypp/solver/detail/SATResolver.cc:1215
+#: ../zypp/solver/detail/SATResolver.cc:1227
 #, c-format
 msgid ""
 "install %s (with vendor change)\n"
@@ -4363,8 +4363,10 @@ msgstr ""
 msgid "invalid"
 msgstr ""
 
-#: ../zypp/solver/detail/SATResolver.cc:1074
-#: ../zypp/solver/detail/SATResolver.cc:1117
+#. for solver reason: NOT weak lock.
+#: ../zypp/solver/detail/SATResolver.cc:1073
+#: ../zypp/solver/detail/SATResolver.cc:1116
+#: ../zypp/solver/detail/SATResolver.cc:1193
 #, c-format
 msgid "keep %s"
 msgstr "Gcina%s"
@@ -4377,34 +4379,34 @@ msgstr "i-libhal_ctx_entsha: Ayikwazu kudala imeko ye-libhal"
 msgid "libhal_set_dbus_connection: Can't set dbus connection"
 msgstr "i-libhal_imisela_uqhagamshelo_lwe-dbus: Ayikwazi kumesela uqhagamshelo lwe-dbus "
 
-#: ../zypp/solver/detail/SATResolver.cc:931
+#: ../zypp/solver/detail/SATResolver.cc:930
 #, fuzzy, c-format
 msgid "nothing provides %s needed by %s"
 msgstr "%s ifunwa ngu %s"
 
-#: ../zypp/solver/detail/SATResolver.cc:922
+#: ../zypp/solver/detail/SATResolver.cc:921
 #, fuzzy, c-format
 msgid "nothing provides requested %s"
 msgstr "Akukho nanye ebonelela ngo%s "
 
-#: ../zypp/solver/detail/SATResolver.cc:913
+#: ../zypp/solver/detail/SATResolver.cc:912
 #, fuzzy, c-format
 msgid "problem with installed package %s"
 msgstr "umyalelo wokuyeka ukuhlohla imibekelelo"
 
-#: ../zypp/solver/detail/SATResolver.cc:1223
+#: ../zypp/solver/detail/SATResolver.cc:1235
 #, c-format
 msgid "replacement of %s with %s"
 msgstr ""
 
 #. %s = filenames
-#: ../zypp/target/rpm/RpmDb.cc:2067
+#: ../zypp/target/rpm/RpmDb.cc:2073
 #, fuzzy, c-format
 msgid "rpm created %s as %s, but it was impossible to determine the difference"
 msgstr "i-rpm idalwe %s njenge %s kodwa kwakungenzeki ukumisela umahluko"
 
 #. %s = filenames
-#: ../zypp/target/rpm/RpmDb.cc:2069
+#: ../zypp/target/rpm/RpmDb.cc:2075
 #, c-format
 msgid ""
 "rpm created %s as %s.\n"
@@ -4414,13 +4416,13 @@ msgstr ""
 "Nantsi imigca eyi-25 yokuqala yomahluko:\n"
 
 #. %s = filenames
-#: ../zypp/target/rpm/RpmDb.cc:2062
+#: ../zypp/target/rpm/RpmDb.cc:2068
 #, fuzzy, c-format
 msgid "rpm saved %s as %s, but it was impossible to determine the difference"
 msgstr "i-rpm igcine %s njenge %s kodwa kwakungenzeki ukumisela umahluko"
 
 #. %s = filenames
-#: ../zypp/target/rpm/RpmDb.cc:2064
+#: ../zypp/target/rpm/RpmDb.cc:2070
 #, c-format
 msgid ""
 "rpm saved %s as %s.\n"
@@ -4429,12 +4431,12 @@ msgstr ""
 "i-rpm igcinwe %s njenge %s.\n"
 "Nantsi imigca eyi-25 yokuqala yomahluko:\n"
 
-#: ../zypp/solver/detail/SATResolver.cc:919
+#: ../zypp/solver/detail/SATResolver.cc:918
 #, fuzzy
 msgid "some dependency problem"
 msgstr "Ayikwazi kuhlohla%s ngenxa yeengxaki zoxhomekeko"
 
-#: ../zypp/solver/detail/SATResolver.cc:996
+#: ../zypp/solver/detail/SATResolver.cc:995
 #, fuzzy
 msgid "uninstallable providers: "
 msgstr "Akukho baboneleli bahlohliweyo baka%s"

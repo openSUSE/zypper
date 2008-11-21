@@ -16,9 +16,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: zypp\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-10-24 10:45+0200\n"
-"PO-Revision-Date: 2008-08-11 11:57+0200\n"
-"Last-Translator: Marek Stopka <mstopka@opensuse.org>\n"
+"POT-Creation-Date: 2008-11-06 18:07+0100\n"
+"PO-Revision-Date: 2008-11-17 11:15+0100\n"
+"Last-Translator: Vojtěch Zeisek <vojta.sc@seznam.cz>\n"
 "Language-Team: czech <cs@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -26,7 +26,7 @@ msgstr ""
 "Plural-Forms:  nplurals=3; plural=(n==1) ? 0 : (n>=2 && n<=4) ? 1 : 2;\n"
 "X-Generator: KBabel 1.11.4\n"
 
-#: ../zypp/solver/detail/SATResolver.cc:994
+#: ../zypp/solver/detail/SATResolver.cc:993
 msgid ""
 "\n"
 "uninstallable providers: "
@@ -51,22 +51,22 @@ msgstr " provádění selhalo"
 msgid " execution skipped while aborting"
 msgstr " provádění přeskočeno během ukončování"
 
-#: ../zypp/solver/detail/SATResolver.cc:941
+#: ../zypp/solver/detail/SATResolver.cc:940
 #, c-format
 msgid "%s conflicts with %s provided by %s"
 msgstr "%s koliduje s %s, který poskytuje %s"
 
-#: ../zypp/solver/detail/SATResolver.cc:927
+#: ../zypp/solver/detail/SATResolver.cc:926
 #, c-format
 msgid "%s is not installable"
 msgstr "%s nelze nainstalovat"
 
-#: ../zypp/solver/detail/SATResolver.cc:946
+#: ../zypp/solver/detail/SATResolver.cc:945
 #, c-format
 msgid "%s obsoletes %s provided by %s"
 msgstr "%s zastaralý %s poskytovaný %s"
 
-#: ../zypp/solver/detail/SATResolver.cc:982
+#: ../zypp/solver/detail/SATResolver.cc:981
 #, c-format
 msgid "%s requires %s, but this requirement cannot be provided"
 msgstr "%s vyžaduje %s, ale tento požadavek nemůže být splněn"
@@ -98,7 +98,7 @@ msgstr "Přidává se repozitář '%s'"
 
 #: ../zypp/VendorSupportOptions.cc:29
 msgid "Additional Customer Contract Necessary"
-msgstr ""
+msgstr "Je nezbytný další zákaznický kontakt"
 
 #. language code: ady
 #: ../zypp/LanguageCode.cc:248
@@ -195,7 +195,7 @@ msgstr "Amharština"
 
 #: ../zypp/VendorSupportOptions.cc:54
 msgid "An additional customer contract is necessary for getting support."
-msgstr ""
+msgstr "Další zákaznický kontakt je nezbytný pro získání podpory-"
 
 # AD
 #: ../zypp/CountryCode.cc:224
@@ -326,7 +326,7 @@ msgid "Austronesian (Other)"
 msgstr "Austronéské (jiné)"
 
 #. !\todo add comma to the message for the next release
-#: ../zypp/media/MediaCurl.cc:1660
+#: ../zypp/media/MediaCurl.cc:1689
 #, c-format
 msgid "Authentication required for '%s'"
 msgstr "Pro '%s' je vyžadováno ověřování"
@@ -747,7 +747,7 @@ msgstr "Nemůžu vysunout médium '%s'"
 #: ../zypp/media/MediaException.cc:273
 #, c-format
 msgid "Cannot find available loop device to mount the image file from '%s'"
-msgstr ""
+msgstr "Nelze najít dostupné zařízení loop pro připojení souboru obrazu z '%s'"
 
 #: ../zypp/media/MediaException.cc:67
 #, c-format
@@ -826,7 +826,7 @@ msgstr "Čamorština"
 
 #. Translator: %s = name of an rpm package. A list of diffs follows
 #. this message.
-#: ../zypp/target/rpm/RpmDb.cc:1898
+#: ../zypp/target/rpm/RpmDb.cc:1899
 #, c-format
 msgid "Changed configuration files for %s:"
 msgstr "Změněné konfigurační soubory pro %s:"
@@ -1122,9 +1122,9 @@ msgstr "Dominikánská republika"
 
 #. TranslatorExplanation: curl is the name of a library, don't translate
 #: ../zypp/media/MediaException.cc:92 ../zypp/media/MediaException.cc:100
-#, fuzzy, c-format
+#, c-format
 msgid "Download (Metalink curl) initialization failed for '%s'"
-msgstr "Inicializace stažení (curl) '%s' selhala"
+msgstr "Inicializace stažení (Metalink curl) selhala na '%s'"
 
 #: ../zypp/media/MediaException.cc:168
 #, c-format
@@ -1144,13 +1144,13 @@ msgid "Download (curl) initialization failed for '%s'"
 msgstr "Inicializace stažení (curl) '%s' selhala"
 
 #: ../zypp/media/MediaException.cc:186 ../zypp/media/MediaException.cc:204
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Download (metalink curl) error for '%s':\n"
 "Error code: %s\n"
 "Error message: %s\n"
 msgstr ""
-"Stažení (curl) '%s' selhalo:\n"
+"Stažení (Metalink curl) selhalo pro '%s':\n"
 "Chybový kód: %s\n"
 "Chybová zpráva: %s\n"
 
@@ -1282,9 +1282,9 @@ msgstr "Během stahování nastavení pro  '%s' došlo chybě:"
 
 #. TranslatorExplanation: curl is the name of a library, don't translate
 #: ../zypp/media/MediaException.cc:195 ../zypp/media/MediaException.cc:213
-#, fuzzy, c-format
+#, c-format
 msgid "Error occurred while setting download (metalink curl) options for '%s':"
-msgstr "Během stahování nastavení pro  '%s' došlo chybě:"
+msgstr "Během zakládání stahování (metalink curl) došlo v chybě v nastavení pro '%s':"
 
 # SY
 # fuzzy
@@ -1328,7 +1328,7 @@ msgstr "Ewondo"
 msgid "Failed to delete key."
 msgstr "Nepodařilo se smazat klíč."
 
-#: ../zypp/target/rpm/RpmDb.cc:1066
+#: ../zypp/target/rpm/RpmDb.cc:1067
 #, c-format
 msgid "Failed to import public key from file %s: %s"
 msgstr "Nepodařilo se importovat klíč ze souboru %s: %s"
@@ -1338,7 +1338,7 @@ msgstr "Nepodařilo se importovat klíč ze souboru %s: %s"
 msgid "Failed to mount %s on %s"
 msgstr "Nepodařilo se připojit %s do %s"
 
-#: ../zypp/target/rpm/RpmDb.cc:1143
+#: ../zypp/target/rpm/RpmDb.cc:1144
 #, c-format
 msgid "Failed to remove public key %s: %s"
 msgstr "Nepodařilo se smazat veřejný klíč %s: %s"
@@ -1774,8 +1774,7 @@ msgstr "Svazek HAL není inicializován"
 msgid "Hausa"
 msgstr "Hausa"
 
-#: ../zypp/solver/detail/SATResolver.cc:923
-#, fuzzy
+#: ../zypp/solver/detail/SATResolver.cc:922
 msgid "Have you enabled all requested repositories?"
 msgstr "Máte povoleny všechny vyžadované repozitáře?"
 
@@ -1948,7 +1947,7 @@ msgstr "Indonéština"
 msgid "Ingush"
 msgstr "Ingush"
 
-#: ../zypp/target/TargetImpl.cc:603 ../zypp/target/TargetImpl.cc:843
+#: ../zypp/target/TargetImpl.cc:603 ../zypp/target/TargetImpl.cc:874
 msgid "Installation has been aborted as directed."
 msgstr "Instalace byla zrušena podle příkazu."
 
@@ -2389,15 +2388,15 @@ msgstr "Lesotho"
 
 #: ../zypp/VendorSupportOptions.cc:20
 msgid "Level 1"
-msgstr ""
+msgstr "Úroveň 1"
 
 #: ../zypp/VendorSupportOptions.cc:23
 msgid "Level 2"
-msgstr ""
+msgstr "Úroveň 2"
 
 #: ../zypp/VendorSupportOptions.cc:26
 msgid "Level 3"
-msgstr ""
+msgstr "Úroveň 3"
 
 #. language code: lez
 #: ../zypp/LanguageCode.cc:744
@@ -3102,7 +3101,7 @@ msgstr "Omán"
 #: ../zypp/parser/RepoindexFileReader.cc:116
 #, c-format
 msgid "One or both of '%s' or '%s' attributes is required."
-msgstr ""
+msgstr "Jeden nebo oba atributy '%s' nebo '%s' jsou vyžadovány."
 
 #: ../zypp/media/MediaException.cc:161
 msgid "Operation not supported by medium"
@@ -3137,9 +3136,9 @@ msgstr "Osmanské jazyky"
 
 #. TranslatorExplanation %s = package being checked for integrity
 #: ../zypp/repo/PackageProvider.cc:247
-#, fuzzy, c-format
+#, c-format
 msgid "Package %s seems to be corrupted during transfer. Do you want to retry retrieval?"
-msgstr "Kontrola integrity balíčku %s se nezdařila. Chcete pokus opakovat?"
+msgstr "Balíček %s se zřejmě poškodil během přenosu. Chcete pokus opakovat?"
 
 #. language code: pal
 #: ../zypp/LanguageCode.cc:926
@@ -3336,8 +3335,8 @@ msgstr "Pro toto URL není podporována analýza řetězce dotazu."
 
 #. TranslatorExplanation after semicolon is error message
 #. TranslatorExplanation the colon is followed by an error message
-#: ../zypp/target/rpm/RpmDb.cc:892 ../zypp/target/rpm/RpmDb.cc:2081
-#: ../zypp/target/rpm/RpmDb.cc:2217
+#: ../zypp/target/rpm/RpmDb.cc:893 ../zypp/target/rpm/RpmDb.cc:2087
+#: ../zypp/target/rpm/RpmDb.cc:2223
 msgid "RPM failed: "
 msgstr "RPM selhalo: "
 
@@ -3373,9 +3372,9 @@ msgid "Removing repository '%s'"
 msgstr "Odebírá se repozitář '%s'"
 
 #: ../zypp/parser/RepoindexFileReader.cc:128
-#, fuzzy, c-format
+#, c-format
 msgid "Required attribute '%s' is missing."
-msgstr "Chybí vyžadovaný soubor: "
+msgstr "Chybí vyžadovaný atribut '%s'."
 
 # RE
 #. :QAT:634:
@@ -3692,7 +3691,7 @@ msgstr "Soghdština"
 msgid "Solomon Islands"
 msgstr "Šalamounovy ostrovy"
 
-#: ../zypp/solver/detail/SATResolver.cc:950
+#: ../zypp/solver/detail/SATResolver.cc:949
 #, c-format
 msgid "Solvable %s conflicts with %s provided by itself"
 msgstr "%s koliduje s %s"
@@ -3868,11 +3867,13 @@ msgid "System exception '%s' on medium '%s'."
 msgstr "Systémová výjimka '%s' na médiu '%s'."
 
 #: ../zypp/ZYppFactory.cc:361
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "System management is locked by the application with pid %d (%s).\n"
 "Close this application before trying again."
-msgstr "Systémová správa je zamknut aplikací, která má pid %d. Prosím uzavřete tuto aplikaci, než se budete znovu pokoušet o práci se systémovou správou."
+msgstr ""
+"Systémová správa je zamknut aplikací, která má pid %d (%s).\n"
+"Prosím uzavřete tuto aplikaci, než se budete znovu pokoušet o práci se systémovou správou."
 
 #. language code: tgl tl
 #: ../zypp/LanguageCode.cc:1108
@@ -3951,21 +3952,20 @@ msgstr "Thajsko"
 
 #: ../zypp/VendorSupportOptions.cc:39
 msgid "The level of support is unspecified"
-msgstr ""
+msgstr "Tato úroveň podpory není specifikována."
 
 #: ../zypp/VendorSupportOptions.cc:42
-#, fuzzy
 msgid "The vendor does not provide support."
-msgstr "Disk neexistuje."
+msgstr "Poskytovatel neposkytuje podporu."
 
 #: ../zypp/base/InterProcessMutex.cc:139
 msgid "This action is being run by another program already."
 msgstr "Tato akce je právě spuštěna jiným programem."
 
-#: ../zypp/solver/detail/SATResolver.cc:1131
-#: ../zypp/solver/detail/SATResolver.cc:1149
+#: ../zypp/solver/detail/SATResolver.cc:1130
+#: ../zypp/solver/detail/SATResolver.cc:1148
 msgid "This request will break your system!"
-msgstr ""
+msgstr "Tento požadavek poškodí váš systém!"
 
 #. language code: tib bod bo
 #: ../zypp/LanguageCode.cc:1112 ../zypp/LanguageCode.cc:1114
@@ -4209,7 +4209,7 @@ msgstr "Spojené státy"
 msgid "United States Minor Outlying Islands"
 msgstr "Menší odlehlé ostrovy Spojených států"
 
-#: ../zypp/target/TargetImpl.cc:877
+#: ../zypp/target/TargetImpl.cc:908
 msgid "Unknown Distribution"
 msgstr "Neznámá distribuce"
 
@@ -4223,7 +4223,7 @@ msgstr "Neznámý jazyk: "
 
 #: ../zypp/VendorSupportOptions.cc:56
 msgid "Unknown support option. Description not available"
-msgstr ""
+msgstr "Neznámá volba podpory. Popis není dostupný"
 
 #: ../zypp/media/MediaUserAuth.cc:123
 #, c-format
@@ -4498,76 +4498,76 @@ msgstr "Kontrola aplikování delta RPM se nezdařila."
 msgid "applydeltarpm failed."
 msgstr "Aplikování delta RPM se nezdařilo."
 
-#: ../zypp/solver/detail/SATResolver.cc:1207
+#: ../zypp/solver/detail/SATResolver.cc:1219
 #, c-format
 msgid "architecture change of %s to %s"
 msgstr "změna architektury z %s na %s"
 
-#: ../zypp/solver/detail/SATResolver.cc:936
+#: ../zypp/solver/detail/SATResolver.cc:935
 #, c-format
 msgid "cannot install both %s and %s"
 msgstr "Nelze nainstalovat %s a zároveň %s"
 
-#: ../zypp/solver/detail/SATResolver.cc:916
+#: ../zypp/solver/detail/SATResolver.cc:915
 msgid "conflicting requests"
 msgstr "protichůdné požadavky"
 
-#: ../zypp/target/rpm/RpmDb.cc:2369
+#: ../zypp/target/rpm/RpmDb.cc:2375
 #, c-format
 msgid "created backup %s"
 msgstr "vytvořena záloha %s"
 
-#: ../zypp/solver/detail/SATResolver.cc:1235
+#: ../zypp/solver/detail/SATResolver.cc:1247
 #, c-format
 msgid "deinstallation of %s"
 msgstr "odstraňování %s"
 
-#: ../zypp/solver/detail/SATResolver.cc:984
+#: ../zypp/solver/detail/SATResolver.cc:983
 msgid "deleted providers: "
 msgstr "odstranění poskytovatelé:"
 
-#: ../zypp/solver/detail/SATResolver.cc:1152
+#: ../zypp/solver/detail/SATResolver.cc:1151
 #, c-format
 msgid "do not ask to delete all solvables providing %s"
 msgstr "neptat se na smazání všech balíčků poskytujících %s"
 
-#: ../zypp/solver/detail/SATResolver.cc:1134
+#: ../zypp/solver/detail/SATResolver.cc:1133
 #, c-format
 msgid "do not ask to install a solvable providing %s"
 msgstr "neptat se na instalaci všech balíčků poskytujících %s"
 
-#: ../zypp/solver/detail/SATResolver.cc:1079
+#: ../zypp/solver/detail/SATResolver.cc:1078
 #, c-format
 msgid "do not forbid installation of %s"
 msgstr "nezakazovat instalaci %s"
 
-#: ../zypp/solver/detail/SATResolver.cc:1058
-#: ../zypp/solver/detail/SATResolver.cc:1096
+#: ../zypp/solver/detail/SATResolver.cc:1057
+#: ../zypp/solver/detail/SATResolver.cc:1095
 #, c-format
 msgid "do not install %s"
 msgstr "neinstalovat %s"
 
-#: ../zypp/solver/detail/SATResolver.cc:1165
+#: ../zypp/solver/detail/SATResolver.cc:1164
 #, c-format
 msgid "do not install most recent version of %s"
 msgstr "neinstalovat moc novou verzi %s"
 
-#: ../zypp/solver/detail/SATResolver.cc:1053
+#: ../zypp/solver/detail/SATResolver.cc:1052
 #, c-format
 msgid "do not keep %s installed"
 msgstr "neudržovat %s nainstalován"
 
-#: ../zypp/solver/detail/SATResolver.cc:1199
+#: ../zypp/solver/detail/SATResolver.cc:1211
 #, c-format
 msgid "downgrade of %s to %s"
 msgstr "downgrade %s na %s"
 
-#: ../zypp/solver/detail/SATResolver.cc:1132
-#: ../zypp/solver/detail/SATResolver.cc:1150
+#: ../zypp/solver/detail/SATResolver.cc:1131
+#: ../zypp/solver/detail/SATResolver.cc:1149
 msgid "ignore the warning of a broken system"
-msgstr ""
+msgstr "ignorovat varování poškozeného systému"
 
-#: ../zypp/solver/detail/SATResolver.cc:1215
+#: ../zypp/solver/detail/SATResolver.cc:1227
 #, c-format
 msgid ""
 "install %s (with vendor change)\n"
@@ -4582,10 +4582,12 @@ msgstr ""
 
 #: ../zypp/VendorSupportOptions.cc:31
 msgid "invalid"
-msgstr ""
+msgstr "neplatné"
 
-#: ../zypp/solver/detail/SATResolver.cc:1074
-#: ../zypp/solver/detail/SATResolver.cc:1117
+#. for solver reason: NOT weak lock.
+#: ../zypp/solver/detail/SATResolver.cc:1073
+#: ../zypp/solver/detail/SATResolver.cc:1116
+#: ../zypp/solver/detail/SATResolver.cc:1193
 #, c-format
 msgid "keep %s"
 msgstr "ponechat %s"
@@ -4598,34 +4600,34 @@ msgstr "libhal_ctx_new: Nelze vytvořit kontext libhal."
 msgid "libhal_set_dbus_connection: Can't set dbus connection"
 msgstr "libhal_set_dbus_connection: Nelze nastavit připojení dbus."
 
-#: ../zypp/solver/detail/SATResolver.cc:931
+#: ../zypp/solver/detail/SATResolver.cc:930
 #, c-format
 msgid "nothing provides %s needed by %s"
 msgstr "nic neposkytuje %s, který je požadován %s"
 
-#: ../zypp/solver/detail/SATResolver.cc:922
+#: ../zypp/solver/detail/SATResolver.cc:921
 #, c-format
 msgid "nothing provides requested %s"
 msgstr "nic neposkytuje vyžádaný %s"
 
-#: ../zypp/solver/detail/SATResolver.cc:913
+#: ../zypp/solver/detail/SATResolver.cc:912
 #, c-format
 msgid "problem with installed package %s"
 msgstr "problém s nainstalovaným balíčkem %s"
 
-#: ../zypp/solver/detail/SATResolver.cc:1223
+#: ../zypp/solver/detail/SATResolver.cc:1235
 #, c-format
 msgid "replacement of %s with %s"
 msgstr "nahrazení %s %s"
 
 #. %s = filenames
-#: ../zypp/target/rpm/RpmDb.cc:2067
+#: ../zypp/target/rpm/RpmDb.cc:2073
 #, c-format
 msgid "rpm created %s as %s, but it was impossible to determine the difference"
 msgstr "Program rpm vytvořil %s jako %s, ale nebylo možné zjistit rozdíl"
 
 #. %s = filenames
-#: ../zypp/target/rpm/RpmDb.cc:2069
+#: ../zypp/target/rpm/RpmDb.cc:2075
 #, c-format
 msgid ""
 "rpm created %s as %s.\n"
@@ -4635,13 +4637,13 @@ msgstr ""
 "Prvních odlišných 25 řádek:\n"
 
 #. %s = filenames
-#: ../zypp/target/rpm/RpmDb.cc:2062
+#: ../zypp/target/rpm/RpmDb.cc:2068
 #, c-format
 msgid "rpm saved %s as %s, but it was impossible to determine the difference"
 msgstr "Program rpm uložil %s jako %s, ale nebylo možné zjistit rozdíl"
 
 #. %s = filenames
-#: ../zypp/target/rpm/RpmDb.cc:2064
+#: ../zypp/target/rpm/RpmDb.cc:2070
 #, c-format
 msgid ""
 "rpm saved %s as %s.\n"
@@ -4650,11 +4652,11 @@ msgstr ""
 "Program rpm uložil %s jako %s.\n"
 "Prvních 25 řádek rozdílů:\n"
 
-#: ../zypp/solver/detail/SATResolver.cc:919
+#: ../zypp/solver/detail/SATResolver.cc:918
 msgid "some dependency problem"
 msgstr "nějaký problém se závislostmi"
 
-#: ../zypp/solver/detail/SATResolver.cc:996
+#: ../zypp/solver/detail/SATResolver.cc:995
 msgid "uninstallable providers: "
 msgstr "neodinstalovatelní poskytovatelé:"
 
@@ -4663,28 +4665,6 @@ msgid "unknown"
 msgstr "neznámý"
 
 #: ../zypp/VendorSupportOptions.cc:17
-#, fuzzy
 msgid "unsupported"
-msgstr " - není podporováno"
+msgstr "nepodporováno"
 
-#~ msgid "%s remove failed"
-#~ msgstr "Odstranění %s se nezdařilo"
-
-#~ msgid "Additional rpm output:"
-#~ msgstr "Další výstup programu rpm:"
-
-#~ msgid "Invalid user name or password."
-#~ msgstr "Neplatné uživatelské jméno nebo heslo."
-
-#~ msgid "rpm output:"
-#~ msgstr "Výstup programu rpm:"
-
-#~ msgid "%s install failed"
-#~ msgstr "Instalace %s selhala"
-
-#
-#~ msgid "%s installed ok"
-#~ msgstr "%s nainstalován ok"
-
-#~ msgid "%s remove ok"
-#~ msgstr "%s odstranění ok"

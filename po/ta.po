@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: NetworkManager-vpnc\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-10-24 10:45+0200\n"
+"POT-Creation-Date: 2008-11-06 18:07+0100\n"
 "PO-Revision-Date: 2005-06-26 01:20+0200\n"
 "Last-Translator: Priyavert Sharma <priyavert.sharma@agreeya.com>\n"
 "Language-Team: AgreeYa Solutions <www.agreeya.com>\n"
@@ -11,7 +11,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-#: ../zypp/solver/detail/SATResolver.cc:994
+#: ../zypp/solver/detail/SATResolver.cc:993
 #, fuzzy
 msgid ""
 "\n"
@@ -37,22 +37,22 @@ msgstr "DBI Execution failed: %s"
 msgid " execution skipped while aborting"
 msgstr ""
 
-#: ../zypp/solver/detail/SATResolver.cc:941
+#: ../zypp/solver/detail/SATResolver.cc:940
 #, fuzzy, c-format
 msgid "%s conflicts with %s provided by %s"
 msgstr "%s %sஉடன் முரண்படுகிறது"
 
-#: ../zypp/solver/detail/SATResolver.cc:927
+#: ../zypp/solver/detail/SATResolver.cc:926
 #, fuzzy, c-format
 msgid "%s is not installable"
 msgstr "நிறுவப்படவில்லை"
 
-#: ../zypp/solver/detail/SATResolver.cc:946
+#: ../zypp/solver/detail/SATResolver.cc:945
 #, fuzzy, c-format
 msgid "%s obsoletes %s provided by %s"
 msgstr "%s %sஐ வழக்கற்றதாக்குகிறது"
 
-#: ../zypp/solver/detail/SATResolver.cc:982
+#: ../zypp/solver/detail/SATResolver.cc:981
 #, c-format
 msgid "%s requires %s, but this requirement cannot be provided"
 msgstr ""
@@ -300,7 +300,7 @@ msgid "Austronesian (Other)"
 msgstr "ஆஸ்ட்ரோனேசியன் (மற்றவை)"
 
 #. !\todo add comma to the message for the next release
-#: ../zypp/media/MediaCurl.cc:1660
+#: ../zypp/media/MediaCurl.cc:1689
 #, c-format
 msgid "Authentication required for '%s'"
 msgstr ""
@@ -776,7 +776,7 @@ msgstr "சமாரோ"
 
 #. Translator: %s = name of an rpm package. A list of diffs follows
 #. this message.
-#: ../zypp/target/rpm/RpmDb.cc:1898
+#: ../zypp/target/rpm/RpmDb.cc:1899
 #, c-format
 msgid "Changed configuration files for %s:"
 msgstr "%s:க்காக உள்ளமைத்தல் கோப்புகள் மாற்றப்பட்டுள்ளன"
@@ -1260,7 +1260,7 @@ msgstr "இவான்டோ"
 msgid "Failed to delete key."
 msgstr "Failed to parse: %s."
 
-#: ../zypp/target/rpm/RpmDb.cc:1066
+#: ../zypp/target/rpm/RpmDb.cc:1067
 #, c-format
 msgid "Failed to import public key from file %s: %s"
 msgstr ""
@@ -1270,7 +1270,7 @@ msgstr ""
 msgid "Failed to mount %s on %s"
 msgstr "%s - %s திறக்க முடியவில்லை\n"
 
-#: ../zypp/target/rpm/RpmDb.cc:1143
+#: ../zypp/target/rpm/RpmDb.cc:1144
 #, fuzzy, c-format
 msgid "Failed to remove public key %s: %s"
 msgstr "பொது விசையை பெற முடியவில்லை."
@@ -1691,7 +1691,7 @@ msgstr "ஹால்வால்யூம் துவக்கப்படவ�
 msgid "Hausa"
 msgstr "ஹெளசா"
 
-#: ../zypp/solver/detail/SATResolver.cc:923
+#: ../zypp/solver/detail/SATResolver.cc:922
 msgid "Have you enabled all requested repositories?"
 msgstr ""
 
@@ -1856,7 +1856,7 @@ msgstr "­ó§¾¡É£º¢Âý"
 msgid "Ingush"
 msgstr "இங்குஷ்"
 
-#: ../zypp/target/TargetImpl.cc:603 ../zypp/target/TargetImpl.cc:843
+#: ../zypp/target/TargetImpl.cc:603 ../zypp/target/TargetImpl.cc:874
 msgid "Installation has been aborted as directed."
 msgstr "குறிப்பிட்டுள்ளபடி நிறுவுதல் இடையில் நிறுத்தப்பட்டது."
 
@@ -3174,8 +3174,8 @@ msgstr "இந்த யூஆர்எல்லுக்கு வினா வ
 
 #. TranslatorExplanation after semicolon is error message
 #. TranslatorExplanation the colon is followed by an error message
-#: ../zypp/target/rpm/RpmDb.cc:892 ../zypp/target/rpm/RpmDb.cc:2081
-#: ../zypp/target/rpm/RpmDb.cc:2217
+#: ../zypp/target/rpm/RpmDb.cc:893 ../zypp/target/rpm/RpmDb.cc:2087
+#: ../zypp/target/rpm/RpmDb.cc:2223
 #, fuzzy
 msgid "RPM failed: "
 msgstr "தோல்வியுற்றது"
@@ -3509,7 +3509,7 @@ msgstr "Ý¼¡ý"
 msgid "Solomon Islands"
 msgstr "«Â÷Ä¡óÐ"
 
-#: ../zypp/solver/detail/SATResolver.cc:950
+#: ../zypp/solver/detail/SATResolver.cc:949
 #, fuzzy, c-format
 msgid "Solvable %s conflicts with %s provided by itself"
 msgstr "%s %sஉடன் முரண்படுகிறது"
@@ -3763,8 +3763,8 @@ msgstr ""
 msgid "This action is being run by another program already."
 msgstr ""
 
-#: ../zypp/solver/detail/SATResolver.cc:1131
-#: ../zypp/solver/detail/SATResolver.cc:1149
+#: ../zypp/solver/detail/SATResolver.cc:1130
+#: ../zypp/solver/detail/SATResolver.cc:1148
 #, fuzzy
 msgid "This request will break your system!"
 msgstr "கோரிக்கை ஏற்கனவே உள்ளது."
@@ -3997,7 +3997,7 @@ msgstr "³ì¸¢Â «¦ÁÃ¢ì¸ ¿¡Î¸û"
 msgid "United States Minor Outlying Islands"
 msgstr "³ì¸¢Â «¦ÁÃ¢ì¸ ¿¡Î¸û"
 
-#: ../zypp/target/TargetImpl.cc:877
+#: ../zypp/target/TargetImpl.cc:908
 #, fuzzy
 msgid "Unknown Distribution"
 msgstr "தெரியாத பட்டியல் விருப்பத்தேர்வு"
@@ -4276,78 +4276,78 @@ msgstr "அப்ளைடெல்டாஆர்பிஎம் சோத�
 msgid "applydeltarpm failed."
 msgstr "அப்ளைடெல்டாஆர்பிஎம் தோல்வியுற்றது."
 
-#: ../zypp/solver/detail/SATResolver.cc:1207
+#: ../zypp/solver/detail/SATResolver.cc:1219
 #, c-format
 msgid "architecture change of %s to %s"
 msgstr ""
 
-#: ../zypp/solver/detail/SATResolver.cc:936
+#: ../zypp/solver/detail/SATResolver.cc:935
 #, fuzzy, c-format
 msgid "cannot install both %s and %s"
 msgstr "%sஐ நிறுவ முடியவில்லை"
 
-#: ../zypp/solver/detail/SATResolver.cc:916
+#: ../zypp/solver/detail/SATResolver.cc:915
 #, fuzzy
 msgid "conflicting requests"
 msgstr "இந்த இணைப்புக்கான கோரிக்கை: "
 
-#: ../zypp/target/rpm/RpmDb.cc:2369
+#: ../zypp/target/rpm/RpmDb.cc:2375
 #, c-format
 msgid "created backup %s"
 msgstr "%s மறுபிரதி உருவாக்கப்பட்டது"
 
-#: ../zypp/solver/detail/SATResolver.cc:1235
+#: ../zypp/solver/detail/SATResolver.cc:1247
 #, fuzzy, c-format
 msgid "deinstallation of %s"
 msgstr "நிறுவுதல்"
 
-#: ../zypp/solver/detail/SATResolver.cc:984
+#: ../zypp/solver/detail/SATResolver.cc:983
 #, fuzzy
 msgid "deleted providers: "
 msgstr "%s யாரும் அளிப்பதில்லை"
 
-#: ../zypp/solver/detail/SATResolver.cc:1152
+#: ../zypp/solver/detail/SATResolver.cc:1151
 #, fuzzy, c-format
 msgid "do not ask to delete all solvables providing %s"
 msgstr "தொடர்புள்ள தீர்வுகளை நிறுவவோ அல்லது நீக்கவோ வேண்டாம்"
 
-#: ../zypp/solver/detail/SATResolver.cc:1134
+#: ../zypp/solver/detail/SATResolver.cc:1133
 #, fuzzy, c-format
 msgid "do not ask to install a solvable providing %s"
 msgstr "%sக்கு நிறுவக்கூடிய அளிப்பவர்கள் இல்லை"
 
-#: ../zypp/solver/detail/SATResolver.cc:1079
+#: ../zypp/solver/detail/SATResolver.cc:1078
 #, fuzzy, c-format
 msgid "do not forbid installation of %s"
 msgstr "%sஐ நிறுவ வேண்டாம்"
 
-#: ../zypp/solver/detail/SATResolver.cc:1058
-#: ../zypp/solver/detail/SATResolver.cc:1096
+#: ../zypp/solver/detail/SATResolver.cc:1057
+#: ../zypp/solver/detail/SATResolver.cc:1095
 #, c-format
 msgid "do not install %s"
 msgstr "%sஐ நிறுவ வேண்டாம்"
 
-#: ../zypp/solver/detail/SATResolver.cc:1165
+#: ../zypp/solver/detail/SATResolver.cc:1164
 #, c-format
 msgid "do not install most recent version of %s"
 msgstr ""
 
-#: ../zypp/solver/detail/SATResolver.cc:1053
+#: ../zypp/solver/detail/SATResolver.cc:1052
 #, fuzzy, c-format
 msgid "do not keep %s installed"
 msgstr "நிறுவப்படவில்லை"
 
-#: ../zypp/solver/detail/SATResolver.cc:1199
+#: ../zypp/solver/detail/SATResolver.cc:1211
 #, fuzzy, c-format
 msgid "downgrade of %s to %s"
 msgstr "%sலிருந்து %s தகவலிறக்கம் செய்யப்பட்டது"
 
-#: ../zypp/solver/detail/SATResolver.cc:1132
-#: ../zypp/solver/detail/SATResolver.cc:1150
+#: ../zypp/solver/detail/SATResolver.cc:1131
+#: ../zypp/solver/detail/SATResolver.cc:1149
 msgid "ignore the warning of a broken system"
 msgstr ""
 
-#: ../zypp/solver/detail/SATResolver.cc:1215
+#: ../zypp/solver/detail/SATResolver.cc:1227
 #, c-format
 msgid ""
 "install %s (with vendor change)\n"
@@ -4360,8 +4360,10 @@ msgstr ""
 msgid "invalid"
 msgstr ""
 
-#: ../zypp/solver/detail/SATResolver.cc:1074
-#: ../zypp/solver/detail/SATResolver.cc:1117
+#. for solver reason: NOT weak lock.
+#: ../zypp/solver/detail/SATResolver.cc:1073
+#: ../zypp/solver/detail/SATResolver.cc:1116
+#: ../zypp/solver/detail/SATResolver.cc:1193
 #, c-format
 msgid "keep %s"
 msgstr "%sஐ வைத்துக் கொள்ளவும்"
@@ -4374,34 +4376,34 @@ msgstr "libhal_ctx_new: ஆல் லைபால் உள்ளடக்கத
 msgid "libhal_set_dbus_connection: Can't set dbus connection"
 msgstr "libhal_set_dbus_connection: ஆல் டிபஸ் இணைப்பை அமைக்க இயலவில்லை"
 
-#: ../zypp/solver/detail/SATResolver.cc:931
+#: ../zypp/solver/detail/SATResolver.cc:930
 #, fuzzy, c-format
 msgid "nothing provides %s needed by %s"
 msgstr "%s, %sக்கு தேவைப்படுகிறது"
 
-#: ../zypp/solver/detail/SATResolver.cc:922
+#: ../zypp/solver/detail/SATResolver.cc:921
 #, fuzzy, c-format
 msgid "nothing provides requested %s"
 msgstr "%s யாரும் அளிப்பதில்லை"
 
-#: ../zypp/solver/detail/SATResolver.cc:913
+#: ../zypp/solver/detail/SATResolver.cc:912
 #, fuzzy, c-format
 msgid "problem with installed package %s"
 msgstr "பேக்கேஜ்களின் நிறுவுதலை நீக்குவதற்கான ஆணை"
 
-#: ../zypp/solver/detail/SATResolver.cc:1223
+#: ../zypp/solver/detail/SATResolver.cc:1235
 #, c-format
 msgid "replacement of %s with %s"
 msgstr ""
 
 #. %s = filenames
-#: ../zypp/target/rpm/RpmDb.cc:2067
+#: ../zypp/target/rpm/RpmDb.cc:2073
 #, fuzzy, c-format
 msgid "rpm created %s as %s, but it was impossible to determine the difference"
 msgstr "%s ஆக ஆர்பிஎம் உருவாf;கப்பட்டுள்ளது, ஆனால் வேறுபாட்டை நிர்ணயிக்க முடியவில்லை"
 
 #. %s = filenames
-#: ../zypp/target/rpm/RpmDb.cc:2069
+#: ../zypp/target/rpm/RpmDb.cc:2075
 #, fuzzy, c-format
 msgid ""
 "rpm created %s as %s.\n"
@@ -4411,13 +4413,13 @@ msgstr ""
 "வேறுபாடுகளின் முதல் 25 வரிகள் இங்குள்ளன:\n"
 
 #. %s = filenames
-#: ../zypp/target/rpm/RpmDb.cc:2062
+#: ../zypp/target/rpm/RpmDb.cc:2068
 #, fuzzy, c-format
 msgid "rpm saved %s as %s, but it was impossible to determine the difference"
 msgstr "%s ஆக ஆர்பிஎம் சேமிக்கப்பட்டுள்ளது, ஆனால் வேறுபாட்டை நிர்ணயிக்க முடியவில்லை"
 
 #. %s = filenames
-#: ../zypp/target/rpm/RpmDb.cc:2064
+#: ../zypp/target/rpm/RpmDb.cc:2070
 #, fuzzy, c-format
 msgid ""
 "rpm saved %s as %s.\n"
@@ -4426,12 +4428,12 @@ msgstr ""
 "%s ஆக ஆர்பிஎம் சேமிக்கப்பட்டுள்ளது.\n"
 "வேறுபாடுகளின் முதல் 25 வரிகள் இங்குள்ளன:\n"
 
-#: ../zypp/solver/detail/SATResolver.cc:919
+#: ../zypp/solver/detail/SATResolver.cc:918
 #, fuzzy
 msgid "some dependency problem"
 msgstr "சார்புத்தன்மை பிரச்னைகள் காரணமாக %s ஐ நிறுவ இயலவில்லை"
 
-#: ../zypp/solver/detail/SATResolver.cc:996
+#: ../zypp/solver/detail/SATResolver.cc:995
 #, fuzzy
 msgid "uninstallable providers: "
 msgstr "%sக்கு நிறுவக்கூடிய அளிப்பவர்கள் இல்லை"

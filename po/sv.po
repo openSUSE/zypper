@@ -1,3 +1,4 @@
+# translation of zypp.sv.po to Swedish
 # translation of zypp.po to
 # Swedish message file for YaST2 (@memory@).
 # Copyright (C) 2005 SUSE Linux Products GmbH.
@@ -9,64 +10,63 @@
 # Mattias Newzella <newzella@linux.se>, 2007.
 msgid ""
 msgstr ""
-"Project-Id-Version: zypp\n"
+"Project-Id-Version: zypp.sv\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-10-24 10:45+0200\n"
-"PO-Revision-Date: 2007-09-08 11:23+0200\n"
-"Last-Translator: Mattias Newzella <newzella@linux.se>\n"
-"Language-Team:  <sv@li.org>\n"
+"POT-Creation-Date: 2008-11-06 18:07+0100\n"
+"PO-Revision-Date: 2008-11-06 22:12+0100\n"
+"Last-Translator: \n"
+"Language-Team: Swedish <sv@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Generator: KBabel 1.11.4\n"
 
-#: ../zypp/solver/detail/SATResolver.cc:994
-#, fuzzy
+#: ../zypp/solver/detail/SATResolver.cc:993
 msgid ""
 "\n"
 "uninstallable providers: "
-msgstr "Det finns inga installerbara leverantörer för %s"
+msgstr ""
+"\n"
+"oinstallerbar leverantör: "
 
 #: ../zypp/media/MediaException.cc:266
 #, c-format
 msgid " SSL certificate problem, verify that the CA cert is OK for '%s'."
-msgstr ""
+msgstr "SSL-certifikatsproblem, kontrollera att CA-certifikatet för '%s' är OK."
 
 #: ../zypp/target/TargetImpl.cc:85
-#, fuzzy
 msgid " executed"
-msgstr "Kör"
+msgstr " kördes"
 
 # %s is either BOOTP or DHCP
 #: ../zypp/target/TargetImpl.cc:107
-#, fuzzy
 msgid " execution failed"
-msgstr "DBI-körning misslyckades: %s"
+msgstr " körningen misslyckades"
 
 #: ../zypp/target/TargetImpl.cc:193
 msgid " execution skipped while aborting"
-msgstr ""
+msgstr " körning hoppades över under avbrytning"
 
-#: ../zypp/solver/detail/SATResolver.cc:941
-#, fuzzy, c-format
+#: ../zypp/solver/detail/SATResolver.cc:940
+#, c-format
 msgid "%s conflicts with %s provided by %s"
-msgstr "%s är i konflikt med %s"
+msgstr "%s är i konflikt med %s som tillhandahålls av %s"
 
-#: ../zypp/solver/detail/SATResolver.cc:927
-#, fuzzy, c-format
+#: ../zypp/solver/detail/SATResolver.cc:926
+#, c-format
 msgid "%s is not installable"
-msgstr "inte installerad."
+msgstr "%s är inte installerbar"
 
-#: ../zypp/solver/detail/SATResolver.cc:946
-#, fuzzy, c-format
+#: ../zypp/solver/detail/SATResolver.cc:945
+#, c-format
 msgid "%s obsoletes %s provided by %s"
-msgstr "%s gör %s inaktuell"
+msgstr "%s gör %s tillhandahållen av %s inaktuell"
 
-#: ../zypp/solver/detail/SATResolver.cc:982
+#: ../zypp/solver/detail/SATResolver.cc:981
 #, c-format
 msgid "%s requires %s, but this requirement cannot be provided"
-msgstr ""
+msgstr "%s behöver %s, men det behovet kan inte uppfyllas"
 
 #. language code: abk ab
 #: ../zypp/LanguageCode.cc:240
@@ -92,11 +92,11 @@ msgstr "Adangme"
 #: ../zypp/RepoManager.cc:1201
 #, c-format
 msgid "Adding repository '%s'"
-msgstr "Lägger till arkiv \"%s\""
+msgstr "Lägger till förrådet \"%s\""
 
 #: ../zypp/VendorSupportOptions.cc:29
 msgid "Additional Customer Contract Necessary"
-msgstr ""
+msgstr "Ytterligare kundkontrakt nödvändigt"
 
 #. language code: ady
 #: ../zypp/LanguageCode.cc:248
@@ -193,7 +193,7 @@ msgstr "Amhariska"
 
 #: ../zypp/VendorSupportOptions.cc:54
 msgid "An additional customer contract is necessary for getting support."
-msgstr ""
+msgstr "Ytterligare ett kundkontrakt behövs för att få support"
 
 # AD
 #: ../zypp/CountryCode.cc:224
@@ -323,7 +323,7 @@ msgid "Austronesian (Other)"
 msgstr "Austronesiska språk (övriga)"
 
 #. !\todo add comma to the message for the next release
-#: ../zypp/media/MediaCurl.cc:1660
+#: ../zypp/media/MediaCurl.cc:1689
 #, c-format
 msgid "Authentication required for '%s'"
 msgstr "Autentisering krävs för \"%s\""
@@ -362,11 +362,11 @@ msgstr "Azerbajdzjanska"
 #: ../zypp/media/MediaException.cc:47
 #, c-format
 msgid "Bad file name: %s"
-msgstr ""
+msgstr "Ogiltigt filnamn: %s"
 
 #: ../zypp/media/MediaException.cc:77
 msgid "Bad media attach point"
-msgstr ""
+msgstr "Ogiltigt media på anslutningspunkten"
 
 # BS
 #. :BRA:076:
@@ -600,7 +600,7 @@ msgstr "Buginesiska"
 #: ../zypp/RepoManager.cc:969
 #, c-format
 msgid "Building repository '%s' cache"
-msgstr "Bygger cache för arkiv \"%s\""
+msgstr "Bygger cache för förrådet \"%s\""
 
 #. :BFA:854:
 #: ../zypp/CountryCode.cc:246
@@ -653,9 +653,8 @@ msgid "Cameroon"
 msgstr "Kamerun"
 
 #: ../zypp/sat/detail/PoolImpl.cc:156
-#, fuzzy
 msgid "Can not create sat-pool."
-msgstr "Det gick inte att skapa filen."
+msgstr "Kan inte skapa sat-pool"
 
 #: ../zypp/thread/Mutex.cc:77
 msgid "Can't acquire the mutex lock"
@@ -664,23 +663,23 @@ msgstr "Det går inte att hämta mutex-låset"
 #: ../zypp/ExternalProgram.cc:301
 #, c-format
 msgid "Can't chdir to '/' inside chroot (%s)."
-msgstr ""
+msgstr "Kan inte chdir till '/' i en chroot (%s)."
 
 #: ../zypp/ExternalProgram.cc:294
 #, c-format
 msgid "Can't chroot to '%s' (%s)."
-msgstr ""
+msgstr "Kan inte chroot till '%s' (%s)"
 
 #. don't want to get here
 #: ../zypp/ExternalProgram.cc:315
 #, c-format
 msgid "Can't exec '%s' (%s)."
-msgstr ""
+msgstr "Kan inte köra '%s' (%s)."
 
 #: ../zypp/ExternalProgram.cc:323
-#, fuzzy, c-format
+#, c-format
 msgid "Can't fork (%s)."
-msgstr "Kan inte hitta %s."
+msgstr "Kan inte dela upp (%s)."
 
 #: ../zypp/thread/Mutex.cc:33
 msgid "Can't initialize mutex attributes"
@@ -691,24 +690,24 @@ msgid "Can't initialize recursive mutex"
 msgstr "Det går inte att initiera rekursivt mutex"
 
 #: ../zypp/base/InterProcessMutex.cc:79
-#, fuzzy, c-format
+#, c-format
 msgid "Can't open lock file: %s"
-msgstr "Det går inte att öppna filen %1."
+msgstr "Kan inte öppna låsfilen: %s"
 
 #: ../zypp/ExternalProgram.cc:230
-#, fuzzy, c-format
+#, c-format
 msgid "Can't open pipe (%s)."
-msgstr "Det går inte att öppna filen %1."
+msgstr "Det går inte att öppna rörledningen (%s)."
 
 #: ../zypp/ExternalProgram.cc:219
-#, fuzzy, c-format
+#, c-format
 msgid "Can't open pty (%s)."
-msgstr "Kan inte öppna fil: %s."
+msgstr "Kan inte öppna PTY (%s)"
 
 #: ../zypp/repo/RepoProvideFile.cc:216
-#, fuzzy, c-format
+#, c-format
 msgid "Can't provide file '%s' from repository '%s'"
-msgstr "Kan inte tillhandahålla fil %s från arkiv %s"
+msgstr "Kan inte tillhandahålla filen %s från förrådet '%s'"
 
 #: ../zypp/thread/Mutex.cc:87
 msgid "Can't release the mutex lock"
@@ -726,17 +725,16 @@ msgstr "Kanada"
 #: ../zypp/KeyRing.cc:277
 #, c-format
 msgid "Cannot create public key %s from %s keyring to file %s"
-msgstr ""
+msgstr "Kan inte skapa publik nyckel %s från %s nyckelring till filen %s"
 
 #: ../zypp/media/MediaException.cc:234
-#, fuzzy
 msgid "Cannot eject any media"
-msgstr "Kan inte hitta några scheman."
+msgstr "Kan inte mata ut media"
 
 #: ../zypp/media/MediaException.cc:236
-#, fuzzy, c-format
+#, c-format
 msgid "Cannot eject media '%s'"
-msgstr "Det går inte att öppna skrivbordsobjektet %s"
+msgstr "Kan inte mata ut media '%s'"
 
 #: ../zypp/media/MediaException.cc:273
 #, c-format
@@ -819,7 +817,7 @@ msgstr "Chamorro"
 
 #. Translator: %s = name of an rpm package. A list of diffs follows
 #. this message.
-#: ../zypp/target/rpm/RpmDb.cc:1898
+#: ../zypp/target/rpm/RpmDb.cc:1899
 #, c-format
 msgid "Changed configuration files for %s:"
 msgstr "Inställningsfiler har ändrats för %s:"
@@ -1316,7 +1314,7 @@ msgstr "Ewondo"
 msgid "Failed to delete key."
 msgstr "Det gick inte att starta VM."
 
-#: ../zypp/target/rpm/RpmDb.cc:1066
+#: ../zypp/target/rpm/RpmDb.cc:1067
 #, c-format
 msgid "Failed to import public key from file %s: %s"
 msgstr ""
@@ -1326,7 +1324,7 @@ msgstr ""
 msgid "Failed to mount %s on %s"
 msgstr "Kunde inte öppna %s - %s\n"
 
-#: ../zypp/target/rpm/RpmDb.cc:1143
+#: ../zypp/target/rpm/RpmDb.cc:1144
 #, fuzzy, c-format
 msgid "Failed to remove public key %s: %s"
 msgstr "Det gick inte att hämta den allmänna nyckeln."
@@ -1762,7 +1760,7 @@ msgstr "HalVolume har inte initierats"
 msgid "Hausa"
 msgstr "Haussa"
 
-#: ../zypp/solver/detail/SATResolver.cc:923
+#: ../zypp/solver/detail/SATResolver.cc:922
 msgid "Have you enabled all requested repositories?"
 msgstr ""
 
@@ -1934,7 +1932,7 @@ msgstr "Indonesiska"
 msgid "Ingush"
 msgstr "Ingusj"
 
-#: ../zypp/target/TargetImpl.cc:603 ../zypp/target/TargetImpl.cc:843
+#: ../zypp/target/TargetImpl.cc:603 ../zypp/target/TargetImpl.cc:874
 msgid "Installation has been aborted as directed."
 msgstr "Installationen har avbrutits enligt instruktionerna."
 
@@ -2967,7 +2965,7 @@ msgstr "Ingen kod"
 
 #: ../zypp/repo/RepoProvideFile.cc:222
 msgid "No url in repository."
-msgstr "Ingen URL i arkiv."
+msgstr "Ingen URL i förrådet"
 
 # Libris vill ha det så
 #. language code: nog
@@ -3317,8 +3315,8 @@ msgstr "Analysering av frågesträng stöds inte för den här URL-adressen"
 
 #. TranslatorExplanation after semicolon is error message
 #. TranslatorExplanation the colon is followed by an error message
-#: ../zypp/target/rpm/RpmDb.cc:892 ../zypp/target/rpm/RpmDb.cc:2081
-#: ../zypp/target/rpm/RpmDb.cc:2217
+#: ../zypp/target/rpm/RpmDb.cc:893 ../zypp/target/rpm/RpmDb.cc:2087
+#: ../zypp/target/rpm/RpmDb.cc:2223
 #, fuzzy
 msgid "RPM failed: "
 msgstr "misslyckades"
@@ -3350,7 +3348,7 @@ msgstr "Relativa sökvägar tillåts inte om det finns behörighet"
 #: ../zypp/RepoManager.cc:1331
 #, c-format
 msgid "Removing repository '%s'"
-msgstr "Tar bort arkiv \"%s\""
+msgstr "Tar bort förrådet \"%s\""
 
 #: ../zypp/parser/RepoindexFileReader.cc:128
 #, fuzzy, c-format
@@ -3666,7 +3664,7 @@ msgstr "Sogdiska"
 msgid "Solomon Islands"
 msgstr "Salomonöarna"
 
-#: ../zypp/solver/detail/SATResolver.cc:950
+#: ../zypp/solver/detail/SATResolver.cc:949
 #, fuzzy, c-format
 msgid "Solvable %s conflicts with %s provided by itself"
 msgstr "%s är i konflikt med %s"
@@ -3931,8 +3929,8 @@ msgstr "Disken finns inte."
 msgid "This action is being run by another program already."
 msgstr ""
 
-#: ../zypp/solver/detail/SATResolver.cc:1131
-#: ../zypp/solver/detail/SATResolver.cc:1149
+#: ../zypp/solver/detail/SATResolver.cc:1130
+#: ../zypp/solver/detail/SATResolver.cc:1148
 #, fuzzy
 msgid "This request will break your system!"
 msgstr "Begäran finns redan."
@@ -4173,7 +4171,7 @@ msgstr "USA"
 msgid "United States Minor Outlying Islands"
 msgstr "USA:s avlägsna mindre öar"
 
-#: ../zypp/target/TargetImpl.cc:877
+#: ../zypp/target/TargetImpl.cc:908
 #, fuzzy
 msgid "Unknown Distribution"
 msgstr "Okänt alternativ för list"
@@ -4458,78 +4456,78 @@ msgstr "applydeltarpm-kontrollen misslyckades."
 msgid "applydeltarpm failed."
 msgstr "applydeltarpm misslyckades."
 
-#: ../zypp/solver/detail/SATResolver.cc:1207
+#: ../zypp/solver/detail/SATResolver.cc:1219
 #, c-format
 msgid "architecture change of %s to %s"
 msgstr ""
 
-#: ../zypp/solver/detail/SATResolver.cc:936
+#: ../zypp/solver/detail/SATResolver.cc:935
 #, fuzzy, c-format
 msgid "cannot install both %s and %s"
 msgstr "Det går inte att installera %s"
 
-#: ../zypp/solver/detail/SATResolver.cc:916
+#: ../zypp/solver/detail/SATResolver.cc:915
 #, fuzzy
 msgid "conflicting requests"
 msgstr "Anslutningsbegäran till"
 
-#: ../zypp/target/rpm/RpmDb.cc:2369
+#: ../zypp/target/rpm/RpmDb.cc:2375
 #, c-format
 msgid "created backup %s"
 msgstr "skapade säkerhetskopian %s"
 
-#: ../zypp/solver/detail/SATResolver.cc:1235
+#: ../zypp/solver/detail/SATResolver.cc:1247
 #, fuzzy, c-format
 msgid "deinstallation of %s"
 msgstr "Det gick inte att installera %s:"
 
-#: ../zypp/solver/detail/SATResolver.cc:984
+#: ../zypp/solver/detail/SATResolver.cc:983
 #, fuzzy
 msgid "deleted providers: "
 msgstr "Ingen tillhandahåller %s"
 
-#: ../zypp/solver/detail/SATResolver.cc:1152
+#: ../zypp/solver/detail/SATResolver.cc:1151
 #, fuzzy, c-format
 msgid "do not ask to delete all solvables providing %s"
 msgstr "Installera inte och ta inte bort resurser som berörs"
 
-#: ../zypp/solver/detail/SATResolver.cc:1134
+#: ../zypp/solver/detail/SATResolver.cc:1133
 #, fuzzy, c-format
 msgid "do not ask to install a solvable providing %s"
 msgstr "Det finns inga installerbara leverantörer för %s"
 
-#: ../zypp/solver/detail/SATResolver.cc:1079
+#: ../zypp/solver/detail/SATResolver.cc:1078
 #, fuzzy, c-format
 msgid "do not forbid installation of %s"
 msgstr "installera inte %s"
 
-#: ../zypp/solver/detail/SATResolver.cc:1058
-#: ../zypp/solver/detail/SATResolver.cc:1096
+#: ../zypp/solver/detail/SATResolver.cc:1057
+#: ../zypp/solver/detail/SATResolver.cc:1095
 #, c-format
 msgid "do not install %s"
 msgstr "installera inte %s"
 
-#: ../zypp/solver/detail/SATResolver.cc:1165
+#: ../zypp/solver/detail/SATResolver.cc:1164
 #, c-format
 msgid "do not install most recent version of %s"
 msgstr ""
 
-#: ../zypp/solver/detail/SATResolver.cc:1053
+#: ../zypp/solver/detail/SATResolver.cc:1052
 #, fuzzy, c-format
 msgid "do not keep %s installed"
 msgstr "inte installerad."
 
-#: ../zypp/solver/detail/SATResolver.cc:1199
+#: ../zypp/solver/detail/SATResolver.cc:1211
 #, fuzzy, c-format
 msgid "downgrade of %s to %s"
 msgstr "Uppdaterar %s till %s"
 
-#: ../zypp/solver/detail/SATResolver.cc:1132
-#: ../zypp/solver/detail/SATResolver.cc:1150
+#: ../zypp/solver/detail/SATResolver.cc:1131
+#: ../zypp/solver/detail/SATResolver.cc:1149
 msgid "ignore the warning of a broken system"
 msgstr ""
 
-#: ../zypp/solver/detail/SATResolver.cc:1215
+#: ../zypp/solver/detail/SATResolver.cc:1227
 #, c-format
 msgid ""
 "install %s (with vendor change)\n"
@@ -4542,8 +4540,10 @@ msgstr ""
 msgid "invalid"
 msgstr ""
 
-#: ../zypp/solver/detail/SATResolver.cc:1074
-#: ../zypp/solver/detail/SATResolver.cc:1117
+#. for solver reason: NOT weak lock.
+#: ../zypp/solver/detail/SATResolver.cc:1073
+#: ../zypp/solver/detail/SATResolver.cc:1116
+#: ../zypp/solver/detail/SATResolver.cc:1193
 #, c-format
 msgid "keep %s"
 msgstr "behåll %s"
@@ -4556,34 +4556,34 @@ msgstr "libhal_ctx_new: Det gick inte att skapa libhal-kontext"
 msgid "libhal_set_dbus_connection: Can't set dbus connection"
 msgstr "libhal_set_dbus_connection: Det gick inte att ange dbus-anslutningen"
 
-#: ../zypp/solver/detail/SATResolver.cc:931
+#: ../zypp/solver/detail/SATResolver.cc:930
 #, fuzzy, c-format
 msgid "nothing provides %s needed by %s"
 msgstr "%s behövs av %s"
 
-#: ../zypp/solver/detail/SATResolver.cc:922
+#: ../zypp/solver/detail/SATResolver.cc:921
 #, fuzzy, c-format
 msgid "nothing provides requested %s"
 msgstr "Ingen tillhandahåller %s"
 
-#: ../zypp/solver/detail/SATResolver.cc:913
+#: ../zypp/solver/detail/SATResolver.cc:912
 #, fuzzy, c-format
 msgid "problem with installed package %s"
 msgstr "Problem med att installera källpaket %s-%s:"
 
-#: ../zypp/solver/detail/SATResolver.cc:1223
+#: ../zypp/solver/detail/SATResolver.cc:1235
 #, c-format
 msgid "replacement of %s with %s"
 msgstr ""
 
 #. %s = filenames
-#: ../zypp/target/rpm/RpmDb.cc:2067
+#: ../zypp/target/rpm/RpmDb.cc:2073
 #, c-format
 msgid "rpm created %s as %s, but it was impossible to determine the difference"
 msgstr "rpm skapade %s som %s, men det gick inte att avgöra skillnaden"
 
 #. %s = filenames
-#: ../zypp/target/rpm/RpmDb.cc:2069
+#: ../zypp/target/rpm/RpmDb.cc:2075
 #, c-format
 msgid ""
 "rpm created %s as %s.\n"
@@ -4593,13 +4593,13 @@ msgstr ""
 "Här visas de första 25 raderna med skillnader:\n"
 
 #. %s = filenames
-#: ../zypp/target/rpm/RpmDb.cc:2062
+#: ../zypp/target/rpm/RpmDb.cc:2068
 #, c-format
 msgid "rpm saved %s as %s, but it was impossible to determine the difference"
 msgstr "rpm sparade %s som %s, men det gick inte att avgöra skillnaden"
 
 #. %s = filenames
-#: ../zypp/target/rpm/RpmDb.cc:2064
+#: ../zypp/target/rpm/RpmDb.cc:2070
 #, c-format
 msgid ""
 "rpm saved %s as %s.\n"
@@ -4608,12 +4608,12 @@ msgstr ""
 "rpm sparade %s som %s.\n"
 "Här visas de första 25 raderna med skillnader:\n"
 
-#: ../zypp/solver/detail/SATResolver.cc:919
+#: ../zypp/solver/detail/SATResolver.cc:918
 #, fuzzy
 msgid "some dependency problem"
 msgstr "Kan inte installera %s på grund av beroendeproblem"
 
-#: ../zypp/solver/detail/SATResolver.cc:996
+#: ../zypp/solver/detail/SATResolver.cc:995
 #, fuzzy
 msgid "uninstallable providers: "
 msgstr "Det finns inga installerbara leverantörer för %s"
@@ -4626,370 +4626,3 @@ msgstr "okänd"
 #, fuzzy
 msgid "unsupported"
 msgstr " - stöds inte"
-
-#~ msgid "%s remove failed"
-#~ msgstr "Det gick inte att ta bort %s"
-
-#~ msgid "Additional rpm output:"
-#~ msgstr "Ytterligare rpm-utmatning:"
-
-#~ msgid "Invalid user name or password."
-#~ msgstr "Ogiltigt användarnamn eller lösenord."
-
-#~ msgid "rpm output:"
-#~ msgstr "rpm-utmatning:"
-
-#~ msgid "%s install failed"
-#~ msgstr "Det gick inte att installera %s"
-
-#~ msgid "%s installed ok"
-#~ msgstr "%s har installerats"
-
-#~ msgid "%s remove ok"
-#~ msgstr "%s borttagen OK"
-
-#~ msgid "%s provides this dependency, but would change the architecture of the installed item"
-#~ msgstr "%s tillhandahåller detta beroende, men skulle förändra arkitekturen för det installerade objektet"
-
-#~ msgid "%s provides this dependency, but would change the vendor of the installed item"
-#~ msgstr "%s tillhandahåller detta beroende, men skulle förändra leverantören för det installerade objektet"
-
-#~ msgid "Do not install or delete the resolvables concerned"
-#~ msgstr "Installera inte och ta inte bort resurser som berörs"
-
-#~ msgid "Ignore that %s is already set to install"
-#~ msgstr "Ignorera att %s redan har angetts för installation"
-
-#~ msgid "Ignore the obsolete %s in %s"
-#~ msgstr "Ignorera det inaktuella %s i %s"
-
-#~ msgid "Ignore this conflict of %s"
-#~ msgstr "Ignorera den här konflikten för %s"
-
-#~ msgid "Ignore this requirement just here"
-#~ msgstr "Ignorera det här kravet här"
-
-#~ msgid "Install %s although it would change the architecture"
-#~ msgstr "Installera %s trots att det kommer att ändra arkitekturen"
-
-#~ msgid "Install %s although it would change the vendor"
-#~ msgstr "Installera %s trots att det kommer att ändra leverantören"
-
-#~ msgid "Install missing resolvables"
-#~ msgstr "Installera resurser som saknas"
-
-#~ msgid "Keep resolvables"
-#~ msgstr "Behåll resurser"
-
-#~ msgid "Unlock these resolvables"
-#~ msgstr "Lås upp dessa resurser"
-
-#~ msgid "delete %s"
-#~ msgstr "ta bort %s"
-
-#~ msgid "install %s"
-#~ msgstr "installera %s"
-
-#~ msgid "unlock %s"
-#~ msgstr "lås upp %s"
-
-#~ msgid "unlock all resolvables"
-#~ msgstr "lås upp alla resurser"
-
-#, fuzzy
-#~ msgid "Can't open solv-file: "
-#~ msgstr "Det går inte att öppna filen %1."
-
-#, fuzzy
-#~ msgid "Error reading solv-file: "
-#~ msgstr "Fel vid läsning av arkiv:"
-
-#~ msgid "Path Parameter parsing not supported for this URL"
-#~ msgstr "Analysering av sökvägsparameter stöds inte för den här URL-adressen"
-
-#~ msgid "Path parameter parsing not supported for this URL"
-#~ msgstr "Analysering av sökvägsparameter stöds inte för den här URL-adressen"
-
-#~ msgid "Reading '%s' repository cache"
-#~ msgstr "Läser \"%s\" arkivcache"
-
-#~ msgid "Cleaning repository '%s' cache"
-#~ msgstr "Rensar arkivcache \"%s\""
-
-#~ msgid "Reading repository '%s' cache"
-#~ msgstr "Läser cache för arkiv \"%s\""
-
-#~ msgid "Software management is already running."
-#~ msgstr "Programvaruhantering körs redan."
-
-#~ msgid "%s is replaced by %s"
-#~ msgstr "%s ersätts av %s"
-
-#~ msgid "%s replaced by %s"
-#~ msgstr "%s ersatt av %s"
-
-#~ msgid "%s will be deleted by the user.\n"
-#~ msgstr "%s kommer att tas bort av användaren.\n"
-
-#~ msgid "%s will be installed by the user.\n"
-#~ msgstr "%s kommer att installeras av användaren.\n"
-
-#~ msgid "No valid solution found within %d seconds"
-#~ msgstr "Ingen giltig lösning hittades inom %d sekunder"
-
-#~ msgid "Invalid information"
-#~ msgstr "Ogiltig information"
-
-#~ msgid "%s is needed by other resolvables"
-#~ msgstr "%s behövs av andra resurser"
-
-#~ msgid ""
-#~ "%s is needed by:\n"
-#~ "%s"
-#~ msgstr ""
-#~ "%s krävs av:\n"
-#~ "%s"
-
-#~ msgid "%s conflicts with other resolvables"
-#~ msgstr "%s är i konflikt med andra resurser"
-
-#~ msgid ""
-#~ "%s conflicts with:\n"
-#~ "%s"
-#~ msgstr ""
-#~ "%s är i konflikt med:\n"
-#~ "%s"
-
-#~ msgid "%s obsoletes other resolvables"
-#~ msgstr "%s gör andra resurser inaktuella"
-
-#~ msgid "%s obsoletes:%s"
-#~ msgstr "%s gör %s inaktuell"
-
-#~ msgid ""
-#~ "\n"
-#~ "These resolvables will be deleted from the system."
-#~ msgstr ""
-#~ "\n"
-#~ "Dessa resurser tas bort från systemet."
-
-#~ msgid "%s depends on other resolvables"
-#~ msgstr "%s beror på andra resurser"
-
-#~ msgid "%s depends on %s"
-#~ msgstr "%s är beroende av %s"
-
-#~ msgid "%s depends on:%s"
-#~ msgstr "%s är beroende av: %s"
-
-#~ msgid "Child of"
-#~ msgstr "Barn till"
-
-#~ msgid ""
-#~ "\n"
-#~ "There is no resource available which supports this requirement."
-#~ msgstr ""
-#~ "\n"
-#~ "Det finns ingen resurs tillgänglig vilken stödjer det här kravet."
-
-#~ msgid "Due to the problems described above/below, this resolution will not solve all dependencies"
-#~ msgstr "På grund av problemen som beskrivs ovan/nedan, löser inte den här resursen alla beroenden"
-
-#~ msgid "Cannot install %s, because it is conflicting with %s"
-#~ msgstr "Kan inte installera %s eftersom den är i konflikt med %s"
-
-#~ msgid "%s is not installed and has been marked as uninstallable"
-#~ msgstr "%s har inte installerats och har markerats som avinstallerbar"
-
-#~ msgid "%s has unfulfilled requirements"
-#~ msgstr "%s har ouppfyllda krav"
-
-#~ msgid "%s has missing dependencies"
-#~ msgstr "%s har beroenden som saknas"
-
-#~ msgid "%s cannot be installed due to missing dependencies"
-#~ msgstr "%s kan inte installeras på grund av att beroenden saknas"
-
-#~ msgid "%s fulfills dependencies of %s but will be uninstalled"
-#~ msgstr "%s uppfyller beroenden för %s men kommer att avinstalleras"
-
-#~ msgid "%s fulfills dependencies of %s but will be kept on your system"
-#~ msgstr "%s uppfyller beroenden för %s men kommer att lämnas kvar på systemet"
-
-#~ msgid "No need to install %s"
-#~ msgstr "%s behöver inte installeras"
-
-#~ msgid "Cannot install %s to fulfill the dependencies of %s"
-#~ msgstr "Det går inte att installera %s så att beroendena för %s uppfylls"
-
-#~ msgid "Cannot install %s to fulfil the dependencies of %s"
-#~ msgstr "Det går inte att installera %s så att beroendena för %s uppfylls"
-
-#~ msgid "%s will not be uninstalled, because it is still required"
-#~ msgstr "%s kommer inte att avinstalleras eftersom den fortfarande krävs"
-
-#~ msgid "%s obsoletes %s. But %s cannot be deleted, because it is locked."
-#~ msgstr "%s gör %s inaktuell. Det går dock inte att ta bort %s eftersom det är låst."
-
-#~ msgid "Cannot install %s, because it is conflicting"
-#~ msgstr "Kan inte installera %s eftersom det är i konflikt"
-
-#~ msgid "%s is uninstallable due to conflicts with %s"
-#~ msgstr "%s är avinstallerbart på grund av konflikter med %s"
-
-#~ msgid "Requirememt %s cannot be fulfilled."
-#~ msgstr "Kravet %s kan inte uppfyllas."
-
-#~ msgid "for requiring %s for %s when upgrading %s"
-#~ msgstr "för krav av %s för %s när %s uppgraderas"
-
-#~ msgid "%s is lacking the requirement %s"
-#~ msgstr "%s saknar kravet %s"
-
-#~ msgid ", Action: "
-#~ msgstr ", Åtgärd:"
-
-#~ msgid ", Trigger: "
-#~ msgstr ", Utlösare: "
-
-#~ msgid "package"
-#~ msgstr "paket"
-
-#~ msgid "selection"
-#~ msgstr "val"
-
-#~ msgid "pattern"
-#~ msgstr "mönster"
-
-#~ msgid "product"
-#~ msgstr "produkt"
-
-#~ msgid "patch"
-#~ msgstr "programfix"
-
-#~ msgid "script"
-#~ msgstr "skript"
-
-#~ msgid "message"
-#~ msgstr "meddelande"
-
-#~ msgid "atom"
-#~ msgstr "atom"
-
-#~ msgid "system"
-#~ msgstr "system"
-
-#~ msgid "Resolvable"
-#~ msgstr "Resurs"
-
-#~ msgid "Marking this resolution attempt as invalid."
-#~ msgstr "Markerar det här lösningsförsöket som ogiltigt."
-
-#~ msgid "Marking resolvable %s as uninstallable"
-#~ msgstr "Resursen %s markeras som avinstallerbar"
-
-#~ msgid "%s is scheduled to be installed, but this is impossible due to dependency problems."
-#~ msgstr "%s är schemalagd för installation, men det är inte möjligt på grund av beroendeproblem."
-
-#~ msgid "Can't install %s since it is already marked as needed to be uninstalled"
-#~ msgstr "Det går inte att installera %s eftersom det redan har markerats som att vara i behov av avinstallation"
-
-#~ msgid "Can't install %s, because it does not apply to this system."
-#~ msgstr "Kan inte installera %s eftersom det inte är tillämpligt för det här systemet."
-
-#~ msgid "Can't install %s, because %s is already marked as needed to for installation"
-#~ msgstr "Det går inte att installera %s, eftersom %s redan har markerats som att vara i behov av installation"
-
-#~ msgid "This would invalidate %s."
-#~ msgstr "Detta skulle göra %s ogiltigt."
-
-#~ msgid "Establishing %s"
-#~ msgstr "Etablerar %s"
-
-#~ msgid "Installing %s"
-#~ msgstr "Installerar %s"
-
-#~ msgid "Skipping %s: already installed"
-#~ msgstr "Hoppar över %s: det har redan installerats"
-
-#~ msgid "There are no alternative providers of %s installed"
-#~ msgstr "Det finns inga alternativa installerade tillhandahållare för %s"
-
-#~ msgid "for %s"
-#~ msgstr "för %s"
-
-#~ msgid "Upgrading to %s to avoid removing %s is not possible."
-#~ msgstr "Uppdatering till %s för att undvika borttag av %s är inte möjligt."
-
-#~ msgid "%s provides %s, but is scheduled to be uninstalled."
-#~ msgstr "%s tillhandahåller %s, men är schemalagd för avinstallation."
-
-#~ msgid "%s provides %s, but another version of that %s is already installed."
-#~ msgstr "%s tillhandahåller %s, men en annan version av detta %s har redan installerats."
-
-#~ msgid "%s provides %s, but it is uninstallable.  Try installing it on its own for more details."
-#~ msgstr "%s tillhandahåller %s, men är avinstallerbart. Försök installera det ensamt om du vill ha mer information."
-
-#~ msgid "%s provides %s, but it is locked."
-#~ msgstr "%s tillhandahåller %s, men är låst."
-
-#~ msgid "%s provides %s,  but is scheduled to be kept."
-#~ msgstr "%s tillhandahåller %s, men har schemalagts för att behållas."
-
-#~ msgid "%s provides %s, but has another architecture."
-#~ msgstr "%s tillhandahåller %s, men har en annan arkitektur."
-
-#~ msgid "%s provides %s, but has another vendor (%s)."
-#~ msgstr "%s tillhandahåller %s, men har en annan leverantör (%s)."
-
-#~ msgid "Can't satisfy requirement %s for %s"
-#~ msgstr "Kan inte tillfredsställa krav %s för %s"
-
-#~ msgid "%s is required by another resolvable selected for installation, so it won't be unlinked."
-#~ msgstr "%s krävs av en annan resurs vald för installation, så länken tas inte bort."
-
-#~ msgid "%s is required by another installed resolvable, so it won't be unlinked."
-#~ msgstr "%s krävs av en annan installerad resurs, så länken tas inte bort."
-
-#~ msgid "%s is locked and cannot be uninstalled."
-#~ msgstr "%s är låst och kan inte avinstalleras."
-
-#~ msgid "A conflict over %s (%s) requires the removal of %s which is scheduled for installation"
-#~ msgstr "En konflikt över %s (%s) kräver att %s som ska installeras tas bort"
-
-#~ msgid "Marking %s as uninstallable due to conflicts over %s"
-#~ msgstr "%s markeras som avinstallerbart på grund av konflikter över %s"
-
-#~ msgid "from %s"
-#~ msgstr "från %s"
-
-#~ msgid " Error!"
-#~ msgstr "Fel!"
-
-#~ msgid " Important!"
-#~ msgstr "Viktigt!"
-
-#~ msgid "%s depended on %s"
-#~ msgstr "%s var beroende av %s"
-
-#~ msgid "%s is recommended by %s"
-#~ msgstr "%s rekommenderas av %s"
-
-#~ msgid "%s is suggested by %s"
-#~ msgstr "%s föreslås av %s"
-
-#~ msgid "%s will be evaluated for installation (freshened) by %s"
-#~ msgstr "%s kommer att utvärderas för installation (uppdaterad) av %s"
-
-#~ msgid "%s is enhanced by %s"
-#~ msgstr "%s utökas av %s"
-
-#~ msgid "%s is supplemented by %s"
-#~ msgstr "%s kompletteras av %s"
-
-#~ msgid "%s part of %s"
-#~ msgstr "%s del av %s"
-
-#, fuzzy
-#~ msgid "Double timeout"
-#~ msgstr "<b>Tidsgräns för dubbelklick </b>"

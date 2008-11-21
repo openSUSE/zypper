@@ -7,15 +7,15 @@
 #
 # Aleksey Novodvorksy <aen@logic.ru>, 2000.
 # Eugene Osintsev <osgene@omskelecom.ru>, 1999, 2000.
-# Aleksey Osipov <aliks-os@yandex.ru>, 2005, 2006, 2007.
+# Aleksey Osipov <aliks-os@yandex.ru>, 2005, 2006, 2007, 2008.
 # Nikolay Derkach <nderkach@gmail.com>, 2007, 2008.
 msgid ""
 msgstr ""
 "Project-Id-Version: zypp\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-10-24 10:45+0200\n"
-"PO-Revision-Date: 2008-04-27 00:54+0400\n"
-"Last-Translator: Nikolay Derkach <nderkach@gmail.com>\n"
+"POT-Creation-Date: 2008-11-06 18:07+0100\n"
+"PO-Revision-Date: 2008-11-12 00:54+0400\n"
+"Last-Translator: Aleksey Osipov <aliks-os@yandex.ru>\n"
 "Language-Team: Russian <opensuse-ru@opensuse.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -23,7 +23,7 @@ msgstr ""
 "Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
 "X-Generator: KBabel 1.11.4\n"
 
-#: ../zypp/solver/detail/SATResolver.cc:994
+#: ../zypp/solver/detail/SATResolver.cc:993
 msgid ""
 "\n"
 "uninstallable providers: "
@@ -49,22 +49,22 @@ msgstr "не удалась операция над файлами"
 msgid " execution skipped while aborting"
 msgstr ""
 
-#: ../zypp/solver/detail/SATResolver.cc:941
+#: ../zypp/solver/detail/SATResolver.cc:940
 #, c-format
 msgid "%s conflicts with %s provided by %s"
 msgstr "%s конфликтует с %s, который предоставляется %s"
 
-#: ../zypp/solver/detail/SATResolver.cc:927
+#: ../zypp/solver/detail/SATResolver.cc:926
 #, c-format
 msgid "%s is not installable"
 msgstr "%s недоступен для установки"
 
-#: ../zypp/solver/detail/SATResolver.cc:946
+#: ../zypp/solver/detail/SATResolver.cc:945
 #, c-format
 msgid "%s obsoletes %s provided by %s"
 msgstr "%s делает устаревшим %s, предоставляемый %s"
 
-#: ../zypp/solver/detail/SATResolver.cc:982
+#: ../zypp/solver/detail/SATResolver.cc:981
 #, c-format
 msgid "%s requires %s, but this requirement cannot be provided"
 msgstr "%s требует %s, но это требование не может быть удовлетворено"
@@ -194,7 +194,7 @@ msgstr "Амхарский (амаринья)"
 
 #: ../zypp/VendorSupportOptions.cc:54
 msgid "An additional customer contract is necessary for getting support."
-msgstr ""
+msgstr "Необходим дополнительный договор для получения поддержки."
 
 #: ../zypp/CountryCode.cc:224
 msgid "Andorra"
@@ -324,7 +324,7 @@ msgid "Austronesian (Other)"
 msgstr "Австронезийские (другие)"
 
 #. !\todo add comma to the message for the next release
-#: ../zypp/media/MediaCurl.cc:1660
+#: ../zypp/media/MediaCurl.cc:1689
 #, c-format
 msgid "Authentication required for '%s'"
 msgstr "Необходима аутентификация для '%s'"
@@ -819,7 +819,7 @@ msgstr "Чаморро"
 
 #. Translator: %s = name of an rpm package. A list of diffs follows
 #. this message.
-#: ../zypp/target/rpm/RpmDb.cc:1898
+#: ../zypp/target/rpm/RpmDb.cc:1899
 #, c-format
 msgid "Changed configuration files for %s:"
 msgstr "Измененные файлы настройки для %s:"
@@ -1312,7 +1312,7 @@ msgstr "Эвондо"
 msgid "Failed to delete key."
 msgstr "Не удалось удалить ключ."
 
-#: ../zypp/target/rpm/RpmDb.cc:1066
+#: ../zypp/target/rpm/RpmDb.cc:1067
 #, c-format
 msgid "Failed to import public key from file %s: %s"
 msgstr "Не удалось смонтировать публичный ключ из файла %s: %s"
@@ -1322,7 +1322,7 @@ msgstr "Не удалось смонтировать публичный ключ
 msgid "Failed to mount %s on %s"
 msgstr "Не удалось смонтировать %s в %s"
 
-#: ../zypp/target/rpm/RpmDb.cc:1143
+#: ../zypp/target/rpm/RpmDb.cc:1144
 #, c-format
 msgid "Failed to remove public key %s: %s"
 msgstr "Не удалось удалить публичный ключ %s: %s"
@@ -1753,7 +1753,7 @@ msgstr "HalVolume не инициализирован"
 msgid "Hausa"
 msgstr "Хауса"
 
-#: ../zypp/solver/detail/SATResolver.cc:923
+#: ../zypp/solver/detail/SATResolver.cc:922
 msgid "Have you enabled all requested repositories?"
 msgstr ""
 
@@ -1921,7 +1921,7 @@ msgstr "Индонезийский"
 msgid "Ingush"
 msgstr "Ингушский"
 
-#: ../zypp/target/TargetImpl.cc:603 ../zypp/target/TargetImpl.cc:843
+#: ../zypp/target/TargetImpl.cc:603 ../zypp/target/TargetImpl.cc:874
 msgid "Installation has been aborted as directed."
 msgstr "Установка прервана согласно инструкции."
 
@@ -2359,15 +2359,15 @@ msgstr "Лесото"
 
 #: ../zypp/VendorSupportOptions.cc:20
 msgid "Level 1"
-msgstr ""
+msgstr "Уровень 1"
 
 #: ../zypp/VendorSupportOptions.cc:23
 msgid "Level 2"
-msgstr ""
+msgstr "Уровень 2"
 
 #: ../zypp/VendorSupportOptions.cc:26
 msgid "Level 3"
-msgstr ""
+msgstr "Уровень 3"
 
 #. language code: lez
 #: ../zypp/LanguageCode.cc:744
@@ -3061,7 +3061,7 @@ msgstr "Оман"
 #: ../zypp/parser/RepoindexFileReader.cc:116
 #, c-format
 msgid "One or both of '%s' or '%s' attributes is required."
-msgstr ""
+msgstr "Один или оба аттрибута необходимы '%s' или '%s'."
 
 #: ../zypp/media/MediaException.cc:161
 msgid "Operation not supported by medium"
@@ -3297,8 +3297,8 @@ msgstr "Для данного URL-адреса анализ строки зап�
 
 #. TranslatorExplanation after semicolon is error message
 #. TranslatorExplanation the colon is followed by an error message
-#: ../zypp/target/rpm/RpmDb.cc:892 ../zypp/target/rpm/RpmDb.cc:2081
-#: ../zypp/target/rpm/RpmDb.cc:2217
+#: ../zypp/target/rpm/RpmDb.cc:893 ../zypp/target/rpm/RpmDb.cc:2087
+#: ../zypp/target/rpm/RpmDb.cc:2223
 msgid "RPM failed: "
 msgstr "Сбой RPM: "
 
@@ -3334,9 +3334,9 @@ msgid "Removing repository '%s'"
 msgstr "Удаляется репозитарий '%s'"
 
 #: ../zypp/parser/RepoindexFileReader.cc:128
-#, fuzzy, c-format
+#, c-format
 msgid "Required attribute '%s' is missing."
-msgstr "Необходимый файл отсутствует: "
+msgstr "Необходимый аттрибут '%s' отсутствует."
 
 #. :QAT:634:
 #: ../zypp/CountryCode.cc:406
@@ -3644,7 +3644,7 @@ msgstr "Согдийский"
 msgid "Solomon Islands"
 msgstr "Соломоновы острова"
 
-#: ../zypp/solver/detail/SATResolver.cc:950
+#: ../zypp/solver/detail/SATResolver.cc:949
 #, c-format
 msgid "Solvable %s conflicts with %s provided by itself"
 msgstr "Объект разрешения зависимостей %s конфликтует с %s, который предоставляется им самим"
@@ -3899,7 +3899,7 @@ msgstr "Тайланд"
 
 #: ../zypp/VendorSupportOptions.cc:39
 msgid "The level of support is unspecified"
-msgstr ""
+msgstr "Уровень поддержки не определен"
 
 #: ../zypp/VendorSupportOptions.cc:42
 #, fuzzy
@@ -3910,8 +3910,8 @@ msgstr "Диск не существует."
 msgid "This action is being run by another program already."
 msgstr "Это действие уже выполняется другой программой."
 
-#: ../zypp/solver/detail/SATResolver.cc:1131
-#: ../zypp/solver/detail/SATResolver.cc:1149
+#: ../zypp/solver/detail/SATResolver.cc:1130
+#: ../zypp/solver/detail/SATResolver.cc:1148
 msgid "This request will break your system!"
 msgstr ""
 
@@ -4153,10 +4153,9 @@ msgstr "США"
 msgid "United States Minor Outlying Islands"
 msgstr "Внешние малые острова США"
 
-#: ../zypp/target/TargetImpl.cc:877
-#, fuzzy
+#: ../zypp/target/TargetImpl.cc:908
 msgid "Unknown Distribution"
-msgstr "Неизвестный параметр команды list"
+msgstr "Неизвестный дистрибьютив"
 
 #: ../zypp/CountryCode.cc:135
 msgid "Unknown country: "
@@ -4440,77 +4439,77 @@ msgstr "сбой при проверке applydeltarpm."
 msgid "applydeltarpm failed."
 msgstr "сбой в applydeltarpm."
 
-#: ../zypp/solver/detail/SATResolver.cc:1207
+#: ../zypp/solver/detail/SATResolver.cc:1219
 #, c-format
 msgid "architecture change of %s to %s"
 msgstr "изменение архитектуры %s на %s"
 
-#: ../zypp/solver/detail/SATResolver.cc:936
+#: ../zypp/solver/detail/SATResolver.cc:935
 #, c-format
 msgid "cannot install both %s and %s"
 msgstr "Не удаётся установить оба %s и %s"
 
-#: ../zypp/solver/detail/SATResolver.cc:916
+#: ../zypp/solver/detail/SATResolver.cc:915
 msgid "conflicting requests"
 msgstr "конфликтующие запросы"
 
 #  Proposal for backup during update
-#: ../zypp/target/rpm/RpmDb.cc:2369
+#: ../zypp/target/rpm/RpmDb.cc:2375
 #, c-format
 msgid "created backup %s"
 msgstr "созданная резервная копия %s"
 
-#: ../zypp/solver/detail/SATResolver.cc:1235
+#: ../zypp/solver/detail/SATResolver.cc:1247
 #, c-format
 msgid "deinstallation of %s"
 msgstr "удаление %s"
 
-#: ../zypp/solver/detail/SATResolver.cc:984
+#: ../zypp/solver/detail/SATResolver.cc:983
 msgid "deleted providers: "
 msgstr "удалённые поставщики: "
 
-#: ../zypp/solver/detail/SATResolver.cc:1152
+#: ../zypp/solver/detail/SATResolver.cc:1151
 #, c-format
 msgid "do not ask to delete all solvables providing %s"
 msgstr "не просить удалить все объекты разрешения зависимостей, предоставляющие %s"
 
-#: ../zypp/solver/detail/SATResolver.cc:1134
+#: ../zypp/solver/detail/SATResolver.cc:1133
 #, c-format
 msgid "do not ask to install a solvable providing %s"
 msgstr "не просить установить объект разрешения зависимостей, предоставляющий %s"
 
-#: ../zypp/solver/detail/SATResolver.cc:1079
+#: ../zypp/solver/detail/SATResolver.cc:1078
 #, c-format
 msgid "do not forbid installation of %s"
 msgstr "не препятствовать установке %s"
 
-#: ../zypp/solver/detail/SATResolver.cc:1058
-#: ../zypp/solver/detail/SATResolver.cc:1096
+#: ../zypp/solver/detail/SATResolver.cc:1057
+#: ../zypp/solver/detail/SATResolver.cc:1095
 #, c-format
 msgid "do not install %s"
 msgstr "не устанавливать %s"
 
-#: ../zypp/solver/detail/SATResolver.cc:1165
+#: ../zypp/solver/detail/SATResolver.cc:1164
 #, c-format
 msgid "do not install most recent version of %s"
 msgstr "не устанавливать самую последнюю версию %s"
 
-#: ../zypp/solver/detail/SATResolver.cc:1053
+#: ../zypp/solver/detail/SATResolver.cc:1052
 #, c-format
 msgid "do not keep %s installed"
 msgstr "не оставлять установленным %s"
 
-#: ../zypp/solver/detail/SATResolver.cc:1199
+#: ../zypp/solver/detail/SATResolver.cc:1211
 #, c-format
 msgid "downgrade of %s to %s"
 msgstr "обновить %s до более старой версии %s"
 
-#: ../zypp/solver/detail/SATResolver.cc:1132
-#: ../zypp/solver/detail/SATResolver.cc:1150
+#: ../zypp/solver/detail/SATResolver.cc:1131
+#: ../zypp/solver/detail/SATResolver.cc:1149
 msgid "ignore the warning of a broken system"
 msgstr ""
 
-#: ../zypp/solver/detail/SATResolver.cc:1215
+#: ../zypp/solver/detail/SATResolver.cc:1227
 #, c-format
 msgid ""
 "install %s (with vendor change)\n"
@@ -4527,8 +4526,10 @@ msgstr ""
 msgid "invalid"
 msgstr ""
 
-#: ../zypp/solver/detail/SATResolver.cc:1074
-#: ../zypp/solver/detail/SATResolver.cc:1117
+#. for solver reason: NOT weak lock.
+#: ../zypp/solver/detail/SATResolver.cc:1073
+#: ../zypp/solver/detail/SATResolver.cc:1116
+#: ../zypp/solver/detail/SATResolver.cc:1193
 #, c-format
 msgid "keep %s"
 msgstr "оставить %s"
@@ -4541,34 +4542,34 @@ msgstr "libhal_ctx_new: Не удаётся создать контекст libh
 msgid "libhal_set_dbus_connection: Can't set dbus connection"
 msgstr "libhal_set_dbus_connection: не удалось установить подключение к dbus"
 
-#: ../zypp/solver/detail/SATResolver.cc:931
+#: ../zypp/solver/detail/SATResolver.cc:930
 #, c-format
 msgid "nothing provides %s needed by %s"
 msgstr "ничто не предоставляет %s, необходимый для %s"
 
-#: ../zypp/solver/detail/SATResolver.cc:922
+#: ../zypp/solver/detail/SATResolver.cc:921
 #, c-format
 msgid "nothing provides requested %s"
 msgstr "ничто не предоставляет запрошенный %s"
 
-#: ../zypp/solver/detail/SATResolver.cc:913
+#: ../zypp/solver/detail/SATResolver.cc:912
 #, c-format
 msgid "problem with installed package %s"
 msgstr "проблема в установленном пакете %s"
 
-#: ../zypp/solver/detail/SATResolver.cc:1223
+#: ../zypp/solver/detail/SATResolver.cc:1235
 #, c-format
 msgid "replacement of %s with %s"
 msgstr "замена %s на %s"
 
 #. %s = filenames
-#: ../zypp/target/rpm/RpmDb.cc:2067
+#: ../zypp/target/rpm/RpmDb.cc:2073
 #, c-format
 msgid "rpm created %s as %s, but it was impossible to determine the difference"
 msgstr "rpm создал %s как %s, но было невозможно определить различия"
 
 #. %s = filenames
-#: ../zypp/target/rpm/RpmDb.cc:2069
+#: ../zypp/target/rpm/RpmDb.cc:2075
 #, c-format
 msgid ""
 "rpm created %s as %s.\n"
@@ -4578,13 +4579,13 @@ msgstr ""
 "Первые 25 строк различий:\n"
 
 #. %s = filenames
-#: ../zypp/target/rpm/RpmDb.cc:2062
+#: ../zypp/target/rpm/RpmDb.cc:2068
 #, c-format
 msgid "rpm saved %s as %s, but it was impossible to determine the difference"
 msgstr "rpm сохранил %s как %s, но было невозможно определить различия"
 
 #. %s = filenames
-#: ../zypp/target/rpm/RpmDb.cc:2064
+#: ../zypp/target/rpm/RpmDb.cc:2070
 #, c-format
 msgid ""
 "rpm saved %s as %s.\n"
@@ -4593,12 +4594,12 @@ msgstr ""
 "rpm сохранил %s как %s.\n"
 "Первые 25 строк различий:\n"
 
-#: ../zypp/solver/detail/SATResolver.cc:919
+#: ../zypp/solver/detail/SATResolver.cc:918
 #, fuzzy
 msgid "some dependency problem"
 msgstr "Игнорировать некоторые зависимости %s"
 
-#: ../zypp/solver/detail/SATResolver.cc:996
+#: ../zypp/solver/detail/SATResolver.cc:995
 msgid "uninstallable providers: "
 msgstr "поставщики, которые невозможно установить: "
 
