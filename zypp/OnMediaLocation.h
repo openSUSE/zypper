@@ -51,6 +51,7 @@ namespace zypp
     OnMediaLocation( const Pathname & filename_r, unsigned medianr_r = 1 )
     : _medianr( medianr_r )
     , _filename( filename_r )
+    , _optional(false) // bnc #447010
     {}
 
   public:
