@@ -292,7 +292,6 @@ bool Testcase::createTestcase(Resolver & resolver, bool dumpPool, bool runSolver
 	zypp::base::LogControl::instance().logfile( dumpPath +"/y2log" );
 	zypp::base::LogControl::TmpExcessive excessive;
 
-	resolver.reset(true); // true = resetting all valid solverresults
 	resolver.resolvePool();
     }
 
