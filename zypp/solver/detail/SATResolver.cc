@@ -769,7 +769,7 @@ void SATResolver::doUpdate()
     setSystemRequirements();
 
     // set locks for the solver
-    void setLocks();
+    setLocks();
 
     _solv = solver_create( _SATPool );
     _solv->vendorCheckCb = &vendorCheck;
