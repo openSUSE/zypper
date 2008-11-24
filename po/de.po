@@ -4,24 +4,23 @@
 #
 # This file is distributed under the same license as @PACKAGE@ package. FIRST
 #
-#
 # Lars Vogdt <lrupp@suse.de>, 2007.
 # Stephan Kulow <coolo@kde.org>, 2007.
 # Michael Skiba <trans@michael-skiba.de>, 2008.
 # Marko Schugardt <mail.sapex@gmx.de>, 2008.
+#
 msgid ""
 msgstr ""
 "Project-Id-Version: zypper.de\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2008-10-27 18:08+0100\n"
-"PO-Revision-Date: 2008-11-09 11:58+0100\n"
-"Last-Translator: Michael Skiba <trans@michael-skiba.de>\n"
+"PO-Revision-Date: Sat Nov 22 14:15:55 UTC 2008\n"
+"Last-Translator: Marko Schugardt <mail.sapex@gmx.de>\n"
 "Language-Team: German <opensuse-translation-de@opensuse.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms:  nplurals=2; plural=(n != 1);\n"
-"X-Generator: Lokalize 0.2\n"
 
 #: ../src/callbacks/keyring.h:48
 #, c-format
@@ -787,7 +786,7 @@ msgstr "Keine Hilfe für diese Option verfügbar."
 #: ../src/repos.cc:80
 #, c-format
 msgid "Checking whether to refresh metadata for %s"
-msgstr "Es wird überprüft, ob die Metadaten für %s aufgefrischt werden müssen."
+msgstr "Es wird überprüft, ob die Metadaten für %s aktualisiert werden müssen."
 
 #: ../src/repos.cc:102
 #, c-format
@@ -801,7 +800,7 @@ msgstr "Die Aktualitätsüberprüfung von '%s' wurde aufgeschoben."
 
 #: ../src/repos.cc:128
 msgid "Forcing raw metadata refresh"
-msgstr "Auffrischung der Rohmetadaten wird erzwungen"
+msgstr "Aktualisierung der Rohmetadaten wird erzwungen"
 
 #: ../src/repos.cc:135
 #, c-format
@@ -945,7 +944,7 @@ msgstr "Aktiviert"
 #. translators: 'zypper repos' column - whether autorefresh is enabled for the repository
 #: ../src/repos.cc:707 ../src/repos.cc:2084
 msgid "Refresh"
-msgstr "Auffrischen"
+msgstr "Aktualisieren"
 
 #. translators: repository priority (in zypper repos -p or -d)
 #: ../src/repos.cc:711 ../src/repos.cc:2088
@@ -1011,19 +1010,19 @@ msgstr "Es sind keine aktivierten Repositories bestimmt."
 
 #: ../src/repos.cc:1005
 msgid "Could not refresh the repositories because of errors."
-msgstr "Die Repositories konnten aufgrund von Fehlern nicht aufgefrischt werden."
+msgstr "Die Repositories konnten aufgrund von Fehlern nicht aktualisiert werden."
 
 #: ../src/repos.cc:1011
 msgid "Some of the repositories have not been refreshed because of an error."
-msgstr "Einige der Repositories konnten aufgrund eines Fehlers nicht aufgefrischt werden."
+msgstr "Einige der Repositories konnten aufgrund eines Fehlers nicht aktualisiert werden."
 
 #: ../src/repos.cc:1016
 msgid "Specified repositories have been refreshed."
-msgstr "Die festgelegten Repositories wurden aufgefrischt."
+msgstr "Die festgelegten Repositories wurden aktualisiert."
 
 #: ../src/repos.cc:1018
 msgid "All repositories have been refreshed."
-msgstr "Alle Repositories wurden aufgefrischt."
+msgstr "Alle Repositories wurden aktualisiert."
 
 #: ../src/repos.cc:1154
 #, c-format
@@ -1072,7 +1071,7 @@ msgstr "Alle Repositories wurden bereinigt."
 
 #: ../src/repos.cc:1261
 msgid "This is a changeable read-only media (CD/DVD), disabling autorefresh."
-msgstr "Dies ist ein nicht-beschreibbares Wechselmedium (CD/DVD), Autoauffrischen wird deaktiviert."
+msgstr "Dies ist ein nicht-beschreibbares Wechselmedium (CD/DVD), Autoaktualisierung wird deaktiviert."
 
 #: ../src/repos.cc:1282 ../src/repos.cc:1543
 #, c-format
@@ -1107,7 +1106,7 @@ msgstr "Repository '%s' erfolgreich hinzugefügt"
 #. TranslatorExplanation used as e.g. "Autorefresh: Yes"
 #: ../src/repos.cc:1338
 msgid "Autorefresh"
-msgstr "Autoauffrischen"
+msgstr "Autoaktualisierung"
 
 #: ../src/repos.cc:1353
 #, c-format
@@ -1201,12 +1200,12 @@ msgstr "Repository '%s' wurde erfolgreich deaktiviert."
 #: ../src/repos.cc:1731
 #, c-format
 msgid "Autorefresh has been enabled for repository '%s'."
-msgstr "Autoauffrischen wurde für Repository '%s' aktiviert."
+msgstr "Autoaktualisierung wurde für Repository '%s' aktiviert."
 
 #: ../src/repos.cc:1734
 #, c-format
 msgid "Autorefresh has been disabled for repository '%s'."
-msgstr "Autoauffrischen wurde für Repository '%s' deaktiviert."
+msgstr "Autoaktualisierung wurde für Repository '%s' deaktiviert."
 
 #: ../src/repos.cc:1741
 #, c-format
@@ -1285,7 +1284,7 @@ msgstr "Dienst '%s' wurde entfernt."
 #: ../src/repos.cc:2327
 #, c-format
 msgid "Refreshing service '%s'."
-msgstr "Dienst '%s' wird aufgefrischt."
+msgstr "Dienst '%s' wird aktualisiert."
 
 #: ../src/repos.cc:2336
 #, c-format
@@ -1321,19 +1320,19 @@ msgstr "Es sind keine aktivierten Dienste festgelegt."
 
 #: ../src/repos.cc:2466
 msgid "Could not refresh the services because of errors."
-msgstr "Die Dienste konnten aufgrund von Fehlern nicht aufgefrischt werden."
+msgstr "Die Dienste konnten aufgrund von Fehlern nicht aktualisiert werden."
 
 #: ../src/repos.cc:2472
 msgid "Some of the services have not been refreshed because of an error."
-msgstr "Einige der Dienste konnten aufgrund von Fehlern nicht aufgefrischt werden."
+msgstr "Einige der Dienste konnten aufgrund von Fehlern nicht aktualisiert werden."
 
 #: ../src/repos.cc:2477
 msgid "Specified services have been refreshed."
-msgstr "Die festgelegten Dienste wurden aufgefrischt."
+msgstr "Die festgelegten Dienste wurden aktualisiert."
 
 #: ../src/repos.cc:2479
 msgid "All services have been refreshed."
-msgstr "Alle Dienste wurden aufgefrischt."
+msgstr "Alle Dienste wurden aktualisiert."
 
 #: ../src/repos.cc:2601
 #, c-format
@@ -1348,12 +1347,12 @@ msgstr "Dienst '%s' wurde erfolgreich deaktiviert."
 #: ../src/repos.cc:2611
 #, c-format
 msgid "Autorefresh has been enabled for service '%s'."
-msgstr "Autoauffrischen wurde für Dienst '%s' aktiviert."
+msgstr "Autoaktualisierung wurde für Dienst '%s' aktiviert."
 
 #: ../src/repos.cc:2614
 #, c-format
 msgid "Autorefresh has been disabled for service '%s'."
-msgstr "Autoauffrischen wurde für Dienst '%s' deaktiviert."
+msgstr "Autoaktualisierung wurde für Dienst '%s' deaktiviert."
 
 #: ../src/repos.cc:2620
 #, c-format
@@ -1891,7 +1890,7 @@ msgstr ""
 "Die Prüfung der Paketintegrität ist fehlgeschlagen. Dies kann ein Problem mit dem Repository oder dem Medium sein. Versuchen Sie eine der folgenden Maßnahmen:\n"
 "\n"
 " – Das letzte Kommando erneut ausführen.\n"
-" – Das Repository mit 'zypper refresh' auffrischen.\n"
+" – Das Repository mit 'zypper refresh' aktualisieren.\n"
 " – Ein anderes Installationsmedium (z.B. bei Beschädigung) verwenden.\n"
 " – Ein anderes Repository verwenden."
 
@@ -2262,7 +2261,7 @@ msgstr ""
 "\t--no-gpg-checks\t\tGPG-Prüffehler ignorieren und fortfahren.\n"
 "\t--plus-repo, -p <URI>\tEin zusätzliches Repository verwenden.\n"
 "\t--disable-repositories\tKeine Metadaten aus den Repositories lesen.\n"
-"\t--no-refresh\t\tDie Repositories nicht auffrischen.\n"
+"\t--no-refresh\t\tDie Repositories nicht aktualisieren.\n"
 
 #. translators: these belong to Repository Options main help text
 #: ../src/Zypper.cc:178
@@ -2312,7 +2311,7 @@ msgstr ""
 "\tremoverepo, rr\t\tEin festgelegtes Repository entfernen.\n"
 "\trenamerepo, nr\t\tEin festgelegtes Repository umbenennen.\n"
 "\tmodifyrepo, mr\t\tEin festgelegtes Repository modifizieren.\n"
-"\trefresh, ref\t\tAlle Repositories auffrischen.\n"
+"\trefresh, ref\t\tAlle Repositories aktualisieren.\n"
 "\tclean\t\t\tLokale Zwischenspeicher bereinigen.\n"
 
 #: ../src/Zypper.cc:204
@@ -2329,7 +2328,7 @@ msgstr ""
 "\taddservice, as\t\tEinen neuen Dienst hinzufügen.\n"
 "\tmodifyservice, ms\tEinen festgelegten Dienst modifizieren.\n"
 "\tremoveservice, rs\tEinen festgelegten Dienst entfernen.\n"
-"\trefresh-services, refs\tAlle Dienste auffrischen.\n"
+"\trefresh-services, refs\tAlle Dienste aktualisieren.\n"
 
 #: ../src/Zypper.cc:212
 msgid ""
@@ -2478,7 +2477,7 @@ msgstr "Repositories deaktivert, verwende nur die Datenbank der installierten Pa
 
 #: ../src/Zypper.cc:502
 msgid "Autorefresh disabled."
-msgstr "Autoauffrischen deaktiviert."
+msgstr "Autoaktualisierung deaktiviert."
 
 #: ../src/Zypper.cc:509
 msgid "CD/DVD repositories disabled."
@@ -2723,8 +2722,8 @@ msgstr ""
 "  Kommandooptionen:\n"
 "-d, --disable                  Den Dienst deaktivieren (aber nicht entfernen).\n"
 "-e, --enable                   Einen deaktivierten Dienst aktivieren.\n"
-"-r, --refresh                  Autoauffrischen des Dienstes aktivieren.\n"
-"-R, --no-refresh               Autoauffrischen des Dienstes deaktivieren.\n"
+"-r, --refresh                  Autoaktualisierung des Dienstes aktivieren.\n"
+"-R, --no-refresh               Autoaktualisierung des Dienstes deaktivieren.\n"
 "-n, --name                     Einen beschreibenden Namen für den Dienst setzen.\n"
 "\n"
 "-i, --ar-to-enable <Alias>     Ein zu aktivierendes RIS-Dienst-Repository.\n"
@@ -2778,10 +2777,10 @@ msgid ""
 msgstr ""
 "refresh-services (refs) [Optionen]\n"
 "\n"
-"Bestimmten Repository-Indexdienst auffrischen.\n"
+"Bestimmten Repository-Indexdienst aktualisieren.\n"
 "\n"
 "  Kommandooptionen:\n"
-"-r, --with-repos      Auch Repositories auffrischen.\n"
+"-r, --with-repos      Auch Repositories aktualisieren.\n"
 
 #. TranslatorExplanation the %s = "yast2, rpm-md, plaindir"
 #: ../src/Zypper.cc:1201
@@ -2813,11 +2812,11 @@ msgstr ""
 "-t, --type <Typ>        Typ des Repositorys (%s).\n"
 "-d, --disable           Das Repository als deaktiviert hinzufügen.\n"
 "-c, --check             URI überprüfen.\n"
-"-C, --no-check          URI nicht überprüfen, später während des Auffrischens überprüfen.\n"
+"-C, --no-check          URI nicht überprüfen, später während der Aktualisierung überprüfen.\n"
 "-n, --name              Beschreibenden Namen für das Repository festlegen.\n"
 "-k, --keep-packages     Zwischenspeichern von RPM-Dateien aktivieren.\n"
 "-K, --no-keep-packages  Zwischenspeichern von RPM-Dateien deaktivieren.\n"
-"-f, --refresh           Autoauffrischen des Repository aktivieren.\n"
+"-f, --refresh           Autoaktualisierung des Repositorys aktivieren.\n"
 
 #. translators: this is just a rug compatiblity command
 #. translators: this is just a rug-compatiblity command
@@ -2933,8 +2932,8 @@ msgstr ""
 "  Kommandooptionen:\n"
 "-d, --disable             Das Repository deaktivieren (aber nicht entfernen).\n"
 "-e, --enable              Ein deaktiviertes Repository aktivieren.\n"
-"-r, --refresh             Autoauffrischen des Repositorys aktivieren.\n"
-"-R, --no-refresh          Autoauffrischen des Repositorys deaktivieren.\n"
+"-r, --refresh             Autoaktualisierung des Repositorys aktivieren.\n"
+"-R, --no-refresh          Autoaktualisierung des Repositorys deaktivieren.\n"
 "-n, --name                Einen beschreibenden Namen für das Repository setzen.\n"
 "-p, --priority <1-99>     Priorität des Repositorys setzen.\n"
 "-k, --keep-packages       Zwischenspeichern von RPM-Dateien aktivieren.\n"
@@ -2962,16 +2961,16 @@ msgid ""
 msgstr ""
 "refresh (ref) [Alias|#|URI] ...\n"
 "\n"
-"Repositories, die durch Alias, Nummer oder URI festgelegt wurden auffrischen. Wenn keine festgelegt wurden, werden alle aktivierten Repositories aufgefrischt.\n"
+"Repositories, die durch Alias, Nummer oder URI festgelegt wurden aktualisieren. Wenn keine festgelegt wurden, werden alle aktivierten Repositories aktualisiert.\n"
 "\n"
 "  Kommandooptionen:\n"
-"-f, --force              Ein komplettes Auffrischen erzwingen.\n"
+"-f, --force              Eine komplette Aktualisierung erzwingen.\n"
 "-b, --force-build        Einen Neubau der Datenbank erzwingen.\n"
 "-d, --force-download     Herunterladen von Rohmetadaten erzwingen.\n"
 "-B, --build-only         Nur die Datenbank bauen, keine Metadaten herunterladen.\n"
 "-D, --download-only      Nur Rohmetadaten herunterladen, nicht die Datenbank bauen.\n"
-"-r, --repo <Alias|#|URI> Nur festgelegte Repositories auffrischen.\n"
-"-s, --services           Frischt erst die Dienste, dann die Repositories auf.\n"
+"-r, --repo <Alias|#|URI> Nur festgelegte Repositories aktualisieren.\n"
+"-s, --services           Aktualisiert erst die Dienste, dann die Repositories.\n"
 
 #: ../src/Zypper.cc:1407
 msgid ""
@@ -3607,7 +3606,7 @@ msgstr ""
 
 #: ../src/Zypper.cc:2325
 msgid "Root privileges are required for refreshing services."
-msgstr "Zum Auffrischen der Dienste werden Root-Rechte benötigt."
+msgstr "Zum Aktualisieren der Dienste werden Root-Rechte benötigt."
 
 #: ../src/Zypper.cc:2352 ../src/Zypper.cc:2699
 msgid "Root privileges are required for modifying system services."
@@ -3702,7 +3701,7 @@ msgstr "Repository %s nicht gefunden."
 
 #: ../src/Zypper.cc:2900
 msgid "Root privileges are required for refreshing system repositories."
-msgstr "Zum Auffrischen der System-Repositories werden Root-Rechte benötigt."
+msgstr "Zum Aktualisieren der System-Repositories werden Root-Rechte benötigt."
 
 #: ../src/Zypper.cc:2907
 #, c-format
