@@ -378,9 +378,9 @@ bool Testcase::createTestcase(Resolver & resolver, bool dumpPool, bool runSolver
     if (resolver.isUpgradeMode())
 	control.distupgrade ();
     if (resolver.isUpdateMode())
-	control.verifySystem ();
-    if (resolver.isVerifyingMode())
 	control.update();
+    if (resolver.isVerifyingMode())
+	control.verifySystem();
 
     return true;
 }
