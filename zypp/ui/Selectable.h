@@ -266,7 +266,7 @@ namespace zypp
       /**  */
       Fate fate() const;
 
-      /** True if either to delete or to install */
+      /** True if neither to delete or to install */
       bool unmodified() const
       { return fate() == UNMODIFIED; }
 
@@ -281,6 +281,15 @@ namespace zypp
       /** True if to install */
       bool toInstall() const
       { return fate() == TO_INSTALL; }
+
+      /** True if would be on system after commit. */
+      bool onSystem() const
+      { return( ( hasInstalledObj() && !toDelete() )
+              ||( hasCandidateObj() && toInstall() ) ); }
+
+      /** True if would be off system after commit. */
+      bool offSystem() const
+      { return ! onSystem(); }
 
       /** */
       bool setFate( Fate fate_r, ResStatus::TransactByValue causer_r = ResStatus::USER );

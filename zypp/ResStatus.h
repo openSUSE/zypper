@@ -268,6 +268,14 @@ namespace zypp
     TransactValue getTransactValue() const
     { return (TransactValue)_bitfield.value<TransactField>(); }
 
+    /** True if would be on system after commit. */
+    bool onSystem() const
+    { return( isInstalled() != transacts() ); }
+
+    /** True if would be off system after commit. */
+    bool offSystem() const
+    { return ! onSystem(); }
+
     bool isBySolver() const
     { return fieldValueIs<TransactByField>( SOLVER ); }
 
