@@ -4,6 +4,7 @@ Mon Nov 24 20:44:40 CET 2008 - jkupec@suse.cz
 - fixed segfault in 'info' when looking for package to show
   (bnc #448247)
 - r11795
+- 1.0.1
 
 -------------------------------------------------------------------
 Mon Nov 24 16:21:02 CET 2008 - jkupec@suse.cz
