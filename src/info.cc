@@ -155,14 +155,7 @@ void printPkgInfo(Zypper & zypper, const ui::Selectable & s)
 #if USE_THE_ONE
   PoolItem theone = s.theObj();
 #else
-  PoolItem theone;
-  if (s.installedEmpty())
-      theone = s.availableBegin() != s.availableEnd() ?
-          findUpdateItem(God->pool(), *s.availableBegin()) : PoolItem();
-  else
-    theone = findUpdateItem(God->pool(), *s.installedBegin());
-  if (!theone)
-    theone = *s.installedBegin();
+  PoolItem theone = findTheBest(God->pool(), s);
 #endif
 
   cout << (zypper.globalOpts().is_rug_compatible ? _("Catalog: ") : _("Repository: "))
