@@ -3,6 +3,7 @@ Mon Nov 24 17:47:35 CET 2008 - schubi@suse.de
 
 - activate locking for doUpdate (bnc #447684)
 - revision 11792
+- RELEASE: 5.24.1 (23)
  
 -------------------------------------------------------------------
 Fri Nov 21 16:56:10 CET 2008 - dmacvicar@suse.de
