@@ -922,9 +922,14 @@ static bool dist_upgrade(Zypper & zypper, zypp::UpgradeStatistics & dup_stats)
   return God->resolver()->doUpgrade(dup_stats);
 }
 
+/**
+ * To be called after setting solver flags and calling solver methods
+ * (like doUpdate(), doUpgrade(), verify(), and resolve()) to generate
+ * solver testcase.
+ */
 static void make_solver_test_case(Zypper & zypper)
 {
-  set_solver_flags(zypper);
+//  set_solver_flags(zypper);
 
   string testcase_dir("/var/log/zypper.solverTestCase");
 
@@ -952,17 +957,12 @@ static void make_solver_test_case(Zypper & zypper)
  */
 void solve_and_commit (Zypper & zypper)
 {
-  if (zypper.cOpts().count("debug-solver"))
-  {
-    make_solver_test_case(zypper);
-    return;
-  }
-
   bool show_forced_problems = true;
   bool commit_done = false;
   do
   {
-    if (zypper.runtimeData().solve_before_commit) // e.g. doUpdate unsets this flag, no need for solving
+    // e.g. doUpdate unsets this flag, no need for another solving
+    if (zypper.runtimeData().solve_before_commit)
     {
       MIL << "solving..." << endl;
 
@@ -983,16 +983,24 @@ void solve_and_commit (Zypper & zypper)
           zypper.out().info(_("Resolving package dependencies..."));
           success = resolve(zypper);
         }
-        if (success)
+
+        // go on, we've got solution or we don't want a solution (we want testcase)
+        if (success || zypper.cOpts().count("debug-solver"))
           break;
 
         success = show_problems(zypper);
-        if (! success) {
-          // TODO cancel transaction?
+        if (!success)
+        {
           zypper.setExitCode(ZYPPER_EXIT_ERR_ZYPP); // bnc #242736
           return;
         }
       }
+    }
+
+    if (zypper.cOpts().count("debug-solver"))
+    {
+      make_solver_test_case(zypper);
+      return;
     }
 
     MIL << "got solution, showing summary" << endl;
