@@ -1,0 +1,60 @@
+namespace zypp
+{
+/** \page CodePitfalls Code Pitfalls - Frequently made mistakes
+
+\section TriBoolCompare Comparing TriBool values
+
+  Comparing two \ref TriBool values is not as easy as it might look like,
+  because the \c TriBool::operator== and \c TriBool::operator!= return
+  a \ref TriBool.
+
+  For example  is <tt>(indeterminate==indeterminate)</tt> not \c true, but
+  \c indeterminate. That's why the following snippet does not do what the
+  author expected:
+
+  \code
+    // buggy option class
+    struct Option
+    {
+      public:
+        Option()
+          : _value( indeterminate )
+        {}
+
+        bool get() const
+        { return ( _value == indeterminate ) ? true : bool(_value); }
+
+        void set( bool new_r )
+        { _value = new_r; }
+
+      private:
+        tribool _value;
+    };
+  \endcode
+
+  You find that \c get() returns \c false as long as the option is unset,
+  and not \c true as the code suggests. That's because <tt>(_value==indeterminate)</tt>
+  returns \c indeterminate.
+
+  \note Always use \c indeterminate(_value) to test whether a TriBools value is \c indeterminate:
+
+  \code
+        bool get() const
+        { return indeterminate( _value ) ? true : bool(_value); }
+  \endcode
+
+  \code
+        tribool _value;
+        ...
+        if ( indeterminate( _value ) )
+        { ... }              // indeterminate
+        else if ( _value )
+        { ... }              // true
+        else
+        { ... }              // false
+  \endcode
+<HR>
+
+
+*/
+}
