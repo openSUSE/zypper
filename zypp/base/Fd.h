@@ -47,7 +47,7 @@ namespace zypp
       /** Ctor opens file.
        * \throw EXCEPTION If open fails.
       */
-      Fd( const Pathname & file_r, int open_flags );
+      Fd( const Pathname & file_r, int open_flags, mode_t mode = 0 );
 
       /** Dtor closes file. */
       ~Fd()

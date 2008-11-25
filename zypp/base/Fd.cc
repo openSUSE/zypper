@@ -33,10 +33,10 @@ namespace zypp
     //	METHOD NAME : Fd::Fd
     //	METHOD TYPE : Ctor
     //
-    Fd::Fd( const Pathname & file_r, int open_flags )
+    Fd::Fd( const Pathname & file_r, int open_flags, mode_t mode )
     : m_fd( -1 )
     {
-      m_fd = open( file_r.asString().c_str(), open_flags );
+      m_fd = open( file_r.asString().c_str(), open_flags, mode );
       if ( m_fd == -1 )
         ZYPP_THROW_ERRNO_MSG( Exception, std::string("open ")+file_r.asString() );
     }

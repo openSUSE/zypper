@@ -67,8 +67,12 @@ InterProcessMutex::InterProcessMutex( const Options &poptions )
         
         // try to create the lock file atomically, this will fail if
         // the lock exists
-        _fd.reset( new Fd( lock_file, O_RDWR | O_CREAT | O_EXCL) );
-        if ( !_fd->isOpen() )
+	try {
+	  _fd.reset( new Fd( lock_file, O_RDWR | O_CREAT | O_EXCL, 0666) );
+	} catch (...) {
+	  _fd.reset();
+	}
+        if ( !_fd || !_fd->isOpen() )
         {
             struct flock lock;
             
