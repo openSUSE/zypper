@@ -28,6 +28,11 @@ namespace zypp
    *   using   boost::logic::indeterminate;
    * }
    * \endcode
+   *
+   * \warning Be carefull.esp. when comparing \ref TriBool using
+   * \c operator==, as <b><tt>( indeterminate == indeterminate )</tt><b>
+   * does \b not evaluate \b true. It's \c indeterminate.
+   *
    * \see http://www.boost.org/doc/html/tribool.html
    * \ingroup BOOST
   */
@@ -35,19 +40,24 @@ namespace zypp
   using   boost::logic::tribool;
   using   boost::logic::indeterminate;
 
-  /** \relates TriBool stream output */
-  inline std::ostream & operator<<(std::ostream & s, const TriBool & obj)
-  {
-    if (obj == indeterminate)
-      s << "indeterminate";
-    else if (obj)
-      s << "true";
-    else
-      s << "false";
-    return s;
-  }
-
   /////////////////////////////////////////////////////////////////
 } // namespace zypp
 ///////////////////////////////////////////////////////////////////
+namespace boost
+{
+    namespace logic
+    {
+      /** \relates TriBool stream output */
+      inline std::ostream & operator<<(std::ostream & s, const tribool & obj)
+      {
+        if (indeterminate(obj))
+          s << "indeterminate";
+        else if (obj)
+          s << "true";
+        else
+          s << "false";
+        return s;
+      }
+    }
+}
 #endif // ZYPP_TRIBOOL_H
