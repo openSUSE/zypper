@@ -72,7 +72,7 @@ Resolver::Resolver (const ResPool & pool)
     , _testing(false)
     , _forceResolve(false)
     , _upgradeMode(false)
-    , _updateMode(false)    
+    , _updateMode(false)
     , _verifying(false)
     , _onlyRequires(indeterminate)
     , _ignorealreadyrecommended(false)
@@ -98,7 +98,7 @@ Resolver::pool (void) const
 void
 Resolver::reset (bool keepExtras )
 {
-    _verifying = false;    
+    _verifying = false;
 
     if (!keepExtras) {
       _extra_requires.clear();
@@ -175,7 +175,7 @@ void Resolver::addQueueItem (const SolverQueueItem_Ptr item)
     if (!found) {
 	_added_queue_items.push_back (item);
 	_added_queue_items.unique ();
-    }    
+    }
 }
 
 void
@@ -222,8 +222,8 @@ Resolver::verifySystem ()
     UndoTransact resetting (ResStatus::APPL_HIGH);
 
     _DEBUG ("Resolver::verifySystem() ");
-    
-    _verifying = true;    
+
+    _verifying = true;
 
     invokeOnEach ( _pool.begin(), _pool.end(),
 		   resfilter::ByTransact( ),			// Resetting all transcations
@@ -249,7 +249,7 @@ Resolver::undo(void)
 
     // Additional QueueItems which has to be regarded by the solver
     _removed_queue_items.clear();
-    _added_queue_items.clear();    
+    _added_queue_items.clear();
 
     return;
 }
@@ -271,7 +271,7 @@ Resolver::solverInit()
     }
 
     _satResolver->setFixsystem(false);
-    _satResolver->setIgnorealreadyrecommended(false);	
+    _satResolver->setIgnorealreadyrecommended(false);
     _satResolver->setAllowdowngrade(false);
     _satResolver->setAllowarchchange(false);
     _satResolver->setAllowvendorchange(false);
@@ -280,7 +280,7 @@ Resolver::solverInit()
     _satResolver->setAllowvirtualconflicts(false);
     _satResolver->setNoupdateprovide(false);
     _satResolver->setDosplitprovides(false);
-	
+
     if (_upgradeMode) {
 	_satResolver->setAllowdowngrade(true);
 	_satResolver->setUpdatesystem(false); // not needed cause packages has already been evaluteted by distupgrade
@@ -298,8 +298,8 @@ Resolver::solverInit()
 
     if (_forceResolve)
 	_satResolver->setAllowuninstall(true);
-	
-    if (_onlyRequires == indeterminate)
+
+    if (indeterminate(_onlyRequires))
 	_satResolver->setOnlyRequires(ZConfig::instance().solver_onlyRequires());
     else if (_onlyRequires)
 	_satResolver->setOnlyRequires(true);
@@ -310,7 +310,7 @@ Resolver::solverInit()
 	_satResolver->setFixsystem(true);
 
     if (_ignorealreadyrecommended)
-	_satResolver->setIgnorealreadyrecommended(true);	
+	_satResolver->setIgnorealreadyrecommended(true);
 
     // Resetting additional solver information
     _isInstalledBy.clear();
@@ -330,16 +330,16 @@ bool
 Resolver::resolveQueue(solver::detail::SolverQueueItemList & queue)
 {
     solverInit();
-    
+
     // add/remove additional SolverQueueItems
     for (SolverQueueItemList::const_iterator iter = _removed_queue_items.begin();
 	 iter != _removed_queue_items.end(); iter++) {
 	for (SolverQueueItemList::const_iterator iterQueue = queue.begin(); iterQueue != queue.end(); iterQueue++) {
-	    if ( (*iterQueue)->cmp(*iter) == 0) {	    
+	    if ( (*iterQueue)->cmp(*iter) == 0) {
 		MIL << "remove from queue" << *iter;
 		queue.remove(*iterQueue);
 		break;
-	    }	    
+	    }
 	}
     }
 
@@ -350,10 +350,10 @@ Resolver::resolveQueue(solver::detail::SolverQueueItemList & queue)
 	    if ( (*iterQueue)->cmp(*iter) == 0) {
 		found = true;
 		break;
-	    }	    
+	    }
 	}
 	if (!found) {
-	    MIL << "add to queue" << *iter;	    
+	    MIL << "add to queue" << *iter;
 	    queue.push_back(*iter);
 	}
     }
@@ -362,7 +362,7 @@ Resolver::resolveQueue(solver::detail::SolverQueueItemList & queue)
     // give the user a chance for changing these decisions again.
     _removed_queue_items.clear();
     _added_queue_items.clear();
-    
+
     return _satResolver->resolveQueue(queue, _addWeak);
 }
 
@@ -389,7 +389,7 @@ Resolver::collectResolverInfo(void)
 		sat::WhatProvides possibleProviders(*capIt);
 		for_( iter, possibleProviders.begin(), possibleProviders.end() ) {
 		    PoolItem provider = ResPool::instance().find( *iter );
-		    
+
 		    // searching if this provider will already be installed
 		    bool found = false;
 		    bool alreadySetForInstallation = false;
@@ -410,19 +410,19 @@ Resolver::collectResolverInfo(void)
 			    _isInstalledBy.insert (make_pair( provider, capKindisInstalledBy));
 			} else {
 			    // no initial installation cause it has been set be e.g. user
-			    ItemCapKind capKindisInstalledBy( *instIter, *capIt, Dep::REQUIRES, false ); 
-			    _isInstalledBy.insert (make_pair( provider, capKindisInstalledBy));			    
+			    ItemCapKind capKindisInstalledBy( *instIter, *capIt, Dep::REQUIRES, false );
+			    _isInstalledBy.insert (make_pair( provider, capKindisInstalledBy));
 			}
 			ItemCapKind capKindisInstalledBy( provider, *capIt, Dep::REQUIRES, !alreadySetForInstallation );
-			_installs.insert (make_pair( *instIter, capKindisInstalledBy));			
+			_installs.insert (make_pair( *instIter, capKindisInstalledBy));
 		    }
 
 		    if (provider.status().staysInstalled()) { // Is already satisfied by an item which is installed
 			ItemCapKind capKindisInstalledBy( provider, *capIt, Dep::REQUIRES, false );
 			_satifiedByInstalled.insert (make_pair( *instIter, capKindisInstalledBy));
 
-			ItemCapKind installedSatisfied( *instIter, *capIt, Dep::REQUIRES, false ); 
-			_installedSatisfied.insert (make_pair( provider, installedSatisfied));			    
+			ItemCapKind installedSatisfied( *instIter, *capIt, Dep::REQUIRES, false );
+			_installedSatisfied.insert (make_pair( provider, installedSatisfied));
 		    }
 		}
 	    }
@@ -434,7 +434,7 @@ Resolver::collectResolverInfo(void)
 		    sat::WhatProvides possibleProviders(*capIt);
 		    for_( iter, possibleProviders.begin(), possibleProviders.end() ) {
 			PoolItem provider = ResPool::instance().find( *iter );
-		    
+
 			// searching if this provider will already be installed
 			bool found = false;
 			bool alreadySetForInstallation = false;
@@ -455,20 +455,20 @@ Resolver::collectResolverInfo(void)
 				_isInstalledBy.insert (make_pair( provider, capKindisInstalledBy));
 			    } else {
 				// no initial installation cause it has been set be e.g. user
-				ItemCapKind capKindisInstalledBy( *instIter, *capIt, Dep::RECOMMENDS, false ); 
-				_isInstalledBy.insert (make_pair( provider, capKindisInstalledBy));			    
+				ItemCapKind capKindisInstalledBy( *instIter, *capIt, Dep::RECOMMENDS, false );
+				_isInstalledBy.insert (make_pair( provider, capKindisInstalledBy));
 			    }
 			    ItemCapKind capKindisInstalledBy( provider, *capIt, Dep::RECOMMENDS, !alreadySetForInstallation );
-			    _installs.insert (make_pair( *instIter, capKindisInstalledBy));			
+			    _installs.insert (make_pair( *instIter, capKindisInstalledBy));
 			}
 
 			if (provider.status().staysInstalled()) { // Is already satisfied by an item which is installed
 			    ItemCapKind capKindisInstalledBy( provider, *capIt, Dep::RECOMMENDS, false );
 			    _satifiedByInstalled.insert (make_pair( *instIter, capKindisInstalledBy));
 
-			    ItemCapKind installedSatisfied( *instIter, *capIt, Dep::RECOMMENDS, false ); 
-			    _installedSatisfied.insert (make_pair( provider, installedSatisfied));			    
-			}		    
+			    ItemCapKind installedSatisfied( *instIter, *capIt, Dep::RECOMMENDS, false );
+			    _installedSatisfied.insert (make_pair( provider, installedSatisfied));
+			}
 		    }
 		}
 
@@ -498,8 +498,8 @@ Resolver::collectResolverInfo(void)
 				_isInstalledBy.insert (make_pair( *instIter, capKindisInstalledBy));
 			    } else {
 				// no initial installation cause it has been set be e.g. user
-				ItemCapKind capKindisInstalledBy( provider, *capIt, Dep::SUPPLEMENTS, false ); 
-				_isInstalledBy.insert (make_pair( *instIter, capKindisInstalledBy));			    
+				ItemCapKind capKindisInstalledBy( provider, *capIt, Dep::SUPPLEMENTS, false );
+				_isInstalledBy.insert (make_pair( *instIter, capKindisInstalledBy));
 			    }
 			    ItemCapKind capKindisInstalledBy( *instIter, *capIt, Dep::SUPPLEMENTS, !alreadySetForInstallation );
 			    _installs.insert (make_pair( provider, capKindisInstalledBy));
@@ -509,8 +509,8 @@ Resolver::collectResolverInfo(void)
 			    ItemCapKind capKindisInstalledBy( *instIter, *capIt, Dep::SUPPLEMENTS, !alreadySetForInstallation );
 			    _satifiedByInstalled.insert (make_pair( provider, capKindisInstalledBy));
 
-			    ItemCapKind installedSatisfied( provider, *capIt, Dep::SUPPLEMENTS, false ); 
-			    _installedSatisfied.insert (make_pair( *instIter, installedSatisfied));			    
+			    ItemCapKind installedSatisfied( provider, *capIt, Dep::SUPPLEMENTS, false );
+			    _installedSatisfied.insert (make_pair( *instIter, installedSatisfied));
 			}
 		    }
 		}

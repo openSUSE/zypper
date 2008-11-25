@@ -30,7 +30,7 @@ namespace zypp
    * \endcode
    *
    * \warning Be carefull.esp. when comparing \ref TriBool using
-   * \c operator==, as <b><tt>( indeterminate == indeterminate )</tt><b>
+   * \c operator==, as <b><tt>( indeterminate == indeterminate )</tt></b>
    * does \b not evaluate \b true. It's \c indeterminate.
    *
    * \see http://www.boost.org/doc/html/tribool.html
