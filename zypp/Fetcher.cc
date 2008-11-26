@@ -21,6 +21,7 @@
 #include "zypp/base/DefaultIntegral.h"
 #include "zypp/base/String.h"
 #include "zypp/Fetcher.h"
+#include "zypp/ZYppFactory.h"
 #include "zypp/CheckSum.h"
 #include "zypp/base/UserRequestException.h"
 #include "zypp/parser/susetags/ContentFileReader.h"
@@ -695,6 +696,12 @@ namespace zypp
     fetcher.start( dest_dir, media );
     fetcher.reset();
 
+    // try to import the key
+    if ( PathInfo(dest_dir + keyloc.filename()).isExist() )
+        getZYpp()->keyRing()->importKey(PublicKey(dest_dir + keyloc.filename()), false);
+    else
+        WAR << "No public key specified by user for index '" << keyloc.filename() << "'"<< endl;
+    
     // now the index itself
     fetcher.enqueue( idxloc, FileChecker(sigchecker) );
     fetcher.start( dest_dir, media );

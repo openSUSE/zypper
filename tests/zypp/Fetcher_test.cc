@@ -30,6 +30,30 @@ BOOST_AUTO_TEST_CASE(fetcher_enqueuedir_noindex)
   }
 }
 
+BOOST_AUTO_TEST_CASE(fetcher_enqueuedir_autoindex_untrustedkey)
+{
+  MediaSetAccess media( ( DATADIR).asUrl(), "/" );
+  // do the test by trusting the SHA1SUMS file signature key
+  {
+      filesystem::TmpDir dest;
+
+      // add the key as untrusted, which is the same as not adding it and
+      // let autodiscovery to add it
+
+      Fetcher fetcher;
+      fetcher.setOptions( Fetcher::AutoAddIndexes );
+      fetcher.enqueueDir(OnMediaLocation("/complexdir"), true);
+      BOOST_CHECK_THROW( fetcher.start( dest.path(), media ), Exception);
+
+      BOOST_CHECK( ! PathInfo(dest.path() + "/complexdir/subdir2").isExist() );
+      BOOST_CHECK( ! PathInfo(dest.path() + "/complexdir/subdir2/subdir2-file1.txt").isExist() );
+      BOOST_CHECK( ! PathInfo(dest.path() + "/complexdir/subdir1/subdir1-file1.txt").isExist() );
+      BOOST_CHECK( ! PathInfo(dest.path() + "/complexdir/subdir1/subdir1-file2.txt").isExist() );
+
+      fetcher.reset();
+  }
+}
+
 BOOST_AUTO_TEST_CASE(fetcher_enqueuedir_autoindex)
 {
   MediaSetAccess media( ( DATADIR).asUrl(), "/" );
