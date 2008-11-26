@@ -1,4 +1,10 @@
 -------------------------------------------------------------------
+Wed Nov 26 17:18:00 CET 2008 - ma@suse.de
+
+- Call 'repo2solv -R' (recursive scan) for plaindir repos. (bnc #443350)
+- revision 11810
+
+-------------------------------------------------------------------
 Wed Nov 26 17:09:12 CET 2008 - dmacvicar@suse.de
 
 - SHA1SUMS.key is not imported by zypp as known key (bnc #446188)

@@ -1027,8 +1027,12 @@ namespace zypp
         cmd.push_back( solvfile.asString() );
 
         if ( repokind == RepoType::RPMPLAINDIR )
+        {
           // FIXME this does only work form dir: URLs
           cmd.push_back( info.baseUrlsBegin()->getPathName() );
+          // recusive for plaindir
+          cmd.push_back( "-R" );
+        }
         else
           cmd.push_back( rawpath.asString() );
 
