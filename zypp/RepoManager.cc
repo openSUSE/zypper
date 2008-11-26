@@ -271,13 +271,29 @@ namespace zypp
   ////////////////////////////////////////////////////////////////////////////
 
   /**
-   * \short Calculates the raw cache path for a repository
+   * \short Calculates the raw cache path for a repository, this is usually
+   * /var/cache/zypp/alias
    */
   inline Pathname rawcache_path_for_repoinfo( const RepoManagerOptions &opt, const RepoInfo &info )
   {
     assert_alias(info);
     return opt.repoRawCachePath / info.escaped_alias();
   }
+
+  /**
+   * \short Calculates the raw metadata cache path for a repository, this is
+   * inside the raw cache dir, plus the path where the metadata is.
+   *
+   * It should be different only for repositories that are not in the root of
+   * the media.
+   * for example /var/cache/zypp/alias/addondir
+   */
+  inline Pathname rawmetadata_path_for_repoinfo( const RepoManagerOptions &opt, const RepoInfo &info )
+  {
+    assert_alias(info);
+    return opt.repoRawCachePath / info.escaped_alias() / info.path();
+  }
+
 
   /**
    * \short Calculates the packages cache path for a repository
@@ -484,7 +500,7 @@ namespace zypp
             ++it )
       {
         // set the metadata path for the repo
-        Pathname metadata_path = rawcache_path_for_repoinfo(options, (*it));
+        Pathname metadata_path = rawmetadata_path_for_repoinfo(options, (*it));
         (*it).setMetadataPath(metadata_path);
 
 	// set the downloaded packages path for the repo
@@ -547,7 +563,7 @@ namespace zypp
 
   Pathname RepoManager::metadataPath( const RepoInfo &info ) const
   {
-    return rawcache_path_for_repoinfo(_pimpl->options, info );
+    return rawmetadata_path_for_repoinfo(_pimpl->options, info );
   }
 
   Pathname RepoManager::packagesPath( const RepoInfo &info ) const
@@ -559,7 +575,8 @@ namespace zypp
 
   RepoStatus RepoManager::metadataStatus( const RepoInfo &info ) const
   {
-    Pathname rawpath = rawcache_path_for_repoinfo( _pimpl->options, info );
+    Pathname rawpath = rawmetadata_path_for_repoinfo( _pimpl->options, info );
+    Pathname mediarootpath = rawcache_path_for_repoinfo( _pimpl->options, info );
     RepoType repokind = info.type();
     RepoStatus status;
 
@@ -583,7 +600,7 @@ namespace zypp
 
       case RepoType::YAST2_e :
       {
-        status = RepoStatus( rawpath + "/content") && (RepoStatus( rawpath + "/media.1/media"));
+        status = RepoStatus( rawpath + "/content") && (RepoStatus( mediarootpath + "/media.1/media"));
       }
       break;
 
@@ -605,7 +622,7 @@ namespace zypp
 
   void RepoManager::touchIndexFile(const RepoInfo & info)
   {
-    Pathname rawpath = rawcache_path_for_repoinfo( _pimpl->options, info );
+    Pathname rawpath = rawmetadata_path_for_repoinfo( _pimpl->options, info );
 
     RepoType repokind = info.type();
     if ( repokind.toEnum() == RepoType::NONE_e )
@@ -666,7 +683,7 @@ namespace zypp
         break;
       }
 
-      Pathname rawpath = rawcache_path_for_repoinfo( _pimpl->options, info );
+      Pathname rawpath = rawmetadata_path_for_repoinfo( _pimpl->options, info );
       filesystem::assert_dir(rawpath);
       oldstatus = metadataStatus(info);
 
@@ -821,7 +838,7 @@ namespace zypp
           break;
         }
 
-        Pathname rawpath = rawcache_path_for_repoinfo( _pimpl->options, info );
+        Pathname rawpath = rawmetadata_path_for_repoinfo( _pimpl->options, info );
         filesystem::assert_dir(rawpath);
 
         // create temp dir as sibling of rawpath
@@ -848,7 +865,7 @@ namespace zypp
            */
           for_( it, repoBegin(), repoEnd() )
           {
-            Pathname cachepath(rawcache_path_for_repoinfo( _pimpl->options, *it ));
+            Pathname cachepath(rawmetadata_path_for_repoinfo( _pimpl->options, *it ));
             if ( PathInfo(cachepath).isExist() )
               downloader_ptr->addCachePath(cachepath);
           }
@@ -927,7 +944,7 @@ namespace zypp
                                 const ProgressData::ReceiverFnc & progressrcv )
   {
     assert_alias(info);
-    Pathname rawpath = rawcache_path_for_repoinfo(_pimpl->options, info);
+    Pathname rawpath = rawmetadata_path_for_repoinfo(_pimpl->options, info);
 
     filesystem::assert_dir(_pimpl->options.repoCachePath);
     RepoStatus raw_metadata_status = metadataStatus(info);

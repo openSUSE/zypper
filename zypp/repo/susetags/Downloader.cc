@@ -35,7 +35,9 @@ Downloader::Downloader( const RepoInfo &repoinfo )
 RepoStatus Downloader::status( MediaSetAccess &media )
 {
   Pathname content = media.provideFile( repoInfo().path() + "/content");
-  Pathname mediafile = media.provideFile( repoInfo().path() + "/media.1/media" );
+  // the media.1 is always in the root of the media, not like the content
+  // file which is in the path() location
+  Pathname mediafile = media.provideFile( "/media.1/media" );
 
   return RepoStatus(content) && RepoStatus(mediafile);
 }

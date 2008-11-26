@@ -14,6 +14,8 @@
 
 #include "zypp/RepoManager.h"
 
+#include "TestSetup.h"
+
 #include <boost/test/auto_unit_test.hpp>
 
 
@@ -28,6 +30,30 @@ using namespace zypp::filesystem;
 using namespace zypp::repo;
 
 #define DATADIR (Pathname(TESTS_SRC_DIR) + "/zypp/data/RepoManager")
+
+#define REPODATADIR (Pathname(TESTS_SRC_DIR) + "/repo/susetags/data/addon_in_subdir")
+
+
+BOOST_AUTO_TEST_CASE(refresh_addon_in_subdir)
+{
+    KeyRingTestReceiver keyring_callbacks;
+    KeyRingTestSignalReceiver receiver;
+
+    // disable sgnature checking
+    keyring_callbacks.answerAcceptKey(KeyRingReport::KEY_TRUST_TEMPORARILY);
+    keyring_callbacks.answerAcceptVerFailed(true);
+    keyring_callbacks.answerAcceptUnknownKey(true);
+
+    // make sure we can refresh an addon which is in a subpath in a media url
+    TestSetup test( Arch_x86_64 );
+    RepoInfo info;
+    info.setBaseUrl(Url(string("dir:") + REPODATADIR.asString()));
+    info.setPath("/updates");
+    info.setType(RepoType::YAST2);
+    info.setAlias("boooh");
+      
+    test.loadRepo(info);
+}
 
 BOOST_AUTO_TEST_CASE(repomanager_test)
 {
