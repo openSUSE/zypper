@@ -1028,10 +1028,10 @@ namespace zypp
 
         if ( repokind == RepoType::RPMPLAINDIR )
         {
+          // recusive for plaindir as 2nd arg!
+          cmd.push_back( "-R" );
           // FIXME this does only work form dir: URLs
           cmd.push_back( info.baseUrlsBegin()->getPathName() );
-          // recusive for plaindir
-          cmd.push_back( "-R" );
         }
         else
           cmd.push_back( rawpath.asString() );
