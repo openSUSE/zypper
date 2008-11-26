@@ -1,0 +1,63 @@
+=Ver: 2.0
+##----------------------------------------
+=Pkg: dnsmasq 2.46 1 i586
++Req:
+/usr/sbin/useradd
+fillup
+coreutils
+grep
+diffutils
+insserv
+sed
+/bin/mkdir
+/bin/sh
+/bin/sh
+/bin/sh
+/bin/sh
+rpmlib(PayloadFilesHavePrefix) <= 4.0-1
+rpmlib(CompressedFileNames) <= 3.0.4-1
+/bin/sh
+libc.so.6
+libc.so.6(GLIBC_2.0)
+libc.so.6(GLIBC_2.1)
+libc.so.6(GLIBC_2.2)
+libc.so.6(GLIBC_2.3)
+libc.so.6(GLIBC_2.3.4)
+libc.so.6(GLIBC_2.4)
+rpmlib(PayloadIsLzma) <= 4.4.2-1
+-Req:
++Prq:
+/usr/sbin/useradd
+fillup
+coreutils
+grep
+diffutils
+insserv
+sed
+/bin/mkdir
+/bin/sh
+/bin/sh
+/bin/sh
+/bin/sh
+rpmlib(PayloadFilesHavePrefix) <= 4.0-1
+rpmlib(CompressedFileNames) <= 3.0.4-1
+rpmlib(PayloadIsLzma) <= 4.4.2-1
+-Prq:
++Prv:
+dns_daemon
+dnsmasq = 2.46-1
+/etc/dnsmasq.conf
+/etc/init.d/dnsmasq
+/etc/slp.reg.d
+/etc/slp.reg.d/dnsmasq.reg
+/etc/sysconfig/SuSEfirewall2.d/services/dnsmasq-dhcp
+/etc/sysconfig/SuSEfirewall2.d/services/dnsmasq-dns
+/usr/sbin/dnsmasq
+/usr/sbin/rcdnsmasq
+-Prv:
+=Grp: Productivity/Networking/DNS/Servers
+=Lic: GPL v2 or later
+=Src: dnsmasq 2.46 1 src
+=Tim: 1226926770
+=Loc: 1 dnsmasq-2.46-1.i586.rpm
+=Siz: 290023 826308

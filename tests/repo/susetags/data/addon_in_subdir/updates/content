@@ -1,0 +1,18 @@
+CONTENTSTYLE 11
+BASEARCHS i586
+DATADIR suse
+DESCRDIR suse/setup/descr
+DISTRIBUTION openSUSE
+FLAVOR dvd
+LABEL openSUSE 11.1
+LINGUAS cs da de en en_GB en_US es fi fr hu it ja nb nl pl pt pt_BR ru sv zh zh_CN zh_TW
+NAME openSUSE
+REFERENCES openSUSE-release = 11.1
+RELNOTESURL http://www.suse.com/relnotes/i386/openSUSE/11.0.42/release-notes-openSUSE.rpm
+REPO_LOCATION http://download.opensuse.org/factory/repo/oss/
+SUMMARY openSUSE
+VENDOR openSUSE
+VERSION 11.1
+META SHA1 3d0cdf34257cc2c54929bf5414969142cad1d421  packages
+META SHA1 2d68731ab2f3c86b81f7672798f871cf96b2d0fc  packages.DU
+META SHA1 07c36c760ed0c58b58d6d8fcfdd2717df02c4256  packages.en
