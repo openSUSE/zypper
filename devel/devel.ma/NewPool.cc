@@ -441,54 +441,6 @@ try {
   INT << "===[START]==========================================" << endl;
   ZConfig::instance();
 
-
-#if 0
-
-  RepoManager repoManager( makeRepoManager( sysRoot ) );
-
-  ServiceInfoList services = repoManager.knownServices();
-  WAR << services << endl;
-
-  //RepoInfoList repos = repoManager.knownRepositories();
-  //DBG << repos << endl;
-
-
-  ServiceInfo s( repoManager.getService( "STest" ) );
-  if ( s == ServiceInfo::noService )
-  {
-    Measure x( "Add service STest" );
-    repoManager.addService( "STest", Url("dir:///Local/Service") );
-    s = repoManager.getService( "STest" );
-    USR << "Add service " << s << endl;
-  }
-
-  {
-    Measure x( "Refresh service STest" );
-    repoManager.refreshService( s );
-  }
-
-
-  RepoInfo nrepo;
-  nrepo.setAlias( alias );
-  nrepo.setName( alias );
-  nrepo.setEnabled( true );
-  nrepo.setAutorefresh( false );
-  nrepo.addBaseUrl( Url(url) );
-
-  if ( ! repoManager.isCached( nrepo ) )
-  {
-    repoManager.buildCache( nrepo );
-  }
-
-  repoManager.loadFromCache( nrepo );
-
-
-  ///////////////////////////////////////////////////////////////////
-  INT << "===[END]============================================" << endl << endl;
-  zypp::base::LogControl::instance().logNothing();
-  return 0;
-#endif
-
   ResPool   pool( ResPool::instance() );
   sat::Pool satpool( sat::Pool::instance() );
 
@@ -507,10 +459,6 @@ try {
     }
   }
 
-  ///////////////////////////////////////////////////////////////////
-  INT << "===[END]============================================" << endl << endl;
-  zypp::base::LogControl::instance().logNothing();
-  return 0;
   if ( 1 )
   {
     RepoManager repoManager( makeRepoManager( sysRoot ) );
