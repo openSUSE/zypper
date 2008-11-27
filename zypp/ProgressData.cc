@@ -108,9 +108,9 @@ namespace zypp
   {
     if ( obj.hasRange() )
     {
-      return str << str::form( "{%u|%s}[%lld,%lld](%lld)",
+      return str << str::form( "{%u|%s}[%lld,%lld](%lld)%lld%%)",
 			       obj.numericId(), obj.name().c_str(),
-			       obj.min(), obj.max(), obj.val() );
+			       obj.min(), obj.max(), obj.val(), obj.reportValue() );
     }
     return str << str::form( "{%u|%s}[-,-](%lld)",
 			     obj.numericId(), obj.name().c_str(),
