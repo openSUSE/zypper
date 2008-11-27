@@ -1,48 +1,67 @@
 #include "Tools.h"
 #include <zypp/ResObjects.h>
+#include <zypp/ProgressData.h>
+#include <zypp/sat/WhatObsoletes.h>
 
 #include "zypp/pool/GetResolvablesToInsDel.h"
 
 Pathname mroot( "/tmp/Bb" );
 TestSetup test( mroot, Arch_ppc64 );
 
-bool checkCaps( Capabilities caps_r );
+#define LCStack   "IOrder::Stack"
+#define LCCache   "IOrder::Cache"
+#define LCVerbose "IOrder::Verbose"
 
-struct RunableCache
+bool progressReceiver( const ProgressData & v )
+{
+  DBG << "...->" << v << endl;
+  return true;
+}
+
+struct RunnableCache
 {
   typedef std::tr1::unordered_map<sat::Solvable,TriBool> CacheType;
   typedef std::vector<sat::Solvable>                     AnalyzeStack;
 
-  RunableCache()
+  RunnableCache()
   : _ltag( "[0000]" )
   {}
 
   /**
-   * Test whether there is a runable provider for each requirement.
+   * Test whether there is a runnable provider for each requirement.
    */
-  bool isRunable( const PoolItem & pi ) const
-  { return isRunable( pi.satSolvable() ); }
+  bool isRunnable( const PoolItem & pi ) const
+  { return isRunnable( pi.satSolvable() ); }
 
-  bool isRunable( sat::Solvable solv_r ) const
+  bool isRunnable( sat::Solvable solv_r ) const
   {
-    tribool & cent( get( solv_r ) );
-    if ( indeterminate( cent ) )
-      return (cent = analyze( solv_r ));
-    return cent;
+    SEC << "Runnable?       " << solv_r << endl;
+    if ( _isRunnable( solv_r ) )
+    {
+      MIL << "Runnable:       " << solv_r << endl;
+      return true;
+    }
+    ERR << "NotRunnable:    " << solv_r << endl;
+    return false;
   }
 
   /**
-   * Test whether there is a runable provider for each pre-requirement.
+   * Test whether there is a runnable provider for each pre-requirement.
    */
   bool isInstallable( const PoolItem & pi ) const
   { return isInstallable( pi.satSolvable() ); }
 
   bool isInstallable( sat::Solvable solv_r ) const
   {
-    tribool & cent( get( solv_r ) );
-    if ( cent )
-      return true; // if runable then also installable.
-    return checkCaps( solv_r.prerequires() );
+    SEC << "Installable?    " << solv_r << endl;
+    tribool & cent( get( solv_r ) ); // if (cached) runnable then also installable.
+    if ( cent || checkCaps( solv_r.prerequires() ) )
+    {
+      MIL << "Installable:    " << solv_r << endl;
+      return true;
+    }
+    ERR << "NotInstallable: " << solv_r << endl;
+    return false;
   }
 
   /** Clear the cache. */
@@ -51,83 +70,90 @@ struct RunableCache
     _cache.clear();
     _stack.clear();
     _ltag = "[0000]";
+    _INT(LCCache) << "Cache cleared!" << endl;
   }
 
   private:
+    /** Internal version without loging for recursive calls. */
+    bool _isRunnable( const PoolItem & pi ) const
+    { return _isRunnable( pi.satSolvable() ); }
+
+    bool _isRunnable( sat::Solvable solv_r ) const
+    {
+      tribool & cent( get( solv_r ) );
+      if ( indeterminate( cent ) )
+        cent = analyze( solv_r );
+      return cent;
+    }
+
     /**
-     * Determine whether this solvable is runable.
+     * Determine whether this solvable is runnable.
      */
     bool analyze( sat::Solvable solv_r ) const
     {
       if ( ! push( solv_r ) )
       {
         if ( _stack.back() != solv_r )
-          SEC << _ltag << "??Already on stack: " << solv_r << " " << _stack << endl;
+          _SEC(LCStack) << _ltag << "** CYCLE: " << solv_r << " " << _stack << endl;
         // else it's a self requirement
         return true; // assume runnable?
       }
-
-      INT << _ltag << "->" << solv_r << " " << _stack << endl;
+      _INT(LCStack) << _ltag << "->" << solv_r << " " << _stack << endl;
       bool ret = checkCaps( solv_r.requires() );
-      if ( ! ret )
-      {
-        ERR << " Not runable: " << solv_r << endl;
-      }
-      INT << _ltag << "<-" << solv_r << " " << _stack << endl;
-
+      _INT(LCStack) << _ltag << "<-" << solv_r << " " << _stack << endl;
       if ( ! pop( solv_r ) )
       {
-        INT << "Stack corrupted! Expect " << solv_r << " " << _stack << endl;
+        _SEC(LCStack) << "** Stack corrupted! Expect " << solv_r << " " << _stack << endl;
       }
       return ret;
     }
 
     /**
-     * For each capability find a runable provider.
+     * For each capability find a runnable provider.
      */
     bool checkCaps( Capabilities caps_r ) const
     {
       for_( it, caps_r.begin(), caps_r.end() )
       {
-        if ( ! findRunableProvider( *it ) )
+        if ( ! findRunnableProvider( *it ) )
           return false;
       }
       return true;
     }
 
     /**
-     * Find a runable provider of a capability on system.
+     * Find a runnable provider of a capability on system.
      *
-     * A runable package is already installed and all of
-     * its requirements are met by runable packages.
+     * A runnable package is already installed and all of
+     * its requirements are met by runnable packages.
      */
-    bool findRunableProvider( Capability cap_r ) const
+    bool findRunnableProvider( Capability cap_r ) const
     {
-      _MIL("findRunableProvider") << _ltag << "  " << cap_r << endl;
+      _MIL(LCVerbose) << _ltag << "  " << cap_r << endl;
       sat::WhatProvides prv( cap_r );
       for_( pit, prv.begin(), prv.end() )
       {
         if ( ! *pit )
         {
-          _DBG("findRunableProvider") << _ltag << "     by system" << endl;
+          _DBG(LCVerbose) << _ltag << "     by system" << endl;
           return true; // noSolvable provides: i.e. system provides
         }
 
         PoolItem pi( *pit );
         if ( pi.status().onSystem() )
         {
-          if ( isRunable( pi ) )
+          if ( _isRunnable( pi ) )
           {
-            _DBG("findRunableProvider") << _ltag << "    " << pi << endl;
+            _DBG(LCVerbose) << _ltag << "    " << pi << endl;
             return true;
           }
           else
           {
-            _WAR("findRunableProvider") << _ltag << "    " << pi << endl;
+            _WAR(LCVerbose) << _ltag << "    " << pi << endl;
           }
         }
       }
-      ERR << _ltag << "    NO on system provider for " << cap_r << endl;
+      ERR << _ltag << "    NO runnable provider for " << cap_r << endl;
       return false;
     }
 
@@ -138,7 +164,7 @@ struct RunableCache
       if ( find( _stack.begin(), _stack.end(), solv_r ) == _stack.end() )
       {
         _stack.push_back( solv_r );
-        _ltag = str::form( "[%04u]", _stack.size() );
+        _ltag = str::form( "[%04lu]", _stack.size() );
         return true;
       }
       // cycle?
@@ -151,7 +177,7 @@ struct RunableCache
       if ( _stack.back() == solv_r )
       {
         _stack.pop_back();
-        _ltag = str::form( "[%04u]", _stack.size() );
+        _ltag = str::form( "[%0l4u]", _stack.size() );
         return true;
       }
       // stack corrupted?
@@ -172,7 +198,7 @@ struct RunableCache
     mutable std::string  _ltag;
 };
 
-RunableCache rcache;
+RunnableCache rcache;
 
 //==================================================
 
@@ -239,6 +265,104 @@ inline void restore()
   test.poolProxy().restoreState();
 }
 
+void display( const pool::GetResolvablesToInsDel & collect, std::set<IdString> interested )
+{
+  USR << "======================================================================" << endl;
+  USR << "=== DELETE" << endl;
+  USR << "======================================================================" << endl;
+  if ( 1 )
+  {
+    ProgressData tics( collect._toDelete.size() );
+    tics.name( "DELETE" );
+    tics.sendTo( &progressReceiver );
+    tics.toMin();
+
+    for_( it, collect._toDelete.begin(), collect._toDelete.end() )
+    {
+      tics.incr();
+
+      it->status().setTransact( true, ResStatus::USER );
+//       vdumpPoolStats( SEC << "Transacting:"<< endl,
+//                       make_filter_begin<resfilter::ByTransact>(pool),
+//                       make_filter_end<resfilter::ByTransact>(pool) ) << endl;
+
+      if ( !interested.empty() && interested.find( it->satSolvable().ident() ) == interested.end() )
+      {
+        MIL << "..." << *it << endl;
+        continue;
+      }
+
+      rcache.clear();
+      if ( ! rcache.isInstallable( *it ) )
+      {
+        USR << "FAILED DEL " << *it << endl;
+      }
+    }
+  }
+
+  USR << "======================================================================" << endl;
+  USR << "=== INSTALL" << endl;
+  USR << "======================================================================" << endl;
+  if ( 1 )
+  {
+    ProgressData tics( collect._toInstall.size() );
+    tics.name( "INSTALL" );
+    tics.sendTo( progressReceiver );
+    tics.toMin();
+
+
+    for_( it, collect._toInstall.begin(), collect._toInstall.end() )
+    {
+      tics.incr();
+
+      ui::Selectable::Ptr p( ui::Selectable::get( *it ) );
+      p->setCandidate( *it );
+      p->setToInstall(); // also deletes the installed one
+//       vdumpPoolStats( SEC << "Transacting:"<< endl,
+//                       make_filter_begin<resfilter::ByTransact>(pool),
+//                       make_filter_end<resfilter::ByTransact>(pool) ) << endl;
+
+
+      if ( !interested.empty() && interested.find( p->ident() ) == interested.end() )
+      {
+        MIL << "..." << *it << endl;
+        continue;
+      }
+
+      rcache.clear();
+
+      sat::WhatObsoletes obs( *it );
+      for_( it, obs.begin(), obs.end() )
+      {
+        if ( ! rcache.isInstallable( *it ) )
+        {
+          USR << "FAILED OBS " << *it << endl;
+        }
+      }
+
+      if ( ! rcache.isInstallable( *it ) )
+      {
+        USR << "FAILED INS " << *it << endl;
+      }
+    }
+  }
+}
+
+void display( const pool::GetResolvablesToInsDel & collect, IdString ident_r )
+{
+  std::set<IdString> interested;
+  interested.insert( ident_r );
+  display( collect, interested );
+}
+
+
+void display( const pool::GetResolvablesToInsDel & collect )
+{
+  std::set<IdString> interested;
+  display( collect, interested );
+}
+
+
 /******************************************************************
 **
 **      FUNCTION NAME : main
@@ -262,8 +386,8 @@ int main( int argc, char * argv[] )
 
   if ( 0 )
   {
-    PoolItem p = getPi<Package>( "bash", Edition("3.1-24.14"), Arch("ppc64") );
-    p.status().setTransact( true, ResStatus::USER );
+    PoolItem pi = getPi<Package>( "bash", Edition("3.1-24.14"), Arch("ppc64") );
+    pi.status().setTransact( true, ResStatus::USER );
   }
 
   save();
@@ -278,97 +402,19 @@ int main( int argc, char * argv[] )
                   make_filter_end<resfilter::ByTransact>(pool) ) << endl;
 
   pool::GetResolvablesToInsDel collect( pool, pool::GetResolvablesToInsDel::ORDER_BY_MEDIANR );
+
+  USR << ui::Selectable::get( "libcdio" ) << endl;
+  USR << ui::Selectable::get( "libcdio7" ) << endl;
+
+  std::set<IdString> interested;
+  //interested.insert( IdString("libcdio") );
+  //interested.insert( IdString("libcdio7") );
+
   restore();
-  vdumpPoolStats( USR << "Transacting:"<< endl,
-                  make_filter_begin<resfilter::ByTransact>(pool),
-                  make_filter_end<resfilter::ByTransact>(pool) ) << endl;
 
-  {
-    for_( it, collect._toDelete.begin(), collect._toDelete.end() )
-    {
-      it->status().setTransact( true, ResStatus::USER );
-      SEC << *it << endl;
-//       vdumpPoolStats( SEC << "Transacting:"<< endl,
-//                       make_filter_begin<resfilter::ByTransact>(pool),
-//                       make_filter_end<resfilter::ByTransact>(pool) ) << endl;
+  display( collect, interested );
 
-      (rcache.isInstallable( *it ) ? MIL : ERR) << *it << " deletable?" << endl;
-    }
-  }
-
-  if ( 0 ) {
-    for_( it, collect._toInstall.begin(), collect._toInstall.end() )
-    {
-      it->status().setTransact( true, ResStatus::USER );
-      SEC << *it << endl;
-//       vdumpPoolStats( SEC << "Transacting:"<< endl,
-//                       make_filter_begin<resfilter::ByTransact>(pool),
-//                       make_filter_end<resfilter::ByTransact>(pool) ) << endl;
-      (rcache.isInstallable( *it ) ? MIL : ERR) << *it << " installable?" << endl;
-    }
-  }
-
-
-#if 0
-  //getPi<>( "", "", Edition(""), Arch("") );
-  getPi<Product>( "SUSE_SLES", Edition("11"), Arch("ppc64") ).status().setTransact( true, ResStatus::USER );
-  getPi<Package>( "sles-release", Edition("11-54.3"), Arch("ppc64") ).status().setTransact( true, ResStatus::USER );
-
-  ResPool pool( test.pool() );
-  vdumpPoolStats( USR << "Transacting:"<< endl,
-                  make_filter_begin<resfilter::ByTransact>(pool),
-                  make_filter_end<resfilter::ByTransact>(pool) ) << endl;
-  upgrade();
-  vdumpPoolStats( USR << "Transacting:"<< endl,
-                  make_filter_begin<resfilter::ByTransact>(pool),
-                  make_filter_end<resfilter::ByTransact>(pool) ) << endl;
-
-  pool::GetResolvablesToInsDel collect( pool, pool::GetResolvablesToInsDel::ORDER_BY_MEDIANR );
-  MIL << "GetResolvablesToInsDel:" << endl << collect << endl;
-
-  if ( 1 )
-  {
-    // Collect until the 1st package from an unwanted media occurs.
-    // Further collection could violate install order.
-    bool hitUnwantedMedia = false;
-    typedef pool::GetResolvablesToInsDel::PoolItemList PoolItemList;
-    PoolItemList::iterator fst=collect._toInstall.end();
-    for ( PoolItemList::iterator it = collect._toInstall.begin(); it != collect._toInstall.end(); ++it)
-    {
-      ResObject::constPtr res( it->resolvable() );
-
-      if ( hitUnwantedMedia
-           || ( res->mediaNr() && res->mediaNr() != 1 ) )
-      {
-        if ( !hitUnwantedMedia )
-          fst=it;
-        hitUnwantedMedia = true;
-      }
-    }
-    dumpRange( WAR << "toInstall1: " << endl,
-               collect._toInstall.begin(), fst ) << endl;
-    dumpRange( WAR << "toInstall2: " << endl,
-               fst, collect._toInstall.end() ) << endl;
-    dumpRange( ERR << "toDelete: " << endl,
-               collect._toDelete.begin(), collect._toDelete.end() ) << endl;
-  }
-  else
-  {
-    dumpRange( WAR << "toInstall: " << endl,
-               collect._toInstall.begin(), collect._toInstall.end() ) << endl;
-    dumpRange( ERR << "toDelete: " << endl,
-               collect._toDelete.begin(), collect._toDelete.end() ) << endl;
-  }
-  INT << "===[END]============================================" << endl << endl;
-  return 0;
-#endif
-
-
-
-
-
-  INT << "===[END]============================================" << endl << endl;
+ INT << "===[END]============================================" << endl << endl;
   zypp::base::LogControl::TmpLineWriter shutUp;
   return 0;
 }
-

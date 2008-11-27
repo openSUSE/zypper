@@ -38,6 +38,7 @@
 #include "zypp/ResStatus.h"
 #include "zypp/NameKindProxy.h"
 #include "zypp/sat/Pool.h"
+#include <zypp/sat/WhatObsoletes.h>
 
 /////////////////////////////////////////////////////////////////////////
 namespace zypp
@@ -196,12 +197,12 @@ InstallOrder::rdfsvisit (const PoolItem item)
 
     // items prereq
     CapabilitySet prq( item->dep(Dep::PREREQUIRES).begin(), item->dep(Dep::PREREQUIRES).end() );
-    // an installed items prereq (in case they are reqired for uninstall scripts)
-    NameKindProxy nkp( _pool, item->name(), item->kind() );
-    if ( ! nkp.installedEmpty() )
+    // any obsoleted items prereq (in case they are reqired for uninstall scripts)
+    sat::WhatObsoletes obs( item );
+    for_( it, obs.begin(), obs.end() )
     {
-      prq.insert( (*nkp.installedBegin())->dep(Dep::PREREQUIRES).begin(),
-		  (*nkp.installedBegin())->dep(Dep::PREREQUIRES).end() );
+      Capabilities p( it->prerequires() );
+      prq.insert( p.begin(), p.end() );
     }
     // put prerequires first and requires last on list to ensure
     // that prerequires are processed first

@@ -1,4 +1,12 @@
 -------------------------------------------------------------------
+Fri Nov 28 00:05:17 CET 2008 - ma@calvin.km13.de
+
+- Take into account the requirements of all obsoleted packages uninstall 
+  scripts when computing the installation order. (bnc #439802)
+- revision 11823
+- version 5.24.3 (23)
+
+-------------------------------------------------------------------
 Thu Nov 27 14:45:07 CET 2008 - dmacvicar@suse.de
 
 - fix maybeUnsuported() method returning wrong result
