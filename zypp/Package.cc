@@ -65,7 +65,11 @@ namespace zypp
 
   bool Package::maybeUnsupported() const
   {
-      return ( vendorSupport() & ( VendorSupportACC | VendorSupportUnsupported | VendorSupportUnknown ) );
+      if ( ( vendorSupport() == VendorSupportUnknown ) ||
+           ( vendorSupport() == VendorSupportACC ) ||
+           ( vendorSupport() == VendorSupportUnsupported ) )
+          return true;
+      return false;
   }
 
   Changelog Package::changelog() const

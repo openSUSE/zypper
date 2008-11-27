@@ -10,6 +10,7 @@
 #include "zypp/base/Exception.h"
 #include "zypp/PathInfo.h"
 #include "zypp/TmpPath.h"
+#include "zypp/Package.h"
 #include "zypp/RepoManager.h"
 #include "zypp/sat/Pool.h"
 #include "KeyRingTestReceiver.h"
@@ -90,5 +91,54 @@ BOOST_AUTO_TEST_CASE(extended_metadata)
 
   BOOST_CHECK( repo.providesUpdatesFor("cpe://o:sle") );
   BOOST_CHECK( ! repo.providesUpdatesFor("cpe://o:windows") );
+
+  // reuse to count solvables
+  count = 0;
+  
+  /**
+   * Now check for the extended metadata of the packages
+   */
+  for_( it, repo.solvablesBegin(), repo.solvablesEnd() )
+  {
+      sat::Solvable s = *it;
+      MIL << s << endl;
+      MIL << s.kind() << endl;
+      if ( s.ident() == "wt" )
+      {
+          count++;
+          Package::Ptr p = asKind<Package>(makeResObject(s));
+          BOOST_CHECK(p);
+          BOOST_CHECK(p->maybeUnsupported() );
+          BOOST_CHECK_EQUAL(p->vendorSupport(), VendorSupportUnknown );
+          
+      }
+      else if ( s.ident() == "foobar" )
+      {
+            count++;            
+            Package::Ptr p = asKind<Package>(makeResObject(s));
+            BOOST_CHECK(p);
+            BOOST_CHECK_EQUAL(p->vendorSupport(), VendorSupportUnsupported ); 
+            BOOST_CHECK(p->maybeUnsupported() );
+      }
+      else if ( s.ident() == "foofoo" )
+      {
+          count++;
+          Package::Ptr p = asKind<Package>(makeResObject(s));
+          BOOST_CHECK(p);
+          // if it is level 3 support it cant be unsupported
+          BOOST_CHECK_EQUAL(p->vendorSupport(), VendorSupportLevel3 );
+          BOOST_CHECK(! p->maybeUnsupported() );
+
+      }
+      else
+      {
+          BOOST_FAIL(str::form("Repo has package not contemplated in test: %s", s.ident().c_str()).c_str());
+      }
+      
+    }
+
+    // check that we actually found all testeable
+    // resolvables
+    BOOST_CHECK_EQUAL(count, 3);
 
 }
