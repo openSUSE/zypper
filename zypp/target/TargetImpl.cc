@@ -312,8 +312,6 @@ namespace zypp
       const char* argv[] =
       {
          "/usr/bin/uuidgen",
-         "-r",
-         "-t",
          NULL
       };
 
