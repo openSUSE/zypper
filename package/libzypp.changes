@@ -1,4 +1,10 @@
 -------------------------------------------------------------------
+Thu Nov 27 14:45:07 CET 2008 - dmacvicar@suse.de
+
+- fix maybeUnsuported() method returning wrong result
+- add testcase for future coverage
+
+-------------------------------------------------------------------
 Wed Nov 26 17:18:00 CET 2008 - ma@suse.de
 
 - Call 'repo2solv -R' (recursive scan) for plaindir repos. (bnc #443350)
