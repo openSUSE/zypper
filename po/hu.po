@@ -15,7 +15,7 @@ msgstr ""
 "Project-Id-Version: zypper.hu\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2008-10-27 18:08+0100\n"
-"PO-Revision-Date: 2008-11-17 14:46+0100\n"
+"PO-Revision-Date: 2008-11-27 10:40+0100\n"
 "Last-Translator: Kalman Kemenczy <kkemenczy@novell.com>\n"
 "Language-Team: Hungarian <hu@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -1712,50 +1712,50 @@ msgstr[1] "A következő termékek kerülnek ELTÁVOLÍTÁSRA:"
 #: ../src/solve-commit.cc:484
 msgid "The following package is going to change architecture:"
 msgid_plural "The following packages are going to change architecture:"
-msgstr[0] "Az alábbi csomag változtatja meg az architektúrát:"
-msgstr[1] "Az alábbi csomagok változtatják meg az architektúrát:"
+msgstr[0] "Az alábbi csomag módosítja az architektúrát:"
+msgstr[1] "Az alábbi csomagok módosítják az architektúrát:"
 
 #: ../src/solve-commit.cc:489
 msgid "The following patch is going to change architecture:"
 msgid_plural "The following patches are going to change architecture:"
-msgstr[0] "Az alábbi javítás változtatja meg az architektúrát:"
-msgstr[1] "Az alábbi javítások változtatják meg az architektúrát:"
+msgstr[0] "Az alábbi javítás módosítja az architektúrát:"
+msgstr[1] "Az alábbi javítások módosítják az architektúrát:"
 
 #: ../src/solve-commit.cc:494
 msgid "The following pattern is going to change architecture:"
 msgid_plural "The following patterns are going to change architecture:"
-msgstr[0] "Az alábbi minta változtatja meg az architektúrát:"
-msgstr[1] "Az alábbi minták változtatják meg az architektúrát:"
+msgstr[0] "Az alábbi minta módosítja az architektúrát:"
+msgstr[1] "Az alábbi minták módosítják az architektúrát:"
 
 #: ../src/solve-commit.cc:499
 msgid "The following product is going to change architecture:"
 msgid_plural "The following products are going to change architecture:"
-msgstr[0] "Az alábbi termék változtatja meg az architektúrát:"
-msgstr[1] "Az alábbi termékek változtatják meg az architektúrát:"
+msgstr[0] "Az alábbi termék módosítja az architektúrát:"
+msgstr[1] "Az alábbi termékek módosítják meg az architektúrát:"
 
 #: ../src/solve-commit.cc:506
 msgid "The following package is going to change vendor:"
 msgid_plural "The following packages are going to change vendor:"
-msgstr[0] "Az alábbi csomag változtatja meg a gyártót:"
-msgstr[1] "Az alábbi csomagok változtatják meg a gyártót:"
+msgstr[0] "Az alábbi csomag módosítja a gyártót:"
+msgstr[1] "Az alábbi csomagok módosítja a gyártót:"
 
 #: ../src/solve-commit.cc:511
 msgid "The following patch is going to change vendor:"
 msgid_plural "The following patches are going to change vendor:"
-msgstr[0] "Az alábbi javítás változtatja meg a gyártót:"
-msgstr[1] "Az alábbi javítások változtatják meg a gyártót:"
+msgstr[0] "Az alábbi javítás módosítja a gyártót:"
+msgstr[1] "Az alábbi javítások módosítják a gyártót:"
 
 #: ../src/solve-commit.cc:516
 msgid "The following pattern is going to change vendor:"
 msgid_plural "The following patterns are going to change vendor:"
-msgstr[0] "Az alábbi minta változtatja meg a gyártót:"
-msgstr[1] "Az alábbi minták változtatják meg a gyártót:"
+msgstr[0] "Az alábbi minta módosítja a gyártót:"
+msgstr[1] "Az alábbi minták módosítják a gyártót:"
 
 #: ../src/solve-commit.cc:521
 msgid "The following product is going to change vendor:"
 msgid_plural "The following products are going to change vendor:"
-msgstr[0] "Az alábbi termék változtatja meg a gyártót:"
-msgstr[1] "Az alábbi termékek változtatják meg a gyártót:"
+msgstr[0] "Az alábbi termék módosítja a gyártót:"
+msgstr[1] "Az alábbi termékek módosítják a gyártót:"
 
 #: ../src/solve-commit.cc:529
 msgid "The following package is not supported by its vendor:"

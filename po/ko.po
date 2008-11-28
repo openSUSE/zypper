@@ -6,7 +6,7 @@ msgstr ""
 "Project-Id-Version: zypper.ko\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2008-10-27 18:08+0100\n"
-"PO-Revision-Date: 2008-11-04 20:34+0900\n"
+"PO-Revision-Date: 2008-11-28 11:31+0900\n"
 "Last-Translator: YunSeok Choi <xein@naver.com>\n"
 "Language-Team: Korean <xein@naver.com>\n"
 "MIME-Version: 1.0\n"
@@ -1964,7 +1964,7 @@ msgstr "저장소로부터 꾸러미 파일 회수 중 문제:"
 #: ../src/solve-commit.cc:1143
 #, c-format
 msgid "Repository '%s' is out of date. Running '%s' might help."
-msgstr "저장소 '%s' 는 유통기한이 지났습니다. '%s' 를 실행하세요."
+msgstr "저장소 '%s' 는 유효기한이 지났습니다. '%s' 를 실행하세요."
 
 #: ../src/solve-commit.cc:1155
 msgid ""

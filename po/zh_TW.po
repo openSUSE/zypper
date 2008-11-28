@@ -11,7 +11,7 @@ msgstr ""
 "Project-Id-Version: zypper\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2008-10-27 18:08+0100\n"
-"PO-Revision-Date: 2008-11-23 11:39+0800\n"
+"PO-Revision-Date: 2008-11-28 21:23+0800\n"
 "Last-Translator: swyear <swyear@gmail.com>\n"
 "Language-Team: Traditional Chinese <opensuse-translation@opensuse.org>\n"
 "MIME-Version: 1.0\n"
@@ -187,11 +187,11 @@ msgstr "%s 的摘要確認失敗。期望 %s，找到 %s。"
 
 #: ../src/callbacks/locks.h:29
 msgid "The following query locks some of the objects you want to unlock:"
-msgstr ""
+msgstr "下列的查詢鎖定了一些您想要解鎖的物件："
 
 #: ../src/callbacks/locks.h:42
 msgid "The following query does not lock anything:"
-msgstr ""
+msgstr "下列的查詢沒有鎖定任何東西："
 
 #. TranslatorExplanation translate letters 'y' and 'n' to whathever is appropriate for your language.
 #. Try to check what answers does zypper accept (it always accepts y/n at least)
@@ -2156,7 +2156,6 @@ msgid "Error"
 msgstr "錯誤"
 
 #: ../src/Zypper.cc:153
-#, fuzzy
 msgid ""
 "  Global Options:\n"
 "\t--help, -h\t\tHelp.\n"
@@ -2178,19 +2177,21 @@ msgstr ""
 "  全域選項：\n"
 "\t--help， -h\t\t說明訊息。\n"
 "\t--version， -V\t\t輸出版本編號。\n"
-"\t--quiet， -q\t\t隱藏一般輸出，僅印出錯誤訊息。\n"
+"\t--quiet， -q\t\t隱藏一般輸出，僅印出錯誤\n"
+"\t\t\t\t訊息。\n"
 "\t--verbose， -v\t\t增加詳細度。\n"
 "\t--no-abbrev, -A\t\t在表格中不要縮減文字。\n"
 "\t--table-style， -s\t表格樣式(整數)。\n"
 "\t--rug-compatible， -r\t開啟 rug 相容性。\n"
-"\t--non-interactive， -n\t不問任何事，自動使用預設的答案。\n"
+"\t--non-interactive， -n\t不問任何事，自動使用預設的\n"
+"\t\t\t\t答案。\n"
 "\t--xmlout， -x\t\t切換為 XML 輸出。\n"
-"\t--reposd-dir， -D <dir>\t使用不同的套件庫定義檔的目錄。\n"
+"\t--reposd-dir， -D <dir>\t使用不同的套件庫定義檔的\n"
+"\t\t\t\t目錄。\n"
 "\t--cache-dir， -C <dir>\t使用不同的中繼資料快取資料庫的目錄。\n"
 "\t--raw-cache-dir <dir>\t使用不同的 raw 中繼資料快取的目錄。\n"
 
 #: ../src/Zypper.cc:171
-#, fuzzy
 msgid ""
 "     Repository Options:\n"
 "\t--no-gpg-checks\t\tIgnore GPG check failures and continue.\n"
@@ -2198,7 +2199,7 @@ msgid ""
 "\t--disable-repositories\tDo not read meta-data from repositories.\n"
 "\t--no-refresh\t\tDo not refresh the repositories.\n"
 msgstr ""
-"\t套件庫選項：\n"
+"     套件庫選項：\n"
 "\t--no-gpg-checks\t\t忽略 GPG 檢查錯誤並繼續。\n"
 "\t--plus-repo， -p <URI>\t使用附加的套件庫。\n"
 "\t--disable-repositories\t不要由套件庫讀取中繼資料。\n"
@@ -2212,16 +2213,16 @@ msgid ""
 msgstr ""
 
 #: ../src/Zypper.cc:182
-#, fuzzy
 msgid ""
 "     Target Options:\n"
 "\t--root, -R <dir>\tOperate on a different root directory.\n"
 "\t--disable-system-resolvables\n"
 "\t\t\t\tDo not read installed packages.\n"
 msgstr ""
-"\t目標選項：\n"
+"     目標選項：\n"
 "\t--root， -R <dir>\t在不同的根目錄操作。\n"
-"\t--disable-system-resolvables、-T\t\t不要讀取已安裝的解決方案。\n"
+"\t--disable-system-resolvables\n"
+"\t\t\t\t不要讀取已安裝的套件。\n"
 
 #: ../src/Zypper.cc:189
 msgid ""
@@ -2234,7 +2235,6 @@ msgstr ""
 "\tshell, sh\t\t同時接受多重指令。\n"
 
 #: ../src/Zypper.cc:194
-#, fuzzy
 msgid ""
 "     Repository Management:\n"
 "\trepos, lr\t\tList all defined repositories.\n"
@@ -2245,7 +2245,7 @@ msgid ""
 "\trefresh, ref\t\tRefresh all repositories.\n"
 "\tclean\t\t\tClean local caches.\n"
 msgstr ""
-"\t套件庫處理：\n"
+"     套件庫管理：\n"
 "\trepos, lr\t\t列出所有已定義的套件庫。\n"
 "\taddrepo, ar\t\t加入一個新的套件庫。\n"
 "\tremoverepo, rr\t\t移除指定的套件庫。\n"
@@ -2265,7 +2265,6 @@ msgid ""
 msgstr ""
 
 #: ../src/Zypper.cc:212
-#, fuzzy
 msgid ""
 "     Software Management:\n"
 "\tinstall, in\t\tInstall packages.\n"
@@ -2277,13 +2276,15 @@ msgid ""
 "\t\t\t\tInstall newly added packages recommended\n"
 "\t\t\t\tby installed packages.\n"
 msgstr ""
-"\t軟體管理：\n"
+"     軟體管理：\n"
 "\tinstall, in\t\t安裝套件。\n"
 "\tremove, rm\t\t移除套件。\n"
 "\tverify, ve\t\t確認套件相依性整合。\n"
-"\tupdate, up\t\t更新已安裝的套件到較新版本。\n"
-"\tdist-upgrade, dup\t進行發行版本升級。\n"
-"\tsource-install, si\t安裝源碼套件和建構軟體所需相依套件。\n"
+"\tsource-install, si\t安裝原始碼套件和其建構所需\n"
+"\t\t\t\t相依性。\n"
+"\tinstall-new-recommends, inr\n"
+"\t\t\t\t安裝已安裝套件所建議\n"
+"\t\t\t\t的新套件。\n"
 
 #: ../src/Zypper.cc:223
 msgid ""
@@ -2297,7 +2298,6 @@ msgid ""
 msgstr ""
 
 #: ../src/Zypper.cc:232
-#, fuzzy
 msgid ""
 "     Querying:\n"
 "\tsearch, se\t\tSearch for packages matching a pattern.\n"
@@ -2311,14 +2311,12 @@ msgid ""
 "\tproducts, pd\t\tList all available products.\n"
 "\twhat-provides, wp\tList packages providing specified capability.\n"
 msgstr ""
-"\t查詢：\n"
+"     查詢：\n"
 "\tsearch, se\t\t搜尋符合樣式的套件。\n"
 "\tinfo, if\t\t顯示指定套件的完整資訊。\n"
 "\tpatch-info\t\t顯示指定修補程式的完整資訊。\n"
 "\tpattern-info\t\t顯示指定樣式的完整資訊。\n"
 "\tproduct-info\t\t顯示指定產品的完整資訊。\n"
-"\tpatch-check, pchk\t檢查修補程式。\n"
-"\tlist-updates, lu\t列出可用更新。\n"
 "\tpatches, pch\t\t列出所有可用的修補程式。\n"
 "\tpackages, pa\t\t列出所有可用的套件。\n"
 "\tpatterns, pt\t\t列出所有可用的樣式。\n"
@@ -2326,14 +2324,13 @@ msgstr ""
 "\twhat-provides, wp\t列出提供指定相容性的套件。\n"
 
 #: ../src/Zypper.cc:247
-#, fuzzy
 msgid ""
 "     Package Locks:\n"
 "\taddlock, al\t\tAdd a package lock.\n"
 "\tremovelock, rl\t\tRemove a package lock.\n"
 "\tlocks, ll\t\tList current package locks.\n"
 msgstr ""
-"\t套件鎖定：\n"
+"     套件鎖定：\n"
 "\taddlock, al\t\t加入一個套件鎖定。\n"
 "\tremovelock, rl\t\t解除一個套件鎖定。\n"
 "\tlocks, ll\t\t列出目前的套件鎖定。\n"
@@ -2431,7 +2428,7 @@ msgstr "非預期的例外。"
 #. ! \todo A capability is NAME[.ARCH][OP<VERSION>] now,
 #. !  the help text will be changed after release
 #: ../src/Zypper.cc:881
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "install (in) [options] <capability|rpm_file_uri> ...\n"
 "\n"
@@ -2474,7 +2471,7 @@ msgstr ""
 #. TranslatorExplanation the first %s = "package, patch, pattern, product"
 #. and the second %s = "package"
 #: ../src/Zypper.cc:930
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "remove (rm) [options] <capability> ...\n"
 "\n"
@@ -2643,7 +2640,7 @@ msgstr ""
 
 #. TranslatorExplanation the %s = "yast2, rpm-md, plaindir"
 #: ../src/Zypper.cc:1201
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "addrepo (ar) [options] <URI> <alias>\n"
 "addrepo (ar) [options] <FILE.repo>\n"
@@ -2675,6 +2672,7 @@ msgstr ""
 "-n, --name              指定此套件庫的描述名稱。\n"
 "-k, --keep-packages     啟用 RPM 檔案快取。\n"
 "-K, --no-keep-packages  停用 RPM 檔案快取。\n"
+"-f, --refresh           啟用套件庫的自動重新整理。\n"
 
 #. translators: this is just a rug compatiblity command
 #. translators: this is just a rug-compatiblity command
@@ -2755,7 +2753,7 @@ msgstr ""
 #. translators: %s is "--all|--remote|--local|--medium-type"
 #. and "--all, --remote, --local, --medium-type"
 #: ../src/Zypper.cc:1338
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "modifyrepo (mr) <options> <alias|#|URI>\n"
 "modifyrepo (mr) <options> <%s>\n"
@@ -2781,7 +2779,7 @@ msgstr ""
 "modifyrepo (mr) <選項> <別名|編號|位址>\n"
 "modifyrepo (mr) <選項> <%s>\n"
 "\n"
-"修改指定別名編號或位址的套件庫性質。或使用 '%s' 選項。\n"
+"修改指定別名編號或位址的套件庫性質。或使用 '%s' 聚集選項。\n"
 "\n"
 "  指令選項:\n"
 "-d, --disable             停用套件庫(但未移除它)\n"
@@ -2789,16 +2787,16 @@ msgstr ""
 "-r, --refresh             啟用套件庫的自動重新整理\n"
 "-R, --no-refresh          停用該套件庫的自動重新整理\n"
 "-n, --name                Set a descriptive name for the repository.\n"
-"-p, --priority <1-99>     設定套件庫的優先性。請參考說明手冊以得到更詳細的資訊。\n"
-"-k, --keep-packages       Enable RPM files caching.\n"
-"-K, --no-keep-packages    Disable RPM files caching.\n"
-"-a, --all                 Apply changes to all repositories.\n"
-"-l, --local               Apply changes to all local repositories.\n"
-"-t, --remote              Apply changes to all remote repositories.\n"
-"-m, --medium-type <type>  Apply changes to repositories of specified type.\n"
+"-p, --priority <1-99>     設定套件庫的優先性。\n"
+"-k, --keep-packages       啟用 RPM 檔案快取。\n"
+"-K, --no-keep-packages    停用 RPM 檔案快取。\n"
+"\n"
+"-a, --all                 套用變更到所套件庫。\n"
+"-l, --local               套用變更到所有本地套件庫。\n"
+"-t, --remote              套用變更到所有遠端套件庫。\n"
+"-m, --medium-type <類型>  套用變更到指定類型的套件庫。\n"
 
 #: ../src/Zypper.cc:1378
-#, fuzzy
 msgid ""
 "refresh (ref) [alias|#|URI] ...\n"
 "\n"
@@ -2824,6 +2822,7 @@ msgstr ""
 "-B, --build-only        僅建立資料庫，不下載中繼資料。\n"
 "-D, --download-only     僅下載 raw 中繼資料，不建立資料庫\n"
 "-r, --repo <別名|編號|位址> 重新整理指定的套件庫。\n"
+"-s, --services           在重新整理套件庫前先重新整理服務。\n"
 
 #: ../src/Zypper.cc:1407
 msgid ""
@@ -2850,7 +2849,7 @@ msgstr ""
 #. TranslatorExplanation the first %s = "package, patch, pattern, product"
 #. and the second %s = "patch"
 #: ../src/Zypper.cc:1436
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "list-updates (lu) [options]\n"
 "\n"
@@ -2872,16 +2871,20 @@ msgstr ""
 "列出所有可用的更新\n"
 "\n"
 "  指令選項：\n"
-"-t, --type <類型>   解決方案的類型 (%s)\n"
+"-t, --type <類型>            套件的類型 (%s)\n"
 "                        預設為： %s\n"
 "-r, --repo <別名|編號|位址>   僅列出指定套件庫中的更新。\n"
 "    --best-effort      盡最大努力來趨近最新狀態，\n"
-"                             更新到比最新版本還低些的也可以接受。\n"
+"                             更新到比最新版本還低些的也\n"
+"                             可以接受。\n"
+"-a, --all                  列出所有有較新版本可用的\n"
+"                             套件，不論他們是否\n"
+"                             可以安裝。\n"
 
 #. TranslatorExplanation the first %s = "package, patch, pattern, product"
 #. and the second %s = "patch"
 #: ../src/Zypper.cc:1487
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "update (up) [options] ...\n"
 "\n"
@@ -2905,19 +2908,22 @@ msgid ""
 "    --force-resolution          Force the solver to find a solution (even an agressive).\n"
 "-D, --dry-run                   Test the update, do not actually update.\n"
 msgstr ""
-"update (up) [選項]\n"
+"update (up) [選項] ...\n"
 "\n"
-"更新所有已安裝的解決方案到可用的較新版本。\n"
+"更新所有或指定的已安裝套件到可用的較新版本。\n"
+"\n"
 "\n"
 "  指令選項：\n"
 "\n"
-"-t, --type <類型>               解決方案的類型 (%s)\n"
+"-t, --type <類型>               套件的類型 (%s)\n"
 "                             預設為： %s\n"
 "-r, --repo <別名|編號|位址>         限制僅用指定的套件庫來更新。\n"
 "    --skip-interactive          跳過互動式更新\n"
 "-l, --auto-agree-with-licenses  自動對第三方授權確認提示說 'yes'。\n"
 "                                請參閱 man zypper 以獲得更進一步的細節。\n"
-"    --best-effort               盡最大努力來趨近最新狀態，更新到比最新版本還低些的也可以接受。\n"
+"    --best-effort               盡最大努力來趨近最新狀態，\n"
+"                                      更新到比最新版本還低些的\n"
+"                                      也可以接受。\n"
 "    --debug-solver              建立解決測試案例來偵錯\n"
 "    --no-recommends             不要安裝建議套件，只安裝需要的。\n"
 "-R, --no-force-resolution       不要強迫找尋解決方案，先詢問。\n"
@@ -3064,7 +3070,6 @@ msgstr ""
 "-r, --repo <別名|編號|位址>   僅列出指定套件庫中的修補程式。\n"
 
 #: ../src/Zypper.cc:1705
-#, fuzzy
 msgid ""
 "packages (pa) [options] [repository] ...\n"
 "\n"
@@ -3091,7 +3096,6 @@ msgstr ""
 "-R, --sort-by-repo        以套件庫排列清單。\n"
 
 #: ../src/Zypper.cc:1733
-#, fuzzy
 msgid ""
 "patterns (pt) [options] [repository] ...\n"
 "\n"
@@ -3114,7 +3118,6 @@ msgstr ""
 "-u, --uninstalled-only    僅顯示未安裝的樣式。\n"
 
 #: ../src/Zypper.cc:1759
-#, fuzzy
 msgid ""
 "products (pd) [options] [repository] ...\n"
 "\n"
@@ -3137,7 +3140,7 @@ msgstr ""
 "-u, --uninstalled-only    僅顯示未安裝的產品。\n"
 
 #: ../src/Zypper.cc:1784
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "info (if) [options] <name> ...\n"
 "\n"
@@ -3153,8 +3156,8 @@ msgstr ""
 "顯示指定套件的詳細資訊。\n"
 "\n"
 "  指令選項：\n"
-"-r, --repo <別名|編號|URI>  只有在指定套件庫時才能工作。\n"
-"-t, --type <type>         解決方案的類型 (%s).\n"
+"-r, --repo <別名|編號|URI>  只有在指定套件庫時使用。\n"
+"-t, --type <type>         套件的類型 (%s).\n"
 "                          預設： %s."
 
 #: ../src/Zypper.cc:1807
@@ -3242,6 +3245,14 @@ msgid ""
 "-t, --type <type>         Type of package (%s).\n"
 "                          Default: %s.\n"
 msgstr ""
+"addlock (al) [選項] <套件名稱> ...\n"
+"\n"
+"加入一個套件鎖定。使用完整名稱或使用萬用字元 '*' 和 '?' 來指定要鎖定的套件。\n"
+"\n"
+"  指令選項:\n"
+"-r, --repo <別名|編號|位址>  限制針對指定套件庫進行鎖定。\n"
+"-t, --type <類型>         套件的類型 (%s).\n"
+"                          預設: %s.\n"
 
 #: ../src/Zypper.cc:1961
 #, c-format
