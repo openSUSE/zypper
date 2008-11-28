@@ -429,7 +429,8 @@ class CollectNonePackages : public resfilter::PoolItemFilterFunctor
 };
 
 bool
-SATResolver::solving()
+SATResolver::solving(const CapabilitySet & requires_caps,
+		     const CapabilitySet & conflict_caps)
 {
     _solv = solver_create( _SATPool );
     _solv->vendorCheckCb = &vendorCheck;
@@ -582,6 +583,30 @@ SATResolver::solving()
 	}
     }
 
+    // Solvables which were selected due requirements which have been made by the user will
+    // be selected by USER.
+    // FIXME: The request queue should contains the TransactBy field
+    for (CapabilitySet::const_iterator iter = requires_caps.begin(); iter != requires_caps.end(); iter++) {
+	sat::WhatProvides rpmProviders(*iter);
+	for_( iter2, rpmProviders.begin(), rpmProviders.end() ) {
+	    PoolItem poolItem(*iter2);
+	    if (poolItem.status().isToBeInstalled()) {
+		MIL << "User requirement " << *iter << " sets " << poolItem << endl;
+		poolItem.status().setTransactByValue (ResStatus::USER);
+	    }
+	}
+    }
+    for (CapabilitySet::const_iterator iter = conflict_caps.begin(); iter != conflict_caps.end(); iter++) {
+	sat::WhatProvides rpmProviders(*iter);
+	for_( iter2, rpmProviders.begin(), rpmProviders.end() ) {
+	    PoolItem poolItem(*iter2);
+	    if (poolItem.status().isToBeUninstalled()) {
+		MIL << "User conflict " << *iter << " sets " << poolItem << endl;
+		poolItem.status().setTransactByValue (ResStatus::USER);
+	    }
+	}
+    }
+
     if (_solv->problems.count > 0 )
     {
 	ERR << "Solverrun finished with an ERROR" << endl;
@@ -698,7 +723,7 @@ SATResolver::resolvePool(const CapabilitySet & requires_caps,
     setLocks();
 
     // solving
-    bool ret = solving();
+    bool ret = solving(requires_caps, conflict_caps);
     // cleanup
     if (ret)
 	solverEnd(); // remove solver only if no errors happend. Need it for solving problems

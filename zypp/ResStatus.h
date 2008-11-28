@@ -291,7 +291,16 @@ namespace zypp
     TransactByValue getTransactByValue() const
     { return (TransactByValue)_bitfield.value<TransactByField>(); }
 
-
+    bool setTransactByValue(TransactByValue causer)
+    {
+	if ( isLessThan<TransactByField>( causer ) ) {
+	    fieldValueAssign<TransactByField>( causer );
+	    return true;
+	} else {
+	    return false;
+	}
+    }
+      
     bool isToBeUninstalledDueToObsolete () const
     { return isToBeUninstalled() && fieldValueIs<TransactDetailField>( DUE_TO_OBSOLETE ); }
 
