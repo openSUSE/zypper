@@ -373,7 +373,7 @@ int main( int argc, char * argv[] )
   INT << "===[START]==========================================" << endl;
 
   Pathname mroot( "/tmp/Bb" );
-  TestSetup test( mroot, Arch_ppc64 );
+  TestSetup test( mroot, Arch_i686 ); // <<< arch
 
   ResPool pool( test.pool() );
   sat::Pool satpool( test.satpool() );
@@ -381,38 +381,36 @@ int main( int argc, char * argv[] )
   {
     zypp::base::LogControl::TmpLineWriter shutUp;
     test.loadTarget();
-    test.loadTestcaseRepos( "/suse/ma/BUGS/439802/bug439802/YaST2/solverTestcase" );
+    test.loadTestcaseRepos( "/suse/ma/BUGS/153548/YaST2/solverTestcase" ); // <<< repos
   }
-
-  if ( 0 )
-  {
-    PoolItem pi = getPi<Package>( "bash", Edition("3.1-24.14"), Arch("ppc64") );
-    pi.status().setTransact( true, ResStatus::USER );
-  }
-
   save();
-  {
+
+
+  { // <<< transaction
     zypp::base::LogControl::TmpLineWriter shutUp;
-    getPi<Product>( "SUSE_SLES", Edition("11"), Arch("ppc64") ).status().setTransact( true, ResStatus::USER );
-    getPi<Package>( "sles-release", Edition("11-54.3"), Arch("ppc64") ).status().setTransact( true, ResStatus::USER );
+    getPi<Product>( "SUSE_SLED" ).status().setTransact( true, ResStatus::USER );
+    getPi<Package>( "kernel-pae" ).status().setTransact( true, ResStatus::USER );
+    getPi<Package>( "sled-release" ).status().setTransact( true, ResStatus::USER );
+    getPi<Pattern>( "apparmor" ).status().setTransact( true, ResStatus::USER );
+    getPi<Pattern>( "desktop-base" ).status().setTransact( true, ResStatus::USER );
+    getPi<Pattern>( "desktop-gnome" ).status().setTransact( true, ResStatus::USER );
+    getPi<Pattern>( "x11" ).status().setTransact( true, ResStatus::USER );
     upgrade();
   }
   vdumpPoolStats( USR << "Transacting:"<< endl,
                   make_filter_begin<resfilter::ByTransact>(pool),
                   make_filter_end<resfilter::ByTransact>(pool) ) << endl;
-
   pool::GetResolvablesToInsDel collect( pool, pool::GetResolvablesToInsDel::ORDER_BY_MEDIANR );
 
-  USR << ui::Selectable::get( "libcdio" ) << endl;
-  USR << ui::Selectable::get( "libcdio7" ) << endl;
-
-  std::set<IdString> interested;
-  //interested.insert( IdString("libcdio") );
-  //interested.insert( IdString("libcdio7") );
+  USR << ui::Selectable::get( "libtiff" ) << endl;
 
   restore();
-
-  display( collect, interested );
+  {
+    //base::LogControl::TmpLineWriter shutUp( new log::FileLineWriter( "iorder.log" ) );
+    std::set<IdString> interested;
+    interested.insert( IdString("libtiff") );
+    display( collect, interested );
+  }
 
  INT << "===[END]============================================" << endl << endl;
   zypp::base::LogControl::TmpLineWriter shutUp;
