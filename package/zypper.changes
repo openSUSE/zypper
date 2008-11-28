@@ -1,4 +1,10 @@
 -------------------------------------------------------------------
+Fri Nov 28 18:28:15 CET 2008 - jkupec@suse.cz
+
+- translations update
+- 1.0.2
+
+-------------------------------------------------------------------
 Mon Nov 24 20:44:40 CET 2008 - jkupec@suse.cz
 
 - fixed segfault in 'info' when looking for package to show
