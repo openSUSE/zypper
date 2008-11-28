@@ -35,7 +35,7 @@ namespace zypp
     //
     /**
      * Media access layer responsible for handling files distributed on a set
-     * of media.
+     * of media with media change and abort/retry/ingore user callback handling.
      *
      * This is provided as a means to handle CD or DVD sets accessible through
      * dir, iso, nfs or other URL schemes other than cd/dvd (see
@@ -113,8 +113,14 @@ namespace zypp
        * \param on_media_file location of the file on media
        * \return local pathname of the requested file
        *
-       * \throws MediaException if a problem occurs,
-       *        see \ref media::MediaManager::provideFile()
+       * \throws MediaException if a problem occured and user has chosen to
+       *         abort the operation. The calling code should take care
+       *         to quit the current operation.
+       * \throws SkipRequestException if a problem occured and user has chosen
+       *         to skip the current operation. The calling code should continue
+       *         with the next one, if possible.
+       *
+       * \see zypp::media::MediaManager::provideFile()
        */
       Pathname provideFile( const OnMediaLocation & on_media_file );
 
@@ -125,16 +131,20 @@ namespace zypp
        * \param media_nr the media number in the media set
        * \return local pathname of the requested file
        *
-       * \throws MediaException if a problem occurs,
-       *        see \ref media::MediaManager::provideFile()
+       * \throws MediaException if a problem occured and user has chosen to
+       *         abort the operation. The calling code should take care
+       *         to quit the current operation.
+       * \throws SkipRequestException if a problem occured and user has chosen
+       *         to skip the current operation. The calling code should continue
+       *         with the next one, if possible.
+       * \see zypp::media::MediaManager::provideFile()
        */
       Pathname provideFile(const Pathname & file, unsigned media_nr = 1 );
 
       /**
-       * The same as provideFile(Pathname,unsigned) but does not throw.
-       * 
-       * This method does not call the user callbacks, except of the case of
-       * not wrong media in the drive, but won't throw an exception in any case.
+       * The same as provideFile(Pathname,unsigned) but this method does not
+       * call the user callbacks, except of the case of
+       * wrong media in the drive, and it won't throw an exception in any case.
        *
        * \return Path to the provided file on success, an empty Pathname() otherwise.
        */
@@ -148,7 +158,7 @@ namespace zypp
        */
       void releaseFile( const OnMediaLocation & on_media_file );
 
-      
+
       /**
        * Release file from media.
        * This signal that file is not needed anymore.
@@ -166,22 +176,35 @@ namespace zypp
        * \param media_nr the media number in the media set
        * \return local pathname of the requested directory
        *
-       * \throws MediaException if a problem occurs,
-       *        see \ref media::MediaManager::provideDir()
-       *        and \ref media::MediaManager::provideDirTree()
+       * \throws MediaException if a problem occured and user has chosen to
+       *         abort the operation. The calling code should take care
+       *         to quit the current operation.
+       * \todo throw SkipRequestException if a problem occured and user has chosen
+       *         to skip the current operation. The calling code should continue
+       *         with the next one, if possible.
+       * \see zypp::media::MediaManager::provideDir()
+       * \see zypp::media::MediaManager::provideDirTree()
        */
       Pathname provideDir(const Pathname & dir, bool recursive, unsigned media_nr = 1);
 
       /**
-       * check if a file exists on the specified media
+       * Checks if a file exists on the specified media, with user callbacks.
        *
        * \param file file to check
        * \param media_nr Media number
+       *
+       * \throws MediaException if a problem occured and user has chosen to
+       *         abort the operation. The calling code should take care
+       *         to quit the current operation.
+       * \throws SkipRequestException if a problem occured and user has chosen
+       *         to skip the current operation. The calling code should continue
+       *         with the next one, if possible.
+       * \see zypp::media::MediaManager::doesFileExist(MediaAccessId,const Pathname&)
        */
       bool doesFileExist(const Pathname & file, unsigned media_nr = 1 );
 
       /**
-       * Fills \ref retlist with directory information
+       * Fills \ref retlist with directory information.
        */
       void dirInfo( filesystem::DirContent &retlist, const Pathname &dirname,
                     bool dots = true, unsigned media_nr = 1 );
@@ -210,6 +233,21 @@ namespace zypp
       static Url rewriteUrl (const Url & url_r, const media::MediaNr medianr);
 
     protected:
+      /**
+       * Provides the \a file from medium number \a media_nr and returns its
+       * local path.
+       *
+       * \note   The method must not throw if \a checkonly is <tt>true</tt>.
+       *
+       * \throws MediaException \a checkonly is <tt>false</tt> and
+       *         a problem occured and user has chosen to
+       *         abort the operation. The calling code should take care
+       *         to quit the current operation.
+       * \throws SkipRequestException \a checkonly is <tt>false</tt> and
+       *         a problem occured and user has chosen
+       *         to skip the current operation. The calling code should continue
+       *         with the next one, if possible.
+       */
       Pathname provideFileInternal(const Pathname & file, unsigned media_nr, bool checkonly, bool cached);
       media::MediaAccessId getMediaAccessId (media::MediaNr medianr);
       virtual std::ostream & dumpOn( std::ostream & str ) const;

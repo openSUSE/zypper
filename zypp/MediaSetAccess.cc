@@ -444,18 +444,6 @@ IMPL_PTR_TYPE(MediaSetAccess);
             ERR << "Failed to release media " << _media << endl;
           }
 
-          //MIL << "Releasing all medias of all sources" << endl;
-          try
-          {
-            //! \todo do we need replacement for this at all?
-            //zypp::SourceManager::sourceManager()->releaseAllSources();
-          }
-          catch (const zypp::Exception& excpt_r)
-          {
-            ZYPP_CAUGHT(excpt_r);
-            ERR << "Failed to release all sources" << endl;
-          }
-
           // set up the reason
           media::MediaChangeReport::Error reason = media::MediaChangeReport::INVALID;
 
@@ -492,6 +480,7 @@ IMPL_PTR_TYPE(MediaSetAccess);
             DBG << "Aborting" << endl;
             ZYPP_RETHROW ( excp );
           }
+          //! \todo FIXME media::MediaChangeReport::IGNORE handling
           else if (user == media::MediaChangeReport::EJECT)
           {
             DBG << "Eject: try to release" << endl;
