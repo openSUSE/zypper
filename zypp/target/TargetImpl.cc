@@ -384,7 +384,7 @@ namespace zypp
       Pathname idpath( home() / "AnonymousUniqueId");
 
       try
-      {   
+      {
         updateFileContent( idpath,
                            boost::bind(fileMissing, idpath),
                            generateRandomId );
@@ -393,7 +393,7 @@ namespace zypp
       {
         WAR << "Can't create anonymous id file" << endl;
       }
-      
+
     }
 
     void TargetImpl::createLastDistributionFlavorCache() const
@@ -411,10 +411,10 @@ namespace zypp
       }
 
       string flavor = p->flavor();
-      
+
       try
       {
-          
+
         updateFileContent( flavorpath,
                            // only if flavor is not empty
                            functor::Constant<bool>( ! flavor.empty() ),
@@ -588,9 +588,14 @@ namespace zypp
         }
       }
       {
-        const SoftLocksFile::Data & softLocks( _softLocksFile.data() );
+        SoftLocksFile::Data softLocks( _softLocksFile.data() );
         if ( ! softLocks.empty() )
         {
+          // Don't soft lock any installed item.
+          for_( it, system.solvablesBegin(), system.solvablesEnd() )
+          {
+            softLocks.erase( it->ident() );
+          }
           ResPool::instance().setAutoSoftLocks( softLocks );
         }
       }
@@ -602,7 +607,7 @@ namespace zypp
           ResPool::instance().setHardLockQueries( hardLocks );
         }
       }
-      
+
       // now that the target is loaded, we can cache the flavor
       createLastDistributionFlavorCache();
 

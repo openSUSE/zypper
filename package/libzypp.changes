@@ -1,4 +1,12 @@
 -------------------------------------------------------------------
+Fri Nov 28 16:33:56 CET 2008 - ma@suse.de
+
+- Prune soft locks to prevent installation but not update of 
+  already installed packages.
+- revision 11829
+- version 5.24.4 (23)
+
+-------------------------------------------------------------------
 Fri Nov 28 11:36:03 CET 2008 - schubi@suse.de
 
 - Taking solutions which based on user requirements/conflict
