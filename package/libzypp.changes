@@ -1,4 +1,11 @@
 -------------------------------------------------------------------
+Fri Nov 28 11:36:03 CET 2008 - schubi@suse.de
+
+- Taking solutions which based on user requirements/conflict
+  "by User" solutions (bnc #442718)
+- revision 11825 
+
+-------------------------------------------------------------------
 Fri Nov 28 00:05:17 CET 2008 - ma@suse.de
 
 - Take into account the requirements of all obsoleted packages uninstall 
