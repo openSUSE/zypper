@@ -17,7 +17,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: zypp.fi\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-11-06 18:07+0100\n"
+"POT-Creation-Date: 2008-11-21 09:10+0100\n"
 "PO-Revision-Date: 2008-10-25 23:51+0300\n"
 "Last-Translator: Jyri Palokangas <jyri.palokangas@opensuse.org>\n"
 "Language-Team: suomi <fi@li.org>\n"
@@ -40,15 +40,15 @@ msgstr ""
 msgid " SSL certificate problem, verify that the CA cert is OK for '%s'."
 msgstr " SSL-ongelma: Tarkista että CA-varmenne kuuluu '%s'."
 
-#: ../zypp/target/TargetImpl.cc:85
+#: ../zypp/target/TargetImpl.cc:88
 msgid " executed"
 msgstr " suoritettu"
 
-#: ../zypp/target/TargetImpl.cc:107
+#: ../zypp/target/TargetImpl.cc:110
 msgid " execution failed"
 msgstr " suoritus epäonnistui"
 
-#: ../zypp/target/TargetImpl.cc:193
+#: ../zypp/target/TargetImpl.cc:196
 msgid " execution skipped while aborting"
 msgstr " suoritus ohitettiin keskeytettäessä"
 
@@ -92,7 +92,7 @@ msgstr "acholi"
 msgid "Adangme"
 msgstr "adangme"
 
-#: ../zypp/RepoManager.cc:1201
+#: ../zypp/RepoManager.cc:1198
 #, c-format
 msgid "Adding repository '%s'"
 msgstr "Lisätään asennuslähdettä '%s'"
@@ -321,7 +321,7 @@ msgid "Austronesian (Other)"
 msgstr "muut austronesialaiset kielet"
 
 #. !\todo add comma to the message for the next release
-#: ../zypp/media/MediaCurl.cc:1689
+#: ../zypp/media/MediaCurl.cc:1702
 #, c-format
 msgid "Authentication required for '%s'"
 msgstr "'%s' vaatii tunnistautumisen"
@@ -603,7 +603,7 @@ msgstr "Brunei"
 msgid "Buginese"
 msgstr "bugi"
 
-#: ../zypp/RepoManager.cc:969
+#: ../zypp/RepoManager.cc:966
 #, c-format
 msgid "Building repository '%s' cache"
 msgstr "Rakennetaan asennuslähteen '%s' välimuistia"
@@ -724,7 +724,7 @@ msgstr "Rekursiivisten mutex-määritteiden asetus ei onnistu"
 msgid "Canada"
 msgstr "Kanada"
 
-#: ../zypp/KeyRing.cc:277
+#: ../zypp/KeyRing.cc:275
 #, c-format
 msgid "Cannot create public key %s from %s keyring to file %s"
 msgstr "Julkisen avaimen %s luonti avainrenkaasta %s tiedostoon %s ei onnistu"
@@ -818,7 +818,7 @@ msgstr "chamorro"
 
 #. Translator: %s = name of an rpm package. A list of diffs follows
 #. this message.
-#: ../zypp/target/rpm/RpmDb.cc:1899
+#: ../zypp/target/rpm/RpmDb.cc:1896
 #, c-format
 msgid "Changed configuration files for %s:"
 msgstr "Muunnettiin paketin %s asetustiedostoja:"
@@ -1158,7 +1158,7 @@ msgid "Duala"
 msgstr "duala"
 
 #. dubious: Throw on malformed known types, otherwise log a warning.
-#: ../zypp/CheckSum.cc:97
+#: ../zypp/CheckSum.cc:98
 #, c-format
 msgid "Dubious type '%s' for %u byte checksum '%s'"
 msgstr "Virheellinen tyyppi '%s' tavulle %u, tarkistussumma: '%s'"
@@ -1316,11 +1316,11 @@ msgstr "ewe"
 msgid "Ewondo"
 msgstr "ewondo"
 
-#: ../zypp/KeyRing.cc:579
+#: ../zypp/KeyRing.cc:577
 msgid "Failed to delete key."
 msgstr "Avaimen poisto epäonnistui."
 
-#: ../zypp/target/rpm/RpmDb.cc:1067
+#: ../zypp/target/rpm/RpmDb.cc:1064
 #, c-format
 msgid "Failed to import public key from file %s: %s"
 msgstr "Avaimen tuonti tiedostosta %s epäonnistui: %s"
@@ -1330,7 +1330,7 @@ msgstr "Avaimen tuonti tiedostosta %s epäonnistui: %s"
 msgid "Failed to mount %s on %s"
 msgstr "%s liittäminen liitospisteeseen %s epäonnistui"
 
-#: ../zypp/target/rpm/RpmDb.cc:1144
+#: ../zypp/target/rpm/RpmDb.cc:1141
 #, c-format
 msgid "Failed to remove public key %s: %s"
 msgstr "Julkisen avaimen %s poisto epäonnistui: %s"
@@ -1939,7 +1939,7 @@ msgstr "indonesia"
 msgid "Ingush"
 msgstr "inguuši"
 
-#: ../zypp/target/TargetImpl.cc:603 ../zypp/target/TargetImpl.cc:874
+#: ../zypp/target/TargetImpl.cc:692 ../zypp/target/TargetImpl.cc:963
 msgid "Installation has been aborted as directed."
 msgstr "Asennus keskeytettiin."
 
@@ -3327,8 +3327,8 @@ msgstr "Tämän URL:n jäsentäminen kyselyksi ei ole tuettu"
 
 #. TranslatorExplanation after semicolon is error message
 #. TranslatorExplanation the colon is followed by an error message
-#: ../zypp/target/rpm/RpmDb.cc:893 ../zypp/target/rpm/RpmDb.cc:2087
-#: ../zypp/target/rpm/RpmDb.cc:2223
+#: ../zypp/target/rpm/RpmDb.cc:893 ../zypp/target/rpm/RpmDb.cc:2084
+#: ../zypp/target/rpm/RpmDb.cc:2220
 msgid "RPM failed: "
 msgstr "RPM-virhe: "
 
@@ -3358,7 +3358,7 @@ msgstr "rarotonga"
 msgid "Relative path not allowed if authority exists"
 msgstr "Suhteellisen polun määrittäminen ei ole sallittua, jos valtuuttaja on määritetty"
 
-#: ../zypp/RepoManager.cc:1331
+#: ../zypp/RepoManager.cc:1328
 #, c-format
 msgid "Removing repository '%s'"
 msgstr "Poistetaan asennuslähdettä '%s'"
@@ -3595,7 +3595,7 @@ msgstr "Sierra Leone"
 msgid "Sign Languages"
 msgstr "viittomakielet"
 
-#: ../zypp/KeyRing.cc:589
+#: ../zypp/KeyRing.cc:587
 #, c-format
 msgid "Signature file %s not found"
 msgstr "Allekirjoitustiedostoa %s ei löydetty"
@@ -4028,7 +4028,7 @@ msgstr "tonga (Malawi)"
 msgid "Tonga (Tonga Islands)"
 msgstr "tonga (Tonga)"
 
-#: ../zypp/KeyRing.cc:528
+#: ../zypp/KeyRing.cc:526
 #, c-format
 msgid "Tried to import not existant key %s into keyring %s"
 msgstr "Yritettiin lisätä avain %s avainrenkaaseen %s, mutta tiedostoa ei löydetty"
@@ -4204,7 +4204,7 @@ msgstr "Yhdysvallat"
 msgid "United States Minor Outlying Islands"
 msgstr "Yhdysvaltain pienet erillissaaret"
 
-#: ../zypp/target/TargetImpl.cc:908
+#: ../zypp/target/TargetImpl.cc:997
 msgid "Unknown Distribution"
 msgstr "Tuntematon jakeluversio"
 
@@ -4306,7 +4306,7 @@ msgid "Vai"
 msgstr "vai"
 
 #. we will throw this later if no URL checks out fine
-#: ../zypp/RepoManager.cc:781
+#: ../zypp/RepoManager.cc:778
 msgid "Valid metadata not found at specified URL(s)"
 msgstr "Annetuista verkko-osoitteista ei löytynyt kelpaavia metatietoja"
 
@@ -4503,7 +4503,7 @@ msgstr "Ei voida asentaa molempia %s ja %s"
 msgid "conflicting requests"
 msgstr "ristiriitaiset kyselyt"
 
-#: ../zypp/target/rpm/RpmDb.cc:2375
+#: ../zypp/target/rpm/RpmDb.cc:2372
 #, c-format
 msgid "created backup %s"
 msgstr "luotiin varmuuskopio %s"
@@ -4612,13 +4612,13 @@ msgid "replacement of %s with %s"
 msgstr "Korvataan %s -> %s"
 
 #. %s = filenames
-#: ../zypp/target/rpm/RpmDb.cc:2073
+#: ../zypp/target/rpm/RpmDb.cc:2070
 #, c-format
 msgid "rpm created %s as %s, but it was impossible to determine the difference"
 msgstr "rpm loi tiedoston %s nimellä %s. Erojen selvittäminen ei onnistunut."
 
 #. %s = filenames
-#: ../zypp/target/rpm/RpmDb.cc:2075
+#: ../zypp/target/rpm/RpmDb.cc:2072
 #, c-format
 msgid ""
 "rpm created %s as %s.\n"
@@ -4628,13 +4628,13 @@ msgstr ""
 "Tässä on ensimmäiset 25 vaihtunutta riviä:\n"
 
 #. %s = filenames
-#: ../zypp/target/rpm/RpmDb.cc:2068
+#: ../zypp/target/rpm/RpmDb.cc:2065
 #, c-format
 msgid "rpm saved %s as %s, but it was impossible to determine the difference"
 msgstr "rpm tallensi tiedoston %s niemellä %s. Erojen selvittäminen ei onnistunut."
 
 #. %s = filenames
-#: ../zypp/target/rpm/RpmDb.cc:2070
+#: ../zypp/target/rpm/RpmDb.cc:2067
 #, c-format
 msgid ""
 "rpm saved %s as %s.\n"

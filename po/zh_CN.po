@@ -9,9 +9,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: YaST (@memory@)\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-11-06 18:07+0100\n"
-"PO-Revision-Date: 2008-06-02 02:15+0800\n"
-"Last-Translator: Thruth Wang <lihaow@opera.com>\n"
+"POT-Creation-Date: 2008-11-21 09:10+0100\n"
+"PO-Revision-Date: 2008-11-28 19:42+0800\n"
+"Last-Translator: Thruth Wang <wanglihao@gmail.com>\n"
 "Language-Team: Simplified Chinese\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -31,19 +31,17 @@ msgstr ""
 msgid " SSL certificate problem, verify that the CA cert is OK for '%s'."
 msgstr " SSL 认证问题，请确认'%s'的 CA 认证是队的。"
 
-#: ../zypp/target/TargetImpl.cc:85
-#, fuzzy
+#: ../zypp/target/TargetImpl.cc:88
 msgid " executed"
-msgstr "执行"
+msgstr " 已执行"
 
-#: ../zypp/target/TargetImpl.cc:107
-#, fuzzy
+#: ../zypp/target/TargetImpl.cc:110
 msgid " execution failed"
-msgstr "DBI 执行失败： %s"
+msgstr " 执行失败"
 
-#: ../zypp/target/TargetImpl.cc:193
+#: ../zypp/target/TargetImpl.cc:196
 msgid " execution skipped while aborting"
-msgstr ""
+msgstr " 执行在中止时被跳过"
 
 #: ../zypp/solver/detail/SATResolver.cc:940
 #, c-format
@@ -85,14 +83,14 @@ msgstr "阿乔利语"
 msgid "Adangme"
 msgstr "阿当梅语"
 
-#: ../zypp/RepoManager.cc:1201
+#: ../zypp/RepoManager.cc:1198
 #, c-format
 msgid "Adding repository '%s'"
 msgstr "正在添加安装源 '%s'"
 
 #: ../zypp/VendorSupportOptions.cc:29
 msgid "Additional Customer Contract Necessary"
-msgstr ""
+msgstr "需要附加客户合同"
 
 #. language code: ady
 #: ../zypp/LanguageCode.cc:248
@@ -150,7 +148,8 @@ msgid "Albania"
 msgstr "阿尔巴尼亚"
 
 #. language code: alb sqi sq
-#: ../zypp/LanguageCode.cc:262 ../zypp/LanguageCode.cc:264
+#: ../zypp/LanguageCode.cc:262
+#: ../zypp/LanguageCode.cc:264
 msgid "Albanian"
 msgstr "阿尔巴尼亚语"
 
@@ -186,7 +185,7 @@ msgstr "阿姆哈拉语"
 
 #: ../zypp/VendorSupportOptions.cc:54
 msgid "An additional customer contract is necessary for getting support."
-msgstr ""
+msgstr "获取支持需要一份附加客户合同。"
 
 #: ../zypp/CountryCode.cc:224
 msgid "Andorra"
@@ -258,7 +257,8 @@ msgid "Armenia"
 msgstr "亚美尼亚"
 
 #. language code: arm hye hy
-#: ../zypp/LanguageCode.cc:284 ../zypp/LanguageCode.cc:286
+#: ../zypp/LanguageCode.cc:284
+#: ../zypp/LanguageCode.cc:286
 msgid "Armenian"
 msgstr "亚美尼亚语"
 
@@ -308,7 +308,7 @@ msgid "Austronesian (Other)"
 msgstr "澳斯特罗尼西亚诸语言（其它）"
 
 #. !\todo add comma to the message for the next release
-#: ../zypp/media/MediaCurl.cc:1689
+#: ../zypp/media/MediaCurl.cc:1702
 #, c-format
 msgid "Authentication required for '%s'"
 msgstr "'%s' 需要身份验证"
@@ -346,7 +346,7 @@ msgstr "阿塞拜疆语"
 #: ../zypp/media/MediaException.cc:47
 #, c-format
 msgid "Bad file name: %s"
-msgstr "文件么错误：%s"
+msgstr "文件名错误：%s"
 
 #: ../zypp/media/MediaException.cc:77
 msgid "Bad media attach point"
@@ -418,7 +418,8 @@ msgid "Bashkir"
 msgstr "巴什基尔语"
 
 #. language code: baq eus eu
-#: ../zypp/LanguageCode.cc:326 ../zypp/LanguageCode.cc:328
+#: ../zypp/LanguageCode.cc:326
+#: ../zypp/LanguageCode.cc:328
 msgid "Basque"
 msgstr "巴斯克语"
 
@@ -572,7 +573,7 @@ msgstr "文莱达鲁萨兰国"
 msgid "Buginese"
 msgstr "布吉语"
 
-#: ../zypp/RepoManager.cc:969
+#: ../zypp/RepoManager.cc:966
 #, c-format
 msgid "Building repository '%s' cache"
 msgstr "正在构建 '%s' 安装源缓存"
@@ -598,7 +599,8 @@ msgid "Burkina Faso"
 msgstr "布基纳法索"
 
 #. language code: bur mya my
-#: ../zypp/LanguageCode.cc:372 ../zypp/LanguageCode.cc:374
+#: ../zypp/LanguageCode.cc:372
+#: ../zypp/LanguageCode.cc:374
 msgid "Burmese"
 msgstr "缅甸语"
 
@@ -628,7 +630,7 @@ msgstr "无法创建 sat-pool。"
 
 #: ../zypp/thread/Mutex.cc:77
 msgid "Can't acquire the mutex lock"
-msgstr "无法获取 mutex 锁定"
+msgstr "无法获得 mutex 锁"
 
 #: ../zypp/ExternalProgram.cc:301
 #, c-format
@@ -692,7 +694,7 @@ msgstr "无法设置递归的 mutex 特性"
 msgid "Canada"
 msgstr "加拿大"
 
-#: ../zypp/KeyRing.cc:277
+#: ../zypp/KeyRing.cc:275
 #, c-format
 msgid "Cannot create public key %s from %s keyring to file %s"
 msgstr "不能从密钥环 %2$s 创建密钥 %1$s 到文件 %3$s"
@@ -709,7 +711,7 @@ msgstr "无法弹出介质'%s'"
 #: ../zypp/media/MediaException.cc:273
 #, c-format
 msgid "Cannot find available loop device to mount the image file from '%s'"
-msgstr ""
+msgstr "找不到可用 loop 设备以挂载来自 '%s' 的映像文件"
 
 #: ../zypp/media/MediaException.cc:67
 #, c-format
@@ -783,10 +785,10 @@ msgstr "查莫罗语"
 
 #. Translator: %s = name of an rpm package. A list of diffs follows
 #. this message.
-#: ../zypp/target/rpm/RpmDb.cc:1899
+#: ../zypp/target/rpm/RpmDb.cc:1896
 #, c-format
 msgid "Changed configuration files for %s:"
-msgstr "%s 的已更改配置文件："
+msgstr "%s 已更改的配置文件："
 
 #. language code: che ce
 #: ../zypp/LanguageCode.cc:396
@@ -824,7 +826,8 @@ msgid "China"
 msgstr "中国"
 
 #. language code: chi zho zh
-#: ../zypp/LanguageCode.cc:400 ../zypp/LanguageCode.cc:402
+#: ../zypp/LanguageCode.cc:400
+#: ../zypp/LanguageCode.cc:402
 msgid "Chinese"
 msgstr "中文"
 
@@ -899,7 +902,8 @@ msgstr "科摩罗"
 
 #. :CCK:166:
 #. :CAF:140:
-#: ../zypp/CountryCode.cc:262 ../zypp/CountryCode.cc:264
+#: ../zypp/CountryCode.cc:262
+#: ../zypp/CountryCode.cc:264
 msgid "Congo"
 msgstr "刚果"
 
@@ -974,7 +978,8 @@ msgid "Croatia"
 msgstr "克罗地亚"
 
 #. language code: scr hrv hr
-#: ../zypp/LanguageCode.cc:1008 ../zypp/LanguageCode.cc:1010
+#: ../zypp/LanguageCode.cc:1008
+#: ../zypp/LanguageCode.cc:1010
 msgid "Croatian"
 msgstr "克罗地亚语"
 
@@ -994,7 +999,8 @@ msgid "Cyprus"
 msgstr "塞浦路斯"
 
 #. language code: cze ces cs
-#: ../zypp/LanguageCode.cc:446 ../zypp/LanguageCode.cc:448
+#: ../zypp/LanguageCode.cc:446
+#: ../zypp/LanguageCode.cc:448
 msgid "Czech"
 msgstr "捷克语"
 
@@ -1069,10 +1075,11 @@ msgid "Dominican Republic"
 msgstr "多米尼加共和国"
 
 #. TranslatorExplanation: curl is the name of a library, don't translate
-#: ../zypp/media/MediaException.cc:92 ../zypp/media/MediaException.cc:100
-#, fuzzy, c-format
+#: ../zypp/media/MediaException.cc:92
+#: ../zypp/media/MediaException.cc:100
+#, c-format
 msgid "Download (Metalink curl) initialization failed for '%s'"
-msgstr "下载(curl) '%s' 时初始化失败。"
+msgstr "下载(Metalink curl) '%s' 时初始化失败。"
 
 #: ../zypp/media/MediaException.cc:168
 #, c-format
@@ -1091,14 +1098,15 @@ msgstr ""
 msgid "Download (curl) initialization failed for '%s'"
 msgstr "下载(curl) '%s' 时初始化失败。"
 
-#: ../zypp/media/MediaException.cc:186 ../zypp/media/MediaException.cc:204
-#, fuzzy, c-format
+#: ../zypp/media/MediaException.cc:186
+#: ../zypp/media/MediaException.cc:204
+#, c-format
 msgid ""
 "Download (metalink curl) error for '%s':\n"
 "Error code: %s\n"
 "Error message: %s\n"
 msgstr ""
-"对于'%s'的下载(curl)错误：\n"
+"对于'%s'的下载(Metalink curl)错误：\n"
 "错误代码：%s\n"
 "错误信息：%s\n"
 
@@ -1113,13 +1121,14 @@ msgid "Duala"
 msgstr "都阿拉语"
 
 #. dubious: Throw on malformed known types, otherwise log a warning.
-#: ../zypp/CheckSum.cc:97
+#: ../zypp/CheckSum.cc:98
 #, c-format
 msgid "Dubious type '%s' for %u byte checksum '%s'"
 msgstr "可疑类型 '%s' 在 %u 字节校验码 '%s'"
 
 #. language code: dut nld nl
-#: ../zypp/LanguageCode.cc:478 ../zypp/LanguageCode.cc:480
+#: ../zypp/LanguageCode.cc:478
+#: ../zypp/LanguageCode.cc:480
 msgid "Dutch"
 msgstr "荷兰语"
 
@@ -1226,10 +1235,11 @@ msgid "Error occurred while setting download (curl) options for '%s':"
 msgstr "为'%s'设置下载(curl)选项时出错："
 
 #. TranslatorExplanation: curl is the name of a library, don't translate
-#: ../zypp/media/MediaException.cc:195 ../zypp/media/MediaException.cc:213
-#, fuzzy, c-format
+#: ../zypp/media/MediaException.cc:195
+#: ../zypp/media/MediaException.cc:213
+#, c-format
 msgid "Error occurred while setting download (metalink curl) options for '%s':"
-msgstr "为'%s'设置下载(curl)选项时出错："
+msgstr "为'%s' 设置下载(metalink curl)选项时出错："
 
 #. language code: myv
 #: ../zypp/LanguageCode.cc:850
@@ -1266,11 +1276,11 @@ msgstr "幽语"
 msgid "Ewondo"
 msgstr "埃翁多语"
 
-#: ../zypp/KeyRing.cc:579
+#: ../zypp/KeyRing.cc:577
 msgid "Failed to delete key."
 msgstr "无法删除密钥。"
 
-#: ../zypp/target/rpm/RpmDb.cc:1067
+#: ../zypp/target/rpm/RpmDb.cc:1064
 #, c-format
 msgid "Failed to import public key from file %s: %s"
 msgstr "从文件 %s 中导入公钥失败：%s"
@@ -1280,7 +1290,7 @@ msgstr "从文件 %s 中导入公钥失败：%s"
 msgid "Failed to mount %s on %s"
 msgstr "未能把 %s 挂载到 %s"
 
-#: ../zypp/target/rpm/RpmDb.cc:1144
+#: ../zypp/target/rpm/RpmDb.cc:1141
 #, c-format
 msgid "Failed to remove public key %s: %s"
 msgstr "未能删除公共密钥 %s: %s"
@@ -1429,7 +1439,8 @@ msgid "France"
 msgstr "法国"
 
 #. language code: fre fra fr
-#: ../zypp/LanguageCode.cc:522 ../zypp/LanguageCode.cc:524
+#: ../zypp/LanguageCode.cc:522
+#: ../zypp/LanguageCode.cc:524
 msgid "French"
 msgstr "法语"
 
@@ -1528,12 +1539,14 @@ msgid "Georgia"
 msgstr "乔治亚州"
 
 #. language code: geo kat ka
-#: ../zypp/LanguageCode.cc:544 ../zypp/LanguageCode.cc:546
+#: ../zypp/LanguageCode.cc:544
+#: ../zypp/LanguageCode.cc:546
 msgid "Georgian"
 msgstr "乔治亚语"
 
 #. language code: ger deu de
-#: ../zypp/LanguageCode.cc:548 ../zypp/LanguageCode.cc:550
+#: ../zypp/LanguageCode.cc:548
+#: ../zypp/LanguageCode.cc:550
 msgid "German"
 msgstr "德语"
 
@@ -1603,7 +1616,8 @@ msgid "Greek, Ancient (to 1453)"
 msgstr "古希腊语（1453 以前）"
 
 #. language code: gre ell el
-#: ../zypp/LanguageCode.cc:578 ../zypp/LanguageCode.cc:580
+#: ../zypp/LanguageCode.cc:578
+#: ../zypp/LanguageCode.cc:580
 msgid "Greek, Modern (1453-)"
 msgstr "现代希腊语 (1453-)"
 
@@ -1677,7 +1691,8 @@ msgstr "海地"
 msgid "Haitian"
 msgstr "海地语"
 
-#: ../zypp/target/hal/HalException.h:46 ../zypp/target/hal/HalException.h:55
+#: ../zypp/target/hal/HalException.h:46
+#: ../zypp/target/hal/HalException.h:55
 #: ../zypp/target/hal/HalException.h:64
 msgid "Hal Exception"
 msgstr "Hal 例外"
@@ -1701,7 +1716,7 @@ msgstr "豪撒语"
 
 #: ../zypp/solver/detail/SATResolver.cc:922
 msgid "Have you enabled all requested repositories?"
-msgstr ""
+msgstr "您启用了所有请求的安装源了么？"
 
 #. language code: haw
 #: ../zypp/LanguageCode.cc:594
@@ -1799,7 +1814,8 @@ msgid "Iceland"
 msgstr "冰岛"
 
 #. language code: ice isl is
-#: ../zypp/LanguageCode.cc:622 ../zypp/LanguageCode.cc:624
+#: ../zypp/LanguageCode.cc:622
+#: ../zypp/LanguageCode.cc:624
 msgid "Icelandic"
 msgstr "冰岛语"
 
@@ -1864,7 +1880,8 @@ msgstr "印度尼西亚语"
 msgid "Ingush"
 msgstr "英古什语"
 
-#: ../zypp/target/TargetImpl.cc:603 ../zypp/target/TargetImpl.cc:874
+#: ../zypp/target/TargetImpl.cc:692
+#: ../zypp/target/TargetImpl.cc:963
 msgid "Installation has been aborted as directed."
 msgstr "安装已经按照指示被中止。"
 
@@ -2290,15 +2307,15 @@ msgstr "莱索托"
 
 #: ../zypp/VendorSupportOptions.cc:20
 msgid "Level 1"
-msgstr ""
+msgstr "级别 1"
 
 #: ../zypp/VendorSupportOptions.cc:23
 msgid "Level 2"
-msgstr ""
+msgstr "级别 2"
 
 #: ../zypp/VendorSupportOptions.cc:26
 msgid "Level 3"
-msgstr ""
+msgstr "级别 3"
 
 #. language code: lez
 #: ../zypp/LanguageCode.cc:744
@@ -2416,7 +2433,8 @@ msgid "Macedonia"
 msgstr "马其顿王国"
 
 #. language code: mac mkd mk
-#: ../zypp/LanguageCode.cc:772 ../zypp/LanguageCode.cc:774
+#: ../zypp/LanguageCode.cc:772
+#: ../zypp/LanguageCode.cc:774
 msgid "Macedonian"
 msgstr "马其顿语"
 
@@ -2456,7 +2474,8 @@ msgid "Malawi"
 msgstr "马拉维"
 
 #. language code: may msa ms
-#: ../zypp/LanguageCode.cc:800 ../zypp/LanguageCode.cc:802
+#: ../zypp/LanguageCode.cc:800
+#: ../zypp/LanguageCode.cc:802
 msgid "Malay"
 msgstr "马来语"
 
@@ -2525,7 +2544,8 @@ msgid "Manx"
 msgstr "马恩岛语"
 
 #. language code: mao mri mi
-#: ../zypp/LanguageCode.cc:790 ../zypp/LanguageCode.cc:792
+#: ../zypp/LanguageCode.cc:790
+#: ../zypp/LanguageCode.cc:792
 msgid "Maori"
 msgstr "毛利语"
 
@@ -2730,7 +2750,8 @@ msgstr "纳米比亚"
 
 #. language code: nau na
 #. :NPL:524:
-#: ../zypp/LanguageCode.cc:858 ../zypp/CountryCode.cc:387
+#: ../zypp/LanguageCode.cc:858
+#: ../zypp/CountryCode.cc:387
 msgid "Nauru"
 msgstr "瑙鲁语"
 
@@ -2836,7 +2857,8 @@ msgstr "纽埃语"
 
 #. Defined LanguageCode constants
 #. Defined CountryCode constants
-#: ../zypp/LanguageCode.cc:225 ../zypp/CountryCode.cc:215
+#: ../zypp/LanguageCode.cc:225
+#: ../zypp/CountryCode.cc:215
 msgid "No Code"
 msgstr "无代码"
 
@@ -2951,7 +2973,7 @@ msgstr "阿曼"
 #: ../zypp/parser/RepoindexFileReader.cc:116
 #, c-format
 msgid "One or both of '%s' or '%s' attributes is required."
-msgstr ""
+msgstr "需要 '%s' 和 '%s' 属性中的一项或两项。"
 
 #: ../zypp/media/MediaException.cc:161
 msgid "Operation not supported by medium"
@@ -2984,9 +3006,9 @@ msgstr "奥托米诸语言"
 
 #. TranslatorExplanation %s = package being checked for integrity
 #: ../zypp/repo/PackageProvider.cc:247
-#, fuzzy, c-format
+#, c-format
 msgid "Package %s seems to be corrupted during transfer. Do you want to retry retrieval?"
-msgstr "%s 包未能通过完整性检查。是否要重试下载它？"
+msgstr "%s 包可能在传输过程中损坏。是否要重新下载？"
 
 #. language code: pal
 #: ../zypp/LanguageCode.cc:926
@@ -3074,7 +3096,8 @@ msgid "Permission to access '%s' denied."
 msgstr "访问'%s'的权限被拒绝。"
 
 #. language code: per fas fa
-#: ../zypp/LanguageCode.cc:938 ../zypp/LanguageCode.cc:940
+#: ../zypp/LanguageCode.cc:938
+#: ../zypp/LanguageCode.cc:940
 msgid "Persian"
 msgstr "波斯语"
 
@@ -3175,14 +3198,16 @@ msgstr "卡塔尔"
 msgid "Quechua"
 msgstr "盖丘亚语"
 
-#: ../zypp/url/UrlBase.cc:782 ../zypp/url/UrlBase.cc:1229
+#: ../zypp/url/UrlBase.cc:782
+#: ../zypp/url/UrlBase.cc:1229
 msgid "Query string parsing not supported for this URL"
 msgstr "不支持对此 URL 的查询字符串进行语法分析"
 
 #. TranslatorExplanation after semicolon is error message
 #. TranslatorExplanation the colon is followed by an error message
-#: ../zypp/target/rpm/RpmDb.cc:893 ../zypp/target/rpm/RpmDb.cc:2087
-#: ../zypp/target/rpm/RpmDb.cc:2223
+#: ../zypp/target/rpm/RpmDb.cc:893
+#: ../zypp/target/rpm/RpmDb.cc:2084
+#: ../zypp/target/rpm/RpmDb.cc:2220
 msgid "RPM failed: "
 msgstr "RPM 失败："
 
@@ -3206,19 +3231,20 @@ msgstr "拉帕努伊语"
 msgid "Rarotongan"
 msgstr "拉罗汤加语"
 
-#: ../zypp/url/UrlBase.cc:1117 ../zypp/url/UrlBase.cc:1131
+#: ../zypp/url/UrlBase.cc:1117
+#: ../zypp/url/UrlBase.cc:1131
 msgid "Relative path not allowed if authority exists"
 msgstr "如果存在认证，则不允许相对路径"
 
-#: ../zypp/RepoManager.cc:1331
+#: ../zypp/RepoManager.cc:1328
 #, c-format
 msgid "Removing repository '%s'"
 msgstr "正在移除安装源 '%s'"
 
 #: ../zypp/parser/RepoindexFileReader.cc:128
-#, fuzzy, c-format
+#, c-format
 msgid "Required attribute '%s' is missing."
-msgstr "找不到所需文件："
+msgstr "找不到所需属性 '%s' 。"
 
 #. :QAT:634:
 #: ../zypp/CountryCode.cc:406
@@ -3236,7 +3262,8 @@ msgid "Romania"
 msgstr "罗马尼亚"
 
 #. language code: rum ron ro
-#: ../zypp/LanguageCode.cc:974 ../zypp/LanguageCode.cc:976
+#: ../zypp/LanguageCode.cc:974
+#: ../zypp/LanguageCode.cc:976
 msgid "Romanian"
 msgstr "罗马尼亚语"
 
@@ -3386,7 +3413,8 @@ msgid "Serbia and Montenegro"
 msgstr "塞尔维亚和黑山"
 
 #. language code: scc srp sr
-#: ../zypp/LanguageCode.cc:1000 ../zypp/LanguageCode.cc:1002
+#: ../zypp/LanguageCode.cc:1000
+#: ../zypp/LanguageCode.cc:1002
 msgid "Serbian"
 msgstr "塞尔维亚语"
 
@@ -3435,7 +3463,7 @@ msgstr "塞拉利昂"
 msgid "Sign Languages"
 msgstr "手语"
 
-#: ../zypp/KeyRing.cc:589
+#: ../zypp/KeyRing.cc:587
 #, c-format
 msgid "Signature file %s not found"
 msgstr "未找到签名文件 %s"
@@ -3486,7 +3514,8 @@ msgid "Slavic (Other)"
 msgstr "斯拉夫诸语言（其它）"
 
 #. language code: slo slk sk
-#: ../zypp/LanguageCode.cc:1032 ../zypp/LanguageCode.cc:1034
+#: ../zypp/LanguageCode.cc:1032
+#: ../zypp/LanguageCode.cc:1034
 msgid "Slovak"
 msgstr "斯洛伐克语"
 
@@ -3676,11 +3705,13 @@ msgid "System exception '%s' on medium '%s'."
 msgstr "系统例外 '%s'  于介质 '%s'。"
 
 #: ../zypp/ZYppFactory.cc:361
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "System management is locked by the application with pid %d (%s).\n"
 "Close this application before trying again."
-msgstr "系统管理被 pid 为 %d 的程序锁定。请关闭这个程序再重试。"
+msgstr ""
+"系统管理被 pid 为 %d 的程序 %s 锁定。\n"
+"请关闭这个程序再重试。"
 
 #. language code: tgl tl
 #: ../zypp/LanguageCode.cc:1108
@@ -3759,12 +3790,11 @@ msgstr "泰国"
 
 #: ../zypp/VendorSupportOptions.cc:39
 msgid "The level of support is unspecified"
-msgstr ""
+msgstr "支持级别未指定"
 
 #: ../zypp/VendorSupportOptions.cc:42
-#, fuzzy
 msgid "The vendor does not provide support."
-msgstr "该磁盘不存在。"
+msgstr "供应者不提供支持。"
 
 #: ../zypp/base/InterProcessMutex.cc:139
 msgid "This action is being run by another program already."
@@ -3773,10 +3803,11 @@ msgstr "这个动作正在被另外一个程序运行着。"
 #: ../zypp/solver/detail/SATResolver.cc:1130
 #: ../zypp/solver/detail/SATResolver.cc:1148
 msgid "This request will break your system!"
-msgstr ""
+msgstr "此请求将破坏您的系统！"
 
 #. language code: tib bod bo
-#: ../zypp/LanguageCode.cc:1112 ../zypp/LanguageCode.cc:1114
+#: ../zypp/LanguageCode.cc:1112
+#: ../zypp/LanguageCode.cc:1114
 msgid "Tibetan"
 msgstr "西藏语"
 
@@ -3822,7 +3853,8 @@ msgstr "托克皮辛语"
 
 #. language code: tkl
 #. :TJK:762:
-#: ../zypp/LanguageCode.cc:1122 ../zypp/CountryCode.cc:435
+#: ../zypp/LanguageCode.cc:1122
+#: ../zypp/CountryCode.cc:435
 msgid "Tokelau"
 msgstr "托克劳语"
 
@@ -3841,7 +3873,7 @@ msgstr "汤加语（尼亚萨）"
 msgid "Tonga (Tonga Islands)"
 msgstr "汤加语（汤加岛）"
 
-#: ../zypp/KeyRing.cc:528
+#: ../zypp/KeyRing.cc:526
 #, c-format
 msgid "Tried to import not existant key %s into keyring %s"
 msgstr "尝试导入并不存在的密钥 %s 到钥匙环 %s"
@@ -3913,7 +3945,8 @@ msgstr "特克斯和凯科斯群岛"
 
 #. language code: tvl
 #. :TTO:780:
-#: ../zypp/LanguageCode.cc:1152 ../zypp/CountryCode.cc:442
+#: ../zypp/LanguageCode.cc:1152
+#: ../zypp/CountryCode.cc:442
 msgid "Tuvalu"
 msgstr "图瓦卢语"
 
@@ -3974,7 +4007,8 @@ msgstr "无法创建 dbus 连接"
 msgid "Unable to initalize HAL context -- hald not running?"
 msgstr "无法初始化 HAL 环境 － hald 未运行？"
 
-#: ../zypp/Url.cc:322 ../zypp/Url.cc:336
+#: ../zypp/Url.cc:322
+#: ../zypp/Url.cc:336
 msgid "Unable to parse Url components"
 msgstr "无法对 URL 组件进行语法分析"
 
@@ -4003,10 +4037,9 @@ msgstr "美国"
 msgid "United States Minor Outlying Islands"
 msgstr "美国本土外小岛屿"
 
-#: ../zypp/target/TargetImpl.cc:908
-#, fuzzy
+#: ../zypp/target/TargetImpl.cc:997
 msgid "Unknown Distribution"
-msgstr "未知的 list 选项"
+msgstr "未知大版本"
 
 #: ../zypp/CountryCode.cc:135
 msgid "Unknown country: "
@@ -4018,7 +4051,7 @@ msgstr "未知语言："
 
 #: ../zypp/VendorSupportOptions.cc:56
 msgid "Unknown support option. Description not available"
-msgstr ""
+msgstr "未知支持选项。描述不可用"
 
 #: ../zypp/media/MediaUserAuth.cc:123
 #, c-format
@@ -4105,7 +4138,7 @@ msgid "Vai"
 msgstr "瓦伊语"
 
 #. we will throw this later if no URL checks out fine
-#: ../zypp/RepoManager.cc:781
+#: ../zypp/RepoManager.cc:778
 msgid "Valid metadata not found at specified URL(s)"
 msgstr "在指定 URL 未找到有效元数据"
 
@@ -4180,7 +4213,8 @@ msgid "Washo"
 msgstr "瓦肖语"
 
 #. language code: wel cym cy
-#: ../zypp/LanguageCode.cc:1192 ../zypp/LanguageCode.cc:1194
+#: ../zypp/LanguageCode.cc:1192
+#: ../zypp/LanguageCode.cc:1194
 msgid "Welsh"
 msgstr "威尔士语"
 
@@ -4296,7 +4330,7 @@ msgstr "无法安装 %s 和 %s"
 msgid "conflicting requests"
 msgstr "冲突的请求"
 
-#: ../zypp/target/rpm/RpmDb.cc:2375
+#: ../zypp/target/rpm/RpmDb.cc:2372
 #, c-format
 msgid "created backup %s"
 msgstr "已创建备份 %s"
@@ -4349,7 +4383,7 @@ msgstr "降级 %s 为 %s"
 #: ../zypp/solver/detail/SATResolver.cc:1131
 #: ../zypp/solver/detail/SATResolver.cc:1149
 msgid "ignore the warning of a broken system"
-msgstr ""
+msgstr "忽略损坏系统的警告"
 
 #: ../zypp/solver/detail/SATResolver.cc:1227
 #, c-format
@@ -4365,7 +4399,7 @@ msgstr ""
 
 #: ../zypp/VendorSupportOptions.cc:31
 msgid "invalid"
-msgstr ""
+msgstr "无效"
 
 #. for solver reason: NOT weak lock.
 #: ../zypp/solver/detail/SATResolver.cc:1073
@@ -4404,13 +4438,13 @@ msgid "replacement of %s with %s"
 msgstr "将 %s 用 %s 取代"
 
 #. %s = filenames
-#: ../zypp/target/rpm/RpmDb.cc:2073
+#: ../zypp/target/rpm/RpmDb.cc:2070
 #, c-format
 msgid "rpm created %s as %s, but it was impossible to determine the difference"
 msgstr "rpm 已将 %s 创建为 %s，但是无法确定之间的差异"
 
 #. %s = filenames
-#: ../zypp/target/rpm/RpmDb.cc:2075
+#: ../zypp/target/rpm/RpmDb.cc:2072
 #, c-format
 msgid ""
 "rpm created %s as %s.\n"
@@ -4420,13 +4454,13 @@ msgstr ""
 "以下是前 25 行差异：\n"
 
 #. %s = filenames
-#: ../zypp/target/rpm/RpmDb.cc:2068
+#: ../zypp/target/rpm/RpmDb.cc:2065
 #, c-format
 msgid "rpm saved %s as %s, but it was impossible to determine the difference"
 msgstr "rpm 已将 %s 另存为 %s，但是无法确定之间的差异"
 
 #. %s = filenames
-#: ../zypp/target/rpm/RpmDb.cc:2070
+#: ../zypp/target/rpm/RpmDb.cc:2067
 #, c-format
 msgid ""
 "rpm saved %s as %s.\n"
@@ -4436,9 +4470,8 @@ msgstr ""
 "以下是前 25 行差异：\n"
 
 #: ../zypp/solver/detail/SATResolver.cc:918
-#, fuzzy
 msgid "some dependency problem"
-msgstr "由于依赖性问题，所以无法安装 %s"
+msgstr "一些依赖性问题"
 
 #: ../zypp/solver/detail/SATResolver.cc:995
 msgid "uninstallable providers: "
@@ -4449,27 +4482,21 @@ msgid "unknown"
 msgstr "未知"
 
 #: ../zypp/VendorSupportOptions.cc:17
-#, fuzzy
 msgid "unsupported"
-msgstr "- 不支持"
+msgstr "不支持"
 
 #~ msgid "%s remove failed"
 #~ msgstr "%s 去除失败"
-
 #~ msgid "Additional rpm output:"
 #~ msgstr "其他 rpm 输出："
-
 #~ msgid "Invalid user name or password."
 #~ msgstr "无效用户名或密码。"
-
 #~ msgid "rpm output:"
 #~ msgstr "rpm 输出："
-
 #~ msgid "%s install failed"
 #~ msgstr "%s 安装失败"
-
 #~ msgid "%s installed ok"
 #~ msgstr "%s 安装成功"
-
 #~ msgid "%s remove ok"
 #~ msgstr "%s 去除成功"
+

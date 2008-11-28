@@ -12,7 +12,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: zypp.bg\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-11-06 18:07+0100\n"
+"POT-Creation-Date: 2008-11-21 09:10+0100\n"
 "PO-Revision-Date: 2006-11-09 18:05+0200\n"
 "Last-Translator: Borislav Mitev <morbid_viper@tkzs.org>\n"
 "Language-Team: Bulgarian <bg@li.org>\n"
@@ -34,17 +34,17 @@ msgstr "Няма инсталируеми доставчици на %s"
 msgid " SSL certificate problem, verify that the CA cert is OK for '%s'."
 msgstr ""
 
-#: ../zypp/target/TargetImpl.cc:85
+#: ../zypp/target/TargetImpl.cc:88
 msgid " executed"
 msgstr ""
 
 # %s is either BOOTP or DHCP
-#: ../zypp/target/TargetImpl.cc:107
+#: ../zypp/target/TargetImpl.cc:110
 #, fuzzy
 msgid " execution failed"
 msgstr "Настройването чрез %s бе неуспешно."
 
-#: ../zypp/target/TargetImpl.cc:193
+#: ../zypp/target/TargetImpl.cc:196
 msgid " execution skipped while aborting"
 msgstr ""
 
@@ -88,7 +88,7 @@ msgstr "Аколи"
 msgid "Adangme"
 msgstr "Адангме"
 
-#: ../zypp/RepoManager.cc:1201
+#: ../zypp/RepoManager.cc:1198
 #, c-format
 msgid "Adding repository '%s'"
 msgstr ""
@@ -326,7 +326,7 @@ msgid "Austronesian (Other)"
 msgstr "Австронезийски (друг)"
 
 #. !\todo add comma to the message for the next release
-#: ../zypp/media/MediaCurl.cc:1689
+#: ../zypp/media/MediaCurl.cc:1702
 #, c-format
 msgid "Authentication required for '%s'"
 msgstr ""
@@ -608,7 +608,7 @@ msgstr "Бруней"
 msgid "Buginese"
 msgstr "Бугинески"
 
-#: ../zypp/RepoManager.cc:969
+#: ../zypp/RepoManager.cc:966
 #, c-format
 msgid "Building repository '%s' cache"
 msgstr ""
@@ -734,7 +734,7 @@ msgstr ""
 msgid "Canada"
 msgstr "Канада"
 
-#: ../zypp/KeyRing.cc:277
+#: ../zypp/KeyRing.cc:275
 #, c-format
 msgid "Cannot create public key %s from %s keyring to file %s"
 msgstr ""
@@ -832,7 +832,7 @@ msgstr "Коморийски"
 
 #. Translator: %s = name of an rpm package. A list of diffs follows
 #. this message.
-#: ../zypp/target/rpm/RpmDb.cc:1899
+#: ../zypp/target/rpm/RpmDb.cc:1896
 #, c-format
 msgid "Changed configuration files for %s:"
 msgstr "Променени файлове с настройки за %s:"
@@ -1171,7 +1171,7 @@ msgid "Duala"
 msgstr "ДуалаДу"
 
 #. dubious: Throw on malformed known types, otherwise log a warning.
-#: ../zypp/CheckSum.cc:97
+#: ../zypp/CheckSum.cc:98
 #, c-format
 msgid "Dubious type '%s' for %u byte checksum '%s'"
 msgstr ""
@@ -1330,12 +1330,12 @@ msgstr "Еве"
 msgid "Ewondo"
 msgstr "Евондо"
 
-#: ../zypp/KeyRing.cc:579
+#: ../zypp/KeyRing.cc:577
 #, fuzzy
 msgid "Failed to delete key."
 msgstr "Неуспешно зареждане на модула \"%s\"."
 
-#: ../zypp/target/rpm/RpmDb.cc:1067
+#: ../zypp/target/rpm/RpmDb.cc:1064
 #, c-format
 msgid "Failed to import public key from file %s: %s"
 msgstr ""
@@ -1345,7 +1345,7 @@ msgstr ""
 msgid "Failed to mount %s on %s"
 msgstr "Неуспешно зареждане на модула \"%s\"."
 
-#: ../zypp/target/rpm/RpmDb.cc:1144
+#: ../zypp/target/rpm/RpmDb.cc:1141
 #, c-format
 msgid "Failed to remove public key %s: %s"
 msgstr ""
@@ -1942,7 +1942,7 @@ msgstr "Индонезийски"
 msgid "Ingush"
 msgstr "Ингуш"
 
-#: ../zypp/target/TargetImpl.cc:603 ../zypp/target/TargetImpl.cc:874
+#: ../zypp/target/TargetImpl.cc:692 ../zypp/target/TargetImpl.cc:963
 msgid "Installation has been aborted as directed."
 msgstr ""
 
@@ -3338,8 +3338,8 @@ msgstr ""
 
 #. TranslatorExplanation after semicolon is error message
 #. TranslatorExplanation the colon is followed by an error message
-#: ../zypp/target/rpm/RpmDb.cc:893 ../zypp/target/rpm/RpmDb.cc:2087
-#: ../zypp/target/rpm/RpmDb.cc:2223
+#: ../zypp/target/rpm/RpmDb.cc:893 ../zypp/target/rpm/RpmDb.cc:2084
+#: ../zypp/target/rpm/RpmDb.cc:2220
 #, fuzzy
 msgid "RPM failed: "
 msgstr "пропадна."
@@ -3370,7 +3370,7 @@ msgstr "Раротоган"
 msgid "Relative path not allowed if authority exists"
 msgstr ""
 
-#: ../zypp/RepoManager.cc:1331
+#: ../zypp/RepoManager.cc:1328
 #, c-format
 msgid "Removing repository '%s'"
 msgstr ""
@@ -3616,7 +3616,7 @@ msgstr "Сиера Леоне"
 msgid "Sign Languages"
 msgstr "Знакови езици"
 
-#: ../zypp/KeyRing.cc:589
+#: ../zypp/KeyRing.cc:587
 #, fuzzy, c-format
 msgid "Signature file %s not found"
 msgstr "KScreensaver не е открит."
@@ -4047,7 +4047,7 @@ msgstr "Тонга (Няса)"
 msgid "Tonga (Tonga Islands)"
 msgstr "Тонга (Острови Тонга)"
 
-#: ../zypp/KeyRing.cc:528
+#: ../zypp/KeyRing.cc:526
 #, c-format
 msgid "Tried to import not existant key %s into keyring %s"
 msgstr ""
@@ -4221,7 +4221,7 @@ msgstr "САЩ"
 msgid "United States Minor Outlying Islands"
 msgstr "Малки Острови по крайбрежието на САЩ"
 
-#: ../zypp/target/TargetImpl.cc:908
+#: ../zypp/target/TargetImpl.cc:997
 #, fuzzy
 msgid "Unknown Distribution"
 msgstr "Непознат монитор:"
@@ -4320,7 +4320,7 @@ msgid "Vai"
 msgstr "Вай"
 
 #. we will throw this later if no URL checks out fine
-#: ../zypp/RepoManager.cc:781
+#: ../zypp/RepoManager.cc:778
 msgid "Valid metadata not found at specified URL(s)"
 msgstr ""
 
@@ -4525,7 +4525,7 @@ msgstr "%s не може да бъде инсталиран"
 msgid "conflicting requests"
 msgstr ""
 
-#: ../zypp/target/rpm/RpmDb.cc:2375
+#: ../zypp/target/rpm/RpmDb.cc:2372
 #, c-format
 msgid "created backup %s"
 msgstr "създадено резервно копие %s"
@@ -4631,13 +4631,13 @@ msgid "replacement of %s with %s"
 msgstr ""
 
 #. %s = filenames
-#: ../zypp/target/rpm/RpmDb.cc:2073
+#: ../zypp/target/rpm/RpmDb.cc:2070
 #, fuzzy, c-format
 msgid "rpm created %s as %s, but it was impossible to determine the difference"
 msgstr "rpm създаде %s като %s, но е невъзможно да се открие разликата"
 
 #. %s = filenames
-#: ../zypp/target/rpm/RpmDb.cc:2075
+#: ../zypp/target/rpm/RpmDb.cc:2072
 #, c-format
 msgid ""
 "rpm created %s as %s.\n"
@@ -4647,13 +4647,13 @@ msgstr ""
 "Ето първите 25 реда от разликите:\n"
 
 #. %s = filenames
-#: ../zypp/target/rpm/RpmDb.cc:2068
+#: ../zypp/target/rpm/RpmDb.cc:2065
 #, fuzzy, c-format
 msgid "rpm saved %s as %s, but it was impossible to determine the difference"
 msgstr "rpm запази %s като %s, но е невъзможно да се открие разликата"
 
 #. %s = filenames
-#: ../zypp/target/rpm/RpmDb.cc:2070
+#: ../zypp/target/rpm/RpmDb.cc:2067
 #, c-format
 msgid ""
 "rpm saved %s as %s.\n"

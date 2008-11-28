@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: zypp\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-11-06 18:07+0100\n"
+"POT-Creation-Date: 2008-11-21 09:10+0100\n"
 "PO-Revision-Date: 2006-11-03 12:03\n"
 "Last-Translator: Novell Language <language@novell.com>\n"
 "Language-Team: Novell Language <language@novell.com>\n"
@@ -25,17 +25,17 @@ msgstr "Akukho baboneleli bahlohliweyo baka%s"
 msgid " SSL certificate problem, verify that the CA cert is OK for '%s'."
 msgstr ""
 
-#: ../zypp/target/TargetImpl.cc:85
+#: ../zypp/target/TargetImpl.cc:88
 #, fuzzy
 msgid " executed"
 msgstr "Phumeza"
 
-#: ../zypp/target/TargetImpl.cc:107
+#: ../zypp/target/TargetImpl.cc:110
 #, fuzzy
 msgid " execution failed"
 msgstr "DBI Execution failed: %s"
 
-#: ../zypp/target/TargetImpl.cc:193
+#: ../zypp/target/TargetImpl.cc:196
 msgid " execution skipped while aborting"
 msgstr ""
 
@@ -79,7 +79,7 @@ msgstr "isi-Acoli"
 msgid "Adangme"
 msgstr "isi-Adangme"
 
-#: ../zypp/RepoManager.cc:1201
+#: ../zypp/RepoManager.cc:1198
 #, c-format
 msgid "Adding repository '%s'"
 msgstr ""
@@ -302,7 +302,7 @@ msgid "Austronesian (Other)"
 msgstr "isi-Austronesian (Esinye)"
 
 #. !\todo add comma to the message for the next release
-#: ../zypp/media/MediaCurl.cc:1689
+#: ../zypp/media/MediaCurl.cc:1702
 #, c-format
 msgid "Authentication required for '%s'"
 msgstr ""
@@ -566,7 +566,7 @@ msgstr "i-Brunei Darussalam"
 msgid "Buginese"
 msgstr "isi-Buginese"
 
-#: ../zypp/RepoManager.cc:969
+#: ../zypp/RepoManager.cc:966
 #, c-format
 msgid "Building repository '%s' cache"
 msgstr ""
@@ -687,7 +687,7 @@ msgstr "Ayikwazi kumisela ulwabelo lokugoba i-mutex "
 msgid "Canada"
 msgstr "i-Canada"
 
-#: ../zypp/KeyRing.cc:277
+#: ../zypp/KeyRing.cc:275
 #, c-format
 msgid "Cannot create public key %s from %s keyring to file %s"
 msgstr ""
@@ -778,7 +778,7 @@ msgstr "isi-Chamorro"
 
 #. Translator: %s = name of an rpm package. A list of diffs follows
 #. this message.
-#: ../zypp/target/rpm/RpmDb.cc:1899
+#: ../zypp/target/rpm/RpmDb.cc:1896
 #, c-format
 msgid "Changed configuration files for %s:"
 msgstr "Iifayili zobumbeko ezitshintshileyo zika%s:"
@@ -1103,7 +1103,7 @@ msgid "Duala"
 msgstr "isi-Duala"
 
 #. dubious: Throw on malformed known types, otherwise log a warning.
-#: ../zypp/CheckSum.cc:97
+#: ../zypp/CheckSum.cc:98
 #, c-format
 msgid "Dubious type '%s' for %u byte checksum '%s'"
 msgstr ""
@@ -1257,12 +1257,12 @@ msgstr "isi-Ewe"
 msgid "Ewondo"
 msgstr "isi-Ewondo"
 
-#: ../zypp/KeyRing.cc:579
+#: ../zypp/KeyRing.cc:577
 #, fuzzy
 msgid "Failed to delete key."
 msgstr "Isilele ukuqalisa i-VM."
 
-#: ../zypp/target/rpm/RpmDb.cc:1067
+#: ../zypp/target/rpm/RpmDb.cc:1064
 #, c-format
 msgid "Failed to import public key from file %s: %s"
 msgstr ""
@@ -1272,7 +1272,7 @@ msgstr ""
 msgid "Failed to mount %s on %s"
 msgstr "Ayikwazanga kuvuleka i-%s - %s\n"
 
-#: ../zypp/target/rpm/RpmDb.cc:1144
+#: ../zypp/target/rpm/RpmDb.cc:1141
 #, fuzzy, c-format
 msgid "Failed to remove public key %s: %s"
 msgstr "Akukwazeki ukufumana iqhosha likawonkewonke."
@@ -1858,7 +1858,7 @@ msgstr "isi-Indonesian"
 msgid "Ingush"
 msgstr "isi-Ingush"
 
-#: ../zypp/target/TargetImpl.cc:603 ../zypp/target/TargetImpl.cc:874
+#: ../zypp/target/TargetImpl.cc:692 ../zypp/target/TargetImpl.cc:963
 msgid "Installation has been aborted as directed."
 msgstr "Ukuhlohla kuye kwalahlwa njengoko bekuyalelwe."
 
@@ -3176,8 +3176,8 @@ msgstr "Ukwahlulwa komtya wokubuzisa awuxhaswa malunga nale-URL"
 
 #. TranslatorExplanation after semicolon is error message
 #. TranslatorExplanation the colon is followed by an error message
-#: ../zypp/target/rpm/RpmDb.cc:893 ../zypp/target/rpm/RpmDb.cc:2087
-#: ../zypp/target/rpm/RpmDb.cc:2223
+#: ../zypp/target/rpm/RpmDb.cc:893 ../zypp/target/rpm/RpmDb.cc:2084
+#: ../zypp/target/rpm/RpmDb.cc:2220
 #, fuzzy
 msgid "RPM failed: "
 msgstr "isilele"
@@ -3206,7 +3206,7 @@ msgstr "isi-Ratongan"
 msgid "Relative path not allowed if authority exists"
 msgstr "Indlela yothungelwano ethelekisekayo ayivunyelwa xa lukhona ugunyaziso"
 
-#: ../zypp/RepoManager.cc:1331
+#: ../zypp/RepoManager.cc:1328
 #, fuzzy, c-format
 msgid "Removing repository '%s'"
 msgstr "Ibuyisela oovimba"
@@ -3431,7 +3431,7 @@ msgstr "i-Sierra Leone"
 msgid "Sign Languages"
 msgstr "Iilwimi zeMiqondiso"
 
-#: ../zypp/KeyRing.cc:589
+#: ../zypp/KeyRing.cc:587
 #, fuzzy, c-format
 msgid "Signature file %s not found"
 msgstr "Ukungenisa akufunyenwanga."
@@ -3838,7 +3838,7 @@ msgstr "isiTonga (Nyasa)"
 msgid "Tonga (Tonga Islands)"
 msgstr "isi-Tonga (Tonga Islands)"
 
-#: ../zypp/KeyRing.cc:528
+#: ../zypp/KeyRing.cc:526
 #, c-format
 msgid "Tried to import not existant key %s into keyring %s"
 msgstr ""
@@ -4000,7 +4000,7 @@ msgstr "i-United States"
 msgid "United States Minor Outlying Islands"
 msgstr "i-United States Minor Outlying Islands"
 
-#: ../zypp/target/TargetImpl.cc:908
+#: ../zypp/target/TargetImpl.cc:997
 #, fuzzy
 msgid "Unknown Distribution"
 msgstr "Isikhethwa soluhlu esingaziwa"
@@ -4102,7 +4102,7 @@ msgid "Vai"
 msgstr "isi-Vai"
 
 #. we will throw this later if no URL checks out fine
-#: ../zypp/RepoManager.cc:781
+#: ../zypp/RepoManager.cc:778
 msgid "Valid metadata not found at specified URL(s)"
 msgstr ""
 
@@ -4294,7 +4294,7 @@ msgstr "Ayikwazi kuhlohla%s "
 msgid "conflicting requests"
 msgstr "Uqhagamshelo lucela uku:"
 
-#: ../zypp/target/rpm/RpmDb.cc:2375
+#: ../zypp/target/rpm/RpmDb.cc:2372
 #, c-format
 msgid "created backup %s"
 msgstr "idale ugcino olukhuselekileyo %s "
@@ -4400,13 +4400,13 @@ msgid "replacement of %s with %s"
 msgstr ""
 
 #. %s = filenames
-#: ../zypp/target/rpm/RpmDb.cc:2073
+#: ../zypp/target/rpm/RpmDb.cc:2070
 #, fuzzy, c-format
 msgid "rpm created %s as %s, but it was impossible to determine the difference"
 msgstr "i-rpm idalwe %s njenge %s kodwa kwakungenzeki ukumisela umahluko"
 
 #. %s = filenames
-#: ../zypp/target/rpm/RpmDb.cc:2075
+#: ../zypp/target/rpm/RpmDb.cc:2072
 #, c-format
 msgid ""
 "rpm created %s as %s.\n"
@@ -4416,13 +4416,13 @@ msgstr ""
 "Nantsi imigca eyi-25 yokuqala yomahluko:\n"
 
 #. %s = filenames
-#: ../zypp/target/rpm/RpmDb.cc:2068
+#: ../zypp/target/rpm/RpmDb.cc:2065
 #, fuzzy, c-format
 msgid "rpm saved %s as %s, but it was impossible to determine the difference"
 msgstr "i-rpm igcine %s njenge %s kodwa kwakungenzeki ukumisela umahluko"
 
 #. %s = filenames
-#: ../zypp/target/rpm/RpmDb.cc:2070
+#: ../zypp/target/rpm/RpmDb.cc:2067
 #, c-format
 msgid ""
 "rpm saved %s as %s.\n"

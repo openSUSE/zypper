@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: NetworkManager-vpnc\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-11-06 18:07+0100\n"
+"POT-Creation-Date: 2008-11-21 09:10+0100\n"
 "PO-Revision-Date: 2005-06-26 01:20+0200\n"
 "Last-Translator: Priyavert Sharma <priyavert.sharma@agreeya.com>\n"
 "Language-Team: AgreeYa Solutions <www.agreeya.com>\n"
@@ -23,17 +23,17 @@ msgstr "%sக்கு நிறுவக்கூடிய அளிப்ப�
 msgid " SSL certificate problem, verify that the CA cert is OK for '%s'."
 msgstr ""
 
-#: ../zypp/target/TargetImpl.cc:85
+#: ../zypp/target/TargetImpl.cc:88
 #, fuzzy
 msgid " executed"
 msgstr "நிறைவேற்று"
 
-#: ../zypp/target/TargetImpl.cc:107
+#: ../zypp/target/TargetImpl.cc:110
 #, fuzzy
 msgid " execution failed"
 msgstr "DBI Execution failed: %s"
 
-#: ../zypp/target/TargetImpl.cc:193
+#: ../zypp/target/TargetImpl.cc:196
 msgid " execution skipped while aborting"
 msgstr ""
 
@@ -77,7 +77,7 @@ msgstr "அகோலி"
 msgid "Adangme"
 msgstr "அடாங்மே"
 
-#: ../zypp/RepoManager.cc:1201
+#: ../zypp/RepoManager.cc:1198
 #, fuzzy, c-format
 msgid "Adding repository '%s'"
 msgstr "மூலங்கள் சேர்க்கப்படுகின்றன"
@@ -300,7 +300,7 @@ msgid "Austronesian (Other)"
 msgstr "ஆஸ்ட்ரோனேசியன் (மற்றவை)"
 
 #. !\todo add comma to the message for the next release
-#: ../zypp/media/MediaCurl.cc:1689
+#: ../zypp/media/MediaCurl.cc:1702
 #, c-format
 msgid "Authentication required for '%s'"
 msgstr ""
@@ -564,7 +564,7 @@ msgstr "புரூனய் தாருசலாம்"
 msgid "Buginese"
 msgstr "º£É"
 
-#: ../zypp/RepoManager.cc:969
+#: ../zypp/RepoManager.cc:966
 #, c-format
 msgid "Building repository '%s' cache"
 msgstr ""
@@ -685,7 +685,7 @@ msgstr "எதிர்ப்புத்தன்மையுள்ள மி�
 msgid "Canada"
 msgstr "¸É¼¡"
 
-#: ../zypp/KeyRing.cc:277
+#: ../zypp/KeyRing.cc:275
 #, c-format
 msgid "Cannot create public key %s from %s keyring to file %s"
 msgstr ""
@@ -776,7 +776,7 @@ msgstr "சமாரோ"
 
 #. Translator: %s = name of an rpm package. A list of diffs follows
 #. this message.
-#: ../zypp/target/rpm/RpmDb.cc:1899
+#: ../zypp/target/rpm/RpmDb.cc:1896
 #, c-format
 msgid "Changed configuration files for %s:"
 msgstr "%s:க்காக உள்ளமைத்தல் கோப்புகள் மாற்றப்பட்டுள்ளன"
@@ -1101,7 +1101,7 @@ msgid "Duala"
 msgstr "ÀÃ¡Ì§Å"
 
 #. dubious: Throw on malformed known types, otherwise log a warning.
-#: ../zypp/CheckSum.cc:97
+#: ../zypp/CheckSum.cc:98
 #, c-format
 msgid "Dubious type '%s' for %u byte checksum '%s'"
 msgstr ""
@@ -1255,12 +1255,12 @@ msgstr "ஈவ்"
 msgid "Ewondo"
 msgstr "இவான்டோ"
 
-#: ../zypp/KeyRing.cc:579
+#: ../zypp/KeyRing.cc:577
 #, fuzzy
 msgid "Failed to delete key."
 msgstr "Failed to parse: %s."
 
-#: ../zypp/target/rpm/RpmDb.cc:1067
+#: ../zypp/target/rpm/RpmDb.cc:1064
 #, c-format
 msgid "Failed to import public key from file %s: %s"
 msgstr ""
@@ -1270,7 +1270,7 @@ msgstr ""
 msgid "Failed to mount %s on %s"
 msgstr "%s - %s திறக்க முடியவில்லை\n"
 
-#: ../zypp/target/rpm/RpmDb.cc:1144
+#: ../zypp/target/rpm/RpmDb.cc:1141
 #, fuzzy, c-format
 msgid "Failed to remove public key %s: %s"
 msgstr "பொது விசையை பெற முடியவில்லை."
@@ -1856,7 +1856,7 @@ msgstr "­ó§¾¡É£º¢Âý"
 msgid "Ingush"
 msgstr "இங்குஷ்"
 
-#: ../zypp/target/TargetImpl.cc:603 ../zypp/target/TargetImpl.cc:874
+#: ../zypp/target/TargetImpl.cc:692 ../zypp/target/TargetImpl.cc:963
 msgid "Installation has been aborted as directed."
 msgstr "குறிப்பிட்டுள்ளபடி நிறுவுதல் இடையில் நிறுத்தப்பட்டது."
 
@@ -3174,8 +3174,8 @@ msgstr "இந்த யூஆர்எல்லுக்கு வினா வ
 
 #. TranslatorExplanation after semicolon is error message
 #. TranslatorExplanation the colon is followed by an error message
-#: ../zypp/target/rpm/RpmDb.cc:893 ../zypp/target/rpm/RpmDb.cc:2087
-#: ../zypp/target/rpm/RpmDb.cc:2223
+#: ../zypp/target/rpm/RpmDb.cc:893 ../zypp/target/rpm/RpmDb.cc:2084
+#: ../zypp/target/rpm/RpmDb.cc:2220
 #, fuzzy
 msgid "RPM failed: "
 msgstr "தோல்வியுற்றது"
@@ -3204,7 +3204,7 @@ msgstr "ரரோடோங்கன்"
 msgid "Relative path not allowed if authority exists"
 msgstr "அதிகாரம் இருக்குமானால் தொடர்புப் பாதை ஆதரவளிக்கப்படுவதில்லை"
 
-#: ../zypp/RepoManager.cc:1331
+#: ../zypp/RepoManager.cc:1328
 #, fuzzy, c-format
 msgid "Removing repository '%s'"
 msgstr "மூலங்கள் சேர்க்கப்படுகின்றன"
@@ -3429,7 +3429,7 @@ msgstr "ஸியரா லியோன்"
 msgid "Sign Languages"
 msgstr "சங்கேத மொழிகள்"
 
-#: ../zypp/KeyRing.cc:589
+#: ../zypp/KeyRing.cc:587
 #, fuzzy, c-format
 msgid "Signature file %s not found"
 msgstr "உள்ளீடு காணப்படவில்லை."
@@ -3835,7 +3835,7 @@ msgstr "டோங்கா (நியாஸா)"
 msgid "Tonga (Tonga Islands)"
 msgstr "டோங்கா (டோங்கா தீவுகள்)"
 
-#: ../zypp/KeyRing.cc:528
+#: ../zypp/KeyRing.cc:526
 #, c-format
 msgid "Tried to import not existant key %s into keyring %s"
 msgstr ""
@@ -3997,7 +3997,7 @@ msgstr "³ì¸¢Â «¦ÁÃ¢ì¸ ¿¡Î¸û"
 msgid "United States Minor Outlying Islands"
 msgstr "³ì¸¢Â «¦ÁÃ¢ì¸ ¿¡Î¸û"
 
-#: ../zypp/target/TargetImpl.cc:908
+#: ../zypp/target/TargetImpl.cc:997
 #, fuzzy
 msgid "Unknown Distribution"
 msgstr "தெரியாத பட்டியல் விருப்பத்தேர்வு"
@@ -4099,7 +4099,7 @@ msgid "Vai"
 msgstr "வாய்"
 
 #. we will throw this later if no URL checks out fine
-#: ../zypp/RepoManager.cc:781
+#: ../zypp/RepoManager.cc:778
 msgid "Valid metadata not found at specified URL(s)"
 msgstr ""
 
@@ -4291,7 +4291,7 @@ msgstr "%sஐ நிறுவ முடியவில்லை"
 msgid "conflicting requests"
 msgstr "இந்த இணைப்புக்கான கோரிக்கை: "
 
-#: ../zypp/target/rpm/RpmDb.cc:2375
+#: ../zypp/target/rpm/RpmDb.cc:2372
 #, c-format
 msgid "created backup %s"
 msgstr "%s மறுபிரதி உருவாக்கப்பட்டது"
@@ -4397,13 +4397,13 @@ msgid "replacement of %s with %s"
 msgstr ""
 
 #. %s = filenames
-#: ../zypp/target/rpm/RpmDb.cc:2073
+#: ../zypp/target/rpm/RpmDb.cc:2070
 #, fuzzy, c-format
 msgid "rpm created %s as %s, but it was impossible to determine the difference"
 msgstr "%s ஆக ஆர்பிஎம் உருவாf;கப்பட்டுள்ளது, ஆனால் வேறுபாட்டை நிர்ணயிக்க முடியவில்லை"
 
 #. %s = filenames
-#: ../zypp/target/rpm/RpmDb.cc:2075
+#: ../zypp/target/rpm/RpmDb.cc:2072
 #, fuzzy, c-format
 msgid ""
 "rpm created %s as %s.\n"
@@ -4413,13 +4413,13 @@ msgstr ""
 "வேறுபாடுகளின் முதல் 25 வரிகள் இங்குள்ளன:\n"
 
 #. %s = filenames
-#: ../zypp/target/rpm/RpmDb.cc:2068
+#: ../zypp/target/rpm/RpmDb.cc:2065
 #, fuzzy, c-format
 msgid "rpm saved %s as %s, but it was impossible to determine the difference"
 msgstr "%s ஆக ஆர்பிஎம் சேமிக்கப்பட்டுள்ளது, ஆனால் வேறுபாட்டை நிர்ணயிக்க முடியவில்லை"
 
 #. %s = filenames
-#: ../zypp/target/rpm/RpmDb.cc:2070
+#: ../zypp/target/rpm/RpmDb.cc:2067
 #, fuzzy, c-format
 msgid ""
 "rpm saved %s as %s.\n"

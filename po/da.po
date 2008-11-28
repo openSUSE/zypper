@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: zypp\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-11-06 18:07+0100\n"
+"POT-Creation-Date: 2008-11-21 09:10+0100\n"
 "PO-Revision-Date: 2008-10-24 13:30+0200\n"
 "Last-Translator: Martin Schlander <mschlander@opensuse.org>\n"
 "Language-Team: Danish <opensuse-translation@opensuse.org>\n"
@@ -36,15 +36,15 @@ msgstr ""
 msgid " SSL certificate problem, verify that the CA cert is OK for '%s'."
 msgstr " SSL-certifikatproblem. Tjek at CA-certifikatet er OK for '%s'."
 
-#: ../zypp/target/TargetImpl.cc:85
+#: ../zypp/target/TargetImpl.cc:88
 msgid " executed"
 msgstr " afviklet"
 
-#: ../zypp/target/TargetImpl.cc:107
+#: ../zypp/target/TargetImpl.cc:110
 msgid " execution failed"
 msgstr " afvikling fejlede"
 
-#: ../zypp/target/TargetImpl.cc:193
+#: ../zypp/target/TargetImpl.cc:196
 msgid " execution skipped while aborting"
 msgstr " afvikling skippet under afbrydelse"
 
@@ -88,7 +88,7 @@ msgstr "Acoli"
 msgid "Adangme"
 msgstr "Adangme"
 
-#: ../zypp/RepoManager.cc:1201
+#: ../zypp/RepoManager.cc:1198
 #, c-format
 msgid "Adding repository '%s'"
 msgstr "Tilføjer softwarekilden '%s'"
@@ -322,7 +322,7 @@ msgid "Austronesian (Other)"
 msgstr "Austronesisk (Malayo-Polynesisk)"
 
 #. !\todo add comma to the message for the next release
-#: ../zypp/media/MediaCurl.cc:1689
+#: ../zypp/media/MediaCurl.cc:1702
 #, c-format
 msgid "Authentication required for '%s'"
 msgstr "Autentificering påkrævet for '%s'"
@@ -603,7 +603,7 @@ msgstr "Brunei Darussalam"
 msgid "Buginese"
 msgstr "Buginesisk"
 
-#: ../zypp/RepoManager.cc:969
+#: ../zypp/RepoManager.cc:966
 #, c-format
 msgid "Building repository '%s' cache"
 msgstr "Opbygger cache for softwarekilden '%s'"
@@ -727,7 +727,7 @@ msgstr "Rekursive mutex-attributter kan ikke angives"
 msgid "Canada"
 msgstr "Canada"
 
-#: ../zypp/KeyRing.cc:277
+#: ../zypp/KeyRing.cc:275
 #, c-format
 msgid "Cannot create public key %s from %s keyring to file %s"
 msgstr "Kan ikke oprette den offentlige nøgle %s fra %s til filen %s"
@@ -824,7 +824,7 @@ msgstr "Chamorro"
 #
 #. Translator: %s = name of an rpm package. A list of diffs follows
 #. this message.
-#: ../zypp/target/rpm/RpmDb.cc:1899
+#: ../zypp/target/rpm/RpmDb.cc:1896
 #, c-format
 msgid "Changed configuration files for %s:"
 msgstr "Konfigurationsfiler er ændret for %s:"
@@ -1165,7 +1165,7 @@ msgid "Duala"
 msgstr "Duala"
 
 #. dubious: Throw on malformed known types, otherwise log a warning.
-#: ../zypp/CheckSum.cc:97
+#: ../zypp/CheckSum.cc:98
 #, c-format
 msgid "Dubious type '%s' for %u byte checksum '%s'"
 msgstr "Tvivlsom type '%s' for %u byte checksum '%s'"
@@ -1326,11 +1326,11 @@ msgstr "Ewe"
 msgid "Ewondo"
 msgstr "Ewondo"
 
-#: ../zypp/KeyRing.cc:579
+#: ../zypp/KeyRing.cc:577
 msgid "Failed to delete key."
 msgstr "Sletning af nøgle fejlede."
 
-#: ../zypp/target/rpm/RpmDb.cc:1067
+#: ../zypp/target/rpm/RpmDb.cc:1064
 #, c-format
 msgid "Failed to import public key from file %s: %s"
 msgstr "Import af offentlig nøgle fra filen %s fejlede: %s"
@@ -1340,7 +1340,7 @@ msgstr "Import af offentlig nøgle fra filen %s fejlede: %s"
 msgid "Failed to mount %s on %s"
 msgstr "Montering af %s fejlede på %s."
 
-#: ../zypp/target/rpm/RpmDb.cc:1144
+#: ../zypp/target/rpm/RpmDb.cc:1141
 #, c-format
 msgid "Failed to remove public key %s: %s"
 msgstr "Fjernelse af den offentlige nøgle %s fejlede: %s"
@@ -1947,7 +1947,7 @@ msgstr "Indonesisk"
 msgid "Ingush"
 msgstr "Ingush"
 
-#: ../zypp/target/TargetImpl.cc:603 ../zypp/target/TargetImpl.cc:874
+#: ../zypp/target/TargetImpl.cc:692 ../zypp/target/TargetImpl.cc:963
 msgid "Installation has been aborted as directed."
 msgstr "Installation er blevet afbrudt som ønsket."
 
@@ -3333,8 +3333,8 @@ msgstr "Fortolkning af forespørgselsstreng er ikke understøttet af denne URL"
 
 #. TranslatorExplanation after semicolon is error message
 #. TranslatorExplanation the colon is followed by an error message
-#: ../zypp/target/rpm/RpmDb.cc:893 ../zypp/target/rpm/RpmDb.cc:2087
-#: ../zypp/target/rpm/RpmDb.cc:2223
+#: ../zypp/target/rpm/RpmDb.cc:893 ../zypp/target/rpm/RpmDb.cc:2084
+#: ../zypp/target/rpm/RpmDb.cc:2220
 msgid "RPM failed: "
 msgstr "RPM fejlede: "
 
@@ -3365,7 +3365,7 @@ msgstr "Rarotongansk"
 msgid "Relative path not allowed if authority exists"
 msgstr "Relativ sti er ikke tilladt hvis autoritet eksisterer"
 
-#: ../zypp/RepoManager.cc:1331
+#: ../zypp/RepoManager.cc:1328
 #, c-format
 msgid "Removing repository '%s'"
 msgstr "Fjerner softwarekilden '%s'"
@@ -3610,7 +3610,7 @@ msgstr "Sierra Leone"
 msgid "Sign Languages"
 msgstr "Tegnsprog"
 
-#: ../zypp/KeyRing.cc:589
+#: ../zypp/KeyRing.cc:587
 #, c-format
 msgid "Signature file %s not found"
 msgstr "Signaturfilen %s blev ikke fundet."
@@ -4043,7 +4043,7 @@ msgstr "Tonga (Nyasa)"
 msgid "Tonga (Tonga Islands)"
 msgstr "Tonga (Tongaøerne)"
 
-#: ../zypp/KeyRing.cc:528
+#: ../zypp/KeyRing.cc:526
 #, c-format
 msgid "Tried to import not existant key %s into keyring %s"
 msgstr "Prøvede at importere ikke-eksisterende nøgle %s ind i nøgleringen %s"
@@ -4215,7 +4215,7 @@ msgstr "USA"
 msgid "United States Minor Outlying Islands"
 msgstr "Fjerne, mindre øer, USA"
 
-#: ../zypp/target/TargetImpl.cc:908
+#: ../zypp/target/TargetImpl.cc:997
 msgid "Unknown Distribution"
 msgstr "Ukendt distribution"
 
@@ -4316,7 +4316,7 @@ msgid "Vai"
 msgstr "Vai"
 
 #. we will throw this later if no URL checks out fine
-#: ../zypp/RepoManager.cc:781
+#: ../zypp/RepoManager.cc:778
 msgid "Valid metadata not found at specified URL(s)"
 msgstr "Ingen gyldig metadata fundet på specificerede URL(er)"
 
@@ -4520,7 +4520,7 @@ msgstr "kan ikke installere både %s og %s"
 msgid "conflicting requests"
 msgstr "modstridende forespørgsler"
 
-#: ../zypp/target/rpm/RpmDb.cc:2375
+#: ../zypp/target/rpm/RpmDb.cc:2372
 #, c-format
 msgid "created backup %s"
 msgstr "backup %s blev oprettet"
@@ -4629,13 +4629,13 @@ msgid "replacement of %s with %s"
 msgstr "udskiftning af %s med %s"
 
 #. %s = filenames
-#: ../zypp/target/rpm/RpmDb.cc:2073
+#: ../zypp/target/rpm/RpmDb.cc:2070
 #, c-format
 msgid "rpm created %s as %s, but it was impossible to determine the difference"
 msgstr "rpm oprettede %s som %s, men det var umuligt at bestemme forskellen"
 
 #. %s = filenames
-#: ../zypp/target/rpm/RpmDb.cc:2075
+#: ../zypp/target/rpm/RpmDb.cc:2072
 #, c-format
 msgid ""
 "rpm created %s as %s.\n"
@@ -4645,13 +4645,13 @@ msgstr ""
 "Her er de første 25 linjer af forskelle:\n"
 
 #. %s = filenames
-#: ../zypp/target/rpm/RpmDb.cc:2068
+#: ../zypp/target/rpm/RpmDb.cc:2065
 #, c-format
 msgid "rpm saved %s as %s, but it was impossible to determine the difference"
 msgstr "rpm gemte %s som %s, men det var umuligt at bestemme forskellen"
 
 #. %s = filenames
-#: ../zypp/target/rpm/RpmDb.cc:2070
+#: ../zypp/target/rpm/RpmDb.cc:2067
 #, c-format
 msgid ""
 "rpm saved %s as %s.\n"

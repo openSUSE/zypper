@@ -15,7 +15,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: zypp.nl\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-11-06 18:07+0100\n"
+"POT-Creation-Date: 2008-11-21 09:10+0100\n"
 "PO-Revision-Date: 2008-10-25 00:14+0200\n"
 "Last-Translator: Freek de Kruijf <freek@opensuse.org>\n"
 "Language-Team: Dutch <Yast-nl-l10n@lists.sf.kovoks.nl>\n"
@@ -38,15 +38,15 @@ msgstr ""
 msgid " SSL certificate problem, verify that the CA cert is OK for '%s'."
 msgstr " SSL-certificaatprobleem, controleer of de CA-cert OK is voor '%s'."
 
-#: ../zypp/target/TargetImpl.cc:85
+#: ../zypp/target/TargetImpl.cc:88
 msgid " executed"
 msgstr " uitgevoerd"
 
-#: ../zypp/target/TargetImpl.cc:107
+#: ../zypp/target/TargetImpl.cc:110
 msgid " execution failed"
 msgstr " uitvoeren is mislukt"
 
-#: ../zypp/target/TargetImpl.cc:193
+#: ../zypp/target/TargetImpl.cc:196
 msgid " execution skipped while aborting"
 msgstr " uitvoeren is overgeslagen tijdens afbreken"
 
@@ -90,7 +90,7 @@ msgstr "Acholi"
 msgid "Adangme"
 msgstr "Adangme"
 
-#: ../zypp/RepoManager.cc:1201
+#: ../zypp/RepoManager.cc:1198
 #, c-format
 msgid "Adding repository '%s'"
 msgstr "Bron '%s' toevoegen"
@@ -314,7 +314,7 @@ msgid "Austronesian (Other)"
 msgstr "Austronesisch (Overige)"
 
 #. !\todo add comma to the message for the next release
-#: ../zypp/media/MediaCurl.cc:1689
+#: ../zypp/media/MediaCurl.cc:1702
 #, c-format
 msgid "Authentication required for '%s'"
 msgstr "Authenticatie vereist voor '%s'"
@@ -578,7 +578,7 @@ msgstr "Brunei Darussalam"
 msgid "Buginese"
 msgstr "Buginees"
 
-#: ../zypp/RepoManager.cc:969
+#: ../zypp/RepoManager.cc:966
 #, c-format
 msgid "Building repository '%s' cache"
 msgstr "Cache van bron '%s' bouwen"
@@ -698,7 +698,7 @@ msgstr "Kan recursief mutex-kenmerk niet instellen"
 msgid "Canada"
 msgstr "Canada"
 
-#: ../zypp/KeyRing.cc:277
+#: ../zypp/KeyRing.cc:275
 #, c-format
 msgid "Cannot create public key %s from %s keyring to file %s"
 msgstr "Kan geen publieke sleutel %s uit %s sleutelring aanmaken naar bestand %s"
@@ -789,7 +789,7 @@ msgstr "Chamorro"
 
 #. Translator: %s = name of an rpm package. A list of diffs follows
 #. this message.
-#: ../zypp/target/rpm/RpmDb.cc:1899
+#: ../zypp/target/rpm/RpmDb.cc:1896
 #, c-format
 msgid "Changed configuration files for %s:"
 msgstr "Configuratiebestanden gewijzigd voor %s:"
@@ -1121,7 +1121,7 @@ msgid "Duala"
 msgstr "Duala"
 
 #. dubious: Throw on malformed known types, otherwise log a warning.
-#: ../zypp/CheckSum.cc:97
+#: ../zypp/CheckSum.cc:98
 #, c-format
 msgid "Dubious type '%s' for %u byte checksum '%s'"
 msgstr "Twijfelachtig type '%s' voor %u bytes checksum '%s'"
@@ -1274,11 +1274,11 @@ msgstr "Ewe"
 msgid "Ewondo"
 msgstr "Ewondo"
 
-#: ../zypp/KeyRing.cc:579
+#: ../zypp/KeyRing.cc:577
 msgid "Failed to delete key."
 msgstr "Verwijderen van sleutel is mislukt."
 
-#: ../zypp/target/rpm/RpmDb.cc:1067
+#: ../zypp/target/rpm/RpmDb.cc:1064
 #, c-format
 msgid "Failed to import public key from file %s: %s"
 msgstr "Importeren van publieke sleutel uit bestand %s is mislukt: %s"
@@ -1288,7 +1288,7 @@ msgstr "Importeren van publieke sleutel uit bestand %s is mislukt: %s"
 msgid "Failed to mount %s on %s"
 msgstr "Aankoppelen van %s op %s is mislukt"
 
-#: ../zypp/target/rpm/RpmDb.cc:1144
+#: ../zypp/target/rpm/RpmDb.cc:1141
 #, c-format
 msgid "Failed to remove public key %s: %s"
 msgstr "Verwijderen van publieke sleutel %s is mislukt: %s"
@@ -1871,7 +1871,7 @@ msgstr "Indonesisch"
 msgid "Ingush"
 msgstr "Ingoesjetisch"
 
-#: ../zypp/target/TargetImpl.cc:603 ../zypp/target/TargetImpl.cc:874
+#: ../zypp/target/TargetImpl.cc:692 ../zypp/target/TargetImpl.cc:963
 msgid "Installation has been aborted as directed."
 msgstr "Installatie is afgebroken volgens de instructies."
 
@@ -3189,8 +3189,8 @@ msgstr "Parseren van queryreeks wordt niet ondersteund voor deze URL"
 
 #. TranslatorExplanation after semicolon is error message
 #. TranslatorExplanation the colon is followed by an error message
-#: ../zypp/target/rpm/RpmDb.cc:893 ../zypp/target/rpm/RpmDb.cc:2087
-#: ../zypp/target/rpm/RpmDb.cc:2223
+#: ../zypp/target/rpm/RpmDb.cc:893 ../zypp/target/rpm/RpmDb.cc:2084
+#: ../zypp/target/rpm/RpmDb.cc:2220
 msgid "RPM failed: "
 msgstr "RPM is mislukt: "
 
@@ -3218,7 +3218,7 @@ msgstr "Rarotongaans"
 msgid "Relative path not allowed if authority exists"
 msgstr "Relatief pad is niet toegestaan als authority bestaat"
 
-#: ../zypp/RepoManager.cc:1331
+#: ../zypp/RepoManager.cc:1328
 #, c-format
 msgid "Removing repository '%s'"
 msgstr "Bron '%s' verwijderen"
@@ -3443,7 +3443,7 @@ msgstr "Sierra Leone"
 msgid "Sign Languages"
 msgstr "Gebarentalen"
 
-#: ../zypp/KeyRing.cc:589
+#: ../zypp/KeyRing.cc:587
 #, c-format
 msgid "Signature file %s not found"
 msgstr "Ondertekeningsbestand %s niet gevonden"
@@ -3850,7 +3850,7 @@ msgstr "Tonga (Nyasa)"
 msgid "Tonga (Tonga Islands)"
 msgstr "Tonga (Tonga-eilanden)"
 
-#: ../zypp/KeyRing.cc:528
+#: ../zypp/KeyRing.cc:526
 #, c-format
 msgid "Tried to import not existant key %s into keyring %s"
 msgstr "Er is een poging gedaan om een niet bestaande sleutel %s te importeren in sleutelring %s"
@@ -4012,7 +4012,7 @@ msgstr "Verenigde Staten"
 msgid "United States Minor Outlying Islands"
 msgstr "United States Minor Outlying Islands"
 
-#: ../zypp/target/TargetImpl.cc:908
+#: ../zypp/target/TargetImpl.cc:997
 msgid "Unknown Distribution"
 msgstr "Onbekende distributie"
 
@@ -4113,7 +4113,7 @@ msgid "Vai"
 msgstr "Vai"
 
 #. we will throw this later if no URL checks out fine
-#: ../zypp/RepoManager.cc:781
+#: ../zypp/RepoManager.cc:778
 msgid "Valid metadata not found at specified URL(s)"
 msgstr "Geen geldige metadata gevonden op opgeven URL('s)"
 
@@ -4305,7 +4305,7 @@ msgstr "kan %s end %s niet beide installeren"
 msgid "conflicting requests"
 msgstr "conflicterende verzoeken"
 
-#: ../zypp/target/rpm/RpmDb.cc:2375
+#: ../zypp/target/rpm/RpmDb.cc:2372
 #, c-format
 msgid "created backup %s"
 msgstr "reservekopie %s aangemaakt"
@@ -4414,13 +4414,13 @@ msgid "replacement of %s with %s"
 msgstr "vervanging van %s door %s"
 
 #. %s = filenames
-#: ../zypp/target/rpm/RpmDb.cc:2073
+#: ../zypp/target/rpm/RpmDb.cc:2070
 #, c-format
 msgid "rpm created %s as %s, but it was impossible to determine the difference"
 msgstr "rpm maakte %s aan als %s, maar het was niet mogelijk om het verschil te achterhalen"
 
 #. %s = filenames
-#: ../zypp/target/rpm/RpmDb.cc:2075
+#: ../zypp/target/rpm/RpmDb.cc:2072
 #, c-format
 msgid ""
 "rpm created %s as %s.\n"
@@ -4430,13 +4430,13 @@ msgstr ""
 "Dit zijn de eerste 25 regels die verschillen:\n"
 
 #. %s = filenames
-#: ../zypp/target/rpm/RpmDb.cc:2068
+#: ../zypp/target/rpm/RpmDb.cc:2065
 #, c-format
 msgid "rpm saved %s as %s, but it was impossible to determine the difference"
 msgstr "rpm sloeg %s op als %s, maar het was niet mogelijk om het verschil te achterhalen"
 
 #. %s = filenames
-#: ../zypp/target/rpm/RpmDb.cc:2070
+#: ../zypp/target/rpm/RpmDb.cc:2067
 #, c-format
 msgid ""
 "rpm saved %s as %s.\n"

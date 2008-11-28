@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: zypp.km\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-11-06 18:07+0100\n"
+"POT-Creation-Date: 2008-11-21 09:10+0100\n"
 "PO-Revision-Date: 2008-10-27 09:04+0700\n"
 "Last-Translator: Khoem Sokhem <khoemsokhem@khmeros.info>\n"
 "Language-Team: Khmer <support@khmeros.info>\n"
@@ -32,15 +32,15 @@ msgstr ""
 msgid " SSL certificate problem, verify that the CA cert is OK for '%s'."
 msgstr " បញ្ហា​វិញ្ញាបនបត្រ SSL ផ្ទៀងផ្ទាត់​ថា​វិញ្ញាបនបត្រ CA គឺ​ត្រឹមត្រូវ​សម្រាប់ '%s'."
 
-#: ../zypp/target/TargetImpl.cc:85
+#: ../zypp/target/TargetImpl.cc:88
 msgid " executed"
 msgstr " បាន​ប្រតិបត្តិ"
 
-#: ../zypp/target/TargetImpl.cc:107
+#: ../zypp/target/TargetImpl.cc:110
 msgid " execution failed"
 msgstr " បាន​បរាជ័យ​ក្នុងកា​រប្រតិបត្តិ"
 
-#: ../zypp/target/TargetImpl.cc:193
+#: ../zypp/target/TargetImpl.cc:196
 msgid " execution skipped while aborting"
 msgstr " ការ​ប្រតិបត្តិ​បាន​រំលង​ខណៈពេល​បោះបង់"
 
@@ -84,7 +84,7 @@ msgstr "អាកូលី"
 msgid "Adangme"
 msgstr "អាដង់ម៉េ"
 
-#: ../zypp/RepoManager.cc:1201
+#: ../zypp/RepoManager.cc:1198
 #, c-format
 msgid "Adding repository '%s'"
 msgstr "កំពុង​បន្ថែម​ឃ្លាំង '%s'"
@@ -307,7 +307,7 @@ msgid "Austronesian (Other)"
 msgstr "អូស្ត្រូណេស៊ី (ផ្សេង​ទៀត)"
 
 #. !\todo add comma to the message for the next release
-#: ../zypp/media/MediaCurl.cc:1689
+#: ../zypp/media/MediaCurl.cc:1702
 #, c-format
 msgid "Authentication required for '%s'"
 msgstr "បាន​ទាមទារ​ការ​ផ្ទៀងផ្ទាត់​ភាព​ត្រឹមត្រូវ​សម្រាប់ '%s'"
@@ -571,7 +571,7 @@ msgstr "ប៊្រុយណេ ដារូសាឡាម"
 msgid "Buginese"
 msgstr "ប៊ុយហ្គីណេសេ"
 
-#: ../zypp/RepoManager.cc:969
+#: ../zypp/RepoManager.cc:966
 #, c-format
 msgid "Building repository '%s' cache"
 msgstr "កំពុង​ស្ថាបនា​ឃ្លាំង '%s'"
@@ -691,7 +691,7 @@ msgstr "មិនអាច​កំណត់​គុណលក្ខណៈ mutex
 msgid "Canada"
 msgstr "កាណាដា"
 
-#: ../zypp/KeyRing.cc:277
+#: ../zypp/KeyRing.cc:275
 #, c-format
 msgid "Cannot create public key %s from %s keyring to file %s"
 msgstr "មិនអាច​បង្កើត​សោ​សាធារណៈ %s ពី keyring %s ទៅ​ឯកសារ %s បានទេ"
@@ -782,7 +782,7 @@ msgstr "ចាមូរូ"
 
 #. Translator: %s = name of an rpm package. A list of diffs follows
 #. this message.
-#: ../zypp/target/rpm/RpmDb.cc:1899
+#: ../zypp/target/rpm/RpmDb.cc:1896
 #, c-format
 msgid "Changed configuration files for %s:"
 msgstr "បាន​ប្ដូរ​ឯកសារ​កំណត់​រចនាសម្ព័ន្ធ​សម្រាប់ %s ៖"
@@ -1112,7 +1112,7 @@ msgid "Duala"
 msgstr "ឌុយអាឡា"
 
 #. dubious: Throw on malformed known types, otherwise log a warning.
-#: ../zypp/CheckSum.cc:97
+#: ../zypp/CheckSum.cc:98
 #, c-format
 msgid "Dubious type '%s' for %u byte checksum '%s'"
 msgstr "ប្រភេទ​មិនច្បាស់ '%s' សម្រាប់ %u បៃ ឆេកសាំ '%s'"
@@ -1265,11 +1265,11 @@ msgstr "អូវឹ"
 msgid "Ewondo"
 msgstr "អេវ៉ុងដូ"
 
-#: ../zypp/KeyRing.cc:579
+#: ../zypp/KeyRing.cc:577
 msgid "Failed to delete key."
 msgstr "បរាជ័យ​ក្នុង​ការ​លុប​សោ ។"
 
-#: ../zypp/target/rpm/RpmDb.cc:1067
+#: ../zypp/target/rpm/RpmDb.cc:1064
 #, c-format
 msgid "Failed to import public key from file %s: %s"
 msgstr "បរាជ័យក្នុង​ការ​នាំចូល​សោ​សាធារណៈ​ពី​ឯកសារ %s: %s"
@@ -1279,7 +1279,7 @@ msgstr "បរាជ័យក្នុង​ការ​នាំចូល​ស
 msgid "Failed to mount %s on %s"
 msgstr "បរាជ័យ​ក្នុង​ការ​ម៉ោន %s លើ %s"
 
-#: ../zypp/target/rpm/RpmDb.cc:1144
+#: ../zypp/target/rpm/RpmDb.cc:1141
 #, c-format
 msgid "Failed to remove public key %s: %s"
 msgstr "បរាជ័យ​ក្នុងការ​យក​សោ​សាធារណៈ %s: %s"
@@ -1864,7 +1864,7 @@ msgstr "ឥណ្ឌូនេស៊ី"
 msgid "Ingush"
 msgstr "អ៊ីងហ្គូស"
 
-#: ../zypp/target/TargetImpl.cc:603 ../zypp/target/TargetImpl.cc:874
+#: ../zypp/target/TargetImpl.cc:692 ../zypp/target/TargetImpl.cc:963
 msgid "Installation has been aborted as directed."
 msgstr "ការ​ដំឡើង ត្រូវបាន​បោះបង់​ដោយ​ផ្ទាល់ ។"
 
@@ -3181,8 +3181,8 @@ msgstr "មិនបាន​គាំទ្រ​ការញែក​ខ្ស
 
 #. TranslatorExplanation after semicolon is error message
 #. TranslatorExplanation the colon is followed by an error message
-#: ../zypp/target/rpm/RpmDb.cc:893 ../zypp/target/rpm/RpmDb.cc:2087
-#: ../zypp/target/rpm/RpmDb.cc:2223
+#: ../zypp/target/rpm/RpmDb.cc:893 ../zypp/target/rpm/RpmDb.cc:2084
+#: ../zypp/target/rpm/RpmDb.cc:2220
 msgid "RPM failed: "
 msgstr "RPM បាន​បរាជ័យ ៖ "
 
@@ -3210,7 +3210,7 @@ msgstr "រ៉ារ៉ូតុងហ្គង់"
 msgid "Relative path not allowed if authority exists"
 msgstr "មិនបាន​អនុញ្ញាត​ផ្លូវ​ដែល​ទាក់ទង​ទេ ប្រសិន​បើ​មាន​អាជ្ញាធរ"
 
-#: ../zypp/RepoManager.cc:1331
+#: ../zypp/RepoManager.cc:1328
 #, c-format
 msgid "Removing repository '%s'"
 msgstr "យក​ឃ្លាំង '%s' ចេញ"
@@ -3435,7 +3435,7 @@ msgstr "សេរ៉ាឡេអូន"
 msgid "Sign Languages"
 msgstr "ភាសា​សញ្ញា"
 
-#: ../zypp/KeyRing.cc:589
+#: ../zypp/KeyRing.cc:587
 #, c-format
 msgid "Signature file %s not found"
 msgstr "រក​មិនឃើញ​ឯកសារ​ហត្ថលេខា %s ទេ"
@@ -3842,7 +3842,7 @@ msgstr "តុងហ្គា (និយ៉ាសា)"
 msgid "Tonga (Tonga Islands)"
 msgstr "តុងហ្គា (កោះ​តុងហ្គា)"
 
-#: ../zypp/KeyRing.cc:528
+#: ../zypp/KeyRing.cc:526
 #, c-format
 msgid "Tried to import not existant key %s into keyring %s"
 msgstr "នាំចូល​សោ %s ដែល​មិនមាន​ទៅ​ក្នុង keyring %s"
@@ -4006,7 +4006,7 @@ msgstr "សហរដ្ឋអាមេរិក"
 msgid "United States Minor Outlying Islands"
 msgstr "កោះ​ឆ្ងាយៗ​របស់​សហរដ្ឋ​អាមេរិក"
 
-#: ../zypp/target/TargetImpl.cc:908
+#: ../zypp/target/TargetImpl.cc:997
 msgid "Unknown Distribution"
 msgstr "មិនស្គាល់​ការ​ចែកចាយ"
 
@@ -4107,7 +4107,7 @@ msgid "Vai"
 msgstr "វ៉ាយ"
 
 #. we will throw this later if no URL checks out fine
-#: ../zypp/RepoManager.cc:781
+#: ../zypp/RepoManager.cc:778
 msgid "Valid metadata not found at specified URL(s)"
 msgstr "រក​មិន​ឃើញ​ទិន្នន័យ​មេតា​ដែល​ត្រឹមត្រូវ​នៅ URL ដែល​បាន​បញ្ជាក់"
 
@@ -4298,7 +4298,7 @@ msgstr "មិនអាច​ដំឡើង​ទាំង %s និង %s"
 msgid "conflicting requests"
 msgstr "សំណើ​ការ​ប៉ះទង្គិច"
 
-#: ../zypp/target/rpm/RpmDb.cc:2375
+#: ../zypp/target/rpm/RpmDb.cc:2372
 #, c-format
 msgid "created backup %s"
 msgstr "បាន​បង្កើត​ព័ត៌មាន​បម្រុង %s"
@@ -4407,13 +4407,13 @@ msgid "replacement of %s with %s"
 msgstr "ការ​ជំនួស %s ជាមួយ %s"
 
 #. %s = filenames
-#: ../zypp/target/rpm/RpmDb.cc:2073
+#: ../zypp/target/rpm/RpmDb.cc:2070
 #, c-format
 msgid "rpm created %s as %s, but it was impossible to determine the difference"
 msgstr "rpm បាន​បង្កើត %s ជា %s ប៉ុន្តែ​វា​មិន​អាច​កំណត់​ភាព​ខុស​គ្នា"
 
 #. %s = filenames
-#: ../zypp/target/rpm/RpmDb.cc:2075
+#: ../zypp/target/rpm/RpmDb.cc:2072
 #, c-format
 msgid ""
 "rpm created %s as %s.\n"
@@ -4423,13 +4423,13 @@ msgstr ""
 "នេះ​ជា​បន្ទាត់ ២៥ ជួរ​ដំបូង​ខុសគ្នា ៖​\n"
 
 #. %s = filenames
-#: ../zypp/target/rpm/RpmDb.cc:2068
+#: ../zypp/target/rpm/RpmDb.cc:2065
 #, c-format
 msgid "rpm saved %s as %s, but it was impossible to determine the difference"
 msgstr "rpm បានរ​ក្សា​ទុក %s ជា %s ប៉ុន្តែ​វា​អាច​កំណត់​ភាព​ខុស​គ្នា"
 
 #. %s = filenames
-#: ../zypp/target/rpm/RpmDb.cc:2070
+#: ../zypp/target/rpm/RpmDb.cc:2067
 #, c-format
 msgid ""
 "rpm saved %s as %s.\n"

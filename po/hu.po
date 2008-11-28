@@ -17,8 +17,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: zypp.hu\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-11-06 18:07+0100\n"
-"PO-Revision-Date: 2008-11-17 15:12+0100\n"
+"POT-Creation-Date: 2008-11-21 09:10+0100\n"
+"PO-Revision-Date: 2008-11-28 09:52+0100\n"
 "Last-Translator: Kalman Kemenczy <kkemenczy@novell.com>\n"
 "Language-Team: Hungarian <hu@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -40,15 +40,15 @@ msgstr ""
 msgid " SSL certificate problem, verify that the CA cert is OK for '%s'."
 msgstr " hiba az SSL-tanúsítvánnyal, ellenőrizze, hogy megfelelő-e a CA tanúsítványa a következőhöz: '%s'."
 
-#: ../zypp/target/TargetImpl.cc:85
+#: ../zypp/target/TargetImpl.cc:88
 msgid " executed"
 msgstr " végrehajtva"
 
-#: ../zypp/target/TargetImpl.cc:107
+#: ../zypp/target/TargetImpl.cc:110
 msgid " execution failed"
 msgstr " végrehajtás sikertelen"
 
-#: ../zypp/target/TargetImpl.cc:193
+#: ../zypp/target/TargetImpl.cc:196
 msgid " execution skipped while aborting"
 msgstr " megszakítás közben a végrehajtás átugorva"
 
@@ -93,7 +93,7 @@ msgstr "acsoli"
 msgid "Adangme"
 msgstr "adangme"
 
-#: ../zypp/RepoManager.cc:1201
+#: ../zypp/RepoManager.cc:1198
 #, c-format
 msgid "Adding repository '%s'"
 msgstr "A(z) '%s' telepítési forrás hozzáadása"
@@ -335,7 +335,7 @@ msgid "Austronesian (Other)"
 msgstr "ausztronéziai (egyéb)"
 
 #. !\todo add comma to the message for the next release
-#: ../zypp/media/MediaCurl.cc:1689
+#: ../zypp/media/MediaCurl.cc:1702
 #, c-format
 msgid "Authentication required for '%s'"
 msgstr "Felhasználóhitelesítés szükséges ehhez: '%s'"
@@ -622,7 +622,7 @@ msgstr "Brunei Darussalam"
 msgid "Buginese"
 msgstr "buginéz"
 
-#: ../zypp/RepoManager.cc:969
+#: ../zypp/RepoManager.cc:966
 #, c-format
 msgid "Building repository '%s' cache"
 msgstr "A(z) '%s' telepítési forrás gyorsítótárának felépítése"
@@ -747,7 +747,7 @@ msgstr "Rekurzív mutex attributum nem állítható be"
 msgid "Canada"
 msgstr "Kanada"
 
-#: ../zypp/KeyRing.cc:277
+#: ../zypp/KeyRing.cc:275
 #, c-format
 msgid "Cannot create public key %s from %s keyring to file %s"
 msgstr "A(z) %s publikus kulcs elkészítése %s kulcstartóból %s fájlba sikertelen"
@@ -847,7 +847,7 @@ msgstr "csamorro"
 # menuentries/menuentry_lan_sendmail.ycp:14
 #. Translator: %s = name of an rpm package. A list of diffs follows
 #. this message.
-#: ../zypp/target/rpm/RpmDb.cc:1899
+#: ../zypp/target/rpm/RpmDb.cc:1896
 #, c-format
 msgid "Changed configuration files for %s:"
 msgstr "%s módosított konfigurációs fájljai:"
@@ -1192,7 +1192,7 @@ msgid "Duala"
 msgstr "duala"
 
 #. dubious: Throw on malformed known types, otherwise log a warning.
-#: ../zypp/CheckSum.cc:97
+#: ../zypp/CheckSum.cc:98
 #, c-format
 msgid "Dubious type '%s' for %u byte checksum '%s'"
 msgstr "'%s' bizonytalan típus %u byte, ellenőrzőösszeg '%s'"
@@ -1352,11 +1352,11 @@ msgstr "ewe"
 msgid "Ewondo"
 msgstr "evondo"
 
-#: ../zypp/KeyRing.cc:579
+#: ../zypp/KeyRing.cc:577
 msgid "Failed to delete key."
 msgstr "A kulcs törlése sikertelen."
 
-#: ../zypp/target/rpm/RpmDb.cc:1067
+#: ../zypp/target/rpm/RpmDb.cc:1064
 #, c-format
 msgid "Failed to import public key from file %s: %s"
 msgstr "Nem sikerült a(z) %s fájlból importálni a publikus kulcsot: %s"
@@ -1366,7 +1366,7 @@ msgstr "Nem sikerült a(z) %s fájlból importálni a publikus kulcsot: %s"
 msgid "Failed to mount %s on %s"
 msgstr "Nem sikerült a(z) %s felcsatolása ide: %s"
 
-#: ../zypp/target/rpm/RpmDb.cc:1144
+#: ../zypp/target/rpm/RpmDb.cc:1141
 #, c-format
 msgid "Failed to remove public key %s: %s"
 msgstr "A(z) %s publikus kulcs eltávolítása sikertelen: %s"
@@ -1820,7 +1820,7 @@ msgstr "hausza"
 
 #: ../zypp/solver/detail/SATResolver.cc:922
 msgid "Have you enabled all requested repositories?"
-msgstr "Engedélyezett minden kívánt telepítési forrást?"
+msgstr "Minden szükséges telepítési forrást engedélyezett?"
 
 #. language code: haw
 #: ../zypp/LanguageCode.cc:594
@@ -1993,7 +1993,7 @@ msgstr "indonéz"
 msgid "Ingush"
 msgstr "ingus"
 
-#: ../zypp/target/TargetImpl.cc:603 ../zypp/target/TargetImpl.cc:874
+#: ../zypp/target/TargetImpl.cc:692 ../zypp/target/TargetImpl.cc:963
 msgid "Installation has been aborted as directed."
 msgstr "A kérésnek megfelelően a telepítés megszakad."
 
@@ -3386,8 +3386,8 @@ msgstr "A lekérdezés feldolgozása ehhez az URL-hez nem támogatott"
 
 #. TranslatorExplanation after semicolon is error message
 #. TranslatorExplanation the colon is followed by an error message
-#: ../zypp/target/rpm/RpmDb.cc:893 ../zypp/target/rpm/RpmDb.cc:2087
-#: ../zypp/target/rpm/RpmDb.cc:2223
+#: ../zypp/target/rpm/RpmDb.cc:893 ../zypp/target/rpm/RpmDb.cc:2084
+#: ../zypp/target/rpm/RpmDb.cc:2220
 msgid "RPM failed: "
 msgstr "RPM sikertelen: "
 
@@ -3418,7 +3418,7 @@ msgstr "rarotongai"
 msgid "Relative path not allowed if authority exists"
 msgstr "Megadott hitelesítő esetén a relatív elérési útvonal megadása nem támogatott"
 
-#: ../zypp/RepoManager.cc:1331
+#: ../zypp/RepoManager.cc:1328
 #, c-format
 msgid "Removing repository '%s'"
 msgstr "A(z) '%s' telepítési forrás eltávolítása"
@@ -3665,7 +3665,7 @@ msgstr "Sierra Leone"
 msgid "Sign Languages"
 msgstr "jelnyelvek"
 
-#: ../zypp/KeyRing.cc:589
+#: ../zypp/KeyRing.cc:587
 #, c-format
 msgid "Signature file %s not found"
 msgstr "A(z) %s aláírás-fájl nem található"
@@ -3719,7 +3719,7 @@ msgstr "szláv (egyéb)"
 #. language code: slo slk sk
 #: ../zypp/LanguageCode.cc:1032 ../zypp/LanguageCode.cc:1034
 msgid "Slovak"
-msgstr "Szlovák"
+msgstr "szlovák"
 
 #. :SJM:744:
 #: ../zypp/CountryCode.cc:419
@@ -3826,7 +3826,7 @@ msgstr "Spanyolország"
 #. language code: spa es
 #: ../zypp/LanguageCode.cc:1066
 msgid "Spanish"
-msgstr "Spanyol"
+msgstr "spanyol"
 
 # LK
 #. :LIE:438:
@@ -3897,7 +3897,7 @@ msgstr "Svédország"
 #. language code: swe sv
 #: ../zypp/LanguageCode.cc:1086
 msgid "Swedish"
-msgstr "Svéd"
+msgstr "svéd"
 
 #. :COG:178:
 #: ../zypp/CountryCode.cc:265
@@ -4097,7 +4097,7 @@ msgstr "tonga (Nyasa)"
 msgid "Tonga (Tonga Islands)"
 msgstr "tongai (Tonga-szigetek)"
 
-#: ../zypp/KeyRing.cc:528
+#: ../zypp/KeyRing.cc:526
 #, c-format
 msgid "Tried to import not existant key %s into keyring %s"
 msgstr "Nem létező kulcsot (%s) próbált a %s kulcstartóba importálni"
@@ -4269,7 +4269,7 @@ msgstr "Amerikai Egyesült Államok"
 msgid "United States Minor Outlying Islands"
 msgstr "Amerikai Egyesült Államok - kisebb külső szigetek"
 
-#: ../zypp/target/TargetImpl.cc:908
+#: ../zypp/target/TargetImpl.cc:997
 msgid "Unknown Distribution"
 msgstr "Ismeretlen disztribúció"
 
@@ -4310,7 +4310,7 @@ msgstr ""
 #. language code: hsb
 #: ../zypp/LanguageCode.cc:612
 msgid "Upper Sorbian"
-msgstr "felső-szorbiai"
+msgstr "felső szorb"
 
 #. language code: urd ur
 #: ../zypp/LanguageCode.cc:1170
@@ -4371,7 +4371,7 @@ msgid "Vai"
 msgstr "vai"
 
 #. we will throw this later if no URL checks out fine
-#: ../zypp/RepoManager.cc:781
+#: ../zypp/RepoManager.cc:778
 msgid "Valid metadata not found at specified URL(s)"
 msgstr "A megadokt URL nem tartalmaz érvényes metaadatot"
 
@@ -4579,7 +4579,7 @@ msgstr "nem telepíthető %s és %s is"
 msgid "conflicting requests"
 msgstr "ütköző kérelmek"
 
-#: ../zypp/target/rpm/RpmDb.cc:2375
+#: ../zypp/target/rpm/RpmDb.cc:2372
 #, c-format
 msgid "created backup %s"
 msgstr "%s másolata létrehozva"
@@ -4691,13 +4691,13 @@ msgid "replacement of %s with %s"
 msgstr "%s cseréje erre: %s"
 
 #. %s = filenames
-#: ../zypp/target/rpm/RpmDb.cc:2073
+#: ../zypp/target/rpm/RpmDb.cc:2070
 #, c-format
 msgid "rpm created %s as %s, but it was impossible to determine the difference"
 msgstr "Az rpm létrehozta %s-t, mint %s, de nem sikerült megállapítani a különbséget"
 
 #. %s = filenames
-#: ../zypp/target/rpm/RpmDb.cc:2075
+#: ../zypp/target/rpm/RpmDb.cc:2072
 #, c-format
 msgid ""
 "rpm created %s as %s.\n"
@@ -4707,13 +4707,13 @@ msgstr ""
 "A különbség első 25 sora:\n"
 
 #. %s = filenames
-#: ../zypp/target/rpm/RpmDb.cc:2068
+#: ../zypp/target/rpm/RpmDb.cc:2065
 #, c-format
 msgid "rpm saved %s as %s, but it was impossible to determine the difference"
 msgstr "Az rpm elmentette %s-t, mint %s, de nem sikerült megállapítani a különbséget"
 
 #. %s = filenames
-#: ../zypp/target/rpm/RpmDb.cc:2070
+#: ../zypp/target/rpm/RpmDb.cc:2067
 #, c-format
 msgid ""
 "rpm saved %s as %s.\n"

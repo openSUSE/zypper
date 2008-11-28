@@ -12,7 +12,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: zypp.el\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-11-06 18:07+0100\n"
+"POT-Creation-Date: 2008-11-21 09:10+0100\n"
 "PO-Revision-Date: 2008-06-06 01:05+0100\n"
 "Last-Translator: Vasileios Giannakopoulos <billg@billg.gr>\n"
 "Language-Team: Ελληνικά <billg@billg.gr>\n"
@@ -34,18 +34,18 @@ msgstr "Δεν υπάρχουν εγκατεστημένοι πάροχοι το
 msgid " SSL certificate problem, verify that the CA cert is OK for '%s'."
 msgstr "SSL Εντάξει."
 
-#: ../zypp/target/TargetImpl.cc:85
+#: ../zypp/target/TargetImpl.cc:88
 #, fuzzy
 msgid " executed"
 msgstr "Εκτέλεση"
 
 # %s is either BOOTP or DHCP
-#: ../zypp/target/TargetImpl.cc:107
+#: ../zypp/target/TargetImpl.cc:110
 #, fuzzy
 msgid " execution failed"
 msgstr "Η εκτέλεση DBI απέτυχε: %s"
 
-#: ../zypp/target/TargetImpl.cc:193
+#: ../zypp/target/TargetImpl.cc:196
 msgid " execution skipped while aborting"
 msgstr ""
 
@@ -90,7 +90,7 @@ msgstr "Acoli"
 msgid "Adangme"
 msgstr "Adangme"
 
-#: ../zypp/RepoManager.cc:1201
+#: ../zypp/RepoManager.cc:1198
 #, fuzzy, c-format
 msgid "Adding repository '%s'"
 msgstr "Προσθήκη πηγής εγκατάστασης '%s'."
@@ -313,7 +313,7 @@ msgid "Austronesian (Other)"
 msgstr "Austronesian (Other)"
 
 #. !\todo add comma to the message for the next release
-#: ../zypp/media/MediaCurl.cc:1689
+#: ../zypp/media/MediaCurl.cc:1702
 #, c-format
 msgid "Authentication required for '%s'"
 msgstr "Απαιτείται πιστοποίηση για '%s'"
@@ -578,7 +578,7 @@ msgstr "Μπρουνέι Νταρουσαλάμ"
 msgid "Buginese"
 msgstr "Buginese"
 
-#: ../zypp/RepoManager.cc:969
+#: ../zypp/RepoManager.cc:966
 #, fuzzy, c-format
 msgid "Building repository '%s' cache"
 msgstr "Προσθήκη πηγής εγκατάστασης '%s'."
@@ -699,7 +699,7 @@ msgstr "Αδυναμία ορισμού παλινδρομικής ιδιότη�
 msgid "Canada"
 msgstr "Καναδάς"
 
-#: ../zypp/KeyRing.cc:277
+#: ../zypp/KeyRing.cc:275
 #, c-format
 msgid "Cannot create public key %s from %s keyring to file %s"
 msgstr ""
@@ -791,7 +791,7 @@ msgstr "Chamorro"
 
 #. Translator: %s = name of an rpm package. A list of diffs follows
 #. this message.
-#: ../zypp/target/rpm/RpmDb.cc:1899
+#: ../zypp/target/rpm/RpmDb.cc:1896
 #, c-format
 msgid "Changed configuration files for %s:"
 msgstr "Αλλαγή αρχείων ρύθμισης για %s:"
@@ -1116,7 +1116,7 @@ msgid "Duala"
 msgstr "Duala"
 
 #. dubious: Throw on malformed known types, otherwise log a warning.
-#: ../zypp/CheckSum.cc:97
+#: ../zypp/CheckSum.cc:98
 #, c-format
 msgid "Dubious type '%s' for %u byte checksum '%s'"
 msgstr ""
@@ -1272,12 +1272,12 @@ msgstr "Ewe"
 msgid "Ewondo"
 msgstr "Ewondo"
 
-#: ../zypp/KeyRing.cc:579
+#: ../zypp/KeyRing.cc:577
 #, fuzzy
 msgid "Failed to delete key."
 msgstr "Αποτυχία εκκίνησης της VM."
 
-#: ../zypp/target/rpm/RpmDb.cc:1067
+#: ../zypp/target/rpm/RpmDb.cc:1064
 #, fuzzy, c-format
 msgid "Failed to import public key from file %s: %s"
 msgstr "Απέτυχε"
@@ -1287,7 +1287,7 @@ msgstr "Απέτυχε"
 msgid "Failed to mount %s on %s"
 msgstr "Αδυναμία ανοίγματος %s - %s\n"
 
-#: ../zypp/target/rpm/RpmDb.cc:1144
+#: ../zypp/target/rpm/RpmDb.cc:1141
 #, fuzzy, c-format
 msgid "Failed to remove public key %s: %s"
 msgstr "Αδυναμία λήψης του δημοσίου κλειδιού."
@@ -1876,7 +1876,7 @@ msgstr "Ινδονησιακά"
 msgid "Ingush"
 msgstr "Ingush"
 
-#: ../zypp/target/TargetImpl.cc:603 ../zypp/target/TargetImpl.cc:874
+#: ../zypp/target/TargetImpl.cc:692 ../zypp/target/TargetImpl.cc:963
 msgid "Installation has been aborted as directed."
 msgstr "Η εγκατάσταση ακυρώθηκε όπως διατάχθηκε."
 
@@ -3197,8 +3197,8 @@ msgstr "Η ανάλυση γραμμής αναζήτησης δεν υποστ�
 
 #. TranslatorExplanation after semicolon is error message
 #. TranslatorExplanation the colon is followed by an error message
-#: ../zypp/target/rpm/RpmDb.cc:893 ../zypp/target/rpm/RpmDb.cc:2087
-#: ../zypp/target/rpm/RpmDb.cc:2223
+#: ../zypp/target/rpm/RpmDb.cc:893 ../zypp/target/rpm/RpmDb.cc:2084
+#: ../zypp/target/rpm/RpmDb.cc:2220
 #, fuzzy
 msgid "RPM failed: "
 msgstr "απέτυχε"
@@ -3227,7 +3227,7 @@ msgstr "Rarotongan"
 msgid "Relative path not allowed if authority exists"
 msgstr "Σχετική διαδρομή δεν επιτρέπεται εαν υπάρχει αρχή"
 
-#: ../zypp/RepoManager.cc:1331
+#: ../zypp/RepoManager.cc:1328
 #, fuzzy, c-format
 msgid "Removing repository '%s'"
 msgstr "Προσθήκη πηγής εγκατάστασης '%s'."
@@ -3452,7 +3452,7 @@ msgstr "Σιέρρα Λεόνε"
 msgid "Sign Languages"
 msgstr "Γλώσσες Συμβόλων"
 
-#: ../zypp/KeyRing.cc:589
+#: ../zypp/KeyRing.cc:587
 #, fuzzy, c-format
 msgid "Signature file %s not found"
 msgstr "Η καταχώρηση δε βρέθηκε."
@@ -3859,7 +3859,7 @@ msgstr "Tonga (Nyasa)"
 msgid "Tonga (Tonga Islands)"
 msgstr "Tonga (Tonga Islands)"
 
-#: ../zypp/KeyRing.cc:528
+#: ../zypp/KeyRing.cc:526
 #, c-format
 msgid "Tried to import not existant key %s into keyring %s"
 msgstr ""
@@ -4021,7 +4021,7 @@ msgstr "Ηνωμένες Πολιτείες της Αμερικής"
 msgid "United States Minor Outlying Islands"
 msgstr "Μικρά απομονωμένα νησιά Ηνωμένων Πολιτειών"
 
-#: ../zypp/target/TargetImpl.cc:908
+#: ../zypp/target/TargetImpl.cc:997
 #, fuzzy
 msgid "Unknown Distribution"
 msgstr "Άγνωστη επιλογή της list"
@@ -4123,7 +4123,7 @@ msgid "Vai"
 msgstr "Vai"
 
 #. we will throw this later if no URL checks out fine
-#: ../zypp/RepoManager.cc:781
+#: ../zypp/RepoManager.cc:778
 #, fuzzy
 msgid "Valid metadata not found at specified URL(s)"
 msgstr "Έγκυρο URL"
@@ -4318,7 +4318,7 @@ msgstr "Αδυναμία εγκατάστασης %s"
 msgid "conflicting requests"
 msgstr "Αίτηση σύνδεσης σε: "
 
-#: ../zypp/target/rpm/RpmDb.cc:2375
+#: ../zypp/target/rpm/RpmDb.cc:2372
 #, c-format
 msgid "created backup %s"
 msgstr "δημιουργία αντιγράφου ασφαλείας %s"
@@ -4426,13 +4426,13 @@ msgid "replacement of %s with %s"
 msgstr ""
 
 #. %s = filenames
-#: ../zypp/target/rpm/RpmDb.cc:2073
+#: ../zypp/target/rpm/RpmDb.cc:2070
 #, fuzzy, c-format
 msgid "rpm created %s as %s, but it was impossible to determine the difference"
 msgstr "Το rpm αποθηκεύτηκε %s ως %s αλλά ήταν αδύνατο να διαφανεί η διαφορά"
 
 #. %s = filenames
-#: ../zypp/target/rpm/RpmDb.cc:2075
+#: ../zypp/target/rpm/RpmDb.cc:2072
 #, c-format
 msgid ""
 "rpm created %s as %s.\n"
@@ -4442,13 +4442,13 @@ msgstr ""
 "Εδώ είναι οι πρώτες 25 σειρές της διαφοράς:\n"
 
 #. %s = filenames
-#: ../zypp/target/rpm/RpmDb.cc:2068
+#: ../zypp/target/rpm/RpmDb.cc:2065
 #, fuzzy, c-format
 msgid "rpm saved %s as %s, but it was impossible to determine the difference"
 msgstr "Το rpm αποθηκεύτηκε %s ως %s αλλά ήταν αδύνατο να διαφανεί η διαφορά"
 
 #. %s = filenames
-#: ../zypp/target/rpm/RpmDb.cc:2070
+#: ../zypp/target/rpm/RpmDb.cc:2067
 #, c-format
 msgid ""
 "rpm saved %s as %s.\n"

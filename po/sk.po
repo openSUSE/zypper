@@ -12,7 +12,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: zypp.sk\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-11-06 18:07+0100\n"
+"POT-Creation-Date: 2008-11-21 09:10+0100\n"
 "PO-Revision-Date: 2008-05-23 17:05+0100\n"
 "Last-Translator: Ladislav Michnovič <lmichnovic@suse.cz>\n"
 "Language-Team: Slovak <sk-i18n@lists.linux.sk>\n"
@@ -35,17 +35,17 @@ msgstr ""
 msgid " SSL certificate problem, verify that the CA cert is OK for '%s'."
 msgstr " problém s certifikátom SSL, skontrolujte či certifikát CA je v poriadku pre '%s'."
 
-#: ../zypp/target/TargetImpl.cc:85
+#: ../zypp/target/TargetImpl.cc:88
 msgid " executed"
 msgstr ""
 
 # %s is either BOOTP or DHCP
-#: ../zypp/target/TargetImpl.cc:107
+#: ../zypp/target/TargetImpl.cc:110
 #, fuzzy
 msgid " execution failed"
 msgstr "Konfigurácia pomocou %s zlyhala."
 
-#: ../zypp/target/TargetImpl.cc:193
+#: ../zypp/target/TargetImpl.cc:196
 msgid " execution skipped while aborting"
 msgstr ""
 
@@ -91,7 +91,7 @@ msgstr "Acoli"
 msgid "Adangme"
 msgstr "Adangme"
 
-#: ../zypp/RepoManager.cc:1201
+#: ../zypp/RepoManager.cc:1198
 #, c-format
 msgid "Adding repository '%s'"
 msgstr "Pridávam repozitár '%s'"
@@ -327,7 +327,7 @@ msgid "Austronesian (Other)"
 msgstr "Austronézsky (ostatné)"
 
 #. !\todo add comma to the message for the next release
-#: ../zypp/media/MediaCurl.cc:1689
+#: ../zypp/media/MediaCurl.cc:1702
 #, c-format
 msgid "Authentication required for '%s'"
 msgstr "'%s' vyžaduje autentifikáciu"
@@ -607,7 +607,7 @@ msgstr "Brunei Darussalam"
 msgid "Buginese"
 msgstr "Buginese"
 
-#: ../zypp/RepoManager.cc:969
+#: ../zypp/RepoManager.cc:966
 #, c-format
 msgid "Building repository '%s' cache"
 msgstr "Vytváram medzipamäť repozitára '%s'"
@@ -732,7 +732,7 @@ msgstr "Nemôžem nastaviť rekurzívny mutex"
 msgid "Canada"
 msgstr "Kanada"
 
-#: ../zypp/KeyRing.cc:277
+#: ../zypp/KeyRing.cc:275
 #, c-format
 msgid "Cannot create public key %s from %s keyring to file %s"
 msgstr "Nemôžem vytvoriť verejný kľúč %s zo zväzku %s do súboru %s"
@@ -829,7 +829,7 @@ msgstr "Chamorro"
 #  progress stage
 #. Translator: %s = name of an rpm package. A list of diffs follows
 #. this message.
-#: ../zypp/target/rpm/RpmDb.cc:1899
+#: ../zypp/target/rpm/RpmDb.cc:1896
 #, c-format
 msgid "Changed configuration files for %s:"
 msgstr "Zmenené konfiguračné súbory pre '%s':"
@@ -1176,7 +1176,7 @@ msgid "Duala"
 msgstr "Duala"
 
 #. dubious: Throw on malformed known types, otherwise log a warning.
-#: ../zypp/CheckSum.cc:97
+#: ../zypp/CheckSum.cc:98
 #, c-format
 msgid "Dubious type '%s' for %u byte checksum '%s'"
 msgstr "Pochybný typ '%s' pre %u bajtový kotrolný súčet '%s'"
@@ -1336,11 +1336,11 @@ msgstr "Ewe"
 msgid "Ewondo"
 msgstr "Ewondo"
 
-#: ../zypp/KeyRing.cc:579
+#: ../zypp/KeyRing.cc:577
 msgid "Failed to delete key."
 msgstr "Nepodarilo zmazať kľúč."
 
-#: ../zypp/target/rpm/RpmDb.cc:1067
+#: ../zypp/target/rpm/RpmDb.cc:1064
 #, c-format
 msgid "Failed to import public key from file %s: %s"
 msgstr "Nepodarilo sa importovať verejný kľúč zo súboru %s: %s"
@@ -1350,7 +1350,7 @@ msgstr "Nepodarilo sa importovať verejný kľúč zo súboru %s: %s"
 msgid "Failed to mount %s on %s"
 msgstr "Nepodarilo sa pripojiť %s na %s."
 
-#: ../zypp/target/rpm/RpmDb.cc:1144
+#: ../zypp/target/rpm/RpmDb.cc:1141
 #, c-format
 msgid "Failed to remove public key %s: %s"
 msgstr "Nepodarilo zmazať verejný kľúč %s: %s"
@@ -1961,7 +1961,7 @@ msgstr "Indonézsky"
 msgid "Ingush"
 msgstr "Ingush"
 
-#: ../zypp/target/TargetImpl.cc:603 ../zypp/target/TargetImpl.cc:874
+#: ../zypp/target/TargetImpl.cc:692 ../zypp/target/TargetImpl.cc:963
 msgid "Installation has been aborted as directed."
 msgstr "Inštalácia bola podľa príkazu zrušená."
 
@@ -3350,8 +3350,8 @@ msgstr "Query string nie je pre túto URL povolený"
 
 #. TranslatorExplanation after semicolon is error message
 #. TranslatorExplanation the colon is followed by an error message
-#: ../zypp/target/rpm/RpmDb.cc:893 ../zypp/target/rpm/RpmDb.cc:2087
-#: ../zypp/target/rpm/RpmDb.cc:2223
+#: ../zypp/target/rpm/RpmDb.cc:893 ../zypp/target/rpm/RpmDb.cc:2084
+#: ../zypp/target/rpm/RpmDb.cc:2220
 msgid "RPM failed: "
 msgstr "RPM zlyhalo:"
 
@@ -3381,7 +3381,7 @@ msgstr "Rarotongan"
 msgid "Relative path not allowed if authority exists"
 msgstr "Relatívna cesta nie je povolená v prípade, že je zadaná autorita"
 
-#: ../zypp/RepoManager.cc:1331
+#: ../zypp/RepoManager.cc:1328
 #, c-format
 msgid "Removing repository '%s'"
 msgstr "Odstraňujem repozitár '%s'"
@@ -3625,7 +3625,7 @@ msgstr "Sierra Leone"
 msgid "Sign Languages"
 msgstr "Sign Languages"
 
-#: ../zypp/KeyRing.cc:589
+#: ../zypp/KeyRing.cc:587
 #, c-format
 msgid "Signature file %s not found"
 msgstr "Podpis súboru %s nebol nájdený."
@@ -4055,7 +4055,7 @@ msgstr "Tonga (Nyasa)"
 msgid "Tonga (Tonga Islands)"
 msgstr "Tonga (Tongské ostrovy)"
 
-#: ../zypp/KeyRing.cc:528
+#: ../zypp/KeyRing.cc:526
 #, c-format
 msgid "Tried to import not existant key %s into keyring %s"
 msgstr "Pokus o importovanie  neexistujúceho kľúča %s do zväzku %s"
@@ -4227,7 +4227,7 @@ msgstr "Spojené Štáty"
 msgid "United States Minor Outlying Islands"
 msgstr "Spojené Štáty Minor Outlying ostrovy"
 
-#: ../zypp/target/TargetImpl.cc:908
+#: ../zypp/target/TargetImpl.cc:997
 #, fuzzy
 msgid "Unknown Distribution"
 msgstr "Neznáma voľba "
@@ -4329,7 +4329,7 @@ msgid "Vai"
 msgstr "Vai"
 
 #. we will throw this later if no URL checks out fine
-#: ../zypp/RepoManager.cc:781
+#: ../zypp/RepoManager.cc:778
 msgid "Valid metadata not found at specified URL(s)"
 msgstr "Na zadanej URL adrese neboli nájdené platné metadáta"
 
@@ -4531,7 +4531,7 @@ msgstr "Nie je možné nainštalovať oboje %s a %s"
 msgid "conflicting requests"
 msgstr "konfliktiace si požiadavky"
 
-#: ../zypp/target/rpm/RpmDb.cc:2375
+#: ../zypp/target/rpm/RpmDb.cc:2372
 #, c-format
 msgid "created backup %s"
 msgstr "Bola vytvorená záloha %s"
@@ -4641,13 +4641,13 @@ msgid "replacement of %s with %s"
 msgstr "%s nahradiť %s"
 
 #. %s = filenames
-#: ../zypp/target/rpm/RpmDb.cc:2073
+#: ../zypp/target/rpm/RpmDb.cc:2070
 #, c-format
 msgid "rpm created %s as %s, but it was impossible to determine the difference"
 msgstr "Balík rpm vytvoril %s as %s, ale nebolo možné určiť rozdiel"
 
 #. %s = filenames
-#: ../zypp/target/rpm/RpmDb.cc:2075
+#: ../zypp/target/rpm/RpmDb.cc:2072
 #, c-format
 msgid ""
 "rpm created %s as %s.\n"
@@ -4657,13 +4657,13 @@ msgstr ""
 "Tu je prvých 25 riadkov rozdielov:\n"
 
 #. %s = filenames
-#: ../zypp/target/rpm/RpmDb.cc:2068
+#: ../zypp/target/rpm/RpmDb.cc:2065
 #, c-format
 msgid "rpm saved %s as %s, but it was impossible to determine the difference"
 msgstr "Balík rpm uložil %s ako %s, ale nebolo možné určiť rozdiel"
 
 #. %s = filenames
-#: ../zypp/target/rpm/RpmDb.cc:2070
+#: ../zypp/target/rpm/RpmDb.cc:2067
 #, c-format
 msgid ""
 "rpm saved %s as %s.\n"

@@ -1,4 +1,4 @@
-# translation of zypp.po to Chinese Traditional
+# translation of zypp.po to Traditional Chinese
 # Chinese message file for YaST2 (@memory@). -*- coding: utf-8 -*-
 # Copyright (C) 2005 SUSE Linux Products GmbH.
 # Copyright (C) 2002 SuSE Linux AG.
@@ -9,10 +9,10 @@ msgid ""
 msgstr ""
 "Project-Id-Version: zypp\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-11-06 18:07+0100\n"
-"PO-Revision-Date: 2008-05-04 03:42+0800\n"
+"POT-Creation-Date: 2008-11-21 09:10+0100\n"
+"PO-Revision-Date: 2008-11-23 12:19+0800\n"
 "Last-Translator: swyear <swyear@gmail.com>\n"
-"Language-Team: Chinese Traditional <zh@li.org>\n"
+"Language-Team: Traditional Chinese <opensuse-translation@opensuse.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -32,19 +32,17 @@ msgstr ""
 msgid " SSL certificate problem, verify that the CA cert is OK for '%s'."
 msgstr " SSL 驗證問題，確認 '%s' 的 CA 憑證是正確的。"
 
-#: ../zypp/target/TargetImpl.cc:85
-#, fuzzy
+#: ../zypp/target/TargetImpl.cc:88
 msgid " executed"
 msgstr "執行"
 
-#: ../zypp/target/TargetImpl.cc:107
-#, fuzzy
+#: ../zypp/target/TargetImpl.cc:110
 msgid " execution failed"
-msgstr "DBI 執行失敗： %s"
+msgstr "執行失敗"
 
-#: ../zypp/target/TargetImpl.cc:193
+#: ../zypp/target/TargetImpl.cc:196
 msgid " execution skipped while aborting"
-msgstr ""
+msgstr "當跳出時跳過執行"
 
 #: ../zypp/solver/detail/SATResolver.cc:940
 #, c-format
@@ -86,14 +84,14 @@ msgstr "阿科利語"
 msgid "Adangme"
 msgstr "阿當梅語"
 
-#: ../zypp/RepoManager.cc:1201
+#: ../zypp/RepoManager.cc:1198
 #, c-format
 msgid "Adding repository '%s'"
 msgstr "正在新增套件庫 '%s'"
 
 #: ../zypp/VendorSupportOptions.cc:29
 msgid "Additional Customer Contract Necessary"
-msgstr ""
+msgstr "需要額外的使用者授權"
 
 #. language code: ady
 #: ../zypp/LanguageCode.cc:248
@@ -187,7 +185,7 @@ msgstr "衣索比亞官方語言"
 
 #: ../zypp/VendorSupportOptions.cc:54
 msgid "An additional customer contract is necessary for getting support."
-msgstr ""
+msgstr "要取得支援需要額外的使用者授權"
 
 #: ../zypp/CountryCode.cc:224
 msgid "Andorra"
@@ -309,7 +307,7 @@ msgid "Austronesian (Other)"
 msgstr "南島語系 (其他)"
 
 #. !\todo add comma to the message for the next release
-#: ../zypp/media/MediaCurl.cc:1689
+#: ../zypp/media/MediaCurl.cc:1702
 #, c-format
 msgid "Authentication required for '%s'"
 msgstr "要求 '%s' 的驗證"
@@ -573,7 +571,7 @@ msgstr "汶萊"
 msgid "Buginese"
 msgstr "布吉斯語"
 
-#: ../zypp/RepoManager.cc:969
+#: ../zypp/RepoManager.cc:966
 #, c-format
 msgid "Building repository '%s' cache"
 msgstr "正在建立套件庫 '%s' 的快取"
@@ -693,7 +691,7 @@ msgstr "無法設定遞迴 mutex 屬性"
 msgid "Canada"
 msgstr "加拿大"
 
-#: ../zypp/KeyRing.cc:277
+#: ../zypp/KeyRing.cc:275
 #, c-format
 msgid "Cannot create public key %s from %s keyring to file %s"
 msgstr "無法建立公開金鑰 %s 從 %s 鑰匙圈到檔案 %s"
@@ -784,7 +782,7 @@ msgstr "查摩洛語"
 
 #. Translator: %s = name of an rpm package. A list of diffs follows
 #. this message.
-#: ../zypp/target/rpm/RpmDb.cc:1899
+#: ../zypp/target/rpm/RpmDb.cc:1896
 #, c-format
 msgid "Changed configuration files for %s:"
 msgstr "%s 的已變更組態檔："
@@ -1071,9 +1069,9 @@ msgstr "多明尼加共和國"
 
 #. TranslatorExplanation: curl is the name of a library, don't translate
 #: ../zypp/media/MediaException.cc:92 ../zypp/media/MediaException.cc:100
-#, fuzzy, c-format
+#, c-format
 msgid "Download (Metalink curl) initialization failed for '%s'"
-msgstr "'%s' 下載 (curl) 初始化失敗"
+msgstr "'%s' 下載 (Metalink curl) 初始化失敗"
 
 #: ../zypp/media/MediaException.cc:168
 #, c-format
@@ -1093,13 +1091,13 @@ msgid "Download (curl) initialization failed for '%s'"
 msgstr "'%s' 下載 (curl) 初始化失敗"
 
 #: ../zypp/media/MediaException.cc:186 ../zypp/media/MediaException.cc:204
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Download (metalink curl) error for '%s':\n"
 "Error code: %s\n"
 "Error message: %s\n"
 msgstr ""
-"'%s' 下載 (curl) 錯誤：\n"
+"'%s' 下載 (Metalink curl) 錯誤：\n"
 "錯誤碼： %s\n"
 "錯誤訊息： %s\n"
 
@@ -1114,7 +1112,7 @@ msgid "Duala"
 msgstr "杜阿拉語"
 
 #. dubious: Throw on malformed known types, otherwise log a warning.
-#: ../zypp/CheckSum.cc:97
+#: ../zypp/CheckSum.cc:98
 #, c-format
 msgid "Dubious type '%s' for %u byte checksum '%s'"
 msgstr "可疑的類型 '%s'：%u 位元 checksum '%s'"
@@ -1228,9 +1226,9 @@ msgstr "為 '%s' 設定下載(curl)參數時發生錯誤："
 
 #. TranslatorExplanation: curl is the name of a library, don't translate
 #: ../zypp/media/MediaException.cc:195 ../zypp/media/MediaException.cc:213
-#, fuzzy, c-format
+#, c-format
 msgid "Error occurred while setting download (metalink curl) options for '%s':"
-msgstr "為 '%s' 設定下載(curl)參數時發生錯誤："
+msgstr "為 '%s' 設定下載(metalink curl)參數時發生錯誤："
 
 #. language code: myv
 #: ../zypp/LanguageCode.cc:850
@@ -1267,11 +1265,11 @@ msgstr "埃維語"
 msgid "Ewondo"
 msgstr "埃翁多語"
 
-#: ../zypp/KeyRing.cc:579
+#: ../zypp/KeyRing.cc:577
 msgid "Failed to delete key."
 msgstr "刪除金鑰失敗。"
 
-#: ../zypp/target/rpm/RpmDb.cc:1067
+#: ../zypp/target/rpm/RpmDb.cc:1064
 #, c-format
 msgid "Failed to import public key from file %s: %s"
 msgstr "從檔案 %s 匯入公開金鑰失敗： %s"
@@ -1281,7 +1279,7 @@ msgstr "從檔案 %s 匯入公開金鑰失敗： %s"
 msgid "Failed to mount %s on %s"
 msgstr "載掛 %s 在 %s 失敗"
 
-#: ../zypp/target/rpm/RpmDb.cc:1144
+#: ../zypp/target/rpm/RpmDb.cc:1141
 #, c-format
 msgid "Failed to remove public key %s: %s"
 msgstr "移除公開金鑰 %s 失敗： %s"
@@ -1703,7 +1701,7 @@ msgstr "豪薩語"
 
 #: ../zypp/solver/detail/SATResolver.cc:922
 msgid "Have you enabled all requested repositories?"
-msgstr ""
+msgstr "請問您已啟用所需的套件庫了嗎？"
 
 #. language code: haw
 #: ../zypp/LanguageCode.cc:594
@@ -1866,7 +1864,7 @@ msgstr "印尼語"
 msgid "Ingush"
 msgstr "印古什語"
 
-#: ../zypp/target/TargetImpl.cc:603 ../zypp/target/TargetImpl.cc:874
+#: ../zypp/target/TargetImpl.cc:692 ../zypp/target/TargetImpl.cc:963
 msgid "Installation has been aborted as directed."
 msgstr "安裝已如指示中止。"
 
@@ -2986,9 +2984,9 @@ msgstr "鄂圖曼語"
 
 #. TranslatorExplanation %s = package being checked for integrity
 #: ../zypp/repo/PackageProvider.cc:247
-#, fuzzy, c-format
+#, c-format
 msgid "Package %s seems to be corrupted during transfer. Do you want to retry retrieval?"
-msgstr "套件 %s 完整性檢查失敗。 您要重試下載嗎？"
+msgstr "套件 %s 似乎在傳輸過程中被打斷。 您要重試下載嗎？"
 
 #. language code: pal
 #: ../zypp/LanguageCode.cc:926
@@ -3183,8 +3181,8 @@ msgstr "此 URL 不支援查詢字串分析"
 
 #. TranslatorExplanation after semicolon is error message
 #. TranslatorExplanation the colon is followed by an error message
-#: ../zypp/target/rpm/RpmDb.cc:893 ../zypp/target/rpm/RpmDb.cc:2087
-#: ../zypp/target/rpm/RpmDb.cc:2223
+#: ../zypp/target/rpm/RpmDb.cc:893 ../zypp/target/rpm/RpmDb.cc:2084
+#: ../zypp/target/rpm/RpmDb.cc:2220
 msgid "RPM failed: "
 msgstr "RPM 失敗： "
 
@@ -3212,15 +3210,15 @@ msgstr "拉羅通加語"
 msgid "Relative path not allowed if authority exists"
 msgstr "如果授權存在，則不允許相對路徑"
 
-#: ../zypp/RepoManager.cc:1331
+#: ../zypp/RepoManager.cc:1328
 #, c-format
 msgid "Removing repository '%s'"
 msgstr "正在移除套件庫 '%s'"
 
 #: ../zypp/parser/RepoindexFileReader.cc:128
-#, fuzzy, c-format
+#, c-format
 msgid "Required attribute '%s' is missing."
-msgstr "缺少需要的檔案："
+msgstr ""
 
 #. :QAT:634:
 #: ../zypp/CountryCode.cc:406
@@ -3437,7 +3435,7 @@ msgstr "獅子山"
 msgid "Sign Languages"
 msgstr "符號語言"
 
-#: ../zypp/KeyRing.cc:589
+#: ../zypp/KeyRing.cc:587
 #, c-format
 msgid "Signature file %s not found"
 msgstr "找不到簽名檔 '%s'"
@@ -3678,11 +3676,13 @@ msgid "System exception '%s' on medium '%s'."
 msgstr "系統排除 '%s' 在媒體 '%s'。"
 
 #: ../zypp/ZYppFactory.cc:361
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "System management is locked by the application with pid %d (%s).\n"
 "Close this application before trying again."
-msgstr "系管管理被應用程式(pid %d)鎖定。再次嘗試之前請先關閉此應用程式。"
+msgstr ""
+"系統管理被應用程式 pid %d (%s)鎖定。\n"
+"再次嘗試之前請先關閉此應用程式。"
 
 #. language code: tgl tl
 #: ../zypp/LanguageCode.cc:1108
@@ -3764,9 +3764,8 @@ msgid "The level of support is unspecified"
 msgstr ""
 
 #: ../zypp/VendorSupportOptions.cc:42
-#, fuzzy
 msgid "The vendor does not provide support."
-msgstr "磁碟不存在。"
+msgstr ""
 
 #: ../zypp/base/InterProcessMutex.cc:139
 msgid "This action is being run by another program already."
@@ -3843,7 +3842,7 @@ msgstr "東加語 (尼亞沙)"
 msgid "Tonga (Tonga Islands)"
 msgstr "東加語 (東加群島)"
 
-#: ../zypp/KeyRing.cc:528
+#: ../zypp/KeyRing.cc:526
 #, c-format
 msgid "Tried to import not existant key %s into keyring %s"
 msgstr "嘗試匯入不存在的金鑰 %s 到鑰匙圈 %s"
@@ -4005,10 +4004,9 @@ msgstr "美國"
 msgid "United States Minor Outlying Islands"
 msgstr "美國外島"
 
-#: ../zypp/target/TargetImpl.cc:908
-#, fuzzy
+#: ../zypp/target/TargetImpl.cc:997
 msgid "Unknown Distribution"
-msgstr "未知的清單選項"
+msgstr ""
 
 #: ../zypp/CountryCode.cc:135
 msgid "Unknown country: "
@@ -4107,7 +4105,7 @@ msgid "Vai"
 msgstr "埃語"
 
 #. we will throw this later if no URL checks out fine
-#: ../zypp/RepoManager.cc:781
+#: ../zypp/RepoManager.cc:778
 msgid "Valid metadata not found at specified URL(s)"
 msgstr "在指定的 URL 中找不到有效的中繼資訊"
 
@@ -4298,7 +4296,7 @@ msgstr "無法同時安裝 %s 和 %s"
 msgid "conflicting requests"
 msgstr "衝突的要求"
 
-#: ../zypp/target/rpm/RpmDb.cc:2375
+#: ../zypp/target/rpm/RpmDb.cc:2372
 #, c-format
 msgid "created backup %s"
 msgstr "已建立備份 %s"
@@ -4368,7 +4366,7 @@ msgstr ""
 
 #: ../zypp/VendorSupportOptions.cc:31
 msgid "invalid"
-msgstr ""
+msgstr "不適用"
 
 #. for solver reason: NOT weak lock.
 #: ../zypp/solver/detail/SATResolver.cc:1073
@@ -4407,13 +4405,13 @@ msgid "replacement of %s with %s"
 msgstr "取代 %s 以 %s"
 
 #. %s = filenames
-#: ../zypp/target/rpm/RpmDb.cc:2073
+#: ../zypp/target/rpm/RpmDb.cc:2070
 #, c-format
 msgid "rpm created %s as %s, but it was impossible to determine the difference"
 msgstr "rpm 已將 %s 建立為 %s，但看不出差異"
 
 #. %s = filenames
-#: ../zypp/target/rpm/RpmDb.cc:2075
+#: ../zypp/target/rpm/RpmDb.cc:2072
 #, c-format
 msgid ""
 "rpm created %s as %s.\n"
@@ -4423,13 +4421,13 @@ msgstr ""
 "這是前 25 行差異：\n"
 
 #. %s = filenames
-#: ../zypp/target/rpm/RpmDb.cc:2068
+#: ../zypp/target/rpm/RpmDb.cc:2065
 #, c-format
 msgid "rpm saved %s as %s, but it was impossible to determine the difference"
 msgstr "rpm 已將 %s 儲存為 %s，但看不出差異"
 
 #. %s = filenames
-#: ../zypp/target/rpm/RpmDb.cc:2070
+#: ../zypp/target/rpm/RpmDb.cc:2067
 #, c-format
 msgid ""
 "rpm saved %s as %s.\n"
@@ -4439,9 +4437,8 @@ msgstr ""
 "這是前 25 行差異：\n"
 
 #: ../zypp/solver/detail/SATResolver.cc:918
-#, fuzzy
 msgid "some dependency problem"
-msgstr "因為相依性問題，導致無法安裝 %s"
+msgstr "有些相依性問題"
 
 #: ../zypp/solver/detail/SATResolver.cc:995
 msgid "uninstallable providers: "
@@ -4452,27 +4449,6 @@ msgid "unknown"
 msgstr "不明的"
 
 #: ../zypp/VendorSupportOptions.cc:17
-#, fuzzy
 msgid "unsupported"
-msgstr " - 不支援"
+msgstr "不支援"
 
-#~ msgid "%s remove failed"
-#~ msgstr "%s 移除失敗"
-
-#~ msgid "Additional rpm output:"
-#~ msgstr "其他 rpm 輸出："
-
-#~ msgid "Invalid user name or password."
-#~ msgstr "無效的使用者名稱和密碼。"
-
-#~ msgid "rpm output:"
-#~ msgstr "rpm 輸出："
-
-#~ msgid "%s install failed"
-#~ msgstr "%s 安裝失敗"
-
-#~ msgid "%s installed ok"
-#~ msgstr "%s 安裝成功"
-
-#~ msgid "%s remove ok"
-#~ msgstr "%s 移除成功"
