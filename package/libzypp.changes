@@ -1,5 +1,5 @@
 -------------------------------------------------------------------
-Fri Nov 28 00:05:17 CET 2008 - ma@calvin.km13.de
+Fri Nov 28 00:05:17 CET 2008 - ma@suse.de
 
 - Take into account the requirements of all obsoleted packages uninstall 
   scripts when computing the installation order. (bnc #439802)
