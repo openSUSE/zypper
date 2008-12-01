@@ -1,4 +1,10 @@
 -------------------------------------------------------------------
+Mon Dec  1 16:53:29 CET 2008 - jkupec@suse.cz
+
+- fixed handling of source-install -d and -D options (bnc #428131)
+- r11843
+
+-------------------------------------------------------------------
 Fri Nov 28 18:28:15 CET 2008 - jkupec@suse.cz
 
 - translations update
