@@ -3165,14 +3165,15 @@ void Zypper::doCommand()
     if (exitCode() != ZYPPER_EXIT_OK)
       return;
     init_target(*this);
-    if (!copts.count("no-build-deps"))
-      load_target_resolvables(*this);
+    // if (!copts.count("no-build-deps")) // if target resolvables are not read, solver produces a weird result
+    load_target_resolvables(*this);
     load_repo_resolvables(*this);
 
-    if (!copts.count("no-build-deps"))
+    if (copts.count("no-build-deps"))
+      mark_src_pkgs(*this);
+    else
       build_deps_install(*this);
-    if (!copts.count("build-deps-only"))
-      find_src_pkgs(*this);
+
     solve_and_commit(*this);
     break;
   }

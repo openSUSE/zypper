@@ -17,8 +17,8 @@
  * Loops through resolvables, checking if there is license to confirm. When
  * run interactively, it displays a dialog, otherwise it answers automatically
  * according to --auto-agree-with-licenses present or not present.
- * 
- * \returns true if all licenses have been confirmed, false otherwise.  
+ *
+ * \returns true if all licenses have been confirmed, false otherwise.
  */
 bool confirm_licenses(Zypper & zypper);
 
@@ -37,15 +37,25 @@ void remove_selections(Zypper & zypper);
 
 
 /**
- * Find source packages by names specified as arguments.
+ * Find source packages by names specified as arguments and enqueue them
+ * for installation.
+ *
+ * \todo this will get deprecated after commit refactoring
+ * \note we still need to be able to install the source package alone
+ *       (without build-deps, which are listed as 'requires' of the srcpackage)
  */
-void find_src_pkgs(Zypper & zypper);
+void mark_src_pkgs(Zypper & zypper);
+
 /**
- * Install source packages found by \ref find_src_pkgs.
+ * Install source packages found by \ref mark_src_pkgs.
+ * \todo this uses ZYpp->installSrcPackage(srcpkg) - if it is to be gone
+ *       during the zypp commit refactoring, we need a replacement
  */
 void install_src_pkgs(Zypper & zypper);
+
 /**
- * Inject requirements of source packages' build dependencies to the pool.
+ * Inject requirements of a source package or its build dependencies (depending
+ * on command line options) to the pool.
  */
 void build_deps_install(Zypper & zypper);
 

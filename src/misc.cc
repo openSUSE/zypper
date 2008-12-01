@@ -354,17 +354,20 @@ void build_deps_install(Zypper & zypper)
       DBG << format("Injecting build requieres for source package %s-%s")
           % srcpkg->name() % srcpkg->edition() << endl;
 
-      // add all src requires to pool DEPRECATED: srcpakcages will be in
-      // the pool (together with their build-deps) like normal packages
-      // so only require the srcpackage
-      /*
-      for_( itc, srcpkg->dep(Dep::REQUIRES).begin(), srcpkg->dep(Dep::REQUIRES).end() )
+      // install build depenendcies only
+      if (zypper.cOpts().count("build-deps-only"))
+        for_(itc, srcpkg->requires().begin(), srcpkg->requires().end())
+        {
+          God->resolver()->addRequire(*itc);
+          DBG << "requiring: " << *itc << endl;
+        }
+      // install the source package with build deps
+      else
       {
-        God->resolver()->addRequire(*itc);
-        DBG << "added req: " << *itc << endl;
-      }*/
-      God->resolver()->addRequire(Capability(srcpkg->name(), Rel::EQ, srcpkg->edition(), ResKind::srcpackage));
-      //installer.item.status().setToBeInstalled( zypp::ResStatus::USER );
+        Capability cap(srcpkg->name(), Rel::EQ, srcpkg->edition(), ResKind::srcpackage);
+        God->resolver()->addRequire(cap);
+        DBG << "requiring: " << cap << endl;
+      }
     }
     else
     {
@@ -375,8 +378,7 @@ void build_deps_install(Zypper & zypper)
   }
 }
 
-
-void find_src_pkgs(Zypper & zypper)
+void mark_src_pkgs(Zypper & zypper)
 {
   /*
    * Workflow:
