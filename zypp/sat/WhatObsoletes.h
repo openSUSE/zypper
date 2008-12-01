@@ -33,6 +33,8 @@ namespace zypp
      *
      * \code
      * \endcode
+     *
+     * \todo Add flag to also add any installed version to the containter.
      */
     class WhatObsoletes : public SolvIterMixin<WhatObsoletes,detail::WhatProvidesIterator>,
                           protected detail::PoolMember

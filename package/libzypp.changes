@@ -1,4 +1,12 @@
 -------------------------------------------------------------------
+Mon Dec  1 19:38:24 CET 2008 - ma@suse.de
+
+- Fix install order computation losing some installed packages
+  pre-requirements. (bnc #439802)
+- revision 11845
+- version 5.24.5 (23)
+
+-------------------------------------------------------------------
 Fri Nov 28 16:33:56 CET 2008 - ma@suse.de
 
 - Prune soft locks to prevent installation but not update of 

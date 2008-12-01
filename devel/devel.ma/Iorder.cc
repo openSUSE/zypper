@@ -5,18 +5,62 @@
 
 #include "zypp/pool/GetResolvablesToInsDel.h"
 
-Pathname mroot( "/tmp/Bb" );
-TestSetup test( mroot, Arch_ppc64 );
+void Dbg( ui::Selectable::Ptr s )
+{
+  SEC << dump(s) << endl;
+  if ( s->installedObj() )
+  {
+    PoolItem pi( s->installedObj() );
+    DBG << pi.satSolvable().obsoletes() << endl;
+    sat::WhatObsoletes obs( pi );
+    INT << "WhatObsoletes " <<  pi << " " << obs << endl;
+  }
+  if ( s->candidateObj() )
+  {
+    PoolItem pi( s->candidateObj() );
+    DBG << pi.satSolvable().obsoletes() << endl;
+    sat::WhatObsoletes obs( pi );
+    INT << "WhatObsoletes " <<  pi << " " << obs << endl;
+  }
 
-#define LCStack   "IOrder::Stack"
-#define LCCache   "IOrder::Cache"
-#define LCVerbose "IOrder::Verbose"
+}
+
+///////////////////////////////////////////////////////////////////
+
+static std::string appname( "ToolIorder" );
+
+void message( const std::string & msg_r )
+{
+  cerr << "*** " << msg_r << endl;
+}
+
+int usage( const std::string & msg_r = std::string(), int exit_r = 100 )
+{
+  if ( ! msg_r.empty() )
+  {
+    cerr << endl;
+    message( msg_r );
+    cerr << endl;
+  }
+  cerr << "Usage: " << appname << "[OPTIONS] TESTCASE" << endl;
+  cerr << "  Load testcase and analyze install order." << endl;
+  return exit_r;
+}
+
+///////////////////////////////////////////////////////////////////
+
 
 bool progressReceiver( const ProgressData & v )
 {
   DBG << "...->" << v << endl;
   return true;
 }
+
+///////////////////////////////////////////////////////////////////
+
+#define LCStack   "IOrder::Stack"
+#define LCCache   "IOrder::Cache"
+#define LCVerbose "IOrder::Verbose"
 
 struct RunnableCache
 {
@@ -177,7 +221,7 @@ struct RunnableCache
       if ( _stack.back() == solv_r )
       {
         _stack.pop_back();
-        _ltag = str::form( "[%0l4u]", _stack.size() );
+        _ltag = str::form( "[%04lu]", _stack.size() );
         return true;
       }
       // stack corrupted?
@@ -226,7 +270,7 @@ bool solve()
   USR << "Solve " << run++ << endl;
   bool rres = false;
   {
-    //zypp::base::LogControl::TmpLineWriter shutUp;
+    zypp::base::LogControl::TmpLineWriter shutUp;
     rres = getZYpp()->resolver()->resolvePool();
   }
   if ( ! rres )
@@ -239,34 +283,19 @@ bool solve()
   return true;
 }
 
-bool verify()
-{
-  bool rres = solve();
-  ResPool pool( test.pool() );
-  for_( it, make_filter_begin<resfilter::ByTransact>(pool),
-        make_filter_end<resfilter::ByTransact>(pool) )
-  {
-    if ( it->status().transacts() &&
-         it->status().isBySolver() )
-    {
-      WAR << "MISSING " << *it << endl;
-    }
-  }
-  return rres;
-}
-
-inline void save()
-{
-  test.poolProxy().saveState();
-}
-
-inline void restore()
-{
-  test.poolProxy().restoreState();
-}
-
 void display( const pool::GetResolvablesToInsDel & collect, std::set<IdString> interested )
 {
+  if ( ! interested.empty() )
+  {
+    USR << "======================================================================" << endl;
+    USR << "=== INTERESTED" << endl;
+    USR << "======================================================================" << endl;
+    for_( it, interested.begin(), interested.end() )
+    {
+      MIL << dump(ui::Selectable::get( *it )) << endl;
+    }
+  }
+
   USR << "======================================================================" << endl;
   USR << "=== DELETE" << endl;
   USR << "======================================================================" << endl;
@@ -331,6 +360,13 @@ void display( const pool::GetResolvablesToInsDel & collect, std::set<IdString> i
 
       rcache.clear();
 
+      for_( it, p->installedBegin(), p->installedEnd() )
+      {
+        if ( ! rcache.isInstallable( *it ) )
+        {
+          USR << "FAILED OLD " << *it << endl;
+        }
+      }
       sat::WhatObsoletes obs( *it );
       for_( it, obs.begin(), obs.end() )
       {
@@ -339,6 +375,7 @@ void display( const pool::GetResolvablesToInsDel & collect, std::set<IdString> i
           USR << "FAILED OBS " << *it << endl;
         }
       }
+
 
       if ( ! rcache.isInstallable( *it ) )
       {
@@ -371,48 +408,69 @@ void display( const pool::GetResolvablesToInsDel & collect )
 int main( int argc, char * argv[] )
 {
   INT << "===[START]==========================================" << endl;
+  appname = Pathname::basename( argv[0] );
+  --argc;
+  ++argv;
 
-  Pathname mroot( "/tmp/Bb" );
-  TestSetup test( mroot, Arch_i686 ); // <<< arch
+  if ( ! argc )
+  {
+    return usage();
+  }
 
-  ResPool pool( test.pool() );
+  ///////////////////////////////////////////////////////////////////
+
+  Pathname mtest( "/suse/ma/BUGS/439802/bug439802/YaST2/solverTestcase" );
+  Arch     march( Arch_ppc64 );
+
+  while ( argc )
+  {
+    --argc;
+    ++argv;
+  }
+
+  if ( mtest.empty() )
+  {
+    return usage( "Missing Testcase", 102 );
+  }
+
+  ///////////////////////////////////////////////////////////////////
+
+  TestSetup test( march );
+  ResPool   pool( test.pool() );
   sat::Pool satpool( test.satpool() );
 
   {
     zypp::base::LogControl::TmpLineWriter shutUp;
     test.loadTarget();
-    test.loadTestcaseRepos( "/suse/ma/BUGS/153548/YaST2/solverTestcase" ); // <<< repos
+    test.loadTestcaseRepos( mtest ); // <<< repos
   }
-  save();
-
+  test.poolProxy().saveState();
 
   { // <<< transaction
     zypp::base::LogControl::TmpLineWriter shutUp;
-    getPi<Product>( "SUSE_SLED" ).status().setTransact( true, ResStatus::USER );
-    getPi<Package>( "kernel-pae" ).status().setTransact( true, ResStatus::USER );
-    getPi<Package>( "sled-release" ).status().setTransact( true, ResStatus::USER );
-    getPi<Pattern>( "apparmor" ).status().setTransact( true, ResStatus::USER );
-    getPi<Pattern>( "desktop-base" ).status().setTransact( true, ResStatus::USER );
-    getPi<Pattern>( "desktop-gnome" ).status().setTransact( true, ResStatus::USER );
-    getPi<Pattern>( "x11" ).status().setTransact( true, ResStatus::USER );
+    getPi<Product>( "SUSE_SLES", Edition("11-0"), Arch_ppc64 ).status().setTransact( true, ResStatus::USER );
+    vdumpPoolStats( USR << "Transacting:"<< endl,
+                  make_filter_begin<resfilter::ByTransact>(pool),
+                  make_filter_end<resfilter::ByTransact>(pool) ) << endl;
     upgrade();
   }
   vdumpPoolStats( USR << "Transacting:"<< endl,
                   make_filter_begin<resfilter::ByTransact>(pool),
                   make_filter_end<resfilter::ByTransact>(pool) ) << endl;
+
   pool::GetResolvablesToInsDel collect( pool, pool::GetResolvablesToInsDel::ORDER_BY_MEDIANR );
 
-  USR << ui::Selectable::get( "libtiff" ) << endl;
 
-  restore();
+
+  test.poolProxy().restoreState();
   {
-    //base::LogControl::TmpLineWriter shutUp( new log::FileLineWriter( "iorder.log" ) );
+    base::LogControl::TmpLineWriter shutUp( new log::FileLineWriter( "iorder.log" ) );
     std::set<IdString> interested;
-    interested.insert( IdString("libtiff") );
+    //interested.insert( IdString("fillup") );
     display( collect, interested );
   }
 
- INT << "===[END]============================================" << endl << endl;
+  INT << "===[END]============================================" << endl << endl;
   zypp::base::LogControl::TmpLineWriter shutUp;
   return 0;
 }

@@ -197,6 +197,13 @@ InstallOrder::rdfsvisit (const PoolItem item)
 
     // items prereq
     CapabilitySet prq( item->dep(Dep::PREREQUIRES).begin(), item->dep(Dep::PREREQUIRES).end() );
+    // an installed items prereq (in case they are reqired for uninstall scripts)
+    ui::Selectable::Ptr sel( ui::Selectable::get( item ) );
+    for_( it, sel->installedBegin(), sel->installedEnd() )
+    {
+      Capabilities p( it->satSolvable().prerequires() );
+      prq.insert( p.begin(), p.end() );
+    }
     // any obsoleted items prereq (in case they are reqired for uninstall scripts)
     sat::WhatObsoletes obs( item );
     for_( it, obs.begin(), obs.end() )
