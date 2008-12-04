@@ -150,6 +150,7 @@ LOCKSFILE=/etc/zypp/locks
 OLDLOCKSFILE=/etc/zypp/locks.old
 
 is_old(){
+  test -f ${LOCKSFILE} || return 0
   TEMP_FILE=`mktemp`
   cat ${LOCKSFILE} | sed '/^\#.*/ d;/.*:.*/d;/^[^[a-zA-Z\*?.0-9]*$/d' > ${TEMP_FILE}
   if [ -s ${TEMP_FILE} ]
