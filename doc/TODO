@@ -29,6 +29,8 @@ Updating
   patches have been installed
 + zypper up --some-option repofoo (like 'rug up repo'?) - update
   packages from specified repos without disabling the others
++ zypper lu --some-option to make it list any newer versions of installed
+  packages, regardless whether they are installable or not.
 
 Packages
 

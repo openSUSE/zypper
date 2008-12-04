@@ -1,4 +1,4 @@
-.TH "zypper" "8" "1.0.1" "zypper" "System Tools"
+.TH "zypper" "8" "1.0.3" "zypper" "System Tools"
 .SH "SYNTAX"
 .LP
 zypper [\fI\-\-global\-opts\fR] <\fBcommand\fR> [\fI\-\-command\-opts\fR] [\fBcommand-arguments\fR]
@@ -91,6 +91,15 @@ messages to be run or shown during installation of the update.
 .LP
 Throughout this manual we will refer to resolvables simply as \fIpackages\fR
 and to resolvable types as \fIpackage types\fR.
+
+.SS Package Dependencies
+.LP
+Software packages depend on each other in various ways. Packages usually
+require or recommend other packages, they can declare that they conflict
+with other packages, etc. Packages can also depend on specific hardware.
+See http://en.opensuse.org/Software_Management/Dependencies for more
+information. Zypper utilizes a \fIdependency solver\fR to find out what
+packages are needed to be installed according to user's request.
 
 
 .SH "COMMANDS"
@@ -238,7 +247,12 @@ Automatically say 'yes' to third party license confirmation prompt. By using thi
 Create solver test case for debugging. Use this option, if you think the
 dependencies were not solved all right and attach the resulting /var/log/zypper.solverTestCase
 directory to your bug report. To use this option, simply add it to the problematic
-install or remove command. 
+install or remove command.
+.TP
+.I \ \ \ \ \-\-no\-recommends
+By default, zypper installs also packages recommended by the requested ones.
+This option causes the recomended packages to be ingored and only the
+required ones to be installed.
 .TP
 .I \-R, \-\-no\-force\-resolution 
 Do not force the solver to find a solution. Instead, report
@@ -280,6 +294,12 @@ Check whether dependencies of installed packages are satisfied.
 In case that any dependency problems are found, zypper suggests packages
 to install or remove to fix them.
 
+.TP
+.I \ \ \ \ \-\-no\-recommends
+By default, zypper installs also packages recommended by the requested ones
+(the ones needed to fix broken dependencies in this case).
+This option causes the recomended packages to be ingored and only the
+required ones to be installed. 
 .TP
 .I \-D, \-\-dry-run
 Test the repair, do not actually do anything to the system.
@@ -420,6 +440,11 @@ Automatically say 'yes' to third party license confirmation prompt. By using thi
 .I \ \ \ \ \-\-debug\-solver
 Create solver test case for debugging. See the install command for details.
 .TP
+.I \ \ \ \ \-\-no\-recommends
+By default, zypper installs also packages recommended by the requested ones.
+This option causes the recomended packages to be ingored and only the
+required ones to be installed.
+.TP
 .I \-R, \-\-no\-force\-resolution 
 Do not force the solver to find a solution. Instead, report
 dependency problem and prompt the user to resolve it manually.
@@ -498,6 +523,11 @@ option can be used multiple times.
 .TP
 .I \-l, \-\-auto\-agree\-with\-licenses
 Automatically say 'yes' to third party license confirmation prompt. By using this option, you choose to agree with licenses of all third-party software this command will install. This option is particularly useful for administators installing the same set of packages on multiple machines (by an automated process) and have the licenses confirmed before.
+.TP
+.I \ \ \ \ \-\-no\-recommends
+By default, zypper installs also packages recommended by the requested ones.
+This option causes the recomended packages to be ingored and only the
+required ones to be installed.
 .TP
 .I \ \ \ \ \-\-debug\-solver
 Create solver test case for debugging. See the install command for details.
