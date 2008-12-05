@@ -90,7 +90,9 @@ messages to be run or shown during installation of the update.
 \- group of packages which are necessary to install a product
 .LP
 Throughout this manual we will refer to resolvables simply as \fIpackages\fR
-and to resolvable types as \fIpackage types\fR.
+and to resolvable types as \fIpackage types\fR. These type names can be used
+as arguments of \fI--type\fR option in several commands like \fBinstall\fR,
+\fBinfo\fR, or \fBsearch\fR.
 
 .SS Package Dependencies
 .LP
@@ -158,8 +160,8 @@ Work only with the repository specified by the alias, number or URI. This
 option can be used multiple times.
 .TP
 .I \-t, \-\-type <type>
-Type of package (default: package). Currently supported package types for
-the info command are: package, patch, pattern, product.
+Type of package (default: package). See section \fBPackage Types\fR for list
+of available package types.
 
 .TP
 .B install (in) [options] <name|capability|rpm_file_uri> ...
@@ -222,8 +224,30 @@ Work only with the repository specified by the alias, number or URI. This
 option can be used multiple times.
 .TP
 \fI\-t, \-\-type\fR <type>
-Type of package (default: package). See the beginning of this subsection for the list
-of available package types.
+Type of package to install (default: package). See section \fBPackage Types\fR
+for list of available package types.
+
+If \fIpattern\fR is specified, and the pattern is not yet installed,
+all packages required and recommended by the pattern will be installed.
+A pattern is considered installed if all the packages and patterns
+it requires are installed. Thus a pattern can be evalueated as installed
+even if you do not install the pattern itself, but rather the packages
+it requries. Use \fBzypper search -t pattern [name]\fR to look for available
+patterns and \fBzypper info -t pattern <name>\fR to list its contents.
+
+If \fIpatch\fR is specified, zypper will install and/or remove packages
+to satisfy specified patch. This is a way to ensure that specific
+bug fix is installed. Like patterns, patches can also be evaluated as installed
+by installing the packages needed to satisfy the patch.
+Use \fBzypper list-patches\fR to look for available
+needed patches and \fBzypper info -t patch <name>\fR to display detailed
+information about a patch.
+
+If \fIproduct\fR is specified, zypper ensures all packages required
+by the product are installed. Use \fBzypper se -t product [name]\fR to look
+for available products and \fBzypper info -t product <name>\fR to display
+detailed information about a product.
+
 .TP
 .I \-n, \-\-name
 Select packages by their name, don't try to select by capabilities.
@@ -335,7 +359,16 @@ Create solver test case for debugging. See the install command for details.
 Remove (uninstall) packages.
 
 The packages can be selected by their name or by a capability they provide.
-For details on package selection see the install command description.
+For details on package selection see the \fBinstall\fR command description.
+
+.TP
+\fI\-r, \-\-repo\fR <alias|#|URI>
+Work only with the repository specified by the alias, number or URI. This
+option can be used multiple times.
+.TP
+\fI\-t, -\-type\fR <type>
+Type of package (default: package). See section \fBPackage Types\fR for list
+of available package types.
 
 Since \fBpatches\fR are not installed in sense of copying files or recording
 a database entry, they cannot be uninstalled, even though zypper shows
@@ -344,15 +377,6 @@ the installed status of its required dependencies. If these dependencies
 are satisified, the patch is rendered installed.
 
 Uninstallation of \fBpatterns\fR is currently not implemented.
-
-.TP
-\fI\-r, \-\-repo\fR <alias|#|URI>
-Work only with the repository specified by the alias, number or URI. This
-option can be used multiple times.
-.TP
-\fI\-t, -\-type\fR <type>
-Type of package (default: package). See the beginning of this subsection for the list
-of available package types.
 .TP
 .I \-n, \-\-name
 Select packages by their name (default).
@@ -393,8 +417,8 @@ all packages for which newer version are available, use \fI\-\-all\fR option.
 
 .TP
 \fI\-t, --type\fR <type>
-Type of package (default: package). See Package Managemet Commands subsection
-for the list of available package types.
+Type of package (default: package). See section \fBPackage Types\fR for list
+of available package types.
 .TP
 \fI\-r, \-\-repo\fR <alias|#|URI>
 Work only with the repository specified by the alias, number or URI. This
@@ -422,8 +446,8 @@ multiple packages matching the pattern.
 
 .TP
 \fI\-t, -\-type\fR <type>
-Type of package (default: package). See Package Management Commands subsection
-for the list of available package types.
+Type of package (default: package). See section \fBPackage Types\fR for list
+of available package types.
 .TP
 \fI\-r, \-\-repo\fR <alias|#|URI>
 Work only with the repository specified by the alias, number or URI. This
@@ -546,8 +570,6 @@ Search for packages matching given strings. * (any substring) and ? (any charact
 .IP
 Results of search are printed in a table with following columns: S (status), Catalog, Type (type of package), Name, Version, Arch (architecture). Status column can contain following values: i - installed, v - another version installed, or an empty space for neither of the former cases.
 .IP
-In \fBrug compatibility mode\fR the --type option defaults to \fBpackage\fR. Furthermore, Instead of the Type column, rug's Bundle column is printed, however, with no contents.
-.IP
 This command accepts the following options:
 
 .TP
@@ -579,8 +601,11 @@ Show only packages that are already installed.
 Show only packages that are not currently installed.
 .TP
 .I \-t, -\-type <type>
-Search only for packages of specified type. See the beginning of the subsection for the list of available package types.
-Multiple \-t option are allowed.
+Search only for packages of specified type. See section \fBPackage Types\fR for list
+of available package types. Multiple \-t option are allowed.
+
+See also the type-specific query commands like \fBpackages\fR, \fBpatterns\fR, etc.
+
 .TP
 \fI\-r, \-\-repo\fR <alias|#|URI>
 Work only with the repository specified by the alias, number or URI. This
@@ -1028,7 +1053,9 @@ wildcard characters.
 Restrict the lock to the specified repository.
 .TP
 .I \-t, \-\-type <type>
-Type of resolvable (package, patch, pattern, product). Default: package.
+Lock only packages of specified type (default: package).
+See section \fBPackage Types\fR for list
+of available package types.
 
 .TP
 .B removelock (rl) [options] <lock-number|package-name> ...
@@ -1374,9 +1401,6 @@ Zypper interprets the update command arguments as repository identifiers in rug-
 mode. The update operation is restricted to the specified repositories.
 .RS
 .TP
-.I \-t, \-\-type
-This option defaults to 'package' in rug compatibility mode. Zypper's default is 'patch'.
-.TP
 .I \-y, \-\-no\-confirm
 Don't require user interaction. This option is implemented using zypper's non-interactive mode.
 .TP
@@ -1400,6 +1424,13 @@ This option has currently no effect.
 .TP
 .I rug search (se)
 zypper search (se)
+.IP
+Instead of the Type column, rug's Bundle column is printed, however, with no contents.
+.RS
+.TP
+.I \-t, \-\-type
+In rug compatibility mode the --type option defaults to \fIpackage\fR. Zypper
+searches all package types by default.
 .TP
 \fI    \-\-sort\-by\-catalog\fR
 Sort packages by catalog, not by name. This option is an alias to zypper's
