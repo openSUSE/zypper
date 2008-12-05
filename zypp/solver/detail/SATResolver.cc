@@ -586,6 +586,8 @@ SATResolver::solving(const CapabilitySet & requires_caps,
     // Solvables which were selected due requirements which have been made by the user will
     // be selected by USER.
     // FIXME: The request queue should contains the TransactBy field
+    // ma: this is also deadly for the UI as it converts the requirement into a fix selection,
+    //     which will serve as user input on the next solver run.
     for (CapabilitySet::const_iterator iter = requires_caps.begin(); iter != requires_caps.end(); iter++) {
 	sat::WhatProvides rpmProviders(*iter);
 	for_( iter2, rpmProviders.begin(), rpmProviders.end() ) {
