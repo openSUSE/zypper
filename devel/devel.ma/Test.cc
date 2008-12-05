@@ -3,6 +3,22 @@
 
 #include <zypp/sat/LookupAttr.h>
 
+  static std::string pidAndAppname()
+  {
+    static std::string _val;
+    if ( _val.empty() )
+    {
+      pid_t mypid = getpid();
+      Pathname p( "/proc/"+str::numstring(mypid)+"/exe" );
+      Pathname myname( filesystem::readlink( p ) );
+
+      _val += str::numstring(mypid);
+      _val += ":";
+      _val += myname.basename();
+    }
+    return _val;
+  }
+
 /******************************************************************
 **
 **      FUNCTION NAME : main
@@ -12,6 +28,11 @@ int main( int argc, char * argv[] )
 {
   INT << "===[START]==========================================" << endl;
 
+  SEC << pidAndAppname() << endl;
+
+
+  INT << "===[END]============================================" << endl << endl;
+  return 0;
   Pathname mroot( "/tmp/Bb" );
   TestSetup test( mroot, Arch_x86_64 );
   test.loadRepo( "/Local/ROOT/cache/raw/11.1-update" );
@@ -35,6 +56,8 @@ int main( int argc, char * argv[] )
   {
     MIL << it << endl;
   }
+
+
 
   INT << "===[END]============================================" << endl << endl;
   return 0;

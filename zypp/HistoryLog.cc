@@ -47,6 +47,22 @@ namespace
     }
     return result;
   }
+
+  static std::string pidAndAppname()
+  {
+    static std::string _val;
+    if ( _val.empty() )
+    {
+      pid_t mypid = getpid();
+      zypp::Pathname p( "/proc/"+zypp::str::numstring(mypid)+"/exe" );
+      zypp::Pathname myname( zypp::filesystem::readlink( p ) );
+
+      _val += zypp::str::numstring(mypid);
+      _val += ":";
+      _val += myname.basename();
+    }
+    return _val;
+  }
 }
 
 namespace zypp
@@ -239,10 +255,11 @@ namespace zypp
       << _sep << p->edition()                          // 4 evr
       << _sep << p->arch();                            // 5 arch
 
-    if (pi.status().isByUser())
+    // ApplLow is what the solver selected on behalf of the user.
+    if (pi.status().isByUser() || pi.status().isByApplLow() )
       _log << _sep << userAtHostname();                // 6 reqested by
-    //else if (pi.status().isByApplHigh() || pi.status().isByApplLow())
-    //  _log << _sep << "appl";
+    else if (pi.status().isByApplHigh())
+      _log << _sep << pidAndAppname();
     else
       _log << _sep;
 
@@ -269,10 +286,11 @@ namespace zypp
       << _sep << p->edition()                          // 4 evr
       << _sep << p->arch();                            // 5 arch
 
-    if (pi.status().isByUser())
+    // ApplLow is what the solver selected on behalf of the user.
+    if ( pi.status().isByUser() || pi.status().isByApplLow() )
       _log << _sep << userAtHostname();                // 6 reqested by
-    //else if (pi.status().isByApplHigh() || pi.status().isByApplLow())
-    //  _log << _sep << "appl";
+    else if (pi.status().isByApplHigh())
+      _log << _sep << pidAndAppname();
     else
       _log << _sep;
 
