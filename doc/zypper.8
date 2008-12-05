@@ -162,6 +162,20 @@ option can be used multiple times.
 .I \-t, \-\-type <type>
 Type of package (default: package). See section \fBPackage Types\fR for list
 of available package types.
+.TP
+Examples:
+
+Show information about package 'workrave':
+.br
+.B $ zypper info workrave
+
+Show information about patch 'libzypp':
+.br
+.B $ zypper info -t patch libzypp
+
+Show information about pattern 'lamp_server':
+.br
+.B $ zypper info -t pattern lamp_server
 
 .TP
 .B install (in) [options] <name|capability|rpm_file_uri> ...
@@ -217,7 +231,6 @@ first package you specify, you need to write '--' before it to prevent it's
 interpretation as a command option.
 
 .B $ zypper install -- -boring-game great-game great-game-manual
-
 .TP
 \fI\-r, \-\-repo\fR <alias|#|URI>
 Work only with the repository specified by the alias, number or URI. This
@@ -292,13 +305,39 @@ non-interactive mode. If this option is specified, it takes the preference.
 .I \-D, \-\-dry\-run
 Test the installation, do not actually install any package. This option will
 add the \-\-test option to the rpm commands run by the install command.
+.TP
+More examples:
+
+Install lamp_server pattern:
+.br
+.B $ zypper install -t pattern lamp_server
+
+Install GhostScript viewer, but ignore recommended packages:
+.br
+.B $ zypper install --no-recommends gv
+
+Install version 2.0.6 of virtualbox-ose package (any of the following):
+.br
+.B $ zypper install virtualbox-ose-2.0.6
+.br
+.B $ zypper install virtualbox-ose=2.0.6
+.br
+.B $ zypper install virtualbox-ose = 2.0.6
 
 
 .TP
 .B source-install (si) <name> ...
 Install specified source packages and their build dependencies.
 
-This command will try to find the newest available versions of the source packages and use rpm -i to install them.
+This command will try to find the newest available versions of the source
+packages and use rpm -i to install them and the packages that are required
+to build the source package.
+
+Note that the source packages must be available in repositories you are using.
+You can check whether a repository contains any source packages using the
+following command:
+
+.B $ zypper search -t srcpackage -r <alias|#|URI>
 
 .TP
 .I \-d, \-\-build\-deps\-only
@@ -310,6 +349,12 @@ Don't install build dependencies.
 \fI\-r, \-\-repo\fR <alias|#|URI>
 Work only with the repository specified by the alias, number or URI. This
 option can be used multiple times.
+.TP
+Examples:
+
+Install build dependencies of dbus-1 source package:
+.br
+.B $ zypper si -D dbus-1
 
 .TP
 .B verify (ve) [options]
@@ -419,6 +464,9 @@ all packages for which newer version are available, use \fI\-\-all\fR option.
 \fI\-t, --type\fR <type>
 Type of package (default: package). See section \fBPackage Types\fR for list
 of available package types.
+
+If \fIpatch\fR is specified, zypper acts as if the \fBlist-patches\fR command
+was executed.
 .TP
 \fI\-r, \-\-repo\fR <alias|#|URI>
 Work only with the repository specified by the alias, number or URI. This
@@ -448,6 +496,9 @@ multiple packages matching the pattern.
 \fI\-t, -\-type\fR <type>
 Type of package (default: package). See section \fBPackage Types\fR for list
 of available package types.
+
+If \fIpatch\fR is specified, zypper acts as if the \fBpatche\fR command
+was executed.
 .TP
 \fI\-r, \-\-repo\fR <alias|#|URI>
 Work only with the repository specified by the alias, number or URI. This
@@ -508,6 +559,18 @@ Work only with the repository specified by the alias, number or URI. This
 option can be used multiple times.
 
 .TP
+.B patch-check (pchk)
+Check for patches. Displays a count of applicable patches and how many
+of them have the security category.
+.PP
+See also the EXIT CODES section for details on exit status of 0, 100, and 101
+returned by this command.
+.TP
+.I \-r, \-\-repo <alias|#|URI>
+Check for patches only in the repository specified by the alias, number or URI.
+This option can be used multiple times.
+
+.TP
 .B patch [options]
 Install all available needed patches.
 
@@ -559,7 +622,14 @@ Create solver test case for debugging. See the install command for details.
 .I \-D, \-\-dry\-run
 Test the upgrade, do not actually install or update any package. This option will
 add the \-\-test option to the rpm commands run by the dist-upgrade command.
+.TP
+Examples:
 
+Upgrade the system using 'factory' and 'packman' repository:
+.br
+.B $ zypper install zypper libzypp
+.br
+.B $ zypper dup -r factory -r packman
 
 .SS Query Commands
 
@@ -605,7 +675,6 @@ Search only for packages of specified type. See section \fBPackage Types\fR for 
 of available package types. Multiple \-t option are allowed.
 
 See also the type-specific query commands like \fBpackages\fR, \fBpatterns\fR, etc.
-
 .TP
 \fI\-r, \-\-repo\fR <alias|#|URI>
 Work only with the repository specified by the alias, number or URI. This
@@ -620,11 +689,49 @@ Sort packages by catalog, not by name.
 .I \-s, \-\-details
 Show all available versions of found packages, each version in each repository
 on a separate line.
+.TP
+Examples:
+
+Search for YaST packages (quote the string to prevent the shell
+from expanding the wildcard):
+.br
+.B $ zypper se 'yast*'
+
+Show all available versions of package 'kernel-default':
+.br
+.B $ zypper se -s --match-exact kernel-default
+
+Look for RSI acronym (case-sensitively), also in summaries and descriptions:
+.br
+.B $ zypper se -dC --match-words RSI
+
+
+.TP
+.B packages (pa) [options] [repository] ...
+List all available packages or all packages from specified repositories.
+Similar to \fBzypper search -s -t package\fR.
+.TP
+.I \-r, \-\-repo <alias|#|URI>
+Just another means to specify repositories.
+.TP
+.I \-i, \-\-installed\-only
+Show only installed packages.
+.TP
+.I \-u, \-\-uninstalled\-only
+Show only packages which are not installed.
+
+.TP
+.B patches (pch) [options] [repository] ...
+List all available patches from specified repositories, including those not
+needed. Similar to \fBzypper search -s -t patch\fR.
+.TP
+\fI\-r, \-\-repo\fR <alias|#|URI>
+Just another means to specify repositories.
 
 .TP
 .B patterns (pt) [options] [repository] ...
 List all available patterns or all patterns from specified repositories.
-Similar to \fBzypper search -s -t pattern\fR
+Similar to \fBzypper search -s -t pattern\fR.
 .TP
 .I \-r, \-\-repo <alias|#|URI>
 Just another means to specify repositories.
@@ -654,28 +761,6 @@ Show only products which are not installed.
 .B what-provides (wp) <capability>
 List all packages providing the specified capability. See also the \fBinstall\fR command for hint about capabilities.
 
-.SS Patch Management
-
-.TP
-.B patch-check (pchk)
-Check for patches. Displays a count of applicable patches and how many
-of them have the security category.
-.PP
-See also the EXIT CODES section for details on exit status of 0, 100, and 101
-returned by this command.
-.TP
-.I \-r, \-\-repo <alias|#|URI>
-Check for patches only in the repository specified by the alias, number or URI.
-This option can be used multiple times.
-
-.TP
-.B patches (pch)
-List patches. Lists all patches that are available, including
-installed and not applicable ones.
-.TP
-\fI\-r, \-\-repo\fR <alias|#|URI>
-Work only with the repository specified by the alias, number or URI. This
-option can be used multiple times.
 
 .SS Repository Management
 
@@ -732,6 +817,19 @@ Disable RPM files caching.
 .I \-f, \-\-refresh
 Enable autorefresh of the repository. The autorefresh is disabled by default when adding
 new repositories.
+.TP
+Examples:
+
+Add an HTTP repository, probe it, name it 'Packman 11.1 repo', and use 'packman' as alias:
+.br
+.B $ zypper ar -c -n 'Packman 11.1 repo' http://packman.iu-bremen.de/suse/11.1 packman
+
+Add repositories from a repo file:
+.br
+.B $ zypper ar http://download.opensuse.org/repositories/zypp:/svn/openSUSE_Factory/zypp:svn.repo
+.br
+.B $ zypper ar myreposbackup.repo
+
 
 .TP
 .B removerepo (rr) [options] <alias|#|URI> ...
@@ -786,10 +884,27 @@ Sort the list by alias.
 .TP
 .I \-N, \-\-sort\-by\-name
 Sort the list by name.
+.TP
+Examples:
+
+Backup your repository setup:
+.br
+.B $ zypper repos -e myreposbackup.repo
+
+List repositories with their URIs and priorities:
+.br
+.B $ zypper lr -pu
 
 .TP
 .B renamerepo (nr) <alias|#|URI> <new-alias>
 Assign new alias to the repository specified by alias, number or URI.
+.TP
+Example:
+
+Rename repository number 8 to 'myrepo' (useful if the repo has some
+dreadful alias which is not usable on the command line).
+.br
+.B $ zypper nr 8 myrepo
 
 .TP
 .B modifyrepo (mr) <options> <alias|#|URI>
@@ -838,6 +953,20 @@ Apply changes to all remote repositories (http/https/ftp).
 Apply changes to repositories of specified type. The type corresponds to the
 repository URI scheme identifier like http, dvd, etc. You can find complete
 list of valid types at http://en.opensuse.org/Libzypp/URI.
+.TP
+Examples:
+
+Enable keeping of packages for all remote repositories:
+.br
+.B $ zypper mr -kt
+
+Enable repository 'updates' and switch on autorefresh for the repo:
+.br
+.B $ zypper mr -er updates
+
+Disable all repositories:
+.br
+.B $ zypper mr -da
 
 .TP
 .B refresh (ref) [alias|#] ...
@@ -861,7 +990,7 @@ Only parse the metadata and build the database, don't download raw metadata into
 Only download the raw metadata, don't parse it or build the database.
 
 .TP
-.B clean [alias|#|URI] ...
+.B clean [options] [alias|#|URI] ...
 Clean the local caches for all known or specified repositories. By default,
  only caches of downloaded packages are cleaned.
 .TP
