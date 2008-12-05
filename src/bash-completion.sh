@@ -1,12 +1,8 @@
-# zypper completion v 0.2 aplha 1 :-) (This is not feature complete version!)
-# A hackweek gift from Marek Stopka <marekstopka@gmail.com>
+# zypper completion v 0.2 aplha 2 :-)
+# A hackweek gift from Marek Stopka <mstopka@opensuse.org>
 #
 # some TODOs:
 # - complete package names for install/remove/update
-# - make sure the default file completion always works for:
-#   * install (to install plain rpms)
-#   * addrepo --repo (to specify .repo file)
-#   * maybe other cases   
 
 _zypper() {
         ZYPPER_CMDLIST=()
@@ -112,4 +108,4 @@ _zypper() {
 	esac
 }
 
-complete -F _zypper -d -X -o default zypper
+complete -F _zypper -o default zypper
