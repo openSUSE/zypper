@@ -16,14 +16,14 @@ msgstr ""
 "Project-Id-Version: zypper\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2008-10-27 18:08+0100\n"
-"PO-Revision-Date: 2008-11-17 20:22+0100\n"
-"Last-Translator: Vojtěch Zeisek <vojta.sc@seznam.cz>\n"
+"PO-Revision-Date: 2008-12-02 17:59+0100\n"
+"Last-Translator: Josef Reidinger <jreidinger@suse.cz>\n"
 "Language-Team: czech <cs@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: KBabel 1.11.4\n"
-"Plural-Forms:  nplurals=3; plural=(n==1) ? 0 : (n>=2 && n<=4) ? 1 : 2;\n"
+"Plural-Forms: nplurals=3; plural=(n==1) ? 0 : (n>=2 && n<=4) ? 1 : 2;\n"
 
 #: ../src/callbacks/keyring.h:48
 #, c-format
@@ -168,9 +168,12 @@ msgstr ""
 msgid "No digest for file %s."
 msgstr "Žádný přehled pro soubor %s."
 
-#: ../src/callbacks/keyring.h:256 ../src/callbacks/keyring.h:266
-#: ../src/callbacks/keyring.h:288 ../src/callbacks/rpm.h:61
-#: ../src/solve-commit.cc:1033 ../src/solve-commit.cc:1057
+#: ../src/callbacks/keyring.h:256
+#: ../src/callbacks/keyring.h:266
+#: ../src/callbacks/keyring.h:288
+#: ../src/callbacks/rpm.h:61
+#: ../src/solve-commit.cc:1033
+#: ../src/solve-commit.cc:1057
 msgid "Continue?"
 msgstr "Pokračovat?"
 
@@ -206,7 +209,8 @@ msgstr "Následující dotaz nezamyká nic:"
 msgid "Please insert medium [%s] #%d and type 'y' to continue or 'n' to cancel the operation."
 msgstr "Prosím vložte médium [%s] # %d a zadejte 'y' pro pokračování, nebo operaci zrušte zadáním 'n'."
 
-#: ../src/callbacks/media.h:228 ../src/callbacks/media.h:235
+#: ../src/callbacks/media.h:228
+#: ../src/callbacks/media.h:235
 msgid "User Name"
 msgstr "Jméno uživatele"
 
@@ -245,8 +249,10 @@ msgstr "(%s rozbaleno)"
 msgid "Running: %s  (%s, %s)"
 msgstr "Spouští se: %s  (%s, %s)"
 
-#: ../src/callbacks/rpm.h:139 ../src/callbacks/rpm.h:148
-#: ../src/callbacks/rpm.h:156 ../src/callbacks/rpm.h:163
+#: ../src/callbacks/rpm.h:139
+#: ../src/callbacks/rpm.h:148
+#: ../src/callbacks/rpm.h:156
+#: ../src/callbacks/rpm.h:163
 msgid "Reading installed packages"
 msgstr "Načítají se nainstalované balíky"
 
@@ -363,15 +369,20 @@ msgstr "Poskytovatel"
 msgid "Conflict"
 msgstr "Konflikt"
 
-#: ../src/info.cc:152 ../src/info.cc:274 ../src/info.cc:345
+#: ../src/info.cc:152
+#: ../src/info.cc:274
+#: ../src/info.cc:345
 msgid "Catalog: "
 msgstr "Katalog: "
 
-#: ../src/info.cc:152 ../src/info.cc:274 ../src/info.cc:345
+#: ../src/info.cc:152
+#: ../src/info.cc:274
+#: ../src/info.cc:345
 msgid "Repository: "
 msgstr "Repozitář: "
 
-#: ../src/info.cc:157 ../src/info.cc:279
+#: ../src/info.cc:157
+#: ../src/info.cc:279
 msgid "Installed: "
 msgstr "Nainstalováno: "
 
@@ -379,22 +390,39 @@ msgstr "Nainstalováno: "
 #. autorefresh?
 #. enabled?
 #. autorefresh?
-#: ../src/info.cc:157 ../src/info.cc:214 ../src/info.cc:220 ../src/info.cc:222
-#: ../src/info.cc:279 ../src/repos.cc:735 ../src/repos.cc:737
-#: ../src/repos.cc:1336 ../src/repos.cc:1338 ../src/repos.cc:2014
-#: ../src/repos.cc:2016 ../src/solve-commit.cc:855
+#: ../src/info.cc:157
+#: ../src/info.cc:214
+#: ../src/info.cc:220
+#: ../src/info.cc:222
+#: ../src/info.cc:279
+#: ../src/repos.cc:735
+#: ../src/repos.cc:737
+#: ../src/repos.cc:1336
+#: ../src/repos.cc:1338
+#: ../src/repos.cc:2014
+#: ../src/repos.cc:2016
+#: ../src/solve-commit.cc:855
 msgid "Yes"
 msgstr "Ano"
 
-#: ../src/info.cc:157 ../src/info.cc:214 ../src/info.cc:220 ../src/info.cc:222
-#: ../src/info.cc:279 ../src/repos.cc:735 ../src/repos.cc:737
-#: ../src/repos.cc:1336 ../src/repos.cc:1338 ../src/repos.cc:2014
-#: ../src/repos.cc:2016 ../src/solve-commit.cc:855
+#: ../src/info.cc:157
+#: ../src/info.cc:214
+#: ../src/info.cc:220
+#: ../src/info.cc:222
+#: ../src/info.cc:279
+#: ../src/repos.cc:735
+#: ../src/repos.cc:737
+#: ../src/repos.cc:1336
+#: ../src/repos.cc:1338
+#: ../src/repos.cc:2014
+#: ../src/repos.cc:2016
+#: ../src/solve-commit.cc:855
 msgid "No"
 msgstr "Ne"
 
 #. ! \todo fix this - arch?
-#: ../src/info.cc:160 ../src/info.cc:209
+#: ../src/info.cc:160
+#: ../src/info.cc:209
 msgid "Status: "
 msgstr "Stav: "
 
@@ -447,41 +475,64 @@ msgstr "Poskytuje:"
 msgid "Requires:"
 msgstr "Vyžaduje:"
 
-#: ../src/info.cc:246 ../src/search.cc:323
+#: ../src/info.cc:246
+#: ../src/search.cc:323
 msgid "Recommended"
 msgstr "Doporučeno"
 
-#: ../src/info.cc:248 ../src/search.cc:325
+#: ../src/info.cc:248
+#: ../src/search.cc:325
 msgid "Suggested"
 msgstr "Navrženo"
 
 #. translators: S for 'installed Status'
 #. translators: S for installed Status
 #. TranslatorExplanation S stands for Status
-#: ../src/info.cc:289 ../src/search.cc:38 ../src/search.cc:54
-#: ../src/search.cc:214 ../src/search.cc:385 ../src/search.cc:441
-#: ../src/search.cc:533 ../src/update.cc:397
+#: ../src/info.cc:289
+#: ../src/search.cc:38
+#: ../src/search.cc:54
+#: ../src/search.cc:214
+#: ../src/search.cc:385
+#: ../src/search.cc:441
+#: ../src/search.cc:533
+#: ../src/update.cc:397
 msgid "S"
 msgstr "S"
 
 #. translators: name (general header)
-#: ../src/info.cc:289 ../src/locks.cc:39 ../src/repos.cc:655
-#: ../src/repos.cc:704 ../src/repos.cc:2081 ../src/search.cc:44
-#: ../src/search.cc:56 ../src/search.cc:215 ../src/search.cc:264
-#: ../src/search.cc:386 ../src/search.cc:447 ../src/search.cc:534
-#: ../src/update.cc:152 ../src/update.cc:405 ../src/Zypper.cc:3973
+#: ../src/info.cc:289
+#: ../src/locks.cc:39
+#: ../src/repos.cc:655
+#: ../src/repos.cc:704
+#: ../src/repos.cc:2081
+#: ../src/search.cc:44
+#: ../src/search.cc:56
+#: ../src/search.cc:215
+#: ../src/search.cc:264
+#: ../src/search.cc:386
+#: ../src/search.cc:447
+#: ../src/search.cc:534
+#: ../src/update.cc:152
+#: ../src/update.cc:405
+#: ../src/Zypper.cc:3973
 msgid "Name"
 msgstr "Jméno"
 
 #. translators: type (general header)
 #. translators: product type (addon/base) (rug calls it Category)
-#: ../src/info.cc:289 ../src/locks.cc:43 ../src/repos.cc:655
-#: ../src/repos.cc:713 ../src/repos.cc:2089 ../src/search.cc:58
-#: ../src/search.cc:218 ../src/search.cc:541
+#: ../src/info.cc:289
+#: ../src/locks.cc:43
+#: ../src/repos.cc:655
+#: ../src/repos.cc:713
+#: ../src/repos.cc:2089
+#: ../src/search.cc:58
+#: ../src/search.cc:218
+#: ../src/search.cc:541
 msgid "Type"
 msgstr "Typ"
 
-#: ../src/info.cc:289 ../src/search.cc:388
+#: ../src/info.cc:289
+#: ../src/search.cc:388
 msgid "Dependency"
 msgstr "Závislost"
 
@@ -495,7 +546,9 @@ msgstr "(žádné)"
 
 #. translators: patch category (recommended, security)
 #. translators: product category (the rug term)
-#: ../src/info.cc:351 ../src/search.cc:267 ../src/search.cc:538
+#: ../src/info.cc:351
+#: ../src/search.cc:267
+#: ../src/search.cc:538
 #: ../src/update.cc:152
 msgid "Category"
 msgstr "Kategorie"
@@ -504,7 +557,8 @@ msgstr "Kategorie"
 msgid "Flavor"
 msgstr "Vůně"
 
-#: ../src/info.cc:353 ../src/utils/misc.cc:111
+#: ../src/info.cc:353
+#: ../src/utils/misc.cc:111
 msgid "Installed"
 msgstr "Nainstalováno"
 
@@ -513,7 +567,8 @@ msgid "Short Name"
 msgstr "Zkrácený název"
 
 #. translators: meaning a package %s or provider of capability %s
-#: ../src/install.cc:68 ../src/install.cc:182
+#: ../src/install.cc:68
+#: ../src/install.cc:182
 #, c-format
 msgid "'%s' not found"
 msgstr "'%s' nelze nalézt"
@@ -541,13 +596,15 @@ msgstr "Nepodařilo se přidat %s do seznamu balíčků k instalaci."
 msgid "Failed to add '%s' to the list of packages to be removed."
 msgstr "Nepodařilo se přidat '%s' do seznamu balíčků k instalaci."
 
-#: ../src/install.cc:373 ../src/install.cc:659
+#: ../src/install.cc:373
+#: ../src/install.cc:659
 #, c-format
 msgid "'%s' is already installed."
 msgstr "závislost '%s' je již nainstalována"
 
 #. translators: meaning a package %s or provider of capability %s
-#: ../src/install.cc:413 ../src/install.cc:673
+#: ../src/install.cc:413
+#: ../src/install.cc:673
 #, c-format
 msgid "'%s' is not installed."
 msgstr "závislost '%s' není nainstalována"
@@ -604,18 +661,25 @@ msgstr "Závislost '%s' poskytující schopnost '%s' je již nainstalována."
 
 #. translators: locks table value
 #. importance
-#: ../src/locks.cc:22 ../src/locks.cc:63 ../src/locks.cc:76
+#: ../src/locks.cc:22
+#: ../src/locks.cc:63
+#: ../src/locks.cc:76
 msgid "(any)"
 msgstr "(jakýkoli)"
 
 #. translators: locks table value
-#: ../src/locks.cc:24 ../src/locks.cc:60 ../src/search.cc:311
+#: ../src/locks.cc:24
+#: ../src/locks.cc:60
+#: ../src/search.cc:311
 msgid "(multiple)"
 msgstr "(více)"
 
 #. translators: catalog (rug's word for repository) (header)
-#: ../src/locks.cc:41 ../src/search.cc:40 ../src/search.cc:263
-#: ../src/update.cc:151 ../src/update.cc:399
+#: ../src/locks.cc:41
+#: ../src/search.cc:40
+#: ../src/search.cc:263
+#: ../src/update.cc:151
+#: ../src/update.cc:399
 msgid "Catalog"
 msgstr "Katalog"
 
@@ -624,8 +688,12 @@ msgid "Importance"
 msgstr "Důležitost"
 
 #. translators: package's repository (header)
-#: ../src/locks.cc:43 ../src/search.cc:64 ../src/search.cc:388
-#: ../src/search.cc:446 ../src/update.cc:151 ../src/update.cc:399
+#: ../src/locks.cc:43
+#: ../src/search.cc:64
+#: ../src/search.cc:388
+#: ../src/search.cc:446
+#: ../src/update.cc:151
+#: ../src/update.cc:399
 msgid "Repository"
 msgstr "Repozitář"
 
@@ -736,7 +804,8 @@ msgstr "Nainstalované balíčky s protějšky v repozitářích: %d"
 msgid "Installed packages with EULAs: %d"
 msgstr "Nainstalované balíčky s EULAmi: %d"
 
-#: ../src/misc.cc:372 ../src/misc.cc:397
+#: ../src/misc.cc:372
+#: ../src/misc.cc:397
 #, c-format
 msgid "Source package '%s' not found."
 msgstr "Zdrojový balík '%s' nebyl nalezen."
@@ -760,16 +829,20 @@ msgstr "Problém při instalaci zdrojového balíku %s-%s:"
 msgid "Warning: "
 msgstr "Upozornění: "
 
-#: ../src/output/OutNormal.cc:151 ../src/output/OutNormal.cc:224
+#: ../src/output/OutNormal.cc:151
+#: ../src/output/OutNormal.cc:224
 msgid "error"
 msgstr "chyba"
 
-#: ../src/output/OutNormal.cc:151 ../src/output/OutNormal.cc:224
+#: ../src/output/OutNormal.cc:151
+#: ../src/output/OutNormal.cc:224
 msgid "done"
 msgstr "dokončeno"
 
-#: ../src/output/OutNormal.cc:165 ../src/output/OutNormal.cc:167
-#: ../src/output/OutNormal.cc:191 ../src/output/OutNormal.cc:217
+#: ../src/output/OutNormal.cc:165
+#: ../src/output/OutNormal.cc:167
+#: ../src/output/OutNormal.cc:191
+#: ../src/output/OutNormal.cc:217
 msgid "Retrieving:"
 msgstr "Získávám:"
 
@@ -815,8 +888,11 @@ msgstr "Načítání metadat repozitáře '%s'"
 msgid "Problem retrieving files from '%s'."
 msgstr "Problém při stahování souborů z '%s'."
 
-#: ../src/repos.cc:160 ../src/repos.cc:2861 ../src/solve-commit.cc:1109
-#: ../src/solve-commit.cc:1137 ../src/solve-commit.cc:1169
+#: ../src/repos.cc:160
+#: ../src/repos.cc:2861
+#: ../src/solve-commit.cc:1109
+#: ../src/solve-commit.cc:1137
+#: ../src/solve-commit.cc:1169
 msgid "Please see the above error message for a hint."
 msgstr "Nápovědu naleznete v uvedené chybové zprávě."
 
@@ -882,12 +958,14 @@ msgstr "Repozitář '%s' nebyl podle aliasu, čísla, nebo URI nalezen."
 msgid "Use '%s' to get the list of defined repositories."
 msgstr "Použijte '%s' pro získání seznamu definovaných repozitářů."
 
-#: ../src/repos.cc:490 ../src/repos.cc:497
+#: ../src/repos.cc:490
+#: ../src/repos.cc:497
 #, c-format
 msgid "Ignoring repository '%s' because of '%s' option."
 msgstr "Ignoruji repozitář '%s' z důvodu volby '%s'."
 
-#: ../src/repos.cc:527 ../src/repos.cc:563
+#: ../src/repos.cc:527
+#: ../src/repos.cc:563
 #, c-format
 msgid "Disabling repository '%s' because of the above error."
 msgstr "Repozitář '%s' bude kvůli uvedené chybě vypnut."
@@ -915,12 +993,15 @@ msgstr "Probíhá inicializace cíle"
 msgid "Target initialization failed:"
 msgstr "Inicializace cíle selhala:"
 
-#: ../src/repos.cc:635 ../src/Zypper.cc:3343
+#: ../src/repos.cc:635
+#: ../src/Zypper.cc:3343
 msgid "Running 'zypper refresh' as root might resolve the problem."
 msgstr "Spuštění 'zypper refresh' jako root by mohlo vyřešit problém."
 
 #. translators: patch status (installed, uninstalled, needed)
-#: ../src/repos.cc:655 ../src/search.cc:269 ../src/update.cc:152
+#: ../src/repos.cc:655
+#: ../src/search.cc:269
+#: ../src/update.cc:152
 msgid "Status"
 msgstr "Stav"
 
@@ -939,26 +1020,33 @@ msgstr "Zakázáno"
 # printers.ycp.noloc:1270
 # printers.ycp.noloc:1270
 # printers.ycp.noloc:1270
-#: ../src/repos.cc:703 ../src/repos.cc:2080 ../src/Zypper.cc:3973
+#: ../src/repos.cc:703
+#: ../src/repos.cc:2080
+#: ../src/Zypper.cc:3973
 msgid "Alias"
 msgstr "Alias"
 
 #. TranslatorExplanation used as e.g. "Enabled: Yes"
-#: ../src/repos.cc:705 ../src/repos.cc:1336 ../src/repos.cc:2082
+#: ../src/repos.cc:705
+#: ../src/repos.cc:1336
+#: ../src/repos.cc:2082
 msgid "Enabled"
 msgstr "povoleno"
 
 #. translators: 'zypper repos' column - whether autorefresh is enabled for the repository
-#: ../src/repos.cc:707 ../src/repos.cc:2084
+#: ../src/repos.cc:707
+#: ../src/repos.cc:2084
 msgid "Refresh"
 msgstr "Obnovit"
 
 #. translators: repository priority (in zypper repos -p or -d)
-#: ../src/repos.cc:711 ../src/repos.cc:2088
+#: ../src/repos.cc:711
+#: ../src/repos.cc:2088
 msgid "Priority"
 msgstr "Priorita"
 
-#: ../src/repos.cc:715 ../src/repos.cc:2091
+#: ../src/repos.cc:715
+#: ../src/repos.cc:2091
 msgid "URI"
 msgstr "Adresa URI"
 
@@ -970,25 +1058,31 @@ msgstr "Služba"
 msgid "No repositories defined. Use the 'zypper addrepo' command to add one or more repositories."
 msgstr "Nejsou definovány žádné repozitáře. Přidejte jeden nebo více repozitářů příkazem 'zypper addrepo'."
 
-#: ../src/repos.cc:837 ../src/repos.cc:909 ../src/repos.cc:1079
+#: ../src/repos.cc:837
+#: ../src/repos.cc:909
+#: ../src/repos.cc:1079
 msgid "Error reading repositories:"
 msgstr "Chyba při čtení repozitářů:"
 
-#: ../src/repos.cc:865 ../src/repos.cc:2213
+#: ../src/repos.cc:865
+#: ../src/repos.cc:2213
 #, c-format
 msgid "Can't open %s for writing."
 msgstr "Nelze otevřít soubor '%s' pro zápis."
 
-#: ../src/repos.cc:867 ../src/repos.cc:2215
+#: ../src/repos.cc:867
+#: ../src/repos.cc:2215
 msgid "Maybe you do not have write permissions?"
 msgstr "Pravděpodobně nemáte oprávnění k zápisu."
 
-#: ../src/repos.cc:874 ../src/repos.cc:2222
+#: ../src/repos.cc:874
+#: ../src/repos.cc:2222
 #, c-format
 msgid "Repositories have been successfully exported to %s."
 msgstr "Repozitáře byly úspěšně vyexportovány do %s."
 
-#: ../src/repos.cc:927 ../src/repos.cc:1097
+#: ../src/repos.cc:927
+#: ../src/repos.cc:1097
 msgid "Specified repositories: "
 msgstr "Zadané repozitáře: "
 
@@ -1080,7 +1174,8 @@ msgstr "Všechny repozitáře byly vyčištěny."
 msgid "This is a changeable read-only media (CD/DVD), disabling autorefresh."
 msgstr "Toto médium je výměnné a pouze pro čtení (CD/DVD), vypíná se automatické obnovení."
 
-#: ../src/repos.cc:1282 ../src/repos.cc:1543
+#: ../src/repos.cc:1282
+#: ../src/repos.cc:1543
 #, c-format
 msgid "Repository named '%s' already exists. Please use another alias."
 msgstr "Repozitář s názvem '%s' již existuje. Použijte jiný alias."
@@ -1089,7 +1184,8 @@ msgstr "Repozitář s názvem '%s' již existuje. Použijte jiný alias."
 msgid "Could not determine the type of the repository. Please check if the defined URIs (see below) point to a valid repository:"
 msgstr "Typ repozitáře se nepodařilo určit. Zkontrolujte, zda definované adresy URI (uvedené níže) ukazují na platný repozitář:"
 
-#: ../src/repos.cc:1300 ../src/Zypper.cc:2420
+#: ../src/repos.cc:1300
+#: ../src/Zypper.cc:2420
 msgid "Can't find a valid repository at given location:"
 msgstr "Na zadaném umístění nelze najít platný repozitář:"
 
@@ -1175,7 +1271,8 @@ msgstr "Nelze změnit alias repozitáře '%s'. Repozitář náleží službě '%
 msgid "Repository '%s' renamed to '%s'."
 msgstr "Repozitář '%s' byl přejmenován na '%s'."
 
-#: ../src/repos.cc:1549 ../src/repos.cc:1769
+#: ../src/repos.cc:1549
+#: ../src/repos.cc:1769
 msgid "Error while modifying the repository:"
 msgstr "Chyba při změně repozitáře:"
 
@@ -1426,12 +1523,14 @@ msgstr "Načítání dat repozitáře '%s'..."
 msgid "Repository '%s' not cached. Caching..."
 msgstr "Repozitář '%s' není uložen ve vyrovnávací paměti. Ukládá se..."
 
-#: ../src/repos.cc:2806 ../src/repos.cc:2834
+#: ../src/repos.cc:2806
+#: ../src/repos.cc:2834
 #, c-format
 msgid "Problem loading data from '%s'"
 msgstr "Problém při načítání dat z '%s'"
 
-#: ../src/repos.cc:2807 ../src/repos.cc:2840
+#: ../src/repos.cc:2807
+#: ../src/repos.cc:2840
 #, c-format
 msgid "Resolvables from '%s' not loaded because of error."
 msgstr "Závislosti z '%s' nebyly načteny, protože došlo k chybě."
@@ -1467,25 +1566,35 @@ msgstr ""
 "K tomuto účelu použijte program rug nebo yast2."
 
 #. translators: Bundle is a term used in rug. See rug for how to translate it.
-#: ../src/search.cc:42 ../src/search.cc:444 ../src/update.cc:402
+#: ../src/search.cc:42
+#: ../src/search.cc:444
+#: ../src/update.cc:402
 msgid "Bundle"
 msgstr "Skupina"
 
 #. translators: package version (header)
 #. best_effort does not know version or arch yet
-#: ../src/search.cc:46 ../src/search.cc:60 ../src/search.cc:265
-#: ../src/search.cc:386 ../src/search.cc:447 ../src/search.cc:535
-#: ../src/update.cc:152 ../src/update.cc:407
+#: ../src/search.cc:46
+#: ../src/search.cc:60
+#: ../src/search.cc:265
+#: ../src/search.cc:386
+#: ../src/search.cc:447
+#: ../src/search.cc:535
+#: ../src/update.cc:152
+#: ../src/update.cc:407
 msgid "Version"
 msgstr "Verze"
 
 #. translators: package architecture (header)
-#: ../src/search.cc:48 ../src/search.cc:62 ../src/search.cc:447
+#: ../src/search.cc:48
+#: ../src/search.cc:62
+#: ../src/search.cc:447
 #: ../src/update.cc:407
 msgid "Arch"
 msgstr "Arch"
 
-#: ../src/search.cc:178 ../src/search.cc:192
+#: ../src/search.cc:178
+#: ../src/search.cc:192
 msgid "System Packages"
 msgstr "Systémové balíčky"
 
@@ -1502,7 +1611,8 @@ msgstr "Nebyly nalezeny žádné vyžadované opravy."
 msgid "No patterns found."
 msgstr "Nebyly nalezeny žádné profily."
 
-#: ../src/search.cc:497 ../src/Zypper.cc:3301
+#: ../src/search.cc:497
+#: ../src/Zypper.cc:3301
 msgid "No packages found."
 msgstr "Nebyly nalezeny žádné balíčky."
 
@@ -1617,7 +1727,7 @@ msgid "The following product is going to be upgraded:"
 msgid_plural "The following products are going to be upgraded:"
 msgstr[0] "Následující produkt bude aktualizován:"
 msgstr[1] "Následující produkty budou aktualizovány:"
-msgstr[2] ""
+msgstr[2] "Následující produkty budou aktualizovány:"
 
 #: ../src/solve-commit.cc:391
 msgid "The following package is going to be downgraded:"
@@ -1911,7 +2021,8 @@ msgstr "potvrzuje se"
 msgid "(dry run)"
 msgstr "(pouze test)"
 
-#: ../src/solve-commit.cc:1108 ../src/solve-commit.cc:1147
+#: ../src/solve-commit.cc:1108
+#: ../src/solve-commit.cc:1147
 msgid "Problem retrieving the package file from the repository:"
 msgstr "Problém při stahování souboru balíčku z repozitáře:"
 
@@ -1968,7 +2079,8 @@ msgstr[0] "%d bezpečnostní oprava"
 msgstr[1] "%d bezpečnostní opravy"
 msgstr[2] "%d bezpečnostních oprav"
 
-#: ../src/update.cc:174 ../src/utils/misc.cc:113
+#: ../src/update.cc:174
+#: ../src/utils/misc.cc:113
 msgid "Needed"
 msgstr "Je potřeba"
 
@@ -1980,7 +2092,8 @@ msgstr ""
 "VAROVÁNÍ: Toto jsou jen aktualizace, které mají vliv na samotný aktualizátor.\n"
 "K dispozici jsou také další aktualizace.\n"
 
-#: ../src/update.cc:198 ../src/update.cc:448
+#: ../src/update.cc:198
+#: ../src/update.cc:448
 msgid "No updates found."
 msgstr "Nebyly nalezeny žádné aktualizace."
 
@@ -2060,8 +2173,10 @@ msgstr "Prosím, podejte hlášení o této chybě."
 msgid "See http://en.opensuse.org/Zypper#Troubleshooting for instructions."
 msgstr "Instrukce jsou k dispozici na adrese http://en.opensuse.org/Zypper#Troubleshooting."
 
-#: ../src/utils/messages.cc:40 ../src/utils/messages.cc:50
-#: ../src/utils/messages.cc:68 ../src/Zypper.cc:3677
+#: ../src/utils/messages.cc:40
+#: ../src/utils/messages.cc:50
+#: ../src/utils/messages.cc:68
+#: ../src/Zypper.cc:3677
 msgid "Usage"
 msgstr "Použití"
 
@@ -2069,7 +2184,9 @@ msgstr "Použití"
 msgid "Too many arguments."
 msgstr "Příliš mnoho argumentů"
 
-#: ../src/utils/messages.cc:48 ../src/Zypper.cc:2706 ../src/Zypper.cc:3674
+#: ../src/utils/messages.cc:48
+#: ../src/Zypper.cc:2706
+#: ../src/Zypper.cc:3674
 msgid "Required argument missing."
 msgstr "Chybí vyžadovaný argument."
 
@@ -2213,12 +2330,14 @@ msgstr "a/r/i"
 msgid "Abort, retry, ignore?"
 msgstr "(A) Přerušit, (R) opakovat, (I) ignorovat?"
 
-#: ../src/utils/prompt.cc:169 ../src/utils/prompt.cc:197
+#: ../src/utils/prompt.cc:169
+#: ../src/utils/prompt.cc:197
 #: ../src/utils/prompt.cc:253
 msgid "yes"
 msgstr "ano"
 
-#: ../src/utils/prompt.cc:169 ../src/utils/prompt.cc:198
+#: ../src/utils/prompt.cc:169
+#: ../src/utils/prompt.cc:198
 #: ../src/utils/prompt.cc:253
 msgid "no"
 msgstr "ne"
@@ -2865,7 +2984,8 @@ msgstr ""
 
 #. translators: this is just a rug compatiblity command
 #. translators: this is just a rug-compatiblity command
-#: ../src/Zypper.cc:1250 ../src/Zypper.cc:2127
+#: ../src/Zypper.cc:1250
+#: ../src/Zypper.cc:2127
 msgid ""
 "list-resolvables (lr)\n"
 "\n"
@@ -3620,7 +3740,8 @@ msgstr ""
 "Tento program má loutkovou implementaci, která vždy vrací 0.\n"
 "Je dodáván kvůli kompatibilitě s rugem.\n"
 
-#: ../src/Zypper.cc:2212 ../src/Zypper.cc:3959
+#: ../src/Zypper.cc:2212
+#: ../src/Zypper.cc:3959
 msgid "Unexpected program flow."
 msgstr "Běh programu proběhl neočekávaným způsobem."
 
@@ -3643,7 +3764,8 @@ msgstr ""
 msgid "Root privileges are required for refreshing services."
 msgstr "K aktualizaci služeb je třeba mít oprávnění uživatele root."
 
-#: ../src/Zypper.cc:2352 ../src/Zypper.cc:2699
+#: ../src/Zypper.cc:2352
+#: ../src/Zypper.cc:2699
 msgid "Root privileges are required for modifying system services."
 msgstr "Ke změně systémových služeb je třeba mít oprávnění uživatele root."
 
@@ -3670,7 +3792,8 @@ msgstr "Ke změně služeb je třeba mít oprávnění uživatele root."
 #. followed by ms command help text which will explain it
 #. translators: aggregate option is e.g. "--all". This message will be
 #. followed by mr command help text which will explain it
-#: ../src/Zypper.cc:2484 ../src/Zypper.cc:2852
+#: ../src/Zypper.cc:2484
+#: ../src/Zypper.cc:2852
 msgid "Alias or an aggregate option is required."
 msgstr "Je požadován alias nebo hromadná možnost."
 
@@ -3679,12 +3802,15 @@ msgstr "Je požadován alias nebo hromadná možnost."
 msgid "Service '%s' not found."
 msgstr "Služba '%s' nebyla nalezena"
 
-#: ../src/Zypper.cc:2554 ../src/Zypper.cc:2698 ../src/Zypper.cc:2784
+#: ../src/Zypper.cc:2554
+#: ../src/Zypper.cc:2698
+#: ../src/Zypper.cc:2784
 #: ../src/Zypper.cc:2840
 msgid "Root privileges are required for modifying system repositories."
 msgstr "Ke změně systémových repozitářů je třeba mít oprávnění uživatele root."
 
-#: ../src/Zypper.cc:2603 ../src/Zypper.cc:2960
+#: ../src/Zypper.cc:2603
+#: ../src/Zypper.cc:2960
 msgid "Too few arguments."
 msgstr "Příliš málo argumentů"
 
@@ -3788,7 +3914,8 @@ msgstr "Vyrovnávací paměť souborů RPM"
 msgid "No valid arguments specified."
 msgstr "Nebyly zadány žádné platné argumenty."
 
-#: ../src/Zypper.cc:3100 ../src/Zypper.cc:3178
+#: ../src/Zypper.cc:3100
+#: ../src/Zypper.cc:3178
 msgid "Warning: No repositories defined. Operating only with the installed resolvables. Nothing can be installed."
 msgstr "Varování: Není definován žádný repozitář. Pracuje se pouze s nainstalovanými závislostmi. Nebude možné provádět instalaci."
 
@@ -3796,8 +3923,11 @@ msgstr "Varování: Není definován žádný repozitář. Pracuje se pouze s na
 msgid "Source package name is a required argument."
 msgstr "Název zdrojového balíčku je vyžadovaný argument."
 
-#: ../src/Zypper.cc:3235 ../src/Zypper.cc:3495 ../src/Zypper.cc:3579
-#: ../src/Zypper.cc:3702 ../src/Zypper.cc:3770
+#: ../src/Zypper.cc:3235
+#: ../src/Zypper.cc:3495
+#: ../src/Zypper.cc:3579
+#: ../src/Zypper.cc:3702
+#: ../src/Zypper.cc:3770
 #, c-format
 msgid "Unknown package type '%s'."
 msgstr "Neznámý typ balíčků: '%s'"
@@ -3811,7 +3941,8 @@ msgid "See the above message for a hint."
 msgstr "Nápověd naleznete v předchozí zprávě."
 
 #. translators: Running as 'rug', cannot use 'best-effort' option.
-#: ../src/Zypper.cc:3514 ../src/Zypper.cc:3597
+#: ../src/Zypper.cc:3514
+#: ../src/Zypper.cc:3597
 #, c-format
 msgid "Running as '%s', cannot use '%s' option."
 msgstr "Spuštěn jako '%s', nelze použít volbu '%s'."
@@ -3824,7 +3955,8 @@ msgstr "K aktualizaci balíků je třeba mít oprávnění uživatele root."
 msgid "Root privileges are required for performing a distribution upgrade."
 msgstr "K aktualizaci distribuce jsou potřeba práva uživatele \"root\"."
 
-#: ../src/Zypper.cc:3732 ../src/Zypper.cc:3793
+#: ../src/Zypper.cc:3732
+#: ../src/Zypper.cc:3793
 msgid "Root privileges are required for adding of package locks."
 msgstr "K přidávání zámků balíčků je třeba mít oprávnění uživatele root."
 
