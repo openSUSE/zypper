@@ -1,4 +1,9 @@
 -------------------------------------------------------------------
+Sun Dec  7 20:21:09 CET 2008 - coolo@suse.de
+
+- note for coolo: do not trust bash advisory from TPM colleagues
+
+-------------------------------------------------------------------
 Fri Dec  5 14:22:11 CET 2008 - ma@suse.de
 
 - Fix solvers inappropriate selection as byUSER (bnc 455965)
