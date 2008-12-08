@@ -17,13 +17,13 @@ msgstr ""
 "Project-Id-Version: zypp\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2008-11-21 09:10+0100\n"
-"PO-Revision-Date: 2008-11-17 11:15+0100\n"
-"Last-Translator: Vojtěch Zeisek <vojta.sc@seznam.cz>\n"
+"PO-Revision-Date: 2008-12-02 17:51+0100\n"
+"Last-Translator: Josef Reidinger <jreidinger@suse.cz>\n"
 "Language-Team: czech <cs@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms:  nplurals=3; plural=(n==1) ? 0 : (n>=2 && n<=4) ? 1 : 2;\n"
+"Plural-Forms: nplurals=3; plural=(n==1) ? 0 : (n>=2 && n<=4) ? 1 : 2;\n"
 "X-Generator: KBabel 1.11.4\n"
 
 #: ../zypp/solver/detail/SATResolver.cc:993
@@ -158,7 +158,8 @@ msgid "Albania"
 msgstr "Albánie"
 
 #. language code: alb sqi sq
-#: ../zypp/LanguageCode.cc:262 ../zypp/LanguageCode.cc:264
+#: ../zypp/LanguageCode.cc:262
+#: ../zypp/LanguageCode.cc:264
 msgid "Albanian"
 msgstr "Albánština"
 
@@ -274,7 +275,8 @@ msgstr "Arménie"
 
 # AM
 #. language code: arm hye hy
-#: ../zypp/LanguageCode.cc:284 ../zypp/LanguageCode.cc:286
+#: ../zypp/LanguageCode.cc:284
+#: ../zypp/LanguageCode.cc:286
 msgid "Armenian"
 msgstr "Arménština"
 
@@ -440,7 +442,8 @@ msgid "Bashkir"
 msgstr "Baškirština"
 
 #. language code: baq eus eu
-#: ../zypp/LanguageCode.cc:326 ../zypp/LanguageCode.cc:328
+#: ../zypp/LanguageCode.cc:326
+#: ../zypp/LanguageCode.cc:328
 msgid "Basque"
 msgstr "Baskičtina"
 
@@ -633,7 +636,8 @@ msgid "Burkina Faso"
 msgstr "Burkina Faso"
 
 #. language code: bur mya my
-#: ../zypp/LanguageCode.cc:372 ../zypp/LanguageCode.cc:374
+#: ../zypp/LanguageCode.cc:372
+#: ../zypp/LanguageCode.cc:374
 msgid "Burmese"
 msgstr "Barmština"
 
@@ -867,7 +871,8 @@ msgid "China"
 msgstr "Čína"
 
 #. language code: chi zho zh
-#: ../zypp/LanguageCode.cc:400 ../zypp/LanguageCode.cc:402
+#: ../zypp/LanguageCode.cc:400
+#: ../zypp/LanguageCode.cc:402
 msgid "Chinese"
 msgstr "Čínština"
 
@@ -946,7 +951,8 @@ msgstr "Komory"
 # CG
 #. :CCK:166:
 #. :CAF:140:
-#: ../zypp/CountryCode.cc:262 ../zypp/CountryCode.cc:264
+#: ../zypp/CountryCode.cc:262
+#: ../zypp/CountryCode.cc:264
 msgid "Congo"
 msgstr "Kongo"
 
@@ -1024,7 +1030,8 @@ msgid "Croatia"
 msgstr "Chorvatsko"
 
 #. language code: scr hrv hr
-#: ../zypp/LanguageCode.cc:1008 ../zypp/LanguageCode.cc:1010
+#: ../zypp/LanguageCode.cc:1008
+#: ../zypp/LanguageCode.cc:1010
 msgid "Croatian"
 msgstr "Chorvatské"
 
@@ -1046,7 +1053,8 @@ msgid "Cyprus"
 msgstr "Kypr"
 
 #. language code: cze ces cs
-#: ../zypp/LanguageCode.cc:446 ../zypp/LanguageCode.cc:448
+#: ../zypp/LanguageCode.cc:446
+#: ../zypp/LanguageCode.cc:448
 msgid "Czech"
 msgstr "České"
 
@@ -1121,7 +1129,8 @@ msgid "Dominican Republic"
 msgstr "Dominikánská republika"
 
 #. TranslatorExplanation: curl is the name of a library, don't translate
-#: ../zypp/media/MediaException.cc:92 ../zypp/media/MediaException.cc:100
+#: ../zypp/media/MediaException.cc:92
+#: ../zypp/media/MediaException.cc:100
 #, c-format
 msgid "Download (Metalink curl) initialization failed for '%s'"
 msgstr "Inicializace stažení (Metalink curl) selhala na '%s'"
@@ -1143,7 +1152,8 @@ msgstr ""
 msgid "Download (curl) initialization failed for '%s'"
 msgstr "Inicializace stažení (curl) '%s' selhala"
 
-#: ../zypp/media/MediaException.cc:186 ../zypp/media/MediaException.cc:204
+#: ../zypp/media/MediaException.cc:186
+#: ../zypp/media/MediaException.cc:204
 #, c-format
 msgid ""
 "Download (metalink curl) error for '%s':\n"
@@ -1171,7 +1181,8 @@ msgid "Dubious type '%s' for %u byte checksum '%s'"
 msgstr "Pochybný typ '%s' pro %u kontrolní součet bytů'%s'"
 
 #. language code: dut nld nl
-#: ../zypp/LanguageCode.cc:478 ../zypp/LanguageCode.cc:480
+#: ../zypp/LanguageCode.cc:478
+#: ../zypp/LanguageCode.cc:480
 msgid "Dutch"
 msgstr "Nizozemské"
 
@@ -1281,7 +1292,8 @@ msgid "Error occurred while setting download (curl) options for '%s':"
 msgstr "Během stahování nastavení pro  '%s' došlo chybě:"
 
 #. TranslatorExplanation: curl is the name of a library, don't translate
-#: ../zypp/media/MediaException.cc:195 ../zypp/media/MediaException.cc:213
+#: ../zypp/media/MediaException.cc:195
+#: ../zypp/media/MediaException.cc:213
 #, c-format
 msgid "Error occurred while setting download (metalink curl) options for '%s':"
 msgstr "Během zakládání stahování (metalink curl) došlo v chybě v nastavení pro '%s':"
@@ -1489,7 +1501,8 @@ msgid "France"
 msgstr "Francie"
 
 #. language code: fre fra fr
-#: ../zypp/LanguageCode.cc:522 ../zypp/LanguageCode.cc:524
+#: ../zypp/LanguageCode.cc:522
+#: ../zypp/LanguageCode.cc:524
 msgid "French"
 msgstr "Francouzské"
 
@@ -1597,12 +1610,14 @@ msgid "Georgia"
 msgstr "Gruzie"
 
 #. language code: geo kat ka
-#: ../zypp/LanguageCode.cc:544 ../zypp/LanguageCode.cc:546
+#: ../zypp/LanguageCode.cc:544
+#: ../zypp/LanguageCode.cc:546
 msgid "Georgian"
 msgstr "Gruzínština"
 
 #. language code: ger deu de
-#: ../zypp/LanguageCode.cc:548 ../zypp/LanguageCode.cc:550
+#: ../zypp/LanguageCode.cc:548
+#: ../zypp/LanguageCode.cc:550
 msgid "German"
 msgstr "Německé"
 
@@ -1673,7 +1688,8 @@ msgid "Greek, Ancient (to 1453)"
 msgstr "Starořečtina (do 1453)"
 
 #. language code: gre ell el
-#: ../zypp/LanguageCode.cc:578 ../zypp/LanguageCode.cc:580
+#: ../zypp/LanguageCode.cc:578
+#: ../zypp/LanguageCode.cc:580
 msgid "Greek, Modern (1453-)"
 msgstr "Novořečtina (od 1453)"
 
@@ -1752,7 +1768,8 @@ msgstr "Haiti"
 msgid "Haitian"
 msgstr "Haitština"
 
-#: ../zypp/target/hal/HalException.h:46 ../zypp/target/hal/HalException.h:55
+#: ../zypp/target/hal/HalException.h:46
+#: ../zypp/target/hal/HalException.h:55
 #: ../zypp/target/hal/HalException.h:64
 msgid "Hal Exception"
 msgstr "Výjimka HAL"
@@ -1882,7 +1899,8 @@ msgid "Iceland"
 msgstr "Island"
 
 #. language code: ice isl is
-#: ../zypp/LanguageCode.cc:622 ../zypp/LanguageCode.cc:624
+#: ../zypp/LanguageCode.cc:622
+#: ../zypp/LanguageCode.cc:624
 msgid "Icelandic"
 msgstr "Islandština"
 
@@ -1947,7 +1965,8 @@ msgstr "Indonéština"
 msgid "Ingush"
 msgstr "Ingush"
 
-#: ../zypp/target/TargetImpl.cc:692 ../zypp/target/TargetImpl.cc:963
+#: ../zypp/target/TargetImpl.cc:692
+#: ../zypp/target/TargetImpl.cc:963
 msgid "Installation has been aborted as directed."
 msgstr "Instalace byla zrušena podle příkazu."
 
@@ -2518,7 +2537,8 @@ msgid "Macedonia"
 msgstr "Makedonie"
 
 #. language code: mac mkd mk
-#: ../zypp/LanguageCode.cc:772 ../zypp/LanguageCode.cc:774
+#: ../zypp/LanguageCode.cc:772
+#: ../zypp/LanguageCode.cc:774
 msgid "Macedonian"
 msgstr "Makedonština"
 
@@ -2562,7 +2582,8 @@ msgid "Malawi"
 msgstr "Malawi"
 
 #. language code: may msa ms
-#: ../zypp/LanguageCode.cc:800 ../zypp/LanguageCode.cc:802
+#: ../zypp/LanguageCode.cc:800
+#: ../zypp/LanguageCode.cc:802
 msgid "Malay"
 msgstr "Malajština"
 
@@ -2637,7 +2658,8 @@ msgid "Manx"
 msgstr "Manština"
 
 #. language code: mao mri mi
-#: ../zypp/LanguageCode.cc:790 ../zypp/LanguageCode.cc:792
+#: ../zypp/LanguageCode.cc:790
+#: ../zypp/LanguageCode.cc:792
 msgid "Maori"
 msgstr "Maorština"
 
@@ -2858,7 +2880,8 @@ msgstr "Namibie"
 
 #. language code: nau na
 #. :NPL:524:
-#: ../zypp/LanguageCode.cc:858 ../zypp/CountryCode.cc:387
+#: ../zypp/LanguageCode.cc:858
+#: ../zypp/CountryCode.cc:387
 msgid "Nauru"
 msgstr "Nauru"
 
@@ -2979,7 +3002,8 @@ msgstr "Niuečtina"
 
 #. Defined LanguageCode constants
 #. Defined CountryCode constants
-#: ../zypp/LanguageCode.cc:225 ../zypp/CountryCode.cc:215
+#: ../zypp/LanguageCode.cc:225
+#: ../zypp/CountryCode.cc:215
 msgid "No Code"
 msgstr "Žádný kód"
 
@@ -3228,7 +3252,8 @@ msgid "Permission to access '%s' denied."
 msgstr "Přístup k '%s' byl zamítnut."
 
 #. language code: per fas fa
-#: ../zypp/LanguageCode.cc:938 ../zypp/LanguageCode.cc:940
+#: ../zypp/LanguageCode.cc:938
+#: ../zypp/LanguageCode.cc:940
 msgid "Persian"
 msgstr "Perština"
 
@@ -3294,15 +3319,15 @@ msgstr "Prakritské jazyky"
 
 #: ../zypp/VendorSupportOptions.cc:45
 msgid "Problem determination, which means technical support designed to provide compatibility information, installation assistance, usage support, on-going maintenance and basic troubleshooting. Level 1 Support is not intended to correct product defect errors."
-msgstr ""
+msgstr "Detekce problému, tedy technická podpora zajišťuje informaci o slučitelnosti produktů, asistenci při instalaci a používání, následnou údržbu a základní řešení problémů. První úroveň podpory neslouží k opravám chyb v produktu."
 
 #: ../zypp/VendorSupportOptions.cc:48
 msgid "Problem isolation, which means technical support designed to duplicate customer problems, isolate problem area and provide resolution for problems not resolved by Level 1 Support."
-msgstr ""
+msgstr "Izolace problému, tedy podporu při zreplikování zákazníkova problému, specifikace problematického místa a poskytuje řešení problémů, které neřeší první úroveň."
 
 #: ../zypp/VendorSupportOptions.cc:51
 msgid "Problem resolution, which means technical support designed to resolve complex problems by engaging engineering in resolution of product defects which have been identified by Level 2 Support."
-msgstr ""
+msgstr "Vyřešení problému, tedy technická podpora pro vyřešení složitého problému zajištěním prostředků pro vyřešení problému zjištěného v podpoře druhé úrovně."
 
 #. language code: pro
 #: ../zypp/LanguageCode.cc:956
@@ -3329,13 +3354,15 @@ msgstr "Katar"
 msgid "Quechua"
 msgstr "Kečua (Inkové)"
 
-#: ../zypp/url/UrlBase.cc:782 ../zypp/url/UrlBase.cc:1229
+#: ../zypp/url/UrlBase.cc:782
+#: ../zypp/url/UrlBase.cc:1229
 msgid "Query string parsing not supported for this URL"
 msgstr "Pro toto URL není podporována analýza řetězce dotazu."
 
 #. TranslatorExplanation after semicolon is error message
 #. TranslatorExplanation the colon is followed by an error message
-#: ../zypp/target/rpm/RpmDb.cc:893 ../zypp/target/rpm/RpmDb.cc:2084
+#: ../zypp/target/rpm/RpmDb.cc:893
+#: ../zypp/target/rpm/RpmDb.cc:2084
 #: ../zypp/target/rpm/RpmDb.cc:2220
 msgid "RPM failed: "
 msgstr "RPM selhalo: "
@@ -3362,7 +3389,8 @@ msgstr "Rapanuiština (tahitština Velikonočního ostrova - Rapa-Nui)"
 msgid "Rarotongan"
 msgstr "Rarotongánština (tahitština Velikonočního ostrova - Rapa-Nui)"
 
-#: ../zypp/url/UrlBase.cc:1117 ../zypp/url/UrlBase.cc:1131
+#: ../zypp/url/UrlBase.cc:1117
+#: ../zypp/url/UrlBase.cc:1131
 msgid "Relative path not allowed if authority exists"
 msgstr "Relativní cesta není povolena, pokud existuje autorita"
 
@@ -3393,7 +3421,8 @@ msgid "Romania"
 msgstr "Rumunsko"
 
 #. language code: rum ron ro
-#: ../zypp/LanguageCode.cc:974 ../zypp/LanguageCode.cc:976
+#: ../zypp/LanguageCode.cc:974
+#: ../zypp/LanguageCode.cc:976
 msgid "Romanian"
 msgstr "Rumunština"
 
@@ -3558,7 +3587,8 @@ msgid "Serbia and Montenegro"
 msgstr "Srbsko a Černá Hora"
 
 #. language code: scc srp sr
-#: ../zypp/LanguageCode.cc:1000 ../zypp/LanguageCode.cc:1002
+#: ../zypp/LanguageCode.cc:1000
+#: ../zypp/LanguageCode.cc:1002
 msgid "Serbian"
 msgstr "Srbština"
 
@@ -3661,7 +3691,8 @@ msgid "Slavic (Other)"
 msgstr "Slovanské (jiné)"
 
 #. language code: slo slk sk
-#: ../zypp/LanguageCode.cc:1032 ../zypp/LanguageCode.cc:1034
+#: ../zypp/LanguageCode.cc:1032
+#: ../zypp/LanguageCode.cc:1034
 msgid "Slovak"
 msgstr "Slovenština"
 
@@ -3968,7 +3999,8 @@ msgid "This request will break your system!"
 msgstr "Tento požadavek poškodí váš systém!"
 
 #. language code: tib bod bo
-#: ../zypp/LanguageCode.cc:1112 ../zypp/LanguageCode.cc:1114
+#: ../zypp/LanguageCode.cc:1112
+#: ../zypp/LanguageCode.cc:1114
 msgid "Tibetan"
 msgstr "Tibetština"
 
@@ -4017,7 +4049,8 @@ msgstr "Tok Pisin"
 # TK
 #. language code: tkl
 #. :TJK:762:
-#: ../zypp/LanguageCode.cc:1122 ../zypp/CountryCode.cc:435
+#: ../zypp/LanguageCode.cc:1122
+#: ../zypp/CountryCode.cc:435
 msgid "Tokelau"
 msgstr "Tokelau"
 
@@ -4116,7 +4149,8 @@ msgstr "Turks a Caicos"
 # TV
 #. language code: tvl
 #. :TTO:780:
-#: ../zypp/LanguageCode.cc:1152 ../zypp/CountryCode.cc:442
+#: ../zypp/LanguageCode.cc:1152
+#: ../zypp/CountryCode.cc:442
 msgid "Tuvalu"
 msgstr "Tuvalu"
 
@@ -4178,7 +4212,8 @@ msgstr "Nelze vytvořit připojení dbus."
 msgid "Unable to initalize HAL context -- hald not running?"
 msgstr "Nelze inicializovat kontext HAL - je spuštěna služba hald?"
 
-#: ../zypp/Url.cc:322 ../zypp/Url.cc:336
+#: ../zypp/Url.cc:322
+#: ../zypp/Url.cc:336
 msgid "Unable to parse Url components"
 msgstr "Nelze analyzovat součásti URL."
 
@@ -4392,7 +4427,8 @@ msgid "Washo"
 msgstr "Washo"
 
 #. language code: wel cym cy
-#: ../zypp/LanguageCode.cc:1192 ../zypp/LanguageCode.cc:1194
+#: ../zypp/LanguageCode.cc:1192
+#: ../zypp/LanguageCode.cc:1194
 msgid "Welsh"
 msgstr "Welština"
 
@@ -4667,3 +4703,4 @@ msgstr "neznámý"
 #: ../zypp/VendorSupportOptions.cc:17
 msgid "unsupported"
 msgstr "nepodporováno"
+
