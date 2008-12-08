@@ -103,6 +103,12 @@ namespace zypp
      */
     void undo( void );
 
+    /*
+     * Resets solver information and verify option.
+     */
+    void reset( void );
+      
+
     /**
      * Do an distribution upgrade
      *

@@ -122,6 +122,8 @@ namespace zypp
   { return _pimpl->satifiedByInstalled (item); }
   const solver::detail::ItemCapKindList Resolver::installedSatisfied (const PoolItem item)
   { return _pimpl->installedSatisfied (item); }
+  void Resolver::reset ()
+  { _pimpl->reset( false ); /* Do not keep extra requires/conflicts */ }
 
 
 
