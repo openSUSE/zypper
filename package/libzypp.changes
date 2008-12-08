@@ -1,4 +1,10 @@
 -------------------------------------------------------------------
+Mon Dec  8 10:39:30 CET 2008 - schubi@suse.de
+
+- Make the solver reset function public (bnc #439373)
+- Revision 11904
+
+-------------------------------------------------------------------
 Sun Dec  7 20:21:09 CET 2008 - coolo@suse.de
 
 - note for coolo: do not trust bash advisory from TPM colleagues
