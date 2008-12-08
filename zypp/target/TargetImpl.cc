@@ -86,7 +86,7 @@ namespace zypp
 
         HistoryLog historylog;
         historylog.comment(script_r.asString() + _(" executed"), /*timestamp*/true);
-        ExternalProgram prog( script_r.asString(), ExternalProgram::Stderr_To_Stdout, false, -1, true /*, root_r*/ );
+        ExternalProgram prog( script_r.asString(), ExternalProgram::Stderr_To_Stdout, false, -1, true, root_r );
 
         for ( std::string output = prog.receiveLine(); output.length(); output = prog.receiveLine() )
         {

@@ -1,4 +1,10 @@
 -------------------------------------------------------------------
+Mon Dec  8 15:31:18 CET 2008 - ma@suse.de
+
+- Execute patch scripts chroot to the installed system. (bnc #456795)
+- revision 11908
+
+-------------------------------------------------------------------
 Mon Dec  8 10:39:30 CET 2008 - schubi@suse.de
 
 - Make the solver reset function public (bnc #439373)
