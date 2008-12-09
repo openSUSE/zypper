@@ -7,14 +7,14 @@
 # Stanislav Visnovsky <visnovsky@kde.org>, 2003.
 # Milan Hromada <mhromada@elas.sk>, 2000.
 # Ladislav Michnovič <lmichnovic@suse.cz>, 2008.
-# Ján Kupec <jkupec@suse.cz>, 2007.
+# Ján Kupec <jkupec@suse.cz>, 2008.
 msgid ""
 msgstr ""
 "Project-Id-Version: zypp.sk\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2008-11-21 09:10+0100\n"
-"PO-Revision-Date: 2008-05-23 17:05+0100\n"
-"Last-Translator: Ladislav Michnovič <lmichnovic@suse.cz>\n"
+"PO-Revision-Date: 2008-12-09 10:32+0100\n"
+"Last-Translator: Jan Kupec <jkupec@suse.cz>\n"
 "Language-Team: Slovak <sk-i18n@lists.linux.sk>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -37,17 +37,16 @@ msgstr " problém s certifikátom SSL, skontrolujte či certifikát CA je v pori
 
 #: ../zypp/target/TargetImpl.cc:88
 msgid " executed"
-msgstr ""
+msgstr " spustený"
 
 # %s is either BOOTP or DHCP
 #: ../zypp/target/TargetImpl.cc:110
-#, fuzzy
 msgid " execution failed"
-msgstr "Konfigurácia pomocou %s zlyhala."
+msgstr " spustenie zlyhalo"
 
 #: ../zypp/target/TargetImpl.cc:196
 msgid " execution skipped while aborting"
-msgstr ""
+msgstr " spustenie odložené kvôli prerušeniu programu"
 
 #: ../zypp/solver/detail/SATResolver.cc:940
 #, c-format
@@ -98,7 +97,7 @@ msgstr "Pridávam repozitár '%s'"
 
 #: ../zypp/VendorSupportOptions.cc:29
 msgid "Additional Customer Contract Necessary"
-msgstr ""
+msgstr "Je potrebná ďalšia Zákaznícka Zmluva"
 
 #. language code: ady
 #: ../zypp/LanguageCode.cc:248
@@ -197,7 +196,7 @@ msgstr "Amharic"
 
 #: ../zypp/VendorSupportOptions.cc:54
 msgid "An additional customer contract is necessary for getting support."
-msgstr ""
+msgstr "Pre poskytovanie podpory je potrebná ďalšia zákaznícka zmluva."
 
 # AD
 #: ../zypp/CountryCode.cc:224
@@ -749,7 +748,7 @@ msgstr "Nemôžem vysunúť médium '%s'"
 #: ../zypp/media/MediaException.cc:273
 #, c-format
 msgid "Cannot find available loop device to mount the image file from '%s'"
-msgstr ""
+msgstr "Neviem nájsť dostupné loop zariadenie na pripojenie súboru '%s' s obrazom."
 
 #: ../zypp/media/MediaException.cc:67
 #, c-format
@@ -1133,9 +1132,9 @@ msgstr "Dominikánska Republika"
 
 #. TranslatorExplanation: curl is the name of a library, don't translate
 #: ../zypp/media/MediaException.cc:92 ../zypp/media/MediaException.cc:100
-#, fuzzy, c-format
+#, c-format
 msgid "Download (Metalink curl) initialization failed for '%s'"
-msgstr "Zlyhala inicializácia sťahovania (curl) pre '%s'"
+msgstr "Zlyhala inicializácia sťahovania (metalink curl) pre '%s'"
 
 #: ../zypp/media/MediaException.cc:168
 #, c-format
@@ -1155,13 +1154,13 @@ msgid "Download (curl) initialization failed for '%s'"
 msgstr "Zlyhala inicializácia sťahovania (curl) pre '%s'"
 
 #: ../zypp/media/MediaException.cc:186 ../zypp/media/MediaException.cc:204
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Download (metalink curl) error for '%s':\n"
 "Error code: %s\n"
 "Error message: %s\n"
 msgstr ""
-"Chyba sťahovania (curl) pre '%s':\n"
+"Chyba sťahovania (metalink curl) pre '%s':\n"
 "Kód chyby: %s\n"
 "Chybová správa: %s\n"
 
@@ -1294,9 +1293,9 @@ msgstr "Vyskytla sa chyba počas nastavovania možností sťahovania (curl) pre 
 
 #. TranslatorExplanation: curl is the name of a library, don't translate
 #: ../zypp/media/MediaException.cc:195 ../zypp/media/MediaException.cc:213
-#, fuzzy, c-format
+#, c-format
 msgid "Error occurred while setting download (metalink curl) options for '%s':"
-msgstr "Vyskytla sa chyba počas nastavovania možností sťahovania (curl) pre '%s':"
+msgstr "Vyskytla sa chyba počas nastavovania možností sťahovania (metalink curl) pre '%s':"
 
 # SY
 # fuzzy
@@ -1790,7 +1789,7 @@ msgstr "Hausa"
 
 #: ../zypp/solver/detail/SATResolver.cc:922
 msgid "Have you enabled all requested repositories?"
-msgstr ""
+msgstr "Máte zapnuté všetky požadované repozitáre?"
 
 #. language code: haw
 #: ../zypp/LanguageCode.cc:594
@@ -2405,15 +2404,15 @@ msgstr "Lesotho"
 
 #: ../zypp/VendorSupportOptions.cc:20
 msgid "Level 1"
-msgstr ""
+msgstr "Úroveň 1"
 
 #: ../zypp/VendorSupportOptions.cc:23
 msgid "Level 2"
-msgstr ""
+msgstr "Úroveň 2"
 
 #: ../zypp/VendorSupportOptions.cc:26
 msgid "Level 3"
-msgstr ""
+msgstr "Úroveň 3"
 
 #. language code: lez
 #: ../zypp/LanguageCode.cc:744
@@ -3116,7 +3115,7 @@ msgstr "Omán"
 #: ../zypp/parser/RepoindexFileReader.cc:116
 #, c-format
 msgid "One or both of '%s' or '%s' attributes is required."
-msgstr ""
+msgstr "Jeden alebo oba z atribútov '%s' alebo '%s' sú vyžadované."
 
 #: ../zypp/media/MediaException.cc:161
 msgid "Operation not supported by medium"
@@ -3151,9 +3150,9 @@ msgstr "Otomian Languages"
 
 #. TranslatorExplanation %s = package being checked for integrity
 #: ../zypp/repo/PackageProvider.cc:247
-#, fuzzy, c-format
+#, c-format
 msgid "Package %s seems to be corrupted during transfer. Do you want to retry retrieval?"
-msgstr "Kontrola integrity balíka %s zlyhala. Chcete sa znova pokúsiť o jeho stiahnutie?"
+msgstr "Balík %s sa počas sťahovania pravdepodobne poškodil. Chcete sa znova pokúsiť o jeho stiahnutie?"
 
 #. language code: pal
 #: ../zypp/LanguageCode.cc:926
@@ -3309,15 +3308,15 @@ msgstr "Prakrit Languages"
 
 #: ../zypp/VendorSupportOptions.cc:45
 msgid "Problem determination, which means technical support designed to provide compatibility information, installation assistance, usage support, on-going maintenance and basic troubleshooting. Level 1 Support is not intended to correct product defect errors."
-msgstr ""
+msgstr "Určenie problému, teda technická podpora zameraná na poskytovanie informácií o kompatibilite, pomoc pri inštalácii, pomoc pri používaní, nepretržitú údržbu a základnú pomoc pri riešení problémov. Podpora Úrovne 1 nie je určená na opravu chýb produktu."
 
 #: ../zypp/VendorSupportOptions.cc:48
 msgid "Problem isolation, which means technical support designed to duplicate customer problems, isolate problem area and provide resolution for problems not resolved by Level 1 Support."
-msgstr ""
+msgstr "Izolácia problému, teda technická podpora zameraná na reprodukovanie problémov zákazníka, vymedzenie problémovej oblasti a poskytovanie riešenia problémov nevyriešených Podporou Úrovne 1."
 
 #: ../zypp/VendorSupportOptions.cc:51
 msgid "Problem resolution, which means technical support designed to resolve complex problems by engaging engineering in resolution of product defects which have been identified by Level 2 Support."
-msgstr ""
+msgstr "Riešenie problému, teda technická podpora zameraná na riešenie zložitých problémov za pomoci odborníkov pri riešení chýb produktu, ktoré boli identifikované Podporou Úrovne 2."
 
 #. language code: pro
 #: ../zypp/LanguageCode.cc:956
@@ -3387,9 +3386,9 @@ msgid "Removing repository '%s'"
 msgstr "Odstraňujem repozitár '%s'"
 
 #: ../zypp/parser/RepoindexFileReader.cc:128
-#, fuzzy, c-format
+#, c-format
 msgid "Required attribute '%s' is missing."
-msgstr "Chýba vyžadovaný súbor: "
+msgstr "Chýba vyžadovaný atribút '%s' ."
 
 # RE
 #. :QAT:634:
@@ -3885,11 +3884,13 @@ msgid "System exception '%s' on medium '%s'."
 msgstr "Systémová výnimka '%s' na médiu '%s'."
 
 #: ../zypp/ZYppFactory.cc:361
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "System management is locked by the application with pid %d (%s).\n"
 "Close this application before trying again."
-msgstr "Správa softvéru je uzamknutá inou aplikáciou s pid-om %d. Prosím ukončite najprv túto aplikáciu než to skúsite znova."
+msgstr ""
+"Správa softvéru je uzamknutá inou aplikáciou s pid-om %d (%s).\n"
+"Ukončite najprv túto aplikáciu a skúste znova."
 
 #. language code: tgl tl
 #: ../zypp/LanguageCode.cc:1108
@@ -3968,12 +3969,11 @@ msgstr "Thajsko"
 
 #: ../zypp/VendorSupportOptions.cc:39
 msgid "The level of support is unspecified"
-msgstr ""
+msgstr "Úroveň podpory nie je určený."
 
 #: ../zypp/VendorSupportOptions.cc:42
-#, fuzzy
 msgid "The vendor does not provide support."
-msgstr "Disk neexistuje."
+msgstr "Dodávateľ neposkytuje podporu."
 
 #: ../zypp/base/InterProcessMutex.cc:139
 msgid "This action is being run by another program already."
@@ -3982,7 +3982,7 @@ msgstr "Táto akcia je už spustená iným programom."
 #: ../zypp/solver/detail/SATResolver.cc:1130
 #: ../zypp/solver/detail/SATResolver.cc:1148
 msgid "This request will break your system!"
-msgstr ""
+msgstr "Tento požiadavok poruší váš systém!"
 
 #. language code: tib bod bo
 #: ../zypp/LanguageCode.cc:1112 ../zypp/LanguageCode.cc:1114
@@ -4228,9 +4228,8 @@ msgid "United States Minor Outlying Islands"
 msgstr "Spojené Štáty Minor Outlying ostrovy"
 
 #: ../zypp/target/TargetImpl.cc:997
-#, fuzzy
 msgid "Unknown Distribution"
-msgstr "Neznáma voľba "
+msgstr "Neznáma Distribúcia"
 
 #: ../zypp/CountryCode.cc:135
 msgid "Unknown country: "
@@ -4242,7 +4241,7 @@ msgstr "Neznámy jazyk:"
 
 #: ../zypp/VendorSupportOptions.cc:56
 msgid "Unknown support option. Description not available"
-msgstr ""
+msgstr "Neznámy typ podpory. Popis nie je k dispozícii."
 
 #: ../zypp/media/MediaUserAuth.cc:123
 #, c-format
@@ -4584,7 +4583,7 @@ msgstr "znížít verziu z %s na %s"
 #: ../zypp/solver/detail/SATResolver.cc:1131
 #: ../zypp/solver/detail/SATResolver.cc:1149
 msgid "ignore the warning of a broken system"
-msgstr ""
+msgstr "ignorovať varovanie o porušení systému"
 
 #: ../zypp/solver/detail/SATResolver.cc:1227
 #, c-format
@@ -4600,9 +4599,8 @@ msgstr ""
 "  %s"
 
 #: ../zypp/VendorSupportOptions.cc:31
-#, fuzzy
 msgid "invalid"
-msgstr "Chybná URL"
+msgstr "chybný"
 
 #. for solver reason: NOT weak lock.
 #: ../zypp/solver/detail/SATResolver.cc:1073
@@ -4673,9 +4671,8 @@ msgstr ""
 "Tu je prvých 25 riadkov rozdielov:\n"
 
 #: ../zypp/solver/detail/SATResolver.cc:918
-#, fuzzy
 msgid "some dependency problem"
-msgstr "Nie je možné nainštalovať %s kvôli problémom so závislosťami"
+msgstr "problém so závislosťami"
 
 #: ../zypp/solver/detail/SATResolver.cc:995
 msgid "uninstallable providers: "
@@ -4687,244 +4684,5 @@ msgstr "neznámy"
 
 #: ../zypp/VendorSupportOptions.cc:17
 msgid "unsupported"
-msgstr ""
+msgstr "nepodporovaný"
 
-#~ msgid "%s remove failed"
-#~ msgstr "Odstránenie %s zlyhalo"
-
-#~ msgid "Additional rpm output:"
-#~ msgstr "Ďalší výstup príkazu rpm:"
-
-#~ msgid "Invalid user name or password."
-#~ msgstr "Neplatné meno používateľa alebo heslo."
-
-#~ msgid "rpm output:"
-#~ msgstr "Výstup príkazu rpm:"
-
-#~ msgid "%s install failed"
-#~ msgstr "Inštalácia %s zlyhala."
-
-#~ msgid "%s installed ok"
-#~ msgstr "%s bol úspešne nainštalovaný"
-
-#~ msgid "%s remove ok"
-#~ msgstr "%s bol úspešne odstránený"
-
-#~ msgid "%s provides this dependency, but would change the architecture of the installed item"
-#~ msgstr "%s poskytuje túto závislosť, ale zmenil by architektúru nainštalovaného systému"
-
-#~ msgid "%s provides this dependency, but would change the vendor of the installed item"
-#~ msgstr "%s poskytuje túto závislosť, ale zmenil by dodávateľa nainštalovaného balíka"
-
-#~ msgid "Do not install or delete the resolvables concerned"
-#~ msgstr "Neinštaluj ani neodstraňuj dotknuté balíky"
-
-#~ msgid "Ignore that %s is already set to install"
-#~ msgstr "Ignoruj fakt, že %s je už označený pre inštaláciu"
-
-#~ msgid "Ignore the obsolete %s in %s"
-#~ msgstr "Ignoruj nahradený %s v %s"
-
-#~ msgid "Ignore this conflict of %s"
-#~ msgstr "Ignoruj tento konflikt s balíkom %s"
-
-#~ msgid "Ignore this requirement just here"
-#~ msgstr "Ignoruj túto požiadavku len pre tento prípad"
-
-#~ msgid "Install %s although it would change the architecture"
-#~ msgstr "Nainštaluj %s, hoci to spôsobí zmenu architektúry"
-
-#~ msgid "Install %s although it would change the vendor"
-#~ msgstr "Nainštaluj %s, hoci to spôsobí zmenu dodávateľa"
-
-#~ msgid "Install missing resolvables"
-#~ msgstr "Nainštaluj chýbajúce balíky"
-
-#~ msgid "Keep resolvables"
-#~ msgstr "Ponechať balíky"
-
-#~ msgid "Unlock these resolvables"
-#~ msgstr "Odomkni tieto balíky"
-
-#~ msgid "delete %s"
-#~ msgstr "odstrániť %s"
-
-#~ msgid "install %s"
-#~ msgstr "nainštalovať %s"
-
-#~ msgid "unlock %s"
-#~ msgstr "odomkni %s"
-
-#~ msgid "unlock all resolvables"
-#~ msgstr "odomkni všetky balíky"
-
-#, fuzzy
-#~ msgid "Can't open solv-file: "
-#~ msgstr "Nemôžem otvoriť súbor '%1'."
-
-#, fuzzy
-#~ msgid "Error reading solv-file: "
-#~ msgstr "Chyba pri čítaní repozitárov:"
-
-#~ msgid "Path Parameter parsing not supported for this URL"
-#~ msgstr "Path parametre nie sú pre túto URL podporované"
-
-#~ msgid "Path parameter parsing not supported for this URL"
-#~ msgstr "Path parametre nie sú pre túto URL podporované"
-
-#~ msgid "Reading '%s' repository cache"
-#~ msgstr "Načítavam medzipamäť pre repozitár '%s'"
-
-#~ msgid "Reading patch and delta rpms from '%s' repository cache"
-#~ msgstr "Načítavam informácie o záplatách a delta rpm súboroch z medzipamäte repozitára '%s'"
-
-#~ msgid "Cleaning repository '%s' cache"
-#~ msgstr "Čistím medzipamäť repozitára '%s'"
-
-#~ msgid "Reading repository '%s' cache"
-#~ msgstr "Načítavam medzipamäť repozitára '%s'"
-
-#~ msgid "Software management is already running."
-#~ msgstr "Správa softvéru je už spustená."
-
-#~ msgid "%s is replaced by %s"
-#~ msgstr "%s je nahradené %s"
-
-#~ msgid "%s replaced by %s"
-#~ msgstr "%s nahradené %s"
-
-#~ msgid "%s will be deleted by the user.\n"
-#~ msgstr "%s bude ostránený používateľom.\n"
-
-#~ msgid "%s will be deleted by another application. (ApplLow/ApplHigh)\n"
-#~ msgstr "%s bude odstránený inou aplikáciou. (ApplLow/ApplHigh)\n"
-
-#~ msgid "%s will be installed by the user.\n"
-#~ msgstr "%s bude nainštalovaný používateľom.\n"
-
-#~ msgid "%s will be installed by another application. (ApplLow/ApplHigh)\n"
-#~ msgstr "%s bude nainštalovaný inou aplikáciou. (ApplLow/ApplHigh)\n"
-
-#~ msgid "No valid solution found within %d seconds"
-#~ msgstr "Počas %d sekúnd nebolo nájdené žiadne platné riešenie"
-
-#~ msgid "The solver has reached a defined timout"
-#~ msgstr "Solver prekročil definovaný čas"
-
-#~ msgid "No valid solution found with just resolvables of best architecture."
-#~ msgstr "Len s objektami najvhodnejšej architektúry nebolo nájdené riešenie."
-
-#~ msgid "With this run only resolvables with the best architecture have been regarded.\n"
-#~ msgstr "Pri hľadaní riešenia bolo v tomto behu uvažované len s objektami s najvhodnejšou architektúrou.\n"
-
-#~ msgid "Regarding all possible resolvables takes time, but can come to a valid result."
-#~ msgstr "Pri uvažovaní všetkých možných architektúr môže hľadanie trvať dlho, no môže viesť k riešeniu."
-
-#~ msgid "Invalid information"
-#~ msgstr "Neplatná informácia"
-
-#~ msgid "%s is needed by other resolvables"
-#~ msgstr "%s je vyžadovaný inými balíkami"
-
-#~ msgid ""
-#~ "%s is needed by:\n"
-#~ "%s"
-#~ msgstr ""
-#~ "%s je vyžadovaný balíkami:\n"
-#~ "%s"
-
-#~ msgid "%s conflicts with other resolvables"
-#~ msgstr "%s je v konflikte s inými balíkmi"
-
-#~ msgid ""
-#~ "%s conflicts with:\n"
-#~ "%s"
-#~ msgstr ""
-#~ "%s je v konflikte s:\n"
-#~ "%s"
-
-#~ msgid "%s obsoletes other resolvables"
-#~ msgstr "%s nahrádza iné balíky"
-
-#~ msgid "%s obsoletes:%s"
-#~ msgstr "%s nahradzuje: %s"
-
-#~ msgid ""
-#~ "\n"
-#~ "These resolvables will be deleted from the system."
-#~ msgstr ""
-#~ "\n"
-#~ "Tieto balíky budú zo systému odstánené."
-
-#~ msgid "%s depends on other resolvables"
-#~ msgstr "%s závisí na iných balíkoch"
-
-#~ msgid "%s depends on %s"
-#~ msgstr "%s závisí na %s"
-
-#~ msgid "%s depends on:%s"
-#~ msgstr "%s závisí na: %s"
-
-#~ msgid "Child of"
-#~ msgstr "Potomok"
-
-#~ msgid ""
-#~ "\n"
-#~ "There is no resource available which supports this requirement."
-#~ msgstr ""
-#~ "\n"
-#~ "Nie je k dispozícii žiaden prostriedok, ktorý by mohol splniť tento požiadavok."
-
-#~ msgid "Due to the problems described above/below, this resolution will not solve all dependencies"
-#~ msgstr "Kvôli vyššie/nižšie popísaným problémom nie je možné vyriešiť všetky závislosti"
-
-#~ msgid "Cannot install %s, because it is conflicting with %s"
-#~ msgstr "Nie je možné nainštalovať %s pretože je v konflikte s %s"
-
-#~ msgid "%s is not installed and has been marked as uninstallable"
-#~ msgstr "Balík %s nie je nainštalovaný a je označený ako nenainštalovateľný"
-
-#~ msgid "%s has unfulfilled requirements"
-#~ msgstr "%s má nesplnené požiadavky"
-
-#~ msgid "%s has missing dependencies"
-#~ msgstr "Balíku %s chýbajú závislé balíky"
-
-#~ msgid "%s cannot be installed due to missing dependencies"
-#~ msgstr "%s nie je možné nainštalovať kvôli chýbajúcim závislostiam"
-
-#~ msgid "%s fulfills dependencies of %s but will be uninstalled"
-#~ msgstr "%s spĺňa závislosti %s ale má byť odinštalovaný"
-
-#~ msgid "%s fulfills dependencies of %s but will be kept on your system"
-#~ msgstr "%s spĺňa závislosti %s ale má byť ponechaný v systéme"
-
-#~ msgid "No need to install %s"
-#~ msgstr "nie je potrebné inštalovať %s"
-
-#~ msgid "Cannot install %s to fulfill the dependencies of %s"
-#~ msgstr "Nie je možné nainštalovať %s aby splnil závislosti balíka %s"
-
-#~ msgid "Cannot install %s to fulfil the dependencies of %s"
-#~ msgstr "Nie je možné nainštalovať %s aby splnil závislosti balíka %s"
-
-#~ msgid "%s will not be uninstalled, because it is still required"
-#~ msgstr "%s nie je možné odinštalovať pretože je stále vyžadovaný iným balíkom"
-
-#~ msgid "%s obsoletes %s. But %s cannot be deleted, because it is locked."
-#~ msgstr "%s nahradzuje %s, ale %s nie je možné odstrániť pretože je zamknutý"
-
-#~ msgid "Cannot install %s, because it is conflicting"
-#~ msgstr "Nie je možné nainštalovať %s lebo je v konflikte s iným balíkom"
-
-#~ msgid "%s is uninstallable due to conflicts with %s"
-#~ msgstr "%s nie je možné nainštalovať kvôli konfliktom s %s"
-
-#~ msgid "Requirememt %s cannot be fulfilled."
-#~ msgstr "Nie je možné splniť požiadavku %s."
-
-#~ msgid "for requiring %s for %s when upgrading %s"
-#~ msgstr "pre vyžadovanie %s pre %s kvôli aktualizácii %s"
-
-#~ msgid "%s is lacking the requirement %s"
-#~ msgstr "Balíku %s chýba vyžadovaný balík %s"
