@@ -453,13 +453,14 @@ try {
         getZYpp()->initializeTarget( sysRoot );
       }
       getZYpp()->target()->load();
+      USR << "baseproduct:               " << getZYpp()->target()->baseProduct() << endl;
       USR << "targetDistribution:        " << getZYpp()->target()->targetDistribution() << endl;
       USR << "targetDistributionRelease: " << getZYpp()->target()->targetDistributionRelease() << endl;
       dumpRange( USR << "Product ", pool.byKindBegin<Product>(), pool.byKindEnd<Product>() ) << endl;
     }
   }
 
-  if ( 1 )
+  if ( 0 )
   {
     RepoManager repoManager( makeRepoManager( sysRoot ) );
     ServiceInfoList services = repoManager.knownServices();
@@ -560,9 +561,7 @@ try {
     }
   }
 
-
-  MIL << Arch_ppc.compatibleWith( Arch_x86_64 ) << endl;
-  MIL << Arch_i586.compatibleWith( Arch_x86_64 ) << endl;
+  SEC << "baseproduct:               " << getZYpp()->target()->baseProduct() << endl;
 
 
 #if 0
