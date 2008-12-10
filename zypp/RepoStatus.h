@@ -105,6 +105,14 @@ namespace zypp
      *
      * \note construct from a non existing
      * file will result in an empty status
+     *
+     * \note construct from a directory, the
+     * directories mtime will be also used as
+     * checksum.
+     *
+     * \todo Add recursive option for dirs so we finaly get
+     * the same as \ref parser::plaindir::dirStatus and can
+     * unify both.
      */
     RepoStatus( const Pathname &file );
 

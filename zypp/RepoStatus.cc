@@ -72,6 +72,20 @@ namespace zypp
     : _pimpl( new Impl() )
   {}
 
+  RepoStatus::RepoStatus( const Pathname &path )
+    : _pimpl( new Impl() )
+  {
+      PathInfo info(path);
+      if ( info.isExist() )
+      {
+        _pimpl->timestamp = Date(info.mtime());
+        if ( info.isFile() )
+          _pimpl->checksum = filesystem::sha1sum(path);
+        else // non files
+          _pimpl->checksum = str::numstring(info.mtime());
+      }
+  }
+
   ///////////////////////////////////////////////////////////////////
   //
   //	METHOD NAME : RepoStatus::~RepoStatus
@@ -105,17 +119,6 @@ namespace zypp
     }
     file << this->checksum() << " " << (int) this->timestamp() << endl << endl;
     file.close();
-  }
-
-  RepoStatus::RepoStatus( const Pathname &path )
-    : _pimpl( new Impl() )
-  {
-      PathInfo info(path);
-      if ( info.isExist() )
-      {
-        _pimpl->checksum = filesystem::sha1sum(path);
-        _pimpl->timestamp = Date(info.mtime());
-      }
   }
 
   bool RepoStatus::empty() const
