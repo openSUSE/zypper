@@ -1,4 +1,14 @@
 -------------------------------------------------------------------
+Wed Dec 10 16:09:08 CET 2008 - ma@suse.de
+
+- Remove obsolete zypp.conf::productsdir and deprecate 
+  ZConfig::productsPath().
+- Monitor /etc/products.d to determine if @system.solv needs to be 
+  rebuilt. (bnc #457933)
+- revision 11923
+- version 5.24.7 (23)
+
+-------------------------------------------------------------------
 Mon Dec  8 15:31:18 CET 2008 - ma@suse.de
 
 - Execute patch scripts chroot to the installed system. (bnc #456795)
