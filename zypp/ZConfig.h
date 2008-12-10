@@ -173,8 +173,9 @@ namespace zypp
       /**
        * Directory for additional product information  (configPath()/products.d)
        * \ingroup g_ZC_CONFIGFILES
+       * \deprecated This locations is no longer used or supported.
        */
-      Pathname productsPath() const;
+      Pathname productsPath() const ZYPP_DEPRECATED;
 
       /**
        * Solver regards required packages,patterns,... only

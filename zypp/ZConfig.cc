@@ -246,6 +246,7 @@ namespace zypp
                 }
                 else if ( entry == "productsdir" )
                 {
+                  WAR << "Deprecated entry 'productsdir=': This locations is no longer used or supported." << endl;
                   cfg_products_path = Pathname(value);
                 }
                 else if ( entry == "solver.onlyRequires" )
