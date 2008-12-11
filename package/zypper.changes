@@ -1,4 +1,15 @@
 -------------------------------------------------------------------
+Thu Dec 11 11:20:42 CET 2008 - jkupec@suse.cz
+
+- fixed typo (bnc #458248)
+- r11924
+
+-------------------------------------------------------------------
+Fri Dec  5 14:55:00 CET 2008 - jkupec@suse.cz
+
+- man page update (fixes also bnc #450857)
+
+-------------------------------------------------------------------
 Mon Dec  1 16:53:29 CET 2008 - jkupec@suse.cz
 
 - fixed handling of source-install -d and -D options (bnc #428131)
