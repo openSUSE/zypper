@@ -107,7 +107,11 @@ namespace zypp
 
           case NAMESPACE_MODALIAS:
             {
-              return target::Modalias::instance().query( IdString(rhs) ) ? RET_systemProperty : RET_unsupported;
+              // modalias strings in capability may be hexencoded because rpm does not allow
+              // ',', ' ' or other special chars.
+              return target::Modalias::instance().query( str::hexdecode( IdString(rhs).c_str() ) )
+                     ? RET_systemProperty
+                     : RET_unsupported;
             }
             break;
 

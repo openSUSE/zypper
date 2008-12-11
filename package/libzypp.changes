@@ -1,4 +1,13 @@
 -------------------------------------------------------------------
+Thu Dec 11 21:39:50 CET 2008 - ma@suse.de
+
+- Add str::hexencode and str::hexdecode to encode special characters 
+  in a string as %XX.
+- Hexdecode modalias strings in rpm dependencies because rpm does not 
+  allow comma, blank and other special chars. (bnc #456695)
+- revision 11927
+
+-------------------------------------------------------------------
 Thu Dec 11 17:13:06 CET 2008 - ma@suse.de
 
 - Catch and report media errors when proving packages. (bnc #457652)

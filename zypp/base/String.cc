@@ -83,6 +83,78 @@ namespace zypp
                );
     }
 
+    ///////////////////////////////////////////////////////////////////
+    // Hexencode
+    ///////////////////////////////////////////////////////////////////
+    namespace {
+      /** What's not decoded. */
+      inline bool heIsAlNum( char ch )
+      {
+        return ( ( 'a' <= ch && ch <= 'z' )
+               ||( 'A' <= ch && ch <= 'Z' )
+               ||( '0' <= ch && ch <= '9' ) );
+      }
+      /** Hex-digit to number or -1. */
+      inline int heDecodeCh( char ch )
+      {
+        if ( '0' <= ch && ch <= '9' )
+          return( ch - '0' );
+        if ( 'A' <= ch && ch <= 'Z' )
+          return( ch - 'A' + 10 );
+        if ( 'a' <= ch && ch <= 'z' )
+          return( ch - 'A' + 10 );
+        return -1;
+      }
+    }
+
+    std::string hexencode( const C_Str & str_r )
+    {
+      static const char *const hdig = "0123456789ABCDEF";
+      std::string res;
+      res.reserve( str_r.size() );
+      for ( const char * it = str_r.c_str(); *it; ++it )
+      {
+        if ( heIsAlNum( *it ) )
+        {
+          res += *it;
+        }
+        else
+        {
+          res += '%';
+          res += hdig[(unsigned char)(*it)/16];
+          res += hdig[(unsigned char)(*it)%16];
+        }
+      }
+      return res;
+    }
+
+    std::string hexdecode( const C_Str & str_r )
+    {
+      std::string res;
+      res.reserve( str_r.size() );
+      for_( it, str_r.c_str(), str_r.c_str()+str_r.size() )
+      {
+        if ( *it == '%' )
+        {
+          int d1 = heDecodeCh( *(it+1) );
+          if ( d1 != -1 )
+          {
+            int d2 = heDecodeCh( *(it+2) );
+            if ( d2 != -1 )
+            {
+              res += (d1<<4)|d2;
+              it += 2;
+              continue;
+            }
+          }
+        }
+        // verbatim if no %XX:
+        res += *it;
+      }
+      return res;
+    }
+    ///////////////////////////////////////////////////////////////////
+
     /******************************************************************
      **
      **      FUNCTION NAME : toLower
@@ -283,6 +355,7 @@ namespace zypp
       }
       return std::string( buf.begin(), buf.end() );
     }
+
 
 
     /******************************************************************

@@ -225,3 +225,28 @@ BOOST_AUTO_TEST_CASE(prefix_suffix)
   BOOST_CHECK( ! str::contains("abcXabcYabc", "xabcy") );
   BOOST_CHECK( str::containsCI("abcXabcYabc", "xabcy") );
 }
+
+BOOST_AUTO_TEST_CASE(hexencode_hexdecode)
+{
+  std::string o;
+  o.reserve( 256 );
+  for ( unsigned i = 1; i < 256; ++i )
+    o += i;
+
+  std::string e( str::hexencode( o ) );
+  // encoded contains nothing but [%a-zA-Z0-9]
+  for ( unsigned i = 0; i < 255; ++i )
+  {
+    char ch = e[i];
+    BOOST_CHECK( ch == '%'
+                 || ( 'a' <= ch && ch <= 'z' )
+                 || ( 'A' <= ch && ch <= 'Z' )
+                 || ( '0' <= ch && ch <= '9' ) );
+  }
+
+  std::string d( str::hexdecode( e ) );
+  BOOST_CHECK( o == d );
+//   for ( unsigned i = 0; i < 255; ++i )
+//     if ( o[i] != d[i] )
+//       WAR << i << " " << unsigned(o[i]) << " != " << unsigned(d[i]) << endl;
+}

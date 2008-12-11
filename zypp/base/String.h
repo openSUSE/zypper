@@ -584,11 +584,30 @@ namespace zypp
        *
        * For use when printing \a c separated values, and where
        * \ref joinEscaped() is too heavy.
+       *
+       * \todo use C_Str instead of std::string to prevent unnecessary
+       * promotion to string if used with "string".
+       *
+       * \todo shoud not be documented in doxy-group 'Join'
        */
       std::string escape(const std::string & str_r, const char c = ' ' );
 
       //! \todo unsecape()
 
+    //@}
+    ///////////////////////////////////////////////////////////////////
+    ///////////////////////////////////////////////////////////////////
+    /** \name Hexencode.
+     * Encode all characters other than [a-zA-Z0-9] as %XX.
+     * This includes the % character itself, which becomes %25.
+     */
+    //@{
+    /** Encode all characters other than [a-zA-Z0-9] as %XX.
+     * This includes the % character itself, which becomes %25.
+     */
+    std::string hexencode( const C_Str & str_r );
+    /** Decode hexencoded %XX sequences. */
+    std::string hexdecode( const C_Str & str_r );
     //@}
     ///////////////////////////////////////////////////////////////////
 
