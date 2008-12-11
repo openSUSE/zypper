@@ -103,12 +103,42 @@ namespace zypp
           {
             ret = doProvidePackage();
           }
+        catch ( const UserRequestException & excpt )
+          {
+            // UserRequestException e.g. from failOnChecksumError was already reported.
+            ERR << "Failed to provide Package " << _package << endl;
+            if ( ! _retry )
+              {
+                ZYPP_RETHROW( excpt );
+              }
+          }
         catch ( const Exception & excpt )
           {
             ERR << "Failed to provide Package " << _package << endl;
             if ( ! _retry )
               {
-                ZYPP_RETHROW( excpt );
+                // Aything else gets reported
+                std::string package_str = _package->name() + "-" + _package->edition().asString();
+
+                // TranslatorExplanation %s = name of the package being processed.
+                std::string detail_str( str::form(_("Failed to provide Package %s. Do you want to retry retrieval?"), package_str.c_str() ) );
+                detail_str += str::form( "\n\n%s\n%s", excpt.asUserString().c_str(), excpt.historyAsString().c_str() );
+
+                switch ( report()->problem( _package, repo::DownloadResolvableReport::IO, detail_str.c_str() ) )
+                {
+                      case repo::DownloadResolvableReport::RETRY:
+                        _retry = true;
+                        break;
+                      case repo::DownloadResolvableReport::IGNORE:
+                        ZYPP_THROW(SkipRequestException("User requested skip of corrupted file"));
+                        break;
+                      case repo::DownloadResolvableReport::ABORT:
+                        ZYPP_THROW(AbortRequestException("User requested to abort"));
+                        break;
+                      default:
+                        ZYPP_RETHROW( excpt );
+                        break;
+                }
               }
           }
       } while ( _retry );

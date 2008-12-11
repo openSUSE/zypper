@@ -1,4 +1,10 @@
 -------------------------------------------------------------------
+Thu Dec 11 17:13:06 CET 2008 - ma@suse.de
+
+- Catch and report media errors when proving packages. (bnc #457652)
+- revision 11926
+
+-------------------------------------------------------------------
 Wed Dec 10 16:09:08 CET 2008 - ma@suse.de
 
 - Remove obsolete zypp.conf::productsdir and deprecate 
