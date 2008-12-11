@@ -2999,7 +2999,7 @@ void Zypper::doCommand()
       if (!_arguments.empty())
         // translators: rug related message, shown if
         // 'zypper in --entire-catalog foorepo someargument' is specified
-        out().warning(_("Ingoring arguments, marking the entire repository."));
+        out().warning(_("Ignoring arguments, marking the entire repository."));
       _arguments.clear();
       _arguments.push_back("*");
       _copts["from"] = _copts["entire-catalog"];
