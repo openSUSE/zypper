@@ -32,17 +32,17 @@ namespace zypp
 	RpmInstallPackageReceiver::~RpmInstallPackageReceiver ()
 	{
 	}
-	
-	void RpmInstallPackageReceiver::reportbegin() 
+
+	void RpmInstallPackageReceiver::reportbegin()
 	{
 	}
-	
-	void RpmInstallPackageReceiver::reportend() 
+
+	void RpmInstallPackageReceiver::reportend()
 	{
 	}
 
         /** Start the operation */
-        void RpmInstallPackageReceiver::start( const Pathname & name ) 
+        void RpmInstallPackageReceiver::start( const Pathname & name )
 	{
 	    _report->start( _resolvable );
 	    _abort = false;
@@ -57,26 +57,26 @@ namespace zypp
 	    _abort = ! _report->progress( percent, _resolvable );
 	    return _abort;
 	}
-	
-	rpm::RpmInstallReport::Action 
+
+	rpm::RpmInstallReport::Action
 	RpmInstallPackageReceiver::problem( Exception & excpt_r )
 	{
-	    rpm::InstallResolvableReport::Action user = 
+	    rpm::InstallResolvableReport::Action user =
 		_report->problem( _resolvable
 		    , rpm::InstallResolvableReport::INVALID
-		    , excpt_r.asUserString()
+		    , excpt_r.asUserHistory()
 		    , _level
 		);
-		
+
 	    switch (user) {
-		case rpm::InstallResolvableReport::RETRY: 
+		case rpm::InstallResolvableReport::RETRY:
 		    return rpm::RpmInstallReport::RETRY;
-		case rpm::InstallResolvableReport::ABORT: 
+		case rpm::InstallResolvableReport::ABORT:
 		    return rpm::RpmInstallReport::ABORT;
-		case rpm::InstallResolvableReport::IGNORE: 
+		case rpm::InstallResolvableReport::IGNORE:
 		    return rpm::RpmInstallReport::IGNORE;
 	    }
-	    
+
 	    return rpm::RpmInstallReport::problem( excpt_r );
 	}
 
@@ -91,7 +91,7 @@ namespace zypp
 	{
 	    _report->finish( _resolvable, rpm::InstallResolvableReport::INVALID, std::string(), _level );
 	}
-	
+
 	void RpmInstallPackageReceiver::tryLevel( target::rpm::InstallResolvableReport::RpmLevel level_r )
 	{
 	    _level = level_r;
@@ -112,17 +112,17 @@ namespace zypp
 	RpmRemovePackageReceiver::~RpmRemovePackageReceiver ()
 	{
 	}
-	
-	void RpmRemovePackageReceiver::reportbegin() 
+
+	void RpmRemovePackageReceiver::reportbegin()
 	{
 	}
-	
-	void RpmRemovePackageReceiver::reportend() 
+
+	void RpmRemovePackageReceiver::reportend()
 	{
 	}
 
         /** Start the operation */
-        void RpmRemovePackageReceiver::start( const std::string & name ) 
+        void RpmRemovePackageReceiver::start( const std::string & name )
 	{
 	    _report->start( _resolvable );
 	}
@@ -136,25 +136,25 @@ namespace zypp
 	    _abort = ! _report->progress( percent, _resolvable );
 	    return _abort;
 	}
-	
-	rpm::RpmRemoveReport::Action 
+
+	rpm::RpmRemoveReport::Action
 	RpmRemovePackageReceiver::problem( Exception & excpt_r )
 	{
-	    rpm::RemoveResolvableReport::Action user = 
+	    rpm::RemoveResolvableReport::Action user =
 		_report->problem( _resolvable
 		    , rpm::RemoveResolvableReport::INVALID
-		    , excpt_r.asUserString()
+		    , excpt_r.asUserHistory()
 		);
-		
+
 	    switch (user) {
-		case rpm::RemoveResolvableReport::RETRY: 
+		case rpm::RemoveResolvableReport::RETRY:
 		    return rpm::RpmRemoveReport::RETRY;
-		case rpm::RemoveResolvableReport::ABORT: 
+		case rpm::RemoveResolvableReport::ABORT:
 		    return rpm::RpmRemoveReport::ABORT;
-		case rpm::RemoveResolvableReport::IGNORE: 
+		case rpm::RemoveResolvableReport::IGNORE:
 		    return rpm::RpmRemoveReport::IGNORE;
 	    }
-	    
+
 	    return rpm::RpmRemoveReport::problem( excpt_r );
 	}
 

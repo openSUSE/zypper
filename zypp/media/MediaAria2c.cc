@@ -48,9 +48,9 @@
 using namespace std;
 using namespace zypp::base;
 
-namespace zypp 
+namespace zypp
 {
-namespace media 
+namespace media
 {
 
 Pathname MediaAria2c::_cookieFile = "/var/lib/YaST2/cookies";
@@ -70,7 +70,7 @@ MediaAria2c::existsAria2cmd()
     };
 
     ExternalProgram aria(argv, ExternalProgram::Stderr_To_Stdout);
-	   
+
     std::string ariaResponse( aria.receiveLine());
     string::size_type pos = ariaResponse.find('/', 0 );
     if( pos != string::npos )
@@ -138,7 +138,7 @@ MediaAria2c::MediaAria2c( const Url &      url_r,
                     true ) // does_download
 {
   MIL << "MediaAria2c::MediaAria2c(" << url_r << ", " << attach_point_hint_r << ")" << endl;
-      
+
   if( !attachPoint().empty())
   {
     PathInfo ainfo(attachPoint());
@@ -169,7 +169,7 @@ MediaAria2c::MediaAria2c( const Url &      url_r,
 void MediaAria2c::attachTo (bool next)
 {
    // clear last arguments
-   _args.clear();   
+   _args.clear();
 
   if ( next )
     ZYPP_THROW(MediaNotSupportedException(_url));
@@ -187,7 +187,7 @@ void MediaAria2c::attachTo (bool next)
     setAttachPoint( mountpoint, true);
   }
 
-  disconnectFrom(); 
+  disconnectFrom();
 
   // Build the aria command.
   _args.push_back(_aria2cPath.asString());
@@ -195,12 +195,12 @@ void MediaAria2c::attachTo (bool next)
   _args.push_back("--summary-interval=1");
   _args.push_back("--follow-metalink=mem");
   _args.push_back( "--check-integrity=true");
-  
+
    // add the anonymous id.
    _args.push_back(str::form("--header=%s", anonymousIdHeader() ));
    _args.push_back(str::form("--header=%s", distributionFlavorHeader() ));
   // TODO add debug option
-   
+
   // Transfer timeout
   {
     _xfer_timeout = TRANSFER_TIMEOUT;
@@ -231,11 +231,11 @@ void MediaAria2c::attachTo (bool next)
       DBG << "Anonymous FTP identification: '" << id << "'" << endl;
       _userpwd = "anonymous:" + id;
     }
-  } 
-  else 
+  }
+  else
   {
      if ( _url.getScheme() == "ftp" )
-     { 
+     {
          _args.push_back(str::form("--ftp-user=%s", _url.getUsername().c_str() ));
      }
      else if ( _url.getScheme() == "http" ||
@@ -243,11 +243,11 @@ void MediaAria2c::attachTo (bool next)
     {
         _args.push_back(str::form("--http-user=%s", _url.getUsername().c_str() ));
     }
-     
+
     if ( _url.getPassword().size() )
     {
       if ( _url.getScheme() == "ftp" )
-      { 
+      {
           _args.push_back(str::form("--ftp-passwd=%s", _url.getPassword().c_str() ));
       }
       else if ( _url.getScheme() == "http" ||
@@ -260,7 +260,7 @@ void MediaAria2c::attachTo (bool next)
 
   // note, aria2c does not support setting the auth type with
   // (basic, digest yet)
-  
+
 
   /*---------------------------------------------------------------*
    CURLOPT_PROXY: host[:port]
@@ -343,7 +343,7 @@ void MediaAria2c::attachTo (bool next)
 
     if ( ! _proxyuserpwd.empty() ) {
         _args.push_back(str::form("--http-proxy-user=%s", _proxyuserpwd.c_str() ));
-      
+
       string proxypassword( _url.getQueryParam( "proxypassword" ) );
       if ( ! proxypassword.empty() ) {
           _args.push_back(str::form("--http-proxy-passwd=%s", proxypassword.c_str() ));
@@ -358,7 +358,7 @@ void MediaAria2c::attachTo (bool next)
   // FIXME: need a derived class to propelly compare url's
   MediaSourceRef media( new MediaSource(_url.getScheme(), _url.asString()));
   setMediaSource(media);
-	
+
 }
 
 bool
@@ -407,7 +407,7 @@ static Url getFileUrl(const Url & url, const Pathname & filename)
 void MediaAria2c::getFile( const Pathname & filename ) const
 {
     // Use absolute file name to prevent access of files outside of the
-    // hierarchy below the attach point.    
+    // hierarchy below the attach point.
     getFileCopy(filename, localPath(filename).absolutename());
 }
 
@@ -415,28 +415,28 @@ void MediaAria2c::getFileCopy( const Pathname & filename , const Pathname & targ
 {
   callback::SendReport<DownloadProgressReport> report;
 
-  Url fileurl(getFileUrl(_url, filename));  
+  Url fileurl(getFileUrl(_url, filename));
 
   bool retry = false;
 
   ExternalProgram::Arguments args = _args;
   args.push_back(str::form("--dir=%s", target.dirname().c_str()));
   args.push_back(fileurl.asString());
-  
+
   do
   {
     try
-    {	
-      report->start(_url, target.asString() );	
-        
-      ExternalProgram aria(args, ExternalProgram::Stderr_To_Stdout);	   
-      int nLine = 0;   
+    {
+      report->start(_url, target.asString() );
+
+      ExternalProgram aria(args, ExternalProgram::Stderr_To_Stdout);
+      int nLine = 0;
 
       //Process response
       for(std::string ariaResponse( aria.receiveLine());
-          ariaResponse.length(); 
+          ariaResponse.length();
           ariaResponse = aria.receiveLine())
-      { 
+      {
         //cout << ariaResponse;
 
         if (!ariaResponse.substr(0,31).compare("Exception: Authorization failed") )
@@ -448,11 +448,11 @@ void MediaAria2c::getFileCopy( const Pathname & filename , const Pathname & targ
         if (!ariaResponse.substr(0,29).compare("Exception: Resource not found") )
         {
             ZYPP_THROW(MediaFileNotFoundException(_url, filename));
-        }        
+        }
 
         if (!ariaResponse.substr(0,9).compare("[#2 SIZE:")) {
-                
-          if (!nLine) 
+
+          if (!nLine)
           {
             size_t left_bound = ariaResponse.find('(',0) + 1;
             size_t count = ariaResponse.find('%',left_bound) - left_bound;
@@ -460,19 +460,19 @@ void MediaAria2c::getFileCopy( const Pathname & filename , const Pathname & targ
             //progressData.toMax();
             report->progress ( std::atoi(ariaResponse.substr(left_bound, count).c_str()), _url, -1, -1 );
             nLine = 1;
-          } 
+          }
           else
           {
             nLine = 0;
-          }		     
-        } 
+          }
+        }
       }
       aria.close();
-        
+
       report->finish( _url ,  zypp::media::DownloadProgressReport::NO_ERROR, "");
       retry = false;
     }
- 
+
     // retry with proper authentication data
     catch (MediaUnauthorizedException & ex_r)
     {
@@ -480,7 +480,7 @@ void MediaAria2c::getFileCopy( const Pathname & filename , const Pathname & targ
         retry = true;
       else
       {
-        report->finish(fileurl, zypp::media::DownloadProgressReport::ACCESS_DENIED, ex_r.asUserString());
+        report->finish(fileurl, zypp::media::DownloadProgressReport::ACCESS_DENIED, ex_r.asUserHistory());
         ZYPP_RETHROW(ex_r);
       }
 
@@ -489,7 +489,7 @@ void MediaAria2c::getFileCopy( const Pathname & filename , const Pathname & targ
     catch (MediaException & excpt_r)
     {
       // FIXME: error number fix
-      report->finish(fileurl, zypp::media::DownloadProgressReport::ERROR, excpt_r.asUserString());
+      report->finish(fileurl, zypp::media::DownloadProgressReport::ERROR, excpt_r.asUserHistory());
       ZYPP_RETHROW(excpt_r);
     }
   }
@@ -530,7 +530,7 @@ bool MediaAria2c::getDoesFileExist( const Pathname & filename ) const
 
 bool MediaAria2c::doGetDoesFileExist( const Pathname & filename ) const
 {
-	
+
   DBG << filename.asString() << endl;
   return true;
 }
@@ -584,7 +584,7 @@ void MediaAria2c::getDirInfo( filesystem::DirContent & retlist,
   getDirectoryYast( retlist, dirname, dots );
 }
 
-std::string MediaAria2c::getAria2cVersion() 
+std::string MediaAria2c::getAria2cVersion()
 {
     const char* argv[] =
     {
@@ -605,7 +605,7 @@ std::string MediaAria2c::getAria2cVersion()
 Pathname MediaAria2c::whereisAria2c()
 {
     Pathname aria2cPathr(ARIA_DEFAULT_BINARY);
-    
+
     const char* argv[] =
     {
       "whereis",
@@ -615,23 +615,23 @@ Pathname MediaAria2c::whereisAria2c()
     };
 
     ExternalProgram aria(argv, ExternalProgram::Stderr_To_Stdout);
-	   
+
     std::string ariaResponse( aria.receiveLine());
     aria.close();
-    
+
     string::size_type pos = ariaResponse.find('/', 0 );
-    if( pos != string::npos ) 
+    if( pos != string::npos )
     {
         aria2cPathr = ariaResponse;
         string::size_type pose = ariaResponse.find(' ', pos + 1 );
         aria2cPathr = ariaResponse.substr( pos , pose - pos );
         MIL << "We will use aria2c located here:  " << ariaResponse.substr( pos , pose - pos) << endl;
     }
-    else 
+    else
     {
         MIL << "We don't know were is ari2ac binary. We will use aria2c located here:  " << aria2cPathr << endl;
     }
-    
+
     return aria2cPathr;
 }
 

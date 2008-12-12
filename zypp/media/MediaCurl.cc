@@ -846,7 +846,7 @@ void MediaCurl::getFileCopy( const Pathname & filename , const Pathname & target
         retry = true;
       else
       {
-        report->finish(fileurl, zypp::media::DownloadProgressReport::ACCESS_DENIED, ex_r.asUserString());
+        report->finish(fileurl, zypp::media::DownloadProgressReport::ACCESS_DENIED, ex_r.asUserHistory());
         ZYPP_RETHROW(ex_r);
       }
     }
@@ -854,7 +854,7 @@ void MediaCurl::getFileCopy( const Pathname & filename , const Pathname & target
     catch (MediaException & excpt_r)
     {
       // FIXME: error number fix
-      report->finish(fileurl, zypp::media::DownloadProgressReport::ERROR, excpt_r.asUserString());
+      report->finish(fileurl, zypp::media::DownloadProgressReport::ERROR, excpt_r.asUserHistory());
       ZYPP_RETHROW(excpt_r);
     }
   }

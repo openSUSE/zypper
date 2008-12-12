@@ -68,6 +68,20 @@ namespace zypp
     return _(str.str().c_str());
   }
 
+  std::string Exception::asUserHistory() const
+  {
+    if ( historyEmpty() )
+      return asUserString();
+
+    std::string ret( asUserString() );
+    if ( ret.empty() )
+      return historyAsString();
+
+    ret += '\n';
+    ret += historyAsString();
+    return ret;
+  }
+
   void Exception::remember( const Exception & old_r )
   {
     if ( &old_r != this ) // no self-remember

@@ -181,7 +181,9 @@ namespace zypp
     /** Error message provided by \ref dumpOn as string. */
     std::string asString() const;
 
-    /** Translated error message as string suitable for the user. */
+    /** Translated error message as string suitable for the user.
+     * \see \ref asUserStringHistory
+    */
     std::string asUserString() const;
 
   public:
@@ -227,6 +229,8 @@ namespace zypp
     */
     std::string historyAsString() const;
 
+    /** A single (multiline) string composed of \ref asUserString  and  \ref historyAsString. */
+    std::string asUserHistory() const;
     //@}
 
   protected:

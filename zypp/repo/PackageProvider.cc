@@ -122,7 +122,7 @@ namespace zypp
 
                 // TranslatorExplanation %s = name of the package being processed.
                 std::string detail_str( str::form(_("Failed to provide Package %s. Do you want to retry retrieval?"), package_str.c_str() ) );
-                detail_str += str::form( "\n\n%s\n%s", excpt.asUserString().c_str(), excpt.historyAsString().c_str() );
+                detail_str += str::form( "\n\n%s", excpt.asUserHistory().c_str() );
 
                 switch ( report()->problem( _package, repo::DownloadResolvableReport::IO, detail_str.c_str() ) )
                 {
@@ -214,7 +214,7 @@ namespace zypp
         }
       catch ( const Exception & excpt )
         {
-          report()->problemDeltaDownload( excpt.asUserString() );
+          report()->problemDeltaDownload( excpt.asUserHistory() );
           return ManagedFile();
         }
       report()->finishDeltaDownload();
