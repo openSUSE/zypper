@@ -14,7 +14,7 @@ msgstr ""
 "Project-Id-Version: zypper.de\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2008-12-11 11:15+0100\n"
-"PO-Revision-Date: Sat Nov 22 14:15:55 UTC 2008\n"
+"PO-Revision-Date: Tue Dec 16 09:13:55 UTC 2008\n"
 "Last-Translator: Marko Schugardt <mail.sapex@gmx.de>\n"
 "Language-Team: German <opensuse-translation-de@opensuse.org>\n"
 "MIME-Version: 1.0\n"
@@ -2555,7 +2555,7 @@ msgstr ""
 #. translators: this option belongs to 'install' command
 #: ../src/Zypper.cc:906
 msgid "    --from <alias|#|URI>        Select packages only from specified repository.\n"
-msgstr ""
+msgstr "    --from <Alias|#|URI>        Nur Pakete aus den festgelegten Repositories w√§hlen.\n"
 
 #. TranslatorExplanation the first %s = "package, patch, pattern, product"
 #. and the second %s = "package"
@@ -3739,7 +3739,7 @@ msgstr "Zum Installieren oder Deinstallieren von Paketen werden Root-Rechte ben√
 #. 'zypper in --entire-catalog foorepo someargument' is specified
 #: ../src/Zypper.cc:3002
 msgid "Ignoring arguments, marking the entire repository."
-msgstr ""
+msgstr "Argumente werden ignoriert, markiere das gesamte Repository."
 
 #: ../src/Zypper.cc:3012
 #, c-format
