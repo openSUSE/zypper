@@ -39,13 +39,14 @@ namespace zypp
 
   public:
     typedef sat::ArrayAttr<PackageKeyword,IdString> Keywords;
+    typedef sat::ArrayAttr<std::string,std::string> FileList;
 
   public:
 
     /**
      * Returns the level of supportability the vendor
      * gives to this package.
-     * 
+     *
      * This is one value from \ref VendorSupportOption
      */
     VendorSupportOption vendorSupport() const;
@@ -77,8 +78,15 @@ namespace zypp
     ByteCount sourcesize() const;
     /** */
     std::list<std::string> authors() const;
-    /** */
-    std::list<std::string> filenames() const;
+
+    /** Return the packages filelist (if available).
+     * The returned \ref FileList appears to be a container of
+     * \c std::string. In fact it is a query, so it does not
+     * consume much memory.
+    */
+    FileList filelist() const;
+    /** \deprecated Use filelist, it's faster and saves memeory. */
+    std::list<std::string> filenames() const ZYPP_DEPRECATED;
 
     /** Name of the source rpm this package was built from.
      */

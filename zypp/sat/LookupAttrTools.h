@@ -172,7 +172,8 @@ namespace zypp
         {}
 
       public:
-        typedef sat::LookupAttr::transformIterator<_ResultT,_AttrT> iterator;
+        typedef LookupAttr::transformIterator<_ResultT,_AttrT> iterator;
+        typedef LookupAttr::size_type size_type;
 
         iterator begin() const
         { return iterator( _q.begin() ); }
@@ -182,6 +183,14 @@ namespace zypp
 
         bool empty() const
         { return _q.empty(); }
+
+        size_type size() const
+        {
+          size_type count = 0;
+          for_( it, begin(), end() )
+            ++count;
+          return count;
+        }
 
       public:
 

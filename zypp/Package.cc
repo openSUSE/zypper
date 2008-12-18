@@ -122,15 +122,13 @@ namespace zypp
     return ret;
   }
 
+  Package::FileList Package::filelist() const
+  { return FileList( sat::SolvAttr::filelist, satSolvable() ); }
+
   std::list<std::string> Package::filenames() const
   {
-    std::list<std::string> files;
-    sat::LookupAttr q( sat::SolvAttr::filelist, *this );
-    for_( it, q.begin(), q.end() )
-    {
-        files.push_back(it.asString());
-    }
-    return files;
+    FileList f( filelist() );
+    return std::list<std::string>( f.begin(), f.end() );
   }
 
   CheckSum Package::checksum() const

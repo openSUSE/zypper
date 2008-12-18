@@ -1,4 +1,11 @@
 -------------------------------------------------------------------
+Thu Dec 18 13:02:27 CET 2008 - ma@suse.de
+
+- Add Package::filelist, faster and less memory consuming 
+  implementation of Package::filenames (now deprecated).
+- revision 11949
+
+-------------------------------------------------------------------
 Thu Dec 11 21:39:50 CET 2008 - ma@suse.de
 
 - Add str::hexencode and str::hexdecode to encode special characters 
