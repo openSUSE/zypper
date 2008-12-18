@@ -85,7 +85,7 @@ namespace zypp
      * consume much memory.
     */
     FileList filelist() const;
-    /** \deprecated Use filelist, it's faster and saves memeory. */
+    /** \deprecated Use filelist, it's faster and saves memory. */
     std::list<std::string> filenames() const ZYPP_DEPRECATED;
 
     /** Name of the source rpm this package was built from.
