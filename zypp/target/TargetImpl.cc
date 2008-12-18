@@ -616,6 +616,11 @@ namespace zypp
       MIL << "Target loaded: " << system.solvablesSize() << " resolvables" << endl;
     }
 
+    ///////////////////////////////////////////////////////////////////
+    //
+    // COMMIT
+    //
+    ///////////////////////////////////////////////////////////////////
     ZYppCommitResult TargetImpl::commit( ResPool pool_r, const ZYppCommitPolicy & policy_rX )
     {
       // ----------------------------------------------------------------- //
@@ -702,7 +707,7 @@ namespace zypp
       ///////////////////////////////////////////////////////////////////
       // Remove/install packages.
       ///////////////////////////////////////////////////////////////////
-     commit (to_uninstall, policy_r, pool_r );
+     commit ( to_uninstall, policy_r, pool_r );
 
       if (policy_r.restrictToMedia() == 0)
       {			// commit all
@@ -765,6 +770,11 @@ namespace zypp
     }
 
 
+    ///////////////////////////////////////////////////////////////////
+    //
+    // COMMIT internal
+    //
+    ///////////////////////////////////////////////////////////////////
     TargetImpl::PoolItemList
     TargetImpl::commit( const TargetImpl::PoolItemList & items_r,
                         const ZYppCommitPolicy & policy_r,
@@ -794,6 +804,12 @@ namespace zypp
             {
               localfile = packageCache.get( it );
             }
+            catch ( const AbortRequestException &e )
+            {
+              WAR << "commit aborted by the user" << endl;
+              abort = true;
+              break;
+            }
             catch ( const SkipRequestException &e )
             {
               ZYPP_CAUGHT( e );
@@ -812,8 +828,9 @@ namespace zypp
 #warning Exception handling
             // create a installation progress report proxy
             RpmInstallPackageReceiver progress( it->resolvable() );
-            progress.connect();
-            bool success = true;
+            progress.connect(); // disconnected on destruction.
+
+            bool success = false;
             rpm::RpmInstFlags flags;
             // Why force and nodeps?
             //
@@ -839,27 +856,34 @@ namespace zypp
               if ( progress.aborted() )
               {
                 WAR << "commit aborted by the user" << endl;
-                progress.disconnect();
-                success = false;
                 abort = true;
                 break;
               }
+              else
+              {
+                success = true;
+              }
             }
-            catch (Exception & excpt_r)
+            catch ( Exception & excpt_r )
             {
               ZYPP_CAUGHT(excpt_r);
               if ( policy_r.dryRun() )
               {
                 WAR << "dry run failed" << endl;
-                progress.disconnect();
                 break;
               }
               // else
-              WAR << "Install failed" << endl;
+              if ( progress.aborted() )
+              {
+                WAR << "commit aborted by the user" << endl;
+                abort = true;
+              }
+              else
+              {
+                WAR << "Install failed" << endl;
+              }
               remaining.push_back( *it );
-              progress.disconnect();
-              success = false;
-              break;
+              break; // stop
             }
 
             if ( success && !policy_r.dryRun() )
@@ -868,14 +892,13 @@ namespace zypp
               // Remember to check this package for presence of patch scripts.
               successfullyInstalledPackages.push_back( it->satSolvable() );
             }
-            progress.disconnect();
           }
           else
           {
-            bool success = true;
-
             RpmRemovePackageReceiver progress( it->resolvable() );
-            progress.connect();
+            progress.connect(); // disconnected on destruction.
+
+            bool success = false;
             rpm::RpmInstFlags flags( rpm::RPMINST_NODEPS );
             if (policy_r.dryRun()) flags |= rpm::RPMINST_TEST;
             try
@@ -886,24 +909,30 @@ namespace zypp
               if ( progress.aborted() )
               {
                 WAR << "commit aborted by the user" << endl;
-                progress.disconnect();
-                success = false;
                 abort = true;
                 break;
+              }
+              else
+              {
+                success = true;
               }
             }
             catch (Exception & excpt_r)
             {
-              WAR << "removal of " << p << " failed";
-              success = false;
               ZYPP_CAUGHT( excpt_r );
+              if ( progress.aborted() )
+              {
+                WAR << "commit aborted by the user" << endl;
+                abort = true;
+                break;
+              }
+              // else
+              WAR << "removal of " << p << " failed";
             }
-            if (success
-                && !policy_r.dryRun())
+            if ( success && !policy_r.dryRun() )
             {
               it->status().resetTransact( ResStatus::USER );
             }
-            progress.disconnect();
           }
         }
         else if ( ! policy_r.dryRun() ) // other resolvables (non-Package)

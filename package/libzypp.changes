@@ -1,4 +1,11 @@
 -------------------------------------------------------------------
+Thu Dec 18 22:26:18 CET 2008 - ma@suse.de
+
+- Fixed lost user request to abort during commit. (bnc #388810, bnc #450273)
+- revision 11954
+- version 5.25.0 (23)
+
+-------------------------------------------------------------------
 Thu Dec 18 13:02:27 CET 2008 - ma@suse.de
 
 - Add Package::filelist, faster and less memory consuming 

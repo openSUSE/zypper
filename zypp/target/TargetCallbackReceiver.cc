@@ -72,6 +72,7 @@ namespace zypp
 		case rpm::InstallResolvableReport::RETRY:
 		    return rpm::RpmInstallReport::RETRY;
 		case rpm::InstallResolvableReport::ABORT:
+                    _abort = true;
 		    return rpm::RpmInstallReport::ABORT;
 		case rpm::InstallResolvableReport::IGNORE:
 		    return rpm::RpmInstallReport::IGNORE;
@@ -125,6 +126,7 @@ namespace zypp
         void RpmRemovePackageReceiver::start( const std::string & name )
 	{
 	    _report->start( _resolvable );
+            _abort = false;
 	}
 
         /**
@@ -150,6 +152,7 @@ namespace zypp
 		case rpm::RemoveResolvableReport::RETRY:
 		    return rpm::RpmRemoveReport::RETRY;
 		case rpm::RemoveResolvableReport::ABORT:
+                    _abort = true;
 		    return rpm::RpmRemoveReport::ABORT;
 		case rpm::RemoveResolvableReport::IGNORE:
 		    return rpm::RpmRemoveReport::IGNORE;
