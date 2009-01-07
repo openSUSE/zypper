@@ -581,6 +581,21 @@ class MediaAria2cInitException : public MediaException
       std::string _msg;
     };
 
+    /** For HTTP 503 and similar. */
+    class MediaTemporaryProblemException : public MediaException
+    {
+    public:
+      MediaTemporaryProblemException(const Url & url_r, const std::string & msg = "Temporary problem")
+      : MediaException(msg)
+      , _url(url_r.asString()), _msg(msg)
+      {}
+      virtual ~MediaTemporaryProblemException() throw() {};
+    protected:
+      virtual std::ostream & dumpOn( std::ostream & str ) const;
+      std::string _url;
+      std::string _msg;
+    };
+
     class MediaBadCAException : public MediaException
     {
     public:
@@ -598,10 +613,10 @@ class MediaAria2cInitException : public MediaException
     /**
      * Thrown if /sbin/losetup fails to find an unused loop device for mounting
      * an .iso image.
-     * 
+     *
      * UI hint: tell user to check permissions to read /dev/loop# or enablement
      * of support for loop devices.
-     * 
+     *
      * \see MediaISO
      */
     class MediaNoLoopDeviceException : public MediaException

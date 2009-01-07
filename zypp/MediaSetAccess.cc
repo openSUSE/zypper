@@ -185,7 +185,8 @@ IMPL_PTR_TYPE(MediaSetAccess);
           {
             reason = media::MediaChangeReport::WRONG;
           }
-          else if( typeid(excp) == typeid( media::MediaTimeoutException))
+          else if( typeid(excp) == typeid( media::MediaTimeoutException) ||
+                   typeid(excp) == typeid( media::MediaTemporaryProblemException))
           {
             reason = media::MediaChangeReport::IO_SOFT;
           }
@@ -314,7 +315,8 @@ IMPL_PTR_TYPE(MediaSetAccess);
           {
             reason = media::MediaChangeReport::WRONG;
           }
-          else if( typeid(excp) == typeid( media::MediaTimeoutException))
+          else if( typeid(excp) == typeid( media::MediaTimeoutException) ||
+                   typeid(excp) == typeid( media::MediaTemporaryProblemException))
           {
             reason = media::MediaChangeReport::IO_SOFT;
           }

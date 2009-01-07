@@ -1062,9 +1062,11 @@ bool MediaCurl::doGetDoesFileExist( const Pathname & filename ) const
                                                 &httpReturnCode );
           if ( infoRet == CURLE_OK )
           {
-            string msg = "HTTP response: " +
-                          str::numstring( httpReturnCode );
-            if ( httpReturnCode == 401 ) // authorization required
+            string msg = "HTTP response: " + str::numstring( httpReturnCode );
+            bool brk = false; // break also from the parent switch
+            switch ( httpReturnCode )
+            {
+            case 401: // authorization required
             {
               std::string auth_hint = getAuthHint();
 
@@ -1075,31 +1077,31 @@ bool MediaCurl::doGetDoesFileExist( const Pathname & filename ) const
                 url, "Login failed.", _curlError, auth_hint
               ));
             }
-            else
-            if (httpReturnCode == 504) // gateway timeout
-            {
+
+            case 503: // service temporarily unavailable (bnc #462545)
+              ZYPP_THROW(MediaTemporaryProblemException(url));
+
+            case 504: // gateway timeout
               ZYPP_THROW(MediaTimeoutException(url));
-            }
-            else
-            if ( httpReturnCode == 403) // access denied
-            {
+
+            case 403: // access denied
                ZYPP_THROW(MediaForbiddenException(url));
-            }
-            else
-            if ( httpReturnCode == 404) // not found
-            {
+
+            case 404: // not found
                err_file_not_found = true;
+               brk = true;
                break;
             }
 
-            msg += err;
+            if (brk)
+              break;
+
             DBG << msg << " (URL: " << url.asString() << ")" << std::endl;
             ZYPP_THROW(MediaCurlException(url, msg, _curlError));
           }
           else
           {
             string msg = "Unable to retrieve HTTP response:";
-            msg += err;
             DBG << msg << " (URL: " << url.asString() << ")" << std::endl;
             ZYPP_THROW(MediaCurlException(url, msg, _curlError));
           }
@@ -1298,12 +1300,14 @@ void MediaCurl::doGetFileCopy( const Pathname & filename , const Pathname & targ
             CURLcode infoRet = curl_easy_getinfo( _curl,
                                                   CURLINFO_RESPONSE_CODE,
                                                   &httpReturnCode );
-            if ( infoRet == CURLE_OK ) {
-              string msg = "HTTP response: " +
-                           str::numstring( httpReturnCode );
-              if ( httpReturnCode == 401 )
+            if ( infoRet == CURLE_OK )
+            {
+              string msg = "HTTP response: " + str::numstring( httpReturnCode );
+              switch ( httpReturnCode )
               {
-                std::string auth_hint = getAuthHint();
+              case 401:
+              {
+                string auth_hint = getAuthHint();
 
                 DBG << msg << " Login failed (URL: " << url.asString() << ")" << std::endl;
                 DBG << "MediaUnauthorizedException auth hint: '" << auth_hint << "'" << std::endl;
@@ -1312,30 +1316,26 @@ void MediaCurl::doGetFileCopy( const Pathname & filename , const Pathname & targ
                   url, "Login failed.", _curlError, auth_hint
                 ));
               }
-              else
-              if (httpReturnCode == 504) // gateway timeout
-              {
+
+              case 503: // service temporarily unavailable (bnc #462545)
+                ZYPP_THROW(MediaTemporaryProblemException(url));
+
+              case 504: // gateway timeout
                 ZYPP_THROW(MediaTimeoutException(url));
-              }
-              else
-              if ( httpReturnCode == 403)
-              {
+
+              case 403:
                  ZYPP_THROW(MediaForbiddenException(url));
-              }
-              else
-              if ( httpReturnCode == 404)
-              {
+
+              case 404:
                  ZYPP_THROW(MediaFileNotFoundException(_url, filename));
               }
 
-              msg += err;
               DBG << msg << " (URL: " << url.asString() << ")" << std::endl;
               ZYPP_THROW(MediaCurlException(url, msg, _curlError));
             }
             else
             {
               string msg = "Unable to retrieve HTTP response:";
-              msg += err;
               DBG << msg << " (URL: " << url.asString() << ")" << std::endl;
               ZYPP_THROW(MediaCurlException(url, msg, _curlError));
             }

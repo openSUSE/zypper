@@ -256,7 +256,14 @@ namespace zypp
     std::ostream & MediaTimeoutException::dumpOn( std::ostream & str ) const
     {
       if (_msg.empty())
-        return str << form(_("Timeout exceed when access '%s'."), _url.c_str()) << endl;
+        return str << form(_("Timeout exceeded when access '%s'."), _url.c_str()) << endl;
+      return str << _msg << endl;
+    }
+
+    std::ostream & MediaTemporaryProblemException::dumpOn( std::ostream & str ) const
+    {
+      if (_msg.empty())
+        return str << form(_("Location '%s' is temporarily unaccessible."), _url.c_str()) << endl;
       return str << _msg << endl;
     }
 
