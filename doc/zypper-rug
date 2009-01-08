@@ -33,7 +33,7 @@ N1: zypp does not have this concept
                     N1    bundle-search (bse)          Search for bundles
                     N1    bundle-types (bt)            List the available bundle types
                     N1    bundle-upgrade (bup)         Upgrade bundles
-                    ++    catalogs (ca)                List the available catalogs
+ repos              ++    catalogs (ca)                List the available catalogs
                     ?     subscribe (sub)              Subscribe to catalogs
                     ?     unsubscribe (unsub)          Unsubscribe to catalogs
 
@@ -94,13 +94,13 @@ search -t pattern   +     patch-search (pse)           Search for patches matchi
                     N1    key-list (kl)                Display whitelisted keys for a service
                         
                         Service management:
-                    ++    mount                        Mount directory as a channel
+ ar -t plaindir     ++    mount                        Mount directory as a channel
                     ++    refresh (ref)                Refresh all or some services
                     ?     register (reg)               Register a service
- addrepo            ++    service-add (sa)             Add a service
- removerepo         ++    service-delete (sd)          Delete a service
- repos              ++    service-list (sl)            List the available services
-                    ++    service-types (st)           List the available service types
+ addservice (as)    ++    service-add (sa)             Add a service
+ removservice (rs)  ++    service-delete (sd)          Delete a service
+ services (ls)      ++    service-list (sl)            List the available services
+                    +D    service-types (st)           List the available service types
                         
                         System:
                     ++    clean-cache (cc)             Clean the HTTP cache
