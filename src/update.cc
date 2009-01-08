@@ -614,7 +614,7 @@ mark_patch_updates( Zypper & zypper, bool skip_interactive )
       for_(it, God->pool().proxy().byKindBegin(ResKind::patch),
                God->pool().proxy().byKindEnd  (ResKind::patch))
       {
-        if (mark_patch_update((*it)->candidateObj(), skip_interactive, ignore_affects_pm))
+        if (mark_patch_update(findTheBest(God->pool(),**it), skip_interactive, ignore_affects_pm))
           any_marked = true;
       }
     }
@@ -646,7 +646,7 @@ mark_patch_updates( Zypper & zypper, bool skip_interactive )
         {
           for_(pit, q.selectableBegin(), q.selectableEnd())
           {
-            any_marked = mark_patch_update((*pit)->candidateObj(), skip_interactive, ignore_affects_pm);
+            any_marked = mark_patch_update(findTheBest(God->pool(),**pit), skip_interactive, ignore_affects_pm);
           }
         }
       }
