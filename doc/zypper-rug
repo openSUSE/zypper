@@ -4,7 +4,7 @@ status symbols:
 
  +: to be implemented
 ++: already implemented
-+1: patch-check does something similar
++D: dummy implementation (does nothing, or fakes the functionality)
  N: not implemented
 N1: zypp does not have this concept
  ?: undecided
@@ -33,10 +33,10 @@ N1: zypp does not have this concept
                     N1    bundle-search (bse)          Search for bundles
                     N1    bundle-types (bt)            List the available bundle types
                     N1    bundle-upgrade (bup)         Upgrade bundles
-                    ?     catalogs (ca)                List the available catalogs
+                    ++    catalogs (ca)                List the available catalogs
                     ?     subscribe (sub)              Subscribe to catalogs
                     ?     unsubscribe (unsub)          Unsubscribe to catalogs
-                       
+
                        File management:
                     N1      bundle-files (bf)            Show the files in a given file bundle
 
@@ -54,7 +54,7 @@ N1: zypp does not have this concept
                     +     info-provides (ip)           List package's provides
                     +     info-requirements (ir)       List package's requirements
                     ++    install (in)                 Install packages
-                    +     list-resolvables (lr)        List Available Resolvable Types
+                    +D    list-resolvables (lr)        List Available Resolvable Types
                     ++    list-updates (lu)            Show the available updates.
                     +     package-file (pf)            Get package which contains file
                     ++    packages (pa)                Show the packages in a given catalog
@@ -62,13 +62,13 @@ search -t pattern   +     patch-search (pse)           Search for patches matchi
                     ++    remove (rm)                  Remove packages
                     N1    rollback (ro)                Rollback packages to a specified date
                     ++    search (se)                  Search for packages matching a pattern
-                    +1    summary (sum)                Show a per-catalog summary of available updates.
+                    ?     summary (sum)                Show a per-catalog summary of available updates.
                     ++    update (up)                  Update packages
                     ++    verify (ve)                  Verify system dependencies
                     +     what-conflicts (wc)          List packages that conflict with a given token
                     ++    what-provides (wp)           Show which packages provide a given token
                     +     what-requires (wr)           Show which packages require a given token
-                        
+ 
                         Patch management:
                     ++    patches (pch)                Show the patches in a given catalog
  info -t patch      ++    patch-info                   Show detailed information for a patch
@@ -83,18 +83,18 @@ search -t pattern   +     patch-search (pse)           Search for patches matchi
                         Preference management:
                     ?     get-prefs (get prefs)        List the system preferences that may be set
                     ?     set-prefs (set)              Set a preference variable
-                        
+ 
                         Product management:
  info -t product    ++    product-info                 Show detailed information for a product
                     ++    products (pd)                Show the products in a given catalog
                         
                         Security:
-                    ?     key-add (ka)                 Add to the list of whitelisted keys for a service
-                    ?     key-delete (kd)              Remove from the list of whitelisted keys for a service
-                    ?     key-list (kl)                Display whitelisted keys for a service
+                    N1    key-add (ka)                 Add to the list of whitelisted keys for a service
+                    N1    key-delete (kd)              Remove from the list of whitelisted keys for a service
+                    N1    key-list (kl)                Display whitelisted keys for a service
                         
                         Service management:
-                    ?     mount                        Mount directory as a channel
+                    ++    mount                        Mount directory as a channel
                     ++    refresh (ref)                Refresh all or some services
                     ?     register (reg)               Register a service
  addrepo            ++    service-add (sa)             Add a service
@@ -105,7 +105,7 @@ search -t pattern   +     patch-search (pse)           Search for patches matchi
                         System:
                     ++    clean-cache (cc)             Clean the HTTP cache
                     N1    load-modules (lm)            Load ZMD modules
-                    N1    ping                         Ping the deamon
+                    +D    ping                         Ping the deamon
                     N1    restart                      Restart the daemon
                     N1    schedules (sch)              Show scheduled items
                     N1    shutdown                     Shut down the daemon
