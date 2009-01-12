@@ -1202,6 +1202,14 @@ or by the package name.
 .I \-r, \-\-repo <alias|#|URI>
 Restrict the lock to the specified repository.
 
+.TP
+.B cleanlocks (cl)
+Remove unused locks.
+
+This command looks for locks that do not currently (with regard to
+repositories used) lock any package and for each such lock it asks user
+whether to remove it.
+
 
 .SS Other Commands
 
