@@ -1,57 +1,50 @@
-# translation of zypper.nl.po to Dutch
-# @TITLE@
-# Copyright (C) 2006, SUSE Linux GmbH, Nuremberg
+# Copyright (C) 2006 SuSE Linux Products GmbH, Nuernberg
+# This file is distributed under the same license as the package.
 #
-# This file is distributed under the same license as @PACKAGE@ package. FIRST
-#
-# Rinse de Vries <rinsedevries@kde.nl>, 2007, 2008.
-# Freek de Kruijf <f.de.kruijf@hetnet.nl>, 2008.
-# Freek de Kruijf <freek@opensuse.org>, 2008.
 msgid ""
 msgstr ""
-"Project-Id-Version: zypper.nl\n"
+"Project-Id-Version: zypper\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2008-12-11 11:15+0100\n"
-"PO-Revision-Date: 2008-12-12 09:45+0100\n"
-"Last-Translator: Freek de Kruijf <freek@opensuse.org>\n"
-"Language-Team: Dutch <Yast-nl-l10n@lists.sf.kovoks.nl>\n"
+"PO-Revision-Date: 2009-01-08 15:48\n"
+"Last-Translator: Novell Language <language@novell.com>\n"
+"Language-Team: Novell Language <language@novell.com>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: KBabel 1.11.4\n"
-"Plural-Forms: nplurals=2; plural= n != 1;\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
 #: ../src/callbacks/keyring.h:48
 #, c-format
 msgid "Accepting an unsigned file '%s'."
-msgstr "U accepteert een niet-ondertekend bestand '%s'."
+msgstr "Niet-ondertekend bestand '%s' accepteren."
 
 #: ../src/callbacks/keyring.h:52
 #, c-format
 msgid "Accepting an unsigned file '%s' from repository '%s'."
-msgstr "U accepteert een niet-ondertekend bestand '%s' uit installatiebron '%s'."
+msgstr "U accepteert een niet-ondertekend bestand '%s' uit opslagruimte '%s'."
 
 #. TranslatorExplanation: speaking of a file
 #: ../src/callbacks/keyring.h:63
 #, c-format
 msgid "File '%s' is unsigned, continue?"
-msgstr "Bestand '%s' is niet ondertekend, doorgaan?"
+msgstr "'%s' is niet ondertekend. Doorgaan?"
 
 #. TranslatorExplanation: speaking of a file
 #: ../src/callbacks/keyring.h:67
 #, c-format
 msgid "File '%s' from repository '%s' is unsigned, continue?"
-msgstr "Bestand '%s' uit installatiebron '%s' is niet ondertekend, doorgaan?"
+msgstr "Bestand '%s' uit opslagruimte '%s' is niet ondertekend, doorgaan?"
 
 #: ../src/callbacks/keyring.h:90
 #, c-format
 msgid "Accepting file '%s' signed with an unknown key '%s'."
-msgstr "Bestand '%s' geaccepteerd dat is ondertekend met een onbekende sleutel '%s'."
+msgstr "Bestand '%s' dat is ondertekend met een onbekende sleutel '%s' accepteren."
 
 #: ../src/callbacks/keyring.h:94
 #, c-format
 msgid "Accepting file '%s' from repository '%s' signed with an unknown key '%s'."
-msgstr "Bestand '%s' uit installatiebron '%s' geaccepteerd dat is ondertekend met een onbekende sleutel '%s'."
+msgstr "Bestand '%s' uit opslagruimte '%s' geaccepteerd dat is ondertekend met een onbekende sleutel '%s'."
 
 #. translators: the last %s is gpg key ID
 #: ../src/callbacks/keyring.h:104
@@ -63,7 +56,7 @@ msgstr "Bestand '%s' is ondertekend met een onbekende sleutel '%s'. Doorgaan?"
 #: ../src/callbacks/keyring.h:108
 #, c-format
 msgid "File '%s' from repository '%s' is signed with an unknown key '%s'. Continue?"
-msgstr "Bestand '%s' uit installatiebron '%s' is ondertekend met een onbekende sleutel '%s'. Doorgaan?"
+msgstr "Bestand '%s' uit opslagruimte '%s' is ondertekend met een onbekende sleutel '%s'. Doorgaan?"
 
 #: ../src/callbacks/keyring.h:125
 msgid "Automatically trusting the following key:"
@@ -71,12 +64,12 @@ msgstr "De volgende sleutel wordt automatisch vertrouwd:"
 
 #: ../src/callbacks/keyring.h:127
 msgid "New repository or package signing key received:"
-msgstr "Een nieuwe ondertekeningssleutel voor een installatiebron of pakket is ontvangen:"
+msgstr "Een nieuwe ondertekeningssleutel voor een opslagruimte of pakket is ontvangen:"
 
 #: ../src/callbacks/keyring.h:131
 #, c-format
 msgid "Key ID: %s"
-msgstr "Sleutel-ID: %s"
+msgstr "Id van sleutel: %s"
 
 #: ../src/callbacks/keyring.h:132
 #, c-format
@@ -91,7 +84,7 @@ msgstr "Vingerafdruk van sleutel: %s"
 #: ../src/callbacks/keyring.h:135
 #, c-format
 msgid "Repository: %s"
-msgstr "Installatiebron: %s"
+msgstr "Opslagruimte: %s"
 
 #. translators: this message is shown after showing description of the key
 #: ../src/callbacks/keyring.h:150
@@ -135,7 +128,7 @@ msgstr "Mislukte verificatie van de ondertekening voor bestand '%s' wordt genege
 #: ../src/callbacks/keyring.h:209
 #, c-format
 msgid "Ignoring failed signature verification for file '%s' from repository '%s'!"
-msgstr "Mislukte verificatie van de ondertekening voor bestand '%s' uit de installatiebron '%s' wordt genegeerd!"
+msgstr "Mislukte verificatie van de ondertekening voor bestand '%s' uit de opslagruimte '%s' wordt genegeerd!"
 
 #: ../src/callbacks/keyring.h:214
 msgid "Double-check this is not caused by some malicious changes in the file!"
@@ -149,15 +142,11 @@ msgstr "Verificatie van de ondertekening is mislukt voor '%s'."
 #: ../src/callbacks/keyring.h:227
 #, c-format
 msgid "Signature verification failed for file '%s' from repository '%s'."
-msgstr "Verificatie van de ondertekening is mislukt voor bestand '%s' uit de installatiebron '%s'."
+msgstr "Verificatie van de ondertekening is mislukt voor bestand '%s' uit de opslagruimte '%s'."
 
 #: ../src/callbacks/keyring.h:232
-msgid ""
-"Warning: This might be caused by a malicious change in the file!\n"
-"Continuing might be risky. Continue anyway?"
-msgstr ""
-"Waarschuwing: dit kan veroorzaakt zijn door een kwaadaardige wijzigingen in het bestand!\n"
-"Doorgaan is riskant! Wilt u toch doorgaan?"
+msgid "Warning: This might be caused by a malicious change in the file!\nContinuing might be risky. Continue anyway?"
+msgstr "Waarschuwing: dit kan veroorzaakt zijn door een kwaadaardige wijzigingen in het bestand!\nDoorgaan is riskant! Wilt u toch doorgaan?"
 
 #: ../src/callbacks/keyring.h:256
 #, c-format
@@ -168,7 +157,7 @@ msgstr "Geen samenvatting voor bestand %s."
 #: ../src/callbacks/keyring.h:288 ../src/callbacks/rpm.h:61
 #: ../src/solve-commit.cc:1041 ../src/solve-commit.cc:1065
 msgid "Continue?"
-msgstr "Doorgaan?"
+msgstr "doorgaan?"
 
 #: ../src/callbacks/keyring.h:265
 #, c-format
@@ -178,16 +167,16 @@ msgstr "Onbekende samenvatting %s voor bestand %s."
 #: ../src/callbacks/keyring.h:280
 #, c-format
 msgid "Ignoring failed digest verification for %s (expected %s, found %s)."
-msgstr "Mislukte verificatie voor samenvatting wordt genegeerd voor %s (%s werd verwacht, %s is gevonden)."
+msgstr "Mislukte verificatie voor samenvatting wordt genegeerd voor %s (%s verwacht, %s gevonden)."
 
 #: ../src/callbacks/keyring.h:287
 #, c-format
 msgid "Digest verification failed for %s. Expected %s, found %s."
-msgstr "Verificatie van de samenvatting is mislukt voor %s. %s werd verwacht, %s werd gevonden."
+msgstr "Verificatie van de samenvatting is mislukt voor %s. %s verwacht, %s gevonden."
 
 #: ../src/callbacks/locks.h:29
 msgid "The following query locks some of the objects you want to unlock:"
-msgstr "De volgende zoekopdracht blokkeert enige van de objecten die u wilt vrijgeven:"
+msgstr "De volgende zoekopdracht blokkeert een aantal van de objecten die u wilt vrijgeven:"
 
 #: ../src/callbacks/locks.h:42
 msgid "The following query does not lock anything:"
@@ -200,14 +189,12 @@ msgstr "De volgende zoekopdracht blokkeert niets:"
 #: ../src/callbacks/media.h:84
 #, c-format
 msgid "Please insert medium [%s] #%d and type 'y' to continue or 'n' to cancel the operation."
-msgstr "Plaats medium [%s] # %d en typ 'y' om verder te gaan of 'n' om de operatie te annuleren."
+msgstr "Plaats medium [%s] # %d en typ 'y' om verder te gaan of 'n' om de bewerking te annuleren."
 
-# inlognaam/gebruikersnaam
 #: ../src/callbacks/media.h:228 ../src/callbacks/media.h:235
 msgid "User Name"
 msgstr "Gebruikersnaam"
 
-# password dialog title
 #: ../src/callbacks/media.h:242
 msgid "Password"
 msgstr "Wachtwoord"
@@ -240,7 +227,7 @@ msgstr "(%s uitgepakt)"
 #: ../src/callbacks/rpm.h:75
 #, c-format
 msgid "Running: %s  (%s, %s)"
-msgstr "Draait: %s  (%s, %s)"
+msgstr "Wordt uitgevoerd: %s  (%s, %s)"
 
 #: ../src/callbacks/rpm.h:139 ../src/callbacks/rpm.h:148
 #: ../src/callbacks/rpm.h:156 ../src/callbacks/rpm.h:163
@@ -272,7 +259,7 @@ msgstr "(met --nodeps --force)"
 #: ../src/callbacks/rpm.h:246
 #, c-format
 msgid "Installing: %s-%s"
-msgstr "Installeert %s-%s"
+msgstr "Installeren: %s-%s"
 
 #: ../src/callbacks/rpm.h:272
 #, c-format
@@ -282,7 +269,7 @@ msgstr "Installatie van %s-%s is mislukt:"
 #: ../src/Command.cc:174
 #, c-format
 msgid "Unknown command '%s'"
-msgstr "Onbekend commando '%s'"
+msgstr "Onbekende opdracht '%s'"
 
 #: ../src/info.cc:40
 msgid "Name: "
@@ -298,11 +285,11 @@ msgstr "Arch: "
 
 #: ../src/info.cc:43
 msgid "Vendor: "
-msgstr "Leverancier: "
+msgstr "Leverancier:"
 
 #: ../src/info.cc:48
 msgid "Summary: "
-msgstr "Samenvatting: "
+msgstr "Overzicht:"
 
 #: ../src/info.cc:49
 msgid "Description: "
@@ -331,7 +318,7 @@ msgstr "Geen"
 
 #: ../src/info.cc:118
 msgid "Requires"
-msgstr "Benodigd"
+msgstr "Vereist"
 
 #: ../src/info.cc:119
 msgid "Provides"
@@ -343,12 +330,12 @@ msgstr "In conflict met"
 
 #: ../src/info.cc:121
 msgid "Obsoletes"
-msgstr "Vervangt"
+msgstr "Verouderde onderdelen"
 
 #. translators: package requirements table header
 #: ../src/info.cc:123
 msgid "Requirement"
-msgstr "Vereisten"
+msgstr "Vereiste"
 
 #. translators: package requirements table header
 #: ../src/info.cc:125
@@ -358,7 +345,7 @@ msgstr "Geleverd door"
 #. translators: package conflicts table header
 #: ../src/info.cc:127
 msgid "Conflict"
-msgstr "Conflicten"
+msgstr "Conflict"
 
 #: ../src/info.cc:161 ../src/info.cc:283 ../src/info.cc:354
 msgid "Catalog: "
@@ -366,7 +353,7 @@ msgstr "Catalogus: "
 
 #: ../src/info.cc:161 ../src/info.cc:283 ../src/info.cc:354
 msgid "Repository: "
-msgstr "Installatiebron: "
+msgstr "Opslagruimte: "
 
 #: ../src/info.cc:166 ../src/info.cc:288
 msgid "Installed: "
@@ -390,7 +377,6 @@ msgstr "Ja"
 msgid "No"
 msgstr "Nee"
 
-# /usr/lib/YaST2/clients/lan_inetd_custom.ycp:754
 #. ! \todo fix this - arch?
 #: ../src/info.cc:169 ../src/info.cc:218
 msgid "Status: "
@@ -415,15 +401,15 @@ msgstr "Installatiegrootte: "
 
 #: ../src/info.cc:221
 msgid "Category: "
-msgstr "Categorie: "
+msgstr "Categorie:"
 
 #: ../src/info.cc:222
 msgid "Created On: "
-msgstr "Aangemaakt op: "
+msgstr "Gemaakt op:"
 
 #: ../src/info.cc:223
 msgid "Reboot Required: "
-msgstr "Systeemherstart vereist: "
+msgstr "Opnieuw opstarten vereist:"
 
 #: ../src/info.cc:226
 msgid "Package Manager Restart Required"
@@ -431,12 +417,11 @@ msgstr "Herstart van pakketbeheerder vereist"
 
 #: ../src/info.cc:228
 msgid "Restart Required: "
-msgstr "Herstart vereist: "
+msgstr "Opnieuw starten vereist:"
 
-# /usr/lib/YaST2/clients/dialup_dev_cfg.ycp:71
 #: ../src/info.cc:231
 msgid "Interactive: "
-msgstr "Interactief: "
+msgstr "Interactief:"
 
 #: ../src/info.cc:235
 msgid "Provides:"
@@ -444,7 +429,7 @@ msgstr "Levert:"
 
 #: ../src/info.cc:244
 msgid "Requires:"
-msgstr "Benodigd:"
+msgstr "Vereist:"
 
 #: ../src/info.cc:255 ../src/search.cc:327
 msgid "Recommended"
@@ -528,7 +513,7 @@ msgstr "%s '%s' wordt overgeslagen (de nieuwste versie is al geïnstalleerd)"
 #: ../src/install.cc:120
 #, c-format
 msgid "Package %s-%s.%s not found in repositories, cannot reinstall."
-msgstr "Pakket %s-%s.%s niet gevonden in installatiebronnen, kan niet opnieuw geïnstalleerd worden."
+msgstr "Pakket %s-%s.%s niet gevonden in opslagruimten, kan niet opnieuw geïnstalleerd worden."
 
 #: ../src/install.cc:133
 #, c-format
@@ -538,12 +523,12 @@ msgstr "Kan '%s' niet toevoegen aan de lijst met te installeren pakketten."
 #: ../src/install.cc:156
 #, c-format
 msgid "Failed to add '%s' to the list of packages to be removed."
-msgstr "Kon '%s' niet toevoegen aan de lijst met te verwijderen pakketten."
+msgstr "Kan '%s' niet toevoegen aan de lijst met te verwijderen pakketten."
 
 #: ../src/install.cc:378 ../src/install.cc:712
 #, c-format
 msgid "'%s' is already installed."
-msgstr "'%s' is al geïnstaleerd."
+msgstr "'%s' is al geïnstalleerd."
 
 #. translators: meaning a package %s or provider of capability %s
 #: ../src/install.cc:418 ../src/install.cc:726
@@ -556,14 +541,8 @@ msgid "Cannot uninstall patches."
 msgstr "Kan patches niet deïnstalleren."
 
 #: ../src/install.cc:443
-msgid ""
-"Installed status of a patch is determined solely based on its dependencies.\n"
-"Patches are not installed in sense of copied files, database records,\n"
-"or similar."
-msgstr ""
-"De geïnstalleerde status van een patch wordt alleen gebaseerd op zijn afhankelijkheden.\n"
-"Patches zijn niet geïnstalleerd op de manier van een gekopieerd bestand, database record\n"
-"of iets dergelijks."
+msgid "Installed status of a patch is determined solely based on its dependencies.\nPatches are not installed in sense of copied files, database records,\nor similar."
+msgstr "De geïnstalleerde status van een patch wordt alleen gebaseerd op zijn afhankelijkheden.\nPatches zijn niet geïnstalleerd op de manier van een gekopieerd bestand, database record\nof iets dergelijks."
 
 #: ../src/install.cc:454
 msgid "Uninstallation of a pattern is currently not defined and implemented."
@@ -578,7 +557,7 @@ msgstr "%s spreekt %s tegen"
 #: ../src/install.cc:477
 #, c-format
 msgid "%s cannot currently be used with %s"
-msgstr "%s kan nu niet gebruikt worden samen met %s"
+msgstr "%s kan nu niet gebruikt worden met %s"
 
 #. translators: meaning a package %s or provider of capability %s
 #: ../src/install.cc:524 ../src/install.cc:683
@@ -605,7 +584,7 @@ msgstr "'%s' die '%s' levert is al geïnstalleerd."
 #. importance
 #: ../src/locks.cc:22 ../src/locks.cc:63 ../src/locks.cc:76
 msgid "(any)"
-msgstr "(welke ook)"
+msgstr "(elk)"
 
 #. translators: locks table value
 #: ../src/locks.cc:24 ../src/locks.cc:60 ../src/search.cc:315
@@ -620,13 +599,13 @@ msgstr "Catalogus"
 
 #: ../src/locks.cc:41
 msgid "Importance"
-msgstr "Belangrijkheid"
+msgstr "Belang"
 
 #. translators: package's repository (header)
 #: ../src/locks.cc:43 ../src/search.cc:64 ../src/search.cc:392
 #: ../src/search.cc:450 ../src/update.cc:152 ../src/update.cc:414
 msgid "Repository"
-msgstr "Installatiebron"
+msgstr "Opslagruimte"
 
 #: ../src/locks.cc:95
 msgid "There are no package locks defined."
@@ -643,12 +622,12 @@ msgstr "Probleem bij toevoegen van pakketblokkering:"
 #: ../src/locks.cc:158
 msgid "Specified lock has been successfully added."
 msgid_plural "Specified locks have been successfully added."
-msgstr[0] "De gespecificeerde blokkering is met succes toegevoegd."
-msgstr[1] "De gespecificeerde blokkering is met succes toegevoegd."
+msgstr[0] "De gespecificeerde blokkering is toegevoegd."
+msgstr[1] "De gespecificeerde blokkering is toegevoegd."
 
 #: ../src/locks.cc:181
 msgid "Specified lock has been successfully removed."
-msgstr "De gespecificeerde blokkering is met succes verwijderd."
+msgstr "De gespecificeerde blokkering is verwijderd."
 
 #: ../src/locks.cc:228
 msgid "No lock has been removed."
@@ -658,12 +637,12 @@ msgstr "Er is geen blokkering verwijderd."
 #, c-format
 msgid "%lu lock has been successfully removed."
 msgid_plural "%lu locks have been succesfully removed."
-msgstr[0] "%lu blokkering is met succes verwijderd."
-msgstr[1] "%lu blokkeringen zijn met succes verwijderd."
+msgstr[0] "%lu blokkering is verwijderd."
+msgstr[1] "%lu blokkeringen zijn verwijderd."
 
 #: ../src/locks.cc:239
 msgid "Problem removing the package lock:"
-msgstr "Probleem bij het verwijderen de pakketblokkering:"
+msgstr "Probleem bij het verwijderen van de pakketblokkering:"
 
 #. translators: this will show up if you press ctrl+c twice (but outside of zypper shell)
 #: ../src/main.cc:38
@@ -681,7 +660,7 @@ msgstr "Gaat automatisch akkoord met licentie van %s %s."
 #: ../src/misc.cc:157
 #, c-format
 msgid "In order to install '%s'%s, you must agree to terms of the following license agreement:"
-msgstr "Om '%s'%s te installeren dient u akkoord te gaan met de voorwaarden in de volgende licentieovereenkomst:"
+msgstr "Om '%s'%s te installeren moet u akkoord gaan met de voorwaarden in de volgende licentieovereenkomst:"
 
 #. lincense prompt
 #: ../src/misc.cc:174
@@ -690,21 +669,21 @@ msgstr "Gaat u akkoord met de voorwaarden in de licentie?"
 
 #: ../src/misc.cc:183
 msgid "Aborting installation due to the need for license confirmation."
-msgstr "Installatie wordt afgebroken omdat de licentie(s) moet(en) worden bevestigd."
+msgstr "Installatie wordt afgebroken omdat de licentie moet worden bevestigd."
 
 #. translators: %sanslate the '--auto-agree-with-licenses',
 #. it is a command line option
 #: ../src/misc.cc:188
 #, c-format
 msgid "Please restart the operation in interactive mode and confirm your agreement with required licenses, or use the %s option."
-msgstr "Gaarne de bewerking opnieuw starten in de interactieve modus en ga akkoord met de vereiste licentie(s) of gebruik de optie %s."
+msgstr "Start de bewerking opnieuw in de interactieve modus en ga akkoord met de vereiste licentie of gebruik de optie %s"
 
 #. translators: e.g. "... with flash package license."
 #. ! \todo fix this to allow proper translation
 #: ../src/misc.cc:200
 #, c-format
 msgid "Aborting installation due to user disagreement with %s %s license."
-msgstr "Installatie wordt afgebroken omdat gebruiker niet akkoord gaat met %s %s licentie."
+msgstr "Installatie wordt afgebroken omdat gebruiker niet akkoord gaat met de licentie %s %s."
 
 #: ../src/misc.cc:247
 msgid "License"
@@ -716,7 +695,7 @@ msgstr "EULA"
 
 #: ../src/misc.cc:283
 msgid "SUMMARY"
-msgstr "SAMENVATTING"
+msgstr "Samenvatting"
 
 #: ../src/misc.cc:284
 #, c-format
@@ -726,7 +705,7 @@ msgstr "Geïnstalleerde pakketten: %d"
 #: ../src/misc.cc:285
 #, c-format
 msgid "Installed packages with counterparts in repositories: %d"
-msgstr "Geïnstalleerde pakketten met zusterpakketten in installatiebronnen: %d"
+msgstr "Geïnstalleerde pakketten met kopieën in opslagruimten: %d"
 
 #: ../src/misc.cc:286
 #, c-format
@@ -755,7 +734,7 @@ msgstr "Probleem bij installeren van bronpakket %s-%s:"
 
 #: ../src/output/OutNormal.cc:54
 msgid "Warning: "
-msgstr "Waarschuwing: "
+msgstr "Waarschuwing:"
 
 #: ../src/output/OutNormal.cc:151 ../src/output/OutNormal.cc:222
 msgid "error"
@@ -763,14 +742,13 @@ msgstr "fout"
 
 #: ../src/output/OutNormal.cc:151 ../src/output/OutNormal.cc:222
 msgid "done"
-msgstr "klaar"
+msgstr "GEREED"
 
 #: ../src/output/OutNormal.cc:165 ../src/output/OutNormal.cc:189
 #: ../src/output/OutNormal.cc:215
 msgid "Retrieving:"
 msgstr "Ophalen:"
 
-# window title for kernel loading (see txt_load_kernel)
 #: ../src/output/OutNormal.cc:171
 msgid "starting"
 msgstr "bezig met starten"
@@ -786,26 +764,26 @@ msgstr "geen hulp beschikbaar voor deze optie"
 #: ../src/repos.cc:80
 #, c-format
 msgid "Checking whether to refresh metadata for %s"
-msgstr "Controleert of vernieuwen van metadata voor %s noodzakelijk is"
+msgstr "Controleert of vernieuwen van metagegevens voor %s noodzakelijk is"
 
 #: ../src/repos.cc:102
 #, c-format
 msgid "Repository '%s' is up to date."
-msgstr "Installatiebron '%s' is actueel."
+msgstr "Opslagruimte '%s' is actueel."
 
 #: ../src/repos.cc:106
 #, c-format
 msgid "The up-to-date check of '%s' has been delayed."
-msgstr "De controle op niet-verouderd van '%s' is vertraagd."
+msgstr "De controle of '%s' up-to-date is, is uitgesteld."
 
 #: ../src/repos.cc:128
 msgid "Forcing raw metadata refresh"
-msgstr "Rauwe metadata-vernieuwing forceren"
+msgstr "Vernieuwen onbewerkte metagegevens forceren"
 
 #: ../src/repos.cc:135
 #, c-format
 msgid "Retrieving repository '%s' metadata"
-msgstr "Ophalen van metadata uit installatiebron '%s'"
+msgstr "Ophalen van metagegevens uit opslagruimte '%s'"
 
 #: ../src/repos.cc:159
 #, c-format
@@ -820,50 +798,50 @@ msgstr "Zie bovenstaande foutmelding voor een hint."
 #: ../src/repos.cc:173
 #, c-format
 msgid "No URIs defined for '%s'."
-msgstr "Geen URI gedefinieerd voor '%s'."
+msgstr "Geen URI's gedefinieerd voor '%s'."
 
 #. TranslatorExplanation the first %s is a .repo file path
 #: ../src/repos.cc:177
 #, c-format
 msgid "Please add one or more base URI (baseurl=URI) entries to %s for repository '%s'."
-msgstr "Gaarne één of meer basis-URI's (baseurl=URI) items toevoegen aan %s voor installatiebron '%s'."
+msgstr "Voeg één of meer basis-URI's (baseurl=URI) items toe aan %s voor opslagruimte '%s'."
 
 #: ../src/repos.cc:190
 msgid "No alias defined for this repository."
-msgstr "Geen alias gedefinieert voor deze installatiebron."
+msgstr "Geen alias gedefinieerd voor deze opslagruimte."
 
 #: ../src/repos.cc:203
 #, c-format
 msgid "Repository '%s' is invalid."
-msgstr "Installatiebron %s is ongeldig."
+msgstr "Opslagruimte %s is ongeldig."
 
 #: ../src/repos.cc:204
 msgid "Please check if the URIs defined for this repository are pointing to a valid repository."
-msgstr "Gaarne controleren of de gedefinieerde URI's voor deze bron wijzen naar een geldige installatiebron."
+msgstr "Controleer of de gedefinieerde URI's voor deze opslagruimte verwijzen naar een geldige opslagruimte."
 
 #: ../src/repos.cc:217
 #, c-format
 msgid "Error retrieving metadata for '%s':"
-msgstr "Fout bij ophalen van metadata voor '%s'."
+msgstr "Fout bij ophalen van metagegevens voor '%s'."
 
 #: ../src/repos.cc:232
 msgid "Forcing building of repository cache"
-msgstr "Bouwen van broncache forceren"
+msgstr "Bouwen van opslagruimtecache forceren"
 
 #: ../src/repos.cc:245
 #, c-format
 msgid "Error parsing metadata for '%s':"
-msgstr "Fout bij analyseren van metadata voor '%s'."
+msgstr "Fout bij analyseren van metagegevens voor '%s'."
 
 #. TranslatorExplanation Don't translate the URL unless it is translated, too
 #: ../src/repos.cc:247
 msgid "This may be caused by invalid metadata in the repository, or by a bug in the metadata parser. In the latter case, or if in doubt, please, file a bug report by following instructions at http://en.opensuse.org/Zypper#Troubleshooting"
-msgstr "Dit kan worden veroorzaakt door ongeldige metadata in de installatiebron of door een fout in de metadata-parser. In het laatste geval of als u twijfelt, rapporteer de fout door de instructies op webpagina http://nl.opensuse.org/Zypper#Troubleshooting op te volgen"
+msgstr "Dit kan worden veroorzaakt door ongeldige metagegevens in de opslagruimte of door een fout in de metagegevensparser. In het laatste geval of als u twijfelt, geeft u de fout door aan de hand van de instructies op webpagina http://nl.opensuse.org/Zypper#Troubleshooting"
 
 #: ../src/repos.cc:261
 #, c-format
 msgid "Repository metadata for '%s' not found in local cache."
-msgstr "Bron-metadata voor '%s' niet gevonden in de lokale cache."
+msgstr "Metagegevens in opslagruimte voor '%s' niet gevonden in de lokale cache."
 
 #: ../src/repos.cc:269
 msgid "Error building the cache:"
@@ -872,37 +850,37 @@ msgstr "Fout bij opbouwen van de cache:"
 #: ../src/repos.cc:422
 #, c-format
 msgid "Repository '%s' not found by its alias, number, or URI."
-msgstr "Installatiebron '%s' is niet gevonden aan de hand van zijn alias, nummer of URI."
+msgstr "Opslagruimte '%s' is niet gevonden aan de hand van de alias, nummer of URI."
 
 #: ../src/repos.cc:426
 #, c-format
 msgid "Use '%s' to get the list of defined repositories."
-msgstr "Gebruik '%s' voor een lijst met gedefinieerde installatiebronnen."
+msgstr "Gebruik '%s' voor een lijst met gedefinieerde opslagruimten."
 
 #: ../src/repos.cc:490 ../src/repos.cc:497
 #, c-format
 msgid "Ignoring repository '%s' because of '%s' option."
-msgstr "Installatiebron '%s' wordt genegeerd vanwege de optie '%s'."
+msgstr "Opslagruimte '%s' wordt genegeerd vanwege de optie '%s'."
 
 #: ../src/repos.cc:527 ../src/repos.cc:563
 #, c-format
 msgid "Disabling repository '%s' because of the above error."
-msgstr "Schakelt installatiebron '%s' uit vanwege bovengenoemde fout."
+msgstr "Schakelt opslagruimte '%s' uit vanwege bovengenoemde fout."
 
 #: ../src/repos.cc:545
 #, c-format
 msgid "Repository '%s' is out-of-date. You can run 'zypper refresh' as root to update it."
-msgstr "Bron '%s' is niet actueel. U kunt als root  'zypper refresh' draaien om deze bij te werken."
+msgstr "Opslagruimte '%s' is niet actueel. U kunt als root 'zypper refresh' uitvoeren om deze bij te werken."
 
 #: ../src/repos.cc:580
 #, c-format
 msgid "The metadata cache needs to be built for the '%s' repository. You can run 'zypper refresh' as root to do this."
-msgstr "De metagegevenscache moet gebouwd worden voor installatiebron '%s'. U kunt als root 'zypper refresh' draaien om dat te doen."
+msgstr "De metagegevenscache moet gebouwd worden voor opslagruimte '%s'. U kunt als root 'zypper refresh' uitvoeren om dat te doen."
 
 #: ../src/repos.cc:587
 #, c-format
 msgid "Disabling repository '%s'."
-msgstr "Deactiveren van installatiebron '%s'."
+msgstr "Deactiveren van opslagruimte '%s'."
 
 #: ../src/repos.cc:624
 msgid "Initializing Target"
@@ -914,9 +892,8 @@ msgstr "Doelinitialisatie is mislukt:"
 
 #: ../src/repos.cc:635 ../src/Zypper.cc:3372
 msgid "Running 'zypper refresh' as root might resolve the problem."
-msgstr "Het draaien van 'zypper refresh' als root zou het probleem op kunnen lossen."
+msgstr "Het uitvoeren van 'zypper refresh' als root zou het probleem op kunnen lossen."
 
-# /usr/lib/YaST2/clients/lan_inetd_custom.ycp:754
 #. translators: patch status (installed, uninstalled, needed)
 #: ../src/repos.cc:655 ../src/search.cc:273 ../src/update.cc:153
 msgid "Status"
@@ -933,7 +910,6 @@ msgstr "Actief"
 msgid "Disabled"
 msgstr "Uitgeschakeld"
 
-# ../../db/printers.ycp.noloc:1270
 #: ../src/repos.cc:703 ../src/repos.cc:2080 ../src/Zypper.cc:4002
 msgid "Alias"
 msgstr "Alias"
@@ -946,7 +922,7 @@ msgstr "Ingeschakeld"
 #. translators: 'zypper repos' column - whether autorefresh is enabled for the repository
 #: ../src/repos.cc:707 ../src/repos.cc:2084
 msgid "Refresh"
-msgstr "Vernieuwen"
+msgstr "Herladen"
 
 #. translators: repository priority (in zypper repos -p or -d)
 #: ../src/repos.cc:711 ../src/repos.cc:2088
@@ -963,11 +939,11 @@ msgstr "Service"
 
 #: ../src/repos.cc:761
 msgid "No repositories defined. Use the 'zypper addrepo' command to add one or more repositories."
-msgstr "Geen installatiebronnen opgegeven. Gebruik het commando 'zypper addrepo' om één of meer bronnen toe te voegen."
+msgstr "Geen opslagruimten opgegeven. Gebruik de opdracht 'zypper addrepo' om één of meer opslagruimten toe te voegen."
 
 #: ../src/repos.cc:837 ../src/repos.cc:909 ../src/repos.cc:1079
 msgid "Error reading repositories:"
-msgstr "Fout bij lezen van installatiebronnen:"
+msgstr "Fout bij lezen van opslagruimten:"
 
 #: ../src/repos.cc:865 ../src/repos.cc:2213
 #, c-format
@@ -981,50 +957,50 @@ msgstr "Misschien hebt u geen schrijfrechten?"
 #: ../src/repos.cc:874 ../src/repos.cc:2222
 #, c-format
 msgid "Repositories have been successfully exported to %s."
-msgstr "De bronnen zijn met succes geëxporteerd naar %s."
+msgstr "De opslagruimten zijn met succes geëxporteerd naar %s."
 
 #: ../src/repos.cc:927 ../src/repos.cc:1097
 msgid "Specified repositories: "
-msgstr "Gespecificeerde installatiebronnen: "
+msgstr "Opgegeven opslagruimten: "
 
 #: ../src/repos.cc:966
 #, c-format
 msgid "Skipping disabled repository '%s'"
-msgstr "Slaat uitgeschakelde installatiebron '%s' over"
+msgstr "Uitgeschakelde opslagruimte '%s' overslaan"
 
 #: ../src/repos.cc:981
 #, c-format
 msgid "Skipping repository '%s' because of the above error."
-msgstr "Slaat installatiebron '%s' over vanwege bovengenoemde fout."
+msgstr "Slaat opslagruimte '%s' over vanwege bovengenoemde fout."
 
 #: ../src/repos.cc:996
 #, c-format
 msgid "Use '%s' or '%s' commands to add or enable repositories."
-msgstr "Gebruik de commando's '%s' of '%s'  om bronnen toe te voegen of te activeren."
+msgstr "Gebruik de opdrachten '%s' of '%s' om opslagruimten toe te voegen of te activeren."
 
 #: ../src/repos.cc:999
 msgid "Specified repositories are not enabled or defined."
-msgstr "Opgegeven bronnen zijn niet geactiveerd of niet gedefinieerd."
+msgstr "Opgegeven opslagruimten zijn niet geactiveerd of niet gedefinieerd."
 
 #: ../src/repos.cc:1001
 msgid "There are no enabled repositories defined."
-msgstr "Er zijn geen geactiveerde bronnen gedefinieerd."
+msgstr "Er zijn geen geactiveerde opslagruimte gedefinieerd."
 
 #: ../src/repos.cc:1005
 msgid "Could not refresh the repositories because of errors."
-msgstr "Kon vanwege fouten de installatiebronnen niet vernieuwen."
+msgstr "Kan vanwege fouten de opslagruimten niet vernieuwen."
 
 #: ../src/repos.cc:1011
 msgid "Some of the repositories have not been refreshed because of an error."
-msgstr "Enkele installatiebronnen zijn vanwege fouten niet vernieuwd."
+msgstr "Enkele opslagruimten zijn vanwege fouten niet vernieuwd."
 
 #: ../src/repos.cc:1016
 msgid "Specified repositories have been refreshed."
-msgstr "De opgegeven installatiebronnen zijn vernieuwd."
+msgstr "De opgegeven opslagruimten zijn vernieuwd."
 
 #: ../src/repos.cc:1018
 msgid "All repositories have been refreshed."
-msgstr "Alle installatiebronnen zijn vernieuwd."
+msgstr "Alle opslagruimten zijn vernieuwd."
 
 #: ../src/repos.cc:1154
 #, c-format
@@ -1034,7 +1010,7 @@ msgstr "Opschonen van metagegevenscache voor '%s'."
 #: ../src/repos.cc:1161
 #, c-format
 msgid "Cleaning raw metadata cache for '%s'."
-msgstr "Opschonen van rauwe metagegevenscache voor '%s'."
+msgstr "Opschonen van onbewerkte metagegevenscache voor '%s'."
 
 #. translators: meaning the cached rpm files
 #: ../src/repos.cc:1169
@@ -1045,7 +1021,7 @@ msgstr "Opschonen van pakketten voor '%s'."
 #: ../src/repos.cc:1177
 #, c-format
 msgid "Cannot clean repository '%s' because of an error."
-msgstr "Opschonen van installatiebron '%s' kan niet vanwege een fout."
+msgstr "Opschonen van opslagruimte '%s' kan niet vanwege een fout."
 
 #: ../src/repos.cc:1191
 msgid "Cleaning installed packages cache."
@@ -1053,23 +1029,23 @@ msgstr "Opschonen van cache voor geïnstalleerde pakketten."
 
 #: ../src/repos.cc:1199
 msgid "Cannot clean installed packages cache because of an error."
-msgstr "Opschonen van cache voor geïnstalleerde pakketten kan niet vanwege een fout."
+msgstr "Kan opschonen van cache voor geïnstalleerde pakketten niet uitvoeren vanwege een fout."
 
 #: ../src/repos.cc:1207
 msgid "Could not clean the repositories because of errors."
-msgstr "Kan de installatiebronnen niet opschonen vanwege fouten."
+msgstr "Kan de opslagruimten niet opschonen vanwege fouten."
 
 #: ../src/repos.cc:1214
 msgid "Some of the repositories have not been cleaned up because of an error."
-msgstr "Enkele installatiebronnen zijn vanwege fouten niet opgeschoond."
+msgstr "Enkele opslagruimten zijn vanwege fouten niet opgeschoond."
 
 #: ../src/repos.cc:1219
 msgid "Specified repositories have been cleaned up."
-msgstr "De gespecificeerde installatiebronnen zijn opgeschoond."
+msgstr "De opgegeven opslagruimten zijn opgeschoond."
 
 #: ../src/repos.cc:1221
 msgid "All repositories have been cleaned up."
-msgstr "Alle installatiebronnen zijn opgeschoond."
+msgstr "Alle opslagruimten zijn opgeschoond."
 
 #: ../src/repos.cc:1261
 msgid "This is a changeable read-only media (CD/DVD), disabling autorefresh."
@@ -1078,19 +1054,19 @@ msgstr "Dit is een verwisselbaar alleen-lezen medium (cd/dvd). Automatisch verni
 #: ../src/repos.cc:1282 ../src/repos.cc:1543
 #, c-format
 msgid "Repository named '%s' already exists. Please use another alias."
-msgstr "Er bestaat al een installatiebron met de naam '%s'. Gaarne een andere alias gebruiken."
+msgstr "Er bestaat al een opslagruimte met de naam '%s'. Gebruik een andere alias."
 
 #: ../src/repos.cc:1293
 msgid "Could not determine the type of the repository. Please check if the defined URIs (see below) point to a valid repository:"
-msgstr "Kan het type installatiebron niet bepalen. Controleer of de gedefinieerde URI's (zie hieronder) naar een geldige bron verwijzen:"
+msgstr "Kan het type opslagruimte niet bepalen. Controleer of de gedefinieerde URI's (zie hieronder) naar een geldige opslagruimte verwijzen:"
 
 #: ../src/repos.cc:1300 ../src/Zypper.cc:2429
 msgid "Can't find a valid repository at given location:"
-msgstr "Kan geen geldige installatiebron vinden op de opgegeven locatie:"
+msgstr "Kan geen geldige opslagruimte vinden op de opgegeven locatie:"
 
 #: ../src/repos.cc:1309
 msgid "Problem transferring repository data from specified URI:"
-msgstr "Probleem bij het overdragen van brongegevens van opgegeven URI:"
+msgstr "Probleem bij het overdragen van opslagruimtegegevens van opgegeven URI:"
 
 #: ../src/repos.cc:1310
 msgid "Please check whether the specified URI is accessible."
@@ -1098,17 +1074,17 @@ msgstr "Controleer of de opgegeven URI toegankelijk is."
 
 #: ../src/repos.cc:1318
 msgid "Unknown problem when adding repository:"
-msgstr "Onbekend probleem bij toevoegen van installatiebron."
+msgstr "Onbekend probleem bij toevoegen van opslagruimte."
 
 #: ../src/repos.cc:1324
 #, c-format
 msgid "Repository '%s' successfully added"
-msgstr "Installatiebron '%s' is met succes toegevoegd:"
+msgstr "Opslagruimte '%s' is toegevoegd:"
 
 #. TranslatorExplanation used as e.g. "Autorefresh: Yes"
 #: ../src/repos.cc:1338
 msgid "Autorefresh"
-msgstr "Autovernieuwen"
+msgstr "Automatisch vernieuwen"
 
 #: ../src/repos.cc:1353
 #, c-format
@@ -1148,36 +1124,36 @@ msgstr "Probleem bij het lezen van het bestand op de opgegeven URI"
 
 #: ../src/repos.cc:1460
 msgid "Repository with no alias defined found in the file, skipping."
-msgstr "Er is een installatiebron zonder een gedefinieerde alias gevonden, overslaan."
+msgstr "Er is een opslagruimte zonder een gedefinieerde alias gevonden, overslaan."
 
 #: ../src/repos.cc:1467
 #, c-format
 msgid "Repository '%s' has no URI defined, skipping."
-msgstr "Bij installatiebron '%s' is geen URI gedefinieerd, overslaan."
+msgstr "Voor opslagruimte '%s' is geen URI gedefinieerd, overslaan."
 
 #: ../src/repos.cc:1507
 #, c-format
 msgid "Repository '%s' has been removed."
-msgstr "Installatiebron '%s' is verwijderd."
+msgstr "Opslagruimte '%s' is verwijderd."
 
 #: ../src/repos.cc:1526
 #, c-format
 msgid "Cannot change alias of '%s' repository. The repository belongs to service '%s' which is responsible for setting its alias."
-msgstr "Kan de alias van de '%s' installatiebron niet wijzigen. De installatiebron behoort bij service '%s' die verantwoordelijk is voor het instellen van zijn alias."
+msgstr "Kan de alias van de '%s' opslagruimte niet wijzigen. De opslagruimte behoort bij service '%s' die verantwoordelijk is voor het instellen van zijn alias."
 
 #: ../src/repos.cc:1537
 #, c-format
 msgid "Repository '%s' renamed to '%s'."
-msgstr "Installatiebron '%s' is hernoemd naar '%s'."
+msgstr "Opslagruimte '%s' is hernoemd naar '%s'."
 
 #: ../src/repos.cc:1549 ../src/repos.cc:1769
 msgid "Error while modifying the repository:"
-msgstr "Fout bij het wijzigen van de installatiebron:"
+msgstr "Fout bij het wijzigen van de opslagruimte:"
 
 #: ../src/repos.cc:1550
 #, c-format
 msgid "Leaving repository '%s' unchanged."
-msgstr "Installatiebron '%s' wordt ongewijzigd gelaten."
+msgstr "Opslagruimte '%s' wordt ongewijzigd gelaten."
 
 #: ../src/repos.cc:1687
 #, c-format
@@ -1187,57 +1163,57 @@ msgstr "Ongeldige prioriteit '%s'. Gebruik een positief geheel getal. Hoe hoger 
 #: ../src/repos.cc:1695
 #, c-format
 msgid "Repository '%s' priority has been left unchanged (%d)"
-msgstr "Prioriteit van installatiebron '%s' is ongewijzigd (%d)"
+msgstr "Prioriteit van opslagruimte '%s' is ongewijzigd (%d)"
 
 #: ../src/repos.cc:1721
 #, c-format
 msgid "Repository '%s' has been sucessfully enabled."
-msgstr "Installatiebron '%s' is met succes geactiveerd."
+msgstr "Opslagruimte '%s' is met succes geactiveerd."
 
 #: ../src/repos.cc:1724
 #, c-format
 msgid "Repository '%s' has been sucessfully disabled."
-msgstr "Installatiebron '%s' is met succes gedeactiveerd."
+msgstr "Opslagruimte '%s' is gedeactiveerd."
 
 #: ../src/repos.cc:1731
 #, c-format
 msgid "Autorefresh has been enabled for repository '%s'."
-msgstr "Autoverversing is geactiveerd voor installatiebron '%s'."
+msgstr "Automatisch vernieuwen is geactiveerd voor opslagruimte '%s'."
 
 #: ../src/repos.cc:1734
 #, c-format
 msgid "Autorefresh has been disabled for repository '%s'."
-msgstr "Autoverversing is gedeactiveerd voor installatiebron '%s'."
+msgstr "Automatisch vernieuwen is gedeactiveerd voor opslagruimte '%s'."
 
 #: ../src/repos.cc:1741
 #, c-format
 msgid "RPM files caching has been enabled for repository '%s'."
-msgstr "RPM-bestanden cachen is geactiveerd voor installatiebron '%s'."
+msgstr "RPM-bestanden cachen is geactiveerd voor opslagruimte '%s'."
 
 #: ../src/repos.cc:1744
 #, c-format
 msgid "RPM files caching has been disabled for repository '%s'."
-msgstr "RPM-bestanden cachen is gedeactiveerd voor installatiebron '%s'."
+msgstr "RPM-bestanden cachen is gedeactiveerd voor opslagruimte '%s'."
 
 #: ../src/repos.cc:1750
 #, c-format
 msgid "Repository '%s' priority has been set to %d."
-msgstr "De prioriteit van installatiebron '%s' is op %d gezet."
+msgstr "De prioriteit van opslagruimte '%s' is op %d gezet."
 
 #: ../src/repos.cc:1756
 #, c-format
 msgid "Name of repository '%s' has been set to '%s'."
-msgstr "De naam van installatiebron '%s' is op '%s' gezet."
+msgstr "De naam van opslagruimte '%s' is op '%s' gezet."
 
 #: ../src/repos.cc:1762
 #, c-format
 msgid "Nothing to change for repository '%s'."
-msgstr "Niets te wijzigen voor installatiebron '%s'."
+msgstr "Niets te wijzigen voor opslagruimte '%s'."
 
 #: ../src/repos.cc:1770
 #, c-format
 msgid "Leaving repository %s unchanged."
-msgstr "Installatiebron %s wordt ongewijzigd gelaten."
+msgstr "Opslagruimte %s wordt ongewijzigd gelaten."
 
 #: ../src/repos.cc:1808
 msgid "Error reading services:"
@@ -1256,12 +1232,12 @@ msgstr "Gebruik '%s' voor een lijst met gedefinieerde services."
 #: ../src/repos.cc:2127
 #, c-format
 msgid "No services defined. Use the '%s' command to add one or more services."
-msgstr "Geen services gedefinieerd. Gebruik het commando '%s' om één of meer services toe te voegen."
+msgstr "Geen services gedefinieerd. Gebruik de opdracht '%s' om één of meer services toe te voegen."
 
 #: ../src/repos.cc:2253
 #, c-format
 msgid "Service aliased '%s' already exists. Please use another alias."
-msgstr "Service met de alias '%s' bestaat al. Gaarne een andere alias gebruiken."
+msgstr "Service met de alias '%s' bestaat al. Gebruik een andere alias."
 
 #: ../src/repos.cc:2263
 #, c-format
@@ -1271,7 +1247,7 @@ msgstr "Fout opgetreden tijdens het toevoegen van de service '%s'."
 #: ../src/repos.cc:2269
 #, c-format
 msgid "Service '%s' has been successfully added."
-msgstr "Service '%s' is met succes toegevoegd."
+msgstr "Service '%s' is toegevoegd."
 
 #: ../src/repos.cc:2308
 #, c-format
@@ -1286,12 +1262,12 @@ msgstr "Service '%s' is verwijderd."
 #: ../src/repos.cc:2327
 #, c-format
 msgid "Refreshing service '%s'."
-msgstr "Verversen van service '%s'."
+msgstr "Vernieuwen van service '%s'."
 
 #: ../src/repos.cc:2336
 #, c-format
 msgid "Problem retrieving the repository index file for service '%s':"
-msgstr "Probleem bij het ophalen van het indexbestand van de installatiebron voor de service '%s':"
+msgstr "Probleem bij het ophalen van het indexbestand van de opslagruimte voor de service '%s':"
 
 #: ../src/repos.cc:2338
 msgid "Check if the URI is valid and accessible."
@@ -1305,12 +1281,12 @@ msgstr "Overslaan van uitgeschakelde service '%s'"
 #: ../src/repos.cc:2442
 #, c-format
 msgid "Skipping service '%s' because of the above error."
-msgstr "Overslaan van service '%s' vanwege bovengenoemde fout."
+msgstr "Service '%s' overslaan vanwege bovengenoemde fout."
 
 #: ../src/repos.cc:2457
 #, c-format
 msgid "Use '%s' or '%s' commands to add or enable services."
-msgstr "Gebruik het commando '%s' of '%s'  om services toe te voegen of te activeren."
+msgstr "Gebruik de opdracht '%s' of '%s' om services toe te voegen of te activeren."
 
 #: ../src/repos.cc:2460
 msgid "Specified services are not enabled or defined."
@@ -1322,39 +1298,39 @@ msgstr "Er zijn geen geactiveerde services gedefinieerd."
 
 #: ../src/repos.cc:2466
 msgid "Could not refresh the services because of errors."
-msgstr "Kon vanwege fouten de services niet verversen."
+msgstr "Kan vanwege fouten de services niet vernieuwen."
 
 #: ../src/repos.cc:2472
 msgid "Some of the services have not been refreshed because of an error."
-msgstr "Enkele van de services zijn vanwege fouten niet ververst."
+msgstr "Enkele van de services zijn vanwege fouten niet vernieuwd."
 
 #: ../src/repos.cc:2477
 msgid "Specified services have been refreshed."
-msgstr "De opgegeven services zijn ververst."
+msgstr "De opgegeven services zijn vernieuwd."
 
 #: ../src/repos.cc:2479
 msgid "All services have been refreshed."
-msgstr "Alle services zijn ververst."
+msgstr "Alle services zijn vernieuwd."
 
 #: ../src/repos.cc:2601
 #, c-format
 msgid "Service '%s' has been sucessfully enabled."
-msgstr "Service '%s' is met succes geactiveerd."
+msgstr "Service '%s' is geactiveerd."
 
 #: ../src/repos.cc:2604
 #, c-format
 msgid "Service '%s' has been sucessfully disabled."
-msgstr "Service '%s' is met succes gedeactiveerd."
+msgstr "Service '%s' is gedeactiveerd."
 
 #: ../src/repos.cc:2611
 #, c-format
 msgid "Autorefresh has been enabled for service '%s'."
-msgstr "Autoverversing is geactiveerd voor service '%s'."
+msgstr "Automatisch vernieuwen is geactiveerd voor service '%s'."
 
 #: ../src/repos.cc:2614
 #, c-format
 msgid "Autorefresh has been disabled for service '%s'."
-msgstr "Autoverversing is gedeactiveerd voor service '%s'."
+msgstr "Automatisch vernieuwen is gedeactiveerd voor service '%s'."
 
 #: ../src/repos.cc:2620
 #, c-format
@@ -1365,29 +1341,29 @@ msgstr "De naam van service '%s' is op '%s' gezet."
 #, c-format
 msgid "Repository '%s' has been added to enabled repositories of service '%s'"
 msgid_plural "Repositories '%s' have been added to enabled repositories of service '%s'"
-msgstr[0] "Installatiebron '%s' is toegevoegd aan de geactiveerde installatiebronnen van service '%s'"
-msgstr[1] "Installatiebronnen '%s' zijn toegevoegd aan de geactiveerde installatiebronnen van service '%s'"
+msgstr[0] "Opslagruimte '%s' is toegevoegd aan de geactiveerde opslagruimten van service '%s'"
+msgstr[1] "Opslagruimten '%s' zijn toegevoegd aan de geactiveerde opslagruimten van service '%s'"
 
 #: ../src/repos.cc:2634
 #, c-format
 msgid "Repository '%s' has been added to disabled repositories of service '%s'"
 msgid_plural "Repositories '%s' have been added to disabled repositories of service '%s'"
-msgstr[0] "Installatiebron '%s' is toegevoegd aan de gedeactiveerde installatiebronnen van service '%s'"
-msgstr[1] "Installatiebronnen '%s' zijn toegevoegd aan de gedeactiveerde installatiebronnen van service '%s'"
+msgstr[0] "Opslagruimte '%s' is toegevoegd aan de gedeactiveerde opslagruimten van service '%s'"
+msgstr[1] "Opslagruimten '%s' zijn toegevoegd aan de gedeactiveerde opslagruimten van service '%s'"
 
 #: ../src/repos.cc:2642
 #, c-format
 msgid "Repository '%s' has been removed from enabled repositories of service '%s'"
 msgid_plural "Repositories '%s' have been removed from enabled repositories of service '%s'"
-msgstr[0] "Installatiebron '%s' is verwijderd uit de geactiveerde installatiebronnen van service '%s'"
-msgstr[1] "Installatiebronnen '%s' zijn toegevoegd aan de geactiveerde installatiebronnen van service '%s'"
+msgstr[0] "Opslagruimte '%s' is verwijderd uit de geactiveerde opslagruimten van service '%s'"
+msgstr[1] "Opslagruimten '%s' zijn toegevoegd aan de geactiveerde opslagruimten van service '%s'"
 
 #: ../src/repos.cc:2650
 #, c-format
 msgid "Repository '%s' has been removed from disabled repositories of service '%s'"
 msgid_plural "Repositories '%s' have been removed from disabled repositories of service '%s'"
-msgstr[0] "Installatiebron '%s' is verwijderd uit de gedeactiveerde installatiebronnen van service '%s'"
-msgstr[1] "Installatiebron '%s' is verwijderd uit de gedeactiveerde installatiebronnen van service '%s'"
+msgstr[0] "Opslagruimte '%s' is verwijderd uit de gedeactiveerde opslagruimten van service '%s'"
+msgstr[1] "Opslagruimte '%s' is verwijderd uit de gedeactiveerde opslagruimten van service '%s'"
 
 #: ../src/repos.cc:2659
 #, c-format
@@ -1396,7 +1372,7 @@ msgstr "Niets te wijzigen voor service '%s'."
 
 #: ../src/repos.cc:2666
 msgid "Error while modifying the service:"
-msgstr "Fout bij het wijzigen van de servicve:"
+msgstr "Fout bij het wijzigen van de service:"
 
 #: ../src/repos.cc:2667
 #, c-format
@@ -1405,17 +1381,17 @@ msgstr "Service %s wordt ongewijzigd gelaten."
 
 #: ../src/repos.cc:2774
 msgid "Loading repository data..."
-msgstr "Gegevens van installatiebron laden..."
+msgstr "Gegevens van opslagruimte laden..."
 
 #: ../src/repos.cc:2792
 #, c-format
 msgid "Retrieving repository '%s' data..."
-msgstr "Gegevens van installatiebron '%s' wordt opgehaald..."
+msgstr "Gegevens van opslagruimte '%s' wordt opgehaald..."
 
 #: ../src/repos.cc:2799
 #, c-format
 msgid "Repository '%s' not cached. Caching..."
-msgstr "Bron '%s' bevindt zich niet in de cache. Deze wordt nu toegevoegd..."
+msgstr "Opslagruimte '%s' bevindt zich niet in de cache. Deze wordt nu toegevoegd..."
 
 #: ../src/repos.cc:2806 ../src/repos.cc:2834
 #, c-format
@@ -1430,7 +1406,7 @@ msgstr "Oplosbare pakketten van '%s' zijn niet geladen vanwege een fout."
 #: ../src/repos.cc:2823
 #, c-format
 msgid "Repository '%s' appears to outdated. Consider using a different mirror or server."
-msgstr "Installatiebron '%s' lijkt verouderd. Ga na of u een andere mirror of server moet gebruiken."
+msgstr "Opslagruimte '%s' lijkt verouderd. Ga na of u een andere mirror of server moet gebruiken."
 
 #. translators: the first %s is 'zypper refresh' and the second 'zypper clean -m'
 #: ../src/repos.cc:2836
@@ -1448,14 +1424,8 @@ msgstr "Er is een fout opgetreden bij het lezen van geïnstalleerde pakketten:"
 
 #. list name, exact match
 #: ../src/repos.cc:2875
-msgid ""
-"ZENworks Management Daemon is running.\n"
-"WARNING: this command will not synchronize changes.\n"
-"Use rug or yast2 for that."
-msgstr ""
-"De daemon ZENworks Management draait.\n"
-"WAARSCHUWING: dit commando synchroniseert geen wijzigingen.\n"
-"Gebruik daarvoor het programma rug of yast2."
+msgid "ZENworks Management Daemon is running.\nWARNING: this command will not synchronize changes.\nUse rug or yast2 for that."
+msgstr "De daemon ZENworks Management wordt uitgevoerd.\nWAARSCHUWING: deze opdracht synchroniseert geen wijzigingen.\nGebruik daarvoor het programma rug of yast2."
 
 #. translators: Bundle is a term used in rug. See rug for how to translate it.
 #: ../src/search.cc:42 ../src/search.cc:448 ../src/update.cc:417
@@ -1503,7 +1473,7 @@ msgstr "Geen producten gevonden."
 #: ../src/search.cc:601
 #, c-format
 msgid "No providers of '%s' found."
-msgstr "Geen leveranciers van '%s' gevonden."
+msgstr "Geen providers van '%s' gevonden."
 
 #. translators: meaning 'dependency problem' found during solving
 #: ../src/solve-commit.cc:44
@@ -1519,16 +1489,16 @@ msgstr " Oplossing %d: "
 #: ../src/solve-commit.cc:76
 msgid "Choose the above solution using '1' or skip, retry or cancel"
 msgid_plural "Choose from above solutions by number or skip, retry or cancel"
-msgstr[0] "Kies de bovenstaande oplossingen door '1' te gebruiken of overslaan, op(n)ieuw of annuleren"
-msgstr[1] "Kies uit de bovenstaande oplossingen door een nummer of overslaan, op(n)ieuw of annuleren"
+msgstr[0] "Kies de bovenstaande oplossingen met '1' of overslaan, opnieuw of annuleren"
+msgstr[1] "Kies uit de bovenstaande oplossingen door een nummer of overslaan, opnieuw of annuleren"
 
 #. translators: translate 'c' to whatever you translated the 'c' in
 #. "c" and "s/r/c" strings
 #: ../src/solve-commit.cc:83
 msgid "Choose the above solution using '1' or cancel using 'c'"
 msgid_plural "Choose from above solutions by number or cancel"
-msgstr[0] "Kies de bovenstaande oplossing door '1' te gebruiken of annuleren door 'a' te gebruiken"
-msgstr[1] "Kies uit de bovenstaande oplossingen door een nummer of annuleren"
+msgstr[0] "Kies de bovenstaande oplossing met '1' of annuleer met 'a' "
+msgstr[1] "Kies uit de bovenstaande oplossingen met een nummer of annuleer te bewerking"
 
 #. translators: answers for dependency problem solution input prompt:
 #. "Choose from above solutions by number or skip, retry or cancel"
@@ -1555,7 +1525,7 @@ msgstr "a"
 #: ../src/solve-commit.cc:134
 #, c-format
 msgid "Applying solution %s"
-msgstr "Oplossing %s wordt toegepast"
+msgstr "Oplossing %s toepassen"
 
 #: ../src/solve-commit.cc:158
 #, c-format
@@ -1605,26 +1575,26 @@ msgstr[1] "De volgende producten zullen worden opgewaardeerd:"
 #: ../src/solve-commit.cc:391
 msgid "The following package is going to be downgraded:"
 msgid_plural "The following packages are going to be downgraded:"
-msgstr[0] "Het volgende pakket zal neerwaarts worden opgewaardeerd:"
-msgstr[1] "De volgende pakketten zullen neerwaarts worden opgewaardeerd:"
+msgstr[0] "Op het volgende pakket wordt een downgrade uitgevoerd:"
+msgstr[1] "Op de volgende pakketten wordt een downgrade uitgevoerd:"
 
 #: ../src/solve-commit.cc:396
 msgid "The following patch is going to be downgraded:"
 msgid_plural "The following patches are going to be downgraded:"
-msgstr[0] "De volgende patch zal neerwaarts worden opgewaardeerd:"
-msgstr[1] "De volgende patches zullen neerwaarts worden opgewaardeerd:"
+msgstr[0] "Op de volgende patch wordt een downgrade uitgevoerd:"
+msgstr[1] "Op de volgende patches wordt een downgrade uitgevoerd:"
 
 #: ../src/solve-commit.cc:401
 msgid "The following pattern is going to be downgraded:"
 msgid_plural "The following patterns are going to be downgraded:"
-msgstr[0] "Het volgende patroon zal neerwaarts worden opgewaardeerd:"
-msgstr[1] "De volgende patronen zullen neerwaarts worden opgewaardeerd:"
+msgstr[0] "Op het volgende patroon wordt een downgrade uitgevoerd:"
+msgstr[1] "Op de volgende patronen wordt een downgrade uitgevoerd:"
 
 #: ../src/solve-commit.cc:406
 msgid "The following product is going to be downgraded:"
 msgid_plural "The following products are going to be downgraded:"
-msgstr[0] "Het volgende product zal neerwaarts worden opgewaardeerd:"
-msgstr[1] "De volgende producten zullen neerwaarts worden opgewaardeerd:"
+msgstr[0] "Op het volgende product wordt een downgrade uitgevoerd:"
+msgstr[1] "Op de volgende producten wordt een downgrade uitgevoerd:"
 
 #: ../src/solve-commit.cc:413
 msgid "The following NEW package is going to be installed:"
@@ -1653,32 +1623,32 @@ msgstr[1] "De volgende NIEUWE producten zullen worden geïnstalleerd:"
 #: ../src/solve-commit.cc:433
 msgid "The following source package is going to be installed:"
 msgid_plural "The following source packages are going to be installed:"
-msgstr[0] "Het volgende broncodepakket zal worden geïnstalleerd:"
-msgstr[1] "De volgende broncodepakketten zullen worden geïnstalleerd:"
+msgstr[0] "Het volgende bronpakket zal worden geïnstalleerd:"
+msgstr[1] "De volgende bronpakketten zullen worden geïnstalleerd:"
 
 #: ../src/solve-commit.cc:440
 msgid "The following package is going to be reinstalled:"
 msgid_plural "The following packages are going to be reinstalled:"
-msgstr[0] "Het volgende pakket zal worden geherinstalleerd:"
-msgstr[1] "De volgende pakketten zullen worden geherinstalleerd:"
+msgstr[0] "Het volgende pakket zal opnieuw worden geïnstalleerd:"
+msgstr[1] "De volgende pakketten zullen opnieuw worden geïnstalleerd:"
 
 #: ../src/solve-commit.cc:445
 msgid "The following patch is going to be reinstalled:"
 msgid_plural "The following patches are going to be reinstalled:"
-msgstr[0] "De volgende patch zal worden geherinstalleerd:"
-msgstr[1] "De volgende patches zullen worden geherinstalleerd:"
+msgstr[0] "De volgende patch zal opnieuw worden geïnstalleerd:"
+msgstr[1] "De volgende patches zullen opnieuw worden geïnstalleerd:"
 
 #: ../src/solve-commit.cc:450
 msgid "The following pattern is going to be reinstalled:"
 msgid_plural "The following patterns are going to be reinstalled:"
-msgstr[0] "Het volgende patroon zal worden geherinstalleerd:"
-msgstr[1] "De volgende patronen zullen worden geherinstalleerd:"
+msgstr[0] "Het volgende patroon zal opnieuw worden geïnstalleerd:"
+msgstr[1] "De volgende patronen zullen opnieuw worden geïnstalleerd:"
 
 #: ../src/solve-commit.cc:455
 msgid "The following product is going to be reinstalled:"
 msgid_plural "The following products are going to be reinstalled:"
-msgstr[0] "Het volgende product zal worden geherinstalleerd:"
-msgstr[1] "De volgende producten zullen worden geherinstalleerd:"
+msgstr[0] "Het volgende product zal opnieuw worden geïnstalleerd:"
+msgstr[1] "De volgende producten zullen opnieuw worden geïnstalleerd:"
 
 #: ../src/solve-commit.cc:462
 msgid "The following package is going to be REMOVED:"
@@ -1755,8 +1725,8 @@ msgstr[1] "De volgende producten zullen de leverancier wijzigen:"
 #: ../src/solve-commit.cc:529
 msgid "The following package is not supported by its vendor:"
 msgid_plural "The following packages are not supported by their vendor:"
-msgstr[0] "Het volgende pakket wordt niet ondersteund door de verkoper:"
-msgstr[1] "De volgende pakketten worden niet ondersteund door de verkoper:"
+msgstr[0] "Het volgende pakket wordt niet ondersteund door de leverancier:"
+msgstr[1] "De volgende pakketten worden niet ondersteund door de leverancier:"
 
 #: ../src/solve-commit.cc:603
 msgid "Dependencies of all installed packages are satisfied."
@@ -1764,11 +1734,11 @@ msgstr "Aan afhankelijkheden van alle pakketten is voldaan."
 
 #: ../src/solve-commit.cc:605
 msgid "Nothing to do."
-msgstr "Niets te doen."
+msgstr "Geen activiteit."
 
 #: ../src/solve-commit.cc:610
 msgid "Some of the dependencies of installed packages are broken. In order to fix these dependencies, the following actions need to be taken:"
-msgstr "Sommige afhankelijkheden van geïnstalleerde pakketten kloppen niet. Om deze afhankelijkheden te verhelpen moeten de volgende acties genomen worden:"
+msgstr "Sommige afhankelijkheden van geïnstalleerde pakketten kloppen niet. Om deze afhankelijkheden te verhelpen moeten de volgende acties uitgevoerd worden:"
 
 #: ../src/solve-commit.cc:764
 #, c-format
@@ -1779,17 +1749,17 @@ msgstr "Totale downloadgrootte: %s"
 #: ../src/solve-commit.cc:769
 #, c-format
 msgid "After the operation, additional %s will be used."
-msgstr "Na de operatie zal aanvullend %s worden gebruikt."
+msgstr "Na de bewerking zal aanvullend %s worden gebruikt."
 
 #: ../src/solve-commit.cc:772
 msgid "No additional space will be used or freed after the operation."
-msgstr "Na de operatie zal er geen extra ruimte in gebruik zijn of vrij komen."
+msgstr "Na de bewerking zal er geen extra ruimte in gebruik zijn of vrij komen."
 
 #. TrasnlatorExplanation %s will be substituted by a byte count e.g. 212 K
 #: ../src/solve-commit.cc:779
 #, c-format
 msgid "After the operation, %s will be freed."
-msgstr "Na de operatie zal %s worden vrijgemaakt."
+msgstr "Na de bewerking zal %s worden vrijgemaakt."
 
 #. translators: meaning --force-resolution and --no-force-resolution
 #: ../src/solve-commit.cc:829
@@ -1816,7 +1786,7 @@ msgstr "Genereert een test..."
 #: ../src/solve-commit.cc:939
 #, c-format
 msgid "Solver test case generated successfully at %s."
-msgstr "Test met oplosser is met succes gegenereerd in %s."
+msgstr "Test met oplosser is gegenereerd in %s."
 
 #: ../src/solve-commit.cc:943
 msgid "Error creating the solver test case."
@@ -1824,11 +1794,11 @@ msgstr "Fout bij genereren van test."
 
 #: ../src/solve-commit.cc:977
 msgid "Computing distribution upgrade..."
-msgstr "Berekenen van distributie opwaardering..."
+msgstr "Distributie-upgrades berekenen..."
 
 #: ../src/solve-commit.cc:983
 msgid "Resolving package dependencies..."
-msgstr "Afhankelijkheden tussen pakketten oplossen..."
+msgstr "Pakketafhankelijkheden oplossen..."
 
 #: ../src/solve-commit.cc:1017
 msgid "Root privileges are required to fix broken package dependencies."
@@ -1853,12 +1823,12 @@ msgstr "Accepteer de samenvatting en vervolg met de installatie of verwijdering 
 #. translators: help text for 'n' option in the y/n/p prompt
 #: ../src/solve-commit.cc:1038
 msgid "Cancel the operation."
-msgstr "Annuleer de operatie."
+msgstr "Annuleer de bewerking."
 
 #. translators: help text for 'p' option in the y/n/p prompt
 #: ../src/solve-commit.cc:1040
 msgid "Restart solver in no-force-resolution mode in order to show dependency problems."
-msgstr "Herstart de oplosser in de modus niet-forceren om de afhankelijkheidsproblemen te tonen."
+msgstr "Herstart de oplosser in de modus niet-forceren om de afhankelijkheidsproblemen weer te geven."
 
 #: ../src/solve-commit.cc:1082
 msgid "committing"
@@ -1866,34 +1836,22 @@ msgstr "toewijzen"
 
 #: ../src/solve-commit.cc:1087
 msgid "(dry run)"
-msgstr "(testdraai)"
+msgstr "(test)"
 
 #: ../src/solve-commit.cc:1116 ../src/solve-commit.cc:1155
 msgid "Problem retrieving the package file from the repository:"
-msgstr "Probleem bij ophalen van pakketbestand van de installatiebron:"
+msgstr "Probleem bij ophalen van pakketbestand uit de opslagruimte:"
 
 #. translators: the first %s is 'zypper refresh' and the second
 #. is repo allias
 #: ../src/solve-commit.cc:1151
 #, c-format
 msgid "Repository '%s' is out of date. Running '%s' might help."
-msgstr "Installatiebron '%s' is verouderd. Draaien van '%s' kan helpen."
+msgstr "Opslagruimte '%s' is verouderd. Als u '%s' uitvoert, kan dit helpen."
 
 #: ../src/solve-commit.cc:1163
-msgid ""
-"The package integrity check failed. This may be a problem with the repository or media. Try one of the following:\n"
-"\n"
-"- just retry previous command\n"
-"- refresh the repositories using 'zypper refresh'\n"
-"- use another installation medium (if e.g. damaged)\n"
-"- use another repository"
-msgstr ""
-"Integriteitscontrole van pakket is mislukt. Er is mogelijk een probleem met de installatiebron of het medium. Probeer een van de volgende oplossingen:\n"
-" \n"
-" - probeer het vorige commando opnieuw\n"
-" - vernieuw de installatiebronnen met 'zypper refresh'\n"
-" - gebruik een ander installatiemedium (bijvoorbeeld bij beschadiging)\n"
-" - gebruik een andere installatiebron"
+msgid "The package integrity check failed. This may be a problem with the repository or media. Try one of the following:\n\n- just retry previous command\n- refresh the repositories using 'zypper refresh'\n- use another installation medium (if e.g. damaged)\n- use another repository"
+msgstr "Integriteitscontrole van pakket is mislukt. Er is mogelijk een probleem met de opslagruimte of het medium. Probeer een van de volgende oplossingen:\n \n - probeer de vorige opdracht opnieuw\n - vernieuw de opslagruimten met 'zypper refresh'\n - gebruik een ander installatiemedium (bijvoorbeeld bij beschadiging)\n - gebruik een andere opslagruimte"
 
 #: ../src/solve-commit.cc:1176
 msgid "Problem occured during or after installation or removal of packages:"
@@ -1915,7 +1873,6 @@ msgid_plural "%d patches needed"
 msgstr[0] "%d patch vereist"
 msgstr[1] "%d patches vereist"
 
-# /usr/lib/YaST2/clients/inst_config_x11.ycp:947
 #. translators: %d is the number of security patches
 #: ../src/update.cc:69
 #, c-format
@@ -1929,12 +1886,8 @@ msgid "Needed"
 msgstr "Nodig"
 
 #: ../src/update.cc:193
-msgid ""
-"These are only the updates affecting the updater itself.\n"
-"Other updates are available too.\n"
-msgstr ""
-"Dit zijn alleen de opwaarderingen die betrekking hebben op het opwaardeerprogramma zelf.\n"
-"Er zijn ook andere opwaarderingen beschikbaar.\n"
+msgid "These are only the updates affecting the updater itself.\nOther updates are available too.\n"
+msgstr "Dit zijn alleen de opwaarderingen die betrekking hebben op het opwaardeerprogramma zelf.\nEr zijn ook andere opwaarderingen beschikbaar.\n"
 
 #: ../src/update.cc:201 ../src/update.cc:464
 msgid "No updates found."
@@ -1948,10 +1901,9 @@ msgstr "Pakketopwaarderingen"
 msgid "Patches"
 msgstr "Patches"
 
-# /usr/lib/YaST2/clients/inst_config_x11.ycp:947
 #: ../src/update.cc:342
 msgid "Pattern updates"
-msgstr "Zoeken in opwaarderingen"
+msgstr "Patroonopwaarderingen"
 
 #: ../src/update.cc:344
 msgid "Product updates"
@@ -1960,7 +1912,7 @@ msgstr "Productopwaarderingen"
 #: ../src/update.cc:528
 #, c-format
 msgid "Cannot parse '%s < %s'"
-msgstr "Kan '%s < %s' niet ontleden"
+msgstr "Kan '%s < %s' niet parseren"
 
 #. translators: %s is the name of a patch
 #: ../src/update.cc:584
@@ -1981,7 +1933,7 @@ msgstr "Patch '%s' niet gevonden."
 #: ../src/update.cc:710
 #, c-format
 msgid "No packages matching '%s' are installed."
-msgstr "Er zijn geen pakketten die overeenkomen met '%s' geïnstalleerd."
+msgstr "Er zijn geen pakketten geïnstalleerd die overeenkomen met '%s'."
 
 #: ../src/update.cc:713
 #, c-format
@@ -2001,17 +1953,17 @@ msgstr "Geen opwaardering voor '%s'."
 #. wrong option in the last argument
 #: ../src/utils/getopt.cc:69
 msgid "Unknown option "
-msgstr "Onbekende optie "
+msgstr "Onbekende optie"
 
 #: ../src/utils/getopt.cc:89
 msgid "Missing argument for "
-msgstr "Argument ontbreekt voor "
+msgstr "Argument ontbreekt voor"
 
 #. translators: speaking of two mutually contradicting command line options
 #: ../src/utils/getopt.cc:120
 #, c-format
 msgid "%s used together with %s, which contradict each other. This property will be left unchanged."
-msgstr "%s is samen met %s gebruikt, terwijl ze elkaar tegenspreken. Deze bron zal niet worden gewijzigd."
+msgstr "%s is samen met %s gebruikt, terwijl ze elkaar tegenspreken. Deze eigenschap zal niet worden gewijzigd."
 
 #: ../src/utils/messages.cc:22
 msgid "Please file a bug report about this."
@@ -2028,7 +1980,6 @@ msgstr "Zie http://en.opensuse.org/Zypper#Troubleshooting voor instructies."
 msgid "Usage"
 msgstr "Gebruik"
 
-# /usr/lib/YaST2/clients/lan_inetd_custom.ycp:764
 #: ../src/utils/messages.cc:41
 msgid "Too many arguments."
 msgstr "Teveel argumenten."
@@ -2045,25 +1996,25 @@ msgstr "De optie '--%s' heeft nu geen effect."
 #: ../src/utils/messages.cc:78
 #, c-format
 msgid "You have chosen to ignore a problem with download or installation of a package which might lead to broken dependencies of other packages. It is recommended to run '%s' after the operation has finished."
-msgstr "U hebt er voor gekozen om aan een probleem met het downloaden  or installatie van een pakket geen aandacht te geven dat kan leiden tot gebroken afhankelijkheden van andere pakketten. Het is aanbevolen om '%s' te draaien nadat de operatie is beëindigd."
+msgstr "U hebt ervoor gekozen om aan een probleem met het downloaden of installeren van een pakket geen aandacht te geven. Dit kan leiden tot gebroken afhankelijkheden van andere pakketten. U kunt het beste '%s' uitvoeren nadat de bewerking is beëindigd."
 
 #: ../src/utils/misc.cc:87
 msgid "package"
 msgid_plural "packages"
-msgstr[0] "pakket"
-msgstr[1] "pakketten"
+msgstr[0] "Pakket"
+msgstr[1] "Pakketten"
 
 #: ../src/utils/misc.cc:89
 msgid "pattern"
 msgid_plural "patterns"
-msgstr[0] "patroon"
-msgstr[1] "patronen"
+msgstr[0] "Patroon"
+msgstr[1] "Patronen"
 
 #: ../src/utils/misc.cc:91
 msgid "product"
 msgid_plural "product"
-msgstr[0] "product"
-msgstr[1] "producten"
+msgstr[0] "Product"
+msgstr[1] "Product"
 
 #: ../src/utils/misc.cc:93
 msgid "patch"
@@ -2081,8 +2032,8 @@ msgstr[1] "bronpakketten"
 #: ../src/utils/misc.cc:97
 msgid "resolvable"
 msgid_plural "resolvables"
-msgstr[0] "oplosbare"
-msgstr[1] "oplosbaren"
+msgstr[0] "Oplosbaar"
+msgstr[1] "oplosbare items"
 
 #: ../src/utils/misc.cc:106
 msgid "Unknown"
@@ -2094,7 +2045,7 @@ msgstr "Niet toepasbaar"
 
 #: ../src/utils/misc.cc:191
 msgid "Specified local path does not exist or is not accessible."
-msgstr "Het gespecificeerde lokale pad bestaat niet of is niet toegankelijk."
+msgstr "Het opgegeven lokale pad bestaat niet of is niet toegankelijk."
 
 #: ../src/utils/misc.cc:203
 msgid "Given URI is invalid"
@@ -2102,7 +2053,7 @@ msgstr "Opgegeven URI is ongeldig"
 
 #: ../src/utils/misc.cc:254
 msgid "Problem copying the specified RPM file to the cache directory."
-msgstr "Probleem bij het kopiëren van het gespecificeerde RPM-bestand naar de cachemap."
+msgstr "Probleem bij het kopiëren van het opgegeven RPM-bestand naar de cachemap."
 
 #: ../src/utils/misc.cc:255
 msgid "Perhaps you are running out of disk space."
@@ -2110,7 +2061,7 @@ msgstr "Wellicht is er onvoldoende schijfruimte."
 
 #: ../src/utils/misc.cc:263
 msgid "Problem retrieving the specified RPM file"
-msgstr "Probleem bij ophalen van het gespecificeerde RPM-bestand"
+msgstr "Probleem bij ophalen van het opgegeven RPM-bestand"
 
 #: ../src/utils/misc.cc:264
 msgid "Please check whether the file is accessible."
@@ -2119,7 +2070,7 @@ msgstr "Controleer of het bestand toegankelijk is."
 #: ../src/utils/misc.cc:321
 #, c-format
 msgid "Cannot parse capability '%s'."
-msgstr "Kan functie '%s' niet ontleden."
+msgstr "Kan functie '%s' niet parseren."
 
 #: ../src/utils/pager.cc:37
 #, c-format
@@ -2132,20 +2083,20 @@ msgstr "Gebruik pijl- of PgUp/PgDn-toetsen om de tekst per regel of pagina te la
 
 #: ../src/utils/pager.cc:49
 msgid "Use the Enter or Space key to scroll the text by lines or pages."
-msgstr "Gebruik de Enter- of Spatie-toets om de tekst per rwgwl of pagina te laten schuiven."
+msgstr "Gebruik de Enter- of Spatie-toets om de tekst per regel of pagina te laten schuiven."
 
 #. ----------------------------------------------------------------------------
 #: ../src/utils/prompt.cc:88
 msgid "abort"
-msgstr "afbreken"
+msgstr "Afbreken"
 
 #: ../src/utils/prompt.cc:88
 msgid "retry"
-msgstr "opnieuw proberen"
+msgstr "Opnieuw"
 
 #: ../src/utils/prompt.cc:88
 msgid "ignore"
-msgstr "negeren"
+msgstr "Negeren"
 
 #: ../src/utils/prompt.cc:100
 msgid "Abort, retry, ignore?\n"
@@ -2154,7 +2105,7 @@ msgstr "Afbreken, opnieuw, negeren?\n"
 #: ../src/utils/prompt.cc:135
 #, c-format
 msgid "autoselect %s after %u "
-msgstr "autoselecteer %s na %u "
+msgstr "%s automatisch selecteren na %u "
 
 #. translators: "a/r/i" are the answers to the
 #. "Abort, retry, ignore?" prompt
@@ -2173,12 +2124,12 @@ msgstr "Afbreken, opnieuw, negeren?"
 #: ../src/utils/prompt.cc:169 ../src/utils/prompt.cc:205
 #: ../src/utils/prompt.cc:261
 msgid "yes"
-msgstr "ja"
+msgstr "Ja"
 
 #: ../src/utils/prompt.cc:169 ../src/utils/prompt.cc:206
 #: ../src/utils/prompt.cc:261
 msgid "no"
-msgstr "nee"
+msgstr "Nee"
 
 #: ../src/utils/prompt.cc:253
 #, c-format
@@ -2194,19 +2145,14 @@ msgstr "Voer 'y' in voor '%s' of 'n' voor '%s' als niets anders voor u werkt."
 
 #: ../src/utils/prompt.cc:274
 #, c-format
-msgid ""
-"If you run zypper without a terminal, use '%s' global\n"
-"option to make zypper use default answers to prompts."
-msgstr ""
-"Als u zypper draait zonder een terminal gebruik dan de globale\n"
-"optie '%s' zodat zypper de standaard antwoorden gebruikt op vragen."
+msgid "If you run zypper without a terminal, use '%s' global\noption to make zypper use default answers to prompts."
+msgstr "Als u zypper uitvoert zonder een terminal gebruik dan de algemene\noptie '%s' zodat zypper de standaardantwoorden gebruikt op vragen."
 
 #. TranslatorExplanation These are reasons for various failures.
 #: ../src/utils/prompt.h:125
 msgid "Not found"
-msgstr "Niet gevonden"
+msgstr "niet gevonden"
 
-# error box title
 #: ../src/utils/prompt.h:125
 msgid "I/O error"
 msgstr "I/O-fout"
@@ -2217,240 +2163,74 @@ msgstr "Ongeldig object"
 
 #: ../src/utils/prompt.h:132
 msgid "Error"
-msgstr "Fout"
+msgstr "fout"
 
 #: ../src/Zypper.cc:153
-msgid ""
-"  Global Options:\n"
-"\t--help, -h\t\tHelp.\n"
-"\t--version, -V\t\tOutput the version number.\n"
-"\t--quiet, -q\t\tSuppress normal output, print only error\n"
-"\t\t\t\tmessages.\n"
-"\t--verbose, -v\t\tIncrease verbosity.\n"
-"\t--no-abbrev, -A\t\tDo not abbreviate text in tables.\n"
-"\t--table-style, -s\tTable style (integer).\n"
-"\t--rug-compatible, -r\tTurn on rug compatibility.\n"
-"\t--non-interactive, -n\tDo not ask anything, use default answers\n"
-"\t\t\t\tautomatically.\n"
-"\t--xmlout, -x\t\tSwitch to XML output.\n"
-"\t--reposd-dir, -D <dir>\tUse alternative repository definition files\n"
-"\t\t\t\tdirectory.\n"
-"\t--cache-dir, -C <dir>\tUse alternative meta-data cache directory.\n"
-"\t--raw-cache-dir <dir>\tUse alternative raw meta-data cache directory.\n"
-msgstr ""
-"  Globale opties:\n"
-"\t--help, -h\t\thulp\n"
-"\t--version, -V\t\ttoon versienummer\n"
-"\t--quiet, -q\t\tonderdruk normale uitvoer, toon alleen\n"
-"\t\t\t\tfoutmeldingen\n"
-"\t--verbose, -v\t\ttoon meer uitvoer\n"
-"\t--no-abbrev, -A\t\tgeen afkortingen in tabellen\n"
-"\t--table-style, -s\ttabelstijl (heel getal)\n"
-"\t--rug-compatible, -r\tschakel rug-compatibiliteit in\n"
-"\t--non-interactive\tvraag niets, gebruik automatisch\n"
-"\t\t\t\tstandaardantwoorden\n"
-"\t--xmlout, -x\t\tschakel naar XML-uitvoer\n"
-"\t--reposd-dir, -D <dir>\tgebruik alternatieve map voor bestanden\n"
-"\t\t\t\tmet definities voor installatiebronnen'\n"
-"\t--cache-dir, -C <dir>\tgebruik alternatieve map voor database met\n"
-"\t\t\t\tmeta-data-cache\n"
-"\t--raw-cache-dir <dir>\tgebruik alternatieve map voor\n"
-"\t\t\t\t'raw meta-data-cache'\n"
+msgid "  Global Options:\n\t--help, -h\t\tHelp.\n\t--version, -V\t\tOutput the version number.\n\t--quiet, -q\t\tSuppress normal output, print only error\n\t\t\t\tmessages.\n\t--verbose, -v\t\tIncrease verbosity.\n\t--no-abbrev, -A\t\tDo not abbreviate text in tables.\n\t--table-style, -s\tTable style (integer).\n\t--rug-compatible, -r\tTurn on rug compatibility.\n\t--non-interactive, -n\tDo not ask anything, use default answers\n\t\t\t\tautomatically.\n\t--xmlout, -x\t\tSwitch to XML output.\n\t--reposd-dir, -D <dir>\tUse alternative repository definition files\n\t\t\t\tdirectory.\n\t--cache-dir, -C <dir>\tUse alternative meta-data cache directory.\n\t--raw-cache-dir <dir>\tUse alternative raw meta-data cache directory.\n"
+msgstr "  Algemene opties:\n\t--help, -h\t\tHelp.\n\t--version, -V\t\tVersienummer uitvoeren.\n\t--quiet, -q\t\tOnderdruk normale uitvoer en geef alleen foutmeldingen weer.\n\t\t\t\t\n\t--verbose, -v\t\tGeef meer uitvoer weer.\n\t--no-abbrev, -A\t\tGeen afkortingen in tabellen.\n\t--table-style, -s\tTabelstijl (geheel getal).\n\t--rug-compatible, -r\tSchakel rug-compatibiliteit in.\n\t--non-interactive, -n\tVraag niets, gebruik automatisch\n\t\t\t\tstandaardantwoorden.\n\t--xmlout, -x\t\tSchakel naar XML-uitvoer.\n\t--reposd-dir, -D <dir>\tGebruik alternatieve bestanden met definities voor\n\t\t\t\topslagruimten.\n\t--cache-dir, -C <dir>\tGebruik alternatieve directory voor database met metagegevenscache.\n\t--raw-cache-dir <dir>\tGebruik alternatieve directory voor raw metagegevenscache.\n"
 
 #: ../src/Zypper.cc:171
-msgid ""
-"     Repository Options:\n"
-"\t--no-gpg-checks\t\tIgnore GPG check failures and continue.\n"
-"\t--plus-repo, -p <URI>\tUse an additional repository.\n"
-"\t--disable-repositories\tDo not read meta-data from repositories.\n"
-"\t--no-refresh\t\tDo not refresh the repositories.\n"
-msgstr ""
-"     Installatiebron-opties:\n"
-"\t--no-gpg-checks\t\tnegeer fouten bij GPG-controles en ga door\n"
-"\t--plus-repo, -p <URI>\tgebruik een additionele installatiebron\n"
-"\t--disable-repositories\tlees geen meta-data uit installatiebronnen\n"
-"\t--no-refresh\t\tinstallatiebronnen niet verversen\n"
+msgid "     Repository Options:\n\t--no-gpg-checks\t\tIgnore GPG check failures and continue.\n\t--plus-repo, -p <URI>\tUse an additional repository.\n\t--disable-repositories\tDo not read meta-data from repositories.\n\t--no-refresh\t\tDo not refresh the repositories.\n"
+msgstr "    Opslagruimteopties:\n\t--no-gpg-checks\t\tNegeer fouten bij GPG-controles en ga door.\n\t--plus-repo, -p <URI>\tGebruik een extra opslagruimte.\n\t--disable-repositories\tLees geen metagegevens uit opslagruimten.\n\t--no-refresh\t\tOpslagruimten niet vernieuwen.\n"
 
 #. translators: these belong to Repository Options main help text
 #: ../src/Zypper.cc:178
-msgid ""
-"\t--no-cd\t\t\tIgnore CD/DVD repositories.\n"
-"\t--no-remote\t\tIgnore remote repositories.\n"
-msgstr ""
-"\t--no-cd\t\t\tNegeer CD/DVD installatiebronnen.\n"
-"\t--no-remote\t\tNegeer installatiebronnen op afstand.\n"
+msgid "\t--no-cd\t\t\tIgnore CD/DVD repositories.\n\t--no-remote\t\tIgnore remote repositories.\n"
+msgstr "\t--no-cd\t\t\tNegeer cd/dvd-opslagruimten.\n\t--no-remote\t\tNegeer externe opslagruimten.\n"
 
 #: ../src/Zypper.cc:182
-msgid ""
-"     Target Options:\n"
-"\t--root, -R <dir>\tOperate on a different root directory.\n"
-"\t--disable-system-resolvables\n"
-"\t\t\t\tDo not read installed packages.\n"
-msgstr ""
-"     Doelopties:\n"
-"\t--root, -R <dir>\twerk vanuit een andere hoofdmap\n"
-"\t--disable-system-resolvables\n"
-"\t\t\t\tlees geen geïnstalleerde pakketten\n"
+msgid "     Target Options:\n\t--root, -R <dir>\tOperate on a different root directory.\n\t--disable-system-resolvables\n\t\t\t\tDo not read installed packages.\n"
+msgstr "    Doelopties:\n\t--root, -R <dir>\tWerk vanuit een andere hoofddirectory.\n\t--disable-system-resolvables\n\t\t\t\tLees geen geïnstalleerde pakketten.\n"
 
 #: ../src/Zypper.cc:189
-msgid ""
-"  Commands:\n"
-"\thelp, ?\t\t\tPrint help.\n"
-"\tshell, sh\t\tAccept multiple commands at once.\n"
-msgstr ""
-"  Opdrachten:\n"
-"\thelp, ?\t\t\ttoon hulp\n"
-"\tshell, sh\t\taccepteer meer commando's ineens\n"
+msgid "  Commands:\n\thelp, ?\t\t\tPrint help.\n\tshell, sh\t\tAccept multiple commands at once.\n"
+msgstr "  Opdrachten:\n\thelp, ?\t\t\tHelp afdrukken\n\tshell, sh\t\tMeerdere opdrachten tegelijk accepteren\n"
 
 #: ../src/Zypper.cc:194
-msgid ""
-"     Repository Management:\n"
-"\trepos, lr\t\tList all defined repositories.\n"
-"\taddrepo, ar\t\tAdd a new repository.\n"
-"\tremoverepo, rr\t\tRemove specified repository.\n"
-"\trenamerepo, nr\t\tRename specified repository.\n"
-"\tmodifyrepo, mr\t\tModify specified repository.\n"
-"\trefresh, ref\t\tRefresh all repositories.\n"
-"\tclean\t\t\tClean local caches.\n"
-msgstr ""
-"     Beheer van installatiebronnen:\n"
-"\trepos, lr\t\ttoon alle gedefiniëerde installatiebronnen\n"
-"\taddrepo, ar\t\tvoeg een nieuwe installatiebron toe\n"
-"\tremoverepo, rr\t\tverwijder de gespecificeerde installatiebron\n"
-"\trenamerepo, nr\t\thernoem de gespecificeerde installatiebron\n"
-"\tmodifyrepo, mr\t\twijzig de gespecificeerde installatiebron\n"
-"\trefresh, ref\t\tververs alle installatiebronnen\n"
-"\tclean\t\t\tmaak lokale caches schoon\n"
+msgid "     Repository Management:\n\trepos, lr\t\tList all defined repositories.\n\taddrepo, ar\t\tAdd a new repository.\n\tremoverepo, rr\t\tRemove specified repository.\n\trenamerepo, nr\t\tRename specified repository.\n\tmodifyrepo, mr\t\tModify specified repository.\n\trefresh, ref\t\tRefresh all repositories.\n\tclean\t\t\tClean local caches.\n"
+msgstr "    Beheer van opslagruimten:\n\trepos, lr\t\tGeef alle gedefinieerde opslagruimten weer.\n\taddrepo, ar\t\tVoeg een nieuwe opslagruimte toe.\n\tremoverepo, rr\t\tVerwijder de gespecificeerde opslagruimten.\n\trenamerepo, nr\t\tHernoem de gespecificeerde opslagruimten.\n\tmodifyrepo, mr\t\tWijzig de gespecificeerde opslagruimte.\n\trefresh, ref\t\tVernieuw alle opslagruimten.\n\tclean\t\t\tMaak lokale caches schoon.\n"
 
 #: ../src/Zypper.cc:204
-msgid ""
-"     Service Management:\n"
-"\tservices, ls\t\tList all defined services.\n"
-"\taddservice, as\t\tAdd a new service.\n"
-"\tmodifyservice, ms\tModify specified service.\n"
-"\tremoveservice, rs\tRemove specified service.\n"
-"\trefresh-services, refs\tRefresh all services.\n"
-msgstr ""
-"     Service-beheer:\n"
-"\tservices, ls\t\ttoon alle gedefinieerde services.\n"
-"\taddservice, as\t\tvoeg een nieuw service toe.\n"
-"\tmodifyservice, ms\tWijzig een gespecificeerde service.\n"
-"\tremoveservice, rs\tverwijder een gespecificeerde service.\n"
-"\trefresh-services, refs\tVervers alle services.\n"
+msgid "     Service Management:\n\tservices, ls\t\tList all defined services.\n\taddservice, as\t\tAdd a new service.\n\tmodifyservice, ms\tModify specified service.\n\tremoveservice, rs\tRemove specified service.\n\trefresh-services, refs\tRefresh all services.\n"
+msgstr "    Service-beheer:\n\tservices, ls\t\tGeef alle gedefinieerde services weer.\n\taddservice, as\t\tVoeg een nieuw service toe.\n\tmodifyservice, ms\tWijzig een gespecificeerde service.\n\tremoveservice, rs\tVerwijder een gespecificeerde service.\n\trefresh-services, refs\tVernieuw alle services.\n"
 
 #: ../src/Zypper.cc:212
-msgid ""
-"     Software Management:\n"
-"\tinstall, in\t\tInstall packages.\n"
-"\tremove, rm\t\tRemove packages.\n"
-"\tverify, ve\t\tVerify integrity of package dependencies.\n"
-"\tsource-install, si\tInstall source packages and their build\n"
-"\t\t\t\tdependencies.\n"
-"\tinstall-new-recommends, inr\n"
-"\t\t\t\tInstall newly added packages recommended\n"
-"\t\t\t\tby installed packages.\n"
-msgstr ""
-"     Softwarebeheer:\n"
-"\tinstall, in\t\tinstalleer pakketten\n"
-"\tremove, rm\t\tverwijder pakketten\n"
-"\tverify, ve\t\tcontroleer de integriteit van pakketafhankelijkheden\n"
-"\tsource-install, si\tinstalleer bronpakketten en hun bouw\n"
-"\t\t\t\tafhankelijkheden\n"
-"\tinstall-new-recommends, inr\n"
-"\t\t\t\tinstalleer nieuw toegevoegde pakketten aanbevolen\n"
-"\t\t\t\tdoor geïnstalleerde pakketten.\n"
+msgid "     Software Management:\n\tinstall, in\t\tInstall packages.\n\tremove, rm\t\tRemove packages.\n\tverify, ve\t\tVerify integrity of package dependencies.\n\tsource-install, si\tInstall source packages and their build\n\t\t\t\tdependencies.\n\tinstall-new-recommends, inr\n\t\t\t\tInstall newly added packages recommended\n\t\t\t\tby installed packages.\n"
+msgstr "     Softwarebeheer:\n\tinstall, in\t\tinstalleer pakketten\n\tremove, rm\t\tverwijder pakketten\n\tverify, ve\t\tcontroleer de integriteit van pakketafhankelijkheden\n\tsource-install, si\tinstalleer bronpakketten en hun bouw\n\t\t\t\tafhankelijkheden\n\tinstall-new-recommends, inr\n\t\t\t\tinstalleer nieuw toegevoegde pakketten aanbevolen\n\t\t\t\tdoor geïnstalleerde pakketten.\n"
 
 #: ../src/Zypper.cc:223
-msgid ""
-"     Update Management:\n"
-"\tupdate, up\t\tUpdate installed packages with newer versions.\n"
-"\tlist-updates, lu\tList available updates.\n"
-"\tpatch\t\t\tInstall needed patches.\n"
-"\tlist-patches, lp\tList needed patches.\n"
-"\tdist-upgrade, dup\tPerform a distribution upgrade.\n"
-"\tpatch-check, pchk\tCheck for patches.\n"
-msgstr ""
-"     Opwaardeerbeheer:\n"
-"\tupdate, up\t\twaardeer geïnstalleerde pakketten op naar de nieuwste versies\n"
-"\tlist-updates, lu\ttoon beschikbare opwaarderingen\n"
-"\tpatch\t\t\tinstalleer benodigde patches\n"
-"\tlist-patches, lp\ttoon benodigde patches\n"
-"\tdist-upgrade, dup\tdoe een distributie opwaardering\n"
-"\tpatch-check, pchk\tcontroleer op patches\n"
+msgid "     Update Management:\n\tupdate, up\t\tUpdate installed packages with newer versions.\n\tlist-updates, lu\tList available updates.\n\tpatch\t\t\tInstall needed patches.\n\tlist-patches, lp\tList needed patches.\n\tdist-upgrade, dup\tPerform a distribution upgrade.\n\tpatch-check, pchk\tCheck for patches.\n"
+msgstr "     Updatebeheer:\n\tupdate, up\t\twerk geïnstalleerde pakketten bij naar de nieuwste versies\n\tlist-updates, lu\tgeef beschikbare updates weer\n\tpatch\t\t\tinstalleer vereiste patches\n\tlist-patches, lp\tgeef vereiste patches weer\n\tdist-upgrade, dup\tvoer een distributieupdate uit.\n\tpatch-check, pchk\tcontroleer op patches\n"
 
 #: ../src/Zypper.cc:232
-msgid ""
-"     Querying:\n"
-"\tsearch, se\t\tSearch for packages matching a pattern.\n"
-"\tinfo, if\t\tShow full information for specified packages.\n"
-"\tpatch-info\t\tShow full information for specified patches.\n"
-"\tpattern-info\t\tShow full information for specified patterns.\n"
-"\tproduct-info\t\tShow full information for specified products.\n"
-"\tpatches, pch\t\tList all available patches.\n"
-"\tpackages, pa\t\tList all available packages.\n"
-"\tpatterns, pt\t\tList all available patterns.\n"
-"\tproducts, pd\t\tList all available products.\n"
-"\twhat-provides, wp\tList packages providing specified capability.\n"
-msgstr ""
-"     opvragen:\n"
-"\tsearch, se\t\tzoek naar pakketten die met een patroon overeenkomen\n"
-"\tinfo, if\t\ttoon alle informatie over gespecificeerde pakketten\n"
-"\tpatch-info\t\ttoon alle informatie over gespecificeerde patches\n"
-"\tpattern-info\t\ttoo alle informati over gespecificeerde patronen\n"
-"\tproduct-info\t\ttoo alle informatie over gespecificeerde producten\n"
-"\tpatches, pch\t\ttoon alle beschikbare patches\n"
-"\tpackages, pa\t\ttoon alle beschikbare pakketten\n"
-"\tpatterns, pt\t\ttoon alle beschikbare patronen\n"
-"\tproducts, pd\t\ttoon alle beschikbare producten\n"
-"\twhat-provides, wp\ttoon pakketten die een gespecificeerde capaciteit leveren\n"
+msgid "     Querying:\n\tsearch, se\t\tSearch for packages matching a pattern.\n\tinfo, if\t\tShow full information for specified packages.\n\tpatch-info\t\tShow full information for specified patches.\n\tpattern-info\t\tShow full information for specified patterns.\n\tproduct-info\t\tShow full information for specified products.\n\tpatches, pch\t\tList all available patches.\n\tpackages, pa\t\tList all available packages.\n\tpatterns, pt\t\tList all available patterns.\n\tproducts, pd\t\tList all available products.\n\twhat-provides, wp\tList packages providing specified capability.\n"
+msgstr "    Opvragen:\n\tsearch, se\t\tZoek naar pakketten die met een patroon overeenkomen.\n\tinfo, if\t\tGeef alle informatie over opgegeven pakketten weer.\n\tpatch-info\t\tGeef alle informatie over opgegeven patches weer.\n\tpattern-info\t\tGeef alle informatie over opgegeven patronen weer.\n\tproduct-info\t\tGeef alle informatie over opgegeven producten weer.\n\tpatch-check, pchk\tControleren op patches.\n\tlist-updates, lu\tGeef beschikbare updates weer.\n\tpatches, pch\t\tGeef alle beschikbare patches weer.\n\tpackages, pa\t\tGeef alle beschikbare pakketten weer.\n\tpatterns, pt\t\tGeef alle beschikbare patronen weer.\n\tproducts, pd\t\tGeef alle beschikbare producten weer.\n\twhat-provides, wp\tGeef pakketten weer die de opgegeven capaciteit leveren.\n"
 
 #: ../src/Zypper.cc:247
-msgid ""
-"     Package Locks:\n"
-"\taddlock, al\t\tAdd a package lock.\n"
-"\tremovelock, rl\t\tRemove a package lock.\n"
-"\tlocks, ll\t\tList current package locks.\n"
-msgstr ""
-"     Pakketblokkeringen:\n"
-"\taddlock, al\t\tvoeg een pakketblokkering toe\n"
-"\tremovelock, rl\t\tverwijder een pakketblokkering\n"
-"\tlocks, ll\t\ttoon de huidige pakketblokkeringen\n"
+msgid "     Package Locks:\n\taddlock, al\t\tAdd a package lock.\n\tremovelock, rl\t\tRemove a package lock.\n\tlocks, ll\t\tList current package locks.\n"
+msgstr "    Pakketblokkeringen:\n\taddlock, al\t\tVoeg een pakketblokkering toe.\n\tremovelock, rl\t\tVerwijder een pakketblokkering.\n\tlocks, ll\t\tGeef de huidige pakketblokkeringen weer.\n"
 
 #: ../src/Zypper.cc:253
-msgid ""
-"     Other Commands:\n"
-"\tversioncmp, vcmp\tCompare two version strings.\n"
-"\ttargetos, tos\t\tPrint the target operating system ID string.\n"
-"\tlicenses\t\tPrint report about licenses and EULAs of\n"
-"\t\t\t\tinstalled packages.\n"
-msgstr ""
-"     Andere commando's:\n"
-"\tversioncmp, vcmp\tvergelijk twee versietekenreeksen\n"
-"\ttargetos, tos\t\ttoon de doel-besturingssysteem-ID tekenreeks\n"
-"\tlicenses\t\ttoon het rapport over de licenties en EULA's van\n"
-"\t\t\t\tde geïnstalleerde pakketten.\n"
+msgid "     Other Commands:\n\tversioncmp, vcmp\tCompare two version strings.\n\ttargetos, tos\t\tPrint the target operating system ID string.\n\tlicenses\t\tPrint report about licenses and EULAs of\n\t\t\t\tinstalled packages.\n"
+msgstr "     Andere opdrachten:\n\tversioncmp, vcmp\tvergelijk twee versietekenreeksen\n\ttargetos, tos\t\tgeef de doelbesturingssysteem-ID tekenreeks weer\n\tlicenses\t\tgeef het rapport over de licenties en EULA's van\n\t\t\t\tde geïnstalleerde pakketten weer.\n"
 
 #: ../src/Zypper.cc:261
-msgid ""
-"  Usage:\n"
-"\tzypper [--global-options] <command> [--command-options] [arguments]\n"
-msgstr ""
-"  Gebruik:\n"
-"\tzypper [--global-options] <commando> [--commando-opties] [argumenten]\n"
+msgid "  Usage:\n\tzypper [--global-options] <command> [--command-options] [arguments]\n"
+msgstr "  Gebruik:\n\tzypper [--algemene opties] <command> [--opdracht-opties] [argumenten]\n"
 
 #. translators: %s is "help" or "zypper help" depending on whether
 #. zypper shell is running or not
 #: ../src/Zypper.cc:286
 #, c-format
 msgid "Type '%s' to get a list of global options and commands."
-msgstr "Type '%s' om een lijst van globale opties en commando's te verkrijgen."
+msgstr "Type '%s' om een lijst van algemene opties en opdrachten te verkrijgen."
 
 #. translators: %s is "help" or "zypper help" depending on whether
 #. zypper shell is running or not
 #: ../src/Zypper.cc:295
 #, c-format
 msgid "Type '%s' to get command-specific help."
-msgstr "Type '%s' om commando-specifieke hulp."
+msgstr "Typ '%s' voor hulp bij de opdrachten."
 
 #: ../src/Zypper.cc:398
 #, c-format
@@ -2477,11 +2257,11 @@ msgstr "Modus zonder GPG-controles wordt geactiveerd."
 
 #: ../src/Zypper.cc:461
 msgid "The path specified in the --root option must be absolute."
-msgstr "Het pad gespecificeerd bij de --root optie moet absoluut zijn."
+msgstr "Het opgegeven pad bij de --root optie moet absoluut zijn."
 
 #: ../src/Zypper.cc:490
 msgid "Repositories disabled, using the database of installed packages only."
-msgstr "Bronnen uitgeschakeld, gebruikt alleen de database van geïnstalleerde pakketten."
+msgstr "Opslagruimten uitgeschakeld, gebruikt alleen de database van geïnstalleerde pakketten."
 
 #: ../src/Zypper.cc:502
 msgid "Autorefresh disabled."
@@ -2489,11 +2269,11 @@ msgstr "Automatisch vernieuwen uitgezet."
 
 #: ../src/Zypper.cc:509
 msgid "CD/DVD repositories disabled."
-msgstr "CD/DVD-installatiebronnen uitgeschakeld."
+msgstr "Cd/dvd-opslagruimten uitgeschakeld."
 
 #: ../src/Zypper.cc:516
 msgid "Remote repositories disabled."
-msgstr "Installatiebronnen op afstand uitgeschakeld."
+msgstr "Externe opslagruimten uitgeschakeld."
 
 #: ../src/Zypper.cc:523
 msgid "Ignoring installed resolvables."
@@ -2515,1103 +2295,252 @@ msgstr "Onverwachte uitzondering."
 #. !  the help text will be changed after release
 #: ../src/Zypper.cc:884
 #, c-format
-msgid ""
-"install (in) [options] <capability|rpm_file_uri> ...\n"
-"\n"
-"Install packages with specified capabilities or RPM files with specified location. A capability is NAME[OP<VERSION>], where OP is one of <, <=, =, >=, >.\n"
-"\n"
-"  Command options:\n"
-"-r, --repo <alias|#|URI>        Install packages only from the specified repository.\n"
-"-t, --type <type>               Type of package (%s).\n"
-"                                Default: %s.\n"
-"-n, --name                      Select packages by plain name, not by capability.\n"
-"-C, --capability                Select packages by capability.\n"
-"-f, --force                     Install even if the item is already installed (reinstall).\n"
-"-l, --auto-agree-with-licenses  Automatically say 'yes' to third party license confirmation prompt.\n"
-"                                See 'man zypper' for more details.\n"
-"    --debug-solver              Create solver test case for debugging.\n"
-"    --no-recommends             Do not install recommended packages, only required.\n"
-"-R, --no-force-resolution       Do not force the solver to find solution, let it ask.\n"
-"    --force-resolution          Force the solver to find a solution (even an agressive).\n"
-"-D, --dry-run                   Test the installation, do not actually install.\n"
-msgstr ""
-"install (in) [opties] <capaciteit|rpm_bestand_uri> ...\n"
-"\n"
-"Installeer pakketten met opgegeven capaciteiten of RPM-bestanden met een specifieke locatie. Een capaciteit is NAAM[OP<VERSIE>], waarbij OP een is van <, <=, =, >=, >.\n"
-"\n"
-"  Opdrachtopties:\n"
-"-r, --repo <alias|#|URI>        installeer pakketten alleen uit de gespecificeerde installatiebron\n"
-"-t, --type <type>               type pakket (%s)\n"
-"                                standaard: %s\n"
-"-n, --name                      selecteer pakketten op hun gewone naam, niet op hun capaciteit\n"
-"-C, --capability                selecteer pakketten op hun capaciteit\n"
-"-f, --force                     installeer zelfs als het item reeds is geïnstalleerd (herinstalleren)\n"
-"-l, --auto-agree-with-licenses  zeg automatisch 'ja' tegen licenties van derden die daarom vragen\n"
-"                                zie 'man zypper' voor meer details\n"
-"    --debug-solver              voer een test uit voor foutopsporing\n"
-"    --no-recommends             installeer geen aanbevolen pakketten, alleen vereiste\n"
-"-R, --noforce-resolution        forceer de oplosser niet tot het vinden van een oplossing, laat het vragen\n"
-"    --force-resolution          forceer de oplosser om een oplossing te vinden (zelfs agressief)\n"
-"-D, --dry-run                   test de installatie, maar doe het niet echt\n"
+msgid "install (in) [options] <capability|rpm_file_uri> ...\n\nInstall packages with specified capabilities or RPM files with specified location. A capability is NAME[OP<VERSION>], where OP is one of <, <=, =, >=, >.\n\n  Command options:\n-r, --repo <alias|#|URI>        Install packages only from the specified repository.\n-t, --type <type>               Type of package (%s).\n                                Default: %s.\n-n, --name                      Select packages by plain name, not by capability.\n-C, --capability                Select packages by capability.\n-f, --force                     Install even if the item is already installed (reinstall).\n-l, --auto-agree-with-licenses  Automatically say 'yes' to third party license confirmation prompt.\n                                See 'man zypper' for more details.\n    --debug-solver              Create solver test case for debugging.\n    --no-recommends             Do not install recommended packages, only required.\n-R, --no-force-resolution       Do not force the solver to find solution, let it ask.\n    --force-resolution          Force the solver to find a solution (even an agressive).\n-D, --dry-run                   Test the installation, do not actually install.\n"
+msgstr "install (in) [opties] <capaciteit|rpm_bestand_uri> ...\n\nInstalleer pakketten met opgegeven capaciteiten of RPM-bestanden met een specifieke locatie. Een capaciteit is NAAM[OP<VERSIE>], waarbij OP een van de volgende tekens is: <, <=, =, >=, >.\n\n  Opdrachtopties:\n-r, --repo <alias|#|URI>        Installeer pakketten alleen uit de opgegeven opslagruimte.\n-t, --type <type>               Type pakket (%s).\n                                Standaard: %s.\n-n, --name                      Selecteer pakketten op hun gewone naam, niet op hun capaciteit.\n-C, --capability                Selecteer pakketten op hun capaciteit.\n-f, --force                     Installeer zelfs als het item reeds is geïnstalleerd (herinstalleren).\n-l, --auto-agree-with-licenses  Zeg automatisch 'ja' tegen licenties van derden als  daarom wordt gevraagd.\n                                Zie 'man zypper' voor meer details.\n    --debug-solver              Voer een test uit voor foutopsporing.\n    --no-recommends             Installeer geen aanbevolen pakketten, alleen vereiste.\n-R, --noforce-resolution        Forceer de oplosser niet tot het vinden van een oplossing, maar laat deze vragen.\n    --force-resolution          Forceer de oplosser om een oplossing te vinden (zelfs agressief).\n-D, --dry-run                   Test de installatie, maar voer deze niet echt uit.\n"
 
 #. translators: this option belongs to 'install' command
 #: ../src/Zypper.cc:906
 msgid "    --from <alias|#|URI>        Select packages only from specified repository.\n"
-msgstr "    --from <alias|#|URI>        Selecteer pakketten alleen uit de gespecificeerde installatiebron.\n"
+msgstr "    --van <alias|#|URI>        Selecteer alleen pakketten uit opgegeven opslagruimte.\n"
 
 #. TranslatorExplanation the first %s = "package, patch, pattern, product"
 #. and the second %s = "package"
 #: ../src/Zypper.cc:935
 #, c-format
-msgid ""
-"remove (rm) [options] <capability> ...\n"
-"\n"
-"Remove packages with specified capabilities. A capability is NAME[OP<VERSION>], where OP is one of <, <=, =, >=, >.\n"
-"\n"
-"  Command options:\n"
-"-r, --repo <alias|#|URI>        Operate only with packages from the specified repository.\n"
-"-t, --type <type>               Type of package (%s).\n"
-"                                Default: %s.\n"
-"-n, --name                      Select packages by plain name, not by capability.\n"
-"-C, --capability                Select packages by capability.\n"
-"    --debug-solver              Create solver test case for debugging.\n"
-"-R, --no-force-resolution       Do not force the solver to find solution, let it ask.\n"
-"    --force-resolution          Force the solver to find a solution (even an agressive).\n"
-"-D, --dry-run                   Test the removal, do not actually remove.\n"
-msgstr ""
-"remove (rm) [opties] <capaciteit> ...\n"
-"\n"
-"Verwijder pakketten met gespecificeerde capaciteiten. Een capaciteit is NAAM[OP<VERSIE>], waarbij OP een is van <, <=, =, >=, >.\n"
-"\n"
-"  Opdrachtopties:\n"
-"-r, --repo <alias|#|URI>        werk alleen met pakketten van de gespecificeeerde installatiebron\n"
-"-t, --type <type>               type pakket (%s)\n"
-"                                standaard: %s\n"
-"-n, --name                      selecteer pakketten op gewone naam, niet op capaciteit\n"
-"-C, --capability                selecteer pakketten op capaciteit\n"
-"    --debug-solver              voer een test uit voor foutopsporing\n"
-"-R, --no-force-resolution       forceer de oplosser niet tot een oplossing, laat deze vragen\n"
-"       force-resolution         forceer de oplosser tot het vinden van een oplossing (zelfs agressief)\n"
-"-D, --dry-run                   test de verwijdering, maar doe het niet echt\n"
+msgid "remove (rm) [options] <capability> ...\n\nRemove packages with specified capabilities. A capability is NAME[OP<VERSION>], where OP is one of <, <=, =, >=, >.\n\n  Command options:\n-r, --repo <alias|#|URI>        Operate only with packages from the specified repository.\n-t, --type <type>               Type of package (%s).\n                                Default: %s.\n-n, --name                      Select packages by plain name, not by capability.\n-C, --capability                Select packages by capability.\n    --debug-solver              Create solver test case for debugging.\n-R, --no-force-resolution       Do not force the solver to find solution, let it ask.\n    --force-resolution          Force the solver to find a solution (even an agressive).\n-D, --dry-run                   Test the removal, do not actually remove.\n"
+msgstr "remove (rm) [opties] <capaciteit> ...\n\nVerwijder pakketten met gespecificeerde capaciteiten. Een capaciteit is NAAM[OP<VERSIE>], waarbij OP een van de volgende tekens is: <, <=, =, >=, >.\n\n  Opdrachtopties:\n-r, --repo <alias|#|URI>        Werk alleen met pakketten van de gespecificeerde opslagruimte.\n-t, --type <type>               Type pakket (%s).\n                                Standaard: %s.\n-n, --name                      Selecteer pakketten op gewone naam, niet op capaciteit.\n-C, --capability               Selecteer pakketten op capaciteit.\n    --debug-solver              Voer een test uit voor foutopsporing.\n-R, --no-force-resolution       Forceer de oplosser niet tot een oplossing, maar laat deze vragen.\n       force-resolution         Forceer de oplosser tot het vinden van een oplossing (zelfs agressief).\n-D, --dry-run                   Test de verwijdering, maar voer de verwijdering niet daadwerkelijk uit.\n"
 
 #: ../src/Zypper.cc:965
-msgid ""
-"source-install (si) [options] <name> ...\n"
-"\n"
-"Install specified source packages and their build dependencies.\n"
-"\n"
-"  Command options:\n"
-"-d, --build-deps-only    Install only build dependencies of specified packages.\n"
-"-D, --no-build-deps      Don't install build dependencies.\n"
-"-r, --repo <alias|#|URI> Install packages only from specified repositories.\n"
-msgstr ""
-"source-install (si) [opties] <naam> ...\n"
-"\n"
-"Installeer specifieke bronpakketten en de verdere pakketten die nodig zijn.\n"
-"\n"
-"  Opdrachtopties:\n"
-"-d, --build-deps-only    installeer alleen benodigheden van gespecificeerde pakketten\n"
-"-D, --no-build-deps      installeer geen benodigheden\n"
-"-r, --repo <alias|#|URI> installeer alleen pakketten uit gespecificeerde pakketbronnen\n"
+msgid "source-install (si) [options] <name> ...\n\nInstall specified source packages and their build dependencies.\n\n  Command options:\n-d, --build-deps-only    Install only build dependencies of specified packages.\n-D, --no-build-deps      Don't install build dependencies.\n-r, --repo <alias|#|URI> Install packages only from specified repositories.\n"
+msgstr "source-install (si) [opties] <naam> ...\n\nInstalleer specifieke bronpakketten en de verdere pakketten die nodig zijn.\n\n  Opdrachtopties:\n-d, --build-deps-only    installeer alleen benodigdheden van opgegeven pakketten\n-D, --no-build-deps      installeer geen benodigdheden\n-r, --repo <alias|#|URI> installeer alleen pakketten uit opgegeven opslagruimten\n"
 
 #: ../src/Zypper.cc:993
-msgid ""
-"verify (ve) [options]\n"
-"\n"
-"Check whether dependencies of installed packages are satisfied and repair eventual dependency problems.\n"
-"\n"
-"  Command options:\n"
-"    --no-recommends      Do not install recommended packages, only required.\n"
-"-D, --dry-run            Test the repair, do not actually do anything to the system.\n"
-"-r, --repo <alias|#|URI> Use only specified repositories to install missing packages.\n"
-msgstr ""
-"verify (ve) [opties]\n"
-"\n"
-"Controleer of afhankelijkheden van geïnstalleerde pakketten kloppen en repareer afhankelijkheidsproblemen.\n"
-"\n"
-"  Opdrachtopties:\n"
-"    --no-recommends      installeer geen aanbevolen pakketten, alleen vereiste\n"
-"-D, --dry-run            test de reparatie, maar verander niets aan het systeem\n"
-"-r, --repo <alias|#|URI> gebruik alleen gespecificeerde installatiebronnen om ontbrekende pakketten te installeren\n"
+msgid "verify (ve) [options]\n\nCheck whether dependencies of installed packages are satisfied and repair eventual dependency problems.\n\n  Command options:\n    --no-recommends      Do not install recommended packages, only required.\n-D, --dry-run            Test the repair, do not actually do anything to the system.\n-r, --repo <alias|#|URI> Use only specified repositories to install missing packages.\n"
+msgstr "verify (ve) [opties]\n\nControleer of afhankelijkheden van geïnstalleerde pakketten kloppen en repareer afhankelijkheidsproblemen.\n\n  Opdrachtopties:\n    --no-recommends      installeer geen aanbevolen pakketten, alleen vereiste\n-D, --dry-run            test de reparatie, maar verander niets aan het systeem\n-r, --repo <alias|#|URI> gebruik alleen gespecificeerde opslagruimten om ontbrekende pakketten te installeren\n"
 
 #: ../src/Zypper.cc:1017
-msgid ""
-"install-new-recommends (inr) [options]\n"
-"\n"
-"Install newly added packages recommended by already installed packages. This can typically be used to install new language packages or drivers for newly added hardware.\n"
-"\n"
-"  Command options:\n"
-"-r, --repo <alias|#|URI> Use only specified repositories to install packages.\n"
-"-D, --dry-run            Test the installation, do not actually install anything.\n"
-"    --debug-solver       Create solver test case for debugging.\n"
-msgstr ""
-"install-new-recommends (inr) [opties]\n"
-"\n"
-"Installeer nieuw toegevoegde pakketten aanbevolen door reeds geïnstalleerde pakketten. Dit kan typisch gebruikt worden om nieuwe taalpakketten of apparaatstuurprogramma's voor nieuw toegevoegde hardware.\n"
-"\n"
-"  Opdrachtopties:\n"
-"-r, --repo <alias|#|URI> gebruik alleen gespecificeerde installatiebronnen om pakketten te installeren\n"
-"-D, --dry-run            test de installatie, installeer niet echt iets\n"
-"    --debug-solver       maak een solver-testcase voor debugging.\n"
+msgid "install-new-recommends (inr) [options]\n\nInstall newly added packages recommended by already installed packages. This can typically be used to install new language packages or drivers for newly added hardware.\n\n  Command options:\n-r, --repo <alias|#|URI> Use only specified repositories to install packages.\n-D, --dry-run            Test the installation, do not actually install anything.\n    --debug-solver       Create solver test case for debugging.\n"
+msgstr "install-new-recommends (inr) [opties]\n\nInstalleer nieuw toegevoegde pakketten aanbevolen door reeds geïnstalleerde pakketten. Dit kan typisch gebruikt worden om nieuwe taalpakketten of stuurprogramma's voor nieuw toegevoegde hardware te installeren.\n\n  Opdrachtopties:\n-r, --repo <alias|#|URI> gebruik alleen opgegeven opslagruimten om pakketten te installeren\n-D, --dry-run            test de installatie, installeer niet echt iets\n    --debug-solver       maak een solver-testcase voor debugging.\n"
 
 #. translators: the %s = "ris" (the only service type currently supported)
 #. ! \todo s/--name/--name <name> after 11.1 release.
 #: ../src/Zypper.cc:1045
 #, c-format
-msgid ""
-"addservice (as) [options] <URI> <alias>\n"
-"\n"
-"Add a repository index service to the system.\n"
-"\n"
-"  Command options:\n"
-"-t, --type <TYPE>       Type of the service (%s).\n"
-"-d, --disable           Add the service as disabled.\n"
-"-n, --name              Specify descriptive name for the service.\n"
-msgstr ""
-"addservice (as) [opties] <URI> <alias>\n"
-"\n"
-"Voeg een index-service van een installatiebron toe aan het systeem.\n"
-"\n"
-"  Opdrachtopties:\n"
-"-t, --type <TYPE>       type service (%s).\n"
-"-d, --disable           voeg de service toe als uitgeschakeld.\n"
-"-n, --name              specificeer een beschrijvende naam voor de service.\n"
+msgid "addservice (as) [options] <URI> <alias>\n\nAdd a repository index service to the system.\n\n  Command options:\n-t, --type <TYPE>       Type of the service (%s).\n-d, --disable           Add the service as disabled.\n-n, --name              Specify descriptive name for the service.\n"
+msgstr "addservice (as) [opties] <URI> <alias>\n\nVoeg een index-service van een opslagruimte toe aan het systeem.\n\n  Opdrachtopties:\n-t, --type <TYPE>       type service (%s).\n-d, --disable           voeg de service toe als uitgeschakeld.\n-n, --name              geef een beschrijvende naam op voor de service.\n"
 
 #. TranslatorExplanation the %s = "yast2, rpm-md, plaindir"
 #. TODO
 #: ../src/Zypper.cc:1069
-msgid ""
-"removeservice (rs) [options] <alias|#|URI>\n"
-"\n"
-"Remove specified repository index service from the sytem..\n"
-"\n"
-"  Command options:\n"
-"    --loose-auth   Ignore user authentication data in the URI.\n"
-"    --loose-query  Ignore query string in the URI.\n"
-msgstr ""
-"removerepo (rr) [opties] <alias|#|URL>\n"
-"\n"
-"Verwijder de installatiebron die is opgegeven door alias, nummer of URI.\n"
-"\n"
-"  Opdrachtopties:\n"
-"    --loose-auth   negeer authenticatiegegevens in de URI\n"
-"    --loose-query  negeer de query-tekenreeks in de URI\n"
+msgid "removeservice (rs) [options] <alias|#|URI>\n\nRemove specified repository index service from the sytem..\n\n  Command options:\n    --loose-auth   Ignore user authentication data in the URI.\n    --loose-query  Ignore query string in the URI.\n"
+msgstr "removerepo (rr) [opties] <alias|#|URL>\n\nVerwijder de opgegeven indexservice van de opslagruimte van het systeem.\n\n  Opdrachtopties:\n    --loose-auth   negeer verificatiegegevens in de URI\n    --loose-query  negeer de query-tekenreeks in de URI\n"
 
 #. translators: %s is "--all" and "--all"
 #: ../src/Zypper.cc:1105
 #, c-format
-msgid ""
-"modifyservice (ms) <options> <alias|#|URI>\n"
-"modifyservice (ms) <options> <%s>\n"
-"\n"
-"Modify properties of services specified by alias, number, or URI, or by the\n"
-"'%s' aggregate options.\n"
-"\n"
-"  Command options:\n"
-"-d, --disable                  Disable the service (but don't remove it).\n"
-"-e, --enable                   Enable a disabled service.\n"
-"-r, --refresh                  Enable auto-refresh of the service.\n"
-"-R, --no-refresh               Disable auto-refresh of the service.\n"
-"-n, --name                     Set a descriptive name for the service.\n"
-"\n"
-"-i, --ar-to-enable <alias>     Add a RIS service repository to enable.\n"
-"-I, --ar-to-disable <alias>    Add a RIS service repository to disable.\n"
-"-j, --rr-to-enable <alias>     Remove a RIS service repository to enable.\n"
-"-J, --rr-to-disable <alias>    Remove a RIS service repository to disable.\n"
-"-k, --cl-to-enable             Clear the list of RIS repositories to enable.\n"
-"-K, --cl-to-disable            Clear the list of RIS repositories to disable.\n"
-"\n"
-"-a, --all                      Apply changes to all services.\n"
-"-l, --local                    Apply changes to all local services.\n"
-"-t, --remote                   Apply changes to all remote services.\n"
-"-m, --medium-type <type>       Apply changes to services of specified type.\n"
-msgstr ""
-"modifyservice (ms) <opties> <alias|#|URI>\n"
-"modifyservice (ms) <opties> <%s>\n"
-"\n"
-"Wijzig de eigenschappen van de service die is opgegeven door alias, nummer of URI of door de\n"
-"agregatie-opties '%s'.\n"
-"\n"
-"  Opdrachtopties:\n"
-"-d, --disable                  schakel de service uit (maar verwijder deze niet)\n"
-"-e, --enable                   activeer een uitgeschakelde service\n"
-"-r, --refresh                  activeer het automatisch vernieuwen van de service\n"
-"-n, --no-refresh               schakel het automatisch vernieuwen van de service uit\n"
-"-n, --name                     geef een beschrijvende naam voor de service.\n"
-"\n"
-"-i, --ar-to-enable <alias>     voeg een RIS-service installatiebron toe om te activeren.\n"
-"-I, --ar-to-disable <alias>    voeg een RIS-service installatiebron toe om te deactiveren.\n"
-"-j, --rr-to-enable <alias>     verwijder een RIS-service installatiebron om te activeren.\n"
-"-J, --rr-to-disable <alias>    verwijder een RIS-service installatiebron om te deactiveren.\n"
-"-k, --keep-packages            leeg de lijst van RIS-installatiebronnen om te activeren.\n"
-"-K, --no-keep-packages         leeg de lijst van RIS-installatiebronnen om te deactiveren.\n"
-"\n"
-"-a, --all                      doe wijzigingen op alle services\n"
-"-l, --local                    doe wijzigingen op alle lokale services\n"
-"-t, --remote                   doe wijzigingen op alle services op afstand\n"
-"-m, --medium-type <type>       doe wijzigingen op services van een specifiek type\n"
+msgid "modifyservice (ms) <options> <alias|#|URI>\nmodifyservice (ms) <options> <%s>\n\nModify properties of services specified by alias, number, or URI, or by the\n'%s' aggregate options.\n\n  Command options:\n-d, --disable                  Disable the service (but don't remove it).\n-e, --enable                   Enable a disabled service.\n-r, --refresh                  Enable auto-refresh of the service.\n-R, --no-refresh               Disable auto-refresh of the service.\n-n, --name                     Set a descriptive name for the service.\n\n-i, --ar-to-enable <alias>     Add a RIS service repository to enable.\n-I, --ar-to-disable <alias>    Add a RIS service repository to disable.\n-j, --rr-to-enable <alias>     Remove a RIS service repository to enable.\n-J, --rr-to-disable <alias>    Remove a RIS service repository to disable.\n-k, --cl-to-enable             Clear the list of RIS repositories to enable.\n-K, --cl-to-disable            Clear the list of RIS repositories to disable.\n\n-a, --all                      Apply changes to all services.\n-l, --local                    Apply changes to all local services.\n-t, --remote                   Apply changes to all remote services.\n-m, --medium-type <type>       Apply changes to services of specified type.\n"
+msgstr "modifyservice (ms) <opties> <alias|#|URI>\n\nmodifyservice (ms) <opties> <%s>\n\nWijzig de eigenschappen van de service die is opgegeven door alias, nummer of URI of door de aggregatieopties '%s'.\n\n  Opdrachtopties:\n-d, --disable             Schakel de service uit (maar verwijder deze niet).\n-e, --enable              Schakel een uitgeschakelde service in.\n-r, --refresh             Schakel het automatisch vernieuwen van de service in.\n-n, --no-refresh          Schakel het automatisch vernieuwen van de service uit.\n\n,--name                Stel een beschrijvende naam in voor de service.\n\n-i, --ar-to-enable <alias>     Voeg een RIS-service toe voor inschakelen.\n-I, --ar-to-disable <alias>    Voeg een opslagruimte voor een RIS-service toe voor inschakelen.\n-j, --rr-to-enable <alias>     Verwijder een opslagruimte voor een RIS-service voor inschakelen.\n-J, --rr-to-disable <alias>    Verwijder een opslagruimte voor een RIS-service voor uitschakelen.\n-k, --cl-to-enable             Wis de lijst met RIS-opslagruimten voor inschakelen.\n-K, --cl-to-disable             Wis de lijst met RIS-opslagruimten voor uitschakelen.\n\n-a, --all                  Voer wijzigingen op alle services uit.\n-l, --local                    Voer wijzigingen op alle lokale services uit.\n-t, --remote                   Voer wijzigingen op alle externe services uit.\n-m, --medium-type <type>       Voer wijzigingen op services van een specifiek type uit.\n"
 
 #: ../src/Zypper.cc:1153
-msgid ""
-"services (ls) [options]\n"
-"\n"
-"List defined services.\n"
-"\n"
-"  Command options:\n"
-"-u, --uri                 Show also base URI of repositories.\n"
-"-p, --priority            Show also repository priority.\n"
-"-d, --details             Show more information like URI, priority, type.\n"
-"-r, --with-repos          Show also repositories belonging to the services.\n"
-"-P, --sort-by-priority    Sort the list by repository priority.\n"
-"-U, --sort-by-uri         Sort the list by URI.\n"
-"-N, --sort-by-name        Sort the list by name.\n"
-msgstr ""
-"repos (lr) [opties]\n"
-"\n"
-"Toon alle gedefiniëerde services.\n"
-"\n"
-"  Opdrachtopties:\n"
-"-u, --uri                 toon ook de basis URI van installatiebronnen\n"
-"-p, --priority            toon ook installatiebronprioriteit\n"
-"-d, --details             toon meer informatie zoals URI, prioriteit en type\n"
-"-r, --with-repos          toon ook installatiebronnen behorend bij de services.\n"
-"-P, --sort-by-priority    sorteer de lijst op installatiebronprioriteit\n"
-"-U, --sort-by-uri         sorteer de lijst op URI\n"
-"-N, --sort-by-name        sorteer de lijst op naam\n"
+msgid "services (ls) [options]\n\nList defined services.\n\n  Command options:\n-u, --uri                 Show also base URI of repositories.\n-p, --priority            Show also repository priority.\n-d, --details             Show more information like URI, priority, type.\n-r, --with-repos          Show also repositories belonging to the services.\n-P, --sort-by-priority    Sort the list by repository priority.\n-U, --sort-by-uri         Sort the list by URI.\n-N, --sort-by-name        Sort the list by name.\n"
+msgstr "repos (lr) [opties]\n\nToon alle gedefinieerde services.\n\n  Opdrachtopties:\n-u, --uri                 toon ook de basis URI van opslagruimten\n-p, --priority            toon ook prioriteit van opslagruimte\n-d, --details             toon meer informatie zoals URI, prioriteit en type\n-r, --with-repos          toon ook opslagruimten behorend bij de services.\n-P, --sort-by-priority    sorteer de lijst op opslagruimteprioriteit\n-U, --sort-by-uri         sorteer de lijst op URI\n-N, --sort-by-name        sorteer de lijst op naam\n"
 
 #: ../src/Zypper.cc:1179
-msgid ""
-"refresh-services (refs) [options]\n"
-"\n"
-"Refresh defined repository index services.\n"
-"\n"
-"  Command options:\n"
-"-r, --with-repos      Refresh also repositories.\n"
-msgstr ""
-"refresh-services (refs) [opties]\n"
-"\n"
-"Ververs gedefinieerde installatiebron index-services.\n"
-"\n"
-"  Opdrachtoptions:\n"
-"-r, --with-repos      ververs ook installatiebronnen\n"
+msgid "refresh-services (refs) [options]\n\nRefresh defined repository index services.\n\n  Command options:\n-r, --with-repos      Refresh also repositories.\n"
+msgstr "refresh-services (refs) [opties]\n\nVernieuw indexservices voor gedefinieerde opslagruimte.\n\n  Opdrachtopties:\n-r, --with-repos     Vernieuw ook opslagruimten.\n"
 
 #. translators: the %s = "yast2, rpm-md, plaindir"
 #. ! \todo s/--name/--name <name> after 11.1 release.
 #: ../src/Zypper.cc:1208
 #, c-format
-msgid ""
-"addrepo (ar) [options] <URI> <alias>\n"
-"addrepo (ar) [options] <FILE.repo>\n"
-"\n"
-"Add a repository to the sytem. The repository can be specified by its URI or can be read from specified .repo file (even remote).\n"
-"\n"
-"  Command options:\n"
-"-r, --repo <FILE.repo>  Just another means to specify a .repo file to read.\n"
-"-t, --type <TYPE>       Type of repository (%s).\n"
-"-d, --disable           Add the repository as disabled.\n"
-"-c, --check             Probe URI.\n"
-"-C, --no-check          Don't probe URI, probe later during refresh.\n"
-"-n, --name              Specify descriptive name for the repository.\n"
-"-k, --keep-packages     Enable RPM files caching.\n"
-"-K, --no-keep-packages  Disable RPM files caching.\n"
-"-f, --refresh           Enable autorefresh of the repository.\n"
-msgstr ""
-"addrepo (ar)  [opties] <URI> <alias>\n"
-"addrepo (ar) [opties] <BESTAND.repo>\n"
-"\n"
-"Voeg een installatiebron toe. Deze kan gespecificeerd zijn door de URI of wordt gelezen uit het .repo-bestand (zelfs extern).\n"
-"\n"
-"  Opdrachtopties:\n"
-"-r, --repo <BESTAND.repo> alleen maar een andere manier om een .repo-bestand te lezen\n"
-"-t, --type <TYPE>         type installatiebron (%s)\n"
-"-d, --disable             voeg de bron toe als uitgeschakeld\n"
-"-c, --check               test de URI\n"
-"-x, --no-check            test de URI niet, doe dat later bij een verversing\n"
-"-n, --name                specificeer de beschrijvende naam voor de bron\n"
-"-k, --keep-packages       schakel cachen van RPM-bestanden in\n"
-"-K, --no-keep-packages    schakel cachen van RPM-bestanden uit\n"
-"-f, --refresh             schakel automatisch verversen in van de installatiebron\n"
+msgid "addrepo (ar) [options] <URI> <alias>\naddrepo (ar) [options] <FILE.repo>\n\nAdd a repository to the sytem. The repository can be specified by its URI or can be read from specified .repo file (even remote).\n\n  Command options:\n-r, --repo <FILE.repo>  Just another means to specify a .repo file to read.\n-t, --type <TYPE>       Type of repository (%s).\n-d, --disable           Add the repository as disabled.\n-c, --check             Probe URI.\n-C, --no-check          Don't probe URI, probe later during refresh.\n-n, --name              Specify descriptive name for the repository.\n-k, --keep-packages     Enable RPM files caching.\n-K, --no-keep-packages  Disable RPM files caching.\n-f, --refresh           Enable autorefresh of the repository.\n"
+msgstr "addrepo (ar)  [opties] <URI> <alias>\naddrepo (ar) [opties] <BESTAND.repo>\n\nVoeg een opslagruimte toe aan het systeem. Deze kan opgegeven zijn door de URI of wordt gelezen uit het .repo-bestand (zelfs extern).\n\n  Opdrachtopties:\n-r, --repo <BESTAND.repo> Een andere manier om een .repo-bestand op te geven dat moet worden lezen\n-t, --type <TYPE>         type opslagruimte (%s)\n-d, --disable             voeg de opslagruime toe als uitgeschakeld\n-c, --check               test de URI\n-x, --no-check            test de URI niet, doe dat later bij een vernieuwing\n-n, --name                geef een beschrijvende naam op voor de opslagruimte\n-k, --keep-packages       schakel cachen van RPM-bestanden in\n-K, --no-keep-packages    schakel cachen van RPM-bestanden uit\n-f, --refresh             schakel automatisch vernieuwen in van de opslagruimte\n"
 
 #. translators: this is just a rug compatiblity command
 #. translators: this is just a rug-compatiblity command
 #: ../src/Zypper.cc:1257 ../src/Zypper.cc:2136
-msgid ""
-"list-resolvables (lr)\n"
-"\n"
-"List available resolvable types.\n"
-msgstr ""
-"list-resolvables (lr)\n"
-"\n"
-"Toon beschikbare typen oplosbaren\n"
+msgid "list-resolvables (lr)\n\nList available resolvable types.\n"
+msgstr "list-resolvables (lr)\n\nToon beschikbare typen oplosbaren\n"
 
 #: ../src/Zypper.cc:1265
-msgid ""
-"repos (lr) [options]\n"
-"\n"
-"List all defined repositories.\n"
-"\n"
-"  Command options:\n"
-"-e, --export <FILE.repo>  Export all defined repositories as a single local .repo file.\n"
-"-u, --uri                 Show also base URI of repositories.\n"
-"-p, --priority            Show also repository priority.\n"
-"-d, --details             Show more information like URI, priority, type.\n"
-"-U, --sort-by-uri         Sort the list by URI.\n"
-"-P, --sort-by-priority    Sort the list by repository priority.\n"
-"-A, --sort-by-alias       Sort the list by alias.\n"
-"-N, --sort-by-name        Sort the list by name.\n"
-msgstr ""
-"repos (lr) [opties]\n"
-"\n"
-"Toon alle gedefiniëerde installatiebronnen.\n"
-"\n"
-"  Opdrachtopties:\n"
-"-e, --export <BESTAND.repo>  exporteer alle gedefiniëerde installatiebronnen als een enkel lokaal repo-betand\n"
-"-u, --uri                 toon ook de basis URI van installatiebronnen\n"
-"-p, --priority            toon ook installatiebronprioriteit\n"
-"-d, --details             toon meer informatie zoals URI, prioriteit en type\n"
-"-U, --sort-by-uri         sorteer de lijst op URI\n"
-"-P, --sort-by-priority    sorteer de lijst op installatiebronprioriteit\n"
-"-A, --sort-by-alias       sorteer de lijst op alias\n"
-"-N, --sort-by-name        sorteer de lijst op naam\n"
+msgid "repos (lr) [options]\n\nList all defined repositories.\n\n  Command options:\n-e, --export <FILE.repo>  Export all defined repositories as a single local .repo file.\n-u, --uri                 Show also base URI of repositories.\n-p, --priority            Show also repository priority.\n-d, --details             Show more information like URI, priority, type.\n-U, --sort-by-uri         Sort the list by URI.\n-P, --sort-by-priority    Sort the list by repository priority.\n-A, --sort-by-alias       Sort the list by alias.\n-N, --sort-by-name        Sort the list by name.\n"
+msgstr "repos (lr) [opties]\n\nToon alle gedefinieerde opslagruimten.\n\n  Opdrachtopties:\n-e, --export <BESTAND.repo>  exporteer alle gedefinieerde opslagruimten als een enkel lokaal repo-betand\n-u, --uri                 toon ook de basis URI van opslagruimten\n-p, --priority            toon ook opslagruimteprioriteit\n-d, --details             toon meer informatie zoals URI, prioriteit en type\n-U, --sort-by-uri         sorteer de lijst op URI\n-P, --sort-by-priority    sorteer de lijst op opslagruimteprioriteit\n-A, --sort-by-alias       sorteer de lijst op alias\n-N, --sort-by-name        sorteer de lijst op naam\n"
 
 #. translators: this option belongs to 'lr' command help
 #: ../src/Zypper.cc:1280
 msgid "-s, --service             Show also alias of parent service.\n"
-msgstr "-s, --service             Toon ook de alias van de ouder-service.\n"
+msgstr "-s, --service             Geef ook de alias van de ouderservice weer.\n"
 
 #: ../src/Zypper.cc:1295
-msgid ""
-"removerepo (rr) [options] <alias|#|URI>\n"
-"\n"
-"Remove repository specified by alias, number or URI.\n"
-"\n"
-"  Command options:\n"
-"    --loose-auth   Ignore user authentication data in the URI.\n"
-"    --loose-query  Ignore query string in the URI.\n"
-msgstr ""
-"removerepo (rr) [opties] <alias|#|URL>\n"
-"\n"
-"Verwijder de installatiebron die is opgegeven door alias, nummer of URI.\n"
-"\n"
-"  Opdrachtopties:\n"
-"    --loose-auth        negeer authenticatiegegevens in de URI\n"
-"    --loose-query       negeer de query-tekenreeks in de URI\n"
+msgid "removerepo (rr) [options] <alias|#|URI>\n\nRemove repository specified by alias, number or URI.\n\n  Command options:\n    --loose-auth   Ignore user authentication data in the URI.\n    --loose-query  Ignore query string in the URI.\n"
+msgstr "removerepo (rr) [opties] <alias|#|URL>\n\nVerwijder de opslagruimte die is opgegeven door alias, nummer of URI.\n\n  Opdrachtopties:\n    --loose-auth        negeer verificatiegegevens in de URI\n    --loose-query       negeer de query-tekenreeks in de URI\n"
 
 #: ../src/Zypper.cc:1314
-msgid ""
-"renamerepo (nr) [options] <alias|#|URI> <new-alias>\n"
-"\n"
-"Assign new alias to the repository specified by alias, number or URI.\n"
-"\n"
-"This command has no additional options.\n"
-msgstr ""
-"renamerepo (nr) [opties] <alias|#|URI> <nieuwe-alias>\n"
-"\n"
-"Wijs een nieuwe alias toe aan de bron die is opgegeven door alias, nummer of URI.\n"
-"\n"
-"Deze opdracht heeft geen aanvullende opties.\n"
+msgid "renamerepo (nr) [options] <alias|#|URI> <new-alias>\n\nAssign new alias to the repository specified by alias, number or URI.\n\nThis command has no additional options.\n"
+msgstr "renamerepo (nr) [opties] <alias|#|URI> <nieuwe-alias>\n\nWijs een nieuwe alias toe aan de opslagruimte die is opgegeven door alias, nummer of URI.\n\nDeze opdracht heeft geen aanvullende opties.\n"
 
 #. translators: %s is "--all|--remote|--local|--medium-type"
 #. and "--all, --remote, --local, --medium-type"
 #. ! \todo s/<1-99>/<#> after 11.1 release.
 #: ../src/Zypper.cc:1346
 #, c-format
-msgid ""
-"modifyrepo (mr) <options> <alias|#|URI>\n"
-"modifyrepo (mr) <options> <%s>\n"
-"\n"
-"Modify properties of repositories specified by alias, number, or URI, or by the\n"
-"'%s' aggregate options.\n"
-"\n"
-"  Command options:\n"
-"-d, --disable             Disable the repository (but don't remove it).\n"
-"-e, --enable              Enable a disabled repository.\n"
-"-r, --refresh             Enable auto-refresh of the repository.\n"
-"-R, --no-refresh          Disable auto-refresh of the repository.\n"
-"-n, --name                Set a descriptive name for the repository.\n"
-"-p, --priority <1-99>     Set priority of the repository.\n"
-"-k, --keep-packages       Enable RPM files caching.\n"
-"-K, --no-keep-packages    Disable RPM files caching.\n"
-"\n"
-"-a, --all                 Apply changes to all repositories.\n"
-"-l, --local               Apply changes to all local repositories.\n"
-"-t, --remote              Apply changes to all remote repositories.\n"
-"-m, --medium-type <type>  Apply changes to repositories of specified type.\n"
-msgstr ""
-"modifyrepo (mr) <opties> <alias|#|URI>\n"
-"modifyrepo (mr) <opties> <%s>\n"
-"\n"
-"Wijzig de eigenschappen van de bron die is opgegeven door alias, nummer of URI of door de agregatie-opties '%s'\n"
-"\n"
-"  Opdrachtopties:\n"
-"-d, --disable             schakel de bron uit (maar verwijder deze niet)\n"
-"-e, --enable              activeer een uitgeschakelde bron\n"
-"-r, --refresh             activeer het automatisch vernieuwen van de bron\n"
-"-n, --no-refresh          schakel het automatisch vernieuwen van de bron uit\n"
-"-p, --priority <1-99>     zet de prioriteit van de bron\n"
-"-k, --keep-packages       schakel het cachen van RPM-bestanden in\n"
-"-K, --no-keep-packages    schakel het cachen van RPM-bestanden uit\n"
-"\n"
-"-a, --all                 doe wijzigingen op alle installatiebronnen\n"
-"-l, --local                    doe wijzigingen op alle lokale installatiebronnen\n"
-"-t, --remote                   doe wijzigingen op alle installatiebronnen op afstand\n"
-"-m, --medium-type <type>       doe wijzigingen op installatiebronnen van een specifiek type.\n"
+msgid "modifyrepo (mr) <options> <alias|#|URI>\nmodifyrepo (mr) <options> <%s>\n\nModify properties of repositories specified by alias, number, or URI, or by the\n'%s' aggregate options.\n\n  Command options:\n-d, --disable             Disable the repository (but don't remove it).\n-e, --enable              Enable a disabled repository.\n-r, --refresh             Enable auto-refresh of the repository.\n-R, --no-refresh          Disable auto-refresh of the repository.\n-n, --name                Set a descriptive name for the repository.\n-p, --priority <1-99>     Set priority of the repository.\n-k, --keep-packages       Enable RPM files caching.\n-K, --no-keep-packages    Disable RPM files caching.\n\n-a, --all                 Apply changes to all repositories.\n-l, --local               Apply changes to all local repositories.\n-t, --remote              Apply changes to all remote repositories.\n-m, --medium-type <type>  Apply changes to repositories of specified type.\n"
+msgstr "modifyrepo (mr)  <opties> <alias|#|URI>\nmodifyrepo (mr) <opties> <%s>\n\nDe eigenschappen van opslagruimten aanpassen op basis van alias, nummer of URI, of op basis van de aggregatieopties \n'%s'.\n\n  Opdrachtopties:\n-d, --disable             De opslagruimte uitschakelen (maar niet verwijderen).\n-e, --enable              Een uitgeschakelde opslagruimte inschakelen.\n-r, --refresh             Automatisch vernieuwen van de opslagruimte inschakelen.\n-R, --no-refresh          Automatisch vernieuwen van de opslagruimte uitschakelen.\n-n, --name                Een beschrijvende naam voor de service instellen.\n-p, --priority <1-99>     Prioriteit van de opslagruimte instellen.\n-k, --keep-packages       Opslaan van RPM-bestanden in de cache inschakelen.\n-K, --no-keep-packages    Opslaan van RPM-bestanden in de cache uitschakelen.\n\n-a, --all                Wijzigingen toepassen op alle opslagruimten.\n-l, --local               Wijzigingen toepassen op alle lokale opslagruimten.\n-t, --remote              Wijzigingen toepassen op alle externe opslagruimten.\n-m, --medium-type <type>  Wijzigingen toepassen op alle opslagruimten van een opgegeven type.\n"
 
 #: ../src/Zypper.cc:1386
-msgid ""
-"refresh (ref) [alias|#|URI] ...\n"
-"\n"
-"Refresh repositories specified by their alias, number or URI. If none are specified, all enabled repositories will be refreshed.\n"
-"\n"
-"  Command options:\n"
-"-f, --force              Force a complete refresh.\n"
-"-b, --force-build        Force rebuild of the database.\n"
-"-d, --force-download     Force download of raw metadata.\n"
-"-B, --build-only         Only build the database, don't download metadata.\n"
-"-D, --download-only      Only download raw metadata, don't build the database.\n"
-"-r, --repo <alias|#|URI> Refresh only specified repositories.\n"
-"-s, --services           Refresh also services before refreshing repos.\n"
-msgstr ""
-"refresh (ref) [alias|#|URI] ...\n"
-"\n"
-"Ververs bronnen gespecificeerd door diens alias, nummer of URI. Als er geen is gespecificeerd zullen alle geactiveerde bronnen worden ververst.\n"
-"\n"
-"  Opdrachtopties:\n"
-"-f, --force              forceer een complete vernieuwing\n"
-"-b, --force-build        forceer het herbouwen van de database\n"
-"-d, --force-download     forceer het downloaden van ruwe metadata\n"
-"-B, --build-only         bouw alleen de database, download geen metadata\n"
-"-D, --download-only      download alleen ruwe metadata, bouw de database niet\n"
-"-r, --repo <alias|#|URI> ververs alleen gespecificeerde bronnen\n"
-"-s, --services           ververs ook services alvorens de installatiebronnen te verversen.\n"
+msgid "refresh (ref) [alias|#|URI] ...\n\nRefresh repositories specified by their alias, number or URI. If none are specified, all enabled repositories will be refreshed.\n\n  Command options:\n-f, --force              Force a complete refresh.\n-b, --force-build        Force rebuild of the database.\n-d, --force-download     Force download of raw metadata.\n-B, --build-only         Only build the database, don't download metadata.\n-D, --download-only      Only download raw metadata, don't build the database.\n-r, --repo <alias|#|URI> Refresh only specified repositories.\n-s, --services           Refresh also services before refreshing repos.\n"
+msgstr "refresh (ref) [alias|#|URI] ...\n\nVernieuw opslagruimten opgegeven met de alias, nummer of URI. Als er geen opslagruimten zijn opgegeven, zullen alle geactiveerde opslagruimten worden vernieuwd.\n\n  Opdrachtopties:\n-f, --force              forceer een complete vernieuwing\n-b, --force-build        forceer het herbouwen van de database\n-d, --force-download     forceer het downloaden van ruwe metagegevens\n-B, --build-only         bouw alleen de database, download geen metagegevens\n-D, --download-only      download alleen ruwe metagegevens, bouw de database niet\n-r, --repo <alias|#|URI> vernieuw alleen opgegeven opslagruimten\n-s, --services           vernieuw ook services voordat de opslagruimten worden vernieuwd.\n"
 
 #: ../src/Zypper.cc:1415
-msgid ""
-"clean [alias|#|URI] ...\n"
-"\n"
-"Clean local caches.\n"
-"\n"
-"  Command options:\n"
-"-r, --repo <alias|#|URI> Clean only specified repositories.\n"
-"-m, --metadata           Clean metadata cache.\n"
-"-M, --raw-metadata       Clean raw metadata cache.\n"
-"-a, --all                Clean both metadata and package caches.\n"
-msgstr ""
-"clean [alias|#|URI] ...\n"
-"\n"
-"Schoon lokale caches op.\n"
-"\n"
-"  Opdrachtopties:\n"
-"-r, --repo <alias|#|URI> schoon alleen gespecificeerde bronnen op\n"
-"-m, --metadata           schoon de metadata-cache\n"
-"-M, --raw-metadata       schoon de rauwe metadata-cache\n"
-"-a, --all                schoon beide de metadata- en de pakket-caches\n"
+msgid "clean [alias|#|URI] ...\n\nClean local caches.\n\n  Command options:\n-r, --repo <alias|#|URI> Clean only specified repositories.\n-m, --metadata           Clean metadata cache.\n-M, --raw-metadata       Clean raw metadata cache.\n-a, --all                Clean both metadata and package caches.\n"
+msgstr "clean [alias|#|URI] ...\n\nSchoon lokale caches op.\n\n  Opdrachtopties:\n-r, --repo <alias|#|URI> schoon alleen opgegeven opslagruimten op\n-m, --metagegevens           schoon de metagegevens-cache\n-M, --raw-metagegevens       schoon de onbewerkte metagegevens-cache\n-a, --all                schoon de metagegevens- en de pakket-caches op\n"
 
 #. TranslatorExplanation the first %s = "package, patch, pattern, product"
 #. and the second %s = "patch"
 #: ../src/Zypper.cc:1444
 #, c-format
-msgid ""
-"list-updates (lu) [options]\n"
-"\n"
-"List all available updates.\n"
-"\n"
-"  Command options:\n"
-"-t, --type <type>             Type of package (%s).\n"
-"                              Default: %s.\n"
-"-r, --repo <alias|#|URI>      List only updates from the specified repository.\n"
-"    --best-effort             Do a 'best effort' approach to update. Updates\n"
-"                              to a lower than the latest version are\n"
-"                              also acceptable.\n"
-"-a, --all                     List all packages for which newer versions are\n"
-"                              available, regardless whether they are\n"
-"                              installable or not.\n"
-msgstr ""
-"list-updates [opties]\n"
-"\n"
-"Toon alle beschikbare opwaarderingen\n"
-"\n"
-"  Opdrachtopties:\n"
-"-t, --type <type>            type oplosbare (%s)\n"
-"                             standaard: %s\n"
-"-r, --repo <alias|#|URI>     toon alleen opwaarderingen van de gespecificeerde bron\n"
-"    --best-effort            gebruik het best-mogelijke resultaat bij het\n"
-"                             opwaarderen. Opwaardering naar een lagere versie\n"
-"                             dan de hoogste is ook acceptabel\n"
-"-a, --all                    toon alle pakketten waarvoor nieuwe versies\n"
-"                             beschikbaar zijn, onafhankeleijk of ze zijn te\n"
-"                             installeren of niet\n"
+msgid "list-updates (lu) [options]\n\nList all available updates.\n\n  Command options:\n-t, --type <type>             Type of package (%s).\n                              Default: %s.\n-r, --repo <alias|#|URI>      List only updates from the specified repository.\n    --best-effort             Do a 'best effort' approach to update. Updates\n                              to a lower than the latest version are\n                              also acceptable.\n-a, --all                     List all packages for which newer versions are\n                              available, regardless whether they are\n                              installable or not.\n"
+msgstr "list-updates [opties]\n\nGeef alle beschikbare updates weer\n\n  Opdrachtopties:\n-t, --type <type>            type oplosbare (%s)\n                             standaard: %s\n-r, --repo <alias|#|URI>     geef alleen updates weer van de opgegeven bron\n    --best-effort            gebruik het best-mogelijke resultaat bij het\n                             bijwerken. Bijwerken naar een lagere versie\n                             dan de hoogste is ook acceptabel\n-a, --all                    geef alle pakketten weer waarvoor nieuwe versies\n                             beschikbaar zijn, onafhankelijk of ze zijn te\n                             installeren of niet\n"
 
 #. TranslatorExplanation the first %s = "package, patch, pattern, product"
 #. and the second %s = "patch"
 #: ../src/Zypper.cc:1495
 #, c-format
-msgid ""
-"update (up) [options] ...\n"
-"\n"
-"Update all or specified installed packages with newer versions, if possible.\n"
-"\n"
-"  Command options:\n"
-"\n"
-"-t, --type <type>               Type of package (%s).\n"
-"                                Default: %s.\n"
-"-r, --repo <alias|#|URI>        Limit updates to the specified repository.\n"
-"    --skip-interactive          Skip interactive updates.\n"
-"-l, --auto-agree-with-licenses  Automatically say 'yes' to third party license\n"
-"                                confirmation prompt.\n"
-"                                See man zypper for more details.\n"
-"    --best-effort               Do a 'best effort' approach to update. Updates\n"
-"                                to a lower than the latest version are\n"
-"                                also acceptable.\n"
-"    --debug-solver              Create solver test case for debugging.\n"
-"    --no-recommends             Do not install recommended packages, only required.\n"
-"-R, --no-force-resolution       Do not force the solver to find solution, let it ask.\n"
-"    --force-resolution          Force the solver to find a solution (even an agressive).\n"
-"-D, --dry-run                   Test the update, do not actually update.\n"
-msgstr ""
-"update (up) [opties]\n"
-"\n"
-"Waardeer alle geïnstalleerde pakketten op naar nieuwere versies, wanneer mogelijk.\n"
-"\n"
-"  Opdrachtopties:\n"
-"\n"
-"-t, --type <type>               type pakket (%s)\n"
-"                                standaard: %s\n"
-"-r, --repo <alias|#|URI>        beperk opwaarderingen tot de gespecificeerde bron\n"
-"    --skip-interactive          sla interactieve opwaarderingen over\n"
-"-l, --auto-agree-with-licenses  zeg automatisch ja op licenties van derden die daar om vragen\n"
-"                                zie man zypper voor meer informatie\n"
-"    --best-effort               gebruik het best-mogelijke resultaat bij het\n"
-"                                opwaarderen. Opwaarderen naar een lagere versie\n"
-"                                dan de hoogste is ook acceptabel\n"
-"    --debug-solver              maak een oplossertestbestand aan voor foutopsporing\n"
-"    --no-recommends             installeer geen aanbevolen pakketten, alleen vereiste\n"
-"-R, --no-force-resolution       forceer de oplosser niet tot het vinden van een oplossing, vraag erom\n"
-"    --force-resolution          forceer de oplosser tot het vinden van een oplossing (zelfs agressief)\n"
-"-D, --dry-run                   test de opwaardering, maar voer deze niet uit\n"
+msgid "update (up) [options] ...\n\nUpdate all or specified installed packages with newer versions, if possible.\n\n  Command options:\n\n-t, --type <type>               Type of package (%s).\n                                Default: %s.\n-r, --repo <alias|#|URI>        Limit updates to the specified repository.\n    --skip-interactive          Skip interactive updates.\n-l, --auto-agree-with-licenses  Automatically say 'yes' to third party license\n                                confirmation prompt.\n                                See man zypper for more details.\n    --best-effort               Do a 'best effort' approach to update. Updates\n                                to a lower than the latest version are\n                                also acceptable.\n    --debug-solver              Create solver test case for debugging.\n    --no-recommends             Do not install recommended packages, only required.\n-R, --no-force-resolution       Do not force the solver to find solution, let it ask.\n    --force-resolution          Force the solver to find a solution (even an agressive).\n-D, --dry-run                   Test the update, do not actually update.\n"
+msgstr "update (up) [opties]\n\nWerk alle geïnstalleerde pakketten bij naar nieuwere versies, wanneer mogelijk.\n\n  Opdrachtopties:\n\n-t, --type <type>               Type pakket (%s).\n                                Standaard: %s.\n-r, --repo <alias|#|URI>        Beperk updates tot de gespecificeerde opslagruimte.\n    --skip-interactive          Sla interactieve updates over.\n-l, --auto-agree-with-licenses  Zeg automatisch ja op licenties van derden die daar om vragen.\n                                Zie man zypper voor meer informatie.\n    --best-effort               Gebruik het best mogelijke resultaat voor bijwerken. Bijwerken\n                                naar een lagere versie dan de hoogste is\n                                ook acceptabel.\n    --debug-solver              Maak een oplossertestbestand aan voor foutopsporing.\n    --no-recommends             Installeer geen aanbevolen pakketten, alleen vereiste.\n-R, --no-force-resolution       Forceer de oplosser niet tot het vinden van een oplossing, maar laat deze vragen.\n    --force-resolution          Forceer de oplosser tot het vinden van een oplossing (zelfs agressief).\n-D, --dry-run                   Test de update, maar voer deze niet daadwerkelijk uit.\n"
 
 #: ../src/Zypper.cc:1534
-msgid ""
-"patch [options]\n"
-"\n"
-"Install all available needed patches.\n"
-"\n"
-"  Command options:\n"
-"\n"
-"-r, --repo <alias|#|URI>        Work only with specified repository.\n"
-"    --skip-interactive          Skip interactive patches.\n"
-"-l, --auto-agree-with-licenses  Automatically say 'yes' to third party license\n"
-"                                confirmation prompt.\n"
-"                                See man zypper for more details.\n"
-"    --debug-solver              Create solver test case for debugging.\n"
-"-D, --dry-run                   Test the update, do not actually update.\n"
-msgstr ""
-"patch [opties]\n"
-"\n"
-"Installeer alle beschikbare noodzakelijke patches.\n"
-"\n"
-"  Opdrachtoptions:\n"
-"\n"
-"-r, --repo <alias|#|URI>        werk alleen met de gespecificeerde installatiebron\n"
-"    --skip-interactive          sla interactieve patches over\n"
-"-l, --auto-agree-with-licenses  zeg automatisch 'ja' tegen licenties van derden die\n"
-"                                daarom vragen\n"
-"                                zie 'man zypper' voor meer details\n"
-"    --debug-solver              voer een test uit voor foutopsporing\n"
-"-D, --dry-run                   test de installatie, maar doe het niet echt\n"
+msgid "patch [options]\n\nInstall all available needed patches.\n\n  Command options:\n\n-r, --repo <alias|#|URI>        Work only with specified repository.\n    --skip-interactive          Skip interactive patches.\n-l, --auto-agree-with-licenses  Automatically say 'yes' to third party license\n                                confirmation prompt.\n                                See man zypper for more details.\n    --debug-solver              Create solver test case for debugging.\n-D, --dry-run                   Test the update, do not actually update.\n"
+msgstr "patch [opties]\n\nInstalleer alle vereiste patches die beschikbaar zijn.\n\n  Opdrachtopties:\n\n-r, --repo <alias|#|URI>       Gebruik alleen de opgegeven opslagruimte.\n    --skip-interactive          Sla interactieve patches over.\n-l, --auto-agree-with-licenses  Zeg automatisch 'ja' op licenties van derden\nals om bevestiging wordt gevraagd.\n                                Zie man zypper voor meer informatie.\n    --debug-solver              Maak een oplossertestbestand voor debuggen.\n-D, --dry-run                   Test de update, maar voer deze niet daadwerkelijk uit\n"
 
 #: ../src/Zypper.cc:1560
-msgid ""
-"list-patches (lp) [options]\n"
-"\n"
-"List all available needed patches.\n"
-"\n"
-"  Command options:\n"
-"-r, --repo <alias|#|URI>        List only patches from the specified repository.\n"
-msgstr ""
-"list-patches (lp) [opties]\n"
-"\n"
-"Toon alle beschikbare noodzakelijke patches.\n"
-"\n"
-"  Opdrachtoptions:\n"
-"-r, --repo <alias|#|URI>        toon alleen patches van de gespecificeerde installatiebron.\n"
+msgid "list-patches (lp) [options]\n\nList all available needed patches.\n\n  Command options:\n-r, --repo <alias|#|URI>        List only patches from the specified repository.\n"
+msgstr "list-patches (lp) (pchk) [opties]\n\nMaak een lijst van alle beschikbare vereiste patches.\n\n  Opdrachtopties:\n-r, --repo <alias|#|URI>  Neem in de lijst alleen patches op uit de opgegeven opslagruimte.\n"
 
 #: ../src/Zypper.cc:1585
-msgid ""
-"dist-upgrade (dup) [options]\n"
-"\n"
-"Perform a distribution upgrade.\n"
-"\n"
-"  Command options:\n"
-"\n"
-"-r, --repo <alias|#|URI>        Limit the upgrade to the specified repository.\n"
-"    --no-recommends             Do not install recommended packages, only required.\n"
-"-l, --auto-agree-with-licenses  Automatically say 'yes' to third party license confirmation prompt.\n"
-"                                See man zypper for more details.\n"
-"    --debug-solver              Create solver test case for debugging\n"
-"-D, --dry-run                   Test the upgrade, do not actually upgrade\n"
-msgstr ""
-"dist-upgrade (dup) [opties]\n"
-"\n"
-"Voer een upgrade van de distributie uit.\n"
-"\n"
-"  Opdrachtopties:\n"
-"\n"
-"-r, --repo <alias|#|URI>        beperk de upgrade tot de gespecificeerd bron\n"
-"    --no-recommends             installeer geen aanbevolen pakketten, alleen vereiste\n"
-"-l, --auto-agree-with-licenses  zeg automatisch ja op licenties van derden die daar om vragen\n"
-"                                zie man zypper voor meer informatie\n"
-"    --debug-solver              maak een oplossertestbestand aan voor foutopsporing\n"
-"-D, --dry-run                   test de upgrade, maar voer deze niet uit\n"
+msgid "dist-upgrade (dup) [options]\n\nPerform a distribution upgrade.\n\n  Command options:\n\n-r, --repo <alias|#|URI>        Limit the upgrade to the specified repository.\n    --no-recommends             Do not install recommended packages, only required.\n-l, --auto-agree-with-licenses  Automatically say 'yes' to third party license confirmation prompt.\n                                See man zypper for more details.\n    --debug-solver              Create solver test case for debugging\n-D, --dry-run                   Test the upgrade, do not actually upgrade\n"
+msgstr "dist-upgrade (dup) [opties]\n\nVoer een upgrade van de distributie uit.\n\n  Opdrachtopties:\n\n-r, --repo <alias|#|URI>        beperk de upgrade tot de opgegeven opslagruimte\n    --no-recommends             installeer geen aanbevolen pakketten, alleen vereiste\n-l, --auto-agree-with-licenses  zeg automatisch ja op licenties van derden\n                                zie man zypper voor meer informatie\n    --debug-solver              maak een oplossertestbestand aan voor foutopsporing\n-D, --dry-run                   test de upgrade, maar voer deze niet uit\n"
 
 #: ../src/Zypper.cc:1627
-msgid ""
-"search (se) [options] [querystring] ...\n"
-"\n"
-"Search for packages matching given search strings.\n"
-"\n"
-"  Command options:\n"
-"    --match-all            Search for a match with all search strings (default).\n"
-"    --match-any            Search for a match with any of the search strings.\n"
-"    --match-substrings     Search for a match to partial words (default).\n"
-"    --match-words          Search for a match to whole words only.\n"
-"    --match-exact          Searches for an exact package name.\n"
-"-d, --search-descriptions  Search also in package summaries and descriptions.\n"
-"-C, --case-sensitive       Perform case-sensitive search.\n"
-"-i, --installed-only       Show only packages that are already installed.\n"
-"-u, --uninstalled-only     Show only packages that are not currently installed.\n"
-"-t, --type <type>          Search only for packages of the specified type.\n"
-"-r, --repo <alias|#|URI>   Search only in the specified repository.\n"
-"    --sort-by-name         Sort packages by name (default).\n"
-"    --sort-by-repo         Sort packages by repository.\n"
-"-s, --details              Show each available version in each repository\n"
-"                           on a separate line.\n"
-"\n"
-"* and ? wildcards can also be used within search strings.\n"
-msgstr ""
-"search (se) [opties] [zoekterm] ...\n"
-"\n"
-"Zoek naar pakketten die overeenkomen met de opgegeven zoektermen\n"
-"\n"
-"  Opdrachtopties:\n"
-"    --match-all            zoek naar een overeenkomst voor alle zoektermen (standaard)\n"
-"    --match-any            zoek naar een overeenkomst voor een willekeurige zoekterm\n"
-"    --match-substrings     overeenkomsten kunnen delen van woorden zijn (standaard)\n"
-"    --match-words          overeenkomsten kunnen alleen hele woorden zijn\n"
-"    --match-exact          zoek naar een exacte pakketnaam\n"
-"-d, --search-descriptions  zoek ook in samenvattingen en omschrijvingen\n"
-"-c, --case-sensitive       voer hoofdlettergevoelige zoekopdracht uit\n"
-"-i, --installed-only       zoek alleen pakketten die al zijn geïnstalleerd\n"
-"-i, --uninstalled-only     zoek alleen pakketten die momenteel niet zijn geïnstalleerd\n"
-"-t, --type <type>          zoek alleen naar pakketten van het opgegeven type\n"
-"-r, --repo <alias|#|URI>   zoek alleen in de gespecificeerd bron\n"
-"    --sort-by-name         sorteer pakketten op naam (standaard)\n"
-"    --sort-by-repo         sorteer pakketten op bron\n"
-"-s  --details              Toon elke beschikbare versie in elke bron\n"
-"                           op een aparte regel\n"
-"\n"
-"de jokertekens * en ? kunnen ook worden gebruikt binnen zoektermen\n"
+msgid "search (se) [options] [querystring] ...\n\nSearch for packages matching given search strings.\n\n  Command options:\n    --match-all            Search for a match with all search strings (default).\n    --match-any            Search for a match with any of the search strings.\n    --match-substrings     Search for a match to partial words (default).\n    --match-words          Search for a match to whole words only.\n    --match-exact          Searches for an exact package name.\n-d, --search-descriptions  Search also in package summaries and descriptions.\n-C, --case-sensitive       Perform case-sensitive search.\n-i, --installed-only       Show only packages that are already installed.\n-u, --uninstalled-only     Show only packages that are not currently installed.\n-t, --type <type>          Search only for packages of the specified type.\n-r, --repo <alias|#|URI>   Search only in the specified repository.\n    --sort-by-name         Sort packages by name (default).\n    --sort-by-repo         Sort packages by repository.\n-s, --details              Show each available version in each repository\n                           on a separate line.\n\n* and ? wildcards can also be used within search strings.\n"
+msgstr "search (se) [opties] [zoekterm] ...\n\nZoek naar pakketten die overeenkomen met de opgegeven zoektermen\n\n  Opdrachtopties:\n    --match-all            zoek naar een overeenkomst voor alle zoektermen (standaard)\n    --match-any            zoek naar een overeenkomst voor een willekeurige zoekterm\n    --match-substrings     overeenkomsten kunnen delen van woorden zijn (standaard)\n    --match-words          overeenkomsten kunnen alleen hele woorden zijn\n    --match-exact          zoek naar een exacte pakketnaam\n-d, --search-descriptions  zoek ook in samenvattingen en omschrijvingen\n-c, --case-sensitive       voer hoofdlettergevoelige zoekopdracht uit\n-i, --installed-only       zoek alleen pakketten die al zijn geïnstalleerd\n-i, --uninstalled-only     zoek alleen pakketten die momenteel niet zijn geïnstalleerd\n-t, --type <type>          zoek alleen naar pakketten van het opgegeven type\n-r, --repo <alias|#|URI>   zoek alleen in de gespecificeerd opslagruimte\n    --sort-by-name         sorteer pakketten op naam (standaard)\n    --sort-by-repo         sorteer pakketten op opslagruimte\n-s  --details              Toon elke beschikbare versie in elke opslagruimte\n                           op een aparte regel\n\nde jokertekens * en ? kunnen ook worden gebruikt binnen zoektermen\n"
 
 #: ../src/Zypper.cc:1664
-msgid ""
-"patch-check (pchk) [options]\n"
-"\n"
-"Check for available patches.\n"
-"\n"
-"  Command options:\n"
-"\n"
-"-r, --repo <alias|#|URI>  Check for patches only in the specified repository.\n"
-msgstr ""
-"patch-check (pchk) [opties]\n"
-"\n"
-"Controleer op beschikbare patches\n"
-"\n"
-"  Opdrachtopties:\n"
-"\n"
-"-r, --repo <alias|#|URI>  controleer alleen op patches in de gespecificeerd bron\n"
+msgid "patch-check (pchk) [options]\n\nCheck for available patches.\n\n  Command options:\n\n-r, --repo <alias|#|URI>  Check for patches only in the specified repository.\n"
+msgstr "patch-check (pchk) [opties]\n\nControleer op beschikbare patches\n\n  Opdrachtopties:\n\n-r, --repo <alias|#|URI>  controleer alleen op patches in de gespecificeerd opslagruimte\n"
 
 #: ../src/Zypper.cc:1686
-msgid ""
-"patches (pch) [repository] ...\n"
-"\n"
-"List all patches available in specified repositories.\n"
-"\n"
-"  Command options:\n"
-"\n"
-"-r, --repo <alias|#|URI>  Just another means to specify repository.\n"
-msgstr ""
-"patches (pch) [installatiebron] ...\n"
-"\n"
-"Toon alle beschikbare patches in de gespecificeerde bronnen\n"
-"\n"
-"  Opdrachtopties:\n"
-"\n"
-"-r, --repo <alias|#|URI>  een andere manier om bronnen te specificeren\n"
+msgid "patches (pch) [repository] ...\n\nList all patches available in specified repositories.\n\n  Command options:\n\n-r, --repo <alias|#|URI>  Just another means to specify repository.\n"
+msgstr "patches (pch) [opslagruimte] ...\n\nToon alle beschikbare patches in de gespecificeerde opslagruimten\n\n  Opdrachtopties:\n\n-r, --repo <alias|#|URI>  een andere manier om opslagruimten op te geven\n"
 
 #: ../src/Zypper.cc:1713
-msgid ""
-"packages (pa) [options] [repository] ...\n"
-"\n"
-"List all packages available in specified repositories.\n"
-"\n"
-"  Command options:\n"
-"\n"
-"-r, --repo <alias|#|URI>  Just another means to specify repository.\n"
-"-i, --installed-only      Show only installed packages.\n"
-"-u, --uninstalled-only    Show only packages which are not installed.\n"
-"-N, --sort-by-name        Sort the list by package name.\n"
-"-R, --sort-by-repo        Sort the list by repository.\n"
-msgstr ""
-"packages (pa) [opties] [installatiebronnen] ...\n"
-"\n"
-"Toon alle beschikbare pakketten in de gespecificeerde bronnen\n"
-"\n"
-"  Opdrachtopties:\n"
-"\n"
-"-r, --repo <alias|#|URI>  alleen een andere manier om de bron te specificeren\n"
-"-i, --installed-only      toon alleen geïnstalleerde pakketten\n"
-"-u, --uninstalled-only    toon alleen niet geïnstalleerde pakketten\n"
-"-N, --sort-by-name        sorteer de lijst op pakketnaam\n"
-"-R, --sort-by-repo        sorteer de lijst op installatiebron\n"
+msgid "packages (pa) [options] [repository] ...\n\nList all packages available in specified repositories.\n\n  Command options:\n\n-r, --repo <alias|#|URI>  Just another means to specify repository.\n-i, --installed-only      Show only installed packages.\n-u, --uninstalled-only    Show only packages which are not installed.\n-N, --sort-by-name        Sort the list by package name.\n-R, --sort-by-repo        Sort the list by repository.\n"
+msgstr "packages (pa) [opties] [opslagruimte] ...\n\nToon alle beschikbare pakketten in de opgegeven opslagruimten\n\n  Opdrachtopties:\n\n-r, --repo <alias|#|URI>  Een andere manier om de opslagruimte op te geven\n-i, --installed-only      toon alleen geïnstalleerde pakketten\n-u, --uninstalled-only    toon alleen niet geïnstalleerde pakketten\n-N, --sort-by-name        sorteer de lijst op pakketnaam\n-R, --sort-by-repo        sorteer de lijst op opslagruimte\n"
 
 #: ../src/Zypper.cc:1741
-msgid ""
-"patterns (pt) [options] [repository] ...\n"
-"\n"
-"List all patterns available in specified repositories.\n"
-"\n"
-"  Command options:\n"
-"\n"
-"-r, --repo <alias|#|URI>  Just another means to specify repository.\n"
-"-i, --installed-only      Show only installed patterns.\n"
-"-u, --uninstalled-only    Show only patterns which are not installed.\n"
-msgstr ""
-"patterns (pt) [opties] [installatiebron] ...\n"
-"\n"
-"Toon alle beschikbare patronen in de gespecificeerde installatiebronnen\n"
-"\n"
-"  Opdrachtopties:\n"
-"\n"
-"-r, --repo <alias|#|URI>  alleen een andere manier om een bron te specificeren\n"
-"-i, --installed-only      toon alleen geïnstalleerde patronen\n"
-"-u, --uninstalled-only    toon alleen niet geïnstalleerde patronen\n"
+msgid "patterns (pt) [options] [repository] ...\n\nList all patterns available in specified repositories.\n\n  Command options:\n\n-r, --repo <alias|#|URI>  Just another means to specify repository.\n-i, --installed-only      Show only installed patterns.\n-u, --uninstalled-only    Show only patterns which are not installed.\n"
+msgstr "patterns (pt) [opties] [opslagruimte] ...\n\nToon alle beschikbare patronen in de opgegeven opslagruimten\n\n  Opdrachtopties:\n\n-r, --repo <alias|#|URI>  Een andere manier om een opslagruimte op te geven\n-i, --installed-only      toon alleen geïnstalleerde patronen\n-u, --uninstalled-only    toon alleen niet geïnstalleerde patronen\n"
 
 #: ../src/Zypper.cc:1767
-msgid ""
-"products (pd) [options] [repository] ...\n"
-"\n"
-"List all products available in specified repositories.\n"
-"\n"
-"  Command options:\n"
-"\n"
-"-r, --repo <alias|#|URI>  Just another means to specify repository.\n"
-"-i, --installed-only      Show only installed products.\n"
-"-u, --uninstalled-only    Show only products which are not installed.\n"
-msgstr ""
-"products (pd) [opties] [installatiebron] ...\n"
-"\n"
-"Toon alle beschikbare producten in de gespecificeerde installatiebronnen\n"
-"\n"
-"  Opdrachtopties:\n"
-"\n"
-"-r, --repo <alias|#|URI>  alleen een andere manier om bronnen te specificeren\n"
-"-i, --installed-only      toon alleen geïnstalleerde producten\n"
-"-u, --uninstalled-only    toon alleen niet geïnstalleerde producten\n"
+msgid "products (pd) [options] [repository] ...\n\nList all products available in specified repositories.\n\n  Command options:\n\n-r, --repo <alias|#|URI>  Just another means to specify repository.\n-i, --installed-only      Show only installed products.\n-u, --uninstalled-only    Show only products which are not installed.\n"
+msgstr "products (pd) [opties] [opslagruimte] ...\n\nToon alle beschikbare producten in de opgegeven opslagruimten\n\n  Opdrachtopties:\n\n-r, --repo <alias|#|URI>  Een andere manier om opslagruimten op te geven\n-i, --installed-only      toon alleen geïnstalleerde producten\n-u, --uninstalled-only    toon alleen niet geïnstalleerde producten\n"
 
 #: ../src/Zypper.cc:1792
 #, c-format
-msgid ""
-"info (if) [options] <name> ...\n"
-"\n"
-"Show detailed information for specified packages.\n"
-"\n"
-"  Command options:\n"
-"-r, --repo <alias|#|URI>  Work only with the specified repository.\n"
-"-t, --type <type>         Type of package (%s).\n"
-"                          Default: %s."
-msgstr ""
-"info (if) [opties] <naam> ...\n"
-"\n"
-"Toon gedetailleerde informatie over gespecificeerde pakketten\n"
-"\n"
-"  Opdrachtopties:\n"
-"-r, --repo <alias|#|URI>  werk alleen met de gespecificeerde bron.\n"
-"-t, --type <type>         type van pakketten (%s).\n"
-"                          standaard: %s."
+msgid "info (if) [options] <name> ...\n\nShow detailed information for specified packages.\n\n  Command options:\n-r, --repo <alias|#|URI>  Work only with the specified repository.\n-t, --type <type>         Type of package (%s).\n                          Default: %s."
+msgstr "info (if) [opties] <naam> ...\n\nGeef gedetailleerde informatie weer over opgegeven pakketten.\n\n  Opdrachtopties:\n-r, --repo <alias|#|URI>  Gebruik alleen de opgegeven opslagruimte.\n-t, --type <type>         Type pakket (%s).\n                          Standaard: %s."
 
 #: ../src/Zypper.cc:1815
 #, c-format
-msgid ""
-"patch-info <patchname> ...\n"
-"\n"
-"Show detailed information for patches.\n"
-"\n"
-"This is a rug compatibility alias for '%s'.\n"
-msgstr ""
-"patch-info <patchnaam>...\n"
-"\n"
-"Toon gedetailleerde informatie over de patches\n"
-"\n"
-"Dit is een alias voor '%s' en bedoelt voor compatibiliteit met rug.\n"
+msgid "patch-info <patchname> ...\n\nShow detailed information for patches.\n\nThis is a rug compatibility alias for '%s'.\n"
+msgstr "patch-info <patchnaam>...\n\nToon gedetailleerde informatie over de patches\n\nDit is een alias voor '%s' en bedoelt voor compatibiliteit met rug.\n"
 
 #: ../src/Zypper.cc:1834
 #, c-format
-msgid ""
-"pattern-info <pattern_name> ...\n"
-"\n"
-"Show detailed information for patterns.\n"
-"\n"
-"This is a rug compatibility alias for '%s'.\n"
-msgstr ""
-"pattern-info <patroonnaam> ...\n"
-"\n"
-"Toon gedetailleerde informatie over patronen\n"
-"\n"
-"Dit is een alias voor '%s' en bedoelt voor compatibiliteit met rug\n"
+msgid "pattern-info <pattern_name> ...\n\nShow detailed information for patterns.\n\nThis is a rug compatibility alias for '%s'.\n"
+msgstr "pattern-info <patroonnaam> ...\n\nToon gedetailleerde informatie over patronen\n\nDit is een alias voor '%s' en bedoelt voor compatibiliteit met rug\n"
 
 #: ../src/Zypper.cc:1853
 #, c-format
-msgid ""
-"product-info <product_name> ...\n"
-"\n"
-"Show detailed information for products.\n"
-"\n"
-"This is a rug compatibility alias for '%s'.\n"
-msgstr ""
-"product-info <productnaam> ...\n"
-"\n"
-"Toon gedetailleerde informatie over producten\n"
-"\n"
-"Dit is een alias voor '%s' en bedoeld voor compatibiliteit met rug\n"
+msgid "product-info <product_name> ...\n\nShow detailed information for products.\n\nThis is a rug compatibility alias for '%s'.\n"
+msgstr "product-info <productnaam> ...\n\nToon gedetailleerde informatie over producten\n\nDit is een alias voor '%s' en bedoeld voor compatibiliteit met rug\n"
 
 #: ../src/Zypper.cc:1870
-msgid ""
-"what-provides (wp) <capability>\n"
-"\n"
-"List all packages providing the specified capability.\n"
-"\n"
-"This command has no additional options.\n"
-msgstr ""
-"what-provides (wp) <functie>\n"
-"\n"
-"Toon alle pakketten die een gespecificeerde functie leveren\n"
-"\n"
-"Dit commando heeft geen additionele opties\n"
+msgid "what-provides (wp) <capability>\n\nList all packages providing the specified capability.\n\nThis command has no additional options.\n"
+msgstr "what-provides (wp) <functie>\n\nToon alle pakketten die een gespecificeerde functie leveren\n\nDeze opdracht heeft geen extra opties\n"
 
 #: ../src/Zypper.cc:1921
-msgid ""
-"moo\n"
-"\n"
-"Show an animal.\n"
-"\n"
-"This command has no additional options.\n"
-msgstr ""
-"moo\n"
-"\n"
-"Toon een dier\n"
-"\n"
-"Dit commando heeft geen aanvullende opties\n"
+msgid "moo\n\nShow an animal.\n\nThis command has no additional options.\n"
+msgstr "moo\n\nToon een dier\n\nDeze opdracht heeft geen extra opties\n"
 
 #: ../src/Zypper.cc:1943
 #, c-format
-msgid ""
-"addlock (al) [options] <packagename> ...\n"
-"\n"
-"Add a package lock. Specify packages to lock by exact name or by a glob pattern using '*' and '?' wildcard characters.\n"
-"\n"
-"  Command options:\n"
-"-r, --repo <alias|#|URI>  Restrict the lock to the specified repository.\n"
-"-t, --type <type>         Type of package (%s).\n"
-"                          Default: %s.\n"
-msgstr ""
-"addlock (al) [opties] <pakketnaam>\n"
-"\n"
-"Voeg een pakketblokkering toe. Specificeer de te blokkeren pakketten door de exacte naam of door een zoekpatroon met '*' en '?' joker-tekens\n"
-"\n"
-"  Opdrachtopties:\n"
-"-r, --repo <alias|#|URI>  beperk de blokkering tot de gespecificeerde bron\n"
-"-t, --type <type>         type van pakket (%s)\n"
-"                          standaard: %s\n"
+msgid "addlock (al) [options] <packagename> ...\n\nAdd a package lock. Specify packages to lock by exact name or by a glob pattern using '*' and '?' wildcard characters.\n\n  Command options:\n-r, --repo <alias|#|URI>  Restrict the lock to the specified repository.\n-t, --type <type>         Type of package (%s).\n                          Default: %s.\n"
+msgstr "addlock (al) [opties] <pakketnaam> ... \n\nVoeg een pakketvergrendeling toe. Specificeer de te vergrendelen pakketten door de exacte naam of door een zoekpatroon met de jokertekens '*' en '?'.\n\n  Opdrachtopties:\n-r, --repo <alias|#|URI>  Beperk de vergrendeling tot de opgegeven opslagruimte.\n-t, --type <type>         Type pakket (%s).\n                          Standaard: %s.\n"
 
 #: ../src/Zypper.cc:1969
 #, c-format
-msgid ""
-"removelock (rl) [options] <lock-number|packagename> ...\n"
-"\n"
-"Remove a package lock. Specify the lock to remove by its number obtained with '%s' or by package name.\n"
-"\n"
-"  Command options:\n"
-"-r, --repo <alias|#|URI>  Remove only locks with specified repository.\n"
-msgstr ""
-"removelock (rl) <blokkeringsnummer|pakketnaam>\n"
-"\n"
-"Verwijder een pakketblokkering. Specificeer de te verwijderen blokkering door zijn nummer verkregen met '%s' of door een pakketnaam\n"
-"\n"
-"  Opdrachtopties\n"
-"-r, --repo <alias|#|URI>  verwijder alleen blokkeringen in de gespecificeerde installatiebron.\n"
+msgid "removelock (rl) [options] <lock-number|packagename> ...\n\nRemove a package lock. Specify the lock to remove by its number obtained with '%s' or by package name.\n\n  Command options:\n-r, --repo <alias|#|URI>  Remove only locks with specified repository.\n"
+msgstr "removelock (rl) <blokkeringsnummer|pakketnaam>\n\nVerwijder een pakketblokkering. Specificeer de te verwijderen blokkering met het nummer verkregen met '%s' of met een pakketnaam\n\n  Opdrachtopties\n-r, --repo <alias|#|URI>  verwijder alleen blokkeringen in de opgegeven opslagruimte.\n"
 
 #: ../src/Zypper.cc:1989
-msgid ""
-"locks (ll)\n"
-"\n"
-"List current package locks.\n"
-"\n"
-"This command has no additional options.\n"
-msgstr ""
-"locks (ll)\n"
-"\n"
-"Toon de huidige pakketblokkeringen\n"
-"\n"
-"Dit commando heeft geen additionele opties\n"
+msgid "locks (ll)\n\nList current package locks.\n\nThis command has no additional options.\n"
+msgstr "locks (ll)\n\nToon de huidige pakketblokkeringen\n\nDeze opdracht heeft geen extra opties\n"
 
 #: ../src/Zypper.cc:2029
-msgid ""
-"targetos (tos)\n"
-"\n"
-"Show the ID string of the target Operating System.\n"
-"\n"
-"This command has no additional options.\n"
-msgstr ""
-"targetos (tos)\n"
-"\n"
-"Toon de ID-tekenreeks van het doel besturingssysteem.\n"
-"\n"
-"Dit commando heeft geen additionele opties.\n"
+msgid "targetos (tos)\n\nShow the ID string of the target Operating System.\n\nThis command has no additional options.\n"
+msgstr "targetos (tos)\n\nToon de ID-tekenreeks van het doelbesturingssysteem.\n\nDeze opdracht heeft geen extra opties.\n"
 
 #: ../src/Zypper.cc:2048
-msgid ""
-"versioncmp (vcmp) <version1> <version2>\n"
-"\n"
-"Compare the versions supplied as arguments.\n"
-"\n"
-"  Command options:\n"
-"-m, --match  Takes missing release number as any release.\n"
-msgstr ""
-"versioncmp (vcmp) <versie1> <versie2>\n"
-"\n"
-"Vergelijk de versies in de argumenten.\n"
-"\n"
-"  Opdrachtopties:\n"
-"-m, --match  Neem een ontbrekend release-nummer als elke release.\n"
+msgid "versioncmp (vcmp) <version1> <version2>\n\nCompare the versions supplied as arguments.\n\n  Command options:\n-m, --match  Takes missing release number as any release.\n"
+msgstr "versioncmp (vcmp) <versie1> <versie2>\n\nVergelijk de versies in de argumenten.\n\n  Opdrachtopties:\n-m, --match  Neem een ontbrekend release-nummer als elke release.\n"
 
 #: ../src/Zypper.cc:2068
-msgid ""
-"licenses\n"
-"\n"
-"Report Licenses and EULA of currently installed software packages.\n"
-"\n"
-"This command has no additional options.\n"
-msgstr ""
-"licenses\n"
-"\n"
-"Toon de licenties en EULA van de huidige geïnstalleerde softwarepakketten.\n"
-"\n"
-"Dit commando heeft geen additionele opties.\n"
+msgid "licenses\n\nReport Licenses and EULA of currently installed software packages.\n\nThis command has no additional options.\n"
+msgstr "licenses\n\nGeef de licenties en EULA weer van de huidige geïnstalleerde softwarepakketten.\n\nDeze opdracht heeft geen extra opties.\n"
 
 #: ../src/Zypper.cc:2085
-msgid ""
-"quit (exit, ^D)\n"
-"\n"
-"Quit the current zypper shell.\n"
-"\n"
-"This command has no additional options.\n"
-msgstr ""
-"quit (exit, ^D)\n"
-"\n"
-"Verlaat de huidige zypper-shell.\n"
-"\n"
-"Dit commando heeft geen additionele opties.\n"
+msgid "quit (exit, ^D)\n\nQuit the current zypper shell.\n\nThis command has no additional options.\n"
+msgstr "quit (exit, ^D)\n\nVerlaat de huidige zypper-shell.\n\nDeze opdracht heeft geen extra opties.\n"
 
 #: ../src/Zypper.cc:2102
-msgid ""
-"shell (sh)\n"
-"\n"
-"Enter the zypper command shell.\n"
-"\n"
-"This command has no additional options.\n"
-msgstr ""
-"shell (sh)\n"
-"\n"
-"Ga de zypper opdracht-shell in\n"
-"\n"
-"Deze opdracht heeft geen additionele opties.\n"
+msgid "shell (sh)\n\nEnter the zypper command shell.\n\nThis command has no additional options.\n"
+msgstr "shell (sh)\n\nGa de zypper opdracht-shell in\n\nDeze opdracht heeft geen extra opties.\n"
 
 #. translators: this is just a rug-compatiblity command
 #: ../src/Zypper.cc:2120
-msgid ""
-"service-types (st)\n"
-"\n"
-"List available service types.\n"
-msgstr ""
-"service-types (st)\n"
-"\n"
-"Toon de beschikbare service-types\n"
+msgid "service-types (st)\n\nList available service types.\n"
+msgstr "service-types (st)\n\nToon de beschikbare service-types\n"
 
 #. trunslators: this is a rug-compatibility command (equivalent of
 #. 'zypper addrepo -t plaindir URI'). You can refer to rug's translations
 #. for how to translate specific terms like channel or service if in doubt.
 #: ../src/Zypper.cc:2158
-msgid ""
-"mount\n"
-"\n"
-"Mount directory with RPMs as a channel.\n"
-"\n"
-"  Command options:\n"
-"-a, --alias <alias>  Use given string as service alias.\n"
-"-n, --name <name>    Use given string as service name.\n"
-"-r, --recurse        Dive into subdirectories.\n"
-msgstr ""
-"mount\n"
-"\n"
-"Koppel de map met RPM's als een kanaal\n"
-"\n"
-"  Opdrachtopties:\n"
-"-a, --alias <alias>  gebruik gegeven tekenreeks als service-alias\n"
-"-n, --name <name>    gebruik de gegeven tekenreeks als service-naam\n"
-"-r, --recurse        ga submappen in\n"
+msgid "mount\n\nMount directory with RPMs as a channel.\n\n  Command options:\n-a, --alias <alias>  Use given string as service alias.\n-n, --name <name>    Use given string as service name.\n-r, --recurse        Dive into subdirectories.\n"
+msgstr "mount\n\nKoppel de map met RPM's als een kanaal\n\n  Opdrachtopties:\n-a, --alias <alias>  gebruik gegeven tekenreeks als service-alias\n-n, --name <name>    gebruik de gegeven tekenreeks als service-naam\n-r, --recurse        ga submappen in\n"
 
 #: ../src/Zypper.cc:2189
 #, c-format
-msgid ""
-"patch-search [options] [querystring...]\n"
-"\n"
-"Search for patches matching given search strings. This is a rug-compatibility alias for '%s'. See zypper's manual page for details.\n"
-msgstr ""
-"patch-search [opties] [zoekterm...]\n"
-"\n"
-"Zoek naar patches die overeenkomen met de gegeven zoektermen. Dit is een alias voor '%s', die bedoeld is voor compatibiliteit met rug. Zie 'man zypper' voor details.\n"
+msgid "patch-search [options] [querystring...]\n\nSearch for patches matching given search strings. This is a rug-compatibility alias for '%s'. See zypper's manual page for details.\n"
+msgstr "patch-search [opties] [zoekterm...]\n\nZoek naar patches die overeenkomen met de gegeven zoektermen. Dit is een alias voor '%s', die bedoeld is voor compatibiliteit met rug. Zie 'man zypper' voor details.\n"
 
 #. translators: this is just a rug-compatiblity command
 #: ../src/Zypper.cc:2207
-msgid ""
-"ping [options]\n"
-"\n"
-"This command has dummy implementation which always returns 0.\n"
-"It is provided for compatibility with rug.\n"
-msgstr ""
-"ping [opties]\n"
-"\n"
-"Dit commando heeft een dummy-implementatie die altijd 0 teruggeeft.\n"
-"Dit wordt geleverd voor compatibiliteit met rug.\n"
+msgid "ping [options]\n\nThis command has dummy implementation which always returns 0.\nIt is provided for compatibility with rug.\n"
+msgstr "ping [opties]\n\nDeze opdracht heeft een dummy-implementatie die altijd 0 retourneert.\nDit wordt geleverd voor compatibiliteit met rug.\n"
 
 #: ../src/Zypper.cc:2221 ../src/Zypper.cc:3988
 msgid "Unexpected program flow."
-msgstr "Onverwachte gang door het programma."
+msgstr "Onverwacht programmaverloop."
 
 #: ../src/Zypper.cc:2245
 msgid "Non-option program arguments: "
-msgstr "Programma-argumenten die geen optie zijn: "
+msgstr "Programma-argumenten die geen optie zijn:"
 
 #. TranslatorExplanation this is a hedgehog, paint another animal, if you want
 #: ../src/Zypper.cc:2307
-msgid ""
-"   \\\\\\\\\\\n"
-"  \\\\\\\\\\\\\\__o\n"
-"__\\\\\\\\\\\\\\'/_"
-msgstr ""
-"   \\\\\\\\\\\n"
-"  \\\\\\\\\\\\\\__o\n"
-"__\\\\\\\\\\\\\\'/_"
+msgid "   \\\\\\\\\\\n  \\\\\\\\\\\\\\__o\n__\\\\\\\\\\\\\\'/_"
+msgstr "   \\\\\\\\\\\n  \\\\\\\\\\\\\\__o\n__\\\\\\\\\\\\\\'/_"
 
 #: ../src/Zypper.cc:2334
 msgid "Root privileges are required for refreshing services."
@@ -3623,7 +2552,7 @@ msgstr "Er zijn root-privileges nodig om de systeemservices te wijzigen."
 
 #: ../src/Zypper.cc:2430
 msgid "Could not determine the type of the repository. Check if the specified URI points to a valid repository."
-msgstr "Kan het type installatiebron niet bepalen. Controleer of de gedefinieerde URI naar een geldige bron verwijst."
+msgstr "Kan het type opslagruimte niet bepalen. Controleer of de opgegeven URI naar een geldige opslagruimte verwijst."
 
 #: ../src/Zypper.cc:2462
 #, c-format
@@ -3633,7 +2562,7 @@ msgstr "`%s' is geen geldig servicetype."
 #: ../src/Zypper.cc:2464
 #, c-format
 msgid "See '%s' or '%s' to get a list of known service types."
-msgstr "Zie '%s' of '%s' voor een lijst met bekende servicetypen."
+msgstr "Zie '%s' of '%s' voor een lijst van bekende servicetypen."
 
 #. translators: aggregate option is e.g. "--all". This message will be
 #. followed by ms command help text which will explain it
@@ -3641,7 +2570,7 @@ msgstr "Zie '%s' of '%s' voor een lijst met bekende servicetypen."
 #. followed by mr command help text which will explain it
 #: ../src/Zypper.cc:2493 ../src/Zypper.cc:2861
 msgid "Alias or an aggregate option is required."
-msgstr "Een alias of geagregeerde optie is vereist."
+msgstr "Een alias of aggregate-optie is vereist."
 
 #: ../src/Zypper.cc:2527
 #, c-format
@@ -3651,37 +2580,36 @@ msgstr "Service '%s' niet gevonden."
 #: ../src/Zypper.cc:2563 ../src/Zypper.cc:2707 ../src/Zypper.cc:2793
 #: ../src/Zypper.cc:2849
 msgid "Root privileges are required for modifying system repositories."
-msgstr "Er zijn root-privileges nodig om de systeembronnen te wijzigen."
+msgstr "Er zijn root-privileges nodig om de systeemopslagruimten te wijzigen."
 
-# /usr/lib/YaST2/clients/lan_inetd_custom.ycp:764
 #: ../src/Zypper.cc:2612 ../src/Zypper.cc:2970
 msgid "Too few arguments."
 msgstr "Te weinig argumenten."
 
 #: ../src/Zypper.cc:2636
 msgid "If only one argument is used, it must be a URI pointing to a .repo file."
-msgstr "Als er één argument wordt gebruikt, dan moet dat een URI zijn die wijst naar een repo-bestand."
+msgstr "Als er één argument wordt gebruikt, moet dat een URI zijn die verwijst naar een repo-bestand."
 
 #: ../src/Zypper.cc:2662
 #, c-format
 msgid "Cannot use %s together with %s. Using the %s setting."
-msgstr "Kan %s niet samen met %s gebruiken. Instellingen uit %s worden gebruikt."
+msgstr "Kan %s niet samen met %s gebruiken. De instelling %s wordt gebruikt."
 
 #: ../src/Zypper.cc:2685
 msgid "Specified type is not a valid repository type:"
-msgstr "Gespecificeerd type is geen geldig brontype:"
+msgstr "Opgegeven type is geen geldig opslagruimtetype:"
 
 #: ../src/Zypper.cc:2687
 #, c-format
 msgid "See '%s' or '%s' to get a list of known repository types."
-msgstr "Zie '%s' of '%s' voor een lijst van bekende brontypen."
+msgstr "Zie '%s' of '%s' voor een lijst van bekende opslagruimtetypen."
 
 #. translators: %s is the supplied command line argument which
 #. for which no repository counterpart was found
 #: ../src/Zypper.cc:2743
 #, c-format
 msgid "Repository '%s' not found by alias, number or URI."
-msgstr "Installatiebron '%s' is niet gevonden aan de hand van de alias, het nummer of de URI."
+msgstr "Opslagruimte '%s' is niet gevonden aan de hand van de alias, het nummer of de URI."
 
 #. translators: %s is the supplied command line argument which
 #. for which no service counterpart was found
@@ -3697,21 +2625,21 @@ msgstr "Onvoldoende argumenten. Er is minstens een URI en alias nodig."
 #: ../src/Zypper.cc:2825
 #, c-format
 msgid "Repository '%s' not found."
-msgstr "Installatiebron '%s' is niet gevonden."
+msgstr "Opslagruimte '%s' is niet gevonden."
 
 #: ../src/Zypper.cc:2891
 #, c-format
 msgid "Repository %s not found."
-msgstr "Installatiebron %s is niet gevonden."
+msgstr "Opslagruimte %s is niet gevonden."
 
 #: ../src/Zypper.cc:2909
 msgid "Root privileges are required for refreshing system repositories."
-msgstr "Er zijn root-privileges vereist voor het vernieuwen van de systeeminstallatiebronnen."
+msgstr "Er zijn root-privileges vereist voor het vernieuwen van de systeemopslagruimten."
 
 #: ../src/Zypper.cc:2916
 #, c-format
 msgid "The '%s' global option has no effect here."
-msgstr "De globale optie '%s' heeft hier geen effect."
+msgstr "De algemene optie '%s' heeft hier geen effect."
 
 #: ../src/Zypper.cc:2924
 #, c-format
@@ -3728,13 +2656,13 @@ msgstr "Minstens één naam van een pakket is vereist."
 
 #: ../src/Zypper.cc:2985
 msgid "Root privileges are required for installing or uninstalling packages."
-msgstr "Er zijn root-privileges vereist voor het installeren en deïnstalleren van pakketten."
+msgstr "Er zijn root-privileges vereist voor het installeren en verwijderen van pakketten."
 
 #. translators: rug related message, shown if
 #. 'zypper in --entire-catalog foorepo someargument' is specified
 #: ../src/Zypper.cc:3002
 msgid "Ignoring arguments, marking the entire repository."
-msgstr "Argumenten worden genegeerd, de gehele installatiebron wordt gemarkeerd."
+msgstr "Argumenten negeren, gehele opslagruimte markeren."
 
 #: ../src/Zypper.cc:3012
 #, c-format
@@ -3744,12 +2672,12 @@ msgstr "Onbekend pakkettype: %s"
 #: ../src/Zypper.cc:3032
 #, c-format
 msgid "'%s' looks like an RPM file. Will try to download it."
-msgstr "'%s' lijkt op een RPM-bestand. Er wordt een poging gedaan het downloaden."
+msgstr "'%s' lijkt op een RPM-bestand. Er wordt geprobeerd het te downloaden."
 
 #: ../src/Zypper.cc:3045
 #, c-format
 msgid "Problem with the RPM file specified as '%s', skipping."
-msgstr "Probleem met het RPM-bestand gespecificeerd als '%s', overslaan."
+msgstr "Probleem met het RPM-bestand opgegeven als '%s', overslaan."
 
 #: ../src/Zypper.cc:3068
 #, c-format
@@ -3766,7 +2694,7 @@ msgstr "Geen geldig argument gespecificeerd."
 
 #: ../src/Zypper.cc:3128 ../src/Zypper.cc:3207
 msgid "Warning: No repositories defined. Operating only with the installed resolvables. Nothing can be installed."
-msgstr "Waarschuwing: geen bronnen gedefinieerd. Er wordt nu alleen gewerkt met de geïnstalleerde oplosbare pakketten. Er kan niets worden geïnstalleerd."
+msgstr "Waarschuwing: geen opslagruimten opgegeven. Er wordt nu alleen gewerkt met de geïnstalleerde oplosbare pakketten. Er kan niets worden geïnstalleerd."
 
 #: ../src/Zypper.cc:3157
 msgid "Source package name is a required argument."
@@ -3776,7 +2704,7 @@ msgstr "Naam van bronpakket is een vereist argument."
 #: ../src/Zypper.cc:3731 ../src/Zypper.cc:3799
 #, c-format
 msgid "Unknown package type '%s'."
-msgstr "Onbekend pakkettype: '%s'."
+msgstr "Onbekend type pakket '%s'."
 
 #: ../src/Zypper.cc:3370
 msgid "Problem occurred initializing or executing the search query"
@@ -3790,7 +2718,7 @@ msgstr "Zie bovenstaande melding voor een hint."
 #: ../src/Zypper.cc:3543 ../src/Zypper.cc:3626
 #, c-format
 msgid "Running as '%s', cannot use '%s' option."
-msgstr "Draaiend als '%s' kan de optie '%s' niet worden gebruikt."
+msgstr "De optie '%s' kan niet worden gebruikt wanneer deze wordt uitgevoerd als '%s' ."
 
 #: ../src/Zypper.cc:3571
 msgid "Root privileges are required for updating packages."
@@ -3821,11 +2749,11 @@ msgstr "%s is ouder dan %s"
 
 #: ../src/Zypper.cc:3973
 msgid "This command only makes sense in the zypper shell."
-msgstr "Dit commando is alleen zinvol binnen de zypper-shell."
+msgstr "Deze opdracht is alleen zinvol binnen de zypper-shell."
 
 #: ../src/Zypper.cc:3985
 msgid "You already are running zypper's shell."
-msgstr "U draait al een shell van zypper."
+msgstr "U voert al een shell van zypper uit."
 
 #: ../src/Zypper.cc:4002
 msgid "Description"
@@ -3833,8 +2761,5 @@ msgstr "Beschrijving"
 
 #: ../src/Zypper.cc:4066
 msgid "Resolvable Type"
-msgstr "Oplosbaartype"
-
-#~ msgid "Root privileges are required for modifying services."
-#~ msgstr "Er zijn root-privileges nodig om de services te wijzigen."
+msgstr "Oplosbaar type"
 
