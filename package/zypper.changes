@@ -1,4 +1,12 @@
 -------------------------------------------------------------------
+Mon Jan 12 16:46:55 CET 2009 - jkupec@suse.cz
+
+- missing 'clean' command alias 'cc' added to man page
+  (bnc #464408)
+- fixed list-patches/patch inconsistency in determining needed
+  patches (bnc #464458)
+
+-------------------------------------------------------------------
 Tue Dec 16 18:23:32 CET 2008 - jkupec@suse.cz
 
 - translations update
