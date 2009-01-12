@@ -1,4 +1,10 @@
 -------------------------------------------------------------------
+Mon Jan 12 15:01:55 CET 2009 - jkupec@suse.cz
+
+- fixed list-patches/patch inconsistency in determining needed
+  patches (bnc #464458)
+
+-------------------------------------------------------------------
 Tue Dec 16 18:23:32 CET 2008 - jkupec@suse.cz
 
 - translations update

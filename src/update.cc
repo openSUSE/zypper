@@ -232,6 +232,8 @@ public:
 // ----------------------------------------------------------------------------
 
 // does not allow changing the arch (#222140).
+// TODO: ignores priority (bnc #464458)
+// TODO: move to libzypp
 PoolItem
 findUpdateItem( const ResPool & pool, const PoolItem item )
 {
