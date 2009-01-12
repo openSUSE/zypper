@@ -248,6 +248,7 @@ void print_main_help(Zypper & zypper)
     "\taddlock, al\t\tAdd a package lock.\n"
     "\tremovelock, rl\t\tRemove a package lock.\n"
     "\tlocks, ll\t\tList current package locks.\n"
+    "\tcleanlocks, cl\t\tRemove unused locks.\n"
   );
 
   static string help_other_commands = _("     Other Commands:\n"
@@ -879,13 +880,11 @@ void Zypper::processCommandOptions()
     _command_help = str::form(_(
       // TranslatorExplanation the first %s = "package, patch, pattern, product"
       //  and the second %s = "package"
-      //! \todo A capability is NAME[.ARCH][OP<VERSION>] now,
-      //!  the help text will be changed after release
       "install (in) [options] <capability|rpm_file_uri> ...\n"
       "\n"
-      "Install packages with specified capabilities or RPM files with"
-      " specified location. A capability is"
-      " NAME[OP<VERSION>], where OP is one of <, <=, =, >=, >.\n"
+      "Install packages with specified capabilities or RPM files with specified\n"
+      "location. A capability is NAME[.ARCH][OP<VERSION>], where OP is one\n"
+      "of <, <=, =, >=, >.\n"
       "\n"
       "  Command options:\n"
       "-r, --repo <alias|#|URI>        Install packages only from the specified repository.\n"
@@ -934,8 +933,9 @@ void Zypper::processCommandOptions()
       //  and the second %s = "package"
       "remove (rm) [options] <capability> ...\n"
       "\n"
-      "Remove packages with specified capabilities. A capability is"
-      " NAME[OP<VERSION>], where OP is one of <, <=, =, >=, >.\n"
+      "Remove packages with specified capabilities.\n"
+      "A capability is NAME[.ARCH][OP<VERSION>], where OP is one\n"
+      "of <, <=, =, >=, >.\n"
       "\n"
       "  Command options:\n"
       "-r, --repo <alias|#|URI>        Operate only with packages from the specified repository.\n"
@@ -1028,7 +1028,6 @@ void Zypper::processCommandOptions()
     break;
   }
 
-  //! \todo
   case ZypperCommand::ADD_SERVICE_e:
   {
     static struct option service_add_options[] = {
@@ -1041,15 +1040,14 @@ void Zypper::processCommandOptions()
     specific_options = service_add_options;
     _command_help = str::form(_(
       // translators: the %s = "ris" (the only service type currently supported)
-      //! \todo s/--name/--name <name> after 11.1 release.
       "addservice (as) [options] <URI> <alias>\n"
       "\n"
       "Add a repository index service to the system.\n"
       "\n"
       "  Command options:\n"
-      "-t, --type <TYPE>       Type of the service (%s).\n"
+      "-t, --type <type>       Type of the service (%s).\n"
       "-d, --disable           Add the service as disabled.\n"
-      "-n, --name              Specify descriptive name for the service.\n"
+      "-n, --name <alias>      Specify descriptive name for the service.\n"
     ), "ris");
     break;
   }
@@ -1065,7 +1063,6 @@ void Zypper::processCommandOptions()
     specific_options = options;
     _command_help = _(
       // TranslatorExplanation the %s = "yast2, rpm-md, plaindir"
-      // TODO
       "removeservice (rs) [options] <alias|#|URI>\n"
       "\n"
       "Remove specified repository index service from the sytem..\n"
@@ -1204,20 +1201,19 @@ void Zypper::processCommandOptions()
     specific_options = service_add_options;
     _command_help = str::form(_(
       // translators: the %s = "yast2, rpm-md, plaindir"
-      //! \todo s/--name/--name <name> after 11.1 release.
       "addrepo (ar) [options] <URI> <alias>\n"
-      "addrepo (ar) [options] <FILE.repo>\n"
+      "addrepo (ar) [options] <file.repo>\n"
       "\n"
       "Add a repository to the sytem. The repository can be specified by its URI"
       " or can be read from specified .repo file (even remote).\n"
       "\n"
       "  Command options:\n"
-      "-r, --repo <FILE.repo>  Just another means to specify a .repo file to read.\n"
-      "-t, --type <TYPE>       Type of repository (%s).\n"
+      "-r, --repo <file.repo>  Just another means to specify a .repo file to read.\n"
+      "-t, --type <type>       Type of repository (%s).\n"
       "-d, --disable           Add the repository as disabled.\n"
       "-c, --check             Probe URI.\n"
       "-C, --no-check          Don't probe URI, probe later during refresh.\n"
-      "-n, --name              Specify descriptive name for the repository.\n"
+      "-n, --name <name>       Specify descriptive name for the repository.\n"
       "-k, --keep-packages     Enable RPM files caching.\n"
       "-K, --no-keep-packages  Disable RPM files caching.\n"
       "-f, --refresh           Enable autorefresh of the repository.\n"
@@ -1342,7 +1338,6 @@ void Zypper::processCommandOptions()
     _command_help = str::form(_(
       // translators: %s is "--all|--remote|--local|--medium-type"
       // and "--all, --remote, --local, --medium-type"
-      //! \todo s/<1-99>/<#> after 11.1 release.
       "modifyrepo (mr) <options> <alias|#|URI>\n"
       "modifyrepo (mr) <options> <%s>\n"
       "\n"
@@ -1355,7 +1350,7 @@ void Zypper::processCommandOptions()
       "-r, --refresh             Enable auto-refresh of the repository.\n"
       "-R, --no-refresh          Disable auto-refresh of the repository.\n"
       "-n, --name                Set a descriptive name for the repository.\n"
-      "-p, --priority <1-99>     Set priority of the repository.\n"
+      "-p, --priority <integer>  Set priority of the repository.\n"
       "-k, --keep-packages       Enable RPM files caching.\n"
       "-K, --no-keep-packages    Disable RPM files caching.\n"
       "\n"
@@ -1412,7 +1407,7 @@ void Zypper::processCommandOptions()
     };
     specific_options = service_list_options;
     _command_help = _(
-      "clean [alias|#|URI] ...\n"
+      "clean (cc) [alias|#|URI] ...\n"
       "\n"
       "Clean local caches.\n"
       "\n"
@@ -2005,15 +2000,15 @@ void Zypper::processCommandOptions()
       {0, 0, 0, 0}
     };
     specific_options = options;
-    _command_help = ( //TODO localize
-      "clean locks (ll)\n"
+    _command_help = (_(
+      "cleanlocks (cl)\n"
       "\n"
-      "Removes useless locks. Before removing locks which doesn't lock anything, ask user.\n"
+      "Remove useless locks.\n"
       "\n"
       "  Command options:\n"
       "-d, --only-duplicates     Clean only duplicate locks.\n"
       "-e, --only-empty          Clean only locks which doesn't lock anything.\n"
-    );
+    ));
     break;
   }
 
@@ -2063,11 +2058,10 @@ void Zypper::processCommandOptions()
       {0, 0, 0, 0}
     };
     specific_options = options;
-    //! \todo s/Licenses/licenses, s/EULA/EULAs
     _command_help = _(
       "licenses\n"
       "\n"
-      "Report Licenses and EULA of currently installed software packages.\n"
+      "Report licenses and EULAs of currently installed software packages.\n"
       "\n"
       "This command has no additional options.\n"
     );
@@ -3872,6 +3866,7 @@ void Zypper::doCommand()
 
     Locks::instance().save();
 
+    //! \todo localize
     out().info(str::form("removed locks: %lu", (long unsigned)(start - Locks::instance().size())));
 
     break;
