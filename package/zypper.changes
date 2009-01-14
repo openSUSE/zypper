@@ -1,4 +1,9 @@
 -------------------------------------------------------------------
+Wed Jan 14 09:59:22 CET 2009 - jkupec@suse.cz
+
+- modifyrepo - accept multiple arguments
+
+-------------------------------------------------------------------
 Mon Jan 12 15:47:48 CET 2009 - jkupec@suse.cz
 
 - some text and man page corrections
