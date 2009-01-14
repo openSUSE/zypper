@@ -46,9 +46,6 @@ Authors:
 mkdir build
 cd build
 cmake -DCMAKE_INSTALL_PREFIX=%{prefix} \
-%if 0%{?sles_version}
-       -DZYPPER_CONFIRM_UNSUPPORTED_PACKAGES \
-%endif
       -DSYSCONFDIR=%{_sysconfdir} \
       -DMANDIR=%{_mandir} \
       -DCMAKE_VERBOSE_MAKEFILE=TRUE \
