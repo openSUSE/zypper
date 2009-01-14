@@ -1,4 +1,10 @@
 -------------------------------------------------------------------
+Wed Jan 14 16:47:05 CET 2009 - jkupec@suse.cz
+
+- check for SLE platform on runtime using base product name
+  instead of compile time (adapted fate #305057)
+
+-------------------------------------------------------------------
 Wed Jan 14 09:59:22 CET 2009 - jkupec@suse.cz
 
 - modifyrepo - accept multiple arguments
