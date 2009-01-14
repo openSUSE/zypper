@@ -748,9 +748,11 @@ static int summary(Zypper & zypper)
   show_summary_of_type(zypper, TO_REMOVE, toremove);
   show_summary_of_type(zypper, TO_CHANGE_ARCH, tochangearch);
   show_summary_of_type(zypper, TO_CHANGE_VENDOR, tochangevendor);
-#ifdef ZYPPER_CONFIRM_UNSUPPORTED_PACKAGES
-  show_summary_of_type(zypper, UNSUPPORTED, tounsupported);
-#endif
+  // if running on SUSE Linux Enterprise, report unsupported packages
+  Product::constPtr platform = God->target()->baseProduct();
+  if (platform && platform->name().find("SUSE_SLE") != string::npos)
+    show_summary_of_type(zypper, UNSUPPORTED, tounsupported);
+
   // "</install-summary>"
   if (zypper.out().type() == Out::TYPE_XML)
     cout << "</install-summary>" << endl;
