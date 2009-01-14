@@ -1,4 +1,11 @@
 -------------------------------------------------------------------
+Wed Jan 14 16:50:52 CET 2009 - jkupec@suse.cz
+
+- check for SLE platform on runtime using base product name
+  instead of compile time (adapted fate #305057 - %suse_sles rpm
+  macro has been dropped).
+
+-------------------------------------------------------------------
 Mon Jan 12 18:43:03 CET 2009 - jkupec@suse.cz
 
 - translations update
