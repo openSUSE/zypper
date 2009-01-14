@@ -1,4 +1,4 @@
-.TH "zypper" "8" "1.0.3" "zypper" "System Tools"
+.TH "zypper" "8" "1.1.0" "zypper" "System Tools"
 .SH "SYNTAX"
 .LP
 zypper [\fI\-\-global\-opts\fR] <\fBcommand\fR> [\fI\-\-command\-opts\fR] [\fBcommand-arguments\fR]
@@ -911,10 +911,10 @@ dreadful alias which is not usable on the command line).
 .B $ zypper nr 8 myrepo
 
 .TP
-.B modifyrepo (mr) <options> <alias|#|URI>
+.B modifyrepo (mr) <options> <alias|#|URI> ...
 .TP
 .B modifyrepo (mr) <options> <--all|--remote|--local|--medium-type>
-Modify properties of the repository specified by alias, number or URI or
+Modify properties of repositories specified by alias, number or URI or
 one of the aggregate options.
 .TP
 \fI\-e, \-\-enable\fR

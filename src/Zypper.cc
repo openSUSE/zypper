@@ -1338,7 +1338,7 @@ void Zypper::processCommandOptions()
     _command_help = str::form(_(
       // translators: %s is "--all|--remote|--local|--medium-type"
       // and "--all, --remote, --local, --medium-type"
-      "modifyrepo (mr) <options> <alias|#|URI>\n"
+      "modifyrepo (mr) <options> <alias|#|URI> ...\n"
       "modifyrepo (mr) <options> <%s>\n"
       "\n"
       "Modify properties of repositories specified by alias, number, or URI, or by the\n"
@@ -2858,14 +2858,6 @@ void Zypper::doCommand()
       setExitCode(ZYPPER_EXIT_ERR_INVALID_ARGS);
       return;
     }
-    // too many arguments
-    if (_arguments.size() > 1
-       || (_arguments.size() > 0 && non_alias))
-    {
-      report_too_many_arguments(_command_help);
-      setExitCode(ZYPPER_EXIT_ERR_INVALID_ARGS);
-      return;
-    }
 
     initRepoManager();
     if (non_alias)
@@ -2874,16 +2866,19 @@ void Zypper::doCommand()
     }
     else
     {
-      RepoInfo repo;
-      if (match_repo(*this,_arguments[0],&repo))
+      for_(arg,_arguments.begin(),_arguments.end())
       {
-        modify_repo(*this, repo.alias());
-      }
-      else
-      {
-        out().error(
-          boost::str(format(_("Repository %s not found.")) % _arguments[0]));
-        ERR << "Repo " << _arguments[0] << " not found" << endl;
+        RepoInfo r;
+        if (match_repo(*this,*arg,&r))
+        {
+          modify_repo(*this, r.alias());
+        }
+        else
+        {
+          out().error(
+            boost::str(format(_("Repository %s not found.")) % *arg));
+          ERR << "Repo " << *arg << " not found" << endl;
+        }
       }
     }
 
