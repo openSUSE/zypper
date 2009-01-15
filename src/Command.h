@@ -36,7 +36,7 @@ struct ZypperCommand
   static const ZypperCommand SRC_INSTALL;
   static const ZypperCommand VERIFY;
   static const ZypperCommand INSTALL_NEW_RECOMMENDS;
-  
+
   static const ZypperCommand UPDATE;
   static const ZypperCommand LIST_UPDATES;
   static const ZypperCommand PATCH;
@@ -58,7 +58,7 @@ struct ZypperCommand
   static const ZypperCommand REMOVE_LOCK;
   static const ZypperCommand LIST_LOCKS;
   static const ZypperCommand CLEAN_LOCKS;
-  
+
   // utils/others
   static const ZypperCommand TARGET_OS;
   static const ZypperCommand VERSION_CMP;
@@ -80,10 +80,10 @@ struct ZypperCommand
   static const ZypperCommand RUG_SERVICE_TYPES;
   static const ZypperCommand RUG_LIST_RESOLVABLES;
   static const ZypperCommand RUG_MOUNT;
-  static const ZypperCommand RUG_INFO_PROVIDES;
-  static const ZypperCommand RUG_INFO_CONFLICTS;
-  static const ZypperCommand RUG_INFO_OBSOLETES;
-  static const ZypperCommand RUG_INFO_REQUIREMENTS;
+  //static const ZypperCommand RUG_INFO_PROVIDES;
+  //static const ZypperCommand RUG_INFO_CONFLICTS;
+  //static const ZypperCommand RUG_INFO_OBSOLETES;
+  //static const ZypperCommand RUG_INFO_REQUIREMENTS;
   static const ZypperCommand RUG_PATCH_SEARCH;
   static const ZypperCommand RUG_PING;
   //!@}
@@ -140,7 +140,7 @@ struct ZypperCommand
     SHELL_e,
     SHELL_QUIT_e,
     MOO_e,
-    
+
     NONE_e,
 
     RUG_PATCH_INFO_e,
@@ -160,7 +160,7 @@ struct ZypperCommand
   ZypperCommand(Command command) : _command(command) {}
 
   explicit ZypperCommand(const std::string & strval_r);
-  
+
   Command toEnum() const { return _command; }
 
   ZypperCommand::Command parse(const std::string & strval_r);
@@ -168,7 +168,7 @@ struct ZypperCommand
   const std::string & asString() const;
 
 
-  Command _command; 
+  Command _command;
 };
 /*
 inline std::ostream & operator<<( std::ostream & str, const ZypperCommand & obj )
