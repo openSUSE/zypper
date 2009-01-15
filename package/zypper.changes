@@ -1,4 +1,9 @@
 -------------------------------------------------------------------
+Thu Jan 15 11:18:36 CET 2009 - jkupec@suse.cz
+
+- fixed typo (bnc #447594)
+
+-------------------------------------------------------------------
 Wed Jan 14 16:47:05 CET 2009 - jkupec@suse.cz
 
 - check for SLE platform on runtime using base product name
