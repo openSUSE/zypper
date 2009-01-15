@@ -81,10 +81,10 @@ const ZypperCommand ZypperCommand::RUG_PRODUCT_INFO(ZypperCommand::RUG_PRODUCT_I
 const ZypperCommand ZypperCommand::RUG_SERVICE_TYPES(ZypperCommand::RUG_SERVICE_TYPES_e);
 const ZypperCommand ZypperCommand::RUG_LIST_RESOLVABLES(ZypperCommand::RUG_LIST_RESOLVABLES_e);
 const ZypperCommand ZypperCommand::RUG_MOUNT(ZypperCommand::RUG_MOUNT_e);
-const ZypperCommand ZypperCommand::RUG_INFO_PROVIDES(ZypperCommand::RUG_INFO_PROVIDES_e);
-const ZypperCommand ZypperCommand::RUG_INFO_CONFLICTS(ZypperCommand::RUG_INFO_CONFLICTS_e);
-const ZypperCommand ZypperCommand::RUG_INFO_OBSOLETES(ZypperCommand::RUG_INFO_OBSOLETES_e);
-const ZypperCommand ZypperCommand::RUG_INFO_REQUIREMENTS(ZypperCommand::RUG_INFO_REQUIREMENTS_e);
+//const ZypperCommand ZypperCommand::RUG_INFO_PROVIDES(ZypperCommand::RUG_INFO_PROVIDES_e);
+//const ZypperCommand ZypperCommand::RUG_INFO_CONFLICTS(ZypperCommand::RUG_INFO_CONFLICTS_e);
+//const ZypperCommand ZypperCommand::RUG_INFO_OBSOLETES(ZypperCommand::RUG_INFO_OBSOLETES_e);
+//const ZypperCommand ZypperCommand::RUG_INFO_REQUIREMENTS(ZypperCommand::RUG_INFO_REQUIREMENTS_e);
 const ZypperCommand ZypperCommand::RUG_PATCH_SEARCH(ZypperCommand::RUG_PATCH_SEARCH_e);
 const ZypperCommand ZypperCommand::RUG_PING(ZypperCommand::RUG_PING_e);
 
@@ -158,10 +158,10 @@ ZypperCommand::Command ZypperCommand::parse(const std::string & strval_r)
     _table["service-types"] = _table["st"] = ZypperCommand::RUG_SERVICE_TYPES_e;
     _table["list-resolvables"] = /*_table["lr"] CONFLICT with repos =*/ ZypperCommand::RUG_LIST_RESOLVABLES_e;
     _table["mount"] = ZypperCommand::RUG_MOUNT_e;
-    _table["info-provides"] = _table["ip"] = ZypperCommand::RUG_INFO_PROVIDES_e;
-    _table["info-requirements"] = _table["ir"] = ZypperCommand::RUG_INFO_REQUIREMENTS_e;
-    _table["info-conflicts"] = _table["ic"] = ZypperCommand::RUG_INFO_CONFLICTS_e;
-    _table["info-obsoletes"] = _table["io"] = ZypperCommand::RUG_INFO_OBSOLETES_e;
+    //_table["info-provides"] = _table["ip"] = ZypperCommand::RUG_INFO_PROVIDES_e;
+    //_table["info-requirements"] = _table["ir"] = ZypperCommand::RUG_INFO_REQUIREMENTS_e;
+    //_table["info-conflicts"] = _table["ic"] = ZypperCommand::RUG_INFO_CONFLICTS_e;
+    //_table["info-obsoletes"] = _table["io"] = ZypperCommand::RUG_INFO_OBSOLETES_e;
     _table["patch-search"] = _table["pse"] = ZypperCommand::RUG_PATCH_SEARCH_e;
     _table["ping"] = ZypperCommand::RUG_PING_e;
   }
