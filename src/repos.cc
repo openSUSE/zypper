@@ -1718,10 +1718,10 @@ void modify_repo(Zypper & zypper, const string & alias)
       {
         if (repo.enabled())
           zypper.out().info(boost::str(format(
-            _("Repository '%s' has been sucessfully enabled.")) % alias));
+            _("Repository '%s' has been successfully enabled.")) % alias));
         else
           zypper.out().info(boost::str(format(
-            _("Repository '%s' has been sucessfully disabled.")) % alias));
+            _("Repository '%s' has been successfully disabled.")) % alias));
       }
 
       if (changed_autoref)
