@@ -1,4 +1,9 @@
 -------------------------------------------------------------------
+Fri Jan  9 17:01:10 CET 2009 - jkupec@suse.cz
+
+- handle HTTP 503 reponses as temporary errors (bnc #462545)
+
+-------------------------------------------------------------------
 Thu Dec 18 22:26:18 CET 2008 - ma@suse.de
 
 - Fixed lost user request to abort during commit. (bnc #388810, bnc #450273)

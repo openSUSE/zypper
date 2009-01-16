@@ -58,9 +58,9 @@
 # - Consider calling ./mkChangelog to edit the
 #   changes file. See './mkChangelog -h' for help.
 #
-SET(LIBZYPP_MAJOR "5")
-SET(LIBZYPP_COMPATMINOR "23")
-SET(LIBZYPP_MINOR "25")
+SET(LIBZYPP_MAJOR "6")
+SET(LIBZYPP_COMPATMINOR "0")
+SET(LIBZYPP_MINOR "0")
 SET(LIBZYPP_PATCH "0")
 #
 # LAST RELEASED: 5.25.0 (23)
