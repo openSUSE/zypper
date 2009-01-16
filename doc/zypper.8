@@ -1104,12 +1104,13 @@ Apply changes to services of specified type.
 .TP
 RIS Service Specific Options
 These options are ignored by services other than Repository Index Services.
+
 .TP
 .I \-i, --ar-to-enable <alias>
-Add a RIS service repository to enable.
+Schedule an RIS service repository to be enabled at next service refresh.
 .TP
 .I \-I, --ar-to-disable <alias>
-Add a RIS service repository to disable.
+Schedule an RIS service repository to be disabled at next service refresh.
 .TP
 .I \-j, --rr-to-enable <alias>
 Remove a RIS service repository to enable.
@@ -1488,6 +1489,17 @@ zypper repos (lr)
 .IP
  zypper doesn't include 'Enabled' and 'Refresh' columns and prints rug's 'Status' column with values "Active" or "Disabled" instead.
 
+.TP
+.I rug subscribe
+This command is not implemented in zypper. Enabling zypper repositories is
+closest to rug's subscription of catalogs. Thus, you can use
+\fBzypper mr -e <alias|#|URI>\fR to enable repositories added by the service.
+Use \fBzypper lr\fR (or \fBzypper ca\fR) to list available repositories.
+
+.TP
+.I rug unsubscribe
+See \fBsubscribe\fR above, with the difference that \fI-d\fR will be used instead of \fI-e\fR
+in the \fBzypper mr\fR command.
 
 .SS Package Management Commands
 
