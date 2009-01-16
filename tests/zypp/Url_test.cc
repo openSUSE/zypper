@@ -6,6 +6,8 @@
 */
 
 #include "zypp/base/Exception.h"
+#include "zypp/base/String.h"
+
 #include "zypp/Url.h"
 #include <stdexcept>
 #include <iostream>
@@ -16,6 +18,17 @@
 
 using boost::unit_test::test_case;
 using namespace zypp;
+
+BOOST_AUTO_TEST_CASE(test_ipv6_url)
+{
+    std::string str, one, two;
+    zypp::Url   url;
+
+    str = "http://[2001:DB8:0:F102::1]/64/sles11/RC1/CD1?device=eth0";
+    url = "http://[2001:db8:0:f102::1]/64/sles11/RC1/CD1?device=eth0";
+    
+    BOOST_CHECK_EQUAL( str, url.asString() );
+}
 
 BOOST_AUTO_TEST_CASE(test_url1)
 {
