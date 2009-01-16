@@ -1,4 +1,9 @@
 -------------------------------------------------------------------
+Thu Jan 15 12:14:44 CET 2009 - jkupec@suse.cz
+
+- Fixed 'unexpected program flow' message (bnc #464384)
+
+-------------------------------------------------------------------
 Wed Jan 14 16:50:52 CET 2009 - jkupec@suse.cz
 
 - check for SLE platform on runtime using base product name
