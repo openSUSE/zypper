@@ -2845,10 +2845,11 @@ void Zypper::doCommand()
       return;
     }
 
-    bool non_alias = copts.count("all") || copts.count("local") ||
+    bool aggregate =
+        copts.count("all") || copts.count("local") ||
         copts.count("remote") || copts.count("medium-type");
 
-    if (_arguments.size() < 1 && !non_alias)
+    if (_arguments.size() < 1 && !aggregate)
     {
       // translators: aggregate option is e.g. "--all". This message will be
       // followed by mr command help text which will explain it
@@ -2860,7 +2861,7 @@ void Zypper::doCommand()
     }
 
     // too many arguments
-    if (_arguments.size() && non_alias)
+    if (_arguments.size() && aggregate)
     {
       report_too_many_arguments(_command_help);
       setExitCode(ZYPPER_EXIT_ERR_INVALID_ARGS);
@@ -2869,7 +2870,7 @@ void Zypper::doCommand()
 
 
     initRepoManager();
-    if (non_alias)
+    if (aggregate)
     {
       modify_repos_by_option(*this);
     }
