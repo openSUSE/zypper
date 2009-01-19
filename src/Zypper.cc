@@ -2859,6 +2859,15 @@ void Zypper::doCommand()
       return;
     }
 
+    // too many arguments
+    if (_arguments.size() && non_alias)
+    {
+      report_too_many_arguments(_command_help);
+      setExitCode(ZYPPER_EXIT_ERR_INVALID_ARGS);
+      return;
+    }
+
+
     initRepoManager();
     if (non_alias)
     {
