@@ -85,6 +85,7 @@ Resolver::Resolver (const ResPool & pool)
 
 Resolver::~Resolver()
 {
+  delete _satResolver;
 }
 
 //---------------------------------------------------------------------------
