@@ -56,32 +56,32 @@ BOOST_AUTO_TEST_CASE(testsplitEscaped)
   BOOST_CHECK_EQUAL( v.size(), 1 );
   BOOST_CHECK_EQUAL( v.front(), string( "escaped sentence " ) );
 
-   v.clear();
-   s = string( "\"escaped \\\\sent\\\"ence \\\\\"" );
-   ii = insert_iterator<vector<string> >( v, v.end() );
-   splitEscaped( s, ii );
-   BOOST_CHECK_EQUAL( v.size(), 1 );
-   BOOST_CHECK_EQUAL( v.front(), string( "escaped \\sent\"ence \\" ) );
+  v.clear();
+  s = string( "\"escaped \\\\sent\\\"ence \\\\\"" );
+  ii = insert_iterator<vector<string> >( v, v.end() );
+  splitEscaped( s, ii );
+  BOOST_CHECK_EQUAL( v.size(), 1 );
+  BOOST_CHECK_EQUAL( v.front(), string( "escaped \\sent\"ence \\" ) );
 
 
-   v.clear();
-   s = string( "escaped sentence\\ with\\ space" );
-   ii = insert_iterator<vector<string> >( v, v.end() );
-   splitEscaped( s, ii );
-   BOOST_CHECK_EQUAL( v.size(), 2 );
-   BOOST_CHECK_EQUAL( v[1], string( "sentence with space" ) );
+  v.clear();
+  s = string( "escaped sentence\\ with\\ space" );
+  ii = insert_iterator<vector<string> >( v, v.end() );
+  splitEscaped( s, ii );
+  BOOST_CHECK_EQUAL( v.size(), 2 );
+  BOOST_CHECK_EQUAL( v[1], string( "sentence with space" ) );
 
-   // split - join
-   v.clear();
-   s = "some line \"\" foo\\ a foo\\\\ b";
-   str::splitEscaped( s, std::back_inserter(v) );
-   BOOST_CHECK_EQUAL( s, str::joinEscaped( v.begin(), v.end() ) );
+  // split - join
+  v.clear();
+  s = "some line \"\" foo\\ a foo\\\\ b";
+  str::splitEscaped( s, std::back_inserter(v) );
+  BOOST_CHECK_EQUAL( s, str::joinEscaped( v.begin(), v.end() ) );
 
-   // split - join using alternate sepchar
-   s = str::joinEscaped( v.begin(), v.end(), 'o' );
-   v.clear();
-   str::splitEscaped( s, std::back_inserter(v), "o" );
-   BOOST_CHECK_EQUAL( s, str::joinEscaped( v.begin(), v.end(), 'o' ) );
+  // split - join using alternate sepchar
+  s = str::joinEscaped( v.begin(), v.end(), 'o' );
+  v.clear();
+  str::splitEscaped( s, std::back_inserter(v), "o" );
+  BOOST_CHECK_EQUAL( s, str::joinEscaped( v.begin(), v.end(), 'o' ) );
 }
 
 BOOST_AUTO_TEST_CASE(testsplitEscapedWithEmpty)
