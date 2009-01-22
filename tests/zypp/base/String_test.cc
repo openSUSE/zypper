@@ -84,6 +84,30 @@ BOOST_AUTO_TEST_CASE(testsplitEscaped)
    BOOST_CHECK_EQUAL( s, str::joinEscaped( v.begin(), v.end(), 'o' ) );
 }
 
+BOOST_AUTO_TEST_CASE(testsplitEscapedWithEmpty)
+{
+  string s( "simple:non-escaped:string" );
+  vector<string> v;
+
+  BOOST_CHECK_EQUAL(splitFieldsEscaped(s, std::back_inserter(v)), 3);
+  BOOST_CHECK_EQUAL(v.size(), 3);
+
+  v.clear();
+  s = "non-escaped:with::spaces:";
+  BOOST_CHECK_EQUAL(splitFieldsEscaped(s, std::back_inserter(v)), 5);
+  BOOST_CHECK_EQUAL(v.size(), 5);
+
+  v.clear();
+  s = "::";
+  BOOST_CHECK_EQUAL(splitFieldsEscaped(s, std::back_inserter(v)), 3);
+  BOOST_CHECK_EQUAL(v.size(), 3);
+
+  v.clear();
+  s = ":escaped::with\\:spaces";
+  BOOST_CHECK_EQUAL(splitFieldsEscaped(s, std::back_inserter(v)), 4);
+  BOOST_CHECK_EQUAL(v.size(), 4);
+}
+
 BOOST_AUTO_TEST_CASE(test_escape)
 {
   string badass = "bad|ass\\|worse";

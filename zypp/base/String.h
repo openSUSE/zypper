@@ -372,19 +372,43 @@ namespace zypp
      * "quoted line" -> 1 element same as above
      * 'quoted line' -> 1 element same as above
      * "escaped quote\'" -> 1 element ( "escaped quote'" )
+     *
+     * \param line_r   The string to parse.
+     * \param result_r
+     * \param sepchars_r  String of separator characters.
+     * \param withEmpty   Whether to include empty fields between separators in the result.
+     *
      * \endcode
-    */
+     */
     template<class _OutputIterator>
       unsigned splitEscaped( const C_Str &   line_r,
                       _OutputIterator result_r,
-                      const C_Str &   sepchars_r = " \t" )
+                      const C_Str &   sepchars_r = " \t",
+                      bool withEmpty = false)
       {
         const char * beg = line_r;
         const char * cur = beg;
+        unsigned ret = 0;
+
         // skip leading sepchars
         while ( *cur && ::strchr( sepchars_r, *cur ) )
+        {
           ++cur;
-        unsigned ret = 0;
+          if (withEmpty)
+          {
+            *result_r = "";
+            ++ret;
+          }
+        }
+
+        // there were only sepchars in the string
+        if (!*cur && withEmpty)
+        {
+          *result_r = "";
+          return ++ret;
+        }
+
+        // after the leading sepchars
         for ( beg = cur; *beg; beg = cur, ++result_r, ++ret )
           {
             if ( *cur == '"'  || *cur == '\'' )
@@ -452,8 +476,23 @@ namespace zypp
               *result_r = s;
             }
             // skip sepchars
-            while ( *cur && ::strchr( sepchars_r, *cur ) )
+            if ( *cur && ::strchr( sepchars_r, *cur ) )
               ++cur;
+            while ( *cur && ::strchr( sepchars_r, *cur ) )
+            {
+              ++cur;
+              if (withEmpty)
+              {
+                *result_r = "";
+                ++ret;
+              }
+            }
+            // the last was a separator => one more field
+            if ( !*cur && withEmpty && ::strchr( sepchars_r, *(cur-1) ) )
+            {
+              *result_r = "";
+              ++ret;
+            }
           }
         return ret;
       }
@@ -471,7 +510,7 @@ namespace zypp
      * ":a:"     -> words 3  ||a||
      *
      * \endcode
-    *
+     *
      * \code
      * std::vector<std::string> words;
      * str::split( "some line", std::back_inserter(words) )
@@ -508,6 +547,22 @@ namespace zypp
           }
         return ret;
       }
+
+    /**
+     * Split \a line_r into fields handling also escaped separators.
+     *
+     * \see splitFields()
+     * \see splitEscaped()
+     */
+    template<class _OutputIterator>
+      unsigned splitFieldsEscaped( const C_Str &   line_r,
+                            _OutputIterator result_r,
+                            const C_Str &   sepchars_r = ":" )
+      {
+        return
+          splitEscaped( line_r, result_r, sepchars_r, true /* withEmpty */ );
+      }
+
     //@}
 
     ///////////////////////////////////////////////////////////////////
