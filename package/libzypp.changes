@@ -1,4 +1,9 @@
 -------------------------------------------------------------------
+Thu Jan 22 10:41:27 CET 2009 - ma@suse.de
+
+- Tell satsolver about product buddies (bnc #466565)
+
+-------------------------------------------------------------------
 Fri Jan  9 17:01:10 CET 2009 - jkupec@suse.cz
 
 - handle HTTP 503 reponses as temporary errors (bnc #462545)
