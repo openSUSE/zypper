@@ -27,35 +27,34 @@ namespace parser
 namespace plaindir
 { /////////////////////////////////////////////////////////////////
 
-static time_t recursive_timestamp( const Pathname &dir )
+static void recursive_timestamp( const Pathname &dir, time_t & max )
 {
-  time_t max = PathInfo(dir).mtime();
   std::list<std::string> dircontent;
-  if (filesystem::readdir( dircontent, dir, false) != 0)
-  {           // dont look for dot files
-    ERR << "readdir " << dir << " failed" << endl;
-    return 0;
-  }
+  if ( filesystem::readdir( dircontent, dir, false/*no dots*/ ) != 0 )
+    return; // readdir logged the error
 
-  for (std::list<std::string>::const_iterator it = dircontent.begin();
-       it != dircontent.end();
-       ++it)
+  for_( it, dircontent.begin(), dircontent.end() )
   {
-    Pathname dir_path = dir + *it;
-    if ( PathInfo(dir_path).isDir())
+    PathInfo pi( dir + *it, PathInfo::LSTAT );
+    if ( pi.isDir() )
     {
-      time_t val = recursive_timestamp(dir_path);
-      if ( val > max )
-        max = val;
+      recursive_timestamp( pi.path(), max );
+      if ( pi.mtime() > max )
+        max = pi.mtime();
     }
   }
-  return max;
 }
 
 RepoStatus dirStatus( const Pathname &dir )
 {
+  time_t t = 0;
+  PathInfo pi(dir);
+  if ( pi.isDir() )
+  {
+    t = pi.mtime();
+    recursive_timestamp(dir,t);
+  }
   RepoStatus status;
-  time_t t = recursive_timestamp(dir);
   status.setTimestamp(Date(t));
   status.setChecksum(str::numstring(t));
   return status;
