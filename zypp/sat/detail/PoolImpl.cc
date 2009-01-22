@@ -26,6 +26,7 @@
 #include "zypp/sat/Pool.h"
 #include "zypp/Capability.h"
 #include "zypp/Locale.h"
+#include "zypp/PoolItem.h"
 
 #include "zypp/target/modalias/Modalias.h"
 
@@ -94,41 +95,49 @@ namespace zypp
         switch ( lhs )
         {
           case NAMESPACE_LANGUAGE:
+          {
+            static IdString en( "en" );
+            const std::tr1::unordered_set<IdString> & locale2Solver( reinterpret_cast<PoolImpl*>(data)->_locale2Solver );
+            if ( locale2Solver.empty() )
             {
-              static IdString en( "en" );
-              const std::tr1::unordered_set<IdString> & locale2Solver( reinterpret_cast<PoolImpl*>(data)->_locale2Solver );
-              if ( locale2Solver.empty() )
-              {
-                return rhs == en.id() ? RET_systemProperty : RET_unsupported;
-              }
-              return locale2Solver.find( IdString(rhs) ) != locale2Solver.end() ? RET_systemProperty : RET_unsupported;
+              return rhs == en.id() ? RET_systemProperty : RET_unsupported;
             }
-            break;
+            return locale2Solver.find( IdString(rhs) ) != locale2Solver.end() ? RET_systemProperty : RET_unsupported;
+          }
+          break;
 
           case NAMESPACE_MODALIAS:
-            {
-              // modalias strings in capability may be hexencoded because rpm does not allow
-              // ',', ' ' or other special chars.
-              return target::Modalias::instance().query( str::hexdecode( IdString(rhs).c_str() ) )
-                     ? RET_systemProperty
-                     : RET_unsupported;
-            }
-            break;
+          {
+            // modalias strings in capability may be hexencoded because rpm does not allow
+            // ',', ' ' or other special chars.
+            return target::Modalias::instance().query( str::hexdecode( IdString(rhs).c_str() ) )
+                ? RET_systemProperty
+              : RET_unsupported;
+          }
+          break;
 
           case NAMESPACE_FILESYSTEM:
+          {
+            static const Pathname sysconfigStoragePath( "/etc/sysconfig/storage" );
+            static WatchFile      sysconfigFile( sysconfigStoragePath, WatchFile::NO_INIT );
+            static std::set<std::string> requiredFilesystems;
+            if ( sysconfigFile.hasChanged() )
             {
-              static const Pathname sysconfigStoragePath( "/etc/sysconfig/storage" );
-              static WatchFile      sysconfigFile( sysconfigStoragePath, WatchFile::NO_INIT );
-              static std::set<std::string> requiredFilesystems;
-              if ( sysconfigFile.hasChanged() )
-              {
-                requiredFilesystems.clear();
-                str::split( base::sysconfig::read( sysconfigStoragePath )["USED_FS_LIST"],
-                            std::inserter( requiredFilesystems, requiredFilesystems.end() ) );
-              }
-              return requiredFilesystems.find( IdString(rhs).asString() ) != requiredFilesystems.end() ? RET_systemProperty : RET_unsupported;
+              requiredFilesystems.clear();
+              str::split( base::sysconfig::read( sysconfigStoragePath )["USED_FS_LIST"],
+                          std::inserter( requiredFilesystems, requiredFilesystems.end() ) );
             }
-            break;
+            return requiredFilesystems.find( IdString(rhs).asString() ) != requiredFilesystems.end() ? RET_systemProperty : RET_unsupported;
+          }
+          break;
+
+          case NAMESPACE_PRODUCTBUDDY:
+          {
+            PoolItem pi( (Solvable(rhs)) );
+            return( pi ? pi.buddy().id() : noId );
+          }
+
+          break;
         }
 
         INT << "Unhandled " << Capability( lhs ) << " vs. " << Capability( rhs ) << endl;
