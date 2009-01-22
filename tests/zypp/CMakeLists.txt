@@ -9,6 +9,7 @@ ADD_TESTS(
   Arch
   Capabilities
   CheckSum
+  Date
   Digest
   Deltarpm
   Edition
