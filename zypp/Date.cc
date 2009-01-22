@@ -22,6 +22,9 @@ using std::endl;
 namespace zypp
 { /////////////////////////////////////////////////////////////////
 
+  static std::string adjustLocale();
+  static void restoreLocale(const std::string & locale);
+
   ///////////////////////////////////////////////////////////////////
   //
   //	METHOD NAME : Date::Date
@@ -33,9 +36,15 @@ namespace zypp
   Date::Date( const std::string & date_str, const std::string & format )
   {
     struct tm tm;
-    if ( ::strptime( date_str.c_str(), format.c_str(), &tm ) != NULL )
+    std::string thisLocale = adjustLocale();
+
+    char * res = ::strptime( date_str.c_str(), format.c_str(), &tm );
+    if ( res != NULL )
       _date = ::timelocal( &tm );
-    else
+
+    restoreLocale(thisLocale);
+
+    if (res == NULL)
       throw DateFormatException(
           str::form( "Invalid date format: '%s'", date_str.c_str() ) );
   }
@@ -48,7 +57,18 @@ namespace zypp
   std::string Date::form( const std::string & format_r ) const
   {
     static char buf[1024];
+    std::string thisLocale = adjustLocale();
 
+    if ( ! strftime( buf, 1024, format_r.c_str(), localtime( &_date ) ) )
+      *buf = '\0';
+
+    restoreLocale(thisLocale);
+
+    return buf;
+  }
+
+  static std::string adjustLocale()
+  {
     const char * tmp = ::setlocale( LC_TIME, NULL );
     std::string thisLocale( tmp ? tmp : "" );
 
@@ -86,15 +106,15 @@ namespace zypp
       thisLocale.clear();
     }
 
-    if ( ! strftime( buf, 1024, format_r.c_str(), localtime( &_date ) ) )
-      *buf = '\0';
+    return thisLocale;
+  }
 
-    if ( ! thisLocale.empty() )
+  static void restoreLocale(const std::string & locale)
+  {
+    if ( ! locale.empty() )
     {
-      ::setlocale( LC_TIME, thisLocale.c_str() );
+      ::setlocale( LC_TIME, locale.c_str() );
     }
-
-    return buf;
   }
 
   /////////////////////////////////////////////////////////////////
