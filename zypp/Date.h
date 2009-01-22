@@ -16,6 +16,8 @@
 #include <iosfwd>
 #include <string>
 
+#include "zypp/base/Exception.h"
+
 ///////////////////////////////////////////////////////////////////
 namespace zypp
 { /////////////////////////////////////////////////////////////////
@@ -44,6 +46,14 @@ namespace zypp
     {}
     /** Ctor taking time_t value as string. */
     Date( const std::string & seconds_r );
+
+    /**
+     * Ctor from a \a date_str formatted using \a format.
+     *
+     * \throws DateFormatException in case \a date_str cannot be
+     *         parsed according to \a format.
+     */
+    Date( const std::string & date_str, const std::string & format);
 
     /** Return the current time. */
     static Date now()
@@ -103,6 +113,13 @@ namespace zypp
   /** \relates Date Stream output */
   inline std::ostream & operator<<( std::ostream & str, const Date & obj )
   { return str << obj.asString(); }
+
+  class DateFormatException : public Exception
+  {
+  public:
+    DateFormatException( const std::string & msg ) : Exception( msg )
+    {}
+  };
 
   /////////////////////////////////////////////////////////////////
 } // namespace zypp

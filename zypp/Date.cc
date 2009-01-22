@@ -30,6 +30,16 @@ namespace zypp
   Date::Date( const std::string & seconds_r )
   { str::strtonum( seconds_r, _date ); }
 
+  Date::Date( const std::string & date_str, const std::string & format )
+  {
+    struct tm tm;
+    if ( ::strptime( date_str.c_str(), format.c_str(), &tm ) != NULL )
+      _date = ::timelocal( &tm );
+    else
+      throw DateFormatException(
+          str::form( "Invalid date format: '%s'", date_str.c_str() ) );
+  }
+
   ///////////////////////////////////////////////////////////////////
   //
   //	METHOD NAME : Date::form
