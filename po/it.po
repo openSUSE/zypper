@@ -5,8 +5,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: zypper\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-12-09 18:17+0100\n"
-"PO-Revision-Date: 2009-01-08 18:41\n"
+"POT-Creation-Date: 2008-12-11 11:15+0100\n"
+"PO-Revision-Date: 2009-01-22 18:25\n"
 "Last-Translator: Novell Language <language@novell.com>\n"
 "Language-Team: Novell Language <language@novell.com>\n"
 "MIME-Version: 1.0\n"
@@ -2661,7 +2661,7 @@ msgstr "Per installare o disinstallare pacchetti è necessario disporre dei priv
 #. translators: rug related message, shown if
 #. 'zypper in --entire-catalog foorepo someargument' is specified
 #: ../src/Zypper.cc:3002
-msgid "Ingoring arguments, marking the entire repository."
+msgid "Ignoring arguments, marking the entire repository."
 msgstr "Argomenti ignorati, contrassegno dell'intero archivio."
 
 #: ../src/Zypper.cc:3012

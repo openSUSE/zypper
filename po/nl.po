@@ -6,7 +6,7 @@ msgstr ""
 "Project-Id-Version: zypper\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2008-12-11 11:15+0100\n"
-"PO-Revision-Date: 2009-01-08 15:48\n"
+"PO-Revision-Date: 2009-01-22 09:04\n"
 "Last-Translator: Novell Language <language@novell.com>\n"
 "Language-Team: Novell Language <language@novell.com>\n"
 "MIME-Version: 1.0\n"
@@ -2171,7 +2171,7 @@ msgstr "  Algemene opties:\n\t--help, -h\t\tHelp.\n\t--version, -V\t\tVersienumm
 
 #: ../src/Zypper.cc:171
 msgid "     Repository Options:\n\t--no-gpg-checks\t\tIgnore GPG check failures and continue.\n\t--plus-repo, -p <URI>\tUse an additional repository.\n\t--disable-repositories\tDo not read meta-data from repositories.\n\t--no-refresh\t\tDo not refresh the repositories.\n"
-msgstr "    Opslagruimteopties:\n\t--no-gpg-checks\t\tNegeer fouten bij GPG-controles en ga door.\n\t--plus-repo, -p <URI>\tGebruik een extra opslagruimte.\n\t--disable-repositories\tLees geen metagegevens uit opslagruimten.\n\t--no-refresh\t\tOpslagruimten niet vernieuwen.\n"
+msgstr "     Opslagruimteopties:\n\t--no-gpg-checks\t\tNegeer fouten bij GPG-controles en ga door.\n\t--plus-repo, -p <URI>\tGebruik een extra opslagruimte.\n\t--disable-repositories\tLees geen metagegevens uit opslagruimten.\n\t--no-refresh\t\tOpslagruimten niet vernieuwen.\n"
 
 #. translators: these belong to Repository Options main help text
 #: ../src/Zypper.cc:178
@@ -2180,7 +2180,7 @@ msgstr "\t--no-cd\t\t\tNegeer cd/dvd-opslagruimten.\n\t--no-remote\t\tNegeer ext
 
 #: ../src/Zypper.cc:182
 msgid "     Target Options:\n\t--root, -R <dir>\tOperate on a different root directory.\n\t--disable-system-resolvables\n\t\t\t\tDo not read installed packages.\n"
-msgstr "    Doelopties:\n\t--root, -R <dir>\tWerk vanuit een andere hoofddirectory.\n\t--disable-system-resolvables\n\t\t\t\tLees geen geïnstalleerde pakketten.\n"
+msgstr "     Doelopties:\n\t--root, -R <dir>\tWerk vanuit een andere hoofddirectory.\n\t--disable-system-resolvables\n\t\t\t\tLees geen geïnstalleerde pakketten.\n"
 
 #: ../src/Zypper.cc:189
 msgid "  Commands:\n\thelp, ?\t\t\tPrint help.\n\tshell, sh\t\tAccept multiple commands at once.\n"
@@ -2188,11 +2188,11 @@ msgstr "  Opdrachten:\n\thelp, ?\t\t\tHelp afdrukken\n\tshell, sh\t\tMeerdere op
 
 #: ../src/Zypper.cc:194
 msgid "     Repository Management:\n\trepos, lr\t\tList all defined repositories.\n\taddrepo, ar\t\tAdd a new repository.\n\tremoverepo, rr\t\tRemove specified repository.\n\trenamerepo, nr\t\tRename specified repository.\n\tmodifyrepo, mr\t\tModify specified repository.\n\trefresh, ref\t\tRefresh all repositories.\n\tclean\t\t\tClean local caches.\n"
-msgstr "    Beheer van opslagruimten:\n\trepos, lr\t\tGeef alle gedefinieerde opslagruimten weer.\n\taddrepo, ar\t\tVoeg een nieuwe opslagruimte toe.\n\tremoverepo, rr\t\tVerwijder de gespecificeerde opslagruimten.\n\trenamerepo, nr\t\tHernoem de gespecificeerde opslagruimten.\n\tmodifyrepo, mr\t\tWijzig de gespecificeerde opslagruimte.\n\trefresh, ref\t\tVernieuw alle opslagruimten.\n\tclean\t\t\tMaak lokale caches schoon.\n"
+msgstr "     Beheer van opslagruimten:\n\trepos, lr\t\tGeef alle gedefinieerde opslagruimten weer.\n\taddrepo, ar\t\tVoeg een nieuwe opslagruimte toe.\n\tremoverepo, rr\t\tVerwijder de gespecificeerde opslagruimten.\n\trenamerepo, nr\t\tHernoem de gespecificeerde opslagruimten.\n\tmodifyrepo, mr\t\tWijzig de gespecificeerde opslagruimte.\n\trefresh, ref\t\tVernieuw alle opslagruimten.\n\tclean\t\t\tMaak lokale caches schoon.\n"
 
 #: ../src/Zypper.cc:204
 msgid "     Service Management:\n\tservices, ls\t\tList all defined services.\n\taddservice, as\t\tAdd a new service.\n\tmodifyservice, ms\tModify specified service.\n\tremoveservice, rs\tRemove specified service.\n\trefresh-services, refs\tRefresh all services.\n"
-msgstr "    Service-beheer:\n\tservices, ls\t\tGeef alle gedefinieerde services weer.\n\taddservice, as\t\tVoeg een nieuw service toe.\n\tmodifyservice, ms\tWijzig een gespecificeerde service.\n\tremoveservice, rs\tVerwijder een gespecificeerde service.\n\trefresh-services, refs\tVernieuw alle services.\n"
+msgstr "     Service-beheer:\n\tservices, ls\t\tGeef alle gedefinieerde services weer.\n\taddservice, as\t\tVoeg een nieuw service toe.\n\tmodifyservice, ms\tWijzig een gespecificeerde service.\n\tremoveservice, rs\tVerwijder een gespecificeerde service.\n\trefresh-services, refs\tVernieuw alle services.\n"
 
 #: ../src/Zypper.cc:212
 msgid "     Software Management:\n\tinstall, in\t\tInstall packages.\n\tremove, rm\t\tRemove packages.\n\tverify, ve\t\tVerify integrity of package dependencies.\n\tsource-install, si\tInstall source packages and their build\n\t\t\t\tdependencies.\n\tinstall-new-recommends, inr\n\t\t\t\tInstall newly added packages recommended\n\t\t\t\tby installed packages.\n"
@@ -2204,11 +2204,11 @@ msgstr "     Updatebeheer:\n\tupdate, up\t\twerk geïnstalleerde pakketten bij n
 
 #: ../src/Zypper.cc:232
 msgid "     Querying:\n\tsearch, se\t\tSearch for packages matching a pattern.\n\tinfo, if\t\tShow full information for specified packages.\n\tpatch-info\t\tShow full information for specified patches.\n\tpattern-info\t\tShow full information for specified patterns.\n\tproduct-info\t\tShow full information for specified products.\n\tpatches, pch\t\tList all available patches.\n\tpackages, pa\t\tList all available packages.\n\tpatterns, pt\t\tList all available patterns.\n\tproducts, pd\t\tList all available products.\n\twhat-provides, wp\tList packages providing specified capability.\n"
-msgstr "    Opvragen:\n\tsearch, se\t\tZoek naar pakketten die met een patroon overeenkomen.\n\tinfo, if\t\tGeef alle informatie over opgegeven pakketten weer.\n\tpatch-info\t\tGeef alle informatie over opgegeven patches weer.\n\tpattern-info\t\tGeef alle informatie over opgegeven patronen weer.\n\tproduct-info\t\tGeef alle informatie over opgegeven producten weer.\n\tpatch-check, pchk\tControleren op patches.\n\tlist-updates, lu\tGeef beschikbare updates weer.\n\tpatches, pch\t\tGeef alle beschikbare patches weer.\n\tpackages, pa\t\tGeef alle beschikbare pakketten weer.\n\tpatterns, pt\t\tGeef alle beschikbare patronen weer.\n\tproducts, pd\t\tGeef alle beschikbare producten weer.\n\twhat-provides, wp\tGeef pakketten weer die de opgegeven capaciteit leveren.\n"
+msgstr "     Opvragen:\n\tsearch, se\t\tZoek naar pakketten die met een patroon overeenkomen.\n\tinfo, if\t\tGeef alle informatie over opgegeven pakketten weer.\n\tpatch-info\t\tGeef alle informatie over opgegeven patches weer.\n\tpattern-info\t\tGeef alle informatie over opgegeven patronen weer.\n\tproduct-info\t\tGeef alle informatie over opgegeven producten weer.\n\tpatch-check, pchk\tControleren op patches.\n\tlist-updates, lu\tGeef beschikbare updates weer.\n\tpatches, pch\t\tGeef alle beschikbare patches weer.\n\tpackages, pa\t\tGeef alle beschikbare pakketten weer.\n\tpatterns, pt\t\tGeef alle beschikbare patronen weer.\n\tproducts, pd\t\tGeef alle beschikbare producten weer.\n\twhat-provides, wp\tGeef pakketten weer die de opgegeven capaciteit leveren.\n"
 
 #: ../src/Zypper.cc:247
 msgid "     Package Locks:\n\taddlock, al\t\tAdd a package lock.\n\tremovelock, rl\t\tRemove a package lock.\n\tlocks, ll\t\tList current package locks.\n"
-msgstr "    Pakketblokkeringen:\n\taddlock, al\t\tVoeg een pakketblokkering toe.\n\tremovelock, rl\t\tVerwijder een pakketblokkering.\n\tlocks, ll\t\tGeef de huidige pakketblokkeringen weer.\n"
+msgstr "     Pakketblokkeringen:\n\taddlock, al\t\tVoeg een pakketblokkering toe.\n\tremovelock, rl\t\tVerwijder een pakketblokkering.\n\tlocks, ll\t\tGeef de huidige pakketblokkeringen weer.\n"
 
 #: ../src/Zypper.cc:253
 msgid "     Other Commands:\n\tversioncmp, vcmp\tCompare two version strings.\n\ttargetos, tos\t\tPrint the target operating system ID string.\n\tlicenses\t\tPrint report about licenses and EULAs of\n\t\t\t\tinstalled packages.\n"

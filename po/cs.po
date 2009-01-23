@@ -6,7 +6,7 @@ msgstr ""
 "Project-Id-Version: zypper\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2008-12-11 11:15+0100\n"
-"PO-Revision-Date: 2009-01-09 10:52\n"
+"PO-Revision-Date: 2009-01-23 10:24\n"
 "Last-Translator: Novell Language <language@novell.com>\n"
 "Language-Team: Novell Language <language@novell.com>\n"
 "MIME-Version: 1.0\n"
@@ -1051,7 +1051,7 @@ msgstr "Všechny repozitáře byly vyčištěny."
 
 #: ../src/repos.cc:1261
 msgid "This is a changeable read-only media (CD/DVD), disabling autorefresh."
-msgstr "Toto médium je vyměnitelné, určené pouze pro čtení (disk CD/DVD), zakazuje se automatické obnovení."
+msgstr "Toto je vyměnitelné médium určené pouze pro čtení (disk CD/DVD), zakazuje se automatické obnovení."
 
 #: ../src/repos.cc:1282 ../src/repos.cc:1543
 #, c-format
@@ -2218,7 +2218,7 @@ msgstr "  Globální volby:\n\t--help, -h\t\tNápověda.\n\t--version, -V\t\tZob
 
 #: ../src/Zypper.cc:171
 msgid "     Repository Options:\n\t--no-gpg-checks\t\tIgnore GPG check failures and continue.\n\t--plus-repo, -p <URI>\tUse an additional repository.\n\t--disable-repositories\tDo not read meta-data from repositories.\n\t--no-refresh\t\tDo not refresh the repositories.\n"
-msgstr "\tMožnosti úložišť:\n\t--no-gpg-checks\t\tIgnorovat selhání kontroly GPG a pokračovat.\n\t--plus-repo, -p <URI>\tPoužít dodatečné úložiště.\n\t--disable-repositories\tNenačítat metadata z úložišť.\n\t--no-refresh\t\tNeobnovovat úložiště.\n"
+msgstr "     Možnosti úložišť:\n\t--no-gpg-checks\t\tIgnorovat selhání kontroly GPG a pokračovat.\n\t--plus-repo, -p <URI>\tPoužít dodatečné úložiště.\n\t--disable-repositories\tNenačítat metadata z úložišť.\n\t--no-refresh\t\tNeobnovovat úložiště.\n"
 
 #. translators: these belong to Repository Options main help text
 #: ../src/Zypper.cc:178
@@ -2316,7 +2316,7 @@ msgstr "Automatické obnovení zakázáno."
 
 #: ../src/Zypper.cc:509
 msgid "CD/DVD repositories disabled."
-msgstr "Úložiště jednotek CD/DVD zakázána."
+msgstr "Úložiště na discích CD/DVD zakázána."
 
 #: ../src/Zypper.cc:516
 msgid "Remote repositories disabled."

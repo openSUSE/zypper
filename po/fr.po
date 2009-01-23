@@ -5,8 +5,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: zypper\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-12-09 18:17+0100\n"
-"PO-Revision-Date: 2009-01-07 15:48\n"
+"POT-Creation-Date: 2008-12-11 11:15+0100\n"
+"PO-Revision-Date: 2009-01-21 16:42\n"
 "Last-Translator: Novell Language <language@novell.com>\n"
 "Language-Team: Novell Language <language@novell.com>\n"
 "MIME-Version: 1.0\n"
@@ -2661,8 +2661,8 @@ msgstr "Les privilèges root sont requis pour l'installation ou la désinstallat
 #. translators: rug related message, shown if
 #. 'zypper in --entire-catalog foorepo someargument' is specified
 #: ../src/Zypper.cc:3002
-msgid "Ingoring arguments, marking the entire repository."
-msgstr "Ignorer les arguments, marquer l'espace de stockage tout entier."
+msgid "Ignoring arguments, marking the entire repository."
+msgstr "Ignorer les arguments, marquer tout le référentiel."
 
 #: ../src/Zypper.cc:3012
 #, c-format

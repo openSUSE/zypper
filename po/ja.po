@@ -5,8 +5,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: zypper\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-12-09 18:17+0100\n"
-"PO-Revision-Date: 2009-01-05 14:06\n"
+"POT-Creation-Date: 2008-12-11 11:15+0100\n"
+"PO-Revision-Date: 2009-01-21 10:05\n"
 "Last-Translator: Novell Language <language@novell.com>\n"
 "Language-Team: Novell Language <language@novell.com>\n"
 "MIME-Version: 1.0\n"
@@ -2149,7 +2149,7 @@ msgstr "     サービスの管理:\n\tservices, ls\t\t定義済みのサービ�
 
 #: ../src/Zypper.cc:212
 msgid "     Software Management:\n\tinstall, in\t\tInstall packages.\n\tremove, rm\t\tRemove packages.\n\tverify, ve\t\tVerify integrity of package dependencies.\n\tsource-install, si\tInstall source packages and their build\n\t\t\t\tdependencies.\n\tinstall-new-recommends, inr\n\t\t\t\tInstall newly added packages recommended\n\t\t\t\tby installed packages.\n"
-msgstr "\tソフトウエア管理:\n\tinstall, in\t\tパッケージをインストールする\n\tremove, rm\t\tパッケージを削除する\n\tverify, ve\t\tパッケージの依存関係を検証する\n\tsource-install, si\t構築の際に依存するものを含めてソースパッケージをインストールする\n\tinstall-new-recommends, inrインストール済みのパッケージから判断される新規推奨パッケージをインストールする\n"
+msgstr "     ソフトウエア管理:\n\tinstall, in\t\tパッケージをインストールする\n\tremove, rm\t\tパッケージを削除する\n\tverify, ve\t\tパッケージの依存関係を検証する\n\tsource-install, si\t構築の際に依存するものを含めてソースパッケージをインストールする\n\tinstall-new-recommends, inrインストール済みのパッケージから判断される新規推奨パッケージをインストールする\n"
 
 #: ../src/Zypper.cc:223
 msgid "     Update Management:\n\tupdate, up\t\tUpdate installed packages with newer versions.\n\tlist-updates, lu\tList available updates.\n\tpatch\t\t\tInstall needed patches.\n\tlist-patches, lp\tList needed patches.\n\tdist-upgrade, dup\tPerform a distribution upgrade.\n\tpatch-check, pchk\tCheck for patches.\n"
@@ -2165,7 +2165,7 @@ msgstr "     パッケージロック:\n\taddlock, al\t\tパッケージロッ�
 
 #: ../src/Zypper.cc:253
 msgid "     Other Commands:\n\tversioncmp, vcmp\tCompare two version strings.\n\ttargetos, tos\t\tPrint the target operating system ID string.\n\tlicenses\t\tPrint report about licenses and EULAs of\n\t\t\t\tinstalled packages.\n"
-msgstr "\tその他のコマンド:\n\tversioncmp, vcmp\t2 つのバージョン文字列を比較する\n\ttargetos, tos\t\tターゲットのオペレーティングシステムの ID 文字列を表示する\n\tlicenses\t\tインストール済みのパッケージについて、ライセンスと使用許諾契約を表示する\n"
+msgstr "     その他のコマンド:\n\tversioncmp, vcmp\t2 つのバージョン文字列を比較する\n\ttargetos, tos\t\tターゲットのオペレーティングシステムの ID 文字列を表示する\n\tlicenses\t\tインストール済みのパッケージについて、ライセンスと使用許諾契約を表示する\n"
 
 #: ../src/Zypper.cc:261
 msgid "  Usage:\n\tzypper [--global-options] <command> [--command-options] [arguments]\n"
@@ -2493,7 +2493,7 @@ msgstr "オプション以外のプログラム引数:"
 #. TranslatorExplanation this is a hedgehog, paint another animal, if you want
 #: ../src/Zypper.cc:2307
 msgid "   \\\\\\\\\\\n  \\\\\\\\\\\\\\__o\n__\\\\\\\\\\\\\\'/_"
-msgstr "　 ∧＿∧\n　( ´∀`)\n　(　∪ ∪\n　と＿)＿)"
+msgstr "   ∧＿∧\n　( ´∀`)\n　(　∪ ∪\n　と＿)＿)"
 
 #: ../src/Zypper.cc:2334
 msgid "Root privileges are required for refreshing services."
@@ -2614,7 +2614,7 @@ msgstr "パッケージのインストール／削除には root 権限が必要
 #. translators: rug related message, shown if
 #. 'zypper in --entire-catalog foorepo someargument' is specified
 #: ../src/Zypper.cc:3002
-msgid "Ingoring arguments, marking the entire repository."
+msgid "Ignoring arguments, marking the entire repository."
 msgstr "引数を無視し、リポジトリ全体にマークを付与します。"
 
 #: ../src/Zypper.cc:3012
