@@ -61,6 +61,42 @@ namespace zypp
 
   namespace
   {
+    /** Simple media mounter to access non-downloading URLs e.g. for non-local plaindir repos.
+     * \ingroup g_RAII
+    */
+    class MediaMounter
+    {
+      public:
+        /** Ctor provides media access. */
+        MediaMounter( const Url & url_r )
+        {
+          media::MediaManager mediamanager;
+          _mid = mediamanager.open( url_r );
+          mediamanager.attachDesiredMedia( _mid );
+        }
+
+        /** Ctor releases the media. */
+        ~MediaMounter()
+        {
+          media::MediaManager mediamanager;
+          mediamanager.release( _mid );
+          mediamanager.close( _mid );
+        }
+
+        /** Convert a path relative to the media into an absolute path.
+         *
+         * Called without argument it returns the path to the medias root directory.
+        */
+        Pathname getPathName( const Pathname & path_r = Pathname() ) const
+        {
+          media::MediaManager mediamanager;
+          return mediamanager.localPath( _mid, path_r );
+        }
+
+      private:
+        media::MediaAccessId _mid;
+    };
+
     /** Check if alias_r is present in repo/service container. */
     template <class Iterator>
     inline bool foundAliasIn( const std::string & alias_r, Iterator begin_r, Iterator end_r )
@@ -747,7 +783,8 @@ namespace zypp
       }
       else if ( repokind.toEnum() == RepoType::RPMPLAINDIR_e )
       {
-        RepoStatus newstatus = parser::plaindir::dirStatus(url.getPathName());
+        MediaMounter media( url );
+        RepoStatus newstatus = parser::plaindir::dirStatus(media.getPathName());
         bool refresh = false;
         if ( oldstatus.checksum() == newstatus.checksum() )
         {
@@ -874,7 +911,8 @@ namespace zypp
         }
         else if ( repokind.toEnum() == RepoType::RPMPLAINDIR_e )
         {
-          RepoStatus newstatus = parser::plaindir::dirStatus(url.getPathName());
+          MediaMounter media( url );
+          RepoStatus newstatus = parser::plaindir::dirStatus(media.getPathName());
 
           std::ofstream file(( tmpdir.path() + "/cookie").c_str());
           if (!file) {
@@ -1018,6 +1056,7 @@ namespace zypp
       {
         // Take care we unlink the solvfile on exception
         ManagedFile guard( solvfile, filesystem::unlink );
+        scoped_ptr<MediaMounter> forPlainDirs;
 
         ExternalProgram::Arguments cmd;
         cmd.push_back( "repo2solv.sh" );
@@ -1028,10 +1067,11 @@ namespace zypp
 
         if ( repokind == RepoType::RPMPLAINDIR )
         {
+          forPlainDirs.reset( new MediaMounter( *info.baseUrlsBegin() ) );
           // recusive for plaindir as 2nd arg!
           cmd.push_back( "-R" );
           // FIXME this does only work form dir: URLs
-          cmd.push_back( info.baseUrlsBegin()->getPathName() );
+          cmd.push_back( forPlainDirs->getPathName().c_str() );
         }
         else
           cmd.push_back( rawpath.asString() );
@@ -1080,6 +1120,7 @@ namespace zypp
     {
       // Handle non existing local directory in advance, as
       // MediaSetAccess does not support it.
+      MIL << "Probed type NONE (not exists) at " << url << endl;
       return repo::RepoType::NONE;
     }
 
@@ -1096,7 +1137,10 @@ namespace zypp
       try
       {
         if ( access.doesFileExist("/repodata/repomd.xml") )
+        {
+          MIL << "Probed type RPMMD at " << url << endl;
           return repo::RepoType::RPMMD;
+        }
       }
       catch ( const media::MediaException &e )
       {
@@ -1109,7 +1153,10 @@ namespace zypp
       try
       {
         if ( access.doesFileExist("/content") )
+        {
+          MIL << "Probed type YAST2 at " << url << endl;
           return repo::RepoType::YAST2;
+        }
       }
       catch ( const media::MediaException &e )
       {
@@ -1119,13 +1166,14 @@ namespace zypp
         gotMediaException = true;
       }
 
-      // if it is a local url of type dir
-      if ( (! media::MediaManager::downloads(url)) && ( url.getScheme() == "dir" ) )
+      // if it is a non-downloading URL denoting a directory
+      if ( ! media::MediaManager::downloads(url) )
       {
-        Pathname path = Pathname(url.getPathName());
-        if ( PathInfo(path).isDir() )
+        MediaMounter media( url );
+        if ( PathInfo(media.getPathName()).isDir() )
         {
           // allow empty dirs for now
+          MIL << "Probed type RPMPLAINDIR at " << url << endl;
           return repo::RepoType::RPMPLAINDIR;
         }
       }
@@ -1141,6 +1189,7 @@ namespace zypp
     if (gotMediaException)
       ZYPP_THROW(enew);
 
+    MIL << "Probed type NONE at " << url << endl;
     return repo::RepoType::NONE;
   }
 
@@ -1219,10 +1268,11 @@ namespace zypp
     progress.name(str::form(_("Adding repository '%s'"), info.name().c_str()));
     progress.toMin();
 
+    MIL << "Try adding repo " << info << endl;
+
     RepoInfo tosave = info;
     if(_pimpl->repos.find(tosave)!= _pimpl->repos.end())
         ZYPP_THROW(RepoAlreadyExistsException(info));
-
 
     // check the first url for now
     if ( _pimpl->options.probe )
