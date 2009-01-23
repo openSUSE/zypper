@@ -1,4 +1,10 @@
 -------------------------------------------------------------------
+Fri Jan 23 16:46:51 CET 2009 - jkupec@suse.cz
+
+- translations update
+- 1.0.5
+
+-------------------------------------------------------------------
 Thu Jan 15 12:14:44 CET 2009 - jkupec@suse.cz
 
 - Fixed 'unexpected program flow' message (bnc #464384)
