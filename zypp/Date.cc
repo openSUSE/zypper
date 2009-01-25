@@ -34,8 +34,9 @@ namespace zypp
   { str::strtonum( seconds_r, _date ); }
 
   Date::Date( const std::string & date_str, const std::string & format )
+    : _date(0)
   {
-    struct tm tm;
+    struct tm tm = {0};
     std::string thisLocale = adjustLocale();
 
     char * res = ::strptime( date_str.c_str(), format.c_str(), &tm );
@@ -112,9 +113,7 @@ namespace zypp
   static void restoreLocale(const std::string & locale)
   {
     if ( ! locale.empty() )
-    {
       ::setlocale( LC_TIME, locale.c_str() );
-    }
   }
 
   /////////////////////////////////////////////////////////////////
