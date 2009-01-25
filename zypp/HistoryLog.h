@@ -23,59 +23,6 @@ namespace zypp
 
   ///////////////////////////////////////////////////////////////////
   //
-  //  CLASS NAME : HistoryLog
-  //
-  /**
-   * Enumeration of known history actions.
-   *
-   * \ingroup g_EnumerationClass
-   */
-  struct HistoryActionID
-  {
-    static const HistoryActionID NONE;
-
-    static const HistoryActionID INSTALL;
-    static const HistoryActionID REMOVE;
-    static const HistoryActionID REPO_ADD;
-    static const HistoryActionID REPO_REMOVE;
-    static const HistoryActionID REPO_CHANGE_ALIAS;
-    static const HistoryActionID REPO_CHANGE_URL;
-
-    enum ID
-    {
-      NONE_e,
-
-      INSTALL_e,
-      REMOVE_e,
-      REPO_ADD_e,
-      REPO_REMOVE_e,
-      REPO_CHANGE_ALIAS_e,
-      REPO_CHANGE_URL_e
-    };
-
-    HistoryActionID() : _id(NONE_e) {}
-
-    HistoryActionID(ID id) : _id(id) {}
-
-    explicit HistoryActionID(const std::string & strval_r);
-
-    ID toEnum() const { return _id; }
-
-    static HistoryActionID::ID parse(const std::string & strval_r);
-
-    const std::string & asString(bool pad = false) const;
-
-    private:
-    ID _id;
-  };
-
-  /** \relates HistoryActionID */
-  std::ostream & operator << (std::ostream & str, const HistoryActionID & id);
-  ///////////////////////////////////////////////////////////////////
-
-
-  ///////////////////////////////////////////////////////////////////
-  //
   //	CLASS NAME : HistoryLog
   /**
    * Simple wrapper for progress log. Refcnt, filename and corresponding

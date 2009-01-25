@@ -26,6 +26,7 @@ SET( zypp_SRCS
   FileChecker.cc
   Glob.cc
   HistoryLog.cc
+  HistoryLogData.cc
   IdString.cc
   KeyRing.cc
   Locks.cc
@@ -106,6 +107,7 @@ SET( zypp_HEADERS
   FileChecker.h
   Glob.h
   HistoryLog.h
+  HistoryLogData.h
   IdString.h
   IdStringType.h
   KeyContext.h
@@ -317,6 +319,7 @@ SET( zypp_parser_SRCS
   parser/ParseException.cc
   parser/IniParser.cc
   parser/IniDict.cc
+  parser/HistoryLogReader.cc
   parser/RepoFileReader.cc
   parser/RepoindexFileReader.cc
   parser/ServiceFileReader.cc
@@ -327,6 +330,7 @@ SET( zypp_parser_HEADERS
   parser/ParseException.h
   parser/IniParser.h
   parser/IniDict.h
+  parser/HistoryLogReader.h
   parser/ParserProgress.h
   parser/RepoFileReader.h
   parser/xml_escape_parser.hpp

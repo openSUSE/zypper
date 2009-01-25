@@ -25,6 +25,7 @@
 #include "zypp/RepoInfo.h"
 
 #include "zypp/HistoryLog.h"
+#include "zypp/HistoryLogData.h"
 
 using std::endl;
 using std::string;
@@ -67,74 +68,7 @@ namespace
 
 namespace zypp
 {
-  ///////////////////////////////////////////////////////////////////
-  //
-  //    CLASS NAME : HistoryActionID
-  //
-  ///////////////////////////////////////////////////////////////////
 
-  static std::map<std::string,HistoryActionID::ID> _table;
-
-  const HistoryActionID HistoryActionID::NONE(HistoryActionID::NONE_e);
-  const HistoryActionID HistoryActionID::INSTALL(HistoryActionID::INSTALL_e);
-  const HistoryActionID HistoryActionID::REMOVE(HistoryActionID::REMOVE_e);
-  const HistoryActionID HistoryActionID::REPO_ADD(HistoryActionID::REPO_ADD_e);
-  const HistoryActionID HistoryActionID::REPO_REMOVE(HistoryActionID::REPO_REMOVE_e);
-  const HistoryActionID HistoryActionID::REPO_CHANGE_ALIAS(HistoryActionID::REPO_CHANGE_ALIAS_e);
-  const HistoryActionID HistoryActionID::REPO_CHANGE_URL(HistoryActionID::REPO_CHANGE_URL_e);
-
-  HistoryActionID::HistoryActionID(const std::string & strval_r)
-    : _id(parse(strval_r))
-  {}
-
-  HistoryActionID::ID HistoryActionID::parse(const std::string & strval_r)
-  {
-    if (_table.empty())
-    {
-      // initialize it
-      _table["install"] = INSTALL_e;
-      _table["remove"]  = REMOVE_e;
-      _table["radd"]    = REPO_ADD_e;
-      _table["rremove"] = REPO_REMOVE_e;
-      _table["ralias"]  = REPO_CHANGE_ALIAS_e;
-      _table["rurl"]    = REPO_CHANGE_URL_e;
-      _table["NONE"] = _table["none"] = HistoryActionID::NONE_e;
-    }
-
-    std::map<std::string,HistoryActionID::ID>::const_iterator it =
-      _table.find(strval_r);
-
-    if (it == _table.end())
-      WAR << "Unknown history action ID '" + strval_r + "'";
-
-    return it->second;
-  }
-
-
-  const std::string & HistoryActionID::asString(bool pad) const
-  {
-    static std::map<ID, std::string> _table;
-    if ( _table.empty() )
-    {
-      // initialize it
-      _table[INSTALL_e]           = "install";
-      _table[REMOVE_e]            = "remove";
-      _table[REPO_ADD_e]          = "radd";
-      _table[REPO_REMOVE_e]       = "rremove";
-      _table[REPO_CHANGE_ALIAS_e] = "ralias";
-      _table[REPO_CHANGE_URL_e]   = "rurl";
-      _table[NONE_e]              = "NONE";
-    }
-    // add spaces so that the size of the returned string is always 7 (for now)
-    if (pad)
-      return _table[_id].append(7 - _table[_id].size(), ' ');
-    return _table[_id];
-  }
-
-  std::ostream & operator << (std::ostream & str, const HistoryActionID & id)
-  { return str << id.asString(); }
-
-  ///////////////////////////////////////////////////////////////////
 
   ///////////////////////////////////////////////////////////////////
   //
