@@ -35,7 +35,40 @@ namespace zypp
   // CLASS NAME: HistoryLogReader
   //
   /**
+   * Reads a zypp history log file and calls the ProcessItem function passed
+   * in the constructor for each item found.
    *
+   * Example:
+   * <code>
+   *
+   * struct HistoryItemCollector
+   * {
+   *   vector<HistoryItem::Ptr> items;
+   *
+   *   bool processEntry( const HistoryItem::Ptr & item_ptr )
+   *   {
+   *     items.push_back(item_ptr);
+   *     return true;
+   *   }
+   * }
+   *
+   * ...
+   *
+   * HistoryItemCollector ic;
+   * HistoryLogReader reader("/var/log/zypp/history", boost::ref(ic));
+   *
+   * try
+   * {
+   *   reader.readAll();
+   * }
+   * catch (const Exception & e)
+   * {
+   *   cout << e.asUserHistory() << endl;
+   * }
+   *
+   * </code>
+   *
+   * \see http://en.opensuse.org/Libzypp/Package_History
    */
   class HistoryLogReader
   {
@@ -51,17 +84,38 @@ namespace zypp
      * Read the whole log file.
      */
     void readAll(
-        const ProgressData::ReceiverFnc &progress = ProgressData::ReceiverFnc());
+      const ProgressData::ReceiverFnc &progress = ProgressData::ReceiverFnc() );
 
-    /*
-     * readFrom(Date);
-     * readFromTo(Date, Date);
+    /**
+     * Read log from specified \a date.
      */
+    void readFrom( const Date & date,
+      const ProgressData::ReceiverFnc &progress = ProgressData::ReceiverFnc() );
+
+    /**
+     * Read log between \a fromDate and \a toDate.
+     */
+    void readFromTo( const Date & fromDate, const Date & toDate,
+      const ProgressData::ReceiverFnc &progress = ProgressData::ReceiverFnc() );
+
+    /**
+     * Set the reader to ignore invalid log entries and continue with the rest.
+     *
+     * \param ignoreInvalid <tt>true</tt> will cause the reader to ignore invalid entries
+     */
+    void setIgnoreInvalidItems( bool ignoreInvalid = false );
+
+    /**
+     * Whether the reader is set to ignore invalid log entries.
+     */
+    bool ignoreInvalidItems() const;
 
   private:
-    Pathname _filename;
-    ProcessItem _callback;
+    /** Implementation */
+    class Impl;
+    RW_pointer<Impl,rw_pointer::Scoped<Impl> > _pimpl;
   };
+  ///////////////////////////////////////////////////////////////////
 
 
   /////////////////////////////////////////////////////////////////

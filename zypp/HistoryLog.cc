@@ -33,7 +33,7 @@ using std::string;
 namespace
 {
   inline string timestamp()
-  { return zypp::Date::now().form( "%Y-%m-%d %H:%M:%S" ); }
+  { return zypp::Date::now().form( HISTORY_LOG_DATE_FORMAT ); }
 
   inline string userAtHostname()
   {

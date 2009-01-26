@@ -13,6 +13,8 @@
 #ifndef ZYPP_HISTORYLOGDATA_H_
 #define ZYPP_HISTORYLOGDATA_H_
 
+#include <iosfwd>
+
 #include "zypp/Date.h"
 #include "zypp/Edition.h"
 #include "zypp/Arch.h"
@@ -93,6 +95,8 @@ namespace zypp
     virtual ~HistoryItem()
     {}
 
+    virtual void dumpTo(std::ostream & str) const;
+
   public:
     Date date;
     HistoryActionID action;
@@ -113,7 +117,7 @@ namespace zypp
     virtual ~HistoryItemInstall()
     {}
 
-    virtual const std::string asString() const;
+    virtual void dumpTo(std::ostream & str) const;
 
   public:
     std::string   name;
@@ -139,6 +143,8 @@ namespace zypp
     virtual ~HistoryItemRemove()
     {}
 
+    virtual void dumpTo(std::ostream & str)  const;
+
   public:
     std::string name;
     Edition     edition;
@@ -161,6 +167,8 @@ namespace zypp
     virtual ~HistoryItemRepoAdd()
     {}
 
+    virtual void dumpTo(std::ostream & str) const;
+
   public:
     std::string alias;
     Url         url;
@@ -181,6 +189,8 @@ namespace zypp
     virtual ~HistoryItemRepoRemove()
     {}
 
+    virtual void dumpTo(std::ostream & str) const;
+
   public:
     std::string alias;
   };
@@ -199,6 +209,8 @@ namespace zypp
     HistoryItemRepoAliasChange(FieldVector & fields);
     virtual ~HistoryItemRepoAliasChange()
     {}
+
+    virtual void dumpTo(std::ostream & str) const;
 
   public:
     std::string oldalias;
@@ -220,12 +232,15 @@ namespace zypp
     virtual ~HistoryItemRepoUrlChange()
     {}
 
+    virtual void dumpTo(std::ostream & str) const;
+
   public:
     std::string alias;
     Url newurl;
   };
   /////////////////////////////////////////////////////////////////////
 
+  std::ostream & operator<<(std::ostream & str, const HistoryItem & obj);
 
 }
 

@@ -113,6 +113,18 @@ namespace zypp
     action = HistoryActionID(str::trim(fields[1]));
   }
 
+  void HistoryItem::dumpTo(ostream & str) const
+  {
+    str << date.form(HISTORY_LOG_DATE_FORMAT) << "|" << action.asString();
+  }
+
+  ostream & operator<<(ostream & str, const HistoryItem & obj)
+  {
+    obj.dumpTo(str);
+    return str;
+  }
+
+
   /////////////////////////////////////////////////////////////////////
   //
   // CLASS NAME: HistoryItemInstall
@@ -135,24 +147,22 @@ namespace zypp
     checksum  = CheckSum::sha(fields[7]);
   }
 
-  const std::string HistoryItemInstall::asString() const
+  void HistoryItemInstall::dumpTo(ostream & str) const
   {
-    ostringstream str;
-    str
-      << date.form(HISTORY_LOG_DATE_FORMAT) << "|"
-      << action.asString() << "|"
+    HistoryItem::dumpTo(str);
+    str << "|"
       << name << "|"
       << edition << "|"
       << arch << "|"
       << reqby << "|"
       << repoalias << "|"
       << checksum;
-    return str.str();
   }
 
-  std::ostream & operator<<(std::ostream & str, const HistoryItemInstall & obj)
+  ostream & operator<<(ostream & str, const HistoryItemInstall & obj)
   {
-    return str << obj.asString();
+    obj.dumpTo(str);
+    return str;
   }
 
 
@@ -176,6 +186,22 @@ namespace zypp
     reqby     = fields[5];
   }
 
+  void HistoryItemRemove::dumpTo(ostream & str) const
+  {
+    HistoryItem::dumpTo(str);
+    str << "|"
+      << name << "|"
+      << edition << "|"
+      << arch << "|"
+      << reqby;
+  }
+
+  ostream & operator<<(ostream & str, const HistoryItemRemove & obj)
+  {
+    obj.dumpTo(str);
+    return str;
+  }
+
 
   /////////////////////////////////////////////////////////////////////
   //
@@ -195,6 +221,20 @@ namespace zypp
     url = Url(fields[3]);
   }
 
+  void HistoryItemRepoAdd::dumpTo(ostream & str) const
+  {
+    HistoryItem::dumpTo(str);
+    str << "|"
+      << alias << "|"
+      << url;
+  }
+
+  ostream & operator<<(ostream & str, const HistoryItemRepoAdd & obj)
+  {
+    obj.dumpTo(str);
+    return str;
+  }
+
 
   /////////////////////////////////////////////////////////////////////
   //
@@ -211,6 +251,18 @@ namespace zypp
           fields.size(), 3)));
 
     alias = fields[2];
+  }
+
+  void HistoryItemRepoRemove::dumpTo(ostream & str) const
+  {
+    HistoryItem::dumpTo(str);
+    str << "|" << alias;
+  }
+
+  ostream & operator<<(ostream & str, const HistoryItemRepoRemove & obj)
+  {
+    obj.dumpTo(str);
+    return str;
   }
 
 
@@ -232,6 +284,18 @@ namespace zypp
     newalias = fields[3];
   }
 
+  void HistoryItemRepoAliasChange::dumpTo(ostream & str) const
+  {
+    HistoryItem::dumpTo(str);
+    str << "|" << oldalias << "|" << newalias;
+  }
+
+  ostream & operator<<(ostream & str, const HistoryItemRepoAliasChange & obj)
+  {
+    obj.dumpTo(str);
+    return str;
+  }
+
 
   /////////////////////////////////////////////////////////////////////
   //
@@ -249,6 +313,18 @@ namespace zypp
 
     alias = fields[2];
     newurl = Url(fields[3]);
+  }
+
+  void HistoryItemRepoUrlChange::dumpTo(ostream & str) const
+  {
+    HistoryItem::dumpTo(str);
+    str << "|" << alias << "|" << newurl;
+  }
+
+  ostream & operator<<(ostream & str, const HistoryItemRepoUrlChange & obj)
+  {
+    obj.dumpTo(str);
+    return str;
   }
 
 
