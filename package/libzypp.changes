@@ -1,4 +1,10 @@
 -------------------------------------------------------------------
+Mon Jan 26 12:41:07 CET 2009 - ma@suse.de
+
+- Let vendor checks per default differ between 'openSUSE Build Service' 
+  and 'openSUSE' (bnc #467262).
+
+-------------------------------------------------------------------
 Fri Jan 23 12:34:44 CET 2009 - ma@suse.de
 
 - Fix handling of plaindir repos on mounted devices (e.g. USB) (bnc #464778)

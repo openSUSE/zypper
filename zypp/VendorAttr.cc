@@ -48,51 +48,10 @@ namespace zypp
   { /////////////////////////////////////////////////////////////////
 
     typedef map<Vendor,unsigned int> VendorMap;
-    typedef vector<string> VendorList;
 
     VendorMap _vendorMap;
     VendorMap _matchMap;
     unsigned int vendorGroupCounter;
-
-    void addEquivalentVendors( VendorList & vendorList )
-    {
-	unsigned int nextId = vendorGroupCounter + 1;
-	// convert to lowercase and check if a vendor is already defined
-	// in an existing group.
-
-	for (VendorList::iterator it = vendorList.begin();
-	     it != vendorList.end();
-	     it++) {
-	    *it = str::toLower( *it );
-	    if (_vendorMap.find(*it) != _vendorMap.end()) {
-		if (nextId != vendorGroupCounter + 1 &&
-		    nextId != _vendorMap[*it]) {
-		    // We have at least 3 groups which has to be mixed --> mix the third group to the first
-		    unsigned int moveID = _vendorMap[*it];
-		    for (VendorMap::iterator itMap = _vendorMap.begin();
-			 itMap != _vendorMap.end();
-			 ++itMap) {
-			if (itMap->second == moveID)
-			    itMap->second = nextId;
-		    }
-		} else {
-		    nextId = _vendorMap[*it];
-		    WAR << "Vendor " << *it << " is already used in another vendor group. --> mixing these groups"
-			<< endl;
-		}
-	    }
-	}
-	// add new entries
-	for (VendorList::iterator it = vendorList.begin();
-	     it != vendorList.end();
-	     ++it) {
-	    _vendorMap[*it] = nextId;
-	}
-
-	if (nextId == vendorGroupCounter + 1)
-	    ++vendorGroupCounter;
-    }
-
 
     /////////////////////////////////////////////////////////////////
   } // namespace
@@ -147,12 +106,54 @@ namespace zypp
         _vendorMap["opensuse"] = suseit->second;
       }
 
-      MIL << "Equivalent vendors:" << endl;
-      for (VendorMap::iterator it = _vendorMap.begin();
-	   it != _vendorMap.end();
-	   it ++) {
-	  MIL << "   " << it->first << " (group " << it->second << ")" << endl;
+      // Take care 'opensuse build service' gets it's own class.
+      VendorMap::const_iterator obsit( _vendorMap.find("opensuse build service") );
+      if ( obsit == _vendorMap.end() )
+      {
+        _vendorMap["opensuse build service"] = ++vendorGroupCounter;
       }
+
+
+      MIL << *this << endl;
+  }
+
+  void VendorAttr::_addVendorList( VendorList & vendorList_r ) const
+  {
+    unsigned int nextId = vendorGroupCounter + 1;
+	// convert to lowercase and check if a vendor is already defined
+	// in an existing group.
+
+    for_( it, vendorList_r.begin(), vendorList_r.end() )
+    {
+      *it = str::toLower( *it );
+      if (_vendorMap.find(*it) != _vendorMap.end())
+      {
+        if (nextId != vendorGroupCounter + 1 &&
+            nextId != _vendorMap[*it])
+        {
+		    // We have at least 3 groups which has to be mixed --> mix the third group to the first
+          unsigned int moveID = _vendorMap[*it];
+          for_( itMap, _vendorMap.begin(), _vendorMap.end() )
+          {
+            if (itMap->second == moveID)
+              itMap->second = nextId;
+          }
+        }
+        else
+        {
+          nextId = _vendorMap[*it];
+          WAR << "Vendor " << *it << " is already used in another vendor group. --> mixing these groups" << endl;
+        }
+      }
+    }
+	// add new entries
+    for_( it, vendorList_r.begin(), vendorList_r.end() )
+    {
+      _vendorMap[*it] = nextId;
+    }
+
+    if (nextId == vendorGroupCounter + 1)
+      ++vendorGroupCounter;
   }
 
   bool VendorAttr::addVendorFile( const Pathname & filename ) const
@@ -188,7 +189,7 @@ namespace zypp
 		  {
 		      VendorList vendorlist;
 		      str::split( value, back_inserter(vendorlist), "," );
-		      addEquivalentVendors (vendorlist);
+		      _addVendorList (vendorlist);
 		      break;
 		  }
 	      }
@@ -236,6 +237,8 @@ namespace zypp
       if ( lhs == rhs )
 	  return true;
 
+      // NOTE: iterate reverse to get find longest prefix first!
+
       if (_matchMap.find(lhs) != _matchMap.end()) {
 	  lhsID = _matchMap[lhs];
       } else {
@@ -266,6 +269,16 @@ namespace zypp
 	  }
       }
       return( lhsID && rhsID && lhsID == rhsID  );
+  }
+
+  std::ostream & operator<<( std::ostream & str, const VendorAttr & /*obj*/ )
+  {
+    str << "Equivalent vendors:";
+    for_( it, _vendorMap.begin(), _vendorMap.end() )
+    {
+      str << endl << "   [" << it->second << "] " << it->first;
+    }
+    return str;
   }
 
   /////////////////////////////////////////////////////////////////

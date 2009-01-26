@@ -26,7 +26,7 @@ namespace zypp
 BOOST_AUTO_TEST_CASE(vendor_test1)
 {
   reconfigureZConfig( DATADIR / "zypp1.conf" );
-  // No vendor definition files has been readed. So only suse,opensuse vendors are
+  // No vendor definition files has been read. So only suse,opensuse vendors are
   // equivalent
   BOOST_REQUIRE( VendorAttr::instance().equivalent("suse", "suse") );
   BOOST_REQUIRE( VendorAttr::instance().equivalent("equal", "equal") );
@@ -34,5 +34,10 @@ BOOST_AUTO_TEST_CASE(vendor_test1)
   BOOST_REQUIRE( VendorAttr::instance().equivalent("opensuse", "SuSE") );
   BOOST_REQUIRE( !VendorAttr::instance().equivalent("open", "SuSE") );
   BOOST_REQUIRE( !VendorAttr::instance().equivalent("nothing", "SuSE") );
+
+  // but "opensuse build service" gets its own class:
+  BOOST_REQUIRE( !VendorAttr::instance().equivalent("opensuse build service", "suse") );
+  BOOST_REQUIRE( !VendorAttr::instance().equivalent("opensuse build service", "opensuse") );
+  BOOST_REQUIRE( VendorAttr::instance().equivalent("opensuse build service", "opensuse build service 2") );
 }
 
