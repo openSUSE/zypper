@@ -1,4 +1,9 @@
 -------------------------------------------------------------------
+Tue Jan 27 14:06:56 CET 2009 - jkupec@suse.cz
+
+- Adapted authetication callback for non-curl URLs (bnc #460970)
+
+-------------------------------------------------------------------
 Thu Jan 15 11:18:36 CET 2009 - jkupec@suse.cz
 
 - fixed typo (bnc #447594)
