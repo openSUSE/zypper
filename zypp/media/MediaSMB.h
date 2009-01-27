@@ -17,6 +17,8 @@
 namespace zypp {
   namespace media {
 
+    class AuthData;
+
     ///////////////////////////////////////////////////////////////////
     //
     //	CLASS NAME : MediaSMB
@@ -60,13 +62,15 @@ namespace zypp {
       void mountAsCIFS() { _vfstype = "cifs"; }
 
     public:
-
       MediaSMB( const Url&       url_r,
 		const Pathname & attach_point_hint_r );
 
       virtual ~MediaSMB() { try { release(); } catch(...) {} }
 
       virtual bool isAttached() const;
+
+    private:
+      bool authenticate( AuthData & authdata, bool firstTry ) const;
     };
 
 ///////////////////////////////////////////////////////////////////A

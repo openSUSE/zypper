@@ -14,9 +14,18 @@
 #include <fstream>
 
 #include "zypp/base/Logger.h"
+#include "zypp/base/Gettext.h"
 #include "zypp/TmpPath.h"
 #include "zypp/KVMap.h"
 #include "zypp/media/Mount.h"
+#include "zypp/media/MediaUserAuth.h"
+#include "zypp/media/CredentialManager.h"
+#include "zypp/ZYppCallbacks.h"
+
+#warning FIXME: get rid of this dependency on Target
+#include "zypp/ZYppFactory.h" // for target->root()
+#include "zypp/Target.h" // for zypp->target->root()
+
 #include "zypp/media/MediaSMB.h"
 
 #include <sys/types.h>
@@ -41,19 +50,19 @@ namespace zypp {
     {
       if ( spath_r.empty() )
         return string();
-    
+
       string share( spath_r.absolutename().asString() );
       string::size_type sep = share.find( "/", 1 );
       if ( sep == string::npos )
         share = share.erase( 0, 1 ); // nothing but the share name in spath_r
       else
         share = share.substr( 1, sep-1 );
-    
+
       // deescape %2f in sharename
       while ( (sep = share.find( "%2f" )) != string::npos ) {
         share.replace( sep, 3, "/" );
       }
-    
+
       return share;
     }
 
@@ -69,12 +78,12 @@ namespace zypp {
     {
       if ( spath_r.empty() )
         return Pathname();
-    
+
       string striped( spath_r.absolutename().asString() );
       string::size_type sep = striped.find( "/", 1 );
       if ( sep == string::npos )
         return "/"; // nothing but the share name in spath_r
-    
+
       return striped.substr( sep );
     }
 
@@ -107,24 +116,30 @@ namespace zypp {
     //
     //	METHOD NAME : MediaSMB::attachTo
     //	METHOD TYPE : PMError
-    //
-    //	DESCRIPTION : Asserted that not already attached, and attachPoint
-    //      is a directory.
-    //
-    //      NOTE: The implementation currently serves both, "smb" and
-    //      and "cifs" URL's, but passes "cifs" to the mount command
-    //      in any case.
-    //
+    /**
+     * Asserted that not already attached, and attachPoint is a directory.
+     *
+     * Authentication: credentials can be specified in the following few ways
+     * (the first has the highest preference).
+     * - URL username:password
+     * - mountoptions URL query parameter (see man mount.cifs)
+     * - CredentialManager - either previously saved credentials will be used
+     *   or the user will be promted for them via AuthenticationReport callback.
+     *
+     * \note The implementation currently serves both, "smb" and
+     *      and "cifs" URL's, but passes "cifs" to the mount command
+     *      in any case.
+     */
     void MediaSMB::attachTo(bool next)
     {
       if(_url.getHost().empty())
     	ZYPP_THROW(MediaBadUrlEmptyHostException(_url));
       if(next)
 	ZYPP_THROW(MediaNotSupportedException(_url));
-    
+
       string path = "//";
       path += _url.getHost() + "/" + getShare( _url.getPathName() );
-   
+
       MediaSourceRef media( new MediaSource( _vfstype, path));
       AttachedMedia  ret( findAttachedMedia( media));
 
@@ -154,93 +169,134 @@ namespace zypp {
       }
 
       Mount mount;
- 
+      CredentialManager cm;
+
       Mount::Options options( _url.getQueryParam("mountoptions") );
       string username = _url.getUsername();
       string password = _url.getPassword();
-    
+
       options["guest"]; // prevent smbmount from asking for password
-    
+
       if ( ! options.has( "rw" ) ) {
         options["ro"];
       }
-    
-      Mount::Options::iterator toEnv;
-    
+
+      // look for a workgroup
+      /*
+      string workgroup = _url.getQueryParam("workgroup");
+      if ( !workgroup.empty() )
+        options["workgroup"] = workgroup;
+      */
+
       // extract 'username', do not overwrite any _url.username
+
+      Mount::Options::iterator toEnv;
       toEnv = options.find("username");
       if ( toEnv != options.end() ) {
         if ( username.empty() )
-    	username = toEnv->second;
+          username = toEnv->second;
         options.erase( toEnv );
       }
+
       toEnv = options.find("user"); // actually cifs specific
       if ( toEnv != options.end() ) {
         if ( username.empty() )
-    	username = toEnv->second;
+          username = toEnv->second;
         options.erase( toEnv );
       }
-    
+
       // extract 'password', do not overwrite any _url.password
+
       toEnv = options.find("password");
       if ( toEnv != options.end() ) {
         if ( password.empty() )
-    	password = toEnv->second;
+          password = toEnv->second;
         options.erase( toEnv );
       }
+
       toEnv = options.find("pass"); // actually cifs specific
       if ( toEnv != options.end() ) {
         if ( password.empty() )
-    	password = toEnv->second;
+          password = toEnv->second;
         options.erase( toEnv );
       }
-    
-      // look for a workgroup
-      string workgroup = _url.getQueryParam("workgroup");
-      if ( workgroup.size() ) {
-        options["workgroup"] = workgroup;
+
+      if ( username.empty() || password.empty() )
+      {
+        AuthData_Ptr c = cm.getCred(_url);
+        if (c)
+        {
+          username = c->username();
+          password = c->password();
+        }
       }
-    
-      // pass 'username' and 'password' via environment
-      Mount::Environment environment;
-      if ( username.size() )
-        environment["USER"] = username;
-      if ( password.size() )
-        environment["PASSWD"] = password;
-    
-      //////////////////////////////////////////////////////
-      // In case we need a tmpfile, credentials will remove
-      // it in it's destructor after the mout call below.
-      filesystem::TmpPath credentials;
-      if ( username.size() || password.size() )
+
+      bool firstTry = true;
+      bool authRequired = false;
+      AuthData authdata;
+      do // repeat this while the mount returns "Permission denied" error
+      {
+        // get credentials from authenicate()
+        if ( !firstTry )
+        {
+          username = authdata.username();
+          password = authdata.password();
+        }
+
+        // pass 'username' and 'password' via environment
+        Mount::Environment environment;
+        if ( !username.empty() )
+          environment["USER"] = username;
+        if ( !password.empty() )
+          environment["PASSWD"] = password;
+
+        //////////////////////////////////////////////////////
+        // In case we need a tmpfile, credentials will remove
+        // it in it's destructor after the mout call below.
+        filesystem::TmpPath credentials;
+        if ( !username.empty() || !password.empty() )
         {
           filesystem::TmpFile tmp;
           ofstream outs( tmp.path().asString().c_str() );
           outs << "username=" <<  username << endl;
           outs << "password=" <<  password << endl;
           outs.close();
-    
+
           credentials = tmp;
           options["credentials"] = credentials.path().asString();
         }
-      //
-      //////////////////////////////////////////////////////
-    
-      mount.mount( path, mountpoint, _vfstype,
-		   options.asString(), environment );
+        //
+        //////////////////////////////////////////////////////
 
-      setMediaSource(media);
+        try
+        {
+          mount.mount( path, mountpoint, _vfstype,
+                       options.asString(), environment );
+          setMediaSource(media);
+          break;
+        }
+        catch (const MediaMountException & e)
+        {
+          ZYPP_CAUGHT( e );
+
+          if ( e.mountError() == "Permission denied" )
+            authRequired = authenticate( authdata, firstTry );
+          else
+            ZYPP_RETHROW( e );
+        }
+
+        firstTry = false;
+      }
+      while ( authRequired );
 
       // wait for /etc/mtab update ...
       // (shouldn't be needed)
       int limit = 3;
       bool mountsucceeded;
       while( !(mountsucceeded=isAttached()) && --limit)
-      {
         sleep(1);
-      }
 
-      if( !mountsucceeded)
+      if ( !mountsucceeded )
       {
         setMediaSource(MediaSourceRef());
         try
@@ -253,7 +309,7 @@ namespace zypp {
         }
         ZYPP_THROW(MediaMountException(
           "Unable to verify that the media was mounted",
-	  path, mountpoint
+          path, mountpoint
         ));
       }
     }
@@ -346,7 +402,75 @@ namespace zypp {
     bool MediaSMB::getDoesFileExist( const Pathname & filename ) const
     {
       return MediaHandler::getDoesFileExist( filename );
-    }    
-    
+    }
+
+    bool MediaSMB::authenticate(AuthData & authdata, bool firstTry) const
+    {
+      //! \todo need a way to pass different CredManagerOptions here
+      Target_Ptr target = zypp::getZYpp()->getTarget();
+      CredentialManager cm(CredManagerOptions(target ? target->root() : ""));
+
+      // get stored credentials
+      AuthData_Ptr cmcred = cm.getCred(_url);
+
+      AuthData_Ptr smbcred;
+      smbcred.reset(new AuthData());
+      callback::SendReport<AuthenticationReport> auth_report;
+
+      // preset the username if present in current url
+      if (!_url.getUsername().empty() && firstTry)
+        smbcred->setUsername(_url.getUsername());
+      // if CM has found some credentials, preset the username from there
+      else if (cmcred)
+        smbcred->setUsername(cmcred->username());
+
+      // indicate we have no good credentials from CM
+      cmcred.reset();
+
+      string prompt_msg = str::form(
+        //!\todo add comma to the message for the next release
+        _("Authentication required for '%s'"), _url.asString().c_str());
+
+      // ask user
+      if (auth_report->prompt(_url, prompt_msg, *smbcred))
+      {
+        DBG << "callback answer: retry" << endl
+            << "AuthData: " << *smbcred << endl;
+
+        if (smbcred->valid())
+        {
+          cmcred = smbcred;
+            // if (credentials->username() != _url.getUsername())
+            //   _url.setUsername(credentials->username());
+            /**
+             *  \todo find a way to save the url with changed username
+             *  back to repoinfo or dont store urls with username
+             *  (and either forbid more repos with the same url and different
+             *  user, or return a set of credentials from CM and try them one
+             *  by one)
+             */
+        }
+      }
+      else
+        DBG << "callback answer: cancel" << endl;
+
+      // set username and password
+      if (cmcred)
+      {
+        authdata.setUsername(cmcred->username());
+        authdata.setPassword(cmcred->password());
+
+        // save the credentials
+        cmcred->setUrl(_url);
+        cm.addCred(*cmcred);
+        cm.save();
+
+        return true;
+      }
+
+      return false;
+    }
+
+
   } // namespace media
 } // namespace zypp
