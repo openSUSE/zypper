@@ -14,13 +14,15 @@
 
 #include <set>
 
-#include "zypp/Url.h"
 #include "zypp/Pathname.h"
 #include "zypp/media/MediaUserAuth.h"
 
 //////////////////////////////////////////////////////////////////////
-namespace zypp 
+namespace zypp
 { ////////////////////////////////////////////////////////////////////
+
+  class Url;
+
   //////////////////////////////////////////////////////////////////////
   namespace media
   { ////////////////////////////////////////////////////////////////////
@@ -28,10 +30,10 @@ namespace zypp
 
   //////////////////////////////////////////////////////////////////////
   //
-  // CLASS NAME : CredManagerOptions 
+  // CLASS NAME : CredManagerOptions
   //
   /**
-   * \todo configurable cred file locations  
+   * \todo configurable cred file locations
    */
   struct CredManagerOptions
   {
@@ -46,15 +48,8 @@ namespace zypp
   // comparator for CredentialSet
   struct AuthDataComparator
   {
-    public: bool operator()(const AuthData_Ptr & lhs,
-                            const AuthData_Ptr & rhs)
-    {
-      if (lhs->username() < rhs->username())
-        return true;
-      if (lhs->url() != rhs->url())
-        return true;
-      return false;
-    }
+    static const url::ViewOption vopt;
+    bool operator()(const AuthData_Ptr & lhs, const AuthData_Ptr & rhs);
   };
 
   //////////////////////////////////////////////////////////////////////
@@ -81,10 +76,10 @@ namespace zypp
   public:
     /**
      * Get credentials for the specified \a url.
-     * 
+     *
      * If the URL contains also username, it will be used to find the match
      * for this user (in case mutliple are available).
-     * 
+     *
      * \param url URL to find credentials for.
      * \return Pointer to retrieved authentication data on success or an empty
      *         AuthData_Ptr otherwise.
@@ -101,7 +96,7 @@ namespace zypp
      * Add new global credentials.
      */
     void addGlobalCred(const AuthData & cred);
-    
+
     /**
      * Add new user credentials.
      */
@@ -109,13 +104,13 @@ namespace zypp
 
     /**
      * Add new credentials with user callbacks.
-     * 
+     *
      * If the cred->url() contains 'credentials' query parameter, the
      * credentials will be automatically saved to the specified file using the
      * \ref saveInFile() method.
      *
      * Otherwise a callback will be called asking whether to save to custom
-     * file, or to global or user's credentials catalog. 
+     * file, or to global or user's credentials catalog.
      *
      * \todo Currently no callback is called, credentials are automatically
      *       saved to user's credentials.cat if no 'credentials' parameter
@@ -131,7 +126,7 @@ namespace zypp
 
     /**
      * Saves given \a cred to global credentials file.
-     * 
+     *
      * \note Use this method to add just one piece of credentials. To add
      *       multiple items at once, use addGlobalCred() followed
      *       by save()
@@ -139,8 +134,8 @@ namespace zypp
     void saveInGlobal(const AuthData & cred);
 
     /**
-     * Saves given \a cred to user's credentials file.  
-     * 
+     * Saves given \a cred to user's credentials file.
+     *
      * \note Use this method to add just one piece of credentials. To add
      *       multiple items at once, use addUserCred() followed
      *       by save()
@@ -149,7 +144,7 @@ namespace zypp
 
     /**
      * Saves given \a cred to user specified credentials file.
-     * 
+     *
      * If the credFile path is absolute, it will be saved at that precise
      * location. If \a credFile is just a filename, it will be saved
      * in \ref CredManagerOptions::customCredFileDir. Otherwise the current
@@ -159,7 +154,7 @@ namespace zypp
 
     /**
      * Remove all global or user credentials from memory and disk.
-     * 
+     *
      * \param global  Whether to remove global or user credentials.
      */
     void clearAll(bool global = false);

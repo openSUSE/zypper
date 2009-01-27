@@ -27,16 +27,40 @@
 using namespace std;
 
 //////////////////////////////////////////////////////////////////////
-namespace zypp 
+namespace zypp
 { ////////////////////////////////////////////////////////////////////
   //////////////////////////////////////////////////////////////////////
   namespace media
   { ////////////////////////////////////////////////////////////////////
 
+  //////////////////////////////////////////////////////////////////////
+  //
+  // CLASS NAME : AuthDataComparator
+  //
+  //////////////////////////////////////////////////////////////////////
+
+  const url::ViewOption AuthDataComparator::vopt =
+    url::ViewOption::DEFAULTS
+    - url::ViewOption::WITH_USERNAME
+    - url::ViewOption::WITH_PASSWORD
+    - url::ViewOption::WITH_QUERY_STR;
+
+  inline bool
+  AuthDataComparator::operator()(
+      const AuthData_Ptr & lhs, const AuthData_Ptr & rhs)
+  {
+    if (lhs->username() != rhs->username())
+      return true;
+
+    if (lhs->url().asString(vopt) != rhs->url().asString(vopt))
+      return true;
+
+    return false;
+  }
 
   //////////////////////////////////////////////////////////////////////
   //
-  // CLASS NAME : CredManagerOptions 
+  // CLASS NAME : CredManagerOptions
   //
   //////////////////////////////////////////////////////////////////////
 
@@ -52,7 +76,7 @@ namespace zypp
 
   //////////////////////////////////////////////////////////////////////
   //
-  // CLASS NAME : CredentialManager::Impl 
+  // CLASS NAME : CredentialManager::Impl
   //
   struct CredentialManager::Impl
   {
@@ -60,7 +84,7 @@ namespace zypp
 
     ~Impl()
     {}
-    
+
     void init_globalCredentials();
     void init_userCredentials();
 
@@ -86,7 +110,7 @@ namespace zypp
 
   //////////////////////////////////////////////////////////////////////
   //
-  // CLASS NAME : CredentialManager::Impl 
+  // CLASS NAME : CredentialManager::Impl
   //
   //////////////////////////////////////////////////////////////////////
 
@@ -204,7 +228,7 @@ namespace zypp
   AuthData_Ptr CredentialManager::Impl::getCredFromFile(const Pathname & file)
   {
     AuthData_Ptr result;
-    
+
     Pathname credfile;
     if (file.absolute())
       // get from that file
@@ -262,7 +286,7 @@ namespace zypp
 
   //////////////////////////////////////////////////////////////////////
   //
-  // CLASS NAME : CredentialManager 
+  // CLASS NAME : CredentialManager
   //
   //////////////////////////////////////////////////////////////////////
 
