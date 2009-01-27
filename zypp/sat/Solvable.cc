@@ -211,22 +211,28 @@ namespace zypp
       OnMediaLocation ret;
 
       Pathname path;
-#warning STILL HARDCODED /suse PREFIX in location
-      // (ma@) loading a susetags repo search for a solvable with attribute
-      // susetags:datadir. this is the prefix. store it in RepoInfo(?).
-      // (ma@) Just a quick'n'dirty solution as we wan't
-      // to get rid of susetags.
       static const sat::SolvAttr susetagsDatadir( "susetags:datadir" );
       switch ( repository().info().type().toEnum() )
       {
         case repo::RepoType::NONE_e:
-          if ( sat::LookupAttr( susetagsDatadir, repository() ).empty() )
-            break;
-          // else set type and fall through
-          repository().info().setProbedType( repo::RepoType::YAST2_e );
-        case repo::RepoType::YAST2_e:
-          path = "suse";
+          {
+            sat::LookupAttr datadir( susetagsDatadir, repository() );
+            if ( ! datadir.empty() )
+            {
+              repository().info().setProbedType( repo::RepoType::YAST2_e );
+              path = datadir.begin().asString();
+            }
+            path = datadir.empty() ? "suse" : datadir.begin().c_str();
+          }
           break;
+
+        case repo::RepoType::YAST2_e:
+          {
+            sat::LookupAttr datadir( susetagsDatadir, repository() );
+            path = datadir.empty() ? "suse" : datadir.begin().c_str();
+          }
+          break;
+
         default:
           break;
       }
