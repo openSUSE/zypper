@@ -1,4 +1,9 @@
 -------------------------------------------------------------------
+Tue Jan 27 13:35:44 CET 2009 - ma@suse.de
+
+- Respect content-file DATDIR when downloading packages. (bnc #468612)
+
+-------------------------------------------------------------------
 Tue Jan 27 13:28:54 CET 2009 - jkupec@suse.cz
 
 - Enabled CredentialManager for MediaSMB (bnc #460970).
