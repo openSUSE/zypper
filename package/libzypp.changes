@@ -1,4 +1,11 @@
 -------------------------------------------------------------------
+Tue Jan 27 13:28:54 CET 2009 - jkupec@suse.cz
+
+- Enabled CredentialManager for MediaSMB (bnc #460970).
+- Ignore URL's username, password, and query string in AuthData
+  comparator in CredentialManager.
+
+-------------------------------------------------------------------
 Mon Jan 26 12:41:07 CET 2009 - ma@suse.de
 
 - Let vendor checks per default differ between 'openSUSE Build Service' 
