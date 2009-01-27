@@ -64,7 +64,7 @@ namespace ZmartRecipients
                  const std::vector<std::string> & devices,
                  unsigned int &                   index)
     {
-      /*std::cout << "detected devices: "; 
+      /*std::cout << "detected devices: ";
       for (std::vector<std::string>::const_iterator it = devices.begin();
            it != devices.end(); ++it)
         std::cout << *it << " ";
@@ -75,7 +75,7 @@ namespace ZmartRecipients
       if (is_changeable_media(url) && error == MediaChangeReport::WRONG)
       {
         //cerr << endl; // may be in the middle of RepoReport or ProgressReport \todo check this
-  
+
         std::string request = boost::str(boost::format(
             // TranslatorExplanation translate letters 'y' and 'n' to whathever is appropriate for your language.
             // Try to check what answers does zypper accept (it always accepts y/n at least)
@@ -84,7 +84,7 @@ namespace ZmartRecipients
             _("Please insert medium [%s] #%d and type 'y' to continue or 'n' to cancel the operation."))
             % label % mediumNr);
         if (read_bool_answer(PROMPT_YN_MEDIA_CHANGE, request, false))
-          return MediaChangeReport::RETRY; 
+          return MediaChangeReport::RETRY;
         else
           return MediaChangeReport::ABORT;
       }
@@ -131,7 +131,7 @@ namespace ZmartRecipients
 
       if (out.verbosity() < Out::HIGH &&
            (
-             // don't show download info unless show_media_progress_hack is used 
+             // don't show download info unless show_media_progress_hack is used
              !Zypper::instance()->runtimeData().show_media_progress_hack ||
              // don't report download of the media file (bnc #330614)
              zypp::Pathname(uri.getPathName()).basename() == "media"
@@ -213,49 +213,48 @@ namespace ZmartRecipients
       }
 
       // curl authentication
-      zypp::media::CurlAuthData * auth_data_ptr =
+      zypp::media::CurlAuthData * curl_auth_data =
         dynamic_cast<zypp::media::CurlAuthData*> (&auth_data);
-      if (auth_data_ptr)
+
+      if (curl_auth_data)
+        curl_auth_data->setAuthType("basic,digest");
+
+      // user name
+
+      std::string username;
+      // expect the input from machine on stdin
+      if (Zypper::instance()->globalOpts().machine_readable)
       {
-        
-        // user name
-        
-        std::string username;
-        // expect the input from machine on stdin
-        if (Zypper::instance()->globalOpts().machine_readable)
-        {
-          Zypper::instance()->out().prompt(
-              PROMPT_AUTH_USERNAME, _("User Name"), PromptOptions(), description);
-          std::cin >> username;
-        }
-        // input from human using readline
-        else
-        {
-          std::cout << description << std::endl;
-          username = get_text(_("User Name") + std::string(": "), auth_data.username());
-        }
-        auth_data_ptr->setUsername(username);
-
-        // password
-        
         Zypper::instance()->out().prompt(
-            PROMPT_AUTH_PASSWORD, _("Password"), PromptOptions());
-
-        std::string password;
-        // expect the input from machine on stdin
-        if (Zypper::instance()->globalOpts().machine_readable)
-          std::cin >> password;
-        else
-          password = get_password();
-        if (password.empty()) return false;
-        auth_data_ptr->setPassword(password);
-
-        auth_data_ptr->setAuthType("basic,digest");
-
-        return true;
+            PROMPT_AUTH_USERNAME, _("User Name"), PromptOptions(), description);
+        std::cin >> username;
       }
+      // input from human using readline
+      else
+      {
+        std::cout << description << std::endl;
+        username = get_text(_("User Name") + std::string(": "), auth_data.username());
+      }
+      if (username.empty())
+        return false;
+      auth_data.setUsername(username);
 
-      return false;
+      // password
+
+      Zypper::instance()->out().prompt(
+          PROMPT_AUTH_PASSWORD, _("Password"), PromptOptions());
+
+      std::string password;
+      // expect the input from machine on stdin
+      if (Zypper::instance()->globalOpts().machine_readable)
+        std::cin >> password;
+      else
+        password = get_password();
+      if (password.empty())
+        return false;
+      auth_data.setPassword(password);
+
+      return true;
     }
   };
 
@@ -286,7 +285,7 @@ class MediaCallbacks {
     }
 };
 
-#endif 
+#endif
 // Local Variables:
 // mode: c++
 // c-basic-offset: 2
