@@ -1,4 +1,9 @@
 -------------------------------------------------------------------
+Wed Jan 28 14:37:28 CET 2009 - jkupec@suse.cz
+
+- HistoryLogReader added
+
+-------------------------------------------------------------------
 Tue Jan 27 13:35:44 CET 2009 - ma@suse.de
 
 - Respect content-file DATDIR when downloading packages. (bnc #468612)
