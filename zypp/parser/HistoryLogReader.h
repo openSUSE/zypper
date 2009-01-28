@@ -36,7 +36,7 @@ namespace zypp
   //
   /**
    * Reads a zypp history log file and calls the ProcessItem function passed
-   * in the constructor for each item found.
+   * in the constructor for each item read.
    *
    * Example:
    * <code>
@@ -82,18 +82,41 @@ namespace zypp
 
     /**
      * Read the whole log file.
+     *
+     * \param progress An optional progress data receiver function.
      */
     void readAll(
       const ProgressData::ReceiverFnc &progress = ProgressData::ReceiverFnc() );
 
     /**
      * Read log from specified \a date.
+     *
+     * \param date     Date from which to read.
+     * \param progress An optional progress data receiver function.
+     *
+     * \see readFromTo()
      */
     void readFrom( const Date & date,
       const ProgressData::ReceiverFnc &progress = ProgressData::ReceiverFnc() );
 
     /**
      * Read log between \a fromDate and \a toDate.
+     *
+     * The date comparison's precision goes to seconds. Omitted time parts
+     * get replaced by zeroes, so if e.g. the time is not specified at all, the
+     * date means midnight of the specified date. So
+     *
+     * <code>
+     * fromDate = Date("2009-01-01", "%Y-%m-%d");
+     * toDate   = Date("2009-01-02", "%Y-%m-%d");
+     * </code>
+     *
+     * will yield log entries from midnight of January, 1st untill
+     * one second before midnight of January, 2nd.
+     *
+     * \param fromDate Date from which to read.
+     * \param toDate   Date on which to stop reading.
+     * \param progress An optional progress data receiver function.
      */
     void readFromTo( const Date & fromDate, const Date & toDate,
       const ProgressData::ReceiverFnc &progress = ProgressData::ReceiverFnc() );
@@ -107,6 +130,8 @@ namespace zypp
 
     /**
      * Whether the reader is set to ignore invalid log entries.
+     *
+     * \see setIngoreInvalidItems()
      */
     bool ignoreInvalidItems() const;
 

@@ -42,8 +42,14 @@ namespace zypp
     {}
 
     HistoryItem::Ptr createHistoryItem(HistoryItem::FieldVector & fields);
+    void parseLine(const string & line, unsigned int lineNr);
 
     void readAll(const ProgressData::ReceiverFnc & progress);
+    void readFrom(const Date & date,
+        const ProgressData::ReceiverFnc & progress);
+    void readFromTo(
+        const Date & fromDate, const Date & toDate,
+        const ProgressData::ReceiverFnc & progress);
 
     Pathname _filename;
     ProcessItem _callback;
@@ -92,6 +98,54 @@ namespace zypp
     return HistoryItem::Ptr();
   }
 
+  void HistoryLogReader::Impl::parseLine(const string & line, unsigned int lineNr)
+  {
+    HistoryItem::FieldVector fields;
+    HistoryItem::Ptr item_ptr;
+
+    // parse into fields
+    str::splitEscaped(line, back_inserter(fields), "|", true);
+
+    if (fields.size() <= 2)
+    {
+      ParseException
+        e(str::form("Error in history log on line #%u.", lineNr));
+      e.addHistory(
+          str::form("Bad number of fields. Got %ld, expected more than %d.",
+              fields.size(), 2));
+      ZYPP_THROW(e);
+    }
+
+    try
+    {
+      item_ptr = createHistoryItem(fields);
+    }
+    catch (const Exception & e)
+    {
+      ZYPP_CAUGHT(e);
+      ERR << "Invalid history log entry on line #" << lineNr << ":" << endl
+          << line << endl;
+
+      if (!_ignoreInvalid)
+      {
+        ParseException newe(
+            str::form("Error in history log on line #%u.", lineNr ) );
+        newe.remember(e);
+        ZYPP_THROW(newe);
+      }
+    }
+
+    if (item_ptr)
+      _callback(item_ptr);
+    else if (!_ignoreInvalid)
+    {
+      ParseException
+        e(str::form("Error in history log on line #%u.", lineNr));
+      e.addHistory("Unknown entry type.");
+      ZYPP_THROW(e);
+    }
+  }
+
   void HistoryLogReader::Impl::readAll(const ProgressData::ReceiverFnc & progress)
   {
     InputStream is(_filename);
@@ -101,55 +155,89 @@ namespace zypp
     pd.sendTo( progress );
     pd.toMin();
 
-    HistoryItem::FieldVector fields;
-    HistoryItem::Ptr item_ptr;
-    for (; line; line.next(), pd.tick(), fields.clear(), item_ptr.reset())
+    for (; line; line.next(), pd.tick() )
     {
-      const string & s = *line;
-      if (s[0] == '#') // ignore comments
+      // ignore comments
+      if ((*line)[0] == '#')
         continue;
 
-      // parse fields
-      str::splitEscaped(s, back_inserter(fields), "|", true);
+      parseLine(*line, line.lineNo());
+    }
 
-      if (fields.size() <= 2)
-        ZYPP_THROW(ParseException(
-          str::form("Bad number of fields. Got %ld, expected more than %d.",
-            fields.size(), 2)));
+    pd.toMax();
+  }
 
-      try
+  void HistoryLogReader::Impl::readFrom(const Date & date,
+      const ProgressData::ReceiverFnc & progress)
+  {
+    InputStream is(_filename);
+    iostr::EachLine line(is);
+
+    ProgressData pd;
+    pd.sendTo( progress );
+    pd.toMin();
+
+    bool pastDate = false;
+    for (; line; line.next(), pd.tick())
+    {
+      const string & s = *line;
+
+      // ignore comments
+      if (s[0] == '#')
+        continue;
+
+      if (pastDate)
+        parseLine(s, line.lineNo());
+      else
       {
-        item_ptr = createHistoryItem(fields);
-      }
-      catch (const Exception & e)
-      {
-        ZYPP_CAUGHT(e);
-        ERR << "Invalid history log entry on line #" << line.lineNo() << ":" << endl
-            << s << endl;
-
-        if (!_ignoreInvalid)
+        Date logDate(s.substr(0, s.find('|')), HISTORY_LOG_DATE_FORMAT);
+        if (logDate > date)
         {
-          ParseException newe(
-              str::form("Error in history log on line #%u.", line.lineNo() ) );
-          newe.remember(e);
-          ZYPP_THROW(newe);
+          pastDate = true;
+          parseLine(s, line.lineNo());
         }
-      }
-
-      if (item_ptr)
-        _callback(item_ptr);
-      else if (!_ignoreInvalid)
-      {
-        ParseException
-          e(str::form("Error in history log on line #%u.", line.lineNo()));
-        e.addHistory("Unknown entry type.");
-        ZYPP_THROW(e);
       }
     }
 
     pd.toMax();
   }
 
+  void HistoryLogReader::Impl::readFromTo(
+      const Date & fromDate, const Date & toDate,
+      const ProgressData::ReceiverFnc & progress)
+  {
+    InputStream is(_filename);
+    iostr::EachLine line(is);
+
+    ProgressData pd;
+    pd.sendTo(progress);
+    pd.toMin();
+
+    bool pastFromDate = false;
+    for (; line; line.next(), pd.tick())
+    {
+      const string & s = *line;
+
+      // ignore comments
+      if (s[0] == '#')
+        continue;
+
+      Date logDate(s.substr(0, s.find('|')), HISTORY_LOG_DATE_FORMAT);
+
+      // past toDate - stop reading
+      if (logDate >= toDate)
+        break;
+
+      // past fromDate - start reading
+      if (!pastFromDate && logDate > fromDate)
+        pastFromDate = true;
+
+      if (pastFromDate)
+        parseLine(s, line.lineNo());
+    }
+
+    pd.toMax();
+  }
 
   /////////////////////////////////////////////////////////////////////
   //
@@ -173,6 +261,15 @@ namespace zypp
 
   void HistoryLogReader::readAll(const ProgressData::ReceiverFnc & progress)
   { _pimpl->readAll(progress); }
+
+  void HistoryLogReader::readFrom(const Date & date,
+      const ProgressData::ReceiverFnc & progress)
+  { _pimpl->readFrom(date, progress); }
+
+  void HistoryLogReader::readFromTo(
+      const Date & fromDate, const Date & toDate,
+      const ProgressData::ReceiverFnc & progress)
+  { _pimpl->readFromTo(fromDate, toDate, progress); }
 
 
     /////////////////////////////////////////////////////////////////
