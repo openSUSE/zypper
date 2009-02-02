@@ -241,8 +241,11 @@ namespace zypp
     MIL << "directory " << dir << endl;
     std::list<RepoInfo> repos;
     std::list<Pathname> entries;
-    if ( filesystem::readdir( entries, Pathname(dir), false ) != 0 )
-      ZYPP_THROW(Exception("failed to read directory"));
+    if ( filesystem::readdir( entries, dir, false ) != 0 )
+    {
+      // TranslatorExplanation '%s' is a pathname
+      ZYPP_THROW(Exception(str::form(_("Failed to read directory '%s'"), dir.c_str())));
+    }
 
     str::regex allowedRepoExt("^\\.repo(_[0-9]+)?$");
     for ( std::list<Pathname>::const_iterator it = entries.begin(); it != entries.end(); ++it )
@@ -441,7 +444,8 @@ namespace zypp
     std::ofstream file( servfile.c_str() );
     if ( !file )
     {
-      ZYPP_THROW( Exception( "Can't open " + servfile.asString() ) );
+      // TranslatorExplanation '%s' is a filename
+      ZYPP_THROW( Exception(str::form( _("Can't open file '%s' for writing."), servfile.c_str() )));
     }
     service.dumpAsIniOn( file );
     MIL << "done" << endl;
@@ -513,8 +517,11 @@ namespace zypp
     std::list<Pathname> entries;
     if (PathInfo(dir).isExist())
     {
-      if ( filesystem::readdir( entries, Pathname(dir), false ) != 0 )
-          ZYPP_THROW(Exception("failed to read directory"));
+      if ( filesystem::readdir( entries, dir, false ) != 0 )
+      {
+        // TranslatorExplanation '%s' is a pathname
+        ZYPP_THROW(Exception(str::form(_("Failed to read directory '%s'"), dir.c_str())));
+      }
 
       //str::regex allowedServiceExt("^\\.service(_[0-9]+)?$");
       for_(it, entries.begin(), entries.end() )
@@ -907,7 +914,7 @@ namespace zypp
               downloader_ptr->addCachePath(cachepath);
           }
 
-          downloader_ptr->download( media, tmpdir.path());
+          downloader_ptr->download( media, tmpdir.path() );
         }
         else if ( repokind.toEnum() == RepoType::RPMPLAINDIR_e )
         {
@@ -915,8 +922,10 @@ namespace zypp
           RepoStatus newstatus = parser::plaindir::dirStatus(media.getPathName());
 
           std::ofstream file(( tmpdir.path() + "/cookie").c_str());
-          if (!file) {
-            ZYPP_THROW (Exception( "Can't open " + tmpdir.path().asString() + "/cookie" ) );
+          if (!file)
+          {
+            // TranslatorExplanation '%s' is a filename
+            ZYPP_THROW( Exception(str::form( _("Can't open file '%s' for writing."), (tmpdir.path()/"cookie").c_str() )));
           }
           file << url << endl;
           file << newstatus.checksum() << endl;
@@ -1091,7 +1100,7 @@ namespace zypp
         int ret = prog.close();
         if ( ret != 0 )
         {
-          RepoException ex(str::form("Failed to cache repo (%d).", ret));
+          RepoException ex(str::form( _("Failed to cache repo (%d)."), ret ));
           ex.remember( errdetail );
           ZYPP_THROW(ex);
         }
@@ -1101,7 +1110,7 @@ namespace zypp
       }
       break;
       default:
-        ZYPP_THROW(RepoUnknownTypeException("Unhandled repository type"));
+        ZYPP_THROW(RepoUnknownTypeException( _("Unhandled repository type") ));
       break;
     }
     // update timestamp and checksum
@@ -1129,7 +1138,9 @@ namespace zypp
     // problems with proxy servers returning an incorrect error
     // on ftp file-not-found(bnc #335906). Instead we'll check another types
     // before throwing.
-    RepoException enew("Error trying to read from " + url.asString());
+
+    // TranslatorExplanation '%s' is an URL
+    RepoException enew(str::form( _("Error trying to read from '%s'"), url.asString().c_str() ));
     bool gotMediaException = false;
     try
     {
@@ -1181,7 +1192,8 @@ namespace zypp
     catch ( const Exception &e )
     {
       ZYPP_CAUGHT(e);
-      Exception enew("Unknown error reading from " + url.asString());
+      // TranslatorExplanation '%s' is an URL
+      Exception enew(str::form( _("Unknown error reading from '%s'"), url.asString().c_str() ));
       enew.remember(e);
       ZYPP_THROW(enew);
     }
@@ -1301,8 +1313,10 @@ namespace zypp
     MIL << "Saving repo in " << repofile << endl;
 
     std::ofstream file(repofile.c_str());
-    if (!file) {
-      ZYPP_THROW (Exception( "Can't open " + repofile.asString() ) );
+    if (!file)
+    {
+      // TranslatorExplanation '%s' is a filename
+      ZYPP_THROW( Exception(str::form( _("Can't open file '%s' for writing."), repofile.c_str() )));
     }
 
     tosave.dumpAsIniOn(file);
@@ -1359,7 +1373,10 @@ namespace zypp
     std::string filename = Pathname(url.getPathName()).basename();
 
     if ( filename == Pathname() )
-      ZYPP_THROW(RepoException("Invalid repo file name at " + url.asString() ));
+    {
+      // TranslatorExplanation '%s' is an URL
+      ZYPP_THROW(RepoException(str::form( _("Invalid repo file name at '%s'"), url.asString().c_str() )));
+    }
 
     // assert the directory exists
     filesystem::assert_dir(_pimpl->options.knownReposPath);
@@ -1369,8 +1386,10 @@ namespace zypp
     MIL << "Saving " << repos.size() << " repo" << ( repos.size() ? "s" : "" ) << " in " << repofile << endl;
 
     std::ofstream file(repofile.c_str());
-    if (!file) {
-      ZYPP_THROW (Exception( "Can't open " + repofile.asString() ) );
+    if (!file)
+    {
+      // TranslatorExplanation '%s' is a filename
+      ZYPP_THROW( Exception(str::form( _("Can't open file '%s' for writing."), repofile.c_str() )));
     }
 
     for ( std::list<RepoInfo>::iterator it = repos.begin();
@@ -1415,7 +1434,7 @@ namespace zypp
       RepoInfo todelete = *it;
       if (todelete.filepath().empty())
       {
-        ZYPP_THROW(RepoException("Can't figure where the repo is stored"));
+        ZYPP_THROW(RepoException( _("Can't figure out where the repo is stored.") ));
       }
       else
       {
@@ -1426,7 +1445,8 @@ namespace zypp
           // easy, only this one, just delete the file
           if ( filesystem::unlink(todelete.filepath()) != 0 )
           {
-            ZYPP_THROW(RepoException("Can't delete " + todelete.filepath().asString()));
+            // TranslatorExplanation '%s' is a filename
+            ZYPP_THROW(RepoException(str::form( _("Can't delete '%s'"), todelete.filepath().c_str() )));
           }
           MIL << todelete.alias() << " sucessfully deleted." << endl;
         }
@@ -1441,9 +1461,10 @@ namespace zypp
           filesystem::assert_dir(todelete.filepath().dirname());
 
           std::ofstream file(todelete.filepath().c_str());
-          if (!file) {
-            //ZYPP_THROW (Exception( "Can't open " + tmp.path().asString() ) );
-            ZYPP_THROW (Exception( "Can't open " + todelete.filepath().asString() ) );
+          if (!file)
+          {
+            // TranslatorExplanation '%s' is a filename
+            ZYPP_THROW( Exception(str::form( _("Can't open file '%s' for writing."), todelete.filepath().c_str() )));
           }
           for ( std::list<RepoInfo>::const_iterator fit = filerepos.begin();
                 fit != filerepos.end();
@@ -1492,7 +1513,7 @@ namespace zypp
 
     if (toedit.filepath().empty())
     {
-      ZYPP_THROW(RepoException("Can't figure where the repo is stored"));
+      ZYPP_THROW(RepoException( _("Can't figure out where the repo is stored.") ));
     }
     else
     {
@@ -1508,9 +1529,10 @@ namespace zypp
       filesystem::assert_dir(toedit.filepath().dirname());
 
       std::ofstream file(toedit.filepath().c_str());
-      if (!file) {
-        //ZYPP_THROW (Exception( "Can't open " + tmp.path().asString() ) );
-        ZYPP_THROW (Exception( "Can't open " + toedit.filepath().asString() ) );
+      if (!file)
+      {
+        // TranslatorExplanation '%s' is a filename
+        ZYPP_THROW( Exception(str::form( _("Can't open file '%s' for writing."), toedit.filepath().c_str() )));
       }
       for ( std::list<RepoInfo>::const_iterator fit = filerepos.begin();
             fit != filerepos.end();
@@ -1645,7 +1667,7 @@ namespace zypp
     Pathname location = service.filepath();
     if( location.empty() )
     {
-      ZYPP_THROW(RepoException("Can't figure where the service is stored"));
+      ZYPP_THROW(RepoException( _("Can't figure out where the service is stored.") ));
     }
 
     ServiceSet tmpSet;
@@ -1656,7 +1678,8 @@ namespace zypp
     {
       if ( filesystem::unlink(location) != 0 )
       {
-        ZYPP_THROW(RepoException("Can't delete " + location.asString()));
+        // TranslatorExplanation '%s' is a filename
+        ZYPP_THROW(RepoException(str::form( _("Can't delete '%s'"), location.c_str() )));
       }
       MIL << alias << " sucessfully deleted." << endl;
     }
@@ -1665,8 +1688,11 @@ namespace zypp
       filesystem::assert_dir(location.dirname());
 
       std::ofstream file(location.c_str());
-      if( file.fail() )
-        ZYPP_THROW(Exception("failed open file to write"));
+      if( !file )
+      {
+        // TranslatorExplanation '%s' is a filename
+        ZYPP_THROW( Exception(str::form( _("Can't open file '%s' for writing."), location.c_str() )));
+      }
 
       for_(it, tmpSet.begin(), tmpSet.end())
       {
@@ -1898,8 +1924,7 @@ namespace zypp
     Pathname location = oldService.filepath();
     if( location.empty() )
     {
-      ZYPP_THROW(RepoException(
-          "Cannot figure out where the service file is stored."));
+      ZYPP_THROW(RepoException( _("Can't figure out where the service is stored.") ));
     }
 
     // remember: there may multiple services being defined in one file:
@@ -1957,14 +1982,16 @@ namespace zypp
     catch ( const media::MediaException &e )
     {
       ZYPP_CAUGHT(e);
-      RepoException enew("Error trying to read from " + url.asString());
+      // TranslatorExplanation '%s' is an URL
+      RepoException enew(str::form( _("Error trying to read from '%s'"), url.asString().c_str() ));
       enew.remember(e);
       ZYPP_THROW(enew);
     }
     catch ( const Exception &e )
     {
       ZYPP_CAUGHT(e);
-      Exception enew("Unknown error reading from " + url.asString());
+      // TranslatorExplanation '%s' is an URL
+      Exception enew(str::form( _("Unknown error reading from '%s'"), url.asString().c_str() ));
       enew.remember(e);
       ZYPP_THROW(enew);
     }
