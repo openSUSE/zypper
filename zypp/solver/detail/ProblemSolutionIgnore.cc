@@ -49,7 +49,7 @@ ProblemSolutionIgnore::ProblemSolutionIgnore( ResolverProblem_Ptr parent,
     : ProblemSolution (parent, "", "")
 {
     // TranslatorExplanation %s = name of package, patch, selection ...    
-    _description = str::form (_("Ignore some dependencies of %s"), item->name().c_str() );
+    _description = str::form (_("ignore some dependencies of %s"), item->name().c_str() );
 
     addAction ( new InjectSolutionAction (item, WEAK));
 }	
@@ -58,7 +58,7 @@ ProblemSolutionIgnore::ProblemSolutionIgnore( ResolverProblem_Ptr parent,
 					      PoolItemList itemList )
     : ProblemSolution (parent, "", "")
 {
-	_description = _("Generally ignore of some dependecies");
+	_description = _("generally ignore of some dependecies");
 	for (PoolItemList::const_iterator iter = itemList.begin();
 	     iter != itemList.end(); iter++) {
 	    addAction ( new InjectSolutionAction (*iter, WEAK));

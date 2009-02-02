@@ -971,7 +971,7 @@ string SATResolver::SATprobleminfoString(Id problem, string &detail, Id &ignoreI
 	  break;
       case SOLVER_PROBLEM_SELF_CONFLICT:
 	  s = mapSolvable (source);
-	  ret = str::form (_("Solvable %s conflicts with %s provided by itself"), solvable2str(pool, s.get()), dep2str(pool, dep));
+	  ret = str::form (_("solvable %s conflicts with %s provided by itself"), solvable2str(pool, s.get()), dep2str(pool, dep));
           break;
       case SOLVER_PROBLEM_DEP_PROVIDERS_NOT_INSTALLABLE:
 	  ignoreId = source; // for setting weak dependencies
@@ -1063,7 +1063,7 @@ SATResolver::problems ()
 		element = 0;
 		ProblemSolutionCombi *problemSolution = new ProblemSolutionCombi(resolverProblem);
 		while ((element = solver_next_solutionelement(_solv, problem, solution, element, &p, &rp)) != 0) {
-		    if (p == 0) {
+		    if (p == SOLVER_SOLUTION_JOB) {
 			/* job, rp is index into job queue */
 			what = _jobQueue.elements[rp];
 			switch (_jobQueue.elements[rp-1])
@@ -1203,6 +1203,34 @@ SATResolver::problems ()
 				ERR << "No valid solution available" << endl;
 				break;
 			}
+		    } else if (p == SOLVER_SOLUTION_INFARCH) {
+			s = mapSolvable (rp);
+			PoolItem poolItem = _pool.find (s);
+			if (_solv->installed && s.get()->repo == _solv->installed) {
+			    problemSolution->addSingleAction (poolItem, KEEP);
+			    string description = str::form (_("keep %s despite the inferior architecture"), solvable2str(pool, s.get()));
+			    MIL << description << endl;
+			    problemSolution->addDescription (description);			    
+			} else {
+			    problemSolution->addSingleAction (poolItem, INSTALL);
+			    string description = str::form (_("install %s despite the inferior architecture"), solvable2str(pool, s.get()));
+			    MIL << description << endl;
+			    problemSolution->addDescription (description);			    			    
+			}
+		    } else if (p == SOLVER_SOLUTION_DISTUPGRADE) {
+			s = mapSolvable (rp);
+			PoolItem poolItem = _pool.find (s);
+			if (_solv->installed && s.get()->repo == _solv->installed) {
+			    problemSolution->addSingleAction (poolItem, KEEP);
+			    string description = str::form (_("keep obsolete %s"), solvable2str(pool, s.get()));
+			    MIL << description << endl;
+			    problemSolution->addDescription (description);			    
+			} else {
+			    problemSolution->addSingleAction (poolItem, INSTALL);
+			    string description = str::form (_("install %s from excluded repository"), solvable2str(pool, s.get()));
+			    MIL << description << endl;
+			    problemSolution->addDescription (description);			    			    			    
+			}
 		    } else {
 			/* policy, replace p with rp */
 			s = mapSolvable (p);
@@ -1288,7 +1316,7 @@ SATResolver::problems ()
 		ProblemSolutionIgnore *problemSolution = new ProblemSolutionIgnore(resolverProblem, item);
 		resolverProblem->addSolution (problemSolution,
 					      false); // Solutions will be shown at the end
-		MIL << "Ignore some dependencies of " << item << endl;
+		MIL << "ignore some dependencies of " << item << endl;
 		MIL << "------------------------------------" << endl;
 	    }
 
