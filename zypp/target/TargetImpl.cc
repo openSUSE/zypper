@@ -831,7 +831,7 @@ namespace zypp
             progress.connect(); // disconnected on destruction.
 
             bool success = false;
-            rpm::RpmInstFlags flags;
+            rpm::RpmInstFlags flags( policy_r.rpmInstFlags() & rpm::RPMINST_JUSTDB );
             // Why force and nodeps?
             //
             // Because zypp builds the transaction and the resolver asserts that
@@ -899,7 +899,8 @@ namespace zypp
             progress.connect(); // disconnected on destruction.
 
             bool success = false;
-            rpm::RpmInstFlags flags( rpm::RPMINST_NODEPS );
+            rpm::RpmInstFlags flags( policy_r.rpmInstFlags() & rpm::RPMINST_JUSTDB );
+            flags |= rpm::RPMINST_NODEPS;
             if (policy_r.dryRun()) flags |= rpm::RPMINST_TEST;
             try
             {
