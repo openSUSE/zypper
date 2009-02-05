@@ -5,6 +5,7 @@
 #include "boost/thread.hpp"
 #include "boost/smart_ptr.hpp"
 
+#include "zypp/Url.h"
 #include "zypp/Pathname.h"
 #include "zypp/base/PtrTypes.h"
 
@@ -48,6 +49,16 @@ class WebServer
    * Stops the worker thread
    */
   void stop();
+
+  /**
+   * returns the port we are listening to
+   */
+  int port() const;
+
+  /**
+   * returns the base url where the webserver is listening
+   */
+  zypp::Url url() const;
  
   /**
    * shows the log of last run

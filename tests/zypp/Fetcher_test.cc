@@ -328,7 +328,7 @@ BOOST_AUTO_TEST_CASE(enqueuedir_http)
       WebServer web((Pathname(TESTS_SRC_DIR) + "/zypp/data/Fetcher/remote-site").c_str(), 10001);
       web.start();
 
-      MediaSetAccess media( Url("http://localhost:10001"), "/" );
+      MediaSetAccess media( web.url(), "/" );
       Fetcher fetcher;
       filesystem::TmpDir dest;
 
@@ -358,7 +358,7 @@ BOOST_AUTO_TEST_CASE(enqueuedir_http_broken)
       WebServer web((Pathname(TESTS_SRC_DIR) + "/zypp/data/Fetcher/remote-site").c_str() , 10001 );
       web.start();
 
-      MediaSetAccess media( Url("http://localhost:10001"), "/" );
+      MediaSetAccess media( web.url(), "/" );
       Fetcher fetcher;
       filesystem::TmpDir dest;
 

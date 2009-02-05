@@ -14,6 +14,17 @@
 using namespace zypp;
 using namespace std;
 
+static inline string hostname()
+{
+    static char buf[256];
+    string result;
+    if (!::gethostname(buf, 255))
+        result += string(buf);
+    else
+        return "localhost";
+    return result;
+}
+
 #define WEBRICK 1
 
 class WebServer::Impl
@@ -36,6 +47,13 @@ public:
     
     virtual void worker_thread()
     {}
+
+    virtual int port() const
+    {
+        return 0;
+    }
+    
+
     
 private:
     friend Impl * rwcowClone<Impl>( const Impl * rhs );
@@ -57,6 +75,12 @@ public:
         if ( ! _stopped )
             stop();
     }
+
+    virtual int port() const
+    {
+        return _port;
+    }
+
     
     virtual void worker_thread()
     {
@@ -145,6 +169,12 @@ public:
         mg_set_option(_ctx, "root", _docroot.c_str());
         _stopped = false;
     }
+
+    virtual int port() const
+    {
+        return _port;
+    }
+
     
     virtual string log() const
     {
@@ -188,6 +218,20 @@ std::string WebServer::log() const
     return _pimpl->log();
 }
 
+int WebServer::port() const
+{
+    return _pimpl->port();
+}
+
+
+Url WebServer::url() const
+{
+    Url url;
+    url.setHost(hostname());
+    url.setPort(str::numstring(port()));
+    url.setScheme("http");
+    return url;
+}
 
 void WebServer::stop()
 {
