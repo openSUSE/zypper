@@ -63,20 +63,13 @@ MediaAria2c::existsAria2cmd()
 {
     const char* argv[] =
     {
-      "whereis",
-      "-b",
+      "which",
       "aria2c",
       NULL
     };
 
     ExternalProgram aria(argv, ExternalProgram::Stderr_To_Stdout);
-
-    std::string ariaResponse( aria.receiveLine());
-    string::size_type pos = ariaResponse.find('/', 0 );
-    if( pos != string::npos )
-        return true;
-    else
-        return false;
+    return ( aria.close() == 0 );
 }
 
 static const char *const anonymousIdHeader()
@@ -610,8 +603,7 @@ Pathname MediaAria2c::whereisAria2c()
 
     const char* argv[] =
     {
-      "whereis",
-      "-b",
+      "which",
       "aria2c",
       NULL
     };
@@ -619,15 +611,12 @@ Pathname MediaAria2c::whereisAria2c()
     ExternalProgram aria(argv, ExternalProgram::Stderr_To_Stdout);
 
     std::string ariaResponse( aria.receiveLine());
-    aria.close();
+    int code = aria.close();
 
-    string::size_type pos = ariaResponse.find('/', 0 );
-    if( pos != string::npos )
+    if( code == 0 )
     {
-        aria2cPathr = ariaResponse;
-        string::size_type pose = ariaResponse.find(' ', pos + 1 );
-        aria2cPathr = ariaResponse.substr( pos , pose - pos );
-        MIL << "We will use aria2c located here:  " << ariaResponse.substr( pos , pose - pos) << endl;
+        aria2cPathr = str::trim(ariaResponse);
+        MIL << "We will use aria2c located here:  " << aria2cPathr << endl;
     }
     else
     {
