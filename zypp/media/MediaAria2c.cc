@@ -421,6 +421,7 @@ void MediaAria2c::getFileCopy( const Pathname & filename , const Pathname & targ
 
   ExternalProgram::Arguments args = _args;
   args.push_back(str::form("--dir=%s", target.dirname().c_str()));
+
   args.push_back(fileurl.asString());
 
   do
@@ -450,8 +451,8 @@ void MediaAria2c::getFileCopy( const Pathname & filename , const Pathname & targ
             ZYPP_THROW(MediaFileNotFoundException(_url, filename));
         }
 
-        if (!ariaResponse.substr(0,9).compare("[#2 SIZE:")) {
-
+        if (!ariaResponse.substr(0,9).compare("[#2 SIZE:"))
+        {
           if (!nLine)
           {
             size_t left_bound = ariaResponse.find('(',0) + 1;
@@ -467,6 +468,7 @@ void MediaAria2c::getFileCopy( const Pathname & filename , const Pathname & targ
           }
         }
       }
+
       aria.close();
 
       report->finish( _url ,  zypp::media::DownloadProgressReport::NO_ERROR, "");

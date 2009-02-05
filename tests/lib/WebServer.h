@@ -1,6 +1,6 @@
 
-#ifndef ZYPP_WEBSERVER_H
-#define ZYPP_WEBSERVER_H
+#ifndef ZYPP_TEST_WEBSERVER_H
+#define ZYPP_TEST_WEBSERVER_H
 
 #include "boost/thread.hpp"
 #include "boost/smart_ptr.hpp"
@@ -8,12 +8,11 @@
 #include "zypp/Pathname.h"
 #include "zypp/base/PtrTypes.h"
 
-struct shttpd_ctx;
-
 /**
  *
  * Starts a webserver to simulate remote transfers in
  * testcases
+ * \author Duncan Mac-Vicar P. <dmacvicar@suse.de>
  *
  * \code
  * #include "WebServer.h"
@@ -39,7 +38,7 @@ class WebServer
   /**
    * creates a web server on \ref root and \port
    */
-  WebServer(const zypp::Pathname root, unsigned int port=9099);
+  WebServer(const zypp::Pathname &root, unsigned int port=10001);
   ~WebServer();
   /**
    * Starts the webserver worker thread
@@ -50,17 +49,15 @@ class WebServer
    */
   void stop();
  
- private:
+  /**
+   * shows the log of last run
+   */
+  std::string log() const;
 
-  void setStrOption( std::string name, std::string value);
-  void setNumOption( std::string name, int value);
-
-  void worker_thread();
-   struct shttpd_ctx *_ctx;
-   zypp::Pathname _docroot;
-   unsigned int _port;
-   zypp::shared_ptr<boost::thread> _thrd;
-   bool _stop;
+  class Impl;
+private:
+  /** Pointer to implementation */
+  zypp::RWCOW_pointer<Impl> _pimpl;
 };
 
 #endif

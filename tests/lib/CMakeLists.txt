@@ -1,5 +1,5 @@
 
-INCLUDE_DIRECTORIES( ${LIBZYPP_SOURCE_DIR}/vendor/shttpd )
+INCLUDE_DIRECTORIES( ${LIBZYPP_SOURCE_DIR}/vendor/mongoose )
 
 ADD_LIBRARY(zypp_test_utils
  TestSetup.h
@@ -7,4 +7,4 @@ ADD_LIBRARY(zypp_test_utils
  WebServer.cc
 )
 
-TARGET_LINK_LIBRARIES(zypp_test_utils shttp zypp boost_thread-mt)
+TARGET_LINK_LIBRARIES(zypp_test_utils mongoose zypp boost_thread-mt)
