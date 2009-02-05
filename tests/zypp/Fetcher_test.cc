@@ -328,7 +328,7 @@ BOOST_AUTO_TEST_CASE(enqueuedir_http)
       WebServer web((Pathname(TESTS_SRC_DIR) + "/zypp/data/Fetcher/remote-site").c_str(), 10001);
       web.start();
 
-      MediaSetAccess media( Url("http://127.0.0.1:10001"), "/" );
+      MediaSetAccess media( Url("http://localhost:10001"), "/" );
       Fetcher fetcher;
       filesystem::TmpDir dest;
 
@@ -355,10 +355,10 @@ BOOST_AUTO_TEST_CASE(enqueuedir_http_broken)
       // add the key as trusted
       //getZYpp()->keyRing()->importKey(PublicKey(DATADIR + "/complexdir/subdir1/SHA1SUMS.key"), true);
 
-      WebServer web((Pathname(TESTS_SRC_DIR) + "/zypp/data/Fetcher/remote-site").c_str() , 10002 );
+      WebServer web((Pathname(TESTS_SRC_DIR) + "/zypp/data/Fetcher/remote-site").c_str() , 10001 );
       web.start();
 
-      MediaSetAccess media( Url("http://127.0.0.1:10002"), "/" );
+      MediaSetAccess media( Url("http://localhost:10001"), "/" );
       Fetcher fetcher;
       filesystem::TmpDir dest;
 

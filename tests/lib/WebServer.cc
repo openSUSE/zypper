@@ -1,6 +1,4 @@
 
-//#include "zypp/ZYpp.h"
-
 #include <sstream>
 #include <string>
 #include "boost/bind.hpp"
@@ -16,7 +14,7 @@
 using namespace zypp;
 using namespace std;
 
-#define WEBRICK 0
+#define WEBRICK 1
 
 class WebServer::Impl
 {
@@ -81,18 +79,8 @@ public:
     
         _stopped = false;
     
-        while ( _stop );
+        while ( ! _stop );
         
-        /*
-        for(line = prog.receiveLine();
-            !line.empty();
-            line = prog.receiveLine() )
-        {
-            strlog << line;
-            if ( _stop )
-                break;
-        }
-        */
         MIL << "Thread end requested" << endl;
         //prog.close();
         if ( prog.running() )
@@ -133,34 +121,29 @@ class WebServerMongooseImpl : public WebServer::Impl
 public:
     WebServerMongooseImpl(const Pathname &root, unsigned int port)
         : _ctx(0L), _docroot(root)
-        , _port(port), _stop(false)
+        , _port(port)
         , _stopped(true)
     {
     }
     
     ~WebServerMongooseImpl()
     {
+        MIL << "Destroying web server" << endl;
+        
         if ( ! _stopped )
             stop();
     }
     
-    virtual void worker_thread()
+    virtual void start()
     {
+        MIL << "Starting shttpd (mongoose)" << endl;
         _log.clear();
         _ctx = mg_start();
         if ( ! mg_set_option(_ctx, "ports", str::form("%d", _port).c_str()) )
             ZYPP_THROW(Exception("Failed to set port"));
         
         mg_set_option(_ctx, "root", _docroot.c_str());
-        stringstream strlog(_log);
-        
-        while ( !_stop )
-        {
-            // loop
-        }
-        MIL << "Thread end requested, shutting down shttpd" << endl;
-        mg_stop(_ctx);
-        _ctx = 0;
+        _stopped = false;
     }
     
     virtual string log() const
@@ -170,25 +153,16 @@ public:
     
     virtual void stop()
     {
-        MIL << "Waiting for shttpd thread to finish" << endl;
-        _stop = true;
-        _thrd->join();
-        MIL << "shttpd thread to finished" << endl;
-        _thrd.reset();
+        MIL << "Stopping shttpd" << endl;
+        mg_stop(_ctx);
+        MIL << "shttpd finished" << endl;
+        _ctx = 0;
         _stopped = true;
-    }
-    
-    virtual void start()
-    {
-        MIL << "Starting shttpd (mongoose) thread" << endl;
-        _thrd.reset( new boost::thread( boost::bind(&WebServerMongooseImpl::worker_thread, this) ) );
     }
     
     mg_context *_ctx;
     zypp::Pathname _docroot;
     unsigned int _port;
-    zypp::shared_ptr<boost::thread> _thrd;
-    bool _stop;
     bool _stopped;
     std::string _log;
 };

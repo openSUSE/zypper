@@ -28,6 +28,9 @@ BuildRequires:  cmake
 BuildRequires:  libsatsolver-devel >= 0.13.0 openssl-devel
 BuildRequires:  boost-devel curl-devel dejagnu doxygen gcc-c++ gettext-devel graphviz hal-devel libxml2-devel
 
+# required for testsuite, webrick
+BuildRequires:  ruby
+
 %if 0%{?suse_version}
 BuildRequires:  libexpat-devel
 %else
