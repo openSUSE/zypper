@@ -40,6 +40,13 @@ namespace zypp
                        : ret );
     }
 
+    inline std::string makeevrstr( const char * version_r,
+                                   const char * release_r,
+                                   Edition::epoch_t epoch_r )
+    { return makeevrstr( std::string(version_r?version_r:""),
+                         std::string(release_r?release_r:""),
+                         epoch_r );
+    }
     /////////////////////////////////////////////////////////////////
   } // namespace
   ///////////////////////////////////////////////////////////////////
