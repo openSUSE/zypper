@@ -90,6 +90,7 @@ namespace zypp
                                stream_r.path().asString().c_str(), "utf-8", XML_PARSE_PEDANTIC ) )
     , _node( _reader )
     {
+      MIL << "Start Parsing " << _stream << endl;
       if ( ! _reader || ! stream_r.stream().good() )
         ZYPP_THROW( Exception( "Bad input stream" ) );
       // set error handler
@@ -111,6 +112,7 @@ namespace zypp
         {
           xmlFreeTextReader( _reader );
         }
+      MIL << "Done Parsing " << _stream << endl;
     }
 
     XmlString Reader::nodeText()
@@ -127,7 +129,7 @@ namespace zypp
       }
       return XmlString();
     }
-    
+
     ///////////////////////////////////////////////////////////////////
     //
     //	METHOD NAME : Reader::nextNode
