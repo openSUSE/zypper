@@ -384,6 +384,7 @@ SET( zypp_parser_xml_SRCS
 )
 
 SET( zypp_parser_xml_HEADERS
+  parser/xml/Parse.h
   parser/xml/Node.h
   parser/xml/ParseDef.h
   parser/xml/ParseDefConsume.h
