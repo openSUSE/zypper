@@ -81,10 +81,15 @@ namespace zypp
 	    return rpm::RpmInstallReport::problem( excpt_r );
 	}
 
+        void RpmInstallPackageReceiver::finishInfo( const std::string & info_r )
+        {
+          _finishInfo = info_r;
+        }
+
         /** Finish operation in case of success */
         void RpmInstallPackageReceiver::finish()
 	{
-	    _report->finish( _resolvable, rpm::InstallResolvableReport::NO_ERROR, std::string(), _level );
+	    _report->finish( _resolvable, rpm::InstallResolvableReport::NO_ERROR, _finishInfo, _level );
 	}
 
         /** Finish operation in case of success */
@@ -161,11 +166,16 @@ namespace zypp
 	    return rpm::RpmRemoveReport::problem( excpt_r );
 	}
 
+        void RpmRemovePackageReceiver::finishInfo( const std::string & info_r )
+        {
+          _finishInfo = info_r;
+        }
+
         /** Finish operation in case of success */
         void RpmRemovePackageReceiver::finish()
 	{
             _report->progress( 100, _resolvable );
-	    _report->finish( _resolvable, rpm::RemoveResolvableReport::NO_ERROR, std::string() );
+	    _report->finish( _resolvable, rpm::RemoveResolvableReport::NO_ERROR, _finishInfo );
 	}
 
         /** Finish operation in case of success */

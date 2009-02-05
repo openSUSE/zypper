@@ -2092,6 +2092,10 @@ void RpmDb::doInstallPackage( const Pathname & filename, RpmInstFlags flags, cal
     ostringstream sstr;
     sstr << "Additional rpm output:" << endl << rpmmsg << endl;
     historylog.comment(sstr.str());
+
+    // report additional rpm output in finish
+    // TranslatorExplanation Text is followed by a ':'  and the actual output.
+    report->finishInfo(str::form( "%s:\n%s\n", _("Additional rpm output"),  rpmmsg.c_str() ));
   }
 }
 
@@ -2228,6 +2232,10 @@ void RpmDb::doRemovePackage( const string & name_r, RpmInstFlags flags, callback
     ostringstream sstr;
     sstr << "Additional rpm output:" << endl << rpmmsg << endl;
     historylog.comment(sstr.str());
+
+    // report additional rpm output in finish
+    // TranslatorExplanation Text is followed by a ':'  and the actual output.
+    report->finishInfo(str::form( "%s:\n%s\n", _("Additional rpm output"),  rpmmsg.c_str() ));
   }
 }
 

@@ -41,27 +41,27 @@ struct RpmRemoveReport : public callback::ReportBase
 
   /** Start the operation */
   virtual void start( const std::string & name )
-  { }
+  {}
   /**
    * Inform about progress
    * Return true on abort
    */
   virtual bool progress( unsigned percent )
-  {
-    return false;
-  }
+  { return false; }
 
   virtual Action problem( Exception & excpt_r )
-  {
-    return ABORT;
-  }
+  { return ABORT; }
+
+  /** Additional rpm output to be reported in \ref finish in case of success. */
+  virtual void finishInfo( const std::string & info_r )
+  {}
 
   /** Finish operation in case of success */
   virtual void finish()
-  { }
+  {}
   /** Finish operation in case of fail, report fail exception */
   virtual void finish( Exception & excpt_r )
-  { }
+  {}
 };
 
 ///////////////////////////////////////////////////////////////////
@@ -78,28 +78,28 @@ struct RpmInstallReport : public callback::ReportBase
 
   /** Start the operation */
   virtual void start( const Pathname & name )
-  { }
+  {}
   /**
    * Inform about progress
    * Return false on abort
    */
   virtual bool progress( unsigned percent )
-  {
-    return true;
-  }
+  { return true; }
+
+  /** Additional rpm output to be reported in \ref finish in case of success. */
+  virtual void finishInfo( const std::string & info_r )
+  {}
 
   /** Finish operation in case of success */
   virtual void finish()
-  { }
+  {}
 
   virtual Action problem( Exception & excpt_r )
-  {
-    return ABORT;
-  }
+  { return ABORT; }
 
   /** Finish operation in case of fail, report fail exception */
   virtual void finish( Exception & excpt_r )
-  { }
+  {}
 };
 
 } // namespace rpm

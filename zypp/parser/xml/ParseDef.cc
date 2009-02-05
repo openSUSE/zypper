@@ -241,7 +241,21 @@ namespace zypp
     {
       if ( reader_r->nodeType() != XML_READER_TYPE_ELEMENT )
         {
-          ZYPP_THROW( ParseDefValidateException( exstr("Expected ELEMENT", *this, reader_r) ) );
+          if ( reader_r->depth() == 0 )
+          {
+            // on the verry first level we skip any initial whitespace and comments...
+            do {
+              // advance to next node
+              if ( ! reader_r.nextNode() )
+                {
+                  ZYPP_THROW( ParseDefValidateException( exstr( "Unexpected EOF ", *this ) ) );
+                }
+            } while( reader_r->nodeType() != XML_READER_TYPE_ELEMENT );
+          }
+          else
+          {
+            ZYPP_THROW( ParseDefValidateException( exstr("Expected ELEMENT", *this, reader_r) ) );
+          }
         }
       if ( reader_r->name() != _name )
         {
@@ -320,6 +334,7 @@ namespace zypp
                   break;
 
                 default:
+                  //DBG << exstr("SKIP ", *this, reader_r) << endl;
                   break;
                 }
             }
