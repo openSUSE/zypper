@@ -100,13 +100,13 @@ namespace zypp
       virtual void startSubnode( const Node & node_r )
       {
         debuglog( "--->  ", node_r );
-        ParseDefConsumeRedirect::start( node_r );
+        ParseDefConsumeRedirect::startSubnode( node_r );
       }
 
       virtual void doneSubnode( const Node & node_r )
       {
         debuglog( "<---  ", node_r );
-        ParseDefConsumeRedirect::done( node_r );
+        ParseDefConsumeRedirect::doneSubnode( node_r );
       }
 
       void debuglog( const char *const tag_r, const Node & node_r )
