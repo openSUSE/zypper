@@ -124,7 +124,7 @@ namespace zypp
     //
     /////////////////////////////////////////////////////////////////
 
-    struct ProductNode : public xml::ParseDef, public xml::ParseDefConsume
+    struct ProductNode : public xml::ParseDef
     {
       ProductNode( ProductFileData::Impl & pdata_r )
         : ParseDef( "product", MANDTAORY )
@@ -148,7 +148,8 @@ namespace zypp
             ;
 
         (*this)["upgrades"]
-            ("upgrade",       MULTIPLE_OPTIONAL)
+            ("upgrade",       MULTIPLE_OPTIONAL, xml::parseDefAssign()
+                                                 >> bind( &ProductNode::doneUpgrade, this, _1 ))
             ;
 
         (*this)["upgrades"]["upgrade"]
@@ -159,37 +160,32 @@ namespace zypp
             ("status",        OPTIONAL,   xml::parseDefAssign( _upgrade._status ) )
             ;
 
-        // Not a clean way to collect the END_ELEMENT calls, but
-        // works for this case. NEEDS CLEANUP!
-
+        // </product> callback to build edition.
+        setConsumer( xml::parseDefAssign() >> bind( &ProductNode::done, this, _1 ) );
         // xml::ParseDef::_debug = true;
-        setConsumer( *this );
-        (*this)["upgrades"].setConsumer( *this );
-       }
+      }
 
-       virtual void done ( const xml::Node & _node )
-       {
-         // SEC << "DONE.... " << _node.localName() << endl;
-         if ( _node.localName() == name() )
-         {
-           // this END node
-           _pdata._edition = Edition( _version, _release );
-         }
-         else if ( _node.localName() == "upgrade" )
-         {
-           // collect upgrade
-           ProductFileData::Upgrade cdata( new ProductFileData::Upgrade::Impl( _upgrade ) );
-           _pdata._upgrades.push_back( cdata );
-           _upgrade = ProductFileData::Upgrade::Impl();
-         }
-       }
+      /** collect _upgrade */
+      void doneUpgrade( const xml::Node & _node )
+      {
+        ProductFileData::Upgrade cdata( new ProductFileData::Upgrade::Impl( _upgrade ) );
+        _pdata._upgrades.push_back( cdata );
+        _upgrade = ProductFileData::Upgrade::Impl();
+      }
 
-       ProductFileData::Impl & _pdata;
+      /** finaly */
+      void done( const xml::Node & _node )
+      {
+        _pdata._edition = Edition( _version, _release );
+      }
 
-       std::string             _version;
-       std::string             _release;
+      private:
+        ProductFileData::Impl & _pdata;
 
-       ProductFileData::Upgrade::Impl _upgrade;
+        std::string             _version;
+        std::string             _release;
+
+        ProductFileData::Upgrade::Impl _upgrade;
     };
 
     bool ProductFileReader::parse( const InputStream & input_r ) const

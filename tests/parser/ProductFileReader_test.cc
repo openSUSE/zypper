@@ -23,7 +23,7 @@ BOOST_AUTO_TEST_CASE(basic)
   BOOST_CHECK_EQUAL( data.registerRelease(), "whatever" );
   BOOST_CHECK_EQUAL( data.updaterepokey(), "A43242DKD" );
 
-  BOOST_CHECK_EQUAL( data.upgrades().size(), 2 );
+  BOOST_REQUIRE_EQUAL( data.upgrades().size(), 2 );
 
   BOOST_CHECK_EQUAL( data.upgrades()[0].name(), "openSUSE_11.1" );
   BOOST_CHECK_EQUAL( data.upgrades()[0].summary(), "openSUSE 11.1" );
