@@ -77,6 +77,7 @@ namespace zypp
       return access.provideFile(repo_r, loc_r, policy_r );
     }
 
+    ///////////////////////////////////////////////////////////////////
     class RepoMediaAccess::Impl
     {
     public:
@@ -95,7 +96,14 @@ namespace zypp
         }
       }
 
-      shared_ptr<MediaSetAccess> mediaAccessForUrl( const Url &url )
+      /** Provide a MediaSetAccess for \c url with label and verifyer adjusted.
+       *
+       * As the same url (e.g. \c 'dvd:///' ) might be used for multiple repos
+       * we must always adjust the repo specific data (label,verifyer).
+       *
+       * \todo This mixture of media and repos specific data is fragile.
+      */
+      shared_ptr<MediaSetAccess> mediaAccessForUrl( const Url &url, RepoInfo repo )
       {
         std::map<Url, shared_ptr<MediaSetAccess> >::const_iterator it;
         it = _medias.find(url);
@@ -109,79 +117,79 @@ namespace zypp
           media.reset( new MediaSetAccess(url) );
           _medias[url] = media;
         }
+        setVerifierForRepo( repo, media );
         return media;
       }
 
-      void setVerifierForRepo( RepoInfo repo, shared_ptr<MediaSetAccess> media )
-      {
-        // Maybe a good place to also set the MediaSetAccess label.
-        // Would be nice if this info was provided by some media
-        // description like
-        if ( media->label().empty() )
+      private:
+        void setVerifierForRepo( RepoInfo repo, shared_ptr<MediaSetAccess> media )
         {
+          // Always set the MediaSetAccess label.
           media->setLabel( repo.name() );
-        }
 
-        // set a verifier if the repository has it
+          // set a verifier if the repository has it
 
-        Pathname mediafile = repo.metadataPath() + "/media.1/media";
-        if ( ! repo.metadataPath().empty() )
-        {
-          if ( PathInfo(mediafile).isExist() )
+          Pathname mediafile = repo.metadataPath() + "/media.1/media";
+          if ( ! repo.metadataPath().empty() )
           {
-            std::map<shared_ptr<MediaSetAccess>, RepoInfo>::const_iterator it;
-            it = _verifier.find(media);
-            if ( it != _verifier.end() )
+            if ( PathInfo(mediafile).isExist() )
             {
-              if ( it->second.alias() == repo.alias() )
+              std::map<shared_ptr<MediaSetAccess>, RepoInfo>::const_iterator it;
+              it = _verifier.find(media);
+              if ( it != _verifier.end() )
               {
-                // this media is already using this repo verifier
-                return;
+                if ( it->second.alias() == repo.alias() )
+                {
+                  // this media is already using this repo verifier
+                  return;
+                }
               }
-            }
 
-            std::ifstream str(mediafile.asString().c_str());
-            std::string vendor;
-            std::string mediaid;
-            std::string buffer;
-            if ( str )
-            {
-              getline(str, vendor);
-              getline(str, mediaid);
-              getline(str, buffer);
-
-              unsigned media_nr = str::strtonum<unsigned>(buffer);
-              MIL << "Repository '" << repo.alias() << "' has " << media_nr << " medias"<< endl;
-
-              for ( unsigned i=1; i <= media_nr; ++i )
+              std::ifstream str(mediafile.asString().c_str());
+              std::string vendor;
+              std::string mediaid;
+              std::string buffer;
+              if ( str )
               {
-                media::MediaVerifierRef verifier( new repo::SUSEMediaVerifier( vendor, mediaid, i ) );
+                getline(str, vendor);
+                getline(str, mediaid);
+                getline(str, buffer);
 
-                media->setVerifier( i, verifier);
+                unsigned media_nr = str::strtonum<unsigned>(buffer);
+                MIL << "Repository '" << repo.alias() << "' has " << media_nr << " medias"<< endl;
+
+                for ( unsigned i=1; i <= media_nr; ++i )
+                {
+                  media::MediaVerifierRef verifier( new repo::SUSEMediaVerifier( vendor, mediaid, i ) );
+
+                  media->setVerifier( i, verifier);
+                }
+                _verifier[media] = repo;
               }
-              _verifier[media] = repo;
+              else
+              {
+                ZYPP_THROW(RepoMetadataException(repo));
+              }
             }
             else
             {
-              ZYPP_THROW(RepoMetadataException(repo));
+              WAR << "No media verifier for repo '" << repo.alias() << "' media/media.1 does not exist in '" << repo.metadataPath() << "'" << endl;
             }
           }
           else
           {
-            WAR << "No media verifier for repo '" << repo.alias() << "' media/media.1 does not exist in '" << repo.metadataPath() << "'" << endl;
+            WAR << "'" << repo.alias() << "' metadata path is empty. Can't set verifier. Probably this repository does not come from RepoManager." << endl;
           }
         }
-        else
-        {
-          WAR << "'" << repo.alias() << "' metadata path is empty. Can't set verifier. Probably this repository does not come from RepoManager." << endl;
-        }
-      }
 
-      std::map<shared_ptr<MediaSetAccess>, RepoInfo> _verifier;
-      std::map<Url, shared_ptr<MediaSetAccess> > _medias;
-      ProvideFilePolicy _defaultPolicy;
+      private:
+        std::map<shared_ptr<MediaSetAccess>, RepoInfo> _verifier;
+        std::map<Url, shared_ptr<MediaSetAccess> > _medias;
+
+      public:
+        ProvideFilePolicy _defaultPolicy;
     };
-
+    ///////////////////////////////////////////////////////////////////
 
 
     RepoMediaAccess::RepoMediaAccess( const ProvideFilePolicy & defaultPolicy_r )
@@ -210,9 +218,7 @@ namespace zypp
                              ref( policy_r ), _1 );
       callback::TempConnect<repo::RepoReport> temp( dumb );
 
-      Url url;
-
-      RepoException repo_excpt(repo_r, 
+      RepoException repo_excpt(repo_r,
                             str::form(_("Can't provide file '%s' from repository '%s'"),
                                loc_r.filename().c_str(),
                                repo_r.alias().c_str() ) );
@@ -232,14 +238,13 @@ namespace zypp
             it != repo_r.baseUrlsEnd();
             /* incremented in the loop */ )
       {
-        url = *it;
+        Url url( *it );
         ++it;
         try
         {
           MIL << "Providing file of repo '" << repo_r.alias()
               << "' from " << url << endl;
-          shared_ptr<MediaSetAccess> access = _impl->mediaAccessForUrl(url);
-          _impl->setVerifierForRepo(repo_r, access);
+          shared_ptr<MediaSetAccess> access = _impl->mediaAccessForUrl( url, repo_r );
 
 	  fetcher.enqueue( loc_r );
 
