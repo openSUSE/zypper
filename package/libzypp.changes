@@ -1,4 +1,9 @@
 -------------------------------------------------------------------
+Mon Feb  9 13:14:26 CET 2009 - ma@suse.de
+
+- Fix installation prompting for the wrong CD/DVD. (bnc #472892)
+
+-------------------------------------------------------------------
 Tue Feb  3 18:07:38 CET 2009 - ma@suse.de
 
 - Send any output from rpm install/delete scripts via callback, so 
