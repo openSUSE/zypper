@@ -89,12 +89,22 @@ const std::string ari_mapping[] = { string(_("abort")),string(_("retry")),string
 
 int read_action_ari_with_timeout (PromptId pid, unsigned timeout,
     int default_action) {
+  Zypper & zypper = *Zypper::instance();
   Out & out = Zypper::instance()->out();
 
   if (default_action >2 || default_action < 0)
   {
     WAR << "bad default action" << endl;
     default_action = 0;
+  }
+
+  // wait 'timeout' number of seconds and return the default in non-interactive mode
+  if (zypper.globalOpts().non_interactive)
+  {
+    zypper.out().info(zypp::str::form(_("Retrying in %u seconds..."), timeout));
+    sleep(timeout);
+    MIL << "running non-interactively, returning " << default_action << endl;
+    return default_action;
   }
 
   out.info (_("Abort, retry, ignore?\n"));
