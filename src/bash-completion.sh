@@ -55,17 +55,20 @@ _zypper() {
 		;;
 		removerepo)
       opts=$(LC_ALL=C $ZYPPER help $prev 2>&1 | sed -e "1,/$magic_string/d" -e 's/.*--/--/' -e 's/ .*//')
-      opts="${opts} $(LC_ALL=C $ZYPPER  lr | sed -e '1,2 d' -e 's/^[0-9]\+[[:space:]]\+|[[:space:]]*\([^|]\+\)|.*$/\1/' -e 's/[[:space:]]*$//')"
+      opts2=$(LC_ALL=C $ZYPPER  lr | sed -e '1,2 d' -e 's/^[0-9]\+[[:space:]]\+|[[:space:]]*\([^|]\+\)|.*$/\1/' -e 's/[[:space:]]*$//'  -e 's/ /\\ /g' -e "s/^\(.*\)$/'\1'/")
+      opts="${opts} ${opts2}"
       COMPREPLY=($(compgen -W "${opts}" -- ${cur}))
 		;;
 		renamerepo)
       opts=$(LC_ALL=C $ZYPPER help $prev 2>&1 | sed -e "1,/$magic_string/d" -e 's/.*--/--/' -e 's/ .*//')
-      opts="${opts} $(LC_ALL=C $ZYPPER  lr | sed -e '1,2 d' -e 's/^[0-9]\+[[:space:]]\+|[[:space:]]*\([^|]\+\)|.*$/\1/' -e 's/[[:space:]]*$//')"
+      opts2=$(LC_ALL=C $ZYPPER  lr | sed -e '1,2 d' -e 's/^[0-9]\+[[:space:]]\+|[[:space:]]*\([^|]\+\)|.*$/\1/' -e 's/[[:space:]]*$//'  -e 's/ /\\ /g' -e "s/^\(.*\)$/'\1'/")
+      opts="${opts} ${opts2}"
       COMPREPLY=($(compgen -W "${opts}" -- ${cur}))
 		;;
 		modifyrepo)
       opts=$(LC_ALL=C $ZYPPER help $prev 2>&1 | sed -e "1,/$magic_string/d" -e 's/.*--/--/' -e 's/ .*//')
-      opts="${opts} $(LC_ALL=C $ZYPPER  lr | sed -e '1,2 d' -e 's/^[0-9]\+[[:space:]]\+|[[:space:]]*\([^|]\+\)|.*$/\1/' -e 's/[[:space:]]*$//')"
+      opts2=$(LC_ALL=C $ZYPPER  lr | sed -e '1,2 d' -e 's/^[0-9]\+[[:space:]]\+|[[:space:]]*\([^|]\+\)|.*$/\1/' -e 's/[[:space:]]*$//'  -e 's/ /\\ /g' -e "s/^\(.*\)$/'\1'/")
+      opts="${opts} ${opts2}"
       COMPREPLY=($(compgen -W "${opts}" -- ${cur}))
 		;;
 		refresh)
