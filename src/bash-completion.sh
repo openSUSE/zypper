@@ -23,67 +23,104 @@ _zypper() {
 
 	case "$prev" in
 		zypper)
-      opts=$ZYPPER_CMDLIST
-      COMPREPLY=($(compgen -W "${opts}" -- ${cur}))
-		;;
-		help)
 			opts=$ZYPPER_CMDLIST
 			COMPREPLY=($(compgen -W "${opts}" -- ${cur}))
 		;;
-		shell)
+		help | ?)
+		
+			opts=$ZYPPER_CMDLIST
+			COMPREPLY=($(compgen -W "${opts}" -- ${cur}))
+		;;
+		shell | sh)
 			return 0
 		;;
-		install)
+		repos | lr)
+      opts=$(LC_ALL=C $ZYPPER help $prev 2>&1 | sed -e "1,/$magic_string/d" -e 's/.*--/--/' -e 's/ .*//')
+      COMPREPLY=($(compgen -W "${opts}" -- ${cur}))
+		;;
+		addrepo | ar)
+      opts=$(LC_ALL=C $ZYPPER help $prev 2>&1 | sed -e "1,/$magic_string/d" -e 's/.*--/--/' -e 's/ .*//')
+      COMPREPLY=($(compgen -W "${opts}" -- ${cur}))
+		;;
+		removerepo | rr)
+      opts=$(LC_ALL=C $ZYPPER help $prev 2>&1 | sed -e "1,/$magic_string/d" -e 's/.*--/--/' -e 's/ .*//')
+      opts="${opts} $(LC_ALL=C $ZYPPER  lr | sed -e '1,2 d' -e 's/^[0-9]\+[[:space:]]\+|[[:space:]]*\([^|]\+\)|.*$/\1/' -e 's/[[:space:]]*$//')"
+      COMPREPLY=($(compgen -W "${opts}" -- ${cur}))
+		;;
+		renamerepo | nr)
+      opts=$(LC_ALL=C $ZYPPER help $prev 2>&1 | sed -e "1,/$magic_string/d" -e 's/.*--/--/' -e 's/ .*//')
+      opts="${opts} $(LC_ALL=C $ZYPPER  lr | sed -e '1,2 d' -e 's/^[0-9]\+[[:space:]]\+|[[:space:]]*\([^|]\+\)|.*$/\1/' -e 's/[[:space:]]*$//')"
+      COMPREPLY=($(compgen -W "${opts}" -- ${cur}))
+		;;
+		modifyrepo | mr)
+      opts=$(LC_ALL=C $ZYPPER help $prev 2>&1 | sed -e "1,/$magic_string/d" -e 's/.*--/--/' -e 's/ .*//')
+      opts2=$(LC_ALL=C $ZYPPER  lr | sed -e '1,2 d' -e 's/^[0-9]\+[[:space:]]\+|[[:space:]]*\([^|]\+\)|.*$/\1/' -e 's/[[:space:]]*$//'  -e 's/ /\\ /g' -e "s/^\(.*\)$/'\1'/")
+      opts="${opts} ${opts2}"
+      COMPREPLY=($(compgen -W "${opts}" -- ${cur}))
+		;;
+		refresh | ref)
+      opts=$(LC_ALL=C $ZYPPER help $prev 2>&1 | sed -e "1,/$magic_string/d" -e 's/.*--/--/' -e 's/ .*//')
+      COMPREPLY=($(compgen -W "${opts}" -- ${cur}))
+		;;
+		clean)
+      opts=$(LC_ALL=C $ZYPPER help $prev 2>&1 | sed -e "1,/$magic_string/d" -e 's/.*--/--/' -e 's/ .*//')
+      COMPREPLY=($(compgen -W "${opts}" -- ${cur}))
+		;;
+		services | ls)
+      opts=$(LC_ALL=C $ZYPPER help $prev 2>&1 | sed -e "1,/$magic_string/d" -e 's/.*--/--/' -e 's/ .*//')
+      COMPREPLY=($(compgen -W "${opts}" -- ${cur}))
+		;;
+		addservice | as)
+      opts=$(LC_ALL=C $ZYPPER help $prev 2>&1 | sed -e "1,/$magic_string/d" -e 's/.*--/--/' -e 's/ .*//')
+      opts2=$(LC_ALL=C $ZYPPER  ls | sed -e '1,2 d' -e 's/^[0-9]\+[[:space:]]\+|[[:space:]]*\([^|]\+\)|.*$/\1/' -e 's/[[:space:]]*$//'  -e 's/ /\\ /g' -e "s/^\(.*\)$/'\1'/")
+      opts="${opts} ${opts2}"
+      COMPREPLY=($(compgen -W "${opts}" -- ${cur}))
+		;;
+		modifyservice | ms)
+      opts=$(LC_ALL=C $ZYPPER help $prev 2>&1 | sed -e "1,/$magic_string/d" -e 's/.*--/--/' -e 's/ .*//')
+      opts2=$(LC_ALL=C $ZYPPER  ls | sed -e '1,2 d' -e 's/^[0-9]\+[[:space:]]\+|[[:space:]]*\([^|]\+\)|.*$/\1/' -e 's/[[:space:]]*$//'  -e 's/ /\\ /g' -e "s/^\(.*\)$/'\1'/")
+      opts="${opts} ${opts2}"
+      COMPREPLY=($(compgen -W "${opts}" -- ${cur}))
+		;;
+		removeservice | rs)
+      opts=$(LC_ALL=C $ZYPPER help $prev 2>&1 | sed -e "1,/$magic_string/d" -e 's/.*--/--/' -e 's/ .*//')
+      opts2=$(LC_ALL=C $ZYPPER  ls | sed -e '1,2 d' -e 's/^[0-9]\+[[:space:]]\+|[[:space:]]*\([^|]\+\)|.*$/\1/' -e 's/[[:space:]]*$//'  -e 's/ /\\ /g' -e "s/^\(.*\)$/'\1'/")
+      opts="${opts} ${opts2}"
+      COMPREPLY=($(compgen -W "${opts}" -- ${cur}))
+		;;
+		refresh-services | refs)
 			opts=$(LC_ALL=C $ZYPPER help $prev 2>&1 | sed -e "1,/$magic_string/d" -e 's/.*--/--/' -e 's/ .*//')
 			COMPREPLY=($(compgen -W "${opts}" -- ${cur}))
 		;;
-		remove)
+		install | in)
+			opts=$(LC_ALL=C $ZYPPER help $prev 2>&1 | sed -e "1,/$magic_string/d" -e 's/.*--/--/' -e 's/ .*//')
+			COMPREPLY=($(compgen -W "${opts}" -- ${cur}))
+		;;
+		remove | rm)
       opts=$(LC_ALL=C $ZYPPER help $prev 2>&1 | sed -e "1,/$magic_string/d" -e 's/.*--/--/' -e 's/ .*//')
       COMPREPLY=($(compgen -W "${opts}" -- ${cur}))
 		;;
-		search)
+		verify | ve)
       opts=$(LC_ALL=C $ZYPPER help $prev 2>&1 | sed -e "1,/$magic_string/d" -e 's/.*--/--/' -e 's/ .*//' | grep -v '*')
       COMPREPLY=($(compgen -W "${opts}" -- ${cur}))
 		;;
-		repos)
+		source-install | si)
+      opts=$(LC_ALL=C $ZYPPER help $prev 2>&1 | sed -e "1,/$magic_string/d"  -e 's/.*--/--/' -e 's/ .*//')
+      COMPREPLY=($(compgen -W "${opts}" -- ${cur}))
+		;;
+		install-new-recommends | inr)
+      opts=$(LC_ALL=C $ZYPPER help $prev 2>&1 | sed -e "1,/$magic_string/d"  -e 's/.*--/--/' -e 's/ .*//')
+      COMPREPLY=($(compgen -W "${opts}" -- ${cur}))
+		;;
+		update | up)
+      opts=$(LC_ALL=C $ZYPPER help $prev 2>&1 | sed -e "1,/$magic_string/d"  -e 's/.*--/--/' -e 's/ .*//')
+      COMPREPLY=($(compgen -W "${opts}" -- ${cur}))
+		;;
+		list-updates | lup)
       opts=$(LC_ALL=C $ZYPPER help $prev 2>&1 | sed -e "1,/$magic_string/d" -e 's/.*--/--/' -e 's/ .*//')
       COMPREPLY=($(compgen -W "${opts}" -- ${cur}))
 		;;
-		addrepo)
-      opts=$(LC_ALL=C $ZYPPER help $prev 2>&1 | sed -e "1,/$magic_string/d" -e 's/.*--/--/' -e 's/ .*//')
-      COMPREPLY=($(compgen -W "${opts}" -- ${cur}))
-		;;
-		removerepo)
-      opts=$(LC_ALL=C $ZYPPER help $prev 2>&1 | sed -e "1,/$magic_string/d" -e 's/.*--/--/' -e 's/ .*//')
-      opts2=$(LC_ALL=C $ZYPPER  lr | sed -e '1,2 d' -e 's/^[0-9]\+[[:space:]]\+|[[:space:]]*\([^|]\+\)|.*$/\1/' -e 's/[[:space:]]*$//'  -e 's/ /\\ /g' -e "s/^\(.*\)$/'\1'/")
-      opts="${opts} ${opts2}"
-      COMPREPLY=($(compgen -W "${opts}" -- ${cur}))
-		;;
-		renamerepo)
-      opts=$(LC_ALL=C $ZYPPER help $prev 2>&1 | sed -e "1,/$magic_string/d" -e 's/.*--/--/' -e 's/ .*//')
-      opts2=$(LC_ALL=C $ZYPPER  lr | sed -e '1,2 d' -e 's/^[0-9]\+[[:space:]]\+|[[:space:]]*\([^|]\+\)|.*$/\1/' -e 's/[[:space:]]*$//'  -e 's/ /\\ /g' -e "s/^\(.*\)$/'\1'/")
-      opts="${opts} ${opts2}"
-      COMPREPLY=($(compgen -W "${opts}" -- ${cur}))
-		;;
-		modifyrepo)
-      opts=$(LC_ALL=C $ZYPPER help $prev 2>&1 | sed -e "1,/$magic_string/d" -e 's/.*--/--/' -e 's/ .*//')
-      opts2=$(LC_ALL=C $ZYPPER  lr | sed -e '1,2 d' -e 's/^[0-9]\+[[:space:]]\+|[[:space:]]*\([^|]\+\)|.*$/\1/' -e 's/[[:space:]]*$//'  -e 's/ /\\ /g' -e "s/^\(.*\)$/'\1'/")
-      opts="${opts} ${opts2}"
-      COMPREPLY=($(compgen -W "${opts}" -- ${cur}))
-		;;
-		services)
-      opts=$(LC_ALL=C $ZYPPER help $prev 2>&1 | sed -e "1,/$magic_string/d" -e 's/.*--/--/' -e 's/ .*//')
-      COMPREPLY=($(compgen -W "${opts}" -- ${cur}))
-		;;
-		refresh)
-      opts=$(LC_ALL=C $ZYPPER help $prev 2>&1 | sed -e "1,/$magic_string/d" -e 's/.*--/--/' -e 's/ .*//')
-      COMPREPLY=($(compgen -W "${opts}" -- ${cur}))
-		;;
-		patch_check)
-      opts=$(LC_ALL=C $ZYPPER help $prev 2>&1 | sed -e "1,/$magic_string/d" -e 's/.*--/--/' -e 's/ .*//')
-      COMPREPLY=($(compgen -W "${opts}" -- ${cur}))
-		;;
-		patches)
+		patch)
       opts=$(LC_ALL=C $ZYPPER help $prev 2>&1 | sed -e "1,/$magic_string/d" -e 's/.*--/--/' -e 's/ .*//')
       COMPREPLY=($(compgen -W "${opts}" -- ${cur}))
 		;;
@@ -91,32 +128,70 @@ _zypper() {
       opts=$(LC_ALL=C $ZYPPER help $prev 2>&1 | sed -e "1,/$magic_string/d" -e 's/.*--/--/' -e 's/ .*//')
       COMPREPLY=($(compgen -W "${opts}" -- ${cur}))
 		;;
-		xml-updates)
-      opts=$(LC_ALL=C $ZYPPER help $prev 2>&1 | sed -e "1,/$magic_string/d" -e 's/.*--/--/' -e 's/ .*//')
-      COMPREPLY=($(compgen -W "${opts}" -- ${cur}))
-		;;
-		update)
+		dist-upgrade | dup)
       opts=$(LC_ALL=C $ZYPPER help $prev 2>&1 | sed -e "1,/$magic_string/d"  -e 's/.*--/--/' -e 's/ .*//')
       COMPREPLY=($(compgen -W "${opts}" -- ${cur}))
 		;;
-		info)
+		patch-check | pchk)
       opts=$(LC_ALL=C $ZYPPER help $prev 2>&1 | sed -e "1,/$magic_string/d"  -e 's/.*--/--/' -e 's/ .*//')
+      COMPREPLY=($(compgen -W "${opts}" -- ${cur}))
+		;;
+		search | se)
+      opts=$(LC_ALL=C $ZYPPER help $prev 2>&1 | sed -e "1,/$magic_string/d" -e 's/.*--/--/' -e 's/ .*//' | grep -v '*')
+      COMPREPLY=($(compgen -W "${opts}" -- ${cur}))
+		;;
+		info | if)
+      opts=$(LC_ALL=C $ZYPPER help $prev 2>&1 | sed -e "1,/$magic_string/d" -e 's/.*--/--/' -e 's/ .*//' | grep -v '*')
       COMPREPLY=($(compgen -W "${opts}" -- ${cur}))
 		;;
 		patch-info)
+      COMPREPLY=""
       return 0
 		;;
-		source-install)
-      opts=$(LC_ALL=C $ZYPPER help $prev 2>&1 | sed -e "1,/$magic_string/d"  -e 's/.*--/--/' -e 's/ .*//')
+		pattern-info)
+      COMPREPLY=""
+      return 0
+		;;
+		product-info)
+      COMPREPLY=""
+      return 0
+		;;
+		patches | pch)
+      opts=$(LC_ALL=C $ZYPPER help $prev 2>&1 | sed -e "1,/$magic_string/d" -e 's/.*--/--/' -e 's/ .*//')
+      COMPREPLY=($(compgen -W "${opts}" -- ${cur}))
+		;;
+		packages | pa)
+      opts=$(LC_ALL=C $ZYPPER help $prev 2>&1 | sed -e "1,/$magic_string/d" -e 's/.*--/--/' -e 's/ .*//')
+      COMPREPLY=($(compgen -W "${opts}" -- ${cur}))
+		;;
+		patterns | pt)
+      opts=$(LC_ALL=C $ZYPPER help $prev 2>&1 | sed -e "1,/$magic_string/d" -e 's/.*--/--/' -e 's/ .*//')
+      COMPREPLY=($(compgen -W "${opts}" -- ${cur}))
+		;;
+		products | pd)
+      opts=$(LC_ALL=C $ZYPPER help $prev 2>&1 | sed -e "1,/$magic_string/d" -e 's/.*--/--/' -e 's/ .*//')
+      COMPREPLY=($(compgen -W "${opts}" -- ${cur}))
+		;;
+		what-provides | wp)
+      opts=$(LC_ALL=C $ZYPPER help $prev 2>&1 | sed -e "1,/$magic_string/d" -e 's/.*--/--/' -e 's/ .*//')
+      COMPREPLY=($(compgen -W "${opts}" -- ${cur}))
+		;;
+		addlock | al)
+      opts=$(LC_ALL=C $ZYPPER help $prev 2>&1 | sed -e "1,/$magic_string/d" -e 's/.*--/--/' -e 's/ .*//')
+      COMPREPLY=($(compgen -W "${opts}" -- ${cur}))
+		;;
+		removelock | rl)
+      opts=$(LC_ALL=C $ZYPPER help $prev 2>&1 | sed -e "1,/$magic_string/d" -e 's/.*--/--/' -e 's/ .*//')
+      COMPREPLY=($(compgen -W "${opts}" -- ${cur}))
+		;;
+		locks | ll)
+      opts=$(LC_ALL=C $ZYPPER help $prev 2>&1 | sed -e "1,/$magic_string/d" -e 's/.*--/--/' -e 's/ .*//')
       COMPREPLY=($(compgen -W "${opts}" -- ${cur}))
 		;;
 		"--type")
 						opts="package patch pattern product"
 						COMPREPLY=($(compgen -W "${opts}" -- ${cur}))
 		;;
-		dist-upgrade)
-			opts=$(LC_ALL=C $ZYPPER help $prev 2>&1 | sed -e "1,/$magic_string/d"  -e 's/.*--/--/' -e 's/ .*//')
-			COMPREPLY=($(compgen -W "${opts}" -- ${cur}))
 	esac
 }
 
