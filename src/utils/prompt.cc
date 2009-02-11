@@ -85,14 +85,23 @@ void PromptOptions::setOptionHelp(unsigned int opt, const std::string & help_str
 
 // ----------------------------------------------------------------------------
 
-const std::string ari_mapping[] = { string(_("abort")),string(_("retry")),string(_("ignore"))};
+const std::string ari_mapping[] =
+{
+  string(_("abort")),
+  string(_("retry")),
+  string(_("ignore"))
+};
 
-int read_action_ari_with_timeout (PromptId pid, unsigned timeout,
-    int default_action) {
+#define CLEARLN "\x1B[2K\r"
+
+//! \todo FIXME the replies should be translatable, and the translation of 'a/r/i' should be used
+//! \todo The default values seems to be useless - we always want to auto-return 'retry' in case of no user input.
+int
+read_action_ari_with_timeout(PromptId pid, unsigned timeout, int default_action)
+{
   Zypper & zypper = *Zypper::instance();
-  Out & out = Zypper::instance()->out();
 
-  if (default_action >2 || default_action < 0)
+  if (default_action > 2 || default_action < 0)
   {
     WAR << "bad default action" << endl;
     default_action = 0;
@@ -107,22 +116,22 @@ int read_action_ari_with_timeout (PromptId pid, unsigned timeout,
     return default_action;
   }
 
-  out.info (_("Abort, retry, ignore?\n"));
-
-  //FIXME XML output
-  cout << endl;
+  // FIXME XML output
+  zypper.out().info (_("Abort, retry, ignore?") + string(" [a/r/i]"));
 
   while (timeout)
   {
     char c = 0;
     pollfd pollfds;
-    pollfds.fd = 0; //stdin
-    pollfds.events = POLLIN; //wait only for data to read
+    pollfds.fd = 0; // stdin
+    pollfds.events = POLLIN; // wait only for data to read
 
-    while (poll(&pollfds,1,5)){ //some user input, timeout 5msec
+    while (poll(&pollfds,1,5)) // some user input, timeout 5msec
+    {
       c = getchar();
 #define eat_rest_input() do {} while (getchar()!='\n')
-      switch (c){
+      switch (c)
+      {
         case 'a':
         case 'A':
           eat_rest_input();
@@ -136,14 +145,18 @@ int read_action_ari_with_timeout (PromptId pid, unsigned timeout,
           eat_rest_input();
           return 2;
         default:
-        WAR << "Unknown char " << c << endl;
+          WAR << "Unknown char " << c << endl;
       }
     }
 
-    //FIXME XML output
-    cout << "\r";
-    cout << boost::str(format(_("autoselect %s after %u ")) % ari_mapping[default_action]
-      % timeout); //! \todo fix english after 11.0
+    // FIXME XML output
+    cout << CLEARLN;
+    cout <<
+      format(
+        _PL("Autoselecting '%s' after %u second.",
+            "Autoselecting '%s' after %u seconds.",
+            timeout))
+        % ari_mapping[default_action] % timeout;
     cout.flush();
 
     sleep(1);
