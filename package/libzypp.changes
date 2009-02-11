@@ -1,4 +1,11 @@
 -------------------------------------------------------------------
+Wed Feb 11 13:31:03 CET 2009 - ma@suse.de
+
+- Follow IEC and use the binary prefixes (KiB,MiB,GiB) for printing Byte 
+  counts based on a power of 1024 (formerly just K,M,G). Byte counts based 
+  on a power of 1000 stay unaffected (kB,MB,GB).
+
+-------------------------------------------------------------------
 Mon Feb  9 13:14:26 CET 2009 - ma@suse.de
 
 - Fix installation prompting for the wrong CD/DVD. (bnc #472892)

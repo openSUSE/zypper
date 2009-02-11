@@ -20,10 +20,10 @@ namespace zypp
 { /////////////////////////////////////////////////////////////////
 
   const ByteCount::Unit ByteCount::B( 1LL, "B", 0 );
-  const ByteCount::Unit ByteCount::K( 1024LL, "K", 1 );
-  const ByteCount::Unit ByteCount::M( 1048576LL, "M", 1 );
-  const ByteCount::Unit ByteCount::G( 1073741824LL, "G", 2 );
-  const ByteCount::Unit ByteCount::T( 1099511627776LL, "T", 3 );
+  const ByteCount::Unit ByteCount::K( 1024LL, "KiB", 1 );
+  const ByteCount::Unit ByteCount::M( 1048576LL, "MiB", 1 );
+  const ByteCount::Unit ByteCount::G( 1073741824LL, "GiB", 2 );
+  const ByteCount::Unit ByteCount::T( 1099511627776LL, "TiB", 3 );
 
   const ByteCount::Unit ByteCount::kB( 1000LL, "kB", 1 );
   const ByteCount::Unit ByteCount::MB( 1000000LL, "MB", 1 );
