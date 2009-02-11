@@ -85,16 +85,8 @@ void PromptOptions::setOptionHelp(unsigned int opt, const std::string & help_str
 
 // ----------------------------------------------------------------------------
 
-const std::string ari_mapping[] =
-{
-  string(_("abort")),
-  string(_("retry")),
-  string(_("ignore"))
-};
-
 #define CLEARLN "\x1B[2K\r"
 
-//! \todo FIXME the replies should be translatable, and the translation of 'a/r/i' should be used
 //! \todo The default values seems to be useless - we always want to auto-return 'retry' in case of no user input.
 int
 read_action_ari_with_timeout(PromptId pid, unsigned timeout, int default_action)
@@ -116,51 +108,65 @@ read_action_ari_with_timeout(PromptId pid, unsigned timeout, int default_action)
     return default_action;
   }
 
-  // FIXME XML output
-  zypper.out().info (_("Abort, retry, ignore?") + string(" [a/r/i]"));
+  PromptOptions poptions(_("a/r/i"), (unsigned int) default_action);
+  zypper.out().prompt(pid, _("Abort, retry, ignore?"), poptions);
+  cout << endl;
 
   while (timeout)
   {
-    char c = 0;
+    char reply = 0;
+    unsigned int reply_int = (unsigned int) default_action;
     pollfd pollfds;
     pollfds.fd = 0; // stdin
     pollfds.events = POLLIN; // wait only for data to read
 
-    while (poll(&pollfds,1,5)) // some user input, timeout 5msec
+    //! \todo poll() reports the file is ready only after it contains newline
+    //!       is there a way to do this without waiting for newline?
+    while (poll(&pollfds, 1, 5)) // some user input, timeout 5msec
     {
-      c = getchar();
-#define eat_rest_input() do {} while (getchar()!='\n')
-      switch (c)
+      reply = getchar();
+      char reply_str[2] = {reply, 0};
+      DBG << " reply: " << reply << " (" << zypp::str::toLower(reply_str) << " lowercase)" << endl;
+      bool got_valid_reply = false;
+      for (unsigned int i = 0; i < poptions.options().size(); i++)
       {
-        case 'a':
-        case 'A':
-          eat_rest_input();
-          return 0;
-        case 'r':
-        case 'R':
-          eat_rest_input();
-          return 1;
-        case 'i':
-        case 'I':
-          eat_rest_input();
-          return 2;
-        default:
-          WAR << "Unknown char " << c << endl;
+        DBG << "index: " << i << " option: " << poptions.options()[i] << endl;
+        if (poptions.options()[i] == zypp::str::toLower(reply_str))
+        {
+          reply_int = i;
+          got_valid_reply = true;
+          break;
+        }
       }
+
+      if (got_valid_reply)
+      {
+        // eat the rest of input
+        do {} while (getchar() != '\n');
+        return reply_int;
+      }
+      else
+        WAR << "Unknown char " << reply << endl;
     }
 
-    // FIXME XML output
-    cout << CLEARLN;
-    cout <<
+    string msg = boost::str(
       format(
         _PL("Autoselecting '%s' after %u second.",
             "Autoselecting '%s' after %u seconds.",
             timeout))
-        % ari_mapping[default_action] % timeout;
-    cout.flush();
+      % poptions.options()[default_action] % timeout
+    );
+
+    if (zypper.out().type() == Out::TYPE_XML)
+      zypper.out().info(msg); // maybe progress??
+    else
+    {
+      cout << CLEARLN << msg << " ";
+      cout.flush();
+    }
 
     sleep(1);
-    timeout--;
+    --timeout;
   }
 
   return default_action;
