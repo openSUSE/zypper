@@ -10,7 +10,7 @@ _zypper() {
 	local magic_string="Command options:"
 	local opts cur prev prevprev
 	if test ${#ZYPPER_CMDLIST[*]} = 0; then
-		for foo in $(LC_ALL=C $ZYPPER -h | sed -e "1,/Commands:/d" | awk -F ' ' '{print $1}' | sed -e 's/,//' -e 's/[[:upper:]].*//'); do
+		for foo in $(LC_ALL=C $ZYPPER -h | sed -e "1,/Commands:/d" | awk -F ' ' '{print $1} {print $2}' | sed -e 's/,//' -e 's/[[:upper:]].*//'); do
 			ZYPPER_CMDLIST="$ZYPPER_CMDLIST $foo"
 		done
 	fi
@@ -69,6 +69,10 @@ _zypper() {
       opts=$(LC_ALL=C $ZYPPER help $prev 2>&1 | sed -e "1,/$magic_string/d" -e 's/.*--/--/' -e 's/ .*//')
       opts2=$(LC_ALL=C $ZYPPER  lr | sed -e '1,2 d' -e 's/^[0-9]\+[[:space:]]\+|[[:space:]]*\([^|]\+\)|.*$/\1/' -e 's/[[:space:]]*$//'  -e 's/ /\\ /g' -e "s/^\(.*\)$/'\1'/")
       opts="${opts} ${opts2}"
+      COMPREPLY=($(compgen -W "${opts}" -- ${cur}))
+		;;
+		services)
+      opts=$(LC_ALL=C $ZYPPER help $prev 2>&1 | sed -e "1,/$magic_string/d" -e 's/.*--/--/' -e 's/ .*//')
       COMPREPLY=($(compgen -W "${opts}" -- ${cur}))
 		;;
 		refresh)
