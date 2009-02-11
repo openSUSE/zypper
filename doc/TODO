@@ -1,5 +1,21 @@
 1.1.x - development releases
+
++ configuration file (.zypperrc)
++ nice overall install progress with ETA
++ improved install summary, extended info available via prompt options
+  + show version/arch/vendor changes
+  + show recommended and suggested packages
+  + show changelog for selected packages or the whole update
+  + show graphical (schubi's widget) or ascii dependency tree of the packages
+    in the summary
+  + explain why a package has been selected for installation/removal
+  + and more...
++ --from option for the installing commands (in/up/patch/dup/inr/verify)
++ add help texts for all prompts
++ options to install/remove packages recommended/suggested packages
+
 1.0.x - bugfixing for SLE11 and openSUSE 11.1
+
 
 NOT SCHEDULED
 -------------
@@ -9,28 +25,20 @@ NOT SCHEDULED
 
 General
 
-+ configuration file (.zypperrc)
-+ nice overall install progress
-+ improved install summary, extended info available via prompt options
-  + show version/arch/vendor changes
-  + show recommended and suggested packages
-  + show changelog for selected packages or the whole update
-  + and more...
 + more options in the media error prompt (e.g. eject CD)
 + testsuite
-+ add help texts for prompts
 ? xml input (feed an xml with operation specification to zypper)
 ? move -vv output to zypper.log, leave only normal and verbose output levels?
   -vv e.g. displays full urls of downloaded files
+? remake --force to do what user intuitively expects, needs to be defined, e.g.
+  - reinstall instead of saying "already installed"
+  - downgrade/upgrade from specified repo if --repo foo --force is used
+  - etc...
 
 Updating
 
 + cron updater: wrapper script for restart-packager after packager-affecting
   patches have been installed
-+ zypper up --some-option repofoo (like 'rug up repo'?) - update
-  packages from specified repos without disabling the others
-+ zypper lu --some-option to make it list any newer versions of installed
-  packages, regardless whether they are installable or not.
 
 Packages
 
@@ -44,4 +52,3 @@ Packages
 Patterns
 
 + implement pattern removal
-+ options to install/remove packages recommended/suggested packages

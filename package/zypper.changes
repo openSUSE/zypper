@@ -1,4 +1,13 @@
 -------------------------------------------------------------------
+Wed Feb 11 14:12:09 CET 2009 - jkupec@suse.cz
+
+- Bash completion improved, allows completion after command
+  shorthands, multiple options, option shorthands, repository
+  aliases. (jreidinger)
+- Avoiding reading of input in a/r/i prompt with timeout in
+  non-interactive mode (bnc #469872)
+
+-------------------------------------------------------------------
 Tue Jan 27 14:06:56 CET 2009 - jkupec@suse.cz
 
 - Adapted authetication callback for non-curl URLs (bnc #460970)
