@@ -96,7 +96,8 @@ _zypper() {
       return 0
 		;;
 		source-install)
-      return 0
+      opts=$(LC_ALL=C $ZYPPER help $prev 2>&1 | sed -e "1,/$magic_string/d"  -e 's/.*--/--/' -e 's/ .*//')
+      COMPREPLY=($(compgen -W "${opts}" -- ${cur}))
 		;;
 		"--type")
 						opts="package patch pattern product"
