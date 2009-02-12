@@ -10,7 +10,7 @@ _zypper() {
 	local magic_string="Command options:"
 	local opts opts2 cur prev command ITER
 	if test ${#ZYPPER_CMDLIST[*]} = 0; then
-		for foo in $(LC_ALL=C $ZYPPER -h | sed -e "1,/Commands:/d" | awk -F ' ' '{print $1} {print $2}' | sed -e 's/,//' -e 's/[[:upper:]].*//'); do
+		for foo in $(LC_ALL=C $ZYPPER -h | sed -e "1,/Commands:/d" -e "/\t\t\t\t/d" | awk -F ' ' '{print $1} {print $2}' | sed -e 's/,//' -e 's/[[:upper:]].*//'); do
 			ZYPPER_CMDLIST="${ZYPPER_CMDLIST} $foo"
 		done
 		ZYPPER_CMDLIST="${ZYPPER_CMDLIST} "
