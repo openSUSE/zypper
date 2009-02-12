@@ -70,6 +70,10 @@ _zypper() {
       				opts2=$(LC_ALL=C $ZYPPER  ls | sed -e '1,2 d' -e 's/^[0-9]\+[[:space:]]\+|[[:space:]]*\([^|]\+\)|.*$/\1/' -e 's/[[:space:]]*$//'  -e 's/ /\\ /g' -e "s/^\(.*\)$/'\1'/")
 				opts="${opts} ${opts2}"
 			;;
+			removelock | rl)
+				opts2=$(LC_ALL=C $ZYPPER  ll | sed -e '1,2 d' | cut -d '|' -f 2)
+				opts="${opts} ${opts2}"
+			;;
 		esac
 			
 		COMPREPLY=($(compgen -W "${opts}" -- ${cur}))
