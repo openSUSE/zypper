@@ -48,7 +48,8 @@ _zypper() {
 	
 	if [[ "$command" =~ "zypper" ]]; then
 		opts=$ZYPPER_CMDLIST
-#TODO generate also global options
+      		opts2=$(LC_ALL=C $ZYPPER help 2>&1 | sed -e "1,/Global Options:/d" -e "/Commands:/,$ d" -e 's/.*--/--/' -e 's/[,[:space:]].*//' -e '/^$/d')
+		opts="${opts} ${opts2}"
 		COMPREPLY=($(compgen -W "${opts}" -- ${cur}))
 		return 0;
 	fi
