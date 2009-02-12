@@ -1,4 +1,15 @@
 -------------------------------------------------------------------
+Thu Feb 12 09:28:00 CET 2009 - jkupec@suse.cz
+
+- Bash completion: added completion of global options and
+  locks for removelock command (jreidinger)
+
+-------------------------------------------------------------------
+Thu Feb 12 09:14:18 CET 2009 - jkupec@suse.cz
+
+- Fixed localization and xml output of a/r/i prompt with timeout.
+
+-------------------------------------------------------------------
 Wed Feb 11 14:12:09 CET 2009 - jkupec@suse.cz
 
 - Bash completion improved, allows completion after command
