@@ -852,9 +852,7 @@ namespace zypp
     // ---------------------------------------------------------------
     void
     MediaManager::provideFile(MediaAccessId   accessId,
-                              const Pathname &filename,
-                              bool            cached,
-                              bool            checkonly) const
+                              const Pathname &filename ) const
     {
       MutexLock glock(g_Mutex);
 
@@ -862,7 +860,7 @@ namespace zypp
 
       ref.checkDesired(accessId);
 
-      ref.handler->provideFile(filename, cached, checkonly);
+      ref.handler->provideFile(filename);
     }
 
     // ---------------------------------------------------------------

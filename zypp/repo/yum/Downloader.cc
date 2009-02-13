@@ -125,27 +125,23 @@ void Downloader::download( MediaSetAccess &media,
 #warning Do we need SignatureFileChecker(string descr)?
   SignatureFileChecker sigchecker/*(repoInfo().name())*/;
 
-  if ( _media_ptr->doesFileExist(sigpath) )
+  this->enqueue( OnMediaLocation(sigpath,1).setOptional(true) );
+  this->start( dest_dir, *_media_ptr);
+  // only add the signature if it exists
+  if ( PathInfo(dest_dir / sigpath).isExist() )
+      sigchecker = SignatureFileChecker(dest_dir / sigpath);
+  this->reset();
+
+  this->enqueue( OnMediaLocation(keypath,1).setOptional(true) );
+  this->start( dest_dir, *_media_ptr);
+    // only add the key if it exists
+  if ( PathInfo(dest_dir / keypath).isExist() )
   {
-     this->enqueue( OnMediaLocation(sigpath,1).setOptional(true) );
-     this->start( dest_dir, *_media_ptr);
-     this->reset();
-     sigchecker = SignatureFileChecker(dest_dir + sigpath);
+      KeyContext context;
+      context.setRepoInfo(repoInfo());
+      sigchecker.addPublicKey(dest_dir + keypath, context);
   }
-
-
-  if ( _media_ptr->doesFileExist(keypath) )
-  {
-    KeyContext context;
-    context.setRepoInfo(repoInfo());
-    this->enqueue( OnMediaLocation(keypath,1).setOptional(true) );
-    this->start( dest_dir, *_media_ptr);
-    this->reset();
-    sigchecker.addPublicKey(dest_dir + keypath, context);
-  }
-
-
-  this->start( dest_dir, *_media_ptr );
+  this->reset();
 
   if ( ! progress.tick() )
     ZYPP_THROW(AbortRequestException());

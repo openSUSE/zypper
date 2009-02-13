@@ -117,21 +117,33 @@ IMPL_PTR_TYPE(MediaSetAccess);
     media_mgr.dirInfo(media, retlist, dirname, dots);
   }
 
-  Pathname MediaSetAccess::provideFile( const OnMediaLocation & on_media_file )
+  Pathname MediaSetAccess::provideFile( const OnMediaLocation & resource, ProvideFileOptions options )
   {
-    return provideFile( on_media_file.filename(), on_media_file.medianr() );
+    return provide( ProvideFile, resource, options );
   }
 
-
-  Pathname MediaSetAccess::provideFile(const Pathname & file, unsigned media_nr )
+  Pathname MediaSetAccess::provideFile(const Pathname & file, unsigned media_nr, ProvideFileOptions options )
   {
-    return provideFileInternal( file, media_nr, false, false);
+    OnMediaLocation resource;
+    resource.setLocation(file, media_nr);
+    return provide( ProvideFile, resource, options );
   }
 
   Pathname MediaSetAccess::provideOptionalFile(const Pathname & file, unsigned media_nr )
   {
-    return provideFileInternal( file, media_nr, false, true);
+    OnMediaLocation resource;
+    resource.setLocation(file, media_nr);
+    Pathname ret;
+    try {
+        ret = provide(ProvideFile, resource, NON_INTERACTIVE);
+    }
+    catch ( const Exception &e )
+    {
+        ZYPP_CAUGHT(e);
+    }
+    return ret;
   }
+
 
   bool MediaSetAccess::doesFileExist(const Pathname & file, unsigned media_nr )
   {
@@ -139,7 +151,6 @@ IMPL_PTR_TYPE(MediaSetAccess);
     media::MediaManager media_mgr;
 
     bool exists = false;
-
     do
     {
       // get the mediaId, but don't try to attach it here
@@ -256,8 +267,13 @@ IMPL_PTR_TYPE(MediaSetAccess);
     return exists;
   }
 
-  Pathname MediaSetAccess::provideFileInternal(const Pathname & file, unsigned media_nr, bool cached, bool checkonly )
+  Pathname MediaSetAccess::provide( ProvideAction action,
+                                    const OnMediaLocation &resource,
+                                    ProvideFileOptions options )
   {
+    Pathname file(resource.filename());
+    unsigned media_nr(resource.medianr());
+      
     callback::SendReport<media::MediaChangeReport> report;
     media::MediaManager media_mgr;
 
@@ -275,7 +291,18 @@ IMPL_PTR_TYPE(MediaSetAccess);
         // try to attach the media
         if ( ! media_mgr.isAttached(media) )
           media_mgr.attachDesiredMedia(media);
-        media_mgr.provideFile (media, file, false, false);
+
+        switch (action)
+        {
+        case ProvideFile:
+            media_mgr.provideFile (media, file); break;
+        case ProvideDir:
+            media_mgr.provideDir (media, file); break;
+        case ProvideDirRecursive:
+            media_mgr.provideDirTree(media, file); break;
+        default:
+            ZYPP_THROW(Exception("Unknown action"));
+        }
         break;
       }
       catch ( media::MediaException & excp )
@@ -321,9 +348,12 @@ IMPL_PTR_TYPE(MediaSetAccess);
             reason = media::MediaChangeReport::IO_SOFT;
           }
 
-          // checkonly: only bother the user if wrong medium is in the drive
-          if (checkonly && reason != media::MediaChangeReport::WRONG)
-            return Pathname();
+          // non interactive only bother the user if wrong medium is in the drive
+          // otherwise propagate the error
+          if ( ( options & NON_INTERACTIVE ) && reason != media::MediaChangeReport::WRONG)
+          {
+              ZYPP_RETHROW(excp);
+          }
           else
           {
             // release all media before requesting another (#336881)
@@ -345,15 +375,11 @@ IMPL_PTR_TYPE(MediaSetAccess);
           if( user == media::MediaChangeReport::ABORT )
           {
             DBG << "Aborting" << endl;
-            if (checkonly)
-              return Pathname();
             ZYPP_RETHROW ( excp );
           }
           else if ( user == media::MediaChangeReport::IGNORE )
           {
             DBG << "Skipping" << endl;
-            if (checkonly)
-              return Pathname();
 	    SkipRequestException nexcp("User-requested skipping of a file");
 	    nexcp.remember(excp);
 	    ZYPP_THROW(nexcp);
@@ -382,8 +408,6 @@ IMPL_PTR_TYPE(MediaSetAccess);
           else
           {
             DBG << "Don't know, let's ABORT" << endl;
-            if (checkonly)
-              return Pathname();
             ZYPP_RETHROW ( excp );
           }
         } while( user == media::MediaChangeReport::EJECT );
@@ -398,127 +422,13 @@ IMPL_PTR_TYPE(MediaSetAccess);
 
   Pathname MediaSetAccess::provideDir(const Pathname & dir,
                                       bool recursive,
-                                      unsigned media_nr)
+                                      unsigned media_nr,
+                                      ProvideFileOptions options )
   {
-    callback::SendReport<media::MediaChangeReport> report;
-    media::MediaManager media_mgr;
-    media::MediaAccessId _media;
+    OnMediaLocation resource;
+    resource.setLocation(dir, media_nr);
 
-    do
-    {
-      // get the mediaId, but don't try to attach it here
-      _media = getMediaAccessId(media_nr);
-
-      try
-      {
-        DBG << "Going to try provide direcotry " << dir
-            << (recursive ? " (recursively)" : "")
-            << " from media nr. " << media_nr << endl;
-
-        // try to attach the media
-        if (!media_mgr.isAttached(_media))
-          media_mgr.attachDesiredMedia(_media);
-
-        _media = getMediaAccessId(media_nr); // in case of redirect
-
-        if (recursive)
-          media_mgr.provideDirTree(_media, dir);
-        else
-          media_mgr.provideDir(_media, dir);
-
-        break; // quit the retry loop
-      }
-      catch (media::MediaException & excp)
-      {
-        ZYPP_CAUGHT(excp);
-        media::MediaChangeReport::Action user;
-
-        do
-        {
-          DBG << "Media couldn't provide dir " << dir << ", releasing." << endl;
-          try
-          {
-            media_mgr.release (_media);
-          }
-          catch (const Exception & excpt_r)
-          {
-            ZYPP_CAUGHT(excpt_r);
-            ERR << "Failed to release media " << _media << endl;
-          }
-
-          // set up the reason
-          media::MediaChangeReport::Error reason = media::MediaChangeReport::INVALID;
-
-          if (typeid(excp) == typeid(media::MediaFileNotFoundException)
-              || typeid(excp) == typeid(media::MediaNotAFileException))
-          {
-            reason = media::MediaChangeReport::NOT_FOUND;
-          }
-          else if (typeid(excp) == typeid( media::MediaNotDesiredException)
-              || typeid(excp) == typeid(media::MediaNotAttachedException))
-          {
-            reason = media::MediaChangeReport::WRONG;
-          }
-
-          vector<string> devices;
-          unsigned int devindex;
-          media_mgr.getDetectedDevices(_media, devices, devindex);
-
-          // release all media before requesting another (#336881)
-          media_mgr.releaseAll();
-
-          user = report->requestMedia(_url,
-                                      media_nr,
-                                      _label,
-                                      reason,
-                                      excp.asUserString(),
-                                      devices,
-                                      devindex);
-
-          MIL << "ProvideDir exception caught, callback answer: " << user << endl;
-
-          if (user == media::MediaChangeReport::ABORT)
-          {
-            DBG << "Aborting" << endl;
-            ZYPP_RETHROW ( excp );
-          }
-          //! \todo FIXME media::MediaChangeReport::IGNORE handling
-          else if (user == media::MediaChangeReport::EJECT)
-          {
-            DBG << "Eject: try to release" << endl;
-            media_mgr.releaseAll();
-            // eject
-            media_mgr.release (_media,
-              devindex < devices.size() ? devices[devindex] : "");
-          }
-          else if (user == media::MediaChangeReport::RETRY ||
-              user == media::MediaChangeReport::CHANGE_URL)
-          {
-            // retry
-            DBG << "Going to try again" << endl;
-            // invalidate current media access id
-            media_mgr.close(_media);
-            _medias.erase(media_nr);
-
-            // not attaching, media set will do that for us
-            // this could generate uncaught exception (#158620)
-
-            break;
-          }
-          else
-          {
-            DBG << "Don't know, let's ABORT" << endl;
-
-            ZYPP_RETHROW (excp);
-          }
-        }
-        while (user == media::MediaChangeReport::EJECT);
-      }
-      // retry or change URL
-    }
-    while (true);
-
-    return media_mgr.localPath(_media, dir);
+    return provide( recursive? ProvideDir : ProvideDirRecursive, resource, options );
   }
 
   media::MediaAccessId MediaSetAccess::getMediaAccessId (media::MediaNr medianr)

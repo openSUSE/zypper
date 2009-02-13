@@ -51,25 +51,26 @@ void Downloader::download( MediaSetAccess &media,
   SignatureFileChecker sigchecker/*(repoInfo().name())*/;
 
   Pathname sig = repoInfo().path() + "/content.asc";
-  if ( media.doesFileExist(sig) )
-  {
-    this->enqueue( OnMediaLocation( sig, 1 ) );
-    this->start( dest_dir, media );
-    this->reset();
 
-    sigchecker = SignatureFileChecker( dest_dir + sig/*, repoInfo().name() */);
-  }
+  this->enqueue( OnMediaLocation( sig, 1 ) );
+  this->start( dest_dir, media );
+  // only if there is a signature in the destination directory
+  if ( PathInfo(dest_dir / sig ).isExist() )
+      sigchecker = SignatureFileChecker( dest_dir + sig/*, repoInfo().name() */);
+  this->reset();
 
   Pathname key = repoInfo().path() + "/content.key";
-  if ( media.doesFileExist(key) )
+
+  this->enqueue( OnMediaLocation( key, 1 ) );
+  this->start( dest_dir, media );
+  // only if there is a key in the destination directory
+  if ( PathInfo(dest_dir / key).isExist() )
   {
     KeyContext context;
     context.setRepoInfo(repoInfo());
-    this->enqueue( OnMediaLocation( key, 1 ) );
-    this->start( dest_dir, media );
-    this->reset();
     sigchecker.addPublicKey(dest_dir + key, context);
   }
+  this->reset();
 
   if ( ! repoInfo().gpgCheck() )
   {

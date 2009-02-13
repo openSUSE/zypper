@@ -17,6 +17,7 @@
 
 #include "zypp/base/ReferenceCounted.h"
 #include "zypp/base/NonCopyable.h"
+#include "zypp/base/Flags.h"
 #include "zypp/base/PtrTypes.h"
 #include "zypp/media/MediaManager.h"
 #include "zypp/Pathname.h"
@@ -107,10 +108,20 @@ namespace zypp
       void setLabel( const std::string & label_r )
       { _label = label_r; }
 
+      enum ProvideFileOption
+      {
+        /**
+         * The user is not asked anything, and the error
+         * exception is just propagated */
+        NONE = 0x0,
+        NON_INTERACTIVE = 0x1
+      };
+      ZYPP_DECLARE_FLAGS(ProvideFileOptions,ProvideFileOption);
+
       /**
        * Provides a file from a media location.
        *
-       * \param on_media_file location of the file on media
+       * \param resource location of the file on media
        * \return local pathname of the requested file
        *
        * \throws MediaException if a problem occured and user has chosen to
@@ -120,9 +131,18 @@ namespace zypp
        *         to skip the current operation. The calling code should continue
        *         with the next one, if possible.
        *
+       *
+       * If the resource is marked as optional, no Exception is thrown
+       * and Pathname() is returned
+       *
+       * \note interaction with the user does not ocurr if
+       * \ref ProvideFileOptions::NON_INTERACTIVE is set.
+       *
+       * \note OnMediaLocation::optional() hint has no effect on the transfer.
+       *
        * \see zypp::media::MediaManager::provideFile()
        */
-      Pathname provideFile( const OnMediaLocation & on_media_file );
+      Pathname provideFile( const OnMediaLocation & resource, ProvideFileOptions options = NONE );
 
       /**
        * Provides \a file from media \a media_nr.
@@ -131,6 +151,11 @@ namespace zypp
        * \param media_nr the media number in the media set
        * \return local pathname of the requested file
        *
+       * \note interaction with the user does not ocurr if
+       * \ref ProvideFileOptions::NON_INTERACTIVE is set.
+       *
+       * \note OnMediaLocation::optional() hint has no effect on the transfer.
+       *
        * \throws MediaException if a problem occured and user has chosen to
        *         abort the operation. The calling code should take care
        *         to quit the current operation.
@@ -139,24 +164,32 @@ namespace zypp
        *         with the next one, if possible.
        * \see zypp::media::MediaManager::provideFile()
        */
-      Pathname provideFile(const Pathname & file, unsigned media_nr = 1 );
+      Pathname provideFile(const Pathname & file, unsigned media_nr = 1, ProvideFileOptions options = NONE );
 
       /**
+       * \deprecated
        * The same as provideFile(Pathname,unsigned) but this method does not
        * call the user callbacks, except of the case of
        * wrong media in the drive, and it won't throw an exception in any case.
        *
        * \return Path to the provided file on success, an empty Pathname() otherwise.
+       * This method is obsolete.
+       *
+       * To avoid interaction with the user, 
+       * use \ref provideFile with \ref ProvideFileOptions::NON_INTERACTIVE
+       * as an option. However you need to handle the exceptions yourself
+       * in case of error. If you need ignore functionality, try
+       * \ref Fetcher and set \ref OnMediaLocation::setOptional 
        */
-      Pathname provideOptionalFile( const Pathname & file, unsigned media_nr = 1 );
+      ZYPP_DEPRECATED Pathname provideOptionalFile( const Pathname & file, unsigned media_nr = 1 );
 
       /**
        * Release file from media.
        * This signal that file is not needed anymore.
        *
-       * \param on_media_file location of the file on media
+       * \param resource location of the file on media
        */
-      void releaseFile( const OnMediaLocation & on_media_file );
+      void releaseFile( const OnMediaLocation &resource );
 
 
       /**
@@ -185,7 +218,7 @@ namespace zypp
        * \see zypp::media::MediaManager::provideDir()
        * \see zypp::media::MediaManager::provideDirTree()
        */
-      Pathname provideDir(const Pathname & dir, bool recursive, unsigned media_nr = 1);
+      Pathname provideDir(const Pathname & dir, bool recursive, unsigned media_nr = 1, ProvideFileOptions options = NONE );
 
       /**
        * Checks if a file exists on the specified media, with user callbacks.
@@ -248,7 +281,19 @@ namespace zypp
        *         to skip the current operation. The calling code should continue
        *         with the next one, if possible.
        */
-      Pathname provideFileInternal(const Pathname & file, unsigned media_nr, bool checkonly, bool cached);
+      Pathname provideFileInternal( const OnMediaLocation &resource, ProvideFileOptions options );
+
+      //typedef function<void ( media::MediaAccessId, const Pathname & )> ProvideAction;
+      enum ProvideAction
+      {
+        ProvideFile,
+        ProvideDir,
+        ProvideDirRecursive,
+        ProvideFileExist,
+      };
+
+      Pathname provide( ProvideAction action, const OnMediaLocation &resource, ProvideFileOptions options );
+
       media::MediaAccessId getMediaAccessId (media::MediaNr medianr);
       virtual std::ostream & dumpOn( std::ostream & str ) const;
 
@@ -275,6 +320,7 @@ namespace zypp
       VerifierMap _verifiers;
     };
     ///////////////////////////////////////////////////////////////////
+    ZYPP_DECLARE_OPERATORS_FOR_FLAGS(MediaSetAccess::ProvideFileOptions);
 
     /** \relates MediaSetAccess Stream output */
     inline std::ostream & operator<<( std::ostream & str, const MediaSetAccess & obj )
