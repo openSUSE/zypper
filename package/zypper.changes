@@ -1,4 +1,12 @@
 -------------------------------------------------------------------
+Sun Feb 15 21:58:35 CET 2009 - jkupec@suse.cz
+
+- Writing additional rpm output after installing/removing packages
+  (bnc #369450)
+
+- 1.0.7
+
+-------------------------------------------------------------------
 Tue Jan 27 14:26:27 CET 2009 - jkupec@suse.cz
 
 - Adapted authetication callback for non-curl URLs (bnc #460970)
