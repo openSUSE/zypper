@@ -1,9 +1,10 @@
 -------------------------------------------------------------------
 Sun Feb 15 21:58:35 CET 2009 - jkupec@suse.cz
 
+- Abort/Retry/Ingore prompt fixes (checking for EOF on input,
+  not reading input at all in non-interactive mode) (bnc #469872).
 - Writing additional rpm output after installing/removing packages
   (bnc #369450)
-
 - 1.0.7
 
 -------------------------------------------------------------------
