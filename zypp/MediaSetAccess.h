@@ -13,7 +13,7 @@
 #include <iosfwd>
 #include <string>
 #include <vector>
-#include <boost/function.hpp>
+#include <zypp/base/Function.h>
 
 #include "zypp/base/ReferenceCounted.h"
 #include "zypp/base/NonCopyable.h"
@@ -283,16 +283,9 @@ namespace zypp
        */
       Pathname provideFileInternal( const OnMediaLocation &resource, ProvideFileOptions options );
 
-      //typedef function<void ( media::MediaAccessId, const Pathname & )> ProvideAction;
-      enum ProvideAction
-      {
-        ProvideFile,
-        ProvideDir,
-        ProvideDirRecursive,
-        ProvideFileExist,
-      };
+      typedef function<void( media::MediaAccessId, const Pathname & )> ProvideOperation;
 
-      Pathname provide( ProvideAction action, const OnMediaLocation &resource, ProvideFileOptions options );
+      void provide( ProvideOperation op, const OnMediaLocation &resource, ProvideFileOptions options );
 
       media::MediaAccessId getMediaAccessId (media::MediaNr medianr);
       virtual std::ostream & dumpOn( std::ostream & str ) const;
