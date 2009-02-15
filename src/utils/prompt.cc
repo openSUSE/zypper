@@ -145,6 +145,14 @@ read_action_ari_with_timeout(PromptId pid, unsigned timeout, int default_action)
         do {} while (getchar() != '\n');
         return reply_int;
       }
+      else if (feof(stdin))
+      {
+        zypper.out().info(zypp::str::form(_("Retrying in %u seconds..."), timeout));
+        WAR << "no good input, returning " << default_action
+          << " in " << timeout << " seconds." << endl;
+        sleep(timeout);
+        return default_action;
+      }
       else
         WAR << "Unknown char " << reply << endl;
     }
