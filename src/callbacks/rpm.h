@@ -126,7 +126,7 @@ struct ScanRpmDbReceive : public zypp::callback::ReceiveReport<zypp::target::rpm
 {
   int & _step;				// step counter for install & receive steps
   int last_reported;
-  
+
   ScanRpmDbReceive( int & step )
   : _step( step )
   {
@@ -181,7 +181,7 @@ struct RemoveResolvableReportReceiver : public zypp::callback::ReceiveReport<zyp
     ::clock_gettime(CLOCK_REALTIME, &_last_reported);
     // translators: This text is a progress display label e.g. "Removing packagename-x.x.x [42%]"
     _label = boost::str(boost::format(_("Removing %s-%s"))
-        % resolvable->name() % resolvable->edition()); 
+        % resolvable->name() % resolvable->edition());
     Zypper::instance()->out().progressStart("remove-resolvable", _label);
   }
 
@@ -211,7 +211,14 @@ struct RemoveResolvableReportReceiver : public zypp::callback::ReceiveReport<zyp
       // set proper exit code, don't write to output, the error should have been reported in problem()
       Zypper::instance()->setExitCode(ZYPPER_EXIT_ERR_ZYPP);
     else
+    {
       Zypper::instance()->out().progressEnd("remove-resolvable", _label);
+
+      // print additional rpm output
+      // bnc #369450
+      if (!reason.empty())
+        Zypper::instance()->out().info(reason);
+    }
   }
 };
 
@@ -233,7 +240,7 @@ struct InstallResolvableReportReceiver : public zypp::callback::ReceiveReport<zy
   zypp::Resolvable::constPtr _resolvable;
   std::string _label;
   timespec _last_reported;
- 
+
   void display_step( zypp::Resolvable::constPtr resolvable, int value )
   {
   }
@@ -289,7 +296,14 @@ struct InstallResolvableReportReceiver : public zypp::callback::ReceiveReport<zy
       // don't write to output, the error should have been reported in problem() (bnc #381203)
       Zypper::instance()->setExitCode(ZYPPER_EXIT_ERR_ZYPP);
     else
+    {
       Zypper::instance()->out().progressEnd("install-resolvable", _label);
+
+      // print additional rpm output
+      // bnc #369450
+      if (!reason.empty())
+        Zypper::instance()->out().info(reason);
+    }
   }
 };
 
