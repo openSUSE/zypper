@@ -64,6 +64,8 @@ namespace ZmartRecipients
                  const std::vector<std::string> & devices,
                  unsigned int &                   index)
     {
+      Zypper & zypper = *Zypper::instance();
+
       /*std::cout << "detected devices: ";
       for (std::vector<std::string>::const_iterator it = devices.begin();
            it != devices.end(); ++it)
@@ -71,7 +73,7 @@ namespace ZmartRecipients
       cout << std::endl;*/
       DBG << "media problem, url: " << url.asString() << std::endl;
 
-      Zypper::instance()->out().error(description);
+      zypper.out().error(description);
       if (is_changeable_media(url) && error == MediaChangeReport::WRONG)
       {
         //cerr << endl; // may be in the middle of RepoReport or ProgressReport \todo check this
@@ -98,14 +100,50 @@ namespace ZmartRecipients
           30,action);
       }
 
-      Action action = (Action) read_action_ari(
-          PROMPT_ARI_MEDIA_PROBLEM, MediaChangeReport::ABORT);
+      // translators: a/r/i/u are replies to the "Abort, retry, ignore?" prompt
+      // Translate the a/r/i part exactly as you did the a/r/i string.
+      // the 'u' reply means 'Change URI'.
+      PromptOptions popts(_("a/r/i/u"), 0);
+      // help text for the "Abort, retry, ignore?" prompt for media errors
+      popts.setOptionHelp(0, _("Skip retrieval of the file and abort current operation."));
+      // help text for the "Abort, retry, ignore?" prompt for media errors
+      popts.setOptionHelp(1, _("Try to retrieve the file again."));
+      // help text for the "Abort, retry, ignore?" prompt for media errors
+      popts.setOptionHelp(2, _("Skip retrieval of the file and try to continue with the operation without the file."));
+      // help text for the "Abort, retry, ignore?" prompt for media errors
+      popts.setOptionHelp(3, _("Change current base URI and try retrieving the file again."));
+      // hide advanced options
+      popts.setShownCount(3);
+
+      // translators: this is a prompt text
+      zypper.out().prompt(PROMPT_ARI_MEDIA_PROBLEM, _("Abort, retry, ignore?"), popts);
+      int reply = get_prompt_reply(zypper, PROMPT_ARI_MEDIA_PROBLEM, popts);
+
+      Action action = MediaChangeReport::ABORT;
+      switch (reply)
+      {
+        case 0: /* abort */
+          break;
+        case 3: /* change url */
+        {
+          // translators: this is a prompt label, will appear as "New URI: "
+          zypp::Url newurl(get_text(_("New URI") + std::string(": "), url.asString()));
+          url = newurl;
+        }
+        case 1: /* retry */
+          action = MediaChangeReport::RETRY;
+          break;
+        case 2: /* ignore */
+          action = MediaChangeReport::IGNORE;
+        default:
+          WAR << "invalid prompt reply: " << reply << std::endl;
+      }
 
       // if an rpm download failed and user chose to ignore that, advice to
       // run zypper verify afterwards
       if (action == MediaChangeReport::IGNORE
-          && Zypper::instance()->runtimeData().action_rpm_download
-          && !Zypper::instance()->runtimeData().seen_verify_hint)
+          && zypper.runtimeData().action_rpm_download
+          && !zypper.runtimeData().seen_verify_hint)
         print_verify_hint(Zypper::instance()->out());
 
       return action;
