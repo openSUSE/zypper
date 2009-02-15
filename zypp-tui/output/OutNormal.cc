@@ -252,6 +252,8 @@ void OutNormal::promptHelp(const PromptOptions & poptions)
     for(PromptOptions::StrVector::const_iterator it = poptions.options().begin();
         it != poptions.options().end(); ++it, ++pos)
     {
+      if (poptions.isDisabled(pos))
+        continue;
       cout << *it << " - ";
       const string & hs_r = poptions.optionHelp(pos);
       if (hs_r.empty())
