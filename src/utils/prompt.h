@@ -1,6 +1,8 @@
 #ifndef ZYPPERPROMPT_H_
 #define ZYPPERPROMPT_H_
 
+#include <set>
+
 #include "output/prompt.h"
 #include "main.h" // for gettext macros
 
@@ -45,6 +47,7 @@ public:
   unsigned int defaultOpt() const { return _default; }
   const std::string optionString() const;
   bool empty() const { return _options.empty(); }
+  bool isYesNoPrompt() const;
 
   const std::string optionHelp(unsigned int opt) const
   { static std::string empty; return opt < _opt_help.size() ? _opt_help[opt] : empty; }
@@ -52,10 +55,38 @@ public:
   void setOptionHelp(unsigned int opt, const std::string & help_str);
   bool helpEmpty() const { return _opt_help.empty(); }
 
+  bool isEnabled(unsigned int opt) const
+  { return _disabled.find(opt) == _disabled.end(); }
+  bool isDisabled(unsigned int opt) const
+  { return _disabled.find(opt) != _disabled.end(); }
+  void disable(unsigned int opt)
+  { _disabled.insert(opt); }
+  void enable(unsigned int opt)
+  { _disabled.erase(opt); }
+  void enableAll()
+  { _disabled.clear(); }
+
+  unsigned int shownCount() const
+  { return _shown_count; }
+  void setShownCount(unsigned int count)
+  { _shown_count = count; }
+
+  int getReplyIndex(const std::string & reply) const;
+
 private:
+  /** option strings */
   StrVector _options;
+  /** index of the default option */
   unsigned int _default;
+  /** help strings corresponding to options */
   StrVector _opt_help;
+  /** set of options to ignore */
+  std::set<unsigned int> _disabled;
+  /**
+   * number of options to show (the rest will still be available and visible
+   * through '?' help)
+   */
+  unsigned int _shown_count;
 };
 
 

@@ -74,7 +74,7 @@ void OutXML::info(const string & msg, Verbosity verbosity, Type mask)
 {
   if (infoWarningFilter(verbosity, mask))
     return;
-  
+
   cout << "<message type=\"info\">" << xml_encode(msg)
        << "</message>" << endl;
 }
@@ -123,7 +123,7 @@ void OutXML::writeProgressTag(const string & id, const string & label,
     cout << " done=\"" << error << "\"";
   // print value only if it is known (percentage progress)
   // missing value means 'is-alive' notification
-  else if (value >= 0) 
+  else if (value >= 0)
     cout << " value=\"" << value << "\"";
   cout << "/>" << endl;
 }
@@ -200,6 +200,8 @@ void OutXML::prompt(PromptId id,
   for (PromptOptions::StrVector::const_iterator it = poptions.options().begin();
        it != poptions.options().end(); ++it, ++i)
   {
+    if (poptions.isDisabled(i))
+      continue;
     string option = *it;
     cout << "<option";
     if (poptions.defaultOpt() == i)

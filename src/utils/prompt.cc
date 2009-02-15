@@ -54,8 +54,9 @@ const string PromptOptions::optionString() const
     option_str += (defaultOpt() == 0 ? zypp::str::toUpper(*it) : *it);
     ++it;
   }
-  for (unsigned int i = 1; it != options().end(); ++it, i++)
-    option_str += "/" + (defaultOpt() == i ? zypp::str::toUpper(*it) : *it);
+  for (unsigned int i = 1; it != options().end() && i < _shown_count; ++it, ++i)
+    if (isEnabled(i))
+      option_str += "/" + (defaultOpt() == i ? zypp::str::toUpper(*it) : *it);
 
   if (!_opt_help.empty())
     option_str += "/?";
@@ -82,6 +83,36 @@ void PromptOptions::setOptionHelp(unsigned int opt, const std::string & help_str
 
   _opt_help[opt] = help_str;
 }
+
+
+int PromptOptions::getReplyIndex(const string & reply) const
+{
+  DBG << " reply: " << reply
+    << " (" << zypp::str::toLower(reply) << " lowercase)" << endl;
+
+  unsigned int i = 0;
+  for(StrVector::const_iterator it = _options.begin();
+      it != _options.end(); ++i, ++it)
+  {
+    DBG << "index: " << i << " option: " << *it << endl;
+    if (*it == zypp::str::toLower(reply))
+    {
+      if (isDisabled(i))
+        break;
+      return i;
+    }
+  }
+
+  return -1;
+}
+
+bool PromptOptions::isYesNoPrompt() const
+{
+  return _options.size() == 2 &&
+      _options[0] == _("yes") &&
+      _options[1] == _("no");
+}
+
 
 // ----------------------------------------------------------------------------
 
@@ -237,13 +268,8 @@ unsigned int get_prompt_reply(Zypper & zypper,
   ifstream stm("/dev/tty", ifstream::in);
   // istream & stm = cin;
 
-  bool is_yn_prompt =
-    poptions.options().size() == 2 &&
-    poptions.options()[0] == _("yes") &&
-    poptions.options()[1] == _("no");
-
   string reply;
-  unsigned int reply_int = poptions.defaultOpt();
+  int reply_int = poptions.defaultOpt();
   bool stmgood;
   while ((stmgood = stm.good()))
   {
@@ -259,7 +285,7 @@ unsigned int get_prompt_reply(Zypper & zypper,
       continue;
     }
 
-    if (is_yn_prompt && rpmatch(reply.c_str()) >= 0)
+    if (poptions.isYesNoPrompt() && rpmatch(reply.c_str()) >= 0)
     {
       if (rpmatch(reply.c_str()))
         reply_int = 0; // the index of "yes" in the poptions.options()
@@ -267,29 +293,13 @@ unsigned int get_prompt_reply(Zypper & zypper,
         reply_int = 1; // the index of "no" in the poptions.options()
       break;
     }
-    else
-    {
-      DBG << " reply: " << reply << " (" << zypp::str::toLower(reply) << " lowercase)" << endl;
-      bool got_valid_reply = false;
-      for (unsigned int i = 0; i < poptions.options().size(); i++)
-      {
-        DBG << "index: " << i << " option: "
-            << poptions.options()[i] << endl;
-        if (poptions.options()[i] == zypp::str::toLower(reply))
-        {
-          reply_int = i;
-          got_valid_reply = true;
-          break;
-        }
-      }
-      if (got_valid_reply)
-        break;
-    }
+    else if ((reply_int = poptions.getReplyIndex(reply)) >= 0) // got valid reply
+      break;
 
     ostringstream s;
     s << format(_("Invalid answer '%s'.")) % reply;
 
-    if (is_yn_prompt)
+    if (poptions.isYesNoPrompt())
     {
       s << " " << format(
       // TranslatorExplanation don't translate the 'y' and 'n', they can always be used as answers.
