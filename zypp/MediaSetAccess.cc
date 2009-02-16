@@ -188,7 +188,7 @@ IMPL_PTR_TYPE(MediaSetAccess);
     ProvideFileOperation op;
     resource.setLocation(file, media_nr);
     try {
-        provide(boost::ref(op), resource, NON_INTERACTIVE);
+        provide(boost::ref(op), resource, PROVIDE_NON_INTERACTIVE);
     }
     catch ( const Exception &e )
     {
@@ -203,7 +203,7 @@ IMPL_PTR_TYPE(MediaSetAccess);
     ProvideFileExistenceOperation op;
     OnMediaLocation resource;
     resource.setLocation(file, media_nr);
-    provide( boost::ref(op), resource, NONE);
+    provide( boost::ref(op), resource, PROVIDE_DEFAULT);
     return op.result;
   }
 
@@ -279,7 +279,7 @@ IMPL_PTR_TYPE(MediaSetAccess);
 
           // non interactive only bother the user if wrong medium is in the drive
           // otherwise propagate the error
-          if ( ( options & NON_INTERACTIVE ) && reason != media::MediaChangeReport::WRONG)
+          if ( ( options & PROVIDE_NON_INTERACTIVE ) && reason != media::MediaChangeReport::WRONG)
           {
               ZYPP_RETHROW(excp);
           }

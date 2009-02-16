@@ -113,8 +113,8 @@ namespace zypp
         /**
          * The user is not asked anything, and the error
          * exception is just propagated */
-        NONE = 0x0,
-        NON_INTERACTIVE = 0x1
+        PROVIDE_DEFAULT = 0x0,
+        PROVIDE_NON_INTERACTIVE = 0x1
       };
       ZYPP_DECLARE_FLAGS(ProvideFileOptions,ProvideFileOption);
 
@@ -142,7 +142,7 @@ namespace zypp
        *
        * \see zypp::media::MediaManager::provideFile()
        */
-      Pathname provideFile( const OnMediaLocation & resource, ProvideFileOptions options = NONE );
+      Pathname provideFile( const OnMediaLocation & resource, ProvideFileOptions options = PROVIDE_DEFAULT );
 
       /**
        * Provides \a file from media \a media_nr.
@@ -164,7 +164,7 @@ namespace zypp
        *         with the next one, if possible.
        * \see zypp::media::MediaManager::provideFile()
        */
-      Pathname provideFile(const Pathname & file, unsigned media_nr = 1, ProvideFileOptions options = NONE );
+      Pathname provideFile(const Pathname & file, unsigned media_nr = 1, ProvideFileOptions options = PROVIDE_DEFAULT );
 
       /**
        * \deprecated
@@ -218,7 +218,7 @@ namespace zypp
        * \see zypp::media::MediaManager::provideDir()
        * \see zypp::media::MediaManager::provideDirTree()
        */
-      Pathname provideDir(const Pathname & dir, bool recursive, unsigned media_nr = 1, ProvideFileOptions options = NONE );
+      Pathname provideDir(const Pathname & dir, bool recursive, unsigned media_nr = 1, ProvideFileOptions options = PROVIDE_DEFAULT );
 
       /**
        * Checks if a file exists on the specified media, with user callbacks.
