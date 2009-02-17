@@ -1,4 +1,9 @@
 -------------------------------------------------------------------
+Tue Feb 17 23:17:54 CET 2009 - ma@calvin.km13.de
+
+- Compute obsoletes based on names only (not considering provides) (bnc #471023)
+
+-------------------------------------------------------------------
 Tue Feb 17 12:56:57 CET 2009 - jkupec@suse.cz
 
 - Fixed FTP authentication (bnc #472879)
