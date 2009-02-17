@@ -1,4 +1,9 @@
 -------------------------------------------------------------------
+Tue Feb 17 12:56:57 CET 2009 - jkupec@suse.cz
+
+- Fixed FTP authentication (bnc #472879)
+
+-------------------------------------------------------------------
 Wed Feb 11 13:31:03 CET 2009 - ma@suse.de
 
 - Follow IEC and use the binary prefixes (KiB,MiB,GiB) for printing Byte 
