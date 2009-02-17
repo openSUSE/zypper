@@ -66,7 +66,7 @@ std::ostream & AuthData::dumpAsIniOn( std::ostream & str ) const
 
 bool CurlAuthData::valid() const
 {
-  return username().size() && password().size() && _auth_type != CURLAUTH_NONE;
+  return username().size() && password().size();
 }
 
 
