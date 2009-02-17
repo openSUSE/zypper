@@ -1,4 +1,12 @@
 -------------------------------------------------------------------
+Sun Feb 15 21:43:13 CET 2009 - jkupec@suse.cz
+
+- Writing additional rpm output after installing/removing packages
+  (bnc #369450)
+- Added ability to change URI in medium error dialog. Dialog help
+  texts added.
+
+-------------------------------------------------------------------
 Thu Feb 12 09:28:00 CET 2009 - jkupec@suse.cz
 
 - Bash completion: added completion of global options and
