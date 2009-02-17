@@ -86,9 +86,8 @@ namespace zypp
     else if (obj.isByApplHigh()) str << "h";
     else if (obj.isByUser()) str << "u";
 
-    str << (obj.isToBeUninstalledDueToObsolete() ? "O" :
-	( obj.isToBeUninstalledDueToUpgrade() ? "U" :
-	( obj.isToBeInstalledSoft() ? "S" : "_" ) ) );
+    str << (obj.isToBeUninstalledDueToUpgrade() ? "U" :
+	( obj.isToBeInstalledSoft() ? "S" : "_" ) );
 
     str << (obj.isSeen() ? "@" : "" );
 
