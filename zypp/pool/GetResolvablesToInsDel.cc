@@ -12,8 +12,9 @@
 #include <iostream>
 #include <set>
 
-#include "zypp/base/Logger.h"
+#include "zypp/base/LogTools.h"
 #include "zypp/sat/Solvable.h"
+#include "zypp/sat/WhatObsoletes.h"
 #include "zypp/pool/GetResolvablesToInsDel.h"
 #include "zypp/pool/PoolStats.h"
 #include "zypp/solver/detail/InstallOrder.h"
@@ -48,56 +49,18 @@ namespace zypp
       if ( deleteList_r.size() == 0 || instlist_r.size() == 0 )
         return; // ---> nothing to do
 
-      // build obsoletes from instlist_r
-      std::set<Capability> obsoletes;
-      for ( GetResolvablesToInsDel::PoolItemList::const_iterator it = instlist_r.begin();
-            it != instlist_r.end(); ++it )
-        {
-          PoolItem item( *it );
-          obsoletes.insert( item->dep(Dep::OBSOLETES).begin(), item->dep(Dep::OBSOLETES).end() );
-        }
-      if ( obsoletes.size() == 0 )
-        return; // ---> nothing to do
+      // These are all installed packages obsoleted by any package to be installed.
+      // Actually we expect all of them to appear in the deleteList_r, and we want
+      // to kick them out. Rpm will delete them when the obsoleter gets installed.
+      sat::WhatObsoletes obsoleted( instlist_r.begin(), instlist_r.end() );
+      for_( it, obsoleted.poolItemBegin(), obsoleted.poolItemEnd() )
+      {
+        DBG << "Ignore appl_delete (should be obsoleted): " << *it << endl;
+        deleteList_r.remove( *it );
+      }
 
-      // match them... ;(
-      GetResolvablesToInsDel::PoolItemList undelayed;
-      // forall applDelete Packages...
-      for ( GetResolvablesToInsDel::PoolItemList::iterator it = deleteList_r.begin();
-            it != deleteList_r.end(); ++it )
-        {
-          PoolItem ipkg( *it );
-          bool delayPkg = false;
-          // ...check whether an obsoletes....
-          for ( std::set<Capability>::iterator obs = obsoletes.begin();
-                ! delayPkg && obs != obsoletes.end(); ++obs )
-            {
-              // ...matches anything provided by the package?
-              for ( Capabilities::const_iterator prov = ipkg->dep(Dep::PROVIDES).begin();
-                    prov != ipkg->dep(Dep::PROVIDES).end(); ++prov )
-                {
-                  if ( obs->matches( *prov ) == CapMatch::yes )
-                    {
-                      // if so, delay package deletion
-                      DBG << "Ignore appl_delete (should be obsoleted): " << ipkg << endl;
-                      delayPkg = true;
-                      ipkg.status().resetTransact( ResStatus::USER );
-                      break;
-                    }
-                }
-            }
-          if ( ! delayPkg ) {
-            DBG << "undelayed " << ipkg << endl;
-            undelayed.push_back( ipkg );
-          }
-        }
-      // Puhh...
-      deleteList_r.swap( undelayed );
+      MIL << "Undelayed deletes: " << deleteList_r << endl;
     }
-
-#warning GetResolvablesToInsDel needs rewrite
-    // - isToBeUninstalledDueToObsolete is valid after DUP only ;(
-    // - isToBeUninstalledDueToUpgrade is valid after solverrun only (acceptable)
-    // probably things can be speeded up a bit.
 
     ///////////////////////////////////////////////////////////////////
     //
