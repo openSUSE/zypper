@@ -1,0 +1,7 @@
+<?xml version="1.0"?>
+<test>
+<setup arch="i686">
+	<system file="solver-system.xml.gz"/>
+	<locale name="en_US" />
+</setup>
+</test>

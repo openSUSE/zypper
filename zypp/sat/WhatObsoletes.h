@@ -31,10 +31,7 @@ namespace zypp
     /** Container of \b installed \ref Solvable which would be
      *  obsoleted by the \ref Solvable passed to the ctor.
      *
-     * \code
-     * \endcode
-     *
-     * \todo Add flag to also add any installed version to the containter.
+     * \todo Publish obsoleteUsesProvides config option.
      */
     class WhatObsoletes : public SolvIterMixin<WhatObsoletes,detail::WhatProvidesIterator>,
                           protected detail::PoolMember
@@ -61,6 +58,16 @@ namespace zypp
         explicit
         WhatObsoletes( const ResObject_constPtr item_r );
 
+        /** Ctor from a range of \ref Solvable, \ref PoolItem or \ref ResObject::constPtr. */
+        template <class _Iterator>
+        WhatObsoletes( _Iterator begin, _Iterator end )
+        : _begin( 0 )
+        {
+          for_( it, begin, end )
+            ctorAdd( *it );
+          ctorDone();
+        }
+
      public:
         /** Whether the container is empty. */
         bool empty() const
@@ -79,6 +86,12 @@ namespace zypp
         /** Iterator pointing behind the last \ref Solvable. */
         const_iterator end() const
         { return const_iterator(); }
+
+      private:
+        void ctorAdd( const PoolItem & item_r );
+        void ctorAdd( ResObject_constPtr item_r );
+        void ctorAdd( Solvable item_r );
+        void ctorDone();
 
       private:
         const sat::detail::IdType * _begin;

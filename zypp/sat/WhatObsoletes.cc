@@ -12,6 +12,7 @@
 #include <iostream>
 
 #include "zypp/base/LogTools.h"
+#include "zypp/base/Tr1hash.h"
 #include "zypp/sat/WhatObsoletes.h"
 #include "zypp/sat/detail/PoolImpl.h"
 #include "zypp/PoolItem.h"
@@ -25,42 +26,16 @@ namespace zypp
   namespace sat
   { /////////////////////////////////////////////////////////////////
 
+    // Obsoletes may either match against provides, or names.
+    // Configuration depends on the behaviour of rpm.
+    bool obsoleteUsesProvides = false;
+
     ///////////////////////////////////////////////////////////////////
     namespace
     { /////////////////////////////////////////////////////////////////
 
-      /** WhatObsoletes ctor helper collecting obsoleted installed items. */
-      shared_ptr<void> allocatedProviders( sat::Solvable item_r, const sat::detail::IdType *& first_r )
-      {
-        WhatProvides obsoleted( item_r.obsoletes() );
-        if ( obsoleted.empty() )
-        {
-          return shared_ptr<void>();
-        }
-
-        // use allocated private data to store the result (incl. trailing NULL)
-        std::vector<sat::detail::IdType> * pdata = 0;
-        shared_ptr<void> ret;
-
-        for_( it, obsoleted.begin(), obsoleted.end() )
-        {
-          if ( it->isSystem() )
-          {
-            if ( ! pdata )
-            {
-              ret.reset( (pdata = new std::vector<sat::detail::IdType>) );
-            }
-            pdata->push_back( it->id() );
-          }
-        }
-
-        if ( pdata )
-        {
-          pdata->push_back( sat::detail::noId );
-          first_r = &pdata->front();
-        }
-        return ret;
-      }
+      typedef std::tr1::unordered_set<detail::IdType> set_type;
+      typedef std::vector<sat::detail::IdType>        vector_type;
 
       /////////////////////////////////////////////////////////////////
     } // namespace
@@ -68,19 +43,99 @@ namespace zypp
 
     WhatObsoletes::WhatObsoletes( Solvable item_r )
     : _begin( 0 )
-    , _private( allocatedProviders( item_r, _begin ) )
-    {}
+    {
+      ctorAdd( item_r );
+      ctorDone();
+    }
 
     WhatObsoletes::WhatObsoletes( const PoolItem & item_r )
     : _begin( 0 )
-    , _private( allocatedProviders( item_r.satSolvable(), _begin ) )
-    {}
+    {
+      ctorAdd( item_r );
+      ctorDone();
+    }
 
     WhatObsoletes::WhatObsoletes( const ResObject::constPtr item_r )
     : _begin( 0 )
     {
       if ( item_r )
-        _private = allocatedProviders( item_r->satSolvable(), _begin );
+      {
+        ctorAdd( item_r->satSolvable() );
+        ctorDone();
+      }
+    }
+
+    void WhatObsoletes::ctorAdd( const PoolItem & item_r )
+    { ctorAdd( item_r->satSolvable() ); }
+
+    void WhatObsoletes::ctorAdd( ResObject_constPtr item_r )
+    { if ( item_r ) ctorAdd( item_r->satSolvable() ); }
+
+
+    namespace
+    {
+      /** Add item to the set created on demand. */
+      inline void addToSet( Solvable item, set_type *& pdata, shared_ptr<void>& _private )
+      {
+        if ( ! pdata )
+        {
+          _private.reset( (pdata = new set_type) );
+        }
+        pdata->insert( item.id() );
+      }
+    }
+
+    void WhatObsoletes::ctorAdd( Solvable item_r )
+    {
+      if ( obsoleteUsesProvides )
+      {
+        WhatProvides obsoleted( item_r.obsoletes() );
+        if ( obsoleted.empty() )
+          return;
+
+        // use allocated private data to collect the results
+        set_type * pdata = ( _private ? reinterpret_cast<set_type*>( _private.get() ) : 0 );
+        for_( it, obsoleted.begin(), obsoleted.end() )
+        {
+          if ( it->isSystem() )
+            addToSet( *it, pdata, _private );
+        }
+      }
+      else // Obsoletes match names
+      {
+        Capabilities obsoletes( item_r.obsoletes() );
+        if ( obsoletes.empty() )
+          return;
+
+        // use allocated private data to collect the results
+        set_type * pdata = ( _private ? reinterpret_cast<set_type*>( _private.get() ) : 0 );
+        for_( it, obsoletes.begin(), obsoletes.end() )
+        {
+          // For each obsoletes find providers, but with the same name
+          IdString ident( it->detail().name() );
+          WhatProvides obsoleted( *it );
+          for_( iit, obsoleted.begin(), obsoleted.end() )
+          {
+            if ( iit->isSystem() && iit->ident() == ident )
+              addToSet( *iit, pdata, _private );
+          }
+        }
+      }
+    }
+
+    void WhatObsoletes::ctorDone()
+    {
+      if ( _private )
+      {
+        // copy set to vector and terminate _private
+        set_type * sdata = reinterpret_cast<set_type*>( _private.get() );
+
+        vector_type * pdata = new vector_type( sdata->begin(), sdata->end() );
+        pdata->push_back( sat::detail::noId );
+        _begin = &pdata->front();
+
+        _private.reset( pdata );
+      }
     }
 
     WhatObsoletes::size_type WhatObsoletes::size() const

@@ -1,0 +1,55 @@
+<channel><subchannel>
+<package>
+	<name>test1</name>
+	<history><update>
+		<arch>i586</arch>
+		<version>1</version><release>1</release>
+	</update></history>
+	<provides>
+		<dep name='test1' op='==' version='1' release='1' />
+	</provides>
+	<obsoletes>
+		<dep name='goaway' op='&lt;' version='2' release='1' />
+	</obsoletes>
+</package>
+<package>
+	<name>goaway</name>
+	<history><update>
+		<arch>i586</arch>
+		<version>1</version><release>1</release>
+	</update></history>
+	<provides>
+		<dep name='goaway' op='==' version='1' release='1' />
+	</provides>
+</package>
+<package>
+	<name>goaway</name>
+	<history><update>
+		<arch>i586</arch>
+		<version>2</version><release>1</release>
+	</update></history>
+	<provides>
+		<dep name='goaway' op='==' version='2' release='1' />
+	</provides>
+</package>
+<package>
+	<name>meetoo</name>
+	<history><update>
+		<arch>i586</arch>
+		<version>1</version><release>1</release>
+	</update></history>
+	<provides>
+		<dep name='goaway' op='==' version='1' release='1' />
+	</provides>
+</package>
+<package>
+	<name>meetoo</name>
+	<history><update>
+		<arch>i586</arch>
+		<version>2</version><release>1</release>
+	</update></history>
+	<provides>
+		<dep name='goaway' op='==' version='2' release='1' />
+	</provides>
+</package>
+</subchannel></channel>
