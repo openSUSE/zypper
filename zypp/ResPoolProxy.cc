@@ -108,30 +108,25 @@ namespace zypp
       const pool::PoolImpl::Id2ItemT & id2item( poolImpl_r.id2item() );
       if ( ! id2item.empty() )
       {
-        sat::detail::IdType cidx = sat::detail::noId;
+        // set startpoint
         pool::PoolImpl::Id2ItemT::const_iterator cbegin = id2item.begin();
 
         for_( it, id2item.begin(), id2item.end() )
         {
-          sat::detail::IdType idx( it->first );
-          if ( idx != cidx )
+          if ( it->first != cbegin->first )
           {
-            // starting a new Selectable
-            if ( cidx )
-            {
-              // create the previous one
-              ui::Selectable::Ptr p( makeSelectablePtr( cbegin, it ) );
-              _selPool[p->kind()].push_back( p );
-              _selIndex[cidx] = p;
-            }
-            cidx = idx;
+            // starting a new Selectable, create the previous one
+            ui::Selectable::Ptr p( makeSelectablePtr( cbegin, it ) );
+            _selPool[p->kind()].push_back( p );
+            _selIndex[cbegin->first] = p;
+            // remember new startpoint
             cbegin = it;
           }
         }
         // create the final one
         ui::Selectable::Ptr p( makeSelectablePtr( cbegin, id2item.end() ) );
         _selPool[p->kind()].push_back( p );
-        _selIndex[cidx] = p;
+        _selIndex[cbegin->first] = p;
       }
     }
 
