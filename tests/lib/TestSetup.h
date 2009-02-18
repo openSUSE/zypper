@@ -9,6 +9,7 @@ using boost::unit_test::test_case;
 
 #include "zypp/base/LogControl.h"
 #include "zypp/base/LogTools.h"
+#include "zypp/base/Flags.h"
 #include "zypp/ZYppFactory.h"
 #include "zypp/ZYpp.h"
 #include "zypp/TmpPath.h"
@@ -27,6 +28,12 @@ using namespace zypp;
 #ifndef BOOST_CHECK_NE
 #define BOOST_CHECK_NE( L, R ) BOOST_CHECK( (L) != (R) )
 #endif
+
+enum TestSetupOptionBits
+{
+  TSO_CLEANROOT = (1 <<  0)
+};
+ZYPP_DECLARE_FLAGS_AND_OPERATORS( TestSetupOptions, TestSetupOptionBits );
 
 /** Build a test environment below a temp. root directory.
  * If a \c rootdir_r was provided to the ctor, this directory
@@ -54,11 +61,17 @@ using namespace zypp;
 class TestSetup
 {
   public:
-    TestSetup( const Arch & sysarch_r = Arch() )
-    { _ctor( Pathname(), sysarch_r ); }
+    typedef TestSetupOptions Options;
 
-    TestSetup( const Pathname & rootdir_r, const Arch & sysarch_r = Arch() )
-    { _ctor( rootdir_r, sysarch_r ); }
+  public:
+    TestSetup( const Arch & sysarch_r = Arch() )
+    { _ctor( Pathname(), sysarch_r, Options() ); }
+
+    TestSetup( const Pathname & rootdir_r, const Arch & sysarch_r = Arch(), const Options & options_r = Options() )
+    { _ctor( rootdir_r, sysarch_r, options_r ); }
+
+    TestSetup( const Pathname & rootdir_r, const Options & options_r )
+    { _ctor( rootdir_r, Arch(), options_r ); }
 
     ~TestSetup()
     { USR << (_tmprootdir.path() == _rootdir ? "DELETE" : "KEEP") << " TESTSETUP below " << _rootdir << endl; }
@@ -208,12 +221,16 @@ class TestSetup
     }
 
   private:
-    void _ctor( const Pathname & rootdir_r, const Arch & sysarch_r )
+    void _ctor( const Pathname & rootdir_r, const Arch & sysarch_r, const Options & options_r )
     {
       if ( rootdir_r.empty() )
         _rootdir = _tmprootdir.path();
       else
+      {
         filesystem::assert_dir( (_rootdir = rootdir_r) );
+        if ( options_r.testFlag( TSO_CLEANROOT ) )
+          filesystem::clean_dir( _rootdir );
+      }
 
       if ( ! sysarch_r.empty() )
         ZConfig::instance().setSystemArchitecture( sysarch_r );
