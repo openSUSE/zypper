@@ -1,5 +1,10 @@
 -------------------------------------------------------------------
-Tue Feb 17 23:17:54 CET 2009 - ma@calvin.km13.de
+Wed Feb 18 15:51:38 CET 2009 - ma@suse.de
+
+- Neither lose packages with empty name, nor SEGV when processing them. (bnc #470011)
+
+-------------------------------------------------------------------
+Tue Feb 17 23:17:54 CET 2009 - ma@suse.de
 
 - Compute obsoletes based on names only (not considering provides) (bnc #471023)
 
