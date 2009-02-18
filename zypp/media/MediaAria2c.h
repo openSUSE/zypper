@@ -13,6 +13,7 @@
 #define ZYPP_MEDIA_MEDIAARIA2C_H
 
 #include "zypp/media/MediaHandler.h"
+#include "zypp/media/TransferSettings.h"
 #include "zypp/ZYppCallbacks.h"
 
 namespace zypp {
@@ -111,7 +112,7 @@ class MediaAria2c : public MediaHandler {
     std::string getAria2cVersion();    
     static std::string _aria2cVersion;
     
-    ExternalProgram::Arguments _args;
+    TransferSettings _settings;
 };
 
 ///////////////////////////////////////////////////////////////////

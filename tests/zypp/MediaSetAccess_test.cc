@@ -7,6 +7,8 @@
 #include "zypp/MediaSetAccess.h"
 #include "zypp/Url.h"
 
+#include "WebServer.h"
+
 using std::cout;
 using std::endl;
 using std::string;
@@ -246,5 +248,31 @@ BOOST_AUTO_TEST_CASE(msa_provide_optional_file)
   
   //! \todo test provideOptionalFile with not desired media
 }
+
+/*
+ * file exists local
+ */
+BOOST_AUTO_TEST_CASE(msa_file_exist_local)
+{
+  MediaSetAccess setaccess(Url(DATADIR + "/src1/cd1"));
+
+  BOOST_CHECK(setaccess.doesFileExist("/test.txt"));
+  BOOST_CHECK(!setaccess.doesFileExist("/testBADNAME.txt"));
+}
+
+/*
+ * file exists remote
+ */
+BOOST_AUTO_TEST_CASE(msa_file_exist_remote)
+{
+  WebServer web( Pathname(DATADIR) / "/src1/cd1", 10001 );
+  web.start();
+  MediaSetAccess setaccess( web.url(), "/" );
+
+  BOOST_CHECK(setaccess.doesFileExist("/test.txt"));
+  BOOST_CHECK(!setaccess.doesFileExist("/testBADNAME.txt"));
+  web.stop();
+}
+
 
 // vim: set ts=2 sts=2 sw=2 ai et:
