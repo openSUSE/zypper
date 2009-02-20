@@ -72,6 +72,225 @@ MediaAria2c::existsAria2cmd()
     return ( aria.close() == 0 );
 }
 
+void fillSettingsFromUrl( const Url &url, TransferSettings &s )
+{
+    std::string param(url.getQueryParam("timeout"));
+    if( !param.empty())
+    {
+      long num = str::strtonum<long>(param);
+      if( num >= 0 && num <= TRANSFER_TIMEOUT_MAX)
+          s.setTimeout(num);
+    }
+
+    if ( ! url.getUsername().empty() )
+    {
+        s.setUsername(url.getUsername());
+        if ( url.getPassword().size() )
+        {
+            s.setPassword(url.getPassword());
+        }
+    }
+
+    string proxy = url.getQueryParam( "proxy" );
+
+    if ( ! proxy.empty() )
+    {
+        string proxyport( url.getQueryParam( "proxyport" ) );
+        if ( ! proxyport.empty() ) {
+            proxy += ":" + proxyport;
+        }
+        s.setProxy(proxy);
+        s.setProxyEnabled(true);
+    }
+}    
+
+void fillSettingsSystemProxy( const Url&url, TransferSettings &s )
+{
+    ProxyInfo proxy_info (ProxyInfo::ImplPtr(new ProxyInfoSysconfig("proxy")));
+
+    if ( proxy_info.enabled())
+    {
+      s.setProxyEnabled(true);
+      std::list<std::string> nope = proxy_info.noProxy();
+      for (ProxyInfo::NoProxyIterator it = proxy_info.noProxyBegin();
+           it != proxy_info.noProxyEnd();
+           it++)
+      {
+        std::string host( str::toLower(url.getHost()));
+        std::string temp( str::toLower(*it));
+
+        // no proxy if it points to a suffix
+        // preceeded by a '.', that maches
+        // the trailing portion of the host.
+        if( temp.size() > 1 && temp.at(0) == '.')
+        {
+          if(host.size() > temp.size() &&
+             host.compare(host.size() - temp.size(), temp.size(), temp) == 0)
+          {
+            DBG << "NO_PROXY: '" << *it  << "' matches host '"
+                                 << host << "'" << endl;
+            s.setProxyEnabled(false);
+            break;
+          }
+        }
+        else
+        // no proxy if we have an exact match
+        if( host == temp)
+        {
+          DBG << "NO_PROXY: '" << *it  << "' matches host '"
+                               << host << "'" << endl;
+          s.setProxyEnabled(false);
+          break;
+        }
+      }
+
+      if ( s.proxyEnabled() )
+          s.setProxy(proxy_info.proxy(url.getScheme()));
+    }
+
+}    
+
+/**
+ * comannd line for aria.
+ * The argument list gets passed as reference
+ * and it is filled.
+ */
+void fillAriaCmdLine( const Pathname &ariapath,
+                      const TransferSettings &s,
+                      const Url &url,
+                      const Pathname &destination,
+                      ExternalProgram::Arguments &args )
+{
+    args.push_back(ariapath.c_str());
+    args.push_back(str::form("--user-agent=%s", s.userAgentString().c_str()));
+    args.push_back("--summary-interval=1");
+    args.push_back("--follow-metalink=mem");
+    args.push_back("--check-integrity=true");
+
+    // add the anonymous id.
+    for ( TransferSettings::Headers::const_iterator it = s.headersBegin();
+          it != s.headersEnd();
+          ++it )
+        args.push_back(str::form("--header=%s", it->c_str() ));
+        
+    args.push_back( str::form("--connect-timeout=%ld", s.timeout()));
+
+    if ( s.username().empty() )
+    {
+        if ( url.getScheme() == "ftp" )
+        {
+            // set anonymous ftp
+            args.push_back(str::form("--ftp-user=%s", "suseuser" ));
+            args.push_back(str::form("--ftp-passwd=%s", VERSION ));
+
+            string id = "yast2";
+            id += VERSION;
+            DBG << "Anonymous FTP identification: '" << id << "'" << endl;
+        }
+    }
+    else
+    {
+        if ( url.getScheme() == "ftp" )
+            args.push_back(str::form("--ftp-user=%s", s.username().c_str() ));
+        else if ( url.getScheme() == "http" ||
+                  url.getScheme() == "https" )
+            args.push_back(str::form("--http-user=%s", s.username().c_str() ));
+        
+        if ( s.password().size() )
+        {
+            if ( url.getScheme() == "ftp" )
+                args.push_back(str::form("--ftp-passwd=%s", s.password().c_str() ));
+            else if ( url.getScheme() == "http" ||
+                      url.getScheme() == "https" )
+                args.push_back(str::form("--http-passwd=%s", s.password().c_str() ));
+        }
+    }
+    
+    if ( s.proxyEnabled() )
+    {
+        args.push_back(str::form("--http-proxy=%s", s.proxy().c_str() ));
+        if ( ! s.proxyUsername().empty() )
+        {
+            args.push_back(str::form("--http-proxy-user=%s", s.proxyUsername().c_str() ));
+            if ( ! s.proxyPassword().empty() )
+                args.push_back(str::form("--http-proxy-passwd=%s", s.proxyPassword().c_str() ));
+        }
+    }
+
+    if ( ! destination.empty() )
+        args.push_back(str::form("--dir=%s", destination.c_str()));
+
+    args.push_back(url.asString().c_str());
+}
+
+/**
+ * comannd line for curl.
+ * The argument list gets passed as reference
+ * and it is filled.
+ */
+void fillCurlCmdLine( const Pathname &curlpath,
+                      const TransferSettings &s,
+                      const Url &url,
+                      ExternalProgram::Arguments &args )
+{
+    args.push_back(curlpath.c_str());
+    // only do a head request
+    args.push_back("-I");
+    args.push_back("-A"); args.push_back(s.userAgentString());
+
+    // headers.
+    for ( TransferSettings::Headers::const_iterator it = s.headersBegin();
+          it != s.headersEnd();
+          ++it )
+    {
+        args.push_back("-H");
+        args.push_back(it->c_str());
+    }
+    
+    args.push_back("--connect-timeout");
+    args.push_back(str::numstring(s.timeout()));
+
+    if ( s.username().empty() )
+    {
+        if ( url.getScheme() == "ftp" )
+        {
+            string id = "yast2:";
+            id += VERSION;
+            args.push_back("--user");
+            args.push_back(id);
+            DBG << "Anonymous FTP identification: '" << id << "'" << endl;
+        }
+    }
+    else
+    {
+        string userpass = s.username();
+                    
+        if ( s.password().size() )
+            userpass += (":" + s.password());
+        args.push_back("--user");
+        args.push_back(userpass);
+    }
+    
+    if ( s.proxyEnabled() )
+    {
+        args.push_back("--proxy");
+        args.push_back(s.proxy());
+        if ( ! s.proxyUsername().empty() )
+        {
+            string userpass = s.proxyUsername();
+                    
+            if ( s.proxyPassword().size() )
+                userpass += (":" + s.proxyPassword());
+            args.push_back("--proxy-user");
+            args.push_back(userpass);
+        }
+    }
+
+    args.push_back("--url");
+    args.push_back(url.asString().c_str());
+}
+
+
 static const char *const anonymousIdHeader()
 {
   // we need to add the release and identifier to the
@@ -124,6 +343,7 @@ const char *const MediaAria2c::agentString()
 }
 
 
+
 MediaAria2c::MediaAria2c( const Url &      url_r,
                       const Pathname & attach_point_hint_r )
     : MediaHandler( url_r, attach_point_hint_r,
@@ -162,8 +382,6 @@ MediaAria2c::MediaAria2c( const Url &      url_r,
 void MediaAria2c::attachTo (bool next)
 {
    // clear last arguments
-   _args.clear();
-
   if ( next )
     ZYPP_THROW(MediaNotSupportedException(_url));
 
@@ -182,173 +400,25 @@ void MediaAria2c::attachTo (bool next)
 
   disconnectFrom();
 
-  // Build the aria command.
-  _args.push_back(_aria2cPath.asString());
-  _args.push_back(str::form("--user-agent=%s", agentString()));
-  _args.push_back("--summary-interval=1");
-  _args.push_back("--follow-metalink=mem");
-  _args.push_back( "--check-integrity=true");
+  _settings.setUserAgentString(agentString());
+  _settings.addHeader(anonymousIdHeader());
+  _settings.addHeader(distributionFlavorHeader());
 
-   // add the anonymous id.
-   _args.push_back(str::form("--header=%s", anonymousIdHeader() ));
-   _args.push_back(str::form("--header=%s", distributionFlavorHeader() ));
-  // TODO add debug option
+  _settings.setTimeout(TRANSFER_TIMEOUT);
+  _settings.setConnectTimeout(CONNECT_TIMEOUT);
 
-  // Transfer timeout
+  // fill some settings from url query parameters
+  fillSettingsFromUrl(_url, _settings);
+
+  // if the proxy was not set by url, then look 
+  if ( _settings.proxy().empty() )
   {
-    _xfer_timeout = TRANSFER_TIMEOUT;
-
-    std::string param(_url.getQueryParam("timeout"));
-    if( !param.empty())
-    {
-      long num = str::strtonum<long>( param);
-      if( num >= 0 && num <= TRANSFER_TIMEOUT_MAX)
-        _xfer_timeout = num;
-    }
+      // at the system proxy settings
+      fillSettingsSystemProxy(_url, _settings);
   }
 
-  _args.push_back( str::form("--connect-timeout=%d", CONNECT_TIMEOUT));
+  DBG << "Proxy: " << (_settings.proxy().empty() ? "-none-" : _settings.proxy()) << endl;
 
-  // TODO limit redirections
-  // TODO Implement certificate validation
-
-  // FTP defaults to anonymous
-
-
-  if ( _url.getUsername().empty() )
-  {
-    if ( _url.getScheme() == "ftp" )
-    {
-      string id = "yast2@";
-      id += VERSION;
-      DBG << "Anonymous FTP identification: '" << id << "'" << endl;
-      _userpwd = "anonymous:" + id;
-    }
-  }
-  else
-  {
-     if ( _url.getScheme() == "ftp" )
-     {
-         _args.push_back(str::form("--ftp-user=%s", _url.getUsername().c_str() ));
-     }
-     else if ( _url.getScheme() == "http" ||
-               _url.getScheme() == "https" )
-    {
-        _args.push_back(str::form("--http-user=%s", _url.getUsername().c_str() ));
-    }
-
-    if ( _url.getPassword().size() )
-    {
-      if ( _url.getScheme() == "ftp" )
-      {
-          _args.push_back(str::form("--ftp-passwd=%s", _url.getPassword().c_str() ));
-      }
-      else if ( _url.getScheme() == "http" ||
-               _url.getScheme() == "https" )
-      {
-          _args.push_back(str::form("--http-passwd=%s", _url.getPassword().c_str() ));
-      }
-    }
-  }
-
-  // note, aria2c does not support setting the auth type with
-  // (basic, digest yet)
-
-
-  /*---------------------------------------------------------------*
-   CURLOPT_PROXY: host[:port]
-
-   Url::option(proxy and proxyport)
-   If not provided, /etc/sysconfig/proxy is evaluated
-   *---------------------------------------------------------------*/
-
-  _proxy = _url.getQueryParam( "proxy" );
-
-  if ( ! _proxy.empty() )
-  {
-    string proxyport( _url.getQueryParam( "proxyport" ) );
-    if ( ! proxyport.empty() ) {
-      _proxy += ":" + proxyport;
-    }
-  }
-  else
-  {
-
-    ProxyInfo proxy_info (ProxyInfo::ImplPtr(new ProxyInfoSysconfig("proxy")));
-
-    if ( proxy_info.enabled())
-    {
-      bool useproxy = true;
-
-      std::list<std::string> nope = proxy_info.noProxy();
-      for (ProxyInfo::NoProxyIterator it = proxy_info.noProxyBegin();
-           it != proxy_info.noProxyEnd();
-           it++)
-      {
-        std::string host( str::toLower(_url.getHost()));
-        std::string temp( str::toLower(*it));
-
-        // no proxy if it points to a suffix
-        // preceeded by a '.', that maches
-        // the trailing portion of the host.
-        if( temp.size() > 1 && temp.at(0) == '.')
-        {
-          if(host.size() > temp.size() &&
-             host.compare(host.size() - temp.size(), temp.size(), temp) == 0)
-          {
-            DBG << "NO_PROXY: '" << *it  << "' matches host '"
-                                 << host << "'" << endl;
-            useproxy = false;
-            break;
-          }
-        }
-        else
-        // no proxy if we have an exact match
-        if( host == temp)
-        {
-          DBG << "NO_PROXY: '" << *it  << "' matches host '"
-                               << host << "'" << endl;
-          useproxy = false;
-          break;
-        }
-      }
-
-      if ( useproxy ) {
-        _proxy = proxy_info.proxy(_url.getScheme());
-      }
-    }
-  }
-
-  DBG << "Proxy: " << (_proxy.empty() ? "-none-" : _proxy) << endl;
-
-  if ( ! _proxy.empty() )
-  {
-      _args.push_back(str::form("--http-proxy=%s", _proxy.c_str() ));
-
-     /*---------------------------------------------------------------*
-     CURLOPT_PROXYUSERPWD: [user name]:[password]
-
-     Url::option(proxyuser and proxypassword) -> CURLOPT_PROXYUSERPWD
-     If not provided, $HOME/.curlrc is evaluated
-     *---------------------------------------------------------------*/
-
-    _proxyuserpwd = _url.getQueryParam( "proxyuser" );
-
-    if ( ! _proxyuserpwd.empty() ) {
-        _args.push_back(str::form("--http-proxy-user=%s", _proxyuserpwd.c_str() ));
-
-      string proxypassword( _url.getQueryParam( "proxypassword" ) );
-      if ( ! proxypassword.empty() ) {
-          _args.push_back(str::form("--http-proxy-passwd=%s", proxypassword.c_str() ));
-      }
-    }
-  }
-
-  //_currentCookieFile = _cookieFile.asString();
-  //_args.push_back(str::form("--load-cookies=%s", _currentCookieFile.c_str()));
-  //NOTE cookie jar?
-
-  // FIXME: need a derived class to propelly compare url's
   MediaSourceRef media( new MediaSource(_url.getScheme(), _url.asString()));
   setMediaSource(media);
 
@@ -412,11 +482,10 @@ void MediaAria2c::getFileCopy( const Pathname & filename , const Pathname & targ
 
   bool retry = false;
 
-  ExternalProgram::Arguments args = _args;
-  args.push_back(str::form("--dir=%s", target.dirname().c_str()));
+  ExternalProgram::Arguments args;
 
-  args.push_back(fileurl.asString());
-
+  fillAriaCmdLine(_aria2cPath, _settings, fileurl, target.dirname(), args);
+  
   do
   {
     try
@@ -525,8 +594,85 @@ bool MediaAria2c::getDoesFileExist( const Pathname & filename ) const
 
 bool MediaAria2c::doGetDoesFileExist( const Pathname & filename ) const
 {
-
   DBG << filename.asString() << endl;
+  callback::SendReport<DownloadProgressReport> report;
+
+  Url fileurl(getFileUrl(_url, filename));
+  bool retry = false;
+
+  ExternalProgram::Arguments args;
+
+  fillCurlCmdLine("/usr/bin/curl", _settings, fileurl, args);
+  
+  do
+  {
+    try
+    {
+      report->start(_url, fileurl.asString() );
+
+      ExternalProgram curl(args, ExternalProgram::Stderr_To_Stdout);
+      //Process response
+      for(std::string curlResponse( curl.receiveLine());
+          curlResponse.length();
+          curlResponse = curl.receiveLine())
+      {
+      
+          if ( str::contains(curlResponse, "401 Authorization Required") )
+          {
+              ZYPP_THROW(MediaUnauthorizedException(
+                             _url, "Login failed.", "Login failed", "auth hint"
+                             ));
+          }
+
+          if ( str::contains(curlResponse, "404 Not Found") )
+              return false;
+
+          if ( str::contains(curlResponse, "200 OK") )
+              return true;
+      }
+
+      int code = curl.close();
+
+      switch (code)
+      {
+      case 0: break;
+          // connection problems
+          return true;
+      case 1:
+      case 2:
+      case 3:
+      case 7:
+      default:
+          ZYPP_THROW(MediaException(_url.asString()));
+      }
+      
+
+      report->finish( _url ,  zypp::media::DownloadProgressReport::NO_ERROR, "");
+      retry = false;
+    }
+    // retry with proper authentication data
+    catch (MediaUnauthorizedException & ex_r)
+    {
+      if(authenticate(ex_r.hint(), !retry))
+        retry = true;
+      else
+      {
+        report->finish(fileurl, zypp::media::DownloadProgressReport::ACCESS_DENIED, ex_r.asUserHistory());
+        ZYPP_RETHROW(ex_r);
+      }
+
+    }
+    // unexpected exception
+    catch (MediaException & excpt_r)
+    {
+      // FIXME: error number fix
+      report->finish(fileurl, zypp::media::DownloadProgressReport::ERROR, excpt_r.asUserHistory());
+      ZYPP_RETHROW(excpt_r);
+    }
+  }
+  while (retry);
+
+  report->finish(fileurl, zypp::media::DownloadProgressReport::NO_ERROR, "");
   return true;
 }
 

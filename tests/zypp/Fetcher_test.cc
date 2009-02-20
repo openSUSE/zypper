@@ -320,14 +320,11 @@ BOOST_AUTO_TEST_CASE(enqueue_broken_content_noindex)
 
 BOOST_AUTO_TEST_CASE(enqueuedir_http)
 {
+    WebServer web((Pathname(TESTS_SRC_DIR) + "/zypp/data/Fetcher/remote-site").c_str(), 10001);
+    web.start();
+
   // at this point the key is already trusted
   {
-      // add the key as trusted
-      //getZYpp()->keyRing()->importKey(PublicKey(DATADIR + "/complexdir/subdir1/SHA1SUMS.key"), true);
-
-      WebServer web((Pathname(TESTS_SRC_DIR) + "/zypp/data/Fetcher/remote-site").c_str(), 10001);
-      web.start();
-
       MediaSetAccess media( web.url(), "/" );
       Fetcher fetcher;
       filesystem::TmpDir dest;
@@ -343,21 +340,10 @@ BOOST_AUTO_TEST_CASE(enqueuedir_http)
       BOOST_CHECK( PathInfo(dest.path() + "/complexdir/subdir2/subdir2-file1.txt").isExist() );
       BOOST_CHECK( PathInfo(dest.path() + "/complexdir/subdir1/subdir1-file1.txt").isExist() );
       BOOST_CHECK( PathInfo(dest.path() + "/complexdir/subdir1/subdir1-file2.txt").isExist() );
-
-      web.stop();
   }
-}
 
-BOOST_AUTO_TEST_CASE(enqueuedir_http_broken)
-{
-  // at this point the key is already trusted
+  // test broken tree
   {
-      // add the key as trusted
-      //getZYpp()->keyRing()->importKey(PublicKey(DATADIR + "/complexdir/subdir1/SHA1SUMS.key"), true);
-
-      WebServer web((Pathname(TESTS_SRC_DIR) + "/zypp/data/Fetcher/remote-site").c_str() , 10001 );
-      web.start();
-
       MediaSetAccess media( web.url(), "/" );
       Fetcher fetcher;
       filesystem::TmpDir dest;
@@ -378,14 +364,10 @@ BOOST_AUTO_TEST_CASE(enqueuedir_http_broken)
       BOOST_CHECK( ! PathInfo(dest.path() + "/complexdir-broken/subdir1/subdir1-file2.txt").isExist() );
 
       fetcher.reset();
-
-      web.stop();
-
-      MIL << web.log();
-
   }
+  
+  web.stop();
 }
-
 
 BOOST_AUTO_TEST_SUITE_END();
 

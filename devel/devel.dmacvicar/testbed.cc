@@ -9,24 +9,42 @@
 
 #include "zypp/Product.h"
 #include "zypp/Package.h"
-
+#include "zypp/Fetcher.h"
 #include "zypp/TmpPath.h"
 #include "zypp/ProgressData.h"
-#include "zypp/parser/yum/RepoParser.h"
-#include "zypp/repo/yum/Downloader.h"
 
 #include "zypp/sat/Pool.h"
 
-#include "zypp/PoolQuery.h"
+#include "zypp/ZYppCallbacks.h"
 
 using namespace std;
 using namespace zypp;
 using namespace zypp::repo;
+using zypp::media::MediaChangeReport;
+
 
 bool result_cb( const ResObject::Ptr &r )
 {
   cout << r << endl;
 }
+
+struct MediaChangeReportReceiver : public zypp::callback::ReceiveReport<MediaChangeReport>
+  {
+    virtual MediaChangeReport::Action
+    requestMedia(zypp::Url & url,
+                 unsigned                         mediumNr,
+                 const std::string &              label,
+                 MediaChangeReport::Error         error,
+                 const std::string &              description,
+                 const std::vector<std::string> & devices,
+                 unsigned int &                   index)
+    {
+      cout << std::endl;
+      MIL << "media problem, url: " << url.asString() << std::endl;
+      return MediaChangeReport::IGNORE;
+    }
+  };
+
 
 int main(int argc, char **argv)
 {
@@ -34,25 +52,21 @@ int main(int argc, char **argv)
     {
       ZYpp::Ptr z = getZYpp();
     
-      //z->initializeTarget("/");
-      //z->target()->load();
-
-      sat::Pool::instance().addRepoSolv("./foo.solv");
-
-//       for ( ResPool::const_iterator it = z->pool().begin(); it != z->pool().end(); ++it )
-//       {
-//         ResObject::constPtr res = it->resolvable();
-//         if ( res->name() == "kde4-kcolorchooser")
-//         {
-//           cout << res << endl;
-//           cout << res->summary() << " | " << res->size() << endl;
-//         }
-//       }
-
-      PoolQuery query();
-      //query.execute("kde", &result_cb);
+      MediaChangeReportReceiver report;
+      report.connect();
       
 
+      Fetcher fetcher;
+      MediaSetAccess access(Url("http://ftp.kernel.org/pub"));
+      filesystem::TmpDir tmp;
+      
+      OnMediaLocation loc;
+      loc.setLocation("/README2");
+      loc.setOptional(true);
+      
+      fetcher.enqueue(loc);
+      fetcher.start(tmp.path(), access);
+      
     }
     catch ( const Exception &e )
     {

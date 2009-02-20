@@ -556,7 +556,9 @@ namespace zypp
       try
       {
         Pathname tmp_file = media.provideFile(resource);
+
         Pathname dest_full_path = dest_dir + resource.filename();
+
         if ( assert_dir( dest_full_path.dirname() ) != 0 )
               ZYPP_THROW( Exception("Can't create " + dest_full_path.dirname().asString()));
         if ( filesystem::copy(tmp_file, dest_full_path ) != 0 )

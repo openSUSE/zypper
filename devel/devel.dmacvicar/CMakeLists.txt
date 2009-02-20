@@ -3,6 +3,9 @@ ADD_DEFINITIONS(-DSRC_DIR=${CMAKE_CURRENT_SOURCE_DIR})
 ADD_EXECUTABLE(rpmbuilder rpmbuilder.cc)
 TARGET_LINK_LIBRARIES(rpmbuilder  zypp )
 
+ADD_EXECUTABLE(testbed testbed.cc)
+TARGET_LINK_LIBRARIES(testbed  zypp )
+
 FIND_PACKAGE(Zsync)
 IF(ZSYNC_FOUND)
   ADD_EXECUTABLE(zsync zsync.cc)

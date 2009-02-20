@@ -720,14 +720,6 @@ namespace zypp
        *
        * \param accessId  The media access id to use.
        * \param filename  The filename to provide, relative to localRoot().
-       * \param cached    If cached is set to true, the function checks, if
-       *                  the file already exists and doesn't download it again
-       *                  if it does. Currently only the existence is checked,
-       *                  no other file attributes.
-       * \param checkonly If this and 'cached' are set to true only the
-       *                  existence of the file is checked but it's not
-       *                  downloaded. If 'cached' is unset an errer is
-       *                  returned always.
        *
        * \throws MediaNotOpenException in case of invalid access id.
        * \throws MediaNotAttachedException in case, that the media is not attached.
@@ -738,11 +730,10 @@ namespace zypp
        * \throws MediaSystemException in case a system operation fails.
        * \throws MediaException derived exception, depending on the url (handler).
        */
+
       void
       provideFile(MediaAccessId   accessId,
-                  const Pathname &filename,
-                  bool            cached    = false,
-                  bool            checkonly = false) const;
+                  const Pathname &filename ) const;
 
       /**
        * FIXME: see MediaAccess class.
