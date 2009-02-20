@@ -128,7 +128,29 @@ MediaAccess::open (const Url& url, const Pathname & preferred_attach_point)
     else if (scheme == "cifs")
         _handler = new MediaCIFS (url,preferred_attach_point);
     else if (scheme == "ftp" || scheme == "http" || scheme == "https")
-        _handler = new MediaAria2c (url,preferred_attach_point);
+    {
+        // Another good idea would be activate MediaAria2c handler via external var
+        bool use_aria = true;
+        const char *ariaenv = getenv( "ZYPP_ARIA2C" );
+        // if user disabled it manually
+        if ( ariaenv && ( strcmp(ariaenv, "0" ) == 0 ) )
+        {
+            WAR << "aria2c manually disabled. Falling back to curl";
+            use_aria = false;
+        }
+        
+        // disable if it does not exist
+        if ( ! MediaAria2c::existsAria2cmd() )
+        {
+            WAR << "aria2c not found. Falling back to curl";
+            use_aria = false;
+        }
+        
+        if ( use_aria )
+            _handler = new MediaAria2c (url,preferred_attach_point);
+        else
+            _handler = new MediaCurl (url,preferred_attach_point);
+    }
     else
     {
 	ZYPP_THROW(MediaUnsupportedUrlSchemeException(url));

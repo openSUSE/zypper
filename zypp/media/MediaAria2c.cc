@@ -628,10 +628,24 @@ bool MediaAria2c::doGetDoesFileExist( const Pathname & filename ) const
               return false;
 
           if ( str::contains(curlResponse, "200 OK") )
-              return false;
+              return true;
       }
 
       int code = curl.close();
+
+      switch (code)
+      {
+      case 0: break;
+          // connection problems
+          return true;
+      case 1:
+      case 2:
+      case 3:
+      case 7:
+      default:
+          ZYPP_THROW(MediaException(_url.asString()));
+      }
+      
 
       report->finish( _url ,  zypp::media::DownloadProgressReport::NO_ERROR, "");
       retry = false;

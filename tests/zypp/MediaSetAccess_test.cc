@@ -92,7 +92,7 @@ BOOST_AUTO_TEST_CASE(msa_url_rewrite)
     Url("http://ftp.opensuse.org/pub/opensuse/distribution/SL-OSS-factory/inst-source").asString());
 }
 
-#define DATADIR (string("dir:") + string(TESTS_SRC_DIR) + string("/zypp/data/mediasetaccess"))
+#define DATADIR (Pathname(TESTS_SRC_DIR) / "/zypp/data/mediasetaccess")
 
 /*
  *
@@ -121,8 +121,7 @@ BOOST_AUTO_TEST_CASE(msa_url_rewrite)
  */
 BOOST_AUTO_TEST_CASE(msa_provide_files_set)
 {
-  string urlstr = DATADIR + "/src1/cd1";
-  Url url(urlstr);
+  Url url = (DATADIR + "/src1/cd1").asUrl();
   MediaSetAccess setaccess(url);
 
   Pathname file1 = setaccess.provideFile("/test.txt", 1);
@@ -140,8 +139,7 @@ BOOST_AUTO_TEST_CASE(msa_provide_files_set)
  */
 BOOST_AUTO_TEST_CASE(msa_provide_files_set_verified)
 {
-  string urlstr = DATADIR + "/src1/cd1";
-  Url url(urlstr);
+  Url url = (DATADIR + "/src1/cd1").asUrl();
   MediaSetAccess setaccess(url);
 
   setaccess.setVerifier(1, media::MediaVerifierRef(new SimpleVerifier("media1")));
@@ -166,8 +164,7 @@ BOOST_AUTO_TEST_CASE(msa_provide_files_set_verified)
  */
 BOOST_AUTO_TEST_CASE(msa_provide_files_single)
 {
-  string urlstr = DATADIR + "/src2";
-  Url url(urlstr);
+  Url url = (DATADIR + "/src2").asUrl();
   MediaSetAccess setaccess(url);
   setaccess.setVerifier(1, media::MediaVerifierRef(new SimpleVerifier("media")));
 
@@ -186,8 +183,8 @@ BOOST_AUTO_TEST_CASE(msa_provide_files_single)
  */
 BOOST_AUTO_TEST_CASE(msa_provide_dir)
 {
-  string urlstr = DATADIR + "/src1/cd1";
-  Url url(urlstr);
+  Url url = (DATADIR + "/src1/cd1").asUrl();
+
   MediaSetAccess setaccess(url);
 
   Pathname dir = setaccess.provideDir("/dir", false, 1);
@@ -217,8 +214,7 @@ BOOST_AUTO_TEST_CASE(msa_provide_dir)
  */
 BOOST_AUTO_TEST_CASE(msa_provide_dirtree)
 {
-  string urlstr = DATADIR + "/src1/cd1";
-  Url url(urlstr);
+  Url url = (DATADIR + "/src1/cd1").asUrl(); 
   MediaSetAccess setaccess(url);
 
   Pathname dir = setaccess.provideDir("/dir", true, 1);
@@ -238,7 +234,8 @@ BOOST_AUTO_TEST_CASE(msa_provide_dirtree)
  */
 BOOST_AUTO_TEST_CASE(msa_provide_optional_file)
 {
-  MediaSetAccess setaccess(Url(DATADIR + "/src1/cd1"));
+  Url url = (DATADIR + "/src1/cd1").asUrl(); 
+  MediaSetAccess setaccess(url);
 
   // must not throw
   BOOST_CHECK(setaccess.provideOptionalFile("/foo", 1).empty() == true);
@@ -254,7 +251,8 @@ BOOST_AUTO_TEST_CASE(msa_provide_optional_file)
  */
 BOOST_AUTO_TEST_CASE(msa_file_exist_local)
 {
-  MediaSetAccess setaccess(Url(DATADIR + "/src1/cd1"));
+  Url url = (DATADIR + "/src1/cd1").asUrl(); 
+  MediaSetAccess setaccess(url);
 
   BOOST_CHECK(setaccess.doesFileExist("/test.txt"));
   BOOST_CHECK(!setaccess.doesFileExist("/testBADNAME.txt"));
@@ -265,12 +263,13 @@ BOOST_AUTO_TEST_CASE(msa_file_exist_local)
  */
 BOOST_AUTO_TEST_CASE(msa_file_exist_remote)
 {
-  WebServer web( Pathname(DATADIR) / "/src1/cd1", 10001 );
+  WebServer web( DATADIR / "/src1/cd1", 10002 );
   web.start();
   MediaSetAccess setaccess( web.url(), "/" );
 
-  BOOST_CHECK(setaccess.doesFileExist("/test.txt"));
   BOOST_CHECK(!setaccess.doesFileExist("/testBADNAME.txt"));
+  BOOST_CHECK(setaccess.doesFileExist("/test.txt"));
+
   web.stop();
 }
 

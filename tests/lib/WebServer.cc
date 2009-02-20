@@ -25,7 +25,7 @@ static inline string hostname()
     return result;
 }
 
-#define WEBRICK 1
+#define WEBRICK 0
 
 class WebServer::Impl
 {
@@ -88,7 +88,7 @@ public:
             
         stringstream strlog(_log);
 
-        string webrick_code = str::form("require 'webrick'; s = WEBrick::HTTPServer.new(:Port => %d, :DocumentRoot    => '%s'); trap('INT'){ s.shutdown }; trap('SIGKILL') { s.shutdown }; s.start;", _port, _docroot.c_str());
+        string webrick_code = str::form("require \"webrick\"; s = WEBrick::HTTPServer.new(:Port => %d, :DocumentRoot    => \"%s\"); trap(\"INT\"){ s.shutdown }; trap(\"SIGKILL\") { s.shutdown }; s.start;", _port, _docroot.c_str());
     
         const char* argv[] =
         {
@@ -163,10 +163,17 @@ public:
         MIL << "Starting shttpd (mongoose)" << endl;
         _log.clear();
         _ctx = mg_start();
-        if ( ! mg_set_option(_ctx, "ports", str::form("%d", _port).c_str()) )
-            ZYPP_THROW(Exception("Failed to set port"));
+
+        int ret = 0;
+        ret = mg_set_option(_ctx, "ports", str::form("%d", _port).c_str());
+        if (  ret != 1 )
+            ZYPP_THROW(Exception(str::form("Failed to set port: %d", ret)));
         
-        mg_set_option(_ctx, "root", _docroot.c_str());
+        MIL << "Setting root directory to : '" << _docroot << "'" << endl;
+        ret = mg_set_option(_ctx, "root", _docroot.c_str());
+        if (  ret != 1 )
+            ZYPP_THROW(Exception(str::form("Failed to set docroot: %d", ret)));
+
         _stopped = false;
     }
 
@@ -175,7 +182,7 @@ public:
         return _port;
     }
 
-    
+   
     virtual string log() const
     {
         return _log;
