@@ -1,4 +1,12 @@
 -------------------------------------------------------------------
+Fri Feb 20 16:28:19 CET 2009 - dmacvicar@suse.de
+
+- MediaAria2c: allow disabling aria2 using ZYPP_ARIA2C=0.
+  Various improvements including file existence checking
+  Disable HEAD request if aria2c >= 1.20
+  Restrict max connections to 2 for now.
+
+-------------------------------------------------------------------
 Wed Feb 18 15:51:38 CET 2009 - ma@suse.de
 
 - Neither lose packages with empty name, nor SEGV when processing them. (bnc #470011)
