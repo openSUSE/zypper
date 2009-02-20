@@ -95,13 +95,8 @@ class MediaAria2c : public MediaHandler {
 
     bool authenticate(const std::string & availAuthTypes, bool firstTry) const;
 
-    mutable std::string _userpwd;
-    std::string _proxy;
-    std::string _proxyuserpwd;
     std::string _currentCookieFile;
     std::string _ca_path;
-    long        _xfer_timeout;
-
     static Pathname _cookieFile;
 
     /** Aria2c path */

@@ -22,6 +22,7 @@
 #include "zypp/base/Gettext.h"
 #include "zypp/ZYppCallbacks.h"
 
+#include "zypp/Edition.h"
 #include "zypp/Target.h"
 #include "zypp/ZYppFactory.h"
 
@@ -156,6 +157,7 @@ void fillSettingsSystemProxy( const Url&url, TransferSettings &s )
  * and it is filled.
  */
 void fillAriaCmdLine( const Pathname &ariapath,
+                      const string &ariaver,
                       const TransferSettings &s,
                       const Url &url,
                       const Pathname &destination,
@@ -166,6 +168,13 @@ void fillAriaCmdLine( const Pathname &ariapath,
     args.push_back("--summary-interval=1");
     args.push_back("--follow-metalink=mem");
     args.push_back("--check-integrity=true");
+
+    // only present in recent aria
+    if ( Edition(ariaver) >= Edition("1.20") )
+        args.push_back( "--use-head=false");
+
+    // TODO make this one configurable
+    args.push_back( "--max-concurrent-downloads=2");
 
     // add the anonymous id.
     for ( TransferSettings::Headers::const_iterator it = s.headersBegin();
@@ -484,7 +493,7 @@ void MediaAria2c::getFileCopy( const Pathname & filename , const Pathname & targ
 
   ExternalProgram::Arguments args;
 
-  fillAriaCmdLine(_aria2cPath, _settings, fileurl, target.dirname(), args);
+  fillAriaCmdLine(_aria2cPath, _aria2cVersion, _settings, fileurl, target.dirname(), args);
   
   do
   {
