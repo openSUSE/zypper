@@ -9,6 +9,7 @@
 #include "zypp/base/NonCopyable.h"
 #include "zypp/ExternalProgram.h"
 #include "zypp/media/TransferSettings.h"
+#include "zypp/ZConfig.h"
 
 using namespace std;
 
@@ -27,6 +28,10 @@ public:
         : _useproxy(false)
         , _timeout(0)
         , _connect_timeout(0)
+        , _maxConcurrentConnections(ZConfig::instance().download_max_concurrent_connections())
+        , _minDownloadSpeed(ZConfig::instance().download_min_download_speed())
+        , _maxDownloadSpeed(ZConfig::instance().download_max_download_speed())
+        , _maxSilentTries(ZConfig::instance().download_max_silent_tries())
     {}
 
     virtual ~Impl()
@@ -58,6 +63,11 @@ public:
     long _connect_timeout;
     Url _url;
     Pathname _targetdir;
+
+    long _maxConcurrentConnections;
+    long _minDownloadSpeed;
+    long _maxDownloadSpeed;
+    long _maxSilentTries;
 };
     
 TransferSettings::TransferSettings()
@@ -169,6 +179,46 @@ void TransferSettings::setConnectTimeout( long t )
 long TransferSettings::connectTimeout() const
 {
     return _impl->_connect_timeout;
+}
+
+long TransferSettings::maxConcurrentConnections() const
+{
+    return _impl->_maxConcurrentConnections;
+}
+
+void TransferSettings::setMaxConcurrentConnections(long v)
+{
+    _impl->_maxConcurrentConnections = v;
+}
+
+long TransferSettings::minDownloadSpeed() const
+{
+    return _impl->_minDownloadSpeed;
+}
+
+void TransferSettings::setMinDownloadSpeed(long v)
+{
+    _impl->_minDownloadSpeed = v;
+}
+
+long TransferSettings::maxDownloadSpeed() const
+{
+    return _impl->_maxDownloadSpeed;
+}
+
+void TransferSettings::setMaxDownloadSpeed(long v)
+{
+    _impl->_maxDownloadSpeed = v;
+}
+
+long TransferSettings::maxSilentTries() const
+{
+    return _impl->_maxSilentTries;
+}
+
+void TransferSettings::setMaxSilentTries(long v)
+{
+    _impl->_maxSilentTries = v;
 }
 
 } // ns media

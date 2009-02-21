@@ -13,6 +13,7 @@
 #define ZYPP_MEDIA_MEDIAARIA2C_H
 
 #include "zypp/media/MediaHandler.h"
+#include "zypp/media/MediaCurl.h"
 #include "zypp/media/TransferSettings.h"
 #include "zypp/ZYppCallbacks.h"
 
@@ -27,7 +28,7 @@ namespace zypp {
  *
  * @see MediaHandler
  **/
-class MediaAria2c : public MediaHandler {
+class MediaAria2c : public MediaCurl {
 
   public:
    /**

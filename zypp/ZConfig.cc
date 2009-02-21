@@ -154,6 +154,10 @@ namespace zypp
         , repo_refresh_delay      	( 10 )
         , download_use_deltarpm   	( true )
         , download_use_deltarpm_always  ( false )
+        , download_max_concurrent_connections(2)
+        , download_min_download_speed(0)
+        , download_max_download_speed(0)
+        , download_max_silent_tries(5)
 	, solver_onlyRequires   	( false )
         , apply_locks_file              ( true )
 
@@ -239,6 +243,22 @@ namespace zypp
                 else if ( entry == "download.use_deltarpm.always" )
                 {
                   download_use_deltarpm_always = str::strToBool( value, download_use_deltarpm_always );
+                }
+                else if ( entry == "download.max_concurrent_connections" )
+                {
+                  str::strtonum(value, download_max_concurrent_connections);
+                }
+                else if ( entry == "download.min_download_speed" )
+                {
+                  str::strtonum(value, download_min_download_speed);
+                }
+                else if ( entry == "download.max_download_speed" )
+                {
+                  str::strtonum(value, download_max_download_speed);
+                }
+                else if ( entry == "download.max_silent_tries" )
+                {
+                  str::strtonum(value, download_max_silent_tries);
                 }
                 else if ( entry == "vendordir" )
                 {
@@ -356,6 +376,11 @@ namespace zypp
 
     bool download_use_deltarpm;
     bool download_use_deltarpm_always;
+
+    int download_max_concurrent_connections;
+    int download_min_download_speed;
+    int download_max_download_speed;
+    int download_max_silent_tries;
 
     bool solver_onlyRequires;
     Pathname solver_checkSystemFile;
@@ -540,12 +565,23 @@ namespace zypp
   bool ZConfig::download_use_deltarpm_always() const
   { return download_use_deltarpm() && _pimpl->download_use_deltarpm_always; }
 
+  long ZConfig::download_max_concurrent_connections() const
+  { return _pimpl->download_max_concurrent_connections; }
+        
+  long ZConfig::download_min_download_speed() const
+  { return _pimpl->download_min_download_speed; }
+    
+  long ZConfig::download_max_download_speed() const
+  { return _pimpl->download_max_download_speed; }
+
+  long ZConfig::download_max_silent_tries() const
+  { return _pimpl->download_max_silent_tries; }
+
   bool ZConfig::solver_onlyRequires() const
   { return _pimpl->solver_onlyRequires; }
 
   Pathname ZConfig::solver_checkSystemFile() const
   { return _pimpl->solver_checkSystemFile; }
-
 
   std::set<IdString> ZConfig::multiversion() const
   { return _pimpl->multiversion; }

@@ -1,6 +1,6 @@
 
-#ifndef TRANSFER_PROGRAM_H_
-#define TRANSFER_PROGRAM_H_
+#ifndef TRANSFER_SETTINGS_H_
+#define TRANSFER_SETTINGS_H_
 
 #include <string>
 #include <vector>
@@ -15,9 +15,7 @@ namespace media
 {
 
 /**
- * Easy access to the transfer command line program no matter
- * which one it is
- *
+ * Holds transfer setting
  */
 class TransferSettings
 {
@@ -139,6 +137,48 @@ public:
    * transfer timeout
    */
   long timeout() const;
+
+  /**
+   * Maximum number of concurrent connections for a single transfer
+   */
+  long maxConcurrentConnections() const;
+
+  /**
+   * Set maximum number of concurrent connections for a single transfer
+   */
+  void setMaxConcurrentConnections(long v);
+
+  /**
+   * Minimum download speed (bytes per second)
+   * until the connection is dropped
+   */
+  long minDownloadSpeed() const;
+  
+  /**
+   * Set minimum download speed (bytes per second)
+   * until the connection is dropped
+   */
+  void setMinDownloadSpeed(long v);
+
+  /**
+   * Maximum download speed (bytes per second)
+   */
+  long maxDownloadSpeed() const;
+
+  /**
+   * Set max download speed (bytes per second)
+   */
+  void setMaxDownloadSpeed(long v);
+
+  /**
+   * Maximum silent retries
+   */
+  long maxSilentTries() const;
+
+  /**
+   * Set maximum silent retries
+   */
+  void setMaxSilentTries(long v);
 
 protected:
   class Impl;

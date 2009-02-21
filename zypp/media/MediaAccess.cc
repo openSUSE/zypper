@@ -321,17 +321,8 @@ MediaAccess::release( const std::string & ejectDev )
 // filename is interpreted relative to the attached url
 // and a path prefix is preserved to destination
 void
-MediaAccess::provideFile( const Pathname & filename, bool cached, bool checkonly) const
+MediaAccess::provideFile( const Pathname & filename ) const
 {
-  if ( cached ) {
-    PathInfo pi( localPath( filename ) );
-    if ( pi.isExist() )
-      return;
-  }
-
-  if(checkonly)
-    ZYPP_THROW(MediaFileNotFoundException(url(), filename));
-
   if ( !_handler ) {
     ZYPP_THROW(MediaNotOpenException("provideFile(" + filename.asString() + ")"));
   }

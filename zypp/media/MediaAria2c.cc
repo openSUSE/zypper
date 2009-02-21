@@ -26,10 +26,12 @@
 #include "zypp/Target.h"
 #include "zypp/ZYppFactory.h"
 
+#include "zypp/media/TransferProgram.h"
 #include "zypp/media/MediaAria2c.h"
 #include "zypp/media/proxyinfo/ProxyInfos.h"
 #include "zypp/media/ProxyInfo.h"
 #include "zypp/media/MediaUserAuth.h"
+#include "zypp/media/MediaCurl.h"
 #include "zypp/thread/Once.h"
 #include <cstdlib>
 #include <sys/types.h>
@@ -169,12 +171,28 @@ void fillAriaCmdLine( const Pathname &ariapath,
     args.push_back("--follow-metalink=mem");
     args.push_back("--check-integrity=true");
 
-    // only present in recent aria
-    if ( Edition(ariaver) >= Edition("1.20") )
-        args.push_back( "--use-head=false");
+    // only present in recent aria lets find out the aria version
+    vector<string> fields;    
+    // "aria2c version x.x"
+    str::split( ariaver, std::back_inserter(fields));
+    if ( fields.size() == 3 )
+    {
+        if ( Edition(fields[2]) >= Edition("1.1.2") )
+            args.push_back( "--use-head=false");
+    }
+    
+    if ( s.maxDownloadSpeed() > 0 )
+        args.push_back(str::form("--max-download-limit=%ld", s.maxDownloadSpeed()));
+    if ( s.minDownloadSpeed() > 0 )
+        args.push_back(str::form("--lowest-speed-limit=%ld", s.minDownloadSpeed()));
 
+    args.push_back(str::form("--max-tries=%ld", s.maxSilentTries()));
+
+    if ( Edition(fields[2]) < Edition("1.2.0") )
+        WAR << "aria2c is older than 1.2.0, some features may be disabled" << endl;
+    
     // TODO make this one configurable
-    args.push_back( "--max-concurrent-downloads=2");
+    args.push_back(str::form("--max-concurrent-downloads=%ld", s.maxConcurrentConnections()));
 
     // add the anonymous id.
     for ( TransferSettings::Headers::const_iterator it = s.headersBegin();
@@ -232,74 +250,6 @@ void fillAriaCmdLine( const Pathname &ariapath,
     args.push_back(url.asString().c_str());
 }
 
-/**
- * comannd line for curl.
- * The argument list gets passed as reference
- * and it is filled.
- */
-void fillCurlCmdLine( const Pathname &curlpath,
-                      const TransferSettings &s,
-                      const Url &url,
-                      ExternalProgram::Arguments &args )
-{
-    args.push_back(curlpath.c_str());
-    // only do a head request
-    args.push_back("-I");
-    args.push_back("-A"); args.push_back(s.userAgentString());
-
-    // headers.
-    for ( TransferSettings::Headers::const_iterator it = s.headersBegin();
-          it != s.headersEnd();
-          ++it )
-    {
-        args.push_back("-H");
-        args.push_back(it->c_str());
-    }
-    
-    args.push_back("--connect-timeout");
-    args.push_back(str::numstring(s.timeout()));
-
-    if ( s.username().empty() )
-    {
-        if ( url.getScheme() == "ftp" )
-        {
-            string id = "yast2:";
-            id += VERSION;
-            args.push_back("--user");
-            args.push_back(id);
-            DBG << "Anonymous FTP identification: '" << id << "'" << endl;
-        }
-    }
-    else
-    {
-        string userpass = s.username();
-                    
-        if ( s.password().size() )
-            userpass += (":" + s.password());
-        args.push_back("--user");
-        args.push_back(userpass);
-    }
-    
-    if ( s.proxyEnabled() )
-    {
-        args.push_back("--proxy");
-        args.push_back(s.proxy());
-        if ( ! s.proxyUsername().empty() )
-        {
-            string userpass = s.proxyUsername();
-                    
-            if ( s.proxyPassword().size() )
-                userpass += (":" + s.proxyPassword());
-            args.push_back("--proxy-user");
-            args.push_back(userpass);
-        }
-    }
-
-    args.push_back("--url");
-    args.push_back(url.asString().c_str());
-}
-
-
 static const char *const anonymousIdHeader()
 {
   // we need to add the release and identifier to the
@@ -355,12 +305,11 @@ const char *const MediaAria2c::agentString()
 
 MediaAria2c::MediaAria2c( const Url &      url_r,
                       const Pathname & attach_point_hint_r )
-    : MediaHandler( url_r, attach_point_hint_r,
-                    "/", // urlpath at attachpoint
-                    true ) // does_download
+    : MediaCurl( url_r, attach_point_hint_r )
 {
   MIL << "MediaAria2c::MediaAria2c(" << url_r << ", " << attach_point_hint_r << ")" << endl;
 
+  /*
   if( !attachPoint().empty())
   {
     PathInfo ainfo(attachPoint());
@@ -380,6 +329,7 @@ MediaAria2c::MediaAria2c( const Url &      url_r,
     if( atemp != NULL)
       ::free(atemp);
   }
+  */
 
    //At this point, we initialize aria2c path
    _aria2cPath = Pathname( whereisAria2c().asString() );
@@ -390,25 +340,8 @@ MediaAria2c::MediaAria2c( const Url &      url_r,
 
 void MediaAria2c::attachTo (bool next)
 {
-   // clear last arguments
-  if ( next )
-    ZYPP_THROW(MediaNotSupportedException(_url));
-
-  if ( !_url.isValid() )
-    ZYPP_THROW(MediaBadUrlException(_url));
-
-  if( !isUseableAttachPoint(attachPoint()))
-  {
-    std::string mountpoint = createAttachPoint().asString();
-
-    if( mountpoint.empty())
-      ZYPP_THROW( MediaBadAttachPointException(url()));
-
-    setAttachPoint( mountpoint, true);
-  }
-
-  disconnectFrom();
-
+  MediaCurl::attachTo(next);
+    
   _settings.setUserAgentString(agentString());
   _settings.addHeader(anonymousIdHeader());
   _settings.addHeader(distributionFlavorHeader());
@@ -427,25 +360,23 @@ void MediaAria2c::attachTo (bool next)
   }
 
   DBG << "Proxy: " << (_settings.proxy().empty() ? "-none-" : _settings.proxy()) << endl;
-
-  MediaSourceRef media( new MediaSource(_url.getScheme(), _url.asString()));
-  setMediaSource(media);
-
 }
 
 bool
 MediaAria2c::checkAttachPoint(const Pathname &apoint) const
 {
-  return MediaHandler::checkAttachPoint( apoint, true, true);
+    return MediaCurl::checkAttachPoint( apoint );
 }
 
 void MediaAria2c::disconnectFrom()
 {
+    MediaCurl::disconnectFrom();
+    
 }
 
 void MediaAria2c::releaseFrom( const std::string & ejectDev )
 {
-  disconnect();
+  MediaCurl::releaseFrom(ejectDev);
 }
 
 static Url getFileUrl(const Url & url, const Pathname & filename)
@@ -573,147 +504,17 @@ void MediaAria2c::getFileCopy( const Pathname & filename , const Pathname & targ
 
 bool MediaAria2c::getDoesFileExist( const Pathname & filename ) const
 {
-  bool retry = false;
-  AuthData auth_data;
-
-  do
-  {
-    try
-    {
-      return doGetDoesFileExist( filename );
-    }
-    // authentication problem, retry with proper authentication data
-    catch (MediaUnauthorizedException & ex_r)
-    {
-      if(authenticate(ex_r.hint(), !retry))
-        retry = true;
-      else
-        ZYPP_RETHROW(ex_r);
-    }
-    // unexpected exception
-    catch (MediaException & excpt_r)
-    {
-      ZYPP_RETHROW(excpt_r);
-    }
-  }
-  while (retry);
-
-  return false;
+    return MediaCurl::getDoesFileExist(filename);
 }
 
 bool MediaAria2c::doGetDoesFileExist( const Pathname & filename ) const
 {
-  DBG << filename.asString() << endl;
-  callback::SendReport<DownloadProgressReport> report;
-
-  Url fileurl(getFileUrl(_url, filename));
-  bool retry = false;
-
-  ExternalProgram::Arguments args;
-
-  fillCurlCmdLine("/usr/bin/curl", _settings, fileurl, args);
-  
-  do
-  {
-    try
-    {
-      report->start(_url, fileurl.asString() );
-
-      ExternalProgram curl(args, ExternalProgram::Stderr_To_Stdout);
-      //Process response
-      for(std::string curlResponse( curl.receiveLine());
-          curlResponse.length();
-          curlResponse = curl.receiveLine())
-      {
-      
-          if ( str::contains(curlResponse, "401 Authorization Required") )
-          {
-              ZYPP_THROW(MediaUnauthorizedException(
-                             _url, "Login failed.", "Login failed", "auth hint"
-                             ));
-          }
-
-          if ( str::contains(curlResponse, "404 Not Found") )
-              return false;
-
-          if ( str::contains(curlResponse, "200 OK") )
-              return true;
-      }
-
-      int code = curl.close();
-
-      switch (code)
-      {
-      case 0: break;
-          // connection problems
-          return true;
-      case 1:
-      case 2:
-      case 3:
-      case 7:
-      default:
-          ZYPP_THROW(MediaException(_url.asString()));
-      }
-      
-
-      report->finish( _url ,  zypp::media::DownloadProgressReport::NO_ERROR, "");
-      retry = false;
-    }
-    // retry with proper authentication data
-    catch (MediaUnauthorizedException & ex_r)
-    {
-      if(authenticate(ex_r.hint(), !retry))
-        retry = true;
-      else
-      {
-        report->finish(fileurl, zypp::media::DownloadProgressReport::ACCESS_DENIED, ex_r.asUserHistory());
-        ZYPP_RETHROW(ex_r);
-      }
-
-    }
-    // unexpected exception
-    catch (MediaException & excpt_r)
-    {
-      // FIXME: error number fix
-      report->finish(fileurl, zypp::media::DownloadProgressReport::ERROR, excpt_r.asUserHistory());
-      ZYPP_RETHROW(excpt_r);
-    }
-  }
-  while (retry);
-
-  report->finish(fileurl, zypp::media::DownloadProgressReport::NO_ERROR, "");
-  return true;
+    return MediaCurl::doGetDoesFileExist(filename);
 }
-
+    
 void MediaAria2c::getDir( const Pathname & dirname, bool recurse_r ) const
 {
-  filesystem::DirContent content;
-  getDirInfo( content, dirname, /*dots*/false );
-
-  for ( filesystem::DirContent::const_iterator it = content.begin(); it != content.end(); ++it ) {
-      Pathname filename = dirname + it->name;
-      int res = 0;
-
-      switch ( it->type ) {
-      case filesystem::FT_NOT_AVAIL: // old directory.yast contains no typeinfo at all
-      case filesystem::FT_FILE:
-        getFile( filename );
-        break;
-      case filesystem::FT_DIR: // newer directory.yast contain at least directory info
-        if ( recurse_r ) {
-          getDir( filename, recurse_r );
-        } else {
-          res = assert_dir( localPath( filename ) );
-          if ( res ) {
-            WAR << "Ignore error (" << res <<  ") on creating local directory '" << localPath( filename ) << "'" << endl;
-          }
-        }
-        break;
-      default:
-        // don't provide devices, sockets, etc.
-        break;
-      }
-  }
+    MediaCurl::getDir(dirname, recurse_r);
 }
 
 bool MediaAria2c::authenticate(const std::string & availAuthTypes, bool firstTry) const

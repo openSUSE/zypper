@@ -243,7 +243,7 @@ namespace zypp {
 	 * \throws MediaException
 	 *
 	 **/
-	void provideFile( const Pathname & filename, bool cached = false, bool checkonly = false ) const;
+	void provideFile( const Pathname & filename ) const;
 
 	/**
 	 * Remove filename below attach point IFF handler downloads files

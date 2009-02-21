@@ -56,6 +56,7 @@ namespace zypp
   class ZConfig : private base::NonCopyable
   {
     public:
+
       /** Singleton ctor */
       static ZConfig & instance();
 
@@ -152,6 +153,28 @@ namespace zypp
        * Amount of time in minutes that must pass before another refresh.
        */
       unsigned repo_refresh_delay() const;
+
+      /**
+       * Maximum number of concurrent connections for a single transfer
+       */
+      long download_max_concurrent_connections() const;
+
+      /**
+       * Minimum download speed (bytes per second)
+       * until the connection is dropped
+       */
+      long download_min_download_speed() const;
+
+      /**
+       * Maximum download speed (bytes per second)
+       */
+      long download_max_download_speed() const;
+
+      /**
+       * Maximum silent tries
+       */
+      long download_max_silent_tries() const;
+
 
       /** Whether to consider using a deltarpm when downloading a package.
        * Config option <tt>download.use_deltarpm (true)</tt>
