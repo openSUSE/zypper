@@ -1,4 +1,14 @@
 -------------------------------------------------------------------
+Sat Feb 21 18:31:17 CET 2009 - dmacvicar@suse.de
+
+Implemented the following options with aria backend:
+
+- download.max_concurrent_connections (default 2)
+  download.min_download_speed (default no limit)
+  download.max_download_speed (default no limit)
+  download.max_silent_tries (default 5)
+
+-------------------------------------------------------------------
 Fri Feb 20 16:28:19 CET 2009 - dmacvicar@suse.de
 
 - MediaAria2c: allow disabling aria2 using ZYPP_ARIA2C=0.
