@@ -1,4 +1,9 @@
 -------------------------------------------------------------------
+Sun Feb 22 15:27:11 CET 2009 - ma@suse.de
+
+- Never refresh repositories from CD/DVD, once they are created. (bnc #476429)
+
+-------------------------------------------------------------------
 Fri Feb 20 16:28:19 CET 2009 - dmacvicar@suse.de
 
 - MediaAria2c: allow disabling aria2 using ZYPP_ARIA2C=0.
