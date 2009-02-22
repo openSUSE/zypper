@@ -1,3 +1,10 @@
+/*---------------------------------------------------------------------------*\
+                          ____  _ _ __ _ __  ___ _ _
+                         |_ / || | '_ \ '_ \/ -_) '_|
+                         /__|\_, | .__/ .__/\___|_|
+                             |__/|_|  |_|
+\*---------------------------------------------------------------------------*/
+
 #include <ctype.h>
 #include <iostream>
 #include <sstream>
@@ -14,6 +21,8 @@
 #include "zypp/base/String.h"
 
 #include "Zypper.h"
+#include "utils/colors.h"
+
 #include "prompt.h"
 
 using namespace std;
@@ -45,24 +54,66 @@ void PromptOptions::setOptions(const std::string & option_str, unsigned int defa
     _default = default_opt;
 }
 
+
+
 const string PromptOptions::optionString() const
 {
-  string option_str;
+  ostringstream option_str;
   StrVector::const_iterator it;
   if ((it = options().begin()) != options().end())
   {
-    option_str += (defaultOpt() == 0 ? zypp::str::toUpper(*it) : *it);
+    if (defaultOpt() == 0)
+      option_str << "_" << *it << "_";
+    else
+      option_str << *it;
     ++it;
   }
   for (unsigned int i = 1; it != options().end() && i < _shown_count; ++it, ++i)
     if (isEnabled(i))
-      option_str += "/" + (defaultOpt() == i ? zypp::str::toUpper(*it) : *it);
+    {
+      option_str << "/";
+      if (defaultOpt() == i)
+        option_str << "_" << *it << "_";
+      else
+        option_str << *it;
+    }
 
   if (!_opt_help.empty())
-    option_str += "/?";
+    option_str << "/?";
 
-  return option_str;
+  return option_str.str();
 }
+
+const string PromptOptions::optionStringColored() const
+{
+  ostringstream option_str;
+  StrVector::const_iterator it;
+  if ((it = options().begin()) != options().end())
+  {
+    if (defaultOpt() == 0)
+      option_str << COLOR_YELLOW << *it;
+    else
+      option_str << COLOR_WHITE << *it;
+    ++it;
+  }
+  for (unsigned int i = 1; it != options().end() && i < _shown_count; ++it, ++i)
+    if (isEnabled(i))
+    {
+      option_str << COLOR_WHITE << "/";
+      if (defaultOpt() == i)
+        option_str << COLOR_YELLOW << *it;
+      else
+        option_str << *it;
+    }
+
+  if (!_opt_help.empty())
+    option_str << COLOR_WHITE << "/?";
+
+  option_str << COLOR_RESET;
+
+  return option_str.str();
+}
+
 
 void PromptOptions::setOptionHelp(unsigned int opt, const std::string & help_str)
 {
@@ -302,10 +353,9 @@ unsigned int get_prompt_reply(Zypper & zypper,
     if (poptions.isYesNoPrompt())
     {
       s << " " << format(
-      // TranslatorExplanation don't translate the 'y' and 'n', they can always be used as answers.
-      // The second and the third %s is the translated 'yes' and 'no' string (lowercase).
-      _("Enter 'y' for '%s' or 'n' for '%s' if nothing else works for you."))
-      % _("yes") % _("no");
+      // translators: the %s are: 'y', 'n', 'yes' (translated), and 'no' (translated).
+      _("Enter '%s' for '%s' or '%s' for '%s' if nothing else works for you."))
+      % "y" % "n" % _("yes") % _("no");
     }
 
     zypper.out().prompt(pid, s.str(), poptions);

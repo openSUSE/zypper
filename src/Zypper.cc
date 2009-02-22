@@ -8,9 +8,6 @@
 // zypper - command line interface for libzypp, the package management library
 // http://en.opensuse.org/Zypper
 
-#ifdef HAVE_CONFIG_H
-#include <config.h>
-#endif
 #include <iostream>
 #include <fstream>
 #include <sstream>

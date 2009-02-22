@@ -1,3 +1,10 @@
+/*---------------------------------------------------------------------------*\
+                          ____  _ _ __ _ __  ___ _ _
+                         |_ / || | '_ \ '_ \/ -_) '_|
+                         /__|\_, | .__/ .__/\___|_|
+                             |__/|_|  |_|
+\*---------------------------------------------------------------------------*/
+
 #include <iostream>
 #include <sstream>
 
@@ -7,7 +14,8 @@
 #include "zypp/ByteCount.h" // for download progress reporting
 #include "zypp/base/String.h" // for toUpper()
 
-#include "../main.h"
+#include "main.h"
+#include "utils/colors.h"
 #include "AliveCursor.h"
 
 #include "OutNormal.h"
@@ -17,6 +25,11 @@ using std::cerr;
 using std::endl;
 using std::string;
 using std::ostringstream;
+
+OutNormal::OutNormal(Verbosity verbosity)
+  : Out(TYPE_NORMAL, verbosity),
+    _has_colors(has_colors()), _isatty(isatty(STDOUT_FILENO))
+{}
 
 OutNormal::~OutNormal()
 {
@@ -44,19 +57,30 @@ void OutNormal::info(const std::string & msg, Verbosity verbosity, Type mask)
 {
   if (infoWarningFilter(verbosity, mask))
     return;
-  cout << msg << endl;
+
+  if (_has_colors && verbosity > Out::QUIET)
+    cout << COLOR_WHITE << msg << COLOR_RESET << endl;
+  else
+    cout << msg << endl;
 }
 
 void OutNormal::warning(const std::string & msg, Verbosity verbosity, Type mask)
 {
   if (infoWarningFilter(verbosity, mask))
     return;
-  info(_("Warning: ") + msg, verbosity, mask);
+
+  if (_has_colors)
+    cout << COLOR_YELLOW_BOLD << _("Warning: ") << COLOR_RESET << msg << endl;
+  else
+    cout << msg << endl;
 }
 
 void OutNormal::error(const std::string & problem_desc, const std::string & hint)
 {
-  cerr << problem_desc;
+  if (_has_colors)
+    cerr << COLOR_RED_BOLD << problem_desc << COLOR_RESET;
+  else
+    cerr << problem_desc;
   if (!hint.empty() && this->verbosity() > Out::QUIET)
     cerr << endl << hint;
   cerr << endl;
@@ -68,10 +92,17 @@ void OutNormal::error(const zypp::Exception & e,
                       const string & problem_desc,
                       const string & hint)
 {
+  if (_has_colors)
+    cerr << COLOR_RED_BOLD;
+
   // problem
   cerr << problem_desc << endl;
   // cause
   cerr << zyppExceptionReport(e) << endl;
+
+  if (_has_colors)
+    cerr << COLOR_RESET;
+
   // hint
   if (!hint.empty())
     cerr << hint << endl;
@@ -122,7 +153,7 @@ void OutNormal::progressStart(const std::string & id,
   if (progressFilter())
     return;
 
-  if (!isatty(STDOUT_FILENO))
+  if (!_isatty)
     cout << label << " [";
 
   if (is_tick)
@@ -147,10 +178,15 @@ void OutNormal::progressEnd(const std::string & id, const string & label, bool e
   if (progressFilter())
     return;
 
-  if (isatty(STDOUT_FILENO))
-    cout << CLEARLN << label << " [" << (error ? _("error") : _("done")) << "]";
-  else
-   cout << "]";
+  if (_isatty)
+  {
+    cout << CLEARLN << label << " [";
+    if (error)
+      print_color(_("error"), COLOR_RED);
+    else
+      cout << _("done");
+  }
+  cout << "]";
   cout << endl << std::flush;
 }
 
@@ -237,7 +273,7 @@ void OutNormal::prompt(PromptId id,
     cout << startdesc << endl;
   cout << prompt;
   if (!poptions.empty())
-    cout << " [" << poptions.optionString() << "]";
+    cout << " [" << (_has_colors ? poptions.optionStringColored() : poptions.optionString()) << "]";
   cout << ": " << std::flush;
 }
 
@@ -264,5 +300,5 @@ void OutNormal::promptHelp(const PromptOptions & poptions)
     }
   }
 
-  cout << endl << "[" << poptions.optionString() << "]: " << std::flush;
+  cout << endl << "[" << (_has_colors ? poptions.optionStringColored() : poptions.optionString()) << "]: " << std::flush;
 }

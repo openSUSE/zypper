@@ -1,3 +1,10 @@
+/*---------------------------------------------------------------------------*\
+                          ____  _ _ __ _ __  ___ _ _
+                         |_ / || | '_ \ '_ \/ -_) '_|
+                         /__|\_, | .__/ .__/\___|_|
+                             |__/|_|  |_|
+\*---------------------------------------------------------------------------*/
+
 #ifndef OUTNORMAL_H_
 #define OUTNORMAL_H_
 
@@ -6,7 +13,7 @@
 class OutNormal : public Out
 {
 public:
-  OutNormal(Verbosity verbosity = NORMAL) : Out(TYPE_NORMAL, verbosity) {}
+  OutNormal(Verbosity verbosity = NORMAL);
   virtual ~OutNormal();
 
 public:
@@ -20,13 +27,13 @@ public:
   /**
    * Prints \a msg prepended with <tt>"Warning: "</tt> to the standard output
    * and appends a newline.
-   * 
+   *
    * \see Out::warning
    */
   virtual void warning(const std::string & msg, Verbosity verbosity = NORMAL, Type mask = TYPE_ALL);
-  
+
   /**
-   * 
+   *
    */
   virtual void error(const std::string & problem_desc, const std::string & hint = "");
   virtual void error(const zypp::Exception & e,
@@ -52,7 +59,7 @@ public:
   virtual void dwnldProgressEnd(const zypp::Url & uri,
                                 long rate = -1,
                                 bool error = false);
-  
+
   virtual void prompt(PromptId id,
                       const std::string & prompt,
                       const PromptOptions & poptions,
@@ -65,6 +72,8 @@ protected:
 
 private:
   bool infoWarningFilter(Verbosity verbosity, Type mask);
+  bool _has_colors;
+  bool _isatty;
 };
 
 #endif /*OUTNORMAL_H_*/

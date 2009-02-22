@@ -1,3 +1,10 @@
+/*---------------------------------------------------------------------------*\
+                          ____  _ _ __ _ __  ___ _ _
+                         |_ / || | '_ \ '_ \/ -_) '_|
+                         /__|\_, | .__/ .__/\___|_|
+                             |__/|_|  |_|
+\*---------------------------------------------------------------------------*/
+
 #ifndef ZYPPERPROMPT_H_
 #define ZYPPERPROMPT_H_
 
@@ -46,6 +53,7 @@ public:
   void setOptions(const std::string & option_str, unsigned int default_opt);
   unsigned int defaultOpt() const { return _default; }
   const std::string optionString() const;
+  const std::string optionStringColored() const;
   bool empty() const { return _options.empty(); }
   bool isYesNoPrompt() const;
 
