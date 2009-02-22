@@ -79,6 +79,17 @@ public:
   std::string password() const;
 
   /**
+   * returns the user and password as 
+   * a user:pass string
+   */
+  std::string userPassword() const;
+
+  /**
+   * sets anonymous authentication (ie: for ftp)
+   */
+  void setAnonymousAuth();
+
+  /**
    * whether the proxy is used or not
    */
   void setProxyEnabled( bool enabled );
@@ -117,6 +128,12 @@ public:
    * proxy auth password
    */
   std::string proxyPassword() const;
+
+  /**
+   * returns the proxy user and password as 
+   * a user:pass string
+   */
+  std::string proxyUserPassword() const;
 
   /**
    * set the connect timeout
@@ -179,6 +196,37 @@ public:
    * Set maximum silent retries
    */
   void setMaxSilentTries(long v);
+
+  /**
+   * Whether to verify host for ssl
+   */
+  bool verifyHostEnabled() const;
+
+  /**
+   * Sets whether to verify host for ssl
+   */
+  void setVerifyHostEnabled( bool enabled );
+
+  /**
+   * Whether to verify peer for ssl
+   */
+  bool verifyPeerEnabled() const;
+
+  /**
+   * Sets whether to verify host for ssl
+   */
+  void setVerifyPeerEnabled( bool enabled );
+
+  /**
+   * SSL certificate authorities path
+   * ( default: /etc/ssl/certs )
+   */
+  Pathname certificateAuthoritiesPath() const;
+
+  /**
+   * Sets the SSL certificate authorities path
+   */
+  void setCertificateAuthoritiesPath( const zypp::Pathname &path );
 
 protected:
   class Impl;

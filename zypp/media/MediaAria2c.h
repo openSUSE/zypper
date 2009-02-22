@@ -107,8 +107,6 @@ class MediaAria2c : public MediaCurl {
     /** External process to get aria2c version */
     std::string getAria2cVersion();    
     static std::string _aria2cVersion;
-    
-    TransferSettings _settings;
 };
 
 ///////////////////////////////////////////////////////////////////

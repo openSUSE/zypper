@@ -12,6 +12,8 @@
 #ifndef ZYPP_MEDIA_MEDIACURL_H
 #define ZYPP_MEDIA_MEDIACURL_H
 
+#include "zypp/base/Flags.h"
+#include "zypp/media/TransferSettings.h"
 #include "zypp/media/MediaHandler.h"
 #include "zypp/ZYppCallbacks.h"
 
@@ -27,7 +29,19 @@ namespace zypp {
  * @short Implementation class for FTP, HTTP and HTTPS MediaHandler
  * @see MediaHandler
  **/
-class MediaCurl : public MediaHandler {
+class MediaCurl : public MediaHandler
+{
+  public:
+    enum RequestOption
+    {
+        /** Defaults */
+        OPTION_NONE = 0x0,
+        /** retrieve only a range of the file */
+        OPTION_RANGE = 0x1,
+        /** only issue a HEAD (or equivalent) request */
+        OPTION_HEAD = 0x02,
+    };
+    ZYPP_DECLARE_FLAGS(RequestOptions,RequestOption);
 
   protected:
 
@@ -69,7 +83,7 @@ class MediaCurl : public MediaHandler {
      * \throws MediaException
      *
      */
-    virtual void doGetFileCopy( const Pathname & srcFilename, const Pathname & targetFilename, callback::SendReport<DownloadProgressReport> & _report) const;
+    virtual void doGetFileCopy( const Pathname & srcFilename, const Pathname & targetFilename, callback::SendReport<DownloadProgressReport> & _report, RequestOptions options = OPTION_NONE ) const;
 
 
     virtual bool checkAttachPoint(const Pathname &apoint) const;
@@ -109,15 +123,20 @@ class MediaCurl : public MediaHandler {
     long _curlDebug;
     curl_slist *_customHeaders;
 
+    /*
     mutable std::string _userpwd;
     std::string _proxy;
     std::string _proxyuserpwd;
+    */
     std::string _currentCookieFile;
-    std::string _ca_path;
-    long        _xfer_timeout;
+    //std::string _ca_path;
+    //long        _xfer_timeout;
 
     static Pathname _cookieFile;
+protected:
+    TransferSettings _settings;
 };
+ZYPP_DECLARE_OPERATORS_FOR_FLAGS(MediaCurl::RequestOptions);
 
 ///////////////////////////////////////////////////////////////////
 

@@ -32,6 +32,9 @@ public:
         , _minDownloadSpeed(ZConfig::instance().download_min_download_speed())
         , _maxDownloadSpeed(ZConfig::instance().download_max_download_speed())
         , _maxSilentTries(ZConfig::instance().download_max_silent_tries())
+        , _verify_host(false)
+        , _verify_peer(false)
+        , _ca_path("/etc/ssl/certs")
     {}
 
     virtual ~Impl()
@@ -68,6 +71,10 @@ public:
     long _minDownloadSpeed;
     long _maxDownloadSpeed;
     long _maxSilentTries;
+
+    bool _verify_host;
+    bool _verify_peer;
+    Pathname _ca_path;
 };
     
 TransferSettings::TransferSettings()
@@ -116,9 +123,25 @@ void TransferSettings::setPassword( const std::string &password )
     _impl->_password = password;
 }
 
+void TransferSettings::setAnonymousAuth()
+{
+    setUsername("anonymous");
+    string id = "yast@";
+    setPassword(id + VERSION);
+}
+
 std::string TransferSettings::password() const
 {
     return _impl->_password;
+}
+
+std::string TransferSettings::userPassword() const
+{
+    string userpwd = username();
+    if ( password().size() ) {
+        userpwd += ":" + password();
+    }
+    return userpwd;
 }
 
 void TransferSettings::setProxyEnabled( bool enabled )
@@ -159,6 +182,15 @@ void TransferSettings::setProxyPassword( const std::string &proxypass )
 std::string TransferSettings::proxyPassword() const
 {
     return _impl->_proxy_password;
+}
+
+std::string TransferSettings::proxyUserPassword() const
+{
+    string userpwd = proxyUsername();
+    if ( proxyPassword().size() ) {
+        userpwd += ":" + proxyPassword();
+    }
+    return userpwd;
 }
 
 void TransferSettings::setTimeout( long t )
@@ -220,6 +252,38 @@ void TransferSettings::setMaxSilentTries(long v)
 {
     _impl->_maxSilentTries = v;
 }
+
+bool TransferSettings::verifyHostEnabled() const
+{
+    return _impl->_verify_host;
+}
+
+void TransferSettings::setVerifyHostEnabled( bool enabled )
+{
+    _impl->_verify_host = enabled;
+}
+
+bool TransferSettings::verifyPeerEnabled() const
+{
+    return _impl->_verify_peer;
+}
+
+
+void TransferSettings::setVerifyPeerEnabled( bool enabled )
+{
+    _impl->_verify_peer = enabled;
+}
+
+Pathname TransferSettings::certificateAuthoritiesPath() const
+{
+    return _impl->_ca_path;
+}
+
+void TransferSettings::setCertificateAuthoritiesPath( const zypp::Pathname &path )
+{
+    _impl->_ca_path = path;
+}
+
 
 } // ns media
 } // ns zypp

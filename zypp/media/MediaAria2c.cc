@@ -26,7 +26,6 @@
 #include "zypp/Target.h"
 #include "zypp/ZYppFactory.h"
 
-#include "zypp/media/TransferProgram.h"
 #include "zypp/media/MediaAria2c.h"
 #include "zypp/media/proxyinfo/ProxyInfos.h"
 #include "zypp/media/ProxyInfo.h"
@@ -74,84 +73,6 @@ MediaAria2c::existsAria2cmd()
     ExternalProgram aria(argv, ExternalProgram::Stderr_To_Stdout);
     return ( aria.close() == 0 );
 }
-
-void fillSettingsFromUrl( const Url &url, TransferSettings &s )
-{
-    std::string param(url.getQueryParam("timeout"));
-    if( !param.empty())
-    {
-      long num = str::strtonum<long>(param);
-      if( num >= 0 && num <= TRANSFER_TIMEOUT_MAX)
-          s.setTimeout(num);
-    }
-
-    if ( ! url.getUsername().empty() )
-    {
-        s.setUsername(url.getUsername());
-        if ( url.getPassword().size() )
-        {
-            s.setPassword(url.getPassword());
-        }
-    }
-
-    string proxy = url.getQueryParam( "proxy" );
-
-    if ( ! proxy.empty() )
-    {
-        string proxyport( url.getQueryParam( "proxyport" ) );
-        if ( ! proxyport.empty() ) {
-            proxy += ":" + proxyport;
-        }
-        s.setProxy(proxy);
-        s.setProxyEnabled(true);
-    }
-}    
-
-void fillSettingsSystemProxy( const Url&url, TransferSettings &s )
-{
-    ProxyInfo proxy_info (ProxyInfo::ImplPtr(new ProxyInfoSysconfig("proxy")));
-
-    if ( proxy_info.enabled())
-    {
-      s.setProxyEnabled(true);
-      std::list<std::string> nope = proxy_info.noProxy();
-      for (ProxyInfo::NoProxyIterator it = proxy_info.noProxyBegin();
-           it != proxy_info.noProxyEnd();
-           it++)
-      {
-        std::string host( str::toLower(url.getHost()));
-        std::string temp( str::toLower(*it));
-
-        // no proxy if it points to a suffix
-        // preceeded by a '.', that maches
-        // the trailing portion of the host.
-        if( temp.size() > 1 && temp.at(0) == '.')
-        {
-          if(host.size() > temp.size() &&
-             host.compare(host.size() - temp.size(), temp.size(), temp) == 0)
-          {
-            DBG << "NO_PROXY: '" << *it  << "' matches host '"
-                                 << host << "'" << endl;
-            s.setProxyEnabled(false);
-            break;
-          }
-        }
-        else
-        // no proxy if we have an exact match
-        if( host == temp)
-        {
-          DBG << "NO_PROXY: '" << *it  << "' matches host '"
-                               << host << "'" << endl;
-          s.setProxyEnabled(false);
-          break;
-        }
-      }
-
-      if ( s.proxyEnabled() )
-          s.setProxy(proxy_info.proxy(url.getScheme()));
-    }
-
-}    
 
 /**
  * comannd line for aria.
@@ -250,38 +171,6 @@ void fillAriaCmdLine( const Pathname &ariapath,
     args.push_back(url.asString().c_str());
 }
 
-static const char *const anonymousIdHeader()
-{
-  // we need to add the release and identifier to the
-  // agent string.
-  // The target could be not initialized, and then this information
-  // is not available.
-  Target_Ptr target = zypp::getZYpp()->getTarget();
-
-  static const std::string _value(
-      str::form(
-          "X-Zypp-AnonymousId: %s",
-          target ? target->anonymousUniqueId().c_str() : "" )
-  );
-  return _value.c_str();
-}
-
-static const char *const distributionFlavorHeader()
-{
-  // we need to add the release and identifier to the
-  // agent string.
-  // The target could be not initialized, and then this information
-  // is not available.
-  Target_Ptr target = zypp::getZYpp()->getTarget();
-
-  static const std::string _value(
-      str::trim( str::form(
-          "X-ZYpp-DistributionFlavor: %s",
-          target ? target->distributionFlavor().c_str() : "" ) )
-  );
-  return _value.c_str();
-}
-
 const char *const MediaAria2c::agentString()
 {
   // we need to add the release and identifier to the
@@ -309,28 +198,6 @@ MediaAria2c::MediaAria2c( const Url &      url_r,
 {
   MIL << "MediaAria2c::MediaAria2c(" << url_r << ", " << attach_point_hint_r << ")" << endl;
 
-  /*
-  if( !attachPoint().empty())
-  {
-    PathInfo ainfo(attachPoint());
-    Pathname apath(attachPoint() + "XXXXXX");
-    char    *atemp = ::strdup( apath.asString().c_str());
-    char    *atest = NULL;
-    if( !ainfo.isDir() || !ainfo.userMayRWX() ||
-         atemp == NULL || (atest=::mkdtemp(atemp)) == NULL)
-    {
-      WAR << "attach point " << ainfo.path()
-          << " is not useable for " << url_r.getScheme() << endl;
-      setAttachPoint("", true);
-    }
-    else if( atest != NULL)
-      ::rmdir(atest);
-
-    if( atemp != NULL)
-      ::free(atemp);
-  }
-  */
-
    //At this point, we initialize aria2c path
    _aria2cPath = Pathname( whereisAria2c().asString() );
 
@@ -341,25 +208,7 @@ MediaAria2c::MediaAria2c( const Url &      url_r,
 void MediaAria2c::attachTo (bool next)
 {
   MediaCurl::attachTo(next);
-    
   _settings.setUserAgentString(agentString());
-  _settings.addHeader(anonymousIdHeader());
-  _settings.addHeader(distributionFlavorHeader());
-
-  _settings.setTimeout(TRANSFER_TIMEOUT);
-  _settings.setConnectTimeout(CONNECT_TIMEOUT);
-
-  // fill some settings from url query parameters
-  fillSettingsFromUrl(_url, _settings);
-
-  // if the proxy was not set by url, then look 
-  if ( _settings.proxy().empty() )
-  {
-      // at the system proxy settings
-      fillSettingsSystemProxy(_url, _settings);
-  }
-
-  DBG << "Proxy: " << (_settings.proxy().empty() ? "-none-" : _settings.proxy()) << endl;
 }
 
 bool
@@ -371,7 +220,6 @@ MediaAria2c::checkAttachPoint(const Pathname &apoint) const
 void MediaAria2c::disconnectFrom()
 {
     MediaCurl::disconnectFrom();
-    
 }
 
 void MediaAria2c::releaseFrom( const std::string & ejectDev )
