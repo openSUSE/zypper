@@ -177,12 +177,10 @@ namespace zypp {
 
   }
 
-///////////////////////////////////////////////////////////////////
-//
-//        CLASS NAME : MediaCurl
-//
-///////////////////////////////////////////////////////////////////
-
+/**
+ * Fills the settings structure using options passed on the url
+ * for example ?timeout=x&proxy=foo
+ */
 void fillSettingsFromUrl( const Url &url, TransferSettings &s )
 {
     std::string param(url.getQueryParam("timeout"));
@@ -261,6 +259,10 @@ void fillSettingsFromUrl( const Url &url, TransferSettings &s )
     }
 }    
 
+/**
+ * Reads the system proxy configuration and fills the settings
+ * structure proxy information
+ */
 void fillSettingsSystemProxy( const Url&url, TransferSettings &s )
 {
     ProxyInfo proxy_info (ProxyInfo::ImplPtr(new ProxyInfoSysconfig("proxy")));
@@ -308,6 +310,10 @@ void fillSettingsSystemProxy( const Url&url, TransferSettings &s )
 
 Pathname MediaCurl::_cookieFile = "/var/lib/YaST2/cookies";
 
+/**
+ * initialized only once, this gets the anonymous id
+ * from the target, which we pass in the http header
+ */
 static const char *const anonymousIdHeader()
 {
   // we need to add the release and identifier to the
@@ -324,6 +330,10 @@ static const char *const anonymousIdHeader()
   return _value.c_str();
 }
 
+/**
+ * initialized only once, this gets the distribution flavor
+ * from the target, which we pass in the http header
+ */
 static const char *const distributionFlavorHeader()
 {
   // we need to add the release and identifier to the
@@ -340,6 +350,10 @@ static const char *const distributionFlavorHeader()
   return _value.c_str();
 }
 
+/**
+ * initialized only once, this gets the agent string
+ * which also includes the curl version
+ */
 static const char *const agentString()
 {
   // we need to add the release and identifier to the
@@ -359,7 +373,8 @@ static const char *const agentString()
   return _value.c_str();
 }
 
-// we use this define to unbloat code
+// we use this define to unbloat code as this C setting option
+// and catching exception is done frequently.
 #define SET_OPTION(opt,val) { \
     ret = curl_easy_setopt ( _curl, opt, val ); \
     if ( ret != 0) { \
@@ -662,11 +677,7 @@ MediaCurl::checkAttachPoint(const Pathname &apoint) const
 }
 
 ///////////////////////////////////////////////////////////////////
-//
-//
-//        METHOD NAME : MediaCurl::disconnectFrom
-//        METHOD TYPE : PMError
-//
+
 void MediaCurl::disconnectFrom()
 {
   if ( _customHeaders )
@@ -682,15 +693,8 @@ void MediaCurl::disconnectFrom()
   }
 }
 
-
 ///////////////////////////////////////////////////////////////////
-//
-//
-//        METHOD NAME : MediaCurl::releaseFrom
-//        METHOD TYPE : void
-//
-//        DESCRIPTION : Asserted that media is attached.
-//
+
 void MediaCurl::releaseFrom( const std::string & ejectDev )
 {
   disconnect();
@@ -724,12 +728,8 @@ static Url getFileUrl(const Url & url, const Pathname & filename)
   return newurl;
 }
 
-
 ///////////////////////////////////////////////////////////////////
-//
-//        METHOD NAME : MediaCurl::getFile
-//        METHOD TYPE : void
-//
+
 void MediaCurl::getFile( const Pathname & filename ) const
 {
     // Use absolute file name to prevent access of files outside of the
@@ -738,10 +738,7 @@ void MediaCurl::getFile( const Pathname & filename ) const
 }
 
 ///////////////////////////////////////////////////////////////////
-//
-//        METHOD NAME : MediaCurl::getFileCopy
-//        METHOD TYPE : void
-//
+
 void MediaCurl::getFileCopy( const Pathname & filename , const Pathname & target) const
 {
   callback::SendReport<DownloadProgressReport> report;
@@ -781,6 +778,7 @@ void MediaCurl::getFileCopy( const Pathname & filename , const Pathname & target
   report->finish(fileurl, zypp::media::DownloadProgressReport::NO_ERROR, "");
 }
 
+///////////////////////////////////////////////////////////////////
 
 bool MediaCurl::getDoesFileExist( const Pathname & filename ) const
 {
@@ -811,6 +809,125 @@ bool MediaCurl::getDoesFileExist( const Pathname & filename ) const
   return false;
 }
 
+///////////////////////////////////////////////////////////////////
+
+void MediaCurl::evaluateCurlCode( const Pathname &filename,
+                                  CURLcode code,
+                                  bool timeout_reached ) const
+{
+  Url url(getFileUrl(_url, filename));
+  
+  if ( code != 0 )
+  {
+    std::string err;
+    try
+    {
+      switch ( code )
+      {
+      case CURLE_UNSUPPORTED_PROTOCOL:
+      case CURLE_URL_MALFORMAT:
+      case CURLE_URL_MALFORMAT_USER:
+          err = " Bad URL";
+      case CURLE_LOGIN_DENIED:
+          ZYPP_THROW(
+              MediaUnauthorizedException(url, "Login failed.", _curlError, ""));
+          break;
+      case CURLE_HTTP_RETURNED_ERROR:
+      {
+        long httpReturnCode = 0;
+        CURLcode infoRet = curl_easy_getinfo( _curl,
+                                              CURLINFO_RESPONSE_CODE,
+                                              &httpReturnCode );
+        if ( infoRet == CURLE_OK )
+        {
+          string msg = "HTTP response: " + str::numstring( httpReturnCode );
+          switch ( httpReturnCode )
+          {
+          case 401:
+          {
+            string auth_hint = getAuthHint();
+            
+            DBG << msg << " Login failed (URL: " << url.asString() << ")" << std::endl;
+            DBG << "MediaUnauthorizedException auth hint: '" << auth_hint << "'" << std::endl;
+            
+            ZYPP_THROW(MediaUnauthorizedException(
+                           url, "Login failed.", _curlError, auth_hint
+                           ));
+          }
+                    
+          case 503: // service temporarily unavailable (bnc #462545)
+            ZYPP_THROW(MediaTemporaryProblemException(url));            
+          case 504: // gateway timeout
+            ZYPP_THROW(MediaTimeoutException(url));                        
+          case 403:
+            ZYPP_THROW(MediaForbiddenException(url));            
+          case 404:
+              ZYPP_THROW(MediaFileNotFoundException(_url, filename));
+          }
+                    
+          DBG << msg << " (URL: " << url.asString() << ")" << std::endl;
+          ZYPP_THROW(MediaCurlException(url, msg, _curlError));
+        }
+        else
+        {
+          string msg = "Unable to retrieve HTTP response:";
+          DBG << msg << " (URL: " << url.asString() << ")" << std::endl;
+          ZYPP_THROW(MediaCurlException(url, msg, _curlError));
+        }
+      }
+      break;
+      case CURLE_FTP_COULDNT_RETR_FILE:
+      case CURLE_FTP_ACCESS_DENIED:
+        err = "File not found";
+        ZYPP_THROW(MediaFileNotFoundException(_url, filename));
+        break;
+      case CURLE_BAD_PASSWORD_ENTERED:
+      case CURLE_FTP_USER_PASSWORD_INCORRECT:
+          err = "Login failed";
+          break;
+      case CURLE_COULDNT_RESOLVE_PROXY:
+      case CURLE_COULDNT_RESOLVE_HOST:
+      case CURLE_COULDNT_CONNECT:
+      case CURLE_FTP_CANT_GET_HOST:
+        err = "Connection failed";
+        break;
+      case CURLE_WRITE_ERROR:
+        err = "Write error";
+        break;
+      case CURLE_ABORTED_BY_CALLBACK:
+      case CURLE_OPERATION_TIMEDOUT:
+        if( timeout_reached)
+        {
+          err  = "Timeout reached";
+          ZYPP_THROW(MediaTimeoutException(url));
+        }
+        else
+        {
+          err = "User abort";
+        }
+        break;
+      case CURLE_SSL_PEER_CERTIFICATE:
+      default:
+        err = "Unrecognized error";
+        break;
+      }
+      
+      // uhm, no 0 code but unknown curl exception
+      ZYPP_THROW(MediaCurlException(url, err, _curlError));
+    }
+    catch (const MediaException & excpt_r)
+    {
+      ZYPP_RETHROW(excpt_r);
+    }
+  }
+  else
+  {
+    // actually the code is 0, nothing happened
+  }   
+}    
+
+///////////////////////////////////////////////////////////////////
+
 bool MediaCurl::doGetDoesFileExist( const Pathname & filename ) const
 {
   DBG << filename.asString() << endl;
@@ -821,23 +938,7 @@ bool MediaCurl::doGetDoesFileExist( const Pathname & filename ) const
   if(_url.getHost().empty())
     ZYPP_THROW(MediaBadUrlEmptyHostException(_url));
 
-  string path = _url.getPathName();
-  if ( !path.empty() && path != "/" && *path.rbegin() == '/' &&
-        filename.absolute() ) {
-      // If url has a path with trailing slash, remove the leading slash from
-      // the absolute file name
-    path += filename.asString().substr( 1, filename.asString().size() - 1 );
-  } else if ( filename.relative() ) {
-      // Add trailing slash to path, if not already there
-    if ( !path.empty() && *path.rbegin() != '/' ) path += "/";
-    // Remove "./" from begin of relative file name
-    path += filename.asString().substr( 2, filename.asString().size() - 2 );
-  } else {
-    path += filename.asString();
-  }
-
-  Url url( _url );
-  url.setPathName( path );
+  Url url(getFileUrl(_url, filename));
 
   DBG << "URL: " << url.asString() << endl;
     // Use URL without options and without username and passwd
@@ -846,7 +947,7 @@ bool MediaCurl::doGetDoesFileExist( const Pathname & filename ) const
     // the rest was already passed as curl options (in attachTo).
   Url curlUrl( url );
 
-    // Use asString + url::ViewOptions instead?
+  // Use asString + url::ViewOptions instead?
   curlUrl.setUsername( "" );
   curlUrl.setPassword( "" );
   curlUrl.setPathParams( "" );
@@ -872,6 +973,7 @@ bool MediaCurl::doGetDoesFileExist( const Pathname & filename ) const
   // little data, that works with broken servers, and
   // works for ftp as well, because retrieving only headers
   // ftp will return always OK code ?
+  // See http://curl.haxx.se/docs/knownbugs.html #58
   if (  _url.getScheme() == "http" ||  _url.getScheme() == "https" )
     ret = curl_easy_setopt( _curl, CURLOPT_NOBODY, 1 );
   else
@@ -888,7 +990,6 @@ bool MediaCurl::doGetDoesFileExist( const Pathname & filename ) const
     curl_easy_setopt( _curl, CURLOPT_HTTPGET, 1 );
     ZYPP_THROW(MediaCurlSetOptException(url, _curlError));
   }
-
 
   FILE *file = ::fopen( "/dev/null", "w" );
   if ( !file ) {
@@ -925,12 +1026,6 @@ bool MediaCurl::doGetDoesFileExist( const Pathname & filename ) const
       }
       ZYPP_THROW(MediaCurlSetOptException(url, err));
   }
-    // Set callback and perform.
-  //ProgressData progressData(_xfer_timeout, url, &report);
-  //report->start(url, dest);
-  //if ( curl_easy_setopt( _curl, CURLOPT_PROGRESSDATA, &progressData ) != 0 ) {
-  //  WAR << "Can't set CURLOPT_PROGRESSDATA: " << _curlError << endl;;
-  //}
 
   CURLcode ok = curl_easy_perform( _curl );
   MIL << "perform code: " << ok << " [ " << curl_easy_strerror(ok) << " ]" << endl;
@@ -938,148 +1033,54 @@ bool MediaCurl::doGetDoesFileExist( const Pathname & filename ) const
   // reset curl settings
   if (  _url.getScheme() == "http" ||  _url.getScheme() == "https" )
   {
-    ret = curl_easy_setopt( _curl, CURLOPT_NOBODY, NULL );
+    curl_easy_setopt( _curl, CURLOPT_NOBODY, NULL );
+    if ( ret != 0 ) {
+      ZYPP_THROW(MediaCurlSetOptException(url, _curlError));
+    }
+
     /* yes, this is why we never got to get NOBODY working before,
        because setting it changes this option too, and we also
        need to reset it
        See: http://curl.haxx.se/mail/archive-2005-07/0073.html
     */
-    ret = curl_easy_setopt( _curl, CURLOPT_HTTPGET, 1 );
+    curl_easy_setopt( _curl, CURLOPT_HTTPGET, 1);
+    if ( ret != 0 ) {
+      ZYPP_THROW(MediaCurlSetOptException(url, _curlError));
+    }
+
   }
   else
-    ret = curl_easy_setopt( _curl, CURLOPT_RANGE, NULL );
-
-  if ( ret != 0 )
   {
-    ZYPP_THROW(MediaCurlSetOptException(url, _curlError));
+    // for FTP we set different options
+    curl_easy_setopt( _curl, CURLOPT_RANGE, NULL);
+    if ( ret != 0 ) {
+      ZYPP_THROW(MediaCurlSetOptException(url, _curlError));
+    }
   }
-
+  
+  // if the code is not zero, close the file
   if ( ok != 0 )
-  {
-    ::fclose( file );
-
-    std::string err;
-    try
-    {
-      bool err_file_not_found = false;
-      switch ( ok )
-      {
-      case CURLE_FTP_COULDNT_RETR_FILE:
-      case CURLE_FTP_ACCESS_DENIED:
-        err_file_not_found = true;
-        break;
-      case CURLE_LOGIN_DENIED:
-        ZYPP_THROW(
-            MediaUnauthorizedException(url, "Login failed.", _curlError, ""));
-        break;
-      case CURLE_HTTP_RETURNED_ERROR:
-        {
-          long httpReturnCode = 0;
-          CURLcode infoRet = curl_easy_getinfo( _curl,
-                                                CURLINFO_RESPONSE_CODE,
-                                                &httpReturnCode );
-          if ( infoRet == CURLE_OK )
-          {
-            string msg = "HTTP response: " + str::numstring( httpReturnCode );
-            bool brk = false; // break also from the parent switch
-            switch ( httpReturnCode )
-            {
-            case 401: // authorization required
-            {
-              std::string auth_hint = getAuthHint();
-
-              DBG << msg << " Login failed (URL: " << url.asString() << ")" << std::endl;
-              DBG << "MediaUnauthorizedException auth hint: '" << auth_hint << "'" << std::endl;
-
-              ZYPP_THROW(MediaUnauthorizedException(
-                url, "Login failed.", _curlError, auth_hint
-              ));
-            }
-
-            case 503: // service temporarily unavailable (bnc #462545)
-              ZYPP_THROW(MediaTemporaryProblemException(url));
-
-            case 504: // gateway timeout
-              ZYPP_THROW(MediaTimeoutException(url));
-
-            case 403: // access denied
-               ZYPP_THROW(MediaForbiddenException(url));
-
-            case 404: // not found
-               err_file_not_found = true;
-               brk = true;
-               break;
-            }
-
-            if (brk)
-              break;
-
-            DBG << msg << " (URL: " << url.asString() << ")" << std::endl;
-            ZYPP_THROW(MediaCurlException(url, msg, _curlError));
-          }
-          else
-          {
-            string msg = "Unable to retrieve HTTP response:";
-            DBG << msg << " (URL: " << url.asString() << ")" << std::endl;
-            ZYPP_THROW(MediaCurlException(url, msg, _curlError));
-          }
-        }
-        break;
-      case CURLE_UNSUPPORTED_PROTOCOL:
-      case CURLE_URL_MALFORMAT:
-      case CURLE_URL_MALFORMAT_USER:
-      case CURLE_BAD_PASSWORD_ENTERED:
-      case CURLE_FTP_USER_PASSWORD_INCORRECT:
-        err = "Login failed";
-        break;
-      case CURLE_COULDNT_RESOLVE_PROXY:
-      case CURLE_COULDNT_RESOLVE_HOST:
-      case CURLE_COULDNT_CONNECT:
-      case CURLE_FTP_CANT_GET_HOST:
-        err = "Connection failed";
-        break;
-      case CURLE_WRITE_ERROR:
-        err = "Write error";
-        break;
-      case CURLE_ABORTED_BY_CALLBACK:
-      case CURLE_OPERATION_TIMEOUTED:
-        err  = "Timeout reached";
-        ZYPP_THROW(MediaTimeoutException(url));
-        break;
-      case CURLE_SSL_CACERT:
-        ZYPP_THROW(MediaBadCAException(url,_curlError));
-      case CURLE_SSL_PEER_CERTIFICATE:
-      default:
-        err = curl_easy_strerror(ok);
-        if (err.empty())
-          err = "Unrecognized error";
-        break;
-      }
-
-      if( err_file_not_found)
-      {
-        // file does not exists
-        return false;
-      }
-      else
-      {
-        // there was an error
-        ZYPP_THROW(MediaCurlException(url, string(), _curlError));
-      }
-    }
-    catch (const MediaException & excpt_r)
-    {
-      ZYPP_RETHROW(excpt_r);
-    }
+      ::fclose(file);
+  
+  // as we are not having user interaction, the user can't cancel
+  // the file existence checking, a callback or timeout return code
+  // will be always a timeout.
+  try {
+      evaluateCurlCode( filename, ok, true /* timeout */);
   }
-
+  catch ( const MediaFileNotFoundException &e ) {
+      // if the file did not exist then we can return false
+      return false;
+  }
+  catch ( const MediaException &e ) {
+      // some error, we are not sure about file existence, rethrw
+      ZYPP_RETHROW(e);
+  }
   // exists
   return ( ok == CURLE_OK );
-  //if ( curl_easy_setopt( _curl, CURLOPT_PROGRESSDATA, NULL ) != 0 ) {
-  //  WAR << "Can't unset CURLOPT_PROGRESSDATA: " << _curlError << endl;;
-  //}
 }
 
+///////////////////////////////////////////////////////////////////
 
 void MediaCurl::doGetFileCopy( const Pathname & filename , const Pathname & target, callback::SendReport<DownloadProgressReport> & report, RequestOptions options ) const
 {
@@ -1192,7 +1193,8 @@ void MediaCurl::doGetFileCopy( const Pathname & filename , const Pathname & targ
       WAR << "Can't unset CURLOPT_PROGRESSDATA: " << _curlError << endl;;
     }
 
-    if ( ret != 0 ) {
+    if ( ret != 0 )
+    {
       ERR << "curl error: " << ret << ": " << _curlError
           << ", temp file size " << PathInfo(destNew).size()
           << " byte." << endl;
@@ -1200,114 +1202,18 @@ void MediaCurl::doGetFileCopy( const Pathname & filename , const Pathname & targ
       ::fclose( file );
       filesystem::unlink( destNew );
 
-      std::string err;
+      // the timeout is determined by the progress data object
+      // which holds wheter the timeout was reached or not,
+      // otherwise it would be a user cancel
       try {
-       bool err_file_not_found = false;
-       switch ( ret ) {
-        case CURLE_UNSUPPORTED_PROTOCOL:
-        case CURLE_URL_MALFORMAT:
-        case CURLE_URL_MALFORMAT_USER:
-          err = " Bad URL";
-        case CURLE_LOGIN_DENIED:
-          ZYPP_THROW(
-              MediaUnauthorizedException(url, "Login failed.", _curlError, ""));
-          break;
-        case CURLE_HTTP_RETURNED_ERROR:
-          {
-            long httpReturnCode = 0;
-            CURLcode infoRet = curl_easy_getinfo( _curl,
-                                                  CURLINFO_RESPONSE_CODE,
-                                                  &httpReturnCode );
-            if ( infoRet == CURLE_OK )
-            {
-              string msg = "HTTP response: " + str::numstring( httpReturnCode );
-              switch ( httpReturnCode )
-              {
-              case 401:
-              {
-                string auth_hint = getAuthHint();
-
-                DBG << msg << " Login failed (URL: " << url.asString() << ")" << std::endl;
-                DBG << "MediaUnauthorizedException auth hint: '" << auth_hint << "'" << std::endl;
-
-                ZYPP_THROW(MediaUnauthorizedException(
-                  url, "Login failed.", _curlError, auth_hint
-                ));
-              }
-
-              case 503: // service temporarily unavailable (bnc #462545)
-                ZYPP_THROW(MediaTemporaryProblemException(url));
-
-              case 504: // gateway timeout
-                ZYPP_THROW(MediaTimeoutException(url));
-
-              case 403:
-                 ZYPP_THROW(MediaForbiddenException(url));
-
-              case 404:
-                 ZYPP_THROW(MediaFileNotFoundException(_url, filename));
-              }
-
-              DBG << msg << " (URL: " << url.asString() << ")" << std::endl;
-              ZYPP_THROW(MediaCurlException(url, msg, _curlError));
-            }
-            else
-            {
-              string msg = "Unable to retrieve HTTP response:";
-              DBG << msg << " (URL: " << url.asString() << ")" << std::endl;
-              ZYPP_THROW(MediaCurlException(url, msg, _curlError));
-            }
-          }
-          break;
-        case CURLE_FTP_COULDNT_RETR_FILE:
-        case CURLE_FTP_ACCESS_DENIED:
-          err = "File not found";
-          err_file_not_found = true;
-          break;
-        case CURLE_BAD_PASSWORD_ENTERED:
-        case CURLE_FTP_USER_PASSWORD_INCORRECT:
-          err = "Login failed";
-          break;
-        case CURLE_COULDNT_RESOLVE_PROXY:
-        case CURLE_COULDNT_RESOLVE_HOST:
-        case CURLE_COULDNT_CONNECT:
-        case CURLE_FTP_CANT_GET_HOST:
-          err = "Connection failed";
-          break;
-        case CURLE_WRITE_ERROR:
-          err = "Write error";
-          break;
-        case CURLE_ABORTED_BY_CALLBACK:
-        case CURLE_OPERATION_TIMEDOUT:
-          if( progressData.reached)
-          {
-            err  = "Timeout reached";
-            ZYPP_THROW(MediaTimeoutException(url));
-          }
-          else
-          {
-            err = "User abort";
-          }
-          break;
-        case CURLE_SSL_PEER_CERTIFICATE:
-        default:
-          err = "Unrecognized error";
-          break;
-       }
-       if( err_file_not_found)
-       {
-         ZYPP_THROW(MediaFileNotFoundException(_url, filename));
-       }
-       else
-       {
-         ZYPP_THROW(MediaCurlException(url, err, _curlError));
-       }
+        evaluateCurlCode( filename, ret, progressData.reached);
       }
-      catch (const MediaException & excpt_r)
-      {
-        ZYPP_RETHROW(excpt_r);
+      catch ( const MediaException &e ) {
+        // some error, we are not sure about file existence, rethrw
+        ZYPP_RETHROW(e);
       }
     }
+    
 #if DETECT_DIR_INDEX
     else
     if(curlUrl.getScheme() == "http" ||
@@ -1400,15 +1306,8 @@ void MediaCurl::doGetFileCopy( const Pathname & filename , const Pathname & targ
     DBG << "done: " << PathInfo(dest) << endl;
 }
 
-
 ///////////////////////////////////////////////////////////////////
-//
-//
-//        METHOD NAME : MediaCurl::getDir
-//        METHOD TYPE : PMError
-//
-//        DESCRIPTION : Asserted that media is attached
-//
+
 void MediaCurl::getDir( const Pathname & dirname, bool recurse_r ) const
 {
   filesystem::DirContent content;
@@ -1441,13 +1340,7 @@ void MediaCurl::getDir( const Pathname & dirname, bool recurse_r ) const
 }
 
 ///////////////////////////////////////////////////////////////////
-//
-//
-//        METHOD NAME : MediaCurl::getDirInfo
-//        METHOD TYPE : PMError
-//
-//        DESCRIPTION : Asserted that media is attached and retlist is empty.
-//
+
 void MediaCurl::getDirInfo( std::list<std::string> & retlist,
                                const Pathname & dirname, bool dots ) const
 {
@@ -1455,13 +1348,7 @@ void MediaCurl::getDirInfo( std::list<std::string> & retlist,
 }
 
 ///////////////////////////////////////////////////////////////////
-//
-//
-//        METHOD NAME : MediaCurl::getDirInfo
-//        METHOD TYPE : PMError
-//
-//        DESCRIPTION : Asserted that media is attached and retlist is empty.
-//
+
 void MediaCurl::getDirInfo( filesystem::DirContent & retlist,
                             const Pathname & dirname, bool dots ) const
 {
@@ -1469,13 +1356,7 @@ void MediaCurl::getDirInfo( filesystem::DirContent & retlist,
 }
 
 ///////////////////////////////////////////////////////////////////
-//
-//
-//        METHOD NAME : MediaCurl::progressCallback
-//        METHOD TYPE : int
-//
-//        DESCRIPTION : Progress callback triggered from MediaCurl::getFile
-//
+
 int MediaCurl::progressCallback( void *clientp,
                                  double dltotal, double dlnow,
                                  double ultotal, double ulnow)
@@ -1565,6 +1446,7 @@ int MediaCurl::progressCallback( void *clientp,
   return 0;
 }
 
+///////////////////////////////////////////////////////////////////
 
 string MediaCurl::getAuthHint() const
 {
@@ -1581,6 +1463,7 @@ string MediaCurl::getAuthHint() const
   return "";
 }
 
+///////////////////////////////////////////////////////////////////
 
 bool MediaCurl::authenticate(const string & availAuthTypes, bool firstTry) const
 {

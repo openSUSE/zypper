@@ -118,20 +118,27 @@ class MediaCurl : public MediaHandler
     bool authenticate(const std::string & availAuthTypes, bool firstTry) const;
 
   private:
+
+    /**
+     * Evaluates a curl return code and throws the right MediaException
+     * \p filename Filename being downloaded
+     * \p code Code curl returnes
+     * \p timeout Whether we reached timeout, which we need to differentiate
+     *    in case the codes aborted-by-callback or timeout are returned by curl
+     *    Otherwise we can't differentiate abort from timeout. Here you may
+     *    want to pass the progress data object timeout-reached value, or
+     *    just true if you are not doing user interaction.
+     *
+     * \throws MediaException If there is a problem
+     */
+    void evaluateCurlCode( const zypp::Pathname &filename, CURLcode code, bool timeout ) const;
+
     CURL *_curl;
     char _curlError[ CURL_ERROR_SIZE ];
     long _curlDebug;
     curl_slist *_customHeaders;
 
-    /*
-    mutable std::string _userpwd;
-    std::string _proxy;
-    std::string _proxyuserpwd;
-    */
     std::string _currentCookieFile;
-    //std::string _ca_path;
-    //long        _xfer_timeout;
-
     static Pathname _cookieFile;
 protected:
     TransferSettings _settings;
