@@ -1,4 +1,9 @@
 -------------------------------------------------------------------
+Sun Feb 22 15:27:11 CET 2009 - ma@suse.de
+
+- Never refresh repositories from CD/DVD, once they are created. (bnc #476429)
+
+-------------------------------------------------------------------
 Sat Feb 21 18:31:17 CET 2009 - dmacvicar@suse.de
 
 Implemented the following options with aria backend:

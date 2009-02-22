@@ -713,22 +713,25 @@ namespace zypp
     {
       MIL << "Going to try to check whether refresh is needed for " << url << endl;
 
-      repo::RepoType repokind = info.type();
-
-      // if the type is unknown, try probing.
-      switch ( repokind.toEnum() )
-      {
-        case RepoType::NONE_e:
-          // unknown, probe it
-          repokind = probe(url);
-        break;
-        default:
-        break;
-      }
-
+      // first check old (cached) metadata
       Pathname rawpath = rawmetadata_path_for_repoinfo( _pimpl->options, info );
       filesystem::assert_dir(rawpath);
       oldstatus = metadataStatus(info);
+
+      if ( oldstatus.empty() )
+      {
+        MIL << "No cached metadata, going to refresh" << endl;
+        return REFRESH_NEEDED;
+      }
+
+      {
+        std::string scheme( url.getScheme() );
+        if ( scheme == "cd" || scheme == "dvd" )
+        {
+          MIL << "never refresh CD/DVD" << endl;
+          return REPO_UP_TO_DATE;
+        }
+      }
 
       // now we've got the old (cached) status, we can decide repo.refresh.delay
       if (policy != RefreshForced && policy != RefreshIfNeededIgnoreDelay)
@@ -752,8 +755,20 @@ namespace zypp
         }
       }
 
-      // create temp dir as sibling of rawpath
+      // To test the new matadta create temp dir as sibling of rawpath
       filesystem::TmpDir tmpdir( filesystem::TmpDir::makeSibling( rawpath ) );
+
+      repo::RepoType repokind = info.type();
+      // if the type is unknown, try probing.
+      switch ( repokind.toEnum() )
+      {
+        case RepoType::NONE_e:
+          // unknown, probe it
+          repokind = probe(url);
+        break;
+        default:
+        break;
+      }
 
       if ( ( repokind.toEnum() == RepoType::RPMMD_e ) ||
            ( repokind.toEnum() == RepoType::YAST2_e ) )
