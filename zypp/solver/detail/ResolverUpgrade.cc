@@ -86,12 +86,12 @@ Resolver::doUpgrade( UpgradeStatistics & opt_stats_r )
 
   // create a testcase for the updating system
   PathInfo path ("/mnt/var/log"); // checking if update has been started from instsys
-
+  std::string now( Date::now().form( "-%Y-%m-%d-%H-%M-%S" ) );
   if ( !path.isExist() ) {
-      Testcase testcase("/var/log/updateTestcase");
+      Testcase testcase("/var/log/updateTestcase"+now);
       testcase.createTestcase (*this, true, false); // create pool, do not solve
   } else {
-      Testcase testcase("/mnt/var/log/updateTestcase");
+      Testcase testcase("/mnt/var/log/updateTestcase"+now);
       testcase.createTestcase (*this, true, false); // create pool, do not solve
   }
 

@@ -444,6 +444,8 @@ HelixControl::HelixControl(const std::string & controlPath,
 	}
 	*file << TAB << "- path        : " << repo.path() << endl;
 	*file << TAB << "- type        : " << repo.type() << endl;
+	*file << TAB << "- generated   : " << (it->first.generatedTimestamp()).form( "%Y-%m-%d %H:%M:%S" ) << endl;
+	*file << TAB << "- outdated    : " << (it->first.suggestedExpirationTimestamp()).form( "%Y-%m-%d %H:%M:%S" ) << endl;
 	*file << TAB << " -->" << endl;
 
 	*file << TAB << "<channel file=\"" << str::numstring((long)it->first.id())
