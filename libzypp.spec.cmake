@@ -29,7 +29,8 @@ BuildRequires:  libsatsolver-devel >= 0.13.0 openssl-devel
 BuildRequires:  boost-devel curl-devel dejagnu doxygen gcc-c++ gettext-devel graphviz hal-devel libxml2-devel
 
 # required for testsuite, webrick
-BuildRequires:  ruby aria2
+BuildRequires:  ruby
+BuildRequires: aria2 >= 1.1.2
 
 %if 0%{?suse_version}
 BuildRequires:  libexpat-devel
@@ -60,7 +61,7 @@ Requires:       gnupg
 %endif
 %requires_eq    satsolver-tools
 
-Requires:       aria2
+Requires:       aria2 >= 1.1.2
 
 %description
 Package, Patch, Pattern, and Product Management
