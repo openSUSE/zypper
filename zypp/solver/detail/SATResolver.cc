@@ -932,6 +932,14 @@ string SATResolver::SATprobleminfoString(Id problem, string &detail, Id &ignoreI
   probr = solver_findproblemrule(_solv, problem);
   switch (solver_problemruleinfo(_solv, &(_jobQueue), probr, &dep, &source, &target))
   {
+      case SOLVER_PROBLEM_DISTUPGRADE_RULE:
+	  s = mapSolvable (source);
+	  ret = str::form (_("%s does not belong to a distupgrade repository"), solvable2str(pool, s.get()));
+  	  break;
+      case SOLVER_PROBLEM_INFARCH_RULE:
+	  s = mapSolvable (source);
+	  ret = str::form (_("%s has inferior architecture"), solvable2str(pool, s.get()));
+	  break;
       case SOLVER_PROBLEM_UPDATE_RULE:
 	  s = mapSolvable (source);
 	  ret = str::form (_("problem with installed package %s"), solvable2str(pool, s.get()));
