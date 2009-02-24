@@ -1157,10 +1157,20 @@ void clean_repos(Zypper & zypper)
 	}
         if( clean_raw_metadata )
         {
-            zypper.out().info(boost::str(format(
-                _("Cleaning raw metadata cache for '%s'.")) % repo.alias ()),
-                Out::HIGH);
-            manager.cleanMetadata(repo);
+            std::string scheme( repo.url().getScheme() );
+            if ( ! ( scheme == "cd" || scheme == "dvd" ) )
+            {
+                zypper.out().info(boost::str(format(
+                    _("Cleaning raw metadata cache for '%s'.")) % repo.alias ()),
+                    Out::HIGH);
+                manager.cleanMetadata(repo);
+            }
+            else
+            {
+                zypper.out().info(boost::str(format(
+                    _("Keeping raw metadata cache for %s '%s'.")) %scheme %repo.alias ()),
+                    Out::HIGH);
+            }
         }
         if( clean_packages )
 	{
