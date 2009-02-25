@@ -119,6 +119,10 @@ make %{?jobs:-j %jobs} VERBOSE=1
 make -C doc/autodoc %{?jobs:-j %jobs}
 make -C po %{?jobs:-j %jobs} translations
 
+%if 0%{?run_testsuite}
+  ctest .
+%endif
+
 #make check
 
 %install
