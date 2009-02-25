@@ -120,7 +120,10 @@ make -C doc/autodoc %{?jobs:-j %jobs}
 make -C po %{?jobs:-j %jobs} translations
 
 %if 0%{?run_testsuite}
-  ctest .
+  make -C tests %{?jobs:-j %jobs}
+  pushd tests
+  ctest -A
+  popd
 %endif
 
 #make check
