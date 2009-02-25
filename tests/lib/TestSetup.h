@@ -29,6 +29,8 @@ using namespace zypp;
 #define BOOST_CHECK_NE( L, R ) BOOST_CHECK( (L) != (R) )
 #endif
 
+#define LABELED(V) #V << ":\t" << V
+
 enum TestSetupOptionBits
 {
   TSO_CLEANROOT = (1 <<  0)
