@@ -5,7 +5,7 @@
 PRG=Main
 SUDO=
 if [ "$1" = -su ]; then
-       SUDO=sudo
+       SUDO="sudo -E"
        shift
 fi
 
