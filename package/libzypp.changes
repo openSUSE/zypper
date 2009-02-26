@@ -1,4 +1,9 @@
 -------------------------------------------------------------------
+Thu Feb 26 13:49:56 CET 2009 - ma@suse.de
+
+- Use correct default for zconfig(solver.checkSystemFile) (bnc# 475144)
+
+-------------------------------------------------------------------
 Thu Feb 26 01:25:33 CET 2009 - ma@suse.de
 
 - Prevent ResStatus from overriding user locks. (bnc #475230)
