@@ -1,4 +1,9 @@
 -------------------------------------------------------------------
+Thu Feb 26 01:25:33 CET 2009 - ma@suse.de
+
+- Prevent ResStatus from overriding user locks. (bnc #475230)
+
+-------------------------------------------------------------------
 Sun Feb 22 15:27:11 CET 2009 - ma@suse.de
 
 - Never refresh repositories from CD/DVD, once they are created. (bnc #476429)
