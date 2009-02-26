@@ -300,6 +300,9 @@ namespace zypp
 	}
     }
 
+    bool isToBeUninstalledDueToObsolete () const
+    { return isToBeUninstalled() && fieldValueIs<TransactDetailField>( DUE_TO_OBSOLETE ); }
+
     bool isToBeUninstalledDueToUpgrade() const
     { return isToBeUninstalled() && fieldValueIs<TransactDetailField>( DUE_TO_UPGRADE ); }
 
@@ -366,9 +369,9 @@ namespace zypp
     }
 
     /** Apply a lock (prevent transaction).
-     * Currently by USER only, but who knows... Set LOCKED
-     * from KEEP_STATE to be shure all transaction details
-     * were reset properly.
+     * Currently by USER or APPL_HIGH only, but who knows...
+     * Set LOCKED from KEEP_STATE to be shure all transaction
+     * details were reset properly.
     */
     bool setLock( bool toLock_r, TransactByValue causer_r )
     {
@@ -381,19 +384,23 @@ namespace zypp
            return true;
         }
       // Here: Lock status is to be changed:
-      if ( causer_r != USER && causer_r != APPL_HIGH)
-        return false;
-      // Setting no transact removes an existing lock,
-      // or brings this into KEEP_STATE, and we apply the lock.
-      if ( ! setTransact( false, causer_r ) )
+      if ( causer_r != USER && causer_r != APPL_HIGH )
         return false;
       if ( toLock_r ) {
-	  fieldValueAssign<TransactField>( LOCKED );
-	  fieldValueAssign<TransactByField>( causer_r );
+        // We're in unlocked state, which includes TRANSACT.
+        // Causer must be allowed to reset this. But from
+        // KEEP_STATE every causer is allowed to set the lock.
+        if ( ! setTransact( false, causer_r ) )
+          return false;
+        fieldValueAssign<TransactField>( LOCKED );
+        fieldValueAssign<TransactByField>( causer_r );
       } else {
-	  fieldValueAssign<TransactField>( KEEP_STATE );
-	  fieldValueAssign<TransactByField>( SOLVER ); // reset to lowest causer
-	                                               // in order to distinguish from keep_state_by_user
+        // To leave Locked state it needs a superior causer.
+        if ( isGreaterThan<TransactByField>( causer_r ) )
+          return false;
+        fieldValueAssign<TransactField>( KEEP_STATE );
+        fieldValueAssign<TransactByField>( SOLVER ); // reset to lowest causer
+	                                             // in order to distinguish from keep_state_by_user
       }
       return true;
     }
