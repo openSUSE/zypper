@@ -555,7 +555,7 @@ namespace zypp
       // try to get the file from the net
       try
       {
-        Pathname tmp_file = media.provideFile(resource);
+        Pathname tmp_file = media.provideFile(resource, resource.optional() ? MediaSetAccess::PROVIDE_NON_INTERACTIVE : MediaSetAccess::PROVIDE_DEFAULT );
 
         Pathname dest_full_path = dest_dir + resource.filename();
 

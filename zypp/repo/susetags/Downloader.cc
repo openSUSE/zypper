@@ -52,7 +52,7 @@ void Downloader::download( MediaSetAccess &media,
 
   Pathname sig = repoInfo().path() + "/content.asc";
 
-  this->enqueue( OnMediaLocation( sig, 1 ) );
+  this->enqueue( OnMediaLocation( sig, 1 ).setOptional(true) );
   this->start( dest_dir, media );
   // only if there is a signature in the destination directory
   if ( PathInfo(dest_dir / sig ).isExist() )
@@ -61,7 +61,7 @@ void Downloader::download( MediaSetAccess &media,
 
   Pathname key = repoInfo().path() + "/content.key";
 
-  this->enqueue( OnMediaLocation( key, 1 ) );
+  this->enqueue( OnMediaLocation( key, 1 ).setOptional(true) );
   this->start( dest_dir, media );
   // only if there is a key in the destination directory
   if ( PathInfo(dest_dir / key).isExist() )
