@@ -12,6 +12,7 @@
 #ifndef ZYPP_RESSTATUS_H
 #define ZYPP_RESSTATUS_H
 
+#include <inttypes.h>
 #include <iosfwd>
 #include "zypp/Bit.h"
 

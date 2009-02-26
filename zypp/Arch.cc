@@ -11,6 +11,7 @@
 */
 #include <iostream>
 #include <list>
+#include <inttypes.h>
 
 #include "zypp/base/Logger.h"
 #include "zypp/base/Exception.h"
