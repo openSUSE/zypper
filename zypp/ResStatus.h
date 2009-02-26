@@ -301,9 +301,6 @@ namespace zypp
 	}
     }
 
-    bool isToBeUninstalledDueToObsolete () const
-    { return isToBeUninstalled() && fieldValueIs<TransactDetailField>( DUE_TO_OBSOLETE ); }
-
     bool isToBeUninstalledDueToUpgrade() const
     { return isToBeUninstalled() && fieldValueIs<TransactDetailField>( DUE_TO_UPGRADE ); }
 
