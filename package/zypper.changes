@@ -1,4 +1,12 @@
 -------------------------------------------------------------------
+Tue Feb 24 16:38:16 CET 2009 - ma@suse.de
+
+- Let 'zypper clean' keep the raw metadata cache of CD/DVD based
+  repositories. We'd need the CD/DVD again to recreate the data.
+  If this is actually desired, explicitly remove an recreate the 
+  CD/DVD based repository. (bnc #476429).
+
+-------------------------------------------------------------------
 Sun Feb 15 21:43:13 CET 2009 - jkupec@suse.cz
 
 - Writing additional rpm output after installing/removing packages
