@@ -122,7 +122,7 @@ make -C po %{?jobs:-j %jobs} translations
 %if 0%{?run_testsuite}
   make -C tests %{?jobs:-j %jobs}
   pushd tests
-  ctest .
+  LD_LIBRARY_PATH=$PWD/../zypp:$LD_LIBRARY_PATH ctest .
   popd
 %endif
 
