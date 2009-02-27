@@ -1,4 +1,11 @@
 -------------------------------------------------------------------
+Fri Feb 27 16:23:36 CET 2009 - dmacvicar@suse.de
+
+- Make sure Fetcher pass optional files as non-interactive
+- Fixes file does not exist error when key/sig does not exist 
+- version 6.2.0 (2)
+
+-------------------------------------------------------------------
 Thu Feb 26 13:49:56 CET 2009 - ma@suse.de
 
 - Use correct default for zconfig(solver.checkSystemFile) (bnc# 475144)
