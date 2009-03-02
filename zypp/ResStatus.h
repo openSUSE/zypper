@@ -692,6 +692,12 @@ namespace zypp
   /** \relates ResStatus Stream output */
   std::ostream & operator<<( std::ostream & str, const ResStatus & obj );
 
+  /** \relates ResStatus Stream output */
+  std::ostream & operator<<( std::ostream & str, ResStatus::TransactValue obj );
+
+  /** \relates ResStatus Stream output */
+  std::ostream & operator<<( std::ostream & str, ResStatus::TransactByValue obj );
+
   /** \relates ResStatus */
   inline bool operator==( const ResStatus & lhs, const ResStatus & rhs )
   { return lhs._bitfield == rhs._bitfield; }

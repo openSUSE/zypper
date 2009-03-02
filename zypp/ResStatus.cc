@@ -98,6 +98,32 @@ namespace zypp
     return str;
   }
 
+
+#define OUTS(X) case ResStatus::X: return str << #X; break
+
+  std::ostream & operator<<( std::ostream & str, ResStatus::TransactValue obj )
+  {
+    switch ( obj )
+    {
+      OUTS( KEEP_STATE );
+      OUTS( LOCKED );
+      OUTS( TRANSACT );
+    }
+    return str;
+  }
+
+  std::ostream & operator<<( std::ostream & str, ResStatus::TransactByValue obj )
+  {
+    switch ( obj )
+    {
+      OUTS( SOLVER );
+      OUTS( APPL_LOW );
+      OUTS( APPL_HIGH );
+      OUTS( USER );
+    }
+    return str;
+  }
+
   /////////////////////////////////////////////////////////////////
 } // namespace zypp
 ///////////////////////////////////////////////////////////////////
