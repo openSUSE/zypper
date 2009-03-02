@@ -71,6 +71,14 @@ MediaAria2c::existsAria2cmd()
     };
 
     ExternalProgram aria(argv, ExternalProgram::Stderr_To_Stdout);
+    
+    for(std::string ariaResponse( aria.receiveLine());
+        ariaResponse.length();
+        ariaResponse = aria.receiveLine())
+    {
+        // nothing
+    }
+    
     return ( aria.close() == 0 );
 }
 
