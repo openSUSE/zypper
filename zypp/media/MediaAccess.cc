@@ -135,14 +135,14 @@ MediaAccess::open (const Url& url, const Pathname & preferred_attach_point)
         // if user disabled it manually
         if ( ariaenv && ( strcmp(ariaenv, "0" ) == 0 ) )
         {
-            WAR << "aria2c manually disabled. Falling back to curl";
+            WAR << "aria2c manually disabled. Falling back to curl" << endl;
             use_aria = false;
         }
         
         // disable if it does not exist
         if ( ! MediaAria2c::existsAria2cmd() )
         {
-            WAR << "aria2c not found. Falling back to curl";
+            WAR << "aria2c not found. Falling back to curl" << endl;
             use_aria = false;
         }
         
