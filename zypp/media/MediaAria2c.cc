@@ -99,6 +99,7 @@ void fillAriaCmdLine( const Pathname &ariapath,
     args.push_back("--summary-interval=1");
     args.push_back("--follow-metalink=mem");
     args.push_back("--check-integrity=true");
+    args.push_back("--file-allocation=none");
 
     // only present in recent aria lets find out the aria version
     vector<string> fields;    
