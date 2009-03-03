@@ -23,6 +23,7 @@ namespace zypp
   const ResStatus ResStatus::toBeInstalled		 (UNINSTALLED, UNDETERMINED, TRANSACT);
   const ResStatus ResStatus::toBeUninstalled		 (INSTALLED,   UNDETERMINED, TRANSACT);
   const ResStatus ResStatus::toBeUninstalledDueToUpgrade (INSTALLED,   UNDETERMINED, TRANSACT, EXPLICIT_INSTALL, DUE_TO_UPGRADE);
+  const ResStatus ResStatus::toBeUninstalledDueToObsolete(INSTALLED,   UNDETERMINED, TRANSACT, EXPLICIT_INSTALL, DUE_TO_OBSOLETE);
 
   ///////////////////////////////////////////////////////////////////
   //
@@ -86,8 +87,9 @@ namespace zypp
     else if (obj.isByApplHigh()) str << "h";
     else if (obj.isByUser()) str << "u";
 
-    str << (obj.isToBeUninstalledDueToUpgrade() ? "U" :
-	( obj.isToBeInstalledSoft() ? "S" : "_" ) );
+    str << (obj.isToBeUninstalledDueToObsolete() ? "O" :
+	( obj.isToBeUninstalledDueToUpgrade() ? "U" :
+	( obj.isToBeInstalledSoft() ? "S" : "_" ) ) );
 
     str << (obj.isSeen() ? "@" : "" );
 
