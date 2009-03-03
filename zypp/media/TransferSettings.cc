@@ -82,6 +82,11 @@ TransferSettings::TransferSettings()
 
 }
 
+void TransferSettings::reset()
+{
+    _impl.reset(new TransferSettings::Impl());
+}
+
 void TransferSettings::addHeader( const std::string &header )
 {
     _impl->_headers.push_back(header);

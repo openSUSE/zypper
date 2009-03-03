@@ -33,6 +33,12 @@ public:
   TransferSettings( const zypp::Url &url );
 
   typedef std::vector<std::string> Headers;
+
+  /**
+   * reset the settings to the defaults
+   */
+  void reset();
+
   /**
    * add a header, on the form "Foo: Bar"
    */
