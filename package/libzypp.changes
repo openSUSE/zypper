@@ -1,4 +1,9 @@
 -------------------------------------------------------------------
+Tue Mar  3 12:44:24 CET 2009 - ma@suse.de
+
+- Adapt to changed satsolver API.
+
+-------------------------------------------------------------------
 Fri Feb 27 16:23:36 CET 2009 - dmacvicar@suse.de
 
 - Make sure Fetcher pass optional files as non-interactive
