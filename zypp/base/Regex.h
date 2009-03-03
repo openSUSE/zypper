@@ -72,6 +72,12 @@ namespace zypp
       regex & operator=(const regex & rhs)
       { assign(rhs.m_str, rhs.m_flags); return *this; }
 
+      /**
+       * string representation of the regular expression
+       */
+      std::string asString() const
+      { return m_str; }
+
     public:
       /** Expert backdoor. Returns pointer to the compiled regex for direct use in regexec() */
       regex_t * get()
