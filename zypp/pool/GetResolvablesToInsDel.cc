@@ -87,7 +87,11 @@ namespace zypp
             }
           else if (it->status().isToBeUninstalled())
             {
-              if( it->status().isToBeUninstalledDueToUpgrade() )
+              if ( it->status().isToBeUninstalledDueToObsolete() )
+                {
+                  DBG << "Ignore auto_delete (should be obsoleted): " << *it << endl;
+                }
+              else if ( it->status().isToBeUninstalledDueToUpgrade() )
                 {
                   DBG << "Ignore auto_delete (should be upgraded): " << *it << endl;
                 }

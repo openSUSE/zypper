@@ -82,7 +82,7 @@ namespace zypp
     };
     typedef std::multimap<PoolItem,ItemCapKind> ItemCapKindMap;
     typedef std::list<ItemCapKind> ItemCapKindList;
-	
+
 
 ///////////////////////////////////////////////////////////////////
 //
@@ -98,7 +98,7 @@ class Resolver : public base::ReferenceCounted, private base::NonCopyable {
 
     CapabilitySet _extra_requires;
     CapabilitySet _extra_conflicts;
-    
+
     // Regard dependencies of the item weak onl
     PoolItemList _addWeak;
 
@@ -106,7 +106,7 @@ class Resolver : public base::ReferenceCounted, private base::NonCopyable {
                                   // have unfulfilled requirements.
                                   // This behaviour is favourited by ZMD
     bool _upgradeMode;            // Resolver has been called with doUpgrade
-    bool _updateMode;            // Resolver has been called with doUpdate    
+    bool _updateMode;            // Resolver has been called with doUpdate
     bool _verifying;              // The system will be checked
     TriBool _onlyRequires; 	  // do install required resolvables only
                                   // no recommended resolvables, language
@@ -124,10 +124,9 @@ class Resolver : public base::ReferenceCounted, private base::NonCopyable {
     ItemCapKindMap _installs;
     ItemCapKindMap _satifiedByInstalled;
     ItemCapKindMap _installedSatisfied;
-    
+
     // helpers
-    bool doesObsoleteItem (PoolItem candidate, PoolItem installed);
-    void collectResolverInfo (void);    
+    void collectResolverInfo (void);
 
     // Unmaintained packages which does not fit to the updated system
     // (broken dependencies) will be deleted.
@@ -158,7 +157,7 @@ class Resolver : public base::ReferenceCounted, private base::NonCopyable {
     void removeExtraConflict (const Capability & capability);
 
     void removeQueueItem (const SolverQueueItem_Ptr item);
-    void addQueueItem (const SolverQueueItem_Ptr item);    
+    void addQueueItem (const SolverQueueItem_Ptr item);
 
     const CapabilitySet extraRequires () { return _extra_requires; }
     const CapabilitySet extraConflicts () { return _extra_conflicts; }
@@ -170,7 +169,7 @@ class Resolver : public base::ReferenceCounted, private base::NonCopyable {
 
     void setIgnorealreadyrecommended (const bool ignorealreadyrecommended)
 	{ _ignorealreadyrecommended = ignorealreadyrecommended; }
-    bool ignorealreadyrecommended() { return _ignorealreadyrecommended; }    
+    bool ignorealreadyrecommended() { return _ignorealreadyrecommended; }
 
     void setOnlyRequires (const TriBool state)
 	{ _onlyRequires = state; }
@@ -178,14 +177,14 @@ class Resolver : public base::ReferenceCounted, private base::NonCopyable {
 
     bool verifySystem ();
     bool resolvePool();
-    bool resolveQueue(solver::detail::SolverQueueItemList & queue);    
+    bool resolveQueue(solver::detail::SolverQueueItemList & queue);
     void doUpdate();
 
     bool doUpgrade( zypp::UpgradeStatistics & opt_stats_r );
     PoolItemList problematicUpdateItems( void ) const;
 
     bool isUpgradeMode(){ return _upgradeMode;};    // Resolver has been called with doUpgrade
-    bool isUpdateMode(){ return _updateMode;};      // Resolver has been called with doUpdate    
+    bool isUpdateMode(){ return _updateMode;};      // Resolver has been called with doUpdate
     bool isVerifyingMode(){ return _verifying;};    // The system will be checked
 
     ResolverProblemList problems () const;
@@ -204,9 +203,9 @@ class Resolver : public base::ReferenceCounted, private base::NonCopyable {
     // installation
     const ItemCapKindList isInstalledBy (const PoolItem item);
     const ItemCapKindList installs (const PoolItem item);
-    const ItemCapKindList satifiedByInstalled (const PoolItem item);    
+    const ItemCapKindList satifiedByInstalled (const PoolItem item);
     const ItemCapKindList installedSatisfied (const PoolItem item);
-    
+
 };
 
 ///////////////////////////////////////////////////////////////////

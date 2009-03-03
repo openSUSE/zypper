@@ -127,7 +127,8 @@ namespace zypp
       {
         EXPLICIT_REMOVE = bit::RangeValue<TransactDetailField,0>::value,
 	SOFT_REMOVE     = bit::RangeValue<TransactDetailField,1>::value,
-        DUE_TO_UPGRADE  = bit::RangeValue<TransactDetailField,2>::value
+        DUE_TO_OBSOLETE = bit::RangeValue<TransactDetailField,2>::value,
+        DUE_TO_UPGRADE  = bit::RangeValue<TransactDetailField,3>::value
       };
     enum SolverStateValue
       {
@@ -300,6 +301,9 @@ namespace zypp
 	    return false;
 	}
     }
+
+    bool isToBeUninstalledDueToObsolete () const
+    { return isToBeUninstalled() && fieldValueIs<TransactDetailField>( DUE_TO_OBSOLETE ); }
 
     bool isToBeUninstalledDueToUpgrade() const
     { return isToBeUninstalled() && fieldValueIs<TransactDetailField>( DUE_TO_UPGRADE ); }
@@ -545,6 +549,13 @@ namespace zypp
     //------------------------------------------------------------------------
     // *** These are only for the Resolver ***
 
+    bool setToBeUninstalledDueToObsolete ( )
+    {
+      if (!setToBeUninstalled (SOLVER)) return false;
+      fieldValueAssign<TransactDetailField>(DUE_TO_OBSOLETE);
+      return true;
+    }
+
     bool setToBeUninstalledDueToUpgrade ( TransactByValue causer )
     {
       if (!setToBeUninstalled (causer)) return false;
@@ -650,6 +661,7 @@ namespace zypp
     static const ResStatus toBeInstalled;
     static const ResStatus toBeUninstalled;
     static const ResStatus toBeUninstalledDueToUpgrade;
+    static const ResStatus toBeUninstalledDueToObsolete;
     //@}
 
   private:
