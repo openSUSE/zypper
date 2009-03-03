@@ -13,6 +13,8 @@
 #include <iostream>
 #include <list>
 
+#include <boost/lexical_cast.hpp>
+
 #include "zypp/base/Logger.h"
 #include "zypp/ExternalProgram.h"
 #include "zypp/ProgressData.h"
@@ -290,41 +292,99 @@ void MediaAria2c::getFileCopy( const Pathname & filename , const Pathname & targ
       report->start(_url, target.asString() );
 
       ExternalProgram aria(args, ExternalProgram::Stderr_To_Stdout);
-      int nLine = 0;
 
+      // progress line like: [#1 SIZE:8.3MiB/10.1MiB(82%) CN:5 SPD:6899.88KiB/s]
+      // we save it until we find a string with FILE: later
+      string progressLine;
+      // file line, which tell which file is the previous progress
+      // ie: FILE: ./packages.FL.gz
+      double average_speed = 0;
+      long average_speed_count = 0;
+      
       //Process response
       for(std::string ariaResponse( aria.receiveLine());
           ariaResponse.length();
           ariaResponse = aria.receiveLine())
       {
         //cout << ariaResponse;
-
-        if (!ariaResponse.substr(0,31).compare("Exception: Authorization failed") )
+        string line = str::trim(ariaResponse);
+          
+        if (!line.substr(0,31).compare("Exception: Authorization failed") )
         {
             ZYPP_THROW(MediaUnauthorizedException(
                   _url, "Login failed.", "Login failed", "auth hint"
                 ));
         }
-        if (!ariaResponse.substr(0,29).compare("Exception: Resource not found") )
+        if (!line.substr(0,29).compare("Exception: Resource not found") )
         {
             ZYPP_THROW(MediaFileNotFoundException(_url, filename));
         }
 
-        if (!ariaResponse.substr(0,9).compare("[#2 SIZE:"))
+        // look for the progress line and save it for later
+        if ( str::hasPrefix(line, "[#") )
+            progressLine = line;
+
+        if ( str::hasPrefix(line, "FILE: ") )
         {
-          if (!nLine)
-          {
-            size_t left_bound = ariaResponse.find('(',0) + 1;
-            size_t count = ariaResponse.find('%',left_bound) - left_bound;
-            //cout << ariaResponse.substr(left_bound, count) << endl;
-            //progressData.toMax();
-            report->progress ( std::atoi(ariaResponse.substr(left_bound, count).c_str()), _url, -1, -1 );
-            nLine = 1;
-          }
-          else
-          {
-            nLine = 0;
-          }
+            // get the FILE name
+            Pathname theFile(line.substr(6, line.size()));
+            // is the report about the filename we are downloading?
+            // aria may report progress about metalinks, torrent and
+            // other stuff which is not the main transfer
+            if ( theFile == target )
+            {
+                // once we find the FILE: line, progress has to be
+                // non empty
+                if ( ! progressLine.empty() )
+                {
+                    // get the percentage (progress) data
+                    int progress = 0;
+                    size_t left_bound = progressLine.find('(',0) + 1;
+                    size_t count = progressLine.find('%',left_bound) - left_bound;
+                    string progressStr = progressLine.substr(left_bound, count);
+ 
+                    if ( count != string::npos )
+                        progress = std::atoi(progressStr.c_str());
+                    else
+                        ERR << "Can't parse progress from '" << progressStr << "'" << endl;
+                    // get the speed
+                    double current_speed = 0;
+                    left_bound = progressLine.find("SPD:",0) + 4;
+                    count = progressLine.find("KiB/s",left_bound) - left_bound;
+                    if ( count != string::npos )
+                    { // convert the string to a double
+                        string speedStr = progressLine.substr(left_bound, count);
+                        try {
+                            current_speed = boost::lexical_cast<double>(speedStr);
+                        }
+                        catch (const std::exception&) {
+                            ERR << "Can't parse speed from '" << speedStr << "'" << endl;
+                            current_speed = 0;
+                        }
+                    }
+                    
+                    // we have a new average speed
+                    average_speed_count++;
+
+                    // this is basically A: average
+                    // ((n-1)A(n-1) + Xn)/n = A(n)
+                    average_speed = (((average_speed_count - 1 )*average_speed) + current_speed)/average_speed_count;
+                    
+                    report->progress ( progress, _url, average_speed, current_speed );
+                    // clear the progress line to detect mismatches between
+                    // [# and FILE: lines
+                    progressLine.clear();
+                }
+                else
+                {
+                    WAR << "aria2c reported a file, but no progress data available" << endl;
+                }
+
+            }
+            else
+            {
+                DBG << "Progress is not about '" << target << "' but '" << theFile << "'" << endl;
+            }            
         }
       }
 
