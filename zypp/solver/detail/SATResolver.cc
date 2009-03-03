@@ -554,7 +554,6 @@ SATResolver::solving(const CapabilitySet & requires_caps,
     }
 
     /* Write validation state back to pool */
-    Map installedmap;
     Queue flags, solvableQueue;
 
     queue_init(&flags);
@@ -565,8 +564,7 @@ SATResolver::solving(const CapabilitySet & requires_caps,
 		  _pool.end(),
 		  functor::not_c(resfilter::byKind<Package>()), // every solvable BUT packages
 		  functor::functorRef<bool,PoolItem> (collectNonePackages) );
-    solver_create_state_maps(_solv, &installedmap, 0);
-    pool_trivial_installable(_solv->pool, &installedmap, &solvableQueue, &flags);
+    solver_trivial_installable(_solv, &solvableQueue, &flags );
     for (int i = 0; i < solvableQueue.count; i++) {
 	PoolItem item = _pool.find (sat::Solvable(solvableQueue.elements[i]));
 	item.status().setUndetermined();
@@ -613,7 +611,6 @@ SATResolver::solving(const CapabilitySet & requires_caps,
 	return false;
     }
 
-    map_free(&installedmap);
     queue_free(&(solvableQueue));
     queue_free(&flags);
 
@@ -1218,12 +1215,12 @@ SATResolver::problems ()
 			    problemSolution->addSingleAction (poolItem, KEEP);
 			    string description = str::form (_("keep %s despite the inferior architecture"), solvable2str(pool, s.get()));
 			    MIL << description << endl;
-			    problemSolution->addDescription (description);			    
+			    problemSolution->addDescription (description);
 			} else {
 			    problemSolution->addSingleAction (poolItem, INSTALL);
 			    string description = str::form (_("install %s despite the inferior architecture"), solvable2str(pool, s.get()));
 			    MIL << description << endl;
-			    problemSolution->addDescription (description);			    			    
+			    problemSolution->addDescription (description);
 			}
 		    } else if (p == SOLVER_SOLUTION_DISTUPGRADE) {
 			s = mapSolvable (rp);
@@ -1232,12 +1229,12 @@ SATResolver::problems ()
 			    problemSolution->addSingleAction (poolItem, KEEP);
 			    string description = str::form (_("keep obsolete %s"), solvable2str(pool, s.get()));
 			    MIL << description << endl;
-			    problemSolution->addDescription (description);			    
+			    problemSolution->addDescription (description);
 			} else {
 			    problemSolution->addSingleAction (poolItem, INSTALL);
 			    string description = str::form (_("install %s from excluded repository"), solvable2str(pool, s.get()));
 			    MIL << description << endl;
-			    problemSolution->addDescription (description);			    			    			    
+			    problemSolution->addDescription (description);
 			}
 		    } else {
 			/* policy, replace p with rp */

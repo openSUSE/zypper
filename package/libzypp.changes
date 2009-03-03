@@ -1,5 +1,5 @@
 -------------------------------------------------------------------
-Tue Mar  3 11:38:11 CET 2009 - dmacvicar@suse.de
+Tue Mar  3 13:38:11 CET 2009 - dmacvicar@suse.de
 
 - aria2: implement speed indicators (bnc#475506)
 - aria2: implement progress indicators correctly (bnc#473846)
@@ -10,6 +10,11 @@ Tue Mar  3 11:38:11 CET 2009 - dmacvicar@suse.de
 - aria2: handle failover correctly (bnc#481115)
 - aria2: various improvements in error and report  handling
 - version 6.2.1 (2)
+
+-------------------------------------------------------------------
+Tue Mar  3 12:44:24 CET 2009 - ma@suse.de
+
+- Adapt to changed satsolver API.
 
 -------------------------------------------------------------------
 Fri Feb 27 16:23:36 CET 2009 - dmacvicar@suse.de
