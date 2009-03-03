@@ -9,6 +9,8 @@ Tue Mar  3 13:38:11 CET 2009 - dmacvicar@suse.de
          /var/cache/zypp/aria2.stats
 - aria2: handle failover correctly (bnc#481115)
 - aria2: various improvements in error and report  handling
+- aria2: curl: reset settings on attach to avoid duplicate
+  headers
 - version 6.2.1 (2)
 
 -------------------------------------------------------------------
