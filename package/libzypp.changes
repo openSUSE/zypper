@@ -1,4 +1,17 @@
 -------------------------------------------------------------------
+Tue Mar  3 11:38:11 CET 2009 - dmacvicar@suse.de
+
+- aria2: implement speed indicators (bnc#475506)
+- aria2: implement progress indicators correctly (bnc#473846)
+- aria2: fix broken pipe when looking for aria2c which caused
+         a fallback to curl.
+- aria2: implement saving and reading mirror stats data in
+         /var/cache/zypp/aria2.stats
+- aria2: handle failover correctly (bnc#481115)
+- aria2: various improvements in error and report  handling
+- version 6.2.1 (2)
+
+-------------------------------------------------------------------
 Fri Feb 27 16:23:36 CET 2009 - dmacvicar@suse.de
 
 - Make sure Fetcher pass optional files as non-interactive
