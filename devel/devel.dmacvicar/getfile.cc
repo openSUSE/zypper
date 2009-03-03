@@ -40,7 +40,7 @@ struct MediaChangeReportReceiver : public zypp::callback::ReceiveReport<MediaCha
                  const std::vector<std::string> & devices,
                  unsigned int &                   index)
     {
-      cout << std::endl;
+      cout << label << " " <<description << std::endl;
       MIL << "media problem, url: " << url.asString() << std::endl;
       return MediaChangeReport::IGNORE;
     }
@@ -63,13 +63,21 @@ struct DownloadProgressReportReceiver : public zypp::callback::ReceiveReport<Dow
     
     virtual Action problem( const Url &/*file*/
                             , Error /*error*/
-                            , const std::string &/*description*/ ) { return ABORT; }
+                            , const std::string &description )
+    {
+        cout << "PROBLEM: " << description << endl;
+        return ABORT; 
+    }
     
     virtual void finish(
         const Url &/*file*/
         , Error /*error*/
-        , const std::string &/*reason*/
-        ) {}
+        , const std::string &reason
+        )
+        {
+            cout << "finish:" << endl;            
+            cout << reason << endl;
+        }
 };
 
 int main(int argc, char **argv)
@@ -97,6 +105,7 @@ int main(int argc, char **argv)
     {
       ZYPP_CAUGHT(e);
       cout << e.msg() << endl;
+      cout << e.historyAsString();
     }
     
     return 0;
