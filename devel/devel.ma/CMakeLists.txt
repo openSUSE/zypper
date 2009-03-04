@@ -34,7 +34,8 @@ FOREACH( loop_var ${APLLPROG} )
    )
    TARGET_LINK_LIBRARIES( ${loop_var}
     boost_signals
-#zypp ${THREAD_LIBRARY}
+    zypp
+    #{THREAD_LIBRARY}
    )
 ENDFOREACH( loop_var )
 
