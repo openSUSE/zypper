@@ -25,7 +25,7 @@ Provides:       yast2-packagemanager
 Obsoletes:      yast2-packagemanager
 Recommends:     logrotate
 BuildRequires:  cmake
-BuildRequires:  libsatsolver-devel >= 0.13.5 openssl-devel
+BuildRequires:  libsatsolver-devel >= 0.14.0 openssl-devel
 BuildRequires:  boost-devel curl-devel dejagnu doxygen gcc-c++ gettext-devel graphviz hal-devel libxml2-devel
 
 # required for testsuite, webrick
