@@ -228,6 +228,10 @@ namespace zypp
                 {
                   cfg_known_repos_path = Pathname(value);
                 }
+                else if ( entry == "servicesdir" )
+                {
+                  cfg_known_services_path = Pathname(value);
+                }
                 else if ( entry == "repo.add.probe" )
                 {
                   repo_add_probe = str::strToBool( value, repo_add_probe );
