@@ -1,4 +1,9 @@
 -------------------------------------------------------------------
+Wed Mar  4 00:13:19 CET 2009 - jkupec@suse.cz
+
+- zypp.conf: fixed and enabled 'servicesdir'
+
+-------------------------------------------------------------------
 Tue Mar  3 13:38:11 CET 2009 - dmacvicar@suse.de
 
 - aria2: implement speed indicators (bnc#475506)
