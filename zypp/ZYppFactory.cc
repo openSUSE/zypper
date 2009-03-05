@@ -172,27 +172,27 @@ namespace zypp
     {
       // it is another program, not me, see if it is still running
       Pathname procdir( "/proc"/str::numstring(pid_r) );
-
-      PathInfo status( procdir/"status" );
+      PathInfo status( procdir );
       MIL << "Checking " <<  status << endl;
-      bool still_running = status.isExist();
 
-      if ( still_running )
+      if ( ! status.isDir() )
       {
-        Pathname p( procdir/"exe" );
-        _locker_name = filesystem::readlink( p ).asString();
-        MIL << p << " -> " << _locker_name << endl;
-
-        p = procdir/"cmdline";
-        MIL << p << ": ";
-        std::ifstream infile( p.c_str() );
-        for( iostr::EachLine in( infile ); in; in.next() )
-        {
-          MIL << *in << endl;
-        }
+	DBG << "No such process." << endl;
+	return false;
       }
 
-      return still_running;
+      static char buffer[513];
+      buffer[0] = buffer[512] = 0;
+      // man proc(5): /proc/[pid]/cmdline is empty if zombie.
+      if ( std::ifstream( (procdir/"cmdline").c_str() ).read( buffer, 512 ).gcount() > 0 )
+      {
+	_locker_name = buffer;
+	DBG << "Is running: " <<  _locker_name << endl;
+	return true;
+      }
+
+      DBG << "In zombie state." << endl;
+      return false;
     }
 
     pid_t lockerPid()
