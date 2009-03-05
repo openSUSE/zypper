@@ -1,4 +1,9 @@
 -------------------------------------------------------------------
+Thu Mar  5 14:52:44 CET 2009 - ma@suse.de
+
+- Remove a lock if the locking process is in zombie state. (bnc #481577)
+
+-------------------------------------------------------------------
 Wed Mar  4 00:13:19 CET 2009 - jkupec@suse.cz
 
 - zypp.conf: fixed and enabled 'servicesdir'
