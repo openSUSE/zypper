@@ -116,7 +116,7 @@ namespace zypp
         if ( key == it.cpeId() )
           return true;
       }
-        
+
       return false;
     }
 
@@ -199,6 +199,8 @@ namespace zypp
         // satsolver priority is based on '<', while yum's repoinfo
         // uses 1(highest)->99(lowest). Thus we use -info_r.priority.
         _repo->priority = -info_r.priority();
+	// subpriority could be used to e.g. prefer http over dvd iff both have same priority.
+	// _repo->subpriority = 0;
     }
 
     void Repository::clearInfo()
