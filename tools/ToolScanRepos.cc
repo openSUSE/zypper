@@ -1,4 +1,6 @@
-#include "Tools.h"
+#define INCLUDE_TESTSETUP_WITHOUT_BOOST
+#include "zypp/../tests/lib/TestSetup.h"
+#undef  INCLUDE_TESTSETUP_WITHOUT_BOOST
 
 static std::string appname( "ToolScanRepos" );
 
