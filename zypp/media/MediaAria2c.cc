@@ -386,7 +386,8 @@ void MediaAria2c::getFileCopy( const Pathname & filename , const Pathname & targ
               // ((n-1)A(n-1) + Xn)/n = A(n)
               average_speed = (((average_speed_count - 1 )*average_speed) + current_speed)/average_speed_count;
                     
-              report->progress ( progress, _url, average_speed, current_speed );
+              // note that aria report speed in kbpss, while the report takes bps
+              report->progress ( progress, _url, average_speed * 1024, current_speed * 1024 );
               // clear the progress line to detect mismatches between
               // [# and FILE: lines
               progressLine.clear();
