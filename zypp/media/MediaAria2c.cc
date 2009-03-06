@@ -297,7 +297,7 @@ void MediaAria2c::getFileCopy( const Pathname & filename , const Pathname & targ
   {
     try
     {
-      report->start(_url, target.asString() );
+      report->start(fileurl, target.asString() );
 
       ExternalProgram aria(args, ExternalProgram::Stderr_To_Stdout);
 
@@ -387,7 +387,7 @@ void MediaAria2c::getFileCopy( const Pathname & filename , const Pathname & targ
               average_speed = (((average_speed_count - 1 )*average_speed) + current_speed)/average_speed_count;
                     
               // note that aria report speed in kbpss, while the report takes bps
-              report->progress ( progress, _url, average_speed * 1024, current_speed * 1024 );
+              report->progress ( progress, fileurl, average_speed * 1024, current_speed * 1024 );
               // clear the progress line to detect mismatches between
               // [# and FILE: lines
               progressLine.clear();
@@ -445,7 +445,7 @@ void MediaAria2c::getFileCopy( const Pathname & filename , const Pathname & targ
         }
       }
       
-      report->finish( _url ,  zypp::media::DownloadProgressReport::NO_ERROR, "");
+      report->finish( fileurl ,  zypp::media::DownloadProgressReport::NO_ERROR, "");
       retry = false;
     }
     // retry with proper authentication data
