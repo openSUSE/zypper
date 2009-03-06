@@ -1,4 +1,9 @@
 -------------------------------------------------------------------
+Fri Mar  6 17:17:26 CET 2009 - dmacvicar@suse.de
+
+- aria2: show the download speed in the right unit
+
+-------------------------------------------------------------------
 Thu Mar  5 14:52:44 CET 2009 - ma@suse.de
 
 - Remove a lock if the locking process is in zombie state. (bnc #481577)
