@@ -3,6 +3,7 @@ Fri Mar  6 17:17:26 CET 2009 - dmacvicar@suse.de
 
 - aria2: show the download speed in the right unit
 - aria2: show the filename in progress, not the repository
+- aria2: don't show done twice
 
 -------------------------------------------------------------------
 Thu Mar  5 14:52:44 CET 2009 - ma@suse.de
