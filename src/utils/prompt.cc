@@ -31,6 +31,7 @@ using namespace boost;
 // ----------------------------------------------------------------------------
 
 PromptOptions::PromptOptions(const std::string & option_str, unsigned int default_opt)
+  : _shown_count(-1)
 {
   setOptions(option_str, default_opt);
 }
@@ -60,7 +61,9 @@ const string PromptOptions::optionString() const
 {
   ostringstream option_str;
   StrVector::const_iterator it;
-  if ((it = options().begin()) != options().end())
+  unsigned int shown_count = _shown_count < 0 ? options().size() : _shown_count;
+
+  if ((it = options().begin()) != options().end() && shown_count > 0)
   {
     if (defaultOpt() == 0)
       option_str << "_" << *it << "_";
@@ -68,7 +71,7 @@ const string PromptOptions::optionString() const
       option_str << *it;
     ++it;
   }
-  for (unsigned int i = 1; it != options().end() && i < _shown_count; ++it, ++i)
+  for (unsigned int i = 1; it != options().end() && i < shown_count; ++it, ++i)
     if (isEnabled(i))
     {
       option_str << "/";
@@ -79,7 +82,7 @@ const string PromptOptions::optionString() const
     }
 
   if (!_opt_help.empty())
-    option_str << "/?";
+    option_str << (shown_count > 0 ? "/" : "") << "?";
 
   return option_str.str();
 }
@@ -88,7 +91,9 @@ const string PromptOptions::optionStringColored() const
 {
   ostringstream option_str;
   StrVector::const_iterator it;
-  if ((it = options().begin()) != options().end())
+  unsigned int shown_count = _shown_count < 0 ? options().size() : _shown_count;
+
+  if ((it = options().begin()) != options().end() && shown_count > 0)
   {
     if (defaultOpt() == 0)
       option_str << COLOR_YELLOW << *it;
@@ -96,7 +101,7 @@ const string PromptOptions::optionStringColored() const
       option_str << COLOR_WHITE << *it;
     ++it;
   }
-  for (unsigned int i = 1; it != options().end() && i < _shown_count; ++it, ++i)
+  for (unsigned int i = 1; it != options().end() && i < shown_count; ++it, ++i)
     if (isEnabled(i))
     {
       option_str << COLOR_WHITE << "/";
@@ -107,7 +112,7 @@ const string PromptOptions::optionStringColored() const
     }
 
   if (!_opt_help.empty())
-    option_str << COLOR_WHITE << "/?";
+    option_str << COLOR_WHITE << (shown_count > 0 ? "/" : "") << "?";
 
   option_str << COLOR_RESET;
 

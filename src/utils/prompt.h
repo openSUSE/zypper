@@ -34,7 +34,7 @@ public:
   /**
    * Default c-tor.
    */
-  PromptOptions() {};
+  PromptOptions() : _shown_count(-1) {};
 
   /**
    * Constructor.
@@ -91,10 +91,10 @@ private:
   /** set of options to ignore */
   std::set<unsigned int> _disabled;
   /**
-   * number of options to show (the rest will still be available and visible
-   * through '?' help)
+   * Number of options to show (the rest will still be available and visible
+   * through '?' help). If negative, all options will be shown. Zero is allowed.
    */
-  unsigned int _shown_count;
+  int _shown_count;
 };
 
 
