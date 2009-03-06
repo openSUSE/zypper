@@ -1,4 +1,14 @@
 -------------------------------------------------------------------
+Fri Mar  6 15:56:53 CET 2009 - jkupec@suse.cz
+
+- Introduced colors.
+- Removed some forgotten control chars from non-terminal output
+  (bnc #440822).
+- Fixed FindReadline to find shared lib, not static.
+- Bash completion: allow spaces in repository aliases
+  (werner@suse.de) (bnc #474361)
+
+-------------------------------------------------------------------
 Tue Feb 24 16:38:16 CET 2009 - ma@suse.de
 
 - Let 'zypper clean' keep the raw metadata cache of CD/DVD based
