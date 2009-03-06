@@ -21,7 +21,28 @@
 
 #define COLOR_RESET             "\033[m"
 
+/*
+enum zypper_colors
+{
+  ZYPPER_COLOR_MSG_NORMAL           = 1,
+  ZYPPER_COLOR_MSG_HIGHLIGHTED      = 2,
+  ZYPPER_COLOR_MSG_ERROR            = 3,
+  ZYPPER_COLOR_MSG_WARNING          = 4
+};
+*/
+
+/** Simple check whether stdout can handle colors. */
 bool has_colors();
-void print_color(const std::string & s, const char * ansi_color_seq);
+
+/**
+ * Print string \a s in given color.
+ *
+ * \param s                string to print
+ * \param ansi_color_seq   color to print with
+ * \param prev_color       color to restore after printing. If NULL,
+ *                         COLOR_RESET will be used
+ */
+void print_color(const std::string & s,
+    const char * ansi_color_seq, const char * prev_color);
 
 #endif /* UTILS_COLORS_H_ */

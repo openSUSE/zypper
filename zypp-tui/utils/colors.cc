@@ -12,9 +12,11 @@
 
 #include "colors.h"
 
+using namespace std;
+
 bool has_colors()
 {
-  if (isatty(STDOUT_FILENO))
+  if (::isatty(STDOUT_FILENO))
   {
     char *term = ::getenv("TERM");
     if (term && ::strcmp(term, "dumb"))
@@ -23,7 +25,16 @@ bool has_colors()
   return false;
 }
 
-void print_color(const std::string & s, const char * ansi_color_seq)
+void print_color(const std::string & s,
+    const char * ansi_color_seq, const char * prev_color)
 {
-  std::cout << ansi_color_seq << s << COLOR_RESET;
+  if (prev_color)
+    cout << COLOR_RESET;
+
+  cout << ansi_color_seq << s;
+
+  if (prev_color)
+    cout << prev_color;
+  else
+    cout << COLOR_RESET;
 }
