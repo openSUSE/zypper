@@ -602,6 +602,26 @@ namespace zypp
     return false;
   }
 
+  std::string makeStupidAlias( const Url & url_r )
+  {
+    std::string ret( url_r.getScheme() );
+    if ( ret.empty() )
+      ret = "repo-";
+    else
+      ret += "-";
+
+    std::string host( url_r.getHost() );
+    if ( ! host.empty() )
+    {
+      ret += host;
+      ret += "-";
+    }
+
+    static Date::ValueType serial = Date::now();
+    ret += Digest::digest( Digest::sha1(), str::hexstring( ++serial ) +url_r.asCompleteString() ).substr(0,8);
+    return ret;
+  }
+
   ////////////////////////////////////////////////////////////////////////////
 
   Pathname RepoManager::metadataPath( const RepoInfo &info ) const
