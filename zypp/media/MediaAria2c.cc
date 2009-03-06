@@ -445,7 +445,6 @@ void MediaAria2c::getFileCopy( const Pathname & filename , const Pathname & targ
         }
       }
       
-      report->finish( fileurl ,  zypp::media::DownloadProgressReport::NO_ERROR, "");
       retry = false;
     }
     // retry with proper authentication data
