@@ -444,7 +444,7 @@ try {
   ResPool   pool( ResPool::instance() );
   sat::Pool satpool( sat::Pool::instance() );
 
-  if ( 1 )
+  if ( 0 )
   {
     Measure x( "INIT TARGET" );
     {
@@ -477,7 +477,7 @@ try {
     }
   }
 
-  if ( 1 )
+  if ( 0 )
   {
     RepoManager repoManager( makeRepoManager( sysRoot ) );
     RepoInfoList repos = repoManager.knownRepositories();
@@ -550,19 +550,20 @@ try {
   ///////////////////////////////////////////////////////////////////
   ///////////////////////////////////////////////////////////////////
 
-  if ( 0 )
+  RepoManager repoManager( makeRepoManager( sysRoot ) );
+  RepoInfoList repos = repoManager.knownRepositories();
+  // launch repos
+  for ( RepoInfoList::iterator it = repos.begin(); it != repos.end(); ++it )
   {
-    PoolItem pi ( getPi<Patch>("xorg-x11-Xvnc") );
-    MIL << pi << endl;
-    if ( pi )
-    {
-      Patch::constPtr p( pi->asKind<Patch>() );
-      INT << p->contents() << endl;
-    }
+     RepoInfo & nrepo( *it );
+     Url url_r( nrepo.url() );
+
+     SEC << url_r << endl;
+     MIL << RepoManager::makeStupidAlias( url_r ) << endl;
   }
-
-  SEC << "baseproduct:               " << getZYpp()->target()->baseProduct() << endl;
-
+  MIL << RepoManager::makeStupidAlias() << endl;
+  MIL << RepoManager::makeStupidAlias() << endl;
+  MIL << RepoManager::makeStupidAlias() << endl;
 
 #if 0
   getZYpp()->resolver()->addRequire( Capability("amarok") );
