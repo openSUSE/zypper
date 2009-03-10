@@ -1,4 +1,13 @@
 -------------------------------------------------------------------
+Tue Mar 10 19:25:46 CET 2009 - jkupec@suse.cz
+
+- Fixed noarch->anyarch and vice-versa update via 'zypper up foo'
+  (bnc #483179).
+- Fixed list-updates showing not-yet-installed packages
+  (bnc #483910).
+- 1.1.0
+
+-------------------------------------------------------------------
 Fri Mar  6 15:56:53 CET 2009 - jkupec@suse.cz
 
 - Introduced colors.
