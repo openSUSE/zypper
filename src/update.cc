@@ -18,6 +18,8 @@ using namespace boost;
 
 extern ZYpp::Ptr God;
 
+static PoolItem
+findInstalledItem( PoolItem item );
 
 // ----------------------------------------------------------------------------
 //
@@ -294,7 +296,9 @@ find_updates( const ResKind & kind, Candidates & candidates )
       it = God->pool().begin(),
       e  = God->pool().end();
     for (; it != e; ++it)
-      if (it->status().isToBeInstalled())
+      // show every package picked by doUpdate for installation
+      // except the ones which are not currently installed (bnc #483910)
+      if (it->status().isToBeInstalled() && findInstalledItem(*it))
         candidates.insert(*it);
     return;
   }
