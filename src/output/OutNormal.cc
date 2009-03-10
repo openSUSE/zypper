@@ -313,8 +313,11 @@ void OutNormal::prompt(PromptId id,
                        const PromptOptions & poptions,
                        const std::string & startdesc)
 {
-  if (startdesc.empty() && !_isatty)
-    cout << CLEARLN;
+  if (startdesc.empty())
+  {
+    if (_isatty)
+      cout << CLEARLN;
+  }
   else
     cout << startdesc << endl;
   cout << prompt;
