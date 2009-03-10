@@ -231,9 +231,30 @@ public:
   }
 };
 
+class SaveBetterEditionArch
+{
+public:
+  PoolItem best;
+
+  bool operator()(PoolItem provider)
+  {
+    if (!provider.status().isLocked() // is not locked (taboo)
+        && (!best                     // first match
+            // or a better architecture
+            || best->arch().compare(provider->arch()) < 0
+            // or a better edition than so-far-found
+            || best->edition().compare(provider->edition()) < 0))
+    {
+      best = provider;
+    }
+    return true;
+  }
+};
+
 // ----------------------------------------------------------------------------
 
-// does not allow changing the arch (#222140).
+// does not allow changing the arch (#222140)
+// except noarch->any or any->noarch (bnc #483179)
 // TODO: ignores priority (bnc #464458)
 // TODO: move to libzypp
 PoolItem
@@ -241,6 +262,7 @@ findUpdateItem( const ResPool & pool, const PoolItem item )
 {
   SaveBetterEdition info;
 
+  // look for the same arch, best version
   invokeOnEach( pool.byIdentBegin(item->kind(), item->name()),
                 pool.byIdentEnd(item->kind(), item->name()),
                 // get uninstalled, equal kind and arch, better edition
@@ -251,6 +273,41 @@ findUpdateItem( const ResPool & pool, const PoolItem item )
                   resfilter::byEdition<CompareByGT<Edition> >(item->edition())),
                 functor::functorRef<bool,PoolItem>(info));
 
+  // the item is noarch, look for best arch, best version
+  // (noarch -> any is allowed) (bnc #483179)
+  if (item->arch() == Arch_noarch)
+  {
+    SaveBetterEditionArch bestEA;
+    invokeOnEach( pool.byIdentBegin(item->kind(), item->name()),
+                  pool.byIdentEnd(item->kind(), item->name()),
+                  // get uninstalled, equal kind, better edition
+                  functor::chain(
+                    resfilter::ByUninstalled(),
+                    resfilter::byEdition<CompareByGT<Edition> >(item->edition())),
+                  functor::functorRef<bool,PoolItem>(bestEA));
+    if (bestEA.best)
+    {
+      if (!info.best)
+        info.best = bestEA.best;
+      if (info.best->arch().compare(bestEA.best->arch()) < 0)
+        info.best = bestEA.best;
+    }
+  }
+  // the item is not noarch & no update found so far - try looking for a noarch
+  // package (any -> noarch is allowed) (bnc #483179)
+  else if (!info.best)
+  {
+    invokeOnEach( pool.byIdentBegin(item->kind(), item->name()),
+                  pool.byIdentEnd(item->kind(), item->name()),
+                  // get uninstalled, equal kind and arch, better edition
+                  functor::chain(
+                    functor::chain(
+                      resfilter::ByUninstalled(),
+                      resfilter::byArch<CompareByEQ<Arch> >(Arch_noarch)),
+                    resfilter::byEdition<CompareByGT<Edition> >(item->edition())),
+                  functor::functorRef<bool,PoolItem>(info));
+  }
+
   XXX << "findUpdateItem(" << item << ") => " << info.best;
   return info.best;
 }
@@ -260,6 +317,8 @@ findTheBest( const ResPool & pool, const ui::Selectable & s)
 {
   PoolItem theone;
   if (s.installedEmpty())
+    //! FIXME this will pick a random arch - should pick the system arch, or
+    //! the best compatible.
     theone = findUpdateItem(God->pool(), *s.availableBegin());
   else
     theone = findUpdateItem(God->pool(), *s.installedBegin());
