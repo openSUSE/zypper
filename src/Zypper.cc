@@ -1773,6 +1773,8 @@ void Zypper::processCommandOptions()
       {"repo", required_argument, 0, 'r'},
       // rug compatibility option, we have --repo
       {"catalog", required_argument, 0, 'c'},
+      {"requires", no_argument, 0, 0},
+      {"recommends", no_argument, 0, 0},
       {"help", no_argument, 0, 'h'},
       {0, 0, 0, 0}
     };
@@ -1785,7 +1787,9 @@ void Zypper::processCommandOptions()
         "  Command options:\n"
         "-r, --repo <alias|#|URI>  Work only with the specified repository.\n"
         "-t, --type <type>         Type of package (%s).\n"
-        "                          Default: %s."
+        "                          Default: %s.\n"
+        "    --requires            Show also requires and prerequires.\n"
+        "    --recommends          Show also recommends."
       ), "package, patch, pattern, product", "package");
 
     break;
@@ -3711,6 +3715,18 @@ void Zypper::doCommand()
       if (kind == ResObject::Kind ()) {
         out().error(boost::str(format(
           _("Unknown package type '%s'.")) % skind));
+        setExitCode(ZYPPER_EXIT_ERR_INVALID_ARGS);
+        return;
+      }
+    }
+
+    // XXX: would requires/recommends make sense for pattern etc.?
+    if (copts.count("requires") || copts.count("recommends"))
+    {
+      if (kind != ResKind::package && kind != ResKind::patch)
+      {
+        out().error(boost::str(format(
+          _("Type '%s' does not support %s.")) % kind % "--requires/--recommends"));
         setExitCode(ZYPPER_EXIT_ERR_INVALID_ARGS);
         return;
       }

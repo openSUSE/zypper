@@ -1,4 +1,4 @@
-.TH "zypper" "8" "1.1.0" "zypper" "System Tools"
+.TH "zypper" "8" "1.1.1" "zypper" "System Tools"
 .SH "SYNTAX"
 .LP
 zypper [\fI\-\-global\-opts\fR] <\fBcommand\fR> [\fI\-\-command\-opts\fR] [\fBcommand-arguments\fR]
@@ -152,7 +152,7 @@ since libzypp became so fast thanks to the SAT solver and its tools
 .SS Package Management Commands
 
 .TP
-.B info (if) <name> ...
+.B info (if) [options] <name> ...
 Displays detailed informaion about the specified packages.
 
 For each specified package, zypper finds the best available version in defined
@@ -166,6 +166,14 @@ option can be used multiple times.
 .I \-t, \-\-type <type>
 Type of package (default: package). See section \fBPackage Types\fR for list
 of available package types.
+.TP
+.I \ \ \ \ \-\-requires
+Show also symbols required and pre-required by the package. Available for package and patch type
+only.
+.TP
+.I \ \ \ \ \-\-recommends
+Show also symbols recommended by the package. Available for package and patch
+type only.
 .TP
 Examples:
 

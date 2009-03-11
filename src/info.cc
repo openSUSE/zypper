@@ -128,6 +128,26 @@ void printInfo(Zypper & zypper, const ResKind & kind)
   }
 }
 
+static void printRequires(const PoolItem & pi)
+{
+  cout << _("Requires:") << endl;
+  std::list<Capability> capList = std::list<Capability>(pi->prerequires().begin(), pi->prerequires().end());
+  capList.assign(pi->requires().begin(), pi->requires().end());
+  for (std::list<Capability>::const_iterator it = capList.begin(); it != capList.end(); ++it)
+  {
+    cout << *it << endl;
+  }
+}
+
+static void printRecommends(const PoolItem & pi)
+{
+  cout << _("Recommends:") << endl;
+  Capabilities capSet = pi->recommends();
+  for (Capabilities::const_iterator it = capSet.begin(); it != capSet.end(); ++it)
+  {
+    cout << *it << endl;
+  }
+}
 
 /**
  * Print package information.
@@ -184,6 +204,20 @@ void printPkgInfo(Zypper & zypper, const ui::Selectable & s)
   cout << _("Installed Size: ") << theone.resolvable()->installSize() << endl;
 
   printSummaryDesc(theone.resolvable());
+
+  bool requires = zypper.cOpts().count("requires");
+  bool recommends = zypper.cOpts().count("recommends");
+
+  if (requires)
+    printRequires(theone);
+
+  if (recommends)
+  {
+    if (requires)
+      cout << endl; // visual separator
+
+    printRecommends(theone);
+  }
 }
 
 /**
@@ -236,16 +270,24 @@ void printPatchInfo(Zypper & zypper, const ui::Selectable & s )
   Capabilities capSet = pool_item.resolvable()->dep(zypp::Dep::PROVIDES);
   // WhatProvides can be used here. The result can be represented as a table of
   // a "Capability" (it->asString()) | "Provided By" (WhatProvides(c))
-  for (Capabilities::const_iterator it = capSet.begin(); it != capSet.end(); ++it) {
-    // FIXME cout << it->refers().asString() << ": " << it->asString() << endl;
+  for (Capabilities::const_iterator it = capSet.begin(); it != capSet.end(); ++it)
     cout << *it << endl;
+
+  cout << endl << _("Conflicts:") << endl;
+  capSet = pool_item.resolvable()->dep(zypp::Dep::CONFLICTS);
+  for (Capabilities::const_iterator it = capSet.begin(); it != capSet.end(); ++it)
+    cout << *it << endl;
+
+  if (zypper.cOpts().count("requires"))
+  {
+    cout << endl; // visual separator
+    printRequires(pool_item);
   }
 
-  cout << endl << _("Requires:") << endl;
-  capSet = pool_item.resolvable()->dep(zypp::Dep::REQUIRES);
-  for (Capabilities::const_iterator it = capSet.begin(); it != capSet.end(); ++it) {
-    // FIXME cout << it->refers().asString() << ": " << it->asString() << endl;
-    cout << *it << endl;
+  if (zypper.cOpts().count("recommends"))
+  {
+    cout << endl; // visual separator
+    printRecommends(pool_item);
   }
 }
 
