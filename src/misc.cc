@@ -123,13 +123,16 @@ ostream& operator << (ostream & stm, ios::iostate state)
 bool confirm_licenses(Zypper & zypper)
 {
   bool confirmed = true;
+  bool license_auto_agree =
+    zypper.cOpts().count("auto-agree-with-licenses")
+    || zypper.cOpts().count("agree-to-third-party-licenses");
 
   for (ResPool::const_iterator it = God->pool().begin(); it != God->pool().end(); ++it)
   {
     if (it->status().isToBeInstalled() &&
         !it->resolvable()->licenseToConfirm().empty())
     {
-      if (zypper.cmdOpts().license_auto_agree)
+      if (license_auto_agree)
       {
       	zypper.out().info(boost::str(
             // TranslatorExplanation The first %s is name of the resolvable, the second is its kind (e.g. 'zypper package')
@@ -173,7 +176,7 @@ bool confirm_licenses(Zypper & zypper)
       // lincense prompt
       string question = _("Do you agree with the terms of the license?");
       //! \todo add 'v' option to view the license again, add prompt help
-      if (!read_bool_answer(PROMPT_YN_LICENSE_AGREE, question, zypper.cmdOpts().license_auto_agree))
+      if (!read_bool_answer(PROMPT_YN_LICENSE_AGREE, question, license_auto_agree))
       {
         confirmed = false;
 

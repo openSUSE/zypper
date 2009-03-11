@@ -735,10 +735,7 @@ void Zypper::shellCleanup()
   _arguments.clear();
   // clear command options
   if (!_copts.empty())
-  {
     _copts.clear();
-    _cmdopts = CommandOptions();
-  }
   // clear the command
   _command = ZypperCommand::NONE;
   // clear command help text
@@ -2970,10 +2967,6 @@ void Zypper::doCommand()
       return;
     }
 
-    if (copts.count("auto-agree-with-licenses")
-        || copts.count("agree-to-third-party-licenses"))
-      _cmdopts.license_auto_agree = true;
-
     // check root user
     if (geteuid() != 0 && !globalOpts().changedRoot)
     {
@@ -3587,10 +3580,6 @@ void Zypper::doCommand()
     if (copts.count("no-confirm"))
       _gopts.non_interactive = true;
 
-    if (copts.count("auto-agree-with-licenses")
-        || copts.count("agree-to-third-party-licenses"))
-      _cmdopts.license_auto_agree = true;
-
     ResKindSet kinds;
     if (copts.count("type"))
     {
@@ -3669,9 +3658,6 @@ void Zypper::doCommand()
       setExitCode(ZYPPER_EXIT_ERR_INVALID_ARGS);
       return;
     }
-
-    if (copts.count("auto-agree-with-licenses"))
-      _cmdopts.license_auto_agree = true;
 
     initRepoManager();
     init_target(*this);

@@ -84,17 +84,6 @@ struct GlobalOptions
   bool changedRoot;
 };
 
-
-struct CommandOptions
-{
-  CommandOptions()
-    :
-  license_auto_agree(false)
-  {}
-
-  bool license_auto_agree;
-};
-
 struct RuntimeData
 {
   RuntimeData()
@@ -171,7 +160,6 @@ public:
   // setters & getters
   Out & out();
   const GlobalOptions & globalOpts() const { return _gopts; }
-  const CommandOptions & cmdOpts() const { return _cmdopts; }
   const parsed_opts & cOpts() const { return _copts; }
   const ZypperCommand & command() const { return _command; }
   const std::string & commandHelp() const { return _command_help; }
@@ -217,7 +205,6 @@ private:
 
   Out * _out_ptr;
   GlobalOptions _gopts;
-  CommandOptions _cmdopts;
   parsed_opts   _copts;
   ZypperCommand _command;
   ArgList _arguments;
