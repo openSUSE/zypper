@@ -1,4 +1,10 @@
 -------------------------------------------------------------------
+Wed Mar 11 16:51:04 CET 2009 - jkupec@suse.cz
+
+- --requires and --recommends added to info command
+  (Marcus Hüwe <suse-tux@gmx.de>)
+
+-------------------------------------------------------------------
 Tue Mar 10 19:25:46 CET 2009 - jkupec@suse.cz
 
 - Fixed noarch->anyarch and vice-versa update via 'zypper up foo'
