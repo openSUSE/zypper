@@ -195,6 +195,19 @@ namespace zypp
     bool systemVerification() const;
 
     /**
+     * Set whether to solve source packages build dependencies per default.
+     * Usually turned off and if, enabled per source package.
+     * \NOTE This affects only source packges selected in the \ref ResPool. No solver rule
+     * will be generated for them. Source packages requested via e.g. \ref addRequire will
+     * always be solved.
+     * \NOTE Be carefull. The older the source package is, the stranger may be the
+     * result of solving it's build dependencies.
+     */
+    void setSolveSrcPackages( bool yesno_r );
+    void setDefaultSolveSrcPackages();
+    bool solveSrcPackages() const;
+
+    /**
      * Adding additional requirement
      *
      */

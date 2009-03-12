@@ -75,6 +75,7 @@ Resolver::Resolver (const ResPool & pool)
     , _updateMode(false)
     , _verifying(false)
     , _onlyRequires(indeterminate)
+    , _solveSrcPackages( false )
     , _ignorealreadyrecommended(false)
 
 {
@@ -281,6 +282,7 @@ Resolver::solverInit()
     _satResolver->setAllowvirtualconflicts(false);
     _satResolver->setNoupdateprovide(false);
     _satResolver->setDosplitprovides(false);
+    _satResolver->setSolveSrcPackages( solveSrcPackages() );
 
     if (_upgradeMode) {
 	_satResolver->setAllowdowngrade(true);

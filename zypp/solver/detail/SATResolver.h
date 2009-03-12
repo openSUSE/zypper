@@ -56,7 +56,11 @@ namespace zypp
 ///////////////////////////////////////////////////////////////////
 //
 //	CLASS NAME : SATResolver
-
+/**
+ * \todo The way solver options are passed as individual booleans from Resolver
+ * via solver::detail::Resolver to SATResolver is pedestrian and error prone.
+ * Introdce a dedicated solver option structure which is passed down as a whole.
+*/
 class SATResolver : public base::ReferenceCounted, private base::NonCopyable {
 
   private:
@@ -91,6 +95,7 @@ class SATResolver : public base::ReferenceCounted, private base::NonCopyable {
     bool _ignorealreadyrecommended;	// true: ignore recommended packages that were already recommended by the installed packages
     bool _distupgrade;
     bool _distupgrade_removeunsupported;
+    bool _solveSrcPackages;		// false: generate no job rule for source packages selected in the pool
 
     // ---------------------------------- methods
     std::string SATprobleminfoString (Id problem, std::string &detail, Id &ignoreId);
@@ -193,6 +198,9 @@ class SATResolver : public base::ReferenceCounted, private base::NonCopyable {
 
     bool onlyRequires () const {return _onlyRequires;}
     void setOnlyRequires ( const bool onlyRequires) { _onlyRequires = onlyRequires;}
+
+    bool solveSrcPackages() const 		{ return _solveSrcPackages; }
+    void setSolveSrcPackages( bool state_r )	{ _solveSrcPackages = state_r; }
 
     PoolItemList problematicUpdateItems( void ) const { return _problem_items; }
 

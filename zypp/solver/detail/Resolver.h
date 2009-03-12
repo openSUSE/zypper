@@ -111,6 +111,7 @@ class Resolver : public base::ReferenceCounted, private base::NonCopyable {
     TriBool _onlyRequires; 	  // do install required resolvables only
                                   // no recommended resolvables, language
                                   // packages, hardware packages (modalias)
+    bool _solveSrcPackages;	// whether to generate solver jobs for selected source packges.
 
     bool _ignorealreadyrecommended;   //ignore recommended packages that have already been recommended by the installed packages
 
@@ -183,10 +184,13 @@ class Resolver : public base::ReferenceCounted, private base::NonCopyable {
     bool doUpgrade( zypp::UpgradeStatistics & opt_stats_r );
     PoolItemList problematicUpdateItems( void ) const;
 
-    bool isUpgradeMode(){ return _upgradeMode;};    // Resolver has been called with doUpgrade
-    bool isUpdateMode(){ return _updateMode;};      // Resolver has been called with doUpdate
-    bool isVerifyingMode(){ return _verifying;};    // The system will be checked
-    void setVerifyingMode( TriBool state_r ) { _verifying = ( state_r == indeterminate ) ? false : bool(state_r); };
+    bool isUpgradeMode() const 			{ return _upgradeMode;};// Resolver has been called with doUpgrade
+    bool isUpdateMode() const 			{ return _updateMode;};	// Resolver has been called with doUpdate
+    bool isVerifyingMode() const 		{ return _verifying;};	// The system will be checked
+    void setVerifyingMode( TriBool state_r )	{ _verifying = ( state_r == indeterminate ) ? false : bool(state_r); }
+
+    bool solveSrcPackages() const 		{ return _solveSrcPackages; }
+    void setSolveSrcPackages( TriBool state_r )	{ _solveSrcPackages = ( state_r == indeterminate ) ? false : bool(state_r); }
 
     ResolverProblemList problems () const;
     void applySolutions (const ProblemSolutionList &solutions);

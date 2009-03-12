@@ -123,7 +123,7 @@ SATResolver::dumpOn( std::ostream & os ) const
 	os << "  ignorealreadyrecommended = " << _solv->ignorealreadyrecommended << endl;
 	os << "  distupgrade = " << _distupgrade << endl;
         os << "  distupgrade_removeunsupported = " << _distupgrade_removeunsupported << endl;
-
+	os << "  solveSrcPackages = " << _solveSrcPackages << endl;
     } else {
 	os << "<NULL>";
     }
@@ -333,6 +333,12 @@ struct SATCollectTransact : public resfilter::PoolItemFilterFunctor
 	if (by_solver) {
 	    item.status().resetTransact( ResStatus::APPL_LOW );// clear any solver/establish transactions
 	    return true;				// back out here, dont re-queue former solver result
+	}
+
+	if ( item.satSolvable().isKind<SrcPackage>() && ! resolver.solveSrcPackages() )
+	{
+	  // Later we may continue on a per source package base.
+	  return true; // dont process this source package.
 	}
 
 	if (status.isToBeInstalled()) {
@@ -716,7 +722,7 @@ SATResolver::resolvePool(const CapabilitySet & requires_caps,
     if (ret)
 	solverEnd(); // remove solver only if no errors happend. Need it for solving problems
 
-    MIL << "SATResolver::resolvePool() done. Ret:" << ret <<  endl;
+    (ret?MIL:WAR) << "SATResolver::resolvePool() done. Ret:" << ret <<  endl;
     return ret;
 }
 
