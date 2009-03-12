@@ -28,7 +28,7 @@ using std::ostringstream;
 
 OutNormal::OutNormal(Verbosity verbosity)
   : Out(TYPE_NORMAL, verbosity),
-    _has_colors(has_colors()), _isatty(isatty(STDOUT_FILENO))
+    _use_colors(false), _isatty(isatty(STDOUT_FILENO))
 {}
 
 OutNormal::~OutNormal()
@@ -58,7 +58,7 @@ void OutNormal::info(const std::string & msg, Verbosity verbosity, Type mask)
   if (infoWarningFilter(verbosity, mask))
     return;
 
-  if (_has_colors && verbosity > Out::QUIET)
+  if (_use_colors && verbosity > Out::QUIET)
     cout << COLOR_WHITE << msg << COLOR_RESET << endl;
   else
     cout << msg << endl;
@@ -69,7 +69,7 @@ void OutNormal::warning(const std::string & msg, Verbosity verbosity, Type mask)
   if (infoWarningFilter(verbosity, mask))
     return;
 
-  if (_has_colors)
+  if (_use_colors)
     cout << COLOR_YELLOW_BOLD << _("Warning: ") << COLOR_RESET << msg << endl;
   else
     cout << msg << endl;
@@ -77,7 +77,7 @@ void OutNormal::warning(const std::string & msg, Verbosity verbosity, Type mask)
 
 void OutNormal::error(const std::string & problem_desc, const std::string & hint)
 {
-  if (_has_colors)
+  if (_use_colors)
     cerr << COLOR_RED_BOLD << problem_desc << COLOR_RESET;
   else
     cerr << problem_desc;
@@ -92,7 +92,7 @@ void OutNormal::error(const zypp::Exception & e,
                       const string & problem_desc,
                       const string & hint)
 {
-  if (_has_colors)
+  if (_use_colors)
     cerr << COLOR_RED_BOLD;
 
   // problem
@@ -100,7 +100,7 @@ void OutNormal::error(const zypp::Exception & e,
   // cause
   cerr << zyppExceptionReport(e) << endl;
 
-  if (_has_colors)
+  if (_use_colors)
     cerr << COLOR_RESET;
 
   // hint
@@ -153,7 +153,7 @@ void OutNormal::progressStart(const std::string & id,
   if (progressFilter())
     return;
 
-  if (_has_colors)
+  if (_use_colors)
     cerr << COLOR_WHITE;
 
   if (!_isatty)
@@ -164,7 +164,7 @@ void OutNormal::progressStart(const std::string & id,
   else
     display_progress(id, label, 0);
 
-  if (_has_colors)
+  if (_use_colors)
     cerr << COLOR_RESET;
 }
 
@@ -173,7 +173,7 @@ void OutNormal::progress(const std::string & id, const string & label, int value
   if (progressFilter())
     return;
 
-  if (_has_colors)
+  if (_use_colors)
     cerr << COLOR_WHITE;
 
   if (value)
@@ -181,7 +181,7 @@ void OutNormal::progress(const std::string & id, const string & label, int value
   else
     display_tick(id, label);
 
-  if (_has_colors)
+  if (_use_colors)
     cerr << COLOR_RESET;
 }
 
@@ -190,7 +190,7 @@ void OutNormal::progressEnd(const std::string & id, const string & label, bool e
   if (progressFilter())
     return;
 
-  if (_has_colors)
+  if (_use_colors)
     cerr << COLOR_WHITE;
 
   if (_isatty)
@@ -203,7 +203,7 @@ void OutNormal::progressEnd(const std::string & id, const string & label, bool e
   }
   cout << "]";
 
-  if (_has_colors)
+  if (_use_colors)
     cerr << COLOR_RESET;
 
   cout << endl << std::flush;
@@ -215,7 +215,7 @@ void OutNormal::dwnldProgressStart(const zypp::Url & uri)
   if (verbosity() < NORMAL)
     return;
 
-  if (_has_colors)
+  if (_use_colors)
     cerr << COLOR_WHITE;
 
   if (isatty(STDOUT_FILENO))
@@ -230,7 +230,7 @@ void OutNormal::dwnldProgressStart(const zypp::Url & uri)
   else
     cout << " [" ;
 
-  if (_has_colors)
+  if (_use_colors)
     cerr << COLOR_RESET;
 
   cout << std::flush;
@@ -249,7 +249,7 @@ void OutNormal::dwnldProgress(const zypp::Url & uri,
     return;
   }
 
-  if (_has_colors)
+  if (_use_colors)
     cerr << COLOR_WHITE;
 
   cout << CLEARLN << _("Retrieving:") << " ";
@@ -268,7 +268,7 @@ void OutNormal::dwnldProgress(const zypp::Url & uri,
     cout << "]";
   }
 
-  if (_has_colors)
+  if (_use_colors)
     cerr << COLOR_RESET;
 
   cout << std::flush;
@@ -279,7 +279,7 @@ void OutNormal::dwnldProgressEnd(const zypp::Url & uri, long rate, bool error)
   if (verbosity() < NORMAL)
     return;
 
-  if (_has_colors)
+  if (_use_colors)
     cerr << COLOR_WHITE;
 
   if (_isatty)
@@ -302,7 +302,7 @@ void OutNormal::dwnldProgressEnd(const zypp::Url & uri, long rate, bool error)
     cout << " (" << zypp::ByteCount(rate) << "/s)";
   cout << "]";
 
-  if (_has_colors)
+  if (_use_colors)
     cerr << COLOR_RESET;
 
   cout << endl << std::flush;
@@ -322,7 +322,7 @@ void OutNormal::prompt(PromptId id,
     cout << startdesc << endl;
   cout << prompt;
   if (!poptions.empty())
-    cout << " [" << (_has_colors ? poptions.optionStringColored() : poptions.optionString()) << "]";
+    cout << " [" << (_use_colors ? poptions.optionStringColored() : poptions.optionString()) << "]";
   cout << ": " << std::flush;
 }
 
@@ -349,5 +349,5 @@ void OutNormal::promptHelp(const PromptOptions & poptions)
     }
   }
 
-  cout << endl << "[" << (_has_colors ? poptions.optionStringColored() : poptions.optionString()) << "]: " << std::flush;
+  cout << endl << "[" << (_use_colors ? poptions.optionStringColored() : poptions.optionString()) << "]: " << std::flush;
 }
