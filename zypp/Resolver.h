@@ -40,8 +40,6 @@ namespace zypp
    * \ref addRequire(), \ref addConflict(), \ref applySolutions(), or by making
    * the changes directly on the \ref PoolItem status objects,
    * call the \ref resolvePool() method.
-   * Do not use this method after \ref verifySystem(), \ref doUpdate(), or
-   * \ref doUpgrade().
    */
   class Resolver : public base::ReferenceCounted, private base::NonCopyable
   {
@@ -55,8 +53,10 @@ namespace zypp
     /**
      * Resolve package dependencies:
      *
-     * Verify consistency of system
+     * Enter \ref systemVerification mode to monitor and repair dependencies
+     * of already installed packages, and solve immediately.
      *
+     * Call \ref setSystemVerification to turn of this mode.
      **/
     bool verifySystem ();
 
@@ -67,7 +67,7 @@ namespace zypp
      * Try to execute all pending transactions (there may be more than
      * one!).
      * The solver collects all transactions (install/delete resolvables)
-     * from the pool, generates task, solving it and writes the 
+     * from the pool, generates task, solving it and writes the
      * results back to pool
      *
      * Returns "true" on success (i.e., if there were no problems that
@@ -93,9 +93,9 @@ namespace zypp
      * have applied any solution AND check the parameter "queue" if
      * there has been any changes by the solver and adapt these changes
      * to e.g. the selectables.
-     * 
+     *
      **/
-    bool resolveQueue (solver::detail::SolverQueueItemList & queue);      
+    bool resolveQueue (solver::detail::SolverQueueItemList & queue);
 
     /*
      * Undo solver changes done in resolvePool()
@@ -107,7 +107,7 @@ namespace zypp
      * Resets solver information and verify option.
      */
     void reset( void );
-      
+
 
     /**
      * Do an distribution upgrade
@@ -135,12 +135,12 @@ namespace zypp
      *
      **/
     void doUpdate( );
-      
+
 
     /**
-     * Unmaintained packages which does not fit to 
+     * Unmaintained packages which does not fit to
      * the updated system (broken dependencies) will be
-     * deleted.       
+     * deleted.
      * Return the list of deleted items.
      * Note : This list is valid after the call doUpgrade() only.
      **/
@@ -153,7 +153,7 @@ namespace zypp
      **/
     ResolverProblemList problems();
 
-      
+
     /**
      * Apply problem solutions. No more than one solution per problem
      * can be applied.
@@ -161,7 +161,7 @@ namespace zypp
     void applySolutions( const ProblemSolutionList & solutions );
 
 
-    /**      
+    /**
      * Remove resolvables which are conflicts with others or
      * have unfulfilled requirements.
      * This behaviour is favourited by ZMD.
@@ -169,7 +169,7 @@ namespace zypp
     void setForceResolve (const bool force);
     bool forceResolve();
 
-    /**      
+    /**
      * Ignore recommended packages that were already recommended by
      * the installed packages
      **/
@@ -178,12 +178,21 @@ namespace zypp
 
     /**
      * Setting whether required packages are installed ONLY
-     * So recommended packages, language packages and packages which depend 
+     * So recommended packages, language packages and packages which depend
      * on hardware (modalias) will not be regarded.
      **/
     void setOnlyRequires (const bool onlyRequires);
-    void resetOnlyRequires(); // set back to default (described in zypp.conf)  
+    void resetOnlyRequires(); // set back to default (described in zypp.conf)
     bool onlyRequires();
+
+    /**
+     * System verification mode also monitors and repairs dependencies
+     * of already installed packages.
+     * \see \ref verifySystem
+     */
+    void setSystemVerification( bool yesno_r );
+    void setDefaultSystemVerification();
+    bool systemVerification() const;
 
     /**
      * Adding additional requirement
@@ -212,20 +221,20 @@ namespace zypp
     /**
      * Get all the additional requirements set by \ref addRequire(Capability).
      *
-     */      
+     */
     const CapabilitySet getRequire ();
-      
+
     /**
      * Get all the additional conflicts set by \ref addConflict(Capability).
      *
-     */            
+     */
     const CapabilitySet getConflict();
 
     /**
      * Generates a solver Testcase of the current state
      *
      * \parame dumpPath destination directory of the created directory
-     * \return true if it was successful     
+     * \return true if it was successful
      */
     bool createSolverTestcase (const std::string & dumpPath = "/var/log/YaST2/solverTestcase");
 
@@ -254,7 +263,7 @@ namespace zypp
      *
      * Note: In order to have a result start a solver run before. Not matter if it is valid or invalid.
      *
-     */      
+     */
     const solver::detail::ItemCapKindList installs (const PoolItem item);
 
     /**
@@ -268,9 +277,9 @@ namespace zypp
      *
      * Note: In order to have a result start a solver run before. Not matter if it is valid or invalid.
      *
-     */      
+     */
     const solver::detail::ItemCapKindList satifiedByInstalled(const PoolItem item);
-      
+
 
     /**
      * Gives information about WHICH items require an already installed item.
@@ -283,11 +292,11 @@ namespace zypp
      *
      * Note: In order to have a result start a solver run before. Not matter if it is valid or invalid.
      *
-     */      
+     */
     const solver::detail::ItemCapKindList installedSatisfied(const PoolItem item);
-      
 
-      
+
+
   private:
     solver::detail::Resolver_Ptr _pimpl;
   };

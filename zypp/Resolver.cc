@@ -97,6 +97,10 @@ namespace zypp
 	  return _pimpl->onlyRequires();
   }
 
+  void Resolver::setSystemVerification( bool yesno_r )	{ _pimpl->setVerifyingMode( yesno_r ); }
+  void Resolver::setDefaultSystemVerification()		{ _pimpl->setVerifyingMode(indeterminate ); }
+  bool Resolver::systemVerification() const		{ return _pimpl->isVerifyingMode(); }
+
   void Resolver::addRequire (const Capability & capability)
   { _pimpl->addExtraRequire( capability ); }
   void Resolver::addConflict (const Capability & capability)

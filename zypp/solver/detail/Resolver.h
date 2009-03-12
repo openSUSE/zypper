@@ -186,6 +186,7 @@ class Resolver : public base::ReferenceCounted, private base::NonCopyable {
     bool isUpgradeMode(){ return _upgradeMode;};    // Resolver has been called with doUpgrade
     bool isUpdateMode(){ return _updateMode;};      // Resolver has been called with doUpdate
     bool isVerifyingMode(){ return _verifying;};    // The system will be checked
+    void setVerifyingMode( TriBool state_r ) { _verifying = ( state_r == indeterminate ) ? false : bool(state_r); };
 
     ResolverProblemList problems () const;
     void applySolutions (const ProblemSolutionList &solutions);
