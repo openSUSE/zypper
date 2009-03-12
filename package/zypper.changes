@@ -1,4 +1,11 @@
 -------------------------------------------------------------------
+Thu Mar 12 13:00:19 CET 2009 - jkupec@suse.cz
+
+- turn off colors by default (to be configurable in zypper.conf)
+  (bnc #483349)
+- 1.1.1
+
+-------------------------------------------------------------------
 Wed Mar 11 16:51:04 CET 2009 - jkupec@suse.cz
 
 - --requires and --recommends added to info command
