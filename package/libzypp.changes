@@ -1,3 +1,11 @@
+------------------------------------------------------------------
+Thu Mar 12 18:38:30 CET 2009 - ma@suse.de
+
+- Add Resolver::setSolveSrcPackages. Per default disable solving 
+  of source package dependencies. We will later allow to enable 
+  it per package.
+- version 6.3.0 (2)
+
 -------------------------------------------------------------------
 Fri Mar  6 17:17:26 CET 2009 - dmacvicar@suse.de
 
