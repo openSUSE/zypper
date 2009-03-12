@@ -67,12 +67,15 @@ public:
 
   virtual void promptHelp(const PromptOptions & poptions);
 
+  void setUseColors(bool value)
+  { _use_colors = value; }
+
 protected:
   virtual bool mine(Type type);
 
 private:
   bool infoWarningFilter(Verbosity verbosity, Type mask);
-  bool _has_colors;
+  bool _use_colors;
   bool _isatty;
 };
 

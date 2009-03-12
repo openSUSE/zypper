@@ -21,6 +21,7 @@
 #include "zypp/SrcPackage.h"
 #include "zypp/TmpPath.h"
 
+#include "Config.h"
 #include "Command.h"
 #include "utils/getopt.h"
 #include "output/Out.h"
@@ -31,6 +32,8 @@
 
 /**
  * Structure for holding global options.
+ *
+ * \deprecated To be replaced by Config
  */
 struct GlobalOptions
 {
@@ -159,6 +162,7 @@ public:
 
   // setters & getters
   Out & out();
+  const Config & config() const { return _config; }
   const GlobalOptions & globalOpts() const { return _gopts; }
   const parsed_opts & cOpts() const { return _copts; }
   const ZypperCommand & command() const { return _command; }
@@ -184,6 +188,7 @@ public:
 private:
   Zypper();
 
+  void readConfig();
   void processGlobalOptions();
   void processCommandOptions();
   void commandShell();
@@ -204,6 +209,7 @@ private:
   char ** _argv;
 
   Out * _out_ptr;
+  Config _config;
   GlobalOptions _gopts;
   parsed_opts   _copts;
   ZypperCommand _command;

@@ -102,7 +102,10 @@ int Zypper::main(int argc, char ** argv)
   _argv = argv;
 
   // parse global options and the command
-  try { processGlobalOptions(); }
+  try {
+    readConfig();
+    processGlobalOptions();
+  }
   catch (const ExitRequestException & e)
   {
     MIL << "Caught exit request:" << endl << e.msg() << endl;
@@ -143,6 +146,11 @@ Out & Zypper::out()
 
   cerr << "uninitialized output writer" << endl;
   ZYPP_THROW(ExitRequestException("no output writer"));
+}
+
+void Zypper::readConfig()
+{
+  _config.read();
 }
 
 void print_main_help(Zypper & zypper)
@@ -391,7 +399,11 @@ void Zypper::processGlobalOptions()
     _gopts.no_abbrev = true;
   }
   else
-    _out_ptr = new OutNormal(verbosity);
+  {
+    OutNormal * p = new OutNormal(verbosity);
+    p->setUseColors(_config.do_colors);
+    _out_ptr = p;
+  }
 
   out().info(boost::str(format(_("Verbosity: %d")) % _gopts.verbosity), Out::HIGH);
   DBG << "Verbosity " << verbosity << endl;
