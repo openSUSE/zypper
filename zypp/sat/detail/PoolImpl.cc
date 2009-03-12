@@ -75,10 +75,12 @@ namespace zypp
 
       static void logSat( struct _Pool *, void *data, int type, const char *logString )
       {
-	  if ((type & (SAT_FATAL|SAT_ERROR))) {
-	      _ERR("satsolver") << logString;
+	  if ( type & (SAT_FATAL|SAT_ERROR) ) {
+	    _ERR("satsolver") << logString;
+	  } else if ( type & SAT_DEBUG_STATS ) {
+	    _DBG("satsolver") << logString;
 	  } else {
-	      _MIL("satsolver") << logString;
+	    _MIL("satsolver") << logString;
 	  }
       }
 
@@ -173,7 +175,7 @@ namespace zypp
 	if (verbose)
 	    ::pool_setdebuglevel( _pool, 2 );
 	else
-	    ::pool_setdebugmask(_pool, SAT_DEBUG_STATS | SAT_DEBUG_JOB);
+	    ::pool_setdebugmask(_pool, SAT_DEBUG_JOB);
 
         ::pool_setdebugcallback( _pool, logSat, NULL );
 
