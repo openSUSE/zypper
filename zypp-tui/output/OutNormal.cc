@@ -58,10 +58,12 @@ void OutNormal::info(const std::string & msg, Verbosity verbosity, Type mask)
   if (infoWarningFilter(verbosity, mask))
     return;
 
-  if (_use_colors && verbosity > Out::QUIET)
-    cout << COLOR_WHITE << msg << COLOR_RESET << endl;
+  if (verbosity == Out::QUIET)
+    print_color(msg, COLOR_CONTEXT_RESULT);
   else
-    cout << msg << endl;
+    cout << msg;
+
+  cout << endl;
 }
 
 void OutNormal::warning(const std::string & msg, Verbosity verbosity, Type mask)
@@ -69,18 +71,13 @@ void OutNormal::warning(const std::string & msg, Verbosity verbosity, Type mask)
   if (infoWarningFilter(verbosity, mask))
     return;
 
-  if (_use_colors)
-    cout << COLOR_YELLOW_BOLD << _("Warning: ") << COLOR_RESET << msg << endl;
-  else
-    cout << msg << endl;
+  print_color(_("Warning: "), COLOR_CONTEXT_MSG_WARNING);
+  cout << msg << endl;
 }
 
 void OutNormal::error(const std::string & problem_desc, const std::string & hint)
 {
-  if (_use_colors)
-    cerr << COLOR_RED_BOLD << problem_desc << COLOR_RESET;
-  else
-    cerr << problem_desc;
+  fprint_color(cerr, problem_desc, COLOR_CONTEXT_MSG_ERROR);
   if (!hint.empty() && this->verbosity() > Out::QUIET)
     cerr << endl << hint;
   cerr << endl;
@@ -92,16 +89,12 @@ void OutNormal::error(const zypp::Exception & e,
                       const string & problem_desc,
                       const string & hint)
 {
-  if (_use_colors)
-    cerr << COLOR_RED_BOLD;
-
   // problem
-  cerr << problem_desc << endl;
+  fprint_color(cerr, problem_desc, COLOR_CONTEXT_MSG_ERROR);
+  cerr << endl;
   // cause
-  cerr << zyppExceptionReport(e) << endl;
-
-  if (_use_colors)
-    cerr << COLOR_RESET;
+  fprint_color(cerr, zyppExceptionReport(e), COLOR_CONTEXT_MSG_ERROR);
+  cerr << endl;
 
   // hint
   if (!hint.empty() && this->verbosity() > Out::QUIET)
@@ -153,9 +146,6 @@ void OutNormal::progressStart(const std::string & id,
   if (progressFilter())
     return;
 
-  if (_use_colors)
-    cerr << COLOR_WHITE;
-
   if (!_isatty)
     cout << label << " [";
 
@@ -163,9 +153,6 @@ void OutNormal::progressStart(const std::string & id,
     display_tick(id, label);
   else
     display_progress(id, label, 0);
-
-  if (_use_colors)
-    cerr << COLOR_RESET;
 }
 
 void OutNormal::progress(const std::string & id, const string & label, int value)
@@ -173,16 +160,10 @@ void OutNormal::progress(const std::string & id, const string & label, int value
   if (progressFilter())
     return;
 
-  if (_use_colors)
-    cerr << COLOR_WHITE;
-
   if (value)
     display_progress(id, label, value);
   else
     display_tick(id, label);
-
-  if (_use_colors)
-    cerr << COLOR_RESET;
 }
 
 void OutNormal::progressEnd(const std::string & id, const string & label, bool error)
@@ -190,21 +171,21 @@ void OutNormal::progressEnd(const std::string & id, const string & label, bool e
   if (progressFilter())
     return;
 
-  if (_use_colors)
-    cerr << COLOR_WHITE;
+  if (!error && _use_colors)
+    cout << get_color(COLOR_CONTEXT_MSG_STATUS);
 
   if (_isatty)
-  {
     cout << CLEARLN << label << " [";
-    if (error)
-      print_color(_("error"), COLOR_RED, COLOR_WHITE);
-    else
-      cout << _("done");
-  }
+
+  if (error)
+    print_color(_("error"), COLOR_CONTEXT_NEGATIVE);
+  else
+    cout << _("done");
+
   cout << "]";
 
-  if (_use_colors)
-    cerr << COLOR_RESET;
+  if (!error && _use_colors)
+    cout << COLOR_RESET;
 
   cout << endl << std::flush;
 }
@@ -215,23 +196,17 @@ void OutNormal::dwnldProgressStart(const zypp::Url & uri)
   if (verbosity() < NORMAL)
     return;
 
-  if (_use_colors)
-    cerr << COLOR_WHITE;
-
-  if (isatty(STDOUT_FILENO))
+  if (_isatty)
     cout << CLEARLN;
   cout << _("Retrieving:") << " ";
   if (verbosity() == DEBUG)
     cout << uri; //! \todo shorten to fit the width of the terminal
   else
     cout << zypp::Pathname(uri.getPathName()).basename();
-  if (isatty(STDOUT_FILENO))
+  if (_isatty)
     cout << " [" << _("starting") << "]"; //! \todo align to the right
   else
     cout << " [" ;
-
-  if (_use_colors)
-    cerr << COLOR_RESET;
 
   cout << std::flush;
 }
@@ -249,9 +224,6 @@ void OutNormal::dwnldProgress(const zypp::Url & uri,
     return;
   }
 
-  if (_use_colors)
-    cerr << COLOR_WHITE;
-
   cout << CLEARLN << _("Retrieving:") << " ";
   if (verbosity() == DEBUG)
     cout << uri; //! \todo shorten to fit the width of the terminal
@@ -268,9 +240,6 @@ void OutNormal::dwnldProgress(const zypp::Url & uri,
     cout << "]";
   }
 
-  if (_use_colors)
-    cerr << COLOR_RESET;
-
   cout << std::flush;
 }
 
@@ -279,8 +248,8 @@ void OutNormal::dwnldProgressEnd(const zypp::Url & uri, long rate, bool error)
   if (verbosity() < NORMAL)
     return;
 
-  if (_use_colors)
-    cerr << COLOR_WHITE;
+  if (!error && _use_colors)
+    cout << get_color(COLOR_CONTEXT_MSG_STATUS);
 
   if (_isatty)
   {
@@ -291,7 +260,7 @@ void OutNormal::dwnldProgressEnd(const zypp::Url & uri, long rate, bool error)
       cout << zypp::Pathname(uri.getPathName()).basename();
     cout << " [";
     if (error)
-      print_color(_("error"), COLOR_RED, COLOR_WHITE);
+      print_color(_("error"), COLOR_CONTEXT_NEGATIVE);
     else
       cout << _("done");
   }
@@ -302,8 +271,8 @@ void OutNormal::dwnldProgressEnd(const zypp::Url & uri, long rate, bool error)
     cout << " (" << zypp::ByteCount(rate) << "/s)";
   cout << "]";
 
-  if (_use_colors)
-    cerr << COLOR_RESET;
+  if (!error && _use_colors)
+    cout << COLOR_RESET;
 
   cout << endl << std::flush;
 }
