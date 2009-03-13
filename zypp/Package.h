@@ -23,6 +23,8 @@ namespace zypp
 
   DEFINE_PTR_TYPE(Package);
 
+
+
   ///////////////////////////////////////////////////////////////////
   //
   //	CLASS NAME : Package
@@ -88,6 +90,9 @@ namespace zypp
     /** \deprecated Use filelist, it's faster and saves memory. */
     std::list<std::string> filenames() const ZYPP_DEPRECATED;
 
+    /** \name Source package handling
+    */
+    //@{
     /** Name of the source rpm this package was built from.
      */
     std::string sourcePkgName() const;
@@ -95,6 +100,15 @@ namespace zypp
     /** Edition of the source rpm this package was built from.
      */
     Edition sourcePkgEdition() const;
+
+    /** The type of the source rpm (\c "src" or \c "nosrc").
+     */
+    std::string sourcePkgType() const;
+
+    /** The source rpms \c "name-version-release.type"
+     */
+    std::string sourcePkgLongName() const;
+    //@}
 
     /**
      * Checksum the source says this package should have.
