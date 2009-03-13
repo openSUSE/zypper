@@ -602,7 +602,7 @@ namespace zypp
     return false;
   }
 
-  std::string makeStupidAlias( const Url & url_r )
+  std::string RepoManager::makeStupidAlias( const Url & url_r )
   {
     std::string ret( url_r.getScheme() );
     if ( ret.empty() )
