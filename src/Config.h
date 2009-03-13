@@ -10,6 +10,8 @@
 
 #include <string>
 
+#include "utils/colors.h"
+
 struct Config
 {
   /** Initializes the config options to defaults. */
@@ -21,16 +23,28 @@ struct Config
 
 
   /**
-   * Whether to print colors to stdout. This is evaluated according to
+   * Whether to colorize the output. This is evaluated according to
    * color_useColors and has_colors()
    */
   bool do_colors;
 
-  /** zypper.conf: color.useColors option */
+  /** zypper.conf: color.useColors */
   std::string color_useColors;
 
-  /** dark (false) or light (true) */
+  /**
+   * zypper.conf: color.background
+   * dark (false) or light (true)
+   */
   bool color_background;
+
+  Color color_colorResult;
+  Color color_colorMsgStatus;
+  Color color_colorMsgError;
+  Color color_colorMsgWarning;
+  Color color_colorPositive;
+  Color color_colorNegative;
+  Color color_colorPromptOption;
+  Color color_colorPromptShorthand;
 };
 
 #endif /* ZYPPER_CONFIG_H_ */

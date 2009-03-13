@@ -96,25 +96,23 @@ const string PromptOptions::optionStringColored() const
   if ((it = options().begin()) != options().end() && shown_count > 0)
   {
     if (defaultOpt() == 0)
-      option_str << COLOR_YELLOW << *it;
+      fprint_color(option_str, *it, COLOR_CONTEXT_PROMPT_SHORTHAND);
     else
-      option_str << COLOR_WHITE << *it;
+      fprint_color(option_str, *it, COLOR_CONTEXT_PROMPT_OPTION);
     ++it;
   }
   for (unsigned int i = 1; it != options().end() && i < shown_count; ++it, ++i)
     if (isEnabled(i))
     {
-      option_str << COLOR_WHITE << "/";
+      fprint_color(option_str, "/", COLOR_CONTEXT_PROMPT_OPTION);
       if (defaultOpt() == i)
-        option_str << COLOR_YELLOW << *it;
+        fprint_color(option_str, *it, COLOR_CONTEXT_PROMPT_SHORTHAND);
       else
-        option_str << *it;
+        fprint_color(option_str, *it, COLOR_CONTEXT_PROMPT_OPTION);
     }
 
   if (!_opt_help.empty())
-    option_str << COLOR_WHITE << (shown_count > 0 ? "/" : "") << "?";
-
-  option_str << COLOR_RESET;
+    fprint_color(option_str, shown_count > 0 ? "/?" : "?", COLOR_CONTEXT_PROMPT_OPTION);
 
   return option_str.str();
 }
