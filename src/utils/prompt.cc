@@ -63,56 +63,35 @@ const string PromptOptions::optionString() const
   StrVector::const_iterator it;
   unsigned int shown_count = _shown_count < 0 ? options().size() : _shown_count;
 
-  if ((it = options().begin()) != options().end() && shown_count > 0)
+  if ((it = options().begin()) != options().end() && shown_count)
   {
-    if (defaultOpt() == 0)
-      option_str << "_" << *it << "_";
-    else
-      option_str << *it;
+    option_str << "[";
+    fprint_color(option_str, *it, COLOR_CONTEXT_PROMPT_OPTION);
+    // fprint_color(option_str, *it, COLOR_CONTEXT_PROMPT_SHORTHAND);
     ++it;
   }
   for (unsigned int i = 1; it != options().end() && i < shown_count; ++it, ++i)
     if (isEnabled(i))
     {
       option_str << "/";
-      if (defaultOpt() == i)
-        option_str << "_" << *it << "_";
-      else
-        option_str << *it;
-    }
-
-  if (!_opt_help.empty())
-    option_str << (shown_count > 0 ? "/" : "") << "?";
-
-  return option_str.str();
-}
-
-const string PromptOptions::optionStringColored() const
-{
-  ostringstream option_str;
-  StrVector::const_iterator it;
-  unsigned int shown_count = _shown_count < 0 ? options().size() : _shown_count;
-
-  if ((it = options().begin()) != options().end() && shown_count > 0)
-  {
-    if (defaultOpt() == 0)
-      fprint_color(option_str, *it, COLOR_CONTEXT_PROMPT_SHORTHAND);
-    else
       fprint_color(option_str, *it, COLOR_CONTEXT_PROMPT_OPTION);
-    ++it;
-  }
-  for (unsigned int i = 1; it != options().end() && i < shown_count; ++it, ++i)
-    if (isEnabled(i))
-    {
-      fprint_color(option_str, "/", COLOR_CONTEXT_PROMPT_OPTION);
-      if (defaultOpt() == i)
-        fprint_color(option_str, *it, COLOR_CONTEXT_PROMPT_SHORTHAND);
-      else
-        fprint_color(option_str, *it, COLOR_CONTEXT_PROMPT_OPTION);
+      //fprint_color(option_str, *it, COLOR_CONTEXT_PROMPT_SHORTHAND);
     }
 
   if (!_opt_help.empty())
-    fprint_color(option_str, shown_count > 0 ? "/?" : "?", COLOR_CONTEXT_PROMPT_OPTION);
+  {
+    if (shown_count)
+      option_str << "/";
+    fprint_color(option_str, "?", COLOR_CONTEXT_PROMPT_OPTION);
+  }
+
+  if (!_options.empty() && shown_count)
+    option_str << "]";
+
+  // default option
+  option_str << " (";
+  fprint_color(option_str, _options[_default], COLOR_CONTEXT_PROMPT_OPTION);
+  option_str << ")";
 
   return option_str.str();
 }
