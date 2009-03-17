@@ -291,7 +291,7 @@ void OutNormal::prompt(PromptId id,
     cout << startdesc << endl;
   cout << prompt;
   if (!poptions.empty())
-    cout << " [" << (_use_colors ? poptions.optionStringColored() : poptions.optionString()) << "]";
+    cout << " " << poptions.optionString();
   cout << ": " << std::flush;
 }
 
@@ -318,5 +318,5 @@ void OutNormal::promptHelp(const PromptOptions & poptions)
     }
   }
 
-  cout << endl << "[" << (_use_colors ? poptions.optionStringColored() : poptions.optionString()) << "]: " << std::flush;
+  cout << endl << poptions.optionString() << ": " << std::flush;
 }
