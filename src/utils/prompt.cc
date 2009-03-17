@@ -86,12 +86,14 @@ const string PromptOptions::optionString() const
   }
 
   if (!_options.empty() && shown_count)
+  {
     option_str << "]";
 
-  // default option
-  option_str << " (";
-  fprint_color(option_str, _options[_default], COLOR_CONTEXT_PROMPT_OPTION);
-  option_str << ")";
+    // default option
+    option_str << " (";
+    fprint_color(option_str, _options[_default], COLOR_CONTEXT_PROMPT_OPTION);
+    option_str << ")";
+  }
 
   return option_str.str();
 }
