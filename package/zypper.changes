@@ -1,4 +1,10 @@
 -------------------------------------------------------------------
+Wed Mar 18 11:03:24 CET 2009 - jkupec@suse.cz
+
+- show dialog's default option in parentheses instead
+  of capitalizing it.
+
+-------------------------------------------------------------------
 Thu Mar 12 13:00:19 CET 2009 - jkupec@suse.cz
 
 - turn off colors by default (to be configurable in zypper.conf)
