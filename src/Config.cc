@@ -6,34 +6,112 @@
 \*---------------------------------------------------------------------------*/
 
 #include <iostream>
+#include <map>
+extern "C"
+{
+  #include <libintl.h>
+}
 
 #include "zypp/base/Logger.h"
 #include "zypp/base/Measure.h"
+#include "zypp/base/String.h"
+#include "zypp/base/Exception.h"
 
+#include "utils/Augeas.h"
 #include "Config.h"
+
+// redefine _ gettext macro defined by ZYpp
+#ifdef _
+#undef _
+#endif
+#define _(MSG) ::gettext(MSG)
 
 using namespace std;
 using namespace zypp;
 
+static map<string, ConfigOption::Option> _table;
+static map<ConfigOption::Option, string> _table_str;
+
+const ConfigOption ConfigOption::COLOR_USE_COLORS(ConfigOption::COLOR_USE_COLORS_e);
+const ConfigOption ConfigOption::COLOR_BACKGROUND(ConfigOption::COLOR_BACKGROUND_e);
+const ConfigOption ConfigOption::COLOR_RESULT(ConfigOption::COLOR_RESULT_e);
+const ConfigOption ConfigOption::COLOR_MSG_STATUS(ConfigOption::COLOR_MSG_STATUS_e);
+const ConfigOption ConfigOption::COLOR_MSG_ERROR(ConfigOption::COLOR_MSG_ERROR_e);
+const ConfigOption ConfigOption::COLOR_MSG_WARNING(ConfigOption::COLOR_MSG_WARNING_e);
+const ConfigOption ConfigOption::COLOR_POSITIVE(ConfigOption::COLOR_POSITIVE_e);
+const ConfigOption ConfigOption::COLOR_NEGATIVE(ConfigOption::COLOR_NEGATIVE_e);
+const ConfigOption ConfigOption::COLOR_PROMPT_OPTION(ConfigOption::COLOR_PROMPT_OPTION_e);
+const ConfigOption ConfigOption::COLOR_PROMPT_SHORTHAND(ConfigOption::COLOR_PROMPT_SHORTHAND_e);
+
+ConfigOption::ConfigOption(const std::string & strval_r)
+  : _value(parse(strval_r))
+{}
+
+ConfigOption::Option ConfigOption::parse(const std::string & strval_r)
+{
+  if (_table.empty())
+  {
+    // initialize it
+    _table["color/useColors"] = ConfigOption::COLOR_USE_COLORS_e;
+    _table["color/background"] = ConfigOption::COLOR_BACKGROUND_e;
+    _table["color/result"] = ConfigOption::COLOR_RESULT_e;
+    _table["color/msgStatus"] = ConfigOption::COLOR_MSG_STATUS_e;
+    _table["color/msgError"] = ConfigOption::COLOR_MSG_ERROR_e;
+    _table["color/msgWarning"] = ConfigOption::COLOR_MSG_WARNING_e;
+    _table["color/positive"] = ConfigOption::COLOR_POSITIVE_e;
+    _table["color/negative"] = ConfigOption::COLOR_NEGATIVE_e;
+    _table["color/promptOption"] = ConfigOption::COLOR_PROMPT_OPTION_e;
+  }
+  map<string, ConfigOption::Option>::const_iterator it = _table.find(strval_r);
+  if (it == _table.end())
+  {
+    string message =
+      zypp::str::form(_("Unknown configuration option '%s'"), strval_r.c_str());
+    ZYPP_THROW(zypp::Exception(message));
+  }
+  return it->second;
+}
+
+const string ConfigOption::asString() const
+{
+  if (_table.empty())
+  {
+    // initialize it
+    _table_str[COLOR_USE_COLORS_e] = string("color/useColors");
+    _table_str[COLOR_BACKGROUND_e] = "color/background";
+    _table_str[COLOR_RESULT_e] = "color/result";
+    _table_str[COLOR_MSG_STATUS_e] = "color/msgStatus";
+    _table_str[COLOR_MSG_ERROR_e] = "color/msgError";
+    _table_str[COLOR_MSG_WARNING_e] = "color/msgWarning";
+    _table_str[COLOR_POSITIVE_e] = "color/positive";
+    _table_str[COLOR_NEGATIVE_e] = "color/negative";
+    _table_str[COLOR_PROMPT_OPTION_e] = "color/promptOption";
+  }
+  map<ConfigOption::Option, string>::const_iterator it = _table_str.find(_value);
+  if (it != _table_str.end())
+    return it->second;
+  return string();
+}
+
+
 Config::Config()
-  : do_colors(false)
-  , color_useColors("never")
-  , color_background(false)          // dark background
-  , color_colorResult     ("white")  // default colors for dark background
-  , color_colorMsgStatus  ("grey")   // if background is actually light, these
-  , color_colorMsgError   ("red")    // colors will be overwritten in read()
-  , color_colorMsgWarning ("yellow")
-  , color_colorPositive   ("green")
-  , color_colorNegative   ("red")
-  , color_colorPromptOption("grey")
-  , color_colorPromptShorthand("yellow")
+  : do_colors        (false)
+  , color_useColors  ("never")
+  , color_background (false)    // dark background
+  , color_result     ("white")  // default colors for dark background
+  , color_msgStatus  ("grey")   // if background is actually light, these
+  , color_msgError   ("red")    // colors will be overwritten in read()
+  , color_msgWarning ("yellow")
+  , color_positive   ("green")
+  , color_negative   ("red")
+  , color_promptOption("grey")
 {}
 
 void Config::read()
 {
   debug::Measure m("ReadConfig");
 
-  // get augeas
+  Augeas augeas;
 
   m.elapsed();
 
@@ -43,99 +121,87 @@ void Config::read()
 
   // ---------------[ colors ]------------------------------------------------
 
-  // color_useColors = augeas.getOption("colors/useColors");
+  color_useColors = augeas.getOption(ConfigOption::COLOR_USE_COLORS.asString());
   do_colors =
     (color_useColors == "autodetect" && has_colors())
     || color_useColors == "always";
 
-  ////// colors/background //////
+  ////// color/background //////
 
   string s;
-  // s = augeas.getOption("colors/background");
+  s = augeas.getOption(ConfigOption::COLOR_BACKGROUND.asString());
   if (s == "light")
     color_background = true;
   else if (!s.empty() && s != "dark")
-    ERR << "invalid colors/background value: " << s << endl;
+    ERR << "invalid color/background value: " << s << endl;
 
-  Color c("none");
+  Color c("");
 
-  ////// colors/colorResult //////
+  ////// color/colorResult //////
 
-  // c =  augeas.getOption("colors/colorResult");
+  c = Color(augeas.getOption(ConfigOption::COLOR_RESULT.asString()));
   if (c.value().empty())
   {
     // set a default for light background
     if (color_background)
-      color_colorResult = Color("black");
+      color_result = Color("black");
   }
   else
-    color_colorResult = c;
+    color_result = c;
 
-  ////// colors/colorMsgStatus //////
+  ////// color/colorMsgStatus //////
 
-  // c =  augeas.getOption("colors/colorMsgStatus");
+  c = Color(augeas.getOption(ConfigOption::COLOR_MSG_STATUS.asString()));
   if (c.value().empty())
   {
     // set a default for light background
     if (color_background)
-      color_colorMsgStatus = Color("default");
+      color_msgStatus = Color("default");
   }
   else
-    color_colorMsgStatus = c;
+    color_msgStatus = c;
 
-  ////// colors/colorMsgError //////
+  ////// color/colorMsgError //////
 
-  // c =  augeas.getOption("colors/colorMsgError");
+  c = Color(augeas.getOption(ConfigOption::COLOR_MSG_ERROR.asString()));
   if (!c.value().empty())
-    color_colorMsgError = c;
+    color_msgError = c;
 
-  ////// colors/colorMsgWarning //////
+  ////// color/colorMsgWarning //////
 
-  // c =  augeas.getOption("colors/colorMsgWarning");
+  c = Color(augeas.getOption(ConfigOption::COLOR_MSG_WARNING.asString()));
   if (c.value().empty())
   {
     // set a default for light background
     if (color_background)
-      color_colorMsgWarning = Color("brown");
+      color_msgWarning = Color("brown");
   }
   else
-    color_colorMsgWarning = c;
+    color_msgWarning = c;
 
-  ////// colors/colorPositive //////
+  ////// color/colorPositive //////
 
-  // c =  augeas.getOption("colors/colorPositive");
+  c = Color(augeas.getOption(ConfigOption::COLOR_POSITIVE.asString()));
   if (!c.value().empty())
-    color_colorPositive = c;
+    color_positive = c;
 
-  ////// colors/colorNegative //////
+  ////// color/colorNegative //////
 
-  // c =  augeas.getOption("colors/colorNegative");
+  c = Color(augeas.getOption(ConfigOption::COLOR_NEGATIVE.asString()));
   if (!c.value().empty())
-    color_colorNegative = c;
+    color_negative = c;
 
-  ////// colors/colorPromptOption //////
+  ////// color/colorPromptOption //////
 
-  // c =  augeas.getOption("colors/colorPromptOption");
+  c = Color(augeas.getOption(ConfigOption::COLOR_PROMPT_OPTION.asString()));
   if (c.value().empty())
   {
     // set a default for light background
     if (color_background)
-      color_colorPromptOption = Color("darkgrey");
+      color_promptOption = Color("darkgrey");
   }
   else
-    color_colorPromptOption = c;
-
-  ////// colors/colorPromptShorthand //////
-
-  // c =  augeas.getOption("colors/colorPromptShorthand");
-  if (c.value().empty())
-  {
-    // set a default for light background
-    if (color_background)
-      color_colorPromptShorthand = Color("cyan");
-  }
-  else
-    color_colorPromptShorthand = c;
+    color_promptOption = c;
 
   m.stop();
 }

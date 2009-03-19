@@ -62,3 +62,9 @@ INSTALL(
   DESTINATION ${INSTALL_PREFIX}/share/doc/packages/${PACKAGE}
 )
 
+# system-wide zypper.conf
+INSTALL(
+  FILES zypper.conf
+  DESTINATION ${SYSCONFDIR}/zypp
+)
+

@@ -140,5 +140,5 @@ INSTALL(
 # augeas lens
 INSTALL(
   FILES utils/zypper.aug
-  DESTINATION ${INSTALL_PREFIX}/share/zypper
+  DESTINATION ${INSTALL_PREFIX}/share/${PACKAGE}
 )

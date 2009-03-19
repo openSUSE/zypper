@@ -11,7 +11,8 @@
 # norootforbuild
 
 Name:           @PACKAGE@
-BuildRequires:  libzypp-devel >= 6.1.0 boost-devel >= 1.33.1 gettext-devel >= 0.15 readline-devel >= 5.1
+BuildRequires:  libzypp-devel >= 6.1.0 boost-devel >= 1.33.1 gettext-devel >= 0.15
+BuildRequires:  readline-devel >= 5.1 augeas-devel >= 0.4.2
 BuildRequires:  gcc-c++ >= 4.1 cmake >= 2.4.6
 Requires:	procps
 Recommends:     logrotate cron 
@@ -83,14 +84,16 @@ touch %buildroot%_var/log/zypper.log
 
 %files -f zypper.lang
 %defattr(-,root,root)
-%{_sysconfdir}/logrotate.d/zypper.lr
-%{_sysconfdir}/logrotate.d/zypp-refresh.lr
+%config(noreplace) %{_sysconfdir}/zypp/zypper.conf
+%config(noreplace) %{_sysconfdir}/logrotate.d/zypper.lr
+%config(noreplace) %{_sysconfdir}/logrotate.d/zypp-refresh.lr
 %{_sysconfdir}/bash_completion.d/zypper.sh
 %{_bindir}/zypper
 %{_bindir}/installation_sources
 %{_sbindir}/zypp-refresh
 %verify(not mode) %attr (755,root,root) %{_sbindir}/zypp-refresh-wrapper
 %dir %{prefix}/share/zypper
+%{prefix}/share/zypper/zypper.aug
 %dir %{prefix}/share/zypper/xml
 %{prefix}/share/zypper/xml/xmlout.rnc
 %dir %{prefix}/include/zypper
