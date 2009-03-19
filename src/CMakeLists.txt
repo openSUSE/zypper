@@ -60,6 +60,7 @@ SET( zypper_out_SRCS
 )
 
 SET( zypper_utils_HEADERS
+  utils/Augeas.h
   utils/colors.h
   utils/getopt.h
   utils/messages.h
@@ -70,6 +71,7 @@ SET( zypper_utils_HEADERS
 )
 
 SET( zypper_utils_SRCS
+  utils/Augeas.cc
   utils/colors.cc
   utils/getopt.cc
   utils/messages.cc
@@ -81,7 +83,7 @@ SET( zypper_utils_SRCS
 )
 
 ADD_EXECUTABLE( zypper ${zypper_SRCS} ${zypper_out_SRCS} ${zypper_utils_SRCS} )
-TARGET_LINK_LIBRARIES( zypper ${ZYPP_LIBRARY} ${READLINE_LIBRARY} )
+TARGET_LINK_LIBRARIES( zypper ${ZYPP_LIBRARY} ${READLINE_LIBRARY} -laugeas ${AUGEAS_LIBRARY} )
 
 INSTALL(
   TARGETS zypper
@@ -135,3 +137,8 @@ INSTALL(
   DESTINATION ${SYSCONFDIR}/logrotate.d
 )
 
+# augeas lens
+INSTALL(
+  FILES utils/zypper.aug
+  DESTINATION ${INSTALL_PREFIX}/share/zypper
+)
