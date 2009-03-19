@@ -26,6 +26,9 @@ Color::Color(const string & color_str)
 
 string Color::parse(const string & value)
 {
+  if (value.empty())
+    return value;
+
   if (str2esc.empty())
   {
     str2esc["green"]          = COLOR_GREEN;
@@ -73,21 +76,19 @@ static const string get_color(const Config & conf, const ColorContext context)
   switch (context)
   {
   case COLOR_CONTEXT_RESULT:
-    return conf.color_colorResult.value();
+    return conf.color_result.value();
   case COLOR_CONTEXT_MSG_STATUS:
-    return conf.color_colorMsgStatus.value();
+    return conf.color_msgStatus.value();
   case COLOR_CONTEXT_MSG_WARNING:
-    return conf.color_colorMsgWarning.value();
+    return conf.color_msgWarning.value();
   case COLOR_CONTEXT_MSG_ERROR:
-    return conf.color_colorMsgError.value();
+    return conf.color_msgError.value();
   case COLOR_CONTEXT_POSTIVE:
-    return conf.color_colorPositive.value();
+    return conf.color_positive.value();
   case COLOR_CONTEXT_NEGATIVE:
-    return conf.color_colorNegative.value();
+    return conf.color_negative.value();
   case COLOR_CONTEXT_PROMPT_OPTION:
-    return conf.color_colorPromptOption.value();
-  case COLOR_CONTEXT_PROMPT_SHORTHAND:
-    return conf.color_colorPromptShorthand.value();
+    return conf.color_promptOption.value();
   default:
     return COLOR_RESET;
   }
