@@ -72,14 +72,14 @@ Zypper::Zypper()
     _running_shell(false), _running_help(false), _exit_requested(false),
     _sh_argc(0), _sh_argv(NULL)
 {
-  MIL << "Hi, me zypper " VERSION " built " << __DATE__ << " " <<  __TIME__ << endl;
+  MIL << "Zypper instance created." << endl;
 }
 
 
 Zypper::~Zypper()
 {
   delete _out_ptr;
-  MIL << "Bye!" << endl;
+  MIL << "Zypper instance destroyed. Bye!" << endl;
 }
 
 
