@@ -16,6 +16,7 @@ extern "C"
 }
 
 #include "zypp/base/NonCopyable.h"
+#include "zypp/TriBool.h"
 
 /**
  * Zypper's wrapper around Augeas.
@@ -29,7 +30,7 @@ public:
   std::string get(const std::string & augpath) const;
 
   std::string getOption(const std::string & option) const;
-  bool isCommented(const std::string & option, bool global) const;
+  zypp::TriBool isCommented(const std::string & option, bool global) const;
   void comment(const std::string & option);
   void uncomment(const std::string & option);
 
@@ -37,7 +38,8 @@ public:
   { return _augeas; }
 
 private:
-  bool isCommented(const std::string & section, const std::string & option,
+  zypp::TriBool isCommented(const std::string & section,
+      const std::string & option,
       bool global) const;
 
 private:

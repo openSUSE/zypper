@@ -5,6 +5,7 @@
                              |__/|_|  |_|
 \*---------------------------------------------------------------------------*/
 #include <iostream>
+#include <stdlib.h>
 
 #include "zypp/base/Logger.h"
 #include "Zypper.h"
@@ -91,7 +92,7 @@ string Augeas::get(const string & augpath) const
   _last_get_result = ::aug_get(_augeas, augpath.c_str(), value);
   if (_last_get_result)
   {
-    MIL << "Got " << augpath << " = " << value[0] << endl;
+    DBG << "Got " << augpath << " = " << value[0] << endl;
     return value[0];
   }
   else if (_last_get_result == 0)
@@ -115,38 +116,65 @@ string Augeas::getOption(const string & option) const
     return string();
   }
 
-  string augpath_u = user_option_path(opt[0], opt[1], _homedir);
-  string result = get(augpath_u);
-  if (_last_get_result && !isCommented(opt[0], opt[1], false))
-    return result;
+  if (_got_user_zypper_conf)
+  {
+    string augpath_u = user_option_path(opt[0], opt[1], _homedir);
+    string result = get(augpath_u);
+    if (_last_get_result && !isCommented(opt[0], opt[1], false))
+      return result;
+  }
 
-  string augpath_g = global_option_path(opt[0], opt[1]);
-  result = get(augpath_g);
-  if (_last_get_result && !isCommented(opt[0], opt[1], true))
-    return result;
+  if (_got_global_zypper_conf)
+  {
+    string augpath_g = global_option_path(opt[0], opt[1]);
+    string result = get(augpath_g);
+    if (_last_get_result && !isCommented(opt[0], opt[1], true))
+      return result;
+  }
 
   return string();
 }
 
 // ---------------------------------------------------------------------------
 
-bool Augeas::isCommented(
+TriBool Augeas::isCommented(
     const string & section, const string & option, bool global) const
 {
+  // don't bother calling aug_get if we don't have the config read
+  if ((global && !_got_global_zypper_conf) ||
+      (!global && !_got_user_zypper_conf))
+    return TriBool::indeterminate_value;
+
   Pathname path(global ?
       global_option_path(section, option) :
       user_option_path(section, option, _homedir));
 
-  path = path.dirname() + "/commented";
-  if (::aug_get(_augeas, path.c_str(), NULL))
-    return true;
+  TriBool result;
 
-  return false;
+  char ** matches;
+  int matchcount = ::aug_match(_augeas, path.c_str(), &matches);
+  if (matchcount == 1)
+  {
+    path = Pathname(matches[0]);
+    // the 'commented' flag is a sibling of the key=value node
+    path = path.dirname() + "/commented";
+    DBG << path << ": ";
+    int res = ::aug_get(_augeas, path.c_str(), NULL);
+    if (res)
+      result = true;
+    else if (res == 0)
+      result = false;
+    DBG << result << endl;
+  }
+  if (matchcount)
+    ::free(matches);
+
+  return result;
 }
 
 // ---------------------------------------------------------------------------
 
-bool Augeas::isCommented(const string & option, bool global) const
+TriBool Augeas::isCommented(const string & option, bool global) const
 {
   vector<string> opt;
   str::split(option, back_inserter(opt), "/");
@@ -154,7 +182,7 @@ bool Augeas::isCommented(const string & option, bool global) const
   if (opt.size() != 2 || opt[0].empty() || opt[1].empty())
   {
     ERR << "invalid option " << option << endl;
-    return false;
+    return TriBool::indeterminate_value;
   }
 
   return isCommented(opt[0], opt[1], global);
