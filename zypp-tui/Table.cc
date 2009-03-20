@@ -2,12 +2,17 @@
 #include <cstring>
 #include <cstdlib>
 #include <readline/readline.h>
+#include <wchar.h>
 
 #include "zypp/base/Logger.h"
 
 #include "Table.h"
+
+// libzypp logger settings
+#undef  ZYPP_BASE_LOGGER_LOGGROUP
+#define ZYPP_BASE_LOGGER_LOGGROUP "zypper"
+
 using namespace std;
-#include <wchar.h>
 
 TableStyle Table::defaultStyle = Ascii;
 
@@ -119,7 +124,7 @@ void TableRow::dumpTo (ostream &stream, const vector<unsigned>& widths,
     {
       stream << s;
       stream.width (widths[c] - ssize);
-    } 
+    }
     stream << "";
   }
   stream << endl;
@@ -199,7 +204,7 @@ void Table::dumpRule (ostream &stream) const {
   const char * cross = lines[_style][2];
 
   bool seen_first = false;
-  
+
   stream.width (0);
   for (unsigned c = 0; c <= _max_col; ++c) {
     if (seen_first) {
