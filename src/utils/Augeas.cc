@@ -166,6 +166,8 @@ TriBool Augeas::isCommented(
       result = false;
     DBG << result << endl;
   }
+  for (int i = 0; i < matchcount; ++i)
+    ::free(matches[i]);
   if (matchcount)
     ::free(matches);
 
