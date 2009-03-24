@@ -2,9 +2,11 @@
 #include <cstring>
 #include <cstdlib>
 #include <readline/readline.h>
-#include <wchar.h>
 
 #include "zypp/base/Logger.h"
+
+#include "utils/misc.h"
+#include "utils/text.h"
 
 #include "Table.h"
 
@@ -30,50 +32,6 @@ const char * lines[][3] = {
   { "\xE2\x94\x83", "\xE2\x94\x80", "\xE2\x95\x82"}, ///< v heavy, h light
   { "\xE2\x95\x91", "\xE2\x94\x80", "\xE2\x95\xAB"}, ///< v double, h light
 };
-
-// A non-ASCII string has 3 different lengths:
-// - bytes
-// - characters (non-ASCII ones have multiple bytes in UTF-8)
-// - columns (Chinese characters are 2 columns wide)
-// In #328918 see how confusing these leads to misalignment.
-
-// return the number of columns in str, or -1 if there's an error
-static
-int string_to_columns_e (const string& str) {
-  // from smpppd.src.rpm/format.cc, thanks arvin
-
-  const char* ptr = str.c_str ();
-  size_t s_bytes = str.length ();
-  int s_cols = 0;
-
-  mbstate_t shift_state;
-  memset (&shift_state, 0, sizeof (shift_state));
-
-  wchar_t wc;
-  size_t c_bytes;
-
-  // mbrtowc produces one wide character from a multibyte string
-  while ((c_bytes = mbrtowc (&wc, ptr, s_bytes, &shift_state)) > 0) {
-    if (c_bytes >= (size_t) -2) // incomplete (-2) or invalid (-1) sequence
-      return -1;
-
-    s_cols += wcwidth (wc);
-
-    s_bytes -= c_bytes;
-    ptr += c_bytes;
-  }
-
-  return s_cols;
-}
-
-static
-unsigned string_to_columns (const string& str) {
-  int c = string_to_columns_e (str);
-  if (c < 0)
-    return str.length();	// fallback if there was an error
-  else
-    return (unsigned) c;
-}
 
 void TableRow::add (const string& s) {
   _columns.push_back (s);
@@ -136,27 +94,9 @@ Table::Table() :
   _has_header (false),
   _max_col (0),
   _width(0),
-  _style (defaultStyle)
-{
-  //! \todo move this to utils
-
-  const char *cols_env = getenv("COLUMNS");
-  if (cols_env)
-    _screen_width  = ::atoi (cols_env);
-  else
-  {
-    ::rl_initialize();
-    //::rl_reset_screen_size();
-    ::rl_get_screen_size (NULL, &_screen_width);
-    DBG << "readline says we have " << _screen_width << " char wide console screen" << endl;
-  }
-
-  // safe default
-  if (!_screen_width)
-     _screen_width = 80;
-
-  DBG << "got screen width of " << _screen_width << endl;
-}
+  _style (defaultStyle),
+  _screen_width(get_screen_width())
+{}
 
 void Table::add (const TableRow& tr) {
   _rows.push_back (tr);
