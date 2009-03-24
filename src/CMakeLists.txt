@@ -68,6 +68,7 @@ SET( zypper_utils_HEADERS
   utils/pager.h
   utils/prompt.h
   utils/richtext.h
+  utils/text.h
 )
 
 SET( zypper_utils_SRCS
@@ -79,6 +80,7 @@ SET( zypper_utils_SRCS
   utils/pager.cc
   utils/prompt.cc
   utils/richtext.cc
+  utils/text.cc
   ${zypper_utils_HEADERS}
 )
 

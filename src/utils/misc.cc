@@ -59,6 +59,29 @@ string readline_getline()
 
 // ----------------------------------------------------------------------------
 
+unsigned get_screen_width()
+{
+  int width = 80;
+
+  const char *cols_env = getenv("COLUMNS");
+  if (cols_env)
+    width  = ::atoi (cols_env);
+  else
+  {
+    ::rl_initialize();
+    //::rl_reset_screen_size();
+    ::rl_get_screen_size (NULL, &width);
+  }
+
+  // safe default
+  if (!width)
+    width = 80;
+
+  return width;
+}
+
+// ----------------------------------------------------------------------------
+
 bool is_changeable_media(const zypp::Url & url)
 {
   MIL << "Checking if this is a changeable medium" << endl;
