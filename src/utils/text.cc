@@ -109,11 +109,26 @@ void wrap_text(ostream & out, const string & text,
       // current wc exceeded the wrap width
       if (col > wrap_width)
       {
+        bool wanthyphen = false;
+        // A single word is longer than the wrap width. Split the word and
+        // append a hyphen at the end of the line. This won't normally happen,
+        // but it can eventually happen e.g. with paths or too low screen widths.
+        //! \todo make word-splitting more intelligent, e.g. if the word already
+        //!       contains a hyphen, split there; do not split because
+        //!       of a non-alphabet character; do not leave orphans, etc...
+        if (linep == prevwp)
+        {
+          prevwp = s - 2;
+          wanthyphen = true;
+        }
+
         // update the size of the string to read
         s_bytes -= (prevwp - linep);
         // print the line, leave linep point to the start of the last word.
         for (; linep < prevwp; ++linep)
           out << *linep;
+        if (wanthyphen)
+          out << "-";
         out << endl;
         // reset column counter
         col = 0;
