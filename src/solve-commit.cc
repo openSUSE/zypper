@@ -23,6 +23,7 @@
 #include "utils/misc.h"
 #include "utils/getopt.h"
 #include "utils/prompt.h"
+#include "utils/Summary.h"
 
 #include "solve-commit.h"
 
@@ -191,350 +192,6 @@ static bool show_problems(Zypper & zypper)
   return retry;
 }
 
-struct ResNameCompare
-{
-  bool operator()(ResObject::constPtr r1, ResObject::constPtr r2) const
-  {
-    return strcoll(r1->name().c_str(), r2->name().c_str()) < 0;
-  }
-};
-
-typedef map<Resolvable::Kind,set<ResObject::constPtr, ResNameCompare> > KindToResObjectSet;
-
-static void show_summary_resolvable_list(const string & label,
-                                         KindToResObjectSet::const_iterator it,
-                                         Out & out)
-{
-  ostringstream s;
-  s << endl << label << endl;
-
-  // get terminal width from COLUMNS env. var.
-  unsigned cols = 0, cols_written = 0;
-  const char *cols_s = getenv("COLUMNS");
-  string cols_str("80");
-  if (cols_s != NULL)
-    cols_str = cols_s;
-  str::strtonum (cols_str, cols);
-  if (cols == 0)
-    cols = 77;
-
-#define INDENT "  "
-//! \todo make function to wrap & indent the text
-  for (set<ResObject::constPtr>::const_iterator resit = it->second.begin();
-      resit != it->second.end(); ++resit)
-  {
-    ResObject::constPtr res(*resit);
-
-    if (out.verbosity() == Out::NORMAL)
-    {
-      // watch the terminal widht
-      if (cols_written == 0)
-        s << INDENT;
-      else if (cols_written + res->name().size() + 1  > cols)
-      {
-        s << endl;
-        cols_written = 0;
-      }
-
-      cols_written += res->name().size();
-    }
-    else
-      s << INDENT;
-
-    // resolvable name
-    s << res->name() << (out.verbosity() > Out::NORMAL ? "" : " ");
-    // plus edition and architecture for verbose output
-    if (out.verbosity() > Out::NORMAL)
-    {
-      s << "-" << res->edition() << "." << res->arch();
-
-      const string & reponame =  res->repoInfo().name();
-      if (!res->vendor().empty() || !reponame.empty())
-      {
-        s << "  (";
-        // plus repo providing this package
-        if (!reponame.empty())
-          s << reponame;
-        // plus package vendor
-        if (!res->vendor().empty())
-          s << (reponame.empty() ? "" : ", ") << res->vendor();
-        s << ")";
-      }
-      // new line after each package in the verbose mode
-      s << endl;
-    }
-  }
-
-  if (out.verbosity() == Out::NORMAL)
-    s << endl;
-
-  out.info(s.str(), Out::QUIET); //! \todo special output needed for this
-}
-
-typedef enum
-{
-  TO_UPGRADE,
-  TO_DOWNGRADE,
-  TO_INSTALL,
-  TO_REINSTALL,
-  TO_REMOVE,
-  TO_CHANGE_ARCH,
-  TO_CHANGE_VENDOR,
-  UNSUPPORTED
-} SummaryType;
-
-static void xml_print_to_transact_tag(SummaryType stype, bool end = false)
-{
-  switch (stype)
-  {
-  case TO_UPGRADE:
-    cout << "<" << (end ? "/" : "") << "to-upgrade>" << endl;
-    break;
-  case TO_DOWNGRADE:
-    cout << "<" << (end ? "/" : "") << "to-downgrade>" << endl;
-    break;
-  case TO_INSTALL:
-    cout << "<" << (end ? "/" : "") << "to-install>" << endl;
-    break;
-  case TO_REINSTALL:
-    cout << "<" << (end ? "/" : "") << "to-reinstall>" << endl;
-    break;
-  case TO_REMOVE:
-    cout << "<" << (end ? "/" : "") << "to-remove>" << endl;
-    break;
-  case TO_CHANGE_ARCH:
-    cout << "<" << (end ? "/" : "") << "to-change-arch>" << endl;
-    break;
-  case TO_CHANGE_VENDOR:
-    cout << "<" << (end ? "/" : "") << "to-change-vendor>" << endl;
-    break;
-  case UNSUPPORTED:
-    cout << "<" << (end ? "/" : "") << "unsupported>" << endl;
-    break;
-  }
-}
-
-static void show_summary_of_type(Zypper & zypper,
-                                 SummaryType stype,
-                                 const KindToResObjectSet & summset)
-{
-  // xml install summary
-  if (zypper.out().type() == Out::TYPE_XML)
-  {
-    bool empty = true;
-    for (KindToResObjectSet::const_iterator it = summset.begin();
-        it != summset.end(); ++it)
-      if (!it->second.empty()) { empty = false; break; }
-    if (empty)
-      return;
-
-    xml_print_to_transact_tag(stype);
-
-    for (KindToResObjectSet::const_iterator it = summset.begin();
-        it != summset.end(); ++it)
-      for (set<ResObject::constPtr>::const_iterator resit = it->second.begin();
-          resit != it->second.end(); ++resit)
-      {
-        ResObject::constPtr res(*resit);
-
-        cout << "<solvable";
-        cout << " type=\"" << it->first << "\"";
-        cout << " name=\"" << res->name() << "\"";
-        cout << " edition=\"" << res->edition() << "\"";
-        //! \todo cout << " edition-old=\"" << << "\"";
-        cout << " arch=\"" << res->arch() << "\"";
-        if (!res->summary().empty())
-          cout << " summary=\"" << xml_encode(res->summary()) << "\"";
-        if (!res->description().empty())
-          cout << ">" << endl << xml_encode(res->description()) << "</solvable>" << endl;
-        else
-          cout << "/>" << endl;
-      }
-
-    xml_print_to_transact_tag(stype, true);
-
-    return;
-  }
-
-  // normal install summary
-  for (KindToResObjectSet::const_iterator it = summset.begin();
-      it != summset.end(); ++it)
-  {
-    string title;
-    switch (stype)
-    {
-    case TO_UPGRADE:
-      if (it->first == ResKind::package)
-        title = _PL(
-          "The following package is going to be upgraded:",
-          "The following packages are going to be upgraded:",
-          it->second.size());
-      else if (it->first == ResKind::patch)
-        title = _PL(
-          "The following patch is going to be upgraded:",
-          "The following patches are going to be upgraded:",
-          it->second.size());
-      else if (it->first == ResKind::pattern)
-        title = _PL(
-          "The following pattern is going to be upgraded:",
-          "The following patterns are going to be upgraded:",
-          it->second.size());
-      else if (it->first == ResKind::product)
-        title = _PL(
-          "The following product is going to be upgraded:",
-          "The following products are going to be upgraded:",
-          it->second.size());
-      break;
-    case TO_DOWNGRADE:
-      if (it->first == ResKind::package)
-        title = _PL(
-          "The following package is going to be downgraded:",
-          "The following packages are going to be downgraded:",
-          it->second.size());
-      else if (it->first == ResKind::patch)
-        title = _PL(
-          "The following patch is going to be downgraded:",
-          "The following patches are going to be downgraded:",
-          it->second.size());
-      else if (it->first == ResKind::pattern)
-        title = _PL(
-          "The following pattern is going to be downgraded:",
-          "The following patterns are going to be downgraded:",
-          it->second.size());
-      else if (it->first == ResKind::product)
-        title = _PL(
-          "The following product is going to be downgraded:",
-          "The following products are going to be downgraded:",
-          it->second.size());
-      break;
-    case TO_INSTALL:
-      if (it->first == ResKind::package)
-        title = _PL(
-          "The following NEW package is going to be installed:",
-          "The following NEW packages are going to be installed:",
-          it->second.size());
-      else if (it->first == ResKind::patch)
-        title = _PL(
-          "The following NEW patch is going to be installed:",
-          "The following NEW patches are going to be installed:",
-          it->second.size());
-      else if (it->first == ResKind::pattern)
-        title = _PL(
-          "The following NEW pattern is going to be installed:",
-          "The following NEW patterns are going to be installed:",
-          it->second.size());
-      else if (it->first == ResKind::product)
-        title = _PL(
-          "The following NEW product is going to be installed:",
-          "The following NEW products are going to be installed:",
-          it->second.size());
-      else if (it->first == ResKind::srcpackage)
-        title = _PL(
-          "The following source package is going to be installed:",
-          "The following source packages are going to be installed:",
-          it->second.size());
-      break;
-    case TO_REINSTALL:
-      if (it->first == ResKind::package)
-        title = _PL(
-          "The following package is going to be reinstalled:",
-          "The following packages are going to be reinstalled:",
-          it->second.size());
-      else if (it->first == ResKind::patch)
-        title = _PL(
-          "The following patch is going to be reinstalled:",
-          "The following patches are going to be reinstalled:",
-          it->second.size());
-      else if (it->first == ResKind::pattern)
-        title = _PL(
-          "The following pattern is going to be reinstalled:",
-          "The following patterns are going to be reinstalled:",
-          it->second.size());
-      else if (it->first == ResKind::product)
-        title = _PL(
-          "The following product is going to be reinstalled:",
-          "The following products are going to be reinstalled:",
-          it->second.size());
-      break;
-    case TO_REMOVE:
-      if (it->first == ResKind::package)
-        title = _PL(
-          "The following package is going to be REMOVED:",
-          "The following packages are going to be REMOVED:",
-          it->second.size());
-      else if (it->first == ResKind::patch)
-        title = _PL(
-          "The following patch is going to be REMOVED:",
-          "The following patches are going to be REMOVED:",
-          it->second.size());
-      else if (it->first == ResKind::pattern)
-        title = _PL(
-          "The following pattern is going to be REMOVED:",
-          "The following patterns are going to be REMOVED:",
-          it->second.size());
-      else if (it->first == ResKind::product)
-        title = _PL(
-          "The following product is going to be REMOVED:",
-          "The following products are going to be REMOVED:",
-          it->second.size());
-      break;
-    case TO_CHANGE_ARCH:
-      if (it->first == ResKind::package)
-        title = _PL(
-          "The following package is going to change architecture:",
-          "The following packages are going to change architecture:",
-          it->second.size());
-      else if (it->first == ResKind::patch)
-        title = _PL(
-          "The following patch is going to change architecture:",
-          "The following patches are going to change architecture:",
-          it->second.size());
-      else if (it->first == ResKind::pattern)
-        title = _PL(
-          "The following pattern is going to change architecture:",
-          "The following patterns are going to change architecture:",
-          it->second.size());
-      else if (it->first == ResKind::product)
-        title = _PL(
-          "The following product is going to change architecture:",
-          "The following products are going to change architecture:",
-          it->second.size());
-      break;
-    case TO_CHANGE_VENDOR:
-      if (it->first == ResKind::package)
-        title = _PL(
-          "The following package is going to change vendor:",
-          "The following packages are going to change vendor:",
-          it->second.size());
-      else if (it->first == ResKind::patch)
-        title = _PL(
-          "The following patch is going to change vendor:",
-          "The following patches are going to change vendor:",
-          it->second.size());
-      else if (it->first == ResKind::pattern)
-        title = _PL(
-          "The following pattern is going to change vendor:",
-          "The following patterns are going to change vendor:",
-          it->second.size());
-      else if (it->first == ResKind::product)
-        title = _PL(
-          "The following product is going to change vendor:",
-          "The following products are going to change vendor:",
-          it->second.size());
-      break;
-    case UNSUPPORTED:
-      // we only look vendor support in packages
-      if (it->first == ResKind::package)
-        title = _PL(
-          "The following package is not supported by its vendor:",
-          "The following packages are not supported by their vendor:",
-          it->second.size());
-      break;
-    }
-
-    show_summary_resolvable_list(title, it, zypper.out());
-  }
-}
 
 enum
 {
@@ -553,51 +210,27 @@ enum
  */
 static int summary(Zypper & zypper)
 {
+  Summary::ViewOptions options = Summary::DEFAULT;
+
+  // if running on SUSE Linux Enterprise, report unsupported packages
+  Product::constPtr platform = God->target()->baseProduct();
+  if (platform && platform->name().find("SUSE_SLE") != string::npos)
+    options = (Summary::ViewOptions) (options | Summary::SHOW_UNSUPPORTED);
+
+  Summary summary(God->pool(), options);
+
+  // set return value to 'reboot needed'
+  if (summary.needMachineReboot())
+    zypper.setExitCode(ZYPPER_EXIT_INF_REBOOT_NEEDED);
+  // set return value to 'restart needed' (restart of package manager)
+  // however, 'reboot needed' takes precedence
+  else if (zypper.exitCode() != ZYPPER_EXIT_INF_REBOOT_NEEDED && summary.needPkgMgrRestart())
+    zypper.setExitCode(ZYPPER_EXIT_INF_RESTART_NEEDED);
+
   int retv = SUMMARY_NOTHING_TO_DO;
-
-  MIL << "Pool contains " << God->pool().size() << " items." << std::endl;
-  DBG << "Install summary:" << endl;
-
-  KindToResObjectSet to_be_installed;
-  KindToResObjectSet to_be_removed;
-
-  // collect resolvables to be installed/removed and set the return status
-  for ( ResPool::const_iterator it = God->pool().begin(); it != God->pool().end(); ++it )
-  {
-    ResObject::constPtr res = it->resolvable();
-    if ( it->status().isToBeInstalled() || it->status().isToBeUninstalled() )
-    {
-      if (it->resolvable()->kind() == ResKind::patch)
-      {
-        Patch::constPtr patch = asKind<Patch>(it->resolvable());
-
-        // set return value to 'reboot needed'
-        if (patch->rebootSuggested())
-          zypper.setExitCode(ZYPPER_EXIT_INF_REBOOT_NEEDED);
-        // set return value to 'restart needed' (restart of package manager)
-        // however, 'reboot needed' takes precedence
-        else if (zypper.exitCode() != ZYPPER_EXIT_INF_REBOOT_NEEDED && patch->restartSuggested())
-          zypper.setExitCode(ZYPPER_EXIT_INF_RESTART_NEEDED);
-      }
-
-      if ( it->status().isToBeInstalled()  )
-      {
-        DBG << "<install>   ";
-        to_be_installed[it->resolvable()->kind()].insert(it->resolvable());
-      }
-      if ( it->status().isToBeUninstalled() )
-      {
-        DBG << "<uninstall> ";
-        to_be_removed[it->resolvable()->kind()].insert(it->resolvable());
-      }
-      DBG << *res << endl;
-    }
-  }
-
-  if (!to_be_removed.empty() || !to_be_installed.empty())
+  if (summary.packagesToGetAndInstall() || summary.packagesToRemove())
     retv = SUMMARY_OK;
-
-  if (retv == SUMMARY_NOTHING_TO_DO && zypper.runtimeData().srcpkgs_to_install.empty())
+  else
   {
     if (zypper.command() == ZypperCommand::VERIFY)
       zypper.out().info(_("Dependencies of all installed packages are satisfied."));
@@ -610,180 +243,23 @@ static int summary(Zypper & zypper)
     zypper.out().info(_("Some of the dependencies of installed packages are broken."
         " In order to fix these dependencies, the following actions need to be taken:"));
 
-  // total packages to download&install.
-  zypper.runtimeData().commit_pkgs_total;
-  for (KindToResObjectSet::const_iterator it = to_be_installed.begin();
-      it != to_be_installed.end(); ++it)
-    zypper.runtimeData().commit_pkgs_total += it->second.size();
+  // total packages to download & install. To be used to write overall progress.
+  zypper.runtimeData().commit_pkgs_total = summary.packagesToGetAndInstall();
   zypper.runtimeData().commit_pkg_current = 0;
 
-  KindToResObjectSet toinstall;
-  KindToResObjectSet toupgrade;
-  KindToResObjectSet todowngrade;
-  KindToResObjectSet toreinstall;
-  KindToResObjectSet toremove;
-  KindToResObjectSet tochangearch;
-  KindToResObjectSet tochangevendor;
-  // objects from previous lists that
-  // are not supported
-  KindToResObjectSet tounsupported;
-
-  // iterate the to_be_installed to find installs/upgrades/downgrades + size info
-  ByteCount download_size, new_installed_size;
-
-  for (KindToResObjectSet::const_iterator it = to_be_installed.begin();
-      it != to_be_installed.end(); ++it)
-  {
-    for (set<ResObject::constPtr>::const_iterator resit = it->second.begin();
-        resit != it->second.end(); ++resit)
-    {
-      ResObject::constPtr res(*resit);
-
-      // FIXME asKind not working?
-      Package::constPtr pkg = asKind<Package>(res);
-      if ( pkg )
-      {
-          // FIXME refactor with libzypp Package::vendorSupportAvailable()
-
-          if ( pkg->maybeUnsupported() )
-              tounsupported[res->kind()].insert(res);
-      }
-
-      // find in to_be_removed:
-      bool upgrade_downgrade = false;
-      for (set<ResObject::constPtr>::iterator rmit = to_be_removed[res->kind()].begin();
-          rmit != to_be_removed[res->kind()].end(); ++rmit)
-      {
-        if (res->name() == (*rmit)->name())
-        {
-          // upgrade
-          if (res->edition() > (*rmit)->edition())
-          {
-            toupgrade[res->kind()].insert(res);
-            if (res->arch() != (*rmit)->arch())
-              tochangearch[res->kind()].insert(res);
-            if (res->vendor() != (*rmit)->vendor())
-              tochangevendor[res->kind()].insert(res);
-          }
-          // reinstall
-          else if (res->edition() == (*rmit)->edition())
-          {
-            toreinstall[res->kind()].insert(res);
-            if (res->arch() != (*rmit)->arch())
-              tochangearch[res->kind()].insert(res);
-            if (res->vendor() != (*rmit)->vendor())
-              tochangevendor[res->kind()].insert(res);
-          }
-          // downgrade
-          else
-          {
-            todowngrade[res->kind()].insert(res);
-            if (res->arch() != (*rmit)->arch())
-              tochangearch[res->kind()].insert(res);
-            if (res->vendor() != (*rmit)->vendor())
-              tochangevendor[res->kind()].insert(res);
-          }
-
-          new_installed_size += res->installSize() - (*rmit)->installSize();
-
-          to_be_removed[res->kind()].erase(*rmit);
-          upgrade_downgrade = true;
-          break;
-        }
-      }
-
-      if (!upgrade_downgrade)
-      {
-        toinstall[res->kind()].insert(res);
-        new_installed_size += res->installSize();
-      }
-
-      download_size += res->downloadSize();
-    }
-  }
-
-  bool toremove_by_solver = false;
-  for (KindToResObjectSet::const_iterator it = to_be_removed.begin();
-      it != to_be_removed.end(); ++it)
-    for (set<ResObject::constPtr>::const_iterator resit = it->second.begin();
-        resit != it->second.end(); ++resit)
-    {
-      /** \todo this does not work
-      if (!toremove_by_solver)
-      {
-        PoolItem pi(*resit);
-        if (pi.status() == ResStatus::SOLVER)
-          toremove_by_solver = true;
-      }*/
-      toremove[it->first].insert(*resit);
-      new_installed_size -= (*resit)->installSize();
-    }
-
-  for (list<SrcPackage::constPtr>::const_iterator it = zypper.runtimeData().srcpkgs_to_install.begin();
-      it != zypper.runtimeData().srcpkgs_to_install.end(); ++it)
-    toinstall[ResKind::srcpackage].insert(*it);
-
-  if (!toremove.empty() && (
+  if (summary.packagesToRemove() && (
       zypper.command() == ZypperCommand::INSTALL ||
       zypper.command() == ZypperCommand::UPDATE))
     retv = SUMMARY_INSTALL_DOES_REMOVE;
-  else if ((!toinstall.empty() || toremove_by_solver)
+  else if (summary.packagesToGetAndInstall()
       && zypper.command() == ZypperCommand::REMOVE)
     retv = SUMMARY_REMOVE_DOES_INSTALL;
 
-  // "</install-summary>"
+  // show the summary
   if (zypper.out().type() == Out::TYPE_XML)
-  {
-    cout << "<install-summary";
-    cout << " download-size=\"" << ((ByteCount::SizeType) download_size) << "\"";
-    cout << " space-usage-diff=\"" << ((ByteCount::SizeType) new_installed_size) << "\"";
-    cout << ">" << endl;
-  }
-
-  // show summary
-  show_summary_of_type(zypper, TO_UPGRADE, toupgrade);
-  show_summary_of_type(zypper, TO_DOWNGRADE, todowngrade);
-  show_summary_of_type(zypper, TO_INSTALL, toinstall);
-  show_summary_of_type(zypper, TO_REINSTALL, toreinstall);
-  show_summary_of_type(zypper, TO_REMOVE, toremove);
-  show_summary_of_type(zypper, TO_CHANGE_ARCH, tochangearch);
-  show_summary_of_type(zypper, TO_CHANGE_VENDOR, tochangevendor);
-  // if running on SUSE Linux Enterprise, report unsupported packages
-  Product::constPtr platform = God->target()->baseProduct();
-  if (platform && platform->name().find("SUSE_SLE") != string::npos)
-    show_summary_of_type(zypper, UNSUPPORTED, tounsupported);
-
-  // "</install-summary>"
-  if (zypper.out().type() == Out::TYPE_XML)
-    cout << "</install-summary>" << endl;
-
-  zypper.out().info("", Out::NORMAL, Out::TYPE_NORMAL); // visual separator
-
-  // count and download size info
-  ostringstream s;
-  if (download_size > 0)
-  {
-    s << format(_("Overall download size: %s.")) % download_size;
-    s << " ";
-  }
-  if (new_installed_size > 0)
-    // TrasnlatorExplanation %s will be substituted by a byte count e.g. 212 K
-    s << format(_("After the operation, additional %s will be used."))
-        % new_installed_size.asString(0,1,1);
-  else if (new_installed_size == 0)
-    s << _("No additional space will be used or freed after the operation.");
+    summary.dumpAsXmlTo(cout);
   else
-  {
-    // get the absolute size
-    ByteCount abs;
-    abs = (-new_installed_size);
-    // TrasnlatorExplanation %s will be substituted by a byte count e.g. 212 K
-    s << format(_("After the operation, %s will be freed."))
-        % abs.asString(0,1,1);
-  }
-  zypper.out().info(s.str());
-
-  MIL << "DONE" << endl;
+    summary.dumpTo(cout);
 
   return retv;
 }
