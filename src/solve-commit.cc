@@ -512,115 +512,117 @@ void solve_and_commit (Zypper & zypper)
         if (!confirm_licenses(zypper))
           return;
 
+        try
         {
+          RuntimeData & gData = Zypper::instance()->runtimeData();
+          gData.show_media_progress_hack = true;
+          // Total packages to download & install.
+          // To be used to write overall progress.
+          gData.commit_pkgs_total = summary.packagesToGetAndInstall();
+          gData.commit_pkg_current = 0;
+
+          ostringstream s;
+          s << _("committing"); MIL << "committing...";
+
+          ZYppCommitResult result;
+          if (copts.count("dry-run"))
+          {
+            s << " " << _("(dry run)") << endl; MIL << "(dry run)";
+            zypper.out().info(s.str(), Out::HIGH);
+
+            result = God->commit(ZYppCommitPolicy().dryRun(true));
+          }
+          else
+          {
+            zypper.out().info(s.str(), Out::HIGH);
+
+            result = God->commit(
+              ZYppCommitPolicy().syncPoolAfterCommit(zypper.runningShell()));
+
+            commit_done = true;
+          }
+
+
+          MIL << endl << "DONE" << endl;
+
+          gData.show_media_progress_hack = false;
+
+          if (!result._errors.empty())
+            zypper.setExitCode(ZYPPER_EXIT_ERR_ZYPP);
+
+          s.clear(); s << result;
+          zypper.out().info(s.str(), Out::HIGH);
+        }
+        catch ( const media::MediaException & e )
+        {
+          ZYPP_CAUGHT(e);
+          zypper.out().error(e,
+              _("Problem retrieving the package file from the repository:"),
+              _("Please see the above error message for a hint."));
+          zypper.setExitCode(ZYPPER_EXIT_ERR_ZYPP);
+          return;
+        }
+        catch ( zypp::repo::RepoException & e )
+        {
+          ZYPP_CAUGHT(e);
+
+          RepoManager manager(zypper.globalOpts().rm_options );
+
+          bool refresh_needed = false;
           try
           {
-            RuntimeData & gData = Zypper::instance()->runtimeData();
-            gData.show_media_progress_hack = true;
-            // Total packages to download & install.
-            // To be used to write overall progress.
-            gData.commit_pkgs_total = summary.packagesToGetAndInstall();
-            gData.commit_pkg_current = 0;
-
-            ostringstream s;
-            s << _("committing"); MIL << "committing...";
-
-            ZYppCommitResult result;
-            if (copts.count("dry-run"))
-            {
-              s << " " << _("(dry run)") << endl; MIL << "(dry run)";
-              zypper.out().info(s.str(), Out::HIGH);
-
-              result = God->commit(ZYppCommitPolicy().dryRun(true));
-            }
-            else
-            {
-              zypper.out().info(s.str(), Out::HIGH);
-
-              result = God->commit(
-                ZYppCommitPolicy().syncPoolAfterCommit(zypper.runningShell()));
-
-              commit_done = true;
-            }
-
-
-            MIL << endl << "DONE" << endl;
-
-            gData.show_media_progress_hack = false;
-
-            if (!result._errors.empty())
-              zypper.setExitCode(ZYPPER_EXIT_ERR_ZYPP);
-
-            s.clear(); s << result;
-            zypper.out().info(s.str(), Out::HIGH);
-          }
-          catch ( const media::MediaException & e ) {
-            ZYPP_CAUGHT(e);
-            zypper.out().error(e,
-                _("Problem retrieving the package file from the repository:"),
-                _("Please see the above error message for a hint."));
-            zypper.setExitCode(ZYPPER_EXIT_ERR_ZYPP);
-            return;
-          }
-          catch ( zypp::repo::RepoException & e ) {
-            ZYPP_CAUGHT(e);
-
-            RepoManager manager(zypper.globalOpts().rm_options );
-
-            bool refresh_needed = false;
-            try
-            {
-              for(RepoInfo::urls_const_iterator it = e.info().baseUrlsBegin();
-                        it != e.info().baseUrlsEnd(); ++it)
+            for(RepoInfo::urls_const_iterator it = e.info().baseUrlsBegin();
+                      it != e.info().baseUrlsEnd(); ++it)
+              {
+                RepoManager::RefreshCheckStatus stat = manager.
+                              checkIfToRefreshMetadata(e.info(), *it,
+                              RepoManager::RefreshForced );
+                if ( stat == RepoManager::REFRESH_NEEDED )
                 {
-                  RepoManager::RefreshCheckStatus stat = manager.
-                                checkIfToRefreshMetadata(e.info(), *it,
-                                RepoManager::RefreshForced );
-                  if ( stat == RepoManager::REFRESH_NEEDED )
-                  {
-                    refresh_needed = true;
-                    break;
-                  }
+                  refresh_needed = true;
+                  break;
                 }
-            }
-            catch (const Exception &)
-            { DBG << "check if to refresh exception caught, ignoring" << endl; }
+              }
+          }
+          catch (const Exception &)
+          { DBG << "check if to refresh exception caught, ignoring" << endl; }
 
-            std::string hint = _("Please see the above error message for a hint.");
-            if (refresh_needed)
-            {
-              hint = boost::str(format(
-                  // translators: the first %s is 'zypper refresh' and the second
-                  // is repo allias
-                  _("Repository '%s' is out of date. Running '%s' might help.")) %
-                  e.info().alias() % "zypper refresh" );
-            }
-            zypper.out().error(e,
-                _("Problem retrieving the package file from the repository:"),
-                hint);
-            zypper.setExitCode(ZYPPER_EXIT_ERR_ZYPP);
-            return;
+          std::string hint = _("Please see the above error message for a hint.");
+          if (refresh_needed)
+          {
+            hint = boost::str(format(
+                // translators: the first %s is 'zypper refresh' and the second
+                // is repo allias
+                _("Repository '%s' is out of date. Running '%s' might help.")) %
+                e.info().alias() % "zypper refresh" );
           }
-          catch ( const zypp::FileCheckException & e ) {
-            ZYPP_CAUGHT(e);
-            zypper.out().error(e,
-                _("The package integrity check failed. This may be a problem"
-                " with the repository or media. Try one of the following:\n"
-                "\n"
-                "- just retry previous command\n"
-                "- refresh the repositories using 'zypper refresh'\n"
-                "- use another installation medium (if e.g. damaged)\n"
-                "- use another repository"));
-            zypper.setExitCode(ZYPPER_EXIT_ERR_ZYPP);
-            return;
-          }
-          catch ( const Exception & e ) {
-            ZYPP_CAUGHT(e);
-            zypper.out().error(e,
-                _("Problem occured during or after installation or removal of packages:"),
-                _("Please see the above error message for a hint."));
-            zypper.setExitCode(ZYPPER_EXIT_ERR_ZYPP);
-          }
+          zypper.out().error(e,
+              _("Problem retrieving the package file from the repository:"),
+              hint);
+          zypper.setExitCode(ZYPPER_EXIT_ERR_ZYPP);
+          return;
+        }
+        catch ( const zypp::FileCheckException & e )
+        {
+          ZYPP_CAUGHT(e);
+          zypper.out().error(e,
+              _("The package integrity check failed. This may be a problem"
+              " with the repository or media. Try one of the following:\n"
+              "\n"
+              "- just retry previous command\n"
+              "- refresh the repositories using 'zypper refresh'\n"
+              "- use another installation medium (if e.g. damaged)\n"
+              "- use another repository"));
+          zypper.setExitCode(ZYPPER_EXIT_ERR_ZYPP);
+          return;
+        }
+        catch ( const Exception & e )
+        {
+          ZYPP_CAUGHT(e);
+          zypper.out().error(e,
+              _("Problem occured during or after installation or removal of packages:"),
+              _("Please see the above error message for a hint."));
+          zypper.setExitCode(ZYPPER_EXIT_ERR_ZYPP);
         }
 
         // install any pending source packages
