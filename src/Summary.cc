@@ -36,10 +36,9 @@ bool Summary::ResPairNameCompare::operator()(
 // --------------------------------------------------------------------------
 
 Summary::Summary(const zypp::ResPool & pool, const ViewOptions options)
-  : _pool(pool), _viewop(options), _wrap_width(80)
+  : _viewop(options), _wrap_width(80)
 {
-  MIL << "Pool contains " << _pool.size() << " items." << std::endl;
-  readPool();
+  readPool(pool);
 }
 
 // --------------------------------------------------------------------------
@@ -59,7 +58,7 @@ typedef std::map<
 
 // --------------------------------------------------------------------------
 
-void Summary::readPool()
+void Summary::readPool(const zypp::ResPool & pool)
 {
   // reset stats
   _need_reboot = false;
@@ -74,9 +73,10 @@ void Summary::readPool()
   KindToResObjectSet to_be_installed;
   KindToResObjectSet to_be_removed;
 
+  MIL << "Pool contains " << pool.size() << " items." << std::endl;
   DBG << "Install summary:" << endl;
 
-  for (ResPool::const_iterator it = _pool.begin(); it != _pool.end(); ++it)
+  for (ResPool::const_iterator it = pool.begin(); it != pool.end(); ++it)
   {
     if (it->status().isToBeInstalled() || it->status().isToBeUninstalled())
     {

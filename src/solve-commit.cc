@@ -192,79 +192,6 @@ static bool show_problems(Zypper & zypper)
   return retry;
 }
 
-
-enum
-{
-  SUMMARY_OK = 0,
-  SUMMARY_NOTHING_TO_DO,
-  SUMMARY_INSTALL_DOES_REMOVE,
-  SUMMARY_REMOVE_DOES_INSTALL
-};
-
-/**
- * sets zypper exit code to:
- *  ZYPPER_EXIT_INF_REBOOT_NEEDED - if one of patches to be installed needs machine reboot,
- *  ZYPPER_EXIT_INF_RESTART_NEEDED - if one of patches to be installed needs package manager restart
- *
- * @return SUMMARY_*
- */
-static int summary(Zypper & zypper)
-{
-  Summary::ViewOptions options = Summary::DEFAULT;
-
-  // if running on SUSE Linux Enterprise, report unsupported packages
-  Product::constPtr platform = God->target()->baseProduct();
-  if (platform && platform->name().find("SUSE_SLE") != string::npos)
-    options = (Summary::ViewOptions) (options | Summary::SHOW_UNSUPPORTED);
-
-  Summary summary(God->pool(), options);
-
-  // set return value to 'reboot needed'
-  if (summary.needMachineReboot())
-    zypper.setExitCode(ZYPPER_EXIT_INF_REBOOT_NEEDED);
-  // set return value to 'restart needed' (restart of package manager)
-  // however, 'reboot needed' takes precedence
-  else if (zypper.exitCode() != ZYPPER_EXIT_INF_REBOOT_NEEDED && summary.needPkgMgrRestart())
-    zypper.setExitCode(ZYPPER_EXIT_INF_RESTART_NEEDED);
-
-  int retv = SUMMARY_NOTHING_TO_DO;
-  if (summary.packagesToGetAndInstall() || summary.packagesToRemove())
-    retv = SUMMARY_OK;
-  else
-  {
-    if (zypper.command() == ZypperCommand::VERIFY)
-      zypper.out().info(_("Dependencies of all installed packages are satisfied."));
-    else
-      zypper.out().info(_("Nothing to do."));
-    return retv;
-  }
-
-  if (zypper.command() == ZypperCommand::VERIFY)
-    zypper.out().info(_("Some of the dependencies of installed packages are broken."
-        " In order to fix these dependencies, the following actions need to be taken:"));
-
-  // total packages to download & install. To be used to write overall progress.
-  zypper.runtimeData().commit_pkgs_total = summary.packagesToGetAndInstall();
-  zypper.runtimeData().commit_pkg_current = 0;
-
-  if (summary.packagesToRemove() && (
-      zypper.command() == ZypperCommand::INSTALL ||
-      zypper.command() == ZypperCommand::UPDATE))
-    retv = SUMMARY_INSTALL_DOES_REMOVE;
-  else if (summary.packagesToGetAndInstall()
-      && zypper.command() == ZypperCommand::REMOVE)
-    retv = SUMMARY_REMOVE_DOES_INSTALL;
-
-  // show the summary
-  if (zypper.out().type() == Out::TYPE_XML)
-    summary.dumpAsXmlTo(cout);
-  else
-    summary.dumpTo(cout);
-
-  return retv;
-}
-
-
 static void dump_pool ()
 {
   int count = 1;
@@ -428,6 +355,9 @@ static void make_solver_test_case(Zypper & zypper)
 // ----------------------------------------------------------------------------
 
 /**
+ * Calls the appropriate solver function with flags according to current
+ * command and options, show the summary, and commits.
+ *
  * @return ZYPPER_EXIT_OK - successful commit,
  *  ZYPPER_EXIT_ERR_ZYPP - if ZYppCommitResult contains resolvables with errors,
  *  ZYPPER_EXIT_INF_REBOOT_NEEDED - if one of patches to be installed needs machine reboot,
@@ -439,6 +369,8 @@ void solve_and_commit (Zypper & zypper)
   bool commit_done = false;
   do
   {
+    // CALL SOLVER
+
     // e.g. doUpdate unsets this flag, no need for another solving
     if (zypper.runtimeData().solve_before_commit)
     {
@@ -483,10 +415,30 @@ void solve_and_commit (Zypper & zypper)
 
     MIL << "got solution, showing summary" << endl;
 
-    // returns SUMMARY_*
-    int retv = summary(zypper);
-    if (retv != SUMMARY_NOTHING_TO_DO || !zypper.runtimeData().srcpkgs_to_install.empty())
+    // SHOW SUMMARY
+
+    Summary summary(God->pool());
+
+    // if running on SUSE Linux Enterprise, report unsupported packages
+    Product::constPtr platform = God->target()->baseProduct();
+    if (platform && platform->name().find("SUSE_SLE") != string::npos)
+      summary.setViewOption(Summary::SHOW_UNSUPPORTED);
+
+    // show the summary
+    if (zypper.out().type() == Out::TYPE_XML)
+      summary.dumpAsXmlTo(cout);
+    else
+      summary.dumpTo(cout);
+
+
+    if (summary.packagesToGetAndInstall() ||
+        summary.packagesToRemove() ||
+        !zypper.runtimeData().srcpkgs_to_install.empty())
     {
+      if (zypper.command() == ZypperCommand::VERIFY)
+        zypper.out().info(_("Some of the dependencies of installed packages are broken."
+            " In order to fix these dependencies, the following actions need to be taken:"));
+
       // check root user
       if (zypper.command() == ZypperCommand::VERIFY && geteuid() != 0
         && !zypper.globalOpts().changedRoot)
@@ -497,9 +449,18 @@ void solve_and_commit (Zypper & zypper)
         return;
       }
 
+      // PROMPT
+
+      bool show_p_option =
+        (summary.packagesToRemove() && (
+          zypper.command() == ZypperCommand::INSTALL ||
+          zypper.command() == ZypperCommand::UPDATE))
+        ||
+        (summary.packagesToGetAndInstall() &&
+          zypper.command() == ZypperCommand::REMOVE);
+
       bool do_commit = false;
-      if (zypper.runtimeData().force_resolution &&
-          (retv == SUMMARY_INSTALL_DOES_REMOVE || retv == SUMMARY_REMOVE_DOES_INSTALL))
+      if (zypper.runtimeData().force_resolution && show_p_option)
       {
         PromptOptions popts;
         // translators: Yes / No / show Problems. This prompt will appear
@@ -544,17 +505,22 @@ void solve_and_commit (Zypper & zypper)
         show_forced_problems = false;
       }
 
+      // COMMIT
+
       if (do_commit)
       {
         if (!confirm_licenses(zypper))
           return;
 
-        if (retv >= 0)
         {
           try
           {
             RuntimeData & gData = Zypper::instance()->runtimeData();
             gData.show_media_progress_hack = true;
+            // Total packages to download & install.
+            // To be used to write overall progress.
+            gData.commit_pkgs_total = summary.packagesToGetAndInstall();
+            gData.commit_pkg_current = 0;
 
             ostringstream s;
             s << _("committing"); MIL << "committing...";
@@ -583,7 +549,7 @@ void solve_and_commit (Zypper & zypper)
             gData.show_media_progress_hack = false;
 
             if (!result._errors.empty())
-              retv = ZYPPER_EXIT_ERR_ZYPP;
+              zypper.setExitCode(ZYPPER_EXIT_ERR_ZYPP);
 
             s.clear(); s << result;
             zypper.out().info(s.str(), Out::HIGH);
@@ -656,28 +622,44 @@ void solve_and_commit (Zypper & zypper)
             zypper.setExitCode(ZYPPER_EXIT_ERR_ZYPP);
           }
         }
+
         // install any pending source packages
+        //! \todo This won't be necessary once we get a new solver flag
+        //! for installing source packages without their build deps
         if (!zypper.runtimeData().srcpkgs_to_install.empty())
           install_src_pkgs(zypper);
+
+        // set return value to 'reboot needed'
+        if (summary.needMachineReboot())
+        {
+          zypper.setExitCode(ZYPPER_EXIT_INF_REBOOT_NEEDED);
+          zypper.out().warning(
+            _("One of installed patches requires reboot of"
+              " your machine. Reboot as soon as possible."), Out::QUIET);
+        }
+        // set return value to 'restart needed' (restart of package manager)
+        // however, 'reboot needed' takes precedence
+        else if (zypper.exitCode() != ZYPPER_EXIT_INF_REBOOT_NEEDED && summary.needPkgMgrRestart())
+        {
+          zypper.setExitCode(ZYPPER_EXIT_INF_RESTART_NEEDED);
+          zypper.out().warning(
+            _("One of installed patches affects the package"
+              " manager itself. Run this command once more to install any other"
+              " needed patches."),
+            Out::QUIET, Out::TYPE_NORMAL); // don't show this to machines
+        }
       }
     }
     // noting to do
     else
+    {
+      if (zypper.command() == ZypperCommand::VERIFY)
+        zypper.out().info(_("Dependencies of all installed packages are satisfied."));
+      else
+        zypper.out().info(_("Nothing to do."));
+
       break;
+    }
   }
   while (show_forced_problems);
-
-  if (commit_done)
-  {
-    if (zypper.exitCode() == ZYPPER_EXIT_INF_REBOOT_NEEDED)
-      zypper.out().warning(
-        _("One of installed patches requires reboot of"
-          " your machine. Reboot as soon as possible."), Out::QUIET);
-    else if (zypper.exitCode() == ZYPPER_EXIT_INF_RESTART_NEEDED)
-      zypper.out().warning(
-        _("One of installed patches affects the package"
-          " manager itself. Run this command once more to install any other"
-          " needed patches."),
-        Out::QUIET, Out::TYPE_NORMAL); // don't show this to machines
-  }
 }

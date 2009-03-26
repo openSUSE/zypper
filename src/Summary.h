@@ -52,7 +52,14 @@ public:
   Summary(const zypp::ResPool & pool, const ViewOptions options = DEFAULT);
   ~Summary() {}
 
-  void readPool();
+  void setViewOptions(const ViewOptions options)
+  { _viewop = options; }
+  ViewOptions viewOptions() const
+  { return _viewop; }
+  void setViewOption(const ViewOptions option)
+  { _viewop = (ViewOptions) (_viewop | option); }
+  void unsetViewOption(const ViewOptions option)
+  { _viewop = (ViewOptions) (_viewop & ~option); }
 
   void writeNewlyInstalled(std::ostream & out);
   void writeRemoved(std::ostream & out);
@@ -85,11 +92,11 @@ public:
   void dumpAsXmlTo(std::ostream & out);
 
 private:
+  void readPool(const zypp::ResPool & pool);
   void writeResolvableList(std::ostream & out, const ResPairSet & resolvables);
   void writeXmlResolvableList(std::ostream & out, const KindToResPairSet & resolvables);
 
 private:
-  zypp::ResPool _pool;
   ViewOptions _viewop;
   mutable unsigned _wrap_width;
 
