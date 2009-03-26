@@ -18,10 +18,13 @@
 #include "zypp/base/Iterator.h"
 #include "zypp/base/Tr1hash.h"
 
+#include "zypp/sat/Solvable.h"
+
 ///////////////////////////////////////////////////////////////////
 namespace zypp
 { /////////////////////////////////////////////////////////////////
 
+  class PoolItem;
   class asPoolItem; // transform functor
 
   namespace ui
@@ -34,6 +37,7 @@ namespace zypp
   { /////////////////////////////////////////////////////////////////
 
     class Solvable;
+    class asSolvable; // transform functor
 
     namespace solvitermixin_detail
     {
@@ -52,6 +56,8 @@ namespace zypp
         {}
         shared_ptr<Uset> _uset;
       };
+
+
     } // namespace solvitermixin_detail
 
 
@@ -66,6 +72,10 @@ namespace zypp
      *
      * \ref SolvIterMixin will then provide iterators over the corresponding
      * \ref PoolItem and \ref ui::Selectable_Ptr.
+     *
+     * \ref SolvIterMixin will also provide default implementations for \ref empty
+     * and \ref size by iterating from \c begin to \c end. In case \c Derived is
+     * able to provide a more efficient implementation, the methods should be overloaded.
      *
      * \code
      *     namespace detail
@@ -105,6 +115,35 @@ namespace zypp
     template <class Derived,class DerivedSolvable_iterator>
     class SolvIterMixin
     {
+      public:
+	typedef size_t size_type;
+
+      public:
+        /** \name Convenience methods.
+         * In case \c Derived is able to provide a more efficient implementation,
+	 * the methods should be overloaded.
+	 */
+        //@{
+	/** Whether the collection is epmty. */
+        bool empty() const
+        { return( self().begin() == self().end() ); }
+
+        /** Size of the collection. */
+        size_type size() const
+        { size_type s = 0; for_( it, self().begin(), self().end() ) ++s; return s;}
+
+	/** Whether collection contains a specific \ref Solvable. */
+	template<class _Solv>
+	bool contains( const _Solv & solv_r ) const
+	{
+	  Solvable solv( asSolvable()( solv_r ) );
+	  for_( it, self().begin(), self().end() )
+	    if ( *it == solv )
+	      return true;
+	  return false;
+	}
+	//@}
+
       public:
         /** \name Iterate as Solvable */
         //@{
