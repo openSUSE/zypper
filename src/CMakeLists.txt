@@ -21,6 +21,7 @@ SET (zypper_HEADERS
   install.h
   update.h
   solve-commit.h
+  Summary.h
   callbacks/keyring.h
   callbacks/media.h
   callbacks/rpm.h
@@ -41,6 +42,7 @@ SET( zypper_SRCS
   install.cc
   update.cc
   solve-commit.cc
+  Summary.cc
   ${zypper_HEADERS}
 )
 
@@ -68,7 +70,6 @@ SET( zypper_utils_HEADERS
   utils/pager.h
   utils/prompt.h
   utils/richtext.h
-  utils/Summary.h
   utils/text.h
 )
 
@@ -81,7 +82,6 @@ SET( zypper_utils_SRCS
   utils/pager.cc
   utils/prompt.cc
   utils/richtext.cc
-  utils/Summary.cc
   utils/text.cc
   ${zypper_utils_HEADERS}
 )

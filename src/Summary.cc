@@ -19,7 +19,7 @@
 #include "utils/text.h"
 #include "utils/misc.h"
 
-#include "utils/Summary.h"
+#include "Summary.h"
 
 using namespace std;
 using namespace zypp;

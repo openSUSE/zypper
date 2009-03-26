@@ -23,7 +23,7 @@
 #include "utils/misc.h"
 #include "utils/getopt.h"
 #include "utils/prompt.h"
-#include "utils/Summary.h"
+#include "Summary.h"
 
 #include "solve-commit.h"
 
