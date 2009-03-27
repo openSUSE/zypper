@@ -307,7 +307,7 @@ void Summary::writeNewlyInstalled(ostream & out)
 
 void Summary::writeRemoved(ostream & out)
 {
-  for_(it, toupgrade.begin(), toupgrade.end())
+  for_(it, toremove.begin(), toremove.end())
   {
     string label;
     if (it->first == ResKind::package)
@@ -593,6 +593,7 @@ void Summary::dumpTo(ostream & out)
   writeChangedVendor(out);
   if (_viewop & SHOW_UNSUPPORTED)
     writeUnsupported(out);
+  out << endl;
   //! \todo write package counts
   writeDownloadAndInstalledSizeSummary(out);
 }
