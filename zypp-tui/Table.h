@@ -21,7 +21,7 @@ using std::vector;
 
 //! table drawing style
 enum TableStyle {
-  Ascii,			///< | - +
+  Ascii         = 0,           ///< | - +
   Light,
   Heavy,
   Double,
@@ -31,7 +31,8 @@ enum TableStyle {
   LightDouble,
   HeavyLight,
   DoubleLight,
-  _End,				///< sentinel
+  none,
+  _End,			       ///< sentinel
 };
 
 class TableRow {
@@ -50,7 +51,7 @@ public:
   void dumbDumpTo (ostream &stream) const;
   //! output with field widths
   void dumpTo (ostream &stream, const vector<unsigned>& widths,
-	       TableStyle st) const;
+	       TableStyle st, unsigned margin) const;
 
   typedef vector<string> container;
 
@@ -94,6 +95,7 @@ public:
   void style (TableStyle st);
   void sort (unsigned by_column);	// columns start with 0...
   void allowAbbrev(unsigned column);
+  void margin(unsigned margin);
 
   Table ();
 
@@ -116,6 +118,8 @@ private:
   int _screen_width;
   //! whether to abbreviate the column if needed
   vector<bool> _abbrev_col;
+
+  unsigned _margin;
 };
 
 inline

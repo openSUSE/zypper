@@ -1,7 +1,6 @@
 #include <iostream>
 #include <cstring>
 #include <cstdlib>
-#include <readline/readline.h>
 
 #include "zypp/base/Logger.h"
 
@@ -55,8 +54,8 @@ void TableRow::dumbDumpTo (ostream &stream) const {
 }
 
 void TableRow::dumpTo (ostream &stream, const vector<unsigned>& widths,
-		       TableStyle st) const {
-  const char * vline = lines[st][0];
+		       TableStyle st, unsigned margin) const {
+  const char * vline = st != none ? lines[st][0] : "";
 
   unsigned int ssize = 0; // string size in columns
   bool seen_first = false;
@@ -65,6 +64,7 @@ void TableRow::dumpTo (ostream &stream, const vector<unsigned>& widths,
     e = _columns.end ();
 
   stream.setf (ios::left, ios::adjustfield);
+  stream << string(margin, ' ');
   for (unsigned c = 0; i != e ; ++i, ++c) {
     if (seen_first) {
       stream.width (0);
@@ -95,7 +95,8 @@ Table::Table() :
   _max_col (0),
   _width(0),
   _style (defaultStyle),
-  _screen_width(get_screen_width())
+  _screen_width(get_screen_width()),
+  _margin(0)
 {}
 
 void Table::add (const TableRow& tr) {
@@ -118,7 +119,11 @@ void Table::allowAbbrev(unsigned column) {
 }
 
 void Table::updateColWidths (const TableRow& tr) {
-  _width = -3;
+  // how much columns spearators add to the width of the table
+  int sepwidth = _style == none ? 2 : 3;
+  // initialize the width to -sepwidth (the first column does not have a line
+  // on the left)
+  _width = -sepwidth;
 
   TableRow::container::const_iterator
     i = tr._columns.begin (),
@@ -135,17 +140,19 @@ void Table::updateColWidths (const TableRow& tr) {
     if (max < cur)
       max = cur;
 
-    _width += max + 3;
+    _width += max + sepwidth;
   }
+  _width += _margin * 2;
 }
 
 void Table::dumpRule (ostream &stream) const {
-  const char * hline = lines[_style][1];
-  const char * cross = lines[_style][2];
+  const char * hline = _style != none ? lines[_style][1] : " ";
+  const char * cross = _style != none ? lines[_style][2] : " ";
 
   bool seen_first = false;
 
   stream.width (0);
+  stream << string(_margin, ' ');
   for (unsigned c = 0; c <= _max_col; ++c) {
     if (seen_first) {
       stream << hline << cross << hline;
@@ -173,7 +180,7 @@ void Table::dumpTo (ostream &stream) const {
   }
 
   if (_has_header) {
-    _header.dumpTo (stream, _max_width, _style);
+    _header.dumpTo (stream, _max_width, _style, _margin );
     dumpRule (stream);
   }
 
@@ -182,13 +189,20 @@ void Table::dumpTo (ostream &stream) const {
     e = _rows.end (),
     i;
   for (i = b; i != e; ++i) {
-    i->dumpTo (stream, _max_width, _style);
+    i->dumpTo (stream, _max_width, _style, _margin);
   }
 }
 
 void Table::style (TableStyle st) {
   if (st < _End)
     _style = st;
+}
+
+void Table::margin(unsigned margin) {
+  if (margin < (unsigned) (_screen_width/2))
+    _margin = margin;
+  else
+    ERR << "margin of " << margin << " is greater than half of the screen" << endl;
 }
 
 void Table::sort (unsigned by_column) {
