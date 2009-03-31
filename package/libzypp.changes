@@ -1,3 +1,10 @@
+-------------------------------------------------------------------
+Tue Mar 31 15:51:32 CEST 2009 - ma@suse.de
+
+- New zypp.conf option 'download.media_preference': Hint which media 
+  to prefer when installing packages (download vs. CD).
+- version 6.4.0 (2)
+
 ------------------------------------------------------------------
 Thu Mar 12 18:38:30 CET 2009 - ma@suse.de
 
