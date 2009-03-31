@@ -53,7 +53,8 @@ void TableRow::dumbDumpTo (ostream &stream) const {
   stream << endl;
 }
 
-void TableRow::dumpTo (ostream &stream, const Table & parent) const {
+void TableRow::dumpTo (ostream &stream, const Table & parent) const
+{
   const char * vline = parent._style != none ? lines[parent._style][0] : "";
 
   unsigned int ssize = 0; // string size in columns
@@ -64,13 +65,38 @@ void TableRow::dumpTo (ostream &stream, const Table & parent) const {
 
   stream.setf (ios::left, ios::adjustfield);
   stream << string(parent._margin, ' ');
-  for (unsigned c = 0; i != e ; ++i, ++c) {
-    if (seen_first) {
+  // current position at currently printed line
+  int curpos = parent._margin;
+  // whether to break the line now in order to wrap it to screen width
+  bool do_wrap = false;
+  for (unsigned c = 0; i != e ; ++i, ++c)
+  {
+    if (seen_first)
+    {
+      do_wrap =
+        // user requested wrapping
+        parent._do_wrap &&
+        // table is wider than screen
+        parent._width > parent._screen_width && (
+        // the next table column would exceed the screen size
+        curpos + parent._max_width[c] + (parent._style != none ? 2 : 3) > parent._screen_width ||
+        // or the user wishes to first break after the previous column
+        parent._force_break_after == c - 1);
+
+      if (do_wrap)
+      {
+        // start printing the next table columns to new line,
+        // indent by 2 console columns
+        stream << endl << string(parent._margin + 2, ' ');
+        curpos = parent._margin + 2; // indent == 2
+      }
+      else
+        // vertical line, padded with spaces
+        stream << ' ' << vline << ' ';
       stream.width (0);
-      // pad vertical line with spaces
-      stream << ' ' << vline << ' ';
     }
-    seen_first = true;
+    else
+      seen_first = true;
 
     // stream.width (widths[c]); // that does not work with multibyte chars
     const string & s = *i;
@@ -83,19 +109,22 @@ void TableRow::dumpTo (ostream &stream, const Table & parent) const {
       stream.width (parent._max_width[c] - ssize);
     }
     stream << "";
+    curpos += parent._max_width[c] + (parent._style != none ? 2 : 3);
   }
   stream << endl;
 }
 
 // ----------------------( Table )---------------------------------------------
 
-Table::Table() :
-  _has_header (false),
-  _max_col (0),
-  _width(0),
-  _style (defaultStyle),
-  _screen_width(get_screen_width()),
-  _margin(0)
+Table::Table()
+  : _has_header (false)
+  , _max_col (0)
+  , _width(0)
+  , _style (defaultStyle)
+  , _screen_width(get_screen_width())
+  , _margin(0)
+  , _force_break_after(-1)
+  , _do_wrap(false)
 {}
 
 void Table::add (const TableRow& tr) {
@@ -190,6 +219,13 @@ void Table::dumpTo (ostream &stream) const {
   for (i = b; i != e; ++i) {
     i->dumpTo (stream, *this);
   }
+}
+
+void Table::wrap(int force_break_after)
+{
+  if (force_break_after >= 0)
+    _force_break_after = force_break_after;
+  _do_wrap = true;
 }
 
 void Table::lineStyle (TableLineStyle st) {

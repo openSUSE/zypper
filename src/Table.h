@@ -83,18 +83,21 @@ TableRow& operator << (TableRow& tr, const string& s) {
   return tr;
 }
 
+
 class Table {
 public:
+  typedef list<TableRow> container;
+
   static TableLineStyle defaultStyle;
 
   void add (const TableRow& tr);
   void setHeader (const TableHeader& tr);
   void dumpTo (ostream& stream) const;
   bool empty () const { return _rows.empty(); }
-  typedef list<TableRow> container;
+  void sort (unsigned by_column);       // columns start with 0...
 
   void lineStyle (TableLineStyle st);
-  void sort (unsigned by_column);	// columns start with 0...
+  void wrap(int force_break_after = -1);
   void allowAbbrev(unsigned column);
   void margin(unsigned margin);
 
@@ -122,6 +125,11 @@ private:
   vector<bool> _abbrev_col;
   //! left/right margin in number of spaces
   unsigned _margin;
+  //! if _do_wrap is set, first break the table at this column;
+  //! If negative, wrap as needed.
+  int _force_break_after;
+  //! Whether to wrap the table if it exceeds _screen_width
+  bool _do_wrap;
 
   friend class TableRow;
 };
