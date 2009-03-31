@@ -15,7 +15,7 @@
 
 using namespace std;
 
-TableStyle Table::defaultStyle = Ascii;
+TableLineStyle Table::defaultStyle = Ascii;
 
 static
 const char * lines[][3] = {
@@ -54,7 +54,7 @@ void TableRow::dumbDumpTo (ostream &stream) const {
 }
 
 void TableRow::dumpTo (ostream &stream, const vector<unsigned>& widths,
-		       TableStyle st, unsigned margin) const {
+		       TableLineStyle st, unsigned margin) const {
   const char * vline = st != none ? lines[st][0] : "";
 
   unsigned int ssize = 0; // string size in columns
@@ -193,7 +193,7 @@ void Table::dumpTo (ostream &stream) const {
   }
 }
 
-void Table::style (TableStyle st) {
+void Table::lineStyle (TableLineStyle st) {
   if (st < _End)
     _style = st;
 }
