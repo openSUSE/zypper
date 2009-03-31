@@ -35,6 +35,8 @@ enum TableLineStyle {
   _End,			       ///< sentinel
 };
 
+class Table;
+
 class TableRow {
 public:
   //! Constructor. Reserve place for c columns.
@@ -49,9 +51,8 @@ public:
 
   //! tab separated output
   void dumbDumpTo (ostream &stream) const;
-  //! output with field widths
-  void dumpTo (ostream &stream, const vector<unsigned>& widths,
-	       TableLineStyle st, unsigned margin) const;
+  //! output with \a parent table attributes
+  void dumpTo (ostream & stream, const Table & parent) const;
 
   typedef vector<string> container;
 
@@ -121,6 +122,8 @@ private:
   vector<bool> _abbrev_col;
   //! left/right margin in number of spaces
   unsigned _margin;
+
+  friend class TableRow;
 };
 
 inline
