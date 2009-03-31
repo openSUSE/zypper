@@ -53,9 +53,8 @@ void TableRow::dumbDumpTo (ostream &stream) const {
   stream << endl;
 }
 
-void TableRow::dumpTo (ostream &stream, const vector<unsigned>& widths,
-		       TableLineStyle st, unsigned margin) const {
-  const char * vline = st != none ? lines[st][0] : "";
+void TableRow::dumpTo (ostream &stream, const Table & parent) const {
+  const char * vline = parent._style != none ? lines[parent._style][0] : "";
 
   unsigned int ssize = 0; // string size in columns
   bool seen_first = false;
@@ -64,7 +63,7 @@ void TableRow::dumpTo (ostream &stream, const vector<unsigned>& widths,
     e = _columns.end ();
 
   stream.setf (ios::left, ios::adjustfield);
-  stream << string(margin, ' ');
+  stream << string(parent._margin, ' ');
   for (unsigned c = 0; i != e ; ++i, ++c) {
     if (seen_first) {
       stream.width (0);
@@ -76,12 +75,12 @@ void TableRow::dumpTo (ostream &stream, const vector<unsigned>& widths,
     // stream.width (widths[c]); // that does not work with multibyte chars
     const string & s = *i;
     ssize = string_to_columns (s);
-    if (ssize > widths[c])
-      stream << (s.substr(0, widths[c] - 2) + "->"); //! \todo FIXME cut at the correct place
+    if (ssize > parent._max_width[c])
+      stream << (s.substr(0, parent._max_width[c] - 2) + "->"); //! \todo FIXME cut at the correct place
     else
     {
       stream << s;
-      stream.width (widths[c] - ssize);
+      stream.width (parent._max_width[c] - ssize);
     }
     stream << "";
   }
@@ -180,7 +179,7 @@ void Table::dumpTo (ostream &stream) const {
   }
 
   if (_has_header) {
-    _header.dumpTo (stream, _max_width, _style, _margin );
+    _header.dumpTo (stream, *this);
     dumpRule (stream);
   }
 
@@ -189,7 +188,7 @@ void Table::dumpTo (ostream &stream) const {
     e = _rows.end (),
     i;
   for (i = b; i != e; ++i) {
-    i->dumpTo (stream, _max_width, _style, _margin);
+    i->dumpTo (stream, *this);
   }
 }
 
