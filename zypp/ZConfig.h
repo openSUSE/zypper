@@ -188,6 +188,23 @@ namespace zypp
       bool download_use_deltarpm_always() const;
 
       /**
+       * Hint which media to prefer when installing packages (download vs. CD).
+       * \see class \ref media::MediaPriority
+       */
+      bool download_media_prefer_download() const;
+      /** \overload */
+      bool download_media_prefer_volatile() const
+      { return ! download_media_prefer_download(); }
+      /**
+       * Set \ref download_media_prefer_download to a specific value.
+       */
+      void set_download_media_prefer_download( bool yesno_r );
+      /**
+       * Set \ref download_media_prefer_download to the configfiles default.
+       */
+      void set_default_download_media_prefer_download();
+
+      /**
        * Directory for equivalent vendor definitions  (configPath()/vendors.d)
        * \ingroup g_ZC_CONFIGFILES
        */

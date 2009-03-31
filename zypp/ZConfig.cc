@@ -134,6 +134,49 @@ namespace zypp
   } // namespace zypp
   ///////////////////////////////////////////////////////////////////
 
+  /** Mutable option with initial value. */
+  template<class _Tp, _Tp _Initial>
+      struct Option
+      {
+	typedef _Tp value_type;
+
+	Option()
+	  : _val( _Initial )
+	{}
+
+	value_type get() const
+	{ return _val; }
+
+	void set( const value_type & newval_r )
+	{ _val = newval_r; }
+
+	private:
+	  value_type _val;
+      };
+
+  /** Mutable option with initial value also remembering a config value. */
+  template<class _Tp, _Tp _Initial>
+      struct DefaultOption : public Option<_Tp,_Initial>
+      {
+	typedef _Tp                  value_type;
+	typedef Option<_Tp,_Initial> option_type;
+
+	void restoreDefault()
+	{ this->set( _default.get() ); }
+
+	void restoreDefault( const value_type & newval_r )
+	{ setDefault( newval_r ); restoreDefault(); }
+
+	value_type getDefault() const
+	{ return _default.get(); }
+
+	void setDefault( const value_type & newval_r )
+	{ _default.set( newval_r ); }
+
+	private:
+	  option_type _default;
+      };
+
   ///////////////////////////////////////////////////////////////////
   //
   //	CLASS NAME : ZConfig::Impl
@@ -247,6 +290,10 @@ namespace zypp
                 else if ( entry == "download.use_deltarpm.always" )
                 {
                   download_use_deltarpm_always = str::strToBool( value, download_use_deltarpm_always );
+                }
+		else if ( entry == "download.media_preference" )
+                {
+		  download_media_prefer_download.restoreDefault( str::compareCI( value, "volatile" ) != 0 );
                 }
                 else if ( entry == "download.max_concurrent_connections" )
                 {
@@ -380,6 +427,7 @@ namespace zypp
 
     bool download_use_deltarpm;
     bool download_use_deltarpm_always;
+    DefaultOption<bool,true> download_media_prefer_download;
 
     int download_max_concurrent_connections;
     int download_min_download_speed;
@@ -569,12 +617,21 @@ namespace zypp
   bool ZConfig::download_use_deltarpm_always() const
   { return download_use_deltarpm() && _pimpl->download_use_deltarpm_always; }
 
+  bool ZConfig::download_media_prefer_download() const
+  { return _pimpl->download_media_prefer_download.get(); }
+
+  void ZConfig::set_download_media_prefer_download( bool yesno_r )
+  { _pimpl->download_media_prefer_download.set( yesno_r ); }
+
+  void ZConfig::set_default_download_media_prefer_download()
+  { _pimpl->download_media_prefer_download.restoreDefault(); }
+
   long ZConfig::download_max_concurrent_connections() const
   { return _pimpl->download_max_concurrent_connections; }
-        
+
   long ZConfig::download_min_download_speed() const
   { return _pimpl->download_min_download_speed; }
-    
+
   long ZConfig::download_max_download_speed() const
   { return _pimpl->download_max_download_speed; }
 
