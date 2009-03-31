@@ -18,6 +18,7 @@
 #include "main.h"
 #include "utils/text.h"
 #include "utils/misc.h"
+#include "Table.h"
 
 #include "Summary.h"
 
@@ -237,33 +238,51 @@ void Summary::writeResolvableList(ostream & out, const ResPairSet & resolvables)
       s << resit->second->name() << " ";
     wrap_text(out, s.str(), 2, _wrap_width);
     out << endl;
+    return;
   }
-}
 
-// --------------------------------------------------------------------------
+  Table t; t.lineStyle(none); t.wrap(0); t.margin(2);
 
-// plus edition and architecture for verbose output
-/*
-if (out.verbosity() > Out::NORMAL)
-{
-  s << "-" << res->edition() << "." << res->arch();
-
-  const string & reponame =  res->repoInfo().name();
-  if (!res->vendor().empty() || !reponame.empty())
+  for (ResPairSet::const_iterator resit = resolvables.begin();
+      resit != resolvables.end(); ++resit)
   {
-    s << "  (";
-    // plus repo providing this package
-    if (!reponame.empty())
-      s << reponame;
-    // plus package vendor
-    if (!res->vendor().empty())
-      s << (reponame.empty() ? "" : ", ") << res->vendor();
-    s << ")";
+    TableRow tr;
+    tr << resit->second->name();
+    if (_viewop & SHOW_VERSION)
+    {
+      if (resit->first && resit->first->edition() != resit->second->edition())
+        tr << resit->first->edition().asString() + " -> " +
+              resit->second->edition().asString();
+      else
+        tr << resit->second->edition().asString();
+    }
+    if (_viewop & SHOW_ARCH)
+    {
+      if (resit->first && resit->first->arch() != resit->second->arch())
+        tr << resit->first->arch().asString() + " -> " +
+              resit->second->arch().asString();
+      else
+        tr << resit->second->arch().asString();
+    }
+    if (_viewop & SHOW_REPO)
+    {
+      // we do not know about repository changes, only show the repo from
+      // which the package will be installed
+      tr << resit->second->repoInfo().name();
+    }
+    if (_viewop & SHOW_VENDOR)
+    {
+      if (resit->first && resit->first->vendor() != resit->second->vendor())
+        tr << resit->first->vendor() + " -> " +
+              resit->second->vendor();
+      else
+        tr << resit->second->vendor();
+    }
+    t << tr;
   }
-  // new line after each package in the verbose mode
-  s << endl;
+
+  out << t << endl;
 }
-*/
 
 // --------------------------------------------------------------------------
 
@@ -549,6 +568,9 @@ void Summary::writeUnsupported(ostream & out)
 
 void Summary::writeDownloadAndInstalledSizeSummary(ostream & out)
 {
+  if (!_inst_pkg_total && toremove.empty())
+    return; // nothing to do, keep silent
+
   // download size info
   ostringstream s;
   if (_todownload > 0)

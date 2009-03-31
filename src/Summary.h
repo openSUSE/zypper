@@ -60,6 +60,8 @@ public:
   { _viewop = (ViewOptions) (_viewop | option); }
   void unsetViewOption(const ViewOptions option)
   { _viewop = (ViewOptions) (_viewop & ~option); }
+  void toggleViewOption(const ViewOptions option)
+  { _viewop & option ? unsetViewOption(option) : setViewOption(option); }
 
   void writeNewlyInstalled(std::ostream & out);
   void writeRemoved(std::ostream & out);

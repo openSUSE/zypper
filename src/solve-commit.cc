@@ -365,7 +365,7 @@ static void make_solver_test_case(Zypper & zypper)
  */
 void solve_and_commit (Zypper & zypper)
 {
-  bool show_forced_problems = true;
+  bool need_another_solver_run = true;
   bool commit_done = false;
   do
   {
@@ -460,29 +460,48 @@ void solve_and_commit (Zypper & zypper)
           zypper.command() == ZypperCommand::REMOVE);
 
       bool do_commit = false;
-      if (zypper.runtimeData().force_resolution && show_p_option)
-      {
-        PromptOptions popts;
-        // translators: Yes / No / show Problems. This prompt will appear
-        // after install/update command summary if there will be any package
-        // to-be-removed automatically to show why, if asked.
-        // Translate to whathever is suitable for your language
-        // The anserws must be separated by slash characters '/' and must
-        // correspond to yes/no/showproblems in that order.
-        // The answers should be lower case letters.
-        popts.setOptions(_("y/n/p"), 0);
-        // translators: help text for 'y' option in the y/n/p prompt
-        popts.setOptionHelp(0, _("Accept the summary and proceed with installation/removal of packages."));
-        // translators: help text for 'n' option in the y/n/p prompt
-        popts.setOptionHelp(1, _("Cancel the operation."));
-        // translators: help text for 'p' option in the y/n/p prompt
-        popts.setOptionHelp(2, _("Restart solver in no-force-resolution mode in order to show dependency problems."));
-        string prompt_text = _("Continue?");
-        zypper.out().prompt(PROMPT_YN_INST_REMOVE_CONTINUE, prompt_text, popts);
-        unsigned int reply =
-          get_prompt_reply(zypper, PROMPT_YN_INST_REMOVE_CONTINUE, popts);
+      PromptOptions popts;
+      // translators: Yes / No / show Problems. This prompt will appear
+      // after install/update command summary if there will be any package
+      // to-be-removed automatically to show why, if asked.
+      // Translate to whathever is suitable for your language
+      // The anserws must be separated by slash characters '/' and must
+      // correspond to yes/no/showproblems in that order.
+      // The answers should be lower case letters.
+      popts.setOptions(_("y/n/p/v/a/r/m"), 0);
+      popts.setShownCount(2);
+      if (!(zypper.runtimeData().force_resolution && show_p_option))
+        popts.disable(2);
+      // translators: help text for 'y' option in the y/n/p prompt
+      popts.setOptionHelp(0, _("Yes, ccept the summary and proceed with installation/removal of packages."));
+      // translators: help text for 'n' option in the y/n/p prompt
+      popts.setOptionHelp(1, _("No, cancel the operation."));
+      // translators: help text for 'p' option in the y/n/p prompt
+      popts.setOptionHelp(2, _("Restart solver in no-force-resolution mode in order to show dependency problems."));
+      popts.setOptionHelp(3, _("Toggle display of package versions."));
+      popts.setOptionHelp(4, _("Toggle display of package architectures."));
+      popts.setOptionHelp(5, _("Toggle display of repositories from which the packages will be installed."));
+      popts.setOptionHelp(6, _("Toggle display of package vendor names."));
+      // popts.setOptionHelp(7, _("Explain why the packages are going to be installed."));
+      // popts.setOptionHelp(8, _("Show all details."));
 
-        if (reply == 2)
+      string prompt_text = _("Continue?");
+
+      unsigned int reply;
+      do
+      {
+        zypper.out().prompt(PROMPT_YN_INST_REMOVE_CONTINUE, prompt_text, popts);
+        reply = get_prompt_reply(zypper, PROMPT_YN_INST_REMOVE_CONTINUE, popts);
+
+        switch(reply)
+        {
+        case 0: // y
+        {
+          do_commit = true;
+          need_another_solver_run = false;
+          break;
+        }
+        case 2: // p
         {
           // one more solver solver run with force-resoltion off
           zypper.runtimeData().force_resolution = false;
@@ -490,20 +509,38 @@ void solve_and_commit (Zypper & zypper)
           God->resolver()->undo();
           continue;
         }
-        else if (reply == 1)
-          show_forced_problems = false;
-        else
+        case 3: // v
         {
-          do_commit = true;
-          show_forced_problems = false;
+          summary.toggleViewOption(Summary::SHOW_VERSION);
+          summary.dumpTo(cout);
+          break;
+        }
+        case 4: // a
+        {
+          summary.toggleViewOption(Summary::SHOW_ARCH);
+          summary.dumpTo(cout);
+          break;
+        }
+        case 5: // r
+        {
+          summary.toggleViewOption(Summary::SHOW_REPO);
+          summary.dumpTo(cout);
+          break;
+        }
+        case 6: // m
+        {
+          summary.toggleViewOption(Summary::SHOW_VENDOR);
+          summary.dumpTo(cout);
+          break;
+        }
+        default: // n
+          need_another_solver_run = false;
         }
       }
-      // no dependency problems
-      else
-      {
-        do_commit = read_bool_answer(PROMPT_YN_INST_REMOVE_CONTINUE, _("Continue?"), true);
-        show_forced_problems = false;
-      }
+      while (reply > 2);
+
+      if (need_another_solver_run)
+        continue;
 
       // COMMIT
 
@@ -663,5 +700,5 @@ void solve_and_commit (Zypper & zypper)
       break;
     }
   }
-  while (show_forced_problems);
+  while (need_another_solver_run);
 }
