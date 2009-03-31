@@ -20,7 +20,7 @@ using std::list;
 using std::vector;
 
 //! table drawing style
-enum TableStyle {
+enum TableLineStyle {
   Ascii         = 0,           ///< | - +
   Light,
   Heavy,
@@ -51,7 +51,7 @@ public:
   void dumbDumpTo (ostream &stream) const;
   //! output with field widths
   void dumpTo (ostream &stream, const vector<unsigned>& widths,
-	       TableStyle st, unsigned margin) const;
+	       TableLineStyle st, unsigned margin) const;
 
   typedef vector<string> container;
 
@@ -84,7 +84,7 @@ TableRow& operator << (TableRow& tr, const string& s) {
 
 class Table {
 public:
-  static TableStyle defaultStyle;
+  static TableLineStyle defaultStyle;
 
   void add (const TableRow& tr);
   void setHeader (const TableHeader& tr);
@@ -92,7 +92,7 @@ public:
   bool empty () const { return _rows.empty(); }
   typedef list<TableRow> container;
 
-  void style (TableStyle st);
+  void lineStyle (TableLineStyle st);
   void sort (unsigned by_column);	// columns start with 0...
   void allowAbbrev(unsigned column);
   void margin(unsigned margin);
@@ -106,19 +106,20 @@ private:
   bool _has_header;
   TableHeader _header;
   container _rows;
+
   //! maximum column index seen in this table
   unsigned _max_col;
   //! maximum width of respective columns
   mutable vector<unsigned> _max_width;
   //! table width (columns)
   int _width;
-  //! table drawing style
-  TableStyle _style;
-  //! console screen width as retrieved by readline
+  //! table line drawing style
+  TableLineStyle _style;
+  //! amount of space we have to print this table
   int _screen_width;
-  //! whether to abbreviate the column if needed
+  //! whether to abbreviate the respective column if needed
   vector<bool> _abbrev_col;
-
+  //! left/right margin in number of spaces
   unsigned _margin;
 };
 

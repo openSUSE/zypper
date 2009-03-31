@@ -417,7 +417,7 @@ void Zypper::processGlobalOptions()
     unsigned s;
     str::strtonum (it->second.front(), s);
     if (s < _End)
-      Table::defaultStyle = (TableStyle) s;
+      Table::defaultStyle = (TableLineStyle) s;
     else
       out().error(str::form(_("Invalid table style %d."), s),
           str::form(_("Use an integer number from %d to %d"), 0, 8));
@@ -3311,7 +3311,7 @@ void Zypper::doCommand()
     resolve(*this);
 
     Table t;
-    t.style(Ascii);
+    t.lineStyle(Ascii);
 
     try
     {
