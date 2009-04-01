@@ -13,16 +13,12 @@
 #include "zypp/base/Logger.h"
 #include "zypp/FileChecker.h"
 
-#include "zypp/Edition.h"
-#include "zypp/Patch.h"
-#include "zypp/Package.h"
-
 #include "zypp/media/MediaException.h"
 
-#include "misc.h"
+#include "misc.h"              // confirm_licenses
 #include "utils/misc.h"
-#include "utils/getopt.h"
-#include "utils/prompt.h"
+#include "utils/prompt.h"      // Continue? and solver problem prompt
+#include "utils/pager.h"       // to view the summary
 #include "Summary.h"
 
 #include "solve-commit.h"
@@ -468,21 +464,29 @@ void solve_and_commit (Zypper & zypper)
       // The anserws must be separated by slash characters '/' and must
       // correspond to yes/no/showproblems in that order.
       // The answers should be lower case letters.
-      popts.setOptions(_("y/n/p/v/a/r/m/d"), 0);
+      popts.setOptions(_("y/n/p/v/a/r/m/d/g"), 0);
       popts.setShownCount(2);
       if (!(zypper.runtimeData().force_resolution && show_p_option))
         popts.disable(2);
-      // translators: help text for 'y' option in the y/n/p prompt
+      // translators: help text for 'y' option in the 'Continue?' prompt
       popts.setOptionHelp(0, _("Yes, accept the summary and proceed with installation/removal of packages."));
-      // translators: help text for 'n' option in the y/n/p prompt
+      // translators: help text for 'n' option in the 'Continue?' prompt
       popts.setOptionHelp(1, _("No, cancel the operation."));
-      // translators: help text for 'p' option in the y/n/p prompt
+      // translators: help text for 'p' option in the 'Continue?' prompt
       popts.setOptionHelp(2, _("Restart solver in no-force-resolution mode in order to show dependency problems."));
+      // translators: help text for 'v' option in the 'Continue?' prompt
       popts.setOptionHelp(3, _("Toggle display of package versions."));
+      // translators: help text for 'a' option in the 'Continue?' prompt
       popts.setOptionHelp(4, _("Toggle display of package architectures."));
+      // translators: help text for 'r' option in the 'Continue?' prompt
       popts.setOptionHelp(5, _("Toggle display of repositories from which the packages will be installed."));
+      // translators: help text for 'm' option in the 'Continue?' prompt
       popts.setOptionHelp(6, _("Toggle display of package vendor names."));
+      // translators: help text for 'd' option in the 'Continue?' prompt
       popts.setOptionHelp(7, _("Toggle between showing all details and as few details as possible."));
+      // translators: help text for 'g' option in the 'Continue?' prompt
+      popts.setOptionHelp(8, _("View the summary in pager."));
+      // translators: help text for 'x' option in the 'Continue?' prompt
       // popts.setOptionHelp(8, _("Explain why the packages are going to be installed."));
 
       string prompt_text = _("Continue?");
@@ -509,37 +513,44 @@ void solve_and_commit (Zypper & zypper)
           God->resolver()->undo();
           continue;
         }
-        case 3: // v
+        case 3: // v - show version
         {
           summary.toggleViewOption(Summary::SHOW_VERSION);
           summary.dumpTo(cout);
           break;
         }
-        case 4: // a
+        case 4: // a - show arch
         {
           summary.toggleViewOption(Summary::SHOW_ARCH);
           summary.dumpTo(cout);
           break;
         }
-        case 5: // r
+        case 5: // r - show repos
         {
           summary.toggleViewOption(Summary::SHOW_REPO);
           summary.dumpTo(cout);
           break;
         }
-        case 6: // m
+        case 6: // m - show vendor
         {
           summary.toggleViewOption(Summary::SHOW_VENDOR);
           summary.dumpTo(cout);
           break;
         }
-        case 7: // d
+        case 7: // d - show details (all attributes)
         {
           summary.toggleViewOption(Summary::DETAILS);
           summary.dumpTo(cout);
           break;
         }
-        default: // n
+        case 8: // g - view in pager
+        {
+          ostringstream s;
+          summary.dumpTo(s);
+          show_text_in_pager(s.str());
+          break;
+        }
+        default: // n - no
           need_another_solver_run = false;
         }
       }
