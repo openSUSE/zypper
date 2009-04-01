@@ -20,8 +20,8 @@ MATH( EXPR LIBZYPP_AGE     "${LIBZYPP_MINOR} - ${LIBZYPP_COMPATMINOR}" )
 MATH( EXPR LIBZYPP_SO_FIRST  "${LIBZYPP_CURRENT}-${LIBZYPP_AGE}" )
 SET( VERSION "${LIBZYPP_MAJOR}.${LIBZYPP_MINOR}.${LIBZYPP_PATCH}" )
 
-SET( CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -fPIC -g -Wall -Woverloaded-virtual -Wnon-virtual-dtor" )
-SET( CMAKE_C_FLAGS   "${CMAKE_C_FLAGS}   -fPIC -g -Wall" )
+SET( CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -fPIC -g -Wall -Woverloaded-virtual -Wnon-virtual-dtor -Wl,-as-needed" )
+SET( CMAKE_C_FLAGS   "${CMAKE_C_FLAGS}   -fPIC -g -Wall -Wl,-as-needed" )
 set( CMAKE_C_FLAGS_RELEASE "${CMAKE_C_FLAGS} -O3" )
 set( CMAKE_CXX_FLAGS_RELEASE "${CMAKE_CXX_FLAGS} -O3" )
 
