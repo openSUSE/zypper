@@ -172,6 +172,11 @@ namespace zypp
     /** \overload Take alias from RepoInfo. */
     bool hasRepo( const RepoInfo & info_r ) const
     { return hasRepo( info_r.alias() ); }
+
+    /** Some stupid string but suitable as alias for your url if nothing better is available.
+     * Something like \c "http-download.opensuse.org-83df67e5"
+    */
+    static std::string makeStupidAlias( const Url & url_r = Url() );
    //@}
 
    /**

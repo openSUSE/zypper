@@ -1,8 +1,6 @@
 #include "TestSetup.h"
 #include <zypp/sat/WhatObsoletes.h>
 
-#define LABELED(V) #V << ":\t" << V
-
 namespace zypp
 {
   namespace sat

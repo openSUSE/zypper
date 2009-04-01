@@ -50,12 +50,6 @@ namespace zypp
 using namespace std;
 using namespace zypp;
 
-bool
-Resolver::doesObsoleteItem (PoolItem candidate, PoolItem installed)
-{
-    return _satResolver->doesObsoleteItem (candidate, installed);
-}
-
 //-----------------------------------------------------------------------------
 
 ///////////////////////////////////////////////////////////////////

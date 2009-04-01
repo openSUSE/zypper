@@ -12,6 +12,7 @@
 #ifndef ZYPP_RESSTATUS_H
 #define ZYPP_RESSTATUS_H
 
+#include <inttypes.h>
 #include <iosfwd>
 #include "zypp/Bit.h"
 
@@ -126,7 +127,8 @@ namespace zypp
       {
         EXPLICIT_REMOVE = bit::RangeValue<TransactDetailField,0>::value,
 	SOFT_REMOVE     = bit::RangeValue<TransactDetailField,1>::value,
-        DUE_TO_UPGRADE  = bit::RangeValue<TransactDetailField,2>::value
+        DUE_TO_OBSOLETE = bit::RangeValue<TransactDetailField,2>::value,
+        DUE_TO_UPGRADE  = bit::RangeValue<TransactDetailField,3>::value
       };
     enum SolverStateValue
       {
@@ -300,6 +302,9 @@ namespace zypp
 	}
     }
 
+    bool isToBeUninstalledDueToObsolete () const
+    { return isToBeUninstalled() && fieldValueIs<TransactDetailField>( DUE_TO_OBSOLETE ); }
+
     bool isToBeUninstalledDueToUpgrade() const
     { return isToBeUninstalled() && fieldValueIs<TransactDetailField>( DUE_TO_UPGRADE ); }
 
@@ -366,9 +371,9 @@ namespace zypp
     }
 
     /** Apply a lock (prevent transaction).
-     * Currently by USER only, but who knows... Set LOCKED
-     * from KEEP_STATE to be shure all transaction details
-     * were reset properly.
+     * Currently by USER or APPL_HIGH only, but who knows...
+     * Set LOCKED from KEEP_STATE to be shure all transaction
+     * details were reset properly.
     */
     bool setLock( bool toLock_r, TransactByValue causer_r )
     {
@@ -381,19 +386,23 @@ namespace zypp
            return true;
         }
       // Here: Lock status is to be changed:
-      if ( causer_r != USER && causer_r != APPL_HIGH)
-        return false;
-      // Setting no transact removes an existing lock,
-      // or brings this into KEEP_STATE, and we apply the lock.
-      if ( ! setTransact( false, causer_r ) )
+      if ( causer_r != USER && causer_r != APPL_HIGH )
         return false;
       if ( toLock_r ) {
-	  fieldValueAssign<TransactField>( LOCKED );
-	  fieldValueAssign<TransactByField>( causer_r );
+        // We're in unlocked state, which includes TRANSACT.
+        // Causer must be allowed to reset this. But from
+        // KEEP_STATE every causer is allowed to set the lock.
+        if ( ! setTransact( false, causer_r ) )
+          return false;
+        fieldValueAssign<TransactField>( LOCKED );
+        fieldValueAssign<TransactByField>( causer_r );
       } else {
-	  fieldValueAssign<TransactField>( KEEP_STATE );
-	  fieldValueAssign<TransactByField>( SOLVER ); // reset to lowest causer
-	                                               // in order to distinguish from keep_state_by_user
+        // To leave Locked state it needs a superior causer.
+        if ( isGreaterThan<TransactByField>( causer_r ) )
+          return false;
+        fieldValueAssign<TransactField>( KEEP_STATE );
+        fieldValueAssign<TransactByField>( SOLVER ); // reset to lowest causer
+	                                             // in order to distinguish from keep_state_by_user
       }
       return true;
     }
@@ -540,6 +549,13 @@ namespace zypp
     //------------------------------------------------------------------------
     // *** These are only for the Resolver ***
 
+    bool setToBeUninstalledDueToObsolete ( )
+    {
+      if (!setToBeUninstalled (SOLVER)) return false;
+      fieldValueAssign<TransactDetailField>(DUE_TO_OBSOLETE);
+      return true;
+    }
+
     bool setToBeUninstalledDueToUpgrade ( TransactByValue causer )
     {
       if (!setToBeUninstalled (causer)) return false;
@@ -645,6 +661,7 @@ namespace zypp
     static const ResStatus toBeInstalled;
     static const ResStatus toBeUninstalled;
     static const ResStatus toBeUninstalledDueToUpgrade;
+    static const ResStatus toBeUninstalledDueToObsolete;
     //@}
 
   private:
@@ -686,6 +703,12 @@ namespace zypp
 
   /** \relates ResStatus Stream output */
   std::ostream & operator<<( std::ostream & str, const ResStatus & obj );
+
+  /** \relates ResStatus Stream output */
+  std::ostream & operator<<( std::ostream & str, ResStatus::TransactValue obj );
+
+  /** \relates ResStatus Stream output */
+  std::ostream & operator<<( std::ostream & str, ResStatus::TransactByValue obj );
 
   /** \relates ResStatus */
   inline bool operator==( const ResStatus & lhs, const ResStatus & rhs )

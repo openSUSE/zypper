@@ -271,6 +271,7 @@ SET( zypp_media_SRCS
   media/CredentialManager.cc
   media/CurlConfig.cc
   media/TransferSettings.cc
+  media/MediaPriority.cc
 )
 
 SET( zypp_media_HEADERS
@@ -295,6 +296,7 @@ SET( zypp_media_HEADERS
   media/CredentialManager.h
   media/CurlConfig.h
   media/TransferSettings.h
+  media/MediaPriority.h
 )
 
 INSTALL(  FILES

@@ -15,31 +15,27 @@ ELSE ( NOT QT_FOUND )
   #)
 ENDIF( NOT QT_FOUND )
 
+SET(THREAD_LIBRARY boost_thread-mt)
+
 ## ############################################################
 
-ADD_CUSTOM_TARGET( ma_test
+ADD_CUSTOM_TARGET( ma_test ALL
    DEPENDS ${CMAKE_CURRENT_SOURCE_DIR}/ma_test
    COMMAND cp ${CMAKE_CURRENT_SOURCE_DIR}/ma_test ${CMAKE_CURRENT_BINARY_DIR}/ma_test
 )
 
 ## ############################################################
 
-FOREACH( loop_var MaTest NewPool DumpSolv Iorder Xml Ex Main FakePool AOUT Parse Test Basic Sat TransList)
+FILE( GLOB ALLCC RELATIVE ${CMAKE_CURRENT_SOURCE_DIR} "*.cc" )
+STRING( REPLACE ".cc" ";" APLLPROG ${ALLCC} )
+FOREACH( loop_var ${APLLPROG} )
    ADD_EXECUTABLE( ${loop_var}
       ${loop_var}.cc
    )
    TARGET_LINK_LIBRARIES( ${loop_var}
-      zypp
-   )
-ENDFOREACH( loop_var )
-
-
-FOREACH( loop_var ToolScanRepos ToolProvideSignedDir)
-   ADD_EXECUTABLE( ${loop_var}
-      ${loop_var}.cc
-   )
-   TARGET_LINK_LIBRARIES( ${loop_var}
-      zypp
+    boost_signals
+    zypp
+    #{THREAD_LIBRARY}
    )
 ENDFOREACH( loop_var )
 

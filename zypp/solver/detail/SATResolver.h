@@ -56,7 +56,11 @@ namespace zypp
 ///////////////////////////////////////////////////////////////////
 //
 //	CLASS NAME : SATResolver
-
+/**
+ * \todo The way solver options are passed as individual booleans from Resolver
+ * via solver::detail::Resolver to SATResolver is pedestrian and error prone.
+ * Introdce a dedicated solver option structure which is passed down as a whole.
+*/
 class SATResolver : public base::ReferenceCounted, private base::NonCopyable {
 
   private:
@@ -78,25 +82,26 @@ class SATResolver : public base::ReferenceCounted, private base::NonCopyable {
     PoolItemList _result_items_to_install;
     PoolItemList _result_items_to_remove;
 
-    bool _fixsystem;			// repair errors in rpm dependency graph 
-    bool _allowdowngrade;		// allow to downgrade installed solvable 
-    bool _allowarchchange;		// allow to change architecture of installed solvables 
-    bool _allowvendorchange;		// allow to change vendor of installed solvables 
+    bool _fixsystem;			// repair errors in rpm dependency graph
+    bool _allowdowngrade;		// allow to downgrade installed solvable
+    bool _allowarchchange;		// allow to change architecture of installed solvables
+    bool _allowvendorchange;		// allow to change vendor of installed solvables
     bool _allowuninstall;		// allow removal of installed solvables
     bool _updatesystem;			// update
-    bool _allowvirtualconflicts;	// false: conflicts on package name, true: conflicts on package provides 
-    bool _noupdateprovide;		// true: update packages needs not to provide old package 
-    bool _dosplitprovides;		// true: consider legacy split provides 
+    bool _allowvirtualconflicts;	// false: conflicts on package name, true: conflicts on package provides
+    bool _noupdateprovide;		// true: update packages needs not to provide old package
+    bool _dosplitprovides;		// true: consider legacy split provides
     bool _onlyRequires;	                // true: consider required packages only
     bool _ignorealreadyrecommended;	// true: ignore recommended packages that were already recommended by the installed packages
-    bool _distupgrade;			
+    bool _distupgrade;
     bool _distupgrade_removeunsupported;
-    
+    bool _solveSrcPackages;		// false: generate no job rule for source packages selected in the pool
+
     // ---------------------------------- methods
     std::string SATprobleminfoString (Id problem, std::string &detail, Id &ignoreId);
     void resetItemTransaction (PoolItem item);
 
-    // Create a SAT solver and reset solver selection in the pool (Collecting 
+    // Create a SAT solver and reset solver selection in the pool (Collecting
     void solverInit(const PoolItemList & weakItems);
     // common solver run with the _jobQueue; Save results back to pool
     bool solving(const CapabilitySet & requires_caps = CapabilitySet(),
@@ -113,10 +118,10 @@ class SATResolver : public base::ReferenceCounted, private base::NonCopyable {
    // e.g. The release package has a buddy to the concerning product item.
    // This user want's the message "Product foo conflicts with product bar" and
    // NOT "package release-foo conflicts with package release-bar"
-   // So these functions return the concerning buddy (e.g. product item) 
+   // So these functions return the concerning buddy (e.g. product item)
     sat::Solvable mapSolvable (const Id &id);
     PoolItem mapItem (const PoolItem &item);
-    
+
   public:
 
     SATResolver (const ResPool & pool, Pool *SATPool);
@@ -175,33 +180,34 @@ class SATResolver : public base::ReferenceCounted, private base::NonCopyable {
 
     bool allowvendorchange () const {return _allowvendorchange;}
     void setAllowvendorchange ( const bool allowvendorchange) { _allowvendorchange = allowvendorchange;}
-    
+
     bool allowuninstall () const {return _allowuninstall;}
     void setAllowuninstall ( const bool allowuninstall) { _allowuninstall = allowuninstall;}
 
     bool updatesystem () const {return _updatesystem;}
     void setUpdatesystem ( const bool updatesystem) { _updatesystem = updatesystem;}
-    
+
     bool allowvirtualconflicts () const {return _allowvirtualconflicts;}
     void setAllowvirtualconflicts ( const bool allowvirtualconflicts) { _allowvirtualconflicts = allowvirtualconflicts;}
-    
+
     bool noupdateprovide () const {return _noupdateprovide;}
     void setNoupdateprovide ( const bool noupdateprovide) { _noupdateprovide = noupdateprovide;}
 
     bool dosplitprovides () const {return _dosplitprovides;}
     void setDosplitprovides ( const bool dosplitprovides) { _dosplitprovides = dosplitprovides;}
-    
+
     bool onlyRequires () const {return _onlyRequires;}
     void setOnlyRequires ( const bool onlyRequires) { _onlyRequires = onlyRequires;}
 
-    bool doesObsoleteItem (PoolItem candidate, PoolItem installed);
+    bool solveSrcPackages() const 		{ return _solveSrcPackages; }
+    void setSolveSrcPackages( bool state_r )	{ _solveSrcPackages = state_r; }
 
-    PoolItemList problematicUpdateItems( void ) const { return _problem_items; }    
+    PoolItemList problematicUpdateItems( void ) const { return _problem_items; }
 
     PoolItemList resultItemsToInstall () { return _result_items_to_install; }
     PoolItemList resultItemsToRemove () { return _result_items_to_remove; }
     PoolItemList problematicUpdateItems() { return _problem_items; }
-    
+
 };
 
 ///////////////////////////////////////////////////////////////////

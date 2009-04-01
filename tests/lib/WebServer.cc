@@ -160,6 +160,12 @@ public:
     
     virtual void start()
     {
+        if ( ! _stopped )
+        {
+            MIL << "mongoose server already running, stopping." << endl;
+            stop();
+        }
+        
         MIL << "Starting shttpd (mongoose)" << endl;
         _log.clear();
         _ctx = mg_start();

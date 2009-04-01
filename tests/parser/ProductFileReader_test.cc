@@ -1,8 +1,6 @@
 #include "TestSetup.h"
 #include <zypp/parser/ProductFileReader.h>
 
-#define LABELED(V) #V << ":\t" << V
-
 //static TestSetup test( Arch_x86_64 );
 
 // Must be the first test!

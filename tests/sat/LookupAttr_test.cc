@@ -2,8 +2,6 @@
 #include <zypp/sat/LookupAttr.h>
 #include <zypp/ResObjects.h>
 
-#define LABELED(V) #V << ":\t" << V
-
 static TestSetup test( "/tmp/x", Arch_x86_64 );
 
 // Must be the first test!

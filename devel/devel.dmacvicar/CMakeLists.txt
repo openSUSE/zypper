@@ -6,6 +6,9 @@ TARGET_LINK_LIBRARIES(rpmbuilder  zypp )
 ADD_EXECUTABLE(testbed testbed.cc)
 TARGET_LINK_LIBRARIES(testbed  zypp )
 
+ADD_EXECUTABLE(getfile getfile.cc)
+TARGET_LINK_LIBRARIES(getfile  zypp )
+
 FIND_PACKAGE(Zsync)
 IF(ZSYNC_FOUND)
   ADD_EXECUTABLE(zsync zsync.cc)

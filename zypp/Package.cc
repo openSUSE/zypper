@@ -139,9 +139,8 @@ namespace zypp
 
   std::string Package::sourcePkgName() const
   {
-   // no id means same as package
+    // no id means same as package
     sat::detail::IdType id( lookupIdAttribute( sat::SolvAttr::sourcename ) );
-    id = lookupIdAttribute(sat::SolvAttr::sourcearch);
     return id ? IdString( id ).asString() : name();
   }
 
@@ -151,6 +150,13 @@ namespace zypp
     sat::detail::IdType id( lookupIdAttribute( sat::SolvAttr::sourceevr ) );
     return id ? Edition( id ) : edition();
   }
+
+  std::string Package::sourcePkgType() const
+  { return lookupStrAttribute( sat::SolvAttr::sourcearch ); }
+
+  std::string Package::sourcePkgLongName() const
+  { return str::form( "%s-%s.%s", sourcePkgName().c_str(), sourcePkgEdition().c_str(), sourcePkgType().c_str() ); }
+
 
   /////////////////////////////////////////////////////////////////
 } // namespace zypp

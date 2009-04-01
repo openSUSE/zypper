@@ -30,7 +30,7 @@ namespace zypp {
     virtual bool askUserToAccepUnknownDigest( const Pathname &file, const std::string &name );
     virtual bool askUserToAcceptWrongDigest( const Pathname &file, const std::string &requested, const std::string &found );
   };
-  
+
 
 
     /** \brief Compute Message Digests (MD5, SHA1 etc)
@@ -46,18 +46,29 @@ namespace zypp {
       private:
     	class P;
     	P* _dp;
-    
+
     	// disabled
     	Digest(const Digest& d);
     	// disabled
     	const Digest& operator=(const Digest& d);
-    
+
+      public:
+	/** \name Well known digest algorithm names. */
+	//@{
+	/** md5 */
+	static const std::string & md5();
+	/** sha1 */
+	static const std::string & sha1();
+	/** sha256 */
+	static const std::string & sha256();
+	//@}
+
       public:
     	Digest();
     	~Digest();
-    
+
     	/** \brief initialize creation of a new message digest
-    	 * 
+    	 *
     	 * Since openssl is used as backend you may use anything that openssl
     	 * supports (see man 1 dgst). Common examples are md5 or sha1. sha1
     	 * should be preferred when creating digests to verify the authenticity
@@ -70,17 +81,17 @@ namespace zypp {
     	 * @return whether an error occured
     	 * */
     	bool create(const std::string& name);
-    
+
     	/** \brief get the name of the current digest algorithm */
     	const std::string& name();
-    
+
     	/** \brief feed data into digest computation algorithm
     	 * @param bytes
     	 * @param len
     	 * @return whether an error occured
     	 * */
     	bool update(const char* bytes, size_t len);
-    
+
     	/** \brief get hex string representation of the digest
     	 *
     	 * this function will finalize the digest computation. calls to update
@@ -89,7 +100,7 @@ namespace zypp {
     	 * @return hex string representation of the digest
     	 * */
     	std::string digest();
-    	
+
     	/** \brief compute digest of a stream. convenience function
     	 *
     	 * calls create, update and digest in one function. The data for the
@@ -101,8 +112,11 @@ namespace zypp {
     	 * @return the digest or empty on error
     	 * */
     	static std::string digest(const std::string& name, std::istream& is, size_t bufsize = 4096);
+
+	/** \overload Reading input data from \c string. */
+    	static std::string digest( const std::string & name, const std::string & input, size_t bufsize = 4096 );
     };
-    
+
 } // namespace zypp
 
 #endif

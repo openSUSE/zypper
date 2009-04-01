@@ -36,6 +36,9 @@ namespace zypp
     typedef TraitsType::constPtrType constPtr;
 
   public:
+    /** The type of the source rpm ("src" or "nosrc"). */
+    std::string sourcePkgType() const;
+
     /** location of resolvable in repo */
     OnMediaLocation location() const;
 

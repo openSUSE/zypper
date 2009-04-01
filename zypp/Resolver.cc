@@ -97,6 +97,14 @@ namespace zypp
 	  return _pimpl->onlyRequires();
   }
 
+  void Resolver::setSystemVerification( bool yesno_r )	{ _pimpl->setVerifyingMode( yesno_r ); }
+  void Resolver::setDefaultSystemVerification()		{ _pimpl->setVerifyingMode(indeterminate ); }
+  bool Resolver::systemVerification() const		{ return _pimpl->isVerifyingMode(); }
+
+  void Resolver::setSolveSrcPackages( bool yesno_r )	{ _pimpl->setSolveSrcPackages( yesno_r ); }
+  void Resolver::setDefaultSolveSrcPackages()		{ _pimpl->setSolveSrcPackages(indeterminate ); }
+  bool Resolver::solveSrcPackages() const		{ return _pimpl->solveSrcPackages(); }
+
   void Resolver::addRequire (const Capability & capability)
   { _pimpl->addExtraRequire( capability ); }
   void Resolver::addConflict (const Capability & capability)

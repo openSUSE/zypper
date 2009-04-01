@@ -1,5 +1,4 @@
 #include <iostream>
-#include <vector>
 #include <sstream>
 
 #include "zypp/base/String.h"
@@ -81,6 +80,11 @@ TransferSettings::TransferSettings()
     : _impl(new TransferSettings::Impl())
 {
 
+}
+
+void TransferSettings::reset()
+{
+    _impl.reset(new TransferSettings::Impl());
 }
 
 void TransferSettings::addHeader( const std::string &header )

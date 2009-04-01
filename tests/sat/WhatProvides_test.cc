@@ -1,7 +1,5 @@
 #include "TestSetup.h"
 
-#define LABELED(V) #V << ":\t" << V
-
 BOOST_AUTO_TEST_CASE(WhatProvides)
 {
   TestSetup test( Arch_x86_64 );

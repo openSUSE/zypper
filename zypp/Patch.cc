@@ -54,7 +54,8 @@ namespace zypp
     static const IdString cat_optional( "optional" );
     static const IdString cat_document( "document" );
 
-    IdString cat( sat::LookupAttr( sat::SolvAttr::patchcategory ).begin().idStr() );
+    // patch category is not poolized in the solv file (i.e. an IdString) ;(
+    IdString cat( sat::LookupAttr( sat::SolvAttr::patchcategory, satSolvable() ).begin().c_str() );
 
     if ( cat == cat_yast )
       return CAT_YAST;

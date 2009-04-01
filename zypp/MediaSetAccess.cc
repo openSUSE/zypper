@@ -226,7 +226,7 @@ IMPL_PTR_TYPE(MediaSetAccess);
 
       try
       {
-        DBG << "Going to try to provide file " << file
+        DBG << "Going to try to provide " << (resource.optional() ? "optional" : "") << " file " << file
             << " from media number " << media_nr << endl;
         // try to attach the media
         if ( ! media_mgr.isAttached(media) )
@@ -281,6 +281,7 @@ IMPL_PTR_TYPE(MediaSetAccess);
           // otherwise propagate the error
           if ( ( options & PROVIDE_NON_INTERACTIVE ) && reason != media::MediaChangeReport::WRONG)
           {
+              MIL << "Can't provide file. Non-Interactive mode." << endl;
               ZYPP_RETHROW(excp);
           }
           else

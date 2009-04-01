@@ -63,6 +63,11 @@ namespace zypp
         size_type size() const
         { return _pimpl->size(); }
 
+	/** */
+	template<class _Solv>
+	bool contains( const _Solv & solv_r ) const
+	{ return( get().find( asSolvable()( solv_r ) ) != end() ); }
+
         /** Iterator pointing to the first \ref Solvable. */
         const_iterator begin() const
         { return _pimpl->begin(); }
@@ -72,8 +77,21 @@ namespace zypp
         { return _pimpl->end(); }
 
       public:
+
+	/** Insert a Solvable.
+	 * \return \c true if it was actually inserted, or \c false if already present.
+	*/
+	template<class _Solv>
+	bool insert( const _Solv & solv_r )
+	{ return get().insert( asSolvable()( solv_r ) ).second; }
+
+      public:
         /** The set. */
         Container & get()
+        { return *_pimpl; }
+
+        /** The set. */
+        const Container & get() const
         { return *_pimpl; }
 
       private:

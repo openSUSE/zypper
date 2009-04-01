@@ -495,6 +495,9 @@ void MediaCurl::attachTo (bool next)
   SET_OPTION(CURLOPT_FAILONERROR,true);
   SET_OPTION(CURLOPT_NOSIGNAL, 1);
 
+  // reset settings in case we are re-attaching
+  _settings.reset();
+  
   // add custom headers
   _settings.addHeader(anonymousIdHeader());
   _settings.addHeader(distributionFlavorHeader());

@@ -40,6 +40,9 @@ namespace zypp
   //
   ///////////////////////////////////////////////////////////////////
 
+  std::string SrcPackage::sourcePkgType() const
+  { return lookupStrAttribute( sat::SolvAttr::arch ); }
+
   OnMediaLocation SrcPackage::location() const
   { return lookupLocation(); }
 

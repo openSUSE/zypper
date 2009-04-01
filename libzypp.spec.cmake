@@ -25,7 +25,7 @@ Provides:       yast2-packagemanager
 Obsoletes:      yast2-packagemanager
 Recommends:     logrotate
 BuildRequires:  cmake
-BuildRequires:  libsatsolver-devel >= 0.13.0 openssl-devel
+BuildRequires:  libsatsolver-devel >= 0.14.0 openssl-devel
 BuildRequires:  boost-devel curl-devel dejagnu doxygen gcc-c++ gettext-devel graphviz hal-devel libxml2-devel
 
 # required for testsuite, webrick
@@ -118,6 +118,13 @@ cmake -DCMAKE_INSTALL_PREFIX=%{prefix} \
 make %{?jobs:-j %jobs} VERBOSE=1
 make -C doc/autodoc %{?jobs:-j %jobs}
 make -C po %{?jobs:-j %jobs} translations
+
+%if 0%{?run_testsuite}
+  make -C tests %{?jobs:-j %jobs}
+  pushd tests
+  LD_LIBRARY_PATH=$PWD/../zypp:$LD_LIBRARY_PATH ctest .
+  popd
+%endif
 
 #make check
 

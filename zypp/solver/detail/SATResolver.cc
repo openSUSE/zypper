@@ -33,6 +33,7 @@
 #include "zypp/ZConfig.h"
 #include "zypp/sat/Pool.h"
 #include "zypp/sat/WhatProvides.h"
+#include "zypp/sat/WhatObsoletes.h"
 #include "zypp/solver/detail/SATResolver.h"
 #include "zypp/solver/detail/ProblemSolutionCombi.h"
 #include "zypp/solver/detail/ProblemSolutionIgnore.h"
@@ -122,7 +123,7 @@ SATResolver::dumpOn( std::ostream & os ) const
 	os << "  ignorealreadyrecommended = " << _solv->ignorealreadyrecommended << endl;
 	os << "  distupgrade = " << _distupgrade << endl;
         os << "  distupgrade_removeunsupported = " << _distupgrade_removeunsupported << endl;
-
+	os << "  solveSrcPackages = " << _solveSrcPackages << endl;
     } else {
 	os << "<NULL>";
     }
@@ -172,7 +173,7 @@ SATResolver::resetItemTransaction (PoolItem item)
 {
     bool found = false;
     for (PoolItemList::const_iterator iter = _items_to_remove.begin();
-	 iter != _items_to_remove.end(); iter++) {
+	 iter != _items_to_remove.end(); ++iter) {
 	if (*iter == item) {
 	    _items_to_remove.remove(*iter);
 	    found = true;
@@ -181,7 +182,7 @@ SATResolver::resetItemTransaction (PoolItem item)
     }
     if (!found) {
 	for (PoolItemList::const_iterator iter = _items_to_install.begin();
-	     iter != _items_to_install.end(); iter++) {
+	     iter != _items_to_install.end(); ++iter) {
 	    if (*iter == item) {
 		_items_to_install.remove(*iter);
 		found = true;
@@ -191,7 +192,7 @@ SATResolver::resetItemTransaction (PoolItem item)
     }
     if (!found) {
 	for (PoolItemList::const_iterator iter = _items_to_keep.begin();
-	     iter != _items_to_keep.end(); iter++) {
+	     iter != _items_to_keep.end(); ++iter) {
 	    if (*iter == item) {
 		_items_to_keep.remove(*iter);
 		found = true;
@@ -201,7 +202,7 @@ SATResolver::resetItemTransaction (PoolItem item)
     }
     if (!found) {
 	for (PoolItemList::const_iterator iter = _items_to_lock.begin();
-	     iter != _items_to_lock.end(); iter++) {
+	     iter != _items_to_lock.end(); ++iter) {
 	    if (*iter == item) {
 		_items_to_lock.remove(*iter);
 		found = true;
@@ -294,32 +295,6 @@ SATSolutionToPool (PoolItem item, const ResStatus & status, const ResStatus::Tra
     return;
 }
 
-
-//----------------------------------------------------------------------------
-// helper functions for distupgrade
-//----------------------------------------------------------------------------
-
-bool SATResolver::doesObsoleteItem (PoolItem candidate, PoolItem installed) {
-  Solvable *sCandidate = _SATPool->solvables + candidate.satSolvable().id();
-  ::_Repo *installedRepo = sat::Pool::instance().systemRepo().get();
-
-  Id p, pp, obsolete, *obsoleteIt;
-
-  if ((!installedRepo || sCandidate->repo != installedRepo) && sCandidate->obsoletes) {
-      obsoleteIt = sCandidate->repo->idarraydata + sCandidate->obsoletes;
-      while ((obsolete = *obsoleteIt++) != 0)
-      {
-	  for (pp = pool_whatprovides(_SATPool, obsolete); (p = _SATPool->whatprovidesdata[pp++]) != 0; ) {
-	      if (p > 0 &&  installed.satSolvable().id() == (sat::detail::SolvableIdType)p) {
-		  MIL << candidate << " obsoletes " << installed << endl;
-		  return true;
-	      }
-	  }
-      }
-  }
-  return false;
-}
-
 //----------------------------------------------------------------------------
 //----------------------------------------------------------------------------
 // resolvePool
@@ -358,6 +333,12 @@ struct SATCollectTransact : public resfilter::PoolItemFilterFunctor
 	if (by_solver) {
 	    item.status().resetTransact( ResStatus::APPL_LOW );// clear any solver/establish transactions
 	    return true;				// back out here, dont re-queue former solver result
+	}
+
+	if ( item.satSolvable().isKind<SrcPackage>() && ! resolver.solveSrcPackages() )
+	{
+	  // Later we may continue on a per source package base.
+	  return true; // dont process this source package.
 	}
 
 	if (status.isToBeInstalled()) {
@@ -480,27 +461,43 @@ SATResolver::solving(const CapabilitySet & requires_caps,
 
     /* solvables to be erased */
     Repository systemRepo( sat::Pool::instance().findSystemRepo() ); // don't create if it does not exist
-    for_( it, systemRepo.solvablesBegin(), systemRepo.solvablesEnd() )
+    if ( systemRepo && ! systemRepo.solvablesEmpty() )
     {
-      if (_solv->decisionmap[it->id()] > 0)
-        continue;
+      bool mustCheckObsoletes = false;
+      for_( it, systemRepo.solvablesBegin(), systemRepo.solvablesEnd() )
+      {
+	if (_solv->decisionmap[it->id()] > 0)
+	  continue;
 
-      PoolItem poolItem( *it );
-      // Check if this is an update
-      CheckIfUpdate info;
-      invokeOnEach( _pool.byIdentBegin( poolItem ),
-                    _pool.byIdentEnd( poolItem ),
-                    resfilter::ByUninstalled(),			// ByUninstalled
-                    functor::functorRef<bool,PoolItem> (info) );
+	PoolItem poolItem( *it );
+	// Check if this is an update
+	CheckIfUpdate info;
+	invokeOnEach( _pool.byIdentBegin( poolItem ),
+		      _pool.byIdentEnd( poolItem ),
+		      resfilter::ByUninstalled(),			// ByUninstalled
+		      functor::functorRef<bool,PoolItem> (info) );
 
-      if (info.is_updated) {
-          SATSolutionToPool (poolItem, ResStatus::toBeUninstalledDueToUpgrade , ResStatus::SOLVER);
-      } else {
-          SATSolutionToPool (poolItem, ResStatus::toBeUninstalled, ResStatus::SOLVER);
+	if (info.is_updated) {
+	  SATSolutionToPool( poolItem, ResStatus::toBeUninstalledDueToUpgrade, ResStatus::SOLVER );
+	} else {
+	  SATSolutionToPool( poolItem, ResStatus::toBeUninstalled, ResStatus::SOLVER );
+	  if ( ! mustCheckObsoletes )
+	    mustCheckObsoletes = true; // lazy check for UninstalledDueToObsolete
+	}
+	_result_items_to_remove.push_back (poolItem);
       }
-      _result_items_to_remove.push_back (poolItem);
+      if ( mustCheckObsoletes )
+      {
+	sat::WhatObsoletes obsoleted( _result_items_to_install.begin(), _result_items_to_install.end() );
+	for_( it, obsoleted.poolItemBegin(), obsoleted.poolItemEnd() )
+	{
+	  ResStatus & status( it->status() );
+	  // WhatObsoletes contains installed items only!
+	  if ( status.transacts() && ! status.isToBeUninstalledDueToUpgrade() )
+	    status.setToBeUninstalledDueToObsolete();
+	}
+      }
     }
-
     /*  solvables which are recommended */
     for (int i = 0; i < _solv->recommendations.count; i++)
     {
@@ -554,7 +551,6 @@ SATResolver::solving(const CapabilitySet & requires_caps,
     }
 
     /* Write validation state back to pool */
-    Map installedmap;
     Queue flags, solvableQueue;
 
     queue_init(&flags);
@@ -565,8 +561,7 @@ SATResolver::solving(const CapabilitySet & requires_caps,
 		  _pool.end(),
 		  functor::not_c(resfilter::byKind<Package>()), // every solvable BUT packages
 		  functor::functorRef<bool,PoolItem> (collectNonePackages) );
-    solver_create_state_maps(_solv, &installedmap, 0);
-    pool_trivial_installable(_solv->pool, &installedmap, &solvableQueue, &flags);
+    solver_trivial_installable(_solv, &solvableQueue, &flags );
     for (int i = 0; i < solvableQueue.count; i++) {
 	PoolItem item = _pool.find (sat::Solvable(solvableQueue.elements[i]));
 	item.status().setUndetermined();
@@ -613,7 +608,6 @@ SATResolver::solving(const CapabilitySet & requires_caps,
 	return false;
     }
 
-    map_free(&installedmap);
     queue_free(&(solvableQueue));
     queue_free(&flags);
 
@@ -728,7 +722,7 @@ SATResolver::resolvePool(const CapabilitySet & requires_caps,
     if (ret)
 	solverEnd(); // remove solver only if no errors happend. Need it for solving problems
 
-    MIL << "SATResolver::resolvePool() done. Ret:" << ret <<  endl;
+    (ret?MIL:WAR) << "SATResolver::resolvePool() done. Ret:" << ret <<  endl;
     return ret;
 }
 
@@ -1218,12 +1212,12 @@ SATResolver::problems ()
 			    problemSolution->addSingleAction (poolItem, KEEP);
 			    string description = str::form (_("keep %s despite the inferior architecture"), solvable2str(pool, s.get()));
 			    MIL << description << endl;
-			    problemSolution->addDescription (description);			    
+			    problemSolution->addDescription (description);
 			} else {
 			    problemSolution->addSingleAction (poolItem, INSTALL);
 			    string description = str::form (_("install %s despite the inferior architecture"), solvable2str(pool, s.get()));
 			    MIL << description << endl;
-			    problemSolution->addDescription (description);			    			    
+			    problemSolution->addDescription (description);
 			}
 		    } else if (p == SOLVER_SOLUTION_DISTUPGRADE) {
 			s = mapSolvable (rp);
@@ -1232,12 +1226,12 @@ SATResolver::problems ()
 			    problemSolution->addSingleAction (poolItem, KEEP);
 			    string description = str::form (_("keep obsolete %s"), solvable2str(pool, s.get()));
 			    MIL << description << endl;
-			    problemSolution->addDescription (description);			    
+			    problemSolution->addDescription (description);
 			} else {
 			    problemSolution->addSingleAction (poolItem, INSTALL);
 			    string description = str::form (_("install %s from excluded repository"), solvable2str(pool, s.get()));
 			    MIL << description << endl;
-			    problemSolution->addDescription (description);			    			    			    
+			    problemSolution->addDescription (description);
 			}
 		    } else {
 			/* policy, replace p with rp */
