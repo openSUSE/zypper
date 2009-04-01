@@ -140,13 +140,16 @@ namespace zypp
       {
 	typedef _Tp value_type;
 
+	/** Default ctor sets _Initial. */
 	Option()
 	  : _val( _Initial )
 	{}
 
+	/** Get the value.  */
 	value_type get() const
 	{ return _val; }
 
+	/** Set a new value.  */
 	void set( const value_type & newval_r )
 	{ _val = newval_r; }
 
@@ -161,15 +164,19 @@ namespace zypp
 	typedef _Tp                  value_type;
 	typedef Option<_Tp,_Initial> option_type;
 
-	void restoreDefault()
+	/** Reset value to the current default. */
+	void restoreToDefault()
 	{ this->set( _default.get() ); }
 
-	void restoreDefault( const value_type & newval_r )
-	{ setDefault( newval_r ); restoreDefault(); }
+	/** Reset value to a new default. */
+	void restoreToDefault( const value_type & newval_r )
+	{ setDefault( newval_r ); restoreToDefault(); }
 
+	/** Get the current default value. */
 	value_type getDefault() const
 	{ return _default.get(); }
 
+	/** Set a new default value. */
 	void setDefault( const value_type & newval_r )
 	{ _default.set( newval_r ); }
 
@@ -293,7 +300,7 @@ namespace zypp
                 }
 		else if ( entry == "download.media_preference" )
                 {
-		  download_media_prefer_download.restoreDefault( str::compareCI( value, "volatile" ) != 0 );
+		  download_media_prefer_download.restoreToDefault( str::compareCI( value, "volatile" ) != 0 );
                 }
                 else if ( entry == "download.max_concurrent_connections" )
                 {
@@ -624,7 +631,7 @@ namespace zypp
   { _pimpl->download_media_prefer_download.set( yesno_r ); }
 
   void ZConfig::set_default_download_media_prefer_download()
-  { _pimpl->download_media_prefer_download.restoreDefault(); }
+  { _pimpl->download_media_prefer_download.restoreToDefault(); }
 
   long ZConfig::download_max_concurrent_connections() const
   { return _pimpl->download_max_concurrent_connections; }
