@@ -234,9 +234,11 @@ namespace zypp
      *
      * \param item    Evaluate additional information for this resolvable.
      * \return A list of structures which contains:
-     *		item     Item which has triggered the installation of the given param item.
-     *		cap      Capability which has triggerd this installation
-     *		capKind  Kind of that capability (e.g.  Dep::REQUIRES,Dep::RECOMMENDS,... )
+     *		item                Item which has triggered the installation of the given param item.
+     *          initialInstallation This item has triggered the installation
+     *	                            Not already fullfilled requierement only.
+     *		cap                 Capability which has triggerd this installation
+     *		capKind             Kind of that capability (e.g.  Dep::REQUIRES,Dep::RECOMMENDS,... )
      *
      * Note: In order to have a result start a solver run before. Not matter if it is valid or invalid.
      *
@@ -248,9 +250,11 @@ namespace zypp
      *
      * \param item     Evaluate additional information for this resolvable.
      * \return A list of structures which contains:
-     *		item     Item which will be installed due to the installation of the given param item too.
-     *		cap      Capability which causes the installation
-     *		capKind  Kind of that capability (e.g.  Dep::REQUIRES,Dep::RECOMMENDS,... )
+     *		item                Item which has triggered the installation of the given param item.
+     *          initialInstallation This item has triggered the installation
+     *	                            Not already fullfilled requierement only.
+     *		cap                 Capability which has triggerd this installation
+     *		capKind             Kind of that capability (e.g.  Dep::REQUIRES,Dep::RECOMMENDS,... )
      *
      * Note: In order to have a result start a solver run before. Not matter if it is valid or invalid.
      *
@@ -262,9 +266,11 @@ namespace zypp
      *
      * \param item     Evaluate additional information for this resolvable.
      * \return A list of structures which contains:
-     *		item     installed Item which provide the requested capability.
-     *		cap      Capability which is needed
-     *		capKind  Kind of that capability (e.g.  Dep::REQUIRES,Dep::RECOMMENDS,... )
+     *		item                Item which has triggered the installation of the given param item.
+     *          initialInstallation This item has triggered the installation
+     *	                            Not already fullfilled requierement only.
+     *		cap                 Capability which has triggerd this installation
+     *		capKind             Kind of that capability (e.g.  Dep::REQUIRES,Dep::RECOMMENDS,... )     
      *
      * Note: In order to have a result start a solver run before. Not matter if it is valid or invalid.
      *
@@ -277,9 +283,11 @@ namespace zypp
      *
      * \param item     Evaluate additional information for this resolvable.
      * \return A list of structures which contains:
-     *		item     Item which requires this capability.
-     *		cap      Capability which is needed
-     *		capKind  Kind of that capability (e.g.  Dep::REQUIRES,Dep::RECOMMENDS,... )
+     *		item                Item which has triggered the installation of the given param item.
+     *          initialInstallation This item has triggered the installation
+     *	                            Not already fullfilled requierement only.
+     *		cap                 Capability which has triggerd this installation
+     *		capKind             Kind of that capability (e.g.  Dep::REQUIRES,Dep::RECOMMENDS,... )     
      *
      * Note: In order to have a result start a solver run before. Not matter if it is valid or invalid.
      *
