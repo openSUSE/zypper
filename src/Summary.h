@@ -32,7 +32,7 @@ public:
   enum _view_options
   {
     DEFAULT                 = 0x0300,
-    DETAILS                 = 0xfbff,
+    DETAILS                 = 0x00ff,
 
     SHOW_VERSION            = 0x0001,
     SHOW_ARCH               = 0x0002,

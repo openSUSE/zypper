@@ -468,12 +468,12 @@ void solve_and_commit (Zypper & zypper)
       // The anserws must be separated by slash characters '/' and must
       // correspond to yes/no/showproblems in that order.
       // The answers should be lower case letters.
-      popts.setOptions(_("y/n/p/v/a/r/m"), 0);
+      popts.setOptions(_("y/n/p/v/a/r/m/d"), 0);
       popts.setShownCount(2);
       if (!(zypper.runtimeData().force_resolution && show_p_option))
         popts.disable(2);
       // translators: help text for 'y' option in the y/n/p prompt
-      popts.setOptionHelp(0, _("Yes, ccept the summary and proceed with installation/removal of packages."));
+      popts.setOptionHelp(0, _("Yes, accept the summary and proceed with installation/removal of packages."));
       // translators: help text for 'n' option in the y/n/p prompt
       popts.setOptionHelp(1, _("No, cancel the operation."));
       // translators: help text for 'p' option in the y/n/p prompt
@@ -482,8 +482,8 @@ void solve_and_commit (Zypper & zypper)
       popts.setOptionHelp(4, _("Toggle display of package architectures."));
       popts.setOptionHelp(5, _("Toggle display of repositories from which the packages will be installed."));
       popts.setOptionHelp(6, _("Toggle display of package vendor names."));
-      // popts.setOptionHelp(7, _("Explain why the packages are going to be installed."));
-      // popts.setOptionHelp(8, _("Show all details."));
+      popts.setOptionHelp(7, _("Toggle between showing all details and as few details as possible."));
+      // popts.setOptionHelp(8, _("Explain why the packages are going to be installed."));
 
       string prompt_text = _("Continue?");
 
@@ -530,6 +530,12 @@ void solve_and_commit (Zypper & zypper)
         case 6: // m
         {
           summary.toggleViewOption(Summary::SHOW_VENDOR);
+          summary.dumpTo(cout);
+          break;
+        }
+        case 7: // d
+        {
+          summary.toggleViewOption(Summary::DETAILS);
           summary.dumpTo(cout);
           break;
         }

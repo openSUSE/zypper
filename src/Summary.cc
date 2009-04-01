@@ -161,9 +161,10 @@ void Summary::readPool(const zypp::ResPool & pool)
           // reinstall
           else if (res->edition() == (*rmit)->edition())
           {
-            toreinstall[res->kind()].insert(rp);
             if (res->arch() != (*rmit)->arch())
               tochangearch[res->kind()].insert(rp);
+            else
+              toreinstall[res->kind()].insert(rp);
             if (res->vendor() != (*rmit)->vendor())
               tochangevendor[res->kind()].insert(rp);
           }
@@ -230,7 +231,7 @@ unsigned Summary::packagesToRemove() const
 
 void Summary::writeResolvableList(ostream & out, const ResPairSet & resolvables)
 {
-  if (_viewop == DEFAULT)
+  if ((_viewop & DETAILS) == 0)
   {
     ostringstream s;
     for (ResPairSet::const_iterator resit = resolvables.begin();
@@ -326,6 +327,8 @@ void Summary::writeNewlyInstalled(ostream & out)
 
 void Summary::writeRemoved(ostream & out)
 {
+  ViewOptions vop = _viewop;
+  unsetViewOption(SHOW_REPO); // never show repo here, it's always @System
   for_(it, toremove.begin(), toremove.end())
   {
     string label;
@@ -353,6 +356,7 @@ void Summary::writeRemoved(ostream & out)
 
     writeResolvableList(out, it->second);
   }
+  _viewop = vop;
 }
 
 // --------------------------------------------------------------------------
@@ -415,6 +419,7 @@ void Summary::writeDowngraded(ostream & out)
         "The following product is going to be downgraded:",
         "The following products are going to be downgraded:",
         it->second.size());
+    out << endl << label << endl;
 
     writeResolvableList(out, it->second);
   }
@@ -483,6 +488,8 @@ void Summary::writeSuggested(ostream & out)
 
 void Summary::writeChangedArch(ostream & out)
 {
+  ViewOptions vop = _viewop;
+  setViewOption(SHOW_ARCH); // always show arch here
   for_(it, tochangearch.begin(), tochangearch.end())
   {
     string label;
@@ -510,12 +517,15 @@ void Summary::writeChangedArch(ostream & out)
 
     writeResolvableList(out, it->second);
   }
+  _viewop = vop;
 }
 
 // --------------------------------------------------------------------------
 
 void Summary::writeChangedVendor(ostream & out)
 {
+  ViewOptions vop = _viewop;
+  setViewOption(SHOW_VENDOR); // always show vendor here
   for_(it, tochangevendor.begin(), tochangevendor.end())
   {
     string label;
@@ -543,6 +553,7 @@ void Summary::writeChangedVendor(ostream & out)
 
     writeResolvableList(out, it->second);
   }
+  _viewop = vop;
 }
 
 // --------------------------------------------------------------------------
