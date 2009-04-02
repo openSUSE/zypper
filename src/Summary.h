@@ -27,7 +27,7 @@ public:
     inline bool operator()(const ResPair & p1, const ResPair & p2) const;
   };
   typedef std::set<ResPair, ResPairNameCompare> ResPairSet;
-  typedef std::map<zypp::Resolvable::Kind, ResPairSet> KindToResPairSet;
+  typedef std::map<zypp::ResKind, ResPairSet> KindToResPairSet;
 
   enum _view_options
   {
@@ -73,6 +73,7 @@ public:
   void writeChangedArch(std::ostream & out);
   void writeChangedVendor(std::ostream & out);
   void writeUnsupported(std::ostream & out);
+  void writePackageCounts(std::ostream & out);
   void writeDownloadAndInstalledSizeSummary(std::ostream & out);
 
   unsigned packagesToGetAndInstall() const

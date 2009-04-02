@@ -464,6 +464,7 @@ void solve_and_commit (Zypper & zypper)
       // The anserws must be separated by slash characters '/' and must
       // correspond to yes/no/showproblems in that order.
       // The answers should be lower case letters.
+      //! \todo add c for changelog and x for explain (show the dep tree)
       popts.setOptions(_("y/n/p/v/a/r/m/d/g"), 0);
       popts.setShownCount(2);
       if (!(zypper.runtimeData().force_resolution && show_p_option))

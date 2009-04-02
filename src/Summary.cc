@@ -607,6 +607,86 @@ void Summary::writeDownloadAndInstalledSizeSummary(ostream & out)
   out << endl;
 }
 
+void Summary::writePackageCounts(ostream & out)
+{
+  if (!packagesToGetAndInstall() && !packagesToRemove())
+    return;
+
+  ostringstream s;
+  bool gotcha = false;
+  unsigned count;
+  KindToResPairSet::const_iterator i;
+
+  i = toupgrade.find(ResKind::package);
+  if (i != toupgrade.end())
+  {
+    count = i->second.size();
+    s << format(_PL("%d package to upgrade", "%d packages to upgrade", count)) % count;
+    gotcha = true;
+  }
+  i = todowngrade.find(ResKind::package);
+  if (i != todowngrade.end())
+  {
+    count = i->second.size();
+    if (gotcha)
+      s << ", " << format(_PL("%d to downgrade", "%d to downgrade", count)) % count;
+    else
+      s << format(_PL("%d package to downgrade", "%d packages to downgrade", count)) % count;
+  }
+  i = toinstall.find(ResKind::package);
+  if (i != toinstall.end())
+  {
+    count = i->second.size();
+    if (gotcha)
+      s << ", " << format(_PL("%d new", "%d new", count)) % count;
+    else
+      s << format(_PL("%d new package to install", "%d new packages to install", count)) % count;
+    gotcha = true;
+  }
+  i = toreinstall.find(ResKind::package);
+  if (i != toreinstall.end())
+  {
+    count = i->second.size();
+    if (gotcha)
+      s << ", " << format(_PL("%d to reinstall", "%d to reinstall", count)) % count;
+    else
+      s << format(_PL("%d package to reinstall", "%d packages to reinstall", count)) % count;
+    gotcha = true;
+  }
+  i = toremove.find(ResKind::package);
+  if (i != toremove.end())
+  {
+    count = i->second.size();
+    if (gotcha)
+      s << ", " << format(_PL("%d to remove", "%d to remove", count)) % count;
+    else
+      s << format(_PL("%d package to remove", "%d packages to remove", count)) % count;
+    gotcha = true;
+  }
+  i = tochangevendor.find(ResKind::package);
+  if (i != tochangevendor.end())
+  {
+    count = i->second.size();
+    if (gotcha)
+      s << ", " << format(_PL("%d to change vendor", "%d to change vendor", count)) % count;
+    else
+      s << format(_PL("%d package will change vendor", "%d packages will change vendor", count)) % count;
+    gotcha = true;
+  }
+  i = tochangearch.find(ResKind::package);
+  if (i != tochangearch.end())
+  {
+    count = i->second.size();
+    if (gotcha)
+      s << ", " << format(_PL("%d to change arch", "%d to change arch", count)) % count;
+    else
+      s << format(_PL("%d package will change arch", "%d packages will change arch", count)) % count;
+    gotcha = true;
+  }
+  s << "." <<  endl;
+  wrap_text(out, s.str(), 0, _wrap_width);
+}
+
 // --------------------------------------------------------------------------
 
 void Summary::dumpTo(ostream & out)
@@ -627,7 +707,7 @@ void Summary::dumpTo(ostream & out)
   if (_viewop & SHOW_UNSUPPORTED)
     writeUnsupported(out);
   out << endl;
-  //! \todo write package counts
+  writePackageCounts(out);
   writeDownloadAndInstalledSizeSummary(out);
 }
 
