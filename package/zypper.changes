@@ -1,4 +1,25 @@
 -------------------------------------------------------------------
+Thu Apr  2 19:46:21 CEST 2009 - jkupec@suse.cz
+
+- configuration file support added. Global settings go to
+  /etc/zypp/zypper.conf, user's to $HOME/.zypper.conf.
+  Override priority order (top to bottom):
+  * CLI options
+  * $HOME/.zypper.conf
+  * /etc/zypp/zypper.conf
+  * zypp.conf
+- configurable colorized output added
+- improved installation summary (bnc #389128). Allows to view
+  version, arch, repo, vendor; view the summary in pager,
+  shows installed package counts
+- xmloutput now writes also old version and old arch in summary
+  (bnc #331060)
+- zypper.conf: solver/installRecommends option added, along with
+  --recommends option for in, up, patch, ve, and dup commands
+  to override zypper.conf setting. If not used, libzypp's setting
+  is used. (bnc #478144)
+
+-------------------------------------------------------------------
 Wed Mar 18 11:03:24 CET 2009 - jkupec@suse.cz
 
 - show dialog's default option in parentheses instead
