@@ -16,6 +16,7 @@ extern "C"
 #include "zypp/base/Measure.h"
 #include "zypp/base/String.h"
 #include "zypp/base/Exception.h"
+#include "zypp/ZConfig.h"
 
 #include "utils/Augeas.h"
 #include "Config.h"
@@ -31,7 +32,7 @@ using namespace zypp;
 
 static map<string, ConfigOption::Option> _table;
 static map<ConfigOption::Option, string> _table_str;
-
+const ConfigOption ConfigOption::SOLVER_INSTALL_RECOMMENDS(ConfigOption::SOLVER_INSTALL_RECOMMENDS_e);
 const ConfigOption ConfigOption::COLOR_USE_COLORS(ConfigOption::COLOR_USE_COLORS_e);
 const ConfigOption ConfigOption::COLOR_BACKGROUND(ConfigOption::COLOR_BACKGROUND_e);
 const ConfigOption ConfigOption::COLOR_RESULT(ConfigOption::COLOR_RESULT_e);
@@ -52,6 +53,7 @@ ConfigOption::Option ConfigOption::parse(const std::string & strval_r)
   if (_table.empty())
   {
     // initialize it
+    _table["solver/installRecommends"] = ConfigOption::SOLVER_INSTALL_RECOMMENDS_e;
     _table["color/useColors"] = ConfigOption::COLOR_USE_COLORS_e;
     _table["color/background"] = ConfigOption::COLOR_BACKGROUND_e;
     _table["color/result"] = ConfigOption::COLOR_RESULT_e;
@@ -77,6 +79,7 @@ const string ConfigOption::asString() const
   if (_table.empty())
   {
     // initialize it
+    _table_str[SOLVER_INSTALL_RECOMMENDS_e] = string("solver/installRecommends");
     _table_str[COLOR_USE_COLORS_e] = string("color/useColors");
     _table_str[COLOR_BACKGROUND_e] = "color/background";
     _table_str[COLOR_RESULT_e] = "color/result";
@@ -95,7 +98,8 @@ const string ConfigOption::asString() const
 
 
 Config::Config()
-  : do_colors        (false)
+  : solver_installRecommends(true)
+  , do_colors        (false)
   , color_useColors  ("never")
   , color_background (false)    // dark background
   , color_result     ("white")  // default colors for dark background
@@ -115,9 +119,20 @@ void Config::read()
 
   m.elapsed();
 
+  string s;
+
   // ---------------[ main ]--------------------------------------------------
 
   // TODO
+
+  // ---------------[ main ]--------------------------------------------------
+
+  s = augeas.getOption(ConfigOption::SOLVER_INSTALL_RECOMMENDS.asString());
+  if (s.empty())
+    solver_installRecommends = ZConfig::instance().solver_onlyRequires();
+  else
+    solver_installRecommends = str::strToBool(s, true);
+
 
   // ---------------[ colors ]------------------------------------------------
 
@@ -128,7 +143,6 @@ void Config::read()
 
   ////// color/background //////
 
-  string s;
   s = augeas.getOption(ConfigOption::COLOR_BACKGROUND.asString());
   if (s == "light")
     color_background = true;

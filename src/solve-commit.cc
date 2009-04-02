@@ -261,13 +261,18 @@ static void set_force_resolution(Zypper & zypper)
 
 static void set_no_recommends(Zypper & zypper)
 {
-  bool no_recommends = false;
+  bool no_recommends = !zypper.config().solver_installRecommends;
+
+  // override zypper.conf in these cases:
   if (zypper.command() == ZypperCommand::REMOVE)
     // never install recommends when removing packages
     no_recommends = true;
-  else
+  else if (zypper.cOpts().count("no-recommends"))
     // install also recommended packages unless --no-recommends is specified
-    no_recommends = zypper.cOpts().count("no-recommends");
+    no_recommends = true;
+  else if (zypper.cOpts().count("recommends"))
+    no_recommends = false;
+
   DBG << "no recommends (only requires): " << no_recommends << endl;
   God->resolver()->setOnlyRequires(no_recommends);
 }

@@ -15,6 +15,8 @@
 class ConfigOption
 {
 public:
+  static const ConfigOption SOLVER_INSTALL_RECOMMENDS;
+
   static const ConfigOption COLOR_USE_COLORS;
   static const ConfigOption COLOR_BACKGROUND;
   static const ConfigOption COLOR_RESULT;
@@ -28,6 +30,8 @@ public:
 
   enum Option
   {
+    SOLVER_INSTALL_RECOMMENDS_e,
+
     COLOR_USE_COLORS_e,
     COLOR_BACKGROUND_e,
     COLOR_RESULT_e,
@@ -67,6 +71,7 @@ struct Config
   void read();
 
 
+  bool solver_installRecommends;
 
   /**
    * Whether to colorize the output. This is evaluated according to

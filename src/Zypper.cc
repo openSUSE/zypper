@@ -869,14 +869,15 @@ void Zypper::processCommandOptions()
       {"no-confirm",                no_argument,       0, 'y'},
       {"auto-agree-with-licenses",  no_argument,       0, 'l'},
       // rug compatibility, we have --auto-agree-with-licenses
-      {"agree-to-third-party-licenses",  no_argument,  0, 0},
-      {"debug-solver",              no_argument,       0, 0},
+      {"agree-to-third-party-licenses",  no_argument,  0,  0 },
+      {"debug-solver",              no_argument,       0,  0 },
       {"no-force-resolution",       no_argument,       0, 'R'},
       {"force-resolution",          no_argument,       0,  0 },
       {"dry-run",                   no_argument,       0, 'D'},
       // rug uses -N shorthand
       {"dry-run",                   no_argument,       0, 'N'},
       {"no-recommends",             no_argument,       0,  0 },
+      {"recommends",                no_argument,       0,  0 },
       // rug compatibility - will mark all packages for installation (like 'in *')
       {"entire-catalog",            required_argument, 0,  0 },
       {"help",                      no_argument,       0, 'h'},
@@ -893,22 +894,28 @@ void Zypper::processCommandOptions()
       "of <, <=, =, >=, >.\n"
       "\n"
       "  Command options:\n"
-      "-r, --repo <alias|#|URI>        Install packages only from the specified repository.\n"
-      "-t, --type <type>               Type of package (%s).\n"
-      "                                Default: %s.\n"
-      "-n, --name                      Select packages by plain name, not by capability.\n"
-      "-C, --capability                Select packages by capability.\n"
-      "-f, --force                     Install even if the item is already installed (reinstall).\n"
-      "-l, --auto-agree-with-licenses  Automatically say 'yes' to third party license confirmation prompt.\n"
-      "                                See 'man zypper' for more details.\n"
-      "    --debug-solver              Create solver test case for debugging.\n"
-      "    --no-recommends             Do not install recommended packages, only required.\n"
-      "-R, --no-force-resolution       Do not force the solver to find solution, let it ask.\n"
-      "    --force-resolution          Force the solver to find a solution (even an agressive).\n"
-      "-D, --dry-run                   Test the installation, do not actually install.\n"
-    ), "package, patch, pattern, product", "package") + string(_(
-      // translators: this option belongs to 'install' command
-      "    --from <alias|#|URI>        Select packages only from specified repository.\n"));
+      "    --from <alias|#|URI>    Select packages from the specified repository.\n"
+      "-r, --repo <alias|#|URI>    Load only the specified repository.\n"
+      "-t, --type <type>           Type of package (%s).\n"
+      "                            Default: %s.\n"
+      "-n, --name                  Select packages by plain name, not by capability.\n"
+      "-C, --capability            Select packages by capability.\n"
+      "-f, --force                 Reinstall the package if the exact version is\n"
+      "                            available in repositories.\n"
+      "-l, --auto-agree-with-licenses\n"
+      "                            Automatically say 'yes' to third party license\n"
+      "                            confirmation prompt.\n"
+      "                            See 'man zypper' for more details.\n"
+      "    --debug-solver          Create solver test case for debugging.\n"
+      "    --no-recommends         Do not install recommended packages, only required.\n"
+      "    --recommends            Install also recommended packages in addition\n"
+      "                            to the required.\n"
+      "    --no-force-resolution   Do not force the solver to find solution,\n"
+      "                            let it ask.\n"
+      "-R, --force-resolution      Force the solver to find a solution (even\n"
+      "                            an agressive).\n"
+      "-D, --dry-run               Test the installation, do not actually install.\n"
+    ), "package, patch, pattern, product", "package");
     break;
   }
 
@@ -1002,9 +1009,12 @@ void Zypper::processCommandOptions()
       " and repair eventual dependency problems.\n"
       "\n"
       "  Command options:\n"
-      "    --no-recommends      Do not install recommended packages, only required.\n"
-      "-D, --dry-run            Test the repair, do not actually do anything to the system.\n"
-      "-r, --repo <alias|#|URI> Use only specified repositories to install missing packages.\n"
+      "-r, --repo <alias|#|URI>    Load only the specified repository.\n"
+      "    --no-recommends         Do not install recommended packages, only required.\n"
+      "    --recommends            Install also recommended packages in addition\n"
+      "                            to the required.\n"
+      "-D, --dry-run               Test the repair, do not actually do anything to\n"
+      "                            the system.\n"
     );
     break;
   }
@@ -1479,6 +1489,7 @@ void Zypper::processCommandOptions()
       {"no-force-resolution",       no_argument,       0, 'R'},
       {"force-resolution",          no_argument,       0,  0 },
       {"no-recommends",             no_argument,       0,  0 },
+      {"recommends",                no_argument,       0,  0 },
       {"dry-run",                   no_argument,       0, 'D'},
       // rug uses -N shorthand
       {"dry-run",                   no_argument,       0, 'N'},
@@ -1499,21 +1510,26 @@ void Zypper::processCommandOptions()
       "\n"
       "  Command options:\n"
       "\n"
-      "-t, --type <type>               Type of package (%s).\n"
-      "                                Default: %s.\n"
-      "-r, --repo <alias|#|URI>        Limit updates to the specified repository.\n"
-      "    --skip-interactive          Skip interactive updates.\n"
-      "-l, --auto-agree-with-licenses  Automatically say 'yes' to third party license\n"
-      "                                confirmation prompt.\n"
-      "                                See man zypper for more details.\n"
-      "    --best-effort               Do a 'best effort' approach to update. Updates\n"
-      "                                to a lower than the latest version are\n"
-      "                                also acceptable.\n"
-      "    --debug-solver              Create solver test case for debugging.\n"
-      "    --no-recommends             Do not install recommended packages, only required.\n"
-      "-R, --no-force-resolution       Do not force the solver to find solution, let it ask.\n"
-      "    --force-resolution          Force the solver to find a solution (even an agressive).\n"
-      "-D, --dry-run                   Test the update, do not actually update.\n"
+      "-t, --type <type>           Type of package (%s).\n"
+      "                            Default: %s.\n"
+      "-r, --repo <alias|#|URI>    Load only the specified repository.\n"
+      "    --skip-interactive      Skip interactive updates.\n"
+      "-l, --auto-agree-with-licenses\n"
+      "                            Automatically say 'yes' to third party license\n"
+      "                            confirmation prompt.\n"
+      "                            See man zypper for more details.\n"
+      "    --best-effort           Do a 'best effort' approach to update. Updates\n"
+      "                            to a lower than the latest version are\n"
+      "                            also acceptable.\n"
+      "    --debug-solver          Create solver test case for debugging.\n"
+      "    --no-recommends         Do not install recommended packages, only required.\n"
+      "    --recommends            Install also recommended packages in addition\n"
+      "                            to the required.\n"
+      "-R, --no-force-resolution   Do not force the solver to find solution,\n"
+      "                            let it ask.\n"
+      "    --force-resolution      Force the solver to find a solution (even\n"
+      "                            an agressive).\n"
+      "-D, --dry-run               Test the update, do not actually update.\n"
     ), "package, patch, pattern, product", "package");
     break;
   }
@@ -1522,10 +1538,11 @@ void Zypper::processCommandOptions()
   {
     static struct option update_options[] = {
       {"repo",                      required_argument, 0, 'r'},
-      {"skip-interactive",          no_argument,       0, 0},
+      {"skip-interactive",          no_argument,       0,  0 },
       {"auto-agree-with-licenses",  no_argument,       0, 'l'},
-      {"debug-solver",              no_argument,       0, 0},
+      {"debug-solver",              no_argument,       0,  0 },
       {"no-recommends",             no_argument,       0,  0 },
+      {"recommends",                no_argument,       0,  0 },
       {"dry-run",                   no_argument,       0, 'D'},
       {"help", no_argument, 0, 'h'},
       {0, 0, 0, 0}
@@ -1538,13 +1555,17 @@ void Zypper::processCommandOptions()
       "\n"
       "  Command options:\n"
       "\n"
-      "-r, --repo <alias|#|URI>        Work only with specified repository.\n"
-      "    --skip-interactive          Skip interactive patches.\n"
-      "-l, --auto-agree-with-licenses  Automatically say 'yes' to third party license\n"
-      "                                confirmation prompt.\n"
-      "                                See man zypper for more details.\n"
-      "    --debug-solver              Create solver test case for debugging.\n"
-      "-D, --dry-run                   Test the update, do not actually update.\n"
+      "-r, --repo <alias|#|URI>    Load only the specified repository.\n"
+      "    --skip-interactive      Skip interactive patches.\n"
+      "-l, --auto-agree-with-licenses\n"
+      "                            Automatically say 'yes' to third party license\n"
+      "                            confirmation prompt.\n"
+      "                            See man zypper for more details.\n"
+      "    --debug-solver          Create solver test case for debugging.\n"
+      "    --no-recommends         Do not install recommended packages, only required.\n"
+      "    --recommends            Install also recommended packages in addition\n"
+      "                            to the required.\n"
+      "-D, --dry-run               Test the update, do not actually update.\n"
     );
     break;
   }
@@ -1573,8 +1594,9 @@ void Zypper::processCommandOptions()
     static struct option dupdate_options[] = {
       {"repo",                      required_argument, 0, 'r'},
       {"no-recommends",             no_argument,       0,  0 },
+      {"recommends",                no_argument,       0,  0 },
       {"auto-agree-with-licenses",  no_argument,       0, 'l'},
-      {"debug-solver",              no_argument,       0, 0},
+      {"debug-solver",              no_argument,       0,  0 },
       {"dry-run",                   no_argument,       0, 'D'},
       // rug uses -N shorthand
       {"dry-run",                   no_argument,       0, 'N'},
@@ -1589,12 +1611,16 @@ void Zypper::processCommandOptions()
       "\n"
       "  Command options:\n"
       "\n"
-      "-r, --repo <alias|#|URI>        Limit the upgrade to the specified repository.\n"
-      "    --no-recommends             Do not install recommended packages, only required.\n"
-      "-l, --auto-agree-with-licenses  Automatically say 'yes' to third party license confirmation prompt.\n"
-      "                                See man zypper for more details.\n"
-      "    --debug-solver              Create solver test case for debugging\n"
-      "-D, --dry-run                   Test the upgrade, do not actually upgrade\n"
+      "-r, --repo <alias|#|URI>    Load only the specified repository.\n"
+      "-l, --auto-agree-with-licenses\n"
+      "                            Automatically say 'yes' to third party license\n"
+      "                            confirmation prompt.\n"
+      "                            See man zypper for more details.\n"
+      "    --debug-solver          Create solver test case for debugging\n"
+      "    --no-recommends         Do not install recommended packages, only required.\n"
+      "    --recommends            Install also recommended packages in addition\n"
+      "                            to the required.\n"
+      "-D, --dry-run               Test the upgrade, do not actually upgrade\n"
     );
     break;
   }
