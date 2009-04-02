@@ -112,6 +112,7 @@ solvable-element =
     attribute edition { xsd:string },      # target edition
     attribute edition-old { xsd:string }?, # currently installed version in case of upgrade
     attribute arch { xsd:string },
+    attribute arch-old { xsd:string }?,    # currently installed architecture
     attribute summary { xsd:string }?,
     text?
   }
