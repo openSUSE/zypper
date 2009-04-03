@@ -737,7 +737,7 @@ static void print_repo_list(Zypper & zypper,
     tr << (repo.autorefresh() ? _("Yes") : _("No"));
     // priority
     if (all || showprio)
-      tr << str::numstring (repo.priority());
+      tr << str::numstring (repo.priority(), 4); // output flush right; looks nicer and sorts correctly
     // type
     if (all)
       tr << repo.type().asString();
@@ -2035,7 +2035,7 @@ static void service_list_tr(
     if (service)
       tr << "";
     else
-      tr << str::numstring (repo->priority());
+      tr << str::numstring (repo->priority(), 4); // output flush right; looks nicer and sorts correctly
   }
 
   // type
