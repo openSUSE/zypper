@@ -1,4 +1,10 @@
 -------------------------------------------------------------------
+Tue Apr  7 10:26:57 CEST 2009 - jkupec@suse.cz
+
+- Fixed ignored --no-confirm option (bnc #468422)
+- 0.6.200
+
+-------------------------------------------------------------------
 Mon Jul  7 15:31:11 CEST 2008 - jkupec@suse.cz
 
 - exit in non-interactive mode if given package cannot be found
