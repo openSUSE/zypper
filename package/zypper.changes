@@ -1,4 +1,10 @@
 -------------------------------------------------------------------
+Tue Apr  7 18:56:09 CEST 2009 - jkupec@suse.cz
+
+- logrotate file for zypp-refresh added (bnc #487613)
+- 0.11.11
+
+-------------------------------------------------------------------
 Mon Jul 21 17:43:23 CEST 2008 - jkupec@suse.cz
 
 - don't mark mutliple patch solvables with the same name for
