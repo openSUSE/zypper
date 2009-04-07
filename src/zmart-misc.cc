@@ -323,7 +323,7 @@ int show_summary()
 
       if (it->resolvable()->kind() == ResTraits<Patch>::kind) {
         Patch::constPtr patch = asKind<Patch>(it->resolvable());
-        
+
         // set return value to 'reboot needed'
         if (patch->reboot_needed())
           retv = ZYPPER_EXIT_INF_REBOOT_NEEDED;
@@ -350,22 +350,22 @@ std::string calculate_token()
 {
   SourceManager_Ptr manager;
   manager = SourceManager::sourceManager();
-  
+
   std::string token;
   stringstream token_stream;
   for ( std::list<Source_Ref>::iterator it = gData.sources.begin(); it !=  gData.sources.end(); ++it )
   {
     Source_Ref src = *it;
-    
+
 //     if ( gSettings.disable_system_sources == SourcesFromSystem )
 //     {
 //       if ( gSettings.output_type == OutputTypeNice )
 //         cout << "Refreshing source " <<  src.alias() << endl;
 //       src.refresh();
 //     }
-    
+
     token_stream << "[" << src.alias() << "| " << src.url() << src.timestamp() << "]";
-    MIL << "Source: " << src.alias() << " from " << src.timestamp() << std::endl;  
+    MIL << "Source: " << src.alias() << " from " << src.timestamp() << std::endl;
   }
 
 #ifdef LIBZYPP_1xx
@@ -373,23 +373,23 @@ std::string calculate_token()
 #else
   token_stream << "[" << "target" << "| " << God->target()->timestamp() << "]";
 #endif
-  
+
   //static std::string digest(const std::string& name, std::istream& is
   token = Digest::digest("sha1", token_stream);
-  
+
   //if ( gSettings.output_type == OutputTypeSimple )
   //  cout << token;
-  
+
   MIL << "new token [" << token << "]" << " previous: [" << gSettings.previous_token << "] previous code: " << gSettings.previous_code << std::endl;
-  
+
   return token;
 }
 
 void cond_load_resolvables ()
-{	
+{
   // something changed
   load_sources();
-    
+
   if ( ! gSettings.disable_system_resolvables ) {
     load_target();
   }
@@ -478,7 +478,7 @@ void dump_pool ()
 
   _XDEBUG( "---------------------------------------" );
   for (ResPool::const_iterator it =   God->pool().begin(); it != God->pool().end(); ++it, ++count) {
-    
+
     if (!full_pool_shown                                    // show item if not shown all before
 	|| it->status().transacts()                         // or transacts
 	|| !it->status().isUndetermined())                  // or established status
@@ -588,7 +588,7 @@ public:
 	      // or a better edition than candidate
 	      || uninstalled->edition().compare( provider->edition() ) < 0))
       {
-	uninstalled = provider;	// store 
+	uninstalled = provider;	// store
       }
       return true;		// keep going
     }
@@ -768,11 +768,11 @@ int solve_and_commit (bool non_interactive) {
   int retv = show_summary();
 
   if (retv >= 0) { // there are resolvables to install/uninstall
-	if (read_bool_answer(_("Continue?"), non_interactive)) {
+    if (non_interactive || read_bool_answer(_("Continue?"), true)) {
       if (!confirm_licenses(non_interactive)) return ZYPPER_EXIT_OK;
 
       cerr_v << _("committing") << endl;
-      
+
       try {
         ZYppCommitResult result = God->commit( ZYppCommitPolicy() );
 
@@ -783,7 +783,7 @@ int solve_and_commit (bool non_interactive) {
       }
       catch ( const Exception & excpt_r ) {
         ZYPP_CAUGHT( excpt_r );
-        
+
         // special handling for failed integrity exception
         if (excpt_r.msg().find("fails integrity check") != string::npos) {
           cerr << endl
@@ -819,7 +819,7 @@ int solve_and_commit (bool non_interactive) {
 // - make this more user-friendly e.g. show only license name and
 //  ask for [y/n/r] with 'r' for read the license text
 //  (opened throu more or less, etc...)
-// - after negative answer, call solve_and_commit() again 
+// - after negative answer, call solve_and_commit() again
 bool confirm_licenses(bool non_interactive)
 {
   bool confirmed = true;
@@ -854,7 +854,7 @@ bool confirm_licenses(bool non_interactive)
       if (non_interactive || !read_bool_answer(question, false))
       {
         confirmed = false;
-        
+
         if (non_interactive)
         {
           cout << endl <<
