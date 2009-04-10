@@ -149,12 +149,19 @@ namespace zypp
         IdString     ident()    const;
 
         ResKind      kind()     const;
-        /** Test whether a Solvable is of a certain \ref ResKind. */
-        bool         isKind( const ResKind & kind_r ) const;
+        /** Test whether a Solvable is of a certain \ref ResKind.
+	 * The test is far cheaper than actually retriveing and
+         * comparing the \ref kind.
+	 */
+        bool isKind( const ResKind & kind_r ) const;
         /** \overload */
         template<class _Res>
         bool isKind() const
         { return isKind( resKind<_Res>() ); }
+        /** \overload Extend the test to a range of \ref ResKind. */
+        template<class _Iterator>
+        bool isKind( _Iterator begin, _Iterator end )
+        { for_( it, begin, end ) if ( isKind( *it ) ) return true; return false; }
 
         std::string  name()     const;
         Edition      edition()  const;
