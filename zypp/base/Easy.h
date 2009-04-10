@@ -23,6 +23,17 @@
 */
 #define for_(IT,BEG,END) for ( typeof(BEG) IT = BEG, _for_end = END; IT != _for_end; ++IT )
 
+/** Simple C-array iterator
+ * \code
+ *  const char * defstrings[] = { "",  "a", "default", "two words" };
+ *  for_( it, arrayBegin(defstrings), arrayEnd(defstrings) )
+ *    cout << *it << endl;
+ * \endcode
+*/
+#define arrayBegin(A) (&A[0])
+#define arrayEnd(A)   (&A[0] + (sizeof(A)/sizeof(*A)))
+
+
 ///////////////////////////////////////////////////////////////////
 namespace zypp
 { /////////////////////////////////////////////////////////////////
