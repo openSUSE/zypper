@@ -1,8 +1,15 @@
 -------------------------------------------------------------------
+Wed Apr 15 14:31:52 CEST 2009 - jkupec@suse.cz
+
+- Fixed requesting of perl symbols in 'install'. E.g.
+  zypper install 'perl(MIME::Lite)' (bnc #433679)
+- Corrected list of repo priority in 'repos' command (bnc #436688).
+- 0.11.11
+
+-------------------------------------------------------------------
 Tue Apr  7 18:56:09 CEST 2009 - jkupec@suse.cz
 
 - logrotate file for zypp-refresh added (bnc #487613)
-- 0.11.11
 
 -------------------------------------------------------------------
 Mon Jul 21 17:43:23 CEST 2008 - jkupec@suse.cz
