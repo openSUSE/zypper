@@ -553,7 +553,13 @@ void install_remove(Zypper & zypper,
 
     string::size_type pos;
 
-    if ((pos = str.rfind(':')) != string::npos)
+    // force repository specified by prefixing 'repo:' to the package name
+    if (!force_by_capability &&
+        //! \todo FIXME this causes problems when requesting symbols containing
+        //! ':', like perl(Foo::Bar). Maybe we should drop or introduce another
+        //! way to enforce repo per package.
+        (pos = str.rfind(':')) != string::npos &&
+        !(str.find("perl(") == 0)) // bnc #433679
     {
       repo = str.substr(0, pos);
       str = str.substr(pos + 1);
