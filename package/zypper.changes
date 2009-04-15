@@ -1,4 +1,10 @@
 -------------------------------------------------------------------
+Wed Apr 15 11:18:18 CEST 2009 - jkupec@suse.cz
+
+- Fixed requesting of perl symbols in 'install'. E.g.
+  zypper install 'perl(MIME::Lite)' (bnc #433679)
+
+-------------------------------------------------------------------
 Thu Apr  2 19:46:21 CEST 2009 - jkupec@suse.cz
 
 - configuration file support added. Global settings go to
