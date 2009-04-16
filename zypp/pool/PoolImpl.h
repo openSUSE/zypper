@@ -334,8 +334,9 @@ namespace zypp
           for_( it, begin(), end() )
           {
             ResStatus & status( it->status() );
-            if ( ! status.isByUser() )
-              continue; // ignore non-uer requests
+            if ( ! ( status.isByUser() || status.isByApplLow() ) )
+              continue; // ignore non-user requests; ApplLow means selected
+                        // by solver, but on behalf of a user request.
 
             switch ( status.getTransactValue() )
             {
