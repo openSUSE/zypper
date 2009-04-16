@@ -1,4 +1,10 @@
 -------------------------------------------------------------------
+Thu Apr 16 12:49:40 CEST 2009 - ma@suse.de
+
+- Soft lock packages deleted on behalf of a user request.
+- version 6.4.1 (2)
+
+-------------------------------------------------------------------
 Tue Mar 31 15:51:32 CEST 2009 - ma@suse.de
 
 - New zypp.conf option 'download.media_preference': Hint which media 
