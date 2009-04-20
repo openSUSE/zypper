@@ -87,6 +87,8 @@ namespace zypp
                        private base::SafeBool<Derived>
   {
     typedef typename base::SafeBool<Derived>::bool_type bool_type;
+    public:
+      typedef IdString::IdType IdType;
 
     protected:
       IdStringType() {}
@@ -105,7 +107,7 @@ namespace zypp
       const char *  c_str()       const { return idStr().c_str(); }
       std::string   asString()    const { return idStr().asString(); }
 
-      IdString::IdType id()       const { return idStr().id(); }
+      IdType        id()          const { return idStr().id(); }
 
     public:
 #ifndef SWIG // Swig treats it as syntax error
