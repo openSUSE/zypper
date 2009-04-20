@@ -508,6 +508,7 @@ SET( zypp_sat_SRCS
   sat/LocaleSupport.cc
   sat/LookupAttr.cc
   sat/SolvAttr.cc
+  sat/AttrMatcher.cc
 )
 
 SET( zypp_sat_HEADERS
@@ -521,6 +522,7 @@ SET( zypp_sat_HEADERS
   sat/LookupAttr.h
   sat/LookupAttrTools.h
   sat/SolvAttr.h
+  sat/AttrMatcher.h
 )
 
 INSTALL(  FILES
