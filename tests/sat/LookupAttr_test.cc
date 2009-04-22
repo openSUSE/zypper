@@ -1,5 +1,6 @@
 #include "TestSetup.h"
 #include <zypp/sat/LookupAttr.h>
+#include <zypp/sat/AttrMatcher.h>
 #include <zypp/ResObjects.h>
 
 static TestSetup test( "/tmp/x", Arch_x86_64 );
@@ -52,6 +53,20 @@ BOOST_AUTO_TEST_CASE(LookupAttr_existingattr)
   BOOST_CHECK( ! q.empty() );
   BOOST_CHECK( q.size() != 0 );
   BOOST_CHECK_NE( q.begin(), q.end() );
+}
+
+BOOST_AUTO_TEST_CASE(LookupAttr_existingattr_matcher)
+{
+  sat::LookupAttr q( sat::SolvAttr::name );
+
+  BOOST_CHECK_THROW( q.setAttrMatcher( sat::AttrMatcher("[]ypper",Match::REGEX) ), MatchInvalidRegexException );
+  BOOST_CHECK( ! q.attrMatcher() );
+  BOOST_CHECK_NO_THROW( q.setAttrMatcher( sat::AttrMatcher("[zZ]ypper",Match::REGEX) ) );
+  BOOST_CHECK( q.attrMatcher() );
+
+  BOOST_CHECK_EQUAL( q.size(), 9 );
+  for_(it,q.begin(),q.end())
+  { cout << it << endl;}
 }
 
 BOOST_AUTO_TEST_CASE(LookupAttr_iterate_solvables)

@@ -29,10 +29,14 @@ namespace zypp
 { /////////////////////////////////////////////////////////////////
 
   class CheckSum;
+  class Match;
+  class MatchException;
 
   ///////////////////////////////////////////////////////////////////
   namespace sat
   { /////////////////////////////////////////////////////////////////
+
+    class AttrMatcher;
 
     ///////////////////////////////////////////////////////////////////
     //
@@ -92,6 +96,9 @@ namespace zypp
     class LookupAttr
     {
       public:
+        typedef MatchException Exception;
+
+      public:
         typedef unsigned size_type;
 
         /** Specify the where to look for the attribule. */
@@ -146,6 +153,28 @@ namespace zypp
         /** Set the \ref SolvAttr to search. */
         void setAttr( SolvAttr attr_r );
         //@}
+
+        /** \name Restrict attributes to match a pattern. */
+        //@{
+        /** The pattern to match.
+         * You can also evaluate \ref AttrMatcher in a boolean context,
+         * in order to test whether an \ref AttrMatcher is set:
+         * \code
+         *   LookupAttr q;
+         *   if ( q.attrMatcher() )
+         *     ...; // an AttrMatcher is set
+         * \endcode
+        */
+        const AttrMatcher & attrMatcher() const;
+
+        /** Set the pattern to match.
+         * \throws MatchException Any of the exceptions thrown by \ref AttrMatcher::compile.
+         */
+        void setAttrMatcher( const AttrMatcher & matcher_r );
+
+        /** Reset the pattern to match. */
+        void resetAttrMatcher();
+       //@}
 
       public:
         /** \name Where to search. */
@@ -226,6 +255,68 @@ namespace zypp
         using LookupAttr::setSolvable;
     };
     ///////////////////////////////////////////////////////////////////
+
+    namespace detail
+    {
+      /** Wrapper around sat \c ::_Dataiterator.
+       *
+       * Manages copy and assign, and release of allocated
+       * resources like datamatcher inside the dataiterator.
+       * Also maintains a copy of the matchstring in order to
+       * keep the char* passed to the dataiterator valid.
+       */
+      class DIWrap : private base::SafeBool<DIWrap>
+      {
+        public:
+          /** \c NULL \c ::_Dataiterator */
+          DIWrap()
+          : _dip( 0 )
+          {}
+          /** Initializes */
+          DIWrap( RepoIdType repoId_r, SolvableIdType solvId_r, IdType attrId_r,
+                  const std::string & mstring_r = std::string(), int flags_r = 0 );
+          /** \overload to catch \c NULL \a mstring_r. */
+          DIWrap( RepoIdType repoId_r, SolvableIdType solvId_r, IdType attrId_r,
+                  const char * mstring_r, int flags_r = 0 );
+          DIWrap( const DIWrap & rhs );
+          ~DIWrap();
+        public:
+          void swap( DIWrap & rhs )
+          {
+            if ( &rhs != this ) // prevent self assign!
+            {
+              std::swap( _dip, rhs._dip );
+              std::swap( _mstring, rhs._mstring );
+            }
+          }
+          DIWrap & operator=( const DIWrap & rhs )
+          {
+            if ( &rhs != this ) // prevent self assign!
+              DIWrap( rhs ).swap( *this );
+            return *this;
+          }
+          void reset()
+          { DIWrap().swap( *this ); }
+        public:
+#ifndef SWIG // Swig treats it as syntax error
+          /** Evaluate in a boolean context <tt>( _dip != NULL )</tt>. */
+          using base::SafeBool<DIWrap>::operator bool_type;
+#endif
+        public:
+          ::_Dataiterator * operator->() const  { return _dip; }
+          ::_Dataiterator * get()        const  { return _dip; }
+          const std::string & getstr()   const  { return _mstring; }
+        private:
+          friend base::SafeBool<DIWrap>::operator bool_type() const;
+          bool boolTest() const
+          { return _dip; }
+        private:
+          ::_Dataiterator * _dip;
+          std::string _mstring;
+      };
+      /** \relates DIWrap Stream output. */
+      std::ostream & operator<<( std::ostream & str, const DIWrap & obj );
+    }
 
     ///////////////////////////////////////////////////////////////////
     //
@@ -405,15 +496,13 @@ namespace zypp
 
       public:
         /**
-         * C-tor taking over ownership of the passed scoped _Dataiterator*
+         * C-tor taking over ownership of the passed \c ::_Dataiterator
          * and doing it's first iteration (::dataiterator_step)
          */
-        iterator( scoped_ptr< ::_Dataiterator> & dip_r );
+        iterator( detail::DIWrap & dip_r );
 
       private:
         friend class boost::iterator_core_access;
-
-        ::_Dataiterator * cloneFrom( const ::_Dataiterator * rhs );
 
         template <class OtherDerived, class OtherIterator, class V, class C, class R, class D>
         bool equal( const boost::iterator_adaptor<OtherDerived, OtherIterator, V, C, R, D> & rhs ) const
@@ -433,7 +522,7 @@ namespace zypp
         ::_Dataiterator * get() const
         { return _dip.get(); }
       private:
-        scoped_ptr< ::_Dataiterator> _dip;
+        detail::DIWrap _dip;
     };
     ///////////////////////////////////////////////////////////////////
 

@@ -17,9 +17,11 @@
 
 #include "zypp/sat/detail/PoolImpl.h"
 
-#include "zypp/sat/LookupAttr.h"
-#include "zypp/CheckSum.h"
 #include "zypp/sat/Pool.h"
+#include "zypp/sat/LookupAttr.h"
+#include "zypp/sat/AttrMatcher.h"
+
+#include "zypp/CheckSum.h"
 
 using std::endl;
 
@@ -72,6 +74,15 @@ namespace zypp
         void setAttr( SolvAttr attr_r )
         { _attr = attr_r; }
 
+        const AttrMatcher & attrMatcher() const
+        { return _attrMatcher; }
+
+        void setAttrMatcher( const AttrMatcher & matcher_r )
+        {
+          matcher_r.compile();
+          _attrMatcher = matcher_r;
+        }
+
       public:
         bool pool() const
         { return ! (_repo || _solv); }
@@ -102,29 +113,16 @@ namespace zypp
 
         LookupAttr::iterator begin() const
         {
-          if ( _attr == SolvAttr::noAttr )
+          if ( _attr == SolvAttr::noAttr || sat::Pool::instance().reposEmpty() )
             return end();
 
-#warning Need to call dataiterator_free, use Autodispose instead of scoped_ptr
-          scoped_ptr< ::_Dataiterator> dip( new ::Dataiterator );
-          // needed while LookupAttr::iterator::dip_equal does ::memcmp:
-          ::memset( dip.get(), 0, sizeof(::_Dataiterator) );
-
+          detail::RepoIdType whichRepo = detail::noRepoId; // all repos
           if ( _solv )
-          {
-            ::dataiterator_init( dip.get(), sat::Pool::instance().get(), _solv.repository().id(), _solv.id(), _attr.id(), 0, 0 );
-          }
+            whichRepo = _solv.repository().id();
           else if ( _repo )
-          {
-            ::dataiterator_init( dip.get(), sat::Pool::instance().get(),              _repo.id(), _solv.id(), _attr.id(), 0, 0 );
-          }
-          else if ( ! sat::Pool::instance().reposEmpty() )
-          {
-            ::dataiterator_init( dip.get(), sat::Pool::instance().get(),                       0, _solv.id(), _attr.id(), 0, 0 );
-          }
-          else
-            return end();
+            whichRepo = _repo.id();
 
+          detail::DIWrap dip( whichRepo, _solv.id(), _attr.id(), _attrMatcher.searchstring(), _attrMatcher.flags().get() );
           return iterator( dip ); // iterator takes over ownership!
         }
 
@@ -135,6 +133,7 @@ namespace zypp
         SolvAttr   _attr;
         Repository _repo;
         Solvable   _solv;
+        AttrMatcher _attrMatcher;
 
       private:
         friend Impl * rwcowClone<Impl>( const Impl * rhs );
@@ -172,6 +171,12 @@ namespace zypp
 
     void LookupAttr::setAttr( SolvAttr attr_r )
     { _pimpl->setAttr( attr_r ); }
+
+    const AttrMatcher & LookupAttr::attrMatcher() const
+    { return _pimpl->attrMatcher(); }
+
+    void LookupAttr::setAttrMatcher( const AttrMatcher & matcher_r )
+    { _pimpl->setAttrMatcher( matcher_r ); }
 
     ///////////////////////////////////////////////////////////////////
 
@@ -248,6 +253,74 @@ namespace zypp
 
     void LookupRepoAttr::setRepo( Repository repo_r )
     { LookupAttr::setRepo( repo_r, REPO_ATTR ); }
+
+    ///////////////////////////////////////////////////////////////////
+    //
+    //  CLASS NAME : detail::DIWrap
+    //
+    ///////////////////////////////////////////////////////////////////
+
+    namespace detail
+    {
+      DIWrap::DIWrap( RepoIdType repoId_r, SolvableIdType solvId_r, IdType attrId_r,
+                      const std::string & mstring_r, int flags_r )
+      : _dip( new ::Dataiterator )
+      , _mstring( mstring_r )
+      {
+        ::dataiterator_init( _dip, sat::Pool::instance().get(), repoId_r, solvId_r, attrId_r,
+                             _mstring.empty() ? 0 : _mstring.c_str(), flags_r );
+      }
+
+      DIWrap::DIWrap( RepoIdType repoId_r, SolvableIdType solvId_r, IdType attrId_r,
+                      const char * mstring_r, int flags_r )
+      : _dip( new ::Dataiterator )
+      , _mstring( mstring_r ? mstring_r : "" )
+      {
+        ::dataiterator_init( _dip, sat::Pool::instance().get(), repoId_r, solvId_r, attrId_r,
+                             _mstring.empty() ? 0 : _mstring.c_str(), flags_r );
+      }
+
+      DIWrap::DIWrap( const DIWrap & rhs )
+        : _dip( 0 )
+        , _mstring( rhs._mstring )
+      {
+        if ( rhs._dip )
+        {
+          _dip = new ::Dataiterator;
+          *_dip = *rhs._dip;
+          // now we have to manually clone any allocated regex data matcher.
+          ::Datamatcher & matcher( _dip->matcher );
+          if ( matcher.match && ( matcher.flags & SEARCH_STRINGMASK ) == SEARCH_REGEX )
+          {
+            ::datamatcher_init( &matcher, _mstring.c_str(), matcher.flags );
+          }
+          else if ( matcher.match && matcher.match != _mstring.c_str() )
+          {
+            //SEC << "**" << rhs._dip << endl;
+            SEC << "r " << rhs._dip->matcher.match << endl;
+            SEC << "r " << rhs._dip->matcher.flags << endl;
+            SEC << "r " << (const void*)rhs._mstring.c_str() << "'" << rhs._mstring << "'" << endl;
+
+            SEC << "t " << matcher.match << endl;
+            SEC << "t " << matcher.flags << endl;
+            SEC << "t " << (const void*)_mstring.c_str() << "'" << _mstring << "'" <<  endl;
+            throw( "this cant be!" );
+          }
+        }
+      }
+
+      DIWrap::~DIWrap()
+      {
+        if ( _dip )
+        {
+          ::dataiterator_free( _dip );
+          delete _dip;
+        }
+      }
+
+      std::ostream & operator<<( std::ostream & str, const DIWrap & obj )
+      { return str << obj.get(); }
+    }
 
     ///////////////////////////////////////////////////////////////////
     //
@@ -366,13 +439,8 @@ namespace zypp
       // remember this position
       ::dataiterator_setpos( _dip.get() );
 
-      // setup the new sub iterator
-      scoped_ptr< ::_Dataiterator> dip( new ::Dataiterator );
-      // needed while LookupAttr::iterator::dip_equal does ::memcmp:
-      ::memset( dip.get(), 0, sizeof(::_Dataiterator) );
-
-      ::dataiterator_init( dip.get(), sat::Pool::instance().get(), 0, SOLVID_POS, 0, 0, 0 );
-
+      // setup the new sub iterator with the remembered position
+      detail::DIWrap dip( 0, SOLVID_POS, 0, 0, 0 );
       return iterator( dip ); // iterator takes over ownership!
     }
 
@@ -547,50 +615,45 @@ namespace zypp
     // internal stuff below
     ///////////////////////////////////////////////////////////////////
 
-    LookupAttr::iterator::~iterator()
-    {}
-
     LookupAttr::iterator::iterator()
     : iterator_adaptor_( 0 )
     {}
 
     LookupAttr::iterator::iterator( const iterator & rhs )
-    : iterator_adaptor_( cloneFrom( rhs.base() ) )
-    , _dip( base() )
+    : iterator_adaptor_( 0 )
+    , _dip( rhs._dip )
+    {
+      base_reference() = _dip.get();
+    }
+
+    LookupAttr::iterator::iterator( detail::DIWrap & dip_r )
+    : iterator_adaptor_( 0 )
+    {
+      _dip.swap( dip_r ); // take ownership!
+      base_reference() = _dip.get();
+      increment();
+    }
+
+    LookupAttr::iterator::~iterator()
     {}
 
     LookupAttr::iterator & LookupAttr::iterator::operator=( const iterator & rhs )
     {
       if ( &rhs != this )
       {
-        _dip.reset( cloneFrom( rhs.base() ) );
+        _dip = rhs._dip;
         base_reference() = _dip.get();
       }
       return *this;
     }
 
-    LookupAttr::iterator::iterator( scoped_ptr< ::_Dataiterator> & dip_r )
-    : iterator_adaptor_( dip_r.get() )
-    {
-      _dip.swap( dip_r ); // take ownership!
-      increment();
-    }
-
     ///////////////////////////////////////////////////////////////////
-
-    ::_Dataiterator * LookupAttr::iterator::cloneFrom( const ::_Dataiterator * rhs )
-    {
-      if ( ! rhs )
-        return 0;
-      ::_Dataiterator * ret( new ::_Dataiterator );
-      *ret = *rhs;
-      return ret;
-    }
 
     bool LookupAttr::iterator::dip_equal( const ::_Dataiterator & lhs, const ::_Dataiterator & rhs ) const
     {
-      // requires ::memset in LookupAttr::begin
-      return ::memcmp( &lhs, &rhs, sizeof(::_Dataiterator) ) == 0;
+      // Iterator equal is same position in same container.
+      // Here: same attribute in same solvable.
+      return( lhs.solvid == rhs.solvid && lhs.key->name == rhs.key->name );
     }
 
     detail::IdType LookupAttr::iterator::dereference() const
