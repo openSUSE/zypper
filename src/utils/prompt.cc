@@ -337,9 +337,9 @@ unsigned int get_prompt_reply(Zypper & zypper,
     if (poptions.isYesNoPrompt())
     {
       s << " " << format(
-      // translators: the %s are: 'y', 'n', 'yes' (translated), and 'no' (translated).
+      // translators: the %s are: 'y', 'yes' (translated), 'n', and 'no' (translated).
       _("Enter '%s' for '%s' or '%s' for '%s' if nothing else works for you."))
-      % "y" % "n" % _("yes") % _("no");
+      % "y" % _("yes") % "n" % _("no");
     }
 
     zypper.out().prompt(pid, s.str(), poptions);
