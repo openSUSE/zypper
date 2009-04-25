@@ -28,6 +28,7 @@ int string_to_columns_e (const string & str)
   const char* ptr = str.c_str ();
   size_t s_bytes = str.length ();
   int s_cols = 0;
+  bool in_ctrlseq = false;
 
   mbstate_t shift_state;
   memset (&shift_state, 0, sizeof (shift_state));
@@ -41,7 +42,13 @@ int string_to_columns_e (const string & str)
     if (c_bytes >= (size_t) -2) // incomplete (-2) or invalid (-1) sequence
       return -1;
 
-    s_cols += wcwidth (wc);
+    // ignore the length of terminal control sequences in order
+    if (!in_ctrlseq && ::wcsncmp(&wc, L"\033", 1) == 0)
+      in_ctrlseq = true;
+    else if (in_ctrlseq && ::wcsncmp(&wc, L"m", 1) == 0)
+      in_ctrlseq = false;
+    else if (!in_ctrlseq)
+      s_cols += ::wcwidth(wc);
 
     s_bytes -= c_bytes;
     ptr += c_bytes;
@@ -64,19 +71,19 @@ void wrap_text(ostream & out, const string & text,
     unsigned indent, unsigned wrap_width, int initial)
 {
   const char * s = text.c_str();
-  size_t s_bytes = text.length ();
+  size_t s_bytes = text.length();
   const char * prevwp = s;
   const char * linep = s;
   wchar_t wc;
   size_t bytes_read;
   bool in_word = false;
+  bool in_ctrlseq = false;
 
   mbstate_t shift_state;
   memset (&shift_state, 0, sizeof (shift_state));
 
   unsigned col = 0;
   unsigned toindent = initial < 0 ? indent : initial;
-  //wchar_t ws[2] = L" ";
   do
   {
     // indentation
@@ -89,7 +96,14 @@ void wrap_text(ostream & out, const string & text,
     bytes_read = mbrtowc (&wc, s, s_bytes, &shift_state);
     if (bytes_read > 0)
     {
-      col += ::wcwidth(wc);
+      // ignore the length of terminal control sequences in order
+      // to wrap colored text correctly
+      if (!in_ctrlseq && ::wcsncmp(&wc, L"\033", 1) == 0)
+        in_ctrlseq = true;
+      else if (in_ctrlseq && ::wcsncmp(&wc, L"m", 1) == 0)
+        in_ctrlseq = false;
+      else if (!in_ctrlseq)
+        col += ::wcwidth(wc);
 
       if (::iswspace(wc))
         in_word = false;
