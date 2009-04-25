@@ -1,8 +1,15 @@
 -------------------------------------------------------------------
+Sat Apr 25 22:44:55 CEST 2009 - jkupec@suse.cz
+
+- Highlighting package count numbers in the summary.
+
+-------------------------------------------------------------------
 Wed Apr 15 11:18:18 CEST 2009 - jkupec@suse.cz
 
 - Fixed requesting of perl symbols in 'install'. E.g.
   zypper install 'perl(MIME::Lite)' (bnc #433679)
+- Corrected list of repo priority in 'repos' and 'services' command
+  (bnc #436688) (Susanne Oberhauser <froh@novell.com>)
 
 -------------------------------------------------------------------
 Thu Apr  2 19:46:21 CEST 2009 - jkupec@suse.cz
