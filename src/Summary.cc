@@ -17,6 +17,7 @@
 
 #include "main.h"
 #include "utils/text.h"
+#include "utils/colors.h"
 #include "utils/misc.h"
 #include "Table.h"
 
@@ -621,7 +622,9 @@ void Summary::writePackageCounts(ostream & out)
   if (i != toupgrade.end())
   {
     count = i->second.size();
-    s << format(_PL("%d package to upgrade", "%d packages to upgrade", count)) % count;
+    fprint_color(s, str::form("%d ", count), COLOR_CONTEXT_HIGHLIGHT);
+    // translators: this text will be preceded by a number e.g. "5 packages to ..."
+    s << _PL("package to upgrade", "packages to upgrade", count);
     gotcha = true;
   }
   i = todowngrade.find(ResKind::package);
@@ -629,18 +632,28 @@ void Summary::writePackageCounts(ostream & out)
   {
     count = i->second.size();
     if (gotcha)
-      s << ", " << format(_PL("%d to downgrade", "%d to downgrade", count)) % count;
+      s << ", ";
+    fprint_color(s, str::form("%d ", count), COLOR_CONTEXT_HIGHLIGHT);
+    if (gotcha)
+      // translators: this text will be preceded by a number e.g. "5 to ..."
+      s << _PL("to downgrade", "to downgrade", count);
     else
-      s << format(_PL("%d package to downgrade", "%d packages to downgrade", count)) % count;
+      // translators: this text will be preceded by a number e.g. "5 packages to ..."
+      s << _PL("package to downgrade", "packages to downgrade", count);
   }
   i = toinstall.find(ResKind::package);
   if (i != toinstall.end())
   {
     count = i->second.size();
     if (gotcha)
-      s << ", " << format(_PL("%d new", "%d new", count)) % count;
+      s << ", ";
+    fprint_color(s, str::form("%d ", count), COLOR_CONTEXT_HIGHLIGHT);
+    if (gotcha)
+      // translators: this text will be preceded by a number e.g. "5 new"
+      s << _PL("new", "new", count);
     else
-      s << format(_PL("%d new package to install", "%d new packages to install", count)) % count;
+      // translators: this text will be preceded by a number e.g. "5 new to install"
+      s << _PL("new package to install", "new packages to install", count);
     gotcha = true;
   }
   i = toreinstall.find(ResKind::package);
@@ -648,9 +661,14 @@ void Summary::writePackageCounts(ostream & out)
   {
     count = i->second.size();
     if (gotcha)
-      s << ", " << format(_PL("%d to reinstall", "%d to reinstall", count)) % count;
+      s << ", ";
+    fprint_color(s, str::form("%d ", count), COLOR_CONTEXT_HIGHLIGHT);
+    if (gotcha)
+      // translators: this text will be preceded by a number e.g. "5 to ..."
+      s << _PL("to reinstall", "to reinstall", count);
     else
-      s << format(_PL("%d package to reinstall", "%d packages to reinstall", count)) % count;
+      // translators: this text will be preceded by a number e.g. "5 packages to ..."
+      s << _PL("package to reinstall", "packages to reinstall", count);
     gotcha = true;
   }
   i = toremove.find(ResKind::package);
@@ -658,9 +676,14 @@ void Summary::writePackageCounts(ostream & out)
   {
     count = i->second.size();
     if (gotcha)
-      s << ", " << format(_PL("%d to remove", "%d to remove", count)) % count;
+      s << ", ";
+    fprint_color(s, str::form("%d ", count), COLOR_CONTEXT_HIGHLIGHT);
+    if (gotcha)
+      // translators: this text will be preceded by a number e.g. "5 to ..."
+      s << _PL("to remove", "to remove", count);
     else
-      s << format(_PL("%d package to remove", "%d packages to remove", count)) % count;
+      // translators: this text will be preceded by a number e.g. "5 packages to ..."
+      s << _PL("package to remove", "packages to remove", count);
     gotcha = true;
   }
   i = tochangevendor.find(ResKind::package);
@@ -668,9 +691,14 @@ void Summary::writePackageCounts(ostream & out)
   {
     count = i->second.size();
     if (gotcha)
-      s << ", " << format(_PL("%d to change vendor", "%d to change vendor", count)) % count;
+      s << ", ";
+    fprint_color(s, str::form("%d ", count), COLOR_CONTEXT_HIGHLIGHT);
+    if (gotcha)
+      // translators: this text will be preceded by a number e.g. "5 to ..."
+      s << _PL("to change vendor", " to change vendor", count);
     else
-      s << format(_PL("%d package will change vendor", "%d packages will change vendor", count)) % count;
+      // translators: this text will be preceded by a number e.g. "5 packages ..."
+      s << _PL("package will change vendor", "packages will change vendor", count);
     gotcha = true;
   }
   i = tochangearch.find(ResKind::package);
@@ -678,9 +706,14 @@ void Summary::writePackageCounts(ostream & out)
   {
     count = i->second.size();
     if (gotcha)
-      s << ", " << format(_PL("%d to change arch", "%d to change arch", count)) % count;
+      s << ", ";
+    fprint_color(s, str::form("%d ", count), COLOR_CONTEXT_HIGHLIGHT);
+    if (gotcha)
+      // translators: this text will be preceded by a number e.g. "5 to ..."
+      s << _PL("to change arch", "to change arch", count);
     else
-      s << format(_PL("%d package will change arch", "%d packages will change arch", count)) % count;
+      // translators: this text will be preceded by a number e.g. "5 packages ..."
+      s << _PL("package will change arch", "packages will change arch", count);
     gotcha = true;
   }
   s << "." <<  endl;
