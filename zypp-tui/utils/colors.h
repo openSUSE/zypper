@@ -56,6 +56,7 @@ typedef enum zypper_color_contexts
   COLOR_CONTEXT_NEGATIVE             = 6,
   COLOR_CONTEXT_PROMPT_OPTION        = 7,
   COLOR_CONTEXT_PROMPT_SHORTHAND     = 8,
+  COLOR_CONTEXT_HIGHLIGHT            = 9,
 
   COLOR_CONTEXT_DEFAULT              = -1
 } ColorContext;
