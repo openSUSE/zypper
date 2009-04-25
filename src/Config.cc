@@ -41,6 +41,7 @@ const ConfigOption ConfigOption::COLOR_MSG_ERROR(ConfigOption::COLOR_MSG_ERROR_e
 const ConfigOption ConfigOption::COLOR_MSG_WARNING(ConfigOption::COLOR_MSG_WARNING_e);
 const ConfigOption ConfigOption::COLOR_POSITIVE(ConfigOption::COLOR_POSITIVE_e);
 const ConfigOption ConfigOption::COLOR_NEGATIVE(ConfigOption::COLOR_NEGATIVE_e);
+const ConfigOption ConfigOption::COLOR_HIGHLIGHT(ConfigOption::COLOR_HIGHLIGHT_e);
 const ConfigOption ConfigOption::COLOR_PROMPT_OPTION(ConfigOption::COLOR_PROMPT_OPTION_e);
 const ConfigOption ConfigOption::COLOR_PROMPT_SHORTHAND(ConfigOption::COLOR_PROMPT_SHORTHAND_e);
 
@@ -62,6 +63,7 @@ ConfigOption::Option ConfigOption::parse(const std::string & strval_r)
     _table["color/msgWarning"] = ConfigOption::COLOR_MSG_WARNING_e;
     _table["color/positive"] = ConfigOption::COLOR_POSITIVE_e;
     _table["color/negative"] = ConfigOption::COLOR_NEGATIVE_e;
+    _table["color/highlight"] = ConfigOption::COLOR_HIGHLIGHT_e;
     _table["color/promptOption"] = ConfigOption::COLOR_PROMPT_OPTION_e;
   }
   map<string, ConfigOption::Option>::const_iterator it = _table.find(strval_r);
@@ -88,6 +90,7 @@ const string ConfigOption::asString() const
     _table_str[COLOR_MSG_WARNING_e] = "color/msgWarning";
     _table_str[COLOR_POSITIVE_e] = "color/positive";
     _table_str[COLOR_NEGATIVE_e] = "color/negative";
+    _table_str[COLOR_HIGHLIGHT_e] = "color/highlight";
     _table_str[COLOR_PROMPT_OPTION_e] = "color/promptOption";
   }
   map<ConfigOption::Option, string>::const_iterator it = _table_str.find(_value);
@@ -108,6 +111,7 @@ Config::Config()
   , color_msgWarning ("yellow")
   , color_positive   ("green")
   , color_negative   ("red")
+  , color_highlight  ("cyan")
   , color_promptOption("grey")
 {}
 
@@ -204,6 +208,12 @@ void Config::read()
   c = Color(augeas.getOption(ConfigOption::COLOR_NEGATIVE.asString()));
   if (!c.value().empty())
     color_negative = c;
+
+  ////// color/highlight //////
+
+  c = Color(augeas.getOption(ConfigOption::COLOR_HIGHLIGHT.asString()));
+  if (!c.value().empty())
+    color_highlight = c;
 
   ////// color/colorPromptOption //////
 

@@ -89,6 +89,8 @@ static const string get_color(const Config & conf, const ColorContext context)
     return conf.color_negative.value();
   case COLOR_CONTEXT_PROMPT_OPTION:
     return conf.color_promptOption.value();
+  case COLOR_CONTEXT_HIGHLIGHT:
+    return conf.color_highlight.value();
   default:
     return COLOR_RESET;
   }

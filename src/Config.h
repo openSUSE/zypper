@@ -25,6 +25,7 @@ public:
   static const ConfigOption COLOR_MSG_WARNING;
   static const ConfigOption COLOR_POSITIVE;
   static const ConfigOption COLOR_NEGATIVE;
+  static const ConfigOption COLOR_HIGHLIGHT;
   static const ConfigOption COLOR_PROMPT_OPTION;
   static const ConfigOption COLOR_PROMPT_SHORTHAND;
 
@@ -40,6 +41,7 @@ public:
     COLOR_MSG_WARNING_e,
     COLOR_POSITIVE_e,
     COLOR_NEGATIVE_e,
+    COLOR_HIGHLIGHT_e,
     COLOR_PROMPT_OPTION_e,
     COLOR_PROMPT_SHORTHAND_e
   };
@@ -94,6 +96,7 @@ struct Config
   Color color_msgWarning;
   Color color_positive;
   Color color_negative;
+  Color color_highlight;
   Color color_promptOption;
 };
 
