@@ -12,7 +12,7 @@
 
 Name:           @PACKAGE@
 BuildRequires:  libzypp-devel >= 6.1.0 boost-devel >= 1.33.1 gettext-devel >= 0.15
-BuildRequires:  readline-devel >= 5.1 augeas-devel >= 0.4.2
+BuildRequires:  readline-devel >= 5.1 augeas-devel >= 0.5.0
 BuildRequires:  gcc-c++ >= 4.1 cmake >= 2.4.6
 Requires:	procps
 Recommends:     logrotate cron 
