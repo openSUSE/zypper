@@ -1,4 +1,14 @@
 -------------------------------------------------------------------
+Sun Apr 26 16:52:55 CEST 2009 - jkupec@suse.cz
+
+- config file handling improved, --config option added to load
+  custom config files instead of the default ones.
+  Override priority order with --config (highest to lowest):
+  * CLI options
+  * --config custom/zypper.conf
+  * zypp.conf
+
+-------------------------------------------------------------------
 Sat Apr 25 22:44:55 CEST 2009 - jkupec@suse.cz
 
 - Highlighting package count numbers in the summary.
@@ -16,8 +26,9 @@ Thu Apr  2 19:46:21 CEST 2009 - jkupec@suse.cz
 
 - configuration file support added. Global settings go to
   /etc/zypp/zypper.conf, user's to $HOME/.zypper.conf.
-  Override priority order (top to bottom):
+  Override priority order (highest to lowest):
   * CLI options
+  * --config custom/zypper.conf
   * $HOME/.zypper.conf
   * /etc/zypp/zypper.conf
   * zypp.conf
