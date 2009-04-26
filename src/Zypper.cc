@@ -153,7 +153,7 @@ void print_main_help(Zypper & zypper)
   static string help_global_options = _("  Global Options:\n"
     "\t--help, -h\t\tHelp.\n"
     "\t--version, -V\t\tOutput the version number.\n"
-    "\t--config, -c\t\tUse specified config file instead of the deafult.\n"
+    "\t--config, -c <file>\tUse specified config file instead of the default.\n"
     "\t--quiet, -q\t\tSuppress normal output, print only error\n"
     "\t\t\t\tmessages.\n"
     "\t--verbose, -v\t\tIncrease verbosity.\n"
