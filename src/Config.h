@@ -70,7 +70,7 @@ struct Config
   Config();
 
   /** Reads zypper.conf and stores the result */
-  void read();
+  void read(const std::string & file = "");
 
 
   bool solver_installRecommends;

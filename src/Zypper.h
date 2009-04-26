@@ -188,7 +188,6 @@ public:
 private:
   Zypper();
 
-  void readConfig();
   void processGlobalOptions();
   void processCommandOptions();
   void commandShell();

@@ -115,117 +115,123 @@ Config::Config()
   , color_promptOption("grey")
 {}
 
-void Config::read()
+void Config::read(const string & file)
 {
-  debug::Measure m("ReadConfig");
-
-  Augeas augeas;
-
-  m.elapsed();
-
-  string s;
-
-  // ---------------[ main ]--------------------------------------------------
-
-  // TODO
-
-  // ---------------[ main ]--------------------------------------------------
-
-  s = augeas.getOption(ConfigOption::SOLVER_INSTALL_RECOMMENDS.asString());
-  if (s.empty())
-    solver_installRecommends = ZConfig::instance().solver_onlyRequires();
-  else
-    solver_installRecommends = str::strToBool(s, true);
-
-
-  // ---------------[ colors ]------------------------------------------------
-
-  color_useColors = augeas.getOption(ConfigOption::COLOR_USE_COLORS.asString());
-  do_colors =
-    (color_useColors == "autodetect" && has_colors())
-    || color_useColors == "always";
-
-  ////// color/background //////
-
-  s = augeas.getOption(ConfigOption::COLOR_BACKGROUND.asString());
-  if (s == "light")
-    color_background = true;
-  else if (!s.empty() && s != "dark")
-    ERR << "invalid color/background value: " << s << endl;
-
-  Color c("");
-
-  ////// color/colorResult //////
-
-  c = Color(augeas.getOption(ConfigOption::COLOR_RESULT.asString()));
-  if (c.value().empty())
+  try
   {
-    // set a default for light background
-    if (color_background)
-      color_result = Color("black");
+    debug::Measure m("ReadConfig");
+    string s;
+
+    Augeas augeas(file);
+
+    m.elapsed();
+
+    // ---------------[ main ]--------------------------------------------------
+
+    // TODO
+
+    // ---------------[ main ]--------------------------------------------------
+
+    s = augeas.getOption(ConfigOption::SOLVER_INSTALL_RECOMMENDS.asString());
+    if (s.empty())
+      solver_installRecommends = ZConfig::instance().solver_onlyRequires();
+    else
+      solver_installRecommends = str::strToBool(s, true);
+
+
+    // ---------------[ colors ]------------------------------------------------
+
+    color_useColors = augeas.getOption(ConfigOption::COLOR_USE_COLORS.asString());
+    do_colors =
+      (color_useColors == "autodetect" && has_colors())
+      || color_useColors == "always";
+
+    ////// color/background //////
+
+    s = augeas.getOption(ConfigOption::COLOR_BACKGROUND.asString());
+    if (s == "light")
+      color_background = true;
+    else if (!s.empty() && s != "dark")
+      ERR << "invalid color/background value: " << s << endl;
+
+    Color c("");
+
+    ////// color/colorResult //////
+
+    c = Color(augeas.getOption(ConfigOption::COLOR_RESULT.asString()));
+    if (c.value().empty())
+    {
+      // set a default for light background
+      if (color_background)
+        color_result = Color("black");
+    }
+    else
+      color_result = c;
+
+    ////// color/colorMsgStatus //////
+
+    c = Color(augeas.getOption(ConfigOption::COLOR_MSG_STATUS.asString()));
+    if (c.value().empty())
+    {
+      // set a default for light background
+      if (color_background)
+        color_msgStatus = Color("default");
+    }
+    else
+      color_msgStatus = c;
+
+    ////// color/colorMsgError //////
+
+    c = Color(augeas.getOption(ConfigOption::COLOR_MSG_ERROR.asString()));
+    if (!c.value().empty())
+      color_msgError = c;
+
+    ////// color/colorMsgWarning //////
+
+    c = Color(augeas.getOption(ConfigOption::COLOR_MSG_WARNING.asString()));
+    if (c.value().empty())
+    {
+      // set a default for light background
+      if (color_background)
+        color_msgWarning = Color("brown");
+    }
+    else
+      color_msgWarning = c;
+
+    ////// color/colorPositive //////
+
+    c = Color(augeas.getOption(ConfigOption::COLOR_POSITIVE.asString()));
+    if (!c.value().empty())
+      color_positive = c;
+
+    ////// color/colorNegative //////
+
+    c = Color(augeas.getOption(ConfigOption::COLOR_NEGATIVE.asString()));
+    if (!c.value().empty())
+      color_negative = c;
+
+    ////// color/highlight //////
+
+    c = Color(augeas.getOption(ConfigOption::COLOR_HIGHLIGHT.asString()));
+    if (!c.value().empty())
+      color_highlight = c;
+
+    ////// color/colorPromptOption //////
+
+    c = Color(augeas.getOption(ConfigOption::COLOR_PROMPT_OPTION.asString()));
+    if (c.value().empty())
+    {
+      // set a default for light background
+      if (color_background)
+        color_promptOption = Color("darkgrey");
+    }
+    else
+      color_promptOption = c;
+
+    m.stop();
   }
-  else
-    color_result = c;
-
-  ////// color/colorMsgStatus //////
-
-  c = Color(augeas.getOption(ConfigOption::COLOR_MSG_STATUS.asString()));
-  if (c.value().empty())
+  catch (Exception & e)
   {
-    // set a default for light background
-    if (color_background)
-      color_msgStatus = Color("default");
+    DBG << "Augeas exception. No config read, sticking with defaults." << endl;
   }
-  else
-    color_msgStatus = c;
-
-  ////// color/colorMsgError //////
-
-  c = Color(augeas.getOption(ConfigOption::COLOR_MSG_ERROR.asString()));
-  if (!c.value().empty())
-    color_msgError = c;
-
-  ////// color/colorMsgWarning //////
-
-  c = Color(augeas.getOption(ConfigOption::COLOR_MSG_WARNING.asString()));
-  if (c.value().empty())
-  {
-    // set a default for light background
-    if (color_background)
-      color_msgWarning = Color("brown");
-  }
-  else
-    color_msgWarning = c;
-
-  ////// color/colorPositive //////
-
-  c = Color(augeas.getOption(ConfigOption::COLOR_POSITIVE.asString()));
-  if (!c.value().empty())
-    color_positive = c;
-
-  ////// color/colorNegative //////
-
-  c = Color(augeas.getOption(ConfigOption::COLOR_NEGATIVE.asString()));
-  if (!c.value().empty())
-    color_negative = c;
-
-  ////// color/highlight //////
-
-  c = Color(augeas.getOption(ConfigOption::COLOR_HIGHLIGHT.asString()));
-  if (!c.value().empty())
-    color_highlight = c;
-
-  ////// color/colorPromptOption //////
-
-  c = Color(augeas.getOption(ConfigOption::COLOR_PROMPT_OPTION.asString()));
-  if (c.value().empty())
-  {
-    // set a default for light background
-    if (color_background)
-      color_promptOption = Color("darkgrey");
-  }
-  else
-    color_promptOption = c;
-
-  m.stop();
 }

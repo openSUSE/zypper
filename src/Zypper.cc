@@ -103,7 +103,6 @@ int Zypper::main(int argc, char ** argv)
 
   // parse global options and the command
   try {
-    readConfig();
     processGlobalOptions();
   }
   catch (const ExitRequestException & e)
@@ -148,16 +147,13 @@ Out & Zypper::out()
   ZYPP_THROW(ExitRequestException("no output writer"));
 }
 
-void Zypper::readConfig()
-{
-  _config.read();
-}
 
 void print_main_help(Zypper & zypper)
 {
   static string help_global_options = _("  Global Options:\n"
     "\t--help, -h\t\tHelp.\n"
     "\t--version, -V\t\tOutput the version number.\n"
+    "\t--config, -c\t\tUse specified config file instead of the deafult.\n"
     "\t--quiet, -q\t\tSuppress normal output, print only error\n"
     "\t\t\t\tmessages.\n"
     "\t--verbose, -v\t\tIncrease verbosity.\n"
@@ -342,6 +338,7 @@ void Zypper::processGlobalOptions()
     {"no-cd",                      no_argument,       0,  0 },
     {"no-remote",                  no_argument,       0,  0 },
     {"xmlout",                     no_argument,       0, 'x'},
+    {"config",                     required_argument, 0, 'c'},
     {0, 0, 0, 0}
   };
 
@@ -354,6 +351,10 @@ void Zypper::processGlobalOptions()
   }
 
   parsed_opts::const_iterator it;
+
+  // read config from specified file or default config files
+  _config.read(
+      (it = gopts.find("config")) != gopts.end() ? it->second.front() : "");
 
   // ====== output setup ======
   // depends on global options, that's we set it up here

@@ -28,7 +28,7 @@ extern "C"
 class Augeas : private zypp::base::NonCopyable
 {
 public:
-  Augeas();
+  Augeas(const std::string & file = "");
   ~Augeas();
 
   std::string get(const std::string & augpath) const;
@@ -42,6 +42,9 @@ public:
   { return _augeas; }
 
 private:
+  std::string userOptionPath(
+      const std::string & section, const std::string & option) const;
+
   zypp::TriBool isCommented(const std::string & section,
       const std::string & option,
       bool global) const;
@@ -49,6 +52,11 @@ private:
 private:
   ::augeas * _augeas;
   std::string _homedir;
+  /**
+   * Path of the config file in the augeas tree,
+   * e.g. /files/path/to/user/zypper.conf
+   */
+  std::string _user_conf_path;
   bool _got_global_zypper_conf;
   bool _got_user_zypper_conf;
 
