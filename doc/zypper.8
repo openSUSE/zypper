@@ -1,4 +1,4 @@
-.TH "zypper" "8" "1.1.1" "zypper" "System Tools"
+.TH "zypper" "8" "1.2.0" "zypper" "System Tools"
 .SH "SYNTAX"
 .LP
 zypper [\fI\-\-global\-opts\fR] <\fBcommand\fR> [\fI\-\-command\-opts\fR] [\fBcommand-arguments\fR]
@@ -1277,6 +1277,20 @@ Help. If a \fBcommand\fR is specified together with --help option, command speci
 .I \-V, \-\-version
 Print zypper version number and exit.
 .TP
+.I \-c, \-\-config <file>
+Use specified config file instead of the default files.
+Other command line options specified together with --config and having
+their counterpart in the config file are still prefered.
+The order of preference with --config is as follows:
+
+* Command line options
+.br
+* --config <file>
+.br
+* /etc/zypp/zypp.conf
+
+See also FILES section for more information.
+.TP
 .I \-v, \-\-verbose
 Increase verbosity. For debugging output specify this option twice.
 .TP
@@ -1365,11 +1379,51 @@ can damage your system using this option.
 
 .SH "FILES"
 .TP
+.B /etc/zypp/zypper.conf, $HOME/.zypper.conf
+Global (system-wide) and user's configuration file for zypper.
+These files are read when zypper starts up and \fI--config\fR option
+is not used.
+
+User's settings are prefered over global settings.
+Similarly, command line options override the settings in either of
+these files. Settings from zypp.conf (see below) having their
+counterparts in zypper.conf are overriden by zypper's values. To sum
+it up, the order of preference is as follows (from highest to lowest):
+
+* Command line options
+.br
+* $HOME/.zypper.conf
+.br
+* /etc/zypp/zypper.conf
+.br
+* /etc/zypp/zypp.conf
+
+See the comments in /etc/zypp/zypper.conf for a list and description
+of available options.
+.TP
+.B /etc/zypp/zypp.conf
+ZYpp configuration file affecting all ZYpp-based applications.
+See the comments in the file for desciption of configurable properties.
+Many of locations of files and directories listed in this section are
+also configurable via zypp.conf.
+
+Options having their counterpart in zypper.conf are overriden by zypper's
+setting.
+.TP
+.B /etc/zypp/locks
+File with package lock definitions, see locks(5) manual page for details.
+The package lock commands (addlock, removelock, etc.) can be used
+to manipulate this file.
+
+This file is used by all ZYpp-based applications.
+.TP
 .B /etc/zypp/repos.d
 Directory containing repository definition (*.repo) files.
 You can use the Repository Management Commands to manipulate these files,
 or you can edit them yourself. In either case, after doing the modifications,
 executing \fBzypper refresh\fR is strongly recommended.
+
+This directory is used by all ZYpp-based applications.
 
 You can use the \-\-reposd\-dir global option to use an alternative directory
 for this purpose or the \-\-root option to make this directory relative to the
@@ -1380,30 +1434,27 @@ Directory containing service definition (*.service) files.
 You can use the Service Management Commands to manipulate theese files, or
 you can edit them youself. Running \fBzypper refs\fR is recommended after
 modifications have been done.
-.TP
-.B /etc/zypp/zypp.conf
-ZYpp configuration file affecting all ZYpp-based applications.
-See the comments in the file for desciption of configurable properties.
-Many of locations of files and directories listed in this section are
-also configurable via zypp.conf.
-.TP
-.B /etc/zypp/locks
-File with package lock definitions, see locks(5) manual page for details.
+
+This directory is used by all ZYpp-based applications.
 .TP
 .B /var/cache/zypp/raw
 Directory for storing raw metadata contained in repositories.
+This directory is used by all ZYpp-based applications.
 Use the \-\-raw\-cache\-dir global option to use an alternative directory
 for this purpose or the \-\-root option to make this directory relative to the
 specified root directory.
 .TP
 .B /var/cache/zypp/solv
 Directory containing preparsed metadata in form of \fBsolv\fR files.
+This directory is used by all ZYpp-based applications.
 .TP
 .B /var/cache/zypp/packages
 If \fBkeeppackages\fR property is set for a repository (see the
 \fBmodifyrepo\fR command), all the RPM file downloaded during installation
 will be kept here. See also the \fBclean\fR command for cleaning these
 cache directories.
+
+This directory is used by all ZYpp-based applications.
 .TP
 .B /var/log/zypp/history
 Installation history log.
