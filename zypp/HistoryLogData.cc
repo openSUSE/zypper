@@ -106,7 +106,7 @@ namespace zypp
   {
     if (fields.size() <= 2)
       ZYPP_THROW(ParseException(
-        str::form("Bad number of fields. Got %ld, expected more than %d.",
+        str::form("Bad number of fields. Got %zd, expected more than %d.",
           fields.size(), 2)));
 
     date = Date(fields[0], HISTORY_LOG_DATE_FORMAT);
@@ -136,7 +136,7 @@ namespace zypp
   {
     if (fields.size() != 8)
       ZYPP_THROW(ParseException(
-        str::form("Bad number of fields. Got %lu, expected %u.",
+        str::form("Bad number of fields. Got %zu, expected %u.",
           fields.size(), 8)));
 
     name      = fields[2];
@@ -177,7 +177,7 @@ namespace zypp
   {
     if (fields.size() != 6)
       ZYPP_THROW(ParseException(
-        str::form("Bad number of fields. Got %lu, expected %u.",
+        str::form("Bad number of fields. Got %zu, expected %u.",
           fields.size(), 6)));
 
     name      = fields[2];
@@ -214,7 +214,7 @@ namespace zypp
   {
     if (fields.size() != 4)
       ZYPP_THROW(ParseException(
-        str::form("Bad number of fields. Got %lu, expected %u.",
+        str::form("Bad number of fields. Got %zu, expected %u.",
           fields.size(), 4)));
 
     alias = fields[2];
@@ -247,7 +247,7 @@ namespace zypp
   {
     if (fields.size() != 3)
       ZYPP_THROW(ParseException(
-        str::form("Bad number of fields. Got %lu, expected %u.",
+        str::form("Bad number of fields. Got %zu, expected %u.",
           fields.size(), 3)));
 
     alias = fields[2];
@@ -277,7 +277,7 @@ namespace zypp
   {
     if (fields.size() != 4)
       ZYPP_THROW(ParseException(
-        str::form("Bad number of fields. Got %lu, expected %u.",
+        str::form("Bad number of fields. Got %zu, expected %u.",
           fields.size(), 4)));
 
     oldalias = fields[2];
@@ -308,7 +308,7 @@ namespace zypp
   {
     if (fields.size() != 4)
       ZYPP_THROW(ParseException(
-        str::form("Bad number of fields. Got %lu, expected %u.",
+        str::form("Bad number of fields. Got %zu, expected %u.",
           fields.size(), 4)));
 
     alias = fields[2];
