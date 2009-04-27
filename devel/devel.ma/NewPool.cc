@@ -38,12 +38,14 @@
 #include "zypp/sat/Pool.h"
 #include "zypp/sat/LocaleSupport.h"
 #include "zypp/sat/LookupAttr.h"
+#include "zypp/sat/AttrMatcher.h"
 #include "zypp/sat/SolvableSet.h"
 #include "zypp/sat/SolvIterMixin.h"
 #include "zypp/sat/detail/PoolImpl.h"
 #include "zypp/sat/WhatObsoletes.h"
 #include "zypp/PoolQuery.h"
 #include "zypp/ServiceInfo.h"
+#include "zypp/media/MediaPriority.h"
 
 #include <boost/mpl/int.hpp>
 
@@ -428,6 +430,47 @@ void testCMP( const L & lhs, const R & rhs )
 #undef OUTS
 }
 
+template <class Lcont, class Rcont>
+void diffquery( const Lcont & l, const Rcont & r )
+{
+  MIL << "DIFF " << l.size() << " <-> " << r.size() << endl;
+  sat::SolvableSet ls;
+  sat::SolvableSet bb;
+  sat::SolvableSet rs;
+
+  for_( it, l.begin(), l.end() )
+  {
+    ( r.contains( *it ) ? bb : ls ).insert( *it );
+  }
+  for_( it, r.begin(), r.end() )
+  {
+    if ( ! l.contains( *it ) )
+      rs.insert( *it );
+  }
+
+  MIL << "(" << ls.size() << ") (" << bb.size() << ") (" << rs.size() << ")" << endl;
+  INT  << ls << endl;
+  INT  << rs << endl;
+}
+
+bool querycompare( const PoolQuery & q )
+{
+  q.begin();
+  SEC << q << endl;
+  unsigned nc = 0;
+  if ( 1 )
+  {
+    Measure x( "new query" );
+    for_( it, q.begin(), q.end() )
+    {
+      ++nc;
+      //DBG << it << endl;
+    }
+    MIL << nc << endl;
+  }
+  return true;
+}
+
 /******************************************************************
 **
 **      FUNCTION NAME : main
@@ -444,7 +487,7 @@ try {
   ResPool   pool( ResPool::instance() );
   sat::Pool satpool( sat::Pool::instance() );
 
-  if ( 0 )
+  if ( 1 )
   {
     Measure x( "INIT TARGET" );
     {
@@ -477,7 +520,7 @@ try {
     }
   }
 
-  if ( 0 )
+  if ( 1 )
   {
     RepoManager repoManager( makeRepoManager( sysRoot ) );
     RepoInfoList repos = repoManager.knownRepositories();
@@ -530,7 +573,7 @@ try {
           repoManager.loadFromCache( nrepo );
         }
 
-        USR << "pool: " << pool << endl;
+        //USR << "pool: " << pool << endl;
       }
     }
   }
@@ -548,22 +591,55 @@ try {
   }
 
   ///////////////////////////////////////////////////////////////////
+
+  Match m( Match::GLOB );
+  SEC << m << endl;
+  SEC << Match::REGEX << endl;
+
+  m = Match::GLOB;
+  SEC << m << endl;
+  m = Match::NOTHING
+      | Match::GLOB;
+  SEC << m << endl;
+  m = Match::GLOB
+      | Match::STRING;
+  SEC << m << endl;
+  m = Match::FILES
+      | Match::NOTHING;
+  SEC << m << endl;
+  m = Match::FILES - Match::STRING;
+  SEC << m << endl;
+
+  SEC << (Match::FILES==Match::NOTHING) << endl;
+  SEC << (Match::FILES!=Match::NOTHING) << endl;
+
   ///////////////////////////////////////////////////////////////////
 
-  RepoManager repoManager( makeRepoManager( sysRoot ) );
-  RepoInfoList repos = repoManager.knownRepositories();
-  // launch repos
-  for ( RepoInfoList::iterator it = repos.begin(); it != repos.end(); ++it )
-  {
-     RepoInfo & nrepo( *it );
-     Url url_r( nrepo.url() );
+  std::string search("devel");
 
-     SEC << url_r << endl;
-     MIL << RepoManager::makeStupidAlias( url_r ) << endl;
-  }
-  MIL << RepoManager::makeStupidAlias() << endl;
-  MIL << RepoManager::makeStupidAlias() << endl;
-  MIL << RepoManager::makeStupidAlias() << endl;
+  PoolQuery q;
+  //querycompare( q );
+
+  q.addString(search);
+  //q.addAttribute(sat::SolvAttr::name, "augeas" );
+  //q.addAttribute(sat::SolvAttr::name );
+  q.addAttribute(sat::SolvAttr::summary);
+  q.setMatchSubstring();
+  //q.setMatchExact();
+  q.setCaseSensitive( false );
+
+  //q.addRepo( "11.1-update" );
+  //q.addRepo( "@System" );
+
+  //q.addKind( ResKind::package );
+  //q.addKind( ResKind::pattern );
+  //q.addKind( ResKind::patch );
+
+  //q.setEdition( Edition("1.0"), Rel::GE );
+
+  q.setMatchFiles();
+
+  querycompare( q );
 
 #if 0
   getZYpp()->resolver()->addRequire( Capability("amarok") );
