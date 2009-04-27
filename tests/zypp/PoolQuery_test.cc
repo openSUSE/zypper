@@ -262,11 +262,19 @@ BOOST_AUTO_TEST_CASE(pool_query_100)
 
   cout << endl;
 
-  PoolQuery q1;
-  q1.addString("sat");
-  q1.addAttribute(sat::SolvAttr::name);
+  {
+    PoolQuery q1;
+    q1.addAttribute(sat::SolvAttr::name, "zypper");
+    BOOST_CHECK_EQUAL(q1.size(),5);
 
-  BOOST_CHECK(std::for_each(q1.begin(), q1.end(), PrintAndCount())._count == 15);
+    PoolQuery q2;
+    q2.addAttribute(sat::SolvAttr::summary,"samba");
+    BOOST_CHECK_EQUAL(q2.size(),13);
+
+    // now summary and name in one go:
+    q1.addAttribute(sat::SolvAttr::summary,"samba");
+    BOOST_CHECK_EQUAL(q1.size(),18);
+  }
 }
 
 

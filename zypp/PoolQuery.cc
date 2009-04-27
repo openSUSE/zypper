@@ -21,12 +21,13 @@
 
 #include "zypp/sat/Pool.h"
 #include "zypp/sat/Solvable.h"
+#include "zypp/sat/AttrMatcher.h"
 
 #include "zypp/PoolQuery.h"
 
 extern "C"
 {
-#include "satsolver/repo.h"
+//#include "satsolver/repo.h"
 }
 
 #undef ZYPP_BASE_LOGGER_LOGGROUP
@@ -39,73 +40,69 @@ using namespace zypp::sat;
 namespace zypp
 { /////////////////////////////////////////////////////////////////
 
-#warning CHECK FOR MEMLEAK DUE TO MISSING dataiterator_free
-
   ///////////////////////////////////////////////////////////////////
   //
   //  CLASS NAME : PoolQuery::Impl
   //
+  /** */
   class PoolQuery::Impl
   {
   public:
     Impl()
-      : _flags( SEARCH_NOCASE | SEARCH_SUBSTRING | SEARCH_SKIP_KIND )
-      , _status_flags(ALL)
+      : _flags( Match::SUBSTRING | Match::NOCASE | Match::SKIP_KIND )
       , _match_word(false)
       , _require_all(false)
-      , _compiled(false)
+      , _status_flags(ALL)
     {}
 
     ~Impl()
     {}
 
   public:
-    const_iterator begin() const;
-    const_iterator end() const;
-
+    /** String representation */
     string asString() const;
 
-    void compile() const;
-  private:
-    string createRegex(const StrContainer & container) const;
-
-  public:
+    /** \name Raw query options. */
+    //@{
     /** Raw search strings. */
     StrContainer _strings;
-    /** Compiled search strings. */
-    mutable string _rcstrings;
-    /** Compiled regex struct */
-    mutable str::regex _regex;
     /** Raw attributes */
     AttrRawStrMap _attrs;
-    /** Regex-compiled attributes */
-    mutable AttrCompiledStrMap _rcattrs;
-    mutable AttrRegexMap _rattrs;
-
-    /** Edition condition operand */
-    mutable Edition _edition;
-    /** Operator for edition condition */
-    mutable Rel _op;
-
-    /** Repos to search. */
-    StrContainer _repos;
-    /** Kinds to search */
-    Kinds _kinds;
 
     /** Sat solver search flags */
-    int _flags;
-    /** Backup of search flags. compile() may change the flags if needed, so
-     * in order to reuse the query, the original flags need to be stored
-     * at the start of compile() */
-    mutable int _cflags;
+    Match _flags;
+    bool _match_word;
+    bool _require_all;
+
     /** Sat solver status flags */
     StatusFilter _status_flags;
 
-    bool _match_word;
+    /** Edition condition operand */
+    Edition _edition;
+    /** Operator for edition condition */
+    Rel _op;
 
-    bool _require_all;
+    /** Repos to search. */
+    StrContainer _repos;
 
-    mutable bool _compiled;
+    /** Kinds to search */
+    Kinds _kinds;
+    //@}
+
+  public:
+    /** Compile the regex.
+     * Basically building the \ref _attrMatchList from strings.
+     * \throws MatchException Any of the exceptions thrown by \ref AttrMatcher::compile.
+     */
+    void compile() const;
+
+    /** AttrMatcher per attribtue. */
+    typedef std::pair<sat::SolvAttr,sat::AttrMatcher> AttrMatchData;
+    mutable std::vector<AttrMatchData> _attrMatchList;
+
+  private:
+    /** Pass flags from \ref compile, as they may have been changed. */
+    string createRegex( const StrContainer & container, const Match & flags ) const;
 
   private:
     friend Impl * rwcowClone<Impl>( const Impl * rhs );
@@ -137,10 +134,17 @@ namespace zypp
     }
   };
 
-
   void PoolQuery::Impl::compile() const
   {
-    _cflags = _flags;
+    _attrMatchList.clear();
+
+    Match cflags( _flags );
+    if ( cflags.mode() == Match::OTHER) // this will never succeed...
+      ZYPP_THROW( MatchUnknownModeException( cflags ) );
+
+    /** Compiled search strings. */
+    string rcstrings;
+
 
     // 'different'         - will have to iterate through all and match by ourselves (slow)
     // 'same'              - will pass the compiled string to dataiterator_init
@@ -150,31 +154,30 @@ namespace zypp
     // // NO ATTRIBUTE
     // else
     //   for all _strings
-    //     create regex; store in _rcstrings; if more strings flag regex;
+    //     create regex; store in rcstrings; if more strings flag regex;
     if (_attrs.empty())
     {
-      _rcstrings = createRegex(_strings);
-      if (_strings.size() > 1)
-        _cflags = (_cflags & ~SEARCH_STRINGMASK) | SEARCH_REGEX;//setMatchRegex();
+      rcstrings = createRegex(_strings, cflags);
+      if (_strings.size() > 1) // switch to regex for multiple strings
+        cflags.setModeRegex();
+      _attrMatchList.push_back( AttrMatchData( sat::SolvAttr::allAttr,
+                                sat::AttrMatcher( rcstrings, cflags ) ) );
     }
 
     // // ONE ATTRIBUTE
     // else if _attrs is not empty but it contains just one attr
     //   for all _strings and _attr[key] strings
-    //     create regex; store in _rcattrs; flag 'one-attr'; if more strings flag regex;
+    //     create regex; flag 'one-attr'; if more strings flag regex;
     else if (_attrs.size() == 1)
     {
       StrContainer joined;
       invokeOnEach(_strings.begin(), _strings.end(), EmptyFilter(), MyInserter(joined));
       invokeOnEach(_attrs.begin()->second.begin(), _attrs.begin()->second.end(), EmptyFilter(), MyInserter(joined));
-      _rcstrings = createRegex(joined);
-      _rcattrs.insert(pair<sat::SolvAttr, string>(_attrs.begin()->first, string()));
-      // switch to regex for multiple strings
-      if (joined.size() > 1)
-        _cflags = (_cflags & ~SEARCH_STRINGMASK) | SEARCH_REGEX;
-      if ((_cflags & SEARCH_STRINGMASK) == SEARCH_REGEX)
-        /* We feed multiple lines eventually (e.g. authors or descriptions), so set REG_NEWLINE. */
-        _regex = str::regex(_rcstrings, REG_EXTENDED | REG_NOSUB | REG_NEWLINE | (_cflags & SEARCH_NOCASE ? REG_ICASE : 0));
+      rcstrings = createRegex(joined, cflags);
+      if (joined.size() > 1) // switch to regex for multiple strings
+        cflags.setModeRegex();
+      _attrMatchList.push_back( AttrMatchData( _attrs.begin()->first,
+                                sat::AttrMatcher( rcstrings, cflags ) ) );
     }
 
     // // MULTIPLE ATTRIBUTES
@@ -215,38 +218,35 @@ attremptycheckend:
       // // THE SAME STRINGS FOR DIFFERENT ATTRS
       // else if _attrs is not empty but it does not contain strings
       //   for each key in _attrs take all _strings
-      //     create regex; store in _rcattrs and _rcstrings; flag 'same'; if more strings flag regex;
+      //     create regex; store in rcstrings; flag 'same'; if more strings flag regex;
       if (attrvals_empty || attrvals_thesame)
       {
         StrContainer joined;
         if (attrvals_empty)
         {
           invokeOnEach(_strings.begin(), _strings.end(), EmptyFilter(), MyInserter(joined));
-          _rcstrings = createRegex(joined);
+          rcstrings = createRegex(joined, cflags);
         }
         else
         {
           invokeOnEach(_strings.begin(), _strings.end(), EmptyFilter(), MyInserter(joined));
           invokeOnEach(_attrs.begin()->second.begin(), _attrs.begin()->second.end(), EmptyFilter(), MyInserter(joined));
-          _rcstrings = createRegex(joined);
+          rcstrings = createRegex(joined, cflags);
         }
-        // copy the _attrs keys to _rcattrs
-        for_(ai, _attrs.begin(), _attrs.end())
-          _rcattrs.insert(pair<sat::SolvAttr, string>(ai->first, string()));
-
-        // switch to regex for multiple strings
-        if (joined.size() > 1)
-          _cflags = (_cflags & ~SEARCH_STRINGMASK) | SEARCH_REGEX;
-
-        if ((_cflags & SEARCH_STRINGMASK) == SEARCH_REGEX)
-          /* We feed multiple lines eventually (e.g. authors or descriptions), so set REG_NEWLINE. */
-          _regex = str::regex(_rcstrings, REG_EXTENDED | REG_NOSUB | REG_NEWLINE | (_cflags & SEARCH_NOCASE ? REG_ICASE : 0));
+        if (joined.size() > 1) // switch to regex for multiple strings
+          cflags.setModeRegex();
+        // May use the same AttrMatcher for all
+        sat::AttrMatcher matcher( rcstrings, cflags );
+        for_( ai, _attrs.begin(), _attrs.end() )
+        {
+          _attrMatchList.push_back( AttrMatchData( ai->first, matcher ) );
+        }
       }
 
       // // DIFFERENT STRINGS FOR DIFFERENT ATTRS
       // if _attrs is not empty and it contains non-empty vectors with non-empty strings
       //   for each key in _attrs take all _strings + all _attrs[key] strings
-      //     create regex; store in _rcattrs; flag 'different'; if more strings flag regex;
+      //     create regex; flag 'different'; if more strings flag regex;
       else
       {
         for_(ai, _attrs.begin(), _attrs.end())
@@ -254,23 +254,21 @@ attremptycheckend:
           StrContainer joined;
           invokeOnEach(_strings.begin(), _strings.end(), EmptyFilter(), MyInserter(joined));
           invokeOnEach(ai->second.begin(), ai->second.end(), EmptyFilter(), MyInserter(joined));
-          string s = createRegex(joined);
-          _rcattrs.insert(pair<sat::SolvAttr, string>(ai->first, s));
-
-          // switch to regex for multiple strings
-          if (joined.size() > 1)
-            _cflags = (_cflags & ~SEARCH_STRINGMASK) | SEARCH_REGEX;
-          if ((_cflags & SEARCH_STRINGMASK) == SEARCH_REGEX)
-          {
-            str::regex regex(s, REG_EXTENDED | REG_NOSUB | REG_NEWLINE | (_cflags & SEARCH_NOCASE ? REG_ICASE : 0));
-            _rattrs.insert(pair<sat::SolvAttr, str::regex>(ai->first, regex));
-          }
+          string s = createRegex(joined, cflags);
+          if (joined.size() > 1) // switch to regex for multiple strings
+            cflags.setModeRegex();
+          _attrMatchList.push_back( AttrMatchData( ai->first,
+                                    sat::AttrMatcher( s, cflags ) ) );
         }
       }
     }
 
-    _compiled = true;
-    DBG << asString() << endl;
+    // Check here, whether all involved regex compile.
+    for_( it, _attrMatchList.begin(), _attrMatchList.end() )
+    {
+      it->second.compile(); // throws on error
+    }
+    //DBG << asString() << endl;
   }
 
 
@@ -296,11 +294,10 @@ attremptycheckend:
     return regexed;
   }
 
+  string PoolQuery::Impl::createRegex( const StrContainer & container, const Match & flags ) const
+  {
 //! macro for word boundary tags for regexes
 #define WB (_match_word ? string("\\b") : string())
-
-  string PoolQuery::Impl::createRegex(const StrContainer & container) const
-  {
     string rstr;
 
     if (container.empty())
@@ -313,7 +310,7 @@ attremptycheckend:
 
     // multiple strings
 
-    bool use_wildcards = (_cflags & SEARCH_STRINGMASK) == SEARCH_GLOB;
+    bool use_wildcards = flags.isModeGlob();
     StrContainer::const_iterator it = container.begin();
     string tmp;
 
@@ -324,16 +321,14 @@ attremptycheckend:
 
     if (_require_all)
     {
-      if ((_cflags & SEARCH_STRINGMASK) != SEARCH_STRING) // not match exact
+      if ( ! flags.isModeString() ) // not match exact
         tmp += ".*" + WB + tmp;
       rstr = "(?=" + tmp + ")";
     }
     else
     {
-      if ((_cflags & SEARCH_STRINGMASK) == SEARCH_STRING || // match exact
-          (_cflags & SEARCH_STRINGMASK) == SEARCH_GLOB)     // match glob
+      if ( flags.isModeString() || flags.isModeGlob() )
         rstr = "^";
-
       rstr += WB + "(" + tmp;
     }
 
@@ -348,7 +343,7 @@ attremptycheckend:
 
       if (_require_all)
       {
-        if ((_cflags & SEARCH_STRINGMASK) != SEARCH_STRING) // not match exact
+        if ( ! flags.isModeString() ) // not match exact
           tmp += ".*" + WB + tmp;
         rstr += "(?=" + tmp + ")";
       }
@@ -360,125 +355,53 @@ attremptycheckend:
 
     if (_require_all)
     {
-      if ((_cflags & SEARCH_STRINGMASK) != SEARCH_STRING) // not match exact
+      if ( ! flags.isModeString() ) // not match exact
         rstr += WB + ".*";
     }
     else
     {
       rstr += ")" + WB;
-      if ((_cflags & SEARCH_STRINGMASK) == SEARCH_STRING || // match exact
-          (_cflags & SEARCH_STRINGMASK) == SEARCH_GLOB)     // match glob
+      if ( flags.isModeString() || flags.isModeGlob() )
         rstr += "$";
     }
 
     return rstr;
+#undef WB
   }
-
-
-  PoolQuery::const_iterator PoolQuery::Impl::begin() const
-  {
-    compile();
-
-    sat::Pool pool(sat::Pool::instance());
-    // no pool or no repos
-    if (!pool.get() || pool.reposEmpty())
-      return end();
-
-    // if only one repository has been specified, find it in the pool
-    Repository repo;
-    if ( _repos.size() == 1 )
-    {
-      string theone = *_repos.begin();
-      repo = pool.reposFind(theone);
-      if (repo == Repository::noRepository)
-      {
-        DBG << "Repository '" << theone << "' not found in sat pool." << endl;
-        return end();
-      }
-    }
-
-    DBG << "_cflags:" << _cflags << endl;
-
-    scoped_ptr< ::_Dataiterator> _rdit( new ::Dataiterator );
-    // needed while LookupAttr::iterator::dip_equal does ::memcmp:
-    ::memset( _rdit.get(), 0, sizeof(::_Dataiterator) );
-
-    // initialize the Dataiterator for different cases
-    if (_rcattrs.empty())
-    {
-      ::dataiterator_init(_rdit.get(),
-        pool.get(),
-        repo.get(),                                  // either NULL or the repo to search
-        0,                                           // search all solvables
-        0,                                           // attribute id - only if 1 attr key specified
-        _rcstrings.empty() ? 0 : _rcstrings.c_str(), // compiled search string
-        _cflags);
-    }
-    else if (_rcattrs.size() == 1)
-    {
-      ::dataiterator_init(_rdit.get(),
-        pool.get(),
-        repo.get(),                                  // either NULL or the repo to search
-        0,                                           // search all solvables
-        _rcattrs.begin()->first.id(),                // keyname - attribute id - only if 1 attr key specified
-        _rcstrings.empty() ? 0 : _rcstrings.c_str(), // compiled search string
-        _cflags);
-    }
-    else
-    {
-      ::dataiterator_init(_rdit.get(),
-        pool.get(),
-        repo.get(),                                  // either NULL or the repo to search
-        0, /*search all resolvables */
-        0, /*keyname - if only 1 attr key specified, pass it here, otherwise do more magic */
-        0, //qs.empty() ? 0 : qs.c_str(), /* create regex, pass it here */
-        _cflags);
-    }
-
-    if ((_cflags & SEARCH_STRINGMASK) == SEARCH_REGEX && _rdit->matcher.error != 0)
-      ZYPP_THROW(Exception(str::form(
-          _("Invalid regular expression '%s': regcomp returned %d"),
-          _rcstrings.c_str(), _rdit->matcher.error)));
-
-    PoolQuery::const_iterator it(_rdit, this);
-    it.increment();
-    return it;
-  }
-
-
-  PoolQuery::const_iterator PoolQuery::Impl::end() const
-  {
-    return PoolQuery::const_iterator();
-  }
-
 
   string PoolQuery::Impl::asString() const
   {
     ostringstream o;
 
-    o << "compiled: " << _compiled << endl;
-
     o << "kinds: ";
-    for(Kinds::const_iterator it = _kinds.begin();
-        it != _kinds.end(); ++it)
-      o << *it << " ";
+    if ( _kinds.empty() )
+      o << "ALL";
+    else
+    {
+      for(Kinds::const_iterator it = _kinds.begin();
+          it != _kinds.end(); ++it)
+        o << *it << " ";
+    }
     o << endl;
 
     o << "repos: ";
-    for(StrContainer::const_iterator it = _repos.begin();
-        it != _repos.end(); ++it)
-      o << *it << " ";
+    if ( _repos.empty() )
+      o << "ALL";
+    else
+    {
+      for(StrContainer::const_iterator it = _repos.begin();
+          it != _repos.end(); ++it)
+        o << *it << " ";
+    }
     o << endl;
 
-    o << "string match flags:" << endl;
-    o << "* string/substring/glob/regex: " << (_cflags & SEARCH_STRINGMASK) << endl;
-    o << "* SEARCH_NOCASE: " << ((_cflags & SEARCH_NOCASE) ? "yes" : "no") << endl;
-    o << "* SEARCH_ALL_REPOS: " << (_repos.empty() ? "yes" : "no") << endl;
-    o << "status filter flags:" << _status_flags << endl;
     o << "version: "<< _op << " " << _edition.asString() << endl;
+    o << "status: " << ( _status_flags ? ( _status_flags == INSTALLED_ONLY ? "INSTALLED_ONLY" : "UNINSTALLED_ONLY" )
+                                       : "ALL" ) << endl;
+
+    o << "string match flags: " << Match(_flags) << endl;
 
     // raw
-
     o << "strings: ";
     for(StrContainer::const_iterator it = _strings.begin();
         it != _strings.end(); ++it)
@@ -496,262 +419,21 @@ attremptycheckend:
     }
 
     // compiled
-
-    o << "compiled strings: " << _rcstrings << endl;
-    o << "compiled attributes:" << endl;
-    for (AttrCompiledStrMap::const_iterator ai = _rcattrs.begin(); ai != _rcattrs.end(); ++ai)
-      o << "* " << ai->first << ": " << ai->second << endl;
-
+    o << "last attribute matcher compiled: " << endl;
+    if ( _attrMatchList.empty() )
+    {
+      o << "not yet compiled" << endl;
+    }
+    else
+    {
+      for_( it, _attrMatchList.begin(), _attrMatchList.end() )
+      {
+        o << "* " << it->first << ": " << it->second << endl;
+      }
+    }
     return o.str();
   }
 
-  /** \relates PoolQuery::Impl Stream output *//*
-  inline std::ostream & operator<<( std::ostream & str, const PoolQuery::Impl & obj )
-  {
-    return str << "PoolQuery::Impl";
-  }
-  */
-  ///////////////////////////////////////////////////////////////////
-
-  ///////////////////////////////////////////////////////////////////
-  namespace detail
-  { /////////////////////////////////////////////////////////////////
-
-  ///////////////////////////////////////////////////////////////////
-  //
-  //  CLASS NAME : PoolQuery::ResultIterator
-  //
-  ///////////////////////////////////////////////////////////////////
-
-  PoolQueryIterator::PoolQueryIterator()
-    : _sid(0), _has_next(false), _do_matching(false)
-  { this->base_reference() = LookupAttr::iterator(); }
-
-
-  PoolQueryIterator::PoolQueryIterator(
-      scoped_ptr< ::_Dataiterator> & dip_r,
-      const PoolQuery::Impl * pqimpl)
-  : _sid(0)
-  , _has_next(true)
-  , _do_matching(pqimpl->_rcattrs.size() > 1)
-  , _flags(pqimpl->_cflags)
-  , _str(pqimpl->_rcstrings)
-  , _regex(pqimpl->_regex)
-  , _attrs_str(pqimpl->_rcattrs)
-  , _attrs_regex(pqimpl->_rattrs)
-  , _repos(pqimpl->_repos)
-  , _kinds(pqimpl->_kinds)
-  , _status_flags(pqimpl->_status_flags)
-  , _edition(pqimpl->_edition)
-  , _op(pqimpl->_op)
-  {
-    this->base_reference() = LookupAttr::iterator(dip_r);
-    _has_next = (*base_reference() != sat::detail::noId);
-  }
-
-
-  PoolQueryIterator::PoolQueryIterator(const PoolQueryIterator & rhs)
-    : _sid(rhs._sid)
-    , _has_next(rhs._has_next)
-    , _do_matching(rhs._do_matching)
-    , _flags(rhs._flags)
-    , _str(rhs._str)
-    , _regex(rhs._regex)
-    , _attrs_str(rhs._attrs_str)
-    , _attrs_regex(rhs._attrs_regex)
-    , _repos(rhs._repos)
-    , _kinds(rhs._kinds)
-    , _status_flags(rhs._status_flags)
-    , _edition(rhs._edition)
-    , _op(rhs._op)
-  { base_reference() = LookupAttr::iterator(rhs.base()); }
-
-
-  PoolQueryIterator::~PoolQueryIterator()
-  {}
-
-
-  PoolQueryIterator & PoolQueryIterator::operator=( const PoolQueryIterator & rhs )
-  {
-    base_reference() = rhs.base();
-    _sid = rhs._sid;
-    _has_next = rhs._has_next;
-    _do_matching = rhs._do_matching;
-    _flags = rhs._flags;
-    _str = rhs._str;
-    _regex = rhs._regex;
-    _attrs_str = rhs._attrs_str;
-    _attrs_regex = rhs._attrs_regex;
-    _repos = rhs._repos;
-    _kinds = rhs._kinds;
-    _status_flags = rhs._status_flags;
-    _edition = rhs._edition;
-    _op = rhs._op;
-    return *this;
-  }
-
-
-  void PoolQueryIterator::increment()
-  {
-    if (!base().get())
-      return;
-
-    bool got_match = false;
-    if (_has_next)
-      while (_has_next && !(got_match = matchSolvable()));
-
-    // no more solvables and the last did not match
-    if (!got_match && !_has_next)
-    {
-      base_reference() = LookupAttr::iterator();
-      _sid = 0;
-    }
-  }
-
-  bool PoolQueryIterator::matchSolvable()
-  {
-    _sid = base().get()->solvid;
-
-    bool new_solvable = true;
-    bool matches = !_do_matching;
-    bool drop_by_kind_status_edition = false;
-    bool drop_by_repo = false;
-    do
-    {
-      if (new_solvable)
-      {
-        while(1)
-        {
-          // whether to drop a resolvable not belonging to this repo
-          drop_by_repo = false;
-          if(!_repos.empty() &&
-             _repos.find(base().get()->repo->name) == _repos.end())
-          {
-            drop_by_repo = true;
-            break;
-          }
-
-          drop_by_kind_status_edition = false;
-
-          // whether to drop a resolvable not matching the edition condition
-          if (_op != Rel::ANY)
-          {
-            sat::Solvable s(_sid);
-            if (!compareByRel<Edition>( _op, s.edition(), _edition, Edition::Match()))
-            {
-              drop_by_kind_status_edition = true;
-              break;
-            }
-          }
-
-          // whether to drop an uninstalled (repo) solvable
-          if ( (_status_flags & PoolQuery::INSTALLED_ONLY) &&
-              base().get()->repo->name != sat::Pool::instance().systemRepoAlias() )
-          {
-            drop_by_kind_status_edition = true;
-            break;
-          }
-
-          // whether to drop an installed (target) solvable
-          if ((_status_flags & PoolQuery::UNINSTALLED_ONLY) &&
-              base().get()->repo->name == sat::Pool::instance().systemRepoAlias())
-          {
-            drop_by_kind_status_edition = true;
-            break;
-          }
-
-          // whether to drop unwanted kind
-          if (!_kinds.empty())
-          {
-            sat::Solvable s(_sid);
-            if (_kinds.find(s.kind()) == _kinds.end())
-              drop_by_kind_status_edition = true;
-          }
-
-          break;
-        }
-
-        matches = matches && !drop_by_kind_status_edition && !drop_by_repo;
-      }
-
-      if (_do_matching && !drop_by_kind_status_edition)
-      {
-        if (!matches)
-        {
-          SolvAttr attr(base().get()->key->name);
-          PoolQuery::AttrCompiledStrMap::const_iterator ai = _attrs_str.find(attr);
-          if (ai != _attrs_str.end())
-          {
-            if ((_flags & SEARCH_STRINGMASK) == SEARCH_REGEX)
-            {
-              const regex_t * regex_p;
-              if (_str.empty())
-              {
-                PoolQuery::AttrRegexMap::iterator rai = _attrs_regex.find(attr);
-                if (rai != _attrs_regex.end())
-                  regex_p = rai->second.get();
-                else
-                {
-                  ERR << "no compiled regex found for " <<  attr << endl;
-                  continue;
-                }
-              }
-              else
-                regex_p = _regex.get();
-#warning wrap matcher an use it
-              matches = ::dataiterator_match_obsolete(base().get(), _flags, regex_p);
-            }
-            else
-            {
-              const string & sstr =
-                _str.empty() ? ai->second : _str;
-              matches = ::dataiterator_match_obsolete(base().get(), _flags, sstr.c_str());
-            }
-
-              // if (matches)
-	      /* After calling dataiterator_match (with any string matcher set)
-	         the kv.str member will be filled with something sensible.  */
-               /*INT << "value: " << base().get()->kv.str << endl
-                  << " str: " <<  _str << endl;*/
-          }
-        }
-      }
-
-      if (drop_by_repo)
-      {
-        base_reference().nextSkipRepo();
-        drop_by_repo = false;
-      }
-      else if (drop_by_kind_status_edition)
-      {
-        base_reference().nextSkipSolvable();
-        drop_by_kind_status_edition = false;
-      }
-
-      // copy the iterator to forward check for the next attribute ***
-      _tmpit = base_reference();
-      _has_next = ++_tmpit != LookupAttr::iterator();
-
-      if (_has_next)
-      {
-        // *** now increment. Had it not be done this way,
-        // the LookupAttr::iterator could have reached the end() while
-        // trying to reach a matching attribute or the next solvable
-        // thus resulting to a problem in the equal() method
-        ++base_reference();
-        new_solvable = base().get()->solvid != _sid;
-      }
-      // no more attributes in this repo, return
-      else
-        return matches; // did the last solvable match conditions?
-    }
-    while (!new_solvable);
-
-    return matches;
-  }
-
-  ///////////////////////////////////////////////////////////////////
-  } //namespace detail
   ///////////////////////////////////////////////////////////////////
 
   ///////////////////////////////////////////////////////////////////
@@ -764,10 +446,8 @@ attremptycheckend:
     : _pimpl(new Impl())
   {}
 
-
   PoolQuery::~PoolQuery()
   {}
-
 
   void PoolQuery::addRepo(const std::string &repoalias)
   {
@@ -798,39 +478,21 @@ attremptycheckend:
     _pimpl->_op = op;
   }
 
-
-  void PoolQuery::setCaseSensitive(const bool value)
-  {
-    if (value)
-      _pimpl->_flags &= ~SEARCH_NOCASE;
-    else
-      _pimpl->_flags |= SEARCH_NOCASE;
-  }
-
-  void PoolQuery::setMatchFiles()
-  {
-    _pimpl->_flags = (_pimpl->_flags & ~SEARCH_STRINGMASK) | SEARCH_FILES;
-  }
-
-  void PoolQuery::setMatchSubstring()
-  { _pimpl->_flags = (_pimpl->_flags & ~SEARCH_STRINGMASK) | SEARCH_SUBSTRING; }
-  void PoolQuery::setMatchExact()
-  { _pimpl->_flags = (_pimpl->_flags & ~SEARCH_STRINGMASK) | SEARCH_STRING; }
-  void PoolQuery::setMatchRegex()
-  { _pimpl->_flags = (_pimpl->_flags & ~SEARCH_STRINGMASK) | SEARCH_REGEX; }
-  void PoolQuery::setMatchGlob()
-  { _pimpl->_flags = (_pimpl->_flags & ~SEARCH_STRINGMASK) | SEARCH_GLOB; }
+  void PoolQuery::setMatchSubstring()	{ _pimpl->_flags.setModeSubstring(); }
+  void PoolQuery::setMatchExact()	{ _pimpl->_flags.setModeString(); }
+  void PoolQuery::setMatchRegex()	{ _pimpl->_flags.setModeRegex(); }
+  void PoolQuery::setMatchGlob()	{ _pimpl->_flags.setModeGlob(); }
   void PoolQuery::setMatchWord()
   {
     _pimpl->_match_word = true;
-    _pimpl->_flags = (_pimpl->_flags & ~SEARCH_STRINGMASK) | SEARCH_REGEX;
+    _pimpl->_flags.setModeRegex();
   }
 
-  void PoolQuery::setFlags(int flags)
+  Match PoolQuery::flags() const
+  { return _pimpl->_flags; }
+  void PoolQuery::setFlags( const Match & flags )
   { _pimpl->_flags = flags; }
 
-  int PoolQuery::flags() const
-  { return _pimpl->_flags; }
 
   void PoolQuery::setInstalledOnly()
   { _pimpl->_status_flags = INSTALLED_ONLY; }
@@ -840,7 +502,7 @@ attremptycheckend:
   { _pimpl->_status_flags = flags; }
 
 
-  void PoolQuery::setRequireAll(const bool require_all)
+  void PoolQuery::setRequireAll(bool require_all)
   { _pimpl->_require_all = require_all; }
 
 
@@ -874,21 +536,21 @@ attremptycheckend:
   PoolQuery::repos() const
   { return _pimpl->_repos; }
 
-  bool PoolQuery::caseSensitive() const
-  { return !(_pimpl->_flags & SEARCH_NOCASE); }
 
-  bool PoolQuery::matchExact() const
-  { return (_pimpl->_flags & SEARCH_STRINGMASK) == SEARCH_STRING; }
-  bool PoolQuery::matchSubstring() const
-  { return (_pimpl->_flags & SEARCH_STRINGMASK) == SEARCH_SUBSTRING; }
-  bool PoolQuery::matchGlob() const
-  { return (_pimpl->_flags & SEARCH_STRINGMASK) == SEARCH_GLOB; }
-  bool PoolQuery::matchRegex() const
-  { return (_pimpl->_flags & SEARCH_STRINGMASK) == SEARCH_REGEX; }
-  int PoolQuery::matchType() const
-  { return _pimpl->_flags & SEARCH_STRINGMASK; }
-  bool PoolQuery::matchFiles() const
-  { return (_pimpl->_flags & SEARCH_STRINGMASK) == SEARCH_FILES; }
+  bool PoolQuery::caseSensitive() const
+  { return !_pimpl->_flags.test( Match::NOCASE ); }
+  void PoolQuery::setCaseSensitive( bool value )
+  { _pimpl->_flags.turn( Match::NOCASE, !value ); }
+
+  bool PoolQuery::filesMatchFullPath() const
+  { return _pimpl->_flags.test( Match::FILES ); }
+  void PoolQuery::setFilesMatchFullPath( bool value )
+  { _pimpl->_flags.turn( Match::FILES, value ); }
+
+  bool PoolQuery::matchExact() const		{ return _pimpl->_flags.isModeString(); }
+  bool PoolQuery::matchSubstring() const	{ return _pimpl->_flags.isModeSubstring(); }
+  bool PoolQuery::matchGlob() const		{ return _pimpl->_flags.isModeGlob(); }
+  bool PoolQuery::matchRegex() const		{ return _pimpl->_flags.isModeRegex(); }
 
   bool PoolQuery::matchWord() const
   { return _pimpl->_match_word; }
@@ -899,37 +561,28 @@ attremptycheckend:
   PoolQuery::StatusFilter PoolQuery::statusFilterFlags() const
   { return _pimpl->_status_flags; }
 
-  PoolQuery::const_iterator PoolQuery::begin() const
-  { return _pimpl->begin(); }
-
-
-  PoolQuery::const_iterator PoolQuery::end() const
-  { return _pimpl->end(); }
-
-
   bool PoolQuery::empty() const
   {
-    try { return _pimpl->begin() == _pimpl->end(); }
+    try { return begin() == end(); }
     catch (const Exception & ex) {}
     return true;
   }
 
-
   PoolQuery::size_type PoolQuery::size() const
   {
-    size_type count = 0;
     try
     {
-      for(const_iterator it = _pimpl->begin(); it != _pimpl->end(); ++it, ++count);
+      size_type count = 0;
+      for_( it, begin(), end() )
+        ++count;
+      return count;
     }
     catch (const Exception & ex) {}
-
-    return count;
+    return 0;
   }
 
-
   void PoolQuery::execute(ProcessResolvable fnc)
-  { invokeOnEach(_pimpl->begin(), _pimpl->end(), fnc); }
+  { invokeOnEach( begin(), end(), fnc); }
 
 
   ///////////////////////////////////////////////////////////////////
@@ -1200,25 +853,25 @@ attremptycheckend:
     if (editionRel() != Rel::ANY && edition() != Edition::noedition)
       str << PoolQueryAttr::editionAttr.asString() << ": " << editionRel() << " " << edition() << delim;
 
-    if (matchType()!=q.matchType())
+    if (matchMode()!=q.matchMode())
     {
-      switch( matchType() )
+      switch( matchMode() )
       {
-      case SEARCH_STRING:
+      case Match::STRING:
         str << PoolQueryAttr::stringTypeAttr.asString() << ": exact" << delim;
         break;
-      case SEARCH_SUBSTRING:
+      case Match::SUBSTRING:
         str << PoolQueryAttr::stringTypeAttr.asString()
             << ": substring" << delim;
         break;
-      case SEARCH_GLOB:
+      case Match::GLOB:
         str << PoolQueryAttr::stringTypeAttr.asString() << ": glob" << delim;
         break;
-      case SEARCH_REGEX:
+      case Match::REGEX:
         str << PoolQueryAttr::stringTypeAttr.asString() << ": regex" << delim;
         break;
       default:
-        WAR << "unknown match type "  << matchType() << endl;
+        WAR << "unknown match type "  << matchMode() << endl;
       }
     }
 
@@ -1281,63 +934,25 @@ attremptycheckend:
 
     //separating delim - protection
     str << delim;
-
   }
-
 
   string PoolQuery::asString() const
   { return _pimpl->asString(); }
 
-
   ostream & operator<<( ostream & str, const PoolQuery & obj )
   { return str << obj.asString(); }
 
-  //internal matching two containers O(n^2)
-  template <class Container>
-  bool equalContainers(const Container& a, const Container& b)
-  {
-    if (a.size()!=b.size())
-      return false;
-
-    for_(it,a.begin(),a.end())
-    {
-      bool finded = false;
-      for_( it2, b.begin(),b.end() )
-      {
-        if (*it==*it2)
-        {
-          finded = true;
-          break;
-        }
-      }
-
-      if (!finded)
-        return false;
-    }
-    return true;
-  }
-
   bool PoolQuery::operator==(const PoolQuery& a) const
   {
-    if (!_pimpl->_compiled)
-      _pimpl->compile();
-    if (!a._pimpl->_compiled)
-      a._pimpl->compile();
-    if( matchType() != a.matchType() )
+    if( flags() != a.flags() )
       return false;
     if( a.matchWord() != matchWord())
       return false;
     if( a.requireAll() != requireAll() )
       return false;
-    if(!equalContainers(a.kinds(), kinds()))
+    if ( a.kinds() != kinds() )
       return false;
-    if(!equalContainers(a.repos(), repos()))
-      return false;
-    if(a._pimpl->_rcstrings != _pimpl->_rcstrings)
-      return false;
-    if(!equalContainers(a._pimpl->_rcattrs, _pimpl->_rcattrs))
-      return false;
-    if(a._pimpl->_cflags != _pimpl->_cflags)
+    if ( a.repos() != repos() )
       return false;
     if(a.edition() != edition())
       return false;
@@ -1347,6 +962,217 @@ attremptycheckend:
     return true;
   }
 
+  ///////////////////////////////////////////////////////////////////
+  namespace detail
+  { /////////////////////////////////////////////////////////////////
+
+    ///////////////////////////////////////////////////////////////////
+    //
+    //  CLASS NAME : PoolQueryMatcher
+    //
+    /** Store \ref PoolQuery settings and assist \ref PoolQueryIterator.
+     *
+     * Basically the matcher performs a base query, which should preselect
+     * candidates for a match. And has some filter conditions on top of it.
+     * Query and fileter depend on the \ref PoolQuery settings.
+     *
+     * Matcher must be stateless, as it is shared between multiple
+     * \ref PoolQueryIterator instances.
+     *
+     * If \ref base_iterator is at the \ref end, \ref advance moves it
+     * to the first match. Otherwise advance moves to the next match, or
+     * to the \ref end, if there is no more match.
+     *
+     * \note The original implementation treated an empty search string as
+     * <it>"match always"</it>. We stay compatible.
+     */
+    class PoolQueryMatcher
+    {
+      public:
+	typedef sat::LookupAttr::iterator base_iterator;
+	typedef std::pair<sat::SolvAttr,sat::AttrMatcher> AttrMatchData;
+
+      public:
+	const base_iterator & end() const
+	{
+	  static base_iterator _end;
+	  return _end;
+	}
+
+	bool advance( base_iterator & base_r ) const
+	{
+	  if ( base_r == end() )
+	    base_r = startNewQyery(); // first candidate
+	  else
+	    ++base_r; // advance to next candidate
+
+	  while ( base_r != end() )
+	  {
+	    if ( isAMatch( base_r ) )
+	    {
+	      base_r.nextSkipSolvable(); // assert we don't visit this Solvable again
+	      return true;
+	    }
+	    // No match: try next
+	    ++base_r;
+	  }
+	  return false;
+	}
+
+      public:
+	/** Ctor stores the \ref PoolQuery settings.
+         * \throw MatchException Any of the exceptions thrown by \ref PoolQuery::Impl::compile.
+         */
+	PoolQueryMatcher( const shared_ptr<const PoolQuery::Impl> & query_r )
+	{
+	  query_r->compile();
+
+	  // Repo restriction:
+	  sat::Pool satpool( sat::Pool::instance() );
+	  for_( it, query_r->_repos.begin(), query_r->_repos.end() )
+	  {
+	    Repository r( satpool.reposFind( *it ) );
+	    if ( r )
+	      _repos.insert( r );
+	  }
+	  // Kind restriction:
+	  _kinds = query_r->_kinds;
+	  // Edition restriction:
+	  _op      = query_r->_op;
+	  _edition = query_r->_edition;
+	  // Status restriction:
+	  _status_flags = query_r->_status_flags;
+          // AttrMatcher
+          _attrMatchList = query_r->_attrMatchList;
+	}
+
+	~PoolQueryMatcher()
+	{}
+
+      private:
+	/** Initialize a new base query. */
+	base_iterator startNewQyery() const
+	{
+	  sat::LookupAttr q;
+
+	  // Repo restriction:
+	  if ( _repos.size() == 1 )
+	    q.setRepo( *_repos.begin() );
+	  // else: handled in isAMatch.
+
+	  // Attribute restriction:
+	  if ( _attrMatchList.size() == 1 ) // all (SolvAttr::allAttr) or 1 attr
+	  {
+            const AttrMatchData & matchData( _attrMatchList[0] );
+	    q.setAttr( matchData.first );
+            if ( matchData.second ) // empty searchstring matches always
+              q.setAttrMatcher( matchData.second );
+	  }
+          else // more than 1 attr (but not all)
+          {
+            // no restriction, it's all handled in isAMatch.
+            q.setAttr( sat::SolvAttr::allAttr );
+          }
+
+	  return q.begin();
+	}
+
+
+	/** Check whether we are on a match.
+	 *
+	 * The check covers the whole Solvable, not just the current
+	 * attribute \c base_r points to. If there's no match, also
+	 * prepare \c base_r to advance appropriately. If there is
+	 * a match, simply return \c true. \ref advance always moves
+	 * to the next Solvable if there was a match.
+	 *
+	 * \note: Caller asserts we're not at \ref end.
+	*/
+	bool isAMatch( base_iterator & base_r ) const
+	{
+	  /////////////////////////////////////////////////////////////////////
+	  Repository inRepo( base_r.inRepo() );
+	  // Status restriction:
+	  if ( _status_flags
+	     && ( (_status_flags == PoolQuery::INSTALLED_ONLY) != inRepo.isSystemRepo() ) )
+	  {
+	    base_r.nextSkipRepo();
+	    return false;
+	  }
+	  // Repo restriction:
+	  if ( _repos.size() > 1 && _repos.find( inRepo ) == _repos.end() )
+	  {
+	    base_r.nextSkipRepo();
+	    return false;
+	  }
+	  /////////////////////////////////////////////////////////////////////
+	  sat::Solvable inSolvable( base_r.inSolvable() );
+	  // Kind restriction:
+	  if ( ! _kinds.empty() && ! inSolvable.isKind( _kinds.begin(), _kinds.end() ) )
+	  {
+            base_r.nextSkipSolvable();
+            return false;
+	  }
+
+	  // Edition restriction:
+	  if ( _op != Rel::ANY && !compareByRel( _op, inSolvable.edition(), _edition, Edition::Match() ) )
+	  {
+	    base_r.nextSkipSolvable();
+	    return false;
+	  }
+	  /////////////////////////////////////////////////////////////////////
+	  // string matching:
+          if ( _attrMatchList.size() == 1 )
+          {
+            return true; // matching was done by the base iterator
+          }
+
+          // Here: search all attributes ;(
+          for_( mi, _attrMatchList.begin(), _attrMatchList.end() )
+          {
+            const AttrMatchData & matchData( *mi );
+            sat::LookupAttr q( matchData.first, inSolvable );
+            if ( matchData.second ) // empty searchstring matches always
+              q.setAttrMatcher( matchData.second );
+            if ( ! q.empty() )
+              return true;
+          }
+          base_r.nextSkipSolvable();
+          return false;
+	}
+
+      private:
+        /** Repositories include in the search. */
+        std::set<Repository> _repos;
+        /** Resolvable kinds to include. */
+        std::set<ResKind> _kinds;
+        /** Edition filter. */
+        Rel _op;
+        Edition _edition;
+        /** Installed status filter flags. \see PoolQuery::StatusFilter */
+        int _status_flags;
+        /** AttrMatcher per attribtue. */
+        std::vector<AttrMatchData> _attrMatchList;
+    };
+    ///////////////////////////////////////////////////////////////////
+
+    void PoolQueryIterator::increment()
+    {
+      // matcher restarts if at end! It is called from the ctor
+      // to get the 1st match. But if the end is reached, it should
+      // be deleted, otherwise we'd start over again.
+      if ( _matcher && ! _matcher->advance( base_reference() ) )
+	_matcher.reset();
+    }
+
+    ///////////////////////////////////////////////////////////////////
+  } //namespace detail
+  ///////////////////////////////////////////////////////////////////
+
+  detail::PoolQueryIterator PoolQuery::begin() const
+  {
+    return shared_ptr<detail::PoolQueryMatcher>( new detail::PoolQueryMatcher( _pimpl.getPtr() ) );
+  }
 
   /////////////////////////////////////////////////////////////////
 } // namespace zypp

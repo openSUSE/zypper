@@ -22,6 +22,7 @@
 
 #include "zypp/sat/SolvIterMixin.h"
 #include "zypp/sat/LookupAttr.h"
+#include "zypp/sat/AttrMatcher.h"
 #include "zypp/sat/Pool.h"
 
 ///////////////////////////////////////////////////////////////////
@@ -99,18 +100,17 @@ namespace zypp
 
     /** Query result accessers. */
     //@{
-
     /**
      * Compile the query and return an iterator to the result.
      *
      * \return An iterator (\ref detail::PoolQueryIterator) returning
      *         sat::Solvable objects pointing at the beginning of the query result.
-     * \throws \ref Exception if the query was about to use a regex which
+     * \throws sat::MatchInvalidRegexException if the query was about to use a regex which
      *         failed to compile.
      *
      * \note Note that PoolQuery is derived from \ref sat::SolvIterMixin which
      *       makes PoolItem and Selectable iterators automatically available.
-     * \see sat::SolvIterMixin
+     * \see \ref sat::SolvIterMixin
      */
     const_iterator begin() const;
 
@@ -213,26 +213,11 @@ namespace zypp
      */
     void setEdition(const Edition & edition, const Rel & op = Rel::EQ);
 
-    /**
-     * Add dependency filter.
-     *
-     * \param dtype   depenedcy type
-     * \param name    depenency name
-     * \param edition edition for a versioned dependency
-     * \param rel     operand for a versioned dependency
-     *
-     * \todo maybe a isRegexp bool as in addName() for the name parameter would
-     *       be handy here as well.
-     * \todo add more addDependecy() variants
-     *//*
-    void addDependency(const Dep & dtype,
-                       const std::string & name,
-                       const Edition & edition = Edition(),
-                       const Rel & rel = Rel::EQ);
-*/
-
-
-    /** \name Text Matching Options */
+    /** \name Text Matching Options
+     * \note The implementation treats an empty search string as
+     * <it>"match always"</it>. So if you want to actually match
+     * an empty value, try <tt>( "^$", setMatchRegex )</tt>.
+     */
     //@{
     /**
      * Turn case sentitivity on or off (unsets or sets \ref SEARCH_NOCASE flag).
@@ -241,7 +226,17 @@ namespace zypp
      *
      * \param value Whether to turn the case sensitivity on (default) or off.
      */
-    void setCaseSensitive(const bool value = true);
+    void setCaseSensitive( bool value = true );
+
+    /**
+     * If set (default), look at the full path when searching in filelists.
+     * Otherwise just match the the basenames.
+     * \see \ref Match::FILES
+     */
+    void setFilesMatchFullPath( bool value = true );
+    /** \overload */
+    void setFilesMatchBasename( bool value = true )
+    { setFilesMatchFullPath( !value ); }
 
     /** Set to match exact string instead of substring.*/
     void setMatchExact();
@@ -255,8 +250,6 @@ namespace zypp
     void setMatchWord();
     //void setLocale(const Locale & locale);
     //@}
-    /* set to match file type attributes (like file lists ) */
-    void setMatchFiles();
 
     /**
      * Require that all of the values set by addString or addAttribute
@@ -264,7 +257,7 @@ namespace zypp
      *
      * \todo doesn't work yet, don't use this function
      */
-    void setRequireAll(const bool require_all = true);
+    void setRequireAll( bool require_all = true );
 
 
     /** \name getters */
@@ -291,27 +284,23 @@ namespace zypp
      */
     bool caseSensitive() const;
 
+    /** Whether searching in filelists looks at the full path or just at the basenames. */
+    bool filesMatchFullPath() const;
+    /** \overload */
+    bool filesMatchBasename() const
+    { return !filesMatchFullPath(); }
+
     bool matchExact() const;
     bool matchSubstring() const;
     bool matchGlob() const;
     bool matchRegex() const;
     bool matchWord() const;
 
-    /**
-     * match file list types
-     *
-     * For attributes like \ref sat::SolvAttr::filelist
-     * you need to activate this one if you want to
-     * match them.
-     *
+    /** Returns string matching mode as enum.
+     * \see \ref Match::Mode
      */
-    bool matchFiles() const;
-
-    /**
-     * Returns currently used string matching type.
-     * \see satsolver/repo.h
-     */
-    int  matchType() const;
+    Match::Mode matchMode() const
+    { return flags().mode(); }
 
     /**
      * Whether all values added via addString() or addAttribute() are required
@@ -354,29 +343,36 @@ namespace zypp
     // low level API
 
     /**
-     * Free function to set the satsolver repo search
-     * flags.
-     *
-     * \see SEARCH_STRINGMASK
-     * \see SEARCH_STRING
-     * \see SEARCH_SUBSTRING
-     * \see SEARCH_GLOB
-     * \see SEARCH_REGEX
-     * \see SEARCH_NOCASE
-     * \see SEARCH_NO_STORAGE_SOLVABLE
-     * \see SEARCH_FILES
-     */
-    void setFlags(int flags);
-
-    /**
      * Free function to get the satsolver repo search
      * flags.
      *
-     * \see setFlags
+     * \see \ref Match
      */
-    int flags() const;
+    Match flags() const;
 
+    /**
+     * Free function to set the satsolver repo search
+     * flags.
+     *
+     * \see \ref Match
+     */
+    void setFlags( const Match & flags );
+
+  public:
     class Impl;
+
+    /** \deprecated unused, buggy and useless. */
+    ZYPP_DEPRECATED void setMatchFiles() {}
+    /** \deprecated unused, buggy and useless. */
+    ZYPP_DEPRECATED bool matchFiles() const { return false; }
+    /** \deprecated There should be no need for this internal value. To
+     * switch across all match mode types, use the enum values returned
+     * by \ref matchMode().  \see \ref Match::Mode.
+     *
+     */
+    ZYPP_DEPRECATED int  matchType() const { return flags().modeval(); }
+
+
   private:
     /** Pointer to implementation */
     RW_pointer<Impl> _pimpl;
@@ -387,19 +383,18 @@ namespace zypp
   std::ostream & operator<<( std::ostream & str, const PoolQuery & obj );
 
 
-
   ///////////////////////////////////////////////////////////////////
   namespace detail
   { /////////////////////////////////////////////////////////////////
 
+  class PoolQueryMatcher;
 
   ///////////////////////////////////////////////////////////////////
   //
   //  CLASS NAME : PoolQuery::PoolQueryIterator
   //
-  /**
-   *
-   */
+  /** \ref PoolQuery iterator as returned by \ref PoolQuery::begin.
+  */
   class PoolQueryIterator : public boost::iterator_adaptor<
     PoolQueryIterator                  // Derived
     , sat::LookupAttr::iterator        // Base
@@ -408,79 +403,39 @@ namespace zypp
     , const sat::Solvable              // Reference
   >
   {
-  public:
-    PoolQueryIterator();
+    public:
+      /** Default ctor is also \c end.*/
+      PoolQueryIterator()
+      {}
 
-    PoolQueryIterator(const PoolQueryIterator &);
+      /** \Ref PoolQuery ctor. */
+      PoolQueryIterator( const shared_ptr<PoolQueryMatcher> & matcher_r )
+      : _matcher( matcher_r )
+      { increment(); }
 
-    explicit
-    PoolQueryIterator( const sat::LookupAttr::iterator & val_r )
-    { this->base_reference() = val_r; }
+    private:
+      friend class boost::iterator_core_access;
 
-    ~PoolQueryIterator();
+      sat::Solvable dereference() const
+      { return base_reference().inSolvable(); }
 
-    PoolQueryIterator & operator=( const PoolQueryIterator & rhs );
+      void increment();
 
-  private:
-    friend class boost::iterator_core_access;
-    friend class PoolQuery::Impl;
-
-    PoolQueryIterator(
-        scoped_ptr< ::_Dataiterator> & dip_r,
-        const PoolQuery::Impl * pqimpl);
-
-    const sat::Solvable dereference() const
-    {
-      return _sid ? sat::Solvable(_sid) : sat::Solvable::noSolvable;
-    }
-
-    void increment();
-
-    bool matchSolvable();
-
-  private:
-    /** current matching solvable id */
-    int _sid;
-    /** whether there is a next solvable to check */
-    bool _has_next;
-    /** whether to do text matching on our own (true) or the Dataiterator already did it */
-    bool _do_matching;
-
-    /** \name Query Data
-     * Depending on whether regexes are used in the search either \ref _str or
-     * \ref _regex (or either _attrs_str or _attrs_regex respectively) are used.
-     */
-    //@{
-
-    /** string matching option flags */
-    int _flags;
-    /** global query string compiled */
-    std::string _str;
-    /** global query compiled regex */
-    str::regex _regex;
-    /** Attribute to string map holding per-attribute query strings (compiled) */
-    PoolQuery::AttrCompiledStrMap _attrs_str;
-    /** Attribute to regex map holding per-attribute compiled regex */
-    PoolQuery::AttrRegexMap _attrs_regex;
-    /** Set of repository names include in the search. */
-    PoolQuery::StrContainer _repos;
-    /** Set of solvable kinds to include in the search. */
-    PoolQuery::Kinds _kinds;
-    /** Installed status filter flags. \see PoolQuery::StatusFilter */
-    int _status_flags;
-
-    Edition _edition;
-    Rel _op;
-    //@}
-
-    /** used to copy current iterator in order to forward check for next attributes */
-    sat::LookupAttr::iterator _tmpit;
+   private:
+      shared_ptr<PoolQueryMatcher> _matcher;
   };
   ///////////////////////////////////////////////////////////////////
+
+  /** \relates PoolQueryIterator Stream output. */
+  inline std::ostream & operator<<( std::ostream & str, const PoolQueryIterator & obj )
+  { return str << obj.base(); }
 
   ///////////////////////////////////////////////////////////////////
   } //namespace detail
   ///////////////////////////////////////////////////////////////////
+
+  inline detail::PoolQueryIterator PoolQuery::end() const
+  { return detail::PoolQueryIterator(); }
 
   /////////////////////////////////////////////////////////////////
 } // namespace zypp
