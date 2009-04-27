@@ -1,4 +1,10 @@
 -------------------------------------------------------------------
+Mon Apr 27 15:26:54 CEST 2009 - ma@suse.de
+
+- In update repos providing multiple release package versions for 
+  the same product, link a product to the latest version. (bnc #497696)
+
+-------------------------------------------------------------------
 Mon Apr 27 14:28:07 CEST 2009 - ma@suse.de
 
 - New classes wraping satsolver datamatcher (Match and sat::AttrMatcher)
