@@ -1,4 +1,12 @@
 -------------------------------------------------------------------
+Mon Apr 27 14:28:07 CEST 2009 - ma@suse.de
+
+- New classes wraping satsolver datamatcher (Match and sat::AttrMatcher)
+- Extend LookupAttr to support matching specific string patterns.
+- Rewrote PoolQuery::Iterator (adapt to AttrMatcher, fixes and speedup)
+- version 6.5.0 (5)
+
+-------------------------------------------------------------------
 Thu Apr 16 12:49:40 CEST 2009 - ma@suse.de
 
 - Soft lock packages deleted on behalf of a user request.
