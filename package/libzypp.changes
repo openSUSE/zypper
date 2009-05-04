@@ -1,4 +1,9 @@
 -------------------------------------------------------------------
+Mon May  4 16:19:54 CEST 2009 - ma@suse.de
+
+- Improve problem report on broken systemCheck rule (bnc #475144)
+
+-------------------------------------------------------------------
 Mon Apr 27 15:26:54 CEST 2009 - ma@suse.de
 
 - In update repos providing multiple release package versions for 
