@@ -41,7 +41,7 @@ namespace zypp
 	 * Class representing one possible solution to one problem found during resolving
 	 * This problem solution is a combination of different actions.
 	 * e.G. install, delete, keep different resolvables.
-	 * 
+	 *
 	 **/
 	class ProblemSolutionCombi : public ProblemSolution
 	{
@@ -66,18 +66,22 @@ namespace zypp
 	    /**
 	     * Add a single action of a SolverQueueItem
 	     */
-	    void addSingleAction( SolverQueueItem_Ptr item, const TransactionKind action);	    
+	    void addSingleAction( SolverQueueItem_Ptr item, const TransactionKind action);
 
 	    /**
 	     * returns the number of actions
 	     */
 	    int actionCount() { return actNumber;}
-	    
+
 	    /**
-	     * Set description text
+	     * Set description text (append)
 	     */
 	    void addDescription( const std::string description);
 
+	    /**
+	     * Set description text (prepend)
+	     */
+	    void addFrontDescription( const std::string & description );
 	};
 
       ///////////////////////////////////////////////////////////////////

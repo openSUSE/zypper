@@ -58,7 +58,7 @@ void ProblemSolutionCombi::addSingleAction( Capability capability, const Transac
     addAction (new TransactionSolutionAction(capability, action));
     actNumber++;
 }
-	
+
 void ProblemSolutionCombi::addSingleAction( PoolItem item, const TransactionKind action)
 {
     addAction (new TransactionSolutionAction(item, action));
@@ -86,7 +86,28 @@ void ProblemSolutionCombi::addDescription( const std::string description)
 	}
 	// all other
 	_details += "\n";
-	_details += description;	
+	_details += description;
+    }
+}
+
+void ProblemSolutionCombi::addFrontDescription( const std::string & description )
+{
+    if ( _description.size() == 0
+	 && _details.size() == 0) {
+	 // first entry
+	_description = description;
+    } else {
+	if ( _description.size() > 0
+	     && _details.size() == 0) {
+	    // second entry
+	    _details = _description;
+	    _description = _("Following actions will be done:");
+	}
+	// all other
+        std::string tmp( _details );
+	_details = description;
+	_details += "\n";
+        _details += tmp;
     }
 }
 
