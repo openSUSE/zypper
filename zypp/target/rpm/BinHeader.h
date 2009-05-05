@@ -47,7 +47,7 @@ public:
 
   typedef intrusive_ptr<const BinHeader> constPtr;
 
-  typedef int32_t tag;
+  typedef rpmTag tag;
 
   class intList;
 
@@ -112,10 +112,10 @@ class BinHeader::intList
 private:
   unsigned cnt;
   void *   val;
-  tag      type;
+  rpmTagType type;
 private:
   friend class BinHeader;
-  unsigned set( void * val_r, tag cnt_r, tag type_r );
+  unsigned set( void * val_r, unsigned cnt_r, rpmTagType type_r );
 public:
   intList();
   bool empty() const
@@ -147,7 +147,7 @@ private:
   void clear();
 private:
   friend class BinHeader;
-  unsigned set( char ** val_r, tag cnt_r );
+  unsigned set( char ** val_r, unsigned cnt_r );
 public:
   stringList();
   ~stringList()

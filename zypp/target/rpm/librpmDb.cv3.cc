@@ -165,7 +165,7 @@ static void compressFilelist(Header h)
   const char ** baseNames;
   int_32 * dirIndexes;
   rpmTagType fnt;
-  int count;
+  rpm_count_t count;
   int i, xx;
   int dirIndex = -1;
 
@@ -273,7 +273,7 @@ void providePackageNVR(Header h)
   const char ** providesEVR = NULL;
   rpmTagType pnt, pvt;
   int_32 * provideFlags = NULL;
-  int providesCount;
+  rpm_count_t providesCount;
   int i, xx;
   int bingo = 1;
 
@@ -408,7 +408,7 @@ void internal_convertV3toV4( const Pathname & v3db_r, const librpmDb::constPtr &
       ::rpmdbClose( db );
     }
     Fclose( fd );
-    ZYPP_THROW(RpmDbOpenException(root, Pathname(string(db->db_root))));
+    ZYPP_THROW(RpmDbOpenException(root, v4db_r->dbPath()));
   }
 
   // Check ammount of packages to process.

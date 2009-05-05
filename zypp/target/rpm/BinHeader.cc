@@ -39,7 +39,7 @@ BinHeader::intList::intList()
     : cnt( 0 ), val( 0 ), type( RPM_NULL_TYPE )
 {}
 
-unsigned BinHeader::intList::set( void * val_r, tag cnt_r, tag type_r )
+unsigned BinHeader::intList::set( void * val_r, unsigned cnt_r, rpmTagType type_r )
 {
   val = val_r;
   cnt = val ? cnt_r : 0;
@@ -56,11 +56,11 @@ int BinHeader::intList::operator[]( const unsigned idx_r ) const
     case RPM_CHAR_TYPE:
       return ((char*)val)[idx_r];
     case RPM_INT8_TYPE:
-      return ((int_8*)val)[idx_r];
+      return ((int8_t*)val)[idx_r];
     case RPM_INT16_TYPE:
-      return ((int_16*)val)[idx_r];
+      return ((int16_t*)val)[idx_r];
     case RPM_INT32_TYPE:
-      return ((int_32*)val)[idx_r];
+      return ((int32_t*)val)[idx_r];
     }
   }
   return 0;
@@ -84,7 +84,7 @@ BinHeader::stringList::stringList()
     : cnt( 0 ), val( 0 )
 {}
 
-unsigned BinHeader::stringList::set( char ** val_r, tag cnt_r )
+unsigned BinHeader::stringList::set( char ** val_r, unsigned cnt_r )
 {
   clear();
   val = val_r;
@@ -198,10 +198,10 @@ unsigned BinHeader::int_list( tag tag_r, intList & lst_r ) const
 {
   if ( !empty() )
   {
-    int_32 type = 0;
-    int_32 cnt  = 0;
+    rpmTagType type = RPM_NULL_TYPE;
+    rpm_count_t cnt = 0;
     void * val  = 0;
-    ::headerGetEntry( _h, tag_r, &type, &val, &cnt );
+    ::headerGetEntry( _h, tag_r, hTYP_t(&type), &val, &cnt );
 
     if ( val )
     {
@@ -238,10 +238,10 @@ unsigned BinHeader::string_list( tag tag_r, stringList & lst_r ) const
 {
   if ( !empty() )
   {
-    int_32 type = 0;
-    int_32 cnt  = 0;
+    rpmTagType type = RPM_NULL_TYPE;
+    rpm_count_t cnt = 0;
     void * val  = 0;
-    ::headerGetEntry( _h, tag_r, &type, &val, &cnt );
+    ::headerGetEntry( _h, tag_r, hTYP_t(&type), &val, &cnt );
 
     if ( val )
     {
@@ -272,10 +272,10 @@ int BinHeader::int_val( tag tag_r ) const
 {
   if ( !empty() )
   {
-    int_32 type = 0;
-    int_32 cnt  = 0;
+    rpmTagType type = RPM_NULL_TYPE;
+    rpm_count_t cnt = 0;
     void * val  = 0;
-    ::headerGetEntry( _h, tag_r, &type, &val, &cnt );
+    ::headerGetEntry( _h, tag_r, hTYP_t(&type), &val, &cnt );
 
     if ( val )
     {
@@ -286,11 +286,11 @@ int BinHeader::int_val( tag tag_r ) const
       case RPM_CHAR_TYPE:
         return *((char*)val);
       case RPM_INT8_TYPE:
-        return *((int_8*)val);
+        return *((int8_t*)val);
       case RPM_INT16_TYPE:
-        return *((int_16*)val);
+        return *((int16_t*)val);
       case RPM_INT32_TYPE:
-        return *((int_32*)val);
+        return *((int32_t*)val);
 
       case RPM_STRING_ARRAY_TYPE:
         free( val );
@@ -315,10 +315,10 @@ std::string BinHeader::string_val( tag tag_r ) const
 {
   if ( !empty() )
   {
-    int_32 type = 0;
-    int_32 cnt  = 0;
+    rpmTagType type = RPM_NULL_TYPE;
+    rpm_count_t cnt = 0;
     void * val  = 0;
-    ::headerGetEntry( _h, tag_r, &type, &val, &cnt );
+    ::headerGetEntry( _h, tag_r, hTYP_t(&type), &val, &cnt );
 
     if ( val )
     {

@@ -52,6 +52,10 @@ ELSE ( NOT RPM_FOUND)
   INCLUDE_DIRECTORIES(${RPM_INCLUDE_DIR})
   # fix includes not relative to rpm
   INCLUDE_DIRECTORIES(${RPM_INCLUDE_DIR}/rpm)
+  if (RPM_4_4_LEGACY)
+    MESSAGE( STATUS "Enable rpm 4.4 legacy interface")
+    ADD_DEFINITIONS(-D_RPM_4_4_COMPAT)
+  endif (RPM_4_4_LEGACY)
 ENDIF( NOT RPM_FOUND)
 
 FIND_PACKAGE(Boost REQUIRED)

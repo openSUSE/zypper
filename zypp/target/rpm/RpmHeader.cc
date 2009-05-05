@@ -10,6 +10,13 @@
  *
 */
 #include "librpm.h"
+#ifndef _RPM_4_4_COMPAT
+#include <rpm/ugid.h>
+inline uid_t getUidS(const char * uname) { uid_t tmp; return ::unameToUid( uname, &tmp ); }
+inline gid_t getGidS(const char * gname) { gid_t tmp; return ::gnameToGid( gname, &tmp ); }
+#else
+#include <rpm/rpmbuild.h>
+#endif
 
 #include <iostream>
 #include <map>
@@ -266,8 +273,8 @@ CapabilitySet RpmHeader::PkgRelList_val( tag tag_r, bool pre, std::set<std::stri
   {
     CapabilitySet ret;
 
-    int_32  kindFlags   = 0;
-    int_32  kindVersion = 0;
+    rpmTag  kindFlags   = rpmTag(0);
+    rpmTag  kindVersion = rpmTag(0);
 
     switch ( tag_r )
     {
@@ -318,8 +325,8 @@ CapabilitySet RpmHeader::PkgRelList_val( tag tag_r, bool pre, std::set<std::stri
       std::string n( names[i] );
 
       Rel op = Rel::ANY;
-      int_32 f  = flags[i];
-      std::string v  = versions[i];
+      int32_t f = flags[i];
+      std::string v = versions[i];
 
       if ( n[0] == '/' )
       {
@@ -756,7 +763,7 @@ std::list<FileInfo> RpmHeader::tag_fileinfos() const
       uid_t uid;
       if (uids.empty())
       {
-        uid = unameToUid( usernames[i].c_str(), &uid );
+        uid = getUidS( usernames[i].c_str() );
       }
       else
       {
@@ -766,7 +773,7 @@ std::list<FileInfo> RpmHeader::tag_fileinfos() const
       gid_t gid;
       if (gids.empty())
       {
-        gid = gnameToGid( groupnames[i].c_str(), &gid );
+        gid = getGidS( groupnames[i].c_str() );
       }
       else
       {

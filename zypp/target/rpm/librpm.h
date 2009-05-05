@@ -18,8 +18,11 @@ extern "C"
 #include <rpm/rpmmacro.h>
 #include <rpm/rpmdb.h>
 #include <rpm/rpmts.h>
-#include <rpm/ugid.h>
 #include <fcntl.h>
+
+#ifndef _RPM_4_4_COMPAT
+typedef int32_t rpm_count_t;
+#endif
 }
 
 #endif // ZYPP_TARGET_RPM_LIBRPM_H
