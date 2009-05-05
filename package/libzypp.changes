@@ -2,6 +2,7 @@
 Tue May  5 13:39:08 CEST 2009 - ma@suse.de
 
 - Detect and compile with rpm 4.7 (bnc #444211)
+- version 6.5.2 (5)
 
 -------------------------------------------------------------------
 Mon May  4 16:19:54 CEST 2009 - ma@suse.de
