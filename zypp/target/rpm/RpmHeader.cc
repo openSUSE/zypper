@@ -12,10 +12,136 @@
 #include "librpm.h"
 #ifndef _RPM_4_4_COMPAT
 #include <rpm/ugid.h>
-inline uid_t getUidS(const char * uname) { uid_t tmp; return ::unameToUid( uname, &tmp ); }
-inline gid_t getGidS(const char * gname) { gid_t tmp; return ::gnameToGid( gname, &tmp ); }
 #else
-#include <rpm/rpmbuild.h>
+////////////////////////////////////////////////////////////////////
+// unameToUid and gnameToGid are shamelessly stolen from rpm-4.4.
+// (rpmio/ugid.c) Those functions were dropped in RPM_4_7
+extern "C"
+{
+#include <pwd.h>
+#include <grp.h>
+}
+/* unameToUid(), uidTouname() and the group variants are really poorly
+   implemented. They really ought to use hash tables. I just made the
+   guess that most files would be owned by root or the same person/group
+   who owned the last file. Those two values are cached, everything else
+   is looked up via getpw() and getgr() functions.  If this performs
+   too poorly I'll have to implement it properly :-( */
+
+int unameToUid(const char * thisUname, uid_t * uid)
+{
+/*@only@*/ static char * lastUname = NULL;
+    static size_t lastUnameLen = 0;
+    static size_t lastUnameAlloced;
+    static uid_t lastUid;
+    struct passwd * pwent;
+    size_t thisUnameLen;
+
+    if (!thisUname) {
+	lastUnameLen = 0;
+	return -1;
+    } else if (strcmp(thisUname, "root") == 0) {
+/*@-boundswrite@*/
+	*uid = 0;
+/*@=boundswrite@*/
+	return 0;
+    }
+
+    thisUnameLen = strlen(thisUname);
+    if (lastUname == NULL || thisUnameLen != lastUnameLen ||
+	strcmp(thisUname, lastUname) != 0)
+    {
+	if (lastUnameAlloced < thisUnameLen + 1) {
+	    lastUnameAlloced = thisUnameLen + 10;
+	    lastUname = (char *)realloc(lastUname, lastUnameAlloced);	/* XXX memory leak */
+	}
+/*@-boundswrite@*/
+	strcpy(lastUname, thisUname);
+/*@=boundswrite@*/
+
+	pwent = getpwnam(thisUname);
+	if (pwent == NULL) {
+	    /*@-internalglobs@*/ /* FIX: shrug */
+	    endpwent();
+	    /*@=internalglobs@*/
+	    pwent = getpwnam(thisUname);
+	    if (pwent == NULL) return -1;
+	}
+
+	lastUid = pwent->pw_uid;
+    }
+
+/*@-boundswrite@*/
+    *uid = lastUid;
+/*@=boundswrite@*/
+
+    return 0;
+}
+
+int gnameToGid(const char * thisGname, gid_t * gid)
+{
+/*@only@*/ static char * lastGname = NULL;
+    static size_t lastGnameLen = 0;
+    static size_t lastGnameAlloced;
+    static gid_t lastGid;
+    size_t thisGnameLen;
+    struct group * grent;
+
+    if (thisGname == NULL) {
+	lastGnameLen = 0;
+	return -1;
+    } else if (strcmp(thisGname, "root") == 0) {
+/*@-boundswrite@*/
+	*gid = 0;
+/*@=boundswrite@*/
+	return 0;
+    }
+
+    thisGnameLen = strlen(thisGname);
+    if (lastGname == NULL || thisGnameLen != lastGnameLen ||
+	strcmp(thisGname, lastGname) != 0)
+    {
+	if (lastGnameAlloced < thisGnameLen + 1) {
+	    lastGnameAlloced = thisGnameLen + 10;
+	    lastGname = (char *)realloc(lastGname, lastGnameAlloced);	/* XXX memory leak */
+	}
+/*@-boundswrite@*/
+	strcpy(lastGname, thisGname);
+/*@=boundswrite@*/
+
+	grent = getgrnam(thisGname);
+	if (grent == NULL) {
+	    /*@-internalglobs@*/ /* FIX: shrug */
+	    endgrent();
+	    /*@=internalglobs@*/
+	    grent = getgrnam(thisGname);
+	    if (grent == NULL) {
+		/* XXX The filesystem package needs group/lock w/o getgrnam. */
+		if (strcmp(thisGname, "lock") == 0) {
+/*@-boundswrite@*/
+		    *gid = lastGid = 54;
+/*@=boundswrite@*/
+		    return 0;
+		} else
+		if (strcmp(thisGname, "mail") == 0) {
+/*@-boundswrite@*/
+		    *gid = lastGid = 12;
+/*@=boundswrite@*/
+		    return 0;
+		} else
+		return -1;
+	    }
+	}
+	lastGid = grent->gr_gid;
+    }
+
+/*@-boundswrite@*/
+    *gid = lastGid;
+/*@=boundswrite@*/
+
+    return 0;
+}
+////////////////////////////////////////////////////////////////////
 #endif
 
 #include <iostream>
@@ -763,7 +889,7 @@ std::list<FileInfo> RpmHeader::tag_fileinfos() const
       uid_t uid;
       if (uids.empty())
       {
-        uid = getUidS( usernames[i].c_str() );
+        uid = unameToUid( usernames[i].c_str(), &uid );
       }
       else
       {
@@ -773,7 +899,7 @@ std::list<FileInfo> RpmHeader::tag_fileinfos() const
       gid_t gid;
       if (gids.empty())
       {
-        gid = getGidS( groupnames[i].c_str() );
+        gid = gnameToGid( groupnames[i].c_str(), &gid );
       }
       else
       {
