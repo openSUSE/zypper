@@ -11,6 +11,12 @@
 */
 
 #include "librpm.h"
+extern "C"
+{
+#ifndef _RPM_4_4_COMPAT
+typedef int32_t rpm_count_t;
+#endif
+}
 
 #include <iostream>
 
