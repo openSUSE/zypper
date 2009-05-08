@@ -1,201 +1,13 @@
 #include "Tools.h"
 
 #include <zypp/ResObjects.h>
-#include <zypp/ProgressData.h>
 #include <zypp/sat/WhatObsoletes.h>
 #include "zypp/pool/GetResolvablesToInsDel.h"
 
-///////////////////////////////////////////////////////////////////
-#if 0
-#include "zypp/parser/xml/ParseDef.h"
-#include "zypp/parser/xml/ParseDefConsume.h"
-#include "zypp/parser/xml/Reader.h"
-namespace zypp
-{
-  namespace xml
-  {
-    namespace parsedefassign
-    {
-      template <class _Type> struct Assigner;
-
-      /** Common interface to all Assigner. */
-      template <>
-          struct Assigner<void>
-      {
-        virtual ~Assigner()
-        {}
-        virtual void assign( const char * text_r )
-        {}
-      };
-
-      /** Assigner assigns text to types constructible from \c char*. */
-      template <class _Type>
-          struct Assigner : public Assigner<void>
-      {
-        Assigner(_Type & value_r )
-          : _value( &value_r )
-        {}
-
-        virtual void assign( const char * text_r )
-        { *_value = _Type( text_r ); }
-
-        private:
-          _Type * _value;
-      };
-
-      /** \name Assigner specialisation for numeric and boolean values.
-       *  \relates Assigner
-       */
-      //@{
-      template <>
-          inline void Assigner<short>::assign( const char * text_r ) { str::strtonum( text_r, *_value ); }
-      template <>
-          inline void Assigner<int>::assign( const char * text_r ) { str::strtonum( text_r, *_value ); }
-      template <>
-          inline void Assigner<long>::assign( const char * text_r ) { str::strtonum( text_r, *_value ); }
-      template <>
-          inline void Assigner<long long>::assign( const char * text_r ) { str::strtonum( text_r, *_value ); }
-      template <>
-          inline void Assigner<unsigned short>::assign( const char * text_r ) { str::strtonum( text_r, *_value ); }
-      template <>
-          inline void Assigner<unsigned>::assign( const char * text_r ) { str::strtonum( text_r, *_value ); }
-      template <>
-          inline void Assigner<unsigned long>::assign( const char * text_r )  { str::strtonum( text_r, *_value ); }
-      template <>
-          inline void Assigner<unsigned long long>::assign( const char * text_r ) { str::strtonum( text_r, *_value ); }
-      template <>
-          inline void Assigner<bool>::assign( const char * text_r ) { str::strToBoolNodefault( text_r, *_value ); }
-      //@}
-    }
-
-    struct ParseDefAssignConsumer : public ParseDefConsume
-    {
-      virtual void start( const Node & node_r )
-      {}
-
-      virtual void text( const Node & node_r )
-      {}
-    };
-
-    struct ParseDefAssign
-    {
-      template <class _Type>
-          ParseDefAssign( _Type & value_r )
-      {}
-
-      operator const shared_ptr<ParseDefAssignConsumer> &() const
-      { return _ptr; }
-
-      private:
-        shared_ptr<ParseDefAssignConsumer> _ptr;
-    };
-
-  }
-
-  /** Parse \c input_r and store data in \c data_r.
-   *
-   * \c _Data must be defaultconstructible and assignable.
-   *
-   * \c _Data::RootNode must be a \ref xml::ParseDef constructible
-   * from \c _Data&.
-   *
-   * \throws ParseDefException on parse errors.
-   *
-   * To parse a xml file like this:
-   * \code
-   * <test><setup>value</setup></test>
-   * \endcode
-   *
-   * You need something like this:
-   * \code
-   *  struct XmlData
-   *  {
-   *    std::string value;
-
-   *   public:
-   *      // Convenience parsing to *this.
-   *      void parse( const Pathname & path_r )
-   *      { rnParse( path_r, *this ); }
-
-   *    public:
-   *      // Parser description
-   *      struct RootNode : public xml::ParseDef, public xml::ParseDefConsume
-   *      {
-   *        RootNode( XmlData & data )
-   *          : ParseDef( "test", MANDTAORY )
-   *        {
-   *          (*this)
-   *              ("setup", MANDTAORY, xml::parseDefAssignText( data.value ) )
-   *              ;
-   *        }
-   *      };
-   *  };
-   *
-   *  XmlData xmlData;
-   *  xmlData.parse( "/tmp/mytest.xml" );
-   * \endcode
-   */
-  template<class _Data>
-  inline void rnParse( const InputStream & input_r, _Data & data_r )
-  {
-    typedef typename _Data::RootNode RootNode;
-    MIL << "+++ " << input_r << endl;
-    _Data pdata;
-    try
-    {
-      xml::Reader reader( input_r );
-      RootNode rootNode( pdata );
-      rootNode.take( reader );
-    }
-    catch ( const Exception & err )
-    {
-      // parse error
-      ERR << err << endl;
-      ERR << "--- " << input_r << endl;
-      ZYPP_RETHROW( err );
-    }
-    MIL << "--- " << input_r << endl;
-    data_r = pdata;
-  }
-
-  struct SolverTestXml
-  {
-    public:
-      struct Chanel
-      {
-        Chanel() :  priority( RepoInfo::defaultPriority() ) {}
-        std::string file;
-        std::string alias;
-        unsigned    priority;
-      };
-
-      Arch              systemArch;
-      Locale            systemLocale;
-      std::string       systemFile;
-      std::list<Chanel> chanelList;
-
-    public:
-      /** Convenience parsing to \c this, appending \c "solver-test.xml" to directories. */
-      void parse( const Pathname & path_r )
-      { rnParse( (PathInfo(path_r).isDir() ? path_r/"solver-test.xml" : path_r ), *this ); }
-
-    public:
-      struct RootNode : public xml::ParseDef, public xml::ParseDefConsume
-      {
-        RootNode( SolverTestXml & data )
-          : ParseDef( "test", MANDTAORY, xml::parseDefAssignText( data.systemFile ) )
-        {
-          (*this)
-            ("setup",        MANDTAORY, xml::parseDefAssign( data.systemArch ) )
-            ;
-        }
-      };
-  };
-}
-#endif
-///////////////////////////////////////////////////////////////////
-
 static std::string appname( __FILE__ );
+static TestSetup test;
+
+///////////////////////////////////////////////////////////////////
 
 #define OUT   USR
 #define HEADL SEC << "===> "
@@ -219,14 +31,6 @@ int usage( const std::string & msg_r = std::string(), int exit_r = 100 )
   cerr << "Usage: " << appname << " TESTCASE" << endl;
   cerr << "  Load and process testcase." << endl;
   return exit_r;
-}
-
-///////////////////////////////////////////////////////////////////
-
-bool progressReceiver( const ProgressData & v )
-{
-  DBG << "...->" << v << endl;
-  return true;
 }
 
 ///////////////////////////////////////////////////////////////////
@@ -270,6 +74,8 @@ bool solve()
 
 ///////////////////////////////////////////////////////////////////
 
+/**
+*/
 struct ArgList
 {
   typedef std::vector<std::string>::const_iterator const_iterator;
@@ -307,7 +113,7 @@ struct ArgList
 
 std::ostream & operator<<( std::ostream & str, const ArgList & obj )
 {
-  for_( it, 0, obj.get().size() )
+  for_( it, 0U, obj.get().size() )
   {
     str << ( it == obj.carg() ? " | " : " " ) << obj.get()[it];
   }
@@ -318,22 +124,77 @@ std::ostream & operator<<( std::ostream & str, const ArgList & obj )
 #define DELGATE(N,F) if ( argv.at(0) == #N ) { argv.poparg(); F( argv ); return; }
 ///////////////////////////////////////////////////////////////////
 
-void listReposCmd( ArgList & argv )
+void exitCmd( ArgList & argv )
 {
-  errmessage() << "Not inplemented: " << argv << endl;
+  HEADL << argv << endl;
+  INT << "===[END]============================================" << endl << endl;
+  zypp::base::LogControl::TmpLineWriter shutUp;
+  ::exit( 0 );
 }
 
-void listIdent( IdString ident )
+///////////////////////////////////////////////////////////////////
+
+void helpCmd( ArgList & argv )
 {
-  HEADL << "list " << ident << endl;
+  HEADL << argv << endl;
+  OUT << "list repos   - list repos in pool" << endl;
+  OUT << "list NAME... - list solvables named or providing NAME" << endl;
+  OUT << "help         - this" << endl;
+  OUT << "exit         - exit" << endl;
+}
 
-  ui::Selectable::Ptr sel( ui::Selectable::get( ident ) );
-  OUT <<  dump(sel) << endl;
+///////////////////////////////////////////////////////////////////
 
-  sat::WhatProvides qp( (Capability( ident.id() )) );
-  OUT << "Provided by " << qp << endl;
+void listReposCmd( ArgList & argv )
+{
+  HEADL << "list repos" << endl;
 
+  sat::Pool satpool( test.satpool() );
+  for_( it, satpool.reposBegin(), satpool.reposEnd() )
+  {
+    OUT << *it << endl;
+  }
+}
 
+void listIdent( IdString ident_r )
+{
+  HEADL << "list " << ident_r << endl;
+
+  ui::Selectable::Ptr sel( ui::Selectable::get( ident_r ) );
+  if ( sel )
+  {
+    OUT << sel->ident()
+        << " I" << sel->installedSize()
+        << " A" << sel->availableSize()
+        << " " << sel->status()
+        << endl;
+    for_( it, sel->installedBegin(), sel->installedEnd() )
+    {
+      OUT << "i " << *it << endl;
+    }
+    PoolItem cand( sel->candidateObj() );
+    for_( it, sel->availableBegin(), sel->availableEnd() )
+    {
+      OUT << (*it == cand ? "* " : "  ") << *it << endl;
+    }
+  }
+
+  {
+    sat::WhatProvides q( (Capability( ident_r.id() )) );
+    bool head = true;
+    for_( it, q.begin(), q.end() )
+    {
+      if ( it->ident() != ident_r )
+      {
+        if ( head )
+        {
+          OUT << "provided by:" << endl;
+          head = false;
+        }
+        OUT << "  " << PoolItem( *it ) << endl;
+      }
+    }
+  }
 }
 
 
@@ -349,34 +210,43 @@ void listCmd( ArgList & argv )
 
 ///////////////////////////////////////////////////////////////////
 
-bool gocmd( ArgList & argv )
+void gocmd( ArgList & argv )
 {
+  if ( argv.empty() )
+  {
+    helpCmd( argv );
+    return;
+  }
+
   switch ( argv[0][0] )
   {
-#define DOCMD(n) if ( argv[0] == #n ) { argv.poparg(); n##Cmd( argv ); return true; }
     case 'e':
-      if ( argv[0] == "exit" ) { return false; }
+      DELGATE( exit, exitCmd );
+      break;
+
+    case 'h':
+      DELGATE( help, helpCmd );
       break;
 
     case 'l':
-      DOCMD( list );
+      DELGATE( list, listCmd );
       break;
-#undef DOCMD
   }
   // no command fall back to list
   listCmd( argv );
-  return true;
 }
 
 void goprompt()
 {
   std::cin.tie( &std::cout );
-  ArgList argv;
+
   do {
-    argv.clear();
+    ArgList argv;
     std::cout << "Hallo : ";
     str::splitEscaped( iostr::getline( std::cin ), std::back_inserter(argv.get()) );
-  } while ( argv.empty() || gocmd( argv ) );
+    gocmd( argv );
+  } while ( true );
+
 }
 
 ///////////////////////////////////////////////////////////////////
@@ -407,12 +277,11 @@ int main( int argc, char * argv[] )
   }
 
   ///////////////////////////////////////////////////////////////////
-  TestSetup test;
+
   test.loadTestcaseRepos( mtest ); // <<< repos
 #define GOCMD(c) { ArgList argv( #c ); gocmd( argv ); }
-  GOCMD( libsndfile );
-  GOCMD( libsndfile1 );
-
+  GOCMD( tgt );
+  GOCMD( iscsitarget );
   goprompt();
 
   INT << "===[END]============================================" << endl << endl;
