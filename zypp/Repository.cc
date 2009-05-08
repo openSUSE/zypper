@@ -204,6 +204,8 @@ namespace zypp
 	// subpriority is used to e.g. prefer http over dvd iff
 	// both have same priority.
 	_repo->subpriority = media::MediaPriority( info_r.url() );
+
+        MIL << *this << endl;
     }
 
     void Repository::clearInfo()
@@ -294,7 +296,7 @@ namespace zypp
 
 	return str << "sat::repo(" << obj.alias() << ")"
 		   << "{"
-                   << "prio " << obj.get()->priority
+                   << "prio " << obj.get()->priority << '.' << obj.get()->subpriority
 		   << ", size " << obj.solvablesSize()
 		   << "}";
     }

@@ -7,11 +7,11 @@
 |                                                                      |
 \---------------------------------------------------------------------*/
 
-/** \file HistoryLogReader.h
+/** \file zypp/parser/HistoryLogReader.h
  *
  */
-#ifndef ZYPP_HISTORYLOGREADER_H_
-#define ZYPP_HISTORYLOGREADER_H_
+#ifndef ZYPP_PARSER_HISTORYLOGREADER_H_
+#define ZYPP_PARSER_HISTORYLOGREADER_H_
 
 #include "zypp/base/PtrTypes.h"
 #include "zypp/ProgressData.h"
@@ -45,7 +45,7 @@ namespace zypp
    * {
    *   vector<HistoryItem::Ptr> items;
    *
-   *   bool processEntry( const HistoryItem::Ptr & item_ptr )
+   *   bool operator()( const HistoryItem::Ptr & item_ptr )
    *   {
    *     items.push_back(item_ptr);
    *     return true;
@@ -150,4 +150,4 @@ namespace zypp
 } // namespace zypp
 ///////////////////////////////////////////////////////////////////
 
-#endif /* ZYPP_HISTORYLOGREADER_H_ */
+#endif /* ZYPP_PARSER_HISTORYLOGREADER_H_ */
