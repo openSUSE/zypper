@@ -1,10 +1,12 @@
 #include "Tools.h"
+
 #include <zypp/ResObjects.h>
 #include <zypp/ProgressData.h>
 #include <zypp/sat/WhatObsoletes.h>
 #include "zypp/pool/GetResolvablesToInsDel.h"
 
 ///////////////////////////////////////////////////////////////////
+#if 0
 #include "zypp/parser/xml/ParseDef.h"
 #include "zypp/parser/xml/ParseDefConsume.h"
 #include "zypp/parser/xml/Reader.h"
@@ -190,13 +192,20 @@ namespace zypp
       };
   };
 }
+#endif
 ///////////////////////////////////////////////////////////////////
 
 static std::string appname( __FILE__ );
 
-void message( const std::string & msg_r )
+#define OUT   USR
+#define HEADL SEC << "===> "
+
+inline std::ostream & errmessage( const std::string & msg_r = std::string() )
 {
-  cerr << "*** " << msg_r << endl;
+  cerr << "*** ";
+  if ( ! msg_r.empty() )
+    cerr << msg_r << endl;
+  return cerr;
 }
 
 int usage( const std::string & msg_r = std::string(), int exit_r = 100 )
@@ -204,7 +213,7 @@ int usage( const std::string & msg_r = std::string(), int exit_r = 100 )
   if ( ! msg_r.empty() )
   {
     cerr << endl;
-    message( msg_r );
+    errmessage( msg_r );
     cerr << endl;
   }
   cerr << "Usage: " << appname << " TESTCASE" << endl;
@@ -261,6 +270,117 @@ bool solve()
 
 ///////////////////////////////////////////////////////////////////
 
+struct ArgList
+{
+  typedef std::vector<std::string>::const_iterator const_iterator;
+
+  ArgList()
+  {}
+
+  ArgList( const std::string & line_r )
+  { str::splitEscaped( line_r, std::back_inserter(_argv) ); }
+
+  const_iterator begin() const { const_iterator ret =_argv.begin(); for ( unsigned i = _carg; i; --i ) ++ret; return ret; }
+  const_iterator end()   const { return _argv.end(); }
+
+  void     clear()       { _argv.clear(); _carg = 0; }
+  bool     empty() const { return _argv.size() == _carg; }
+  unsigned size()  const { return _argv.size() - _carg; }
+
+  std::string &       operator[]( int idx )       { return _argv[_carg+idx]; }
+  const std::string & operator[]( int idx ) const { return _argv[_carg+idx]; }
+
+  std::string at( int idx ) const { return _carg+idx < _argv.size() ? _argv[_carg+idx] : std::string(); }
+
+  unsigned carg() const { return _carg; }
+  void poparg( int cnt = 1 ) { _carg = arange( _carg + cnt ); }
+
+  public:
+    std::vector<std::string> &       get()       { return _argv; }
+    const std::vector<std::string> & get() const { return _argv; }
+ private:
+   unsigned arange( int idx ) const { return idx < 0 ? 0 : std::min( unsigned(idx), _argv.size() ); }
+ private:
+    DefaultIntegral<unsigned,0> _carg;
+    std::vector<std::string> _argv;
+};
+
+std::ostream & operator<<( std::ostream & str, const ArgList & obj )
+{
+  for_( it, 0, obj.get().size() )
+  {
+    str << ( it == obj.carg() ? " | " : " " ) << obj.get()[it];
+  }
+  return str;
+}
+
+///////////////////////////////////////////////////////////////////
+#define DELGATE(N,F) if ( argv.at(0) == #N ) { argv.poparg(); F( argv ); return; }
+///////////////////////////////////////////////////////////////////
+
+void listReposCmd( ArgList & argv )
+{
+  errmessage() << "Not inplemented: " << argv << endl;
+}
+
+void listIdent( IdString ident )
+{
+  HEADL << "list " << ident << endl;
+
+  ui::Selectable::Ptr sel( ui::Selectable::get( ident ) );
+  OUT <<  dump(sel) << endl;
+
+  sat::WhatProvides qp( (Capability( ident.id() )) );
+  OUT << "Provided by " << qp << endl;
+
+
+}
+
+
+void listCmd( ArgList & argv )
+{
+  DELGATE( repos, listReposCmd );
+
+  for_( it, argv.begin(), argv.end() )
+  {
+    listIdent( IdString(*it) );
+  }
+}
+
+///////////////////////////////////////////////////////////////////
+
+bool gocmd( ArgList & argv )
+{
+  switch ( argv[0][0] )
+  {
+#define DOCMD(n) if ( argv[0] == #n ) { argv.poparg(); n##Cmd( argv ); return true; }
+    case 'e':
+      if ( argv[0] == "exit" ) { return false; }
+      break;
+
+    case 'l':
+      DOCMD( list );
+      break;
+#undef DOCMD
+  }
+  // no command fall back to list
+  listCmd( argv );
+  return true;
+}
+
+void goprompt()
+{
+  std::cin.tie( &std::cout );
+  ArgList argv;
+  do {
+    argv.clear();
+    std::cout << "Hallo : ";
+    str::splitEscaped( iostr::getline( std::cin ), std::back_inserter(argv.get()) );
+  } while ( argv.empty() || gocmd( argv ) );
+}
+
+///////////////////////////////////////////////////////////////////
+
 /******************************************************************
 **
 **      FUNCTION NAME : main
@@ -272,52 +392,28 @@ int main( int argc, char * argv[] )
   appname = Pathname::basename( argv[0] );
   --argc;
   ++argv;
-
   ///////////////////////////////////////////////////////////////////
 
-  Pathname mtest( "/suse/ma/BUGS/472099/zypper.solverTestCase" );
-  Arch     march( Arch_i686 );
+  if ( !argc )
+    return usage();
 
-  while ( argc )
-  {
-    --argc;
-    ++argv;
-  }
+  Pathname mtest( *argv );
+  --argc;
+  ++argv;
 
-  if ( mtest.empty() )
+  if ( ! PathInfo( mtest / "solver-test.xml" ).isFile() )
   {
-    return usage( "Missing Testcase", 102 );
+    return usage( "No testcase at " + mtest.asString() );
   }
 
   ///////////////////////////////////////////////////////////////////
+  TestSetup test;
+  test.loadTestcaseRepos( mtest ); // <<< repos
+#define GOCMD(c) { ArgList argv( #c ); gocmd( argv ); }
+  GOCMD( libsndfile );
+  GOCMD( libsndfile1 );
 
-  //xml::ParseDef::_debug = true;
-  SolverTestXml solvertest;
-  solvertest.parse( mtest );
-  USR << solvertest.systemFile << endl;
-  USR << solvertest.systemArch << endl;
-
-  INT << "===[END]============================================" << endl << endl;
-  return 0;
-
-  TestSetup test( march );
-  ResPool   pool( test.pool() );
-  sat::Pool satpool( test.satpool() );
-
-  {
-    //zypp::base::LogControl::TmpLineWriter shutUp;
-    test.loadTarget();
-    test.loadTestcaseRepos( mtest ); // <<< repos
-  }
-  test.poolProxy().saveState();
-
-  {
-    //zypp::base::LogControl::TmpLineWriter shutUp;
-    upgrade();
-  }
-  vdumpPoolStats( USR << "Transacting:"<< endl,
-                  make_filter_begin<resfilter::ByTransact>(pool),
-                  make_filter_end<resfilter::ByTransact>(pool) ) << endl;
+  goprompt();
 
   INT << "===[END]============================================" << endl << endl;
   zypp::base::LogControl::TmpLineWriter shutUp;

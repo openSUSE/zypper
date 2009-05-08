@@ -9,6 +9,8 @@ using boost::unit_test::test_case;
 
 #include "zypp/base/LogControl.h"
 #include "zypp/base/LogTools.h"
+#include "zypp/base/InputStream.h"
+#include "zypp/base/IOStream.h"
 #include "zypp/base/Flags.h"
 #include "zypp/ZYppFactory.h"
 #include "zypp/ZYpp.h"
@@ -30,6 +32,18 @@ using namespace zypp;
 #endif
 
 #define LABELED(V) #V << ":\t" << V
+
+inline std::string getXmlNodeVal( const std::string & line_r, const std::string & node_r )
+{
+  std::string::size_type pos = line_r.find( node_r + "=\"" );
+  if ( pos != std::string::npos )
+  {
+    pos += node_r.size() + 2;
+    std::string::size_type epos = line_r.find( "\"", pos );
+    return line_r.substr( pos, epos-pos );
+  }
+  return std::string();
+}
 
 enum TestSetupOptionBits
 {
@@ -158,6 +172,14 @@ class TestSetup
     void loadRepo( const char * loc_r, const std::string & alias_r = std::string() )
     { loadRepo( std::string( loc_r ? loc_r : "" ), alias_r ); }
 
+  private:
+    // repo data from solver-test.xml
+    struct RepoD {
+      DefaultIntegral<unsigned,0> priority;
+      std::string alias;
+      Url url;
+    };
+
   public:
     /** Directly load a helix repo from some testcase.
      * An empty alias is guessed.
@@ -173,11 +195,50 @@ class TestSetup
     // Load repos included in a solver testcase.
     void loadTestcaseRepos( const Pathname & path_r )
     {
-      if ( ! filesystem::PathInfo( path_r ).isDir() )
+      filesystem::PathInfo pi( path_r / "solver-test.xml" );
+      if ( ! pi.isFile() )
       {
-        ERR << "No dir " << filesystem::PathInfo( path_r ) << endl;
+        ERR << "No testcase in " << filesystem::PathInfo( path_r ) << endl;
         return;
       }
+      // dumb parse
+      InputStream infile( pi.path() );
+      Arch sysarch( Arch_empty );
+      Url guessedUrl;
+      typedef std::map<std::string,RepoD> RepoI;
+      RepoI repoi;
+      for( iostr::EachLine in( infile ); in; in.next() )
+      {
+        if ( str::hasPrefix( *in, "\t<channel" ) )
+        {
+          RepoD & repod( repoi[getXmlNodeVal( *in, "file" )] );
+
+          repod.alias = getXmlNodeVal( *in, "name" );
+          repod.priority = str::strtonum<unsigned>( getXmlNodeVal( *in, "priority" ) );
+          repod.url = guessedUrl;
+          guessedUrl = Url();
+        }
+        else if ( str::hasPrefix( *in, "\t- url " ) )
+        {
+          std::string::size_type pos = in->find( ": " );
+          if ( pos != std::string::npos )
+          {
+            guessedUrl = Url( in->substr( pos+2 ) );
+          }
+        }
+        else if ( str::hasPrefix( *in, "\t<locale" ) )
+        {
+          satpool().addRequestedLocale( Locale( getXmlNodeVal( *in, "name" ) ) );
+        }
+       else if ( sysarch.empty() && str::hasPrefix( *in, "<setup" ) )
+        {
+          sysarch = Arch( getXmlNodeVal( *in, "arch" ) );
+          if ( ! sysarch.empty() )
+            ZConfig::instance().setSystemArchitecture( sysarch );
+        }
+      }
+
+      //
       filesystem::Glob files( path_r/"*{.xml,.xml.gz}", filesystem::Glob::_BRACE );
       for_( it, files.begin(), files.end() )
       {
@@ -187,8 +248,18 @@ class TestSetup
         if ( str::hasPrefix( basename, "solver-system.xml" ) )
           loadTargetHelix( *it );
         else
-          loadHelix( *it );
+        {
+          const RepoD & repod( repoi[basename] );
+
+          RepoInfo nrepo;
+          nrepo.setAlias( repod.alias.empty() ? basename : repod.alias );
+          nrepo.setPriority( repod.priority );
+          nrepo.setBaseUrl( repod.url );
+          satpool().addRepoHelix( *it, nrepo );
+        }
       }
+
+      poolProxy(); // prepare
     }
 
   public:
