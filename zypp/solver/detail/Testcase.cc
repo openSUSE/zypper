@@ -116,7 +116,7 @@ std::string helixXML( const Capability &cap )
 	    && detail.rhs().detail().isNamed()) {
 	    // packageand dependency
 	    str << "<dep name='packageand("
-		<< IdString(detail.lhs().id()) << ","
+		<< IdString(detail.lhs().id()) << ":"
 		<< IdString(detail.rhs().id()) << ")' />" << endl;
 	} else {
 	    // modalias ?
