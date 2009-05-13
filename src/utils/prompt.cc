@@ -243,6 +243,9 @@ read_action_ari_with_timeout(PromptId pid, unsigned timeout, int default_action)
     --timeout;
   }
 
+  if (zypper.out().type() != Out::TYPE_XML)
+    cout << CLEARLN << _("Trying again...") << endl;
+
   return default_action;
 }
 
