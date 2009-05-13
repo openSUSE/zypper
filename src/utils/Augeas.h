@@ -20,10 +20,6 @@ extern "C"
 
 /**
  * Zypper's wrapper around Augeas.
- *
- * \todo add root dir argument to constructor
- * \todo add conf file to load argument
- * \todo use the new API to cherry-pick the lense and conf file to load
  */
 class Augeas : private zypp::base::NonCopyable
 {
