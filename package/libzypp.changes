@@ -1,4 +1,9 @@
 -------------------------------------------------------------------
+Wed May 20 14:23:07 CEST 2009 - ma@suse.de
+
+- Fix lost housekeeping data in modifyRepo (bnc #503207)
+
+-------------------------------------------------------------------
 Fri May  8 16:43:47 CEST 2009 - ma@suse.de
 
 - Allow service refresh to change a repositories url (bnc #502157)
