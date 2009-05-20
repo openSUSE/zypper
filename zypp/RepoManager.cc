@@ -1531,19 +1531,16 @@ namespace zypp
   ////////////////////////////////////////////////////////////////////////////
 
   void RepoManager::modifyRepository( const std::string &alias,
-                                      const RepoInfo & newinfo,
+                                      const RepoInfo & newinfo_r,
                                       const ProgressData::ReceiverFnc & progressrcv )
   {
     RepoInfo toedit = getRepositoryInfo(alias);
+    RepoInfo newinfo( newinfo_r ); // need writable copy to upadte housekeeping data
 
     // check if the new alias already exists when renaming the repo
-    if (alias != newinfo.alias())
+    if ( alias != newinfo.alias() && hasRepo( newinfo.alias() ) )
     {
-      for_( it, repoBegin(), repoEnd() )
-      {
-        if ( newinfo.alias() == (*it).alias() )
-          ZYPP_THROW(RepoAlreadyExistsException(newinfo));
-      }
+      ZYPP_THROW(RepoAlreadyExistsException(newinfo));
     }
 
     if (toedit.filepath().empty())
@@ -1581,6 +1578,7 @@ namespace zypp
             newinfo.dumpAsIniOn(file);
       }
 
+      newinfo.setFilepath(toedit.filepath());
       _pimpl->repos.erase(toedit);
       _pimpl->repos.insert(newinfo);
       HistoryLog(_pimpl->options.rootDir).modifyRepository(toedit, newinfo);
