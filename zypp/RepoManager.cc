@@ -974,11 +974,7 @@ namespace zypp
 
         // ok we have the metadata, now exchange
         // the contents
-
-        filesystem::TmpDir oldmetadata( filesystem::TmpDir::makeSibling( rawpath ) );
-        filesystem::rename( rawpath, oldmetadata.path() );
-        // move the just downloaded there
-        filesystem::rename( tmpdir.path(), rawpath );
+	filesystem::exchange( tmpdir.path(), rawpath );
 
         // we are done.
         return;
