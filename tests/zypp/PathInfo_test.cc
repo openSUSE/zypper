@@ -209,10 +209,4 @@ BOOST_AUTO_TEST_CASE(test_exchange)
   BOOST_CHECK_EQUAL( filesystem::exchange( a, b ), 0 );
   BOOST_CHECK( PathInfo(a).isFile() );
   BOOST_CHECK( PathInfo(b).isDir() );
-
-  // Exchange with location that can't be created:
-  BOOST_CHECK_EQUAL( chmod( b.dirname(), 0555 ), 0 );
-  BOOST_CHECK_EQUAL( filesystem::exchange( a, b ), EACCES );
-  BOOST_CHECK( PathInfo(a).isFile() );
-  BOOST_CHECK( PathInfo(b).isDir() );
 }
