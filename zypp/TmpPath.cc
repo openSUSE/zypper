@@ -172,17 +172,11 @@ namespace zypp {
                       const std::string & prefix_r )
     {
       // parent dir must exist
-      PathInfo p( inParentDir_r );
-      if ( ! p.isDir() )
-        {
-          filesystem::assert_dir( inParentDir_r );
-          p(); // re-stat
-          if ( ! p.isDir() )
-          {
-            ERR << "Parent directory can't be created: " << p << endl;
-            return;
-          }
-        }
+      if ( filesystem::assert_dir( inParentDir_r ) != 0 )
+      {
+        ERR << "Parent directory '" << inParentDir_r << "' can't be created." << endl;
+        return;
+      }
 
       // create the temp file
       Pathname tmpPath = (inParentDir_r + prefix_r).extend( "XXXXXX");
@@ -190,7 +184,6 @@ namespace zypp {
       if ( ! buf )
         {
           ERR << "Out of memory" << endl;
-          ::free( buf );
           return;
         }
 
@@ -217,9 +210,9 @@ namespace zypp {
       TmpFile ret( sibling_r.dirname(), sibling_r.basename() );
       // clone mode if sibling_r exists
       PathInfo p( sibling_r );
-      if ( p.isExist() )
+      if ( p.isFile() )
       {
-        chmod( ret.path(), p.st_mode() );
+        ::chmod( ret.path().c_str(), p.st_mode() );
       }
       return ret;
     }
@@ -251,17 +244,11 @@ namespace zypp {
                     const std::string & prefix_r )
     {
       // parent dir must exist
-      PathInfo p( inParentDir_r );
-      if ( ! p.isDir() )
-        {
-          filesystem::assert_dir( inParentDir_r );
-          p(); // re-stat
-          if ( ! p.isDir() )
-          {
-            ERR << "Parent directory does not exist: " << p << endl;
-            return;
-          }
-        }
+      if ( filesystem::assert_dir( inParentDir_r ) != 0  )
+      {
+        ERR << "Parent directory '" << inParentDir_r << "' can't be created." << endl;
+        return;
+      }
 
       // create the temp dir
       Pathname tmpPath = (inParentDir_r + prefix_r).extend( "XXXXXX");
@@ -292,9 +279,9 @@ namespace zypp {
       TmpDir ret( sibling_r.dirname(), sibling_r.basename() );
       // clone mode if sibling_r exists
       PathInfo p( sibling_r );
-      if ( p.isExist() )
+      if ( p.isDir() )
       {
-        chmod( ret.path(), p.st_mode() );
+        ::chmod( ret.path().c_str(), p.st_mode() );
       }
       return ret;
     }
