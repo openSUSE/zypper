@@ -1,4 +1,9 @@
 -------------------------------------------------------------------
+Fri May 22 12:39:03 CEST 2009 - jkupec@suse.cz
+
+- Fixed some help issues (bnc #505938)
+
+-------------------------------------------------------------------
 Sun Apr 26 16:52:55 CEST 2009 - jkupec@suse.cz
 
 - config file handling improved, --config option added to load
