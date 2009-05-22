@@ -551,6 +551,11 @@ void Zypper::processGlobalOptions()
     catch (Exception & e)
     {
       out().error(e.asUserString());
+      if (runningHelp())
+      {
+        print_unknown_command_hint(*this);
+        ZYPP_THROW(ExitRequestException("help provided"));
+      }
     }
   }
   else if (!gopts.count("version"))
@@ -558,13 +563,23 @@ void Zypper::processGlobalOptions()
 
   if (command() == ZypperCommand::HELP)
   {
+    // -h already present, print help on help and quit
+    if (runningHelp())
+    {
+      print_unknown_command_hint(*this);
+      print_command_help_hint(*this);
+      ZYPP_THROW(ExitRequestException("help provided"));
+    }
+
     setRunningHelp(true);
     if (optind < _argc)
     {
+      // set the next argument as command (to provide help later)
       string arg = _argv[optind++];
       try { setCommand(ZypperCommand(arg)); }
       catch (Exception e)
       {
+        // unknown command, print hint and exit
         if (!arg.empty() && arg != "-h" && arg != "--help")
         {
           out().info(e.asUserString(), Out::QUIET);
@@ -573,6 +588,7 @@ void Zypper::processGlobalOptions()
         }
       }
     }
+    // plain help command, print main help and quit
     else
     {
       print_main_help(*this);
@@ -815,43 +831,48 @@ void Zypper::processCommandOptions()
   struct option no_options = {0, 0, 0, 0};
   struct option *specific_options = &no_options;
 
-  // this could be done in the processGlobalOptions() if there was no
-  // zypper shell
   if (command() == ZypperCommand::HELP)
   {
-    if (argc() > 1)
+    // in shell, check next argument to see if command-specific help is wanted
+    if (runningShell())
     {
-      string cmd = argv()[1];
-      try
+      if (argc() > 1)
       {
-        setRunningHelp(true);
-        setCommand(ZypperCommand(cmd));
-      }
-      catch (Exception & ex) {
-        if (!cmd.empty() && cmd != "-h" && cmd != "--help")
+        string cmd = argv()[1];
+        try
         {
-          out().info(ex.asUserString(), Out::QUIET);
-          print_unknown_command_hint(*this);
-          return;
+          setRunningHelp(true);
+          setCommand(ZypperCommand(cmd));
+        }
+        catch (Exception & ex) {
+          // unknown command. Known command will be handled in the switch
+          // and doCommand()
+          if (!cmd.empty() && cmd != "-h" && cmd != "--help")
+          {
+            out().info(ex.asUserString(), Out::QUIET);
+            print_unknown_command_hint(*this);
+            ZYPP_THROW(ExitRequestException("help provided"));
+          }
         }
       }
-    }
-    else
-    {
-      print_main_help(*this);
-      return;
+      // if no command is requested, show main help
+      else
+      {
+        print_main_help(*this);
+        ZYPP_THROW(ExitRequestException("help provided"));
+      }
     }
   }
 
   switch (command().toEnum())
   {
-
-  // print help on help
+  // print help on help and return
+  // this should work for both, in shell and out of shell
   case ZypperCommand::HELP_e:
   {
     print_unknown_command_hint(*this);
     print_command_help_hint(*this);
-    break;
+    ZYPP_THROW(ExitRequestException("help provided"));
   }
 
   case ZypperCommand::INSTALL_e:
@@ -2254,63 +2275,36 @@ void Zypper::processCommandOptions()
   }
   }
 
+  // no need to parse command options if we already know we just want help
+  if (runningHelp())
+    return;
+
   // parse command options
-  if (!runningHelp())
+  ::copts = _copts = parse_options (argc(), argv(), specific_options);
+  if (copts.count("_unknown"))
   {
-    ::copts = _copts = parse_options (argc(), argv(), specific_options);
-    if (copts.count("_unknown"))
+    setExitCode(ZYPPER_EXIT_ERR_SYNTAX);
+    ERR << "Unknown option, returning." << endl;
+    return;
+  }
+
+  MIL << "Done parsing options." << endl;
+
+  // treat --help command option like global --help option from now on
+  // i.e. when used together with command to print command specific help
+  setRunningHelp(runningHelp() || copts.count("help"));
+
+  if (optind < argc())
+  {
+    ostringstream s;
+    s << _("Non-option program arguments: ");
+    while (optind < argc())
     {
-      setExitCode(ZYPPER_EXIT_ERR_SYNTAX);
-      ERR << "Unknown option, returning." << endl;
-      return;
+      string argument = argv()[optind++];
+      s << "'" << argument << "' ";
+      _arguments.push_back (argument);
     }
-
-    MIL << "Done parsing options." << endl;
-
-    // treat --help command option like global --help option from now on
-    // i.e. when used together with command to print command specific help
-    setRunningHelp(runningHelp() || copts.count("help"));
-
-    if (optind < argc()) {
-      ostringstream s;
-      s << _("Non-option program arguments: ");
-      while (optind < argc()) {
-        string argument = argv()[optind++];
-        s << "'" << argument << "' ";
-        _arguments.push_back (argument);
-      }
-      out().info(s.str(), Out::HIGH);
-    }
-
-    // here come commands that need the lock
-    try
-    {
-      const char *roh = getenv("ZYPP_READONLY_HACK");
-      if (roh != NULL && roh[0] == '1')
-        zypp_readonly_hack::IWantIt ();
-      else if (   command() == ZypperCommand::LIST_REPOS
-               || command() == ZypperCommand::LIST_SERVICES
-               || command() == ZypperCommand::TARGET_OS )
-        zypp_readonly_hack::IWantIt (); // #247001, #302152
-
-      God = zypp::getZYpp();
-    }
-    catch (ZYppFactoryException & excpt_r)
-    {
-      ZYPP_CAUGHT (excpt_r);
-      ERR  << "A ZYpp transaction is already in progress." << endl;
-      out().error(excpt_r.asString());
-
-      setExitCode(ZYPPER_EXIT_ERR_ZYPP);
-      throw (ExitRequestException("ZYpp locked"));
-    }
-    catch (Exception & excpt_r)
-    {
-      ZYPP_CAUGHT (excpt_r);
-      out().error(excpt_r.msg());
-      setExitCode(ZYPPER_EXIT_ERR_ZYPP);
-      throw (ExitRequestException("ZYpp locked"));
-    }
+    out().info(s.str(), Out::HIGH);
   }
 
   MIL << "Done " << endl;
@@ -2319,11 +2313,43 @@ void Zypper::processCommandOptions()
 /// process one command from the OS shell or the zypper shell
 void Zypper::doCommand()
 {
-  MIL << "Going to process command " << command().toEnum() << endl;
-  ResObject::Kind kind;
+  if (runningHelp()) { out().info(_command_help, Out::QUIET); return; }
 
+  // === ZYpp lock ===
+
+  try
+  {
+    const char *roh = getenv("ZYPP_READONLY_HACK");
+    if (roh != NULL && roh[0] == '1')
+      zypp_readonly_hack::IWantIt ();
+    else if (   command() == ZypperCommand::LIST_REPOS
+             || command() == ZypperCommand::LIST_SERVICES
+             || command() == ZypperCommand::TARGET_OS )
+      zypp_readonly_hack::IWantIt (); // #247001, #302152
+
+    God = zypp::getZYpp();
+  }
+  catch (ZYppFactoryException & excpt_r)
+  {
+    ZYPP_CAUGHT (excpt_r);
+    ERR  << "A ZYpp transaction is already in progress." << endl;
+    out().error(excpt_r.asString());
+
+    setExitCode(ZYPPER_EXIT_ERR_ZYPP);
+    throw (ExitRequestException("ZYpp locked"));
+  }
+  catch (Exception & excpt_r)
+  {
+    ZYPP_CAUGHT (excpt_r);
+    out().error(excpt_r.msg());
+    setExitCode(ZYPPER_EXIT_ERR_ZYPP);
+    throw (ExitRequestException("ZYpp locked"));
+  }
 
   // === execute command ===
+
+  MIL << "Going to process command " << command().toEnum() << endl;
+  ResObject::Kind kind;
 
   switch(command().toEnum())
   {
@@ -4062,7 +4088,6 @@ void Zypper::doCommand()
   // dummy commands
   case ZypperCommand::RUG_PING_e:
   {
-    if (runningHelp()) { out().info(_command_help, Out::QUIET); return; }
     break;
   }
 
