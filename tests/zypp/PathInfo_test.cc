@@ -7,6 +7,7 @@
 #include <boost/test/auto_unit_test.hpp>
 
 #include "zypp/base/Logger.h"
+#include "zypp/base/LogControl.h"
 #include "zypp/base/Exception.h"
 #include "zypp/PathInfo.h"
 #include "zypp/TmpPath.h"
@@ -52,13 +53,13 @@ BOOST_AUTO_TEST_CASE(pathinfo_is_exist_test)
   Pathname subdir("text with spaces");
   // create a fake file
   BOOST_CHECK_EQUAL( filesystem::mkdir(dir.path() + subdir), 0 );
-  
+
   Pathname filepath = (dir.path() + subdir+ "filename");
   ofstream str(filepath.asString().c_str(),ofstream::out);
   str << "foo bar" << endl;
   str.flush();
   str.close();
-  
+
   BOOST_CHECK( PathInfo(filepath).isExist() );
 }
 
@@ -118,4 +119,100 @@ BOOST_AUTO_TEST_CASE(pathinfo_expandlink_test)
   cout << brokenlink << " -> " << filesystem::expandlink(brokenlink) << endl;
 }
 
+BOOST_AUTO_TEST_CASE(test_assert_dir_file)
+{
+  TmpDir   root;
 
+  Pathname rfile( root/"file" );
+  BOOST_CHECK_EQUAL( filesystem::assert_file( rfile ), 0 );
+  BOOST_CHECK( PathInfo(rfile).isFile() );
+
+  Pathname rdir ( root/"dir" );
+  BOOST_CHECK_EQUAL( filesystem::assert_dir ( rdir ),  0 );
+  BOOST_CHECK( PathInfo(rdir).isDir() );
+
+  // empty path
+  Pathname path;
+  BOOST_CHECK_EQUAL( filesystem::assert_file( path ), ENOENT );
+  BOOST_CHECK_EQUAL( filesystem::assert_dir ( path ), ENOENT );
+
+  // for dirs:
+  // existing dir
+  path = rdir;
+  BOOST_CHECK_EQUAL( filesystem::assert_dir( path ), 0 );
+  BOOST_CHECK( PathInfo(path).isDir() );
+  // new dirs
+  path = rdir/"sub/subsub";
+  BOOST_CHECK_EQUAL( filesystem::assert_dir( path ), 0 );
+  BOOST_CHECK( PathInfo(path).isDir() );
+  // file in path
+  path = rfile/"sub";
+  BOOST_CHECK_EQUAL( filesystem::assert_dir( path ), ENOTDIR );
+  BOOST_CHECK( !PathInfo(path).isDir() );
+  // path is file
+  path = rfile;
+  BOOST_CHECK_EQUAL( filesystem::assert_dir( path ), EEXIST );
+  BOOST_CHECK( !PathInfo(path).isDir() );
+
+  // for files:
+  // existing file
+  path = rfile;
+  BOOST_CHECK_EQUAL( filesystem::assert_file( path ), 0 );
+  BOOST_CHECK( PathInfo(path).isFile() );
+  // new file
+  path = rdir/"sub/file";
+  BOOST_CHECK_EQUAL( filesystem::assert_file( path ), 0 );
+  BOOST_CHECK( PathInfo(path).isFile() );
+  // file in path
+  path = rfile/"sub/file";
+  BOOST_CHECK_EQUAL( filesystem::assert_file( path ), ENOTDIR );
+  BOOST_CHECK( ! PathInfo(path).isFile() );
+  // path is dir
+  path = rdir;
+  BOOST_CHECK_EQUAL( filesystem::assert_file( path ), EEXIST );
+  BOOST_CHECK( ! PathInfo(path).isFile() );
+}
+
+BOOST_AUTO_TEST_CASE(test_exchange)
+{
+  TmpDir root;
+  Pathname a;
+  Pathname b;
+  // paths must not be epmty:
+  BOOST_CHECK_EQUAL( filesystem::exchange( a, b ), EINVAL );
+  a = root/"a/p";
+  BOOST_CHECK_EQUAL( filesystem::exchange( a, b ), EINVAL );
+  b = root/"b/p";
+  BOOST_CHECK_EQUAL( filesystem::exchange( a, b ), 0 ); // ok if both don't exist
+
+  // one path not existing:
+  filesystem::assert_file( a );
+  BOOST_CHECK( PathInfo(a).isFile() );
+  BOOST_CHECK( !PathInfo(b).isFile() );
+
+  BOOST_CHECK_EQUAL( filesystem::exchange( a, b ), 0 );
+  BOOST_CHECK( !PathInfo(a).isFile() );
+  BOOST_CHECK( PathInfo(b).isFile() );
+
+  BOOST_CHECK_EQUAL( filesystem::exchange( a, b ), 0 );
+  BOOST_CHECK( PathInfo(a).isFile() );
+  BOOST_CHECK( !PathInfo(b).isFile() );
+
+  // both paths exist:
+  filesystem::assert_dir( b );
+  BOOST_CHECK( PathInfo(b).isDir() );
+
+  BOOST_CHECK_EQUAL( filesystem::exchange( a, b ), 0 );
+  BOOST_CHECK( PathInfo(a).isDir() );
+  BOOST_CHECK( PathInfo(b).isFile() );
+
+  BOOST_CHECK_EQUAL( filesystem::exchange( a, b ), 0 );
+  BOOST_CHECK( PathInfo(a).isFile() );
+  BOOST_CHECK( PathInfo(b).isDir() );
+
+  // Exchange with location that can't be created:
+  BOOST_CHECK_EQUAL( chmod( b.dirname(), 0555 ), 0 );
+  BOOST_CHECK_EQUAL( filesystem::exchange( a, b ), EACCES );
+  BOOST_CHECK( PathInfo(a).isFile() );
+  BOOST_CHECK( PathInfo(b).isDir() );
+}

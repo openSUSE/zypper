@@ -25,6 +25,7 @@
 #include "zypp/ExternalProgram.h"
 #include "zypp/PathInfo.h"
 #include "zypp/Digest.h"
+#include "zypp/TmpPath.h"
 
 using std::endl;
 using std::string;
@@ -287,11 +288,16 @@ namespace zypp
      **
      **	DESCRIPTION : Helper function to log return values.
     */
-    inline int _Log_Result( const int res, const char * rclass = "errno" )
+#define _Log_Result MIL << endl, __Log_Result
+    inline int __Log_Result( const int res, const char * rclass = 0 /*errno*/ )
     {
-      MIL << endl;
       if ( res )
-        WAR << " FAILED: " << rclass << " " << res << endl;
+      {
+        if ( rclass )
+          WAR << " FAILED: " << rclass << " " << res << endl;
+        else
+          WAR << " FAILED: " << str::strerror( res ) << endl;
+      }
       return res;
     }
 
@@ -316,42 +322,43 @@ namespace zypp
     //
     int assert_dir( const Pathname & path, unsigned mode )
     {
-      string::size_type pos, lastpos = 0;
-      string spath = path.asString()+"/";
-      int ret = 0;
-
-      if(path.empty())
+      if ( path.empty() )
         return ENOENT;
 
-      // skip ./
-      if(path.relative())
-        lastpos=2;
-      // skip /
-      else
-        lastpos=1;
+      { // Handle existing paths in advance.
+        PathInfo pi( path );
+        if ( pi.isDir() )
+          return 0;
+        if ( pi.isExist() )
+          return EEXIST;
+      }
 
-      //    MIL << "about to create " << spath << endl;
-      while((pos = spath.find('/',lastpos)) != string::npos )
+      string spath = path.asString()+"/";
+      string::size_type lastpos = ( path.relative() ? 2 : 1 ); // skip leasding './' or '/'
+      string::size_type pos = string::npos;
+      int ret = 0;
+
+      while ( (pos = spath.find('/',lastpos)) != string::npos )
+      {
+        string dir( spath.substr(0,pos) );
+        ret = ::mkdir( dir.c_str(), mode );
+        if ( ret == -1 )
         {
-          string dir = spath.substr(0,pos);
-          ret = ::mkdir(dir.c_str(), mode);
-          if(ret == -1)
-          {
-            // ignore errors about already existing directorys
-            if(errno == EEXIST)
-              ret=0;
-            else
-            {
-              ret=errno;
-              WAR << " FAILED: mkdir " << dir << ' ' << str::octstring( mode ) << " errno " << ret << endl;
-            }
-          }
+          if ( errno == EEXIST ) // ignore errors about already existing paths
+            ret = 0;
           else
           {
-            MIL << "mkdir " << dir << ' ' << str::octstring( mode ) << endl;
+            ret = errno;
+            WAR << " FAILED: mkdir " << dir << ' ' << str::octstring( mode ) << " errno " << ret << endl;
           }
-          lastpos = pos+1;
         }
+        else
+        {
+          MIL << "mkdir " << dir << ' ' << str::octstring( mode ) << endl;
+        }
+        lastpos = pos+1;
+      }
+
       return ret;
     }
 
@@ -679,6 +686,70 @@ namespace zypp
 
     ///////////////////////////////////////////////////////////////////
     //
+    //	METHOD NAME : exchange
+    //	METHOD TYPE : int
+    //
+    int exchange( const Pathname & lpath, const Pathname & rpath )
+    {
+      MIL << "exchange " << lpath << " <-> " << rpath;
+      if ( lpath.empty() || rpath.empty() )
+        return _Log_Result( EINVAL );
+
+      PathInfo linfo( lpath );
+      PathInfo rinfo( rpath );
+
+      if ( ! linfo.isExist() )
+      {
+        if ( ! rinfo.isExist() )
+          return _Log_Result( 0 ); // both don't exist.
+
+        // just rename rpath -> lpath
+        int ret = assert_dir( lpath.dirname() );
+        if ( ret != 0 )
+          return _Log_Result( ret );
+        if ( ::rename( rpath.c_str(), lpath.c_str() ) == -1 ) {
+          return _Log_Result( errno );
+        }
+        return _Log_Result( 0 );
+      }
+
+      // HERE: lpath exists:
+      if ( ! rinfo.isExist() )
+      {
+        // just rename lpath -> rpath
+        int ret = assert_dir( rpath.dirname() );
+        if ( ret != 0 )
+          return _Log_Result( ret );
+        if ( ::rename( lpath.c_str(), rpath.c_str() ) == -1 ) {
+          return _Log_Result( errno );
+        }
+        return _Log_Result( 0 );
+      }
+
+      // HERE: both exist
+      TmpFile tmpfile( TmpFile::makeSibling( rpath ) );
+      if ( ! tmpfile )
+        return _Log_Result( errno );
+      Pathname tmp( tmpfile.path() );
+      ::unlink( tmp.c_str() );
+
+      if ( ::rename( lpath.c_str(), tmp.c_str() ) == -1 ) {
+        return _Log_Result( errno );
+      }
+      if ( ::rename( rpath.c_str(), lpath.c_str() ) == -1 ) {
+        ::rename( tmp.c_str(), lpath.c_str() );
+        return _Log_Result( errno );
+      }
+      if ( ::rename( tmp.c_str(), rpath.c_str() ) == -1 ) {
+        ::rename( lpath.c_str(), rpath.c_str() );
+        ::rename( tmp.c_str(), lpath.c_str() );
+        return _Log_Result( errno );
+      }
+      return _Log_Result( 0 );
+    }
+
+    ///////////////////////////////////////////////////////////////////
+    //
     //	METHOD NAME : copy
     //	METHOD TYPE : int
     //
@@ -975,6 +1046,30 @@ namespace zypp
       mode_t mask = ::umask( 0022 );
       ::umask( mask );
       return mask;
+    }
+
+    ///////////////////////////////////////////////////////////////////
+    //
+    //	METHOD NAME : getUmask
+    //	METHOD TYPE : mode_t
+    //
+    int assert_file( const Pathname & path, unsigned mode )
+    {
+      int ret = assert_dir( path.dirname() );
+      MIL << "assert_file " << str::octstring( mode ) << " " << path;
+      if ( ret != 0 )
+        return _Log_Result( ret );
+
+      PathInfo pi( path );
+      if ( pi.isExist() )
+        return _Log_Result( pi.isFile() ? 0 : EEXIST );
+
+      int fd = ::creat( path.c_str(), mode );
+      if ( fd == -1 )
+        return _Log_Result( errno );
+
+      ::close( fd );
+      return _Log_Result( 0 );
     }
 
     ///////////////////////////////////////////////////////////////////

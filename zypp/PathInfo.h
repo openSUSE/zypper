@@ -523,6 +523,15 @@ namespace zypp
     /** \name File related functions. */
     //@{
     /**
+     * Create an empty file if it does not yet exist. Make parent directories
+     * as needed. mode specifies the permissions to use. It is modified by the
+     * process's umask in the usual way.
+     *
+     * @return 0 on success, errno on failure
+     **/
+    int assert_file( const Pathname & path, unsigned mode = 0644 );
+
+    /**
      * Change file's modification and access times.
      *
      * \return 0 on success, errno on failure
@@ -543,6 +552,34 @@ namespace zypp
      * @return 0 on success, errno on failure
      **/
     int rename( const Pathname & oldpath, const Pathname & newpath );
+
+    /** Exchanges two files or directories.
+     *
+     * Most common use is when building a new config file (or dir)
+     * in a tempfile. After the job is done, configfile and tempfile
+     * are exchanged. This includes moving away the configfile in case
+     * the tempfile does not exist. Parent directories are created as
+     * needed.
+     *
+     * \note Paths are exchanged using \c ::rename, so take care both paths
+     * are located on the same filesystem.
+     *
+     * \code
+     * Pathname configfile( "/etc/myconfig" );
+     * TmpFile  newconfig( TmpFile::makeSibling( configfile ) );
+     * // now write the new config:
+     * std::ofstream o( newconfig.path().c_str() );
+     * o << "mew values << endl;
+     * o.close();
+     * // If everything is fine, exchange the files:
+     * exchange( newconfig.path(), configfile );
+     * // Now the old configfile is still available at newconfig.path()
+     * // until newconfig goes out of scope.
+     * \endcode
+     *
+     * @return 0 on success, errno on failure
+     */
+    int exchange( const Pathname & lpath, const Pathname & rpath );
 
     /**
      * Like 'cp file dest'. Copy file to destination file.
@@ -586,7 +623,7 @@ namespace zypp
     /**
      * Recursively follows the symlink pointed to by \a path_r and returns
      * the Pathname to the real file or directory pointed to by the link.
-     * 
+     *
      * There is a recursion limit of 256 iterations to protect against a cyclic
      * link.
      *
@@ -594,7 +631,7 @@ namespace zypp
      *   if it is a valid link. If \a path_r is not a link, an exact copy of
      *   it is returned. If \a path_r is a broken or a cyclic link, an empty
      *   Pathname is returned and the event logged.
-     */ 
+     */
     Pathname expandlink( const Pathname & path_r );
 
     /**
