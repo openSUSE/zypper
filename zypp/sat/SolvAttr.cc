@@ -36,6 +36,16 @@ namespace sat
   const SolvAttr SolvAttr::name         ( SOLVABLE_NAME );
   const SolvAttr SolvAttr::edition      ( SOLVABLE_EVR );
   const SolvAttr SolvAttr::arch         ( SOLVABLE_ARCH );
+  const SolvAttr SolvAttr::vendor	( SOLVABLE_VENDOR );
+
+  const SolvAttr SolvAttr::provides	( SOLVABLE_PROVIDES );
+  const SolvAttr SolvAttr::obsoletes	( SOLVABLE_OBSOLETES );
+  const SolvAttr SolvAttr::conflicts	( SOLVABLE_CONFLICTS );
+  const SolvAttr SolvAttr::requires	( SOLVABLE_REQUIRES );
+  const SolvAttr SolvAttr::recommends	( SOLVABLE_RECOMMENDS );
+  const SolvAttr SolvAttr::suggests	( SOLVABLE_SUGGESTS );
+  const SolvAttr SolvAttr::supplements	( SOLVABLE_SUPPLEMENTS );
+  const SolvAttr SolvAttr::enhances	( SOLVABLE_ENHANCES );
 
   const SolvAttr SolvAttr::summary      ( SOLVABLE_SUMMARY );       // translated
   const SolvAttr SolvAttr::description  ( SOLVABLE_DESCRIPTION );   // translated
@@ -63,7 +73,6 @@ namespace sat
   const SolvAttr SolvAttr::keywords     ( SOLVABLE_KEYWORDS );
   const SolvAttr SolvAttr::sourcesize   ( "sourcesize" );
   const SolvAttr SolvAttr::authors      ( SOLVABLE_AUTHORS );
-  const SolvAttr SolvAttr::filenames    ( "filenames" );
   const SolvAttr SolvAttr::filelist     ( SOLVABLE_FILELIST );
   const SolvAttr SolvAttr::sourcearch   ( SOLVABLE_SOURCEARCH );
   const SolvAttr SolvAttr::sourcename   ( SOLVABLE_SOURCENAME );

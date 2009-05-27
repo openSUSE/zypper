@@ -45,16 +45,24 @@ namespace sat
       /** Value representing \c noAttr (<tt>""</tt>)*/
       static const SolvAttr noAttr;
 
-      /** \name special solvable attributes which are part of the ::Solvable struct
-       *
-       * \todo can these be used in LookupAttr currently?
-       * \todo add dependencies here? Or move all this stuff elsewhere?
-       */
+      /** \name special solvable attributes which are part of the ::Solvable struct */
       //@{
       static const SolvAttr name;
       static const SolvAttr edition;
       static const SolvAttr arch;
+      static const SolvAttr vendor;
       //@}
+
+      /** \name dependency attrigutes */
+      //@{
+      static const SolvAttr provides;
+      static const SolvAttr obsoletes;
+      static const SolvAttr conflicts;
+      static const SolvAttr requires;
+      static const SolvAttr recommends;
+      static const SolvAttr suggests;
+      static const SolvAttr supplements;
+      static const SolvAttr enhances;
 
       /** \name common */
       //@{
@@ -86,7 +94,6 @@ namespace sat
       static const SolvAttr keywords;
       static const SolvAttr sourcesize;
       static const SolvAttr authors;
-      static const SolvAttr filenames;
       static const SolvAttr filelist;
       static const SolvAttr sourcearch;
       static const SolvAttr sourcename;
