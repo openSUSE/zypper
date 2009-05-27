@@ -208,7 +208,6 @@ namespace zypp
         , download_min_download_speed(0)
         , download_max_download_speed(0)
         , download_max_silent_tries(5)
-	, solver_onlyRequires   	( false )
         , apply_locks_file              ( true )
 
       {
@@ -329,7 +328,11 @@ namespace zypp
                 }
                 else if ( entry == "solver.onlyRequires" )
                 {
-                  solver_onlyRequires = str::strToBool( value, solver_onlyRequires );
+                  solver_onlyRequires.set( str::strToBool( value, solver_onlyRequires.get() ) );
+                }
+                else if ( entry == "solver.allowVendorChange" )
+                {
+                  solver_allowVendorChange.set( str::strToBool( value, solver_allowVendorChange.get() ) );
                 }
                 else if ( entry == "solver.checkSystemFile" )
                 {
@@ -441,7 +444,8 @@ namespace zypp
     int download_max_download_speed;
     int download_max_silent_tries;
 
-    bool solver_onlyRequires;
+    Option<bool,false> solver_onlyRequires;
+    Option<bool,false> solver_allowVendorChange;
     Pathname solver_checkSystemFile;
 
     std::set<IdString> multiversion;
@@ -646,7 +650,10 @@ namespace zypp
   { return _pimpl->download_max_silent_tries; }
 
   bool ZConfig::solver_onlyRequires() const
-  { return _pimpl->solver_onlyRequires; }
+  { return _pimpl->solver_onlyRequires.get(); }
+
+  bool ZConfig::solver_allowVendorChange() const
+  { return _pimpl->solver_allowVendorChange.get(); }
 
   Pathname ZConfig::solver_checkSystemFile() const
   { return ( _pimpl->solver_checkSystemFile.empty()
@@ -662,9 +669,7 @@ namespace zypp
   { return _pimpl->multiversion.erase(IdString(name)); }
 
   bool ZConfig::apply_locks_file() const
-  {
-    return _pimpl->apply_locks_file;
-  }
+  { return _pimpl->apply_locks_file; }
 
   Pathname ZConfig::update_dataPath() const
   {

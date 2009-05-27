@@ -229,6 +229,11 @@ namespace zypp
       Pathname solver_checkSystemFile() const;
 
       /**
+       * Whether vendor check is by default enabled.
+       */
+      bool solver_allowVendorChange() const;
+
+      /**
        * Packages which can be installed parallel with different versions
        * Returning a set of package names (IdString)
        */
