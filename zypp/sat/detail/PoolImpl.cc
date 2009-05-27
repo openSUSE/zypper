@@ -142,7 +142,7 @@ namespace zypp
           break;
         }
 
-        INT << "Unhandled " << Capability( lhs ) << " vs. " << Capability( rhs ) << endl;
+        WAR << "Unhandled " << Capability( lhs ) << " vs. " << Capability( rhs ) << endl;
         return RET_unsupported;
       }
 
