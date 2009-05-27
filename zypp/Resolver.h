@@ -58,7 +58,7 @@ namespace zypp
      *
      * Call \ref setSystemVerification to turn of this mode.
      **/
-    bool verifySystem ();
+    bool verifySystem();
 
 
     /**
@@ -75,7 +75,7 @@ namespace zypp
      * the latter case, use problems() and later applySolutions()
      * below.
      **/
-    bool resolvePool (void);
+    bool resolvePool();
 
 
     /**
@@ -95,18 +95,18 @@ namespace zypp
      * to e.g. the selectables.
      *
      **/
-    bool resolveQueue (solver::detail::SolverQueueItemList & queue);
+    bool resolveQueue( solver::detail::SolverQueueItemList & queue );
 
     /*
      * Undo solver changes done in resolvePool()
      * Throwing away all ignored dependencies.
      */
-    void undo( void );
+    void undo();
 
     /*
      * Resets solver information and verify option.
      */
-    void reset( void );
+    void reset();
 
 
     /**
@@ -144,7 +144,7 @@ namespace zypp
      * Return the list of deleted items.
      * Note : This list is valid after the call doUpgrade() only.
      **/
-    std::list<PoolItem> problematicUpdateItems( void ) const;
+    std::list<PoolItem> problematicUpdateItems() const;
 
     /**
      * Return the dependency problems found by the last call to
@@ -166,14 +166,14 @@ namespace zypp
      * have unfulfilled requirements.
      * This behaviour is favourited by ZMD.
      **/
-    void setForceResolve (const bool force);
+    void setForceResolve( bool force );
     bool forceResolve();
 
     /**
      * Ignore recommended packages that were already recommended by
      * the installed packages
      **/
-    void setIgnoreAlreadyRecommended (const bool ignoreAlreadyRecommended);
+    void setIgnoreAlreadyRecommended( bool yesno_r );
     bool ignoreAlreadyRecommended();
 
     /**
@@ -181,9 +181,21 @@ namespace zypp
      * So recommended packages, language packages and packages which depend
      * on hardware (modalias) will not be regarded.
      **/
-    void setOnlyRequires (const bool onlyRequires);
+    void setOnlyRequires( bool yesno_r );
     void resetOnlyRequires(); // set back to default (described in zypp.conf)
     bool onlyRequires();
+
+    /**
+     * Setting whether the solver should allow or disallow vendor changes.
+     *
+     * If OFF (the default) the solver will replace packages with packages
+     * of the same (or equivalent) vendor ony.
+     *
+     * \see \ref VendorAttr for definition of vendor equivalence.
+     **/
+    void setAllowVendorChange( bool yesno_r );
+    void setDefaultAllowVendorChange(); // set back to default (in zypp.conf)
+    bool allowVendorChange() const;
 
     /**
      * System verification mode also monitors and repairs dependencies
@@ -211,37 +223,37 @@ namespace zypp
      * Adding additional requirement
      *
      */
-    void addRequire (const Capability & capability);
+    void addRequire( const Capability & capability );
 
     /**
      * Adding additional conflict
      *
      */
-    void addConflict (const Capability & capability);
+    void addConflict( const Capability & capability );
 
     /**
      * Remove the additional requirement set by \ref addRequire(Capability).
      *
      */
-    void removeRequire (const Capability & capability);
+    void removeRequire( const Capability & capability );
 
     /**
      * Remove the additional conflict set by \ref addConflict(Capability).
      *
      */
-    void removeConflict (const Capability & capability);
+    void removeConflict( const Capability & capability );
 
     /**
      * Get all the additional requirements set by \ref addRequire(Capability).
      *
      */
-    const CapabilitySet getRequire ();
+    CapabilitySet getRequire();
 
     /**
      * Get all the additional conflicts set by \ref addConflict(Capability).
      *
      */
-    const CapabilitySet getConflict();
+    CapabilitySet getConflict();
 
     /**
      * Generates a solver Testcase of the current state
@@ -249,7 +261,7 @@ namespace zypp
      * \parame dumpPath destination directory of the created directory
      * \return true if it was successful
      */
-    bool createSolverTestcase (const std::string & dumpPath = "/var/log/YaST2/solverTestcase");
+    bool createSolverTestcase( const std::string & dumpPath = "/var/log/YaST2/solverTestcase" );
 
     /**
      * Gives information about WHO has pused an installation of an given item.
@@ -265,7 +277,7 @@ namespace zypp
      * Note: In order to have a result start a solver run before. Not matter if it is valid or invalid.
      *
      */
-    const solver::detail::ItemCapKindList isInstalledBy (const PoolItem item);
+    solver::detail::ItemCapKindList isInstalledBy( const PoolItem & item );
 
     /**
      * Gives information about WHICH additional items will be installed due the installation of an item.
@@ -281,7 +293,7 @@ namespace zypp
      * Note: In order to have a result start a solver run before. Not matter if it is valid or invalid.
      *
      */
-    const solver::detail::ItemCapKindList installs (const PoolItem item);
+    solver::detail::ItemCapKindList installs( const PoolItem & item );
 
     /**
      * Gives information about WHICH installed items are requested by the installation of an item.
@@ -292,12 +304,12 @@ namespace zypp
      *          initialInstallation This item has triggered the installation
      *	                            Not already fullfilled requierement only.
      *		cap                 Capability which has triggerd this installation
-     *		capKind             Kind of that capability (e.g.  Dep::REQUIRES,Dep::RECOMMENDS,... )     
+     *		capKind             Kind of that capability (e.g.  Dep::REQUIRES,Dep::RECOMMENDS,... )
      *
      * Note: In order to have a result start a solver run before. Not matter if it is valid or invalid.
      *
      */
-    const solver::detail::ItemCapKindList satifiedByInstalled(const PoolItem item);
+    solver::detail::ItemCapKindList satifiedByInstalled( const PoolItem & item );
 
 
     /**
@@ -309,12 +321,12 @@ namespace zypp
      *          initialInstallation This item has triggered the installation
      *	                            Not already fullfilled requierement only.
      *		cap                 Capability which has triggerd this installation
-     *		capKind             Kind of that capability (e.g.  Dep::REQUIRES,Dep::RECOMMENDS,... )     
+     *		capKind             Kind of that capability (e.g.  Dep::REQUIRES,Dep::RECOMMENDS,... )
      *
      * Note: In order to have a result start a solver run before. Not matter if it is valid or invalid.
      *
      */
-    const solver::detail::ItemCapKindList installedSatisfied(const PoolItem item);
+    solver::detail::ItemCapKindList installedSatisfied( const PoolItem & item );
 
 
 

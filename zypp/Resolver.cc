@@ -27,16 +27,7 @@ namespace zypp
   using namespace solver;
 
   IMPL_PTR_TYPE(Resolver);
-#if 0
-  Resolver_Ptr Resolver::_resolver = NULL;
-  Resolver_Ptr Resolver::resolver()
-  {
-    if (_resolver == NULL) {
-	_resolver = new Resolver();
-    }
-    return _resolver;
-  }
-#endif
+
   ///////////////////////////////////////////////////////////////////
   //
   //	METHOD NAME : Resolver::Resolver
@@ -62,75 +53,81 @@ namespace zypp
   ///////////////////////////////////////////////////////////////////
   bool Resolver::verifySystem ()
   { return _pimpl->verifySystem(); }
+
   bool Resolver::resolvePool ()
   { return _pimpl->resolvePool(); }
-  bool Resolver::resolveQueue (zypp::solver::detail::SolverQueueItemList & queue)
+
+  bool Resolver::resolveQueue( solver::detail::SolverQueueItemList & queue )
   { return _pimpl->resolveQueue(queue); }
+
   void Resolver::undo()
   { _pimpl->undo(); }
+
   ResolverProblemList Resolver::problems ()
   { return _pimpl->problems (); }
+
   void Resolver::applySolutions( const ProblemSolutionList & solutions )
   { _pimpl->applySolutions (solutions); }
+
   bool Resolver::doUpgrade( UpgradeStatistics & opt_stats_r )
   { return _pimpl->doUpgrade(opt_stats_r); }
+
   void Resolver::doUpdate()
   { _pimpl->doUpdate(); }
-  void Resolver::setForceResolve( const bool force )
-  { _pimpl->setForceResolve( force ); }
-  bool Resolver::forceResolve()
-  { return _pimpl->forceResolve(); }
-  void Resolver::setIgnoreAlreadyRecommended
-       (const bool ignoreAlreadyRecommended)
-  { _pimpl->setIgnorealreadyrecommended (ignoreAlreadyRecommended); }
-  bool Resolver::ignoreAlreadyRecommended()
-  { return _pimpl->ignorealreadyrecommended(); }
-  void Resolver::setOnlyRequires( const bool onlyRequires )
-  { onlyRequires ? _pimpl->setOnlyRequires( true ) : _pimpl->setOnlyRequires( false ); }
-  void Resolver::resetOnlyRequires()
-  { _pimpl->setOnlyRequires( indeterminate ); }
-  bool Resolver::onlyRequires()
-  {
-      if (indeterminate(_pimpl->onlyRequires()))
-	  return ZConfig::instance().solver_onlyRequires();
-      else
-	  return _pimpl->onlyRequires();
-  }
+
+  void Resolver::setForceResolve( bool yesno_r )	{ _pimpl->setForceResolve( yesno_r ); }
+  bool Resolver::forceResolve()				{ return _pimpl->forceResolve(); }
+
+  void Resolver::setIgnoreAlreadyRecommended( bool yesno_r) { _pimpl->setIgnoreAlreadyRecommended( yesno_r ); }
+  bool Resolver::ignoreAlreadyRecommended()		{ return _pimpl->ignoreAlreadyRecommended(); }
+
+  void Resolver::setOnlyRequires( bool yesno_r )	{ _pimpl->setOnlyRequires( yesno_r ); }
+  void Resolver::resetOnlyRequires()			{ _pimpl->setOnlyRequires( indeterminate ); }
+  bool Resolver::onlyRequires()				{ return _pimpl->onlyRequires(); }
+
+  void Resolver::setAllowVendorChange( bool yesno_r )	{ _pimpl->setAllowVendorChange( yesno_r ); }
+  void Resolver::setDefaultAllowVendorChange()		{ _pimpl->setAllowVendorChange( indeterminate ); }
+  bool Resolver::allowVendorChange() const		{ return _pimpl->allowVendorChange(); }
 
   void Resolver::setSystemVerification( bool yesno_r )	{ _pimpl->setVerifyingMode( yesno_r ); }
-  void Resolver::setDefaultSystemVerification()		{ _pimpl->setVerifyingMode(indeterminate ); }
+  void Resolver::setDefaultSystemVerification()		{ _pimpl->setVerifyingMode( indeterminate ); }
   bool Resolver::systemVerification() const		{ return _pimpl->isVerifyingMode(); }
 
   void Resolver::setSolveSrcPackages( bool yesno_r )	{ _pimpl->setSolveSrcPackages( yesno_r ); }
-  void Resolver::setDefaultSolveSrcPackages()		{ _pimpl->setSolveSrcPackages(indeterminate ); }
+  void Resolver::setDefaultSolveSrcPackages()		{ _pimpl->setSolveSrcPackages( indeterminate ); }
   bool Resolver::solveSrcPackages() const		{ return _pimpl->solveSrcPackages(); }
 
-  void Resolver::addRequire (const Capability & capability)
-  { _pimpl->addExtraRequire( capability ); }
-  void Resolver::addConflict (const Capability & capability)
-  { _pimpl->addExtraConflict( capability ); }
-  void Resolver::removeRequire (const Capability & capability)
-  { _pimpl->removeExtraRequire( capability ); }
-  void Resolver::removeConflict (const Capability & capability)
-  { _pimpl->removeExtraConflict( capability ); }
-  const CapabilitySet Resolver::getRequire ()
-  { return _pimpl->extraRequires();}
-  const CapabilitySet Resolver::getConflict ()
-  { return _pimpl->extraConflicts();}
-  std::list<PoolItem> Resolver::problematicUpdateItems( void ) const
+
+  void Resolver::addRequire( const Capability & capability )	{ _pimpl->addExtraRequire( capability ); }
+  void Resolver::addConflict( const Capability & capability )	{ _pimpl->addExtraConflict( capability ); }
+  void Resolver::removeRequire( const Capability & capability )	{ _pimpl->removeExtraRequire( capability ); }
+  void Resolver::removeConflict( const Capability & capability ){ _pimpl->removeExtraConflict( capability ); }
+
+  CapabilitySet Resolver::getRequire()	{ return _pimpl->extraRequires(); }
+  CapabilitySet Resolver::getConflict()	{ return _pimpl->extraConflicts(); }
+
+  std::list<PoolItem> Resolver::problematicUpdateItems() const
   { return _pimpl->problematicUpdateItems(); }
-  bool Resolver::createSolverTestcase (const std::string & dumpPath)
-  { solver::detail::Testcase testcase (dumpPath);
-    return testcase.createTestcase(*_pimpl);}
-  const solver::detail::ItemCapKindList Resolver::isInstalledBy (const PoolItem item)
+
+  bool Resolver::createSolverTestcase( const std::string & dumpPath )
+  {
+    solver::detail::Testcase testcase (dumpPath);
+    return testcase.createTestcase(*_pimpl);
+  }
+
+  solver::detail::ItemCapKindList Resolver::isInstalledBy( const PoolItem & item )
   { return _pimpl->isInstalledBy (item); }
-  const solver::detail::ItemCapKindList Resolver::installs (const PoolItem item)
+
+  solver::detail::ItemCapKindList Resolver::installs( const PoolItem & item )
   { return _pimpl->installs (item); }
-  const solver::detail::ItemCapKindList Resolver::satifiedByInstalled (const PoolItem item)
+
+  solver::detail::ItemCapKindList Resolver::satifiedByInstalled( const PoolItem & item )
   { return _pimpl->satifiedByInstalled (item); }
-  const solver::detail::ItemCapKindList Resolver::installedSatisfied (const PoolItem item)
+
+  solver::detail::ItemCapKindList Resolver::installedSatisfied( const PoolItem & item )
   { return _pimpl->installedSatisfied (item); }
-  void Resolver::reset ()
+
+  void Resolver::reset()
   { _pimpl->reset( false ); /* Do not keep extra requires/conflicts */ }
 
 

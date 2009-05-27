@@ -352,7 +352,7 @@ bool Testcase::createTestcase(Resolver & resolver, bool dumpPool, bool runSolver
 			  "solver-system.xml.gz",
 			  resolver.forceResolve(),
 			  resolver.onlyRequires(),
-			  resolver.ignorealreadyrecommended() );
+			  resolver.ignoreAlreadyRecommended() );
 
     for (PoolItemList::const_iterator iter = items_to_install.begin(); iter != items_to_install.end(); iter++) {
 	control.installResolvable (iter->resolvable(), iter->status());
@@ -450,7 +450,7 @@ HelixControl::HelixControl(const std::string & controlPath,
 
 	*file << TAB << "<channel file=\"" << str::numstring((long)it->first.id())
 	      << "-package.xml.gz\" name=\"" << repo.alias() << "\""
-	      << " priority=\"" << repo.priority() 
+	      << " priority=\"" << repo.priority()
 	      << "\" />" << endl << endl;
     }
     for (LocaleSet::const_iterator iter = languages.begin(); iter != languages.end(); iter++) {
@@ -465,7 +465,7 @@ HelixControl::HelixControl(const std::string & controlPath,
 
     if (ignorealreadyrecommended)
 	*file << TAB << "<ignorealreadyrecommended/>" << endl;
-    
+
     *file << "</setup>" << endl
 	  << "<trial>" << endl;
 }

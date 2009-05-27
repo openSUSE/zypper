@@ -56,8 +56,7 @@ IMPL_PTR_TYPE(Resolver);
 //---------------------------------------------------------------------------
 
 
-std::ostream &
-Resolver::dumpOn( std::ostream & os ) const
+std::ostream & Resolver::dumpOn( std::ostream & os ) const
 {
     return os << "<resolver/>";
 }
@@ -69,14 +68,14 @@ Resolver::Resolver (const ResPool & pool)
     : _pool(pool)
     , _satResolver(NULL)
     , _poolchanged(_pool.serial() )
-    , _testing(false)
-    , _forceResolve(false)
-    , _upgradeMode(false)
-    , _updateMode(false)
-    , _verifying(false)
-    , _onlyRequires(indeterminate)
-    , _solveSrcPackages( false )
-    , _ignorealreadyrecommended(false)
+    , _forceResolve		(false)
+    , _upgradeMode		(false)
+    , _updateMode		(false)
+    , _verifying		(false)
+    , _onlyRequires		( ZConfig::instance().solver_onlyRequires() )
+    , _allowVendorChange	( ZConfig::instance().solver_allowVendorChange() )
+    , _solveSrcPackages		( false )
+    , _ignoreAlreadyRecommended	(false)
 
 {
     sat::Pool satPool( sat::Pool::instance() );
@@ -91,14 +90,22 @@ Resolver::~Resolver()
 
 //---------------------------------------------------------------------------
 
-ResPool
-Resolver::pool (void) const
+void Resolver::setAllowVendorChange( TriBool state_r )
 {
-    return _pool;
+  _allowVendorChange = indeterminate(state_r) ? ZConfig::instance().solver_allowVendorChange() : bool(state_r);
 }
 
-void
-Resolver::reset (bool keepExtras )
+void Resolver::setOnlyRequires( TriBool state_r )
+{
+  _onlyRequires = indeterminate(state_r) ? ZConfig::instance().solver_onlyRequires() : bool(state_r);
+}
+
+//---------------------------------------------------------------------------
+
+ResPool Resolver::pool() const
+{ return _pool; }
+
+void Resolver::reset( bool keepExtras )
 {
     _verifying = false;
 
@@ -113,8 +120,7 @@ Resolver::reset (bool keepExtras )
     _installedSatisfied.clear();
 }
 
-void
-Resolver::doUpdate()
+void Resolver::doUpdate()
 {
     _updateMode = true;
     return _satResolver->doUpdate();
@@ -123,31 +129,19 @@ Resolver::doUpdate()
 PoolItemList Resolver::problematicUpdateItems() const
 { return _satResolver->problematicUpdateItems(); }
 
-void
-Resolver::addExtraRequire (const Capability & capability)
-{
-    _extra_requires.insert (capability);
-}
+void Resolver::addExtraRequire( const Capability & capability )
+{ _extra_requires.insert (capability); }
 
-void
-Resolver::removeExtraRequire (const Capability & capability)
-{
-    _extra_requires.erase (capability);
-}
+void Resolver::removeExtraRequire( const Capability & capability )
+{ _extra_requires.erase (capability); }
 
-void
-Resolver::addExtraConflict (const Capability & capability)
-{
-    _extra_conflicts.insert (capability);
-}
+void Resolver::addExtraConflict( const Capability & capability )
+{ _extra_conflicts.insert (capability); }
 
-void
-Resolver::removeExtraConflict (const Capability & capability)
-{
-    _extra_conflicts.erase (capability);
-}
+void Resolver::removeExtraConflict( const Capability & capability )
+{ _extra_conflicts.erase (capability); }
 
-void Resolver::removeQueueItem (const SolverQueueItem_Ptr item)
+void Resolver::removeQueueItem( SolverQueueItem_Ptr item )
 {
     bool found = false;
     for (SolverQueueItemList::const_iterator iter = _added_queue_items.begin();
@@ -163,7 +157,8 @@ void Resolver::removeQueueItem (const SolverQueueItem_Ptr item)
 	_removed_queue_items.unique ();
     }
 }
-void Resolver::addQueueItem (const SolverQueueItem_Ptr item)
+
+void Resolver::addQueueItem( SolverQueueItem_Ptr item )
 {
     bool found = false;
     for (SolverQueueItemList::const_iterator iter = _removed_queue_items.begin();
@@ -180,11 +175,8 @@ void Resolver::addQueueItem (const SolverQueueItem_Ptr item)
     }
 }
 
-void
-Resolver::addWeak (const PoolItem item)
-{
-    _addWeak.push_back (item);
-}
+void Resolver::addWeak( const PoolItem & item )
+{ _addWeak.push_back( item ); }
 
 //---------------------------------------------------------------------------
 
@@ -218,8 +210,7 @@ struct DoTransact : public resfilter::PoolItemFilterFunctor
 };
 
 
-bool
-Resolver::verifySystem ()
+bool Resolver::verifySystem()
 {
     UndoTransact resetting (ResStatus::APPL_HIGH);
 
@@ -238,8 +229,7 @@ Resolver::verifySystem ()
 //----------------------------------------------------------------------------
 // undo
 
-void
-Resolver::undo(void)
+void Resolver::undo()
 {
     UndoTransact info(ResStatus::APPL_LOW);
     MIL << "*** undo ***" << endl;
@@ -256,8 +246,7 @@ Resolver::undo(void)
     return;
 }
 
-void
-Resolver::solverInit()
+void Resolver::solverInit()
 {
     // Solving with the satsolver
     static bool poolDumped = false;
@@ -272,48 +261,29 @@ Resolver::solverInit()
 	}
     }
 
-    _satResolver->setFixsystem(false);
-    _satResolver->setIgnorealreadyrecommended(false);
-    _satResolver->setAllowdowngrade(false);
-    _satResolver->setAllowarchchange(false);
-    _satResolver->setAllowvendorchange(false);
-    _satResolver->setAllowuninstall(false);
-    _satResolver->setUpdatesystem(false);
-    _satResolver->setAllowvirtualconflicts(false);
-    _satResolver->setNoupdateprovide(false);
-    _satResolver->setDosplitprovides(false);
-    _satResolver->setSolveSrcPackages( solveSrcPackages() );
+    _satResolver->setFixsystem			( isVerifyingMode() );
+    _satResolver->setIgnorealreadyrecommended	( ignoreAlreadyRecommended() );
+    _satResolver->setOnlyRequires		( onlyRequires() );
+    _satResolver->setAllowdowngrade		(false);
+    _satResolver->setAllowarchchange		(false);
+    _satResolver->setAllowvendorchange		( allowVendorChange() );
+    _satResolver->setAllowuninstall		( forceResolve() );
+    _satResolver->setUpdatesystem		(false);
+    _satResolver->setAllowvirtualconflicts	(false);
+    _satResolver->setNoupdateprovide		(false);
+    _satResolver->setDosplitprovides		(false);
+    _satResolver->setSolveSrcPackages		( solveSrcPackages() );
 
     if (_upgradeMode) {
-	_satResolver->setAllowdowngrade(true);
-	_satResolver->setUpdatesystem(false); // not needed cause packages has already been evaluteted by distupgrade
-	_satResolver->setDosplitprovides(true);
-	if ( !getenv("ZYPP_NO_SAT_UPDATE") ) {
-	    MIL << "-------------- Calling SAT Solver in distupgrade mode -------------------" << endl;
-	    // SAT solver will do the dist update
-	    _satResolver->setAllowarchchange(true);
-	    _satResolver->setAllowvendorchange(true);
-	    _satResolver->setUpdatesystem(true);
-	    _satResolver->setDistupgrade(true);
-	    _satResolver->setDistupgrade_removeunsupported(false);
-	}
+      // may overwrite some settings
+      _satResolver->setDistupgrade			(true);
+      _satResolver->setDistupgrade_removeunsupported	(false);
+      _satResolver->setUpdatesystem			(true);
+      _satResolver->setAllowdowngrade			(true);
+      _satResolver->setAllowarchchange			(true);
+      _satResolver->setAllowvendorchange		(true);
+      _satResolver->setDosplitprovides			(true);
     }
-
-    if (_forceResolve)
-	_satResolver->setAllowuninstall(true);
-
-    if (indeterminate(_onlyRequires))
-	_satResolver->setOnlyRequires(ZConfig::instance().solver_onlyRequires());
-    else if (_onlyRequires)
-	_satResolver->setOnlyRequires(true);
-    else
-	_satResolver->setOnlyRequires(false);
-
-    if (_verifying)
-	_satResolver->setFixsystem(true);
-
-    if (_ignorealreadyrecommended)
-	_satResolver->setIgnorealreadyrecommended(true);
 
     // Resetting additional solver information
     _isInstalledBy.clear();
@@ -322,15 +292,13 @@ Resolver::solverInit()
     _installedSatisfied.clear();
 }
 
-bool
-Resolver::resolvePool()
+bool Resolver::resolvePool()
 {
     solverInit();
     return _satResolver->resolvePool(_extra_requires, _extra_conflicts, _addWeak);
 }
 
-bool
-Resolver::resolveQueue(solver::detail::SolverQueueItemList & queue)
+bool Resolver::resolveQueue( solver::detail::SolverQueueItemList & queue )
 {
     solverInit();
 
@@ -374,8 +342,7 @@ Resolver::resolveQueue(solver::detail::SolverQueueItemList & queue)
 // Getting more information about the solve results
 
 
-void
-Resolver::collectResolverInfo(void)
+void Resolver::collectResolverInfo()
 {
     if ( _satResolver
 	 && _isInstalledBy.empty()
@@ -523,7 +490,8 @@ Resolver::collectResolverInfo(void)
 }
 
 
-const ItemCapKindList Resolver::isInstalledBy (const PoolItem item) {
+ItemCapKindList Resolver::isInstalledBy( const PoolItem & item )
+{
     ItemCapKindList ret;
     collectResolverInfo();
 
@@ -541,7 +509,8 @@ const ItemCapKindList Resolver::isInstalledBy (const PoolItem item) {
     return ret;
 }
 
-const ItemCapKindList Resolver::installs (const PoolItem item) {
+ItemCapKindList Resolver::installs( const PoolItem & item )
+{
     ItemCapKindList ret;
     collectResolverInfo();
 
@@ -559,7 +528,8 @@ const ItemCapKindList Resolver::installs (const PoolItem item) {
     return ret;
 }
 
-const ItemCapKindList Resolver::satifiedByInstalled (const PoolItem item) {
+ItemCapKindList Resolver::satifiedByInstalled( const PoolItem & item )
+{
     ItemCapKindList ret;
     collectResolverInfo();
 
@@ -577,7 +547,8 @@ const ItemCapKindList Resolver::satifiedByInstalled (const PoolItem item) {
     return ret;
 }
 
-const ItemCapKindList Resolver::installedSatisfied (const PoolItem item) {
+ItemCapKindList Resolver::installedSatisfied( const PoolItem & item )
+{
     ItemCapKindList ret;
     collectResolverInfo();
 

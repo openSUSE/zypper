@@ -102,18 +102,22 @@ class Resolver : public base::ReferenceCounted, private base::NonCopyable {
     // Regard dependencies of the item weak onl
     PoolItemList _addWeak;
 
+    /** \name Solver flags */
+    //@{
     bool _forceResolve;           // remove items which are conflicts with others or
                                   // have unfulfilled requirements.
                                   // This behaviour is favourited by ZMD
     bool _upgradeMode;            // Resolver has been called with doUpgrade
     bool _updateMode;            // Resolver has been called with doUpdate
     bool _verifying;              // The system will be checked
-    TriBool _onlyRequires; 	  // do install required resolvables only
+    bool _onlyRequires; 	  // do install required resolvables only
                                   // no recommended resolvables, language
                                   // packages, hardware packages (modalias)
+    bool _allowVendorChange;	// whether the solver should allow or disallow vendor changes.
     bool _solveSrcPackages;	// whether to generate solver jobs for selected source packges.
 
-    bool _ignorealreadyrecommended;   //ignore recommended packages that have already been recommended by the installed packages
+    bool _ignoreAlreadyRecommended;   //ignore recommended packages that have already been recommended by the installed packages
+    //@}
 
     // Additional QueueItems which has to be regarded by the solver
     // This will be used e.g. by solution actions
@@ -127,7 +131,7 @@ class Resolver : public base::ReferenceCounted, private base::NonCopyable {
     ItemCapKindMap _installedSatisfied;
 
     // helpers
-    void collectResolverInfo (void);
+    void collectResolverInfo();
 
     // Unmaintained packages which does not fit to the updated system
     // (broken dependencies) will be deleted.
@@ -138,78 +142,81 @@ class Resolver : public base::ReferenceCounted, private base::NonCopyable {
 
   public:
 
-    Resolver (const ResPool & pool);
+    Resolver( const ResPool & pool );
     virtual ~Resolver();
 
     // ---------------------------------- I/O
 
     virtual std::ostream & dumpOn( std::ostream & str ) const;
-    friend std::ostream& operator<<(std::ostream& str, const Resolver & obj)
+    friend std::ostream& operator<<( std::ostream& str, const Resolver & obj )
     { return obj.dumpOn (str); }
 
     // ---------------------------------- methods
 
-    ResPool pool (void) const;
-    void setPool (const ResPool & pool) { _pool = pool; }
+    ResPool pool() const;
+    void setPool( const ResPool & pool ) { _pool = pool; }
 
-    void addExtraRequire (const Capability & capability);
-    void removeExtraRequire (const Capability & capability);
-    void addExtraConflict (const Capability & capability);
-    void removeExtraConflict (const Capability & capability);
+    void addExtraRequire( const Capability & capability );
+    void removeExtraRequire( const Capability & capability );
+    void addExtraConflict( const Capability & capability );
+    void removeExtraConflict( const Capability & capability );
 
-    void removeQueueItem (const SolverQueueItem_Ptr item);
-    void addQueueItem (const SolverQueueItem_Ptr item);
+    void removeQueueItem( SolverQueueItem_Ptr item );
+    void addQueueItem( SolverQueueItem_Ptr item );
 
-    const CapabilitySet extraRequires () { return _extra_requires; }
-    const CapabilitySet extraConflicts () { return _extra_conflicts; }
+    CapabilitySet extraRequires()	{ return _extra_requires; }
+    CapabilitySet extraConflicts()	{ return _extra_conflicts; }
 
-    void addWeak (const PoolItem item);
+    void addWeak( const PoolItem & item );
 
-    void setForceResolve (const bool force) { _forceResolve = force; }
-    bool forceResolve() { return _forceResolve; }
-
-    void setIgnorealreadyrecommended (const bool ignorealreadyrecommended)
-	{ _ignorealreadyrecommended = ignorealreadyrecommended; }
-    bool ignorealreadyrecommended() { return _ignorealreadyrecommended; }
-
-    void setOnlyRequires (const TriBool state)
-	{ _onlyRequires = state; }
-    TriBool onlyRequires () { return _onlyRequires; }
-
-    bool verifySystem ();
+    bool verifySystem();
     bool resolvePool();
-    bool resolveQueue(solver::detail::SolverQueueItemList & queue);
+    bool resolveQueue( SolverQueueItemList & queue );
     void doUpdate();
 
     bool doUpgrade( zypp::UpgradeStatistics & opt_stats_r );
-    PoolItemList problematicUpdateItems( void ) const;
+    PoolItemList problematicUpdateItems() const;
 
-    bool isUpgradeMode() const 			{ return _upgradeMode;};// Resolver has been called with doUpgrade
-    bool isUpdateMode() const 			{ return _updateMode;};	// Resolver has been called with doUpdate
-    bool isVerifyingMode() const 		{ return _verifying;};	// The system will be checked
-    void setVerifyingMode( TriBool state_r )	{ _verifying = ( state_r == indeterminate ) ? false : bool(state_r); }
+    /** \name Solver flags */
+    //@{
+    bool ignoreAlreadyRecommended() const	{ return _ignoreAlreadyRecommended; }
+    void setIgnoreAlreadyRecommended( bool yesno_r ) { _ignoreAlreadyRecommended = yesno_r; }
+
+    bool onlyRequires () const			{ return _onlyRequires; }
+    void setOnlyRequires( TriBool state_r );
+
+    bool forceResolve()	const 			{ return _forceResolve; }
+    void setForceResolve( TriBool state_r )	{ _forceResolve = indeterminate(state_r) ? false : bool(state_r); }
+
+    bool isUpgradeMode() const 			{ return _upgradeMode; }// Resolver has been called with doUpgrade
+
+    bool isUpdateMode() const 			{ return _updateMode; }	// Resolver has been called with doUpdate
+
+    bool isVerifyingMode() const 		{ return _verifying; }	// The system will be checked
+    void setVerifyingMode( TriBool state_r )	{ _verifying = indeterminate(state_r) ? false : bool(state_r); }
+
+    bool allowVendorChange() const		{ return _allowVendorChange; }
+    void setAllowVendorChange( TriBool state_r );
 
     bool solveSrcPackages() const 		{ return _solveSrcPackages; }
-    void setSolveSrcPackages( TriBool state_r )	{ _solveSrcPackages = ( state_r == indeterminate ) ? false : bool(state_r); }
+    void setSolveSrcPackages( TriBool state_r )	{ _solveSrcPackages = indeterminate(state_r) ? false : bool(state_r); }
+    //@}
 
-    ResolverProblemList problems () const;
-    void applySolutions (const ProblemSolutionList &solutions);
+    ResolverProblemList problems() const;
+    void applySolutions( const ProblemSolutionList & solutions );
 
     // reset all SOLVER transaction in pool
-    void undo(void);
+    void undo();
 
-    void reset (bool keepExtras = false );
-
-    bool testing(void) const { return _testing; }
-    void setTesting( bool testing ) { _testing = testing; }
+    void reset( bool keepExtras = false );
 
     // Get more information about the solverrun
     // Which item will be installed by another item or triggers an item for
     // installation
-    const ItemCapKindList isInstalledBy (const PoolItem item);
-    const ItemCapKindList installs (const PoolItem item);
-    const ItemCapKindList satifiedByInstalled (const PoolItem item);
-    const ItemCapKindList installedSatisfied (const PoolItem item);
+    ItemCapKindList isInstalledBy( const PoolItem & item );
+    ItemCapKindList installs( const PoolItem & item );
+    ItemCapKindList satifiedByInstalled (const PoolItem & item );
+    ItemCapKindList installedSatisfied( const PoolItem & item );
 
 };
 

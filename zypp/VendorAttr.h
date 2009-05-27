@@ -16,7 +16,6 @@
 #include <string>
 #include <vector>
 
-#include "zypp/base/NonCopyable.h"
 #include "zypp/PathInfo.h"
 #include "zypp/Vendor.h"
 
@@ -31,11 +30,9 @@ namespace zypp {
  *
  * Per default vendor strings starting with \c "suse' or \c 'opensuse"
  * are treated equivalent. This may be changed by providing customized
- * vendor description files in /etc/zypp/vendors.d.
- *
- * \todo remove superfluous base::NonCopyable
+ * vendor description files in \c /etc/zypp/vendors.d.
 */
-class VendorAttr : private base::NonCopyable
+class VendorAttr
 {
   public:
     typedef std::vector<std::string> VendorList;
