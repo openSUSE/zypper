@@ -125,12 +125,6 @@ namespace zypp
   Package::FileList Package::filelist() const
   { return FileList( sat::SolvAttr::filelist, satSolvable() ); }
 
-  std::list<std::string> Package::filenames() const
-  {
-    FileList f( filelist() );
-    return std::list<std::string>( f.begin(), f.end() );
-  }
-
   CheckSum Package::checksum() const
   { return lookupCheckSumAttribute( sat::SolvAttr::checksum ); }
 

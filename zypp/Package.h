@@ -23,8 +23,6 @@ namespace zypp
 
   DEFINE_PTR_TYPE(Package);
 
-
-
   ///////////////////////////////////////////////////////////////////
   //
   //	CLASS NAME : Package
@@ -87,8 +85,6 @@ namespace zypp
      * consume much memory.
     */
     FileList filelist() const;
-    /** \deprecated Use filelist, it's faster and saves memory. */
-    std::list<std::string> filenames() const ZYPP_DEPRECATED;
 
     /** \name Source package handling
     */
