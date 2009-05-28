@@ -382,7 +382,7 @@ namespace zypp
         /** Whether this is a string attribute. */
         bool solvAttrString() const;
 
-        /** *Whether this string attribute is available as \ref IdString. */
+        /** Whether this string attribute is available as \ref IdString. */
         bool solvAttrIdString() const;
 
         /** Whether this is a CheckSum attribute.*/
@@ -472,14 +472,20 @@ namespace zypp
          * via \ref c_str and \ref asString.
          */
         IdString idStr() const;
+	/** \overload Directly returning the \c Id */
+        detail::IdType id() const
+        { return idStr().id(); }
 
         /** As \ref CheckSum. */
         CheckSum asCheckSum() const;
 
         /** Templated return type.
-         * Specialized for supported types.
+         * Per default assumes an Id based type, so try to construct
+         * it from the Id.
+         *
+         * Should be specialized for supported types above.
         */
-        template<class _Tp> _Tp asType() const;
+        template<class _Tp> _Tp asType() const { return _Tp(id()); }
         //@}
 
         ///////////////////////////////////////////////////////////////////
@@ -539,6 +545,7 @@ namespace zypp
     template<> inline const char * LookupAttr::iterator::asType<const char *>() const { return c_str(); }
     template<> inline std::string  LookupAttr::iterator::asType<std::string>()  const { return asString(); }
     template<> inline IdString     LookupAttr::iterator::asType<IdString>()     const { return idStr(); }
+    template<>        CheckSum     LookupAttr::iterator::asType<CheckSum>()     const;
 
     template<class _ResultT, class _AttrT>
     class ArrayAttr;

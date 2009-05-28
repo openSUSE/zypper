@@ -534,6 +534,13 @@ namespace zypp
           case REPOKEY_TYPE_ID:
           case REPOKEY_TYPE_IDARRAY:
           case REPOKEY_TYPE_CONSTANTID:
+            {
+              detail::IdType id = ::repodata_globalize_id( _dip->data, _dip->kv.id );
+              return ISRELDEP(id) ? Capability( id ).asString()
+                                  : IdString( id ).asString();
+            }
+            break;
+
           case REPOKEY_TYPE_STR:
           case REPOKEY_TYPE_DIRSTRARRAY:
             {
@@ -686,6 +693,9 @@ namespace zypp
           << ">(" <<  IdString(obj.solvAttrType()) << ") = " << obj.asString();
       return str;
     }
+
+    template<> CheckSum LookupAttr::iterator::asType<CheckSum>() const
+    { return asCheckSum(); }
 
     /////////////////////////////////////////////////////////////////
   } // namespace sat
