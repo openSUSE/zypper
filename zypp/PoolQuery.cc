@@ -25,11 +25,6 @@
 
 #include "zypp/PoolQuery.h"
 
-extern "C"
-{
-//#include "satsolver/repo.h"
-}
-
 #undef ZYPP_BASE_LOGGER_LOGGROUP
 #define ZYPP_BASE_LOGGER_LOGGROUP "PoolQuery"
 
@@ -39,6 +34,54 @@ using namespace zypp::sat;
 ///////////////////////////////////////////////////////////////////
 namespace zypp
 { /////////////////////////////////////////////////////////////////
+
+  ///////////////////////////////////////////////////////////////////
+  namespace
+  { /////////////////////////////////////////////////////////////////
+
+    /** Match data per attribtue.
+     *
+     * This includes the attribute itself, an optional \ref sat::AttrMatcher
+     * to restrict the query to certain string values, and an optional
+     * boolean \ref Predicate that may apply further restrictions that can
+     * not be expressed by the \ref attrMatcher.
+     *
+     * Example for such a \ref predicate would be an additional edition range
+     * check whan looking for dependencies. The \ref attrMatcher would
+     * find potential matches by looking at the dependencies name, the
+     * predicate will then check the edition ranges.
+     *
+     * As the \ref predicate takes an iterator pointing to the current
+     * match, it's also suitable for sub-structure (flexarray) inspection
+     * (\see \ref sat::LookupAttr::iterator::solvAttrSubEntry).
+     */
+    struct AttrMatchData
+    {
+      typedef function<bool(sat::LookupAttr::iterator)> Predicate;
+
+      static bool always( sat::LookupAttr::iterator ) { return true; }
+      static bool never( sat::LookupAttr::iterator ) { return false; }
+
+      AttrMatchData( sat::SolvAttr attr_r, const sat::AttrMatcher & attrMatcher_r )
+        : attr( attr_r )
+        , attrMatcher( attrMatcher_r )
+        { /*predicate = always;*/ }
+
+      sat::SolvAttr    attr;
+      sat::AttrMatcher attrMatcher;
+      Predicate        predicate;
+    };
+
+    std::ostream & operator<<( std::ostream & str, const AttrMatchData & obj )
+    {
+      return str << obj.attr << ": " << obj.attrMatcher << ( obj.predicate ? " (+predicate)" : "" );
+    }
+
+    typedef std::list<AttrMatchData> AttrMatchList;
+
+  } /////////////////////////////////////////////////////////////////
+  // namespace
+  ///////////////////////////////////////////////////////////////////
 
   ///////////////////////////////////////////////////////////////////
   //
@@ -97,8 +140,7 @@ namespace zypp
     void compile() const;
 
     /** AttrMatcher per attribtue. */
-    typedef std::pair<sat::SolvAttr,sat::AttrMatcher> AttrMatchData;
-    mutable std::vector<AttrMatchData> _attrMatchList;
+    mutable AttrMatchList _attrMatchList;
 
   private:
     /** Pass flags from \ref compile, as they may have been changed. */
@@ -266,7 +308,7 @@ attremptycheckend:
     // Check here, whether all involved regex compile.
     for_( it, _attrMatchList.begin(), _attrMatchList.end() )
     {
-      it->second.compile(); // throws on error
+      it->attrMatcher.compile(); // throws on error
     }
     //DBG << asString() << endl;
   }
@@ -428,7 +470,7 @@ attremptycheckend:
     {
       for_( it, _attrMatchList.begin(), _attrMatchList.end() )
       {
-        o << "* " << it->first << ": " << it->second << endl;
+        o << "* " << *it << endl;
       }
     }
     return o.str();
@@ -990,7 +1032,6 @@ attremptycheckend:
     {
       public:
 	typedef sat::LookupAttr::iterator base_iterator;
-	typedef std::pair<sat::SolvAttr,sat::AttrMatcher> AttrMatchData;
 
       public:
 	const base_iterator & end() const
@@ -1063,10 +1104,10 @@ attremptycheckend:
 	  // Attribute restriction:
 	  if ( _attrMatchList.size() == 1 ) // all (SolvAttr::allAttr) or 1 attr
 	  {
-            const AttrMatchData & matchData( _attrMatchList[0] );
-	    q.setAttr( matchData.first );
-            if ( matchData.second ) // empty searchstring matches always
-              q.setAttrMatcher( matchData.second );
+            const AttrMatchData & matchData( _attrMatchList.front() );
+	    q.setAttr( matchData.attr );
+            if ( matchData.attrMatcher ) // empty searchstring matches always
+              q.setAttrMatcher( matchData.attrMatcher );
 	  }
           else // more than 1 attr (but not all)
           {
@@ -1131,9 +1172,9 @@ attremptycheckend:
           for_( mi, _attrMatchList.begin(), _attrMatchList.end() )
           {
             const AttrMatchData & matchData( *mi );
-            sat::LookupAttr q( matchData.first, inSolvable );
-            if ( matchData.second ) // empty searchstring matches always
-              q.setAttrMatcher( matchData.second );
+            sat::LookupAttr q( matchData.attr, inSolvable );
+            if ( matchData.attrMatcher ) // empty searchstring matches always
+              q.setAttrMatcher( matchData.attrMatcher );
             if ( ! q.empty() )
               return true;
           }
@@ -1152,7 +1193,7 @@ attremptycheckend:
         /** Installed status filter flags. \see PoolQuery::StatusFilter */
         int _status_flags;
         /** AttrMatcher per attribtue. */
-        std::vector<AttrMatchData> _attrMatchList;
+        AttrMatchList _attrMatchList;
     };
     ///////////////////////////////////////////////////////////////////
 

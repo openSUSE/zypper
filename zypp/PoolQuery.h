@@ -193,6 +193,13 @@ namespace zypp
      * This can be changed by (not yet implemented) \ref setRequireAll()
      * method.
      *
+     * \note Though it is possible to use dependency attributes like
+     * \ref Solv::Attr::provides here, note that the query string is
+     * matched against a dependencies \c "name" part only. Any
+     * <tt>"op edition"</tt> part of a \ref Capability is \b not
+     * considered at all. \see \ref addDependency on how to query for
+     * capabilities including edition ranges.
+     *
      * \note Solvables of a kind not supporting the specified attribute will
      * <b>not</b> be returned.
      * \todo check the above
@@ -203,6 +210,14 @@ namespace zypp
      * \see sat::SolvAttr
      */
     void addAttribute(const sat::SolvAttr & attr, const std::string & value = "");
+
+    /*
+     * Query for matching dependency attributes.
+     *
+     * \throws Exception if \a attr is not a dependency attribute
+     */
+    //void addDependency( const sat::SolvAttr & attr, Capability cap_r );
+    //void addDependency( const sat::SolvAttr & attr, const std::string & name = "");
 
     /**
      * Set version condition. This will filter out solvables not matching
