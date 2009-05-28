@@ -65,7 +65,7 @@ namespace zypp
       AttrMatchData( sat::SolvAttr attr_r, const sat::AttrMatcher & attrMatcher_r )
         : attr( attr_r )
         , attrMatcher( attrMatcher_r )
-        { /*predicate = always;*/ }
+      {}
 
       sat::SolvAttr    attr;
       sat::AttrMatcher attrMatcher;
@@ -1162,10 +1162,18 @@ attremptycheckend:
 	    return false;
 	  }
 	  /////////////////////////////////////////////////////////////////////
-	  // string matching:
+	  // string and predicate matching:
+
           if ( _attrMatchList.size() == 1 )
           {
-            return true; // matching was done by the base iterator
+            // String matching was done by the base iterator.
+            // Now check any predicate:
+            const AttrMatchData::Predicate & predicate( _attrMatchList.front().predicate );
+            if ( ! predicate || predicate( base_r ) )
+              return true;
+
+            base_r.nextSkipSolvable();
+            return false;
           }
 
           // Here: search all attributes ;(
@@ -1173,10 +1181,24 @@ attremptycheckend:
           {
             const AttrMatchData & matchData( *mi );
             sat::LookupAttr q( matchData.attr, inSolvable );
-            if ( matchData.attrMatcher ) // empty searchstring matches always
+            if ( matchData.attrMatcher ) // an empty searchstring matches always
               q.setAttrMatcher( matchData.attrMatcher );
-            if ( ! q.empty() )
-              return true;
+
+            if ( ! q.empty() ) // there are matches.
+            {
+              // now check any predicate:
+              const AttrMatchData::Predicate & predicate( matchData.predicate );
+              if ( predicate )
+              {
+                for_( it, q.begin(), q.end() )
+                {
+                  if ( predicate( it ) )
+                    return true;
+                }
+              }
+              else
+                return true;
+            }
           }
           base_r.nextSkipSolvable();
           return false;

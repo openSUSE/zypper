@@ -210,14 +210,47 @@ namespace zypp
      * \see sat::SolvAttr
      */
     void addAttribute(const sat::SolvAttr & attr, const std::string & value = "");
-
-    /*
-     * Query for matching dependency attributes.
+#if 0
+    /**
+     * Query for dependencies matching a broken down capability.
      *
-     * \throws Exception if \a attr is not a dependency attribute
+     * The capabilities \c name part may be defined as ordinary query
+     * string (\see \ref addAttribute), so globing and regex are supported.
+     * \code
+     *   addDependency( sat::SolvAttr::provides, "kde*", Edition("2.0"), Rel::GE );
+     * \endcode
+     * \throws Exception in case \a attr is not a dependency attribute.
      */
-    //void addDependency( const sat::SolvAttr & attr, Capability cap_r );
-    //void addDependency( const sat::SolvAttr & attr, const std::string & name = "");
+    void addDependency( const sat::SolvAttr & attr, const std::string & name,
+                        const Edition & edition, const Rel & op = Rel::EQ );
+    /** \overload Query provides */
+    void addProvides( const std::string & name, const Edition & edition, const Rel & op = Rel::EQ )
+    { addDependency( sat::SolvAttr::provides, name, edition, op ); }
+    /** \overload Query requires */
+    void addRequires( const std::string & name, const Edition & edition, const Rel & op = Rel::EQ )
+    { addDependency( sat::SolvAttr::requires, name, edition, op ); }
+    /** \overload Query obsoletes */
+    void addObsoletes( const std::string & name, const Edition & edition, const Rel & op = Rel::EQ )
+    { addDependency( sat::SolvAttr::obsoletes, name, edition, op ); }
+    /** \overload Query conflicts */
+    void addConflicts( const std::string & name, const Edition & edition, const Rel & op = Rel::EQ )
+    { addDependency( sat::SolvAttr::conflicts, name, edition, op ); }
+    /** \overload Query recommends */
+    void addRecommends( const std::string & name, const Edition & edition, const Rel & op = Rel::EQ )
+    { addDependency( sat::SolvAttr::recommends, name, edition, op ); }
+    /** \overload Query suggests */
+    void addSuggests( const std::string & name, const Edition & edition, const Rel & op = Rel::EQ )
+    { addDependency( sat::SolvAttr::suggests, name, edition, op ); }
+    /** \overload Query supplements */
+    void addSupplements( const std::string & name, const Edition & edition, const Rel & op = Rel::EQ )
+    { addDependency( sat::SolvAttr::supplements, name, edition, op ); }
+    /** \overload Query enhances */
+    void addEnhances( const std::string & name, const Edition & edition, const Rel & op = Rel::EQ )
+    { addDependency( sat::SolvAttr::enhances, name, edition, op ); }
+
+    /** \overload Query taking a \ref Capability (always exact name match) */
+    void addDependency( const sat::SolvAttr & attr, Capability cap_r );
+#endif
 
     /**
      * Set version condition. This will filter out solvables not matching
