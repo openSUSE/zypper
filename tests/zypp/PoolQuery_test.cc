@@ -35,6 +35,24 @@ struct PrintAndCount
   unsigned _count;
 };
 
+void dumpQ( std::ostream & str, const PoolQuery & q, bool verbose = true )
+{
+  q.begin();
+  str << q << endl;
+  unsigned nc = 0;
+  if ( 1 )
+  {
+    for_( it, q.begin(), q.end() )
+    {
+      ++nc;
+      if ( verbose )
+        str << it << endl;
+    }
+    str << "--> MATCHES: " << nc << endl;
+  }
+}
+
+
 #if 0
 BOOST_AUTO_TEST_CASE(pool_query_experiment)
 {
@@ -57,7 +75,6 @@ BOOST_AUTO_TEST_CASE(pool_query_experiment)
   std::for_each(q.begin(), q.end(), cb);
 }
 #endif
-
 
 /////////////////////////////////////////////////////////////////////////////
 //  0xx basic queries
@@ -650,3 +667,71 @@ BOOST_AUTO_TEST_CASE(pool_query_equal)
   BOOST_CHECK(q==q4);
   BOOST_CHECK(q4!=q3);
 }
+
+/////////////////////////////////////////////////////////////////////////////
+//  Dependency Query
+/////////////////////////////////////////////////////////////////////////////
+
+BOOST_AUTO_TEST_CASE(addDependency)
+{
+  {
+    cout << "****addDependency1****"  << endl;
+    PoolQuery q;
+    q.setCaseSensitive( false );
+    q.setMatchSubstring();
+    q.addString( "libzypp" );
+    q.addDependency( sat::SolvAttr::provides, "FOO" ); // ! finds 'perl(CPAN::InfoObj)' 'foO'
+    std::for_each(q.begin(), q.end(), PrintAndCount());
+    BOOST_CHECK_EQUAL( q.size(), 12 );
+  }
+  {
+    cout << "****addDependency2****"  << endl;
+    PoolQuery q;
+    q.setCaseSensitive( false );
+    q.setMatchSubstring();
+    q.addString( "libzypp" );
+    q.addDependency( sat::SolvAttr::provides, "FOO", Rel::GT, Edition("5.0") );
+    std::for_each(q.begin(), q.end(), PrintAndCount());
+    //dumpQ( std::cout, q );
+    BOOST_CHECK_EQUAL( q.size(), 6 );
+  }
+
+  {
+    cout << "****addDependency3****"  << endl;
+    PoolQuery q;
+    // includes wine
+    q.addDependency( sat::SolvAttr::provides, "kernel" );
+    std::for_each(q.begin(), q.end(), PrintAndCount());
+    //dumpQ( std::cout, q );
+    BOOST_CHECK_EQUAL( q.size(), 12 );
+  }
+  {
+    cout << "****addDependency4****"  << endl;
+    PoolQuery q;
+    // no wine
+    q.addDependency( sat::SolvAttr::name, "kernel" );
+    std::for_each(q.begin(), q.end(), PrintAndCount());
+    //dumpQ( std::cout, q );
+    BOOST_CHECK_EQUAL( q.size(), 11 );
+  }
+  {
+    cout << "****addDependency5****"  << endl;
+    PoolQuery q;
+    // Capability always matches exact
+    q.addDependency( sat::SolvAttr::provides, Capability("kernel") );
+    std::for_each(q.begin(), q.end(), PrintAndCount());
+    //dumpQ( std::cout, q );
+    BOOST_CHECK_EQUAL( q.size(), 2 );
+  }
+  {
+    cout << "****addDependency6****"  << endl;
+    PoolQuery q;
+    // non dependecy + Capability matches solvable name!
+    q.addDependency( sat::SolvAttr::summary, Capability("kernel") );
+    std::for_each(q.begin(), q.end(), PrintAndCount());
+    //dumpQ( std::cout, q );
+    BOOST_CHECK_EQUAL( q.size(), 0 ); // non dependecy
+  }
+}
+
+

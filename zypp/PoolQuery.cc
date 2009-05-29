@@ -13,7 +13,7 @@
 #include <sstream>
 
 #include "zypp/base/Gettext.h"
-#include "zypp/base/Logger.h"
+#include "zypp/base/LogTools.h"
 #include "zypp/base/Algorithm.h"
 #include "zypp/base/String.h"
 #include "zypp/repo/RepoException.h"
@@ -67,6 +67,12 @@ namespace zypp
         , attrMatcher( attrMatcher_r )
       {}
 
+      AttrMatchData( sat::SolvAttr attr_r, const sat::AttrMatcher & attrMatcher_r, const Predicate & predicate_r )
+        : attr( attr_r )
+        , attrMatcher( attrMatcher_r )
+        , predicate( predicate_r )
+      {}
+
       sat::SolvAttr    attr;
       sat::AttrMatcher attrMatcher;
       Predicate        predicate;
@@ -78,6 +84,84 @@ namespace zypp
     }
 
     typedef std::list<AttrMatchData> AttrMatchList;
+
+    /////////////////////////////////////////////////////////////////
+    // some Helpers and Predicates
+    /////////////////////////////////////////////////////////////////
+
+    bool isDependencyAttribute( sat::SolvAttr attr_r )
+    {
+      static sat::SolvAttr deps[] = {
+        SolvAttr::provides,
+        SolvAttr::requires,
+        SolvAttr::recommends,
+        SolvAttr::obsoletes,
+        SolvAttr::conflicts,
+        SolvAttr::suggests,
+        SolvAttr::supplements,
+        SolvAttr::enhances,
+      };
+      for_( it, arrayBegin(deps), arrayEnd(deps) )
+        if ( *it == attr_r )
+          return true;
+      return false;
+    }
+
+    /** Whether the current capabilities edition range ovelaps.
+     * Query asserts \a iter_r points to a capability and we
+     * have to check the range only.
+     */
+    struct EditionRangePredicate
+    {
+      EditionRangePredicate( const Rel & op, const Edition & edition )
+        : _range( op, edition )
+      {}
+
+      bool operator()( sat::LookupAttr::iterator iter_r )
+      {
+        CapDetail cap( iter_r.id() );
+        if ( ! cap.isSimple() )
+          return false;
+        if ( cap.isNamed() ) // no range to match
+          return true;
+        return overlaps( Edition::MatchRange( cap.op(), cap.ed() ), _range );
+      }
+
+      Edition::MatchRange _range;
+    };
+
+    /** Whether the current Solvables edition is within a given range. */
+    struct SolvableRangePredicate
+    {
+      SolvableRangePredicate( const Rel & op, const Edition & edition )
+        : _range( op, edition )
+      {}
+
+      bool operator()( sat::LookupAttr::iterator iter_r )
+      {
+        return overlaps( Edition::MatchRange( Rel::EQ, iter_r.inSolvable().edition() ), _range );
+      }
+
+      Edition::MatchRange _range;
+    };
+
+    /** Whether the current capability matches a given one.
+     * Query asserts \a iter_r points to a capability and we
+     * have to check the match only.
+     */
+    struct CapabilityMatchPredicate
+    {
+      CapabilityMatchPredicate( Capability cap_r )
+        : _cap( cap_r )
+      {}
+
+      bool operator()( sat::LookupAttr::iterator iter_r ) const
+      {
+        return _cap.matches( iter_r.asType<Capability>() ) == CapMatch::yes;
+      }
+
+      Capability _cap;
+    };
 
   } /////////////////////////////////////////////////////////////////
   // namespace
@@ -111,6 +195,8 @@ namespace zypp
     StrContainer _strings;
     /** Raw attributes */
     AttrRawStrMap _attrs;
+    /** Uncompiled attributes with predicate. */
+    AttrMatchList _uncompiledPredicated;
 
     /** Sat solver search flags */
     Match _flags;
@@ -199,11 +285,7 @@ namespace zypp
     //     create regex; store in rcstrings; if more strings flag regex;
     if (_attrs.empty())
     {
-      rcstrings = createRegex(_strings, cflags);
-      if (_strings.size() > 1) // switch to regex for multiple strings
-        cflags.setModeRegex();
-      _attrMatchList.push_back( AttrMatchData( sat::SolvAttr::allAttr,
-                                sat::AttrMatcher( rcstrings, cflags ) ) );
+      ; // A default 'query-all' will be added after all sources are processed.
     }
 
     // // ONE ATTRIBUTE
@@ -305,7 +387,50 @@ attremptycheckend:
       }
     }
 
-    // Check here, whether all involved regex compile.
+    // Now handle any predicated queries
+    if ( ! _uncompiledPredicated.empty() )
+    {
+      StrContainer global;
+      invokeOnEach( _strings.begin(), _strings.end(), EmptyFilter(), MyInserter(global) );
+      for_( it, _uncompiledPredicated.begin(), _uncompiledPredicated.end() )
+      {
+        if ( it->attrMatcher.flags().mode() == Match::OTHER )
+        {
+          // need to compile:
+          StrContainer joined( global );
+          const std::string & mstr( it->attrMatcher.searchstring() );
+          if ( ! mstr.empty() )
+            joined.insert( mstr );
+
+          cflags = _flags;
+          rcstrings = createRegex( joined, cflags );
+          if ( joined.size() > 1 ) // switch to regex for multiple strings
+            cflags.setModeRegex();
+
+          _attrMatchList.push_back( AttrMatchData( it->attr,
+                                    sat::AttrMatcher( rcstrings, cflags ),
+                                        it->predicate ) );
+        }
+        else
+        {
+          // copy matcher
+         _attrMatchList.push_back( *it );
+        }
+      }
+    }
+
+    // If no attributes defined at all, then add 'query all'
+    if ( _attrMatchList.empty() )
+    {
+      cflags = _flags;
+      rcstrings = createRegex( _strings, cflags );
+      if ( _strings.size() > 1 ) // switch to regex for multiple strings
+        cflags.setModeRegex();
+      _attrMatchList.push_back( AttrMatchData( sat::SolvAttr::allAttr,
+                                sat::AttrMatcher( rcstrings, cflags ) ) );
+    }
+
+    // Finally check here, whether all involved regex compile.
     for_( it, _attrMatchList.begin(), _attrMatchList.end() )
     {
       it->attrMatcher.compile(); // throws on error
@@ -460,6 +585,12 @@ attremptycheckend:
       o << endl;
     }
 
+    o << "predicated: " << endl;
+    for_( it, _uncompiledPredicated.begin(), _uncompiledPredicated.end() )
+    {
+      o << "* " << *it << endl;
+    }
+
     // compiled
     o << "last attribute matcher compiled: " << endl;
     if ( _attrMatchList.empty() )
@@ -501,18 +632,59 @@ attremptycheckend:
     _pimpl->_repos.insert(repoalias);
   }
 
-
   void PoolQuery::addKind(const ResKind & kind)
   { _pimpl->_kinds.insert(kind); }
-
 
   void PoolQuery::addString(const string & value)
   { _pimpl->_strings.insert(value); }
 
-
   void PoolQuery::addAttribute(const sat::SolvAttr & attr, const std::string & value)
   { _pimpl->_attrs[attr].insert(value); }
 
+  void PoolQuery::addDependency( const sat::SolvAttr & attr, const std::string & name, const Rel & op, const Edition & edition )
+  {
+    switch ( op.inSwitch() )
+    {
+      case Rel::ANY_e:	// no additional constraint on edition.
+        addAttribute( attr, name );
+        return;
+
+      case Rel::NONE_e:	// will never match.
+        return;
+
+      default: // go and add the predicated query (uncompiled)
+        break;
+    }
+
+    // Match::OTHER indicates need to compile.
+    sat::AttrMatcher matcher( name, Match::OTHER );
+
+    AttrMatchData::Predicate pred;
+    if ( isDependencyAttribute( attr ) )
+      pred = EditionRangePredicate( op, edition );
+    else
+      pred = SolvableRangePredicate( op, edition );
+
+    _pimpl->_uncompiledPredicated.push_back( AttrMatchData( attr, matcher, pred ) );
+  }
+
+  void PoolQuery::addDependency( const sat::SolvAttr & attr, Capability cap_r )
+  {
+    CapDetail cap( cap_r );
+    if ( ! cap.isSimple() ) // will never match.
+      return;
+
+    // Matches STRING per default. (won't get compiled!)
+    sat::AttrMatcher matcher( cap.name().asString() );
+
+    AttrMatchData::Predicate pred;
+    if ( isDependencyAttribute( attr ) )
+      pred = CapabilityMatchPredicate( cap_r );
+    else
+      pred = SolvableRangePredicate( cap.op(), cap.ed() );
+
+    _pimpl->_uncompiledPredicated.push_back( AttrMatchData( attr, matcher, pred ) );
+  }
 
   void PoolQuery::setEdition(const Edition & edition, const Rel & op)
   {
