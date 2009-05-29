@@ -53,7 +53,7 @@ namespace sat
       static const SolvAttr vendor;
       //@}
 
-      /** \name dependency attrigutes */
+      /** \name dependency attributes */
       //@{
       static const SolvAttr provides;
       static const SolvAttr obsoletes;
