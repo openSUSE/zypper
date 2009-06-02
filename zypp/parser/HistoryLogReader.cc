@@ -111,7 +111,7 @@ namespace zypp
       ParseException
         e(str::form("Error in history log on line #%u.", lineNr));
       e.addHistory(
-          str::form("Bad number of fields. Got %ld, expected more than %d.",
+          str::form("Bad number of fields. Got %zd, expected more than %d.",
               fields.size(), 2));
       ZYPP_THROW(e);
     }

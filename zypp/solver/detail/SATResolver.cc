@@ -939,10 +939,10 @@ string SATResolver::SATprobleminfoString(Id problem, string &detail, Id &ignoreI
 	  ret = str::form (_("problem with installed package %s"), solvable2str(pool, s.get()));
 	  break;
       case SOLVER_PROBLEM_JOB_RULE:
-	  ret = str::form (_("conflicting requests"));
+	  ret = _("conflicting requests");
 	  break;
       case SOLVER_PROBLEM_RPM_RULE:
-	  ret = str::form (_("some dependency problem"));
+	  ret = _("some dependency problem");
 	  break;
       case SOLVER_PROBLEM_JOB_NOTHING_PROVIDES_DEP:
 	  ret = str::form (_("nothing provides requested %s"), dep2str(pool, dep));
