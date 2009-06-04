@@ -1,4 +1,10 @@
 -------------------------------------------------------------------
+Thu Jun  4 14:22:58 CEST 2009 - ma@suse.de
+
+- Cleanup and remove deprecated interface methods.
+- version 6.8.0 (8)
+
+-------------------------------------------------------------------
 Fri May 29 20:12:55 CEST 2009 - ma@suse.de
 
 - Improve PoolQuery to allow queries on dependencies. (bnc #475682)
