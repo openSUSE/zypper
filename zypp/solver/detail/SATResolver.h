@@ -88,7 +88,6 @@ class SATResolver : public base::ReferenceCounted, private base::NonCopyable {
     bool _allowvendorchange;		// allow to change vendor of installed solvables
     bool _allowuninstall;		// allow removal of installed solvables
     bool _updatesystem;			// update
-    bool _allowvirtualconflicts;	// false: conflicts on package name, true: conflicts on package provides
     bool _noupdateprovide;		// true: update packages needs not to provide old package
     bool _dosplitprovides;		// true: consider legacy split provides
     bool _onlyRequires;	                // true: consider required packages only
@@ -186,9 +185,6 @@ class SATResolver : public base::ReferenceCounted, private base::NonCopyable {
 
     bool updatesystem () const {return _updatesystem;}
     void setUpdatesystem ( const bool updatesystem) { _updatesystem = updatesystem;}
-
-    bool allowvirtualconflicts () const {return _allowvirtualconflicts;}
-    void setAllowvirtualconflicts ( const bool allowvirtualconflicts) { _allowvirtualconflicts = allowvirtualconflicts;}
 
     bool noupdateprovide () const {return _noupdateprovide;}
     void setNoupdateprovide ( const bool noupdateprovide) { _noupdateprovide = noupdateprovide;}

@@ -116,7 +116,6 @@ SATResolver::dumpOn( std::ostream & os ) const
 	os << "  allowvendorchange = " <<  _solv->allowvendorchange << endl;
 	os << "  allowuninstall = " << _solv->allowuninstall << endl;
 	os << "  updatesystem = " << _solv->updatesystem << endl;
-	os << "  allowvirtualconflicts = " <<  _solv->allowvirtualconflicts << endl;
 	os << "  noupdateprovide = " << _solv->noupdateprovide << endl;
 	os << "  dosplitprovides = " << _solv->dosplitprovides << endl;
 	os << "  onlyRequires = " << _solv->dontinstallrecommended << endl;
@@ -142,7 +141,6 @@ SATResolver::SATResolver (const ResPool & pool, Pool *SATPool)
     , _allowvendorchange(false)
     , _allowuninstall(false)
     , _updatesystem(false)
-    , _allowvirtualconflicts(false)
     , _noupdateprovide(false)
     , _dosplitprovides(false)
     , _onlyRequires(ZConfig::instance().solver_onlyRequires())
@@ -422,7 +420,6 @@ SATResolver::solving(const CapabilitySet & requires_caps,
     _solv->allowuninstall = _allowuninstall;
     _solv->allowarchchange = _allowarchchange;
     _solv->allowvendorchange = _allowvendorchange;
-    _solv->allowvirtualconflicts = _allowvirtualconflicts;
     _solv->dosplitprovides = _dosplitprovides;
     _solv->noupdateprovide = _noupdateprovide;
     _solv->dontinstallrecommended = _onlyRequires;

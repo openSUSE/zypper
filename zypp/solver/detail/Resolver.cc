@@ -269,7 +269,6 @@ void Resolver::solverInit()
     _satResolver->setAllowvendorchange		( allowVendorChange() );
     _satResolver->setAllowuninstall		( forceResolve() );
     _satResolver->setUpdatesystem		(false);
-    _satResolver->setAllowvirtualconflicts	(false);
     _satResolver->setNoupdateprovide		(false);
     _satResolver->setDosplitprovides		(false);
     _satResolver->setSolveSrcPackages		( solveSrcPackages() );
