@@ -67,7 +67,7 @@ namespace zypp
     /** The product flavor (LiveCD Demo, FTP edition,...). */
     std::string flavor() const;
 
-    /** Get the product type (base, add-on)
+    /** Get the product type
      * Well, in an ideal world there is only one base product.
      * It's the installed product denoted by a symlink in
      * \c /etc/products.d.

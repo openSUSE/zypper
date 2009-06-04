@@ -72,7 +72,7 @@ namespace zypp
         {
           media::MediaManager mediamanager;
           _mid = mediamanager.open( url_r );
-          mediamanager.attachDesiredMedia( _mid );
+          mediamanager.attach( _mid );
         }
 
         /** Ctor releases the media. */
@@ -1791,7 +1791,7 @@ namespace zypp
     // download the repo index file
     media::MediaManager mediamanager;
     media::MediaAccessId mid = mediamanager.open( service.url() );
-    mediamanager.attachDesiredMedia( mid );
+    mediamanager.attach( mid );
     mediamanager.provideFile( mid, "repo/repoindex.xml" );
     Pathname path = mediamanager.localPath(mid, "repo/repoindex.xml" );
 

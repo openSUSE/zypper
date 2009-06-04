@@ -321,11 +321,6 @@ namespace zypp
                 {
                   cfg_vendor_path = Pathname(value);
                 }
-                else if ( entry == "productsdir" )
-                {
-                  WAR << "Deprecated entry 'productsdir=': This locations is no longer used or supported." << endl;
-                  cfg_products_path = Pathname(value);
-                }
                 else if ( entry == "solver.onlyRequires" )
                 {
                   solver_onlyRequires.set( str::strToBool( value, solver_onlyRequires.get() ) );
@@ -425,7 +420,6 @@ namespace zypp
     Pathname cfg_known_repos_path;
     Pathname cfg_known_services_path;
     Pathname cfg_vendor_path;
-    Pathname cfg_products_path;
     Pathname locks_file;
 
     Pathname update_data_path;
@@ -596,12 +590,6 @@ namespace zypp
   {
     return ( _pimpl->cfg_vendor_path.empty()
         ? (configPath()/"vendors.d") : _pimpl->cfg_vendor_path );
-  }
-
-  Pathname ZConfig::productsPath() const
-  {
-    return ( _pimpl->cfg_products_path.empty()
-        ? (configPath()/"products.d") : _pimpl->cfg_products_path );
   }
 
   Pathname ZConfig::locksFile() const

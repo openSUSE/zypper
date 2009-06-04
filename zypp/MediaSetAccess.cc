@@ -62,8 +62,6 @@ IMPL_PTR_TYPE(MediaSetAccess);
       media_mgr.addVerifier( id, verifier );
       // remove any saved verifier for this media
       _verifiers.erase(media_nr);
-      //if (! noattach && ! media_mgr.isAttached(id))
-      //media_mgr.attach(id);
     }
     else
     {
@@ -72,16 +70,6 @@ IMPL_PTR_TYPE(MediaSetAccess);
       _verifiers[media_nr] = verifier;
     }
   }
-
-//       callback::SendReport<source::DownloadFileReport> report;
-//       DownloadProgressFileReceiver download_report( report );
-//       SourceFactory source_factory;
-//       Url file_url( url().asString() + file_r.asString() );
-//       report->start( source_factory.createFrom(this), file_url );
-//       callback::TempConnect<media::DownloadProgressReport> tmp_download( download_report );
-//       Pathname file = provideJustFile( file_r, media_nr, cached, checkonly );
-//       report->finish( file_url, source::DownloadFileReport::NO_ERROR, "" );
-//       return file;
 
   void MediaSetAccess::releaseFile( const OnMediaLocation & on_media_file )
   {
@@ -112,7 +100,7 @@ IMPL_PTR_TYPE(MediaSetAccess);
 
     // try to attach the media
     if ( ! media_mgr.isAttached(media) )
-        media_mgr.attachDesiredMedia(media);
+        media_mgr.attach(media);
 
     media_mgr.dirInfo(media, retlist, dirname, dots);
   }
@@ -127,7 +115,7 @@ IMPL_PTR_TYPE(MediaSetAccess);
       result = media_mgr.localPath(media, file);
     }
   };
-          
+
   struct ProvideDirTreeOperation
   {
     Pathname result;
@@ -153,15 +141,15 @@ IMPL_PTR_TYPE(MediaSetAccess);
   struct ProvideFileExistenceOperation
   {
     bool result;
-    ProvideFileExistenceOperation() 
-        : result(false) 
+    ProvideFileExistenceOperation()
+        : result(false)
     {}
-      
+
     void operator()( media::MediaAccessId media, const Pathname &file )
     {
       media::MediaManager media_mgr;
       result = media_mgr.doesFileExist(media, file);
-    }      
+    }
   };
 
 
@@ -182,22 +170,6 @@ IMPL_PTR_TYPE(MediaSetAccess);
     return op.result;
   }
 
-  Pathname MediaSetAccess::provideOptionalFile(const Pathname & file, unsigned media_nr )
-  {
-    OnMediaLocation resource;
-    ProvideFileOperation op;
-    resource.setLocation(file, media_nr);
-    try {
-        provide(boost::ref(op), resource, PROVIDE_NON_INTERACTIVE);
-    }
-    catch ( const Exception &e )
-    {
-        ZYPP_CAUGHT(e);
-    }
-    return op.result;
-  }
-
-
   bool MediaSetAccess::doesFileExist(const Pathname & file, unsigned media_nr )
   {
     ProvideFileExistenceOperation op;
@@ -213,7 +185,7 @@ IMPL_PTR_TYPE(MediaSetAccess);
   {
     Pathname file(resource.filename());
     unsigned media_nr(resource.medianr());
-      
+
     callback::SendReport<media::MediaChangeReport> report;
     media::MediaManager media_mgr;
 
@@ -230,7 +202,7 @@ IMPL_PTR_TYPE(MediaSetAccess);
             << " from media number " << media_nr << endl;
         // try to attach the media
         if ( ! media_mgr.isAttached(media) )
-          media_mgr.attachDesiredMedia(media);
+          media_mgr.attach(media);
         op(media, file);
         break;
       }
@@ -362,7 +334,7 @@ IMPL_PTR_TYPE(MediaSetAccess);
     }
     ProvideDirOperation op;
     provide( boost::ref(op), resource, options);
-    return op.result;    
+    return op.result;
   }
 
   media::MediaAccessId MediaSetAccess::getMediaAccessId (media::MediaNr medianr)
@@ -372,8 +344,6 @@ IMPL_PTR_TYPE(MediaSetAccess);
     if (_medias.find(medianr) != _medias.end())
     {
       media::MediaAccessId id = _medias[medianr];
-      //if (! noattach && ! media_mgr.isAttached(id))
-      //media_mgr.attach(id);
       return id;
     }
     Url url;
@@ -462,9 +432,6 @@ IMPL_PTR_TYPE(MediaSetAccess);
     str << "MediaSetAccess (URL='" << _url << "', attach_point_hint='" << _prefAttachPoint << "')";
     return str;
   }
-
-//     media::MediaVerifierRef MediaSetAccess::verifier(unsigned media_nr)
-//     { return media::MediaVerifierRef(new media::NoVerifier()); }
 
 /////////////////////////////////////////////////////////////////
 } // namespace zypp

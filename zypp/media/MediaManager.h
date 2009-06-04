@@ -216,7 +216,7 @@ namespace zypp
      *       Mandatory parameter specifying the name of the block device of
      *       the partition to mount.
      *     - <tt>filesystem</tt>:
-     *       The name of the filesystem. Defaults to "auto". 
+     *       The name of the filesystem. Defaults to "auto".
      *   - Authority:
      *     A non-empty authority URL component is not allowed.
      *   - Path name:
@@ -234,7 +234,7 @@ namespace zypp
      *       "file:/directory/name"
      *     \endcode
      *   - Query parameters:
-     *     none 
+     *     none
      *   - Authority:
      *     A non-empty authority URL component (e.g. containing
      *     a host name) is not allowed.
@@ -253,7 +253,7 @@ namespace zypp
      *
      *       "iso:/?iso=CD1.iso&url=nfs://server/path/to/media"
      *       "iso:/?iso=CD1.iso&url=hd:/?device=/dev/hda"
-     * 
+     *
      *        "iso:/subdir?iso=DVD1.iso&url=nfs://nfs-server/directory&mnt=/nfs/attach/point&filesystem=udf"
      *     \endcode
      *   - Query parameters:
@@ -271,7 +271,7 @@ namespace zypp
      *       source media url.
      *     - <tt>filesystem</tt>:
      *       Optional name of the filesystem used in the iso file. Defaults
-     *       to "auto". 
+     *       to "auto".
      *   - Authority:
      *     A non-empty authority URL component is not allowed.
      *   - Path name:
@@ -334,7 +334,7 @@ namespace zypp
      *     Mandatory URL component, that specifies the share name with
      *     optional subdirectory, where the desired files are located.
      *
-     * \subsection MediaCurl_Url MediaCurl - FTP/HTTP directory tree (ftp, http, https) 
+     * \subsection MediaCurl_Url MediaCurl - FTP/HTTP directory tree (ftp, http, https)
      * The access handler to media directory tree on a ftp/http server.
      *   - Scheme:
      *     - <b>ftp</b>
@@ -390,11 +390,11 @@ namespace zypp
      *         enables ssl verify, this is the default
      *         and is equivalent to 'host,peer'.
      *       - 'host': The server is considered the intended one, when the
-     *         'Common Name' field or a 'Subject Alternate Name' field in 
+     *         'Common Name' field or a 'Subject Alternate Name' field in
      *         the certificate matches the host name in the URL.
      *       - 'peer': Verifies whether the certificate provided by the
      *         server is authentic against the chain of digital signatures
-     *         found in <tt>ssl_capath</tt>. 
+     *         found in <tt>ssl_capath</tt>.
      *     - <tt>timeout</tt>:
      *       Transfer timeout in seconds between 0 and 3600, 0 disables
      *       the timeout, default timeout is 180 seconds.
@@ -402,7 +402,7 @@ namespace zypp
      *       method names to use: 'basic', 'digest', 'ntlm', 'negotiate',
      *       'spnego', 'gssnego'.
      *       Note, that this list depends on the list of methods supported
-     *       by the curl library. 
+     *       by the curl library.
      *   - Authority:
      *     The authority component has to provide a hostname. Optionally
      *     also a username and password. In case of the 'ftp' scheme,
@@ -567,22 +567,20 @@ namespace zypp
       setAttachPrefix(const Pathname &attach_prefix);
 
       /**
-       * Attach the media using the concrete handler.
+       * Attach the media using the concrete handler (checks all devices).
        *
        * Remember to release() or close() each id you've attached
        * and not need any more. Attach is like an open of a file!
        *
        * \param accessId A media access id.
-       * \param next     Whether to try the next drive if avaliable.
        * \throws MediaNotOpenException for invalid access id.
-       * \deprecated in favor of attachDesiredMedia(MediaAccessId) which looks
-       *   for a desirable media on all available devices.
        */
       void
-      attach(MediaAccessId accessId, bool next = false) ZYPP_DEPRECATED;
+      attach(MediaAccessId accessId);
 
-      void
-      attachDesiredMedia(MediaAccessId accessId);
+      /** \deprecated Simply use \ref attach. */
+      ZYPP_DEPRECATED void attachDesiredMedia(MediaAccessId accessId)
+      { attach( accessId ); }
 
       /**
        * Release the attached media and optionally eject.
@@ -590,7 +588,7 @@ namespace zypp
        * If the \p ejectDev parameter is not empty all other access
        * id's are released and the specified drive (CD/DVD drive) is
        * ejected.
-       * 
+       *
        * \param accessId A media access id.
        * \param ejectDev Device to eject. None if empty.
        * \throws MediaNotOpenException for invalid access id.
@@ -672,8 +670,8 @@ namespace zypp
        * Simple check, based on media's URL scheme, telling whether the
        * it is possible to physically change the media inside its drive, like
        * CDs or DVDs. Useful to decide whether to request media change from
-       * user or not. 
-       * 
+       * user or not.
+       *
        * \param accessId The media access id.
        * \return <tt>false</tt> if the media is not changeable,
        *         <tt>true</tt> otherwise.
@@ -798,7 +796,7 @@ namespace zypp
        * Fill in a vector of detected ejectable devices and the index of the
        * currently attached device within the vector. The contents of the vector
        * are the device names (/dev/cdrom and such).
-       * 
+       *
        * \param accessId Medium id.
        * \param devices  vector to load with the device names
        * \param index    index of the currently used device in the devices vector
@@ -835,7 +833,7 @@ namespace zypp
       bool
       isUseableAttachPoint(const Pathname &path,
                            bool            mtab=true) const;
-      
+
     private:
       friend class MediaHandler;
 

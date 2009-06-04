@@ -454,19 +454,6 @@ namespace zypp
 
   public:
     class Impl;
-
-    /** \deprecated unused, buggy and useless. */
-    ZYPP_DEPRECATED void setMatchFiles() {}
-    /** \deprecated unused, buggy and useless. */
-    ZYPP_DEPRECATED bool matchFiles() const { return false; }
-    /** \deprecated There should be no need for this internal value. To
-     * switch across all match mode types, use the enum values returned
-     * by \ref matchMode().  \see \ref Match::Mode.
-     *
-     */
-    ZYPP_DEPRECATED int  matchType() const { return flags().modeval(); }
-
-
   private:
     /** Pointer to implementation */
     RW_pointer<Impl> _pimpl;

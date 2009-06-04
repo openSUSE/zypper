@@ -46,19 +46,17 @@ public:
   /**
    * Checks validity of authentication data.
    * \return true if the object contains non-empty username and
-   *  non-empty password, false otherwise.  
+   *  non-empty password, false otherwise.
    */
   virtual bool valid() const;
 
   void setUrl(const Url & url) { _url = url; }
   void setUsername(const std::string & username) { _username = username; }
-  /** \deprecated use setUsername() instead */
-  ZYPP_DEPRECATED void setUserName(const std::string & username) { _username = username; }
-  void setPassword(const std::string & password) { _password = password; }  
+  void setPassword(const std::string & password) { _password = password; }
 
   Url url() const { return _url; }
   std::string username() const { return _username; }
-  std::string password() const { return _password; } 
+  std::string password() const { return _password; }
 
   virtual std::ostream & dumpOn( std::ostream & str ) const;
 
@@ -105,7 +103,7 @@ public:
   /**
    * Checks validity of authentication data.
    * \return true if the object contains non-empty username,
-   *  non-empty password, and specifies authentication type; false otherwise.  
+   *  non-empty password, and specifies authentication type; false otherwise.
    */
   virtual bool valid() const;
 
@@ -132,7 +130,7 @@ public:
   long authType() { return _auth_type; } const
   std::string authTypeAsString() { return _auth_type_str; } const
 
-  std::string getUserPwd() const { return username() + ":" + password(); } 
+  std::string getUserPwd() const { return username() + ":" + password(); }
 
 
   /**
@@ -140,7 +138,7 @@ public:
    * into a long of ORed CURLAUTH_* identifiers.
    * The method also automatically leaves out any auth types declared
    * not supported by curl_version_info().
-   * 
+   *
    * \throws MediaException if an invalid authentication type name is
    *         encountered.
    */

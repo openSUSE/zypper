@@ -1019,21 +1019,6 @@ namespace zypp
 
     ///////////////////////////////////////////////////////////////////
 
-    std::string TargetImpl::release() const
-    {
-      std::ifstream suseRelease( (_root / "/etc/SuSE-release").c_str() );
-      for( iostr::EachLine in( suseRelease ); in; in.next() )
-      {
-        std::string line( str::trim( *in ) );
-        if ( ! line.empty() )
-          return line;
-      }
-
-      return _("Unknown Distribution");
-    }
-
-    ///////////////////////////////////////////////////////////////////
-
     Product::constPtr TargetImpl::baseProduct() const
     {
       ResPool pool(ResPool::instance());

@@ -76,10 +76,6 @@ namespace zypp
      */
     void unload();
 
-    /** \deprecated NOOP
-    */
-    ZYPP_DEPRECATED void reset() {}
-
     /** Null implementation */
     static Target_Ptr nullimpl();
 
@@ -118,21 +114,13 @@ namespace zypp
      * if you require some base product attributes when the
      * target is not loaded into the pool, see
      * \ref targetDistribution , \ref targetDistributionRelease
-     * and \ref distributionVersion that obtain the data 
+     * and \ref distributionVersion that obtain the data
      * on demand from the installed product information.
      */
     Product::constPtr baseProduct() const;
 
     /** \name Base product and registration. */
     //@{
-    /** The targets distribution release string (/etc/SuSE-release)
-     * \code
-     *   openSUSE 10.3 (i586)
-     * \endcode
-     * \deprecated \ref targetDistribution might be a better choice as it does not depend on /etc/SuSE-release.
-    */
-    std::string release() const ZYPP_DEPRECATED;
-
     /** This is \c register.target attribute of the installed base product.
      * Used for registration and \ref Service refresh.
      */
@@ -150,7 +138,7 @@ namespace zypp
      */
     std::string distributionVersion() const;
     //@}
-    
+
 
     /**
      * This is \flavor attribute of the installed base product
@@ -159,8 +147,8 @@ namespace zypp
      * been loaded, as the value is not present in the system
      * but computer from a package provides
      */
-    std::string distributionFlavor() const;    
-    
+    std::string distributionFlavor() const;
+
     /**
      * anonymous unique id
      *

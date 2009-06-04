@@ -34,8 +34,6 @@ namespace zypp
   //
   /** String matching option flags as used e.g. by \ref sat::AttrMatcher.
    *
-   *
-   *
    * \code
    * Match mode( Match::GLOB | Match::NOCASE );
    * \endcode

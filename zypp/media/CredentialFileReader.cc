@@ -33,7 +33,7 @@ namespace zypp
 
   //////////////////////////////////////////////////////////////////////
   //
-  // CLASS NAME : CredentialFileReader 
+  // CLASS NAME : CredentialFileReader
   //
   //////////////////////////////////////////////////////////////////////
 
@@ -61,7 +61,7 @@ namespace zypp
 
       AuthData_Ptr credentials;
       credentials.reset(new AuthData());
-      
+
       // set url
       if (storedUrl.isValid())
         credentials->setUrl(storedUrl);
@@ -71,7 +71,7 @@ namespace zypp
            ++it)
       {
         if (it->first == "username")
-          credentials->setUserName(it->second);
+          credentials->setUsername(it->second);
         else if (it->first == "password")
           credentials->setPassword(it->second);
         else

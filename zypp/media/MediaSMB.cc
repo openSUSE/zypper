@@ -341,12 +341,6 @@ namespace zypp {
       mount.umount(attachPoint().asString());
     }
 
-    // deprecated
-    void MediaSMB::releaseFrom( bool eject )
-    {
-      releaseFrom( "" );
-    }
-
     ///////////////////////////////////////////////////////////////////
     //
     //	METHOD NAME : MediaSMB::getFile

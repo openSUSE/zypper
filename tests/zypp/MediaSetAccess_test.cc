@@ -215,7 +215,7 @@ BOOST_AUTO_TEST_CASE(msa_provide_dir)
  */
 BOOST_AUTO_TEST_CASE(msa_provide_dirtree)
 {
-  Url url = (DATADIR + "/src1/cd1").asUrl(); 
+  Url url = (DATADIR + "/src1/cd1").asUrl();
   MediaSetAccess setaccess(url);
 
   Pathname dir = setaccess.provideDir("/dir", true, 1);
@@ -231,28 +231,11 @@ BOOST_AUTO_TEST_CASE(msa_provide_dirtree)
 }
 
 /*
- * Provide optional file
- */
-BOOST_AUTO_TEST_CASE(msa_provide_optional_file)
-{
-  Url url = (DATADIR + "/src1/cd1").asUrl(); 
-  MediaSetAccess setaccess(url);
-
-  // must not throw
-  BOOST_CHECK(setaccess.provideOptionalFile("/foo", 1).empty() == true);
-
-  Pathname file = setaccess.provideOptionalFile("/test.txt", 1);
-  BOOST_CHECK(check_file_exists(file) == true);
-  
-  //! \todo test provideOptionalFile with not desired media
-}
-
-/*
  * file exists local
  */
 BOOST_AUTO_TEST_CASE(msa_file_exist_local)
 {
-  Url url = (DATADIR + "/src1/cd1").asUrl(); 
+  Url url = (DATADIR + "/src1/cd1").asUrl();
   MediaSetAccess setaccess(url);
 
   BOOST_CHECK(setaccess.doesFileExist("/test.txt"));
@@ -272,9 +255,9 @@ BOOST_AUTO_TEST_CASE(msa_remote_tests)
   BOOST_CHECK(setaccess.doesFileExist("/test.txt"));
 
   // check providing a file via http works
-  Pathname local = setaccess.provideFile("/test.txt");  
+  Pathname local = setaccess.provideFile("/test.txt");
   BOOST_CHECK(CheckSum::sha1(sha1sum(local)) == CheckSum::sha1("2616e23301d7fcf7ac3324142f8c748cd0b6692b"));
-  
+
   // providing a file which does not exist should throw
   BOOST_CHECK_THROW(setaccess.provideFile("/testBADNAME.txt"), media::MediaFileNotFoundException);
   web.stop();

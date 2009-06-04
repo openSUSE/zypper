@@ -30,7 +30,7 @@ namespace zypp {
     //	CLASS NAME : MediaNFS
     //
     ///////////////////////////////////////////////////////////////////
-    
+
     ///////////////////////////////////////////////////////////////////
     //
     //
@@ -187,19 +187,6 @@ namespace zypp {
     ///////////////////////////////////////////////////////////////////
     //
     //
-    //	METHOD NAME : MediaNFS::releaseFrom
-    //	METHOD TYPE : PMError
-    //
-    //	DESCRIPTION : Asserted that media is attached.
-    //
-    void MediaNFS::releaseFrom( bool eject )
-    {
-      releaseFrom( "" );
-    }
-
-    ///////////////////////////////////////////////////////////////////
-    //
-    //
     //  METHOD NAME : MediaNFS::releaseFrom
     //  METHOD TYPE : void
     //
@@ -222,7 +209,7 @@ namespace zypp {
     {
       MediaHandler::getFile( filename );;
     }
-    
+
     ///////////////////////////////////////////////////////////////////
     //
     //	METHOD NAME : MediaNFS::getDir
@@ -234,7 +221,7 @@ namespace zypp {
     {
       MediaHandler::getDir( dirname, recurse_r );
     }
-    
+
     ///////////////////////////////////////////////////////////////////
     //
     //
@@ -248,7 +235,7 @@ namespace zypp {
     {
       MediaHandler::getDirInfo( retlist, dirname, dots );
     }
-    
+
     ///////////////////////////////////////////////////////////////////
     //
     //
@@ -266,8 +253,8 @@ namespace zypp {
     bool MediaNFS::getDoesFileExist( const Pathname & filename ) const
     {
       return MediaHandler::getDoesFileExist( filename );
-    }    
+    }
 
-    
+
   } // namespace media
 } // namespace zypp

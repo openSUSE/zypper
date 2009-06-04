@@ -153,10 +153,6 @@ namespace zypp
 
     /** Installed size. */
     ByteCount installSize() const;
-    /** \deprecated Use installSize which is more precise.*/
-    ZYPP_DEPRECATED ByteCount installsize() const { return installSize(); }
-    /** \deprecated Use installSize which is more precise. */
-    ZYPP_DEPRECATED ByteCount size() const { return installSize(); }
 
     /** Size of the rpm package. */
     ByteCount downloadSize() const;

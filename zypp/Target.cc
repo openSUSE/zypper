@@ -94,9 +94,6 @@ namespace zypp
   Date Target::timestamp() const
   { return _pimpl->timestamp(); }
 
-  std::string Target::release() const
-  { return _pimpl->release(); }
-
   std::string Target::distributionFlavor() const
   { return _pimpl->distributionFlavor(); }
 
@@ -114,7 +111,7 @@ namespace zypp
 
   Product::constPtr Target::baseProduct() const
   { return _pimpl->baseProduct(); }
-    
+
 
   /////////////////////////////////////////////////////////////////
 } // namespace zypp

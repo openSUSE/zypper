@@ -93,18 +93,6 @@ namespace zypp
       std::string message( const Locale & lang_r = Locale() ) const;
 
       /**
-       * Use \ref rebootSuggested()
-       */
-      ZYPP_DEPRECATED bool reboot_needed() const
-      { return rebootSuggested(); }
-
-      /**
-       * Use \ref restartSuggested()
-       */
-      ZYPP_DEPRECATED bool affects_pkg_manager() const
-      { return restartSuggested(); }
-
-      /**
        * Is the patch installation interactive? (does it need user input?)
        */
       bool interactive() const;
@@ -129,13 +117,6 @@ namespace zypp
        * references. \see Patch::ReferenceIterator
        */
       ReferenceIterator referencesEnd() const;
-
-    public:
-      /** Patch ID
-       * \deprecated Seems to be unsused autobuild interal data?
-      */
-      ZYPP_DEPRECATED std::string id() const
-      { return std::string(); }
 
     protected:
       friend Ptr make<Self>( const sat::Solvable & solvable_r );

@@ -31,7 +31,7 @@ namespace zypp
   {
     Pathname    _dir;
     std::string _name;
-    
+
     /**
      * \short Ctor
      */
@@ -39,13 +39,13 @@ namespace zypp
       : _dir(dir_r), _name(name_r)
     {
     }
-    
+
     bool operator<( const MediaProductEntry &rhs ) const
     {
       return ( _name < rhs._name );
     }
   };
-  
+
   /**
    * A set of available products in media
    */
@@ -59,7 +59,7 @@ namespace zypp
   {
     std::ifstream pfile( file_r.asString().c_str() );
     while ( pfile.good() ) {
-  
+
       std::string value = str::getline( pfile, str::TRIM );
       if ( pfile.bad() ) {
         ERR << "Error parsing " << file_r << std::endl;
@@ -69,13 +69,13 @@ namespace zypp
         break; // no data on last line
       }
       std::string tag = str::stripFirstWord( value, true );
-  
+
       if ( tag.size() ) {
         *result = MediaProductEntry( tag, value );
       }
     }
   }
-  
+
   /**
    * \short Available products in a url location
    *
@@ -90,9 +90,9 @@ namespace zypp
     media::MediaManager media_mgr;
     // open the media
     media::MediaId id = media_mgr.open(url_r);
-    media_mgr.attachDesiredMedia(id);
+    media_mgr.attach(id);
     Pathname products_file = Pathname("media.1/products");
-  
+
     try  {
       media_mgr.provideFile (id, products_file);
       products_file = media_mgr.localPath (id, products_file);
@@ -104,7 +104,7 @@ namespace zypp
     }
     media_mgr.release(id, "");
  }
- 
+
  /**
    * \short Available products in a url location
    *

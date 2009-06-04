@@ -31,7 +31,9 @@ namespace zypp
     /** \defgroup ZYPP_STR_REGEX Regular expressions
      *
      * Namespace zypp::str regular expressions \b using the glibc regex library.
-     * 
+     *
+     * \see \ref sat::AttrMatcher string matcher supporing regex, globing, etc.
+     *
      * regex
      * regex_match
      * smatch
@@ -50,6 +52,10 @@ namespace zypp
     inline bool regex_match(const std::string& s, const regex& regex)
     { return regex_match( s.c_str(), regex ); }
 
+    /**
+     * \see \ref sat::AttrMatcher string matcher supporing regex, globing, etc.
+     * \ingroup ZYPP_STR_REGEX
+     */
     class regex {
     public:
 
@@ -96,6 +102,10 @@ namespace zypp
       bool m_valid;
     };
 
+    /**
+     * \ingroup ZYPP_STR_REGEX
+     * \see regex
+     */
     class smatch {
     public:
       smatch();

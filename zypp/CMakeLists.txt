@@ -19,7 +19,6 @@ SET( zypp_SRCS
   Digest.cc
   DiskUsage.cc
   DiskUsageCounter.cc
-  dummy.cc
   Edition.cc
   ExternalProgram.cc
   Fetcher.cc
@@ -697,7 +696,6 @@ INSTALL(  FILES
 )
 
 SET( zypp_repo_SRCS
-  repo/dummy.cc
   repo/RepoException.cc
   repo/RepoType.cc
   repo/ServiceType.cc

@@ -182,7 +182,7 @@ namespace zypp
         ZYPP_THROW(MediaNotSupportedException(_url));
 
       MediaManager manager;
-      manager.attach(_parentId, false);
+      manager.attach(_parentId);
 
       try
       {

@@ -561,20 +561,7 @@ namespace zypp
     }
 
     // ---------------------------------------------------------------
-    void
-    MediaManager::attach(MediaAccessId accessId, bool next)
-    {
-      MutexLock glock(g_Mutex);
-
-      ManagedMedia &ref( m_impl->findMM(accessId));
-
-      DBG << "attach(id=" << accessId << ")" << std::endl;
-
-      return ref.handler->attach(next);
-    }
-
-    // ---------------------------------------------------------------
-    void MediaManager::attachDesiredMedia(MediaAccessId accessId)
+    void MediaManager::attach(MediaAccessId accessId)
     {
       MutexLock glock(g_Mutex);
 

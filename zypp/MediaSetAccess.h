@@ -167,23 +167,6 @@ namespace zypp
       Pathname provideFile(const Pathname & file, unsigned media_nr = 1, ProvideFileOptions options = PROVIDE_DEFAULT );
 
       /**
-       * \deprecated
-       * The same as provideFile(Pathname,unsigned) but this method does not
-       * call the user callbacks, except of the case of
-       * wrong media in the drive, and it won't throw an exception in any case.
-       *
-       * \return Path to the provided file on success, an empty Pathname() otherwise.
-       * This method is obsolete.
-       *
-       * To avoid interaction with the user, 
-       * use \ref provideFile with \ref ProvideFileOptions::NON_INTERACTIVE
-       * as an option. However you need to handle the exceptions yourself
-       * in case of error. If you need ignore functionality, try
-       * \ref Fetcher and set \ref OnMediaLocation::setOptional 
-       */
-      ZYPP_DEPRECATED Pathname provideOptionalFile( const Pathname & file, unsigned media_nr = 1 );
-
-      /**
        * Release file from media.
        * This signal that file is not needed anymore.
        *
