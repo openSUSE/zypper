@@ -171,6 +171,15 @@ namespace zypp
 
 	bool	     installOnly() const;
 
+        /** String representation <tt>"ident-edition.arch"</tt> or \c "noSolvable"
+         * \code
+         *   product:openSUSE-11.1.x86_64
+         *   autoyast2-2.16.19-0.1.src
+         *   noSolvable
+         * \endcode
+        */
+        std::string asString() const;
+
       public:
 
         /** \name Access to the \ref Solvable dependencies.

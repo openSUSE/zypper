@@ -423,6 +423,16 @@ namespace zypp
                    : Capabilities();
     }
 
+    std::string Solvable::asString() const
+    {
+      NO_SOLVABLE_RETURN( (_id == detail::systemSolvableId ? "systemSolvable" : "noSolvable") );
+      return str::form( "%s-%s.%s",
+                        IdString( _solvable->name ).c_str(),
+                        IdString( _solvable->evr ).c_str(),
+                        IdString( _solvable->arch ).c_str() );
+    }
+
+
     ///////////////////////////////////////////////////////////////////
     namespace
     { /////////////////////////////////////////////////////////////////

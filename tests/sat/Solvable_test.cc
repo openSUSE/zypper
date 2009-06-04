@@ -22,6 +22,7 @@ BOOST_AUTO_TEST_CASE(test_init)
 {
   TestSetup test( Arch_x86_64 );
   test.loadRepo( TESTS_SRC_DIR "/data/openSUSE-11.1", "opensuse" );
+  test.loadRepo( TESTS_SRC_DIR "/data/11.0-update", "update" );
 }
 
 
@@ -84,6 +85,21 @@ BOOST_AUTO_TEST_CASE(attributes)
     // check that we actually found all testeable
     // resolvables
     BOOST_CHECK_EQUAL(c, 2);
-
-
 }
+
+BOOST_AUTO_TEST_CASE(asString)
+{
+  BOOST_CHECK_EQUAL( sat::Solvable(0).asString(), "noSolvable" );
+  BOOST_CHECK_EQUAL( sat::Solvable(1).asString(), "systemSolvable" );
+  BOOST_CHECK_EQUAL( sat::Solvable(2).asString(), "product:openSUSE-11.1.x86_64" );
+  BOOST_CHECK_EQUAL( sat::Solvable(3693).asString(), "autoyast2-2.16.19-0.1.src" );
+  BOOST_CHECK_EQUAL( sat::Solvable(19222).asString(), "noSolvable" );
+#if 0
+  Repository r = sat::Pool::instance().reposFind("update");
+  for_( it, r.solvablesBegin(), r.solvablesEnd() )
+  {
+    BOOST_CHECK_EQUAL( (*it).asString(), str::numstring((*it).id()) );
+  }
+#endif
+}
+
