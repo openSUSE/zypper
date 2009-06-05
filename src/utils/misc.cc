@@ -259,7 +259,7 @@ Pathname cache_rpm(const string & rpm_uri_str, const string & cache_dir)
   {
     media::MediaManager mm;
     media::MediaAccessId mid = mm.open(rpmurl);
-    mm.attachDesiredMedia(mid);
+    mm.attach(mid);
 
     mm.provideFile(mid, rpmpath.basename());
     Pathname localrpmpath = mm.localPath(mid, rpmpath.basename());

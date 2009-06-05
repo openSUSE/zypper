@@ -1,4 +1,9 @@
 -------------------------------------------------------------------
+Thu Jun  4 16:14:17 CEST 2009 - ma@suse.de
+
+- Adapt to libzypp-6.8.0 api changes.
+
+-------------------------------------------------------------------
 Fri May 22 12:39:03 CEST 2009 - jkupec@suse.cz
 
 - Fixed some help issues (bnc #505938)
@@ -91,7 +96,7 @@ Tue Feb 24 16:38:16 CET 2009 - ma@suse.de
 
 - Let 'zypper clean' keep the raw metadata cache of CD/DVD based
   repositories. We'd need the CD/DVD again to recreate the data.
-  If this is actually desired, explicitly remove an recreate the 
+  If this is actually desired, explicitly remove an recreate the
   CD/DVD based repository. (bnc #476429).
 
 -------------------------------------------------------------------
@@ -195,7 +200,7 @@ Mon Nov 24 20:44:40 CET 2008 - jkupec@suse.cz
 Mon Nov 24 16:21:02 CET 2008 - jkupec@suse.cz
 
 - fixed generation of solver testcases for verify and dist-upgrade
-- r11789 
+- r11789
 
 -------------------------------------------------------------------
 Wed Nov 19 15:57:27 CET 2008 - jkupec@suse.cz
@@ -476,7 +481,7 @@ Sun Sep 14 00:05:59 CEST 2008 - jkupec@suse.cz
 
 - modifyservice --{ar,rr,cl}-to-{enable,disable} options added
   (fate #304915)
-- modifyservice can now modify also non-service repos 
+- modifyservice can now modify also non-service repos
 - r11061
 
 -------------------------------------------------------------------
@@ -544,8 +549,8 @@ Mon Sep  8 19:36:42 CEST 2008 - jkupec@suse.cz
 -------------------------------------------------------------------
 Tue Aug 19 16:39:32 CEST 2008 - dmacvicar@suse.de
 
-- confirm unsupported packages in SLE 
-  (fate#305057) 
+- confirm unsupported packages in SLE
+  (fate#305057)
 
 -------------------------------------------------------------------
 Mon Aug 18 17:50:02 CEST 2008 - dmacvicar@suse.de
