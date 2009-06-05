@@ -29,7 +29,6 @@ extern "C"
 #include <satsolver/queue.h>
 }
 
-#include <sstream>
 #include "zypp/solver/detail/Helper.h"
 #include "zypp/base/String.h"
 #include "zypp/Capability.h"
@@ -71,36 +70,26 @@ IMPL_PTR_TYPE(SATResolver);
 //---------------------------------------------------------------------------
 
 int vendorCheck (Pool *pool, Solvable *solvable1, Solvable *solvable2) {
-//    DBG << "vendorCheck: " << id2str(pool, solvable1->vendor) << " <--> " << id2str(pool, solvable1->vendor) << endl;
-    return VendorAttr::instance().equivalent(id2str(pool, solvable1->vendor), id2str(pool, solvable2->vendor)) ? 0:1;
+//    DBG << "vendorCheck: " << IdString(solvable1->vendor) << " <--> " << IdString(solvable2->vendor) << endl;
+    return VendorAttr::instance().equivalent( IdString(solvable1->vendor).asString(),
+                                              IdString(solvable2->vendor).asString() ) ? 0 : 1;
 }
 
 
-string
-itemToString (PoolItem item, bool shortVersion)
+inline std::string itemToString( const PoolItem & item )
 {
-    ostringstream os;
-    if (!item) return "";
+  if ( !item )
+    return std::string();
 
-    if (item->kind() != ResKind::package)
-	os << item->kind() << ':';
-    os  << item->name();
-    if (!shortVersion) {
-	os << '-' << item->edition();
-	if (item->arch() != "") {
-	    os << '.' << item->arch();
-	}
-	Repository s = item->repository();
-	if (s) {
-	    string alias = s.info().alias();
-	    if (!alias.empty()
-		&& alias != "@system")
-	    {
-		os << '[' << s.info().alias() << ']';
-	    }
-	}
-    }
-    return os.str();
+  sat::Solvable slv( item.satSolvable() );
+  std::string ret( slv.asString() ); // n-v-r.a
+  if ( ! slv.isSystem() )
+  {
+    ret += "[";
+    ret += slv.repository().alias();
+    ret += "]";
+  }
+  return ret;
 }
 
 
@@ -926,15 +915,15 @@ string SATResolver::SATprobleminfoString(Id problem, string &detail, Id &ignoreI
   {
       case SOLVER_PROBLEM_DISTUPGRADE_RULE:
 	  s = mapSolvable (source);
-	  ret = str::form (_("%s does not belong to a distupgrade repository"), solvable2str(pool, s.get()));
+	  ret = str::form (_("%s does not belong to a distupgrade repository"), s.asString().c_str());
   	  break;
       case SOLVER_PROBLEM_INFARCH_RULE:
 	  s = mapSolvable (source);
-	  ret = str::form (_("%s has inferior architecture"), solvable2str(pool, s.get()));
+	  ret = str::form (_("%s has inferior architecture"), s.asString().c_str());
 	  break;
       case SOLVER_PROBLEM_UPDATE_RULE:
 	  s = mapSolvable (source);
-	  ret = str::form (_("problem with installed package %s"), solvable2str(pool, s.get()));
+	  ret = str::form (_("problem with installed package %s"), s.asString().c_str());
 	  break;
       case SOLVER_PROBLEM_JOB_RULE:
 	  ret = _("conflicting requests");
@@ -948,30 +937,30 @@ string SATResolver::SATprobleminfoString(Id problem, string &detail, Id &ignoreI
 	  break;
       case SOLVER_PROBLEM_NOT_INSTALLABLE:
 	  s = mapSolvable (source);
-	  ret = str::form (_("%s is not installable"), solvable2str(pool, s.get()));
+	  ret = str::form (_("%s is not installable"), s.asString().c_str());
 	  break;
       case SOLVER_PROBLEM_NOTHING_PROVIDES_DEP:
 	  s = mapSolvable (source);
-	  ret = str::form (_("nothing provides %s needed by %s"), dep2str(pool, dep), solvable2str(pool, s.get()));
+	  ret = str::form (_("nothing provides %s needed by %s"), dep2str(pool, dep), s.asString().c_str());
 	  break;
       case SOLVER_PROBLEM_SAME_NAME:
 	  s = mapSolvable (source);
 	  s2 = mapSolvable (target);
-	  ret = str::form (_("cannot install both %s and %s"), solvable2str(pool, s.get()), solvable2str(pool, s2.get()));
+	  ret = str::form (_("cannot install both %s and %s"), s.asString().c_str(), s2.asString().c_str());
 	  break;
       case SOLVER_PROBLEM_PACKAGE_CONFLICT:
 	  s = mapSolvable (source);
 	  s2 = mapSolvable (target);
-	  ret = str::form (_("%s conflicts with %s provided by %s"), solvable2str(pool, s.get()), dep2str(pool, dep), solvable2str(pool, s2.get()));
+	  ret = str::form (_("%s conflicts with %s provided by %s"), s.asString().c_str(), dep2str(pool, dep), s2.asString().c_str());
 	  break;
       case SOLVER_PROBLEM_PACKAGE_OBSOLETES:
 	  s = mapSolvable (source);
 	  s2 = mapSolvable (target);
-	  ret = str::form (_("%s obsoletes %s provided by %s"), solvable2str(pool, s.get()), dep2str(pool, dep), solvable2str(pool, s2.get()));
+	  ret = str::form (_("%s obsoletes %s provided by %s"), s.asString().c_str(), dep2str(pool, dep), s2.asString().c_str());
 	  break;
       case SOLVER_PROBLEM_SELF_CONFLICT:
 	  s = mapSolvable (source);
-	  ret = str::form (_("solvable %s conflicts with %s provided by itself"), solvable2str(pool, s.get()), dep2str(pool, dep));
+	  ret = str::form (_("solvable %s conflicts with %s provided by itself"), s.asString().c_str(), dep2str(pool, dep));
           break;
       case SOLVER_PROBLEM_DEP_PROVIDERS_NOT_INSTALLABLE:
 	  ignoreId = source; // for setting weak dependencies
@@ -1003,14 +992,14 @@ string SATResolver::SATprobleminfoString(Id problem, string &detail, Id &ignoreI
 	      }
 	  }
 
-	  ret = str::form (_("%s requires %s, but this requirement cannot be provided"), solvable2str(pool, s.get()), dep2str(pool, dep));
+	  ret = str::form (_("%s requires %s, but this requirement cannot be provided"), s.asString().c_str(), dep2str(pool, dep));
 	  if (providerlistInstalled.size() > 0) {
 	      detail += _("deleted providers: ");
 	      for (ProviderList::const_iterator iter = providerlistInstalled.begin(); iter != providerlistInstalled.end(); iter++) {
 		  if (iter == providerlistInstalled.begin())
-		      detail += itemToString (*iter, false);
+		      detail += itemToString( *iter );
 		  else
-		      detail += "\n                   " + itemToString (mapItem(*iter), false);
+		      detail += "\n                   " + itemToString( mapItem(*iter) );
 	      }
 	  }
 	  if (providerlistUninstalled.size() > 0) {
@@ -1020,9 +1009,9 @@ string SATResolver::SATprobleminfoString(Id problem, string &detail, Id &ignoreI
 		  detail = _("uninstallable providers: ");
 	      for (ProviderList::const_iterator iter = providerlistUninstalled.begin(); iter != providerlistUninstalled.end(); iter++) {
 		  if (iter == providerlistUninstalled.begin())
-		      detail += itemToString (*iter, false);
+		      detail += itemToString( *iter );
 		  else
-		      detail += "\n                   " + itemToString (mapItem(*iter), false);
+		      detail += "\n                   " + itemToString( mapItem(*iter) );
 	      }
 	  }
 	  break;
@@ -1074,18 +1063,17 @@ SATResolver::problems ()
 				if (poolItem) {
 				    if (_solv->installed && s.get()->repo == _solv->installed) {
 					problemSolution->addSingleAction (poolItem, REMOVE);
-					string description = str::form (_("do not keep %s installed"),  solvable2str(pool, s.get()) );
+					string description = str::form (_("do not keep %s installed"),  s.asString().c_str() );
 					MIL << description << endl;
 					problemSolution->addDescription (description);
 				    } else {
 					problemSolution->addSingleAction (poolItem, KEEP);
-					string description = str::form (_("do not install %s"), solvable2str(pool, s.get()));
+					string description = str::form (_("do not install %s"), s.asString().c_str());
 					MIL << description << endl;
 					problemSolution->addDescription (description);
 				    }
 				} else {
-				    ERR << "SOLVER_INSTALL_SOLVABLE: No item found for " << id2str(pool, s.get()->name) << "-"
-					<<  id2str(pool, s.get()->evr) << "." <<  id2str(pool, s.get()->arch) << endl;
+				    ERR << "SOLVER_INSTALL_SOLVABLE: No item found for " << s.asString() << endl;
 				}
 			    }
 				break;
@@ -1095,18 +1083,17 @@ SATResolver::problems ()
 				if (poolItem) {
 				    if (_solv->installed && s.get()->repo == _solv->installed) {
 					problemSolution->addSingleAction (poolItem, KEEP);
-					string description = str::form (_("keep %s"), solvable2str(pool, s.get()));
+					string description = str::form (_("keep %s"), s.asString().c_str());
 					MIL << description << endl;
 					problemSolution->addDescription (description);
 				    } else {
 					problemSolution->addSingleAction (poolItem, UNLOCK);
-					string description = str::form (_("do not forbid installation of %s"), itemToString(poolItem, false).c_str());
+					string description = str::form (_("do not forbid installation of %s"), itemToString( poolItem ).c_str());
 					MIL << description << endl;
 					problemSolution->addDescription (description);
 				    }
 				} else {
-				    ERR << "SOLVER_ERASE_SOLVABLE: No item found for " << id2str(pool, s.get()->name) << "-" <<  id2str(pool, s.get()->evr) << "." <<
-					id2str(pool, s.get()->arch) << endl;
+				    ERR << "SOLVER_ERASE_SOLVABLE: No item found for " << s.asString() << endl;
 				}
 			    }
 				break;
@@ -1193,15 +1180,14 @@ SATResolver::problems ()
 				if (poolItem) {
 				    if (_solv->installed && s.get()->repo == _solv->installed) {
 					problemSolution->addSingleAction (poolItem, KEEP);
-					string description = str::form (_("do not install most recent version of %s"), solvable2str(pool, s.get()));
+					string description = str::form (_("do not install most recent version of %s"), s.asString().c_str());
 					MIL << description << endl;
 					problemSolution->addDescription (description);
 				    } else {
 					ERR << "SOLVER_INSTALL_SOLVABLE_UPDATE " << poolItem << " is not selected for installation" << endl;
 				    }
 				} else {
-				    ERR << "SOLVER_INSTALL_SOLVABLE_UPDATE: No item found for " << id2str(pool, s.get()->name) << "-" <<  id2str(pool, s.get()->evr) << "." <<
-					id2str(pool, s.get()->arch) << endl;
+				    ERR << "SOLVER_INSTALL_SOLVABLE_UPDATE: No item found for " << s.asString() << endl;
 				}
 				}
 				break;
@@ -1215,12 +1201,12 @@ SATResolver::problems ()
 			PoolItem poolItem = _pool.find (s);
 			if (_solv->installed && s.get()->repo == _solv->installed) {
 			    problemSolution->addSingleAction (poolItem, KEEP);
-			    string description = str::form (_("keep %s despite the inferior architecture"), solvable2str(pool, s.get()));
+			    string description = str::form (_("keep %s despite the inferior architecture"), s.asString().c_str());
 			    MIL << description << endl;
 			    problemSolution->addDescription (description);
 			} else {
 			    problemSolution->addSingleAction (poolItem, INSTALL);
-			    string description = str::form (_("install %s despite the inferior architecture"), solvable2str(pool, s.get()));
+			    string description = str::form (_("install %s despite the inferior architecture"), s.asString().c_str());
 			    MIL << description << endl;
 			    problemSolution->addDescription (description);
 			}
@@ -1229,12 +1215,12 @@ SATResolver::problems ()
 			PoolItem poolItem = _pool.find (s);
 			if (_solv->installed && s.get()->repo == _solv->installed) {
 			    problemSolution->addSingleAction (poolItem, KEEP);
-			    string description = str::form (_("keep obsolete %s"), solvable2str(pool, s.get()));
+			    string description = str::form (_("keep obsolete %s"), s.asString().c_str());
 			    MIL << description << endl;
 			    problemSolution->addDescription (description);
 			} else {
 			    problemSolution->addSingleAction (poolItem, INSTALL);
-			    string description = str::form (_("install %s from excluded repository"), solvable2str(pool, s.get()));
+			    string description = str::form (_("install %s from excluded repository"), s.asString().c_str());
 			    MIL << description << endl;
 			    problemSolution->addDescription (description);
 			}
@@ -1250,12 +1236,11 @@ SATResolver::problems ()
 			    PoolItem poolItem = _pool.find (s);
 			    if (poolItem) {
 				problemSolution->addSingleAction (poolItem, LOCK); // for solver reason: NOT weak lock.
-				string description = str::form (_("keep %s"), solvable2str(pool, s.get()));
+				string description = str::form (_("keep %s"), s.asString().c_str());
 				MIL << description << endl;
 				problemSolution->addDescription (description);
 			    } else {
-				ERR << "SOLVER_INSTALL_SOLVABLE: No item found for " << id2str(pool, s.get()->name) << "-"
-				    <<  id2str(pool, s.get()->evr) << "." <<  id2str(pool, s.get()->arch) << endl;
+				ERR << "SOLVER_INSTALL_SOLVABLE: No item found for " << s.asString() << endl;
 			    }
 			}
 			else if (rp)
@@ -1268,7 +1253,7 @@ SATResolver::problems ()
 
 				if (evrcmp(pool, s.get()->evr, sd.get()->evr, EVRCMP_COMPARE ) > 0)
 				{
-				    string description = str::form (_("downgrade of %s to %s"), solvable2str(pool, s.get()), solvable2str(pool, sd.get()));
+				    string description = str::form (_("downgrade of %s to %s"), s.asString().c_str(), sd.asString().c_str());
 				    MIL << description << endl;
 				    problemSolution->addDescription (description);
 				    gotone = 1;
@@ -1276,7 +1261,7 @@ SATResolver::problems ()
 				if (!_solv->allowarchchange && s.get()->name == sd.get()->name && s.get()->arch != sd.get()->arch
 				    && policy_illegal_archchange(_solv, s.get(), sd.get()))
 				{
-				    string description = str::form (_("architecture change of %s to %s"), solvable2str(pool, s.get()), solvable2str(pool, sd.get()));
+				    string description = str::form (_("architecture change of %s to %s"), s.asString().c_str(), sd.asString().c_str());
 				    MIL << description << endl;
 				    problemSolution->addDescription (description);
 				    gotone = 1;
@@ -1284,27 +1269,29 @@ SATResolver::problems ()
 				if (!_solv->allowvendorchange && s.get()->name == sd.get()->name && s.get()->vendor != sd.get()->vendor
 				    && policy_illegal_vendorchange(_solv, s.get(), sd.get()))
 				{
+                                    IdString s_vendor( s.vendor() );
+                                    IdString sd_vendor( sd.vendor() );
 				    string description = str::form (_("install %s (with vendor change)\n  %s\n-->\n  %s") ,
-								    solvable2str(pool, sd.get()) , id2str(pool, s.get()->vendor),
-								    string(sd.get()->vendor ?  id2str(pool, sd.get()->vendor) : " (no vendor) ").c_str() );
+								    sd.asString().c_str(),
+                                                                    ( s_vendor ? s_vendor.c_str() : " (no vendor) " ),
+                                                                    ( sd_vendor ? sd_vendor.c_str() : " (no vendor) " ) );
 				    MIL << description << endl;
 				    problemSolution->addDescription (description);
 				    gotone = 1;
 				}
 				if (!gotone) {
-				    string description = str::form (_("replacement of %s with %s"), solvable2str(pool, s.get()), solvable2str(pool, sd.get()));
+				    string description = str::form (_("replacement of %s with %s"), s.asString().c_str(), sd.asString().c_str());
 				    MIL << description << endl;
 				    problemSolution->addDescription (description);
 				}
 			    } else {
-				ERR << id2str(pool, s.get()->name) << "-" <<  id2str(pool, s.get()->evr) << "." <<  id2str(pool, s.get()->arch)
-				    << " or "  << id2str(pool, sd.get()->name) << "-" <<  id2str(pool, sd.get()->evr) << "." <<  id2str(pool, sd.get()->arch) << " not found" << endl;
+				ERR << s.asString() << " or "  << sd.asString() << " not found" << endl;
 			    }
 			}
 			else
 			{
 			    if (itemFrom) {
-				string description = str::form (_("deinstallation of %s"), solvable2str(pool, s.get()));
+				string description = str::form (_("deinstallation of %s"), s.asString().c_str());
 				MIL << description << endl;
 				problemSolution->addDescription (description);
 				problemSolution->addSingleAction (itemFrom, REMOVE);
