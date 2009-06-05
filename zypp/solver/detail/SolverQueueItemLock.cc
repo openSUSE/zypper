@@ -17,13 +17,16 @@
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA
  * 02111-1307, USA.
  */
+extern "C"
+{
+#include <satsolver/solver.h>
+}
 
 #include "zypp/base/Logger.h"
 #include "zypp/solver/detail/SolverQueueItemLock.h"
-#include "satsolver/solver.h"
 
 /////////////////////////////////////////////////////////////////////////
-namespace zypp 
+namespace zypp
 { ///////////////////////////////////////////////////////////////////////
   ///////////////////////////////////////////////////////////////////////
   namespace solver
@@ -72,20 +75,20 @@ bool SolverQueueItemLock::addRule (_Queue & q)
 	return false;
     }
     MIL << "Lock " << _item << " with the SAT-Pool ID: " << id << endl;
-    if (_item.status().isInstalled()) {    
-	if (_soft) {    
+    if (_item.status().isInstalled()) {
+	if (_soft) {
 	    queue_push( &(q), SOLVER_INSTALL_SOLVABLE | SOLVER_WEAK );
 	} else {
-	    queue_push( &(q), SOLVER_INSTALL_SOLVABLE );	
+	    queue_push( &(q), SOLVER_INSTALL_SOLVABLE );
 	}
     } else {
-	if (_soft) {    
+	if (_soft) {
 	    queue_push( &(q), SOLVER_ERASE_SOLVABLE | SOLVER_WEAK );
 	} else {
-	    queue_push( &(q), SOLVER_ERASE_SOLVABLE );	
-	}	
+	    queue_push( &(q), SOLVER_ERASE_SOLVABLE );
+	}
     }
-    queue_push( &(q), id );    
+    queue_push( &(q), id );
     return true;
 }
 

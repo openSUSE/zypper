@@ -17,15 +17,18 @@
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA
  * 02111-1307, USA.
  */
+extern "C"
+{
+#include <satsolver/solver.h>
+}
 
 #include "zypp/base/Logger.h"
 #include "zypp/IdString.h"
 #include "zypp/IdStringType.h"
 #include "zypp/solver/detail/SolverQueueItemInstall.h"
-#include "satsolver/solver.h"
 
 /////////////////////////////////////////////////////////////////////////
-namespace zypp 
+namespace zypp
 { ///////////////////////////////////////////////////////////////////////
   ///////////////////////////////////////////////////////////////////////
   namespace solver
@@ -46,7 +49,7 @@ SolverQueueItemInstall::dumpOn( std::ostream & os ) const
     os << "[" << (_soft?"Soft":"") << "Install: "
     << _name
     << "]";
-    
+
     return os;
 }
 
@@ -69,7 +72,7 @@ SolverQueueItemInstall::~SolverQueueItemInstall()
 bool SolverQueueItemInstall::addRule (_Queue & q)
 {
     ::Id id = IdString(_name).id();
-    if (_soft) {    
+    if (_soft) {
 	queue_push( &(q), SOLVER_INSTALL_SOLVABLE_NAME | SOLVER_WEAK  );
     } else {
 	queue_push( &(q), SOLVER_INSTALL_SOLVABLE_NAME );
@@ -77,7 +80,7 @@ bool SolverQueueItemInstall::addRule (_Queue & q)
     queue_push( &(q), id);
 
     MIL << "Install " << _name << (_soft ? "(soft)" : "")
-	<< " with SAT-PoolID: " << id << endl;        
+	<< " with SAT-PoolID: " << id << endl;
     return true;
 }
 
@@ -100,7 +103,7 @@ SolverQueueItemInstall::cmp (SolverQueueItem_constPtr item) const
     SolverQueueItemInstall_constPtr ins = dynamic_pointer_cast<const SolverQueueItemInstall>(item);
     if (_name != ins->_name) {
 	return _name.compare(ins->_name);
-    } 
+    }
     return 0;
 }
 

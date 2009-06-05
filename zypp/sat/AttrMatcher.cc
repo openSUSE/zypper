@@ -11,7 +11,7 @@
 */
 extern "C"
 {
-#include "satsolver/repo.h"
+#include <satsolver/repo.h>
 }
 
 #include <iostream>

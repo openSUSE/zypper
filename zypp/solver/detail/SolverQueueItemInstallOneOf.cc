@@ -17,14 +17,17 @@
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA
  * 02111-1307, USA.
  */
+extern "C"
+{
+#include <satsolver/solver.h>
+}
 
 #include "zypp/base/Logger.h"
 #include "zypp/solver/detail/SolverQueueItemInstallOneOf.h"
-#include "satsolver/solver.h"
 #include "zypp/sat/Pool.h"
 
 /////////////////////////////////////////////////////////////////////////
-namespace zypp 
+namespace zypp
 { ///////////////////////////////////////////////////////////////////////
   ///////////////////////////////////////////////////////////////////////
   namespace solver
@@ -48,7 +51,7 @@ SolverQueueItemInstallOneOf::dumpOn( std::ostream & os ) const
 	 iter++)
 	os << *iter;
     os << "]";
-    
+
     return os;
 }
 
@@ -58,7 +61,7 @@ SolverQueueItemInstallOneOf::SolverQueueItemInstallOneOf (const ResPool & pool, 
 							  bool soft)
     : SolverQueueItem (QUEUE_ITEM_TYPE_INSTALL_ONE_OF, pool)
     , _oneOfList (itemList)
-    , _soft (soft)    
+    , _soft (soft)
 {
 }
 
@@ -74,14 +77,14 @@ bool SolverQueueItemInstallOneOf::addRule (_Queue & q)
     bool ret = true;
     MIL << "Install one of " << (_soft ? "(soft):" : ":")<< endl;
     Queue qs;
-    
-    if (_soft) {    
+
+    if (_soft) {
 	queue_push( &(q), SOLVER_INSTALL_SOLVABLE_ONE_OF | SOLVER_WEAK);
     } else {
 	queue_push( &(q), SOLVER_INSTALL_SOLVABLE_ONE_OF );
     }
 
-    queue_init(&qs);    
+    queue_init(&qs);
     for (PoolItemList::const_iterator iter = _oneOfList.begin(); iter != _oneOfList.end(); iter++) {
 	Id id = (*iter)->satSolvable().id();
 	if (id == ID_NULL) {
@@ -89,13 +92,13 @@ bool SolverQueueItemInstallOneOf::addRule (_Queue & q)
 	    ret = false;
 	} else {
 	    MIL << "    candidate:" << *iter << " with the SAT-Pool ID: " << id << endl;
-	    queue_push( &(qs), id );    		    
+	    queue_push( &(qs), id );
 	}
     }
-    sat::Pool satPool( sat::Pool::instance() );    
+    sat::Pool satPool( sat::Pool::instance() );
     queue_push( &(q), pool_queuetowhatprovides(satPool.get(), &qs));
     queue_free(&qs);
-    
+
     return ret;
 }
 
@@ -105,7 +108,7 @@ SolverQueueItemInstallOneOf::copy (void) const
     SolverQueueItemInstallOneOf_Ptr new_installOneOf = new SolverQueueItemInstallOneOf (pool(), _oneOfList);
     new_installOneOf->SolverQueueItem::copy(this);
     new_installOneOf->_soft = _soft;
-    
+
     return new_installOneOf;
 }
 

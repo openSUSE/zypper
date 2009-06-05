@@ -18,6 +18,17 @@
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA
  * 02111-1307, USA.
  */
+extern "C"
+{
+#include <satsolver/repo_solv.h>
+#include <satsolver/poolarch.h>
+#include <satsolver/evr.h>
+#include <satsolver/poolvendor.h>
+#include <satsolver/policy.h>
+#include <satsolver/bitmap.h>
+#include <satsolver/queue.h>
+}
+
 #include <sstream>
 #include "zypp/solver/detail/Helper.h"
 #include "zypp/base/String.h"
@@ -40,16 +51,6 @@
 #include "zypp/solver/detail/SolverQueueItemInstall.h"
 #include "zypp/solver/detail/SolverQueueItemDelete.h"
 #include "zypp/solver/detail/SystemCheck.h"
-
-extern "C" {
-#include "satsolver/repo_solv.h"
-#include "satsolver/poolarch.h"
-#include "satsolver/evr.h"
-#include "satsolver/poolvendor.h"
-#include "satsolver/policy.h"
-#include "satsolver/bitmap.h"
-#include "satsolver/queue.h"
-}
 
 /////////////////////////////////////////////////////////////////////////
 namespace zypp

@@ -17,13 +17,16 @@
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA
  * 02111-1307, USA.
  */
+extern "C"
+{
+#include <satsolver/solver.h>
+}
 
 #include "zypp/base/Logger.h"
 #include "zypp/solver/detail/SolverQueueItem.h"
-#include "satsolver/solver.h"
 
 /////////////////////////////////////////////////////////////////////////
-namespace zypp 
+namespace zypp
 { ///////////////////////////////////////////////////////////////////////
   ///////////////////////////////////////////////////////////////////////
   namespace solver
@@ -44,10 +47,10 @@ SolverQueueItem::dumpOn( std::ostream & os ) const
     switch (_type) {
       case QUEUE_ITEM_TYPE_UNKNOWN       :	os << "unknown"; break;
       case QUEUE_ITEM_TYPE_UPDATE        :	os << "update"; break;
-      case QUEUE_ITEM_TYPE_LOCK          :	os << "lock"; break;	  
+      case QUEUE_ITEM_TYPE_LOCK          :	os << "lock"; break;
       case QUEUE_ITEM_TYPE_INSTALL       :	os << "install"; break;
       case QUEUE_ITEM_TYPE_DELETE        :	os << "delete"; break;
-      case QUEUE_ITEM_TYPE_INSTALL_ONE_OF:	os << "install one of"; break;	  
+      case QUEUE_ITEM_TYPE_INSTALL_ONE_OF:	os << "install one of"; break;
       default: os << "?solverqueueitem?"; break;
     }
     return os;

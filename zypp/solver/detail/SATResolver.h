@@ -22,6 +22,12 @@
 #ifndef ZYPP_SOLVER_DETAIL_SAT_RESOLVER_H
 #define ZYPP_SOLVER_DETAIL_SAT_RESOLVER_H
 
+extern "C"
+{
+#include <satsolver/solver.h>
+#include <satsolver/pool.h>
+}
+
 #include <iosfwd>
 #include <list>
 #include <map>
@@ -36,10 +42,6 @@
 #include "zypp/ProblemSolution.h"
 #include "zypp/Capability.h"
 #include "zypp/solver/detail/SolverQueueItem.h"
-extern "C" {
-#include "satsolver/solver.h"
-#include "satsolver/pool.h"
-}
 
 
 /////////////////////////////////////////////////////////////////////////

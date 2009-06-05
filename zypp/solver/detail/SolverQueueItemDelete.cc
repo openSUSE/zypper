@@ -17,14 +17,17 @@
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA
  * 02111-1307, USA.
  */
+extern "C"
+{
+#include <satsolver/solver.h>
+}
 
 #include "zypp/base/Logger.h"
 #include "zypp/IdString.h"
 #include "zypp/solver/detail/SolverQueueItemDelete.h"
-#include "satsolver/solver.h"
 
 /////////////////////////////////////////////////////////////////////////
-namespace zypp 
+namespace zypp
 { ///////////////////////////////////////////////////////////////////////
   ///////////////////////////////////////////////////////////////////////
   namespace solver
@@ -67,15 +70,15 @@ SolverQueueItemDelete::~SolverQueueItemDelete()
 bool SolverQueueItemDelete::addRule (_Queue & q)
 {
     ::Id id = IdString(_name).id();
-    if (_soft) {    
+    if (_soft) {
 	queue_push( &(q), SOLVER_ERASE_SOLVABLE_NAME | SOLVER_WEAK);
     } else {
-	queue_push( &(q), SOLVER_ERASE_SOLVABLE_NAME );	
+	queue_push( &(q), SOLVER_ERASE_SOLVABLE_NAME );
     }
     queue_push( &(q), id);
 
     MIL << "Delete " << _name << (_soft ? "(soft)" : "")
-	<< " with SAT-Pool: " << id << endl;    
+	<< " with SAT-Pool: " << id << endl;
     return true;
 }
 

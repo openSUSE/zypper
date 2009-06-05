@@ -17,13 +17,16 @@
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA
  * 02111-1307, USA.
  */
+extern "C"
+{
+#include <satsolver/solver.h>
+}
 
 #include "zypp/base/Logger.h"
 #include "zypp/solver/detail/SolverQueueItemUpdate.h"
-#include "satsolver/solver.h"
 
 /////////////////////////////////////////////////////////////////////////
-namespace zypp 
+namespace zypp
 { ///////////////////////////////////////////////////////////////////////
   ///////////////////////////////////////////////////////////////////////
   namespace solver
@@ -73,7 +76,7 @@ bool SolverQueueItemUpdate::addRule (_Queue & q)
     }
     MIL << "Update explicit " << _item << " with the SAT-Pool ID: " << id << endl;
     queue_push( &(q), SOLVER_INSTALL_SOLVABLE_UPDATE );
-    queue_push( &(q), id );    
+    queue_push( &(q), id );
     return true;
 }
 
