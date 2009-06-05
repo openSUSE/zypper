@@ -1,3 +1,8 @@
+Fri Jun  5 21:16:45 CEST 2009 - ma@suse.de
+
+- Fix solver to use IdSting to avoid failing vendor checks.
+- version 6.8.1 (8)
+
 -------------------------------------------------------------------
 Thu Jun  4 14:22:58 CEST 2009 - ma@suse.de
 
