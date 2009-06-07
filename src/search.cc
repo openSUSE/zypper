@@ -535,6 +535,8 @@ static void list_product_table(Zypper & zypper)
 
   // translators: S for installed Status
   th << _("S");
+  if (!zypper.globalOpts().is_rug_compatible)
+    th << _("Repository");
   th << _("Name");
   th << _("Version");
   if (zypper.globalOpts().is_rug_compatible)
@@ -542,37 +544,62 @@ static void list_product_table(Zypper & zypper)
      th << _("Category");
   else
     th << _("Is Base");
+  th << _("Arch");
   tbl << th;
 
   bool installed_only = zypper.cOpts().count("installed-only");
   bool notinst_only = zypper.cOpts().count("uninstalled-only");
 
-  ResPool::byKind_iterator
-    it = God->pool().byKindBegin(ResKind::product),
-    e  = God->pool().byKindEnd(ResKind::product);
+  ResPoolProxy::const_iterator
+      it = God->pool().proxy().byKindBegin(ResKind::product),
+      e  = God->pool().proxy().byKindEnd(ResKind::product);
   for (; it != e; ++it )
   {
-    Product::constPtr product = asKind<Product>(it->resolvable());
+    ui::Selectable::constPtr s = *it;
 
-    TableRow tr;
-    if (it->status().isInstalled())
+    // get the first installed object
+    PoolItem installed;
+    if (!s->installedEmpty())
+      installed = s->installedObj();
+
+    // show available objects
+    for_(it, s->availableBegin(), s->availableEnd())
     {
-      if (notinst_only)
-        continue;
-      tr << "i";
+      Product::constPtr product = asKind<Product>(it->resolvable());
+      TableRow tr;
+      zypp::PoolItem pi = *it;
+      string repo = product->repoInfo().name();
+
+      if (installed)
+      {
+        if (notinst_only)
+          continue;
+        if (equalNVRA(*installed.resolvable(), *pi.resolvable()))
+        {
+          tr << "i";
+          // this is needed, other isTargetDistribution would not return
+          // true for the installed base product
+          product = asKind<Product>(installed);
+        }
+        else
+          tr << "v";
+      }
+      else
+      {
+        if (installed_only)
+          continue;
+        tr << "";
+      }
+      if (!zypper.globalOpts().is_rug_compatible)
+        tr << repo;
+      tr << product->name () << product->edition().asString();
+      if (zypper.globalOpts().is_rug_compatible)
+        tr << (product->isTargetDistribution() ? "base" : "");
+      else
+        tr << (product->isTargetDistribution() ? _("Yes") : _("No"));
+      tr << product->arch().asString();
+      tbl << tr;
     }
-    else
-    {
-      if (installed_only)
-        continue;
-      tr << "";
-    }
-    tr << product->name () << product->edition().asString();
-    if (zypper.globalOpts().is_rug_compatible)
-      tr << (product->isTargetDistribution() ? "base" : "");
-    else
-      tr << (product->isTargetDistribution() ? _("Yes") : _("No"));
-    tbl << tr;
   }
   tbl.sort(1); // Name
 
