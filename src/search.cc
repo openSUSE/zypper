@@ -543,8 +543,10 @@ static void list_product_table(Zypper & zypper)
      // translators: product category (base/addon), the rug term
      th << _("Category");
   else
+  {
+    th << _("Arch");
     th << _("Is Base");
-  th << _("Arch");
+  }
   tbl << th;
 
   bool installed_only = zypper.cOpts().count("installed-only");
@@ -590,14 +592,21 @@ static void list_product_table(Zypper & zypper)
           continue;
         tr << "";
       }
+      // repository
       if (!zypper.globalOpts().is_rug_compatible)
         tr << repo;
+      // name
       tr << product->name () << product->edition().asString();
       if (zypper.globalOpts().is_rug_compatible)
+        // rug 'Category'
         tr << (product->isTargetDistribution() ? "base" : "");
       else
+      {
+        // architecture
+        tr << product->arch().asString();
+        // is base
         tr << (product->isTargetDistribution() ? _("Yes") : _("No"));
-      tr << product->arch().asString();
+      }
       tbl << tr;
     }
   }
