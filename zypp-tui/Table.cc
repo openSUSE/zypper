@@ -79,9 +79,10 @@ void TableRow::dumpTo (ostream &stream, const Table & parent) const
         // table is wider than screen
         parent._width > parent._screen_width && (
         // the next table column would exceed the screen size
-        curpos + parent._max_width[c] + (parent._style != none ? 2 : 3) > parent._screen_width ||
+        curpos + (int) parent._max_width[c] + (parent._style != none ? 2 : 3) >
+          parent._screen_width ||
         // or the user wishes to first break after the previous column
-        parent._force_break_after == c - 1);
+        parent._force_break_after == (int) (c - 1));
 
       if (do_wrap)
       {
