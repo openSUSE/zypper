@@ -678,7 +678,7 @@ void Summary::writePackageCounts(ostream & out)
     count = i->second.size();
     if (gotcha)
       s << ", ";
-    fprint_color(s, str::form("%d ", count), COLOR_CONTEXT_HIGHLIGHT);
+    fprint_color(s, str::form("%d ", count), COLOR_CONTEXT_NEGATIVE);
     if (gotcha)
       // translators: this text will be preceded by a number e.g. "5 to ..."
       s << _PL("to remove", "to remove", count);
@@ -693,7 +693,7 @@ void Summary::writePackageCounts(ostream & out)
     count = i->second.size();
     if (gotcha)
       s << ", ";
-    fprint_color(s, str::form("%d ", count), COLOR_CONTEXT_HIGHLIGHT);
+    fprint_color(s, str::form("%d ", count), COLOR_CONTEXT_NEGATIVE);
     if (gotcha)
       // translators: this text will be preceded by a number e.g. "5 to ..."
       s << _PL("to change vendor", " to change vendor", count);
