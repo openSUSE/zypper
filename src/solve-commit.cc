@@ -552,7 +552,9 @@ void solve_and_commit (Zypper & zypper)
         case 8: // g - view in pager
         {
           ostringstream s;
+          summary.setForceNoColor(true);
           summary.dumpTo(s);
+          summary.setForceNoColor(false);
           show_text_in_pager(s.str());
           break;
         }

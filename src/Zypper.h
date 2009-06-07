@@ -162,7 +162,7 @@ public:
 
   // setters & getters
   Out & out();
-  const Config & config() const { return _config; }
+  Config & config() { return _config; }
   const GlobalOptions & globalOpts() const { return _gopts; }
   const parsed_opts & cOpts() const { return _copts; }
   const ZypperCommand & command() const { return _command; }

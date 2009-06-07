@@ -62,6 +62,8 @@ public:
   { _viewop = (ViewOptions) (_viewop & ~option); }
   void toggleViewOption(const ViewOptions option)
   { _viewop & option ? unsetViewOption(option) : setViewOption(option); }
+  void setForceNoColor(bool value = true)
+  { _force_no_color = value; }
 
   void writeNewlyInstalled(std::ostream & out);
   void writeRemoved(std::ostream & out);
@@ -102,6 +104,7 @@ private:
 private:
   ViewOptions _viewop;
   mutable unsigned _wrap_width;
+  bool _force_no_color;
 
   bool _need_reboot;
   bool _need_restart;

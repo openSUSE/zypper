@@ -20,6 +20,7 @@
 #include "utils/colors.h"
 #include "utils/misc.h"
 #include "Table.h"
+#include "Zypper.h"
 
 #include "Summary.h"
 
@@ -38,7 +39,7 @@ bool Summary::ResPairNameCompare::operator()(
 // --------------------------------------------------------------------------
 
 Summary::Summary(const zypp::ResPool & pool, const ViewOptions options)
-  : _viewop(options), _wrap_width(80)
+  : _viewop(options), _wrap_width(80), _force_no_color(false)
 {
   readPool(pool);
 }
@@ -724,6 +725,16 @@ void Summary::writePackageCounts(ostream & out)
 
 void Summary::dumpTo(ostream & out)
 {
+  struct SetColor
+  {
+    SetColor(bool force) : docolors(Zypper::instance()->config().do_colors)
+    { if (force) Zypper::instance()->config().do_colors = false; }
+    ~SetColor()
+    { Zypper::instance()->config().do_colors = docolors; }
+    bool docolors;
+  };
+  SetColor setcolor(_force_no_color);
+
   _wrap_width = get_screen_width();
 
   writeNewlyInstalled(out);
