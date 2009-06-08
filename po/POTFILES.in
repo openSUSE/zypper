@@ -7,6 +7,7 @@
 ../src/callbacks/repo.h
 ../src/callbacks/rpm.h
 ../src/Command.cc
+../src/Config.cc
 ../src/info.cc
 ../src/install.cc
 ../src/locks.cc
@@ -17,7 +18,9 @@
 ../src/repos.cc
 ../src/search.cc
 ../src/solve-commit.cc
+../src/Summary.cc
 ../src/update.cc
+../src/utils/Augeas.cc
 ../src/utils/getopt.cc
 ../src/utils/messages.cc
 ../src/utils/misc.cc
