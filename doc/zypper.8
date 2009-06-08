@@ -23,6 +23,10 @@ pattern definitions, etc. These data are stored together with the RPM files in
 folders called \fBrepositories\fR. Repositories can be placed on various media
 like an HTTP or FTP server, DVD, or a folder on a local disc.
 
+There is a special set of commands in zypper intented to manipulate repositories.
+Also many commands and options take a repository as an arugment. See section
+\fBCOMMANDS\fR, subsection \fBRepository Management\fR for more details.
+
 .SS Resource Identfiers (URI)
 To specify locations of repositories or other resources (RPM files, .repo
 files) you can use any type of URIs supported by libzypp. See
@@ -781,12 +785,27 @@ zypper is able to work with YaST, YUM, and aptrpm
 repositories, ZENworks 7 Linux Management, ZENworks 6.6.x Linux
 Management servers, as well as local files.
 
+Repositories are primarily identified using their \fIURI\fR or \fIalias\fR.
+Alias serves as a shorthand for the long URI or name of the repository.
+The \fIname\fR of the repository should briefly describe the repository and
+is shown to the user in tables and messages. The name is not required, and
+if not known, the alias is shown instead. The alias is required and
+uniquely identifies the repository on the system.
+
+The \fIalias\fR, \fIURI\fR, or the \fInumber\fR from \fBzypper repos\fR list can be used to
+specify a repository as an argument of various zypper commands and
+options like \fBrefresh\fR, \fB--repo\fR, or \fB--from\fR.
+
+Apart from the above, repositories have several other properties which can be
+set using the commands described in this section below, or by manually
+editing the repository definition files (.repo files, see section FILES).
+
 .TP
 .B addrepo (ar) [options] <URI> <alias> 
 .TP
 .B addrepo (ar) [options] <FILE.repo>
 
-Add a new repository specified by URI and assign specified alias to it or specify URI to repo file.
+Add a new repository specified by URI and assign specified alias to it or specify URI to a .repo file.
 
 Newly added repositories have auto-refresh disabled by default (except for repositories
 imported from a .repo, having the auto-refresh enabled). To enable auto-refresh, use the
@@ -1419,7 +1438,7 @@ This file is used by all ZYpp-based applications.
 .TP
 .B /etc/zypp/repos.d
 Directory containing repository definition (*.repo) files.
-You can use the Repository Management Commands to manipulate these files,
+You can use the Repository Management commands to manipulate these files,
 or you can edit them yourself. In either case, after doing the modifications,
 executing \fBzypper refresh\fR is strongly recommended.
 
