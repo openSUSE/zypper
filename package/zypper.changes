@@ -1,4 +1,11 @@
 -------------------------------------------------------------------
+Mon Jun  8 11:55:57 CEST 2009 - jkupec@suse.cz
+
+- some code cleanup and fixes
+- show arch & repo in 'products'
+- 1.2.0
+
+-------------------------------------------------------------------
 Thu Jun  4 16:14:17 CEST 2009 - ma@suse.de
 
 - Adapt to libzypp-6.8.0 api changes.
