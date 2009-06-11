@@ -7,13 +7,13 @@
 #
 # Ivan Petrouchtchak <ivanpetrouchtchak@yahoo.com>, 2007.
 # Yuri Chornoivan <yurchor@ukr.net>, 2008.
-# Ivan Petrouchtchak <fr.ivan@ukrainian-orthodox.org>, 2008.
+# Ivan Petrouchtchak <fr.ivan@ukrainian-orthodox.org>, 2008, 2009.
 msgid ""
 msgstr ""
 "Project-Id-Version: zypper.uk\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-12-11 11:15+0100\n"
-"PO-Revision-Date: 2008-10-27 21:58-0700\n"
+"POT-Creation-Date: 2009-06-08 16:44+0200\n"
+"PO-Revision-Date: 2009-01-17 00:39-0800\n"
 "Last-Translator: Ivan Petrouchtchak <fr.ivan@ukrainian-orthodox.org>\n"
 "Language-Team: Ukrainian <translation@linux.org.ua>\n"
 "MIME-Version: 1.0\n"
@@ -166,9 +166,11 @@ msgid "No digest for file %s."
 msgstr "Нема дайджесту для файла %s."
 
 # continue button label
+#. translators: help text for 'x' option in the 'Continue?' prompt
+#. popts.setOptionHelp(8, _("Explain why the packages are going to be installed."));
 #: ../src/callbacks/keyring.h:256 ../src/callbacks/keyring.h:266
 #: ../src/callbacks/keyring.h:288 ../src/callbacks/rpm.h:61
-#: ../src/solve-commit.cc:1041 ../src/solve-commit.cc:1065
+#: ../src/solve-commit.cc:498
 msgid "Continue?"
 msgstr "Продовжити?"
 
@@ -199,17 +201,59 @@ msgstr "Наступний запит нічого не блокує:"
 #. Try to check what answers does zypper accept (it always accepts y/n at least)
 #. You can also have a look at the regular expressions used to check the answer here:
 #. /usr/lib/locale/<your_locale>/LC_MESSAGES/SYS_LC_MESSAGES
-#: ../src/callbacks/media.h:84
+#: ../src/callbacks/media.h:86
 #, c-format
 msgid "Please insert medium [%s] #%d and type 'y' to continue or 'n' to cancel the operation."
 msgstr "Будь ласка, вставте носій [%s] # %d і введіть «т» (y), щоб продовжити або «н» (n), щоб скасувати дію."
 
-#: ../src/callbacks/media.h:228 ../src/callbacks/media.h:235
+#. translators: a/r/i/u are replies to the "Abort, retry, ignore?" prompt
+#. Translate the a/r/i part exactly as you did the a/r/i string.
+#. the 'u' reply means 'Change URI'.
+#: ../src/callbacks/media.h:106
+#, fuzzy
+#| msgid "a/r/i"
+msgid "a/r/i/u"
+msgstr "п/с/і"
+
+#. help text for the "Abort, retry, ignore?" prompt for media errors
+#: ../src/callbacks/media.h:108
+msgid "Skip retrieval of the file and abort current operation."
+msgstr ""
+
+#. help text for the "Abort, retry, ignore?" prompt for media errors
+#: ../src/callbacks/media.h:110
+msgid "Try to retrieve the file again."
+msgstr ""
+
+#. help text for the "Abort, retry, ignore?" prompt for media errors
+#: ../src/callbacks/media.h:112
+msgid "Skip retrieval of the file and try to continue with the operation without the file."
+msgstr ""
+
+#. help text for the "Abort, retry, ignore?" prompt for media errors
+#: ../src/callbacks/media.h:114
+msgid "Change current base URI and try retrieving the file again."
+msgstr ""
+
+#. translators: this is a prompt text
+#: ../src/callbacks/media.h:119 ../src/utils/prompt.cc:178
+#: ../src/utils/prompt.cc:266
+msgid "Abort, retry, ignore?"
+msgstr "Перервати, спробувати знов, ігнорувати?"
+
+#. translators: this is a prompt label, will appear as "New URI: "
+#: ../src/callbacks/media.h:130
+#, fuzzy
+#| msgid "URI"
+msgid "New URI"
+msgstr "URI"
+
+#: ../src/callbacks/media.h:267 ../src/callbacks/media.h:274
 msgid "User Name"
 msgstr "Ім'я користувача"
 
 # password dialog title
-#: ../src/callbacks/media.h:242
+#: ../src/callbacks/media.h:283
 msgid "Password"
 msgstr "Пароль"
 
@@ -261,21 +305,21 @@ msgstr "Вилучення %s зазнало невдачі:"
 
 #. TranslatorExplanation --nodeps and --force are options of the rpm command, don't translate
 #. ! \todo use format
-#: ../src/callbacks/rpm.h:224
+#: ../src/callbacks/rpm.h:231
 msgid "(with --nodeps)"
 msgstr "(з --nodeps)"
 
-#: ../src/callbacks/rpm.h:224
+#: ../src/callbacks/rpm.h:231
 msgid "(with --nodeps --force)"
 msgstr "(з --nodeps --force)"
 
 #. TranslatorExplanation This text is a progress display label e.g. "Installing foo-1.1.2 [42%]"
-#: ../src/callbacks/rpm.h:246
+#: ../src/callbacks/rpm.h:253
 #, c-format
 msgid "Installing: %s-%s"
 msgstr "Встановлення: %s-%s"
 
-#: ../src/callbacks/rpm.h:272
+#: ../src/callbacks/rpm.h:279
 #, c-format
 msgid "Installation of %s-%s failed:"
 msgstr "Встановлення %s-%s зазнало невдачі:"
@@ -284,6 +328,12 @@ msgstr "Встановлення %s-%s зазнало невдачі:"
 #, c-format
 msgid "Unknown command '%s'"
 msgstr "Невідома команда «%s»"
+
+#: ../src/Config.cc:73
+#, fuzzy, c-format
+#| msgid "Unknown command option"
+msgid "Unknown configuration option '%s'"
+msgstr "Невідомий параметр для команди"
 
 #: ../src/info.cc:40
 msgid "Name: "
@@ -361,15 +411,25 @@ msgstr "Надається"
 msgid "Conflict"
 msgstr "Конфліктує"
 
-#: ../src/info.cc:161 ../src/info.cc:283 ../src/info.cc:354
+#: ../src/info.cc:133
+msgid "Requires:"
+msgstr "Потребує:"
+
+#: ../src/info.cc:144
+#, fuzzy
+#| msgid "Recommends"
+msgid "Recommends:"
+msgstr "Рекомендує"
+
+#: ../src/info.cc:181 ../src/info.cc:325 ../src/info.cc:396
 msgid "Catalog: "
 msgstr "Каталог: "
 
-#: ../src/info.cc:161 ../src/info.cc:283 ../src/info.cc:354
+#: ../src/info.cc:181 ../src/info.cc:325 ../src/info.cc:396
 msgid "Repository: "
 msgstr "Сховище: "
 
-#: ../src/info.cc:166 ../src/info.cc:288
+#: ../src/info.cc:186 ../src/info.cc:330
 msgid "Installed: "
 msgstr "Встановлені: "
 
@@ -377,136 +437,137 @@ msgstr "Встановлені: "
 #. autorefresh?
 #. enabled?
 #. autorefresh?
-#: ../src/info.cc:166 ../src/info.cc:223 ../src/info.cc:229 ../src/info.cc:231
-#: ../src/info.cc:288 ../src/repos.cc:735 ../src/repos.cc:737
-#: ../src/repos.cc:1336 ../src/repos.cc:1338 ../src/repos.cc:2014
-#: ../src/repos.cc:2016 ../src/solve-commit.cc:855
+#. is base
+#: ../src/info.cc:186 ../src/info.cc:257 ../src/info.cc:263 ../src/info.cc:265
+#: ../src/info.cc:330 ../src/info.cc:403 ../src/info.cc:407
+#: ../src/repos.cc:735 ../src/repos.cc:737 ../src/repos.cc:1346
+#: ../src/repos.cc:1348 ../src/repos.cc:2024 ../src/repos.cc:2026
+#: ../src/search.cc:608 ../src/solve-commit.cc:256
 msgid "Yes"
 msgstr "Так"
 
-#: ../src/info.cc:166 ../src/info.cc:223 ../src/info.cc:229 ../src/info.cc:231
-#: ../src/info.cc:288 ../src/repos.cc:735 ../src/repos.cc:737
-#: ../src/repos.cc:1336 ../src/repos.cc:1338 ../src/repos.cc:2014
-#: ../src/repos.cc:2016 ../src/solve-commit.cc:855
+#: ../src/info.cc:186 ../src/info.cc:257 ../src/info.cc:263 ../src/info.cc:265
+#: ../src/info.cc:330 ../src/info.cc:403 ../src/info.cc:407
+#: ../src/repos.cc:735 ../src/repos.cc:737 ../src/repos.cc:1346
+#: ../src/repos.cc:1348 ../src/repos.cc:2024 ../src/repos.cc:2026
+#: ../src/search.cc:608 ../src/solve-commit.cc:256
 msgid "No"
 msgstr "Ні"
 
 #. ! \todo fix this - arch?
-#: ../src/info.cc:169 ../src/info.cc:218
+#: ../src/info.cc:189 ../src/info.cc:252
 msgid "Status: "
 msgstr "Стан: "
 
-#: ../src/info.cc:173
+#: ../src/info.cc:193
 msgid "up-to-date"
 msgstr "оновлений"
 
-#: ../src/info.cc:177
+#: ../src/info.cc:197
 #, c-format
 msgid "out-of-date (version %s installed)"
 msgstr "застаріло (встановлено версію %s)"
 
-#: ../src/info.cc:182
+#: ../src/info.cc:202
 msgid "not installed"
 msgstr "не встановлено"
 
-#: ../src/info.cc:184
+#: ../src/info.cc:204
 msgid "Installed Size: "
 msgstr "Встановлений розмір: "
 
-#: ../src/info.cc:221
+#: ../src/info.cc:255
 msgid "Category: "
 msgstr "Категорія: "
 
-#: ../src/info.cc:222
+#: ../src/info.cc:256
 msgid "Created On: "
 msgstr "Створено: "
 
-#: ../src/info.cc:223
+#: ../src/info.cc:257
 msgid "Reboot Required: "
 msgstr "Потрібне перезавантаження: "
 
-#: ../src/info.cc:226
+#: ../src/info.cc:260
 msgid "Package Manager Restart Required"
 msgstr "Потрібний перезапуск менеджера пакунків"
 
-#: ../src/info.cc:228
+#: ../src/info.cc:262
 msgid "Restart Required: "
 msgstr "Потрібний перезапуск: "
 
-#: ../src/info.cc:231
+#: ../src/info.cc:265
 msgid "Interactive: "
 msgstr "Інтерактивний: "
 
-#: ../src/info.cc:235
+#: ../src/info.cc:269
 msgid "Provides:"
 msgstr "Надає:"
 
-#: ../src/info.cc:244
-msgid "Requires:"
-msgstr "Потребує:"
+#: ../src/info.cc:276
+#, fuzzy
+#| msgid "Conflicts"
+msgid "Conflicts:"
+msgstr "Конфліктує"
 
-#: ../src/info.cc:255 ../src/search.cc:327
+#: ../src/info.cc:297 ../src/search.cc:327
 msgid "Recommended"
 msgstr "Рекомендовано"
 
-#: ../src/info.cc:257 ../src/search.cc:329
+#: ../src/info.cc:299 ../src/search.cc:329
 msgid "Suggested"
 msgstr "Пропонується"
 
 #. translators: S for 'installed Status'
 #. translators: S for installed Status
 #. TranslatorExplanation S stands for Status
-#: ../src/info.cc:298 ../src/search.cc:38 ../src/search.cc:54
+#: ../src/info.cc:340 ../src/search.cc:38 ../src/search.cc:54
 #: ../src/search.cc:218 ../src/search.cc:389 ../src/search.cc:445
-#: ../src/search.cc:537 ../src/update.cc:412
+#: ../src/search.cc:537 ../src/update.cc:477
 msgid "S"
 msgstr "S"
 
 #. translators: name (general header)
-#: ../src/info.cc:298 ../src/locks.cc:39 ../src/repos.cc:655
-#: ../src/repos.cc:704 ../src/repos.cc:2081 ../src/search.cc:44
+#: ../src/info.cc:340 ../src/locks.cc:39 ../src/repos.cc:655
+#: ../src/repos.cc:704 ../src/repos.cc:2091 ../src/search.cc:44
 #: ../src/search.cc:56 ../src/search.cc:219 ../src/search.cc:268
-#: ../src/search.cc:390 ../src/search.cc:451 ../src/search.cc:538
-#: ../src/update.cc:153 ../src/update.cc:420 ../src/Zypper.cc:4002
+#: ../src/search.cc:390 ../src/search.cc:451 ../src/search.cc:540
+#: ../src/update.cc:155 ../src/update.cc:485 ../src/Zypper.cc:4066
 msgid "Name"
 msgstr "Назва"
 
 #. translators: type (general header)
-#. translators: product type (addon/base) (rug calls it Category)
-#: ../src/info.cc:298 ../src/locks.cc:43 ../src/repos.cc:655
-#: ../src/repos.cc:713 ../src/repos.cc:2089 ../src/search.cc:58
-#: ../src/search.cc:222 ../src/search.cc:545
+#: ../src/info.cc:340 ../src/locks.cc:43 ../src/repos.cc:655
+#: ../src/repos.cc:713 ../src/repos.cc:2099 ../src/search.cc:58
+#: ../src/search.cc:222
 msgid "Type"
 msgstr "Тип"
 
-#: ../src/info.cc:298 ../src/search.cc:392
+#: ../src/info.cc:340 ../src/search.cc:392
 msgid "Dependency"
 msgstr "Залежність"
 
-#: ../src/info.cc:316
+#: ../src/info.cc:358
 msgid "Contents"
 msgstr "Вміст"
 
-#: ../src/info.cc:318
+#: ../src/info.cc:360
 msgid "(empty)"
 msgstr "(порожній)"
 
-#. translators: patch category (recommended, security)
-#. translators: product category (the rug term)
-#: ../src/info.cc:360 ../src/search.cc:271 ../src/search.cc:542
-#: ../src/update.cc:153
-msgid "Category"
-msgstr "Категорія"
+#: ../src/info.cc:402 ../src/search.cc:548
+msgid "Is Base"
+msgstr ""
 
-#: ../src/info.cc:361
+#: ../src/info.cc:404
 msgid "Flavor"
 msgstr "Вид"
 
-#: ../src/info.cc:362 ../src/utils/misc.cc:111
+#: ../src/info.cc:406 ../src/utils/misc.cc:134
 msgid "Installed"
 msgstr "Встановлені"
 
-#: ../src/info.cc:363
+#: ../src/info.cc:408
 msgid "Short Name"
 msgstr "Коротка назва"
 
@@ -539,13 +600,13 @@ msgstr "Не вдалося додати «%s» до списку встанов
 msgid "Failed to add '%s' to the list of packages to be removed."
 msgstr "Не вдалось додати «%s» до списку пакунків для вилучення."
 
-#: ../src/install.cc:378 ../src/install.cc:712
+#: ../src/install.cc:378 ../src/install.cc:718
 #, c-format
 msgid "'%s' is already installed."
 msgstr "«%s» вже встановлено."
 
 #. translators: meaning a package %s or provider of capability %s
-#: ../src/install.cc:418 ../src/install.cc:726
+#: ../src/install.cc:418 ../src/install.cc:732
 #, c-format
 msgid "'%s' is not installed."
 msgstr "«%s» не встановлено."
@@ -580,22 +641,22 @@ msgid "%s cannot currently be used with %s"
 msgstr "%s на даний момент не може використовуватися з %s"
 
 #. translators: meaning a package %s or provider of capability %s
-#: ../src/install.cc:524 ../src/install.cc:683
+#: ../src/install.cc:524 ../src/install.cc:689
 #, c-format
 msgid "'%s' not found."
 msgstr "«%s» не знайдено."
 
-#: ../src/install.cc:573
+#: ../src/install.cc:579
 msgid "Specifying architecture when selecting packages by name is not implemented."
 msgstr "Вказування архітектури при вибиранні пакунків за назвою — не впроваджено."
 
-#: ../src/install.cc:608
+#: ../src/install.cc:614
 #, c-format
 msgid "'%s' is not a valid package or capability name."
 msgstr "«%s» не є чинною назвою пакунка або функціональності."
 
 #. translators: %s are package names
-#: ../src/install.cc:716
+#: ../src/install.cc:722
 #, c-format
 msgid "'%s' providing '%s' is already installed."
 msgstr "«%s», що містить «%s» вже встановлено."
@@ -613,7 +674,7 @@ msgstr "(декілька)"
 
 #. translators: catalog (rug's word for repository) (header)
 #: ../src/locks.cc:41 ../src/search.cc:40 ../src/search.cc:267
-#: ../src/update.cc:152 ../src/update.cc:414
+#: ../src/update.cc:154 ../src/update.cc:479
 msgid "Catalog"
 msgstr "Каталог"
 
@@ -623,7 +684,8 @@ msgstr "Важливість"
 
 #. translators: package's repository (header)
 #: ../src/locks.cc:43 ../src/search.cc:64 ../src/search.cc:392
-#: ../src/search.cc:450 ../src/update.cc:152 ../src/update.cc:414
+#: ../src/search.cc:450 ../src/search.cc:539 ../src/update.cc:154
+#: ../src/update.cc:479
 msgid "Repository"
 msgstr "Сховище"
 
@@ -672,115 +734,117 @@ msgid "OK OK! Exiting immediately..."
 msgstr "Добре, добре! Негайний вихід..."
 
 #. TranslatorExplanation The first %s is name of the resolvable, the second is its kind (e.g. 'zypper package')
-#: ../src/misc.cc:136
+#: ../src/misc.cc:139
 #, c-format
 msgid "Automatically agreeing with %s %s license."
 msgstr "Автоматично погоджується з ліцензією %s %s."
 
 #. translators: the first %s is the name of the package, the second
 #. is " (package-type)" if other than "package" (patch/product/pattern)
-#: ../src/misc.cc:157
+#: ../src/misc.cc:160
 #, c-format
 msgid "In order to install '%s'%s, you must agree to terms of the following license agreement:"
 msgstr "Щоб встановити '%s'%s, ви мусите погодитись з умовами наступної ліцензії."
 
 #. lincense prompt
-#: ../src/misc.cc:174
+#: ../src/misc.cc:177
 msgid "Do you agree with the terms of the license?"
 msgstr "Погоджуєтесь з умовами цієї ліцензії?"
 
-#: ../src/misc.cc:183
+#: ../src/misc.cc:186
 msgid "Aborting installation due to the need for license confirmation."
 msgstr "Встановлення переривається, оскільки спочатку слід прийняти ліцензію."
 
 #. translators: %sanslate the '--auto-agree-with-licenses',
 #. it is a command line option
-#: ../src/misc.cc:188
+#: ../src/misc.cc:191
 #, c-format
 msgid "Please restart the operation in interactive mode and confirm your agreement with required licenses, or use the %s option."
 msgstr "Будь ласка, перезапустіть дію в інтерактивному режимі, а потім погодьтесь з потрібними ліцензіями або скористайтесь параметром %s."
 
 #. translators: e.g. "... with flash package license."
 #. ! \todo fix this to allow proper translation
-#: ../src/misc.cc:200
+#: ../src/misc.cc:203
 #, c-format
 msgid "Aborting installation due to user disagreement with %s %s license."
 msgstr "Встановлення переривається, бо користувач не погодився з ліцензією %s %s."
 
-#: ../src/misc.cc:247
+#: ../src/misc.cc:250
 msgid "License"
 msgstr "Ліцензія"
 
-#: ../src/misc.cc:265
+#: ../src/misc.cc:268
 msgid "EULA"
 msgstr "Ліцензійна угода"
 
-#: ../src/misc.cc:283
+#: ../src/misc.cc:286
 msgid "SUMMARY"
 msgstr "ЗВЕДЕННЯ"
 
-#: ../src/misc.cc:284
+#: ../src/misc.cc:287
 #, c-format
 msgid "Installed packages: %d"
 msgstr "Встановлені пакунки: %d"
 
-#: ../src/misc.cc:285
+#: ../src/misc.cc:288
 #, c-format
 msgid "Installed packages with counterparts in repositories: %d"
 msgstr "Встановлені пакунки з частинами у сховищах: %d"
 
-#: ../src/misc.cc:286
+#: ../src/misc.cc:289
 #, c-format
 msgid "Installed packages with EULAs: %d"
 msgstr "Встановлені пакунки з ліцензійними угодами: %d"
 
-#: ../src/misc.cc:375 ../src/misc.cc:399
+#: ../src/misc.cc:378 ../src/misc.cc:402
 #, c-format
 msgid "Source package '%s' not found."
 msgstr "Пакунок джерела «%s» не знайдено."
 
-#: ../src/misc.cc:409
+#: ../src/misc.cc:412
 #, c-format
 msgid "Installing source package %s-%s"
 msgstr "Встановлення пакунка джерела %s-%s"
 
-#: ../src/misc.cc:418
+#: ../src/misc.cc:421
 #, c-format
 msgid "Source package %s-%s successfully installed."
 msgstr "Пакунок джерела %s-%s було успішно встановлено."
 
-#: ../src/misc.cc:425
+#: ../src/misc.cc:428
 #, c-format
 msgid "Problem installing source package %s-%s:"
 msgstr "Проблема з встановленням пакунка джерела %s-%s:"
 
-#: ../src/output/OutNormal.cc:54
+#: ../src/output/OutNormal.cc:74
 msgid "Warning: "
 msgstr "Попередження: "
 
-#: ../src/output/OutNormal.cc:151 ../src/output/OutNormal.cc:222
+#: ../src/output/OutNormal.cc:181 ../src/output/OutNormal.cc:263
+#: ../src/output/OutNormal.cc:268
 msgid "error"
 msgstr "помилка"
 
-#: ../src/output/OutNormal.cc:151 ../src/output/OutNormal.cc:222
+#: ../src/output/OutNormal.cc:183 ../src/output/OutNormal.cc:265
+#: ../src/output/OutNormal.cc:268
 msgid "done"
 msgstr "завершено"
 
-#: ../src/output/OutNormal.cc:165 ../src/output/OutNormal.cc:189
-#: ../src/output/OutNormal.cc:215
+#: ../src/output/OutNormal.cc:201 ../src/output/OutNormal.cc:227
+#: ../src/output/OutNormal.cc:256
 msgid "Retrieving:"
 msgstr "Звантаження:"
 
 # window title for kernel loading (see txt_load_kernel)
-#: ../src/output/OutNormal.cc:171
+#: ../src/output/OutNormal.cc:207
 msgid "starting"
 msgstr "запуск"
 
-#: ../src/output/OutNormal.cc:248
+#: ../src/output/OutNormal.cc:302
 msgid "No help available for this prompt."
 msgstr "Для цього запрошення немає довідки."
 
-#: ../src/output/OutNormal.cc:258
+#: ../src/output/OutNormal.cc:314
 msgid "no help available for this option"
 msgstr "для цього параметра немає довідки"
 
@@ -813,8 +877,8 @@ msgstr "Звантаження метаданих сховища «%s»"
 msgid "Problem retrieving files from '%s'."
 msgstr "Проблема зі звантаженням файлів з «%s»."
 
-#: ../src/repos.cc:160 ../src/repos.cc:2861 ../src/solve-commit.cc:1117
-#: ../src/solve-commit.cc:1145 ../src/solve-commit.cc:1177
+#: ../src/repos.cc:160 ../src/repos.cc:2871 ../src/solve-commit.cc:623
+#: ../src/solve-commit.cc:652 ../src/solve-commit.cc:686
 msgid "Please see the above error message for a hint."
 msgstr "Будь ласка, прочитайте повідомлення про помилку, розміщене вище, щоб краще зрозуміти ситуацію."
 
@@ -913,12 +977,12 @@ msgstr "Започаткування цілі"
 msgid "Target initialization failed:"
 msgstr "Не вдалося започаткувати ціль:"
 
-#: ../src/repos.cc:635 ../src/Zypper.cc:3372
+#: ../src/repos.cc:635 ../src/Zypper.cc:3430
 msgid "Running 'zypper refresh' as root might resolve the problem."
 msgstr "Виконання команди «zypper refresh» від адміністратора може зарадити проблемі."
 
 #. translators: patch status (installed, uninstalled, needed)
-#: ../src/repos.cc:655 ../src/search.cc:273 ../src/update.cc:153
+#: ../src/repos.cc:655 ../src/search.cc:273 ../src/update.cc:155
 msgid "Status"
 msgstr "Стан"
 
@@ -933,26 +997,26 @@ msgstr "Активний"
 msgid "Disabled"
 msgstr "Вимкнено"
 
-#: ../src/repos.cc:703 ../src/repos.cc:2080 ../src/Zypper.cc:4002
+#: ../src/repos.cc:703 ../src/repos.cc:2090 ../src/Zypper.cc:4066
 msgid "Alias"
 msgstr "Псевдонім"
 
 #. TranslatorExplanation used as e.g. "Enabled: Yes"
-#: ../src/repos.cc:705 ../src/repos.cc:1336 ../src/repos.cc:2082
+#: ../src/repos.cc:705 ../src/repos.cc:1346 ../src/repos.cc:2092
 msgid "Enabled"
 msgstr "Увімкнено"
 
 #. translators: 'zypper repos' column - whether autorefresh is enabled for the repository
-#: ../src/repos.cc:707 ../src/repos.cc:2084
+#: ../src/repos.cc:707 ../src/repos.cc:2094
 msgid "Refresh"
 msgstr "Оновити"
 
 #. translators: repository priority (in zypper repos -p or -d)
-#: ../src/repos.cc:711 ../src/repos.cc:2088
+#: ../src/repos.cc:711 ../src/repos.cc:2098
 msgid "Priority"
 msgstr "Пріоритет"
 
-#: ../src/repos.cc:715 ../src/repos.cc:2091
+#: ../src/repos.cc:715 ../src/repos.cc:2101
 msgid "URI"
 msgstr "URI"
 
@@ -968,16 +1032,16 @@ msgstr "Не визначено жодного сховища. Вживайте 
 msgid "Error reading repositories:"
 msgstr "Помилка читання сховищ:"
 
-#: ../src/repos.cc:865 ../src/repos.cc:2213
+#: ../src/repos.cc:865 ../src/repos.cc:2223
 #, c-format
 msgid "Can't open %s for writing."
 msgstr "Неможливо відкрити %s для запису."
 
-#: ../src/repos.cc:867 ../src/repos.cc:2215
+#: ../src/repos.cc:867 ../src/repos.cc:2225
 msgid "Maybe you do not have write permissions?"
 msgstr "Можливо ви не маєте прав запису?"
 
-#: ../src/repos.cc:874 ../src/repos.cc:2222
+#: ../src/repos.cc:874 ../src/repos.cc:2232
 #, c-format
 msgid "Repositories have been successfully exported to %s."
 msgstr "Сховища було успішно експортовано до %s."
@@ -1030,337 +1094,345 @@ msgstr "Всі сховища було освіжено."
 msgid "Cleaning metadata cache for '%s'."
 msgstr "Очищення кешу метаданих для \"%s\"."
 
-#: ../src/repos.cc:1161
+#: ../src/repos.cc:1164
 #, c-format
 msgid "Cleaning raw metadata cache for '%s'."
 msgstr "Очищення кешу сирих метаданих для \"%s\"."
 
+#: ../src/repos.cc:1171
+#, fuzzy, c-format
+#| msgid "Cleaning raw metadata cache for '%s'."
+msgid "Keeping raw metadata cache for %s '%s'."
+msgstr "Очищення кешу сирих метаданих для \"%s\"."
+
 #. translators: meaning the cached rpm files
-#: ../src/repos.cc:1169
+#: ../src/repos.cc:1179
 #, c-format
 msgid "Cleaning packages for '%s'."
 msgstr "Очищення пакунків з \"%s\"."
 
-#: ../src/repos.cc:1177
+#: ../src/repos.cc:1187
 #, c-format
 msgid "Cannot clean repository '%s' because of an error."
 msgstr "Неможливо очистити сховище «%s» через помилку."
 
-#: ../src/repos.cc:1191
+#: ../src/repos.cc:1201
 msgid "Cleaning installed packages cache."
 msgstr "Очищення кешу встановлених пакунків."
 
-#: ../src/repos.cc:1199
+#: ../src/repos.cc:1209
 msgid "Cannot clean installed packages cache because of an error."
 msgstr "Неможливо очистити кеш встановлених пакунків через помилку."
 
-#: ../src/repos.cc:1207
+#: ../src/repos.cc:1217
 msgid "Could not clean the repositories because of errors."
 msgstr "Через помилки не вдалось очистити сховища."
 
-#: ../src/repos.cc:1214
+#: ../src/repos.cc:1224
 msgid "Some of the repositories have not been cleaned up because of an error."
 msgstr "Деякі сховища не було очищено через помилку."
 
-#: ../src/repos.cc:1219
+#: ../src/repos.cc:1229
 msgid "Specified repositories have been cleaned up."
 msgstr "Вказані сховища було очищено."
 
-#: ../src/repos.cc:1221
+#: ../src/repos.cc:1231
 msgid "All repositories have been cleaned up."
 msgstr "Всі сховища було очищено."
 
-#: ../src/repos.cc:1261
+#: ../src/repos.cc:1271
 msgid "This is a changeable read-only media (CD/DVD), disabling autorefresh."
 msgstr "Це змінний носій тільки для читання (КД/DVD), автоосвіження буде вимкнено."
 
-#: ../src/repos.cc:1282 ../src/repos.cc:1543
+#: ../src/repos.cc:1292 ../src/repos.cc:1553
 #, c-format
 msgid "Repository named '%s' already exists. Please use another alias."
 msgstr "Вже існує сховище з назвою «%s». Будь ласка, введіть інший псевдонім."
 
-#: ../src/repos.cc:1293
+#: ../src/repos.cc:1303
 msgid "Could not determine the type of the repository. Please check if the defined URIs (see below) point to a valid repository:"
 msgstr "Не вдалося визначити тип сховища. Будь ласка, перевірте чи зазначені адреси URI (див. нижче) вказують на чинне сховище:"
 
-#: ../src/repos.cc:1300 ../src/Zypper.cc:2429
+#: ../src/repos.cc:1310 ../src/Zypper.cc:2486
 msgid "Can't find a valid repository at given location:"
 msgstr "Не вдається знайти в цьому місці чинне сховище:"
 
-#: ../src/repos.cc:1309
+#: ../src/repos.cc:1319
 msgid "Problem transferring repository data from specified URI:"
 msgstr "Помилка перенесення даних сховища з вказаної адреси URI:"
 
-#: ../src/repos.cc:1310
+#: ../src/repos.cc:1320
 msgid "Please check whether the specified URI is accessible."
 msgstr "Будь ласка, перевірте чи доступна вказана адреса URI."
 
-#: ../src/repos.cc:1318
+#: ../src/repos.cc:1328
 msgid "Unknown problem when adding repository:"
 msgstr "Виникла невідома проблема при додаванні сховища:"
 
-#: ../src/repos.cc:1324
+#: ../src/repos.cc:1334
 #, c-format
 msgid "Repository '%s' successfully added"
 msgstr "Сховище «%s» успішно додано"
 
 #. TranslatorExplanation used as e.g. "Autorefresh: Yes"
-#: ../src/repos.cc:1338
+#: ../src/repos.cc:1348
 msgid "Autorefresh"
 msgstr "Автоосвіження"
 
-#: ../src/repos.cc:1353
+#: ../src/repos.cc:1363
 #, c-format
 msgid "Reading data from '%s' media"
 msgstr "Читання даних з носія «%s»"
 
-#: ../src/repos.cc:1360
+#: ../src/repos.cc:1370
 #, c-format
 msgid "Problem reading data from '%s' media"
 msgstr "Проблема з читанням даних з носія «%s»"
 
-#: ../src/repos.cc:1361
+#: ../src/repos.cc:1371
 msgid "Please check if your installation media is valid and readable."
 msgstr "Перевірте чи носій, з якого проводилося встановлення, правильно записаний і придатний до читання."
 
-#: ../src/repos.cc:1426
+#: ../src/repos.cc:1436
 msgid "Problem accessing the file at the specified URI"
 msgstr "Помилка доступу до файла за вказаною адресою URI"
 
-#: ../src/repos.cc:1427
+#: ../src/repos.cc:1437
 msgid "Please check if the URI is valid and accessible."
 msgstr "Будь ласка, перевірте чи чинна і доступна вказана адреса URI."
 
-#: ../src/repos.cc:1435
+#: ../src/repos.cc:1445
 msgid "Problem parsing the file at the specified URI"
 msgstr "Помилка аналізу файла за вказаною адресою URI"
 
 #. TranslatorExplanation don't translate the URI if the URI itself is not translated.
 #. Also don't translate the '.repo' string.
-#: ../src/repos.cc:1438
+#: ../src/repos.cc:1448
 msgid "Is it a .repo file? See http://en.opensuse.org/Standards/RepoInfo for details."
 msgstr "Чи це файл .repo? Для подробиць дивіться http://en.opensuse.org/Standards/RepoInfo."
 
-#: ../src/repos.cc:1446
+#: ../src/repos.cc:1456
 msgid "Problem encountered while trying to read the file at the specified URI"
 msgstr "Трапилась проблема під час спроби читання файла за вказаною адресою URI"
 
-#: ../src/repos.cc:1460
+#: ../src/repos.cc:1470
 msgid "Repository with no alias defined found in the file, skipping."
 msgstr "У файлі знайдено запис для сховища без встановленого псевдоніма, його пропущено."
 
-#: ../src/repos.cc:1467
+#: ../src/repos.cc:1477
 #, c-format
 msgid "Repository '%s' has no URI defined, skipping."
 msgstr "Сховище «%s» не має визначеного URI, його пропущено."
 
-#: ../src/repos.cc:1507
+#: ../src/repos.cc:1517
 #, c-format
 msgid "Repository '%s' has been removed."
 msgstr "Сховище «%s» було вилучено."
 
-#: ../src/repos.cc:1526
+#: ../src/repos.cc:1536
 #, c-format
 msgid "Cannot change alias of '%s' repository. The repository belongs to service '%s' which is responsible for setting its alias."
 msgstr "Неможливо змінити псевдонім сховища «%s». Сховище належить службі «%s», яка відповідає за встановлення його псевдоніму."
 
-#: ../src/repos.cc:1537
+#: ../src/repos.cc:1547
 #, c-format
 msgid "Repository '%s' renamed to '%s'."
 msgstr "Сховище «%s» перейменоване на «%s»."
 
-#: ../src/repos.cc:1549 ../src/repos.cc:1769
+#: ../src/repos.cc:1559 ../src/repos.cc:1779
 msgid "Error while modifying the repository:"
 msgstr "Помилка зміни сховища:"
 
-#: ../src/repos.cc:1550
+#: ../src/repos.cc:1560
 #, c-format
 msgid "Leaving repository '%s' unchanged."
 msgstr "Сховище «%s» буде залишене без змін."
 
-#: ../src/repos.cc:1687
+#: ../src/repos.cc:1697
 #, c-format
 msgid "Invalid priority '%s'. Use a positive integer number. The greater the number, the lower the priority."
 msgstr "Нечинний пріоритет «%s». Для зазначення пріоритету використовуйте додатне ціле число. Чим вище число, тим нижчий пріоритет."
 
-#: ../src/repos.cc:1695
+#: ../src/repos.cc:1705
 #, c-format
 msgid "Repository '%s' priority has been left unchanged (%d)"
 msgstr "Пріоритет сховища «%s» було залишено без змін (%d)"
 
-#: ../src/repos.cc:1721
-#, c-format
-msgid "Repository '%s' has been sucessfully enabled."
+#: ../src/repos.cc:1731
+#, fuzzy, c-format
+#| msgid "Repository '%s' has been sucessfully enabled."
+msgid "Repository '%s' has been successfully enabled."
 msgstr "Сховище «%s» було успішно увімкнено."
 
-#: ../src/repos.cc:1724
-#, c-format
-msgid "Repository '%s' has been sucessfully disabled."
+#: ../src/repos.cc:1734
+#, fuzzy, c-format
+#| msgid "Repository '%s' has been sucessfully disabled."
+msgid "Repository '%s' has been successfully disabled."
 msgstr "Сховище «%s» було успішно вимкнено."
 
-#: ../src/repos.cc:1731
+#: ../src/repos.cc:1741
 #, c-format
 msgid "Autorefresh has been enabled for repository '%s'."
 msgstr "Для сховища \"%s\" було увімкнено автоматичне освіження."
 
-#: ../src/repos.cc:1734
+#: ../src/repos.cc:1744
 #, c-format
 msgid "Autorefresh has been disabled for repository '%s'."
 msgstr "Для сховища «%s» було вимкнено автоматичне освіження."
 
-#: ../src/repos.cc:1741
+#: ../src/repos.cc:1751
 #, c-format
 msgid "RPM files caching has been enabled for repository '%s'."
 msgstr "Для сховища \"%s\" було увімкнено кешування файлів RPM."
 
-#: ../src/repos.cc:1744
+#: ../src/repos.cc:1754
 #, c-format
 msgid "RPM files caching has been disabled for repository '%s'."
 msgstr "Для сховища «%s» було вимкнено кешування файлів RPM."
 
-#: ../src/repos.cc:1750
+#: ../src/repos.cc:1760
 #, c-format
 msgid "Repository '%s' priority has been set to %d."
 msgstr "Пріоритет сховища «%s» було встановлено у значення %d."
 
-#: ../src/repos.cc:1756
+#: ../src/repos.cc:1766
 #, c-format
 msgid "Name of repository '%s' has been set to '%s'."
 msgstr "Назву сховища «%s» було встановлено у значення «%s»."
 
-#: ../src/repos.cc:1762
+#: ../src/repos.cc:1772
 #, c-format
 msgid "Nothing to change for repository '%s'."
 msgstr "Нічого не змінено для сховища «%s»."
 
-#: ../src/repos.cc:1770
+#: ../src/repos.cc:1780
 #, c-format
 msgid "Leaving repository %s unchanged."
 msgstr "Сховище %s буде залишене без змін."
 
-#: ../src/repos.cc:1808
+#: ../src/repos.cc:1818
 msgid "Error reading services:"
 msgstr "Помилка читання служб:"
 
-#: ../src/repos.cc:1897
+#: ../src/repos.cc:1907
 #, c-format
 msgid "Service '%s' not found by its alias, number, or URI."
 msgstr "Службу «%s» не знайдено за її псевдонімом, номером або URI."
 
-#: ../src/repos.cc:1901
+#: ../src/repos.cc:1911
 #, c-format
 msgid "Use '%s' to get the list of defined services."
 msgstr "Вживайте «%s», щоб отримати список визначених сховищ."
 
-#: ../src/repos.cc:2127
+#: ../src/repos.cc:2137
 #, c-format
 msgid "No services defined. Use the '%s' command to add one or more services."
 msgstr "Не визначено жодної служби. Вживайте команду «%s», щоб додати одну або більше служб."
 
-#: ../src/repos.cc:2253
+#: ../src/repos.cc:2263
 #, c-format
 msgid "Service aliased '%s' already exists. Please use another alias."
 msgstr "Вже існує сховище з назвою «%s». Будь ласка, введіть інший псевдонім."
 
-#: ../src/repos.cc:2263
+#: ../src/repos.cc:2273
 #, c-format
 msgid "Error occured while adding service '%s'."
 msgstr "Помилка під час додавання служби «%s»."
 
-#: ../src/repos.cc:2269
+#: ../src/repos.cc:2279
 #, c-format
 msgid "Service '%s' has been successfully added."
 msgstr "Успішно додано службу «%s»."
 
-#: ../src/repos.cc:2308
+#: ../src/repos.cc:2318
 #, c-format
 msgid "Removing service '%s':"
 msgstr "Вилучення служби «%s»:"
 
-#: ../src/repos.cc:2311
+#: ../src/repos.cc:2321
 #, c-format
 msgid "Service '%s' has been removed."
 msgstr "Службу «%s» було вилучено."
 
-#: ../src/repos.cc:2327
+#: ../src/repos.cc:2337
 #, c-format
 msgid "Refreshing service '%s'."
 msgstr "Освіження служби «%s»."
 
-#: ../src/repos.cc:2336
+#: ../src/repos.cc:2346
 #, c-format
 msgid "Problem retrieving the repository index file for service '%s':"
 msgstr "Проблема отримання файла індексу сховища для служби «%s»:"
 
-#: ../src/repos.cc:2338
+#: ../src/repos.cc:2348
 msgid "Check if the URI is valid and accessible."
 msgstr "Будь ласка, перевірте чи чинна і доступна вказана адреса URI."
 
-#: ../src/repos.cc:2396
+#: ../src/repos.cc:2406
 #, c-format
 msgid "Skipping disabled service '%s'"
 msgstr "Пропускається вимкнена служба «%s»"
 
-#: ../src/repos.cc:2442
+#: ../src/repos.cc:2452
 #, c-format
 msgid "Skipping service '%s' because of the above error."
 msgstr "Пропускається служба «%s» через помилку вище."
 
-#: ../src/repos.cc:2457
+#: ../src/repos.cc:2467
 #, c-format
 msgid "Use '%s' or '%s' commands to add or enable services."
 msgstr "Для додавання або увімкнення служб вживайте команди «%s» або «%s»."
 
-#: ../src/repos.cc:2460
+#: ../src/repos.cc:2470
 msgid "Specified services are not enabled or defined."
 msgstr "Вказані служби не увімкнено або не визначено."
 
-#: ../src/repos.cc:2462
+#: ../src/repos.cc:2472
 msgid "There are no enabled services defined."
 msgstr "Немає визначених увімкнених служб."
 
-#: ../src/repos.cc:2466
+#: ../src/repos.cc:2476
 msgid "Could not refresh the services because of errors."
 msgstr "Через помилки не вдалось освіжити служби."
 
-#: ../src/repos.cc:2472
+#: ../src/repos.cc:2482
 msgid "Some of the services have not been refreshed because of an error."
 msgstr "Деякі служби не було освіжено через помилку."
 
-#: ../src/repos.cc:2477
+#: ../src/repos.cc:2487
 msgid "Specified services have been refreshed."
 msgstr "Вказані служби було освіжено."
 
-#: ../src/repos.cc:2479
+#: ../src/repos.cc:2489
 msgid "All services have been refreshed."
 msgstr "Всі служби було освіжено."
 
-#: ../src/repos.cc:2601
+#: ../src/repos.cc:2611
 #, c-format
 msgid "Service '%s' has been sucessfully enabled."
 msgstr "Службу «%s» було успішно увімкнено."
 
-#: ../src/repos.cc:2604
+#: ../src/repos.cc:2614
 #, c-format
 msgid "Service '%s' has been sucessfully disabled."
 msgstr "Службу «%s» було успішно вимкнено."
 
-#: ../src/repos.cc:2611
+#: ../src/repos.cc:2621
 #, c-format
 msgid "Autorefresh has been enabled for service '%s'."
 msgstr "Для служби «%s» було увімкнено автоматичне освіження."
 
-#: ../src/repos.cc:2614
+#: ../src/repos.cc:2624
 #, c-format
 msgid "Autorefresh has been disabled for service '%s'."
 msgstr "Для служби «%s» було вимкнено автоматичне освіження."
 
-#: ../src/repos.cc:2620
+#: ../src/repos.cc:2630
 #, c-format
 msgid "Name of service '%s' has been set to '%s'."
 msgstr "Назву служби «%s» було встановлено до «%s»."
 
-#: ../src/repos.cc:2626
+#: ../src/repos.cc:2636
 #, c-format
 msgid "Repository '%s' has been added to enabled repositories of service '%s'"
 msgid_plural "Repositories '%s' have been added to enabled repositories of service '%s'"
@@ -1368,7 +1440,7 @@ msgstr[0] "Сховище «%s» було додане до увімкнених
 msgstr[1] "Сховища «%s» були додані до увімкнених сховищ служби «%s»"
 msgstr[2] "Сховища «%s» були додані до увімкнених сховищ служби «%s»"
 
-#: ../src/repos.cc:2634
+#: ../src/repos.cc:2644
 #, c-format
 msgid "Repository '%s' has been added to disabled repositories of service '%s'"
 msgid_plural "Repositories '%s' have been added to disabled repositories of service '%s'"
@@ -1376,7 +1448,7 @@ msgstr[0] "Сховище «%s» було додане до вимкнених �
 msgstr[1] "Сховища «%s» були додані до вимкнених сховищ служби «%s»"
 msgstr[2] "Сховища «%s» були додані до вимкнених сховищ служби «%s»"
 
-#: ../src/repos.cc:2642
+#: ../src/repos.cc:2652
 #, c-format
 msgid "Repository '%s' has been removed from enabled repositories of service '%s'"
 msgid_plural "Repositories '%s' have been removed from enabled repositories of service '%s'"
@@ -1384,7 +1456,7 @@ msgstr[0] "Сховище «%s» було вилучене з увімкнени
 msgstr[1] "Сховища «%s» було вилучено з увімкнених сховищ служби «%s»"
 msgstr[2] "Сховища «%s» було вилучено з увімкнених сховищ служби «%s»"
 
-#: ../src/repos.cc:2650
+#: ../src/repos.cc:2660
 #, c-format
 msgid "Repository '%s' has been removed from disabled repositories of service '%s'"
 msgid_plural "Repositories '%s' have been removed from disabled repositories of service '%s'"
@@ -1392,65 +1464,65 @@ msgstr[0] "Сховище «%s» було вилучене з вимкнених
 msgstr[1] "Сховища «%s» були вилучені з вимкнених сховищ служби «%s»"
 msgstr[2] "Сховища «%s» були вилучені з вимкнених сховищ служби «%s»"
 
-#: ../src/repos.cc:2659
+#: ../src/repos.cc:2669
 #, c-format
 msgid "Nothing to change for service '%s'."
 msgstr "Нічого не змінено для служби «%s»."
 
-#: ../src/repos.cc:2666
+#: ../src/repos.cc:2676
 msgid "Error while modifying the service:"
 msgstr "Помилка зміни служби:"
 
-#: ../src/repos.cc:2667
+#: ../src/repos.cc:2677
 #, c-format
 msgid "Leaving service %s unchanged."
 msgstr "Службу %s буде залишене без змін."
 
-#: ../src/repos.cc:2774
+#: ../src/repos.cc:2784
 msgid "Loading repository data..."
 msgstr "Завантаження даних сховища..."
 
-#: ../src/repos.cc:2792
+#: ../src/repos.cc:2802
 #, c-format
 msgid "Retrieving repository '%s' data..."
 msgstr "Отримання даних сховища «%s»..."
 
-#: ../src/repos.cc:2799
+#: ../src/repos.cc:2809
 #, c-format
 msgid "Repository '%s' not cached. Caching..."
 msgstr "Сховище «%s» відсутнє у кеші. Кешування..."
 
-#: ../src/repos.cc:2806 ../src/repos.cc:2834
+#: ../src/repos.cc:2816 ../src/repos.cc:2844
 #, c-format
 msgid "Problem loading data from '%s'"
 msgstr "Проблема завантаження даних з «%s»"
 
-#: ../src/repos.cc:2807 ../src/repos.cc:2840
+#: ../src/repos.cc:2817 ../src/repos.cc:2850
 #, c-format
 msgid "Resolvables from '%s' not loaded because of error."
 msgstr "Потрібні пакунки з «%s» не завантажено через помилку."
 
-#: ../src/repos.cc:2823
+#: ../src/repos.cc:2833
 #, c-format
 msgid "Repository '%s' appears to outdated. Consider using a different mirror or server."
 msgstr "Схоже, що служба «%s» застаріла. Спробуйте використовувати інший сервер або дзеркало."
 
 #. translators: the first %s is 'zypper refresh' and the second 'zypper clean -m'
-#: ../src/repos.cc:2836
+#: ../src/repos.cc:2846
 #, c-format
 msgid "Try '%s', or even '%s' before doing so."
 msgstr "Спробуйте «%s» або, навіть, «%s» перш ніж це робити."
 
-#: ../src/repos.cc:2849
+#: ../src/repos.cc:2859
 msgid "Reading installed packages..."
 msgstr "Читання встановлених пакунків..."
 
-#: ../src/repos.cc:2860
+#: ../src/repos.cc:2870
 msgid "Problem occured while reading the installed packages:"
 msgstr "Під час читання встановлених пакунків виникла проблема:"
 
 #. list name, exact match
-#: ../src/repos.cc:2875
+#: ../src/repos.cc:2885
 msgid ""
 "ZENworks Management Daemon is running.\n"
 "WARNING: this command will not synchronize changes.\n"
@@ -1461,20 +1533,20 @@ msgstr ""
 "Для цього скористайтесь rug або yast2."
 
 #. translators: Bundle is a term used in rug. See rug for how to translate it.
-#: ../src/search.cc:42 ../src/search.cc:448 ../src/update.cc:417
+#: ../src/search.cc:42 ../src/search.cc:448 ../src/update.cc:482
 msgid "Bundle"
 msgstr "Збірка"
 
 #. translators: package version (header)
 #: ../src/search.cc:46 ../src/search.cc:60 ../src/search.cc:269
-#: ../src/search.cc:390 ../src/search.cc:451 ../src/search.cc:539
-#: ../src/update.cc:153 ../src/update.cc:423
+#: ../src/search.cc:390 ../src/search.cc:451 ../src/search.cc:541
+#: ../src/update.cc:155 ../src/update.cc:488
 msgid "Version"
 msgstr "Версія"
 
 #. translators: package architecture (header)
 #: ../src/search.cc:48 ../src/search.cc:62 ../src/search.cc:451
-#: ../src/update.cc:423
+#: ../src/search.cc:547 ../src/update.cc:488
 msgid "Arch"
 msgstr "Арх."
 
@@ -1487,6 +1559,12 @@ msgstr "Системні пакунки"
 msgid "Summary"
 msgstr "Підсумок"
 
+#. translators: patch category (recommended, security)
+#. translators: product category (base/addon), the rug term
+#: ../src/search.cc:271 ../src/search.cc:544 ../src/update.cc:155
+msgid "Category"
+msgstr "Категорія"
+
 #: ../src/search.cc:351
 msgid "No needed patches found."
 msgstr "Не знайдено потрібних латок."
@@ -1495,31 +1573,31 @@ msgstr "Не знайдено потрібних латок."
 msgid "No patterns found."
 msgstr "Не знайдено шаблонів."
 
-#: ../src/search.cc:501 ../src/Zypper.cc:3330
+#: ../src/search.cc:501 ../src/Zypper.cc:3388
 msgid "No packages found."
 msgstr "Не знайдено пакунків."
 
-#: ../src/search.cc:578
+#: ../src/search.cc:616
 msgid "No products found."
 msgstr "Не знайдено продуктів."
 
-#: ../src/search.cc:601
+#: ../src/search.cc:639
 #, c-format
 msgid "No providers of '%s' found."
 msgstr "Не знайдено пакунків з вмістом «%s»."
 
 #. translators: meaning 'dependency problem' found during solving
-#: ../src/solve-commit.cc:44
+#: ../src/solve-commit.cc:41
 msgid "Problem: "
 msgstr "Проблема: "
 
 #. TranslatorExplanation %d is the solution number
-#: ../src/solve-commit.cc:57
+#: ../src/solve-commit.cc:54
 #, c-format
 msgid " Solution %d: "
 msgstr " Вирішення %d: "
 
-#: ../src/solve-commit.cc:76
+#: ../src/solve-commit.cc:73
 msgid "Choose the above solution using '1' or skip, retry or cancel"
 msgid_plural "Choose from above solutions by number or skip, retry or cancel"
 msgstr[0] "Оберіть розв’язання з перелічених вище скориставшись \"1\" або пропустіть, повторіть або вийдіть"
@@ -1528,7 +1606,7 @@ msgstr[2] "Оберіть розв’язання з перелічених ви
 
 #. translators: translate 'c' to whatever you translated the 'c' in
 #. "c" and "s/r/c" strings
-#: ../src/solve-commit.cc:83
+#: ../src/solve-commit.cc:80
 msgid "Choose the above solution using '1' or cancel using 'c'"
 msgid_plural "Choose from above solutions by number or cancel"
 msgstr[0] "Оберіть розв’язання з перелічених вище, скориставшись \"1\", або скасуйте за допомогою \"c\""
@@ -1541,7 +1619,7 @@ msgstr[2] "Оберіть розв’язання з перелічених ви
 #. The anserws must be separated by slash characters '/' and must
 #. correspond to skip/retry/cancel in that order.
 #. The answers should be lower case letters.
-#: ../src/solve-commit.cc:102
+#: ../src/solve-commit.cc:99
 msgid "s/r/c"
 msgstr "s/r/c"
 
@@ -1552,17 +1630,17 @@ msgstr "s/r/c"
 #. See the "s/r/c" comment for other details.
 #. One letter string  for translation can be tricky, so in case of problems,
 #. please report a bug against zypper at bugzilla.novell.com, we'll try to solve it.
-#: ../src/solve-commit.cc:114
+#: ../src/solve-commit.cc:111
 msgid "c"
 msgstr "с"
 
 #. continue with next problem
-#: ../src/solve-commit.cc:134
+#: ../src/solve-commit.cc:131
 #, c-format
 msgid "Applying solution %s"
 msgstr "Застосування рішення %s"
 
-#: ../src/solve-commit.cc:158
+#: ../src/solve-commit.cc:155
 #, c-format
 msgid "%d Problem:"
 msgid_plural "%d Problems:"
@@ -1571,302 +1649,63 @@ msgstr[1] "%d проблеми:"
 msgstr[2] "%d проблем:"
 
 #. should not happen! If solve() failed at least one problem must be set!
-#: ../src/solve-commit.cc:162
+#: ../src/solve-commit.cc:159
 msgid "Specified capability not found"
 msgstr "Вказану функціональність не знайдено"
 
-#: ../src/solve-commit.cc:173
+#: ../src/solve-commit.cc:170
 #, c-format
 msgid "Problem: %s"
 msgstr "Проблема: %s"
 
-#: ../src/solve-commit.cc:188
+#: ../src/solve-commit.cc:185
 msgid "Resolving dependencies..."
 msgstr "Розв’язання залежностей..."
 
-#: ../src/solve-commit.cc:369
-msgid "The following package is going to be upgraded:"
-msgid_plural "The following packages are going to be upgraded:"
-msgstr[0] "Буде оновлено пакунок:"
-msgstr[1] "Буде оновлено такі пакунки:"
-msgstr[2] "Буде оновлено такі пакунки:"
-
-#: ../src/solve-commit.cc:374
-msgid "The following patch is going to be upgraded:"
-msgid_plural "The following patches are going to be upgraded:"
-msgstr[0] "Буде оновлено латку:"
-msgstr[1] "Буде оновлено такі латки:"
-msgstr[2] "Буде оновлено такі латки:"
-
-#: ../src/solve-commit.cc:379
-msgid "The following pattern is going to be upgraded:"
-msgid_plural "The following patterns are going to be upgraded:"
-msgstr[0] "Буде оновлено шаблон:"
-msgstr[1] "Буде оновлено такі шаблони:"
-msgstr[2] "Буде оновлено такі шаблони:"
-
-#: ../src/solve-commit.cc:384
-msgid "The following product is going to be upgraded:"
-msgid_plural "The following products are going to be upgraded:"
-msgstr[0] "Буде оновлено продукт:"
-msgstr[1] "Буде оновлено такі продукти:"
-msgstr[2] "Буде оновлено такі продукти:"
-
-#: ../src/solve-commit.cc:391
-msgid "The following package is going to be downgraded:"
-msgid_plural "The following packages are going to be downgraded:"
-msgstr[0] "Буде повернено до старішої версії пакунок:"
-msgstr[1] "Буде повернено до старішої версії такі пакунки:"
-msgstr[2] "Буде повернено до старішої версії такі пакунки:"
-
-#: ../src/solve-commit.cc:396
-msgid "The following patch is going to be downgraded:"
-msgid_plural "The following patches are going to be downgraded:"
-msgstr[0] "Буде повернено до старішої версії латку:"
-msgstr[1] "Буде повернено до старішої версії такі латки:"
-msgstr[2] "Буде повернено до старішої версії такі латки:"
-
-#: ../src/solve-commit.cc:401
-msgid "The following pattern is going to be downgraded:"
-msgid_plural "The following patterns are going to be downgraded:"
-msgstr[0] "Буде повернено до старішої версії шаблон:"
-msgstr[1] "Буде повернено до старішої версії такі шаблони:"
-msgstr[2] "Буде повернено до старішої версії такі шаблони:"
-
-#: ../src/solve-commit.cc:406
-msgid "The following product is going to be downgraded:"
-msgid_plural "The following products are going to be downgraded:"
-msgstr[0] "Буде повернено до старішої версії продукт:"
-msgstr[1] "Буде повернено до старішої версії такі продукти:"
-msgstr[2] "Буде повернено до старішої версії такі продукти:"
-
-#: ../src/solve-commit.cc:413
-msgid "The following NEW package is going to be installed:"
-msgid_plural "The following NEW packages are going to be installed:"
-msgstr[0] "Буде встановлено НОВИЙ пакунок:"
-msgstr[1] "Буде встановлено такі НОВІ пакунки:"
-msgstr[2] "Буде встановлено такі НОВІ пакунки:"
-
-#: ../src/solve-commit.cc:418
-msgid "The following NEW patch is going to be installed:"
-msgid_plural "The following NEW patches are going to be installed:"
-msgstr[0] "Буде встановлено НОВУ латку:"
-msgstr[1] "Буде встановлено такі НОВІ латки:"
-msgstr[2] "Буде встановлено такі НОВІ латки:"
-
-#: ../src/solve-commit.cc:423
-msgid "The following NEW pattern is going to be installed:"
-msgid_plural "The following NEW patterns are going to be installed:"
-msgstr[0] "Буде встановлено НОВИЙ шаблон:"
-msgstr[1] "Буде встановлено такі НОВІ шаблони:"
-msgstr[2] "Буде встановлено такі НОВІ шаблони:"
-
-#: ../src/solve-commit.cc:428
-msgid "The following NEW product is going to be installed:"
-msgid_plural "The following NEW products are going to be installed:"
-msgstr[0] "Буде встановлено НОВИЙ продукт:"
-msgstr[1] "Буде встановлено такі НОВІ продукти:"
-msgstr[2] "Буде встановлено такі НОВІ продукти:"
-
-#: ../src/solve-commit.cc:433
-msgid "The following source package is going to be installed:"
-msgid_plural "The following source packages are going to be installed:"
-msgstr[0] "Буде встановлено пакунок з сирцями:"
-msgstr[1] "Буде встановлено такі пакунки з з сирцями:"
-msgstr[2] "Буде встановлено такі пакунки з з сирцями:"
-
-#: ../src/solve-commit.cc:440
-msgid "The following package is going to be reinstalled:"
-msgid_plural "The following packages are going to be reinstalled:"
-msgstr[0] "Буде перевстановлено пакунок:"
-msgstr[1] "Буде перевстановлено такі пакунки:"
-msgstr[2] "Буде перевстановлено такі пакунки:"
-
-#: ../src/solve-commit.cc:445
-msgid "The following patch is going to be reinstalled:"
-msgid_plural "The following patches are going to be reinstalled:"
-msgstr[0] "Буде перевстановлено латку:"
-msgstr[1] "Буде перевстановлено такі латки:"
-msgstr[2] "Буде перевстановлено такі латки:"
-
-#: ../src/solve-commit.cc:450
-msgid "The following pattern is going to be reinstalled:"
-msgid_plural "The following patterns are going to be reinstalled:"
-msgstr[0] "Буде перевстановлено шаблон:"
-msgstr[1] "Буде перевстановлено такі шаблони:"
-msgstr[2] "Буде перевстановлено такі шаблони:"
-
-#: ../src/solve-commit.cc:455
-msgid "The following product is going to be reinstalled:"
-msgid_plural "The following products are going to be reinstalled:"
-msgstr[0] "Буде перевстановлено продукт:"
-msgstr[1] "Буде перевстановлено такі продукти:"
-msgstr[2] "Буде перевстановлено такі продукти:"
-
-#: ../src/solve-commit.cc:462
-msgid "The following package is going to be REMOVED:"
-msgid_plural "The following packages are going to be REMOVED:"
-msgstr[0] "Буде ВИЛУЧЕНО пакунок:"
-msgstr[1] "Буде ВИЛУЧЕНО такі пакунки:"
-msgstr[2] "Буде ВИЛУЧЕНО такі пакунки:"
-
-#: ../src/solve-commit.cc:467
-msgid "The following patch is going to be REMOVED:"
-msgid_plural "The following patches are going to be REMOVED:"
-msgstr[0] "Буде ВИЛУЧЕНО латку:"
-msgstr[1] "Буде ВИЛУЧЕНО такі латки:"
-msgstr[2] "Буде ВИЛУЧЕНО такі латки:"
-
-#: ../src/solve-commit.cc:472
-msgid "The following pattern is going to be REMOVED:"
-msgid_plural "The following patterns are going to be REMOVED:"
-msgstr[0] "Буде ВИЛУЧЕНО шаблон:"
-msgstr[1] "Буде ВИЛУЧЕНО такі шаблони:"
-msgstr[2] "Буде ВИЛУЧЕНО такі шаблони:"
-
-#: ../src/solve-commit.cc:477
-msgid "The following product is going to be REMOVED:"
-msgid_plural "The following products are going to be REMOVED:"
-msgstr[0] "Буде ВИЛУЧЕНО продукт:"
-msgstr[1] "Буде ВИЛУЧЕНО такі продукти:"
-msgstr[2] "Буде ВИЛУЧЕНО такі продукти:"
-
-#: ../src/solve-commit.cc:484
-msgid "The following package is going to change architecture:"
-msgid_plural "The following packages are going to change architecture:"
-msgstr[0] "Буде змінено архітектуру пакунка:"
-msgstr[1] "Буде змінено архітектуру таких пакунків:"
-msgstr[2] "Буде змінено архітектуру таких пакунків:"
-
-#: ../src/solve-commit.cc:489
-msgid "The following patch is going to change architecture:"
-msgid_plural "The following patches are going to change architecture:"
-msgstr[0] "Буде змінено архітектуру латки:"
-msgstr[1] "Буде змінено архітектуру таких латок:"
-msgstr[2] "Буде змінено архітектуру таких латок:"
-
-#: ../src/solve-commit.cc:494
-msgid "The following pattern is going to change architecture:"
-msgid_plural "The following patterns are going to change architecture:"
-msgstr[0] "Буде змінено архітектуру шаблона:"
-msgstr[1] "Буде змінено архітектуру таких шаблонів:"
-msgstr[2] "Буде змінено архітектуру таких шаблонів:"
-
-#: ../src/solve-commit.cc:499
-msgid "The following product is going to change architecture:"
-msgid_plural "The following products are going to change architecture:"
-msgstr[0] "Буде змінено архітектуру продукту:"
-msgstr[1] "Буде змінено архітектуру таких продуктів:"
-msgstr[2] "Буде змінено архітектуру таких продуктів:"
-
-#: ../src/solve-commit.cc:506
-msgid "The following package is going to change vendor:"
-msgid_plural "The following packages are going to change vendor:"
-msgstr[0] "Буде змінено постачальника пакунка:"
-msgstr[1] "Буде змінено постачальника таких пакунків:"
-msgstr[2] "Буде змінено постачальника таких пакунків:"
-
-#: ../src/solve-commit.cc:511
-msgid "The following patch is going to change vendor:"
-msgid_plural "The following patches are going to change vendor:"
-msgstr[0] "Буде змінено постачальника латки:"
-msgstr[1] "Буде змінено постачальника таких латок:"
-msgstr[2] "Буде змінено постачальника таких латок:"
-
-#: ../src/solve-commit.cc:516
-msgid "The following pattern is going to change vendor:"
-msgid_plural "The following patterns are going to change vendor:"
-msgstr[0] "Буде змінено постачальника шаблона:"
-msgstr[1] "Буде змінено постачальника таких шаблонів:"
-msgstr[2] "Буде змінено постачальника таких шаблонів:"
-
-#: ../src/solve-commit.cc:521
-msgid "The following product is going to change vendor:"
-msgid_plural "The following products are going to change vendor:"
-msgstr[0] "Буде змінено постачальника продукту:"
-msgstr[1] "Буде змінено постачальника таких продуктів:"
-msgstr[2] "Буде змінено постачальника таких продуктів:"
-
-#: ../src/solve-commit.cc:529
-msgid "The following package is not supported by its vendor:"
-msgid_plural "The following packages are not supported by their vendor:"
-msgstr[0] "Наступний пакунок на підтримується його постачальником:"
-msgstr[1] "Наступні пакунки на підтримуються їх постачальником:"
-msgstr[2] "Наступні пакунки на підтримуються їх постачальником:"
-
-#: ../src/solve-commit.cc:603
-msgid "Dependencies of all installed packages are satisfied."
-msgstr "Залежності всіх встановлених пакунків задоволено."
-
-#: ../src/solve-commit.cc:605
-msgid "Nothing to do."
-msgstr "Нема що робити."
-
-#: ../src/solve-commit.cc:610
-msgid "Some of the dependencies of installed packages are broken. In order to fix these dependencies, the following actions need to be taken:"
-msgstr "Деякі з залежностей встановлених пакунків порушено. З метою виправити ці залежності слід виконати такі дії:"
-
-#: ../src/solve-commit.cc:764
-#, c-format
-msgid "Overall download size: %s."
-msgstr "Загальний розмір звантаження: %s."
-
-#. TrasnlatorExplanation %s will be substituted by a byte count e.g. 212 K
-#: ../src/solve-commit.cc:769
-#, c-format
-msgid "After the operation, additional %s will be used."
-msgstr "Після дії, буде додатково вжито %s."
-
-#: ../src/solve-commit.cc:772
-msgid "No additional space will be used or freed after the operation."
-msgstr "Після операції не буде додатково зайнято або вивільнено дискового простору."
-
-#. TrasnlatorExplanation %s will be substituted by a byte count e.g. 212 K
-#: ../src/solve-commit.cc:779
-#, c-format
-msgid "After the operation, %s will be freed."
-msgstr "Після дії, %s буде вивільнено."
-
 #. translators: meaning --force-resolution and --no-force-resolution
-#: ../src/solve-commit.cc:829
+#: ../src/solve-commit.cc:230
 #, c-format
 msgid "%s conflicts with %s, will use the less aggressive %s"
 msgstr "%s конфліктує з %s, буде використано менш агресивний %s"
 
-#: ../src/solve-commit.cc:855
+#: ../src/solve-commit.cc:256
 msgid "Force resolution:"
 msgstr "Примусова роздільна здатність:"
 
-#: ../src/solve-commit.cc:911
+#: ../src/solve-commit.cc:317
 msgid "Verifying dependencies..."
 msgstr "Перевірка залежностей..."
 
-#: ../src/solve-commit.cc:920
+#: ../src/solve-commit.cc:326
 msgid "Computing upgrade..."
 msgstr "Підрахування оновлення..."
 
-#: ../src/solve-commit.cc:936
+#: ../src/solve-commit.cc:342
 msgid "Generating solver test case..."
 msgstr "Створення тесту..."
 
-#: ../src/solve-commit.cc:939
+#: ../src/solve-commit.cc:345
 #, c-format
 msgid "Solver test case generated successfully at %s."
 msgstr "Тест створено успішно у %s."
 
-#: ../src/solve-commit.cc:943
+#: ../src/solve-commit.cc:349
 msgid "Error creating the solver test case."
 msgstr "Помилка створення тесту."
 
-#: ../src/solve-commit.cc:977
+#: ../src/solve-commit.cc:388
 msgid "Computing distribution upgrade..."
 msgstr "Підрахування оновлення дистрибутиву..."
 
-#: ../src/solve-commit.cc:983
+#: ../src/solve-commit.cc:394
 msgid "Resolving package dependencies..."
 msgstr "Розв’язання залежностей пакунків..."
 
-#: ../src/solve-commit.cc:1017
+#: ../src/solve-commit.cc:440
+msgid "Some of the dependencies of installed packages are broken. In order to fix these dependencies, the following actions need to be taken:"
+msgstr "Деякі з залежностей встановлених пакунків порушено. З метою виправити ці залежності слід виконати такі дії:"
+
+#: ../src/solve-commit.cc:448
 msgid "Root privileges are required to fix broken package dependencies."
 msgstr "Для виправлення порушених залежностей пакунків потрібні привілеї адміністратора."
 
@@ -1877,45 +1716,82 @@ msgstr "Для виправлення порушених залежностей 
 #. The anserws must be separated by slash characters '/' and must
 #. correspond to yes/no/showproblems in that order.
 #. The answers should be lower case letters.
-#: ../src/solve-commit.cc:1034
-msgid "y/n/p"
-msgstr "y/n/p"
+#. ! \todo add c for changelog and x for explain (show the dep tree)
+#: ../src/solve-commit.cc:473
+msgid "y/n/p/v/a/r/m/d/g"
+msgstr ""
 
-#. translators: help text for 'y' option in the y/n/p prompt
-#: ../src/solve-commit.cc:1036
-msgid "Accept the summary and proceed with installation/removal of packages."
+#. translators: help text for 'y' option in the 'Continue?' prompt
+#: ../src/solve-commit.cc:478
+#, fuzzy
+#| msgid "Accept the summary and proceed with installation/removal of packages."
+msgid "Yes, accept the summary and proceed with installation/removal of packages."
 msgstr "Взяти до уваги резюме і продовжити встановлення або вилучення пакунків."
 
-#. translators: help text for 'n' option in the y/n/p prompt
-#: ../src/solve-commit.cc:1038
-msgid "Cancel the operation."
+#. translators: help text for 'n' option in the 'Continue?' prompt
+#: ../src/solve-commit.cc:480
+#, fuzzy
+#| msgid "Cancel the operation."
+msgid "No, cancel the operation."
 msgstr "Скасувати дію."
 
-#. translators: help text for 'p' option in the y/n/p prompt
-#: ../src/solve-commit.cc:1040
+#. translators: help text for 'p' option in the 'Continue?' prompt
+#: ../src/solve-commit.cc:482
 msgid "Restart solver in no-force-resolution mode in order to show dependency problems."
 msgstr "Перезапустити розв’язувач у режимі без примусового розв’язання, щоб подивитися на проблеми у залежностях."
 
-#: ../src/solve-commit.cc:1082
+#. translators: help text for 'v' option in the 'Continue?' prompt
+#: ../src/solve-commit.cc:484
+msgid "Toggle display of package versions."
+msgstr ""
+
+#. translators: help text for 'a' option in the 'Continue?' prompt
+#: ../src/solve-commit.cc:486
+msgid "Toggle display of package architectures."
+msgstr ""
+
+#. translators: help text for 'r' option in the 'Continue?' prompt
+#: ../src/solve-commit.cc:488
+#, fuzzy
+#| msgid "The following packages will be installed:\n"
+msgid "Toggle display of repositories from which the packages will be installed."
+msgstr "Буде встановлено наступні пакунки:\n"
+
+#. translators: help text for 'm' option in the 'Continue?' prompt
+#: ../src/solve-commit.cc:490
+msgid "Toggle display of package vendor names."
+msgstr ""
+
+#. translators: help text for 'd' option in the 'Continue?' prompt
+#: ../src/solve-commit.cc:492
+msgid "Toggle between showing all details and as few details as possible."
+msgstr ""
+
+#. translators: help text for 'g' option in the 'Continue?' prompt
+#: ../src/solve-commit.cc:494
+msgid "View the summary in pager."
+msgstr ""
+
+#: ../src/solve-commit.cc:587
 msgid "committing"
 msgstr "передається"
 
-#: ../src/solve-commit.cc:1087
+#: ../src/solve-commit.cc:592
 msgid "(dry run)"
 msgstr "(пробний прогін)"
 
-#: ../src/solve-commit.cc:1116 ../src/solve-commit.cc:1155
+#: ../src/solve-commit.cc:622 ../src/solve-commit.cc:662
 msgid "Problem retrieving the package file from the repository:"
 msgstr "Проблема зі звантаженням файла пакунка зі сховища:"
 
 #. translators: the first %s is 'zypper refresh' and the second
 #. is repo allias
-#: ../src/solve-commit.cc:1151
+#: ../src/solve-commit.cc:658
 #, c-format
 msgid "Repository '%s' is out of date. Running '%s' might help."
 msgstr "Дані сховища «%s» застаріли. Запуск «%s» має допомогти."
 
-#: ../src/solve-commit.cc:1163
+#: ../src/solve-commit.cc:671
 msgid ""
 "The package integrity check failed. This may be a problem with the repository or media. Try one of the following:\n"
 "\n"
@@ -1931,20 +1807,382 @@ msgstr ""
 "- замініть носій встановлення (якщо пошкоджений)\n"
 "- скористайтесь іншим сховищем"
 
-#: ../src/solve-commit.cc:1176
+#: ../src/solve-commit.cc:685
 msgid "Problem occured during or after installation or removal of packages:"
 msgstr "Під час або після встановлення або вилучення пакунків сталася помилка:"
 
-#: ../src/solve-commit.cc:1196
+#: ../src/solve-commit.cc:701
 msgid "One of installed patches requires reboot of your machine. Reboot as soon as possible."
 msgstr "Одна з встановлених латок потребує перезапуску вашого комп’ютера. Будь ласка, зробіть це якомога швидше."
 
-#: ../src/solve-commit.cc:1200
+#: ../src/solve-commit.cc:710
 msgid "One of installed patches affects the package manager itself. Run this command once more to install any other needed patches."
 msgstr "Одна з встановлених латок стосується самого менеджера пакунків. Знову запустіть цю команду, щоб встановити інші потрібні пакунки."
 
+#: ../src/solve-commit.cc:721
+msgid "Dependencies of all installed packages are satisfied."
+msgstr "Залежності всіх встановлених пакунків задоволено."
+
+#: ../src/solve-commit.cc:723
+msgid "Nothing to do."
+msgstr "Нема що робити."
+
+#: ../src/Summary.cc:299
+msgid "The following NEW package is going to be installed:"
+msgid_plural "The following NEW packages are going to be installed:"
+msgstr[0] "Буде встановлено НОВИЙ пакунок:"
+msgstr[1] "Буде встановлено такі НОВІ пакунки:"
+msgstr[2] "Буде встановлено такі НОВІ пакунки:"
+
+#: ../src/Summary.cc:304
+msgid "The following NEW patch is going to be installed:"
+msgid_plural "The following NEW patches are going to be installed:"
+msgstr[0] "Буде встановлено НОВУ латку:"
+msgstr[1] "Буде встановлено такі НОВІ латки:"
+msgstr[2] "Буде встановлено такі НОВІ латки:"
+
+#: ../src/Summary.cc:309
+msgid "The following NEW pattern is going to be installed:"
+msgid_plural "The following NEW patterns are going to be installed:"
+msgstr[0] "Буде встановлено НОВИЙ шаблон:"
+msgstr[1] "Буде встановлено такі НОВІ шаблони:"
+msgstr[2] "Буде встановлено такі НОВІ шаблони:"
+
+#: ../src/Summary.cc:314
+msgid "The following NEW product is going to be installed:"
+msgid_plural "The following NEW products are going to be installed:"
+msgstr[0] "Буде встановлено НОВИЙ продукт:"
+msgstr[1] "Буде встановлено такі НОВІ продукти:"
+msgstr[2] "Буде встановлено такі НОВІ продукти:"
+
+#: ../src/Summary.cc:319
+msgid "The following source package is going to be installed:"
+msgid_plural "The following source packages are going to be installed:"
+msgstr[0] "Буде встановлено пакунок з сирцями:"
+msgstr[1] "Буде встановлено такі пакунки з з сирцями:"
+msgstr[2] "Буде встановлено такі пакунки з з сирцями:"
+
+#: ../src/Summary.cc:339
+msgid "The following package is going to be REMOVED:"
+msgid_plural "The following packages are going to be REMOVED:"
+msgstr[0] "Буде ВИЛУЧЕНО пакунок:"
+msgstr[1] "Буде ВИЛУЧЕНО такі пакунки:"
+msgstr[2] "Буде ВИЛУЧЕНО такі пакунки:"
+
+#: ../src/Summary.cc:344
+msgid "The following patch is going to be REMOVED:"
+msgid_plural "The following patches are going to be REMOVED:"
+msgstr[0] "Буде ВИЛУЧЕНО латку:"
+msgstr[1] "Буде ВИЛУЧЕНО такі латки:"
+msgstr[2] "Буде ВИЛУЧЕНО такі латки:"
+
+#: ../src/Summary.cc:349
+msgid "The following pattern is going to be REMOVED:"
+msgid_plural "The following patterns are going to be REMOVED:"
+msgstr[0] "Буде ВИЛУЧЕНО шаблон:"
+msgstr[1] "Буде ВИЛУЧЕНО такі шаблони:"
+msgstr[2] "Буде ВИЛУЧЕНО такі шаблони:"
+
+#: ../src/Summary.cc:354
+msgid "The following product is going to be REMOVED:"
+msgid_plural "The following products are going to be REMOVED:"
+msgstr[0] "Буде ВИЛУЧЕНО продукт:"
+msgstr[1] "Буде ВИЛУЧЕНО такі продукти:"
+msgstr[2] "Буде ВИЛУЧЕНО такі продукти:"
+
+#: ../src/Summary.cc:373
+msgid "The following package is going to be upgraded:"
+msgid_plural "The following packages are going to be upgraded:"
+msgstr[0] "Буде оновлено пакунок (пакунки):"
+msgstr[1] "Буде оновлено пакунок (пакунки):"
+msgstr[2] "Буде оновлено пакунок (пакунки):"
+
+#: ../src/Summary.cc:378
+msgid "The following patch is going to be upgraded:"
+msgid_plural "The following patches are going to be upgraded:"
+msgstr[0] "Буде оновлено латку:"
+msgstr[1] "Буде оновлено такі латки:"
+msgstr[2] "Буде оновлено такі латки:"
+
+#: ../src/Summary.cc:383
+msgid "The following pattern is going to be upgraded:"
+msgid_plural "The following patterns are going to be upgraded:"
+msgstr[0] "Буде оновлено шаблон:"
+msgstr[1] "Буде оновлено такі шаблони:"
+msgstr[2] "Буде оновлено такі шаблони:"
+
+#: ../src/Summary.cc:388
+msgid "The following product is going to be upgraded:"
+msgid_plural "The following products are going to be upgraded:"
+msgstr[0] "Буде оновлено продукт:"
+msgstr[1] "Буде оновлено такі продукти:"
+msgstr[2] "Буде оновлено такі продукти:"
+
+#: ../src/Summary.cc:406
+msgid "The following package is going to be downgraded:"
+msgid_plural "The following packages are going to be downgraded:"
+msgstr[0] "Буде повернено до старішої версії пакунок (пакунки):"
+msgstr[1] "Буде повернено до старішої версії пакунок (пакунки):"
+msgstr[2] "Буде повернено до старішої версії пакунок (пакунки):"
+
+#: ../src/Summary.cc:411
+msgid "The following patch is going to be downgraded:"
+msgid_plural "The following patches are going to be downgraded:"
+msgstr[0] "Буде повернено до старішої версії латку:"
+msgstr[1] "Буде повернено до старішої версії такі латки:"
+msgstr[2] "Буде повернено до старішої версії такі латки:"
+
+#: ../src/Summary.cc:416
+msgid "The following pattern is going to be downgraded:"
+msgid_plural "The following patterns are going to be downgraded:"
+msgstr[0] "Буде повернено до старішої версії шаблон:"
+msgstr[1] "Буде повернено до старішої версії такі шаблони:"
+msgstr[2] "Буде повернено до старішої версії такі шаблони:"
+
+#: ../src/Summary.cc:421
+msgid "The following product is going to be downgraded:"
+msgid_plural "The following products are going to be downgraded:"
+msgstr[0] "Буде повернено до старішої версії продукт:"
+msgstr[1] "Буде повернено до старішої версії такі продукти:"
+msgstr[2] "Буде повернено до старішої версії такі продукти:"
+
+#: ../src/Summary.cc:439
+msgid "The following package is going to be reinstalled:"
+msgid_plural "The following packages are going to be reinstalled:"
+msgstr[0] "Буде перевстановлено пакунок (пакунки):"
+msgstr[1] "Буде перевстановлено пакунок (пакунки):"
+msgstr[2] "Буде перевстановлено пакунок (пакунки):"
+
+#: ../src/Summary.cc:444
+msgid "The following patch is going to be reinstalled:"
+msgid_plural "The following patches are going to be reinstalled:"
+msgstr[0] "Буде перевстановлено латку:"
+msgstr[1] "Буде перевстановлено такі латки:"
+msgstr[2] "Буде перевстановлено такі латки:"
+
+#: ../src/Summary.cc:449
+msgid "The following pattern is going to be reinstalled:"
+msgid_plural "The following patterns are going to be reinstalled:"
+msgstr[0] "Буде перевстановлено шаблон:"
+msgstr[1] "Буде перевстановлено такі шаблони:"
+msgstr[2] "Буде перевстановлено такі шаблони:"
+
+#: ../src/Summary.cc:454
+msgid "The following product is going to be reinstalled:"
+msgid_plural "The following products are going to be reinstalled:"
+msgstr[0] "Буде перевстановлено продукт:"
+msgstr[1] "Буде перевстановлено такі продукти:"
+msgstr[2] "Буде перевстановлено такі продукти:"
+
+#: ../src/Summary.cc:500
+msgid "The following package is going to change architecture:"
+msgid_plural "The following packages are going to change architecture:"
+msgstr[0] "Буде змінено архітектуру пакунка:"
+msgstr[1] "Буде змінено архітектуру таких пакунків:"
+msgstr[2] "Буде змінено архітектуру таких пакунків:"
+
+#: ../src/Summary.cc:505
+msgid "The following patch is going to change architecture:"
+msgid_plural "The following patches are going to change architecture:"
+msgstr[0] "Буде змінено архітектуру латки:"
+msgstr[1] "Буде змінено архітектуру таких латок:"
+msgstr[2] "Буде змінено архітектуру таких латок:"
+
+#: ../src/Summary.cc:510
+msgid "The following pattern is going to change architecture:"
+msgid_plural "The following patterns are going to change architecture:"
+msgstr[0] "Буде змінено архітектуру шаблона:"
+msgstr[1] "Буде змінено архітектуру таких шаблонів:"
+msgstr[2] "Буде змінено архітектуру таких шаблонів:"
+
+#: ../src/Summary.cc:515
+msgid "The following product is going to change architecture:"
+msgid_plural "The following products are going to change architecture:"
+msgstr[0] "Буде змінено архітектуру продукту:"
+msgstr[1] "Буде змінено архітектуру таких продуктів:"
+msgstr[2] "Буде змінено архітектуру таких продуктів:"
+
+#: ../src/Summary.cc:536
+msgid "The following package is going to change vendor:"
+msgid_plural "The following packages are going to change vendor:"
+msgstr[0] "Буде змінено постачальника пакунка:"
+msgstr[1] "Буде змінено постачальника таких пакунків:"
+msgstr[2] "Буде змінено постачальника таких пакунків:"
+
+#: ../src/Summary.cc:541
+msgid "The following patch is going to change vendor:"
+msgid_plural "The following patches are going to change vendor:"
+msgstr[0] "Буде змінено постачальника латки:"
+msgstr[1] "Буде змінено постачальника таких латок:"
+msgstr[2] "Буде змінено постачальника таких латок:"
+
+#: ../src/Summary.cc:546
+msgid "The following pattern is going to change vendor:"
+msgid_plural "The following patterns are going to change vendor:"
+msgstr[0] "Буде змінено постачальника шаблона:"
+msgstr[1] "Буде змінено постачальника таких шаблонів:"
+msgstr[2] "Буде змінено постачальника таких шаблонів:"
+
+#: ../src/Summary.cc:551
+msgid "The following product is going to change vendor:"
+msgid_plural "The following products are going to change vendor:"
+msgstr[0] "Буде змінено постачальника продукту:"
+msgstr[1] "Буде змінено постачальника таких продуктів:"
+msgstr[2] "Буде змінено постачальника таких продуктів:"
+
+#: ../src/Summary.cc:571
+msgid "The following package is not supported by its vendor:"
+msgid_plural "The following packages are not supported by their vendor:"
+msgstr[0] "Наступний пакунок на підтримується його постачальником:"
+msgstr[1] "Наступні пакунки на підтримуються їх постачальником:"
+msgstr[2] "Наступні пакунки на підтримуються їх постачальником:"
+
+#: ../src/Summary.cc:590
+#, c-format
+msgid "Overall download size: %s."
+msgstr "Загальний розмір звантаження: %s."
+
+#. TrasnlatorExplanation %s will be substituted by a byte count e.g. 212 K
+#: ../src/Summary.cc:595
+#, c-format
+msgid "After the operation, additional %s will be used."
+msgstr "Після дії, буде додатково вжито %s."
+
+#: ../src/Summary.cc:598
+msgid "No additional space will be used or freed after the operation."
+msgstr "Після операції не буде додатково зайнято або вивільнено дискового простору."
+
+#. TrasnlatorExplanation %s will be substituted by a byte count e.g. 212 K
+#: ../src/Summary.cc:605
+#, c-format
+msgid "After the operation, %s will be freed."
+msgstr "Після дії, %s буде вивільнено."
+
+#. translators: this text will be preceded by a number e.g. "5 packages to ..."
+#: ../src/Summary.cc:628
+#, fuzzy
+#| msgid "No packages to update"
+msgid "package to upgrade"
+msgid_plural "packages to upgrade"
+msgstr[0] "Немає пакунків для оновлення"
+msgstr[1] "Немає пакунків для оновлення"
+msgstr[2] "Немає пакунків для оновлення"
+
+#. translators: this text will be preceded by a number e.g. "5 to ..."
+#: ../src/Summary.cc:640
+msgid "to downgrade"
+msgid_plural "to downgrade"
+msgstr[0] ""
+msgstr[1] ""
+msgstr[2] ""
+
+#. translators: this text will be preceded by a number e.g. "5 packages to ..."
+#: ../src/Summary.cc:643
+#, fuzzy
+#| msgid "The package download failed"
+msgid "package to downgrade"
+msgid_plural "packages to downgrade"
+msgstr[0] "Завантаження пакунка зазнало невдачі"
+msgstr[1] "Завантаження пакунка зазнало невдачі"
+msgstr[2] "Завантаження пакунка зазнало невдачі"
+
+#. translators: this text will be preceded by a number e.g. "5 new"
+#: ../src/Summary.cc:654
+#, fuzzy
+#| msgid "New"
+msgid "new"
+msgid_plural "new"
+msgstr[0] "Новий"
+msgstr[1] "Новий"
+msgstr[2] "Новий"
+
+#. translators: this text will be preceded by a number e.g. "5 new to install"
+#: ../src/Summary.cc:657
+#, fuzzy
+#| msgid "The package is not installed"
+msgid "new package to install"
+msgid_plural "new packages to install"
+msgstr[0] "Пакунок не встановлено"
+msgstr[1] "Пакунок не встановлено"
+msgstr[2] "Пакунок не встановлено"
+
+#. translators: this text will be preceded by a number e.g. "5 to ..."
+#: ../src/Summary.cc:669
+#, fuzzy
+#| msgid "_Force install"
+msgid "to reinstall"
+msgid_plural "to reinstall"
+msgstr[0] "Встановити _примусово"
+msgstr[1] "Встановити _примусово"
+msgstr[2] "Встановити _примусово"
+
+#. translators: this text will be preceded by a number e.g. "5 packages to ..."
+#: ../src/Summary.cc:672
+#, fuzzy
+#| msgid "Package installer"
+msgid "package to reinstall"
+msgid_plural "packages to reinstall"
+msgstr[0] "Встановлення пакунків"
+msgstr[1] "Встановлення пакунків"
+msgstr[2] "Встановлення пакунків"
+
+#. translators: this text will be preceded by a number e.g. "5 to ..."
+#: ../src/Summary.cc:684
+#, fuzzy
+#| msgid "%s remove ok"
+msgid "to remove"
+msgid_plural "to remove"
+msgstr[0] "%s вилучено без помилок"
+msgstr[1] "%s вилучено без помилок"
+msgstr[2] "%s вилучено без помилок"
+
+#. translators: this text will be preceded by a number e.g. "5 packages to ..."
+#: ../src/Summary.cc:687
+#, fuzzy
+#| msgid "Unable to remove ^%s\n"
+msgid "package to remove"
+msgid_plural "packages to remove"
+msgstr[0] "Не вдалося вилучити ^%s\n"
+msgstr[1] "Не вдалося вилучити ^%s\n"
+msgstr[2] "Не вдалося вилучити ^%s\n"
+
+#. translators: this text will be preceded by a number e.g. "5 to ..."
+#: ../src/Summary.cc:699
+msgid "to change vendor"
+msgid_plural " to change vendor"
+msgstr[0] ""
+msgstr[1] ""
+msgstr[2] ""
+
+#. translators: this text will be preceded by a number e.g. "5 packages ..."
+#: ../src/Summary.cc:702
+#, fuzzy
+#| msgid "The following package is going to change vendor:"
+#| msgid_plural "The following packages are going to change vendor:"
+msgid "package will change vendor"
+msgid_plural "packages will change vendor"
+msgstr[0] "Буде змінено постачальника пакунка:"
+msgstr[1] "Буде змінено постачальника таких пакунків:"
+msgstr[2] "Буде змінено постачальника таких пакунків:"
+
+#. translators: this text will be preceded by a number e.g. "5 to ..."
+#: ../src/Summary.cc:714
+msgid "to change arch"
+msgid_plural "to change arch"
+msgstr[0] ""
+msgstr[1] ""
+msgstr[2] ""
+
+#. translators: this text will be preceded by a number e.g. "5 packages ..."
+#: ../src/Summary.cc:717
+msgid "package will change arch"
+msgid_plural "packages will change arch"
+msgstr[0] ""
+msgstr[1] ""
+msgstr[2] ""
+
 #. translators: %d is the number of needed patches
-#: ../src/update.cc:65
+#: ../src/update.cc:67
 #, c-format
 msgid "%d patch needed"
 msgid_plural "%d patches needed"
@@ -1953,7 +2191,7 @@ msgstr[1] "потрібна %d латки"
 msgstr[2] "потрібна %d латок"
 
 #. translators: %d is the number of security patches
-#: ../src/update.cc:69
+#: ../src/update.cc:71
 #, c-format
 msgid "%d security patch"
 msgid_plural "%d security patches"
@@ -1961,11 +2199,11 @@ msgstr[0] "%d латка безпеки"
 msgstr[1] "%d латки безпеки"
 msgstr[2] "%d латок безпеки"
 
-#: ../src/update.cc:175 ../src/utils/misc.cc:113
+#: ../src/update.cc:177 ../src/utils/misc.cc:136
 msgid "Needed"
 msgstr "Потрібні"
 
-#: ../src/update.cc:193
+#: ../src/update.cc:195
 msgid ""
 "These are only the updates affecting the updater itself.\n"
 "Other updates are available too.\n"
@@ -1973,61 +2211,92 @@ msgstr ""
 "Ці оновлення стосуються тільки програми оновлення.\n"
 "Але є також інші оновлення.\n"
 
-#: ../src/update.cc:201 ../src/update.cc:464
+#: ../src/update.cc:203 ../src/update.cc:529
 msgid "No updates found."
 msgstr "Не знайдено оновлень."
 
-#: ../src/update.cc:338
+#: ../src/update.cc:403
 msgid "Package updates"
 msgstr "Оновлення пакунків"
 
-#: ../src/update.cc:340
+#: ../src/update.cc:405
 msgid "Patches"
 msgstr "Латки"
 
-#: ../src/update.cc:342
+#: ../src/update.cc:407
 msgid "Pattern updates"
 msgstr "Оновлення шаблона"
 
-#: ../src/update.cc:344
+#: ../src/update.cc:409
 msgid "Product updates"
 msgstr "Оновлення продукту"
 
-#: ../src/update.cc:528
+#: ../src/update.cc:593
 #, c-format
 msgid "Cannot parse '%s < %s'"
 msgstr "Не вдається обробити \"%s < %s\""
 
 #. translators: %s is the name of a patch
-#: ../src/update.cc:584
+#: ../src/update.cc:649
 #, c-format
 msgid "'%s' is interactive, skipping."
 msgstr "«%s» є інтерактивною, пропускається."
 
-#: ../src/update.cc:639
+#: ../src/update.cc:704
 #, c-format
 msgid "No patches matching '%s' found."
 msgstr "Не знайдено латок, що відповідають «%s»."
 
-#: ../src/update.cc:642
+#: ../src/update.cc:707
 #, c-format
 msgid "Patch '%s' not found."
 msgstr "Латку «%s» не знайдено."
 
-#: ../src/update.cc:710
+#: ../src/update.cc:775
 #, c-format
 msgid "No packages matching '%s' are installed."
 msgstr "Не встановлено пакунків, що відповідають «%s»."
 
-#: ../src/update.cc:713
+#: ../src/update.cc:778
 #, c-format
 msgid "Package '%s' is not installed."
 msgstr "Не встановлено пакунок «%s»."
 
-#: ../src/update.cc:730
+#: ../src/update.cc:795
 #, c-format
 msgid "No update candidate for '%s'."
 msgstr "Не знайдено кандидатури для оновлення «%s»"
+
+#: ../src/utils/Augeas.cc:26
+#, fuzzy
+#| msgid "Cannot copy the configuration template."
+msgid "Cannot initialize configuration file parser."
+msgstr "Неможливо скопіювати шаблон конфігурації."
+
+#: ../src/utils/Augeas.cc:43 ../src/utils/Augeas.cc:55
+#, fuzzy
+#| msgid "Reading the config file failed"
+msgid "Augeas error: setting config file to load failed."
+msgstr "Спроба читання файла налаштувань зазнала невдачі"
+
+#: ../src/utils/Augeas.cc:61
+#, fuzzy
+#| msgid "Cannot parse the certificate."
+msgid "Could not parse the config files."
+msgstr "Неможливо проаналізувати сертифікат."
+
+# %s is either BOOTP or DHCP
+#: ../src/utils/Augeas.cc:95
+#, fuzzy
+#| msgid "An idmapd configuration file is required."
+msgid "No configuration file exists or could be parsed."
+msgstr "Потрібний файл конфігурації idmapd."
+
+#: ../src/utils/Augeas.cc:98
+#, fuzzy
+#| msgid "Error parsing the CRL."
+msgid "Error parsing zypper.conf:"
+msgstr "Помилка аналізу CRL."
 
 #. For '-garbage' argument, with 'a', 'b', and 'e' as known options,
 #. getopt_long reports 'a', 'b', and 'e' as known options.
@@ -2060,7 +2329,7 @@ msgid "See http://en.opensuse.org/Zypper#Troubleshooting for instructions."
 msgstr "Див. http://en.opensuse.org/Zypper#Troubleshooting для допомоги."
 
 #: ../src/utils/messages.cc:40 ../src/utils/messages.cc:50
-#: ../src/utils/messages.cc:68 ../src/Zypper.cc:3706
+#: ../src/utils/messages.cc:68 ../src/Zypper.cc:3757
 msgid "Usage"
 msgstr "Вжиток"
 
@@ -2068,7 +2337,7 @@ msgstr "Вжиток"
 msgid "Too many arguments."
 msgstr "Забагато аргументів."
 
-#: ../src/utils/messages.cc:48 ../src/Zypper.cc:2715 ../src/Zypper.cc:3703
+#: ../src/utils/messages.cc:48 ../src/Zypper.cc:2772 ../src/Zypper.cc:3754
 msgid "Required argument missing."
 msgstr "Потрібний аргумент відсутній."
 
@@ -2082,35 +2351,35 @@ msgstr "Параметр \"--%s\" поки що не працюватиме."
 msgid "You have chosen to ignore a problem with download or installation of a package which might lead to broken dependencies of other packages. It is recommended to run '%s' after the operation has finished."
 msgstr "Ви хочете зігнорувати проблему зі звантаженням або встановленням пакунка, що може призвести до пошкодження залежностей інших пакунків. Рекомендовано запустити «%s» після виконання цієї дії."
 
-#: ../src/utils/misc.cc:87
+#: ../src/utils/misc.cc:110
 msgid "package"
 msgid_plural "packages"
 msgstr[0] "пакунок"
 msgstr[1] "пакунки"
 msgstr[2] "пакунків"
 
-#: ../src/utils/misc.cc:89
+#: ../src/utils/misc.cc:112
 msgid "pattern"
 msgid_plural "patterns"
 msgstr[0] "шаблон"
 msgstr[1] "шаблони"
 msgstr[2] "шаблонів"
 
-#: ../src/utils/misc.cc:91
+#: ../src/utils/misc.cc:114
 msgid "product"
 msgid_plural "product"
 msgstr[0] "продукт"
 msgstr[1] "продукти"
 msgstr[2] "продуктів"
 
-#: ../src/utils/misc.cc:93
+#: ../src/utils/misc.cc:116
 msgid "patch"
 msgid_plural "patches"
 msgstr[0] "латка"
 msgstr[1] "латки"
 msgstr[2] "латок"
 
-#: ../src/utils/misc.cc:95
+#: ../src/utils/misc.cc:118
 msgid "srcpackage"
 msgid_plural "srcpackages"
 msgstr[0] "пакунок з сирцями"
@@ -2118,46 +2387,46 @@ msgstr[1] "пакунки з сирцями"
 msgstr[2] "пакунків з сирцями"
 
 #. default
-#: ../src/utils/misc.cc:97
+#: ../src/utils/misc.cc:120
 msgid "resolvable"
 msgid_plural "resolvables"
 msgstr[0] "потрібний"
 msgstr[1] "потрібні"
 msgstr[2] "потрібних"
 
-#: ../src/utils/misc.cc:106
+#: ../src/utils/misc.cc:129
 msgid "Unknown"
 msgstr "Невідомо"
 
-#: ../src/utils/misc.cc:118
+#: ../src/utils/misc.cc:141
 msgid "Not Applicable"
 msgstr "Не стосується"
 
-#: ../src/utils/misc.cc:191
+#: ../src/utils/misc.cc:214
 msgid "Specified local path does not exist or is not accessible."
 msgstr "Вказаний локальний шлях або не існує, або доступ до нього неможливий."
 
-#: ../src/utils/misc.cc:203
+#: ../src/utils/misc.cc:226
 msgid "Given URI is invalid"
 msgstr "Вказана адреса URI - нечинна"
 
-#: ../src/utils/misc.cc:254
+#: ../src/utils/misc.cc:277
 msgid "Problem copying the specified RPM file to the cache directory."
 msgstr "Проблема з копіюванням зазначеного файла RPM до теки кеша."
 
-#: ../src/utils/misc.cc:255
+#: ../src/utils/misc.cc:278
 msgid "Perhaps you are running out of disk space."
 msgstr "Можливо, ви вичерпали вільне місце на диску."
 
-#: ../src/utils/misc.cc:263
+#: ../src/utils/misc.cc:286
 msgid "Problem retrieving the specified RPM file"
 msgstr "Проблема із звантаженням зазначеного файла RPM"
 
-#: ../src/utils/misc.cc:264
+#: ../src/utils/misc.cc:287
 msgid "Please check whether the file is accessible."
 msgstr "Будь ласка, перевірте чи доступний файл."
 
-#: ../src/utils/misc.cc:321
+#: ../src/utils/misc.cc:344
 #, c-format
 msgid "Cannot parse capability '%s'."
 msgstr "Не вдалося розібрати функціональність «%s»."
@@ -2175,27 +2444,20 @@ msgstr "Використовуйте стрілки або клавіші pgUp/p
 msgid "Use the Enter or Space key to scroll the text by lines or pages."
 msgstr "Використовуйте клавіші Enter або Пробіл, щоб прокручувати текст рядками або сторінками."
 
-#. ----------------------------------------------------------------------------
-#: ../src/utils/prompt.cc:88
-msgid "abort"
-msgstr "перервати"
+#: ../src/utils/prompt.cc:147 ../src/utils/prompt.cc:275
+#: ../src/utils/prompt.cc:345
+msgid "yes"
+msgstr "так"
 
-#: ../src/utils/prompt.cc:88
-msgid "retry"
-msgstr "повторити"
+#: ../src/utils/prompt.cc:148 ../src/utils/prompt.cc:275
+#: ../src/utils/prompt.cc:345
+msgid "no"
+msgstr "ні"
 
-#: ../src/utils/prompt.cc:88
-msgid "ignore"
-msgstr "ігнорувати"
-
-#: ../src/utils/prompt.cc:100
-msgid "Abort, retry, ignore?\n"
-msgstr "Перервати, спробувати знов, ігнорувати?\n"
-
-#: ../src/utils/prompt.cc:135
+#: ../src/utils/prompt.cc:171 ../src/utils/prompt.cc:216
 #, c-format
-msgid "autoselect %s after %u "
-msgstr "автоматично вибрати %s після %u "
+msgid "Retrying in %u seconds..."
+msgstr ""
 
 #. translators: "a/r/i" are the answers to the
 #. "Abort, retry, ignore?" prompt
@@ -2203,37 +2465,38 @@ msgstr "автоматично вибрати %s після %u "
 #. the answers must be separated by slash characters '/' and must
 #. correspond to abort/retry/ignore in that order.
 #. The answers should be lower case letters.
-#: ../src/utils/prompt.cc:159
+#: ../src/utils/prompt.cc:177 ../src/utils/prompt.cc:265
 msgid "a/r/i"
 msgstr "п/с/і"
 
-#: ../src/utils/prompt.cc:160
-msgid "Abort, retry, ignore?"
-msgstr "Перервати, спробувати знов, ігнорувати?"
+#: ../src/utils/prompt.cc:228
+#, fuzzy, c-format
+#| msgid "autoselect %s after %u "
+msgid "Autoselecting '%s' after %u second."
+msgid_plural "Autoselecting '%s' after %u seconds."
+msgstr[0] "автоматично вибрати %s після %u "
+msgstr[1] "автоматично вибрати %s після %u "
+msgstr[2] "автоматично вибрати %s після %u "
 
-#: ../src/utils/prompt.cc:169 ../src/utils/prompt.cc:205
-#: ../src/utils/prompt.cc:261
-msgid "yes"
-msgstr "так"
+#: ../src/utils/prompt.cc:247
+#, fuzzy
+#| msgid "Preparing installation..."
+msgid "Trying again..."
+msgstr "Підготувати встановлення..."
 
-#: ../src/utils/prompt.cc:169 ../src/utils/prompt.cc:206
-#: ../src/utils/prompt.cc:261
-msgid "no"
-msgstr "ні"
-
-#: ../src/utils/prompt.cc:253
+#: ../src/utils/prompt.cc:338
 #, c-format
 msgid "Invalid answer '%s'."
 msgstr "Нечинна відповідь «%s»."
 
-#. TranslatorExplanation don't translate the 'y' and 'n', they can always be used as answers.
-#. The second and the third %s is the translated 'yes' and 'no' string (lowercase).
-#: ../src/utils/prompt.cc:260
-#, c-format
-msgid "Enter 'y' for '%s' or 'n' for '%s' if nothing else works for you."
+#. translators: the %s are: 'y', 'yes' (translated), 'n', and 'no' (translated).
+#: ../src/utils/prompt.cc:344
+#, fuzzy, c-format
+#| msgid "Enter 'y' for '%s' or 'n' for '%s' if nothing else works for you."
+msgid "Enter '%s' for '%s' or '%s' for '%s' if nothing else works for you."
 msgstr "Введіть «y» для «%s» або «n» для «%s», якщо ніщо інше не допомагає."
 
-#: ../src/utils/prompt.cc:274
+#: ../src/utils/prompt.cc:358
 #, c-format
 msgid ""
 "If you run zypper without a terminal, use '%s' global\n"
@@ -2243,28 +2506,47 @@ msgstr ""
 "параметр «%s», щоб zypper давала типові відповіді на запити."
 
 #. TranslatorExplanation These are reasons for various failures.
-#: ../src/utils/prompt.h:125
+#: ../src/utils/prompt.h:164
 msgid "Not found"
 msgstr "Не знайдено"
 
 # error box title
-#: ../src/utils/prompt.h:125
+#: ../src/utils/prompt.h:164
 msgid "I/O error"
 msgstr "Помилка вводу/виводу"
 
-#: ../src/utils/prompt.h:125
+#: ../src/utils/prompt.h:164
 msgid "Invalid object"
 msgstr "Нечинний об'єкт"
 
-#: ../src/utils/prompt.h:132
+#: ../src/utils/prompt.h:171
 msgid "Error"
 msgstr "Помилка"
 
 #: ../src/Zypper.cc:153
+#, fuzzy
+#| msgid ""
+#| "  Global Options:\n"
+#| "\t--help, -h\t\tHelp.\n"
+#| "\t--version, -V\t\tOutput the version number.\n"
+#| "\t--quiet, -q\t\tSuppress normal output, print only error\n"
+#| "\t\t\t\tmessages.\n"
+#| "\t--verbose, -v\t\tIncrease verbosity.\n"
+#| "\t--no-abbrev, -A\t\tDo not abbreviate text in tables.\n"
+#| "\t--table-style, -s\tTable style (integer).\n"
+#| "\t--rug-compatible, -r\tTurn on rug compatibility.\n"
+#| "\t--non-interactive, -n\tDo not ask anything, use default answers\n"
+#| "\t\t\t\tautomatically.\n"
+#| "\t--xmlout, -x\t\tSwitch to XML output.\n"
+#| "\t--reposd-dir, -D <dir>\tUse alternative repository definition files\n"
+#| "\t\t\t\tdirectory.\n"
+#| "\t--cache-dir, -C <dir>\tUse alternative meta-data cache directory.\n"
+#| "\t--raw-cache-dir <dir>\tUse alternative raw meta-data cache directory.\n"
 msgid ""
 "  Global Options:\n"
 "\t--help, -h\t\tHelp.\n"
 "\t--version, -V\t\tOutput the version number.\n"
+"\t--config, -c <file>\tUse specified config file instead of the default.\n"
 "\t--quiet, -q\t\tSuppress normal output, print only error\n"
 "\t\t\t\tmessages.\n"
 "\t--verbose, -v\t\tIncrease verbosity.\n"
@@ -2296,7 +2578,7 @@ msgstr ""
 "\t--raw-cache-dir <тека>\tВикористовувати альтернативну теку кешу сирих\n"
 "\t\t\t\tметаданих.\n"
 
-#: ../src/Zypper.cc:171
+#: ../src/Zypper.cc:172
 msgid ""
 "     Repository Options:\n"
 "\t--no-gpg-checks\t\tIgnore GPG check failures and continue.\n"
@@ -2311,7 +2593,7 @@ msgstr ""
 "\t--no-refresh\t\tНе освіжувати сховища.\n"
 
 #. translators: these belong to Repository Options main help text
-#: ../src/Zypper.cc:178
+#: ../src/Zypper.cc:179
 msgid ""
 "\t--no-cd\t\t\tIgnore CD/DVD repositories.\n"
 "\t--no-remote\t\tIgnore remote repositories.\n"
@@ -2319,7 +2601,7 @@ msgstr ""
 "\t--no-cd\t\t\tІгнорувати сховища КД/DVD.\n"
 "\t--no-remote\t\tІгнорувати віддалені сховища.\n"
 
-#: ../src/Zypper.cc:182
+#: ../src/Zypper.cc:183
 msgid ""
 "     Target Options:\n"
 "\t--root, -R <dir>\tOperate on a different root directory.\n"
@@ -2331,7 +2613,7 @@ msgstr ""
 "\t--disable-system-resolvables\n"
 "\t\t\t\tНе читати встановлені пакунки.\n"
 
-#: ../src/Zypper.cc:189
+#: ../src/Zypper.cc:190
 msgid ""
 "  Commands:\n"
 "\thelp, ?\t\t\tPrint help.\n"
@@ -2341,7 +2623,7 @@ msgstr ""
 "\thelp, ?\t\t\tПоказати довідку.\n"
 "\tshell, sh\t\tПриймати по декілька команд одразу.\n"
 
-#: ../src/Zypper.cc:194
+#: ../src/Zypper.cc:195
 msgid ""
 "     Repository Management:\n"
 "\trepos, lr\t\tList all defined repositories.\n"
@@ -2361,7 +2643,7 @@ msgstr ""
 "\trefresh, ref\t\tОсвіжити дані про всі сховища.\n"
 "\tclean\t\t\tОчистити локальний кеш.\n"
 
-#: ../src/Zypper.cc:204
+#: ../src/Zypper.cc:205
 msgid ""
 "     Service Management:\n"
 "\tservices, ls\t\tList all defined services.\n"
@@ -2377,7 +2659,7 @@ msgstr ""
 "\tremoveservice, rs\t\tВилучити вказану службу.\n"
 "\trefresh-services, refs\t\tОсвіжити дані про всі служби.\n"
 
-#: ../src/Zypper.cc:212
+#: ../src/Zypper.cc:213
 msgid ""
 "     Software Management:\n"
 "\tinstall, in\t\tInstall packages.\n"
@@ -2399,7 +2681,7 @@ msgstr ""
 "\t\t\t\tВстановити новододані пакунки, які було\n"
 "\t\t\t\tрекомендовано встановленими пакунками.\n"
 
-#: ../src/Zypper.cc:223
+#: ../src/Zypper.cc:224
 msgid ""
 "     Update Management:\n"
 "\tupdate, up\t\tUpdate installed packages with newer versions.\n"
@@ -2417,7 +2699,7 @@ msgstr ""
 "\tdist-upgrade, dup\tВиконати оновлення дистрибутиву.\n"
 "\tpatch-check, pchk\tПеревірити наявність латок оновлення.\n"
 
-#: ../src/Zypper.cc:232
+#: ../src/Zypper.cc:233
 msgid ""
 "     Querying:\n"
 "\tsearch, se\t\tSearch for packages matching a pattern.\n"
@@ -2443,19 +2725,26 @@ msgstr ""
 "\tproducts, pd\t\tНадати список доступних продуктів.\n"
 "\twhat-provides, wp\tНадати список пакунків, що надають певну функціональність.\n"
 
-#: ../src/Zypper.cc:247
+#: ../src/Zypper.cc:248
+#, fuzzy
+#| msgid ""
+#| "     Package Locks:\n"
+#| "\taddlock, al\t\tAdd a package lock.\n"
+#| "\tremovelock, rl\t\tRemove a package lock.\n"
+#| "\tlocks, ll\t\tList current package locks.\n"
 msgid ""
 "     Package Locks:\n"
 "\taddlock, al\t\tAdd a package lock.\n"
 "\tremovelock, rl\t\tRemove a package lock.\n"
 "\tlocks, ll\t\tList current package locks.\n"
+"\tcleanlocks, cl\t\tRemove unused locks.\n"
 msgstr ""
 "     Блокування пакунків:\n"
 "\taddlock, al\t\tЗаблокувати пакунок.\n"
 "\tremovelock, rl\t\tЗняти блокування з пакунка.\n"
 "\tlocks, ll\t\tНадати список замків пакунка.\n"
 
-#: ../src/Zypper.cc:253
+#: ../src/Zypper.cc:255
 msgid ""
 "     Other Commands:\n"
 "\tversioncmp, vcmp\tCompare two version strings.\n"
@@ -2469,7 +2758,7 @@ msgstr ""
 "\tlicenses\t\tПоказати ліцензії і угоди для\n"
 "\t\t\t\tвстановлених пакунків.\n"
 
-#: ../src/Zypper.cc:261
+#: ../src/Zypper.cc:263
 msgid ""
 "  Usage:\n"
 "\tzypper [--global-options] <command> [--command-options] [arguments]\n"
@@ -2479,100 +2768,127 @@ msgstr ""
 
 #. translators: %s is "help" or "zypper help" depending on whether
 #. zypper shell is running or not
-#: ../src/Zypper.cc:286
+#: ../src/Zypper.cc:288
 #, c-format
 msgid "Type '%s' to get a list of global options and commands."
 msgstr "Введіть «%s», щоб прочитати список основних параметрів і команд."
 
 #. translators: %s is "help" or "zypper help" depending on whether
 #. zypper shell is running or not
-#: ../src/Zypper.cc:295
+#: ../src/Zypper.cc:297
 #, c-format
 msgid "Type '%s' to get command-specific help."
 msgstr "Введіть «%s», щоб прочитати довідку з окремої команди."
 
-#: ../src/Zypper.cc:398
+#: ../src/Zypper.cc:409
 #, c-format
 msgid "Verbosity: %d"
 msgstr "Багатослівність: %d"
 
-#: ../src/Zypper.cc:412
+#: ../src/Zypper.cc:423
 #, c-format
 msgid "Invalid table style %d."
 msgstr "Непридатний стиль таблиці %d."
 
-#: ../src/Zypper.cc:413
+#: ../src/Zypper.cc:424
 #, c-format
 msgid "Use an integer number from %d to %d"
 msgstr "Використовуйте ціле число від %d до %d"
 
-#: ../src/Zypper.cc:444
+#: ../src/Zypper.cc:455
 msgid "Entering non-interactive mode."
 msgstr "Початок неінтерактивного режиму."
 
-#: ../src/Zypper.cc:450
+#: ../src/Zypper.cc:461
 msgid "Entering 'no-gpg-checks' mode."
 msgstr "Входження до режиму \"no-gpg-checks\"."
 
-#: ../src/Zypper.cc:461
+#: ../src/Zypper.cc:472
 msgid "The path specified in the --root option must be absolute."
 msgstr "Шлях, що визначається параметром --root, має бути абсолютним."
 
-#: ../src/Zypper.cc:490
+#: ../src/Zypper.cc:501
 msgid "Repositories disabled, using the database of installed packages only."
 msgstr "Сховища вимкнено, буде вживатись тільки база даних встановлених пакунків."
 
-#: ../src/Zypper.cc:502
+#: ../src/Zypper.cc:513
 msgid "Autorefresh disabled."
 msgstr "Автоосвіження вимкнено."
 
-#: ../src/Zypper.cc:509
+#: ../src/Zypper.cc:520
 msgid "CD/DVD repositories disabled."
 msgstr "Сховища КД/DVD вимкнено."
 
-#: ../src/Zypper.cc:516
+#: ../src/Zypper.cc:527
 msgid "Remote repositories disabled."
 msgstr "Віддалені сховища вимкнено."
 
-#: ../src/Zypper.cc:523
+#: ../src/Zypper.cc:534
 msgid "Ignoring installed resolvables."
 msgstr "Ігнорування встановлених залежності."
 
 #. TranslatorExplanation The %s is "--plus-repo"
-#: ../src/Zypper.cc:618
+#: ../src/Zypper.cc:645
 #, c-format
 msgid "The %s option has no effect here, ignoring."
 msgstr "Параметр %s у цьому випадку не працюватиме, його пропущено."
 
-#: ../src/Zypper.cc:795
+#: ../src/Zypper.cc:819
 msgid "Unexpected exception."
 msgstr "Непередбачений виняток."
 
 #. TranslatorExplanation the first %s = "package, patch, pattern, product"
 #. and the second %s = "package"
-#. ! \todo A capability is NAME[.ARCH][OP<VERSION>] now,
-#. !  the help text will be changed after release
-#: ../src/Zypper.cc:884
-#, c-format
+#: ../src/Zypper.cc:912
+#, fuzzy, c-format
+#| msgid ""
+#| "install (in) [options] <capability|rpm_file_uri> ...\n"
+#| "\n"
+#| "Install packages with specified capabilities or RPM files with specified location. A capability is NAME[OP<VERSION>], where OP is one of <, <=, =, >=, >.\n"
+#| "\n"
+#| "  Command options:\n"
+#| "-r, --repo <alias|#|URI>        Install packages only from the specified repository.\n"
+#| "-t, --type <type>               Type of package (%s).\n"
+#| "                                Default: %s.\n"
+#| "-n, --name                      Select packages by plain name, not by capability.\n"
+#| "-C, --capability                Select packages by capability.\n"
+#| "-f, --force                     Install even if the item is already installed (reinstall).\n"
+#| "-l, --auto-agree-with-licenses  Automatically say 'yes' to third party license confirmation prompt.\n"
+#| "                                See 'man zypper' for more details.\n"
+#| "    --debug-solver              Create solver test case for debugging.\n"
+#| "    --no-recommends             Do not install recommended packages, only required.\n"
+#| "-R, --no-force-resolution       Do not force the solver to find solution, let it ask.\n"
+#| "    --force-resolution          Force the solver to find a solution (even an agressive).\n"
+#| "-D, --dry-run                   Test the installation, do not actually install.\n"
 msgid ""
 "install (in) [options] <capability|rpm_file_uri> ...\n"
 "\n"
-"Install packages with specified capabilities or RPM files with specified location. A capability is NAME[OP<VERSION>], where OP is one of <, <=, =, >=, >.\n"
+"Install packages with specified capabilities or RPM files with specified\n"
+"location. A capability is NAME[.ARCH][OP<VERSION>], where OP is one\n"
+"of <, <=, =, >=, >.\n"
 "\n"
 "  Command options:\n"
-"-r, --repo <alias|#|URI>        Install packages only from the specified repository.\n"
-"-t, --type <type>               Type of package (%s).\n"
-"                                Default: %s.\n"
-"-n, --name                      Select packages by plain name, not by capability.\n"
-"-C, --capability                Select packages by capability.\n"
-"-f, --force                     Install even if the item is already installed (reinstall).\n"
-"-l, --auto-agree-with-licenses  Automatically say 'yes' to third party license confirmation prompt.\n"
-"                                See 'man zypper' for more details.\n"
-"    --debug-solver              Create solver test case for debugging.\n"
-"    --no-recommends             Do not install recommended packages, only required.\n"
-"-R, --no-force-resolution       Do not force the solver to find solution, let it ask.\n"
-"    --force-resolution          Force the solver to find a solution (even an agressive).\n"
-"-D, --dry-run                   Test the installation, do not actually install.\n"
+"    --from <alias|#|URI>    Select packages from the specified repository.\n"
+"-r, --repo <alias|#|URI>    Load only the specified repository.\n"
+"-t, --type <type>           Type of package (%s).\n"
+"                            Default: %s.\n"
+"-n, --name                  Select packages by plain name, not by capability.\n"
+"-C, --capability            Select packages by capability.\n"
+"-f, --force                 Reinstall the package if the exact version is\n"
+"                            available in repositories.\n"
+"-l, --auto-agree-with-licenses\n"
+"                            Automatically say 'yes' to third party license\n"
+"                            confirmation prompt.\n"
+"                            See 'man zypper' for more details.\n"
+"    --debug-solver          Create solver test case for debugging.\n"
+"    --no-recommends         Do not install recommended packages, only required.\n"
+"    --recommends            Install also recommended packages in addition\n"
+"                            to the required.\n"
+"    --no-force-resolution   Do not force the solver to find solution,\n"
+"                            let it ask.\n"
+"-R, --force-resolution      Force the solver to find a solution (even\n"
+"                            an agressive).\n"
+"-D, --dry-run               Test the installation, do not actually install.\n"
 msgstr ""
 "install (in) [параметри] <функціональність|uri_rpm_файла> ...\n"
 "\n"
@@ -2592,19 +2908,31 @@ msgstr ""
 "    --force-resolution          Примусити розв’язуючу програму знайти вирішення (навіть, неточне).\n"
 "-D, --dry-run                   Випробувати можливість встановлення, не встановлювати насправді\n"
 
-#. translators: this option belongs to 'install' command
-#: ../src/Zypper.cc:906
-msgid "    --from <alias|#|URI>        Select packages only from specified repository.\n"
-msgstr ""
-
 #. TranslatorExplanation the first %s = "package, patch, pattern, product"
 #. and the second %s = "package"
-#: ../src/Zypper.cc:935
-#, c-format
+#: ../src/Zypper.cc:969
+#, fuzzy, c-format
+#| msgid ""
+#| "remove (rm) [options] <capability> ...\n"
+#| "\n"
+#| "Remove packages with specified capabilities. A capability is NAME[OP<VERSION>], where OP is one of <, <=, =, >=, >.\n"
+#| "\n"
+#| "  Command options:\n"
+#| "-r, --repo <alias|#|URI>        Operate only with packages from the specified repository.\n"
+#| "-t, --type <type>               Type of package (%s).\n"
+#| "                                Default: %s.\n"
+#| "-n, --name                      Select packages by plain name, not by capability.\n"
+#| "-C, --capability                Select packages by capability.\n"
+#| "    --debug-solver              Create solver test case for debugging.\n"
+#| "-R, --no-force-resolution       Do not force the solver to find solution, let it ask.\n"
+#| "    --force-resolution          Force the solver to find a solution (even an agressive).\n"
+#| "-D, --dry-run                   Test the removal, do not actually remove.\n"
 msgid ""
 "remove (rm) [options] <capability> ...\n"
 "\n"
-"Remove packages with specified capabilities. A capability is NAME[OP<VERSION>], where OP is one of <, <=, =, >=, >.\n"
+"Remove packages with specified capabilities.\n"
+"A capability is NAME[.ARCH][OP<VERSION>], where OP is one\n"
+"of <, <=, =, >=, >.\n"
 "\n"
 "  Command options:\n"
 "-r, --repo <alias|#|URI>        Operate only with packages from the specified repository.\n"
@@ -2633,7 +2961,7 @@ msgstr ""
 "    --force-resolution          Примусити розв’язуючу програму знайти вирішення (навіть, неточне).\n"
 "-D, --dry-run                   Випробувати можливість вилучення, не вилучати насправді\n"
 
-#: ../src/Zypper.cc:965
+#: ../src/Zypper.cc:1000
 msgid ""
 "source-install (si) [options] <name> ...\n"
 "\n"
@@ -2653,16 +2981,29 @@ msgstr ""
 "-D, --no-build-deps      Не встановлювати залежності для збирання.\n"
 "-r, --repo <alias|#|URI> Встановити пакунки лише з зазначених сховищ.\n"
 
-#: ../src/Zypper.cc:993
+#: ../src/Zypper.cc:1028
+#, fuzzy
+#| msgid ""
+#| "verify (ve) [options]\n"
+#| "\n"
+#| "Check whether dependencies of installed packages are satisfied and repair eventual dependency problems.\n"
+#| "\n"
+#| "  Command options:\n"
+#| "    --no-recommends      Do not install recommended packages, only required.\n"
+#| "-D, --dry-run            Test the repair, do not actually do anything to the system.\n"
+#| "-r, --repo <alias|#|URI> Use only specified repositories to install missing packages.\n"
 msgid ""
 "verify (ve) [options]\n"
 "\n"
 "Check whether dependencies of installed packages are satisfied and repair eventual dependency problems.\n"
 "\n"
 "  Command options:\n"
-"    --no-recommends      Do not install recommended packages, only required.\n"
-"-D, --dry-run            Test the repair, do not actually do anything to the system.\n"
-"-r, --repo <alias|#|URI> Use only specified repositories to install missing packages.\n"
+"-r, --repo <alias|#|URI>    Load only the specified repository.\n"
+"    --no-recommends         Do not install recommended packages, only required.\n"
+"    --recommends            Install also recommended packages in addition\n"
+"                            to the required.\n"
+"-D, --dry-run               Test the repair, do not actually do anything to\n"
+"                            the system.\n"
 msgstr ""
 "verify (ve) [параметри]\n"
 "\n"
@@ -2673,7 +3014,7 @@ msgstr ""
 "-D, --dry-run            Спробувати полагодити, не виконувати реальних дій з системою.\n"
 "-r, --repo <псевдонім|#|URI> Використовувати лише вказані сховища для встановлення пакунків, яких не вистачає.\n"
 
-#: ../src/Zypper.cc:1017
+#: ../src/Zypper.cc:1055
 msgid ""
 "install-new-recommends (inr) [options]\n"
 "\n"
@@ -2694,18 +3035,26 @@ msgstr ""
 "    --debug-solver       Створити тестовий приклад для зневадження розв’язуючої програми.\n"
 
 #. translators: the %s = "ris" (the only service type currently supported)
-#. ! \todo s/--name/--name <name> after 11.1 release.
-#: ../src/Zypper.cc:1045
-#, c-format
+#: ../src/Zypper.cc:1081
+#, fuzzy, c-format
+#| msgid ""
+#| "addservice (as) [options] <URI> <alias>\n"
+#| "\n"
+#| "Add a repository index service to the system.\n"
+#| "\n"
+#| "  Command options:\n"
+#| "-t, --type <TYPE>       Type of the service (%s).\n"
+#| "-d, --disable           Add the service as disabled.\n"
+#| "-n, --name              Specify descriptive name for the service.\n"
 msgid ""
 "addservice (as) [options] <URI> <alias>\n"
 "\n"
 "Add a repository index service to the system.\n"
 "\n"
 "  Command options:\n"
-"-t, --type <TYPE>       Type of the service (%s).\n"
+"-t, --type <type>       Type of the service (%s).\n"
 "-d, --disable           Add the service as disabled.\n"
-"-n, --name              Specify descriptive name for the service.\n"
+"-n, --name <alias>      Specify descriptive name for the service.\n"
 msgstr ""
 "addservice (as) [параметри] <URI> <псевдонім>\n"
 "\n"
@@ -2717,8 +3066,7 @@ msgstr ""
 "-n, --name              Вказати описову назву служби.\n"
 
 #. TranslatorExplanation the %s = "yast2, rpm-md, plaindir"
-#. TODO
-#: ../src/Zypper.cc:1069
+#: ../src/Zypper.cc:1104
 msgid ""
 "removeservice (rs) [options] <alias|#|URI>\n"
 "\n"
@@ -2737,7 +3085,7 @@ msgstr ""
 "    --loose-query\tІгнорувати рядок запиту в URL\n"
 
 #. translators: %s is "--all" and "--all"
-#: ../src/Zypper.cc:1105
+#: ../src/Zypper.cc:1140
 #, c-format
 msgid ""
 "modifyservice (ms) <options> <alias|#|URI>\n"
@@ -2789,7 +3137,7 @@ msgstr ""
 "-t, --remote                   Застосувати зміни до всіх віддалених служб.\n"
 "-m, --medium-type <type>       Застосувати зміни до всіх служб вказаного типу.\n"
 
-#: ../src/Zypper.cc:1153
+#: ../src/Zypper.cc:1188
 msgid ""
 "services (ls) [options]\n"
 "\n"
@@ -2817,7 +3165,7 @@ msgstr ""
 "-U, --sort-by-uri         Впорядкувати список за URI.\n"
 "-N, --sort-by-name        Впорядкувати список за назвами.\n"
 
-#: ../src/Zypper.cc:1179
+#: ../src/Zypper.cc:1214
 msgid ""
 "refresh-services (refs) [options]\n"
 "\n"
@@ -2834,22 +3182,37 @@ msgstr ""
 "-r, --with-repos      Також оновити сховища.\n"
 
 #. translators: the %s = "yast2, rpm-md, plaindir"
-#. ! \todo s/--name/--name <name> after 11.1 release.
-#: ../src/Zypper.cc:1208
-#, c-format
+#: ../src/Zypper.cc:1242
+#, fuzzy, c-format
+#| msgid ""
+#| "addrepo (ar) [options] <URI> <alias>\n"
+#| "addrepo (ar) [options] <FILE.repo>\n"
+#| "\n"
+#| "Add a repository to the sytem. The repository can be specified by its URI or can be read from specified .repo file (even remote).\n"
+#| "\n"
+#| "  Command options:\n"
+#| "-r, --repo <FILE.repo>  Just another means to specify a .repo file to read.\n"
+#| "-t, --type <TYPE>       Type of repository (%s).\n"
+#| "-d, --disable           Add the repository as disabled.\n"
+#| "-c, --check             Probe URI.\n"
+#| "-C, --no-check          Don't probe URI, probe later during refresh.\n"
+#| "-n, --name              Specify descriptive name for the repository.\n"
+#| "-k, --keep-packages     Enable RPM files caching.\n"
+#| "-K, --no-keep-packages  Disable RPM files caching.\n"
+#| "-f, --refresh           Enable autorefresh of the repository.\n"
 msgid ""
 "addrepo (ar) [options] <URI> <alias>\n"
-"addrepo (ar) [options] <FILE.repo>\n"
+"addrepo (ar) [options] <file.repo>\n"
 "\n"
 "Add a repository to the sytem. The repository can be specified by its URI or can be read from specified .repo file (even remote).\n"
 "\n"
 "  Command options:\n"
-"-r, --repo <FILE.repo>  Just another means to specify a .repo file to read.\n"
-"-t, --type <TYPE>       Type of repository (%s).\n"
+"-r, --repo <file.repo>  Just another means to specify a .repo file to read.\n"
+"-t, --type <type>       Type of repository (%s).\n"
 "-d, --disable           Add the repository as disabled.\n"
 "-c, --check             Probe URI.\n"
 "-C, --no-check          Don't probe URI, probe later during refresh.\n"
-"-n, --name              Specify descriptive name for the repository.\n"
+"-n, --name <name>       Specify descriptive name for the repository.\n"
 "-k, --keep-packages     Enable RPM files caching.\n"
 "-K, --no-keep-packages  Disable RPM files caching.\n"
 "-f, --refresh           Enable autorefresh of the repository.\n"
@@ -2872,7 +3235,7 @@ msgstr ""
 
 #. translators: this is just a rug compatiblity command
 #. translators: this is just a rug-compatiblity command
-#: ../src/Zypper.cc:1257 ../src/Zypper.cc:2136
+#: ../src/Zypper.cc:1291 ../src/Zypper.cc:2188
 msgid ""
 "list-resolvables (lr)\n"
 "\n"
@@ -2882,7 +3245,7 @@ msgstr ""
 "\n"
 "Надає список типів розв’язань.\n"
 
-#: ../src/Zypper.cc:1265
+#: ../src/Zypper.cc:1299
 msgid ""
 "repos (lr) [options]\n"
 "\n"
@@ -2913,11 +3276,11 @@ msgstr ""
 "-N, --sort-by-name        Впорядкувати список за назвами.\n"
 
 #. translators: this option belongs to 'lr' command help
-#: ../src/Zypper.cc:1280
+#: ../src/Zypper.cc:1314
 msgid "-s, --service             Show also alias of parent service.\n"
 msgstr "-s, --service             Показати також псевдонім батьківської служби.\n"
 
-#: ../src/Zypper.cc:1295
+#: ../src/Zypper.cc:1329
 msgid ""
 "removerepo (rr) [options] <alias|#|URI>\n"
 "\n"
@@ -2935,7 +3298,7 @@ msgstr ""
 "    --loose-auth\tІгнорувати дані автентифікації користувача у URL\n"
 "    --loose-query\tІгнорувати рядок запиту у URL\n"
 
-#: ../src/Zypper.cc:1314
+#: ../src/Zypper.cc:1348
 msgid ""
 "renamerepo (nr) [options] <alias|#|URI> <new-alias>\n"
 "\n"
@@ -2951,11 +3314,31 @@ msgstr ""
 
 #. translators: %s is "--all|--remote|--local|--medium-type"
 #. and "--all, --remote, --local, --medium-type"
-#. ! \todo s/<1-99>/<#> after 11.1 release.
-#: ../src/Zypper.cc:1346
-#, c-format
+#: ../src/Zypper.cc:1379
+#, fuzzy, c-format
+#| msgid ""
+#| "modifyrepo (mr) <options> <alias|#|URI>\n"
+#| "modifyrepo (mr) <options> <%s>\n"
+#| "\n"
+#| "Modify properties of repositories specified by alias, number, or URI, or by the\n"
+#| "'%s' aggregate options.\n"
+#| "\n"
+#| "  Command options:\n"
+#| "-d, --disable             Disable the repository (but don't remove it).\n"
+#| "-e, --enable              Enable a disabled repository.\n"
+#| "-r, --refresh             Enable auto-refresh of the repository.\n"
+#| "-R, --no-refresh          Disable auto-refresh of the repository.\n"
+#| "-n, --name                Set a descriptive name for the repository.\n"
+#| "-p, --priority <1-99>     Set priority of the repository.\n"
+#| "-k, --keep-packages       Enable RPM files caching.\n"
+#| "-K, --no-keep-packages    Disable RPM files caching.\n"
+#| "\n"
+#| "-a, --all                 Apply changes to all repositories.\n"
+#| "-l, --local               Apply changes to all local repositories.\n"
+#| "-t, --remote              Apply changes to all remote repositories.\n"
+#| "-m, --medium-type <type>  Apply changes to repositories of specified type.\n"
 msgid ""
-"modifyrepo (mr) <options> <alias|#|URI>\n"
+"modifyrepo (mr) <options> <alias|#|URI> ...\n"
 "modifyrepo (mr) <options> <%s>\n"
 "\n"
 "Modify properties of repositories specified by alias, number, or URI, or by the\n"
@@ -2967,7 +3350,7 @@ msgid ""
 "-r, --refresh             Enable auto-refresh of the repository.\n"
 "-R, --no-refresh          Disable auto-refresh of the repository.\n"
 "-n, --name                Set a descriptive name for the repository.\n"
-"-p, --priority <1-99>     Set priority of the repository.\n"
+"-p, --priority <integer>  Set priority of the repository.\n"
 "-k, --keep-packages       Enable RPM files caching.\n"
 "-K, --no-keep-packages    Disable RPM files caching.\n"
 "\n"
@@ -2996,7 +3379,7 @@ msgstr ""
 "-t, --remote              Застосувати зміни до всіх віддалених сховищ.\n"
 "-m, --medium-type <type>  Застосувати зміни до сховищ з вказаним типом.\n"
 
-#: ../src/Zypper.cc:1386
+#: ../src/Zypper.cc:1419
 msgid ""
 "refresh (ref) [alias|#|URI] ...\n"
 "\n"
@@ -3024,9 +3407,20 @@ msgstr ""
 "-r, --repo <псевдонім|#|URI> Оновити дані лише для вказаних сховищ.\n"
 "-s, --services           Оновити також служби перед оновленням сховищ.\n"
 
-#: ../src/Zypper.cc:1415
+#: ../src/Zypper.cc:1448
+#, fuzzy
+#| msgid ""
+#| "clean [alias|#|URI] ...\n"
+#| "\n"
+#| "Clean local caches.\n"
+#| "\n"
+#| "  Command options:\n"
+#| "-r, --repo <alias|#|URI> Clean only specified repositories.\n"
+#| "-m, --metadata           Clean metadata cache.\n"
+#| "-M, --raw-metadata       Clean raw metadata cache.\n"
+#| "-a, --all                Clean both metadata and package caches.\n"
 msgid ""
-"clean [alias|#|URI] ...\n"
+"clean (cc) [alias|#|URI] ...\n"
 "\n"
 "Clean local caches.\n"
 "\n"
@@ -3048,7 +3442,7 @@ msgstr ""
 
 #. TranslatorExplanation the first %s = "package, patch, pattern, product"
 #. and the second %s = "patch"
-#: ../src/Zypper.cc:1444
+#: ../src/Zypper.cc:1477
 #, c-format
 msgid ""
 "list-updates (lu) [options]\n"
@@ -3082,8 +3476,30 @@ msgstr ""
 
 #. TranslatorExplanation the first %s = "package, patch, pattern, product"
 #. and the second %s = "patch"
-#: ../src/Zypper.cc:1495
-#, c-format
+#: ../src/Zypper.cc:1529
+#, fuzzy, c-format
+#| msgid ""
+#| "update (up) [options] ...\n"
+#| "\n"
+#| "Update all or specified installed packages with newer versions, if possible.\n"
+#| "\n"
+#| "  Command options:\n"
+#| "\n"
+#| "-t, --type <type>               Type of package (%s).\n"
+#| "                                Default: %s.\n"
+#| "-r, --repo <alias|#|URI>        Limit updates to the specified repository.\n"
+#| "    --skip-interactive          Skip interactive updates.\n"
+#| "-l, --auto-agree-with-licenses  Automatically say 'yes' to third party license\n"
+#| "                                confirmation prompt.\n"
+#| "                                See man zypper for more details.\n"
+#| "    --best-effort               Do a 'best effort' approach to update. Updates\n"
+#| "                                to a lower than the latest version are\n"
+#| "                                also acceptable.\n"
+#| "    --debug-solver              Create solver test case for debugging.\n"
+#| "    --no-recommends             Do not install recommended packages, only required.\n"
+#| "-R, --no-force-resolution       Do not force the solver to find solution, let it ask.\n"
+#| "    --force-resolution          Force the solver to find a solution (even an agressive).\n"
+#| "-D, --dry-run                   Test the update, do not actually update.\n"
 msgid ""
 "update (up) [options] ...\n"
 "\n"
@@ -3091,21 +3507,26 @@ msgid ""
 "\n"
 "  Command options:\n"
 "\n"
-"-t, --type <type>               Type of package (%s).\n"
-"                                Default: %s.\n"
-"-r, --repo <alias|#|URI>        Limit updates to the specified repository.\n"
-"    --skip-interactive          Skip interactive updates.\n"
-"-l, --auto-agree-with-licenses  Automatically say 'yes' to third party license\n"
-"                                confirmation prompt.\n"
-"                                See man zypper for more details.\n"
-"    --best-effort               Do a 'best effort' approach to update. Updates\n"
-"                                to a lower than the latest version are\n"
-"                                also acceptable.\n"
-"    --debug-solver              Create solver test case for debugging.\n"
-"    --no-recommends             Do not install recommended packages, only required.\n"
-"-R, --no-force-resolution       Do not force the solver to find solution, let it ask.\n"
-"    --force-resolution          Force the solver to find a solution (even an agressive).\n"
-"-D, --dry-run                   Test the update, do not actually update.\n"
+"-t, --type <type>           Type of package (%s).\n"
+"                            Default: %s.\n"
+"-r, --repo <alias|#|URI>    Load only the specified repository.\n"
+"    --skip-interactive      Skip interactive updates.\n"
+"-l, --auto-agree-with-licenses\n"
+"                            Automatically say 'yes' to third party license\n"
+"                            confirmation prompt.\n"
+"                            See man zypper for more details.\n"
+"    --best-effort           Do a 'best effort' approach to update. Updates\n"
+"                            to a lower than the latest version are\n"
+"                            also acceptable.\n"
+"    --debug-solver          Create solver test case for debugging.\n"
+"    --no-recommends         Do not install recommended packages, only required.\n"
+"    --recommends            Install also recommended packages in addition\n"
+"                            to the required.\n"
+"-R, --no-force-resolution   Do not force the solver to find solution,\n"
+"                            let it ask.\n"
+"    --force-resolution      Force the solver to find a solution (even\n"
+"                            an agressive).\n"
+"-D, --dry-run               Test the update, do not actually update.\n"
 msgstr ""
 "update (up) [параметри]\n"
 "\n"
@@ -3125,7 +3546,22 @@ msgstr ""
 "-R, --force-resolution <on|off> Примусити розв’язання (навіть неточне).\n"
 "-D, --dry-run                   Випробувати можливість оновлення, не оновлювати насправді.\n"
 
-#: ../src/Zypper.cc:1534
+#: ../src/Zypper.cc:1574
+#, fuzzy
+#| msgid ""
+#| "patch [options]\n"
+#| "\n"
+#| "Install all available needed patches.\n"
+#| "\n"
+#| "  Command options:\n"
+#| "\n"
+#| "-r, --repo <alias|#|URI>        Work only with specified repository.\n"
+#| "    --skip-interactive          Skip interactive patches.\n"
+#| "-l, --auto-agree-with-licenses  Automatically say 'yes' to third party license\n"
+#| "                                confirmation prompt.\n"
+#| "                                See man zypper for more details.\n"
+#| "    --debug-solver              Create solver test case for debugging.\n"
+#| "-D, --dry-run                   Test the update, do not actually update.\n"
 msgid ""
 "patch [options]\n"
 "\n"
@@ -3133,13 +3569,17 @@ msgid ""
 "\n"
 "  Command options:\n"
 "\n"
-"-r, --repo <alias|#|URI>        Work only with specified repository.\n"
-"    --skip-interactive          Skip interactive patches.\n"
-"-l, --auto-agree-with-licenses  Automatically say 'yes' to third party license\n"
-"                                confirmation prompt.\n"
-"                                See man zypper for more details.\n"
-"    --debug-solver              Create solver test case for debugging.\n"
-"-D, --dry-run                   Test the update, do not actually update.\n"
+"-r, --repo <alias|#|URI>    Load only the specified repository.\n"
+"    --skip-interactive      Skip interactive patches.\n"
+"-l, --auto-agree-with-licenses\n"
+"                            Automatically say 'yes' to third party license\n"
+"                            confirmation prompt.\n"
+"                            See man zypper for more details.\n"
+"    --debug-solver          Create solver test case for debugging.\n"
+"    --no-recommends         Do not install recommended packages, only required.\n"
+"    --recommends            Install also recommended packages in addition\n"
+"                            to the required.\n"
+"-D, --dry-run               Test the update, do not actually update.\n"
 msgstr ""
 "patch [параметри]\n"
 "\n"
@@ -3155,7 +3595,7 @@ msgstr ""
 "    --debug-solver              Створити тестовий приклад для зневадження розв’язань.\n"
 "-D, --dry-run                   Випробувати можливість оновлення, не оновлювати насправді.\n"
 
-#: ../src/Zypper.cc:1560
+#: ../src/Zypper.cc:1604
 msgid ""
 "list-patches (lp) [options]\n"
 "\n"
@@ -3172,7 +3612,20 @@ msgstr ""
 "\n"
 "-r, --repo <псевдонім|#|URI>  Показати наявні латки тільки у вказаному сховищі.\n"
 
-#: ../src/Zypper.cc:1585
+#: ../src/Zypper.cc:1630
+#, fuzzy
+#| msgid ""
+#| "dist-upgrade (dup) [options]\n"
+#| "\n"
+#| "Perform a distribution upgrade.\n"
+#| "\n"
+#| "  Command options:\n"
+#| "\n"
+#| "-r, --repo <alias|#|URI>        Limit the upgrade to the repository specified by the alias.\n"
+#| "-l, --auto-agree-with-licenses  Automatically say 'yes' to third party license confirmation prompt.\n"
+#| "                                See man zypper for more details.\n"
+#| "    --debug-solver              Create solver test case for debugging\n"
+#| "-D, --dry-run                   Test the upgrade, do not actually upgrade\n"
 msgid ""
 "dist-upgrade (dup) [options]\n"
 "\n"
@@ -3180,12 +3633,16 @@ msgid ""
 "\n"
 "  Command options:\n"
 "\n"
-"-r, --repo <alias|#|URI>        Limit the upgrade to the specified repository.\n"
-"    --no-recommends             Do not install recommended packages, only required.\n"
-"-l, --auto-agree-with-licenses  Automatically say 'yes' to third party license confirmation prompt.\n"
-"                                See man zypper for more details.\n"
-"    --debug-solver              Create solver test case for debugging\n"
-"-D, --dry-run                   Test the upgrade, do not actually upgrade\n"
+"-r, --repo <alias|#|URI>    Load only the specified repository.\n"
+"-l, --auto-agree-with-licenses\n"
+"                            Automatically say 'yes' to third party license\n"
+"                            confirmation prompt.\n"
+"                            See man zypper for more details.\n"
+"    --debug-solver          Create solver test case for debugging\n"
+"    --no-recommends         Do not install recommended packages, only required.\n"
+"    --recommends            Install also recommended packages in addition\n"
+"                            to the required.\n"
+"-D, --dry-run               Test the upgrade, do not actually upgrade\n"
 msgstr ""
 "dist-upgrade (dup) [параметри]\n"
 "\n"
@@ -3193,13 +3650,13 @@ msgstr ""
 "\n"
 "  Параметри команди:\n"
 "\n"
-"-r, --repo <псевдонім|#|URI>        Обмежити оновлення вказаним сховищем.\n"
+"-r, --repo <псевдонім|#|URI>        Обмежити оновлення сховищем, що задане псевдонімом.\n"
 "-l, --auto-agree-with-licenses  Автоматично відповісти «так» на питання про згоду на умови ліцензуванняt.\n"
 "                                Щоб дізнатися більше, виконайте команду «man zypper».\n"
-"    --debug-solver              Створити тестовий приклад для зневадження розв’язання.\n"
-"-D, --dry-run                   Випробувати можливість оновлення, не оновлювати насправді.\n"
+"    --debug-solver              Створити тестовий приклад для зневадження розв’язуючої програми\n"
+"-D, --dry-run                   Випробувати можливість оновлення, не оновлювати насправді\n"
 
-#: ../src/Zypper.cc:1627
+#: ../src/Zypper.cc:1676
 msgid ""
 "search (se) [options] [querystring] ...\n"
 "\n"
@@ -3247,7 +3704,7 @@ msgstr ""
 "\n"
 "Також можна використовувати шаблони заміни * і ? для пошуку в рядках.\n"
 
-#: ../src/Zypper.cc:1664
+#: ../src/Zypper.cc:1713
 msgid ""
 "patch-check (pchk) [options]\n"
 "\n"
@@ -3265,7 +3722,7 @@ msgstr ""
 "\n"
 "-r, --repo <псевдонім|#|URI>  Перевіряти наявність латок тільки у вказаному сховищі.\n"
 
-#: ../src/Zypper.cc:1686
+#: ../src/Zypper.cc:1735
 msgid ""
 "patches (pch) [repository] ...\n"
 "\n"
@@ -3283,7 +3740,7 @@ msgstr ""
 "\n"
 "-r, --repo <псевдонім|#|URI>  Ще один спосіб вказати сховище.\n"
 
-#: ../src/Zypper.cc:1713
+#: ../src/Zypper.cc:1762
 msgid ""
 "packages (pa) [options] [repository] ...\n"
 "\n"
@@ -3309,7 +3766,7 @@ msgstr ""
 "-N, --sort-by-name        Впорядкувати список за назвами пакунків.\n"
 "-R, --sort-by-repo        Впорядкувати список за сховищами.\n"
 
-#: ../src/Zypper.cc:1741
+#: ../src/Zypper.cc:1790
 msgid ""
 "patterns (pt) [options] [repository] ...\n"
 "\n"
@@ -3331,7 +3788,7 @@ msgstr ""
 "-i, --installed-only      Показати лише встановлені шаблони.\n"
 "-u, --uninstalled-only    Показати лише невстановлені шаблони.\n"
 
-#: ../src/Zypper.cc:1767
+#: ../src/Zypper.cc:1816
 msgid ""
 "products (pd) [options] [repository] ...\n"
 "\n"
@@ -3353,8 +3810,17 @@ msgstr ""
 "-i, --installed-only      Показати лише встановлені продукти.\n"
 "-u, --uninstalled-only    Показати лише невстановлені продукти.\n"
 
-#: ../src/Zypper.cc:1792
-#, c-format
+#: ../src/Zypper.cc:1843
+#, fuzzy, c-format
+#| msgid ""
+#| "info (if) [options] <name> ...\n"
+#| "\n"
+#| "Show detailed information for specified packages.\n"
+#| "\n"
+#| "  Command options:\n"
+#| "-r, --repo <alias|#|URI>  Work only with the specified repository.\n"
+#| "-t, --type <type>         Type of package (%s).\n"
+#| "                          Default: %s."
 msgid ""
 "info (if) [options] <name> ...\n"
 "\n"
@@ -3363,7 +3829,9 @@ msgid ""
 "  Command options:\n"
 "-r, --repo <alias|#|URI>  Work only with the specified repository.\n"
 "-t, --type <type>         Type of package (%s).\n"
-"                          Default: %s."
+"                          Default: %s.\n"
+"    --requires            Show also requires and prerequires.\n"
+"    --recommends          Show also recommends."
 msgstr ""
 "info (if) [параметри] <назва> ...\n"
 "\n"
@@ -3374,7 +3842,7 @@ msgstr ""
 "-t, --type <тип>         Тип пакунка (%s).\n"
 "                          Типовий: %s."
 
-#: ../src/Zypper.cc:1815
+#: ../src/Zypper.cc:1868
 #, c-format
 msgid ""
 "patch-info <patchname> ...\n"
@@ -3389,7 +3857,7 @@ msgstr ""
 "\n"
 "Це псевдонім для сумісності rug з «%s»\n"
 
-#: ../src/Zypper.cc:1834
+#: ../src/Zypper.cc:1887
 #, c-format
 msgid ""
 "pattern-info <pattern_name> ...\n"
@@ -3404,7 +3872,7 @@ msgstr ""
 "\n"
 "Це псевдонім для сумісності rug з «%s»\n"
 
-#: ../src/Zypper.cc:1853
+#: ../src/Zypper.cc:1906
 #, c-format
 msgid ""
 "product-info <product_name> ...\n"
@@ -3419,7 +3887,7 @@ msgstr ""
 "\n"
 "Це псевдонім для сумісності rug з «%s»\n"
 
-#: ../src/Zypper.cc:1870
+#: ../src/Zypper.cc:1923
 msgid ""
 "what-provides (wp) <capability>\n"
 "\n"
@@ -3433,7 +3901,7 @@ msgstr ""
 "\n"
 "Ця команда не має додаткових параметрів.\n"
 
-#: ../src/Zypper.cc:1921
+#: ../src/Zypper.cc:1974
 msgid ""
 "moo\n"
 "\n"
@@ -3447,7 +3915,7 @@ msgstr ""
 "\n"
 "Ця команда не має додаткових параметрів.\n"
 
-#: ../src/Zypper.cc:1943
+#: ../src/Zypper.cc:1996
 #, c-format
 msgid ""
 "addlock (al) [options] <packagename> ...\n"
@@ -3468,7 +3936,7 @@ msgstr ""
 "-t, --type <тип>         Тип пакунка (%s).\n"
 "                          Типовий: %s.\n"
 
-#: ../src/Zypper.cc:1969
+#: ../src/Zypper.cc:2022
 #, c-format
 msgid ""
 "removelock (rl) [options] <lock-number|packagename> ...\n"
@@ -3485,7 +3953,7 @@ msgstr ""
 "  Параметри команди:\n"
 "-r, --repo <alias|#|URI>  Вилучити блокування тільки з вказаного пакунка.\n"
 
-#: ../src/Zypper.cc:1989
+#: ../src/Zypper.cc:2042
 msgid ""
 "locks (ll)\n"
 "\n"
@@ -3499,7 +3967,18 @@ msgstr ""
 "\n"
 "Ця команда не має додаткових параметрів.\n"
 
-#: ../src/Zypper.cc:2029
+#: ../src/Zypper.cc:2062
+msgid ""
+"cleanlocks (cl)\n"
+"\n"
+"Remove useless locks.\n"
+"\n"
+"  Command options:\n"
+"-d, --only-duplicates     Clean only duplicate locks.\n"
+"-e, --only-empty          Clean only locks which doesn't lock anything.\n"
+msgstr ""
+
+#: ../src/Zypper.cc:2082
 msgid ""
 "targetos (tos)\n"
 "\n"
@@ -3513,7 +3992,7 @@ msgstr ""
 "\n"
 "Ця команда не має додаткових параметрів.\n"
 
-#: ../src/Zypper.cc:2048
+#: ../src/Zypper.cc:2101
 msgid ""
 "versioncmp (vcmp) <version1> <version2>\n"
 "\n"
@@ -3529,11 +4008,18 @@ msgstr ""
 "  Параметри команди:\n"
 "-m, --match  Приймає відсутній номер версії як будь-який випуск.\n"
 
-#: ../src/Zypper.cc:2068
+#: ../src/Zypper.cc:2120
+#, fuzzy
+#| msgid ""
+#| "licenses\n"
+#| "\n"
+#| "Report Licenses and EULA of currently installed software packages.\n"
+#| "\n"
+#| "This command has no additional options.\n"
 msgid ""
 "licenses\n"
 "\n"
-"Report Licenses and EULA of currently installed software packages.\n"
+"Report licenses and EULAs of currently installed software packages.\n"
 "\n"
 "This command has no additional options.\n"
 msgstr ""
@@ -3543,7 +4029,7 @@ msgstr ""
 "\n"
 "Ця команда не має додаткових параметрів.\n"
 
-#: ../src/Zypper.cc:2085
+#: ../src/Zypper.cc:2137
 msgid ""
 "quit (exit, ^D)\n"
 "\n"
@@ -3557,7 +4043,7 @@ msgstr ""
 "\n"
 "Ця команда не має додаткових параметрів.\n"
 
-#: ../src/Zypper.cc:2102
+#: ../src/Zypper.cc:2154
 msgid ""
 "shell (sh)\n"
 "\n"
@@ -3572,7 +4058,7 @@ msgstr ""
 "Ця команда не має додаткових параметрів.\n"
 
 #. translators: this is just a rug-compatiblity command
-#: ../src/Zypper.cc:2120
+#: ../src/Zypper.cc:2172
 msgid ""
 "service-types (st)\n"
 "\n"
@@ -3585,7 +4071,7 @@ msgstr ""
 #. trunslators: this is a rug-compatibility command (equivalent of
 #. 'zypper addrepo -t plaindir URI'). You can refer to rug's translations
 #. for how to translate specific terms like channel or service if in doubt.
-#: ../src/Zypper.cc:2158
+#: ../src/Zypper.cc:2210
 msgid ""
 "mount\n"
 "\n"
@@ -3605,7 +4091,7 @@ msgstr ""
 "-n, --name <назва>    Використовувати вказаний рядок як назву служби.\n"
 "-r, --recurse        Рекурсія за підкаталогами.\n"
 
-#: ../src/Zypper.cc:2189
+#: ../src/Zypper.cc:2241
 #, c-format
 msgid ""
 "patch-search [options] [querystring...]\n"
@@ -3617,7 +4103,7 @@ msgstr ""
 "Шукає латки, що відповідають заданим рядкам пошуку. Це відповідник \"%s\" для сумісності з rug. Подробиці можна знайти у довіднику з zypper.\n"
 
 #. translators: this is just a rug-compatiblity command
-#: ../src/Zypper.cc:2207
+#: ../src/Zypper.cc:2259
 msgid ""
 "ping [options]\n"
 "\n"
@@ -3629,16 +4115,16 @@ msgstr ""
 "Ця команда має порожнє впровадження, яке завжди повертає 0.\n"
 "Це потрібне для сумісності з rug.\n"
 
-#: ../src/Zypper.cc:2221 ../src/Zypper.cc:3988
+#: ../src/Zypper.cc:2273 ../src/Zypper.cc:4052
 msgid "Unexpected program flow."
 msgstr "Неочікуваний перебіг виконання програми"
 
-#: ../src/Zypper.cc:2245
+#: ../src/Zypper.cc:2300
 msgid "Non-option program arguments: "
 msgstr "Аргументи програми (не-параметри): "
 
 #. TranslatorExplanation this is a hedgehog, paint another animal, if you want
-#: ../src/Zypper.cc:2307
+#: ../src/Zypper.cc:2364
 msgid ""
 "   \\\\\\\\\\\n"
 "  \\\\\\\\\\\\\\__o\n"
@@ -3648,24 +4134,24 @@ msgstr ""
 "  \\\\\\\\\\\\\\__o\n"
 "__\\\\\\\\\\\\\\'/_"
 
-#: ../src/Zypper.cc:2334
+#: ../src/Zypper.cc:2391
 msgid "Root privileges are required for refreshing services."
 msgstr "Для освіження служб потрібні привілеї адміністратора."
 
-#: ../src/Zypper.cc:2361 ../src/Zypper.cc:2481 ../src/Zypper.cc:2708
+#: ../src/Zypper.cc:2418 ../src/Zypper.cc:2538 ../src/Zypper.cc:2765
 msgid "Root privileges are required for modifying system services."
 msgstr "Для зміни системних служб потрібні привілеї адміністратора."
 
-#: ../src/Zypper.cc:2430
+#: ../src/Zypper.cc:2487
 msgid "Could not determine the type of the repository. Check if the specified URI points to a valid repository."
 msgstr "Не вдалося визначити тип сховища. Будь ласка, перевірте чи зазначені адреси URI (див. нижче) вказують на чинне сховище."
 
-#: ../src/Zypper.cc:2462
+#: ../src/Zypper.cc:2519
 #, c-format
 msgid "'%s' is not a valid service type."
 msgstr "«%s» не є чинним типом служби."
 
-#: ../src/Zypper.cc:2464
+#: ../src/Zypper.cc:2521
 #, c-format
 msgid "See '%s' or '%s' to get a list of known service types."
 msgstr "Щоб отримати список відомих типів служб, скористайтесь «%s» або «%s»."
@@ -3674,200 +4160,247 @@ msgstr "Щоб отримати список відомих типів служ�
 #. followed by ms command help text which will explain it
 #. translators: aggregate option is e.g. "--all". This message will be
 #. followed by mr command help text which will explain it
-#: ../src/Zypper.cc:2493 ../src/Zypper.cc:2861
+#: ../src/Zypper.cc:2550 ../src/Zypper.cc:2919
 msgid "Alias or an aggregate option is required."
 msgstr "Потрібен псевдонім або сукупність параметрів сховища."
 
-#: ../src/Zypper.cc:2527
+#: ../src/Zypper.cc:2584
 #, c-format
 msgid "Service '%s' not found."
 msgstr "Службу «%s» не знайдено."
 
-#: ../src/Zypper.cc:2563 ../src/Zypper.cc:2707 ../src/Zypper.cc:2793
-#: ../src/Zypper.cc:2849
+#: ../src/Zypper.cc:2620 ../src/Zypper.cc:2764 ../src/Zypper.cc:2850
+#: ../src/Zypper.cc:2906
 msgid "Root privileges are required for modifying system repositories."
 msgstr "Для зміни системних сховищ потрібні привілеї адміністратора."
 
-#: ../src/Zypper.cc:2612 ../src/Zypper.cc:2970
+#: ../src/Zypper.cc:2669 ../src/Zypper.cc:3032
 msgid "Too few arguments."
 msgstr "Замало аргументів."
 
-#: ../src/Zypper.cc:2636
+#: ../src/Zypper.cc:2693
 msgid "If only one argument is used, it must be a URI pointing to a .repo file."
 msgstr "Якщо використано лише один аргумент, це має бути URI, що вказує на файл .repo."
 
-#: ../src/Zypper.cc:2662
+#: ../src/Zypper.cc:2719
 #, c-format
 msgid "Cannot use %s together with %s. Using the %s setting."
 msgstr "Не можна використовувати %s разом з %s. Використано параметри з %s."
 
-#: ../src/Zypper.cc:2685
+#: ../src/Zypper.cc:2742
 msgid "Specified type is not a valid repository type:"
 msgstr "Вказаний тип не є чинним типом сховища:"
 
-#: ../src/Zypper.cc:2687
+#: ../src/Zypper.cc:2744
 #, c-format
 msgid "See '%s' or '%s' to get a list of known repository types."
 msgstr "Щоб отримати список відомих типів сховищ, скористайтесь «%s» або «%s»."
 
 #. translators: %s is the supplied command line argument which
 #. for which no repository counterpart was found
-#: ../src/Zypper.cc:2743
+#: ../src/Zypper.cc:2800
 #, c-format
 msgid "Repository '%s' not found by alias, number or URI."
 msgstr "Сховище «%s» не знайдено за його псевдонімом, номером або URL."
 
 #. translators: %s is the supplied command line argument which
 #. for which no service counterpart was found
-#: ../src/Zypper.cc:2766
+#: ../src/Zypper.cc:2823
 #, c-format
 msgid "Service '%s' not found by alias, number or URI."
 msgstr "Сховище «%s» не знайдено за його псевдонімом, номером або URL."
 
-#: ../src/Zypper.cc:2800
+#: ../src/Zypper.cc:2857
 msgid "Too few arguments. At least URI and alias are required."
 msgstr "Замало аргументів. Потрібні, принаймні, адреса URI і псевдонім."
 
-#: ../src/Zypper.cc:2825
+#: ../src/Zypper.cc:2882
 #, c-format
 msgid "Repository '%s' not found."
 msgstr "Сховище «%s» не знайдено."
 
-#: ../src/Zypper.cc:2891
+#: ../src/Zypper.cc:2952
 #, c-format
 msgid "Repository %s not found."
 msgstr "Сховище %s не знайдено."
 
-#: ../src/Zypper.cc:2909
+#: ../src/Zypper.cc:2971
 msgid "Root privileges are required for refreshing system repositories."
 msgstr "Для освіження системних сховищ потрібні привілеї адміністратора."
 
-#: ../src/Zypper.cc:2916
+#: ../src/Zypper.cc:2978
 #, c-format
 msgid "The '%s' global option has no effect here."
 msgstr "Глобальний параметр «%s» тут не працюватиме."
 
-#: ../src/Zypper.cc:2924
+#: ../src/Zypper.cc:2986
 #, c-format
 msgid "Arguments are not allowed if '%s' is used."
 msgstr "Аргументи не дозволені, якщо використовується «%s»."
 
-#: ../src/Zypper.cc:2950
+#: ../src/Zypper.cc:3012
 msgid "Root privileges are required for cleaning local caches."
 msgstr "Для очищення локального кешу потрібні привілеї адміністратора."
 
-#: ../src/Zypper.cc:2971
+#: ../src/Zypper.cc:3033
 msgid "At least one package name is required."
 msgstr "Потрібна хоча б одна назва пакунка."
 
-#: ../src/Zypper.cc:2985
+#: ../src/Zypper.cc:3043
 msgid "Root privileges are required for installing or uninstalling packages."
 msgstr "Для встановлення і вилучення пакунків потрібні привілеї адміністратора."
 
 #. translators: rug related message, shown if
 #. 'zypper in --entire-catalog foorepo someargument' is specified
-#: ../src/Zypper.cc:3002
+#: ../src/Zypper.cc:3060
 msgid "Ignoring arguments, marking the entire repository."
-msgstr ""
+msgstr "Аргументи буде зігноровано; позначається ціле сховище."
 
-#: ../src/Zypper.cc:3012
+#: ../src/Zypper.cc:3070
 #, c-format
 msgid "Unknown package type: %s"
 msgstr "Невідомий тип пакунка: %s"
 
-#: ../src/Zypper.cc:3032
+#: ../src/Zypper.cc:3090
 #, c-format
 msgid "'%s' looks like an RPM file. Will try to download it."
 msgstr "\"%s\" схожий на файл RPM. Спробуємо його звантажити."
 
-#: ../src/Zypper.cc:3045
+#: ../src/Zypper.cc:3103
 #, c-format
 msgid "Problem with the RPM file specified as '%s', skipping."
 msgstr "Проблема з файлом RPM, заданим як \"%s\", його пропущено."
 
-#: ../src/Zypper.cc:3068
+#: ../src/Zypper.cc:3126
 #, c-format
 msgid "Problem reading the RPM header of %s. Is it an RPM file?"
 msgstr "Проблема під час читання заголовка RPM %s. Можливо, це не файл RPM?"
 
-#: ../src/Zypper.cc:3093
+#: ../src/Zypper.cc:3151
 msgid "Plain RPM files cache"
 msgstr "Кеш простих файлів RPM"
 
-#: ../src/Zypper.cc:3114
+#: ../src/Zypper.cc:3172
 msgid "No valid arguments specified."
 msgstr "Не вказано чинні аргументи."
 
-#: ../src/Zypper.cc:3128 ../src/Zypper.cc:3207
+#: ../src/Zypper.cc:3186 ../src/Zypper.cc:3265
 msgid "Warning: No repositories defined. Operating only with the installed resolvables. Nothing can be installed."
 msgstr "Увага: немає визначених сховищ. Дії тільки з встановленими потрібними пакунками. Нічого неможливо встановити."
 
-#: ../src/Zypper.cc:3157
+#: ../src/Zypper.cc:3215
 msgid "Source package name is a required argument."
 msgstr "Назва пакунка джерела - це потрібний аргумент."
 
-#: ../src/Zypper.cc:3264 ../src/Zypper.cc:3524 ../src/Zypper.cc:3608
-#: ../src/Zypper.cc:3731 ../src/Zypper.cc:3799
+#: ../src/Zypper.cc:3322 ../src/Zypper.cc:3582 ../src/Zypper.cc:3662
+#: ../src/Zypper.cc:3782 ../src/Zypper.cc:3862
 #, c-format
 msgid "Unknown package type '%s'."
 msgstr "Невідомий тип пакунка «%s»."
 
-#: ../src/Zypper.cc:3370
+#: ../src/Zypper.cc:3428
 msgid "Problem occurred initializing or executing the search query"
 msgstr "Під час започаткування та виконання пошукового запиту сталася помилка"
 
-#: ../src/Zypper.cc:3371
+#: ../src/Zypper.cc:3429
 msgid "See the above message for a hint."
 msgstr "Прочитайте повідомлення розміщене вище, щоб зрозуміти ситуацію краще."
 
 #. translators: Running as 'rug', cannot use 'best-effort' option.
-#: ../src/Zypper.cc:3543 ../src/Zypper.cc:3626
+#: ../src/Zypper.cc:3601 ../src/Zypper.cc:3680
 #, c-format
 msgid "Running as '%s', cannot use '%s' option."
 msgstr "Виконується як «%s», неможливо вживати параметр «%s»."
 
-#: ../src/Zypper.cc:3571
+#: ../src/Zypper.cc:3629
 msgid "Root privileges are required for updating packages."
 msgstr "Для оновлення пакунків потрібні привілеї адміністратора."
 
-#: ../src/Zypper.cc:3664
+#: ../src/Zypper.cc:3718
 msgid "Root privileges are required for performing a distribution upgrade."
 msgstr "Для проведення оновлення дистрибутива вам слід мати привілеї адміністратора."
 
-#: ../src/Zypper.cc:3761 ../src/Zypper.cc:3822
+#: ../src/Zypper.cc:3794
+#, fuzzy, c-format
+#| msgid "'%1' does not exist."
+msgid "Type '%s' does not support %s."
+msgstr "\"%1\" не існує."
+
+#: ../src/Zypper.cc:3824 ../src/Zypper.cc:3885
 msgid "Root privileges are required for adding of package locks."
 msgstr "Для блокування пакунків потрібні привілеї адміністратора."
 
-#: ../src/Zypper.cc:3930
+#: ../src/Zypper.cc:3994
 #, c-format
 msgid "%s matches %s"
 msgstr "%s збігається з %s"
 
-#: ../src/Zypper.cc:3932
+#: ../src/Zypper.cc:3996
 #, c-format
 msgid "%s is newer than %s"
 msgstr "%s новіший за %s"
 
-#: ../src/Zypper.cc:3934
+#: ../src/Zypper.cc:3998
 #, c-format
 msgid "%s is older than %s"
 msgstr "%s старіший за %s"
 
-#: ../src/Zypper.cc:3973
+#: ../src/Zypper.cc:4037
 msgid "This command only makes sense in the zypper shell."
 msgstr "Ця команда має сенс тільки в оболонці zypper."
 
-#: ../src/Zypper.cc:3985
+#: ../src/Zypper.cc:4049
 msgid "You already are running zypper's shell."
 msgstr "У вас вже запущено оболонку zypper."
 
-#: ../src/Zypper.cc:4002
+#: ../src/Zypper.cc:4066
 msgid "Description"
 msgstr "Опис"
 
-#: ../src/Zypper.cc:4066
+#: ../src/Zypper.cc:4129
 msgid "Resolvable Type"
 msgstr "Тип розв’язувача"
 
-#~ msgid "Root privileges are required for modifying services."
-#~ msgstr "Для зміни служб потрібні привілеї адміністратора."
+#~ msgid "y/n/p"
+#~ msgstr "y/n/p"
+
+#~ msgid "abort"
+#~ msgstr "перервати"
+
+#~ msgid "retry"
+#~ msgstr "повторити"
+
+#~ msgid "ignore"
+#~ msgstr "ігнорувати"
+
+#~ msgid "Abort, retry, ignore?\n"
+#~ msgstr "Перервати, спробувати знов, ігнорувати?\n"
+
+#~ msgid "    --from <alias|#|URI>        Select packages only from specified repository.\n"
+#~ msgstr "    --from <псевдонім|#|URI>        Вибрати пакунки тільки з указаного сховища.\n"
+
+#~ msgid ""
+#~ "dist-upgrade (dup) [options]\n"
+#~ "\n"
+#~ "Perform a distribution upgrade.\n"
+#~ "\n"
+#~ "  Command options:\n"
+#~ "\n"
+#~ "-r, --repo <alias|#|URI>        Limit the upgrade to the specified repository.\n"
+#~ "    --no-recommends             Do not install recommended packages, only required.\n"
+#~ "-l, --auto-agree-with-licenses  Automatically say 'yes' to third party license confirmation prompt.\n"
+#~ "                                See man zypper for more details.\n"
+#~ "    --debug-solver              Create solver test case for debugging\n"
+#~ "-D, --dry-run                   Test the upgrade, do not actually upgrade\n"
+#~ msgstr ""
+#~ "dist-upgrade (dup) [параметри]\n"
+#~ "\n"
+#~ "Виконати оновлення дистрибутива.\n"
+#~ "\n"
+#~ "  Параметри команди:\n"
+#~ "\n"
+#~ "-r, --repo <псевдонім|#|URI>        Обмежити оновлення вказаним сховищем.\n"
+#~ "-l, --auto-agree-with-licenses  Автоматично відповісти «так» на питання про згоду на умови ліцензуванняt.\n"
+#~ "                                Щоб дізнатися більше, виконайте команду «man zypper».\n"
+#~ "    --debug-solver              Створити тестовий приклад для зневадження розв’язання.\n"
+#~ "-D, --dry-run                   Випробувати можливість оновлення, не оновлювати насправді.\n"
