@@ -18,8 +18,8 @@ Autoreqprov:    on
 Summary:        Package, Patch, Pattern, and Product Management
 Version:        @VERSION@
 Release:        0
-Source:         @PACKAGE@-@VERSION@.tar.bz2
-Source1:        @PACKAGE@-rpmlintrc
+Source:         %{name}-%{version}.tar.bz2
+Source1:        %{name}-rpmlintrc
 Prefix:         /usr
 Provides:       yast2-packagemanager
 Obsoletes:      yast2-packagemanager
@@ -78,7 +78,7 @@ Authors:
     Ladislav Slezak <lslezak@suse.cz>
 
 %package devel
-Requires:       libzypp == @VERSION@
+Requires:       libzypp == %{version}
 Requires:       libxml2-devel curl-devel openssl-devel rpm-devel glibc-devel zlib-devel
 Requires:       bzip2 popt-devel dbus-1-devel glib2-devel hal-devel boost-devel libstdc++-devel
 Requires:       cmake libsatsolver-devel >= 0.13.0
