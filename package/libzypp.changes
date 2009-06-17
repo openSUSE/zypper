@@ -1,3 +1,11 @@
+-------------------------------------------------------------------
+Wed Jun 17 15:39:17 CEST 2009 - ma@suse.de
+
+- Allow building libzypp without HAL (not recommended). Without HAL
+  CD/DVD device detection is limited to /dev/dvd and /dev/cdrom.
+- version 6.8.2 (8)
+
+-------------------------------------------------------------------
 Fri Jun  5 21:16:45 CEST 2009 - ma@suse.de
 
 - Fix solver to use IdSting to avoid failing vendor checks.
@@ -21,7 +29,7 @@ Thu May 28 12:53:02 CEST 2009 - ma@suse.de
 - New solver.allowVendorChange expert option in zypp.conf.
 - version 6.6.0 (6)
 
--------------------------------------------------------------------
+------------------------------------------------------------------
 Wed May 20 14:23:07 CEST 2009 - ma@suse.de
 
 - Fix lost housekeeping data in modifyRepo (bnc #503207)
