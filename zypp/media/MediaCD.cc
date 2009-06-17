@@ -220,7 +220,7 @@ namespace zypp {
   {
     DeviceList detected;
 
-#ifndef NO_HALa
+#ifndef NO_HAL
     using namespace zypp::target::hal;
     try
     {
