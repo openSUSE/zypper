@@ -10,7 +10,30 @@
  *
  *  \brief Hardware abstaction layer library wrapper implementation.
  */
-#ifndef FAKE_HAL // disables zypp's HAL dependency
+#include <zypp/target/hal/HalException.h>
+//////////////////////////////////////////////////////////////////////
+namespace zypp
+{ ////////////////////////////////////////////////////////////////////
+  ////////////////////////////////////////////////////////////////////
+  namespace target
+  { //////////////////////////////////////////////////////////////////
+    //////////////////////////////////////////////////////////////////
+    namespace hal
+    { ////////////////////////////////////////////////////////////////
+      NoHalException::NoHalException()
+        : Exception(_("Sorry, but this version of libzypp was built without HAL support."))
+      {}
+      ////////////////////////////////////////////////////////////////
+    } // namespace hal
+    //////////////////////////////////////////////////////////////////
+    //////////////////////////////////////////////////////////////////
+  } // namespace target
+  ////////////////////////////////////////////////////////////////////
+  ////////////////////////////////////////////////////////////////////
+} // namespace zypp
+//////////////////////////////////////////////////////////////////////
+
+#ifndef NO_HAL // disables zypp's HAL dependency
 
 #include <zypp/target/hal/HalContext.h>
 #include <zypp/thread/Mutex.h>
@@ -1076,7 +1099,7 @@ namespace zypp
   ////////////////////////////////////////////////////////////////////
 } // namespace zypp
 //////////////////////////////////////////////////////////////////////
-#else // FAKE_HAL
+#else // NO_HAL
 #include <zypp/target/hal/HalContext.h>
 #include <zypp/target/hal/HalException.h>
 namespace zypp
@@ -1102,7 +1125,7 @@ namespace zypp
 
       // --------------------------------------------------------------
       HalContext::HalContext(bool)
-      {}
+      { ZYPP_THROW( NoHalException() ); }
       HalContext::~HalContext()
       {}
       HalContext &
@@ -1142,7 +1165,7 @@ namespace zypp
       { return ""; }
       // --------------------------------------------------------------
       HalDrive::HalDrive()
-      {}
+      { ZYPP_THROW( NoHalException() ); }
       HalDrive::~HalDrive()
       {}
       HalDrive &
@@ -1177,7 +1200,7 @@ namespace zypp
 
       // --------------------------------------------------------------
       HalVolume::HalVolume()
-      {}
+      { ZYPP_THROW( NoHalException() ); }
       HalVolume::~HalVolume()
       {}
       HalVolume &
@@ -1225,7 +1248,7 @@ namespace zypp
   ////////////////////////////////////////////////////////////////////
 } // namespace zypp
 //////////////////////////////////////////////////////////////////////
-#endif // FAKE_HAL
+#endif // NO_HAL
 
 /*
 ** vim: set ts=2 sts=2 sw=2 ai et:

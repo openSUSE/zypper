@@ -94,6 +94,10 @@ namespace zypp
         std::string e_msg;
       };
 
+      /** Exception thrown if we were built without hal support (-DNO_HAL).
+       */
+      struct NoHalException: public Exception
+      { NoHalException(); };
 
       ////////////////////////////////////////////////////////////////
     } // namespace hal

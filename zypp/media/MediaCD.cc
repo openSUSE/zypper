@@ -166,13 +166,13 @@ namespace zypp {
       cmd[1] = device_r.c_str();
       cmd[2] = NULL;
       ExternalProgram eject(cmd, ExternalProgram::Stderr_To_Stdout);
-      
+
       for(std::string out( eject.receiveLine());
           out.length(); out = eject.receiveLine())
       {
         DBG << " " << out;
       }
-      
+
       if(eject.close() != 0)
       {
         WAR << "Eject of " << device_r << " failed." << std::endl;
@@ -218,21 +218,22 @@ namespace zypp {
   MediaCD::DeviceList
   MediaCD::detectDevices(bool supportingDVD) const
   {
-    using namespace zypp::target::hal;
-
     DeviceList detected;
+
+#ifndef NO_HALa
+    using namespace zypp::target::hal;
     try
     {
       HalContext hal(true);
 
       std::vector<std::string> drv_udis;
       drv_udis = hal.findDevicesByCapability("storage.cdrom");
-      
+
       DBG << "Found " << drv_udis.size() << " cdrom drive udis" << std::endl;
       for(size_t d = 0; d < drv_udis.size(); d++)
       {
         HalDrive drv( hal.getDriveFromUDI( drv_udis[d]));
-      
+
         if( drv)
         {
           bool supportsDVD=false;
@@ -275,7 +276,25 @@ namespace zypp {
     {
       ZYPP_CAUGHT(e);
     }
-
+#else // NO_HAL
+#warning Poor CDROM devices detection without HAL
+    WAR << "Cdrom drive detection without HAL! " << std::endl;
+    PathInfo dvdinfo( "/dev/dvd" );
+    PathInfo cdrinfo( "/dev/cdrom" );
+    if ( dvdinfo.isBlk() )
+    {
+      MediaSource media( "cdrom", dvdinfo.path().asString(), dvdinfo.major(), dvdinfo.minor() );
+      DBG << "Found (NO_HAL): " << media << std::endl;
+      detected.push_back( media );
+    }
+    if ( cdrinfo.isBlk()
+         && ! ( cdrinfo.major() == dvdinfo.major() && cdrinfo.minor() == dvdinfo.minor() ) )
+    {
+      MediaSource media( "cdrom", cdrinfo.path().asString(), cdrinfo.major(), cdrinfo.minor() );
+      DBG << "Found (NO_HAL): " << media << std::endl;
+      detected.push_back( media );
+    }
+#endif
     return detected;
   }
 
@@ -698,8 +717,8 @@ namespace zypp {
     bool is_automounted = false;
     if( media.mediaSource && !media.mediaSource->name.empty())
     {
+#ifndef NO_HAL
       using namespace zypp::target::hal;
-
       try
       {
         HalContext hal(true);
@@ -742,6 +761,12 @@ namespace zypp {
       {
         ZYPP_CAUGHT(e);
       }
+#else // NO_HAL
+#warning Can not detect automounted media without HAL
+    INT << "Can not detect automounted media without HAL!" << endl;
+    // ma@: This codepath is probably unused due to 'REUSE_FOREIGN_MOUNTS == 2'
+    // Maybe we should cleanup all this automount-specail-handling.
+#endif
     }
     DBG << "Media "        << media.mediaSource->asString()
         << " attached on " << media.attachPoint->path

@@ -74,11 +74,16 @@ ELSE (GETTEXT_FOUND)
 ENDIF (GETTEXT_FOUND)
 
 FIND_PACKAGE(Hal REQUIRED)
-IF ( NOT HAL_FOUND)
-  MESSAGE( FATAL_ERROR " Hal not found" )
+IF ( NOT HAL_FOUND )
+  MESSAGE( WARNING " Package 'hal' not found. HAL is mainly used for CD/DVD device detection." )
+  MESSAGE( WARNING " If you build libzypp without HAL, this will result in a limited" )
+  MESSAGE( WARNING " CD/DVD device detection (/dev/dvd,/dev/cdrom)." )
+  SET(HAL_LIBRARY "")
+  SET(HAL_STORAGE_LIBRARY "")
+  ADD_DEFINITIONS(-DNO_HAL)
 ELSE ( NOT HAL_FOUND)
   INCLUDE_DIRECTORIES(${HAL_INCLUDE_DIR})
-# hal/libhal-storage.h is broken grrr
+  # hal/libhal-storage.h is broken grrr
   INCLUDE_DIRECTORIES(${HAL_INCLUDE_DIR}/hal)
 ENDIF( NOT HAL_FOUND)
 
