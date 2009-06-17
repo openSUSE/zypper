@@ -574,12 +574,10 @@ INSTALL(  FILES
 )
 
 SET( zypp_target_hal_SRCS
-  target/hal/Hal.cc
   target/hal/HalContext.cc
 )
 
 SET( zypp_target_hal_HEADERS
-  target/hal/Hal.h
   target/hal/HalContext.h
   target/hal/HalException.h
 )
