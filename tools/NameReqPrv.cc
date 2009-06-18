@@ -11,6 +11,17 @@ void message( const std::string & msg_r )
   cerr << "*** " << msg_r << endl;
 }
 
+int errexit( const std::string & msg_r = std::string(), int exit_r = 100 )
+{
+  if ( ! msg_r.empty() )
+  {
+    cerr << endl;
+    message( msg_r );
+    cerr << endl;
+  }
+  return exit_r;
+}
+
 int usage( const std::string & msg_r = std::string(), int exit_r = 100 )
 {
   if ( ! msg_r.empty() )
@@ -19,14 +30,18 @@ int usage( const std::string & msg_r = std::string(), int exit_r = 100 )
     message( msg_r );
     cerr << endl;
   }
-  cerr << "Usage: " << appname << " [OPTIONS] NAME... [[OPTIONS] NAME...]..." << endl;
+  cerr << "Usage: " << appname << " [--root ROOTDIR] [OPTIONS] NAME... [[OPTIONS] NAME...]..." << endl;
   cerr << "  Load all enabled repositories (no refresh) and search for" << endl;
   cerr << "  occurrences of NAME (substring) in package names, provides or" << endl;
   cerr << "  requires." << endl;
+  cerr << "  --root   Load repos from the system located below ROOTDIR. If ROOTDIR" << endl;
+  cerr << "           denotes a sover testcase, the testcase is loaded." << endl;
   cerr << "  -i/-I    turn on/off case insensitive search (default on)" << endl;
   cerr << "  -n/-N    turn on/off looking for names       (default on)" << endl;
   cerr << "  -p/-P    turn on/off looking for provides    (default off)" << endl;
   cerr << "  -r/-R    turn on/off looking for requires    (default off)" << endl;
+  cerr << "  -a       short for -n -p -r" << endl;
+  cerr << "  -A       short for -n -P -R" << endl;
   cerr << "TODO: Waiting for PoolQuery::allMatches switch and need to beautify output." << endl;
   cerr << "" << endl;
   return exit_r;
@@ -51,42 +66,72 @@ int main( int argc, char * argv[] )
   ///////////////////////////////////////////////////////////////////
 
   ZConfig::instance();
-  Pathname sysRoot( "/" );
+  Pathname sysRoot("/");
 
-  if ( 1 )
+  if ( (*argv) == std::string("--root") )
   {
-    message( "*** load target" );
-    getZYpp()->initializeTarget( sysRoot );
-    getZYpp()->target()->load();
+    --argc,++argv;
+    if ( ! argc )
+      return errexit("--root requires an argument.");
+
+    if ( ! PathInfo( *argv ).isDir() )
+      return errexit("--root requires a directory.");
+
+    sysRoot = *argv;
+    --argc,++argv;
   }
 
-  if ( 1 )
+  if ( TestSetup::isTestcase( sysRoot ) )
   {
-    RepoManager repoManager( sysRoot );
-    RepoInfoList repos = repoManager.knownRepositories();
-    for_( it, repos.begin(), repos.end() )
+    message( str::form( "*** Load Testcase from '%s'", sysRoot.c_str() ) );
+    TestSetup test;
+    test.loadTestcaseRepos( sysRoot );
+  }
+  else if ( TestSetup::isTestSetup( sysRoot ) )
+  {
+    message( str::form( "*** Load TestSetup from '%s'", sysRoot.c_str() ) );
+    TestSetup test( sysRoot );
+    test.loadRepos();
+  }
+  else
+  {
+    // a system
+    message( str::form( "*** Load system at '%s'", sysRoot.c_str() ) );
+    if ( 1 )
     {
-      RepoInfo & nrepo( *it );
+      message( "*** load target" );
+      getZYpp()->initializeTarget( sysRoot );
+      getZYpp()->target()->load();
+    }
 
-      if ( ! nrepo.enabled() )
-        continue;
+    if ( 1 )
+    {
+      RepoManager repoManager( sysRoot );
+      RepoInfoList repos = repoManager.knownRepositories();
+      for_( it, repos.begin(), repos.end() )
+      {
+        RepoInfo & nrepo( *it );
 
-      if ( ! repoManager.isCached( nrepo ) )
-      {
-        message( str::form( "*** omit uncached repo '%s' (do 'zypper refresh')", nrepo.name().c_str() ) );
-        continue;
-      }
+        if ( ! nrepo.enabled() )
+          continue;
 
-      message( str::form( "*** load repo '%s'", nrepo.name().c_str() ) );
-      try
-      {
-        repoManager.loadFromCache( nrepo );
-      }
-      catch ( const Exception & exp )
-      {
-        message( exp.asString() + "\n" + exp.historyAsString() );
-        message( str::form( "*** omit broken repo '%s' (do 'zypper refresh')", nrepo.name().c_str() ) );
-        continue;
+        if ( ! repoManager.isCached( nrepo ) )
+        {
+          message( str::form( "*** omit uncached repo '%s' (do 'zypper refresh')", nrepo.name().c_str() ) );
+          continue;
+        }
+
+        message( str::form( "*** load repo '%s'", nrepo.name().c_str() ) );
+        try
+        {
+          repoManager.loadFromCache( nrepo );
+        }
+        catch ( const Exception & exp )
+        {
+          message( exp.asString() + "\n" + exp.historyAsString() );
+          message( str::form( "*** omit broken repo '%s' (do 'zypper refresh')", nrepo.name().c_str() ) );
+          continue;
+        }
       }
     }
   }
@@ -106,6 +151,8 @@ int main( int argc, char * argv[] )
     {
       switch ( (*argv)[1] )
       {
+        case 'a':  names =	true, 	requires = provides =	true;	break;
+        case 'A':  names =	true, 	requires = provides =	false;	break;
         case 'i': ignorecase =	true;	break;
         case 'I': ignorecase =	false;	break;
         case 'n': names =	true;	break;
@@ -129,6 +176,9 @@ int main( int argc, char * argv[] )
       q.addDependency( sat::SolvAttr::provides );
     if ( requires )
       q.addDependency( sat::SolvAttr::requires );
+
+//     q.begin();
+//     cerr << q << endl;
 
     cerr << *argv << " [" << (ignorecase?'i':'_') << (names?'n':'_') << (requires?'r':'_') << (provides?'p':'_') << "] {" << endl;
 
