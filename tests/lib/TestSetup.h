@@ -93,6 +93,19 @@ class TestSetup
     { USR << (_tmprootdir.path() == _rootdir ? "DELETE" : "KEEP") << " TESTSETUP below " << _rootdir << endl; }
 
   public:
+    /** Whether directory \a path_r contains a solver testcase. */
+    static bool isTestcase( const Pathname & path_r )
+    {
+      return filesystem::PathInfo( path_r / "solver-test.xml" ).isFile();
+    }
+
+    /** Whether directory \a path_r contains a testsetup. */
+    static bool isTestSetup( const Pathname & path_r )
+    {
+      return filesystem::PathInfo( path_r / "repos.d" ).isDir() && filesystem::PathInfo( path_r / "raw" ).isDir();
+    }
+
+  public:
     const Pathname & root() const { return _rootdir; }
 
     Target &     target()      { if ( ! getZYpp()->getTarget() ) getZYpp()->initializeTarget( _rootdir ); return *getZYpp()->getTarget(); }
