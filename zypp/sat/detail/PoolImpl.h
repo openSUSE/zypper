@@ -18,7 +18,6 @@ extern "C"
 #include <satsolver/solvable.h>
 #include <satsolver/poolarch.h>
 #include <satsolver/repo_solv.h>
-#include <satsolver/repo_helix.h>
 }
 #include <iosfwd>
 

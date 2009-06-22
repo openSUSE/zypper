@@ -30,6 +30,14 @@
 
 #include "zypp/target/modalias/Modalias.h"
 
+extern "C"
+{
+// Workaround satsolver project not providing a common include
+// directory. (the -devel package does, but the git repo doesn't).
+// #include <satsolver/repo_helix.h>
+void repo_add_helix( ::Repo *repo, FILE *fp, int flags );
+}
+
 using std::endl;
 
 #undef  ZYPP_BASE_LOGGER_LOGGROUP
