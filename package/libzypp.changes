@@ -1,4 +1,10 @@
 -------------------------------------------------------------------
+Tue Jun 23 13:29:36 CEST 2009 - ma@suse.de
+
+- Allow building libzypp with rpm-5 (experimental)
+- version 6.8.3 (8)
+
+-------------------------------------------------------------------
 Wed Jun 17 15:39:17 CEST 2009 - ma@suse.de
 
 - Allow building libzypp without HAL (not recommended). Without HAL
