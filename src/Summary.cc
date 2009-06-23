@@ -33,7 +33,10 @@ using boost::format;
 bool Summary::ResPairNameCompare::operator()(
     const ResPair & p1, const ResPair & p2) const
 {
-  return ::strcoll(p1.second->name().c_str(), p2.second->name().c_str()) < 0;
+  int ret = ::strcoll(p1.second->name().c_str(), p2.second->name().c_str());
+  if (ret == 0)
+    return p1.second->edition() < p2.second->edition();
+  return ret < 0;
 }
 
 // --------------------------------------------------------------------------
@@ -51,7 +54,10 @@ struct ResNameCompare
   bool operator()(
       zypp::ResObject::constPtr r1, zypp::ResObject::constPtr r2) const
   {
-    return ::strcoll(r1->name().c_str(), r2->name().c_str()) < 0;
+    int ret = ::strcoll(r1->name().c_str(), r2->name().c_str());
+    if (ret == 0)
+      return r1->edition() < r2->edition();
+    return ret < 0;
   }
 };
 
@@ -233,12 +239,32 @@ unsigned Summary::packagesToRemove() const
 
 void Summary::writeResolvableList(ostream & out, const ResPairSet & resolvables)
 {
+  // find multi-version packages
+  map<string, unsigned> dupes;
+  // no need to do this if SHOW_VERSION is on
+  if (!(_viewop & SHOW_VERSION))
+  {
+    for_(resit, resolvables.begin(), resolvables.end())
+      dupes[resit->second->name()]++;
+    // remove the single-versions from the map
+    map<string, unsigned>::iterator it = dupes.begin();
+    for (; it != dupes.end(); ++it)
+      if (it->second == 1)
+        dupes.erase(it); // seems the iterator is not invalidated by this
+  }
+
   if ((_viewop & DETAILS) == 0)
   {
     ostringstream s;
     for (ResPairSet::const_iterator resit = resolvables.begin();
         resit != resolvables.end(); ++resit)
-      s << resit->second->name() << " ";
+        // name
+      s << resit->second->name()
+        // version (if multiple versions are present)
+        << (dupes.find(resit->second->name()) != dupes.end() ?
+             string("-") + resit->second->edition().asString() :
+             string())
+        << " ";
     wrap_text(out, s.str(), 2, _wrap_width);
     out << endl;
     return;
@@ -250,7 +276,14 @@ void Summary::writeResolvableList(ostream & out, const ResPairSet & resolvables)
       resit != resolvables.end(); ++resit)
   {
     TableRow tr;
-    tr << resit->second->name();
+
+    // name
+    tr << resit->second->name() +
+      // version (if multiple versions are present)
+      (dupes.find(resit->second->name()) != dupes.end() && !(_viewop & SHOW_VERSION) ?
+        string("-") + resit->second->edition().asString() :
+        string());
+
     if (_viewop & SHOW_VERSION)
     {
       if (resit->first && resit->first->edition() != resit->second->edition())
