@@ -6,17 +6,33 @@ endif(RPM_INCLUDE_DIR AND RPM_LIBRARY)
 
 set(RPM_LIBRARY)
 set(RPM_INCLUDE_DIR)
-set(RPM_4_4_LEGACY)
 
 FIND_PATH(RPM_INCLUDE_DIR rpm/rpmdb.h
 	/usr/include
 	/usr/local/include
 )
 
-FIND_PATH(RPM_4_4_LEGACY rpm/rpmlegacy.h
-	${RPM_INCLUDE_DIR}
-	NO_DEFAULT_PATH
-)
+set(RPM_SUSPECT_VERSION "RPM_SUSPECT_VERSION-NOTFOUND" )
+if ( RPM_INCLUDE_DIR )
+	FIND_PATH(RPM_SUSPECT_VERSION rpm/rpm4compat.h
+		${RPM_INCLUDE_DIR}
+		NO_DEFAULT_PATH
+	)
+	if ( RPM_SUSPECT_VERSION )
+		set(RPM_SUSPECT_VERSION "5.x" )
+	else ( RPM_SUSPECT_VERSION )
+		FIND_PATH(RPM_SUSPECT_VERSION rpm/rpmlegacy.h
+			${RPM_INCLUDE_DIR}
+			NO_DEFAULT_PATH
+		)
+		if ( RPM_SUSPECT_VERSION )
+			set(RPM_SUSPECT_VERSION "4.x" )
+		else ( RPM_SUSPECT_VERSION )
+			set(RPM_SUSPECT_VERSION "4.4" )
+		endif ( RPM_SUSPECT_VERSION )
+	endif ( RPM_SUSPECT_VERSION )
+endif ( RPM_INCLUDE_DIR )
+
 
 FIND_LIBRARY(RPM_LIBRARY NAMES rpm
 	PATHS
@@ -25,10 +41,7 @@ FIND_LIBRARY(RPM_LIBRARY NAMES rpm
 )
 
 if(RPM_INCLUDE_DIR AND RPM_LIBRARY)
-   MESSAGE( STATUS "rpm found: includes in ${RPM_INCLUDE_DIR}, library in ${RPM_LIBRARY}")
-   if ( RPM_4_4_LEGACY )
-     MESSAGE( STATUS "rpm provides 4.4 legacy interface")
-   endif ( RPM_4_4_LEGACY )
+   MESSAGE( STATUS "rpm found: includes in ${RPM_INCLUDE_DIR}, library in ${RPM_LIBRARY} (suspect ${RPM_SUSPECT_VERSION})")
    set(RPM_FOUND TRUE)
 else(RPM_INCLUDE_DIR AND RPM_LIBRARY)
    MESSAGE( STATUS "rpm not found")

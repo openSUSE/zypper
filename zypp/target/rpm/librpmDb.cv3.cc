@@ -9,12 +9,23 @@
 /** \file zypp/target/rpm/librpmDb.cv3.cc
  *
 */
-
 #include "librpm.h"
 extern "C"
 {
 #ifndef _RPM_4_4_COMPAT
+#ifdef _RPM_5
+typedef rpmuint32_t rpm_count_t;
+#else
 typedef int32_t rpm_count_t;
+#endif
+#endif
+
+#ifdef _RPM_5
+#define HGEPtr_t void *
+#define headerGetEntryMinMemory headerGetEntry
+#define headerNVR(h,n,v,r) headerNEVRA(h,n,NULL,v,r,NULL)
+#else
+#define HGEPtr_t const void *
 #endif
 }
 
@@ -162,17 +173,13 @@ static int dncmp(const void * a, const void * b)
 static void compressFilelist(Header h)
 /*@*/
 {
-  HGE_t hge = (HGE_t)headerGetEntryMinMemory;
-  HAE_t hae = (HAE_t)headerAddEntry;
-  HRE_t hre = (HRE_t)headerRemoveEntry;
-  HFD_t hfd = headerFreeData;
   char ** fileNames;
   const char ** dirNames;
   const char ** baseNames;
   int_32 * dirIndexes;
   rpmTagType fnt;
   rpm_count_t count;
-  int i, xx;
+  int xx;
   int dirIndex = -1;
 
   /*
@@ -183,12 +190,12 @@ static void compressFilelist(Header h)
 
   if (headerIsEntry(h, RPMTAG_DIRNAMES))
   {
-    xx = hre(h, RPMTAG_OLDFILENAMES);
+    xx = headerRemoveEntry(h, RPMTAG_OLDFILENAMES);
     return;		/* Already converted. */
   }
 
-  void *hgePtr = NULL;
-  if (!hge(h, RPMTAG_OLDFILENAMES, &fnt, &hgePtr, &count))
+  HGEPtr_t hgePtr = NULL;
+  if (!headerGetEntryMinMemory(h, RPMTAG_OLDFILENAMES, hTYP_t(&fnt), &hgePtr, &count))
     return;		/* no file list */
   fileNames = (char **)hgePtr;
   if (fileNames == NULL || count <= 0)
@@ -203,7 +210,7 @@ static void compressFilelist(Header h)
     /* HACK. Source RPM, so just do things differently */
     dirIndex = 0;
     dirNames[dirIndex] = "";
-    for (i = 0; i < count; i++)
+    for (rpm_count_t i = 0; i < count; i++)
     {
       dirIndexes[i] = dirIndex;
       baseNames[i] = fileNames[i];
@@ -212,7 +219,7 @@ static void compressFilelist(Header h)
   }
 
   /*@-branchstate@*/
-  for (i = 0; i < count; i++)
+  for (rpm_count_t i = 0; i < count; i++)
   {
     const char ** needle;
     char savechar;
@@ -248,16 +255,16 @@ static void compressFilelist(Header h)
 exit:
   if (count > 0)
   {
-    xx = hae(h, RPMTAG_DIRINDEXES, RPM_INT32_TYPE, dirIndexes, count);
-    xx = hae(h, RPMTAG_BASENAMES, RPM_STRING_ARRAY_TYPE,
+    xx = headerAddEntry(h, RPMTAG_DIRINDEXES, RPM_INT32_TYPE, dirIndexes, count);
+    xx = headerAddEntry(h, RPMTAG_BASENAMES, RPM_STRING_ARRAY_TYPE,
              baseNames, count);
-    xx = hae(h, RPMTAG_DIRNAMES, RPM_STRING_ARRAY_TYPE,
+    xx = headerAddEntry(h, RPMTAG_DIRNAMES, RPM_STRING_ARRAY_TYPE,
              dirNames, dirIndex + 1);
   }
 
-  fileNames = (char**)hfd(fileNames, fnt);
+  fileNames = (char**)headerFreeData(fileNames, fnt);
 
-  xx = hre(h, RPMTAG_OLDFILENAMES);
+  xx = headerRemoveEntry(h, RPMTAG_OLDFILENAMES);
 }
 /*@=bounds@*/
 
@@ -267,10 +274,8 @@ exit:
  */
 void providePackageNVR(Header h)
 {
-  HGE_t hge = (HGE_t)headerGetEntryMinMemory;
-  HFD_t hfd = headerFreeData;
   const char *name, *version, *release;
-  void *hgePtr = NULL;
+  HGEPtr_t hgePtr = NULL;
   int_32 * epoch;
   const char *pEVR;
   char *p;
@@ -280,7 +285,7 @@ void providePackageNVR(Header h)
   rpmTagType pnt, pvt;
   int_32 * provideFlags = NULL;
   rpm_count_t providesCount;
-  int i, xx;
+  int xx;
   int bingo = 1;
 
   /* Generate provides for this package name-version-release. */
@@ -289,7 +294,7 @@ void providePackageNVR(Header h)
     return;
   pEVR = p = (char *)alloca(21 + strlen(version) + 1 + strlen(release) + 1);
   *p = '\0';
-  if (hge(h, RPMTAG_EPOCH, NULL, &hgePtr, NULL))
+  if (headerGetEntryMinMemory(h, RPMTAG_EPOCH, NULL, &hgePtr, NULL))
   {
     epoch = (int_32 *)hgePtr;
     sprintf(p, "%d:", *epoch);
@@ -302,17 +307,17 @@ void providePackageNVR(Header h)
    * Rpm prior to 3.0.3 does not have versioned provides.
    * If no provides at all are available, we can just add.
    */
-  if (!hge(h, RPMTAG_PROVIDENAME, &pnt, &hgePtr, &providesCount))
+  if (!headerGetEntryMinMemory(h, RPMTAG_PROVIDENAME, hTYP_t(&pnt), &hgePtr, &providesCount))
     goto exit;
   provides = (const char **)hgePtr;
 
   /*
    * Otherwise, fill in entries on legacy packages.
    */
-  if (!hge(h, RPMTAG_PROVIDEVERSION, &pvt, &hgePtr, NULL))
+  if (!headerGetEntryMinMemory(h, RPMTAG_PROVIDEVERSION, hTYP_t(&pvt), &hgePtr, NULL))
   {
     providesEVR = (const char **)hgePtr;
-    for (i = 0; i < providesCount; i++)
+    for (rpm_count_t i = 0; i < providesCount; i++)
     {
       const char * vdummy = "";
       int_32 fdummy = RPMSENSE_ANY;
@@ -324,12 +329,12 @@ void providePackageNVR(Header h)
     goto exit;
   }
 
-  xx = hge(h, RPMTAG_PROVIDEFLAGS, NULL, &hgePtr, NULL);
+  xx = headerGetEntryMinMemory(h, RPMTAG_PROVIDEFLAGS, NULL, &hgePtr, NULL);
   provideFlags = (int_32 *)hgePtr;
 
   /*@-nullderef@*/    /* LCL: providesEVR is not NULL */
   if (provides && providesEVR && provideFlags)
-    for (i = 0; i < providesCount; i++)
+    for (rpm_count_t i = 0; i < providesCount; i++)
     {
       if (!(provides[i] && providesEVR[i]))
         continue;
@@ -342,8 +347,8 @@ void providePackageNVR(Header h)
   /*@=nullderef@*/
 
 exit:
-  provides = (const char **)hfd(provides, pnt);
-  providesEVR = (const char **)hfd(providesEVR, pvt);
+  provides = (const char **)headerFreeData(provides, pnt);
+  providesEVR = (const char **)headerFreeData(providesEVR, pvt);
 
   if (bingo)
   {
@@ -499,7 +504,11 @@ void internal_convertV3toV4( const Pathname & v3db_r, const librpmDb::constPtr &
       continue;
     }
     rpmdbFreeIterator(mi);
+#ifdef _RPM_5
+    if (rpmdbAdd(db, -1, h, 0))
+#else
     if (rpmdbAdd(db, -1, h, 0, 0))
+#endif
     {
 //      report.dbWriteError( nrv );
       proceed = false;//CBSuggest::CANCEL; // immediately stop loop

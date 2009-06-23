@@ -10,7 +10,7 @@
  *
 */
 #include "librpm.h"
-#ifndef _RPM_4_4_COMPAT
+#if !defined(_RPM_4_4_COMPAT) && !defined(_RPM_5)
 #include <rpm/ugid.h>
 #else
 ////////////////////////////////////////////////////////////////////
@@ -237,7 +237,7 @@ RpmHeader::constPtr RpmHeader::readPackage( const Pathname & path_r,
   Header nh = 0;
   int res = ::rpmReadPackageFile( ts, fd, path_r.asString().c_str(), &nh );
 
-  ts = ::rpmtsFree(ts);
+  ts = rpmtsFree(ts);
 
   ::Fclose( fd );
 

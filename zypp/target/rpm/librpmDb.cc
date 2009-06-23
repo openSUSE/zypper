@@ -455,13 +455,12 @@ unsigned librpmDb::size() const
   unsigned count = 0;
   if ( valid() )
   {
-#ifdef _RPM_4_4_COMPAT
+#if defined(_RPM_4_4_COMPAT) || defined(_RPM_5)
     // looks like rpm-4.7 has no public dbi interface anymore
     int dbi = ::rpmdbOpen("/", &_d._db, O_RDONLY, 0);
     if (dbi == 0) {
         rpmdbMatchIterator mi = ::rpmdbInitIterator(_d._db, RPMTAG_NAME, NULL, 0);
         if (mi != NULL) {
-            rpmtd item;
             for (;;) {
                 Header rpmHeader = ::rpmdbNextIterator(mi);
                 if (rpmHeader != NULL)

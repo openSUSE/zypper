@@ -1646,7 +1646,7 @@ RpmDb::checkPackageResult RpmDb::checkPackage( const Pathname & path_r )
   ::rpmtsSetRootDir( ts, root().asString().c_str() );
   ::rpmtsSetVSFlags( ts, RPMVSF_DEFAULT );
   int res = ::rpmReadPackageFile( ts, fd, path_r.asString().c_str(), NULL );
-  ts = ::rpmtsFree(ts);
+  ts = rpmtsFree(ts);
 
   ::Fclose( fd );
 

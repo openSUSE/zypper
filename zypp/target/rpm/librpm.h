@@ -12,9 +12,19 @@
 #ifndef ZYPP_TARGET_RPM_LIBRPM_H
 #define ZYPP_TARGET_RPM_LIBRPM_H
 
+#ifdef _RPM_5
+// needs to be outside 'extern "C"'
+#include <rpm/rpm4compat.h>
+#endif // _RPM_5
+
 extern "C"
 {
+#ifdef _RPM_5
+#include <rpm/rpmtag.h>
+#else
 #include <rpm/rpmlib.h>
+#endif // _RPM_5
+
 #include <rpm/rpmmacro.h>
 #include <rpm/rpmdb.h>
 #include <rpm/rpmts.h>

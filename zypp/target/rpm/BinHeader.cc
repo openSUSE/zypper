@@ -12,8 +12,17 @@
 #include "librpm.h"
 extern "C"
 {
+#ifdef _RPM_5
+#undef RPM_NULL_TYPE
+#define RPM_NULL_TYPE rpmTagType(0)
+#endif
+
 #ifndef _RPM_4_4_COMPAT
+#ifdef _RPM_5
+typedef rpmuint32_t rpm_count_t;
+#else
 typedef int32_t rpm_count_t;
+#endif
 #endif
 }
 
@@ -59,8 +68,10 @@ int BinHeader::intList::operator[]( const unsigned idx_r ) const
   {
     switch ( type )
     {
+#if RPM_CHAR_TYPE != RPM_INT8_TYPE
     case RPM_CHAR_TYPE:
       return ((char*)val)[idx_r];
+#endif
     case RPM_INT8_TYPE:
       return ((int8_t*)val)[idx_r];
     case RPM_INT16_TYPE:
@@ -120,7 +131,7 @@ BinHeader::BinHeader( Header h_r )
 {
   if ( _h )
   {
-    ::headerLink( _h );
+    headerLink( _h );
   }
 }
 
@@ -155,7 +166,7 @@ BinHeader::~BinHeader()
 {
   if ( _h )
   {
-    ::headerFree( _h );
+    headerFree( _h );
   }
 }
 
@@ -215,7 +226,9 @@ unsigned BinHeader::int_list( tag tag_r, intList & lst_r ) const
       {
       case RPM_NULL_TYPE:
         return lst_r.set( 0, 0, type );
+#if RPM_CHAR_TYPE != RPM_INT8_TYPE
       case RPM_CHAR_TYPE:
+#endif
       case RPM_INT8_TYPE:
       case RPM_INT16_TYPE:
       case RPM_INT32_TYPE:
@@ -289,8 +302,10 @@ int BinHeader::int_val( tag tag_r ) const
       {
       case RPM_NULL_TYPE:
         return 0;
+#if RPM_CHAR_TYPE != RPM_INT8_TYPE
       case RPM_CHAR_TYPE:
         return *((char*)val);
+#endif
       case RPM_INT8_TYPE:
         return *((int8_t*)val);
       case RPM_INT16_TYPE:
