@@ -77,6 +77,7 @@ namespace zypp
    * on kinds, multiple repos, and multiple attributes are filtered inside
    * the PoolQuery, so these tend to be slower.
    *
+   * \see detail::PoolQueryIterator on how to inspect matches in detail.
    * \see tests/zypp/PoolQuery_test.cc for more examples
    * \see sat::SolvIterMixin
    */
@@ -463,7 +464,6 @@ namespace zypp
   /** \relates PoolQuery Stream output. */
   std::ostream & operator<<( std::ostream & str, const PoolQuery & obj );
 
-
   ///////////////////////////////////////////////////////////////////
   namespace detail
   { /////////////////////////////////////////////////////////////////
@@ -475,7 +475,12 @@ namespace zypp
   //  CLASS NAME : PoolQuery::PoolQueryIterator
   //
   /** \ref PoolQuery iterator as returned by \ref PoolQuery::begin.
-  */
+   *
+   * The \ref PoolQueryIterator visits sat::Solavables that do contain matches.
+   *
+   * But it also provides an iterator by itself, to allow a detailed inspection of
+   * the individual attribute matches within the current Solvable.
+   */
   class PoolQueryIterator : public boost::iterator_adaptor<
     PoolQueryIterator                  // Derived
     , sat::LookupAttr::iterator        // Base
@@ -484,6 +489,10 @@ namespace zypp
     , const sat::Solvable              // Reference
   >
   {
+      typedef std::vector<sat::LookupAttr::iterator> Matches;
+    public:
+      typedef Matches::size_type size_type;
+      typedef Matches::const_iterator matches_iterator;
     public:
       /** Default ctor is also \c end.*/
       PoolQueryIterator()
@@ -494,6 +503,61 @@ namespace zypp
       : _matcher( matcher_r )
       { increment(); }
 
+      /** \name Detailed inspection of attribute matches within the current Solvable.
+       *
+       * The \ref matches_iterator visits all attribute matches within the current Solvable,
+       * providing a \ref sat::LookupAttr::iterator pointing to attribute. While a
+       * \ref matches_iterator itself becomes invalid if the PoolQueryIterator is advanced,
+       * the \ref sat::LookupAttr::iterator it pointed to stays valid, even after the query
+       * ended.
+       *
+       * \code
+       * // Setup query for "libzypp"  in name or requires:
+       * PoolQuery q;
+       * q.addString( "libzypp" );
+       * q.setMatchSubstring();
+       * q.setCaseSensitive( false );
+       * q.addAttribute( sat::SolvAttr::name );
+       * q.addDependency( sat::SolvAttr::requires );
+       *
+       * // Iterate the result:
+       * for_( solvIter, q.begin(), q.end() )
+       * {
+       *   sat::Solvable solvable( *solvIter );
+       *   cout << "Found matches in " << solvable << endl;
+       *   if ( verbose )
+       *     for_( attrIter, solvIter.matchesBegin(), solvIter.matchesEnd() )
+       *     {
+       *       sat::LookupAttr::iterator attr( *attrIter );
+       *       cout << "    " << attr.inSolvAttr() << "\t\"" << attr.asString() << "\"" << endl;
+       *     }
+       * }
+       *
+       *
+       * Found matches in PackageKit-0.3.11-1.12.i586(@System)
+       *    solvable:requires        "libzypp.so.523"
+       * Found matches in libqdialogsolver1-1.2.6-1.1.2.i586(@System)
+       *    solvable:requires        "libzypp.so.523"
+       *    solvable:requires        "libzypp >= 5.25.3-0.1.2"
+       * Found matches in libzypp-5.30.3-0.1.1.i586(@System)
+       *    solvable:name            "libzypp"
+       * Found matches in libzypp-testsuite-tools-4.2.6-8.1.i586(@System)
+       *    solvable:name            "libzypp-testsuite-tools"
+       *    solvable:requires        "libzypp.so.523"
+       * ...
+       * \endcode
+       */
+      //@{
+      /** \c False unless this is the \c end iterator. */
+      bool matchesEmpty() const			{ return ! _matcher; }
+      /** Number of attribute matches. */
+      size_type matchesSize() const		{ return matches().size(); }
+      /** Begin of matches. */
+      matches_iterator matchesBegin() const	{ return matches().begin(); }
+      /** End of matches. */
+      matches_iterator matchesEnd() const	{ return matches().end(); }
+      //@}
+
     private:
       friend class boost::iterator_core_access;
 
@@ -502,14 +566,21 @@ namespace zypp
 
       void increment();
 
-   private:
+    private:
+      const Matches & matches() const;
+
+    private:
       shared_ptr<PoolQueryMatcher> _matcher;
+      mutable shared_ptr<Matches>  _matches;
   };
   ///////////////////////////////////////////////////////////////////
 
   /** \relates PoolQueryIterator Stream output. */
   inline std::ostream & operator<<( std::ostream & str, const PoolQueryIterator & obj )
   { return str << obj.base(); }
+
+  /** \relates PoolQueryIterator Detailed stream output. */
+  std::ostream & dumpOn( std::ostream & str, const PoolQueryIterator & obj );
 
   ///////////////////////////////////////////////////////////////////
   } //namespace detail

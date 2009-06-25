@@ -214,7 +214,7 @@ namespace zypp
     //
     //	CLASS NAME : LookupRepoAttr
     //
-    /** Lightweight repositor attribute value lookup.
+    /** Lightweight repository attribute value lookup.
      *
      * This is just a convenience class that overloads all
      * \ref LookupAttr methods which take a \ref LookupAttr::Location
@@ -357,6 +357,12 @@ namespace zypp
         /** Immediately advance to the next \ref Repository. */
         void skipRepo()
         { nextSkipRepo(); increment(); }
+
+        /** Stop after all matches in the current \ref Solvable are processed. */
+        void stayInThisSolvable();
+
+        /** Stop after all matches in the current \ref Repository are processed. */
+        void stayInThisRepo();
         //@}
 
         /** \name Current position info. */

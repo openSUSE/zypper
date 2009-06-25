@@ -350,6 +350,12 @@ namespace zypp
     void LookupAttr::iterator::nextSkipRepo()
     { if ( _dip ) ::dataiterator_skip_repo( _dip.get() ); }
 
+    void LookupAttr::iterator::stayInThisSolvable()
+    { if ( _dip ) { _dip.get()->repoid = -1; _dip.get()->flags |= SEARCH_THISSOLVID; } }
+
+    void LookupAttr::iterator::stayInThisRepo()
+    { if ( _dip ) { _dip.get()->repoid = -1; } }
+
     ///////////////////////////////////////////////////////////////////
     // attr value type test
     ///////////////////////////////////////////////////////////////////

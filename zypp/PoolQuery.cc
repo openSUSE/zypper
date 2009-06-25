@@ -1217,20 +1217,70 @@ attremptycheckend:
 	  if ( base_r == end() )
 	    base_r = startNewQyery(); // first candidate
 	  else
+          {
+            base_r.nextSkipSolvable(); // assert we don't visit this Solvable again
 	    ++base_r; // advance to next candidate
+          }
 
 	  while ( base_r != end() )
 	  {
 	    if ( isAMatch( base_r ) )
-	    {
-	      base_r.nextSkipSolvable(); // assert we don't visit this Solvable again
 	      return true;
-	    }
 	    // No match: try next
-	    ++base_r;
+            ++base_r;
 	  }
 	  return false;
 	}
+
+        /** Provide all matching attributes within this solvable.
+         *
+         */
+        void matchDetail( const base_iterator & base_r, std::vector<base_iterator> & return_r ) const
+        {
+          if ( base_r == end() )
+            return;
+
+          sat::Solvable inSolvable( base_r.inSolvable() );
+
+          if ( _attrMatchList.size() == 1 )
+          {
+            // base_r is already on the 1st matching attribute!
+            // String matching is done by the base iterator. We must check the predicate here.
+            // Let's see if there are more matches for this solvable:
+            base_iterator base( base_r );
+            base.stayInThisSolvable(); // avoid discarding matches we found far away from here.
+            return_r.push_back( base );
+
+            const AttrMatchData::Predicate & predicate( _attrMatchList.front().predicate );
+            for ( ++base; base.inSolvable() == inSolvable; ++base ) // safe even if base == end()
+            {
+              if ( ! predicate || predicate( base ) )
+                return_r.push_back( base );
+            }
+          }
+          else
+          {
+            // Here: search all attributes ;(
+            for_( mi, _attrMatchList.begin(), _attrMatchList.end() )
+            {
+              const AttrMatchData & matchData( *mi );
+              sat::LookupAttr q( matchData.attr, inSolvable );
+              if ( matchData.attrMatcher ) // an empty searchstring matches always
+                q.setAttrMatcher( matchData.attrMatcher );
+
+              if ( ! q.empty() ) // there are matches.
+              {
+                // now check any predicate:
+                const AttrMatchData::Predicate & predicate( matchData.predicate );
+                for_( it, q.begin(), q.end() )
+                {
+                  if ( ! predicate || predicate( it ) )
+                    return_r.push_back( it );
+                }
+              }
+            }
+          }
+        }
 
       public:
 	/** Ctor stores the \ref PoolQuery settings.
@@ -1344,8 +1394,7 @@ attremptycheckend:
             if ( ! predicate || predicate( base_r ) )
               return true;
 
-            base_r.nextSkipSolvable();
-            return false;
+            return false; // no skip as there may be more occurrences od this attr.
           }
 
           // Here: search all attributes ;(
@@ -1396,8 +1445,42 @@ attremptycheckend:
       // matcher restarts if at end! It is called from the ctor
       // to get the 1st match. But if the end is reached, it should
       // be deleted, otherwise we'd start over again.
-      if ( _matcher && ! _matcher->advance( base_reference() ) )
-	_matcher.reset();
+      if ( !_matcher )
+        return; // at end
+      if ( _matches )
+        _matches.reset(); // invalidate old matches
+      if ( ! _matcher->advance( base_reference() ) )
+        _matcher.reset();
+    }
+
+    const PoolQueryIterator::Matches & PoolQueryIterator::matches() const
+    {
+      if ( _matches )
+        return *_matches;
+
+      if ( !_matcher )
+      {
+        // at end of query:
+        static const Matches _none;
+        return _none;
+      }
+
+      _matches.reset( new Matches );
+      _matcher->matchDetail( base_reference(), *_matches );
+      return *_matches;
+    }
+
+    std::ostream & dumpOn( std::ostream & str, const PoolQueryIterator & obj )
+    {
+      str << *obj;
+      if ( ! obj.matchesEmpty() )
+      {
+        for_( it, obj.matchesBegin(), obj.matchesEnd() )
+        {
+          str << endl << "    " << it->inSolvAttr() << "\t" << it->asString();
+        }
+      }
+      return str;
     }
 
     ///////////////////////////////////////////////////////////////////
