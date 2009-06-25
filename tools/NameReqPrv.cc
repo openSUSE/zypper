@@ -6,18 +6,14 @@
 
 static std::string appname( "NameReqPrv" );
 
-void message( const std::string & msg_r )
-{
-  cerr << "*** " << msg_r << endl;
-}
+#define message cerr
+using std::flush;
 
 int errexit( const std::string & msg_r = std::string(), int exit_r = 100 )
 {
   if ( ! msg_r.empty() )
   {
-    cerr << endl;
-    message( msg_r );
-    cerr << endl;
+    cerr << endl << msg_r << endl << endl;
   }
   return exit_r;
 }
@@ -26,9 +22,7 @@ int usage( const std::string & msg_r = std::string(), int exit_r = 100 )
 {
   if ( ! msg_r.empty() )
   {
-    cerr << endl;
-    message( msg_r );
-    cerr << endl;
+    cerr << endl << msg_r << endl << endl;
   }
   cerr << "Usage: " << appname << " [--root ROOTDIR] [OPTIONS] NAME... [[OPTIONS] NAME...]..." << endl;
   cerr << "  Load all enabled repositories (no refresh) and search for" << endl;
@@ -67,6 +61,7 @@ int main( int argc, char * argv[] )
 
   ZConfig::instance();
   Pathname sysRoot("/");
+  sat::Pool satpool( sat::Pool::instance() );
 
   if ( (*argv) == std::string("--root") )
   {
@@ -83,25 +78,26 @@ int main( int argc, char * argv[] )
 
   if ( TestSetup::isTestcase( sysRoot ) )
   {
-    message( str::form( "*** Load Testcase from '%s'", sysRoot.c_str() ) );
+    message << str::form( "*** Load Testcase from '%s'", sysRoot.c_str() ) << endl;
     TestSetup test;
     test.loadTestcaseRepos( sysRoot );
   }
   else if ( TestSetup::isTestSetup( sysRoot ) )
   {
-    message( str::form( "*** Load TestSetup from '%s'", sysRoot.c_str() ) );
+    message << str::form( "*** Load TestSetup from '%s'", sysRoot.c_str() ) << endl;
     TestSetup test( sysRoot );
     test.loadRepos();
   }
   else
   {
     // a system
-    message( str::form( "*** Load system at '%s'", sysRoot.c_str() ) );
+    message << str::form( "*** Load system at '%s'", sysRoot.c_str() ) << endl;
     if ( 1 )
     {
-      message( "*** load target" );
+      message << "*** load target '" << Repository::systemRepoAlias() << "'\t" << endl;
       getZYpp()->initializeTarget( sysRoot );
       getZYpp()->target()->load();
+      message << satpool.systemRepo() << endl;
     }
 
     if ( 1 )
@@ -117,27 +113,26 @@ int main( int argc, char * argv[] )
 
         if ( ! repoManager.isCached( nrepo ) )
         {
-          message( str::form( "*** omit uncached repo '%s' (do 'zypper refresh')", nrepo.name().c_str() ) );
+          message << str::form( "*** omit uncached repo '%s' (do 'zypper refresh')", nrepo.name().c_str() ) << endl;
           continue;
         }
 
-        message( str::form( "*** load repo '%s'", nrepo.name().c_str() ) );
+        message << str::form( "*** load repo '%s'\t", nrepo.name().c_str() ) << flush;
         try
         {
           repoManager.loadFromCache( nrepo );
+          message << satpool.reposFind( nrepo.alias() ) << endl;
         }
         catch ( const Exception & exp )
         {
-          message( exp.asString() + "\n" + exp.historyAsString() );
-          message( str::form( "*** omit broken repo '%s' (do 'zypper refresh')", nrepo.name().c_str() ) );
+          message << exp.asString() + "\n" + exp.historyAsString() << endl;
+          message << str::form( "*** omit broken repo '%s' (do 'zypper refresh')", nrepo.name().c_str() ) << endl;
           continue;
         }
       }
     }
   }
 
-  sat::Pool satpool( sat::Pool::instance() );
-  dumpRange( cerr, satpool.reposBegin(), satpool.reposEnd() ) << endl;
   ///////////////////////////////////////////////////////////////////
 
   bool ignorecase( true );
@@ -177,17 +172,14 @@ int main( int argc, char * argv[] )
     if ( requires )
       q.addDependency( sat::SolvAttr::requires );
 
-//     q.begin();
-//     cerr << q << endl;
-
-    cerr << *argv << " [" << (ignorecase?'i':'_') << (names?'n':'_') << (requires?'r':'_') << (provides?'p':'_') << "] {" << endl;
+    message << *argv << " [" << (ignorecase?'i':'_') << (names?'n':'_') << (requires?'r':'_') << (provides?'p':'_') << "] {" << endl;
 
     for_( it, q.begin(), q.end() )
     {
-      cerr << "  " << it << endl;
+      message << "  " << dump(it) << endl;
     }
 
-    cerr << "}" << endl;
+    message << "}" << endl;
   }
 
   INT << "===[END]============================================" << endl << endl;
