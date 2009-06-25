@@ -70,15 +70,18 @@ namespace zypp
 
     public:
          /**
-          * Short unique, convenience string to refer to a repo.
+          * Short unique string to identify a repo.
           * ie: openSUSE-10.3
           *
           * If you are looking for a label to display
-          * see \ref info() which provides \ref RepoInfo::name()
+          * see \ref name().
           * ie: "openSUSE 10.3 Main repository"
           *
           */
         std::string alias() const;
+
+        /** Label to display for this repo. */
+        std::string name() const;
 
         /**
          * Timestamp when this repository was generated

@@ -61,6 +61,9 @@ namespace zypp
       return _repo->name;
     }
 
+    std::string Repository::name() const
+    { return info().name(); }
+
     zypp::Date Repository::generatedTimestamp() const
     {
       NO_REPOSITORY_RETURN( 0 );
