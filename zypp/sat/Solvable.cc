@@ -198,8 +198,30 @@ namespace zypp
       return CheckSum( std::string(), s ); // try to autodetect
     }
 
+    ///////////////////////////////////////////////////////////////////
+    namespace
+    {
+      inline Pathname lookupDatadirIn( Repository repor_r )
+      {
+        static const sat::SolvAttr susetagsDatadir( "susetags:datadir" );
+        Pathname ret;
+        // First look for repo attribute "susetags:datadir". If not found,
+        // look into the solvables as Code11 satsolver placed it there.
+        sat::LookupRepoAttr datadir( susetagsDatadir, repor_r );
+        if ( ! datadir.empty() )
+          ret = datadir.begin().asString();
+        else
+        {
+          sat::LookupAttr datadir( susetagsDatadir, repor_r );
+          if ( ! datadir.empty() )
+            ret = datadir.begin().asString();
+        }
+        return ret;
+      }
+    }
+    ///////////////////////////////////////////////////////////////////
+
     OnMediaLocation Solvable::lookupLocation() const
-    //std::string Solvable::lookupLocation( unsigned & medianr ) const
     {
       NO_SOLVABLE_RETURN( OnMediaLocation() );
       // medianumber and path
@@ -211,27 +233,23 @@ namespace zypp
       OnMediaLocation ret;
 
       Pathname path;
-      static const sat::SolvAttr susetagsDatadir( "susetags:datadir" );
       switch ( repository().info().type().toEnum() )
       {
         case repo::RepoType::NONE_e:
-          {
-            sat::LookupAttr datadir( susetagsDatadir, repository() );
-            if ( ! datadir.empty() )
-            {
-              repository().info().setProbedType( repo::RepoType::YAST2_e );
-              path = datadir.begin().asString();
-            }
-            path = datadir.empty() ? "suse" : datadir.begin().c_str();
-          }
-          break;
+        {
+          path = lookupDatadirIn( repository() );
+          if ( ! path.empty() )
+            repository().info().setProbedType( repo::RepoType::YAST2_e );
+        }
+        break;
 
         case repo::RepoType::YAST2_e:
-          {
-            sat::LookupAttr datadir( susetagsDatadir, repository() );
-            path = datadir.empty() ? "suse" : datadir.begin().c_str();
-          }
-          break;
+        {
+          path = lookupDatadirIn( repository() );
+          if ( path.empty() )
+            path = "suse";
+        }
+        break;
 
         default:
           break;
