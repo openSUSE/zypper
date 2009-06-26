@@ -1,4 +1,13 @@
 -------------------------------------------------------------------
+Fri Jun 26 12:06:51 CEST 2009 - ma@suse.de
+
+- Enhance PoolQueryIterator to allow detailed inspection of attribute 
+  matches.
+- Prefer datadir stored as repo attribute, but fallback searching in 
+  solvbales (old solv files do this). 
+- version 6.9.0 (8)
+
+-------------------------------------------------------------------
 Tue Jun 23 13:29:36 CEST 2009 - ma@suse.de
 
 - Allow building libzypp with rpm-5 (experimental)
