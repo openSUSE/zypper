@@ -375,6 +375,10 @@ namespace zypp
 
         /** The current \ref SolvAttr. */
         SolvAttr inSolvAttr() const;
+
+        /** Whether this points to the end of a query. */
+        bool atEnd() const
+        { return !_dip; }
         //@}
 
         /** \name Test attribute value type. */
