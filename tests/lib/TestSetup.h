@@ -25,6 +25,7 @@ using std::cin;
 using std::cout;
 using std::cerr;
 using std::endl;
+using std::flush;
 using namespace zypp;
 
 #ifndef BOOST_CHECK_NE
@@ -196,7 +197,7 @@ class TestSetup
   public:
     /** Directly load a helix repo from some testcase.
      * An empty alias is guessed.
-    */
+     */
     void loadHelix( const Pathname & path_r, const std::string & alias_r = std::string() )
     {
       // .solv file is loaded directly using a faked RepoInfo
@@ -303,6 +304,77 @@ class TestSetup
         }
         USR << "Create from cache" << endl;
         repoManager.loadFromCache( nrepo );
+      }
+    }
+
+  public:
+    /** Detect and load the system located at \a sysRoot.
+     *
+     * \a sysRoot needs to be a directory containing either a SolverTestcase,
+     * a TestSetup system or a real system. The  provided repostitories are
+     * loaded into the pool (without refresh).
+    */
+    static void LoadSystemAt( const Pathname & sysRoot )
+    {
+      if ( ! PathInfo( sysRoot ).isDir() )
+        ZYPP_THROW( Exception("sysRoot argument needs to be a directory") );
+
+      if ( TestSetup::isTestcase( sysRoot ) )
+      {
+        USR << str::form( "*** Load Testcase from '%s'", sysRoot.c_str() ) << endl;
+        TestSetup test;
+        test.loadTestcaseRepos( sysRoot );
+      }
+      else if ( TestSetup::isTestSetup( sysRoot ) )
+      {
+        USR << str::form( "*** Load TestSetup from '%s'", sysRoot.c_str() ) << endl;
+        TestSetup test( sysRoot, Arch_x86_64 );
+        test.loadRepos();
+      }
+      else
+      {
+        sat::Pool satpool( sat::Pool::instance() );
+        // a system
+        USR << str::form( "*** Load system at '%s'", sysRoot.c_str() ) << endl;
+        if ( 1 )
+        {
+          USR << "*** load target '" << Repository::systemRepoAlias() << "'\t" << endl;
+          getZYpp()->initializeTarget( sysRoot );
+          getZYpp()->target()->load();
+          USR << satpool.systemRepo() << endl;
+        }
+
+        if ( 1 )
+        {
+          RepoManager repoManager( sysRoot );
+          RepoInfoList repos = repoManager.knownRepositories();
+          for_( it, repos.begin(), repos.end() )
+          {
+            RepoInfo & nrepo( *it );
+
+            if ( ! nrepo.enabled() )
+              continue;
+
+            if ( ! repoManager.isCached( nrepo ) )
+            {
+              USR << str::form( "*** omit uncached repo '%s' (do 'zypper refresh')", nrepo.name().c_str() ) << endl;
+              continue;
+            }
+
+            USR << str::form( "*** load repo '%s'\t", nrepo.name().c_str() ) << flush;
+            try
+            {
+              repoManager.loadFromCache( nrepo );
+              USR << satpool.reposFind( nrepo.alias() ) << endl;
+            }
+            catch ( const Exception & exp )
+            {
+              USR << exp.asString() + "\n" + exp.historyAsString() << endl;
+              USR << str::form( "*** omit broken repo '%s' (do 'zypper refresh')", nrepo.name().c_str() ) << endl;
+              continue;
+            }
+          }
+        }
       }
     }
 
