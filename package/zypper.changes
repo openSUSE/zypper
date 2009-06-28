@@ -1,4 +1,10 @@
 -------------------------------------------------------------------
+Tue Jun 23 18:56:26 CEST 2009 - jkupec@suse.cz
+
+- Handle multiple versions of the same package in summary
+  (bnc #389128).
+
+-------------------------------------------------------------------
 Mon Jun  8 11:55:57 CEST 2009 - jkupec@suse.cz
 
 - some code cleanup and fixes
