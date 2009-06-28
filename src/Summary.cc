@@ -674,6 +674,7 @@ void Summary::writePackageCounts(ostream & out)
     else
       // translators: this text will be preceded by a number e.g. "5 packages to ..."
       s << _PL("package to downgrade", "packages to downgrade", count);
+    gotcha = true;
   }
   i = toinstall.find(ResKind::package);
   if (i != toinstall.end())
