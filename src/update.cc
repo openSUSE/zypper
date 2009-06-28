@@ -629,12 +629,13 @@ void xml_list_updates(const ResKindSet & kinds)
 // ----------------------------------------------------------------------------
 
 static bool
-mark_patch_update(const PoolItem & pi, bool skip_interactive, bool ignore_affects_pm)
+mark_patch_update(ui::Selectable & s,
+                  bool skip_interactive, bool ignore_affects_pm)
 {
-  Patch::constPtr patch = asKind<Patch>(pi.resolvable());
-  if (pi.isRelevant() && !pi.isSatisfied())
+  Patch::constPtr patch = asKind<Patch>(s.candidateObj());
+  if (s.isBroken())
   {
-    DBG << "patch " << patch->name() << " " << ignore_affects_pm << ", "
+    DBG << "candidate patch " << patch->name() << " " << ignore_affects_pm << ", "
       << patch->restartSuggested() << endl;
     if (ignore_affects_pm || patch->restartSuggested())
     {
@@ -646,15 +647,20 @@ mark_patch_update(const PoolItem & pi, bool skip_interactive, bool ignore_affect
         // license to confirm and --skip-interactive is requested.
         Zypper::instance()->out().warning(str::form(
           // translators: %s is the name of a patch
-          _("'%s' is interactive, skipping."), patch->name().c_str()));
+          _("'%s' is interactive, skipping."),
+          string(patch->name() + string("-") + patch->edition().asString()).c_str()));
         return false;
       }
       else
       {
-        mark_item_install(pi);
-        return true;
+        bool result = s.setToInstall();
+        if (!result)
+          ERR << "Marking " << s << " for installation failed" << endl;
+        return result;
       }
     }
+    else
+      XXX << "patch " << s.name() << "is satisfied or not relevant" << endl;
   }
 
   return false;
@@ -679,7 +685,7 @@ mark_patch_updates( Zypper & zypper, bool skip_interactive )
       for_(it, God->pool().proxy().byKindBegin(ResKind::patch),
                God->pool().proxy().byKindEnd  (ResKind::patch))
       {
-        if (mark_patch_update(findTheBest(God->pool(),**it), skip_interactive, ignore_affects_pm))
+        if (mark_patch_update(**it, skip_interactive, ignore_affects_pm))
           any_marked = true;
       }
     }
@@ -710,9 +716,8 @@ mark_patch_updates( Zypper & zypper, bool skip_interactive )
         else
         {
           for_(pit, q.selectableBegin(), q.selectableEnd())
-          {
-            any_marked = mark_patch_update(findTheBest(God->pool(),**pit), skip_interactive, ignore_affects_pm);
-          }
+            if ( mark_patch_update(**pit, skip_interactive, ignore_affects_pm))
+              any_marked = true;
         }
       }
     }

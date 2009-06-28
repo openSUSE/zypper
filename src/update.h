@@ -44,6 +44,7 @@ void mark_updates(Zypper & zypper,
  * Similar to zypp::solver::detail::Helper::findUpdateItem()
  * but allows changing the vendor and does not allow chaning arch.
  */
+# warning get rid of findUpdateItem, make new API in zypp
 zypp::PoolItem findUpdateItem(const zypp::ResPool & pool, const zypp::PoolItem item);
 
 /**
@@ -54,4 +55,5 @@ zypp::PoolItem findUpdateItem(const zypp::ResPool & pool, const zypp::PoolItem i
  *       the best compatible instead.
  * \todo All of this should be done in libzypp, using defined policies.
  */
+# warning get rid of findTheBest, make new API in zypp
 zypp::PoolItem findTheBest( const zypp::ResPool & pool, const zypp::ui::Selectable & s);
