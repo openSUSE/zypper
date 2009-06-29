@@ -1,4 +1,13 @@
 -------------------------------------------------------------------
+Mon Jun 29 13:59:41 CEST 2009 - jkupec@suse.cz
+
+- now 'list-patches' does not hide other updates if software
+  management updates (which are to be installed before any other)
+  are available. (bnc #503068)
+- fixed a bug in selection of updates in 'zypper patch'
+  (bnc #498814)
+
+-------------------------------------------------------------------
 Tue Jun 23 18:56:26 CEST 2009 - jkupec@suse.cz
 
 - Handle multiple versions of the same package in summary
