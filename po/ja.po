@@ -208,7 +208,6 @@ msgstr "メディア [%s] #%d を挿入し 'y' を入力して続行するか、
 #. Translate the a/r/i part exactly as you did the a/r/i string.
 #. the 'u' reply means 'Change URI'.
 #: ../src/callbacks/media.h:106
-#| msgid "a/r/i"
 msgid "a/r/i/u"
 msgstr "a/r/i/u"
 
@@ -240,7 +239,6 @@ msgstr "中止(A), 再試行(R), 無視(I)？"
 
 #. translators: this is a prompt label, will appear as "New URI: "
 #: ../src/callbacks/media.h:130
-#| msgid "URI"
 msgid "New URI"
 msgstr "新しい URI"
 
@@ -327,7 +325,6 @@ msgstr "不明なコマンド '%s'"
 
 #: ../src/Config.cc:73
 #, c-format
-#| msgid "Unknown command option"
 msgid "Unknown configuration option '%s'"
 msgstr "不明な設定オプション '%s'"
 
@@ -412,7 +409,6 @@ msgid "Requires:"
 msgstr "必要:"
 
 #: ../src/info.cc:144
-#| msgid "Recommends"
 msgid "Recommends:"
 msgstr "推奨:"
 
@@ -500,7 +496,6 @@ msgid "Provides:"
 msgstr "提供:"
 
 #: ../src/info.cc:276
-#| msgid "Conflicts"
 msgid "Conflicts:"
 msgstr "競合:"
 
@@ -1090,7 +1085,6 @@ msgstr "'%s' に対する未加工のメタデータのキャッシュを削除�
 
 #: ../src/repos.cc:1171
 #, c-format
-#| msgid "Cleaning raw metadata cache for '%s'."
 msgid "Keeping raw metadata cache for %s '%s'."
 msgstr "%s '%s' に対する未加工のメタデータのキャッシュを保持しています。"
 
@@ -1249,13 +1243,11 @@ msgstr "リポジトリ '%s' の優先順位を変更しませんでした (%d)"
 
 #: ../src/repos.cc:1731
 #, c-format
-#| msgid "Repository '%s' has been sucessfully enabled."
 msgid "Repository '%s' has been successfully enabled."
 msgstr "リポジトリ '%s' を有効に設定しました。"
 
 #: ../src/repos.cc:1734
 #, c-format
-#| msgid "Repository '%s' has been sucessfully disabled."
 msgid "Repository '%s' has been successfully disabled."
 msgstr "リポジトリ '%s' を無効に設定しました。"
 
@@ -1698,13 +1690,11 @@ msgstr "y/n/p/v/a/r/m/d/g"
 
 #. translators: help text for 'y' option in the 'Continue?' prompt
 #: ../src/solve-commit.cc:478
-#| msgid "Accept the summary and proceed with installation/removal of packages."
 msgid "Yes, accept the summary and proceed with installation/removal of packages."
 msgstr "はい、概要に表示されている内容を受け入れ、パッケージのインストール／削除を行なう"
 
 #. translators: help text for 'n' option in the 'Continue?' prompt
 #: ../src/solve-commit.cc:480
-#| msgid "Cancel the operation."
 msgid "No, cancel the operation."
 msgstr "いいえ、操作をキャンセルする"
 
@@ -1725,7 +1715,6 @@ msgstr "パッケージアーキテクチャの表示を切り替える"
 
 #. translators: help text for 'r' option in the 'Continue?' prompt
 #: ../src/solve-commit.cc:488
-#| msgid "The following packages will be installed:\n"
 msgid "Toggle display of repositories from which the packages will be installed."
 msgstr "パッケージのインストール元リポジトリの表示を切り替える"
 
@@ -1972,7 +1961,6 @@ msgstr "この操作を行なうと、%s の容量が開放されます。"
 
 #. translators: this text will be preceded by a number e.g. "5 packages to ..."
 #: ../src/Summary.cc:628
-#| msgid "No packages to update"
 msgid "package to upgrade"
 msgid_plural "packages to upgrade"
 msgstr[0] "個のアップグレードすべきパッケージ"
@@ -1985,49 +1973,42 @@ msgstr[0] "個のダウングレード"
 
 #. translators: this text will be preceded by a number e.g. "5 packages to ..."
 #: ../src/Summary.cc:643
-#| msgid "The package download failed"
 msgid "package to downgrade"
 msgid_plural "packages to downgrade"
 msgstr[0] "個のダウングレードすべきパッケージ"
 
 #. translators: this text will be preceded by a number e.g. "5 new"
 #: ../src/Summary.cc:654
-#| msgid "New"
 msgid "new"
 msgid_plural "new"
 msgstr[0] "新規"
 
 #. translators: this text will be preceded by a number e.g. "5 new to install"
 #: ../src/Summary.cc:657
-#| msgid "The package is not installed"
 msgid "new package to install"
 msgid_plural "new packages to install"
 msgstr[0] "個のインストールすべきパッケージ"
 
 #. translators: this text will be preceded by a number e.g. "5 to ..."
 #: ../src/Summary.cc:669
-#| msgid "_Force install"
 msgid "to reinstall"
 msgid_plural "to reinstall"
 msgstr[0] "個の再インストール"
 
 #. translators: this text will be preceded by a number e.g. "5 packages to ..."
 #: ../src/Summary.cc:672
-#| msgid "Package installer"
 msgid "package to reinstall"
 msgid_plural "packages to reinstall"
 msgstr[0] "個の再インストールすべきパッケージ"
 
 #. translators: this text will be preceded by a number e.g. "5 to ..."
 #: ../src/Summary.cc:684
-#| msgid "%s remove ok"
 msgid "to remove"
 msgid_plural "to remove"
 msgstr[0] "個の削除"
 
 #. translators: this text will be preceded by a number e.g. "5 packages to ..."
 #: ../src/Summary.cc:687
-#| msgid "Unable to remove ^%s\n"
 msgid "package to remove"
 msgid_plural "packages to remove"
 msgstr[0] "個の削除すべきパッケージ"
@@ -2040,8 +2021,6 @@ msgstr[0] "個の製造元変更"
 
 #. translators: this text will be preceded by a number e.g. "5 packages ..."
 #: ../src/Summary.cc:702
-#| msgid "The following package is going to change vendor:"
-#| msgid_plural "The following packages are going to change vendor:"
 msgid "package will change vendor"
 msgid_plural "packages will change vendor"
 msgstr[0] "個の製造元を変更すべきパッケージ"
@@ -2141,28 +2120,23 @@ msgid "No update candidate for '%s'."
 msgstr "'%s' に対する更新候補がありません"
 
 #: ../src/utils/Augeas.cc:26
-#| msgid "Cannot copy the configuration template."
 msgid "Cannot initialize configuration file parser."
 msgstr "設定ファイル処理システムを準備することができません。"
 
 #: ../src/utils/Augeas.cc:43 ../src/utils/Augeas.cc:55
-#| msgid "Reading the config file failed"
 msgid "Augeas error: setting config file to load failed."
 msgstr "Augeas エラー: 読み込むべき設定ファイルの設定に失敗しました。"
 
 #: ../src/utils/Augeas.cc:61
-#| msgid "Cannot parse the certificate."
 msgid "Could not parse the config files."
 msgstr "設定ファイルを処理することができませんでした。"
 
 # %s is either BOOTP or DHCP
 #: ../src/utils/Augeas.cc:95
-#| msgid "An idmapd configuration file is required."
 msgid "No configuration file exists or could be parsed."
 msgstr "設定ファイルが存在しないか、処理できません。"
 
 #: ../src/utils/Augeas.cc:98
-#| msgid "Error parsing the CRL."
 msgid "Error parsing zypper.conf:"
 msgstr "zypper.conf の処理時にエラー:"
 
@@ -2327,13 +2301,11 @@ msgstr "a/r/i"
 
 #: ../src/utils/prompt.cc:228
 #, c-format
-#| msgid "autoselect %s after %u "
 msgid "Autoselecting '%s' after %u second."
 msgid_plural "Autoselecting '%s' after %u seconds."
 msgstr[0] "%2$u 秒後に '%1$s' を自動選択します。"
 
 #: ../src/utils/prompt.cc:247
-#| msgid "Preparing installation..."
 msgid "Trying again..."
 msgstr "再試行しています..."
 
@@ -2345,7 +2317,6 @@ msgstr "回答 '%s' が正しくありません。"
 #. translators: the %s are: 'y', 'yes' (translated), 'n', and 'no' (translated).
 #: ../src/utils/prompt.cc:344
 #, c-format
-#| msgid "Enter 'y' for '%s' or 'n' for '%s' if nothing else works for you."
 msgid "Enter '%s' for '%s' or '%s' for '%s' if nothing else works for you."
 msgstr "うまく動作しない場合、 '%2$s' に対しては '%1$s' を、 '%4$s' に対しては '%3$s' を入力してください。"
 
@@ -2377,23 +2348,6 @@ msgid "Error"
 msgstr "エラー"
 
 #: ../src/Zypper.cc:153
-#| msgid ""
-#| "  Global Options:\n"
-#| "\t--help, -h\t\tHelp.\n"
-#| "\t--version, -V\t\tOutput the version number.\n"
-#| "\t--quiet, -q\t\tSuppress normal output, print only error\n"
-#| "\t\t\t\tmessages.\n"
-#| "\t--verbose, -v\t\tIncrease verbosity.\n"
-#| "\t--no-abbrev, -A\t\tDo not abbreviate text in tables.\n"
-#| "\t--table-style, -s\tTable style (integer).\n"
-#| "\t--rug-compatible, -r\tTurn on rug compatibility.\n"
-#| "\t--non-interactive, -n\tDo not ask anything, use default answers\n"
-#| "\t\t\t\tautomatically.\n"
-#| "\t--xmlout, -x\t\tSwitch to XML output.\n"
-#| "\t--reposd-dir, -D <dir>\tUse alternative repository definition files\n"
-#| "\t\t\t\tdirectory.\n"
-#| "\t--cache-dir, -C <dir>\tUse alternative meta-data cache directory.\n"
-#| "\t--raw-cache-dir <dir>\tUse alternative raw meta-data cache directory.\n"
 msgid ""
 "  Global Options:\n"
 "\t--help, -h\t\tHelp.\n"
@@ -2573,11 +2527,6 @@ msgstr ""
 "\twhat-provides, wp\t指定した能力設定が提供するパッケージを表示する\n"
 
 #: ../src/Zypper.cc:248
-#| msgid ""
-#| "     Package Locks:\n"
-#| "\taddlock, al\t\tAdd a package lock.\n"
-#| "\tremovelock, rl\t\tRemove a package lock.\n"
-#| "\tlocks, ll\t\tList current package locks.\n"
 msgid ""
 "     Package Locks:\n"
 "\taddlock, al\t\tAdd a package lock.\n"
@@ -2687,25 +2636,6 @@ msgstr "予期しない例外が発生しました。"
 #. and the second %s = "package"
 #: ../src/Zypper.cc:912
 #, c-format
-#| msgid ""
-#| "install (in) [options] <capability|rpm_file_uri> ...\n"
-#| "\n"
-#| "Install packages with specified capabilities or RPM files with specified location. A capability is NAME[OP<VERSION>], where OP is one of <, <=, =, >=, >.\n"
-#| "\n"
-#| "  Command options:\n"
-#| "-r, --repo <alias|#|URI>        Install packages only from the specified repository.\n"
-#| "-t, --type <type>               Type of package (%s).\n"
-#| "                                Default: %s.\n"
-#| "-n, --name                      Select packages by plain name, not by capability.\n"
-#| "-C, --capability                Select packages by capability.\n"
-#| "-f, --force                     Install even if the item is already installed (reinstall).\n"
-#| "-l, --auto-agree-with-licenses  Automatically say 'yes' to third party license confirmation prompt.\n"
-#| "                                See 'man zypper' for more details.\n"
-#| "    --debug-solver              Create solver test case for debugging.\n"
-#| "    --no-recommends             Do not install recommended packages, only required.\n"
-#| "-R, --no-force-resolution       Do not force the solver to find solution, let it ask.\n"
-#| "    --force-resolution          Force the solver to find a solution (even an agressive).\n"
-#| "-D, --dry-run                   Test the installation, do not actually install.\n"
 msgid ""
 "install (in) [options] <capability|rpm_file_uri> ...\n"
 "\n"
@@ -2770,21 +2700,6 @@ msgstr ""
 #. and the second %s = "package"
 #: ../src/Zypper.cc:969
 #, c-format
-#| msgid ""
-#| "remove (rm) [options] <capability> ...\n"
-#| "\n"
-#| "Remove packages with specified capabilities. A capability is NAME[OP<VERSION>], where OP is one of <, <=, =, >=, >.\n"
-#| "\n"
-#| "  Command options:\n"
-#| "-r, --repo <alias|#|URI>        Operate only with packages from the specified repository.\n"
-#| "-t, --type <type>               Type of package (%s).\n"
-#| "                                Default: %s.\n"
-#| "-n, --name                      Select packages by plain name, not by capability.\n"
-#| "-C, --capability                Select packages by capability.\n"
-#| "    --debug-solver              Create solver test case for debugging.\n"
-#| "-R, --no-force-resolution       Do not force the solver to find solution, let it ask.\n"
-#| "    --force-resolution          Force the solver to find a solution (even an agressive).\n"
-#| "-D, --dry-run                   Test the removal, do not actually remove.\n"
 msgid ""
 "remove (rm) [options] <capability> ...\n"
 "\n"
@@ -2841,15 +2756,6 @@ msgstr ""
 "-r, --repo <alias|#|URI> 指定したリポジトリからのパッケージのみをインストールする\n"
 
 #: ../src/Zypper.cc:1028
-#| msgid ""
-#| "verify (ve) [options]\n"
-#| "\n"
-#| "Check whether dependencies of installed packages are satisfied and repair eventual dependency problems.\n"
-#| "\n"
-#| "  Command options:\n"
-#| "    --no-recommends      Do not install recommended packages, only required.\n"
-#| "-D, --dry-run            Test the repair, do not actually do anything to the system.\n"
-#| "-r, --repo <alias|#|URI> Use only specified repositories to install missing packages.\n"
 msgid ""
 "verify (ve) [options]\n"
 "\n"
@@ -2898,15 +2804,6 @@ msgstr ""
 #. translators: the %s = "ris" (the only service type currently supported)
 #: ../src/Zypper.cc:1081
 #, c-format
-#| msgid ""
-#| "addservice (as) [options] <URI> <alias>\n"
-#| "\n"
-#| "Add a repository index service to the system.\n"
-#| "\n"
-#| "  Command options:\n"
-#| "-t, --type <TYPE>       Type of the service (%s).\n"
-#| "-d, --disable           Add the service as disabled.\n"
-#| "-n, --name              Specify descriptive name for the service.\n"
 msgid ""
 "addservice (as) [options] <URI> <alias>\n"
 "\n"
@@ -3045,22 +2942,6 @@ msgstr ""
 #. translators: the %s = "yast2, rpm-md, plaindir"
 #: ../src/Zypper.cc:1242
 #, c-format
-#| msgid ""
-#| "addrepo (ar) [options] <URI> <alias>\n"
-#| "addrepo (ar) [options] <FILE.repo>\n"
-#| "\n"
-#| "Add a repository to the sytem. The repository can be specified by its URI or can be read from specified .repo file (even remote).\n"
-#| "\n"
-#| "  Command options:\n"
-#| "-r, --repo <FILE.repo>  Just another means to specify a .repo file to read.\n"
-#| "-t, --type <TYPE>       Type of repository (%s).\n"
-#| "-d, --disable           Add the repository as disabled.\n"
-#| "-c, --check             Probe URI.\n"
-#| "-C, --no-check          Don't probe URI, probe later during refresh.\n"
-#| "-n, --name              Specify descriptive name for the repository.\n"
-#| "-k, --keep-packages     Enable RPM files caching.\n"
-#| "-K, --no-keep-packages  Disable RPM files caching.\n"
-#| "-f, --refresh           Enable autorefresh of the repository.\n"
 msgid ""
 "addrepo (ar) [options] <URI> <alias>\n"
 "addrepo (ar) [options] <file.repo>\n"
@@ -3177,27 +3058,6 @@ msgstr ""
 #. and "--all, --remote, --local, --medium-type"
 #: ../src/Zypper.cc:1379
 #, c-format
-#| msgid ""
-#| "modifyrepo (mr) <options> <alias|#|URI>\n"
-#| "modifyrepo (mr) <options> <%s>\n"
-#| "\n"
-#| "Modify properties of repositories specified by alias, number, or URI, or by the\n"
-#| "'%s' aggregate options.\n"
-#| "\n"
-#| "  Command options:\n"
-#| "-d, --disable             Disable the repository (but don't remove it).\n"
-#| "-e, --enable              Enable a disabled repository.\n"
-#| "-r, --refresh             Enable auto-refresh of the repository.\n"
-#| "-R, --no-refresh          Disable auto-refresh of the repository.\n"
-#| "-n, --name                Set a descriptive name for the repository.\n"
-#| "-p, --priority <1-99>     Set priority of the repository.\n"
-#| "-k, --keep-packages       Enable RPM files caching.\n"
-#| "-K, --no-keep-packages    Disable RPM files caching.\n"
-#| "\n"
-#| "-a, --all                 Apply changes to all repositories.\n"
-#| "-l, --local               Apply changes to all local repositories.\n"
-#| "-t, --remote              Apply changes to all remote repositories.\n"
-#| "-m, --medium-type <type>  Apply changes to repositories of specified type.\n"
 msgid ""
 "modifyrepo (mr) <options> <alias|#|URI> ...\n"
 "modifyrepo (mr) <options> <%s>\n"
@@ -3269,16 +3129,6 @@ msgstr ""
 "-s, --services           リポジトリを更新する前にサービスも更新する\n"
 
 #: ../src/Zypper.cc:1448
-#| msgid ""
-#| "clean [alias|#|URI] ...\n"
-#| "\n"
-#| "Clean local caches.\n"
-#| "\n"
-#| "  Command options:\n"
-#| "-r, --repo <alias|#|URI> Clean only specified repositories.\n"
-#| "-m, --metadata           Clean metadata cache.\n"
-#| "-M, --raw-metadata       Clean raw metadata cache.\n"
-#| "-a, --all                Clean both metadata and package caches.\n"
 msgid ""
 "clean (cc) [alias|#|URI] ...\n"
 "\n"
@@ -3338,28 +3188,6 @@ msgstr ""
 #. and the second %s = "patch"
 #: ../src/Zypper.cc:1529
 #, c-format
-#| msgid ""
-#| "update (up) [options] ...\n"
-#| "\n"
-#| "Update all or specified installed packages with newer versions, if possible.\n"
-#| "\n"
-#| "  Command options:\n"
-#| "\n"
-#| "-t, --type <type>               Type of package (%s).\n"
-#| "                                Default: %s.\n"
-#| "-r, --repo <alias|#|URI>        Limit updates to the specified repository.\n"
-#| "    --skip-interactive          Skip interactive updates.\n"
-#| "-l, --auto-agree-with-licenses  Automatically say 'yes' to third party license\n"
-#| "                                confirmation prompt.\n"
-#| "                                See man zypper for more details.\n"
-#| "    --best-effort               Do a 'best effort' approach to update. Updates\n"
-#| "                                to a lower than the latest version are\n"
-#| "                                also acceptable.\n"
-#| "    --debug-solver              Create solver test case for debugging.\n"
-#| "    --no-recommends             Do not install recommended packages, only required.\n"
-#| "-R, --no-force-resolution       Do not force the solver to find solution, let it ask.\n"
-#| "    --force-resolution          Force the solver to find a solution (even an agressive).\n"
-#| "-D, --dry-run                   Test the update, do not actually update.\n"
 msgid ""
 "update (up) [options] ...\n"
 "\n"
@@ -3414,20 +3242,6 @@ msgstr ""
 "-D, --dry-run               更新をテストするだけで実際には何もしない\n"
 
 #: ../src/Zypper.cc:1574
-#| msgid ""
-#| "patch [options]\n"
-#| "\n"
-#| "Install all available needed patches.\n"
-#| "\n"
-#| "  Command options:\n"
-#| "\n"
-#| "-r, --repo <alias|#|URI>        Work only with specified repository.\n"
-#| "    --skip-interactive          Skip interactive patches.\n"
-#| "-l, --auto-agree-with-licenses  Automatically say 'yes' to third party license\n"
-#| "                                confirmation prompt.\n"
-#| "                                See man zypper for more details.\n"
-#| "    --debug-solver              Create solver test case for debugging.\n"
-#| "-D, --dry-run                   Test the update, do not actually update.\n"
 msgid ""
 "patch [options]\n"
 "\n"
@@ -3483,19 +3297,6 @@ msgstr ""
 "-r, --repo <alias|#|URI>        指定したリポジトリからの修正のみを表示する\n"
 
 #: ../src/Zypper.cc:1630
-#| msgid ""
-#| "dist-upgrade (dup) [options]\n"
-#| "\n"
-#| "Perform a distribution upgrade.\n"
-#| "\n"
-#| "  Command options:\n"
-#| "\n"
-#| "-r, --repo <alias|#|URI>        Limit the upgrade to the specified repository.\n"
-#| "    --no-recommends             Do not install recommended packages, only required.\n"
-#| "-l, --auto-agree-with-licenses  Automatically say 'yes' to third party license confirmation prompt.\n"
-#| "                                See man zypper for more details.\n"
-#| "    --debug-solver              Create solver test case for debugging\n"
-#| "-D, --dry-run                   Test the upgrade, do not actually upgrade\n"
 msgid ""
 "dist-upgrade (dup) [options]\n"
 "\n"
@@ -3688,15 +3489,6 @@ msgstr ""
 
 #: ../src/Zypper.cc:1843
 #, c-format
-#| msgid ""
-#| "info (if) [options] <name> ...\n"
-#| "\n"
-#| "Show detailed information for specified packages.\n"
-#| "\n"
-#| "  Command options:\n"
-#| "-r, --repo <alias|#|URI>  Work only with the specified repository.\n"
-#| "-t, --type <type>         Type of package (%s).\n"
-#| "                          Default: %s."
 msgid ""
 "info (if) [options] <name> ...\n"
 "\n"
@@ -3716,8 +3508,7 @@ msgstr ""
 "  コマンドオプション:\n"
 "-r, --repo <alias|#|URI>  指定したリポジトリからのもののみに対して作業を行なう\n"
 "-t, --type <type>         パッケージの種類 (%s) \n"
-"                          既定: %s"
-"    --requires            必要とするパッケージと事前に必要とするパッケージも表示する\n"
+"                          既定: %s    --requires            必要とするパッケージと事前に必要とするパッケージも表示する\n"
 "    --recommends          推奨パッケージも表示する"
 
 #: ../src/Zypper.cc:1868
@@ -3894,12 +3685,6 @@ msgstr ""
 "-m, --match  リリース番号が存在しないときはどんなリリースでもかまわないものとする\n"
 
 #: ../src/Zypper.cc:2120
-#| msgid ""
-#| "licenses\n"
-#| "\n"
-#| "Report Licenses and EULA of currently installed software packages.\n"
-#| "\n"
-#| "This command has no additional options.\n"
 msgid ""
 "licenses\n"
 "\n"
@@ -4207,7 +3992,6 @@ msgstr "ディストリビューションのアップグレード処理を行な
 
 #: ../src/Zypper.cc:3794
 #, c-format
-#| msgid "'%1' does not exist."
 msgid "Type '%s' does not support %s."
 msgstr "種類 '%s' は %s に対応していません。"
 
@@ -4245,4 +4029,3 @@ msgstr "説明"
 #: ../src/Zypper.cc:4129
 msgid "Resolvable Type"
 msgstr "解決方法の種類"
-

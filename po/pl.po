@@ -213,7 +213,6 @@ msgstr "Proszę włożyć nośnik [%s] #%d i nacisnąć 't' aby kontynuować lub
 #. the 'u' reply means 'Change URI'.
 #: ../src/callbacks/media.h:106
 #, fuzzy
-#| msgid "a/r/i"
 msgid "a/r/i/u"
 msgstr "p/s/i"
 
@@ -246,7 +245,6 @@ msgstr "Przerwij, spróbuj ponownie, ignoruj?"
 #. translators: this is a prompt label, will appear as "New URI: "
 #: ../src/callbacks/media.h:130
 #, fuzzy
-#| msgid "URI"
 msgid "New URI"
 msgstr "Adres URL"
 
@@ -333,9 +331,8 @@ msgstr "Nieznane polecenie '%s'"
 
 #: ../src/Config.cc:73
 #, fuzzy, c-format
-#| msgid "Unknown command option"
 msgid "Unknown configuration option '%s'"
-msgstr "Nieznana opcja polecenia"
+msgstr "Nieznane polecenie '%s'"
 
 #: ../src/info.cc:40
 msgid "Name: "
@@ -419,9 +416,8 @@ msgstr "Wymaga:"
 
 #: ../src/info.cc:144
 #, fuzzy
-#| msgid "Recommends"
 msgid "Recommends:"
-msgstr "Zaleca"
+msgstr "Zalecany"
 
 #: ../src/info.cc:181 ../src/info.cc:325 ../src/info.cc:396
 msgid "Catalog: "
@@ -508,7 +504,6 @@ msgstr "Dostarcza:"
 
 #: ../src/info.cc:276
 #, fuzzy
-#| msgid "Conflicts"
 msgid "Conflicts:"
 msgstr "Konfliktuje"
 
@@ -1104,7 +1099,6 @@ msgstr "Czyszczenie bufora metadanych dla '%s'."
 
 #: ../src/repos.cc:1171
 #, fuzzy, c-format
-#| msgid "Cleaning raw metadata cache for '%s'."
 msgid "Keeping raw metadata cache for %s '%s'."
 msgstr "Czyszczenie bufora metadanych dla '%s'."
 
@@ -1263,13 +1257,11 @@ msgstr "Nie zmieniono priorytetu '%s' (%d)"
 
 #: ../src/repos.cc:1731
 #, fuzzy, c-format
-#| msgid "Repository '%s' has been sucessfully enabled."
 msgid "Repository '%s' has been successfully enabled."
 msgstr "Odblokowano repozytorium '%s'."
 
 #: ../src/repos.cc:1734
 #, fuzzy, c-format
-#| msgid "Repository '%s' has been sucessfully disabled."
 msgid "Repository '%s' has been successfully disabled."
 msgstr "Zablokowano repozytorium '%s'."
 
@@ -1727,14 +1719,12 @@ msgstr ""
 #. translators: help text for 'y' option in the 'Continue?' prompt
 #: ../src/solve-commit.cc:478
 #, fuzzy
-#| msgid "Accept the summary and proceed with installation/removal of packages."
 msgid "Yes, accept the summary and proceed with installation/removal of packages."
 msgstr "Akceptuje podsumowanie i kontynuuje instalację lub usunięcie pakietów."
 
 #. translators: help text for 'n' option in the 'Continue?' prompt
 #: ../src/solve-commit.cc:480
 #, fuzzy
-#| msgid "Cancel the operation."
 msgid "No, cancel the operation."
 msgstr "Zatrzymanie czynności."
 
@@ -1755,10 +1745,8 @@ msgstr ""
 
 #. translators: help text for 'r' option in the 'Continue?' prompt
 #: ../src/solve-commit.cc:488
-#, fuzzy
-#| msgid "The following packages will be installed:\n"
 msgid "Toggle display of repositories from which the packages will be installed."
-msgstr "Zainstalowane zostaną następujące pakiety:\n"
+msgstr ""
 
 #. translators: help text for 'm' option in the 'Continue?' prompt
 #: ../src/solve-commit.cc:490
@@ -2065,12 +2053,11 @@ msgstr "Po wykonaniu operacji zwolnione zostanie %s."
 #. translators: this text will be preceded by a number e.g. "5 packages to ..."
 #: ../src/Summary.cc:628
 #, fuzzy
-#| msgid "No packages to update"
 msgid "package to upgrade"
 msgid_plural "packages to upgrade"
-msgstr[0] "Brak pakietów do zaktualizowania"
-msgstr[1] "Brak pakietów do zaktualizowania"
-msgstr[2] "Brak pakietów do zaktualizowania"
+msgstr[0] "Aktualizacje pakietów"
+msgstr[1] "Aktualizacje pakietów"
+msgstr[2] "Aktualizacje pakietów"
 
 #. translators: this text will be preceded by a number e.g. "5 to ..."
 #: ../src/Summary.cc:640
@@ -2082,73 +2069,62 @@ msgstr[2] ""
 
 #. translators: this text will be preceded by a number e.g. "5 packages to ..."
 #: ../src/Summary.cc:643
-#, fuzzy
-#| msgid "The package download failed"
 msgid "package to downgrade"
 msgid_plural "packages to downgrade"
-msgstr[0] "Pobranie pakietu zakończone niepowodzeniem"
-msgstr[1] "Pobranie pakietu zakończone niepowodzeniem"
-msgstr[2] "Pobranie pakietu zakończone niepowodzeniem"
+msgstr[0] ""
+msgstr[1] ""
+msgstr[2] ""
 
 #. translators: this text will be preceded by a number e.g. "5 new"
 #: ../src/Summary.cc:654
-#, fuzzy
-#| msgid "New"
 msgid "new"
 msgid_plural "new"
-msgstr[0] "Nowy"
-msgstr[1] "Nowy"
-msgstr[2] "Nowy"
+msgstr[0] ""
+msgstr[1] ""
+msgstr[2] ""
 
 #. translators: this text will be preceded by a number e.g. "5 new to install"
 #: ../src/Summary.cc:657
 #, fuzzy
-#| msgid "The package is not installed"
 msgid "new package to install"
 msgid_plural "new packages to install"
-msgstr[0] "Pakiet nie jest zainstalowany"
-msgstr[1] "Pakiet nie jest zainstalowany"
-msgstr[2] "Pakiet nie jest zainstalowany"
+msgstr[0] "Pakiet '%s' nie jest zainstalowany."
+msgstr[1] "Pakiet '%s' nie jest zainstalowany."
+msgstr[2] "Pakiet '%s' nie jest zainstalowany."
 
 #. translators: this text will be preceded by a number e.g. "5 to ..."
 #: ../src/Summary.cc:669
 #, fuzzy
-#| msgid "_Force install"
 msgid "to reinstall"
 msgid_plural "to reinstall"
-msgstr[0] "_Wymuś instalację"
-msgstr[1] "_Wymuś instalację"
-msgstr[2] "_Wymuś instalację"
+msgstr[0] "niezainstalowany"
+msgstr[1] "niezainstalowany"
+msgstr[2] "niezainstalowany"
 
 #. translators: this text will be preceded by a number e.g. "5 packages to ..."
 #: ../src/Summary.cc:672
 #, fuzzy
-#| msgid "Package installer"
 msgid "package to reinstall"
 msgid_plural "packages to reinstall"
-msgstr[0] "Instalator pakietów"
-msgstr[1] "Instalator pakietów"
-msgstr[2] "Instalator pakietów"
+msgstr[0] "Pakiet '%s' nie jest zainstalowany."
+msgstr[1] "Pakiet '%s' nie jest zainstalowany."
+msgstr[2] "Pakiet '%s' nie jest zainstalowany."
 
 #. translators: this text will be preceded by a number e.g. "5 to ..."
 #: ../src/Summary.cc:684
-#, fuzzy
-#| msgid "%s remove ok"
 msgid "to remove"
 msgid_plural "to remove"
-msgstr[0] "Usunięcie %s powiodło się"
-msgstr[1] "Usunięcie %s powiodło się"
-msgstr[2] "Usunięcie %s powiodło się"
+msgstr[0] ""
+msgstr[1] ""
+msgstr[2] ""
 
 #. translators: this text will be preceded by a number e.g. "5 packages to ..."
 #: ../src/Summary.cc:687
-#, fuzzy
-#| msgid "Unable to remove ^%s\n"
 msgid "package to remove"
 msgid_plural "packages to remove"
-msgstr[0] "Nie można usunąć ^%s\n"
-msgstr[1] "Nie można usunąć ^%s\n"
-msgstr[2] "Nie można usunąć ^%s\n"
+msgstr[0] ""
+msgstr[1] ""
+msgstr[2] ""
 
 #. translators: this text will be preceded by a number e.g. "5 to ..."
 #: ../src/Summary.cc:699
@@ -2161,8 +2137,6 @@ msgstr[2] ""
 #. translators: this text will be preceded by a number e.g. "5 packages ..."
 #: ../src/Summary.cc:702
 #, fuzzy
-#| msgid "The following package is going to change vendor:"
-#| msgid_plural "The following packages are going to change vendor:"
 msgid "package will change vendor"
 msgid_plural "packages will change vendor"
 msgstr[0] "Zostanie zmieniony dostawca następującego pakietu:"
@@ -2273,34 +2247,25 @@ msgstr "Brak aktualizacji dla '%s'."
 
 #: ../src/utils/Augeas.cc:26
 #, fuzzy
-#| msgid "Cannot copy the configuration template."
 msgid "Cannot initialize configuration file parser."
-msgstr "Nie można skopiować szablonu konfiguracji."
+msgstr "Inicjalizacja nie powiodła się:"
 
 #: ../src/utils/Augeas.cc:43 ../src/utils/Augeas.cc:55
-#, fuzzy
-#| msgid "Reading the config file failed"
 msgid "Augeas error: setting config file to load failed."
-msgstr "Odczytanie pliku konfiguracyjnego zakończone niepowodzeniem"
+msgstr ""
 
 #: ../src/utils/Augeas.cc:61
-#, fuzzy
-#| msgid "Cannot parse the certificate."
 msgid "Could not parse the config files."
-msgstr "Analiza certyfikatu nie powiodła się."
+msgstr ""
 
-# %s is either BOOTP or DHCP
 #: ../src/utils/Augeas.cc:95
-#, fuzzy
-#| msgid "An idmapd configuration file is required."
 msgid "No configuration file exists or could be parsed."
-msgstr "Wymagany jest plik konfiguracyjny idmapd."
+msgstr ""
 
 #: ../src/utils/Augeas.cc:98
 #, fuzzy
-#| msgid "Error parsing the CRL."
 msgid "Error parsing zypper.conf:"
-msgstr "Wystąpił błąd podczas analizy CRL."
+msgstr "Błąd podczas odczytu serwerów:"
 
 #. For '-garbage' argument, with 'a', 'b', and 'e' as known options,
 #. getopt_long reports 'a', 'b', and 'e' as known options.
@@ -2475,7 +2440,6 @@ msgstr "p/s/i"
 
 #: ../src/utils/prompt.cc:228
 #, fuzzy, c-format
-#| msgid "autoselect %s after %u "
 msgid "Autoselecting '%s' after %u second."
 msgid_plural "Autoselecting '%s' after %u seconds."
 msgstr[0] "automatyczny wybór %s po %u"
@@ -2483,10 +2447,8 @@ msgstr[1] "automatyczny wybór %s po %u"
 msgstr[2] "automatyczny wybór %s po %u"
 
 #: ../src/utils/prompt.cc:247
-#, fuzzy
-#| msgid "Preparing installation..."
 msgid "Trying again..."
-msgstr "Przygotowywanie instalacji..."
+msgstr ""
 
 #: ../src/utils/prompt.cc:338
 #, c-format
@@ -2496,7 +2458,6 @@ msgstr "Nieprawidłowa odpowiedź '%s'."
 #. translators: the %s are: 'y', 'yes' (translated), 'n', and 'no' (translated).
 #: ../src/utils/prompt.cc:344
 #, fuzzy, c-format
-#| msgid "Enter 'y' for '%s' or 'n' for '%s' if nothing else works for you."
 msgid "Enter '%s' for '%s' or '%s' for '%s' if nothing else works for you."
 msgstr "Proszę wybrać 't' dla '%s' lub 'n' dla '%s' jeśli nic innego nie działa"
 
@@ -2529,23 +2490,6 @@ msgstr "Błąd"
 
 #: ../src/Zypper.cc:153
 #, fuzzy
-#| msgid ""
-#| "  Global Options:\n"
-#| "\t--help, -h\t\tHelp.\n"
-#| "\t--version, -V\t\tOutput the version number.\n"
-#| "\t--quiet, -q\t\tSuppress normal output, print only error\n"
-#| "\t\t\t\tmessages.\n"
-#| "\t--verbose, -v\t\tIncrease verbosity.\n"
-#| "\t--no-abbrev, -A\t\tDo not abbreviate text in tables.\n"
-#| "\t--table-style, -s\tTable style (integer).\n"
-#| "\t--rug-compatible, -r\tTurn on rug compatibility.\n"
-#| "\t--non-interactive, -n\tDo not ask anything, use default answers\n"
-#| "\t\t\t\tautomatically.\n"
-#| "\t--xmlout, -x\t\tSwitch to XML output.\n"
-#| "\t--reposd-dir, -D <dir>\tUse alternative repository definition files\n"
-#| "\t\t\t\tdirectory.\n"
-#| "\t--cache-dir, -C <dir>\tUse alternative meta-data cache directory.\n"
-#| "\t--raw-cache-dir <dir>\tUse alternative raw meta-data cache directory.\n"
 msgid ""
 "  Global Options:\n"
 "\t--help, -h\t\tHelp.\n"
@@ -2730,11 +2674,6 @@ msgstr ""
 
 #: ../src/Zypper.cc:248
 #, fuzzy
-#| msgid ""
-#| "     Package Locks:\n"
-#| "\taddlock, al\t\tAdd a package lock.\n"
-#| "\tremovelock, rl\t\tRemove a package lock.\n"
-#| "\tlocks, ll\t\tList current package locks.\n"
 msgid ""
 "     Package Locks:\n"
 "\taddlock, al\t\tAdd a package lock.\n"
@@ -2845,25 +2784,6 @@ msgstr "Niespodziewany wyjątek."
 #. and the second %s = "package"
 #: ../src/Zypper.cc:912
 #, fuzzy, c-format
-#| msgid ""
-#| "install (in) [options] <capability|rpm_file_uri> ...\n"
-#| "\n"
-#| "Install packages with specified capabilities or RPM files with specified location. A capability is NAME[OP<VERSION>], where OP is one of <, <=, =, >=, >.\n"
-#| "\n"
-#| "  Command options:\n"
-#| "-r, --repo <alias|#|URI>        Install packages only from the specified repository.\n"
-#| "-t, --type <type>               Type of package (%s).\n"
-#| "                                Default: %s.\n"
-#| "-n, --name                      Select packages by plain name, not by capability.\n"
-#| "-C, --capability                Select packages by capability.\n"
-#| "-f, --force                     Install even if the item is already installed (reinstall).\n"
-#| "-l, --auto-agree-with-licenses  Automatically say 'yes' to third party license confirmation prompt.\n"
-#| "                                See 'man zypper' for more details.\n"
-#| "    --debug-solver              Create solver test case for debugging.\n"
-#| "    --no-recommends             Do not install recommended packages, only required.\n"
-#| "-R, --no-force-resolution       Do not force the solver to find solution, let it ask.\n"
-#| "    --force-resolution          Force the solver to find a solution (even an agressive).\n"
-#| "-D, --dry-run                   Test the installation, do not actually install.\n"
 msgid ""
 "install (in) [options] <capability|rpm_file_uri> ...\n"
 "\n"
@@ -2917,21 +2837,6 @@ msgstr ""
 #. and the second %s = "package"
 #: ../src/Zypper.cc:969
 #, fuzzy, c-format
-#| msgid ""
-#| "remove (rm) [options] <capability> ...\n"
-#| "\n"
-#| "Remove packages with specified capabilities. A capability is NAME[OP<VERSION>], where OP is one of <, <=, =, >=, >.\n"
-#| "\n"
-#| "  Command options:\n"
-#| "-r, --repo <alias|#|URI>        Operate only with packages from the specified repository.\n"
-#| "-t, --type <type>               Type of package (%s).\n"
-#| "                                Default: %s.\n"
-#| "-n, --name                      Select packages by plain name, not by capability.\n"
-#| "-C, --capability                Select packages by capability.\n"
-#| "    --debug-solver              Create solver test case for debugging.\n"
-#| "-R, --no-force-resolution       Do not force the solver to find solution, let it ask.\n"
-#| "    --force-resolution          Force the solver to find a solution (even an agressive).\n"
-#| "-D, --dry-run                   Test the removal, do not actually remove.\n"
 msgid ""
 "remove (rm) [options] <capability> ...\n"
 "\n"
@@ -2987,15 +2892,6 @@ msgstr ""
 
 #: ../src/Zypper.cc:1028
 #, fuzzy
-#| msgid ""
-#| "verify (ve) [options]\n"
-#| "\n"
-#| "Check whether dependencies of installed packages are satisfied and repair eventual dependency problems.\n"
-#| "\n"
-#| "  Command options:\n"
-#| "    --no-recommends      Do not install recommended packages, only required.\n"
-#| "-D, --dry-run            Test the repair, do not actually do anything to the system.\n"
-#| "-r, --repo <alias|#|URI> Use only specified repositories to install missing packages.\n"
 msgid ""
 "verify (ve) [options]\n"
 "\n"
@@ -3041,15 +2937,6 @@ msgstr ""
 #. translators: the %s = "ris" (the only service type currently supported)
 #: ../src/Zypper.cc:1081
 #, fuzzy, c-format
-#| msgid ""
-#| "addservice (as) [options] <URI> <alias>\n"
-#| "\n"
-#| "Add a repository index service to the system.\n"
-#| "\n"
-#| "  Command options:\n"
-#| "-t, --type <TYPE>       Type of the service (%s).\n"
-#| "-d, --disable           Add the service as disabled.\n"
-#| "-n, --name              Specify descriptive name for the service.\n"
 msgid ""
 "addservice (as) [options] <URI> <alias>\n"
 "\n"
@@ -3188,22 +3075,6 @@ msgstr ""
 #. translators: the %s = "yast2, rpm-md, plaindir"
 #: ../src/Zypper.cc:1242
 #, fuzzy, c-format
-#| msgid ""
-#| "addrepo (ar) [options] <URI> <alias>\n"
-#| "addrepo (ar) [options] <FILE.repo>\n"
-#| "\n"
-#| "Add a repository to the sytem. The repository can be specified by its URI or can be read from specified .repo file (even remote).\n"
-#| "\n"
-#| "  Command options:\n"
-#| "-r, --repo <FILE.repo>  Just another means to specify a .repo file to read.\n"
-#| "-t, --type <TYPE>       Type of repository (%s).\n"
-#| "-d, --disable           Add the repository as disabled.\n"
-#| "-c, --check             Probe URI.\n"
-#| "-C, --no-check          Don't probe URI, probe later during refresh.\n"
-#| "-n, --name              Specify descriptive name for the repository.\n"
-#| "-k, --keep-packages     Enable RPM files caching.\n"
-#| "-K, --no-keep-packages  Disable RPM files caching.\n"
-#| "-f, --refresh           Enable autorefresh of the repository.\n"
 msgid ""
 "addrepo (ar) [options] <URI> <alias>\n"
 "addrepo (ar) [options] <file.repo>\n"
@@ -3319,27 +3190,6 @@ msgstr ""
 #. and "--all, --remote, --local, --medium-type"
 #: ../src/Zypper.cc:1379
 #, fuzzy, c-format
-#| msgid ""
-#| "modifyrepo (mr) <options> <alias|#|URI>\n"
-#| "modifyrepo (mr) <options> <%s>\n"
-#| "\n"
-#| "Modify properties of repositories specified by alias, number, or URI, or by the\n"
-#| "'%s' aggregate options.\n"
-#| "\n"
-#| "  Command options:\n"
-#| "-d, --disable             Disable the repository (but don't remove it).\n"
-#| "-e, --enable              Enable a disabled repository.\n"
-#| "-r, --refresh             Enable auto-refresh of the repository.\n"
-#| "-R, --no-refresh          Disable auto-refresh of the repository.\n"
-#| "-n, --name                Set a descriptive name for the repository.\n"
-#| "-p, --priority <1-99>     Set priority of the repository.\n"
-#| "-k, --keep-packages       Enable RPM files caching.\n"
-#| "-K, --no-keep-packages    Disable RPM files caching.\n"
-#| "\n"
-#| "-a, --all                 Apply changes to all repositories.\n"
-#| "-l, --local               Apply changes to all local repositories.\n"
-#| "-t, --remote              Apply changes to all remote repositories.\n"
-#| "-m, --medium-type <type>  Apply changes to repositories of specified type.\n"
 msgid ""
 "modifyrepo (mr) <options> <alias|#|URI> ...\n"
 "modifyrepo (mr) <options> <%s>\n"
@@ -3412,16 +3262,6 @@ msgstr ""
 
 #: ../src/Zypper.cc:1448
 #, fuzzy
-#| msgid ""
-#| "clean [alias|#|URI] ...\n"
-#| "\n"
-#| "Clean local caches.\n"
-#| "\n"
-#| "  Command options:\n"
-#| "-r, --repo <alias|#|URI> Clean only specified repositories.\n"
-#| "-m, --metadata           Clean metadata cache.\n"
-#| "-M, --raw-metadata       Clean raw metadata cache.\n"
-#| "-a, --all                Clean both metadata and package caches.\n"
 msgid ""
 "clean (cc) [alias|#|URI] ...\n"
 "\n"
@@ -3482,28 +3322,6 @@ msgstr ""
 #. and the second %s = "patch"
 #: ../src/Zypper.cc:1529
 #, fuzzy, c-format
-#| msgid ""
-#| "update (up) [options] ...\n"
-#| "\n"
-#| "Update all or specified installed packages with newer versions, if possible.\n"
-#| "\n"
-#| "  Command options:\n"
-#| "\n"
-#| "-t, --type <type>               Type of package (%s).\n"
-#| "                                Default: %s.\n"
-#| "-r, --repo <alias|#|URI>        Limit updates to the specified repository.\n"
-#| "    --skip-interactive          Skip interactive updates.\n"
-#| "-l, --auto-agree-with-licenses  Automatically say 'yes' to third party license\n"
-#| "                                confirmation prompt.\n"
-#| "                                See man zypper for more details.\n"
-#| "    --best-effort               Do a 'best effort' approach to update. Updates\n"
-#| "                                to a lower than the latest version are\n"
-#| "                                also acceptable.\n"
-#| "    --debug-solver              Create solver test case for debugging.\n"
-#| "    --no-recommends             Do not install recommended packages, only required.\n"
-#| "-R, --no-force-resolution       Do not force the solver to find solution, let it ask.\n"
-#| "    --force-resolution          Force the solver to find a solution (even an agressive).\n"
-#| "-D, --dry-run                   Test the update, do not actually update.\n"
 msgid ""
 "update (up) [options] ...\n"
 "\n"
@@ -3555,20 +3373,6 @@ msgstr ""
 
 #: ../src/Zypper.cc:1574
 #, fuzzy
-#| msgid ""
-#| "patch [options]\n"
-#| "\n"
-#| "Install all available needed patches.\n"
-#| "\n"
-#| "  Command options:\n"
-#| "\n"
-#| "-r, --repo <alias|#|URI>        Work only with specified repository.\n"
-#| "    --skip-interactive          Skip interactive patches.\n"
-#| "-l, --auto-agree-with-licenses  Automatically say 'yes' to third party license\n"
-#| "                                confirmation prompt.\n"
-#| "                                See man zypper for more details.\n"
-#| "    --debug-solver              Create solver test case for debugging.\n"
-#| "-D, --dry-run                   Test the update, do not actually update.\n"
 msgid ""
 "patch [options]\n"
 "\n"
@@ -3620,19 +3424,6 @@ msgstr ""
 
 #: ../src/Zypper.cc:1630
 #, fuzzy
-#| msgid ""
-#| "dist-upgrade (dup) [options]\n"
-#| "\n"
-#| "Perform a distribution upgrade.\n"
-#| "\n"
-#| "  Command options:\n"
-#| "\n"
-#| "-r, --repo <alias|#|URI>        Limit the upgrade to the specified repository.\n"
-#| "    --no-recommends             Do not install recommended packages, only required.\n"
-#| "-l, --auto-agree-with-licenses  Automatically say 'yes' to third party license confirmation prompt.\n"
-#| "                                See man zypper for more details.\n"
-#| "    --debug-solver              Create solver test case for debugging\n"
-#| "-D, --dry-run                   Test the upgrade, do not actually upgrade\n"
 msgid ""
 "dist-upgrade (dup) [options]\n"
 "\n"
@@ -3820,15 +3611,6 @@ msgstr ""
 
 #: ../src/Zypper.cc:1843
 #, fuzzy, c-format
-#| msgid ""
-#| "info (if) [options] <name> ...\n"
-#| "\n"
-#| "Show detailed information for specified packages.\n"
-#| "\n"
-#| "  Command options:\n"
-#| "-r, --repo <alias|#|URI>  Work only with the specified repository.\n"
-#| "-t, --type <type>         Type of package (%s).\n"
-#| "                          Default: %s."
 msgid ""
 "info (if) [options] <name> ...\n"
 "\n"
@@ -4018,12 +3800,6 @@ msgstr ""
 
 #: ../src/Zypper.cc:2120
 #, fuzzy
-#| msgid ""
-#| "licenses\n"
-#| "\n"
-#| "Report Licenses and EULA of currently installed software packages.\n"
-#| "\n"
-#| "This command has no additional options.\n"
 msgid ""
 "licenses\n"
 "\n"
@@ -4329,10 +4105,9 @@ msgid "Root privileges are required for performing a distribution upgrade."
 msgstr "Do przeprowadzenia aktualizacji dystrybucji wymagane są uprawnienia administratora."
 
 #: ../src/Zypper.cc:3794
-#, fuzzy, c-format
-#| msgid "'%1' does not exist."
+#, c-format
 msgid "Type '%s' does not support %s."
-msgstr "\"%1\" nie istnieje."
+msgstr ""
 
 #: ../src/Zypper.cc:3824 ../src/Zypper.cc:3885
 msgid "Root privileges are required for adding of package locks."

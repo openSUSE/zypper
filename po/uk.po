@@ -13,7 +13,7 @@ msgstr ""
 "Project-Id-Version: zypper.uk\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2009-06-08 16:44+0200\n"
-"PO-Revision-Date: 2009-01-17 00:39-0800\n"
+"PO-Revision-Date: 2009-06-15 23:28-0700\n"
 "Last-Translator: Ivan Petrouchtchak <fr.ivan@ukrainian-orthodox.org>\n"
 "Language-Team: Ukrainian <translation@linux.org.ua>\n"
 "MIME-Version: 1.0\n"
@@ -210,30 +210,28 @@ msgstr "Будь ласка, вставте носій [%s] # %d і введіт
 #. Translate the a/r/i part exactly as you did the a/r/i string.
 #. the 'u' reply means 'Change URI'.
 #: ../src/callbacks/media.h:106
-#, fuzzy
-#| msgid "a/r/i"
 msgid "a/r/i/u"
-msgstr "п/с/і"
+msgstr "п/с/і/з"
 
 #. help text for the "Abort, retry, ignore?" prompt for media errors
 #: ../src/callbacks/media.h:108
 msgid "Skip retrieval of the file and abort current operation."
-msgstr ""
+msgstr "Пропустити отримання файла і перервати дію."
 
 #. help text for the "Abort, retry, ignore?" prompt for media errors
 #: ../src/callbacks/media.h:110
 msgid "Try to retrieve the file again."
-msgstr ""
+msgstr "Спробувати знову дістати файл."
 
 #. help text for the "Abort, retry, ignore?" prompt for media errors
 #: ../src/callbacks/media.h:112
 msgid "Skip retrieval of the file and try to continue with the operation without the file."
-msgstr ""
+msgstr "Перервати отримання файла і спробувати продовжити дію без файла."
 
 #. help text for the "Abort, retry, ignore?" prompt for media errors
 #: ../src/callbacks/media.h:114
 msgid "Change current base URI and try retrieving the file again."
-msgstr ""
+msgstr "Змінити поточну базову адресу (URI) і знову спробувати отримати файл."
 
 #. translators: this is a prompt text
 #: ../src/callbacks/media.h:119 ../src/utils/prompt.cc:178
@@ -243,10 +241,8 @@ msgstr "Перервати, спробувати знов, ігнорувати?
 
 #. translators: this is a prompt label, will appear as "New URI: "
 #: ../src/callbacks/media.h:130
-#, fuzzy
-#| msgid "URI"
 msgid "New URI"
-msgstr "URI"
+msgstr "Нова адреса (URI)"
 
 #: ../src/callbacks/media.h:267 ../src/callbacks/media.h:274
 msgid "User Name"
@@ -330,10 +326,9 @@ msgid "Unknown command '%s'"
 msgstr "Невідома команда «%s»"
 
 #: ../src/Config.cc:73
-#, fuzzy, c-format
-#| msgid "Unknown command option"
+#, c-format
 msgid "Unknown configuration option '%s'"
-msgstr "Невідомий параметр для команди"
+msgstr "Невідомий параметр «%s»"
 
 #: ../src/info.cc:40
 msgid "Name: "
@@ -416,10 +411,8 @@ msgid "Requires:"
 msgstr "Потребує:"
 
 #: ../src/info.cc:144
-#, fuzzy
-#| msgid "Recommends"
 msgid "Recommends:"
-msgstr "Рекомендує"
+msgstr "Рекомендує:"
 
 #: ../src/info.cc:181 ../src/info.cc:325 ../src/info.cc:396
 msgid "Catalog: "
@@ -505,10 +498,8 @@ msgid "Provides:"
 msgstr "Надає:"
 
 #: ../src/info.cc:276
-#, fuzzy
-#| msgid "Conflicts"
 msgid "Conflicts:"
-msgstr "Конфліктує"
+msgstr "Конфліктує:"
 
 #: ../src/info.cc:297 ../src/search.cc:327
 msgid "Recommended"
@@ -557,7 +548,7 @@ msgstr "(порожній)"
 
 #: ../src/info.cc:402 ../src/search.cc:548
 msgid "Is Base"
-msgstr ""
+msgstr "Є базовий"
 
 #: ../src/info.cc:404
 msgid "Flavor"
@@ -1100,10 +1091,9 @@ msgid "Cleaning raw metadata cache for '%s'."
 msgstr "Очищення кешу сирих метаданих для \"%s\"."
 
 #: ../src/repos.cc:1171
-#, fuzzy, c-format
-#| msgid "Cleaning raw metadata cache for '%s'."
+#, c-format
 msgid "Keeping raw metadata cache for %s '%s'."
-msgstr "Очищення кешу сирих метаданих для \"%s\"."
+msgstr "Збереження кешу сирих метаданих для %s «%s»."
 
 #. translators: meaning the cached rpm files
 #: ../src/repos.cc:1179
@@ -1259,14 +1249,12 @@ msgid "Repository '%s' priority has been left unchanged (%d)"
 msgstr "Пріоритет сховища «%s» було залишено без змін (%d)"
 
 #: ../src/repos.cc:1731
-#, fuzzy, c-format
-#| msgid "Repository '%s' has been sucessfully enabled."
+#, c-format
 msgid "Repository '%s' has been successfully enabled."
 msgstr "Сховище «%s» було успішно увімкнено."
 
 #: ../src/repos.cc:1734
-#, fuzzy, c-format
-#| msgid "Repository '%s' has been sucessfully disabled."
+#, c-format
 msgid "Repository '%s' has been successfully disabled."
 msgstr "Сховище «%s» було успішно вимкнено."
 
@@ -1719,21 +1707,17 @@ msgstr "Для виправлення порушених залежностей 
 #. ! \todo add c for changelog and x for explain (show the dep tree)
 #: ../src/solve-commit.cc:473
 msgid "y/n/p/v/a/r/m/d/g"
-msgstr ""
+msgstr "т/н/п/в/а/с/м/д/з"
 
 #. translators: help text for 'y' option in the 'Continue?' prompt
 #: ../src/solve-commit.cc:478
-#, fuzzy
-#| msgid "Accept the summary and proceed with installation/removal of packages."
 msgid "Yes, accept the summary and proceed with installation/removal of packages."
-msgstr "Взяти до уваги резюме і продовжити встановлення або вилучення пакунків."
+msgstr "Так, взяти до уваги резюме і продовжити встановлення або вилучення пакунків."
 
 #. translators: help text for 'n' option in the 'Continue?' prompt
 #: ../src/solve-commit.cc:480
-#, fuzzy
-#| msgid "Cancel the operation."
 msgid "No, cancel the operation."
-msgstr "Скасувати дію."
+msgstr "Ні, скасувати дію."
 
 #. translators: help text for 'p' option in the 'Continue?' prompt
 #: ../src/solve-commit.cc:482
@@ -1743,34 +1727,32 @@ msgstr "Перезапустити розв’язувач у режимі бе�
 #. translators: help text for 'v' option in the 'Continue?' prompt
 #: ../src/solve-commit.cc:484
 msgid "Toggle display of package versions."
-msgstr ""
+msgstr "Перемкнути показ версій пакунків."
 
 #. translators: help text for 'a' option in the 'Continue?' prompt
 #: ../src/solve-commit.cc:486
 msgid "Toggle display of package architectures."
-msgstr ""
+msgstr "Перемкнути показ архітектур пакунків."
 
 #. translators: help text for 'r' option in the 'Continue?' prompt
 #: ../src/solve-commit.cc:488
-#, fuzzy
-#| msgid "The following packages will be installed:\n"
 msgid "Toggle display of repositories from which the packages will be installed."
-msgstr "Буде встановлено наступні пакунки:\n"
+msgstr "Перемкнути показ сховищ, з яких буде встановлено пакунки."
 
 #. translators: help text for 'm' option in the 'Continue?' prompt
 #: ../src/solve-commit.cc:490
 msgid "Toggle display of package vendor names."
-msgstr ""
+msgstr "Перемкнути показ назв постачальників пакунків."
 
 #. translators: help text for 'd' option in the 'Continue?' prompt
 #: ../src/solve-commit.cc:492
 msgid "Toggle between showing all details and as few details as possible."
-msgstr ""
+msgstr "Перемкнути показ всіх подробиць або мало подробиць."
 
 #. translators: help text for 'g' option in the 'Continue?' prompt
 #: ../src/solve-commit.cc:494
 msgid "View the summary in pager."
-msgstr ""
+msgstr "Перегляд зведення в пейджері."
 
 #: ../src/solve-commit.cc:587
 msgid "committing"
@@ -2060,126 +2042,107 @@ msgstr "Після дії, %s буде вивільнено."
 
 #. translators: this text will be preceded by a number e.g. "5 packages to ..."
 #: ../src/Summary.cc:628
-#, fuzzy
-#| msgid "No packages to update"
 msgid "package to upgrade"
 msgid_plural "packages to upgrade"
-msgstr[0] "Немає пакунків для оновлення"
-msgstr[1] "Немає пакунків для оновлення"
-msgstr[2] "Немає пакунків для оновлення"
+msgstr[0] "пакунок оновити"
+msgstr[1] "пакунки оновити"
+msgstr[2] "пакунків оновити"
 
 #. translators: this text will be preceded by a number e.g. "5 to ..."
 #: ../src/Summary.cc:640
 msgid "to downgrade"
 msgid_plural "to downgrade"
-msgstr[0] ""
-msgstr[1] ""
-msgstr[2] ""
+msgstr[0] "вернути до старішої версії"
+msgstr[1] "вернути до старішої версії"
+msgstr[2] "вернути до старішої версії"
 
 #. translators: this text will be preceded by a number e.g. "5 packages to ..."
 #: ../src/Summary.cc:643
-#, fuzzy
-#| msgid "The package download failed"
 msgid "package to downgrade"
 msgid_plural "packages to downgrade"
-msgstr[0] "Завантаження пакунка зазнало невдачі"
-msgstr[1] "Завантаження пакунка зазнало невдачі"
-msgstr[2] "Завантаження пакунка зазнало невдачі"
+msgstr[0] "пакунок вернути до старішої версії"
+msgstr[1] "пакунки вернути до старішої версії"
+msgstr[2] "пакунків вернути до старішої версії"
 
 #. translators: this text will be preceded by a number e.g. "5 new"
 #: ../src/Summary.cc:654
-#, fuzzy
-#| msgid "New"
 msgid "new"
 msgid_plural "new"
-msgstr[0] "Новий"
-msgstr[1] "Новий"
-msgstr[2] "Новий"
+msgstr[0] "новий"
+msgstr[1] "нові"
+msgstr[2] "нових"
 
 #. translators: this text will be preceded by a number e.g. "5 new to install"
 #: ../src/Summary.cc:657
-#, fuzzy
-#| msgid "The package is not installed"
 msgid "new package to install"
 msgid_plural "new packages to install"
-msgstr[0] "Пакунок не встановлено"
-msgstr[1] "Пакунок не встановлено"
-msgstr[2] "Пакунок не встановлено"
+msgstr[0] "новий пакунок встановити"
+msgstr[1] "нові пакунки встановити"
+msgstr[2] "нових пакунків встановити"
 
 #. translators: this text will be preceded by a number e.g. "5 to ..."
 #: ../src/Summary.cc:669
-#, fuzzy
-#| msgid "_Force install"
 msgid "to reinstall"
 msgid_plural "to reinstall"
-msgstr[0] "Встановити _примусово"
-msgstr[1] "Встановити _примусово"
-msgstr[2] "Встановити _примусово"
+msgstr[0] "перевстановити"
+msgstr[1] "перевстановити"
+msgstr[2] "перевстановити"
 
 #. translators: this text will be preceded by a number e.g. "5 packages to ..."
 #: ../src/Summary.cc:672
-#, fuzzy
-#| msgid "Package installer"
 msgid "package to reinstall"
 msgid_plural "packages to reinstall"
-msgstr[0] "Встановлення пакунків"
-msgstr[1] "Встановлення пакунків"
-msgstr[2] "Встановлення пакунків"
+msgstr[0] "пакунок перевстановити"
+msgstr[1] "пакунки перевстановити"
+msgstr[2] "пакунків перевстановити"
 
 #. translators: this text will be preceded by a number e.g. "5 to ..."
 #: ../src/Summary.cc:684
-#, fuzzy
-#| msgid "%s remove ok"
 msgid "to remove"
 msgid_plural "to remove"
-msgstr[0] "%s вилучено без помилок"
-msgstr[1] "%s вилучено без помилок"
-msgstr[2] "%s вилучено без помилок"
+msgstr[0] "вилучити"
+msgstr[1] "вилучити"
+msgstr[2] "вилучити"
 
 #. translators: this text will be preceded by a number e.g. "5 packages to ..."
 #: ../src/Summary.cc:687
-#, fuzzy
-#| msgid "Unable to remove ^%s\n"
 msgid "package to remove"
 msgid_plural "packages to remove"
-msgstr[0] "Не вдалося вилучити ^%s\n"
-msgstr[1] "Не вдалося вилучити ^%s\n"
-msgstr[2] "Не вдалося вилучити ^%s\n"
+msgstr[0] "пакунок вилучити"
+msgstr[1] "пакунки вилучити"
+msgstr[2] "пакунків вилучити"
 
 #. translators: this text will be preceded by a number e.g. "5 to ..."
 #: ../src/Summary.cc:699
 msgid "to change vendor"
 msgid_plural " to change vendor"
-msgstr[0] ""
-msgstr[1] ""
-msgstr[2] ""
+msgstr[0] "змінить постачальника"
+msgstr[1] "змінить постачальників"
+msgstr[2] "змінять постачальників"
 
 #. translators: this text will be preceded by a number e.g. "5 packages ..."
 #: ../src/Summary.cc:702
-#, fuzzy
-#| msgid "The following package is going to change vendor:"
-#| msgid_plural "The following packages are going to change vendor:"
 msgid "package will change vendor"
 msgid_plural "packages will change vendor"
-msgstr[0] "Буде змінено постачальника пакунка:"
-msgstr[1] "Буде змінено постачальника таких пакунків:"
-msgstr[2] "Буде змінено постачальника таких пакунків:"
+msgstr[0] "пакунок змінить постачальника"
+msgstr[1] "пакунки змінить постачальника"
+msgstr[2] "пакунків змінить постачальника"
 
 #. translators: this text will be preceded by a number e.g. "5 to ..."
 #: ../src/Summary.cc:714
 msgid "to change arch"
 msgid_plural "to change arch"
-msgstr[0] ""
-msgstr[1] ""
-msgstr[2] ""
+msgstr[0] "змінить архітектуру"
+msgstr[1] "змінить архітектуру"
+msgstr[2] "змінять архітектуру"
 
 #. translators: this text will be preceded by a number e.g. "5 packages ..."
 #: ../src/Summary.cc:717
 msgid "package will change arch"
 msgid_plural "packages will change arch"
-msgstr[0] ""
-msgstr[1] ""
-msgstr[2] ""
+msgstr[0] "пакунок змінить архітектуру"
+msgstr[1] "пакунки змінять архітектуру"
+msgstr[2] "пакунків змінять архітектуру"
 
 #. translators: %d is the number of needed patches
 #: ../src/update.cc:67
@@ -2268,35 +2231,25 @@ msgid "No update candidate for '%s'."
 msgstr "Не знайдено кандидатури для оновлення «%s»"
 
 #: ../src/utils/Augeas.cc:26
-#, fuzzy
-#| msgid "Cannot copy the configuration template."
 msgid "Cannot initialize configuration file parser."
-msgstr "Неможливо скопіювати шаблон конфігурації."
+msgstr "Неможливо започаткувати аналізатор файлів конфігурації."
 
 #: ../src/utils/Augeas.cc:43 ../src/utils/Augeas.cc:55
-#, fuzzy
-#| msgid "Reading the config file failed"
 msgid "Augeas error: setting config file to load failed."
-msgstr "Спроба читання файла налаштувань зазнала невдачі"
+msgstr "Помилка: спроба завантаження файла налаштувань зазнала невдачі."
 
 #: ../src/utils/Augeas.cc:61
-#, fuzzy
-#| msgid "Cannot parse the certificate."
 msgid "Could not parse the config files."
-msgstr "Неможливо проаналізувати сертифікат."
+msgstr "Неможливо проаналізувати файли конфігурації."
 
 # %s is either BOOTP or DHCP
 #: ../src/utils/Augeas.cc:95
-#, fuzzy
-#| msgid "An idmapd configuration file is required."
 msgid "No configuration file exists or could be parsed."
-msgstr "Потрібний файл конфігурації idmapd."
+msgstr "Файл конфігурації неможливо проаналізувати або він не існує."
 
 #: ../src/utils/Augeas.cc:98
-#, fuzzy
-#| msgid "Error parsing the CRL."
 msgid "Error parsing zypper.conf:"
-msgstr "Помилка аналізу CRL."
+msgstr "Помилка аналізу zypper.conf:"
 
 #. For '-garbage' argument, with 'a', 'b', and 'e' as known options,
 #. getopt_long reports 'a', 'b', and 'e' as known options.
@@ -2479,10 +2432,8 @@ msgstr[1] "автоматично вибрати %s після %u "
 msgstr[2] "автоматично вибрати %s після %u "
 
 #: ../src/utils/prompt.cc:247
-#, fuzzy
-#| msgid "Preparing installation..."
 msgid "Trying again..."
-msgstr "Підготувати встановлення..."
+msgstr "Повторна спроба..."
 
 #: ../src/utils/prompt.cc:338
 #, c-format
@@ -4009,13 +3960,6 @@ msgstr ""
 "-m, --match  Приймає відсутній номер версії як будь-який випуск.\n"
 
 #: ../src/Zypper.cc:2120
-#, fuzzy
-#| msgid ""
-#| "licenses\n"
-#| "\n"
-#| "Report Licenses and EULA of currently installed software packages.\n"
-#| "\n"
-#| "This command has no additional options.\n"
 msgid ""
 "licenses\n"
 "\n"
@@ -4321,10 +4265,9 @@ msgid "Root privileges are required for performing a distribution upgrade."
 msgstr "Для проведення оновлення дистрибутива вам слід мати привілеї адміністратора."
 
 #: ../src/Zypper.cc:3794
-#, fuzzy, c-format
-#| msgid "'%1' does not exist."
+#, c-format
 msgid "Type '%s' does not support %s."
-msgstr "\"%1\" не існує."
+msgstr "Тип «%s» не підтримує %s."
 
 #: ../src/Zypper.cc:3824 ../src/Zypper.cc:3885
 msgid "Root privileges are required for adding of package locks."
@@ -4360,47 +4303,3 @@ msgstr "Опис"
 #: ../src/Zypper.cc:4129
 msgid "Resolvable Type"
 msgstr "Тип розв’язувача"
-
-#~ msgid "y/n/p"
-#~ msgstr "y/n/p"
-
-#~ msgid "abort"
-#~ msgstr "перервати"
-
-#~ msgid "retry"
-#~ msgstr "повторити"
-
-#~ msgid "ignore"
-#~ msgstr "ігнорувати"
-
-#~ msgid "Abort, retry, ignore?\n"
-#~ msgstr "Перервати, спробувати знов, ігнорувати?\n"
-
-#~ msgid "    --from <alias|#|URI>        Select packages only from specified repository.\n"
-#~ msgstr "    --from <псевдонім|#|URI>        Вибрати пакунки тільки з указаного сховища.\n"
-
-#~ msgid ""
-#~ "dist-upgrade (dup) [options]\n"
-#~ "\n"
-#~ "Perform a distribution upgrade.\n"
-#~ "\n"
-#~ "  Command options:\n"
-#~ "\n"
-#~ "-r, --repo <alias|#|URI>        Limit the upgrade to the specified repository.\n"
-#~ "    --no-recommends             Do not install recommended packages, only required.\n"
-#~ "-l, --auto-agree-with-licenses  Automatically say 'yes' to third party license confirmation prompt.\n"
-#~ "                                See man zypper for more details.\n"
-#~ "    --debug-solver              Create solver test case for debugging\n"
-#~ "-D, --dry-run                   Test the upgrade, do not actually upgrade\n"
-#~ msgstr ""
-#~ "dist-upgrade (dup) [параметри]\n"
-#~ "\n"
-#~ "Виконати оновлення дистрибутива.\n"
-#~ "\n"
-#~ "  Параметри команди:\n"
-#~ "\n"
-#~ "-r, --repo <псевдонім|#|URI>        Обмежити оновлення вказаним сховищем.\n"
-#~ "-l, --auto-agree-with-licenses  Автоматично відповісти «так» на питання про згоду на умови ліцензуванняt.\n"
-#~ "                                Щоб дізнатися більше, виконайте команду «man zypper».\n"
-#~ "    --debug-solver              Створити тестовий приклад для зневадження розв’язання.\n"
-#~ "-D, --dry-run                   Випробувати можливість оновлення, не оновлювати насправді.\n"

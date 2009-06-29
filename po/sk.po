@@ -1,19 +1,17 @@
-# translation of zypper.sk.po to Slovak
 # Slovak language translation of zypper messages.
 #
 # Copyright (C) 2006, SUSE Linux GmbH, Nuremberg
 #
 # Rastislav Krupansky <ra100@atlas.sk>, 2008.
 # Ladislav Michnovič <lmichnovic@suse.cz>, 2008.
-# Ján Kupec <jkupec@suse.cz>, 2008.
-# Jan Kupec <jkupec@suse.cz>, 2009.
+# Ján Kupec <jkupec@suse.cz>, 2008, 2009.
 msgid ""
 msgstr ""
-"Project-Id-Version: zypper.sk\n"
+"Project-Id-Version: zypper\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2009-06-08 16:44+0200\n"
 "PO-Revision-Date: 2009-06-12 16:09+0200\n"
-"Last-Translator: Jan Kupec <jkupec@suse.cz>\n"
+"Last-Translator: Ján Kupec <jkupec@suse.cz>\n"
 "Language-Team: Slovak <sk-i18n@lists.linux.sk>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -209,7 +207,6 @@ msgstr "Prosím vložte médium [%s] #%d a napíšte 'a' pre pokračovanie alebo
 #. Translate the a/r/i part exactly as you did the a/r/i string.
 #. the 'u' reply means 'Change URI'.
 #: ../src/callbacks/media.h:106
-#| msgid "a/r/i"
 msgid "a/r/i/u"
 msgstr "k/z/i/u"
 
@@ -241,7 +238,6 @@ msgstr "Ukončiť, znova, ignorovať?"
 
 #. translators: this is a prompt label, will appear as "New URI: "
 #: ../src/callbacks/media.h:130
-#| msgid "URI"
 msgid "New URI"
 msgstr "Nová URI adresa"
 
@@ -328,7 +324,6 @@ msgstr "Neznámy príkaz '%s'"
 
 #: ../src/Config.cc:73
 #, c-format
-#| msgid "Unknown command option"
 msgid "Unknown configuration option '%s'"
 msgstr "Neznáma konfiguračná voľba '%s'"
 
@@ -416,7 +411,6 @@ msgid "Requires:"
 msgstr "Vyžaduje:"
 
 #: ../src/info.cc:144
-#| msgid "Recommended"
 msgid "Recommends:"
 msgstr "Odporúča:"
 
@@ -504,7 +498,6 @@ msgid "Provides:"
 msgstr "Poskytuje:"
 
 #: ../src/info.cc:276
-#| msgid "Conflicts"
 msgid "Conflicts:"
 msgstr "Vylučuje:"
 
@@ -1106,7 +1099,6 @@ msgstr "Čistím medzipamať surových údajov repozitára '%s'."
 
 #: ../src/repos.cc:1171
 #, c-format
-#| msgid "Cleaning raw metadata cache for '%s'."
 msgid "Keeping raw metadata cache for %s '%s'."
 msgstr "Ponechávam si medzipamať surových údajov repozitára %s '%s'."
 
@@ -1265,13 +1257,11 @@ msgstr "Priorita repozitára '%s' zostáva nezmenená (%d)."
 
 #: ../src/repos.cc:1731
 #, c-format
-#| msgid "Repository '%s' has been sucessfully enabled."
 msgid "Repository '%s' has been successfully enabled."
 msgstr "Repozitár '%s' bol úspešne zapnutý."
 
 #: ../src/repos.cc:1734
 #, c-format
-#| msgid "Repository '%s' has been sucessfully disabled."
 msgid "Repository '%s' has been successfully disabled."
 msgstr "Repozitár '%s' bol úspešne vypnutý."
 
@@ -1728,13 +1718,11 @@ msgstr "a/n/p/v/c/r/m/d/g"
 
 #. translators: help text for 'y' option in the 'Continue?' prompt
 #: ../src/solve-commit.cc:478
-#| msgid "Accept the summary and proceed with installation/removal of packages."
 msgid "Yes, accept the summary and proceed with installation/removal of packages."
 msgstr "Áno, prijať návrh a pokračovať v inštalácii/odstraňovaní balíkov."
 
 #. translators: help text for 'n' option in the 'Continue?' prompt
 #: ../src/solve-commit.cc:480
-#| msgid "Cancel the operation."
 msgid "No, cancel the operation."
 msgstr "Nie, zrušiť operáciu."
 
@@ -2061,7 +2049,6 @@ msgstr "Po tejto operácii sa uvoľní %s."
 
 #. translators: this text will be preceded by a number e.g. "5 packages to ..."
 #: ../src/Summary.cc:628
-#| msgid "No packages to update"
 msgid "package to upgrade"
 msgid_plural "packages to upgrade"
 msgstr[0] "balík bude aktualizovaný"
@@ -2078,7 +2065,6 @@ msgstr[2] "deaktualizovaných"
 
 #. translators: this text will be preceded by a number e.g. "5 packages to ..."
 #: ../src/Summary.cc:643
-#| msgid "No packages to update"
 msgid "package to downgrade"
 msgid_plural "packages to downgrade"
 msgstr[0] "balík bude deaktualizovaný"
@@ -2095,7 +2081,6 @@ msgstr[2] "nových"
 
 #. translators: this text will be preceded by a number e.g. "5 new to install"
 #: ../src/Summary.cc:657
-#| msgid "The package is not installed"
 msgid "new package to install"
 msgid_plural "new packages to install"
 msgstr[0] "nový balík bude nainštalovaný"
@@ -2104,7 +2089,6 @@ msgstr[2] "nových balíkov bude nainštalovaných"
 
 #. translators: this text will be preceded by a number e.g. "5 to ..."
 #: ../src/Summary.cc:669
-#| msgid "install"
 msgid "to reinstall"
 msgid_plural "to reinstall"
 msgstr[0] "preinštalovaný"
@@ -2113,7 +2097,6 @@ msgstr[2] "preinštalovaných"
 
 #. translators: this text will be preceded by a number e.g. "5 packages to ..."
 #: ../src/Summary.cc:672
-#| msgid "The package is not installed"
 msgid "package to reinstall"
 msgid_plural "packages to reinstall"
 msgstr[0] "balík bude preinštalovaný"
@@ -2122,7 +2105,6 @@ msgstr[2] "balíkov bude preinštalovaných"
 
 #. translators: this text will be preceded by a number e.g. "5 to ..."
 #: ../src/Summary.cc:684
-#| msgid "%s remove ok"
 msgid "to remove"
 msgid_plural "to remove"
 msgstr[0] "odstránený"
@@ -2131,7 +2113,6 @@ msgstr[2] "odstránených"
 
 #. translators: this text will be preceded by a number e.g. "5 packages to ..."
 #: ../src/Summary.cc:687
-#| msgid "No packages to update"
 msgid "package to remove"
 msgid_plural "packages to remove"
 msgstr[0] "balík bude odstránený"
@@ -2148,8 +2129,6 @@ msgstr[2] "zmení dodávateľa"
 
 #. translators: this text will be preceded by a number e.g. "5 packages ..."
 #: ../src/Summary.cc:702
-#| msgid "The following package is going to change vendor:"
-#| msgid_plural "The following packages are going to change vendor:"
 msgid "package will change vendor"
 msgid_plural "packages will change vendor"
 msgstr[0] "balík zmení dodávateľa"
@@ -2259,28 +2238,23 @@ msgstr "Pre '%s' neexistuje žiadny kandidát na aktualizáciu."
 
 #  progress stage
 #: ../src/utils/Augeas.cc:26
-#| msgid "Changed configuration files for %s:"
 msgid "Cannot initialize configuration file parser."
 msgstr "Nepodarilo sa spustiť čítač konfiguračných súborov."
 
 #: ../src/utils/Augeas.cc:43 ../src/utils/Augeas.cc:55
-#| msgid "Reading the config file failed"
 msgid "Augeas error: setting config file to load failed."
 msgstr "Chyba Augeasu: nepodarilo sa nastaviť konfiguračný súbor pre načítanie."
 
 #: ../src/utils/Augeas.cc:61
-#| msgid "Could not load the global configuration."
 msgid "Could not parse the config files."
 msgstr "Nepodarilo sa načítať konfiguračné súbory."
 
 #  progress stage
 #: ../src/utils/Augeas.cc:95
-#| msgid "Changed configuration files for %s:"
 msgid "No configuration file exists or could be parsed."
 msgstr "Konfiguračné súbory neexistujú alebo sa ich nepodarilo načítať."
 
 #: ../src/utils/Augeas.cc:98
-#| msgid "Error reading services:"
 msgid "Error parsing zypper.conf:"
 msgstr "Chyba pri čítaní zypper.conf:"
 
@@ -2457,7 +2431,6 @@ msgstr "k/z/i"
 
 #: ../src/utils/prompt.cc:228
 #, c-format
-#| msgid "autoselect %s after %u "
 msgid "Autoselecting '%s' after %u second."
 msgid_plural "Autoselecting '%s' after %u seconds."
 msgstr[0] "Automatická odpoveď '%s' po '%u' sekunde."
@@ -2465,7 +2438,6 @@ msgstr[1] "Automatická odpoveď '%s' po '%u' sekundách."
 msgstr[2] "Automatická odpoveď '%s' po '%u' sekundách."
 
 #: ../src/utils/prompt.cc:247
-#| msgid "Preparing installation..."
 msgid "Trying again..."
 msgstr "Skúšam znova..."
 
@@ -2477,7 +2449,6 @@ msgstr "Neplatná odpoveď '%s'."
 #. translators: the %s are: 'y', 'yes' (translated), 'n', and 'no' (translated).
 #: ../src/utils/prompt.cc:344
 #, c-format
-#| msgid "Enter 'y' for '%s' or 'n' for '%s' if nothing else works for you."
 msgid "Enter '%s' for '%s' or '%s' for '%s' if nothing else works for you."
 msgstr "Zadajte '%s' pre '%s' alebo '%s' pre '%s', ak nič iné nefunguje."
 
@@ -2507,23 +2478,6 @@ msgid "Error"
 msgstr "Chyba"
 
 #: ../src/Zypper.cc:153
-#| msgid ""
-#| "  Global Options:\n"
-#| "\t--help, -h\t\tHelp.\n"
-#| "\t--version, -V\t\tOutput the version number.\n"
-#| "\t--quiet, -q\t\tSuppress normal output, print only error\n"
-#| "\t\t\t\tmessages.\n"
-#| "\t--verbose, -v\t\tIncrease verbosity.\n"
-#| "\t--no-abbrev, -A\t\tDo not abbreviate text in tables.\n"
-#| "\t--table-style, -s\tTable style (integer).\n"
-#| "\t--rug-compatible, -r\tTurn on rug compatibility.\n"
-#| "\t--non-interactive, -n\tDo not ask anything, use default answers\n"
-#| "\t\t\t\tautomatically.\n"
-#| "\t--xmlout, -x\t\tSwitch to XML output.\n"
-#| "\t--reposd-dir, -D <dir>\tUse alternative repository definition files\n"
-#| "\t\t\t\tdirectory.\n"
-#| "\t--cache-dir, -C <dir>\tUse alternative meta-data cache directory.\n"
-#| "\t--raw-cache-dir <dir>\tUse alternative raw meta-data cache directory.\n"
 msgid ""
 "  Global Options:\n"
 "\t--help, -h\t\tHelp.\n"
@@ -2704,11 +2658,6 @@ msgstr ""
 "\twhat-provides, wp\tZobraz zoznam balíkov, ktoré poskytujú zadanú schopnosť.\n"
 
 #: ../src/Zypper.cc:248
-#| msgid ""
-#| "     Package Locks:\n"
-#| "\taddlock, al\t\tAdd a package lock.\n"
-#| "\tremovelock, rl\t\tRemove a package lock.\n"
-#| "\tlocks, ll\t\tList current package locks.\n"
 msgid ""
 "     Package Locks:\n"
 "\taddlock, al\t\tAdd a package lock.\n"
@@ -2818,25 +2767,6 @@ msgstr "Neočakávaná výnimka. "
 #. and the second %s = "package"
 #: ../src/Zypper.cc:912
 #, c-format
-#| msgid ""
-#| "install (in) [options] <capability|rpm_file_uri> ...\n"
-#| "\n"
-#| "Install packages with specified capabilities or RPM files with specified location. A capability is NAME[OP<VERSION>], where OP is one of <, <=, =, >=, >.\n"
-#| "\n"
-#| "  Command options:\n"
-#| "-r, --repo <alias|#|URI>        Install packages only from the specified repository.\n"
-#| "-t, --type <type>               Type of package (%s).\n"
-#| "                                Default: %s.\n"
-#| "-n, --name                      Select packages by plain name, not by capability.\n"
-#| "-C, --capability                Select packages by capability.\n"
-#| "-f, --force                     Install even if the item is already installed (reinstall).\n"
-#| "-l, --auto-agree-with-licenses  Automatically say 'yes' to third party license confirmation prompt.\n"
-#| "                                See 'man zypper' for more details.\n"
-#| "    --debug-solver              Create solver test case for debugging.\n"
-#| "    --no-recommends             Do not install recommended packages, only required.\n"
-#| "-R, --no-force-resolution       Do not force the solver to find solution, let it ask.\n"
-#| "    --force-resolution          Force the solver to find a solution (even an agressive).\n"
-#| "-D, --dry-run                   Test the installation, do not actually install.\n"
 msgid ""
 "install (in) [options] <capability|rpm_file_uri> ...\n"
 "\n"
@@ -2892,21 +2822,6 @@ msgstr ""
 #. and the second %s = "package"
 #: ../src/Zypper.cc:969
 #, c-format
-#| msgid ""
-#| "remove (rm) [options] <capability> ...\n"
-#| "\n"
-#| "Remove packages with specified capabilities. A capability is NAME[OP<VERSION>], where OP is one of <, <=, =, >=, >.\n"
-#| "\n"
-#| "  Command options:\n"
-#| "-r, --repo <alias|#|URI>        Operate only with packages from the specified repository.\n"
-#| "-t, --type <type>               Type of package (%s).\n"
-#| "                                Default: %s.\n"
-#| "-n, --name                      Select packages by plain name, not by capability.\n"
-#| "-C, --capability                Select packages by capability.\n"
-#| "    --debug-solver              Create solver test case for debugging.\n"
-#| "-R, --no-force-resolution       Do not force the solver to find solution, let it ask.\n"
-#| "    --force-resolution          Force the solver to find a solution (even an agressive).\n"
-#| "-D, --dry-run                   Test the removal, do not actually remove.\n"
 msgid ""
 "remove (rm) [options] <capability> ...\n"
 "\n"
@@ -2961,15 +2876,6 @@ msgstr ""
 "-r, --repo <alias|#|URI> Inštaluj len balíky zo zadaných repozitárov.\n"
 
 #: ../src/Zypper.cc:1028
-#| msgid ""
-#| "verify (ve) [options]\n"
-#| "\n"
-#| "Check whether dependencies of installed packages are satisfied and repair eventual dependency problems.\n"
-#| "\n"
-#| "  Command options:\n"
-#| "    --no-recommends      Do not install recommended packages, only required.\n"
-#| "-D, --dry-run            Test the repair, do not actually do anything to the system.\n"
-#| "-r, --repo <alias|#|URI> Use only specified repositories to install missing packages.\n"
 msgid ""
 "verify (ve) [options]\n"
 "\n"
@@ -3016,15 +2922,6 @@ msgstr ""
 #. translators: the %s = "ris" (the only service type currently supported)
 #: ../src/Zypper.cc:1081
 #, c-format
-#| msgid ""
-#| "addservice (as) [options] <URI> <alias>\n"
-#| "\n"
-#| "Add a repository index service to the system.\n"
-#| "\n"
-#| "  Command options:\n"
-#| "-t, --type <TYPE>       Type of the service (%s).\n"
-#| "-d, --disable           Add the service as disabled.\n"
-#| "-n, --name              Specify descriptive name for the service.\n"
 msgid ""
 "addservice (as) [options] <URI> <alias>\n"
 "\n"
@@ -3164,22 +3061,6 @@ msgstr ""
 #. translators: the %s = "yast2, rpm-md, plaindir"
 #: ../src/Zypper.cc:1242
 #, c-format
-#| msgid ""
-#| "addrepo (ar) [options] <URI> <alias>\n"
-#| "addrepo (ar) [options] <FILE.repo>\n"
-#| "\n"
-#| "Add a repository to the sytem. The repository can be specified by its URI or can be read from specified .repo file (even remote).\n"
-#| "\n"
-#| "  Command options:\n"
-#| "-r, --repo <FILE.repo>  Just another means to specify a .repo file to read.\n"
-#| "-t, --type <TYPE>       Type of repository (%s).\n"
-#| "-d, --disable           Add the repository as disabled.\n"
-#| "-c, --check             Probe URI.\n"
-#| "-C, --no-check          Don't probe URI, probe later during refresh.\n"
-#| "-n, --name              Specify descriptive name for the repository.\n"
-#| "-k, --keep-packages     Enable RPM files caching.\n"
-#| "-K, --no-keep-packages  Disable RPM files caching.\n"
-#| "-f, --refresh           Enable autorefresh of the repository.\n"
 msgid ""
 "addrepo (ar) [options] <URI> <alias>\n"
 "addrepo (ar) [options] <file.repo>\n"
@@ -3296,27 +3177,6 @@ msgstr ""
 #. and "--all, --remote, --local, --medium-type"
 #: ../src/Zypper.cc:1379
 #, c-format
-#| msgid ""
-#| "modifyrepo (mr) <options> <alias|#|URI>\n"
-#| "modifyrepo (mr) <options> <%s>\n"
-#| "\n"
-#| "Modify properties of repositories specified by alias, number, or URI, or by the\n"
-#| "'%s' aggregate options.\n"
-#| "\n"
-#| "  Command options:\n"
-#| "-d, --disable             Disable the repository (but don't remove it).\n"
-#| "-e, --enable              Enable a disabled repository.\n"
-#| "-r, --refresh             Enable auto-refresh of the repository.\n"
-#| "-R, --no-refresh          Disable auto-refresh of the repository.\n"
-#| "-n, --name                Set a descriptive name for the repository.\n"
-#| "-p, --priority <1-99>     Set priority of the repository.\n"
-#| "-k, --keep-packages       Enable RPM files caching.\n"
-#| "-K, --no-keep-packages    Disable RPM files caching.\n"
-#| "\n"
-#| "-a, --all                 Apply changes to all repositories.\n"
-#| "-l, --local               Apply changes to all local repositories.\n"
-#| "-t, --remote              Apply changes to all remote repositories.\n"
-#| "-m, --medium-type <type>  Apply changes to repositories of specified type.\n"
 msgid ""
 "modifyrepo (mr) <options> <alias|#|URI> ...\n"
 "modifyrepo (mr) <options> <%s>\n"
@@ -3387,16 +3247,6 @@ msgstr ""
 "-s, --services           Aktualizuj aj služby pred aktualizáciou repozitárov.\n"
 
 #: ../src/Zypper.cc:1448
-#| msgid ""
-#| "clean [alias|#|URI] ...\n"
-#| "\n"
-#| "Clean local caches.\n"
-#| "\n"
-#| "  Command options:\n"
-#| "-r, --repo <alias|#|URI> Clean only specified repositories.\n"
-#| "-m, --metadata           Clean metadata cache.\n"
-#| "-M, --raw-metadata       Clean raw metadata cache.\n"
-#| "-a, --all                Clean both metadata and package caches.\n"
 msgid ""
 "clean (cc) [alias|#|URI] ...\n"
 "\n"
@@ -3454,28 +3304,6 @@ msgstr ""
 #. and the second %s = "patch"
 #: ../src/Zypper.cc:1529
 #, c-format
-#| msgid ""
-#| "update (up) [options] ...\n"
-#| "\n"
-#| "Update all or specified installed packages with newer versions, if possible.\n"
-#| "\n"
-#| "  Command options:\n"
-#| "\n"
-#| "-t, --type <type>               Type of package (%s).\n"
-#| "                                Default: %s.\n"
-#| "-r, --repo <alias|#|URI>        Limit updates to the specified repository.\n"
-#| "    --skip-interactive          Skip interactive updates.\n"
-#| "-l, --auto-agree-with-licenses  Automatically say 'yes' to third party license\n"
-#| "                                confirmation prompt.\n"
-#| "                                See man zypper for more details.\n"
-#| "    --best-effort               Do a 'best effort' approach to update. Updates\n"
-#| "                                to a lower than the latest version are\n"
-#| "                                also acceptable.\n"
-#| "    --debug-solver              Create solver test case for debugging.\n"
-#| "    --no-recommends             Do not install recommended packages, only required.\n"
-#| "-R, --no-force-resolution       Do not force the solver to find solution, let it ask.\n"
-#| "    --force-resolution          Force the solver to find a solution (even an agressive).\n"
-#| "-D, --dry-run                   Test the update, do not actually update.\n"
 msgid ""
 "update (up) [options] ...\n"
 "\n"
@@ -3527,20 +3355,6 @@ msgstr ""
 "-D, --dry-run                   Beh naprázdno. Len otestuj aktualizáciu, ale nič skutočne neaktualizuj.\n"
 
 #: ../src/Zypper.cc:1574
-#| msgid ""
-#| "patch [options]\n"
-#| "\n"
-#| "Install all available needed patches.\n"
-#| "\n"
-#| "  Command options:\n"
-#| "\n"
-#| "-r, --repo <alias|#|URI>        Work only with specified repository.\n"
-#| "    --skip-interactive          Skip interactive patches.\n"
-#| "-l, --auto-agree-with-licenses  Automatically say 'yes' to third party license\n"
-#| "                                confirmation prompt.\n"
-#| "                                See man zypper for more details.\n"
-#| "    --debug-solver              Create solver test case for debugging.\n"
-#| "-D, --dry-run                   Test the update, do not actually update.\n"
 msgid ""
 "patch [options]\n"
 "\n"
@@ -3593,19 +3407,6 @@ msgstr ""
 "-r, --repo <alias|#|URI>  Pracuj len so zadaným repozitárom.\n"
 
 #: ../src/Zypper.cc:1630
-#| msgid ""
-#| "dist-upgrade (dup) [options]\n"
-#| "\n"
-#| "Perform a distribution upgrade.\n"
-#| "\n"
-#| "  Command options:\n"
-#| "\n"
-#| "-r, --repo <alias|#|URI>        Limit the upgrade to the specified repository.\n"
-#| "    --no-recommends             Do not install recommended packages, only required.\n"
-#| "-l, --auto-agree-with-licenses  Automatically say 'yes' to third party license confirmation prompt.\n"
-#| "                                See man zypper for more details.\n"
-#| "    --debug-solver              Create solver test case for debugging\n"
-#| "-D, --dry-run                   Test the upgrade, do not actually upgrade\n"
 msgid ""
 "dist-upgrade (dup) [options]\n"
 "\n"
@@ -3794,15 +3595,6 @@ msgstr ""
 
 #: ../src/Zypper.cc:1843
 #, c-format
-#| msgid ""
-#| "info (if) [options] <name> ...\n"
-#| "\n"
-#| "Show detailed information for specified packages.\n"
-#| "\n"
-#| "  Command options:\n"
-#| "-r, --repo <alias|#|URI>  Work only with the specified repository.\n"
-#| "-t, --type <type>         Type of package (%s).\n"
-#| "                          Default: %s."
 msgid ""
 "info (if) [options] <name> ...\n"
 "\n"
@@ -3822,8 +3614,7 @@ msgstr ""
 "  Voľby príkazu:\n"
 "-r, --repo <alias|#|URI>  Pracuj len so zadaným repozitárom.\n"
 "-t, --type <type>         Typ balíka (%s).\n"
-"                          Prednastavený typ: %s. "
-"    --requires            Zobraz aj požadované závislosti.\n"
+"                          Prednastavený typ: %s.     --requires            Zobraz aj požadované závislosti.\n"
 "    --recommends          Zobraz aj odporúčané závislosti."
 
 #: ../src/Zypper.cc:1868
@@ -4003,12 +3794,6 @@ msgstr ""
 "-m, --match  Berie chýbajúce číslo vydania ako akékoľvek vydanie.\n"
 
 #: ../src/Zypper.cc:2120
-#| msgid ""
-#| "licenses\n"
-#| "\n"
-#| "Report Licenses and EULA of currently installed software packages.\n"
-#| "\n"
-#| "This command has no additional options.\n"
 msgid ""
 "licenses\n"
 "\n"
@@ -4315,7 +4100,6 @@ msgstr "Pre kompletnú aktualizáciu systému sú potrebné práva správcu syst
 
 #: ../src/Zypper.cc:3794
 #, c-format
-#| msgid "The disk does not exist."
 msgid "Type '%s' does not support %s."
 msgstr "Typ '%s' nepodporuje %s."
 
@@ -4353,4 +4137,3 @@ msgstr "Popis"
 #: ../src/Zypper.cc:4129
 msgid "Resolvable Type"
 msgstr "Typ balíka"
-
