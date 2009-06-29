@@ -1,4 +1,10 @@
 -------------------------------------------------------------------
+Mon Jun 29 17:40:23 CEST 2009 - jkupec@suse.cz
+
+- Updated translations.
+- 1.2.1
+
+-------------------------------------------------------------------
 Mon Jun 29 13:59:41 CEST 2009 - jkupec@suse.cz
 
 - now 'list-patches' does not hide other updates if software
