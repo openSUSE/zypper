@@ -187,22 +187,31 @@ static bool list_patch_updates(Zypper & zypper)
   // those that affect the package manager go first
   // (TODO: user option for this?)
   bool affectpm = false;
-  if (!pm_tbl.empty ())
+  if (!pm_tbl.empty())
   {
     affectpm = true;
-    if (!tbl.empty ())
-      zypper.out().warning(
-        _("These are only the updates affecting the updater itself.\n"
-          "Other updates are available too.\n"));
-    tbl = pm_tbl;
+    if (!tbl.empty())
+    {
+      zypper.out().info(_("The following software management updates will be installed first:"));
+      cout << endl;
+    }
+    pm_tbl.sort(1); // Name
+    cout << pm_tbl;
   }
 
-  tbl.sort (1);                 // Name
-
-  if (tbl.empty())
+  tbl.sort(1); // Name
+  if (tbl.empty() && !affectpm)
     zypper.out().info(_("No updates found."));
-  else
+  else if (!tbl.empty())
+  {
+    if (affectpm)
+    {
+      cout << endl;
+      zypper.out().info(_("The following updates are also available:"));
+      cout << endl;
+    }
     cout << tbl;
+  }
 
   return affectpm;
 }
@@ -439,7 +448,8 @@ void list_updates(Zypper & zypper, const ResKindSet & kinds, bool best_effort)
       affects_pkgmgr = xml_list_patches();
     else
     {
-      zypper.out().info(i18n_kind_updates(*it), Out::QUIET, Out::TYPE_NORMAL);
+      if (kinds.size() > 1)
+        zypper.out().info(i18n_kind_updates(*it), Out::QUIET, Out::TYPE_NORMAL);
       zypper.out().info("", Out::QUIET, Out::TYPE_NORMAL); // visual separator
       affects_pkgmgr = list_patch_updates(zypper);
     }
@@ -633,7 +643,7 @@ mark_patch_update(ui::Selectable & s,
                   bool skip_interactive, bool ignore_affects_pm)
 {
   Patch::constPtr patch = asKind<Patch>(s.candidateObj());
-  if (s.isBroken())
+  if (s.isBroken()) // bnc #506860
   {
     DBG << "candidate patch " << patch->name() << " " << ignore_affects_pm << ", "
       << patch->restartSuggested() << endl;
