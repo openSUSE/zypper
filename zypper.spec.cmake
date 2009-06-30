@@ -21,7 +21,7 @@ Group:          System/Packages
 BuildRoot:      %{_tmppath}/%{name}-%{version}-build
 Autoreqprov:    on
 PreReq:         permissions
-Summary:        Command line package management tool using libzypp
+Summary:        Command line software manager using libzypp
 Version:        @VERSION@
 Release:        0
 Source:         @PACKAGE@-@VERSION@.tar.bz2
@@ -31,7 +31,12 @@ Provides:       y2pmsh
 Obsoletes:      y2pmsh
 
 %description
-Command line package management tool using libzypp.
+Zypper is a command line tool for managing software. It can be used to add
+package repositories, search for packages, install, remove, or update packages,
+install patches, hardware drivers, verify dependencies, and more.
+
+Zypper can be used interactively or non-interactively by user, from scripts,
+or front-ends. 
 
 Authors:
 --------
