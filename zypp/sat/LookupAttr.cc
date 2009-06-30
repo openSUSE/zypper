@@ -541,7 +541,7 @@ namespace zypp
           case REPOKEY_TYPE_IDARRAY:
           case REPOKEY_TYPE_CONSTANTID:
             {
-              detail::IdType id = ::repodata_globalize_id( _dip->data, _dip->kv.id );
+              detail::IdType id = ::repodata_globalize_id( _dip->data, _dip->kv.id, 1 );
               return ISRELDEP(id) ? Capability( id ).asString()
                                   : IdString( id ).asString();
             }
@@ -595,7 +595,7 @@ namespace zypp
           case REPOKEY_TYPE_ID:
           case REPOKEY_TYPE_IDARRAY:
           case REPOKEY_TYPE_CONSTANTID:
-            return IdString( ::repodata_globalize_id( _dip->data, _dip->kv.id ) );
+            return IdString( ::repodata_globalize_id( _dip->data, _dip->kv.id, 1 ) );
             break;
         }
       }
@@ -671,7 +671,7 @@ namespace zypp
 
     detail::IdType LookupAttr::iterator::dereference() const
     {
-      return _dip ? ::repodata_globalize_id( _dip->data, _dip->kv.id )
+      return _dip ? ::repodata_globalize_id( _dip->data, _dip->kv.id, 1 )
                   : detail::noId;
     }
 
