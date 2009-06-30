@@ -425,6 +425,11 @@ void solve_and_commit (Zypper & zypper)
     if (platform && platform->name().find("SUSE_SLE") != string::npos)
       summary.setViewOption(Summary::SHOW_UNSUPPORTED);
 
+    if (zypper.out().verbosity() == Out::HIGH)
+      summary.setViewOption(Summary::SHOW_VERSION);
+    else if (zypper.out().verbosity() == Out::DEBUG)
+      summary.setViewOption(Summary::SHOW_ALL);
+
     // show the summary
     if (zypper.out().type() == Out::TYPE_XML)
       summary.dumpAsXmlTo(cout);
