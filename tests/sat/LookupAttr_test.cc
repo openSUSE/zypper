@@ -180,7 +180,35 @@ BOOST_AUTO_TEST_CASE(LookupAttr_solvable_attribute_substructure)
     BOOST_CHECK_EQUAL( res.subFind( sat::SolvAttr::updateReferenceHref ),  res.subFind( "href" ) );
     BOOST_CHECK_EQUAL( res.subFind( sat::SolvAttr::updateReferenceId ),    res.subFind( "id" ) );
     BOOST_CHECK_EQUAL( res.subFind( sat::SolvAttr::updateReferenceTitle ), res.subFind( "title" ) );
+
+    // NOTE: Unfortunately the satsolver dataiterator loses constect information when
+    // entering a sub-structure. That's why one can't invoke e.g subBegin on an iterator
+    // that was retieved by subFind.
+    // The test below will fail, once libsatsolver fixes the dataiterator. The expected
+    // result then is, that subBegin brings you to the beginning again.
+    BOOST_CHECK_EQUAL( res.subFind( sat::SolvAttr::updateReferenceType ).subBegin(),  res.subEnd() );
+    // BOOST_CHECK_EQUAL( res.subFind( sat::SolvAttr::updateReferenceType ).subBegin(),  res.subBegin() );
   }
+
+  // search substructure id without parent-structure won't work:
+  q = sat::LookupAttr( sat::SolvAttr::updateReferenceId );
+  BOOST_CHECK_EQUAL( q.size(), 0 );
+
+  // search id in parent-structure:
+  q = sat::LookupAttr( sat::SolvAttr::updateReferenceId, sat::SolvAttr::updateReference );
+  BOOST_CHECK_EQUAL( q.size(), 303 );
+
+  // search id in any parent-structure:
+  q = sat::LookupAttr( sat::SolvAttr::updateReferenceId, sat::SolvAttr::allAttr );
+  BOOST_CHECK_EQUAL( q.size(), 303 );
+
+  // search any id in parent-structure: (4 ids per updateReference)
+  q = sat::LookupAttr( sat::SolvAttr::allAttr, sat::SolvAttr::updateReference );
+  BOOST_CHECK_EQUAL( q.size(), 1212 );
+
+  // search any id in any parent-structure:
+  q = sat::LookupAttr( sat::SolvAttr::allAttr, sat::SolvAttr::allAttr );
+  BOOST_CHECK_EQUAL( q.size(), 10473 );
 }
 
 BOOST_AUTO_TEST_CASE(LookupAttr_repoattr)

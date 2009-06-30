@@ -58,13 +58,13 @@ namespace zypp
         Impl()
         {}
         Impl( SolvAttr attr_r, Location loc_r )
-        : _attr( attr_r ), _solv( loc_r == REPO_ATTR ? SOLVID_META : noSolvableId )
+        : _attr( attr_r ), _parent( SolvAttr::noAttr ), _solv( loc_r == REPO_ATTR ? SOLVID_META : noSolvableId )
         {}
         Impl( SolvAttr attr_r, Repository repo_r, Location loc_r )
-        : _attr( attr_r ), _repo( repo_r ), _solv( loc_r == REPO_ATTR ? SOLVID_META : noSolvableId )
+        : _attr( attr_r ), _parent( SolvAttr::noAttr ), _repo( repo_r ), _solv( loc_r == REPO_ATTR ? SOLVID_META : noSolvableId )
         {}
         Impl( SolvAttr attr_r, Solvable solv_r )
-        : _attr( attr_r ), _solv( solv_r )
+        : _attr( attr_r ), _parent( SolvAttr::noAttr ), _solv( solv_r )
         {}
 
       public:
@@ -111,6 +111,13 @@ namespace zypp
           _solv = solv_r;
         }
 
+        SolvAttr parent() const
+        { return _parent; }
+
+        void setParent( SolvAttr attr_r )
+        { _parent = attr_r; }
+
+      public:
         LookupAttr::iterator begin() const
         {
           if ( _attr == SolvAttr::noAttr || sat::Pool::instance().reposEmpty() )
@@ -123,6 +130,8 @@ namespace zypp
             whichRepo = _repo.id();
 
           detail::DIWrap dip( whichRepo, _solv.id(), _attr.id(), _attrMatcher.searchstring(), _attrMatcher.flags().get() );
+          if ( _parent != SolvAttr::noAttr )
+            ::dataiterator_prepend_keyname( dip.get(), _parent.id() );
           return iterator( dip ); // iterator takes over ownership!
         }
 
@@ -131,6 +140,7 @@ namespace zypp
 
       private:
         SolvAttr   _attr;
+        SolvAttr   _parent;
         Repository _repo;
         Solvable   _solv;
         AttrMatcher _attrMatcher;
@@ -155,14 +165,24 @@ namespace zypp
     LookupAttr::LookupAttr( SolvAttr attr_r, Location loc_r )
       : _pimpl( new Impl( attr_r, loc_r ) )
     {}
+    LookupAttr::LookupAttr( SolvAttr attr_r, SolvAttr parent_r, Location loc_r )
+      : _pimpl( new Impl( attr_r, loc_r ) )
+    { _pimpl->setParent( parent_r ); }
 
     LookupAttr::LookupAttr( SolvAttr attr_r, Repository repo_r, Location loc_r )
       : _pimpl( new Impl( attr_r, repo_r, loc_r ) )
     {}
+    LookupAttr::LookupAttr( SolvAttr attr_r, SolvAttr parent_r, Repository repo_r, Location loc_r )
+      : _pimpl( new Impl( attr_r, repo_r, loc_r ) )
+    { _pimpl->setParent( parent_r ); }
 
     LookupAttr::LookupAttr( SolvAttr attr_r, Solvable solv_r )
       : _pimpl( new Impl( attr_r, solv_r ) )
     {}
+    LookupAttr::LookupAttr( SolvAttr attr_r, SolvAttr parent_r, Solvable solv_r )
+      : _pimpl( new Impl( attr_r, solv_r ) )
+    { _pimpl->setParent( parent_r ); }
+
 
     ///////////////////////////////////////////////////////////////////
 
@@ -197,6 +217,12 @@ namespace zypp
 
     void LookupAttr::setSolvable( Solvable solv_r )
     { _pimpl->setSolvable( solv_r ); }
+
+    SolvAttr LookupAttr::parent() const
+    { return _pimpl->parent(); }
+
+    void LookupAttr::setParent( SolvAttr attr_r )
+    { _pimpl->setParent( attr_r ); }
 
     ///////////////////////////////////////////////////////////////////
 
@@ -417,10 +443,25 @@ namespace zypp
       return false;
     }
 
-    bool LookupAttr::iterator::solvAttrSubEntry() const
+    ///////////////////////////////////////////////////////////////////
+    namespace
     {
-      return solvAttrType() == REPOKEY_TYPE_FLEXARRAY;
+      enum SubType { ST_NONE,	// no sub-structure
+                     ST_FLEX,	// flexarray
+                     ST_SUB };	// inside sub-structure
+      SubType subType( const detail::DIWrap & dip )
+      {
+        if ( ! dip )
+          return ST_NONE;
+        if ( dip.get()->key->type == REPOKEY_TYPE_FLEXARRAY )
+          return ST_FLEX;
+        return dip.get()->kv.parent ? ST_SUB : ST_NONE;
+      }
     }
+    ///////////////////////////////////////////////////////////////////
+
+    bool LookupAttr::iterator::solvAttrSubEntry() const
+    { return subType( _dip ) != ST_NONE; }
 
     ///////////////////////////////////////////////////////////////////
     // Iterate sub-structures.
@@ -439,12 +480,18 @@ namespace zypp
 
     LookupAttr::iterator LookupAttr::iterator::subBegin() const
     {
-      if ( ! solvAttrSubEntry() )
-        return subEnd();
-
-      // remember this position
-      ::dataiterator_setpos( _dip.get() );
-
+      switch ( subType( _dip ) )
+      {
+        case ST_NONE:
+          return subEnd();
+          break;
+        case ST_FLEX:
+          ::dataiterator_setpos( _dip.get() );
+          break;
+        case ST_SUB:
+          ::dataiterator_setpos_parent( _dip.get() );
+          break;
+      }
       // setup the new sub iterator with the remembered position
       detail::DIWrap dip( 0, SOLVID_POS, 0, 0, 0 );
       return iterator( dip ); // iterator takes over ownership!
@@ -471,9 +518,29 @@ namespace zypp
       if ( attrname_r.empty() )
         return subBegin();
 
+      SubType subtype( subType( _dip ) );
+      if ( subtype == ST_NONE )
+        return subBegin();
+
       std::string subattr( inSolvAttr().asString() );
-      subattr += ":";
-      subattr += attrname_r;
+      if ( subtype == ST_FLEX )
+      {
+        // append ":attrname"
+        subattr += ":";
+        subattr += attrname_r;
+      }
+      else
+      {
+        // replace "oldname" after ':' with "attrname"
+        std::string::size_type pos( subattr.rfind( ':' ) );
+        if ( pos != std::string::npos )
+        {
+          subattr.erase( pos+1 );
+          subattr += attrname_r;
+        }
+        else
+          subattr = attrname_r; // no ':' so replace all.
+      }
       return subFind( SolvAttr( subattr ) );
     }
 
@@ -577,7 +644,7 @@ namespace zypp
               {
                 str << "  " << it.inSolvAttr() << " = " << it.asString() << endl;
               }
-              str << "}" << endl;
+              str << "}";
              return str.str();
             }
             break;
@@ -695,8 +762,8 @@ namespace zypp
       else if ( obj.inRepo() )
         str << obj.inRepo();
 
-      str << '<' << obj.inSolvAttr()
-          << ">(" <<  IdString(obj.solvAttrType()) << ") = " << obj.asString();
+      str << '<' << obj.inSolvAttr() << (obj.solvAttrSubEntry() ? ">(*" : ">(")
+          <<  IdString(obj.solvAttrType()) << ") = " << obj.asString();
       return str;
     }
 

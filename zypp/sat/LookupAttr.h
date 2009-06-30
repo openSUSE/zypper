@@ -60,6 +60,20 @@ namespace zypp
      *
      * Use \ref SolvAttr::allAttr to search all attributes.
      *
+     * To search for attributes located in a sub-structure (flexarray)
+     * you also have to pass the sub-structures attribute as parent.
+     * Passing \ref SolvAttr::allAttr a parent will lookup the attribute
+     * in \c any sub-structure.
+     *
+     * \code
+     *    // Lookup all 'name' attributes:
+     *    sat::LookupAttr q( sat::SolvAttr::name );
+     *    // Lookup all 'name' attributes within a sub-structure 'data':
+     *    sat::LookupAttr q( sat::SolvAttr::name, sat::SolvAttr::data );
+     *    // Lookup all 'name' attributes within any sub-structure:
+     *    sat::LookupAttr q( sat::SolvAttr::name, sat::SolvAttr::allAttr );
+     * \endcode
+     *
      * \code
      *  // look for all attributes of one solvable
      *  void ditest( sat::Solvable slv_r )
@@ -113,12 +127,18 @@ namespace zypp
 
         /** Lookup \ref SolvAttr in \ref Pool (all repositories). */
         explicit LookupAttr( SolvAttr attr_r, Location = SOLV_ATTR );
+        /** \overload SolvAttr within sub-structure \a parent_r. */
+        LookupAttr( SolvAttr attr_r, SolvAttr parent_r, Location = SOLV_ATTR );
 
         /** Lookup \ref SolvAttr in one\ref Repository. */
-        explicit LookupAttr( SolvAttr attr_r, Repository repo_r, Location = SOLV_ATTR );
+        LookupAttr( SolvAttr attr_r, Repository repo_r, Location = SOLV_ATTR );
+        /** \overload SolvAttr within sub-structure \a parent_r. */
+        LookupAttr( SolvAttr attr_r, SolvAttr parent_r, Repository repo_r, Location = SOLV_ATTR );
 
         /** Lookup \ref SolvAttr in one \ref Solvable. */
         LookupAttr( SolvAttr attr_r, Solvable solv_r );
+        /** \overload SolvAttr within sub-structure \a parent_r. */
+        LookupAttr( SolvAttr attr_r, SolvAttr parent_r, Solvable solv_r );
 
       public:
         /** \name Search result. */
@@ -196,6 +216,12 @@ namespace zypp
 
         /** Set search in one \ref Solvable. */
         void setSolvable( Solvable solv_r );
+
+        /** Whether to search within a sub-structure (\ref SolvAttr::noAttr if not) */
+        SolvAttr parent() const;
+
+        /** Set search within a sub-structure (\ref SolvAttr::noAttr for none) */
+        void setParent( SolvAttr attr_r );
         //@}
 
       private:
@@ -376,7 +402,7 @@ namespace zypp
         /** The current \ref SolvAttr. */
         SolvAttr inSolvAttr() const;
 
-        /** Whether this points to the end of a query. */
+        /** Whether this points to the end of a query (Iterator is invalid). */
         bool atEnd() const
         { return !_dip; }
         //@}
@@ -408,6 +434,13 @@ namespace zypp
         /** \name Iterate sub-structures.
          *
          * These are usable iff \ref solvAttrSubEntry is \c true.
+         *
+         * \note Unfortunately the underlying satsolver dataiterator as returned
+         * by \ref subBegin and \ref subFind loses some context when being created.
+         * Thus it's not possible to invoke \ref subBegin and \ref subFind on an
+         * iterator that was previously returned by one of those methods. The result
+         * will be an \c end iterator. For the same reason it is not possible for an
+         * iterator to leave the sub-structure again.
          *
          * \code
          * // Lookup all "update:reference" entries for a specific solvable
