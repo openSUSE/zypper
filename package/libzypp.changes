@@ -1,4 +1,10 @@
 -------------------------------------------------------------------
+Tue Jun 30 16:32:08 CEST 2009 - ma@suse.de
+
+- Enhance LookupAttr to allow direct query of attributes within 
+  sub-structures (flexarrays).
+
+-------------------------------------------------------------------
 Fri Jun 26 12:06:51 CEST 2009 - ma@suse.de
 
 - Enhance PoolQueryIterator to allow detailed inspection of attribute 
