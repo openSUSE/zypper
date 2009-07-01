@@ -1,4 +1,11 @@
 -------------------------------------------------------------------
+Wed Jul  1 13:44:04 CEST 2009 - ma@suse.de
+
+- Running as non-root user use a temporary @System solvfile in case the
+  global one is outdated and needed refresh. (bnc #517183)
+- version 6.9.1 (8)
+
+-------------------------------------------------------------------
 Tue Jun 30 16:32:08 CEST 2009 - ma@suse.de
 
 - Enhance LookupAttr to allow direct query of attributes within 
