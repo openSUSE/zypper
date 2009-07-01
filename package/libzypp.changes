@@ -1,4 +1,10 @@
 -------------------------------------------------------------------
+Wed Jul  1 18:05:54 CEST 2009 - ma@suse.de
+
+- Support PoolQuery for sub-structures attributes. (fate #305503)
+- version 6.9.2 (8)
+
+-------------------------------------------------------------------
 Wed Jul  1 13:44:04 CEST 2009 - ma@suse.de
 
 - Running as non-root user use a temporary @System solvfile in case the
