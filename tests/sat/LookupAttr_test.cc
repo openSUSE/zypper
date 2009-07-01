@@ -190,9 +190,9 @@ BOOST_AUTO_TEST_CASE(LookupAttr_solvable_attribute_substructure)
     // BOOST_CHECK_EQUAL( res.subFind( sat::SolvAttr::updateReferenceType ).subBegin(),  res.subBegin() );
   }
 
-  // search substructure id without parent-structure won't work:
-  q = sat::LookupAttr( sat::SolvAttr::updateReferenceId );
-  BOOST_CHECK_EQUAL( q.size(), 0 );
+  // search substructure id without parent-structure works for wellknown structures:
+  //   q = sat::LookupAttr( sat::SolvAttr::updateReferenceId );
+  BOOST_CHECK_EQUAL( q.size(), 303 );
 
   // search id in parent-structure:
   q = sat::LookupAttr( sat::SolvAttr::updateReferenceId, sat::SolvAttr::updateReference );

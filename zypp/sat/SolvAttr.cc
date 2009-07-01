@@ -136,6 +136,30 @@ namespace sat
   const SolvAttr SolvAttr::repositoryRpmDbCookie      ( REPOSITORY_RPMDBCOOKIE );
   const SolvAttr SolvAttr::repositoryDeltaInfo        ( REPOSITORY_DELTAINFO );
 
+  /////////////////////////////////////////////////////////////////
+
+  SolvAttr SolvAttr::parent() const
+  {
+    switch( id() )
+    {
+      case UPDATE_COLLECTION_NAME:
+      case UPDATE_COLLECTION_EVR:
+      case UPDATE_COLLECTION_ARCH:
+      case UPDATE_COLLECTION_FILENAME:
+      case UPDATE_COLLECTION_FLAGS:
+        return updateCollection;
+        break;
+
+      case UPDATE_REFERENCE_TYPE:
+      case UPDATE_REFERENCE_HREF:
+      case UPDATE_REFERENCE_ID:
+      case UPDATE_REFERENCE_TITLE:
+        return updateReference;
+        break;
+    }
+    return noAttr;
+  }
+
 } // namespace sat
   /////////////////////////////////////////////////////////////////
 } // namespace zypp

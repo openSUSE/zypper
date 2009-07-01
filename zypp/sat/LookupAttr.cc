@@ -56,15 +56,16 @@ namespace zypp
     {
       public:
         Impl()
+        : _parent( SolvAttr::noAttr )
         {}
         Impl( SolvAttr attr_r, Location loc_r )
-        : _attr( attr_r ), _parent( SolvAttr::noAttr ), _solv( loc_r == REPO_ATTR ? SOLVID_META : noSolvableId )
+        : _attr( attr_r ), _parent( attr_r.parent() ), _solv( loc_r == REPO_ATTR ? SOLVID_META : noSolvableId )
         {}
         Impl( SolvAttr attr_r, Repository repo_r, Location loc_r )
-        : _attr( attr_r ), _parent( SolvAttr::noAttr ), _repo( repo_r ), _solv( loc_r == REPO_ATTR ? SOLVID_META : noSolvableId )
+        : _attr( attr_r ), _parent( attr_r.parent() ), _repo( repo_r ), _solv( loc_r == REPO_ATTR ? SOLVID_META : noSolvableId )
         {}
         Impl( SolvAttr attr_r, Solvable solv_r )
-        : _attr( attr_r ), _parent( SolvAttr::noAttr ), _solv( solv_r )
+        : _attr( attr_r ), _parent( attr_r.parent() ), _solv( solv_r )
         {}
 
       public:
@@ -72,7 +73,12 @@ namespace zypp
         { return _attr; }
 
         void setAttr( SolvAttr attr_r )
-        { _attr = attr_r; }
+        {
+          _attr = attr_r;
+          SolvAttr p( _attr.parent() );
+          if ( p != SolvAttr::noAttr )
+            _parent = p;
+        }
 
         const AttrMatcher & attrMatcher() const
         { return _attrMatcher; }
@@ -132,6 +138,7 @@ namespace zypp
           detail::DIWrap dip( whichRepo, _solv.id(), _attr.id(), _attrMatcher.searchstring(), _attrMatcher.flags().get() );
           if ( _parent != SolvAttr::noAttr )
             ::dataiterator_prepend_keyname( dip.get(), _parent.id() );
+
           return iterator( dip ); // iterator takes over ownership!
         }
 
@@ -314,6 +321,14 @@ namespace zypp
         {
           _dip = new ::Dataiterator;
           *_dip = *rhs._dip;
+          if ( _dip->nparents )
+          {
+            for ( int i = 1; i < _dip->nparents; ++i )
+            {
+              _dip->parents[i].kv.parent = &_dip->parents[i-1].kv;
+            }
+            _dip->kv.parent = &_dip->parents[_dip->nparents-1].kv;
+          }
           // now we have to manually clone any allocated regex data matcher.
           ::Datamatcher & matcher( _dip->matcher );
           if ( matcher.match && ( matcher.flags & SEARCH_STRINGMASK ) == SEARCH_REGEX )

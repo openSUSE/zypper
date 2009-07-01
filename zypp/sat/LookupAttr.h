@@ -63,7 +63,9 @@ namespace zypp
      * To search for attributes located in a sub-structure (flexarray)
      * you also have to pass the sub-structures attribute as parent.
      * Passing \ref SolvAttr::allAttr a parent will lookup the attribute
-     * in \c any sub-structure.
+     * in \c any sub-structure. Few attributes are known to have a parent
+     * (\see \ref SolvAttr::parent). Setting those attributes will automatically
+     * initialize their parent value.
      *
      * \code
      *    // Lookup all 'name' attributes:

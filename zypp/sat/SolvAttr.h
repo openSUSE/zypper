@@ -33,6 +33,8 @@ namespace sat
    * Attributes associated with individual solvables,
    * or with the repository as a whole.
    *
+   * \note If you add well known subsructure attributes, update \ref parent.
+   *
    * \see \ref LookupAttr
    */
   class SolvAttr : public IdStringType<SolvAttr>
@@ -109,17 +111,17 @@ namespace sat
       static const SolvAttr restartSuggested;
       static const SolvAttr reloginSuggested;
       static const SolvAttr message;
-      static const SolvAttr updateCollection;
-      static const SolvAttr updateCollectionName;
-      static const SolvAttr updateCollectionEvr;
-      static const SolvAttr updateCollectionArch;
-      static const SolvAttr updateCollectionFilename;
-      static const SolvAttr updateCollectionFlags;
-      static const SolvAttr updateReference;
-      static const SolvAttr updateReferenceType;
-      static const SolvAttr updateReferenceHref;
-      static const SolvAttr updateReferenceId;
-      static const SolvAttr updateReferenceTitle;
+      static const SolvAttr updateCollection;		// SUB-STRUCTURE:
+      static const SolvAttr updateCollectionName;	// name
+      static const SolvAttr updateCollectionEvr;	// evr
+      static const SolvAttr updateCollectionArch;	// arch
+      static const SolvAttr updateCollectionFilename;	// filename
+      static const SolvAttr updateCollectionFlags;	// flags
+      static const SolvAttr updateReference;		// SUB-STRUCTURE:
+      static const SolvAttr updateReferenceType;	// type
+      static const SolvAttr updateReferenceHref;	// href
+      static const SolvAttr updateReferenceId;		// id
+      static const SolvAttr updateReferenceTitle;	// title
       //@}
 
       /** \name pattern */
@@ -175,6 +177,16 @@ namespace sat
       explicit SolvAttr( const IdString & idstr_r )  : _str( idstr_r ) {}
       explicit SolvAttr( const std::string & str_r ) : _str( str_r ) {}
       explicit SolvAttr( const char * cstr_r )       : _str( cstr_r ) {}
+
+      /** Return the parent of well know sub-structure attributes (\ref SolvAttr::noAttr if none).
+       * \li \ref updateCollection
+       * \li \ref updateReference
+       */
+      SolvAttr parent() const;
+
+      /** Whether this is a well know sub-structure attribute. */
+      bool hasParent() const
+      { return parent() != noAttr; }
 
     private:
       friend class IdStringType<SolvAttr>;
