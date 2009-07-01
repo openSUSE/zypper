@@ -70,7 +70,7 @@ namespace zypp
       /** Null implementation */
       static TargetImpl_Ptr nullimpl();
 
-      /** 
+      /**
        * generates the unique anonymous id which is called
        * when creating the target
        */
@@ -81,6 +81,27 @@ namespace zypp
        */
       void createLastDistributionFlavorCache() const;
 
+      /** \name Solv file handling.
+       * If target solv file is outdated, but (non-root-)user has
+       * no permission to  create it at the default location, we
+       * use a temporary one.
+       */
+      //@{
+    private:
+      /** The systems default solv file location. */
+      Pathname defaultSolvfilesPath() const;
+
+      /** The solv file location actually in use (default or temp). */
+      Pathname solvfilesPath() const
+      { return solvfilesPathIsTemp() ? _tmpSolvfilesPath : defaultSolvfilesPath(); }
+
+      /** Whether we're using a temp. solvfile. */
+      bool solvfilesPathIsTemp() const
+      { return ! _tmpSolvfilesPath.empty(); }
+
+      Pathname _tmpSolvfilesPath;
+
+    public:
       void load();
 
       void unload();
@@ -88,6 +109,7 @@ namespace zypp
       void clearCache();
 
       void buildCache();
+      //@}
 
       std::string anonymousUniqueId() const;
 

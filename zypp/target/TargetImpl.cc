@@ -28,6 +28,7 @@
 #include "zypp/base/UserRequestException.h"
 
 #include "zypp/ZConfig.h"
+#include "zypp/ZYppFactory.h"
 
 #include "zypp/PoolItem.h"
 #include "zypp/ResObjects.h"
@@ -299,7 +300,6 @@ namespace zypp
 
       createAnonymousId();
 
-
       MIL << "Initialized target on " << _root << endl;
     }
 
@@ -438,17 +438,26 @@ namespace zypp
       MIL << "Targets closed" << endl;
     }
 
+    ///////////////////////////////////////////////////////////////////
+    //
+    // solv file handling
+    //
+    ///////////////////////////////////////////////////////////////////
+
+    Pathname TargetImpl::defaultSolvfilesPath() const
+    {
+      return Pathname::assertprefix( _root, ZConfig::instance().repoSolvfilesPath() / sat::Pool::instance().systemRepoAlias() );
+    }
+
     void TargetImpl::clearCache()
     {
-      Pathname base = Pathname::assertprefix( _root,
-                                              ZConfig::instance().repoSolvfilesPath() / sat::Pool::instance().systemRepoAlias() );
+      Pathname base = solvfilesPath();
       filesystem::recursive_rmdir( base );
     }
 
     void TargetImpl::buildCache()
     {
-      Pathname base = Pathname::assertprefix( _root,
-                                              ZConfig::instance().repoSolvfilesPath() / sat::Pool::instance().systemRepoAlias() );
+      Pathname base = solvfilesPath();
       Pathname rpmsolv       = base/"solv";
       Pathname rpmsolvcookie = base/"cookie";
 
@@ -477,20 +486,51 @@ namespace zypp
 
       if ( build_rpm_solv )
       {
-        // Take care we unlink the solvfile on exception
-        ManagedFile guard( base, filesystem::recursive_rmdir );
-
-        // if it does not exist yet, we better create it
+        // if the solvfile dir does not exist yet, we better create it
         filesystem::assert_dir( base );
 
+        Pathname oldSolvFile( solvexisted ? rpmsolv : Pathname() ); // to speedup rpmdb2solv
+
         filesystem::TmpFile tmpsolv( filesystem::TmpFile::makeSibling( rpmsolv ) );
-        if (!tmpsolv)
+        if ( !tmpsolv )
         {
+          // Can't create temporary solv file, usually due to insufficient permission
+          // (user query while @System solv needs refresh). If so, try switching
+          // to a location within zypps temp. space (will be cleaned at application end).
+
+          bool switchingToTmpSolvfile = false;
           Exception ex("Failed to cache rpm database.");
-          ex.remember(str::form(
-              "Cannot create temporary file under %s.", base.c_str()));
-          ZYPP_THROW(ex);
+          ex.remember(str::form("Cannot create temporary file under %s.", base.c_str()));
+
+          if ( ! solvfilesPathIsTemp() )
+          {
+            base = getZYpp()->tmpPath() / sat::Pool::instance().systemRepoAlias();
+            rpmsolv       = base/"solv";
+            rpmsolvcookie = base/"cookie";
+
+            filesystem::assert_dir( base );
+            tmpsolv = filesystem::TmpFile::makeSibling( rpmsolv );
+
+            if ( tmpsolv )
+            {
+              WAR << "Using a temporary solv file at " << base << endl;
+              switchingToTmpSolvfile = true;
+              _tmpSolvfilesPath = base;
+            }
+            else
+            {
+              ex.remember(str::form("Cannot create temporary file under %s.", base.c_str()));
+            }
+          }
+
+          if ( ! switchingToTmpSolvfile )
+          {
+            ZYPP_THROW(ex);
+          }
         }
+
+        // Take care we unlink the solvfile on exception
+        ManagedFile guard( base, filesystem::recursive_rmdir );
 
         std::ostringstream cmd;
         cmd << "rpmdb2solv";
@@ -499,8 +539,8 @@ namespace zypp
 
         cmd << " -p '" << Pathname::assertprefix( _root, "/etc/products.d" ) << "'";
 
-        if ( solvexisted )
-          cmd << " '" << rpmsolv << "'";
+        if ( ! oldSolvFile.empty() )
+          cmd << " '" << oldSolvFile << "'";
 
         cmd << "  > '" << tmpsolv.path() << "'";
 
@@ -548,8 +588,7 @@ namespace zypp
 
       // now add the repos to the pool
       sat::Pool satpool( sat::Pool::instance() );
-      Pathname rpmsolv( Pathname::assertprefix( _root,
-                        ZConfig::instance().repoSolvfilesPath() / satpool.systemRepoAlias() / "solv" ) );
+      Pathname rpmsolv( solvfilesPath() / "solv" );
       MIL << "adding " << rpmsolv << " to pool(" << satpool.systemRepoAlias() << ")" << endl;
 
       // Providing an empty system repo, unload any old content
