@@ -320,33 +320,7 @@ namespace zypp
         if ( rhs._dip )
         {
           _dip = new ::Dataiterator;
-          *_dip = *rhs._dip;
-          if ( _dip->nparents )
-          {
-            for ( int i = 1; i < _dip->nparents; ++i )
-            {
-              _dip->parents[i].kv.parent = &_dip->parents[i-1].kv;
-            }
-            _dip->kv.parent = &_dip->parents[_dip->nparents-1].kv;
-          }
-          // now we have to manually clone any allocated regex data matcher.
-          ::Datamatcher & matcher( _dip->matcher );
-          if ( matcher.match && ( matcher.flags & SEARCH_STRINGMASK ) == SEARCH_REGEX )
-          {
-            ::datamatcher_init( &matcher, _mstring.c_str(), matcher.flags );
-          }
-          else if ( matcher.match && matcher.match != _mstring.c_str() )
-          {
-            //SEC << "**" << rhs._dip << endl;
-            SEC << "r " << rhs._dip->matcher.match << endl;
-            SEC << "r " << rhs._dip->matcher.flags << endl;
-            SEC << "r " << (const void*)rhs._mstring.c_str() << "'" << rhs._mstring << "'" << endl;
-
-            SEC << "t " << matcher.match << endl;
-            SEC << "t " << matcher.flags << endl;
-            SEC << "t " << (const void*)_mstring.c_str() << "'" << _mstring << "'" <<  endl;
-            throw( "this cant be!" );
-          }
+          ::dataiterator_init_clone( _dip, rhs._dip );
         }
       }
 
@@ -495,20 +469,23 @@ namespace zypp
 
     LookupAttr::iterator LookupAttr::iterator::subBegin() const
     {
-      switch ( subType( _dip ) )
+      SubType subtype( subType( _dip ) );
+      if ( subtype == ST_NONE )
+        return subEnd();
+      // setup the new sub iterator with the remembered position
+      detail::DIWrap dip( 0, 0, 0 );
+      ::dataiterator_clonepos( dip.get(), _dip.get() );
+      switch ( subtype )
       {
-        case ST_NONE:
-          return subEnd();
+        case ST_NONE:	// not reached
           break;
         case ST_FLEX:
-          ::dataiterator_setpos( _dip.get() );
+          ::dataiterator_seek( dip.get(), DI_SEEK_CHILD|DI_SEEK_STAY );
           break;
         case ST_SUB:
-          ::dataiterator_setpos_parent( _dip.get() );
+          ::dataiterator_seek( dip.get(), DI_SEEK_REWIND|DI_SEEK_STAY );
           break;
       }
-      // setup the new sub iterator with the remembered position
-      detail::DIWrap dip( 0, SOLVID_POS, 0, 0, 0 );
       return iterator( dip ); // iterator takes over ownership!
     }
 

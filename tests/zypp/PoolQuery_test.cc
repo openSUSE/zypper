@@ -682,7 +682,8 @@ BOOST_AUTO_TEST_CASE(addDependency)
     q.addString( "libzypp" );
     q.addDependency( sat::SolvAttr::provides, "FOO" ); // ! finds 'perl(CPAN::InfoObj)' 'foO'
     std::for_each(q.begin(), q.end(), PrintAndCount());
-    BOOST_CHECK_EQUAL( q.size(), 12 );
+    //dumpQ( std::cout, q );
+    BOOST_CHECK_EQUAL( q.size(), 13 );
   }
   {
     cout << "****addDependency2****"  << endl;
@@ -693,7 +694,7 @@ BOOST_AUTO_TEST_CASE(addDependency)
     q.addDependency( sat::SolvAttr::provides, "FOO", Rel::GT, Edition("5.0") );
     std::for_each(q.begin(), q.end(), PrintAndCount());
     //dumpQ( std::cout, q );
-    BOOST_CHECK_EQUAL( q.size(), 6 );
+    BOOST_CHECK_EQUAL( q.size(), 7 );
   }
 
   {
