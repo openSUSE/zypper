@@ -1,4 +1,10 @@
 -------------------------------------------------------------------
+Thu Jul  2 16:42:42 CEST 2009 - ma@suse.de
+
+- Adapt to satsolvers improved dataiterator handling.
+- version 6.9.3 (8)
+
+-------------------------------------------------------------------
 Wed Jul  1 18:05:54 CEST 2009 - ma@suse.de
 
 - Support PoolQuery for sub-structures attributes. (fate #305503)
