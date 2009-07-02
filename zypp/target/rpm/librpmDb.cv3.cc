@@ -20,10 +20,12 @@ typedef int32_t rpm_count_t;
 #endif
 #endif
 
-#ifdef _RPM_5
+#if defined( _RPM_5 )
 #define HGEPtr_t void *
 #define headerGetEntryMinMemory headerGetEntry
 #define headerNVR(h,n,v,r) headerNEVRA(h,n,NULL,v,r,NULL)
+#elif defined( _RPM_4_4_COMPAT )
+#define HGEPtr_t void *
 #else
 #define HGEPtr_t const void *
 #endif
