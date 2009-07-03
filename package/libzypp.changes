@@ -1,4 +1,11 @@
 -------------------------------------------------------------------
+Fri Jul  3 09:20:56 CEST 2009 - ma@suse.de
+
+- When unmounting ISO images, don't mix up exceptions thrown by the 
+  loop mounted ISO and those thrown by the media containing it.
+  (bnc #517856)
+
+-------------------------------------------------------------------
 Thu Jul  2 16:42:42 CEST 2009 - ma@suse.de
 
 - Adapt to satsolvers improved dataiterator handling.
