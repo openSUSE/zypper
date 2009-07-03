@@ -1,4 +1,13 @@
 -------------------------------------------------------------------
+Tue Jun  9 16:14:42 CEST 2009 - jkupec@suse.cz
+
+- --with-interactive option added to 'patch' command. The option
+  avoids skipping patches marked as interactive when in
+  non-interactive mode. Absent this option it was not possible
+  to install all needed patches non-interactively (bnc #497711)
+- 1.0.10
+
+-------------------------------------------------------------------
 Wed Apr 15 13:09:55 CEST 2009 - jkupec@suse.cz
 
 - Fixed requesting of perl symbols in 'install'. E.g.
