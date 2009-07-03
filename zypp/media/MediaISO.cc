@@ -299,8 +299,18 @@ namespace zypp
 
       if( _parentId)
       {
+        // Unmounting the iso already succeeded,
+        // so don't let exceptions escape.
         MediaManager manager;
-        manager.release(_parentId);
+        try
+        {
+          manager.release(_parentId);
+        }
+        catch ( const Exception & excpt_r )
+        {
+          ZYPP_CAUGHT( excpt_r );
+          WAR << "Not been able to cleanup the parent mount." << endl;
+        }
       }
       // else:
       // the media manager has reset the _parentId
