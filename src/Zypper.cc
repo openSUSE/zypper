@@ -1522,6 +1522,7 @@ void Zypper::processCommandOptions()
     static struct option update_options[] = {
       {"repo",                      required_argument, 0, 'r'},
       {"skip-interactive",          no_argument,       0, 0},
+      {"with-interactive",          no_argument,       0, 0},
       {"auto-agree-with-licenses",  no_argument,       0, 'l'},
       {"debug-solver",              no_argument,       0, 0},
       {"no-recommends",             no_argument,       0,  0 },
@@ -1544,7 +1545,9 @@ void Zypper::processCommandOptions()
       "                                See man zypper for more details.\n"
       "    --debug-solver              Create solver test case for debugging.\n"
       "-D, --dry-run                   Test the update, do not actually update.\n"
-    );
+    ) + string(_(
+      "    --with-interactive          Do not skip interactive patches.\n"
+    ));
     break;
   }
 
@@ -3595,6 +3598,22 @@ void Zypper::doCommand()
         || copts.count("agree-to-third-party-licenses"))
       _cmdopts.license_auto_agree = true;
 
+    bool skip_interactive = false;
+    if (copts.count("skip-interactive"))
+    {
+      if (copts.count("with-interactive"))
+      {
+        out().error(str::form(_("%s contradicts %s"), "--with-interactive", "--skip-interactive"));
+        setExitCode(ZYPPER_EXIT_ERR_INVALID_ARGS);
+        return;
+      }
+      skip_interactive = true;
+    }
+    // bnc #497711
+    else if (globalOpts().non_interactive && !copts.count("with-interactive"))
+      skip_interactive = true;
+    MIL << "Skipping interactive patches: " << (skip_interactive ? "yes" : "no") << endl;
+
     ResKindSet kinds;
     if (copts.count("type"))
     {
@@ -3641,8 +3660,6 @@ void Zypper::doCommand()
     load_resolvables(*this);
     resolve(*this); // needed to compute status of PPP
 
-    bool skip_interactive =
-      copts.count("skip-interactive") || globalOpts().non_interactive;
 
     mark_updates(*this, kinds, skip_interactive, best_effort);
 
