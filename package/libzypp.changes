@@ -1,4 +1,9 @@
 -------------------------------------------------------------------
+Fri Jul  3 13:01:13 CEST 2009 - ma@suse.de
+
+- Fix parsing of rpm.install.excludedocs option (bnc #518883)
+
+-------------------------------------------------------------------
 Fri Jul  3 09:20:56 CEST 2009 - ma@suse.de
 
 - When unmounting ISO images, don't mix up exceptions thrown by the 
