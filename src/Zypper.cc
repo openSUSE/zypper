@@ -1570,6 +1570,7 @@ void Zypper::processCommandOptions()
     static struct option update_options[] = {
       {"repo",                      required_argument, 0, 'r'},
       {"skip-interactive",          no_argument,       0,  0 },
+      {"with-interactive",          no_argument,       0,  0 },
       {"auto-agree-with-licenses",  no_argument,       0, 'l'},
       {"debug-solver",              no_argument,       0,  0 },
       {"no-recommends",             no_argument,       0,  0 },
@@ -1604,7 +1605,10 @@ void Zypper::processCommandOptions()
       "-r, --repo <alias|#|URI>    Load only the specified repository.\n"
       "-D, --dry-run               Test the update, do not actually update.\n"
       "-d, --download-only         Only download the packages, do not install.\n"
-    );
+    //! \todo merge this with the above string for 11.3
+    ) + string(_(
+      "    --with-interactive      Do not skip interactive patches.\n"
+    ));
     break;
   }
 
@@ -3712,6 +3716,22 @@ void Zypper::doCommand()
     if (copts.count("no-confirm"))
       _gopts.non_interactive = true;
 
+    bool skip_interactive = false;
+    if (copts.count("skip-interactive"))
+    {
+      if (copts.count("with-interactive"))
+      {
+        out().error(str::form(_("%s contradicts %s"), "--with-interactive", "--skip-interactive"));
+        setExitCode(ZYPPER_EXIT_ERR_INVALID_ARGS);
+        return;
+      }
+      skip_interactive = true;
+    }
+    // bnc #497711
+    else if (globalOpts().non_interactive && !copts.count("with-interactive"))
+      skip_interactive = true;
+    MIL << "Skipping interactive patches: " << (skip_interactive ? "yes" : "no") << endl;
+
     ResKindSet kinds;
     if (copts.count("type"))
     {
@@ -3758,8 +3778,6 @@ void Zypper::doCommand()
     load_resolvables(*this);
     resolve(*this); // needed to compute status of PPP
 
-    bool skip_interactive =
-      copts.count("skip-interactive") || globalOpts().non_interactive;
 
     if (copts.count("bugzilla") || copts.count("bz") || copts.count("cve"))
       mark_updates_by_issue(*this);

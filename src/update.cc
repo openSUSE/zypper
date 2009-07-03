@@ -596,7 +596,8 @@ mark_patch_update(ui::Selectable & s,
           && (patch->interactive() || !patch->licenseToConfirm().empty()))
       {
         // Skipping a patch because it is marked as interactive or has
-        // license to confirm and --skip-interactive is requested.
+        // license to confirm and --skip-interactive is requested
+        // (i.e. also --non-interactive, since it implies --skip-interactive)
         Zypper::instance()->out().warning(str::form(
           // translators: %s is the name of a patch
           _("'%s' is interactive, skipping."),
