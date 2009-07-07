@@ -68,7 +68,44 @@ namespace
 
 namespace zypp
 {
+  namespace
+  {
+    const char		_sep = '|';
+    std::ofstream 	_log;
+    unsigned		_refcnt = 0;
+    Pathname		_fname;
 
+    inline void openLog()
+    {
+      if ( _fname.empty() )
+        _fname = ZConfig::instance().historyLogFile();
+
+      _log.clear();
+      _log.open( _fname.asString().c_str(), std::ios::out|std::ios::app );
+      if( !_log )
+        ERR << "Could not open logfile '" << _fname << "'" << endl;
+    }
+
+    inline void closeLog()
+    {
+      _log.clear();
+      _log.close();
+    }
+
+    inline void refUp()
+    {
+      if ( !_refcnt )
+        openLog();
+      ++_refcnt;
+    }
+
+    inline void refDown()
+    {
+      --_refcnt;
+      if ( !_refcnt )
+        closeLog();
+    }
+  }
 
   ///////////////////////////////////////////////////////////////////
   //
@@ -76,61 +113,26 @@ namespace zypp
   //
   ///////////////////////////////////////////////////////////////////
 
-  Pathname HistoryLog::_fname(ZConfig::instance().historyLogFile());
-  std::ofstream HistoryLog::_log;
-  unsigned HistoryLog::_refcnt = 0;
-  const char HistoryLog::_sep = '|';
-
-  ///////////////////////////////////////////////////////////////////
-
   HistoryLog::HistoryLog( const Pathname & rootdir )
   {
+    setRoot( rootdir );
     refUp();
-    if (!rootdir.empty() && rootdir.absolute())
-      _fname = rootdir / ZConfig::instance().historyLogFile();
   }
 
-  void HistoryLog::openLog()
+  HistoryLog::~HistoryLog()
   {
-    if ( !_fname.empty() )
-    {
-      _log.clear();
-      _log.open( _fname.asString().c_str(), std::ios::out|std::ios::app );
-      if( !_log )
-        ERR << "Could not open logfile '" << _fname << "'" << endl;
-    }
+    refDown();
   }
-
-  void HistoryLog::closeLog()
-  {
-    _log.clear();
-    _log.close();
-  }
-
-  void HistoryLog::refUp()
-  {
-    if ( !_refcnt )
-      openLog();
-    ++_refcnt;
-  }
-
-  void HistoryLog::refDown()
-  {
-    --_refcnt;
-    if ( !_refcnt )
-      closeLog();
-  }
-
 
   void HistoryLog::setRoot( const Pathname & rootdir )
   {
-    if (rootdir.empty() || !rootdir.absolute())
+    if ( ! rootdir.absolute() )
       return;
 
     if ( _refcnt )
       closeLog();
 
-    _fname = rootdir / "/var/log/zypp/history";
+    _fname = rootdir / ZConfig::instance().historyLogFile();
     filesystem::assert_dir( _fname.dirname() );
     MIL << "installation log file " << _fname << endl;
 
@@ -138,9 +140,12 @@ namespace zypp
       openLog();
   }
 
-
   const Pathname & HistoryLog::fname()
-  { return _fname; }
+  {
+    if ( _fname.empty() )
+      _fname = ZConfig::instance().historyLogFile();
+    return _fname;
+  }
 
   /////////////////////////////////////////////////////////////////////////
 

@@ -52,26 +52,14 @@ namespace zypp
    *
    * \see http://en.opensuse.org/Libzypp/Package_History
    *
-   * \todo Static private stuff does not need to be mentioned here in the
-   * header (use an annon. namespace in the .cc). Appart from that the
-   * implementation as signleton is questionable. Use shared_ptr instead of
-   * handcrafted ref/unref. Manage multiple logs at different locations.
+   * \todo The implementation as pseudo signleton is questionable.
+   * Use shared_ptr instead of handcrafted ref/unref. Manage multiple
+   * logs at different locations.
    */
   class HistoryLog
   {
     HistoryLog( const HistoryLog & );
     HistoryLog & operator=( const HistoryLog & );
-  private:
-    static std::ofstream _log;
-    static unsigned _refcnt;
-    static Pathname _fname;
-    static const char _sep;
-
-    static void openLog();
-    static void closeLog();
-    static void refUp();
-    static void refDown();
-
   public:
     /**
      * Constructor with an optional root directory.
@@ -79,8 +67,7 @@ namespace zypp
      * \param rootdir actual target root directory
      */
     HistoryLog( const Pathname & rootdir = Pathname() );
-    ~HistoryLog()
-    { refDown(); }
+    ~HistoryLog();
 
     /**
      * Set new root directory to the default history log file path.
