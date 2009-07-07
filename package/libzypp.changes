@@ -1,4 +1,10 @@
 -------------------------------------------------------------------
+Tue Jul  7 17:45:47 CEST 2009 - ma@suse.de
+
+- Fix HistoryLog to initialize on demand.
+- version 6.10.0 (10)
+
+-------------------------------------------------------------------
 Fri Jul  3 13:01:13 CEST 2009 - ma@suse.de
 
 - Fix parsing of rpm.install.excludedocs option (bnc #518883)
