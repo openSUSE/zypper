@@ -30,7 +30,7 @@
 #include "zypp/RepoManager.h"
 #include "zypp/Repository.h"
 #include "zypp/RepoInfo.h"
-
+#include "zypp/TriBool.h"
 #include "zypp/repo/PackageProvider.h"
 
 #include "zypp/ResPoolProxy.h"
@@ -453,7 +453,7 @@ void diffquery( const Lcont & l, const Rcont & r )
   INT  << rs << endl;
 }
 
-bool querycompare( const PoolQuery & q )
+bool querycompare( const PoolQuery & q, bool verbose = true )
 {
   q.begin();
   SEC << q << endl;
@@ -464,12 +464,15 @@ bool querycompare( const PoolQuery & q )
     for_( it, q.begin(), q.end() )
     {
       ++nc;
-      //DBG << it << endl;
+      if ( verbose )
+        DBG << it << endl;
     }
-    MIL << nc << endl;
+    SEC << "--> MATCHES: " << nc << endl;
   }
   return true;
 }
+
+#include "zypp/MediaProducts.h"
 
 /******************************************************************
 **
@@ -478,11 +481,14 @@ bool querycompare( const PoolQuery & q )
 */
 int main( int argc, char * argv[] )
 try {
-  --argc;
-  ++argv;
+  --argc,++argv;
   zypp::base::LogControl::instance().logToStdErr();
   INT << "===[START]==========================================" << endl;
   ZConfig::instance();
+
+  USR << ZConfig::instance().rpmInstallFlags() << endl;
+
+  return 0;
 
   ResPool   pool( ResPool::instance() );
   sat::Pool satpool( sat::Pool::instance() );
@@ -592,54 +598,70 @@ try {
 
   ///////////////////////////////////////////////////////////////////
 
-  Match m( Match::GLOB );
-  SEC << m << endl;
-  SEC << Match::REGEX << endl;
+  {
+    PoolQuery q;
+    q.setCaseSensitive( false );
+    q.setMatchSubstring();
+    q.addString( "xteddy" );
+    q.addDependency( sat::SolvAttr::provides, "libzypp", Rel::EQ, Edition("4.2.6") );
+    q.addDependency( sat::SolvAttr::name, "zypper", Rel::LE, Edition("4.2.6") );
+    //q.addDependency( sat::SolvAttr::name, Capability("kernel-default") );
+    q.addKind( ResKind::package );
+    querycompare( q );
+  }
+  //////////////////////////////////////////////////////////////////
+  INT << "===[END]============================================" << endl << endl;
+  zypp::base::LogControl::instance().logNothing();
+  return 0;
 
-  m = Match::GLOB;
-  SEC << m << endl;
-  m = Match::NOTHING
-      | Match::GLOB;
-  SEC << m << endl;
-  m = Match::GLOB
-      | Match::STRING;
-  SEC << m << endl;
-  m = Match::FILES
-      | Match::NOTHING;
-  SEC << m << endl;
-  m = Match::FILES - Match::STRING;
-  SEC << m << endl;
+  {
+    PoolQuery q;
+    q.setCaseSensitive( false );
+    q.setMatchSubstring();
+    q.addAttribute( sat::SolvAttr::provides, "libzypp" );
+    q.addKind( ResKind::package );
+    querycompare( q, false );
 
-  SEC << (Match::FILES==Match::NOTHING) << endl;
-  SEC << (Match::FILES!=Match::NOTHING) << endl;
+    q.setMatchExact();
+    querycompare( q, false );
 
-  ///////////////////////////////////////////////////////////////////
+    q.addString( "xteddy" );
+    querycompare( q, false );
+  }
+  {
+    PoolQuery q;
+    q.setCaseSensitive( false );
+    q.setMatchExact();
+    q.addKind( ResKind::package );
 
-  std::string search("devel");
+    q.addAttribute( sat::SolvAttr::provides, "xteddy" );
+    querycompare( q, false );
+  }
 
-  PoolQuery q;
-  //querycompare( q );
+  {
+    PoolQuery q;
+    q.setCaseSensitive( false );
+    q.setMatchSubstring();
+    q.addDependency( sat::SolvAttr::provides, "libzypp" );
+    q.addKind( ResKind::package );
+    querycompare( q, false );
 
-  q.addString(search);
-  //q.addAttribute(sat::SolvAttr::name, "augeas" );
-  //q.addAttribute(sat::SolvAttr::name );
-  q.addAttribute(sat::SolvAttr::summary);
-  q.setMatchSubstring();
-  //q.setMatchExact();
-  q.setCaseSensitive( false );
+    q.setMatchExact();
+    querycompare( q, false );
 
-  //q.addRepo( "11.1-update" );
-  //q.addRepo( "@System" );
+    q.addString( "xteddy" );
+    querycompare( q, false );
+  }
+ {
+    PoolQuery q;
+    q.setCaseSensitive( false );
+    q.setMatchExact();
+    q.addKind( ResKind::package );
 
-  //q.addKind( ResKind::package );
-  //q.addKind( ResKind::pattern );
-  //q.addKind( ResKind::patch );
+    q.addDependency( sat::SolvAttr::provides, "xteddy" );
+    querycompare( q, false );
+  }
 
-  //q.setEdition( Edition("1.0"), Rel::GE );
-
-  q.setMatchFiles();
-
-  querycompare( q );
 
 #if 0
   getZYpp()->resolver()->addRequire( Capability("amarok") );

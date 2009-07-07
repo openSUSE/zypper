@@ -32,7 +32,7 @@ int usage( const std::string & msg_r = std::string(), int exit_r = 100 )
   cerr << "           denotes a sover testcase, the testcase is loaded." << endl;
   cerr << "  -i/-I    turn on/off case insensitive search (default on)" << endl;
   cerr << "  -n/-N    turn on/off looking for names       (default on)" << endl;
-  cerr << "  -p/-P    turn on/off looking for provides    (default off)" << endl;
+  cerr << "  -p/-P    turn on/off looking for provides    (default on)" << endl;
   cerr << "  -r/-R    turn on/off looking for requires    (default off)" << endl;
   cerr << "  -a       short for -n -p -r" << endl;
   cerr << "  -A       short for -n -P -R" << endl;
@@ -137,7 +137,7 @@ int main( int argc, char * argv[] )
 
   bool ignorecase( true );
   bool names     ( true );
-  bool provides  ( false );
+  bool provides  ( true );
   bool requires  ( false );
 
   for ( ; argc; --argc,++argv )

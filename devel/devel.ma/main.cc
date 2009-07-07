@@ -1,14 +1,19 @@
 #include "Tools.h"
-#include "zypp/pool/GetResolvablesToInsDel.h"
 
-static TestSetup test( Arch_x86_64 );  // use x86_64 as system arch
+#include <zypp/PoolQuery.h>
+
+///////////////////////////////////////////////////////////////////
+
+static const Pathname sysRoot( getenv("SYSROOT") ? getenv("SYSROOT") : "/Local/ROOT" );
+
+///////////////////////////////////////////////////////////////////
 
 bool solve()
 {
   bool rres = false;
   {
     //zypp::base::LogControl::TmpLineWriter shutUp;
-    rres = test.resolver().resolvePool();
+    //rres = test.resolver().resolvePool();
   }
   if ( ! rres )
   {
@@ -25,23 +30,55 @@ try {
   ++argv;
   zypp::base::LogControl::instance().logToStdErr();
   INT << "===[START]==========================================" << endl;
+  ZConfig::instance();
+  TestSetup::LoadSystemAt( sysRoot );
+  ///////////////////////////////////////////////////////////////////
+  ResPool   pool( ResPool::instance() );
+  sat::Pool satpool( sat::Pool::instance() );
+  ///////////////////////////////////////////////////////////////////
+  dumpRange( USR, satpool.reposBegin(), satpool.reposEnd() ) << endl;
+  USR << "pool: " << pool << endl;
+  ///////////////////////////////////////////////////////////////////
 
-  test.loadTarget(); // initialize and load target
-  test.loadRepo( Url("iso:/?iso=/mounts/dist/install/openSUSE-11.1-Beta2-DONTUSE/kiwi.out.dvd-i586.iso") );
+  if ( 1 )
+  {
+    Measure x("-");
+    sat::LookupAttr q( sat::SolvAttr::updateReference );
+    for_( res, q.begin(), q.end() )
+    {
+      MIL << res << endl;
+    }
+  }
 
-  ResPool    pool( test.pool() );
-  Resolver & resolver( test.resolver() );
+  if ( 0 )
+  {
+    Measure( "x" );
 
-  resolver.addRequire( Capability("glibc") );
-  resolver.addRequire( Capability("zlib") );
-  resolver.addRequire( Capability("lsb-buildenv") );
-  solve();
-  vdumpPoolStats( USR << "Transacting:"<< endl,
-                  make_filter_begin<resfilter::ByTransact>(pool),
-                  make_filter_end<resfilter::ByTransact>(pool) ) << endl;
+    PoolQuery q;
+    q.setMatchSubstring();
+    q.setCaseSensitive( false );
+    q.addAttribute( sat::SolvAttr::updateReference );
 
-  pool::GetResolvablesToInsDel collect( pool, pool::GetResolvablesToInsDel::ORDER_BY_MEDIANR );
-  MIL << "GetResolvablesToInsDel:" << endl << collect << endl;
+    for_( it, q.begin(), q.end() )
+    {
+      // for each matching patch
+      MIL << *it << endl;
+
+      if ( 0 )
+      {
+        for_( d, it.matchesBegin(), it.matchesEnd() )
+        {
+          // for each matching updateReferenceId in that patch:
+          DBG << " - " << d->inSolvAttr() << "\t\"" << d->asString() << "\" has type \""
+              << d->subFind( sat::SolvAttr::updateReferenceType ).asString() << "\"" << endl;
+          for_( s, d->subBegin(), d->subEnd() )
+          {
+            DBG << "    -" << s.inSolvAttr() << "\t\"" << s.asString() << "\"" << endl;
+          }
+        }
+      }
+    }
+  }
 
   ///////////////////////////////////////////////////////////////////
   INT << "===[END]============================================" << endl << endl;
