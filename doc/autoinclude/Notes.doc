@@ -19,5 +19,11 @@ namespace zypp
 \li \c MediaManager::attachDesiredMedia	renamed to		MediaManager::attach
 <HR>
 
+\section V_6_10_0  6.10.0 - Removed zypp::UpgradeStatistics
+Since \c Code-11 the distribution upgrade is computed by the satsolver and no longer by
+libzypp itself. For some reason zypp::UpgradeStatistics were still present in the interfaces,
+but actually no longer used. Neither as input nor as result struct. Now they are removed.
+<HR>
+
 */
 }

@@ -66,7 +66,6 @@ SET( zypp_SRCS
   SysContent.cc
   Target.cc
   TmpPath.cc
-  UpgradeStatistics.cc
   Url.cc
   VendorAttr.cc
   VendorSupportOptions.cc
@@ -163,7 +162,6 @@ SET( zypp_HEADERS
   Target.h
   TmpPath.h
   TriBool.h
-  UpgradeStatistics.h
   Url.h
   VendorAttr.h
   VendorSupportOptions.h

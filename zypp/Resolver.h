@@ -19,7 +19,6 @@
 #include "zypp/base/PtrTypes.h"
 
 #include "zypp/ResPool.h"
-#include "zypp/UpgradeStatistics.h"
 #include "zypp/solver/detail/Resolver.h"
 #include "zypp/solver/detail/SolverQueueItem.h"
 #include "zypp/ProblemTypes.h"
@@ -118,9 +117,6 @@ namespace zypp
      * etc.
      **/
     bool doUpgrade();
-    /** \deprecated The UpgradeStatistics argument is a meanwhile useless relict of pre-satsolver days. */
-    ZYPP_DEPRECATED bool doUpgrade( UpgradeStatistics & )
-    { return doUpgrade(); }
 
     /**
      * Update to newest package

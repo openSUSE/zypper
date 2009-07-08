@@ -251,8 +251,7 @@ bool upgrade()
   bool rres = false;
   {
     zypp::base::LogControl::TmpLineWriter shutUp;
-    UpgradeStatistics u;
-    rres = getZYpp()->resolver()->doUpgrade( u );
+    rres = getZYpp()->resolver()->doUpgrade();
   }
   if ( ! rres )
   {

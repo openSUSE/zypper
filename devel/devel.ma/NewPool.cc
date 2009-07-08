@@ -592,8 +592,7 @@ try {
   if ( 0 )
   {
     Measure x( "Upgrade" );
-    UpgradeStatistics u;
-    getZYpp()->resolver()->doUpgrade( u );
+    getZYpp()->resolver()->doUpgrade();
   }
 
   ///////////////////////////////////////////////////////////////////
