@@ -40,7 +40,6 @@
 #include "zypp/ProblemTypes.h"
 #include "zypp/ResolverProblem.h"
 #include "zypp/ProblemSolution.h"
-#include "zypp/UpgradeStatistics.h"
 #include "zypp/Capabilities.h"
 #include "zypp/Capability.h"
 
@@ -56,7 +55,6 @@ namespace zypp
     { ///////////////////////////////////////////////////////////////////
 
     class SATResolver;
-
 
     ///////////////////////////////////////////////////////////////////
     //
@@ -94,7 +92,6 @@ class Resolver : public base::ReferenceCounted, private base::NonCopyable {
     ResPool _pool;
     SATResolver *_satResolver;
     SerialNumberWatcher _poolchanged;
-    bool _testing;
 
     CapabilitySet _extra_requires;
     CapabilitySet _extra_conflicts;
@@ -174,7 +171,7 @@ class Resolver : public base::ReferenceCounted, private base::NonCopyable {
     bool resolveQueue( SolverQueueItemList & queue );
     void doUpdate();
 
-    bool doUpgrade( zypp::UpgradeStatistics & opt_stats_r );
+    bool doUpgrade();
     PoolItemList problematicUpdateItems() const;
 
     /** \name Solver flags */

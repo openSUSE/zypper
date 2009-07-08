@@ -62,38 +62,20 @@ using namespace zypp;
 //		      and set the SAT solver in update mode
 //
 bool
-Resolver::doUpgrade( UpgradeStatistics & opt_stats_r )
+Resolver::doUpgrade()
 {
   Target_Ptr target( getZYpp()->getTarget() );
   if ( ! target )
   {
     ERR << "Huh, no target ?" << endl;
-    if (!_testing)
-      return false;		// can't continue without target
-    MIL << "Running in test mode, continuing without target" << endl;
-  }
-  MIL << "target at " << target << endl;
-
-  MIL << "doUpgrade start... "
-    << "(silent_downgrades:" << (opt_stats_r.silent_downgrades?"yes":"no") << ")"
-    << endl;
+    return false; // can't continue without target
+ }
 
   // create a testcase for the updating system
-  PathInfo path ("/mnt/var/log"); // checking if update has been started from instsys
   std::string now( Date::now().form( "-%Y-%m-%d-%H-%M-%S" ) );
-  if ( !path.isExist() ) {
-      Testcase testcase("/var/log/updateTestcase"+now);
-      testcase.createTestcase (*this, true, false); // create pool, do not solve
-  } else {
-      Testcase testcase("/mnt/var/log/updateTestcase"+now);
-      testcase.createTestcase (*this, true, false); // create pool, do not solve
-  }
-
-  {
-    UpgradeOptions opts( opt_stats_r );
-    opt_stats_r = UpgradeStatistics();
-    (UpgradeOptions&)opt_stats_r = opts;
-  }
+  Pathname path ( target->assertRootPrefix("/var/log/updateTestcase"+now) );
+  Testcase testcase( path.asString() );
+  testcase.createTestcase (*this, true, false); // create pool, do not solve
 
   // Setting Resolver to upgrade mode. SAT solver will do the update
   _upgradeMode = true;

@@ -14,7 +14,6 @@
 #include "zypp/Resolver.h"
 #include "zypp/ZConfig.h"
 #include "zypp/TriBool.h"
-#include "zypp/UpgradeStatistics.h"
 #include "zypp/solver/detail/Resolver.h"
 #include "zypp/solver/detail/Testcase.h"
 
@@ -69,8 +68,8 @@ namespace zypp
   void Resolver::applySolutions( const ProblemSolutionList & solutions )
   { _pimpl->applySolutions (solutions); }
 
-  bool Resolver::doUpgrade( UpgradeStatistics & opt_stats_r )
-  { return _pimpl->doUpgrade(opt_stats_r); }
+  bool Resolver::doUpgrade()
+  { return _pimpl->doUpgrade(); }
 
   void Resolver::doUpdate()
   { _pimpl->doUpdate(); }

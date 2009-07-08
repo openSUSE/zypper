@@ -112,18 +112,15 @@ namespace zypp
     /**
      * Do an distribution upgrade
      *
-     * This will run a full upgrade on the pool, taking all upgrade
-     * dependencies (provide/obsolete for package renames, split-
-     * provides, etc.) into account and actually removing installed
-     * packages if no upgrade exists AND the package dependency is
-     * broken
-     *
-     * To be run with great caution. It basically brings your
-     * system 'back to start'.
-     * Quite helpful to get back to a 'sane state'. Quite disastrous
-     * since you'll loose all non-distribution packages
+     * Perform a distribution upgrade. This performs an update of
+     * all packages with a special resolver algorithm which takes
+     * care of package splits, pattern  and  product  updates,
+     * etc.
      **/
-    bool doUpgrade( UpgradeStatistics & opt_stats_r );
+    bool doUpgrade();
+    /** \deprecated The UpgradeStatistics argument is a meanwhile useless relict of pre-satsolver days. */
+    ZYPP_DEPRECATED bool doUpgrade( UpgradeStatistics & )
+    { return doUpgrade(); }
 
     /**
      * Update to newest package

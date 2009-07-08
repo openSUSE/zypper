@@ -27,10 +27,13 @@
 
 #ifndef ZYPP_UPGRADESTATISTICS_H
 #define ZYPP_UPGRADESTATISTICS_H
+#warning This include and the classes declared inside are depreceated.
 
 #include <iosfwd>
 #include <list>
 #include <string>
+
+#include "zypp/base/Deprecated.h"
 
 /////////////////////////////////////////////////////////////////////////
 namespace zypp
@@ -42,7 +45,7 @@ namespace zypp
 /**
  * @short Struct for update options
  **/
-class UpgradeOptions {
+class ZYPP_DEPRECATED UpgradeOptions {
 
   public:
 
@@ -73,8 +76,10 @@ class UpgradeOptions {
 //	CLASS NAME : UpgradeStatistics
 /**
  * @short Struct for update options, statistics, and result lists.
+ *
+ * \deprecated
  **/
-class UpgradeStatistics : public UpgradeOptions {
+class ZYPP_DEPRECATED UpgradeStatistics : public UpgradeOptions {
 
     virtual std::ostream & dumpOn( std::ostream & str ) const;
     friend std::ostream & operator<<( std::ostream & str, const UpgradeStatistics & obj )
