@@ -1,4 +1,10 @@
 -------------------------------------------------------------------
+Wed Jul  8 14:20:14 CEST 2009 - ma@suse.de
+
+- Remove references to deprecated UpgradeStatistics.
+- 1.2.2
+
+-------------------------------------------------------------------
 Mon Jun 29 17:40:23 CEST 2009 - jkupec@suse.cz
 
 - Updated translations.
