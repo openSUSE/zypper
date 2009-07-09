@@ -24,7 +24,8 @@ PreReq:         permissions
 Summary:        Command line software manager using libzypp
 Version:        @VERSION@
 Release:        0
-Source:         @PACKAGE@-@VERSION@.tar.bz2
+Source:         %{name}-%{version}.tar.bz2
+Source1:        %{name}-rpmlintrc
 Prefix:         /usr
 URL:            http://en.opensuse.org/Zypper
 Provides:       y2pmsh
