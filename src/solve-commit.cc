@@ -319,13 +319,13 @@ static bool verify(Zypper & zypper)
   return God->resolver()->verifySystem();
 }
 
-static bool dist_upgrade(Zypper & zypper, zypp::UpgradeStatistics & dup_stats)
+static bool dist_upgrade(Zypper & zypper)
 {
   dump_pool();
   set_solver_flags(zypper);
   zypper.out().info(_("Computing upgrade..."), Out::HIGH);
   DBG << "Calling the solver doUpgrade()..." << endl;
-  return God->resolver()->doUpgrade(dup_stats);
+  return God->resolver()->doUpgrade();
 }
 
 /**
@@ -384,10 +384,8 @@ void solve_and_commit (Zypper & zypper)
           success = verify(zypper);
         else if (zypper.command() == ZypperCommand::DIST_UPGRADE)
         {
-          zypp::UpgradeStatistics dup_stats;
           zypper.out().info(_("Computing distribution upgrade..."));
-          success = dist_upgrade(zypper, dup_stats);
-          //! \todo make use of the upgrade stats
+          success = dist_upgrade(zypper);
         }
         else
         {
