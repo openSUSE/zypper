@@ -14,7 +14,7 @@ msgstr ""
 "Project-Id-Version: zypper.de\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2009-06-08 16:44+0200\n"
-"PO-Revision-Date: Wed Dec 31 22:03:23 UTC 2008\n"
+"PO-Revision-Date: 2009-07-06 19:28+0200\n"
 "Last-Translator: Marko Schugardt <mail.sapex@gmx.de>\n"
 "Language-Team: German <opensuse-translation-de@opensuse.org>\n"
 "MIME-Version: 1.0\n"
@@ -157,7 +157,7 @@ msgid ""
 "Warning: This might be caused by a malicious change in the file!\n"
 "Continuing might be risky. Continue anyway?"
 msgstr ""
-"Warnung: Dies könnte durch eine arglistige Änderung an der Datei verursacht worden sein!\n"
+"Achtung: Dies könnte durch eine arglistige Änderung an der Datei verursacht worden sein!\n"
 "Fortfahren könnte risikoreich sein. Trotzdem fortfahren?"
 
 #: ../src/callbacks/keyring.h:256
@@ -817,7 +817,7 @@ msgstr "Problem beim Installieren des Quellpakets %s-%s:"
 
 #: ../src/output/OutNormal.cc:74
 msgid "Warning: "
-msgstr "Warnung: "
+msgstr "Achtung: "
 
 #: ../src/output/OutNormal.cc:181 ../src/output/OutNormal.cc:263
 #: ../src/output/OutNormal.cc:268
@@ -1524,7 +1524,7 @@ msgid ""
 "Use rug or yast2 for that."
 msgstr ""
 "Der ZENworks-Management-Daemon läuft.\n"
-"WARNUNG: Dieses Kommando wird Änderungen nicht synchronisieren.\n"
+"ACHTUNG: Dieses Kommando wird Änderungen nicht synchronisieren.\n"
 "Verwenden Sie dafür rug oder yast2."
 
 #. translators: Bundle is a term used in rug. See rug for how to translate it.
@@ -4242,7 +4242,7 @@ msgstr "Keine gültigen Argumente festgelegt."
 
 #: ../src/Zypper.cc:3186 ../src/Zypper.cc:3265
 msgid "Warning: No repositories defined. Operating only with the installed resolvables. Nothing can be installed."
-msgstr "Warnung: Keine Repositories bestimmt. Operiere nur mit den installierten auflösbaren Abhängigkeiten. Es kann nichts installiert werden."
+msgstr "Achtung: Keine Repositories bestimmt. Operiere nur mit den installierten auflösbaren Abhängigkeiten. Es kann nichts installiert werden."
 
 #: ../src/Zypper.cc:3215
 msgid "Source package name is a required argument."
