@@ -570,7 +570,6 @@ void install_remove(Zypper & zypper,
     if ((pos = str.rfind('.')) != string::npos)
     {
       arch = str.substr(pos + 1);
-      //str = str.substr(0, pos);
       if (Arch(arch).isBuiltIn())
       {
         if (force_by_name)
@@ -584,6 +583,7 @@ void install_remove(Zypper & zypper,
 
         // name.arch is a valid capability since libzypp-4.15.0 (bnc #305445)
         by_capability = true;
+        str = str.substr(0, pos);
       }
       else
       {
@@ -640,7 +640,7 @@ void install_remove(Zypper & zypper,
 
           DBG << "trying: " << trythis << " edition: " << tryver << endl;
 
-          Capability cap = safe_parse_cap (zypper, trythis, kind);
+          Capability cap = safe_parse_cap (zypper, trythis, kind, arch);
           sat::WhatProvides q(cap);
           for_(sit, q.begin(), q.end())
           {
@@ -679,7 +679,7 @@ void install_remove(Zypper & zypper,
 
     // try by capability
 
-    Capability cap = safe_parse_cap (zypper, str, kind);
+    Capability cap = safe_parse_cap (zypper, str, kind, arch);
     sat::WhatProvides q(cap);
 
     // is there a provider for the requested capability?

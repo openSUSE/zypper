@@ -86,7 +86,8 @@ std::string & indent(std::string & text, int columns);
 
 zypp::Capability safe_parse_cap (Zypper & zypper,
                                  const std::string & capstr,
-                                 const zypp::ResKind & kind = zypp::ResKind::nokind);
+                                 const zypp::ResKind & kind = zypp::ResKind::nokind,
+                                 const std::string & arch = "");
 
 
 // comparator for RepoInfo set

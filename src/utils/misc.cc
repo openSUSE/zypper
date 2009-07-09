@@ -304,7 +304,7 @@ std::string & indent(std::string & text, int columns)
   return text;
 }
 
-static string preparse_cap_str(const string & capstr)
+static string preparse_cap_str(const string & capstr, const string & arch)
 {
   // expect versioned caps as NAME[OP<EDITION>]
   // transform to NAME[ OP <EDITION>] (add spaces)
@@ -315,12 +315,15 @@ static string preparse_cap_str(const string & capstr)
   {
     new_capstr.insert(op_pos, " ");
     DBG << "new capstr: " << new_capstr << endl;
-    op_pos = new_capstr.find_first_not_of("<>=", op_pos + 1);
-    if (op_pos != string::npos && new_capstr.size() > op_pos)
+    string::size_type post_op_pos =
+      new_capstr.find_first_not_of("<>=", op_pos + 1);
+    if (post_op_pos != string::npos && new_capstr.size() > post_op_pos)
     {
-      new_capstr.insert(op_pos, " ");
-      DBG << "new capstr: " << new_capstr << endl;
+      new_capstr.insert(post_op_pos, " ");
     }
+    if (!arch.empty())
+      new_capstr.insert(op_pos, "." + arch);
+    DBG << "new capstr: " << new_capstr << endl;
   }
 
   return new_capstr;
@@ -328,14 +331,15 @@ static string preparse_cap_str(const string & capstr)
 
 Capability safe_parse_cap (Zypper & zypper,
                            const string & capstr,
-                           const ResKind & kind)
+                           const ResKind & kind,
+                           const string & arch)
 {
   try
   {
     if (kind == ResKind::nokind)
-      return Capability(preparse_cap_str(capstr));
+      return Capability(preparse_cap_str(capstr, arch));
     else
-      return Capability(preparse_cap_str(capstr), kind);
+      return Capability(preparse_cap_str(capstr, arch), kind);
   }
   catch (const Exception& e)
   {
