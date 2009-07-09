@@ -18,6 +18,11 @@ using namespace boost;
 
 extern ZYpp::Ptr God;
 
+typedef set<PoolItem> Candidates;
+
+static void
+find_updates( const ResKindSet & kinds, Candidates & candidates );
+
 static PoolItem
 findInstalledItem( PoolItem item );
 
@@ -77,7 +82,7 @@ void patch_check ()
 // ----------------------------------------------------------------------------
 
 // returns true if restartSuggested() patches are availble
-bool xml_list_patches ()
+static bool xml_list_patches ()
 {
   const zypp::ResPool& pool = God->pool();
 
@@ -140,6 +145,36 @@ bool xml_list_patches ()
     cout << "<appletinfo status=\"no-update-repositories\"/>" << endl;
 
   return pkg_mgr_available;
+}
+
+// ----------------------------------------------------------------------------
+
+static void xml_list_updates(const ResKindSet & kinds)
+{
+  Candidates candidates;
+  find_updates (kinds, candidates);
+
+  Candidates::iterator cb = candidates.begin (), ce = candidates.end (), ci;
+  for (ci = cb; ci != ce; ++ci) {
+    ResObject::constPtr res = ci->resolvable();
+
+    cout << " <update ";
+    cout << "name=\"" << res->name () << "\" " ;
+    cout << "edition=\""  << res->edition ().asString() << "\" ";
+    cout << "kind=\"" << res->kind() << "\" ";
+    cout << ">" << endl;
+    cout << "  <summary>" << xml_encode(res->summary()) << "  </summary>" << endl;
+    cout << "  <description>" << xml_encode(res->description()) << "</description>" << endl;
+    cout << "  <license>" << xml_encode(res->licenseToConfirm()) << "</license>" << endl;
+
+    if ( !res->repoInfo().alias().empty() )
+    {
+        cout << "  <source url=\"" << xml_encode(res->repoInfo().baseUrlsBegin()->asString());
+        cout << "\" alias=\"" << xml_encode(res->repoInfo().alias()) << "\"/>" << endl;
+    }
+
+    cout << " </update>" << endl;
+  }
 }
 
 // ----------------------------------------------------------------------------
@@ -345,8 +380,6 @@ findTheBest( const ResPool & pool, const ui::Selectable & s)
 
 // ----------------------------------------------------------------------------
 
-typedef set<PoolItem> Candidates;
-
 /**
  * Find all available updates of given kind.
  */
@@ -394,7 +427,7 @@ find_updates( const ResKind & kind, Candidates & candidates )
 /**
  * Find all available updates of given kinds.
  */
-static void
+void
 find_updates( const ResKindSet & kinds, Candidates & candidates )
 {
   for (ResKindSet::const_iterator kit = kinds.begin(); kit != kinds.end(); ++kit)
@@ -604,36 +637,6 @@ static bool require_item_update (const PoolItem& pi) {
   }
 
   return true;
-}
-
-// ----------------------------------------------------------------------------
-
-void xml_list_updates(const ResKindSet & kinds)
-{
-  Candidates candidates;
-  find_updates (kinds, candidates);
-
-  Candidates::iterator cb = candidates.begin (), ce = candidates.end (), ci;
-  for (ci = cb; ci != ce; ++ci) {
-    ResObject::constPtr res = ci->resolvable();
-
-    cout << " <update ";
-    cout << "name=\"" << res->name () << "\" " ;
-    cout << "edition=\""  << res->edition ().asString() << "\" ";
-    cout << "kind=\"" << res->kind() << "\" ";
-    cout << ">" << endl;
-    cout << "  <summary>" << xml_encode(res->summary()) << "  </summary>" << endl;
-    cout << "  <description>" << xml_encode(res->description()) << "</description>" << endl;
-    cout << "  <license>" << xml_encode(res->licenseToConfirm()) << "</license>" << endl;
-
-    if ( !res->repoInfo().alias().empty() )
-    {
-        cout << "  <source url=\"" << xml_encode(res->repoInfo().baseUrlsBegin()->asString());
-        cout << "\" alias=\"" << xml_encode(res->repoInfo().alias()) << "\"/>" << endl;
-    }
-
-    cout << " </update>" << endl;
-  }
 }
 
 // ----------------------------------------------------------------------------

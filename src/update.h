@@ -22,11 +22,6 @@ void list_updates(Zypper & zypper,
                   const ResKindSet & kinds,
                   bool best_effort);
 
-/** \todo remove from this header after xu is dropped */
-bool xml_list_patches();
-/** \todo remove from this header after xu is dropped */
-void xml_list_updates(const ResKindSet & kinds);
-
 /**
  * \param kind  resolvable type
  * \param skip_interactive whether to skip updates that need user interaction
