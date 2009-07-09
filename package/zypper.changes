@@ -1,8 +1,16 @@
 -------------------------------------------------------------------
+Thu Jul  9 12:21:31 CEST 2009 - jkupec@suse.cz
+
+- Enable use of name-version.arch all together (bnc #519312).
+- Improved description in .spec file
+- Show verbose summary when -v is used (bnc #517171).
+  If -v is used, version are shown, if -vv is used, all the package
+  details are shown in the installation summary.
+
+-------------------------------------------------------------------
 Wed Jul  8 14:20:14 CEST 2009 - ma@suse.de
 
 - Remove references to deprecated UpgradeStatistics.
-- 1.2.2
 
 -------------------------------------------------------------------
 Mon Jun 29 17:40:23 CEST 2009 - jkupec@suse.cz
