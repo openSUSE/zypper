@@ -1,8 +1,13 @@
 -------------------------------------------------------------------
+Fri Jul 10 15:21:39 CEST 2009 - ma@suse.de
+
+- Adapt to boost_unit_test_framework-1.38. 
+- version 6.10.1 (10)
+
+-------------------------------------------------------------------
 Wed Jul  8 16:19:31 CEST 2009 - ma@suse.de
 
 - Remove obsolete UpgradeStatistics class from libzypp.
-- version 6.10.1 (10)
 
 -------------------------------------------------------------------
 Tue Jul  7 17:45:47 CEST 2009 - ma@suse.de
