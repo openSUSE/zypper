@@ -1,7 +1,29 @@
 
 You can find here unit tests for lot of zypp classes.
 
-run 
+run
 ctest .
 
-or the binary itself to run just one test 
+or the binary itself to run just one test
+
+
+Note on libboost_unit_test_framework.so.1.38.0
+----------------------------------------------
+
+When you run the tests manually, some of the testcases here may fail
+with an error message like:
+
+  unknown location(0):            \
+  fatal error in "keyring_test":  \
+  child has exited; pid: 7222; uid: 216; exit value: 2
+
+This happens because the boost test framework we use monitors the
+return code of child processes. This monitoring should be turned off.
+
+You can do this either via a commandfline option:
+
+	 ./KeyRing_test --catch_system_errors=no
+
+Or via an environment variable:
+
+	 BOOST_TEST_CATCH_SYSTEM_ERRORS=no ./KeyRing_test
