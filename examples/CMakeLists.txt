@@ -1,10 +1,14 @@
-INCLUDE_DIRECTORIES( ${CMAKE_CURRENT_SOURCE_DIR} ${CMAKE_CURRENT_BINARY_DIR} )
+## ############################################################
 
+FILE( GLOB ALLCC RELATIVE ${CMAKE_CURRENT_SOURCE_DIR} "*.cc" )
+STRING( REPLACE ".cc" ";" APLLPROG ${ALLCC} )
+FOREACH( loop_var ${APLLPROG} )
+  ADD_EXECUTABLE( ${loop_var}
+    ${loop_var}.cc
+  )
+  TARGET_LINK_LIBRARIES( ${loop_var}
+    zypp
+  )
+ENDFOREACH( loop_var )
 
-########### next target ###############
-
-SET(read_plaindir_source_SRCS
-read_plaindir_source.cc
-)
-
-ADD_EXECUTABLE(read_plaindir_source ${read_plaindir_source_SRCS})
+## ############################################################
