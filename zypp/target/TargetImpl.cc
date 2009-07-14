@@ -1101,7 +1101,20 @@ namespace zypp
     {
       if ( _distributionVersion.empty() )
       {
-        _distributionVersion = baseproductdata( _root ).edition().version();
+        // By default ZYpp looks for /etc/product.d/baseproduct..
+        //_distributionVersion = baseproductdata( _root ).edition().version();
+
+        if ( _distributionVersion.empty() )
+        {
+          // ...But the baseproduct method is not expected to work on RedHat derivatives.
+          // On RHEL, Fedora and others the "product version" is determined by the first package
+          // providing 'redhat-release'. This value is not hardcoded in YUM and can be configured
+          // with the $distroverpkg variable.
+          rpm::librpmDb::db_const_iterator it;
+          if ( it.findByProvides( ZConfig::instance().distroverpkg() ) )
+            _distributionVersion = it->tag_version();
+        }
+
         if ( !_distributionVersion.empty() )
           MIL << "Remember distributionVersion = '" << _distributionVersion << "'" << endl;
       }

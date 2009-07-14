@@ -1,4 +1,12 @@
 -------------------------------------------------------------------
+Tue Jul 14 18:15:51 CEST 2009 - ma@suse.de
+
+- Support "product version" detection on systems not using 
+  /etc/product.d/baseproduct by looking for the first package
+  providing ZConfig::distroverpkg (defaults to redhat-release). 
+- version 6.10.2 (10)
+
+-------------------------------------------------------------------
 Fri Jul 10 15:21:39 CEST 2009 - ma@suse.de
 
 - Adapt to boost_unit_test_framework-1.38. 

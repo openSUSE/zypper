@@ -706,6 +706,11 @@ namespace zypp
 
   ///////////////////////////////////////////////////////////////////
 
+  std::string ZConfig::distroverpkg() const
+  { return "redhat-release"; }
+
+  ///////////////////////////////////////////////////////////////////
+
   std::ostream & ZConfig::about( std::ostream & str ) const
   {
     str << "libzypp: " << VERSION << " built " << __DATE__ << " " <<  __TIME__ << endl;
