@@ -1,4 +1,14 @@
 -------------------------------------------------------------------
+Thu Jul 15 14:55:31 CEST 2009 - jkupec@suse.cz
+
+- Manage updates for bugzilla and CVE issues (fate #305503).
+  Following options added to lu and patch commands:
+  * list-updates: --bugzilla, --cve, --issues, --all
+  * patch: --bugzilla, --cve options added
+  See 'man zypper' for more details.
+- 1.2.2
+
+-------------------------------------------------------------------
 Thu Jul  9 12:21:31 CEST 2009 - jkupec@suse.cz
 
 - Enable use of name-version.arch all together (bnc #519312).
