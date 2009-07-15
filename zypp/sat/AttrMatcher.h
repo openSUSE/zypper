@@ -50,6 +50,8 @@ namespace zypp
       {
         NOTHING,	//!< Match nothing
         STRING,		//!< Excat matching
+        STRINGSTART,	//!< Match at string start
+        STRINGEND,	//!< Match at string end
         SUBSTRING,	//!< Match substring
         GLOB,		//!< Glob
         REGEX,		//!< Regular Expression
@@ -167,6 +169,12 @@ namespace zypp
       /** Whether this has mode \ref STRING. */
       bool isModeString() const
       { return isMode( STRING ); }
+      /** Whether this has mode \ref STRINGSTART. */
+      bool isModeStringstart() const
+      { return isMode( STRINGSTART ); }
+      /** Whether this has mode \ref STRINGEND. */
+      bool isModeStringend() const
+      { return isMode( STRINGEND ); }
       /** Whether this has mode \ref SUBSTRING. */
       bool isModeSubstring() const
       { return isMode( SUBSTRING ); }
@@ -183,6 +191,12 @@ namespace zypp
       /** Set the mode \ref STRING. */
       void setModeString()
       { setMode( STRING ); }
+      /** Set the mode \ref STRINGSTART. */
+      void setModeStringstart()
+      { setMode( STRINGSTART ); }
+      /** Set the mode \ref STRINGEND. */
+      void setModeStringend()
+      { setMode( STRINGEND ); }
       /** Set the mode \ref SUBSTRING. */
       void setModeSubstring()
       { setMode( SUBSTRING ); }

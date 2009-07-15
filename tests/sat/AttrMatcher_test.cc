@@ -99,6 +99,26 @@ BOOST_AUTO_TEST_CASE(AttrMatcher_STRING)
   BOOST_CHECK( !m( "default" ) );
 }
 
+BOOST_AUTO_TEST_CASE(AttrMatcher_STRINGSTART)
+{
+  sat::AttrMatcher m( "fau", Match::STRINGSTART );
+  BOOST_CHECK( !m( "" ) );
+  BOOST_CHECK( !m( "a" ) );
+  BOOST_CHECK( m( "fau" ) );
+  BOOST_CHECK( m( "fault" ) );
+  BOOST_CHECK( !m( "default" ) );
+}
+
+BOOST_AUTO_TEST_CASE(AttrMatcher_STRINGEND)
+{
+  sat::AttrMatcher m( "fau", Match::STRINGEND );
+  BOOST_CHECK( !m( "" ) );
+  BOOST_CHECK( !m( "a" ) );
+  BOOST_CHECK( m( "fau" ) );
+  BOOST_CHECK( m( "defau" ) );
+  BOOST_CHECK( !m( "default" ) );
+}
+
 BOOST_AUTO_TEST_CASE(AttrMatcher_REGEX)
 {
   sat::AttrMatcher m( "fau" );

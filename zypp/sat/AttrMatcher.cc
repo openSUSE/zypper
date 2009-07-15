@@ -53,6 +53,8 @@ namespace zypp
     {
       case 0:			return NOTHING;		break;
       case SEARCH_STRING:	return STRING;		break;
+      case SEARCH_STRINGSTART:	return STRINGSTART;	break;
+      case SEARCH_STRINGEND:	return STRINGEND;	break;
       case SEARCH_SUBSTRING:	return SUBSTRING;	break;
       case SEARCH_GLOB:		return GLOB;		break;
       case SEARCH_REGEX:	return REGEX;		break;
@@ -66,6 +68,8 @@ namespace zypp
     {
       case NOTHING:	return 0;			break;
       case STRING:	return SEARCH_STRING;		break;
+      case STRINGSTART:	return SEARCH_STRINGSTART;	break;
+      case STRINGEND:	return SEARCH_STRINGEND;	break;
       case SUBSTRING:	return SEARCH_SUBSTRING;	break;
       case GLOB:	return SEARCH_GLOB;		break;
       case REGEX:	return SEARCH_REGEX;		break;
@@ -84,6 +88,8 @@ namespace zypp
 #define OUTS(V) case Match::V: return str << #V; break
       OUTS( NOTHING );
       OUTS( STRING );
+      OUTS( STRINGSTART );
+      OUTS( STRINGEND );
       OUTS( SUBSTRING );
       OUTS( GLOB );
       OUTS( REGEX );
@@ -99,21 +105,21 @@ namespace zypp
       return str << "NOTHING";
 
     const char * sep = "|";
-
-    int val = obj.modeval();
-    switch ( val )
+    Match::Mode mode( obj.mode() );
+    switch ( mode )
     {
-      case 0:			sep = 0; 		break;
-      case SEARCH_STRING:	str << "STRING";	break;
-      case SEARCH_SUBSTRING:	str << "SUBSTRING";	break;
-      case SEARCH_GLOB:		str << "GLOB";		break;
-      case SEARCH_REGEX:	str << "REGEX";		break;
+      case Match::NOTHING:
+        sep = 0; // suppress 'NOTHING|'
+        break;
+      case Match::OTHER:
+        str << mode<<"("<<obj.modeval()<<")"; // check whether satsolver has introduced new modes!
+        break;
       default:
-        str << "OTHER("<<val<<")"; // check whether satsolver has introduced new modes!
+        str << mode;
         break;
     }
 
-    val = obj.flagval();
+    int val = obj.flagval();
     if ( val )
     {
 #define OUTS(V) if ( val & Match::V.get() ) { val &= ~Match::V.get(); if ( sep ) str << sep; else sep = "|"; str << #V; }
