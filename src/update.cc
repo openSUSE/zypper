@@ -531,7 +531,11 @@ void list_updates(Zypper & zypper, const ResKindSet & kinds, bool best_effort)
     th << _("Name");
     // best_effort does not know version or arch yet
     if (!best_effort)
-      th << _("Version") << _("Arch");
+    {
+      if (*it == ResKind::package)
+        th << _("Current Version");
+      th << _("Available Version") << _("Arch");
+    }
 
     tbl << th;
 
@@ -542,8 +546,6 @@ void list_updates(Zypper & zypper, const ResKindSet & kinds, bool best_effort)
 
     Candidates::iterator cb = candidates.begin (), ce = candidates.end (), ci;
     for (ci = cb; ci != ce; ++ci) {
-//      ResStatus& candstat = ci->status();
-//      candstat.setToBeInstalled (ResStatus::USER);
       ResObject::constPtr res = ci->resolvable();
       TableRow tr (cols);
       tr << "v";
@@ -556,9 +558,15 @@ void list_updates(Zypper & zypper, const ResKindSet & kinds, bool best_effort)
 
       // strictly speaking, we could show version and arch even in best_effort
       //  iff there is only one candidate. But we don't know the number of candidates here.
-      if (!best_effort) {
-         tr << res->edition ().asString ()
-            << res->arch ().asString ();
+      if (!best_effort)
+      {
+        // for packages show also the current installed version (bnc #466599)
+        //! \todo this deserves cleanup and optimization: e.g. findInstalledItem()
+        //! is called twice, once here and once in find_updates()
+        if (*it == ResKind::package)
+          tr << findInstalledItem(PoolItem(ci->resolvable()))->edition().asString();
+        tr << res->edition ().asString ()
+          << res->arch ().asString ();
       }
       tbl << tr;
     }
