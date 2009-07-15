@@ -1,4 +1,4 @@
-.TH "zypper" "8" "1.2.0" "zypper" "System Tools"
+.TH "zypper" "8" "1.2.2" "zypper" "System Tools"
 .SH "SYNTAX"
 .LP
 zypper [\fI\-\-global\-opts\fR] <\fBcommand\fR> [\fI\-\-command\-opts\fR] [\fBcommand-arguments\fR]
@@ -304,7 +304,7 @@ install or remove command.
 .TP
 .I \ \ \ \ \-\-no\-recommends
 By default, zypper installs also packages recommended by the requested ones.
-This option causes the recomended packages to be ingored and only the
+This option causes the recomended packages to be ignored and only the
 required ones to be installed.
 .TP
 .I \-R, \-\-no\-force\-resolution 
@@ -383,7 +383,7 @@ to install or remove to fix them.
 .I \ \ \ \ \-\-no\-recommends
 By default, zypper installs also packages recommended by the requested ones
 (the ones needed to fix broken dependencies in this case).
-This option causes the recomended packages to be ingored and only the
+This option causes the recomended packages to be ignored and only the
 required ones to be installed. 
 .TP
 .I \-D, \-\-dry-run
@@ -533,7 +533,7 @@ Create solver test case for debugging. See the install command for details.
 .TP
 .I \ \ \ \ \-\-no\-recommends
 By default, zypper installs also packages recommended by the requested ones.
-This option causes the recomended packages to be ingored and only the
+This option causes the recomended packages to be ignored and only the
 required ones to be installed.
 .TP
 .I \-R, \-\-no\-force\-resolution 
@@ -562,13 +562,30 @@ optional for products and patterns. It is not applicable to patches.
 .B list-patches (lp) [options]
 List all available needed patches.
 
-If there are patches that affect the package management itself, only those will
-be listed, and you will be informed if also other patches are available. After
-installing the package management patches, the other needed patches will
-be listed.
-
 This command is similar to 'zypper list-updates -t patch'.
 
+Note that since the arguments of some of the following options are not
+required, they must be specified using '=' instead of a space.
+
+.TP
+\fI\-b, \-\-bugzilla\fR[=#]
+List available needed patches for all Bugzilla issues, or issues whose
+number matches the given string.
+.TP
+\fI \ \ \ \ \-\-cve\fR[=#]
+List available needed patches for all CVE issues, or issues whose number
+matches the given string.
+.TP
+\fI \ \ \ \ \-\-issues\fR[=string]
+Look for issues whose number, summary, or description matches the specified
+string. Issues found by number are displayed separately from those found
+by descriptions. In the latter case, use \fBzypper patch-info <patchname>\fR
+to get information about issues the patch fixes.
+.TP
+.I \-a, \-\-all
+By default, only patches that are relevant and needed on your system are listed.
+This option causes all available released patches to be listed. This option can
+be combined with all the rest of the \fBlist-updates\fR command options.
 .TP
 \fI\-r, \-\-repo\fR <alias|#|URI>
 Work only with the repository specified by the alias, number or URI. This
@@ -596,6 +613,16 @@ be installed first and you will be asked to run the \fBpatch\fR command again.
 This command is similar to 'zypper update -t patch'.
 
 .TP
+\fI\-b, \-\-bugzilla\fR <#>
+Install patch fixing a Bugzilla issue specified by number. Use
+\fBlist-patches --bugzilla\fR command to get a list of available
+needed patches for specific issues.
+.TP
+\fI \ \ \ \ \-\-cve\fR <#>
+Install patch fixing a MITRE's CVE issue specified by number. Use
+\fBlist-patches --cve\fR command to get a list of available
+needed patches for specific issues.
+.TP
 \fI\-r, \-\-repo\fR <alias|#|URI>
 Work only with the repository specified by the alias, number or URI. This
 option can be used multiple times.
@@ -605,6 +632,11 @@ Skip interactive patches.
 .TP
 .I \-l, \-\-auto\-agree\-with\-licenses
 See the \fBupdate\fR command for description of this option.
+.TP
+.I \ \ \ \ \-\-no\-recommends
+By default, zypper installs also packages recommended by the requested ones.
+This option causes the recomended packages to be ignored and only the
+required ones to be installed.
 .TP
 .I \ \ \ \ \-\-debug\-solver
 Create test case for debugging of dependency resolver.
@@ -629,7 +661,7 @@ Automatically say 'yes' to third party license confirmation prompt. By using thi
 .TP
 .I \ \ \ \ \-\-no\-recommends
 By default, zypper installs also packages recommended by the requested ones.
-This option causes the recomended packages to be ingored and only the
+This option causes the recomended packages to be ignored and only the
 required ones to be installed.
 .TP
 .I \ \ \ \ \-\-debug\-solver
