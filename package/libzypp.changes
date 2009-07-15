@@ -1,4 +1,9 @@
 -------------------------------------------------------------------
+Tue Jul 15 14:38:51 CEST 2009 - jkupec@suse.cz
+
+- log redirections when cURL media backend is used (fate #305320).
+
+-------------------------------------------------------------------
 Tue Jul 14 18:15:51 CEST 2009 - ma@suse.de
 
 - Support "product version" detection on systems not using 
