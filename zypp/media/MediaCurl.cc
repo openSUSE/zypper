@@ -111,6 +111,41 @@ namespace
     }
     return 0;
   }
+
+  static size_t
+  log_redirects_curl(
+      void *ptr, size_t size, size_t nmemb, void *stream)
+  {
+    // INT << "got header: " << string((char *)ptr, ((char*)ptr) + size*nmemb) << endl;
+
+    char * lstart = (char *)ptr, * lend = (char *)ptr;
+    size_t pos = 0;
+    size_t max = size * nmemb;
+    while (pos + 1 < max)
+    {
+      // get line
+      for (lstart = lend; *lend != '\n' && pos < max; ++lend, ++pos);
+
+      // look for "Location"
+      string line(lstart, lend);
+      if (line.find("Location") != string::npos)
+      {
+        DBG << "redirecting to " << line << endl;
+        return max;
+      }
+
+      // continue with the next line
+      if (pos + 1 < max)
+      {
+        ++lend;
+        ++pos;
+      }
+      else
+        break;
+    }
+
+    return max;
+  }
 }
 
 namespace zypp {
@@ -203,7 +238,7 @@ void fillSettingsFromUrl( const Url &url, TransferSettings &s )
         if ( url.getScheme() == "ftp" && s.username().empty() )
             s.setAnonymousAuth();
     }
-        
+
     if ( url.getScheme() == "https" )
     {
         s.setVerifyPeerEnabled(false);
@@ -237,10 +272,10 @@ void fillSettingsFromUrl( const Url &url, TransferSettings &s )
             }
         }
     }
-    
+
     Pathname ca_path = Pathname(url.getQueryParam("ssl_capath")).asString();
     if( ! ca_path.empty())
-    {    
+    {
         if( !PathInfo(ca_path).isDir() || !Pathname(ca_path).absolute())
             ZYPP_THROW(MediaBadUrlException(url, "Invalid ssl_capath path"));
         else
@@ -257,7 +292,7 @@ void fillSettingsFromUrl( const Url &url, TransferSettings &s )
         s.setProxy(proxy);
         s.setProxyEnabled(true);
     }
-}    
+}
 
 /**
  * Reads the system proxy configuration and fills the settings
@@ -306,7 +341,7 @@ void fillSettingsSystemProxy( const Url&url, TransferSettings &s )
       if ( s.proxyEnabled() )
           s.setProxy(proxy_info.proxy(url.getScheme()));
     }
-}    
+}
 
 Pathname MediaCurl::_cookieFile = "/var/lib/YaST2/cookies";
 
@@ -382,7 +417,7 @@ static const char *const agentString()
       ZYPP_THROW(MediaCurlSetOptException(_url, _curlError)); \
     } \
   }
-      
+
 MediaCurl::MediaCurl( const Url &      url_r,
                       const Pathname & attach_point_hint_r )
     : MediaHandler( url_r, attach_point_hint_r,
@@ -486,6 +521,8 @@ void MediaCurl::attachTo (bool next)
     }
   }
 
+  curl_easy_setopt(_curl, CURLOPT_HEADERFUNCTION, log_redirects_curl);
+
   CURLcode ret = curl_easy_setopt( _curl, CURLOPT_ERRORBUFFER, _curlError );
   if ( ret != 0 ) {
     disconnectFrom();
@@ -497,7 +534,7 @@ void MediaCurl::attachTo (bool next)
 
   // reset settings in case we are re-attaching
   _settings.reset();
-  
+
   // add custom headers
   _settings.addHeader(anonymousIdHeader());
   _settings.addHeader(distributionFlavorHeader());
@@ -518,8 +555,8 @@ void MediaCurl::attachTo (bool next)
       disconnectFrom();
       ZYPP_RETHROW(e);
   }
-  
-  // if the proxy was not set by url, then look 
+
+  // if the proxy was not set by url, then look
   if ( _settings.proxy().empty() )
   {
       // at the system proxy settings
@@ -544,10 +581,10 @@ void MediaCurl::attachTo (bool next)
 
   if ( _url.getScheme() == "https" )
   {
-    if( _settings.verifyPeerEnabled() || 
+    if( _settings.verifyPeerEnabled() ||
         _settings.verifyHostEnabled() )
     {
-      SET_OPTION(CURLOPT_CAPATH, _settings.certificateAuthoritiesPath().c_str());      
+      SET_OPTION(CURLOPT_CAPATH, _settings.certificateAuthoritiesPath().c_str());
     }
 
     SET_OPTION(CURLOPT_SSL_VERIFYPEER, _settings.verifyPeerEnabled() ? 1L : 0L);
@@ -608,11 +645,11 @@ void MediaCurl::attachTo (bool next)
       SET_OPTION(CURLOPT_PROXY, _settings.proxy().c_str());
       /*---------------------------------------------------------------*
         CURLOPT_PROXYUSERPWD: [user name]:[password]
-        
+
         Url::option(proxyuser and proxypassword) -> CURLOPT_PROXYUSERPWD
         If not provided, $HOME/.curlrc is evaluated
         *---------------------------------------------------------------*/
-      
+
       string proxyuserpwd = _settings.proxyUserPassword();
 
       if ( proxyuserpwd.empty() )
@@ -631,7 +668,7 @@ void MediaCurl::attachTo (bool next)
         SET_OPTION(CURLOPT_PROXYUSERPWD, proxyuserpwd.c_str());
     }
   }
-  
+
   /** Speed limits */
   if ( _settings.minDownloadSpeed() != 0 )
   {
@@ -639,7 +676,7 @@ void MediaCurl::attachTo (bool next)
       // default to 10 seconds at low speed
       SET_OPTION(CURLOPT_LOW_SPEED_TIME, 10);
   }
-  
+
   if ( _settings.maxDownloadSpeed() != 0 )
       SET_OPTION(CURLOPT_MAX_RECV_SPEED_LARGE, _settings.maxDownloadSpeed());
 
@@ -660,7 +697,7 @@ void MediaCurl::attachTo (bool next)
         it != _settings.headersEnd();
         ++it )
   {
-      
+
       _customHeaders = curl_slist_append(_customHeaders, it->c_str());
       if ( !_customHeaders )
           ZYPP_THROW(MediaCurlInitException(_url));
@@ -819,7 +856,7 @@ void MediaCurl::evaluateCurlCode( const Pathname &filename,
                                   bool timeout_reached ) const
 {
   Url url(getFileUrl(_url, filename));
-  
+
   if ( code != 0 )
   {
     std::string err;
@@ -849,25 +886,25 @@ void MediaCurl::evaluateCurlCode( const Pathname &filename,
           case 401:
           {
             string auth_hint = getAuthHint();
-            
+
             DBG << msg << " Login failed (URL: " << url.asString() << ")" << std::endl;
             DBG << "MediaUnauthorizedException auth hint: '" << auth_hint << "'" << std::endl;
-            
+
             ZYPP_THROW(MediaUnauthorizedException(
                            url, "Login failed.", _curlError, auth_hint
                            ));
           }
-                    
+
           case 503: // service temporarily unavailable (bnc #462545)
-            ZYPP_THROW(MediaTemporaryProblemException(url));            
+            ZYPP_THROW(MediaTemporaryProblemException(url));
           case 504: // gateway timeout
-            ZYPP_THROW(MediaTimeoutException(url));                        
+            ZYPP_THROW(MediaTimeoutException(url));
           case 403:
-            ZYPP_THROW(MediaForbiddenException(url));            
+            ZYPP_THROW(MediaForbiddenException(url));
           case 404:
               ZYPP_THROW(MediaFileNotFoundException(_url, filename));
           }
-                    
+
           DBG << msg << " (URL: " << url.asString() << ")" << std::endl;
           ZYPP_THROW(MediaCurlException(url, msg, _curlError));
         }
@@ -914,7 +951,7 @@ void MediaCurl::evaluateCurlCode( const Pathname &filename,
         err = "Unrecognized error";
         break;
       }
-      
+
       // uhm, no 0 code but unknown curl exception
       ZYPP_THROW(MediaCurlException(url, err, _curlError));
     }
@@ -926,8 +963,8 @@ void MediaCurl::evaluateCurlCode( const Pathname &filename,
   else
   {
     // actually the code is 0, nothing happened
-  }   
-}    
+  }
+}
 
 ///////////////////////////////////////////////////////////////////
 
@@ -1060,11 +1097,11 @@ bool MediaCurl::doGetDoesFileExist( const Pathname & filename ) const
       ZYPP_THROW(MediaCurlSetOptException(url, _curlError));
     }
   }
-  
+
   // if the code is not zero, close the file
   if ( ok != 0 )
       ::fclose(file);
-  
+
   // as we are not having user interaction, the user can't cancel
   // the file existence checking, a callback or timeout return code
   // will be always a timeout.
@@ -1216,7 +1253,7 @@ void MediaCurl::doGetFileCopy( const Pathname & filename , const Pathname & targ
         ZYPP_RETHROW(e);
       }
     }
-    
+
 #if DETECT_DIR_INDEX
     else
     if(curlUrl.getScheme() == "http" ||
