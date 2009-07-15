@@ -1102,7 +1102,7 @@ namespace zypp
       if ( _distributionVersion.empty() )
       {
         // By default ZYpp looks for /etc/product.d/baseproduct..
-        //_distributionVersion = baseproductdata( _root ).edition().version();
+        _distributionVersion = baseproductdata( _root ).edition().version();
 
         if ( _distributionVersion.empty() )
         {
