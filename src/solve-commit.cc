@@ -465,13 +465,15 @@ void solve_and_commit (Zypper & zypper)
 
       bool do_commit = false;
       PromptOptions popts;
-      // translators: Yes / No / show Problems. This prompt will appear
-      // after install/update command summary if there will be any package
-      // to-be-removed automatically to show why, if asked.
+      // translators: These are the "Continue?" prompt options corresponding to
+      // "Yes / No / show Problems / Versions / Arch / Repository /
+      // vendor / Details / show in pager". This prompt will appear
+      // after install/update and similar command installation summary.
       // Translate to whathever is suitable for your language
       // The anserws must be separated by slash characters '/' and must
-      // correspond to yes/no/showproblems in that order.
-      // The answers should be lower case letters.
+      // correspond to the above options, in that exact order.
+      // The answers should be lower case letters, but in general, any UTF-8
+      // string will do.
       //! \todo add c for changelog and x for explain (show the dep tree)
       popts.setOptions(_("y/n/p/v/a/r/m/d/g"), 0);
       popts.setShownCount(2);
