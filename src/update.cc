@@ -11,6 +11,7 @@
 
 #include "Table.h"
 #include "update.h"
+#include "main.h"
 
 using namespace std;
 using namespace zypp;
@@ -181,6 +182,8 @@ static void xml_list_updates(const ResKindSet & kinds)
 
 static bool list_patch_updates(Zypper & zypper)
 {
+  bool all = zypper.cOpts().count("all");
+
   Table tbl;
   Table pm_tbl; // only those that affect packagemanager (restartSuggested()), they have priority
   TableHeader th;
@@ -200,7 +203,7 @@ static bool list_patch_updates(Zypper & zypper)
   {
     ResObject::constPtr res = it->resolvable();
 
-    if ( it->isRelevant() && ! it->isSatisfied() )
+    if (all || it->isBroken())
     {
       Patch::constPtr patch = asKind<Patch>(res);
 
@@ -209,9 +212,9 @@ static bool list_patch_updates(Zypper & zypper)
         tr << patch->repoInfo().name();
         tr << res->name () << res->edition ().asString();
         tr << patch->category();
-        tr <<  _("Needed");
+        tr << (it->isBroken() ? _("needed") : _("not needed"));
 
-        if (patch->restartSuggested ())
+        if (!all && patch->restartSuggested ())
           pm_tbl << tr;
         else
           tbl << tr;
@@ -646,6 +649,8 @@ mark_patch_update(ui::Selectable & s,
                   bool skip_interactive, bool ignore_affects_pm)
 {
   Patch::constPtr patch = asKind<Patch>(s.candidateObj());
+  XXX << "candidate patch " << patch->name() << " " << ignore_affects_pm << ", "
+        << patch->restartSuggested() << endl;
   if (s.isBroken()) // bnc #506860
   {
     DBG << "candidate patch " << patch->name() << " " << ignore_affects_pm << ", "
@@ -824,4 +829,260 @@ void mark_updates(Zypper & zypper, const ResKindSet & kinds, bool skip_interacti
       }
     }
   }
+}
+
+// ----------------------------------------------------------------------------
+
+void list_patches_by_issue(Zypper & zypper)
+{
+  // lu --issues               - list all issues which need to be fixed
+  // lu --issues=foo           - look for foo in issue # or description
+  // lu --bz                   - list all bugzilla issues
+  // lu --cve                  - list all CVE issues
+  // lu --bz=foo --cve=foo     - look for foo in bugzillas or CVEs
+  // --all                     - list all, not only needed patches
+
+  // --bz, --cve can't be used together with --issue; this case is ruled out
+  // in the initial arguments validation in Zypper.cc
+
+  typedef set<pair<string, string> > Issues;
+  bool only_needed = !zypper.cOpts().count("all");
+  bool specific = false; // whether specific issue numbers were given
+
+  Table t;
+  TableHeader th;
+  th << _("Issue") << _("No.") << _("Patch") << _("Category");
+  t << th;
+
+#define FILL_ISSUES(TYPE, ID) \
+  it = zypper.cOpts().find(TYPE); \
+  if (it != zypper.cOpts().end()) \
+    for_(i, it->second.begin(), it->second.end()) \
+    { \
+      issues.insert(pair<string, string>(ID, *i)); \
+      if (!i->empty()) \
+        specific = true; \
+    } \
+
+  // make a set of unique issues
+  Issues issues;
+  parsed_opts::const_iterator it;
+  FILL_ISSUES("bugzilla", "bugzilla");
+  FILL_ISSUES("bz", "bugzilla");
+  FILL_ISSUES("cve", "cve");
+  FILL_ISSUES("issues", "issues");
+
+  // remove those without arguments if there are any with arguments
+  // (will show only the specified ones)
+  if (specific)
+    for (Issues::const_iterator i = issues.begin(); i != issues.end(); )
+    {
+      if (i->second.empty())
+      {
+        zypper.out().warning(str::form(_(
+            "Ignoring %s without argument because similar option with"
+            " an argument has been specified."),
+            ("--" + i->first).c_str()));
+        issues.erase(i++);
+      }
+      else
+        ++i;
+    }
+
+  // construct a PoolQuery for each argument separately and add the results
+  // to the Table.
+  string issuesstr;
+  for_(issue, issues.begin(), issues.end())
+  {
+    PoolQuery q;
+    q.setMatchSubstring();
+    q.setCaseSensitive(false);
+    q.addKind(ResKind::patch); // is this unnecessary? only patches should have updateReference* attributes
+
+    // specific bugzilla or CVE
+    if (specific)
+    {
+      if (issue->first == "bugzilla" || issue->first == "cve")
+        q.addAttribute(sat::SolvAttr::updateReferenceId, issue->second);
+    }
+    // all bugzillas or CVEs
+    else
+    {
+      if (issue->first == "bugzilla")
+        q.addAttribute(sat::SolvAttr::updateReferenceType, "bugzilla");
+      else if (issue->first == "cve")
+        q.addAttribute(sat::SolvAttr::updateReferenceType, "cve");
+    }
+    // look for substring in description and reference ID (issue number)
+    if (issue->first == "issues")
+    {
+      // whether argument was given or not, it does not matter; without
+      // argument, all issues will be found
+      q.addAttribute(sat::SolvAttr::updateReferenceId, issue->second);
+      issuesstr = issue->second;
+    }
+
+    cout << "*****" << endl << q << endl << "*****" << endl;
+
+    for_(it, q.begin(), q.end())
+    {
+      PoolItem pi(*it);
+      if (only_needed && !pi.status().isBroken())
+        continue;
+      Patch::constPtr patch = asKind<Patch>(pi.resolvable());
+
+      // Print details about each match in that solvable:
+      for_( d, it.matchesBegin(), it.matchesEnd() )
+      {
+        string itype =
+          d->subFind(sat::SolvAttr::updateReferenceType).asString();
+        if (itype != issue->first)
+          continue;
+
+        TableRow tr;
+        tr << itype;
+        tr << d->subFind(sat::SolvAttr::updateReferenceId).asString();
+        tr << (patch->name() + "-" + patch->edition().asString());
+        tr << patch->category();
+        t << tr;
+      }
+    }
+  }
+
+  // look for matches in patch descriptions
+  Table t1;
+  TableHeader th1;
+  th1 << _("Name") << _("Version") << _("Category") << _("Summary");
+  t1 << th1;
+  if (!issuesstr.empty())
+  {
+    PoolQuery q;
+    q.setMatchSubstring();
+    q.setCaseSensitive(false);
+    q.addKind(ResKind::patch);
+    q.addAttribute(sat::SolvAttr::summary, issuesstr);
+    q.addAttribute(sat::SolvAttr::description, issuesstr);
+
+    for_(it, q.begin(), q.end())
+    {
+      PoolItem pi(*it);
+      if (only_needed && !pi.status().isBroken())
+        continue;
+      Patch::constPtr patch = asKind<Patch>(pi.resolvable());
+
+      TableRow tr;
+      tr << patch->name() << patch->edition().asString() << patch->category();
+      //! \todo could show a highlighted match with a portion of surrounding
+      //! text. Needs case-insensitive find.
+      tr << patch->summary();
+      t1 << tr;
+    }
+  }
+
+  if (!zypper.globalOpts().no_abbrev)
+    t1.allowAbbrev(3);
+  t.sort(3);
+  t1.sort(0);
+
+  if (t.empty() && t1.empty())
+    zypper.out().info(_("No matching issues found."));
+  else
+  {
+    if (!t.empty())
+    {
+      if (!issuesstr.empty())
+      {
+        cout << endl;
+        zypper.out().info(_(
+            "The following matches in issue numbers have been found:"));
+      }
+
+      cout << endl << t;
+    }
+
+    if (!t1.empty())
+    {
+      if (!t.empty())
+        cout << endl;
+      zypper.out().info(_(
+          "Matches in patch descriptions of the following patches have been"
+          " found:"));
+      cout << endl << t1;
+    }
+  }
+}
+
+// ----------------------------------------------------------------------------
+
+void mark_updates_by_issue(Zypper & zypper)
+{
+  typedef set<pair<string, string> > Issues;
+  Issues issues;
+  parsed_opts::const_iterator it = zypper.cOpts().find("bugzilla");
+  if (it != zypper.cOpts().end())
+    for_(i, it->second.begin(), it->second.end())
+      issues.insert(pair<string, string>("b", *i));
+  it = zypper.cOpts().find("bz");
+  if (it != zypper.cOpts().end())
+    for_(i, it->second.begin(), it->second.end())
+      issues.insert(pair<string, string>("b", *i));
+  it = zypper.cOpts().find("cve");
+  if (it != zypper.cOpts().end())
+    for_(i, it->second.begin(), it->second.end())
+      issues.insert(pair<string, string>("c", *i));
+
+  for_(issue, issues.begin(), issues.end())
+  {
+    PoolQuery q;
+    q.setMatchExact();
+    q.setCaseSensitive(false);
+    q.addKind(ResKind::patch); // is this unnecessary?
+    if (issue->first == "b")
+      q.addAttribute(sat::SolvAttr::updateReferenceId, issue->second);
+    else if (issue->first == "c")
+      q.addAttribute(sat::SolvAttr::updateReferenceId, issue->second);
+
+    bool found = false;
+    for_(sit, q.begin(), q.end())
+    {
+      if (!PoolItem(*sit).status().isBroken()) // not needed
+        continue;
+
+      for_( d, sit.matchesBegin(), sit.matchesEnd() )
+      {
+        if (issue->first == "b" &&
+            d->subFind(sat::SolvAttr::updateReferenceType).asString() == "bugzilla")
+        {
+          if (mark_patch_update(*God->pool().proxy().lookup(*sit),
+                zypper.cOpts().count("skip-interactive"), true))
+            found = true;
+          else
+            DBG << str::form("fix for bugzilla issue number %s was not marked.",
+                issue->second.c_str());
+        }
+        else if (issue->first == "b" &&
+            d->subFind(sat::SolvAttr::updateReferenceType).asString() == "bugzilla")
+        {
+          if (mark_patch_update(*God->pool().proxy().lookup(*sit),
+                zypper.cOpts().count("skip-interactive"), true))
+            found = true;
+          else
+            DBG << str::form("fix for CVE issue number %s was not marked.",
+                issue->second.c_str());
+        }
+      }
+    }
+    if (!found)
+    {
+      if (issue->first == "b")
+        zypper.out().info(str::form(_(
+            "Fix for bugzilla issue number %s was not found or is not needed."),
+            issue->second.c_str()));
+      else if (issue->first == "c")
+        zypper.out().info(str::form(_(
+            "Fix for CVE issue number %s was not found or is not needed."),
+            issue->second.c_str()));
+      zypper.setExitCode(ZYPPER_EXIT_INF_CAP_NOT_FOUND);
+    }
+  } // next issue from --bz --cve
 }

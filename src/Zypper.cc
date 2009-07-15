@@ -1566,6 +1566,9 @@ void Zypper::processCommandOptions()
       {"no-recommends",             no_argument,       0,  0 },
       {"recommends",                no_argument,       0,  0 },
       {"dry-run",                   no_argument,       0, 'D'},
+      {"bz",                        required_argument, 0, 'b'},
+      {"bugzilla",                  required_argument, 0, 'b'},
+      {"cve",                       required_argument, 0,  0 },
       {"help", no_argument, 0, 'h'},
       {0, 0, 0, 0}
     };
@@ -1577,16 +1580,18 @@ void Zypper::processCommandOptions()
       "\n"
       "  Command options:\n"
       "\n"
-      "-r, --repo <alias|#|URI>    Load only the specified repository.\n"
       "    --skip-interactive      Skip interactive patches.\n"
       "-l, --auto-agree-with-licenses\n"
       "                            Automatically say 'yes' to third party license\n"
       "                            confirmation prompt.\n"
       "                            See man zypper for more details.\n"
+      "-b, --bugzilla #            Install patch fixing the specified bugzilla issue.\n"
+      "    --cve #                 Install patch fixing the specified CVE issue.\n"
       "    --debug-solver          Create solver test case for debugging.\n"
       "    --no-recommends         Do not install recommended packages, only required.\n"
       "    --recommends            Install also recommended packages in addition\n"
       "                            to the required.\n"
+      "-r, --repo <alias|#|URI>    Load only the specified repository.\n"
       "-D, --dry-run               Test the update, do not actually update.\n"
     );
     break;
@@ -1596,6 +1601,11 @@ void Zypper::processCommandOptions()
   {
     static struct option list_updates_options[] = {
       {"repo",        required_argument, 0, 'r'},
+      {"bz",          optional_argument, 0, 'b'},
+      {"bugzilla",    optional_argument, 0, 'b'},
+      {"cve",         optional_argument, 0,  0 },
+      {"issues",      optional_argument, 0,  0 },
+      {"all",         no_argument,       0, 'a'},
       {"help", no_argument, 0, 'h'},
       {0, 0, 0, 0}
     };
@@ -1606,7 +1616,11 @@ void Zypper::processCommandOptions()
       "List all available needed patches.\n"
       "\n"
       "  Command options:\n"
-      "-r, --repo <alias|#|URI>        List only patches from the specified repository.\n"
+      "-b, --bugzilla[=#]         List needed patches for Bugzilla issues.\n"
+      "    --cve[=#]              List needed patches for CVE issues.\n"
+      "    --issues[=string]      Look for issues matching the specified string.\n"
+      "-a, --all                  List all patches, not only the needed ones.\n"
+      "-r, --repo <alias|#|URI>   List only patches from the specified repository.\n"
     );
     break;
   }
@@ -3591,6 +3605,8 @@ void Zypper::doCommand()
     else
       kinds.insert(ResKind::package);
 
+    //! \todo drop this option - it's the default for packages now, irrelevant
+    //! for patches; just test with products and patterns
     bool best_effort = copts.count( "best-effort" );
 
     if (globalOpts().is_rug_compatible && best_effort)
@@ -3602,6 +3618,15 @@ void Zypper::doCommand()
         Out::HIGH);
     }
 
+    if ((copts.count("bugzilla") || copts.count("bz") || copts.count("cve")) &&
+        copts.count("issues"))
+    {
+      out().error(str::form(
+        _("Cannot use %s together with %s."), "--issues", "--bz, --cve"));
+      setExitCode(ZYPPER_EXIT_ERR_INVALID_ARGS);
+      return;
+    }
+
     initRepoManager();
     init_target(*this);
     init_repos(*this);
@@ -3610,7 +3635,11 @@ void Zypper::doCommand()
     load_resolvables(*this);
     resolve(*this);
 
-    list_updates(*this, kinds, best_effort);
+    if (copts.count("bugzilla") || copts.count("bz")
+        || copts.count("cve") || copts.count("issues"))
+      list_patches_by_issue(*this);
+    else
+      list_updates(*this, kinds, best_effort);
 
     break;
   }
@@ -3698,7 +3727,10 @@ void Zypper::doCommand()
     bool skip_interactive =
       copts.count("skip-interactive") || globalOpts().non_interactive;
 
-    mark_updates(*this, kinds, skip_interactive, best_effort);
+    if (copts.count("bugzilla") || copts.count("bz") || copts.count("cve"))
+      mark_updates_by_issue(*this);
+    else
+      mark_updates(*this, kinds, skip_interactive, best_effort);
 
     solve_and_commit(*this);
 

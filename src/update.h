@@ -23,14 +23,30 @@ void list_updates(Zypper & zypper,
                   bool best_effort);
 
 /**
- * \param kind  resolvable type
- * \param skip_interactive whether to skip updates that need user interaction
+ * List available fixes to all issues or issues specified in --bugzilla
+ * or --cve options, or look for --issues[=str[ in numbers and descriptions
+ */
+void list_patches_by_issue(Zypper & zypper);
+
+/**
+ * Mark patches for installation or package for update.
+ *
+ * \param kinds  set of resolvable types
+ * \param skip_interactive
+ *               whether to skip updates that need user interaction
  * \param best_effort
+ *               only require the resolvable name, let the solver choose
  */
 void mark_updates(Zypper & zypper,
                   const ResKindSet & kinds,
                   bool skip_interactive,
                   bool best_effort);
+
+/**
+ * Mark patches for installation according to bugzilla or CVE number specified
+ * in --cve or --bugzilla or --bz.
+ */
+void mark_updates_by_issue(Zypper & zypper);
 
 /**
  * Find best (according to edition) uninstalled item
