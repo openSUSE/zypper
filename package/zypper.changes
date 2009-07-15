@@ -1,12 +1,17 @@
 -------------------------------------------------------------------
-Thu Jul 15 14:55:31 CEST 2009 - jkupec@suse.cz
+Thu Jul 16 01:47:31 CEST 2009 - jkupec@suse.cz
+
+- list-updates: show also current installed version (bnc #466599)
+- 1.2.2
+
+-------------------------------------------------------------------
+Wed Jul 15 14:55:31 CEST 2009 - jkupec@suse.cz
 
 - Manage updates for bugzilla and CVE issues (fate #305503).
   Following options added to lu and patch commands:
   * list-updates: --bugzilla, --cve, --issues, --all
   * patch: --bugzilla, --cve options added
   See 'man zypper' for more details.
-- 1.2.2
 
 -------------------------------------------------------------------
 Thu Jul  9 12:21:31 CEST 2009 - jkupec@suse.cz
