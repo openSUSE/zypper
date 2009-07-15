@@ -49,6 +49,7 @@
 
 #include "zypp/pool/GetResolvablesToInsDel.h"
 #include "zypp/solver/detail/Helper.h"
+#include "zypp/solver/detail/Testcase.h"
 
 #include "zypp/repo/DeltaCandidates.h"
 #include "zypp/repo/PackageProvider.h"
@@ -58,12 +59,31 @@
 
 using namespace std;
 
+
 ///////////////////////////////////////////////////////////////////
 namespace zypp
 { /////////////////////////////////////////////////////////////////
   ///////////////////////////////////////////////////////////////////
   namespace target
   { /////////////////////////////////////////////////////////////////
+
+    /** \internal Manage writing a new testcase when doing an upgrade. */
+    void writeOutUpgradeTestcase()
+    {
+      Target_Ptr target( getZYpp()->getTarget() );
+      if ( ! target )
+      {
+        WAR << "No Target no Testcase!" << endl;
+        return;
+      }
+
+      std::string stem( "updateTestcase" );
+      Pathname dir( target->assertRootPrefix("/var/log/") );
+      Pathname next( dir / Date::now().form( stem+"-%Y-%m-%d-%H-%M-%S" ) );
+
+      MIL << "Write new testcase " << next << endl;
+      getZYpp()->resolver()->createSolverTestcase( next.asString(), false/*no solving*/ );
+    }
 
     ///////////////////////////////////////////////////////////////////
     namespace
@@ -671,6 +691,14 @@ namespace zypp
       // ----------------------------------------------------------------- //
 
       MIL << "TargetImpl::commit(<pool>, " << policy_r << ")" << endl;
+
+      ///////////////////////////////////////////////////////////////////
+      // Write out a testcase if we're in dist upgrade mode.
+      ///////////////////////////////////////////////////////////////////
+      if ( getZYpp()->resolver()->upgradeMode() )
+      {
+        writeOutUpgradeTestcase();
+      }
 
       ///////////////////////////////////////////////////////////////////
       // Store non-package data:

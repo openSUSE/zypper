@@ -273,7 +273,7 @@ bool Testcase::createTestcase(Resolver & resolver, bool dumpPool, bool runSolver
     PathInfo path (dumpPath);
 
     if ( !path.isExist() ) {
-	if (zypp::filesystem::mkdir (dumpPath)!=0) {
+	if (zypp::filesystem::assert_dir (dumpPath)!=0) {
 	    ERR << "Cannot create directory " << dumpPath << endl;
 	    return false;
 	}

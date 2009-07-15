@@ -84,6 +84,8 @@ namespace zypp
   void Resolver::resetOnlyRequires()			{ _pimpl->setOnlyRequires( indeterminate ); }
   bool Resolver::onlyRequires()				{ return _pimpl->onlyRequires(); }
 
+  bool Resolver::upgradeMode() const			{ return _pimpl->isUpgradeMode(); }
+
   void Resolver::setAllowVendorChange( bool yesno_r )	{ _pimpl->setAllowVendorChange( yesno_r ); }
   void Resolver::setDefaultAllowVendorChange()		{ _pimpl->setAllowVendorChange( indeterminate ); }
   bool Resolver::allowVendorChange() const		{ return _pimpl->allowVendorChange(); }
@@ -108,10 +110,10 @@ namespace zypp
   std::list<PoolItem> Resolver::problematicUpdateItems() const
   { return _pimpl->problematicUpdateItems(); }
 
-  bool Resolver::createSolverTestcase( const std::string & dumpPath )
+  bool Resolver::createSolverTestcase( const std::string & dumpPath, bool runSolver )
   {
     solver::detail::Testcase testcase (dumpPath);
-    return testcase.createTestcase(*_pimpl);
+    return testcase.createTestcase(*_pimpl, true, runSolver);
   }
 
   solver::detail::ItemCapKindList Resolver::isInstalledBy( const PoolItem & item )

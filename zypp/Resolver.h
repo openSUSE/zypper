@@ -179,6 +179,11 @@ namespace zypp
     bool onlyRequires();
 
     /**
+     * Whether the \ref Resolver is in upgrade mode.
+     */
+    bool upgradeMode() const;
+
+    /**
      * Setting whether the solver should allow or disallow vendor changes.
      *
      * If OFF (the default) the solver will replace packages with packages
@@ -254,7 +259,7 @@ namespace zypp
      * \parame dumpPath destination directory of the created directory
      * \return true if it was successful
      */
-    bool createSolverTestcase( const std::string & dumpPath = "/var/log/YaST2/solverTestcase" );
+    bool createSolverTestcase( const std::string & dumpPath = "/var/log/YaST2/solverTestcase", bool runSolver = true );
 
     /**
      * Gives information about WHO has pused an installation of an given item.

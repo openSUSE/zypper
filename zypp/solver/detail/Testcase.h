@@ -39,22 +39,22 @@ namespace zypp
 template<class T>
 std::string helixXML( const T &obj ); //undefined
 
-template<> 
+template<>
 std::string helixXML( const Edition &edition );
 
-template<> 
+template<>
 std::string helixXML( const Arch &arch );
 
-template<> 
+template<>
 std::string helixXML( const Capability &cap );
 
-template<> 
+template<>
 std::string helixXML( const Capabilities &caps );
 
-template<> 
+template<>
 std::string helixXML( const CapabilitySet &caps );
 
-template<> 
+template<>
 std::string helixXML( const PoolItem &item );
 
 
@@ -69,7 +69,7 @@ class  HelixResolvable : public base::ReferenceCounted, private base::NonCopyabl
 
   private:
     std::string dumpFile; // Path of the generated testcase
-    ofgzstream *file;    
+    ofgzstream *file;
 
   public:
     HelixResolvable (const std::string & path);
@@ -99,12 +99,12 @@ class  HelixControl {
     HelixControl (const std::string & controlPath,
 		  const RepositoryTable & sourceTable,
 		  const Arch & systemArchitecture,
-		  const LocaleSet &languages,		  
+		  const LocaleSet &languages,
 		  const std::string & systemPath = "solver-system.xml.gz",
 		  const bool forceResolve = false,
 		  const bool onlyRequires = false,
 		  const bool ignorealreadyrecommended = false);
-    HelixControl ();    
+    HelixControl ();
     ~HelixControl ();
 
     void installResolvable (const ResObject::constPtr &resObject,
@@ -112,21 +112,21 @@ class  HelixControl {
     void lockResolvable (const ResObject::constPtr &resObject,
 			 const ResStatus &status);
     void keepResolvable (const ResObject::constPtr &resObject,
-			 const ResStatus &status);        
+			 const ResStatus &status);
     void deleteResolvable (const ResObject::constPtr &resObject,
 			   const ResStatus &status);
     void addDependencies (const CapabilitySet &capRequire, const CapabilitySet &capConflict);
-    
+
     void distupgrade ();
     void verifySystem ();
     void update ();
-    
+
     std::string filename () { return dumpFile; }
 };
-	
 
 
-	
+
+
 ///////////////////////////////////////////////////////////////////
 //
 //	CLASS NAME : Testcase
@@ -140,11 +140,11 @@ class Testcase {
 
   public:
     Testcase (const std::string & path);
-    Testcase ();    
+    Testcase ();
     ~Testcase ();
 
     bool createTestcase (Resolver & resolver, bool dumpPool = true, bool runSolver = true);
-    bool createTestcasePool(const ResPool &pool);    
+    bool createTestcasePool(const ResPool &pool);
 };
 
 

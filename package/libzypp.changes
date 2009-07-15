@@ -1,4 +1,11 @@
 -------------------------------------------------------------------
+Wed Jul 15 17:53:43 CEST 2009 - ma@suse.de
+
+- Don't write a solver testcase when solving for dist upgrade, 
+  but when actually committing.
+- version 6.10.3 (10)
+
+-------------------------------------------------------------------
 Wed Jul 15 16:45:39 CEST 2009 - ma@suse.de
 
 - Add new string Match::Mode STRINGSTART and STRINGEND.

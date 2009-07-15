@@ -69,13 +69,7 @@ Resolver::doUpgrade()
   {
     ERR << "Huh, no target ?" << endl;
     return false; // can't continue without target
- }
-
-  // create a testcase for the updating system
-  std::string now( Date::now().form( "-%Y-%m-%d-%H-%M-%S" ) );
-  Pathname path ( target->assertRootPrefix("/var/log/updateTestcase"+now) );
-  Testcase testcase( path.asString() );
-  testcase.createTestcase (*this, true, false); // create pool, do not solve
+  }
 
   // Setting Resolver to upgrade mode. SAT solver will do the update
   _upgradeMode = true;
