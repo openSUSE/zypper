@@ -329,6 +329,10 @@ namespace zypp
                 {
                   solver_allowVendorChange.set( str::strToBool( value, solver_allowVendorChange.get() ) );
                 }
+                else if ( entry == "solver.upgradeTestcasesToKeep" )
+                {
+                  solver_upgradeTestcasesToKeep.set( str::strtonum<unsigned>( value ) );
+                }
                 else if ( entry == "solver.checkSystemFile" )
                 {
                   solver_checkSystemFile = Pathname(value);
@@ -439,8 +443,9 @@ namespace zypp
     int download_max_download_speed;
     int download_max_silent_tries;
 
-    Option<bool,false> solver_onlyRequires;
-    Option<bool,false> solver_allowVendorChange;
+    Option<bool,false>  solver_onlyRequires;
+    Option<bool,false>  solver_allowVendorChange;
+    Option<unsigned,2U> solver_upgradeTestcasesToKeep;
     Pathname solver_checkSystemFile;
 
     std::set<IdString> multiversion;
@@ -638,6 +643,7 @@ namespace zypp
   long ZConfig::download_max_silent_tries() const
   { return _pimpl->download_max_silent_tries; }
 
+
   bool ZConfig::solver_onlyRequires() const
   { return _pimpl->solver_onlyRequires.get(); }
 
@@ -647,6 +653,9 @@ namespace zypp
   Pathname ZConfig::solver_checkSystemFile() const
   { return ( _pimpl->solver_checkSystemFile.empty()
       ? (configPath()/"systemCheck") : _pimpl->solver_checkSystemFile ); }
+
+  unsigned ZConfig::solver_upgradeTestcasesToKeep() const
+  { return _pimpl->solver_upgradeTestcasesToKeep.get(); }
 
   std::set<IdString> ZConfig::multiversion() const
   { return _pimpl->multiversion; }

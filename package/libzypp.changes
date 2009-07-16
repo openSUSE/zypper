@@ -1,4 +1,12 @@
 -------------------------------------------------------------------
+Thu Jul 16 16:25:24 CEST 2009 - ma@suse.de
+
+- New solver.upgradeTestcasesToKeep option in zypp.conf. It tells 
+  how many dist upgrade solver testcases should be kept on the system.
+  Per default just the last two are kept. 
+- version 6.10.4 (10)
+
+-------------------------------------------------------------------
 Wed Jul 15 17:53:43 CEST 2009 - ma@suse.de
 
 - Don't write a solver testcase when solving for dist upgrade, 

@@ -227,6 +227,15 @@ namespace zypp
       bool solver_allowVendorChange() const;
 
       /**
+       * When committing a dist upgrade (e.g. <tt>zypper dup</tt>)
+       * a solver testcase is written. It is needed in bugreports,
+       * in case something went wrong. This returns the number of
+       * testcases to keep on the system. Old cases will be deleted,
+       * as new ones are created. Use \c 0 to write no testcase at all.
+       */
+      unsigned solver_upgradeTestcasesToKeep() const;
+
+      /**
        * Packages which can be installed parallel with different versions
        * Returning a set of package names (IdString)
        */

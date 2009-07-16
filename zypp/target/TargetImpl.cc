@@ -68,8 +68,12 @@ namespace zypp
   { /////////////////////////////////////////////////////////////////
 
     /** \internal Manage writing a new testcase when doing an upgrade. */
-    void writeOutUpgradeTestcase()
+    void writeUpgradeTestcase()
     {
+      unsigned toKeep( ZConfig::instance().solver_upgradeTestcasesToKeep() );
+      MIL << "Testcases to keep: " << toKeep << endl;
+      if ( !toKeep )
+        return;
       Target_Ptr target( getZYpp()->getTarget() );
       if ( ! target )
       {
@@ -80,6 +84,27 @@ namespace zypp
       std::string stem( "updateTestcase" );
       Pathname dir( target->assertRootPrefix("/var/log/") );
       Pathname next( dir / Date::now().form( stem+"-%Y-%m-%d-%H-%M-%S" ) );
+
+      {
+        std::list<std::string> content;
+        filesystem::readdir( content, dir, /*dots*/false );
+        std::set<std::string> cases;
+        for_( c, content.begin(), content.end() )
+        {
+          if ( str::startsWith( *c, stem ) )
+            cases.insert( *c );
+        }
+        if ( cases.size() >= toKeep )
+        {
+          unsigned toDel = cases.size() - toKeep + 1; // +1 for the new one
+          for_( c, cases.begin(), cases.end() )
+          {
+            filesystem::recursive_rmdir( dir/(*c) );
+            if ( ! --toDel )
+              break;
+          }
+        }
+      }
 
       MIL << "Write new testcase " << next << endl;
       getZYpp()->resolver()->createSolverTestcase( next.asString(), false/*no solving*/ );
@@ -697,7 +722,7 @@ namespace zypp
       ///////////////////////////////////////////////////////////////////
       if ( getZYpp()->resolver()->upgradeMode() )
       {
-        writeOutUpgradeTestcase();
+        writeUpgradeTestcase();
       }
 
       ///////////////////////////////////////////////////////////////////
