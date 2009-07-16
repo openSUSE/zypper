@@ -21,6 +21,7 @@ function mkCmd() {
   done
 }
 
+# check what we have
 HAVE_ZLM=false
 if rpm -q zen-updater >/dev/null; then
     HAVE_ZLM=true
@@ -28,6 +29,14 @@ fi
 HAVE_OPENSUSE=false
 if rpm -q yast2-packager >/dev/null; then
     HAVE_OPENSUSE=true
+fi
+HAVE_KPACKAGEKIT=false
+if rpm -q kpackagekit >/dev/null; then
+    HAVE_KPACKAGEKIT=true
+fi
+HAVE_GPACKAGEKIT=false
+if rpm -q gnome-packagekit >/dev/null; then
+    HAVE_GPACKAGEKIT=true
 fi
 
 if $HAVE_ZLM; then
@@ -58,6 +67,23 @@ else
     fi
 fi
 
+METHOD=yast
+# determine what we can use
+if [[ $HAVE_KPACKAGEKIT && $KDE_FULL_SESSION ]]
+then
+  METHOD=kpackagekit
+elif [[ $HAVE_GPACKAGEKIT && "$WINDOWMANAGER" == "/usr/bin/gnome" ]]
+then
+  METHOD=gnome-packagekit
+else
+  if [ "$STACK" == "zlm" ]; then
+    METHOD="zlm"
+  else
+    METHOD="yast"
+  fi
+fi
+
+
 xsu() {
     # a copy of xdg-su.
     package-manager-su -c "$(mkCmd "$@")"
@@ -66,27 +92,49 @@ xsu() {
 # do_* fall back to yast for STACK=ugh
 
 do_update() {
-    if [ $STACK = zlm ]; then
-	zen-updater --no-tray "$@"
-    else
-	xsu /sbin/yast2 --update "$@"
-    fi
+    case "${METHOD}" in
+    yast)
+      xsu /sbin/yast2 --update "$@"
+    ;;
+    zlm)
+      zen-updater --no-tray "$@"
+    ;;
+    kpackagekit)
+      kpackagekit --updates "$@"
+    ;;
+    gnome-packagekit)
+      /usr/bin/gpk-update-viewer2 "$@"
+    ;;
+    esac
 }
 
 do_remove() {
-    if [ $STACK = zlm ]; then
-	zen-remover "$@"
-    else
-	xsu /sbin/yast2 --remove "$@"
-    fi
+  # not all support remove
+  case "${METHOD}" in
+    yast|kpackagekit|gnome-packagekit)
+      xsu /sbin/yast2 --remove "$@"
+    ;;
+    zlm)
+      zen-remover "$@"
+    ;;
+    esac
 }
 
 do_install() {
-    if [ $STACK = zlm ]; then
-	zen-installer "$@"
-    else
-	xsu /sbin/yast2 --install "$@"
-    fi
+    case "${METHOD}" in
+    yast)
+      xsu /sbin/yast2 --install "$@"  
+    ;;
+    zlm)
+      zen-installer "$@"
+    ;;
+    kpackagekit)
+      kpackagekit "$@"
+    ;;
+    gnome-packagekit)
+      /usr/bin/gpk-install-local-file "$@"
+    ;;
+    esac
 }
 
 if [ "x$1" = "x--update" -a $# = 2 ]; then
