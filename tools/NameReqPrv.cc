@@ -176,7 +176,15 @@ int main( int argc, char * argv[] )
 
     for_( it, q.begin(), q.end() )
     {
-      message << "  " << dump(it) << endl;
+      message << "  " << *it << "(" << it->vendor() << ")";
+      if ( ! it.matchesEmpty() )
+      {
+        for_( match, it.matchesBegin(), it.matchesEnd() )
+        {
+          message << endl << "    " << match->inSolvAttr() << "\t" << match->asString();
+        }
+      }
+      message << endl;
     }
 
     message << "}" << endl;
