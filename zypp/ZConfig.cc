@@ -13,6 +13,7 @@ extern "C"
 {
 #include <sys/utsname.h>
 #include <unistd.h>
+#include <satsolver/satversion.h>
 }
 #include <iostream>
 #include <fstream>
@@ -723,6 +724,7 @@ namespace zypp
   std::ostream & ZConfig::about( std::ostream & str ) const
   {
     str << "libzypp: " << VERSION << " built " << __DATE__ << " " <<  __TIME__ << endl;
+    str << "satsolver: " << SATSOLVER_VERSION_STRING << endl;
     str << "zypp.conf: '" << _pimpl->_parsedZyppConf << "'" << endl;
     str << "TextLocale: '" << textLocale() << "' (" << defaultTextLocale() << ")" << endl;
     str << "SystemArchitecture: '" << systemArchitecture() << "' (" << defaultSystemArchitecture() << ")" << endl;
