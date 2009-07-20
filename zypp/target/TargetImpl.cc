@@ -302,13 +302,15 @@ namespace zypp
 
         Package::constPtr p = asKind<Package>(pi.resolvable());
 
-
         // Build a repository list for repos
         // contributing to the pool
         std::list<Repository> repos( _pool.knownRepositoriesBegin(), _pool.knownRepositoriesEnd() );
         repo::DeltaCandidates deltas(repos, p->name());
         repo::PackageProvider pkgProvider( _access, p, deltas, packageProviderPolicy );
-        return pkgProvider.providePackage();
+
+        ManagedFile ret( pkgProvider.providePackage() );
+        INT << ret << " (" << ret.getDispose() << ")" << endl;
+        return ret;
       }
     };
     ///////////////////////////////////////////////////////////////////
@@ -860,6 +862,7 @@ namespace zypp
       ///////////////////////////////////////////////////////////////////
 
       DBG << "commit log file is set to: " << HistoryLog::fname() << endl;
+      if ( ! policy_r.dryRun() || policy_r.downloadMode() == DownloadOnly )
       {
         // somewhat uggly constraint: The iterator passed to the CommitPackageCache
         // must match begin and end of the install PoolItemList passed to commit.
@@ -876,8 +879,58 @@ namespace zypp
         CommitPackageCache packageCache( items.begin(), items.end(),
                                          root() / "tmp", repoProvidePackage );
 
-        commit ( to_uninstall, policy_r, packageCache );
+        bool miss = false;
+        if ( policy_r.downloadMode() != DownloadAsNeeded )
         {
+          // Preload the cache. Until now this means pre-loading all packages.
+          // Once DownloadInHeaps is fully implemented, this will change and
+          // we may actually have more than one heap.
+          for_( it, items.begin(), items.end() )
+          {
+            if ( (*it)->isKind<Package>() )
+            {
+              ManagedFile localfile;
+              try
+              {
+                localfile = packageCache.get( it );
+                localfile.resetDispose(); // keep the package file in the cache
+              }
+              catch ( const AbortRequestException & exp )
+              {
+                miss = true;
+                WAR << "commit cache preload aborted by the user" << endl;
+                ZYPP_THROW( TargetAbortedException( N_("Installation has been aborted as directed.") ) );
+                break;
+              }
+              catch ( const SkipRequestException & exp )
+              {
+                ZYPP_CAUGHT( exp );
+                miss = true;
+                WAR << "Skipping cache preload package " << (*it)->asKind<Package>() << " in commit" << endl;
+                continue;
+              }
+              catch ( const Exception & exp )
+              {
+                // bnc #395704: missing catch causes abort.
+                // TODO see if packageCache fails to handle errors correctly.
+                ZYPP_CAUGHT( exp );
+                miss = true;
+                INT << "Unexpected Error: Skipping cache preload package " << (*it)->asKind<Package>() << " in commit" << endl;
+                continue;
+              }
+            }
+          }
+        }
+
+        if ( miss )
+        {
+          ERR << "Some packages could not be provided. Aborting commit."<< endl;
+          result._remaining.insert( result._remaining.end(), to_install.begin(), to_install.end() );
+          result._srcremaining.insert( result._srcremaining.end(), to_srcinstall.begin(), to_srcinstall.end() );
+        }
+        else if ( ! policy_r.dryRun() )
+        {
+          commit ( to_uninstall, policy_r, packageCache );
           TargetImpl::PoolItemList bad = commit( items, policy_r, packageCache );
           if ( ! bad.empty() )
           {
@@ -890,10 +943,18 @@ namespace zypp
             }
           }
         }
+        else
+        {
+          DBG << "dryRun: Not installing/deleting anything." << endl;
+        }
+      }
+      else
+      {
+        DBG << "dryRun: Not downloading/installing/deleting anything." << endl;
       }
 
       ///////////////////////////////////////////////////////////////////
-      // Try to rebuild solv file while rpm database is still in cache.
+      // Try to rebuild solv file while rpm database is still in cache
       ///////////////////////////////////////////////////////////////////
       if ( ! policy_r.dryRun() )
       {
@@ -986,6 +1047,7 @@ namespace zypp
               if ( progress.aborted() )
               {
                 WAR << "commit aborted by the user" << endl;
+                localfile.resetDispose(); // keep the package file in the cache
                 abort = true;
                 break;
               }
@@ -997,6 +1059,8 @@ namespace zypp
             catch ( Exception & excpt_r )
             {
               ZYPP_CAUGHT(excpt_r);
+              localfile.resetDispose(); // keep the package file in the cache
+
               if ( policy_r.dryRun() )
               {
                 WAR << "dry run failed" << endl;
