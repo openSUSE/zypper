@@ -1,4 +1,11 @@
 -------------------------------------------------------------------
+Mon Jul 20 23:57:46 CEST 2009 - ma@km13.de
+
+- Add download policies to ZYppCommitPolicy, supporting DownloadOnly
+  and DownloadInAdvance. 
+- version 6.11.0 (11)
+
+-------------------------------------------------------------------
 Thu Jul 16 17:05:27 CEST 2009 - dmacvicar@suse.de
 
 - add support to the package-manager script to use kpackagekit
