@@ -48,6 +48,7 @@
 #include "zypp/parser/ProductFileReader.h"
 
 #include "zypp/pool/GetResolvablesToInsDel.h"
+#include "zypp/solver/detail/Helper.h"
 #include "zypp/solver/detail/Testcase.h"
 
 #include "zypp/repo/DeltaCandidates.h"
@@ -291,7 +292,9 @@ namespace zypp
 
       RepoProvidePackage( repo::RepoMediaAccess &access, ResPool pool_r )
         : _pool(pool_r), _access(access)
-      {}
+      {
+
+      }
 
       ManagedFile operator()( const PoolItem & pi )
       {
@@ -705,16 +708,11 @@ namespace zypp
     ZYppCommitResult TargetImpl::commit( ResPool pool_r, const ZYppCommitPolicy & policy_rX )
     {
       // ----------------------------------------------------------------- //
-      ZYppCommitPolicy policy_r( policy_rX );
-
       // Fake outstanding YCP fix: Honour restriction to media 1
       // at installation, but install all remaining packages if post-boot.
+      ZYppCommitPolicy policy_r( policy_rX );
       if ( policy_r.restrictToMedia() > 1 )
         policy_r.allMedia();
-
-      // DownloadOnly implies dry-run.
-      if ( policy_r.downloadMode() == DownloadOnly )
-        policy_r.dryRun( true );
       // ----------------------------------------------------------------- //
 
       MIL << "TargetImpl::commit(<pool>, " << policy_r << ")" << endl;
@@ -724,73 +722,99 @@ namespace zypp
       ///////////////////////////////////////////////////////////////////
       if ( getZYpp()->resolver()->upgradeMode() )
       {
-        if ( ! policy_r.dryRun() )
-        {
-          writeUpgradeTestcase();
-        }
-        else
-        {
-          DBG << "dryRun: Not writing upgrade testcase." << endl;
-        }
+        writeUpgradeTestcase();
       }
 
       ///////////////////////////////////////////////////////////////////
       // Store non-package data:
       ///////////////////////////////////////////////////////////////////
-      if ( ! policy_r.dryRun() )
+      filesystem::assert_dir( home() );
+      // requested locales
+      _requestedLocalesFile.setLocales( pool_r.getRequestedLocales() );
+      // weak locks
       {
-        filesystem::assert_dir( home() );
-        // requested locales
-        _requestedLocalesFile.setLocales( pool_r.getRequestedLocales() );
-        // weak locks
-        {
-          SoftLocksFile::Data newdata;
-          pool_r.getActiveSoftLocks( newdata );
-          _softLocksFile.setData( newdata );
-        }
-        // hard locks
-        if ( ZConfig::instance().apply_locks_file() )
-        {
-          HardLocksFile::Data newdata;
-          pool_r.getHardLockQueries( newdata );
-          _hardLocksFile.setData( newdata );
-        }
+        SoftLocksFile::Data newdata;
+        pool_r.getActiveSoftLocks( newdata );
+        _softLocksFile.setData( newdata );
       }
-      else
+      // hard locks
+      if ( ZConfig::instance().apply_locks_file() )
       {
-        DBG << "dryRun: Not stroring non-package data." << endl;
+        HardLocksFile::Data newdata;
+        pool_r.getHardLockQueries( newdata );
+        _hardLocksFile.setData( newdata );
       }
 
       ///////////////////////////////////////////////////////////////////
-      // Compute transaction:
+      // Process packages:
       ///////////////////////////////////////////////////////////////////
+
+      DBG << "commit log file is set to: " << HistoryLog::fname() << endl;
 
       ZYppCommitResult result;
+
       TargetImpl::PoolItemList to_uninstall;
       TargetImpl::PoolItemList to_install;
       TargetImpl::PoolItemList to_srcinstall;
-
       {
+
         pool::GetResolvablesToInsDel
         collect( pool_r, policy_r.restrictToMedia() ? pool::GetResolvablesToInsDel::ORDER_BY_MEDIANR
                  : pool::GetResolvablesToInsDel::ORDER_BY_SOURCE );
         MIL << "GetResolvablesToInsDel: " << endl << collect << endl;
-        to_uninstall.swap ( collect._toDelete );
-        to_install.swap   ( collect._toInstall );
+        to_uninstall.swap( collect._toDelete );
+        to_install.swap( collect._toInstall );
         to_srcinstall.swap( collect._toSrcinstall );
       }
 
       if ( policy_r.restrictToMedia() )
       {
         MIL << "Restrict to media number " << policy_r.restrictToMedia() << endl;
+      }
 
+      ///////////////////////////////////////////////////////////////////
+      // First collect and display all messages
+      // associated with patches to be installed.
+      ///////////////////////////////////////////////////////////////////
+      for_( it, to_install.begin(), to_install.end() )
+      {
+        if ( ! isKind<Patch>(it->resolvable()) )
+          continue;
+        if ( ! it->status().isToBeInstalled() )
+          continue;
+
+        Patch::constPtr patch( asKind<Patch>(it->resolvable()) );
+        if ( ! patch->message().empty() )
+        {
+          MIL << "Show message for " << patch << endl;
+          callback::SendReport<target::PatchMessageReport> report;
+          if ( ! report->show( patch ) )
+          {
+            WAR << "commit aborted by the user" << endl;
+            ZYPP_THROW( TargetAbortedException( N_("Installation has been aborted as directed.") ) );
+          }
+        }
+      }
+
+      ///////////////////////////////////////////////////////////////////
+      // Remove/install packages.
+      ///////////////////////////////////////////////////////////////////
+     commit ( to_uninstall, policy_r, pool_r );
+
+      if (policy_r.restrictToMedia() == 0)
+      {			// commit all
+        result._remaining = commit( to_install, policy_r, pool_r );
+        result._srcremaining = commit( to_srcinstall, policy_r, pool_r );
+      }
+      else
+      {
         TargetImpl::PoolItemList current_install;
         TargetImpl::PoolItemList current_srcinstall;
 
         // Collect until the 1st package from an unwanted media occurs.
         // Further collection could violate install order.
         bool hitUnwantedMedia = false;
-        for ( TargetImpl::PoolItemList::iterator it = to_install.begin(); it != to_install.end(); ++it )
+        for (TargetImpl::PoolItemList::iterator it = to_install.begin(); it != to_install.end(); ++it)
         {
           ResObject::constPtr res( it->resolvable() );
 
@@ -806,12 +830,16 @@ namespace zypp
           }
         }
 
+        TargetImpl::PoolItemList bad = commit( current_install, policy_r, pool_r );
+        result._remaining.insert(result._remaining.end(), bad.begin(), bad.end());
+
         for (TargetImpl::PoolItemList::iterator it = to_srcinstall.begin(); it != to_srcinstall.end(); ++it)
         {
           Resolvable::constPtr res( it->resolvable() );
           Package::constPtr pkg( asKind<Package>(res) );
-          if ( pkg && policy_r.restrictToMedia() != pkg->mediaNr() ) // check medianr for packages only
+          if (pkg && policy_r.restrictToMedia() != pkg->mediaNr()) // check medianr for packages only
           {
+            XXX << "Package " << *pkg << ", wrong media " << pkg->mediaNr() << endl;
             result._srcremaining.push_back( *it );
           }
           else
@@ -819,86 +847,14 @@ namespace zypp
             current_srcinstall.push_back( *it );
           }
         }
-
-        to_install.swap   ( current_install );
-        to_srcinstall.swap( current_srcinstall );
-      }
-
-      ///////////////////////////////////////////////////////////////////
-      // First collect and display all messages
-      // associated with patches to be installed.
-      ///////////////////////////////////////////////////////////////////
-      if ( ! policy_r.dryRun() )
-      {
-        for_( it, to_install.begin(), to_install.end() )
-        {
-          if ( ! isKind<Patch>(it->resolvable()) )
-            continue;
-          if ( ! it->status().isToBeInstalled() )
-            continue;
-
-          Patch::constPtr patch( asKind<Patch>(it->resolvable()) );
-          if ( ! patch->message().empty() )
-          {
-            MIL << "Show message for " << patch << endl;
-            callback::SendReport<target::PatchMessageReport> report;
-            if ( ! report->show( patch ) )
-            {
-              WAR << "commit aborted by the user" << endl;
-              ZYPP_THROW( TargetAbortedException( N_("Installation has been aborted as directed.") ) );
-            }
-          }
-        }
-      }
-      else
-      {
-        DBG << "dryRun: Not checking patch messages." << endl;
-      }
-
-      ///////////////////////////////////////////////////////////////////
-      // Remove/install packages.
-      ///////////////////////////////////////////////////////////////////
-
-      DBG << "commit log file is set to: " << HistoryLog::fname() << endl;
-      {
-        // somewhat uggly constraint: The iterator passed to the CommitPackageCache
-        // must match begin and end of the install PoolItemList passed to commit.
-        // For the download policies it's the easiest, if we have just a single
-        // toInstall list. So we unify to_install and to_srcinstall. In case
-        // of errors we have to split it up again. This will be cleaned up when
-        // we introduce the new install order.
-        TargetImpl::PoolItemList items( to_install );
-        items.insert( items.end(), to_srcinstall.begin(), to_srcinstall.end() );
-
-        // prepare the package cache according to the download options:
-        repo::RepoMediaAccess access;
-        RepoProvidePackage repoProvidePackage( access, pool_r );
-        CommitPackageCache packageCache( items.begin(), items.end(),
-                                         root() / "tmp", repoProvidePackage );
-
-        commit ( to_uninstall, policy_r, packageCache );
-        {
-          TargetImpl::PoolItemList bad = commit( items, policy_r, packageCache );
-          if ( ! bad.empty() )
-          {
-            for_( it, bad.begin(), bad.end() )
-            {
-              if ( isKind<SrcPackage>(it->resolvable()) )
-                result._srcremaining.push_back( *it );
-              else
-                result._remaining.push_back( *it );
-            }
-          }
-        }
+        bad = commit( current_srcinstall, policy_r, pool_r );
+        result._srcremaining.insert(result._srcremaining.end(), bad.begin(), bad.end());
       }
 
       ///////////////////////////////////////////////////////////////////
       // Try to rebuild solv file while rpm database is still in cache.
       ///////////////////////////////////////////////////////////////////
-      if ( ! policy_r.dryRun() )
-      {
-        buildCache();
-      }
+      buildCache();
 
       result._result = (to_install.size() - result._remaining.size());
       MIL << "TargetImpl::commit(<pool>, " << policy_r << ") returns: " << result << endl;
@@ -914,13 +870,19 @@ namespace zypp
     TargetImpl::PoolItemList
     TargetImpl::commit( const TargetImpl::PoolItemList & items_r,
                         const ZYppCommitPolicy & policy_r,
-                        CommitPackageCache & packageCache_r )
+                        const ResPool & pool_r )
     {
+      TargetImpl::PoolItemList remaining;
+      repo::RepoMediaAccess access;
       MIL << "TargetImpl::commit(<list>" << policy_r << ")" << items_r.size() << endl;
 
       bool abort = false;
       std::vector<sat::Solvable> successfullyInstalledPackages;
-      TargetImpl::PoolItemList remaining;
+
+      // prepare the package cache.
+      RepoProvidePackage repoProvidePackage( access, pool_r );
+      CommitPackageCache packageCache( items_r.begin(), items_r.end(),
+                                       root() / "tmp", repoProvidePackage );
 
       for ( TargetImpl::PoolItemList::const_iterator it = items_r.begin(); it != items_r.end(); it++ )
       {
@@ -932,7 +894,7 @@ namespace zypp
             ManagedFile localfile;
             try
             {
-              localfile = packageCache_r.get( it );
+              localfile = packageCache.get( it );
             }
             catch ( const AbortRequestException &e )
             {
