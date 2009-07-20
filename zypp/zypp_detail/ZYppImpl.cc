@@ -134,17 +134,18 @@ namespace zypp
 
       ZYppCommitResult res = _target->_pimpl->commit( pool(), policy_r );
 
-      if (! policy_r.dryRun() ) {
-
-          DBG << "unloading " << sat::Pool::instance().systemRepoAlias() << " repo from pool" << endl;
-
-        _target->unload();
-
+      if (! policy_r.dryRun() )
+      {
         if ( policy_r.syncPoolAfterCommit() )
           {
             // reload new status from target
             DBG << "reloading " << sat::Pool::instance().systemRepoAlias() << " repo to pool" << endl;
             _target->load();
+          }
+        else
+          {
+            DBG << "unloading " << sat::Pool::instance().systemRepoAlias() << " repo from pool" << endl;
+            _target->unload();
           }
       }
 
