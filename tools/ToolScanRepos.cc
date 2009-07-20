@@ -61,7 +61,7 @@ int main( int argc, char * argv[] )
     {
       oClearRoot = false;
     }
-    else if ( argv[0] == std::string("-r") )
+    else if ( argv[0] == std::string("-r") || argv[0] == std::string("--root"))
     {
       --argc;
       ++argv;
