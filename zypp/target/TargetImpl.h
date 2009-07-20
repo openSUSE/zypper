@@ -40,6 +40,7 @@ namespace zypp
   { /////////////////////////////////////////////////////////////////
 
     DEFINE_PTR_TYPE(TargetImpl);
+    class CommitPackageCache;
 
     ///////////////////////////////////////////////////////////////////
     //
@@ -142,10 +143,11 @@ namespace zypp
       }
 
       /** Commit ordered changes
-       *  @param pool_r only needed for #160792
+       *  @param packageCache_r Access to the package provider
        *  @return uncommitted ones (due to error)
        */
-      PoolItemList commit( const PoolItemList & items_r, const ZYppCommitPolicy & policy_r, const ResPool & pool_r );
+      PoolItemList commit( const PoolItemList & items_r, const ZYppCommitPolicy & policy_r,
+                           CommitPackageCache & packageCache_r );
 
       /** Install a source package on the Target. */
       void installSrcPackage( const SrcPackage_constPtr & srcPackage_r );

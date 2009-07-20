@@ -14,11 +14,31 @@
 
 #include <iosfwd>
 
+#include "zypp/base/PtrTypes.h"
+
 #include "zypp/target/rpm/RpmFlags.h"
 
 ///////////////////////////////////////////////////////////////////
 namespace zypp
 { /////////////////////////////////////////////////////////////////
+
+  /** Supported commit download policies. */
+  enum DownloadMode
+  {
+    DownloadOnly,	//!< Just download all packages to the local cache.
+			//!< Do not install. Implies a dry-run.
+    DownloadInAdvance,	//!< First download all packages to the local cache.
+			//!< Then start to install.
+    DownloadImHeaps,	//!< Similar to DownloadInAdvance, but try to split
+			//!< the transaction into heaps, where at the end of
+			//!< each heap a consistent system state is reached.
+    DownloadAsNeeded	//!< Alternating download and install. Packages are
+			//!< cached just to avid CD/DVD hopping. This is the
+			//!< traditional behaviour.
+  };
+
+  /** \relates DownloadMode Stream output. */
+  std::ostream & operator<<( std::ostream & str, DownloadMode obj );
 
   ///////////////////////////////////////////////////////////////////
   //
@@ -27,67 +47,70 @@ namespace zypp
   /** */
   class ZYppCommitPolicy
   {
-  public:
-    ZYppCommitPolicy();
+    public:
 
-  public:
-    unsigned restrictToMedia() const
-    { return _restrictToMedia; }
+      ZYppCommitPolicy();
 
-    bool dryRun() const
-    { return _dryRun; }
+    public:
+      /** Restrict commit to media 1.
+       * Fake outstanding YCP fix: Honour restriction to media 1
+       * at installation, but install all remaining packages if
+       * post-boot (called with <tt>mediaNr_r &gt; 1</tt>).
+       */
+      ZYppCommitPolicy & restrictToMedia( unsigned mediaNr_r );
 
-    target::rpm::RpmInstFlags rpmInstFlags() const
-    { return _rpmInstFlags; }
+      /** Process all media (default) */
+      ZYppCommitPolicy & allMedia()
+      { return restrictToMedia( 0 ); }
 
-    bool rpmNoSignature() const
-    { return _rpmInstFlags.testFlag( target::rpm::RPMINST_NOSIGNATURE ); }
-
-    bool rpmExcludeDocs() const
-    { return _rpmInstFlags.testFlag( target::rpm::RPMINST_EXCLUDEDOCS ); }
+      unsigned restrictToMedia() const;
 
 
-    bool syncPoolAfterCommit() const
-    { return _syncPoolAfterCommit; }
+      /** Set dry run (default: false).
+       * Dry-run should not change anything on the system, unless
+       * the \ref downloadMode is set to \ref DownloadOnly. In that
+       * case packages are downloaded to the local cache.
+      */
+      ZYppCommitPolicy & dryRun( bool yesNo_r );
 
-  public:
-    /** Restrict commit to media 1.
-     * Fake outstanding YCP fix: Honour restriction to media 1
-     * at installation, but install all remaining packages if
-     * post-boot (called with <tt>mediaNr_r &gt; 1</tt>).
-     */
-    ZYppCommitPolicy & restrictToMedia( unsigned mediaNr_r )
-    { _restrictToMedia = ( mediaNr_r == 1 ) ? 1 : 0; return *this; }
+      bool dryRun() const;
 
-    /** Process all media (default) */
-    ZYppCommitPolicy & allMedia()
-    { return restrictToMedia( 0 ); }
 
-    /** Set dry run (default: false) */
-    ZYppCommitPolicy & dryRun( bool yesNo_r )
-    { _dryRun = yesNo_r; return *this; }
+      /** Commit download policy to use. (default: \ref DownloadAsNeeded)
+       *  \note \ref DownloadOnly also implies a \ref dryRun.
+       */
+      ZYppCommitPolicy & downloadMode( DownloadMode val_r );
 
-    /** The default \ref target::rpm::RpmInstFlags. (default: none)*/
-    ZYppCommitPolicy &  rpmInstFlags( target::rpm::RpmInstFlags newFlags_r )
-    { _rpmInstFlags = newFlags_r; return *this; }
+      DownloadMode downloadMode() const;
 
-    /** Use rpm option --nosignature (default: false) */
-    ZYppCommitPolicy & rpmNoSignature( bool yesNo_r )
-    { _rpmInstFlags.setFlag( target::rpm::RPMINST_NOSIGNATURE, yesNo_r ); return *this; }
 
-    /** Use rpm option --excludedocs (default: false) */
-    ZYppCommitPolicy & rpmExcludeDocs( bool yesNo_r )
-    { _rpmInstFlags.setFlag( target::rpm::RPMINST_EXCLUDEDOCS, yesNo_r ); return *this; }
+      /** The default \ref target::rpm::RpmInstFlags. (default: none)*/
+      ZYppCommitPolicy &  rpmInstFlags( target::rpm::RpmInstFlags newFlags_r );
 
-    /** Kepp pool in sync with the Target databases after commit (default: true) */
-    ZYppCommitPolicy & syncPoolAfterCommit( bool yesNo_r )
-    { _syncPoolAfterCommit = yesNo_r; return *this; }
+      /** Use rpm option --nosignature (default: false) */
+      ZYppCommitPolicy & rpmNoSignature( bool yesNo_r );
 
-  private:
-    unsigned                  _restrictToMedia;
-    bool                      _dryRun;
-    target::rpm::RpmInstFlags _rpmInstFlags;
-    bool                      _syncPoolAfterCommit;
+      /** Use rpm option --excludedocs (default: false) */
+      ZYppCommitPolicy & rpmExcludeDocs( bool yesNo_r );
+
+      target::rpm::RpmInstFlags rpmInstFlags() const;
+
+      bool rpmNoSignature() const;
+
+      bool rpmExcludeDocs() const;
+
+
+      /** Kepp pool in sync with the Target databases after commit (default: true) */
+      ZYppCommitPolicy & syncPoolAfterCommit( bool yesNo_r );
+
+      bool syncPoolAfterCommit() const;
+
+    public:
+      /** Implementation  */
+      class Impl;
+    private:
+      /** Pointer to data. */
+      RWCOW_pointer<Impl> _pimpl;
   };
   ///////////////////////////////////////////////////////////////////
 
