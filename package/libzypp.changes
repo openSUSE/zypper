@@ -2,7 +2,7 @@
 Mon Jul 20 23:57:46 CEST 2009 - ma@km13.de
 
 - Add download policies to ZYppCommitPolicy, supporting DownloadOnly
-  and DownloadInAdvance. 
+  and DownloadInAdvance. (fate #302159, fate #305624)
 - version 6.11.0 (11)
 
 -------------------------------------------------------------------
