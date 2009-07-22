@@ -1,4 +1,10 @@
 -------------------------------------------------------------------
+Thu Jul 23 00:22:50 CEST 2009 - ma@km13.de
+
+- New misc::defaultLoadSystem: Convenience to create the ZYpp instance 
+  and load target and enabled repositories.
+
+-------------------------------------------------------------------
 Wed Jul 22 14:57:32 CEST 2009 - ma@suse.de
 
 - New class InstanceId to build strings to identify/retrieve specific 

@@ -32,6 +32,7 @@ SET( zypp_SRCS
   Locks.cc
   MediaProducts.cc
   MediaSetAccess.cc
+  Misc.cc
   NameKindProxy.cc
   OnMediaLocation.cc
   Package.cc
@@ -119,6 +120,7 @@ SET( zypp_HEADERS
   ManagedFile.h
   MediaProducts.h
   MediaSetAccess.h
+  Misc.h
   NameKindProxy.h
   Vendor.h
   OnMediaLocation.h
