@@ -52,6 +52,9 @@ namespace zypp
     */
     ZYpp::Ptr getZYpp() const;
 
+    /** Whether the ZYpp instance is already created.*/
+    bool haveZYpp() const;
+
   private:
     /** Default ctor. */
     ZYppFactory();

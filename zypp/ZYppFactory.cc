@@ -151,7 +151,8 @@ namespace zypp
     bool lockFileExists()
     {
       Pathname lock_file = Pathname(ZYPP_LOCK_FILE);
-    // check if the file already existed.
+      // check if the file already existed.
+      INT << PathInfo(lock_file) << endl;
       bool exists = PathInfo(lock_file).isExist();
       return exists;
     }
@@ -293,7 +294,11 @@ namespace zypp
 
   };
 
-  static ZYppGlobalLock globalLock;
+  namespace
+  {
+    ZYppGlobalLock globalLock;
+    bool           _haveZYpp = false;
+  }
 
   ///////////////////////////////////////////////////////////////////
   //
@@ -350,13 +355,12 @@ namespace zypp
     {
       /*--------------------------------------------------*/
       if ( zypp_readonly_hack::active )
-        {
+      {
           _instance = new ZYpp( ZYpp::Impl_Ptr(new ZYpp::Impl) );
           MIL << "ZYPP_READONLY active." << endl;
-          return _instance;
-        }
+      }
       /*--------------------------------------------------*/
-      if ( globalLock.zyppLocked() )
+      else if ( globalLock.zyppLocked() )
       {
 	std::string t = str::form(_("System management is locked by the application with pid %d (%s).\n"
                                      "Close this application before trying again."),
@@ -370,10 +374,18 @@ namespace zypp
         _instance = new ZYpp( ZYpp::Impl_Ptr(new ZYpp::Impl) );
         globalLock._clean_lock = true;
       }
+
+      if ( _instance )
+        _haveZYpp = true;
     }
 
     return _instance;
   }
+
+  ///////////////////////////////////////////////////////////////////
+  //
+  bool ZYppFactory::haveZYpp() const
+  { return _haveZYpp; }
 
   /******************************************************************
   **
