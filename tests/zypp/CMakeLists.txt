@@ -15,6 +15,7 @@ ADD_TESTS(
   Edition
   Fetcher
   FileChecker
+  InstanceId
   KeyRing
   Locks
   MediaSetAccess

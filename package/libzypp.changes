@@ -1,4 +1,11 @@
 -------------------------------------------------------------------
+Wed Jul 22 14:57:32 CEST 2009 - ma@suse.de
+
+- New class InstanceId to build strings to identify/retrieve specific 
+  Solvables.
+- version 6.11.1 (11)
+
+-------------------------------------------------------------------
 Mon Jul 20 23:57:46 CEST 2009 - ma@km13.de
 
 - Add download policies to ZYppCommitPolicy, supporting DownloadOnly
