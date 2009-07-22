@@ -86,7 +86,7 @@ namespace zypp {
         }
         start_program (argvp, environment, stderr_disp, stderr_fd, default_locale, rootdir);
     }
-    
+
 
     ExternalProgram::ExternalProgram (const Arguments &argv,
                                       const Environment & environment,
@@ -113,7 +113,7 @@ namespace zypp {
         start_program (argvp, environment, stderr_disp, stderr_fd, default_locale, rootdir);
 
     }
-    
+
 
 
 
@@ -367,10 +367,14 @@ namespace zypp {
     {
       if (pid > 0)
       {
-    	ExternalDataSource::close();
+        setBlocking( true );
+        while ( receiveLine().length() )
+          ; // discard any output instead of closing the pipe
+    	//ExternalDataSource::close();
+
     	// Wait for child to exit
     	int ret;
-          int status = 0;
+        int status = 0;
     	do
     	{
     	    ret = waitpid(pid, &status, 0);
