@@ -483,4 +483,13 @@ namespace zypp {
       }
     }
 
+    std::ostream & ExternalProgram::operator>>( std::ostream & out_r )
+    {
+      setBlocking( true );
+      for ( std::string line = receiveLine(); line.length(); line = receiveLine() )
+        out_r << line;
+      return out_r;
+    }
+
+
 } // namespace zypp

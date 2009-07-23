@@ -168,6 +168,28 @@ namespace zypp {
        */
       static void renumber_fd (int origfd, int newfd);
 
+    public:
+
+      /**
+       * Redirect all command output to an \c ostream.
+       * Returns when the command has completed.
+       * \code
+       *   std::ostringstream s;
+       *   ExternalProgram("pwd") >> s;
+       *   SEC << s.str() << endl;
+       * \endcode
+       * \code
+       *   std::ostringstream s;
+       *   ExternalProgram prog("ls -l wrzl");
+       *   prog >> s;
+       *   if ( prog.close() == 0 )
+       *     MIL << s.str() << endl;
+       *   else
+       *     ERR << prog.execError() << endl;
+       * \endcode
+       */
+      std::ostream & operator>>( std::ostream & out_r );
+
     protected:
       int checkStatus( int );
 
