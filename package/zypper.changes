@@ -1,4 +1,9 @@
 -------------------------------------------------------------------
+Mon Jul 27 16:51:39 CEST 2009 - jkupec@suse.cz
+
+- Fixed installing rpms with epoch (bnc #404048)
+
+-------------------------------------------------------------------
 Mon Jul 27 14:33:09 CEST 2009 - jkupec@suse.cz
 
 - --download-only option added for in, up, patch, dup, and ve
