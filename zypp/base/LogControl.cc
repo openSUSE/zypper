@@ -328,12 +328,16 @@ namespace zypp
          * destructed. At least destucted after all statics
          * which log from their dtor.
         */
-        static LogControlImpl instance;
+        static LogControlImpl & instance();
       };
       ///////////////////////////////////////////////////////////////////
 
       // 'THE' LogControlImpl singleton
-      LogControlImpl LogControlImpl::instance;
+      inline LogControlImpl & LogControlImpl::instance()
+      {
+        static LogControlImpl _instance;
+        return _instance;
+      }
 
       ///////////////////////////////////////////////////////////////////
 
@@ -355,7 +359,7 @@ namespace zypp
                                 const char * func_r,
                                 const int    line_r )
       {
-        return LogControlImpl::instance.getStream( group_r,
+        return LogControlImpl::instance().getStream( group_r,
                                                    level_r,
                                                    file_r,
                                                    func_r,
@@ -367,13 +371,13 @@ namespace zypp
                              const char * file_r, const char * func_r, int line_r,
                              const std::string & buffer_r )
       {
-        LogControlImpl::instance.putStream( group_r, level_r,
+        LogControlImpl::instance().putStream( group_r, level_r,
                                             file_r, func_r, line_r,
                                             buffer_r );
       }
 
       bool isExcessive()
-      { return LogControlImpl::instance.isExcessive(); }
+      { return LogControlImpl::instance().isExcessive(); }
 
       /////////////////////////////////////////////////////////////////
     } // namespace logger
@@ -389,25 +393,25 @@ namespace zypp
     using logger::LogControlImpl;
 
     void LogControl::logfile( const Pathname & logfile_r )
-    { LogControlImpl::instance.logfile( logfile_r ); }
+    { LogControlImpl::instance().logfile( logfile_r ); }
 
     void LogControl::logfile( const Pathname & logfile_r, mode_t mode_r )
-    { LogControlImpl::instance.logfile( logfile_r, mode_r ); }
+    { LogControlImpl::instance().logfile( logfile_r, mode_r ); }
 
     shared_ptr<LogControl::LineWriter> LogControl::getLineWriter() const
-    { return LogControlImpl::instance.getLineWriter(); }
+    { return LogControlImpl::instance().getLineWriter(); }
 
     void LogControl::setLineWriter( const shared_ptr<LineWriter> & writer_r )
-    { LogControlImpl::instance.setLineWriter( writer_r ); }
+    { LogControlImpl::instance().setLineWriter( writer_r ); }
 
     void LogControl::setLineFormater( const shared_ptr<LineFormater> & formater_r )
-    { LogControlImpl::instance.setLineFormater( formater_r ); }
+    { LogControlImpl::instance().setLineFormater( formater_r ); }
 
     void LogControl::logNothing()
-    { LogControlImpl::instance.setLineWriter( shared_ptr<LineWriter>() ); }
+    { LogControlImpl::instance().setLineWriter( shared_ptr<LineWriter>() ); }
 
     void LogControl::logToStdErr()
-    { LogControlImpl::instance.setLineWriter( shared_ptr<LineWriter>( new log::StderrLineWriter ) ); }
+    { LogControlImpl::instance().setLineWriter( shared_ptr<LineWriter>( new log::StderrLineWriter ) ); }
 
     ///////////////////////////////////////////////////////////////////
     //
@@ -415,9 +419,9 @@ namespace zypp
     //
     ///////////////////////////////////////////////////////////////////
     LogControl::TmpExcessive::TmpExcessive()
-    { LogControlImpl::instance.excessive( true ); }
+    { LogControlImpl::instance().excessive( true ); }
     LogControl::TmpExcessive::~TmpExcessive()
-    { LogControlImpl::instance.excessive( false );  }
+    { LogControlImpl::instance().excessive( false );  }
 
     /******************************************************************
      **
@@ -426,7 +430,7 @@ namespace zypp
     */
     std::ostream & operator<<( std::ostream & str, const LogControl & obj )
     {
-      return str << LogControlImpl::instance;
+      return str << LogControlImpl::instance();
     }
 
     /////////////////////////////////////////////////////////////////
