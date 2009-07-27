@@ -1,4 +1,10 @@
 -------------------------------------------------------------------
+Mon Jul 27 16:05:43 CEST 2009 - ma@suse.de
+
+- Create LogControl on demand instead of using a static var. (bnc #525339)
+- version 6.11.2 (11)
+
+-------------------------------------------------------------------
 Thu Jul 23 00:22:50 CEST 2009 - ma@km13.de
 
 - New misc::defaultLoadSystem: Convenience to create the ZYpp instance 
