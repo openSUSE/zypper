@@ -724,7 +724,12 @@ namespace zypp
   std::ostream & ZConfig::about( std::ostream & str ) const
   {
     str << "libzypp: " << VERSION << " built " << __DATE__ << " " <<  __TIME__ << endl;
-    str << "satsolver: " << SATSOLVER_VERSION_STRING << endl;
+
+    str << "satsolver: " << sat_version;
+    if ( ::strcmp( sat_version, SATSOLVER_VERSION_STRING ) )
+      str << " (built against " << SATSOLVER_VERSION_STRING << ")";
+    str << endl;
+
     str << "zypp.conf: '" << _pimpl->_parsedZyppConf << "'" << endl;
     str << "TextLocale: '" << textLocale() << "' (" << defaultTextLocale() << ")" << endl;
     str << "SystemArchitecture: '" << systemArchitecture() << "' (" << defaultSystemArchitecture() << ")" << endl;
