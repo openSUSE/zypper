@@ -900,6 +900,7 @@ void Zypper::processCommandOptions()
       {"dry-run",                   no_argument,       0, 'N'},
       {"no-recommends",             no_argument,       0,  0 },
       {"recommends",                no_argument,       0,  0 },
+      {"download-only",             no_argument,       0, 'd'},
       // rug compatibility - will mark all packages for installation (like 'in *')
       {"entire-catalog",            required_argument, 0,  0 },
       {"help",                      no_argument,       0, 'h'},
@@ -937,6 +938,7 @@ void Zypper::processCommandOptions()
       "-R, --force-resolution      Force the solver to find a solution (even\n"
       "                            an agressive).\n"
       "-D, --dry-run               Test the installation, do not actually install.\n"
+      "-d, --download-only         Only download the packages, do not install.\n"
     ), "package, patch, pattern, product", "package");
     break;
   }
@@ -1017,6 +1019,7 @@ void Zypper::processCommandOptions()
       {"dry-run", no_argument, 0, 'D'},
       // rug uses -N shorthand
       {"dry-run", no_argument, 0, 'N'},
+      {"download-only", no_argument, 0, 'd'},
       {"repo", required_argument, 0, 'r'},
       {"no-recommends", no_argument, 0, 0},
       {"help", no_argument, 0, 'h'},
@@ -1037,6 +1040,7 @@ void Zypper::processCommandOptions()
       "                            to the required.\n"
       "-D, --dry-run               Test the repair, do not actually do anything to\n"
       "                            the system.\n"
+      "-d, --download-only         Only download needed packages, do not install.\n"
     );
     break;
   }
@@ -1045,6 +1049,7 @@ void Zypper::processCommandOptions()
   {
     static struct option options[] = {
       {"dry-run", no_argument, 0, 'D'},
+      {"download-only", no_argument, 0, 'd'},
       {"repo", required_argument, 0, 'r'},
       {"debug-solver", no_argument, 0, 0},
       {"help", no_argument, 0, 'h'},
@@ -1061,6 +1066,7 @@ void Zypper::processCommandOptions()
       "  Command options:\n"
       "-r, --repo <alias|#|URI> Use only specified repositories to install packages.\n"
       "-D, --dry-run            Test the installation, do not actually install anything.\n"
+      "-d, --download-only      Only download the packages, do not install.\n"
       "    --debug-solver       Create solver test case for debugging.\n"
     );
     break;
@@ -1515,9 +1521,9 @@ void Zypper::processCommandOptions()
       {"dry-run",                   no_argument,       0, 'D'},
       // rug uses -N shorthand
       {"dry-run",                   no_argument,       0, 'N'},
-      // dummy for now
       {"download-only",             no_argument,       0, 'd'},
       // rug-compatibility - dummy for now
+      //! \todo category can now be implemented in 'patch' using PoolQuery
       {"category",                  no_argument,       0, 'g'},
       {"help", no_argument, 0, 'h'},
       {0, 0, 0, 0}
@@ -1552,6 +1558,7 @@ void Zypper::processCommandOptions()
       "    --force-resolution      Force the solver to find a solution (even\n"
       "                            an agressive).\n"
       "-D, --dry-run               Test the update, do not actually update.\n"
+      "-d, --download-only         Only download the packages, do not install.\n"
     ), "package, patch, pattern, product", "package");
     break;
   }
@@ -1566,6 +1573,7 @@ void Zypper::processCommandOptions()
       {"no-recommends",             no_argument,       0,  0 },
       {"recommends",                no_argument,       0,  0 },
       {"dry-run",                   no_argument,       0, 'D'},
+      {"download-only",             no_argument,       0, 'd'},
       {"bz",                        required_argument, 0, 'b'},
       {"bugzilla",                  required_argument, 0, 'b'},
       {"cve",                       required_argument, 0,  0 },
@@ -1593,6 +1601,7 @@ void Zypper::processCommandOptions()
       "                            to the required.\n"
       "-r, --repo <alias|#|URI>    Load only the specified repository.\n"
       "-D, --dry-run               Test the update, do not actually update.\n"
+      "-d, --download-only         Only download the packages, do not install.\n"
     );
     break;
   }
@@ -1636,6 +1645,7 @@ void Zypper::processCommandOptions()
       {"dry-run",                   no_argument,       0, 'D'},
       // rug uses -N shorthand
       {"dry-run",                   no_argument,       0, 'N'},
+      {"download-only",             no_argument,       0, 'd'},
       {"help", no_argument, 0, 'h'},
       {0, 0, 0, 0}
     };
@@ -1657,6 +1667,7 @@ void Zypper::processCommandOptions()
       "    --recommends            Install also recommended packages in addition\n"
       "                            to the required.\n"
       "-D, --dry-run               Test the upgrade, do not actually upgrade\n"
+      "-d, --download-only         Only download the packages, do not install.\n"
     );
     break;
   }
@@ -3668,8 +3679,6 @@ void Zypper::doCommand()
       return;
     }
 
-    if (_copts.count("download-only"))
-      report_dummy_option(out(), "download-only");
     if (_copts.count("category"))
       report_dummy_option(out(), "category");
 

@@ -351,6 +351,25 @@ static void make_solver_test_case(Zypper & zypper)
   }
 }
 
+ZYppCommitPolicy get_commit_policy(Zypper & zypper)
+{
+  ZYppCommitPolicy policy;
+
+  if (zypper.cOpts().count("dry-run"))
+    policy.dryRun(true);
+
+  if (zypper.cOpts().count("download-only"))
+    policy.downloadMode(DownloadOnly);
+  //! \todo make this configurable
+  //else
+  //  policy.downloadMode(DownloadInAdvance);
+
+  policy.syncPoolAfterCommit(policy.dryRun() ? false : zypper.runningShell());
+
+  MIL << "Using commit policy: " << policy << endl;
+  return policy;
+}
+
 // ----------------------------------------------------------------------------
 // commit
 // ----------------------------------------------------------------------------
@@ -590,25 +609,12 @@ void solve_and_commit (Zypper & zypper)
 
           ostringstream s;
           s << _("committing"); MIL << "committing...";
-
-          ZYppCommitResult result;
           if (copts.count("dry-run"))
-          {
-            s << " " << _("(dry run)") << endl; MIL << "(dry run)";
-            zypper.out().info(s.str(), Out::HIGH);
+            s << " " << _("(dry run)") << endl;
+          zypper.out().info(s.str(), Out::HIGH);
 
-            result = God->commit(ZYppCommitPolicy().dryRun(true));
-          }
-          else
-          {
-            zypper.out().info(s.str(), Out::HIGH);
-
-            result = God->commit(
-              ZYppCommitPolicy().syncPoolAfterCommit(zypper.runningShell()));
-
-            commit_done = true;
-          }
-
+          ZYppCommitResult result = God->commit(get_commit_policy(zypper));
+          commit_done = true;
 
           MIL << endl << "DONE" << endl;
 
