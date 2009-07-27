@@ -61,6 +61,9 @@ string readline_getline()
 
 unsigned get_screen_width()
 {
+  if (!::isatty(STDOUT_FILENO))
+    return 80;
+
   int width = 80;
 
   const char *cols_env = getenv("COLUMNS");
