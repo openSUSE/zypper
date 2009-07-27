@@ -554,16 +554,26 @@ void install_remove(Zypper & zypper,
     string::size_type pos;
 
     // force repository specified by prefixing 'repo:' to the package name
+    //! \todo FIXME this causes problems when requesting symbols containing
+    //! ':', like perl(Foo::Bar) or package with specified epoch.
+    //! Maybe we should drop or introduce another
+    //! way to enforce repo per package.
     if (!force_by_capability &&
-        //! \todo FIXME this causes problems when requesting symbols containing
-        //! ':', like perl(Foo::Bar). Maybe we should drop or introduce another
-        //! way to enforce repo per package.
         (pos = str.rfind(':')) != string::npos &&
         !(str.find("perl(") == 0)) // bnc #433679
     {
       repo = str.substr(0, pos);
-      str = str.substr(pos + 1);
-      force_by_name = true; // until there is a solver API for this
+      if (match_repo(zypper, repo, &RepoInfo()))
+      {
+        str = str.substr(pos + 1);
+        force_by_name = true; //! \todo until there is a solver API for this
+        DBG << "will install " << str << " from repo " << repo << endl;
+      }
+      // not a repo, continue as usual
+      else
+      {
+        repo.clear();
+      }
     }
 
     // force arch with '.'
@@ -589,6 +599,7 @@ void install_remove(Zypper & zypper,
       {
         DBG << "Unknown arch (" << arch << ") in package " << str
             << ", will treat it like part of the name" << endl;
+        arch.clear();
         /*
         zypper.out().error(
             str::form(_("Unknown architecture '%s'"), arch.c_str()),

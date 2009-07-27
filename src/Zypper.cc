@@ -3138,6 +3138,7 @@ void Zypper::doCommand()
             {
               string nvrcap =
                 header->tag_name() + "=" +
+                str::numstring(header->tag_epoch()) + ":" +
                 header->tag_version() + "-" +
                 header->tag_release();
               DBG << "rpm package capability: " << nvrcap << endl;
