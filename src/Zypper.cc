@@ -1526,7 +1526,7 @@ void Zypper::processCommandOptions()
     _command_help = str::form(_(
       // TranslatorExplanation the first %s = "package, patch, pattern, product"
       //  and the second %s = "patch"
-      "update (up) [options] ...\n"
+      "update (up) [options] [packagename] ...\n"
       "\n"
       "Update all or specified installed packages with newer versions, if possible.\n"
       "\n"
