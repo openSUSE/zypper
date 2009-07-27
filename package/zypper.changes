@@ -1,4 +1,10 @@
 -------------------------------------------------------------------
+Mon Jul 27 14:33:09 CEST 2009 - jkupec@suse.cz
+
+- --download-only option added for in, up, patch, dup, and ve
+  command (fate #302159)
+
+-------------------------------------------------------------------
 Thu Jul 16 01:47:31 CEST 2009 - jkupec@suse.cz
 
 - list-updates: show also current installed version (bnc #466599)
