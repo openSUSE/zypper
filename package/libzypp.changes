@@ -1,4 +1,10 @@
 -------------------------------------------------------------------
+Tue Jul 28 23:05:43 CEST 2009 - jkupec@suse.cz
+
+- Fixed parsing of download rate report (changed in aria2 1.4.0)
+  (bnc #513944)
+
+-------------------------------------------------------------------
 Mon Jul 27 16:05:43 CEST 2009 - ma@suse.de
 
 - Create LogControl on demand instead of using a static var. (bnc #525339)
