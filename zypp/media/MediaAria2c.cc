@@ -75,14 +75,14 @@ MediaAria2c::existsAria2cmd()
     };
 
     ExternalProgram aria(argv, ExternalProgram::Stderr_To_Stdout);
-    
+
     for(std::string ariaResponse( aria.receiveLine());
         ariaResponse.length();
         ariaResponse = aria.receiveLine())
     {
         // nothing
     }
-    
+
     return ( aria.close() == 0 );
 }
 
@@ -112,7 +112,7 @@ void fillAriaCmdLine( const Pathname &ariapath,
     args.push_back("--uri-selector=adaptive");
 
     // only present in recent aria lets find out the aria version
-    vector<string> fields;    
+    vector<string> fields;
     // "aria2c version x.x"
     str::split( ariaver, std::back_inserter(fields));
     if ( fields.size() == 3 )
@@ -120,7 +120,7 @@ void fillAriaCmdLine( const Pathname &ariapath,
         if ( Edition(fields[2]) >= Edition("1.1.2") )
             args.push_back( "--use-head=false");
     }
-    
+
     if ( s.maxDownloadSpeed() > 0 )
         args.push_back(str::form("--max-download-limit=%ld", s.maxDownloadSpeed()));
     if ( s.minDownloadSpeed() > 0 )
@@ -130,7 +130,7 @@ void fillAriaCmdLine( const Pathname &ariapath,
 
     if ( Edition(fields[2]) < Edition("1.2.0") )
         WAR << "aria2c is older than 1.2.0, some features may be disabled" << endl;
-    
+
     // TODO make this one configurable
     args.push_back(str::form("--max-concurrent-downloads=%ld", s.maxConcurrentConnections()));
 
@@ -139,7 +139,7 @@ void fillAriaCmdLine( const Pathname &ariapath,
           it != s.headersEnd();
           ++it )
         args.push_back(str::form("--header=%s", it->c_str() ));
-        
+
     args.push_back( str::form("--connect-timeout=%ld", s.timeout()));
 
     if ( s.username().empty() )
@@ -162,7 +162,7 @@ void fillAriaCmdLine( const Pathname &ariapath,
         else if ( url.getScheme() == "http" ||
                   url.getScheme() == "https" )
             args.push_back(str::form("--http-user=%s", s.username().c_str() ));
-        
+
         if ( s.password().size() )
         {
             if ( url.getScheme() == "ftp" )
@@ -172,7 +172,7 @@ void fillAriaCmdLine( const Pathname &ariapath,
                 args.push_back(str::form("--http-passwd=%s", s.password().c_str() ));
         }
     }
-    
+
     if ( s.proxyEnabled() )
     {
         args.push_back(str::form("--http-proxy=%s", s.proxy().c_str() ));
@@ -292,7 +292,7 @@ void MediaAria2c::getFileCopy( const Pathname & filename , const Pathname & targ
   ExternalProgram::Arguments args;
 
   fillAriaCmdLine(_aria2cPath, _aria2cVersion, _settings, fileurl, target.dirname(), args);
-  
+
   do
   {
     try
@@ -302,6 +302,8 @@ void MediaAria2c::getFileCopy( const Pathname & filename , const Pathname & targ
       ExternalProgram aria(args, ExternalProgram::Stderr_To_Stdout);
 
       // progress line like: [#1 SIZE:8.3MiB/10.1MiB(82%) CN:5 SPD:6899.88KiB/s]
+      // but since 1.4.0:    [#1 SIZE:8.3MiB/10.1MiB(82%) CN:5 SPD:899.8KiBs]
+      //       (bnc #513944) [#1 SIZE:8.3MiB/10.1MiB(82%) CN:5 SPD:3.8MiBs]
       // we save it until we find a string with FILE: later
       string progressLine;
       // file line, which tell which file is the previous progress
@@ -311,7 +313,7 @@ void MediaAria2c::getFileCopy( const Pathname & filename , const Pathname & targ
 
       // here we capture aria output exceptions
       vector<string> ariaExceptions;
-      
+
       //Process response
       for(std::string ariaResponse( aria.receiveLine());
           ariaResponse.length();
@@ -319,7 +321,7 @@ void MediaAria2c::getFileCopy( const Pathname & filename , const Pathname & targ
       {
         //cout << ariaResponse;
         string line = str::trim(ariaResponse);
-          
+
         // look for the progress line and save it for later
         if ( str::hasPrefix(line, "[#") )
         {
@@ -337,7 +339,7 @@ void MediaAria2c::getFileCopy( const Pathname & filename , const Pathname & targ
           }
           // otherwise, remember the error
           string excpMsg = line.substr(10, line.size());
-          DBG << "aria2c reported: '" << excpMsg << "'" << endl;            
+          DBG << "aria2c reported: '" << excpMsg << "'" << endl;
           ariaExceptions.push_back(excpMsg);
         }
         else if ( str::hasPrefix(line, "FILE: ") )
@@ -358,17 +360,25 @@ void MediaAria2c::getFileCopy( const Pathname & filename , const Pathname & targ
               size_t left_bound = progressLine.find('(',0) + 1;
               size_t count = progressLine.find('%',left_bound) - left_bound;
               string progressStr = progressLine.substr(left_bound, count);
- 
+
               if ( count != string::npos )
                 progress = std::atoi(progressStr.c_str());
               else
                   ERR << "Can't parse progress from '" << progressStr << "'" << endl;
+
               // get the speed
               double current_speed = 0;
               left_bound = progressLine.find("SPD:",0) + 4;
-              count = progressLine.find("KiB/s",left_bound) - left_bound;
+              count = progressLine.find("KiB",left_bound);
+              bool kibs = true; // KiBs ? (MiBs if false)
+              if ( count == string::npos ) // try MiBs
+              {
+                count = progressLine.find("MiBs",left_bound);
+                kibs = false;
+              }
               if ( count != string::npos )
               { // convert the string to a double
+                count -= left_bound;
                 string speedStr = progressLine.substr(left_bound, count);
                 try {
                   current_speed = boost::lexical_cast<double>(speedStr);
@@ -378,16 +388,20 @@ void MediaAria2c::getFileCopy( const Pathname & filename , const Pathname & targ
                   current_speed = 0;
                 }
               }
-                    
+
               // we have a new average speed
               average_speed_count++;
-              
+
               // this is basically A: average
               // ((n-1)A(n-1) + Xn)/n = A(n)
-              average_speed = (((average_speed_count - 1 )*average_speed) + current_speed)/average_speed_count;
-                    
-              // note that aria report speed in kbpss, while the report takes bps
-              report->progress ( progress, fileurl, average_speed * 1024, current_speed * 1024 );
+              average_speed =
+                (((average_speed_count - 1 )*average_speed) + current_speed)
+                / average_speed_count;
+
+              // note that aria report speed in kBps or MBps, while the report takes Bps
+              report->progress ( progress, fileurl,
+                  average_speed * (kibs ? 0x400 : 0x10000),
+                  current_speed * (kibs ? 0x400 : 0x10000));
               // clear the progress line to detect mismatches between
               // [# and FILE: lines
               progressLine.clear();
@@ -401,7 +415,7 @@ void MediaAria2c::getFileCopy( const Pathname & filename , const Pathname & targ
           else
           {
             DBG << "Progress is not about '" << target << "' but '" << theFile << "'" << endl;
-          }            
+          }
         }
         else
         {
@@ -440,11 +454,11 @@ void MediaAria2c::getFileCopy( const Pathname & filename , const Pathname & targ
           MediaException e(str::form("Failed to download %s from %s", filename.c_str(), _url.asString().c_str()));
           for_(it, ariaExceptions.begin(), ariaExceptions.end())
               e.addHistory(*it);
-              
+
           ZYPP_THROW(e);
         }
       }
-      
+
       retry = false;
     }
     // retry with proper authentication data
@@ -481,7 +495,7 @@ bool MediaAria2c::doGetDoesFileExist( const Pathname & filename ) const
 {
     return MediaCurl::doGetDoesFileExist(filename);
 }
-    
+
 void MediaAria2c::getDir( const Pathname & dirname, bool recurse_r ) const
 {
     MediaCurl::getDir(dirname, recurse_r);
