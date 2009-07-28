@@ -138,14 +138,14 @@ MediaAccess::open (const Url& url, const Pathname & preferred_attach_point)
             WAR << "aria2c manually disabled. Falling back to curl" << endl;
             use_aria = false;
         }
-        
+
         // disable if it does not exist
-        if ( ! MediaAria2c::existsAria2cmd() )
+        if ( use_aria && ! MediaAria2c::existsAria2cmd() )
         {
             WAR << "aria2c not found. Falling back to curl" << endl;
             use_aria = false;
         }
-        
+
         if ( use_aria )
             _handler = new MediaAria2c (url,preferred_attach_point);
         else
