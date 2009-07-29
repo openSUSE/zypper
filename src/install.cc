@@ -563,7 +563,7 @@ void install_remove(Zypper & zypper,
         !(str.find("perl(") == 0)) // bnc #433679
     {
       repo = str.substr(0, pos);
-      if (match_repo(zypper, repo, &RepoInfo()))
+      if (match_repo(zypper, repo))
       {
         str = str.substr(pos + 1);
         force_by_name = true; //! \todo until there is a solver API for this

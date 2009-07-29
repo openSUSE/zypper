@@ -324,7 +324,8 @@ bool match_repo(Zypper & zypper, string str, RepoInfo *repo)
       }
       if (found)
       {
-        *repo = *known_it;
+        if (repo)
+          *repo = *known_it;
         break;
       }
     }

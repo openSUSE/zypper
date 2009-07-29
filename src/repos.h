@@ -74,7 +74,7 @@ void clean_repos(Zypper & zypper);
  * \param repo pointer to fill with found repository
  * \return success if respository is found
  */
-bool match_repo(Zypper & zypper, const std::string str, zypp::RepoInfo *repo);
+bool match_repo(Zypper & zypper, const std::string str, zypp::RepoInfo *repo = 0);
 
 
 /**
