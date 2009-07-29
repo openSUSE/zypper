@@ -50,6 +50,7 @@
 #define  TRANSFER_TIMEOUT       60 * 3
 #define  TRANSFER_TIMEOUT_MAX   60 * 60
 
+#define  ARIA_BINARY "aria2c"
 
 using namespace std;
 using namespace zypp::base;
@@ -60,30 +61,20 @@ namespace media
 {
 
 Pathname MediaAria2c::_cookieFile = "/var/lib/YaST2/cookies";
-Pathname MediaAria2c::_aria2cPath = "/usr/local/bin/aria2c";
 std::string MediaAria2c::_aria2cVersion = "WE DON'T KNOW ARIA2C VERSION";
 
 //check if aria2c is present in the system
 bool
 MediaAria2c::existsAria2cmd()
 {
-    const char* argv[] =
-    {
-      "which",
-      "aria2c",
-      NULL
-    };
-
-    ExternalProgram aria(argv, ExternalProgram::Stderr_To_Stdout);
-
-    for(std::string ariaResponse( aria.receiveLine());
-        ariaResponse.length();
-        ariaResponse = aria.receiveLine())
-    {
-        // nothing
-    }
-
-    return ( aria.close() == 0 );
+  static const char* argv[] =
+  {
+    ARIA_BINARY,
+    "--version",
+    NULL
+  };
+  ExternalProgram aria( argv, ExternalProgram::Stderr_To_Stdout );
+  return( aria.close() == 0 );
 }
 
 /**
@@ -91,14 +82,13 @@ MediaAria2c::existsAria2cmd()
  * The argument list gets passed as reference
  * and it is filled.
  */
-void fillAriaCmdLine( const Pathname &ariapath,
-                      const string &ariaver,
+void fillAriaCmdLine( const string &ariaver,
                       const TransferSettings &s,
                       const Url &url,
                       const Pathname &destination,
                       ExternalProgram::Arguments &args )
 {
-    args.push_back(ariapath.c_str());
+    args.push_back(ARIA_BINARY);
     args.push_back(str::form("--user-agent=%s", s.userAgentString().c_str()));
     args.push_back("--summary-interval=1");
     args.push_back("--follow-metalink=mem");
@@ -216,12 +206,8 @@ MediaAria2c::MediaAria2c( const Url &      url_r,
     : MediaCurl( url_r, attach_point_hint_r )
 {
   MIL << "MediaAria2c::MediaAria2c(" << url_r << ", " << attach_point_hint_r << ")" << endl;
-
-   //At this point, we initialize aria2c path
-   _aria2cPath = Pathname( whereisAria2c().asString() );
-
-   //Get aria2c version
-   _aria2cVersion = getAria2cVersion();
+  //Get aria2c version
+  _aria2cVersion = getAria2cVersion();
 }
 
 void MediaAria2c::attachTo (bool next)
@@ -291,7 +277,7 @@ void MediaAria2c::getFileCopy( const Pathname & filename , const Pathname & targ
 
   ExternalProgram::Arguments args;
 
-  fillAriaCmdLine(_aria2cPath, _aria2cVersion, _settings, fileurl, target.dirname(), args);
+  fillAriaCmdLine(_aria2cVersion, _settings, fileurl, target.dirname(), args);
 
   do
   {
@@ -521,51 +507,17 @@ void MediaAria2c::getDirInfo( filesystem::DirContent & retlist,
 
 std::string MediaAria2c::getAria2cVersion()
 {
-    const char* argv[] =
+    static const char* argv[] =
     {
-        _aria2cPath.c_str(),
+      ARIA_BINARY,
       "--version",
       NULL
     };
-
     ExternalProgram aria(argv, ExternalProgram::Stderr_To_Stdout);
-
-    std::string vResponse = aria.receiveLine();
+    std::string vResponse( str::trim( aria.receiveLine() ) );
     aria.close();
-    return str::trim(vResponse);
+    return vResponse;
 }
-
-#define ARIA_DEFAULT_BINARY "/usr/bin/aria2c"
-
-Pathname MediaAria2c::whereisAria2c()
-{
-    Pathname aria2cPathr(ARIA_DEFAULT_BINARY);
-
-    const char* argv[] =
-    {
-      "which",
-      "aria2c",
-      NULL
-    };
-
-    ExternalProgram aria(argv, ExternalProgram::Stderr_To_Stdout);
-
-    std::string ariaResponse( aria.receiveLine());
-    int code = aria.close();
-
-    if( code == 0 )
-    {
-        aria2cPathr = str::trim(ariaResponse);
-        MIL << "We will use aria2c located here:  " << aria2cPathr << endl;
-    }
-    else
-    {
-        MIL << "We don't know were is ari2ac binary. We will use aria2c located here:  " << aria2cPathr << endl;
-    }
-
-    return aria2cPathr;
-}
-
 } // namespace media
 } // namespace zypp
 //

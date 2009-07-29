@@ -79,7 +79,7 @@ class MediaAria2c : public MediaCurl {
 
     virtual ~MediaAria2c() { try { release(); } catch(...) {} }
 
-    //static void setCookieFile( const Pathname & );    
+    //static void setCookieFile( const Pathname & );
 
     class Callbacks
     {
@@ -90,7 +90,7 @@ class MediaAria2c : public MediaCurl {
 
   protected:
 
-    static const char *const agentString();   
+    static const char *const agentString();
 
   private:
 
@@ -100,12 +100,8 @@ class MediaAria2c : public MediaCurl {
     std::string _ca_path;
     static Pathname _cookieFile;
 
-    /** Aria2c path */
-    Pathname whereisAria2c();
-    static Pathname _aria2cPath;
-    
     /** External process to get aria2c version */
-    std::string getAria2cVersion();    
+    std::string getAria2cVersion();
     static std::string _aria2cVersion;
 };
 
