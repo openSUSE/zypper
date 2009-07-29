@@ -237,6 +237,9 @@ namespace zypp {
       // Create module process
       if ((pid = fork()) == 0)
       {
+        //////////////////////////////////////////////////////////////////////
+        // Don't write to the logfile after fork!
+        //////////////////////////////////////////////////////////////////////
     	if (use_pty)
     	{
     	    setsid();
@@ -292,14 +295,12 @@ namespace zypp {
     	    if(chroot(root) == -1)
     	    {
                 _execError = str::form( _("Can't chroot to '%s' (%s)."), root, strerror(errno) );
-                ERR << _execError << endl;
                 std::cerr << _execError << endl;// After fork log on stderr too
     		_exit (128);			// No sense in returning! I am forked away!!
     	    }
     	    if(chdir("/") == -1)
     	    {
                 _execError = str::form( _("Can't chdir to '/' inside chroot (%s)."), strerror(errno) );
-                ERR << _execError << endl;
                 std::cerr << _execError << endl;// After fork log on stderr too
     		_exit (128);			// No sense in returning! I am forked away!!
     	    }
@@ -313,9 +314,9 @@ namespace zypp {
     	execvp(argv[0], const_cast<char *const *>(argv));
         // don't want to get here
         _execError = str::form( _("Can't exec '%s' (%s)."), argv[0], strerror(errno) );
-        ERR << _execError << endl;
         std::cerr << _execError << endl;// After fork log on stderr too
         _exit (129);			// No sense in returning! I am forked away!!
+        //////////////////////////////////////////////////////////////////////
       }
 
       else if (pid == -1)	 // Fork failed, close everything.
