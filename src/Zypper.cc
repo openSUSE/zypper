@@ -939,7 +939,7 @@ void Zypper::processCommandOptions()
       "                            an agressive).\n"
       "-D, --dry-run               Test the installation, do not actually install.\n"
       "-d, --download-only         Only download the packages, do not install.\n"
-    ), "package, patch, pattern, product", "package");
+    ), "package, patch, pattern, product, srcpackage", "package");
     break;
   }
 
