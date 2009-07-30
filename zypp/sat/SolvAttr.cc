@@ -52,7 +52,7 @@ namespace sat
   const SolvAttr SolvAttr::insnotify    ( SOLVABLE_MESSAGEINS );    // translated
   const SolvAttr SolvAttr::delnotify    ( SOLVABLE_MESSAGEDEL );    // translated
   const SolvAttr SolvAttr::eula		( SOLVABLE_EULA );          // translated
-  const SolvAttr SolvAttr::cpeid        ( SOLVABLE_CPE_ID );
+  const SolvAttr SolvAttr::cpeid        ( SOLVABLE_CPEID );
   const SolvAttr SolvAttr::installtime  ( SOLVABLE_INSTALLTIME );
   const SolvAttr SolvAttr::buildtime    ( SOLVABLE_BUILDTIME );
   const SolvAttr SolvAttr::installsize  ( SOLVABLE_INSTALLSIZE );
