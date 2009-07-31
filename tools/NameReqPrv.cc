@@ -6,7 +6,7 @@
 
 static std::string appname( "NameReqPrv" );
 
-#define message cerr
+#define message cout
 using std::flush;
 
 int errexit( const std::string & msg_r = std::string(), int exit_r = 100 )
