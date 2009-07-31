@@ -1,4 +1,13 @@
 -------------------------------------------------------------------
+Fri Jul 31 17:55:33 CEST 2009 - ma@suse.de
+
+- Remove confusing newlines in vendor change info (bnc #503859)
+- Removing a package lock was not counted as state change (bnc #501850)
+- Take solver_allowVendorChange option into account when computing the
+  Selectables default candidate.
+- version 6.12.0 (11)
+
+-------------------------------------------------------------------
 Wed Jul 29 13:36:19 CEST 2009 - ma@suse.de
 
 - Avoid deadlock after fork and failed exec. (bnc 493152)
