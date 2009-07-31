@@ -209,3 +209,35 @@ BOOST_AUTO_TEST_CASE(transition)
   testTable( &ResStatus::setSoftTransact,	&evaluateSetSoftTransact );
   testTable( &ResStatus::setLock, 		&evaluateSetLock );
 }
+
+
+bool WhilePoolItemSameStateIsPrivate( ResStatus ostatus, ResStatus nstatus )
+{
+  if ( nstatus == ostatus )
+    return true;
+        // some bits changed...
+  if ( nstatus.getTransactValue() != ostatus.getTransactValue()
+       && ( ! nstatus.isBySolver() // ignore solver state changes
+                  // removing a user lock also goes to bySolver
+       || ostatus.getTransactValue() == ResStatus::LOCKED ) )
+    return false;
+  if ( nstatus.isLicenceConfirmed() != ostatus.isLicenceConfirmed() )
+    return false;
+  return true;
+}
+
+BOOST_AUTO_TEST_CASE(savestate)
+{
+  ResStatus ostatus;
+  ResStatus nstatus;
+
+  BOOST_CHECK_EQUAL( WhilePoolItemSameStateIsPrivate( ostatus, nstatus ), true );
+  nstatus.setLock( true, ResStatus::USER );
+  BOOST_CHECK_EQUAL( WhilePoolItemSameStateIsPrivate( ostatus, nstatus ), false );
+  ostatus = nstatus;
+  nstatus.setLock( false, ResStatus::USER );
+  BOOST_CHECK_EQUAL( WhilePoolItemSameStateIsPrivate( ostatus, nstatus ), false );
+}
+
+
+

@@ -106,8 +106,13 @@ namespace zypp
       { status() = _savedStatus; }
       bool sameState() const
       {
-        if (    status().getTransactValue() != _savedStatus.getTransactValue()
-                && !status().isBySolver() )
+        if ( status() == _savedStatus )
+          return true;
+        // some bits changed...
+        if ( status().getTransactValue() != _savedStatus.getTransactValue()
+             && ( ! status().isBySolver() // ignore solver state changes
+                  // removing a user lock also goes to bySolver
+                  || _savedStatus.getTransactValue() == ResStatus::LOCKED ) )
           return false;
         if ( status().isLicenceConfirmed() != _savedStatus.isLicenceConfirmed() )
           return false;
