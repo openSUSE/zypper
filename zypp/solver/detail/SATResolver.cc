@@ -1271,7 +1271,7 @@ SATResolver::problems ()
 				{
                                     IdString s_vendor( s.vendor() );
                                     IdString sd_vendor( sd.vendor() );
-				    string description = str::form (_("install %s (with vendor change)\n  %s\n-->\n  %s") ,
+				    string description = str::form (_("install %s (with vendor change)\n  %s  -->  %s") ,
 								    sd.asString().c_str(),
                                                                     ( s_vendor ? s_vendor.c_str() : " (no vendor) " ),
                                                                     ( sd_vendor ? sd_vendor.c_str() : " (no vendor) " ) );
