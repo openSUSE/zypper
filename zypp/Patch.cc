@@ -111,7 +111,7 @@ namespace zypp
   Patch::Contents Patch::contents() const
   {
     Contents result;
-    DBG << *this << endl;
+    // DBG << *this << endl;
     sat::LookupAttr updateCollection( sat::SolvAttr::updateCollection, satSolvable() );
     for_( entry, updateCollection.begin(), updateCollection.end() )
     {
@@ -138,7 +138,7 @@ namespace zypp
       }
       if ( ! relevant )
       {
-        DBG << "Not relevant: " << name << "-" << edition << "." << arch << endl;
+        // DBG << "Not relevant: " << name << "-" << edition << "." << arch << endl;
         continue;
       }
 
@@ -151,7 +151,7 @@ namespace zypp
         providers = sat::WhatProvides( Capability( arch, name.c_str(), Rel::GT, edition, ResKind::package ) );
         if ( providers.empty() )
         {
-          // Hmm, this patch is not installable, noone is providing the package in the collection
+          // Hmm, this patch is not installable, no one is providing the package in the collection
           // FIXME: raise execption ? fake a solvable ?
           WAR << "Missing provider: " << name << "-" << edition << "." << arch << endl;
           continue;
@@ -159,7 +159,7 @@ namespace zypp
       }
 
       // FIXME ?! loop over providers and try to find installed ones ?
-      DBG << "Found " << name << "-" << edition << "." << arch << ": " << *(providers.begin()) << endl;
+      // DBG << "Found " << name << "-" << edition << "." << arch << ": " << *(providers.begin()) << endl;
       result.get().insert( *(providers.begin()) );
     }
 
