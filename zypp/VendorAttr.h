@@ -63,6 +63,8 @@ class VendorAttr
      * different vendor usually must be confirmed by the user.
     */
     bool equivalent( const Vendor & lVendor, const Vendor & rVendor ) const;
+    /** \overload using IdStrings */
+    bool equivalent( IdString lVendor, IdString rVendor ) const;
 
   private:
     VendorAttr();

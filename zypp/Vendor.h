@@ -13,6 +13,7 @@
 #define ZYPP_VENDOR_H
 
 #include <string>
+#include "zypp/IdString.h"
 
 ///////////////////////////////////////////////////////////////////
 namespace zypp

@@ -17,6 +17,7 @@
 
 #include "zypp/base/PtrTypes.h"
 
+#include "zypp/ZConfig.h"
 #include "zypp/ui/Selectable.h"
 #include "zypp/ui/SelectableTraits.h"
 
@@ -68,6 +69,7 @@ namespace zypp
           else
             _availableItems.insert( *it );
         }
+        _defaultCandidate = defaultCandidate();
       }
 
     public:
@@ -106,10 +108,7 @@ namespace zypp
         PoolItem ret( transactingCandidate() );
         if ( ret )
           return ret;
-
-        if ( _candidate )
-          return _candidate;
-        return defaultCandidate();
+        return _candidate ? _candidate : _defaultCandidate;
       }
 
       /** Set a userCandidate (out of available objects).
@@ -213,18 +212,30 @@ namespace zypp
       {
         if ( !installedEmpty() )
         {
-          // prefer the installed objects arch.
+          // prefer the installed objects arch and vendor
+          bool solver_allowVendorChange( ZConfig::instance().solver_allowVendorChange() );
           for ( installed_const_iterator iit = installedBegin();
                 iit != installedEnd(); ++iit )
           {
+            PoolItem sameArch; // in case there's no same vendor at least stay with same arch
             for ( available_const_iterator it = availableBegin();
                   it != availableEnd(); ++it )
             {
               if ( (*iit)->arch() == (*it)->arch() )
               {
-                return (*it);
+                if ( ! solver_allowVendorChange )
+                {
+                  if ( VendorAttr::instance().equivalent( (*iit).satSolvable().vendor(), (*it).satSolvable().vendor() ) )
+                    return *it;
+                  else if ( ! sameArch ) // remember best same arch in case no same vendor found
+                     sameArch = *it;
+                }
+                else // same arch is sufficient
+                  return *it;
               }
             }
+            if ( sameArch )
+              return sameArch;
           }
         }
         if ( _availableItems.empty() )
@@ -250,6 +261,8 @@ namespace zypp
       const std::string      _name;
       InstalledItemSet       _installedItems;
       AvailableItemSet       _availableItems;
+      //! Best among availabe with restpect to installed.
+      PoolItem               _defaultCandidate;
       //! The object selected by setCandidateObj() method.
       PoolItem               _candidate;
     };

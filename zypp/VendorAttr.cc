@@ -226,6 +226,12 @@ namespace zypp
       return true;
   }
 
+  bool VendorAttr::equivalent( IdString lVendor, IdString rVendor ) const
+  {
+    if ( lVendor == rVendor )
+      return true;
+    return equivalent( lVendor.asString(), rVendor.asString() );
+  }
 
   bool VendorAttr::equivalent( const Vendor & lVendor, const Vendor & rVendor ) const
   {
