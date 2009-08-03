@@ -23,6 +23,12 @@
 namespace zypp {
 //////////////////////////////////////////////////////////////////
 
+  class PoolItem;
+  namespace sat
+  {
+    class Solvable;
+  }
+
 /** Definition of vendor equivalence.
  *
  * Packages with equivalment vendor strings may replace themself without
@@ -63,8 +69,12 @@ class VendorAttr
      * different vendor usually must be confirmed by the user.
     */
     bool equivalent( const Vendor & lVendor, const Vendor & rVendor ) const;
-    /** \overload using IdStrings */
+    /** \overload using \ref IdStrings */
     bool equivalent( IdString lVendor, IdString rVendor ) const;
+    /** \overload using \ref sat::Solvable */
+    bool equivalent( sat::Solvable lVendor, sat::Solvable rVendor ) const;
+    /** \overload using \ref PoolItem */
+    bool equivalent( const PoolItem & lVendor, const PoolItem & rVendor ) const;
 
   private:
     VendorAttr();

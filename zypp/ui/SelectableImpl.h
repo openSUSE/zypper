@@ -225,7 +225,7 @@ namespace zypp
               {
                 if ( ! solver_allowVendorChange )
                 {
-                  if ( VendorAttr::instance().equivalent( (*iit).satSolvable().vendor(), (*it).satSolvable().vendor() ) )
+                  if ( VendorAttr::instance().equivalent( (*iit), (*it) ) )
                     return *it;
                   else if ( ! sameArch ) // remember best same arch in case no same vendor found
                      sameArch = *it;

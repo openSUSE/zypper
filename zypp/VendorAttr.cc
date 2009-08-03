@@ -48,11 +48,69 @@ namespace zypp
   { /////////////////////////////////////////////////////////////////
 
     typedef map<Vendor,unsigned int> VendorMap;
-
     VendorMap _vendorMap;
-    VendorMap _matchMap;
     unsigned int vendorGroupCounter;
 
+    /////////////////////////////////////////////////////////////////
+  } // namespace
+  ///////////////////////////////////////////////////////////////////
+
+  ///////////////////////////////////////////////////////////////////
+  namespace
+  { /////////////////////////////////////////////////////////////////
+    typedef DefaultIntegral<int,0>				VendorMatchEntry;
+    typedef std::tr1::unordered_map<IdString, VendorMatchEntry>	VendorMatch;
+    int         _nextId = -1;
+    VendorMatch _vendorMatch;
+
+    /** Reset match cache if global VendorMap was changed. */
+    inline void vendorMatchIdReset()
+    {
+      _nextId = -1;
+      _vendorMatch.clear();
+    }
+
+    /**
+     * Helper mapping vendor string to eqivalence class ID.
+     *
+     * \li Return the vendor strings eqivalence class ID stored in _vendorMatch.
+     * \li If not found, assign and return the eqivalence class ID of the lowercased string.
+     * \li If not found, assign and return a new ID (look into the predefined VendorMap (id>0),
+     *     otherwise create a new ID (<0)).
+     */
+    inline unsigned vendorMatchId( IdString vendor )
+    {
+      VendorMatchEntry & ent( _vendorMatch[vendor] );
+      if ( ! ent )
+      {
+        IdString lcvendor( str::toLower( vendor.asString() ) );
+        VendorMatchEntry & lcent( _vendorMatch[lcvendor] );
+        if ( ! lcent )
+        {
+          unsigned myid = 0;
+          // Compare this entry with the global vendor map.
+          // Reversed to get the longes prefix.
+          for ( VendorMap::reverse_iterator it = _vendorMap.rbegin(); it != _vendorMap.rend(); ++it )
+          {
+            if ( str::hasPrefix( lcvendor.c_str(), it->first ) )
+            {
+              myid = it->second;
+              break; // found
+            }
+          }
+          if ( ! myid )
+          {
+            myid = --_nextId; // get a new class ID
+          }
+          ent = lcent = myid; // remember the new DI
+        }
+        else
+        {
+          ent = lcent; // take the ID from the lowercased vendor string
+        }
+      }
+      return ent;
+    }
     /////////////////////////////////////////////////////////////////
   } // namespace
   ///////////////////////////////////////////////////////////////////
@@ -154,6 +212,9 @@ namespace zypp
 
     if (nextId == vendorGroupCounter + 1)
       ++vendorGroupCounter;
+
+    // invalidate any match cache
+    vendorMatchIdReset();
   }
 
   bool VendorAttr::addVendorFile( const Pathname & filename ) const
@@ -226,56 +287,28 @@ namespace zypp
       return true;
   }
 
+  //////////////////////////////////////////////////////////////////
+  // vendor equivalence:
+  //////////////////////////////////////////////////////////////////
+
   bool VendorAttr::equivalent( IdString lVendor, IdString rVendor ) const
   {
     if ( lVendor == rVendor )
       return true;
-    return equivalent( lVendor.asString(), rVendor.asString() );
+    return vendorMatchId( lVendor ) == vendorMatchId( rVendor );
   }
 
   bool VendorAttr::equivalent( const Vendor & lVendor, const Vendor & rVendor ) const
-  {
-      unsigned int lhsID = 0;
-      unsigned int rhsID = 0;
-      Vendor lhs = str::toLower (lVendor);
-      Vendor rhs = str::toLower (rVendor);
-
-      if ( lhs == rhs )
-	  return true;
-
-      // NOTE: iterate reverse to get find longest prefix first!
-
-      if (_matchMap.find(lhs) != _matchMap.end()) {
-	  lhsID = _matchMap[lhs];
-      } else {
-	  // compare this entry with the vendor map
-	  for (VendorMap::reverse_iterator it = _vendorMap.rbegin();
-	       it != _vendorMap.rend();
-	       ++it) {
-	      if (lhs.substr (0, it->first.size())  == it->first) {
-		  lhsID = it->second;
-		  _matchMap[lhs] = lhsID;
-		  break; // exit for
-	      }
-	  }
-      }
-
-      if (_matchMap.find(rhs) != _matchMap.end()) {
-	  rhsID = _matchMap[rhs];
-      } else {
-	  // compare this entry with the vendor map
-	  for (VendorMap::reverse_iterator it = _vendorMap.rbegin();
-	       it != _vendorMap.rend();
-	       ++it) {
-	      if (rhs.substr (0, it->first.size())  == it->first) {
-		  rhsID = it->second;
-		  _matchMap[rhs] = rhsID;
-		  break; // exit for
-	      }
-	  }
-      }
-      return( lhsID && rhsID && lhsID == rhsID  );
+  { return equivalent( IdString( lVendor ), IdString( rVendor ) );
   }
+
+  bool VendorAttr::equivalent( sat::Solvable lVendor, sat::Solvable rVendor ) const
+  { return equivalent( lVendor.vendor(), rVendor.vendor() ); }
+
+  bool VendorAttr::equivalent( const PoolItem & lVendor, const PoolItem & rVendor ) const
+  { return equivalent( lVendor.satSolvable().vendor(), rVendor.satSolvable().vendor() ); }
+
+  //////////////////////////////////////////////////////////////////
 
   std::ostream & operator<<( std::ostream & str, const VendorAttr & /*obj*/ )
   {

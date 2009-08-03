@@ -132,7 +132,7 @@ class LookForUpdate : public resfilter::PoolItemFilterFunctor
 
         if ( installed.resolvable() )
         {
-          if ( !VendorAttr::instance().equivalent(installed->vendor(),provider->vendor()) )
+          if ( !VendorAttr::instance().equivalent( installed, provider ) )
           {
             MIL << "Discarding '" << provider << "' from vendor '"
                 << provider->vendor() << "' different to uninstalled '"

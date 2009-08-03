@@ -69,10 +69,10 @@ IMPL_PTR_TYPE(SATResolver);
 // Callbacks for SAT policies
 //---------------------------------------------------------------------------
 
-int vendorCheck (Pool *pool, Solvable *solvable1, Solvable *solvable2) {
-//    DBG << "vendorCheck: " << IdString(solvable1->vendor) << " <--> " << IdString(solvable2->vendor) << endl;
-    return VendorAttr::instance().equivalent( IdString(solvable1->vendor).asString(),
-                                              IdString(solvable2->vendor).asString() ) ? 0 : 1;
+int vendorCheck( Pool *pool, Solvable *solvable1, Solvable *solvable2 )
+{
+  return VendorAttr::instance().equivalent( IdString(solvable1->vendor),
+                                            IdString(solvable2->vendor) ) ? 0 : 1;
 }
 
 
