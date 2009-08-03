@@ -140,7 +140,8 @@ class SATResolver : public base::ReferenceCounted, private base::NonCopyable {
     // solver run with pool selected items
     bool resolvePool(const CapabilitySet & requires_caps,
 		     const CapabilitySet & conflict_caps,
-		     const PoolItemList & weakItems
+		     const PoolItemList & weakItems,
+		     const std::set<Repository> & upgradeRepos
 		     );
     // solver run with the given request queue
     bool resolveQueue(const SolverQueueItemList &requestQueue,

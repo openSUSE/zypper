@@ -116,6 +116,7 @@ class  HelixControl {
     void deleteResolvable (const ResObject::constPtr &resObject,
 			   const ResStatus &status);
     void addDependencies (const CapabilitySet &capRequire, const CapabilitySet &capConflict);
+    void addUpgradeRepos( const std::set<Repository> & upgradeRepos_r );
 
     void distupgrade ();
     void verifySystem ();

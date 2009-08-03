@@ -656,7 +656,8 @@ SATResolver::solverEnd()
 bool
 SATResolver::resolvePool(const CapabilitySet & requires_caps,
 			 const CapabilitySet & conflict_caps,
-			 const PoolItemList & weakItems)
+			 const PoolItemList & weakItems,
+                         const std::set<Repository> & upgradeRepos)
 {
     MIL << "SATResolver::resolvePool()" << endl;
 
@@ -683,6 +684,13 @@ SATResolver::resolvePool(const CapabilitySet & requires_caps,
 	    queue_push( &(_jobQueue), SOLVER_ERASE_SOLVABLE );
 	    queue_push( &(_jobQueue), id);
 	}
+    }
+
+    for_( iter, upgradeRepos.begin(), upgradeRepos.end() )
+    {
+	queue_push( &(_jobQueue), SOLVER_DISTUPGRADE );
+	queue_push( &(_jobQueue), iter->get()->repoid );
+        MIL << "Upgrade repo " << *iter << endl;
     }
 
     for (CapabilitySet::const_iterator iter = requires_caps.begin(); iter != requires_caps.end(); iter++) {

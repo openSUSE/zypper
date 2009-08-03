@@ -95,6 +95,7 @@ class Resolver : public base::ReferenceCounted, private base::NonCopyable {
 
     CapabilitySet _extra_requires;
     CapabilitySet _extra_conflicts;
+    std::set<Repository> _upgradeRepos;
 
     // Regard dependencies of the item weak onl
     PoolItemList _addWeak;
@@ -152,6 +153,11 @@ class Resolver : public base::ReferenceCounted, private base::NonCopyable {
 
     ResPool pool() const;
     void setPool( const ResPool & pool ) { _pool = pool; }
+
+    void addUpgradeRepo( Repository repo_r ) 		{ if ( repo_r ) _upgradeRepos.insert( repo_r ); }
+    void removeUpgradeRepo( Repository repo_r )		{ _upgradeRepos.erase( repo_r ); }
+    void removeUpgradeRepos()				{ _upgradeRepos.clear(); }
+    const std::set<Repository> & upgradeRepos() const	{ return _upgradeRepos; }
 
     void addExtraRequire( const Capability & capability );
     void removeExtraRequire( const Capability & capability );

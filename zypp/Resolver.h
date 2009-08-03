@@ -115,6 +115,8 @@ namespace zypp
      * all packages with a special resolver algorithm which takes
      * care of package splits, pattern  and  product  updates,
      * etc.
+     *
+     * \see \ref addUpgradeRepo
      **/
     bool doUpgrade();
 
@@ -128,7 +130,6 @@ namespace zypp
      *
      **/
     void doUpdate( );
-
 
     /**
      * Unmaintained packages which does not fit to
@@ -216,6 +217,23 @@ namespace zypp
     void setSolveSrcPackages( bool yesno_r );
     void setDefaultSolveSrcPackages();
     bool solveSrcPackages() const;
+
+    /**
+     * Adding request to perform a dist upgrade restricted to this repository.
+     * This is what e.g. <tt>zypper dup --repo myrepo</tt> should perform.
+     * \see \ref doUpgrade
+     */
+    void addUpgradeRepo( Repository repo_r );
+
+    /**
+     * Remove the upgrade request for this repo.
+     */
+    void removeUpgradeRepo( Repository repo_r );
+
+    /**
+     * Remove all upgrade repo requests.
+     */
+    void removeUpgradeRepos();
 
     /**
      * Adding additional requirement

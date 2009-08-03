@@ -98,6 +98,9 @@ namespace zypp
   void Resolver::setDefaultSolveSrcPackages()		{ _pimpl->setSolveSrcPackages( indeterminate ); }
   bool Resolver::solveSrcPackages() const		{ return _pimpl->solveSrcPackages(); }
 
+  void Resolver::addUpgradeRepo( Repository repo_r )	{ _pimpl->addUpgradeRepo( repo_r ); }
+  void Resolver::removeUpgradeRepo( Repository repo_r )	{ _pimpl->removeUpgradeRepo( repo_r ); }
+  void Resolver::removeUpgradeRepos()			{ _pimpl->removeUpgradeRepos(); }
 
   void Resolver::addRequire( const Capability & capability )	{ _pimpl->addExtraRequire( capability ); }
   void Resolver::addConflict( const Capability & capability )	{ _pimpl->addExtraConflict( capability ); }

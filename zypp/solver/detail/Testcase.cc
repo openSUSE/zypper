@@ -373,6 +373,7 @@ bool Testcase::createTestcase(Resolver & resolver, bool dumpPool, bool runSolver
     control.addDependencies (resolver.extraRequires(), resolver.extraConflicts());
     control.addDependencies (SystemCheck::instance().requiredSystemCap(),
 			     SystemCheck::instance().conflictSystemCap());
+    control.addUpgradeRepos( resolver.upgradeRepos() );
 
     if (resolver.isUpgradeMode())
 	control.distupgrade ();
@@ -530,6 +531,14 @@ void HelixControl::addDependencies (const CapabilitySet & capRequire, const Capa
     for (CapabilitySet::const_iterator iter = capConflict.begin(); iter != capConflict.end(); iter++) {
 	*file << "<addConflict " << " name=\"" << iter->asString() << "\"" << "/>" << endl;
     }
+}
+
+void HelixControl::addUpgradeRepos( const std::set<Repository> & upgradeRepos_r )
+{
+  for_( it, upgradeRepos_r.begin(), upgradeRepos_r.end() )
+  {
+    *file << "<upgradeRepo name=\"" << it->alias() << "\"/>" << endl;
+  }
 }
 
 void HelixControl::distupgrade()

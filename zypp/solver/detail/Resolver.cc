@@ -294,7 +294,7 @@ void Resolver::solverInit()
 bool Resolver::resolvePool()
 {
     solverInit();
-    return _satResolver->resolvePool(_extra_requires, _extra_conflicts, _addWeak);
+    return _satResolver->resolvePool(_extra_requires, _extra_conflicts, _addWeak, _upgradeRepos );
 }
 
 bool Resolver::resolveQueue( solver::detail::SolverQueueItemList & queue )
