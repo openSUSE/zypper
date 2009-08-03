@@ -1,4 +1,11 @@
 -------------------------------------------------------------------
+Mon Aug  3 18:46:13 CEST 2009 - ma@suse.de
+
+- New Resolver::addUpgradeRepo to perform a dist upgrade restricted to 
+  certain repositories.
+- version 6.13.0 (11)
+
+-------------------------------------------------------------------
 Fri Jul 31 17:55:33 CEST 2009 - ma@suse.de
 
 - Remove confusing newlines in vendor change info (bnc #503859)
