@@ -6,7 +6,7 @@
 |                         /_____||_| |_| |_|                           |
 |                                                                      |
 \---------------------------------------------------------------------*/
-/** \file	zypp/Misc.cc
+/** \file	zypp/misc/DefaultLoadSystem.cc
  *
 */
 #include <iostream>
@@ -14,7 +14,7 @@
 #include "zypp/base/LogTools.h"
 #include "zypp/PathInfo.h"
 
-#include "zypp/Misc.h"
+#include "zypp/misc/DefaultLoadSystem.h"
 
 #include "zypp/ZYppFactory.h"
 #include "zypp/zypp_detail/ZYppReadOnlyHack.h"

@@ -32,7 +32,6 @@ SET( zypp_SRCS
   Locks.cc
   MediaProducts.cc
   MediaSetAccess.cc
-  Misc.cc
   NameKindProxy.cc
   OnMediaLocation.cc
   Package.cc
@@ -120,7 +119,6 @@ SET( zypp_HEADERS
   ManagedFile.h
   MediaProducts.h
   MediaSetAccess.h
-  Misc.h
   NameKindProxy.h
   Vendor.h
   OnMediaLocation.h
@@ -761,8 +759,21 @@ SET( zypp_ws_HEADERS
   ws/WebpinResult.h
 )
 
+####################################################################
+
+SET( zypp_misc_HEADERS
+  Misc.h
+  misc/DefaultLoadSystem.h
+)
+
+SET( zypp_misc_SRCS
+  misc/DefaultLoadSystem.cc
+)
+
+####################################################################
 
 SET( zypp_lib_SRCS
+${zypp_misc_SRCS}
 ${zypp_pool_SRCS}
 ${zypp_parser_susetags_SRCS}
 ${zypp_parser_xml_SRCS}
@@ -820,6 +831,7 @@ ${zypp_source_susetags_HEADERS}
 ${zypp_target_modalias_HEADERS}
 ${zypp_target_HEADERS}
 ${zypp_pool_HEADERS}
+${zypp_misc_HEADERS}
 )
 
 #

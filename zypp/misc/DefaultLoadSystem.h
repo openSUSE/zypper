@@ -6,11 +6,11 @@
 |                         /_____||_| |_| |_|                           |
 |                                                                      |
 \---------------------------------------------------------------------*/
-/** \file	zypp/Misc.h
+/** \file	zypp/misc/DefaultLoadSystem.h
  *
 */
-#ifndef ZYPP_MISC_H
-#define ZYPP_MISC_H
+#ifndef ZYPP_MISC_DEFAULTLOADSYSTEM_H
+#define ZYPP_MISC_DEFAULTLOADSYSTEM_H
 
 #include <iosfwd>
 
@@ -60,4 +60,4 @@ namespace zypp
   /////////////////////////////////////////////////////////////////
 } // namespace zypp
 ///////////////////////////////////////////////////////////////////
-#endif // ZYPP_MISC_H
+#endif // ZYPP_MISC_DEFAULTLOADSYSTEM_H
