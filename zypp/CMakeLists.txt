@@ -764,10 +764,12 @@ SET( zypp_ws_HEADERS
 SET( zypp_misc_HEADERS
   Misc.h
   misc/DefaultLoadSystem.h
+  misc/CheckAccessDeleted.h
 )
 
 SET( zypp_misc_SRCS
   misc/DefaultLoadSystem.cc
+  misc/CheckAccessDeleted.cc
 )
 
 ####################################################################
