@@ -1,6 +1,8 @@
 
 ADD_SUBDIRECTORY( package-manager )
 
+INSTALL(PROGRAMS zypp-CheckAccessDeleted DESTINATION "${CMAKE_INSTALL_PREFIX}/bin")
+
 ## ############################################################
 
 FILE( GLOB ALLCC RELATIVE ${CMAKE_CURRENT_SOURCE_DIR} "*.cc" )

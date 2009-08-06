@@ -1,4 +1,13 @@
 -------------------------------------------------------------------
+Thu Aug  6 18:18:21 CEST 2009 - ma@suse.de
+
+- Provide class CheckAccessDeleted and command zypp-CheckAccessDeleted
+  to check for running processes which access meanwhile deleted files or 
+  libraries.  This may be used after commit, when trying to figure out 
+  which services need to be restated. (fate #300763).
+- version 6.13.1 (11)
+
+-------------------------------------------------------------------
 Mon Aug  3 18:46:13 CEST 2009 - ma@suse.de
 
 - New Resolver::addUpgradeRepo to perform a dist upgrade restricted to 

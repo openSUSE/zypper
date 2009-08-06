@@ -25,7 +25,7 @@ Provides:       yast2-packagemanager
 Obsoletes:      yast2-packagemanager
 Recommends:     logrotate
 BuildRequires:  cmake
-BuildRequires:  libsatsolver-devel >= 0.14.4 
+BuildRequires:  libsatsolver-devel >= 0.14.4
 BuildRequires:  openssl-devel
 BuildRequires:  boost-devel curl-devel dejagnu doxygen gcc-c++ gettext-devel graphviz hal-devel libxml2-devel
 
@@ -136,6 +136,7 @@ make install DESTDIR=$RPM_BUILD_ROOT
 make -C doc/autodoc install DESTDIR=$RPM_BUILD_ROOT
 mkdir -p $RPM_BUILD_ROOT/etc/zypp/repos.d
 mkdir -p $RPM_BUILD_ROOT/etc/zypp/services.d
+mkdir -p $RPM_BUILD_ROOT/%{_usr}/lib/zypp/bin
 mkdir -p $RPM_BUILD_ROOT/%{_var}/lib/zypp
 mkdir -p $RPM_BUILD_ROOT/%{_var}/log/zypp
 mkdir -p $RPM_BUILD_ROOT/%{_var}/cache/zypp
@@ -153,7 +154,6 @@ cd ..
 %post
 %run_ldconfig
 if [ -f /var/cache/zypp/zypp.db ]; then rm /var/cache/zypp/zypp.db; fi
-#%{prefix}/lib/zypp/zypp-migrate-sources
 
 # convert old lock file to new
 # TODO make this a separate file?
@@ -233,6 +233,7 @@ rm -rf "$RPM_BUILD_ROOT"
 %dir               %{_var}/lib/zypp
 %dir               %{_var}/log/zypp
 %dir               %{_var}/cache/zypp
+%{prefix}/lib/zypp
 %{prefix}/share/zypp
 %{prefix}/share/applications/package-manager.desktop
 %{prefix}/share/icons/hicolor/scalable/apps/package-manager-icon.svg
