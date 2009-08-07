@@ -83,7 +83,9 @@ namespace zypp
       if ( pinfo.command.size() == 15 )
       {
         // the command name might be truncated, so we check against /proc/<pid>/exe
-        pinfo.command = filesystem::readlink( Pathname("/proc")/pinfo.pid/"exe" ).basename();
+        Pathname command( filesystem::readlink( Pathname("/proc")/pinfo.pid/"exe" ) );
+        if ( ! command.empty() )
+          pinfo.command = command.basename();
       }
 
       MIL << " Take " << pinfo << endl;
@@ -163,6 +165,21 @@ namespace zypp
     return _data.size();
   }
 
+  std::string CheckAccessDeleted::findService( const Pathname & command_r )
+  {
+    ProcInfo p;
+    p.command = command_r.basename();
+    return p.service();
+  }
+  std::string CheckAccessDeleted::findService( const char * command_r )
+  { return findService( Pathname( command_r ) ); }
+
+  std::string CheckAccessDeleted::findService( const std::string & command_r )
+  { return findService( Pathname( command_r ) ); }
+
+  std::string CheckAccessDeleted::findService( pid_t pid_r )
+  { return findService( filesystem::readlink( Pathname("/proc")/str::numstring(pid_r)/"exe" ) ); }
+
   ///////////////////////////////////////////////////////////////////
   namespace
   { /////////////////////////////////////////////////////////////////
@@ -172,7 +189,32 @@ namespace zypp
 
   std::string CheckAccessDeleted::ProcInfo::service() const
   {
-    // TODO: This needs to be implemented.
+    if ( command.empty() )
+      return std::string();
+    // TODO: This needs to be implemented smarter... be carefull
+    // as we don't know whether the target is up.
+
+    static const Pathname initD( "/etc/init.d" );
+    { // init.d script with same name
+      PathInfo pi( initD/command );
+      if ( pi.isFile() && pi.isX() )
+        return command;
+    }
+    { // init.d script with name + 'd'
+      std::string alt( command+"d" );
+      PathInfo pi( initD/alt );
+      if ( pi.isFile() && pi.isX() )
+        return alt;
+    }
+    if ( *command.rbegin() == 'd' )
+    { // init.d script with name - trailing'd'
+      std::string alt( command );
+      alt.erase( alt.size()-1 );
+      PathInfo pi( initD/alt );
+      WAR <<pi << endl;
+      if ( pi.isFile() && pi.isX() )
+        return alt;
+    }
     return std::string();
   }
 

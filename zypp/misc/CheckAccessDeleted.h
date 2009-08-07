@@ -79,6 +79,20 @@ namespace zypp
       const_iterator begin() const	{ return _data.begin(); }
       const_iterator end() const	{ return _data.end(); }
 
+    public:
+      /** Guess if \c command was started by an \c /etc/init.d/ script.
+       * The name of an \c /etc/init.d/ script that might be used to restart the
+       * command. \c command may be specifies by name, full path or pid.
+       * \warning This is just a guess.
+       */
+      static std::string findService( const char * command_r );
+      /** \overload Taking a string.*/
+      static std::string findService( const std::string & command_r );
+      /** \overload Taking a pathname. */
+      static std::string findService( const Pathname & command_r );
+      /** \overload taking the pid. */
+      static std::string findService( pid_t pid_r );
+
     private:
       std::vector<ProcInfo> _data;
   };
