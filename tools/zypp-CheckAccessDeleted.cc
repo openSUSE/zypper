@@ -1,3 +1,4 @@
+#include <cstdio>
 #include <iostream>
 #include <zypp/base/Easy.h>
 #include <zypp/base/String.h>
