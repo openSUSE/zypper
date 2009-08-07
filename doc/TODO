@@ -1,18 +1,8 @@
-1.1.x - development releases
+1.2.x - development releases
 
-+ configuration file (.zypperrc)
 + nice overall install progress with ETA
-+ improved install summary, extended info available via prompt options
-  + show version/arch/vendor changes
-  + show recommended and suggested packages
-  + show changelog for selected packages or the whole update
-  + show graphical (schubi's widget) or ascii dependency tree of the packages
-    in the summary
-  + explain why a package has been selected for installation/removal
-  + and more...
 + --from option for the installing commands (in/up/patch/dup/inr/verify)
 + add help texts for all prompts
-+ options to install/remove packages recommended/suggested packages
 
 1.0.x - bugfixing for SLE11 and openSUSE 11.1
 
@@ -25,8 +15,17 @@ NOT SCHEDULED
 
 General
 
++ improved install summary, extended info available via prompt options
+  + show recommended and suggested packages
+  + show changelog for selected packages or the whole update
+  + show graphical (schubi's widget) or ascii dependency tree of the packages
+    in the summary
+  + explain why a package has been selected for installation/removal
++ options to install/remove packages recommended/suggested packages
 + more options in the media error prompt (e.g. eject CD)
 + testsuite
++ exit gracefully in first SIGINT, immediately on the second (needs proper
+  implementation)
 ? xml input (feed an xml with operation specification to zypper)
 ? move -vv output to zypper.log, leave only normal and verbose output levels?
   -vv e.g. displays full urls of downloaded files
