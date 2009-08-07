@@ -1,11 +1,13 @@
 #include "Tools.h"
 
 #include <zypp/PoolQuery.h>
+#include <zypp/target/rpm/librpmDb.h>
 
 ///////////////////////////////////////////////////////////////////
 
 //static const Pathname sysRoot( getenv("SYSROOT") ? getenv("SYSROOT") : "/Local/ROOT" );
 static const Pathname sysRoot( "/tmp/Local/ma/DNL-test" );
+//static const Pathname sysRoot( "/" );
 
 ///////////////////////////////////////////////////////////////////
 
@@ -14,15 +16,43 @@ bool solve()
   bool rres = false;
   {
     //zypp::base::LogControl::TmpLineWriter shutUp;
-    //rres = test.resolver().resolvePool();
+    rres = getZYpp()->resolver()->resolvePool();
   }
   if ( ! rres )
   {
     ERR << "resolve " << rres << endl;
+    getZYpp()->resolver()->problems();
     return false;
   }
   MIL << "resolve " << rres << endl;
   return true;
+}
+
+bool upgrade()
+{
+  bool rres = false;
+  {
+    //zypp::base::LogControl::TmpLineWriter shutUp;
+    Measure x( "Upgrade" );
+    rres = getZYpp()->resolver()->doUpgrade();
+  }
+  if ( ! rres )
+  {
+    Measure x( "Upgrade Error" );
+    ERR << "upgrade " << rres << endl;
+    getZYpp()->resolver()->problems();
+    return false;
+  }
+  MIL << "upgrade " << rres << endl;
+  return true;
+}
+
+namespace zypp
+{
+  namespace target
+  {
+    void writeUpgradeTestcase();
+  }
 }
 
 int main( int argc, char * argv[] )
@@ -33,6 +63,7 @@ try {
   INT << "===[START]==========================================" << endl;
   ZConfig::instance();
   TestSetup::LoadSystemAt( sysRoot );
+  getZYpp()->initializeTarget( sysRoot );
   ///////////////////////////////////////////////////////////////////
   ResPool   pool( ResPool::instance() );
   sat::Pool satpool( sat::Pool::instance() );
@@ -41,12 +72,25 @@ try {
   USR << "pool: " << pool << endl;
   ///////////////////////////////////////////////////////////////////
 
+  if ( 1 )
+  {
+    getZYpp()->resolver()->addRequire( Capability("emacs") );
+    solve();
+    vdumpPoolStats( USR << "Transacting:"<< endl,
+                    make_filter_begin<resfilter::ByTransact>(pool),
+                    make_filter_end<resfilter::ByTransact>(pool) ) << endl;
+  }
 
-  getZYpp()->resolver()->addRequire( Capability("xteddy") );
-  solve();
-  vdumpPoolStats( USR << "Transacting:"<< endl,
-                  make_filter_begin<resfilter::ByTransact>(pool),
-                  make_filter_end<resfilter::ByTransact>(pool) ) << endl;
+
+  {
+    ZYppCommitPolicy policy;
+    policy.dryRun( true );
+    policy.downloadMode( DownloadOnly );
+
+    USR << policy << endl;
+    ZYppCommitResult result( getZYpp()->commit( policy ) );
+    USR << result << endl;
+  }
 
 
   ///////////////////////////////////////////////////////////////////
