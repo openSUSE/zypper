@@ -136,7 +136,7 @@ make install DESTDIR=$RPM_BUILD_ROOT
 make -C doc/autodoc install DESTDIR=$RPM_BUILD_ROOT
 mkdir -p $RPM_BUILD_ROOT/etc/zypp/repos.d
 mkdir -p $RPM_BUILD_ROOT/etc/zypp/services.d
-mkdir -p $RPM_BUILD_ROOT/%{_usr}/lib/zypp/bin
+mkdir -p $RPM_BUILD_ROOT/%{_usr}/lib/zypp
 mkdir -p $RPM_BUILD_ROOT/%{_var}/lib/zypp
 mkdir -p $RPM_BUILD_ROOT/%{_var}/log/zypp
 mkdir -p $RPM_BUILD_ROOT/%{_var}/cache/zypp
@@ -233,7 +233,7 @@ rm -rf "$RPM_BUILD_ROOT"
 %dir               %{_var}/lib/zypp
 %dir               %{_var}/log/zypp
 %dir               %{_var}/cache/zypp
-%{prefix}/lib/zypp
+%dir               %{prefix}/lib/zypp
 %{prefix}/share/zypp
 %{prefix}/share/applications/package-manager.desktop
 %{prefix}/share/icons/hicolor/scalable/apps/package-manager-icon.svg
@@ -242,8 +242,7 @@ rm -rf "$RPM_BUILD_ROOT"
 %{prefix}/share/icons/hicolor/24x24/apps/package-manager-icon.png
 %{prefix}/share/icons/hicolor/32x32/apps/package-manager-icon.png
 %{prefix}/share/icons/hicolor/48x48/apps/package-manager-icon.png
-%{prefix}/bin/package-manager
-%{prefix}/bin/package-manager-su
+%{prefix}/bin/*
 %{_libdir}/libzypp*so.*
 %doc %_mandir/man5/locks.5.*
 
