@@ -772,6 +772,11 @@ SET( zypp_misc_SRCS
   misc/CheckAccessDeleted.cc
 )
 
+INSTALL( FILES
+  ${zypp_misc_HEADERS}
+  DESTINATION ${CMAKE_INSTALL_PREFIX}/include/zypp/misc
+)
+
 ####################################################################
 
 SET( zypp_lib_SRCS
