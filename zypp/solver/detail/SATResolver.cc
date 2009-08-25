@@ -688,7 +688,7 @@ SATResolver::resolvePool(const CapabilitySet & requires_caps,
 
     for_( iter, upgradeRepos.begin(), upgradeRepos.end() )
     {
-	queue_push( &(_jobQueue), SOLVER_DISTUPGRADE );
+	queue_push( &(_jobQueue), SOLVER_DISTUPGRADE|SOLVER_SOLVABLE_REPO );
 	queue_push( &(_jobQueue), iter->get()->repoid );
         MIL << "Upgrade repo " << *iter << endl;
     }
