@@ -1,4 +1,10 @@
 -------------------------------------------------------------------
+Wed Aug 26 15:55:22 CEST 2009 - ma@suse.de
+
+- Tune CheckAccessDeleted to focus on libraries and executables.
+- version 6.13.2 (11)
+
+-------------------------------------------------------------------
 Thu Aug  6 18:18:21 CEST 2009 - ma@suse.de
 
 - Provide class CheckAccessDeleted and command zypp-CheckAccessDeleted

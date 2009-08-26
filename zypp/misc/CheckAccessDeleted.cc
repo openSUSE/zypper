@@ -91,37 +91,74 @@ namespace zypp
       MIL << " Take " << pinfo << endl;
     }
 
-    /** Add line to cache if it refers to a deleted file.
-     * Either the link count \c(k) os \c 0, or if no link cout is present,
-     * the filedescriptor/type \c (ft) is set to \c DEL.
+    /** Add line to cache if it refers to a deleted executable or library file:
+     * - Either the link count \c(k) os \c 0, or no link cout is present.
+     * - The type \c (t) is set to \c REG or \c DEL
+     * - The filedescriptor \c (f) is set to \c txt, \c mem or \c DEL
     */
     inline void addCacheIf( CheckAccessDeleted::ProcInfo & cache_r, const std::string & line_r )
     {
-      bool takeLine = false;
-      const char * name = "";
+      const char * k = ".";
+      const char * f = ".";
+      const char * t = ".";
+      const char * n = ".";
 
-      for_( ch, line_r.begin(), line_r.end() )
+      for_( ch, line_r.c_str(), ch+line_r.size() )
       {
         switch ( *ch )
         {
           case 'k':
-             if ( ! takeLine && *(ch+1) == '0' && *(ch+2) == '\0' )
-               takeLine = true;
-           break;
+            if ( *(ch+1) != '0' )	// skip non-zero link counts
+              return;
+            k = ch+1;
+            break;
           case 'f':
+            f = ch+1;
+            break;
           case 't':
-            if ( ! takeLine && *(ch+1) == 'D' && *(ch+2) == 'E' && *(ch+3) == 'L' && *(ch+4) == '\0' )
-              takeLine = true;
+            t = ch+1;
             break;
           case 'n':
-             name = &*(ch+1);
-             break;
+            n = ch+1;
+            break;
         }
         if ( *ch == '\n' ) break;		// end of data
         do { ++ch; } while ( *ch != '\0' );	// skip to next field
       }
-      if ( takeLine )
-        cache_r.files.push_back( name );
+
+      if ( !t || !f || !n )
+        return;	// wrong filedescriptor/type/name
+
+      if ( !(    ( *t == 'R' && *(t+1) == 'E' && *(t+2) == 'G' && *(t+3) == '\0' )
+              || ( *t == 'D' && *(t+1) == 'E' && *(t+2) == 'L' && *(t+3) == '\0' ) ) )
+        return;	// wrong type
+
+      if ( !(    ( *f == 'm' && *(f+1) == 'e' && *(f+2) == 'm' && *(f+3) == '\0' )
+              || ( *f == 't' && *(f+1) == 'x' && *(f+2) == 't' && *(f+3) == '\0' )
+              || ( *f == 'D' && *(f+1) == 'E' && *(f+2) == 'L' && *(f+3) == '\0' )
+              || ( *f == 'l' && *(f+1) == 't' && *(f+2) == 'x' && *(f+3) == '\0' ) ) )
+        return;	// wrong filedescriptor type
+
+      std::string name( n );
+
+      if ( *f == 'm' || *f == 'D' )	// skip some wellknown nonlibrary memorymapped files
+      {
+        static const char * black[] = {
+          "/SYSV",
+          "/var/run/"
+        };
+        for_( it, arrayBegin( black ), arrayEnd( black ) )
+        {
+          if ( str::hasPrefix( n, *it ) )
+            return;
+        }
+      }
+
+      if ( std::find( cache_r.files.begin(), cache_r.files.end(), name ) == cache_r.files.end() )
+      {
+        // Add if no duplicate
+        cache_r.files.push_back( n );
+      }
     }
     /////////////////////////////////////////////////////////////////
   } // namespace

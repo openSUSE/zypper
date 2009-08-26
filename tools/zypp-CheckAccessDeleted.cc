@@ -103,14 +103,14 @@ int main( int argc, char * argv[] )
     {
       std::cout << "Usage: " << progname << " [--help]" << std::endl;
       std::cout << "List information about all running processe" << std::endl;
-      std::cout << "which access deleted files or libraries." << std::endl;
+      std::cout << "which access deleted executables or libraries." << std::endl;
       std::cout << "  PID     " << "process ID" << std::endl;
       std::cout << "  PPID    " << "parent process ID" << std::endl;
       std::cout << "  UID     " << "process user ID" << std::endl;
       std::cout << "  LOGIN   " << "process login name" << std::endl;
       std::cout << "  COMMAND " << "process command name" << std::endl;
       std::cout << "  SERVICE " << "/etc/init.d/ script that might be used to restart the command (guessed)" << std::endl;
-      std::cout << "  FILES   " << "list of deleted files or libraries accessed" << std::endl;
+      std::cout << "  FILES   " << "list of deleted executables or libraries accessed" << std::endl;
       return 0;
     }
     std::cerr << progname << ": unexpected argument '" << argv[1] << "'" << std::endl;

@@ -21,7 +21,7 @@ namespace zypp
 { /////////////////////////////////////////////////////////////////
 
   /**
-   * Check for running processes which access deleted files or libraries.
+   * Check for running processes which access deleted executables or libraries.
    *
    * Executed after commit, this gives a hint which processes/services
    * need to be restarted.
@@ -33,6 +33,7 @@ namespace zypp
    */
   class CheckAccessDeleted
   {
+
     public:
       /**
        * Data about one running process accessing deleted files.
@@ -44,7 +45,7 @@ namespace zypp
         std::string puid;		//!< process user ID
         std::string login;		//!< process login name
         std::string command;		//!< process command name
-        std::vector<std::string> files;	//!< list of deleted files or libraries accessed
+        std::vector<std::string> files;	//!< list of deleted executables or libraries accessed
 
         /** Guess if command was started by an \c /etc/init.d/ script.
          * The name of an \c /etc/init.d/ script that might be used to restart the
@@ -68,7 +69,7 @@ namespace zypp
       { if ( doCheck_r ) check(); }
 
     public:
-      /** Check for running processes which access deleted files or libraries.
+      /** Check for running processes which access deleted executables or libraries.
        * \return the number of processes found.
        * \throws Exception On error collecting the data (e.g. no lsof installed)
        */
