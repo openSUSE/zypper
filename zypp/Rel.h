@@ -87,14 +87,19 @@ namespace zypp
      *
      * \throw PARSE if \a strval_r is not legal.
      * \todo refine exceptions and check throw.
-    */
+     */
     explicit
     Rel( const std::string & strval_r );
 
     /** Ctor from string (non-throwing).
      * Illegal string values resolve to \c default_r
-    */
+     */
     Rel( const std::string & strval_r, const Rel & default_r );
+
+    /** Assign from string IFF it contains a legal value.
+     * \return Whether \a strval_r contained a legal value.
+    */
+    bool parseFrom( const std::string & strval_r );
 
     /** Ctor from bits. */
     explicit

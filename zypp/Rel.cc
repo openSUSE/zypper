@@ -86,6 +86,17 @@ namespace zypp
   : _op( parse( strval_r, default_r ) )
   {}
 
+  bool Rel::parseFrom( const std::string & strval_r )
+  {
+    std::map<std::string,Rel::for_use_in_switch>::const_iterator it = findStr( strval_r );
+    if ( it == _table.end() )
+    {
+      return false;
+    }
+    _op = it->second;
+    return true;
+  }
+
   ///////////////////////////////////////////////////////////////////
   //
   //	METHOD NAME : Rel::asString
