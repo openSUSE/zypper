@@ -33,6 +33,104 @@ namespace zypp
   ///////////////////////////////////////////////////////////////////
   namespace
   { /////////////////////////////////////////////////////////////////
+
+    /** backward skip whitespace starting at pos_r */
+    inline std::string::size_type backskipWs( const std::string & str_r, std::string::size_type pos_r )
+    {
+      for ( ; pos_r != std::string::npos; --pos_r )
+      {
+        char ch = str_r[pos_r];
+        if ( ch != ' ' && ch != '\t' )
+          break;
+      }
+      return pos_r;
+    }
+
+    /** backward skip non-whitespace starting at pos_r */
+    inline std::string::size_type backskipNWs( const std::string & str_r, std::string::size_type pos_r )
+    {
+      for ( ; pos_r != std::string::npos; --pos_r )
+      {
+        char ch = str_r[pos_r];
+        if ( ch == ' ' || ch == '\t' )
+          break;
+      }
+      return pos_r;
+    }
+
+    /** Split any 'op edition' from str_r */
+    void splitOpEdition( std::string & str_r, Rel & op_r, Edition & ed_r )
+    {
+      if ( str_r.empty() )
+        return;
+      std::string::size_type ch( str_r.size()-1 );
+
+      // check whether the one but last word is a valid Rel:
+      if ( (ch = backskipWs( str_r, ch )) != std::string::npos )
+      {
+        std::string::size_type ee( ch );
+        if ( (ch = backskipNWs( str_r, ch )) != std::string::npos )
+        {
+          std::string::size_type eb( ch );
+          if ( (ch = backskipWs( str_r, ch )) != std::string::npos )
+          {
+            std::string::size_type oe( ch );
+            ch = backskipNWs( str_r, ch ); // now before 'op'? begin
+            if ( op_r.parseFrom( str_r.substr( ch+1, oe-ch ) ) )
+            {
+              // found a legal 'op'
+              ed_r = Edition( str_r.substr( eb+1, ee-eb ) );
+              if ( ch != std::string::npos ) // 'op' is not at str_r begin, so skip WS
+                ch = backskipWs( str_r, ch );
+              str_r.erase( ch+1 );
+              return;
+            }
+          }
+        }
+      }
+      // HERE: Didn't find 'name op edition'
+      // As a convenience we check for an embeded 'op' (not surounded by WS).
+      // But just '[<=>]=?|!=' and not inside '()'.
+      ch = str_r.find_last_of( "<=>)" );
+      if ( ch != std::string::npos && str_r[ch] != ')' )
+      {
+        std::string::size_type oe( ch );
+
+        // do edition first:
+        ch = str_r.find_first_not_of( " \t", oe+1 );
+        if ( ch != std::string::npos )
+          ed_r = Edition( str_r.substr( ch ) );
+
+        // now finish op:
+        ch = oe-1;
+        if ( str_r[oe] != '=' )	// '[<>]'
+        {
+          op_r = ( str_r[oe] == '<' ) ? Rel::LT : Rel::GT;
+        }
+        else
+        { // '?='
+          if ( ch != std::string::npos )
+          {
+            switch ( str_r[ch] )
+            {
+              case '<': --ch; op_r = Rel::LE; break;
+              case '>': --ch; op_r = Rel::GE; break;
+              case '!': --ch; op_r = Rel::NE; break;
+              case '=': --ch; // fall through
+              default:        op_r = Rel::EQ; break;
+            }
+          }
+        }
+
+        // finally name:
+        if ( ch != std::string::npos ) // 'op' is not at str_r begin, so skip WS
+          ch = backskipWs( str_r, ch );
+        str_r.erase( ch+1 );
+        return;
+      }
+      // HERE: It's a plain 'name'
+    }
+
     /** Build \ref Capability from data. No parsing required.
     */
     sat::detail::IdType relFromStr( ::_Pool * pool_r,
@@ -118,35 +216,13 @@ namespace zypp
                                     const std::string & str_r, const ResKind & kind_r,
                                     Capability::CtorFlag flag_r )
     {
-      // strval_r has at least two words which could make 'op edition'?
-      // improve regex!
-      static const str::regex  rx( "(.*[^ \t])([ \t]+)([^ \t]+)([ \t]+)([^ \t]+)" );
-      static str::smatch what;
-
       std::string name( str_r );
       Rel         op;
       Edition     ed;
-      if ( flag_r == Capability::UNPARSED
-           && str_r.find(' ') != std::string::npos
-           && str::regex_match( str_r, what, rx ) )
+      if ( flag_r == Capability::UNPARSED )
       {
-        try
-        {
-          Rel     cop( what[3] );
-          Edition ced( what[5] );
-          name = what[1];
-          op = cop;
-          ed = ced;
-        }
-        catch ( Exception & excpt )
-        {
-          // So they don't make valid 'op edition'
-          ZYPP_CAUGHT( excpt );
-          DBG << "Trying named relation for: " << str_r << endl;
-        }
+        splitOpEdition( name, op, ed );
       }
-      //else
-      // not a versioned relation
 
       if ( arch_r.empty() )
         return relFromStr( pool_r, name, op, ed, kind_r ); // parses for name[.arch]
