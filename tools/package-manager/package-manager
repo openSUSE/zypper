@@ -21,21 +21,47 @@ function mkCmd() {
   done
 }
 
+function check_installed()
+{
+  rpm -q "$1" >/dev/null
+  return $?
+}
+
+function what_do_we_have()
+{
+  echo "Zlm: ${HAVE_ZLM}"
+  echo "openSUSE: ${HAVE_OPENSUSE}"
+  echo "KPackagekit: ${HAVE_KPACKAGEKIT}"
+  echo "GPackagekit: ${HAVE_GPACKAGEKIT}"
+  echo "KDE running: ${KDE_FULL_SESSION}"
+}
+
 # check what we have
 HAVE_ZLM=false
-if rpm -q zen-updater >/dev/null; then
+check_installed "zen-updater"
+if [ "$?" == "0" ]
+then
     HAVE_ZLM=true
 fi
+
 HAVE_OPENSUSE=false
-if rpm -q yast2-packager >/dev/null; then
+check_installed "yast2-packager"
+if [ $? == 0 ]
+then
     HAVE_OPENSUSE=true
 fi
+
 HAVE_KPACKAGEKIT=false
-if rpm -q kpackagekit >/dev/null; then
+check_installed "kpackagekit"
+if [ "$?" == "0" ]
+then
     HAVE_KPACKAGEKIT=true
 fi
+
 HAVE_GPACKAGEKIT=false
-if rpm -q gnome-packagekit >/dev/null; then
+check_installed "gnome-packagekit"
+if [ $? == 0 ]
+then
     HAVE_GPACKAGEKIT=true
 fi
 
@@ -69,11 +95,9 @@ fi
 
 METHOD=yast
 # determine what we can use
-if [[ $HAVE_KPACKAGEKIT && $KDE_FULL_SESSION ]]
-then
+if $HAVE_KPACKAGEKIT && [ "$KDE_FULL_SESSION" ]; then
   METHOD=kpackagekit
-elif [[ $HAVE_GPACKAGEKIT && "$WINDOWMANAGER" == "/usr/bin/gnome" ]]
-then
+elif $HAVE_GPACKAGEKIT && [ "$WINDOWMANAGER" == "/usr/bin/gnome" ]; then
   METHOD=gnome-packagekit
 else
   if [ "$STACK" == "zlm" ]; then
@@ -83,6 +107,7 @@ else
   fi
 fi
 
+echo $METHOD
 
 xsu() {
     # a copy of xdg-su.
