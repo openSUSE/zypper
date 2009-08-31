@@ -81,14 +81,14 @@ class TestSetup
     typedef TestSetupOptions Options;
 
   public:
-    TestSetup( const Arch & sysarch_r = Arch() )
+    TestSetup( const Arch & sysarch_r = Arch_empty )
     { _ctor( Pathname(), sysarch_r, Options() ); }
 
-    TestSetup( const Pathname & rootdir_r, const Arch & sysarch_r = Arch(), const Options & options_r = Options() )
+    TestSetup( const Pathname & rootdir_r, const Arch & sysarch_r = Arch_empty, const Options & options_r = Options() )
     { _ctor( rootdir_r, sysarch_r, options_r ); }
 
     TestSetup( const Pathname & rootdir_r, const Options & options_r )
-    { _ctor( rootdir_r, Arch(), options_r ); }
+    { _ctor( rootdir_r, Arch_empty, options_r ); }
 
     ~TestSetup()
     { USR << (_tmprootdir.path() == _rootdir ? "DELETE" : "KEEP") << " TESTSETUP below " << _rootdir << endl; }
