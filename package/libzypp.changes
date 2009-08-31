@@ -3,6 +3,7 @@ Fri Aug 28 17:33:55 CEST 2009 - dmacvicar@suse.de
 
 - package-manager script:
   do not fail if kpackagekit is not installed (bnc #529510)
+- version 6.13.3 (11)
 
 -------------------------------------------------------------------
 Wed Aug 26 15:55:22 CEST 2009 - ma@suse.de
