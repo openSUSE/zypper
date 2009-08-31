@@ -148,16 +148,24 @@ do_remove() {
 do_install() {
     case "${METHOD}" in
     yast)
-      xsu /sbin/yast2 --install "$@"  
+      xsu /sbin/yast2 --install "$@"
     ;;
     zlm)
       zen-installer "$@"
     ;;
     kpackagekit)
-      kpackagekit "$@"
+      if [ $# == 0 ]; then
+          xsu /sbin/yast2 --install
+      else
+          kpackagekit "$@"
+      fi
     ;;
     gnome-packagekit)
-      /usr/bin/gpk-install-local-file "$@"
+      if [ $# == 0 ]; then
+          xsu /sbin/yast2 --install
+      else
+          /usr/bin/gpk-install-local-file "$@"
+      fi
     ;;
     esac
 }

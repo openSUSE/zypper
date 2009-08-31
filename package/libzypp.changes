@@ -1,4 +1,10 @@
 -------------------------------------------------------------------
+Mon Aug 31 15:17:01 CEST 2009 - ma@suse.de
+
+- package-manager script: Fall back to package selection if no 
+  packages are passed on the commandline. (bnc #529137)
+
+-------------------------------------------------------------------
 Fri Aug 28 17:33:55 CEST 2009 - dmacvicar@suse.de
 
 - package-manager script:
