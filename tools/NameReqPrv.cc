@@ -26,7 +26,7 @@ int usage( const std::string & msg_r = std::string(), int exit_r = 100 )
   }
   cerr << "Usage: " << appname << " [--root ROOTDIR] [OPTIONS] NAME... [[OPTIONS] NAME...]..." << endl;
   cerr << "  Load all enabled repositories (no refresh) and search for" << endl;
-  cerr << "  occurrences of NAME (substring) in package names, provides or" << endl;
+  cerr << "  occurrences of NAME (regex) in package names, provides or" << endl;
   cerr << "  requires." << endl;
   cerr << "  --root   Load repos from the system located below ROOTDIR. If ROOTDIR" << endl;
   cerr << "           denotes a sover testcase, the testcase is loaded." << endl;
@@ -39,6 +39,20 @@ int usage( const std::string & msg_r = std::string(), int exit_r = 100 )
   cerr << "TODO: Waiting for PoolQuery::allMatches switch and need to beautify output." << endl;
   cerr << "" << endl;
   return exit_r;
+}
+
+void tableOut( const std::string & s1 = std::string(),
+               const std::string & s2 = std::string(),
+               const std::string & s3 = std::string(),
+               const std::string & s4 = std::string(),
+               const std::string & s5 = std::string() )
+{
+  message << "  ";
+#define TABEL(N) static unsigned w##N = 0; if ( ! s##N.empty() ) w##N = std::max( w##N, s##N.size() ); message << str::form( " %-*s ", w##N, s##N.c_str() )
+#define TABER(N) static unsigned w##N = 0; if ( ! s##N.empty() ) w##N = std::max( w##N, s##N.size() ); message << str::form( " %*s ", w##N, s##N.c_str() )
+  TABER( 1 ); TABEL( 2 ); TABEL( 3 ); TABEL( 4 ); TABEL( 5 );
+#undef TABEL
+  message << endl;
 }
 
 /******************************************************************
@@ -85,7 +99,7 @@ int main( int argc, char * argv[] )
   else if ( TestSetup::isTestSetup( sysRoot ) )
   {
     message << str::form( "*** Load TestSetup from '%s'", sysRoot.c_str() ) << endl;
-    TestSetup test( sysRoot );
+    TestSetup test( sysRoot, Arch_x86_64 );
     test.loadRepos();
   }
   else
@@ -161,8 +175,9 @@ int main( int argc, char * argv[] )
     }
 
     PoolQuery q;
-    q.addString( *argv );
-    q.setMatchSubstring();
+    std::string qstr( *argv );
+    q.addString( qstr );
+    q.setMatchRegex();
     q.setCaseSensitive( ! ignorecase );
 
     if ( names )
@@ -176,15 +191,18 @@ int main( int argc, char * argv[] )
 
     for_( it, q.begin(), q.end() )
     {
-      message << "  " << *it << "(" << it->vendor() << ")";
+      tableOut( str::numstring( it->id() ), it->asString(), it->repository().alias(), it->vendor().asString() );
+      //message << "  " << *it << "(" << it->vendor() << ")";
       if ( ! it.matchesEmpty() )
       {
         for_( match, it.matchesBegin(), it.matchesEnd() )
         {
-          message << endl << "    " << match->inSolvAttr() << "\t" << match->asString();
+          //tableOut( match->inSolvAttr().asString().substr( 9, 1 ), match->asString() );
+          tableOut( "", "", "", match->inSolvAttr().asString().substr( 9, 1 )+" " +match->asString() );
+          //message << endl << "    " << match->inSolvAttr() << "\t" << match->asString();
         }
       }
-      message << endl;
+      //message << endl;
     }
 
     message << "}" << endl;
