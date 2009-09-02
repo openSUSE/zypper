@@ -54,6 +54,8 @@ namespace zypp
      * As the \ref predicate takes an iterator pointing to the current
      * match, it's also suitable for sub-structure (flexarray) inspection
      * (\see \ref sat::LookupAttr::iterator::solvAttrSubEntry).
+     *
+     * \note: \see \ref addPredicate for further constraints.
      */
     struct AttrMatchData
     {
@@ -67,20 +69,63 @@ namespace zypp
         , attrMatcher( attrMatcher_r )
       {}
 
-      AttrMatchData( sat::SolvAttr attr_r, const sat::AttrMatcher & attrMatcher_r, const Predicate & predicate_r )
+      AttrMatchData( sat::SolvAttr attr_r, const sat::AttrMatcher & attrMatcher_r,
+                     const Predicate & predicate_r, const std::string & predicateStr_r )
         : attr( attr_r )
         , attrMatcher( attrMatcher_r )
         , predicate( predicate_r )
+        , predicateStr( predicateStr_r )
       {}
+
+      /** A usable Predicate must provide a string representation.
+       * As there is no \c operator== for \ref Predicate, we compare it's
+       * string representation instead. Actually Predicate deserves to become
+       * a class which is also serializable, so we can store predicated queries.
+       */
+      template<class _Predicate>
+      void addPredicate( const _Predicate & predicate_r )
+      {
+        predicate    = predicate_r;
+        predicateStr = predicate_r.stringRep();
+      }
 
       sat::SolvAttr    attr;
       sat::AttrMatcher attrMatcher;
       Predicate        predicate;
+      std::string      predicateStr;
     };
 
-    std::ostream & operator<<( std::ostream & str, const AttrMatchData & obj )
+    /** \relates AttrMatchData */
+    inline std::ostream & operator<<( std::ostream & str, const AttrMatchData & obj )
     {
-      return str << obj.attr << ": " << obj.attrMatcher << ( obj.predicate ? " (+predicate)" : "" );
+      str << obj.attr << ": " << obj.attrMatcher;
+      if ( obj.predicate )
+        str << " +(" << obj.predicateStr << ")";
+      return str;
+    }
+
+    /** \relates AttrMatchData */
+    inline bool operator==( const AttrMatchData & lhs, const AttrMatchData & rhs )
+    {
+      return ( lhs.attr == rhs.attr
+               && lhs.attrMatcher == rhs.attrMatcher
+               && lhs.predicateStr == rhs.predicateStr );
+    }
+
+    /** \relates AttrMatchData */
+    inline bool operator!=( const AttrMatchData & lhs, const AttrMatchData & rhs )
+    { return !( lhs == rhs ); }
+
+    /** \relates AttrMatchData Arbitrary order for std::container. */
+    inline bool operator<( const AttrMatchData & lhs, const AttrMatchData & rhs )
+    {
+      if ( lhs.attr != rhs.attr )
+        return (  lhs.attr < rhs.attr );
+      if ( lhs.attrMatcher != rhs.attrMatcher )
+        return (  lhs.attrMatcher < rhs.attrMatcher );
+      if ( lhs.predicateStr != rhs.predicateStr )
+        return (  lhs.predicateStr < rhs.predicateStr );
+      return false;
     }
 
     typedef std::list<AttrMatchData> AttrMatchList;
@@ -127,6 +172,13 @@ namespace zypp
         return overlaps( Edition::MatchRange( cap.op(), cap.ed() ), _range );
       }
 
+      std::string stringRep() const
+      {
+        std::ostringstream str;
+        str << "EditionRange " << _range.op << " " << _range.value;
+        return str.str();
+      }
+
       Edition::MatchRange _range;
     };
 
@@ -140,6 +192,13 @@ namespace zypp
       bool operator()( sat::LookupAttr::iterator iter_r )
       {
         return overlaps( Edition::MatchRange( Rel::EQ, iter_r.inSolvable().edition() ), _range );
+      }
+
+      std::string stringRep() const
+      {
+        std::ostringstream str;
+        str << "SolvableRange " << _range.op << " " << _range.value;
+        return str.str();
       }
 
       Edition::MatchRange _range;
@@ -158,6 +217,13 @@ namespace zypp
       bool operator()( sat::LookupAttr::iterator iter_r ) const
       {
         return _cap.matches( iter_r.asType<Capability>() ) == CapMatch::yes;
+      }
+
+      std::string stringRep() const
+      {
+        std::ostringstream str;
+        str << "CapabilityMatch " << _cap;
+        return str.str();
       }
 
       Capability _cap;
@@ -196,7 +262,7 @@ namespace zypp
     /** Raw attributes */
     AttrRawStrMap _attrs;
     /** Uncompiled attributes with predicate. */
-    AttrMatchList _uncompiledPredicated;
+    std::set<AttrMatchData> _uncompiledPredicated;
 
     /** Sat solver search flags */
     Match _flags;
@@ -219,6 +285,26 @@ namespace zypp
     //@}
 
   public:
+
+    bool operator==( const PoolQuery::Impl & rhs ) const
+    {
+      return ( _strings == rhs._strings
+               && _attrs == rhs._attrs
+               && _uncompiledPredicated == rhs._uncompiledPredicated
+               && _flags == rhs._flags
+               && _match_word == rhs._match_word
+               && _require_all == rhs._require_all
+               && _status_flags == rhs._status_flags
+               && _edition == rhs._edition
+               && _op == rhs._op
+               && _repos == rhs._repos
+               && _kinds == rhs._kinds );
+    }
+
+    bool operator!=( const PoolQuery::Impl & rhs ) const
+    { return ! operator==( rhs ); }
+
+  public:
     /** Compile the regex.
      * Basically building the \ref _attrMatchList from strings.
      * \throws MatchException Any of the exceptions thrown by \ref AttrMatcher::compile.
@@ -239,6 +325,7 @@ namespace zypp
     { return new Impl( *this ); }
   };
 
+  ///////////////////////////////////////////////////////////////////
 
   struct MyInserter
   {
@@ -409,7 +496,7 @@ attremptycheckend:
 
           _attrMatchList.push_back( AttrMatchData( it->attr,
                                     sat::AttrMatcher( rcstrings, cflags ),
-                                        it->predicate ) );
+                                                      it->predicate, it->predicateStr ) );
         }
         else
         {
@@ -656,16 +743,16 @@ attremptycheckend:
         break;
     }
 
-    // Match::OTHER indicates need to compile.
-    sat::AttrMatcher matcher( name, Match::OTHER );
+    // Match::OTHER indicates need to compile
+    // (merge global search strings into name).
+    AttrMatchData attrMatchData( attr, sat::AttrMatcher( name, Match::OTHER ) );
 
-    AttrMatchData::Predicate pred;
     if ( isDependencyAttribute( attr ) )
-      pred = EditionRangePredicate( op, edition );
+      attrMatchData.addPredicate( EditionRangePredicate( op, edition ) );
     else
-      pred = SolvableRangePredicate( op, edition );
+      attrMatchData.addPredicate( SolvableRangePredicate( op, edition ) );
 
-    _pimpl->_uncompiledPredicated.push_back( AttrMatchData( attr, matcher, pred ) );
+    _pimpl->_uncompiledPredicated.insert( attrMatchData );
   }
 
   void PoolQuery::addDependency( const sat::SolvAttr & attr, Capability cap_r )
@@ -675,15 +762,14 @@ attremptycheckend:
       return;
 
     // Matches STRING per default. (won't get compiled!)
-    sat::AttrMatcher matcher( cap.name().asString() );
+    AttrMatchData attrMatchData( attr, sat::AttrMatcher( cap.name().asString() ) );
 
-    AttrMatchData::Predicate pred;
     if ( isDependencyAttribute( attr ) )
-      pred = CapabilityMatchPredicate( cap_r );
+      attrMatchData.addPredicate( CapabilityMatchPredicate( cap_r ) );
     else
-      pred = SolvableRangePredicate( cap.op(), cap.ed() );
+      attrMatchData.addPredicate( SolvableRangePredicate( cap.op(), cap.ed() ) );
 
-    _pimpl->_uncompiledPredicated.push_back( AttrMatchData( attr, matcher, pred ) );
+    _pimpl->_uncompiledPredicated.insert( attrMatchData );
   }
 
   void PoolQuery::setEdition(const Edition & edition, const Rel & op)
@@ -1156,25 +1242,8 @@ attremptycheckend:
   ostream & operator<<( ostream & str, const PoolQuery & obj )
   { return str << obj.asString(); }
 
-  bool PoolQuery::operator==(const PoolQuery& a) const
-  {
-    if( flags() != a.flags() )
-      return false;
-    if( a.matchWord() != matchWord())
-      return false;
-    if( a.requireAll() != requireAll() )
-      return false;
-    if ( a.kinds() != kinds() )
-      return false;
-    if ( a.repos() != repos() )
-      return false;
-    if(a.edition() != edition())
-      return false;
-    if(a.editionRel() != editionRel())
-      return false;
-
-    return true;
-  }
+  bool PoolQuery::operator==( const PoolQuery & rhs ) const
+  { return *_pimpl == *rhs._pimpl; }
 
   ///////////////////////////////////////////////////////////////////
   namespace detail

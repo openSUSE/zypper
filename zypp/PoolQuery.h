@@ -84,11 +84,9 @@ namespace zypp
   class PoolQuery : public sat::SolvIterMixin<PoolQuery, detail::PoolQueryIterator>
   {
   public:
-    typedef std::set<std::string>                           StrContainer;
     typedef std::set<ResKind>                               Kinds;
+    typedef std::set<std::string>                           StrContainer;
     typedef std::map<sat::SolvAttr, StrContainer>           AttrRawStrMap;
-    typedef std::map<sat::SolvAttr, std::string>            AttrCompiledStrMap;
-    typedef std::map<sat::SolvAttr, str::regex>             AttrRegexMap;
 
     typedef detail::PoolQueryIterator                       const_iterator;
     typedef unsigned int                                    size_type;

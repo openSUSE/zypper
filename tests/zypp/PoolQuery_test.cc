@@ -20,6 +20,9 @@ BOOST_AUTO_TEST_CASE(pool_query_init)
 }
 /////////////////////////////////////////////////////////////////////////////
 
+static std::ofstream devNull;
+#define COUT devNull
+
 struct PrintAndCount
 {
   PrintAndCount() : _count(0) {}
@@ -27,7 +30,7 @@ struct PrintAndCount
   bool operator()( const sat::Solvable & solvable )
   {
     zypp::PoolItem pi( zypp::ResPool::instance().find( solvable ) );
-    cout << pi.resolvable() << endl;
+    COUT << pi.resolvable() << endl;
     ++_count;
     return true;
   }
@@ -645,27 +648,73 @@ BOOST_AUTO_TEST_CASE(pool_query_serialize)
 BOOST_AUTO_TEST_CASE(pool_query_equal)
 {
   cout << "****equal****"  << endl;
-  PoolQuery q;
-  q.addString("zypp");
-  q.addAttribute(sat::SolvAttr::name);
-  q.setMatchGlob();
-  PoolQuery q2;
-  q2.addString("zypp");
-  q2.addAttribute(sat::SolvAttr::name);
-  q2.setMatchGlob();
-  PoolQuery q3;
-  q3.addString("zypp");
-  q3.addAttribute(sat::SolvAttr::name);
-  q3.setMatchGlob();
-  q3.setRequireAll(true);
-  PoolQuery q4;
-  q4.addAttribute(sat::SolvAttr::name,"zypp");
-  q4.setMatchGlob();
+  std::vector<PoolQuery> v;
+  {
+    PoolQuery q;
+    v.push_back( q );
+  }
+  {
+    PoolQuery q;
+    q.addAttribute( sat::SolvAttr::name, "zypper" );
+    q.setMatchExact();
+    q.setCaseSensitive(true);
+    v.push_back( q );
+  }
+  {
+    PoolQuery q;
+    q.addAttribute( sat::SolvAttr::name, "libzypp" );	// different
+    q.setMatchExact();
+    q.setCaseSensitive(true);
+    v.push_back( q );
+  }
+  {
+    PoolQuery q;
+    q.addAttribute( sat::SolvAttr::vendor, "zypper" );	// different
+    q.setMatchExact();
+    q.setCaseSensitive(true);
+    v.push_back( q );
+  }
+  {
+    PoolQuery q;
+    q.addAttribute( sat::SolvAttr::name, "zypper" );
+    q.setMatchExact();
+    q.setCaseSensitive(false);	// different
+    v.push_back( q );
+  }
+  {
+    PoolQuery q;
+    q.addAttribute( sat::SolvAttr::name, "zypper" );
+    q.setMatchSubstring();	// different
+    q.setCaseSensitive(true);
+    v.push_back( q );
+  }
+  {
+    PoolQuery q;
+    q.addDependency( sat::SolvAttr::provides, "zypper" );
+    v.push_back( q );
+  }
+  {
+    PoolQuery q;
+    q.addDependency( sat::SolvAttr::provides, "zypper", Rel::GT, Edition("1.0")  );
+    v.push_back( q );
+  }
+  {
+    PoolQuery q;
+    q.addDependency( sat::SolvAttr::provides, "zypper", Rel::GT, Edition("2.0")  );
+    v.push_back( q );
+  }
 
-  BOOST_CHECK(q==q2);
-  BOOST_CHECK(q!=q3);
-  BOOST_CHECK(q==q4);
-  BOOST_CHECK(q4!=q3);
+  for_( li, 0U, v.size() )
+  {
+    for_( ri, 0U, v.size() )
+    {
+      COUT << li << " <> " << ri << endl;
+      bool equal( v[li] == v[ri] );
+      bool nequal( v[li] != v[ri] );
+      BOOST_CHECK_EQUAL( equal, li==ri );
+      BOOST_CHECK_EQUAL( equal, !nequal );
+    }
+  }
 }
 
 /////////////////////////////////////////////////////////////////////////////
