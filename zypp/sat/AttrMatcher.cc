@@ -275,6 +275,10 @@ namespace zypp
     : _pimpl( new Impl( search_r, flags_r ) )
     {}
 
+    AttrMatcher::AttrMatcher( const std::string & search_r, const Match::Mode & flags_r )
+    : _pimpl( new Impl( search_r, flags_r ) )
+    {}
+
     AttrMatcher::AttrMatcher( const std::string & search_r, int flags_r )
     : _pimpl( new Impl( search_r, Match(flags_r) ) )
     {}
@@ -314,6 +318,20 @@ namespace zypp
     std::ostream & operator<<( std::ostream & str, const AttrMatcher & obj )
     {
       return str << *obj._pimpl;
+    }
+
+    bool operator==( const AttrMatcher & lhs, const AttrMatcher & rhs )
+    {
+      return ( lhs.flags() == rhs.flags()
+               && lhs.searchstring() == rhs.searchstring() );
+    }
+
+    bool operator<( const AttrMatcher & lhs, const AttrMatcher & rhs )
+    {
+      if ( lhs.flags().get() != rhs.flags().get() )
+        return ( lhs.flags().get() < rhs.flags().get() );
+
+      return ( lhs.searchstring() < rhs.searchstring() );
     }
 
     /////////////////////////////////////////////////////////////////

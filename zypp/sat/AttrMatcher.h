@@ -330,6 +330,12 @@ namespace zypp
         /** Ctor taking string and \ref Match flags. */
         AttrMatcher( const std::string & search_r, const Match & flags_r );
 
+        /** Ctor taking string and \ref Match::Mode.
+         * Needed because we want them to be treated as \ref Match,
+         * and not as \ref int as the compiler woud do.
+        */
+        AttrMatcher( const std::string & search_r, const Match::Mode & flags_r );
+
         /** Low level interface wraps \a flags into \ref Match. */
         AttrMatcher( const std::string & search_r, int flags_r );
 
@@ -398,6 +404,16 @@ namespace zypp
 
     /** \relates AttrMatcher Stream output */
     std::ostream & operator<<( std::ostream & str, const AttrMatcher & obj );
+
+    /** \relates AttrMatcher */
+    bool operator==( const AttrMatcher & lhs, const AttrMatcher & rhs );
+
+    /** \relates AttrMatcher */
+    inline bool operator!=( const AttrMatcher & lhs, const AttrMatcher & rhs )
+    { return !( lhs == rhs ); }
+
+    /** \relates AttrMatcher Arbitrary order for std::container. */
+    bool operator<( const AttrMatcher & lhs, const AttrMatcher & rhs );
 
     /////////////////////////////////////////////////////////////////
   } // namespace sat
