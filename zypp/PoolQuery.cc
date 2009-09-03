@@ -39,97 +39,6 @@ namespace zypp
   namespace
   { /////////////////////////////////////////////////////////////////
 
-    /** Match data per attribtue.
-     *
-     * This includes the attribute itself, an optional \ref sat::AttrMatcher
-     * to restrict the query to certain string values, and an optional
-     * boolean \ref Predicate that may apply further restrictions that can
-     * not be expressed by the \ref attrMatcher.
-     *
-     * Example for such a \ref predicate would be an additional edition range
-     * check whan looking for dependencies. The \ref attrMatcher would
-     * find potential matches by looking at the dependencies name, the
-     * predicate will then check the edition ranges.
-     *
-     * As the \ref predicate takes an iterator pointing to the current
-     * match, it's also suitable for sub-structure (flexarray) inspection
-     * (\see \ref sat::LookupAttr::iterator::solvAttrSubEntry).
-     *
-     * \note: \see \ref addPredicate for further constraints.
-     */
-    struct AttrMatchData
-    {
-      typedef function<bool(sat::LookupAttr::iterator)> Predicate;
-
-      static bool always( sat::LookupAttr::iterator ) { return true; }
-      static bool never( sat::LookupAttr::iterator ) { return false; }
-
-      AttrMatchData( sat::SolvAttr attr_r, const sat::AttrMatcher & attrMatcher_r )
-        : attr( attr_r )
-        , attrMatcher( attrMatcher_r )
-      {}
-
-      AttrMatchData( sat::SolvAttr attr_r, const sat::AttrMatcher & attrMatcher_r,
-                     const Predicate & predicate_r, const std::string & predicateStr_r )
-        : attr( attr_r )
-        , attrMatcher( attrMatcher_r )
-        , predicate( predicate_r )
-        , predicateStr( predicateStr_r )
-      {}
-
-      /** A usable Predicate must provide a string representation.
-       * As there is no \c operator== for \ref Predicate, we compare it's
-       * string representation instead. Actually Predicate deserves to become
-       * a class which is also serializable, so we can store predicated queries.
-       */
-      template<class _Predicate>
-      void addPredicate( const _Predicate & predicate_r )
-      {
-        predicate    = predicate_r;
-        predicateStr = predicate_r.stringRep();
-      }
-
-      sat::SolvAttr    attr;
-      sat::AttrMatcher attrMatcher;
-      Predicate        predicate;
-      std::string      predicateStr;
-    };
-
-    /** \relates AttrMatchData */
-    inline std::ostream & operator<<( std::ostream & str, const AttrMatchData & obj )
-    {
-      str << obj.attr << ": " << obj.attrMatcher;
-      if ( obj.predicate )
-        str << " +(" << obj.predicateStr << ")";
-      return str;
-    }
-
-    /** \relates AttrMatchData */
-    inline bool operator==( const AttrMatchData & lhs, const AttrMatchData & rhs )
-    {
-      return ( lhs.attr == rhs.attr
-               && lhs.attrMatcher == rhs.attrMatcher
-               && lhs.predicateStr == rhs.predicateStr );
-    }
-
-    /** \relates AttrMatchData */
-    inline bool operator!=( const AttrMatchData & lhs, const AttrMatchData & rhs )
-    { return !( lhs == rhs ); }
-
-    /** \relates AttrMatchData Arbitrary order for std::container. */
-    inline bool operator<( const AttrMatchData & lhs, const AttrMatchData & rhs )
-    {
-      if ( lhs.attr != rhs.attr )
-        return (  lhs.attr < rhs.attr );
-      if ( lhs.attrMatcher != rhs.attrMatcher )
-        return (  lhs.attrMatcher < rhs.attrMatcher );
-      if ( lhs.predicateStr != rhs.predicateStr )
-        return (  lhs.predicateStr < rhs.predicateStr );
-      return false;
-    }
-
-    typedef std::list<AttrMatchData> AttrMatchList;
-
     /////////////////////////////////////////////////////////////////
     // some Helpers and Predicates
     /////////////////////////////////////////////////////////////////
@@ -172,11 +81,12 @@ namespace zypp
         return overlaps( Edition::MatchRange( cap.op(), cap.ed() ), _range );
       }
 
-      std::string stringRep() const
+      std::string serialize() const
       {
-        std::ostringstream str;
-        str << "EditionRange " << _range.op << " " << _range.value;
-        return str.str();
+        std::string ret( "EditionRange" );
+        str::appendEscaped( ret, _range.op.asString() );
+        str::appendEscaped( ret, _range.value.asString() );
+        return ret;
       }
 
       Edition::MatchRange _range;
@@ -194,11 +104,12 @@ namespace zypp
         return overlaps( Edition::MatchRange( Rel::EQ, iter_r.inSolvable().edition() ), _range );
       }
 
-      std::string stringRep() const
+      std::string serialize() const
       {
-        std::ostringstream str;
-        str << "SolvableRange " << _range.op << " " << _range.value;
-        return str.str();
+        std::string ret( "SolvableRange" );
+        str::appendEscaped( ret, _range.op.asString() );
+        str::appendEscaped( ret, _range.value.asString() );
+        return ret;
       }
 
       Edition::MatchRange _range;
@@ -219,15 +130,179 @@ namespace zypp
         return _cap.matches( iter_r.asType<Capability>() ) == CapMatch::yes;
       }
 
-      std::string stringRep() const
+      std::string serialize() const
       {
-        std::ostringstream str;
-        str << "CapabilityMatch " << _cap;
-        return str.str();
+        std::string ret( "CapabilityMatch" );
+        str::appendEscaped( ret, _cap.asString() );
+        return ret;
       }
 
       Capability _cap;
     };
+
+    /////////////////////////////////////////////////////////////////
+    //
+    /////////////////////////////////////////////////////////////////
+    /** Match data per attribtue.
+     *
+     * This includes the attribute itself, an optional \ref sat::AttrMatcher
+     * to restrict the query to certain string values, and an optional
+     * boolean \ref Predicate that may apply further restrictions that can
+     * not be expressed by the \ref attrMatcher.
+     *
+     * Example for such a \ref predicate would be an additional edition range
+     * check whan looking for dependencies. The \ref attrMatcher would
+     * find potential matches by looking at the dependencies name, the
+     * predicate will then check the edition ranges.
+     *
+     * As the \ref predicate takes an iterator pointing to the current
+     * match, it's also suitable for sub-structure (flexarray) inspection
+     * (\see \ref sat::LookupAttr::iterator::solvAttrSubEntry).
+     *
+     * \note: \see \ref addPredicate for further constraints.
+     */
+    struct AttrMatchData
+    {
+      typedef function<bool(sat::LookupAttr::iterator)> Predicate;
+
+      static bool always( sat::LookupAttr::iterator ) { return true; }
+      static bool never( sat::LookupAttr::iterator ) { return false; }
+
+      AttrMatchData()
+      {}
+
+      AttrMatchData( sat::SolvAttr attr_r, const sat::AttrMatcher & attrMatcher_r )
+        : attr( attr_r )
+        , attrMatcher( attrMatcher_r )
+      {}
+
+      AttrMatchData( sat::SolvAttr attr_r, const sat::AttrMatcher & attrMatcher_r,
+                     const Predicate & predicate_r, const std::string & predicateStr_r )
+        : attr( attr_r )
+        , attrMatcher( attrMatcher_r )
+        , predicate( predicate_r )
+        , predicateStr( predicateStr_r )
+      {}
+
+      /** A usable Predicate must provide a string serialization.
+       * As there is no \c operator== for \ref Predicate, we compare it's
+       * string representation instead. If you add new predicated, check the
+       * deserialization code in \ref deserialize.
+       */
+      template<class _Predicate>
+      void addPredicate( const _Predicate & predicate_r )
+      {
+        predicate    = predicate_r;
+        predicateStr = predicate_r.serialize();
+      }
+
+      /** Dumb serialization.
+       * \code
+       *   AttrMatchData ATTRIBUTE SEARCHSTRING [C|X] SERIALIZED_PREDICATE
+       * \endcode
+      */
+      std::string serialize() const
+      {
+        std::string ret( "AttrMatchData" );
+        str::appendEscaped( ret, attr.asString() );
+        str::appendEscaped( ret, attrMatcher.searchstring() );
+        // TODO: Actually the flag should be serialized too, but for PoolQuery
+        // it's by now sufficient to differ between mode OTHER and others,
+        // i.e. whether to compile or not compile.
+        str::appendEscaped( ret, attrMatcher.flags().mode() == Match::OTHER ? "C" : "X" );
+        str::appendEscaped( ret, predicateStr );
+        return ret;
+      }
+
+       /** Dumb restore from serialized string.
+        * \throw Exception on parse error.
+        */
+      static AttrMatchData deserialize( const std::string & str_r )
+      {
+        std::vector<std::string> words;
+        str::splitEscaped( str_r, std::back_inserter(words) );
+        if ( words.empty() || words[0] != "AttrMatchData" )
+          ZYPP_THROW( Exception( str::Str() << "Expecting AttrMatchData: " << str_r ) );
+        if ( words.size() != 5 )
+          ZYPP_THROW( Exception( str::Str() << "Wrong number of words: " << str_r ) );
+
+        AttrMatchData ret;
+        ret.attr = sat::SolvAttr( words[1] );
+        ret.attrMatcher = sat::AttrMatcher( words[2] );
+        if ( words[3] == "C" )
+          ret.attrMatcher.setFlags( Match::OTHER );
+        ret.predicateStr = words[4];
+
+        // now the predicate
+        words.clear();
+        str::splitEscaped( ret.predicateStr, std::back_inserter(words) );
+        if ( ! words.empty() )
+        {
+          if ( words[0] == "EditionRange" )
+          {
+            if ( words.size() != 3 )
+              ZYPP_THROW( Exception( str::Str() << "Wrong number of words: " << str_r ) );
+            ret.predicate = EditionRangePredicate( Rel(words[1]), Edition(words[2]) );
+          }
+          else if ( words[0] == "SolvableRange" )
+          {
+            if ( words.size() != 3 )
+              ZYPP_THROW( Exception( str::Str() << "Wrong number of words: " << str_r ) );
+            ret.predicate = SolvableRangePredicate( Rel(words[1]), Edition(words[2]) );
+          }
+          else if ( words[0] == "CapabilityMatch" )
+          {
+            if ( words.size() != 2 )
+              ZYPP_THROW( Exception( str::Str() << "Wrong number of words: " << str_r ) );
+            ret.predicate = CapabilityMatchPredicate( Capability(words[1]) );
+          }
+          else
+            ZYPP_THROW( Exception( str::Str() << "Unknown predicate: " << str_r ) );
+        }
+        return ret;
+     }
+
+      sat::SolvAttr    attr;
+      sat::AttrMatcher attrMatcher;
+      Predicate        predicate;
+      std::string      predicateStr;
+    };
+
+    /** \relates AttrMatchData */
+    inline std::ostream & operator<<( std::ostream & str, const AttrMatchData & obj )
+    {
+      str << obj.attr << ": " << obj.attrMatcher;
+      if ( obj.predicate )
+        str << " +(" << obj.predicateStr << ")";
+      return str;
+    }
+
+    /** \relates AttrMatchData */
+    inline bool operator==( const AttrMatchData & lhs, const AttrMatchData & rhs )
+    {
+      return ( lhs.attr == rhs.attr
+               && lhs.attrMatcher == rhs.attrMatcher
+               && lhs.predicateStr == rhs.predicateStr );
+    }
+
+    /** \relates AttrMatchData */
+    inline bool operator!=( const AttrMatchData & lhs, const AttrMatchData & rhs )
+    { return !( lhs == rhs ); }
+
+    /** \relates AttrMatchData Arbitrary order for std::container. */
+    inline bool operator<( const AttrMatchData & lhs, const AttrMatchData & rhs )
+    {
+      if ( lhs.attr != rhs.attr )
+        return (  lhs.attr < rhs.attr );
+      if ( lhs.attrMatcher != rhs.attrMatcher )
+        return (  lhs.attrMatcher < rhs.attrMatcher );
+      if ( lhs.predicateStr != rhs.predicateStr )
+        return (  lhs.predicateStr < rhs.predicateStr );
+      return false;
+    }
+
+    typedef std::list<AttrMatchData> AttrMatchList;
+
 
   } /////////////////////////////////////////////////////////////////
   // namespace
@@ -354,7 +429,7 @@ namespace zypp
     _attrMatchList.clear();
 
     Match cflags( _flags );
-    if ( cflags.mode() == Match::OTHER) // this will never succeed...
+    if ( cflags.mode() == Match::OTHER ) // this will never succeed...
       ZYPP_THROW( MatchUnknownModeException( cflags ) );
 
     /** Compiled search strings. */
@@ -923,6 +998,7 @@ attremptycheckend:
     static const PoolQueryAttr caseSensitiveAttr;
     static const PoolQueryAttr installStatusAttr;
     static const PoolQueryAttr editionAttr;
+    static const PoolQueryAttr complexAttr;
   };
 
   const PoolQueryAttr PoolQueryAttr::noAttr;
@@ -935,6 +1011,7 @@ attremptycheckend:
   const PoolQueryAttr PoolQueryAttr::caseSensitiveAttr("case_sensitive");
   const PoolQueryAttr PoolQueryAttr::installStatusAttr("install_status");
   const PoolQueryAttr PoolQueryAttr::editionAttr("version");
+  const PoolQueryAttr PoolQueryAttr::complexAttr("complex");
 
   class StringTypeAttr : public IdStringType<PoolQueryAttr>
   {
@@ -969,6 +1046,7 @@ attremptycheckend:
 
 
   //\TODO maybe ctor with stream can be usefull
+  //\TODO let it throw, let it throw, let it throw.
   bool PoolQuery::recover( istream &str, char delim )
   {
     bool finded_something = false; //indicates some atributes is finded
@@ -1115,6 +1193,18 @@ attremptycheckend:
 
         setEdition(Edition(attrValue), rel);
       }
+      else if ( attribute == PoolQueryAttr::complexAttr )
+      {
+        try
+        {
+          _pimpl->_uncompiledPredicated.insert( AttrMatchData::deserialize( attrValue ) );
+        }
+        catch ( const Exception & err )
+        {
+          WAR << "Unparsable value for complex: " << err.asUserHistory() << endl;
+
+        }
+      }
       else if ( attribute==PoolQueryAttr::noAttr )
       {
         WAR << "empty attribute name" << endl;
@@ -1230,6 +1320,11 @@ attremptycheckend:
       {
         str << s <<": "<< *it2 << delim;
       }
+    }
+
+    for_( it, _pimpl->_uncompiledPredicated.begin(), _pimpl->_uncompiledPredicated.end() )
+    {
+      str << "complex: "<< it->serialize() << delim;
     }
 
     //separating delim - protection
