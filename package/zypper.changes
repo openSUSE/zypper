@@ -1,4 +1,11 @@
 -------------------------------------------------------------------
+Thu Sep  3 16:30:13 CEST 2009 - jkupec@suse.cz
+
+- Fixed wrong table column width computation causing excessive
+  output (bnc #534795)
+- 1.0.11
+
+-------------------------------------------------------------------
 Tue Jun  9 16:14:42 CEST 2009 - jkupec@suse.cz
 
 - --with-interactive option added to 'patch' command. The option
