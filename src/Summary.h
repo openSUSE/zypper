@@ -83,6 +83,7 @@ public:
   { return _inst_pkg_total; }
   unsigned packagesToRemove() const;
   unsigned packagesToUpgrade() const;
+  unsigned packagesToDowngrade() const;
   const zypp::ByteCount & toDownload() const
   { return _todownload; }
   const zypp::ByteCount & installedSizeChange() const

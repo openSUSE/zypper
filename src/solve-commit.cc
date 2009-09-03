@@ -798,8 +798,10 @@ void solve_and_commit (Zypper & zypper)
             Out::QUIET, Out::TYPE_NORMAL); // don't show this to machines
         }
 
-        // check for running services
-        if (summary.packagesToRemove() && summary.packagesToUpgrade())
+        // check for running services (fate #300763)
+        if (summary.packagesToRemove() ||
+            summary.packagesToUpgrade() ||
+            summary.packagesToDowngrade())
           suggest_restart_services(zypper);
       }
     }
