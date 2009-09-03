@@ -237,6 +237,18 @@ unsigned Summary::packagesToRemove() const
 
 // --------------------------------------------------------------------------
 
+unsigned Summary::packagesToUpgrade() const
+{
+  // total packages to remove (packages only - patches, patterns, and products
+  // are virtual; srcpackages do not get removed by zypper)
+  KindToResPairSet::const_iterator it = toupgrade.find(ResKind::package);
+  if (it != toupgrade.end())
+    return it->second.size();
+  return 0;
+}
+
+// --------------------------------------------------------------------------
+
 void Summary::writeResolvableList(ostream & out, const ResPairSet & resolvables)
 {
   // find multi-version packages
