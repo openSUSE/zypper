@@ -334,10 +334,10 @@ namespace zypp
     }
 
 
-    std::string escape( const std::string & str_r, const char sep_r )
+    std::string escape( const C_Str & str_r, const char sep_r )
     {
       std::vector<char> buf;
-      for_( s, str_r.begin(), str_r.end() )
+      for_( s, str_r.c_str(), s+str_r.size() )
       {
         switch ( *s )
         {

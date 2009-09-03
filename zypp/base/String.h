@@ -17,6 +17,7 @@
 #include <iosfwd>
 #include <vector>
 #include <string>
+#include <sstream>
 
 #include "zypp/base/Easy.h"
 #include "zypp/base/PtrTypes.h"
@@ -153,6 +154,29 @@ namespace zypp
       ~SafeBuf() { if ( _buf ) free( _buf ); }
       std::string asString() const
       { return _buf ? std::string(_buf) : std::string(); }
+    };
+
+    ///////////////////////////////////////////////////////////////////
+    /** Convenient building of std::string via std::ostream::operator<<.
+     * Basically this is an \ref ostringstream which is autocenvertible
+     * into a \ref string.
+     * \code
+     *  void fnc( const std::string & txt_r );
+     *  fnc( str::Str() << "Hello " << 13 );
+     *
+     *  std::string txt( str::Str() << 45 );
+     * \endcode
+    */
+    struct Str
+    {
+      template<class _Tp>
+      Str & operator<<( const _Tp & val )
+      { _str << val; return *this; }
+
+      operator std::string() const
+      { return _str.str(); }
+
+      std::ostringstream _str;
     };
 
     ///////////////////////////////////////////////////////////////////
@@ -645,7 +669,18 @@ namespace zypp
        *
        * \todo shoud not be documented in doxy-group 'Join'
        */
-      std::string escape(const std::string & str_r, const char c = ' ' );
+      std::string escape( const C_Str & str_r, const char c = ' ' );
+
+      /** Escape \a next_r and append it to \a str_r using separator \a sep_r. */
+      inline void appendEscaped( std::string & str_r, const C_Str & next_r, const char sep_r = ' ' )
+      {
+        if ( ! str_r.empty() )
+          str_r += sep_r;
+        if ( next_r.empty() )
+          str_r += "\"\"";
+        else
+          str_r += escape( next_r, sep_r );
+      }
 
       //! \todo unsecape()
 
