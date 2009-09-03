@@ -2,6 +2,7 @@
 #include "zypp/../tests/lib/TestSetup.h"
 #undef  INCLUDE_TESTSETUP_WITHOUT_BOOST
 
+#include <algorithm>
 #include <zypp/PoolQuery.h>
 
 static std::string appname( "NameReqPrv" );
