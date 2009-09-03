@@ -78,9 +78,11 @@ public:
   void writePackageCounts(std::ostream & out);
   void writeDownloadAndInstalledSizeSummary(std::ostream & out);
 
+
   unsigned packagesToGetAndInstall() const
   { return _inst_pkg_total; }
   unsigned packagesToRemove() const;
+  unsigned packagesToUpgrade() const;
   const zypp::ByteCount & toDownload() const
   { return _todownload; }
   const zypp::ByteCount & installedSizeChange() const
