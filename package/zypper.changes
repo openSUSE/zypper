@@ -1,4 +1,10 @@
 -------------------------------------------------------------------
+Thu Sep  3 19:55:38 CEST 2009 - jkupec@suse.cz
+
+- Showing running processes using files deleted by recent package
+  upgrade/downgrade or removal (fate #300763).
+
+-------------------------------------------------------------------
 Thu Aug 27 15:30:03 CEST 2009 - mvidner@suse.cz
 
 - 1.2.3, by popular demand
