@@ -430,49 +430,29 @@ void testCMP( const L & lhs, const R & rhs )
 #undef OUTS
 }
 
-template <class Lcont, class Rcont>
-void diffquery( const Lcont & l, const Rcont & r )
+#include "zypp/Locks.h"
+#include "zypp/target/HardLocksFile.h"
+inline PoolQuery makeTrivialQuery( IdString ident_r )
 {
-  MIL << "DIFF " << l.size() << " <-> " << r.size() << endl;
-  sat::SolvableSet ls;
-  sat::SolvableSet bb;
-  sat::SolvableSet rs;
+  sat::Solvable::SplitIdent ident( ident_r );
 
-  for_( it, l.begin(), l.end() )
-  {
-    ( r.contains( *it ) ? bb : ls ).insert( *it );
-  }
-  for_( it, r.begin(), r.end() )
-  {
-    if ( ! l.contains( *it ) )
-      rs.insert( *it );
-  }
-
-  MIL << "(" << ls.size() << ") (" << bb.size() << ") (" << rs.size() << ")" << endl;
-  INT  << ls << endl;
-  INT  << rs << endl;
+  PoolQuery q;
+  q.addAttribute( sat::SolvAttr::name, ident.name().asString() );
+  q.addKind( ident.kind() );
+  q.setMatchExact();
+  q.setCaseSensitive(true);
+  return q;
 }
-
-bool querycompare( const PoolQuery & q, bool verbose = true )
+inline PoolQuery makeTrivialQuery( const char * ch )
+{ return makeTrivialQuery( IdString(ch) ); }
+void lktest()
 {
-  q.begin();
-  SEC << q << endl;
-  unsigned nc = 0;
-  if ( 1 )
-  {
-    Measure x( "new query" );
-    for_( it, q.begin(), q.end() )
-    {
-      ++nc;
-      if ( verbose )
-        DBG << it << endl;
-    }
-    SEC << "--> MATCHES: " << nc << endl;
-  }
-  return true;
+  static unsigned i = 0;
+  ResPool pool( ResPool::instance() );
+  target::HardLocksFile::Data newdata;
+  pool.getHardLockQueries( newdata );
+  SEC << '[' << i++ << ']' << newdata << endl;
 }
-
-#include "zypp/MediaProducts.h"
 
 /******************************************************************
 **
@@ -485,10 +465,6 @@ try {
   zypp::base::LogControl::instance().logToStdErr();
   INT << "===[START]==========================================" << endl;
   ZConfig::instance();
-
-  USR << ZConfig::instance().rpmInstallFlags() << endl;
-
-  return 0;
 
   ResPool   pool( ResPool::instance() );
   sat::Pool satpool( sat::Pool::instance() );
@@ -597,69 +573,53 @@ try {
 
   ///////////////////////////////////////////////////////////////////
 
+  Locks & locks = Locks::instance();
   {
     PoolQuery q;
-    q.setCaseSensitive( false );
-    q.setMatchSubstring();
-    q.addString( "xteddy" );
-    q.addDependency( sat::SolvAttr::provides, "libzypp", Rel::EQ, Edition("4.2.6") );
-    q.addDependency( sat::SolvAttr::name, "zypper", Rel::LE, Edition("4.2.6") );
-    //q.addDependency( sat::SolvAttr::name, Capability("kernel-default") );
-    q.addKind( ResKind::package );
-    querycompare( q );
+    q.setMatchGlob();
+    q.addDependency( sat::SolvAttr::provides, "kernel", Rel::EQ, Edition("2.0") );
+    q.addDependency( sat::SolvAttr::provides, Capability( "kernel == 3" ) );
+
+    SEC << q << endl;
+    std::stringstream str;
+    q.serialize( str );
+    INT << str.str() << endl;
+    PoolQuery p;
+    p.recover( str );
+    SEC << p << endl;
+    locks.addLock( q );
   }
+  {
+    PoolQuery q;
+    q.setMatchGlob();
+    q.addString( "kernel" );
+    q.addDependency( sat::SolvAttr::provides );
+    locks.addLock( q );
+  }
+  locks.merge();
+  MIL << locks.size() << endl;
+
+  locks.save( "/tmp/foo" );
+  ExternalProgram("cat /tmp/foo") >> USR;
+  return 0;
+
+  lktest();
+  ui::Selectable::Ptr p( getSel<Package>( "zypper" ) );
+  ui::Selectable::Ptr p1( getSel<Package>( "libzypp" ) );
+  if ( p )
+  {
+    MIL << p->setStatus( ui::S_Protected, ResStatus::USER ) << endl;
+    MIL << p1->setStatus( ui::S_Protected, ResStatus::USER ) << endl;
+    MIL << p << endl;
+    MIL << p1 << endl;
+    lktest();
+  }
+
+
   //////////////////////////////////////////////////////////////////
   INT << "===[END]============================================" << endl << endl;
   zypp::base::LogControl::instance().logNothing();
   return 0;
-
-  {
-    PoolQuery q;
-    q.setCaseSensitive( false );
-    q.setMatchSubstring();
-    q.addAttribute( sat::SolvAttr::provides, "libzypp" );
-    q.addKind( ResKind::package );
-    querycompare( q, false );
-
-    q.setMatchExact();
-    querycompare( q, false );
-
-    q.addString( "xteddy" );
-    querycompare( q, false );
-  }
-  {
-    PoolQuery q;
-    q.setCaseSensitive( false );
-    q.setMatchExact();
-    q.addKind( ResKind::package );
-
-    q.addAttribute( sat::SolvAttr::provides, "xteddy" );
-    querycompare( q, false );
-  }
-
-  {
-    PoolQuery q;
-    q.setCaseSensitive( false );
-    q.setMatchSubstring();
-    q.addDependency( sat::SolvAttr::provides, "libzypp" );
-    q.addKind( ResKind::package );
-    querycompare( q, false );
-
-    q.setMatchExact();
-    querycompare( q, false );
-
-    q.addString( "xteddy" );
-    querycompare( q, false );
-  }
- {
-    PoolQuery q;
-    q.setCaseSensitive( false );
-    q.setMatchExact();
-    q.addKind( ResKind::package );
-
-    q.addDependency( sat::SolvAttr::provides, "xteddy" );
-    querycompare( q, false );
-  }
 
 
 #if 0
