@@ -231,7 +231,8 @@ void Table::dumpTo (ostream &stream) const {
         _width > _screen_width &&
         // don't resize the column to less than 3, or if the resulting table
         // would still exceed the screen width (bnc #534795)
-         _width - _screen_width < _max_width[c] - 3) {
+        _max_width[c] > 3 &&
+        _width - _screen_width < ((int) _max_width[c]) - 3) {
       _max_width[c] -= _width - _screen_width;
       break;
     }
