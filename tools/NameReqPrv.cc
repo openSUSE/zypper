@@ -48,8 +48,8 @@ void tableOut( const std::string & s1 = std::string(),
                const std::string & s5 = std::string() )
 {
   message << "  ";
-#define TABEL(N) static unsigned w##N = 0; if ( ! s##N.empty() ) w##N = std::max( w##N, s##N.size() ); message << str::form( " %-*s ", w##N, s##N.c_str() )
-#define TABER(N) static unsigned w##N = 0; if ( ! s##N.empty() ) w##N = std::max( w##N, s##N.size() ); message << str::form( " %*s ", w##N, s##N.c_str() )
+#define TABEL(N) static unsigned w##N = 0; if ( ! s##N.empty() ) w##N = std::max( w##N, unsigned(s##N.size()) ); message << str::form( " %-*s ", w##N, s##N.c_str() )
+#define TABER(N) static unsigned w##N = 0; if ( ! s##N.empty() ) w##N = std::max( w##N, unsigned(s##N.size()) ); message << str::form( " %*s ", w##N, s##N.c_str() )
   TABER( 1 ); TABEL( 2 ); TABEL( 3 ); TABEL( 4 ); TABEL( 5 );
 #undef TABEL
   message << endl;
