@@ -1387,36 +1387,22 @@ void SATResolver::setSystemRequirements()
 	MIL << "SYSTEM Conflicts " << *iter << endl;
     }
 
-    // try to prefer none architecture change if possible
-    // So the architecture of the "rpm" package should be prefered
+    // Lock the architecture of the running systems rpm
+    // package on distupgrade.
+    if ( _distupgrade && ZConfig::instance().systemRoot() == "/" )
+    {
+      ResPool pool( ResPool::instance() );
+      IdString rpm( "rpm" );
+      for_( it, pool.byIdentBegin(rpm), pool.byIdentEnd(rpm) )
+      {
+        if ( (*it)->isSystem() )
+        {
+          Capability archrule( (*it)->arch(), rpm.c_str(), Capability::PARSED );
+          queue_push( &(_jobQueue), SOLVER_INSTALL|SOLVABLE_NAME|SOLVER_ESSENTIAL );
+          queue_push( &(_jobQueue), archrule.id() );
 
-    Capability cap("rpm");
-    sat::WhatProvides rpmProviders(cap);
-    for_( iter2, rpmProviders.begin(), rpmProviders.end() ) {
-	if (iter2->isSystem()) {
-	    sat::detail::IdType nid = iter2->ident().id();
-	    nid = rel2id(_SATPool,
-			 nid,
-			 iter2->arch().id(), REL_ARCH, true);
-	    if (_distupgrade)
-	    {
-		bool addRule = false;
-		Capability cap(nid);
-		sat::WhatProvides rpmProviders(cap);
-		for_( iter3, rpmProviders.begin(), rpmProviders.end() ) {
-		    if ( !(iter3->isSystem())) {
-			addRule = true;
-			break;
-		    }
-		}
-		if (!addRule)
-		    break;
-	    }
-
-	    queue_push(&(_jobQueue), SOLVER_INSTALL|SOLVABLE_NAME|SOLVER_ESSENTIAL);
-	    queue_push(&(_jobQueue), nid);
-	    break;
-	}
+        }
+      }
     }
 }
 
