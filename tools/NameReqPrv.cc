@@ -37,7 +37,6 @@ int usage( const std::string & msg_r = std::string(), int exit_r = 100 )
   cerr << "  -r/-R    turn on/off looking for requires    (default off)" << endl;
   cerr << "  -a       short for -n -p -r" << endl;
   cerr << "  -A       short for -n -P -R" << endl;
-  cerr << "TODO: Waiting for PoolQuery::allMatches switch and need to beautify output." << endl;
   cerr << "" << endl;
   return exit_r;
 }
