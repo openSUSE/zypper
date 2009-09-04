@@ -65,6 +65,11 @@ namespace zypp
 
     public:
 
+      /** The target root directory. */
+      Pathname systemRoot() const;
+
+    public:
+
       /** The autodetected system architecture. */
       static Arch defaultSystemArchitecture();
 

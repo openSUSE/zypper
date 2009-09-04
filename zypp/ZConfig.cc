@@ -499,6 +499,12 @@ namespace zypp
   ZConfig::~ZConfig( )
   {}
 
+  Pathname ZConfig::systemRoot() const
+  {
+    Target_Ptr target( getZYpp()->getTarget() );
+    return target ? target->root() : Pathname();
+  }
+
   ///////////////////////////////////////////////////////////////////
   //
   // system architecture
