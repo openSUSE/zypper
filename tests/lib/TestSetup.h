@@ -330,6 +330,15 @@ class TestSetup
         USR << str::form( "*** Load TestSetup from '%s'", sysRoot.c_str() ) << endl;
         TestSetup test( sysRoot, Arch_x86_64 );
         test.loadRepos();
+
+        Pathname solvCachePath( RepoManagerOptions::makeTestSetup( test.root() ).repoSolvCachePath );
+        Pathname fakeTargetSolv( solvCachePath / sat::Pool::systemRepoAlias() / "solv" );
+        if ( PathInfo( fakeTargetSolv ).isFile() )
+        {
+          USR << str::form( "*** Fake TestSetup Target from '%s'", fakeTargetSolv.c_str() ) << endl;
+          test.target();
+          test.loadTargetRepo( fakeTargetSolv );
+        }
       }
       else
       {
