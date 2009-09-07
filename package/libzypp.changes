@@ -1,8 +1,10 @@
 -------------------------------------------------------------------
-Mon Sep  7 17:11:21 CEST 2009 - ma@suse.de
+Mon Sep  7 17:31:20 CEST 2009 - ma@suse.de
 
 - Fix resolution to force installation even if dependencies are missing. 
   (bnc #531564)
+- Rephrase solver resolution to point out if a package will break. 
+  (bnc #520083)
 
 -------------------------------------------------------------------
 Fri Sep  4 12:19:50 CEST 2009 - ma@suse.de

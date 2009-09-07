@@ -48,12 +48,12 @@ ProblemSolutionIgnore::ProblemSolutionIgnore( ResolverProblem_Ptr parent,
 					      PoolItem item )
     : ProblemSolution (parent, "", "")
 {
-    // TranslatorExplanation %s = name of package, patch, selection ...    
-    _description = str::form (_("ignore some dependencies of %s"), item->name().c_str() );
+    // TranslatorExplanation %s = name of package, patch, selection ...
+    _description = str::form (_("break %s by ignoring some of its dependencies"), item->name().c_str() );
 
     addAction ( new InjectSolutionAction (item, WEAK));
-}	
-	
+}
+
 ProblemSolutionIgnore::ProblemSolutionIgnore( ResolverProblem_Ptr parent,
 					      PoolItemList itemList )
     : ProblemSolution (parent, "", "")
@@ -64,7 +64,7 @@ ProblemSolutionIgnore::ProblemSolutionIgnore( ResolverProblem_Ptr parent,
 	    addAction ( new InjectSolutionAction (*iter, WEAK));
 	}
 }
-	
+
       ///////////////////////////////////////////////////////////////////
     };// namespace detail
     /////////////////////////////////////////////////////////////////////
