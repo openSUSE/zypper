@@ -1,9 +1,15 @@
 -------------------------------------------------------------------
+Mon Sep  7 17:11:21 CEST 2009 - ma@suse.de
+
+- Fix resolution to force installation even if dependencies are missing. 
+  (bnc #531564)
+
+-------------------------------------------------------------------
 Fri Sep  4 12:19:50 CEST 2009 - ma@suse.de
 
 - Lock rpms architecture only on distupgrade of the running system. 
   (bnc #458520)
-- version 6.14.1 (11)
+- version 6.14.2 (11)
 
 -------------------------------------------------------------------
 Thu Sep  3 13:41:31 CEST 2009 - ma@suse.de
