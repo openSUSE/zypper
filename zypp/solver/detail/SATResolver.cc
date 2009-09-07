@@ -948,6 +948,7 @@ string SATResolver::SATprobleminfoString(Id problem, string &detail, Id &ignoreI
 	  ret = str::form (_("%s is not installable"), s.asString().c_str());
 	  break;
       case SOLVER_PROBLEM_NOTHING_PROVIDES_DEP:
+	  ignoreId = source; // for setting weak dependencies
 	  s = mapSolvable (source);
 	  ret = str::form (_("nothing provides %s needed by %s"), dep2str(pool, dep), s.asString().c_str());
 	  break;
