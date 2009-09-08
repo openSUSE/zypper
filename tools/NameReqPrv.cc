@@ -33,7 +33,7 @@ int usage( const std::string & msg_r = std::string(), int exit_r = 100 )
   cerr << "           denotes a sover testcase, the testcase is loaded." << endl;
   cerr << "  -i/-I    turn on/off case insensitive search (default on)" << endl;
   cerr << "  -n/-N    turn on/off looking for names       (default on)" << endl;
-  cerr << "  -p/-P    turn on/off looking for provides    (default on)" << endl;
+  cerr << "  -p/-P    turn on/off looking for provides    (default off)" << endl;
   cerr << "  -r/-R    turn on/off looking for requires    (default off)" << endl;
   cerr << "  -a       short for -n -p -r" << endl;
   cerr << "  -A       short for -n -P -R" << endl;
@@ -151,7 +151,7 @@ int main( int argc, char * argv[] )
 
   bool ignorecase( true );
   bool names     ( true );
-  bool provides  ( true );
+  bool provides  ( false );
   bool requires  ( false );
 
   for ( ; argc; --argc,++argv )
@@ -192,17 +192,13 @@ int main( int argc, char * argv[] )
     for_( it, q.begin(), q.end() )
     {
       tableOut( str::numstring( it->id() ), it->asString(), it->repository().alias(), it->vendor().asString() );
-      //message << "  " << *it << "(" << it->vendor() << ")";
       if ( ! it.matchesEmpty() )
       {
         for_( match, it.matchesBegin(), it.matchesEnd() )
         {
-          //tableOut( match->inSolvAttr().asString().substr( 9, 1 ), match->asString() );
           tableOut( "", "", "", match->inSolvAttr().asString().substr( 9, 1 )+" " +match->asString() );
-          //message << endl << "    " << match->inSolvAttr() << "\t" << match->asString();
         }
       }
-      //message << endl;
     }
 
     message << "}" << endl;
