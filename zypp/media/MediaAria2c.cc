@@ -437,7 +437,8 @@ void MediaAria2c::getFileCopy( const Pathname & filename , const Pathname & targ
         case 1: // unknown
         default:
         {
-          MediaException e(str::form("Failed to download %s from %s", filename.c_str(), _url.asString().c_str()));
+          // TranslatorExplanation: Failed to download <FILENAME> from <SERVERURL>.
+          MediaException e(str::form(_("Failed to download %s from %s"), filename.c_str(), _url.asString().c_str()));
           for_(it, ariaExceptions.begin(), ariaExceptions.end())
               e.addHistory(*it);
 
