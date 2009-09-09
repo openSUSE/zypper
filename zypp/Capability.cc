@@ -374,6 +374,46 @@ namespace zypp
     return str::regex_match( name_r, what, filenameRegex );
   }
 
+  Capability Capability::guessPackageSpec( const std::string & str_r )
+  {
+    Capability cap( str_r );
+    CapDetail detail( cap.detail() );
+
+    // str_r might be the form "libzypp-1.2.3-4.5(.arch)'
+    // correctly parsed as name capability by the ctor.
+    if ( detail.isNamed() && ::strrchr( detail.name().c_str(), '-' ) && sat::WhatProvides( cap ).empty() )
+    {
+      Arch origArch( detail.arch() ); // to support a trailing .arch
+
+      std::string guess( detail.name().asString() );
+      std::string::size_type pos( guess.rfind( '-' ) );
+      guess[pos] = '=';
+
+      Capability guesscap( origArch, guess );
+      detail = guesscap.detail();
+
+      if ( ! sat::WhatProvides( Capability(detail.name().id()) ).empty() )
+        return guesscap;
+
+      // try the one but last '-'
+      if ( pos )
+      {
+        guess[pos] = '-';
+        if ( (pos = guess.rfind( '-', pos-1 )) != std::string::npos )
+        {
+          guess[pos] = '=';
+
+          guesscap = Capability( origArch, guess );
+          detail = guesscap.detail();
+
+          if ( ! sat::WhatProvides( Capability(detail.name().id()) ).empty() )
+            return guesscap;
+        }
+      }
+    }
+    return cap;
+  }
+
   /******************************************************************
   **
   **	FUNCTION NAME : operator<<

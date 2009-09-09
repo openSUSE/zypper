@@ -9,6 +9,7 @@
 #include <boost/test/floating_point_comparison.hpp>
 #include <boost/test/auto_unit_test.hpp>
 
+#include "TestSetup.h"
 #include "zypp/Arch.h"
 #include "zypp/Capability.h"
 #include "zypp/Capabilities.h"
@@ -19,6 +20,8 @@ using boost::test_tools::close_at_tolerance;
 
 using namespace std;
 using namespace zypp;
+
+static TestSetup test( Arch_x86_64 );
 
 BOOST_AUTO_TEST_CASE(capabilities_test)
 {
@@ -113,4 +116,33 @@ BOOST_AUTO_TEST_CASE(capabilities_test)
   BOOST_CHECK_EQUAL( Capability( Arch_i386, "na.me" ), na );
   BOOST_CHECK_EQUAL( Capability( Arch_i386, "na.me == 1" ), naoe );
 }
+
+BOOST_AUTO_TEST_CASE(guessPackageSpec)
+{
+  BOOST_CHECK_EQUAL( Capability::guessPackageSpec( "" ),
+                     Capability( "", "", "", "" ) );
+
+  // With no libzypp in the pool, no guess should succeed:
+  BOOST_REQUIRE( sat::WhatProvides(Capability("libzypp")).empty() );
+
+  BOOST_CHECK_EQUAL( Capability::guessPackageSpec( "libzypp-1-2" ),	 Capability( "",     "libzypp-1-2",      "", "" ) );
+  BOOST_CHECK_EQUAL( Capability::guessPackageSpec( "libzypp-1-2.i586" ), Capability( "i586", "libzypp-1-2",      "", "" ) );
+  BOOST_CHECK_EQUAL( Capability::guessPackageSpec( "libzypp.i586-1-2" ), Capability( "",     "libzypp.i586-1-2", "", "" ) );
+
+  // now load some repo prividing libzypp and csee how the guessing
+  // changes:
+  test.loadRepo( TESTS_SRC_DIR "/data/openSUSE-11.1", "opensuse" );
+
+  BOOST_REQUIRE( ! sat::WhatProvides(Capability("libzypp")).empty() );
+
+  BOOST_CHECK_EQUAL( Capability::guessPackageSpec( "libzypp-1-2" ),      Capability( "",     "libzypp", "=", "1-2" ) );
+  BOOST_CHECK_EQUAL( Capability::guessPackageSpec( "libzypp-1-2.i586" ), Capability( "i586", "libzypp", "=", "1-2" ) );
+  BOOST_CHECK_EQUAL( Capability::guessPackageSpec( "libzypp.i586-1-2" ), Capability( "i586", "libzypp", "=", "1-2" ) );
+
+  // Double arch spec: the trailing one succeeds, the other one gets part of the name.
+  // As "libzypp.i586' is not in the pool, guessing fails. Result is a named cap.
+  BOOST_CHECK_EQUAL( Capability::guessPackageSpec( "libzypp.i586-1-2.ppc" ),
+                     Capability( "ppc",  "libzypp.i586-1-2", "", "" ) );
+}
+
 

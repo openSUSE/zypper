@@ -210,6 +210,32 @@ namespace zypp
       static bool isInterestingFileSpec( const std::string & name_r ) { return isInterestingFileSpec( name_r.c_str() ); }
       static bool isInterestingFileSpec( const char * name_r );
 
+      /** \ref Capability parser also guessing \c "libzypp-1.2.3-4.5.x86_64" formats.
+       *
+       * The argument might be in the form \c "libzypp-devel-1.2.3.x86_64".
+       * Passed to the Capability ctor, this would correctly be parsed as name
+       * capability, because actually the edition part had to be separated by a
+       * \c '=', and the architecture had to be appended to the name.
+       * So this is how it actually had to look like: \c "libzypp-devel.x86_64=1.2.3"
+       *
+       * Obviously we have to guess if, and where to split name and edition. In
+       * fact \c "devel" could also be the version and \c "1.2.3" would be the
+       * release then.
+       *
+       * Assuming this Capability should be provided by some package in
+       * the \ref ResPool, we check this. If unprovided, we substitute the last,
+       * (or one but last) \c '-' by a \c '='. If the name part
+       * (without version) of the resulting Capability is provided
+       * by the \ref ResPool, this Capability is returned.
+       *
+       * Otherwise we return the Capability originally created from
+       * \a str_r.
+       *
+       * \note: As this method will access the global pool, the returned
+       * result depends on the pools content.
+       */
+      static Capability guessPackageSpec( const std::string & str_r );
+
     public:
       /** Expert backdoor. */
       sat::detail::IdType id() const
