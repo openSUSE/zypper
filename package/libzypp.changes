@@ -1,4 +1,11 @@
 -------------------------------------------------------------------
+Wed Sep  9 15:02:18 CEST 2009 - ma@suse.de
+
+- Add Capability::guessPackageSpec; parser also supporting "name-ver-rel.arch"
+  formats for building Capabilities(originally "name.arch=ver-rel").
+- version 6.14.3 (11)
+
+-------------------------------------------------------------------
 Mon Sep  7 17:31:20 CEST 2009 - ma@suse.de
 
 - Fix resolution to force installation even if dependencies are missing. 
