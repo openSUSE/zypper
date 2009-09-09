@@ -136,9 +136,8 @@ class TestSetup
     {
       RepoManager rmanager( repomanager() );
       if ( rmanager.hasRepo( nrepo ) )
-        rmanager.modifyRepository( nrepo );
-      else
-        rmanager.addRepository( nrepo );
+        nrepo.setAlias( RepoManager::makeStupidAlias( nrepo.url() ) );
+      rmanager.addRepository( nrepo );
       rmanager.buildCache( nrepo );
       rmanager.loadFromCache( nrepo );
     }
