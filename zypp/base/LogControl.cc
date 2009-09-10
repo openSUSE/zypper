@@ -321,6 +321,11 @@ namespace zypp
           }
         }
 
+        ~LogControlImpl()
+        {
+          _lineWriter.reset();
+        }
+
       public:
         /** The LogControlImpl singleton
          * \note As most dtors log, it is inportant that the
