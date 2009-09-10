@@ -209,7 +209,6 @@ SET( zypp_base_HEADERS
   base/Algorithm.h
   base/Counter.h
   base/Debug.h
-  base/DefaultFalseBool.h
   base/DefaultIntegral.h
   base/Deprecated.h
   base/DtorReset.h

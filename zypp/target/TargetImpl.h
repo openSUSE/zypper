@@ -18,7 +18,6 @@
 
 #include "zypp/base/ReferenceCounted.h"
 #include "zypp/base/NonCopyable.h"
-#include "zypp/base/DefaultFalseBool.h"
 #include "zypp/base/PtrTypes.h"
 #include "zypp/PoolItem.h"
 #include "zypp/ZYppCommit.h"
