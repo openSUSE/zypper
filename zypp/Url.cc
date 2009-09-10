@@ -205,6 +205,7 @@ namespace zypp
         ref.reset( new UrlBase());
         ref->config("require_host",     "m");   // host is mandatory
         addUrlByScheme("nfs",    ref);
+        addUrlByScheme("nfs4",   ref);
         addUrlByScheme("smb",    ref);
         addUrlByScheme("cifs",   ref);
         addUrlByScheme("http",   ref);
@@ -437,6 +438,42 @@ namespace zypp
     return m_impl->isValidScheme(scheme);
   }
 
+
+  ///////////////////////////////////////////////////////////////////
+  namespace
+  {
+    inline bool isInList( const char ** begin_r, const char ** end_r, const std::string & scheme_r )
+    {
+      for ( ; begin_r != end_r; ++begin_r )
+        if ( scheme_r == *begin_r )
+          return true;
+      return false;
+    }
+  }
+  bool Url::schemeIsLocal( const std::string & scheme_r )
+  {
+    static const char * val[] = { "cd", "dvd", "dir", "hd", "iso", "file" };
+    return isInList( arrayBegin(val), arrayEnd(val), scheme_r );
+  }
+
+  bool Url::schemeIsRemote( const std::string & scheme_r )
+  {
+    static const char * val[] = { "http", "https", "nfs", "nfs4", "smb", "cifs", "ftp", "sftp" };
+    return isInList( arrayBegin(val), arrayEnd(val), scheme_r );
+  }
+
+  bool Url::schemeIsVolatile( const std::string & scheme_r )
+  {
+    static const char * val[] = { "cd", "dvd" };
+    return isInList( arrayBegin(val), arrayEnd(val), scheme_r );
+  }
+
+  bool Url::schemeIsDownloading( const std::string & scheme_r )
+  {
+    static const char * val[] = { "http", "https", "ftp", "sftp" };
+    return isInList( arrayBegin(val), arrayEnd(val), scheme_r );
+  }
+  ///////////////////////////////////////////////////////////////////
 
   // -----------------------------------------------------------------
   bool

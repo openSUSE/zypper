@@ -247,6 +247,26 @@ namespace zypp
     isValidScheme(const std::string &scheme) const;
 
 
+    /** hd cd dvd dir file iso */
+    static bool schemeIsLocal( const std::string & scheme_r );
+    /** \overload nonstatic version */
+    bool schemeIsLocal() const { return schemeIsLocal( getScheme() ); }
+
+    /** nfs nfs4 smb cifs http https ftp sftp */
+    static bool schemeIsRemote( const std::string & scheme_r );
+    /** \overload nonstatic version */
+    bool schemeIsRemote() const { return schemeIsRemote( getScheme() ); }
+
+    /** cd dvd */
+    static bool schemeIsVolatile( const std::string & scheme_r );
+    /** \overload nonstatic version */
+    bool schemeIsVolatile() const { return schemeIsVolatile( getScheme() ); }
+
+    /** http https ftp sftp */
+    static bool schemeIsDownloading( const std::string & scheme_r );
+    /** \overload nonstatic version */
+    bool schemeIsDownloading() const { return schemeIsDownloading( getScheme() ); }
+
     /**
      * \brief Verifies the Url.
      *
