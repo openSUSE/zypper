@@ -67,8 +67,7 @@ Resolver::doUpgrade()
   Target_Ptr target( getZYpp()->getTarget() );
   if ( ! target )
   {
-    ERR << "Huh, no target ?" << endl;
-    return false; // can't continue without target
+    WAR << "Huh, no target ?" << endl;
   }
 
   // Setting Resolver to upgrade mode. SAT solver will do the update
