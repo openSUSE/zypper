@@ -16,6 +16,7 @@
 #include <map>
 
 #include "zypp/base/Sysconfig.h"
+#include "zypp/base/DefaultIntegral.h"
 #include "zypp/media/ProxyInfo.h"
 #include "zypp/media/proxyinfo/ProxyInfoImpl.h"
 
@@ -40,7 +41,7 @@ namespace zypp {
       /**  */
       virtual ProxyInfo::NoProxyIterator noProxyEnd() const;
     private:
-      bool _enabled;
+      DefaultIntegral<bool,false> _enabled;
       ProxyInfo::NoProxyList _no_proxy;
       std::map<std::string,std::string> _proxies;
     };
