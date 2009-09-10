@@ -115,7 +115,7 @@ MediaAccess::open (const Url& url, const Pathname & preferred_attach_point)
     */
     if (scheme == "cd" || scheme == "dvd")
         _handler = new MediaCD (url,preferred_attach_point);
-    else if (scheme == "nfs")
+    else if (scheme == "nfs" || scheme == "nfs4")
         _handler = new MediaNFS (url,preferred_attach_point);
     else if (scheme == "iso")
         _handler = new MediaISO (url,preferred_attach_point);
@@ -163,22 +163,6 @@ MediaAccess::open (const Url& url, const Pathname & preferred_attach_point)
     }
 
     MIL << "Opened: " << *this << endl;
-}
-
-// STATIC
-bool
-MediaAccess::downloads(const Url &url)
-{
-    std::string scheme( url.getScheme());
-    return (scheme == "ftp" || scheme == "http" || scheme == "https");
-}
-
-// STATIC
-bool
-MediaAccess::canBeVolatile(const Url &url)
-{
-    std::string scheme( url.getScheme());
-    return ! (scheme == "cd" || scheme == "dvd");
 }
 
 // Type of media if open, otherwise NONE.

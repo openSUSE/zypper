@@ -1209,7 +1209,7 @@ namespace zypp
       }
 
       // if it is a non-downloading URL denoting a directory
-      if ( ! media::MediaManager::downloads(url) )
+      if ( ! url.schemeIsDownloading() )
       {
         MediaMounter media( url );
         if ( PathInfo(media.getPathName()).isDir() )

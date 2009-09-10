@@ -265,7 +265,7 @@ namespace zypp
      *       Optional parameter specifying the URL to the directory containing
      *       the iso file.<br>
      *       The supported URL schemes are: <i><b>hd</b>, <b>dir</b>,
-     *       <b>file</b>, <b>nfs</b>, <b>smb</b>, <b>cifs</b>.</i>
+     *       <b>file</b>, <b>nfs</b>, <b>nfs4</b>, <b>smb</b>, <b>cifs</b>.</i>
      *     - <tt>mnt</tt>:
      *       Optional parameter specifying the prefered attach point for the
      *       source media url.
@@ -282,16 +282,21 @@ namespace zypp
      * The access handler for media on NFS exported directory tree.
      *   - Scheme:
      *     - <b>nfs</b>
+     *     - <b>nfs</b>
      *   - Examples:
      *     \code
      *        "nfs://nfs-server/exported/path"
      *        "nfs://nfs-server/exported/path?mountoptions=ro"
+     *        "nfs://nfs-server/exported/path&type=nfs4"
+     *        "nfs4://nfs-server/exported/path"
      *     \endcode
      *   - Query parameters:
      *     - <tt>mountoptions</tt>:
      *       The mount options separated by comma ','.
      *       Default is the "ro" option.
-     *   - Authority:
+     *     - <tt>type=nfs4</tt>:
+     *       Whether to mount as nfs4. This is the default for scheme nfs4.
+      *   - Authority:
      *     The authority component has to provide a hostname.
      *     Username, password and port are currently ignored.
      *   - Path name:
@@ -504,18 +509,10 @@ namespace zypp
       bool
       downloads(MediaAccessId accessId) const;
 
-      /**
-       * Hint if files will be downloaded when using the
-       * specified media \p url.
-       *
-       * @note This hint is based on the \p url scheme
-       * only and does not imply, that the URL is valid.
-       *
-       * @param url The media URL to check.
-       * @return True, if the files are downloaded.
-       */
-      static bool
-      downloads(const Url &url);
+     /** \deprecated Use \ref Url::schemeIsDownloading */
+      static
+      ZYPP_DEPRECATED bool downloads(const Url &url)
+      { return url.schemeIsDownloading(); }
 
       /**
        * Returns the \ref MediaAccessUrl of the media access id.

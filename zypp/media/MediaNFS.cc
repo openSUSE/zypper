@@ -86,8 +86,7 @@ namespace zypp {
 	return;
       }
 
-      const char* const filesystem = "nfs";
-      std::string       mountpoint = attachPoint().asString();
+      std::string mountpoint( attachPoint().asString() );
       Mount mount;
 
       if( !isUseableAttachPoint(attachPoint()))
@@ -96,6 +95,12 @@ namespace zypp {
 	if( mountpoint.empty())
 	  ZYPP_THROW( MediaBadAttachPointException(url()));
 	setAttachPoint( mountpoint, true);
+      }
+
+      std::string filesystem( _url.getScheme() );
+      if ( filesystem != "nfs4" && _url.getQueryParam("type") == "nfs4" )
+      {
+        filesystem = "nfs4";
       }
 
       string options = _url.getQueryParam("mountoptions");

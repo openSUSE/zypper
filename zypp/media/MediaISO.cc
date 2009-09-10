@@ -102,12 +102,12 @@ namespace zypp
             << src.asString() << std::endl;
         ZYPP_THROW(MediaUnsupportedUrlSchemeException(src));
       }
-#if 1
       else
       if( !(src.getScheme() == "hd"   ||
             src.getScheme() == "dir"  ||
             src.getScheme() == "file" ||
             src.getScheme() == "nfs"  ||
+            src.getScheme() == "nfs4" ||
             src.getScheme() == "smb"  ||
             src.getScheme() == "cifs"))
       {
@@ -115,7 +115,6 @@ namespace zypp
             << src.asString() << std::endl;
         ZYPP_THROW(MediaUnsupportedUrlSchemeException(src));
       }
-#endif
 
       MediaManager manager;
 

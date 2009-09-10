@@ -262,7 +262,7 @@ namespace zypp
     {
       if (_pimpl->baseUrls.empty())
         return false;
-      else if ( media::MediaAccess::downloads( *baseUrlsBegin() ) )
+      else if ( baseUrlsBegin()->schemeIsDownloading() )
         return true;
       else
         return false;

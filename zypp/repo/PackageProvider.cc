@@ -23,10 +23,8 @@
 #include "zypp/TmpPath.h"
 #include "zypp/ZConfig.h"
 #include "zypp/RepoInfo.h"
-#include "zypp/media/MediaManager.h"
 
 using std::endl;
-using zypp::media::MediaManager;
 
 ///////////////////////////////////////////////////////////////////
 namespace zypp
@@ -159,7 +157,7 @@ namespace zypp
         url = * info.baseUrlsBegin();
 
       // check whether to process patch/delta rpms
-      if ( MediaManager::downloads(url) || ZConfig::instance().download_use_deltarpm_always() )
+      if ( url.schemeIsDownloading() || ZConfig::instance().download_use_deltarpm_always() )
         {
           std::list<DeltaRpm> deltaRpms;
           if ( ZConfig::instance().download_use_deltarpm() )

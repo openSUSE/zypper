@@ -105,29 +105,10 @@ namespace zypp {
 	 */
 	bool        downloads() const;
 
-	/**
-	 * Hint if files will be downloaded when using the
-	 * specified media \p url.
-	 *
-	 * @note This hint is based on the \p url scheme
-	 * only and does not imply, that the URL is valid.
-	 *
-	 * @param url The media URL to check.
-	 * @return True, if the files are downloaded.
-	 */
+	/** \deprecated Use \ref Url::schemeIsVolatile */
 	static
-	bool        downloads(const Url &url);
-	/**
-	 * Hint whether the media can provide volatile contents
-	 *
-	 * @note This hint is based on the \p url scheme
-	 * only and does not imply, that the URL is valid.
-	 *
-	 * @param url The media URL to check.
-	 * @return True, if the files are downloaded.
-	 */
-	static
-	bool        canBeVolatile(const Url &url);
+	ZYPP_DEPRECATED bool canBeVolatile(const Url &url)
+        { return url.schemeIsVolatile(); }
 
 	/**
 	 * Used Protocol if media is opened, otherwise 'unknown'.
@@ -168,14 +149,14 @@ namespace zypp {
 	 *
 	 **/
 	bool isAttached() const;
-        
+
         bool hasMoreDevices() const;
-        
+
         /**
          * Fill in a vector of detected ejectable devices and the index of the
          * currently attached device within the vector. The contents of the vector
          * are the device names (/dev/cdrom and such).
-         * 
+         *
          * \param devices  vector to load with the device names
          * \param index    index of the currently used device in the devices vector
          */
@@ -340,7 +321,7 @@ namespace zypp {
          *
          **/
         bool doesFileExist( const Pathname & filename ) const;
-        
+
 	/**
 	 * Destructor
 	 **/

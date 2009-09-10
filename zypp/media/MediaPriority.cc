@@ -66,6 +66,7 @@ namespace zypp
 
 	  case 'n':
 	    RETURN_IF( "nfs",	3 );
+	    RETURN_IF( "nfs4",	3 );
 	    break;
 
 	  case 's':

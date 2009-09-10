@@ -124,7 +124,7 @@ void Mount::mount( const std::string & source,
 	}
 	else if  ( value.find ( "Not a directory" ) != string::npos )
 	{
-	    if( filesystem == "nfs")
+	    if( filesystem == "nfs" || filesystem == "nfs4" )
 	    {
 		err = "Nfs path is not a directory";
 	    }
