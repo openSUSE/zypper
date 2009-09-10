@@ -120,6 +120,7 @@ void TableRow::dumpTo (ostream &stream, const Table & parent) const
 Table::Table()
   : _has_header (false)
   , _max_col (0)
+  , _max_width(1, 0)
   , _width(0)
   , _style (defaultStyle)
   , _screen_width(get_screen_width())
@@ -160,8 +161,11 @@ void Table::updateColWidths (const TableRow& tr) {
   for (unsigned c = 0; i != e; ++i, ++c) {
     // ensure that _max_width[c] exists
     if (_max_col < c)
+    {
       _max_col = c;
-    _max_width.resize (_max_col + 1);
+      _max_width.resize (_max_col + 1);
+      _max_width[c] = 0;
+    }
 
     unsigned &max = _max_width[c];
     unsigned cur = string_to_columns (*i);
@@ -202,7 +206,12 @@ void Table::dumpTo (ostream &stream) const {
   unsigned c = 0;
   for (vector<bool>::const_iterator it = _abbrev_col.begin();
       it != _abbrev_col.end() && c <= _max_col; ++it, ++c) {
-    if (*it && _width > _screen_width) {
+    if (*it &&
+        _width > _screen_width &&
+        // don't resize the column to less than 3, or if the resulting table
+        // would still exceed the screen width (bnc #534795)
+        _max_width[c] > 3 &&
+        _width - _screen_width < ((int) _max_width[c]) - 3) {
       _max_width[c] -= _width - _screen_width;
       break;
     }
