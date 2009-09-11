@@ -16,29 +16,12 @@
 
 #include "zypp/base/PtrTypes.h"
 
+#include "zypp/DownloadMode.h"
 #include "zypp/target/rpm/RpmFlags.h"
 
 ///////////////////////////////////////////////////////////////////
 namespace zypp
 { /////////////////////////////////////////////////////////////////
-
-  /** Supported commit download policies. */
-  enum DownloadMode
-  {
-    DownloadOnly,	//!< Just download all packages to the local cache.
-			//!< Do not install. Implies a dry-run.
-    DownloadInAdvance,	//!< First download all packages to the local cache.
-			//!< Then start to install.
-    DownloadInHeaps,	//!< Similar to DownloadInAdvance, but try to split
-			//!< the transaction into heaps, where at the end of
-			//!< each heap a consistent system state is reached.
-    DownloadAsNeeded	//!< Alternating download and install. Packages are
-			//!< cached just to avid CD/DVD hopping. This is the
-			//!< traditional behaviour.
-  };
-
-  /** \relates DownloadMode Stream output. */
-  std::ostream & operator<<( std::ostream & str, DownloadMode obj );
 
   ///////////////////////////////////////////////////////////////////
   //
@@ -76,7 +59,7 @@ namespace zypp
       bool dryRun() const;
 
 
-      /** Commit download policy to use. (default: \ref DownloadAsNeeded)
+      /** Commit download policy to use. (default: \ref DownloadDefault)
        *  \note \ref DownloadOnly also implies a \ref dryRun.
        */
       ZYppCommitPolicy & downloadMode( DownloadMode val_r );

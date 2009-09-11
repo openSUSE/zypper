@@ -21,20 +21,6 @@
 namespace zypp
 { /////////////////////////////////////////////////////////////////
 
-  std::ostream & operator<<( std::ostream & str, DownloadMode obj )
-  {
-    switch ( obj )
-    {
-#define OUTS(VAL) case VAL: return str << #VAL; break
-      OUTS( DownloadOnly );
-      OUTS( DownloadInAdvance );
-      OUTS( DownloadInHeaps );
-      OUTS( DownloadAsNeeded );
-#undef OUTS
-    }
-    return str << "DownloadMode(" << int(obj) << ")";
-  }
-
   ///////////////////////////////////////////////////////////////////
   //
   //	CLASS NAME : ZYppCommitPolicy::Impl
@@ -47,7 +33,7 @@ namespace zypp
       Impl()
       : _restrictToMedia	( 0 )
       , _dryRun			( false )
-      , _downloadMode		( DownloadAsNeeded )
+      , _downloadMode		( DownloadDefault )
       , _rpmInstFlags		( ZConfig::instance().rpmInstallFlags() )
       , _syncPoolAfterCommit	( true )
       {}
