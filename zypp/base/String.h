@@ -724,11 +724,7 @@ namespace zypp
     /** \name Case insensitive comparison. */
     //@{
     inline int compareCI( const C_Str & lhs, const C_Str & rhs )
-    {
-      if ( lhs == rhs )
-        return 0;
-      return ::strcasecmp( lhs, rhs );
-    }
+    { return ::strcasecmp( lhs, rhs ); }
     //@}
 
     /** \name Locate substring. */
