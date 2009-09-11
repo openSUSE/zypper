@@ -25,6 +25,7 @@
 #include "zypp/Pathname.h"
 #include "zypp/IdString.h"
 
+#include "zypp/DownloadMode.h"
 #include "zypp/target/rpm/RpmFlags.h"
 
 ///////////////////////////////////////////////////////////////////
@@ -208,6 +209,11 @@ namespace zypp
        * Set \ref download_media_prefer_download to the configfiles default.
        */
       void set_default_download_media_prefer_download();
+
+      /**
+       * Commit download policy to use as default.
+       */
+      DownloadMode commit_downloadMode() const;
 
       /**
        * Directory for equivalent vendor definitions  (configPath()/vendors.d)

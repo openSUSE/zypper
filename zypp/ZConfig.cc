@@ -318,6 +318,12 @@ namespace zypp
                 {
                   str::strtonum(value, download_max_silent_tries);
                 }
+                else if ( entry == "commit.downloadMode" )
+                {
+                  INT << value << endl;
+                  INT << deserializeDownloadMode(value) << endl;
+                  commit_downloadMode.set( deserializeDownloadMode( value ) );
+                }
                 else if ( entry == "vendordir" )
                 {
                   cfg_vendor_path = Pathname(value);
@@ -443,6 +449,8 @@ namespace zypp
     int download_min_download_speed;
     int download_max_download_speed;
     int download_max_silent_tries;
+
+    Option<DownloadMode,DownloadDefault> commit_downloadMode;
 
     Option<bool,false>  solver_onlyRequires;
     Option<bool,false>  solver_allowVendorChange;
@@ -650,6 +658,8 @@ namespace zypp
   long ZConfig::download_max_silent_tries() const
   { return _pimpl->download_max_silent_tries; }
 
+  DownloadMode ZConfig::commit_downloadMode() const
+  { return _pimpl->commit_downloadMode.get(); }
 
   bool ZConfig::solver_onlyRequires() const
   { return _pimpl->solver_onlyRequires.get(); }

@@ -33,7 +33,7 @@ namespace zypp
       Impl()
       : _restrictToMedia	( 0 )
       , _dryRun			( false )
-      , _downloadMode		( DownloadDefault )
+      , _downloadMode		( ZConfig::instance().commit_downloadMode() )
       , _rpmInstFlags		( ZConfig::instance().rpmInstallFlags() )
       , _syncPoolAfterCommit	( true )
       {}
