@@ -31,6 +31,7 @@ int usage( const std::string & msg_r = std::string(), int exit_r = 100 )
   cerr << "  requires." << endl;
   cerr << "  --root   Load repos from the system located below ROOTDIR. If ROOTDIR" << endl;
   cerr << "           denotes a sover testcase, the testcase is loaded." << endl;
+  cerr << "  --installed Process installed packages only." << endl;
   cerr << "  -i/-I    turn on/off case insensitive search (default on)" << endl;
   cerr << "  -n/-N    turn on/off looking for names       (default on)" << endl;
   cerr << "  -p/-P    turn on/off looking for provides    (default off)" << endl;
@@ -90,6 +91,13 @@ int main( int argc, char * argv[] )
     --argc,++argv;
   }
 
+  bool onlyInstalled( false );
+  if ( (*argv) == std::string("--installed") )
+  {
+    --argc,++argv;
+    onlyInstalled = true;
+  }
+
   if ( TestSetup::isTestcase( sysRoot ) )
   {
     message << str::form( "*** Load Testcase from '%s'", sysRoot.c_str() ) << endl;
@@ -106,7 +114,7 @@ int main( int argc, char * argv[] )
   {
     // a system
     message << str::form( "*** Load system at '%s'", sysRoot.c_str() ) << endl;
-    if ( 1 )
+    if ( true )
     {
       message << "*** load target '" << Repository::systemRepoAlias() << "'\t" << endl;
       getZYpp()->initializeTarget( sysRoot );
@@ -114,7 +122,7 @@ int main( int argc, char * argv[] )
       message << satpool.systemRepo() << endl;
     }
 
-    if ( 1 )
+    if ( !onlyInstalled )
     {
       RepoManager repoManager( sysRoot );
       RepoInfoList repos = repoManager.knownRepositories();
