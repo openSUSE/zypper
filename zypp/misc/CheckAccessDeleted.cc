@@ -144,8 +144,9 @@ namespace zypp
       if ( *f == 'm' || *f == 'D' )	// skip some wellknown nonlibrary memorymapped files
       {
         static const char * black[] = {
-          "/SYSV",
-          "/var/run/"
+            "/SYSV"
+          , "/var/run/"
+          , "/dev/"
         };
         for_( it, arrayBegin( black ), arrayEnd( black ) )
         {
