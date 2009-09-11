@@ -1,4 +1,11 @@
 -------------------------------------------------------------------
+Fri Sep 11 15:13:30 CEST 2009 - ma@km13.de
+
+- New commit.downloadMode option in zypp.conf. Allows to set a
+  prefered download policy for commit.
+- version 6.16.0 (11)
+
+-------------------------------------------------------------------
 Thu Sep 10 19:03:01 CEST 2009 - ma@suse.de
 
 - Support nfs4 (nfs4://... or nfs://...?type=nfs4) (fate #306451)
