@@ -1,4 +1,10 @@
 -------------------------------------------------------------------
+Wed Sep 16 16:13:47 CEST 2009 - ma@suse.de
+
+- Fix zyppers installRecommends option not following the zypp.conf
+  setting. (bnc #539579)
+
+-------------------------------------------------------------------
 Thu Sep 10 12:57:44 CEST 2009 - jkupec@suse.cz
 
 - Fixed wrong table column width computation causing excessive

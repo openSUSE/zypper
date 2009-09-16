@@ -134,7 +134,7 @@ void Config::read(const string & file)
 
     s = augeas.getOption(ConfigOption::SOLVER_INSTALL_RECOMMENDS.asString());
     if (s.empty())
-      solver_installRecommends = ZConfig::instance().solver_onlyRequires();
+      solver_installRecommends = !ZConfig::instance().solver_onlyRequires();
     else
       solver_installRecommends = str::strToBool(s, true);
 
