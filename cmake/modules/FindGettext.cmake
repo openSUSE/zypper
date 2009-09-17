@@ -6,7 +6,7 @@
 #  GETTEXT_FOUND: True if gettext has been found.
 #
 # Additionally it provides the following macros:
-# GETTEXT_CREATE_TRANSLATIONS ( outputFile [ALL] file1 ... fileN )
+# GETTEXT_CREATE_TRANSLATIONS ( _moBasename [ALL] file1 ... fileN )
 #    This will create a target "translations" which will convert the
 #    given input po files into the binary output mo file. If the
 #    ALL option is used, the translations will also be created when
@@ -16,13 +16,9 @@ FIND_PROGRAM(GETTEXT_MSGMERGE_EXECUTABLE msgmerge)
 
 FIND_PROGRAM(GETTEXT_MSGFMT_EXECUTABLE msgfmt)
 
-MACRO(GETTEXT_CREATE_TRANSLATIONS _potFile _firstPoFile)
+MACRO(GETTEXT_CREATE_TRANSLATIONS _moBasename _firstPoFile)
 
    SET(_gmoFiles)
-   GET_FILENAME_COMPONENT(_potBasename ${_potFile} NAME_WE)
-   GET_FILENAME_COMPONENT(_absPotFile ${_potFile} ABSOLUTE)
-
-#MESSAGE( STATUS "pot: ${_potFile} converted to ${_potBasename}")
 
    SET(_addToAll)
    IF(${_firstPoFile} STREQUAL "ALL")
@@ -38,13 +34,11 @@ MACRO(GETTEXT_CREATE_TRANSLATIONS _potFile _firstPoFile)
 
       ADD_CUSTOM_COMMAND(
          OUTPUT ${_gmoFile}
-#COMMAND ${GETTEXT_MSGMERGE_EXECUTABLE} --quiet --update --backup=none -s ${_absFile} ${_absPotFile}
          COMMAND ${GETTEXT_MSGFMT_EXECUTABLE} -o ${_gmoFile} ${_absFile}
-#DEPENDS ${_absPotFile} ${_absFile}
          DEPENDS ${_absFile}
       )
 
-      INSTALL(FILES ${_gmoFile} DESTINATION share/locale/${_lang}/LC_MESSAGES RENAME ${_potBasename}.mo)
+      INSTALL(FILES ${_gmoFile} DESTINATION share/locale/${_lang}/LC_MESSAGES RENAME ${_moBasename}.mo)
       SET(_gmoFiles ${_gmoFiles} ${_gmoFile})
 
    ENDFOREACH (_currentPoFile )
