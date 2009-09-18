@@ -50,6 +50,9 @@
 using namespace std;
 using namespace zypp::filesystem;
 
+#define WARNINGMAILPATH		"/var/log/YaST2/"
+#define FILEFORBACKUPFILES	"YaSTBackupModifiedFiles"
+
 namespace zypp
 {
 namespace target
@@ -193,83 +196,7 @@ ostream & operator<<( ostream & str, const RpmDb::DbStateInfoBits & obj )
   return str;
 }
 
-///////////////////////////////////////////////////////////////////
-//	CLASS NAME : RpmDbPtr
-//	CLASS NAME : RpmDbconstPtr
-///////////////////////////////////////////////////////////////////
 
-#define WARNINGMAILPATH "/var/log/YaST2/"
-#define FILEFORBACKUPFILES "YaSTBackupModifiedFiles"
-
-///////////////////////////////////////////////////////////////////
-//
-//	CLASS NAME : RpmDb::Packages
-/**
- * Helper class for RpmDb::getPackages() to build the
- * list<Package::Ptr> returned. We have to assert, that there
- * is a unique entry for every string.
- *
- * In the first step we build the _list list which contains all
- * packages (even those which are contained in multiple versions).
- *
- * At the end buildIndex() is called to build the _index is created
- * and points to the last installed versions of all packages.
- * Operations changing the rpmdb
- * content (install/remove package) should set _valid to false. The
- * next call to RpmDb::getPackages() will then reread the the rpmdb.
- *
- * Note that outside RpmDb::getPackages() _list and _index are always
- * in sync. So you may use lookup(PkgName) to retrieve a specific
- * Package::Ptr.
- **/
-class RpmDb::Packages
-{
-public:
-  list<Package::Ptr>        _list;
-  map<string,Package::Ptr> _index;
-  bool                      _valid;
-  Packages() : _valid( false )
-  {}
-  void clear()
-  {
-    _list.clear();
-    _index.clear();
-    _valid = false;
-  }
-  Package::Ptr lookup( const string & name_r ) const
-  {
-    map<string,Package::Ptr>::const_iterator got = _index.find( name_r );
-    if ( got != _index.end() )
-      return got->second;
-    return Package::Ptr();
-  }
-  void buildIndex()
-  {
-    _index.clear();
-    for ( list<Package::Ptr>::iterator iter = _list.begin();
-          iter != _list.end(); ++iter )
-    {
-      string name = (*iter)->name();
-      Package::Ptr & nptr = _index[name]; // be shure to get a reference!
-
-      if ( nptr )
-      {
-        WAR << "Multiple entries for package '" << name << "' in rpmdb" << endl;
-        if ( nptr->installtime() > (*iter)->installtime() )
-          continue;
-        else
-          nptr = *iter;
-      }
-      else
-      {
-        nptr = *iter;
-      }
-    }
-    _valid = true;
-  }
-};
-
-///////////////////////////////////////////////////////////////////
 
 ///////////////////////////////////////////////////////////////////
 //
@@ -289,7 +216,6 @@ public:
 //
 RpmDb::RpmDb()
     : _dbStateInfo( DbSI_NO_INIT )
-    , _packages( * new Packages ) // delete in destructor
 #warning Check for obsolete memebers
     , _backuppath ("/var/adm/backup")
     , _packagebackups(false)
@@ -314,9 +240,7 @@ RpmDb::~RpmDb()
 {
   MIL << "~RpmDb()" << endl;
   closeDatabase();
-
   delete process;
-  delete &_packages;
   MIL  << "~RpmDb() end" << endl;
   sKeyRingReceiver.reset();
 }
@@ -757,9 +681,6 @@ void RpmDb::modifyDatabase()
     removeV3( _root + _dbPath, dbsi_has( _dbStateInfo, DbSI_MADE_V3TOV4 ) );
     dbsi_clr( _dbStateInfo, DbSI_HAVE_V3 );
   }
-
-  // invalidate Packages list
-  _packages._valid = false;
 }
 
 ///////////////////////////////////////////////////////////////////
@@ -780,7 +701,6 @@ void RpmDb::closeDatabase()
   ///////////////////////////////////////////////////////////////////
   // Block further database access
   ///////////////////////////////////////////////////////////////////
-  _packages.clear();
   librpmDb::blockAccess();
 
   ///////////////////////////////////////////////////////////////////
@@ -851,8 +771,6 @@ void RpmDb::doRebuildDatabase(callback::SendReport<RebuildDBReport> & report)
 
   // don't call modifyDatabase because it would remove the old
   // rpm3 database, if the current database is a temporary one.
-  // But do invalidate packages list.
-  _packages._valid = false;
   run_rpm (opts, ExternalProgram::Stderr_To_Stdout);
 
   // progress report: watch this file growing
@@ -1038,8 +956,6 @@ void RpmDb::importPubkey( const PublicKey & pubkey_r )
 
   // don't call modifyDatabase because it would remove the old
   // rpm3 database, if the current database is a temporary one.
-  // But do invalidate packages list.
-  _packages._valid = false;
   run_rpm( opts, ExternalProgram::Stderr_To_Stdout );
 
   string line;
@@ -1115,8 +1031,6 @@ void RpmDb::removePubkey( const PublicKey & pubkey_r )
 
   // don't call modifyDatabase because it would remove the old
   // rpm3 database, if the current database is a temporary one.
-  // But do invalidate packages list.
-  _packages._valid = false;
   run_rpm( opts, ExternalProgram::Stderr_To_Stdout );
 
   string line;
@@ -1205,239 +1119,6 @@ set<Edition> RpmDb::pubkeyEditions() const
     return ret;
   }
 
-///////////////////////////////////////////////////////////////////
-//
-//
-//	METHOD NAME : RpmDb::packagesValid
-//	METHOD TYPE : bool
-//
-bool RpmDb::packagesValid() const
-{
-  return( _packages._valid || ! initialized() );
-}
-
-///////////////////////////////////////////////////////////////////
-//
-//
-//	METHOD NAME : RpmDb::getPackages
-//	METHOD TYPE : const list<Package::Ptr> &
-//
-//	DESCRIPTION :
-//
-const list<Package::Ptr> & RpmDb::getPackages()
-{
-  callback::SendReport<ScanDBReport> report;
-
-  report->start ();
-
-  try
-  {
-    const list<Package::Ptr> & ret = doGetPackages(report);
-    report->finish(ScanDBReport::NO_ERROR, "");
-    return ret;
-  }
-  catch (RpmException & excpt_r)
-  {
-    report->finish(ScanDBReport::FAILED, excpt_r.asUserHistory ());
-    ZYPP_RETHROW(excpt_r);
-  }
-#warning fixme
-  static const list<Package::Ptr> empty_list;
-  return empty_list;
-}
-
-#warning FIX READING RPM DATBASE TO POOL
-#if 0 // obsolete helper
-inline static void insertCaps( Capabilities &capset, capability::CapabilityImplPtrSet ptrset, CapFactory &factory )
-{
-  for ( capability::CapabilityImplPtrSet::const_iterator it = ptrset.begin();
-        it != ptrset.end();
-        ++it )
-  {
-    capset.insert( factory.fromImpl(*it) );
-  }
-}
-#endif
-
-//
-// make Package::Ptr from RpmHeader
-// return NULL on error
-//
-Package::Ptr RpmDb::makePackageFromHeader( const RpmHeader::constPtr header,
-                                           set<string> * filerequires,
-                                           const Pathname & location,
-					   Repository repo )
-{
-  if ( ! header )
-    return 0;
-
-  if ( header->isSrc() )
-  {
-    WAR << "Can't make Package from SourcePackage header" << endl;
-    return 0;
-  }
-
-  Package::Ptr pptr;
-#warning FIX READING RPM DATBASE TO POOL
-#if 0
-  string name = header->tag_name();
-
-  // create dataprovider
-  detail::ResImplTraits<RPMPackageImpl>::Ptr impl( new RPMPackageImpl( header ) );
-
-  impl->setRepository( repo );
-  if (!location.empty())
-    impl->setLocation( OnMediaLocation(location,1) );
-
-  Edition edition;
-  try
-  {
-    edition = Edition( header->tag_version(),
-                       header->tag_release(),
-                       header->tag_epoch());
-  }
-  catch (Exception & excpt_r)
-  {
-    ZYPP_CAUGHT( excpt_r );
-    WAR << "Package " << name << " has bad edition '"
-    << (header->tag_epoch()==0?"":(header->tag_epoch()+":"))
-    << header->tag_version()
-    << (header->tag_release().empty()?"":(string("-") + header->tag_release())) << "'";
-    return pptr;
-  }
-
-  Arch arch;
-  try
-  {
-    arch = Arch( header->tag_arch() );
-  }
-  catch (Exception & excpt_r)
-  {
-    ZYPP_CAUGHT( excpt_r );
-    WAR << "Package " << name << " has bad architecture '" << header->tag_arch() << "'";
-    return pptr;
-  }
-
-  // Collect basic Resolvable data
-  NVRAD dataCollect( header->tag_name(),
-                     edition,
-                     arch );
-
-  list<string> filenames = impl->filenames();
-  CapFactory capfactory;
-  insertCaps( dataCollect[Dep::PROVIDES], header->tag_provides( filerequires ), capfactory );
-
-  for (list<string>::const_iterator filename = filenames.begin();
-       filename != filenames.end();
-       ++filename)
-  {
-    if ( capability::isInterestingFileSpec( *filename ) )
-    {
-      try
-      {
-        dataCollect[Dep::PROVIDES].insert(capfactory.fromImpl(capability::buildFile(ResKind::package, *filename) ));
-      }
-      catch (Exception & excpt_r)
-      {
-        ZYPP_CAUGHT( excpt_r );
-        WAR << "Ignoring invalid capability: " << *filename << endl;
-      }
-    }
-  }
-
-  insertCaps( dataCollect[Dep::REQUIRES], header->tag_requires( filerequires ), capfactory );
-  insertCaps( dataCollect[Dep::PREREQUIRES], header->tag_prerequires( filerequires ), capfactory );
-  insertCaps( dataCollect[Dep::CONFLICTS], header->tag_conflicts( filerequires ), capfactory );
-  insertCaps( dataCollect[Dep::OBSOLETES], header->tag_obsoletes( filerequires ), capfactory );
-  insertCaps( dataCollect[Dep::ENHANCES], header->tag_enhances( filerequires ), capfactory );
-  insertCaps( dataCollect[Dep::SUPPLEMENTS], header->tag_supplements( filerequires ), capfactory );
-
-  try
-  {
-    // create package from dataprovider
-    pptr = detail::makeResolvableFromImpl( dataCollect, impl );
-  }
-  catch (Exception & excpt_r)
-  {
-    ZYPP_CAUGHT( excpt_r );
-    ERR << "Can't create Package::Ptr" << endl;
-  }
-#endif
-  return pptr;
-}
-
-const list<Package::Ptr> & RpmDb::doGetPackages(callback::SendReport<ScanDBReport> & report)
-{
-  if ( packagesValid() )
-  {
-    return _packages._list;
-  }
-
-  _packages.clear();
-
-  ///////////////////////////////////////////////////////////////////
-  // Collect package data.
-  ///////////////////////////////////////////////////////////////////
-  unsigned expect = 0;
-  librpmDb::constPtr dbptr;
-  librpmDb::dbAccess( dbptr );
-  expect = dbptr->size();
-  DBG << "Expecting " << expect << " packages" << endl;
-
-  librpmDb::db_const_iterator iter;
-  unsigned current = 0;
-  Pathname location;
-
-  for ( iter.findAll(); *iter; ++iter, ++current, report->progress( (100*current)/expect))
-  {
-
-    string name = iter->tag_name();
-    if ( name == string( "gpg-pubkey" ) )
-    {
-      DBG << "Ignoring pseudo package " << name << endl;
-      // pseudo package filtered, as we can't handle multiple instances
-      // of 'gpg-pubkey-VERS-REL'.
-      continue;
-    }
-
-    Package::Ptr pptr = makePackageFromHeader( *iter, &_filerequires, location, Repository() );
-    if ( ! pptr )
-    {
-      WAR << "Failed to make package from database header '" << name << "'" << endl;
-      continue;
-    }
-
-    _packages._list.push_back( pptr );
-  }
-  _packages.buildIndex();
-  DBG << "Found installed packages: " << _packages._list.size() << endl;
-
-#warning FILEREQUIRES HACK SHOULD BE DONE WHEN WRITING THE RPMDB SOLV FILE
-#if 0
-  ///////////////////////////////////////////////////////////////////
-  // Evaluate filerequires collected so far
-  ///////////////////////////////////////////////////////////////////
-  for ( set<string>::iterator it = _filerequires.begin(); it != _filerequires.end(); ++it )
-    {
-
-      for ( iter.findByFile( *it ); *iter; ++iter )
-      {
-        Package::Ptr pptr = _packages.lookup( iter->tag_name() );
-        if ( !pptr )
-        {
-          WAR << "rpmdb.findByFile returned unknown package " << *iter << endl;
-          continue;
-        }
-        pptr->injectProvides(_f.parse(ResKind::package, *it));
-      }
-    }
-#endif
-
-  ///////////////////////////////////////////////////////////////////
-  // Build final packages list
-  ///////////////////////////////////////////////////////////////////
-  return _packages._list;
-}
 
 ///////////////////////////////////////////////////////////////////
 //

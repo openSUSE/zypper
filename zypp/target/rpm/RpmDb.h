@@ -244,33 +244,6 @@ public:
 
   ///////////////////////////////////////////////////////////////////
   //
-  // Cached RPM database retrieval via librpm.
-  //
-  ///////////////////////////////////////////////////////////////////
-private:
-
-  class Packages;
-
-  Packages & _packages;
-
-  std::set<std::string> _filerequires;
-
-public:
-
-  /**
-   * @return Whether the list of installed packages is valid, or
-   * you'd better reread it. (<B>NOTE:</B> returns valid, if not
-   * initialized).
-   **/
-  bool packagesValid() const;
-
-  /**
-   * If necessary build, and return the list of all installed packages.
-   **/
-  const std::list<Package::Ptr> & getPackages();
-
-  ///////////////////////////////////////////////////////////////////
-  //
   // Direct RPM database retrieval via librpm.
   //
   ///////////////////////////////////////////////////////////////////
@@ -345,16 +318,6 @@ public:
    **/
   void getData( const std::string & name_r, const Edition & ed_r,
                 RpmHeader::constPtr & result_r ) const;
-
-
-  /**
-   * Create a package from RpmHeader
-   * return NULL on error
-   **/
-
-  static Package::Ptr makePackageFromHeader( const RpmHeader::constPtr header,
-                                             std::set<std::string> * filerequires,
-                                             const Pathname & location, Repository repo );
 
   ///////////////////////////////////////////////////////////////////
   //
@@ -561,10 +524,7 @@ public:
 protected:
   void doRemovePackage( const std::string & name_r, RpmInstFlags flags, callback::SendReport<RpmRemoveReport> & report );
   void doInstallPackage( const Pathname & filename, RpmInstFlags flags, callback::SendReport<RpmInstallReport> & report );
-  const std::list<Package::Ptr> & doGetPackages(callback::SendReport<ScanDBReport> & report);
   void doRebuildDatabase(callback::SendReport<RebuildDBReport> & report);
-
-
 };
 
 } // namespace rpm

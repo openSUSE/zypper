@@ -593,37 +593,6 @@ namespace zypp
         ) {}
       };
 
-       // progress for scanning the database
-      struct ScanDBReport : public callback::ReportBase
-      {
-        enum Action {
-          ABORT,  // abort and return error
-          RETRY,	// retry
-	  IGNORE	// ignore the failure
-        };
-
-        enum Error {
-	  NO_ERROR,
-	  FAILED		// conversion failed
-        };
-
-        virtual void start(
-        ) {}
-
-        virtual bool progress(int /*value*/)
-        { return true; }
-
-        virtual Action problem(
-  	  Error /*error*/
-  	 , const std::string &/*description*/
-        ) { return ABORT; }
-
-        virtual void finish(
-          Error /*error*/
-	  , const std::string &/*reason*/
-        ) {}
-      };
-
       /////////////////////////////////////////////////////////////////
     } // namespace rpm
     ///////////////////////////////////////////////////////////////////
