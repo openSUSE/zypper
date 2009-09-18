@@ -297,7 +297,7 @@ RpmDb::RpmDb()
 {
   process = 0;
   exit_code = -1;
-
+  librpmDb::globalInit();
   // Some rpm versions are patched not to abort installation if
   // symlink creation failed.
   setenv( "RPM_IgnoreFailedSymlinks", "1", 1 );

@@ -153,6 +153,7 @@ int gnameToGid(const char * thisGname, gid_t * gid)
 #include "zypp/base/Logger.h"
 #include "zypp/base/Exception.h"
 
+#include "zypp/target/rpm/librpmDb.h"
 #include "zypp/target/rpm/RpmHeader.h"
 #include "zypp/Package.h"
 #include "zypp/PathInfo.h"
@@ -226,6 +227,7 @@ RpmHeader::constPtr RpmHeader::readPackage( const Pathname & path_r,
     return (RpmHeader*)0;
   }
 
+  librpmDb::globalInit();
   rpmts ts = ::rpmtsCreate();
   unsigned vsflag = RPMVSF_DEFAULT;
   if ( verification_r & NODIGEST )
