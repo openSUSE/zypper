@@ -1,4 +1,11 @@
 -------------------------------------------------------------------
+Fri Sep 18 17:20:37 CEST 2009 - ma@suse.de
+
+- Make sure rpmReadConfigFiles was called before using librpm (bnc #539603).
+- Remove dead rpm database caching code from class RpmDb.
+- version 6.17.0 (17)
+
+-------------------------------------------------------------------
 Fri Sep 11 15:13:30 CEST 2009 - ma@km13.de
 
 - New commit.downloadMode option in zypp.conf. Allows to set a
