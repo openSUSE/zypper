@@ -122,54 +122,6 @@ struct PatchScriptReportReceiver : public zypp::callback::ReceiveReport<zypp::ta
 };
 
 ///////////////////////////////////////////////////////////////////
-struct ScanRpmDbReceive : public zypp::callback::ReceiveReport<zypp::target::rpm::ScanDBReport>
-{
-  int & _step;				// step counter for install & receive steps
-  int last_reported;
-
-  ScanRpmDbReceive( int & step )
-  : _step( step )
-  {
-  }
-
-  virtual void start()
-  {
-    last_reported = 0;
-    Zypper::instance()->out().progressStart(
-      "read-installed-packages", _("Reading installed packages"));
-  }
-
-  virtual bool progress(int value)
-  {
-    // this is called too often. relax a bit.
-    static int last = -1;
-    if (last != value)
-      Zypper::instance()->out().progress(
-        "read-installed-packages", _("Reading installed packages"), value);
-    last = value;
-    return true;
-  }
-
-  virtual Action problem( zypp::target::rpm::ScanDBReport::Error error, const std::string & description )
-  {
-    Zypper::instance()->out().progressEnd(
-      "read-installed-packages", _("Reading installed packages"), true);
-    return zypp::target::rpm::ScanDBReport::problem( error, description );
-  }
-
-  virtual void finish( Error error, const std::string & reason )
-  {
-    Zypper::instance()->out()
-      .progressEnd("read-installed-packages", _("Reading installed packages"), error != NO_ERROR);
-    if (error != NO_ERROR)
-    {
-      Zypper::instance()->out().error(zcb_error2str(error, reason));
-      Zypper::instance()->setExitCode(ZYPPER_EXIT_ERR_ZYPP);
-    }
-  }
-};
-
-///////////////////////////////////////////////////////////////////
  // progress for removing a resolvable
 struct RemoveResolvableReportReceiver : public zypp::callback::ReceiveReport<zypp::target::rpm::RemoveResolvableReport>
 {
@@ -317,22 +269,18 @@ class RpmCallbacks {
   private:
     ZmartRecipients::PatchMessageReportReceiver _messageReceiver;
     ZmartRecipients::PatchScriptReportReceiver _scriptReceiver;
-    ZmartRecipients::ScanRpmDbReceive _readReceiver;
     ZmartRecipients::RemoveResolvableReportReceiver _installReceiver;
     ZmartRecipients::InstallResolvableReportReceiver _removeReceiver;
     int _step_counter;
 
   public:
     RpmCallbacks()
-	: _readReceiver( _step_counter )
-	//, _removeReceiver( _step_counter )
-	, _step_counter( 0 )
+	: _step_counter( 0 )
     {
       _messageReceiver.connect();
       _scriptReceiver.connect();
       _installReceiver.connect();
       _removeReceiver.connect();
-      _readReceiver.connect();
     }
 
     ~RpmCallbacks()
@@ -341,7 +289,6 @@ class RpmCallbacks {
       _scriptReceiver.disconnect();
       _installReceiver.disconnect();
       _removeReceiver.disconnect();
-      _readReceiver.connect();
     }
 };
 

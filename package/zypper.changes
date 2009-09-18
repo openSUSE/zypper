@@ -1,4 +1,9 @@
 -------------------------------------------------------------------
+Fri Sep 18 17:43:12 CEST 2009 - ma@suse.de
+
+- Remove connection to dead zypp::ScanDBReport.
+
+-------------------------------------------------------------------
 Wed Sep 16 16:13:47 CEST 2009 - ma@suse.de
 
 - Fix zyppers installRecommends option not following the zypp.conf
