@@ -119,4 +119,12 @@ std::string asXML(const zypp::Product & p, bool is_installed);
 
 std::string asXML(const zypp::Pattern & p, bool is_installed);
 
+/**
+ * fate #300763
+ * Used by 'zypper ps' to show running processes that use
+ * libraries or other files that have been removed since their execution.
+ * This is particularly useful after 'zypper remove' or 'zypper update'.
+ */
+void list_processes_using_deleted_files(Zypper & zypper);
+
 #endif /*ZYPPER_UTILS_H*/

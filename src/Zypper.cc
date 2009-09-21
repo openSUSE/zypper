@@ -2151,6 +2151,26 @@ void Zypper::processCommandOptions()
     break;
   }
 
+
+  case ZypperCommand::PS_e:
+  {
+    static struct option options[] =
+    {
+      {"help", no_argument, 0, 'h'},
+      {0, 0, 0, 0}
+    };
+    specific_options = options;
+    _command_help = _(
+      "ps\n"
+      "\n"
+      "List running processes which use files deleted by recent upgrades.\n"
+      "\n"
+      "This command has no additional options.\n"
+    );
+    break;
+  }
+
+
   case ZypperCommand::SHELL_QUIT_e:
   {
     static struct option quit_options[] = {
@@ -4067,6 +4087,24 @@ void Zypper::doCommand()
 
     break;
   }
+
+
+  case ZypperCommand::PS_e:
+  {
+    if (runningHelp()) { out().info(_command_help, Out::QUIET); return; }
+
+    if (!_arguments.empty())
+    {
+      report_too_many_arguments(_command_help);
+      setExitCode(ZYPPER_EXIT_ERR_INVALID_ARGS);
+      return;
+    }
+
+    list_processes_using_deleted_files(*this);
+
+    break;
+  }
+
 
   // -----------------------------( shell )------------------------------------
 

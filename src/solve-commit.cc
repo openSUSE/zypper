@@ -20,7 +20,6 @@
 #include "utils/misc.h"
 #include "utils/prompt.h"      // Continue? and solver problem prompt
 #include "utils/pager.h"       // to view the summary
-#include "Table.h"             // for process list in suggest_restart_services
 #include "Summary.h"
 
 #include "solve-commit.h"
@@ -373,11 +372,10 @@ ZYppCommitPolicy get_commit_policy(Zypper & zypper)
 }
 
 /** fate #300763
- * This is called after each commit to show running processes that use
- * libraries or other files that have been removed since their execution.
- * This is particularly useful after zypper remove or zypper update.
+ * This is called after each commit to notify user about running processes that
+ * use libraries or other files that have been removed since their execution.
  */
-static void suggest_restart_services(Zypper & zypper)
+static void notify_processes_using_deleted_files(Zypper & zypper)
 {
   zypper.out().info(
       _("Checking for running processes using deleted libraries..."), Out::HIGH);
@@ -392,55 +390,12 @@ static void suggest_restart_services(Zypper & zypper)
       zypper.out().error(e, _("Check failed:"));
   }
 
-  Table t;
-  t.allowAbbrev(6);
-  TableHeader th;
-  // process ID
-  th << _("PID");
-  // parent process ID
-  th << _("PPID");
-  // process user ID
-  th << _("UID");
-  // process login name
-  th << _("Login");
-  // process command name
-  th << _("Command");
-  // "/etc/init.d/ script that might be used to restart the command (guessed)
-  th << _("Service");
-  // "list of deleted files or libraries accessed"
-  th << _("Files");
-  t << th;
-
-  for_( it, checker.begin(), checker.end() )
+  if (checker.begin() != checker.end())
   {
-    TableRow tr;
-    vector<string>::const_iterator fit = it->files.begin();
-    tr << it->pid << it->ppid << it->puid << it->login << it->command
-      << it->service() << (fit != it->files.end() ? *fit : "");
-    t << tr;
-    for (; fit != it->files.end(); ++fit)
-    {
-      TableRow tr1;
-      tr1 << "" << "" << "" << "" << "" << "" << *fit;
-      t << tr1;
-    }
-  }
-
-  if (t.empty())
-  {
-    zypper.out().info(_("No such processes found."), Out::HIGH);
-  }
-  else
-  {
-    cout << endl;
-    zypper.out().info(_("The following running processes use deleted files:"));
-    cout << endl;
-    cout << t << endl;
-    zypper.out().info(_("You may wish to restart these processes."));
     zypper.out().info(str::form(
-        _("See '%s' for information about the meaning of values"
-          " in the above table."),
-        "man zypper"));
+        _("There are some running programs that use files deleted by recent upgrade."
+          " You may wish to restart some of them. Run '%s' to list these programs."),
+        "zypper ps"));
   }
 }
 
@@ -802,7 +757,7 @@ void solve_and_commit (Zypper & zypper)
         if (summary.packagesToRemove() ||
             summary.packagesToUpgrade() ||
             summary.packagesToDowngrade())
-          suggest_restart_services(zypper);
+          notify_processes_using_deleted_files(zypper);
       }
     }
     // noting to do
