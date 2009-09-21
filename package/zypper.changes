@@ -1,4 +1,11 @@
 -------------------------------------------------------------------
+Mon Sep 21 10:38:38 CEST 2009 - jkupec@suse.cz
+
+- 'zypper ps' added to list processes using deleted files
+  (fate #300763). This is instead of showing the list after each
+  commit.
+
+-------------------------------------------------------------------
 Fri Sep 18 17:43:12 CEST 2009 - ma@suse.de
 
 - Remove connection to dead zypp::ScanDBReport.
