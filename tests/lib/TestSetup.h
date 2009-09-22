@@ -313,7 +313,7 @@ class TestSetup
      * a TestSetup system or a real system. The  provided repostitories are
      * loaded into the pool (without refresh).
     */
-    static void LoadSystemAt( const Pathname & sysRoot )
+    static void LoadSystemAt( const Pathname & sysRoot, const Arch & _testSetupArch_r = Arch_x86_64 )
     {
       if ( ! PathInfo( sysRoot ).isDir() )
         ZYPP_THROW( Exception("sysRoot argument needs to be a directory") );
@@ -327,7 +327,8 @@ class TestSetup
       else if ( TestSetup::isTestSetup( sysRoot ) )
       {
         USR << str::form( "*** Load TestSetup from '%s'", sysRoot.c_str() ) << endl;
-        TestSetup test( sysRoot, Arch_x86_64 );
+
+        TestSetup test( sysRoot, _testSetupArch_r );
         test.loadRepos();
 
         Pathname solvCachePath( RepoManagerOptions::makeTestSetup( test.root() ).repoSolvCachePath );

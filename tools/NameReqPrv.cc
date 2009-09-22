@@ -199,7 +199,7 @@ int main( int argc, char * argv[] )
 
     for_( it, q.begin(), q.end() )
     {
-      tableOut( str::numstring( it->id() ), it->asString(), it->repository().alias(), it->vendor().asString(),
+      tableOut( str::numstring( it->id() ), it->asString(), it->repository().name(), it->vendor().asString(),
                 str::numstring( PoolItem(*it)->buildtime() ) );
       if ( ! it.matchesEmpty() )
       {
