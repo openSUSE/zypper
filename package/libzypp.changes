@@ -1,4 +1,12 @@
 -------------------------------------------------------------------
+Tue Sep 22 20:32:38 CEST 2009 - ma@suse.de
+
+- Add Selectable::updateCandidateObj returning the candidate for 
+  update, if there is one. The updateCandidate must not violate 
+  any active solver policy.
+- version 6.17.1 (17)
+
+-------------------------------------------------------------------
 Fri Sep 18 17:20:37 CEST 2009 - ma@suse.de
 
 - Make sure rpmReadConfigFiles was called before using librpm (bnc #539603).
