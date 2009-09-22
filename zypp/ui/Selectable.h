@@ -120,9 +120,18 @@ namespace zypp
       PoolItem installedObj() const;
 
       /** The 'best' or 'most interesting' among all available objects.
-       * One that is, or is likely to be, chosen for installation.
+       * One that is, or is likely to be, chosen for installation, unless
+       * it violated any solver policy (see \ref updateCandidateObj).
        */
       PoolItem candidateObj() const;
+
+      /** The best candidate for update, if there is one.
+       * In contrary to \ref candidateObj, this may return no item even if
+       * there are available objects. This simply means the best object is
+       * already installed, and all available objects violate at least one
+       * update policy.
+       */
+      PoolItem updateCandidateObj() const;
 
       /** Return the \ref installedObj resolvable casted to a specific kind.
        * \code

@@ -117,6 +117,39 @@ namespace zypp
       */
       PoolItem setCandidate( const PoolItem & newCandidate_r, ResStatus::TransactByValue causer_r );
 
+      /** The best candidate for update, if there is one.
+       * In contrary to \ref candidateObj, this may return no item even if
+       * there are available objects. This simply means the best object is
+       * already installed, and all available objects violate at least one
+       * update policy.
+       */
+      PoolItem updateCandidateObj() const
+      {
+        if ( installedEmpty() || ! _defaultCandidate )
+          return _defaultCandidate;
+        // Here: installed and _defaultCandidate are non NULL.
+
+        // update candidate must come from the highest priority repo
+        if ( _defaultCandidate->repoInfo().priority() != (*availableBegin())->repoInfo().priority() )
+          return PoolItem();
+
+        PoolItem installed( installedObj() );
+        // check vendor change
+        if ( ! ( ZConfig::instance().solver_allowVendorChange()
+                 || VendorAttr::instance().equivalent( _defaultCandidate->vendor(), installed->vendor() ) ) )
+          return PoolItem();
+
+        // check arch change
+        if ( _defaultCandidate->arch() != installed->arch() )
+          return PoolItem();
+
+        // check greater edition
+        if ( _defaultCandidate->edition() <= installed->edition() )
+          return PoolItem();
+
+        return _defaultCandidate;
+      }
+
       /** Best among all objects. */
       PoolItem theObj() const
       {
@@ -140,7 +173,6 @@ namespace zypp
 
       available_const_iterator availableBegin() const
       { return _availableItems.begin(); }
-
 
       available_const_iterator availableEnd() const
       { return _availableItems.end(); }
@@ -263,6 +295,7 @@ namespace zypp
       AvailableItemSet       _availableItems;
       //! Best among availabe with restpect to installed.
       PoolItem               _defaultCandidate;
+
       //! The object selected by setCandidateObj() method.
       PoolItem               _candidate;
     };
