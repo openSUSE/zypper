@@ -247,7 +247,7 @@ static bool build_cache(Zypper & zypper, const RepoInfo &repo, bool force_build)
         _("This may be caused by invalid metadata in the repository,"
           " or by a bug in the metadata parser. In the latter case,"
           " or if in doubt, please, file a bug report by following"
-          " instructions at http://en.opensuse.org/Zypper#Troubleshooting"));
+          " instructions at http://en.opensuse.org/Zypper/Troubleshooting"));
 
     // log untranslated message
     ERR << format("Error parsing metadata for '%s':") % repo.name() << endl;

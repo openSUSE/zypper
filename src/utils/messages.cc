@@ -22,7 +22,7 @@ void report_a_bug (Out & out)
   s <<_("Please file a bug report about this.") << endl
       // TranslatorExplanation remember not to translate the URL
       // unless you translate the actual page :)
-    << _("See http://en.opensuse.org/Zypper#Troubleshooting for instructions.");
+    << _("See http://en.opensuse.org/Zypper/Troubleshooting for instructions.");
   out.error(s.str());
 }
 
