@@ -282,6 +282,16 @@ namespace zypp
       */
       Pathname update_messagesPath() const;
 
+      /** \name Command to be invoked to send update messages. */
+      //@{
+      /** Command definition for sending update messages.*/
+      std::string updateMessagesNotify() const;
+      /** Set a new command definition (see update.messages.notify in zypp.conf). */
+      void setUpdateMessagesNotify( const std::string & val_r );
+      /** Reset to the zypp.conf default. */
+      void resetUpdateMessagesNotify();
+     //@}
+
       /** \name Options for package installation */
       //@{
       /** The default \ref target::rpm::RpmInstFlags for \ref ZYppCommitPolicy.

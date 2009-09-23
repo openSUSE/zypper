@@ -135,35 +135,45 @@ namespace zypp
   } // namespace zypp
   ///////////////////////////////////////////////////////////////////
 
-  /** Mutable option with initial value. */
-  template<class _Tp, _Tp _Initial>
+  /** Mutable option. */
+  template<class _Tp>
       struct Option
       {
 	typedef _Tp value_type;
 
-	/** Default ctor sets _Initial. */
-	Option()
-	  : _val( _Initial )
+	/** No default ctor, explicit initialisation! */
+	Option( const value_type & initial_r )
+	  : _val( initial_r )
 	{}
 
 	/** Get the value.  */
-	value_type get() const
+	const value_type & get() const
 	{ return _val; }
+
+        operator const value_type &() const
+        { return _val; }
 
 	/** Set a new value.  */
 	void set( const value_type & newval_r )
 	{ _val = newval_r; }
+
+        value_type & ref()
+        { return _val; }
 
 	private:
 	  value_type _val;
       };
 
   /** Mutable option with initial value also remembering a config value. */
-  template<class _Tp, _Tp _Initial>
-      struct DefaultOption : public Option<_Tp,_Initial>
+  template<class _Tp>
+      struct DefaultOption : public Option<_Tp>
       {
-	typedef _Tp                  value_type;
-	typedef Option<_Tp,_Initial> option_type;
+	typedef _Tp         value_type;
+	typedef Option<_Tp> option_type;
+
+        DefaultOption( const value_type & initial_r )
+          : Option<_Tp>( initial_r ), _default( initial_r )
+        {}
 
 	/** Reset value to the current default. */
 	void restoreToDefault()
@@ -174,7 +184,7 @@ namespace zypp
 	{ setDefault( newval_r ); restoreToDefault(); }
 
 	/** Get the current default value. */
-	value_type getDefault() const
+	const value_type & getDefault() const
 	{ return _default.get(); }
 
 	/** Set a new default value. */
@@ -201,15 +211,21 @@ namespace zypp
         : _parsedZyppConf         	( override_r )
         , cfg_arch                	( defaultSystemArchitecture() )
         , cfg_textLocale          	( defaultTextLocale() )
+        , updateMessagesNotify		( "single | /usr/lib/zypp/notify-message -p %p" )
         , repo_add_probe          	( false )
         , repo_refresh_delay      	( 10 )
         , download_use_deltarpm   	( true )
         , download_use_deltarpm_always  ( false )
-        , download_max_concurrent_connections(2)
-        , download_min_download_speed(0)
-        , download_max_download_speed(0)
-        , download_max_silent_tries(5)
-        , apply_locks_file              ( true )
+        , download_media_prefer_download( true )
+        , download_max_concurrent_connections( 2 )
+        , download_min_download_speed	( 0 )
+        , download_max_download_speed	( 0 )
+        , download_max_silent_tries	( 5 )
+        , commit_downloadMode		( DownloadDefault )
+        , solver_onlyRequires		( false )
+        , solver_allowVendorChange	( false )
+        , solver_upgradeTestcasesToKeep	( 2 )
+        , apply_locks_file		( true )
 
       {
         MIL << "libzypp: " << VERSION << " built " << __DATE__ << " " <<  __TIME__ << endl;
@@ -330,11 +346,11 @@ namespace zypp
                 }
                 else if ( entry == "solver.onlyRequires" )
                 {
-                  solver_onlyRequires.set( str::strToBool( value, solver_onlyRequires.get() ) );
+                  solver_onlyRequires.set( str::strToBool( value, solver_onlyRequires ) );
                 }
                 else if ( entry == "solver.allowVendorChange" )
                 {
-                  solver_allowVendorChange.set( str::strToBool( value, solver_allowVendorChange.get() ) );
+                  solver_allowVendorChange.set( str::strToBool( value, solver_allowVendorChange ) );
                 }
                 else if ( entry == "solver.upgradeTestcasesToKeep" )
                 {
@@ -372,6 +388,10 @@ namespace zypp
                 else if ( entry == "update.messagessdir" )
                 {
                   update_messages_path = Pathname(value);
+                }
+                else if ( entry == "update.messages.notify" )
+                {
+                  updateMessagesNotify.set( value );
                 }
                 else if ( entry == "rpm.install.excludedocs" )
                 {
@@ -437,24 +457,25 @@ namespace zypp
     Pathname update_data_path;
     Pathname update_scripts_path;
     Pathname update_messages_path;
+    DefaultOption<std::string> updateMessagesNotify;
 
     bool repo_add_probe;
     unsigned repo_refresh_delay;
 
     bool download_use_deltarpm;
     bool download_use_deltarpm_always;
-    DefaultOption<bool,true> download_media_prefer_download;
+    DefaultOption<bool> download_media_prefer_download;
 
     int download_max_concurrent_connections;
     int download_min_download_speed;
     int download_max_download_speed;
     int download_max_silent_tries;
 
-    Option<DownloadMode,DownloadDefault> commit_downloadMode;
+    Option<DownloadMode> commit_downloadMode;
 
-    Option<bool,false>  solver_onlyRequires;
-    Option<bool,false>  solver_allowVendorChange;
-    Option<unsigned,2U> solver_upgradeTestcasesToKeep;
+    Option<bool>	solver_onlyRequires;
+    Option<bool>	solver_allowVendorChange;
+    Option<unsigned>	solver_upgradeTestcasesToKeep;
     Pathname solver_checkSystemFile;
 
     std::set<IdString> multiversion;
@@ -638,7 +659,7 @@ namespace zypp
   { return download_use_deltarpm() && _pimpl->download_use_deltarpm_always; }
 
   bool ZConfig::download_media_prefer_download() const
-  { return _pimpl->download_media_prefer_download.get(); }
+  { return _pimpl->download_media_prefer_download; }
 
   void ZConfig::set_download_media_prefer_download( bool yesno_r )
   { _pimpl->download_media_prefer_download.set( yesno_r ); }
@@ -659,20 +680,20 @@ namespace zypp
   { return _pimpl->download_max_silent_tries; }
 
   DownloadMode ZConfig::commit_downloadMode() const
-  { return _pimpl->commit_downloadMode.get(); }
+  { return _pimpl->commit_downloadMode; }
 
   bool ZConfig::solver_onlyRequires() const
-  { return _pimpl->solver_onlyRequires.get(); }
+  { return _pimpl->solver_onlyRequires; }
 
   bool ZConfig::solver_allowVendorChange() const
-  { return _pimpl->solver_allowVendorChange.get(); }
+  { return _pimpl->solver_allowVendorChange; }
 
   Pathname ZConfig::solver_checkSystemFile() const
   { return ( _pimpl->solver_checkSystemFile.empty()
       ? (configPath()/"systemCheck") : _pimpl->solver_checkSystemFile ); }
 
   unsigned ZConfig::solver_upgradeTestcasesToKeep() const
-  { return _pimpl->solver_upgradeTestcasesToKeep.get(); }
+  { return _pimpl->solver_upgradeTestcasesToKeep; }
 
   std::set<IdString> ZConfig::multiversion() const
   { return _pimpl->multiversion; }
@@ -698,12 +719,20 @@ namespace zypp
              ? Pathname(update_dataPath()/"update-messages") : _pimpl->update_messages_path );
   }
 
-
   Pathname ZConfig::update_scriptsPath() const
   {
     return ( _pimpl->update_scripts_path.empty()
              ? Pathname(update_dataPath()/"update-scripts") : _pimpl->update_scripts_path );
   }
+
+  std::string ZConfig::updateMessagesNotify() const
+  { return _pimpl->updateMessagesNotify; }
+
+  void ZConfig::setUpdateMessagesNotify( const std::string & val_r )
+  { _pimpl->updateMessagesNotify.set( val_r ); }
+
+  void ZConfig::resetUpdateMessagesNotify()
+  { _pimpl->updateMessagesNotify.restoreToDefault(); }
 
   ///////////////////////////////////////////////////////////////////
 
