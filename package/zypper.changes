@@ -1,4 +1,9 @@
 -------------------------------------------------------------------
+Wed Sep 23 13:33:48 CEST 2009 - jkupec@suse.cz
+
+- Fixed troubleshooting wiki link (bnc #533606)
+
+-------------------------------------------------------------------
 Mon Sep 21 10:38:38 CEST 2009 - jkupec@suse.cz
 
 - 'zypper ps' added to list processes using deleted files
