@@ -1,6 +1,8 @@
 
 ADD_SUBDIRECTORY( package-manager )
 
+INSTALL( FILES notify-message DESTINATION "${CMAKE_INSTALL_PREFIX}/lib/zypp" )
+
 ## ############################################################
 
 FILE( GLOB ALLCC RELATIVE ${CMAKE_CURRENT_SOURCE_DIR} "*.cc" )
@@ -17,4 +19,3 @@ ENDFOREACH( loop_var )
 ## ############################################################
 
 INSTALL(TARGETS zypp-CheckAccessDeleted DESTINATION "${CMAKE_INSTALL_PREFIX}/bin")
-

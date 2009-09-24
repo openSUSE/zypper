@@ -198,7 +198,7 @@ namespace zypp
         return false; // abort.
       }
 
-      /** Look for patch scripts named 'name-version-release-*' and
+      /** Look for update scripts named 'name-version-release-*' and
        *  execute them. Return \c false if \c ABORT was requested.
        */
       bool RunUpdateScripts( const Pathname & root_r,
@@ -209,7 +209,7 @@ namespace zypp
         if ( checkPackages_r.empty() )
           return true; // no installed packages to check
 
-        MIL << "Looking for new patch scripts in (" <<  root_r << ")" << scriptsPath_r << endl;
+        MIL << "Looking for new update scripts in (" <<  root_r << ")" << scriptsPath_r << endl;
         Pathname scriptsDir( Pathname::assertprefix( root_r, scriptsPath_r ) );
         if ( ! PathInfo( scriptsDir ).isDir() )
           return true; // no script dir
@@ -236,14 +236,14 @@ namespace zypp
 
             if ( abort || aborting_r )
             {
-              WAR << "Aborting: Skip patch script " << *sit << endl;
+              WAR << "Aborting: Skip update script " << *sit << endl;
               HistoryLog().comment(
                   script.path().asString() + _(" execution skipped while aborting"),
                   /*timestamp*/true);
             }
             else
             {
-              MIL << "Found patch script " << *sit << endl;
+              MIL << "Found update script " << *sit << endl;
               callback::SendReport<PatchScriptReport> report;
               report->start( make<Package>( *it ), script.path() );
 
@@ -255,9 +255,185 @@ namespace zypp
         return !abort;
       }
 
+      ///////////////////////////////////////////////////////////////////
+      //
+      ///////////////////////////////////////////////////////////////////
+
+      inline void copyTo( std::ostream & out_r, const Pathname & file_r )
+      {
+        std::ifstream infile( file_r.c_str() );
+        for( iostr::EachLine in( infile ); in; in.next() )
+        {
+          out_r << *in << endl;
+        }
+      }
+
+      void sendNotification( const Pathname & root_r,
+                             const Pathname & messagesPath_r,
+                             const std::list<std::pair<sat::Solvable,Pathname> > & notifications_r )
+      {
+        if ( notifications_r.empty() )
+          return;
+
+        std::string cmdspec( ZConfig::instance().updateMessagesNotify() );
+        MIL << "Notification command is '" << cmdspec << "'" << endl;
+        if ( cmdspec.empty() )
+          return;
+
+        std::string::size_type pos( cmdspec.find( '|' ) );
+        if ( pos == std::string::npos )
+        {
+          ERR << "Can't send Notification: Missing 'format |' in command spec." << endl;
+          HistoryLog().comment( str::Str() << _("Error sending update message notification."), /*timestamp*/true );
+          return;
+        }
+
+        std::string formatStr( str::toLower( str::trim( cmdspec.substr( 0, pos ) ) ) );
+        std::string commandStr( str::trim( cmdspec.substr( pos + 1 ) ) );
+
+        enum Format { UNKNOWN, NONE, SINGLE, DIGEST, BULK };
+        Format format = UNKNOWN;
+        if ( formatStr == "none" )
+          format = NONE;
+        else if ( formatStr == "single" )
+          format = SINGLE;
+        else if ( formatStr == "digest" )
+          format = DIGEST;
+        else if ( formatStr == "bulk" )
+          format = BULK;
+        else
+        {
+          ERR << "Can't send Notification: Unknown format '" << formatStr << " |' in command spec." << endl;
+          HistoryLog().comment( str::Str() << _("Error sending update message notification."), /*timestamp*/true );
+         return;
+        }
+
+        std::vector<std::string> command;
+        command.push_back( "<" ); // prepare to redirect input
+        str::splitEscaped( commandStr, std::back_inserter( command ) );
+
+        // Take care: commands are ececuted chroot(root_r). The message file
+        // pathnames in notifications_r are local to root_r. For physical access
+        // to the file they need to be prefixed.
+
+        if ( format == NONE || format == SINGLE )
+        {
+          for_( it, notifications_r.begin(), notifications_r.end() )
+          {
+            if ( format == SINGLE )
+              command.front() = "<"+Pathname::assertprefix( root_r, it->second ).asString();
+            ExternalProgram prog( command, ExternalProgram::Stderr_To_Stdout, false, -1, true, root_r );
+            if ( true ) // Wait for feedback
+            {
+              for( std::string line = prog.receiveLine(); ! line.empty(); line = prog.receiveLine() )
+              {
+                DBG << line;
+              }
+              int ret = prog.close();
+              if ( ret != 0 )
+              {
+                ERR << "Notification command returned with error (" << ret << ")." << endl;
+                HistoryLog().comment( str::Str() << _("Error sending update message notification."), /*timestamp*/true );
+                return;
+              }
+            }
+          }
+        }
+        else if ( format == DIGEST || format == BULK )
+        {
+          filesystem::TmpFile tmpfile;
+          ofstream out( tmpfile.path().c_str() );
+          for_( it, notifications_r.begin(), notifications_r.end() )
+          {
+            if ( format == DIGEST )
+            {
+              out << it->second << endl;
+            }
+            else if ( format == BULK )
+            {
+              copyTo( out << '\f', Pathname::assertprefix( root_r, it->second ) );
+            }
+          }
+
+          command.front() = "<"+tmpfile.path().asString(); // redirect input
+          ExternalProgram prog( command, ExternalProgram::Stderr_To_Stdout, false, -1, true, root_r );
+          if ( true ) // Wait for feedback otherwise the TmpFile goes out of scope.
+          {
+            for( std::string line = prog.receiveLine(); ! line.empty(); line = prog.receiveLine() )
+            {
+              DBG << line;
+            }
+            int ret = prog.close();
+            if ( ret != 0 )
+            {
+              ERR << "Notification command returned with error (" << ret << ")." << endl;
+              HistoryLog().comment( str::Str() << _("Error sending update message notification."), /*timestamp*/true );
+              return;
+            }
+          }
+        }
+        else
+        {
+          INT << "Can't send Notification: Missing handler for 'format |' in command spec." << endl;
+          HistoryLog().comment( str::Str() << _("Error sending update message notification."), /*timestamp*/true );
+          return;
+        }
+      }
+
+
+      /** Look for update messages named 'name-version-release-*' and
+       *  send notification according to \ref ZConfig::updateMessagesNotify.
+       */
+      void RunUpdateMessages( const Pathname & root_r,
+                              const Pathname & messagesPath_r,
+                              const std::vector<sat::Solvable> & checkPackages_r )
+      {
+        if ( checkPackages_r.empty() )
+          return; // no installed packages to check
+
+        MIL << "Looking for new update messages in (" <<  root_r << ")" << messagesPath_r << endl;
+        Pathname messagesDir( Pathname::assertprefix( root_r, messagesPath_r ) );
+        if ( ! PathInfo( messagesDir ).isDir() )
+          return; // no script dir
+
+        std::list<std::string> messages;
+        filesystem::readdir( messages, messagesDir, /*dots*/false );
+        if ( messages.empty() )
+          return; // no messages in message dir
+
+        // Now collect all matching messages in notifications and send them.
+        std::list<std::pair<sat::Solvable,Pathname> > notifications;
+
+        HistoryLog historylog;
+        for_( it, checkPackages_r.begin(), checkPackages_r.end() )
+        {
+          std::string prefix( str::form( "%s-%s-", it->name().c_str(), it->edition().c_str() ) );
+          for_( sit, messages.begin(), messages.end() )
+          {
+            if ( ! str::hasPrefix( *sit, prefix ) )
+              continue;
+
+            PathInfo message( messagesDir / *sit );
+            if ( ! message.isFile() )
+              continue;
+
+            MIL << "Found update message " << *sit << endl;
+            Pathname localPath( messagesPath_r/(*sit) ); // without root prefix
+            historylog.comment( str::Str() << _("New update message") << " " << localPath, /*timestamp*/true );
+            notifications.push_back( std::make_pair( *it, localPath ) );
+          }
+        }
+        sendNotification( root_r, messagesPath_r, notifications );
+      }
+
       /////////////////////////////////////////////////////////////////
     } // namespace
     ///////////////////////////////////////////////////////////////////
+
+    void XRunUpdateMessages( const Pathname & root_r,
+                            const Pathname & messagesPath_r,
+                            const std::vector<sat::Solvable> & checkPackages_r )
+    { RunUpdateMessages( root_r, messagesPath_r, checkPackages_r ); }
 
     /** Helper for PackageProvider queries during commit. */
     struct QueryInstalledEditionHelper
@@ -1175,10 +1351,13 @@ namespace zypp
 
       } // for
 
-      // Check presence of patch scripts. If aborting, at least log
-      // omitted scripts.
+      // Check presence of update scripts/messages. If aborting,
+      // at least log omitted scripts.
       if ( ! successfullyInstalledPackages.empty() )
       {
+        RunUpdateMessages( _root, ZConfig::instance().update_messagesPath(),
+                           successfullyInstalledPackages );
+
         if ( ! RunUpdateScripts( _root, ZConfig::instance().update_scriptsPath(),
                                  successfullyInstalledPackages, abort ) )
         {

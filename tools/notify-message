@@ -1,0 +1,4 @@
+#! /bin/bash
+# Expecting message text on stdin.
+# TODO: make it smart.
+mail -s 'notify-message' root

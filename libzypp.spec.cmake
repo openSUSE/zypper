@@ -230,6 +230,7 @@ rm -rf "$RPM_BUILD_ROOT"
 %config(noreplace) /etc/zypp/zypp.conf
 %config(noreplace) /etc/zypp/systemCheck
 %config(noreplace) %{_sysconfdir}/logrotate.d/zypp-history.lr
+                   %{_usr}/lib/zypp
 %dir               %{_var}/lib/zypp
 %dir               %{_var}/log/zypp
 %dir               %{_var}/cache/zypp
