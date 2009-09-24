@@ -94,7 +94,15 @@ namespace zypp {
        * Start an external program by giving the arguments as an arry of char *pointers.
        * If environment is provided, varaiables will be added to the childs environment,
        * overwriting existing ones.
-       * \throws ExternalProgramException if fork fails.
+       *
+       * Stdin redirection: If the \b 1st argument starts with a \b '<', the remaining
+       * part is treated as file opened for reading on standard input (or \c /dev/null
+       * if empty).
+       * \code
+       *   // cat file /tmp/x
+       *   const char* argv[] = { "</tmp/x", "cat", NULL };
+       *   ExternalProgram prog( argv );
+       * \endcode
        */
 
       ExternalProgram();

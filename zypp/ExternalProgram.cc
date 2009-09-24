@@ -194,6 +194,15 @@ namespace zypp {
       int to_external[2], from_external[2];  // fds for pair of pipes
       int master_tty,	slave_tty;	   // fds for pair of ttys
 
+      const char * redirectStdin = 0;
+      if ( argv[0] && *argv[0] == '<' )
+      {
+        redirectStdin = argv[0]+1;
+        if ( *redirectStdin == '\0' )
+          redirectStdin = "/dev/null";
+        ++argv;
+      }
+
       // do not remove the single quotes around every argument, copy&paste of
       // command to shell will not work otherwise!
       {
@@ -205,6 +214,8 @@ namespace zypp {
           cmdstr << argv[i];
           cmdstr << '\'';
         }
+        if ( redirectStdin )
+          cmdstr << " < '" << redirectStdin << "'";
         _command = cmdstr.str();
       }
       DBG << "Executing " << _command << endl;
@@ -264,6 +275,13 @@ namespace zypp {
     	    renumber_fd (from_external[1], 1); // set new stdout
     	    ::close(to_external	 [1]);	  // Belongs to father process
     	}
+
+        if ( redirectStdin )
+        {
+          ::close( 0 );
+          int inp_fd = open( redirectStdin, O_RDONLY );
+          dup2( inp_fd, 0 );
+        }
 
     	// Handle stderr
     	if (stderr_disp == Discard_Stderr)
