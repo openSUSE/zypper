@@ -33,7 +33,8 @@ using boost::format;
 
 extern ZYpp::Ptr God;
 
-#define USE_THE_ONE 0
+/** Use ui::Selectable::updateCandidateObj() */
+#define USE_THE_ONE 1
 
 void printNVA(const ResObject::constPtr & res)
 {
@@ -153,7 +154,11 @@ void printPkgInfo(Zypper & zypper, const ui::Selectable & s)
   PoolItem installed = s.installedObj();
 
 #if USE_THE_ONE
-  PoolItem theone = s.theObj();
+  PoolItem theone = s.updateCandidateObj();
+  // if there's no update candidate, then there must be an installed object
+  // otherwise there would be no selectable of this name & kind
+  if (!theone)
+    theone = installed;
 #else
   PoolItem theone = findTheBest(God->pool(), s);
 #endif

@@ -19,8 +19,8 @@ using namespace boost;
 
 extern ZYpp::Ptr God;
 
-/** Use ui::Selectable::theObj() or candidateObj() */
-#define USE_THE_ONE 0
+/** Use ui::Selectable::updateCandidateObj() */
+#define USE_THE_ONE 1
 
 static PoolItem findInstalledItemInRepos(const PoolItem & installed)
 {
@@ -89,7 +89,11 @@ mark_for_install(Zypper & zypper,
 
 
 #if USE_THE_ONE
-  PoolItem candidate = s->candidateObj();
+  PoolItem candidate = s->updateCandidateObj();
+  // if there's no update candidate, then there must be an installed object
+  // otherwise there would be no selectable of this name & kind
+  if (!candidate)
+    candidate = s->installedObj();
 #else
   PoolItem candidate = findTheBest(God->pool(), *s);
 #endif
@@ -301,7 +305,11 @@ mark_selectable(Zypper & zypper,
                 const string & arch = "")
 {
 #if USE_THE_ONE
-  PoolItem theone = s.theObj();
+  PoolItem theone = s.updateCandidateObj();
+  // if there's no update candidate, then there must be an installed object
+  // otherwise there would be no selectable of this name & kind
+  if (!theone)
+    theone = s.installedObj();
 #else
   PoolItem theone = findTheBest(God->pool(), s);
 #endif
