@@ -721,11 +721,11 @@ void mark_updates(Zypper & zypper, const ResKindSet & kinds, bool skip_interacti
           {
             ui::Selectable::Ptr s = *solvit;
 #if USE_THE_ONE
-            PoolItem theone = s.updateCandidateObj();
+            PoolItem theone = s->updateCandidateObj();
             // if there's no update candidate, then there must be an installed object
             // otherwise there would be no selectable of this name & kind
             if (!theone)
-              theone = s.installedObj();
+              theone = s->installedObj();
 #else
             PoolItem theone = findTheBest(God->pool(), *s);
 #endif

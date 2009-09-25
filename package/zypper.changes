@@ -1,4 +1,10 @@
 -------------------------------------------------------------------
+Fri Sep 25 18:36:02 CEST 2009 - jkupec@suse.cz
+
+- Fixed incorrect selection of update candidate (bnc #539360)
+- 1.0.12
+
+-------------------------------------------------------------------
 Thu Sep  3 16:30:13 CEST 2009 - jkupec@suse.cz
 
 - Fixed wrong table column width computation causing excessive
