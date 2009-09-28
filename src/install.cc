@@ -19,8 +19,6 @@ using namespace boost;
 
 extern ZYpp::Ptr God;
 
-/** Use ui::Selectable::theObj() or candidateObj() */
-#define USE_THE_ONE 0
 
 static PoolItem findInstalledItemInRepos(const PoolItem & installed)
 {
@@ -32,7 +30,7 @@ static PoolItem findInstalledItemInRepos(const PoolItem & installed)
       filter::SameItemAs(installed),
       resfilter::ByUninstalled()),
     functor::getFirst(result));
-  INT << "findInstalledItemInRepos(" << installed << ") => " << result << endl;
+  XXX << "findInstalledItemInRepos(" << installed << ") => " << result << endl;
   return result;
 }
 
@@ -79,20 +77,13 @@ mark_for_install(Zypper & zypper,
 
   ui::Selectable::Ptr s = *q.selectableBegin();
   DBG << "... done" << endl;
-/*
-  for_(it, s->installedBegin(), s->installedEnd())
-  { cout << *it << endl; }
-  for_(it, s->availableBegin(), s->availableEnd())
-  { cout << *it << endl; }
-*/
+
   bool force = copts.count("force");
 
 
-#if USE_THE_ONE
-  PoolItem candidate = s->candidateObj();
-#else
-  PoolItem candidate = findTheBest(God->pool(), *s);
-#endif
+  PoolItem candidate = s->updateCandidateObj();
+  if (!candidate)
+    candidate = s->installedObj();
 
   if (s->installedObj() &&
       equalNVRA(*s->installedObj().resolvable(), *candidate.resolvable()) &&
@@ -300,11 +291,9 @@ mark_selectable(Zypper & zypper,
                 const string & repo = "",
                 const string & arch = "")
 {
-#if USE_THE_ONE
-  PoolItem theone = s.theObj();
-#else
-  PoolItem theone = findTheBest(God->pool(), s);
-#endif
+  PoolItem theone = s.updateCandidateObj();
+  if (!theone)
+    theone = s.installedObj();
 
   DBG << "the One: " << theone << endl;
 
@@ -373,7 +362,7 @@ mark_selectable(Zypper & zypper,
   {
     if (theoneinstalled && !force)
     {
-      DBG << "the One (" << theone << ") is installed, skipping." << endl;
+      DBG << "the One (" << theone << ") is already installed, skipping." << endl;
       zypper.out().info(str::form(
           _("'%s' is already installed."), s.name().c_str()));
       return;
@@ -395,7 +384,13 @@ mark_selectable(Zypper & zypper,
 
       //! could be a problem for patches if there would a greater version
       //! of a patch appear that would be irrelevant at the same time. Should
-      //! happen probably.
+      //! not happen usually.
+
+      //! this causes bnc #539360 if wrong update candidate is found
+      //! this request installation of installed > installed_version, which
+      //! can drag in a package with higher version even from repo with lower
+      //! priority
+      //! hopefully using ui::Selectable::updateCandidateObj() will fix this
       if (anyinstalled)
         c = Capability(s.name(), Rel::GT, installed->edition(), s.kind());
       // require any version

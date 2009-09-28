@@ -33,7 +33,6 @@ using boost::format;
 
 extern ZYpp::Ptr God;
 
-#define USE_THE_ONE 0
 
 void printNVA(const ResObject::constPtr & res)
 {
@@ -171,12 +170,9 @@ Copy and modify /usr/share/vim/current/gvimrc to ~/.gvimrc if needed.
 void printPkgInfo(Zypper & zypper, const ui::Selectable & s)
 {
   PoolItem installed = s.installedObj();
-
-#if USE_THE_ONE
-  PoolItem theone = s.theObj();
-#else
-  PoolItem theone = findTheBest(God->pool(), s);
-#endif
+  PoolItem theone = s.updateCandidateObj();
+  if (!theone)
+    theone = installed;
 
   cout << (zypper.globalOpts().is_rug_compatible ? _("Catalog: ") : _("Repository: "))
        << theone.resolvable()->repository().info().name() << endl;

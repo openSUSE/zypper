@@ -47,24 +47,3 @@ void mark_updates(Zypper & zypper,
  * in --cve or --bugzilla or --bz.
  */
 void mark_updates_by_issue(Zypper & zypper);
-
-/**
- * Find best (according to edition) uninstalled item
- * with same kind/name/arch as \a item.
- *
- * Similar to zypp::solver::detail::Helper::findUpdateItem()
- * but allows changing the vendor and does not allow chaning arch.
- */
-# warning get rid of findUpdateItem, make new API in zypp
-zypp::PoolItem findUpdateItem(const zypp::ResPool & pool, const zypp::PoolItem item);
-
-/**
- * Finds the best object in the Selectable.
- *
- * \todo FIXME if there is no installed object in the selectable, it chooses
- *       a random arch from the available objects (the availableBegin()). Choose
- *       the best compatible instead.
- * \todo All of this should be done in libzypp, using defined policies.
- */
-# warning get rid of findTheBest, make new API in zypp
-zypp::PoolItem findTheBest( const zypp::ResPool & pool, const zypp::ui::Selectable & s);
