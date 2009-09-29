@@ -29,6 +29,7 @@ ADD_TESTS(
   RepoStatus
   ResKind
   ResStatus
+  Selectable
   Target
   Url
   Vendor
