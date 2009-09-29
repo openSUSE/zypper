@@ -1,18 +1,19 @@
-# translation of zypper.po to italian
+# translation of zypper.it.po to Italiano
 # @TITLE@
 # Copyright (C) 2006, SUSE Linux GmbH, Nuremberg
 #
 # This file is distributed under the same license as @PACKAGE@ package. FIRST
 #
 # Andrea Florio <andrea@opensuse.org>, 2008, 2009.
+# Michael Skiba <trans@michael-skiba.de>, 2009.
 msgid ""
 msgstr ""
-"Project-Id-Version: zypper\n"
+"Project-Id-Version: zypper.it\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-06-08 16:44+0200\n"
-"PO-Revision-Date: 2009-01-07 18:44+0100\n"
+"POT-Creation-Date: 2009-09-21 11:46+0200\n"
+"PO-Revision-Date: 2009-09-24 19:12+0200\n"
 "Last-Translator: Andrea Florio <andrea@opensuse.org>\n"
-"Language-Team: italian <opensuse-translation@opensuse.org>\n"
+"Language-Team: Italiano <opensuse-translation@opensuse.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -27,7 +28,7 @@ msgstr "Si sta accettando un file non firmato '%s'."
 #: ../src/callbacks/keyring.h:52
 #, c-format
 msgid "Accepting an unsigned file '%s' from repository '%s'."
-msgstr "Si sta accettando un file non firmato '%s' dalla sorgente di installazione '%s'."
+msgstr "Si sta accettando un file non firmato '%s' dal repository '%s'."
 
 #. TranslatorExplanation: speaking of a file
 #: ../src/callbacks/keyring.h:63
@@ -39,7 +40,7 @@ msgstr "Il file '%s' non è firmato, continuare?"
 #: ../src/callbacks/keyring.h:67
 #, c-format
 msgid "File '%s' from repository '%s' is unsigned, continue?"
-msgstr "Il file '%s' dalla sorgente di installazione '%s' non è firmato, continuare?"
+msgstr "Il file '%s' dal repository '%s' non è firmato, continuare?"
 
 #: ../src/callbacks/keyring.h:90
 #, c-format
@@ -49,7 +50,7 @@ msgstr "Si sta accettando il file '%s' firmato con una chiave sconosciuta '%s'."
 #: ../src/callbacks/keyring.h:94
 #, c-format
 msgid "Accepting file '%s' from repository '%s' signed with an unknown key '%s'."
-msgstr "Si sta accettando il file '%s' dalla sorgente di installazione '%s' firmato con una chiave sconosciuta '%s'."
+msgstr "Si sta accettando il file '%s' dal repository '%s' firmato con una chiave sconosciuta '%s'."
 
 #. translators: the last %s is gpg key ID
 #: ../src/callbacks/keyring.h:104
@@ -61,7 +62,7 @@ msgstr "Il file '%s' è firmato con una chiave sconosciuta '%s'. Continuare?"
 #: ../src/callbacks/keyring.h:108
 #, c-format
 msgid "File '%s' from repository '%s' is signed with an unknown key '%s'. Continue?"
-msgstr "Il file '%s' dalla sorgente di installazione '%s' è firmato con una chiave sconosciuta '%s'. Continuare?"
+msgstr "Il file '%s' dal repository '%s' è firmato con una chiave sconosciuta '%s'. Continuare?"
 
 #: ../src/callbacks/keyring.h:125
 msgid "Automatically trusting the following key:"
@@ -69,7 +70,7 @@ msgstr "Fidarsi automaticamente delle seguenti chiavi:"
 
 #: ../src/callbacks/keyring.h:127
 msgid "New repository or package signing key received:"
-msgstr "Ricevuta una nuova chiave di firma del pacchetto o della sorgente di installazione:"
+msgstr "Ricevuta una nuova chiave di firma del pacchetto o del repository:"
 
 #: ../src/callbacks/keyring.h:131
 #, c-format
@@ -89,7 +90,7 @@ msgstr "Impronta digitale Chiave: %s"
 #: ../src/callbacks/keyring.h:135
 #, c-format
 msgid "Repository: %s"
-msgstr "Sorgente di installazione: %s"
+msgstr "Repository: %s"
 
 #. translators: this message is shown after showing description of the key
 #: ../src/callbacks/keyring.h:150
@@ -133,7 +134,7 @@ msgstr "Ignora verifica fallita della firma per il file '%s'!"
 #: ../src/callbacks/keyring.h:209
 #, c-format
 msgid "Ignoring failed signature verification for file '%s' from repository '%s'!"
-msgstr "Ignora verifica fallita della firma per il file '%s' dalla sorgente di installazione '%s'!"
+msgstr "Ignora verifica fallita della firma per il file '%s' dal repository '%s'!"
 
 #: ../src/callbacks/keyring.h:214
 msgid "Double-check this is not caused by some malicious changes in the file!"
@@ -147,7 +148,7 @@ msgstr "Verifica della firma fallita per il file '%s'."
 #: ../src/callbacks/keyring.h:227
 #, c-format
 msgid "Signature verification failed for file '%s' from repository '%s'."
-msgstr "Verifica della firma fallita per il file '%s' dalla sorgente di installazione '%s'."
+msgstr "Verifica della firma fallita per il file '%s' dal repository '%s'."
 
 #: ../src/callbacks/keyring.h:232
 msgid ""
@@ -168,7 +169,7 @@ msgstr "Nessun file di sommario per %s."
 #. popts.setOptionHelp(8, _("Explain why the packages are going to be installed."));
 #: ../src/callbacks/keyring.h:256 ../src/callbacks/keyring.h:266
 #: ../src/callbacks/keyring.h:288 ../src/callbacks/rpm.h:61
-#: ../src/solve-commit.cc:498
+#: ../src/solve-commit.cc:551
 msgid "Continue?"
 msgstr "Continuare?"
 
@@ -208,43 +209,39 @@ msgstr "Per favore, inserire il supporto [%s] #%d e premere 's' per continuare o
 #. Translate the a/r/i part exactly as you did the a/r/i string.
 #. the 'u' reply means 'Change URI'.
 #: ../src/callbacks/media.h:106
-#, fuzzy
-#| msgid "a/r/i"
 msgid "a/r/i/u"
-msgstr "a/r/i"
+msgstr "a/r/i/u"
 
 #. help text for the "Abort, retry, ignore?" prompt for media errors
 #: ../src/callbacks/media.h:108
 msgid "Skip retrieval of the file and abort current operation."
-msgstr ""
+msgstr "Salta il recupero del file ed annulla l'operazione attuale."
 
 #. help text for the "Abort, retry, ignore?" prompt for media errors
 #: ../src/callbacks/media.h:110
 msgid "Try to retrieve the file again."
-msgstr ""
+msgstr "Prova a recuperare nuovamente il file."
 
 #. help text for the "Abort, retry, ignore?" prompt for media errors
 #: ../src/callbacks/media.h:112
 msgid "Skip retrieval of the file and try to continue with the operation without the file."
-msgstr ""
+msgstr "Salta il recupero del file e prova a continuare l'operazione senza il file."
 
 #. help text for the "Abort, retry, ignore?" prompt for media errors
 #: ../src/callbacks/media.h:114
 msgid "Change current base URI and try retrieving the file again."
-msgstr ""
+msgstr "Cambia l'URI di base attuale e prova a recuperare nuovamente il file."
 
 #. translators: this is a prompt text
 #: ../src/callbacks/media.h:119 ../src/utils/prompt.cc:178
 #: ../src/utils/prompt.cc:266
 msgid "Abort, retry, ignore?"
-msgstr "Annullare, Riprovare, Ignorare?"
+msgstr "Annullare, riprovare, rgnorare?"
 
 #. translators: this is a prompt label, will appear as "New URI: "
 #: ../src/callbacks/media.h:130
-#, fuzzy
-#| msgid "URI"
 msgid "New URI"
-msgstr "URI"
+msgstr "Nuovo URI"
 
 #: ../src/callbacks/media.h:267 ../src/callbacks/media.h:274
 msgid "User Name"
@@ -285,54 +282,48 @@ msgstr "(%s estratto)"
 msgid "Running: %s  (%s, %s)"
 msgstr "Esecuzione: %s  (%s, %s)"
 
-#: ../src/callbacks/rpm.h:139 ../src/callbacks/rpm.h:148
-#: ../src/callbacks/rpm.h:156 ../src/callbacks/rpm.h:163
-msgid "Reading installed packages"
-msgstr "Lettura dei pacchetti installati"
-
 #. translators: This text is a progress display label e.g. "Removing packagename-x.x.x [42%]"
-#: ../src/callbacks/rpm.h:183
+#: ../src/callbacks/rpm.h:135
 #, c-format
 msgid "Removing %s-%s"
 msgstr "Rimozione %s-%s"
 
-#: ../src/callbacks/rpm.h:202
+#: ../src/callbacks/rpm.h:154
 #, c-format
 msgid "Removal of %s failed:"
 msgstr "Rimozione di %s fallita:"
 
 #. TranslatorExplanation --nodeps and --force are options of the rpm command, don't translate
 #. ! \todo use format
-#: ../src/callbacks/rpm.h:231
+#: ../src/callbacks/rpm.h:183
 msgid "(with --nodeps)"
 msgstr "(con --nodeps)"
 
-#: ../src/callbacks/rpm.h:231
+#: ../src/callbacks/rpm.h:183
 msgid "(with --nodeps --force)"
 msgstr "(con --nodeps --force)"
 
 # TLABEL modules/inst_target_part.ycp:680
 #. TranslatorExplanation This text is a progress display label e.g. "Installing foo-1.1.2 [42%]"
-#: ../src/callbacks/rpm.h:253
+#: ../src/callbacks/rpm.h:205
 #, c-format
 msgid "Installing: %s-%s"
 msgstr "Installazione di: %s-%s"
 
-#: ../src/callbacks/rpm.h:279
+#: ../src/callbacks/rpm.h:231
 #, c-format
 msgid "Installation of %s-%s failed:"
 msgstr "Installazione di %s-%s fallita:"
 
-#: ../src/Command.cc:174
+#: ../src/Command.cc:176
 #, c-format
 msgid "Unknown command '%s'"
 msgstr "Comando sconosciuto '%s'"
 
 #: ../src/Config.cc:73
-#, fuzzy, c-format
-#| msgid "Unknown command option"
+#, c-format
 msgid "Unknown configuration option '%s'"
-msgstr "Opzione di comando sconosciuta"
+msgstr "Opzione di configurazione '%s' sconosciuta"
 
 #: ../src/info.cc:40
 msgid "Name: "
@@ -348,7 +339,7 @@ msgstr "Arch: "
 
 #: ../src/info.cc:43
 msgid "Vendor: "
-msgstr "Marca:*"
+msgstr "Marca: "
 
 #: ../src/info.cc:48
 msgid "Summary: "
@@ -415,10 +406,8 @@ msgid "Requires:"
 msgstr "Richiede:"
 
 #: ../src/info.cc:144
-#, fuzzy
-#| msgid "Recommends"
 msgid "Recommends:"
-msgstr "Consigliati"
+msgstr "Consigliati: "
 
 #: ../src/info.cc:181 ../src/info.cc:325 ../src/info.cc:396
 msgid "Catalog: "
@@ -426,7 +415,7 @@ msgstr "Catalogo: "
 
 #: ../src/info.cc:181 ../src/info.cc:325 ../src/info.cc:396
 msgid "Repository: "
-msgstr "Sorgente di installazione: "
+msgstr "Repository: "
 
 #: ../src/info.cc:186 ../src/info.cc:330
 msgid "Installed: "
@@ -439,17 +428,17 @@ msgstr "Installato: "
 #. is base
 #: ../src/info.cc:186 ../src/info.cc:257 ../src/info.cc:263 ../src/info.cc:265
 #: ../src/info.cc:330 ../src/info.cc:403 ../src/info.cc:407
-#: ../src/repos.cc:735 ../src/repos.cc:737 ../src/repos.cc:1346
-#: ../src/repos.cc:1348 ../src/repos.cc:2024 ../src/repos.cc:2026
-#: ../src/search.cc:608 ../src/solve-commit.cc:256
+#: ../src/repos.cc:736 ../src/repos.cc:738 ../src/repos.cc:1347
+#: ../src/repos.cc:1349 ../src/repos.cc:2025 ../src/repos.cc:2027
+#: ../src/search.cc:608 ../src/solve-commit.cc:257
 msgid "Yes"
 msgstr "Sì"
 
 #: ../src/info.cc:186 ../src/info.cc:257 ../src/info.cc:263 ../src/info.cc:265
 #: ../src/info.cc:330 ../src/info.cc:403 ../src/info.cc:407
-#: ../src/repos.cc:735 ../src/repos.cc:737 ../src/repos.cc:1346
-#: ../src/repos.cc:1348 ../src/repos.cc:2024 ../src/repos.cc:2026
-#: ../src/search.cc:608 ../src/solve-commit.cc:256
+#: ../src/repos.cc:736 ../src/repos.cc:738 ../src/repos.cc:1347
+#: ../src/repos.cc:1349 ../src/repos.cc:2025 ../src/repos.cc:2027
+#: ../src/search.cc:608 ../src/solve-commit.cc:257
 msgid "No"
 msgstr "No"
 
@@ -505,10 +494,8 @@ msgid "Provides:"
 msgstr "Fornisce:"
 
 #: ../src/info.cc:276
-#, fuzzy
-#| msgid "Conflicts"
 msgid "Conflicts:"
-msgstr "In conflitto"
+msgstr "Conflitti: "
 
 #: ../src/info.cc:297 ../src/search.cc:327
 msgid "Recommended"
@@ -523,22 +510,23 @@ msgstr "Suggerito"
 #. TranslatorExplanation S stands for Status
 #: ../src/info.cc:340 ../src/search.cc:38 ../src/search.cc:54
 #: ../src/search.cc:218 ../src/search.cc:389 ../src/search.cc:445
-#: ../src/search.cc:537 ../src/update.cc:477
+#: ../src/search.cc:537 ../src/update.cc:523
 msgid "S"
 msgstr "S"
 
 #. translators: name (general header)
-#: ../src/info.cc:340 ../src/locks.cc:39 ../src/repos.cc:655
-#: ../src/repos.cc:704 ../src/repos.cc:2091 ../src/search.cc:44
+#: ../src/info.cc:340 ../src/locks.cc:39 ../src/repos.cc:656
+#: ../src/repos.cc:705 ../src/repos.cc:2092 ../src/search.cc:44
 #: ../src/search.cc:56 ../src/search.cc:219 ../src/search.cc:268
 #: ../src/search.cc:390 ../src/search.cc:451 ../src/search.cc:540
-#: ../src/update.cc:155 ../src/update.cc:485 ../src/Zypper.cc:4066
+#: ../src/update.cc:193 ../src/update.cc:531 ../src/update.cc:963
+#: ../src/Zypper.cc:4146
 msgid "Name"
 msgstr "Nome"
 
 #. translators: type (general header)
-#: ../src/info.cc:340 ../src/locks.cc:43 ../src/repos.cc:655
-#: ../src/repos.cc:713 ../src/repos.cc:2099 ../src/search.cc:58
+#: ../src/info.cc:340 ../src/locks.cc:43 ../src/repos.cc:656
+#: ../src/repos.cc:714 ../src/repos.cc:2100 ../src/search.cc:58
 #: ../src/search.cc:222
 msgid "Type"
 msgstr "Tipo"
@@ -557,13 +545,13 @@ msgstr "(vuoto)"
 
 #: ../src/info.cc:402 ../src/search.cc:548
 msgid "Is Base"
-msgstr ""
+msgstr "È Base"
 
 #: ../src/info.cc:404
 msgid "Flavor"
 msgstr "Tipo"
 
-#: ../src/info.cc:406 ../src/utils/misc.cc:134
+#: ../src/info.cc:406 ../src/utils/misc.cc:140
 msgid "Installed"
 msgstr "installato"
 
@@ -588,7 +576,7 @@ msgstr "salto %s '%s' (la versione più recente è già installata)"
 #: ../src/install.cc:120
 #, c-format
 msgid "Package %s-%s.%s not found in repositories, cannot reinstall."
-msgstr "Il pacchetto %s-%s-%s non è stato trovato nella sorgente di installazione, impossibile reinstallarlo."
+msgstr "Il pacchetto %s-%s-%s non è stato trovato nel repository, impossibile reinstallarlo."
 
 #: ../src/install.cc:133
 #, c-format
@@ -600,14 +588,14 @@ msgstr "Impossibile aggiungere '%s' all’elenco dei pacchetti da installare."
 msgid "Failed to add '%s' to the list of packages to be removed."
 msgstr "Impossibile aggiungere '%s' all’elenco dei pacchetti da installare."
 
-#: ../src/install.cc:378 ../src/install.cc:718
+#: ../src/install.cc:378 ../src/install.cc:729
 #, c-format
 msgid "'%s' is already installed."
 msgstr "'%s' è già installato."
 
 # TLABEL modules/inst_target_part.ycp:680
 #. translators: meaning a package %s or provider of capability %s
-#: ../src/install.cc:418 ../src/install.cc:732
+#: ../src/install.cc:418 ../src/install.cc:743
 #, c-format
 msgid "'%s' is not installed."
 msgstr "'%s' non è installato."
@@ -643,22 +631,22 @@ msgid "%s cannot currently be used with %s"
 msgstr "%s non può essere usata al momento con %s"
 
 #. translators: meaning a package %s or provider of capability %s
-#: ../src/install.cc:524 ../src/install.cc:689
+#: ../src/install.cc:524 ../src/install.cc:700
 #, c-format
 msgid "'%s' not found."
 msgstr "'%s' non trovato."
 
-#: ../src/install.cc:579
+#: ../src/install.cc:588
 msgid "Specifying architecture when selecting packages by name is not implemented."
 msgstr "Specificare l'architettura quando si seleziona un pacchetto per nome non è implementato."
 
-#: ../src/install.cc:614
+#: ../src/install.cc:625
 #, c-format
 msgid "'%s' is not a valid package or capability name."
 msgstr "'%s' non è un è un nome di pacchetto o di possibilità valido."
 
 #. translators: %s are package names
-#: ../src/install.cc:722
+#: ../src/install.cc:733
 #, c-format
 msgid "'%s' providing '%s' is already installed."
 msgstr "'%s' fornice '%s' che è già installato."
@@ -676,7 +664,7 @@ msgstr "(multipli)"
 
 #. translators: catalog (rug's word for repository) (header)
 #: ../src/locks.cc:41 ../src/search.cc:40 ../src/search.cc:267
-#: ../src/update.cc:154 ../src/update.cc:479
+#: ../src/update.cc:192 ../src/update.cc:525
 msgid "Catalog"
 msgstr "Catalogo"
 
@@ -686,10 +674,10 @@ msgstr "Importanza"
 
 #. translators: package's repository (header)
 #: ../src/locks.cc:43 ../src/search.cc:64 ../src/search.cc:392
-#: ../src/search.cc:450 ../src/search.cc:539 ../src/update.cc:154
-#: ../src/update.cc:479
+#: ../src/search.cc:450 ../src/search.cc:539 ../src/update.cc:192
+#: ../src/update.cc:525
 msgid "Repository"
-msgstr "Sorgente di installazione"
+msgstr "Repository"
 
 #: ../src/locks.cc:95
 msgid "There are no package locks defined."
@@ -749,7 +737,7 @@ msgstr "Per poter installare '%s'%s, è necessario accettare i termini del contr
 #. lincense prompt
 #: ../src/misc.cc:177
 msgid "Do you agree with the terms of the license?"
-msgstr "Acceti i termini di licenza?"
+msgstr "Accetti i termini di licenza?"
 
 #: ../src/misc.cc:186
 msgid "Aborting installation due to the need for license confirmation."
@@ -789,7 +777,7 @@ msgstr "Pacchetti installati: %d"
 #: ../src/misc.cc:288
 #, c-format
 msgid "Installed packages with counterparts in repositories: %d"
-msgstr "Pacchetti installati che hanno una controparte nelle sorgenti di installazione: %d"
+msgstr "Pacchetti installati che hanno una controparte neli repository: %d"
 
 #: ../src/misc.cc:289
 #, c-format
@@ -856,7 +844,7 @@ msgstr "Verifico se è necessario aggiornare i metadati per %s"
 #: ../src/repos.cc:102
 #, c-format
 msgid "Repository '%s' is up to date."
-msgstr "La sorgente di installazione '%s' è aggiornata."
+msgstr "Il repository '%s' è aggiornato."
 
 #: ../src/repos.cc:106
 #, c-format
@@ -870,7 +858,7 @@ msgstr "Aggiornamento forzato dei metadati"
 #: ../src/repos.cc:135
 #, c-format
 msgid "Retrieving repository '%s' metadata"
-msgstr "Recupero dei metadati della sorgente di installazione '%s'"
+msgstr "Recupero dei metadati del repository '%s'"
 
 # TLABEL modules/inst_config_x11.ycp:578
 #: ../src/repos.cc:159
@@ -878,8 +866,8 @@ msgstr "Recupero dei metadati della sorgente di installazione '%s'"
 msgid "Problem retrieving files from '%s'."
 msgstr "Si è verificato un problema scaricando i file da '%s'."
 
-#: ../src/repos.cc:160 ../src/repos.cc:2871 ../src/solve-commit.cc:623
-#: ../src/solve-commit.cc:652 ../src/solve-commit.cc:686
+#: ../src/repos.cc:160 ../src/repos.cc:2872 ../src/solve-commit.cc:663
+#: ../src/solve-commit.cc:692 ../src/solve-commit.cc:726
 msgid "Please see the above error message for a hint."
 msgstr "Per favore, per un suggerimento, controllare il messaggio di errore precedente ."
 
@@ -892,20 +880,20 @@ msgstr "Nessun URI definito per '%s'."
 #: ../src/repos.cc:177
 #, c-format
 msgid "Please add one or more base URI (baseurl=URI) entries to %s for repository '%s'."
-msgstr "Per favore, aggiungere una o più voci URI di base (baseurl=URI) a %s per la sorgente di installazione '%s'."
+msgstr "Per favore, aggiungere una o più voci URI di base (baseurl=URI) a %s per il repository '%s'."
 
 #: ../src/repos.cc:190
 msgid "No alias defined for this repository."
-msgstr "Nessun alias definito per questa sorgente di installazione."
+msgstr "Nessun alias definito per questo repository."
 
 #: ../src/repos.cc:203
 #, c-format
 msgid "Repository '%s' is invalid."
-msgstr "La sorgente di installazione '%s' non è valida."
+msgstr "Il repository '%s' non è valido."
 
 #: ../src/repos.cc:204
 msgid "Please check if the URIs defined for this repository are pointing to a valid repository."
-msgstr "Per favore, verificare se gli URI definiti per questa sorgente di installazione puntano ad una sorgente di installazione valida."
+msgstr "Per favore, verificare se gli URI definiti per questo repository puntano ad un repository valido."
 
 #: ../src/repos.cc:217
 #, c-format
@@ -914,7 +902,7 @@ msgstr "Errore nel recupero dei metadati per '%s':"
 
 #: ../src/repos.cc:232
 msgid "Forcing building of repository cache"
-msgstr "Costruzione forzata della cache della sorgente di installazione"
+msgstr "Costruzione forzata della cache del repository"
 
 #: ../src/repos.cc:245
 #, c-format
@@ -923,607 +911,605 @@ msgstr "Errore nell'analisi dei metadati per '%s':"
 
 #. TranslatorExplanation Don't translate the URL unless it is translated, too
 #: ../src/repos.cc:247
-msgid "This may be caused by invalid metadata in the repository, or by a bug in the metadata parser. In the latter case, or if in doubt, please, file a bug report by following instructions at http://en.opensuse.org/Zypper#Troubleshooting"
-msgstr "Questo può essere causato da metadati non validi nella sorgente di installazione, o da un errore nel parser dei metadati. In quest'ultimo caso o se non si è certi, per favore,seganalate un bug seguendo le istruzioni riportate in http://en.opensuse.org/Zypper#Troubleshooting"
+msgid "This may be caused by invalid metadata in the repository, or by a bug in the metadata parser. In the latter case, or if in doubt, please, file a bug report by following instructions at http://en.opensuse.org/Zypper/Troubleshooting"
+msgstr "Questo può essere causato da metadati non validi nel repository, o da un errore nel parser dei metadati. In quest'ultimo caso o se non si è certi, per favore,seganalate un bug seguendo le istruzioni riportate in http://en.opensuse.org/Zypper/Troubleshooting"
 
 #: ../src/repos.cc:261
 #, c-format
 msgid "Repository metadata for '%s' not found in local cache."
-msgstr "Metadati della sorgente di installazione per '%s' non trovati nella cache locale."
+msgstr "Metadati del repository per '%s' non trovati nella cache locale."
 
 #: ../src/repos.cc:269
 msgid "Error building the cache:"
 msgstr "Errore durante la costruzione della cache:"
 
-#: ../src/repos.cc:422
+#: ../src/repos.cc:423
 #, c-format
 msgid "Repository '%s' not found by its alias, number, or URI."
-msgstr "Sorgente di installazione '%s' non trovata tramite l'alias, il numero o l'URI."
+msgstr "Il repository '%s' non è stato trovato tramite l'alias, il numero o l'URI."
 
-#: ../src/repos.cc:426
+#: ../src/repos.cc:427
 #, c-format
 msgid "Use '%s' to get the list of defined repositories."
-msgstr "Usare '%s' per ottenere una lista delle sorgenti di installazione definite."
+msgstr "Usare '%s' per ottenere una lista dei repository definiti."
 
-#: ../src/repos.cc:490 ../src/repos.cc:497
+#: ../src/repos.cc:491 ../src/repos.cc:498
 #, c-format
 msgid "Ignoring repository '%s' because of '%s' option."
-msgstr "Ignoro la sorgente di installazione '%s' a causa dell'opzione '%s'."
+msgstr "Ignoro il repository '%s' a causa dell'opzione '%s'."
 
-#: ../src/repos.cc:527 ../src/repos.cc:563
+#: ../src/repos.cc:528 ../src/repos.cc:564
 #, c-format
 msgid "Disabling repository '%s' because of the above error."
-msgstr "Esclusione della sorgente di installazione '%s' a causa dell'errore precedente."
+msgstr "Esclusione del repository '%s' a causa dell'errore precedente."
 
-#: ../src/repos.cc:545
+#: ../src/repos.cc:546
 #, c-format
 msgid "Repository '%s' is out-of-date. You can run 'zypper refresh' as root to update it."
-msgstr "La sorgente di installazione '%s' non è aggiornata. È possibile eseguire 'zypper refresh' da root per aggiornarlo."
+msgstr "Il repository '%s' non è aggiornato. È possibile eseguire 'zypper refresh' da root per aggiornarlo."
 
-#: ../src/repos.cc:580
+#: ../src/repos.cc:581
 #, c-format
 msgid "The metadata cache needs to be built for the '%s' repository. You can run 'zypper refresh' as root to do this."
-msgstr "La cache metadate della sorgente di installazione '%s' ha bisogno di essere costruita. È possibile eseguire 'zypper refresh' per farlo."
+msgstr "La cache metadata del repository '%s' ha bisogno di essere costruita. È possibile eseguire 'zypper refresh' per farlo."
 
-#: ../src/repos.cc:587
+#: ../src/repos.cc:588
 #, c-format
 msgid "Disabling repository '%s'."
-msgstr "Disabilito la sorgente di installazione '%s'."
+msgstr "Disabilito il repository '%s'."
 
-#: ../src/repos.cc:624
+#: ../src/repos.cc:625
 msgid "Initializing Target"
 msgstr "Inizializzazione della destinazione in corso"
 
-#: ../src/repos.cc:633
+#: ../src/repos.cc:634
 msgid "Target initialization failed:"
 msgstr "Tentativo di inizializzazione fallito:"
 
-#: ../src/repos.cc:635 ../src/Zypper.cc:3430
+#: ../src/repos.cc:636 ../src/Zypper.cc:3476
 msgid "Running 'zypper refresh' as root might resolve the problem."
 msgstr "Lanciare 'zypper refresh' come root potrebbe risolvere il problema."
 
 #. translators: patch status (installed, uninstalled, needed)
-#: ../src/repos.cc:655 ../src/search.cc:273 ../src/update.cc:155
+#: ../src/repos.cc:656 ../src/search.cc:273 ../src/update.cc:193
 msgid "Status"
 msgstr "Stato"
 
 #. status
 #. rug's status (active, pending => active, disabled <= enabled, disabled)
 #. this is probably the closest possible compatibility arrangement
-#: ../src/repos.cc:672
+#: ../src/repos.cc:673
 msgid "Active"
 msgstr "Attiva"
 
-#: ../src/repos.cc:672
+#: ../src/repos.cc:673
 msgid "Disabled"
 msgstr "Disabilitato"
 
-#: ../src/repos.cc:703 ../src/repos.cc:2090 ../src/Zypper.cc:4066
+#: ../src/repos.cc:704 ../src/repos.cc:2091 ../src/Zypper.cc:4146
 msgid "Alias"
 msgstr "Alias"
 
 #. TranslatorExplanation used as e.g. "Enabled: Yes"
-#: ../src/repos.cc:705 ../src/repos.cc:1346 ../src/repos.cc:2092
+#: ../src/repos.cc:706 ../src/repos.cc:1347 ../src/repos.cc:2093
 msgid "Enabled"
 msgstr "abilitato"
 
 #. translators: 'zypper repos' column - whether autorefresh is enabled for the repository
-#: ../src/repos.cc:707 ../src/repos.cc:2094
+#: ../src/repos.cc:708 ../src/repos.cc:2095
 msgid "Refresh"
 msgstr "Attualizza"
 
 #. translators: repository priority (in zypper repos -p or -d)
-#: ../src/repos.cc:711 ../src/repos.cc:2098
+#: ../src/repos.cc:712 ../src/repos.cc:2099
 msgid "Priority"
 msgstr "Priorità"
 
-#: ../src/repos.cc:715 ../src/repos.cc:2101
+#: ../src/repos.cc:716 ../src/repos.cc:2102
 msgid "URI"
 msgstr "URI"
 
-#: ../src/repos.cc:717
+#. "/etc/init.d/ script that might be used to restart the command (guessed)
+#: ../src/repos.cc:718 ../src/utils/misc.cc:445
 msgid "Service"
 msgstr "Servizio"
 
-#: ../src/repos.cc:761
+#: ../src/repos.cc:762
 msgid "No repositories defined. Use the 'zypper addrepo' command to add one or more repositories."
-msgstr "Nessuna sorgente di installazione è stata definita. Usare 'zypper addrepo' per aggiungere una o più sorgenti di installazione."
+msgstr "Nessun repository è stato definito. Usare 'zypper addrepo' per aggiungere uno o più repository."
 
-#: ../src/repos.cc:837 ../src/repos.cc:909 ../src/repos.cc:1079
+#: ../src/repos.cc:838 ../src/repos.cc:910 ../src/repos.cc:1080
 msgid "Error reading repositories:"
-msgstr "Errore durante la lettura delle sorgenti di installazione:"
+msgstr "Errore durante la lettura dei repository:"
 
-#: ../src/repos.cc:865 ../src/repos.cc:2223
+#: ../src/repos.cc:866 ../src/repos.cc:2224
 #, c-format
 msgid "Can't open %s for writing."
 msgstr "Impossibile aprire il file %s in scrittura."
 
-#: ../src/repos.cc:867 ../src/repos.cc:2225
+#: ../src/repos.cc:868 ../src/repos.cc:2226
 msgid "Maybe you do not have write permissions?"
 msgstr "Forse non hai i permessi di scrittura?"
 
-#: ../src/repos.cc:874 ../src/repos.cc:2232
+#: ../src/repos.cc:875 ../src/repos.cc:2233
 #, c-format
 msgid "Repositories have been successfully exported to %s."
-msgstr "Le sorgenti di installazione sono state esportate con successo in %s."
+msgstr "I repository sono stati esportati con successo in %s."
 
-#: ../src/repos.cc:927 ../src/repos.cc:1097
+#: ../src/repos.cc:928 ../src/repos.cc:1098
 msgid "Specified repositories: "
-msgstr "Sorgenti di installazione specificate: "
+msgstr "Repository specificati: "
 
-#: ../src/repos.cc:966
+#: ../src/repos.cc:967
 #, c-format
 msgid "Skipping disabled repository '%s'"
-msgstr "Esclusione delle sorgenti di installazione disabilitate '%s'"
+msgstr "Esclusione dei repository disabilitati '%s'"
 
-#: ../src/repos.cc:981
+#: ../src/repos.cc:982
 #, c-format
 msgid "Skipping repository '%s' because of the above error."
-msgstr "Esclusione della sorgente di installazione '%s' a causa dell'errore precedente."
+msgstr "Esclusione del repository '%s' a causa dell'errore precedente."
 
-#: ../src/repos.cc:996
+#: ../src/repos.cc:997
 #, c-format
 msgid "Use '%s' or '%s' commands to add or enable repositories."
-msgstr "Usare i comandi '%s' o '%s' per aggiungere o abilitare le sorgenti di installazione."
+msgstr "Usare i comandi '%s' o '%s' per aggiungere o abilitare i repository."
 
-#: ../src/repos.cc:999
+#: ../src/repos.cc:1000
 msgid "Specified repositories are not enabled or defined."
-msgstr "Le sorgenti di installazione specificate non sono abilitato o non sono definite."
+msgstr "I repository specificati non sono abilitati o non sono definiti."
 
-#: ../src/repos.cc:1001
+#: ../src/repos.cc:1002
 msgid "There are no enabled repositories defined."
-msgstr "Non esistono sorgenti di installazione abilitate definite."
+msgstr "Non esistono repository abilitati definiti."
 
-#: ../src/repos.cc:1005
+#: ../src/repos.cc:1006
 msgid "Could not refresh the repositories because of errors."
-msgstr "Impossibile aggiornare le sorgenti di installazione a causa di un errore."
+msgstr "Impossibile aggiornare i repository a causa di un errore."
 
-#: ../src/repos.cc:1011
+#: ../src/repos.cc:1012
 msgid "Some of the repositories have not been refreshed because of an error."
-msgstr "Alcune sorgenti di installazione non sono state aggiornate a causa di un errore."
+msgstr "Alcuni repository non sono stati aggiornati a causa di un errore."
 
-#: ../src/repos.cc:1016
+#: ../src/repos.cc:1017
 msgid "Specified repositories have been refreshed."
-msgstr "Le sorgenti di installazione specificate sono state aggiornate."
+msgstr "I repository specificati sono stati aggiornati."
 
-#: ../src/repos.cc:1018
+#: ../src/repos.cc:1019
 msgid "All repositories have been refreshed."
-msgstr "Tutte le sorgenti di installazione sono state aggiornate."
+msgstr "Tutti i repository sono stati aggiornati."
 
-#: ../src/repos.cc:1154
+#: ../src/repos.cc:1155
 #, c-format
 msgid "Cleaning metadata cache for '%s'."
 msgstr "Pulizia della cache metadata per '%s'."
 
-#: ../src/repos.cc:1164
+#: ../src/repos.cc:1165
 #, c-format
 msgid "Cleaning raw metadata cache for '%s'."
 msgstr "Pulizia della cache metadata raw per '%s'."
 
-#: ../src/repos.cc:1171
-#, fuzzy, c-format
-#| msgid "Cleaning raw metadata cache for '%s'."
+#: ../src/repos.cc:1172
+#, c-format
 msgid "Keeping raw metadata cache for %s '%s'."
-msgstr "Pulizia della cache metadata raw per '%s'."
+msgstr "Mantenimento della cache metadata raw per %s '%s'."
 
 # TLABEL modules/inst_config_x11.ycp:578
 #. translators: meaning the cached rpm files
-#: ../src/repos.cc:1179
+#: ../src/repos.cc:1180
 #, c-format
 msgid "Cleaning packages for '%s'."
 msgstr "Pulizia dei pacchetti per '%s'."
 
-#: ../src/repos.cc:1187
+#: ../src/repos.cc:1188
 #, c-format
 msgid "Cannot clean repository '%s' because of an error."
-msgstr "Impossibile pulire la sorgente di installazione '%s' a causa dell'errore."
+msgstr "Impossibile pulire il repository '%s' a causa dell'errore."
 
-#: ../src/repos.cc:1201
+#: ../src/repos.cc:1202
 msgid "Cleaning installed packages cache."
 msgstr "Lettura della cache dei pacchetti installati."
 
-#: ../src/repos.cc:1209
+#: ../src/repos.cc:1210
 msgid "Cannot clean installed packages cache because of an error."
 msgstr "Impossibile pulire la cache dei pacchetti installati a causa di un errore interno."
 
-#: ../src/repos.cc:1217
+#: ../src/repos.cc:1218
 msgid "Could not clean the repositories because of errors."
-msgstr "Impossibile pulire le sorgenti di installazione a causa di errori."
+msgstr "Impossibile pulire i repository a causa di errori."
 
-#: ../src/repos.cc:1224
+#: ../src/repos.cc:1225
 msgid "Some of the repositories have not been cleaned up because of an error."
-msgstr "Alcune sorgenti di installazione non sono state pulite a causa di un errore."
+msgstr "Alcuni repository non sono stati puliti a causa di un errore."
 
-#: ../src/repos.cc:1229
+#: ../src/repos.cc:1230
 msgid "Specified repositories have been cleaned up."
-msgstr "Le sorgenti di installazione specificate sono state pulite."
+msgstr "I repository specificati sono stati puliti."
 
-#: ../src/repos.cc:1231
+#: ../src/repos.cc:1232
 msgid "All repositories have been cleaned up."
-msgstr "Tutte le sorgenti di installazione sono state pulite."
+msgstr "Tutti i repository sono stati puliti."
 
-#: ../src/repos.cc:1271
+#: ../src/repos.cc:1272
 msgid "This is a changeable read-only media (CD/DVD), disabling autorefresh."
 msgstr "Questo è un supporto a sola lettura (CD/DVD), aggiornamento disabilitato."
 
-#: ../src/repos.cc:1292 ../src/repos.cc:1553
+#: ../src/repos.cc:1293 ../src/repos.cc:1554
 #, c-format
 msgid "Repository named '%s' already exists. Please use another alias."
-msgstr "Esiste già una sorgente di installazione di nome '%s'. Per favore, usare un'altro alias."
+msgstr "Esiste già un repository di nome '%s'. Per favore, usare un altro alias."
 
-#: ../src/repos.cc:1303
+#: ../src/repos.cc:1304
 msgid "Could not determine the type of the repository. Please check if the defined URIs (see below) point to a valid repository:"
-msgstr "Impossibile determinare il tipo della sorgente di installazione. Per favore, verificare che l'URI definito (vedi sotto) punti ad una sorgente di installazione valida:"
+msgstr "Impossibile determinare il tipo di repository. Per favore, verificare che l'URI definito (vedi sotto) punti ad un repository valido:"
 
-#: ../src/repos.cc:1310 ../src/Zypper.cc:2486
+#: ../src/repos.cc:1311 ../src/Zypper.cc:2531
 msgid "Can't find a valid repository at given location:"
-msgstr "Impossibile trovare una sorgente di installazione valida nella posizione specificate:"
-
-#: ../src/repos.cc:1319
-msgid "Problem transferring repository data from specified URI:"
-msgstr "Si è verificato un problema trasferendo i dati della sorgente di installazione dall'URI specificato:"
+msgstr "Impossibile trovare un repository valida nella posizione specificate:"
 
 #: ../src/repos.cc:1320
+msgid "Problem transferring repository data from specified URI:"
+msgstr "Si è verificato un problema trasferendo i dati del repository dall'URI specificato:"
+
+#: ../src/repos.cc:1321
 msgid "Please check whether the specified URI is accessible."
 msgstr "Per favore, verificare che l'URI specificato sia accessibile."
 
-#: ../src/repos.cc:1328
+#: ../src/repos.cc:1329
 msgid "Unknown problem when adding repository:"
-msgstr "Si è verificato un problema sconosciuto durante l'aggiunta della sorgente di installazione:"
+msgstr "Si è verificato un problema sconosciuto durante l'aggiunta del repository:"
 
-#: ../src/repos.cc:1334
+#: ../src/repos.cc:1335
 #, c-format
 msgid "Repository '%s' successfully added"
-msgstr "La sorgente di installazione '%s' è stata aggiunta con successo"
+msgstr "Il repository '%s' è stato aggiunto con successo"
 
 #. TranslatorExplanation used as e.g. "Autorefresh: Yes"
-#: ../src/repos.cc:1348
+#: ../src/repos.cc:1349
 msgid "Autorefresh"
 msgstr "Aggiorna automaticamente"
 
 # TLABEL modules/inst_config_x11.ycp:578
-#: ../src/repos.cc:1363
+#: ../src/repos.cc:1364
 #, c-format
 msgid "Reading data from '%s' media"
 msgstr "Lettura dei dati dal supporto '%s'"
 
 # TLABEL modules/inst_config_x11.ycp:578
-#: ../src/repos.cc:1370
+#: ../src/repos.cc:1371
 #, c-format
 msgid "Problem reading data from '%s' media"
 msgstr "Si è verificato un problema leggendo i dati dal supporto '%s'"
 
-#: ../src/repos.cc:1371
+#: ../src/repos.cc:1372
 msgid "Please check if your installation media is valid and readable."
 msgstr "Per favore, verificare che il vostro supporto di installazione sia valido e leggibile."
 
-#: ../src/repos.cc:1436
+#: ../src/repos.cc:1437
 msgid "Problem accessing the file at the specified URI"
 msgstr "Si è verificato un problema accedendo al file all'URI specificato"
 
-#: ../src/repos.cc:1437
+#: ../src/repos.cc:1438
 msgid "Please check if the URI is valid and accessible."
 msgstr "Per favore, verificare che l'URI specificato sia valido e accessibile."
 
-#: ../src/repos.cc:1445
+#: ../src/repos.cc:1446
 msgid "Problem parsing the file at the specified URI"
 msgstr "Si è verificato un problema durante l'esame del file all'URI specificato"
 
 #. TranslatorExplanation don't translate the URI if the URI itself is not translated.
 #. Also don't translate the '.repo' string.
-#: ../src/repos.cc:1448
+#: ../src/repos.cc:1449
 msgid "Is it a .repo file? See http://en.opensuse.org/Standards/RepoInfo for details."
-msgstr "È un file .repo? Vedere http://en.opensuse.org/Standards/RepoInfo per ulteriori informazioni."
+msgstr "Questo è un file .repo? Vedere http://en.opensuse.org/Standards/RepoInfo per ulteriori informazioni."
 
-#: ../src/repos.cc:1456
+#: ../src/repos.cc:1457
 msgid "Problem encountered while trying to read the file at the specified URI"
 msgstr "Si è verificato in problema mentre si tentava di leggere il file all'URI specificato"
 
-#: ../src/repos.cc:1470
+#: ../src/repos.cc:1471
 msgid "Repository with no alias defined found in the file, skipping."
-msgstr "È stata trovata un sorgente di installazione senza un alias definito nel file, la ignoro."
+msgstr "È stato trovato un repository senza un alias definito nel file, la ignoro."
 
-#: ../src/repos.cc:1477
+#: ../src/repos.cc:1478
 #, c-format
 msgid "Repository '%s' has no URI defined, skipping."
-msgstr "La sorgente di installazione '%s' non ha un URI definito, la ignoro."
+msgstr "Il repository '%s' non ha un URI definito, lo ignoro."
 
-#: ../src/repos.cc:1517
+#: ../src/repos.cc:1518
 #, c-format
 msgid "Repository '%s' has been removed."
-msgstr "La sorgente di installazione '%s' è stata rimossa."
+msgstr "Il repository '%s' è stato rimosso."
 
-#: ../src/repos.cc:1536
+#: ../src/repos.cc:1537
 #, c-format
 msgid "Cannot change alias of '%s' repository. The repository belongs to service '%s' which is responsible for setting its alias."
-msgstr "Impossibile cambiare l'alias della sorgente di installazione '%s'. La sorgente di installazione appartiene al servizio '%s' che è responsabile per le impostazioni dell'alias."
+msgstr "Impossibile cambiare l'alias del repository '%s'. Il repository appartiene al servizio '%s' che è responsabile per le impostazioni dell'alias."
 
-#: ../src/repos.cc:1547
+#: ../src/repos.cc:1548
 #, c-format
 msgid "Repository '%s' renamed to '%s'."
-msgstr "Sorgente di installazione '%s' rinominata come '%s'."
+msgstr "Repository '%s' rinominato come '%s'."
 
-#: ../src/repos.cc:1559 ../src/repos.cc:1779
+#: ../src/repos.cc:1560 ../src/repos.cc:1780
 msgid "Error while modifying the repository:"
-msgstr "errore durante la modifica della sorgente di installazione:"
+msgstr "Errore durante la modifica del repository:"
 
-#: ../src/repos.cc:1560
+#: ../src/repos.cc:1561
 #, c-format
 msgid "Leaving repository '%s' unchanged."
-msgstr "La sorgente di installazione '%s' non sarà modificata."
+msgstr "Il repository '%s' non sarà modificato."
 
-#: ../src/repos.cc:1697
+#: ../src/repos.cc:1698
 #, c-format
 msgid "Invalid priority '%s'. Use a positive integer number. The greater the number, the lower the priority."
-msgstr "'%s' priorità non vailda. Usa un numero intero. Più alto sarà il numero, più bassa sarà òa priorità."
+msgstr "'%s' priorità non vailda. Usa un numero intero. Più alto sarà il numero, più bassa sarà la priorità."
 
-#: ../src/repos.cc:1705
+#: ../src/repos.cc:1706
 #, c-format
 msgid "Repository '%s' priority has been left unchanged (%d)"
-msgstr "La priorità della sorgente di installazione '%s' è rimansta invariata (%d)"
+msgstr "La priorità del repository '%s' è rimansta invariata (%d)"
 
-#: ../src/repos.cc:1731
-#, fuzzy, c-format
-#| msgid "Repository '%s' has been sucessfully enabled."
+#: ../src/repos.cc:1732
+#, c-format
 msgid "Repository '%s' has been successfully enabled."
-msgstr "La sorgente di installazione '%s' è stata abilitata correttamente."
+msgstr "Il repository '%s' è stato abilitato con successo."
 
-#: ../src/repos.cc:1734
-#, fuzzy, c-format
-#| msgid "Repository '%s' has been sucessfully disabled."
+#: ../src/repos.cc:1735
+#, c-format
 msgid "Repository '%s' has been successfully disabled."
-msgstr "La sorgente di installazione %s è stata disabilitata correttamente."
+msgstr "Il repository '%s' è stato disabilitato con successo."
 
-#: ../src/repos.cc:1741
+#: ../src/repos.cc:1742
 #, c-format
 msgid "Autorefresh has been enabled for repository '%s'."
-msgstr "L'auto aggiornamento è stato abilitato per la sorgente di installazione '%s'."
+msgstr "L'auto aggiornamento è stato abilitato per il repository '%s'."
 
-#: ../src/repos.cc:1744
+#: ../src/repos.cc:1745
 #, c-format
 msgid "Autorefresh has been disabled for repository '%s'."
-msgstr "L'auto aggiornamento è stato disabilitato per la sorgente di installazione '%s'."
+msgstr "L'auto aggiornamento è stato disabilitato per il repository '%s'."
 
-#: ../src/repos.cc:1751
+#: ../src/repos.cc:1752
 #, c-format
 msgid "RPM files caching has been enabled for repository '%s'."
-msgstr "La cache dei file RPM è stata abilitata per la sorgente di installazione '%s'."
+msgstr "La cache dei file RPM è stata abilitata per il repository '%s'."
 
-#: ../src/repos.cc:1754
+#: ../src/repos.cc:1755
 #, c-format
 msgid "RPM files caching has been disabled for repository '%s'."
-msgstr "La cache dei file RPM è stata disabilitata per la sorgente di installazione '%s'."
+msgstr "La cache dei file RPM è stata disabilitata per il repository '%s'."
 
-#: ../src/repos.cc:1760
+#: ../src/repos.cc:1761
 #, c-format
 msgid "Repository '%s' priority has been set to %d."
-msgstr "La priorità della sorgente di installzione '%s' è stata impostata su %d."
+msgstr "La priorità del repository '%s' è stata impostata su %d."
 
-#: ../src/repos.cc:1766
+#: ../src/repos.cc:1767
 #, c-format
 msgid "Name of repository '%s' has been set to '%s'."
-msgstr "Il nome della sorgente di installzione '%s' è stata impostata su '%s'."
+msgstr "Il nome del repository '%s' è stata impostata su '%s'."
 
-#: ../src/repos.cc:1772
+#: ../src/repos.cc:1773
 #, c-format
 msgid "Nothing to change for repository '%s'."
-msgstr "Nessun cambio per la sorgente di installazione '%s'."
+msgstr "Nessun cambio per il repository '%s'."
 
-#: ../src/repos.cc:1780
+#: ../src/repos.cc:1781
 #, c-format
 msgid "Leaving repository %s unchanged."
-msgstr "La sorgente di installazione %s non sarà modificato."
+msgstr "Il repository %s non sarà modificato."
 
-#: ../src/repos.cc:1818
+#: ../src/repos.cc:1819
 msgid "Error reading services:"
 msgstr "Errore durante la lettura dei servizi:"
 
-#: ../src/repos.cc:1907
+#: ../src/repos.cc:1908
 #, c-format
 msgid "Service '%s' not found by its alias, number, or URI."
 msgstr "Il servizio '%s' non è stato trovato tramite l'alias, il numero o l'URI."
 
-#: ../src/repos.cc:1911
+#: ../src/repos.cc:1912
 #, c-format
 msgid "Use '%s' to get the list of defined services."
 msgstr "Usare '%s' per ottenere una lista dei servizi definiti."
 
-#: ../src/repos.cc:2137
+#: ../src/repos.cc:2138
 #, c-format
 msgid "No services defined. Use the '%s' command to add one or more services."
 msgstr "Nessun servizio è stato definito. Usare '%s' per aggiungere una o più servizi."
 
-#: ../src/repos.cc:2263
+#: ../src/repos.cc:2264
 #, c-format
 msgid "Service aliased '%s' already exists. Please use another alias."
-msgstr "Esiste già un servizio di nome '%s'. Per favore, usare un'altro alias."
+msgstr "Esiste già un servizio di nome '%s'. Per favore, usare un altro alias."
 
-#: ../src/repos.cc:2273
+#: ../src/repos.cc:2274
 #, c-format
 msgid "Error occured while adding service '%s'."
 msgstr "Si è verificato un errore aggiungendo il servizio '%s'."
 
-#: ../src/repos.cc:2279
+#: ../src/repos.cc:2280
 #, c-format
 msgid "Service '%s' has been successfully added."
 msgstr "Il servizio '%s' è stato aggiunto con successo."
 
-#: ../src/repos.cc:2318
+#: ../src/repos.cc:2319
 #, c-format
 msgid "Removing service '%s':"
 msgstr "Rimozione del servizio '%s':"
 
-#: ../src/repos.cc:2321
+#: ../src/repos.cc:2322
 #, c-format
 msgid "Service '%s' has been removed."
 msgstr "Il servizio '%s' è stato rimosso."
 
-#: ../src/repos.cc:2337
+#: ../src/repos.cc:2338
 #, c-format
 msgid "Refreshing service '%s'."
 msgstr "Aggiornamento del servizio '%s'."
 
-#: ../src/repos.cc:2346
+#: ../src/repos.cc:2347
 #, c-format
 msgid "Problem retrieving the repository index file for service '%s':"
-msgstr "Si è verificato un problema recuperando i file indice dalla sorgente di installazione per il servizio '%s':"
+msgstr "Si è verificato un problema recuperando i file indice dal repository per il servizio '%s':"
 
-#: ../src/repos.cc:2348
+#: ../src/repos.cc:2349
 msgid "Check if the URI is valid and accessible."
 msgstr "Verificare che l'URI specificato sia valido ed accessibile."
 
-#: ../src/repos.cc:2406
+#: ../src/repos.cc:2407
 #, c-format
 msgid "Skipping disabled service '%s'"
 msgstr "Esclusione del servizio disabilitato '%s'"
 
-#: ../src/repos.cc:2452
+#: ../src/repos.cc:2453
 #, c-format
 msgid "Skipping service '%s' because of the above error."
 msgstr "Esclusione del servizio '%s' a causa dell'errore precedente."
 
-#: ../src/repos.cc:2467
+#: ../src/repos.cc:2468
 #, c-format
 msgid "Use '%s' or '%s' commands to add or enable services."
 msgstr "Usare i comandi '%s' o '%s' per aggiungere o abilitare i servizi."
 
-#: ../src/repos.cc:2470
+#: ../src/repos.cc:2471
 msgid "Specified services are not enabled or defined."
 msgstr "I servizi specificati non sono abilitati o definiti."
 
-#: ../src/repos.cc:2472
+#: ../src/repos.cc:2473
 msgid "There are no enabled services defined."
 msgstr "Non esistono servizi abilitati definiti."
 
-#: ../src/repos.cc:2476
+#: ../src/repos.cc:2477
 msgid "Could not refresh the services because of errors."
 msgstr "Impossibile aggiornare i servizi a causa di un errore."
 
-#: ../src/repos.cc:2482
+#: ../src/repos.cc:2483
 msgid "Some of the services have not been refreshed because of an error."
 msgstr "Alcuni serivizi non sono stati aggiornati a causa di un errore."
 
-#: ../src/repos.cc:2487
+#: ../src/repos.cc:2488
 msgid "Specified services have been refreshed."
 msgstr "I servizi specificati sono stati aggiornati."
 
-#: ../src/repos.cc:2489
+#: ../src/repos.cc:2490
 msgid "All services have been refreshed."
 msgstr "Tutti i servizi sono stati aggiornati."
 
-#: ../src/repos.cc:2611
+#: ../src/repos.cc:2612
 #, c-format
 msgid "Service '%s' has been sucessfully enabled."
 msgstr "Il servizio '%s' è stato abilitato correttamente."
 
-#: ../src/repos.cc:2614
+#: ../src/repos.cc:2615
 #, c-format
 msgid "Service '%s' has been sucessfully disabled."
 msgstr "Il servizio %s è stato disabilitato correttamente."
 
-#: ../src/repos.cc:2621
+#: ../src/repos.cc:2622
 #, c-format
 msgid "Autorefresh has been enabled for service '%s'."
 msgstr "L'auto aggiornamento è stato abilitato per i servizi '%s'."
 
-#: ../src/repos.cc:2624
+#: ../src/repos.cc:2625
 #, c-format
 msgid "Autorefresh has been disabled for service '%s'."
 msgstr "L'auto aggiornamento è stato disabilitato per i servizi '%s'."
 
-#: ../src/repos.cc:2630
+#: ../src/repos.cc:2631
 #, c-format
 msgid "Name of service '%s' has been set to '%s'."
 msgstr "Il nome del serizio '%s' è stato impostato su '%s'."
 
-#: ../src/repos.cc:2636
+#: ../src/repos.cc:2637
 #, c-format
 msgid "Repository '%s' has been added to enabled repositories of service '%s'"
 msgid_plural "Repositories '%s' have been added to enabled repositories of service '%s'"
-msgstr[0] "La sorgente di installazione '%s' è stata aggiunta alle sorgenti di installazione abilitate del servizio '%s'"
-msgstr[1] "Le sorgenti di installazione '%s' sono state aggiuntw alle sorgenti di installazione abilitate del servizio '%s'"
+msgstr[0] "Il repository '%s' è stato aggiunto ai repository abilitati del servizio '%s'"
+msgstr[1] "I repository '%s' sono stati aggiunti ai repository abilitati del servizio '%s'"
 
-#: ../src/repos.cc:2644
+#: ../src/repos.cc:2645
 #, c-format
 msgid "Repository '%s' has been added to disabled repositories of service '%s'"
 msgid_plural "Repositories '%s' have been added to disabled repositories of service '%s'"
-msgstr[0] "La sorgente di installazione '%s' è stata aggiunta alle sorgenti di installazione disabilitate del servizio '%s'"
-msgstr[1] "Le sorgenti di installazione '%s' sono state aggiunte alle sorgenti di installazione disabilitate del servizio '%s'"
+msgstr[0] "Il repository '%s' è stato aggiunto ai repository disabilitati del servizio '%s'"
+msgstr[1] "I repository '%s' sono stati aggiunti ai repository disabilitati del servizio '%s'"
 
-#: ../src/repos.cc:2652
+#: ../src/repos.cc:2653
 #, c-format
 msgid "Repository '%s' has been removed from enabled repositories of service '%s'"
 msgid_plural "Repositories '%s' have been removed from enabled repositories of service '%s'"
-msgstr[0] "La sorgente di installazione '%s' è stata rimossa dalle sorgenti di installazione abilitate del servizio '%s'"
-msgstr[1] "Le sorgenti di installazione '%s' sono state rimosse dalle sorgenti di installazione abilitate del servizio '%s'"
+msgstr[0] "Il repository '%s' è stata rimossa dali repository abilitate del servizio '%s'"
+msgstr[1] "Le repository '%s' sono state rimosse dali repository abilitate del servizio '%s'"
 
-#: ../src/repos.cc:2660
+#: ../src/repos.cc:2661
 #, c-format
 msgid "Repository '%s' has been removed from disabled repositories of service '%s'"
 msgid_plural "Repositories '%s' have been removed from disabled repositories of service '%s'"
-msgstr[0] "La sorgente di installazione '%s' è stata rimossa dalle sorgenti di installazione disabilitate del servizio '%s'"
-msgstr[1] "Le sorgenti di installazione '%s' sono state rimosse dalle sorgenti di installazione abilitate del servizio '%s'"
+msgstr[0] "Il repository '%s' è stato rimosso dai repository disabilitati del servizio '%s'"
+msgstr[1] "I repository '%s' sono stati rimossi dai repository abilitati del servizio '%s'"
 
-#: ../src/repos.cc:2669
+#: ../src/repos.cc:2670
 #, c-format
 msgid "Nothing to change for service '%s'."
 msgstr "Nessun cambio per il servizio '%s'."
 
-#: ../src/repos.cc:2676
+#: ../src/repos.cc:2677
 msgid "Error while modifying the service:"
 msgstr "errore durante la modifica del servizio:"
 
-#: ../src/repos.cc:2677
+#: ../src/repos.cc:2678
 #, c-format
 msgid "Leaving service %s unchanged."
 msgstr "Il servizio %s non sarà modificato."
 
-#: ../src/repos.cc:2784
+#: ../src/repos.cc:2785
 msgid "Loading repository data..."
-msgstr "Recupero dei dati della sorgente di installazione..."
+msgstr "Recupero dei dati del repository..."
 
-#: ../src/repos.cc:2802
+#: ../src/repos.cc:2803
 #, c-format
 msgid "Retrieving repository '%s' data..."
-msgstr "Recupero dei dati della sorgente di installazione %s..."
+msgstr "Recupero dei dati del repository %s..."
 
-#: ../src/repos.cc:2809
+#: ../src/repos.cc:2810
 #, c-format
 msgid "Repository '%s' not cached. Caching..."
 msgstr "Il repository '%s' non ha la cache. Creazione cache..."
 
 # TLABEL modules/inst_config_x11.ycp:578
-#: ../src/repos.cc:2816 ../src/repos.cc:2844
+#: ../src/repos.cc:2817 ../src/repos.cc:2845
 #, c-format
 msgid "Problem loading data from '%s'"
 msgstr "Si è verificato un problema leggendo i dati da '%s'"
 
-#: ../src/repos.cc:2817 ../src/repos.cc:2850
+#: ../src/repos.cc:2818 ../src/repos.cc:2851
 #, c-format
 msgid "Resolvables from '%s' not loaded because of error."
 msgstr "Risolubili da '%s' non caricati a causa di un errore."
 
-#: ../src/repos.cc:2833
+#: ../src/repos.cc:2834
 #, c-format
 msgid "Repository '%s' appears to outdated. Consider using a different mirror or server."
-msgstr "La sorgente di installazione '%s' sembra non essere aggiornato. Considera di usare un mirror o un server differente."
+msgstr "Il repository '%s' sembra non essere aggiornato. Considera di usare un mirror o un server differente."
 
 #. translators: the first %s is 'zypper refresh' and the second 'zypper clean -m'
-#: ../src/repos.cc:2846
+#: ../src/repos.cc:2847
 #, c-format
 msgid "Try '%s', or even '%s' before doing so."
 msgstr "Prova '%s', oppure '%s' prima di farlo."
 
-#: ../src/repos.cc:2859
+#: ../src/repos.cc:2860
 msgid "Reading installed packages..."
 msgstr "Lettura dei pacchetti installati..."
 
-#: ../src/repos.cc:2870
+#: ../src/repos.cc:2871
 msgid "Problem occured while reading the installed packages:"
 msgstr "Si è verificato un errore durante la lettura dei pacchetti installati:"
 
 #. list name, exact match
-#: ../src/repos.cc:2885
+#: ../src/repos.cc:2886
 msgid ""
 "ZENworks Management Daemon is running.\n"
 "WARNING: this command will not synchronize changes.\n"
@@ -1534,20 +1520,20 @@ msgstr ""
 "Utilizzare rug o yast2 a tal fine."
 
 #. translators: Bundle is a term used in rug. See rug for how to translate it.
-#: ../src/search.cc:42 ../src/search.cc:448 ../src/update.cc:482
+#: ../src/search.cc:42 ../src/search.cc:448 ../src/update.cc:528
 msgid "Bundle"
 msgstr "Pacchetto"
 
 #. translators: package version (header)
 #: ../src/search.cc:46 ../src/search.cc:60 ../src/search.cc:269
 #: ../src/search.cc:390 ../src/search.cc:451 ../src/search.cc:541
-#: ../src/update.cc:155 ../src/update.cc:488
+#: ../src/update.cc:193 ../src/update.cc:963
 msgid "Version"
 msgstr "Versione"
 
 #. translators: package architecture (header)
 #: ../src/search.cc:48 ../src/search.cc:62 ../src/search.cc:451
-#: ../src/search.cc:547 ../src/update.cc:488
+#: ../src/search.cc:547 ../src/update.cc:537
 msgid "Arch"
 msgstr "Arch"
 
@@ -1556,13 +1542,14 @@ msgid "System Packages"
 msgstr "Pacchetti di Sistema"
 
 #. translators: package summary (header)
-#: ../src/search.cc:221
+#: ../src/search.cc:221 ../src/update.cc:963
 msgid "Summary"
 msgstr "Sommario"
 
 #. translators: patch category (recommended, security)
 #. translators: product category (base/addon), the rug term
-#: ../src/search.cc:271 ../src/search.cc:544 ../src/update.cc:155
+#: ../src/search.cc:271 ../src/search.cc:544 ../src/update.cc:193
+#: ../src/update.cc:862 ../src/update.cc:963
 msgid "Category"
 msgstr "Categoria"
 
@@ -1574,7 +1561,7 @@ msgstr "Nessuna patch necessaria trovata."
 msgid "No patterns found."
 msgstr "Nessun modello trovato."
 
-#: ../src/search.cc:501 ../src/Zypper.cc:3388
+#: ../src/search.cc:501 ../src/Zypper.cc:3434
 msgid "No packages found."
 msgstr "Nessun pacchetto trovato."
 
@@ -1588,17 +1575,17 @@ msgid "No providers of '%s' found."
 msgstr "Non è stato trovato alcun fornitore per '%s'."
 
 #. translators: meaning 'dependency problem' found during solving
-#: ../src/solve-commit.cc:41
+#: ../src/solve-commit.cc:42
 msgid "Problem: "
 msgstr "Problema: "
 
 #. TranslatorExplanation %d is the solution number
-#: ../src/solve-commit.cc:54
+#: ../src/solve-commit.cc:55
 #, c-format
 msgid " Solution %d: "
 msgstr " Soluzione %d: "
 
-#: ../src/solve-commit.cc:73
+#: ../src/solve-commit.cc:74
 msgid "Choose the above solution using '1' or skip, retry or cancel"
 msgid_plural "Choose from above solutions by number or skip, retry or cancel"
 msgstr[0] "Scegli la soluzione precedente premendo '1' o ignora o riprova o annulla"
@@ -1606,10 +1593,10 @@ msgstr[1] "Scegli tra le soluzioni precedenti per numero o ignora, riprova o ann
 
 #. translators: translate 'c' to whatever you translated the 'c' in
 #. "c" and "s/r/c" strings
-#: ../src/solve-commit.cc:80
+#: ../src/solve-commit.cc:81
 msgid "Choose the above solution using '1' or cancel using 'c'"
 msgid_plural "Choose from above solutions by number or cancel"
-msgstr[0] "Scegli la soluzione precedente premendo '1' o annula premendo 'a'"
+msgstr[0] "Scegli la soluzione precedente premendo '1' o annulla premendo 'a'"
 msgstr[1] "Scegli tra le soluzioni precedenti per numeno o scegli annulla"
 
 #. translators: answers for dependency problem solution input prompt:
@@ -1618,7 +1605,7 @@ msgstr[1] "Scegli tra le soluzioni precedenti per numeno o scegli annulla"
 #. The anserws must be separated by slash characters '/' and must
 #. correspond to skip/retry/cancel in that order.
 #. The answers should be lower case letters.
-#: ../src/solve-commit.cc:99
+#: ../src/solve-commit.cc:100
 msgid "s/r/c"
 msgstr "i/r/a"
 
@@ -1629,17 +1616,17 @@ msgstr "i/r/a"
 #. See the "s/r/c" comment for other details.
 #. One letter string  for translation can be tricky, so in case of problems,
 #. please report a bug against zypper at bugzilla.novell.com, we'll try to solve it.
-#: ../src/solve-commit.cc:111
+#: ../src/solve-commit.cc:112
 msgid "c"
 msgstr "a"
 
 #. continue with next problem
-#: ../src/solve-commit.cc:131
+#: ../src/solve-commit.cc:132
 #, c-format
 msgid "Applying solution %s"
 msgstr "Applicazione della soluzione %s"
 
-#: ../src/solve-commit.cc:155
+#: ../src/solve-commit.cc:156
 #, c-format
 msgid "%d Problem:"
 msgid_plural "%d Problems:"
@@ -1647,150 +1634,160 @@ msgstr[0] "%d Problema:"
 msgstr[1] "%d Problemi:"
 
 #. should not happen! If solve() failed at least one problem must be set!
-#: ../src/solve-commit.cc:159
+#: ../src/solve-commit.cc:160
 msgid "Specified capability not found"
 msgstr "La capacità specificata non è stata trovata"
 
-#: ../src/solve-commit.cc:170
+#: ../src/solve-commit.cc:171
 #, c-format
 msgid "Problem: %s"
 msgstr "Problema: %s"
 
-#: ../src/solve-commit.cc:185
+#: ../src/solve-commit.cc:186
 msgid "Resolving dependencies..."
 msgstr "Risoluzione delle dipendenze in corso…"
 
 #. translators: meaning --force-resolution and --no-force-resolution
-#: ../src/solve-commit.cc:230
+#: ../src/solve-commit.cc:231
 #, c-format
 msgid "%s conflicts with %s, will use the less aggressive %s"
 msgstr "%s è in conflitto con '%s', si userà il meno aggressivo %s"
 
-#: ../src/solve-commit.cc:256
+#: ../src/solve-commit.cc:257
 msgid "Force resolution:"
 msgstr "Forza risoluzione:"
 
-#: ../src/solve-commit.cc:317
+#: ../src/solve-commit.cc:318
 msgid "Verifying dependencies..."
 msgstr "Verifica delle dipendenze in corso…"
 
-#: ../src/solve-commit.cc:326
+#: ../src/solve-commit.cc:327
 msgid "Computing upgrade..."
 msgstr "Eseguo l'aggiornamento..."
 
-#: ../src/solve-commit.cc:342
+#: ../src/solve-commit.cc:343
 msgid "Generating solver test case..."
 msgstr "Generazione del caso di prova del risolutore..."
 
-#: ../src/solve-commit.cc:345
+#: ../src/solve-commit.cc:346
 #, c-format
 msgid "Solver test case generated successfully at %s."
 msgstr "Generazione del caso di prova generato con successo su %s."
 
-#: ../src/solve-commit.cc:349
+#: ../src/solve-commit.cc:350
 msgid "Error creating the solver test case."
 msgstr "Errore durante la creazione del caso di prova per il risolutore."
 
-#: ../src/solve-commit.cc:388
+#: ../src/solve-commit.cc:381 ../src/utils/misc.cc:419
+msgid "Checking for running processes using deleted libraries..."
+msgstr "Ricerca dei processi avviati che usano le librerie cancellate in corso..."
+
+#: ../src/solve-commit.cc:390 ../src/utils/misc.cc:428
+#| msgid "Check for updates:"
+msgid "Check failed:"
+msgstr "Verifica fallita:"
+
+#: ../src/solve-commit.cc:396
+#, c-format
+msgid "There are some running programs that use files deleted by recent upgrade. You may wish to restart some of them. Run '%s' to list these programs."
+msgstr "Ci sono alcuni programmi che stanno utilizzando dei file che sono stati eliminati da un recente aggiornamento. Vorresti riavviare alcuni di questi. Usa '%s' per un elenco di questi programmi,"
+
+#: ../src/solve-commit.cc:435
 msgid "Computing distribution upgrade..."
 msgstr "Eseguo l'aggiornamento della distribuzione..."
 
-#: ../src/solve-commit.cc:394
+#: ../src/solve-commit.cc:440
 msgid "Resolving package dependencies..."
 msgstr "Risoluzione delle dipendenze dei pacchetti…"
 
-#: ../src/solve-commit.cc:440
+#: ../src/solve-commit.cc:491
 msgid "Some of the dependencies of installed packages are broken. In order to fix these dependencies, the following actions need to be taken:"
 msgstr "Alcune delle dipendenze dei pacchetti installati sono mancanti. Per correggerle sono necessarie le seguenti azioni:"
 
-#: ../src/solve-commit.cc:448
+#: ../src/solve-commit.cc:499
 msgid "Root privileges are required to fix broken package dependencies."
 msgstr "Per correggere i pacchetti corrotti sono necessari i privilegi dell'utente root."
 
-#. translators: Yes / No / show Problems. This prompt will appear
-#. after install/update command summary if there will be any package
-#. to-be-removed automatically to show why, if asked.
+#. translators: These are the "Continue?" prompt options corresponding to
+#. "Yes / No / show Problems / Versions / Arch / Repository /
+#. vendor / Details / show in pager". This prompt will appear
+#. after install/update and similar command installation summary.
 #. Translate to whathever is suitable for your language
 #. The anserws must be separated by slash characters '/' and must
-#. correspond to yes/no/showproblems in that order.
-#. The answers should be lower case letters.
+#. correspond to the above options, in that exact order.
+#. The answers should be lower case letters, but in general, any UTF-8
+#. string will do.
 #. ! \todo add c for changelog and x for explain (show the dep tree)
-#: ../src/solve-commit.cc:473
+#: ../src/solve-commit.cc:526
 msgid "y/n/p/v/a/r/m/d/g"
-msgstr ""
+msgstr "s/n/p/v/a/r/m/d/g"
 
 #. translators: help text for 'y' option in the 'Continue?' prompt
-#: ../src/solve-commit.cc:478
-#, fuzzy
-#| msgid "Accept the summary and proceed with installation/removal of packages."
+#: ../src/solve-commit.cc:531
 msgid "Yes, accept the summary and proceed with installation/removal of packages."
-msgstr "Accetta il sommario e procedi con l'installazione/rimozione dei pacchetti."
+msgstr "Si, Accetta il sommario e procedi con l'installazione/rimozione dei pacchetti."
 
 #. translators: help text for 'n' option in the 'Continue?' prompt
-#: ../src/solve-commit.cc:480
-#, fuzzy
-#| msgid "Cancel the operation."
+#: ../src/solve-commit.cc:533
 msgid "No, cancel the operation."
-msgstr "Annulla l'operazione."
+msgstr "No, annulla l'operazione."
 
 #. translators: help text for 'p' option in the 'Continue?' prompt
-#: ../src/solve-commit.cc:482
+#: ../src/solve-commit.cc:535
 msgid "Restart solver in no-force-resolution mode in order to show dependency problems."
 msgstr "Riavvia il risolutore nella modalità no-forxe-resolution per  mostrare i problemi di dipendenze."
 
 #. translators: help text for 'v' option in the 'Continue?' prompt
-#: ../src/solve-commit.cc:484
+#: ../src/solve-commit.cc:537
 msgid "Toggle display of package versions."
-msgstr ""
+msgstr "Abilita la visualizzazione delle versioni dei pacchetti."
 
 #. translators: help text for 'a' option in the 'Continue?' prompt
-#: ../src/solve-commit.cc:486
+#: ../src/solve-commit.cc:539
 msgid "Toggle display of package architectures."
-msgstr ""
+msgstr "Abilita la visualizzazione delle architetture dei pacchetti."
 
 #. translators: help text for 'r' option in the 'Continue?' prompt
-#: ../src/solve-commit.cc:488
-#, fuzzy
-#| msgid "The following packages will be installed:\n"
+#: ../src/solve-commit.cc:541
 msgid "Toggle display of repositories from which the packages will be installed."
-msgstr "Verranno installati i seguenti pacchetti:\n"
+msgstr "Abilita la visualizzazione dei repository dai quali saranno installati i pacchetti."
 
 #. translators: help text for 'm' option in the 'Continue?' prompt
-#: ../src/solve-commit.cc:490
+#: ../src/solve-commit.cc:543
 msgid "Toggle display of package vendor names."
-msgstr ""
+msgstr "Abilita la visualizzazione dei nomi dei fornitori del pacchetti."
 
 #. translators: help text for 'd' option in the 'Continue?' prompt
-#: ../src/solve-commit.cc:492
+#: ../src/solve-commit.cc:545
 msgid "Toggle between showing all details and as few details as possible."
-msgstr ""
+msgstr "Scegli tra mostrare tutti i dettagli o meno dettagli possibile."
 
 #. translators: help text for 'g' option in the 'Continue?' prompt
-#: ../src/solve-commit.cc:494
+#: ../src/solve-commit.cc:547
 msgid "View the summary in pager."
-msgstr ""
+msgstr "Visualizza il sommario nel pager."
 
-#: ../src/solve-commit.cc:587
+#: ../src/solve-commit.cc:640
 msgid "committing"
 msgstr "commit"
 
-#: ../src/solve-commit.cc:592
+#: ../src/solve-commit.cc:642
 msgid "(dry run)"
 msgstr "(avvio di prova)"
 
 # TLABEL modules/inst_config_x11.ycp:578
-#: ../src/solve-commit.cc:622 ../src/solve-commit.cc:662
+#: ../src/solve-commit.cc:662 ../src/solve-commit.cc:702
 msgid "Problem retrieving the package file from the repository:"
-msgstr "Si è verificato un problema scaricando il pacchetto dalla sorgente di installazione:"
+msgstr "Si è verificato un problema scaricando il pacchetto dal repository:"
 
 #. translators: the first %s is 'zypper refresh' and the second
 #. is repo allias
-#: ../src/solve-commit.cc:658
+#: ../src/solve-commit.cc:698
 #, c-format
 msgid "Repository '%s' is out of date. Running '%s' might help."
-msgstr "La sorgente di installazione '%s' non è aggiornata. Lanciare '%s' potrebbe aiutare."
+msgstr "Il repository '%s' non è aggiornato. Lanciare '%s' potrebbe aiutare."
 
-#: ../src/solve-commit.cc:671
+#: ../src/solve-commit.cc:711
 msgid ""
 "The package integrity check failed. This may be a problem with the repository or media. Try one of the following:\n"
 "\n"
@@ -1799,346 +1796,327 @@ msgid ""
 "- use another installation medium (if e.g. damaged)\n"
 "- use another repository"
 msgstr ""
-"Verifica di integrità dei pacchetti fallita. Il problema può dipendere dalla sorgente o dal supporto di installazione. Provare a eseguire una delle seguenti operazioni:\n"
+"Verifica di integrità dei pacchetti fallita. Il problema può dipendere dal repository o dal supporto di installazione. Provare a eseguire una delle seguenti operazioni:\n"
 " \n"
 " – riprovare con il comando precedente\n"
-" – aggiornare le sorgenti di installazione tramite 'zypper refresh'\n"
+" – aggiornare i repository tramite 'zypper refresh'\n"
 " – utilizzare un altro supporto di installazione (se ad es. quello in uso è danneggiato)\n"
-" – utilizzare un’altra sorgente di installazione"
+" – utilizzare un’altro repository"
 
-#: ../src/solve-commit.cc:685
+#: ../src/solve-commit.cc:725
 msgid "Problem occured during or after installation or removal of packages:"
 msgstr "Si è verificato un errore durante l'installazione o la rimozione dei pacchetti:"
 
-#: ../src/solve-commit.cc:701
+#: ../src/solve-commit.cc:741
 msgid "One of installed patches requires reboot of your machine. Reboot as soon as possible."
 msgstr "Una delle patch installate richiede di riavviare il computer. Riavviarlo il più presto possibile."
 
-#: ../src/solve-commit.cc:710
+#: ../src/solve-commit.cc:750
 msgid "One of installed patches affects the package manager itself. Run this command once more to install any other needed patches."
 msgstr "Una delle patch installate riguarda il gestore pacchetti. Lancia questo comando ancora una volta per installare ogni altra patch necessaria."
 
-#: ../src/solve-commit.cc:721
+#: ../src/solve-commit.cc:767
 msgid "Dependencies of all installed packages are satisfied."
 msgstr "Le dipendenze di tutti i pacchetti installati sono soddisfatte."
 
-#: ../src/solve-commit.cc:723
+#: ../src/solve-commit.cc:769
 msgid "Nothing to do."
 msgstr "Nessuna operazione da eseguire."
 
-#: ../src/Summary.cc:299
+#: ../src/Summary.cc:356
 msgid "The following NEW package is going to be installed:"
 msgid_plural "The following NEW packages are going to be installed:"
 msgstr[0] "Il seguente NUOVO pacchetto sarà installato:"
 msgstr[1] "I seguenti NUOVI pacchetti saranno installati:"
 
-#: ../src/Summary.cc:304
+#: ../src/Summary.cc:361
 msgid "The following NEW patch is going to be installed:"
 msgid_plural "The following NEW patches are going to be installed:"
 msgstr[0] "La seguente NUOVA patch sarà installata:"
 msgstr[1] "Le seguenti NUOVE patch saranno installate:"
 
-#: ../src/Summary.cc:309
+#: ../src/Summary.cc:366
 msgid "The following NEW pattern is going to be installed:"
 msgid_plural "The following NEW patterns are going to be installed:"
 msgstr[0] "Il seguente NUOVO modello sarà installato:"
 msgstr[1] "I seguenti NUOVI modelli saranno installati:"
 
-#: ../src/Summary.cc:314
+#: ../src/Summary.cc:371
 msgid "The following NEW product is going to be installed:"
 msgid_plural "The following NEW products are going to be installed:"
 msgstr[0] "Il seguente NUOVO prodotto sarà installato:"
 msgstr[1] "I seguenti NUOVI prodotti saranno installati:"
 
-#: ../src/Summary.cc:319
+#: ../src/Summary.cc:376
 msgid "The following source package is going to be installed:"
 msgid_plural "The following source packages are going to be installed:"
 msgstr[0] "Il seguente pacchetto sorgente sarà installato:"
 msgstr[1] "I seguenti pacchetti sorgente saranno installati:"
 
-#: ../src/Summary.cc:339
+#: ../src/Summary.cc:396
 msgid "The following package is going to be REMOVED:"
 msgid_plural "The following packages are going to be REMOVED:"
 msgstr[0] "Il seguente pacchetto sarà RIMOSSO:"
 msgstr[1] "I seguenti pacchetti saranno RIMOSSI:"
 
-#: ../src/Summary.cc:344
+#: ../src/Summary.cc:401
 msgid "The following patch is going to be REMOVED:"
 msgid_plural "The following patches are going to be REMOVED:"
 msgstr[0] "La seguente patch sarà RIMOSSA:"
 msgstr[1] "Le seguenti patch saranno RIMOSSE:"
 
-#: ../src/Summary.cc:349
+#: ../src/Summary.cc:406
 msgid "The following pattern is going to be REMOVED:"
 msgid_plural "The following patterns are going to be REMOVED:"
 msgstr[0] "Il seguente modello sarà RIMOSSO:"
 msgstr[1] "I seguenti modelli saranno RIMOSSI:"
 
-#: ../src/Summary.cc:354
+#: ../src/Summary.cc:411
 msgid "The following product is going to be REMOVED:"
 msgid_plural "The following products are going to be REMOVED:"
 msgstr[0] "Il seguente prodotto sarà RIMOSSO:"
 msgstr[1] "I seguenti prodotti saranno RIMOSSI:"
 
-#: ../src/Summary.cc:373
+#: ../src/Summary.cc:430
 msgid "The following package is going to be upgraded:"
 msgid_plural "The following packages are going to be upgraded:"
 msgstr[0] "Il seguente pacchetto sta per essere aggiornato:"
 msgstr[1] "I seguenti pacchetti stanno per essere aggiornati:"
 
-#: ../src/Summary.cc:378
+#: ../src/Summary.cc:435
 msgid "The following patch is going to be upgraded:"
 msgid_plural "The following patches are going to be upgraded:"
 msgstr[0] "La seguente patch sta per essere aggiornata:"
 msgstr[1] "Le seguenti patch stanno per essere aggiornate:"
 
-#: ../src/Summary.cc:383
+#: ../src/Summary.cc:440
 msgid "The following pattern is going to be upgraded:"
 msgid_plural "The following patterns are going to be upgraded:"
 msgstr[0] "Il seguente modello sta per essere aggiornato:"
 msgstr[1] "I seguenti modelli stanno per essere aggiornati:"
 
-#: ../src/Summary.cc:388
+#: ../src/Summary.cc:445
 msgid "The following product is going to be upgraded:"
 msgid_plural "The following products are going to be upgraded:"
 msgstr[0] "Il seguente prodotto sta per essere aggiornato:"
 msgstr[1] "I seguenti prodotti stanno per essere aggiornati:"
 
-#: ../src/Summary.cc:406
+#: ../src/Summary.cc:463
 msgid "The following package is going to be downgraded:"
 msgid_plural "The following packages are going to be downgraded:"
 msgstr[0] "Il seguente pacchetto sta per essere aggiornato:"
 msgstr[1] "I seguenti pacchetti stanno per essere aggiornati:"
 
-#: ../src/Summary.cc:411
+#: ../src/Summary.cc:468
 msgid "The following patch is going to be downgraded:"
 msgid_plural "The following patches are going to be downgraded:"
 msgstr[0] "La seguente patch sta per essere aggiornata:"
 msgstr[1] "Le seguenti patch stanno per essere aggiornate:"
 
-#: ../src/Summary.cc:416
+#: ../src/Summary.cc:473
 msgid "The following pattern is going to be downgraded:"
 msgid_plural "The following patterns are going to be downgraded:"
 msgstr[0] "Il seguente modello sta per essere portato alla versione precedente:"
 msgstr[1] "I seguenti modelli stanno per essere portati alla versioni precedenti:"
 
-#: ../src/Summary.cc:421
+#: ../src/Summary.cc:478
 msgid "The following product is going to be downgraded:"
 msgid_plural "The following products are going to be downgraded:"
 msgstr[0] "Il seguente prodotto sta per essere portato alla versione precedente:"
 msgstr[1] "I seguenti prodotti stanno per essere portati alle versioni precedenti:"
 
-#: ../src/Summary.cc:439
+#: ../src/Summary.cc:496
 msgid "The following package is going to be reinstalled:"
 msgid_plural "The following packages are going to be reinstalled:"
 msgstr[0] "Il seguente pacchetto sarà re-installato:"
 msgstr[1] "I seguenti pacchetti saranno re-installati:"
 
-#: ../src/Summary.cc:444
+#: ../src/Summary.cc:501
 msgid "The following patch is going to be reinstalled:"
 msgid_plural "The following patches are going to be reinstalled:"
 msgstr[0] "La seguente patch sarà re-installata:"
 msgstr[1] "Le seguenti patch saranno re-installate:"
 
-#: ../src/Summary.cc:449
+#: ../src/Summary.cc:506
 msgid "The following pattern is going to be reinstalled:"
 msgid_plural "The following patterns are going to be reinstalled:"
 msgstr[0] "Il seguente modello sarà re-installato:"
 msgstr[1] "I seguenti modelli saranno re-installati:"
 
-#: ../src/Summary.cc:454
+#: ../src/Summary.cc:511
 msgid "The following product is going to be reinstalled:"
 msgid_plural "The following products are going to be reinstalled:"
 msgstr[0] "Il seguente prodotto sarà re-installato:"
 msgstr[1] "I seguenti prodotti saranno re-installati:"
 
-#: ../src/Summary.cc:500
+#: ../src/Summary.cc:557
 msgid "The following package is going to change architecture:"
 msgid_plural "The following packages are going to change architecture:"
 msgstr[0] "Il seguente pacchetto cambierà architettura:"
 msgstr[1] "I seguenti pacchetti cambieranno architettura:"
 
-#: ../src/Summary.cc:505
+#: ../src/Summary.cc:562
 msgid "The following patch is going to change architecture:"
 msgid_plural "The following patches are going to change architecture:"
 msgstr[0] "La seguente patch cambierà architettura:"
 msgstr[1] "Le seguenti patch cambieranno architettura:"
 
-#: ../src/Summary.cc:510
+#: ../src/Summary.cc:567
 msgid "The following pattern is going to change architecture:"
 msgid_plural "The following patterns are going to change architecture:"
 msgstr[0] "Il seguente modello cambierà architettura:"
 msgstr[1] "I seguenti modelli cambieranno architettura:"
 
-#: ../src/Summary.cc:515
+#: ../src/Summary.cc:572
 msgid "The following product is going to change architecture:"
 msgid_plural "The following products are going to change architecture:"
 msgstr[0] "Il seguente prodotto cambierà architettura:"
 msgstr[1] "I seguenti prodotti cambieranno architettura:"
 
-#: ../src/Summary.cc:536
+#: ../src/Summary.cc:593
 msgid "The following package is going to change vendor:"
 msgid_plural "The following packages are going to change vendor:"
 msgstr[0] "Il seguente pacchetto cambierà fornitore:"
 msgstr[1] "I seguenti pacchetti cambieranno fornitori:"
 
-#: ../src/Summary.cc:541
+#: ../src/Summary.cc:598
 msgid "The following patch is going to change vendor:"
 msgid_plural "The following patches are going to change vendor:"
 msgstr[0] "La seguente patch cambierà fornitore:"
 msgstr[1] "Le seguenti patch cambieranno fornitore:"
 
-#: ../src/Summary.cc:546
+#: ../src/Summary.cc:603
 msgid "The following pattern is going to change vendor:"
 msgid_plural "The following patterns are going to change vendor:"
 msgstr[0] "Il seguente modello cambierà fornitore:"
 msgstr[1] "I seguenti modelli cambieranno fornitore:"
 
-#: ../src/Summary.cc:551
+#: ../src/Summary.cc:608
 msgid "The following product is going to change vendor:"
 msgid_plural "The following products are going to change vendor:"
 msgstr[0] "Il seguente prodotto cambierà fornitore:"
 msgstr[1] "I seguenti prodotti cambieranno fornitore:"
 
-#: ../src/Summary.cc:571
+#: ../src/Summary.cc:628
 msgid "The following package is not supported by its vendor:"
 msgid_plural "The following packages are not supported by their vendor:"
 msgstr[0] "Il seguente pacchetto non è supportato dal suo fornitore:"
 msgstr[1] "I seguenti pacchetti non sono supportati dai loro fornitori:"
 
-#: ../src/Summary.cc:590
+#: ../src/Summary.cc:647
 #, c-format
 msgid "Overall download size: %s."
 msgstr "Dimensione complessiva del download: %s."
 
 #. TrasnlatorExplanation %s will be substituted by a byte count e.g. 212 K
-#: ../src/Summary.cc:595
+#: ../src/Summary.cc:652
 #, c-format
 msgid "After the operation, additional %s will be used."
-msgstr "Dopo l'operazione, sarà utilizzato %s addizionale."
+msgstr "Dopo l'operazione, saranno utilizzati %s addizionali."
 
-#: ../src/Summary.cc:598
+#: ../src/Summary.cc:655
 msgid "No additional space will be used or freed after the operation."
-msgstr "Nessuno spazio sarà utilizzato o liberato dopo questa operazione."
+msgstr "Nessun spazio addizionale sarà utilizzato o liberato dopo questa operazione."
 
 #. TrasnlatorExplanation %s will be substituted by a byte count e.g. 212 K
-#: ../src/Summary.cc:605
+#: ../src/Summary.cc:662
 #, c-format
 msgid "After the operation, %s will be freed."
 msgstr "Dopo l'operazione saranno liberati %s."
 
 #. translators: this text will be preceded by a number e.g. "5 packages to ..."
-#: ../src/Summary.cc:628
-#, fuzzy
-#| msgid "No packages to update"
+#: ../src/Summary.cc:685
 msgid "package to upgrade"
 msgid_plural "packages to upgrade"
-msgstr[0] "Nessun pacchetto da aggiornare"
-msgstr[1] "Nessun pacchetto da aggiornare"
+msgstr[0] "pacchetto da aggiornare"
+msgstr[1] "pacchetti da aggiornare"
 
 #. translators: this text will be preceded by a number e.g. "5 to ..."
-#: ../src/Summary.cc:640
+#: ../src/Summary.cc:697
 msgid "to downgrade"
 msgid_plural "to downgrade"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "di cui effettuare il downgrade"
+msgstr[1] "di cui effettuare il downgrade"
 
 #. translators: this text will be preceded by a number e.g. "5 packages to ..."
-#: ../src/Summary.cc:643
-#, fuzzy
-#| msgid "No packages to update"
+#: ../src/Summary.cc:700
 msgid "package to downgrade"
 msgid_plural "packages to downgrade"
-msgstr[0] "Nessun pacchetto da aggiornare"
-msgstr[1] "Nessun pacchetto da aggiornare"
+msgstr[0] "pacchetto di cui effettuare il downgrade"
+msgstr[1] "pacchetti di cui effettuare il downgrade"
 
 #. translators: this text will be preceded by a number e.g. "5 new"
-#: ../src/Summary.cc:654
-#, fuzzy
-#| msgid "New"
+#: ../src/Summary.cc:712
 msgid "new"
 msgid_plural "new"
-msgstr[0] "Nuovo"
-msgstr[1] "Nuovo"
+msgstr[0] "nuovo"
+msgstr[1] "nuovi"
 
 #. translators: this text will be preceded by a number e.g. "5 new to install"
-#: ../src/Summary.cc:657
-#, fuzzy
-#| msgid "The package is not installed"
+#: ../src/Summary.cc:715
 msgid "new package to install"
 msgid_plural "new packages to install"
-msgstr[0] "Il pacchetto non è installato"
-msgstr[1] "Il pacchetto non è installato"
+msgstr[0] "nuovo pacchetto da installare"
+msgstr[1] "nuovi pacchetti da installre"
 
 #. translators: this text will be preceded by a number e.g. "5 to ..."
-#: ../src/Summary.cc:669
-#, fuzzy
-#| msgid "_Force install"
+#: ../src/Summary.cc:727
 msgid "to reinstall"
 msgid_plural "to reinstall"
-msgstr[0] "_Forza intallazione"
-msgstr[1] "_Forza intallazione"
+msgstr[0] "da reinstallare"
+msgstr[1] "da reinstallare"
 
 #. translators: this text will be preceded by a number e.g. "5 packages to ..."
-#: ../src/Summary.cc:672
-#, fuzzy
-#| msgid "The package is not installed"
+#: ../src/Summary.cc:730
 msgid "package to reinstall"
 msgid_plural "packages to reinstall"
-msgstr[0] "Il pacchetto non è installato"
-msgstr[1] "Il pacchetto non è installato"
+msgstr[0] "pacchetto da reinstallre"
+msgstr[1] "pacchetti da reinstallare"
 
 #. translators: this text will be preceded by a number e.g. "5 to ..."
-#: ../src/Summary.cc:684
-#, fuzzy
-#| msgid "%s remove ok"
+#: ../src/Summary.cc:742
 msgid "to remove"
 msgid_plural "to remove"
-msgstr[0] "Rimozione di %s completata"
-msgstr[1] "Rimozione di %s completata"
+msgstr[0] "da rimuovere"
+msgstr[1] "da rimuovere"
 
 #. translators: this text will be preceded by a number e.g. "5 packages to ..."
-#: ../src/Summary.cc:687
-#, fuzzy
-#| msgid "Unable to remove ^%s\n"
+#: ../src/Summary.cc:745
 msgid "package to remove"
 msgid_plural "packages to remove"
-msgstr[0] "Impossibile rimuovere ^%s\n"
-msgstr[1] "Impossibile rimuovere ^%s\n"
+msgstr[0] "pacchetto da rimuovere"
+msgstr[1] "pacchetti da rimuovere"
 
 #. translators: this text will be preceded by a number e.g. "5 to ..."
-#: ../src/Summary.cc:699
+#: ../src/Summary.cc:757
 msgid "to change vendor"
 msgid_plural " to change vendor"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "con cambio di rivenditore"
+msgstr[1] "con cambio di rivenditore"
 
 #. translators: this text will be preceded by a number e.g. "5 packages ..."
-#: ../src/Summary.cc:702
-#, fuzzy
-#| msgid "The following package is going to change vendor:"
-#| msgid_plural "The following packages are going to change vendor:"
+#: ../src/Summary.cc:760
 msgid "package will change vendor"
 msgid_plural "packages will change vendor"
-msgstr[0] "Il seguente pacchetto cambierà fornitore:"
-msgstr[1] "I seguenti pacchetti cambieranno fornitori:"
+msgstr[0] "pacchetto cambierà fornitore"
+msgstr[1] "pacchetti cambieranno fornitori"
 
 #. translators: this text will be preceded by a number e.g. "5 to ..."
-#: ../src/Summary.cc:714
+#: ../src/Summary.cc:772
 msgid "to change arch"
 msgid_plural "to change arch"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "con cambio di architettura"
+msgstr[1] "con cambio di architettura"
 
 #. translators: this text will be preceded by a number e.g. "5 packages ..."
-#: ../src/Summary.cc:717
+#: ../src/Summary.cc:775
 msgid "package will change arch"
 msgid_plural "packages will change arch"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "cambierà architettura"
+msgstr[1] "cambieranno architettura"
 
 #. translators: %d is the number of needed patches
-#: ../src/update.cc:67
+#: ../src/update.cc:73
 #, c-format
 msgid "%d patch needed"
 msgid_plural "%d patches needed"
@@ -2147,112 +2125,164 @@ msgstr[1] "%d patch necessarie"
 
 # TLABEL modules/inst_config_x11.ycp:578
 #. translators: %d is the number of security patches
-#: ../src/update.cc:71
+#: ../src/update.cc:77
 #, c-format
 msgid "%d security patch"
 msgid_plural "%d security patches"
 msgstr[0] "%d aggiornamento di sicurezza"
 msgstr[1] "%d aggiornamenti di sicurezza"
 
-#: ../src/update.cc:177 ../src/utils/misc.cc:136
-msgid "Needed"
-msgstr "Necessario"
+#: ../src/update.cc:215
+#| msgid "Needed"
+msgid "needed"
+msgstr "necessario"
 
-#: ../src/update.cc:195
-msgid ""
-"These are only the updates affecting the updater itself.\n"
-"Other updates are available too.\n"
-msgstr ""
-"Questi aggiornamenti riguardano solo il programma di aggiornamento.\n"
-"Sono disponibili anche altri aggiornamenti.\n"
+#: ../src/update.cc:215
+#| msgid "Restart needed"
+msgid "not needed"
+msgstr "non necessario"
 
-#: ../src/update.cc:203 ../src/update.cc:529
+#: ../src/update.cc:233
+#| msgid "The following packages will be installed:\n"
+msgid "The following software management updates will be installed first:"
+msgstr "Verranno installati prima i seguenti aggiornamenti per la gestione del software:"
+
+#: ../src/update.cc:242 ../src/update.cc:583
 msgid "No updates found."
 msgstr "Nessun aggiornamento trovato."
 
-#: ../src/update.cc:403
+#: ../src/update.cc:248
+#| msgid "The following updates are available:"
+msgid "The following updates are also available:"
+msgstr "Sono disponibili anche i seguenti aggiornamenti:"
+
+#: ../src/update.cc:448
 msgid "Package updates"
 msgstr "Aggiornamenti pacchetto"
 
-#: ../src/update.cc:405
+#: ../src/update.cc:450
 msgid "Patches"
 msgstr "Patch"
 
 # TLABEL modules/inst_config_x11.ycp:578
-#: ../src/update.cc:407
+#: ../src/update.cc:452
 msgid "Pattern updates"
 msgstr "Aggiornamenti del modello"
 
-#: ../src/update.cc:409
+#: ../src/update.cc:454
 msgid "Product updates"
 msgstr "Aggiornamenti prodotto"
 
-#: ../src/update.cc:593
+#: ../src/update.cc:536
+#| msgid "Current Connection"
+msgid "Current Version"
+msgstr "Versione attuale"
+
+#: ../src/update.cc:537
+#| msgid "Available Memory"
+msgid "Available Version"
+msgstr "Versione disponibile"
+
+#: ../src/update.cc:647
 #, c-format
 msgid "Cannot parse '%s < %s'"
 msgstr "Impossibile analizzare '%s < %s'"
 
 #. translators: %s is the name of a patch
-#: ../src/update.cc:649
+#: ../src/update.cc:676
 #, c-format
 msgid "'%s' is interactive, skipping."
 msgstr "'%s' è interattivo, saltato."
 
-#: ../src/update.cc:704
+#: ../src/update.cc:736
 #, c-format
 msgid "No patches matching '%s' found."
 msgstr "Nessun aggiornamento corrispondente a '%s' è stato trovato."
 
-#: ../src/update.cc:707
+#: ../src/update.cc:739
 #, c-format
 msgid "Patch '%s' not found."
 msgstr "Aggiornamento '%s' non trovato."
 
-#: ../src/update.cc:775
+#: ../src/update.cc:806
 #, c-format
 msgid "No packages matching '%s' are installed."
 msgstr "Nessun pacchetto corrispondente a '%s' è installato."
 
-#: ../src/update.cc:778
+#: ../src/update.cc:809
 #, c-format
 msgid "Package '%s' is not installed."
-msgstr "Il pacchetto '%s?' non è installato."
+msgstr "Il pacchetto '%s' non è installato."
 
-#: ../src/update.cc:795
+#: ../src/update.cc:826
 #, c-format
 msgid "No update candidate for '%s'."
 msgstr "Nessun aggiornamento candidato per '%s'."
 
+#: ../src/update.cc:862
+#| msgid "Is Base"
+msgid "Issue"
+msgstr "Difetto"
+
+#: ../src/update.cc:862
+#| msgid "No"
+msgid "No."
+msgstr "No."
+
+#: ../src/update.cc:862
+msgid "Patch"
+msgstr "Patch"
+
+#: ../src/update.cc:891
+#, c-format
+msgid "Ignoring %s without argument because similar option with an argument has been specified."
+msgstr "Ignoro %s senza un argomento perché è stata specificata un'opzione simile con un argomento"
+
+#: ../src/update.cc:996
+#| msgid "No matches found"
+msgid "No matching issues found."
+msgstr "Nessun difetto corrispondente trovato."
+
+#: ../src/update.cc:1005
+#| msgid "The following patch is going to be downgraded:"
+#| msgid_plural "The following patches are going to be downgraded:"
+msgid "The following matches in issue numbers have been found:"
+msgstr "Sono stati trovati i seguenti numeri di difetti con un riscontro:"
+
+#: ../src/update.cc:1016
+msgid "Matches in patch descriptions of the following patches have been found:"
+msgstr "Sono stati trovati i riscontri nelle descrizioni delle patch per le seguenti patch:"
+
+#: ../src/update.cc:1087
+#, c-format
+msgid "Fix for bugzilla issue number %s was not found or is not needed."
+msgstr "La correzione del problema numero %s di bugzilla non è stata trovata o non è necessaria"
+
+#: ../src/update.cc:1091
+#, c-format
+msgid "Fix for CVE issue number %s was not found or is not needed."
+msgstr "La correzione del problema numero %s di CVE non è stata trovata o non è necessaria"
+
 #: ../src/utils/Augeas.cc:26
-#, fuzzy
-#| msgid "Cannot copy the configuration template."
 msgid "Cannot initialize configuration file parser."
-msgstr "Impossibile copiare il modello di configurazione."
+msgstr "Impossibile inizializzare il controllo del file di configurazione."
 
 #: ../src/utils/Augeas.cc:43 ../src/utils/Augeas.cc:55
-#, fuzzy
-#| msgid "Reading the config file failed"
 msgid "Augeas error: setting config file to load failed."
-msgstr "Lettura del file di configurazione fallita"
+msgstr "Errore Augeas: errore ne caricare il file di configurazione delle impostazioni."
 
 #: ../src/utils/Augeas.cc:61
-#, fuzzy
-#| msgid "Cannot parse the certificate."
 msgid "Could not parse the config files."
-msgstr "Impossibile analizzare sintatticamente il certificato."
+msgstr "Impossibile analizzare sintatticamente i file di configurazione."
 
 # %s is either BOOTP or DHCP
 #: ../src/utils/Augeas.cc:95
-#, fuzzy
-#| msgid "An idmapd configuration file is required."
 msgid "No configuration file exists or could be parsed."
-msgstr "È necessario un file di configurazione idmapd."
+msgstr "Non esiste o non può essere analizzato alcun file di configurazione"
 
 #: ../src/utils/Augeas.cc:98
-#, fuzzy
-#| msgid "Error parsing the CRL."
 msgid "Error parsing zypper.conf:"
-msgstr "Errore durante l'analisi sintattica del CRL."
+msgstr "Errore durante l'analisi sintattica di zypper.conf:"
 
 #. For '-garbage' argument, with 'a', 'b', and 'e' as known options,
 #. getopt_long reports 'a', 'b', and 'e' as known options.
@@ -2262,11 +2292,11 @@ msgstr "Errore durante l'analisi sintattica del CRL."
 #. wrong option in the last argument
 #: ../src/utils/getopt.cc:69
 msgid "Unknown option "
-msgstr "Opzione sconosciuta"
+msgstr "Opzione sconosciuta "
 
 #: ../src/utils/getopt.cc:89
 msgid "Missing argument for "
-msgstr "Argomento mancante per"
+msgstr "Argomento mancante per "
 
 #. translators: speaking of two mutually contradicting command line options
 #: ../src/utils/getopt.cc:120
@@ -2281,11 +2311,11 @@ msgstr "Inoltrare una segnalazione su questo bug."
 #. TranslatorExplanation remember not to translate the URL
 #. unless you translate the actual page :)
 #: ../src/utils/messages.cc:25
-msgid "See http://en.opensuse.org/Zypper#Troubleshooting for instructions."
-msgstr "Per ulteriori istruzioni, vedere http://en.opensuse.org/Zypper#Troubleshooting."
+msgid "See http://en.opensuse.org/Zypper/Troubleshooting for instructions."
+msgstr "Per ulteriori istruzioni, vedere http://en.opensuse.org/Zypper/Troubleshooting."
 
 #: ../src/utils/messages.cc:40 ../src/utils/messages.cc:50
-#: ../src/utils/messages.cc:68 ../src/Zypper.cc:3757
+#: ../src/utils/messages.cc:68 ../src/Zypper.cc:3819
 msgid "Usage"
 msgstr "Uso"
 
@@ -2293,7 +2323,7 @@ msgstr "Uso"
 msgid "Too many arguments."
 msgstr "Troppi argomenti."
 
-#: ../src/utils/messages.cc:48 ../src/Zypper.cc:2772 ../src/Zypper.cc:3754
+#: ../src/utils/messages.cc:48 ../src/Zypper.cc:2817 ../src/Zypper.cc:3816
 msgid "Required argument missing."
 msgstr "Mancano degli argomenti richiesti."
 
@@ -2305,83 +2335,139 @@ msgstr "L'opzione globale '--%s' non ha effetto al momento."
 #: ../src/utils/messages.cc:78
 #, c-format
 msgid "You have chosen to ignore a problem with download or installation of a package which might lead to broken dependencies of other packages. It is recommended to run '%s' after the operation has finished."
-msgstr "Hai scelto di ignorare un problema con il download o l'installazione di un pacchetto che potrebbe rompere le dipendenze di altri pacchetti. E' raccomandato di lanciare '%s' dopo che l'operazione è terminata."
+msgstr "Hai scelto di ignorare un problema con il download o l'installazione di un pacchetto che potrebbe rompere le dipendenze di altri pacchetti. È raccomandato di lanciare '%s' dopo che l'operazione è terminata."
 
-#: ../src/utils/misc.cc:110
+#: ../src/utils/misc.cc:116
 msgid "package"
 msgid_plural "packages"
 msgstr[0] "pacchetto"
 msgstr[1] "pacchetti"
 
-#: ../src/utils/misc.cc:112
+#: ../src/utils/misc.cc:118
 msgid "pattern"
 msgid_plural "patterns"
 msgstr[0] "modello"
 msgstr[1] "modelli"
 
-#: ../src/utils/misc.cc:114
+#: ../src/utils/misc.cc:120
 msgid "product"
 msgid_plural "product"
 msgstr[0] "prodotto"
 msgstr[1] "prodotti"
 
-#: ../src/utils/misc.cc:116
+#: ../src/utils/misc.cc:122
 msgid "patch"
 msgid_plural "patches"
 msgstr[0] "patch"
 msgstr[1] "patch"
 
-#: ../src/utils/misc.cc:118
+#: ../src/utils/misc.cc:124
 msgid "srcpackage"
 msgid_plural "srcpackages"
 msgstr[0] "pacchetto src"
 msgstr[1] "pacchetti src"
 
 #. default
-#: ../src/utils/misc.cc:120
+#: ../src/utils/misc.cc:126
 msgid "resolvable"
 msgid_plural "resolvables"
 msgstr[0] "Risolubile"
 msgstr[1] "Risolubili"
 
-#: ../src/utils/misc.cc:129
+#: ../src/utils/misc.cc:135
 msgid "Unknown"
 msgstr "Sconosciuto"
 
-#: ../src/utils/misc.cc:141
+#: ../src/utils/misc.cc:142
+msgid "Needed"
+msgstr "Necessario"
+
+#: ../src/utils/misc.cc:147
 msgid "Not Applicable"
 msgstr "Non applicabile"
 
-#: ../src/utils/misc.cc:214
+#: ../src/utils/misc.cc:220
 msgid "Specified local path does not exist or is not accessible."
 msgstr "Il percorso locale specificato non esiste o non è accessibile."
 
-#: ../src/utils/misc.cc:226
+#: ../src/utils/misc.cc:232
 msgid "Given URI is invalid"
 msgstr "L'URL fornito non è valido"
 
 # TLABEL modules/inst_config_x11.ycp:578
-#: ../src/utils/misc.cc:277
+#: ../src/utils/misc.cc:283
 msgid "Problem copying the specified RPM file to the cache directory."
 msgstr "Si è verificato un problema copiando l'RPM specificato nell'indice."
 
-#: ../src/utils/misc.cc:278
+#: ../src/utils/misc.cc:284
 msgid "Perhaps you are running out of disk space."
 msgstr "Forse lo spazio su disco si sta esaurendo."
 
 # TLABEL modules/inst_config_x11.ycp:578
-#: ../src/utils/misc.cc:286
+#: ../src/utils/misc.cc:292
 msgid "Problem retrieving the specified RPM file"
 msgstr "Si è verificato un problema scaricando l'RPM specificato"
 
-#: ../src/utils/misc.cc:287
+#: ../src/utils/misc.cc:293
 msgid "Please check whether the file is accessible."
 msgstr "Per favore, verificare che il file sia accessibile."
 
-#: ../src/utils/misc.cc:344
+#: ../src/utils/misc.cc:354
 #, c-format
 msgid "Cannot parse capability '%s'."
 msgstr "Impossibile analizzare sintatticamente la capacità '%s'."
+
+#. process ID
+#: ../src/utils/misc.cc:435
+#| msgid "PCI"
+msgid "PID"
+msgstr "PID"
+
+#. parent process ID
+#: ../src/utils/misc.cc:437
+msgid "PPID"
+msgstr "PPID"
+
+#. process user ID
+#: ../src/utils/misc.cc:439
+#| msgid "URI"
+msgid "UID"
+msgstr "UID"
+
+#. process login name
+#: ../src/utils/misc.cc:441
+msgid "Login"
+msgstr "Login"
+
+#. process command name
+#: ../src/utils/misc.cc:443
+msgid "Command"
+msgstr "Comando"
+
+# menu item for selecting a file
+#. "list of deleted files or libraries accessed"
+#: ../src/utils/misc.cc:447
+#| msgid "File"
+msgid "Files"
+msgstr "File"
+
+#: ../src/utils/misc.cc:467
+msgid "No processes using deleted files found."
+msgstr "Nessun processo utilizza i file eliminati"
+
+#: ../src/utils/misc.cc:471
+#| msgid "The following resources are modified"
+msgid "The following running processes use deleted files:"
+msgstr "I seguenti processi stanno utilizzano dei file eliminati:"
+
+#: ../src/utils/misc.cc:474
+msgid "You may wish to restart these processes."
+msgstr "Potresti voler riavviare questi processi."
+
+#: ../src/utils/misc.cc:476
+#, c-format
+msgid "See '%s' for information about the meaning of values in the above table."
+msgstr "Controlla '%s' per informazioni riguardo il significato dei valori nella tabella sopra."
 
 #: ../src/utils/pager.cc:37
 #, c-format
@@ -2409,7 +2495,7 @@ msgstr "no"
 #: ../src/utils/prompt.cc:171 ../src/utils/prompt.cc:216
 #, c-format
 msgid "Retrying in %u seconds..."
-msgstr ""
+msgstr "Riprovo in %u secondi..."
 
 #. translators: "a/r/i" are the answers to the
 #. "Abort, retry, ignore?" prompt
@@ -2422,18 +2508,15 @@ msgid "a/r/i"
 msgstr "a/r/i"
 
 #: ../src/utils/prompt.cc:228
-#, fuzzy, c-format
-#| msgid "autoselect %s after %u "
+#, c-format
 msgid "Autoselecting '%s' after %u second."
 msgid_plural "Autoselecting '%s' after %u seconds."
-msgstr[0] "autoseleziono %s dopo %u "
-msgstr[1] "autoseleziono %s dopo %u "
+msgstr[0] "autoseleziono %s dopo %u secondo"
+msgstr[1] "autoseleziono %s dopo %u secondi."
 
 #: ../src/utils/prompt.cc:247
-#, fuzzy
-#| msgid "Preparing installation..."
 msgid "Trying again..."
-msgstr "Preparazione dell'installazione in corso..."
+msgstr "Nuova prova in corso..."
 
 #: ../src/utils/prompt.cc:338
 #, c-format
@@ -2442,10 +2525,9 @@ msgstr "'%s', risposta non valida."
 
 #. translators: the %s are: 'y', 'yes' (translated), 'n', and 'no' (translated).
 #: ../src/utils/prompt.cc:344
-#, fuzzy, c-format
-#| msgid "Enter 'y' for '%s' or 'n' for '%s' if nothing else works for you."
+#, c-format
 msgid "Enter '%s' for '%s' or '%s' for '%s' if nothing else works for you."
-msgstr "Inserire 's' per '%s' o 'n' per '%s' se null'altro funziona."
+msgstr "Inserire '%s' per '%s' o '%s' per '%s' se null'altro funziona."
 
 #: ../src/utils/prompt.cc:358
 #, c-format
@@ -2475,24 +2557,6 @@ msgid "Error"
 msgstr "Errore"
 
 #: ../src/Zypper.cc:153
-#, fuzzy
-#| msgid ""
-#| "  Global Options:\n"
-#| "\t--help, -h\t\tHelp.\n"
-#| "\t--version, -V\t\tOutput the version number.\n"
-#| "\t--quiet, -q\t\tSuppress normal output, print only error\n"
-#| "\t\t\t\tmessages.\n"
-#| "\t--verbose, -v\t\tIncrease verbosity.\n"
-#| "\t--no-abbrev, -A\t\tDo not abbreviate text in tables.\n"
-#| "\t--table-style, -s\tTable style (integer).\n"
-#| "\t--rug-compatible, -r\tTurn on rug compatibility.\n"
-#| "\t--non-interactive, -n\tDo not ask anything, use default answers\n"
-#| "\t\t\t\tautomatically.\n"
-#| "\t--xmlout, -x\t\tSwitch to XML output.\n"
-#| "\t--reposd-dir, -D <dir>\tUse alternative repository definition files\n"
-#| "\t\t\t\tdirectory.\n"
-#| "\t--cache-dir, -C <dir>\tUse alternative meta-data cache directory.\n"
-#| "\t--raw-cache-dir <dir>\tUse alternative raw meta-data cache directory.\n"
 msgid ""
 "  Global Options:\n"
 "\t--help, -h\t\tHelp.\n"
@@ -2512,22 +2576,23 @@ msgid ""
 "\t--cache-dir, -C <dir>\tUse alternative meta-data cache directory.\n"
 "\t--raw-cache-dir <dir>\tUse alternative raw meta-data cache directory.\n"
 msgstr ""
-"  Opzioni Globali:\n"
+"  Opzione Globali:\n"
 "\t--help, -h\t\tAiuto.\n"
-"\t--version, -V\t\tRestituisce il numero della versione.\n"
-"\t--quiet, -q\t\tElimina l'output convenzionale, stampa solo i messaggi\n"
+"\t--version, -V\t\tMostra il numero di versione.\n"
+"\t--config, -c <file>\tUsa il file di configurazione specificato invece che quello di default.\n"
+"\t--quiet, -q\t\tElimina l'outpunt convenzionale, mostra solo i messaggi\n"
 "\t\t\t\tdi errore.\n"
 "\t--verbose, -v\t\tAumenta il livello di dettaglio.\n"
 "\t--no-abbrev, -A\t\tNon abbrevia il testo in tabelle.\n"
 "\t--table-style, -s\tStile tabella (interi).\n"
-"\t--rug-compatible, -r\tAttiva la compatibilità con rug.\n"
-"\t--non-interactive\tNon pone domande. Utilizza le risposte predefinite\n"
+"\t--rug-compatible, -r\t Attiva la compatibilità rug.\n"
+"\t--non-interactive, -n\tNon pone domande, Utilizza le risposte predefinite\n"
 "\t\t\t\tautomaticamente.\n"
 "\t--xmlout, -x\t\tCambia ad output XML.\n"
-"\t--reposd-dir, -D <dir>\tUsa indice alternativo delle definizioni dei file\n"
-"\t\t\t\tdella sorgente di installazione .\n"
-"\t--cache-dir, -C <dir>\tUsa indice alternativo per la cache meta-data del database.\n"
-"\t--raw-cache-dir <dir>\tUsa indice alternativo per la cache meta-data raw.\n"
+"\t--reposd-dir, -D <dir>\tUsa cartella alternativa delle definizioni dei file\n"
+"\t\t\t\tdei repository.\n"
+"\t--cache-dir, -C <dir>\tUsa cartella alternativa per la cache meta-data del database.\n"
+"\t--raw-cache-dir <dir>\tUsa cartella alternativa per la cache meta-data raw.\n"
 
 #: ../src/Zypper.cc:172
 msgid ""
@@ -2537,11 +2602,11 @@ msgid ""
 "\t--disable-repositories\tDo not read meta-data from repositories.\n"
 "\t--no-refresh\t\tDo not refresh the repositories.\n"
 msgstr ""
-"     Opzioni Sorgenti Di Installazione:\n"
+"     Opzioni dei Repository:\n"
 "\t--no-gpg-checks\t\tIngnora fallimenti GPG e continua.\n"
-"\t--plus-repo, -p <URI>\tUtilizza sorgenti di installazione aggiuntive.\n"
-"\t--disable-repositories\tNon legge i meta-dati dalle sorgenti di installazione.\n"
-"\t--no-refresh\t\tNon aggiorna le sorgenti di installazione.\n"
+"\t--plus-repo, -p <URI>\tUtilizza repository aggiuntivi.\n"
+"\t--disable-repositories\tNon legge i meta-dati dai repository.\n"
+"\t--no-refresh\t\tNon aggiorna i repository.\n"
 
 #. translators: these belong to Repository Options main help text
 #: ../src/Zypper.cc:179
@@ -2549,8 +2614,8 @@ msgid ""
 "\t--no-cd\t\t\tIgnore CD/DVD repositories.\n"
 "\t--no-remote\t\tIgnore remote repositories.\n"
 msgstr ""
-"\t--no-cd\t\t\tIgnora sorgenti di installazione su CD/DVD.\n"
-"\t--no-remote\t\tIgnora sorgenti di installazione remote.\n"
+"\t--no-cd\t\t\tIgnora repository su CD/DVD.\n"
+"\t--no-remote\t\tIgnora repository remoti.\n"
 
 #: ../src/Zypper.cc:183
 msgid ""
@@ -2560,7 +2625,7 @@ msgid ""
 "\t\t\t\tDo not read installed packages.\n"
 msgstr ""
 "     Opzioni Obbiettivo:\n"
-"\t--root, -R <dir>\tLavora su una diversa directory radice..\n"
+"\t--root, -R <dir>\tLavora su una diversa directory radice.\n"
 "\t--disable-system-resolvables\n"
 "\t\t\t\tNon legge i pacchetti installati.\n"
 
@@ -2585,13 +2650,13 @@ msgid ""
 "\trefresh, ref\t\tRefresh all repositories.\n"
 "\tclean\t\t\tClean local caches.\n"
 msgstr ""
-"     Gestione Sorgenti di installazione:\n"
-"\trepos, lr\t\tMostra tutte le sorgenti di installazione.\n"
-"\taddrepo, ar\t\tAggiungi una nuova sorgente di installazione.\n"
-"\tremoverepo, rr\t\tRimuovi la sorgente di installazione specificata.\n"
-"\trenamerepo, nr\t\tRinomina la sorgente di installazione specificata.\n"
-"\tmodifyrepo, mr\t\tModifica la sorgente di installazione specificata.\n"
-"\trefresh, ref\t\tAggiorna tutte le sorgenti di installazione.\n"
+"     Gestione dei Repository:\n"
+"\trepos, lr\t\tMostra tutti i repository.\n"
+"\taddrepo, ar\t\tAggiungi un nuovo repository.\n"
+"\tremoverepo, rr\t\tRimuovi il repository specificato.\n"
+"\trenamerepo, nr\t\tRinomina il repository specificato.\n"
+"\tmodifyrepo, mr\t\tModifica il repository specificato.\n"
+"\trefresh, ref\t\tAggiorna tutti i repository.\n"
 "\tclean\t\t\tPulisci le cache locali.\n"
 
 #: ../src/Zypper.cc:205
@@ -2677,12 +2742,6 @@ msgstr ""
 "\twhat-provides, wp\tMostra i pacchetti che forniscono una compatibilità specificata.\n"
 
 #: ../src/Zypper.cc:248
-#, fuzzy
-#| msgid ""
-#| "     Package Locks:\n"
-#| "\taddlock, al\t\tAdd a package lock.\n"
-#| "\tremovelock, rl\t\tRemove a package lock.\n"
-#| "\tlocks, ll\t\tList current package locks.\n"
 msgid ""
 "     Package Locks:\n"
 "\taddlock, al\t\tAdd a package lock.\n"
@@ -2694,6 +2753,7 @@ msgstr ""
 "\taddlock, al\t\tAggiungi blocco a un pacchetto.\n"
 "\tremovelock, rl\t\tRimuovi blocco a un pacchetto.\n"
 "\tlocks, ll\t\tMostra tutti i blocchi al pacchetto.\n"
+"\tcleanlocks, cl\t\tRimuove i blocchi inutilizzati.\n"
 
 #: ../src/Zypper.cc:255
 msgid ""
@@ -2714,7 +2774,7 @@ msgid ""
 "  Usage:\n"
 "\tzypper [--global-options] <command> [--command-options] [arguments]\n"
 msgstr ""
-"Utilizzo:\n"
+"  Utilizzo:\n"
 "\tzypper [--opzione-globale] <comando> [--opzioni-del-comando] [argomenti]\n"
 
 #. translators: %s is "help" or "zypper help" depending on whether
@@ -2760,23 +2820,23 @@ msgstr "Il percorso specificato nell'opzione --root deve essere assoluto."
 
 #: ../src/Zypper.cc:501
 msgid "Repositories disabled, using the database of installed packages only."
-msgstr "Sorgente di installazione disabilitata, sarà utilizzato solo il database dei pacchetti installati."
+msgstr "Repository disabilitati, sarà utilizzato solo il database dei pacchetti installati."
 
 #: ../src/Zypper.cc:513
 msgid "Autorefresh disabled."
-msgstr "Aggiornamento automaticamento disabilitato."
+msgstr "Aggiornamento automatico disabilitato."
 
 #: ../src/Zypper.cc:520
 msgid "CD/DVD repositories disabled."
-msgstr "Sorgenti di installazione su CD/DVD disabilitate."
+msgstr "Repository su CD/DVD disabilitati."
 
 #: ../src/Zypper.cc:527
 msgid "Remote repositories disabled."
-msgstr "Sorgenti di installazione remote disabilitate."
+msgstr "Repository remoti disabilitati."
 
 #: ../src/Zypper.cc:534
 msgid "Ignoring installed resolvables."
-msgstr "Tralasciamento dei risolvibili installati."
+msgstr "Ignoro i risolvibili installati."
 
 #. TranslatorExplanation The %s is "--plus-repo"
 #: ../src/Zypper.cc:645
@@ -2790,27 +2850,37 @@ msgstr "Eccezione imprevista."
 
 #. TranslatorExplanation the first %s = "package, patch, pattern, product"
 #. and the second %s = "package"
-#: ../src/Zypper.cc:912
-#, fuzzy, c-format
+#: ../src/Zypper.cc:913
+#, c-format
 #| msgid ""
 #| "install (in) [options] <capability|rpm_file_uri> ...\n"
 #| "\n"
-#| "Install packages with specified capabilities or RPM files with specified location. A capability is NAME[OP<VERSION>], where OP is one of <, <=, =, >=, >.\n"
+#| "Install packages with specified capabilities or RPM files with specified\n"
+#| "location. A capability is NAME[.ARCH][OP<VERSION>], where OP is one\n"
+#| "of <, <=, =, >=, >.\n"
 #| "\n"
 #| "  Command options:\n"
-#| "-r, --repo <alias|#|URI>        Install packages only from the specified repository.\n"
-#| "-t, --type <type>               Type of package (%s).\n"
-#| "                                Default: %s.\n"
-#| "-n, --name                      Select packages by plain name, not by capability.\n"
-#| "-C, --capability                Select packages by capability.\n"
-#| "-f, --force                     Install even if the item is already installed (reinstall).\n"
-#| "-l, --auto-agree-with-licenses  Automatically say 'yes' to third party license confirmation prompt.\n"
-#| "                                See 'man zypper' for more details.\n"
-#| "    --debug-solver              Create solver test case for debugging.\n"
-#| "    --no-recommends             Do not install recommended packages, only required.\n"
-#| "-R, --no-force-resolution       Do not force the solver to find solution, let it ask.\n"
-#| "    --force-resolution          Force the solver to find a solution (even an agressive).\n"
-#| "-D, --dry-run                   Test the installation, do not actually install.\n"
+#| "    --from <alias|#|URI>    Select packages from the specified repository.\n"
+#| "-r, --repo <alias|#|URI>    Load only the specified repository.\n"
+#| "-t, --type <type>           Type of package (%s).\n"
+#| "                            Default: %s.\n"
+#| "-n, --name                  Select packages by plain name, not by capability.\n"
+#| "-C, --capability            Select packages by capability.\n"
+#| "-f, --force                 Reinstall the package if the exact version is\n"
+#| "                            available in repositories.\n"
+#| "-l, --auto-agree-with-licenses\n"
+#| "                            Automatically say 'yes' to third party license\n"
+#| "                            confirmation prompt.\n"
+#| "                            See 'man zypper' for more details.\n"
+#| "    --debug-solver          Create solver test case for debugging.\n"
+#| "    --no-recommends         Do not install recommended packages, only required.\n"
+#| "    --recommends            Install also recommended packages in addition\n"
+#| "                            to the required.\n"
+#| "    --no-force-resolution   Do not force the solver to find solution,\n"
+#| "                            let it ask.\n"
+#| "-R, --force-resolution      Force the solver to find a solution (even\n"
+#| "                            an agressive).\n"
+#| "-D, --dry-run               Test the installation, do not actually install.\n"
 msgid ""
 "install (in) [options] <capability|rpm_file_uri> ...\n"
 "\n"
@@ -2840,46 +2910,43 @@ msgid ""
 "-R, --force-resolution      Force the solver to find a solution (even\n"
 "                            an agressive).\n"
 "-D, --dry-run               Test the installation, do not actually install.\n"
+"-d, --download-only         Only download the packages, do not install.\n"
 msgstr ""
 "install (in) [opzioni] <capacità|rpm_file_uri> ...\n"
 "\n"
-"Installa i risolubili con la capacità specificata oppure file RPM con una specifica posizione. Una capacità è NOME[OP<VERSIONE>], dove OP può essere <, <=, =, >=, >.\n"
+"Installa i risolubili con la capacità specificata oppure file RPM con una specifica\n"
+"posizione. Una capacità è NOME[.ARCH][OP<VERSIONE>], dove OP\n"
+"può essere <, <=, =, >=, >.\n"
 "\n"
 "  Opzioni del comando:\n"
-"-r, --repo <alias|#|URI>              Installa i risolubili solo dalla sorgente di installazione specificata dall'alias.\n"
+"    --from <alias|#|URI>    Seleziona i pacchetti dal repository specificato.\n"
+"-r, --repo <alias|#|URI>              Carica solo il repository specificato.\n"
 "-t, --type <tipo>               Tipo di risolubili (%s)\n"
 "                                Predefinito: %s\n"
-"-n, --name                      Seleziona i risolubili per nome, non per capacità\n"
-"-C, --capability                Seleziona i risolubili per capacità\n"
-"-f, --force                     Installa anche se l'oggetto è già installato (reinstalla)\n"
-"-l, --auto-agree-with-licenses  Risponde automaticante 'si' al prompt di conferma delle licenze di terze parti.\n"
+"-n, --name                      Seleziona i pacchetti per nome, non per capacità\n"
+"-C, --capability                Seleziona i pacchetti per capacità\n"
+"-f, --force                     Reinstalla il pacchetto se l'esatta versione è\n"
+"                            disponibile nei repository.\n"
+"-l, --auto-agree-with-licenses\n"
+"                            Risponde automaticante 'sì' al prompt di conferma\n"
+"                            delle licenze di terze parti.\n"
 "\n"
-"                                Vedere 'man zypper' per ulteriori dettagli.\n"
+"                            Vedere 'man zypper' per ulteriori dettagli.\n"
 "    --debug-solver              Crea un caso di prova per il risolutore\n"
-"    --no-recommends             Non installare pacchetti raccomandati, solo quelli necessari.\n"
-"-R, --no-force-resolution       Non forzare il risolutore a trovare un soluzione, lascia chiedere.\n"
-"    --force-resolution            Forza il risolutore a trovare una soluzione (anche aggressiva)\n"
-"-D, --dry-run                   Testa l'installazione, non installa realmente\n"
+"    --no-recommends         Non installare pacchetti raccomandati, solo quelli necessari.\n"
+"    --recommends            Installa anche i pacchetti raccomandati oltre\n"
+"                            a quelli richiesti.\n"
+"    --no-force-resolution   Non forza il risolutore a trovare un soluzione,\n"
+"                            la chiede.\n"
+"-R, --force-resolution      Forza il risolutore a trovare una soluzione (anche\n"
+"                            se aggressiva).\n"
+"-D, --dry-run               Testa l'installazione, non installa realmente.\n"
+"-d, --download-only         Scarica solamente i pacchett senza installarli.\n"
 
 #. TranslatorExplanation the first %s = "package, patch, pattern, product"
 #. and the second %s = "package"
-#: ../src/Zypper.cc:969
-#, fuzzy, c-format
-#| msgid ""
-#| "remove (rm) [options] <capability> ...\n"
-#| "\n"
-#| "Remove packages with specified capabilities. A capability is NAME[OP<VERSION>], where OP is one of <, <=, =, >=, >.\n"
-#| "\n"
-#| "  Command options:\n"
-#| "-r, --repo <alias|#|URI>        Operate only with packages from the specified repository.\n"
-#| "-t, --type <type>               Type of package (%s).\n"
-#| "                                Default: %s.\n"
-#| "-n, --name                      Select packages by plain name, not by capability.\n"
-#| "-C, --capability                Select packages by capability.\n"
-#| "    --debug-solver              Create solver test case for debugging.\n"
-#| "-R, --no-force-resolution       Do not force the solver to find solution, let it ask.\n"
-#| "    --force-resolution          Force the solver to find a solution (even an agressive).\n"
-#| "-D, --dry-run                   Test the removal, do not actually remove.\n"
+#: ../src/Zypper.cc:971
+#, c-format
 msgid ""
 "remove (rm) [options] <capability> ...\n"
 "\n"
@@ -2900,20 +2967,21 @@ msgid ""
 msgstr ""
 "remove (rm) [opzioni] <capacità> ...\n"
 "\n"
-"Rimuovere i risolubili con le capacità specificate. Una capacità è NOME[OP<VERSIONE>], dove OP può essere <, <=, =, >=, >.\n"
+"Rimuovere i risolubili con le capacità specificate. Una capacità è NOME[.ARCH][OP<VERSIONE>], dove OP è uno\n"
+"tra <, <=, =, >=, >.\n"
 "\n"
 "  Opzioni del comando:\n"
-"-r, --repo <alias|#|URI>        Opera solo con i pacchetti della sorgente di installazione specificata.\n"
+"-r, --repo <alias|#|URI>        Opera solo con i pacchetti del repository specificato.\n"
 "-t, --type <tipo>               Tipi di pachetto (%s)\n"
 "                                Predefinito: %s\n"
 "-n, --name                       Seleziona i pacchetti per nome, non per capacità.\n"
 "-C, --capability                Seleziona pacchetti per capacità.\n"
 "    --debug-solver             Crea caso di prova per il debug\n"
 "-R, --no-force-resolution       Non forzare il risolutore a trovare un soluzione, lascia chiedere.\n"
-"    --force-resolution            Forza il risolutore a trovare una soluzione (anche aggressiva)\n"
+"    --force-resolution            Forza il risolutore a trovare una soluzione (anche se aggressiva)\n"
 "-D, --dry-run                   Testa la rimozione, non rimuove realmente\n"
 
-#: ../src/Zypper.cc:1000
+#: ../src/Zypper.cc:1002
 msgid ""
 "source-install (si) [options] <name> ...\n"
 "\n"
@@ -2931,19 +2999,21 @@ msgstr ""
 "  Opzioni del comando:\n"
 "-d, --build-deps-only    Installa solamente le dipendenze di compilazione per il pacchetto specificato.\n"
 "-D, --no-build-deps      Non installa le dipendenze di compilazione.\n"
-"-r, --repo <alias|#|URI> Installa i pacchetti solo dalla sorgente di installazione specificata.\n"
+"-r, --repo <alias|#|URI> Installa i pacchetti solo dal repository specificato.\n"
 
-#: ../src/Zypper.cc:1028
-#, fuzzy
+#: ../src/Zypper.cc:1031
 #| msgid ""
 #| "verify (ve) [options]\n"
 #| "\n"
 #| "Check whether dependencies of installed packages are satisfied and repair eventual dependency problems.\n"
 #| "\n"
 #| "  Command options:\n"
-#| "    --no-recommends      Do not install recommended packages, only required.\n"
-#| "-D, --dry-run            Test the repair, do not actually do anything to the system.\n"
-#| "-r, --repo <alias|#|URI> Use only specified repositories to install missing packages.\n"
+#| "-r, --repo <alias|#|URI>    Load only the specified repository.\n"
+#| "    --no-recommends         Do not install recommended packages, only required.\n"
+#| "    --recommends            Install also recommended packages in addition\n"
+#| "                            to the required.\n"
+#| "-D, --dry-run               Test the repair, do not actually do anything to\n"
+#| "                            the system.\n"
 msgid ""
 "verify (ve) [options]\n"
 "\n"
@@ -2956,16 +3026,31 @@ msgid ""
 "                            to the required.\n"
 "-D, --dry-run               Test the repair, do not actually do anything to\n"
 "                            the system.\n"
+"-d, --download-only         Only download needed packages, do not install.\n"
 msgstr ""
 "verify (ve) [opzioni]\n"
 "\n"
 "Verifica che le dipendenze dei pacchetti installati siano soddisfatte e ripara eventualmente problemi di dipendenze.\n"
 "\n"
 "  Opzioni del comando:\n"
-"-D, --dry-run            Test di riparazione, non viene eseguito nulla su sistema.\n"
-"-r, --repo <alias|#|URI> Utilizza solamente la sorgente di installazione specificata per i pacchetti mancanti.\n"
+"-r, --repo <alias|#|URI>    Carica solo in repository specificato.\n"
+"    --no-recommends         Non installa i pacchetti raccomandatim solo quelli richieti.\n"
+"    --recommends            Installa anche i pacchetti raccomandati oltre\n"
+"                            a quelli richiesti.\n"
+"-D, --dry-run               Test di riparazione, non viene eseguito nulla\n"
+"                            sul sistema.\n"
+"-d, --download-only         Scarica solamente i pacchett senza installarli.\n"
 
-#: ../src/Zypper.cc:1055
+#: ../src/Zypper.cc:1060
+#| msgid ""
+#| "install-new-recommends (inr) [options]\n"
+#| "\n"
+#| "Install newly added packages recommended by already installed packages. This can typically be used to install new language packages or drivers for newly added hardware.\n"
+#| "\n"
+#| "  Command options:\n"
+#| "-r, --repo <alias|#|URI> Use only specified repositories to install packages.\n"
+#| "-D, --dry-run            Test the installation, do not actually install anything.\n"
+#| "    --debug-solver       Create solver test case for debugging.\n"
 msgid ""
 "install-new-recommends (inr) [options]\n"
 "\n"
@@ -2974,6 +3059,7 @@ msgid ""
 "  Command options:\n"
 "-r, --repo <alias|#|URI> Use only specified repositories to install packages.\n"
 "-D, --dry-run            Test the installation, do not actually install anything.\n"
+"-d, --download-only      Only download the packages, do not install.\n"
 "    --debug-solver       Create solver test case for debugging.\n"
 msgstr ""
 "install-new-recommends (inr) [opzioni]\n"
@@ -2981,22 +3067,14 @@ msgstr ""
 "Installa i nuovi pacchetti raccomandati da pacchetti già installati. Ciò può essere usato tipicamente per installare nuovi pacchetti di lingua o drivers per il nuovo hardware aggiunto.\n"
 "\n"
 "  Opzioni Comando:\n"
-"-r, --repo <alias|#|URI> Utilizza solamente le sorgenti di installazione specificate per installare pacchetti.\n"
+"-r, --repo <alias|#|URI> Utilizza solamente i repository specificate per installare pacchetti.\n"
 "-D, --dry-run            Testa l'installazione, non installa realmente.\n"
+"-d, --download-only         Scarica solamente i pacchett senza installarli.\n"
 "    --debug-solver       Crea un caso di prova per il debug.\n"
 
 #. translators: the %s = "ris" (the only service type currently supported)
-#: ../src/Zypper.cc:1081
-#, fuzzy, c-format
-#| msgid ""
-#| "addservice (as) [options] <URI> <alias>\n"
-#| "\n"
-#| "Add a repository index service to the system.\n"
-#| "\n"
-#| "  Command options:\n"
-#| "-t, --type <TYPE>       Type of the service (%s).\n"
-#| "-d, --disable           Add the service as disabled.\n"
-#| "-n, --name              Specify descriptive name for the service.\n"
+#: ../src/Zypper.cc:1087
+#, c-format
 msgid ""
 "addservice (as) [options] <URI> <alias>\n"
 "\n"
@@ -3009,15 +3087,15 @@ msgid ""
 msgstr ""
 "addservice (as) [opzioni] <URI> <alias>\n"
 "\n"
-"Aggiungi al sistema una sorgente di installazione indice del servizio.\n"
+"Aggiungi al sistema un repository indice del servizio.\n"
 "\n"
 "  Opzioni comando:\n"
-"-t, --type <TIPO>       Tipo di servizio (%s).\n"
+"-t, --type <tipo>       Tipo di servizio (%s).\n"
 "-d, --disable           Aggiungi il servizio come disabilitato.\n"
-"-n, --name              Specifica un nome descrittivo per il servizio.\n"
+"-n, --name <alias>      Specifica un nome descrittivo per il servizio.\n"
 
 #. TranslatorExplanation the %s = "yast2, rpm-md, plaindir"
-#: ../src/Zypper.cc:1104
+#: ../src/Zypper.cc:1110
 msgid ""
 "removeservice (rs) [options] <alias|#|URI>\n"
 "\n"
@@ -3029,14 +3107,14 @@ msgid ""
 msgstr ""
 "removeservice (rs) [opzioni] <alias|#|URI>\n"
 "\n"
-"Rimuove la sorgente di installazione indice del servizio specificato dal sistema.\n"
+"Rimuove il repository indice del servizio specificato dal sistema.\n"
 "\n"
 "  Opzioni del comando:\n"
 "    --loose-auth   Ignora dati di autenticazione dell'utente nell'URI\n"
 "    --loose-query   Ignora stringhe di query nell'URI\n"
 
 #. translators: %s is "--all" and "--all"
-#: ../src/Zypper.cc:1140
+#: ../src/Zypper.cc:1146
 #, c-format
 msgid ""
 "modifyservice (ms) <options> <alias|#|URI>\n"
@@ -3077,19 +3155,19 @@ msgstr ""
 "-n, --no-fresh            Disabilita aggiornamento automatico del servizio\n"
 "-n, --name                Imposta un nome descrittivo per il servizio.\n"
 "\n"
-"-i, --ar-to-enable <alias>     Aggiunge una sorgente di installazione RIS del servizio da abilitare.\n"
-"-I, --ar-to-disable <alias>    Aggiunge una sorgente di installazione RIS del servizio da disabilitare.\n"
-"-j, --rr-to-enable <alias>     Rimuove una sorgente di installazione RIS del servizio da abilitare.\n"
-"-J, --rr-to-disable <alias>    Rimuove una sorgente di installazione RIS del servizio da disabilitare.\n"
-"-k, --cl-to-enable             Pulisce la lista delle sorgenti di installazione RIS da abilitare.\n"
-"-K, --cl-to-disable            Pulisce la lista delle sorgenti di installazione RIS da disabilitare.\n"
+"-i, --ar-to-enable <alias>     Aggiunge un repository RIS del servizio da abilitare.\n"
+"-I, --ar-to-disable <alias>    Aggiunge un repository RIS del servizio da disabilitare.\n"
+"-j, --rr-to-enable <alias>     Rimuove un repository RIS del servizio da abilitare.\n"
+"-J, --rr-to-disable <alias>    Rimuove un repository RIS del servizio da disabilitare.\n"
+"-k, --cl-to-enable             Pulisce la lista dei repository RIS da abilitare.\n"
+"-K, --cl-to-disable            Pulisce la lista dei repository RIS da disabilitare.\n"
 "\n"
 "-a, --all                 Applica cambiamenti a tutti i servizi.\n"
 "-l, --local               Applica cambiamenti a tutti i servizi locali.\n"
 "-t, --remote              Applica cambiamenti a tutti i servizi remoti.\n"
 "-m, --medium-type <tipo>  Applica cambiamenti a tutti i servizi del tipo specificato.\n"
 
-#: ../src/Zypper.cc:1188
+#: ../src/Zypper.cc:1194
 msgid ""
 "services (ls) [options]\n"
 "\n"
@@ -3109,15 +3187,15 @@ msgstr ""
 "Mostra i servizi definiti.\n"
 "\n"
 "  Opzioni comando:\n"
-"-u, --uri                 Mostra anche l'URI base delle sorgenti di installazione.\n"
-"-p, --priority            Mostra anche la priorità delle sorgenti di installazione.\n"
+"-u, --uri                 Mostra anche l'URI base dei repository.\n"
+"-p, --priority            Mostra anche la priorità dei repository.\n"
 "-d, --details             Mostra più informazioni con l'URI, la priorità, il tipo.\n"
-"-r, --with-repos          Mostra anche le sorgenti di installazione che fanno parte dei servizi.\n"
-"-P, --sort-by-priority    Ordina la lista per la priorità delle sorgenti di installazione.\n"
+"-r, --with-repos          Mostra anche i repository che fanno parte dei servizi.\n"
+"-P, --sort-by-priority    Ordina la lista per la priorità dei repository.\n"
 "-U, --sort-by-uri         Ordina la lista per URI.\n"
 "-N, --sort-by-name        Ordina la lista per nome.\n"
 
-#: ../src/Zypper.cc:1214
+#: ../src/Zypper.cc:1220
 msgid ""
 "refresh-services (refs) [options]\n"
 "\n"
@@ -3128,30 +3206,14 @@ msgid ""
 msgstr ""
 "refresh-services (refs) [opzioni]\n"
 "\n"
-"Aggiorna le sorgenti di installazione indice del servizio.\n"
+"Aggiorna i repository indice del servizio.\n"
 "\n"
 "  Opzioni comando:\n"
-"-r, --with-repos      Aggiorna anche le sorgenti di installazione.\n"
+"-r, --with-repos      Aggiorna anche i repository.\n"
 
 #. translators: the %s = "yast2, rpm-md, plaindir"
-#: ../src/Zypper.cc:1242
-#, fuzzy, c-format
-#| msgid ""
-#| "addrepo (ar) [options] <URI> <alias>\n"
-#| "addrepo (ar) [options] <FILE.repo>\n"
-#| "\n"
-#| "Add a repository to the sytem. The repository can be specified by its URI or can be read from specified .repo file (even remote).\n"
-#| "\n"
-#| "  Command options:\n"
-#| "-r, --repo <FILE.repo>  Just another means to specify a .repo file to read.\n"
-#| "-t, --type <TYPE>       Type of repository (%s).\n"
-#| "-d, --disable           Add the repository as disabled.\n"
-#| "-c, --check             Probe URI.\n"
-#| "-C, --no-check          Don't probe URI, probe later during refresh.\n"
-#| "-n, --name              Specify descriptive name for the repository.\n"
-#| "-k, --keep-packages     Enable RPM files caching.\n"
-#| "-K, --no-keep-packages  Disable RPM files caching.\n"
-#| "-f, --refresh           Enable autorefresh of the repository.\n"
+#: ../src/Zypper.cc:1248
+#, c-format
 msgid ""
 "addrepo (ar) [options] <URI> <alias>\n"
 "addrepo (ar) [options] <file.repo>\n"
@@ -3172,22 +3234,22 @@ msgstr ""
 "addrepo (ar) [opzioni] <URI> <alias>\n"
 "addrepo (ar) [opzioni] <FILE.repo>\n"
 "\n"
-"Aggiunge una sorgente di installazione al sistema. La sorgente di installazione può essere specificata tramite URI o può essere letta da un file .repo specificato (anche remoto).\n"
+"Aggiunge un repository al sistema. Il repository può essere specificata tramite URI o può essere letta da un file .repo specificato (anche remoto).\n"
 "\n"
 "  Opzioni del comando:\n"
-"-r, --repo <FILE.repo>  Semplicemente un al'tro modo di specificare un .repo da leggere\n"
-"-t, --type <TIPO>       Tipo di sorgente di installazione (%s)\n"
-"-d, --disabled          Aggiunge la sorgente di installazione come disabilitato\n"
+"-r, --repo <file.repo>  Semplicemente un al'tro modo di specificare un file .repo da leggere\n"
+"-t, --type <tipo>       Tipo di repository (%s)\n"
+"-d, --disabled          Aggiunge il repository come disabilitato\n"
 "-c, --check             Controlla l'URI\n"
 "-C, --nocheck           Non controlla l'URI, sarà controllato in seguito durante l'aggiornamento.\n"
-"-n, --name              Specifica il nome descrittivo per la sorgente di installazione.\n"
+"-n, --name <nome>       Specifica il nome descrittivo per il repository.\n"
 "-k, --keep-packages     Abilita la cache dei file RPM.\n"
 "-K, --no-keep-packages  Disabilita la cache dei file RPM.\n"
-"-f, --refresh           Abilita l'aggiornamento automatico delle sorgenti di installazione.\n"
+"-f, --refresh           Abilita l'aggiornamento automatico dei repository.\n"
 
 #. translators: this is just a rug compatiblity command
 #. translators: this is just a rug-compatiblity command
-#: ../src/Zypper.cc:1291 ../src/Zypper.cc:2188
+#: ../src/Zypper.cc:1297 ../src/Zypper.cc:2233
 msgid ""
 "list-resolvables (lr)\n"
 "\n"
@@ -3197,7 +3259,7 @@ msgstr ""
 "\n"
 "Mostra i tipi di risolubili disponibili.\n"
 
-#: ../src/Zypper.cc:1299
+#: ../src/Zypper.cc:1305
 msgid ""
 "repos (lr) [options]\n"
 "\n"
@@ -3215,24 +3277,24 @@ msgid ""
 msgstr ""
 "repos (lr) [opzioni[\n"
 "\n"
-"Mostra le sorgenti di installazione definite.\n"
+"Mostra i repository definiti.\n"
 "\n"
 "  Opzioni comando:\n"
-"-e, --export <FILE.repo>  Esporta tutte le sorgenti di installazione in un sigolo file .repo locale.\n"
-"-u, --uri                 Mostra anche l'URI base delle sorgenti di installazione.\n"
-"-p, --priority            Mostra anche la priorità delle sorgenti di installazione.\n"
+"-e, --export <FILE.repo>  Esporta tutte i repository in un sigolo file .repo locale.\n"
+"-u, --uri                 Mostra anche l'URI base dei repository.\n"
+"-p, --priority            Mostra anche la priorità dei repository.\n"
 "-d, --details             Mostra più informazioni con l'URI, la priorità, il tipo.\n"
 "-U, --sort-by-uri         Ordina la lista per URI.\n"
-"-P, --sort-by-priority    Ordina la lista per la priorità delle sorgenti di installazione.\n"
+"-P, --sort-by-priority    Ordina la lista per la priorità dei repository.\n"
 "-A, --sort-by-alias       Ordina la lista per alias.\n"
 "-N, --sort-by-name        Ordina la lista per nome.\n"
 
 #. translators: this option belongs to 'lr' command help
-#: ../src/Zypper.cc:1314
+#: ../src/Zypper.cc:1320
 msgid "-s, --service             Show also alias of parent service.\n"
 msgstr "-s, --service             Mostra anche l'alias del servizio principale.\n"
 
-#: ../src/Zypper.cc:1329
+#: ../src/Zypper.cc:1335
 msgid ""
 "removerepo (rr) [options] <alias|#|URI>\n"
 "\n"
@@ -3244,13 +3306,13 @@ msgid ""
 msgstr ""
 "removerepo (rr) [opzioni] <alias|#|URI>\n"
 "\n"
-"Rimuove la sorgente di installazione specificata dall'alias, dal numero o dall'URI.\n"
+"Rimuove il repository specificato dall'alias, dal numero o dall'URI.\n"
 "\n"
 "  Opzioni del comando:\n"
 "    --loose-auth   Ignora dati di autenticazione dell'utente nell'URI\n"
 "    --loose-query   Ignora stringhe di query nell'URI\n"
 
-#: ../src/Zypper.cc:1348
+#: ../src/Zypper.cc:1354
 msgid ""
 "renamerepo (nr) [options] <alias|#|URI> <new-alias>\n"
 "\n"
@@ -3260,35 +3322,14 @@ msgid ""
 msgstr ""
 "renamerepo (nr) [options] <alias|#|URI> <nuovo-alias>\n"
 "\n"
-"Assegna un nuovo alias alla sorgente di installazione specificata dall'alias, dal numero o dall'URI.\n"
+"Assegna un nuovo alias al repository specificato dall'alias, dal numero o dall'URI.\n"
 "\n"
 "Questo comando non ha opzioni aggiuntive.\n"
 
 #. translators: %s is "--all|--remote|--local|--medium-type"
 #. and "--all, --remote, --local, --medium-type"
-#: ../src/Zypper.cc:1379
-#, fuzzy, c-format
-#| msgid ""
-#| "modifyrepo (mr) <options> <alias|#|URI>\n"
-#| "modifyrepo (mr) <options> <%s>\n"
-#| "\n"
-#| "Modify properties of repositories specified by alias, number, or URI, or by the\n"
-#| "'%s' aggregate options.\n"
-#| "\n"
-#| "  Command options:\n"
-#| "-d, --disable             Disable the repository (but don't remove it).\n"
-#| "-e, --enable              Enable a disabled repository.\n"
-#| "-r, --refresh             Enable auto-refresh of the repository.\n"
-#| "-R, --no-refresh          Disable auto-refresh of the repository.\n"
-#| "-n, --name                Set a descriptive name for the repository.\n"
-#| "-p, --priority <1-99>     Set priority of the repository.\n"
-#| "-k, --keep-packages       Enable RPM files caching.\n"
-#| "-K, --no-keep-packages    Disable RPM files caching.\n"
-#| "\n"
-#| "-a, --all                 Apply changes to all repositories.\n"
-#| "-l, --local               Apply changes to all local repositories.\n"
-#| "-t, --remote              Apply changes to all remote repositories.\n"
-#| "-m, --medium-type <type>  Apply changes to repositories of specified type.\n"
+#: ../src/Zypper.cc:1385
+#, c-format
 msgid ""
 "modifyrepo (mr) <options> <alias|#|URI> ...\n"
 "modifyrepo (mr) <options> <%s>\n"
@@ -3311,29 +3352,28 @@ msgid ""
 "-t, --remote              Apply changes to all remote repositories.\n"
 "-m, --medium-type <type>  Apply changes to repositories of specified type.\n"
 msgstr ""
-"modifyrepo (mr) <opzioni> <alias|#|URI>\n"
+"modifyrepo (mr) <opzioni> <alias|#|URI>... \n"
 "modifyrepo (mr) <opzioni> <%s>\n"
 "\n"
-"Modifica le proprietà della sorgente di installazione specificata dall'alias, dal numero, dall'URI o attraverso\n"
+"Modifica le proprietà del repository specificata dall'alias, dal numero, dall'URI o attraverso\n"
 "le opzioni aggregate '%s'.\n"
 "\n"
 "  Opzioni del comando:\n"
-"-d, --disable             Disabilita la sorgente di installazione (ma non la rimuove)\n"
-"-e, --enable             Abilita una sorgente di installazione disabilitata\n"
-"-r, --refresh             Abilita aggiornamento automatico della sorgente di installazione\n"
-"-R, --no-fresh            Disabilita aggiornamento automatico della sorgente di installazione\n"
-"-n, --name                Imposta un nome descrittivo per la sorgente di installazione.\n"
-"-p, --priority <1-99>     Imposta la priorità della sorgente di installazione.\n"
+"-d, --disable             Disabilita il repository (ma non la rimuove)\n"
+"-e, --enable             Abilita un repository disabilitata\n"
+"-r, --refresh             Abilita aggiornamento automatico del repository\n"
+"-R, --no-fresh            Disabilita aggiornamento automatico del repository\n"
+"-n, --name                Imposta un nome descrittivo per il repository.\n"
+"-p, --priority <intero>  Imposta la priorità del repository.\n"
 "-k, --keep-packages       Abilita la cache dei file RPM.\n"
 "-K, --no-keep-packages    Disabilita la cache dei file RPM.\n"
 "\n"
-"-a, --all                 Applica cambiamenti a tutte le sorgenti di installazione.\n"
-"-l, --local               Applica cambiamenti a tutte le sorgenti di installazione locali.\n"
-"-t, --remote              Applica cambiamenti a tutte le sorgenti di installazione remote.\n"
-"-m, --medium-type <tipo>  Applica i cambiamenti alle sorgenti di installazione specificate dal tipo.\n"
-"-m, --medium-type <tipo>  Applica cambiamenti a tutte le sorgenti di installazione del tipo specificato.\n"
+"-a, --all                 Applica cambiamenti a tutte i repository.\n"
+"-l, --local               Applica cambiamenti a tutte i repository locali.\n"
+"-t, --remote              Applica cambiamenti a tutte i repository remote.\n"
+"-m, --medium-type <tipo>  Applica cambiamenti a tutti i repository del tipo specificato.\n"
 
-#: ../src/Zypper.cc:1419
+#: ../src/Zypper.cc:1425
 msgid ""
 "refresh (ref) [alias|#|URI] ...\n"
 "\n"
@@ -3350,7 +3390,7 @@ msgid ""
 msgstr ""
 "refresh (ref) [alias|#|URI] ...\n"
 "\n"
-"Aggiorna le sorgenti di installazione specificate dall'alias, dal numero o dall'URI. Se nessuna è stata specificata, tutte le sorgenti di installazione saranno aggiornate\n"
+"Aggiorna i repository specificati dall'alias, dal numero o dall'URI. Se non ne viene specificato nessuno, saranno aggiornati tutti i repository\n"
 "\n"
 "  Opzioni del comando:\n"
 "-f, --force             Forza un aggiornamento completo\n"
@@ -3358,21 +3398,10 @@ msgstr ""
 "-d, --force-download    Forza il download dei metadati\n"
 "-B, --build-only        Costruisce solo il database senza scaricare i metadati\n"
 "-D, --download-only     Scarica solo i metadati senza costruire il database\n"
-"-r, --repo <alias|#|URI> Aggiorna solamente la sorgente d'installazione specificata.\n"
-"-s, --services           Aggiorna anche i servizi prima di aggiornare le sorgenti di installazione.\n"
+"-r, --repo <alias|#|URI> Aggiorna solamente il repository specificato.\n"
+"-s, --services           Aggiorna anche i servizi prima di aggiornare i repository.\n"
 
-#: ../src/Zypper.cc:1448
-#, fuzzy
-#| msgid ""
-#| "clean [alias|#|URI] ...\n"
-#| "\n"
-#| "Clean local caches.\n"
-#| "\n"
-#| "  Command options:\n"
-#| "-r, --repo <alias|#|URI> Clean only specified repositories.\n"
-#| "-m, --metadata           Clean metadata cache.\n"
-#| "-M, --raw-metadata       Clean raw metadata cache.\n"
-#| "-a, --all                Clean both metadata and package caches.\n"
+#: ../src/Zypper.cc:1454
 msgid ""
 "clean (cc) [alias|#|URI] ...\n"
 "\n"
@@ -3390,13 +3419,13 @@ msgstr ""
 "\n"
 "  Opzioni del comando:\n"
 "-r, --repo <alias|#|URI> Pulisce solamente la sorgente d'installazione specificata.\n"
-"-m, --metadata\t\tPulisce la cache del metadata.\n"
+"-m, --metadata           Pulisce la cache del metadata.\n"
 "-M, --raw-metadata       Pulisce la cache del metadata raw .\n"
-"-a, --all\t\tPulisce entrambe le cache, del metadata e del pacchetto.\n"
+"-a, --all                Pulisce entrambe le cache, del metadata e del pacchetto.\n"
 
 #. TranslatorExplanation the first %s = "package, patch, pattern, product"
 #. and the second %s = "patch"
-#: ../src/Zypper.cc:1477
+#: ../src/Zypper.cc:1483
 #, c-format
 msgid ""
 "list-updates (lu) [options]\n"
@@ -3421,7 +3450,7 @@ msgstr ""
 "  Opzioni del comando:\n"
 "-t, --type <tipo>   Tipo di risolubile (%s). \n"
 "                          Predefinito: %s\n"
-"-r, --repo <alias|#|URI>  Elenca solo gli aggiornamenti dalla sorgente di installazione specificata.\n"
+"-r, --repo <alias|#|URI>  Elenca solo gli aggiornamenti dal repository specificato.\n"
 "    --best-effort           Usa l'approccio 'best effort' per aggiornare.\n"
 "                               Gli aggiornamenti a versioni meno recenti\n"
 "                                 sono anche accettabili.\n"
@@ -3431,8 +3460,8 @@ msgstr ""
 
 #. TranslatorExplanation the first %s = "package, patch, pattern, product"
 #. and the second %s = "patch"
-#: ../src/Zypper.cc:1529
-#, fuzzy, c-format
+#: ../src/Zypper.cc:1535
+#, c-format
 #| msgid ""
 #| "update (up) [options] ...\n"
 #| "\n"
@@ -3440,23 +3469,28 @@ msgstr ""
 #| "\n"
 #| "  Command options:\n"
 #| "\n"
-#| "-t, --type <type>               Type of package (%s).\n"
-#| "                                Default: %s.\n"
-#| "-r, --repo <alias|#|URI>        Limit updates to the specified repository.\n"
-#| "    --skip-interactive          Skip interactive updates.\n"
-#| "-l, --auto-agree-with-licenses  Automatically say 'yes' to third party license\n"
-#| "                                confirmation prompt.\n"
-#| "                                See man zypper for more details.\n"
-#| "    --best-effort               Do a 'best effort' approach to update. Updates\n"
-#| "                                to a lower than the latest version are\n"
-#| "                                also acceptable.\n"
-#| "    --debug-solver              Create solver test case for debugging.\n"
-#| "    --no-recommends             Do not install recommended packages, only required.\n"
-#| "-R, --no-force-resolution       Do not force the solver to find solution, let it ask.\n"
-#| "    --force-resolution          Force the solver to find a solution (even an agressive).\n"
-#| "-D, --dry-run                   Test the update, do not actually update.\n"
+#| "-t, --type <type>           Type of package (%s).\n"
+#| "                            Default: %s.\n"
+#| "-r, --repo <alias|#|URI>    Load only the specified repository.\n"
+#| "    --skip-interactive      Skip interactive updates.\n"
+#| "-l, --auto-agree-with-licenses\n"
+#| "                            Automatically say 'yes' to third party license\n"
+#| "                            confirmation prompt.\n"
+#| "                            See man zypper for more details.\n"
+#| "    --best-effort           Do a 'best effort' approach to update. Updates\n"
+#| "                            to a lower than the latest version are\n"
+#| "                            also acceptable.\n"
+#| "    --debug-solver          Create solver test case for debugging.\n"
+#| "    --no-recommends         Do not install recommended packages, only required.\n"
+#| "    --recommends            Install also recommended packages in addition\n"
+#| "                            to the required.\n"
+#| "-R, --no-force-resolution   Do not force the solver to find solution,\n"
+#| "                            let it ask.\n"
+#| "    --force-resolution      Force the solver to find a solution (even\n"
+#| "                            an agressive).\n"
+#| "-D, --dry-run               Test the update, do not actually update.\n"
 msgid ""
-"update (up) [options] ...\n"
+"update (up) [options] [packagename] ...\n"
 "\n"
 "Update all or specified installed packages with newer versions, if possible.\n"
 "\n"
@@ -3482,6 +3516,7 @@ msgid ""
 "    --force-resolution      Force the solver to find a solution (even\n"
 "                            an agressive).\n"
 "-D, --dry-run               Test the update, do not actually update.\n"
+"-d, --download-only         Only download the packages, do not install.\n"
 msgstr ""
 "update (up) [opzioni] ...\n"
 "\n"
@@ -3489,23 +3524,29 @@ msgstr ""
 "\n"
 "  Opzioni del comando:\n"
 "\n"
-"-t, --type <tipo>               Tipo di risolubile (%s)\n"
-"                                Predefinito: %s\n"
-"-r, --repo <alias|#|URI>          Limita gli aggiornamenti alle sorgenti di installazione specificate dall'alias.\n"
-"    --skip-interactive          Salta aggiornamenti interattivi\n"
-"-l, --auto-agree-with-licenses  Risponde automaticamente 'si' al prompt di conferma\n"
-"                                delle licenze di terze parti.\n"
-"                                Vedere man zypper per maggiori dettagli.\n"
-"    --best-effort               Usa l'approccio 'best effort' per aggiornare.\n"
-"                                  Aggiornamenti con una versione inferiore sono\n"
-"                                   anche accettabili.\n"
-"    --debug-solver              Creao un test risolutore per il debug.\n"
-"-R, --no-force-resolution       Non forzare il risolutore a trovare un soluzione, lascia chiedere.\n"
-"    --force-resolution            Forza il risolutore a trovare una soluzione (anche aggressiva)\n"
-"-D, --dry-run                   Testa un aggiornamento, nessun aggiornamento verrà eseguito\n"
+"-t, --type <tipo>           Tipo di pacchetto (%s).\n"
+"                            Predefinito: %s.\n"
+"-r, --repo <alias|#|URI>    Carica solamente in repository specificato.\n"
+"    --skip-interactive      Salta aggiornamenti interattivi.\n"
+"-l, --auto-agree-with-licenses\n"
+"                            Risponde automaticamente 'sì' al prompt di conferma\n"
+"                            delle licenze di terze parti.\n"
+"                            vedere man zypper per maggiori dettagli.\n"
+"    --best-effort           Usa l'approccio 'best effort' per aggiornare. Gli aggiornamenti\n"
+"                            and una versione inferiore sono\n"
+"                            anche accettabili.\n"
+"    --debug-solver          Crea un test risolutore per il debug.\n"
+"    --no-recommends         Non installa i pacchetti raccomandati, solo quelli richiesti.\n"
+"    --recommends            Installa anche i pacchetti raccomandati oltre\n"
+"                            a quelli richiesti.\n"
+"-R, --no-force-resolution   Non forzare il risolutore a trovare una soluzione,\n"
+"                            lascia chiedere.\n"
+"    --force-resolution      Forza il risolutore a trovare una soluzione (anche\n"
+"                            se agressiva).\n"
+"-D, --dry-run               Testa un aggiornamento, nessun aggiornamento verrà eseguito.\n"
+"-d, --download-only         Scarica solamente i pacchett senza installarli.\n"
 
-#: ../src/Zypper.cc:1574
-#, fuzzy
+#: ../src/Zypper.cc:1585
 #| msgid ""
 #| "patch [options]\n"
 #| "\n"
@@ -3513,13 +3554,17 @@ msgstr ""
 #| "\n"
 #| "  Command options:\n"
 #| "\n"
-#| "-r, --repo <alias|#|URI>        Work only with specified repository.\n"
-#| "    --skip-interactive          Skip interactive patches.\n"
-#| "-l, --auto-agree-with-licenses  Automatically say 'yes' to third party license\n"
-#| "                                confirmation prompt.\n"
-#| "                                See man zypper for more details.\n"
-#| "    --debug-solver              Create solver test case for debugging.\n"
-#| "-D, --dry-run                   Test the update, do not actually update.\n"
+#| "-r, --repo <alias|#|URI>    Load only the specified repository.\n"
+#| "    --skip-interactive      Skip interactive patches.\n"
+#| "-l, --auto-agree-with-licenses\n"
+#| "                            Automatically say 'yes' to third party license\n"
+#| "                            confirmation prompt.\n"
+#| "                            See man zypper for more details.\n"
+#| "    --debug-solver          Create solver test case for debugging.\n"
+#| "    --no-recommends         Do not install recommended packages, only required.\n"
+#| "    --recommends            Install also recommended packages in addition\n"
+#| "                            to the required.\n"
+#| "-D, --dry-run               Test the update, do not actually update.\n"
 msgid ""
 "patch [options]\n"
 "\n"
@@ -3527,17 +3572,20 @@ msgid ""
 "\n"
 "  Command options:\n"
 "\n"
-"-r, --repo <alias|#|URI>    Load only the specified repository.\n"
 "    --skip-interactive      Skip interactive patches.\n"
 "-l, --auto-agree-with-licenses\n"
 "                            Automatically say 'yes' to third party license\n"
 "                            confirmation prompt.\n"
 "                            See man zypper for more details.\n"
+"-b, --bugzilla #            Install patch fixing the specified bugzilla issue.\n"
+"    --cve #                 Install patch fixing the specified CVE issue.\n"
 "    --debug-solver          Create solver test case for debugging.\n"
 "    --no-recommends         Do not install recommended packages, only required.\n"
 "    --recommends            Install also recommended packages in addition\n"
 "                            to the required.\n"
+"-r, --repo <alias|#|URI>    Load only the specified repository.\n"
 "-D, --dry-run               Test the update, do not actually update.\n"
+"-d, --download-only         Only download the packages, do not install.\n"
 msgstr ""
 "patch [opzioni]\n"
 "\n"
@@ -3545,32 +3593,44 @@ msgstr ""
 "\n"
 "  Opzioni del comando:\n"
 "\n"
-"-r, --repo <alias|#|URI>              Lavoro esclusivamente con la sorgente di installazione specificata.\n"
-"    --skip-interactive          Salta le patch interattive.\n"
-"-l, --auto-agree-with-licenses  Risponde automaticamente 'si' al prompt di conferma\n"
-"                                delle licenze di terze parti.\n"
-"                                Vedere man zypper per maggiori dettagli.\n"
-"    --debug-solver              Crea un caso di prova per il debug.\n"
-" -D, --dry-run                   Testa un aggiornamento, nessun aggiornamento reale\n"
+"-r, --repo <alias|#|URI>    Carica solo il repository specificato.\n"
+"    --skip-interactive      Salta le patch interattive.\n"
+"-l, --auto-agree-with-licenses\n"
+"                            Risponde automaticamente 'sì' al prompt di conferma\n"
+"                            delle licenze di terze parti.\n"
+"                            Vedere man zypper per maggiori dettagli.\n"
+"    --debug-solver          Crea un caso di prova per il debug.\n"
+"    --no-recommends         Non installa i pacchetti raccomandati, solo quelli richiesti.\n"
+"    --recommends            Installa anche i pacchetti raccomandati, oltre\n"
+"                            a quelli richiesti.\n"
+"-D, --dry-run               Testa un aggiornamento, nessun aggiornamento reale\n"
+"-d, --download-only         Scarica solamente i pacchett senza installarli.\n"
 
-#: ../src/Zypper.cc:1604
+#: ../src/Zypper.cc:1623
 msgid ""
 "list-patches (lp) [options]\n"
 "\n"
 "List all available needed patches.\n"
 "\n"
 "  Command options:\n"
-"-r, --repo <alias|#|URI>        List only patches from the specified repository.\n"
+"-b, --bugzilla[=#]         List needed patches for Bugzilla issues.\n"
+"    --cve[=#]              List needed patches for CVE issues.\n"
+"    --issues[=string]      Look for issues matching the specified string.\n"
+"-a, --all                  List all patches, not only the needed ones.\n"
+"-r, --repo <alias|#|URI>   List only patches from the specified repository.\n"
 msgstr ""
 "list-patches (lp) [opzioni]\n"
 "\n"
-"Elenca le patch necessarie disponibili.\n"
+"Elenca tutte le patch necessarie.\n"
 "\n"
 "  Opzioni del comando:\n"
-"-r, --repo <alias|#|URI>  Elenca solo le patch presenti nella sorgente di installazione specificata.\n"
+"-b, --bugzilla[=#]         Elenca le patch necessarie per i difetti dal Bugzilla.\n"
+"    --cve[=#]              Elenca le patch necessarie per i difetti CVE.\n"
+"    --issues[=stringa]      Controlla i difetti che corrispondo alla stringa.\n"
+"-a, --all                  Elenca tutte le patch, non solo quelle necessarie.\n"
+"-r, --repo <alias|#|URI>   Elenca solo le patch disponibili nel repository specificato.\n"
 
-#: ../src/Zypper.cc:1630
-#, fuzzy
+#: ../src/Zypper.cc:1654
 #| msgid ""
 #| "dist-upgrade (dup) [options]\n"
 #| "\n"
@@ -3578,12 +3638,16 @@ msgstr ""
 #| "\n"
 #| "  Command options:\n"
 #| "\n"
-#| "-r, --repo <alias|#|URI>        Limit the upgrade to the specified repository.\n"
-#| "    --no-recommends             Do not install recommended packages, only required.\n"
-#| "-l, --auto-agree-with-licenses  Automatically say 'yes' to third party license confirmation prompt.\n"
-#| "                                See man zypper for more details.\n"
-#| "    --debug-solver              Create solver test case for debugging\n"
-#| "-D, --dry-run                   Test the upgrade, do not actually upgrade\n"
+#| "-r, --repo <alias|#|URI>    Load only the specified repository.\n"
+#| "-l, --auto-agree-with-licenses\n"
+#| "                            Automatically say 'yes' to third party license\n"
+#| "                            confirmation prompt.\n"
+#| "                            See man zypper for more details.\n"
+#| "    --debug-solver          Create solver test case for debugging\n"
+#| "    --no-recommends         Do not install recommended packages, only required.\n"
+#| "    --recommends            Install also recommended packages in addition\n"
+#| "                            to the required.\n"
+#| "-D, --dry-run               Test the upgrade, do not actually upgrade\n"
 msgid ""
 "dist-upgrade (dup) [options]\n"
 "\n"
@@ -3601,21 +3665,27 @@ msgid ""
 "    --recommends            Install also recommended packages in addition\n"
 "                            to the required.\n"
 "-D, --dry-run               Test the upgrade, do not actually upgrade\n"
+"-d, --download-only         Only download the packages, do not install.\n"
 msgstr ""
 "dist-upgrade (dup) [opzioni]\n"
 "\n"
-"Avbvia l'aggiornamento della distribuzione\n"
+"Avvia l'aggiornamento della distribuzione\n"
 "\n"
 "  Opzioni del comando:\n"
 "\n"
-"-r, --repo <alias|#|URI>              Limita gli aggiornamenti alla sorgente di installazione specificata.\n"
-"    -no-recommends                   Non installare i pacchetti raccomandati, solo quelli richiesti\n"
-"-l, --auto-agree-with-licenses  Accetta automaticamente le licenze dei pacchetti di terze parti.\n"
-"                                Vedere 'man zypper' per ulteriori dettagli.\n"
-"    --debug-solver              Crea un caso di prova per il debug del risolutore.\n"
-" -D, --dry-run                   Testa un aggiornamento, nessun aggiornamento reale\n"
+"-r, --repo <alias|#|URI>    Limita gli aggiornamenti alil repository specificata.\n"
+"-l, --auto-agree-with-licenses\n"
+"                            Risponde automaticamente 'sì' al prompt di conferma\n"
+"                            delle licenze di terze parti.\n"
+"                            Vedere man zypper per maggiori dettagli.\n"
+"    --debug-solver          Crea un caso di prova per il debug.\n"
+"    --no-recommends         Non installa i pacchetti raccomandati, solo quelli richiesti.\n"
+"    --recommends            Installa anche i pacchetti raccomandati, oltre\n"
+"                            a quelli richiesti.\n"
+"-D, --dry-run               Testa un aggiornamento, nessun aggiornamento reale\n"
+"-d, --download-only         Scarica solamente i pacchett senza installarli.\n"
 
-#: ../src/Zypper.cc:1676
+#: ../src/Zypper.cc:1701
 msgid ""
 "search (se) [options] [querystring] ...\n"
 "\n"
@@ -3655,15 +3725,15 @@ msgstr ""
 "-i, --installed-only       Mosra solo i pacchetti già installati.\n"
 "-u, --uninstalled-only     Mostra solo i pacchetti non attualmente installati.\n"
 "-t, --type <tipo>          Mostra solo i pacchetti del tipo specificato.\n"
-"-r, --repo <alias|#|URI>   Cerca solo nella sorgente di installazione con l'alias specificato.\n"
+"-r, --repo <alias|#|URI>   Cerca solo nel repository specificato.\n"
 "     --sort-by-name        Ordina i pacchetti per nome (predefinito).\n"
-"     --sort-by-repo        Ordina i pacchetti per sorgente di installazione.\n"
-"-s, --details              Mostra ogni versione disponibile in ogni sorgente di installazione\n"
+"     --sort-by-repo        Ordina i pacchetti per repository.\n"
+"-s, --details              Mostra ogni versione disponibile in ogni repository\n"
 "                           in una linea separata.\n"
-" \n"
-" Nelle stringhe di ricerca è possibile utilizzare i caratteri jolly * e ?.\n"
+"\n"
+"Nelle stringhe di ricerca è possibile utilizzare i caratteri jolly * e ?.\n"
 
-#: ../src/Zypper.cc:1713
+#: ../src/Zypper.cc:1738
 msgid ""
 "patch-check (pchk) [options]\n"
 "\n"
@@ -3679,9 +3749,9 @@ msgstr ""
 "\n"
 "  Opzioni del comando:\n"
 "\n"
-"-r, --repo <alias|#|URI>  Verifica gli aggiornamenti solo nella sorgente di installazione specificata.\n"
+"-r, --repo <alias|#|URI>  Verifica gli aggiornamenti solo nel repository specificato.\n"
 
-#: ../src/Zypper.cc:1735
+#: ../src/Zypper.cc:1760
 msgid ""
 "patches (pch) [repository] ...\n"
 "\n"
@@ -3691,15 +3761,15 @@ msgid ""
 "\n"
 "-r, --repo <alias|#|URI>  Just another means to specify repository.\n"
 msgstr ""
-"patches (pch) [repository]\n"
+"patches (pch) [repository] ...\n"
 "\n"
-"Elenca gli aggiornamenti disponibili nella sorgente di installazione specificata\n"
+"Elenca gli aggiornamenti disponibili nel repository specificato\n"
 "\n"
 "  Opzioni del comando:\n"
 "\n"
-"-r, --repo <alias|#|URI>  Solo un'altro metodo per specificare una sorgente di installazione.\n"
+"-r, --repo <alias|#|URI>  Solo un altro metodo per specificare un repository.\n"
 
-#: ../src/Zypper.cc:1762
+#: ../src/Zypper.cc:1787
 msgid ""
 "packages (pa) [options] [repository] ...\n"
 "\n"
@@ -3713,19 +3783,19 @@ msgid ""
 "-N, --sort-by-name        Sort the list by package name.\n"
 "-R, --sort-by-repo        Sort the list by repository.\n"
 msgstr ""
-"packages (pa) [opzioni] [sorgente di installazione] ...\n"
+"packages (pa) [opzioni] [repository] ...\n"
 "\n"
-"Elenca tutti i pacchetti disponibili nelle sorgenti di installazione specificate.\n"
+"Elenca tutti i pacchetti disponibili nei repository specificati.\n"
 "\n"
 "  Opzioni comando:\n"
 "\n"
-"-r, --repo <alias|#|URI>  Semplicemente un'altro modo per specificare una sorgente di installazione.\n"
+"-r, --repo <alias|#|URI>  Semplicemente un altro modo per specificare un repository.\n"
 "-i, --installed-only      Mostra solo i pacchetti installati.\n"
 "-u, --uninstalled-only    Mostra solo i pacchetti che non sono installati.\n"
 "-N, --sort-by-name        Ordina la lista per nome.\n"
-"-R, --sort-by-repo        Ordina la lista per sorgente di installazione.\n"
+"-R, --sort-by-repo        Ordina la lista per repository.\n"
 
-#: ../src/Zypper.cc:1790
+#: ../src/Zypper.cc:1815
 msgid ""
 "patterns (pt) [options] [repository] ...\n"
 "\n"
@@ -3737,17 +3807,17 @@ msgid ""
 "-i, --installed-only      Show only installed patterns.\n"
 "-u, --uninstalled-only    Show only patterns which are not installed.\n"
 msgstr ""
-"patterns (pt) [opzioni] [sorgenti di installazione] ...\n"
+"patterns (pt) [opzioni] [repository] ...\n"
 "\n"
-"Elenca tutti i modelli disponibili in un sorgente di installazione specificata.\n"
+"Elenca tutti i modelli disponibili in un repository specificato.\n"
 "\n"
 "  Opzioni comando:\n"
 "\n"
-"-r, --repo <alias|#|URI>  Un'altro modo per specificare una sorgente di installazione.\n"
+"-r, --repo <alias|#|URI>  Un altro modo per specificare un repository.\n"
 "-i, --installed-only      Mostra solo i modelli installati.\n"
 "-u, --uninstalled-only    Mostra solo i modelli che non sono installati.\n"
 
-#: ../src/Zypper.cc:1816
+#: ../src/Zypper.cc:1841
 msgid ""
 "products (pd) [options] [repository] ...\n"
 "\n"
@@ -3759,27 +3829,18 @@ msgid ""
 "-i, --installed-only      Show only installed products.\n"
 "-u, --uninstalled-only    Show only products which are not installed.\n"
 msgstr ""
-"products (pd) [opzioni] [sorgente di installazione] ...\n"
+"products (pd) [opzioni] [repository] ...\n"
 "\n"
-"Elenca tutti i prodotti disponibili nelle sorgenti di installazione specificate.\n"
+"Elenca tutti i prodotti disponibili nei repository specificati.\n"
 "\n"
 "  Opzioni comando:\n"
 "\n"
-"-r, --repo <alias|#|URI>  Solo un'altro modo per specificare una sorgente di installazione.\n"
+"-r, --repo <alias|#|URI>  Solo un altro modo per specificare un repository.\n"
 "-i, --installed-only      Mostra solo i prodotti installati.\n"
 "-u, --uninstalled-only    Mostra solo i prodotti che non sono installatti.\n"
 
-#: ../src/Zypper.cc:1843
-#, fuzzy, c-format
-#| msgid ""
-#| "info (if) [options] <name> ...\n"
-#| "\n"
-#| "Show detailed information for specified packages.\n"
-#| "\n"
-#| "  Command options:\n"
-#| "-r, --repo <alias|#|URI>  Work only with the specified repository.\n"
-#| "-t, --type <type>         Type of package (%s).\n"
-#| "                          Default: %s."
+#: ../src/Zypper.cc:1868
+#, c-format
 msgid ""
 "info (if) [options] <name> ...\n"
 "\n"
@@ -3797,11 +3858,13 @@ msgstr ""
 "Mostra informazioni dettagliate per i pacchetti specificati\n"
 "\n"
 "  Opzioni comando:\n"
-"-r, --repo <alias|#|URI>  Lavora solo con la sorgente di installazione specificata.\n"
+"-r, --repo <alias|#|URI>  Lavora solo con il repository specificato.\n"
 "-t, --type <tipo>         Tipi di pacchetti (%s).\n"
-"                          Predefinito: %s."
+"                         Predefinito: %s.\n"
+"    --requires            Mostra anche i richiesti ed i 'pre-richiesti'.\n"
+"    --recommends          Mostra anche i raccomandati."
 
-#: ../src/Zypper.cc:1868
+#: ../src/Zypper.cc:1893
 #, c-format
 msgid ""
 "patch-info <patchname> ...\n"
@@ -3816,7 +3879,7 @@ msgstr ""
 "\n"
 "Questo è un alias rug-compatibile per '%s.\n"
 
-#: ../src/Zypper.cc:1887
+#: ../src/Zypper.cc:1912
 #, c-format
 msgid ""
 "pattern-info <pattern_name> ...\n"
@@ -3831,7 +3894,7 @@ msgstr ""
 "\n"
 "Questo è un alias rug-compatibile per '%s.\n"
 
-#: ../src/Zypper.cc:1906
+#: ../src/Zypper.cc:1931
 #, c-format
 msgid ""
 "product-info <product_name> ...\n"
@@ -3846,7 +3909,7 @@ msgstr ""
 "\n"
 "Questo è un alias rug-compatibile per '%s.\n"
 
-#: ../src/Zypper.cc:1923
+#: ../src/Zypper.cc:1948
 msgid ""
 "what-provides (wp) <capability>\n"
 "\n"
@@ -3860,7 +3923,7 @@ msgstr ""
 "\n"
 "Questo comando non ha ulteriori opzioni.\n"
 
-#: ../src/Zypper.cc:1974
+#: ../src/Zypper.cc:1999
 msgid ""
 "moo\n"
 "\n"
@@ -3874,7 +3937,7 @@ msgstr ""
 "\n"
 "Questo comando non ha opzioni aggiuntive.\n"
 
-#: ../src/Zypper.cc:1996
+#: ../src/Zypper.cc:2021
 #, c-format
 msgid ""
 "addlock (al) [options] <packagename> ...\n"
@@ -3891,11 +3954,11 @@ msgstr ""
 "Aggiungi un blocco ad un p'acchetto. Specifica i pacchetti da bloccare con il nome esatto o con un modello globale usando i caratteri giolli ? e *.\n"
 "\n"
 "  Opzioni comando:\n"
-"-r, --repo <alias|#|URI>  Restringi il blocco alla sorgente di istallazione specificata.\n"
+"-r, --repo <alias|#|URI>  Restringi il blocco al repository specificato.\n"
 "-t, --type <type>         Tipi di pacchetto (%s).\n"
 "                          Predefinito: %s.\n"
 
-#: ../src/Zypper.cc:2022
+#: ../src/Zypper.cc:2047
 #, c-format
 msgid ""
 "removelock (rl) [options] <lock-number|packagename> ...\n"
@@ -3910,9 +3973,9 @@ msgstr ""
 "Rimuovi un blocco ad un pacchetto. Specifica il blocco da rimuovere usando il suo numero ottenuto con '%s'.\n"
 "\n"
 "  Opzioni comando:\n"
-"-r, --repo <alias|#|URI>  Rimuove solo i blocchi della sorgente di installazione specificata.\n"
+"-r, --repo <alias|#|URI>  Rimuove solo i blocchi dal repository specificato.\n"
 
-#: ../src/Zypper.cc:2042
+#: ../src/Zypper.cc:2067
 msgid ""
 "locks (ll)\n"
 "\n"
@@ -3926,7 +3989,7 @@ msgstr ""
 "\n"
 "Questo comando non ha ulteriori opzioni.\n"
 
-#: ../src/Zypper.cc:2062
+#: ../src/Zypper.cc:2087
 msgid ""
 "cleanlocks (cl)\n"
 "\n"
@@ -3936,8 +3999,15 @@ msgid ""
 "-d, --only-duplicates     Clean only duplicate locks.\n"
 "-e, --only-empty          Clean only locks which doesn't lock anything.\n"
 msgstr ""
+"cleanlocks (cl)\n"
+"\n"
+"Rimuove i blocchi inutili.\n"
+"\n"
+"  Opzioni del comando:\n"
+"-d, --only-duplicates     Elimina solo i blocchi duplicati.\n"
+"-e, --only-empty          Elimina solo i blocchi che non bloccano nulla.\n"
 
-#: ../src/Zypper.cc:2082
+#: ../src/Zypper.cc:2107
 msgid ""
 "targetos (tos)\n"
 "\n"
@@ -3951,7 +4021,7 @@ msgstr ""
 "\n"
 "Questo comando non ha opzioni aggiuntive.\n"
 
-#: ../src/Zypper.cc:2101
+#: ../src/Zypper.cc:2126
 msgid ""
 "versioncmp (vcmp) <version1> <version2>\n"
 "\n"
@@ -3967,14 +4037,7 @@ msgstr ""
 "  Opzioni comando:\n"
 "-m, --match  Mantiene il numero di rilascio mancante per ogni rilascio.\n"
 
-#: ../src/Zypper.cc:2120
-#, fuzzy
-#| msgid ""
-#| "licenses\n"
-#| "\n"
-#| "Report Licenses and EULA of currently installed software packages.\n"
-#| "\n"
-#| "This command has no additional options.\n"
+#: ../src/Zypper.cc:2145
 msgid ""
 "licenses\n"
 "\n"
@@ -3984,11 +4047,31 @@ msgid ""
 msgstr ""
 "licenze\n"
 "\n"
-"Mostra Licenze ed EULA dei pacchetti software correntemente installati.\n"
+"Mostra Licenze e le EULA dei pacchetti software attualmente installati.\n"
 "\n"
 "Questo comando non ha opzioni addizionali.\n"
 
-#: ../src/Zypper.cc:2137
+#: ../src/Zypper.cc:2164
+#| msgid ""
+#| "locks (ll)\n"
+#| "\n"
+#| "List current package locks.\n"
+#| "\n"
+#| "This command has no additional options.\n"
+msgid ""
+"ps\n"
+"\n"
+"List running processes which use files deleted by recent upgrades.\n"
+"\n"
+"This command has no additional options.\n"
+msgstr ""
+"ps\n"
+"\n"
+"Elenca i processi in corso che usano file cancellati da un recente aggiornamento.\n"
+"\n"
+"Questo comando non ha ulteriori opzioni.\n"
+
+#: ../src/Zypper.cc:2182
 msgid ""
 "quit (exit, ^D)\n"
 "\n"
@@ -4002,7 +4085,7 @@ msgstr ""
 "\n"
 "Questo comando non ha opzioni aggiuntive.\n"
 
-#: ../src/Zypper.cc:2154
+#: ../src/Zypper.cc:2199
 msgid ""
 "shell (sh)\n"
 "\n"
@@ -4017,7 +4100,7 @@ msgstr ""
 "Questo comando non ha opzioni aggiuntive.\n"
 
 #. translators: this is just a rug-compatiblity command
-#: ../src/Zypper.cc:2172
+#: ../src/Zypper.cc:2217
 msgid ""
 "service-types (st)\n"
 "\n"
@@ -4030,7 +4113,7 @@ msgstr ""
 #. trunslators: this is a rug-compatibility command (equivalent of
 #. 'zypper addrepo -t plaindir URI'). You can refer to rug's translations
 #. for how to translate specific terms like channel or service if in doubt.
-#: ../src/Zypper.cc:2210
+#: ../src/Zypper.cc:2255
 msgid ""
 "mount\n"
 "\n"
@@ -4047,10 +4130,10 @@ msgstr ""
 "\n"
 "  Opzioni comando:\n"
 "-a, --alias <alias>  Usa la stringa data come alias del servizio.\n"
-"-n, --name <name>    Usa la stringa data come nome del servizio.\n"
+"-n, --name <nome>    Usa la stringa data come nome del servizio.\n"
 "-r, --recurse        Scende nelle sottocartelle.\n"
 
-#: ../src/Zypper.cc:2241
+#: ../src/Zypper.cc:2286
 #, c-format
 msgid ""
 "patch-search [options] [querystring...]\n"
@@ -4062,7 +4145,7 @@ msgstr ""
 "Cerca le patch che hanno un riscontro con la stringa di ricerca data. Questo alias è rug-compatibile per '%s' Vedi la pagina del manuale di zypper per i dettagli.\n"
 
 #. translators: this is just a rug-compatiblity command
-#: ../src/Zypper.cc:2259
+#: ../src/Zypper.cc:2304
 msgid ""
 "ping [options]\n"
 "\n"
@@ -4074,66 +4157,43 @@ msgstr ""
 "Questo comando è una implementazione di prova che risponde sempre 0.\n"
 "È fornita per compatibilità con rug.\n"
 
-#: ../src/Zypper.cc:2273 ../src/Zypper.cc:4052
+#: ../src/Zypper.cc:2318 ../src/Zypper.cc:4132
 msgid "Unexpected program flow."
 msgstr "Flusso di programma inatteso."
 
-#: ../src/Zypper.cc:2300
+#: ../src/Zypper.cc:2345
 msgid "Non-option program arguments: "
 msgstr "Argomenti del programma senza opzioni: "
 
 #. TranslatorExplanation this is a hedgehog, paint another animal, if you want
-#: ../src/Zypper.cc:2364
+#: ../src/Zypper.cc:2409
 msgid ""
 "   \\\\\\\\\\\n"
 "  \\\\\\\\\\\\\\__o\n"
 "__\\\\\\\\\\\\\\'/_"
 msgstr ""
-"                 :#@@@@@@@@@@@@@@#;`   @@+,          \n"
-"              .@@@@@@@@@@@@@@@@@@@@@@#:@@@@@@#:      \n"
-"            :@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@#`   \n"
-"          ,@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@+  `@+  \n"
-"         @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@# @@# @` \n"
-"       :@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@`#@ .:@@ \n"
-"      #@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ @@#@;+@ \n"
-"     @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@+@@@:.@@@ @@,\n"
-"    @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ ;@@` . +@@@\n"
-"   +@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@:  +@@@@@@# \n"
-"  ,@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@;  .'+;  ,\n"
-"  @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@:` :+@,\n"
-" '@@@@@`     '@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@; \n"
-" @@@@;         @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@:   \n"
-"`@@@+  ,@@@@+   @@@@@@@@@@@@@@@@@@@@@.  `,::,`       \n"
-";@@@  ,@@@@@@@   @@@@@@'     #@@@@@@,                \n"
-"#@@@  @@@:,@@@@  ,@@@@'       ,@@@@@                 \n"
-"@@@@  @@    '@@'  @@@@         `@@@@`                \n"
-"'@@@  @@:    @@@  ;@@@          .@@@;                \n"
-",@@@  @@@@@, +@@   @@@           :@@@                \n"
-" @@@+  @@@@. @@@    ,@             #@,`:             \n"
-" '@@@:   `   @@@                     + `             \n"
-"  @@@@#    `@@@,                                     \n"
-"   @@@@@@@@@@@@                                      \n"
-"    #@@@@@@@@#                                       \n"
-"      +@@@@#` "
+"   \\\\\\\\\\\n"
+"  \\\\\\\\\\\\\\__o\n"
+"__\\\\\\\\\\\\\\'/_"
 
-#: ../src/Zypper.cc:2391
+#: ../src/Zypper.cc:2436
 msgid "Root privileges are required for refreshing services."
 msgstr "Per aggiornare i servizi sono necessari i privilegi dell'utente root."
 
-#: ../src/Zypper.cc:2418 ../src/Zypper.cc:2538 ../src/Zypper.cc:2765
+#: ../src/Zypper.cc:2463 ../src/Zypper.cc:2583 ../src/Zypper.cc:2810
 msgid "Root privileges are required for modifying system services."
 msgstr "Per modificare i servizi del sistema sono necessari i privilegi di utente root."
 
-#: ../src/Zypper.cc:2487
+#: ../src/Zypper.cc:2532
 msgid "Could not determine the type of the repository. Check if the specified URI points to a valid repository."
-msgstr "Impossibile determinare il tipo della sorgente di installazione. Per favore, verificare che l'URI punti ad una sorgente di installazione valida."
+msgstr "Impossibile determinare il tipo di repository. Per favore, verificare che l'URI punti ad un repository valido."
 
-#: ../src/Zypper.cc:2519
+#: ../src/Zypper.cc:2564
 #, c-format
 msgid "'%s' is not a valid service type."
 msgstr "'%s' non è un è un tipo di servizio valido."
 
-#: ../src/Zypper.cc:2521
+#: ../src/Zypper.cc:2566
 #, c-format
 msgid "See '%s' or '%s' to get a list of known service types."
 msgstr "Vedere '%s' o '%s' per ottenere una lista dei tipi di servizi conosciuti."
@@ -4142,223 +4202,209 @@ msgstr "Vedere '%s' o '%s' per ottenere una lista dei tipi di servizi conosciuti
 #. followed by ms command help text which will explain it
 #. translators: aggregate option is e.g. "--all". This message will be
 #. followed by mr command help text which will explain it
-#: ../src/Zypper.cc:2550 ../src/Zypper.cc:2919
+#: ../src/Zypper.cc:2595 ../src/Zypper.cc:2964
 msgid "Alias or an aggregate option is required."
 msgstr "È necessario un alias o un aggregatore."
 
-#: ../src/Zypper.cc:2584
+#: ../src/Zypper.cc:2629
 #, c-format
 msgid "Service '%s' not found."
 msgstr "Servizio '%s' non trovato."
 
-#: ../src/Zypper.cc:2620 ../src/Zypper.cc:2764 ../src/Zypper.cc:2850
-#: ../src/Zypper.cc:2906
+#: ../src/Zypper.cc:2665 ../src/Zypper.cc:2809 ../src/Zypper.cc:2895
+#: ../src/Zypper.cc:2951
 msgid "Root privileges are required for modifying system repositories."
-msgstr "Per modificare le sorgenti di installazione del sistema sono necessari i privilegi di utente root."
+msgstr "Per modificare i repository del sistema sono necessari i privilegi di utente root."
 
-#: ../src/Zypper.cc:2669 ../src/Zypper.cc:3032
+#: ../src/Zypper.cc:2714 ../src/Zypper.cc:3077
 msgid "Too few arguments."
 msgstr "Troppo pochi argomenti."
 
-#: ../src/Zypper.cc:2693
+#: ../src/Zypper.cc:2738
 msgid "If only one argument is used, it must be a URI pointing to a .repo file."
 msgstr "Se è usato solo un argomento, questo deve essere un URI che punta a un file .repo."
 
-#: ../src/Zypper.cc:2719
+#: ../src/Zypper.cc:2764
 #, c-format
 msgid "Cannot use %s together with %s. Using the %s setting."
 msgstr "Impossibile usare %s insieme con %s. Utilizzo le impostazioni di %s."
 
-#: ../src/Zypper.cc:2742
+#: ../src/Zypper.cc:2787
 msgid "Specified type is not a valid repository type:"
-msgstr "Il tipo specificato non è un tipo valido di sorgente di installazione:"
+msgstr "Il tipo specificato non è un tipo valido di repository:"
 
-#: ../src/Zypper.cc:2744
+#: ../src/Zypper.cc:2789
 #, c-format
 msgid "See '%s' or '%s' to get a list of known repository types."
-msgstr "Vedere '%s' o '%s' per ottenere una lista dei tipi conosciuti di sorgente di installazione."
+msgstr "Vedere '%s' o '%s' per ottenere una lista dei tipi conosciuti di repository."
 
 #. translators: %s is the supplied command line argument which
 #. for which no repository counterpart was found
-#: ../src/Zypper.cc:2800
+#: ../src/Zypper.cc:2845
 #, c-format
 msgid "Repository '%s' not found by alias, number or URI."
-msgstr "Sorgente di installazione '%s' non trovata tramite l'alias, il numero o l'URI."
+msgstr "Repoitory '%s' non trovato tramite l'alias, il numero o l'URI."
 
 #. translators: %s is the supplied command line argument which
 #. for which no service counterpart was found
-#: ../src/Zypper.cc:2823
+#: ../src/Zypper.cc:2868
 #, c-format
 msgid "Service '%s' not found by alias, number or URI."
 msgstr "Servizio '%s' non trovato tramite l'alias, il numero o l'URI."
 
-#: ../src/Zypper.cc:2857
+#: ../src/Zypper.cc:2902
 msgid "Too few arguments. At least URI and alias are required."
-msgstr "Troppi pochi argomento. È necessario inserire almeno l'URL e l'alias."
+msgstr "Troppo pochi argomenti. È necessario inserire almeno l'URL e l'alias."
 
-#: ../src/Zypper.cc:2882
+#: ../src/Zypper.cc:2927
 #, c-format
 msgid "Repository '%s' not found."
-msgstr "La sorgente di installazione '%s' non è stata trovata."
+msgstr "Il repository '%s' non è stato trovato."
 
-#: ../src/Zypper.cc:2952
+#: ../src/Zypper.cc:2997
 #, c-format
 msgid "Repository %s not found."
-msgstr "La sorgente di installazione '%s' non è stata trovata."
+msgstr "Il repository %s non è stato trovato."
 
-#: ../src/Zypper.cc:2971
+#: ../src/Zypper.cc:3016
 msgid "Root privileges are required for refreshing system repositories."
-msgstr "Per aggiornare le sorgenti di installazione del sistema sono necessari i privilegi dell'utente root."
+msgstr "Per aggiornare i repository del sistema sono necessari i privilegi dell'utente root."
 
-#: ../src/Zypper.cc:2978
+#: ../src/Zypper.cc:3023
 #, c-format
 msgid "The '%s' global option has no effect here."
 msgstr "L'opzione globale '%s' non ha effetto qui."
 
-#: ../src/Zypper.cc:2986
+#: ../src/Zypper.cc:3031
 #, c-format
 msgid "Arguments are not allowed if '%s' is used."
 msgstr "Gli argomenti non sono permessi se è utilizzato '%s'."
 
-#: ../src/Zypper.cc:3012
+#: ../src/Zypper.cc:3057
 msgid "Root privileges are required for cleaning local caches."
 msgstr "Per pulire le cache sono necessari i privilegi dell'utente root."
 
-#: ../src/Zypper.cc:3033
+#: ../src/Zypper.cc:3078
 msgid "At least one package name is required."
 msgstr "È richiesto almeno un nome pacchetto."
 
-#: ../src/Zypper.cc:3043
+#: ../src/Zypper.cc:3088
 msgid "Root privileges are required for installing or uninstalling packages."
 msgstr "Per visualizzare le origini del sistema sono necessari i privilegi dell'utente root."
 
 #. translators: rug related message, shown if
 #. 'zypper in --entire-catalog foorepo someargument' is specified
-#: ../src/Zypper.cc:3060
+#: ../src/Zypper.cc:3105
 msgid "Ignoring arguments, marking the entire repository."
-msgstr "Ignora gli argomenti, segna l'intera sorgente di installazione."
+msgstr "Ignora gli argomenti, segna l'intero repository."
 
-#: ../src/Zypper.cc:3070
+#: ../src/Zypper.cc:3115
 #, c-format
 msgid "Unknown package type: %s"
 msgstr "Tipo di pacchetto sconosciuto: %s"
 
-#: ../src/Zypper.cc:3090
+#: ../src/Zypper.cc:3135
 #, c-format
 msgid "'%s' looks like an RPM file. Will try to download it."
 msgstr "'%s' sembra un file RPM. Proverò a scaricarlo."
 
-#: ../src/Zypper.cc:3103
+#: ../src/Zypper.cc:3148
 #, c-format
 msgid "Problem with the RPM file specified as '%s', skipping."
 msgstr "Problema con il file RPM file specificato come '%s', lo ignoro."
 
-#: ../src/Zypper.cc:3126
+#: ../src/Zypper.cc:3172
 #, c-format
 msgid "Problem reading the RPM header of %s. Is it an RPM file?"
 msgstr "C'è un problema a leggere l'intestazione dell'RPM di %s. È un RPM?"
 
-#: ../src/Zypper.cc:3151
+#: ../src/Zypper.cc:3197
 msgid "Plain RPM files cache"
 msgstr "Cache file RPM"
 
-#: ../src/Zypper.cc:3172
+#: ../src/Zypper.cc:3218
 msgid "No valid arguments specified."
 msgstr "Nessun argomento valido specificato."
 
-#: ../src/Zypper.cc:3186 ../src/Zypper.cc:3265
+#: ../src/Zypper.cc:3232 ../src/Zypper.cc:3311
 msgid "Warning: No repositories defined. Operating only with the installed resolvables. Nothing can be installed."
-msgstr "Attenzione: Nessuna sorgente di installazione definita. Si opererà solo con i risolubili installati. Nulla potrà essere installato."
+msgstr "Attenzione: Nessun repository definito. Si opererà solo con i risolubili installati. Nulla potrà essere installato."
 
-#: ../src/Zypper.cc:3215
+#: ../src/Zypper.cc:3261
 msgid "Source package name is a required argument."
 msgstr "Il nome del pacchetto sorgente è richiesto come parametro."
 
-#: ../src/Zypper.cc:3322 ../src/Zypper.cc:3582 ../src/Zypper.cc:3662
-#: ../src/Zypper.cc:3782 ../src/Zypper.cc:3862
+#: ../src/Zypper.cc:3368 ../src/Zypper.cc:3628 ../src/Zypper.cc:3721
+#: ../src/Zypper.cc:3844 ../src/Zypper.cc:3924
 #, c-format
 msgid "Unknown package type '%s'."
 msgstr "Tipo di pacchetto sconosciuto '%s'."
 
-#: ../src/Zypper.cc:3428
+#: ../src/Zypper.cc:3474
 msgid "Problem occurred initializing or executing the search query"
 msgstr "Un problema è apparso inizializando o eseguendo un query di ricerca"
 
-#: ../src/Zypper.cc:3429
+#: ../src/Zypper.cc:3475
 msgid "See the above message for a hint."
 msgstr "Vedere il messaggio precedente per un suggerimento."
 
 #. translators: Running as 'rug', cannot use 'best-effort' option.
-#: ../src/Zypper.cc:3601 ../src/Zypper.cc:3680
+#: ../src/Zypper.cc:3649 ../src/Zypper.cc:3739
 #, c-format
 msgid "Running as '%s', cannot use '%s' option."
 msgstr "Eseguendo '%s' non è possibile utilizzare l'opzione '%s'."
 
-#: ../src/Zypper.cc:3629
+#: ../src/Zypper.cc:3657
+#, c-format
+#| msgid "Cannot use %s together with %s. Using the %s setting."
+msgid "Cannot use %s together with %s."
+msgstr "Impossibile usare %s insieme con %s."
+
+#: ../src/Zypper.cc:3690
 msgid "Root privileges are required for updating packages."
 msgstr "Per aggiornare i pacchetti sono necessari i privilegi dell'utente root."
 
-#: ../src/Zypper.cc:3718
+#: ../src/Zypper.cc:3780
 msgid "Root privileges are required for performing a distribution upgrade."
 msgstr "Per aggiornare l'intera distribuzione sono necessari i privilegi dell'utente root."
 
-#: ../src/Zypper.cc:3794
-#, fuzzy, c-format
-#| msgid "'%1' does not exist."
+#: ../src/Zypper.cc:3856
+#, c-format
 msgid "Type '%s' does not support %s."
-msgstr "'%1' inesistente."
+msgstr "Il tipo '%s' non supporta %s"
 
-#: ../src/Zypper.cc:3824 ../src/Zypper.cc:3885
+#: ../src/Zypper.cc:3886 ../src/Zypper.cc:3947
 msgid "Root privileges are required for adding of package locks."
 msgstr "Per bloccare i pacchetti sono necessari i privilegi dell'utente root."
 
-#: ../src/Zypper.cc:3994
+#: ../src/Zypper.cc:4056
 #, c-format
 msgid "%s matches %s"
 msgstr "%s corrisponde a %s"
 
-#: ../src/Zypper.cc:3996
+#: ../src/Zypper.cc:4058
 #, c-format
 msgid "%s is newer than %s"
 msgstr "%s è più recente di %s"
 
-#: ../src/Zypper.cc:3998
+#: ../src/Zypper.cc:4060
 #, c-format
 msgid "%s is older than %s"
 msgstr "%s è più vecchio di %s"
 
-#: ../src/Zypper.cc:4037
+#: ../src/Zypper.cc:4117
 msgid "This command only makes sense in the zypper shell."
 msgstr "Questo comando ha senso solamente nella shell di zypper."
 
-#: ../src/Zypper.cc:4049
+#: ../src/Zypper.cc:4129
 msgid "You already are running zypper's shell."
 msgstr "Zypper è già in esecuzione in una shell."
 
-#: ../src/Zypper.cc:4066
+#: ../src/Zypper.cc:4146
 msgid "Description"
 msgstr "Descrizione"
 
-#: ../src/Zypper.cc:4129
+#: ../src/Zypper.cc:4209
 msgid "Resolvable Type"
 msgstr "Tipo di risolvibile"
 
-#~ msgid "y/n/p"
-#~ msgstr "s/n/p"
-
-# internal key used: Cancel
-# internal key used: Cancel
-#~ msgid "abort"
-#~ msgstr "interrompi"
-
-#~ msgid "retry"
-#~ msgstr "riprova"
-
-#~ msgid "ignore"
-#~ msgstr "ignora"
-
-#~ msgid "Abort, retry, ignore?\n"
-#~ msgstr "Annullare, riprovare, ignorare?\n"
-
-#~ msgid "    --from <alias|#|URI>        Select packages only from specified repository.\n"
-#~ msgstr "    --from <alias|#|URI>        Seleziona i pacchetti solo dalla sorgente di installazione specificata.\n"
