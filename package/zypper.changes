@@ -1,4 +1,11 @@
 -------------------------------------------------------------------
+Tue Sep 29 13:11:54 CEST 2009 - jkupec@suse.cz
+
+- Fixed wrong update candidate selection (bnc #539360)
+- Translations updated
+- 1.2.5
+
+-------------------------------------------------------------------
 Wed Sep 23 13:33:48 CEST 2009 - jkupec@suse.cz
 
 - Fixed troubleshooting wiki link (bnc #533606)
