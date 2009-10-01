@@ -27,7 +27,9 @@ namespace zypp
   //
   //	CLASS NAME : ZYppCommitPolicy
   //
-  /** */
+  /** Options and policies for ZYpp::commit.
+   * \see \ref ZYpp::commit
+   */
   class ZYppCommitPolicy
   {
     public:
