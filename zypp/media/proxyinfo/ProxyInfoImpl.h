@@ -15,6 +15,8 @@
 #include <string>
 #include <list>
 
+#include "zypp/Url.h"
+#include "zypp/base/String.h"
 #include "zypp/media/ProxyInfo.h"
 
 namespace zypp {
@@ -29,7 +31,7 @@ namespace zypp {
       /** Dtor */
       virtual ~Impl()
       {}
-  
+
     public:
       /**  */
       virtual bool enabled() const = 0;
@@ -41,7 +43,33 @@ namespace zypp {
       virtual ProxyInfo::NoProxyIterator noProxyBegin() const = 0;
       /**  */
       virtual ProxyInfo::NoProxyIterator noProxyEnd() const = 0;
-  
+
+      /** Return \c true if  \ref enabled and \a url_r does not match \ref noProxy. */
+      bool useProxyFor( const Url & url_r ) const
+      {
+        if ( ! enabled() )
+          return false;
+
+        ProxyInfo::NoProxyList noproxy( noProxy() );
+        if ( noproxy.size() == 1 && noproxy.front() == "*" )
+          return false; // just an asterisk disables all.
+
+        // No proxy: Either an exact match, or the previous character
+        // is a '.', so host is within the same domain.
+        // A leading '.' in the pattern is ignored. Some implementations
+        // need '.foo.ba' to prevent 'foo.ba' from matching 'xfoo.ba'.
+        std::string host( str::toLower( url_r.getHost() ) );
+        for_( it, noproxy.begin(), noproxy.end() )
+        {
+          std::string pattern( str::toLower( (*it)[0] == '.' ? it->c_str() + 1 : it->c_str() ) );
+          if ( str::hasSuffix( host, pattern )
+               && ( host.size() == pattern.size()
+                    || host[host.size()-pattern.size()-1] == '.' ) )
+            return false;
+        }
+        return true;
+      }
+
     public:
       /** Default Impl: empty sets. */
       static shared_ptr<Impl> _nullimpl;

@@ -47,5 +47,8 @@ namespace zypp {
     ProxyInfo::NoProxyIterator ProxyInfo::noProxyEnd() const
     { return _pimpl->noProxyEnd(); }
 
+    bool ProxyInfo::useProxyFor( const Url & url_r ) const
+    { return _pimpl->useProxyFor( url_r ); }
+
   } // namespace media
 } // namespace zypp

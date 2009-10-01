@@ -18,6 +18,9 @@
 #include "zypp/base/PtrTypes.h"
 
 namespace zypp {
+
+  class Url;
+
   namespace media {
 
     ///////////////////////////////////////////////////////////////////
@@ -30,7 +33,7 @@ namespace zypp {
       typedef intrusive_ptr<ProxyInfo> constPtr;
       typedef std::list<std::string> NoProxyList;
       typedef std::list<std::string>::const_iterator NoProxyIterator;
-      
+
       /** Implementation */
       struct Impl;
       typedef shared_ptr<Impl> ImplPtr;
@@ -43,6 +46,10 @@ namespace zypp {
       NoProxyList noProxy() const;
       NoProxyIterator noProxyBegin() const;
       NoProxyIterator noProxyEnd() const;
+
+      /** Return \c true if  \ref enabled and \a url_r does not match \ref noProxy. */
+      bool useProxyFor( const Url & url_r ) const;
+
     private:
       /** Pointer to implementation */
       RW_pointer<Impl> _pimpl;
