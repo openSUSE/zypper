@@ -301,46 +301,9 @@ void fillSettingsFromUrl( const Url &url, TransferSettings &s )
 void fillSettingsSystemProxy( const Url&url, TransferSettings &s )
 {
     ProxyInfo proxy_info (ProxyInfo::ImplPtr(new ProxyInfoSysconfig("proxy")));
-
-    if ( proxy_info.enabled())
-    {
-      s.setProxyEnabled(true);
-      std::list<std::string> nope = proxy_info.noProxy();
-      for (ProxyInfo::NoProxyIterator it = proxy_info.noProxyBegin();
-           it != proxy_info.noProxyEnd();
-           it++)
-      {
-        std::string host( str::toLower(url.getHost()));
-        std::string temp( str::toLower(*it));
-
-        // no proxy if it points to a suffix
-        // preceeded by a '.', that maches
-        // the trailing portion of the host.
-        if( temp.size() > 1 && temp.at(0) == '.')
-        {
-          if(host.size() > temp.size() &&
-             host.compare(host.size() - temp.size(), temp.size(), temp) == 0)
-          {
-            DBG << "NO_PROXY: '" << *it  << "' matches host '"
-                                 << host << "'" << endl;
-            s.setProxyEnabled(false);
-            break;
-          }
-        }
-        else
-        // no proxy if we have an exact match
-        if( host == temp)
-        {
-          DBG << "NO_PROXY: '" << *it  << "' matches host '"
-                               << host << "'" << endl;
-          s.setProxyEnabled(false);
-          break;
-        }
-      }
-
-      if ( s.proxyEnabled() )
-          s.setProxy(proxy_info.proxy(url.getScheme()));
-    }
+    s.setProxyEnabled( proxy_info.useProxyFor( url ) );
+    if ( s.proxyEnabled() )
+      s.setProxy(proxy_info.proxy(url.getScheme()));
 }
 
 Pathname MediaCurl::_cookieFile = "/var/lib/YaST2/cookies";
