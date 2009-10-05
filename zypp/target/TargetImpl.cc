@@ -1106,8 +1106,8 @@ namespace zypp
         }
         else if ( ! policy_r.dryRun() )
         {
-          commit ( to_uninstall, policy_r, packageCache );
-          TargetImpl::PoolItemList bad = commit( items, policy_r, packageCache );
+          commit ( to_uninstall, policy_r, result, packageCache );
+          TargetImpl::PoolItemList bad = commit( items, policy_r, result, packageCache );
           if ( ! bad.empty() )
           {
             for_( it, bad.begin(), bad.end() )
@@ -1151,6 +1151,7 @@ namespace zypp
     TargetImpl::PoolItemList
     TargetImpl::commit( const TargetImpl::PoolItemList & items_r,
                         const ZYppCommitPolicy & policy_r,
+                        ZYppCommitResult & result_r,
                         CommitPackageCache & packageCache_r )
     {
       MIL << "TargetImpl::commit(<list>" << policy_r << ")" << items_r.size() << endl;

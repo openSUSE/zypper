@@ -126,28 +126,6 @@ namespace zypp
       /** Commit changes in the pool */
       ZYppCommitResult commit( ResPool pool_r, const ZYppCommitPolicy & policy_r );
 
-      ZYPP_DEPRECATED int commit( ResPool pool_r, unsigned int medianr,
-                                  PoolItemList & errors_r,
-                                  PoolItemList & remaining_r,
-                                  PoolItemList & srcremaining_r,
-                                  bool dry_run = false )
-      {
-        ZYppCommitPolicy policy;
-        policy.restrictToMedia( medianr ).dryRun( dry_run );
-        ZYppCommitResult res = commit( pool_r, policy );
-        errors_r.swap( res._errors );
-        remaining_r.swap( res._remaining );
-        srcremaining_r.swap( res._srcremaining );
-        return res._result;
-      }
-
-      /** Commit ordered changes
-       *  @param packageCache_r Access to the package provider
-       *  @return uncommitted ones (due to error)
-       */
-      PoolItemList commit( const PoolItemList & items_r, const ZYppCommitPolicy & policy_r,
-                           CommitPackageCache & packageCache_r );
-
       /** Install a source package on the Target. */
       void installSrcPackage( const SrcPackage_constPtr & srcPackage_r );
 
@@ -190,6 +168,13 @@ namespace zypp
       /** \copydoc Target::distributionFlavor() */
       std::string distributionFlavor() const;
 
+    private:
+      /** Commit ordered changes (internal helper) */
+      PoolItemList commit( const PoolItemList & items_r,
+                           const ZYppCommitPolicy & policy_r,
+                           ZYppCommitResult & result_r,
+                           CommitPackageCache & packageCache_r );
+
     protected:
       /** Path to the target */
       Pathname _root;
@@ -203,6 +188,7 @@ namespace zypp
       HardLocksFile _hardLocksFile;
       /** Cache distributionVersion */
       mutable std::string _distributionVersion;
+
     private:
       /** Null implementation */
       static TargetImpl_Ptr _nullimpl;
