@@ -18,12 +18,52 @@
 namespace zypp
 { /////////////////////////////////////////////////////////////////
 
+  ///////////////////////////////////////////////////////////////////
+  //
+  //	CLASS NAME : ZYppCommitResult::Impl
+  //
+  ///////////////////////////////////////////////////////////////////
+
+  class ZYppCommitResult::Impl
+  {
+    public:
+      Impl()
+      {}
+
+    public:
+      UpdateNotifications _updateMessages;
+
+    private:
+      friend Impl * rwcowClone<Impl>( const Impl * rhs );
+      /** clone for RWCOW_pointer */
+      Impl * clone() const { return new Impl( *this ); }
+  };
+
+  ///////////////////////////////////////////////////////////////////
+  //
+  //	CLASS NAME : ZYppCommitResult
+  //
+  ///////////////////////////////////////////////////////////////////
+
+  ZYppCommitResult::ZYppCommitResult()
+  : _result(0), _pimpl( new Impl )
+  {}
+
+  const UpdateNotifications & ZYppCommitResult::updateMessages() const
+  { return _pimpl->_updateMessages; }
+
+  UpdateNotifications & ZYppCommitResult::setUpdateMessages()
+  { return _pimpl->_updateMessages; }
+
+  ///////////////////////////////////////////////////////////////////
+
   std::ostream & operator<<( std::ostream & str, const ZYppCommitResult & obj )
   {
     str << "CommitResult " << obj._result
         << " (errors " << obj._errors.size()
         << ", remaining " << obj._remaining.size()
         << ", srcremaining " << obj._srcremaining.size()
+        << ", updateMessages " << obj.updateMessages().size()
         << ")";
     return str;
   }

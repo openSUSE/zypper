@@ -200,6 +200,8 @@ namespace zypp
 
       /** Look for update scripts named 'name-version-release-*' and
        *  execute them. Return \c false if \c ABORT was requested.
+       *
+       * \see http://en.opensuse.org/Software_Management/Code11/Scripts_and_Messages
        */
       bool RunUpdateScripts( const Pathname & root_r,
                              const Pathname & scriptsPath_r,
@@ -270,7 +272,7 @@ namespace zypp
 
       void sendNotification( const Pathname & root_r,
                              const Pathname & messagesPath_r,
-                             const std::list<std::pair<sat::Solvable,Pathname> > & notifications_r )
+                             const UpdateNotifications & notifications_r )
       {
         if ( notifications_r.empty() )
           return;
@@ -321,7 +323,7 @@ namespace zypp
           for_( it, notifications_r.begin(), notifications_r.end() )
           {
             if ( format == SINGLE )
-              command.front() = "<"+Pathname::assertprefix( root_r, it->second ).asString();
+              command.front() = "<"+Pathname::assertprefix( root_r, it->file() ).asString();
             ExternalProgram prog( command, ExternalProgram::Stderr_To_Stdout, false, -1, true, root_r );
             if ( true ) // Wait for feedback
             {
@@ -347,11 +349,11 @@ namespace zypp
           {
             if ( format == DIGEST )
             {
-              out << it->second << endl;
+              out << it->file() << endl;
             }
             else if ( format == BULK )
             {
-              copyTo( out << '\f', Pathname::assertprefix( root_r, it->second ) );
+              copyTo( out << '\f', Pathname::assertprefix( root_r, it->file() ) );
             }
           }
 
@@ -383,10 +385,13 @@ namespace zypp
 
       /** Look for update messages named 'name-version-release-*' and
        *  send notification according to \ref ZConfig::updateMessagesNotify.
+       *
+       * \see http://en.opensuse.org/Software_Management/Code11/Scripts_and_Messages
        */
       void RunUpdateMessages( const Pathname & root_r,
                               const Pathname & messagesPath_r,
-                              const std::vector<sat::Solvable> & checkPackages_r )
+                              const std::vector<sat::Solvable> & checkPackages_r,
+                              ZYppCommitResult & result_r )
       {
         if ( checkPackages_r.empty() )
           return; // no installed packages to check
@@ -394,16 +399,14 @@ namespace zypp
         MIL << "Looking for new update messages in (" <<  root_r << ")" << messagesPath_r << endl;
         Pathname messagesDir( Pathname::assertprefix( root_r, messagesPath_r ) );
         if ( ! PathInfo( messagesDir ).isDir() )
-          return; // no script dir
+          return; // no messages dir
 
         std::list<std::string> messages;
         filesystem::readdir( messages, messagesDir, /*dots*/false );
         if ( messages.empty() )
           return; // no messages in message dir
 
-        // Now collect all matching messages in notifications and send them.
-        std::list<std::pair<sat::Solvable,Pathname> > notifications;
-
+        // Now collect all matching messages in result and send them
         HistoryLog historylog;
         for_( it, checkPackages_r.begin(), checkPackages_r.end() )
         {
@@ -419,11 +422,11 @@ namespace zypp
 
             MIL << "Found update message " << *sit << endl;
             Pathname localPath( messagesPath_r/(*sit) ); // without root prefix
+            result_r.setUpdateMessages().push_back( UpdateNotificationFile( *it, localPath ) );
             historylog.comment( str::Str() << _("New update message") << " " << localPath, /*timestamp*/true );
-            notifications.push_back( std::make_pair( *it, localPath ) );
           }
         }
-        sendNotification( root_r, messagesPath_r, notifications );
+        sendNotification( root_r, messagesPath_r, result_r.updateMessages() );
       }
 
       /////////////////////////////////////////////////////////////////
@@ -431,9 +434,10 @@ namespace zypp
     ///////////////////////////////////////////////////////////////////
 
     void XRunUpdateMessages( const Pathname & root_r,
-                            const Pathname & messagesPath_r,
-                            const std::vector<sat::Solvable> & checkPackages_r )
-    { RunUpdateMessages( root_r, messagesPath_r, checkPackages_r ); }
+                             const Pathname & messagesPath_r,
+                             const std::vector<sat::Solvable> & checkPackages_r,
+                             ZYppCommitResult & result_r )
+    { RunUpdateMessages( root_r, messagesPath_r, checkPackages_r, result_r ); }
 
     /** Helper for PackageProvider queries during commit. */
     struct QueryInstalledEditionHelper
@@ -1357,7 +1361,8 @@ namespace zypp
       if ( ! successfullyInstalledPackages.empty() )
       {
         RunUpdateMessages( _root, ZConfig::instance().update_messagesPath(),
-                           successfullyInstalledPackages );
+                           successfullyInstalledPackages,
+                           result_r );
 
         if ( ! RunUpdateScripts( _root, ZConfig::instance().update_scriptsPath(),
                                  successfullyInstalledPackages, abort ) )
