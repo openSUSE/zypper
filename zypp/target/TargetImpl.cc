@@ -270,8 +270,17 @@ namespace zypp
         }
       }
 
+      inline std::string notificationCmdSubst( const std::string & cmd_r, const UpdateNotificationFile & notification_r )
+      {
+        std::string ret( cmd_r );
+#define SUBST_IF(PAT,VAL) if ( ret.find( PAT ) != std::string::npos ) ret = str::gsub( ret, PAT, VAL )
+        SUBST_IF( "%p", notification_r.solvable().asString() );
+        SUBST_IF( "%P", notification_r.file().asString() );
+#undef SUBST_IF
+        return ret;
+      }
+
       void sendNotification( const Pathname & root_r,
-                             const Pathname & messagesPath_r,
                              const UpdateNotifications & notifications_r )
       {
         if ( notifications_r.empty() )
@@ -310,10 +319,6 @@ namespace zypp
          return;
         }
 
-        std::vector<std::string> command;
-        command.push_back( "<" ); // prepare to redirect input
-        str::splitEscaped( commandStr, std::back_inserter( command ) );
-
         // Take care: commands are ececuted chroot(root_r). The message file
         // pathnames in notifications_r are local to root_r. For physical access
         // to the file they need to be prefixed.
@@ -322,8 +327,11 @@ namespace zypp
         {
           for_( it, notifications_r.begin(), notifications_r.end() )
           {
+            std::vector<std::string> command;
             if ( format == SINGLE )
-              command.front() = "<"+Pathname::assertprefix( root_r, it->file() ).asString();
+              command.push_back( "<"+Pathname::assertprefix( root_r, it->file() ).asString() );
+            str::splitEscaped( notificationCmdSubst( commandStr, *it ), std::back_inserter( command ) );
+
             ExternalProgram prog( command, ExternalProgram::Stderr_To_Stdout, false, -1, true, root_r );
             if ( true ) // Wait for feedback
             {
@@ -357,7 +365,10 @@ namespace zypp
             }
           }
 
-          command.front() = "<"+tmpfile.path().asString(); // redirect input
+          std::vector<std::string> command;
+          command.push_back( "<"+tmpfile.path().asString() ); // redirect input
+          str::splitEscaped( notificationCmdSubst( commandStr, *notifications_r.begin() ), std::back_inserter( command ) );
+
           ExternalProgram prog( command, ExternalProgram::Stderr_To_Stdout, false, -1, true, root_r );
           if ( true ) // Wait for feedback otherwise the TmpFile goes out of scope.
           {
@@ -426,7 +437,7 @@ namespace zypp
             historylog.comment( str::Str() << _("New update message") << " " << localPath, /*timestamp*/true );
           }
         }
-        sendNotification( root_r, messagesPath_r, result_r.updateMessages() );
+        sendNotification( root_r, result_r.updateMessages() );
       }
 
       /////////////////////////////////////////////////////////////////
