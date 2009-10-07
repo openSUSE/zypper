@@ -1,4 +1,14 @@
 -------------------------------------------------------------------
+Wed Oct  7 16:45:21 CEST 2009 - ma@suse.de
+
+- Return update messages via ZYppCommitResult. Support variable 
+  substitution in notification command. (fate #301175)
+- Fix evaluation of no_proxy entries (bnc #543337)
+- aria/curl: Fix header data in case the target is 
+  not initialized when downloading.
+- version 6.18.0 (17)
+
+-------------------------------------------------------------------
 Thu Sep 24 17:21:45 CEST 2009 - ma@suse.de
 
 - Add zypp.conf option update.messages.notify: Command to be invoked 
