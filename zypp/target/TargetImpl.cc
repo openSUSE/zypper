@@ -1410,6 +1410,8 @@ namespace zypp
       return 0L;
     }
 
+    ///////////////////////////////////////////////////////////////////
+
     namespace
     {
       parser::ProductFileData baseproductdata( const Pathname & root_r )
@@ -1429,13 +1431,45 @@ namespace zypp
         return parser::ProductFileData();
       }
 
+      inline Pathname staticGuessRoot( const Pathname & root_r )
+      {
+        if ( root_r.empty() )
+        {
+          // empty root: use existing Target or assume "/"
+          Pathname ret ( ZConfig::instance().systemRoot() );
+          if ( ret.empty() )
+            return Pathname("/");
+          return ret;
+        }
+        return root_r;
+      }
+
+      inline std::string firstNonEmptyLineIn( const Pathname & file_r )
+      {
+        std::ifstream idfile( file_r.c_str() );
+        for( iostr::EachLine in( idfile ); in; in.next() )
+        {
+          std::string line( str::trim( *in ) );
+          if ( ! line.empty() )
+            return line;
+        }
+        return std::string();
+      }
     }
 
     std::string TargetImpl::targetDistribution() const
     { return baseproductdata( _root ).registerTarget(); }
+    // static version:
+    std::string TargetImpl::targetDistribution( const Pathname & root_r )
+    { return baseproductdata( staticGuessRoot(root_r) ).registerTarget(); }
+
 
     std::string TargetImpl::targetDistributionRelease() const
     { return baseproductdata( _root ).registerRelease(); }
+    // static version:
+    std::string TargetImpl::targetDistributionRelease( const Pathname & root_r )
+    { return baseproductdata( staticGuessRoot(root_r) ).registerRelease();}
+
 
     std::string TargetImpl::distributionVersion() const
     {
@@ -1460,31 +1494,31 @@ namespace zypp
       }
       return _distributionVersion;
     }
+    // static version: (no fallback to init and read rpm db here)
+    std::string TargetImpl::distributionVersion( const Pathname & root_r )
+    { return baseproductdata( staticGuessRoot(root_r) ).edition().version(); }
+
 
     std::string TargetImpl::distributionFlavor() const
     {
-        std::ifstream idfile( ( home() / "LastDistributionFlavor" ).c_str() );
-        for( iostr::EachLine in( idfile ); in; in.next() )
-        {
-            std::string line( str::trim( *in ) );
-            if ( ! line.empty() )
-                return line;
-        }
-        return std::string();
+      return firstNonEmptyLineIn( home() / "LastDistributionFlavor" );
+    }
+    // static version:
+    std::string TargetImpl::distributionFlavor( const Pathname & root_r )
+    {
+      return firstNonEmptyLineIn( staticGuessRoot(root_r) / "/var/lib/zypp/LastDistributionFlavor" );
     }
 
     ///////////////////////////////////////////////////////////////////
 
     std::string TargetImpl::anonymousUniqueId() const
     {
-        std::ifstream idfile( ( home() / "AnonymousUniqueId" ).c_str() );
-        for( iostr::EachLine in( idfile ); in; in.next() )
-        {
-            std::string line( str::trim( *in ) );
-            if ( ! line.empty() )
-                return line;
-        }
-        return std::string();
+      return firstNonEmptyLineIn( home() / "AnonymousUniqueId" );
+    }
+    // static version:
+    std::string TargetImpl::anonymousUniqueId( const Pathname & root_r )
+    {
+      return firstNonEmptyLineIn( staticGuessRoot(root_r) / "/var/lib/zypp/AnonymousUniqueId" );
     }
 
     ///////////////////////////////////////////////////////////////////

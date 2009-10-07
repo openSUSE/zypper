@@ -111,8 +111,6 @@ namespace zypp
       void buildCache();
       //@}
 
-      std::string anonymousUniqueId() const;
-
     public:
 
       /** The root set for this target */
@@ -153,20 +151,31 @@ namespace zypp
       /** \copydoc Target::baseProduct() */
       Product::constPtr baseProduct() const;
 
-      /** \copydoc Target::release() */
-      std::string release() const;
 
       /** \copydoc Target::targetDistribution() */
       std::string targetDistribution() const;
+      /** \overload */
+      static std::string targetDistribution( const Pathname & root_r );
 
       /** \copydoc Target::targetDistributionRelease()*/
       std::string targetDistributionRelease() const;
+      /** \overload */
+      static std::string targetDistributionRelease( const Pathname & root_r );
 
       /** \copydoc Target::distributionVersion()*/
       std::string distributionVersion() const;
+      /** \overload */
+      static std::string distributionVersion( const Pathname & root_r );
 
       /** \copydoc Target::distributionFlavor() */
       std::string distributionFlavor() const;
+      /** \overload */
+      static std::string distributionFlavor( const Pathname & root_r );
+
+      /** \copydoc Target::anonymousUniqueId() */
+      std::string anonymousUniqueId() const;
+      /** \overload */
+      static std::string anonymousUniqueId( const Pathname & root_r );
 
     private:
       /** Commit ordered changes (internal helper) */

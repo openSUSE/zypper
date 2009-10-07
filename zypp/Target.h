@@ -119,35 +119,47 @@ namespace zypp
      */
     Product::constPtr baseProduct() const;
 
-    /** \name Base product and registration. */
+  public:
+    /** \name Base product and registration.
+     *
+     * Static methods herein allow to retrieve the values without explicitly
+     * initializing the \ref Target. They take a targets root directory as
+     * argument. If an empty \ref Pathname is passed, an already existing
+     * Targets root is used, otherwise \c "\" is assumed.
+     */
     //@{
     /** This is \c register.target attribute of the installed base product.
      * Used for registration and \ref Service refresh.
      */
     std::string targetDistribution() const;
+    /** \overload */
+    static std::string targetDistribution( const Pathname & root_r );
 
     /** This is \c register.release attribute of the installed base product.
      * Used for registration.
      */
     std::string targetDistributionRelease() const;
-    //@}
+    /** \overload */
+    static std::string targetDistributionRelease( const Pathname & root_r );
 
     /** This is \c version attribute of the installed base product.
      * For example http://download.opensue.org/update/11.0
      * The 11.0 corresponds to the base product version.
      */
     std::string distributionVersion() const;
-    //@}
-
+    /** \overload */
+    static std::string distributionVersion( const Pathname & root_r );
 
     /**
-     * This is \flavor attribute of the installed base product
+     * This is \c flavor attribute of the installed base product
      * but does not require the target to be loaded as it remembers
      * the last used one. It can be empty is the target has never
      * been loaded, as the value is not present in the system
      * but computer from a package provides
      */
     std::string distributionFlavor() const;
+    /** \overload */
+    static std::string distributionFlavor( const Pathname & root_r );
 
     /**
      * anonymous unique id
@@ -158,6 +170,9 @@ namespace zypp
      *
      */
     std::string anonymousUniqueId() const;
+    /** \overload */
+    static std::string anonymousUniqueId( const Pathname & root_r );
+    //@}
 
   public:
     /** Ctor. If \c doRebuild_r is \c true, an already existing

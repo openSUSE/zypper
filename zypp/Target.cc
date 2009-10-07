@@ -94,24 +94,33 @@ namespace zypp
   Date Target::timestamp() const
   { return _pimpl->timestamp(); }
 
-  std::string Target::distributionFlavor() const
-  { return _pimpl->distributionFlavor(); }
-
-  std::string Target::targetDistribution() const
-  { return _pimpl->targetDistribution(); }
-
-  std::string Target::targetDistributionRelease() const
-  { return _pimpl->targetDistributionRelease(); }
-
-  std::string Target::anonymousUniqueId() const
-  { return _pimpl->anonymousUniqueId(); }
-
-  std::string Target::distributionVersion() const
-  { return _pimpl->distributionVersion(); }
-
   Product::constPtr Target::baseProduct() const
   { return _pimpl->baseProduct(); }
 
+  std::string Target::targetDistribution() const
+  { return _pimpl->targetDistribution(); }
+  std::string Target::targetDistribution( const Pathname & root_r )
+  { return target::TargetImpl::targetDistribution( root_r ); }
+
+  std::string Target::targetDistributionRelease() const
+  { return _pimpl->targetDistributionRelease(); }
+  std::string Target::targetDistributionRelease( const Pathname & root_r )
+  { return target::TargetImpl::targetDistributionRelease( root_r ); }
+
+  std::string Target::distributionVersion() const
+  { return _pimpl->distributionVersion(); }
+  std::string Target::distributionVersion( const Pathname & root_r )
+  { return target::TargetImpl::distributionVersion( root_r ); }
+
+  std::string Target::distributionFlavor() const
+  { return _pimpl->distributionFlavor(); }
+  std::string Target::distributionFlavor( const Pathname & root_r )
+  { return target::TargetImpl::distributionFlavor( root_r ); }
+
+  std::string Target::anonymousUniqueId() const
+  { return _pimpl->anonymousUniqueId(); }
+  std::string Target::anonymousUniqueId( const Pathname & root_r )
+  { return target::TargetImpl::anonymousUniqueId( root_r ); }
 
   /////////////////////////////////////////////////////////////////
 } // namespace zypp
