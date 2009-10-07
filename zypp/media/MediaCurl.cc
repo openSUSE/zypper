@@ -317,13 +317,11 @@ static const char *const anonymousIdHeader()
   // we need to add the release and identifier to the
   // agent string.
   // The target could be not initialized, and then this information
-  // is not available.
-  Target_Ptr target = zypp::getZYpp()->getTarget();
-
+  // is guessed.
   static const std::string _value(
       str::trim( str::form(
           "X-ZYpp-AnonymousId: %s",
-          target ? target->anonymousUniqueId().c_str() : "" ) )
+          Target::anonymousUniqueId( Pathname()/*guess root*/ ).c_str() ) )
   );
   return _value.c_str();
 }
@@ -337,13 +335,11 @@ static const char *const distributionFlavorHeader()
   // we need to add the release and identifier to the
   // agent string.
   // The target could be not initialized, and then this information
-  // is not available.
-  Target_Ptr target = zypp::getZYpp()->getTarget();
-
+  // is guessed.
   static const std::string _value(
       str::trim( str::form(
           "X-ZYpp-DistributionFlavor: %s",
-          target ? target->distributionFlavor().c_str() : "" ) )
+          Target::distributionFlavor( Pathname()/*guess root*/ ).c_str() ) )
   );
   return _value.c_str();
 }
@@ -357,15 +353,13 @@ static const char *const agentString()
   // we need to add the release and identifier to the
   // agent string.
   // The target could be not initialized, and then this information
-  // is not available.
-  Target_Ptr target = zypp::getZYpp()->getTarget();
-
+  // is guessed.
   static const std::string _value(
     str::form(
        "ZYpp %s (curl %s) %s"
        , VERSION
        , curl_version_info(CURLVERSION_NOW)->version
-       , target ? target->targetDistribution().c_str() : ""
+       , Target::targetDistribution( Pathname()/*guess root*/ ).c_str()
     )
   );
   return _value.c_str();

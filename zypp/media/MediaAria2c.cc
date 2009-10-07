@@ -193,7 +193,7 @@ const char *const MediaAria2c::agentString()
        "ZYpp %s (%s) %s"
        , VERSION
        , MediaAria2c::_aria2cVersion.c_str()
-       , target ? target->targetDistribution().c_str() : ""
+       , Target::targetDistribution( Pathname()/*guess root*/ ).c_str()
     )
   );
   return _value.c_str();
