@@ -80,6 +80,12 @@ namespace zypp
       const std::string & asString() const
       { return name_t; }
 
+      /** String representation as "(root)/path" */
+      static std::string showRoot( const Pathname & root_r, const Pathname & path_r );
+
+      /** String representation as "(root)/path", unless \a root is \c "/" or empty. */
+      static std::string showRootIf( const Pathname & root_r, const Pathname & path_r );
+
       /** Url representation using \c dir schema. */
       Url asUrl() const;
 

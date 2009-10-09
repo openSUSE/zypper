@@ -241,6 +241,18 @@ namespace zypp
       return ret;
     }
 
+    std::string Pathname::showRoot( const Pathname & root_r, const Pathname & path_r )
+    {
+      return str::Str() << "(" << root_r << ")" << path_r;
+    }
+
+    std::string Pathname::showRootIf( const Pathname & root_r, const Pathname & path_r )
+    {
+      if ( root_r.empty() || root_r == "/" )
+        return path_r.asString();
+      return showRoot( root_r, path_r );
+    }
+
     ///////////////////////////////////////////////////////////////////
     //
     //	METHOD NAME : Pathname::extension
