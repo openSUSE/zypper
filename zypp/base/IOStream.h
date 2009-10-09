@@ -43,6 +43,56 @@ namespace zypp
      */
     std::string getline( std::istream & str );
 
+    /** Copy istream to ostream.
+     * \return reference to the ostream.
+     */
+    inline std::ostream & copy( std::istream & from_r, std::ostream & to_r )
+    {
+      if ( from_r && to_r )
+      {
+        char ch;
+        while ( from_r && from_r.get( ch ) )
+          to_r.put( ch );
+      }
+      return to_r;
+    }
+
+    /** Copy istream to ostream, prefixing each line with \a indent_r (default <tt>"> "</tt> ).
+     * \return reference to the ostream.
+     */
+    inline std::ostream & copyIndent( std::istream & from_r, std::ostream & to_r, const std::string & indent_r = "> " )
+    {
+      if ( from_r && to_r )
+      {
+        char ch;
+        bool indent = true;
+        while ( from_r && from_r.get( ch ) )
+        {
+          if ( indent )
+            to_r << indent_r;
+          indent = ( ch == '\n' );
+          to_r.put( ch );
+        }
+      }
+      return to_r;
+    }
+
+    /** Copy istream to ostream, prefixing each line with \a indent_r (default <tt>"> "</tt> ).
+     * \return reference to the ostream.
+     */
+    inline void tee( std::istream & from_r, std::ostream & to1_r, std::ostream & to2_r )
+    {
+      if ( from_r && ( to1_r ||to2_r ) )
+      {
+        char ch;
+        while ( from_r && from_r.get( ch ) )
+        {
+          to1_r.put( ch );
+          to2_r.put( ch );
+        }
+      }
+    }
+
     ///////////////////////////////////////////////////////////////////
     //
     //	CLASS NAME : EachLine
