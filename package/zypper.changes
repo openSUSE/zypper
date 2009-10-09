@@ -1,4 +1,11 @@
 -------------------------------------------------------------------
+Fri Oct  9 14:54:11 CEST 2009 - ma@suse.de
+
+- Init target when refreshing sources, otherwise we dont have the
+  trusted gpg keys at hand when downloading. (bnc #530389)
+- 0.6.201
+
+-------------------------------------------------------------------
 Tue Apr  7 10:26:57 CEST 2009 - jkupec@suse.cz
 
 - Fixed ignored --no-confirm option (bnc #468422)
