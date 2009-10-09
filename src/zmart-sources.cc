@@ -1,5 +1,6 @@
 #include "zmart.h"
 #include "zmart-sources.h"
+#include "zmart-misc.h"
 #include "zypper-tabulator.h"
 #include "zypper-callbacks.h"
 
@@ -37,10 +38,13 @@ void cond_init_system_sources ()
     init_system_sources();
   }
   done = true;
-} 
+}
 
 void init_system_sources()
 {
+  // need gpg keys when downloading (#304672)
+  cond_init_target();
+
   SourceManager_Ptr manager;
   manager = SourceManager::sourceManager();
   try
@@ -57,7 +61,7 @@ void init_system_sources()
     cerr << _("Failed to restore sources") << endl;
     exit(-1);
   }
-    
+
   for ( SourceManager::Source_const_iterator it = manager->Source_begin(); it !=  manager->Source_end(); ++it )
   {
     Source_Ref src = manager->findSource(it->alias());
@@ -81,7 +85,7 @@ void include_source_by_url( const Url &url )
     ZYPP_CAUGHT( excpt_r );
     exit(-1);
   }
-  
+
 }
 
 #ifdef LIBZYPP_1xx
@@ -147,7 +151,7 @@ static void print_source_list(const std::list<SourceInfo> &sources )
 void list_system_sources()
 {
   std::list<SourceInfo> sources;
-  
+
   try
   {
 #ifdef LIBZYPP_1xx
@@ -161,9 +165,9 @@ void list_system_sources()
   catch ( const Exception &e )
   {
     cout << _("Error reading system sources: ") << e.msg() << std::endl;
-    exit(-1); 
+    exit(-1);
   }
-  
+
   print_source_list(sources);
 }
 
@@ -200,10 +204,10 @@ bool parse_repo_file (const string& file, string& url, string& alias)
 
   if (!have_alias) {
     cerr << _("Name not found") << endl;
-  }  
+  }
   if (!have_url) {
     cerr << _("baseurl not found") << endl;
-  }  
+  }
   cerr_vv << "Name: " << alias << endl;
   cerr_vv << "URL: " << url << endl;
 
@@ -241,7 +245,7 @@ void add_source_by_url( const zypp::Url &url, const string &alias,
   Pathname cache;
   bool is_base = false;
   string myalias = alias.empty() ? timestamp() : alias;
-   
+
   // more products?
   // try
   cerr_vv << "Creating source" << endl;
@@ -261,12 +265,12 @@ void add_source_by_url( const zypp::Url &url, const string &alias,
     source.enable();
   else
     source.disable();
-  
+
   source.setAutorefresh (refresh);
 
     sourceIds.push_back( sourceId );
       cout << "Added Installation Sources:" << endl;
-  
+
     list<SourceManager::SourceId>::const_iterator it;
     for( it = sourceIds.begin(); it != sourceIds.end(); ++it ) {
       Source_Ref source = manager->findSource(*it);
@@ -318,7 +322,7 @@ void remove_source( const std::string& anystring )
 {
   cerr_vv << "Constructing SourceManager" << endl;
   SourceManager_Ptr manager = SourceManager::sourceManager();
- 
+
   cerr_vv << "Restoring SourceManager" << endl;
   bool success = true;
   std::set<std::string> _broken_sources;
@@ -540,6 +544,9 @@ void refresh_sources()
 #ifdef LIBZYPP_1xx
   cerr << _("Sorry, not implemented yet for libzypp-1.x.x") << endl;
 #else
+  // need gpg keys when downloading (#304672)
+  cond_init_target();
+
   zypp::storage::PersistentStorage store;
   std::list<SourceInfo> sources;
 
@@ -551,7 +558,7 @@ void refresh_sources()
   catch ( const Exception &e )
   {
     cerr << _("Error reading system sources: ") << e.msg() << std::endl;
-    exit(-1); 
+    exit(-1);
   }
 
   for(std::list<SourceInfo>::const_iterator it = sources.begin();
@@ -560,7 +567,7 @@ void refresh_sources()
     try
     {
       cout << _("Refreshing ") << it->alias() << endl <<
-        "URI: " << it->url() << endl; 
+        "URI: " << it->url() << endl;
       Source_Ref src = SourceFactory().createFrom(
         it->type(), it->url(), it->path(), it->alias(), it->cacheDir(),
         false, // base source
