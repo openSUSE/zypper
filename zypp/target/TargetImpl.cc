@@ -428,7 +428,7 @@ namespace zypp
               continue;
 
             PathInfo message( messagesDir / *sit );
-            if ( ! message.isFile() )
+            if ( ! message.isFile() || message.size() == 0 )
               continue;
 
             MIL << "Found update message " << *sit << endl;
@@ -958,7 +958,7 @@ namespace zypp
       // Compute transaction:
       ///////////////////////////////////////////////////////////////////
 
-      ZYppCommitResult result;
+      ZYppCommitResult result( root() );
       TargetImpl::PoolItemList to_uninstall;
       TargetImpl::PoolItemList to_install;
       TargetImpl::PoolItemList to_srcinstall;
@@ -1371,16 +1371,17 @@ namespace zypp
       // at least log omitted scripts.
       if ( ! successfullyInstalledPackages.empty() )
       {
-        RunUpdateMessages( _root, ZConfig::instance().update_messagesPath(),
-                           successfullyInstalledPackages,
-                           result_r );
-
         if ( ! RunUpdateScripts( _root, ZConfig::instance().update_scriptsPath(),
                                  successfullyInstalledPackages, abort ) )
         {
           WAR << "Commit aborted by the user" << endl;
           abort = true;
         }
+        // send messages after scripts in case some script generates output,
+        // that should be kept in t %ghost message file.
+        RunUpdateMessages( _root, ZConfig::instance().update_messagesPath(),
+                           successfullyInstalledPackages,
+                           result_r );
       }
 
       if ( abort )

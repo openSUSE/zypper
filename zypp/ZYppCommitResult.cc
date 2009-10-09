@@ -31,7 +31,8 @@ namespace zypp
       {}
 
     public:
-      UpdateNotifications _updateMessages;
+      Pathname			_root;
+      UpdateNotifications	_updateMessages;
 
     private:
       friend Impl * rwcowClone<Impl>( const Impl * rhs );
@@ -48,6 +49,13 @@ namespace zypp
   ZYppCommitResult::ZYppCommitResult()
   : _result(0), _pimpl( new Impl )
   {}
+
+  ZYppCommitResult::ZYppCommitResult( const Pathname & root_r )
+  : _result(0), _pimpl( new Impl )
+  { _pimpl->_root = root_r; }
+
+  const Pathname & ZYppCommitResult::root() const
+  { return _pimpl->_root; }
 
   const UpdateNotifications & ZYppCommitResult::updateMessages() const
   { return _pimpl->_updateMessages; }

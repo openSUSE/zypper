@@ -51,10 +51,41 @@ namespace zypp
   {
     public:
       ZYppCommitResult();
+      ZYppCommitResult( const Pathname & root_r );
 
     public:
+      /** Remembered root directory of the target.
+       *  \Note Pathnames within this class are relative to the
+       * targets root directory.
+      */
+      const Pathname & root() const;
+
       /** List of update messages installed during this commit.
        * \Note Pathnames are relative to the targets root directory.
+       * \code
+       *   ZYppCommitResult result;
+       *   ...
+       *   if ( ! result.updateMessages().empty() )
+       *   {
+       *     MIL << "Received " << result.updateMessages().size() << " update notification(s):" << endl;
+       *     for_( it, result.updateMessages().begin(), result.updateMessages().end() )
+       *     {
+       *       MIL << "- From " << it->solvable().asString() << " in file " << Pathname::showRootIf( result.root(), it->file() ) << ":" << endl;
+       *       {
+       *         // store message files content in a string:
+       *         InputStream istr( Pathname::assertprefix( result.root(), it->file() ) );
+       *         std::ostringstream strstr;
+       *         iostr::copy( istr, strstr );
+       *         std::string message( strstr.str() ); // contains the message
+       *       }
+       *       {
+       *         // or write out the message file indented:
+       *         InputStream istr( Pathname::assertprefix( result.root(), it->file() ) );
+       *         iostr::copyIndent( istr, MIL, "> " ) << endl;
+       *       }
+       *     }
+       *   }
+       * \endcode
        */
       const UpdateNotifications & updateMessages() const;
 
