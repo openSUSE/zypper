@@ -30,6 +30,7 @@ const char * lines[][3] = {
   { "\xE2\x94\x82", "\xE2\x95\x90", "\xE2\x95\xAA"}, ///< v light, h double
   { "\xE2\x94\x83", "\xE2\x94\x80", "\xE2\x95\x82"}, ///< v heavy, h light
   { "\xE2\x95\x91", "\xE2\x94\x80", "\xE2\x95\xAB"}, ///< v double, h light
+  { ":", "-", "+" },                                 ///< colon separated values
 };
 
 void TableRow::add (const string& s) {
