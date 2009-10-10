@@ -798,6 +798,17 @@ static void print_repo_list(Zypper & zypper,
 
 // ----------------------------------------------------------------------------
 
+static void print_repo_details(Zypper & zypper, list<RepoInfo> & repos)
+{
+  for_(it, repos.begin(), repos.end())
+  {
+    RepoInfo repo = *it;
+    cout << repo << endl;
+  }
+}
+
+// ----------------------------------------------------------------------------
+
 /** Repo list as xml */
 static void print_xml_repo_list(Zypper & zypper, list<RepoInfo> repos)
 {
@@ -827,10 +838,14 @@ void list_repos(Zypper & zypper)
   RepoManager & manager = zypper.repoManager();
   RuntimeData & gData = zypper.runtimeData();
   list<RepoInfo> repos;
+  list<string> not_found;
 
   try
   {
-    repos.insert(repos.end(), manager.repoBegin(), manager.repoEnd());
+    if (zypper.arguments().empty())
+      repos.insert(repos.end(), manager.repoBegin(), manager.repoEnd());
+    else
+      get_repos(zypper, zypper.arguments().begin(), zypper.arguments().end(), repos, not_found);
   }
   catch ( const Exception &e )
   {
@@ -884,6 +899,8 @@ void list_repos(Zypper & zypper)
   // print repo list the rug's way
   else if (zypper.globalOpts().is_rug_compatible)
     print_rug_sources_list(repos);
+  else if (!zypper.arguments().empty())
+    print_repo_details(zypper, repos);
   // print repo list as table
   else
     print_repo_list(zypper, repos);
