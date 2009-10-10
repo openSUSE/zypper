@@ -31,6 +31,7 @@ enum TableLineStyle {
   LightDouble,
   HeavyLight,
   DoubleLight,
+  Colon,
   none,
   _End,			       ///< sentinel
 };

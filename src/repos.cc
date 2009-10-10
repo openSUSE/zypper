@@ -800,10 +800,53 @@ static void print_repo_list(Zypper & zypper,
 
 static void print_repo_details(Zypper & zypper, list<RepoInfo> & repos)
 {
+  bool another = false;
   for_(it, repos.begin(), repos.end())
   {
+    if (another)
+      cout << endl;
+
     RepoInfo repo = *it;
-    cout << repo << endl;
+    Table t;
+    t.lineStyle(::Colon);
+    t.allowAbbrev(1);
+
+    TableRow tr; tr << _("Alias") << repo.alias(); t << tr;
+    TableRow tr_name; tr_name << _("Name") << repo.name(); t << tr_name;
+    TableRow tr_uri; tr_uri << _("URI") << repo.url().asString(); t << tr_uri;
+    TableRow tr_en;
+    tr_en << _("Enabled") << (repo.enabled() ? _("Yes") : _("No"));
+    t << tr_en;
+    TableRow tr_prio;
+    tr_prio << _("Priority") << str::form("%d", repo.priority());
+    t << tr_prio;
+    TableRow tr_ref;
+    tr_ref << _("Auto-refresh") << (repo.autorefresh() ? _("On") : _("Off"));
+    t << tr_ref;
+    TableRow tr_keep;
+    tr_keep << _("Keep Packages") << (repo.keepPackages() ? _("On") : _("Off"));
+    t << tr_keep;
+    TableRow tr_type;
+    tr_type << _("Type") << repo.type().asString();
+    t << tr_type;
+    TableRow tr_gpg;
+    tr_gpg << _("GPG Check") << (repo.gpgCheck() ? _("On") : _("Off"));
+    t << tr_gpg;
+    TableRow tr_gpg_key;
+    tr_gpg_key << _("GPG Key URI") << repo.gpgKeyUrl().asString();
+    t << tr_gpg_key;
+    TableRow tr_path;
+    tr_path << _("Path Prefix") << repo.path().asString();
+    t << tr_path;
+    TableRow tr_srv;
+    tr_srv << _("Parent Service") << repo.service();
+    t << tr_srv;
+    TableRow tr_mdpath;
+    tr_mdpath << _("MD Cache Path") << repo.metadataPath().asString();
+    t << tr_mdpath;
+
+    cout << t;
+    another = true;
   }
 }
 
