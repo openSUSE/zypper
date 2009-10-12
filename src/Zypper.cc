@@ -1302,6 +1302,7 @@ void Zypper::processCommandOptions()
     }
 
     _command_help = _(
+      // FIXME it's 'repos (lr) [options] [repo] ...' now. Fix after 11.2
       "repos (lr) [options]\n"
       "\n"
       "List all defined repositories.\n"
@@ -1317,6 +1318,7 @@ void Zypper::processCommandOptions()
       "-N, --sort-by-name        Sort the list by name.\n"
     ) + string(_(
       // translators: this option belongs to 'lr' command help
+      // FIXME add this to the rest after 11.2
       "-s, --service             Show also alias of parent service.\n"
     ));
     break;
@@ -1638,6 +1640,7 @@ void Zypper::processCommandOptions()
   {
     static struct option dupdate_options[] = {
       {"repo",                      required_argument, 0, 'r'},
+      {"from",                      required_argument, 0,  0 },
       {"no-recommends",             no_argument,       0,  0 },
       {"recommends",                no_argument,       0,  0 },
       {"auto-agree-with-licenses",  no_argument,       0, 'l'},
@@ -1650,7 +1653,7 @@ void Zypper::processCommandOptions()
       {0, 0, 0, 0}
     };
     specific_options = dupdate_options;
-    _command_help = _(
+    _command_help = string(_(
       "dist-upgrade (dup) [options]\n"
       "\n"
       "Perform a distribution upgrade.\n"
@@ -1668,7 +1671,8 @@ void Zypper::processCommandOptions()
       "                            to the required.\n"
       "-D, --dry-run               Test the upgrade, do not actually upgrade\n"
       "-d, --download-only         Only download the packages, do not install.\n"
-    );
+    )) + // FIXME: add to the rest of the strings after 11.2 release
+    _("    --from <alias|#|URI>    Restrict upgrade to specified repository.\n");
     break;
   }
 

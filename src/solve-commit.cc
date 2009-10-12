@@ -17,6 +17,7 @@
 #include "zypp/misc/CheckAccessDeleted.h"
 
 #include "misc.h"              // confirm_licenses
+#include "repos.h"              // get_repo - used in dist_upgrade
 #include "utils/misc.h"
 #include "utils/prompt.h"      // Continue? and solver problem prompt
 #include "utils/pager.h"       // to view the summary
@@ -324,6 +325,32 @@ static bool dist_upgrade(Zypper & zypper)
 {
   dump_pool();
   set_solver_flags(zypper);
+
+  // set repositories to upgrade to (--from)
+
+  list<RepoInfo> specified;
+  list<string> not_found;
+  parsed_opts::const_iterator tmp1;
+  if ((tmp1 = copts.find("from")) != copts.end())
+    get_repos(zypper, tmp1->second.begin(), tmp1->second.end(), specified, not_found);
+  report_unknown_repos(zypper.out(), not_found);
+
+  if (!not_found.empty())
+    throw ExitRequestException("Some of specified repositories were not found.");
+
+  set<string> aliases;
+  for_(it, specified.begin(), specified.end())
+    aliases.insert(it->alias());
+
+  for_(it, God->pool().knownRepositoriesBegin(), God->pool().knownRepositoriesEnd())
+    if (aliases.find(it->alias()) != aliases.end())
+    {
+      MIL << "Adding upgrade repository: " << it->alias() << endl;
+      God->resolver()->addUpgradeRepo(*it);
+    }
+
+  // compute the upgrade
+
   zypper.out().info(_("Computing upgrade..."), Out::HIGH);
   DBG << "Calling the solver doUpgrade()..." << endl;
   return God->resolver()->doUpgrade();

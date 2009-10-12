@@ -648,10 +648,31 @@ Test the update, do not actually update.
 
 .TP
 .B dist-upgrade (dup) [options]
-Perform a distribution upgrade. This command performs an update of all packages
-with a special resolver algorithm which takes care of package splits, pattern
-and product updates, etc.
+Perform a distribution upgrade. This command applies the state of (specified)
+repositories onto the system; upgrades (or even downgrades) installed packages
+to versions found in repositories, removes packages that are no longer in the
+repositories and pose a dependency problem for the upgrade, handles package
+splits and renames, etc.
 
+If no repositories are specified via --from or --repo options, zypper
+will do the upgrade with all defined repositories. This can be a problem
+if the system contains conflicting repositories, like repositories
+for two different distribution releases. This often happens if one
+forgets to remove older release repository after adding a new one, say
+openSUSE 11.1 and openSUSE 11.2.
+
+To avoid the above trouble, you can specify the repositories from
+which to do the upgrade using the --from or --repo options.
+The difference between these two is that when --repo is used, zypper
+acts as if it knew onle the specified repositories, while with --from
+zypper can eventually use also the rest of enabled repositories to
+satisfy package dependencies.
+
+.TP
+\fI\ \ \ \ \-\-from\fR <alias|#|URI>
+Restricts the upgrade to the specified repositories (the option can be used
+multiple times) only, but can satisfy dependencies also from the rest
+of enabled repositories.
 .TP
 \fI\-r, \-\-repo\fR <alias|#|URI>
 Work only with the repository specified by the alias, number or URI. This
