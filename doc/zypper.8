@@ -906,10 +906,12 @@ Ignore user authentication data in the URI
 Ignore query string in the URI
 
 .TP
-.B repos (lr) [options]
-List all defined repositories.
+.B repos (lr) [options] [repo] ...
+List all defined repositories or show detailed information about those
+specified as arguments
 .IP
-The following data are printed for each repository found:
+If no arguments are given, the following data are printed for each repository
+found on the sytem:
 # (repository number), Enabled (whether the repository is enabled), Refresh
 (whether auto-refresh is enabled for the repository), Type (rpm-md, yast2,
 plaindir), Alias (shorthand for Name), and Name. Other columns can be added
@@ -920,6 +922,10 @@ set of repositories. If you add, remove or change a repository, the numbers may
 change. Keep that in mind when using the numbers with the repository handling
 commands. On the other hand, using the alias instead of the number is always
 safe.
+
+To show detailed information about specific repositories, specify them
+as arguments, either by alias, number from simple \fBzypper lr\fR, or by
+URI; e.g. fB \fBzypper lr factory\fR, or \fBzypper lr 2\fR.
 
 .TP
 .I \-e, \-\-export <FILE.repo|->

@@ -888,7 +888,10 @@ void list_repos(Zypper & zypper)
     if (zypper.arguments().empty())
       repos.insert(repos.end(), manager.repoBegin(), manager.repoEnd());
     else
+    {
       get_repos(zypper, zypper.arguments().begin(), zypper.arguments().end(), repos, not_found);
+      report_unknown_repos(zypper.out(), not_found);
+    }
   }
   catch ( const Exception &e )
   {
