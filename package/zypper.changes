@@ -1,9 +1,17 @@
 -------------------------------------------------------------------
+Mon Oct 12 10:57:56 CEST 2009 - jkupec@suse.cz
+
+- 'zypper lr' now shows details about repos specified as arguments.
+- Added '--from' to 'zypper dup' to do the upgrade from
+  specified repos only.
+- Translations updated
+- 1.2.5
+
+-------------------------------------------------------------------
 Tue Sep 29 13:11:54 CEST 2009 - jkupec@suse.cz
 
 - Fixed wrong update candidate selection (bnc #539360)
 - Translations updated
-- 1.2.5
 
 -------------------------------------------------------------------
 Wed Sep 23 13:33:48 CEST 2009 - jkupec@suse.cz
