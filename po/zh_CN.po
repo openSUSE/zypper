@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: @PACKAGE@\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-09-21 11:46+0200\n"
+"POT-Creation-Date: 2009-10-12 11:46+0200\n"
 "PO-Revision-Date: 2009-04-17 15:14+0800\n"
 "Last-Translator: Eric Shan <ericalways@gmail.com>\n"
 "Language-Team: Simplified Chinese\n"
@@ -167,7 +167,7 @@ msgstr "文件 %s 没有摘要。"
 #. popts.setOptionHelp(8, _("Explain why the packages are going to be installed."));
 #: ../src/callbacks/keyring.h:256 ../src/callbacks/keyring.h:266
 #: ../src/callbacks/keyring.h:288 ../src/callbacks/rpm.h:61
-#: ../src/solve-commit.cc:551
+#: ../src/solve-commit.cc:578
 msgid "Continue?"
 msgstr "是否继续？"
 
@@ -327,101 +327,101 @@ msgstr "未知命令 '%s'"
 msgid "Unknown configuration option '%s'"
 msgstr "未知的 command 选项"
 
-#: ../src/info.cc:40
+#: ../src/info.cc:39
 msgid "Name: "
 msgstr "名称："
 
-#: ../src/info.cc:41
+#: ../src/info.cc:40
 msgid "Version: "
 msgstr "版本："
 
-#: ../src/info.cc:42
+#: ../src/info.cc:41
 msgid "Arch: "
 msgstr "存档："
 
-#: ../src/info.cc:43
+#: ../src/info.cc:42
 msgid "Vendor: "
 msgstr "发行者："
 
-#: ../src/info.cc:48
+#: ../src/info.cc:47
 msgid "Summary: "
 msgstr "概要："
 
-#: ../src/info.cc:49
+#: ../src/info.cc:48
 msgid "Description: "
 msgstr "描述："
 
 #. TranslatorExplanation E.g. "package 'zypper' not found."
 #. ! \todo use a separate string for each kind so that it is translatable.
-#: ../src/info.cc:82
+#: ../src/info.cc:81
 #, c-format
 msgid "%s '%s' not found."
 msgstr "%s '%s' 未找到。"
 
-#: ../src/info.cc:94
+#: ../src/info.cc:93
 #, c-format
 msgid "Information for %s %s:"
 msgstr "%s %s 的信息："
 
-#: ../src/info.cc:111
+#: ../src/info.cc:110
 #, c-format
 msgid "Info for type '%s' not implemented."
 msgstr "类型'%s'的信息尚未实现。"
 
-#: ../src/info.cc:117
+#: ../src/info.cc:116
 msgid "None"
 msgstr "无"
 
-#: ../src/info.cc:118
+#: ../src/info.cc:117
 msgid "Requires"
 msgstr "需要"
 
-#: ../src/info.cc:119
+#: ../src/info.cc:118
 msgid "Provides"
 msgstr "提供"
 
-#: ../src/info.cc:120
+#: ../src/info.cc:119
 msgid "Conflicts"
 msgstr "冲突"
 
-#: ../src/info.cc:121
+#: ../src/info.cc:120
 msgid "Obsoletes"
 msgstr "废弃"
 
 #. translators: package requirements table header
-#: ../src/info.cc:123
+#: ../src/info.cc:122
 msgid "Requirement"
 msgstr "需要"
 
 #. translators: package requirements table header
-#: ../src/info.cc:125
+#: ../src/info.cc:124
 msgid "Provided By"
 msgstr "提供者"
 
 #. translators: package conflicts table header
-#: ../src/info.cc:127
+#: ../src/info.cc:126
 msgid "Conflict"
 msgstr "冲突"
 
-#: ../src/info.cc:133
+#: ../src/info.cc:132
 msgid "Requires:"
 msgstr "需要："
 
-#: ../src/info.cc:144
+#: ../src/info.cc:143
 #, fuzzy
 #| msgid "Recommends"
 msgid "Recommends:"
 msgstr "推荐"
 
-#: ../src/info.cc:181 ../src/info.cc:325 ../src/info.cc:396
+#: ../src/info.cc:177 ../src/info.cc:321 ../src/info.cc:392
 msgid "Catalog: "
 msgstr "编目："
 
-#: ../src/info.cc:181 ../src/info.cc:325 ../src/info.cc:396
+#: ../src/info.cc:177 ../src/info.cc:321 ../src/info.cc:392
 msgid "Repository: "
 msgstr "安装源："
 
-#: ../src/info.cc:186 ../src/info.cc:330
+#: ../src/info.cc:182 ../src/info.cc:326
 msgid "Installed: "
 msgstr "已安装："
 
@@ -430,185 +430,185 @@ msgstr "已安装："
 #. enabled?
 #. autorefresh?
 #. is base
-#: ../src/info.cc:186 ../src/info.cc:257 ../src/info.cc:263 ../src/info.cc:265
-#: ../src/info.cc:330 ../src/info.cc:403 ../src/info.cc:407
-#: ../src/repos.cc:736 ../src/repos.cc:738 ../src/repos.cc:1347
-#: ../src/repos.cc:1349 ../src/repos.cc:2025 ../src/repos.cc:2027
-#: ../src/search.cc:608 ../src/solve-commit.cc:257
+#: ../src/info.cc:182 ../src/info.cc:253 ../src/info.cc:259 ../src/info.cc:261
+#: ../src/info.cc:326 ../src/info.cc:399 ../src/info.cc:403
+#: ../src/repos.cc:736 ../src/repos.cc:738 ../src/repos.cc:818
+#: ../src/repos.cc:1410 ../src/repos.cc:1412 ../src/repos.cc:2088
+#: ../src/repos.cc:2090 ../src/search.cc:608 ../src/solve-commit.cc:258
 msgid "Yes"
 msgstr "是"
 
-#: ../src/info.cc:186 ../src/info.cc:257 ../src/info.cc:263 ../src/info.cc:265
-#: ../src/info.cc:330 ../src/info.cc:403 ../src/info.cc:407
-#: ../src/repos.cc:736 ../src/repos.cc:738 ../src/repos.cc:1347
-#: ../src/repos.cc:1349 ../src/repos.cc:2025 ../src/repos.cc:2027
-#: ../src/search.cc:608 ../src/solve-commit.cc:257
+#: ../src/info.cc:182 ../src/info.cc:253 ../src/info.cc:259 ../src/info.cc:261
+#: ../src/info.cc:326 ../src/info.cc:399 ../src/info.cc:403
+#: ../src/repos.cc:736 ../src/repos.cc:738 ../src/repos.cc:818
+#: ../src/repos.cc:1410 ../src/repos.cc:1412 ../src/repos.cc:2088
+#: ../src/repos.cc:2090 ../src/search.cc:608 ../src/solve-commit.cc:258
 msgid "No"
 msgstr "否"
 
 #. ! \todo fix this - arch?
-#: ../src/info.cc:189 ../src/info.cc:252
+#: ../src/info.cc:185 ../src/info.cc:248
 msgid "Status: "
 msgstr "状态："
 
-#: ../src/info.cc:193
+#: ../src/info.cc:189
 msgid "up-to-date"
 msgstr "最新"
 
-#: ../src/info.cc:197
+#: ../src/info.cc:193
 #, c-format
 msgid "out-of-date (version %s installed)"
 msgstr "过时 (安装版本 %s)"
 
-#: ../src/info.cc:202
+#: ../src/info.cc:198
 msgid "not installed"
 msgstr "未安装"
 
-#: ../src/info.cc:204
+#: ../src/info.cc:200
 msgid "Installed Size: "
 msgstr "已安装的大小："
 
-#: ../src/info.cc:255
+#: ../src/info.cc:251
 msgid "Category: "
 msgstr "类别："
 
-#: ../src/info.cc:256
+#: ../src/info.cc:252
 msgid "Created On: "
 msgstr "创建日期："
 
-#: ../src/info.cc:257
+#: ../src/info.cc:253
 msgid "Reboot Required: "
 msgstr "需要重引导："
 
-#: ../src/info.cc:260
+#: ../src/info.cc:256
 msgid "Package Manager Restart Required"
 msgstr "需要重新启动软件包管理器"
 
-#: ../src/info.cc:262
+#: ../src/info.cc:258
 msgid "Restart Required: "
 msgstr "需要重新启动："
 
-#: ../src/info.cc:265
+#: ../src/info.cc:261
 msgid "Interactive: "
 msgstr "交互的："
 
-#: ../src/info.cc:269
+#: ../src/info.cc:265
 msgid "Provides:"
 msgstr "提供："
 
-#: ../src/info.cc:276
+#: ../src/info.cc:272
 #, fuzzy
 #| msgid "Conflicts"
 msgid "Conflicts:"
 msgstr "冲突"
 
-#: ../src/info.cc:297 ../src/search.cc:327
+#: ../src/info.cc:293 ../src/search.cc:327
 msgid "Recommended"
 msgstr "推荐"
 
-#: ../src/info.cc:299 ../src/search.cc:329
+#: ../src/info.cc:295 ../src/search.cc:329
 msgid "Suggested"
 msgstr "建议"
 
 #. translators: S for 'installed Status'
 #. translators: S for installed Status
 #. TranslatorExplanation S stands for Status
-#: ../src/info.cc:340 ../src/search.cc:38 ../src/search.cc:54
+#: ../src/info.cc:336 ../src/search.cc:38 ../src/search.cc:54
 #: ../src/search.cc:218 ../src/search.cc:389 ../src/search.cc:445
-#: ../src/search.cc:537 ../src/update.cc:523
+#: ../src/search.cc:537 ../src/update.cc:438
 msgid "S"
 msgstr "状态"
 
 #. translators: name (general header)
-#: ../src/info.cc:340 ../src/locks.cc:39 ../src/repos.cc:656
-#: ../src/repos.cc:705 ../src/repos.cc:2092 ../src/search.cc:44
-#: ../src/search.cc:56 ../src/search.cc:219 ../src/search.cc:268
-#: ../src/search.cc:390 ../src/search.cc:451 ../src/search.cc:540
-#: ../src/update.cc:193 ../src/update.cc:531 ../src/update.cc:963
-#: ../src/Zypper.cc:4146
+#: ../src/info.cc:336 ../src/locks.cc:39 ../src/repos.cc:656
+#: ../src/repos.cc:705 ../src/repos.cc:815 ../src/repos.cc:2155
+#: ../src/search.cc:44 ../src/search.cc:56 ../src/search.cc:219
+#: ../src/search.cc:268 ../src/search.cc:390 ../src/search.cc:451
+#: ../src/search.cc:540 ../src/update.cc:193 ../src/update.cc:446
+#: ../src/update.cc:876 ../src/Zypper.cc:4150
 msgid "Name"
 msgstr "名称"
 
 #. translators: type (general header)
-#: ../src/info.cc:340 ../src/locks.cc:43 ../src/repos.cc:656
-#: ../src/repos.cc:714 ../src/repos.cc:2100 ../src/search.cc:58
-#: ../src/search.cc:222
+#: ../src/info.cc:336 ../src/locks.cc:43 ../src/repos.cc:656
+#: ../src/repos.cc:714 ../src/repos.cc:830 ../src/repos.cc:2163
+#: ../src/search.cc:58 ../src/search.cc:222
 msgid "Type"
 msgstr "类型"
 
-#: ../src/info.cc:340 ../src/search.cc:392
+#: ../src/info.cc:336 ../src/search.cc:392
 msgid "Dependency"
 msgstr "依赖关系"
 
-#: ../src/info.cc:358
+#: ../src/info.cc:354
 msgid "Contents"
 msgstr "内容"
 
-#: ../src/info.cc:360
+#: ../src/info.cc:356
 msgid "(empty)"
 msgstr "(空)"
 
-#: ../src/info.cc:402 ../src/search.cc:548
+#: ../src/info.cc:398 ../src/search.cc:548
 msgid "Is Base"
 msgstr ""
 
-#: ../src/info.cc:404
+#: ../src/info.cc:400
 msgid "Flavor"
 msgstr ""
 
-#: ../src/info.cc:406 ../src/utils/misc.cc:140
+#: ../src/info.cc:402 ../src/utils/misc.cc:140
 msgid "Installed"
 msgstr "已安装 "
 
-#: ../src/info.cc:408
+#: ../src/info.cc:404
 msgid "Short Name"
 msgstr "短名称"
 
 #. translators: meaning a package %s or provider of capability %s
-#: ../src/install.cc:72 ../src/install.cc:186
+#: ../src/install.cc:70 ../src/install.cc:177
 #, c-format
 msgid "'%s' not found"
 msgstr "没有找到 '%s'。"
 
 #. translators: e.g. skipping package 'zypper' (the newest version already installed)
 #. ! \todo capitalize the first letter
-#: ../src/install.cc:108
+#: ../src/install.cc:99
 #, c-format
 msgid "skipping %s '%s' (the newest version already installed)"
 msgstr "正在跳过 %s '%s'（已经安装了最新版本）"
 
 #. translators: %s-%s.%s is name-version.arch
-#: ../src/install.cc:120
+#: ../src/install.cc:111
 #, c-format
 msgid "Package %s-%s.%s not found in repositories, cannot reinstall."
 msgstr "在安装源中找不到 %s-%s.%s 软件包，无法安装。"
 
-#: ../src/install.cc:133
+#: ../src/install.cc:124
 #, c-format
 msgid "Failed to add '%s' to the list of packages to be installed."
 msgstr "未能将'%s'添加到要安装的包列表。"
 
-#: ../src/install.cc:156
+#: ../src/install.cc:147
 #, c-format
 msgid "Failed to add '%s' to the list of packages to be removed."
 msgstr "未能将'%s'添加到要删除的包列表。"
 
-#: ../src/install.cc:378 ../src/install.cc:729
+#: ../src/install.cc:367 ../src/install.cc:724
 #, c-format
 msgid "'%s' is already installed."
 msgstr "'%s'已安装。"
 
 #. translators: meaning a package %s or provider of capability %s
-#: ../src/install.cc:418 ../src/install.cc:743
+#: ../src/install.cc:413 ../src/install.cc:738
 #, c-format
 msgid "'%s' is not installed."
 msgstr "'%s'未安装。"
 
-#: ../src/install.cc:442
+#: ../src/install.cc:437
 msgid "Cannot uninstall patches."
 msgstr "无法反安装补丁。"
 
-#: ../src/install.cc:443
+#: ../src/install.cc:438
 msgid ""
 "Installed status of a patch is determined solely based on its dependencies.\n"
 "Patches are not installed in sense of copied files, database records,\n"
@@ -618,38 +618,38 @@ msgstr ""
 "在复制文件、数据库记录或类似情况下，补丁不\n"
 "会被安装。"
 
-#: ../src/install.cc:454
+#: ../src/install.cc:449
 msgid "Uninstallation of a pattern is currently not defined and implemented."
 msgstr "当前没有定义模式反安装，也没有实现。"
 
-#: ../src/install.cc:468
+#: ../src/install.cc:463
 #, c-format
 msgid "%s contradicts %s"
 msgstr "%s 与 %s 冲突"
 
 #. translators: meaning --force with --capability
-#: ../src/install.cc:477
+#: ../src/install.cc:472
 #, c-format
 msgid "%s cannot currently be used with %s"
 msgstr "%s 现在不能和 %s 一起使用"
 
 #. translators: meaning a package %s or provider of capability %s
-#: ../src/install.cc:524 ../src/install.cc:700
+#: ../src/install.cc:519 ../src/install.cc:695
 #, c-format
 msgid "'%s' not found."
 msgstr "没有找到 '%s'。"
 
-#: ../src/install.cc:588
+#: ../src/install.cc:583
 msgid "Specifying architecture when selecting packages by name is not implemented."
 msgstr "不能实现按名称选择软件包时指定架构。"
 
-#: ../src/install.cc:625
+#: ../src/install.cc:620
 #, c-format
 msgid "'%s' is not a valid package or capability name."
 msgstr "`%s'不是有效的软件包或者 Capacity 名称。"
 
 #. translators: %s are package names
-#: ../src/install.cc:733
+#: ../src/install.cc:728
 #, c-format
 msgid "'%s' providing '%s' is already installed."
 msgstr "'%s' 提供 '%s' 已安装。"
@@ -667,7 +667,7 @@ msgstr "（多个）"
 
 #. translators: catalog (rug's word for repository) (header)
 #: ../src/locks.cc:41 ../src/search.cc:40 ../src/search.cc:267
-#: ../src/update.cc:192 ../src/update.cc:525
+#: ../src/update.cc:192 ../src/update.cc:440
 msgid "Catalog"
 msgstr "编目"
 
@@ -678,7 +678,7 @@ msgstr "重要性"
 #. translators: package's repository (header)
 #: ../src/locks.cc:43 ../src/search.cc:64 ../src/search.cc:392
 #: ../src/search.cc:450 ../src/search.cc:539 ../src/update.cc:192
-#: ../src/update.cc:525
+#: ../src/update.cc:440
 msgid "Repository"
 msgstr "安装源"
 
@@ -866,8 +866,8 @@ msgstr "正在接受服务 '%s' 的元数据"
 msgid "Problem retrieving files from '%s'."
 msgstr "从 '%s' 接收文件时出现问题。"
 
-#: ../src/repos.cc:160 ../src/repos.cc:2872 ../src/solve-commit.cc:663
-#: ../src/solve-commit.cc:692 ../src/solve-commit.cc:726
+#: ../src/repos.cc:160 ../src/repos.cc:2935 ../src/solve-commit.cc:690
+#: ../src/solve-commit.cc:719 ../src/solve-commit.cc:753
 msgid "Please see the above error message for a hint."
 msgstr "请参见以上错误信息找到线索。"
 
@@ -966,7 +966,7 @@ msgstr "正在初始化目标"
 msgid "Target initialization failed:"
 msgstr "目标初始化失败："
 
-#: ../src/repos.cc:636 ../src/Zypper.cc:3476
+#: ../src/repos.cc:636 ../src/Zypper.cc:3480
 msgid "Running 'zypper refresh' as root might resolve the problem."
 msgstr "以 root 运行 'zypper refresh' 或许会解决问题。"
 
@@ -986,26 +986,28 @@ msgstr "主动"
 msgid "Disabled"
 msgstr "已禁用"
 
-#: ../src/repos.cc:704 ../src/repos.cc:2091 ../src/Zypper.cc:4146
+#: ../src/repos.cc:704 ../src/repos.cc:814 ../src/repos.cc:2154
+#: ../src/Zypper.cc:4150
 msgid "Alias"
 msgstr "别名"
 
 #. TranslatorExplanation used as e.g. "Enabled: Yes"
-#: ../src/repos.cc:706 ../src/repos.cc:1347 ../src/repos.cc:2093
+#: ../src/repos.cc:706 ../src/repos.cc:818 ../src/repos.cc:1410
+#: ../src/repos.cc:2156
 msgid "Enabled"
 msgstr "已启用"
 
 #. translators: 'zypper repos' column - whether autorefresh is enabled for the repository
-#: ../src/repos.cc:708 ../src/repos.cc:2095
+#: ../src/repos.cc:708 ../src/repos.cc:2158
 msgid "Refresh"
 msgstr "刷新"
 
 #. translators: repository priority (in zypper repos -p or -d)
-#: ../src/repos.cc:712 ../src/repos.cc:2099
+#: ../src/repos.cc:712 ../src/repos.cc:821 ../src/repos.cc:2162
 msgid "Priority"
 msgstr "优先级"
 
-#: ../src/repos.cc:716 ../src/repos.cc:2102
+#: ../src/repos.cc:716 ../src/repos.cc:816 ../src/repos.cc:2165
 msgid "URI"
 msgstr "URI"
 
@@ -1018,493 +1020,539 @@ msgstr "服务"
 msgid "No repositories defined. Use the 'zypper addrepo' command to add one or more repositories."
 msgstr "没有定义软件源。使用 'zypper addrepo' 命令添加一个或多个软件源。"
 
-#: ../src/repos.cc:838 ../src/repos.cc:910 ../src/repos.cc:1080
+#: ../src/repos.cc:824
+#, fuzzy
+#| msgid "Autorefresh"
+msgid "Auto-refresh"
+msgstr "自动刷新"
+
+#: ../src/repos.cc:824 ../src/repos.cc:827 ../src/repos.cc:833
+msgid "On"
+msgstr "开"
+
+#: ../src/repos.cc:824 ../src/repos.cc:827 ../src/repos.cc:833
+msgid "Off"
+msgstr "关"
+
+#: ../src/repos.cc:827
+#, fuzzy
+#| msgid "System Packages"
+msgid "Keep Packages"
+msgstr "系统软件包"
+
+#: ../src/repos.cc:833
+#, fuzzy
+#| msgid "DNS Check"
+msgid "GPG Check"
+msgstr "DNS 检测"
+
+#: ../src/repos.cc:836
+msgid "GPG Key URI"
+msgstr ""
+
+#: ../src/repos.cc:839
+#, fuzzy
+#| msgid "Dial Prefix"
+msgid "Path Prefix"
+msgstr "拨号前缀"
+
+#: ../src/repos.cc:842
+#, fuzzy
+#| msgid "Print Server"
+msgid "Parent Service"
+msgstr "打印服务器"
+
+#: ../src/repos.cc:845
+msgid "MD Cache Path"
+msgstr ""
+
+#: ../src/repos.cc:899 ../src/repos.cc:973 ../src/repos.cc:1143
 msgid "Error reading repositories:"
 msgstr "读取安装源时出错："
 
-#: ../src/repos.cc:866 ../src/repos.cc:2224
+#: ../src/repos.cc:927 ../src/repos.cc:2287
 #, c-format
 msgid "Can't open %s for writing."
 msgstr "无法打开 %s 进行写操作。"
 
-#: ../src/repos.cc:868 ../src/repos.cc:2226
+#: ../src/repos.cc:929 ../src/repos.cc:2289
 msgid "Maybe you do not have write permissions?"
 msgstr "您是不是没有写的权限呢？"
 
-#: ../src/repos.cc:875 ../src/repos.cc:2233
+#: ../src/repos.cc:936 ../src/repos.cc:2296
 #, c-format
 msgid "Repositories have been successfully exported to %s."
 msgstr "软件源已经被成功导出到 %s。"
 
-#: ../src/repos.cc:928 ../src/repos.cc:1098
+#: ../src/repos.cc:991 ../src/repos.cc:1161
 msgid "Specified repositories: "
 msgstr "指定的软件源："
 
-#: ../src/repos.cc:967
+#: ../src/repos.cc:1030
 #, c-format
 msgid "Skipping disabled repository '%s'"
 msgstr "正在跳过已禁用的安装源 '%s'"
 
-#: ../src/repos.cc:982
+#: ../src/repos.cc:1045
 #, c-format
 msgid "Skipping repository '%s' because of the above error."
 msgstr "正在跳过出现如上错误的安装源 '%s' 。"
 
-#: ../src/repos.cc:997
+#: ../src/repos.cc:1060
 #, c-format
 msgid "Use '%s' or '%s' commands to add or enable repositories."
 msgstr "使用 '%s' 或者 '%s' 命令添加或启用安装源。"
 
-#: ../src/repos.cc:1000
+#: ../src/repos.cc:1063
 msgid "Specified repositories are not enabled or defined."
 msgstr "指定安装源没有被启用或者定义。"
 
-#: ../src/repos.cc:1002
+#: ../src/repos.cc:1065
 msgid "There are no enabled repositories defined."
 msgstr "未定义已经启用的软件源。"
 
-#: ../src/repos.cc:1006
+#: ../src/repos.cc:1069
 msgid "Could not refresh the repositories because of errors."
 msgstr "由于出错无法刷新软件安装源。"
 
-#: ../src/repos.cc:1012
+#: ../src/repos.cc:1075
 msgid "Some of the repositories have not been refreshed because of an error."
 msgstr "由于出错，一些软件源未被刷新。"
 
-#: ../src/repos.cc:1017
+#: ../src/repos.cc:1080
 msgid "Specified repositories have been refreshed."
 msgstr "指定安装源均已刷新。"
 
-#: ../src/repos.cc:1019
+#: ../src/repos.cc:1082
 msgid "All repositories have been refreshed."
 msgstr "所有安装源均已刷新。"
 
-#: ../src/repos.cc:1155
+#: ../src/repos.cc:1218
 #, c-format
 msgid "Cleaning metadata cache for '%s'."
 msgstr "正在清理'%s'的元数据。"
 
-#: ../src/repos.cc:1165
+#: ../src/repos.cc:1228
 #, c-format
 msgid "Cleaning raw metadata cache for '%s'."
 msgstr "正在为'%s'清理原始元数据。"
 
-#: ../src/repos.cc:1172
+#: ../src/repos.cc:1235
 #, fuzzy, c-format
 #| msgid "Cleaning raw metadata cache for '%s'."
 msgid "Keeping raw metadata cache for %s '%s'."
 msgstr "正在为'%s'清理原始元数据。"
 
 #. translators: meaning the cached rpm files
-#: ../src/repos.cc:1180
+#: ../src/repos.cc:1243
 #, c-format
 msgid "Cleaning packages for '%s'."
 msgstr "正在为 '%s' 清理软件包。"
 
-#: ../src/repos.cc:1188
+#: ../src/repos.cc:1251
 #, c-format
 msgid "Cannot clean repository '%s' because of an error."
 msgstr "由于出错无法清理软件源 '%s' 。"
 
-#: ../src/repos.cc:1202
+#: ../src/repos.cc:1265
 msgid "Cleaning installed packages cache."
 msgstr "正在清理已安装软件包缓存。"
 
-#: ../src/repos.cc:1210
+#: ../src/repos.cc:1273
 msgid "Cannot clean installed packages cache because of an error."
 msgstr "由于出错无法清理已安装软件包的缓存。"
 
-#: ../src/repos.cc:1218
+#: ../src/repos.cc:1281
 msgid "Could not clean the repositories because of errors."
 msgstr "由于出错无法清理软件安装源。"
 
-#: ../src/repos.cc:1225
+#: ../src/repos.cc:1288
 msgid "Some of the repositories have not been cleaned up because of an error."
 msgstr "由于出错，一些软件源未被清理。"
 
-#: ../src/repos.cc:1230
+#: ../src/repos.cc:1293
 msgid "Specified repositories have been cleaned up."
 msgstr "指定的软件源清理完毕。"
 
-#: ../src/repos.cc:1232
+#: ../src/repos.cc:1295
 msgid "All repositories have been cleaned up."
 msgstr "所有软件源清理完毕。"
 
-#: ../src/repos.cc:1272
+#: ../src/repos.cc:1335
 msgid "This is a changeable read-only media (CD/DVD), disabling autorefresh."
 msgstr "这是一个可以改变的只读介质（CD/DVD），禁用自动刷新。"
 
-#: ../src/repos.cc:1293 ../src/repos.cc:1554
+#: ../src/repos.cc:1356 ../src/repos.cc:1617
 #, c-format
 msgid "Repository named '%s' already exists. Please use another alias."
 msgstr "已经存在名称为'%s'的软件源。请另外选择一个别名。"
 
-#: ../src/repos.cc:1304
+#: ../src/repos.cc:1367
 msgid "Could not determine the type of the repository. Please check if the defined URIs (see below) point to a valid repository:"
 msgstr "不能确定软件源的类型。请检查下面定义的 URI 是否指向一个有效的软件源："
 
-#: ../src/repos.cc:1311 ../src/Zypper.cc:2531
+#: ../src/repos.cc:1374 ../src/Zypper.cc:2535
 msgid "Can't find a valid repository at given location:"
 msgstr "不能在指定的位置找到一个正确的安装源："
 
-#: ../src/repos.cc:1320
+#: ../src/repos.cc:1383
 msgid "Problem transferring repository data from specified URI:"
 msgstr "从指定 URI 传输软件源数据出现问题："
 
-#: ../src/repos.cc:1321
+#: ../src/repos.cc:1384
 msgid "Please check whether the specified URI is accessible."
 msgstr "请检查指定的 URI 是否可访问。"
 
-#: ../src/repos.cc:1329
+#: ../src/repos.cc:1392
 msgid "Unknown problem when adding repository:"
 msgstr "添加软件源时出现未知问题："
 
-#: ../src/repos.cc:1335
+#: ../src/repos.cc:1398
 #, c-format
 msgid "Repository '%s' successfully added"
 msgstr "成功添加了安装源 '%s' "
 
 #. TranslatorExplanation used as e.g. "Autorefresh: Yes"
-#: ../src/repos.cc:1349
+#: ../src/repos.cc:1412
 msgid "Autorefresh"
 msgstr "自动刷新"
 
-#: ../src/repos.cc:1364
+#: ../src/repos.cc:1427
 #, c-format
 msgid "Reading data from '%s' media"
 msgstr "正在从介质 '%s' 读取数据"
 
-#: ../src/repos.cc:1371
+#: ../src/repos.cc:1434
 #, c-format
 msgid "Problem reading data from '%s' media"
 msgstr "从介质 '%s' 读取数据出现问题"
 
-#: ../src/repos.cc:1372
+#: ../src/repos.cc:1435
 msgid "Please check if your installation media is valid and readable."
 msgstr "请检查您的安装介质是否正确和可读。"
 
-#: ../src/repos.cc:1437
+#: ../src/repos.cc:1500
 msgid "Problem accessing the file at the specified URI"
 msgstr "访问指定 URI 处文件出现问题"
 
-#: ../src/repos.cc:1438
+#: ../src/repos.cc:1501
 msgid "Please check if the URI is valid and accessible."
 msgstr "请检查 URI 是有效的且可访问的。"
 
-#: ../src/repos.cc:1446
+#: ../src/repos.cc:1509
 msgid "Problem parsing the file at the specified URI"
 msgstr "解析指定 URI 的文件出现问题"
 
 #. TranslatorExplanation don't translate the URI if the URI itself is not translated.
 #. Also don't translate the '.repo' string.
-#: ../src/repos.cc:1449
+#: ../src/repos.cc:1512
 msgid "Is it a .repo file? See http://en.opensuse.org/Standards/RepoInfo for details."
 msgstr "这是一个 .repo 文件吗？ 细节请看 http://en.opensuse.org/Standards/RepoInfo"
 
-#: ../src/repos.cc:1457
+#: ../src/repos.cc:1520
 msgid "Problem encountered while trying to read the file at the specified URI"
 msgstr "尝试读取指定 URI 处文件时遇到问题"
 
-#: ../src/repos.cc:1471
+#: ../src/repos.cc:1534
 msgid "Repository with no alias defined found in the file, skipping."
 msgstr "在文件中发现一个安装源没有定义别名，正在跳过。"
 
-#: ../src/repos.cc:1478
+#: ../src/repos.cc:1541
 #, c-format
 msgid "Repository '%s' has no URI defined, skipping."
 msgstr "安装源 '%s' 未定义 URI，正在跳过。"
 
-#: ../src/repos.cc:1518
+#: ../src/repos.cc:1581
 #, c-format
 msgid "Repository '%s' has been removed."
 msgstr "安装源 '%s' 已经被移除。"
 
-#: ../src/repos.cc:1537
+#: ../src/repos.cc:1600
 #, c-format
 msgid "Cannot change alias of '%s' repository. The repository belongs to service '%s' which is responsible for setting its alias."
 msgstr "无法改变安装源 '%s' 的别名。此安装源属于服务'%s' ，该服务负责指定别名。"
 
-#: ../src/repos.cc:1548
+#: ../src/repos.cc:1611
 #, c-format
 msgid "Repository '%s' renamed to '%s'."
 msgstr "安装源 '%s' 重命名为 '%s' 。"
 
-#: ../src/repos.cc:1560 ../src/repos.cc:1780
+#: ../src/repos.cc:1623 ../src/repos.cc:1843
 msgid "Error while modifying the repository:"
 msgstr "修改安装源时出现错误："
 
-#: ../src/repos.cc:1561
+#: ../src/repos.cc:1624
 #, c-format
 msgid "Leaving repository '%s' unchanged."
 msgstr "不改变安装源 '%s' "
 
-#: ../src/repos.cc:1698
+#: ../src/repos.cc:1761
 #, c-format
 msgid "Invalid priority '%s'. Use a positive integer number. The greater the number, the lower the priority."
 msgstr "优先级 '%s' 无效。请使用正整数。数字越大，优先级越低。"
 
-#: ../src/repos.cc:1706
+#: ../src/repos.cc:1769
 #, c-format
 msgid "Repository '%s' priority has been left unchanged (%d)"
 msgstr "安装源 '%s' 的优先级未被改变(%d)"
 
-#: ../src/repos.cc:1732
+#: ../src/repos.cc:1795
 #, fuzzy, c-format
 #| msgid "Repository '%s' has been sucessfully enabled."
 msgid "Repository '%s' has been successfully enabled."
 msgstr "成功启用软件源 '%s'。"
 
-#: ../src/repos.cc:1735
+#: ../src/repos.cc:1798
 #, fuzzy, c-format
 #| msgid "Repository '%s' has been sucessfully disabled."
 msgid "Repository '%s' has been successfully disabled."
 msgstr "成功禁用软件源 '%s'。"
 
-#: ../src/repos.cc:1742
+#: ../src/repos.cc:1805
 #, c-format
 msgid "Autorefresh has been enabled for repository '%s'."
 msgstr "已启用安装源'%s'的自动刷新。"
 
-#: ../src/repos.cc:1745
+#: ../src/repos.cc:1808
 #, c-format
 msgid "Autorefresh has been disabled for repository '%s'."
 msgstr "已禁用安装源'%s'的自动刷新。"
 
-#: ../src/repos.cc:1752
+#: ../src/repos.cc:1815
 #, c-format
 msgid "RPM files caching has been enabled for repository '%s'."
 msgstr "缓存 RPM 文件在软件源 '%s' 被启用。"
 
-#: ../src/repos.cc:1755
+#: ../src/repos.cc:1818
 #, c-format
 msgid "RPM files caching has been disabled for repository '%s'."
 msgstr "缓存 RPM 文件在软件源 '%s' 被禁用。"
 
-#: ../src/repos.cc:1761
+#: ../src/repos.cc:1824
 #, c-format
 msgid "Repository '%s' priority has been set to %d."
 msgstr "安装源 '%s' 的优先级被设为 %d。"
 
-#: ../src/repos.cc:1767
+#: ../src/repos.cc:1830
 #, c-format
 msgid "Name of repository '%s' has been set to '%s'."
 msgstr "安装源 '%s' 名称被设定为 '%s'。"
 
-#: ../src/repos.cc:1773
+#: ../src/repos.cc:1836
 #, c-format
 msgid "Nothing to change for repository '%s'."
 msgstr "对安装源 '%s' 未作任何改变。"
 
-#: ../src/repos.cc:1781
+#: ../src/repos.cc:1844
 #, c-format
 msgid "Leaving repository %s unchanged."
 msgstr "安装源 %s 未有改变。"
 
-#: ../src/repos.cc:1819
+#: ../src/repos.cc:1882
 msgid "Error reading services:"
 msgstr "读取服务时出错："
 
-#: ../src/repos.cc:1908
+#: ../src/repos.cc:1971
 #, c-format
 msgid "Service '%s' not found by its alias, number, or URI."
 msgstr "无法通过别名、编号或 URI 找到服务 '%s'。"
 
-#: ../src/repos.cc:1912
+#: ../src/repos.cc:1975
 #, c-format
 msgid "Use '%s' to get the list of defined services."
 msgstr "用 '%s' 获得已定义的服务列表。"
 
-#: ../src/repos.cc:2138
+#: ../src/repos.cc:2201
 #, c-format
 msgid "No services defined. Use the '%s' command to add one or more services."
 msgstr "没有定义服务。使用 '%s' 命令添加一个或多个服务。"
 
-#: ../src/repos.cc:2264
+#: ../src/repos.cc:2327
 #, c-format
 msgid "Service aliased '%s' already exists. Please use another alias."
 msgstr "已经存在别名为'%s'的服务。请另外选择一个别名。"
 
-#: ../src/repos.cc:2274
+#: ../src/repos.cc:2337
 #, c-format
 msgid "Error occured while adding service '%s'."
 msgstr "添加服务 '%s' 出错。"
 
-#: ../src/repos.cc:2280
+#: ../src/repos.cc:2343
 #, c-format
 msgid "Service '%s' has been successfully added."
 msgstr "成功添加了服务 '%s'。"
 
-#: ../src/repos.cc:2319
+#: ../src/repos.cc:2382
 #, c-format
 msgid "Removing service '%s':"
 msgstr "正在移除服务 '%s'："
 
-#: ../src/repos.cc:2322
+#: ../src/repos.cc:2385
 #, c-format
 msgid "Service '%s' has been removed."
 msgstr "服务 '%s' 已经被移除。"
 
-#: ../src/repos.cc:2338
+#: ../src/repos.cc:2401
 #, c-format
 msgid "Refreshing service '%s'."
 msgstr "正在刷新服务 '%s'。"
 
-#: ../src/repos.cc:2347
+#: ../src/repos.cc:2410
 #, c-format
 msgid "Problem retrieving the repository index file for service '%s':"
 msgstr "从安装源接受服务 '%s' 的索引文件出错："
 
-#: ../src/repos.cc:2349
+#: ../src/repos.cc:2412
 msgid "Check if the URI is valid and accessible."
 msgstr "检查 URI 是有效的且可访问的。"
 
-#: ../src/repos.cc:2407
+#: ../src/repos.cc:2470
 #, c-format
 msgid "Skipping disabled service '%s'"
 msgstr "正在跳过已禁用的服务 '%s'"
 
-#: ../src/repos.cc:2453
+#: ../src/repos.cc:2516
 #, c-format
 msgid "Skipping service '%s' because of the above error."
 msgstr "正在跳过出现如上错误的服务 '%s' 。"
 
-#: ../src/repos.cc:2468
+#: ../src/repos.cc:2531
 #, c-format
 msgid "Use '%s' or '%s' commands to add or enable services."
 msgstr "使用 '%s' 或者 '%s' 命令添加或启用服务。"
 
-#: ../src/repos.cc:2471
+#: ../src/repos.cc:2534
 msgid "Specified services are not enabled or defined."
 msgstr "指定服务没有被启用或者定义。"
 
-#: ../src/repos.cc:2473
+#: ../src/repos.cc:2536
 msgid "There are no enabled services defined."
 msgstr "未定义已启用的服务。"
 
-#: ../src/repos.cc:2477
+#: ../src/repos.cc:2540
 msgid "Could not refresh the services because of errors."
 msgstr "由于出错无法刷新服务。"
 
-#: ../src/repos.cc:2483
+#: ../src/repos.cc:2546
 msgid "Some of the services have not been refreshed because of an error."
 msgstr "由于出错，一些服务未被刷新。"
 
-#: ../src/repos.cc:2488
+#: ../src/repos.cc:2551
 msgid "Specified services have been refreshed."
 msgstr "指定服务均已刷新。"
 
-#: ../src/repos.cc:2490
+#: ../src/repos.cc:2553
 msgid "All services have been refreshed."
 msgstr "所有服务均已刷新。"
 
-#: ../src/repos.cc:2612
+#: ../src/repos.cc:2675
 #, c-format
 msgid "Service '%s' has been sucessfully enabled."
 msgstr "成功启用服务 '%s'。"
 
-#: ../src/repos.cc:2615
+#: ../src/repos.cc:2678
 #, c-format
 msgid "Service '%s' has been sucessfully disabled."
 msgstr "成功禁用服务 '%s'。"
 
-#: ../src/repos.cc:2622
+#: ../src/repos.cc:2685
 #, c-format
 msgid "Autorefresh has been enabled for service '%s'."
 msgstr "已启用服务 '%s' 的自动刷新。"
 
-#: ../src/repos.cc:2625
+#: ../src/repos.cc:2688
 #, c-format
 msgid "Autorefresh has been disabled for service '%s'."
 msgstr "已禁用服务 '%s' 的自动刷新。"
 
-#: ../src/repos.cc:2631
+#: ../src/repos.cc:2694
 #, c-format
 msgid "Name of service '%s' has been set to '%s'."
 msgstr "服务 '%s' 名称被设定为 '%s'。"
 
-#: ../src/repos.cc:2637
+#: ../src/repos.cc:2700
 #, c-format
 msgid "Repository '%s' has been added to enabled repositories of service '%s'"
 msgid_plural "Repositories '%s' have been added to enabled repositories of service '%s'"
 msgstr[0] "安装源 '%s' 已被加入服务 '%s' 中被启用的安装源。"
 
-#: ../src/repos.cc:2645
+#: ../src/repos.cc:2708
 #, c-format
 msgid "Repository '%s' has been added to disabled repositories of service '%s'"
 msgid_plural "Repositories '%s' have been added to disabled repositories of service '%s'"
 msgstr[0] "安装源 '%s' 已被加入服务 '%s' 中被禁用的安装源。"
 
-#: ../src/repos.cc:2653
+#: ../src/repos.cc:2716
 #, c-format
 msgid "Repository '%s' has been removed from enabled repositories of service '%s'"
 msgid_plural "Repositories '%s' have been removed from enabled repositories of service '%s'"
 msgstr[0] "安装源 '%s' 已从服务 '%s' 中被启用的安装源中移除。"
 
-#: ../src/repos.cc:2661
+#: ../src/repos.cc:2724
 #, c-format
 msgid "Repository '%s' has been removed from disabled repositories of service '%s'"
 msgid_plural "Repositories '%s' have been removed from disabled repositories of service '%s'"
 msgstr[0] "安装源 '%s' 已从服务 '%s' 中被禁用的安装源中移除。"
 
-#: ../src/repos.cc:2670
+#: ../src/repos.cc:2733
 #, c-format
 msgid "Nothing to change for service '%s'."
 msgstr "对服务 '%s' 未作任何改变。"
 
-#: ../src/repos.cc:2677
+#: ../src/repos.cc:2740
 msgid "Error while modifying the service:"
 msgstr "修改服务时出现错误："
 
-#: ../src/repos.cc:2678
+#: ../src/repos.cc:2741
 #, c-format
 msgid "Leaving service %s unchanged."
 msgstr "服务 %s 未有改变。"
 
-#: ../src/repos.cc:2785
+#: ../src/repos.cc:2848
 msgid "Loading repository data..."
 msgstr "正在加载安装源数据..."
 
-#: ../src/repos.cc:2803
+#: ../src/repos.cc:2866
 #, c-format
 msgid "Retrieving repository '%s' data..."
 msgstr "正在接受安装源 %s 的数据..."
 
-#: ../src/repos.cc:2810
+#: ../src/repos.cc:2873
 #, c-format
 msgid "Repository '%s' not cached. Caching..."
 msgstr "安装源 '%s' 未被缓存。正在缓存中..."
 
-#: ../src/repos.cc:2817 ../src/repos.cc:2845
+#: ../src/repos.cc:2880 ../src/repos.cc:2908
 #, c-format
 msgid "Problem loading data from '%s'"
 msgstr "从 '%s' 加载数据出错"
 
-#: ../src/repos.cc:2818 ../src/repos.cc:2851
+#: ../src/repos.cc:2881 ../src/repos.cc:2914
 #, c-format
 msgid "Resolvables from '%s' not loaded because of error."
 msgstr "出现错误，未加载来自 '%s' 的可解析项。"
 
-#: ../src/repos.cc:2834
+#: ../src/repos.cc:2897
 #, c-format
 msgid "Repository '%s' appears to outdated. Consider using a different mirror or server."
 msgstr "安装源 '%s' 可能已经过期失效。请考虑使用一个不同的镜像或服务器。"
 
 #. translators: the first %s is 'zypper refresh' and the second 'zypper clean -m'
-#: ../src/repos.cc:2847
+#: ../src/repos.cc:2910
 #, c-format
 msgid "Try '%s', or even '%s' before doing so."
 msgstr "尝试 '%s'，或之前使用 '%s'。"
 
-#: ../src/repos.cc:2860
+#: ../src/repos.cc:2923
 msgid "Reading installed packages..."
 msgstr "正在读取已安装的软件包..."
 
-#: ../src/repos.cc:2871
+#: ../src/repos.cc:2934
 msgid "Problem occured while reading the installed packages:"
 msgstr "读取已安装软件包时出现问题："
 
 #. list name, exact match
-#: ../src/repos.cc:2886
+#: ../src/repos.cc:2949
 msgid ""
 "ZENworks Management Daemon is running.\n"
 "WARNING: this command will not synchronize changes.\n"
@@ -1515,20 +1563,20 @@ msgstr ""
 "请用 rug 或者 yast2 同步。"
 
 #. translators: Bundle is a term used in rug. See rug for how to translate it.
-#: ../src/search.cc:42 ../src/search.cc:448 ../src/update.cc:528
+#: ../src/search.cc:42 ../src/search.cc:448 ../src/update.cc:443
 msgid "Bundle"
 msgstr "捆绑软件"
 
 #. translators: package version (header)
 #: ../src/search.cc:46 ../src/search.cc:60 ../src/search.cc:269
 #: ../src/search.cc:390 ../src/search.cc:451 ../src/search.cc:541
-#: ../src/update.cc:193 ../src/update.cc:963
+#: ../src/update.cc:193 ../src/update.cc:876
 msgid "Version"
 msgstr "版本"
 
 #. translators: package architecture (header)
 #: ../src/search.cc:48 ../src/search.cc:62 ../src/search.cc:451
-#: ../src/search.cc:547 ../src/update.cc:537
+#: ../src/search.cc:547 ../src/update.cc:452
 msgid "Arch"
 msgstr "存档"
 
@@ -1537,14 +1585,14 @@ msgid "System Packages"
 msgstr "系统软件包"
 
 #. translators: package summary (header)
-#: ../src/search.cc:221 ../src/update.cc:963
+#: ../src/search.cc:221 ../src/update.cc:876
 msgid "Summary"
 msgstr "小结"
 
 #. translators: patch category (recommended, security)
 #. translators: product category (base/addon), the rug term
 #: ../src/search.cc:271 ../src/search.cc:544 ../src/update.cc:193
-#: ../src/update.cc:862 ../src/update.cc:963
+#: ../src/update.cc:775 ../src/update.cc:876
 msgid "Category"
 msgstr "类别"
 
@@ -1556,7 +1604,7 @@ msgstr "找不到需要的补丁程序。"
 msgid "No patterns found."
 msgstr "没有找到样式。"
 
-#: ../src/search.cc:501 ../src/Zypper.cc:3434
+#: ../src/search.cc:501 ../src/Zypper.cc:3438
 msgid "No packages found."
 msgstr "没有找到软件包。"
 
@@ -1570,24 +1618,24 @@ msgid "No providers of '%s' found."
 msgstr "找不到 '%s' 提供者。"
 
 #. translators: meaning 'dependency problem' found during solving
-#: ../src/solve-commit.cc:42
+#: ../src/solve-commit.cc:43
 msgid "Problem: "
 msgstr "问题："
 
 #. TranslatorExplanation %d is the solution number
-#: ../src/solve-commit.cc:55
+#: ../src/solve-commit.cc:56
 #, c-format
 msgid " Solution %d: "
 msgstr "方案 %d："
 
-#: ../src/solve-commit.cc:74
+#: ../src/solve-commit.cc:75
 msgid "Choose the above solution using '1' or skip, retry or cancel"
 msgid_plural "Choose from above solutions by number or skip, retry or cancel"
 msgstr[0] "请从以上方案中选择：数字、跳过、重试或者取消"
 
 #. translators: translate 'c' to whatever you translated the 'c' in
 #. "c" and "s/r/c" strings
-#: ../src/solve-commit.cc:81
+#: ../src/solve-commit.cc:82
 msgid "Choose the above solution using '1' or cancel using 'c'"
 msgid_plural "Choose from above solutions by number or cancel"
 msgstr[0] "请从以上方案中选择：数字或者取消"
@@ -1598,7 +1646,7 @@ msgstr[0] "请从以上方案中选择：数字或者取消"
 #. The anserws must be separated by slash characters '/' and must
 #. correspond to skip/retry/cancel in that order.
 #. The answers should be lower case letters.
-#: ../src/solve-commit.cc:100
+#: ../src/solve-commit.cc:101
 msgid "s/r/c"
 msgstr "s/r/c"
 
@@ -1609,95 +1657,96 @@ msgstr "s/r/c"
 #. See the "s/r/c" comment for other details.
 #. One letter string  for translation can be tricky, so in case of problems,
 #. please report a bug against zypper at bugzilla.novell.com, we'll try to solve it.
-#: ../src/solve-commit.cc:112
+#: ../src/solve-commit.cc:113
 msgid "c"
 msgstr "c"
 
 #. continue with next problem
-#: ../src/solve-commit.cc:132
+#: ../src/solve-commit.cc:133
 #, c-format
 msgid "Applying solution %s"
 msgstr "应用方案 %s"
 
-#: ../src/solve-commit.cc:156
+#: ../src/solve-commit.cc:157
 #, c-format
 msgid "%d Problem:"
 msgid_plural "%d Problems:"
 msgstr[0] "%d 问题："
 
 #. should not happen! If solve() failed at least one problem must be set!
-#: ../src/solve-commit.cc:160
+#: ../src/solve-commit.cc:161
 msgid "Specified capability not found"
 msgstr "未找到指定的功能。"
 
-#: ../src/solve-commit.cc:171
+#: ../src/solve-commit.cc:172
 #, c-format
 msgid "Problem: %s"
 msgstr "问题：%s"
 
-#: ../src/solve-commit.cc:186
+#: ../src/solve-commit.cc:187
 msgid "Resolving dependencies..."
 msgstr "正在解析依赖性..."
 
 #. translators: meaning --force-resolution and --no-force-resolution
-#: ../src/solve-commit.cc:231
+#: ../src/solve-commit.cc:232
 #, c-format
 msgid "%s conflicts with %s, will use the less aggressive %s"
 msgstr "%s 与 %s 冲突，将使用没有这么激进的 %s"
 
-#: ../src/solve-commit.cc:257
+#: ../src/solve-commit.cc:258
 msgid "Force resolution:"
 msgstr "强制分辨率："
 
-#: ../src/solve-commit.cc:318
+#: ../src/solve-commit.cc:319
 msgid "Verifying dependencies..."
 msgstr "正在检查依赖关系..."
 
-#: ../src/solve-commit.cc:327
+#. compute the upgrade
+#: ../src/solve-commit.cc:354
 msgid "Computing upgrade..."
 msgstr "计算升级..."
 
-#: ../src/solve-commit.cc:343
+#: ../src/solve-commit.cc:370
 msgid "Generating solver test case..."
 msgstr "正在生成解析程序试例..."
 
-#: ../src/solve-commit.cc:346
+#: ../src/solve-commit.cc:373
 #, c-format
 msgid "Solver test case generated successfully at %s."
 msgstr "解析程序试例在 %s 成功生成。"
 
-#: ../src/solve-commit.cc:350
+#: ../src/solve-commit.cc:377
 msgid "Error creating the solver test case."
 msgstr "创建解析程序依赖关系的试例出错。"
 
-#: ../src/solve-commit.cc:381 ../src/utils/misc.cc:419
+#: ../src/solve-commit.cc:408 ../src/utils/misc.cc:419
 msgid "Checking for running processes using deleted libraries..."
 msgstr ""
 
-#: ../src/solve-commit.cc:390 ../src/utils/misc.cc:428
+#: ../src/solve-commit.cc:417 ../src/utils/misc.cc:428
 #, fuzzy
 #| msgid "Check for updates:"
 msgid "Check failed:"
 msgstr "正在检查更新："
 
-#: ../src/solve-commit.cc:396
+#: ../src/solve-commit.cc:423
 #, c-format
 msgid "There are some running programs that use files deleted by recent upgrade. You may wish to restart some of them. Run '%s' to list these programs."
 msgstr ""
 
-#: ../src/solve-commit.cc:435
+#: ../src/solve-commit.cc:462
 msgid "Computing distribution upgrade..."
 msgstr "正在计算大版本升级..."
 
-#: ../src/solve-commit.cc:440
+#: ../src/solve-commit.cc:467
 msgid "Resolving package dependencies..."
 msgstr "正在解析软件包依赖性..."
 
-#: ../src/solve-commit.cc:491
+#: ../src/solve-commit.cc:518
 msgid "Some of the dependencies of installed packages are broken. In order to fix these dependencies, the following actions need to be taken:"
 msgstr "一些安装的软件包依赖关系已经损坏。要修复依赖，需要执行以下操作："
 
-#: ../src/solve-commit.cc:499
+#: ../src/solve-commit.cc:526
 msgid "Root privileges are required to fix broken package dependencies."
 msgstr "修复软件包依赖关系需要有 root 特权。"
 
@@ -1711,81 +1760,81 @@ msgstr "修复软件包依赖关系需要有 root 特权。"
 #. The answers should be lower case letters, but in general, any UTF-8
 #. string will do.
 #. ! \todo add c for changelog and x for explain (show the dep tree)
-#: ../src/solve-commit.cc:526
+#: ../src/solve-commit.cc:553
 msgid "y/n/p/v/a/r/m/d/g"
 msgstr ""
 
 #. translators: help text for 'y' option in the 'Continue?' prompt
-#: ../src/solve-commit.cc:531
+#: ../src/solve-commit.cc:558
 #, fuzzy
 #| msgid "Accept the summary and proceed with installation/removal of packages."
 msgid "Yes, accept the summary and proceed with installation/removal of packages."
 msgstr "接受概述，继续安装/删除软件包。"
 
 #. translators: help text for 'n' option in the 'Continue?' prompt
-#: ../src/solve-commit.cc:533
+#: ../src/solve-commit.cc:560
 #, fuzzy
 #| msgid "Cancel the operation."
 msgid "No, cancel the operation."
 msgstr "取消操作。"
 
 #. translators: help text for 'p' option in the 'Continue?' prompt
-#: ../src/solve-commit.cc:535
+#: ../src/solve-commit.cc:562
 msgid "Restart solver in no-force-resolution mode in order to show dependency problems."
 msgstr "重新以无强制解决模式启动解析程序，以显示依赖性问题。"
 
 #. translators: help text for 'v' option in the 'Continue?' prompt
-#: ../src/solve-commit.cc:537
+#: ../src/solve-commit.cc:564
 msgid "Toggle display of package versions."
 msgstr ""
 
 #. translators: help text for 'a' option in the 'Continue?' prompt
-#: ../src/solve-commit.cc:539
+#: ../src/solve-commit.cc:566
 msgid "Toggle display of package architectures."
 msgstr ""
 
 #. translators: help text for 'r' option in the 'Continue?' prompt
-#: ../src/solve-commit.cc:541
+#: ../src/solve-commit.cc:568
 #, fuzzy
 #| msgid "The following packages will be installed:\n"
 msgid "Toggle display of repositories from which the packages will be installed."
 msgstr "将安装以下包：\n"
 
 #. translators: help text for 'm' option in the 'Continue?' prompt
-#: ../src/solve-commit.cc:543
+#: ../src/solve-commit.cc:570
 msgid "Toggle display of package vendor names."
 msgstr ""
 
 #. translators: help text for 'd' option in the 'Continue?' prompt
-#: ../src/solve-commit.cc:545
+#: ../src/solve-commit.cc:572
 msgid "Toggle between showing all details and as few details as possible."
 msgstr ""
 
 #. translators: help text for 'g' option in the 'Continue?' prompt
-#: ../src/solve-commit.cc:547
+#: ../src/solve-commit.cc:574
 msgid "View the summary in pager."
 msgstr ""
 
-#: ../src/solve-commit.cc:640
+#: ../src/solve-commit.cc:667
 msgid "committing"
 msgstr "正在提交"
 
-#: ../src/solve-commit.cc:642
+#: ../src/solve-commit.cc:669
 msgid "(dry run)"
 msgstr "(演习)"
 
-#: ../src/solve-commit.cc:662 ../src/solve-commit.cc:702
+#: ../src/solve-commit.cc:689 ../src/solve-commit.cc:729
 msgid "Problem retrieving the package file from the repository:"
 msgstr "从软件源下载软件包文件出错："
 
 #. translators: the first %s is 'zypper refresh' and the second
 #. is repo allias
-#: ../src/solve-commit.cc:698
+#: ../src/solve-commit.cc:725
 #, c-format
 msgid "Repository '%s' is out of date. Running '%s' might help."
 msgstr "软件源 '%s' 太旧。运行 '%s' 可能有效。"
 
-#: ../src/solve-commit.cc:711
+#: ../src/solve-commit.cc:738
 msgid ""
 "The package integrity check failed. This may be a problem with the repository or media. Try one of the following:\n"
 "\n"
@@ -1801,23 +1850,23 @@ msgstr ""
 " － 使用其他安装介质(如果已经损坏)\n"
 " － 使用其他安装源"
 
-#: ../src/solve-commit.cc:725
+#: ../src/solve-commit.cc:752
 msgid "Problem occured during or after installation or removal of packages:"
 msgstr "下列软件包在安装期间或安装后或移除时出现问题："
 
-#: ../src/solve-commit.cc:741
+#: ../src/solve-commit.cc:768
 msgid "One of installed patches requires reboot of your machine. Reboot as soon as possible."
 msgstr "安装的补丁之一需要重新启动计算机。请尽快重启。"
 
-#: ../src/solve-commit.cc:750
+#: ../src/solve-commit.cc:777
 msgid "One of installed patches affects the package manager itself. Run this command once more to install any other needed patches."
 msgstr "其中一个已安装补丁影响到软件包管理程序本身。重新运行此命令以安装其它所需补丁。"
 
-#: ../src/solve-commit.cc:767
+#: ../src/solve-commit.cc:794
 msgid "Dependencies of all installed packages are satisfied."
 msgstr "所有已安装的软件包的依赖关系都满足。"
 
-#: ../src/solve-commit.cc:769
+#: ../src/solve-commit.cc:796
 msgid "Nothing to do."
 msgstr "无操作。"
 
@@ -2121,7 +2170,7 @@ msgstr "需要重新启动"
 msgid "The following software management updates will be installed first:"
 msgstr "将安装以下包：\n"
 
-#: ../src/update.cc:242 ../src/update.cc:583
+#: ../src/update.cc:242 ../src/update.cc:498
 msgid "No updates found."
 msgstr "没有更新。"
 
@@ -2131,112 +2180,112 @@ msgstr "没有更新。"
 msgid "The following updates are also available:"
 msgstr "下列更新可用："
 
-#: ../src/update.cc:448
+#: ../src/update.cc:363
 msgid "Package updates"
 msgstr "软件包更新"
 
-#: ../src/update.cc:450
+#: ../src/update.cc:365
 msgid "Patches"
 msgstr "补丁"
 
-#: ../src/update.cc:452
+#: ../src/update.cc:367
 msgid "Pattern updates"
 msgstr "模式更新"
 
-#: ../src/update.cc:454
+#: ../src/update.cc:369
 msgid "Product updates"
 msgstr "产品更新"
 
-#: ../src/update.cc:536
+#: ../src/update.cc:451
 #, fuzzy
 #| msgid "Current Connection"
 msgid "Current Version"
 msgstr "当前连接"
 
-#: ../src/update.cc:537
+#: ../src/update.cc:452
 #, fuzzy
 #| msgid "Available Memory"
 msgid "Available Version"
 msgstr "可用内存"
 
-#: ../src/update.cc:647
+#: ../src/update.cc:562
 #, c-format
 msgid "Cannot parse '%s < %s'"
 msgstr "无法分析 '%s < %s'"
 
 #. translators: %s is the name of a patch
-#: ../src/update.cc:676
+#: ../src/update.cc:591
 #, c-format
 msgid "'%s' is interactive, skipping."
 msgstr "'%s'是交互的，跳过。"
 
-#: ../src/update.cc:736
+#: ../src/update.cc:651
 #, c-format
 msgid "No patches matching '%s' found."
 msgstr "没有找到匹配 '%s' 的补丁。"
 
-#: ../src/update.cc:739
+#: ../src/update.cc:654
 #, c-format
 msgid "Patch '%s' not found."
 msgstr "没有找到补丁 '%s'。"
 
-#: ../src/update.cc:806
+#: ../src/update.cc:721
 #, c-format
 msgid "No packages matching '%s' are installed."
 msgstr "没有匹配 '%s' 的软件包被安装。"
 
-#: ../src/update.cc:809
+#: ../src/update.cc:724
 #, c-format
 msgid "Package '%s' is not installed."
 msgstr "软件包 '%s' 没有安装。"
 
-#: ../src/update.cc:826
+#: ../src/update.cc:739
 #, c-format
 msgid "No update candidate for '%s'."
 msgstr "没有'%s'的更新候选。"
 
-#: ../src/update.cc:862
+#: ../src/update.cc:775
 msgid "Issue"
 msgstr ""
 
-#: ../src/update.cc:862
+#: ../src/update.cc:775
 #, fuzzy
 #| msgid "No"
 msgid "No."
 msgstr "否"
 
-#: ../src/update.cc:862
+#: ../src/update.cc:775
 msgid "Patch"
 msgstr "补丁"
 
-#: ../src/update.cc:891
+#: ../src/update.cc:804
 #, c-format
 msgid "Ignoring %s without argument because similar option with an argument has been specified."
 msgstr ""
 
-#: ../src/update.cc:996
+#: ../src/update.cc:909
 #, fuzzy
 #| msgid "No matches found"
 msgid "No matching issues found."
 msgstr "找不到匹配项"
 
-#: ../src/update.cc:1005
+#: ../src/update.cc:918
 #, fuzzy
 #| msgid "The following patch is going to be downgraded:"
 #| msgid_plural "The following patches are going to be downgraded:"
 msgid "The following matches in issue numbers have been found:"
 msgstr "以下补丁将被降级："
 
-#: ../src/update.cc:1016
+#: ../src/update.cc:929
 msgid "Matches in patch descriptions of the following patches have been found:"
 msgstr ""
 
-#: ../src/update.cc:1087
+#: ../src/update.cc:1000
 #, c-format
 msgid "Fix for bugzilla issue number %s was not found or is not needed."
 msgstr ""
 
-#: ../src/update.cc:1091
+#: ../src/update.cc:1004
 #, c-format
 msgid "Fix for CVE issue number %s was not found or is not needed."
 msgstr ""
@@ -2303,7 +2352,7 @@ msgid "See http://en.opensuse.org/Zypper/Troubleshooting for instructions."
 msgstr "请参阅 http://en.opensuse.org/Zypper/Troubleshooting 站点上的指导。"
 
 #: ../src/utils/messages.cc:40 ../src/utils/messages.cc:50
-#: ../src/utils/messages.cc:68 ../src/Zypper.cc:3819
+#: ../src/utils/messages.cc:68 ../src/Zypper.cc:3823
 msgid "Usage"
 msgstr "用法"
 
@@ -2311,7 +2360,7 @@ msgstr "用法"
 msgid "Too many arguments."
 msgstr "太多自变量。"
 
-#: ../src/utils/messages.cc:48 ../src/Zypper.cc:2817 ../src/Zypper.cc:3816
+#: ../src/utils/messages.cc:48 ../src/Zypper.cc:2821 ../src/Zypper.cc:3820
 msgid "Required argument missing."
 msgstr "缺少需要的信息。"
 
@@ -3192,7 +3241,7 @@ msgstr ""
 
 #. translators: this is just a rug compatiblity command
 #. translators: this is just a rug-compatiblity command
-#: ../src/Zypper.cc:1297 ../src/Zypper.cc:2233
+#: ../src/Zypper.cc:1297 ../src/Zypper.cc:2237
 msgid ""
 "list-resolvables (lr)\n"
 "\n"
@@ -3202,7 +3251,8 @@ msgstr ""
 "\n"
 "列出可用的解析项类型。\n"
 
-#: ../src/Zypper.cc:1305
+#. FIXME it's 'repos (lr) [options] [repo] ...' now. Fix after 11.2
+#: ../src/Zypper.cc:1306
 msgid ""
 "repos (lr) [options]\n"
 "\n"
@@ -3233,11 +3283,12 @@ msgstr ""
 "-N, --sort-by-name        按名称排列列表。\n"
 
 #. translators: this option belongs to 'lr' command help
-#: ../src/Zypper.cc:1320
+#. FIXME add this to the rest after 11.2
+#: ../src/Zypper.cc:1322
 msgid "-s, --service             Show also alias of parent service.\n"
 msgstr "-s, --service             同时显示母服务的别名。\n"
 
-#: ../src/Zypper.cc:1335
+#: ../src/Zypper.cc:1337
 msgid ""
 "removerepo (rr) [options] <alias|#|URI>\n"
 "\n"
@@ -3255,7 +3306,7 @@ msgstr ""
 "    --loose-auth   忽略 URI 中用户认证数据。\n"
 "    --loose-query  忽略 URI 中的查询字符串。\n"
 
-#: ../src/Zypper.cc:1354
+#: ../src/Zypper.cc:1356
 msgid ""
 "renamerepo (nr) [options] <alias|#|URI> <new-alias>\n"
 "\n"
@@ -3271,7 +3322,7 @@ msgstr ""
 
 #. translators: %s is "--all|--remote|--local|--medium-type"
 #. and "--all, --remote, --local, --medium-type"
-#: ../src/Zypper.cc:1385
+#: ../src/Zypper.cc:1387
 #, c-format
 msgid ""
 "modifyrepo (mr) <options> <alias|#|URI> ...\n"
@@ -3296,7 +3347,7 @@ msgid ""
 "-m, --medium-type <type>  Apply changes to repositories of specified type.\n"
 msgstr ""
 
-#: ../src/Zypper.cc:1425
+#: ../src/Zypper.cc:1427
 msgid ""
 "refresh (ref) [alias|#|URI] ...\n"
 "\n"
@@ -3324,7 +3375,7 @@ msgstr ""
 "-r, --repo <alias|#|URI> 仅刷新指定安装源。\n"
 "-s, --services           刷新安装源之前刷新服务。\n"
 
-#: ../src/Zypper.cc:1454
+#: ../src/Zypper.cc:1456
 #, fuzzy
 #| msgid ""
 #| "clean [alias|#|URI] ...\n"
@@ -3359,7 +3410,7 @@ msgstr ""
 
 #. TranslatorExplanation the first %s = "package, patch, pattern, product"
 #. and the second %s = "patch"
-#: ../src/Zypper.cc:1483
+#: ../src/Zypper.cc:1485
 #, c-format
 msgid ""
 "list-updates (lu) [options]\n"
@@ -3392,7 +3443,7 @@ msgstr ""
 
 #. TranslatorExplanation the first %s = "package, patch, pattern, product"
 #. and the second %s = "patch"
-#: ../src/Zypper.cc:1535
+#: ../src/Zypper.cc:1537
 #, fuzzy, c-format
 msgid ""
 "update (up) [options] [packagename] ...\n"
@@ -3442,7 +3493,7 @@ msgstr ""
 "    --force-resolution          Force the solver to find a solution (even an agressive).\n"
 "-D, --dry-run                   Test the installation, do not actually install.\n"
 
-#: ../src/Zypper.cc:1585
+#: ../src/Zypper.cc:1587
 #, fuzzy
 #| msgid ""
 #| "patch [options]\n"
@@ -3493,7 +3544,7 @@ msgstr ""
 "    --debug-solver              为调试创建依赖关系测试用例。\n"
 "-D, --dry-run                   仅测试更新，并不真正更新。\n"
 
-#: ../src/Zypper.cc:1623
+#: ../src/Zypper.cc:1625
 msgid ""
 "list-patches (lp) [options]\n"
 "\n"
@@ -3507,7 +3558,7 @@ msgid ""
 "-r, --repo <alias|#|URI>   List only patches from the specified repository.\n"
 msgstr ""
 
-#: ../src/Zypper.cc:1654
+#: ../src/Zypper.cc:1657
 #, fuzzy
 #| msgid ""
 #| "dist-upgrade (dup) [options]\n"
@@ -3554,7 +3605,14 @@ msgstr ""
 "    --debug-solver              为调试创建解决测试用例\n"
 "-D, --dry-run                   测试升级是否可行，并不真正进行升级\n"
 
-#: ../src/Zypper.cc:1701
+#. FIXME: add to the rest of the strings after 11.2 release
+#: ../src/Zypper.cc:1675
+#, fuzzy
+#| msgid "    --from <alias|#|URI>        Select packages only from specified repository.\n"
+msgid "    --from <alias|#|URI>    Restrict upgrade to specified repository.\n"
+msgstr "    --from <alias|#|URI>        从指定的安装源中选择软件包。\n"
+
+#: ../src/Zypper.cc:1705
 msgid ""
 "search (se) [options] [querystring] ...\n"
 "\n"
@@ -3601,7 +3659,7 @@ msgstr ""
 "\n"
 " * 和 ? 通配符也可以用在搜索字符串中。\n"
 
-#: ../src/Zypper.cc:1738
+#: ../src/Zypper.cc:1742
 msgid ""
 "patch-check (pchk) [options]\n"
 "\n"
@@ -3619,7 +3677,7 @@ msgstr ""
 "\n"
 "-r, --repo <别名|#|URI>  检查指定安装源中的补丁。\n"
 
-#: ../src/Zypper.cc:1760
+#: ../src/Zypper.cc:1764
 msgid ""
 "patches (pch) [repository] ...\n"
 "\n"
@@ -3637,7 +3695,7 @@ msgstr ""
 "\n"
 "-r, --repo <别名|#|URI>  指定安装源。\n"
 
-#: ../src/Zypper.cc:1787
+#: ../src/Zypper.cc:1791
 #, fuzzy
 msgid ""
 "packages (pa) [options] [repository] ...\n"
@@ -3664,7 +3722,7 @@ msgstr ""
 "-N, --sort-by-name        按照软件包名称排序。\n"
 "-R, --sort-by-repo        按照安装源排序。\n"
 
-#: ../src/Zypper.cc:1815
+#: ../src/Zypper.cc:1819
 #, fuzzy
 msgid ""
 "patterns (pt) [options] [repository] ...\n"
@@ -3687,7 +3745,7 @@ msgstr ""
 "-i, --installed-only      只显示已安装的模式。\n"
 "-u, --uninstalled-only    只显示未安装的模式。\n"
 
-#: ../src/Zypper.cc:1841
+#: ../src/Zypper.cc:1845
 #, fuzzy
 msgid ""
 "products (pd) [options] [repository] ...\n"
@@ -3710,7 +3768,7 @@ msgstr ""
 "-i, --installed-only      只显示已安装的产品。\n"
 "-u, --uninstalled-only    只显示未安装的产品。\n"
 
-#: ../src/Zypper.cc:1868
+#: ../src/Zypper.cc:1872
 #, fuzzy, c-format
 #| msgid ""
 #| "info (if) [options] <name> ...\n"
@@ -3742,7 +3800,7 @@ msgstr ""
 "-t, --type <type>         软件包的类型 (%s)。\n"
 "                          默认：%s。"
 
-#: ../src/Zypper.cc:1893
+#: ../src/Zypper.cc:1897
 #, c-format
 msgid ""
 "patch-info <patchname> ...\n"
@@ -3757,7 +3815,7 @@ msgstr ""
 "\n"
 "这是和 rug 兼容的 '%s' 的别名.\n"
 
-#: ../src/Zypper.cc:1912
+#: ../src/Zypper.cc:1916
 #, c-format
 msgid ""
 "pattern-info <pattern_name> ...\n"
@@ -3772,7 +3830,7 @@ msgstr ""
 "\n"
 "这是和 rug 兼容的 '%s' 的别名.\n"
 
-#: ../src/Zypper.cc:1931
+#: ../src/Zypper.cc:1935
 #, c-format
 msgid ""
 "product-info <product_name> ...\n"
@@ -3787,7 +3845,7 @@ msgstr ""
 "\n"
 "这是和 rug 兼容的 '%s' 的别名.\n"
 
-#: ../src/Zypper.cc:1948
+#: ../src/Zypper.cc:1952
 msgid ""
 "what-provides (wp) <capability>\n"
 "\n"
@@ -3801,7 +3859,7 @@ msgstr ""
 "\n"
 "此命令没有附加选项。\n"
 
-#: ../src/Zypper.cc:1999
+#: ../src/Zypper.cc:2003
 msgid ""
 "moo\n"
 "\n"
@@ -3815,7 +3873,7 @@ msgstr ""
 "\n"
 "此命令没有附加选项。\n"
 
-#: ../src/Zypper.cc:2021
+#: ../src/Zypper.cc:2025
 #, c-format
 msgid ""
 "addlock (al) [options] <packagename> ...\n"
@@ -3836,7 +3894,7 @@ msgstr ""
 "-t, --type <type>         软件包的类型 (%s)。\n"
 "                          默认：%s。\n"
 
-#: ../src/Zypper.cc:2047
+#: ../src/Zypper.cc:2051
 #, c-format
 msgid ""
 "removelock (rl) [options] <lock-number|packagename> ...\n"
@@ -3853,7 +3911,7 @@ msgstr ""
 "  命令选项：\n"
 "-r, --repo <alias|#|URI>  仅限于制定安装源内删除锁定。\n"
 
-#: ../src/Zypper.cc:2067
+#: ../src/Zypper.cc:2071
 msgid ""
 "locks (ll)\n"
 "\n"
@@ -3867,7 +3925,7 @@ msgstr ""
 "\n"
 "此命令无附加选项。\n"
 
-#: ../src/Zypper.cc:2087
+#: ../src/Zypper.cc:2091
 msgid ""
 "cleanlocks (cl)\n"
 "\n"
@@ -3878,7 +3936,7 @@ msgid ""
 "-e, --only-empty          Clean only locks which doesn't lock anything.\n"
 msgstr ""
 
-#: ../src/Zypper.cc:2107
+#: ../src/Zypper.cc:2111
 msgid ""
 "targetos (tos)\n"
 "\n"
@@ -3892,7 +3950,7 @@ msgstr ""
 "\n"
 "此命令无附加选项。\n"
 
-#: ../src/Zypper.cc:2126
+#: ../src/Zypper.cc:2130
 msgid ""
 "versioncmp (vcmp) <version1> <version2>\n"
 "\n"
@@ -3908,7 +3966,7 @@ msgstr ""
 "  命令选项：\n"
 "-m, --match  将没有的发布号作为任意发布号。\n"
 
-#: ../src/Zypper.cc:2145
+#: ../src/Zypper.cc:2149
 #, fuzzy
 #| msgid ""
 #| "licenses\n"
@@ -3929,7 +3987,7 @@ msgstr ""
 "\n"
 "此命令没有附加选项。\n"
 
-#: ../src/Zypper.cc:2164
+#: ../src/Zypper.cc:2168
 #, fuzzy
 #| msgid ""
 #| "locks (ll)\n"
@@ -3950,7 +4008,7 @@ msgstr ""
 "\n"
 "此命令无附加选项。\n"
 
-#: ../src/Zypper.cc:2182
+#: ../src/Zypper.cc:2186
 msgid ""
 "quit (exit, ^D)\n"
 "\n"
@@ -3964,7 +4022,7 @@ msgstr ""
 "\n"
 "该命令没有附加的选项。\n"
 
-#: ../src/Zypper.cc:2199
+#: ../src/Zypper.cc:2203
 msgid ""
 "shell (sh)\n"
 "\n"
@@ -3979,7 +4037,7 @@ msgstr ""
 "该命令没有附加的选项。\n"
 
 #. translators: this is just a rug-compatiblity command
-#: ../src/Zypper.cc:2217
+#: ../src/Zypper.cc:2221
 msgid ""
 "service-types (st)\n"
 "\n"
@@ -3992,7 +4050,7 @@ msgstr ""
 #. trunslators: this is a rug-compatibility command (equivalent of
 #. 'zypper addrepo -t plaindir URI'). You can refer to rug's translations
 #. for how to translate specific terms like channel or service if in doubt.
-#: ../src/Zypper.cc:2255
+#: ../src/Zypper.cc:2259
 msgid ""
 "mount\n"
 "\n"
@@ -4012,7 +4070,7 @@ msgstr ""
 "-n, --name <name>    使用给定字符串作为服务名。\n"
 "-r, --recurse        检测子目录。\n"
 
-#: ../src/Zypper.cc:2286
+#: ../src/Zypper.cc:2290
 #, c-format
 msgid ""
 "patch-search [options] [querystring...]\n"
@@ -4024,7 +4082,7 @@ msgstr ""
 "搜索符合给定条件的补丁。这是 '%s' 的rug兼容性别名。详情参见 zypper 用户手册页。\n"
 
 #. translators: this is just a rug-compatiblity command
-#: ../src/Zypper.cc:2304
+#: ../src/Zypper.cc:2308
 msgid ""
 "ping [options]\n"
 "\n"
@@ -4036,16 +4094,16 @@ msgstr ""
 "此命令应用了一个虚设实现，总是返回 0。\n"
 "这是为了和 rug 保持兼容性。\n"
 
-#: ../src/Zypper.cc:2318 ../src/Zypper.cc:4132
+#: ../src/Zypper.cc:2322 ../src/Zypper.cc:4136
 msgid "Unexpected program flow."
 msgstr "未预期的程序流。"
 
-#: ../src/Zypper.cc:2345
+#: ../src/Zypper.cc:2349
 msgid "Non-option program arguments: "
 msgstr "无选项程序参数："
 
 #. TranslatorExplanation this is a hedgehog, paint another animal, if you want
-#: ../src/Zypper.cc:2409
+#: ../src/Zypper.cc:2413
 msgid ""
 "   \\\\\\\\\\\n"
 "  \\\\\\\\\\\\\\__o\n"
@@ -4055,24 +4113,24 @@ msgstr ""
 "  \\\\\\\\\\\\\\__o\n"
 "__\\\\\\\\\\\\\\'/_"
 
-#: ../src/Zypper.cc:2436
+#: ../src/Zypper.cc:2440
 msgid "Root privileges are required for refreshing services."
 msgstr "刷新服务需要有 root 特权。"
 
-#: ../src/Zypper.cc:2463 ../src/Zypper.cc:2583 ../src/Zypper.cc:2810
+#: ../src/Zypper.cc:2467 ../src/Zypper.cc:2587 ../src/Zypper.cc:2814
 msgid "Root privileges are required for modifying system services."
 msgstr "修改系统服务需要有 root 特权。"
 
-#: ../src/Zypper.cc:2532
+#: ../src/Zypper.cc:2536
 msgid "Could not determine the type of the repository. Check if the specified URI points to a valid repository."
 msgstr "不能确定安装源的类型。请检查指定的 URI 是否指向一个有效的软件源。"
 
-#: ../src/Zypper.cc:2564
+#: ../src/Zypper.cc:2568
 #, c-format
 msgid "'%s' is not a valid service type."
 msgstr "`%s' 不是有效的服务类型。"
 
-#: ../src/Zypper.cc:2566
+#: ../src/Zypper.cc:2570
 #, c-format
 msgid "See '%s' or '%s' to get a list of known service types."
 msgstr "请参考'%s' 或 '%s' 查看已知的服务类型列表。"
@@ -4081,210 +4139,210 @@ msgstr "请参考'%s' 或 '%s' 查看已知的服务类型列表。"
 #. followed by ms command help text which will explain it
 #. translators: aggregate option is e.g. "--all". This message will be
 #. followed by mr command help text which will explain it
-#: ../src/Zypper.cc:2595 ../src/Zypper.cc:2964
+#: ../src/Zypper.cc:2599 ../src/Zypper.cc:2968
 msgid "Alias or an aggregate option is required."
 msgstr "需要别名或者一个总体的选项。"
 
-#: ../src/Zypper.cc:2629
+#: ../src/Zypper.cc:2633
 #, c-format
 msgid "Service '%s' not found."
 msgstr "没有找到服务 '%s'。"
 
-#: ../src/Zypper.cc:2665 ../src/Zypper.cc:2809 ../src/Zypper.cc:2895
-#: ../src/Zypper.cc:2951
+#: ../src/Zypper.cc:2669 ../src/Zypper.cc:2813 ../src/Zypper.cc:2899
+#: ../src/Zypper.cc:2955
 msgid "Root privileges are required for modifying system repositories."
 msgstr "修改系统安装源需要有 root 特权。"
 
-#: ../src/Zypper.cc:2714 ../src/Zypper.cc:3077
+#: ../src/Zypper.cc:2718 ../src/Zypper.cc:3081
 msgid "Too few arguments."
 msgstr "参数太少。"
 
-#: ../src/Zypper.cc:2738
+#: ../src/Zypper.cc:2742
 msgid "If only one argument is used, it must be a URI pointing to a .repo file."
 msgstr "如果只用一个参数，必须是一个指向 .repo 文件的 URI。"
 
-#: ../src/Zypper.cc:2764
+#: ../src/Zypper.cc:2768
 #, c-format
 msgid "Cannot use %s together with %s. Using the %s setting."
 msgstr "不能同时使用 %s 和 %s。使用 %s 设置。"
 
-#: ../src/Zypper.cc:2787
+#: ../src/Zypper.cc:2791
 msgid "Specified type is not a valid repository type:"
 msgstr "指定的类型不是有效的软件源类型："
 
-#: ../src/Zypper.cc:2789
+#: ../src/Zypper.cc:2793
 #, c-format
 msgid "See '%s' or '%s' to get a list of known repository types."
 msgstr "请参考'%s' 或 '%s' 查看已知的安装源类型列表。"
 
 #. translators: %s is the supplied command line argument which
 #. for which no repository counterpart was found
-#: ../src/Zypper.cc:2845
+#: ../src/Zypper.cc:2849
 #, c-format
 msgid "Repository '%s' not found by alias, number or URI."
 msgstr "通过别名、编号或 URI 都未找到安装源 '%s'。"
 
 #. translators: %s is the supplied command line argument which
 #. for which no service counterpart was found
-#: ../src/Zypper.cc:2868
+#: ../src/Zypper.cc:2872
 #, c-format
 msgid "Service '%s' not found by alias, number or URI."
 msgstr "通过别名、编号或 URI 都未找到服务 '%s'。"
 
-#: ../src/Zypper.cc:2902
+#: ../src/Zypper.cc:2906
 msgid "Too few arguments. At least URI and alias are required."
 msgstr "参数过少。至少需要 URI 和别名。"
 
-#: ../src/Zypper.cc:2927
+#: ../src/Zypper.cc:2931
 #, c-format
 msgid "Repository '%s' not found."
 msgstr "找不到安装源'%s'。"
 
-#: ../src/Zypper.cc:2997
+#: ../src/Zypper.cc:3001
 #, c-format
 msgid "Repository %s not found."
 msgstr "找不到安装源 %s。"
 
-#: ../src/Zypper.cc:3016
+#: ../src/Zypper.cc:3020
 msgid "Root privileges are required for refreshing system repositories."
 msgstr "刷新系统安装源需要有 root 特权。"
 
-#: ../src/Zypper.cc:3023
+#: ../src/Zypper.cc:3027
 #, c-format
 msgid "The '%s' global option has no effect here."
 msgstr "全局选项'%s'在这里无效。"
 
-#: ../src/Zypper.cc:3031
+#: ../src/Zypper.cc:3035
 #, c-format
 msgid "Arguments are not allowed if '%s' is used."
 msgstr "若使用 '%s' 则不允许使用参数。"
 
-#: ../src/Zypper.cc:3057
+#: ../src/Zypper.cc:3061
 msgid "Root privileges are required for cleaning local caches."
 msgstr "清理本地缓存需要有 root 特权。"
 
-#: ../src/Zypper.cc:3078
+#: ../src/Zypper.cc:3082
 msgid "At least one package name is required."
 msgstr "至少需要指定一个软件包名称。"
 
-#: ../src/Zypper.cc:3088
+#: ../src/Zypper.cc:3092
 msgid "Root privileges are required for installing or uninstalling packages."
 msgstr "安装或删除软件包需要有 root 特权。"
 
 #. translators: rug related message, shown if
 #. 'zypper in --entire-catalog foorepo someargument' is specified
-#: ../src/Zypper.cc:3105
+#: ../src/Zypper.cc:3109
 msgid "Ignoring arguments, marking the entire repository."
 msgstr ""
 
-#: ../src/Zypper.cc:3115
+#: ../src/Zypper.cc:3119
 #, c-format
 msgid "Unknown package type: %s"
 msgstr "未知软件包类型：%s"
 
-#: ../src/Zypper.cc:3135
+#: ../src/Zypper.cc:3139
 #, c-format
 msgid "'%s' looks like an RPM file. Will try to download it."
 msgstr "'%s'貌似是一个 RPM 文件，将尝试下载之。"
 
-#: ../src/Zypper.cc:3148
+#: ../src/Zypper.cc:3152
 #, c-format
 msgid "Problem with the RPM file specified as '%s', skipping."
 msgstr "指定为 '%s' 的RPM 文件出现问题，正在跳过。"
 
-#: ../src/Zypper.cc:3172
+#: ../src/Zypper.cc:3176
 #, c-format
 msgid "Problem reading the RPM header of %s. Is it an RPM file?"
 msgstr "读取 %s 的 RPM 头出现问题。这真是一个 RPM 文件么？"
 
-#: ../src/Zypper.cc:3197
+#: ../src/Zypper.cc:3201
 msgid "Plain RPM files cache"
 msgstr "纯 RPM 文件缓存"
 
-#: ../src/Zypper.cc:3218
+#: ../src/Zypper.cc:3222
 msgid "No valid arguments specified."
 msgstr "没有指定有效的参数。"
 
-#: ../src/Zypper.cc:3232 ../src/Zypper.cc:3311
+#: ../src/Zypper.cc:3236 ../src/Zypper.cc:3315
 msgid "Warning: No repositories defined. Operating only with the installed resolvables. Nothing can be installed."
 msgstr "警告：没有设定安装源。操作只能局限于已安装的可解析项。不能安装新软件。"
 
-#: ../src/Zypper.cc:3261
+#: ../src/Zypper.cc:3265
 msgid "Source package name is a required argument."
 msgstr "源代码软件包名称是一个必须的参数。"
 
-#: ../src/Zypper.cc:3368 ../src/Zypper.cc:3628 ../src/Zypper.cc:3721
-#: ../src/Zypper.cc:3844 ../src/Zypper.cc:3924
+#: ../src/Zypper.cc:3372 ../src/Zypper.cc:3632 ../src/Zypper.cc:3725
+#: ../src/Zypper.cc:3848 ../src/Zypper.cc:3928
 #, c-format
 msgid "Unknown package type '%s'."
 msgstr "未知软件包类型 '%s'。"
 
-#: ../src/Zypper.cc:3474
+#: ../src/Zypper.cc:3478
 msgid "Problem occurred initializing or executing the search query"
 msgstr "在初始化或执行搜索请求时出现问题"
 
-#: ../src/Zypper.cc:3475
+#: ../src/Zypper.cc:3479
 msgid "See the above message for a hint."
 msgstr "请参考以上信息，从中获得提示。"
 
 #. translators: Running as 'rug', cannot use 'best-effort' option.
-#: ../src/Zypper.cc:3649 ../src/Zypper.cc:3739
+#: ../src/Zypper.cc:3653 ../src/Zypper.cc:3743
 #, c-format
 msgid "Running as '%s', cannot use '%s' option."
 msgstr "以 '%s' 运行，无法使用 '%s' 参数。"
 
-#: ../src/Zypper.cc:3657
+#: ../src/Zypper.cc:3661
 #, fuzzy, c-format
 #| msgid "Cannot use %s together with %s. Using the %s setting."
 msgid "Cannot use %s together with %s."
 msgstr "不能同时使用 %s 和 %s。使用 %s 设置。"
 
-#: ../src/Zypper.cc:3690
+#: ../src/Zypper.cc:3694
 msgid "Root privileges are required for updating packages."
 msgstr "更新软件包需要有 root 特权。"
 
-#: ../src/Zypper.cc:3780
+#: ../src/Zypper.cc:3784
 msgid "Root privileges are required for performing a distribution upgrade."
 msgstr "升级发行版本需要有 root 特权。"
 
-#: ../src/Zypper.cc:3856
+#: ../src/Zypper.cc:3860
 #, fuzzy, c-format
 #| msgid "'%1' does not exist."
 msgid "Type '%s' does not support %s."
 msgstr "'%1”不存在。"
 
-#: ../src/Zypper.cc:3886 ../src/Zypper.cc:3947
+#: ../src/Zypper.cc:3890 ../src/Zypper.cc:3951
 msgid "Root privileges are required for adding of package locks."
 msgstr "添加软件包锁定需要有 root 特权。"
 
-#: ../src/Zypper.cc:4056
+#: ../src/Zypper.cc:4060
 #, c-format
 msgid "%s matches %s"
 msgstr "%s 匹配 %s"
 
-#: ../src/Zypper.cc:4058
+#: ../src/Zypper.cc:4062
 #, c-format
 msgid "%s is newer than %s"
 msgstr "%s 比 %s 较新"
 
-#: ../src/Zypper.cc:4060
+#: ../src/Zypper.cc:4064
 #, c-format
 msgid "%s is older than %s"
 msgstr "%s 比 %s 较旧"
 
-#: ../src/Zypper.cc:4117
+#: ../src/Zypper.cc:4121
 msgid "This command only makes sense in the zypper shell."
 msgstr "这个命令只有在 zypper shell 里面使用才有意义。"
 
-#: ../src/Zypper.cc:4129
+#: ../src/Zypper.cc:4133
 msgid "You already are running zypper's shell."
 msgstr "您已经在运行 zypper 的 shell。"
 
-#: ../src/Zypper.cc:4146
+#: ../src/Zypper.cc:4150
 msgid "Description"
 msgstr "说明"
 
-#: ../src/Zypper.cc:4209
+#: ../src/Zypper.cc:4213
 msgid "Resolvable Type"
 msgstr "可解析项类型"
 
@@ -4330,9 +4388,6 @@ msgstr "可解析项类型"
 
 #~ msgid "Abort, retry, ignore?\n"
 #~ msgstr "中止、重试、忽略？\n"
-
-#~ msgid "    --from <alias|#|URI>        Select packages only from specified repository.\n"
-#~ msgstr "    --from <alias|#|URI>        从指定的安装源中选择软件包。\n"
 
 #~ msgid "Root privileges are required for modifying services."
 #~ msgstr "修改服务需要有 root 特权。"
