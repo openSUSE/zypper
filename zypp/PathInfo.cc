@@ -812,6 +812,31 @@ namespace zypp
 
     ///////////////////////////////////////////////////////////////////
     //
+    //	METHOD NAME : hardlink
+    //	METHOD TYPE : int
+    //
+    int hardlinkCopy( const Pathname & oldpath, const Pathname & newpath )
+    {
+      MIL << "hardlinkCopy " << oldpath << " -> " << newpath;
+      if ( ::link( oldpath.asString().c_str(), newpath.asString().c_str() ) == -1 )
+      {
+        switch ( errno )
+        {
+          case EEXIST: // newpath already exists
+            if ( unlink( newpath ) == 0 && ::link( oldpath.asString().c_str(), newpath.asString().c_str() ) != -1 )
+              return _Log_Result( 0 );
+            break;
+          case EXDEV: // oldpath  and  newpath are not on the same mounted file system
+            return copy( oldpath, newpath );
+            break;
+        }
+        return _Log_Result( errno );
+      }
+      return _Log_Result( 0 );
+    }
+
+    ///////////////////////////////////////////////////////////////////
+    //
     //	METHOD NAME : readlink
     //	METHOD TYPE : int
     //

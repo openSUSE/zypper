@@ -606,6 +606,13 @@ namespace zypp
     int hardlink( const Pathname & oldpath, const Pathname & newpath );
 
     /**
+     * Create \a newpath as hardlink or copy of \a oldpath.
+     *
+     * @return 0 on success, errno on failure.
+     */
+    int hardlinkCopy( const Pathname & oldpath, const Pathname & newpath );
+
+    /**
      * Like '::readlink'. Return the contents of the symbolic link
      * \a symlink_r via \a target_r.
      *
