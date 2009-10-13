@@ -32,6 +32,9 @@ namespace zypp
     struct DeltaCandidates::Impl
     {
       public:
+        Impl()
+        {}
+
         Impl( const std::list<Repository> & repos, const std::string & pkgname = "" )
         : repos(repos), pkgname(pkgname)
         {}
@@ -58,6 +61,11 @@ namespace zypp
     // class DeltaCandidates
     //
     ///////////////////////////////////////////////////////////////////
+
+    DeltaCandidates::DeltaCandidates()
+    : _pimpl( new Impl )
+    {}
+
 
     DeltaCandidates::DeltaCandidates(const std::list<Repository> & repos,
                                      const std::string & pkgname)

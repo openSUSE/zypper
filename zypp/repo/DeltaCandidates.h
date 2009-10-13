@@ -42,10 +42,10 @@ namespace zypp
       class Impl;
 
     public:
+      DeltaCandidates();
       /**
        * \short Creates a candidate calculator
        * \param repos Set of repositories providing patch and delta packages
-       * \param installed_callback Will be used to ask if a package is installed or not
        */
       DeltaCandidates( const std::list<Repository> & repos, const std::string & pkgname = "" );
       /** Dtor */
