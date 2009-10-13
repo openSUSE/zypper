@@ -130,9 +130,7 @@ namespace zypp
   public:
     Impl();
 
-    ~Impl() {
-      MIL << endl;
-    }
+    ~Impl() {}
 
     void setOptions( Fetcher::Options options );
     Fetcher::Options options() const;
@@ -368,15 +366,10 @@ namespace zypp
             if ( assert_dir( dest_full_path.dirname() ) != 0 )
               ZYPP_THROW( Exception("Can't create " + dest_full_path.dirname().asString()));
 
-            if ( filesystem::hardlink(cached_file, dest_full_path ) != 0 )
+            if ( filesystem::hardlinkCopy(cached_file, dest_full_path ) != 0 )
             {
-              WAR << "Can't hardlink '" << cached_file << "' to '" << dest_dir << "'. Trying copying." << endl;
-              if ( filesystem::copy(cached_file, dest_full_path ) != 0 )
-              {
-                ERR << "Can't copy " << cached_file + " to " + dest_dir << endl;
-                // try next cache
-                continue;
-              }
+              ERR << "Can't hardlink/copy " << cached_file + " to " + dest_dir << endl;
+              continue;
             }
           }
           // found in cache
@@ -561,7 +554,7 @@ namespace zypp
 
         if ( assert_dir( dest_full_path.dirname() ) != 0 )
               ZYPP_THROW( Exception("Can't create " + dest_full_path.dirname().asString()));
-        if ( filesystem::copy(tmp_file, dest_full_path ) != 0 )
+        if ( filesystem::hardlinkCopy( tmp_file, dest_full_path ) != 0 )
         {
           if ( ! PathInfo(tmp_file).isExist() )
               ERR << tmp_file << " does not exist" << endl;
@@ -569,7 +562,7 @@ namespace zypp
               ERR << dest_full_path.dirname() << " does not exist" << endl;
 
           media.releaseFile(resource); //not needed anymore, only eat space
-          ZYPP_THROW( Exception("Can't copy " + tmp_file.asString() + " to " + dest_dir.asString()));
+          ZYPP_THROW( Exception("Can't hardlink/copy " + tmp_file.asString() + " to " + dest_dir.asString()));
         }
 
         media.releaseFile(resource); //not needed anymore, only eat space
@@ -703,7 +696,7 @@ namespace zypp
         getZYpp()->keyRing()->importKey(PublicKey(dest_dir + keyloc.filename()), false);
     else
         WAR << "No public key specified by user for index '" << keyloc.filename() << "'"<< endl;
-    
+
     // now the index itself
     fetcher.enqueue( idxloc, FileChecker(sigchecker) );
     fetcher.start( dest_dir, media );
