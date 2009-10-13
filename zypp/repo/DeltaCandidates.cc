@@ -81,13 +81,13 @@ namespace zypp
                || it.subFind( sat::SolvAttr(DELTA_PACKAGE_NAME) ).asString() == _pimpl->pkgname )
           {
             DeltaRpm delta( it );
-            DBG << "checking delta: " << delta << endl;
+            //DBG << "checking delta: " << delta << endl;
             if ( ! package
                    || (    package->name()    == delta.name()
                         && package->edition() == delta.edition()
                         && package->arch()    == delta.arch() ) )
             {
-              DBG << "got delta candidate" << endl;
+              DBG << "got delta candidate: " << delta << endl;
               candidates.push_back( delta );
             }
           }
