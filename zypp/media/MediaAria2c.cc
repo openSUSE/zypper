@@ -292,6 +292,7 @@ void MediaAria2c::getFileCopy( const Pathname & filename , const Pathname & targ
       //       (bnc #513944) [#1 SIZE:8.3MiB/10.1MiB(82%) CN:5 SPD:3.8MiBs]
       // we save it until we find a string with FILE: later
       string progressLine;
+      int progress = 0;
       // file line, which tell which file is the previous progress
       // ie: FILE: ./packages.FL.gz
       double average_speed = 0;
@@ -299,6 +300,9 @@ void MediaAria2c::getFileCopy( const Pathname & filename , const Pathname & targ
 
       // here we capture aria output exceptions
       vector<string> ariaExceptions;
+
+      // TODO: Detect partial downloads!
+      bool partialDownload = false; // Whether it makes sense to retry with --continue!
 
       //Process response
       for(std::string ariaResponse( aria.receiveLine());
@@ -342,7 +346,7 @@ void MediaAria2c::getFileCopy( const Pathname & filename , const Pathname & targ
             if ( ! progressLine.empty() )
             {
               // get the percentage (progress) data
-              int progress = 0;
+              progress = 0;
               size_t left_bound = progressLine.find('(',0) + 1;
               size_t count = progressLine.find('%',left_bound) - left_bound;
               string progressStr = progressLine.substr(left_bound, count);
@@ -437,6 +441,22 @@ void MediaAria2c::getFileCopy( const Pathname & filename , const Pathname & targ
         case 1: // unknown
         default:
         {
+          if ( partialDownload )
+          {
+            // Ask for retry on partial downloads, when it makes sense to retry with --continue!
+            // Other errors are handled by the layers above.
+            MediaException e(str::form(_("Download interrupted at %d%%"), progress ));
+            for_(it, ariaExceptions.begin(), ariaExceptions.end())
+              e.addHistory(*it);
+
+            DownloadProgressReport::Action action = report->problem( _url, DownloadProgressReport::ERROR, e.asUserHistory() );
+            if ( action == DownloadProgressReport::RETRY )
+            {
+              retry = true;
+              continue;
+            }
+          }
+
           // TranslatorExplanation: Failed to download <FILENAME> from <SERVERURL>.
           MediaException e(str::form(_("Failed to download %s from %s"), filename.c_str(), _url.asString().c_str()));
           for_(it, ariaExceptions.begin(), ariaExceptions.end())
