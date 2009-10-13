@@ -171,13 +171,19 @@ PoolItem getPi( const std::string & alias_r, const std::string & name_r, const E
   ResPool pool( getZYpp()->pool() );
   for_(it, pool.byIdentBegin<_Res>(name_r), pool.byIdentEnd<_Res>(name_r) )
   {
-    if ( !ret
-         && ( ed_r.empty()    || ed_r.match((*it)->edition()) == 0 )
+    if (    ( ed_r.empty()    || ed_r.match((*it)->edition()) == 0 )
          && ( arch_r.empty()  || arch_r == (*it)->arch()  )
          && ( alias_r.empty() || alias_r == (*it)->repository().alias() ) )
     {
-      ret = (*it);
-      MIL << "    ->" << *it << endl;
+      if ( !ret || ret->repository().alias() == sat::Pool::systemRepoAlias() )
+      {
+        ret = (*it);
+        MIL << "    ->" << *it << endl;
+      }
+      else
+      {
+        DBG << "    - " << *it << endl;
+      }
     }
     else
     {

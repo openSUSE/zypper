@@ -24,6 +24,7 @@
 #include "zypp/PackageKeyword.h"
 #include "zypp/TmpPath.h"
 #include "zypp/ManagedFile.h"
+#include "zypp/MediaSetAccess.h"
 #include "zypp/NameKindProxy.h"
 #include "zypp/pool/GetResolvablesToInsDel.h"
 
@@ -46,6 +47,10 @@
 #include "zypp/PoolQuery.h"
 #include "zypp/ServiceInfo.h"
 #include "zypp/media/MediaPriority.h"
+
+#include "zypp/target/rpm/RpmDb.h"
+#include "zypp/target/rpm/RpmHeader.h"
+#include "zypp/target/rpm/librpmDb.h"
 
 #include <boost/mpl/int.hpp>
 
@@ -454,6 +459,42 @@ void lktest()
   SEC << '[' << i++ << ']' << newdata << endl;
 }
 
+
+Capability guessPackageSpec( const std::string & str_r )
+{
+  return Capability::guessPackageSpec( str_r );
+}
+
+
+
+
+void cut( const Capability & cap )
+{
+  CapDetail detail( cap.detail() );
+  if ( detail.isSimple() )
+  {
+    MIL << detail.kind() << ": " << detail.name();
+    if ( detail.hasArch() )
+      MIL << " (" << detail.arch() << ")";
+    if ( detail.isVersioned() )
+      MIL << " " << detail.op() << " " << detail.ed();
+    MIL << endl;
+  }
+  else
+  {
+    MIL << "---???---" << endl;
+  }
+}
+
+namespace zypp { namespace target {
+  void XRunUpdateMessages( const Pathname & root_r,
+                           const Pathname & messagesPath_r,
+                           const std::vector<sat::Solvable> & checkPackages_r,
+                           ZYppCommitResult & result_r );
+
+}}
+using zypp::target::XRunUpdateMessages;
+
 /******************************************************************
 **
 **      FUNCTION NAME : main
@@ -462,6 +503,12 @@ void lktest()
 int main( int argc, char * argv[] )
 try {
   --argc,++argv;
+  if (0) {
+    // download the repo index file
+    media::MediaManager mediamanager;
+    media::MediaAccessId mid = mediamanager.open( Url("http://download.opensuse.org") );
+    mediamanager.attach( mid );
+  }
   zypp::base::LogControl::instance().logToStdErr();
   INT << "===[START]==========================================" << endl;
   ZConfig::instance();
@@ -469,7 +516,7 @@ try {
   ResPool   pool( ResPool::instance() );
   sat::Pool satpool( sat::Pool::instance() );
 
-  if ( 1 )
+  if ( 0 )
   {
     Measure x( "INIT TARGET" );
     {
@@ -573,57 +620,13 @@ try {
 
   ///////////////////////////////////////////////////////////////////
 
-  Locks & locks = Locks::instance();
-  {
-    PoolQuery q;
-    q.setMatchGlob();
-    q.addDependency( sat::SolvAttr::provides, "kernel", Rel::EQ, Edition("2.0") );
-    q.addDependency( sat::SolvAttr::provides, Capability( "kernel == 3" ) );
-
-    SEC << q << endl;
-    std::stringstream str;
-    q.serialize( str );
-    INT << str.str() << endl;
-    PoolQuery p;
-    p.recover( str );
-    SEC << p << endl;
-    locks.addLock( q );
-  }
-  {
-    PoolQuery q;
-    q.setMatchGlob();
-    q.addString( "kernel" );
-    q.addDependency( sat::SolvAttr::provides );
-    locks.addLock( q );
-  }
-  locks.merge();
-  MIL << locks.size() << endl;
-
-  locks.save( "/tmp/foo" );
-  ExternalProgram("cat /tmp/foo") >> USR;
-  return 0;
-
-  lktest();
-  ui::Selectable::Ptr p( getSel<Package>( "zypper" ) );
-  ui::Selectable::Ptr p1( getSel<Package>( "libzypp" ) );
-  if ( p )
-  {
-    MIL << p->setStatus( ui::S_Protected, ResStatus::USER ) << endl;
-    MIL << p1->setStatus( ui::S_Protected, ResStatus::USER ) << endl;
-    MIL << p << endl;
-    MIL << p1 << endl;
-    lktest();
-  }
 
 
-  //////////////////////////////////////////////////////////////////
-  INT << "===[END]============================================" << endl << endl;
-  zypp::base::LogControl::instance().logNothing();
-  return 0;
 
 
-#if 0
+#if 1
   getZYpp()->resolver()->addRequire( Capability("amarok") );
+  pool.byKindBegin<Package>()->status().setTransact( true, ResStatus::USER );
   solve();
   vdumpPoolStats( USR << "Transacting:"<< endl,
                   make_filter_begin<resfilter::ByTransact>(pool),
@@ -638,8 +641,11 @@ try {
 catch ( const Exception & exp )
 {
   INT << exp << endl << exp.historyAsString();
+  throw;
 }
 catch (...)
-{}
+{
+  throw;
+}
 
 
