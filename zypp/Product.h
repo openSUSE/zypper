@@ -48,6 +48,26 @@ namespace zypp
     .*/
     std::string referenceFilename() const;
 
+    /** List of packages included in older versions of this product and now dropped.
+     *
+     * This evaluates the \ref referencePackage \c weakremover namespace. It actually
+     * returns a \ref CapabilitySet, because we support to drop specific versions or
+     * version ranges of a package. Use \ref sat::WhatProvides to get the actually
+     * installed and available packages matching this list.
+     * \code
+     *   const Product & openSUSE;
+     *   sat::WhatProvides droped( openSUSE.droplist() );
+     *   for_( it, droped.poolItemBegin(), dropped.poolItemEnd() )
+     *   {
+     *     if ( it->status().isInstalled() )
+     *     {
+     *       MIL << "Installed but no longer supported package: " << *it << endl;
+     *     }
+     *   }
+     * \endcode
+     */
+    CapabilitySet droplist() const;
+
   public:
     /***/
     typedef std::vector<constPtr> ReplacedProducts;

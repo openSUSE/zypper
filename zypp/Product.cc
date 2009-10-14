@@ -128,6 +128,9 @@ namespace zypp
     return ret;
   }
 
+  CapabilitySet Product::droplist() const
+  { return poolItem().buddy().valuesOfNamespace( "weakremover" ); }
+
   std::string Product::productLine() const
   { return lookupStrAttribute( sat::SolvAttr::productProductLine ); }
 
