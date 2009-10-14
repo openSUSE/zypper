@@ -121,6 +121,12 @@ namespace zypp
 
     Capabilities prerequires() const
     { return sat::Solvable::prerequires(); }
+
+    CapabilitySet providesNamespace( const std::string & namespace_r ) const
+    { return sat::Solvable::providesNamespace( namespace_r ); }
+
+    CapabilitySet valuesOfNamespace( const std::string & namespace_r ) const
+    { return sat::Solvable::valuesOfNamespace( namespace_r ); }
     //@}
 
   public:

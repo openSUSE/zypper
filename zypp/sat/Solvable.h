@@ -198,6 +198,18 @@ namespace zypp
         Capabilities enhances()    const;
         Capabilities supplements() const;
         Capabilities prerequires() const;
+
+        /** Return the namespaced provides <tt>'namespace([value])[ op edition]'</tt> of this Solvable. */
+        CapabilitySet providesNamespace( const std::string & namespace_r ) const;
+
+        /** Return <tt>'value[ op edition]'</tt> for namespaced provides <tt>'namespace(value)[ op edition]'</tt>.
+         * Similar to \ref providesNamespace, but the namespace is stripped from the
+         * dependencies. This is convenient if the namespace denotes packages that
+         * should be looked up. E.g. the \c weakremover namespace used in a products
+         * release package denotes the packages that were dropped from the distribution.
+         * \see \ref Product::droplist
+         */
+        CapabilitySet valuesOfNamespace( const std::string & namespace_r ) const;
         //@}
 
       public:

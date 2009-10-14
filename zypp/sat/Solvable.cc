@@ -441,6 +441,39 @@ namespace zypp
                    : Capabilities();
     }
 
+    CapabilitySet Solvable::providesNamespace( const std::string & namespace_r ) const
+    {
+      NO_SOLVABLE_RETURN( CapabilitySet() );
+      CapabilitySet ret;
+      Capabilities caps( provides() );
+      for_( it, caps.begin(), caps.end() )
+      {
+        CapDetail caprep( it->detail() );
+        if ( str::hasPrefix( caprep.name().c_str(), namespace_r ) && *(caprep.name().c_str()+namespace_r.size()) == '(' )
+          ret.insert( *it );
+      }
+      return ret;
+   }
+
+    CapabilitySet Solvable::valuesOfNamespace( const std::string & namespace_r ) const
+    {
+      NO_SOLVABLE_RETURN( CapabilitySet() );
+      CapabilitySet ret;
+      Capabilities caps( provides() );
+      for_( it, caps.begin(), caps.end() )
+      {
+        CapDetail caprep( it->detail() );
+        if ( str::hasPrefix( caprep.name().c_str(), namespace_r ) && *(caprep.name().c_str()+namespace_r.size()) == '(' )
+        {
+          std::string value( caprep.name().c_str()+namespace_r.size()+1 );
+          value[value.size()-1] = '\0'; // erase the trailing ')'
+          ret.insert( Capability( value, caprep.op(), caprep.ed() ) );
+        }
+      }
+      return ret;
+    }
+
+
     std::string Solvable::asString() const
     {
       NO_SOLVABLE_RETURN( (_id == detail::systemSolvableId ? "systemSolvable" : "noSolvable") );
