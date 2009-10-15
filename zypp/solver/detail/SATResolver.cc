@@ -644,7 +644,7 @@ SATResolver::solverInit(const PoolItemList & weakItems)
 
     if ( _distupgrade )
     {
-      if ( ZConfig::instance().solverUpgradeRemoveDropedPackages() )
+      if ( ZConfig::instance().solverUpgradeRemoveDroppedPackages() )
       {
         MIL << "Checking droplists ..." << endl;
         // Dropped packages: look for 'weakremover()' provides

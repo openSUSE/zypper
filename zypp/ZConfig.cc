@@ -227,7 +227,7 @@ namespace zypp
         , solver_onlyRequires		( false )
         , solver_allowVendorChange	( false )
         , solver_upgradeTestcasesToKeep	( 2 )
-        , solverUpgradeRemoveDropedPackages( true )
+        , solverUpgradeRemoveDroppedPackages( true )
         , apply_locks_file		( true )
 
       {
@@ -357,9 +357,9 @@ namespace zypp
                 {
                   solver_upgradeTestcasesToKeep.set( str::strtonum<unsigned>( value ) );
                 }
-                else if ( entry == "solver.upgradeRemoveDropedPackages" )
+                else if ( entry == "solver.upgradeRemoveDroppedPackages" )
                 {
-                  solverUpgradeRemoveDropedPackages.restoreToDefault( str::strToBool( value, solverUpgradeRemoveDropedPackages.getDefault() ) );
+                  solverUpgradeRemoveDroppedPackages.restoreToDefault( str::strToBool( value, solverUpgradeRemoveDroppedPackages.getDefault() ) );
                 }
                 else if ( entry == "solver.checkSystemFile" )
                 {
@@ -481,7 +481,7 @@ namespace zypp
     Option<bool>	solver_onlyRequires;
     Option<bool>	solver_allowVendorChange;
     Option<unsigned>	solver_upgradeTestcasesToKeep;
-    DefaultOption<bool> solverUpgradeRemoveDropedPackages;
+    DefaultOption<bool> solverUpgradeRemoveDroppedPackages;
 
     Pathname solver_checkSystemFile;
 
@@ -702,9 +702,9 @@ namespace zypp
   unsigned ZConfig::solver_upgradeTestcasesToKeep() const
   { return _pimpl->solver_upgradeTestcasesToKeep; }
 
-  bool ZConfig::solverUpgradeRemoveDropedPackages() const		{ return _pimpl->solverUpgradeRemoveDropedPackages; }
-  void ZConfig::setSolverUpgradeRemoveDropedPackages( bool val_r )	{ _pimpl->solverUpgradeRemoveDropedPackages.set( val_r ); }
-  void ZConfig::resetSolverUpgradeRemoveDropedPackages()		{ _pimpl->solverUpgradeRemoveDropedPackages.restoreToDefault(); }
+  bool ZConfig::solverUpgradeRemoveDroppedPackages() const		{ return _pimpl->solverUpgradeRemoveDroppedPackages; }
+  void ZConfig::setSolverUpgradeRemoveDroppedPackages( bool val_r )	{ _pimpl->solverUpgradeRemoveDroppedPackages.set( val_r ); }
+  void ZConfig::resetSolverUpgradeRemoveDroppedPackages()		{ _pimpl->solverUpgradeRemoveDroppedPackages.restoreToDefault(); }
 
   std::set<IdString> ZConfig::multiversion() const
   { return _pimpl->multiversion; }

@@ -259,11 +259,11 @@ namespace zypp
        * cleanup manually. Or simply leave them installed as long as you don't
        * need the disk space.
        */
-      bool solverUpgradeRemoveDropedPackages() const;
-      /** Set \ref solverUpgradeRemoveDropedPackages to \a val_r. */
-      void setSolverUpgradeRemoveDropedPackages( bool val_r );
-      /** Reset \ref solverUpgradeRemoveDropedPackages to the \c zypp.conf default. */
-      void resetSolverUpgradeRemoveDropedPackages();
+      bool solverUpgradeRemoveDroppedPackages() const;
+      /** Set \ref solverUpgradeRemoveDroppedPackages to \a val_r. */
+      void setSolverUpgradeRemoveDroppedPackages( bool val_r );
+      /** Reset \ref solverUpgradeRemoveDroppedPackages to the \c zypp.conf default. */
+      void resetSolverUpgradeRemoveDroppedPackages();
 
       /**
        * Packages which can be installed parallel with different versions

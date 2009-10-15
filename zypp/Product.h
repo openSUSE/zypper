@@ -56,8 +56,8 @@ namespace zypp
      * installed and available packages matching this list.
      * \code
      *   const Product & openSUSE;
-     *   sat::WhatProvides droped( openSUSE.droplist() );
-     *   for_( it, droped.poolItemBegin(), dropped.poolItemEnd() )
+     *   sat::WhatProvides dropped( openSUSE.droplist() );
+     *   for_( it, dropped.poolItemBegin(), dropped.poolItemEnd() )
      *   {
      *     if ( it->status().isInstalled() )
      *     {
