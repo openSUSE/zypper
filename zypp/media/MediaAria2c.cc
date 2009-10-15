@@ -13,7 +13,7 @@
 #include <iostream>
 #include <list>
 #include <vector>
-
+#include <fstream>
 #include <boost/lexical_cast.hpp>
 
 #include "zypp/base/Logger.h"
@@ -29,6 +29,8 @@
 #include "zypp/Target.h"
 #include "zypp/ZYppFactory.h"
 #include "zypp/ZConfig.h"
+
+#include "zypp/TmpPath.h"
 
 #include "zypp/media/MediaAria2c.h"
 #include "zypp/media/proxyinfo/ProxyInfos.h"
@@ -84,10 +86,17 @@ MediaAria2c::existsAria2cmd()
  */
 void fillAriaCmdLine( const string &ariaver,
                       const TransferSettings &s,
+                      filesystem::TmpPath &credentials,
                       const Url &url,
                       const Pathname &destination,
                       ExternalProgram::Arguments &args )
 {
+    
+    // options that are not passed in the command line
+    // like credentials, every string is in the
+    // opt=val format
+    list<string> file_options;
+    
     args.push_back(ARIA_BINARY);
     args.push_back(str::form("--user-agent=%s", s.userAgentString().c_str()));
     args.push_back("--summary-interval=1");
@@ -148,18 +157,18 @@ void fillAriaCmdLine( const string &ariaver,
     else
     {
         if ( url.getScheme() == "ftp" )
-            args.push_back(str::form("--ftp-user=%s", s.username().c_str() ));
+            file_options.push_back(str::form("ftp-user=%s", s.username().c_str() ));
         else if ( url.getScheme() == "http" ||
                   url.getScheme() == "https" )
-            args.push_back(str::form("--http-user=%s", s.username().c_str() ));
+            file_options.push_back(str::form("http-user=%s", s.username().c_str() ));
 
         if ( s.password().size() )
         {
             if ( url.getScheme() == "ftp" )
-                args.push_back(str::form("--ftp-passwd=%s", s.password().c_str() ));
+                file_options.push_back(str::form("ftp-passwd=%s", s.password().c_str() ));
             else if ( url.getScheme() == "http" ||
                       url.getScheme() == "https" )
-                args.push_back(str::form("--http-passwd=%s", s.password().c_str() ));
+                file_options.push_back(str::form("http-passwd=%s", s.password().c_str() ));
         }
     }
 
@@ -168,15 +177,28 @@ void fillAriaCmdLine( const string &ariaver,
         args.push_back(str::form("--http-proxy=%s", s.proxy().c_str() ));
         if ( ! s.proxyUsername().empty() )
         {
-            args.push_back(str::form("--http-proxy-user=%s", s.proxyUsername().c_str() ));
+            file_options.push_back(str::form("http-proxy-user=%s", s.proxyUsername().c_str() ));
             if ( ! s.proxyPassword().empty() )
-                args.push_back(str::form("--http-proxy-passwd=%s", s.proxyPassword().c_str() ));
+                file_options.push_back(str::form("http-proxy-passwd=%s", s.proxyPassword().c_str() ));
         }
     }
 
     if ( ! destination.empty() )
         args.push_back(str::form("--dir=%s", destination.c_str()));
 
+    // now append the file if there are hidden options
+    if ( ! file_options.empty() )
+    {
+        filesystem::TmpFile tmp;
+        ofstream outs( tmp.path().c_str() );
+        for_( it, file_options.begin(), file_options.end() )
+            outs << *it << endl;
+        outs.close();
+
+        credentials = tmp;
+        args.push_back(str::form("--conf-path=%s", credentials.path().c_str()));
+    }
+    
     args.push_back(url.asString().c_str());
 }
 
@@ -277,7 +299,8 @@ void MediaAria2c::getFileCopy( const Pathname & filename , const Pathname & targ
 
   ExternalProgram::Arguments args;
 
-  fillAriaCmdLine(_aria2cVersion, _settings, fileurl, target.dirname(), args);
+  filesystem::TmpPath credentials;
+  fillAriaCmdLine(_aria2cVersion, _settings, credentials, fileurl, target.dirname(), args);
 
   do
   {
