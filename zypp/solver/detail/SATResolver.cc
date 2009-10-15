@@ -379,21 +379,21 @@ class CheckIfUpdate : public resfilter::PoolItemFilterFunctor
 };
 
 
-class CollectNonePackages : public resfilter::PoolItemFilterFunctor
+class CollectPseudoInstalled : public resfilter::PoolItemFilterFunctor
 {
   public:
     Queue *solvableQueue;
 
-    CollectNonePackages( Queue *queue )
+    CollectPseudoInstalled( Queue *queue )
 	:solvableQueue (queue)
     {}
 
-    // collecting none packges
-
+    // collecting PseudoInstalled items
     bool operator()( PoolItem item )
     {
-	queue_push(solvableQueue, item.satSolvable().id());
-	return true;
+      if ( traits::isPseudoInstalled( item.satSolvable().kind() ) )
+        queue_push( solvableQueue, item.satSolvable().id() );
+      return true;
     }
 };
 
@@ -543,11 +543,10 @@ SATResolver::solving(const CapabilitySet & requires_caps,
     queue_init(&flags);
     queue_init(&solvableQueue);
 
-    CollectNonePackages collectNonePackages(&solvableQueue);
+    CollectPseudoInstalled collectPseudoInstalled(&solvableQueue);
     invokeOnEach( _pool.begin(),
 		  _pool.end(),
-		  functor::not_c(resfilter::byKind<Package>()), // every solvable BUT packages
-		  functor::functorRef<bool,PoolItem> (collectNonePackages) );
+		  functor::functorRef<bool,PoolItem> (collectPseudoInstalled) );
     solver_trivial_installable(_solv, &solvableQueue, &flags );
     for (int i = 0; i < solvableQueue.count; i++) {
 	PoolItem item = _pool.find (sat::Solvable(solvableQueue.elements[i]));
