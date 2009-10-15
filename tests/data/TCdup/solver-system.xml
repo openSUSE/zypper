@@ -1,0 +1,55 @@
+<channel><subchannel>
+<product>
+	<name>Product</name>
+	<vendor>openSUSE</vendor>
+	<history><update>
+		<arch>i586</arch>
+		<version>1</version>
+		<release>1</release>
+	</update></history>
+</product>
+<package>
+	<name>release-package</name>
+	<vendor>openSUSE</vendor>
+	<history><update>
+		<arch>i586</arch>
+		<version>1</version>
+		<release>1</release>
+	</update></history>
+        <provides>
+                <dep name='product()'/>
+                <dep name='product(Product)' op='==' version='1' release='1' />
+        </provides>
+</package>
+
+<package>
+	<name>glibc</name>
+	<vendor>openSUSE</vendor>
+	<history><update>
+		<arch>i586</arch>
+		<version>1</version>
+		<release>1</release>
+	</update></history>
+        <requires>
+                <dep name='dropped_required'/>
+        </requires>
+</package>
+<package>
+	<name>dropped_required</name>
+	<vendor>openSUSE</vendor>
+	<history><update>
+		<arch>i586</arch>
+		<version>1</version>
+		<release>1</release>
+	</update></history>
+</package>
+<package>
+	<name>dropped</name>
+	<vendor>openSUSE</vendor>
+	<history><update>
+		<arch>i586</arch>
+		<version>1</version>
+		<release>1</release>
+	</update></history>
+</package>
+</subchannel></channel>

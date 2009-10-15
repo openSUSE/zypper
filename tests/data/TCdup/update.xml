@@ -1,0 +1,36 @@
+<channel><subchannel>
+<product>
+	<name>Product</name>
+	<vendor>openSUSE</vendor>
+	<history><update>
+		<arch>i586</arch>
+		<version>2</version>
+		<release>1</release>
+	</update></history>
+</product>
+<package>
+	<name>release-package</name>
+	<vendor>openSUSE</vendor>
+	<history><update>
+		<arch>i586</arch>
+		<version>2</version>
+		<release>1</release>
+	</update></history>
+        <provides>
+                <dep name='product()'/>
+                <dep name='product(Product)' op='==' version='2' release='1' />
+                <dep name='weakremover(dropped_required)'/>
+                <dep name='weakremover(dropped)'/>
+        </provides>
+</package>
+
+<package>
+	<name>package</name>
+	<vendor>openSUSE</vendor>
+	<history><update>
+		<arch>i586</arch>
+		<version>2</version>
+		<release>1</release>
+	</update></history>
+</package>
+</subchannel></channel>

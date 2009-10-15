@@ -10,6 +10,7 @@ ADD_TESTS(
   Capabilities
   CheckSum
   Date
+  Dup
   Digest
   Deltarpm
   Edition

@@ -31,10 +31,11 @@ extern "C"
 
 #include "zypp/solver/detail/Helper.h"
 #include "zypp/base/String.h"
+#include "zypp/Product.h"
 #include "zypp/Capability.h"
 #include "zypp/ResStatus.h"
 #include "zypp/VendorAttr.h"
-#include "zypp/base/Logger.h"
+#include "zypp/base/LogTools.h"
 #include "zypp/base/String.h"
 #include "zypp/base/Gettext.h"
 #include "zypp/base/Algorithm.h"
@@ -639,6 +640,34 @@ SATResolver::solverInit(const PoolItemList & weakItems)
     for (std::set<IdString>::const_iterator it = parallel.begin(); it != parallel.end(); ++it) {
 	queue_push( &(_jobQueue), SOLVER_NOOBSOLETES_SOLVABLE_NAME );
 	queue_push( &(_jobQueue), it->id() );
+    }
+
+    if ( _distupgrade )
+    {
+      if ( ZConfig::instance().solverUpgradeRemoveDropedPackages() )
+      {
+        MIL << "Checking droplists ..." << endl;
+        // Dropped packages: look for 'weakremover()' provides
+        // in dup candidates of installed products.
+        ResPoolProxy proxy( ResPool::instance().proxy() );
+        for_( it, proxy.byKindBegin<Product>(), proxy.byKindEnd<Product>() )
+        {
+          if ( (*it)->onSystem() ) // (to install) or (not to delete)
+          {
+            CapabilitySet droplist( (*it)->candidateAsKind<Product>()->droplist() );
+            dumpRangeLine( MIL << "Droplist for " << (*it)->candidateObj() << ": " << droplist.size() << " ", droplist.begin(), droplist.end() ) << endl;
+            for_( cap, droplist.begin(), droplist.end() )
+            {
+              queue_push( &_jobQueue, SOLVER_DROP_ORPHANED|SOLVER_SOLVABLE_NAME );
+              queue_push( &_jobQueue, cap->id() );
+            }
+          }
+        }
+      }
+      else
+      {
+        MIL << "Droplist processing is disabled." << endl;
+      }
     }
 }
 

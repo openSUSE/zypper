@@ -1,0 +1,13 @@
+<?xml version="1.0"?>
+<test>
+<setup arch="x86_64">
+	<system file="solver-system.xml"/>
+	<!--
+	- alias       : update
+	- url         : http://foo.org/distribution/update
+	-->
+	<channel file="update.xml" name="update" priority="10" />
+	<locale name="en_US" />
+	<locale name="de" />
+</setup>
+</test>
