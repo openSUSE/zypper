@@ -1,4 +1,12 @@
 -------------------------------------------------------------------
+Thu Oct 15 20:48:02 CEST 2009 - ma@suse.de
+
+- ResStatus: add isOrphaned to test whether a package is not provided
+  by any enabled repository. Orphaned packages are usually good candidates 
+  for cleanup unless the providing repository was intentionally disabled.
+- version 6.19.0 (19)
+
+-------------------------------------------------------------------
 Thu Oct 15 17:28:38 CEST 2009 - dmacvicar@suse.de
 
 - aria2: pass credentials in a file instead of the command line
