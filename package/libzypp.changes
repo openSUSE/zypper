@@ -1,4 +1,12 @@
 -------------------------------------------------------------------
+Thu Oct 15 17:28:38 CEST 2009 - dmacvicar@suse.de
+
+- aria2: pass credentials in a file instead of the command line
+  which is logged.
+- aria2: we get the url in the progress if there is no response 
+  from the server yet, handle that to avoid flooding the log.
+
+-------------------------------------------------------------------
 Thu Oct 15 16:56:25 CEST 2009 - ma@suse.de
 
 - Performing a dist upgrade the solver may try to delete old and no
