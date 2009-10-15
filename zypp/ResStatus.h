@@ -71,7 +71,7 @@ namespace zypp
     typedef bit::Range<FieldType,TransactField::end,         2> TransactByField;
     typedef bit::Range<FieldType,TransactByField::end,       2> TransactDetailField;
     typedef bit::Range<FieldType,TransactDetailField::end,   1> LicenceConfirmedField;
-    typedef bit::Range<FieldType,LicenceConfirmedField::end, 2> WeakField;
+    typedef bit::Range<FieldType,LicenceConfirmedField::end, 3> WeakField;
     typedef bit::Range<FieldType,WeakField::end,             1> UserLockQueryField; // internal
     // enlarge FieldType if more bit's needed. It's not yet
     // checked by the compiler.
@@ -135,12 +135,12 @@ namespace zypp
         LICENCE_CONFIRMED   = bit::RangeValue<LicenceConfirmedField,1>::value
       };
 
-    enum WeakValue
+    enum WeakValue	// Unlike the other fields those are BITS that may be or'ed!
       {
         NO_WEAK 		= bit::RangeValue<WeakField,0>::value,
-        SUGGESTED   		= bit::RangeValue<WeakField,1>::value,
-	RECOMMENDED 		= bit::RangeValue<WeakField,2>::value,
-	SUGGESTED_AND_RECOMMENDED = bit::RangeValue<WeakField,3>::value
+        SUGGESTED   		= bit::RangeValue<WeakField,1<<0>::value,
+	RECOMMENDED 		= bit::RangeValue<WeakField,1<<1>::value,
+	ORPHANED		= bit::RangeValue<WeakField,1<<2>::value
       };
 
     enum UserLockQuery // internal
@@ -178,30 +178,28 @@ namespace zypp
     { fieldValueAssign<LicenceConfirmedField>( toVal_r ? LICENCE_CONFIRMED : LICENCE_UNCONFIRMED ); }
 
   public:
-
     bool isRecommended() const
-    { return fieldValueIs<WeakField>( RECOMMENDED ); }
+    { return _bitfield.test( RECOMMENDED ); }
 
     bool isSuggested() const
-    { return fieldValueIs<WeakField>( SUGGESTED ); }
+    { return _bitfield.test( SUGGESTED ); }
 
-    bool resetWeak() const
-    { return fieldValueIs<WeakField>( NO_WEAK ); }
+    bool isOrphaned() const
+    { return _bitfield.test( ORPHANED ); }
+
+    void resetWeak()
+    { return fieldValueAssign<WeakField>( NO_WEAK ); }
 
     void setRecommended( bool toVal_r = true )
-    { if (isSuggested())
-	fieldValueAssign<WeakField>( toVal_r ? SUGGESTED_AND_RECOMMENDED : SUGGESTED );
-    else
-	fieldValueAssign<WeakField>( toVal_r ? RECOMMENDED : NO_WEAK );
-    }
+    { _bitfield.set( RECOMMENDED, toVal_r ); }
 
     void setSuggested( bool toVal_r = true )
-    { if (isRecommended())
-	fieldValueAssign<WeakField>( toVal_r ? SUGGESTED_AND_RECOMMENDED : RECOMMENDED );
-    else
-	fieldValueAssign<WeakField>( toVal_r ? SUGGESTED : NO_WEAK );
-    }
+    { _bitfield.set( SUGGESTED, toVal_r ); }
 
+    void setOrphaned( bool toVal_r = true )
+    { _bitfield.set( ORPHANED, toVal_r ); }
+
+  public:
     ValidateValue validate() const
     { return (ValidateValue)_bitfield.value<ValidateField>(); }
 
@@ -660,23 +658,23 @@ namespace zypp
     */
     template<class _Field>
       bool fieldValueIs( FieldType val_r ) const
-      { return _bitfield.isEqual<_Field>( val_r ); }
+    { return _bitfield.isEqual<_Field>( val_r ); }
 
     /** Set the corresponding Field to value \a val_r.
     */
     template<class _Field>
       void fieldValueAssign( FieldType val_r )
-      { _bitfield.assign<_Field>( val_r ); }
+    { _bitfield.assign<_Field>( val_r ); }
 
     /** compare two values.
     */
     template<class _Field>
       bool isGreaterThan( FieldType val_r )
-	  { return _bitfield.value<_Field>() > val_r; }
+    { return _bitfield.value<_Field>() > val_r; }
 
     template<class _Field>
       bool isLessThan( FieldType val_r )
-	  { return _bitfield.value<_Field>() < val_r; }
+    { return _bitfield.value<_Field>() < val_r; }
 
   private:
     friend class resstatus::StatusBackup;

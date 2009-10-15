@@ -93,6 +93,13 @@ inline std::string itemToString( const PoolItem & item )
   return ret;
 }
 
+inline PoolItem getPoolItem( Id id_r )
+{
+  PoolItem ret( (sat::Solvable( id_r )) );
+  if ( !ret && id_r )
+    INT << "id " << id_r << " not found in ZYPP pool." << endl;
+  return ret;
+}
 
 //---------------------------------------------------------------------------
 
@@ -431,20 +438,15 @@ SATResolver::solving(const CapabilitySet & requires_caps,
     _result_items_to_remove.clear();
 
     /*  solvables to be installed */
-    for (int i = 0; i < _solv->decisionq.count; i++)
+    for ( int i = 0; i < _solv->decisionq.count; ++i )
     {
-      Id p;
-      p = _solv->decisionq.elements[i];
-      if (p < 0 || !sat::Solvable(p) || sat::Solvable(p).isSystem())
+      sat::Solvable slv( _solv->decisionq.elements[i] );
+      if ( !slv || slv.isSystem() )
 	continue;
 
-      PoolItem poolItem((sat::Solvable(p)));
-      if (poolItem) {
-	  SATSolutionToPool (poolItem, ResStatus::toBeInstalled, ResStatus::SOLVER);
-	  _result_items_to_install.push_back (poolItem);
-      } else {
-	  ERR << "id " << p << " not found in ZYPP pool." << endl;
-      }
+      PoolItem poolItem( slv );
+      SATSolutionToPool (poolItem, ResStatus::toBeInstalled, ResStatus::SOLVER);
+      _result_items_to_install.push_back (poolItem);
     }
 
     /* solvables to be erased */
@@ -486,56 +488,28 @@ SATResolver::solving(const CapabilitySet & requires_caps,
 	}
       }
     }
-    /*  solvables which are recommended */
-    for (int i = 0; i < _solv->recommendations.count; i++)
-    {
-      Id p;
-      p = _solv->recommendations.elements[i];
-      if (p < 0 || !sat::Solvable(p))
-	continue;
 
-      PoolItem poolItem = _pool.find (sat::Solvable(p));
-      if (poolItem) {
-	  poolItem.status().setRecommended(true);
-	  _XDEBUG("SATSolutionToPool(" << poolItem << ") recommended !");
-      } else {
-	  ERR << "id " << p << " not found in ZYPP pool." << endl;
-      }
+    /*  solvables which are recommended */
+    for ( int i = 0; i < _solv->recommendations.count; ++i )
+    {
+      PoolItem poolItem( getPoolItem( _solv->recommendations.elements[i] ) );
+      poolItem.status().setRecommended( true );
     }
 
     /*  solvables which are suggested */
-    for (int i = 0; i < _solv->suggestions.count; i++)
+    for ( int i = 0; i < _solv->suggestions.count; ++i )
     {
-      Id p;
-      p = _solv->suggestions.elements[i];
-      if (p < 0 || !sat::Solvable(p))
-	continue;
-
-      PoolItem poolItem = _pool.find (sat::Solvable(p));
-      if (poolItem) {
-	  poolItem.status().setSuggested(true);
-	  _XDEBUG("SATSolutionToPool(" << poolItem << ") suggested !");
-      } else {
-	  ERR << "id " << p << " not found in ZYPP pool." << endl;
-      }
+      PoolItem poolItem( getPoolItem( _solv->suggestions.elements[i] ) );
+      poolItem.status().setSuggested( true );
     }
 
     _problem_items.clear();
-    /*  solvables which are no longer supported */
-    for (int i = 0; i < _solv->orphaned.count; i++)
+    /*  solvables which are orphaned */
+    for ( int i = 0; i < _solv->orphaned.count; ++i )
     {
-	Id p;
-	p = _solv->orphaned.elements[i];
-	if (p < 0 || !sat::Solvable(p))
-	    continue;
-
-	PoolItem poolItem = _pool.find (sat::Solvable(p));
-	if (poolItem) {
-	    _problem_items.push_back(poolItem);
-	    _XDEBUG( poolItem << " orphaned !");
-	} else {
-	    ERR << "id " << p << " not found in ZYPP pool." << endl;
-	}
+      PoolItem poolItem( getPoolItem( _solv->orphaned.elements[i] ) );
+      poolItem.status().setOrphaned( true );
+      _problem_items.push_back( poolItem );
     }
 
     /* Write validation state back to pool */
