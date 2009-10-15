@@ -358,11 +358,13 @@ void MediaAria2c::getFileCopy( const Pathname & filename , const Pathname & targ
         else if ( str::hasPrefix(line, "FILE: ") )
         {
           // get the FILE name
-          Pathname theFile(line.substr(6, line.size()));
+          string theFile(line.substr(6, line.size()));
           // is the report about the filename we are downloading?
           // aria may report progress about metalinks, torrent and
           // other stuff which is not the main transfer
-          if ( theFile == target )
+          // the reported file is the url before the server emits a response
+          // and then is reported as the target file
+          if ( Pathname(theFile) == target || theFile == fileurl.asCompleteString() )
           {
             // once we find the FILE: line, progress has to be
             // non empty
@@ -535,7 +537,6 @@ bool MediaAria2c::authenticate(const std::string & availAuthTypes, bool firstTry
 {
     return false;
 }
-
 
 void MediaAria2c::getDirInfo( std::list<std::string> & retlist,
                                const Pathname & dirname, bool dots ) const
