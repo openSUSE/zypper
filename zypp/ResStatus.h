@@ -70,8 +70,7 @@ namespace zypp
     typedef bit::Range<FieldType,ValidateField::end,         2> TransactField;
     typedef bit::Range<FieldType,TransactField::end,         2> TransactByField;
     typedef bit::Range<FieldType,TransactByField::end,       2> TransactDetailField;
-    typedef bit::Range<FieldType,TransactDetailField::end,   1> SolverStateField;
-    typedef bit::Range<FieldType,SolverStateField::end,      1> LicenceConfirmedField;
+    typedef bit::Range<FieldType,TransactDetailField::end,   1> LicenceConfirmedField;
     typedef bit::Range<FieldType,LicenceConfirmedField::end, 2> WeakField;
     typedef bit::Range<FieldType,WeakField::end,             1> UserLockQueryField; // internal
     // enlarge FieldType if more bit's needed. It's not yet
@@ -117,7 +116,6 @@ namespace zypp
         /** Detail for no transact, i.e. reset any Install/RemoveDetailValue. */
         NO_DETAIL = bit::RangeValue<TransactDetailField,0>::value,
       };
-
     enum InstallDetailValue
       {
         EXPLICIT_INSTALL = bit::RangeValue<TransactDetailField,0>::value,
@@ -129,11 +127,6 @@ namespace zypp
 	SOFT_REMOVE     = bit::RangeValue<TransactDetailField,1>::value,
         DUE_TO_OBSOLETE = bit::RangeValue<TransactDetailField,2>::value,
         DUE_TO_UPGRADE  = bit::RangeValue<TransactDetailField,3>::value
-      };
-    enum SolverStateValue
-      {
-	NORMAL     = bit::RangeValue<SolverStateField,0>::value, // default, notthing special
-	SEEN       = bit::RangeValue<SolverStateField,1>::value, // already seen during ResolverUpgrade
       };
 
     enum LicenceConfirmedValue
@@ -633,15 +626,6 @@ namespace zypp
       return true;
     }
 
-    bool isSeen () const
-    { return fieldValueIs<SolverStateField>( SEEN ); }
-
-    bool setSeen (bool value)
-    {
-      fieldValueAssign<SolverStateField>( value ? SEEN : NORMAL );
-      return true;
-    }
-
     bool setStatus( ResStatus newStatus_r )
     {
       // State field is immutable!
@@ -670,8 +654,7 @@ namespace zypp
                ValidateValue v      = UNDETERMINED,
                TransactValue t      = KEEP_STATE,
                InstallDetailValue i = EXPLICIT_INSTALL,
-               RemoveDetailValue r  = EXPLICIT_REMOVE,
-	       SolverStateValue ssv = NORMAL );
+               RemoveDetailValue r  = EXPLICIT_REMOVE );
 
     /** Return whether the corresponding Field has value \a val_r.
     */

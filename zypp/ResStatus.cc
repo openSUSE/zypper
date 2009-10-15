@@ -51,7 +51,7 @@ namespace zypp
   {}
 
 
-  ResStatus::ResStatus (enum StateValue s, enum ValidateValue v, enum TransactValue t, enum InstallDetailValue i, enum RemoveDetailValue r, enum SolverStateValue ssv)
+  ResStatus::ResStatus (enum StateValue s, enum ValidateValue v, enum TransactValue t, enum InstallDetailValue i, enum RemoveDetailValue r)
     : _bitfield (s)
   {
     fieldValueAssign<ValidateField>(v);
@@ -59,9 +59,6 @@ namespace zypp
     if (t == TRANSACT) {
 	if (s == INSTALLED) fieldValueAssign<TransactDetailField>(r);
 	else fieldValueAssign<TransactDetailField>(i);
-    }
-    if (ssv != NORMAL) {
-	fieldValueAssign<SolverStateField>(ssv);
     }
   }
 
@@ -91,10 +88,7 @@ namespace zypp
 	( obj.isToBeUninstalledDueToUpgrade() ? "U" :
 	( obj.isToBeInstalledSoft() ? "S" : "_" ) ) );
 
-    str << (obj.isSeen() ? "@" : "" );
-
     str << (obj.isRecommended() ? "r" : "" );
-
     str << (obj.isSuggested() ? "s" : "" );
 
     return str;
