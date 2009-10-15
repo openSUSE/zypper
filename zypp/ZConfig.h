@@ -246,6 +246,25 @@ namespace zypp
        */
       unsigned solver_upgradeTestcasesToKeep() const;
 
+      /** Whether dist upgrade should remove a products dropped packages (true).
+       *
+       * A new product may suggest a list of old and no longer supported
+       * packages (dropped packages). Performing a dist upgrade the solver
+       * may try to delete them, even if they do not cause any dependency
+       * problem.
+       *
+       * Turning this option off, the solver will not try to remove those
+       * packages unless they actually do cause dependency trouble. At any
+       * time you may use zypper to detect orphaned packages, and do the
+       * cleanup manually. Or simply leave them installed as long as you don't
+       * need the disk space.
+       */
+      bool solverUpgradeRemoveDropedPackages() const;
+      /** Set \ref solverUpgradeRemoveDropedPackages to \a val_r. */
+      void setSolverUpgradeRemoveDropedPackages( bool val_r );
+      /** Reset \ref solverUpgradeRemoveDropedPackages to the \c zypp.conf default. */
+      void resetSolverUpgradeRemoveDropedPackages();
+
       /**
        * Packages which can be installed parallel with different versions
        * Returning a set of package names (IdString)

@@ -150,6 +150,7 @@ namespace zypp
 	const value_type & get() const
 	{ return _val; }
 
+        /** Autoconversion to value_type.  */
         operator const value_type &() const
         { return _val; }
 
@@ -157,6 +158,7 @@ namespace zypp
 	void set( const value_type & newval_r )
 	{ _val = newval_r; }
 
+        /** Non-const reference to set a new value. */
         value_type & ref()
         { return _val; }
 
@@ -225,6 +227,7 @@ namespace zypp
         , solver_onlyRequires		( false )
         , solver_allowVendorChange	( false )
         , solver_upgradeTestcasesToKeep	( 2 )
+        , solverUpgradeRemoveDropedPackages( true )
         , apply_locks_file		( true )
 
       {
@@ -336,8 +339,6 @@ namespace zypp
                 }
                 else if ( entry == "commit.downloadMode" )
                 {
-                  INT << value << endl;
-                  INT << deserializeDownloadMode(value) << endl;
                   commit_downloadMode.set( deserializeDownloadMode( value ) );
                 }
                 else if ( entry == "vendordir" )
@@ -355,6 +356,10 @@ namespace zypp
                 else if ( entry == "solver.upgradeTestcasesToKeep" )
                 {
                   solver_upgradeTestcasesToKeep.set( str::strtonum<unsigned>( value ) );
+                }
+                else if ( entry == "solver.upgradeRemoveDropedPackages" )
+                {
+                  solverUpgradeRemoveDropedPackages.restoreToDefault( str::strToBool( value, solverUpgradeRemoveDropedPackages.getDefault() ) );
                 }
                 else if ( entry == "solver.checkSystemFile" )
                 {
@@ -476,6 +481,8 @@ namespace zypp
     Option<bool>	solver_onlyRequires;
     Option<bool>	solver_allowVendorChange;
     Option<unsigned>	solver_upgradeTestcasesToKeep;
+    DefaultOption<bool> solverUpgradeRemoveDropedPackages;
+
     Pathname solver_checkSystemFile;
 
     std::set<IdString> multiversion;
@@ -694,6 +701,10 @@ namespace zypp
 
   unsigned ZConfig::solver_upgradeTestcasesToKeep() const
   { return _pimpl->solver_upgradeTestcasesToKeep; }
+
+  bool ZConfig::solverUpgradeRemoveDropedPackages() const		{ return _pimpl->solverUpgradeRemoveDropedPackages; }
+  void ZConfig::setSolverUpgradeRemoveDropedPackages( bool val_r )	{ _pimpl->solverUpgradeRemoveDropedPackages.set( val_r ); }
+  void ZConfig::resetSolverUpgradeRemoveDropedPackages()		{ _pimpl->solverUpgradeRemoveDropedPackages.restoreToDefault(); }
 
   std::set<IdString> ZConfig::multiversion() const
   { return _pimpl->multiversion; }
