@@ -225,6 +225,49 @@ namespace zypp
         {
           return _value == rhs;
         }
+
+       public:
+
+         /** Set or unset bits of \a rhs. */
+        template<class _Range>
+            BitField & set( _IntT rhs, bool doset_r )
+            { return set( (rhs & _Range::Mask::value), doset_r ); }
+
+        BitField & set( _IntT rhs, bool doset_r )
+        { return doset_r ? set( rhs ) : unset( rhs ); }
+
+        /** Set bits of \a rhs. */
+        template<class _Range>
+            BitField & set( _IntT rhs )
+            { return set( rhs & _Range::Mask::value ); }
+
+        BitField & set( _IntT rhs )
+        { _value |= rhs; return *this; }
+
+        /** Unset bits of \a rhs. */
+        template<class _Range>
+            BitField & unset( _IntT rhs )
+            { return unset( rhs & _Range::Mask::value ); }
+
+        BitField & unset( _IntT rhs )
+        { _value &= ~rhs; return *this; }
+
+        /** Test whether \b all bits of \a rhs are set. */
+        template<class _Range>
+            bool test( _IntT rhs )
+            { return test( rhs & _Range::Mask::value ); }
+
+        bool test( _IntT rhs ) const
+        { return (_value & rhs) == rhs; }
+
+        /** Test whether \b at \b least \b one bit of \a rhs is set. */
+        template<class _Range>
+            bool testAnyOf( _IntT rhs )
+            { return testAnyOf( rhs & _Range::Mask::value ); }
+
+        bool testAnyOf( _IntT rhs ) const
+        { return (_value & rhs); }
+
       public:
 
         BitField & operator=( const BitField & rhs )
