@@ -1,4 +1,16 @@
 -------------------------------------------------------------------
+Thu Oct 15 16:56:25 CEST 2009 - ma@suse.de
+
+- Performing a dist upgrade the solver may try to delete old and no
+  longer provided (dropped) packages, even if they do not cause any 
+  dependency problem. This behaviour may be trurned off via zypp.conf 
+  option solver.upgradeRemoveDropedPackages. (bnc #539543)
+- New zypp.conf option solver.upgradeRemoveDropedPackages (true).
+- Add Product::droplist: List of dropped packages, i.e. packages no 
+  longer provided by a product.
+- version 6.18.1 (17)
+
+-------------------------------------------------------------------
 Wed Oct  7 16:45:21 CEST 2009 - ma@suse.de
 
 - Return update messages via ZYppCommitResult. Support variable 
