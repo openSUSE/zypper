@@ -1,4 +1,11 @@
 -------------------------------------------------------------------
+Mon Oct 19 13:39:31 CEST 2009 - ma@suse.de
+
+- Repository::setInfo: Propagate priority changes to the solver to
+  avoid reloading the whole repo (bnc #498266).
+- version 6.19.1 (19)
+
+-------------------------------------------------------------------
 Thu Oct 15 20:48:02 CEST 2009 - ma@suse.de
 
 - ResStatus: add isOrphaned to test whether a package is not provided
