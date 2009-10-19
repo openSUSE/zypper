@@ -177,9 +177,8 @@ namespace zypp
           /** */
           const RepoInfo & repoInfo( RepoIdType id_r )
           { return _repoinfos[id_r]; }
-          /** */
-          void setRepoInfo( RepoIdType id_r, const RepoInfo & info_r )
-          { _repoinfos[id_r] = info_r; }
+          /** Also adjust repo priority and subpriority accordingly. */
+          void setRepoInfo( RepoIdType id_r, const RepoInfo & info_r );
           /** */
           void eraseRepoInfo( RepoIdType id_r )
           { _repoinfos.erase( id_r ); }

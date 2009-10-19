@@ -29,6 +29,7 @@
 #include "zypp/PoolItem.h"
 
 #include "zypp/target/modalias/Modalias.h"
+#include "zypp/media/MediaPriority.h"
 
 extern "C"
 {
@@ -345,6 +346,36 @@ namespace zypp
       {
         setDirty(__FUNCTION__, repo_r->name );
         return ::repo_add_solvable_block( repo_r, count_r );
+      }
+
+      void PoolImpl::setRepoInfo( RepoIdType id_r, const RepoInfo & info_r )
+      {
+        ::_Repo * repo( getRepo( id_r ) );
+        if ( repo )
+        {
+          bool dirty = false;
+
+          // satsolver priority is based on '<', while yum's repoinfo
+          // uses 1(highest)->99(lowest). Thus we use -info_r.priority.
+          if ( repo->priority != -info_r.priority() )
+          {
+            repo->priority = -info_r.priority();
+            dirty = true;
+          }
+
+ 	  // subpriority is used to e.g. prefer http over dvd iff
+	  // both have same priority.
+          int mediaPriority( media::MediaPriority( info_r.url() ) );
+          if ( repo->subpriority != mediaPriority )
+          {
+            repo->subpriority = mediaPriority;
+            dirty = true;
+          }
+
+          if ( dirty )
+            setDirty(__FUNCTION__, info_r.alias().c_str() );
+        }
+        _repoinfos[id_r] = info_r;
       }
 
       ///////////////////////////////////////////////////////////////////
