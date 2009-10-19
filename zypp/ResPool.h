@@ -108,6 +108,32 @@ namespace zypp
       { return make_filter_end( filter_r, *this ); }
       //@}
 
+      /** \name Iterate over all PoolItems by status.
+       *
+       * Simply pass the \ref ResStatus predicate you want to use as filter:
+       * \code
+       *   // iterate over all orphaned items:
+       *   for_( it, pool.byStatusBegin(&ResStatus::isOrphaned), pool.byStatusEnd(&ResStatus::isOrphaned) )
+       *   {...}
+       * \endcode
+       *
+       * Or use \ref filter::ByStatus in more complex queries:
+       * \code
+       *   // iterate over all (orphaned and recommended) items:
+       *   functor::Chain<filter::ByStatus,filter::ByStatus> myfilter( filter::ByStatus(&ResStatus::isOrphaned),
+       *                                                               filter::ByStatus(&ResStatus::isRecommended) );
+       *   for_( it, pool.filterBegin(myfilter), pool.filterEnd(myfilter) )
+       *   { ... }
+       * \endcode
+       */
+      //@{
+      filter_iterator<filter::ByStatus,const_iterator> byStatusBegin( const filter::ByStatus & filter_r ) const
+      { return make_filter_begin( filter_r, *this ); }
+
+      filter_iterator<filter::ByStatus,const_iterator> byStatusEnd( const filter::ByStatus & filter_r ) const
+      { return make_filter_end( filter_r, *this ); }
+      //@}
+
     public:
       /** \name Iterate over all PoolItems of a certain name and kind. */
       //@{

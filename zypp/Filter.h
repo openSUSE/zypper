@@ -131,6 +131,38 @@ namespace zypp
 
     ///////////////////////////////////////////////////////////////////
     //
+    //	CLASS NAME : ByStatus
+    //
+    /** Filter solvables according to their status.
+    */
+    class ByStatus
+    {
+      public:
+        typedef bool (ResStatus::*Predicate)() const;
+
+      public:
+        ByStatus( Predicate pred_r )
+        : _pred( pred_r )
+        {}
+
+      public:
+        /** Filter on \ref PoolItem. */
+        bool operator()( const PoolItem & pi_r ) const
+        { return (pi_r.status().*_pred)(); }
+
+        /** Filter fitting sat::Solvable/ResObject. */
+        template<class _Solv>
+        bool operator()( const _Solv & solv_r ) const
+        { return operator()( PoolItem(solv_r) ); }
+
+      private:
+        Predicate _pred;
+    };
+    ///////////////////////////////////////////////////////////////////
+
+
+    ///////////////////////////////////////////////////////////////////
+    //
     //	CLASS NAME : SameItemAs
     //
     /** Filter items with at least same NVRA, vendor.
