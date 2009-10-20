@@ -91,12 +91,12 @@ void fillAriaCmdLine( const string &ariaver,
                       const Pathname &destination,
                       ExternalProgram::Arguments &args )
 {
-    
+
     // options that are not passed in the command line
     // like credentials, every string is in the
     // opt=val format
     list<string> file_options;
-    
+
     args.push_back(ARIA_BINARY);
     args.push_back(str::form("--user-agent=%s", s.userAgentString().c_str()));
     args.push_back("--summary-interval=1");
@@ -198,8 +198,12 @@ void fillAriaCmdLine( const string &ariaver,
         credentials = tmp;
         args.push_back(str::form("--conf-path=%s", credentials.path().c_str()));
     }
-    
-    args.push_back(url.asString().c_str());
+
+    // Credentials are passed via --{ftp,http}-{user,passwd}.
+    // Aria does not like them being repeated in the url. (bnc #544634)
+    args.push_back(url.asString( url.getViewOptions()
+                               - url::ViewOptions::WITH_USERNAME
+                               - url::ViewOptions::WITH_PASSWORD ).c_str());
 }
 
 const char *const MediaAria2c::agentString()
