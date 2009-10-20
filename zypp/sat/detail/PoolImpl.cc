@@ -184,7 +184,7 @@ namespace zypp
 	if (verbose)
 	    ::pool_setdebuglevel( _pool, 2 );
 	else
-	    ::pool_setdebugmask(_pool, SAT_DEBUG_JOB);
+	    ::pool_setdebugmask(_pool, SAT_DEBUG_JOB|SAT_DEBUG_STATS);
 
         ::pool_setdebugcallback( _pool, logSat, NULL );
 
