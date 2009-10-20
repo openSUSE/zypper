@@ -1,4 +1,12 @@
 -------------------------------------------------------------------
+Tue Oct 20 16:06:13 CEST 2009 - ma@suse.de
+
+- Credentials are passed as commandline options to aria2c, so strip any
+  'user@' from the URL. Otherwise aria will use an empty password for 
+  this URL and authentication will fail. (bnc #544634)
+- version 6.19.2 (19)
+
+-------------------------------------------------------------------
 Mon Oct 19 13:39:31 CEST 2009 - ma@suse.de
 
 - Repository::setInfo: Propagate priority changes to the solver to
