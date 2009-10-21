@@ -327,7 +327,7 @@ find_updates( const ResKind & kind, Candidates & candidates )
 
   for_(it, pool.proxy().byKindBegin(kind), pool.proxy().byKindEnd(kind))
   {
-    if ((*it)->hasInstalledObj())
+    if (!(*it)->hasInstalledObj())
       continue;
 
     PoolItem candidate = (*it)->updateCandidateObj();
@@ -456,6 +456,8 @@ void list_updates(Zypper & zypper, const ResKindSet & kinds, bool best_effort)
 
     unsigned int cols = th.cols();
 
+    ResPoolProxy uipool( ResPool::instance().proxy() );
+
     Candidates candidates;
     find_updates( *it, candidates );
 
@@ -478,8 +480,17 @@ void list_updates(Zypper & zypper, const ResKindSet & kinds, bool best_effort)
         // for packages show also the current installed version (bnc #466599)
         //! \todo this deserves cleanup and optimization: e.g. findInstalledItem()
         //! is called twice, once here and once in find_updates()
+        //! ma@: Use ui::Selectable instead of findInstalledItem, mainly because
+        //! it does not require to traverse the pool. Furthermore findInstalledItem
+        //! silently hides locked installed packages which is not appropriate here.
+        //! Either hide the whole update or show all.
+        //
         if (*it == ResKind::package)
-          tr << findInstalledItem(PoolItem(ci->resolvable()))->edition().asString();
+        {
+          ui::Selectable::Ptr sel( uipool.lookup( *ci ) );
+          if ( sel->hasInstalledObj() )
+            tr << sel->installedObj()->edition().asString();
+        }
         tr << res->edition ().asString ()
           << res->arch ().asString ();
       }
