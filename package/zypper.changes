@@ -1,4 +1,10 @@
 -------------------------------------------------------------------
+Wed Oct 21 17:49:07 CEST 2009 - ma@suse.de
+
+- Fix abort on 'zypper lu -a'. (bnc #548752)
+- 1.2.6
+
+-------------------------------------------------------------------
 Mon Oct 12 10:57:56 CEST 2009 - jkupec@suse.cz
 
 - 'zypper lr' now shows details about repos specified as arguments.
