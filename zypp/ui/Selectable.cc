@@ -73,6 +73,9 @@ namespace zypp
     PoolItem Selectable::candidateObj() const
     { return _pimpl->candidateObj(); }
 
+    PoolItem Selectable::candidateObjFrom( Repository repo_r ) const
+    { return _pimpl->candidateObjFrom( repo_r ); }
+
     PoolItem Selectable::updateCandidateObj() const
     { return _pimpl->updateCandidateObj(); }
 

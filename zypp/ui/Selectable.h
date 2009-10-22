@@ -125,6 +125,13 @@ namespace zypp
        */
       PoolItem candidateObj() const;
 
+      /** The best candidate provided by a specific \ref Repository, if there is one.
+       * In contrary to \ref candidateObj, this may return no item even if
+       * there are available objects. This simply means the \ref Repository
+       * does not provide this object.
+       */
+      PoolItem candidateObjFrom( Repository repo_r ) const;
+
       /** The best candidate for update, if there is one.
        * In contrary to \ref candidateObj, this may return no item even if
        * there are available objects. This simply means the best object is
@@ -132,6 +139,7 @@ namespace zypp
        * update policy.
        */
       PoolItem updateCandidateObj() const;
+
 
       /** Return the \ref installedObj resolvable casted to a specific kind.
        * \code

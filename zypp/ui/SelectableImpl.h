@@ -117,6 +117,21 @@ namespace zypp
       */
       PoolItem setCandidate( const PoolItem & newCandidate_r, ResStatus::TransactByValue causer_r );
 
+      /** The best candidate provided by a specific \ref Repository, if there is one.
+       * In contrary to \ref candidateObj, this may return no item even if
+       * there are available objects. This simply means the \ref Repository
+       * does not provide this object.
+       */
+      PoolItem candidateObjFrom( Repository repo_r ) const
+      {
+        for_( it, availableBegin(), availableEnd() )
+        {
+          if ( (*it)->repository() == repo_r )
+            return *it;
+        }
+        return PoolItem();
+      }
+
       /** The best candidate for update, if there is one.
        * In contrary to \ref candidateObj, this may return no item even if
        * there are available objects. This simply means the best object is
