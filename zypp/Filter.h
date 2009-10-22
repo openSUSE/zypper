@@ -141,14 +141,14 @@ namespace zypp
         typedef bool (ResStatus::*Predicate)() const;
 
       public:
-        ByStatus( Predicate pred_r )
+        ByStatus( Predicate pred_r = 0 )
         : _pred( pred_r )
         {}
 
       public:
         /** Filter on \ref PoolItem. */
         bool operator()( const PoolItem & pi_r ) const
-        { return (pi_r.status().*_pred)(); }
+        { return _pred && (pi_r.status().*_pred)(); }
 
         /** Filter fitting sat::Solvable/ResObject. */
         template<class _Solv>
