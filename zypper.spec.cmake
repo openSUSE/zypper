@@ -14,7 +14,8 @@ Name:           @PACKAGE@
 BuildRequires:  libzypp-devel >= 5.30.12 boost-devel >= 1.33.1 gettext-devel >= 0.15 readline-devel >= 5.1
 BuildRequires:  gcc-c++ >= 4.1 cmake >= 2.4.6
 Requires:	procps
-Recommends:     logrotate cron 
+%requires_ge	libzypp
+Recommends:     logrotate cron
 License:        GPL v2 or later
 Group:          System/Packages
 BuildRoot:      %{_tmppath}/%{name}-%{version}-build
@@ -26,8 +27,8 @@ Release:        0
 Source:         @PACKAGE@-@VERSION@.tar.bz2
 Prefix:         /usr
 URL:            http://en.opensuse.org/Zypper
-Provides:       y2pmsh 
-Obsoletes:      y2pmsh 
+Provides:       y2pmsh
+Obsoletes:      y2pmsh
 
 %description
 Command line package management tool using libzypp.
