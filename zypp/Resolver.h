@@ -218,15 +218,26 @@ namespace zypp
     void setDefaultSolveSrcPackages();
     bool solveSrcPackages() const;
 
+    /** \name Upgrade to content of a specific repository.
+     * \note This is an ordinary solver request. You should simply
+     * \ref resolvePool to execute, and not \ref doUpgrade.
+     */
+    //@{
     /**
      * Adding request to perform a dist upgrade restricted to this repository.
+     *
      * This is what e.g. <tt>zypper dup --repo myrepo</tt> should perform.
      * \see \ref doUpgrade
      */
     void addUpgradeRepo( Repository repo_r );
 
     /**
-     * Remove the upgrade request for this repo.
+     * Whether there is an \c UpgradeRepo request pending for this repo.
+     */
+    bool upgradingRepo( Repository repo_r ) const;
+
+    /**
+     * Remove an upgrade request for this repo.
      */
     void removeUpgradeRepo( Repository repo_r );
 
@@ -234,6 +245,7 @@ namespace zypp
      * Remove all upgrade repo requests.
      */
     void removeUpgradeRepos();
+    //@}
 
     /**
      * Adding additional requirement

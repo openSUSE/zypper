@@ -99,6 +99,7 @@ namespace zypp
   bool Resolver::solveSrcPackages() const		{ return _pimpl->solveSrcPackages(); }
 
   void Resolver::addUpgradeRepo( Repository repo_r )	{ _pimpl->addUpgradeRepo( repo_r ); }
+  bool Resolver::upgradingRepo( Repository repo_r ) const { return _pimpl->upgradingRepo( repo_r ); }
   void Resolver::removeUpgradeRepo( Repository repo_r )	{ _pimpl->removeUpgradeRepo( repo_r ); }
   void Resolver::removeUpgradeRepos()			{ _pimpl->removeUpgradeRepos(); }
 

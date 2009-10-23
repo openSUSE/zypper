@@ -154,7 +154,8 @@ class Resolver : public base::ReferenceCounted, private base::NonCopyable {
     ResPool pool() const;
     void setPool( const ResPool & pool ) { _pool = pool; }
 
-    void addUpgradeRepo( Repository repo_r ) 		{ if ( repo_r ) _upgradeRepos.insert( repo_r ); }
+    void addUpgradeRepo( Repository repo_r ) 		{ if ( repo_r && ! repo_r.isSystemRepo() ) _upgradeRepos.insert( repo_r ); }
+    bool upgradingRepo( Repository repo_r ) const	{ return( _upgradeRepos.find( repo_r ) != _upgradeRepos.end() ); }
     void removeUpgradeRepo( Repository repo_r )		{ _upgradeRepos.erase( repo_r ); }
     void removeUpgradeRepos()				{ _upgradeRepos.clear(); }
     const std::set<Repository> & upgradeRepos() const	{ return _upgradeRepos; }
