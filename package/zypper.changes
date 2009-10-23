@@ -1,4 +1,10 @@
 -------------------------------------------------------------------
+Fri Oct 23 12:50:35 CEST 2009 - jkupec@suse.cz
+
+- Fixed unintentional hiding of the 'p' install summary option
+  (bnc #549183)
+
+-------------------------------------------------------------------
 Wed Oct 21 17:49:07 CEST 2009 - ma@suse.de
 
 - Fix abort on 'zypper lu -a'. (bnc #548752)
