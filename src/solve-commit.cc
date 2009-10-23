@@ -551,7 +551,7 @@ void solve_and_commit (Zypper & zypper)
       // string will do.
       //! \todo add c for changelog and x for explain (show the dep tree)
       popts.setOptions(_("y/n/p/v/a/r/m/d/g"), 0);
-      popts.setShownCount(2);
+      popts.setShownCount(3);
       if (!(zypper.runtimeData().force_resolution && show_p_option))
         popts.disable(2);
       // translators: help text for 'y' option in the 'Continue?' prompt
