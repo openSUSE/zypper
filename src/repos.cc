@@ -281,13 +281,11 @@ static bool build_cache(Zypper & zypper, const RepoInfo &repo, bool force_build)
 bool match_repo(Zypper & zypper, string str, RepoInfo *repo)
 {
   RepoManager & manager = zypper.repoManager();
-  list<RepoInfo> known;
-  known.insert(known.end(), manager.repoBegin(), manager.repoEnd());
   bool found = false;
-
   unsigned int number = 1; // repo number
-  for (list<RepoInfo>::const_iterator known_it = known.begin();
-      known_it != known.end(); ++known_it, number++)
+
+  for (RepoManager::RepoConstIterator known_it = manager.repoBegin();
+       known_it != manager.repoEnd(); ++known_it, number++)
   {
     unsigned int tmp = 0;
     safe_lexical_cast (str, tmp); // try to make an int out of the string
