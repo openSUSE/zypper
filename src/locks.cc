@@ -6,7 +6,7 @@
 #include "zypp/Locks.h"
 
 #include "output/Out.h"
-#include "main.h" 
+#include "main.h"
 #include "Table.h"
 #include "utils/misc.h"
 #include "locks.h"
@@ -41,14 +41,14 @@ void list_locks(Zypper & zypper)
       th << _("Catalog") << _("Importance");
     else
       th << _("Type") << _("Repository");
-    
+
     t << th;
 
     unsigned i = 1;
     for_(it, locks.begin(), locks.end())
     {
       TableRow tr;
-      
+
       // #
       tr << str::numstring (i);
 
@@ -177,7 +177,7 @@ void remove_locks(Zypper & zypper, const Zypper::ArgList & args)
       {
         advance(it, i-1);
         locks.removeLock(*it);
-  
+
         zypper.out().info(_("Specified lock has been successfully removed."));
       }
       else //package name
@@ -213,7 +213,7 @@ void remove_locks(Zypper & zypper, const Zypper::ArgList & args)
             last = *it;
           }
         }
-        
+
         if (res == 1) //only one with identical name, then remove it
           locks.removeLock(last);
         else
@@ -229,8 +229,8 @@ void remove_locks(Zypper & zypper, const Zypper::ArgList & args)
     //removed something
     else
       zypper.out().info(str::form(_PL(
-        "%lu lock has been successfully removed.",
-        "%lu locks have been succesfully removed.",
+        "%zu lock has been successfully removed.",
+        "%zu locks have been succesfully removed.",
         start - locks.size()), start - locks.size()));
   }
   catch(const Exception & e)
