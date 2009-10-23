@@ -15,6 +15,7 @@ BuildRequires:  libzypp-devel >= 6.17.1 boost-devel >= 1.33.1 gettext-devel >= 0
 BuildRequires:  readline-devel >= 5.1 augeas-devel >= 0.5.0
 BuildRequires:  gcc-c++ >= 4.1 cmake >= 2.4.6
 Requires:	procps
+%requires_ge	libzypp
 Recommends:     logrotate cron
 License:        GPL v2 or later
 Group:          System/Packages
@@ -37,7 +38,7 @@ package repositories, search for packages, install, remove, or update packages,
 install patches, hardware drivers, verify dependencies, and more.
 
 Zypper can be used interactively or non-interactively by user, from scripts,
-or front-ends. 
+or front-ends.
 
 Authors:
 --------
