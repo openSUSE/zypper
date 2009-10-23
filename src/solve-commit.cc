@@ -326,7 +326,9 @@ static bool dist_upgrade(Zypper & zypper)
   dump_pool();
   set_solver_flags(zypper);
 
-  // set repositories to upgrade to (--from)
+  // Test for repositories to upgrade to (--from)
+  // If those are specified addUpgradeRepo and solve,
+  // otherwise perform a full dist upgrade.
 
   list<RepoInfo> specified;
   list<string> not_found;
@@ -338,18 +340,26 @@ static bool dist_upgrade(Zypper & zypper)
   if (!not_found.empty())
     throw ExitRequestException("Some of specified repositories were not found.");
 
-  set<string> aliases;
-  for_(it, specified.begin(), specified.end())
-    aliases.insert(it->alias());
-
-  for_(it, God->pool().knownRepositoriesBegin(), God->pool().knownRepositoriesEnd())
-    if (aliases.find(it->alias()) != aliases.end())
+  if ( ! specified.empty() )
+  {
+    // Here: do upgrade for the specified repos:
+    Resolver_Ptr resolver( God->resolver() );
+    ResPool      pool    ( God->pool() );
+    for_( it, specified.begin(), specified.end() )
     {
-      MIL << "Adding upgrade repository: " << it->alias() << endl;
-      God->resolver()->addUpgradeRepo(*it);
+      Repository repo( pool.reposFind( it->alias() ) );
+      MIL << "Adding upgrade repository: " << repo.alias() << endl;
+      resolver->addUpgradeRepo( repo );
     }
 
-  // compute the upgrade
+    DBG << "Calling the solver..." << endl;
+    //! \todo Somehow tell set_solver_flags/set_ignore_recommends_of_installed that
+    //! this is no full upgrade. Until then set setIgnoreAlreadyRecommended again here:
+    resolver->setIgnoreAlreadyRecommended( true );
+    return resolver->resolvePool();
+  }
+
+  // Here: compute the full upgrade
 
   zypper.out().info(_("Computing upgrade..."), Out::HIGH);
   DBG << "Calling the solver doUpgrade()..." << endl;
