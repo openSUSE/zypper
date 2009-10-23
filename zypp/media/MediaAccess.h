@@ -105,7 +105,7 @@ namespace zypp {
 	 */
 	bool        downloads() const;
 
-	/** \deprecated Use \ref Url::downloads */
+	/** \deprecated Use \ref Url::schemeIsDownloading */
 	static
 	ZYPP_DEPRECATED bool downloads(const Url &url)
         { return url.schemeIsDownloading(); }
