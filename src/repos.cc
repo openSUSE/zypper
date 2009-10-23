@@ -492,7 +492,7 @@ static void do_init_repos(Zypper & zypper, const Container & container)
           it->name().c_str(), "no-cd"));
       gData.repos.erase(it++);
     }
-    if (no_remote && MediaAccess::downloads(*it->baseUrlsBegin()))
+    if (no_remote && (*it->baseUrlsBegin()).schemeIsDownloading())
     {
       zypper.out().info(str::form(
           _("Ignoring repository '%s' because of '%s' option."),
@@ -1652,7 +1652,7 @@ void modify_repos_by_option( Zypper & zypper )
     {
       if (!it->baseUrlsEmpty())
       {
-        if ( !MediaAccess::downloads( *it->baseUrlsBegin()) )
+        if ( ! (*it->baseUrlsBegin()).schemeIsDownloading() )
         {
           string alias = it->alias();
           toModify.insert( alias );
@@ -1667,7 +1667,7 @@ void modify_repos_by_option( Zypper & zypper )
     {
       if (!it->baseUrlsEmpty())
       {
-        if ( MediaAccess::downloads( *it->baseUrlsBegin()) )
+        if ( (*it->baseUrlsBegin()).schemeIsDownloading() )
         {
           string alias = it->alias();
           toModify.insert( alias );
@@ -2787,10 +2787,10 @@ void modify_services_by_option( Zypper & zypper )
     if (url.isValid())
     {
       bool modify = false;
-      if (local  && !MediaAccess::downloads( url ) )
+      if (local  && ! url.schemeIsDownloading() )
         modify = true;
 
-      if (!modify && remote && MediaAccess::downloads( url ) )
+      if (!modify && remote && url.schemeIsDownloading() )
         modify = true;
 
       if (!modify && schemes.find(url.getScheme()) != schemes.end())
