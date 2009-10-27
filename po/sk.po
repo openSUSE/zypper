@@ -704,11 +704,11 @@ msgstr "Nebol odstránené žiadny zámok."
 
 #: ../src/locks.cc:232
 #, c-format
-msgid "%lu lock has been successfully removed."
-msgid_plural "%lu locks have been succesfully removed."
-msgstr[0] "'%lu' zámok bol úspešne odstránený."
-msgstr[1] "'%lu' zámky boli úspešne odstránené."
-msgstr[2] "'%lu' zámkov bolo úspešne odstránených."
+msgid "%zu lock has been successfully removed."
+msgid_plural "%zu locks have been succesfully removed."
+msgstr[0] "'%zu' zámok bol úspešne odstránený."
+msgstr[1] "'%zu' zámky boli úspešne odstránené."
+msgstr[2] "'%zu' zámkov bolo úspešne odstránených."
 
 #: ../src/locks.cc:239
 msgid "Problem removing the package lock:"

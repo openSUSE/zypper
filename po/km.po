@@ -699,9 +699,9 @@ msgstr "គ្មាន​​សោ​ត្រូវ​បាន​យក​ច
 
 #: ../src/locks.cc:232
 #, c-format
-msgid "%lu lock has been successfully removed."
-msgid_plural "%lu locks have been succesfully removed."
-msgstr[0] "សោ %lu ត្រូវ​បានយកចេញ​ដោយ​ស្វ័យ​ប្រវត្តិ ។"
+msgid "%zu lock has been successfully removed."
+msgid_plural "%zu locks have been succesfully removed."
+msgstr[0] "សោ %lz ត្រូវ​បានយកចេញ​ដោយ​ស្វ័យ​ប្រវត្តិ ។"
 
 #: ../src/locks.cc:239
 msgid "Problem removing the package lock:"

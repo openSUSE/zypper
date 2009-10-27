@@ -700,10 +700,10 @@ msgstr "Ingen lås er fjernet."
 
 #: ../src/locks.cc:232
 #, c-format
-msgid "%lu lock has been successfully removed."
-msgid_plural "%lu locks have been succesfully removed."
-msgstr[0] "%lu lås er fjernet."
-msgstr[1] "%lu lås er fjernet."
+msgid "%zu lock has been successfully removed."
+msgid_plural "%zu locks have been succesfully removed."
+msgstr[0] "%zu lås er fjernet."
+msgstr[1] "%zu lås er fjernet."
 
 #: ../src/locks.cc:239
 msgid "Problem removing the package lock:"

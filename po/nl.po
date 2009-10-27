@@ -705,10 +705,10 @@ msgstr "Er is geen blokkering verwijderd."
 
 #: ../src/locks.cc:232
 #, c-format
-msgid "%lu lock has been successfully removed."
-msgid_plural "%lu locks have been succesfully removed."
-msgstr[0] "%lu blokkering is met succes verwijderd."
-msgstr[1] "%lu blokkeringen zijn met succes verwijderd."
+msgid "%zu lock has been successfully removed."
+msgid_plural "%zu locks have been succesfully removed."
+msgstr[0] "%zu blokkering is met succes verwijderd."
+msgstr[1] "%zu blokkeringen zijn met succes verwijderd."
 
 #: ../src/locks.cc:239
 msgid "Problem removing the package lock:"

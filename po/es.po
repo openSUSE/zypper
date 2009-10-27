@@ -716,10 +716,10 @@ msgstr "No se eliminó ningún bloqueo."
 
 #: ../src/locks.cc:232
 #, c-format
-msgid "%lu lock has been successfully removed."
-msgid_plural "%lu locks have been succesfully removed."
-msgstr[0] "%lu bloqueo fue eliminado satisfactoriamente."
-msgstr[1] "%lu bloqueos fueron eliminados satisfactoriamente."
+msgid "%zu lock has been successfully removed."
+msgid_plural "%zu locks have been succesfully removed."
+msgstr[0] "%zu bloqueo fue eliminado satisfactoriamente."
+msgstr[1] "%zu bloqueos fueron eliminados satisfactoriamente."
 
 #: ../src/locks.cc:239
 msgid "Problem removing the package lock:"

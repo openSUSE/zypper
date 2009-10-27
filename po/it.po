@@ -707,10 +707,10 @@ msgstr "Nessun blocco è stato rimosso."
 
 #: ../src/locks.cc:232
 #, c-format
-msgid "%lu lock has been successfully removed."
-msgid_plural "%lu locks have been succesfully removed."
-msgstr[0] "Il blocco %lu è stato rimosso con successo."
-msgstr[1] "I blocchi %lu sono stati rimossi con successo."
+msgid "%zu lock has been successfully removed."
+msgid_plural "%zu locks have been succesfully removed."
+msgstr[0] "Il blocco %zu è stato rimosso con successo."
+msgstr[1] "I blocchi %zu sono stati rimossi con successo."
 
 #: ../src/locks.cc:239
 msgid "Problem removing the package lock:"

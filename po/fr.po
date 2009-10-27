@@ -719,10 +719,10 @@ msgstr "Auncun verrouillage n'a été supprimé."
 
 #: ../src/locks.cc:232
 #, c-format
-msgid "%lu lock has been successfully removed."
-msgid_plural "%lu locks have been succesfully removed."
-msgstr[0] "Le verrouillage %lu a été supprimé avec succès."
-msgstr[1] "Les verrouillages spécifiés %lu ont été supprimés avec succès."
+msgid "%zu lock has been successfully removed."
+msgid_plural "%zu locks have been succesfully removed."
+msgstr[0] "Le verrouillage %zu a été supprimé avec succès."
+msgstr[1] "Les verrouillages spécifiés %zu ont été supprimés avec succès."
 
 #: ../src/locks.cc:239
 msgid "Problem removing the package lock:"

@@ -708,10 +708,10 @@ msgstr "Es wurde keine Sperre entfernt."
 
 #: ../src/locks.cc:232
 #, c-format
-msgid "%lu lock has been successfully removed."
-msgid_plural "%lu locks have been succesfully removed."
-msgstr[0] "%lu Sperre wurde erfolgreich entfernt."
-msgstr[1] "%lu Sperren wurden erfolgreich entfernt."
+msgid "%zu lock has been successfully removed."
+msgid_plural "%zu locks have been succesfully removed."
+msgstr[0] "%zu Sperre wurde erfolgreich entfernt."
+msgstr[1] "%zu Sperren wurden erfolgreich entfernt."
 
 #: ../src/locks.cc:239
 msgid "Problem removing the package lock:"

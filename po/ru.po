@@ -700,11 +700,11 @@ msgstr "Ни одной блокировки не удалено."
 
 #: ../src/locks.cc:232
 #, c-format
-msgid "%lu lock has been successfully removed."
-msgid_plural "%lu locks have been succesfully removed."
-msgstr[0] "%lu блокировка успешно удалена."
-msgstr[1] "%lu блокировки успешно удалены."
-msgstr[2] "%lu блокировок успешно удалено."
+msgid "%zu lock has been successfully removed."
+msgid_plural "%zu locks have been succesfully removed."
+msgstr[0] "%zu блокировка успешно удалена."
+msgstr[1] "%zu блокировки успешно удалены."
+msgstr[2] "%zu блокировок успешно удалено."
 
 #: ../src/locks.cc:239
 msgid "Problem removing the package lock:"

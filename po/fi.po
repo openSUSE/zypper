@@ -708,10 +708,10 @@ msgstr "Lukkoja ei poistettu."
 
 #: ../src/locks.cc:232
 #, c-format
-msgid "%lu lock has been successfully removed."
-msgid_plural "%lu locks have been succesfully removed."
-msgstr[0] "Lukon %lu poistaminen onnistui."
-msgstr[1] "%lu lukkoa poistettiin onnistuneesti."
+msgid "%zu lock has been successfully removed."
+msgid_plural "%zu locks have been succesfully removed."
+msgstr[0] "Lukon %zu poistaminen onnistui."
+msgstr[1] "%zu lukkoa poistettiin onnistuneesti."
 
 #: ../src/locks.cc:239
 msgid "Problem removing the package lock:"

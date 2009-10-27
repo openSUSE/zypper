@@ -709,9 +709,9 @@ msgstr "잠금 제거된것이 없습니다."
 
 #: ../src/locks.cc:232
 #, c-format
-msgid "%lu lock has been successfully removed."
-msgid_plural "%lu locks have been succesfully removed."
-msgstr[0] "%lu 잠금이 성공적으로 제거 되었습니다."
+msgid "%zu lock has been successfully removed."
+msgid_plural "%zu locks have been succesfully removed."
+msgstr[0] "%zu 잠금이 성공적으로 제거 되었습니다."
 
 #  progress stages
 #: ../src/locks.cc:239

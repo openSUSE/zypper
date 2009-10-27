@@ -705,11 +705,11 @@ msgstr "Не було знято жодного блокування."
 
 #: ../src/locks.cc:232
 #, c-format
-msgid "%lu lock has been successfully removed."
-msgid_plural "%lu locks have been succesfully removed."
-msgstr[0] "%lu блокування було успішно знято."
-msgstr[1] "%lu блокування було успішно знято."
-msgstr[2] "%lu блокувань було успішно знято."
+msgid "%zu lock has been successfully removed."
+msgid_plural "%zu locks have been succesfully removed."
+msgstr[0] "%zu блокування було успішно знято."
+msgstr[1] "%zu блокування було успішно знято."
+msgstr[2] "%zu блокувань було успішно знято."
 
 #: ../src/locks.cc:239
 msgid "Problem removing the package lock:"

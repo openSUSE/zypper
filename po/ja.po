@@ -700,9 +700,9 @@ msgstr "ロックは解除されませんでした。"
 
 #: ../src/locks.cc:232
 #, c-format
-msgid "%lu lock has been successfully removed."
-msgid_plural "%lu locks have been succesfully removed."
-msgstr[0] "%lu 個のパッケージロックを解除しました。"
+msgid "%zu lock has been successfully removed."
+msgid_plural "%zu locks have been succesfully removed."
+msgstr[0] "%zu 個のパッケージロックを解除しました。"
 
 #: ../src/locks.cc:239
 msgid "Problem removing the package lock:"

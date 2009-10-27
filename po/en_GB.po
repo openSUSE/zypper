@@ -669,8 +669,8 @@ msgstr "Repository %s has been removed."
 
 #: ../src/locks.cc:232
 #, fuzzy, c-format
-msgid "%lu lock has been successfully removed."
-msgid_plural "%lu locks have been succesfully removed."
+msgid "%zu lock has been successfully removed."
+msgid_plural "%zu locks have been succesfully removed."
 msgstr[0] "Repository %s has been successfully modified."
 msgstr[1] "Repository %s has been successfully modified."
 

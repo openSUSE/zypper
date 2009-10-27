@@ -708,9 +708,9 @@ msgstr "ไม่มีการล็อคใดที่เอาออกไ
 
 #: ../src/locks.cc:232
 #, c-format
-msgid "%lu lock has been successfully removed."
-msgid_plural "%lu locks have been succesfully removed."
-msgstr[0] "เอาการล็อค %lu ตัวออกไปแล้ว"
+msgid "%zu lock has been successfully removed."
+msgid_plural "%zu locks have been succesfully removed."
+msgstr[0] "เอาการล็อค %zu ตัวออกไปแล้ว"
 
 #: ../src/locks.cc:239
 msgid "Problem removing the package lock:"

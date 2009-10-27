@@ -708,10 +708,10 @@ msgstr "Nenhuma tranca foi removida."
 
 #: ../src/locks.cc:232
 #, c-format
-msgid "%lu lock has been successfully removed."
-msgid_plural "%lu locks have been succesfully removed."
-msgstr[0] "A tranca %lu foi removida com sucesso."
-msgstr[1] "As trancas %lu foram removidas com sucesso."
+msgid "%zu lock has been successfully removed."
+msgid_plural "%zu locks have been succesfully removed."
+msgstr[0] "A tranca %zu foi removida com sucesso."
+msgstr[1] "As trancas %zu foram removidas com sucesso."
 
 #: ../src/locks.cc:239
 msgid "Problem removing the package lock:"
