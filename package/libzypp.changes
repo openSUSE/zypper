@@ -1,4 +1,10 @@
 -------------------------------------------------------------------
+Tue Oct 27 12:30:29 CET 2009 - ma@suse.de
+
+- Add Resolver::upgradingRepo demanded by GUI. (bnc #548551)
+- version 6.20.0 (19)
+
+-------------------------------------------------------------------
 Thu Oct 22 15:09:57 CEST 2009 - ma@suse.de
 
 - Fixes to make libzypp-bindings compile.
