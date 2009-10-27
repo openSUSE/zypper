@@ -202,6 +202,20 @@ mark_by_name (Zypper & zypper,
 // don't try NAME-EDITION yet, could be confused by
 // dbus-1-x11, java-1_4_2-gcj-compat, ...
 /*
+
+ma@: Look at the Capability::guessPackageSpec implementaion. This might be
+what you want unless you also want to support globbing like 'libz*-12.3-14'.
+In this case you need PoolQuery instead of WhatProvides lookups.
+
+There is no rule that an edition starts with a number, so your regex approach
+won't work. If your string is correctly parsed as a name-capability, you can
+check whether it matches a package name. If not, replace the last '-' by a '=',
+and check whether the namepart now matches a package (-versionwithoutrelease).
+If not, replace the one but last '-' and try again (-version-release).
+
+That's basically what guessPackageSpec does, but it also supports embeded
+arch specs: "libzypp-1.2.3-4.5.arch" or "libzypp.arch-1.2.3-4.5".
+
 bool mark_by_name_edition (...)
   static const regex rx_name_edition("(.*?)-([0-9].*)");
 
