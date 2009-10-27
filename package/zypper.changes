@@ -1,4 +1,11 @@
 -------------------------------------------------------------------
+Tue Oct 27 14:32:21 CET 2009 - jkupec@suse.cz
+
+- Init target when refreshing sources, otherwise we dont have the
+  trusted gpg keys at hand when downloading. (bnc #530389)
+- 0.6.106
+
+-------------------------------------------------------------------
 Mon Jul  7 15:31:11 CEST 2008 - jkupec@suse.cz
 
 - exit in non-interactive mode if given package cannot be found
