@@ -281,45 +281,58 @@ static bool build_cache(Zypper & zypper, const RepoInfo &repo, bool force_build)
 bool match_repo(Zypper & zypper, string str, RepoInfo *repo)
 {
   RepoManager & manager = zypper.repoManager();
+
+  // Quick check for alias/reponumber first:
+  {
+    unsigned int number = 1; // repo number
+    unsigned int tmp    = 0;
+    safe_lexical_cast (str, tmp); // try to make an int out of the string
+    for (RepoManager::RepoConstIterator known_it = manager.repoBegin();
+         known_it != manager.repoEnd(); ++known_it, ++number)
+    {
+      if ( known_it->alias() == str || tmp == number )
+      {
+        if (repo)
+          *repo = *known_it;
+
+        return true;
+      }
+    }
+  }
+
+  // Expensive URL analysis only if needed:
   bool found = false;
-  unsigned int number = 1; // repo number
 
   for (RepoManager::RepoConstIterator known_it = manager.repoBegin();
-       known_it != manager.repoEnd(); ++known_it, number++)
+       known_it != manager.repoEnd(); ++known_it)
   {
-    unsigned int tmp = 0;
-    safe_lexical_cast (str, tmp); // try to make an int out of the string
-
     try
     {
-      found = known_it->alias() == str || tmp == number;
-      if (!found)
+      url::ViewOption urlview = url::ViewOption::DEFAULTS + url::ViewOption::WITH_PASSWORD;
+      if (zypper.cOpts().count("loose-auth"))
       {
-        url::ViewOption urlview = url::ViewOption::DEFAULTS + url::ViewOption::WITH_PASSWORD;
-        if (zypper.cOpts().count("loose-auth"))
-        {
-          urlview = urlview
+        urlview = urlview
             - url::ViewOptions::WITH_PASSWORD
             - url::ViewOptions::WITH_USERNAME;
-        }
-        if (zypper.cOpts().count("loose-query"))
-          urlview = urlview - url::ViewOptions::WITH_QUERY_STR;
-
-        if (!(urlview.has(url::ViewOptions::WITH_PASSWORD)
-            && urlview.has(url::ViewOptions::WITH_QUERY_STR)))
-        {
-          for_(urlit, known_it->baseUrlsBegin(), known_it->baseUrlsEnd())
-            if (urlit->asString(urlview) == Url(str).asString(urlview))
-            {
-              found = true;
-              break;
-            }
-        }
-        else
-          found =
-            find(known_it->baseUrlsBegin(),known_it->baseUrlsEnd(),Url(str))
-              != known_it->baseUrlsEnd();
       }
+      if (zypper.cOpts().count("loose-query"))
+        urlview = urlview - url::ViewOptions::WITH_QUERY_STR;
+
+      if (!(urlview.has(url::ViewOptions::WITH_PASSWORD)
+            && urlview.has(url::ViewOptions::WITH_QUERY_STR)))
+      {
+        for_(urlit, known_it->baseUrlsBegin(), known_it->baseUrlsEnd())
+          if (urlit->asString(urlview) == Url(str).asString(urlview))
+        {
+          found = true;
+          break;
+        }
+      }
+      else
+        found =
+            find(known_it->baseUrlsBegin(),known_it->baseUrlsEnd(),Url(str))
+            != known_it->baseUrlsEnd();
+
       if (found)
       {
         if (repo)
