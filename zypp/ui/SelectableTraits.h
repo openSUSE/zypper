@@ -66,7 +66,10 @@ namespace zypp
       };
 
       /** Oder on InstalledItemSet.
-       * Newer install time at the beginning of the set.
+       * \li best Arch
+       * \li best Edition
+       * \li newer install time
+       * \li ResObject::constPtr as fallback.
       */
       struct IOrder : public std::binary_function<PoolItem,PoolItem,bool>
       {
@@ -76,6 +79,12 @@ namespace zypp
         //
         bool operator()( const PoolItem & lhs, const PoolItem & rhs ) const
         {
+          int res = lhs->arch().compare( rhs->arch() );
+          if ( res )
+            return res > 0;
+          res = lhs->edition().compare( rhs->edition() );
+          if ( res )
+            return res > 0;
           Date ldate = lhs->installtime();
           Date rdate = rhs->installtime();
           if ( ldate != rdate )
