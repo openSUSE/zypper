@@ -270,7 +270,6 @@ namespace zypp
           {"CN", N_( "China" ) }, 				// :CHN:156:
           {"CO", N_( "Colombia" ) }, 				// :COL:170:
           {"CR", N_( "Costa Rica" ) }, 				// :CRI:188:
-          {"CS", N_( "Serbia and Montenegro" ) }, 		// :SCG:891:
           {"CU", N_( "Cuba" ) }, 				// :CUB:192:
           {"CV", N_( "Cape Verde" ) }, 				// :CPV:132:
           {"CX", N_( "Christmas Island" ) }, 			// :CXR:162:
@@ -301,6 +300,7 @@ namespace zypp
           {"GD", N_( "Grenada" ) }, 				// :GRD:308:
           {"GE", N_( "Georgia" ) }, 				// :GEO:268:
           {"GF", N_( "French Guiana" ) }, 			// :GUF:254:
+          {"GG", N_( "Guernsey" ) },
           {"GH", N_( "Ghana" ) }, 				// :GHA:288:
           {"GI", N_( "Gibraltar" ) }, 				// :GIB:292:
           {"GL", N_( "Greenland" ) }, 				// :GRL:304:
@@ -323,12 +323,14 @@ namespace zypp
           {"ID", N_( "Indonesia" ) }, 				// :IDN:360:
           {"IE", N_( "Ireland" ) }, 				// :IRL:372:
           {"IL", N_( "Israel" ) }, 				// :ISR:376:
+          {"IM", N_( "Isle of Man" ) },
           {"IN", N_( "India" ) }, 				// :IND:356:
           {"IO", N_( "British Indian Ocean Territory" ) }, 	// :IOT:086:
           {"IQ", N_( "Iraq" ) }, 				// :IRQ:368:
           {"IR", N_( "Iran" ) }, 				// :IRN:364:
           {"IS", N_( "Iceland" ) }, 				// :ISL:352:
           {"IT", N_( "Italy" ) }, 				// :ITA:380:
+          {"JE", N_( "Jersey" ) },
           {"JM", N_( "Jamaica" ) }, 				// :JAM:388:
           {"JO", N_( "Jordan" ) }, 				// :JOR:400:
           {"JP", N_( "Japan" ) }, 				// :JPN:392:
@@ -357,6 +359,8 @@ namespace zypp
           {"MA", N_( "Morocco" ) }, 				// :MAR:504:
           {"MC", N_( "Monaco" ) }, 				// :MCO:492:
           {"MD", N_( "Moldova" ) }, 				// :MDA:498:
+          {"ME", N_( "Montenegro" ) },
+          {"MF", N_( "Saint Martin" ) },
           {"MG", N_( "Madagascar" ) }, 				// :MDG:450:
           {"MH", N_( "Marshall Islands" ) }, 			// :MHL:584:
           {"MK", N_( "Macedonia" ) }, 				// :MKD:807:
@@ -405,6 +409,7 @@ namespace zypp
           {"QA", N_( "Qatar" ) }, 				// :QAT:634:
           {"RE", N_( "Reunion" ) }, 				// :REU:638:
           {"RO", N_( "Romania" ) }, 				// :ROU:642:
+          {"RS", N_( "Serbia" ) },
           {"RU", N_( "Russian Federation" ) }, 			// :RUS:643:
           {"RW", N_( "Rwanda" ) }, 				// :RWA:646:
           {"SA", N_( "Saudi Arabia" ) }, 			// :SAU:682:
