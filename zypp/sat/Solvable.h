@@ -180,6 +180,11 @@ namespace zypp
         */
         std::string asString() const;
 
+        /** Test whether two Solvables have the same content.
+         * Basically the same name, edition, arch, vendor and buildtime.
+         */
+        bool identical( Solvable rhs ) const;
+
       public:
 
         /** \name Access to the \ref Solvable dependencies.
@@ -290,6 +295,11 @@ namespace zypp
     /** \relates Solvable */
     inline bool operator<( const Solvable & lhs, const Solvable & rhs )
     { return lhs.get() < rhs.get(); }
+
+    /** \relates Solvable Test for same content. */
+    inline bool identical( Solvable lhs, Solvable rhs )
+    { return lhs.identical( rhs ); }
+
 
     ///////////////////////////////////////////////////////////////////
     namespace detail

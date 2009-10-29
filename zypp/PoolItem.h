@@ -184,6 +184,20 @@ namespace zypp
   inline bool operator!=( const ResObject::constPtr & lhs, const PoolItem & rhs )
   { return ! (lhs==rhs); }
 
+
+  /** \relates PoolItem Test for same content. */
+  inline bool identical( const PoolItem & lhs, const PoolItem & rhs )
+  { return lhs.satSolvable().identical( rhs.satSolvable() ); }
+
+  /** \relates PoolItem Test for same content. */
+  inline bool identical( const PoolItem & lhs, sat::Solvable rhs )
+  { return lhs.satSolvable().identical( rhs ); }
+
+  /** \relates PoolItem Test for same content. */
+  inline bool identical( sat::Solvable lhs, const PoolItem & rhs )
+  { return lhs.identical( rhs.satSolvable() ); }
+
+
   /** Solvable to PoolItem transform functor.
    * \relates PoolItem
    * \relates sat::SolvIterMixin

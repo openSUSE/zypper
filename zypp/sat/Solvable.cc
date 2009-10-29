@@ -483,6 +483,12 @@ namespace zypp
                         IdString( _solvable->arch ).c_str() );
     }
 
+    bool Solvable::identical( Solvable rhs ) const
+    {
+      NO_SOLVABLE_RETURN( ! rhs.get() );
+      ::_Solvable * rhssolvable( rhs.get() );
+      return rhssolvable && ::solvable_identical( _solvable, rhssolvable );
+    }
 
     ///////////////////////////////////////////////////////////////////
     namespace
