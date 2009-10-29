@@ -1211,7 +1211,7 @@ SATResolver::problems ()
 			s = mapSolvable (rp);
 			PoolItem poolItem = _pool.find (s);
 			if (_solv->installed && s.get()->repo == _solv->installed) {
-			    problemSolution->addSingleAction (poolItem, KEEP);
+			    problemSolution->addSingleAction (poolItem, LOCK);
 			    string description = str::form (_("keep %s despite the inferior architecture"), s.asString().c_str());
 			    MIL << description << endl;
 			    problemSolution->addDescription (description);
@@ -1225,7 +1225,7 @@ SATResolver::problems ()
 			s = mapSolvable (rp);
 			PoolItem poolItem = _pool.find (s);
 			if (_solv->installed && s.get()->repo == _solv->installed) {
-			    problemSolution->addSingleAction (poolItem, KEEP);
+			    problemSolution->addSingleAction (poolItem, LOCK);
 			    string description = str::form (_("keep obsolete %s"), s.asString().c_str());
 			    MIL << description << endl;
 			    problemSolution->addDescription (description);
