@@ -186,7 +186,15 @@ namespace zypp
           break;
 
         case UNMODIFIED:
-          return setStatus( hasInstalledObj() ? S_KeepInstalled : S_NoInst, causer_r );
+          switch ( status() ) {
+            case S_Protected:
+            case S_Taboo:
+              return true;
+              break;
+            default:
+              return setStatus( hasInstalledObj() ? S_KeepInstalled : S_NoInst, causer_r );
+              break;
+          }
           break;
       }
       return false;
