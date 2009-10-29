@@ -191,6 +191,14 @@ namespace zypp
       /** \overload */
       PoolItem setCandidate( ResObject::constPtr newCandidate_r, ResStatus::TransactByValue causer_r = ResStatus::USER );
 
+      /** Arrange the specified candidate (out of available objects) to be on system after commit.
+       * If the specified candidate is not already installed (\ref identicalInstalled),
+       * and the \a causer_r has sufficient permisssion, then \a newCandidate_r is set as the new
+       * candidate (\ref setCandidate) and selected for installation.
+       * \returns \c True if \a newCandidate_r is already installed or sucessfully selected for installation.
+       */
+      bool setOnSystem( const PoolItem & newCandidate_r, ResStatus::TransactByValue causer_r = ResStatus::USER );
+
       /** An object you could use as pars pro toto.
        *
        * \return the \ref candidateObj, or ,if no available objects

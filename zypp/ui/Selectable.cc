@@ -88,6 +88,13 @@ namespace zypp
     PoolItem Selectable::setCandidate( ResObject::constPtr newCandidate_r, ResStatus::TransactByValue causer_r )
     { return _pimpl->setCandidate( PoolItem( newCandidate_r ), causer_r ); }
 
+    bool Selectable::setOnSystem( const PoolItem & newCandidate_r, ResStatus::TransactByValue causer_r )
+    {
+      if ( identicalInstalled( newCandidate_r ) )
+        return setFate( UNMODIFIED, causer_r );
+      return setCandidate( newCandidate_r, causer_r ) && setFate( TO_INSTALL, causer_r );
+    }
+
     PoolItem Selectable::theObj() const
     { return _pimpl->theObj(); }
 
