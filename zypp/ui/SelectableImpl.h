@@ -165,6 +165,22 @@ namespace zypp
         return _defaultCandidate;
       }
 
+      /** \c True if \a rhs has the same content as an installed one.
+       * \see \ref sat::Solvable::identical
+       */
+      bool identicalInstalled( const PoolItem & rhs ) const
+      {
+        if ( !installedEmpty() && rhs )
+        {
+          for_( it, _installedItems.begin(), _installedItems.end() )
+          {
+            if ( identical( *it, rhs ) )
+              return true;
+          }
+        }
+        return false;
+      }
+
       /** Best among all objects. */
       PoolItem theObj() const
       {

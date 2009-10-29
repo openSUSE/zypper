@@ -140,6 +140,24 @@ namespace zypp
        */
       PoolItem updateCandidateObj() const;
 
+      /** \c True if \a rhs has the same content as an installed one.
+       *  Basically the same name, edition, arch, vendor and buildtime.
+       * \see \ref sat::Solvable::identical
+       */
+      bool identicalInstalled( const PoolItem & rhs ) const;
+
+      /** \c True if the \ref candidateObj is installed (same content).
+       * \see \ref identicalInstalled.
+       */
+      bool identicalInstalledCandidate() const
+      { return identicalInstalled( candidateObj() ); }
+
+      /** \c True if the \ref updateCandidateObj is installed (same content).
+       * \see \ref identicalInstalled.
+       */
+      bool identicalInstalledUpdateCandidate() const
+      { return identicalInstalled( updateCandidateObj() ); }
+
 
       /** Return the \ref installedObj resolvable casted to a specific kind.
        * \code
