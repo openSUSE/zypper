@@ -1,4 +1,10 @@
 -------------------------------------------------------------------
+Fri Oct 30 11:36:57 CET 2009 - ma@suse.de
+
+- Fix 'zypper in --from' selecting the wrong packages. (bnc #548392)
+- 1.2.8
+
+-------------------------------------------------------------------
 Fri Oct 23 15:09:58 CEST 2009 - ma@suse.de
 
 - Fix 'dup --from' not to perform a complete distupgrade. (bnc #549490)
