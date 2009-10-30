@@ -1,7 +1,8 @@
 -------------------------------------------------------------------
 Fri Oct 30 12:30:48 CET 2009 - ma@suse.de
 
-- Don't try to use an empty proxy string (bnc #551314)
+- Don't try to use an empty proxy string. (bnc #551314)
+- MediaSMB failed to pass the --workgroup option to mount. (bnc #547354)
 - version 6.21.1 (19)
 
 -------------------------------------------------------------------
