@@ -1,4 +1,14 @@
 -------------------------------------------------------------------
+Fri Oct 30 11:28:05 CET 2009 - ma@suse.de
+
+- New class PoolItemBest: Find the best candidates e.g. in a PoolQuery 
+  result. ui::Selectabe enhancements. Both will aid applications to
+  install package sets determined by query results. (bnc # 548392)
+- Fix upgradeRepo solution to keep obsolete packages. (bnc #550915)
+- Updated iso3166-1 country codes (bnc #531350)
+- version 6.21.0 (19)
+
+-------------------------------------------------------------------
 Tue Oct 27 12:30:29 CET 2009 - ma@suse.de
 
 - Add Resolver::upgradingRepo demanded by GUI. (bnc #548551)
