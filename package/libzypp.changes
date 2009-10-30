@@ -1,4 +1,10 @@
 -------------------------------------------------------------------
+Fri Oct 30 12:30:48 CET 2009 - ma@suse.de
+
+- Don't try to use an empty proxy string (bnc #551314)
+- version 6.21.1 (19)
+
+-------------------------------------------------------------------
 Fri Oct 30 11:28:05 CET 2009 - ma@suse.de
 
 - New class PoolItemBest: Find the best candidates e.g. in a PoolQuery 
