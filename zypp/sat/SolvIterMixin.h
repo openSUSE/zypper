@@ -77,6 +77,12 @@ namespace zypp
      * and \ref size by iterating from \c begin to \c end. In case \c Derived is
      * able to provide a more efficient implementation, the methods should be overloaded.
      *
+     * \note You will sometimes face the problem, that when using the \ref PoolItem
+     * iterator you hit multiple version of the same package, while when using the
+     * \ref ui::Selectable iterator the information which of the available candidates
+     * actually matched got lost. In this case class \ref PoolItemBest may help you.
+     * Use it to pick the best version only.
+     *
      * \code
      *     namespace detail
      *     {

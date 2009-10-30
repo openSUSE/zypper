@@ -53,6 +53,12 @@ namespace zypp
    * objects. Additionally, thanx to the \ref sat::SolvIterMixin, a Selectable
    * and PoolItem iterators are automatically available.
    *
+   * \note You will sometimes face the problem, that when using the \ref PoolItem
+   * iterator you hit multiple version of the same package, while when using the
+   * \ref ui::Selectable iterator the information which of the available candidates
+   * actually matched got lost. In this case class \ref PoolItemBest may help you.
+   * Use it to pick the best version only.
+   *
    * <code>
    * PoolQuery q;
    * q.addAttribute(sat::SolvAttr::name, "zypp*");
