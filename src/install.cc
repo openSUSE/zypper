@@ -1,11 +1,12 @@
 #include <boost/format.hpp>
 //#include <iostream>
 #include "zypp/ZYppFactory.h"
-#include "zypp/base/Logger.h"
+#include "zypp/base/LogTools.h"
 #include "zypp/base/Algorithm.h"
 #include "zypp/base/Functional.h"
 #include "zypp/Filter.h"
 #include "zypp/PoolQuery.h"
+#include "zypp/PoolItemBest.h"
 
 #include "utils/misc.h"
 
@@ -511,23 +512,26 @@ void install_remove(Zypper & zypper,
     // for each argument search (glob) & mark
     for_(strit, argsnew.begin(), argsnew.end())
     {
-      bool found = false;
-      for_(it, repos.begin(), repos.end())
+      PoolQuery q;
+      q.addKind(kind);
+      q.addAttribute(sat::SolvAttr::name, *strit);
+      for_( it, repos.begin(), repos.end() )
       {
-        PoolQuery q;
-        q.addAttribute(sat::SolvAttr::name, *strit);
-        q.setMatchGlob();
         q.addRepo(it->alias());
-        q.addKind(kind);
+      }
+      q.setMatchGlob();
 
-        for_(sit, q.selectableBegin(), q.selectableEnd())
+      // Get the best matching items and tag them for
+      // installation.
+      PoolItemBest bestMatches( q.begin(), q.end() );
+      if ( ! bestMatches.empty() )
+      {
+        for_( sit, bestMatches.begin(), bestMatches.end() )
         {
-          mark_by_name(zypper, true, kind, (*sit)->name(), it->alias(), "", false);
-          found = true;
+          ui::asSelectable()( *sit )->setOnSystem( *sit, ResStatus::USER );
         }
       }
-
-      if (!found)
+      else
       {
         // translators: meaning a package %s or provider of capability %s
         zypper.out().error(str::form(_("'%s' not found."), strit->c_str()));
