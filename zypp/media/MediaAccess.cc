@@ -25,7 +25,6 @@
 #include "zypp/media/MediaCD.h"
 #include "zypp/media/MediaDIR.h"
 #include "zypp/media/MediaDISK.h"
-#include "zypp/media/MediaSMB.h"
 #include "zypp/media/MediaCIFS.h"
 #include "zypp/media/MediaCurl.h"
 #include "zypp/media/MediaAria2c.h"
@@ -123,10 +122,8 @@ MediaAccess::open (const Url& url, const Pathname & preferred_attach_point)
         _handler = new MediaDIR (url,preferred_attach_point);
     else if (scheme == "hd")
         _handler = new MediaDISK (url,preferred_attach_point);
-    else if (scheme == "smb")
-	_handler = new MediaSMB (url,preferred_attach_point);
-    else if (scheme == "cifs")
-        _handler = new MediaCIFS (url,preferred_attach_point);
+    else if (scheme == "cifs" || scheme == "smb")
+	_handler = new MediaCIFS (url,preferred_attach_point);
     else if (scheme == "ftp" || scheme == "http" || scheme == "https")
     {
         // Another good idea would be activate MediaAria2c handler via external var

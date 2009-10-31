@@ -260,7 +260,6 @@ SET( zypp_media_SRCS
   media/MediaCD.cc
   media/MediaDIR.cc
   media/MediaDISK.cc
-  media/MediaSMB.cc
   media/MediaCIFS.cc
   media/ProxyInfo.cc
   media/MediaCurl.cc
@@ -289,7 +288,6 @@ SET( zypp_media_HEADERS
   media/MediaISO.h
   media/MediaManager.h
   media/MediaNFS.h
-  media/MediaSMB.h
   media/MediaSource.h
   media/MediaUserAuth.h
   media/Mount.h
