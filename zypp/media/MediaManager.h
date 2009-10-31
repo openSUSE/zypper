@@ -322,16 +322,16 @@ namespace zypp
      *     - <tt>mountoptions</tt>:
      *       The mount options separated by a comma ','. Default are the
      *       "ro" and "guest" options.
-     *     - <tt>workgroup</tt>:
+     *     - <tt>workgroup</tt> or <tt>domain</tt>:
      *       The name of the workgroup.
      *     - <tt>username</tt>:
      *       Alternative username to username in URL authority.
      *     - <tt>password</tt>:
      *       Alternative password to password in URL authority.
      *     - <tt>user</tt>:
-     *       Alternative username (cifs specific variant?)
+     *       Alternative username (cifs specific variant)
      *     - <tt>pass</tt>:
-     *       Alternative password (cifs specific variant?)
+     *       Alternative password (cifs specific variant)
      *   - Authority:
      *     The authority component has to provide a hostname. Optionally
      *     also a username and password.

@@ -183,8 +183,10 @@ namespace zypp {
 
       // look for a workgroup
       string workgroup = _url.getQueryParam("workgroup");
+      if ( workgroup.empty() )
+        workgroup = _url.getQueryParam("domain");
       if ( !workgroup.empty() )
-        options["workgroup"] = workgroup;
+        options["domain"] = workgroup;
 
       // extract 'username', do not overwrite any _url.username
 
