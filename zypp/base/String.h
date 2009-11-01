@@ -124,6 +124,10 @@ namespace zypp
         inline std::string asString( const std::string &t )
         { return t; }
 
+    template<>
+        inline std::string asString( const bool &t )
+        { return t ? "+" : "-"; }
+
     ///////////////////////////////////////////////////////////////////
     /** Printf style construction of std::string. */
     std::string form( const char * format, ... )
@@ -203,6 +207,17 @@ namespace zypp
     inline std::string numstring( unsigned long n,      int w = 0 ) { return form( "%*lu",   w, n ); }
     inline std::string numstring( long long n,          int w = 0 ) { return form( "%*lld",  w, n ); }
     inline std::string numstring( unsigned long long n, int w = 0 ) { return form( "%*llu",  w, n ); }
+
+    template<> inline std::string asString( const char & t )			{ return numstring( t ); }
+    template<> inline std::string asString( const unsigned char & t )		{ return numstring( t ); }
+    template<> inline std::string asString( const short & t )			{ return numstring( t ); }
+    template<> inline std::string asString( const unsigned short & t )		{ return numstring( t ); }
+    template<> inline std::string asString( const int & t )			{ return numstring( t ); }
+    template<> inline std::string asString( const unsigned & t )		{ return numstring( t ); }
+    template<> inline std::string asString( const long & t )			{ return numstring( t ); }
+    template<> inline std::string asString( const unsigned long & t )		{ return numstring( t ); }
+    template<> inline std::string asString( const long long & t )		{ return numstring( t ); }
+    template<> inline std::string asString( const unsigned long long & t )	{ return numstring( t ); }
     //@}
 
     ///////////////////////////////////////////////////////////////////

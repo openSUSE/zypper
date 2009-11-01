@@ -64,6 +64,7 @@ namespace zypp
               || t == "yes"
               || t == "true"
               || t == "on"
+              || t == "+"
               || strtonum<long long>( str )
             );
     }
@@ -80,6 +81,7 @@ namespace zypp
                  || t == "no"
                  || t == "false"
                  || t == "off"
+                 || t == "-"
                );
     }
 
