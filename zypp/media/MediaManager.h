@@ -313,6 +313,7 @@ namespace zypp
      *     \code
      *       "cifs://servername/share/path/on/the/share"
      *       "cifs://username:passwd@servername/share/path/on/the/share?mountoptions=ro"
+     *       "cifs://username:passwd@servername/share/path/on/the/share?mountoptions=noguest"
      *       "smb://servername/share/path/on/the/share"
      *       "smb://username:passwd@servername/share/path/on/the/share?mountoptions=ro"
      *     \endcode
@@ -321,7 +322,9 @@ namespace zypp
      *   - Query parameters:
      *     - <tt>mountoptions</tt>:
      *       The mount options separated by a comma ','. Default are the
-     *       "ro" and "guest" options.
+     *       "ro" and "guest" options. Specify "noguest" to turn off
+     *       "guest". This is necessary if Samba is configured to reject
+     *       guest connections.
      *     - <tt>workgroup</tt> or <tt>domain</tt>:
      *       The name of the workgroup.
      *     - <tt>username</tt>:
