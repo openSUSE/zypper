@@ -1,4 +1,10 @@
 -------------------------------------------------------------------
+Mon Nov  2 21:33:40 CET 2009 - ma@suse.de
+
+- Enhance interface for zypper. (bnc #551956)
+- version 6.21.4 (19)
+
+-------------------------------------------------------------------
 Mon Nov  2 20:03:31 CET 2009 - ma@suse.de
 
 - CIFS/SMB: Support mountoption 'noguest' to prevent passing 'guest' option
