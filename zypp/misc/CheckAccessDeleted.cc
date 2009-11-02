@@ -92,16 +92,15 @@ namespace zypp
     }
 
     /** Add line to cache if it refers to a deleted executable or library file:
-     * - Either the link count \c(k) os \c 0, or no link cout is present.
+     * - Either the link count \c(k) is \c 0, or no link cout is present.
      * - The type \c (t) is set to \c REG or \c DEL
      * - The filedescriptor \c (f) is set to \c txt, \c mem or \c DEL
     */
     inline void addCacheIf( CheckAccessDeleted::ProcInfo & cache_r, const std::string & line_r )
     {
-      const char * k = ".";
-      const char * f = ".";
-      const char * t = ".";
-      const char * n = ".";
+      const char * f = 0;
+      const char * t = 0;
+      const char * n = 0;
 
       for_( ch, line_r.c_str(), ch+line_r.size() )
       {
@@ -110,7 +109,6 @@ namespace zypp
           case 'k':
             if ( *(ch+1) != '0' )	// skip non-zero link counts
               return;
-            k = ch+1;
             break;
           case 'f':
             f = ch+1;
@@ -140,6 +138,9 @@ namespace zypp
         return;	// wrong filedescriptor type
 
       std::string name( n );
+
+      if ( str::contains( n, "(stat: Permission denied)" ) )
+        return;	// Avoid reporting false positive due to insufficient permission.
 
       if ( *f == 'm' || *f == 'D' )	// skip some wellknown nonlibrary memorymapped files
       {
