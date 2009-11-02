@@ -1,4 +1,10 @@
 -------------------------------------------------------------------
+Mon Nov  2 18:36:50 CET 2009 - ma@suse.de
+
+- Prevent clipping lines when output is redirected. (bnc #551744)
+- 1.2.9
+
+-------------------------------------------------------------------
 Fri Oct 30 11:36:57 CET 2009 - ma@suse.de
 
 - Fix 'zypper in --from' selecting the wrong packages. (bnc #548392)
