@@ -1337,6 +1337,9 @@ attremptycheckend:
   ostream & operator<<( ostream & str, const PoolQuery & obj )
   { return str << obj.asString(); }
 
+  std::ostream & dumpOn( std::ostream & str, const PoolQuery & obj )
+  { return dumpRange( str << obj, obj.begin(), obj.end() ); }
+
   bool PoolQuery::operator==( const PoolQuery & rhs ) const
   { return *_pimpl == *rhs._pimpl; }
 

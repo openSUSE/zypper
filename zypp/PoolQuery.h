@@ -468,6 +468,9 @@ namespace zypp
   /** \relates PoolQuery Stream output. */
   std::ostream & operator<<( std::ostream & str, const PoolQuery & obj );
 
+  /** \relates PoolQuery Detailed stream output. */
+  std::ostream & dumpOn( std::ostream & str, const PoolQuery & obj );
+
   ///////////////////////////////////////////////////////////////////
   namespace detail
   { /////////////////////////////////////////////////////////////////
