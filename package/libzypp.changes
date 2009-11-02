@@ -1,4 +1,11 @@
 -------------------------------------------------------------------
+Mon Nov  2 20:03:31 CET 2009 - ma@suse.de
+
+- CIFS/SMB: Support mountoption 'noguest' to prevent passing 'guest' option
+  to mount. "cifs://server/share/path?mountoptions=noguest,ro" (bnc #547354)
+- version 6.21.3 (19)
+
+-------------------------------------------------------------------
 Mon Nov  2 16:35:33 CET 2009 - ma@suse.de
 
 - CheckAccessDeleted: Avoid reporting false positive due to insufficient 
