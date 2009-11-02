@@ -1,4 +1,10 @@
 -------------------------------------------------------------------
+Mon Nov  2 13:59:33 CET 2009 - ma@suse.de
+
+- Don't try to access droplist of dropped products. (bnc #551697)
+- version 6.21.2 (19)
+
+-------------------------------------------------------------------
 Fri Oct 30 12:30:48 CET 2009 - ma@suse.de
 
 - Don't try to use an empty proxy string. (bnc #551314)
