@@ -103,3 +103,42 @@ BOOST_AUTO_TEST_CASE(asString)
 #endif
 }
 
+BOOST_AUTO_TEST_CASE(SplitIdent)
+{
+  sat::Solvable::SplitIdent split;
+  BOOST_CHECK_EQUAL( split.ident(), IdString() );
+  BOOST_CHECK_EQUAL( split.kind(), ResKind() );
+  BOOST_CHECK_EQUAL( split.name(), IdString() );
+
+  // kind defaults to package
+  split = sat::Solvable::SplitIdent( "foo" );
+  BOOST_CHECK_EQUAL( split.ident(), "foo" );
+  BOOST_CHECK_EQUAL( split.kind(), ResKind::package );
+  BOOST_CHECK_EQUAL( split.name(), "foo" );
+
+  // kind package and srcpackage do not have namespaced ident
+  split = sat::Solvable::SplitIdent( "package:foo" );
+  BOOST_CHECK_EQUAL( split.ident(), "foo" );
+  BOOST_CHECK_EQUAL( split.kind(), ResKind::package );
+  BOOST_CHECK_EQUAL( split.name(), "foo" );
+
+  split = sat::Solvable::SplitIdent( "srcpackage:foo" );
+  BOOST_CHECK_EQUAL( split.ident(), "foo" );
+  BOOST_CHECK_EQUAL( split.kind(), ResKind::srcpackage );
+  BOOST_CHECK_EQUAL( split.name(), "foo" );
+
+  // all other kinds do have namespaced ident
+  split = sat::Solvable::SplitIdent( "patch:foo" );
+  BOOST_CHECK_EQUAL( split.ident(), "patch:foo" );
+  BOOST_CHECK_EQUAL( split.kind(), ResKind::patch );
+  BOOST_CHECK_EQUAL( split.name(), "foo" );
+
+  // all other kinds do have namespaced ident
+  split = sat::Solvable::SplitIdent( "unknownkind:foo" );
+  BOOST_CHECK_EQUAL( split.ident(), "unknownkind:foo" );
+  BOOST_CHECK_EQUAL( split.kind(), ResKind("unknownkind") );
+  BOOST_CHECK_EQUAL( split.name(), "foo" );
+
+}
+
+

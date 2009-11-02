@@ -35,44 +35,61 @@ namespace zypp
   namespace sat
   { /////////////////////////////////////////////////////////////////
 
-    Solvable::SplitIdent::SplitIdent( IdString ident_r )
-    : _ident( ident_r )
+    namespace
     {
-      if ( ! ident_r )
-        return;
-
-      const char * ident = ident_r.c_str();
-      const char * sep = ::strchr( ident, ':' );
-
-      // no ':' in package names (hopefully)
-      if ( ! sep )
+      void _doSplit( IdString & _ident, ResKind & _kind, IdString & _name )
       {
-        _kind = ResKind::package;
-        _name = ident_r;
-        return;
-      }
+        if ( ! _ident )
+          return;
 
-      // save name
-      _name = IdString( sep+1 );
-      // quick check for well known kinds
-      if ( sep-ident >= 4 )
-      {
-        switch ( ident[3] )
+        const char * ident = _ident.c_str();
+        const char * sep = ::strchr( ident, ':' );
+
+        // no ':' in package names (hopefully)
+        if ( ! sep )
         {
+          _kind = ResKind::package;
+          _name = _ident;
+          return;
+        }
+
+        // save name
+        _name = IdString( sep+1 );
+
+        // Quick check for well known kinds.
+        // NOTE: kind package and srcpackage do not
+        //       have namespaced ident!
+        if ( sep-ident >= 4 )
+        {
+          switch ( ident[3] )
+          {
 #define OUTS(K,S) if ( !::strncmp( ident, ResKind::K.c_str(), S ) ) _kind = ResKind::K
           //             ----v
-          case 'c': OUTS( patch, 5 );       return; break;
-          case 'd': OUTS( product, 7 );     return; break;
-          case 'k': OUTS( package, 7 );     return; break;
-          case 'p': OUTS( srcpackage, 10 ); return; break;
-          case 't': OUTS( pattern, 7 );     return; break;
+            case 'c': OUTS( patch, 5 );       return; break;
+            case 'd': OUTS( product, 7 );     return; break;
+            case 'k': OUTS( package, 7 );     _ident = _name; return; break;
+            case 'p': OUTS( srcpackage, 10 ); _ident = _name; return; break;
+            case 't': OUTS( pattern, 7 );     return; break;
 #undef OUTS
+          }
         }
-      }
 
-      // an unknown kind
-      _kind = ResKind( std::string( ident, sep-ident ) );
+        // an unknown kind
+        _kind = ResKind( std::string( ident, sep-ident ) );
+      }
     }
+
+    Solvable::SplitIdent::SplitIdent( IdString ident_r )
+    : _ident( ident_r )
+    { _doSplit( _ident, _kind, _name ); }
+
+    Solvable::SplitIdent::SplitIdent( const char * ident_r )
+    : _ident( ident_r )
+    { _doSplit( _ident, _kind, _name ); }
+
+    Solvable::SplitIdent::SplitIdent( const std::string & ident_r )
+    : _ident( ident_r )
+    { _doSplit( _ident, _kind, _name ); }
 
     Solvable::SplitIdent::SplitIdent( ResKind kind_r, IdString name_r )
     : _kind( kind_r )

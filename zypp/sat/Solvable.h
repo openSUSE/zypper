@@ -251,6 +251,8 @@ namespace zypp
           public:
             SplitIdent() {}
             SplitIdent( IdString ident_r );
+            SplitIdent( const char * ident_r );
+            SplitIdent( const std::string & ident_r );
             SplitIdent( ResKind kind_r, IdString name_r );
             SplitIdent( ResKind kind_r, const C_Str & name_r );
 
