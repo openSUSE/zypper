@@ -1,4 +1,9 @@
 -------------------------------------------------------------------
+Tue Nov  3 21:07:29 CET 2009 - ma@suse.de
+
+- Fix typo in man page. (bnc #552265)
+
+-------------------------------------------------------------------
 Mon Nov  2 18:36:50 CET 2009 - ma@suse.de
 
 - Prevent clipping lines when output is redirected. (bnc #551744)
