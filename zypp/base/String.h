@@ -108,6 +108,12 @@ namespace zypp
     /**
      * Global asString() that works with std::string too
      */
+    inline std::string asString( const std::string &t )
+    { return t; }
+
+    inline std::string asString( const char * t )
+    { return t; }
+
     template<class _T>
         inline std::string asString( const _T &t )
         { return t.asString(); }
@@ -119,10 +125,6 @@ namespace zypp
     template<class _T>
         inline std::string asString( const weak_ptr<_T> &p )
         { return p->asString(); }
-
-    template<>
-        inline std::string asString( const std::string &t )
-        { return t; }
 
     template<>
         inline std::string asString( const bool &t )
