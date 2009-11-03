@@ -76,12 +76,12 @@ struct ProcInfoTable
                  const std::string & files_r ) const
   {
     printf( "%*s %*s %*s  %-*s %-*s %-*s %-s\n",
-            pid.size, pid_r.c_str(),
-            ppid.size, ppid_r.c_str(),
-            puid.size, puid_r.c_str(),
-            login.size, login_r.c_str(),
-            command.size, command_r.c_str(),
-            service.size, (service_r.empty() ? " -" : service_r.c_str()),
+            (int)pid.size, pid_r.c_str(),
+            (int)ppid.size, ppid_r.c_str(),
+            (int)puid.size, puid_r.c_str(),
+            (int)login.size, login_r.c_str(),
+            (int)command.size, command_r.c_str(),
+            (int)service.size, (service_r.empty() ? " -" : service_r.c_str()),
             files_r.c_str() );
   }
 
