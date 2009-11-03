@@ -1,4 +1,9 @@
 -------------------------------------------------------------------
+Tue Nov  3 21:19:29 CET 2009 - ma@suse.de
+
+- Fix typo in man page. (bnc #552265)
+
+-------------------------------------------------------------------
 Fri Oct 23 11:11:27 CEST 2009 - ma@suse.de
 
 - Require at least libzypp version used at buildtime. (bnc #549205)
