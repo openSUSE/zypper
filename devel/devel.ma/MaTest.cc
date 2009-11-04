@@ -24,7 +24,6 @@
 #include "zypp/PackageKeyword.h"
 #include "zypp/TmpPath.h"
 #include "zypp/ManagedFile.h"
-#include "zypp/NameKindProxy.h"
 #include "zypp/pool/GetResolvablesToInsDel.h"
 
 #include "zypp/RepoManager.h"
@@ -218,28 +217,6 @@ struct StatusInstall : public SetTransactValue
   : SetTransactValue( ResStatus::TRANSACT, ResStatus::USER )
   {}
 };
-
-inline bool g( const NameKindProxy & nkp, Arch arch = Arch() )
-{
-  if ( nkp.availableEmpty() )
-  {
-    ERR << "No Item to select: " << nkp << endl;
-    return false;
-    ZYPP_THROW( Exception("No Item to select") );
-  }
-
-  if ( arch != Arch() )
-  {
-    typeof( nkp.availableBegin() ) it =  nkp.availableBegin();
-    for ( ; it != nkp.availableEnd(); ++it )
-    {
-      if ( (*it)->arch() == arch )
-	return (*it).status().setTransact( true, ResStatus::USER );
-    }
-  }
-
-  return nkp.availableBegin()->status().setTransact( true, ResStatus::USER );
-}
 
 ///////////////////////////////////////////////////////////////////
 

@@ -20,7 +20,6 @@
 #include "zypp/target/TargetImpl.h"
 #include "zypp/ZYpp.h"
 #include "zypp/DiskUsageCounter.h"
-#include "zypp/NameKindProxy.h"
 #include "zypp/ZConfig.h"
 #include "zypp/sat/Pool.h"
 #include "zypp/PoolItem.h"

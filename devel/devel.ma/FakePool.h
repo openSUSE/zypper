@@ -16,7 +16,6 @@
 #include "zypp/ZYppFactory.h"
 #include "zypp/ResPool.h"
 #include "zypp/ResPoolProxy.h"
-#include "zypp/NameKindProxy.h"
 #include "zypp/CapFactory.h"
 
 #include "zypp/Atom.h"

@@ -36,7 +36,6 @@
 
 #include "zypp/ResFilters.h"
 #include "zypp/ResStatus.h"
-#include "zypp/NameKindProxy.h"
 #include "zypp/sat/Pool.h"
 #include <zypp/sat/WhatObsoletes.h>
 

@@ -18,7 +18,6 @@
 #include "zypp/Language.h"
 #include "zypp/Digest.h"
 #include "zypp/PackageKeyword.h"
-#include "zypp/NameKindProxy.h"
 #include "zypp/pool/GetResolvablesToInsDel.h"
 
 #include "zypp/parser/TagParser.h"
