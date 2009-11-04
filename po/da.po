@@ -15,7 +15,7 @@ msgstr ""
 "Project-Id-Version: zypper\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2009-10-12 11:46+0200\n"
-"PO-Revision-Date: 2009-09-23 12:47+0200\n"
+"PO-Revision-Date: 2009-10-14 13:52+0200\n"
 "Last-Translator: Martin Schlander <mschlander@opensuse.org>\n"
 "Language-Team: Danish <opensuse-translation@opensuse.org>\n"
 "MIME-Version: 1.0\n"
@@ -1024,8 +1024,6 @@ msgid "No repositories defined. Use the 'zypper addrepo' command to add one or m
 msgstr "Ingen softwarekilder angivet. Brug kommandoen 'zypper addrepo' for at tilføje en eller flere softwarekilder."
 
 #: ../src/repos.cc:824
-#, fuzzy
-#| msgid "Autorefresh"
 msgid "Auto-refresh"
 msgstr "Automatisk genopfrisk"
 
@@ -1038,36 +1036,28 @@ msgid "Off"
 msgstr "Fra"
 
 #: ../src/repos.cc:827
-#, fuzzy
-#| msgid "System Packages"
 msgid "Keep Packages"
-msgstr "Systempakker"
+msgstr "Behold pakker"
 
 #: ../src/repos.cc:833
-#, fuzzy
-#| msgid "DNS Check"
 msgid "GPG Check"
-msgstr "DNS-check"
+msgstr "GPG-tjek"
 
 #: ../src/repos.cc:836
 msgid "GPG Key URI"
-msgstr ""
+msgstr "URI til GPG-nøgle"
 
 #: ../src/repos.cc:839
-#, fuzzy
-#| msgid "Dial Prefix"
 msgid "Path Prefix"
-msgstr "Forvalgkode"
+msgstr "Sti-præfiks"
 
 #: ../src/repos.cc:842
-#, fuzzy
-#| msgid "Print Server"
 msgid "Parent Service"
-msgstr "Printserver"
+msgstr "Forældertjeneste"
 
 #: ../src/repos.cc:845
 msgid "MD Cache Path"
-msgstr ""
+msgstr "Sti til MD-cache"
 
 #: ../src/repos.cc:899 ../src/repos.cc:973 ../src/repos.cc:1143
 msgid "Error reading repositories:"
@@ -3612,10 +3602,8 @@ msgstr ""
 
 #. FIXME: add to the rest of the strings after 11.2 release
 #: ../src/Zypper.cc:1675
-#, fuzzy
-#| msgid "    --from <alias|#|URI>        Select packages only from specified repository.\n"
 msgid "    --from <alias|#|URI>    Restrict upgrade to specified repository.\n"
-msgstr "    --from <alias|#|URI>        Vælg kun pakke fra den angivne softwarekilde.\n"
+msgstr "    --from <alias|#|URI>    Begræns opgradering til den angivne softwarekilde.\n"
 
 #: ../src/Zypper.cc:1705
 msgid ""

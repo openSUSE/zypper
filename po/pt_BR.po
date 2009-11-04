@@ -12,7 +12,7 @@ msgstr ""
 "Project-Id-Version: zypper\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2009-10-12 11:46+0200\n"
-"PO-Revision-Date: 2009-09-23 12:23-0300\n"
+"PO-Revision-Date: 2009-10-13 09:33-0300\n"
 "Last-Translator: Luiz Fernando Ranghetti <elchevive@opensuse.org>\n"
 "Language-Team: Brazilian Portuguese <opensuse-pt@opensuse.org>\n"
 "MIME-Version: 1.0\n"
@@ -1019,10 +1019,8 @@ msgid "No repositories defined. Use the 'zypper addrepo' command to add one or m
 msgstr "Nenhum repositório definido. Use o comando 'zypper addrepo' para adicionar um ou mais repositórios."
 
 #: ../src/repos.cc:824
-#, fuzzy
-#| msgid "Autorefresh"
 msgid "Auto-refresh"
-msgstr "Atualização automática"
+msgstr "Atualizar automaticamente"
 
 #: ../src/repos.cc:824 ../src/repos.cc:827 ../src/repos.cc:833
 msgid "On"
@@ -1033,36 +1031,28 @@ msgid "Off"
 msgstr "Desligado"
 
 #: ../src/repos.cc:827
-#, fuzzy
-#| msgid "System Packages"
 msgid "Keep Packages"
-msgstr "Pacotes do sistema"
+msgstr "Manter pacotes"
 
 #: ../src/repos.cc:833
-#, fuzzy
-#| msgid "DNS Check"
 msgid "GPG Check"
-msgstr "Verificação do DNS"
+msgstr "Verificação GPG"
 
 #: ../src/repos.cc:836
 msgid "GPG Key URI"
-msgstr ""
+msgstr "URI da chave GPG"
 
 #: ../src/repos.cc:839
-#, fuzzy
-#| msgid "Dial Prefix"
 msgid "Path Prefix"
-msgstr "Prefixo de discagem"
+msgstr "Prefixo do caminho"
 
 #: ../src/repos.cc:842
-#, fuzzy
-#| msgid "Print Server"
 msgid "Parent Service"
-msgstr "Servidor de impressão"
+msgstr "Serviço parente"
 
 #: ../src/repos.cc:845
 msgid "MD Cache Path"
-msgstr ""
+msgstr "Caminho do cache MD"
 
 #: ../src/repos.cc:899 ../src/repos.cc:973 ../src/repos.cc:1143
 msgid "Error reading repositories:"
@@ -3605,7 +3595,7 @@ msgstr ""
 #. FIXME: add to the rest of the strings after 11.2 release
 #: ../src/Zypper.cc:1675
 msgid "    --from <alias|#|URI>    Restrict upgrade to specified repository.\n"
-msgstr ""
+msgstr "    --from <apelido|#|URI>    Restringir a atualização ao repositório especificado.\n"
 
 #: ../src/Zypper.cc:1705
 msgid ""

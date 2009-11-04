@@ -13,7 +13,7 @@ msgstr ""
 "Project-Id-Version: zypper.uk\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2009-10-12 11:46+0200\n"
-"PO-Revision-Date: 2009-09-23 19:52-0700\n"
+"PO-Revision-Date: 2009-10-13 21:09-0700\n"
 "Last-Translator: Ivan Petrouchtchak <fr.ivan@ukrainian-orthodox.org>\n"
 "Language-Team: Ukrainian <translation@linux.org.ua>\n"
 "MIME-Version: 1.0\n"
@@ -1019,8 +1019,6 @@ msgid "No repositories defined. Use the 'zypper addrepo' command to add one or m
 msgstr "Не визначено жодного сховища. Вживайте команду «zypper addrepo», щоб додати одне і більше сховищ."
 
 #: ../src/repos.cc:824
-#, fuzzy
-#| msgid "Autorefresh"
 msgid "Auto-refresh"
 msgstr "Автоосвіження"
 
@@ -1033,36 +1031,28 @@ msgid "Off"
 msgstr "Вимк."
 
 #: ../src/repos.cc:827
-#, fuzzy
-#| msgid "System Packages"
 msgid "Keep Packages"
-msgstr "Системні пакунки"
+msgstr "Залишити пакунки"
 
 #: ../src/repos.cc:833
-#, fuzzy
-#| msgid "DNS Check"
 msgid "GPG Check"
-msgstr "Пошук в DNS"
+msgstr "Перевірка GPG"
 
 #: ../src/repos.cc:836
 msgid "GPG Key URI"
-msgstr ""
+msgstr "URI ключа GPG"
 
 #: ../src/repos.cc:839
-#, fuzzy
-#| msgid "Dial Prefix"
 msgid "Path Prefix"
-msgstr "Префікс набору"
+msgstr "Префікс шляху"
 
 #: ../src/repos.cc:842
-#, fuzzy
-#| msgid "Print Server"
 msgid "Parent Service"
-msgstr "Сервер друку"
+msgstr "Батьківська служба"
 
 #: ../src/repos.cc:845
 msgid "MD Cache Path"
-msgstr ""
+msgstr "Шлях кешу MD"
 
 #: ../src/repos.cc:899 ../src/repos.cc:973 ../src/repos.cc:1143
 msgid "Error reading repositories:"
@@ -3653,7 +3643,7 @@ msgstr ""
 #. FIXME: add to the rest of the strings after 11.2 release
 #: ../src/Zypper.cc:1675
 msgid "    --from <alias|#|URI>    Restrict upgrade to specified repository.\n"
-msgstr ""
+msgstr "    --from <псевдонім|#|URI>    Оновлення тільки з вказаного сховища.\n"
 
 #: ../src/Zypper.cc:1705
 msgid ""

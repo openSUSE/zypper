@@ -12,7 +12,7 @@ msgstr ""
 "Project-Id-Version: zypper.nl\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2009-10-12 11:46+0200\n"
-"PO-Revision-Date: 2009-09-25 11:39+0200\n"
+"PO-Revision-Date: 2009-10-16 00:59+0200\n"
 "Last-Translator: Freek de Kruijf <freek@opensuse.org>\n"
 "Language-Team: Dutch <Yast-nl-l10n@lists.sf.kovoks.nl>\n"
 "MIME-Version: 1.0\n"
@@ -1020,8 +1020,6 @@ msgid "No repositories defined. Use the 'zypper addrepo' command to add one or m
 msgstr "Geen installatiebronnen opgegeven. Gebruik het commando 'zypper addrepo' om één of meer bronnen toe te voegen."
 
 #: ../src/repos.cc:824
-#, fuzzy
-#| msgid "Autorefresh"
 msgid "Auto-refresh"
 msgstr "Autovernieuwen"
 
@@ -1034,36 +1032,28 @@ msgid "Off"
 msgstr "Uit"
 
 #: ../src/repos.cc:827
-#, fuzzy
-#| msgid "System Packages"
 msgid "Keep Packages"
-msgstr "Systeempakketten"
+msgstr "Pakketten behouden"
 
 #: ../src/repos.cc:833
-#, fuzzy
-#| msgid "DNS Check"
 msgid "GPG Check"
-msgstr "DNS-controle"
+msgstr "GPG-controle"
 
 #: ../src/repos.cc:836
 msgid "GPG Key URI"
-msgstr ""
+msgstr "URI van GPG-sleutel"
 
 #: ../src/repos.cc:839
-#, fuzzy
-#| msgid "Dial Prefix"
 msgid "Path Prefix"
-msgstr "Doorkiesnummer"
+msgstr "Padvoorvoegsel"
 
 #: ../src/repos.cc:842
-#, fuzzy
-#| msgid "Print Server"
 msgid "Parent Service"
-msgstr "Printerserver"
+msgstr "Ouderservice"
 
 #: ../src/repos.cc:845
 msgid "MD Cache Path"
-msgstr ""
+msgstr "MD Cache-pad"
 
 #: ../src/repos.cc:899 ../src/repos.cc:973 ../src/repos.cc:1143
 msgid "Error reading repositories:"
@@ -3598,10 +3588,8 @@ msgstr ""
 
 #. FIXME: add to the rest of the strings after 11.2 release
 #: ../src/Zypper.cc:1675
-#, fuzzy
-#| msgid "    --from <alias|#|URI>        Select packages only from specified repository.\n"
 msgid "    --from <alias|#|URI>    Restrict upgrade to specified repository.\n"
-msgstr "    --from <alias|#|URI>        Selecteer pakketten alleen uit de gespecificeerde installatiebron.\n"
+msgstr "    --from <alias|#|URI>        Beperk bijwerken tot de gespecificeerde installatiebron.\n"
 
 #: ../src/Zypper.cc:1705
 msgid ""

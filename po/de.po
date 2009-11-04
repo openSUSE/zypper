@@ -16,7 +16,7 @@ msgstr ""
 "Project-Id-Version: zypper.de\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2009-10-12 11:46+0200\n"
-"PO-Revision-Date: 2009-09-28 21:26+0200\n"
+"PO-Revision-Date: 2009-10-23 20:46+0200\n"
 "Last-Translator: Hermann-Josef Beckers <hj.beckers@onlinehome.de>\n"
 "Language-Team: German <kde-i18n-de@kde.org>\n"
 "MIME-Version: 1.0\n"
@@ -50,24 +50,33 @@ msgstr "Datei '%s' aus Repository '%s' ist unsigniert, fortfahren?"
 #: ../src/callbacks/keyring.h:90
 #, c-format
 msgid "Accepting file '%s' signed with an unknown key '%s'."
-msgstr "Datei '%s', die mit einem unbekannten Schlüssel '%s' signiert wurde, wird akzeptiert."
+msgstr ""
+"Datei '%s', die mit einem unbekannten Schlüssel '%s' signiert wurde, wird "
+"akzeptiert."
 
 #: ../src/callbacks/keyring.h:94
 #, c-format
-msgid "Accepting file '%s' from repository '%s' signed with an unknown key '%s'."
-msgstr "Datei '%s' aus Repository '%s', die mit einem unbekannten Schlüssel '%s' signiert wurde, wird akzeptiert."
+msgid ""
+"Accepting file '%s' from repository '%s' signed with an unknown key '%s'."
+msgstr ""
+"Datei '%s' aus Repository '%s', die mit einem unbekannten Schlüssel '%s' "
+"signiert wurde, wird akzeptiert."
 
 #. translators: the last %s is gpg key ID
 #: ../src/callbacks/keyring.h:104
 #, c-format
 msgid "File '%s' is signed with an unknown key '%s'. Continue?"
-msgstr "Datei '%s' ist mit einem unbekannten Schlüssel '%s' signiert. Fortfahren?"
+msgstr ""
+"Datei '%s' ist mit einem unbekannten Schlüssel '%s' signiert. Fortfahren?"
 
 #. translators: the last %s is gpg key ID
 #: ../src/callbacks/keyring.h:108
 #, c-format
-msgid "File '%s' from repository '%s' is signed with an unknown key '%s'. Continue?"
-msgstr "Datei '%s' aus Repository '%s' ist mit einem unbekannten Schlüssel '%s' signiert. Fortfahren?"
+msgid ""
+"File '%s' from repository '%s' is signed with an unknown key '%s'. Continue?"
+msgstr ""
+"Datei '%s' aus Repository '%s' ist mit einem unbekannten Schlüssel '%s' "
+"signiert. Fortfahren?"
 
 #: ../src/callbacks/keyring.h:125
 msgid "Automatically trusting the following key:"
@@ -100,7 +109,8 @@ msgstr "Repository: %s"
 #. translators: this message is shown after showing description of the key
 #: ../src/callbacks/keyring.h:150
 msgid "Do you want to reject the key, trust temporarily, or trust always?"
-msgstr "Wollen Sie den Schlüssel (a)bweisen, ihm (t)emporär oder (i)mmer vertrauen?"
+msgstr ""
+"Wollen Sie den Schlüssel (a)bweisen, ihm (t)emporär oder (i)mmer vertrauen?"
 
 #. translators: r/t/a stands for Reject/TrustTemporarily/trustAlways(import)
 #. translate to whatever is appropriate for your language
@@ -129,7 +139,9 @@ msgstr "Dem Schlüssel zeitweise vertrauen."
 #. translators: help text for the 'a' option in the 'r/t/a' prompt
 #: ../src/callbacks/keyring.h:172
 msgid "Trust the key and import it into trusted keyring."
-msgstr "Dem Schlüssel vertrauen und in den vertrauenswürdigen Schlüsselring importieren."
+msgstr ""
+"Dem Schlüssel vertrauen und in den vertrauenswürdigen Schlüsselring "
+"importieren."
 
 #: ../src/callbacks/keyring.h:206
 #, c-format
@@ -138,12 +150,17 @@ msgstr "Fehlgeschlagene Signaturüberprüfung für Datei '%s' wird ignoriert!"
 
 #: ../src/callbacks/keyring.h:209
 #, c-format
-msgid "Ignoring failed signature verification for file '%s' from repository '%s'!"
-msgstr "Fehlgeschlagene Signaturüberprüfung für Datei '%s' aus Repository '%s' wird ignoriert!"
+msgid ""
+"Ignoring failed signature verification for file '%s' from repository '%s'!"
+msgstr ""
+"Fehlgeschlagene Signaturüberprüfung für Datei '%s' aus Repository '%s' wird "
+"ignoriert!"
 
 #: ../src/callbacks/keyring.h:214
 msgid "Double-check this is not caused by some malicious changes in the file!"
-msgstr "Überprüfen Sie sehr genau, das dies nicht durch arglistige Änderungen in der Datei verursacht wurde!"
+msgstr ""
+"Überprüfen Sie sehr genau, das dies nicht durch arglistige Änderungen in der "
+"Datei verursacht wurde!"
 
 #: ../src/callbacks/keyring.h:224
 #, c-format
@@ -160,7 +177,8 @@ msgid ""
 "Warning: This might be caused by a malicious change in the file!\n"
 "Continuing might be risky. Continue anyway?"
 msgstr ""
-"Achtung: Dies könnte durch eine arglistige Änderung an der Datei verursacht worden sein!\n"
+"Achtung: Dies könnte durch eine arglistige Änderung an der Datei verursacht "
+"worden sein!\n"
 "Fortfahren könnte risikoreich sein. Trotzdem fortfahren?"
 
 #: ../src/callbacks/keyring.h:256
@@ -186,16 +204,20 @@ msgstr "Unbekannte Zusammenfassung %s für Datei %s."
 #: ../src/callbacks/keyring.h:280
 #, c-format
 msgid "Ignoring failed digest verification for %s (expected %s, found %s)."
-msgstr "Fehlgeschlagene Überprüfung für %s wird ignoriert (erwartet wurde %s, gefunden wurde %s)."
+msgstr ""
+"Fehlgeschlagene Überprüfung für %s wird ignoriert (erwartet wurde %s, "
+"gefunden wurde %s)."
 
 #: ../src/callbacks/keyring.h:287
 #, c-format
 msgid "Digest verification failed for %s. Expected %s, found %s."
-msgstr "Überprüfung für %s fehlgeschlagen. Erwartet wurde %s, gefunden wurde %s."
+msgstr ""
+"Überprüfung für %s fehlgeschlagen. Erwartet wurde %s, gefunden wurde %s."
 
 #: ../src/callbacks/locks.h:29
 msgid "The following query locks some of the objects you want to unlock:"
-msgstr "Die folgende Anfrage sperrt einige der Objekte, die Sie entsperren wollen:"
+msgstr ""
+"Die folgende Anfrage sperrt einige der Objekte, die Sie entsperren wollen:"
 
 #: ../src/callbacks/locks.h:42
 msgid "The following query does not lock anything:"
@@ -208,8 +230,12 @@ msgstr "Die folgende Anfrage sperrt nichts:"
 #. /usr/lib/locale/<your_locale>/LC_MESSAGES/SYS_LC_MESSAGES
 #: ../src/callbacks/media.h:86
 #, c-format
-msgid "Please insert medium [%s] #%d and type 'y' to continue or 'n' to cancel the operation."
-msgstr "Bitte legen Sie Medium [%s] #%d ein und geben 'j' ein, um fortzufahren oder 'n', um die Operation abzubrechen."
+msgid ""
+"Please insert medium [%s] #%d and type 'y' to continue or 'n' to cancel the "
+"operation."
+msgstr ""
+"Bitte legen Sie Medium [%s] #%d ein und geben 'j' ein, um fortzufahren oder "
+"'n', um die Operation abzubrechen."
 
 #. translators: a/r/i/u are replies to the "Abort, retry, ignore?" prompt
 #. Translate the a/r/i part exactly as you did the a/r/i string.
@@ -230,7 +256,9 @@ msgstr "Erneute Dateiabfrage"
 
 #. help text for the "Abort, retry, ignore?" prompt for media errors
 #: ../src/callbacks/media.h:112
-msgid "Skip retrieval of the file and try to continue with the operation without the file."
+msgid ""
+"Skip retrieval of the file and try to continue with the operation without "
+"the file."
 msgstr "Dateiabruf überspringen und die Operation ohne die Datei fortsetzen."
 
 #. help text for the "Abort, retry, ignore?" prompt for media errors
@@ -573,23 +601,28 @@ msgstr "'%s' nicht gefunden"
 #: ../src/install.cc:99
 #, c-format
 msgid "skipping %s '%s' (the newest version already installed)"
-msgstr "%s '%s' wird übersprungen (die neueste Version ist bereits installiert)"
+msgstr ""
+"%s '%s' wird übersprungen (die neueste Version ist bereits installiert)"
 
 #. translators: %s-%s.%s is name-version.arch
 #: ../src/install.cc:111
 #, c-format
 msgid "Package %s-%s.%s not found in repositories, cannot reinstall."
-msgstr "Paket %s-%s.%s wurde nicht in den Repositories gefunden, Neuinstallation nicht möglich."
+msgstr ""
+"Paket %s-%s.%s wurde nicht in den Repositories gefunden, Neuinstallation "
+"nicht möglich."
 
 #: ../src/install.cc:124
 #, c-format
 msgid "Failed to add '%s' to the list of packages to be installed."
-msgstr "Hinzufügen von '%s' zur Liste der zu installierenden Pakete fehlgeschlagen."
+msgstr ""
+"Hinzufügen von '%s' zur Liste der zu installierenden Pakete fehlgeschlagen."
 
 #: ../src/install.cc:147
 #, c-format
 msgid "Failed to add '%s' to the list of packages to be removed."
-msgstr "Hinzufügen von '%s' zur Liste der zu entfernenden Pakete fehlgeschlagen."
+msgstr ""
+"Hinzufügen von '%s' zur Liste der zu entfernenden Pakete fehlgeschlagen."
 
 #: ../src/install.cc:367 ../src/install.cc:724
 #, c-format
@@ -612,13 +645,16 @@ msgid ""
 "Patches are not installed in sense of copied files, database records,\n"
 "or similar."
 msgstr ""
-"Der Installationsstatus eines Patches basiert einzig auf seinen Abhängigkeiten.\n"
+"Der Installationsstatus eines Patches basiert einzig auf seinen "
+"Abhängigkeiten.\n"
 "Patches werden nicht im Sinne von kopierten Dateien, Datenbankeinträgen\n"
 "oder ähnlichem installiert."
 
 #: ../src/install.cc:449
 msgid "Uninstallation of a pattern is currently not defined and implemented."
-msgstr "Die Deinstallation eines Schemas ist momentan nicht definiert und implementiert."
+msgstr ""
+"Die Deinstallation eines Schemas ist momentan nicht definiert und "
+"implementiert."
 
 #: ../src/install.cc:463
 #, c-format
@@ -638,8 +674,11 @@ msgid "'%s' not found."
 msgstr "'%s' nicht gefunden."
 
 #: ../src/install.cc:583
-msgid "Specifying architecture when selecting packages by name is not implemented."
-msgstr "Architektur wird festgelegt, wenn die Paketauswahl durch den Namen nicht implementiert ist."
+msgid ""
+"Specifying architecture when selecting packages by name is not implemented."
+msgstr ""
+"Architektur wird festgelegt, wenn die Paketauswahl durch den Namen nicht "
+"implementiert ist."
 
 #: ../src/install.cc:620
 #, c-format
@@ -732,8 +771,12 @@ msgstr "Lizenz %s %s automatisch zustimmen."
 #. is " (package-type)" if other than "package" (patch/product/pattern)
 #: ../src/misc.cc:160
 #, c-format
-msgid "In order to install '%s'%s, you must agree to terms of the following license agreement:"
-msgstr "Um '%s'%s zu installieren, müssen Sie den Bedingungen der folgenden Lizenzvereinbarung zustimmen:"
+msgid ""
+"In order to install '%s'%s, you must agree to terms of the following license "
+"agreement:"
+msgstr ""
+"Um '%s'%s zu installieren, müssen Sie den Bedingungen der folgenden "
+"Lizenzvereinbarung zustimmen:"
 
 #. lincense prompt
 #: ../src/misc.cc:177
@@ -742,21 +785,30 @@ msgstr "Stimmen Sie den Bedingungen der Lizenz zu?"
 
 #: ../src/misc.cc:186
 msgid "Aborting installation due to the need for license confirmation."
-msgstr "Die Installation wird aufgrund der Notwendigkeit von Lizenzzusagen abgebrochen."
+msgstr ""
+"Die Installation wird aufgrund der Notwendigkeit von Lizenzzusagen "
+"abgebrochen."
 
 #. translators: %sanslate the '--auto-agree-with-licenses',
 #. it is a command line option
 #: ../src/misc.cc:191
 #, c-format
-msgid "Please restart the operation in interactive mode and confirm your agreement with required licenses, or use the %s option."
-msgstr "Bitte starten Sie die Operation im interaktiven Modus erneut und bestätigen Ihr Einverständnis mit den benötigten Lizenzen oder verwenden Sie die Option %s."
+msgid ""
+"Please restart the operation in interactive mode and confirm your agreement "
+"with required licenses, or use the %s option."
+msgstr ""
+"Bitte starten Sie die Operation im interaktiven Modus erneut und bestätigen "
+"Ihr Einverständnis mit den benötigten Lizenzen oder verwenden Sie die Option "
+"%s."
 
 #. translators: e.g. "... with flash package license."
 #. ! \todo fix this to allow proper translation
 #: ../src/misc.cc:203
 #, c-format
 msgid "Aborting installation due to user disagreement with %s %s license."
-msgstr "Die Installation wird aufgrund einer Benutzerunstimmigkeit mit der Lizenz %s %s abgebrochen."
+msgstr ""
+"Die Installation wird aufgrund einer Benutzerunstimmigkeit mit der Lizenz %s "
+"%s abgebrochen."
 
 #: ../src/misc.cc:250
 msgid "License"
@@ -869,7 +921,9 @@ msgstr "Problem beim Abrufen der Dateien von '%s'."
 #: ../src/repos.cc:160 ../src/repos.cc:2935 ../src/solve-commit.cc:690
 #: ../src/solve-commit.cc:719 ../src/solve-commit.cc:753
 msgid "Please see the above error message for a hint."
-msgstr "Sehen Sie sich bitte die obige Fehlermeldung an, um einen Hinweis zu bekommen."
+msgstr ""
+"Sehen Sie sich bitte die obige Fehlermeldung an, um einen Hinweis zu "
+"bekommen."
 
 #: ../src/repos.cc:173
 #, c-format
@@ -879,8 +933,12 @@ msgstr "Keine URIs für '%s' bestimmt."
 #. TranslatorExplanation the first %s is a .repo file path
 #: ../src/repos.cc:177
 #, c-format
-msgid "Please add one or more base URI (baseurl=URI) entries to %s for repository '%s'."
-msgstr "Bitte fügen Sie eine oder mehrere Basis-URI(baseurl=URI)-Einträge zu %s für Repository '%s' hinzu."
+msgid ""
+"Please add one or more base URI (baseurl=URI) entries to %s for repository '%"
+"s'."
+msgstr ""
+"Bitte fügen Sie eine oder mehrere Basis-URI(baseurl=URI)-Einträge zu %s für "
+"Repository '%s' hinzu."
 
 #: ../src/repos.cc:190
 msgid "No alias defined for this repository."
@@ -892,8 +950,12 @@ msgid "Repository '%s' is invalid."
 msgstr "Repository '%s' ist ungültig."
 
 #: ../src/repos.cc:204
-msgid "Please check if the URIs defined for this repository are pointing to a valid repository."
-msgstr "Bitte überprüfen Sie, ob die für dieses Repository bestimmten URIs zu einem gültigen Repository verweisen."
+msgid ""
+"Please check if the URIs defined for this repository are pointing to a valid "
+"repository."
+msgstr ""
+"Bitte überprüfen Sie, ob die für dieses Repository bestimmten URIs zu einem "
+"gültigen Repository verweisen."
 
 #: ../src/repos.cc:217
 #, c-format
@@ -911,13 +973,23 @@ msgstr "Fehler beim Analysieren der Metadaten für '%s':"
 
 #. TranslatorExplanation Don't translate the URL unless it is translated, too
 #: ../src/repos.cc:247
-msgid "This may be caused by invalid metadata in the repository, or by a bug in the metadata parser. In the latter case, or if in doubt, please, file a bug report by following instructions at http://en.opensuse.org/Zypper/Troubleshooting"
-msgstr "Dies könnte durch ungültige Metadaten im Repository oder durch einen Bug im Metadatenanalysierer verursacht worden sein. Im letzteren Fall oder wenn Sie im Zweifel sind, füllen Sie bitte einen Bug-Report mittels folgender Instruktionen aus:  http://de.opensuse.org/Zypper/Problemlösungen."
+msgid ""
+"This may be caused by invalid metadata in the repository, or by a bug in the "
+"metadata parser. In the latter case, or if in doubt, please, file a bug "
+"report by following instructions at http://en.opensuse.org/Zypper/"
+"Troubleshooting"
+msgstr ""
+"Dies könnte durch ungültige Metadaten im Repository oder durch einen Bug im "
+"Metadatenanalysierer verursacht worden sein. Im letzteren Fall oder wenn Sie "
+"im Zweifel sind, füllen Sie bitte einen Bug-Report mittels folgender "
+"Instruktionen aus:  http://de.opensuse.org/Zypper/Problemlösungen."
 
 #: ../src/repos.cc:261
 #, c-format
 msgid "Repository metadata for '%s' not found in local cache."
-msgstr "Repository-Metadaten für '%s' wurden nicht im lokalen Zwischenspeicher gefunden."
+msgstr ""
+"Repository-Metadaten für '%s' wurden nicht im lokalen Zwischenspeicher "
+"gefunden."
 
 #: ../src/repos.cc:269
 msgid "Error building the cache:"
@@ -931,7 +1003,8 @@ msgstr "Repository '%s' wurde nicht durch Alias, Nummer oder URI gefunden."
 #: ../src/repos.cc:427
 #, c-format
 msgid "Use '%s' to get the list of defined repositories."
-msgstr "Verwenden Sie '%s', um die Liste der definitierten Repositories zu erhalten."
+msgstr ""
+"Verwenden Sie '%s', um die Liste der definitierten Repositories zu erhalten."
 
 #: ../src/repos.cc:491 ../src/repos.cc:498
 #, c-format
@@ -945,13 +1018,21 @@ msgstr "Repository '%s' wird aufgrund des obigen Fehlers deaktiviert."
 
 #: ../src/repos.cc:546
 #, c-format
-msgid "Repository '%s' is out-of-date. You can run 'zypper refresh' as root to update it."
-msgstr "Repository '%s' ist veraltet. Sie können 'zypper refresh' als Root ausführen, um es zu aktualisieren."
+msgid ""
+"Repository '%s' is out-of-date. You can run 'zypper refresh' as root to "
+"update it."
+msgstr ""
+"Repository '%s' ist veraltet. Sie können 'zypper refresh' als Root "
+"ausführen, um es zu aktualisieren."
 
 #: ../src/repos.cc:581
 #, c-format
-msgid "The metadata cache needs to be built for the '%s' repository. You can run 'zypper refresh' as root to do this."
-msgstr "Der Metadatenzwischenspeicher muss für das Repository '%s' erstellt werden. Sie können 'zypper refresh' als Root ausführen, um dies zu erledigen."
+msgid ""
+"The metadata cache needs to be built for the '%s' repository. You can run "
+"'zypper refresh' as root to do this."
+msgstr ""
+"Der Metadatenzwischenspeicher muss für das Repository '%s' erstellt werden. "
+"Sie können 'zypper refresh' als Root ausführen, um dies zu erledigen."
 
 #: ../src/repos.cc:588
 #, c-format
@@ -1017,12 +1098,14 @@ msgid "Service"
 msgstr "Dienst"
 
 #: ../src/repos.cc:762
-msgid "No repositories defined. Use the 'zypper addrepo' command to add one or more repositories."
-msgstr "Keine Repositories bestimmt. Verwenden Sie das Kommando 'zypper addrepo', um ein oder mehrere Repositories hinzuzufügen."
+msgid ""
+"No repositories defined. Use the 'zypper addrepo' command to add one or more "
+"repositories."
+msgstr ""
+"Keine Repositories bestimmt. Verwenden Sie das Kommando 'zypper addrepo', um "
+"ein oder mehrere Repositories hinzuzufügen."
 
 #: ../src/repos.cc:824
-#, fuzzy
-#| msgid "Autorefresh"
 msgid "Auto-refresh"
 msgstr "Autoaktualisierung"
 
@@ -1035,36 +1118,28 @@ msgid "Off"
 msgstr "Aus"
 
 #: ../src/repos.cc:827
-#, fuzzy
-#| msgid "System Packages"
 msgid "Keep Packages"
-msgstr "Systempakete"
+msgstr "Pakete behalten"
 
 #: ../src/repos.cc:833
-#, fuzzy
-#| msgid "DNS Check"
 msgid "GPG Check"
-msgstr "DNS-Überprüfung"
+msgstr "GPG-Überprüfung"
 
 #: ../src/repos.cc:836
 msgid "GPG Key URI"
-msgstr ""
+msgstr "GPG-Schlüssel-URI"
 
 #: ../src/repos.cc:839
-#, fuzzy
-#| msgid "Dial Prefix"
 msgid "Path Prefix"
-msgstr "Vorwahl"
+msgstr "Pfad-Präfix"
 
 #: ../src/repos.cc:842
-#, fuzzy
-#| msgid "Print Server"
 msgid "Parent Service"
-msgstr "Druckserver"
+msgstr "übergeordneter Dienst"
 
 #: ../src/repos.cc:845
 msgid "MD Cache Path"
-msgstr ""
+msgstr "MD-Zwischenspeicher-Pfad"
 
 #: ../src/repos.cc:899 ../src/repos.cc:973 ../src/repos.cc:1143
 msgid "Error reading repositories:"
@@ -1101,7 +1176,9 @@ msgstr "Repository '%s' wird aufgrund des obigen Fehlers übersprungen."
 #: ../src/repos.cc:1060
 #, c-format
 msgid "Use '%s' or '%s' commands to add or enable repositories."
-msgstr "Verwenden Sie die Kommandos '%s' oder '%s', um Repositories hinzuzufügen oder zu aktivieren."
+msgstr ""
+"Verwenden Sie die Kommandos '%s' oder '%s', um Repositories hinzuzufügen "
+"oder zu aktivieren."
 
 #: ../src/repos.cc:1063
 msgid "Specified repositories are not enabled or defined."
@@ -1113,11 +1190,14 @@ msgstr "Es sind keine aktivierten Repositories bestimmt."
 
 #: ../src/repos.cc:1069
 msgid "Could not refresh the repositories because of errors."
-msgstr "Die Repositories konnten aufgrund von Fehlern nicht aktualisiert werden."
+msgstr ""
+"Die Repositories konnten aufgrund von Fehlern nicht aktualisiert werden."
 
 #: ../src/repos.cc:1075
 msgid "Some of the repositories have not been refreshed because of an error."
-msgstr "Einige der Repositories konnten aufgrund eines Fehlers nicht aktualisiert werden."
+msgstr ""
+"Einige der Repositories konnten aufgrund eines Fehlers nicht aktualisiert "
+"werden."
 
 #: ../src/repos.cc:1080
 msgid "Specified repositories have been refreshed."
@@ -1159,7 +1239,9 @@ msgstr "Der Zwischenspeicher der installierten Pakete wird bereinigt."
 
 #: ../src/repos.cc:1273
 msgid "Cannot clean installed packages cache because of an error."
-msgstr "Der Zwischenspeicher der installierten Pakete kann aufgrund eines Fehlers nicht bereinigt werden."
+msgstr ""
+"Der Zwischenspeicher der installierten Pakete kann aufgrund eines Fehlers "
+"nicht bereinigt werden."
 
 #: ../src/repos.cc:1281
 msgid "Could not clean the repositories because of errors."
@@ -1179,24 +1261,35 @@ msgstr "Alle Repositories wurden bereinigt."
 
 #: ../src/repos.cc:1335
 msgid "This is a changeable read-only media (CD/DVD), disabling autorefresh."
-msgstr "Dies ist ein nicht-beschreibbares Wechselmedium (CD/DVD), Autoaktualisierung wird deaktiviert."
+msgstr ""
+"Dies ist ein nicht-beschreibbares Wechselmedium (CD/DVD), Autoaktualisierung "
+"wird deaktiviert."
 
 #: ../src/repos.cc:1356 ../src/repos.cc:1617
 #, c-format
 msgid "Repository named '%s' already exists. Please use another alias."
-msgstr "Ein mit '%s' benanntes Repository existiert bereits. Bitte verwenden Sie einen anderen Alias."
+msgstr ""
+"Ein mit '%s' benanntes Repository existiert bereits. Bitte verwenden Sie "
+"einen anderen Alias."
 
 #: ../src/repos.cc:1367
-msgid "Could not determine the type of the repository. Please check if the defined URIs (see below) point to a valid repository:"
-msgstr "Der Typ des Repositorys konnte nicht festgestellt werden. Bitte überprüfen Sie, ob die definierten URIs (siehe unten) auf ein gültiges Repository verweisen:"
+msgid ""
+"Could not determine the type of the repository. Please check if the defined "
+"URIs (see below) point to a valid repository:"
+msgstr ""
+"Der Typ des Repositorys konnte nicht festgestellt werden. Bitte überprüfen "
+"Sie, ob die definierten URIs (siehe unten) auf ein gültiges Repository "
+"verweisen:"
 
 #: ../src/repos.cc:1374 ../src/Zypper.cc:2535
 msgid "Can't find a valid repository at given location:"
-msgstr "Ein gültiges Repository konnte an dem gegebenen Ort nicht gefunden werden:"
+msgstr ""
+"Ein gültiges Repository konnte an dem gegebenen Ort nicht gefunden werden:"
 
 #: ../src/repos.cc:1383
 msgid "Problem transferring repository data from specified URI:"
-msgstr "Problem beim Transferieren der Repository-Daten von dem festgelegten URI:"
+msgstr ""
+"Problem beim Transferieren der Repository-Daten von dem festgelegten URI:"
 
 #: ../src/repos.cc:1384
 msgid "Please check whether the specified URI is accessible."
@@ -1228,7 +1321,8 @@ msgstr "Problem beim Lesen der Daten von Medium '%s'"
 
 #: ../src/repos.cc:1435
 msgid "Please check if your installation media is valid and readable."
-msgstr "Bitte überprüfen Sie, ob Ihr Installationsmedium gültig und lesbar ist."
+msgstr ""
+"Bitte überprüfen Sie, ob Ihr Installationsmedium gültig und lesbar ist."
 
 #: ../src/repos.cc:1500
 msgid "Problem accessing the file at the specified URI"
@@ -1245,16 +1339,23 @@ msgstr "Dateianalyseproblem beim festgelegten URI"
 #. TranslatorExplanation don't translate the URI if the URI itself is not translated.
 #. Also don't translate the '.repo' string.
 #: ../src/repos.cc:1512
-msgid "Is it a .repo file? See http://en.opensuse.org/Standards/RepoInfo for details."
-msgstr "Ist es eine .repo-Datei? Siehe http://en.opensuse.org/Standards/RepoInfo für Details."
+msgid ""
+"Is it a .repo file? See http://en.opensuse.org/Standards/RepoInfo for "
+"details."
+msgstr ""
+"Ist es eine .repo-Datei? Siehe http://en.opensuse.org/Standards/RepoInfo für "
+"Details."
 
 #: ../src/repos.cc:1520
 msgid "Problem encountered while trying to read the file at the specified URI"
-msgstr "Es trat ein Problem auf, beim Versuch die Datei beim festgelegten URI zu lesen."
+msgstr ""
+"Es trat ein Problem auf, beim Versuch die Datei beim festgelegten URI zu "
+"lesen."
 
 #: ../src/repos.cc:1534
 msgid "Repository with no alias defined found in the file, skipping."
-msgstr "Repository mit keinem in der Datei bestimmten Alias gefunden, übersprungen."
+msgstr ""
+"Repository mit keinem in der Datei bestimmten Alias gefunden, übersprungen."
 
 #: ../src/repos.cc:1541
 #, c-format
@@ -1268,8 +1369,12 @@ msgstr "Repository '%s' wurde entfernt."
 
 #: ../src/repos.cc:1600
 #, c-format
-msgid "Cannot change alias of '%s' repository. The repository belongs to service '%s' which is responsible for setting its alias."
-msgstr "Alias von Repository '%s' kann nicht geändert werden. Das Repository gehört zum Dienst '%s', welcher für das Setzen seines Alias verantwortlich ist."
+msgid ""
+"Cannot change alias of '%s' repository. The repository belongs to service '%"
+"s' which is responsible for setting its alias."
+msgstr ""
+"Alias von Repository '%s' kann nicht geändert werden. Das Repository gehört "
+"zum Dienst '%s', welcher für das Setzen seines Alias verantwortlich ist."
 
 #: ../src/repos.cc:1611
 #, c-format
@@ -1287,8 +1392,12 @@ msgstr "Repository '%s' wird nicht verändert."
 
 #: ../src/repos.cc:1761
 #, c-format
-msgid "Invalid priority '%s'. Use a positive integer number. The greater the number, the lower the priority."
-msgstr "Ungültige Priorität '%s'. Verwenden Sie eine positive Ganzzahl. Je größer die Zahl, desto niedriger die Priorität."
+msgid ""
+"Invalid priority '%s'. Use a positive integer number. The greater the "
+"number, the lower the priority."
+msgstr ""
+"Ungültige Priorität '%s'. Verwenden Sie eine positive Ganzzahl. Je größer "
+"die Zahl, desto niedriger die Priorität."
 
 #: ../src/repos.cc:1769
 #, c-format
@@ -1323,7 +1432,8 @@ msgstr "Zwischenspeichern von RPM-Dateien wurde für Repository '%s' aktiviert."
 #: ../src/repos.cc:1818
 #, c-format
 msgid "RPM files caching has been disabled for repository '%s'."
-msgstr "Zwischenspeichern von RPM-Dateien wurde für Repository '%s' deaktiviert."
+msgstr ""
+"Zwischenspeichern von RPM-Dateien wurde für Repository '%s' deaktiviert."
 
 #: ../src/repos.cc:1824
 #, c-format
@@ -1362,12 +1472,16 @@ msgstr "Verwenden Sie '%s', um die Liste der definierten Dienste zu erhalten."
 #: ../src/repos.cc:2201
 #, c-format
 msgid "No services defined. Use the '%s' command to add one or more services."
-msgstr "Keine Dienste definiert. Verwenden Sie das Kommando '%s', um einen oder mehrere Dienst/e hinzuzufügen."
+msgstr ""
+"Keine Dienste definiert. Verwenden Sie das Kommando '%s', um einen oder "
+"mehrere Dienst/e hinzuzufügen."
 
 #: ../src/repos.cc:2327
 #, c-format
 msgid "Service aliased '%s' already exists. Please use another alias."
-msgstr "Ein mit '%s' benannter Dienst existiert bereits. Bitte verwenden Sie einen anderen Alias."
+msgstr ""
+"Ein mit '%s' benannter Dienst existiert bereits. Bitte verwenden Sie einen "
+"anderen Alias."
 
 #: ../src/repos.cc:2337
 #, c-format
@@ -1416,7 +1530,9 @@ msgstr "Dienst '%s' wird aufgrund des obigen Fehlers übersprungen."
 #: ../src/repos.cc:2531
 #, c-format
 msgid "Use '%s' or '%s' commands to add or enable services."
-msgstr "Verwenden Sie die Kommandos '%s' oder '%s', um Dienste hinzuzufügen oder zu aktivieren."
+msgstr ""
+"Verwenden Sie die Kommandos '%s' oder '%s', um Dienste hinzuzufügen oder zu "
+"aktivieren."
 
 #: ../src/repos.cc:2534
 msgid "Specified services are not enabled or defined."
@@ -1470,30 +1586,53 @@ msgstr "Name von Dienst '%s' wurde auf '%s' gesetzt."
 #: ../src/repos.cc:2700
 #, c-format
 msgid "Repository '%s' has been added to enabled repositories of service '%s'"
-msgid_plural "Repositories '%s' have been added to enabled repositories of service '%s'"
-msgstr[0] "Repository '%s' wurde zu den aktivierten Repositories von Dienst '%s' hinzugefügt"
-msgstr[1] "Repositories '%s' wurden zu den aktivierten Repositories von Dienst '%s' hinzugefügt"
+msgid_plural ""
+"Repositories '%s' have been added to enabled repositories of service '%s'"
+msgstr[0] ""
+"Repository '%s' wurde zu den aktivierten Repositories von Dienst '%s' "
+"hinzugefügt"
+msgstr[1] ""
+"Repositories '%s' wurden zu den aktivierten Repositories von Dienst '%s' "
+"hinzugefügt"
 
 #: ../src/repos.cc:2708
 #, c-format
 msgid "Repository '%s' has been added to disabled repositories of service '%s'"
-msgid_plural "Repositories '%s' have been added to disabled repositories of service '%s'"
-msgstr[0] "Repository '%s' wurde zu den deaktivierten Repositories von Dienst '%s' hinzugefügt"
-msgstr[1] "Repositories '%s' wurden zu den deaktivierten Repositories von Dienst '%s' hinzugefügt"
+msgid_plural ""
+"Repositories '%s' have been added to disabled repositories of service '%s'"
+msgstr[0] ""
+"Repository '%s' wurde zu den deaktivierten Repositories von Dienst '%s' "
+"hinzugefügt"
+msgstr[1] ""
+"Repositories '%s' wurden zu den deaktivierten Repositories von Dienst '%s' "
+"hinzugefügt"
 
 #: ../src/repos.cc:2716
 #, c-format
-msgid "Repository '%s' has been removed from enabled repositories of service '%s'"
-msgid_plural "Repositories '%s' have been removed from enabled repositories of service '%s'"
-msgstr[0] "Repository '%s' wurde von den aktivierten Repositories von Dienst '%s' entfernt"
-msgstr[1] "Repositories '%s' wurden von den aktivierten Repositories von Dienst '%s' entfernt"
+msgid ""
+"Repository '%s' has been removed from enabled repositories of service '%s'"
+msgid_plural ""
+"Repositories '%s' have been removed from enabled repositories of service '%s'"
+msgstr[0] ""
+"Repository '%s' wurde von den aktivierten Repositories von Dienst '%s' "
+"entfernt"
+msgstr[1] ""
+"Repositories '%s' wurden von den aktivierten Repositories von Dienst '%s' "
+"entfernt"
 
 #: ../src/repos.cc:2724
 #, c-format
-msgid "Repository '%s' has been removed from disabled repositories of service '%s'"
-msgid_plural "Repositories '%s' have been removed from disabled repositories of service '%s'"
-msgstr[0] "Repository '%s' wurde von den deaktivierten Repositories von Dienst '%s' entfernt"
-msgstr[1] "Repositories '%s' wurden von den deaktivierten Repositories von Dienst '%s' entfernt"
+msgid ""
+"Repository '%s' has been removed from disabled repositories of service '%s'"
+msgid_plural ""
+"Repositories '%s' have been removed from disabled repositories of service '%"
+"s'"
+msgstr[0] ""
+"Repository '%s' wurde von den deaktivierten Repositories von Dienst '%s' "
+"entfernt"
+msgstr[1] ""
+"Repositories '%s' wurden von den deaktivierten Repositories von Dienst '%s' "
+"entfernt"
 
 #: ../src/repos.cc:2733
 #, c-format
@@ -1531,12 +1670,18 @@ msgstr "Problem beim Laden der Daten von '%s'"
 #: ../src/repos.cc:2881 ../src/repos.cc:2914
 #, c-format
 msgid "Resolvables from '%s' not loaded because of error."
-msgstr "Auflösbare Abhängigkeiten von '%s' wurden aufgrund eines Fehlers nicht geladen."
+msgstr ""
+"Auflösbare Abhängigkeiten von '%s' wurden aufgrund eines Fehlers nicht "
+"geladen."
 
 #: ../src/repos.cc:2897
 #, c-format
-msgid "Repository '%s' appears to outdated. Consider using a different mirror or server."
-msgstr "Repository '%s' erscheint veraltet. Ziehen Sie es in Erwägung einen anderen (Spiegel-)Server zu verwenden."
+msgid ""
+"Repository '%s' appears to outdated. Consider using a different mirror or "
+"server."
+msgstr ""
+"Repository '%s' erscheint veraltet. Ziehen Sie es in Erwägung einen anderen "
+"(Spiegel-)Server zu verwenden."
 
 #. translators: the first %s is 'zypper refresh' and the second 'zypper clean -m'
 #: ../src/repos.cc:2910
@@ -1632,8 +1777,12 @@ msgstr "Lösung %d: "
 #: ../src/solve-commit.cc:75
 msgid "Choose the above solution using '1' or skip, retry or cancel"
 msgid_plural "Choose from above solutions by number or skip, retry or cancel"
-msgstr[0] "Wählen Sie die obige Lösung mittels '1' oder Sie (u)eberspringen, (w)iederholen oder (b)rechen ab."
-msgstr[1] "Wählen Sie aus den obigen Lösungen mittels Nummer oder Sie (u)eberspringen, (w)iederholen oder (b)rechen ab."
+msgstr[0] ""
+"Wählen Sie die obige Lösung mittels '1' oder Sie (u)eberspringen, (w)"
+"iederholen oder (b)rechen ab."
+msgstr[1] ""
+"Wählen Sie aus den obigen Lösungen mittels Nummer oder Sie (u)eberspringen, "
+"(w)iederholen oder (b)rechen ab."
 
 #. translators: translate 'c' to whatever you translated the 'c' in
 #. "c" and "s/r/c" strings
@@ -1641,7 +1790,8 @@ msgstr[1] "Wählen Sie aus den obigen Lösungen mittels Nummer oder Sie (u)ebers
 msgid "Choose the above solution using '1' or cancel using 'c'"
 msgid_plural "Choose from above solutions by number or cancel"
 msgstr[0] "Wählen Sie die obige Lösung mittels '1' oder brechen Sie a(b)."
-msgstr[1] "Wählen Sie aus den obigen Lösungen mittels Nummer oder brechen Sie a(b)."
+msgstr[1] ""
+"Wählen Sie aus den obigen Lösungen mittels Nummer oder brechen Sie a(b)."
 
 #. translators: answers for dependency problem solution input prompt:
 #. "Choose from above solutions by number or skip, retry or cancel"
@@ -1733,8 +1883,13 @@ msgstr "Prüfung fehlerhaft:"
 
 #: ../src/solve-commit.cc:423
 #, c-format
-msgid "There are some running programs that use files deleted by recent upgrade. You may wish to restart some of them. Run '%s' to list these programs."
-msgstr "Es gibt einige aktive Prozessen, die Dateien verwenden, die durch die letzte Aktualisierung gelöscht wurden. Evtl. möchten Sie einige davon neu starten. Zum Auflisten dieser Programme starten Sie '%s'."
+msgid ""
+"There are some running programs that use files deleted by recent upgrade. "
+"You may wish to restart some of them. Run '%s' to list these programs."
+msgstr ""
+"Es gibt einige aktive Prozessen, die Dateien verwenden, die durch die letzte "
+"Aktualisierung gelöscht wurden. Evtl. möchten Sie einige davon neu starten. "
+"Zum Auflisten dieser Programme starten Sie '%s'."
 
 #: ../src/solve-commit.cc:462
 msgid "Computing distribution upgrade..."
@@ -1745,12 +1900,19 @@ msgid "Resolving package dependencies..."
 msgstr "Paketabhängigkeiten auflösen ..."
 
 #: ../src/solve-commit.cc:518
-msgid "Some of the dependencies of installed packages are broken. In order to fix these dependencies, the following actions need to be taken:"
-msgstr "Einige der Abhängigkeiten der installierten Pakete sind beschädigt. Um diese Abhängigkeiten zu reparieren, müssen die folgenden Aktionen ausgeführt werden:"
+msgid ""
+"Some of the dependencies of installed packages are broken. In order to fix "
+"these dependencies, the following actions need to be taken:"
+msgstr ""
+"Einige der Abhängigkeiten der installierten Pakete sind beschädigt. Um diese "
+"Abhängigkeiten zu reparieren, müssen die folgenden Aktionen ausgeführt "
+"werden:"
 
 #: ../src/solve-commit.cc:526
 msgid "Root privileges are required to fix broken package dependencies."
-msgstr "Root-Rechte werden benötigt, um beschädigte Paketabhängigkeiten zu reparieren."
+msgstr ""
+"Root-Rechte werden benötigt, um beschädigte Paketabhängigkeiten zu "
+"reparieren."
 
 #. translators: These are the "Continue?" prompt options corresponding to
 #. "Yes / No / show Problems / Versions / Arch / Repository /
@@ -1768,8 +1930,11 @@ msgstr "j/n/p/v/a/r/m/d/g"
 
 #. translators: help text for 'y' option in the 'Continue?' prompt
 #: ../src/solve-commit.cc:558
-msgid "Yes, accept the summary and proceed with installation/removal of packages."
-msgstr "Ja, akzeptieren Sie die Zusammenfassung und fahren mit der Installation/Entfernung der Pakete fort."
+msgid ""
+"Yes, accept the summary and proceed with installation/removal of packages."
+msgstr ""
+"Ja, akzeptieren Sie die Zusammenfassung und fahren mit der Installation/"
+"Entfernung der Pakete fort."
 
 #. translators: help text for 'n' option in the 'Continue?' prompt
 #: ../src/solve-commit.cc:560
@@ -1778,8 +1943,12 @@ msgstr "Nein, die Operation abbrechen."
 
 #. translators: help text for 'p' option in the 'Continue?' prompt
 #: ../src/solve-commit.cc:562
-msgid "Restart solver in no-force-resolution mode in order to show dependency problems."
-msgstr "Auflöser ohne Zwangslösungs-Modus neustarten, um Abhängigkeitsprobleme anzuzeigen."
+msgid ""
+"Restart solver in no-force-resolution mode in order to show dependency "
+"problems."
+msgstr ""
+"Auflöser ohne Zwangslösungs-Modus neustarten, um Abhängigkeitsprobleme "
+"anzuzeigen."
 
 #. translators: help text for 'v' option in the 'Continue?' prompt
 #: ../src/solve-commit.cc:564
@@ -1793,8 +1962,11 @@ msgstr "Anzeige der Paketarchitekturen ein-/ausschalten."
 
 #. translators: help text for 'r' option in the 'Continue?' prompt
 #: ../src/solve-commit.cc:568
-msgid "Toggle display of repositories from which the packages will be installed."
-msgstr "Anzeige der Repositories, aus denen die Pakete installiert werden, ein-/ausschalten."
+msgid ""
+"Toggle display of repositories from which the packages will be installed."
+msgstr ""
+"Anzeige der Repositories, aus denen die Pakete installiert werden, ein-/"
+"ausschalten."
 
 #. translators: help text for 'm' option in the 'Continue?' prompt
 #: ../src/solve-commit.cc:570
@@ -1832,14 +2004,17 @@ msgstr "Repository '%s' ist veraltet. Vielleicht hilft es, '%s' auszuführen."
 
 #: ../src/solve-commit.cc:738
 msgid ""
-"The package integrity check failed. This may be a problem with the repository or media. Try one of the following:\n"
+"The package integrity check failed. This may be a problem with the "
+"repository or media. Try one of the following:\n"
 "\n"
 "- just retry previous command\n"
 "- refresh the repositories using 'zypper refresh'\n"
 "- use another installation medium (if e.g. damaged)\n"
 "- use another repository"
 msgstr ""
-"Die Prüfung der Paketintegrität ist fehlgeschlagen. Dies kann ein Problem mit dem Repository oder dem Medium sein. Versuchen Sie eine der folgenden Maßnahmen:\n"
+"Die Prüfung der Paketintegrität ist fehlgeschlagen. Dies kann ein Problem "
+"mit dem Repository oder dem Medium sein. Versuchen Sie eine der folgenden "
+"Maßnahmen:\n"
 "\n"
 " – Das letzte Kommando erneut ausführen.\n"
 " – Das Repository mit 'zypper refresh' aktualisieren.\n"
@@ -1848,15 +2023,26 @@ msgstr ""
 
 #: ../src/solve-commit.cc:752
 msgid "Problem occured during or after installation or removal of packages:"
-msgstr "Ein Problem trat während oder nach der Installation/Entfernung von Paketen auf:"
+msgstr ""
+"Ein Problem trat während oder nach der Installation/Entfernung von Paketen "
+"auf:"
 
 #: ../src/solve-commit.cc:768
-msgid "One of installed patches requires reboot of your machine. Reboot as soon as possible."
-msgstr "Einer der installierten Patches benötigt einen Neustart der Maschine. Starten Sie so schnell wie möglich neu."
+msgid ""
+"One of installed patches requires reboot of your machine. Reboot as soon as "
+"possible."
+msgstr ""
+"Einer der installierten Patches benötigt einen Neustart der Maschine. "
+"Starten Sie so schnell wie möglich neu."
 
 #: ../src/solve-commit.cc:777
-msgid "One of installed patches affects the package manager itself. Run this command once more to install any other needed patches."
-msgstr "Einer der installierten Patches betrifft den Paketverwalter selbst. Führen Sie den Befehl nochmal aus, um jeden anderen benötigten Patch zu installieren."
+msgid ""
+"One of installed patches affects the package manager itself. Run this "
+"command once more to install any other needed patches."
+msgstr ""
+"Einer der installierten Patches betrifft den Paketverwalter selbst. Führen "
+"Sie den Befehl nochmal aus, um jeden anderen benötigten Patch zu "
+"installieren."
 
 #: ../src/solve-commit.cc:794
 msgid "Dependencies of all installed packages are satisfied."
@@ -1954,19 +2140,22 @@ msgstr[1] "Die folgenden Pakete werden durch eine ältere Version ausgetauscht:"
 msgid "The following patch is going to be downgraded:"
 msgid_plural "The following patches are going to be downgraded:"
 msgstr[0] "Der folgende Patch wird durch eine ältere Version ausgetauscht:"
-msgstr[1] "Die folgenden Patches werden durch eine ältere Version ausgetauscht:"
+msgstr[1] ""
+"Die folgenden Patches werden durch eine ältere Version ausgetauscht:"
 
 #: ../src/Summary.cc:473
 msgid "The following pattern is going to be downgraded:"
 msgid_plural "The following patterns are going to be downgraded:"
 msgstr[0] "Das folgende Schema wird durch eine ältere Version ausgetauscht:"
-msgstr[1] "Die folgenden Schemata werden durch eine ältere Version ausgetauscht:"
+msgstr[1] ""
+"Die folgenden Schemata werden durch eine ältere Version ausgetauscht:"
 
 #: ../src/Summary.cc:478
 msgid "The following product is going to be downgraded:"
 msgid_plural "The following products are going to be downgraded:"
 msgstr[0] "Das folgende Produkt wird durch eine ältere Version ausgetauscht:"
-msgstr[1] "Die folgenden Produkte werden durch eine ältere Version ausgetauscht:"
+msgstr[1] ""
+"Die folgenden Produkte werden durch eine ältere Version ausgetauscht:"
 
 #: ../src/Summary.cc:496
 msgid "The following package is going to be reinstalled:"
@@ -2059,7 +2248,9 @@ msgstr "Nach der Operation werden zusätzlich %s belegt."
 
 #: ../src/Summary.cc:655
 msgid "No additional space will be used or freed after the operation."
-msgstr "Kein zusätzlicher Speicherplatz wird nach dieser Operation belegt oder freigegeben."
+msgstr ""
+"Kein zusätzlicher Speicherplatz wird nach dieser Operation belegt oder "
+"freigegeben."
 
 #. TrasnlatorExplanation %s will be substituted by a byte count e.g. 212 K
 #: ../src/Summary.cc:662
@@ -2184,7 +2375,8 @@ msgstr "nicht erforderlich"
 
 #: ../src/update.cc:233
 msgid "The following software management updates will be installed first:"
-msgstr "Die folgenden Softwareverwaltungs-Aktualisierungen werden zuerst installiert:"
+msgstr ""
+"Die folgenden Softwareverwaltungs-Aktualisierungen werden zuerst installiert:"
 
 #: ../src/update.cc:242 ../src/update.cc:498
 msgid "No updates found."
@@ -2268,8 +2460,12 @@ msgstr "Aktualisierung"
 
 #: ../src/update.cc:804
 #, c-format
-msgid "Ignoring %s without argument because similar option with an argument has been specified."
-msgstr "%s ohne Argument wird ignoriert, weil eine ähnliche Option mit einem Argument angegeben wurde."
+msgid ""
+"Ignoring %s without argument because similar option with an argument has "
+"been specified."
+msgstr ""
+"%s ohne Argument wird ignoriert, weil eine ähnliche Option mit einem "
+"Argument angegeben wurde."
 
 #: ../src/update.cc:909
 msgid "No matching issues found."
@@ -2282,16 +2478,22 @@ msgstr "Die folgenden Übereinstimmungen mit Eintragsnummern wurden gefunden:"
 #: ../src/update.cc:929
 msgid "Matches in patch descriptions of the following patches have been found:"
 msgstr ""
+"Übereinstimmungen wurden in den Patch-Beschreibungen der folgenden Patche "
+"gefunden:"
 
 #: ../src/update.cc:1000
 #, c-format
 msgid "Fix for bugzilla issue number %s was not found or is not needed."
-msgstr "Bereinigung für Bugzilla-Eintragsnummer %s wurde nicht gefunden oder ist nicht erforderlich."
+msgstr ""
+"Bereinigung für Bugzilla-Eintragsnummer %s wurde nicht gefunden oder ist "
+"nicht erforderlich."
 
 #: ../src/update.cc:1004
 #, c-format
 msgid "Fix for CVE issue number %s was not found or is not needed."
-msgstr "Bereinigung für CVE-Eintragsnummer %s wurde nicht gefunden oder ist nicht erforderlich."
+msgstr ""
+"Bereinigung für CVE-Eintragsnummer %s wurde nicht gefunden oder ist nicht "
+"erforderlich."
 
 #: ../src/utils/Augeas.cc:26
 msgid "Cannot initialize configuration file parser."
@@ -2308,7 +2510,8 @@ msgstr "Die Konfigurationsdateien konnten nicht analysiert werden."
 # %s is either BOOTP or DHCP
 #: ../src/utils/Augeas.cc:95
 msgid "No configuration file exists or could be parsed."
-msgstr "Eine Konfigurationsdatei existiert nicht oder konnte nicht analysiert werden."
+msgstr ""
+"Eine Konfigurationsdatei existiert nicht oder konnte nicht analysiert werden."
 
 #: ../src/utils/Augeas.cc:98
 msgid "Error parsing zypper.conf:"
@@ -2331,18 +2534,24 @@ msgstr "Fehlendes Argument für "
 #. translators: speaking of two mutually contradicting command line options
 #: ../src/utils/getopt.cc:120
 #, c-format
-msgid "%s used together with %s, which contradict each other. This property will be left unchanged."
-msgstr "%s wurde zusammen mit %s verwendet, welche sich gegenseitig aufheben. Diese Einstellung wird unverändert bleiben."
+msgid ""
+"%s used together with %s, which contradict each other. This property will be "
+"left unchanged."
+msgstr ""
+"%s wurde zusammen mit %s verwendet, welche sich gegenseitig aufheben. Diese "
+"Einstellung wird unverändert bleiben."
 
 #: ../src/utils/messages.cc:22
 msgid "Please file a bug report about this."
-msgstr "Machen Sie bitte darüber unter https://bugzilla.novell.com/ einen Bug-Report."
+msgstr ""
+"Machen Sie bitte darüber unter https://bugzilla.novell.com/ einen Bug-Report."
 
 #. TranslatorExplanation remember not to translate the URL
 #. unless you translate the actual page :)
 #: ../src/utils/messages.cc:25
 msgid "See http://en.opensuse.org/Zypper/Troubleshooting for instructions."
-msgstr "Anweisungen finden Sie unter http://de.opensuse.org/Zypper/Troubleshooting."
+msgstr ""
+"Anweisungen finden Sie unter http://de.opensuse.org/Zypper/Troubleshooting."
 
 #: ../src/utils/messages.cc:40 ../src/utils/messages.cc:50
 #: ../src/utils/messages.cc:68 ../src/Zypper.cc:3823
@@ -2364,8 +2573,15 @@ msgstr "Die Option '--%s' hat momentan keinen Effekt."
 
 #: ../src/utils/messages.cc:78
 #, c-format
-msgid "You have chosen to ignore a problem with download or installation of a package which might lead to broken dependencies of other packages. It is recommended to run '%s' after the operation has finished."
-msgstr "Sie haben sich dafür entschieden ein Problem mit dem Herunterladen oder der Installation eines Pakets zu ignorieren, was möglicherweise zu beschädigten Abhängigkeiten anderer Pakete führen kann. Es wird empfohlen '%s' zu starten, nachdem die Operation beendet wurde."
+msgid ""
+"You have chosen to ignore a problem with download or installation of a "
+"package which might lead to broken dependencies of other packages. It is "
+"recommended to run '%s' after the operation has finished."
+msgstr ""
+"Sie haben sich dafür entschieden ein Problem mit dem Herunterladen oder der "
+"Installation eines Pakets zu ignorieren, was möglicherweise zu beschädigten "
+"Abhängigkeiten anderer Pakete führen kann. Es wird empfohlen '%s' zu "
+"starten, nachdem die Operation beendet wurde."
 
 #: ../src/utils/misc.cc:116
 msgid "package"
@@ -2426,7 +2642,9 @@ msgstr "Angegebener URI ist ungültig"
 
 #: ../src/utils/misc.cc:283
 msgid "Problem copying the specified RPM file to the cache directory."
-msgstr "Problem beim Kopieren der festgelegten RPM-Datei zum Zwischenspeicherverzeichnis."
+msgstr ""
+"Problem beim Kopieren der festgelegten RPM-Datei zum "
+"Zwischenspeicherverzeichnis."
 
 #: ../src/utils/misc.cc:284
 msgid "Perhaps you are running out of disk space."
@@ -2490,8 +2708,11 @@ msgstr "Sie möchten evtl einige dieser Prozesse neu starten."
 
 #: ../src/utils/misc.cc:476
 #, c-format
-msgid "See '%s' for information about the meaning of values in the above table."
-msgstr "Siehe '%s' zu Informationen über die Bedeutung der Werte in der obigen Tabelle."
+msgid ""
+"See '%s' for information about the meaning of values in the above table."
+msgstr ""
+"Siehe '%s' zu Informationen über die Bedeutung der Werte in der obigen "
+"Tabelle."
 
 #: ../src/utils/pager.cc:37
 #, c-format
@@ -2500,11 +2721,15 @@ msgstr "Drücken Sie '%c', um den Pager zu beenden."
 
 #: ../src/utils/pager.cc:47
 msgid "Use arrows or pgUp/pgDown keys to scroll the text by lines or pages."
-msgstr "Verwenden Sie die Pfeiltasten oder die Tasten BildAuf/BildAb, um den Text zeilen- oder seitenweise zu blättern."
+msgstr ""
+"Verwenden Sie die Pfeiltasten oder die Tasten BildAuf/BildAb, um den Text "
+"zeilen- oder seitenweise zu blättern."
 
 #: ../src/utils/pager.cc:49
 msgid "Use the Enter or Space key to scroll the text by lines or pages."
-msgstr "Verwenden Sie die Enter- oder Leerzeichen-Taste, um den Text zeilen- oder seitenweise zu blättern."
+msgstr ""
+"Verwenden Sie die Enter- oder Leerzeichen-Taste, um den Text zeilen- oder "
+"seitenweise zu blättern."
 
 # For consistency, use the capitalized form #345187
 #: ../src/utils/prompt.cc:147 ../src/utils/prompt.cc:275
@@ -2551,9 +2776,11 @@ msgstr "Ungültige Antwort '%s'."
 
 #. translators: the %s are: 'y', 'yes' (translated), 'n', and 'no' (translated).
 #: ../src/utils/prompt.cc:344
-#, fuzzy, c-format
+#, c-format
 msgid "Enter '%s' for '%s' or '%s' for '%s' if nothing else works for you."
-msgstr "Geben Sie 'j' für '%s' oder 'n' für '%s' ein, wenn nichts anderes für Sie funktioniert."
+msgstr ""
+"Geben Sie '%s' für '%s' oder %s' für '%s' ein, wenn nichts anderes für Sie "
+"funktioniert."
 
 #: ../src/utils/prompt.cc:358
 #, c-format
@@ -2561,7 +2788,8 @@ msgid ""
 "If you run zypper without a terminal, use '%s' global\n"
 "option to make zypper use default answers to prompts."
 msgstr ""
-"Wenn Sie Zypper ohne ein Terminal ausführen, verwenden Sie die globale Option '%s',\n"
+"Wenn Sie Zypper ohne ein Terminal ausführen, verwenden Sie die globale "
+"Option '%s',\n"
 "damit Zypper die Standardantworten bei Fragen verwendet."
 
 #. TranslatorExplanation These are reasons for various failures.
@@ -2605,7 +2833,8 @@ msgstr ""
 "  Globale Optionen:\n"
 "\t--help, -h\t\tHilfe.\n"
 "\t--version, -V\t\tAusgabe der Versionsnummer.\n"
-"\t--config, -c <file>\tangegebene Konfig-Datei anstelle der Standard-Datei benutzen.\n"
+"\t--config, -c <file>\tangegebene Konfig-Datei anstelle der Standard-Datei "
+"benutzen.\n"
 "\t--quiet, -q\t\tNormale Ausgabe unterdrücken, nur\n"
 "\t\t\t\tFehlermeldungen ausgeben.\n"
 "\t--verbose, -v\t\tGesprächigkeit erhöhen.\n"
@@ -2615,10 +2844,13 @@ msgstr ""
 "\t--non-interactive, -n\tNicht fragen, automatisch die\n"
 "\t\t\t\tStandardantworten annehmen.\n"
 "\t--xmlout, -x\t\tZur XML-Ausgabe umschalten.\n"
-"\t--reposd-dir, -D <dir>\tAlternatives Repository-Definition-Files-Verzeichnis\n"
+"\t--reposd-dir, -D <dir>\tAlternatives Repository-Definition-Files-"
+"Verzeichnis\n"
 "\t\t\t\tverwenden.\n"
-"\t--cache-dir, -C <dir>\tAlternatives Meta-Data-Cache-Verzeichnis verwenden.\n"
-"\t--raw-cache-dir <dir>\tAlternatives Raw-Meta-Data-Cache-Verzeichnis verwenden.\n"
+"\t--cache-dir, -C <dir>\tAlternatives Meta-Data-Cache-Verzeichnis "
+"verwenden.\n"
+"\t--raw-cache-dir <dir>\tAlternatives Raw-Meta-Data-Cache-Verzeichnis "
+"verwenden.\n"
 
 #: ../src/Zypper.cc:172
 msgid ""
@@ -2734,7 +2966,8 @@ msgid ""
 "\tpatch-check, pchk\tCheck for patches.\n"
 msgstr ""
 "     Aktualisierungsverwaltung:\n"
-"\tupdate, up\t\tAlle installierten Pakete mit neueren Versionen aktualisieren.\n"
+"\tupdate, up\t\tAlle installierten Pakete mit neueren Versionen "
+"aktualisieren.\n"
 "\tlist-updates, lu\tVerfügbare Aktualisierungen auflisten.\n"
 "\tpatch\t\t\tBenötigte Patches installieren.\n"
 "\tlist-patches, lp\tBenötigte Patches auflisten.\n"
@@ -2758,14 +2991,18 @@ msgstr ""
 "     Anfragen:\n"
 "\tsearch, se\t\tNach Paketen suchen, die zu einem Schema passen.\n"
 "\tinfo, if\t\tVollständige Informationen für festgelegte Pakete anzeigen.\n"
-"\tpatch-info\t\tVollständige Informationen für festgelegte Patches anzeigen.\n"
-"\tpattern-info\t\tVollständige Informationen für festgelegte Schemata anzeigen.\n"
-"\tproduct-info\t\tVollständige Informationen für festgelegte Produkte anzeigen.\n"
+"\tpatch-info\t\tVollständige Informationen für festgelegte Patches "
+"anzeigen.\n"
+"\tpattern-info\t\tVollständige Informationen für festgelegte Schemata "
+"anzeigen.\n"
+"\tproduct-info\t\tVollständige Informationen für festgelegte Produkte "
+"anzeigen.\n"
 "\tpatches, pch\t\tAlle verfügbaren Patches auflisten.\n"
 "\tpackages, pa\t\tAlle verfügbaren Pakete auflisten.\n"
 "\tpatterns, pt\t\tAlle verfügbaren Schemata auflisten.\n"
 "\tproducts, pd\t\tAlle verfügbaren Produkte auflisten.\n"
-"\twhat-provides, wp\tPakete auflisten, die die festgelegte Fähigkeit anbieten.\n"
+"\twhat-provides, wp\tPakete auflisten, die die festgelegte Fähigkeit "
+"anbieten.\n"
 
 #: ../src/Zypper.cc:248
 msgid ""
@@ -2808,7 +3045,9 @@ msgstr ""
 #: ../src/Zypper.cc:288
 #, c-format
 msgid "Type '%s' to get a list of global options and commands."
-msgstr "Geben Sie '%s' ein, um eine Liste der globalen Optionen und Kommandos zu erhalten."
+msgstr ""
+"Geben Sie '%s' ein, um eine Liste der globalen Optionen und Kommandos zu "
+"erhalten."
 
 #. translators: %s is "help" or "zypper help" depending on whether
 #. zypper shell is running or not
@@ -2846,7 +3085,8 @@ msgstr "Der in der Option --root festgelegte Pfad muss absolut sein."
 
 #: ../src/Zypper.cc:501
 msgid "Repositories disabled, using the database of installed packages only."
-msgstr "Repositories deaktivert, verwende nur die Datenbank der installierten Pakete."
+msgstr ""
+"Repositories deaktivert, verwende nur die Datenbank der installierten Pakete."
 
 #: ../src/Zypper.cc:513
 msgid "Autorefresh disabled."
@@ -2890,7 +3130,8 @@ msgid ""
 "-r, --repo <alias|#|URI>    Load only the specified repository.\n"
 "-t, --type <type>           Type of package (%s).\n"
 "                            Default: %s.\n"
-"-n, --name                  Select packages by plain name, not by capability.\n"
+"-n, --name                  Select packages by plain name, not by "
+"capability.\n"
 "-C, --capability            Select packages by capability.\n"
 "-f, --force                 Reinstall the package if the exact version is\n"
 "                            available in repositories.\n"
@@ -2899,7 +3140,8 @@ msgid ""
 "                            confirmation prompt.\n"
 "                            See 'man zypper' for more details.\n"
 "    --debug-solver          Create solver test case for debugging.\n"
-"    --no-recommends         Do not install recommended packages, only required.\n"
+"    --no-recommends         Do not install recommended packages, only "
+"required.\n"
 "    --recommends            Install also recommended packages in addition\n"
 "                            to the required.\n"
 "    --no-force-resolution   Do not force the solver to find solution,\n"
@@ -2911,24 +3153,36 @@ msgid ""
 msgstr ""
 "install (in) [Optionen] <Fähigkeit|RPM-Datei-URI> ...\n"
 "\n"
-"Pakete mit festgelegten Fähigkeiten oder RPM-Dateien mit festgelegtem Ort installieren. Eine Fähigkeit ist NAME[OP<VERSION>], wobei OP eines von <, <=, =, >=, > ist.\n"
+"Pakete mit festgelegten Fähigkeiten oder RPM-Dateien mit festgelegtem Ort "
+"installieren. Eine Fähigkeit ist NAME[OP<VERSION>], wobei OP eines von <, "
+"<=, =, >=, > ist.\n"
 "\n"
 "  Kommandooptionen:\n"
-"-r, --repo <Alias|#|URI>        Nur Pakete aus den festgelegten Repositories installieren.\n"
+"-r, --repo <Alias|#|URI>        Nur Pakete aus den festgelegten Repositories "
+"installieren.\n"
 "-t, --type <Typ>                Pakettyp (%s).\n"
 "                                Standard: %s.\n"
-"-n, --name                      Paket durch einfachen Namen, nicht durch Fähigkeit, wählen.\n"
+"-n, --name                      Paket durch einfachen Namen, nicht durch "
+"Fähigkeit, wählen.\n"
 "-C, --capability                Paket durch Fähigkeit wählen.\n"
-"-f, --force                     Selbst wenn das Element bereits installiert ist,\n"
+"-f, --force                     Selbst wenn das Element bereits installiert "
+"ist,\n"
 "                                installieren (Reinstallation).\n"
-"-l, --auto-agree-with-licenses  Automatisch 'ja' sagen zu Dittparteilizenz-Bestätigungsaufforderungen.\n"
+"-l, --auto-agree-with-licenses  Automatisch 'ja' sagen zu Dittparteilizenz-"
+"Bestätigungsaufforderungen.\n"
 "                                Siehe 'man zypper' für mehr Details.\n"
-"    --debug-solver              Auflöser-Testfall für das Debugging erstellen.\n"
-"    --no-recommends             Keine empfohlenen Pakete installieren, nur benötigte.\n"
-"    --recommends      Zusätzlich  zu den erforderlichen auch empfohlene Pakete installieren.\n"
-"   --no-force-resolution       Den Auflöser nicht zur Suche einer Lösung zwingen, ihn fragen lassen.\n"
-"-R,    --force-resolution          Den Auflöser zur Suche einer Lösung zwingen (selbst eine aggressive).\n"
-"-D, --dry-run                   Die Installation proben, nicht wirklich installieren.\n"
+"    --debug-solver              Auflöser-Testfall für das Debugging "
+"erstellen.\n"
+"    --no-recommends             Keine empfohlenen Pakete installieren, nur "
+"benötigte.\n"
+"    --recommends      Zusätzlich  zu den erforderlichen auch empfohlene "
+"Pakete installieren.\n"
+"   --no-force-resolution       Den Auflöser nicht zur Suche einer Lösung "
+"zwingen, ihn fragen lassen.\n"
+"-R,    --force-resolution          Den Auflöser zur Suche einer Lösung "
+"zwingen (selbst eine aggressive).\n"
+"-D, --dry-run                   Die Installation proben, nicht wirklich "
+"installieren.\n"
 
 #. TranslatorExplanation the first %s = "package, patch, pattern, product"
 #. and the second %s = "package"
@@ -2942,31 +3196,42 @@ msgid ""
 "of <, <=, =, >=, >.\n"
 "\n"
 "  Command options:\n"
-"-r, --repo <alias|#|URI>        Operate only with packages from the specified repository.\n"
+"-r, --repo <alias|#|URI>        Operate only with packages from the "
+"specified repository.\n"
 "-t, --type <type>               Type of package (%s).\n"
 "                                Default: %s.\n"
-"-n, --name                      Select packages by plain name, not by capability.\n"
+"-n, --name                      Select packages by plain name, not by "
+"capability.\n"
 "-C, --capability                Select packages by capability.\n"
 "    --debug-solver              Create solver test case for debugging.\n"
-"-R, --no-force-resolution       Do not force the solver to find solution, let it ask.\n"
-"    --force-resolution          Force the solver to find a solution (even an agressive).\n"
+"-R, --no-force-resolution       Do not force the solver to find solution, "
+"let it ask.\n"
+"    --force-resolution          Force the solver to find a solution (even an "
+"agressive).\n"
 "-D, --dry-run                   Test the removal, do not actually remove.\n"
 msgstr ""
 "remove (rm) [Optionen] <Fähigkeit> ...\n"
 "\n"
 "Pakete mit festgelegten Fähigkeiten entfernen.\n"
-" Eine Fähigkeit ist NAME[OP<VERSION>], wobei OP eines von <, <=, =, >=, > ist.\n"
+" Eine Fähigkeit ist NAME[OP<VERSION>], wobei OP eines von <, <=, =, >=, > "
+"ist.\n"
 "\n"
 "  Kommandooptionen:\n"
-"-r, --repo <Alias|#|URI>        Nur mit Paketen des festgelegten Repositorys operieren.\n"
+"-r, --repo <Alias|#|URI>        Nur mit Paketen des festgelegten Repositorys "
+"operieren.\n"
 "-t, --type <Typ>                Pakettyp (%s).\n"
 "                                Standard: %s.\n"
-"-n, --name                      Paket durch einfachen Namen wählen, nicht durch Fähigkeit.\n"
+"-n, --name                      Paket durch einfachen Namen wählen, nicht "
+"durch Fähigkeit.\n"
 "-C, --capability                Paket durch Fähigkeit wählen.\n"
-"    --debug-solver              Auflöser-Testfall für das Debugging erstellen.\n"
-"-R, --no-force-resolution       Den Auflöser nicht zur Suche einer Lösung zwingen, ihn fragen lassen.\n"
-"    --force-resolution          Den Auflöser zur Suche einer Lösung zwingen (selbst eine aggressive).\n"
-"-D, --dry-run                   Die Entfernung proben, nicht wirklich entfernen.\n"
+"    --debug-solver              Auflöser-Testfall für das Debugging "
+"erstellen.\n"
+"-R, --no-force-resolution       Den Auflöser nicht zur Suche einer Lösung "
+"zwingen, ihn fragen lassen.\n"
+"    --force-resolution          Den Auflöser zur Suche einer Lösung zwingen "
+"(selbst eine aggressive).\n"
+"-D, --dry-run                   Die Entfernung proben, nicht wirklich "
+"entfernen.\n"
 
 #: ../src/Zypper.cc:1002
 msgid ""
@@ -2975,7 +3240,8 @@ msgid ""
 "Install specified source packages and their build dependencies.\n"
 "\n"
 "  Command options:\n"
-"-d, --build-deps-only    Install only build dependencies of specified packages.\n"
+"-d, --build-deps-only    Install only build dependencies of specified "
+"packages.\n"
 "-D, --no-build-deps      Don't install build dependencies.\n"
 "-r, --repo <alias|#|URI> Install packages only from specified repositories.\n"
 msgstr ""
@@ -2984,19 +3250,23 @@ msgstr ""
 "Festgelegte Quellpakete und ihre Erstellungs-Abhängigkeiten installieren.\n"
 "\n"
 "  Kommandooptionen:\n"
-"-d, --build-deps-only    Nur Erstellungs-Abhängigkeiten der festgelegten Pakete installieren.\n"
+"-d, --build-deps-only    Nur Erstellungs-Abhängigkeiten der festgelegten "
+"Pakete installieren.\n"
 "-D, --no-build-deps      Keine Erstellungs-Abhängigkeiten installieren.\n"
-"-r, --repo <Alias|#|URI> Nur Pakete aus den festgelegten Repositories installieren.\n"
+"-r, --repo <Alias|#|URI> Nur Pakete aus den festgelegten Repositories "
+"installieren.\n"
 
 #: ../src/Zypper.cc:1031
 msgid ""
 "verify (ve) [options]\n"
 "\n"
-"Check whether dependencies of installed packages are satisfied and repair eventual dependency problems.\n"
+"Check whether dependencies of installed packages are satisfied and repair "
+"eventual dependency problems.\n"
 "\n"
 "  Command options:\n"
 "-r, --repo <alias|#|URI>    Load only the specified repository.\n"
-"    --no-recommends         Do not install recommended packages, only required.\n"
+"    --no-recommends         Do not install recommended packages, only "
+"required.\n"
 "    --recommends            Install also recommended packages in addition\n"
 "                            to the required.\n"
 "-D, --dry-run               Test the repair, do not actually do anything to\n"
@@ -3005,34 +3275,46 @@ msgid ""
 msgstr ""
 "verify (ve) [Optionen]\n"
 "\n"
-"Überprüfung auf aufgelöste Abhängigkeiten der installierten Pakete und Reparatur eventueller Abhängigkeitsprobleme.\n"
+"Überprüfung auf aufgelöste Abhängigkeiten der installierten Pakete und "
+"Reparatur eventueller Abhängigkeitsprobleme.\n"
 "\n"
 "  Kommandooptionen:\n"
 "-r, --repo <Alias|#|URI> Nur die festgelegten Repositories verwenden\n"
-"    --no-recommends     Keine empfohlenen, nur erforderliche Pakete installieren.\n"
-"    --recommends          Zusätzlich zu den erforderlichen auch empfohlene Pakete installieren.\n"
+"    --no-recommends     Keine empfohlenen, nur erforderliche Pakete "
+"installieren.\n"
+"    --recommends          Zusätzlich zu den erforderlichen auch empfohlene "
+"Pakete installieren.\n"
 "-D, --dry-run            Die Reparatur proben, nicht wirklich reparieren.\n"
-"-d, --download-only      Benötigte Pakete nur herunterladen, nicht installieren.\n"
+"-d, --download-only      Benötigte Pakete nur herunterladen, nicht "
+"installieren.\n"
 
 #: ../src/Zypper.cc:1060
 msgid ""
 "install-new-recommends (inr) [options]\n"
 "\n"
-"Install newly added packages recommended by already installed packages. This can typically be used to install new language packages or drivers for newly added hardware.\n"
+"Install newly added packages recommended by already installed packages. This "
+"can typically be used to install new language packages or drivers for newly "
+"added hardware.\n"
 "\n"
 "  Command options:\n"
-"-r, --repo <alias|#|URI> Use only specified repositories to install packages.\n"
-"-D, --dry-run            Test the installation, do not actually install anything.\n"
+"-r, --repo <alias|#|URI> Use only specified repositories to install "
+"packages.\n"
+"-D, --dry-run            Test the installation, do not actually install "
+"anything.\n"
 "-d, --download-only      Only download the packages, do not install.\n"
 "    --debug-solver       Create solver test case for debugging.\n"
 msgstr ""
 "install-new-recommends (inr) [Optionen]\n"
 "\n"
-"Neu hinzugefügte Pakete installieren, die durch bereits installierte Pakete vorgeschlagen wurden. Dies wird typischerweise verwendet, um neue Sprachpakete oder Treiber für neu hinzugefügte Hardware zu installieren.\n"
+"Neu hinzugefügte Pakete installieren, die durch bereits installierte Pakete "
+"vorgeschlagen wurden. Dies wird typischerweise verwendet, um neue "
+"Sprachpakete oder Treiber für neu hinzugefügte Hardware zu installieren.\n"
 "\n"
 "  Kommandooptionen:\n"
-"-r, --repo <Alias|#|URI> Nur festgelegte Repositories verwenden, um Pakete zu installieren.\n"
-"-D, --dry-run            Die Installation proben, nicht wirklich installieren.\n"
+"-r, --repo <Alias|#|URI> Nur festgelegte Repositories verwenden, um Pakete "
+"zu installieren.\n"
+"-D, --dry-run            Die Installation proben, nicht wirklich "
+"installieren.\n"
 "    --debug-solver       Auflöser-Testfall für das Debugging erstellen.\n"
 
 #. translators: the %s = "ris" (the only service type currently supported)
@@ -3055,7 +3337,8 @@ msgstr ""
 "  Kommandooptionen:\n"
 "-t, --type <Typ>        Typ des Dienstes (%s).\n"
 "-d, --disable           Den Dienst als deaktiviert hinzufügen.\n"
-"-n, --name  <alias>            Beschreibenden Namen für den Dienst festlegen.\n"
+"-n, --name  <alias>            Beschreibenden Namen für den Dienst "
+"festlegen.\n"
 
 #. TranslatorExplanation the %s = "yast2, rpm-md, plaindir"
 #: ../src/Zypper.cc:1110
@@ -3097,8 +3380,10 @@ msgid ""
 "-I, --ar-to-disable <alias>    Add a RIS service repository to disable.\n"
 "-j, --rr-to-enable <alias>     Remove a RIS service repository to enable.\n"
 "-J, --rr-to-disable <alias>    Remove a RIS service repository to disable.\n"
-"-k, --cl-to-enable             Clear the list of RIS repositories to enable.\n"
-"-K, --cl-to-disable            Clear the list of RIS repositories to disable.\n"
+"-k, --cl-to-enable             Clear the list of RIS repositories to "
+"enable.\n"
+"-K, --cl-to-disable            Clear the list of RIS repositories to "
+"disable.\n"
 "\n"
 "-a, --all                      Apply changes to all services.\n"
 "-l, --local                    Apply changes to all local services.\n"
@@ -3108,26 +3393,39 @@ msgstr ""
 "modifyservice (ms) <Optionen> <Alias|#|URI>\n"
 "modifyservice (ms) <Optionen> <%s>\n"
 "\n"
-"Eigenschaften, der durch Alias, Nummer, URI oder durch die Sammeloption '%s' festgelegten Dienste modifizieren.\n"
+"Eigenschaften, der durch Alias, Nummer, URI oder durch die Sammeloption '%s' "
+"festgelegten Dienste modifizieren.\n"
 "\n"
 "  Kommandooptionen:\n"
-"-d, --disable                  Den Dienst deaktivieren (aber nicht entfernen).\n"
+"-d, --disable                  Den Dienst deaktivieren (aber nicht "
+"entfernen).\n"
 "-e, --enable                   Einen deaktivierten Dienst aktivieren.\n"
 "-r, --refresh                  Autoaktualisierung des Dienstes aktivieren.\n"
-"-R, --no-refresh               Autoaktualisierung des Dienstes deaktivieren.\n"
-"-n, --name                     Einen beschreibenden Namen für den Dienst setzen.\n"
+"-R, --no-refresh               Autoaktualisierung des Dienstes "
+"deaktivieren.\n"
+"-n, --name                     Einen beschreibenden Namen für den Dienst "
+"setzen.\n"
 "\n"
-"-i, --ar-to-enable <Alias>     Ein zu aktivierendes RIS-Dienst-Repository hinzufügen.\n"
-"-I, --ar-to-disable <Alias>    Ein zu deaktivierendes RIS-Dienst-Repository hinzufügen.\n"
-"-j, --rr-to-enable <Alias>     Ein zu aktivierendes RIS-Dienst-Repository entfernen.\n"
-"-J, --rr-to-disable <Alias>    Ein zu deaktivierendes RIS-Dienst-Repository entfernen.\n"
-"-k, --cl-to-enable             Die Liste der zu aktivierenden RIS-Repositories löschen.\n"
-"-K, --cl-to-disable            Die Liste der zu deaktivierenden RIS-Repositories löschen.\n"
+"-i, --ar-to-enable <Alias>     Ein zu aktivierendes RIS-Dienst-Repository "
+"hinzufügen.\n"
+"-I, --ar-to-disable <Alias>    Ein zu deaktivierendes RIS-Dienst-Repository "
+"hinzufügen.\n"
+"-j, --rr-to-enable <Alias>     Ein zu aktivierendes RIS-Dienst-Repository "
+"entfernen.\n"
+"-J, --rr-to-disable <Alias>    Ein zu deaktivierendes RIS-Dienst-Repository "
+"entfernen.\n"
+"-k, --cl-to-enable             Die Liste der zu aktivierenden RIS-"
+"Repositories löschen.\n"
+"-K, --cl-to-disable            Die Liste der zu deaktivierenden RIS-"
+"Repositories löschen.\n"
 "\n"
 "-a, --all                      Änderungen auf alle Dienste anwenden.\n"
-"-l, --local                    Änderungen auf alle lokalen Dienste anwenden.\n"
-"-t, --remote                   Änderungen auf alle entfernten Dienste anwenden.\n"
-"-m, --medium-type <Typ>        Änderungen auf Dienste des festgelegten Typs anwenden.\n"
+"-l, --local                    Änderungen auf alle lokalen Dienste "
+"anwenden.\n"
+"-t, --remote                   Änderungen auf alle entfernten Dienste "
+"anwenden.\n"
+"-m, --medium-type <Typ>        Änderungen auf Dienste des festgelegten Typs "
+"anwenden.\n"
 
 #: ../src/Zypper.cc:1194
 msgid ""
@@ -3151,8 +3449,10 @@ msgstr ""
 "  Kommandooptionen:\n"
 "-u, --uri                 Auch Basis-URI der Repositories anzeigen.\n"
 "-p, --priority            Auch Repository-Priorität anzeigen.\n"
-"-d, --details             Mehr Informationen wie URI, Priorität, Typ, etc. anzeigen.\n"
-"-r, --with-repos          Auch zu den Diensten gehörige Repositories anzeigen.\n"
+"-d, --details             Mehr Informationen wie URI, Priorität, Typ, etc. "
+"anzeigen.\n"
+"-r, --with-repos          Auch zu den Diensten gehörige Repositories "
+"anzeigen.\n"
 "-P, --sort-by-priority    Die Liste nach Repository-Priorität sortieren.\n"
 "-U, --sort-by-uri         Die Liste nach URI sortieren.\n"
 "-N, --sort-by-name        Die Liste nach Name sortieren.\n"
@@ -3180,7 +3480,8 @@ msgid ""
 "addrepo (ar) [options] <URI> <alias>\n"
 "addrepo (ar) [options] <file.repo>\n"
 "\n"
-"Add a repository to the sytem. The repository can be specified by its URI or can be read from specified .repo file (even remote).\n"
+"Add a repository to the sytem. The repository can be specified by its URI or "
+"can be read from specified .repo file (even remote).\n"
 "\n"
 "  Command options:\n"
 "-r, --repo <file.repo>  Just another means to specify a .repo file to read.\n"
@@ -3196,14 +3497,16 @@ msgstr ""
 "addrepo (ar) [Optionen] <URI> <Alias>\n"
 "addrepo (ar) [Optionen] <Datei.repo>\n"
 "\n"
-"Dem System ein Repository hinzufügen. Das Repository kann durch seinen URI oder die angegebene (auch ferne) .repo-Datei spezifiziert werden.\n"
+"Dem System ein Repository hinzufügen. Das Repository kann durch seinen URI "
+"oder die angegebene (auch ferne) .repo-Datei spezifiziert werden.\n"
 "\n"
 "  Kommandooptionen:\n"
 "-r, --repo <Datei.repo> Eine zu lesende .repo-Datei festlegen.\n"
 "-t, --type <Typ>        Typ des Repositorys (%s).\n"
 "-d, --disable           Das Repository als deaktiviert hinzufügen.\n"
 "-c, --check             URI überprüfen.\n"
-"-C, --no-check          URI nicht überprüfen, später während der Aktualisierung überprüfen.\n"
+"-C, --no-check          URI nicht überprüfen, später während der "
+"Aktualisierung überprüfen.\n"
 "-n, --name              Beschreibenden Namen für das Repository festlegen.\n"
 "-k, --keep-packages     Zwischenspeichern von RPM-Dateien aktivieren.\n"
 "-K, --no-keep-packages  Zwischenspeichern von RPM-Dateien deaktivieren.\n"
@@ -3229,7 +3532,8 @@ msgid ""
 "List all defined repositories.\n"
 "\n"
 "  Command options:\n"
-"-e, --export <FILE.repo>  Export all defined repositories as a single local .repo file.\n"
+"-e, --export <FILE.repo>  Export all defined repositories as a single local ."
+"repo file.\n"
 "-u, --uri                 Show also base URI of repositories.\n"
 "-p, --priority            Show also repository priority.\n"
 "-d, --details             Show more information like URI, priority, type.\n"
@@ -3247,7 +3551,8 @@ msgstr ""
 "                          eine einfache lokale .repo-Datei exportieren.\n"
 "-u, --uri                 Auch die Basis-URI der Repositories anzeigen.\n"
 "-p, --priority            Auch die Repository-Priorität anzeigen.\n"
-"-d, --details             Mehr Informationen, wie URI, Priorität, Typ, etc. anzeigen.\n"
+"-d, --details             Mehr Informationen, wie URI, Priorität, Typ, etc. "
+"anzeigen.\n"
 "-U, --sort-by-uri         Die Liste nach URI sortieren.\n"
 "-P, --sort-by-priority    Die Liste nach Repository-Priorität sortieren.\n"
 "-A, --sort-by-alias       Die Liste nach Alias sortieren.\n"
@@ -3257,7 +3562,8 @@ msgstr ""
 #. FIXME add this to the rest after 11.2
 #: ../src/Zypper.cc:1322
 msgid "-s, --service             Show also alias of parent service.\n"
-msgstr "-s, --service             Auch Alias des übergeordneten Dienstes anzeigen.\n"
+msgstr ""
+"-s, --service             Auch Alias des übergeordneten Dienstes anzeigen.\n"
 
 #: ../src/Zypper.cc:1337
 msgid ""
@@ -3287,7 +3593,8 @@ msgid ""
 msgstr ""
 "renamerepo (nr) [Optionen] <Alias|#|URI> <Neuer-Alias>\n"
 "\n"
-"Neuen Alias zu dem durch Alias, Nummer oder URI festgelegten Repository zuweisen.\n"
+"Neuen Alias zu dem durch Alias, Nummer oder URI festgelegten Repository "
+"zuweisen.\n"
 "\n"
 "Dieses Kommando hat keine weiteren Optionen.\n"
 
@@ -3299,7 +3606,8 @@ msgid ""
 "modifyrepo (mr) <options> <alias|#|URI> ...\n"
 "modifyrepo (mr) <options> <%s>\n"
 "\n"
-"Modify properties of repositories specified by alias, number, or URI, or by the\n"
+"Modify properties of repositories specified by alias, number, or URI, or by "
+"the\n"
 "'%s' aggregate options.\n"
 "\n"
 "  Command options:\n"
@@ -3320,51 +3628,64 @@ msgstr ""
 "modifyrepo (mr) <Optionen> <Alias|#|URI>\n"
 "modifyrepo (mr) <Optionen> <%s>\n"
 "\n"
-"Eigenschaften der Repositories, die durch Alias, Nummer, URI oder durch die Sammeloptionen '%s' festgelegt\n"
+"Eigenschaften der Repositories, die durch Alias, Nummer, URI oder durch die "
+"Sammeloptionen '%s' festgelegt\n"
 " wurden. modifizieren.\n"
 "\n"
 "  Kommandooptionen:\n"
-"-d, --disable             Das Repository deaktivieren (aber nicht entfernen).\n"
+"-d, --disable             Das Repository deaktivieren (aber nicht "
+"entfernen).\n"
 "-e, --enable              Ein deaktiviertes Repository aktivieren.\n"
 "-r, --refresh             Autoaktualisierung des Repositorys aktivieren.\n"
 "-R, --no-refresh          Autoaktualisierung des Repositorys deaktivieren.\n"
-"-n, --name                Einen beschreibenden Namen für das Repository setzen.\n"
+"-n, --name                Einen beschreibenden Namen für das Repository "
+"setzen.\n"
 "-p, --priority <1-99>     Priorität des Repositorys setzen.\n"
 "-k, --keep-packages       Zwischenspeichern von RPM-Dateien aktivieren.\n"
 "-K, --no-keep-packages    Zwischenspeichern von RPM-Dateien deaktivieren.\n"
 "\n"
 "-a, --all                 Änderungen auf alle Repositories anwenden.\n"
-"-l, --local               Änderungen auf alle lokalen Repositories anwenden.\n"
-"-t, --remote              Änderungen auf alle entfernten Repositories anwenden.\n"
-"-m, --medium-type <Typ>   Änderungen auf Repositories des festgelegten Typs anwenden.\n"
+"-l, --local               Änderungen auf alle lokalen Repositories "
+"anwenden.\n"
+"-t, --remote              Änderungen auf alle entfernten Repositories "
+"anwenden.\n"
+"-m, --medium-type <Typ>   Änderungen auf Repositories des festgelegten Typs "
+"anwenden.\n"
 
 #: ../src/Zypper.cc:1427
 msgid ""
 "refresh (ref) [alias|#|URI] ...\n"
 "\n"
-"Refresh repositories specified by their alias, number or URI. If none are specified, all enabled repositories will be refreshed.\n"
+"Refresh repositories specified by their alias, number or URI. If none are "
+"specified, all enabled repositories will be refreshed.\n"
 "\n"
 "  Command options:\n"
 "-f, --force              Force a complete refresh.\n"
 "-b, --force-build        Force rebuild of the database.\n"
 "-d, --force-download     Force download of raw metadata.\n"
 "-B, --build-only         Only build the database, don't download metadata.\n"
-"-D, --download-only      Only download raw metadata, don't build the database.\n"
+"-D, --download-only      Only download raw metadata, don't build the "
+"database.\n"
 "-r, --repo <alias|#|URI> Refresh only specified repositories.\n"
 "-s, --services           Refresh also services before refreshing repos.\n"
 msgstr ""
 "refresh (ref) [Alias|#|URI] ...\n"
 "\n"
-"Repositories, die durch Alias, Nummer oder URI festgelegt wurden aktualisieren. Wenn keine festgelegt wurden, werden alle aktivierten Repositories aktualisiert.\n"
+"Repositories, die durch Alias, Nummer oder URI festgelegt wurden "
+"aktualisieren. Wenn keine festgelegt wurden, werden alle aktivierten "
+"Repositories aktualisiert.\n"
 "\n"
 "  Kommandooptionen:\n"
 "-f, --force              Eine komplette Aktualisierung erzwingen.\n"
 "-b, --force-build        Einen Neubau der Datenbank erzwingen.\n"
 "-d, --force-download     Herunterladen von Rohmetadaten erzwingen.\n"
-"-B, --build-only         Nur die Datenbank erstellen, keine Metadaten herunterladen.\n"
-"-D, --download-only      Nur Rohmetadaten herunterladen, nicht die Datenbank neu erstellen.\n"
+"-B, --build-only         Nur die Datenbank erstellen, keine Metadaten "
+"herunterladen.\n"
+"-D, --download-only      Nur Rohmetadaten herunterladen, nicht die Datenbank "
+"neu erstellen.\n"
 "-r, --repo <Alias|#|URI> Nur festgelegte Repositories aktualisieren.\n"
-"-s, --services           Aktualisiert erst die Dienste, dann die Repositories.\n"
+"-s, --services           Aktualisiert erst die Dienste, dann die "
+"Repositories.\n"
 
 #: ../src/Zypper.cc:1456
 msgid ""
@@ -3400,11 +3721,14 @@ msgid ""
 "  Command options:\n"
 "-t, --type <type>             Type of package (%s).\n"
 "                              Default: %s.\n"
-"-r, --repo <alias|#|URI>      List only updates from the specified repository.\n"
-"    --best-effort             Do a 'best effort' approach to update. Updates\n"
+"-r, --repo <alias|#|URI>      List only updates from the specified "
+"repository.\n"
+"    --best-effort             Do a 'best effort' approach to update. "
+"Updates\n"
 "                              to a lower than the latest version are\n"
 "                              also acceptable.\n"
-"-a, --all                     List all packages for which newer versions are\n"
+"-a, --all                     List all packages for which newer versions "
+"are\n"
 "                              available, regardless whether they are\n"
 "                              installable or not.\n"
 msgstr ""
@@ -3415,7 +3739,8 @@ msgstr ""
 "  Kommandooptionen:\n"
 "-t, --type <Typ>          Pakettyp (%s).\n"
 "                          Standard: %s.\n"
-"-r, --repo <Alias|#|URI>  Nur Aktualisierungen des festgelegten Repositorys auflisten.\n"
+"-r, --repo <Alias|#|URI>  Nur Aktualisierungen des festgelegten Repositorys "
+"auflisten.\n"
 "    --best-effort         Einen 'bestmöglichen' Ansatz zur Aktualisierung\n"
 "                          durchführen. Aktualisierungen zu einer älteren\n"
 "                          als der neuesten Version sind auch akzeptabel.\n"
@@ -3430,7 +3755,8 @@ msgstr ""
 msgid ""
 "update (up) [options] [packagename] ...\n"
 "\n"
-"Update all or specified installed packages with newer versions, if possible.\n"
+"Update all or specified installed packages with newer versions, if "
+"possible.\n"
 "\n"
 "  Command options:\n"
 "\n"
@@ -3446,7 +3772,8 @@ msgid ""
 "                            to a lower than the latest version are\n"
 "                            also acceptable.\n"
 "    --debug-solver          Create solver test case for debugging.\n"
-"    --no-recommends         Do not install recommended packages, only required.\n"
+"    --no-recommends         Do not install recommended packages, only "
+"required.\n"
 "    --recommends            Install also recommended packages in addition\n"
 "                            to the required.\n"
 "-R, --no-force-resolution   Do not force the solver to find solution,\n"
@@ -3458,31 +3785,41 @@ msgid ""
 msgstr ""
 "update (up) [Optionen] [Paketname] ...\n"
 "\n"
-"Alle oder angegebene installierte Pakete mit neueren Versionen aktualisieren, wenn möglich.\n"
+"Alle oder angegebene installierte Pakete mit neueren Versionen "
+"aktualisieren, wenn möglich.\n"
 "\n"
 "  Kommandooptionen:\n"
 "\n"
 "-t, --type <Typ>                Pakettyp (%s).\n"
 "                                Standard: %s.\n"
-"-r, --repo <Alias|#|URI>        Aktualisierungen auf das angegebene Repository limitieren.\n"
+"-r, --repo <Alias|#|URI>        Aktualisierungen auf das angegebene "
+"Repository limitieren.\n"
 "    --skip-interactive          Interaktive Aktualisierungen überspringen.\n"
-"-l, --auto-agree-with-licenses  Automatisch 'ja' sagen zu Drittparteilizenz-\n"
+"-l, --auto-agree-with-licenses  Automatisch 'ja' sagen zu "
+"Drittparteilizenz-\n"
 "                                Bestätigungsaufforderungen.\n"
 "                                Siehe 'man zypper' für mehr Details.\n"
-"    --best-effort               Einen 'bestmöglichen' Ansatz zur Aktualisierung durchführen.\n"
-"                                Aktualisierungen zu einer älteren als der neuesten Version\n"
+"    --best-effort               Einen 'bestmöglichen' Ansatz zur "
+"Aktualisierung durchführen.\n"
+"                                Aktualisierungen zu einer älteren als der "
+"neuesten Version\n"
 "                                sind auch akzeptabel.\n"
-"    --debug-solver              Auflöser-Testfall für das Debugging erstellen.\n"
-"    --no-recommends     Keine empfohlenen, nur erforderliche Pakete installieren.\n"
-"    --recommends          Zusätzlich zu den erforderlichen auch empfohlene Pakete installieren.\n"
-"-R, --no-force-resolution       Den Auflöser nicht zur Suche nach einer Lösung\n"
+"    --debug-solver              Auflöser-Testfall für das Debugging "
+"erstellen.\n"
+"    --no-recommends     Keine empfohlenen, nur erforderliche Pakete "
+"installieren.\n"
+"    --recommends          Zusätzlich zu den erforderlichen auch empfohlene "
+"Pakete installieren.\n"
+"-R, --no-force-resolution       Den Auflöser nicht zur Suche nach einer "
+"Lösung\n"
 "                                zwingen, ihn fragen lassen.\n"
-"    --force-resolution          Den Auflöser zur Suche nach einer Lösung zwingen\n"
+"    --force-resolution          Den Auflöser zur Suche nach einer Lösung "
+"zwingen\n"
 "                                (selbst eine aggressive).\n"
-"-D, --dry-run                   Die Aktualisierung proben, nicht wirklich aktualisieren.\n"
+"-D, --dry-run                   Die Aktualisierung proben, nicht wirklich "
+"aktualisieren.\n"
 
 #: ../src/Zypper.cc:1587
-#, fuzzy
 msgid ""
 "patch [options]\n"
 "\n"
@@ -3495,10 +3832,12 @@ msgid ""
 "                            Automatically say 'yes' to third party license\n"
 "                            confirmation prompt.\n"
 "                            See man zypper for more details.\n"
-"-b, --bugzilla #            Install patch fixing the specified bugzilla issue.\n"
+"-b, --bugzilla #            Install patch fixing the specified bugzilla "
+"issue.\n"
 "    --cve #                 Install patch fixing the specified CVE issue.\n"
 "    --debug-solver          Create solver test case for debugging.\n"
-"    --no-recommends         Do not install recommended packages, only required.\n"
+"    --no-recommends         Do not install recommended packages, only "
+"required.\n"
 "    --recommends            Install also recommended packages in addition\n"
 "                            to the required.\n"
 "-r, --repo <alias|#|URI>    Load only the specified repository.\n"
@@ -3511,15 +3850,26 @@ msgstr ""
 "\n"
 "  Kommandooptionen:\n"
 "\n"
-"-r, --repo <Alias|#|URI>        Nur mit dem festgelegten Repository arbeiten.\n"
 "    --skip-interactive          Interaktive Patches überspringen.\n"
-"-l, --auto-agree-with-licenses  Automatisch 'ja' sagen zu Drittparteilizenz-\n"
+"-l, --auto-agree-with-licenses  Automatisch 'ja' sagen zu "
+"Drittparteilizenz-\n"
 "                                Bestätigungsaufforderungen.\n"
 "                                Siehe 'man zypper' für mehr Details.\n"
-"    --no-recommends     Keine empfohlenen, nur erforderliche Pakete installieren.\n"
-"    --recommends          Zusätzlich zu den erforderlichen auch empfohlene Pakete installieren.\n"
-"    --debug-solver              Auflöser-Testfall für das Debugging erstellen\n"
-"-D, --dry-run                   Die Aktualisierung proben, nicht wirklich aktualisieren\n"
+"-b, --bugzilla #            Patch für den angegebenen Bugzilla-Eintrag "
+"installieren.\n"
+"    --cve #                 Patch für den angegebenen CVE-Eintrag "
+"installieren.\n"
+"    --debug-solver          Lösungstestfall für Debugging erstellen.\n"
+"    --no-recommends     Keine empfohlenen, nur erforderliche Pakete "
+"installieren.\n"
+"    --recommends          Zusätzlich zu den erforderlichen auch empfohlene "
+"Pakete installieren.\n"
+"    --debug-solver              Auflöser-Testfall für das Debugging "
+"erstellen\n"
+"-r, --repo <alias|#|URI>  Nur das spezifizierte Repository laden.\n"
+"-D, --dry-run                   Die Aktualisierung proben, nicht wirklich "
+"aktualisieren\n"
+"-d, --download-only       Pakete nur herunterladen, nicht installieren.\n"
 
 #: ../src/Zypper.cc:1625
 msgid ""
@@ -3534,9 +3884,20 @@ msgid ""
 "-a, --all                  List all patches, not only the needed ones.\n"
 "-r, --repo <alias|#|URI>   List only patches from the specified repository.\n"
 msgstr ""
+"list-patches (lp) [Optionen\n"
+"\n"
+"zeigt alle verfügbaren erforderlichen Patche.\n"
+"\n"
+" Befehlsoptionen:\n"
+"-b --bugzilla[=#]     zeigt erforderliche Patche für Bugzilla-Einträge.\n"
+"  --cve[=#]     zeigt erforderliche Patche für CVE-Einträge.\n"
+"  --issues[=Zeichenkette] sucht Einträge, die auf die angegebene "
+"Zeichenkette passen.\n"
+"-a, --all     zeigt alle Patche, nicht nur die erforderlichen.\n"
+"-r, --repo <alias|#|URI>   zeigt nur Patche aus dem angegebenen "
+"Verzeichnis.\n"
 
 #: ../src/Zypper.cc:1657
-#, fuzzy
 msgid ""
 "dist-upgrade (dup) [options]\n"
 "\n"
@@ -3550,7 +3911,8 @@ msgid ""
 "                            confirmation prompt.\n"
 "                            See man zypper for more details.\n"
 "    --debug-solver          Create solver test case for debugging\n"
-"    --no-recommends         Do not install recommended packages, only required.\n"
+"    --no-recommends         Do not install recommended packages, only "
+"required.\n"
 "    --recommends            Install also recommended packages in addition\n"
 "                            to the required.\n"
 "-D, --dry-run               Test the upgrade, do not actually upgrade\n"
@@ -3562,21 +3924,29 @@ msgstr ""
 "\n"
 "  Kommandooptionen:\n"
 "\n"
-"-r, --repo <Alias|#|URI>        Die Aktualisierung auf das festgelegte Repository limitieren.\n"
-"    --no-recommends             Keine empfohlenen Pakete installieren, nur die benötigten.\n"
-"-l, --auto-agree-with-licenses  Automatisch 'ja' sagen zu Drittparteilizenz-Bestätigungsaufforderungen.\n"
+"-r, --repo <Alias|#|URI>        Die Aktualisierung auf das festgelegte "
+"Repository limitieren.\n"
+"    --no-recommends             Keine empfohlenen Pakete installieren, nur "
+"die benötigten.\n"
+"-l, --auto-agree-with-licenses  Automatisch 'ja' sagen zu Drittparteilizenz-"
+"Bestätigungsaufforderungen.\n"
 "                                Siehe 'man zypper' für mehr Details.\n"
-"    --debug-solver              Auflöser-Testfall für das Debugging erstellen\n"
-"    --no-recommends     Keine empfohlenen, nur erforderliche Pakete installieren.\n"
-"    --recommends          Zusätzlich zu den erforderlichen auch empfohlene Pakete installieren.\n"
-"-D, --dry-run                   Die Aktualisierung proben, nicht wirklich aktualisieren\n"
+"    --debug-solver              Auflöser-Testfall für das Debugging "
+"erstellen\n"
+"    --no-recommends     Keine empfohlenen, nur erforderliche Pakete "
+"installieren.\n"
+"    --recommends          Zusätzlich zu den erforderlichen auch empfohlene "
+"Pakete installieren.\n"
+"-D, --dry-run                   Die Aktualisierung proben, nicht wirklich "
+"aktualisieren\n"
+"-d, --download-only   Die Pakete nur herunterladen, nicht installieren.\n"
 
 #. FIXME: add to the rest of the strings after 11.2 release
 #: ../src/Zypper.cc:1675
-#, fuzzy
-#| msgid "    --from <alias|#|URI>        Select packages only from specified repository.\n"
 msgid "    --from <alias|#|URI>    Restrict upgrade to specified repository.\n"
-msgstr "    --from <Alias|#|URI>        Nur Pakete aus den festgelegten Repositories wählen.\n"
+msgstr ""
+"    --from <Alias|#|URI>        Nur Pakete aus dem festgelegten Verzeichnis "
+"wählen.\n"
 
 #: ../src/Zypper.cc:1705
 msgid ""
@@ -3585,15 +3955,19 @@ msgid ""
 "Search for packages matching given search strings.\n"
 "\n"
 "  Command options:\n"
-"    --match-all            Search for a match with all search strings (default).\n"
-"    --match-any            Search for a match with any of the search strings.\n"
+"    --match-all            Search for a match with all search strings "
+"(default).\n"
+"    --match-any            Search for a match with any of the search "
+"strings.\n"
 "    --match-substrings     Search for a match to partial words (default).\n"
 "    --match-words          Search for a match to whole words only.\n"
 "    --match-exact          Searches for an exact package name.\n"
-"-d, --search-descriptions  Search also in package summaries and descriptions.\n"
+"-d, --search-descriptions  Search also in package summaries and "
+"descriptions.\n"
 "-C, --case-sensitive       Perform case-sensitive search.\n"
 "-i, --installed-only       Show only packages that are already installed.\n"
-"-u, --uninstalled-only     Show only packages that are not currently installed.\n"
+"-u, --uninstalled-only     Show only packages that are not currently "
+"installed.\n"
 "-t, --type <type>          Search only for packages of the specified type.\n"
 "-r, --repo <alias|#|URI>   Search only in the specified repository.\n"
 "    --sort-by-name         Sort packages by name (default).\n"
@@ -3608,13 +3982,19 @@ msgstr ""
 "Nach Paketen suchen, die zur angegebenen Suchzeichenkette passen.\n"
 "\n"
 "  Kommandooptionen:\n"
-"    --match-all            Nach einer Übereinstimmung mit allen Suchzeichenketten suchen (Standard).\n"
-"    --match-any            Nach einer Übereinstimmung mit jeder Suchzeichenkette suchen.\n"
-"    --match-substrings     Nach einer Übereinstimmung mit teilweisen Wörtern suchen (Standard).\n"
-"    --match-words          Nach einer Übereinstimmung mit nur ganzen Wörtern suchen.\n"
+"    --match-all            Nach einer Übereinstimmung mit allen "
+"Suchzeichenketten suchen (Standard).\n"
+"    --match-any            Nach einer Übereinstimmung mit jeder "
+"Suchzeichenkette suchen.\n"
+"    --match-substrings     Nach einer Übereinstimmung mit teilweisen Wörtern "
+"suchen (Standard).\n"
+"    --match-words          Nach einer Übereinstimmung mit nur ganzen Wörtern "
+"suchen.\n"
 "    --match-exact          Nach einem genauen Paketnamen suchen.\n"
-"-d, --search-descriptions  Auch in Paketzusammenfassungen und -beschreibungen suchen.\n"
-"-C, --case-sensitive       Eine Groß- und Kleinschreibung berücksichtigende Suche durchführen.\n"
+"-d, --search-descriptions  Auch in Paketzusammenfassungen und -"
+"beschreibungen suchen.\n"
+"-C, --case-sensitive       Eine Groß- und Kleinschreibung berücksichtigende "
+"Suche durchführen.\n"
 "-i, --installed-only       Nur installierte Pakete anzeigen.\n"
 "-u, --uninstalled-only     Nur nicht-installierte Pakete anzeigen.\n"
 "-t, --type <Typ>           Nur nach Paketen des festgelegten Typs suchen.\n"
@@ -3624,7 +4004,8 @@ msgstr ""
 "-s, --details              Jede verfügbare Version in jedem Repository\n"
 "                           auf einer separaten Zeile anzeigen.\n"
 "\n"
-"Die Wildcards * und ? können auch innerhalb der Suchzeichenketten verwendet werden.\n"
+"Die Wildcards * und ? können auch innerhalb der Suchzeichenketten verwendet "
+"werden.\n"
 
 #: ../src/Zypper.cc:1742
 msgid ""
@@ -3634,7 +4015,8 @@ msgid ""
 "\n"
 "  Command options:\n"
 "\n"
-"-r, --repo <alias|#|URI>  Check for patches only in the specified repository.\n"
+"-r, --repo <alias|#|URI>  Check for patches only in the specified "
+"repository.\n"
 msgstr ""
 "patch-check (pchk) [Optionen]\n"
 "\n"
@@ -3642,7 +4024,8 @@ msgstr ""
 "\n"
 "  Kommandooptionen:\n"
 "\n"
-"-r, --repo <Alias|#|URI>  Nur auf Patches aus dem festgelegten Repository prüfen.\n"
+"-r, --repo <Alias|#|URI>  Nur auf Patches aus dem festgelegten Repository "
+"prüfen.\n"
 
 #: ../src/Zypper.cc:1764
 msgid ""
@@ -3835,7 +4218,8 @@ msgstr ""
 msgid ""
 "addlock (al) [options] <packagename> ...\n"
 "\n"
-"Add a package lock. Specify packages to lock by exact name or by a glob pattern using '*' and '?' wildcard characters.\n"
+"Add a package lock. Specify packages to lock by exact name or by a glob "
+"pattern using '*' and '?' wildcard characters.\n"
 "\n"
 "  Command options:\n"
 "-r, --repo <alias|#|URI>  Restrict the lock to the specified repository.\n"
@@ -3844,10 +4228,13 @@ msgid ""
 msgstr ""
 "addlock (al) [Optionen] <Paketname> ...\n"
 "\n"
-"Eine Paketsperre hinzufügen. Zu sperrende Pakete durch exakten Namen oder globales Muster festlegen, Verwendung der Wildcard-Zeichen '*' und '?' möglich.\n"
+"Eine Paketsperre hinzufügen. Zu sperrende Pakete durch exakten Namen oder "
+"globales Muster festlegen, Verwendung der Wildcard-Zeichen '*' und '?' "
+"möglich.\n"
 "\n"
 "  Kommandooptionen:\n"
-"-r, --repo <Alias|#|URI>  Die Sperre auf das festgelegte Repository beschränken.\n"
+"-r, --repo <Alias|#|URI>  Die Sperre auf das festgelegte Repository "
+"beschränken.\n"
 "-t, --type <Typ>          Pakettyp (%s).\n"
 "                          Standard: %s.\n"
 
@@ -3856,17 +4243,20 @@ msgstr ""
 msgid ""
 "removelock (rl) [options] <lock-number|packagename> ...\n"
 "\n"
-"Remove a package lock. Specify the lock to remove by its number obtained with '%s' or by package name.\n"
+"Remove a package lock. Specify the lock to remove by its number obtained "
+"with '%s' or by package name.\n"
 "\n"
 "  Command options:\n"
 "-r, --repo <alias|#|URI>  Remove only locks with specified repository.\n"
 msgstr ""
 "removelock (rl) [Optionen] <Nummer der Sperre|Paketname> ...\n"
 "\n"
-"Eine Paketsperre entfernen. Die zu entfernenden Sperre durch die mit '%s' erhaltene Nummer oder den Paketnamen festlegen.\n"
+"Eine Paketsperre entfernen. Die zu entfernenden Sperre durch die mit '%s' "
+"erhaltene Nummer oder den Paketnamen festlegen.\n"
 "\n"
 "  Kommandooptionen:\n"
-"-r, --repo <Alias|#|URI>  Nur Sperren des festgelegten Repositorys entfernen.\n"
+"-r, --repo <Alias|#|URI>  Nur Sperren des festgelegten Repositorys "
+"entfernen.\n"
 
 #: ../src/Zypper.cc:2071
 msgid ""
@@ -3954,7 +4344,8 @@ msgid ""
 msgstr ""
 "os\n"
 "\n"
-"Aktive Prozesse auflisten, die Dateien benutzen, die von den letzten Aktualisierungen gelöscht wurden.\n"
+"Aktive Prozesse auflisten, die Dateien benutzen, die von den letzten "
+"Aktualisierungen gelöscht wurden.\n"
 "\n"
 "Dieses Kommando hat keine zusätzlichen Optionen.\n"
 
@@ -4025,11 +4416,13 @@ msgstr ""
 msgid ""
 "patch-search [options] [querystring...]\n"
 "\n"
-"Search for patches matching given search strings. This is a rug-compatibility alias for '%s'. See zypper's manual page for details.\n"
+"Search for patches matching given search strings. This is a rug-"
+"compatibility alias for '%s'. See zypper's manual page for details.\n"
 msgstr ""
 "patch-search [Optionen] [Anfragezeichenkette...]\n"
 "\n"
-"Nach Patches suchen, die zu den angegebenen Suchzeichenketten passen. Dies ist ein rug-Kompatibilitätsalias für '%s'. Siehe 'man zypper' für Details.\n"
+"Nach Patches suchen, die zu den angegebenen Suchzeichenketten passen. Dies "
+"ist ein rug-Kompatibilitätsalias für '%s'. Siehe 'man zypper' für Details.\n"
 
 #. translators: this is just a rug-compatiblity command
 #: ../src/Zypper.cc:2308
@@ -4072,8 +4465,12 @@ msgid "Root privileges are required for modifying system services."
 msgstr "Zum Modifizieren der Systemdienste werden Root-Rechte benötigt."
 
 #: ../src/Zypper.cc:2536
-msgid "Could not determine the type of the repository. Check if the specified URI points to a valid repository."
-msgstr "Konnte den Typ des Repositorys nicht feststellen. Bitte überprüfen Sie, ob der festgelegte URI auf ein gültiges Repository verweist."
+msgid ""
+"Could not determine the type of the repository. Check if the specified URI "
+"points to a valid repository."
+msgstr ""
+"Konnte den Typ des Repositorys nicht feststellen. Bitte überprüfen Sie, ob "
+"der festgelegte URI auf ein gültiges Repository verweist."
 
 #: ../src/Zypper.cc:2568
 #, c-format
@@ -4109,13 +4506,17 @@ msgid "Too few arguments."
 msgstr "Zu wenig Argumente."
 
 #: ../src/Zypper.cc:2742
-msgid "If only one argument is used, it must be a URI pointing to a .repo file."
-msgstr "Wenn nur ein Argument verwendet wird, dann muss es ein zu einer .repo-Datei verweisender URI sein."
+msgid ""
+"If only one argument is used, it must be a URI pointing to a .repo file."
+msgstr ""
+"Wenn nur ein Argument verwendet wird, dann muss es ein zu einer .repo-Datei "
+"verweisender URI sein."
 
 #: ../src/Zypper.cc:2768
 #, c-format
 msgid "Cannot use %s together with %s. Using the %s setting."
-msgstr "Kann %s nicht zusammen mit %s verwenden. Die Einstellung %s wird verwendet."
+msgstr ""
+"Kann %s nicht zusammen mit %s verwenden. Die Einstellung %s wird verwendet."
 
 #: ../src/Zypper.cc:2791
 msgid "Specified type is not a valid repository type:"
@@ -4124,7 +4525,8 @@ msgstr "Der festgelegte Typ ist kein gültiger Repository-Typ:"
 #: ../src/Zypper.cc:2793
 #, c-format
 msgid "See '%s' or '%s' to get a list of known repository types."
-msgstr "Siehe '%s' oder '%s', um eine Liste bekannter Repository-Typen zu erhalten."
+msgstr ""
+"Siehe '%s' oder '%s', um eine Liste bekannter Repository-Typen zu erhalten."
 
 #. translators: %s is the supplied command line argument which
 #. for which no repository counterpart was found
@@ -4179,7 +4581,8 @@ msgstr "Wenigstens ein Paketname wird benötigt."
 
 #: ../src/Zypper.cc:3092
 msgid "Root privileges are required for installing or uninstalling packages."
-msgstr "Zum Installieren oder Deinstallieren von Paketen werden Root-Rechte benötigt."
+msgstr ""
+"Zum Installieren oder Deinstallieren von Paketen werden Root-Rechte benötigt."
 
 #. translators: rug related message, shown if
 #. 'zypper in --entire-catalog foorepo someargument' is specified
@@ -4195,7 +4598,8 @@ msgstr "Unbekannter Pakettyp: %s"
 #: ../src/Zypper.cc:3139
 #, c-format
 msgid "'%s' looks like an RPM file. Will try to download it."
-msgstr "'%s' sieht wie eine RPM-Datei aus. Werde versuchen sie herunterzuladen."
+msgstr ""
+"'%s' sieht wie eine RPM-Datei aus. Werde versuchen sie herunterzuladen."
 
 #: ../src/Zypper.cc:3152
 #, c-format
@@ -4216,8 +4620,12 @@ msgid "No valid arguments specified."
 msgstr "Keine gültigen Argumente festgelegt."
 
 #: ../src/Zypper.cc:3236 ../src/Zypper.cc:3315
-msgid "Warning: No repositories defined. Operating only with the installed resolvables. Nothing can be installed."
-msgstr "Achtung: Keine Repositories bestimmt. Operiere nur mit den installierten auflösbaren Abhängigkeiten. Es kann nichts installiert werden."
+msgid ""
+"Warning: No repositories defined. Operating only with the installed "
+"resolvables. Nothing can be installed."
+msgstr ""
+"Achtung: Keine Repositories bestimmt. Operiere nur mit den installierten "
+"auflösbaren Abhängigkeiten. Es kann nichts installiert werden."
 
 #: ../src/Zypper.cc:3265
 msgid "Source package name is a required argument."
@@ -4231,7 +4639,9 @@ msgstr "Unbekannter Pakettyp '%s'."
 
 #: ../src/Zypper.cc:3478
 msgid "Problem occurred initializing or executing the search query"
-msgstr "Es trat ein Problem bei der Initialisierung oder Ausführung der Suchanfrage auf."
+msgstr ""
+"Es trat ein Problem bei der Initialisierung oder Ausführung der Suchanfrage "
+"auf."
 
 #: ../src/Zypper.cc:3479
 msgid "See the above message for a hint."
@@ -4303,7 +4713,8 @@ msgstr "Typ der auflösbaren Abhängigkeit"
 #~ "These are only the updates affecting the updater itself.\n"
 #~ "Other updates are available too.\n"
 #~ msgstr ""
-#~ "Dies sind nur die Aktualisierungen, die den Aktualisierer selbst betreffen.\n"
+#~ "Dies sind nur die Aktualisierungen, die den Aktualisierer selbst "
+#~ "betreffen.\n"
 #~ "Andere Aktualisierungen sind auch verfügbar.\n"
 
 #~ msgid ""
@@ -4312,7 +4723,8 @@ msgstr "Typ der auflösbaren Abhängigkeit"
 #~ "List all available needed patches.\n"
 #~ "\n"
 #~ "  Command options:\n"
-#~ "-r, --repo <alias|#|URI>        List only patches from the specified repository.\n"
+#~ "-r, --repo <alias|#|URI>        List only patches from the specified "
+#~ "repository.\n"
 #~ msgstr ""
 #~ "list-patches (lp) [Optionen]\n"
 #~ "\n"
@@ -4320,7 +4732,8 @@ msgstr "Typ der auflösbaren Abhängigkeit"
 #~ "\n"
 #~ "  Kommandooptionen:\n"
 #~ "\n"
-#~ "-r, --repo <Alias|#|URI>        Nur Patches aus dem angegebenen Repository auflisten.\n"
+#~ "-r, --repo <Alias|#|URI>        Nur Patches aus dem angegebenen "
+#~ "Repository auflisten.\n"
 
 #~ msgid "y/n/p"
 #~ msgstr "y/n/p"

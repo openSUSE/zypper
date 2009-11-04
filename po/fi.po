@@ -19,7 +19,7 @@ msgstr ""
 "Project-Id-Version: zypper.fi\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2009-10-12 11:46+0200\n"
-"PO-Revision-Date: 2009-10-06 20:54+0300\n"
+"PO-Revision-Date: 2009-10-30 18:05+0200\n"
 "Last-Translator: Jyri Palokangas <jyri.palokangas@opensuse.org>\n"
 "Language-Team: suomi <fi@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -156,7 +156,7 @@ msgstr "Aitoustarkistus epäonnistui tiedostossa '%s'."
 #: ../src/callbacks/keyring.h:227
 #, c-format
 msgid "Signature verification failed for file '%s' from repository '%s'."
-msgstr "Allekirjoituksen varmistaminen epäonnistui tiedostossa '%s' asennslähteestä '%s'."
+msgstr "Allekirjoituksen varmistaminen epäonnistui tiedostossa '%s' asennuslähteestä '%s'."
 
 #: ../src/callbacks/keyring.h:232
 msgid ""
@@ -553,7 +553,7 @@ msgstr "Kantapaketti"
 
 #: ../src/info.cc:400
 msgid "Flavor"
-msgstr "tyyppi"
+msgstr "Tyyppi"
 
 #: ../src/info.cc:402 ../src/utils/misc.cc:140
 msgid "Installed"
@@ -618,7 +618,7 @@ msgstr ""
 
 #: ../src/install.cc:449
 msgid "Uninstallation of a pattern is currently not defined and implemented."
-msgstr "Ohjelmistoryhmän poistamista ei ole viellä totetettu."
+msgstr "Ohjelmistoryhmän poistamista ei ole vielä totetettu."
 
 #: ../src/install.cc:463
 #, c-format
@@ -639,7 +639,7 @@ msgstr "'%s' ei löytynyt."
 
 #: ../src/install.cc:583
 msgid "Specifying architecture when selecting packages by name is not implemented."
-msgstr "Pakettien valitsemista nimen ja arkkitehtuurin perusteella ei ole viellä toteutettu."
+msgstr "Pakettien valitsemista nimen ja arkkitehtuurin perusteella ei ole vielä toteutettu."
 
 #: ../src/install.cc:620
 #, c-format
@@ -671,7 +671,7 @@ msgstr "Luettelo"
 
 #: ../src/locks.cc:41
 msgid "Importance"
-msgstr "Tärkeä"
+msgstr "Tärkeys"
 
 #. translators: package's repository (header)
 #: ../src/locks.cc:43 ../src/search.cc:64 ../src/search.cc:392
@@ -720,7 +720,7 @@ msgstr "Virhe pakettilukon poistamisessa:"
 #. translators: this will show up if you press ctrl+c twice (but outside of zypper shell)
 #: ../src/main.cc:38
 msgid "OK OK! Exiting immediately..."
-msgstr " OK! Poistutaan välittömästi..."
+msgstr "Okei! Poistutaan välittömästi..."
 
 #. TranslatorExplanation The first %s is name of the resolvable, the second is its kind (e.g. 'zypper package')
 #: ../src/misc.cc:139
@@ -773,7 +773,7 @@ msgstr "KUVAUS"
 #: ../src/misc.cc:287
 #, c-format
 msgid "Installed packages: %d"
-msgstr "Asennettuja paketteja: %d"
+msgstr "Asennetut paketit: %d"
 
 #: ../src/misc.cc:288
 #, c-format
@@ -783,7 +783,7 @@ msgstr "Asennettujen pakettien vastikkeet asennuslähteissä: %d"
 #: ../src/misc.cc:289
 #, c-format
 msgid "Installed packages with EULAs: %d"
-msgstr "Asennettuja Käyttäehtosopimuksellisia paketteja: %d"
+msgstr "Asennettuja käyttäehtosopimuksellisia paketteja: %d"
 
 #: ../src/misc.cc:378 ../src/misc.cc:402
 #, c-format
@@ -827,7 +827,7 @@ msgstr "Ladataan:"
 # window title for kernel loading (see txt_load_kernel)
 #: ../src/output/OutNormal.cc:207
 msgid "starting"
-msgstr "Käynnistetään"
+msgstr "käynnistetään"
 
 #: ../src/output/OutNormal.cc:302
 msgid "No help available for this prompt."
@@ -869,7 +869,7 @@ msgstr "Virhe ladattaessa tiedostoja kohteesta '%s'."
 #: ../src/repos.cc:160 ../src/repos.cc:2935 ../src/solve-commit.cc:690
 #: ../src/solve-commit.cc:719 ../src/solve-commit.cc:753
 msgid "Please see the above error message for a hint."
-msgstr "Tarkista ylläoleva viesti."
+msgstr "Tarkista ylläoleva viesti vihjeiden varalta."
 
 #: ../src/repos.cc:173
 #, c-format
@@ -912,7 +912,7 @@ msgstr "Virhe jäsennettäessä asennuslähteen '%s' metatietoja:"
 #. TranslatorExplanation Don't translate the URL unless it is translated, too
 #: ../src/repos.cc:247
 msgid "This may be caused by invalid metadata in the repository, or by a bug in the metadata parser. In the latter case, or if in doubt, please, file a bug report by following instructions at http://en.opensuse.org/Zypper/Troubleshooting"
-msgstr "Tämä voi johtua virheellisistä asennuslähteen metatiedoista tai metatietojen jäsentäjän ohjelmointivirheestä. Jos epäilet jälkimmäistä,  tee virheraportti näiden ohjeiden mukaisesti: http://en.opensuse.org/Zypper/Troubleshooting"
+msgstr "Tämä voi johtua virheellisistä asennuslähteen metatiedoista tai metatietojen jäsentäjän ohjelmointivirheestä. Jos epäilet jälkimmäistä, tee virheraportti näiden ohjeiden mukaisesti: http://en.opensuse.org/Zypper/Troubleshooting"
 
 #: ../src/repos.cc:261
 #, c-format
@@ -960,7 +960,7 @@ msgstr "Poistetaan asennuslähde '%s' käytöstä."
 
 #: ../src/repos.cc:625
 msgid "Initializing Target"
-msgstr "Alustetaan kohdetta"
+msgstr "Valmistellaan kohdetta"
 
 #: ../src/repos.cc:634
 msgid "Target initialization failed:"
@@ -1022,10 +1022,8 @@ msgid "No repositories defined. Use the 'zypper addrepo' command to add one or m
 msgstr "Asennuslähteitä ei ole määritetty. Käytä 'zypper addrepo' -komentoa lisätäksesi yhden tai useamman asennuslähteen."
 
 #: ../src/repos.cc:824
-#, fuzzy
-#| msgid "Autorefresh"
 msgid "Auto-refresh"
-msgstr "Automaattinen päivitys"
+msgstr "Auto-päivitys"
 
 #: ../src/repos.cc:824 ../src/repos.cc:827 ../src/repos.cc:833
 msgid "On"
@@ -1036,36 +1034,28 @@ msgid "Off"
 msgstr "Pois käytöstä"
 
 #: ../src/repos.cc:827
-#, fuzzy
-#| msgid "System Packages"
 msgid "Keep Packages"
-msgstr "Järjestelmän paketit"
+msgstr "Pidä paketit"
 
 #: ../src/repos.cc:833
-#, fuzzy
-#| msgid "DNS Check"
 msgid "GPG Check"
-msgstr "DNS-tarkistus"
+msgstr "GPG-tarkistus"
 
 #: ../src/repos.cc:836
 msgid "GPG Key URI"
-msgstr ""
+msgstr "GPG-avaimen verkko-osoite"
 
 #: ../src/repos.cc:839
-#, fuzzy
-#| msgid "Dial Prefix"
 msgid "Path Prefix"
-msgstr "Soiton etuliite"
+msgstr "Polun etuliite"
 
 #: ../src/repos.cc:842
-#, fuzzy
-#| msgid "Print Server"
 msgid "Parent Service"
-msgstr "Tulostuspalvelin"
+msgstr "Kantapalvelu"
 
 #: ../src/repos.cc:845
 msgid "MD Cache Path"
-msgstr ""
+msgstr "MD välimuistin polku"
 
 #: ../src/repos.cc:899 ../src/repos.cc:973 ../src/repos.cc:1143
 msgid "Error reading repositories:"
@@ -1092,7 +1082,7 @@ msgstr "Määritellyt asennuslähteet: "
 #: ../src/repos.cc:1030
 #, c-format
 msgid "Skipping disabled repository '%s'"
-msgstr "Ohitettiin käytöstäpoistettu asennuslähde '%s'"
+msgstr "Ohitettiin käytöstä poistettu asennuslähde '%s'"
 
 #: ../src/repos.cc:1045
 #, c-format
@@ -1551,7 +1541,7 @@ msgstr "Luetaan asennettuja paketteja..."
 
 #: ../src/repos.cc:2934
 msgid "Problem occured while reading the installed packages:"
-msgstr "Tapahtui virhe luettaessa asennuttuja paketteja:"
+msgstr "Tapahtui virhe luettaessa asennettuja paketteja:"
 
 #. list name, exact match
 #: ../src/repos.cc:2949
@@ -1735,7 +1725,7 @@ msgstr "Tarkistus epäonnistui:"
 #: ../src/solve-commit.cc:423
 #, c-format
 msgid "There are some running programs that use files deleted by recent upgrade. You may wish to restart some of them. Run '%s' to list these programs."
-msgstr "Jotkin käynnissä olevista ohjelmista käyttävät päivityksessä poistettuja kirjastoja ja ne tulis uudelleen käynnistää. Aja '%s' saadaksesi listan näistä ohjelmista."
+msgstr "Jotkin käynnissä olevista ohjelmista käyttävät päivityksessä poistettuja kirjastoja ja ne tulisi uudelleen käynnistää. Aja '%s' saadaksesi listan näistä ohjelmista."
 
 #: ../src/solve-commit.cc:462
 msgid "Computing distribution upgrade..."
@@ -1747,7 +1737,7 @@ msgstr "Ratkaistaan pakettien riippuvuuksia..."
 
 #: ../src/solve-commit.cc:518
 msgid "Some of the dependencies of installed packages are broken. In order to fix these dependencies, the following actions need to be taken:"
-msgstr "Jonkin asennetun paketin riippuvuudet ei täyty. Tilanteen korjaamiseksi täytyy tehdä seuraavat toimenpiteet:"
+msgstr "Jonkin asennetun paketin riippuvuudet eivät täyty. Tilanteen korjaamiseksi täytyy tehdä seuraavat toimenpiteet:"
 
 #: ../src/solve-commit.cc:526
 msgid "Root privileges are required to fix broken package dependencies."
@@ -1814,7 +1804,7 @@ msgstr "Näytä yhteenveto sivuttimessa."
 
 #: ../src/solve-commit.cc:667
 msgid "committing"
-msgstr "Suoritetaan"
+msgstr "suoritetaan"
 
 #: ../src/solve-commit.cc:669
 msgid "(dry run)"
@@ -1840,7 +1830,7 @@ msgid ""
 "- use another installation medium (if e.g. damaged)\n"
 "- use another repository"
 msgstr ""
-"Paketin aitoustarkistus epäonnistui. Tämä voi olla merkki asennuslähteen tai tietovälineen ongelmasta. Voit yrittä seuraavia keinoja:\n"
+"Paketin aitoustarkistus epäonnistui. Tämä voi olla merkki asennuslähteen tai tietovälineen ongelmasta. Voit yritä seuraavia keinoja:\n"
 "\n"
 "- Kokeile uudelleen edellistä komentoa\n"
 "- Päivitä asennuslähteet komennolla 'zypper refresh'\n"
@@ -2431,7 +2421,7 @@ msgstr "Virhe kopioitaessa RPM-tiedostoa välimuistihakemistoon."
 
 #: ../src/utils/misc.cc:284
 msgid "Perhaps you are running out of disk space."
-msgstr "Ekä levytila on loppumaisillaan."
+msgstr "Ehkä levytila on loppumaisillaan."
 
 #: ../src/utils/misc.cc:292
 msgid "Problem retrieving the specified RPM file"
@@ -3566,14 +3556,15 @@ msgstr ""
 "                                osapuolen käyttöehtosopimuksiin. Katso lisätietoja \n"
 "                                zypper-komennon ohjekirjasta (man zypper).\n"
 "    --debug-solver              Luo ratkaisintesti (debug).\n"
-"    --no-recommends             Älä asenna suositeltuja paketteja.    --recommends                Asenna myös suositeltavat paketit.\n"
+"    --no-recommends             Älä asenna suositeltuja paketteja\n"
+".    --recommends                Asenna myös suositeltavat paketit.\n"
 "-D, --dry-run                   Testaa järjestelmän päivitystä (itse päivitystä ei suoriteta).\n"
 "-d, --download-only             Ainoastaan lataa paketit (ei asenneta).\n"
 
 #. FIXME: add to the rest of the strings after 11.2 release
 #: ../src/Zypper.cc:1675
 msgid "    --from <alias|#|URI>    Restrict upgrade to specified repository.\n"
-msgstr ""
+msgstr "    --from <alias|#|URI>    Rajoita päivitys määritettyyn asennuslähteeseen.\n"
 
 #: ../src/Zypper.cc:1705
 msgid ""
@@ -4225,7 +4216,7 @@ msgstr "Tuntematon paketin tyyppi '%s'."
 
 #: ../src/Zypper.cc:3478
 msgid "Problem occurred initializing or executing the search query"
-msgstr "Virhe alustettaessa tai suoritettaessa hakua"
+msgstr "Virhe valmisteltaessa tai suoritettaessa hakua"
 
 #: ../src/Zypper.cc:3479
 msgid "See the above message for a hint."
@@ -4289,3 +4280,4 @@ msgstr "Kuvaus"
 #: ../src/Zypper.cc:4213
 msgid "Resolvable Type"
 msgstr "Tyyppi"
+

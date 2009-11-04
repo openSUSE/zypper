@@ -1026,7 +1026,6 @@ msgid "No repositories defined. Use the 'zypper addrepo' command to add one or m
 msgstr "Nie sú definované žiadne repozitáre. Pridajte jeden alebo viac repozitárov pomocou príkazu 'zypper addrepo'."
 
 #: ../src/repos.cc:824
-#| msgid "Autorefresh"
 msgid "Auto-refresh"
 msgstr "Autoaktualizácia"
 
@@ -1039,12 +1038,10 @@ msgid "Off"
 msgstr "Vypnuté"
 
 #: ../src/repos.cc:827
-#| msgid "System Packages"
 msgid "Keep Packages"
 msgstr "Ponechávať balíky"
 
 #: ../src/repos.cc:833
-#| msgid "DNS Check"
 msgid "GPG Check"
 msgstr "Overovanie pomocou GPG"
 
@@ -1053,12 +1050,10 @@ msgid "GPG Key URI"
 msgstr "URI GPG kľúča"
 
 #: ../src/repos.cc:839
-#| msgid "Dial Prefix"
 msgid "Path Prefix"
 msgstr "Prefix cesty"
 
 #: ../src/repos.cc:842
-#| msgid "Print Server"
 msgid "Parent Service"
 msgstr "Rodičovská služba"
 
@@ -4346,4 +4341,3 @@ msgstr "Popis"
 #: ../src/Zypper.cc:4213
 msgid "Resolvable Type"
 msgstr "Typ balíka"
-

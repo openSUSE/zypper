@@ -10,7 +10,7 @@ msgstr ""
 "Project-Id-Version: zypper.km\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2009-10-12 11:46+0200\n"
-"PO-Revision-Date: 2009-09-23 10:17+0700\n"
+"PO-Revision-Date: 2009-10-13 07:47+0700\n"
 "Last-Translator: Khoem Sokhem <khoemsokhem@khmeros.info>\n"
 "Language-Team: Khmer <support@khmeros.info>\n"
 "MIME-Version: 1.0\n"
@@ -701,7 +701,7 @@ msgstr "គ្មាន​​សោ​ត្រូវ​បាន​យក​ច
 #, c-format
 msgid "%zu lock has been successfully removed."
 msgid_plural "%zu locks have been succesfully removed."
-msgstr[0] "សោ %lz ត្រូវ​បានយកចេញ​ដោយ​ស្វ័យ​ប្រវត្តិ ។"
+msgstr[0] "សោ %zu ត្រូវ​បានយកចេញ​ដោយ​ស្វ័យ​ប្រវត្តិ ។"
 
 #: ../src/locks.cc:239
 msgid "Problem removing the package lock:"
@@ -1011,8 +1011,6 @@ msgid "No repositories defined. Use the 'zypper addrepo' command to add one or m
 msgstr "គ្មាន​ឃ្លាំង​បាន​កំណត់ ។ ប្រើ​ពាក្យ​បញ្ជា 'zypper addrepo' ដើម្បី​បន្ថែម​ឃ្លាំង​មួយ ឬ​ច្រើន ។"
 
 #: ../src/repos.cc:824
-#, fuzzy
-#| msgid "Autorefresh"
 msgid "Auto-refresh"
 msgstr "ធ្វើ​ឲ្យ​ស្រស់​ដោយ​ស្វ័យ​ប្រវត្តិ"
 
@@ -1025,36 +1023,28 @@ msgid "Off"
 msgstr "បិទ"
 
 #: ../src/repos.cc:827
-#, fuzzy
-#| msgid "System Packages"
 msgid "Keep Packages"
-msgstr "កញ្ចប់​ប្រព័ន្ធ"
+msgstr "រក្សា​កញ្ចប់"
 
 #: ../src/repos.cc:833
-#, fuzzy
-#| msgid "DNS Check"
 msgid "GPG Check"
-msgstr "ការ​ត្រួតពិនិត្យ DNS"
+msgstr "ពិនិត្យ​មើល GPG"
 
 #: ../src/repos.cc:836
 msgid "GPG Key URI"
-msgstr ""
+msgstr "សោ GPG URI"
 
 #: ../src/repos.cc:839
-#, fuzzy
-#| msgid "Dial Prefix"
 msgid "Path Prefix"
-msgstr "បុព្វបទ​ការ​ហៅ"
+msgstr "បុព្វបទ​​ផ្លូវ"
 
 #: ../src/repos.cc:842
-#, fuzzy
-#| msgid "Print Server"
 msgid "Parent Service"
-msgstr "ម៉ាស៊ីន​បម្រើ​បោះពុម្ព"
+msgstr "សេវា​មេ"
 
 #: ../src/repos.cc:845
 msgid "MD Cache Path"
-msgstr ""
+msgstr "ផ្លូវ​ឃ្លាំង​សម្ងាត់ MD"
 
 #: ../src/repos.cc:899 ../src/repos.cc:973 ../src/repos.cc:1143
 msgid "Error reading repositories:"
@@ -3520,7 +3510,7 @@ msgstr ""
 #. FIXME: add to the rest of the strings after 11.2 release
 #: ../src/Zypper.cc:1675
 msgid "    --from <alias|#|URI>    Restrict upgrade to specified repository.\n"
-msgstr ""
+msgstr "    --from <alias|#|URI>    ដាក់​កម្រិត​ធ្វើ​ឲ្យ​ប្រសើរ​ទៅ​ឃ្លាំង​ដែលបានបញ្ជាក់ ។\n"
 
 #: ../src/Zypper.cc:1705
 msgid ""

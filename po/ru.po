@@ -10,7 +10,7 @@ msgstr ""
 "Project-Id-Version: zypper\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2009-10-12 11:46+0200\n"
-"PO-Revision-Date: 2009-09-24 02:08+0400\n"
+"PO-Revision-Date: 2009-10-13 20:54+0400\n"
 "Last-Translator: Alexander Melentiev <alex239@gmail.com>\n"
 "Language-Team: Russian <opensuse-translation-ru@opensuse.org>\n"
 "MIME-Version: 1.0\n"
@@ -1013,8 +1013,6 @@ msgid "No repositories defined. Use the 'zypper addrepo' command to add one or m
 msgstr "Репозитории не определены. Используйте команду 'zypper addrepo' для добавления одного или более репозиториев."
 
 #: ../src/repos.cc:824
-#, fuzzy
-#| msgid "Autorefresh"
 msgid "Auto-refresh"
 msgstr "Автоматическое обновление"
 
@@ -1027,36 +1025,28 @@ msgid "Off"
 msgstr "Выкл"
 
 #: ../src/repos.cc:827
-#, fuzzy
-#| msgid "System Packages"
 msgid "Keep Packages"
-msgstr "Системные пакеты"
+msgstr "Сохранять пакеты"
 
 #: ../src/repos.cc:833
-#, fuzzy
-#| msgid "DNS Check"
 msgid "GPG Check"
-msgstr "Проверка системы DNS"
+msgstr "Проверка GPG"
 
 #: ../src/repos.cc:836
 msgid "GPG Key URI"
-msgstr ""
+msgstr "URI ключа GPG"
 
 #: ../src/repos.cc:839
-#, fuzzy
-#| msgid "Dial Prefix"
 msgid "Path Prefix"
-msgstr "Префикс набора"
+msgstr "Префикс пути"
 
 #: ../src/repos.cc:842
-#, fuzzy
-#| msgid "Print Server"
 msgid "Parent Service"
-msgstr "Сервер печати"
+msgstr "Родительская служба"
 
 #: ../src/repos.cc:845
 msgid "MD Cache Path"
-msgstr ""
+msgstr "Путь кэша MD"
 
 #: ../src/repos.cc:899 ../src/repos.cc:973 ../src/repos.cc:1143
 msgid "Error reading repositories:"
@@ -3641,7 +3631,7 @@ msgstr ""
 #. FIXME: add to the rest of the strings after 11.2 release
 #: ../src/Zypper.cc:1675
 msgid "    --from <alias|#|URI>    Restrict upgrade to specified repository.\n"
-msgstr ""
+msgstr "    --from <alias|#|URI>    Ограничить обновление указанным репозиторием.\n"
 
 #: ../src/Zypper.cc:1705
 msgid ""

@@ -17,7 +17,7 @@ msgstr ""
 "Project-Id-Version: zypper\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2009-10-12 11:46+0200\n"
-"PO-Revision-Date: 2009-09-24 15:05-0300\n"
+"PO-Revision-Date: 2009-10-13 17:18-0300\n"
 "Last-Translator: Sergio Gabriel Teves <gabriel@opensuse.org>\n"
 "Language-Team: Spanish <opensuse-translation-es@opensuse.org>\n"
 "MIME-Version: 1.0\n"
@@ -1029,8 +1029,6 @@ msgid "No repositories defined. Use the 'zypper addrepo' command to add one or m
 msgstr "No hay repositorios definidos. Utilice el comando 'zypper addrepo' para añadir uno o más repositorios."
 
 #: ../src/repos.cc:824
-#, fuzzy
-#| msgid "Autorefresh"
 msgid "Auto-refresh"
 msgstr "Actualización automática"
 
@@ -1043,36 +1041,28 @@ msgid "Off"
 msgstr "Desconectado "
 
 #: ../src/repos.cc:827
-#, fuzzy
-#| msgid "System Packages"
 msgid "Keep Packages"
-msgstr "Paquetes del sistema"
+msgstr "Mantener paquetes"
 
 #: ../src/repos.cc:833
-#, fuzzy
-#| msgid "DNS Check"
 msgid "GPG Check"
-msgstr "Comprobación DNS"
+msgstr "Comprobación GPG"
 
 #: ../src/repos.cc:836
 msgid "GPG Key URI"
-msgstr ""
+msgstr "URI de la clave GPG"
 
 #: ../src/repos.cc:839
-#, fuzzy
-#| msgid "Dial Prefix"
 msgid "Path Prefix"
-msgstr "Prefijo de marcado"
+msgstr "Prefijo del directorio"
 
 #: ../src/repos.cc:842
-#, fuzzy
-#| msgid "Print Server"
 msgid "Parent Service"
-msgstr "Servidor de impresión"
+msgstr "Servicio principal"
 
 #: ../src/repos.cc:845
 msgid "MD Cache Path"
-msgstr ""
+msgstr "Ubicación de la cache MD"
 
 #: ../src/repos.cc:899 ../src/repos.cc:973 ../src/repos.cc:1143
 msgid "Error reading repositories:"
@@ -3599,8 +3589,6 @@ msgstr ""
 
 #. FIXME: add to the rest of the strings after 11.2 release
 #: ../src/Zypper.cc:1675
-#, fuzzy
-#| msgid "    --from <alias|#|URI>        Select packages only from specified repository.\n"
 msgid "    --from <alias|#|URI>    Restrict upgrade to specified repository.\n"
 msgstr "    --from <alias|#|URI>        Paquetes seleccionados sólo del repositorio indicado.\n"
 

@@ -5,12 +5,13 @@
 # This file is distributed under the same license as @PACKAGE@ package. FIRST
 #
 # Yasuhiko Kamata <belphegor@belbel.or.jp>, 2007, 2008, 2009.
+# Tomohito Koseki <historic.ruins@gmail.com>, 2009.
 msgid ""
 msgstr ""
 "Project-Id-Version: zypper\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2009-10-12 11:46+0200\n"
-"PO-Revision-Date: 2009-10-06 20:57+0900\n"
+"PO-Revision-Date: 2009-10-31 10:52+0900\n"
 "Last-Translator: Yasuhiko Kamata <belphegor@belbel.or.jp>\n"
 "Language-Team: Japanese <opensuse-ja@opensuse.org>\n"
 "MIME-Version: 1.0\n"
@@ -1012,8 +1013,6 @@ msgid "No repositories defined. Use the 'zypper addrepo' command to add one or m
 msgstr "リポジトリが見つかりません。 'zypper addrepo' コマンドでリポジトリを追加することができます。"
 
 #: ../src/repos.cc:824
-#, fuzzy
-#| msgid "Autorefresh"
 msgid "Auto-refresh"
 msgstr "自動更新"
 
@@ -1026,36 +1025,28 @@ msgid "Off"
 msgstr "オフ"
 
 #: ../src/repos.cc:827
-#, fuzzy
-#| msgid "System Packages"
 msgid "Keep Packages"
-msgstr "システムパッケージ"
+msgstr "パッケージを維持"
 
 #: ../src/repos.cc:833
-#, fuzzy
-#| msgid "DNS Check"
 msgid "GPG Check"
-msgstr "DNS 動作確認"
+msgstr "GPG 動作確認"
 
 #: ../src/repos.cc:836
 msgid "GPG Key URI"
-msgstr ""
+msgstr "GPG 鍵 URI"
 
 #: ../src/repos.cc:839
-#, fuzzy
-#| msgid "Dial Prefix"
 msgid "Path Prefix"
-msgstr "ダイヤルプレフィックス"
+msgstr "パスプレフィックス"
 
 #: ../src/repos.cc:842
-#, fuzzy
-#| msgid "Print Server"
 msgid "Parent Service"
-msgstr "印刷サーバ"
+msgstr "親サービス"
 
 #: ../src/repos.cc:845
 msgid "MD Cache Path"
-msgstr ""
+msgstr "MD キャッシュパス"
 
 #: ../src/repos.cc:899 ../src/repos.cc:973 ../src/repos.cc:1143
 msgid "Error reading repositories:"
@@ -1848,7 +1839,7 @@ msgstr "インストール済みの全パッケージの依存関係に問題は
 
 #: ../src/solve-commit.cc:796
 msgid "Nothing to do."
-msgstr "何もすることはありません。"
+msgstr "何もすることがありません。"
 
 #: ../src/Summary.cc:356
 msgid "The following NEW package is going to be installed:"
@@ -3527,7 +3518,7 @@ msgstr ""
 #. FIXME: add to the rest of the strings after 11.2 release
 #: ../src/Zypper.cc:1675
 msgid "    --from <alias|#|URI>    Restrict upgrade to specified repository.\n"
-msgstr ""
+msgstr "    --from <alias|#|URI>    指定したリポジトリにアップグレードを制限します。\n"
 
 #: ../src/Zypper.cc:1705
 msgid ""
@@ -4244,3 +4235,4 @@ msgstr "説明"
 #: ../src/Zypper.cc:4213
 msgid "Resolvable Type"
 msgstr "解決方法の種類"
+
