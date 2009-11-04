@@ -313,6 +313,10 @@ namespace zypp
       bool unmodified() const
       { return fate() == UNMODIFIED; }
 
+      /** True if locked (subclass of unmodified). */
+      bool locked() const
+      { Status st( status() ); return( st == S_Protected || st == S_Taboo ); }
+
       /** True if either to delete or to install */
       bool toModify() const
       { return fate() != UNMODIFIED; }
