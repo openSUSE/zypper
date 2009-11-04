@@ -1251,7 +1251,7 @@ SATResolver::problems ()
 			    PoolItem poolItem = _pool.find (s);
 			    if (poolItem) {
 				problemSolution->addSingleAction (poolItem, LOCK); // for solver reason: NOT weak lock.
-				string description = str::form (_("keep %s"), s.asString().c_str());
+				string description = str::form (_("keep obsolete %s"), s.asString().c_str());
 				MIL << description << endl;
 				problemSolution->addDescription (description);
 			    } else {
