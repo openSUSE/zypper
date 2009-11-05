@@ -156,6 +156,7 @@ void fillAriaCmdLine( const string &ariaver,
     }
     else
     {
+        MIL << "Passing " << url.getScheme() << " credentials '" << s.username() << ':' << (s.password().empty() ? "" : "PASSWORD")<< "'" << endl;
         if ( url.getScheme() == "ftp" )
             file_options.push_back(str::form("ftp-user=%s", s.username().c_str() ));
         else if ( url.getScheme() == "http" ||
@@ -177,6 +178,7 @@ void fillAriaCmdLine( const string &ariaver,
         args.push_back(str::form("--http-proxy=%s", s.proxy().c_str() ));
         if ( ! s.proxyUsername().empty() )
         {
+            MIL << "Passing " << /*url.getScheme()*/"http" << "-proxy credentials '" << s.proxyUsername() << ':' << (s.proxyPassword().empty() ? "" : "PASSWORD")<< "'" << endl;
             file_options.push_back(str::form("http-proxy-user=%s", s.proxyUsername().c_str() ));
             if ( ! s.proxyPassword().empty() )
                 file_options.push_back(str::form("http-proxy-passwd=%s", s.proxyPassword().c_str() ));
