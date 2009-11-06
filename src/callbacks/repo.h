@@ -23,7 +23,7 @@
 ///////////////////////////////////////////////////////////////////
 namespace ZmartRecipients
 {
-///////////////////////////////////////////////////////////////////    
+///////////////////////////////////////////////////////////////////
 
 // progress for downloading a resolvable
 struct DownloadResolvableReportReceiver : public zypp::callback::ReceiveReport<zypp::repo::DownloadResolvableReport>
@@ -157,6 +157,11 @@ struct DownloadResolvableReportReceiver : public zypp::callback::ReceiveReport<z
     s << " (" << ++zypper.runtimeData().commit_pkg_current
       << "/" << zypper.runtimeData().commit_pkgs_total << ")";
 
+    // temporary fix for bnc #545295
+    if (zypper.runtimeData().commit_pkg_current ==
+        zypper.runtimeData().commit_pkgs_total)
+      zypper.runtimeData().commit_pkg_current = 0;
+
 // grr, bad class??
 //    zypp::ResObject::constPtr ro =
 //      dynamic_pointer_cast<const zypp::ResObject::constPtr> (resolvable_ptr);
@@ -213,7 +218,7 @@ struct ProgressReportReceiver  : public zypp::callback::ReceiveReport<zypp::Prog
         data.name(),
         data.reportAlive());
   }
-  
+
   virtual bool progress( const zypp::ProgressData &data )
   {
     if (data.reportAlive())
@@ -226,7 +231,7 @@ struct ProgressReportReceiver  : public zypp::callback::ReceiveReport<zypp::Prog
           data.name(), data.val());
     return true;
   }
-  
+
 //   virtual Action problem( zypp::Repository /*repo*/, Error error, const std::string & description )
 //   {
 //     display_done ();
@@ -258,7 +263,7 @@ struct RepoReportReceiver  : public zypp::callback::ReceiveReport<zypp::repo::Re
       .progress("repo", "(" + _repo.name() + ") " + pd.name(), pd.val());
     return true;
   }
-  
+
   virtual Action problem( zypp::Repository /*repo*/, Error error, const std::string & description )
   {
     Zypper::instance()->out()
@@ -275,7 +280,7 @@ struct RepoReportReceiver  : public zypp::callback::ReceiveReport<zypp::repo::Re
       Zypper::instance()->out().error(zcb_error2str(error, reason));
 //    display_step(100);
     // many of these, avoid newline -- probably obsolete??
-    //if (task.find("Reading patch") == 0) 
+    //if (task.find("Reading patch") == 0)
       //cout_n << '\r' << flush;
 //    else
 //      display_done ("repo", cout_n);
@@ -310,7 +315,7 @@ class SourceCallbacks {
 
 };
 
-#endif 
+#endif
 // Local Variables:
 // mode: c++
 // c-basic-offset: 2
