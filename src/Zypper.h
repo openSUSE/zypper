@@ -87,6 +87,11 @@ struct GlobalOptions
   bool changedRoot;
 };
 
+/**
+ * \bug The RepoInfo lists kept herein may lack housekeeping data added by the
+ * zypp::RepoManager. Consider using your own RepoInfos only for those not
+ * maintained by zypp::RepoManager. (bnc #544432)
+*/
 struct RuntimeData
 {
   RuntimeData()

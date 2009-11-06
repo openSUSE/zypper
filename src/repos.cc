@@ -1359,6 +1359,7 @@ void add_repo(Zypper & zypper, RepoInfo & repo)
     struct Bye { ~Bye() { Zypper::instance()->runtimeData().current_repo = RepoInfo(); } } reset __attribute__ ((__unused__));
 
     manager.addRepository(repo);
+    repo = manager.getRepo(repo);
   }
   catch (const RepoAlreadyExistsException & e)
   {
