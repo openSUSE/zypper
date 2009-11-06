@@ -9,6 +9,7 @@
 /** \file	zypp/sat/Repository.cc
  *
 */
+#include <climits>
 #include <iostream>
 
 #include "zypp/base/Logger.h"
@@ -62,6 +63,19 @@ namespace zypp
 
     std::string Repository::name() const
     { return info().name(); }
+
+    int Repository::satInternalPriority() const
+    {
+      NO_REPOSITORY_RETURN( INT_MIN );
+      return _repo->priority;
+    }
+
+    int Repository::satInternalSubPriority() const
+    {
+      NO_REPOSITORY_RETURN( INT_MIN );
+      return _repo->subpriority;
+    }
+
 
     zypp::Date Repository::generatedTimestamp() const
     {
