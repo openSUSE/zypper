@@ -4739,11 +4739,6 @@ msgstr "Description"
 msgid "Resolvable Type"
 msgstr "Type d'élément"
 
-#~ msgid "%zu lock has been successfully removed."
-#~ msgid_plural "%zu locks have been succesfully removed."
-#~ msgstr[0] "Le verrouillage %zu a été supprimé avec succès."
-#~ msgstr[1] "Les verrouillages spécifiés %zu ont été supprimés avec succès."
-
 #~ msgid "Reading installed packages"
 #~ msgstr "Lecture des paquets installés"
 
