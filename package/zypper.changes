@@ -1,4 +1,9 @@
 -------------------------------------------------------------------
+Fri Nov  6 15:35:46 CET 2009 - jkupec@suse.cz
+
+- fixed wrong package counting during installation (bnc #545295)
+
+-------------------------------------------------------------------
 Wed Nov  4 12:29:41 CET 2009 - jkupec@suse.cz
 
 - updated translations
