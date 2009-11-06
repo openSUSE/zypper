@@ -382,6 +382,9 @@ namespace zypp
     if (!metadataPath().empty())
       str << "- metadataPath: " << metadataPath() << std::endl;
 
+    if (!packagesPath().empty())
+      str << "- packagesPath: " << packagesPath() << std::endl;
+
     return str;
   }
 

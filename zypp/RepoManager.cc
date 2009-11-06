@@ -1352,6 +1352,9 @@ namespace zypp
 
     tosave.dumpAsIniOn(file);
     tosave.setFilepath(repofile);
+    tosave.setMetadataPath( metadataPath( tosave ) );
+    tosave.setPackagesPath( packagesPath( tosave ) );
+
     _pimpl->repos.insert(tosave);
 
     progress.set(90);
