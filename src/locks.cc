@@ -214,23 +214,7 @@ void remove_locks(Zypper & zypper, const Zypper::ArgList & args)
         }
         q.setCaseSensitive();
 
-        //hack to remove unique lock added by zypper
-        int res = 0;
-        PoolQuery& last = q;
-        for_( it, locks.begin(), locks.end() )
-        {
-          PoolQuery::StrContainer sc = it->attribute(sat::SolvAttr::name);
-          if (sc.size() == 1 && sc.count(*args_it))
-          {
-            res++;
-            last = *it;
-          }
-        }
-
-        if (res == 1) //only one with identical name, then remove it
-          locks.removeLock(last);
-        else
-          locks.removeLock(q);
+        locks.removeLock(q);
       }
     }
 
