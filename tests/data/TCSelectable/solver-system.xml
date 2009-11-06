@@ -8,4 +8,13 @@
 		<release>1</release>
 	</update></history>
 </package>
+<package>
+	<name>candidatenoarch</name>
+	<vendor>unknown</vendor>
+	<history><update>
+		<arch>i586</arch>
+		<version>1</version>
+		<release>1</release>
+	</update></history>
+</package>
 </subchannel></channel>

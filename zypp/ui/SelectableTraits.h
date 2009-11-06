@@ -34,7 +34,7 @@ namespace zypp
     {
       /** Oder on AvailableItemSet.
        * \li repository priority
-       * \li best Arch
+       * \li best Arch (arch/noarch changes are ok)
        * \li best Edition
        * \li ResObject::constPtr as fallback.
       */
@@ -47,21 +47,30 @@ namespace zypp
         //
         bool operator()( const PoolItem & lhs, const PoolItem & rhs ) const
         {
-          unsigned lprio = lhs->satSolvable().repository().info().priority();
-          unsigned rprio = rhs->satSolvable().repository().info().priority();
+          int lprio = lhs->satSolvable().repository().satInternalPriority();
+          int rprio = rhs->satSolvable().repository().satInternalPriority();
           if ( lprio != rprio )
-            return( lprio < rprio ); // lower value meands higher priority :(
-          int res = lhs->arch().compare( rhs->arch() );
-          if ( res )
-            return res > 0;
-          res = lhs->edition().compare( rhs->edition() );
+            return( lprio > rprio );
+
+          // arch/noarch changes are ok.
+          if ( lhs->arch() != Arch_noarch && rhs->arch() != Arch_noarch )
+          {
+            int res = lhs->arch().compare( rhs->arch() );
+            if ( res )
+              return res > 0;
+          }
+
+          int res = lhs->edition().compare( rhs->edition() );
           if ( res )
             return res > 0;
 
-          // no more criteria, still equal:
-          // use the ResObject::constPtr (the poiner value)
-          // (here it's arbitrary whether < or > )
-          return lhs.resolvable() < rhs.resolvable();
+          lprio = lhs->satSolvable().repository().satInternalSubPriority();
+          rprio = rhs->satSolvable().repository().satInternalSubPriority();
+          if ( lprio != rprio )
+            return( lprio > rprio );
+
+          // no more criteria, still equal: sort by id
+          return lhs.satSolvable().id() < rhs.satSolvable().id();
         }
       };
 
@@ -90,10 +99,8 @@ namespace zypp
           if ( ldate != rdate )
             return( ldate > rdate );
 
-          // no more criteria, still equal:
-          // use the ResObject::constPtr (the poiner value)
-          // (here it's arbitrary whether < or > )
-          return lhs.resolvable() < rhs.resolvable();
+          // no more criteria, still equal: sort by id
+          return lhs.satSolvable().id() < rhs.satSolvable().id();
         }
       };
 

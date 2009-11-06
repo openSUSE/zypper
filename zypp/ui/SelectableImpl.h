@@ -154,8 +154,9 @@ namespace zypp
                  || VendorAttr::instance().equivalent( _defaultCandidate->vendor(), installed->vendor() ) ) )
           return PoolItem();
 
-        // check arch change
-        if ( _defaultCandidate->arch() != installed->arch() )
+        // check arch change (arch noarch changes are allowed)
+        if ( _defaultCandidate->arch() != installed->arch()
+           && ! ( _defaultCandidate->arch() == Arch_noarch || installed->arch() == Arch_noarch ) )
           return PoolItem();
 
         // check greater edition
@@ -280,11 +281,12 @@ namespace zypp
           for ( installed_const_iterator iit = installedBegin();
                 iit != installedEnd(); ++iit )
           {
-            PoolItem sameArch; // in case there's no same vendor at least stay with same arch
+            PoolItem sameArch; // in case there's no same vendor at least stay with same arch.
             for ( available_const_iterator it = availableBegin();
                   it != availableEnd(); ++it )
             {
-              if ( (*iit)->arch() == (*it)->arch() )
+              // 'same arch' includes allowed changes to/from noarch.
+              if ( (*iit)->arch() == (*it)->arch() || (*iit)->arch() == Arch_noarch || (*it)->arch() == Arch_noarch )
               {
                 if ( ! solver_allowVendorChange )
                 {
@@ -345,14 +347,43 @@ namespace zypp
     inline std::ostream & dumpOn( std::ostream & str, const Selectable::Impl & obj )
     {
       str << '[' << obj.kind() << ']' << obj.name() << ": " << obj.status() << endl;
-      if ( obj.candidateObj() )
-        str << "(C " << obj.candidateObj() << ")" << endl;
-      else
-        str << "(C NONE )" << endl;
-      dumpRange( str << "  (I " << obj.installedSize() << ") ", obj.installedBegin(), obj.installedEnd() );
+
       if ( obj.installedEmpty() )
-        str << endl << " ";
-      dumpRange( str << " (A " << obj.availableSize() << ") ", obj.availableBegin(), obj.availableEnd() ) << endl;
+        str << "   (I 0) {}" << endl << "   ";
+      else
+      {
+        str << "   (I " << obj.installedSize() << ") {" << endl;
+        for_( it, obj.installedBegin(), obj.installedEnd() )
+        {
+          str << "   " << *it << endl;
+        }
+        str << "}  ";
+      }
+
+      if ( obj.availableEmpty() )
+      {
+        str << "(A 0) {}";
+      }
+      else
+      {
+        PoolItem cand( obj.candidateObj() );
+        PoolItem up( obj.updateCandidateObj() );
+        str << "(A " << obj.availableSize() << ") {" << endl;
+        for_( it, obj.availableBegin(), obj.availableEnd() )
+        {
+          char t = ' ';
+          if ( *it == cand )
+          {
+            t = *it == up ? 'C' : 'c';
+          }
+          else if ( *it == up )
+          {
+            t = 'u';
+          }
+          str << " " << t << " " << *it << endl;
+        }
+        str << "}  ";
+      }
 
       return str;
     }
