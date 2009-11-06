@@ -1,4 +1,9 @@
 -------------------------------------------------------------------
+Fri Nov  6 19:47:49 CET 2009 - ma@suse.de
+
+- Fix zypper to use up-to-date RepoInfos. (bnc #544432)
+
+-------------------------------------------------------------------
 Fri Nov  6 15:35:46 CET 2009 - jkupec@suse.cz
 
 - fixed wrong package counting during installation (bnc #545295)
