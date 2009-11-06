@@ -1,4 +1,11 @@
 -------------------------------------------------------------------
+Fri Nov  6 15:24:22 CET 2009 - ma@suse.de
+
+- al/rl: Support 'kind:name' notation if -t is not given. Also required 
+  to remove a specific lock as rl does not yet support -t. (bnc 551956)
+- 1.2.10
+
+-------------------------------------------------------------------
 Wed Nov  4 12:29:41 CET 2009 - jkupec@suse.cz
 
 - updated translations
