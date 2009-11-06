@@ -124,9 +124,19 @@ void add_locks(Zypper & zypper, const Zypper::ArgList & args, const ResKindSet &
     for_(it,args.begin(),args.end())
     {
       PoolQuery q;
-      q.addAttribute(sat::SolvAttr::name, *it);
-      for_(itk, kinds.begin(), kinds.end())
-        q.addKind(*itk);
+      if ( kinds.empty() ) // derive it from the name
+      {
+        sat::Solvable::SplitIdent split( *it );
+        q.addAttribute( sat::SolvAttr::name, split.name().asString() );
+        q.addKind( split.kind() );
+      }
+      else
+      {
+        q.addAttribute(sat::SolvAttr::name, *it);
+        for_(itk, kinds.begin(), kinds.end()) {
+          q.addKind(*itk);
+        }
+      }
       q.setMatchGlob();
       parsed_opts::const_iterator itr;
       //TODO rug compatibility for more arguments with version restrict
@@ -185,7 +195,10 @@ void remove_locks(Zypper & zypper, const Zypper::ArgList & args)
         //TODO fill query in one method to have consistent add/remove
         //TODO what to do with repo and kinds?
         PoolQuery q;
-        q.addAttribute(sat::SolvAttr::name, *args_it);
+         // derive kind from the name: (rl should also support -t)
+        sat::Solvable::SplitIdent split( *args_it );
+        q.addAttribute( sat::SolvAttr::name, split.name().asString() );
+        q.addKind( split.kind() );
         q.setMatchGlob();
         parsed_opts::const_iterator itr;
         if ((itr = copts.find("repo")) != copts.end())

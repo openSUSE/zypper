@@ -3932,8 +3932,8 @@ void Zypper::doCommand()
         kinds.insert(kind);
       }
     }
-    else
-      kinds.insert(ResKind::package);
+    //else
+    //  let add_locks determine the appropriate type (bnc #551956)
 
     add_locks(*this, _arguments, kinds);
 
