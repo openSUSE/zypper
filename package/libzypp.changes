@@ -1,4 +1,11 @@
 -------------------------------------------------------------------
+Fri Nov  6 22:16:10 CET 2009 - ma@suse.de
+
+- dup: Process drop list only if product actually changes. (bnc #552180)
+- Selectable: Consider allowed arch/noarch changes when comuting candiadates.
+- version 6.22.0 (19)
+
+-------------------------------------------------------------------
 Mon Nov  2 21:33:40 CET 2009 - ma@suse.de
 
 - Enhance interface for zypper. (bnc #551956)
