@@ -1,4 +1,4 @@
-.TH "zypper" "8" "1.2.5" "zypper" "System Tools"
+.TH "zypper" "8" "1.2.11" "zypper" "System Tools"
 .SH "SYNTAX"
 .LP
 zypper [\fI\-\-global\-opts\fR] <\fBcommand\fR> [\fI\-\-command\-opts\fR] [\fBcommand-arguments\fR]
@@ -1441,6 +1441,11 @@ Ignore GPG check failures and continue. If a GPG issue occurs when using this
 option zypper prints and logs a warning and automatically continues without
 interrupting the operation. Use this option with caution, as you can easily
 overlook security problems by using it.
+.TP
+.I \ \ \ \ \-\-gpg\-auto\-import\-keys
+If new repository signing key is found, do not ask what to do; trust and
+import it automatically. This option causes that the new key is imported
+also in non-interactive mode, where it would otherwise got rejected.
 .TP
 .I \-p, \-\-plus\-repo <URI>
 Use an additional repository for this operation. The repository aliased tmp#

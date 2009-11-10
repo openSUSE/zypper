@@ -1,4 +1,9 @@
 -------------------------------------------------------------------
+Tue Nov 10 18:56:34 CET 2009 - jkupec@suse.cz
+
+- --gpg-auto-import-keys global option added (fate #307087)
+
+-------------------------------------------------------------------
 Tue Nov 10 15:35:14 CET 2009 - jkupec@suse.cz
 
 - --with-interactive option added to 'patch' command (bnc #497711)
