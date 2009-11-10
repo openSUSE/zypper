@@ -176,8 +176,14 @@ void print_main_help(Zypper & zypper)
     "\t--no-refresh\t\tDo not refresh the repositories.\n"
   )) + string(_(
     // translators: these belong to Repository Options main help text
+    // \todo merge into the main string for 11.3
     "\t--no-cd\t\t\tIgnore CD/DVD repositories.\n"
     "\t--no-remote\t\tIgnore remote repositories.\n"
+  )) + string(_(
+    // translators: these belong to Repository Options main help text
+    // \todo merge into the main string for 11.3
+    "\t--gpg-auto-import-keys\tAutomatically trust and import new repository\n"
+      "\t\t\t\tsigning keys.\n"
   ));
 
   static string help_global_target_options = _("     Target Options:\n"
@@ -324,6 +330,7 @@ void Zypper::processGlobalOptions()
     {"rug-compatible",             no_argument,       0, 'r'},
     {"non-interactive",            no_argument,       0, 'n'},
     {"no-gpg-checks",              no_argument,       0,  0 },
+    {"gpg-auto-import-keys",       no_argument,       0,  0 },
     {"root",                       required_argument, 0, 'R'},
     {"reposd-dir",                 required_argument, 0, 'D'},
     {"cache-dir",                  required_argument, 0, 'C'},
@@ -460,6 +467,15 @@ void Zypper::processGlobalOptions()
     _gopts.no_gpg_checks = true;
     out().info(_("Entering 'no-gpg-checks' mode."), Out::HIGH);
     MIL << "Entering no-gpg-checks mode" << endl;
+  }
+
+  if (gopts.count("gpg-auto-import-keys")) {
+    _gopts.gpg_auto_import_keys = true;
+    string warn = str::form(
+      _("Turning on '%s'. New repository signing keys will be automatically imported!"),
+      "--gpg-auto-import-keys");
+    out().warning(warn, Out::HIGH);
+    MIL << "gpg-auto-import-keys is on" << endl;
   }
 
   if ((it = gopts.find("root")) != gopts.end()) {

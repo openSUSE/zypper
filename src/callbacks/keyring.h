@@ -121,7 +121,9 @@ namespace zypp
 	const std::string & keyid = key.id(), keyname = key.name(),
 	  fingerprint = key.fingerprint();
 
-        if (_gopts.no_gpg_checks)
+	if (_gopts.gpg_auto_import_keys)
+	  s << _("Automatically importing the following key:") << std::endl;
+	else if (_gopts.no_gpg_checks)
           s << _("Automatically trusting the following key:") << std::endl;
         else
           s << _("New repository or package signing key received:") << std::endl;
@@ -135,13 +137,22 @@ namespace zypp
           s << str::form(_("Repository: %s"), context.repoInfo().name().c_str())
             << std::endl;
 
-        // print info and dont ask
+        // print info and don't ask
         if (_gopts.no_gpg_checks)
         {
-          MIL << boost::format("Automatically trusting key id '%s', '%s', fingerprint '%s'")
-              % keyid % keyname % fingerprint << std::endl;
           zypper.out().info(s.str());
-          return KeyRingReport::KEY_TRUST_TEMPORARILY;
+          if (_gopts.gpg_auto_import_keys)
+          {
+            MIL << boost::format("Automatically importing key id '%s', '%s', fingerprint '%s'")
+                % keyid % keyname % fingerprint << std::endl;
+            return KeyRingReport::KEY_TRUST_AND_IMPORT;
+          }
+          else
+          {
+            MIL << boost::format("Automatically trusting key id '%s', '%s', fingerprint '%s'")
+                % keyid % keyname % fingerprint << std::endl;
+            return KeyRingReport::KEY_TRUST_TEMPORARILY;
+          }
         }
 
         // ask the user
@@ -159,10 +170,10 @@ namespace zypp
           // The anserws must be separated by slash characters '/' and must
           // correspond to reject/trusttemporarily/trustalways in that order.
           // The answers should be lower case letters.
-          popts.setOptions(_("r/t/a/"), 0);
+          popts.setOptions(_("r/t/a/"), _gopts.gpg_auto_import_keys ? 2 : 0);
         else
           // translators: the same as r/t/a, but without 'a'
-          popts.setOptions(_("r/t"), 0);
+          popts.setOptions(_("r/t"), _gopts.gpg_auto_import_keys ? 1 : 0);
         // translators: help text for the 'r' option in the 'r/t/a' prompt
         popts.setOptionHelp(0, _("Don't trust the key."));
         // translators: help text for the 't' option in the 'r/t/a' prompt

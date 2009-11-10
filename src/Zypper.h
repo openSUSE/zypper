@@ -45,6 +45,7 @@ struct GlobalOptions
   is_rug_compatible(false),
   non_interactive(false),
   no_gpg_checks(false),
+  gpg_auto_import_keys(false),
   machine_readable(false),
   no_refresh(false),
   no_cd(false),
@@ -73,6 +74,7 @@ struct GlobalOptions
   bool is_rug_compatible;
   bool non_interactive;
   bool no_gpg_checks;
+  bool gpg_auto_import_keys;
   bool machine_readable;
   /** Whether to disable autorefresh. */
   bool no_refresh;
