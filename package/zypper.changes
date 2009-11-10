@@ -2,6 +2,7 @@
 Fri Nov  6 19:47:49 CET 2009 - ma@suse.de
 
 - Fix zypper to use up-to-date RepoInfos. (bnc #544432)
+- 1.2.10
 
 -------------------------------------------------------------------
 Fri Nov  6 15:35:46 CET 2009 - jkupec@suse.cz
