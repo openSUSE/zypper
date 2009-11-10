@@ -121,6 +121,7 @@ namespace zypp
 	const std::string & keyid = key.id(), keyname = key.name(),
 	  fingerprint = key.fingerprint();
 
+	s << std::endl;
 	if (_gopts.gpg_auto_import_keys)
 	  s << _("Automatically importing the following key:") << std::endl;
 	else if (_gopts.no_gpg_checks)
