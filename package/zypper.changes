@@ -1,4 +1,9 @@
 -------------------------------------------------------------------
+Tue Nov 10 15:35:14 CET 2009 - jkupec@suse.cz
+
+- --with-interactive option added to 'patch' command (bnc #497711)
+
+-------------------------------------------------------------------
 Fri Nov  6 19:47:49 CET 2009 - ma@suse.de
 
 - Fix zypper to use up-to-date RepoInfos. (bnc #544432)
