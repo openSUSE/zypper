@@ -70,10 +70,18 @@ namespace zypp
 
     public:
       /** Check for running processes which access deleted executables or libraries.
+       *
+       * Per default \ref check will try guess and collect executables and
+       * libraries only by looking at the files path and name. (e.g named
+       * \c lib* or located in \c *bin/).
+       *
+       * A verbose check will omit this test and collect all processes uning
+       * any deleted file.
+       *
        * \return the number of processes found.
        * \throws Exception On error collecting the data (e.g. no lsof installed)
        */
-      size_type check();
+      size_type check( bool verbose_r = false );
 
       bool empty() const		{ return _data.empty(); }
       size_type size() const		{ return _data.size(); }

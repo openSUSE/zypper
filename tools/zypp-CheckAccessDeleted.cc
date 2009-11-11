@@ -120,7 +120,7 @@ int main( int argc, char * argv[] )
 
   zypp::CheckAccessDeleted checker(false); // wait for explicit call to check()
   try {
-    checker.check();
+    checker.check( /*verbose*/true );
   }
   catch( const zypp::Exception & err )
   {

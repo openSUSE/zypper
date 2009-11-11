@@ -96,7 +96,7 @@ namespace zypp
      * - The type \c (t) is set to \c REG or \c DEL
      * - The filedescriptor \c (f) is set to \c txt, \c mem or \c DEL
     */
-    inline void addCacheIf( CheckAccessDeleted::ProcInfo & cache_r, const std::string & line_r )
+    inline void addCacheIf( CheckAccessDeleted::ProcInfo & cache_r, const std::string & line_r, bool verbose_r  )
     {
       const char * f = 0;
       const char * t = 0;
@@ -137,10 +137,14 @@ namespace zypp
               || ( *f == 'l' && *(f+1) == 't' && *(f+2) == 'x' && *(f+3) == '\0' ) ) )
         return;	// wrong filedescriptor type
 
-      std::string name( n );
-
       if ( str::contains( n, "(stat: Permission denied)" ) )
         return;	// Avoid reporting false positive due to insufficient permission.
+
+      if ( ! verbose_r )
+      {
+        if ( ! ( str::contains( n, "/lib" ) || str::contains( n, "bin/" ) ) )
+          return; // Try to avoid reporting false positive unless verbose.
+      }
 
       if ( *f == 'm' || *f == 'D' )	// skip some wellknown nonlibrary memorymapped files
       {
@@ -156,7 +160,7 @@ namespace zypp
         }
       }
 
-      if ( std::find( cache_r.files.begin(), cache_r.files.end(), name ) == cache_r.files.end() )
+      if ( std::find( cache_r.files.begin(), cache_r.files.end(), n ) == cache_r.files.end() )
       {
         // Add if no duplicate
         cache_r.files.push_back( n );
@@ -166,7 +170,7 @@ namespace zypp
   } // namespace
   ///////////////////////////////////////////////////////////////////
 
-  CheckAccessDeleted::size_type CheckAccessDeleted::check()
+  CheckAccessDeleted::size_type CheckAccessDeleted::check( bool verbose_r )
   {
     _data.clear();
     std::vector<ProcInfo> data;
@@ -187,7 +191,7 @@ namespace zypp
       }
       else
       {
-        addCacheIf( cache, line );
+        addCacheIf( cache, line, verbose_r );
       }
     }
     addDataIf( data, cache );
