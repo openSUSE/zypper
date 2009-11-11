@@ -65,7 +65,7 @@ Requires:       gnupg
 # need CURLOPT_REDIR_PROTOCOLS:
 %define min_curl_version 7.19.4
 Requires:       libcurl4   >= %{min_curl_version}
-BuildRequires:  curl-devel >= %{min_curl_version}
+BuildRequires:  libcurl-devel >= %{min_curl_version}
 
 Requires:       aria2 >= 1.1.2
 
@@ -88,7 +88,7 @@ Requires:       libzypp == %{version}
 Requires:       libxml2-devel openssl-devel rpm-devel glibc-devel zlib-devel
 Requires:       bzip2 popt-devel dbus-1-devel glib2-devel hal-devel boost-devel libstdc++-devel
 Requires:       cmake
-Requires:       curl-devel >= %{min_curl_version}
+Requires:       libcurl-devel >= %{min_curl_version}
 %requires_ge    libsatsolver-devel
 
 Summary:        Package, Patch, Pattern, and Product Management - developers files
