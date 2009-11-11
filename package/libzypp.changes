@@ -1,4 +1,11 @@
 -------------------------------------------------------------------
+Wed Nov 11 13:54:52 CET 2009 - ma@suse.de
+
+- CheckAccessDeleted: Per default do not collect and report deleted files 
+  that outside bin and lib directories. 'zypper ps' reporting false positive
+  seems to confuse. (bnc #554480)
+
+-------------------------------------------------------------------
 Wed Nov 11 11:45:01 CET 2009 - ma@suse.de
 
 - Following https redirections requires at least libcurl4-7.19.4. (bnc #553895)
