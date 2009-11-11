@@ -1,4 +1,9 @@
 -------------------------------------------------------------------
+Wed Nov 11 11:45:01 CET 2009 - ma@suse.de
+
+- Following https redirections requires at least libcurl4-7.19.4. (bnc #553895)
+
+-------------------------------------------------------------------
 Fri Nov  6 22:16:10 CET 2009 - ma@suse.de
 
 - dup: Process drop list only if product actually changes. (bnc #552180)
