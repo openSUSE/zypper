@@ -1,4 +1,24 @@
 -------------------------------------------------------------------
+Thu Nov 12 15:31:10 UTC 2009 - dmacvicar@suse.de
+
+- Forward port and document already present changes
+  from Code11-Branch
+  * void SEGV if trying to access data of installed packages, that were
+    deleted behind our back (bnc #530595)
+  * ProxyInfoSysconfig: take care variables get initialized.
+  * Fix parsing of rpm.install.excludedocs option (bnc #518883)
+  * Use rpm variables in specfile. (bnc #512466)
+  * Fix to compile with -Werror=format-security
+  * Fix packageand() in testcase generation
+  * Don't link unneeded libraries. (bnc #490895)
+  * Fix Patch::categoryEnum.
+  * Adapt to changed satsolver API. (bnc #480303)
+  * Taking ALL translations for generating GMO files (bnc #458739)
+  * Advice users to contact NCC if access to a 'novell.com'
+    repository is denied (bnc #464586).
+- version 6.22.2 (19)
+
+-------------------------------------------------------------------
 Thu Nov 12 11:53:04 CET 2009 - ma@suse.de
 
 - Raised the limit of redirections from 3 to 6 (bnc #465532)
