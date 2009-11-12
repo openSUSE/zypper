@@ -78,7 +78,7 @@ int main( int argc, char * argv[] )
   Pathname sysRoot("/");
   sat::Pool satpool( sat::Pool::instance() );
 
-  if ( (*argv) == std::string("--root") )
+  if ( argc && (*argv) == std::string("--root") )
   {
     --argc,++argv;
     if ( ! argc )
@@ -92,7 +92,7 @@ int main( int argc, char * argv[] )
   }
 
   bool onlyInstalled( false );
-  if ( (*argv) == std::string("--installed") )
+  if ( argc && (*argv) == std::string("--installed") )
   {
     --argc,++argv;
     onlyInstalled = true;
@@ -184,6 +184,21 @@ int main( int argc, char * argv[] )
 
     PoolQuery q;
     std::string qstr( *argv );
+
+    if ( *argv == ResKind::product )
+    {
+      q.addKind( ResKind::product );
+    }
+    else if ( *argv == ResKind::patch )
+    {
+      q.addKind( ResKind::patch );
+    }
+    else if ( *argv == ResKind::pattern )
+    {
+      q.addKind( ResKind::pattern );
+    }
+    else
+    {
     q.addString( qstr );
     q.setMatchRegex();
     q.setCaseSensitive( ! ignorecase );
@@ -194,6 +209,7 @@ int main( int argc, char * argv[] )
       q.addDependency( sat::SolvAttr::provides );
     if ( requires )
       q.addDependency( sat::SolvAttr::requires );
+    }
 
     message << *argv << " [" << (ignorecase?'i':'_') << (names?'n':'_') << (requires?'r':'_') << (provides?'p':'_') << "] {" << endl;
 
