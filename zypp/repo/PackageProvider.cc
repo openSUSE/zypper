@@ -91,6 +91,31 @@ namespace zypp
       else
         url = * info.baseUrlsBegin();
 
+      { // check for cache hit:
+        OnMediaLocation loc( _package->location() );
+        PathInfo cachepath( info.packagesPath() / loc.filename() );
+
+        if ( cachepath.isFile() && ! loc.checksum().empty() ) // accept cache hit with matching checksum only!
+             // Tempting to do a quick check for matching .rpm-filesize before computing checksum,
+             // but real life shows that loc.downloadSize() and the .rpm-filesize frequently do not
+             // match, even if loc.checksum() and the .rpm-files checksum do. Blame the metadata generator(s).
+        {
+          CheckSum cachechecksum( loc.checksum().type(), filesystem::checksum( cachepath.path(), loc.checksum().type() ) );
+          USR << cachechecksum << endl;
+          if ( cachechecksum == loc.checksum() )
+          {
+            ManagedFile ret( cachepath.path() );
+            if ( ! info.keepPackages() )
+            {
+              ret.setDispose( filesystem::unlink );
+            }
+            MIL << "provided Package from cache " << _package << " at " << ret << endl;
+            return ret; // <-- cache hit
+          }
+        }
+      }
+
+      // HERE: cache misss, do download:
       MIL << "provide Package " << _package << endl;
       ScopedGuard guardReport( newReport() );
       ManagedFile ret;
