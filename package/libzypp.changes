@@ -1,4 +1,15 @@
 -------------------------------------------------------------------
+Thu Nov 12 11:53:04 CET 2009 - ma@suse.de
+
+- Raised the limit of redirections from 3 to 6 (bnc #465532)
+- Following redirections also for https (bnc #545722).
+- Following https redirections requires at least libcurl4-7.19.4. (bnc #553895)
+- Do not report cached packages as being downloaded. (bnc #545295)
+- Per default do not collect and report deleted files outside bin and lib 
+  directories for 'zypper ps'. (bnc #554480)
+- version 6.22.1 (19)
+
+-------------------------------------------------------------------
 Wed Nov 11 13:54:52 CET 2009 - ma@suse.de
 
 - CheckAccessDeleted: Per default do not collect and report deleted files 
