@@ -85,7 +85,7 @@ namespace zypp
       {
           target::rpm::RpmHeader::constPtr header;
           target->rpmDb().getData(name(), header);
-          return header->tag_changelog();
+          return header ? header->tag_changelog() : Changelog(); // might be deleted behind our back (bnc #530595)
       }
       WAR << "changelog is not available for uninstalled packages" << std::endl;
       return Changelog();
