@@ -31,7 +31,6 @@ namespace zypp
   {
       //MIL << "checking " << file << " file against checksum '" << _checksum << "'" << endl;
     callback::SendReport<DigestReport> report;
-    CheckSum real_checksum( _checksum.type(), filesystem::checksum( file, _checksum.type() ));
 
     if ( _checksum.empty() )
     {
@@ -48,6 +47,7 @@ namespace zypp
     }
     else
     {
+      CheckSum real_checksum( _checksum.type(), filesystem::checksum( file, _checksum.type() ));
       if ( (real_checksum != _checksum) )
       {
         if ( report->askUserToAcceptWrongDigest( file, _checksum.checksum(), real_checksum.checksum() ) )
