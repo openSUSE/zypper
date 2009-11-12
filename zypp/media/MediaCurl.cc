@@ -527,17 +527,17 @@ void MediaCurl::attachTo (bool next)
   */
   SET_OPTION(CURLOPT_CONNECTTIMEOUT, _settings.connectTimeout());
 
-  if ( _url.getScheme() == "http" )
-  {
-    // follow any Location: header that the server sends as part of
-    // an HTTP header (#113275)
-    SET_OPTION(CURLOPT_FOLLOWLOCATION, true);
-    SET_OPTION(CURLOPT_MAXREDIRS, 3L);
-    SET_OPTION(CURLOPT_USERAGENT, _settings.userAgentString().c_str() );
-  }
+  // follow any Location: header that the server sends as part of
+  // an HTTP header (#113275)
+  SET_OPTION(CURLOPT_FOLLOWLOCATION, true);
+  // 3 redirects seem to be too few in some cases (bnc #465532)
+  SET_OPTION(CURLOPT_MAXREDIRS, 6L);
 
   if ( _url.getScheme() == "https" )
   {
+    // restrict following of redirections from https to https only
+    SET_OPTION( CURLOPT_REDIR_PROTOCOLS, CURLPROTO_HTTPS );
+
     if( _settings.verifyPeerEnabled() ||
         _settings.verifyHostEnabled() )
     {
@@ -546,8 +546,9 @@ void MediaCurl::attachTo (bool next)
 
     SET_OPTION(CURLOPT_SSL_VERIFYPEER, _settings.verifyPeerEnabled() ? 1L : 0L);
     SET_OPTION(CURLOPT_SSL_VERIFYHOST, _settings.verifyHostEnabled() ? 2L : 0L);
-    SET_OPTION(CURLOPT_USERAGENT, _settings.userAgentString().c_str() );
   }
+
+  SET_OPTION(CURLOPT_USERAGENT, _settings.userAgentString().c_str() );
 
   /*---------------------------------------------------------------*
    CURLOPT_USERPWD: [user name]:[password]
