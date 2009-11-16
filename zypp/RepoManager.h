@@ -381,8 +381,16 @@ namespace zypp
 
    /**
     * \short Probe repo metadata type.
+    *
+    * The location to probe consists of the base \a url (you may think of it as
+    * a mountpoint) and the \a path to the repository on the mounted media
+    * (ususally \c / ).
     */
-   repo::RepoType probe( const Url &url ) const;
+   repo::RepoType probe( const Url & url, const Pathname & path ) const;
+   /**
+    * \overload Using the default path \c "/".
+    */
+   repo::RepoType probe( const Url & url ) const;
 
 
    /**

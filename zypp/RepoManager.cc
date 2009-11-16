@@ -320,14 +320,14 @@ namespace zypp
   }
 
   /**
-   * \short Calculates the raw metadata cache path for a repository, this is
-   * inside the raw cache dir, plus the path where the metadata is.
+   * \short Calculates the raw product metadata path for a repository, this is
+   * inside the raw cache dir, plus an optional path where the metadata is.
    *
    * It should be different only for repositories that are not in the root of
    * the media.
    * for example /var/cache/zypp/alias/addondir
    */
-  inline Pathname rawmetadata_path_for_repoinfo( const RepoManagerOptions &opt, const RepoInfo &info )
+  inline Pathname rawproductdata_path_for_repoinfo( const RepoManagerOptions &opt, const RepoInfo &info )
   {
     assert_alias(info);
     return opt.repoRawCachePath / info.escaped_alias() / info.path();
@@ -543,7 +543,7 @@ namespace zypp
             ++it )
       {
         // set the metadata path for the repo
-        Pathname metadata_path = rawmetadata_path_for_repoinfo(options, (*it));
+        Pathname metadata_path = rawcache_path_for_repoinfo(options, (*it));
         (*it).setMetadataPath(metadata_path);
 
 	// set the downloaded packages path for the repo
@@ -626,7 +626,7 @@ namespace zypp
 
   Pathname RepoManager::metadataPath( const RepoInfo &info ) const
   {
-    return rawmetadata_path_for_repoinfo(_pimpl->options, info );
+    return rawcache_path_for_repoinfo(_pimpl->options, info );
   }
 
   Pathname RepoManager::packagesPath( const RepoInfo &info ) const
@@ -638,8 +638,8 @@ namespace zypp
 
   RepoStatus RepoManager::metadataStatus( const RepoInfo &info ) const
   {
-    Pathname rawpath = rawmetadata_path_for_repoinfo( _pimpl->options, info );
     Pathname mediarootpath = rawcache_path_for_repoinfo( _pimpl->options, info );
+    Pathname productdatapath = rawproductdata_path_for_repoinfo( _pimpl->options, info );
     RepoType repokind = info.type();
     RepoStatus status;
 
@@ -647,7 +647,7 @@ namespace zypp
     {
       case RepoType::NONE_e:
       // unknown, probe the local metadata
-        repokind = probe(rawpath.asUrl());
+        repokind = probe( productdatapath.asUrl() );
       break;
       default:
       break;
@@ -657,20 +657,20 @@ namespace zypp
     {
       case RepoType::RPMMD_e :
       {
-        status = RepoStatus( rawpath + "/repodata/repomd.xml");
+        status = RepoStatus( productdatapath + "/repodata/repomd.xml");
       }
       break;
 
       case RepoType::YAST2_e :
       {
-        status = RepoStatus( rawpath + "/content") && (RepoStatus( mediarootpath + "/media.1/media"));
+        status = RepoStatus( productdatapath + "/content") && (RepoStatus( mediarootpath + "/media.1/media"));
       }
       break;
 
       case RepoType::RPMPLAINDIR_e :
       {
-        if ( PathInfo(Pathname(rawpath + "/cookie")).isExist() )
-          status = RepoStatus( rawpath + "/cookie");
+        if ( PathInfo(Pathname(productdatapath + "/cookie")).isExist() )
+          status = RepoStatus( /*productdatapath*/ + "/cookie");
       }
       break;
 
@@ -685,12 +685,12 @@ namespace zypp
 
   void RepoManager::touchIndexFile(const RepoInfo & info)
   {
-    Pathname rawpath = rawmetadata_path_for_repoinfo( _pimpl->options, info );
+    Pathname productdatapath = rawproductdata_path_for_repoinfo( _pimpl->options, info );
 
     RepoType repokind = info.type();
     if ( repokind.toEnum() == RepoType::NONE_e )
       // unknown, probe the local metadata
-      repokind = probe(rawpath.asUrl());
+      repokind = probe( productdatapath.asUrl() );
     // if still unknown, just return
     if (repokind == RepoType::NONE_e)
       return;
@@ -699,15 +699,15 @@ namespace zypp
     switch ( repokind.toEnum() )
     {
       case RepoType::RPMMD_e :
-        p = Pathname(rawpath + "/repodata/repomd.xml");
+        p = Pathname(productdatapath + "/repodata/repomd.xml");
         break;
 
       case RepoType::YAST2_e :
-        p = Pathname(rawpath + "/content");
+        p = Pathname(productdatapath + "/content");
         break;
 
       case RepoType::RPMPLAINDIR_e :
-        p = Pathname(rawpath + "/cookie");
+        p = Pathname(productdatapath + "/cookie");
         break;
 
       case RepoType::NONE_e :
@@ -734,8 +734,8 @@ namespace zypp
       MIL << "Going to try to check whether refresh is needed for " << url << endl;
 
       // first check old (cached) metadata
-      Pathname rawpath = rawmetadata_path_for_repoinfo( _pimpl->options, info );
-      filesystem::assert_dir(rawpath);
+      Pathname mediarootpath = rawcache_path_for_repoinfo( _pimpl->options, info );
+      filesystem::assert_dir(mediarootpath);
       oldstatus = metadataStatus(info);
 
       if ( oldstatus.empty() )
@@ -775,16 +775,16 @@ namespace zypp
         }
       }
 
-      // To test the new matadta create temp dir as sibling of rawpath
-      filesystem::TmpDir tmpdir( filesystem::TmpDir::makeSibling( rawpath ) );
+      // To test the new matadta create temp dir as sibling of mediarootpath
+      filesystem::TmpDir tmpdir( filesystem::TmpDir::makeSibling( mediarootpath ) );
 
       repo::RepoType repokind = info.type();
       // if the type is unknown, try probing.
       switch ( repokind.toEnum() )
       {
         case RepoType::NONE_e:
-          // unknown, probe it
-          repokind = probe(url);
+          // unknown, probe it \todo respect productdir
+          repokind = probe( url, info.path() );
         break;
         default:
         break;
@@ -894,7 +894,7 @@ namespace zypp
         {
           case RepoType::NONE_e:
             // unknown, probe it
-            repokind = probe(*it);
+            repokind = probe( *it, info.path() );
 
             if (repokind.toEnum() != RepoType::NONE_e)
             {
@@ -917,11 +917,11 @@ namespace zypp
           break;
         }
 
-        Pathname rawpath = rawmetadata_path_for_repoinfo( _pimpl->options, info );
-        filesystem::assert_dir(rawpath);
+        Pathname mediarootpath = rawcache_path_for_repoinfo( _pimpl->options, info );
+        filesystem::assert_dir(mediarootpath);
 
-        // create temp dir as sibling of rawpath
-        filesystem::TmpDir tmpdir( filesystem::TmpDir::makeSibling( rawpath ) );
+        // create temp dir as sibling of mediarootpath
+        filesystem::TmpDir tmpdir( filesystem::TmpDir::makeSibling( mediarootpath ) );
 
         if ( ( repokind.toEnum() == RepoType::RPMMD_e ) ||
              ( repokind.toEnum() == RepoType::YAST2_e ) )
@@ -944,7 +944,7 @@ namespace zypp
            */
           for_( it, repoBegin(), repoEnd() )
           {
-            Pathname cachepath(rawmetadata_path_for_repoinfo( _pimpl->options, *it ));
+            Pathname cachepath(rawcache_path_for_repoinfo( _pimpl->options, *it ));
             if ( PathInfo(cachepath).isExist() )
               downloader_ptr->addCachePath(cachepath);
           }
@@ -974,7 +974,7 @@ namespace zypp
 
         // ok we have the metadata, now exchange
         // the contents
-	filesystem::exchange( tmpdir.path(), rawpath );
+	filesystem::exchange( tmpdir.path(), mediarootpath );
 
         // we are done.
         return;
@@ -1022,7 +1022,8 @@ namespace zypp
                                 const ProgressData::ReceiverFnc & progressrcv )
   {
     assert_alias(info);
-    Pathname rawpath = rawmetadata_path_for_repoinfo(_pimpl->options, info);
+    Pathname mediarootpath = rawcache_path_for_repoinfo( _pimpl->options, info );
+    Pathname productdatapath = rawproductdata_path_for_repoinfo( _pimpl->options, info );
 
     filesystem::assert_dir(_pimpl->options.repoCachePath);
     RepoStatus raw_metadata_status = metadataStatus(info);
@@ -1066,7 +1067,7 @@ namespace zypp
       cleanCache(info);
     }
 
-    MIL << info.alias() << " building cache..." << endl;
+    MIL << info.alias() << " building cache..." << info.type() << endl;
 
     Pathname base = solv_path_for_repoinfo( _pimpl->options, info);
     filesystem::assert_dir(base);
@@ -1080,7 +1081,7 @@ namespace zypp
     {
       case RepoType::NONE_e:
         // unknown, probe the local metadata
-        repokind = probe(rawpath.asUrl());
+        repokind = probe( productdatapath.asUrl() );
       break;
       default:
       break;
@@ -1114,7 +1115,7 @@ namespace zypp
           cmd.push_back( forPlainDirs->getPathName().c_str() );
         }
         else
-          cmd.push_back( rawpath.asString() );
+          cmd.push_back( productdatapath.asString() );
 
         ExternalProgram prog( cmd, ExternalProgram::Stderr_To_Stdout );
         std::string errdetail;
@@ -1152,15 +1153,18 @@ namespace zypp
 
   ////////////////////////////////////////////////////////////////////////////
 
-  repo::RepoType RepoManager::probe( const Url &url ) const
-  {
-    MIL << "going to probe the type of the repo " << endl;
+  repo::RepoType RepoManager::probe( const Url & url ) const
+  { return probe( url, Pathname() ); }
 
-    if ( url.getScheme() == "dir" && ! PathInfo( url.getPathName() ).isDir() )
+  repo::RepoType RepoManager::probe( const Url & url, const Pathname & path  ) const
+  {
+    MIL << "going to probe the repo type at " << url << " (" << path << ")" << endl;
+
+    if ( url.getScheme() == "dir" && ! PathInfo( url.getPathName()/path ).isDir() )
     {
       // Handle non existing local directory in advance, as
       // MediaSetAccess does not support it.
-      MIL << "Probed type NONE (not exists) at " << url << endl;
+      MIL << "Probed type NONE (not exists) at " << url << " (" << path << ")" << endl;
       return repo::RepoType::NONE;
     }
 
@@ -1178,9 +1182,9 @@ namespace zypp
       MediaSetAccess access(url);
       try
       {
-        if ( access.doesFileExist("/repodata/repomd.xml") )
+        if ( access.doesFileExist(path/"/repodata/repomd.xml") )
         {
-          MIL << "Probed type RPMMD at " << url << endl;
+          MIL << "Probed type RPMMD at " << url << " (" << path << ")" << endl;
           return repo::RepoType::RPMMD;
         }
       }
@@ -1194,9 +1198,9 @@ namespace zypp
 
       try
       {
-        if ( access.doesFileExist("/content") )
+        if ( access.doesFileExist(path/"/content") )
         {
-          MIL << "Probed type YAST2 at " << url << endl;
+          MIL << "Probed type YAST2 at " << url << " (" << path << ")" << endl;
           return repo::RepoType::YAST2;
         }
       }
@@ -1212,10 +1216,10 @@ namespace zypp
       if ( ! url.schemeIsDownloading() )
       {
         MediaMounter media( url );
-        if ( PathInfo(media.getPathName()).isDir() )
+        if ( PathInfo(media.getPathName()/path).isDir() )
         {
           // allow empty dirs for now
-          MIL << "Probed type RPMPLAINDIR at " << url << endl;
+          MIL << "Probed type RPMPLAINDIR at " << url << " (" << path << ")" << endl;
           return repo::RepoType::RPMPLAINDIR;
         }
       }
@@ -1232,7 +1236,7 @@ namespace zypp
     if (gotMediaException)
       ZYPP_THROW(enew);
 
-    MIL << "Probed type NONE at " << url << endl;
+    MIL << "Probed type NONE at " << url << " (" << path << ")" << endl;
     return repo::RepoType::NONE;
   }
 
@@ -1323,7 +1327,7 @@ namespace zypp
       DBG << "unknown repository type, probing" << endl;
 
       RepoType probedtype;
-      probedtype = probe(*tosave.baseUrlsBegin());
+      probedtype = probe( *tosave.baseUrlsBegin(), info.path() );
       if ( tosave.baseUrlsSize() > 0 )
       {
         if ( probedtype == RepoType::NONE )

@@ -51,9 +51,17 @@ BOOST_AUTO_TEST_CASE(refresh_addon_in_subdir)
     info.setPath("/updates");
     info.setType(RepoType::YAST2);
     info.setAlias("boooh");
-      
+
     test.loadRepo(info);
+
+    // take care we actually got the data
+    Repository r( test.satpool().reposFind( "boooh" ) );
+    BOOST_REQUIRE( r );
+    BOOST_CHECK_EQUAL( r.solvablesSize(), 2 );
+    BOOST_CHECK_EQUAL( r.info().type(), repo::RepoType::YAST2 );
+    BOOST_CHECK( r.info().hasLicense() );
 }
+
 
 BOOST_AUTO_TEST_CASE(repomanager_test)
 {

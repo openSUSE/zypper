@@ -146,12 +146,14 @@ namespace zypp
        * Pathname relative to the base Url where the product/repository
        * is located
        *
-       * For medias containing more than one product, or repositories not
-       * located at the root of the media it is important to
-       * know the path of the media root relative to the product directory
-       * so a media verifier can be set for that media.
+       * For media containing more than one product, or repositories not
+       * located at the root of the media it is important to know the path
+       * to the product directory relative to the media root. So a media
+       * verifier can be set for that media. You may also read it as
+       * <tt>baseUrl = url to mount</tt> and <tt>path = path on the 
+       * mounted media</tt>.
        *
-       * It is not mandatory, and the default is /
+       * It is not mandatory, and the default is \c /.
        *
        * \note As a repository can have multiple Urls, the path is unique and
        * the same for all Urls, so it is assumed all the Urls have the

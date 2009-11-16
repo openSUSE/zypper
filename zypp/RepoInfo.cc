@@ -59,7 +59,7 @@ namespace zypp
 
   public:
     Pathname licenseTgz() const
-    { return metadatapath.empty() ? Pathname() : metadatapath / "license.tar.gz"; }
+    { return metadatapath.empty() ? Pathname() : metadatapath / path / "license.tar.gz"; }
 
 
   public:
@@ -276,6 +276,9 @@ namespace zypp
   bool RepoInfo::hasLicense() const
   {
     Pathname licenseTgz( _pimpl->licenseTgz() );
+    SEC << licenseTgz << endl;
+    SEC << PathInfo(licenseTgz) << endl;
+
     return ! licenseTgz.empty() &&  PathInfo(licenseTgz).isFile();
   }
 
