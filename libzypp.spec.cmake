@@ -25,13 +25,14 @@ Provides:       yast2-packagemanager
 Obsoletes:      yast2-packagemanager
 Recommends:     logrotate
 BuildRequires:  cmake
-BuildRequires:  libsatsolver-devel >= 0.14.9
 BuildRequires:  openssl-devel
 BuildRequires:  boost-devel dejagnu doxygen gcc-c++ gettext-devel graphviz hal-devel libxml2-devel
 
+BuildRequires:  libsatsolver-devel >= 0.14.9
+%requires_eq    satsolver-tools
+
 # required for testsuite, webrick
 BuildRequires:  ruby
-BuildRequires: aria2 >= 1.1.2
 
 %if 0%{?suse_version}
 BuildRequires:  libexpat-devel
@@ -61,13 +62,26 @@ Requires:       gpg2
 Requires:       gnupg
 %endif
 
-%requires_eq    satsolver-tools
+# ---------------------------------------------------------------
+%if 0%{?suse_version} == 1110
+# (almost) common codebase, but on SLES11-SP1 (according to Rudi
+# suse_version == 1110) we have a patched libcurl-7.19.0-11.22,
+# and no aria2.
+%define min_curl_version 7.19.0-11.22
+# ---------------------------------------------------------------
+%else
+# ---------------------------------------------------------------
+# This is 11.2 (better not sles11-sp1)
 # need CURLOPT_REDIR_PROTOCOLS:
 %define min_curl_version 7.19.4
+# want aria2:
+Requires:      aria2 >= 1.1.2
+BuildRequires: aria2 >= 1.1.2
+%endif
+# ---------------------------------------------------------------
+
 Requires:       libcurl4   >= %{min_curl_version}
 BuildRequires:  libcurl-devel >= %{min_curl_version}
-
-Requires:       aria2 >= 1.1.2
 
 %description
 Package, Patch, Pattern, and Product Management
