@@ -1,4 +1,11 @@
 -------------------------------------------------------------------
+Mon Nov 16 16:27:39 CET 2009 - ma@suse.de
+
+- Specfile fixes to build on sle11-sp1.
+- Fix repository probing and building in presence of productdir. (bnc #553712)
+- version 6.22.3 (19)
+
+-------------------------------------------------------------------
 Thu Nov 12 15:31:10 UTC 2009 - dmacvicar@suse.de
 
 - Forward port and document already present changes
