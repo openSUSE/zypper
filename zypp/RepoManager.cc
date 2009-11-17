@@ -670,7 +670,7 @@ namespace zypp
       case RepoType::RPMPLAINDIR_e :
       {
         if ( PathInfo(Pathname(productdatapath + "/cookie")).isExist() )
-          status = RepoStatus( /*productdatapath*/ + "/cookie");
+          status = RepoStatus( productdatapath + "/cookie");
       }
       break;
 
@@ -826,7 +826,7 @@ namespace zypp
       else if ( repokind.toEnum() == RepoType::RPMPLAINDIR_e )
       {
         MediaMounter media( url );
-        RepoStatus newstatus = parser::plaindir::dirStatus(media.getPathName());
+        RepoStatus newstatus = parser::plaindir::dirStatus( media.getPathName( info.path() ) );
         bool refresh = false;
         if ( oldstatus.checksum() == newstatus.checksum() )
         {
@@ -954,15 +954,20 @@ namespace zypp
         else if ( repokind.toEnum() == RepoType::RPMPLAINDIR_e )
         {
           MediaMounter media( url );
-          RepoStatus newstatus = parser::plaindir::dirStatus(media.getPathName());
+          RepoStatus newstatus = parser::plaindir::dirStatus( media.getPathName( info.path() ) );
 
-          std::ofstream file(( tmpdir.path() + "/cookie").c_str());
-          if (!file)
+          Pathname productpath( tmpdir.path() / info.path() );
+          filesystem::assert_dir( productpath );
+          std::ofstream file( (productpath/"cookie").c_str() );
+          if ( !file )
           {
             // TranslatorExplanation '%s' is a filename
-            ZYPP_THROW( Exception(str::form( _("Can't open file '%s' for writing."), (tmpdir.path()/"cookie").c_str() )));
+            ZYPP_THROW( Exception(str::form( _("Can't open file '%s' for writing."), (productpath/"cookie").c_str() )));
           }
-          file << url << endl;
+          file << url;
+          if ( ! info.path().empty() && info.path() != "/" )
+            file << " (" << info.path() << ")";
+          file << endl;
           file << newstatus.checksum() << endl;
 
           file.close();
@@ -1112,7 +1117,7 @@ namespace zypp
           // recusive for plaindir as 2nd arg!
           cmd.push_back( "-R" );
           // FIXME this does only work form dir: URLs
-          cmd.push_back( forPlainDirs->getPathName().c_str() );
+          cmd.push_back( forPlainDirs->getPathName( info.path() ).c_str() );
         }
         else
           cmd.push_back( productdatapath.asString() );
