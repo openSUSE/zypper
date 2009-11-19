@@ -248,37 +248,42 @@ namespace zypp
 
     std::ostream & MediaForbiddenException::dumpOn( std::ostream & str ) const
     {
-      if (_msg.empty())
-        return str << form(_("Permission to access '%s' denied."), _url.c_str()) << endl;
-      return str << _msg << endl;
+      str << form(_("Permission to access '%s' denied."), _url.c_str()) << endl;
+      if ( !_msg.empty() )
+        str << endl << _msg << endl;
+      return str;
     }
 
     std::ostream & MediaTimeoutException::dumpOn( std::ostream & str ) const
     {
-      if (_msg.empty())
-        return str << form(_("Timeout exceeded when access '%s'."), _url.c_str()) << endl;
-      return str << _msg << endl;
+      str << form(_("Timeout exceeded when accessing '%s'."), _url.c_str()) << endl;
+      if ( !_msg.empty() )
+        str << endl << _msg << endl;
+      return str;
     }
 
     std::ostream & MediaTemporaryProblemException::dumpOn( std::ostream & str ) const
     {
-      if (_msg.empty())
-        return str << form(_("Location '%s' is temporarily unaccessible."), _url.c_str()) << endl;
-      return str << _msg << endl;
+      str << form(_("Location '%s' is temporarily unaccessible."), _url.c_str()) << endl;
+      if ( !_msg.empty() )
+        str << endl << _msg << endl;
+      return str;
     }
 
     std::ostream & MediaBadCAException::dumpOn( std::ostream & str ) const
     {
-      if (_msg.empty())
-        return str << form(_(" SSL certificate problem, verify that the CA cert is OK for '%s'."), _url.c_str()) << endl;
-      return str << _msg << endl;
+      str << form(_(" SSL certificate problem, verify that the CA cert is OK for '%s'."), _url.c_str()) << endl;
+      if ( !_msg.empty() )
+        str << endl << _msg << endl;
+      return str;
     }
 
     std::ostream & MediaNoLoopDeviceException::dumpOn( std::ostream & str ) const
     {
-      if (msg().empty())
-        return str << form(_("Cannot find available loop device to mount the image file from '%s'"), _url.c_str()) << endl;
-      return str << msg() << endl;
+      str << form(_("Cannot find available loop device to mount the image file from '%s'"), _url.c_str()) << endl;
+      if ( !_msg.empty() )
+        str << endl << _msg << endl;
+      return str;
     }
 
   /////////////////////////////////////////////////////////////////

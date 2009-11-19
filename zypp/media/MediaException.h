@@ -570,7 +570,7 @@ class MediaAria2cInitException : public MediaException
     class MediaTimeoutException : public MediaException
     {
     public:
-      MediaTimeoutException(const Url & url_r, const std::string & msg = "Timeout exceed")
+      MediaTimeoutException(const Url & url_r, const std::string & msg = "")
       : MediaException(msg)
       , _url(url_r.asString()), _msg(msg)
       {}
@@ -585,7 +585,7 @@ class MediaAria2cInitException : public MediaException
     class MediaTemporaryProblemException : public MediaException
     {
     public:
-      MediaTemporaryProblemException(const Url & url_r, const std::string & msg = "Temporary problem")
+      MediaTemporaryProblemException(const Url & url_r, const std::string & msg = "")
       : MediaException(msg)
       , _url(url_r.asString()), _msg(msg)
       {}
@@ -599,7 +599,7 @@ class MediaAria2cInitException : public MediaException
     class MediaBadCAException : public MediaException
     {
     public:
-      MediaBadCAException(const Url & url_r, const std::string & msg = "Invalid CA")
+      MediaBadCAException(const Url & url_r, const std::string & msg = "")
       : MediaException(msg)
       , _url(url_r.asString()), _msg(msg)
       {}
