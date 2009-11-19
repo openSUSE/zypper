@@ -104,6 +104,8 @@ private:
   void writeResolvableList(std::ostream & out, const ResPairSet & resolvables);
   void writeXmlResolvableList(std::ostream & out, const KindToResPairSet & resolvables);
 
+  void collectInstalledRecommends(const zypp::ResObject::constPtr & obj);
+
 private:
   ViewOptions _viewop;
   mutable unsigned _wrap_width;
@@ -128,6 +130,17 @@ private:
   KindToResPairSet tochangevendor;
   /** objects from previous lists that are not supported */
   KindToResPairSet unsupported;
+
+  /** \name For weak deps info.
+   * @{
+   */
+  KindToResPairSet required;
+  KindToResPairSet recommended;
+  //! recommended but not to be installed
+  KindToResPairSet noinstrec;
+  //! suggested but not to be installed
+  KindToResPairSet noinstsug;
+  //! @}
 };
 
 #endif /* ZYPPER_UTILS_SUMMARY_H_ */

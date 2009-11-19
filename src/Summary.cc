@@ -14,6 +14,7 @@
 #include "zypp/ResPool.h"
 #include "zypp/Patch.h"
 #include "zypp/Package.h"
+#include "zypp/ui/Selectable.h"
 
 #include "main.h"
 #include "utils/text.h"
@@ -519,28 +520,203 @@ void Summary::writeReinstalled(ostream & out)
 
 // --------------------------------------------------------------------------
 
+void Summary::collectInstalledRecommends(const ResObject::constPtr & obj)
+{
+  XXX << obj << endl;
+  ResObject::constPtr nullres;
+
+  Capabilities rec = obj->recommends();
+  for_(capit, rec.begin(), rec.end())
+  {
+    sat::WhatProvides q(*capit);
+    // not using selectables here: matching found resolvables against those
+    // in the toinstall set (the ones selected by the solver)
+    for_(sit, q.begin(), q.end())
+    {
+      if (sit->isSystem()) // is it necessary to have the system solvable?
+        continue;
+      if (sit->name() == obj->name())
+        continue; // ignore self-recommends (should not happen, though)
+
+      XXX << "rec: " << *sit << endl;
+      ResObject::constPtr recobj = makeResObject(*sit);
+      ResPairSet::const_iterator match =
+        toinstall[sit->kind()].find(ResPair(nullres, recobj));
+      if (match != toinstall[sit->kind()].end())
+      {
+        if (recommended[sit->kind()].insert(*match).second)
+          collectInstalledRecommends(recobj);
+        break;
+      }
+    }
+  }
+
+  Capabilities req = obj->requires();
+  for_(capit, req.begin(), req.end())
+  {
+    sat::WhatProvides q(*capit);
+    for_(sit, q.begin(), q.end())
+    {
+      if (sit->isSystem()) // is it necessary to have the system solvable?
+        continue;
+      if (sit->name() == obj->name())
+        continue; // ignore self-requires
+      XXX << "req: " << *sit << endl;
+      ResObject::constPtr reqobj = makeResObject(*sit);
+      ResPairSet::const_iterator match =
+        toinstall[sit->kind()].find(ResPair(nullres, reqobj));
+      if (match != toinstall[sit->kind()].end())
+      {
+        if (required[sit->kind()].insert(*match).second)
+          collectInstalledRecommends(reqobj);
+        break;
+      }
+    }
+  }
+}
+
+// --------------------------------------------------------------------------
+
+static void collectNotInstalledDeps(
+    const Dep & dep,
+    const ResObject::constPtr & obj,
+    Summary::KindToResPairSet & result)
+{
+  XXX << obj << endl;
+  ResObject::constPtr nullres;
+  Capabilities req = obj->dep(dep);
+  for_(capit, req.begin(), req.end())
+  {
+    sat::WhatProvides q(*capit);
+    for_(selit, q.selectableBegin(), q.selectableEnd())
+    {
+      ui::Selectable::Ptr s = *selit;
+      if (s->name() == obj->name())
+        continue; // ignore self-deps
+
+      XXX << dep << ": " << *s << endl;
+      if (s->status() == ui::S_NoInst)
+      {
+        result[s->kind()].insert(Summary::ResPair(nullres, s->candidateObj()));
+        break;
+      }
+    }
+  }
+}
+
+// --------------------------------------------------------------------------
+
 void Summary::writeRecommended(ostream & out)
-{/*
+{
+  // lazy-compute the installed recommended objects
+  if (recommended.empty())
+  {
+    ResObject::constPtr obj;
+    for_(kindit, toinstall.begin(), toinstall.end())
+      for_(it, kindit->second.begin(), kindit->second.end())
+        // collect recommends of all packages request by user
+        if (it->second->poolItem().status().getTransactByValue() != ResStatus::SOLVER)
+          collectInstalledRecommends(it->second);
+  }
+
+  // lazy-compute the not-to-be-installed recommended objects
+  if (noinstrec.empty())
+  {
+    ResObject::constPtr obj;
+    for_(kindit, toinstall.begin(), toinstall.end())
+      for_(it, kindit->second.begin(), kindit->second.end())
+        if (it->second->poolItem().status().getTransactByValue() != ResStatus::SOLVER)
+          collectNotInstalledDeps(Dep::RECOMMENDS, it->second, noinstrec);
+  }
+
   for_(it, recommended.begin(), recommended.end())
   {
-    string label;
+    string label = "The following recommended packages were selected automatically:";
+    if (it->first == ResKind::package)
+      label = _PL(
+        "The following recommended package was automatically selected:",
+        "The following recommended packages were automatically selected:",
+        it->second.size());
+    else if (it->first == ResKind::patch)
+      label = _PL(
+        "The following recommended patch was automatically selected:",
+        "The following recommended patches were automatically selected:",
+        it->second.size());
+    else if (it->first == ResKind::pattern)
+      label = _PL(
+        "The following recommended pattern was automatically selected:",
+        "The following recommended patterns were automatically selected:",
+        it->second.size());
+    else if (it->first == ResKind::product)
+      label = _PL(
+        "The following recommended product was automatically selected:",
+        "The following recommended products were automatically selected:",
+        it->second.size());
     out << endl << label << endl;
 
     writeResolvableList(out, it->second);
-  }*/
+  }
+
+  for_(it, noinstrec.begin(), noinstrec.end())
+  {
+    string label;
+    if (it->first == ResKind::package)
+      label = _PL(
+        "The following package is recommended, but will not be installed:",
+        "The following packages are recommended, but will not be installed:",
+        it->second.size());
+    else if (it->first == ResKind::patch)
+      label = _PL(
+        "The following patch is recommended, but will not be installed:",
+        "The following patches are recommended, but will not be installed:",
+        it->second.size());
+    else if (it->first == ResKind::pattern)
+      label = _PL(
+        "The following pattern is recommended, but will not be installed:",
+        "The following patterns are recommended, but will not be installed:",
+        it->second.size());
+    else if (it->first == ResKind::product)
+      label = _PL(
+        "The following product is recommended, but will not be installed:",
+        "The following products are recommended, but will not be installed:",
+        it->second.size());
+    out << endl << label << endl;
+
+    writeResolvableList(out, it->second);
+  }
+
+/*
+  for_(it, required.begin(), required.end())
+  {
+    string label = "These are required:";
+    out << endl << label << endl;
+
+    writeResolvableList(out, it->second);
+  }
+*/
 }
 
 // --------------------------------------------------------------------------
 
 void Summary::writeSuggested(ostream & out)
-{/*
-  for_(it, suggested.begin(), suggested.end())
+{
+  if (noinstsug.empty())
+  {
+    ResObject::constPtr obj;
+    for_(kindit, toinstall.begin(), toinstall.end())
+      for_(it, kindit->second.begin(), kindit->second.end())
+        // collect recommends of all packages request by user
+        if (it->second->poolItem().status().getTransactByValue() != ResStatus::SOLVER)
+          collectNotInstalledDeps(Dep::SUGGESTS, it->second, noinstsug);
+  }
+
+  for_(it, noinstsug.begin(), noinstsug.end())
   {
     string label;
     out << endl << label << endl;
 
     writeResolvableList(out, it->second);
-  }*/
+  }
 }
 
 // --------------------------------------------------------------------------
