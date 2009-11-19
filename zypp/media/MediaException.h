@@ -624,12 +624,13 @@ class MediaAria2cInitException : public MediaException
     public:
       MediaNoLoopDeviceException(const Url & url_r, const std::string & msg = "")
         : MediaException(msg)
-        , _url(url_r.asString())
+        , _url(url_r.asString()), _msg(msg)
       {}
       virtual ~MediaNoLoopDeviceException() throw() {};
     protected:
       virtual std::ostream & dumpOn( std::ostream & str ) const;
       std::string _url;
+      std::string _msg;
     };
   /////////////////////////////////////////////////////////////////
   } // namespace media
