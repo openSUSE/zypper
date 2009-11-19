@@ -713,6 +713,26 @@ void Summary::writeSuggested(ostream & out)
   for_(it, noinstsug.begin(), noinstsug.end())
   {
     string label;
+    if (it->first == ResKind::package)
+      label = _PL(
+        "The following package is suggested, but will not be installed:",
+        "The following packages are suggested, but will not be installed:",
+        it->second.size());
+    else if (it->first == ResKind::patch)
+      label = _PL(
+        "The following patch is suggested, but will not be installed:",
+        "The following patches are suggested, but will not be installed:",
+        it->second.size());
+    else if (it->first == ResKind::pattern)
+      label = _PL(
+        "The following pattern is suggested, but will not be installed:",
+        "The following patterns are suggested, but will not be installed:",
+        it->second.size());
+    else if (it->first == ResKind::product)
+      label = _PL(
+        "The following product is suggested, but will not be installed:",
+        "The following products are suggested, but will not be installed:",
+        it->second.size());
     out << endl << label << endl;
 
     writeResolvableList(out, it->second);
