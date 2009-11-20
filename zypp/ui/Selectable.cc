@@ -132,6 +132,9 @@ namespace zypp
     bool Selectable::isUnmaintained() const
     { return _pimpl->isUnmaintained(); }
 
+    bool Selectable::multiversionInstall() const
+    { return _pimpl->multiversionInstall(); }
+
     bool Selectable::isUndetermined() const
     { return _pimpl->isUndetermined(); }
 

@@ -267,6 +267,11 @@ namespace zypp
        */
       bool isUnmaintained() const;
 
+      /** Whether different versions of this package can be installed at the same time.
+       * Per default \c false. \see also \ref ZConfig::multiversion.
+       */
+      bool multiversionInstall() const;
+
       /** \name Classification of available patches (pseudo installed items).
        * A patch is either \c not \c relevant, \c satisfied or \c broken.
        * The same applies to other pseudo installed kinds.

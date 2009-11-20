@@ -228,6 +228,9 @@ namespace zypp
       bool isUnmaintained() const
       { return availableEmpty(); }
 
+      bool multiversionInstall() const
+      { return theObj().satSolvable().multiversionInstall(); }
+
       bool isUndetermined() const
       {
         PoolItem cand( candidateObj() );
@@ -346,7 +349,8 @@ namespace zypp
     /** \relates Selectable::Impl Stream output */
     inline std::ostream & dumpOn( std::ostream & str, const Selectable::Impl & obj )
     {
-      str << '[' << obj.kind() << ']' << obj.name() << ": " << obj.status() << endl;
+      str << '[' << obj.kind() << ']' << obj.name() << ": " << obj.status()
+          << ( obj.multiversionInstall() ? " (multiversion)" : "") << endl;
 
       if ( obj.installedEmpty() )
         str << "   (I 0) {}" << endl << "   ";

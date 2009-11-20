@@ -79,12 +79,15 @@ namespace zypp
     Arch arch() const
     { return sat::Solvable::arch(); }
 
-    /**
-     * Flag in the metadata indicating this should be
-     * installed unsing '-i' (not -U).
+    /** Whether different versions of this package can be installed at the same time.
+     * Per default \c false. \see also \ref ZConfig::multiversion.
      */
+    bool multiversionInstall() const
+    { return sat::Solvable::multiversionInstall(); }
+
+    /** \deprecated Use \ref multiversionInstall. */
     bool installOnly() const
-    { return sat::Solvable::installOnly(); }
+    { return sat::Solvable::multiversionInstall(); }
 
     /** \name Dependencies. */
     //@{

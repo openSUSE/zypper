@@ -169,7 +169,13 @@ namespace zypp
 
         IdString     vendor()   const;
 
-	bool	     installOnly() const;
+        /** Whether different versions of this package can be installed at the same time.
+         * Per default \c false. \see also \ref ZConfig::multiversion.
+         */
+        bool         multiversionInstall() const;
+
+        /** \deprecated Use \ref multiversionInstall. */
+	bool installOnly() const ZYPP_DEPRECATED;
 
         /** String representation <tt>"ident-edition.arch"</tt> or \c "noSolvable"
          * \code

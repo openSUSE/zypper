@@ -374,13 +374,12 @@ namespace zypp
       //return ArchId( _solvable->arch );
     }
 
-    bool Solvable::installOnly() const
+    bool Solvable::multiversionInstall() const
     {
-	std::set<IdString> multiversion = ZConfig::instance().multiversion();
-	if (multiversion.find(ident()) != multiversion.end())
-	      return true;
-	return false;
+      return myPool().isMultiversion( ident() );
     }
+
+    bool Solvable::installOnly() const { return multiversionInstall(); }
 
     IdString Solvable::vendor() const
     {

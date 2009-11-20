@@ -610,10 +610,10 @@ SATResolver::solverInit(const PoolItemList & weakItems)
     }
 
     // Add rules for parallel installable resolvables with different versions
-    std::set<IdString> parallel = ZConfig::instance().multiversion();
-    for (std::set<IdString>::const_iterator it = parallel.begin(); it != parallel.end(); ++it) {
-	queue_push( &(_jobQueue), SOLVER_NOOBSOLETES_SOLVABLE_NAME );
-	queue_push( &(_jobQueue), it->id() );
+    for_( it, sat::Pool::instance().multiversionBegin(), sat::Pool::instance().multiversionEnd() )
+    {
+      queue_push( &(_jobQueue), SOLVER_NOOBSOLETES_SOLVABLE_NAME );
+      queue_push( &(_jobQueue), it->id() );
     }
 
     if ( _distupgrade )

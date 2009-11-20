@@ -215,6 +215,7 @@ namespace zypp
         }
         _serial.setDirty();           // pool content change
         _availableLocalesPtr.reset(); // available locales may change
+        _multiversionListPtr.reset(); // re-evaluate ZConfig::multiversionSpec.
 
         // invaldate dependency/namespace related indices:
         depSetDirty();
@@ -476,6 +477,39 @@ namespace zypp
           }
         }
         return *_availableLocalesPtr;
+      }
+
+      void PoolImpl::multiversionListInit() const
+      {
+        _multiversionListPtr.reset( new MultiversionList );
+        MultiversionList & multiversionList( *_multiversionListPtr );
+
+        const std::set<std::string> & multiversionSpec( ZConfig::instance().multiversionSpec() );
+        for_( it, multiversionSpec.begin(), multiversionSpec.end() )
+        {
+          static const std::string prefix( "provides:" );
+          if ( str::hasPrefix( *it, prefix ) )
+          {
+            WhatProvides provides( Capability( it->c_str() + prefix.size() ) );
+            if ( provides.empty() )
+            {
+              MIL << "Multiversion install not provided (" << *it << ")" << endl;
+            }
+            else
+            {
+              for_( pit, provides.begin(), provides.end() )
+              {
+                if ( multiversionList.insert( pit->ident() ).second )
+                  MIL << "Multiversion install " << pit->ident() << " (" << *it << ")" << endl;
+              }
+            }
+          }
+          else
+          {
+            MIL << "Multiversion install " << *it << endl;
+            multiversionList.insert( IdString( *it ) );
+          }
+        }
       }
 
       /////////////////////////////////////////////////////////////////

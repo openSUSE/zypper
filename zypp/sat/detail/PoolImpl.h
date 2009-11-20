@@ -222,6 +222,26 @@ namespace zypp
           }
           //@}
 
+        public:
+          /** \name Multiversion install. */
+          //@{
+          typedef std::tr1::unordered_set<IdString> MultiversionList;
+
+          const MultiversionList & multiversionList() const
+          {
+            if ( ! _multiversionListPtr )
+              multiversionListInit();
+            return *_multiversionListPtr;
+          }
+
+          bool isMultiversion( IdString ident_r ) const
+          {
+            const MultiversionList & l( multiversionList() );
+            return l.find( ident_r ) != l.end();
+          }
+
+          //@}
+
         private:
           /** sat-pool. */
           ::_Pool * _pool;
@@ -236,6 +256,10 @@ namespace zypp
           LocaleSet _requestedLocales;
           mutable scoped_ptr<LocaleSet> _availableLocalesPtr;
           mutable std::tr1::unordered_set<IdString> _locale2Solver;
+
+          /**  */
+          void multiversionListInit() const;
+          mutable scoped_ptr<MultiversionList> _multiversionListPtr;
       };
       ///////////////////////////////////////////////////////////////////
 

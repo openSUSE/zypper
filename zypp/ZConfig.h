@@ -265,13 +265,16 @@ namespace zypp
       /** Reset \ref solverUpgradeRemoveDroppedPackages to the \c zypp.conf default. */
       void resetSolverUpgradeRemoveDroppedPackages();
 
-      /**
-       * Packages which can be installed parallel with different versions
-       * Returning a set of package names (IdString)
+      /** \name Packages which can be installed in different versions at the same time.
+       * This returns the config file values (\c names or \c provides:...). For the corresponding
+       * packages use e.g \ref sat::Pool::multiversionBegin, or \ref sat::Solbale::multiversionInstall
+       * (\ref ui::Selectable::multiversionInstall).
        */
-      std::set<IdString> multiversion() const;
-      void addMultiversion(std::string &name);
-      bool removeMultiversion(std::string &name);
+      //@{
+      const std::set<std::string> & multiversionSpec() const;
+      void addMultiversionSpec( const std::string & name_r );
+      void removeMultiversionSpec( const std::string & name_r );
+      //@}
 
       /**
        * Path where zypp can find or create lock file (configPath()/locks)

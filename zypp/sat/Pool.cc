@@ -200,6 +200,12 @@ namespace zypp
     bool Pool::isAvailableLocale( const Locale & locale_r ) const
     { return myPool().isAvailableLocale( locale_r ); }
 
+    bool Pool::multiversionEmpty() const			{ return myPool().multiversionList().empty(); }
+    size_t Pool::multiversionSize() const			{ return myPool().multiversionList().size(); }
+    Pool::MultiversionIterator Pool::multiversionBegin() const	{ return myPool().multiversionList().begin(); }
+    Pool::MultiversionIterator Pool::multiversionEnd() const	{ return myPool().multiversionList().end(); }
+    bool Pool::isMultiversion( IdString ident_r ) const		{ return myPool().isMultiversion( ident_r ); }
+
    /******************************************************************
     **
     **	FUNCTION NAME : operator<<

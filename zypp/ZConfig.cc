@@ -367,12 +367,7 @@ namespace zypp
                 }
                 else if ( entry == "multiversion" )
                 {
-		  std::list<std::string> multi;
-                  str::split( value, back_inserter(multi), ", \t" );
-		  for ( std::list<string>::const_iterator it = multi.begin();
-			it != multi.end(); it++) {
-		      multiversion.insert (IdString(*it));
-		  }
+                  str::split( value, inserter( multiversion, multiversion.end() ), ", \t" );
                 }
                 else if ( entry == "locksfile.path" )
                 {
@@ -485,7 +480,7 @@ namespace zypp
 
     Pathname solver_checkSystemFile;
 
-    std::set<IdString> multiversion;
+    std::set<std::string> multiversion;
 
     bool apply_locks_file;
 
@@ -706,14 +701,9 @@ namespace zypp
   void ZConfig::setSolverUpgradeRemoveDroppedPackages( bool val_r )	{ _pimpl->solverUpgradeRemoveDroppedPackages.set( val_r ); }
   void ZConfig::resetSolverUpgradeRemoveDroppedPackages()		{ _pimpl->solverUpgradeRemoveDroppedPackages.restoreToDefault(); }
 
-  std::set<IdString> ZConfig::multiversion() const
-  { return _pimpl->multiversion; }
-
-  void ZConfig::addMultiversion(std::string &name)
-  { _pimpl->multiversion.insert(IdString(name)); }
-
-  bool ZConfig::removeMultiversion(std::string &name)
-  { return _pimpl->multiversion.erase(IdString(name)); }
+  const std::set<std::string> & ZConfig::multiversionSpec() const	{ return _pimpl->multiversion; }
+  void ZConfig::addMultiversionSpec( const std::string & name_r )	{ _pimpl->multiversion.insert( name_r ); }
+  void ZConfig::removeMultiversionSpec( const std::string & name_r )	{ _pimpl->multiversion.erase( name_r ); }
 
   bool ZConfig::apply_locks_file() const
   { return _pimpl->apply_locks_file; }
