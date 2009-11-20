@@ -3829,6 +3829,15 @@ void Zypper::doCommand()
     }
 
     initRepoManager();
+
+    if (!copts.count("repo") && !copts.count("from")
+        && repoManager().knownRepositories().size() > 1)
+      this->out().warning(str::form(_(
+        "You are about to do a distribution upgrade with all enabled"
+        " repositories. Make sure these repositories are compatible before you"
+        " continue. See '%s' for more information about this command."),
+        "man zypper"));
+
     init_target(*this);
     init_repos(*this);
     if (exitCode() != ZYPPER_EXIT_OK)
