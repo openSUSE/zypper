@@ -12,6 +12,8 @@
 #include "zypp/ZYppFactory.h"
 #include "zypp/base/Logger.h"
 #include "zypp/FileChecker.h"
+#include "zypp/base/InputStream.h"
+#include "zypp/base/IOStream.h"
 
 #include "zypp/media/MediaException.h"
 #include "zypp/misc/CheckAccessDeleted.h"
@@ -436,6 +438,43 @@ static void notify_processes_using_deleted_files(Zypper & zypper)
   }
 }
 
+static void show_update_messages(Zypper & zypper, const UpdateNotifications & messages)
+{
+  if (!messages.empty())
+    return;
+
+  zypper.out().info(_("Update notifications were received from the following packages:"));
+  MIL << "Received " << messages.size() << " update notification(s):" << endl;
+
+  std::ostringstream msg;
+  for_(it, messages.begin(), messages.end())
+  {
+    MIL << "- From " << it->solvable().asString()
+      << " in file " << Pathname::showRootIf(zypper.globalOpts().root_dir, it->file() ) << endl;
+    zypper.out().info(
+        it->solvable().asString() + " (" +
+        Pathname::showRootIf(zypper.globalOpts().root_dir, it->file()) + ")");
+    {
+      msg << _("Message from package %s:") << endl << endl;
+      InputStream istr(Pathname::assertprefix(zypper.globalOpts().root_dir, it->file()));
+      iostr::copy(istr, msg);
+      msg << endl << "-----------------------------------------------------------------------------" << endl;
+    }
+  }
+
+  PromptOptions popts;
+  popts.setOptions(_("y/n"), 1);
+  string prompt_text = _("View the notifications now?");
+  unsigned int reply;
+
+  zypper.out().prompt(PROMPT_YN_INST_REMOVE_CONTINUE, prompt_text, popts);
+  reply = get_prompt_reply(zypper, PROMPT_YN_INST_REMOVE_CONTINUE, popts);
+
+  if (reply == 0)
+    show_text_in_pager(msg.str());
+}
+
+
 // ----------------------------------------------------------------------------
 // commit
 // ----------------------------------------------------------------------------
@@ -691,6 +730,8 @@ void solve_and_commit (Zypper & zypper)
 
           s.clear(); s << result;
           zypper.out().info(s.str(), Out::HIGH);
+
+          show_update_messages(zypper, result.updateMessages());
         }
         catch ( const media::MediaException & e )
         {
