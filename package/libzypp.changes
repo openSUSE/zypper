@@ -1,4 +1,11 @@
 -------------------------------------------------------------------
+Fri Nov 20 13:30:02 CET 2009 - ma@suse.de
+
+- Parse zypp.conf multiversion option and make the setting available 
+  in pool and resolver.
+- version 6.23.0 (19)
+
+-------------------------------------------------------------------
 Mon Nov 16 16:27:39 CET 2009 - ma@suse.de
 
 - Specfile fixes to build on sle11-sp1.
