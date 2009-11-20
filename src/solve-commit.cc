@@ -452,7 +452,7 @@ static void show_update_messages(Zypper & zypper, const UpdateNotifications & me
         it->solvable().asString() + " (" +
         Pathname::showRootIf(zypper.globalOpts().root_dir, it->file()) + ")");
     {
-      msg << _("Message from package %s:") << endl << endl;
+      msg << str::form(_("Message from package %s:"), it->solvable().name().c_str()) << endl << endl;
       InputStream istr(Pathname::assertprefix(zypper.globalOpts().root_dir, it->file()));
       iostr::copy(istr, msg);
       msg << endl << "-----------------------------------------------------------------------------" << endl;
