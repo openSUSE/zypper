@@ -1,4 +1,13 @@
 -------------------------------------------------------------------
+Fri Nov 20 15:12:22 CET 2009 - jkupec@suse.cz
+
+- --download option added to in, up, dup, ve, and patch commands
+  to set the package download mode ad-hoc. Available download
+  modes: only, in-advance, in-heaps, as-needed.
+- Show update notifications after installation (fate #301175)
+- 1.2.11
+
+-------------------------------------------------------------------
 Fri Nov 20 12:36:32 CET 2009 - jkupec@suse.cz
 
 - dist-upgrade: warn about muliple repos and show hint. This
