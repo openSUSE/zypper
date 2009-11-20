@@ -398,11 +398,8 @@ ZYppCommitPolicy get_commit_policy(Zypper & zypper)
   if (zypper.cOpts().count("dry-run"))
     policy.dryRun(true);
 
-  if (zypper.cOpts().count("download-only"))
-    policy.downloadMode(DownloadOnly);
-  //! \todo make this configurable
-  //else
-  //  policy.downloadMode(DownloadInAdvance);
+  if (zypper.cOpts().count("download-only") || zypper.cOpts().count("download"))
+    policy.downloadMode(get_download_option(zypper));
 
   policy.syncPoolAfterCommit(policy.dryRun() ? false : zypper.runningShell());
 

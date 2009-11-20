@@ -18,6 +18,7 @@
 #include "zypp/Capability.h"
 #include "zypp/ResKind.h"
 #include "zypp/RepoInfo.h"
+#include "zypp/ZYppCommitPolicy.h"
 
 class Zypper;
 
@@ -128,5 +129,7 @@ std::string asXML(const zypp::Pattern & p, bool is_installed);
  * This is particularly useful after 'zypper remove' or 'zypper update'.
  */
 void list_processes_using_deleted_files(Zypper & zypper);
+
+zypp::DownloadMode get_download_option(Zypper & zypper);
 
 #endif /*ZYPPER_UTILS_H*/

@@ -917,6 +917,7 @@ void Zypper::processCommandOptions()
       {"no-recommends",             no_argument,       0,  0 },
       {"recommends",                no_argument,       0,  0 },
       {"download-only",             no_argument,       0, 'd'},
+      {"download",                  required_argument, 0,  0 },
       // rug compatibility - will mark all packages for installation (like 'in *')
       {"entire-catalog",            required_argument, 0,  0 },
       {"help",                      no_argument,       0, 'h'},
@@ -1036,6 +1037,7 @@ void Zypper::processCommandOptions()
       // rug uses -N shorthand
       {"dry-run", no_argument, 0, 'N'},
       {"download-only", no_argument, 0, 'd'},
+      {"download", required_argument, 0, 0},
       {"repo", required_argument, 0, 'r'},
       {"no-recommends", no_argument, 0, 0},
       {"help", no_argument, 0, 'h'},
@@ -1066,6 +1068,7 @@ void Zypper::processCommandOptions()
     static struct option options[] = {
       {"dry-run", no_argument, 0, 'D'},
       {"download-only", no_argument, 0, 'd'},
+      {"download", required_argument, 0, 0},
       {"repo", required_argument, 0, 'r'},
       {"debug-solver", no_argument, 0, 0},
       {"help", no_argument, 0, 'h'},
@@ -1540,6 +1543,7 @@ void Zypper::processCommandOptions()
       // rug uses -N shorthand
       {"dry-run",                   no_argument,       0, 'N'},
       {"download-only",             no_argument,       0, 'd'},
+      {"download",                  required_argument, 0,  0 },
       // rug-compatibility - dummy for now
       //! \todo category can now be implemented in 'patch' using PoolQuery
       {"category",                  no_argument,       0, 'g'},
@@ -1593,6 +1597,7 @@ void Zypper::processCommandOptions()
       {"recommends",                no_argument,       0,  0 },
       {"dry-run",                   no_argument,       0, 'D'},
       {"download-only",             no_argument,       0, 'd'},
+      {"download",                  required_argument, 0,  0 },
       {"bz",                        required_argument, 0, 'b'},
       {"bugzilla",                  required_argument, 0, 'b'},
       {"cve",                       required_argument, 0,  0 },
@@ -1669,6 +1674,7 @@ void Zypper::processCommandOptions()
       // rug uses -N shorthand
       {"dry-run",                   no_argument,       0, 'N'},
       {"download-only",             no_argument,       0, 'd'},
+      {"download",                  required_argument, 0,  0 },
       {"help", no_argument, 0, 'h'},
       {0, 0, 0, 0}
     };
@@ -3143,6 +3149,9 @@ void Zypper::doCommand()
 
     bool install_not_remove = command() == ZypperCommand::INSTALL;
 
+    // parse the download options to check for errors
+    get_download_option(*this);
+
     initRepoManager();
 
     // check for rpm files among the arguments
@@ -3323,6 +3332,9 @@ void Zypper::doCommand()
     // switch on non-interactive mode if no-confirm specified
     if (copts.count("no-confirm"))
       _gopts.non_interactive = true;
+
+    // parse the download options to check for errors
+    get_download_option(*this);
 
     initRepoManager();
 
@@ -3780,6 +3792,9 @@ void Zypper::doCommand()
         Out::HIGH);
     }
 
+    // parse the download options to check for errors
+    get_download_option(*this);
+
     init_target(*this);
     initRepoManager();
 
@@ -3827,6 +3842,9 @@ void Zypper::doCommand()
       setExitCode(ZYPPER_EXIT_ERR_INVALID_ARGS);
       return;
     }
+
+    // parse the download options to check for errors
+    get_download_option(*this);
 
     initRepoManager();
 

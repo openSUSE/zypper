@@ -478,3 +478,31 @@ void list_processes_using_deleted_files(Zypper & zypper)
         "man zypper"));
   }
 }
+
+DownloadMode get_download_option(Zypper & zypper)
+{
+  if (!zypper.cOpts().count("download") &&
+      !zypper.cOpts().count("download-only"))
+    return DownloadDefault; //! \todo FIXME return ZConfig value
+
+  string download;
+  parsed_opts::const_iterator it = zypper.cOpts().find("download");
+  if (it != zypper.cOpts().end())
+    download = it->second.front();
+  if (zypper.cOpts().count("download-only") || download == "only")
+    return DownloadOnly;
+  else if (download == "in-advance")
+    return DownloadInAdvance;
+  else if (download == "in-heaps")
+    return DownloadInHeaps;
+  else if (download == "as-needed")
+    return DownloadAsNeeded;
+  else
+  {
+    zypper.out().error(str::form(_("Unknown download mode '%s'."), download.c_str()));
+    zypper.out().info(str::form(_("Available download modes: %s"),
+          "only, in-advance, in-heaps, as-needed"));
+    zypper.setExitCode(ZYPPER_EXIT_ERR_INVALID_ARGS);
+    throw ExitRequestException("Unknown download mode");
+  }
+}
