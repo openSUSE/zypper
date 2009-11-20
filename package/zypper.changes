@@ -1,4 +1,10 @@
 -------------------------------------------------------------------
+Fri Nov 20 12:36:32 CET 2009 - jkupec@suse.cz
+
+- dist-upgrade: warn about muliple repos and show hint. This
+  is a temporary solution to fate #305553.
+
+-------------------------------------------------------------------
 Thu Nov 19 19:56:15 CET 2009 - jkupec@suse.cz
 
 - Show recommended and suggested packages in summary (fate #303493)
