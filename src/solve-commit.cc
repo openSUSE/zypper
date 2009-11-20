@@ -437,7 +437,7 @@ static void notify_processes_using_deleted_files(Zypper & zypper)
 
 static void show_update_messages(Zypper & zypper, const UpdateNotifications & messages)
 {
-  if (!messages.empty())
+  if (messages.empty())
     return;
 
   zypper.out().info(_("Update notifications were received from the following packages:"));
