@@ -223,10 +223,12 @@ namespace zypp
 
         // Now collect and execute all matching scripts.
         // On ABORT: at least log all outstanding scripts.
+        // - "name-version-release"
+        // - "name-version-release-*"
         bool abort = false;
         for_( it, checkPackages_r.begin(), checkPackages_r.end() )
         {
-          std::string prefix( str::form( "%s-%s-", it->name().c_str(), it->edition().c_str() ) );
+          std::string prefix( str::form( "%s-%s", it->name().c_str(), it->edition().c_str() ) );
           for_( sit, scripts.begin(), scripts.end() )
           {
             if ( ! str::hasPrefix( *sit, prefix ) )
@@ -235,6 +237,9 @@ namespace zypp
             PathInfo script( scriptsDir / *sit );
             if ( ! script.isFile() )
               continue;
+
+            if ( (*sit)[prefix.size()] != '\0' && (*sit)[prefix.size()] != '-' )
+              continue; // if not exact match it had to continue with '-'
 
             if ( abort || aborting_r )
             {
@@ -418,14 +423,19 @@ namespace zypp
           return; // no messages in message dir
 
         // Now collect all matching messages in result and send them
+        // - "name-version-release"
+        // - "name-version-release-*"
         HistoryLog historylog;
         for_( it, checkPackages_r.begin(), checkPackages_r.end() )
         {
-          std::string prefix( str::form( "%s-%s-", it->name().c_str(), it->edition().c_str() ) );
+          std::string prefix( str::form( "%s-%s", it->name().c_str(), it->edition().c_str() ) );
           for_( sit, messages.begin(), messages.end() )
           {
             if ( ! str::hasPrefix( *sit, prefix ) )
               continue;
+
+            if ( (*sit)[prefix.size()] != '\0' && (*sit)[prefix.size()] != '-' )
+              continue; // if not exact match it had to continue with '-'
 
             PathInfo message( messagesDir / *sit );
             if ( ! message.isFile() || message.size() == 0 )
