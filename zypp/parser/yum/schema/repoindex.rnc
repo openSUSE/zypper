@@ -1,5 +1,6 @@
-# NU service index file schema.
-#
+# Repository Index XML file schema
+#   see http://en.opensuse.org/Standards/Repository_Index_Service
+# 
 # Elements:
 #
 # repoindex
@@ -11,8 +12,8 @@
 #     distro_target - target distribution
 #     priority - priority of repository
 #     pub - ???
-#     path - relative path to repository
-#
+#     path - path relative to the repoindex.xml parent dir URL
+#     url - full URI of the repository 
 
 element repoindex {
   element repo {
@@ -22,7 +23,10 @@ element repoindex {
     attribute distro_target { xsd:string },
     attribute priority { xsd:integer }?,
     attribute pub { xsd:integer }?,
-    attribute path { xsd:string }
+    (
+      attribute url {xsd:anyURI} |
+      attribute path { xsd:string }
+    )
   }+,
   empty
 }
