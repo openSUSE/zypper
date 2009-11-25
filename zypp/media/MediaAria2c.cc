@@ -403,6 +403,8 @@ void MediaAria2c::getFileCopy( const Pathname & filename , const Pathname & targ
                 string speedStr = progressLine.substr(left_bound, count);
                 try {
                   current_speed = boost::lexical_cast<double>(speedStr);
+                  // convert to and work with bytes everywhere (bnc #537870)
+                  current_speed *= kibs ? 0x400 : 0x100000;
                 }
                 catch (const std::exception&) {
                   ERR << "Can't parse speed from '" << speedStr << "'" << endl;
@@ -416,13 +418,10 @@ void MediaAria2c::getFileCopy( const Pathname & filename , const Pathname & targ
               // this is basically A: average
               // ((n-1)A(n-1) + Xn)/n = A(n)
               average_speed =
-                (((average_speed_count - 1 )*average_speed) + current_speed)
+                (((average_speed_count - 1)*average_speed) + current_speed)
                 / average_speed_count;
 
-              // note that aria report speed in kBps or MBps, while the report takes Bps
-              report->progress ( progress, fileurl,
-                  average_speed * (kibs ? 0x400 : 0x10000),
-                  current_speed * (kibs ? 0x400 : 0x10000));
+              report->progress ( progress, fileurl, average_speed, current_speed );
               // clear the progress line to detect mismatches between
               // [# and FILE: lines
               progressLine.clear();
