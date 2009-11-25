@@ -1,4 +1,11 @@
 -------------------------------------------------------------------
+Wed Nov 25 16:28:29 CET 2009 - ma@suse.de
+
+- Add ui::Selecatble interface for picking specific package versions
+  to install or delete if multiversion install is on.
+- version 6.24.0 (19)
+
+-------------------------------------------------------------------
 Fri Nov 20 13:30:02 CET 2009 - ma@suse.de
 
 - Parse zypp.conf multiversion option and make the setting available 
