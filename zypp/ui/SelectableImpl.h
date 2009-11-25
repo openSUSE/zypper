@@ -91,12 +91,13 @@ namespace zypp
       /**  */
       bool setStatus( const Status state_r, ResStatus::TransactByValue causer_r );
 
-      /** Installed object. */
+      /** Installed object (transacting ot highest version). */
       PoolItem installedObj() const
       {
-          if (!installedEmpty())
-              return *_installedItems.begin();
+        if ( installedEmpty() )
           return PoolItem();
+        PoolItem ret( transactingInstalled() );
+        return ret ? ret : *_installedItems.begin();
       }
 
       /** Best among available objects.
@@ -140,9 +141,10 @@ namespace zypp
        */
       PoolItem updateCandidateObj() const
       {
-        if ( installedEmpty() || ! _defaultCandidate )
+        if ( multiversionInstall() || installedEmpty() || ! _defaultCandidate )
           return _defaultCandidate;
-        // Here: installed and _defaultCandidate are non NULL.
+        // Here: installed and _defaultCandidate are non NULL and it's not a
+        //       multiversion install.
 
         // update candidate must come from the highest priority repo
         if ( _defaultCandidate->repoInfo().priority() != (*availableBegin())->repoInfo().priority() )
@@ -186,13 +188,9 @@ namespace zypp
       PoolItem theObj() const
       {
         PoolItem ret( candidateObj() );
-        if (ret)
-            return ret;
-
-        if ( ! _installedItems.empty() )
-            return  (*_installedItems.begin());
-
-        return PoolItem();
+        if ( ret )
+          return ret;
+        return installedObj();
       }
 
       ////////////////////////////////////////////////////////////////////////
@@ -231,6 +229,12 @@ namespace zypp
       bool multiversionInstall() const
       { return theObj().satSolvable().multiversionInstall(); }
 
+      bool pickInstall( const PoolItem & pi_r, ResStatus::TransactByValue causer_r, bool yesno_r );
+
+      bool pickDelete( const PoolItem & pi_r, ResStatus::TransactByValue causer_r, bool yesno_r );
+
+      ////////////////////////////////////////////////////////////////////////
+
       bool isUndetermined() const
       {
         PoolItem cand( candidateObj() );
@@ -264,10 +268,19 @@ namespace zypp
       { if ( candidateObj() ) candidateObj().status().setLicenceConfirmed( val_r ); }
 
     private:
+      PoolItem transactingInstalled() const
+      {
+        for_( it, installedBegin(), installedEnd() )
+          {
+            if ( (*it).status().transacts() )
+              return (*it);
+          }
+        return PoolItem();
+      }
+
       PoolItem transactingCandidate() const
       {
-        for ( available_const_iterator it = availableBegin();
-              it != availableEnd(); ++it )
+        for_( it, availableBegin(), availableEnd() )
           {
             if ( (*it).status().transacts() )
               return (*it);
@@ -277,7 +290,7 @@ namespace zypp
 
       PoolItem defaultCandidate() const
       {
-        if ( !installedEmpty() )
+        if ( ! ( multiversionInstall() || installedEmpty() ) )
         {
           // prefer the installed objects arch and vendor
           bool solver_allowVendorChange( ZConfig::instance().solver_allowVendorChange() );
@@ -356,10 +369,16 @@ namespace zypp
         str << "   (I 0) {}" << endl << "   ";
       else
       {
+        PoolItem icand( obj.installedObj() );
         str << "   (I " << obj.installedSize() << ") {" << endl;
         for_( it, obj.installedBegin(), obj.installedEnd() )
         {
-          str << "   " << *it << endl;
+          char t = ' ';
+          if ( *it == icand )
+          {
+            t = 'i';
+          }
+          str << " " << t << " " << *it << endl;
         }
         str << "}  ";
       }

@@ -323,6 +323,22 @@ namespace zypp
       return _candidate = newCandidate;
     }
 
+    bool Selectable::Impl::pickInstall( const PoolItem & pi_r, ResStatus::TransactByValue causer_r, bool yesno_r )
+    {
+      if ( pi_r.satSolvable().ident() != ident() || pi_r.satSolvable().isSystem() )
+        return false; // not my PoolItem or an installed one
+
+      return pi_r.status().setTransact( yesno_r, causer_r );
+    }
+
+    bool Selectable::Impl::pickDelete( const PoolItem & pi_r, ResStatus::TransactByValue causer_r, bool yesno_r )
+    {
+      if ( pi_r.satSolvable().ident() != ident() || ! pi_r.satSolvable().isSystem() )
+        return false; // not my PoolItem or not installed
+
+      return pi_r.status().setTransact( yesno_r, causer_r );
+    }
+
     ResStatus::TransactByValue Selectable::Impl::modifiedBy() const
     {
       PoolItem cand( candidateObj() );

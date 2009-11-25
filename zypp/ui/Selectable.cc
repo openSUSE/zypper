@@ -135,6 +135,14 @@ namespace zypp
     bool Selectable::multiversionInstall() const
     { return _pimpl->multiversionInstall(); }
 
+    bool Selectable::pickInstall( const PoolItem & pi_r, ResStatus::TransactByValue causer_r, bool yesno_r )
+    { return _pimpl->pickInstall( pi_r, causer_r, yesno_r ); }
+
+    bool Selectable::pickDelete( const PoolItem & pi_r, ResStatus::TransactByValue causer_r, bool yesno_r )
+    { return _pimpl->pickDelete( pi_r, causer_r, yesno_r ); }
+
+    ////////////////////////////////////////////////////////////////////////
+
     bool Selectable::isUndetermined() const
     { return _pimpl->isUndetermined(); }
 

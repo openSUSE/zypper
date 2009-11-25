@@ -267,10 +267,36 @@ namespace zypp
        */
       bool isUnmaintained() const;
 
+      /** \name Multiversion install.
+       *
+       * Using \ref pickInstall or \ref pickDelete with non-multiversionInstall items
+       * is possible, but additional constraints will apply. E.g. selecting one item for
+       * install will deselect any other.
+       */
+      //@{
       /** Whether different versions of this package can be installed at the same time.
        * Per default \c false. \see also \ref ZConfig::multiversion.
        */
       bool multiversionInstall() const;
+
+      /** Select a specific available item for installation.
+       */
+      bool pickInstall( const PoolItem & pi_r, ResStatus::TransactByValue causer_r = ResStatus::USER, bool yesno_r = true );
+
+      /** Deselect a specific available item from installation.
+      */
+      bool pickNoInstall( const PoolItem & pi_r, ResStatus::TransactByValue causer_r = ResStatus::USER )
+      { return pickInstall( pi_r, causer_r, false ); }
+
+      /** Select a specific installed item for deletion.
+       */
+      bool pickDelete( const PoolItem & pi_r, ResStatus::TransactByValue causer_r = ResStatus::USER, bool yesno_r = true );
+
+      /** Deselect a specific installed item from deletion.
+       */
+      bool pickNoDelete( const PoolItem & pi_r, ResStatus::TransactByValue causer_r = ResStatus::USER )
+      { return pickDelete( pi_r, causer_r, false ); }
+      //@}
 
       /** \name Classification of available patches (pseudo installed items).
        * A patch is either \c not \c relevant, \c satisfied or \c broken.
