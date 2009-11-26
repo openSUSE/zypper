@@ -130,6 +130,11 @@ std::string asXML(const zypp::Pattern & p, bool is_installed);
  */
 void list_processes_using_deleted_files(Zypper & zypper);
 
+
+/**
+ * Check whether one of --download-* or --download options was given and return
+ * the specified mode.
+ */
 zypp::DownloadMode get_download_option(Zypper & zypper);
 
 #endif /*ZYPPER_UTILS_H*/

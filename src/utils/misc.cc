@@ -481,23 +481,36 @@ void list_processes_using_deleted_files(Zypper & zypper)
 
 DownloadMode get_download_option(Zypper & zypper)
 {
-  if (!zypper.cOpts().count("download") &&
-      !zypper.cOpts().count("download-only"))
-    return DownloadDefault; //! \todo FIXME return ZConfig value
+  DownloadMode mode;
+  DownloadMode zconfig = ZConfig::instance().commit_downloadMode();
 
+  // check for --download-* options
+  if (zypper.cOpts().count("download-only"))
+    mode = DownloadOnly;
+  else if (zypper.cOpts().count("download-in-advance"))
+    mode = DownloadInAdvance;
+  else if (zypper.cOpts().count("download-in-heaps"))
+    mode = DownloadInHeaps;
+  else if (zypper.cOpts().count("download-as-needed"))
+    mode = DownloadAsNeeded;
+  else
+    mode = zconfig;
+
+  // check --download <mode>
+  // this option overrides the above aliases, if used simultaneously
   string download;
   parsed_opts::const_iterator it = zypper.cOpts().find("download");
   if (it != zypper.cOpts().end())
     download = it->second.front();
-  if (zypper.cOpts().count("download-only") || download == "only")
-    return DownloadOnly;
+  if (download == "only")
+    mode = DownloadOnly;
   else if (download == "in-advance")
-    return DownloadInAdvance;
+    mode = DownloadInAdvance;
   else if (download == "in-heaps")
-    return DownloadInHeaps;
+    mode = DownloadInHeaps;
   else if (download == "as-needed")
-    return DownloadAsNeeded;
-  else
+    mode = DownloadAsNeeded;
+  else if (!download.empty())
   {
     zypper.out().error(str::form(_("Unknown download mode '%s'."), download.c_str()));
     zypper.out().info(str::form(_("Available download modes: %s"),
@@ -505,4 +518,25 @@ DownloadMode get_download_option(Zypper & zypper)
     zypper.setExitCode(ZYPPER_EXIT_ERR_INVALID_ARGS);
     throw ExitRequestException("Unknown download mode");
   }
+
+  // warn about the override, both were specified
+  if (!download.empty() &&
+      (zypper.cOpts().count("download-only") ||
+       zypper.cOpts().count("download-in-advance") ||
+       zypper.cOpts().count("download-in-heaps") ||
+       zypper.cOpts().count("download-as-needed")))
+  {
+    zypper.out().warning(
+      str::form(_("Option '%s' overrides '%s'."), "--download", "--download-*"));
+  }
+
+  MIL << "Download mode: ";
+  if      (mode == DownloadInAdvance) MIL << "in-advance";
+  else if (mode == DownloadInHeaps)   MIL << "in-heaps";
+  else if (mode == DownloadOnly)      MIL << "only";
+  else if (mode == DownloadAsNeeded)  MIL << "as-needed";
+  else                                MIL << "UNKNOWN";
+  MIL << (mode == zconfig ? " (zconfig value)" : "") << endl;
+
+  return mode;
 }

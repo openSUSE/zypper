@@ -916,8 +916,13 @@ void Zypper::processCommandOptions()
       {"dry-run",                   no_argument,       0, 'N'},
       {"no-recommends",             no_argument,       0,  0 },
       {"recommends",                no_argument,       0,  0 },
-      {"download-only",             no_argument,       0, 'd'},
       {"download",                  required_argument, 0,  0 },
+      // aliases for --download
+      // in --download-only, -d must be kept for backward and rug compatibility
+      {"download-only",             no_argument,       0, 'd'},
+      {"download-in-advance",       no_argument,       0,  0 },
+      {"download-in-heaps",         no_argument,       0,  0 },
+      {"download-as-needed",        no_argument,       0,  0 },
       // rug compatibility - will mark all packages for installation (like 'in *')
       {"entire-catalog",            required_argument, 0,  0 },
       {"help",                      no_argument,       0, 'h'},
@@ -925,8 +930,9 @@ void Zypper::processCommandOptions()
     };
     specific_options = install_options;
     _command_help = str::form(_(
-      // TranslatorExplanation the first %s = "package, patch, pattern, product"
-      //  and the second %s = "package"
+      // translators: the first %s = "package, patch, pattern, product",
+      // second %s = "package",
+      // and the third %s = "only, in-advance, in-heaps, as-needed"
       "install (in) [options] <capability|rpm_file_uri> ...\n"
       "\n"
       "Install packages with specified capabilities or RPM files with specified\n"
@@ -955,8 +961,12 @@ void Zypper::processCommandOptions()
       "-R, --force-resolution      Force the solver to find a solution (even\n"
       "                            an agressive).\n"
       "-D, --dry-run               Test the installation, do not actually install.\n"
+      "    --download              Set the download-install mode. Available modes:\n"
+      "                            %s\n"
       "-d, --download-only         Only download the packages, do not install.\n"
-    ), "package, patch, pattern, product, srcpackage", "package");
+    ), "package, patch, pattern, product, srcpackage",
+       "package",
+       "only, in-advance, in-heaps, as-needed");
     break;
   }
 
@@ -1036,8 +1046,13 @@ void Zypper::processCommandOptions()
       {"dry-run", no_argument, 0, 'D'},
       // rug uses -N shorthand
       {"dry-run", no_argument, 0, 'N'},
-      {"download-only", no_argument, 0, 'd'},
-      {"download", required_argument, 0, 0},
+      {"download",                  required_argument, 0,  0 },
+      // aliases for --download
+      // in --download-only, -d must be kept for backward and rug compatibility
+      {"download-only",             no_argument,       0, 'd'},
+      {"download-in-advance",       no_argument,       0,  0 },
+      {"download-in-heaps",         no_argument,       0,  0 },
+      {"download-as-needed",        no_argument,       0,  0 },
       {"repo", required_argument, 0, 'r'},
       {"no-recommends", no_argument, 0, 0},
       {"help", no_argument, 0, 'h'},
@@ -1045,7 +1060,7 @@ void Zypper::processCommandOptions()
       {0, 0, 0, 0}
     };
     specific_options = verify_options;
-    _command_help = _(
+    _command_help = str::form(_(
       "verify (ve) [options]\n"
       "\n"
       "Check whether dependencies of installed packages are satisfied"
@@ -1058,8 +1073,10 @@ void Zypper::processCommandOptions()
       "                            to the required.\n"
       "-D, --dry-run               Test the repair, do not actually do anything to\n"
       "                            the system.\n"
-      "-d, --download-only         Only download needed packages, do not install.\n"
-    );
+      "    --download              Set the download-install mode. Available modes:\n"
+      "                            %s\n"
+      "-d, --download-only         Only download the packages, do not install.\n"
+    ), "only, in-advance, in-heaps, as-needed");
     break;
   }
 
@@ -1067,15 +1084,20 @@ void Zypper::processCommandOptions()
   {
     static struct option options[] = {
       {"dry-run", no_argument, 0, 'D'},
-      {"download-only", no_argument, 0, 'd'},
-      {"download", required_argument, 0, 0},
+      {"download",                  required_argument, 0,  0 },
+      // aliases for --download
+      // in --download-only, -d must be kept for backward and rug compatibility
+      {"download-only",             no_argument,       0, 'd'},
+      {"download-in-advance",       no_argument,       0,  0 },
+      {"download-in-heaps",         no_argument,       0,  0 },
+      {"download-as-needed",        no_argument,       0,  0 },
       {"repo", required_argument, 0, 'r'},
       {"debug-solver", no_argument, 0, 0},
       {"help", no_argument, 0, 'h'},
       {0, 0, 0, 0}
     };
     specific_options = options;
-    _command_help = _(
+    _command_help = str::form(_(
       "install-new-recommends (inr) [options]\n"
       "\n"
       "Install newly added packages recommended by already installed packages."
@@ -1083,11 +1105,13 @@ void Zypper::processCommandOptions()
       " for newly added hardware.\n"
       "\n"
       "  Command options:\n"
-      "-r, --repo <alias|#|URI> Use only specified repositories to install packages.\n"
-      "-D, --dry-run            Test the installation, do not actually install anything.\n"
-      "-d, --download-only      Only download the packages, do not install.\n"
-      "    --debug-solver       Create solver test case for debugging.\n"
-    );
+      "-r, --repo <alias|#|URI>    Load only the specified repositories.\n"
+      "-D, --dry-run               Test the installation, do not actually install.\n"
+      "    --download              Set the download-install mode. Available modes:\n"
+      "                            %s\n"
+      "-d, --download-only         Only download the packages, do not install.\n"
+      "    --debug-solver          Create solver test case for debugging.\n"
+    ), "only, in-advance, in-heaps, as-needed");
     break;
   }
 
@@ -1542,8 +1566,13 @@ void Zypper::processCommandOptions()
       {"dry-run",                   no_argument,       0, 'D'},
       // rug uses -N shorthand
       {"dry-run",                   no_argument,       0, 'N'},
-      {"download-only",             no_argument,       0, 'd'},
       {"download",                  required_argument, 0,  0 },
+      // aliases for --download
+      // in --download-only, -d must be kept for backward and rug compatibility
+      {"download-only",             no_argument,       0, 'd'},
+      {"download-in-advance",       no_argument,       0,  0 },
+      {"download-in-heaps",         no_argument,       0,  0 },
+      {"download-as-needed",        no_argument,       0,  0 },
       // rug-compatibility - dummy for now
       //! \todo category can now be implemented in 'patch' using PoolQuery
       {"category",                  no_argument,       0, 'g'},
@@ -1552,8 +1581,9 @@ void Zypper::processCommandOptions()
     };
     specific_options = update_options;
     _command_help = str::form(_(
-      // TranslatorExplanation the first %s = "package, patch, pattern, product"
-      //  and the second %s = "patch"
+      // translators: the first %s = "package, patch, pattern, product",
+      // the second %s = "patch",
+      // and the third %s = "only, in-avance, in-heaps, as-needed"
       "update (up) [options] [packagename] ...\n"
       "\n"
       "Update all or specified installed packages with newer versions, if possible.\n"
@@ -1580,8 +1610,12 @@ void Zypper::processCommandOptions()
       "    --force-resolution      Force the solver to find a solution (even\n"
       "                            an agressive).\n"
       "-D, --dry-run               Test the update, do not actually update.\n"
+      "    --download              Set the download-install mode. Available modes:\n"
+      "                            %s\n"
       "-d, --download-only         Only download the packages, do not install.\n"
-    ), "package, patch, pattern, product", "package");
+    ), "package, patch, pattern, product, srcpackage",
+       "package",
+       "only, in-advance, in-heaps, as-needed");
     break;
   }
 
@@ -1596,8 +1630,13 @@ void Zypper::processCommandOptions()
       {"no-recommends",             no_argument,       0,  0 },
       {"recommends",                no_argument,       0,  0 },
       {"dry-run",                   no_argument,       0, 'D'},
-      {"download-only",             no_argument,       0, 'd'},
       {"download",                  required_argument, 0,  0 },
+      // aliases for --download
+      // in --download-only, -d must be kept for backward and rug compatibility
+      {"download-only",             no_argument,       0, 'd'},
+      {"download-in-advance",       no_argument,       0,  0 },
+      {"download-in-heaps",         no_argument,       0,  0 },
+      {"download-as-needed",        no_argument,       0,  0 },
       {"bz",                        required_argument, 0, 'b'},
       {"bugzilla",                  required_argument, 0, 'b'},
       {"cve",                       required_argument, 0,  0 },
@@ -1605,7 +1644,7 @@ void Zypper::processCommandOptions()
       {0, 0, 0, 0}
     };
     specific_options = update_options;
-    _command_help = _(
+    _command_help = str::form(_(
       "patch [options]\n"
       "\n"
       "Install all available needed patches.\n"
@@ -1613,6 +1652,7 @@ void Zypper::processCommandOptions()
       "  Command options:\n"
       "\n"
       "    --skip-interactive      Skip interactive patches.\n"
+      "    --with-interactive      Do not skip interactive patches.\n"
       "-l, --auto-agree-with-licenses\n"
       "                            Automatically say 'yes' to third party license\n"
       "                            confirmation prompt.\n"
@@ -1625,11 +1665,10 @@ void Zypper::processCommandOptions()
       "                            to the required.\n"
       "-r, --repo <alias|#|URI>    Load only the specified repository.\n"
       "-D, --dry-run               Test the update, do not actually update.\n"
+      "    --download              Set the download-install mode. Available modes:\n"
+      "                            %s\n"
       "-d, --download-only         Only download the packages, do not install.\n"
-    //! \todo merge this with the above string for 11.3
-    ) + string(_(
-      "    --with-interactive      Do not skip interactive patches.\n"
-    ));
+    ), "only, in-advance, in-heaps, as-needed");
     break;
   }
 
@@ -1673,19 +1712,25 @@ void Zypper::processCommandOptions()
       {"dry-run",                   no_argument,       0, 'D'},
       // rug uses -N shorthand
       {"dry-run",                   no_argument,       0, 'N'},
-      {"download-only",             no_argument,       0, 'd'},
       {"download",                  required_argument, 0,  0 },
+      // aliases for --download
+      // in --download-only, -d must be kept for backward and rug compatibility
+      {"download-only",             no_argument,       0, 'd'},
+      {"download-in-advance",       no_argument,       0,  0 },
+      {"download-in-heaps",         no_argument,       0,  0 },
+      {"download-as-needed",        no_argument,       0,  0 },
       {"help", no_argument, 0, 'h'},
       {0, 0, 0, 0}
     };
     specific_options = dupdate_options;
-    _command_help = string(_(
+    _command_help = str::form(_(
       "dist-upgrade (dup) [options]\n"
       "\n"
       "Perform a distribution upgrade.\n"
       "\n"
       "  Command options:\n"
       "\n"
+      "    --from <alias|#|URI>    Restrict upgrade to specified repository.\n"
       "-r, --repo <alias|#|URI>    Load only the specified repository.\n"
       "-l, --auto-agree-with-licenses\n"
       "                            Automatically say 'yes' to third party license\n"
@@ -1696,9 +1741,10 @@ void Zypper::processCommandOptions()
       "    --recommends            Install also recommended packages in addition\n"
       "                            to the required.\n"
       "-D, --dry-run               Test the upgrade, do not actually upgrade\n"
+      "    --download              Set the download-install mode. Available modes:\n"
+      "                            %s\n"
       "-d, --download-only         Only download the packages, do not install.\n"
-    )) + // FIXME: add to the rest of the strings after 11.2 release
-    _("    --from <alias|#|URI>    Restrict upgrade to specified repository.\n");
+    ), "only, in-advance, in-heaps, as-needed");
     break;
   }
 
