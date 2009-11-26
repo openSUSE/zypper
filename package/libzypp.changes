@@ -1,4 +1,9 @@
 -------------------------------------------------------------------
+Thu Nov 26 16:06:52 CET 2009 - jkupec@suse.cz
+
+- Fixed parsing of download speed from aria2c (bnc #537870)
+
+-------------------------------------------------------------------
 Wed Nov 25 16:28:29 CET 2009 - ma@suse.de
 
 - Add ui::Selecatble interface for picking specific package versions
