@@ -319,6 +319,7 @@ void MediaAria2c::getFileCopy( const Pathname & filename , const Pathname & targ
       // progress line like: [#1 SIZE:8.3MiB/10.1MiB(82%) CN:5 SPD:6899.88KiB/s]
       // but since 1.4.0:    [#1 SIZE:8.3MiB/10.1MiB(82%) CN:5 SPD:899.8KiBs]
       //       (bnc #513944) [#1 SIZE:8.3MiB/10.1MiB(82%) CN:5 SPD:3.8MiBs]
+      //                     [#1 SIZE:8.3MiB/10.1MiB(82%) CN:5 SPD:38Bs]
       // we save it until we find a string with FILE: later
       string progressLine;
       int progress = 0;
@@ -389,14 +390,16 @@ void MediaAria2c::getFileCopy( const Pathname & filename , const Pathname & targ
 
               // get the speed
               double current_speed = 0;
+              int factor = 1; // B/KiB/MiB multiplication factor
+
               left_bound = progressLine.find("SPD:",0) + 4;
-              count = progressLine.find("KiB",left_bound);
-              bool kibs = true; // KiBs ? (MiBs if false)
-              if ( count == string::npos ) // try MiBs
-              {
-                count = progressLine.find("MiBs",left_bound);
-                kibs = false;
-              }
+              if ((count = progressLine.find("KiB",left_bound)) != string::npos)
+                factor = 1024;
+              else if ((count = progressLine.find("MiB",left_bound)) != string::npos)
+                factor = 0x100000;
+              else
+                count = progressLine.find("Bs",left_bound);
+
               if ( count != string::npos )
               { // convert the string to a double
                 count -= left_bound;
@@ -404,13 +407,15 @@ void MediaAria2c::getFileCopy( const Pathname & filename , const Pathname & targ
                 try {
                   current_speed = boost::lexical_cast<double>(speedStr);
                   // convert to and work with bytes everywhere (bnc #537870)
-                  current_speed *= kibs ? 0x400 : 0x100000;
+                  current_speed *= factor;
                 }
                 catch (const std::exception&) {
                   ERR << "Can't parse speed from '" << speedStr << "'" << endl;
                   current_speed = 0;
                 }
               }
+              else
+                ERR << "Can't parse speed from '" << progressLine << "'" << endl;
 
               // we have a new average speed
               average_speed_count++;
