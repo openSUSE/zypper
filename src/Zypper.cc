@@ -169,22 +169,16 @@ void print_main_help(Zypper & zypper)
     "\t--raw-cache-dir <dir>\tUse alternative raw meta-data cache directory.\n"
   );
 
-  static string help_global_repo_options = string(_("     Repository Options:\n"
+  static string help_global_repo_options = _("     Repository Options:\n"
     "\t--no-gpg-checks\t\tIgnore GPG check failures and continue.\n"
+    "\t--gpg-auto-import-keys\tAutomatically trust and import new repository\n"
+      "\t\t\t\tsigning keys.\n"
     "\t--plus-repo, -p <URI>\tUse an additional repository.\n"
     "\t--disable-repositories\tDo not read meta-data from repositories.\n"
     "\t--no-refresh\t\tDo not refresh the repositories.\n"
-  )) + string(_(
-    // translators: these belong to Repository Options main help text
-    // \todo merge into the main string for 11.3
     "\t--no-cd\t\t\tIgnore CD/DVD repositories.\n"
     "\t--no-remote\t\tIgnore remote repositories.\n"
-  )) + string(_(
-    // translators: these belong to Repository Options main help text
-    // \todo merge into the main string for 11.3
-    "\t--gpg-auto-import-keys\tAutomatically trust and import new repository\n"
-      "\t\t\t\tsigning keys.\n"
-  ));
+  );
 
   static string help_global_target_options = _("     Target Options:\n"
     "\t--root, -R <dir>\tOperate on a different root directory.\n"
@@ -1345,8 +1339,7 @@ void Zypper::processCommandOptions()
     }
 
     _command_help = _(
-      // FIXME it's 'repos (lr) [options] [repo] ...' now. Fix after 11.2
-      "repos (lr) [options]\n"
+      "repos (lr) [options] [repo] ...\n"
       "\n"
       "List all defined repositories.\n"
       "\n"
@@ -1355,15 +1348,12 @@ void Zypper::processCommandOptions()
       "-u, --uri                 Show also base URI of repositories.\n"
       "-p, --priority            Show also repository priority.\n"
       "-d, --details             Show more information like URI, priority, type.\n"
+      "-s, --service             Show also alias of parent service.\n"
       "-U, --sort-by-uri         Sort the list by URI.\n"
       "-P, --sort-by-priority    Sort the list by repository priority.\n"
       "-A, --sort-by-alias       Sort the list by alias.\n"
       "-N, --sort-by-name        Sort the list by name.\n"
-    ) + string(_(
-      // translators: this option belongs to 'lr' command help
-      // FIXME add this to the rest after 11.2
-      "-s, --service             Show also alias of parent service.\n"
-    ));
+    );
     break;
   }
 
