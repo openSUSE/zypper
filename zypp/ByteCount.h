@@ -40,14 +40,20 @@ namespace zypp
     //@{
     /** 1 Byte */
     static const Unit B;
+
     /** 1024 Byte */
     static const Unit K;
+    static const Unit KiB;
     /** 1024^2 Byte */
     static const Unit M;
+    static const Unit MiB;
     /** 1024^3 Byte */
     static const Unit G;
+    static const Unit GiB;
     /** 1024^4 Byte */
     static const Unit T;
+    static const Unit TiB;
+
     /** 1000 Byte */
     static const Unit kB;
     /** 1000^2 Byte */
@@ -73,7 +79,7 @@ namespace zypp
     : _count( count_r * unit_r.factor() )
     {}
 
-  public:
+ public:
 
     /** Conversion to SizeType. */
     operator SizeType() const
