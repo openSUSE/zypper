@@ -1,4 +1,10 @@
 -------------------------------------------------------------------
+Thu Nov 26 18:32:32 CET 2009 - ma@suse.de
+
+- Fix chroot execution of update scripts.
+- version 6.24.2 (19)
+
+-------------------------------------------------------------------
 Thu Nov 26 16:06:52 CET 2009 - jkupec@suse.cz
 
 - Fixed parsing of download speed from aria2c (bnc #537870)
