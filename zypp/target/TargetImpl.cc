@@ -127,7 +127,7 @@ namespace zypp
                                                                  const Pathname & script_r,
                                                                  callback::SendReport<PatchScriptReport> & report_r )
       {
-        MIL << "Execute script " << PathInfo(script_r) << endl;
+        MIL << "Execute script " << PathInfo(Pathname::assertprefix( root_r,script_r)) << endl;
 
         HistoryLog historylog;
         historylog.comment(script_r.asString() + _(" executed"), /*timestamp*/true);
@@ -241,11 +241,12 @@ namespace zypp
             if ( (*sit)[prefix.size()] != '\0' && (*sit)[prefix.size()] != '-' )
               continue; // if not exact match it had to continue with '-'
 
+            Pathname localPath( scriptsPath_r/(*sit) ); // without root prefix
             if ( abort || aborting_r )
             {
               WAR << "Aborting: Skip update script " << *sit << endl;
               HistoryLog().comment(
-                  script.path().asString() + _(" execution skipped while aborting"),
+                  localPath.asString() + _(" execution skipped while aborting"),
                   /*timestamp*/true);
             }
             else
@@ -254,7 +255,7 @@ namespace zypp
               callback::SendReport<PatchScriptReport> report;
               report->start( make<Package>( *it ), script.path() );
 
-              if ( ! executeScript( root_r, script.path(), report ) )
+              if ( ! executeScript( root_r, localPath, report ) ) // script path without root prefix!
                 abort = true; // requested abort.
             }
           }
