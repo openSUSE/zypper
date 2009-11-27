@@ -1,8 +1,8 @@
 -------------------------------------------------------------------
-Thu Nov 26 18:32:32 CET 2009 - ma@suse.de
+Fri Nov 27 11:20:34 CET 2009 - ma@suse.de
 
-- Fix chroot execution of update scripts.
-- version 6.24.2 (19)
+- Fix chroot execution of update scripts. (bnc #558813)
+- version 6.24.3 (19)
 
 -------------------------------------------------------------------
 Thu Nov 26 16:06:52 CET 2009 - jkupec@suse.cz
