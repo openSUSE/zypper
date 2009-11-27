@@ -693,6 +693,20 @@ namespace zypp
      * @return 0 on success, errno on failure
      **/
     int chmod( const Pathname & path, mode_t mode );
+
+    /**
+     * Add the \c mode bits to the file given by path.
+     *
+     * @return 0 on success, errno on failure
+     */
+    int addmod( const Pathname & path, mode_t mode );
+
+    /**
+     * Remove the \c mode bits from the file given by path.
+     *
+     * @return 0 on success, errno on failure
+     */
+    int delmod( const Pathname & path, mode_t mode );
     //@}
 
     ///////////////////////////////////////////////////////////////////

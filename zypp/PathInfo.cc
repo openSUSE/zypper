@@ -1017,7 +1017,25 @@ namespace zypp
       return _Log_Result( 0 );
     }
 
-    ///////////////////////////////////////////////////////////////////
+    int addmod( const Pathname & path, mode_t mode )
+    {
+      mode_t omode( PathInfo( path ).st_mode() );
+      mode_t tmode( omode | mode );
+      if ( omode != mode )
+        return chmod( path, tmode );
+      return 0;
+    }
+
+    int delmod( const Pathname & path, mode_t mode )
+    {
+      mode_t omode( PathInfo( path ).st_mode() );
+      mode_t tmode( omode & ~mode );
+      if ( omode != mode )
+        return chmod( path, tmode );
+      return 0;
+    }
+
+   //////////////////////////////////////////////////////////////////
     //
     //	METHOD NAME : zipType
     //	METHOD TYPE : ZIP_TYPE
