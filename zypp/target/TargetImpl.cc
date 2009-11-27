@@ -241,6 +241,9 @@ namespace zypp
             if ( (*sit)[prefix.size()] != '\0' && (*sit)[prefix.size()] != '-' )
               continue; // if not exact match it had to continue with '-'
 
+            // Assert it's set executable
+            filesystem::addmod( script.path(), 0500 );
+
             Pathname localPath( scriptsPath_r/(*sit) ); // without root prefix
             if ( abort || aborting_r )
             {
