@@ -129,6 +129,17 @@ namespace ZmartRecipients
       std::string ejectprompttext = _("Select device to eject.");
       // popts.setOptionHelp(4, _("Eject medium."));
 
+      // https options
+      // translators: a/r/i/u are replies to the "Abort, retry, ignore?" prompt.
+      // Translate the a/r/i part exactly as you did the a/r/i string.
+      // The 'u' reply means 'Change URI'.
+      // https protocol-specific options:
+      // 's' stands for Disable SSL certificate authority check
+      std::string httpsopts = _("a/r/i/u/s");
+      std::string ssldisabletext = _("Disable SSL certificate authority check and continue.");
+      std::string ssldisabledtext = _("SSL certificate authority check disabled.");
+      // popts.setOptionHelp(4, _("Eject medium."));
+
       // translators: this is a prompt text
       zypper.out().prompt(PROMPT_ARI_MEDIA_PROBLEM, _("Abort, retry, ignore?"), popts);
       int reply = get_prompt_reply(zypper, PROMPT_ARI_MEDIA_PROBLEM, popts);
