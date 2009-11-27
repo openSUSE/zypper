@@ -1,4 +1,10 @@
 -------------------------------------------------------------------
+Fri Nov 27 12:42:18 CET 2009 - jkupec@suse.cz
+
+- Don't force resolution in 'install' for non-package types
+  (bnc #549940)
+
+-------------------------------------------------------------------
 Fri Nov 20 15:12:22 CET 2009 - jkupec@suse.cz
 
 - --download option added to in, up, dup, ve, and patch commands
