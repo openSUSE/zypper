@@ -234,12 +234,12 @@ namespace zypp
             if ( ! str::hasPrefix( *sit, prefix ) )
               continue;
 
+            if ( (*sit)[prefix.size()] != '\0' && (*sit)[prefix.size()] != '-' )
+              continue; // if not exact match it had to continue with '-'
+
             PathInfo script( scriptsDir / *sit );
             if ( ! script.isFile() )
               continue;
-
-            if ( (*sit)[prefix.size()] != '\0' && (*sit)[prefix.size()] != '-' )
-              continue; // if not exact match it had to continue with '-'
 
             // Assert it's set executable
             filesystem::addmod( script.path(), 0500 );
