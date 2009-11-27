@@ -115,6 +115,20 @@ namespace ZmartRecipients
       // hide advanced options
       popts.setShownCount(3);
 
+      // protocol-specific options
+
+      // cd/dvd options
+      // translators: a/r/i/u are replies to the "Abort, retry, ignore?" prompt.
+      // Translate the a/r/i part exactly as you did the a/r/i string.
+      // The 'u' reply means 'Change URI'.
+      // cd/dvd protocol-specific options:
+      // 'e' stands for Eject medium
+      std::string dvdopts = _("a/r/i/u/e");
+      std::string ejecttext = _("Eject medium.");
+      std::string devicestext = _("Detected devices:");
+      std::string ejectprompttext = _("Select device to eject.");
+      // popts.setOptionHelp(4, _("Eject medium."));
+
       // translators: this is a prompt text
       zypper.out().prompt(PROMPT_ARI_MEDIA_PROBLEM, _("Abort, retry, ignore?"), popts);
       int reply = get_prompt_reply(zypper, PROMPT_ARI_MEDIA_PROBLEM, popts);
