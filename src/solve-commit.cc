@@ -245,9 +245,22 @@ static void set_force_resolution(Zypper & zypper)
   {
     if (!zypper.globalOpts().non_interactive &&
         (zypper.globalOpts().is_rug_compatible ||
-         zypper.command() == ZypperCommand::INSTALL ||
          zypper.command() == ZypperCommand::REMOVE))
       force_resolution = true;
+    else if (!zypper.globalOpts().non_interactive &&
+        zypper.command() == ZypperCommand::INSTALL)
+    {
+      // if the command is 'install', force resolution only if the sole
+      // --type is 'package' or no --type is given (bnc #549940)
+      parsed_opts::const_iterator it;
+      if (zypper.cOpts().count("type") == 0 ||
+          ((it = zypper.cOpts().find("type")) != zypper.cOpts().end() &&
+            it->second.size() == 1 &&
+            it->second.front() == "package"))
+        force_resolution = true;
+      else
+        force_resolution = false;
+    }
     else
       force_resolution = false;
   }
