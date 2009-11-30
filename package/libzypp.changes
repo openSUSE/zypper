@@ -1,4 +1,10 @@
 -------------------------------------------------------------------
+Mon Nov 30 17:56:02 CET 2009 - ma@suse.de
+
+- Also parse <product> tag from .prod files <upgrade> section.
+- version 6.24.3 (19)
+
+-------------------------------------------------------------------
 Fri Nov 27 11:20:34 CET 2009 - ma@suse.de
 
 - Fix chroot execution of update scripts. (bnc #558813)
