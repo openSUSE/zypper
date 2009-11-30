@@ -23,6 +23,7 @@ This is the Server product of the SUSE Linux Enterprise edition. It is an altern
          <name>openSUSE_11.1</name>
          <summary>openSUSE 11.1</summary>
          <repository>http://download.opensuse.org/distribution/openSUSE/11.1</repository>
+         <product>used on entreprise products</product>
          <notify>true</notify>
          <status>stable</status>
        </upgrade>

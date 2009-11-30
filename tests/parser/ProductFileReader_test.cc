@@ -26,12 +26,14 @@ BOOST_AUTO_TEST_CASE(basic)
   BOOST_CHECK_EQUAL( data.upgrades()[0].name(), "openSUSE_11.1" );
   BOOST_CHECK_EQUAL( data.upgrades()[0].summary(), "openSUSE 11.1" );
   BOOST_CHECK_EQUAL( data.upgrades()[0].repository(), "http://download.opensuse.org/distribution/openSUSE/11.1" );
+  BOOST_CHECK_EQUAL( data.upgrades()[0].product(), "used on entreprise products" );
   BOOST_CHECK_EQUAL( data.upgrades()[0].notify(), true );
   BOOST_CHECK_EQUAL( data.upgrades()[0].status(), "stable" );
 
   BOOST_CHECK_EQUAL( data.upgrades()[1].name(), "openSUSE_Factory" );
   BOOST_CHECK_EQUAL( data.upgrades()[1].summary(), "openSUSE Factory" );
   BOOST_CHECK_EQUAL( data.upgrades()[1].repository(), "http://download.opensuse.org/distribution/openSUSE/Factory" );
+  BOOST_CHECK_EQUAL( data.upgrades()[1].product(), "" );
   BOOST_CHECK_EQUAL( data.upgrades()[1].notify(), false );
   BOOST_CHECK_EQUAL( data.upgrades()[1].status(), "unstable" );
 }
