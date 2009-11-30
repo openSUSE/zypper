@@ -64,6 +64,7 @@ namespace zypp
 
       public:
         ///////////////////////////////////////////////////////////////////
+        /** \see http://en.opensuse.org/Product_Management/Code11/Upgrade */
         struct Upgrade
         {
           public:
@@ -75,6 +76,7 @@ namespace zypp
             std::string name()    const;
             std::string summary() const;
             std::string repository() const;
+            std::string product() const;
             bool        notify()  const;
             std::string status()  const;
 

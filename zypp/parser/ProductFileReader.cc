@@ -41,6 +41,7 @@ namespace zypp
       std::string                 _name;
       std::string                 _summary;
       std::string                 _repository;
+      std::string                 _product;
       DefaultIntegral<bool,false> _notify;
       std::string                 _status;
     };
@@ -52,6 +53,7 @@ namespace zypp
     std::string ProductFileData::Upgrade::name()       const { return _pimpl->_name; }
     std::string ProductFileData::Upgrade::summary()    const { return _pimpl->_summary; }
     std::string ProductFileData::Upgrade::repository() const { return _pimpl->_repository; }
+    std::string ProductFileData::Upgrade::product()    const { return _pimpl->_product; }
     bool        ProductFileData::Upgrade::notify()     const { return _pimpl->_notify; }
     std::string ProductFileData::Upgrade::status()     const { return _pimpl->_status; }
 
@@ -111,9 +113,10 @@ namespace zypp
 
     std::ostream & operator<<( std::ostream & str, const ProductFileData::Upgrade & obj )
     {
-      str << str::form( "|upgrade|%s|%s|%s|%s|",
+      str << str::form( "|upgrade|%s|%s|%s|%s|%s|",
                         obj.name().c_str(),
                         obj.repository().c_str(),
+                        obj.product().c_str(),
                         obj.status().c_str(),
                         (obj.notify() ? "notify" : "noNotify") );
       return str;
@@ -156,6 +159,7 @@ namespace zypp
             ("name",          OPTIONAL,   xml::parseDefAssign( _upgrade._name ) )
             ("summary",       OPTIONAL,   xml::parseDefAssign( _upgrade._summary ) )
             ("repository",    OPTIONAL,   xml::parseDefAssign( _upgrade._repository ) )
+            ("product",       OPTIONAL,   xml::parseDefAssign( _upgrade._product ) )
             ("notify",        OPTIONAL,   xml::parseDefAssign( _upgrade._notify ) )
             ("status",        OPTIONAL,   xml::parseDefAssign( _upgrade._status ) )
             ;
