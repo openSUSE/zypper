@@ -55,18 +55,18 @@ ConfigOption::Option ConfigOption::parse(const std::string & strval_r)
   if (_table.empty())
   {
     // initialize it
-    _table["solver/installRecommends"] = ConfigOption::SOLVER_INSTALL_RECOMMENDS_e;
+    _table["solver/installRecommends"] = SOLVER_INSTALL_RECOMMENDS_e;
     _table["solver/forceResolutionCommands"] = SOLVER_FORCE_RESOLUTION_COMMANDS_e;
-    _table["color/useColors"] = ConfigOption::COLOR_USE_COLORS_e;
-    _table["color/background"] = ConfigOption::COLOR_BACKGROUND_e;
-    _table["color/result"] = ConfigOption::COLOR_RESULT_e;
-    _table["color/msgStatus"] = ConfigOption::COLOR_MSG_STATUS_e;
-    _table["color/msgError"] = ConfigOption::COLOR_MSG_ERROR_e;
-    _table["color/msgWarning"] = ConfigOption::COLOR_MSG_WARNING_e;
-    _table["color/positive"] = ConfigOption::COLOR_POSITIVE_e;
-    _table["color/negative"] = ConfigOption::COLOR_NEGATIVE_e;
-    _table["color/highlight"] = ConfigOption::COLOR_HIGHLIGHT_e;
-    _table["color/promptOption"] = ConfigOption::COLOR_PROMPT_OPTION_e;
+    _table["color/useColors"] = COLOR_USE_COLORS_e;
+    _table["color/background"] = COLOR_BACKGROUND_e;
+    _table["color/result"] = COLOR_RESULT_e;
+    _table["color/msgStatus"] = COLOR_MSG_STATUS_e;
+    _table["color/msgError"] = COLOR_MSG_ERROR_e;
+    _table["color/msgWarning"] = COLOR_MSG_WARNING_e;
+    _table["color/positive"] = COLOR_POSITIVE_e;
+    _table["color/negative"] = COLOR_NEGATIVE_e;
+    _table["color/highlight"] = COLOR_HIGHLIGHT_e;
+    _table["color/promptOption"] = COLOR_PROMPT_OPTION_e;
   }
   map<string, ConfigOption::Option>::const_iterator it = _table.find(strval_r);
   if (it == _table.end())
