@@ -8,7 +8,7 @@
 #ifndef ZYPPERCOMMAND_H_
 #define ZYPPERCOMMAND_H_
 
-#include<iosfwd>
+//#include<iosfwd>
 #include<string>
 
 /**
@@ -183,5 +183,8 @@ inline bool operator==(const ZypperCommand & obj1, const ZypperCommand & obj2)
 inline bool operator!=(const ZypperCommand & obj1, const ZypperCommand & obj2)
 { return obj1._command != obj2._command; }
 
+// for use in std::set
+inline bool operator<(const ZypperCommand & obj1, const ZypperCommand & obj2)
+{ return obj1._command < obj2._command; }
 
 #endif /*ZYPPERCOMMAND_H_*/

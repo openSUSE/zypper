@@ -33,6 +33,7 @@ using namespace zypp;
 static map<string, ConfigOption::Option> _table;
 static map<ConfigOption::Option, string> _table_str;
 const ConfigOption ConfigOption::SOLVER_INSTALL_RECOMMENDS(ConfigOption::SOLVER_INSTALL_RECOMMENDS_e);
+const ConfigOption ConfigOption::SOLVER_FORCE_RESOLUTION_COMMANDS(ConfigOption::SOLVER_FORCE_RESOLUTION_COMMANDS_e);
 const ConfigOption ConfigOption::COLOR_USE_COLORS(ConfigOption::COLOR_USE_COLORS_e);
 const ConfigOption ConfigOption::COLOR_BACKGROUND(ConfigOption::COLOR_BACKGROUND_e);
 const ConfigOption ConfigOption::COLOR_RESULT(ConfigOption::COLOR_RESULT_e);
@@ -55,6 +56,7 @@ ConfigOption::Option ConfigOption::parse(const std::string & strval_r)
   {
     // initialize it
     _table["solver/installRecommends"] = ConfigOption::SOLVER_INSTALL_RECOMMENDS_e;
+    _table["solver/forceResolutionCommands"] = SOLVER_FORCE_RESOLUTION_COMMANDS_e;
     _table["color/useColors"] = ConfigOption::COLOR_USE_COLORS_e;
     _table["color/background"] = ConfigOption::COLOR_BACKGROUND_e;
     _table["color/result"] = ConfigOption::COLOR_RESULT_e;
@@ -81,8 +83,9 @@ const string ConfigOption::asString() const
   if (_table.empty())
   {
     // initialize it
-    _table_str[SOLVER_INSTALL_RECOMMENDS_e] = string("solver/installRecommends");
-    _table_str[COLOR_USE_COLORS_e] = string("color/useColors");
+    _table_str[SOLVER_INSTALL_RECOMMENDS_e] = "solver/installRecommends";
+    _table_str[SOLVER_FORCE_RESOLUTION_COMMANDS_e] = "solver/forceResolutionCommands";
+    _table_str[COLOR_USE_COLORS_e] = "color/useColors";
     _table_str[COLOR_BACKGROUND_e] = "color/background";
     _table_str[COLOR_RESULT_e] = "color/result";
     _table_str[COLOR_MSG_STATUS_e] = "color/msgStatus";
@@ -130,13 +133,25 @@ void Config::read(const string & file)
 
     // TODO
 
-    // ---------------[ main ]--------------------------------------------------
+
+    // ---------------[ solver ]------------------------------------------------
 
     s = augeas.getOption(ConfigOption::SOLVER_INSTALL_RECOMMENDS.asString());
     if (s.empty())
       solver_installRecommends = !ZConfig::instance().solver_onlyRequires();
     else
       solver_installRecommends = str::strToBool(s, true);
+
+    s = augeas.getOption(ConfigOption::SOLVER_FORCE_RESOLUTION_COMMANDS.asString());
+    if (s.empty())
+      solver_forceResolutionCommands.insert(ZypperCommand::REMOVE);
+    else
+    {
+      list<string> cmdstr;
+      zypp::str::split(s, std::back_inserter(cmdstr), ",");
+      for_(c, cmdstr.begin(), cmdstr.end())
+        solver_forceResolutionCommands.insert(ZypperCommand(*c));
+    }
 
 
     // ---------------[ colors ]------------------------------------------------

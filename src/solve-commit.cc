@@ -214,13 +214,6 @@ static void dump_pool ()
 
 static void set_force_resolution(Zypper & zypper)
 {
-  // don't force resolution in 'verify'
-  if (zypper.command() == ZypperCommand::VERIFY)
-  {
-    God->resolver()->setForceResolve(false);
-    return;
-  }
-
   // --force-resolution command line parameter value
   TriBool force_resolution = zypper.runtimeData().force_resolution;
 
@@ -236,8 +229,14 @@ static void set_force_resolution(Zypper & zypper)
     force_resolution = false;
   }
 
-  // if --force-resolution was not specified on the command line, force
-  // the resolution by default for the install and remove commands and the
+  // if --force-resolution was not specified on the command line,
+  // use value from zypper.conf
+  if (zypper.config().solver_forceResolutionCommands.find(zypper.command()) !=
+      zypper.config().solver_forceResolutionCommands.end())
+    force_resolution = true;
+
+  // if we still don't have the value, force
+  // the resolution by default for the remove commands and the
   // rug_compatible mode. Don't force resolution in non-interactive mode
   // and for update and dist-upgrade command (complex solver request).
   // bnc #369980
@@ -247,20 +246,6 @@ static void set_force_resolution(Zypper & zypper)
         (zypper.globalOpts().is_rug_compatible ||
          zypper.command() == ZypperCommand::REMOVE))
       force_resolution = true;
-    else if (!zypper.globalOpts().non_interactive &&
-        zypper.command() == ZypperCommand::INSTALL)
-    {
-      // if the command is 'install', force resolution only if the sole
-      // --type is 'package' or no --type is given (bnc #549940)
-      parsed_opts::const_iterator it;
-      if (zypper.cOpts().count("type") == 0 ||
-          ((it = zypper.cOpts().find("type")) != zypper.cOpts().end() &&
-            it->second.size() == 1 &&
-            it->second.front() == "package"))
-        force_resolution = true;
-      else
-        force_resolution = false;
-    }
     else
       force_resolution = false;
   }

@@ -9,13 +9,16 @@
 #define ZYPPER_CONFIG_H_
 
 #include <string>
+#include <set>
 
+#include "Command.h"
 #include "utils/colors.h"
 
 class ConfigOption
 {
 public:
   static const ConfigOption SOLVER_INSTALL_RECOMMENDS;
+  static const ConfigOption SOLVER_FORCE_RESOLUTION_COMMANDS;
 
   static const ConfigOption COLOR_USE_COLORS;
   static const ConfigOption COLOR_BACKGROUND;
@@ -32,6 +35,7 @@ public:
   enum Option
   {
     SOLVER_INSTALL_RECOMMENDS_e,
+    SOLVER_FORCE_RESOLUTION_COMMANDS_e,
 
     COLOR_USE_COLORS_e,
     COLOR_BACKGROUND_e,
@@ -74,6 +78,7 @@ struct Config
 
 
   bool solver_installRecommends;
+  std::set<ZypperCommand> solver_forceResolutionCommands;
 
   /**
    * Whether to colorize the output. This is evaluated according to
