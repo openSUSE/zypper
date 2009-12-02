@@ -147,8 +147,14 @@ namespace zypp
        */
       PoolItem highestAvailableVersionObj() const;
 
-      /** \c True if \a rhs has the same content as an installed one.
-       *  Basically the same name, edition, arch, vendor and buildtime.
+     /** \c True if \a rhs is installed and one with the same content is available.
+       * Basically the same name, edition, arch, vendor and buildtime.
+       * \see \ref sat::Solvable::identical
+       */
+      bool identicalAvailable( const PoolItem & rhs ) const;
+
+     /** \c True if \a rhs has the same content as an installed one.
+       * Basically the same name, edition, arch, vendor and buildtime.
        * \see \ref sat::Solvable::identical
        */
       bool identicalInstalled( const PoolItem & rhs ) const;

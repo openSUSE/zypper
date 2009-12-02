@@ -168,7 +168,7 @@ namespace zypp
         return _defaultCandidate;
       }
 
-      /** \copydoc Selectable::highestAvailableVersionObj() */
+      /** \copydoc Selectable::highestAvailableVersionObj()const */
       PoolItem highestAvailableVersionObj() const
       {
         PoolItem ret;
@@ -180,9 +180,21 @@ namespace zypp
         return ret;
       }
 
-      /** \c True if \a rhs has the same content as an installed one.
-       * \see \ref sat::Solvable::identical
-       */
+      /** \copydoc Selectable::identicalAvailable( const PoolItem & )const */
+      bool identicalAvailable( const PoolItem & rhs ) const
+      {
+        if ( !availableEmpty() && rhs )
+        {
+          for_( it, _availableItems.begin(), _availableItems.end() )
+          {
+            if ( identical( *it, rhs ) )
+              return true;
+          }
+        }
+        return false;
+      }
+
+      /** \copydoc Selectable::identicalInstalled( const PoolItem & )const */
       bool identicalInstalled( const PoolItem & rhs ) const
       {
         if ( !installedEmpty() && rhs )
