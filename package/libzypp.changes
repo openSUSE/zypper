@@ -1,4 +1,11 @@
 -------------------------------------------------------------------
+Wed Dec  2 13:10:43 CET 2009 - ma@suse.de
+
+- Add Selectable::highestAvailableVersionObj. Returns the highest 
+  available package version, ignoring priorities and policies. (bnc #557557)
+- version 6.25.0 (19)
+
+-------------------------------------------------------------------
 Mon Nov 30 17:56:02 CET 2009 - ma@suse.de
 
 - Also parse <product> tag from .prod files <upgrade> section.
