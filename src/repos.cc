@@ -447,7 +447,7 @@ void report_unknown_repos(Out & out, list<string> not_found)
  */
 
 template <class Container>
-static void do_init_repos(Zypper & zypper, const Container & container)
+void do_init_repos(Zypper & zypper, const Container & container)
 {
   MIL << "Going to initialize repositories." << endl;
   RuntimeData & gData = zypper.runtimeData();
@@ -605,6 +605,9 @@ static void do_init_repos(Zypper & zypper, const Container & container)
     }
   }
 }
+
+// Explicit instantiation required for versions used outside repos.o
+template void init_repos( Zypper &, const std::vector<std::string> & );
 
 // ----------------------------------------------------------------------------
 
