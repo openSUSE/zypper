@@ -120,6 +120,9 @@ namespace zypp
       void ContentFileReader::beginParse()
       {
 	_pimpl.reset( new Impl(*this) );
+        // actually mandatory, but in case they were forgotten...
+        _pimpl->repoindex().descrdir = "suse/setup/descr";
+        _pimpl->repoindex().datadir = "suse";
       }
 
       ///////////////////////////////////////////////////////////////////
