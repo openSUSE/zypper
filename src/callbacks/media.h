@@ -10,18 +10,17 @@
 
 #include <stdlib.h>
 #include <ctime>
+#include <iostream>
 
 #include <boost/format.hpp>
 
 #include "zypp/ZYppCallbacks.h"
-#include "zypp/base/String.h"
+#include "zypp/base/Logger.h"
 #include "zypp/Pathname.h"
 #include "zypp/Url.h"
-#include "zypp/media/MediaUserAuth.h"
 
 #include "Zypper.h"
 #include "utils/prompt.h"
-#include "utils/messages.h"
 
 
 #define REPEAT_LIMIT 3
@@ -62,117 +61,7 @@ namespace ZmartRecipients
                  MediaChangeReport::Error         error,
                  const std::string &              description,
                  const std::vector<std::string> & devices,
-                 unsigned int &                   index)
-    {
-      Zypper & zypper = *Zypper::instance();
-
-      /*std::cout << "detected devices: ";
-      for (std::vector<std::string>::const_iterator it = devices.begin();
-           it != devices.end(); ++it)
-        std::cout << *it << " ";
-      cout << std::endl;*/
-      DBG << "media problem, url: " << url.asString() << std::endl;
-
-      zypper.out().error(description);
-      if (is_changeable_media(url) && error == MediaChangeReport::WRONG)
-      {
-        //cerr << endl; // may be in the middle of RepoReport or ProgressReport \todo check this
-
-        std::string request = boost::str(boost::format(
-            // TranslatorExplanation translate letters 'y' and 'n' to whathever is appropriate for your language.
-            // Try to check what answers does zypper accept (it always accepts y/n at least)
-            // You can also have a look at the regular expressions used to check the answer here:
-            // /usr/lib/locale/<your_locale>/LC_MESSAGES/SYS_LC_MESSAGES
-            _("Please insert medium [%s] #%d and type 'y' to continue or 'n' to cancel the operation."))
-            % label % mediumNr);
-        if (read_bool_answer(PROMPT_YN_MEDIA_CHANGE, request, false))
-          return MediaChangeReport::RETRY;
-        else
-          return MediaChangeReport::ABORT;
-      }
-
-      if (error == MediaChangeReport::IO_SOFT)
-      {
-        MediaChangeReport::Action action = MediaChangeReport::RETRY;
-        if (repeat_counter.counter_overrun(url))
-          action = MediaChangeReport::ABORT;
-        return (Action) read_action_ari_with_timeout(PROMPT_ARI_MEDIA_PROBLEM,
-          30,action);
-      }
-
-      // translators: a/r/i/u are replies to the "Abort, retry, ignore?" prompt
-      // Translate the a/r/i part exactly as you did the a/r/i string.
-      // the 'u' reply means 'Change URI'.
-      PromptOptions popts(_("a/r/i/u"), 0);
-      // help text for the "Abort, retry, ignore?" prompt for media errors
-      popts.setOptionHelp(0, _("Skip retrieval of the file and abort current operation."));
-      // help text for the "Abort, retry, ignore?" prompt for media errors
-      popts.setOptionHelp(1, _("Try to retrieve the file again."));
-      // help text for the "Abort, retry, ignore?" prompt for media errors
-      popts.setOptionHelp(2, _("Skip retrieval of the file and try to continue with the operation without the file."));
-      // help text for the "Abort, retry, ignore?" prompt for media errors
-      popts.setOptionHelp(3, _("Change current base URI and try retrieving the file again."));
-      // hide advanced options
-      popts.setShownCount(3);
-
-      // protocol-specific options
-
-      // cd/dvd options
-      // translators: a/r/i/u are replies to the "Abort, retry, ignore?" prompt.
-      // Translate the a/r/i part exactly as you did the a/r/i string.
-      // The 'u' reply means 'Change URI'.
-      // cd/dvd protocol-specific options:
-      // 'e' stands for Eject medium
-      std::string dvdopts = _("a/r/i/u/e");
-      std::string ejecttext = _("Eject medium.");
-      std::string devicestext = _("Detected devices:");
-      std::string ejectprompttext = _("Select device to eject.");
-      // popts.setOptionHelp(4, _("Eject medium."));
-
-      // https options
-      // translators: a/r/i/u are replies to the "Abort, retry, ignore?" prompt.
-      // Translate the a/r/i part exactly as you did the a/r/i string.
-      // The 'u' reply means 'Change URI'.
-      // https protocol-specific options:
-      // 's' stands for Disable SSL certificate authority check
-      std::string httpsopts = _("a/r/i/u/s");
-      std::string ssldisabletext = _("Disable SSL certificate authority check and continue.");
-      std::string ssldisabledtext = _("SSL certificate authority check disabled.");
-      // popts.setOptionHelp(4, _("Eject medium."));
-
-      // translators: this is a prompt text
-      zypper.out().prompt(PROMPT_ARI_MEDIA_PROBLEM, _("Abort, retry, ignore?"), popts);
-      int reply = get_prompt_reply(zypper, PROMPT_ARI_MEDIA_PROBLEM, popts);
-
-      Action action = MediaChangeReport::ABORT;
-      switch (reply)
-      {
-        case 0: /* abort */
-          break;
-        case 3: /* change url */
-        {
-          // translators: this is a prompt label, will appear as "New URI: "
-          zypp::Url newurl(get_text(_("New URI") + std::string(": "), url.asString()));
-          url = newurl;
-        }
-        case 1: /* retry */
-          action = MediaChangeReport::RETRY;
-          break;
-        case 2: /* ignore */
-          action = MediaChangeReport::IGNORE;
-        default:
-          WAR << "invalid prompt reply: " << reply << std::endl;
-      }
-
-      // if an rpm download failed and user chose to ignore that, advice to
-      // run zypper verify afterwards
-      if (action == MediaChangeReport::IGNORE
-          && zypper.runtimeData().action_rpm_download
-          && !zypper.runtimeData().seen_verify_hint)
-        print_verify_hint(Zypper::instance()->out());
-
-      return action;
-    }
+                 unsigned int &                   index);
     private:
       repeat_counter_ repeat_counter;
   };

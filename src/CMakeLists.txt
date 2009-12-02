@@ -43,6 +43,7 @@ SET( zypper_SRCS
   update.cc
   solve-commit.cc
   Summary.cc
+  callbacks/media.cc
   ${zypper_HEADERS}
 )
 
