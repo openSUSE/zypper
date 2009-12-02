@@ -168,6 +168,18 @@ namespace zypp
         return _defaultCandidate;
       }
 
+      /** \copydoc Selectable::highestAvailableVersionObj() */
+      PoolItem highestAvailableVersionObj() const
+      {
+        PoolItem ret;
+        for_( it, availableBegin(), availableEnd() )
+        {
+          if ( !ret || (*it).satSolvable().edition() > ret.satSolvable().edition() )
+            ret = *it;
+        }
+        return ret;
+      }
+
       /** \c True if \a rhs has the same content as an installed one.
        * \see \ref sat::Solvable::identical
        */

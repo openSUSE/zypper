@@ -140,6 +140,13 @@ namespace zypp
        */
       PoolItem updateCandidateObj() const;
 
+      /** Simply the highest available version, ignoring priorities and policies.
+       * It's doubtful whether solely looking at the version makes a good
+       * candidate, but apps ask for it. Beware that different vendors may
+       * use different (uncomparable) version schemata.
+       */
+      PoolItem highestAvailableVersionObj() const;
+
       /** \c True if \a rhs has the same content as an installed one.
        *  Basically the same name, edition, arch, vendor and buildtime.
        * \see \ref sat::Solvable::identical

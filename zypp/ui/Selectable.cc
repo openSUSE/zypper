@@ -79,6 +79,9 @@ namespace zypp
     PoolItem Selectable::updateCandidateObj() const
     { return _pimpl->updateCandidateObj(); }
 
+    PoolItem Selectable::highestAvailableVersionObj() const
+    { return _pimpl->highestAvailableVersionObj(); }
+
     bool Selectable::identicalInstalled( const PoolItem & rhs ) const
     { return _pimpl->identicalInstalled( rhs ); }
 
