@@ -1,4 +1,8 @@
-
+-------------------------------------------------------------------
+Wed Dec  2 12:28:18 CET 2009 - jkupec@suse.cz
+- new prompt options for media errors:
+  * cd/dvd: 'e' to eject selected drive (bnc #279045)
+  * https: 's' to disable SSL CA check (bnc #223512)
 
 -------------------------------------------------------------------
 Fri Nov 27 12:42:18 CET 2009 - jkupec@suse.cz
