@@ -1,4 +1,11 @@
 -------------------------------------------------------------------
+Thu Dec  3 12:00:16 CET 2009 - ma@suse.de
+
+- PickList and status interface for handling packages which are
+  installable in multiple versions. (fate #305311)
+- version 6.26.0 (19)
+
+-------------------------------------------------------------------
 Wed Dec  2 13:10:43 CET 2009 - ma@suse.de
 
 - Add Selectable::highestAvailableVersionObj. Returns the highest 
