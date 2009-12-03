@@ -1,4 +1,9 @@
 -------------------------------------------------------------------
+Thu Dec  3 12:13:19 CET 2009 - jkupec@suse.cz
+
+- Show truely all updates when --all is used (bnc #557557)
+
+-------------------------------------------------------------------
 Wed Dec  2 12:28:18 CET 2009 - jkupec@suse.cz
 - new prompt options for media errors:
   * cd/dvd: 'e' to eject selected drive (bnc #279045)
