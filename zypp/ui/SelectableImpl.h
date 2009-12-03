@@ -253,7 +253,7 @@ namespace zypp
       {
         if ( ! _picklistPtr )
         {
-          _picklistPtr.reset( new PickList( _availableItems.size() ) );
+          _picklistPtr.reset( new PickList );
           // installed without identical avaialble first:
           for_( it, _installedItems.begin(), _installedItems.end() )
           {
@@ -463,6 +463,31 @@ namespace zypp
             t = 'u';
           }
           str << " " << t << " " << *it << endl;
+        }
+        str << "}  ";
+      }
+
+      if ( obj.picklistEmpty() )
+      {
+        str << "(P 0) {}";
+      }
+      else
+      {
+        PoolItem cand( obj.candidateObj() );
+        PoolItem up( obj.updateCandidateObj() );
+        str << "(P " << obj.picklistSize() << ") {" << endl;
+        for_( it, obj.picklistBegin(), obj.picklistEnd() )
+        {
+          char t = ' ';
+          if ( *it == cand )
+          {
+            t = *it == up ? 'C' : 'c';
+          }
+          else if ( *it == up )
+          {
+            t = 'u';
+          }
+          str << " " << t << " " << *it << "\t" << obj.pickStatus( *it ) << endl;
         }
         str << "}  ";
       }
