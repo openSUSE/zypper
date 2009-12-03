@@ -340,11 +340,80 @@ namespace zypp
       return pi_r.status().setTransact( yesno_r, causer_r );
     }
 
+    ///////////////////////////////////////////////////////////////////
+
     Status Selectable::Impl::pickStatus( const PoolItem & pi_r ) const
     {
-      return status();
+      if ( pi_r.satSolvable().ident() == ident() )
+      {
+        if ( pi_r.satSolvable().isSystem() )
+        {
+          // have installed!
+          if ( pi_r.status().isLocked() )
+            return S_Protected;
+
+          // at least one identical available transacing?
+          for_( it, _availableItems.begin(), _availableItems.end() )
+          {
+            if ( identical( *it, pi_r ) )
+            {
+              if ( (*it).status().transacts() )
+                return( (*it).status().isByUser() ? S_Update : S_AutoUpdate );
+            }
+          }
+
+          // no update, so maybe delete?
+          if ( pi_r.status().transacts() )
+            return ( pi_r.status().isByUser() ? S_Del : S_AutoDel );
+
+          // keep
+          return S_KeepInstalled;
+        }
+        else
+        {
+          // have available!
+          if ( pi_r.status().isLocked() )
+            return S_Taboo;
+
+          // have identical installed? (maybe transacting):
+          PoolItem inst;
+          for_( it, _installedItems.begin(), _installedItems.end() )
+          {
+            if ( identical( *it, pi_r ) )
+            {
+              if ( (*it).status().transacts() )
+              {
+                inst = *it;
+                break;
+              }
+              if ( !inst )
+                inst = *it;
+            }
+          }
+
+          // check for inst/update
+          if ( pi_r.status().transacts() )
+          {
+            if ( inst )
+              return( pi_r.status().isByUser() ? S_Update : S_AutoUpdate );
+            else
+              return( pi_r.status().isByUser() ? S_Install : S_AutoInstall );
+          }
+
+          // no inst/update, so maybe delete?
+          if ( ! inst )
+            return  S_NoInst;
+
+          if ( inst.status().transacts() )
+            return( inst.status().isByUser() ? S_Del : S_AutoDel );
+
+          return S_KeepInstalled;
+        }
+      }
+      return Status(-1); // not my PoolItem
     }
 
+    ///////////////////////////////////////////////////////////////////
 
     ResStatus::TransactByValue Selectable::Impl::modifiedBy() const
     {
