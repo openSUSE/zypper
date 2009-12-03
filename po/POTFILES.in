@@ -3,6 +3,7 @@
 # cat tmp | sort > POTFILES.in.new
 ../src/callbacks/keyring.h
 ../src/callbacks/locks.h
+../src/callbacks/media.cc
 ../src/callbacks/media.h
 ../src/callbacks/repo.h
 ../src/callbacks/rpm.h
