@@ -325,13 +325,17 @@ find_updates( const ResKind & kind, Candidates & candidates )
   }
 
 
+  // get --all available updates, no matter if they are installable or break
+  // some current policy
   for_(it, pool.proxy().byKindBegin(kind), pool.proxy().byKindEnd(kind))
   {
     if (!(*it)->hasInstalledObj())
       continue;
 
-    PoolItem candidate = (*it)->updateCandidateObj();
+    PoolItem candidate = (*it)->highestAvailableVersionObj(); // bnc #557557
     if (!candidate)
+      continue;
+    if (compareByNVRA((*it)->installedObj().resolvable(), candidate.resolvable()) >= 0)
       continue;
 
     DBG << "selectable: " << **it << endl;
