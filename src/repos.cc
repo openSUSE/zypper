@@ -282,7 +282,8 @@ bool match_repo(Zypper & zypper, string str, RepoInfo *repo)
 {
   RepoManager & manager = zypper.repoManager();
 
-  // Quick check for alias/reponumber first:
+  // Quick check for alias/reponumber/name first.
+  // Name can be ambiguous, in which case the first match found will be returned
   {
     unsigned int number = 1; // repo number
     unsigned int tmp    = 0;
@@ -290,7 +291,7 @@ bool match_repo(Zypper & zypper, string str, RepoInfo *repo)
     for (RepoManager::RepoConstIterator known_it = manager.repoBegin();
          known_it != manager.repoEnd(); ++known_it, ++number)
     {
-      if ( known_it->alias() == str || tmp == number )
+      if (known_it->alias() == str || tmp == number || known_it->name() == str)
       {
         if (repo)
           *repo = *known_it;
@@ -300,7 +301,8 @@ bool match_repo(Zypper & zypper, string str, RepoInfo *repo)
     }
   }
 
-  // Expensive URL analysis only if needed:
+  // expensive URL analysis only if the above did not find anything.
+  // URL can be ambiguous, in which case the first found match will be returned.
   bool found = false;
 
   for (RepoManager::RepoConstIterator known_it = manager.repoBegin();
