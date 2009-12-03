@@ -1,4 +1,4 @@
-.TH "zypper" "8" "1.2.11" "zypper" "System Tools"
+.TH "zypper" "8" "1.2.14" "zypper" "System Tools"
 .SH "SYNTAX"
 .LP
 zypper [\fI\-\-global\-opts\fR] <\fBcommand\fR> [\fI\-\-command\-opts\fR] [\fBcommand-arguments\fR]
@@ -835,9 +835,8 @@ List all packages providing the specified capability. See also the \fBinstall\fR
 .SS Repository Management
 
 .PP
-zypper is able to work with YaST, YUM, and aptrpm
-repositories, ZENworks 7 Linux Management, ZENworks 6.6.x Linux
-Management servers, as well as local files.
+Zypper is able to work with YaST, RPM-MD (yum) software repositories, and
+plain directories containing .rpm files.
 
 Repositories are primarily identified using their \fIURI\fR or \fIalias\fR.
 Alias serves as a shorthand for the long URI or name of the repository.
