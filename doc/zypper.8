@@ -164,8 +164,8 @@ For each specified package, zypper finds the best available version in defined
 repositories and shows information for this package.
 
 .TP
-\fI\-r, \-\-repo\fR <alias|#|URI>
-Work only with the repository specified by the alias, number or URI. This
+\fI\-r, \-\-repo\fR <alias|name|#|URI>
+Work only with the repository specified by the alias, name, number or URI. This
 option can be used multiple times.
 .TP
 .I \-t, \-\-type <type>
@@ -249,8 +249,8 @@ interpretation as a command option.
 
 .B $ zypper install -- -boring-game great-game great-game-manual
 .TP
-\fI\-r, \-\-repo\fR <alias|#|URI>
-Work only with the repository specified by the alias, number or URI. This
+\fI\-r, \-\-repo\fR <alias|name|#|URI>
+Work only with the repository specified by the alias, name, number or URI. This
 option can be used multiple times.
 .TP
 \fI\-t, \-\-type\fR <type>
@@ -285,7 +285,7 @@ Select packages by their name, don't try to select by capabilities.
 .I \-f, \-\-force
 Install even if the item is already installed (reinstall)
 .TP
-.I \ \ \ \ \-\-from <alias|#|URI>
+.I \ \ \ \ \-\-from <alias|name|#|URI>
 Select packages from specified repository. If strings specified as arguments
 to the install command match packages in repositories specified in this option,
 they will be marked for installation. This option currently implies
@@ -354,7 +354,7 @@ Note that the source packages must be available in repositories you are using.
 You can check whether a repository contains any source packages using the
 following command:
 
-.B $ zypper search -t srcpackage -r <alias|#|URI>
+.B $ zypper search -t srcpackage -r <alias|name|#|URI>
 
 .TP
 .I \-d, \-\-build\-deps\-only
@@ -363,8 +363,8 @@ Install only build dependencies of specified packages.
 .I \-D, \-\-no\-build\-deps
 Don't install build dependencies.
 .TP
-\fI\-r, \-\-repo\fR <alias|#|URI>
-Work only with the repository specified by the alias, number or URI. This
+\fI\-r, \-\-repo\fR <alias|name|#|URI>
+Work only with the repository specified by the alias, name, number, or URI. This
 option can be used multiple times.
 .TP
 Examples:
@@ -390,8 +390,8 @@ required ones to be installed.
 .I \-D, \-\-dry-run
 Test the repair, do not actually do anything to the system.
 .TP
-\fI\-r, \-\-repo\fR <alias|#|URI>
-Work only with the repository specified by the alias, number or URI. This
+\fI\-r, \-\-repo\fR <alias|name|#|URI>
+Work only with the repository specified by the alias, name, number, or URI. This
 option can be used multiple times.
 .TP
 .I \ \ \ \ \-\-debug\-solver
@@ -404,8 +404,8 @@ This can typically be used to install language packages recently added
 to repositories or drivers for newly added hardware.
 
 .TP
-\fI\-r, \-\-repo\fR <alias|#|URI>
-Work only with the repository specified by the alias, number or URI. This
+\fI\-r, \-\-repo\fR <alias|name|#|URI>
+Work only with the repository specified by the alias, name, number, or URI. This
 option can be used multiple times.
 .TP
 .I \-D, \-\-dry-run
@@ -424,8 +424,8 @@ The packages can be selected by their name or by a capability they provide.
 For details on package selection see the \fBinstall\fR command description.
 
 .TP
-\fI\-r, \-\-repo\fR <alias|#|URI>
-Work only with the repository specified by the alias, number or URI. This
+\fI\-r, \-\-repo\fR <alias|name|#|URI>
+Work only with the repository specified by the alias, name, number, or URI. This
 option can be used multiple times.
 .TP
 \fI\-t, -\-type\fR <type>
@@ -485,8 +485,8 @@ of available package types.
 If \fIpatch\fR is specified, zypper acts as if the \fBlist-patches\fR command
 was executed.
 .TP
-\fI\-r, \-\-repo\fR <alias|#|URI>
-Work only with the repository specified by the alias, number or URI. This
+\fI\-r, \-\-repo\fR <alias|name|#|URI>
+Work only with the repository specified by the alias, name, number, or URI. This
 option can be used multiple times.
 .TP
 .I \-a, \-\-all
@@ -517,8 +517,8 @@ of available package types.
 If \fIpatch\fR is specified, zypper acts as if the \fBpatche\fR command
 was executed.
 .TP
-\fI\-r, \-\-repo\fR <alias|#|URI>
-Work only with the repository specified by the alias, number or URI. This
+\fI\-r, \-\-repo\fR <alias|name|#|URI>
+Work only with the repository specified by the alias, name, number, or URI. This
 option can be used multiple times.
 .TP
 .I \ \ \ \ \-\-skip\-interactive
@@ -588,8 +588,8 @@ By default, only patches that are relevant and needed on your system are listed.
 This option causes all available released patches to be listed. This option can
 be combined with all the rest of the \fBlist-updates\fR command options.
 .TP
-\fI\-r, \-\-repo\fR <alias|#|URI>
-Work only with the repository specified by the alias, number or URI. This
+\fI\-r, \-\-repo\fR <alias|name|#|URI>
+Work only with the repository specified by the alias, name, number, or URI. This
 option can be used multiple times.
 
 .TP
@@ -600,8 +600,8 @@ of them have the security category.
 See also the EXIT CODES section for details on exit status of 0, 100, and 101
 returned by this command.
 .TP
-.I \-r, \-\-repo <alias|#|URI>
-Check for patches only in the repository specified by the alias, number or URI.
+.I \-r, \-\-repo <alias|name|#|URI>
+Check for patches only in the repository specified by the alias, name, number, or URI.
 This option can be used multiple times.
 
 .TP
@@ -624,8 +624,8 @@ Install patch fixing a MITRE's CVE issue specified by number. Use
 \fBlist-patches --cve\fR command to get a list of available
 needed patches for specific issues.
 .TP
-\fI\-r, \-\-repo\fR <alias|#|URI>
-Work only with the repository specified by the alias, number or URI. This
+\fI\-r, \-\-repo\fR <alias|name|#|URI>
+Work only with the repository specified by the alias, name, number, or URI. This
 option can be used multiple times.
 .TP
 .I \ \ \ \ \-\-skip\-interactive
@@ -669,13 +669,13 @@ zypper can eventually use also the rest of enabled repositories to
 satisfy package dependencies.
 
 .TP
-\fI\ \ \ \ \-\-from\fR <alias|#|URI>
+\fI\ \ \ \ \-\-from\fR <alias|name|#|URI>
 Restricts the upgrade to the specified repositories (the option can be used
 multiple times) only, but can satisfy dependencies also from the rest
 of enabled repositories.
 .TP
-\fI\-r, \-\-repo\fR <alias|#|URI>
-Work only with the repository specified by the alias, number or URI. This
+\fI\-r, \-\-repo\fR <alias|name|#|URI>
+Work only with the repository specified by the alias, name, number, or URI. This
 option can be used multiple times.
 .TP
 .I \-l, \-\-auto\-agree\-with\-licenses
@@ -746,8 +746,8 @@ of available package types. Multiple \-t option are allowed.
 
 See also the type-specific query commands like \fBpackages\fR, \fBpatterns\fR, etc.
 .TP
-\fI\-r, \-\-repo\fR <alias|#|URI>
-Work only with the repository specified by the alias, number or URI. This
+\fI\-r, \-\-repo\fR <alias|name|#|URI>
+Work only with the repository specified by the alias, name, number, or URI. This
 option can be used multiple times.
 .TP
 .I \ \ \ \ \-\-sort\-by\-name
@@ -781,7 +781,7 @@ Look for RSI acronym (case-sensitively), also in summaries and descriptions:
 List all available packages or all packages from specified repositories.
 Similar to \fBzypper search -s -t package\fR.
 .TP
-.I \-r, \-\-repo <alias|#|URI>
+.I \-r, \-\-repo <alias|name|#|URI>
 Just another means to specify repositories.
 .TP
 .I \-i, \-\-installed\-only
@@ -795,7 +795,7 @@ Show only packages which are not installed.
 List all available patches from specified repositories, including those not
 needed. Similar to \fBzypper search -s -t patch\fR.
 .TP
-\fI\-r, \-\-repo\fR <alias|#|URI>
+\fI\-r, \-\-repo\fR <alias|name|#|URI>
 Just another means to specify repositories.
 
 .TP
@@ -803,7 +803,7 @@ Just another means to specify repositories.
 List all available patterns or all patterns from specified repositories.
 Similar to \fBzypper search -s -t pattern\fR.
 .TP
-.I \-r, \-\-repo <alias|#|URI>
+.I \-r, \-\-repo <alias|name|#|URI>
 Just another means to specify repositories.
 .TP
 .I \-i, \-\-installed\-only
@@ -818,7 +818,7 @@ List all available products or all products from specified repositories.
 Similar to \fBzypper search -s -t product\fR, but shows also the type of the product
 (base, add-on).
 .TP
-.I \-r, \-\-repo <alias|#|URI>
+.I \-r, \-\-repo <alias|name|#|URI>
 Just another means to specify repositories.
 .TP
 .I \-i, \-\-installed\-only
@@ -846,7 +846,7 @@ is shown to the user in tables and messages. The name is not required, and
 if not known, the alias is shown instead. The alias is required and
 uniquely identifies the repository on the system.
 
-The \fIalias\fR, \fIURI\fR, or the \fInumber\fR from \fBzypper repos\fR list can be used to
+The \fIalias\fR, \fIname\fR, \fIURI\fR, or the \fInumber\fR from \fBzypper repos\fR list can be used to
 specify a repository as an argument of various zypper commands and
 options like \fBrefresh\fR, \fB--repo\fR, or \fB--from\fR.
 
@@ -917,8 +917,8 @@ Add repositories from a repo file:
 
 
 .TP
-.B removerepo (rr) [options] <alias|#|URI> ...
-Delete repositories specified by aliases, numbers or URIs.
+.B removerepo (rr) [options] <alias|name|#|URI> ...
+Delete repositories specified by aliases, names, numbers or URIs.
 .TP
 \fI    --loose-auth\fR
 Ignore user authentication data in the URI
@@ -945,7 +945,7 @@ commands. On the other hand, using the alias instead of the number is always
 safe.
 
 To show detailed information about specific repositories, specify them
-as arguments, either by alias, number from simple \fBzypper lr\fR, or by
+as arguments, either by alias, name, number from simple \fBzypper lr\fR, or by
 URI; e.g. fB \fBzypper lr factory\fR, or \fBzypper lr 2\fR.
 
 .TP
@@ -987,8 +987,8 @@ List repositories with their URIs and priorities:
 .B $ zypper lr -pu
 
 .TP
-.B renamerepo (nr) <alias|#|URI> <new-alias>
-Assign new alias to the repository specified by alias, number or URI.
+.B renamerepo (nr) <alias|name|#|URI> <new-alias>
+Assign new alias to the repository specified by alias, name, number, or URI.
 .TP
 Example:
 
@@ -998,10 +998,10 @@ dreadful alias which is not usable on the command line).
 .B $ zypper nr 8 myrepo
 
 .TP
-.B modifyrepo (mr) <options> <alias|#|URI> ...
+.B modifyrepo (mr) <options> <alias|name|#|URI> ...
 .TP
 .B modifyrepo (mr) <options> <--all|--remote|--local|--medium-type>
-Modify properties of repositories specified by alias, number or URI or
+Modify properties of repositories specified by alias, name, number, or URI or
 one of the aggregate options.
 .TP
 \fI\-e, \-\-enable\fR
@@ -1060,8 +1060,8 @@ Disable all repositories:
 .B $ zypper mr -da
 
 .TP
-.B refresh (ref) [alias|#] ...
-Refresh repositories specified by their alias or number. If no repositories are specified, all enabled repositories will be refreshed.
+.B refresh (ref) [alias|name|#|URI] ...
+Refresh repositories specified by their alias, name, number, or URI. If no repositories are specified, all enabled repositories will be refreshed.
 .IP
 See also METADATA REFRESH POLICY section for more details.
 .TP
@@ -1084,7 +1084,7 @@ Only download the raw metadata, don't parse it or build the database.
 Refresh also services before refreshing repositories.
 
 .TP
-.B clean (cc) [options] [alias|#|URI] ...
+.B clean (cc) [options] [alias|name|#|URI] ...
 Clean the local caches for all known or specified repositories. By default,
  only caches of downloaded packages are cleaned.
 .TP
@@ -1139,7 +1139,7 @@ Add the service as disabled.
 Specify descriptive name for the service.
 
 .TP
-.B removeservice (rs) [options] <alias|#|URI> ...
+.B removeservice (rs) [options] <alias|name|#|URI> ...
 
 Remove specified repository index service from the sytem.
 
@@ -1153,7 +1153,7 @@ Ignore user authentication data in the URI.
 Ignore query string in the URI.
 
 .TP
-.B modifyservice (ms) <options> <alias|#|URI>
+.B modifyservice (ms) <options> <alias|name|#|URI>
 .B modifyservice (ms) <options> <--all|--remote|--local|--medium-type>
 Modify properties of specified services.
 
@@ -1239,7 +1239,7 @@ Sort the list by URI.
 Sort the list by name.
 
 .TP
-.B refresh-services (refs) [options] <alias|#|URI> ...
+.B refresh-services (refs) [options] <alias|name|#|URI> ...
 Refreshing a service mean executing the service's special task.
 
 RIS services add, remove, or modify repositories on your system based on
@@ -1273,7 +1273,7 @@ Add a package lock. Specify packages to lock by exact name or by a glob pattern 
 wildcard characters. 
 
 .TP
-.I \-r, \-\-repo <alias|#|URI>
+.I \-r, \-\-repo <alias|name|#|URI>
 Restrict the lock to the specified repository.
 .TP
 .I \-t, \-\-type <type>
@@ -1287,7 +1287,7 @@ Remove specified package lock. Specify the lock to remove by its number obtained
 or by the package name.
 
 .TP
-.I \-r, \-\-repo <alias|#|URI>
+.I \-r, \-\-repo <alias|name|#|URI>
 Restrict the lock to the specified repository.
 
 .TP
@@ -1661,7 +1661,7 @@ zypper repos (lr)
 .I rug subscribe
 This command is not implemented in zypper. Enabling zypper repositories is
 closest to rug's subscription of catalogs. Thus, you can use
-\fBzypper mr -e <alias|#|URI>\fR to enable repositories added by the service.
+\fBzypper mr -e <alias|name|#|URI>\fR to enable repositories added by the service.
 Use \fBzypper lr\fR (or \fBzypper ca\fR) to list available repositories.
 
 .TP
