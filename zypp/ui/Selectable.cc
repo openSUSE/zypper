@@ -132,6 +132,19 @@ namespace zypp
     Selectable::installed_iterator Selectable::installedEnd() const
     { return _pimpl->installedEnd(); }
 
+    ////////////////////////////////////////////////////////////////////////
+
+    bool Selectable::picklistEmpty() const
+    { return _pimpl->picklistEmpty();  }
+
+    Selectable::picklist_size_type Selectable::picklistSize() const
+    { return _pimpl->picklistSize(); }
+
+    Selectable::picklist_iterator Selectable::picklistBegin() const
+    { return _pimpl->picklistBegin(); }
+
+    Selectable::picklist_iterator Selectable::picklistEnd() const
+    { return _pimpl->picklistEnd(); }
 
     ////////////////////////////////////////////////////////////////////////
 
@@ -146,6 +159,9 @@ namespace zypp
 
     bool Selectable::pickDelete( const PoolItem & pi_r, ResStatus::TransactByValue causer_r, bool yesno_r )
     { return _pimpl->pickDelete( pi_r, causer_r, yesno_r ); }
+
+    Status Selectable::pickStatus( const PoolItem & pi_r ) const
+    { return _pimpl->pickStatus( pi_r ); }
 
     ////////////////////////////////////////////////////////////////////////
 

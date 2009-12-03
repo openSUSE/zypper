@@ -64,6 +64,9 @@ namespace zypp
       typedef SelectableTraits::installed_iterator      installed_iterator;
       typedef SelectableTraits::installed_size_type     installed_size_type;
 
+      typedef SelectableTraits::picklist_iterator	picklist_iterator;
+      typedef SelectableTraits::picklist_size_type	picklist_size_type;
+
     public:
       /** \name Static ctor substitues picking the item from the pool.
        * \code
@@ -233,7 +236,7 @@ namespace zypp
 
       ////////////////////////////////////////////////////////////////////////
 
-      /** \name Insatlled objects iterators.
+      /** \name Installed objects iterators.
        * Ordered by install time. Latest first.
       */
       //@{
@@ -241,6 +244,19 @@ namespace zypp
       installed_size_type installedSize() const;
       installed_iterator installedBegin() const;
       installed_iterator installedEnd() const;
+      //}
+
+      ////////////////////////////////////////////////////////////////////////
+
+      /** \name picklist iterators.
+       * This is basically the available items list prepended by those
+       * installed items, that are nolonger \ref identicalAvailable.
+       */
+      //@{
+      bool picklistEmpty() const;
+      picklist_size_type picklistSize() const;
+      picklist_iterator picklistBegin() const;
+      picklist_iterator picklistEnd() const;
       //}
 
       ////////////////////////////////////////////////////////////////////////
@@ -309,6 +325,31 @@ namespace zypp
        */
       bool pickNoDelete( const PoolItem & pi_r, ResStatus::TransactByValue causer_r = ResStatus::USER )
       { return pickDelete( pi_r, causer_r, false ); }
+
+      /** Compute the \ref ui::Status for an individual PoolItem.
+       * This just takes into account the item and any identical
+       * installed (or available) one.
+       * \code
+       *   Assume there are 3 identical 'foo-1.1 (vendor A)' items,
+       *   one 'foo-2.1 (vendor A)' and one ''foo-1.1 (vendor B)':
+       *
+       *   installed: . foo-1.1 (vendor A)          -> S_KeepInstalled
+       *   available:   foo-2.1 (vendor A) (repo 1) -> S_NoInst
+       *              . foo-1.1 (vendor A) (repo 1) -> S_KeepInstalled
+       *              . foo-1.1 (vendor A) (repo 2) -> S_KeepInstalled
+       *                foo-1.1 (vendor B) (repo 3) -> S_NoInst
+       *
+       *   After 'foo-1.1 (vendor A) (repo 1)' was selected to be installed:
+       *
+       *   installed: . foo-1.1 (vendor A)          -> S_Update
+       *   available:   foo-2.1 (vendor A) (repo 1) -> S_NoInst
+       *              I foo-1.1 (vendor A) (repo 1) -> S_Update
+       *              . foo-1.1 (vendor A) (repo 2) -> S_KeepInstalled
+       *                foo-1.1 (vendor B) (repo 3) -> S_NoInst
+       * \endcode
+       * \see \ref sat::Solvable::identical
+       */
+      Status pickStatus( const PoolItem & pi_r ) const;
       //@}
 
       /** \name Classification of available patches (pseudo installed items).

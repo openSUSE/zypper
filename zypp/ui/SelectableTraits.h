@@ -13,6 +13,7 @@
 #define ZYPP_UI_SELECTABLETRAITS_H
 
 #include <set>
+#include <vector>
 
 #include "zypp/base/Iterator.h"
 #include "zypp/PoolItem.h"
@@ -114,7 +115,10 @@ namespace zypp
       typedef AvailableItemSet::const_iterator installed_const_iterator;
       typedef AvailableItemSet::size_type      installed_size_type;
 
-  };
+      typedef std::vector<PoolItem>             PickList;
+      typedef PickList::const_iterator          picklist_iterator;
+      typedef PickList::size_type               picklist_size_type;
+    };
     ///////////////////////////////////////////////////////////////////
 
     /////////////////////////////////////////////////////////////////

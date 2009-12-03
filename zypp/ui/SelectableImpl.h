@@ -52,6 +52,8 @@ namespace zypp
       typedef SelectableTraits::installed_const_iterator installed_const_iterator;
       typedef SelectableTraits::installed_size_type      installed_size_type;
 
+      typedef SelectableTraits::PickList		PickList;
+
     public:
       template <class _Iterator>
       Impl( const ResObject::Kind & kind_r,
@@ -247,6 +249,36 @@ namespace zypp
 
       ////////////////////////////////////////////////////////////////////////
 
+      const PickList & picklist() const
+      {
+        if ( ! _picklistPtr )
+        {
+          _picklistPtr.reset( new PickList( _availableItems.size() ) );
+          // installed without identical avaialble first:
+          for_( it, _installedItems.begin(), _installedItems.end() )
+          {
+            if ( ! identicalAvailable( *it ) )
+              _picklistPtr->push_back( *it );
+          }
+          _picklistPtr->insert( _picklistPtr->end(), availableBegin(), availableEnd() );
+        }
+        return *_picklistPtr;
+      }
+
+      bool picklistEmpty() const
+      { return picklist().empty(); }
+
+      picklist_size_type picklistSize() const
+      { return picklist().size(); }
+
+      picklist_iterator picklistBegin() const
+      { return picklist().begin(); }
+
+      picklist_iterator picklistEnd() const
+      { return picklist().end(); }
+
+      ////////////////////////////////////////////////////////////////////////
+
       bool isUnmaintained() const
       { return availableEmpty(); }
 
@@ -256,6 +288,8 @@ namespace zypp
       bool pickInstall( const PoolItem & pi_r, ResStatus::TransactByValue causer_r, bool yesno_r );
 
       bool pickDelete( const PoolItem & pi_r, ResStatus::TransactByValue causer_r, bool yesno_r );
+
+      Status pickStatus( const PoolItem & pi_r ) const;
 
       ////////////////////////////////////////////////////////////////////////
 
@@ -368,9 +402,10 @@ namespace zypp
       AvailableItemSet       _availableItems;
       //! Best among availabe with restpect to installed.
       PoolItem               _defaultCandidate;
-
       //! The object selected by setCandidateObj() method.
       PoolItem               _candidate;
+      //! lazy initialized picklist
+      mutable scoped_ptr<PickList> _picklistPtr;
     };
     ///////////////////////////////////////////////////////////////////
 

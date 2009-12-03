@@ -323,6 +323,7 @@ namespace zypp
       return _candidate = newCandidate;
     }
 
+
     bool Selectable::Impl::pickInstall( const PoolItem & pi_r, ResStatus::TransactByValue causer_r, bool yesno_r )
     {
       if ( pi_r.satSolvable().ident() != ident() || pi_r.satSolvable().isSystem() )
@@ -338,6 +339,12 @@ namespace zypp
 
       return pi_r.status().setTransact( yesno_r, causer_r );
     }
+
+    Status Selectable::Impl::pickStatus( const PoolItem & pi_r ) const
+    {
+      return status();
+    }
+
 
     ResStatus::TransactByValue Selectable::Impl::modifiedBy() const
     {
