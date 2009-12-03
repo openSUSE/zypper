@@ -16,23 +16,25 @@ NOT SCHEDULED
 General
 
 + improved install summary, extended info available via prompt options
-  + show recommended and suggested packages
   + show changelog for selected packages or the whole update
   + show graphical (schubi's widget) or ascii dependency tree of the packages
     in the summary
   + explain why a package has been selected for installation/removal
 + options to install/remove packages recommended/suggested packages
-+ more options in the media error prompt (e.g. eject CD)
 + testsuite
 + exit gracefully in first SIGINT, immediately on the second (needs proper
   implementation)
 ? xml input (feed an xml with operation specification to zypper)
 ? move -vv output to zypper.log, leave only normal and verbose output levels?
   -vv e.g. displays full urls of downloaded files
-? remake --force to do what user intuitively expects, needs to be defined, e.g.
+
+Repository management
+
++ remake --force to do what user intuitively expects, needs to be defined, e.g.
   - reinstall instead of saying "already installed"
   - downgrade/upgrade from specified repo if --repo foo --force is used
   - etc...
++ zypper.conf option to choose whether to show alias or name in various output
 
 Updating
 
@@ -42,8 +44,8 @@ Updating
 Packages
 
 + just download, don't install. Compare to YOU: do not delete after installing
-? zypper up -t package should show the difference between zypper lu -t package
-  and current summary as  "these packages have been kept back" (like apt does).
++ 'zypper up' should show the difference between 'zypper lu' and 'lu --all'
+  as  "these packages have been kept back" (like apt does).
   User can upgrade such packages with 'zypper in foo' then.
 ? list packages newly added to repos since last update (might be easy once we
   have package history)

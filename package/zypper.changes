@@ -1,4 +1,10 @@
 -------------------------------------------------------------------
+Thu Dec  3 23:47:22 CET 2009 - jkupec@suse.cz
+
+- Match repositories also by name wherever repository is expected
+  (bnc #462697).
+
+-------------------------------------------------------------------
 Thu Dec  3 12:13:19 CET 2009 - jkupec@suse.cz
 
 - Show truely all updates when --all is used (bnc #557557)
