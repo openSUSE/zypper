@@ -308,23 +308,8 @@ namespace zypp
        */
       bool multiversionInstall() const;
 
-      /** Select a specific available item for installation.
-       */
-      bool pickInstall( const PoolItem & pi_r, ResStatus::TransactByValue causer_r = ResStatus::USER, bool yesno_r = true );
-
-      /** Deselect a specific available item from installation.
-      */
-      bool pickNoInstall( const PoolItem & pi_r, ResStatus::TransactByValue causer_r = ResStatus::USER )
-      { return pickInstall( pi_r, causer_r, false ); }
-
-      /** Select a specific installed item for deletion.
-       */
-      bool pickDelete( const PoolItem & pi_r, ResStatus::TransactByValue causer_r = ResStatus::USER, bool yesno_r = true );
-
-      /** Deselect a specific installed item from deletion.
-       */
-      bool pickNoDelete( const PoolItem & pi_r, ResStatus::TransactByValue causer_r = ResStatus::USER )
-      { return pickDelete( pi_r, causer_r, false ); }
+      /** */
+      bool setPickStatus( const PoolItem & pi_r, const Status state_r, ResStatus::TransactByValue causer_r = ResStatus::USER );
 
       /** Compute the \ref ui::Status for an individual PoolItem.
        * This just takes into account the item and any identical
