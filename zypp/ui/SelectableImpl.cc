@@ -123,7 +123,7 @@ namespace zypp
     //
     //	CLASS NAME : StatusHelper
     //
-    /**
+    /** \todo Unify status and pickStatus.
     */
     struct StatusHelper
     {
@@ -161,16 +161,19 @@ namespace zypp
         if ( cand )
         {
           if ( inst ) {
-            ResStatus & inststatus( backup( inst.status() ) );
-            if ( ! inststatus.setTransact( false, causer ) ) return restore();
-            if ( ! inststatus.setLock    ( false, causer ) ) return restore();
-            if ( ! cand->multiversionInstall() )
+            for_( it, _impl.installedBegin(), _impl.installedEnd() )
             {
+              ResStatus & inststatus( backup( it->status() ) );
+              if ( ! inststatus.setTransact( false, causer ) ) return restore();
+              if ( ! inststatus.setLock    ( false, causer ) ) return restore();
+              if ( ! cand->multiversionInstall() )
+              {
               // This is what the solver most probabely will do.
               // If we are wrong the solver will correct it. But
               // this way we will get a better disk usage result,
               // even if no autosolving is on.
-              inststatus.setTransact( true, ResStatus::SOLVER );
+                inststatus.setTransact( true, ResStatus::SOLVER );
+              }
             }
           }
           if ( ! unlockCandidates() ) return restore();
@@ -186,9 +189,12 @@ namespace zypp
         if ( inst )
         {
           if ( ! resetTransactingCandidates() ) return restore();
-          ResStatus & inststatus( backup( inst.status() ) );
-          if ( ! inststatus.setLock( false, causer ) ) return restore();
-          if ( ! inststatus.setTransact( true, causer ) ) return restore();
+          for_( it, _impl.installedBegin(), _impl.installedEnd() )
+          {
+            ResStatus & inststatus( backup( it->status() ) );
+            if ( ! inststatus.setLock( false, causer ) ) return restore();
+            if ( ! inststatus.setTransact( true, causer ) ) return restore();
+          }
           return true;
         }
         return false;
@@ -198,9 +204,12 @@ namespace zypp
       {
         if ( inst )
         {
-          ResStatus & inststatus( backup( inst.status() ) );
-          if ( ! inststatus.setTransact( false, causer ) ) return restore();
-          if ( ! inststatus.setLock( false, causer ) ) return restore();
+          for_( it, _impl.installedBegin(), _impl.installedEnd() )
+          {
+            ResStatus & inststatus( backup( it->status() ) );
+            if ( ! inststatus.setTransact( false, causer ) ) return restore();
+            if ( ! inststatus.setLock( false, causer ) ) return restore();
+          }
         }
         if ( ! unlockCandidates() ) return restore();
         return true;
@@ -213,8 +222,12 @@ namespace zypp
 
         if ( inst ) {
           resetTransactingCandidates();
-          inst.status().setTransact( false, causer );
-          return inst.status().setLock( true, causer );
+          for_( it, _impl.installedBegin(), _impl.installedEnd() )
+          {
+            it->status().setTransact( false, causer );
+            it->status().setLock( true, causer );
+          }
+          return true;
         } else
           return false;
       }
@@ -399,9 +412,22 @@ namespace zypp
     }
 
     ///////////////////////////////////////////////////////////////////
+
+    bool Selectable::Impl::pickInstall( const PoolItem & pi_r, ResStatus::TransactByValue causer_r, bool yesno_r )
+    {
+      if ( identicalInstalled( pi_r ) )
+        return setPickStatus( pi_r, ( yesno_r ? S_Update : S_KeepInstalled ), causer_r );
+      return setPickStatus( pi_r, ( yesno_r ? S_Install : S_NoInst ), causer_r );
+    }
+
+    bool Selectable::Impl::pickDelete( const PoolItem & pi_r, ResStatus::TransactByValue causer_r, bool yesno_r )
+    {
+      return setPickStatus( pi_r, ( yesno_r ? S_Del : S_KeepInstalled ), causer_r );
+    }
+
     bool Selectable::Impl::setPickStatus( const PoolItem & pi_r, Status state_r, ResStatus::TransactByValue causer_r )
     {
-      if ( pi_r.satSolvable().ident() == ident() )
+      if ( pi_r.satSolvable().ident() != ident() )
         return false;  // not my PoolItem
 
       if ( ! multiversionInstall() )
@@ -419,7 +445,7 @@ namespace zypp
           i.push_back( *it );
       for_( it, availableBegin(), availableEnd() )
         if ( identical( *it, pi_r ) )
-          i.push_back( *it );
+          a.push_back( *it );
 
       switch ( state_r )
       {
@@ -472,7 +498,10 @@ namespace zypp
           {
             if ( ! backup.forEach( i.begin(), i.end(), &StatusBackup::unlock, causer_r ) ) return backup.restore();
             if ( ! backup.forEach( i.begin(), i.end(), &StatusBackup::setTransactTrue, ResStatus::SOLVER ) ) return backup.restore();
-
+            // maybe unlock candidate only?
+            if ( ! backup.forEach( a.begin(), a.end(), &StatusBackup::unlock, causer_r ) ) return backup.restore();
+            const PoolItem & cand( pi_r.status().isInstalled() ? *a.begin() : pi_r ); // status already backed up above
+            if ( ! cand.status().setTransact( true, causer_r ) ) return backup.restore();
             return true;
           }
           break;
@@ -499,73 +528,69 @@ namespace zypp
 
     Status Selectable::Impl::pickStatus( const PoolItem & pi_r ) const
     {
-      if ( pi_r.satSolvable().ident() == ident() )
+      if ( pi_r.satSolvable().ident() != ident() )
+        return Status(-1); // not my PoolItem
+
+      std::vector<PoolItem> i;
+      std::vector<PoolItem> a;
+      PoolItem ti;
+      PoolItem ta;
+
+      for_( it, installedBegin(), installedEnd() )
+        if ( identical( *it, pi_r ) )
+        {
+          i.push_back( *it );
+          if ( ! ti && it->status().transacts() )
+            ti = *it;
+        }
+
+      for_( it, availableBegin(), availableEnd() )
+        if ( identical( *it, pi_r ) )
+        {
+          a.push_back( *it );
+          if ( ! ta && it->status().transacts() )
+            ta = *it;
+        }
+
+      if ( ta )
       {
-        if ( pi_r.satSolvable().isSystem() )
-        {
-          // have installed!
-          if ( pi_r.status().isLocked() )
-            return S_Protected;
-
-          // at least one identical available transacing?
-          for_( it, _availableItems.begin(), _availableItems.end() )
-          {
-            if ( identical( *it, pi_r ) )
-            {
-              if ( (*it).status().transacts() )
-                return( (*it).status().isByUser() ? S_Update : S_AutoUpdate );
-            }
-          }
-
-          // no update, so maybe delete?
-          if ( pi_r.status().transacts() )
-            return ( pi_r.status().isByUser() ? S_Del : S_AutoDel );
-
-          // keep
-          return S_KeepInstalled;
-        }
+        if ( ta.status().isByUser() )
+          return( i.empty() ? S_Install : S_Update );
         else
-        {
-          // have available!
-          if ( pi_r.status().isLocked() )
-            return S_Taboo;
-
-          // have identical installed? (maybe transacting):
-          PoolItem inst;
-          for_( it, _installedItems.begin(), _installedItems.end() )
-          {
-            if ( identical( *it, pi_r ) )
-            {
-              if ( (*it).status().transacts() )
-              {
-                inst = *it;
-                break;
-              }
-              if ( !inst )
-                inst = *it;
-            }
-          }
-
-          // check for inst/update
-          if ( pi_r.status().transacts() )
-          {
-            if ( inst )
-              return( pi_r.status().isByUser() ? S_Update : S_AutoUpdate );
-            else
-              return( pi_r.status().isByUser() ? S_Install : S_AutoInstall );
-          }
-
-          // no inst/update, so maybe delete?
-          if ( ! inst )
-            return  S_NoInst;
-
-          if ( inst.status().transacts() )
-            return( inst.status().isByUser() ? S_Del : S_AutoDel );
-
-          return S_KeepInstalled;
-        }
+          return( i.empty() ? S_AutoInstall : S_AutoUpdate );
       }
-      return Status(-1); // not my PoolItem
+
+      if ( ti )
+      {
+        return( ti.status().isByUser() ? S_Del : S_AutoDel );
+      }
+
+      for_( it, i.begin(), i.end() )
+        if ( it->status().isLocked() )
+          return S_Protected;
+
+      if ( i.empty() )
+      {
+        bool allALocked = true;
+        for_( it, a.begin(), a.end() )
+          if ( ! it->status().isLocked() )
+          {
+            allALocked = false;
+            break;
+          }
+        if ( allALocked )
+          return S_Taboo;
+      }
+
+      // KEEP state:
+      if ( ! i.empty() )
+        return S_KeepInstalled;
+      // Report pseudo installed items as installed, if they are satisfied.
+      if ( traits::isPseudoInstalled( kind() )
+           && ( ta ? ta : *a.begin() ).status().isSatisfied() ) // no installed, so we must have candidate
+        return S_KeepInstalled;
+
+      return S_NoInst;
     }
 
     ///////////////////////////////////////////////////////////////////

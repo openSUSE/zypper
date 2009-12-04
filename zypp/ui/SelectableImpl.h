@@ -285,9 +285,13 @@ namespace zypp
       bool multiversionInstall() const
       { return theObj().satSolvable().multiversionInstall(); }
 
-      bool setPickStatus( const PoolItem & pi_r, Status state_r, ResStatus::TransactByValue causer_r );
+      bool pickInstall( const PoolItem & pi_r, ResStatus::TransactByValue causer_r, bool yesno_r );
+
+      bool pickDelete( const PoolItem & pi_r, ResStatus::TransactByValue causer_r, bool yesno_r );
 
       Status pickStatus( const PoolItem & pi_r ) const;
+
+      bool setPickStatus( const PoolItem & pi_r, Status state_r, ResStatus::TransactByValue causer_r );
 
       ////////////////////////////////////////////////////////////////////////
 

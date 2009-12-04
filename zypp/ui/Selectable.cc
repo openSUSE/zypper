@@ -154,11 +154,17 @@ namespace zypp
     bool Selectable::multiversionInstall() const
     { return _pimpl->multiversionInstall(); }
 
-    bool Selectable::setPickStatus( const PoolItem & pi_r, Status state_r, ResStatus::TransactByValue causer_r )
-    { return _pimpl->setPickStatus( pi_r, state_r, causer_r ); }
+    bool Selectable::pickInstall( const PoolItem & pi_r, ResStatus::TransactByValue causer_r, bool yesno_r )
+    { return _pimpl->pickInstall( pi_r, causer_r, yesno_r ); }
+
+    bool Selectable::pickDelete( const PoolItem & pi_r, ResStatus::TransactByValue causer_r, bool yesno_r )
+    { return _pimpl->pickDelete( pi_r, causer_r, yesno_r ); }
 
     Status Selectable::pickStatus( const PoolItem & pi_r ) const
     { return _pimpl->pickStatus( pi_r ); }
+
+    bool Selectable::setPickStatus( const PoolItem & pi_r, Status state_r, ResStatus::TransactByValue causer_r )
+    { return _pimpl->setPickStatus( pi_r, state_r, causer_r ); }
 
     ////////////////////////////////////////////////////////////////////////
 
