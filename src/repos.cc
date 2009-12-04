@@ -1366,6 +1366,14 @@ void add_repo(Zypper & zypper, RepoInfo & repo)
     manager.addRepository(repo);
     repo = manager.getRepo(repo);
   }
+  catch (const RepoInvalidAliasException & e)
+  {
+    ZYPP_CAUGHT(e);
+    zypper.out().error(e,
+        boost::str(format(_("Invalid repository alias: '%s'")) % repo.alias()));
+    zypper.setExitCode(ZYPPER_EXIT_ERR_INVALID_ARGS);
+    return;
+  }
   catch (const RepoAlreadyExistsException & e)
   {
     ZYPP_CAUGHT(e);
