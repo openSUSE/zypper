@@ -64,6 +64,7 @@ namespace zypp
     DEF_CTORS( RepoNotCachedException,      "Repository is not cached" );
     DEF_CTORS( RepoNoUrlException,          "Repository has no or invalid url defined." );
     DEF_CTORS( RepoNoAliasException,        "Repository has no alias defined." );
+    DEF_CTORS( RepoInvalidAliasException,   "Repository has an invalid alias." );
     DEF_CTORS( RepoNotFoundException,       "Repository not found." );
     DEF_CTORS( RepoAlreadyExistsException,  "Repository already exists." );
     DEF_CTORS( RepoUnknownTypeException,    "Repository type can't be determined." );
@@ -111,6 +112,7 @@ namespace zypp
     CLASS::CLASS( const ServiceInfo & service_r, const std::string & msg_r ) : ServiceException( service_r, msg_r ) {}
 
     DEF_CTORS( ServiceNoAliasException,       "Service has no alias defined." );
+    DEF_CTORS( ServiceInvalidAliasException,  "Service has an invalid alias." );
     DEF_CTORS( ServiceAlreadyExistsException, "Service already exists." );
     DEF_CTORS( ServiceNoUrlException,         "Service has no or invalid url defined." );
 

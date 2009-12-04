@@ -285,12 +285,22 @@ namespace zypp
   {
     if ( info.alias().empty() )
       ZYPP_THROW( RepoNoAliasException() );
+    // bnc #473834. Maybe we can match the alias against a regex to define
+    // and check for valid aliases
+    if ( info.alias()[0] == '.')
+      ZYPP_THROW(RepoInvalidAliasException(
+         info, _("Repository alias cannot start with dot.")));
   }
 
   inline void assert_alias( const ServiceInfo & info )
   {
     if ( info.alias().empty() )
       ZYPP_THROW( ServiceNoAliasException() );
+    // bnc #473834. Maybe we can match the alias against a regex to define
+    // and check for valid aliases
+    if ( info.alias()[0] == '.')
+      ZYPP_THROW(ServiceInvalidAliasException(
+         info, _("Service alias cannot start with dot.")));
   }
 
   ////////////////////////////////////////////////////////////////////////////

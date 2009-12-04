@@ -98,6 +98,18 @@ namespace zypp
     };
 
     /**
+     * Thrown when the repo alias is found to be invalid.
+     */
+    class RepoInvalidAliasException : public RepoException
+    {
+    public:
+      RepoInvalidAliasException();
+      RepoInvalidAliasException( const std::string & msg_r );
+      RepoInvalidAliasException( const RepoInfo & info );
+      RepoInvalidAliasException( const RepoInfo & info, const std::string & msg_r );
+    };
+
+    /**
      * thrown when it was impossible to
      * match a repository
      */
@@ -192,6 +204,18 @@ namespace zypp
         ServiceNoAliasException( const std::string & msg_r );
         ServiceNoAliasException( const ServiceInfo & service_r );
         ServiceNoAliasException( const ServiceInfo & service_r, const std::string & msg_r );
+    };
+
+    /**
+     * Thrown when the repo alias is found to be invalid.
+     */
+    class ServiceInvalidAliasException : public ServiceException
+    {
+    public:
+      ServiceInvalidAliasException();
+      ServiceInvalidAliasException( const std::string & msg_r );
+      ServiceInvalidAliasException( const ServiceInfo & info );
+      ServiceInvalidAliasException( const ServiceInfo & info, const std::string & msg_r );
     };
 
     /** Service already exists and some unique attribute can't be duplicated.
