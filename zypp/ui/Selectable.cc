@@ -64,7 +64,7 @@ namespace zypp
     Status Selectable::status() const
     { return _pimpl->status(); }
 
-    bool Selectable::setStatus( const Status state_r, ResStatus::TransactByValue causer_r )
+    bool Selectable::setStatus( Status state_r, ResStatus::TransactByValue causer_r )
     { return _pimpl->setStatus( state_r, causer_r ); }
 
     PoolItem Selectable::installedObj() const
@@ -154,7 +154,7 @@ namespace zypp
     bool Selectable::multiversionInstall() const
     { return _pimpl->multiversionInstall(); }
 
-    bool Selectable::setPickStatus( const PoolItem & pi_r, const Status state_r, ResStatus::TransactByValue causer_r )
+    bool Selectable::setPickStatus( const PoolItem & pi_r, Status state_r, ResStatus::TransactByValue causer_r )
     { return _pimpl->setPickStatus( pi_r, state_r, causer_r ); }
 
     Status Selectable::pickStatus( const PoolItem & pi_r ) const
