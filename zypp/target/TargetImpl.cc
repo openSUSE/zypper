@@ -1239,7 +1239,7 @@ namespace zypp
             flags |= rpm::RPMINST_NODEPS;
             flags |= rpm::RPMINST_FORCE;
             //
-            if (p->installOnly())          flags |= rpm::RPMINST_NOUPGRADE;
+            if (p->multiversionInstall())  flags |= rpm::RPMINST_NOUPGRADE;
             if (policy_r.dryRun())         flags |= rpm::RPMINST_TEST;
             if (policy_r.rpmExcludeDocs()) flags |= rpm::RPMINST_EXCLUDEDOCS;
             if (policy_r.rpmNoSignature()) flags |= rpm::RPMINST_NOSIGNATURE;
