@@ -148,9 +148,9 @@ void Config::read(const string & file)
     else
     {
       list<string> cmdstr;
-      zypp::str::split(s, std::back_inserter(cmdstr), ",");
+      str::split(s, std::back_inserter(cmdstr), ",");
       for_(c, cmdstr.begin(), cmdstr.end())
-        solver_forceResolutionCommands.insert(ZypperCommand(*c));
+        solver_forceResolutionCommands.insert(ZypperCommand(str::trim(*c)));
     }
 
 
