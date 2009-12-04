@@ -1,4 +1,9 @@
 -------------------------------------------------------------------
+Fri Dec  4 14:56:19 CET 2009 - jkupec@suse.cz
+
+- Don't allow an alias to start with '.' (bnc #473834)
+
+-------------------------------------------------------------------
 Thu Dec  3 12:00:16 CET 2009 - ma@suse.de
 
 - PickList and status interface for handling packages which are
