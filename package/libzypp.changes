@@ -1,4 +1,10 @@
 -------------------------------------------------------------------
+Fri Dec  4 17:19:58 CET 2009 - ma@suse.de
+
+- Improve multiversion status handling and installation. (fate #305311)
+- version 6.27.0 (19)
+
+-------------------------------------------------------------------
 Fri Dec  4 14:56:19 CET 2009 - jkupec@suse.cz
 
 - Don't allow an alias to start with '.' (bnc #473834)
