@@ -309,7 +309,7 @@ namespace zypp
       bool multiversionInstall() const;
 
       /** */
-      bool setPickStatus( const PoolItem & pi_r, const Status state_r, ResStatus::TransactByValue causer_r = ResStatus::USER );
+      bool setPickStatus( const PoolItem & pi_r, Status state_r, ResStatus::TransactByValue causer_r = ResStatus::USER );
 
       /** Compute the \ref ui::Status for an individual PoolItem.
        * This just takes into account the item and any identical
@@ -448,7 +448,7 @@ namespace zypp
        * Try to set a new Status.
        * Returns \c false if the transitions is not allowed.
        */
-      bool setStatus( const Status state_r, ResStatus::TransactByValue causer_r = ResStatus::USER );
+      bool setStatus( Status state_r, ResStatus::TransactByValue causer_r = ResStatus::USER );
 
       /** Return who caused the modification. */
       ResStatus::TransactByValue modifiedBy() const;

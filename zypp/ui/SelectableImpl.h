@@ -91,7 +91,7 @@ namespace zypp
       Status status() const;
 
       /**  */
-      bool setStatus( const Status state_r, ResStatus::TransactByValue causer_r );
+      bool setStatus( Status state_r, ResStatus::TransactByValue causer_r );
 
       /** Installed object (transacting ot highest version). */
       PoolItem installedObj() const
@@ -285,7 +285,7 @@ namespace zypp
       bool multiversionInstall() const
       { return theObj().satSolvable().multiversionInstall(); }
 
-      bool setPickStatus( const PoolItem & pi_r, const Status state_r, ResStatus::TransactByValue causer_r );
+      bool setPickStatus( const PoolItem & pi_r, Status state_r, ResStatus::TransactByValue causer_r );
 
       Status pickStatus( const PoolItem & pi_r ) const;
 
