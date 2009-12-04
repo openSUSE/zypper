@@ -503,7 +503,7 @@ namespace zypp
     {
       NO_SOLVABLE_RETURN( ! rhs.get() );
       ::_Solvable * rhssolvable( rhs.get() );
-      return rhssolvable && ::solvable_identical( _solvable, rhssolvable );
+      return rhssolvable && ( _solvable == rhssolvable || ::solvable_identical( _solvable, rhssolvable ) );
     }
 
     ///////////////////////////////////////////////////////////////////

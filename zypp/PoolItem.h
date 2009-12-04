@@ -187,7 +187,7 @@ namespace zypp
 
   /** \relates PoolItem Test for same content. */
   inline bool identical( const PoolItem & lhs, const PoolItem & rhs )
-  { return lhs.satSolvable().identical( rhs.satSolvable() ); }
+  { return lhs == rhs || lhs.satSolvable().identical( rhs.satSolvable() ); }
 
   /** \relates PoolItem Test for same content. */
   inline bool identical( const PoolItem & lhs, sat::Solvable rhs )
