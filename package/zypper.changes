@@ -1,4 +1,9 @@
 -------------------------------------------------------------------
+Tue Dec  8 14:49:06 CET 2009 - jkupec@suse.cz
+
+- search, pt: hide patterns flagged user invisible (bnc #538152)
+
+-------------------------------------------------------------------
 Fri Dec  4 14:58:46 CET 2009 - jkupec@suse.cz
 
 - Report invalid alias exception from libzypp (bnc #473834)
