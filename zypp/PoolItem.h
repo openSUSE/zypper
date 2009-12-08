@@ -198,6 +198,18 @@ namespace zypp
   { return lhs.identical( rhs.satSolvable() ); }
 
 
+  /** \relates PoolItem Test for same name version release and arch. */
+  inline bool sameNVRA( const PoolItem & lhs, const PoolItem & rhs )
+  { return lhs == rhs || lhs.satSolvable().sameNVRA( rhs.satSolvable() ); }
+
+  /** \relates PoolItem Test for same name version release and arch. */
+  inline bool sameNVRA( const PoolItem & lhs, sat::Solvable rhs )
+  { return lhs.satSolvable().sameNVRA( rhs ); }
+
+  /** \relates PoolItem Test for same name version release and arch. */
+  inline bool sameNVRA( sat::Solvable lhs, const PoolItem & rhs )
+  { return lhs.sameNVRA( rhs.satSolvable() ); }
+
   /** Solvable to PoolItem transform functor.
    * \relates PoolItem
    * \relates sat::SolvIterMixin

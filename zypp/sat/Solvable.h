@@ -191,7 +191,11 @@ namespace zypp
          */
         bool identical( Solvable rhs ) const;
 
-      public:
+        /** Test for same name-version-release.arch */
+        bool sameNVRA( Solvable rhs ) const
+        { return( ident() == rhs.ident() && edition() == rhs.edition() && arch() == rhs.arch() ); }
+
+     public:
 
         /** \name Access to the \ref Solvable dependencies.
          *
@@ -308,6 +312,9 @@ namespace zypp
     inline bool identical( Solvable lhs, Solvable rhs )
     { return lhs.identical( rhs ); }
 
+    /** \relates Solvable Test for same name version release and arch. */
+    inline bool sameNVRA( Solvable lhs, Solvable rhs )
+    { return lhs.sameNVRA( rhs ); }
 
     ///////////////////////////////////////////////////////////////////
     namespace detail
