@@ -368,19 +368,26 @@ class CheckIfUpdate : public resfilter::PoolItemFilterFunctor
 {
   public:
     bool is_updated;
+    bool multiversion;
+    sat::Solvable _installed;
 
-    CheckIfUpdate()
+    CheckIfUpdate( sat::Solvable installed_r )
 	: is_updated( false )
+        , multiversion( installed_r.multiversionInstall() )
+        , _installed( installed_r )
     {}
 
-    // check this item will be installed
+    // check this item will be updated
 
     bool operator()( PoolItem item )
     {
-	if (item.status().isToBeInstalled())
-	{
-	    is_updated = true;
-	    return false;
+	if ( item.status().isToBeInstalled() )
+        {
+          if ( ! multiversion || sameNVRA( _installed, item ) )
+          {
+            is_updated = true;
+            return false;
+          }
 	}
 	return true;
     }
@@ -459,9 +466,9 @@ SATResolver::solving(const CapabilitySet & requires_caps,
 	if (_solv->decisionmap[it->id()] > 0)
 	  continue;
 
-	PoolItem poolItem( *it );
 	// Check if this is an update
-	CheckIfUpdate info;
+	CheckIfUpdate info( *it );
+	PoolItem poolItem( *it );
 	invokeOnEach( _pool.byIdentBegin( poolItem ),
 		      _pool.byIdentEnd( poolItem ),
 		      resfilter::ByUninstalled(),			// ByUninstalled
@@ -832,10 +839,10 @@ void SATResolver::doUpdate()
       if (_solv->decisionmap[i] > 0)
 	continue;
 
-      PoolItem poolItem = _pool.find (sat::Solvable(i));
+      PoolItem poolItem( _pool.find( sat::Solvable(i) ) );
       if (poolItem) {
 	  // Check if this is an update
-	  CheckIfUpdate info;
+	  CheckIfUpdate info( (sat::Solvable(i)) );
 	  invokeOnEach( _pool.byIdentBegin( poolItem ),
 			_pool.byIdentEnd( poolItem ),
 			resfilter::ByUninstalled(),			// ByUninstalled

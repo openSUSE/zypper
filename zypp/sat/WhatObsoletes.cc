@@ -87,6 +87,9 @@ namespace zypp
 
     void WhatObsoletes::ctorAdd( Solvable item_r )
     {
+      if ( item_r.multiversionInstall() )
+        return; // multiversion (rpm -i) does not evaluate any obsoletes
+
       if ( obsoleteUsesProvides )
       {
         WhatProvides obsoleted( item_r.obsoletes() );
