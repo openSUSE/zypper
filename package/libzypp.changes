@@ -1,4 +1,10 @@
 -------------------------------------------------------------------
+Tue Dec  8 19:41:17 CET 2009 - ma@suse.de
+
+- Fix transaction building in presence of multiversion installable items.
+- version 6.27.1 (19)
+
+-------------------------------------------------------------------
 Fri Dec  4 17:19:58 CET 2009 - ma@suse.de
 
 - Improve multiversion status handling and installation. (fate #305311)
