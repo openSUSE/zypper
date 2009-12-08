@@ -401,7 +401,8 @@ string asXML(const Pattern & p, bool is_installed)
        " vendor=\"" << xml_encode(p.vendor()) << "\""
        " summary=\"" << xml_encode(p.summary()) << "\""
        " repo=\"" << xml_encode(p.repoInfo().alias()) << "\""
-       " installed=\"" << (is_installed ? 1 : 0) << "\"";
+       " installed=\"" << (is_installed ? 1 : 0) << "\""
+       " uservisible=\"" << (p.userVisible() ? 1 : 0) << "\"";
   if (p.description().empty())
     str << "/>";
   else

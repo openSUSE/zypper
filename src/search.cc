@@ -75,6 +75,14 @@ bool FillSearchTableSolvable::operator()(const zypp::ui::Selectable::constPtr & 
     TableRow row;
     zypp::PoolItem pi = *it;
 
+    // hide patterns with user visible flag not set (bnc #538152)
+    if (pi->kind() == zypp::ResKind::pattern)
+    {
+      Pattern::constPtr ptrn = asKind<Pattern>(pi.resolvable());
+      if (ptrn && !ptrn->userVisible())
+        continue;
+    }
+
     // installed status
 
     // patters
@@ -225,6 +233,14 @@ FillSearchTableSelectable::FillSearchTableSelectable(
 
 bool FillSearchTableSelectable::operator()(const zypp::ui::Selectable::constPtr & s) const
 {
+  // hide patterns with user visible flag not set (bnc #538152)
+  if (s->kind() == zypp::ResKind::pattern)
+  {
+    Pattern::constPtr ptrn = s->candidateAsKind<Pattern>();
+    if (ptrn && !ptrn->userVisible())
+      return true;
+  }
+
   TableRow row;
 
   bool installed;
@@ -406,6 +422,9 @@ static void list_pattern_table(Zypper & zypper)
       continue;
 
     Pattern::constPtr pattern = asKind<Pattern>(it->resolvable());
+    // hide patterns with user visible flag not set (bnc #538152)
+    if (!pattern->userVisible())
+      continue;
 
     TableRow tr;
     tr << (it->isSatisfied() ? "i" : "");
