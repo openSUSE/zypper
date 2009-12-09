@@ -32,6 +32,7 @@ using namespace zypp;
 
 static map<string, ConfigOption::Option> _table;
 static map<ConfigOption::Option, string> _table_str;
+const ConfigOption ConfigOption::MAIN_SHOW_ALIAS(ConfigOption::MAIN_SHOW_ALIAS_e);
 const ConfigOption ConfigOption::SOLVER_INSTALL_RECOMMENDS(ConfigOption::SOLVER_INSTALL_RECOMMENDS_e);
 const ConfigOption ConfigOption::SOLVER_FORCE_RESOLUTION_COMMANDS(ConfigOption::SOLVER_FORCE_RESOLUTION_COMMANDS_e);
 const ConfigOption ConfigOption::COLOR_USE_COLORS(ConfigOption::COLOR_USE_COLORS_e);
@@ -55,6 +56,7 @@ ConfigOption::Option ConfigOption::parse(const std::string & strval_r)
   if (_table.empty())
   {
     // initialize it
+    _table["main/showAlias"] = SOLVER_INSTALL_RECOMMENDS_e;
     _table["solver/installRecommends"] = SOLVER_INSTALL_RECOMMENDS_e;
     _table["solver/forceResolutionCommands"] = SOLVER_FORCE_RESOLUTION_COMMANDS_e;
     _table["color/useColors"] = COLOR_USE_COLORS_e;
@@ -83,6 +85,7 @@ const string ConfigOption::asString() const
   if (_table.empty())
   {
     // initialize it
+    _table_str[MAIN_SHOW_ALIAS_e] = "main/showAlias";
     _table_str[SOLVER_INSTALL_RECOMMENDS_e] = "solver/installRecommends";
     _table_str[SOLVER_FORCE_RESOLUTION_COMMANDS_e] = "solver/forceResolutionCommands";
     _table_str[COLOR_USE_COLORS_e] = "color/useColors";
@@ -104,7 +107,8 @@ const string ConfigOption::asString() const
 
 
 Config::Config()
-  : solver_installRecommends(true)
+  : show_alias(false)
+  , solver_installRecommends(true)
   , do_colors        (false)
   , color_useColors  ("never")
   , color_background (false)    // dark background
@@ -131,7 +135,9 @@ void Config::read(const string & file)
 
     // ---------------[ main ]--------------------------------------------------
 
-    // TODO
+    s = augeas.getOption(ConfigOption::MAIN_SHOW_ALIAS.asString());
+    if (!s.empty())
+      show_alias = str::strToBool(s, false);
 
 
     // ---------------[ solver ]------------------------------------------------

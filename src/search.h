@@ -13,7 +13,7 @@
 #include "Zypper.h"
 #include "Table.h"
 
-std::string selectable_search_repo_str(const zypp::ui::Selectable & s);
+//std::string selectable_search_repo_str(const zypp::ui::Selectable & s);
 
 /**
  * Functor for filling search output table in rug style.
@@ -24,6 +24,7 @@ struct FillSearchTableSolvable
   Table * _table;
   const GlobalOptions & _gopts;
   zypp::TriBool _inst_notinst;
+  bool _show_alias;
 
   FillSearchTableSolvable(
       Table & table,
@@ -55,6 +56,7 @@ struct FillPatchesTable
   Table * _table;
   const GlobalOptions & _gopts;
   zypp::TriBool _inst_notinst;
+  bool _show_alias;
   
   FillPatchesTable( Table & table,
       zypp::TriBool inst_notinst = zypp::indeterminate );

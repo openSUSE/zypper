@@ -62,6 +62,9 @@ public:
   { _viewop = (ViewOptions) (_viewop & ~option); }
   void toggleViewOption(const ViewOptions option)
   { _viewop & option ? unsetViewOption(option) : setViewOption(option); }
+  /** Show alias instead of name when showing repositories. */
+  void setShowRepoAlias(bool value = true)
+  { _show_repo_alias = value; }
   void setForceNoColor(bool value = true)
   { _force_no_color = value; }
 
@@ -108,6 +111,7 @@ private:
 
 private:
   ViewOptions _viewop;
+  bool _show_repo_alias;
   mutable unsigned _wrap_width;
   bool _force_no_color;
 

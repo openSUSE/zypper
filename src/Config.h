@@ -17,6 +17,8 @@
 class ConfigOption
 {
 public:
+  static const ConfigOption MAIN_SHOW_ALIAS;
+
   static const ConfigOption SOLVER_INSTALL_RECOMMENDS;
   static const ConfigOption SOLVER_FORCE_RESOLUTION_COMMANDS;
 
@@ -34,6 +36,8 @@ public:
 
   enum Option
   {
+    MAIN_SHOW_ALIAS_e,
+
     SOLVER_INSTALL_RECOMMENDS_e,
     SOLVER_FORCE_RESOLUTION_COMMANDS_e,
 
@@ -76,6 +80,8 @@ struct Config
   /** Reads zypper.conf and stores the result */
   void read(const std::string & file = "");
 
+  /** Whether to show */
+  bool show_alias;
 
   bool solver_installRecommends;
   std::set<ZypperCommand> solver_forceResolutionCommands;

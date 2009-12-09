@@ -28,6 +28,7 @@ FillSearchTableSolvable::FillSearchTableSolvable(
   : _table( &table )
   , _gopts(Zypper::instance()->globalOpts())
   , _inst_notinst(inst_notinst)
+  , _show_alias(Zypper::instance()->config().show_alias)
 {
   TableHeader header;
 
@@ -146,7 +147,8 @@ bool FillSearchTableSolvable::operator()(const zypp::ui::Selectable::constPtr & 
     if (_gopts.is_rug_compatible)
     {
       row
-        << pi->repository().info().name()
+        << (_show_alias ?
+            pi->repository().info().alias() : pi->repository().info().name())
         << ""
         << pi->name()
         << pi->edition().asString()
@@ -159,7 +161,8 @@ bool FillSearchTableSolvable::operator()(const zypp::ui::Selectable::constPtr & 
         << kind_to_string_localized(pi->kind(), 1)
         << pi->edition().asString()
         << pi->arch().asString()
-        << pi->repository().info().name();
+        << (_show_alias ?
+            pi->repository().info().alias() : pi->repository().info().name());
     }
 
     *_table << row;
@@ -205,7 +208,7 @@ bool FillSearchTableSolvable::operator()(const zypp::ui::Selectable::constPtr & 
         << (string("(") + _("System Packages") + ")");
     }
 
-    *_table << row;pi->repository().info().name();
+    *_table << row;
   }
 
   //! \todo maintain an internal plaindir repo named "Local Packages"
@@ -275,6 +278,7 @@ FillPatchesTable::FillPatchesTable( Table & table, zypp::TriBool inst_notinst )
   : _table( &table )
   , _gopts(Zypper::instance()->globalOpts())
   , _inst_notinst(inst_notinst)
+  , _show_alias(Zypper::instance()->config().show_alias)
 {
   TableHeader header;
 
@@ -305,7 +309,8 @@ bool FillPatchesTable::operator()(const zypp::PoolItem & pi) const
   zypp::Patch::constPtr patch = zypp::asKind<zypp::Patch>(pi.resolvable());
 
   row
-    << pi->repository().info().name()
+    << (_show_alias ?
+        pi->repository().info().alias() : pi->repository().info().name())
     << pi->name()
     << pi->edition().asString()
     << patch->category()
@@ -317,6 +322,7 @@ bool FillPatchesTable::operator()(const zypp::PoolItem & pi) const
 }
 
 
+/*
 string selectable_search_repo_str(const ui::Selectable & s)
 {
   string repostr;
@@ -335,7 +341,7 @@ string selectable_search_repo_str(const ui::Selectable & s)
 
   return repostr;
 }
-
+*/
 
 static string string_weak_status(const ResStatus & rs)
 {

@@ -547,6 +547,8 @@ void solve_and_commit (Zypper & zypper)
     else if (zypper.out().verbosity() == Out::DEBUG)
       summary.setViewOption(Summary::SHOW_ALL);
 
+    summary.setShowRepoAlias(zypper.config().show_alias);
+
     // show the summary
     if (zypper.out().type() == Out::TYPE_XML)
       summary.dumpAsXmlTo(cout);

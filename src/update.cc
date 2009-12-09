@@ -209,7 +209,7 @@ static bool list_patch_updates(Zypper & zypper)
 
       {
         TableRow tr (cols);
-        tr << patch->repoInfo().name();
+        tr << (zypper.config().show_alias ? patch->repoInfo().alias() : patch->repoInfo().name());
         tr << res->name () << res->edition ().asString();
         tr << patch->category();
         tr << (it->isBroken() ? _("needed") : _("not needed"));
@@ -471,7 +471,7 @@ void list_updates(Zypper & zypper, const ResKindSet & kinds, bool best_effort)
       TableRow tr (cols);
       tr << "v";
       if (!hide_repo) {
-        tr << res->repoInfo().name();
+        tr << (zypper.config().show_alias ?  res->repoInfo().alias() : res->repoInfo().name());
       }
       if (zypper.globalOpts().is_rug_compatible)
         tr << "";               // Bundle
