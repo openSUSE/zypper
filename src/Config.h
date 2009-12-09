@@ -80,7 +80,7 @@ struct Config
   /** Reads zypper.conf and stores the result */
   void read(const std::string & file = "");
 
-  /** Whether to show */
+  /** Whether to show repo alias instead of name wherever we need to show repo*/
   bool show_alias;
 
   bool solver_installRecommends;
