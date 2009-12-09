@@ -1,4 +1,10 @@
 -------------------------------------------------------------------
+Wed Dec  9 13:57:44 CET 2009 - jkupec@suse.cz
+
+- zypper.conf: main.showAlias option added to choose between
+  alias and name for showing repos
+
+-------------------------------------------------------------------
 Tue Dec  8 14:49:06 CET 2009 - jkupec@suse.cz
 
 - search, pt: hide patterns flagged user invisible (bnc #538152)
