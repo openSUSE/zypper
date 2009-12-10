@@ -1,4 +1,10 @@
 -------------------------------------------------------------------
+Thu Dec 10 17:18:34 CET 2009 - jkupec@suse.cz
+
+- RepoInfoBase::label() added for use in UI messages, plus
+  ZConfig::repoLabelIsAlias()
+
+-------------------------------------------------------------------
 Tue Dec  8 19:41:17 CET 2009 - ma@suse.de
 
 - Fix transaction building in presence of multiversion installable items.
