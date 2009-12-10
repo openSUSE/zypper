@@ -939,7 +939,7 @@ namespace zypp
           MediaSetAccess media(url);
           shared_ptr<repo::Downloader> downloader_ptr;
 
-          MIL << "Creating downloader for [ " << info.name() << " ]" << endl;
+          MIL << "Creating downloader for [ " << info.alias() << " ]" << endl;
 
           if ( repokind.toEnum() == RepoType::RPMMD_e )
             downloader_ptr.reset(new yum::Downloader(info));
@@ -1074,7 +1074,7 @@ namespace zypp
     ProgressData progress(100);
     callback::SendReport<ProgressReport> report;
     progress.sendTo( ProgressReportAdaptor( progressrcv, report ) );
-    progress.name(str::form(_("Building repository '%s' cache"), info.name().c_str()));
+    progress.name(str::form(_("Building repository '%s' cache"), info.label().c_str()));
     progress.toMin();
 
     if (needs_cleaning)
@@ -1327,7 +1327,7 @@ namespace zypp
     ProgressData progress(100);
     callback::SendReport<ProgressReport> report;
     progress.sendTo( ProgressReportAdaptor( progressrcv, report ) );
-    progress.name(str::form(_("Adding repository '%s'"), info.name().c_str()));
+    progress.name(str::form(_("Adding repository '%s'"), info.label().c_str()));
     progress.toMin();
 
     MIL << "Try adding repo " << info << endl;
@@ -1474,7 +1474,7 @@ namespace zypp
     ProgressData progress;
     callback::SendReport<ProgressReport> report;
     progress.sendTo( ProgressReportAdaptor( progressrcv, report ) );
-    progress.name(str::form(_("Removing repository '%s'"), info.name().c_str()));
+    progress.name(str::form(_("Removing repository '%s'"), info.label().c_str()));
 
     MIL << "Going to delete repo " << info.alias() << endl;
 
