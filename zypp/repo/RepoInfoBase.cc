@@ -11,6 +11,7 @@
  */
 #include <iostream>
 
+#include "zypp/ZConfig.h"
 #include "zypp/repo/RepoVariables.h"
 
 #include "zypp/repo/RepoInfoBase.h"
@@ -133,6 +134,13 @@ namespace zypp
 
     repo::RepoVariablesStringReplacer replacer;
     return replacer(_pimpl->name);
+  }
+
+  std::string RepoInfoBase::label() const
+  {
+    if ( ZConfig::instance().repoLabelIsAlias() )
+      return alias();
+    return name();
   }
 
   Pathname RepoInfoBase::filepath() const

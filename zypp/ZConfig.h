@@ -161,6 +161,22 @@ namespace zypp
       unsigned repo_refresh_delay() const;
 
       /**
+       * Whether to use repository alias or name in user messages (progress,
+       * exceptions, ...).
+       * True: use alias, false: use name.
+       */
+      bool repoLabelIsAlias() const;
+
+      /**
+       * Whether to use repository alias or name in user messages (progress,
+       * exceptions, ...). Console applications might prefer to use and display
+       * the shorter alias instead of full repository name.
+       *
+       * Default: false; i.e. repo label is 'name'
+       */
+      void repoLabelIsAlias( bool yesno_r );
+
+      /**
        * Maximum number of concurrent connections for a single transfer
        */
       long download_max_concurrent_connections() const;

@@ -216,6 +216,7 @@ namespace zypp
         , updateMessagesNotify		( "single | /usr/lib/zypp/notify-message -p %p" )
         , repo_add_probe          	( false )
         , repo_refresh_delay      	( 10 )
+        , repoLabelIsAlias              ( false )
         , download_use_deltarpm   	( true )
         , download_use_deltarpm_always  ( false )
         , download_media_prefer_download( true )
@@ -461,6 +462,7 @@ namespace zypp
 
     bool repo_add_probe;
     unsigned repo_refresh_delay;
+    bool repoLabelIsAlias;
 
     bool download_use_deltarpm;
     bool download_use_deltarpm_always;
@@ -653,6 +655,12 @@ namespace zypp
   {
     return _pimpl->repo_refresh_delay;
   }
+
+  bool ZConfig::repoLabelIsAlias() const
+  { return _pimpl->repoLabelIsAlias; }
+
+  void ZConfig::repoLabelIsAlias( bool yesno_r )
+  { _pimpl->repoLabelIsAlias = yesno_r; }
 
   bool ZConfig::download_use_deltarpm() const
   { return _pimpl->download_use_deltarpm; }

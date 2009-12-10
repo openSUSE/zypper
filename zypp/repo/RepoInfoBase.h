@@ -59,11 +59,17 @@ namespace zypp
       /**
        * \short Repository short label
        *
-       * Short label or description of the repository, to be used on
-       * the user interface.
+       * Short label or description of the repository.
        * ie: "SUSE Linux 10.2 updates"
        */
       std::string name() const;
+
+      /**
+       * \short Label for use in messages for the user interface.
+       *
+       * Returns an alias or name, according to ZConfig::repoLabelIsAlias().
+       */
+      std::string label() const;
 
       /**
        * If enabled is false, then this repository must be ignored as if does
