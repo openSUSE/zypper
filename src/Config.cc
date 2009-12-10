@@ -137,7 +137,10 @@ void Config::read(const string & file)
 
     s = augeas.getOption(ConfigOption::MAIN_SHOW_ALIAS.asString());
     if (!s.empty())
+    {
       show_alias = str::strToBool(s, false);
+      ZConfig::instance().repoLabelIsAlias(show_alias);
+    }
 
 
     // ---------------[ solver ]------------------------------------------------
