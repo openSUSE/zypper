@@ -88,7 +88,7 @@ namespace zypp
           pinfo.command = command.basename();
       }
 
-      MIL << " Take " << pinfo << endl;
+      //MIL << " Take " << pinfo << endl;
     }
 
     /** Add line to cache if it refers to a deleted executable or library file:
