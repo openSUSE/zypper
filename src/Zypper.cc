@@ -885,6 +885,9 @@ void Zypper::processCommandOptions()
     ZYPP_THROW(ExitRequestException("help provided"));
   }
 
+  //! \todo all option descriptions in help texts should start at 29th character
+  //! and should wrap at 79th column (bnc #423007)
+
   case ZypperCommand::INSTALL_e:
   {
     static struct option install_options[] = {
@@ -950,10 +953,10 @@ void Zypper::processCommandOptions()
       "    --no-recommends         Do not install recommended packages, only required.\n"
       "    --recommends            Install also recommended packages in addition\n"
       "                            to the required.\n"
-      "    --no-force-resolution   Do not force the solver to find solution,\n"
+      "-R, --no-force-resolution   Do not force the solver to find solution,\n"
       "                            let it ask.\n"
-      "-R, --force-resolution      Force the solver to find a solution (even\n"
-      "                            an agressive).\n"
+      "    --force-resolution      Force the solver to find a solution (even\n"
+      "                            an aggressive one).\n"
       "-D, --dry-run               Test the installation, do not actually install.\n"
       "    --download              Set the download-install mode. Available modes:\n"
       "                            %s\n"
@@ -996,15 +999,17 @@ void Zypper::processCommandOptions()
       "of <, <=, =, >=, >.\n"
       "\n"
       "  Command options:\n"
-      "-r, --repo <alias|#|URI>        Operate only with packages from the specified repository.\n"
-      "-t, --type <type>               Type of package (%s).\n"
-      "                                Default: %s.\n"
-      "-n, --name                      Select packages by plain name, not by capability.\n"
-      "-C, --capability                Select packages by capability.\n"
-      "    --debug-solver              Create solver test case for debugging.\n"
-      "-R, --no-force-resolution       Do not force the solver to find solution, let it ask.\n"
-      "    --force-resolution          Force the solver to find a solution (even an agressive).\n"
-      "-D, --dry-run                   Test the removal, do not actually remove.\n"
+      "-r, --repo <alias|#|URI>    Load only the specified repository.\n"
+      "-t, --type <type>           Type of package (%s).\n"
+      "                            Default: %s.\n"
+      "-n, --name                  Select packages by plain name, not by capability.\n"
+      "-C, --capability            Select packages by capability.\n"
+      "    --debug-solver          Create solver test case for debugging.\n"
+      "-R, --no-force-resolution   Do not force the solver to find solution,\n"
+      "                            let it ask.\n"
+      "    --force-resolution      Force the solver to find a solution (even\n"
+      "                            an aggressive one).\n"
+      "-D, --dry-run               Test the removal, do not actually remove.\n"
     ), "package, patch, pattern, product", "package");
     break;
   }
@@ -1598,7 +1603,7 @@ void Zypper::processCommandOptions()
       "-R, --no-force-resolution   Do not force the solver to find solution,\n"
       "                            let it ask.\n"
       "    --force-resolution      Force the solver to find a solution (even\n"
-      "                            an agressive).\n"
+      "                            an aggressive one).\n"
       "-D, --dry-run               Test the update, do not actually update.\n"
       "    --download              Set the download-install mode. Available modes:\n"
       "                            %s\n"
