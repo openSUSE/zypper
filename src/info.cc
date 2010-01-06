@@ -246,12 +246,12 @@ void printPatchInfo(Zypper & zypper, const ui::Selectable & s )
     cout << *it << endl;
   }
 
-  cout << endl << _("Requires:") << endl;
-  capSet = pool_item.resolvable()->dep(zypp::Dep::REQUIRES);
-  for (Capabilities::const_iterator it = capSet.begin(); it != capSet.end(); ++it) {
-    // FIXME cout << it->refers().asString() << ": " << it->asString() << endl;
+  // bnc #565050 - in libzypp 5.x.x, after switching to libsatsolver, patches
+  // no longer require *atoms*, but rather conflict with older *packages*.
+  cout << endl << _("Conflicts:") << endl;
+  capSet = pool_item.resolvable()->dep(zypp::Dep::CONFLICTS);
+  for (Capabilities::const_iterator it = capSet.begin(); it != capSet.end(); ++it)
     cout << *it << endl;
-  }
 }
 
 static string string_weak_status(const ResStatus & rs)
