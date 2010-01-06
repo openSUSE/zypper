@@ -1,4 +1,9 @@
 -------------------------------------------------------------------
+Wed Jan  6 15:48:20 CET 2010 - jkupec@suse.cz
+
+- Fixed --no-force-resolution help text (bnc #535816)
+
+-------------------------------------------------------------------
 Wed Dec  9 13:57:44 CET 2009 - jkupec@suse.cz
 
 - zypper.conf: main.showAlias option added to choose between
