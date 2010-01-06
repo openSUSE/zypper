@@ -514,7 +514,6 @@ namespace zypp
         repo::PackageProvider pkgProvider( _access, p, deltas, packageProviderPolicy );
 
         ManagedFile ret( pkgProvider.providePackage() );
-        INT << ret << " (" << ret.getDispose() << ")" << endl;
         return ret;
       }
     };
