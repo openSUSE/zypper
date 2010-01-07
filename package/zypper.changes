@@ -1,4 +1,10 @@
 -------------------------------------------------------------------
+Thu Jan  7 14:10:11 CET 2010 - jkupec@suse.cz
+
+- Avoid overwriting progress lines with other messages
+  (bnc #495977)
+
+-------------------------------------------------------------------
 Wed Jan  6 15:48:20 CET 2010 - jkupec@suse.cz
 
 - Fixed --no-force-resolution help text (bnc #535816)
