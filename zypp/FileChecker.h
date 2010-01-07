@@ -99,6 +99,7 @@ namespace zypp
       */
       SignatureFileChecker();
 
+      void setKeyContext(const KeyContext & keycontext);
 
       /**
        * add a public key to the list of known keys

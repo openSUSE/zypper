@@ -105,6 +105,9 @@ namespace zypp
   {
   }
 
+  void SignatureFileChecker::setKeyContext(const KeyContext & keycontext)
+  { _context = keycontext; }
+
   void SignatureFileChecker::addPublicKey( const Pathname & publickey, const KeyContext & keycontext )
   { addPublicKey( PublicKey(publickey), keycontext ); }
 

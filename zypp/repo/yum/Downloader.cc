@@ -134,13 +134,17 @@ void Downloader::download( MediaSetAccess &media,
 
   this->enqueue( OnMediaLocation(keypath,1).setOptional(true) );
   this->start( dest_dir, *_media_ptr);
-    // only add the key if it exists
+
+  KeyContext context;
+  context.setRepoInfo(repoInfo());
+  // only add the key if it exists
   if ( PathInfo(dest_dir / keypath).isExist() )
-  {
-      KeyContext context;
-      context.setRepoInfo(repoInfo());
-      sigchecker.addPublicKey(dest_dir + keypath, context);
-  }
+    sigchecker.addPublicKey(dest_dir + keypath, context);
+  // set the checker context even if the key is not known (unsigned repo, key
+  // file missing; bnc #495977)
+  else
+    sigchecker.setKeyContext(context);
+
   this->reset();
 
   if ( ! progress.tick() )
