@@ -99,6 +99,13 @@ namespace zypp
       */
       SignatureFileChecker();
 
+      /**
+       * Set context for this checker.
+       *
+       * Use this method if you're not adding the key (with context) via
+       * one of the addPublicKey methods. The addPublicKey method overwrites
+       * the context.
+       */
       void setKeyContext(const KeyContext & keycontext);
 
       /**
