@@ -28,7 +28,7 @@ using std::ostringstream;
 
 OutNormal::OutNormal(Verbosity verbosity)
   : Out(TYPE_NORMAL, verbosity),
-    _use_colors(false), _isatty(isatty(STDOUT_FILENO))
+    _use_colors(false), _isatty(isatty(STDOUT_FILENO)), _newline(true)
 {}
 
 OutNormal::~OutNormal()
@@ -321,7 +321,8 @@ void OutNormal::prompt(PromptId id,
   if (!poptions.empty())
     cout << " " << poptions.optionString();
   cout << ": " << std::flush;
-  _newline = false;
+  // prompt ends with newline (user hits <enter>) unless exited abnormaly
+  _newline = true;
 }
 
 void OutNormal::promptHelp(const PromptOptions & poptions)
@@ -348,5 +349,6 @@ void OutNormal::promptHelp(const PromptOptions & poptions)
   }
 
   cout << endl << poptions.optionString() << ": " << std::flush;
-  _newline = false;
+  // prompt ends with newline (user hits <enter>) unless exited abnormaly
+  _newline = true;
 }
