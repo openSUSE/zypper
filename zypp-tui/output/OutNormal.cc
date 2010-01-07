@@ -58,12 +58,16 @@ void OutNormal::info(const std::string & msg, Verbosity verbosity, Type mask)
   if (infoWarningFilter(verbosity, mask))
     return;
 
+  if (!_newline)
+    cout << endl;
+
   if (verbosity == Out::QUIET)
     print_color(msg, COLOR_CONTEXT_RESULT);
   else
     print_color(msg, COLOR_CONTEXT_MSG_STATUS);
 
   cout << endl;
+  _newline = true;
 }
 
 void OutNormal::warning(const std::string & msg, Verbosity verbosity, Type mask)
@@ -71,16 +75,24 @@ void OutNormal::warning(const std::string & msg, Verbosity verbosity, Type mask)
   if (infoWarningFilter(verbosity, mask))
     return;
 
+  if (!_newline)
+    cout << endl;
+
   print_color(_("Warning: "), COLOR_CONTEXT_MSG_WARNING);
   cout << msg << endl;
+  _newline = true;
 }
 
 void OutNormal::error(const std::string & problem_desc, const std::string & hint)
 {
+  if (!_newline)
+    cout << endl;
+
   fprint_color(cerr, problem_desc, COLOR_CONTEXT_MSG_ERROR);
   if (!hint.empty() && this->verbosity() > Out::QUIET)
     cerr << endl << hint;
   cerr << endl;
+  _newline = true;
 }
 
 // ----------------------------------------------------------------------------
@@ -89,6 +101,9 @@ void OutNormal::error(const zypp::Exception & e,
                       const string & problem_desc,
                       const string & hint)
 {
+  if (!_newline)
+    cout << endl;
+
   // problem
   fprint_color(cerr, problem_desc, COLOR_CONTEXT_MSG_ERROR);
   cerr << endl;
@@ -99,6 +114,8 @@ void OutNormal::error(const zypp::Exception & e,
   // hint
   if (!hint.empty() && this->verbosity() > Out::QUIET)
     cerr << hint << endl;
+
+  _newline = true;
 }
 
 // ----------------------------------------------------------------------------
@@ -153,6 +170,8 @@ void OutNormal::progressStart(const std::string & id,
     display_tick(id, label);
   else
     display_progress(id, label, 0);
+
+  _newline = false;
 }
 
 void OutNormal::progress(const std::string & id, const string & label, int value)
@@ -164,6 +183,8 @@ void OutNormal::progress(const std::string & id, const string & label, int value
     display_progress(id, label, value);
   else
     display_tick(id, label);
+
+  _newline = false;
 }
 
 void OutNormal::progressEnd(const std::string & id, const string & label, bool error)
@@ -188,6 +209,7 @@ void OutNormal::progressEnd(const std::string & id, const string & label, bool e
     cout << COLOR_RESET;
 
   cout << endl << std::flush;
+  _newline = true;
 }
 
 // progress with download rate
@@ -209,6 +231,7 @@ void OutNormal::dwnldProgressStart(const zypp::Url & uri)
     cout << " [" ;
 
   cout << std::flush;
+  _newline = false;
 }
 
 void OutNormal::dwnldProgress(const zypp::Url & uri,
@@ -241,6 +264,7 @@ void OutNormal::dwnldProgress(const zypp::Url & uri,
   }
 
   cout << std::flush;
+  _newline = false;
 }
 
 void OutNormal::dwnldProgressEnd(const zypp::Url & uri, long rate, bool error)
@@ -275,6 +299,7 @@ void OutNormal::dwnldProgressEnd(const zypp::Url & uri, long rate, bool error)
     cout << COLOR_RESET;
 
   cout << endl << std::flush;
+  _newline = true;
 }
 
 void OutNormal::prompt(PromptId id,
@@ -282,6 +307,9 @@ void OutNormal::prompt(PromptId id,
                        const PromptOptions & poptions,
                        const std::string & startdesc)
 {
+  if (!_newline)
+    cout << endl;
+
   if (startdesc.empty())
   {
     if (_isatty)
@@ -293,6 +321,7 @@ void OutNormal::prompt(PromptId id,
   if (!poptions.empty())
     cout << " " << poptions.optionString();
   cout << ": " << std::flush;
+  _newline = false;
 }
 
 void OutNormal::promptHelp(const PromptOptions & poptions)
@@ -319,4 +348,5 @@ void OutNormal::promptHelp(const PromptOptions & poptions)
   }
 
   cout << endl << poptions.optionString() << ": " << std::flush;
+  _newline = false;
 }

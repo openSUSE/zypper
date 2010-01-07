@@ -75,8 +75,12 @@ protected:
 
 private:
   bool infoWarningFilter(Verbosity verbosity, Type mask);
+
   bool _use_colors;
   bool _isatty;
+  /* Newline flag. false if the last output did not end with new line character
+   * (like in a self-overwriting progress line), false otherwise. */
+  bool _newline;
 };
 
 #endif /*OUTNORMAL_H_*/
