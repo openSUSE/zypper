@@ -1,4 +1,10 @@
 -------------------------------------------------------------------
+Thu Jan  7 12:25:24 CET 2010 - jkupec@suse.cz
+
+- Set SignatureFileChecker context even if the key is not known
+  (bnc #495977)
+
+-------------------------------------------------------------------
 Thu Dec 10 17:18:34 CET 2009 - jkupec@suse.cz
 
 - RepoInfoBase::label() added for use in UI messages, plus
