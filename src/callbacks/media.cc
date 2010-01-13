@@ -200,13 +200,13 @@ ZmartRecipients::MediaChangeReportReceiver::requestMedia(
 {
   Zypper & zypper = *Zypper::instance();
 
-  DBG << "medium problem, url: " << url.asString() << std::endl;
+  DBG << "medium problem, url: " << url.asString()
+      << ", error " << error
+      << ", label '" << label << "', #" << mediumNr << endl;
 
   zypper.out().error(description);
-  if (is_changeable_media(url) && error == MediaChangeReport::WRONG)
+  if (is_changeable_media(url))
   {
-    //cerr << endl; // may be in the middle of RepoReport or ProgressReport \todo check this
-
     std::string request = boost::str(boost::format(
         // TranslatorExplanation translate letters 'y' and 'n' to whathever is appropriate for your language.
         // Try to check what answers does zypper accept (it always accepts y/n at least)
