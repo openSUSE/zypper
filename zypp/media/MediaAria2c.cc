@@ -17,6 +17,7 @@
 #include <boost/lexical_cast.hpp>
 
 #include "zypp/base/Logger.h"
+#include "zypp/base/Regex.h"
 #include "zypp/ExternalProgram.h"
 #include "zypp/ProgressData.h"
 #include "zypp/base/String.h"
@@ -316,16 +317,24 @@ void MediaAria2c::getFileCopy( const Pathname & filename , const Pathname & targ
 
       ExternalProgram aria(args, ExternalProgram::Stderr_To_Stdout);
 
+      // extended regex for parsing of progress lines
       // progress line like: [#1 SIZE:8.3MiB/10.1MiB(82%) CN:5 SPD:6899.88KiB/s]
       // but since 1.4.0:    [#1 SIZE:8.3MiB/10.1MiB(82%) CN:5 SPD:899.8KiBs]
       //       (bnc #513944) [#1 SIZE:8.3MiB/10.1MiB(82%) CN:5 SPD:3.8MiBs]
       //                     [#1 SIZE:8.3MiB/10.1MiB(82%) CN:5 SPD:38Bs]
-      // we save it until we find a string with FILE: later
-      string progressLine;
+      // later got also ETA: [#1 SIZE:8.3MiB/10.1MiB(82%) CN:5 SPD:38Bs ETA:02s]
+      static str::regex rxProgress(
+          "^\\[#[0-9]+ SIZE:[0-9\\.]+(|Ki|Mi|Ti)B/[0-9\\.]+(|Ki|Mi|Ti)B\\(?([0-9]+)?%?\\)? CN:[0-9]+ SPD:([0-9\\.]+)(|Ki|Mi|Ti)Bs.*\\]$");
+
+      // whether we received correct progress line before corresponding FILE line
+      bool gotProgress = false;
+      // download progress in %
       int progress = 0;
-      // file line, which tell which file is the previous progress
-      // ie: FILE: ./packages.FL.gz
+      // current download speed in bytes
+      double current_speed = 0;
+      // download speed in bytes
       double average_speed = 0;
+      // number of speed measurements
       long average_speed_count = 0;
 
       // here we capture aria output exceptions
@@ -339,13 +348,45 @@ void MediaAria2c::getFileCopy( const Pathname & filename , const Pathname & targ
           ariaResponse.length();
           ariaResponse = aria.receiveLine())
       {
-        //cout << ariaResponse;
         string line = str::trim(ariaResponse);
+        // INT << line << endl;
 
-        // look for the progress line and save it for later
+        // look for the progress line and save parsed values until we find
+        // a string with FILE: later.
         if ( str::hasPrefix(line, "[#") )
         {
-          progressLine = line;
+          str::smatch progressValues;
+          if (( gotProgress = str::regex_match(line, progressValues, rxProgress) ))
+          {
+            // INT << "got: progress: '" << progressValues[3]
+            //     << "' speed: '" << progressValues[4] << " "
+            //     << progressValues[5] << "Bs'" << endl;
+
+            // get the percentage (progress) data
+            progress = std::atoi(progressValues[3].c_str());
+
+            // get the speed
+
+            int factor = 1; // B/KiB/MiB multiplication factor
+            if (progressValues[5] == "Ki")
+              factor = 1024;
+            else if (progressValues[5] == "Mi")
+              factor = 0x100000;
+            else if (progressValues[5] == "Ti")
+              factor = 0x40000000;
+
+            try {
+              current_speed = boost::lexical_cast<double>(progressValues[4]);
+              // convert to and work with bytes everywhere (bnc #537870)
+              current_speed *= factor;
+            }
+            catch (const std::exception&) {
+              ERR << "Can't parse speed from '" << progressValues[4] << "'" << endl;
+              current_speed = 0;
+            }
+          }
+          else
+            ERR << "Can't parse progress line '" << line << "'" << endl;
         }
         // save error messages for later
         else if ( str::hasPrefix(line, "Exception: ") )
@@ -362,6 +403,8 @@ void MediaAria2c::getFileCopy( const Pathname & filename , const Pathname & targ
           DBG << "aria2c reported: '" << excpMsg << "'" << endl;
           ariaExceptions.push_back(excpMsg);
         }
+        // The file line tells which file corresponds to the previous progress,
+        // eg.: FILE: ./packages.FL.gz
         else if ( str::hasPrefix(line, "FILE: ") )
         {
           // get the FILE name
@@ -375,48 +418,8 @@ void MediaAria2c::getFileCopy( const Pathname & filename , const Pathname & targ
           {
             // once we find the FILE: line, progress has to be
             // non empty
-            if ( ! progressLine.empty() )
+            if ( gotProgress )
             {
-              // get the percentage (progress) data
-              progress = 0;
-              size_t left_bound = progressLine.find('(',0) + 1;
-              size_t count = progressLine.find('%',left_bound) - left_bound;
-              string progressStr = progressLine.substr(left_bound, count);
-
-              if ( count != string::npos )
-                progress = std::atoi(progressStr.c_str());
-              else
-                  ERR << "Can't parse progress from '" << progressStr << "'" << endl;
-
-              // get the speed
-              double current_speed = 0;
-              int factor = 1; // B/KiB/MiB multiplication factor
-
-              left_bound = progressLine.find("SPD:",0) + 4;
-              if ((count = progressLine.find("KiB",left_bound)) != string::npos)
-                factor = 1024;
-              else if ((count = progressLine.find("MiB",left_bound)) != string::npos)
-                factor = 0x100000;
-              else
-                count = progressLine.find("Bs",left_bound);
-
-              if ( count != string::npos )
-              { // convert the string to a double
-                count -= left_bound;
-                string speedStr = progressLine.substr(left_bound, count);
-                try {
-                  current_speed = boost::lexical_cast<double>(speedStr);
-                  // convert to and work with bytes everywhere (bnc #537870)
-                  current_speed *= factor;
-                }
-                catch (const std::exception&) {
-                  ERR << "Can't parse speed from '" << speedStr << "'" << endl;
-                  current_speed = 0;
-                }
-              }
-              else
-                ERR << "Can't parse speed from '" << progressLine << "'" << endl;
-
               // we have a new average speed
               average_speed_count++;
 
@@ -427,9 +430,9 @@ void MediaAria2c::getFileCopy( const Pathname & filename , const Pathname & targ
                 / average_speed_count;
 
               report->progress ( progress, fileurl, average_speed, current_speed );
-              // clear the progress line to detect mismatches between
-              // [# and FILE: lines
-              progressLine.clear();
+
+              // clear the flag to detect mismatches between [# and FILE: lines
+              gotProgress = false;
             }
             else
             {
