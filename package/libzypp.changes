@@ -1,4 +1,9 @@
 -------------------------------------------------------------------
+Fri Jan 15 18:15:26 CET 2010 - jkupec@suse.cz
+
+- Use regex to parse aria2c progress lines (bnc #570917)
+
+-------------------------------------------------------------------
 Thu Jan  7 12:25:24 CET 2010 - jkupec@suse.cz
 
 - Set SignatureFileChecker context even if the key is not known
