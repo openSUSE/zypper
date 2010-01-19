@@ -1304,7 +1304,21 @@ namespace zypp
 
     try
     {
-      sat::Pool::instance().addRepoSolv( solvfile, info );
+      Repository repo = sat::Pool::instance().addRepoSolv( solvfile, info );
+      // test toolversion in order to rebuild solv file in case
+      // it was written by an old satsolver-tool parser.
+      //
+      // Known version strings used:
+      //  - <no string>
+      //  - "1.0"
+      //
+      sat::LookupRepoAttr toolversion( sat::SolvAttr::repositoryToolVersion, repo );
+      if ( toolversion.begin().asString().empty() )
+      {
+        repo.eraseFromPool();
+        ZYPP_THROW(Exception("Solv-file was created by old parser."));
+      }
+      // else: up-to-date (or even newer).
     }
     catch ( const Exception & exp )
     {
