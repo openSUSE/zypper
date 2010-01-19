@@ -136,6 +136,8 @@ namespace sat
   const SolvAttr SolvAttr::repositoryRpmDbCookie      ( REPOSITORY_RPMDBCOOKIE );
   const SolvAttr SolvAttr::repositoryDeltaInfo        ( REPOSITORY_DELTAINFO );
 
+  const SolvAttr SolvAttr::repositoryToolVersion	( REPOSITORY_TOOLVERSION );
+
   /////////////////////////////////////////////////////////////////
 
   SolvAttr SolvAttr::parent() const
