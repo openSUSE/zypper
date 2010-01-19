@@ -1,4 +1,11 @@
 -------------------------------------------------------------------
+Tue Jan 19 14:50:15 CET 2010 - ma@suse.de
+
+- Evaluate SolvAttr::repositoryToolVersion to prevent loading 
+  outdated solv files. (bnc #570623)
+- version 6.29.0 (19)
+
+-------------------------------------------------------------------
 Fri Jan 15 18:15:26 CET 2010 - jkupec@suse.cz
 
 - Use regex to parse aria2c progress lines (bnc #570917)

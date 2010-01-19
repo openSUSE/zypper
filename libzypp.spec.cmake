@@ -28,7 +28,7 @@ BuildRequires:  cmake
 BuildRequires:  openssl-devel
 BuildRequires:  boost-devel dejagnu doxygen gcc-c++ gettext-devel graphviz hal-devel libxml2-devel
 
-BuildRequires:  libsatsolver-devel >= 0.14.9
+BuildRequires:  libsatsolver-devel >= 0.14.13
 %requires_eq    satsolver-tools
 
 # required for testsuite, webrick
