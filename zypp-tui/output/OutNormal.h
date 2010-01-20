@@ -75,6 +75,8 @@ protected:
 
 private:
   bool infoWarningFilter(Verbosity verbosity, Type mask);
+  void displayProgress(const std::string & s, int percent);
+  void displayTick(const std::string & s);
 
   bool _use_colors;
   bool _isatty;
