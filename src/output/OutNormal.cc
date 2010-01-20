@@ -120,11 +120,11 @@ void OutNormal::error(const zypp::Exception & e,
 
 // ----------------------------------------------------------------------------
 
-static void display_progress ( const std::string & id, const string & s, int percent)
+void OutNormal::displayProgress (const string & s, int percent)
 {
   static AliveCursor cursor;
 
-  if (isatty(STDOUT_FILENO))
+  if (_isatty)
   {
     cout << CLEARLN << s << " [";
     // dont display percents if invalid
@@ -141,11 +141,11 @@ static void display_progress ( const std::string & id, const string & s, int per
 
 // ----------------------------------------------------------------------------
 
-static void display_tick ( const std::string & id, const string & s)
+void OutNormal::displayTick (const string & s)
 {
   static AliveCursor cursor;
 
-  if (isatty(STDOUT_FILENO))
+  if (_isatty)
   {
     cout << CLEARLN << s << " [" << ++cursor << "]";
     cout << std::flush;
@@ -167,9 +167,9 @@ void OutNormal::progressStart(const std::string & id,
     cout << label << " [";
 
   if (is_tick)
-    display_tick(id, label);
+    displayTick(label);
   else
-    display_progress(id, label, 0);
+    displayProgress(label, 0);
 
   _newline = false;
 }
@@ -180,9 +180,9 @@ void OutNormal::progress(const std::string & id, const string & label, int value
     return;
 
   if (value)
-    display_progress(id, label, value);
+    displayProgress(label, value);
   else
-    display_tick(id, label);
+    displayTick(label);
 
   _newline = false;
 }
