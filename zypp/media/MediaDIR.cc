@@ -84,7 +84,7 @@ namespace zypp {
 	else
 	{
           ZYPP_THROW(MediaBadUrlException(url(),
-            "Specified path '" + url().getPathName() + "' is not allowed as media source"
+            "Specified path '" + url().getPathName() + "' is not a directory"
 	  ));
 	}
       }
