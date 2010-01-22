@@ -154,7 +154,7 @@ namespace zypp
       }
 
       // rel or abs path
-      if ( *R_pci == '/' || *R_pci == '\\' ) {
+      if ( *R_pci == '/' ) {
         Stack_Ci.Push( "" );
         ++R_pci;
       } else {
@@ -164,7 +164,6 @@ namespace zypp
       do {
         switch ( *R_pci ) {
         case '/':
-        case '\\':
         case '\0':
           if ( W_pci != Buf_aci ) {
             *W_pci = '\0';
