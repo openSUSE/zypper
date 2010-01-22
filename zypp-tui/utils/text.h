@@ -11,15 +11,27 @@
 #include <string>
 #include <iosfwd>
 
-/** Returns the length of the string in columns */
-/*
+/** Returns the column width of a multi-byte character string \a str */
+unsigned mbs_width (const std::string & str);
+
+/**
+ * Wrap and indent given \a text and write it to the output stream \a out.
+ *
  * TODO
  * - delete whitespace at the end of lines
  * - keep one-letter words with the next
+ *
+ * \param out       output stream to write to
+ * \param test      text to wrap
+ * \param indent    number of columns by which to indent the whole text
+ * \param wrap_width number of columns the text should be wrapped into
+ * \param initial   number of columns by which the first line should be indented
+ *                  by default, the first line is indented by \a indent
+ *
  */
-unsigned string_to_columns (const std::string & str);
-
-void wrap_text(std::ostream & out, const std::string & text,
+void mbs_write_wrapped (
+    std::ostream & out,
+    const std::string & text,
     unsigned indent, unsigned wrap_width, int initial = -1);
 
 #endif /* ZYPPER_UTILS_TEXT_H_ */

@@ -102,7 +102,7 @@ void TableRow::dumpTo (ostream &stream, const Table & parent) const
 
     // stream.width (widths[c]); // that does not work with multibyte chars
     const string & s = *i;
-    ssize = string_to_columns (s);
+    ssize = mbs_width (s);
     if (ssize > parent._max_width[c])
       stream << (s.substr(0, parent._max_width[c] - 2) + "->"); //! \todo FIXME cut at the correct place
     else
@@ -169,7 +169,7 @@ void Table::updateColWidths (const TableRow& tr) {
     }
 
     unsigned &max = _max_width[c];
-    unsigned cur = string_to_columns (*i);
+    unsigned cur = mbs_width (*i);
 
     if (max < cur)
       max = cur;

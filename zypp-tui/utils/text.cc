@@ -5,9 +5,9 @@
                              |__/|_|  |_|
 \*---------------------------------------------------------------------------*/
 
-#include <wchar.h>
+#include <cwchar>
 #include <cstring>
-#include <sstream>
+#include <ostream>
 
 #include "utils/text.h"
 
@@ -21,7 +21,7 @@ using namespace std;
 
 // return the number of columns in str, or -1 if there's an error
 static
-int string_to_columns_e (const string & str)
+int mbs_width_e (const string & str)
 {
   // from smpppd.src.rpm/format.cc, thanks arvin
 
@@ -57,9 +57,9 @@ int string_to_columns_e (const string & str)
   return s_cols;
 }
 
-unsigned string_to_columns (const string& str)
+unsigned mbs_width (const string& str)
 {
-  int c = string_to_columns_e (str);
+  int c = mbs_width_e(str);
   if (c < 0)
     return str.length();        // fallback if there was an error
   else
@@ -67,7 +67,7 @@ unsigned string_to_columns (const string& str)
 }
 
 
-void wrap_text(ostream & out, const string & text,
+void mbs_write_wrapped(ostream & out, const string & text,
     unsigned indent, unsigned wrap_width, int initial)
 {
   const char * s = text.c_str();
