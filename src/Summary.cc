@@ -290,7 +290,7 @@ void Summary::writeResolvableList(ostream & out, const ResPairSet & resolvables)
              string("-") + resit->second->edition().asString() :
              string())
         << " ";
-    wrap_text(out, s.str(), 2, _wrap_width);
+    mbs_write_wrapped(out, s.str(), 2, _wrap_width);
     out << endl;
     return;
   }
@@ -860,7 +860,7 @@ void Summary::writeDownloadAndInstalledSizeSummary(ostream & out)
     s << format(_("After the operation, %s will be freed.")) % abs.asString(0,1,1);
   }
 
-  wrap_text(out, s.str(), 0, _wrap_width);
+  mbs_write_wrapped(out, s.str(), 0, _wrap_width);
   out << endl;
 }
 
@@ -974,7 +974,7 @@ void Summary::writePackageCounts(ostream & out)
     gotcha = true;
   }
   s << "." <<  endl;
-  wrap_text(out, s.str(), 0, _wrap_width);
+  mbs_write_wrapped(out, s.str(), 0, _wrap_width);
 }
 
 // --------------------------------------------------------------------------
