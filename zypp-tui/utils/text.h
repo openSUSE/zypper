@@ -34,4 +34,14 @@ void mbs_write_wrapped (
     const std::string & text,
     unsigned indent, unsigned wrap_width, int initial = -1);
 
+/**
+ * Returns a substring of a multi-byte character string \a str starting
+ * at screen column \a pos and being \a n columns wide, as far as possible
+ * according to the multi-column characters found in \a str.
+ */
+std::string mbs_substr_by_width(
+    const std::string & str,
+    std::string::size_type pos,
+    std::string::size_type n = std::string::npos);
+
 #endif /* ZYPPER_UTILS_TEXT_H_ */

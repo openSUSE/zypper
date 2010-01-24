@@ -43,6 +43,7 @@ int mbs_width_e (const string & str)
       return -1;
 
     // ignore the length of terminal control sequences in order
+    // to compute the length of colored text correctly
     if (!in_ctrlseq && ::wcsncmp(&wc, L"\033", 1) == 0)
       in_ctrlseq = true;
     else if (in_ctrlseq && ::wcsncmp(&wc, L"m", 1) == 0)
@@ -66,6 +67,80 @@ unsigned mbs_width (const string& str)
     return (unsigned) c;
 }
 
+// ---------------------------------------------------------------------------
+
+std::string mbs_substr_by_width(
+    const std::string & str,
+    std::string::size_type pos,
+    std::string::size_type n)
+{
+  if (n == 0)
+    return string();
+
+  const char * ptr = str.c_str();
+  const char * sptr = NULL;
+  const char * eptr = NULL;
+  size_t s_bytes = str.length();
+  int s_cols = 0, s_cols_prev;
+  bool in_ctrlseq = false;
+
+  mbstate_t shift_state;
+  memset (&shift_state, 0, sizeof (shift_state));
+
+  wchar_t wc;
+  size_t c_bytes;
+
+  // mbrtowc produces one wide character from a multibyte string
+  while ((c_bytes = mbrtowc (&wc, ptr, s_bytes, &shift_state)) > 0)
+  {
+    if (c_bytes >= (size_t) -2) // incomplete (-2) or invalid (-1) sequence
+      return str.substr(pos, n); // default to normal string substr
+
+    s_cols_prev = s_cols;
+    // ignore the length of terminal control sequences in order
+    // to compute the length of the string correctly
+    if (!in_ctrlseq && ::wcsncmp(&wc, L"\033", 1) == 0)
+      in_ctrlseq = true;
+    else if (in_ctrlseq && ::wcsncmp(&wc, L"m", 1) == 0)
+      in_ctrlseq = false;
+    else if (!in_ctrlseq)
+      s_cols += ::wcwidth(wc);
+
+    // mark the beginning
+    if (sptr == NULL && (unsigned) s_cols >= pos)
+    {
+      // cut at the right column, include also the current character
+      if ((unsigned) s_cols_prev == pos)
+        sptr = ptr;
+      // current character cut into pieces, don't include it
+      else
+        sptr = ptr + c_bytes;
+    }
+    // mark the end
+    if (n != string::npos && (unsigned) s_cols >= pos + n)
+    {
+      // cut at the right column, include also the current character
+      if ((unsigned) s_cols == pos + n)
+        eptr = ptr + c_bytes;
+      // current character cut into pieces, don't include it
+      else
+        eptr = ptr;
+      break;
+    }
+
+    s_bytes -= c_bytes;
+    ptr += c_bytes;
+  }
+
+  if (eptr == NULL)
+    eptr = ptr;
+
+  if (eptr == sptr)
+    return string();
+  return string(sptr, eptr - sptr);
+}
+
+// ---------------------------------------------------------------------------
 
 void mbs_write_wrapped(ostream & out, const string & text,
     unsigned indent, unsigned wrap_width, int initial)
