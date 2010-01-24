@@ -49,11 +49,22 @@ ELSE( AUGEAS_FOUND )
   MESSAGE( FATAL_ERROR "augeas not found" )
 ENDIF( AUGEAS_FOUND )
 
+MACRO(ADD_TESTS)
+  FOREACH( loop_var ${ARGV} )
+    SET_SOURCE_FILES_PROPERTIES( ${loop_var}_test.cc COMPILE_FLAGS "-DBOOST_TEST_DYN_LINK -DBOOST_TEST_MAIN -DBOOST_AUTO_TEST_MAIN=\"\" " )
+    ADD_EXECUTABLE( ${loop_var}_test ${loop_var}_test.cc )
+    TARGET_LINK_LIBRARIES( ${loop_var}_test ${ZYPP_LIBRARY} boost_unit_test_framework zypp_test_utils)
+    ADD_TEST( ${loop_var}_test ${CMAKE_CURRENT_BINARY_DIR}/${loop_var}_test --catch_system_errors=no)
+  ENDFOREACH( loop_var )
+ENDMACRO(ADD_TESTS)
 
 ADD_SUBDIRECTORY( src )
 ADD_SUBDIRECTORY( po )
 ADD_SUBDIRECTORY( doc )
+ADD_SUBDIRECTORY( test EXCLUDE_FROM_ALL )
 
+INCLUDE(CTest)
+ENABLE_TESTING()
 
 
 # documentation too important to be hidden in doc:
