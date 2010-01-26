@@ -2942,7 +2942,11 @@ void load_repo_resolvables(Zypper & zypper)
 
       // check that the metadata is not outdated
       // feature #301904
-      Repository robj = God->pool().reposFind(repo.alias());
+      // ma@: Using God->pool() here would always rebuild the pools index tables,
+      // because loading a new repo invalidates them. Rebuilding the whatprovides
+      // index is sometimes slow, so we avoid this overhead by directly acesssing
+      // the sat::Pool.
+      Repository robj = zypp::sat::Pool::instance().reposFind(repo.alias());
       if ( robj != Repository::noRepository &&
            robj.maybeOutdated() )
       {
