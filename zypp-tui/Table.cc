@@ -20,7 +20,7 @@ TableLineStyle Table::defaultStyle = Ascii;
 static
 const char * lines[][3] = {
   { "|", "-", "+"},		///< Ascii
-  // utf 8. TODO wchars?
+  // utf 8
   { "\xE2\x94\x82", "\xE2\x94\x80", "\xE2\x94\xBC"}, ///< light
   { "\xE2\x94\x83", "\xE2\x94\x81", "\xE2\x95\x8B"}, ///< heavy
   { "\xE2\x95\x91", "\xE2\x95\x90", "\xE2\x95\xAC"}, ///< double
@@ -104,7 +104,7 @@ void TableRow::dumpTo (ostream &stream, const Table & parent) const
     const string & s = *i;
     ssize = mbs_width (s);
     if (ssize > parent._max_width[c])
-      stream << (s.substr(0, parent._max_width[c] - 2) + "->"); //! \todo FIXME cut at the correct place
+      stream << (mbs_substr_by_width(s, 0, parent._max_width[c] - 2) + "->");
     else
     {
       stream << s;
