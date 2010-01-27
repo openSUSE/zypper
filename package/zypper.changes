@@ -1,4 +1,10 @@
 -------------------------------------------------------------------
+Wed Jan 27 13:34:06 CET 2010 - jkupec@suse.cz
+
+- Correctly abbreviate strings with non-ascii characters in columns
+  (bnc #393723)
+
+-------------------------------------------------------------------
 Thu Jan  7 14:10:11 CET 2010 - jkupec@suse.cz
 
 - Avoid overwriting progress lines with other messages
