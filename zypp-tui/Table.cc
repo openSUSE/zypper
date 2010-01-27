@@ -104,7 +104,11 @@ void TableRow::dumpTo (ostream &stream, const Table & parent) const
     const string & s = *i;
     ssize = mbs_width (s);
     if (ssize > parent._max_width[c])
-      stream << (mbs_substr_by_width(s, 0, parent._max_width[c] - 2) + "->");
+    {
+      unsigned cutby = parent._max_width[c] - 2;
+      string cutstr = mbs_substr_by_width(s, 0, cutby);
+      stream << cutstr << string(cutby - mbs_width(cutstr), ' ') << "->";
+    }
     else
     {
       stream << s;
