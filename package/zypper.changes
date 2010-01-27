@@ -1,4 +1,9 @@
 -------------------------------------------------------------------
+Wed Jan 27 16:04:11 CET 2010 - jkupec@suse.cz
+
+- Setting --root correctly when working with lock (reported by Uwe)
+
+-------------------------------------------------------------------
 Wed Jan 27 13:34:06 CET 2010 - jkupec@suse.cz
 
 - Correctly abbreviate strings with non-ascii characters in tables
