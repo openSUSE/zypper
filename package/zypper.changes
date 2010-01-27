@@ -1,7 +1,7 @@
 -------------------------------------------------------------------
 Wed Jan 27 13:34:06 CET 2010 - jkupec@suse.cz
 
-- Correctly abbreviate strings with non-ascii characters in columns
+- Correctly abbreviate strings with non-ascii characters in tables
   (bnc #393723)
 
 -------------------------------------------------------------------
