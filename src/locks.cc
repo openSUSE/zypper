@@ -31,7 +31,8 @@ void list_locks(Zypper & zypper)
   try
   {
     Locks & locks = Locks::instance();
-    locks.read();
+    locks.read(Pathname::assertprefix
+        (zypper.globalOpts().root_dir, ZConfig::instance().locksFile()));
 
     Table t;
 
@@ -119,7 +120,8 @@ void add_locks(Zypper & zypper, const Zypper::ArgList & args, const ResKindSet &
   try
   {
     Locks & locks = Locks::instance();
-    locks.read();
+    locks.read(Pathname::assertprefix
+        (zypper.globalOpts().root_dir, ZConfig::instance().locksFile()));
     start = locks.size();
     for_(it,args.begin(),args.end())
     {
@@ -155,7 +157,8 @@ void add_locks(Zypper & zypper, const Zypper::ArgList & args, const ResKindSet &
 
       locks.addLock(q);
     }
-    locks.save();
+    locks.save(Pathname::assertprefix
+        (zypper.globalOpts().root_dir, ZConfig::instance().locksFile()));
   }
   catch(const Exception & e)
   {
@@ -176,7 +179,8 @@ void remove_locks(Zypper & zypper, const Zypper::ArgList & args)
   try
   {
     Locks & locks = Locks::instance();
-    locks.read();
+    locks.read(Pathname::assertprefix
+        (zypper.globalOpts().root_dir, ZConfig::instance().locksFile()));
     Locks::size_type start = locks.size();
     for_( args_it, args.begin(), args.end() )
     {
@@ -218,7 +222,8 @@ void remove_locks(Zypper & zypper, const Zypper::ArgList & args)
       }
     }
 
-    locks.save();
+    locks.save(Pathname::assertprefix
+        (zypper.globalOpts().root_dir, ZConfig::instance().locksFile()));
 
     // nothing removed
     if (start == locks.size())
