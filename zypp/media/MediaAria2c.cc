@@ -25,6 +25,7 @@
 #include "zypp/base/Sysconfig.h"
 #include "zypp/base/Gettext.h"
 #include "zypp/ZYppCallbacks.h"
+#include "zypp/base/UserRequestException.h"
 
 #include "zypp/Edition.h"
 #include "zypp/Target.h"
@@ -340,8 +341,10 @@ void MediaAria2c::getFileCopy( const Pathname & filename , const Pathname & targ
       // here we capture aria output exceptions
       vector<string> ariaExceptions;
 
-      // TODO: Detect partial downloads!
-      bool partialDownload = false; // Whether it makes sense to retry with --continue!
+      // whether it makes sense to retry with --continue
+      bool partialDownload = false;
+      // whether user request abort of the download
+      bool userAbort = false;
 
       //Process response
       for(std::string ariaResponse( aria.receiveLine());
@@ -429,7 +432,11 @@ void MediaAria2c::getFileCopy( const Pathname & filename , const Pathname & targ
                 (((average_speed_count - 1)*average_speed) + current_speed)
                 / average_speed_count;
 
-              report->progress ( progress, fileurl, average_speed, current_speed );
+              if (!partialDownload && progress > 0)
+                partialDownload = true;
+
+              if ( ! report->progress ( progress, fileurl, average_speed, current_speed ) )
+                userAbort = true;
 
               // clear the flag to detect mismatches between [# and FILE: lines
               gotProgress = false;
@@ -438,7 +445,6 @@ void MediaAria2c::getFileCopy( const Pathname & filename , const Pathname & targ
             {
               WAR << "aria2c reported a file, but no progress data available" << endl;
             }
-
           }
           else
           {
@@ -451,7 +457,14 @@ void MediaAria2c::getFileCopy( const Pathname & filename , const Pathname & targ
         }
       }
 
-      int code = aria.close();
+      int code;
+      if (userAbort)
+      {
+        aria.kill();
+        code = 7;
+      }
+      else
+        code = aria.close();
 
       switch ( code )
       {
@@ -495,8 +508,15 @@ void MediaAria2c::getFileCopy( const Pathname & filename , const Pathname & targ
             }
           }
 
-          // TranslatorExplanation: Failed to download <FILENAME> from <SERVERURL>.
-          MediaException e(str::form(_("Failed to download %s from %s"), filename.c_str(), _url.asString().c_str()));
+          string msg;
+          if (userAbort)
+            msg = _("Download interrupted by user");
+          else
+            // TranslatorExplanation: Failed to download <FILENAME> from <SERVERURL>.
+            msg = str::form(_("Failed to download %s from %s"),
+                filename.c_str(), _url.asString().c_str());
+
+          MediaException e(msg);
           for_(it, ariaExceptions.begin(), ariaExceptions.end())
               e.addHistory(*it);
 
