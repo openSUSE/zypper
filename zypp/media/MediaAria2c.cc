@@ -25,7 +25,6 @@
 #include "zypp/base/Sysconfig.h"
 #include "zypp/base/Gettext.h"
 #include "zypp/ZYppCallbacks.h"
-#include "zypp/base/UserRequestException.h"
 
 #include "zypp/Edition.h"
 #include "zypp/Target.h"
