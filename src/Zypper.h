@@ -183,7 +183,7 @@ public:
   bool runningShell() const { return _running_shell; }
   bool runningHelp() const { return _running_help; }
   bool exitRequested() const { return _exit_requested; }
-  void requestExit() { _exit_requested = true; }
+  void requestExit(bool do_exit = true) { _exit_requested = do_exit; }
 
   int argc() { return _running_shell ? _sh_argc : _argc; }
   char ** argv() { return _running_shell ? _sh_argv : _argv; }

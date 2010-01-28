@@ -110,6 +110,13 @@ namespace ZmartRecipients
         return true;
 
       Zypper & zypper = *(Zypper::instance());
+
+      if (zypper.exitRequested())
+      {
+        DBG << "received exit request" << std::endl;
+        return false;
+      }
+
       if (!zypper.runtimeData().raw_refresh_progress_label.empty())
         zypper.out().progress(
           "raw-refresh", zypper.runtimeData().raw_refresh_progress_label);
@@ -122,7 +129,6 @@ namespace ZmartRecipients
       return true;
     }
 
-    // not used anywhere in libzypp 3.20.0 (really)
     virtual DownloadProgressReport::Action
     problem( const zypp::Url & uri, DownloadProgressReport::Error error, const std::string & description )
     {
@@ -131,7 +137,11 @@ namespace ZmartRecipients
         Zypper::instance()->out().dwnldProgressEnd(uri, _last_drate_avg, true);
       Zypper::instance()->out().error(zcb_error2str(error, description));
 
-      return (Action) read_action_ari(PROMPT_ARI_MEDIA_PROBLEM, DownloadProgressReport::ABORT);
+      Action action = (Action) read_action_ari(
+          PROMPT_ARI_MEDIA_PROBLEM, DownloadProgressReport::ABORT);
+      if (action == DownloadProgressReport::RETRY)
+        Zypper::instance()->requestExit(false);
+      return action;
     }
 
     // used only to finish, errors will be reported in media change callback (libzypp 3.20.0)
