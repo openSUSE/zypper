@@ -25,13 +25,18 @@ extern "C"
 #include "zypp/zypp_detail/ZYppImpl.h"
 #include "zypp/zypp_detail/ZYppReadOnlyHack.h"
 
-#define ZYPP_LOCK_FILE "/var/run/zypp.pid"
-
 using std::endl;
 
 ///////////////////////////////////////////////////////////////////
 namespace zypp
 { /////////////////////////////////////////////////////////////////
+
+  namespace env
+  {
+    /** Hack to circumvent the currently poor --root support. */
+    inline Pathname ZYPP_LOCKFILE_ROOT()
+    { return getenv("ZYPP_LOCKFILE_ROOT") ? getenv("ZYPP_LOCKFILE_ROOT") : "/"; }
+  }
 
   ///////////////////////////////////////////////////////////////////
   namespace zypp_readonly_hack
@@ -61,9 +66,12 @@ namespace zypp
 
       ZYppGlobalLock()
       : _clean_lock(false)
+      , _zyppLockFilePath( env::ZYPP_LOCKFILE_ROOT() / "/var/run/zypp.pid" )
       , _zypp_lockfile(0)
       , _locker_pid(0)
-    {}
+    {
+      filesystem::assert_dir(_zyppLockFilePath.dirname());
+    }
 
     ~ZYppGlobalLock()
     {
@@ -72,14 +80,13 @@ namespace zypp
           pid_t curr_pid = getpid();
           if ( _zypp_lockfile )
             {
-              Pathname lock_file = Pathname(ZYPP_LOCK_FILE);
               unLockFile();
               closeLockFile();
 
               if ( _clean_lock )
               {
                 MIL << "Cleaning lock file. (" << curr_pid << ")" << std::endl;
-                if ( filesystem::unlink(lock_file) == 0 )
+                if ( filesystem::unlink(_zyppLockFilePath) == 0 )
                   MIL << "Lockfile cleaned. (" << curr_pid << ")" << std::endl;
                 else
                   ERR << "Cant clean lockfile. (" << curr_pid << ")" << std::endl;
@@ -99,16 +106,17 @@ namespace zypp
     bool _clean_lock;
 
     private:
+    Pathname _zyppLockFilePath;
     FILE *_zypp_lockfile;
     pid_t _locker_pid;
     std::string _locker_name;
 
     void openLockFile(const char *mode)
     {
-      Pathname lock_file = Pathname(ZYPP_LOCK_FILE);
-      _zypp_lockfile = fopen(lock_file.asString().c_str(), mode);
+
+      _zypp_lockfile = fopen(_zyppLockFilePath.asString().c_str(), mode);
       if (_zypp_lockfile == 0)
-        ZYPP_THROW (Exception( "Cant open " + lock_file.asString() + " in mode " + std::string(mode) ) );
+        ZYPP_THROW (Exception( "Cant open " + _zyppLockFilePath.asString() + " in mode " + std::string(mode) ) );
     }
 
     void closeLockFile()
@@ -150,11 +158,10 @@ namespace zypp
 
     bool lockFileExists()
     {
-      Pathname lock_file = Pathname(ZYPP_LOCK_FILE);
       // check if the file already existed.
-      INT << PathInfo(lock_file) << endl;
-      bool exists = PathInfo(lock_file).isExist();
-      return exists;
+      PathInfo pi(_zyppLockFilePath);
+      DBG << pi << endl;
+      return pi.isExist();
     }
 
     void createLockFile()
@@ -203,7 +210,7 @@ namespace zypp
       long readpid = 0;
 
       fscanf(_zypp_lockfile, "%ld", &readpid);
-      MIL << "read: Lockfile " << ZYPP_LOCK_FILE << " has pid " << readpid << " (our pid: " << curr_pid << ") "<< std::endl;
+      MIL << "read: Lockfile " << _zyppLockFilePath << " has pid " << readpid << " (our pid: " << curr_pid << ") "<< std::endl;
       locker_pid = (pid_t) readpid;
       return locker_pid;
     }
@@ -213,11 +220,10 @@ namespace zypp
     bool zyppLocked()
     {
       pid_t curr_pid = getpid();
-      Pathname lock_file = Pathname(ZYPP_LOCK_FILE);
 
       if ( lockFileExists() )
       {
-        MIL << "found lockfile " << lock_file << std::endl;
+        MIL << "found lockfile " << _zyppLockFilePath << std::endl;
         openLockFile("r");
         shLockFile();
 
@@ -250,7 +256,7 @@ namespace zypp
             if ( geteuid() == 0 )
             {
               MIL << locker_pid << " has a ZYpp lock, but process is not running. Cleaning lock file." << std::endl;
-              if ( filesystem::unlink(lock_file) == 0 )
+              if ( filesystem::unlink(_zyppLockFilePath) == 0 )
               {
                 createLockFile();
               // now open it for reading
@@ -274,10 +280,10 @@ namespace zypp
       }
       else
       {
-        MIL << "no lockfile " << lock_file << " found" << std::endl;
+        MIL << "no lockfile " << _zyppLockFilePath << " found" << std::endl;
         if ( geteuid() == 0 )
         {
-          MIL << "running as root. Will attempt to create " << lock_file << std::endl;
+          MIL << "running as root. Will attempt to create " << _zyppLockFilePath << std::endl;
           createLockFile();
         // now open it for reading
           openLockFile("r");
@@ -285,7 +291,7 @@ namespace zypp
         }
         else
         {
-          MIL << "running as user. Skipping creating " << lock_file << std::endl;
+          MIL << "running as user. Skipping creating " << _zyppLockFilePath << std::endl;
         }
         return false;
       }
