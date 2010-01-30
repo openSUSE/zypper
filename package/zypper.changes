@@ -1,4 +1,10 @@
 -------------------------------------------------------------------
+Sat Jan 30 14:04:11 CET 2010 - jkupec@suse.cz
+
+- Fixed ignored .arch when specifying packages as name.arch
+  (bnc #561294)
+
+-------------------------------------------------------------------
 Wed Jan 27 16:04:11 CET 2010 - jkupec@suse.cz
 
 - Setting --root correctly when working with lock (reported by Uwe)
