@@ -329,8 +329,11 @@ static string preparse_cap_str(const string & capstr, const string & arch)
     }
     if (!arch.empty())
       new_capstr.insert(op_pos, "." + arch);
-    DBG << "new capstr: " << new_capstr << endl;
   }
+  else if (!arch.empty())
+    new_capstr += "." + arch;
+
+  DBG << "new capstr: " << new_capstr << endl;
 
   return new_capstr;
 }

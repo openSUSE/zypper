@@ -642,7 +642,8 @@ void install_remove(Zypper & zypper,
 
 
     // is version specified?
-    by_capability = str.find_first_of("=<>") != string::npos;
+    if (!by_capability)
+      by_capability = str.find_first_of("=<>") != string::npos;
 
     // try to find foo-bar-1.2.3-2
     if (!by_capability && str.find('-') != string::npos)
