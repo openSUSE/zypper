@@ -125,12 +125,16 @@ BOOST_AUTO_TEST_CASE(guessPackageSpec)
   // With no libzypp in the pool, no guess should succeed:
   BOOST_REQUIRE( sat::WhatProvides(Capability("libzypp")).empty() );
 
+  // these must be guessed
   BOOST_CHECK_EQUAL( Capability::guessPackageSpec( "libzypp-1-2" ),	 Capability( "",     "libzypp-1-2",      "", "" ) );
   BOOST_CHECK_EQUAL( Capability::guessPackageSpec( "libzypp-1-2.i586" ), Capability( "i586", "libzypp-1-2",      "", "" ) );
   BOOST_CHECK_EQUAL( Capability::guessPackageSpec( "libzypp.i586-1-2" ), Capability( "",     "libzypp.i586-1-2", "", "" ) );
 
-  // now load some repo prividing libzypp and csee how the guessing
-  // changes:
+  // these are unambiguous
+  BOOST_CHECK_EQUAL( Capability::guessPackageSpec( "patch:swmgmt=12" ), Capability( "", "swmgmt", "=", "12", ResKind::patch ) );
+  BOOST_CHECK_EQUAL( Capability::guessPackageSpec( "libzypp=0:1.0.2-2" ), Capability( "", "libzypp", "=", "0:1.0.2-2" ) );
+
+  // now load some repo providing libzypp and see how the guessing changes:
   test.loadRepo( TESTS_SRC_DIR "/data/openSUSE-11.1", "opensuse" );
 
   BOOST_REQUIRE( ! sat::WhatProvides(Capability("libzypp")).empty() );
@@ -138,6 +142,9 @@ BOOST_AUTO_TEST_CASE(guessPackageSpec)
   BOOST_CHECK_EQUAL( Capability::guessPackageSpec( "libzypp-1-2" ),      Capability( "",     "libzypp", "=", "1-2" ) );
   BOOST_CHECK_EQUAL( Capability::guessPackageSpec( "libzypp-1-2.i586" ), Capability( "i586", "libzypp", "=", "1-2" ) );
   BOOST_CHECK_EQUAL( Capability::guessPackageSpec( "libzypp.i586-1-2" ), Capability( "i586", "libzypp", "=", "1-2" ) );
+  BOOST_CHECK_EQUAL( Capability::guessPackageSpec( "libzypp<=1.0.2-2" ), Capability( "", "libzypp", "<=", "1.0.2-2" ) );
+  BOOST_CHECK_EQUAL( Capability::guessPackageSpec( "libzypp<=1:1.0.2-2" ), Capability( "", "libzypp", "<=", "1:1.0.2-2" ) );
+  BOOST_CHECK_EQUAL( Capability::guessPackageSpec( "libzypp-0:1.0.2-2" ), Capability( "", "libzypp", "=", "0:1.0.2-2" ) );
 
   // Double arch spec: the trailing one succeeds, the other one gets part of the name.
   // As "libzypp.i586' is not in the pool, guessing fails. Result is a named cap.
