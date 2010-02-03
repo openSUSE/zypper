@@ -1,4 +1,12 @@
 -------------------------------------------------------------------
+Wed Feb  3 13:34:08 CET 2010 - jkupec@suse.cz
+
+- Exit if missing required option argument.
+- Start using Capability::guessPackageSpec to parse package
+  arguments.
+- 1.2.15
+
+-------------------------------------------------------------------
 Sat Jan 30 14:04:11 CET 2010 - jkupec@suse.cz
 
 - Fixed ignored .arch when specifying packages as name.arch

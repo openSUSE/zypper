@@ -1,4 +1,4 @@
-.TH "zypper" "8" "1.2.14" "zypper" "System Tools"
+.TH "zypper" "8" "1.2.15" "zypper" "System Tools"
 .SH "SYNTAX"
 .LP
 zypper [\fI\-\-global\-opts\fR] <\fBcommand\fR> [\fI\-\-command\-opts\fR] [\fBcommand-arguments\fR]
@@ -323,6 +323,31 @@ non-interactive mode. If this option is specified, it takes the preference.
 Test the installation, do not actually install any package. This option will
 add the \-\-test option to the rpm commands run by the install command.
 .TP
+Download-and-install mode options:
+.TP
+.I \-d, \-\-download\-only
+Only download the packages for later installation.
+.TP
+.I \ \ \ \ \-\-download\-in\-advance
+First download all packages, ten start installing.
+.TP
+.I \ \ \ \ \-\-download\-in\-heaps
+TODO. Download a minimal set of packages that can be installed without leaving
+the system in broken state, and install them. Then download and install another
+heap until all are installed. This helps to keep the system in consistent state
+without the need to download all package in advance, which combines the
+advantages of --download-in-advance and --download-as-needed.
+.TP
+.I \ \ \ \ \-\-download\-as\-needed
+Download one package, install it immediately, and continue with the rest
+until all are installed. This is the default mode.
+.TP
+.I \ \ \ \ \-\-download <mode>
+Use the specified download-and-install mode. Available modes are:
+\fBonly\fR, \fBin-advance\fR, \fBin-heaps\fR, \fBas-needed\fR.
+See corresponding \fI--download-<mode>\fR options for their description.
+
+.TP
 More examples:
 
 Install lamp_server pattern:
@@ -413,6 +438,9 @@ Test the installation, do not actually install anything.
 .TP
 .I \ \ \ \ \-\-debug\-solver
 Create solver test case for debugging. See the install command for details.
+.TP
+This command also accepts the download-and-install mode options described
+in the \fBinstall\fR command description.
 
 .TP
 .B remove (rm) [options] <name> ...
@@ -557,6 +585,9 @@ packages with best version and architecture, but instead requests installation
 of a package with higher version than the installed one and leaves the rest
 on the dependency solver. This method is always used for packages, and is
 optional for products and patterns. It is not applicable to patches.
+.TP
+This command also accepts the download-and-install mode options described
+in the \fBinstall\fR command description.
 
 
 .TP
@@ -631,6 +662,9 @@ option can be used multiple times.
 .I \ \ \ \ \-\-skip\-interactive
 Skip interactive patches.
 .TP
+.I \ \ \ \ \-\-with\-interactive
+Avoid skipping of  interactive patches when in non-interactive mode.
+.TP
 .I \-l, \-\-auto\-agree\-with\-licenses
 See the \fBupdate\fR command for description of this option.
 .TP
@@ -644,6 +678,9 @@ Create test case for debugging of dependency resolver.
 .TP
 .I \-D, \-\-dry\-run
 Test the update, do not actually update.
+.TP
+This command also accepts the download-and-install mode options described
+in the \fBinstall\fR command description.
 
 
 .TP
@@ -692,6 +729,9 @@ Create solver test case for debugging. See the install command for details.
 .I \-D, \-\-dry\-run
 Test the upgrade, do not actually install or update any package. This option will
 add the \-\-test option to the rpm commands run by the dist-upgrade command.
+.TP
+This command also accepts the download-and-install mode options described
+in the \fBinstall\fR command description.
 .TP
 Examples:
 
