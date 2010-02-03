@@ -612,6 +612,9 @@ namespace zypp
      * \throws Exception if have problems with files
      */
     void modifyService( const std::string & oldAlias, const ServiceInfo & service );
+    /** \overload Take alias from ServiceInfo. */
+    void modifyService( const ServiceInfo & service )
+    { modifyService( service.alias(), service ); }
 
   private:
     /**
