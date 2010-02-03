@@ -1815,7 +1815,7 @@ namespace zypp
     // Either when probing the type, or when adjusting the repositories
     // enable/disable state.:
     bool serviceModified = false;
-    MIL << "going to refresh service '" << service.alias() << "', url: "<< service.url() << endl;
+    MIL << "Going to refresh service '" << service.alias() << "', url: "<< service.url() << endl;
 
     //! \todo add callbacks for apps (start, end, repo removed, repo added, repo changed)
 
@@ -1841,7 +1841,7 @@ namespace zypp
     std::string servicesTargetDistro = _pimpl->options.servicesTargetDistro;
     if ( servicesTargetDistro.empty() && getZYpp()->getTarget() )
       servicesTargetDistro = getZYpp()->target()->targetDistribution();
-    DBG << "servicesTargetDistro: " << servicesTargetDistro << endl;
+    DBG << "ServicesTargetDistro: " << servicesTargetDistro << endl;
 
     // parse it
     RepoCollector collector(servicesTargetDistro);
@@ -1894,6 +1894,16 @@ namespace zypp
     {
       if ( ! foundAliasIn( it->alias(), collector.repos ) )
       {
+        if ( it->enabled() )
+        {
+          DBG << "Service removes enabled repo " << it->alias() << endl;
+          service.addRepoToEnable( it->alias() );
+          serviceModified = true;
+        }
+        else
+        {
+          DBG << "Service removes disabled repo " << it->alias() << endl;
+        }
         removeRepository( *it );
       }
     }
@@ -1930,6 +1940,7 @@ namespace zypp
         // At that point check whether a repo with the same alias
         // exists outside this service. Maybe forcefully re-alias
         // the existing repo?
+        DBG << "Service adds repo " << it->alias() << " " << (beEnabled?"enabled":"disabled") << endl;
         addRepository( *it );
 
         // save repo credentials
@@ -1945,23 +1956,38 @@ namespace zypp
         {
           if ( ! oldRepo->enabled() )
           {
+            DBG << "Service repo " << it->alias() << " gets enabled" << endl;
             oldRepo->setEnabled( true );
             oldRepoModified = true;
+          }
+          else
+          {
+            DBG << "Service repo " << it->alias() << " stays enabled" << endl;
           }
         }
         else if ( beDisabled )
         {
           if ( oldRepo->enabled() )
           {
+            DBG << "Service repo " << it->alias() << " gets disabled" << endl;
             oldRepo->setEnabled( false );
             oldRepoModified = true;
           }
+          else
+          {
+            DBG << "Service repo " << it->alias() << " stays disabled" << endl;
+          }
+        }
+        else
+        {
+          DBG << "Service repo " << it->alias() << " stays " <<  (oldRepo->enabled()?"enabled":"disabled") << endl;
         }
 
         // changed url?
         // service repo can contain only one URL now, so no need to iterate.
         if ( oldRepo->url() != it->url() )
         {
+          DBG << "Service repo " << it->alias() << " gets new URL " << it->url() << endl;
           oldRepo->setBaseUrl( it->url() );
           oldRepoModified = true;
         }
