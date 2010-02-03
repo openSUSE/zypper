@@ -4,6 +4,7 @@ Wed Feb  3 13:34:08 CET 2010 - jkupec@suse.cz
 - Exit if missing required option argument.
 - Start using Capability::guessPackageSpec to parse package
   arguments.
+- man page updated (bnc #576080)
 - 1.2.15
 
 -------------------------------------------------------------------
