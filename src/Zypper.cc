@@ -2397,7 +2397,7 @@ void Zypper::processCommandOptions()
 
   // parse command options
   ::copts = _copts = parse_options (argc(), argv(), specific_options);
-  if (copts.count("_unknown") || gopts.count("_missing_arg"))
+  if (copts.count("_unknown") || copts.count("_missing_arg"))
   {
     setExitCode(ZYPPER_EXIT_ERR_SYNTAX);
     ERR << "Unknown option or missing argument, returning." << endl;
