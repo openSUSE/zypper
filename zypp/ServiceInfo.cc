@@ -125,7 +125,10 @@ namespace zypp
   { return( _pimpl->reposToEnable.find( alias_r ) != _pimpl->reposToEnable.end() ); }
 
   void ServiceInfo::addRepoToEnable( const std::string & alias_r )
-  { _pimpl->reposToEnable.insert( alias_r ); }
+  {
+    _pimpl->reposToEnable.insert( alias_r );
+    _pimpl->reposToDisable.erase( alias_r );
+  }
 
   void ServiceInfo::delRepoToEnable( const std::string & alias_r )
   { _pimpl->reposToEnable.erase( alias_r ); }
@@ -150,7 +153,10 @@ namespace zypp
   { return( _pimpl->reposToDisable.find( alias_r ) != _pimpl->reposToDisable.end() ); }
 
   void ServiceInfo::addRepoToDisable( const std::string & alias_r )
-  { _pimpl->reposToDisable.insert( alias_r ); }
+  {
+    _pimpl->reposToDisable.insert( alias_r );
+    _pimpl->reposToEnable.erase( alias_r );
+  }
 
   void ServiceInfo::delRepoToDisable( const std::string & alias_r )
   { _pimpl->reposToDisable.erase( alias_r ); }
