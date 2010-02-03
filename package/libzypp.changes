@@ -1,4 +1,12 @@
 -------------------------------------------------------------------
+Wed Feb  3 15:57:13 CET 2010 - ma@suse.de
+
+- Remember the enabled state of removed service repositories. This 
+  way we are able to restore service repositories correctly after a 
+  subscrition expired and gets renewed. (bnc #572634)
+- version 6.29.2 (19)
+
+-------------------------------------------------------------------
 Thu Jan 28 16:12:25 CET 2010 - jkupec@suse.cz
 
 - Abort aria2c download when the progress callback receives 'false'
