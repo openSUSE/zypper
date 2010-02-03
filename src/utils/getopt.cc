@@ -82,11 +82,12 @@ parsed_opts parse_options (int argc, char **argv,
 
       cerr << "'" << endl;
 
-      // tell the caller there have been uknown options encountered
+      // tell the caller there have been unknown options encountered
       result["_unknown"].push_back("");
       break;
     case ':':
       cerr << _("Missing argument for ") << argv[optind - 1] << endl;
+      result["_missing_arg"].push_back("");
       break;
     default:
       const char *mapidx = optc? short2long[optc] : longopts[option_index].name;
