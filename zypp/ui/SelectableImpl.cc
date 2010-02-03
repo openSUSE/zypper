@@ -313,7 +313,7 @@ namespace zypp
           return( installedObj().status().isByUser() ? S_Del : S_AutoDel );
         }
 
-      if ( installedObj() && installedObj().status().isLocked() )
+      if ( installedObj() && allInstalledLocked() )
 	  return S_Protected;
 
       if ( !installedObj() && allCandidatesLocked() )

@@ -396,6 +396,18 @@ namespace zypp
         return( ! _availableItems.empty() );
       }
 
+      bool allInstalledLocked() const
+      {
+        for ( installed_const_iterator it = installedBegin();
+              it != installedEnd(); ++it )
+          {
+            if ( ! (*it).status().isLocked() )
+              return false;
+          }
+        return( ! _installedItems.empty() );
+      }
+
+
     private:
       const IdString         _ident;
       const ResObject::Kind  _kind;
@@ -446,7 +458,7 @@ namespace zypp
 
       if ( obj.availableEmpty() )
       {
-        str << "(A 0) {}";
+        str << "(A 0) {}" << endl << "   ";
       }
       else
       {
