@@ -103,12 +103,14 @@ int main( int argc, char * argv[] )
     message << str::form( "*** Load Testcase from '%s'", sysRoot.c_str() ) << endl;
     TestSetup test;
     test.loadTestcaseRepos( sysRoot );
+    dumpRange( message, satpool.reposBegin(), satpool.reposEnd() ) << endl;
   }
   else if ( TestSetup::isTestSetup( sysRoot ) )
   {
     message << str::form( "*** Load TestSetup from '%s'", sysRoot.c_str() ) << endl;
     TestSetup test( sysRoot, Arch_x86_64 );
     test.loadRepos();
+    dumpRange( message, satpool.reposBegin(), satpool.reposEnd() ) << endl;
   }
   else
   {
@@ -183,6 +185,8 @@ int main( int argc, char * argv[] )
     }
 
     PoolQuery q;
+    if ( onlyInstalled )
+      q.setInstalledOnly();
     std::string qstr( *argv );
 
     if ( *argv == ResKind::product )
