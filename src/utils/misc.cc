@@ -310,55 +310,6 @@ std::string & indent(std::string & text, int columns)
   return text;
 }
 
-static string preparse_cap_str(const string & capstr, const string & arch)
-{
-  // expect versioned caps as NAME[OP<EDITION>]
-  // transform to NAME[ OP <EDITION>] (add spaces)
-  string new_capstr = capstr;
-  DBG << "capstr: " << capstr << endl;
-  string::size_type op_pos = capstr.find_first_of("<>=");
-  if (op_pos != string::npos)
-  {
-    new_capstr.insert(op_pos, " ");
-    DBG << "new capstr: " << new_capstr << endl;
-    string::size_type post_op_pos =
-      new_capstr.find_first_not_of("<>=", op_pos + 1);
-    if (post_op_pos != string::npos && new_capstr.size() > post_op_pos)
-    {
-      new_capstr.insert(post_op_pos, " ");
-    }
-    if (!arch.empty())
-      new_capstr.insert(op_pos, "." + arch);
-  }
-  else if (!arch.empty())
-    new_capstr += "." + arch;
-
-  DBG << "new capstr: " << new_capstr << endl;
-
-  return new_capstr;
-}
-
-Capability safe_parse_cap (Zypper & zypper,
-                           const string & capstr,
-                           const ResKind & kind,
-                           const string & arch)
-{
-  try
-  {
-    if (kind == ResKind::nokind)
-      return Capability(preparse_cap_str(capstr, arch));
-    else
-      return Capability(preparse_cap_str(capstr, arch), kind);
-  }
-  catch (const Exception& e)
-  {
-    //! \todo check this handling (should we fail or set a special exit code?)
-    ZYPP_CAUGHT(e);
-    zypper.out().error(str::form(_("Cannot parse capability '%s'."), capstr.c_str()));
-  }
-  return Capability();
-}
-
 /**
  * \todo this is an ugly quick-hack code, let's do something reusable and maintainable in libzypp later
  */

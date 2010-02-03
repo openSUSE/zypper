@@ -544,15 +544,64 @@ void install_remove(Zypper & zypper,
     return;
   }
 
-  string str, arch, repo;
+  string str, repo;
   bool by_capability;
-  const ResPool & pool = God->pool();
   for_(it, argsnew.begin(), argsnew.end())
   {
-    str = *it; arch.clear(); repo.clear();
+    // For given arguments:
+    //    +vim
+    //    -emacs
+    //    libdnet1.i586
+    //    perl-devel:perl(Digest::MD5)
+    //    ~non-oss:opera-2:10.1-1.2.gcc44.x86_64
+    //    zypper>=1.2.15
+    //
+    // 1) check for and remove the install/remove modifiers
+    //    vim                          (install)
+    //    emacs                        (remove)
+    //    perl-devel:perl(Digest::MD5) (install/remove according to command)
+    //
+    // 2) check for and remove the repo specifier at the beginning of the arg
+    //    vim                           (no repo)
+    //    libdnet1.i586                 (no repo)
+    //    perl(Digest::MD5)             (perl-devel repo)
+    //    opera-2:10.1-1.2.gcc44.x86_64 (non-oss repo)
+    //    note: repo can be specified by number/alias/name/URI, use match_repo()
+    //
+    // 3) parse the rest of the string as standard zypp package specifier into
+    //    a Capability using Capability::guessPackageSpec
+    //                                  name, arch, op, evr, kind
+    //    vim                           'vim', '', '', '', 'package'
+    //    libdnet1.i586                 'libdnet', 'i586', '', '', 'package'
+    //    perl(Digest::MD5)             'perl(Digest::MD5)', '', '', '', 'package'
+    //    opera-2:10.1-1.2.gcc44.x86_64 'opera', 'x86_64', '=', '2:10.1-1.2.gcc44', 'package'
+    //    zypper>=1.2.15                'zypper', '', '>=', '1.2.15', 'package'
+    //    note: depends on whether the cap in the pool
+    //
+    // 4) if the capability only contains name and kind, and --capability was
+    //    not specified, or --name was specified, try to install 'by-name'
+    //    first, i.e. via ui::Selectable and/or PoolItem.
+    //    note: wildcards must be supported here, use PoolQuery with match_glob
+    //          to find the selectables
+    //
+    // 5) if no package could be found by name, or the capability contains
+    //    op+version/arch, or --capability was specified,
+    //    install 'by-capability', i.e. using ResPool::addRequires(cap)
+    //
+    // NOTES
+    // * In both 4) and 5) check for already installed packages, available
+    //   candidates, and report any problems back to user.
+    // * If repository match was found in 2), issue request forcing the repo and
+    //   - if --force was specified, insist on installing from that repo (even
+    //     downgrade or change vendor   TODO
+    //   - if --force was NOT used, only install new, or upgrade without vendor
+    //     change. If downgrade or vendor change is needed, report back to user
+    //     and advice to use --force, if that's what is really wanted. TODO
+
+    str = *it; repo.clear();
     by_capability = false;
 
-    // install remove modifiers
+    // check for and remove the install/remove modifiers
     if (str[0] == '+' || str[0] == '~')
     {
       install_not_remove = true;
@@ -564,16 +613,14 @@ void install_remove(Zypper & zypper,
       str.erase(0, 1);
     }
 
-    string::size_type pos;
-
     // force repository specified by prefixing 'repo:' to the package name
-    //! \todo FIXME this causes problems when requesting symbols containing
-    //! ':', like perl(Foo::Bar) or package with specified epoch.
-    //! Maybe we should drop or introduce another
-    //! way to enforce repo per package.
-    if (!force_by_capability &&
-        (pos = str.rfind(':')) != string::npos &&
-        !(str.find("perl(") == 0)) // bnc #433679
+    //
+    // check for and remove the 'repo:' prefix
+    // ignore colons coming after '(' or '=' (bnc #433679)
+    // e.g. 'perl(Digest::MD5)', or 'opera=2:10.00-4102.gcc4.shared.qt3'
+
+    string::size_type pos;
+    if ((pos = str.find(':')) != string::npos && str.find_first_of("(=") > pos)
     {
       repo = str.substr(0, pos);
       if (match_repo(zypper, repo))
@@ -584,108 +631,34 @@ void install_remove(Zypper & zypper,
       }
       // not a repo, continue as usual
       else
-      {
         repo.clear();
-      }
     }
 
-    // force arch with '.'
-    if ((pos = str.rfind('.')) != string::npos)
-    {
-      arch = str.substr(pos + 1);
-      if (Arch(arch).isBuiltIn())
-      {
-        if (force_by_name)
-        {
-          zypper.out().error(
-            _("Specifying architecture when selecting packages by name"
-              " is not implemented."));
-          zypper.setExitCode(ZYPPER_EXIT_ERR_INVALID_ARGS);
-          throw ExitRequestException();
-        }
-
-        // name.arch is a valid capability since libzypp-4.15.0 (bnc #305445)
-        by_capability = true;
-        str = str.substr(0, pos);
-      }
-      else
-      {
-        DBG << "Unknown arch (" << arch << ") in package " << str
-            << ", will treat it like part of the name" << endl;
-        arch.clear();
-        /*
-        zypper.out().error(
-            str::form(_("Unknown architecture '%s'"), arch.c_str()),
-            _("When selecting packages by name, the last dot character must be followed\n"
-              "by a valid architecture code."));
-        zypper.setExitCode(ZYPPER_EXIT_ERR_INVALID_ARGS);
-        throw ExitRequestException();
-        */
-      }
-    }
+    // parse the rest of the string as standard zypp package specifier
+    Capability parsedcap = Capability::guessPackageSpec(str);
+    Capability namecap("", str, "", "", kind);
+    MIL << "got '" << parsedcap << "'" << endl;
 
     // mark by name by force
     if (force_by_name)
     {
-      mark_by_name (zypper, install_not_remove, kind, str, repo, arch);
+      //! \todo FIXME this does not work: mark_by_name does not pick the arch nor repo. Make an API in zypp for this
+      mark_by_name (zypper, install_not_remove, kind, str, repo, parsedcap.detail().arch().asString());
       continue;
     }
 
-    // recognize missplaced command line options given as packages (bnc#391644)
+    // recognize misplaced command line options given as packages (bnc#391644)
     if ( str[0] == '-' )
     {
       zypper.out().error(boost::str(format(
+          //! \todo FIXME "not a valid package name or capability"
           _("'%s' is not a valid package or capability name.")) % str));
       zypper.setExitCode(ZYPPER_EXIT_ERR_INVALID_ARGS);
       ZYPP_THROW(ExitRequestException());
     }
 
-
-    // is version specified?
-    if (!by_capability)
-      by_capability = str.find_first_of("=<>") != string::npos;
-
-    // try to find foo-bar-1.2.3-2
-    if (!by_capability && str.find('-') != string::npos)
-    {
-      // try to find the original string first as name
-      // search by name, not in whatprovides, since there can be provider even
-      // for cracklib-dict=small
-      // continue only if nothing has been found this way
-      if (pool.byIdentBegin(kind, str) == pool.byIdentEnd(kind, str))
-      {
-        // try to replace '-' for '=' from right to the left and check
-        // whether there is something providing such capability
-        string::size_type pos = string::npos;
-        while ((pos = str.rfind('-', pos)) != string::npos)
-        {
-          string trythis = str;
-          trythis.replace(pos, 1, 1, '=');
-          string tryver = str.substr(pos + 1, str.size() - 1);
-
-          DBG << "trying: " << trythis << " edition: " << tryver << endl;
-
-          Capability cap = safe_parse_cap (zypper, trythis, kind, arch);
-          sat::WhatProvides q(cap);
-          for_(sit, q.begin(), q.end())
-          {
-            if (sit->edition().match(tryver) == 0)
-            {
-              str = trythis;
-              by_capability = true;
-              DBG << str << "might be what we wanted" << endl;
-              break;
-            }
-          }
-          if (by_capability)
-            break;
-          --pos;
-        }
-      }
-    }
-
-    // try to find by name + wildcards first
-    if (!by_capability)
+    // try intall by name first (if version or arch was not specified)
+    if (parsedcap == namecap)
     {
       PoolQuery q;
       q.addKind(kind);
@@ -694,6 +667,8 @@ void install_remove(Zypper & zypper,
       bool found = false;
       for_(s, q.selectableBegin(), q.selectableEnd())
       {
+        //! FIXME mark_selectable works via addRequires, change it to mark via selectable!!!
+        // otherwise the solver is free to install any provider of the symbol
         mark_selectable(zypper, **s, install_not_remove, force);
         found = true;
       }
@@ -701,11 +676,11 @@ void install_remove(Zypper & zypper,
       if (found)
         continue;
     }
+    else
+      by_capability = true;
 
     // try by capability
-
-    Capability cap = safe_parse_cap (zypper, str, kind, arch);
-    sat::WhatProvides q(cap);
+    sat::WhatProvides q(parsedcap);
 
     // is there a provider for the requested capability?
     if (q.empty())
@@ -759,7 +734,6 @@ void install_remove(Zypper & zypper,
       continue;
     }
 
-    mark_by_capability (zypper, install_not_remove, kind, cap);
+    mark_by_capability (zypper, install_not_remove, kind, parsedcap);
   }
 }
-

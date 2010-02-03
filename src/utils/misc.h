@@ -15,7 +15,6 @@
 #include "zypp/Url.h"
 #include "zypp/Pathname.h"
 
-#include "zypp/Capability.h"
 #include "zypp/ResKind.h"
 #include "zypp/RepoInfo.h"
 #include "zypp/ZYppCommitPolicy.h"
@@ -86,12 +85,6 @@ zypp::Pathname cache_rpm(const std::string & rpm_uri_str,
 std::string xml_encode(const std::string & text);
 
 std::string & indent(std::string & text, int columns);
-
-zypp::Capability safe_parse_cap (Zypper & zypper,
-                                 const std::string & capstr,
-                                 const zypp::ResKind & kind = zypp::ResKind::nokind,
-                                 const std::string & arch = "");
-
 
 // comparator for RepoInfo set
 class RepoInfoAliasComparator

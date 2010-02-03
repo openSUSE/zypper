@@ -655,7 +655,7 @@ void list_products(Zypper & zypper)
 
 void list_what_provides(Zypper & zypper, const string & str)
 {
-  Capability cap = safe_parse_cap (zypper, /*kind,*/ str);
+  Capability cap(Capability::guessPackageSpec(str));
   sat::WhatProvides q(cap);
 
   // is there a provider for the requested capability?

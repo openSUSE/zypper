@@ -1,0 +1,55 @@
+- install ufo
+  * install, or upgrade to the best package named 'ufo' or providing symbol
+   'ufo', in that order
+  * or say "'foo' not found."
+  * or say "'foo' already installed"
+    * TODO or additionally say "Better version 'foo' exists in repo 'repo'
+      having lower priority. Use ??? to install it."
+    * TODO or additionally say "Better version 'foo' exists in repo 'repo' but
+      is provided by a different vendor. Use ??? to install it."
+
+- install --name ufo
+  * install, or upgrade to the best package named 'ufo'
+  * or give the feedback as in the 'install ufo' case above
+
+- install --capability ufo
+  * install the best version of one of packages providing symbol 'ufo'
+  * or say "'foo' not found."
+  * or say "Package 'fooprovider' providing 'foo' is already installed"
+
+- install --from repo ufo
+  install repo:ufo
+  * like 'install --name ufo', but take the package from repo 'repo'
+    TODO make it like 'install ufo' (allow also by-capability)
+  * TODO or say "Can't install 'ufo' from 'repo' because of a vendor change. Use
+    --force to override."
+  * TODO or say "Better version of 'ufo' is alread installed. Use --force to install
+    the version from 'repo'."
+
+
+ACCEPTED arguments:
+
+[modifier][repo:][type:]name[.arch][opevr[.arch]]
+
+type     = patch|pattern|product       ; if not specified 'package' is implied
+evr      = [edition:]version[-release]
+op       = -|=|>=|<=|>|<
+modifier = +|-|~|!                     ; install/remove modifier
+
+examples
+
+ufo
++ufo
+ufo-1.2.0
+ufo>1.2.0
+repo:ufo
+pattern:ufo
+repo:patch:ufo-12
+ufo.i586-1:1.2.0-4
+~ufo=1:1.2.0-4.i586
+
+
+NOTES
+- 'install' == 'install --name' with fallback to 'install --capability'
+- using .arch or evr forces --capability
+  (but this is basically not necessary and can be changed in the future)
