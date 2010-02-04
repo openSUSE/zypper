@@ -3,7 +3,7 @@
 #include <zypp/sat/AttrMatcher.h>
 #include <zypp/ResObjects.h>
 
-static TestSetup test( "/tmp/x", Arch_x86_64 );
+static TestSetup test( Arch_x86_64 );
 
 // Must be the first test!
 BOOST_AUTO_TEST_CASE(bnc_435838)
