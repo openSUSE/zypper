@@ -2,6 +2,9 @@
 
 #include <zypp/PoolQuery.h>
 #include <zypp/target/rpm/librpmDb.h>
+#include <zypp/parser/ProductFileReader.h>
+#include "zypp/pool/GetResolvablesToInsDel.h"
+#include "zypp/sat/WhatObsoletes.h"
 
 ///////////////////////////////////////////////////////////////////
 
@@ -61,28 +64,67 @@ try {
   ++argv;
   zypp::base::LogControl::instance().logToStdErr();
   INT << "===[START]==========================================" << endl;
+  ///////////////////////////////////////////////////////////////////
+
+
+  DBG << Pathname("a\\b") << endl;
+  DBG << Pathname(".\\a/") << endl;
+  DBG << Pathname("/a\\b/c") << endl;
+
+  INT << "===[END]============================================" << endl << endl;
+  zypp::base::LogControl::instance().logNothing();
+  return 0;
+
   ::unsetenv( "ZYPP_CONF" );
   ZConfig::instance();
-  TestSetup::LoadSystemAt( sysRoot, Arch_i586 );
-  ///////////////////////////////////////////////////////////////////
   ResPool   pool( ResPool::instance() );
   sat::Pool satpool( sat::Pool::instance() );
   ///////////////////////////////////////////////////////////////////
+  dumpRange( WAR, satpool.multiversionBegin(), satpool.multiversionEnd() ) << endl;
+  TestSetup::LoadSystemAt( sysRoot, Arch_i586 );
+  ///////////////////////////////////////////////////////////////////
+
   dumpRange( USR, satpool.reposBegin(), satpool.reposEnd() ) << endl;
   USR << "pool: " << pool << endl;
 
-  {
-    PoolQuery q;
-    q.addAttribute( sat::SolvAttr::name, "yast2-samba-server" );
-    MIL << dump(q) << endl;
-  }
+  dumpRange( WAR, satpool.multiversionBegin(), satpool.multiversionEnd() ) << endl;
+
+  ui::Selectable::Ptr sel( getSel<Package>( "test" ) );
+  WAR << dump( sel ) << endl;
+
+  DBG << sel->setStatus( ui::S_Update, ResStatus::USER ) << endl;
+  WAR << dump( sel ) << endl;
+
+  DBG << sel->setStatus( ui::S_Del, ResStatus::USER ) << endl;
+  WAR << dump( sel ) << endl;
+
+  DBG << sel->setStatus( ui::S_KeepInstalled, ResStatus::USER ) << endl;
+  WAR << dump( sel ) << endl;
+
+  DBG << sel->pickInstall( *(++++sel->availableBegin()) ) << endl;
+  WAR << dump( sel ) << endl;
+
+  DBG << sel->pickDelete( *(++sel->installedBegin()) ) << endl;
+  WAR << dump( sel ) << endl;
+
+  DBG << sel->pickInstall( *(sel->installedBegin()) ) << endl;
+  WAR << dump( sel ) << endl;
+
+  solve();
+  WAR << dump( sel ) << endl;
+  pool::GetResolvablesToInsDel collect( pool, pool::GetResolvablesToInsDel::ORDER_BY_MEDIANR );
+
+  ///////////////////////////////////////////////////////////////////
+  INT << "===[END]============================================" << endl << endl;
+  zypp::base::LogControl::instance().logNothing();
+  	return 0;
    {
     PoolQuery q;
-    q.addAttribute( sat::SolvAttr::name, "yast2-samba-server" );
+    q.addAttribute( sat::SolvAttr::name, "open" );
     q.addKind( ResKind::patch );
     MIL << dump(q) << endl;
   }
- {
+  {
     PoolQuery q;
     q.addAttribute( sat::SolvAttr::name, "patch:yast2-samba-server" );
     MIL << dump(q) << endl;
