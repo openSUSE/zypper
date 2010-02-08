@@ -66,8 +66,10 @@ Requires:       gnupg
 %if 0%{?suse_version} == 1110
 # (almost) common codebase, but on SLES11-SP1 (according to Rudi
 # suse_version == 1110) we have a patched libcurl-7.19.0-11.22,
-# and no aria2.
+# and no aria2. Furthermore SLE may use it's own set of .po files
+# from po/sle-zypp-po.tar.bz2.
 %define min_curl_version 7.19.0-11.22
+%define use_translation_set sle-zypp
 # ---------------------------------------------------------------
 %else
 # ---------------------------------------------------------------
@@ -137,6 +139,7 @@ cmake -DCMAKE_INSTALL_PREFIX=%{prefix} \
       -DLIB=%{_lib} \
       -DCMAKE_BUILD_TYPE=Release \
       -DCMAKE_SKIP_RPATH=1 \
+      %{?use_translation_set:-DUSE_TRANSLATION_SET=%use_translation_set} \
       ..
 make %{?jobs:-j %jobs} VERBOSE=1
 make -C doc/autodoc %{?jobs:-j %jobs}
