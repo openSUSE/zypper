@@ -1,4 +1,11 @@
 -------------------------------------------------------------------
+Mon Feb  8 20:30:08 CET 2010 - jkupec@suse.cz
+
+- Replaced .po files in source tree by tarballs.
+- updated translations + SLE11-SP1 translations added
+- 1.2.16
+
+-------------------------------------------------------------------
 Wed Feb  3 13:34:08 CET 2010 - jkupec@suse.cz
 
 - Exit if missing required option argument.
