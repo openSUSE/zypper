@@ -1,4 +1,10 @@
 -------------------------------------------------------------------
+Mon Feb  8 13:21:40 CET 2010 - ma@suse.de
+
+- Support an alternate SLE-SP1 translation set.
+- version 6.29.3 (19)
+
+-------------------------------------------------------------------
 Wed Feb  3 15:57:13 CET 2010 - ma@suse.de
 
 - Remember the enabled state of removed service repositories. This 
