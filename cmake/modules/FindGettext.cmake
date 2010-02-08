@@ -67,7 +67,7 @@ MACRO( GETTEXT_CREATE_TARBALL_TRANSLATIONS _translation_set_basename )
                 )
 
                 INSTALL(
-                        FILES ${_gmoFile}
+                        FILES ${CMAKE_CURRENT_BINARY_DIR}/${_gmoFile}
                         DESTINATION share/locale/${_lang}/LC_MESSAGES
                         RENAME ${_translation_set_basename}.mo
                 )
