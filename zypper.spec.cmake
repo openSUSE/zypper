@@ -53,6 +53,15 @@ Authors:
 %build
 mkdir build
 cd build
+
+# Use different translation set for SUSE Linux Enterprise 10 SP1
+#
+# The code base is the same, but SLES11-SP1 (suse_version == 1110)
+# may use it's own set of .po files from po/sle-zypper-po.tar.bz2.
+%if 0%{?suse_version} == 1110
+%define use_translation_set sle-zypper
+%endif
+
 cmake -DCMAKE_INSTALL_PREFIX=%{prefix} \
       -DSYSCONFDIR=%{_sysconfdir} \
       -DMANDIR=%{_mandir} \
@@ -60,6 +69,7 @@ cmake -DCMAKE_INSTALL_PREFIX=%{prefix} \
       -DCMAKE_C_FLAGS_RELEASE:STRING="%{optflags}" \
       -DCMAKE_CXX_FLAGS_RELEASE:STRING="%{optflags}" \
       -DCMAKE_BUILD_TYPE=Release \
+      %{?use_translation_set:-DUSE_TRANSLATION_SET=%use_translation_set} \
       ..
 
 #gettextize -f
