@@ -1,4 +1,11 @@
 -------------------------------------------------------------------
+Wed Feb 10 12:45:21 CET 2010 - ma@suse.de
+
+- Fix package-manager script wrongly escaping UTF-8 chars in path 
+  names (bnc #571410)
+- version 6.29.4 (19)
+
+-------------------------------------------------------------------
 Mon Feb  8 13:21:40 CET 2010 - ma@suse.de
 
 - Support an alternate SLE-SP1 translation set.
