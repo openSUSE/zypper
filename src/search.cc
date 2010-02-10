@@ -551,6 +551,26 @@ static void list_products_xml(Zypper & zypper)
   cout << "</product-list>" << endl;
 }
 
+// common product_table_row data
+static void add_product_table_row( Zypper & zypper, TableRow & tr,  const Product::constPtr & product )
+{
+  // repository
+  if (!zypper.globalOpts().is_rug_compatible)
+    tr << product->repoInfo().name();
+  // name
+  tr << product->name () << product->edition().asString();
+  if (zypper.globalOpts().is_rug_compatible)
+    // rug 'Category'
+    tr << (product->isTargetDistribution() ? "base" : "");
+  else
+  {
+    // architecture
+    tr << product->arch().asString();
+    // is base
+    tr << (product->isTargetDistribution() ? _("Yes") : _("No"));
+  }
+}
+
 static void list_product_table(Zypper & zypper)
 {
   MIL << "Going to list packages." << std::endl;
@@ -589,27 +609,33 @@ static void list_product_table(Zypper & zypper)
     if (!s->installedEmpty())
       installed = s->installedObj();
 
+    bool missedInstalled = installed; // if no available hits, we need to print it
+
     // show available objects
     for_(it, s->availableBegin(), s->availableEnd())
     {
       Product::constPtr product = asKind<Product>(it->resolvable());
       TableRow tr;
       zypp::PoolItem pi = *it;
-      string repo = product->repoInfo().name();
 
       if (installed)
       {
-        if (notinst_only)
-          continue;
         if (equalNVRA(*installed.resolvable(), *pi.resolvable()))
         {
+          if (notinst_only)
+            continue;
           tr << "i";
           // this is needed, other isTargetDistribution would not return
           // true for the installed base product
           product = asKind<Product>(installed);
+          missedInstalled = false;
         }
         else
+        {
+          if (installed_only)
+            continue;
           tr << "v";
+        }
       }
       else
       {
@@ -617,21 +643,19 @@ static void list_product_table(Zypper & zypper)
           continue;
         tr << "";
       }
-      // repository
-      if (!zypper.globalOpts().is_rug_compatible)
-        tr << repo;
-      // name
-      tr << product->name () << product->edition().asString();
-      if (zypper.globalOpts().is_rug_compatible)
-        // rug 'Category'
-        tr << (product->isTargetDistribution() ? "base" : "");
-      else
-      {
-        // architecture
-        tr << product->arch().asString();
-        // is base
-        tr << (product->isTargetDistribution() ? _("Yes") : _("No"));
-      }
+      add_product_table_row( zypper, tr, product );
+      tbl << tr;
+    }
+
+    if ( missedInstalled ) // no available hit, we need to print it
+    {
+      // show installed product in ablence of an available one:
+      if (notinst_only)
+        continue;
+
+      TableRow tr;
+      tr << "i";
+      add_product_table_row( zypper, tr, installed->asKind<Product>() );
       tbl << tr;
     }
   }
