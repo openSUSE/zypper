@@ -35,7 +35,8 @@ Augeas::Augeas(const string & file)
     want_custom = true;
     if (filepath.relative())
     {
-      string wd = ::getenv("PWD");
+      const char * env = ::getenv("PWD");
+      string wd = env ? env : ".";
       filepath = wd / filepath;
     }
 
@@ -44,7 +45,9 @@ Augeas::Augeas(const string & file)
   }
   else
   {
-    _homedir = ::getenv("HOME");
+    const char * env = ::getenv("HOME");
+    if ( env )
+      _homedir = env;
     if (_homedir.empty())
       WAR << "Cannot figure out user's home directory. Skipping user's config." << endl;
     else

@@ -698,9 +698,13 @@ void Zypper::commandShell()
 
   string histfile;
   try {
-    Pathname p (getenv ("HOME"));
-    p /= ".zypper_history";
-    histfile = p.asString ();
+    const char * env = getenv ("HOME");
+    if ( env )
+    {
+      Pathname p( env );
+      p /= ".zypper_history";
+      histfile = p.asString ();
+    }
   } catch (...) {
     // no history
   }
