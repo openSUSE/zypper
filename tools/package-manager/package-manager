@@ -13,11 +13,16 @@ EOF
 }
 
 # quoted concatenation of arguments
+function quote() {
+  # formerly used 'printf %q' breaks UTF-8 strings
+  echo -n "$@" | sed 's/\([]|&;<>()$`\" \t*?#~=%[]\)/\\\1/g'
+}
+
 function mkCmd() {
-  printf "%q" "$1"
+  quote "$1"
   shift
   for ARG in "$@"; do
-    printf " %q" "$ARG"
+    echo -n " $(quote "$ARG")"
   done
 }
 
