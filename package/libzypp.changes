@@ -1,4 +1,11 @@
 -------------------------------------------------------------------
+Thu Feb 11 13:40:49 CET 2010 - ma@suse.de
+
+- On SLE aria2 is not required, so conflict with a too old aria2
+  version installed. (bnc #578052)
+- version 6.29.5 (19)
+
+-------------------------------------------------------------------
 Wed Feb 10 12:45:21 CET 2010 - ma@suse.de
 
 - Fix package-manager script wrongly escaping UTF-8 chars in path 
