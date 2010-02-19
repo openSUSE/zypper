@@ -1,4 +1,10 @@
 -------------------------------------------------------------------
+Fri Feb 19 12:01:39 CET 2010 - jkupec@suse.cz
+
+- Fixed broken --type (bnc #580571)
+- 1.2.18
+
+-------------------------------------------------------------------
 Wed Feb 10 16:01:15 CET 2010 - ma@suse.de
 
 - Fix 'zypper products' failing to list installed products under 
