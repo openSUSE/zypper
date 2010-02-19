@@ -637,6 +637,28 @@ void install_remove(Zypper & zypper,
     // parse the rest of the string as standard zypp package specifier
     Capability parsedcap = Capability::guessPackageSpec(str);
     Capability namecap("", str, "", "", kind);
+    sat::Solvable::SplitIdent splid(parsedcap.detail().name());
+
+    // set the right kind (bnc #580571)
+    // prefer those specified in args
+    // if not in args, use the one from --type
+    if (zypper.cOpts().count("type") && splid.kind() != kind)
+    {
+      // kind specified in arg, too - just warn and let it be
+      if (parsedcap.detail().name().asString().find(':') != string::npos)
+        zypper.out().warning(str::form(
+            _("Different package type specified in '%s' option and '%s' argument. Will use the latter."),
+            "--type", str.c_str()));
+      // no kind specified in arg, use --type
+      else
+        parsedcap = Capability(
+            Arch(parsedcap.detail().arch()),
+            splid.name().asString(),
+            parsedcap.detail().op(),
+            parsedcap.detail().ed(),
+            kind);
+    }
+
     MIL << "got '" << parsedcap << "'" << endl;
 
     // mark by name by force
