@@ -380,6 +380,15 @@ namespace zypp
                        const ProgressData::ReceiverFnc & progressrcv = ProgressData::ReceiverFnc() );
 
    /**
+    * Remove any subdirectories of cache directories which no longer belong
+    * to any of known repositories.
+    *
+    * These can be temporary directories left by interrupted refresh,
+    * or dirs left after changing .repo files outside of libzypp.
+    */
+   void cleanCacheDirGarbage( const ProgressData::ReceiverFnc & progressrcv = ProgressData::ReceiverFnc() );
+
+   /**
     * \short Probe repo metadata type.
     *
     * The location to probe consists of the base \a url (you may think of it as

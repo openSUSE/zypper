@@ -1257,6 +1257,53 @@ namespace zypp
 
   ////////////////////////////////////////////////////////////////////////////
 
+  void RepoManager::cleanCacheDirGarbage( const ProgressData::ReceiverFnc & progressrcv )
+  {
+    MIL << "Going to clean up garbage in cache dirs" << endl;
+
+    ProgressData progress(300);
+    progress.sendTo(progressrcv);
+    progress.toMin();
+
+    std::list<Pathname> cachedirs;
+    cachedirs.push_back(_pimpl->options.repoRawCachePath);
+    cachedirs.push_back(_pimpl->options.repoPackagesCachePath);
+    cachedirs.push_back(_pimpl->options.repoSolvCachePath);
+
+    for_( dir, cachedirs.begin(), cachedirs.end() )
+    {
+      if ( PathInfo(*dir).isExist() )
+      {
+        std::list<Pathname> entries;
+        if ( filesystem::readdir( entries, *dir, false ) != 0 )
+          // TranslatorExplanation '%s' is a pathname
+          ZYPP_THROW(Exception(str::form(_("Failed to read directory '%s'"), dir->c_str())));
+
+        unsigned sdircount   = entries.size();
+        unsigned sdircurrent = 1;
+        for_( subdir, entries.begin(), entries.end() )
+        {
+          // if it does not belong known repo, make it disappear
+          bool found = false;
+          for_( r, repoBegin(), repoEnd() )
+            if ( subdir->basename() == r->escaped_alias() )
+            { found = true; break; }
+
+          if ( ! found )
+            filesystem::recursive_rmdir( *subdir );
+
+          progress.set( progress.val() + sdircurrent * 100 / sdircount );
+          ++sdircurrent;
+        }
+      }
+      else
+        progress.set( progress.val() + 100 );
+    }
+    progress.toMax();
+  }
+
+  ////////////////////////////////////////////////////////////////////////////
+
   void RepoManager::cleanCache( const RepoInfo &info,
                                 const ProgressData::ReceiverFnc & progressrcv )
   {
@@ -1264,6 +1311,7 @@ namespace zypp
     progress.sendTo(progressrcv);
     progress.toMin();
 
+    MIL << "Removing raw metadata cache for " << info.alias() << endl;
     filesystem::recursive_rmdir(solv_path_for_repoinfo(_pimpl->options, info));
 
     progress.toMax();
