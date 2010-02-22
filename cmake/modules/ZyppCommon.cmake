@@ -122,11 +122,11 @@ MACRO(GENERATE_PACKAGING PACKAGE VERSION)
   SET( CPACK_SOURCE_GENERATOR "TBZ2")
   SET( CPACK_SOURCE_PACKAGE_FILE_NAME "${PACKAGE}-${VERSION}" )
   INCLUDE(CPack)
-  
+
   SPECFILE()
-  
+
   ADD_CUSTOM_TARGET( svncheck
-    COMMAND cd $(CMAKE_SOURCE_DIR) && ! LC_ALL=C svn status --show-updates --quiet | grep -v '^Status against revision'
+    COMMAND cd $(CMAKE_SOURCE_DIR) && LC_ALL=C git status | grep -q "nothing to commit .working directory clean."
   )
 
   SET( AUTOBUILD_COMMAND
@@ -136,11 +136,11 @@ MACRO(GENERATE_PACKAGING PACKAGE VERSION)
     COMMAND ${CMAKE_COMMAND} -E remove ${CPACK_SOURCE_PACKAGE_FILE_NAME}.tar.bz2
     COMMAND ${CMAKE_COMMAND} -E copy "${CMAKE_SOURCE_DIR}/package/${PACKAGE}.changes" "${CMAKE_BINARY_DIR}/package/${PACKAGE}.changes"
   )
-  
+
   ADD_CUSTOM_TARGET( srcpackage_local
     ${AUTOBUILD_COMMAND}
   )
-  
+
   ADD_CUSTOM_TARGET( srcpackage
     COMMAND ${CMAKE_MAKE_PROGRAM} svncheck
     ${AUTOBUILD_COMMAND}
