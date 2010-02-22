@@ -1,4 +1,9 @@
 -------------------------------------------------------------------
+Mon Feb 22 15:25:34 CET 2010 - jkupec@suse.cz
+
+- Made CURLE_PARTIAL_FILE an auto-retry error (bnc #471436)
+
+-------------------------------------------------------------------
 Mon Feb 22 13:09:09 CET 2010 - ma@suse.de
 
 - Turn off cookies when retrieving services repoindex.xml (bnc #573897)
