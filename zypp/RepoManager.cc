@@ -1942,7 +1942,7 @@ namespace zypp
     {
       if ( ! foundAliasIn( it->alias(), collector.repos ) )
       {
-        if ( it->enabled() )
+        if ( it->enabled() && ! service.repoToDisableFind( it->alias() ) )
         {
           DBG << "Service removes enabled repo " << it->alias() << endl;
           service.addRepoToEnable( it->alias() );
