@@ -367,13 +367,13 @@ static const char *const agentString()
 
 // we use this define to unbloat code as this C setting option
 // and catching exception is done frequently.
-#define SET_OPTION(opt,val) { \
+#define SET_OPTION(opt,val) do { \
     ret = curl_easy_setopt ( _curl, opt, val ); \
     if ( ret != 0) { \
       disconnectFrom(); \
       ZYPP_THROW(MediaCurlSetOptException(_url, _curlError)); \
     } \
-  }
+  } while ( false )
 
 MediaCurl::MediaCurl( const Url &      url_r,
                       const Pathname & attach_point_hint_r )
