@@ -1,4 +1,10 @@
 -------------------------------------------------------------------
+Mon Feb 22 17:22:14 CET 2010 - jkupec@suse.cz
+
+- Avoiding confirmation of unchanged license on upgrade
+  (bnc #394396)
+
+-------------------------------------------------------------------
 Sun Feb 21 14:17:39 CET 2010 - jkupec@suse.cz
 
 - clean --all: clean also garbage and zypper cache (bnc #467693)
