@@ -3,7 +3,7 @@ Sun Feb 21 14:11:49 CET 2010 - jkupec@suse.cz
 
 - RepoManager::cleanCacheDirGarbage added for removing directories
   which do not belong to any of known repos (bnc #467693)
-- version 6.30.5 (19)
+- version 6.30.0 (19)
 
 -------------------------------------------------------------------
 Thu Feb 11 13:40:49 CET 2010 - ma@suse.de
