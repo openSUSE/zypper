@@ -379,6 +379,8 @@ namespace zypp
      *     "ftp://user:pass@server/%2fhome/user/path/to/media" -- both
      *     URLs points to the same directory on the server.
      *   - Query parameters:
+     *     - <tt>cookies</tt>:
+     *       Turn off using cookies by setting it to "0" (or false, no, off).
      *     - <tt>proxy</tt>:
      *       A proxy hostname or hostname and port separated by ':'.
      *     - <tt>proxyport</tt>:

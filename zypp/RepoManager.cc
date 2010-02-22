@@ -1878,9 +1878,13 @@ namespace zypp
       }
     }
 
+    // repoindex.xml must be fetched always without using cookies (bnc #573897)
+    Url serviceUrl( service.url() );
+    serviceUrl.setQueryParam( "cookies", "0" );
+
     // download the repo index file
     media::MediaManager mediamanager;
-    media::MediaAccessId mid = mediamanager.open( service.url() );
+    media::MediaAccessId mid = mediamanager.open( serviceUrl );
     mediamanager.attach( mid );
     mediamanager.provideFile( mid, "repo/repoindex.xml" );
     Pathname path = mediamanager.localPath(mid, "repo/repoindex.xml" );

@@ -642,7 +642,10 @@ void MediaCurl::attachTo (bool next)
    *---------------------------------------------------------------*/
 
   _currentCookieFile = _cookieFile.asString();
-  SET_OPTION(CURLOPT_COOKIEFILE, _currentCookieFile.c_str() );
+  if ( str::strToBool( _url.getQueryParam( "cookies" ), true ) )
+    SET_OPTION(CURLOPT_COOKIEFILE, _currentCookieFile.c_str() );
+  else
+    MIL << "No cookies requested" << endl;
   SET_OPTION(CURLOPT_COOKIEJAR, _currentCookieFile.c_str() );
   SET_OPTION(CURLOPT_PROGRESSFUNCTION, &progressCallback );
   SET_OPTION(CURLOPT_NOPROGRESS, false );
