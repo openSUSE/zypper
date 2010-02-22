@@ -900,6 +900,7 @@ void MediaCurl::evaluateCurlCode( const Pathname &filename,
       case CURLE_WRITE_ERROR:
         err = "Write error";
         break;
+      case CURLE_PARTIAL_FILE:
       case CURLE_ABORTED_BY_CALLBACK:
       case CURLE_OPERATION_TIMEDOUT:
         if( timeout_reached)
