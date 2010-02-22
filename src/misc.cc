@@ -132,6 +132,28 @@ bool confirm_licenses(Zypper & zypper)
     if (it->status().isToBeInstalled() &&
         !it->resolvable()->licenseToConfirm().empty())
     {
+      ui::Selectable::Ptr selectable =
+          God->pool().proxy().lookup(it->resolvable()->kind(), it->resolvable()->name());
+
+      // this is an upgrade, check whether the license changed
+      // for now we only do dumb string comparison (bnc #394396)
+      if (selectable->hasInstalledObj())
+      {
+        bool differ = false;
+        for_(inst, selectable->installedBegin(), selectable->installedEnd())
+          if (inst->resolvable()->licenseToConfirm() != it->resolvable()->licenseToConfirm())
+          { differ = true; break; }
+
+        if (!differ)
+        {
+          DBG << "old and new license does not differ for "
+              << it->resolvable()->name() << endl;
+          continue;
+        }
+        DBG << "new license for " << it->resolvable()->name()
+            << " is different, needs confirmation " << endl;
+      }
+
       if (license_auto_agree)
       {
       	zypper.out().info(boost::str(
