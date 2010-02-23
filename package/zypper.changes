@@ -1,4 +1,9 @@
 -------------------------------------------------------------------
+Tue Feb 23 18:01:48 CET 2010 - jkupec@suse.cz
+
+- Avoid a newline in 'zypper --quiet list-patches' (bnc #523573)
+
+-------------------------------------------------------------------
 Tue Feb 23 14:17:20 CET 2010 - jkupec@suse.cz
 
 - Showing packages that need additional customer contract
