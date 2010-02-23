@@ -467,9 +467,24 @@ void MediaAria2c::getFileCopy( const Pathname & filename , const Pathname & targ
 
       switch ( code )
       {
-        // success
-        case 0: // success
-            break;
+        case 0: // success?
+          if ( ! PathInfo( target ).isExist() )
+          {
+            // bnc #564816: aria2 might return 0 if an error occurred
+            // _before_ the download actually started.
+
+            // TranslatorExplanation: Failed to download <FILENAME> from <SERVERURL>.
+            std::string msg( str::form(_("Failed to download %s from %s"),
+                             filename.c_str(), _url.asString().c_str() ) );
+
+            MediaException e( msg );
+            for_( it, ariaExceptions.begin(), ariaExceptions.end() )
+              e.addHistory( *it );
+
+            ZYPP_THROW( e );
+          }
+          break;
+
         case 2: // timeout
         {
           MediaTimeoutException e(_url);
@@ -477,6 +492,8 @@ void MediaAria2c::getFileCopy( const Pathname & filename , const Pathname & targ
               e.addHistory(*it);
           ZYPP_THROW(e);
         }
+        break;
+
         case 3: // not found
         case 4: // max notfound reached
         {
@@ -485,6 +502,8 @@ void MediaAria2c::getFileCopy( const Pathname & filename , const Pathname & targ
               e.addHistory(*it);
           ZYPP_THROW(e);
         }
+        break;
+
         case 5: // too slow
         case 6: // network problem
         case 7: // unfinished downloads (ctr-c)
@@ -521,6 +540,7 @@ void MediaAria2c::getFileCopy( const Pathname & filename , const Pathname & targ
 
           ZYPP_THROW(e);
         }
+        break;
       }
 
       retry = false;
