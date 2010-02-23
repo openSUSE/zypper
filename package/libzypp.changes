@@ -1,4 +1,11 @@
 -------------------------------------------------------------------
+Tue Feb 23 19:05:04 CET 2010 - jkupec@suse.cz
+
+- Avoiding use of 'guest' if 'credentials' is used when moutning
+  a CIFS share. This caused 'permission denied' error with certain
+  server configurations (bnc #560496).
+
+-------------------------------------------------------------------
 Tue Feb 23 17:31:05 CET 2010 - ma@suse.de
 
 - Check if a downloaded file actually exists even if aria2c returned 0. 
