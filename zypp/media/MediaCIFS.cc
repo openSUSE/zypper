@@ -174,12 +174,6 @@ namespace zypp {
       string username = _url.getUsername();
       string password = _url.getPassword();
 
-      // Use 'guest' option unless explicitly disabled (bnc #547354)
-      if ( options.has( "noguest" ) )
-        options.erase( "noguest" );
-      else
-        options["guest"];
-
       if ( ! options.has( "rw" ) ) {
         options["ro"];
       }
@@ -268,6 +262,17 @@ namespace zypp {
           credentials = tmp;
           options["credentials"] = credentials.path().asString();
         }
+        else
+        {
+          // Use 'guest' option unless explicitly disabled (bnc #547354)
+          if ( options.has( "noguest" ) )
+            options.erase( "noguest" );
+          else
+            // prevent smbmount from asking for password
+            // only add this option if 'credentials' is not used (bnc #560496)
+            options["guest"];
+        }
+
         //
         //////////////////////////////////////////////////////
 
