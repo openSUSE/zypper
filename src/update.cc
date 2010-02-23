@@ -231,7 +231,7 @@ static bool list_patch_updates(Zypper & zypper)
     if (!tbl.empty())
     {
       zypper.out().info(_("The following software management updates will be installed first:"));
-      cout << endl;
+      zypper.out().info("", Out::NORMAL, Out::TYPE_NORMAL);
     }
     pm_tbl.sort(1); // Name
     cout << pm_tbl;
@@ -244,10 +244,10 @@ static bool list_patch_updates(Zypper & zypper)
   {
     if (affectpm)
     {
-      cout << endl;
+      zypper.out().info("", Out::NORMAL, Out::TYPE_NORMAL);
       zypper.out().info(_("The following updates are also available:"));
-      cout << endl;
     }
+    zypper.out().info("", Out::QUIET, Out::TYPE_NORMAL);
     cout << tbl;
   }
 
@@ -377,6 +377,8 @@ string i18n_kind_updates(const ResKind & kind)
 
 // ----------------------------------------------------------------------------
 
+// FIXME rewrite this function so that first the list of updates is collected and later correctly presented (bnc #523573)
+
 void list_updates(Zypper & zypper, const ResKindSet & kinds, bool best_effort)
 {
   if (zypper.out().type() == Out::TYPE_XML)
@@ -404,8 +406,10 @@ void list_updates(Zypper & zypper, const ResKindSet & kinds, bool best_effort)
     else
     {
       if (kinds.size() > 1)
+      {
+        zypper.out().info("", Out::NORMAL, Out::TYPE_NORMAL);
         zypper.out().info(i18n_kind_updates(*it), Out::QUIET, Out::TYPE_NORMAL);
-      zypper.out().info("", Out::QUIET, Out::TYPE_NORMAL); // visual separator
+      }
       affects_pkgmgr = list_patch_updates(zypper);
     }
     localkinds.erase(it);
