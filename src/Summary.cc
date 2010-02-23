@@ -140,12 +140,12 @@ void Summary::readPool(const zypp::ResPool & pool)
     {
       ResObject::constPtr res(*resit);
 
-      // FIXME asKind not working?
       Package::constPtr pkg = asKind<Package>(res);
       if (pkg)
       {
-        // FIXME refactor with libzypp Package::vendorSupportAvailable()
-        if (pkg->maybeUnsupported())
+        if (pkg->vendorSupport() & VendorSupportACC)
+          support_needacc[res->kind()].insert(ResPair(nullres, res));
+        else if (pkg->maybeUnsupported())
           unsupported[res->kind()].insert(ResPair(nullres, res));
       }
 
@@ -820,11 +820,30 @@ void Summary::writeUnsupported(ostream & out)
   for_(it, unsupported.begin(), unsupported.end())
   {
     string label;
-    // we only look vendor support in packages
+    // we only look at vendor support in packages
     if (it->first == ResKind::package)
       label = _PL(
         "The following package is not supported by its vendor:",
         "The following packages are not supported by their vendor:",
+        it->second.size());
+    out << endl << label << endl;
+
+    writeResolvableList(out, it->second);
+  }
+}
+
+// --------------------------------------------------------------------------
+
+void Summary::writeNeedACC(ostream & out)
+{
+  for_(it, support_needacc.begin(), support_needacc.end())
+  {
+    string label;
+    // we only look at vendor support in packages
+    if (it->first == ResKind::package)
+      label = _PL(
+        "The following package needs additional customer contract to get support:",
+        "The following packages need additional customer contract to get support:",
         it->second.size());
     out << endl << label << endl;
 
@@ -1005,7 +1024,10 @@ void Summary::dumpTo(ostream & out)
   writeChangedArch(out);
   writeChangedVendor(out);
   if (_viewop & SHOW_UNSUPPORTED)
+  {
+    writeNeedACC(out);
     writeUnsupported(out);
+  }
   out << endl;
   writePackageCounts(out);
   writeDownloadAndInstalledSizeSummary(out);

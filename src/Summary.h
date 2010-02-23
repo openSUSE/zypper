@@ -78,6 +78,7 @@ public:
   void writeChangedArch(std::ostream & out);
   void writeChangedVendor(std::ostream & out);
   void writeUnsupported(std::ostream & out);
+  void writeNeedACC(std::ostream & out);
   void writePackageCounts(std::ostream & out);
   void writeDownloadAndInstalledSizeSummary(std::ostream & out);
 
@@ -132,8 +133,10 @@ private:
   KindToResPairSet toremove;
   KindToResPairSet tochangearch;
   KindToResPairSet tochangevendor;
-  /** objects from previous lists that are not supported */
+  /** objects from previous lists that are marked as not supported */
   KindToResPairSet unsupported;
+  /** objects from previous lists that need additional customer contract */
+  KindToResPairSet support_needacc;
 
   /** \name For weak deps info.
    * @{
