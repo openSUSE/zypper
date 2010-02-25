@@ -181,7 +181,7 @@ cd ..
 
 
 %post
-%run_ldconfig
+/sbin/ldconfig
 if [ -f /var/cache/zypp/zypp.db ]; then rm /var/cache/zypp/zypp.db; fi
 
 # convert old lock file to new
@@ -245,8 +245,7 @@ if is_old ${LOCKSFILE}
 fi
 
 
-%postun
-%run_ldconfig
+%postun -p /sbin/ldconfig
 
 %clean
 rm -rf "$RPM_BUILD_ROOT"
