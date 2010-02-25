@@ -88,13 +88,10 @@ cd ..
 touch %buildroot%_var/log/zypper.log
 
 %post
-/sbin/ldconfig
 %run_permissions
 
 %verifyscript
 %verify_permissions -e %{_sbindir}/zypp-refresh-wrapper
-
-%postun -p /sbin/ldconfig
 
 %clean
 
