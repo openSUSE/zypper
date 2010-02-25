@@ -272,10 +272,13 @@ void Summary::writeResolvableList(ostream & out, const ResPairSet & resolvables)
     for_(resit, resolvables.begin(), resolvables.end())
       dupes[resit->second->name()]++;
     // remove the single-versions from the map
-    map<string, unsigned>::iterator it = dupes.begin();
-    for (; it != dupes.end(); ++it)
+    for (map<string, unsigned>::iterator it = dupes.begin(); it != dupes.end(); /**/)
+    {
       if (it->second == 1)
-        dupes.erase(it); // seems the iterator is not invalidated by this
+        dupes.erase(it++); // postfix! Incrementing before erase
+      else
+        ++it;
+    }
   }
 
   if ((_viewop & DETAILS) == 0)
