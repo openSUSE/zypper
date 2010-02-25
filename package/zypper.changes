@@ -1,4 +1,9 @@
 -------------------------------------------------------------------
+Thu Feb 25 22:18:48 CET 2010 - jkupec@suse.cz
+
+- Added a few forgotten strings for translation (bnc #581332)
+
+-------------------------------------------------------------------
 Thu Feb 25 11:57:48 CET 2010 - ma@suse.de
 
 - Fix SEGV in Summary::writeResolvableList
