@@ -8,14 +8,13 @@
 #ifndef LOCKS_ZYPPER_CALLBACKS_H
 #define LOCKS_ZYPPER_CALLBACKS_H
 
-#include <iostream>
+#include <iosfwd>
 
 #include "zypp/base/Logger.h"
 #include "zypp/ZYppCallbacks.h"
 #include "zypp/PoolQuery.h"
 
 #include "utils/prompt.h"
-//#include "utils/misc.h"
 
 namespace zypp {
 
@@ -24,14 +23,17 @@ namespace zypp {
     virtual Action conflict( const PoolQuery& query, ConflictState state )
     {
       if (state == SAME_RESULTS)
-         Zypper::instance()->out().error("The following query locks the same packages as the lock which you want remove:");
+        Zypper::instance()->out().error(
+          _("The following query locks the same objects as the one you want to remove:"));
       else
-         Zypper::instance()->out().error(_("The following query locks some of the objects you want to unlock:"));
+        Zypper::instance()->out().error(
+          _("The following query locks some of the objects you want to unlock:"));
 
       query.serialize(std::cout);
 
-      return read_bool_answer(PROMPT_YN_REMOVE_LOCK ,
-        "Do you want remove this lock?", true)? DELETE : IGNORE;
+      return read_bool_answer(
+        PROMPT_YN_REMOVE_LOCK, _("Do you want to remove this lock?"), true) ?
+          DELETE : IGNORE;
     }
   };
 
@@ -39,12 +41,14 @@ namespace zypp {
   {
     virtual Action execute( const PoolQuery& query )
     {
-      Zypper::instance()->out().error(_("The following query does not lock anything:"));
+      Zypper::instance()->out().error(
+        _("The following query does not lock anything:"));
 
       query.serialize(std::cout);
 
-      return read_bool_answer(PROMPT_YN_REMOVE_LOCK ,
-        "Do you want remove this lock?", true)? DELETE : IGNORE;
+      return read_bool_answer(
+        PROMPT_YN_REMOVE_LOCK, _("Do you want to remove this lock?"), true) ?
+          DELETE : IGNORE;
     }
   };
 
