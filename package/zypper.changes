@@ -1,4 +1,10 @@
 -------------------------------------------------------------------
+Thu Feb 25 11:57:48 CET 2010 - ma@suse.de
+
+- Fix SEGV in Summary::writeResolvableList
+- 1.2.20
+
+-------------------------------------------------------------------
 Tue Feb 23 18:01:48 CET 2010 - jkupec@suse.cz
 
 - Avoid a newline in 'zypper --quiet list-patches' (bnc #523573)
