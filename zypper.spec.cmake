@@ -15,13 +15,15 @@ BuildRequires:  libzypp-devel >= 6.30.0 boost-devel >= 1.33.1 gettext-devel >= 0
 BuildRequires:  readline-devel >= 5.1 augeas-devel >= 0.5.0
 BuildRequires:  gcc-c++ >= 4.1 cmake >= 2.4.6
 Requires:	procps
+%if 0%{?suse_version}
 %requires_ge	libzypp
 Recommends:     logrotate cron
+PreReq:         permissions
+%endif
 License:        GPL v2 or later
 Group:          System/Packages
 BuildRoot:      %{_tmppath}/%{name}-%{version}-build
 Autoreqprov:    on
-PreReq:         permissions
 Summary:        Command line software manager using libzypp
 Version:        @VERSION@
 Release:        0
@@ -87,11 +89,13 @@ cd ..
 %{__install} -d -m755 %buildroot%_var/log
 touch %buildroot%_var/log/zypper.log
 
+%if 0%{?suse_version}
 %post
 %run_permissions
 
 %verifyscript
 %verify_permissions -e %{_sbindir}/zypp-refresh-wrapper
+%endif
 
 %clean
 
