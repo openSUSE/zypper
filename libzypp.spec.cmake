@@ -23,13 +23,19 @@ Source1:        %{name}-rpmlintrc
 Prefix:         /usr
 Provides:       yast2-packagemanager
 Obsoletes:      yast2-packagemanager
+%if 0%{?suse_version}
 Recommends:     logrotate
+%endif
 BuildRequires:  cmake
 BuildRequires:  openssl-devel
 BuildRequires:  boost-devel dejagnu doxygen gcc-c++ gettext-devel graphviz hal-devel libxml2-devel
 
 BuildRequires:  libsatsolver-devel >= 0.14.13
+%if 0%{?suse_version}
 %requires_eq    satsolver-tools
+%else
+Requires:	satsolver-tools
+%endif
 
 # required for testsuite, webrick
 BuildRequires:  ruby
@@ -59,7 +65,7 @@ Requires: e2fsprogs
 %if 0%{?suse_version}
 Requires:       gpg2
 %else
-Requires:       gnupg
+Requires:       gnupg2
 %endif
 
 %define min_aria_version 1.1.2
@@ -86,7 +92,11 @@ BuildRequires: aria2 >= %{min_aria_version}
 %endif
 # ---------------------------------------------------------------
 
+%if 0%{?suse_version}
 Requires:       libcurl4   >= %{min_curl_version}
+%else
+Requires:       libcurl   >= %{min_curl_version}
+%endif
 BuildRequires:  libcurl-devel >= %{min_curl_version}
 
 %description
@@ -109,8 +119,11 @@ Requires:       libxml2-devel openssl-devel rpm-devel glibc-devel zlib-devel
 Requires:       bzip2 popt-devel dbus-1-devel glib2-devel hal-devel boost-devel libstdc++-devel
 Requires:       cmake
 Requires:       libcurl-devel >= %{min_curl_version}
+%if 0%{?suse_version}
 %requires_ge    libsatsolver-devel
-
+%else
+Requires:	libsatsolver-devel
+%endif
 Summary:        Package, Patch, Pattern, and Product Management - developers files
 Group:          System/Packages
 Provides:       yast2-packagemanager-devel
