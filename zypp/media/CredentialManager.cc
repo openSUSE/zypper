@@ -6,7 +6,7 @@
 |                         /_____||_| |_| |_|                           |
 |                                                                      |
 \---------------------------------------------------------------------*/
-/** \file zypp/media/CredentialManager.h
+/** \file zypp/media/CredentialManager.cc
  *
  */
 #include <iostream>
@@ -45,7 +45,7 @@ namespace zypp
     - url::ViewOption::WITH_PASSWORD
     - url::ViewOption::WITH_QUERY_STR;
 
-  inline bool
+  bool
   AuthDataComparator::operator()(
       const AuthData_Ptr & lhs, const AuthData_Ptr & rhs)
   {
