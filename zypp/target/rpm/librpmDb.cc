@@ -134,9 +134,6 @@ bool librpmDb::globalInit()
     return false;
   }
 
-  // should speed up convertdb and rebuilddb.
-  ::addMacro( NULL, "_rpmdb_rebuild", NULL, "%{nil}", RMIL_CMDLINE );
-
   initialized = true; // Necessary to be able to use exand().
 
 #define OUTVAL(n) << " (" #n ":" << expand( "%{" #n "}" ) << ")"
