@@ -35,10 +35,7 @@ FillSearchTableSolvable::FillSearchTableSolvable(
   {
     list<RepoInfo> & repos = zypper.runtimeData().repos;
     for_(it, repos.begin(), repos.end())
-    {
-      INT << "repo: " << it->alias() << endl;
       _repos.insert(it->alias());
-    }
   }
 
   TableHeader header;
@@ -241,6 +238,14 @@ FillSearchTableSelectable::FillSearchTableSelectable(
   , _gopts(Zypper::instance()->globalOpts())
   , inst_notinst(installed_only)
 {
+  Zypper & zypper = *Zypper::instance();
+  if (zypper.cOpts().find("repo") != zypper.cOpts().end())
+  {
+    list<RepoInfo> & repos = zypper.runtimeData().repos;
+    for_(it, repos.begin(), repos.end())
+      _repos.insert(it->alias());
+  }
+
   TableHeader header;
   // translators: S for installed Status
   header << _("S");
@@ -263,18 +268,54 @@ bool FillSearchTableSelectable::operator()(const zypp::ui::Selectable::constPtr 
 
   TableRow row;
 
-  bool installed;
+  // whether to show the solvable as 'installed'
+  bool installed = false;
+
   if (zypp::traits::isPseudoInstalled(s->kind()))
     installed = s->theObj().isSatisfied();
+  // check for installed counterpart in one of specified repos (bnc #467106)
+  else if (!_repos.empty())
+  {
+    for_(ait, s->availableBegin(), s->availableEnd())
+      for_(iit, s->installedBegin(), s->installedEnd())
+        if (identical(*ait, *iit) &&
+            _repos.find(ait->resolvable()->repoInfo().alias()) != _repos.end())
+        {
+          installed = true;
+          break;
+        }
+  }
+  // if no --repo is specified, we don't care where does the installed package
+  // come from
   else
     installed = !s->installedEmpty();
 
-  if (s->kind() != zypp::ResKind::srcpackage && installed)
+
+  if (s->kind() != zypp::ResKind::srcpackage)
   {
-    // not-installed only
-    if (inst_notinst == false)
-      return true;
-    row << "i";
+    if (installed)
+    {
+      // not-installed only
+      if (inst_notinst == false)
+        return true;
+      row << "i";
+    }
+    // this happens if the solvable has installed objects, but no counterpart
+    // of them in specified repos
+    else if (s->hasInstalledObj())
+    {
+      // not-installed only
+      if (inst_notinst == true)
+        return true;
+      row << "v";
+    }
+    else
+    {
+      // installed only
+      if (inst_notinst == true)
+        return true;
+      row << "";
+    }
   }
   else
   {
@@ -283,6 +324,7 @@ bool FillSearchTableSelectable::operator()(const zypp::ui::Selectable::constPtr 
       return true;
     row << "";
   }
+
   row << s->name();
   row << s->theObj()->summary();
   row << kind_to_string_localized(s->kind(), 1);

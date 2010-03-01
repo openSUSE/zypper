@@ -40,6 +40,8 @@ struct FillSearchTableSelectable
   // the table used for output
   Table * _table;
   const GlobalOptions & _gopts;
+  /** Aliases of repos specified as --repo */
+  std::set<std::string> _repos;
   zypp::TriBool inst_notinst;
 
   FillSearchTableSelectable(
