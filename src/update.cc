@@ -752,7 +752,7 @@ void mark_updates(Zypper & zypper, const ResKindSet & kinds, bool skip_interacti
             if (!theone)
               theone = s->installedObj();
 
-            if (equalNVRA(*s->installedObj().resolvable(), *theone.resolvable()))
+            if (identical(s->installedObj(), theone))
             {
               DBG << "the One (" << theone << ") is installed, skipping." << endl;
               zypper.out().info(str::form(

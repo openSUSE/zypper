@@ -49,8 +49,6 @@ std::string kind_to_string_localized(
 
 std::string string_patch_status(const zypp::PoolItem & pi);
 
-bool equalNVRA(const zypp::Resolvable & lhs, const zypp::Resolvable & rhs);
-
 /**
  * Creates a Url out of \a urls_s. If the url_s looks looks_like_url()
  * Url(url_s) is returned. Otherwise if \a url_s represends a valid path to

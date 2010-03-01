@@ -87,7 +87,7 @@ mark_for_install(Zypper & zypper,
     candidate = s->installedObj();
 
   if (s->installedObj() &&
-      equalNVRA(*s->installedObj().resolvable(), *candidate.resolvable()) &&
+      identical(s->installedObj(), candidate) &&
       !force)
   {
     // if it is broken install anyway, even if it is installed
@@ -316,7 +316,7 @@ mark_selectable(Zypper & zypper,
   bool theoneinstalled; // is the One installed ?
   if (!traits::isPseudoInstalled(s.kind()))
     theoneinstalled = !s.installedEmpty() &&
-      equalNVRA(*s.installedObj().resolvable(), *theone.resolvable());
+      identical(s.installedObj(), theone);
   else if (s.kind() == ResKind::patch)
     theoneinstalled = theone.isRelevant() && theone.isSatisfied();
   else

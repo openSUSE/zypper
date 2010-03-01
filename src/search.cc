@@ -560,7 +560,7 @@ void list_packages(Zypper & zypper)
       {
         if (notinst_only)
           continue;
-        row << (equalNVRA(*installed.resolvable(), *pi.resolvable()) ? "i" : "v");
+        row << (identical(installed, pi) ? "i" : "v");
       }
       else
       {
@@ -679,7 +679,7 @@ static void list_product_table(Zypper & zypper)
 
       if (installed)
       {
-        if (equalNVRA(*installed.resolvable(), *pi.resolvable()))
+        if (identical(installed, pi))
         {
           if (notinst_only)
             continue;

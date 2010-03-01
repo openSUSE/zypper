@@ -277,7 +277,7 @@ void report_licenses(Zypper & zypper)
 
       for_(it, s->availableBegin(), s->availableEnd())
       {
-        if (equalNVRA(*it->resolvable(), *inst.resolvable()))
+        if (identical(*it, inst))
         {
           inst_with_repo = *it;
           ++count_installed_repo;
