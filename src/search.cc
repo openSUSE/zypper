@@ -30,6 +30,17 @@ FillSearchTableSolvable::FillSearchTableSolvable(
   , _inst_notinst(inst_notinst)
   , _show_alias(Zypper::instance()->config().show_alias)
 {
+  Zypper & zypper = *Zypper::instance();
+  if (zypper.cOpts().find("repo") != zypper.cOpts().end())
+  {
+    list<RepoInfo> & repos = zypper.runtimeData().repos;
+    for_(it, repos.begin(), repos.end())
+    {
+      INT << "repo: " << it->alias() << endl;
+      _repos.insert(it->alias());
+    }
+  }
+
   TableHeader header;
 
   if (_gopts.is_rug_compatible)
@@ -120,7 +131,9 @@ bool FillSearchTableSolvable::operator()(const zypp::ui::Selectable::constPtr & 
         installed = false;
         for_(instit, s->installedBegin(), s->installedEnd())
         {
-          if (equalNVRA(*instit->resolvable(), *pi.resolvable()))
+          if (identical(*instit, pi) &&
+               (_repos.empty() ||
+                _repos.find(pi.resolvable()->repoInfo().alias())!=_repos.end()))
           {
             installed = true;
             break;
@@ -168,7 +181,11 @@ bool FillSearchTableSolvable::operator()(const zypp::ui::Selectable::constPtr & 
     *_table << row;
   }
 
+  // --uninstalled
   if (_inst_notinst == false)
+    return true;
+  // --repo => we only want the repo resolvables, not @System (bnc #467106)
+  if (!_repos.empty())
     return true;
 
   // now list the system packages
@@ -177,7 +194,7 @@ bool FillSearchTableSolvable::operator()(const zypp::ui::Selectable::constPtr & 
     // show installed objects only if there is no counterpart in repos
     bool has_counterpart = false;
     for_(ait, s->availableBegin(), s->availableEnd())
-      if (equalNVRA(*it->resolvable(), *ait->resolvable()))
+      if (identical(*it, *ait))
       {
         has_counterpart = true;
         break;

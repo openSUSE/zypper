@@ -23,6 +23,8 @@ struct FillSearchTableSolvable
   // the table used for output
   Table * _table;
   const GlobalOptions & _gopts;
+  /** Aliases of repos specified as --repo */
+  std::set<std::string> _repos;
   zypp::TriBool _inst_notinst;
   bool _show_alias;
 
