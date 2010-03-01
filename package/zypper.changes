@@ -1,4 +1,11 @@
 -------------------------------------------------------------------
+Mon Mar  1 15:11:40 CET 2010 - jkupec@suse.cz
+
+- Show installed packages only from specified repos when
+  'zypper [-i|-u] -r repo' is used (bnc#467106)
+- 1.2.21
+
+-------------------------------------------------------------------
 Thu Feb 25 22:18:48 CET 2010 - jkupec@suse.cz
 
 - Added a few forgotten strings for translation (bnc #581332)

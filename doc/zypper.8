@@ -1,4 +1,4 @@
-.TH "zypper" "8" "1.2.19" "zypper" "System Tools"
+.TH "zypper" "8" "1.2.21" "zypper" "System Tools"
 .SH "SYNTAX"
 .LP
 zypper [\fI\-\-global\-opts\fR] <\fBcommand\fR> [\fI\-\-command\-opts\fR] [\fBcommand-arguments\fR]
@@ -747,8 +747,18 @@ Upgrade the system using 'factory' and 'packman' repository:
 .TP
 \fBsearch\fR (\fBse\fR) [\fIoptions\fR] [\fBquerystring\fR] ...
 Search for packages matching given strings. * (any substring) and ? (any character) wildcards can also be used within search strings.
-.IP
-Results of search are printed in a table with following columns: S (status), Catalog, Type (type of package), Name, Version, Arch (architecture). Status column can contain following values: i - installed, v - another version installed, or an empty space for neither of the former cases.
+
+Results of search are printed in a table with following columns:
+S (status), Catalog, Type (type of package), Name, Version,
+Arch (architecture). The status column can contain the following
+values: i - installed, v - another version installed,
+or an empty space for neither of the former cases.
+
+The 'v' status is only shown if the version or the repository
+matters (\fI\-\-details\fR or \fI\-\-repo\fR is used), and the installed
+version differs from the one listed or is from a repository other
+than specified.
+
 .IP
 This command accepts the following options:
 
