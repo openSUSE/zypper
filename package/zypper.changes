@@ -1,4 +1,10 @@
 -------------------------------------------------------------------
+Tue Mar  2 11:46:40 CET 2010 - jkupec@suse.cz
+
+- Checking for running PackageKit. If it's running zypper offers
+  to suggest to it to quit (bnc#580513).
+
+-------------------------------------------------------------------
 Mon Mar  1 15:11:40 CET 2010 - jkupec@suse.cz
 
 - Show installed packages only from specified repos when
