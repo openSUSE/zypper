@@ -2440,12 +2440,43 @@ void Zypper::doCommand()
   try
   {
     const char *roh = getenv("ZYPP_READONLY_HACK");
+
     if (roh != NULL && roh[0] == '1')
       zypp_readonly_hack::IWantIt ();
+
     else if (   command() == ZypperCommand::LIST_REPOS
              || command() == ZypperCommand::LIST_SERVICES
              || command() == ZypperCommand::TARGET_OS )
       zypp_readonly_hack::IWantIt (); // #247001, #302152
+
+    // check for packagekit (bnc #580513)
+    else if (packagekit_running())
+    {
+      // ask user wheter to tell it to quit
+      out().info(_(
+        "PackageKit is blocking zypper. This happens if you have an"
+        " updater applet or other software management application using"
+        " PackageKit running."
+      ));
+
+      bool reply = read_bool_answer(
+          PROMPT_PACKAGEKIT_QUIT, _("Tell PackageKit to quit?"), false);
+
+      // tell it to quit
+      while (reply)
+      {
+        packagekit_suggest_quit();
+        ::sleep(1);
+        if (packagekit_running())
+        {
+          out().info(_("PackageKit is still running (probably busy)."));
+          reply = read_bool_answer(
+              PROMPT_PACKAGEKIT_QUIT, _("Try again?"), false);
+        }
+        else
+          reply = false;
+      }
+    }
 
     God = zypp::getZYpp();
   }

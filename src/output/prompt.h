@@ -46,7 +46,8 @@ typedef enum
   PROMPT_YN_REMOVE_LOCK                  = 19,
   PROMPT_PATCH_MESSAGE_CONTINUE          = 20,
   PROMPT_ARI_PATCH_SCRIPT_PROBLEM        = 21,
-  PROMPT_MEDIA_EJECT                     = 22
+  PROMPT_MEDIA_EJECT                     = 22,
+  PROMPT_PACKAGEKIT_QUIT                 = 23
 } PromptId;
 
 #endif /*PROMPT_H_*/

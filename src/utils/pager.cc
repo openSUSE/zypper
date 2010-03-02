@@ -17,7 +17,6 @@
 #include "zypp/TmpPath.h"
 #include "zypp/Pathname.h"
 #include "zypp/PathInfo.h"
-#include "zypp/ExternalProgram.h"
 
 #include "../main.h"
 #include "Zypper.h"

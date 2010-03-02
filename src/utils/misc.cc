@@ -17,6 +17,7 @@
 #include "zypp/media/MediaManager.h"
 #include "zypp/parser/xml/XmlEscape.h"
 #include "zypp/misc/CheckAccessDeleted.h"
+#include "zypp/ExternalProgram.h"
 
 #include "zypp/PoolItem.h"
 #include "zypp/Product.h"
@@ -419,6 +420,8 @@ void list_processes_using_deleted_files(Zypper & zypper)
   }
 }
 
+// ----------------------------------------------------------------------------
+
 DownloadMode get_download_option(Zypper & zypper)
 {
   DownloadMode mode;
@@ -479,4 +482,53 @@ DownloadMode get_download_option(Zypper & zypper)
   MIL << (mode == zconfig ? " (zconfig value)" : "") << endl;
 
   return mode;
+}
+
+// ----------------------------------------------------------------------------
+
+bool packagekit_running()
+{
+  bool result = false;
+  const char* argv[] =
+  {
+    "dbus-send",
+    "--system",
+    "--dest=org.freedesktop.DBus",
+    "--type=method_call",
+    "--print-reply",
+    "--reply-timeout=200",
+    "/",
+    "org.freedesktop.DBus.NameHasOwner",
+    "string:org.freedesktop.PackageKit",
+    NULL
+  };
+
+  ExternalProgram pkcheck(argv);
+
+  string line;
+  for (line = pkcheck.receiveLine(); !line.empty(); line = pkcheck.receiveLine())
+    if (line.find("boolean") != string::npos && line.find("true") != string::npos)
+      result = true;
+
+  pkcheck.close();
+  return result;
+}
+
+// ----------------------------------------------------------------------------
+
+void packagekit_suggest_quit()
+{
+  const char* argv[] =
+  {
+    "dbus-send",
+    "--system",
+    "--dest=org.freedesktop.PackageKit",
+    "--type=method_call",
+    "/org/freedesktop/PackageKit",
+    "org.freedesktop.PackageKit.SuggestDaemonQuit",
+    NULL
+  };
+
+  ExternalProgram pkcall(argv);
+  pkcall.close();
 }

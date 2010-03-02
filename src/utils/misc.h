@@ -128,4 +128,10 @@ void list_processes_using_deleted_files(Zypper & zypper);
  */
 zypp::DownloadMode get_download_option(Zypper & zypper);
 
+/** Check whether packagekit is running using a DBus call */
+bool packagekit_running();
+
+/** Send suggestion to quit to PackageKit via DBus */
+void packagekit_suggest_quit();
+
 #endif /*ZYPPER_UTILS_H*/
