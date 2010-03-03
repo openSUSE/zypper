@@ -1,4 +1,9 @@
 -------------------------------------------------------------------
+Wed Mar  3 16:51:39 CET 2010 - jkupec@suse.cz
+
+- Ignoring trailing slash when matching repos by URL (bnc #585082)
+
+-------------------------------------------------------------------
 Mon Mar  1 15:11:40 CET 2010 - jkupec@suse.cz
 
 - Show installed packages only from specified repos when
