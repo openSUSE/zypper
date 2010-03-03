@@ -1,4 +1,9 @@
 -------------------------------------------------------------------
+Wed Mar  3 16:50:07 CET 2010 - jkupec@suse.cz
+
+- Ignoring trailing slash when matching repos by URL (bnc #585082)
+
+-------------------------------------------------------------------
 Tue Mar  2 11:46:40 CET 2010 - jkupec@suse.cz
 
 - Checking for running PackageKit. If it's running zypper offers
