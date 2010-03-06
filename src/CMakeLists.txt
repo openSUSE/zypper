@@ -21,6 +21,7 @@ SET (zypper_HEADERS
   install.h
   update.h
   solve-commit.h
+  PackageArgs.h
   Summary.h
   callbacks/keyring.h
   callbacks/media.h
@@ -41,6 +42,7 @@ SET( zypper_SRCS
   install.cc
   update.cc
   solve-commit.cc
+  PackageArgs.cc
   Summary.cc
   callbacks/media.cc
   ${zypper_HEADERS}

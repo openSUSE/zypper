@@ -11,3 +11,5 @@ ADD_SUBDIRECTORY( utils )
 ADD_CUSTOM_TARGET( ctest
    COMMAND ctest -a
 )
+
+ADD_TESTS( PackageArgs )
