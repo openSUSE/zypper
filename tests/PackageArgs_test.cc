@@ -9,6 +9,7 @@
 #include "PackageArgs.h"
 
 using namespace std;
+using namespace zypp;
 
 BOOST_AUTO_TEST_CASE(preprocess_test)
 {
@@ -99,6 +100,45 @@ BOOST_AUTO_TEST_CASE(preprocess_test)
     BOOST_CHECK((sargs.find("git<=1.6.4.2") != sargs.end()));
     BOOST_CHECK((sargs.find("tree<=") != sargs.end()));
     BOOST_CHECK_EQUAL(sargs.size(), 5);
+  }
+
+  {
+    vector<string> rawargs;
+    rawargs.push_back("perl(Math::BigInt)");
+    rawargs.push_back("pattern:laptop");
+
+    PackageArgs args(rawargs);
+    set<string> sargs = args.asStringSet();
+
+    BOOST_CHECK((sargs.find("perl(Math::BigInt)") != sargs.end()));
+    BOOST_CHECK((sargs.find("pattern:laptop") != sargs.end()));
+    BOOST_CHECK_EQUAL(sargs.size(), 2);
+  }
+}
+
+BOOST_AUTO_TEST_CASE(argToCaps_test)
+{
+  {
+    vector<string> rawargs;
+    rawargs.push_back("zypper>=1.4.0");
+    rawargs.push_back("perl(Math::BigInt)");
+    rawargs.push_back("pattern:laptop");
+    rawargs.push_back("-irda");
+
+    PackageArgs args(rawargs);
+    const PackageArgs::CapRepoPairSet & caps = args.doCaps();
+    BOOST_CHECK(caps.find(PackageArgs::CapRepoPair(
+        Capability("", "zypper", ">=", "1.4.0"),"")) != caps.end());
+    BOOST_CHECK(caps.find(PackageArgs::CapRepoPair(
+        Capability("perl(Math::BigInt)"),"")) != caps.end());
+    BOOST_CHECK(caps.find(PackageArgs::CapRepoPair(
+        Capability("laptop", ResKind::pattern),"")) != caps.end());
+    BOOST_CHECK_EQUAL(caps.size(), 3);
+
+    const PackageArgs::CapRepoPairSet & dontcaps = args.dontCaps();
+    BOOST_CHECK(dontcaps.find(PackageArgs::CapRepoPair(
+        Capability("irda"),"")) != dontcaps.end());
+    BOOST_CHECK_EQUAL(dontcaps.size(), 1);
   }
 }
 

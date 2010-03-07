@@ -15,6 +15,7 @@
 #include <set>
 #include <vector>
 #include <string>
+#include <utility>
 
 #include "zypp/Capability.h"
 
@@ -22,22 +23,37 @@ class Zypper;
 
 class PackageArgs
 {
+public:
   typedef std::set<std::string> StringSet;
+  typedef std::pair<zypp::Capability, std::string> CapRepoPair;
+  typedef std::set<CapRepoPair> CapRepoPairSet;
 
 public:
-  PackageArgs();
-  PackageArgs(const std::vector<std::string> & args);
+  PackageArgs(const zypp::ResKind & kind = zypp::ResKind::package);
+  PackageArgs(
+      const std::vector<std::string> & args,
+      const zypp::ResKind & kind = zypp::ResKind::package);
   ~PackageArgs() {}
 
-  StringSet asStringSet() const
+  const StringSet & asStringSet() const
   { return _args; }
+  /** Capabilities we want to install/upgrade and don't want to remove, plus
+   * associated requested repo */
+  const CapRepoPairSet & doCaps() const
+  { return _do_caps; }
+  /** Capabilities we don't want to install/upgrade or want to remove. */
+  const CapRepoPairSet & dontCaps() const
+  { return _dont_caps; }
 
 protected:
   void preprocess(const std::vector<std::string> & args);
+  void argsToCaps(const zypp::ResKind & kind);
 
 private:
   Zypper & zypper;
   StringSet _args;
+  CapRepoPairSet _do_caps;
+  CapRepoPairSet _dont_caps;
 };
 
 
