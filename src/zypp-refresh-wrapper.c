@@ -10,6 +10,9 @@
 #include <unistd.h>
 /* perror */
 #include <stdio.h>
+/* getpwuid */
+#include <sys/types.h>
+#include <pwd.h>
 
 #define WRAPPER_ERROR 101
 
@@ -20,13 +23,16 @@ char *lang = NULL;
 
 int main (void)
 {
+  struct passwd *pwd_ent;
+
   /* see http://rechner.lst.de/~okir/blackhats/node41.html */
   while (1)
   {
     int fd = open("/dev/null", O_RDWR);
     if (fd < 0)
         return WRAPPER_ERROR;
-    if (fd > 2) {
+    if (fd > 2)
+    {
         close(fd);
         break;
     }
@@ -88,6 +94,16 @@ int main (void)
   /* set language */
   if (lang != NULL)
     setenv("LANG", lang, 1);
+
+  /* set HOME, so zypp::media::CredentialManager can find credentials in /root
+   * (bnc #585789). Other parts of zypp/er use HOME as well. */
+  pwd_ent = getpwuid(0);
+  if(pwd_ent == NULL)
+  {
+    fprintf(stderr,"No password entry for root found\n");
+    return WRAPPER_ERROR;
+  }
+  setenv("HOME", pwd_ent->pw_dir, 1);
 
   /* execute the real application */
   execl (app, app, (char *) NULL);
