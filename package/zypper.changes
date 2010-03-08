@@ -1,4 +1,10 @@
 -------------------------------------------------------------------
+Mon Mar  8 16:15:37 CET 2010 - jkupec@suse.cz
+
+- zypp-refresh-wrapper: set HOME so zypp/er credentials under
+  /root can be found (bnc #585789)
+
+-------------------------------------------------------------------
 Wed Mar  3 16:51:39 CET 2010 - jkupec@suse.cz
 
 - Ignoring trailing slash when matching repos by URL (bnc #585082)
