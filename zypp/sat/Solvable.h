@@ -100,7 +100,7 @@ namespace zypp
         std::string lookupStrAttribute( const SolvAttr & attr ) const;
         /** \overload Trying to look up a translated string attribute.
          *
-         * Returns the translation for \c lang_r (\b no fallback locales).
+         * Returns the translation for \c lang_r.
          *
          * Passing an empty \ref Locale will return the string for the
          * current default locale (\see \ref ZConfig::TextLocale),

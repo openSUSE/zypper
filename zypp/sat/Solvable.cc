@@ -176,7 +176,11 @@ namespace zypp
       }
       else
       {
-        s = ::solvable_lookup_str_lang( _solvable, attr.id(), lang_r.code().c_str() );
+	for ( Locale l( lang_r ); l != Locale::noCode; l = l.fallback() )
+	  if ( (s = ::solvable_lookup_str_lang( _solvable, attr.id(), l.code().c_str(), 0 )) )
+	    return s;
+	  // here: no matching locale, so use default
+	  s = ::solvable_lookup_str_lang( _solvable, attr.id(), 0, 0 );
       }
       return s ? s : std::string();
    }
