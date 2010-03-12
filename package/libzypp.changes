@@ -1,4 +1,10 @@
 -------------------------------------------------------------------
+Fri Mar 12 14:46:25 CET 2010 - ma@suse.de
+
+- Fix handling of symlinked packages in package cache. (bnc #585409)
+- version 6.30.5 (19)
+
+-------------------------------------------------------------------
 Tue Feb 23 19:05:04 CET 2010 - jkupec@suse.cz
 
 - Avoiding use of 'guest' if 'credentials' is used when moutning
