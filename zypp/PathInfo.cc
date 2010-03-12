@@ -769,6 +769,7 @@ namespace zypp
 
       const char *const argv[] = {
         "/bin/cp",
+        "--remove-destination",
         "--",
         file.asString().c_str(),
         dest.asString().c_str(),
@@ -818,6 +819,15 @@ namespace zypp
     int hardlinkCopy( const Pathname & oldpath, const Pathname & newpath )
     {
       MIL << "hardlinkCopy " << oldpath << " -> " << newpath;
+
+      PathInfo oldpi( oldpath, PathInfo::LSTAT );
+      if ( oldpi.isLink() )
+      {
+	// dont hardlink symliknks!
+	return copy( oldpath, newpath );
+      }
+
+      // Here: no symlink
       if ( ::link( oldpath.asString().c_str(), newpath.asString().c_str() ) == -1 )
       {
         switch ( errno )
