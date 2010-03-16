@@ -687,6 +687,85 @@ mark_patch_updates( Zypper & zypper, bool skip_interactive )
 
 // ----------------------------------------------------------------------------
 
+// report back when specified selectable can't be updated (bnc #522223)
+// TODO make this function return special Status object that can be both tested
+// and that can report itself as string or xml or terse
+void selectable_update_report(Zypper & zypper, const ui::Selectable & s)
+{
+  PoolItem theone = s.updateCandidateObj();
+  DBG << "best:      " << theone    << endl;
+  if (!theone)
+    theone = s.installedObj();
+
+  PoolItem highest = s.highestAvailableVersionObj();
+  PoolItem installed = s.installedObj();
+  DBG << "installed: " << installed << endl;
+  DBG << "highest:   " << highest   << endl;
+
+  // no installable update candidate
+  if (identical(installed, theone))
+  {
+    // no update candidate at all
+    if (identical(installed, highest))
+    {
+      DBG << "the One (" << theone << ") is installed, skipping." << endl;
+      zypper.out().info(str::form(
+          _("No update candidate for '%s'."), s.name().c_str()));
+    }
+    // update candidate locked
+    else if (s.status() == ui::S_Protected)
+    {
+      DBG << "Newer object exists, but is locked: " << highest << endl;
+
+      ostringstream cmdhint;
+      cmdhint << "zypper removelock " << highest.resolvable()->name();
+
+      zypper.out().info(str::form(
+        _("Skipping '%s', because it is locked. Use '%s' to unlock it."),
+        s.name().c_str(), cmdhint.str().c_str()));
+    }
+    // update candidate has different vendor
+    else if (highest->vendor() != installed->vendor())
+    {
+      DBG << "Newer object with different vendor exists: " << highest << endl;
+
+      ostringstream cmdhint;
+      cmdhint << "zypper install " << highest->name()
+          << "-" << highest->edition() << "." << highest->arch();
+
+      zypper.out().info(str::form(
+        _("Skipping '%s', because the update candidate has different"
+          " vendor. Use '%s' to install this candidate."),
+          s.name().c_str(), cmdhint.str().c_str()));
+    }
+    // update candidate is from low-priority (higher priority number) repo
+    else if (highest->repoInfo().priority() > installed->repoInfo().priority())
+    {
+      DBG << "Newer object exists in lower-priority repo: " << highest << endl;
+
+      ostringstream cmdhint;
+      cmdhint << "zypper install " << highest->name()
+          << "-" << highest->edition() << "." << highest->arch();
+
+      zypper.out().info(str::form(
+        _("Skipping '%s', because the update candidate is in repository with"
+          " lower priority. Use '%s' to install this candidate."),
+          s.name().c_str(), cmdhint.str().c_str()));
+    }
+  }
+  // got update candidate
+  else
+  {
+    zypper.out().info(
+        str::form(_("Selecting '%s' for update."), s.name().c_str()),
+        Out::HIGH);
+    Capability c(s.name(), Rel::GT, installed->edition(), s.kind());
+    DBG << s << " update: adding requirement " << c << endl;
+  }
+}
+
+// ----------------------------------------------------------------------------
+
 void mark_updates(Zypper & zypper, const ResKindSet & kinds, bool skip_interactive, bool best_effort )
 {
   MIL << endl;
@@ -752,13 +831,7 @@ void mark_updates(Zypper & zypper, const ResKindSet & kinds, bool skip_interacti
             if (!theone)
               theone = s->installedObj();
 
-            if (identical(s->installedObj(), theone))
-            {
-              DBG << "the One (" << theone << ") is installed, skipping." << endl;
-              zypper.out().info(str::form(
-                  _("No update candidate for '%s'."), s->name().c_str()));
-            }
-            else
+            if (!identical(s->installedObj(), theone))
             {
               //s->setCandidate(theone); ?
               //s->setStatus(ui::S_Update); ?
@@ -766,6 +839,7 @@ void mark_updates(Zypper & zypper, const ResKindSet & kinds, bool skip_interacti
               solver->addRequire(c);
               DBG << *s << " update: adding requirement " << c << endl;
             }
+            selectable_update_report(zypper, *s);
           }
       }
     }
