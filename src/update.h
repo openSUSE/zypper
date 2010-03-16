@@ -47,3 +47,5 @@ void mark_updates(Zypper & zypper,
  * in --cve or --bugzilla or --bz.
  */
 void mark_updates_by_issue(Zypper & zypper);
+
+void selectable_update_report(Zypper & zypper, const zypp::ui::Selectable & s);
