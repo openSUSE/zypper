@@ -14,6 +14,7 @@
 
 #include "zypp/base/Logger.h"
 #include "zypp/base/String.h"
+#include "zypp/base/Easy.h"
 #include "zypp/media/MediaManager.h"
 #include "zypp/parser/xml/XmlEscape.h"
 #include "zypp/misc/CheckAccessDeleted.h"
@@ -106,6 +107,42 @@ bool is_changeable_media(const zypp::Url & url)
   }
 
   return is_cd;
+}
+
+// ----------------------------------------------------------------------------
+
+ResKind string_to_kind (const string & skind)
+{
+  ResObject::Kind empty;
+  string lskind = str::toLower (skind);
+  if (lskind == "package")
+    return ResKind::package;
+  if (lskind == "pattern")
+    return ResKind::pattern;
+  if (lskind == "product")
+    return ResKind::product;
+  if (lskind == "patch")
+    return ResKind::patch;
+  if (lskind == "srcpackage")
+    return ResKind::srcpackage;
+  // not recognized
+  return empty;
+}
+
+// ----------------------------------------------------------------------------
+
+ResKindSet kindset_from(const std::list<std::string> & kindstrings)
+{
+  ResKind kind;
+  ResKindSet kinds;
+  for_(it, kindstrings.begin(), kindstrings.end())
+  {
+    kind = string_to_kind(*it);
+    if (kind == ResKind::nokind)
+      continue;
+    kinds.insert(kind);
+  }
+  return kinds;
 }
 
 // ----------------------------------------------------------------------------

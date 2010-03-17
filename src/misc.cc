@@ -36,27 +36,6 @@ using namespace boost;
 
 extern ZYpp::Ptr God;
 
-// converts a user-supplied kind to a zypp kind object
-// returns an empty one if not recognized
-ResKind string_to_kind (const string &skind)
-{
-  ResObject::Kind empty;
-  string lskind = str::toLower (skind);
-  if (lskind == "package")
-    return ResKind::package;
-  if (lskind == "pattern")
-    return ResKind::pattern;
-  if (lskind == "product")
-    return ResKind::product;
-  if (lskind == "patch")
-    return ResKind::patch;
-  if (lskind == "srcpackage")
-    return ResKind::srcpackage;
-  // not recognized
-  return empty;
-}
-
-// ----------------------------------------------------------------------------
 
 void remove_selections(Zypper & zypper)
 {
