@@ -1,4 +1,13 @@
 -------------------------------------------------------------------
+Wed Mar 17 16:20:25 CET 2010 - jkupec@suse.cz
+
+- Reporting why specified selectable can't be updated
+  in 'zypper in packages' or 'zypper up packages' (bnc #522223)
+  In case of 'zypper up' the summary also shows a list of packages
+  that have update candidates, but will not get upgraded.
+- 1.4.0
+
+-------------------------------------------------------------------
 Wed Mar  3 16:50:07 CET 2010 - jkupec@suse.cz
 
 - Ignoring trailing slash when matching repos by URL (bnc #585082)
