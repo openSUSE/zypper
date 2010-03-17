@@ -380,6 +380,11 @@ mark_selectable(Zypper & zypper,
       DBG << "the One (" << theone << ") is already installed, skipping." << endl;
       zypper.out().info(str::form(
           _("'%s' is already installed."), s.name().c_str()));
+
+      // report why an update was not found for the package (bnc #522223)
+      if (!traits::isPseudoInstalled(s.kind()))
+        selectable_update_report(zypper, s);
+
       return;
     }
 

@@ -721,7 +721,8 @@ void selectable_update_report(Zypper & zypper, const ui::Selectable & s)
       cmdhint << "zypper removelock " << highest.resolvable()->name();
 
       zypper.out().info(str::form(
-        _("Skipping '%s', because it is locked. Use '%s' to unlock it."),
+        _("There is an update candidate for '%s', but it is locked."
+          " Use '%s' to unlock it."),
         s.name().c_str(), cmdhint.str().c_str()));
     }
     // update candidate has different vendor
@@ -734,7 +735,7 @@ void selectable_update_report(Zypper & zypper, const ui::Selectable & s)
           << "-" << highest->edition() << "." << highest->arch();
 
       zypper.out().info(str::form(
-        _("Skipping '%s', because the update candidate has different"
+        _("There is an update candidate for '%s', but it is from different"
           " vendor. Use '%s' to install this candidate."),
           s.name().c_str(), cmdhint.str().c_str()));
     }
@@ -748,8 +749,8 @@ void selectable_update_report(Zypper & zypper, const ui::Selectable & s)
           << "-" << highest->edition() << "." << highest->arch();
 
       zypper.out().info(str::form(
-        _("Skipping '%s', because the update candidate is in repository with"
-          " lower priority. Use '%s' to install this candidate."),
+        _("There is an update candidate for '%s', but it comes from repository"
+           " with lower priority. Use '%s' to install this candidate."),
           s.name().c_str(), cmdhint.str().c_str()));
     }
   }
