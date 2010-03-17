@@ -44,6 +44,12 @@ unsigned get_screen_width();
 
 bool is_changeable_media(const zypp::Url & url);
 
+/** Converts user-supplied kind to zypp::ResKind object.
+ * Returns an empty one if not recognized. */
+zypp::ResKind string_to_kind(const std::string & skind);
+
+ResKindSet kindset_from(const std::list<std::string> & kindstrings);
+
 std::string kind_to_string_localized(
     const zypp::ResKind & kind, unsigned long count);
 

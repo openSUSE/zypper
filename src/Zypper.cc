@@ -43,6 +43,7 @@
 #include "utils/misc.h"
 #include "utils/messages.h"
 #include "utils/getopt.h"
+#include "utils/misc.h"
 
 #include "repos.h"
 #include "install.h"

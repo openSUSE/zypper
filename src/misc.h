@@ -8,8 +8,6 @@
 #ifndef ZMART_MISC_H
 #define ZMART_MISC_H
 
-#include <string>
-
 #include "Zypper.h"
 
 
@@ -26,8 +24,6 @@ bool confirm_licenses(Zypper & zypper);
  * Prints a report about licenses and EULAs of installed packages to stdout.
  */
 void report_licenses(Zypper & zypper);
-
-zypp::ResKind string_to_kind (const std::string & skind);
 
 /**
  * Reset all selections made by mark_* methods. Needed in the shell to reset
