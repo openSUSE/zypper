@@ -42,6 +42,7 @@ public:
     SHOW_SUGGESTED          = 0x0100,
     SHOW_RECOMMENDED        = 0x0200,
     SHOW_UNSUPPORTED        = 0x0400,
+    SHOW_NOT_UPDATED        = 0x0800,
 
     SHOW_ALL                = 0xffff
   };
@@ -79,6 +80,7 @@ public:
   void writeChangedVendor(std::ostream & out);
   void writeUnsupported(std::ostream & out);
   void writeNeedACC(std::ostream & out);
+  void writeNotUpdated(std::ostream & out);
   void writePackageCounts(std::ostream & out);
   void writeDownloadAndInstalledSizeSummary(std::ostream & out);
 
@@ -133,6 +135,10 @@ private:
   KindToResPairSet toremove;
   KindToResPairSet tochangearch;
   KindToResPairSet tochangevendor;
+  /** Packages that have update candidate, but won't get updated.
+   * In 'zypper up' this is because of vendor, repo priority, dependiencies,
+   * etc; but the list can be used also generally. */
+  KindToResPairSet notupdated;
   /** objects from previous lists that are marked as not supported */
   KindToResPairSet unsupported;
   /** objects from previous lists that need additional customer contract */

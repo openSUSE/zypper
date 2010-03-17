@@ -537,6 +537,19 @@ void solve_and_commit (Zypper & zypper)
 
     Summary summary(God->pool());
 
+    // show not updated packages if 'zypper up' (-t package or -t product)
+    ResKindSet kinds;
+    if (zypper.cOpts().find("type") != zypper.cOpts().end())
+      kinds = kindset_from(zypper.cOpts().find("type")->second);
+    if (zypper.command() == ZypperCommand::UPDATE
+        && zypper.arguments().empty()
+        && (kinds.empty()
+            || kinds.find(ResKind::package) != kinds.end()
+            || kinds.find(ResKind::product) != kinds.end()))
+    {
+      summary.setViewOption(Summary::SHOW_NOT_UPDATED);
+    }
+
     // if running on SUSE Linux Enterprise, report unsupported packages
     Product::constPtr platform = God->target()->baseProduct();
     if (platform && platform->name().find("SUSE_SLE") != string::npos)

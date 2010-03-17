@@ -11,6 +11,7 @@
 #include <boost/format.hpp>
 
 #include "zypp/base/Logger.h"
+#include "zypp/base/Measure.h"
 #include "zypp/ResPool.h"
 #include "zypp/Patch.h"
 #include "zypp/Package.h"
@@ -86,6 +87,8 @@ void Summary::readPool(const zypp::ResPool & pool)
   MIL << "Pool contains " << pool.size() << " items." << std::endl;
   DBG << "Install summary:" << endl;
 
+  debug::Measure m;
+
   for (ResPool::const_iterator it = pool.begin(); it != pool.end(); ++it)
   {
     if (it->status().isToBeInstalled() || it->status().isToBeUninstalled())
@@ -120,6 +123,8 @@ void Summary::readPool(const zypp::ResPool & pool)
   _inst_pkg_total =
     to_be_installed[ResKind::package].size() +
     to_be_installed[ResKind::srcpackage].size();
+
+  m.elapsed();
 
 /* This will work again after commit refactoring: all the srcpackages will be in the pool
 
@@ -206,6 +211,8 @@ void Summary::readPool(const zypp::ResPool & pool)
     }
   }
 
+  m.elapsed();
+
   //bool toremove_by_solver = false;
   for (KindToResObjectSet::const_iterator it = to_be_removed.begin();
       it != to_be_removed.end(); ++it)
@@ -222,6 +229,41 @@ void Summary::readPool(const zypp::ResPool & pool)
       toremove[it->first].insert(ResPair(nullres, *resit));
       _inst_size_change -= (*resit)->installSize();
     }
+
+  m.elapsed();
+
+  // *** notupdated ***
+
+  // get all available updates, no matter if they are installable or break
+  // some current policy
+  KindToResPairSet candidates;
+  ResKindSet kinds;
+  kinds.insert(ResKind::package);
+  kinds.insert(ResKind::product);
+  for_(kit, kinds.begin(), kinds.end())
+    for_(it, pool.proxy().byKindBegin(*kit), pool.proxy().byKindEnd(*kit))
+    {
+      if (!(*it)->hasInstalledObj())
+        continue;
+
+      ResObject::constPtr candidate =
+        (*it)->highestAvailableVersionObj().resolvable();
+      if (!candidate)
+        continue;
+      if (compareByNVRA((*it)->installedObj().resolvable(), candidate) >= 0)
+        continue;
+
+      candidates[*kit].insert(ResPair(nullres, candidate));
+    }
+  // compare available updates with the list of packages to be upgraded
+  for_(it, toupgrade.begin(), toupgrade.end())
+    set_difference(
+        candidates[it->first].begin(), candidates[it->first].end(),
+        it->second.begin(), it->second.end(),
+        inserter(notupdated[it->first], notupdated[it->first].begin()),
+        Summary::ResPairNameCompare());
+
+  m.stop();
 }
 
 // --------------------------------------------------------------------------
@@ -854,6 +896,28 @@ void Summary::writeNeedACC(ostream & out)
   }
 }
 
+void Summary::writeNotUpdated(std::ostream & out)
+{
+  for_(it, notupdated.begin(), notupdated.end())
+  {
+    string label;
+    // we only look at update candidates for packages and products
+    if (it->first == ResKind::package)
+      label = _PL(
+        "The following package update will NOT be installed:",
+        "The following package updates will NOT be installed:",
+        it->second.size());
+    else if (it->first == ResKind::product)
+      label = _PL(
+        "The following product update will NOT be installed:",
+        "The following product updates will NOT be installed:",
+        it->second.size());
+    out << endl << label << endl;
+
+    writeResolvableList(out, it->second);
+  }
+}
+
 // --------------------------------------------------------------------------
 
 void Summary::writeDownloadAndInstalledSizeSummary(ostream & out)
@@ -1015,6 +1079,8 @@ void Summary::dumpTo(ostream & out)
 
   _wrap_width = get_screen_width();
 
+  if (_viewop & SHOW_NOT_UPDATED)
+    writeNotUpdated(out);
   writeNewlyInstalled(out);
   writeRemoved(out);
   writeUpgraded(out);
