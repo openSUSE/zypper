@@ -616,8 +616,12 @@ static void add_product_table_row( Zypper & zypper, TableRow & tr,  const Produc
   // repository
   if (!zypper.globalOpts().is_rug_compatible)
     tr << product->repoInfo().name();
-  // name
-  tr << product->name () << product->edition().asString();
+  // internal (unix) name
+  tr << product->name ();
+  // full name (bnc #589333)
+  tr << product->summary();
+  // version
+  tr << product->edition().asString();
   if (zypper.globalOpts().is_rug_compatible)
     // rug 'Category'
     tr << (product->isTargetDistribution() ? "base" : "");
@@ -632,7 +636,7 @@ static void add_product_table_row( Zypper & zypper, TableRow & tr,  const Produc
 
 static void list_product_table(Zypper & zypper)
 {
-  MIL << "Going to list packages." << std::endl;
+  MIL << "Going to list products." << std::endl;
 
   Table tbl;
   TableHeader th;
@@ -641,6 +645,9 @@ static void list_product_table(Zypper & zypper)
   th << _("S");
   if (!zypper.globalOpts().is_rug_compatible)
     th << _("Repository");
+  // translators: used in products. Internal Name is the unix name of the
+  // product whereas simply Name is the official full name of the product.
+  th << _("Internal Name");
   th << _("Name");
   th << _("Version");
   if (zypper.globalOpts().is_rug_compatible)
