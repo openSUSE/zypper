@@ -1,4 +1,10 @@
 -------------------------------------------------------------------
+Thu Mar 18 19:37:24 CET 2010 - jkupec@suse.cz
+
+- Showing full product name in summary, license text, and products
+  table (bnc #589333)
+
+-------------------------------------------------------------------
 Wed Mar 17 16:20:25 CET 2010 - jkupec@suse.cz
 
 - Reporting why specified selectable can't be updated
