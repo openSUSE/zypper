@@ -23,41 +23,41 @@ namespace zypp
       /**
        * The support for this package is unknown
        */
-      VendorSupportUnknown     = 0x0000,
+      VendorSupportUnknown     = 0,
       /**
        * The package is known to be unsupported by the vendor
        */
-      VendorSupportUnsupported = 0x0001,
+      VendorSupportUnsupported = (1<<0),
       /**
        * Additional Customer Contract necessary
        */
-      VendorSupportACC         = 0x0002,
+      VendorSupportACC         = (1<<1),
       /**
-       * Problem determination, which means technical support 
-       * designed to provide compatibility information, 
+       * Problem determination, which means technical support
+       * designed to provide compatibility information,
        * installation assistance, usage support, on-going maintenance
-       * and basic troubleshooting. Level 1 Support is not intended to 
+       * and basic troubleshooting. Level 1 Support is not intended to
        * correct product defect errors.
        *
        * May have different semantics for different organizations.
        */
-      VendorSupportLevel1      = 0x0004,
+      VendorSupportLevel1      = (1<<2),
       /**
-       * Problem isolation, which means technical support designed 
-       * to duplicate customer problems, isolate problem area and provide 
+       * Problem isolation, which means technical support designed
+       * to duplicate customer problems, isolate problem area and provide
        * resolution for problems not resolved by Level 1 Support.
        *
        * May have different semantics for different organizations.
-       */       
-      VendorSupportLevel2      = 0x0008,
+       */
+      VendorSupportLevel2      = (1<<3),
       /**
        * Problem resolution, which means technical support designed
        * to resolve complex problems by engaging engineering in resolution
        * of product defects which have been identified by Level 2 Support.
        *
        * May have different semantics for different organizations.
-       */              
-      VendorSupportLevel3      = 0x0016
+       */
+      VendorSupportLevel3      = (1<<4)
     };
 
     // Make a flag set for this
@@ -84,4 +84,4 @@ namespace zypp
 
 }
 
-#endif 
+#endif
