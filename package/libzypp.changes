@@ -1,4 +1,10 @@
 -------------------------------------------------------------------
+Thu Mar 18 17:17:02 CET 2010 - ma@suse.de
+
+- Fix broken bit values in enum VendorSupportOption (bnc#589331)
+- version 6.31.0 (31)
+
+-------------------------------------------------------------------
 Fri Mar 12 14:46:25 CET 2010 - ma@suse.de
 
 - Fix handling of symlinked packages in package cache. (bnc #585409)
