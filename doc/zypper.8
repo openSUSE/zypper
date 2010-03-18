@@ -531,7 +531,9 @@ Update installed packages with newer versions, where possible.
 
 This command will not update packages which would require change of package
 vendor unless the vendor is specified in /etc/zypp/vendors.d, or which would
-require manual resolution of problems with dependencies.
+require manual resolution of problems with dependencies. Such non-installable
+updates will then be listed in separate section of the summary as
+"The following package updates will NOT be installed:".
 
 To update individual packages, specify one or more package names. You can
 use the '*' and '?' wildcard characters in the package names to specify
