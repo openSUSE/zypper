@@ -83,6 +83,14 @@ void remove_selections(Zypper & zypper)
 
 // ----------------------------------------------------------------------------
 
+static string get_display_name(const ResObject::constPtr & obj)
+{
+  // in most cases we want to display full product name (bnc #589333)
+  if (obj->kind() == ResKind::product)
+    return obj->summary();
+  return obj->name();
+}
+
 /* debugging
 static
 ostream& operator << (ostream & stm, ios::iostate state)
@@ -136,9 +144,10 @@ bool confirm_licenses(Zypper & zypper)
       if (license_auto_agree)
       {
       	zypper.out().info(boost::str(
-            // TranslatorExplanation The first %s is name of the resolvable, the second is its kind (e.g. 'zypper package')
+            // translators: the first %s is name of the resolvable,
+      	    // the second is its kind (e.g. 'zypper package')
       	    format(_("Automatically agreeing with %s %s license."))
-            % it->resolvable()->name()
+            % get_display_name(it->resolvable())
             % kind_to_string_localized(it->resolvable()->kind(),1)));
 
         MIL << format("Automatically agreeing with %s %s license.")
@@ -160,7 +169,7 @@ bool confirm_licenses(Zypper & zypper)
           // is " (package-type)" if other than "package" (patch/product/pattern)
           _("In order to install '%s'%s, you must agree"
             " to terms of the following license agreement:"),
-            it->resolvable()->name().c_str(), kindstr.c_str());
+            get_display_name(it->resolvable()).c_str(), kindstr.c_str());
       s << endl << endl;
 
       // license text
@@ -202,7 +211,7 @@ bool confirm_licenses(Zypper & zypper)
               // translators: e.g. "... with flash package license."
               //! \todo fix this to allow proper translation
               _("Aborting installation due to user disagreement with %s %s license."))
-                % it->resolvable()->name()
+                % get_display_name(it->resolvable())
                 % kind_to_string_localized(it->resolvable()->kind(), 1)),
               Out::QUIET);
             MIL << "License(s) NOT confirmed (interactive)" << endl;

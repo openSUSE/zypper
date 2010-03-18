@@ -329,7 +329,9 @@ void Summary::writeResolvableList(ostream & out, const ResPairSet & resolvables)
     for (ResPairSet::const_iterator resit = resolvables.begin();
         resit != resolvables.end(); ++resit)
         // name
-      s << resit->second->name()
+      s << (resit->second->kind() == ResKind::product ?
+              resit->second->summary() :
+              resit->second->name())
         // version (if multiple versions are present)
         << (dupes.find(resit->second->name()) != dupes.end() ?
              string("-") + resit->second->edition().asString() :
@@ -348,7 +350,9 @@ void Summary::writeResolvableList(ostream & out, const ResPairSet & resolvables)
     TableRow tr;
 
     // name
-    tr << resit->second->name() +
+    tr << (resit->second->kind() == ResKind::product ?
+        resit->second->summary() :
+        resit->second->name()) +
       // version (if multiple versions are present)
       (dupes.find(resit->second->name()) != dupes.end() && !(_viewop & SHOW_VERSION) ?
         string("-") + resit->second->edition().asString() :
