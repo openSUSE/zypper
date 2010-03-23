@@ -1,4 +1,9 @@
 -------------------------------------------------------------------
+Tue Mar 23 11:14:14 CET 2010 - jkupec@suse.cz
+
+- Fixed 'lp --issues' and 'patch --cve #' (bnc #589640)
+
+-------------------------------------------------------------------
 Thu Mar 18 16:04:02 CET 2010 - jkupec@suse.cz
 
 - Showing full product name in installation summary and license
