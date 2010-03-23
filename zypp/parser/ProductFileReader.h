@@ -54,6 +54,9 @@ namespace zypp
         Edition     edition() const;
         Arch        arch()    const;
 
+	std::string shortName()	const;
+	std::string summary()	const;
+
       public:
         std::string productline()     const;
         std::string registerTarget()  const;

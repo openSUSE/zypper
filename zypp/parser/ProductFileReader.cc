@@ -70,6 +70,9 @@ namespace zypp
       Edition     _edition;
       Arch        _arch;
 
+      std::string _shortName;
+      std::string _summary;
+
       std::string _productline;
       std::string _registerTarget;
       std::string _registerRelease;
@@ -87,6 +90,9 @@ namespace zypp
     IdString    ProductFileData::name()    const { return _pimpl->_name; }
     Edition     ProductFileData::edition() const { return _pimpl->_edition; }
     Arch        ProductFileData::arch()    const { return _pimpl->_arch; }
+
+    std::string ProductFileData::shortName()	const { return _pimpl->_shortName; }
+    std::string ProductFileData::summary()	const { return _pimpl->_summary; }
 
     std::string ProductFileData::productline()     const { return _pimpl->_productline; }
     std::string ProductFileData::registerTarget()  const { return _pimpl->_registerTarget; }
@@ -139,6 +145,8 @@ namespace zypp
             ("version",       MANDTAORY,  xml::parseDefAssign( _version ) )
             ("release",       MANDTAORY,  xml::parseDefAssign( _release ) )
             ("arch",          MANDTAORY,  xml::parseDefAssign( _pdata._arch ) )
+            ("shortsummary",  OPTIONAL,   xml::parseDefAssign( _pdata._shortName ) )
+            ("summary",       OPTIONAL,   xml::parseDefAssign( _pdata._summary ) )
             ("productline",   OPTIONAL,   xml::parseDefAssign( _pdata._productline ) )
             ("register",      OPTIONAL)
             ("updaterepokey", OPTIONAL,   xml::parseDefAssign( _pdata._updaterepokey ) )
