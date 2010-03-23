@@ -4139,8 +4139,10 @@ void Zypper::doCommand()
 
     Locks::instance().save();
 
-    //! \todo localize
-    out().info(str::form("removed locks: %lu", (long unsigned)(start - Locks::instance().size())));
+    Locks::size_type diff = start - Locks::instance().size();
+    out().info(str::form(
+        _PL("Removed %lu lock.","Removed %lu locks.", diff),
+        (long unsigned) diff));
 
     break;
   }
