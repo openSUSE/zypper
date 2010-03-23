@@ -910,6 +910,7 @@ void list_patches_by_issue(Zypper & zypper)
   string issuesstr;
   for_(issue, issues.begin(), issues.end())
   {
+    DBG << "querying: " << issue->first << " = " << issue->second << endl;
     PoolQuery q;
     q.setMatchSubstring();
     q.setCaseSensitive(false);
@@ -938,21 +939,21 @@ void list_patches_by_issue(Zypper & zypper)
       issuesstr = issue->second;
     }
 
-    cout << "*****" << endl << q << endl << "*****" << endl;
-
     for_(it, q.begin(), q.end())
     {
       PoolItem pi(*it);
       if (only_needed && !pi.status().isBroken())
         continue;
+
       Patch::constPtr patch = asKind<Patch>(pi.resolvable());
+      DBG << "got: " << patch << endl;
 
       // Print details about each match in that solvable:
       for_( d, it.matchesBegin(), it.matchesEnd() )
       {
         string itype =
           d->subFind(sat::SolvAttr::updateReferenceType).asString();
-        if (itype != issue->first)
+        if (issue->first != "issues" && itype != issue->first)
           continue;
 
         TableRow tr;
@@ -1064,6 +1065,8 @@ void mark_updates_by_issue(Zypper & zypper)
       if (!PoolItem(*sit).status().isBroken()) // not needed
         continue;
 
+      DBG << "got: " << *sit << endl;
+
       for_( d, sit.matchesBegin(), sit.matchesEnd() )
       {
         if (issue->first == "b" &&
@@ -1076,8 +1079,8 @@ void mark_updates_by_issue(Zypper & zypper)
             DBG << str::form("fix for bugzilla issue number %s was not marked.",
                 issue->second.c_str());
         }
-        else if (issue->first == "b" &&
-            d->subFind(sat::SolvAttr::updateReferenceType).asString() == "bugzilla")
+        else if (issue->first == "c" &&
+            d->subFind(sat::SolvAttr::updateReferenceType).asString() == "cve")
         {
           if (mark_patch_update(*God->pool().proxy().lookup(*sit),
                 zypper.cOpts().count("skip-interactive"), true))
