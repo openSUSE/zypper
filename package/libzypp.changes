@@ -1,4 +1,11 @@
 -------------------------------------------------------------------
+Tue Mar 23 16:55:56 CET 2010 - ma@suse.de
+
+- Add static Target::distributionLabel to return the baseproducts 
+  shortName and summary. Mainlu used for the bootloader menu. (bnc #586303) 
+- version 6.31.1 (31)
+
+-------------------------------------------------------------------
 Thu Mar 18 17:17:02 CET 2010 - ma@suse.de
 
 - Fix broken bit values in enum VendorSupportOption (bnc#589331)
