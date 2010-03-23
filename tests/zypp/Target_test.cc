@@ -22,7 +22,7 @@ BOOST_AUTO_TEST_CASE(target_test)
 {
 
     filesystem::TmpDir tmp;
-    
+
     ZYpp::Ptr z = getZYpp();
 
     // create the products.d directory
@@ -31,9 +31,9 @@ BOOST_AUTO_TEST_CASE(target_test)
 
     // make it the base product
     BOOST_CHECK( symlink(tmp.path() / "/etc/products.d/product.prod", tmp.path() / "/etc/products.d/baseproduct" ) == 0 );
-    
+
     z->initializeTarget( tmp.path() );
-    
+
     BOOST_CHECK( ! z->target()->anonymousUniqueId().empty() );
     BOOST_CHECK( PathInfo( tmp.path() / "/var/lib/zypp/AnonymousUniqueId").isExist() );
     BOOST_CHECK( PathInfo( tmp.path() / "/var/lib/zypp/AnonymousUniqueId").size() > 0 );
@@ -43,4 +43,7 @@ BOOST_AUTO_TEST_CASE(target_test)
     BOOST_CHECK_EQUAL( z->target()->targetDistributionRelease(), "special_edition");
     BOOST_CHECK_EQUAL( z->target()->distributionVersion(), "10");
 
+    Target::DistributionLabel dlabel( z->target()->distributionLabel() );
+    BOOST_CHECK_EQUAL( dlabel.summary, "A cool distribution" );
+    BOOST_CHECK_EQUAL( dlabel.shortName, "" );
 }
