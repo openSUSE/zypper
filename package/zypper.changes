@@ -1,4 +1,9 @@
 -------------------------------------------------------------------
+Tue Mar 23 17:00:21 CET 2010 - jkupec@suse.cz
+
+- Fixed "removed locks:" message not translated (bnc #581332)
+
+-------------------------------------------------------------------
 Tue Mar 23 11:13:10 CET 2010 - jkupec@suse.cz
 
 - Fixed 'lp --issues' and 'patch --cve #' (bnc #589640)
