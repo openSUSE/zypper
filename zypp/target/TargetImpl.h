@@ -163,6 +163,11 @@ namespace zypp
       static std::string targetDistributionRelease( const Pathname & root_r );
 
       /** \copydoc Target::distributionVersion()*/
+      Target::DistributionLabel distributionLabel() const;
+      /** \overload */
+      static Target::DistributionLabel distributionLabel( const Pathname & root_r );
+
+      /** \copydoc Target::distributionVersion()*/
       std::string distributionVersion() const;
       /** \overload */
       static std::string distributionVersion( const Pathname & root_r );

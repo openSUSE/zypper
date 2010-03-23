@@ -1488,13 +1488,29 @@ namespace zypp
     std::string TargetImpl::targetDistribution( const Pathname & root_r )
     { return baseproductdata( staticGuessRoot(root_r) ).registerTarget(); }
 
-
     std::string TargetImpl::targetDistributionRelease() const
     { return baseproductdata( _root ).registerRelease(); }
     // static version:
     std::string TargetImpl::targetDistributionRelease( const Pathname & root_r )
     { return baseproductdata( staticGuessRoot(root_r) ).registerRelease();}
 
+    Target::DistributionLabel TargetImpl::distributionLabel() const
+    {
+      Target::DistributionLabel ret;
+      parser::ProductFileData pdata( baseproductdata( _root ) );
+      ret.shortName = pdata.shortName();
+      ret.summary = pdata.summary();
+      return ret;
+    }
+    // static version:
+    Target::DistributionLabel TargetImpl::distributionLabel( const Pathname & root_r )
+    {
+      Target::DistributionLabel ret;
+      parser::ProductFileData pdata( baseproductdata( staticGuessRoot(root_r) ) );
+      ret.shortName = pdata.shortName();
+      ret.summary = pdata.summary();
+      return ret;
+    }
 
     std::string TargetImpl::distributionVersion() const
     {

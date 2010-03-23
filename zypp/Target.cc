@@ -57,6 +57,12 @@ namespace zypp
     return _nullimpl;
   }
 
+  std::ostream & operator<<( std::ostream & str, const Target::DistributionLabel & obj )
+  {
+    str << "summary=" << obj.summary << endl;
+    str << "shortName=" << obj.shortName << endl;
+    return str;
+  }
 
   ///////////////////////////////////////////////////////////////////
   //
@@ -106,6 +112,11 @@ namespace zypp
   { return _pimpl->targetDistributionRelease(); }
   std::string Target::targetDistributionRelease( const Pathname & root_r )
   { return target::TargetImpl::targetDistributionRelease( root_r ); }
+
+  Target::DistributionLabel Target::distributionLabel() const
+  { return _pimpl->distributionLabel(); }
+  Target::DistributionLabel Target::distributionLabel( const Pathname & root_r )
+  { return target::TargetImpl::distributionLabel( root_r ); }
 
   std::string Target::distributionVersion() const
   { return _pimpl->distributionVersion(); }

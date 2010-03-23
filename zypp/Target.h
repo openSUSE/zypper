@@ -142,6 +142,14 @@ namespace zypp
     /** \overload */
     static std::string targetDistributionRelease( const Pathname & root_r );
 
+    struct DistributionLabel { std::string shortName; std::string summary; };
+    /** This is \c shortName and \c summary attribute of the installed base product.
+     * Used e.g. for the bootloader menu.
+     */
+    DistributionLabel distributionLabel() const;
+    /** \overload */
+    static DistributionLabel distributionLabel( const Pathname & root_r );
+
     /** This is \c version attribute of the installed base product.
      * For example http://download.opensue.org/update/11.0
      * The 11.0 corresponds to the base product version.
@@ -204,6 +212,14 @@ namespace zypp
   inline std::ostream & operator<<( std::ostream & str, const Target & obj )
   { return obj.dumpOn( str ); }
 
+  /** \relates Target::DistributionLabel Stream output.
+   * Write out the content as key/value pairs:
+   * \code
+   * summary=Beautiful Name
+   * shortName=BN
+   * \endcode
+   */
+  std::ostream & operator<<( std::ostream & str, const Target::DistributionLabel & obj );
 
   /////////////////////////////////////////////////////////////////
 } // namespace zypp
