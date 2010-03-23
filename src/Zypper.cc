@@ -4151,10 +4151,7 @@ void Zypper::doCommand()
   {
     if (runningHelp()) { out().info(_command_help, Out::QUIET); return; }
 
-    // needed to be able to retrieve the target distribution
-    init_target(*this);
-
-    out().info(God->target()->targetDistribution());
+    out().info(Target::targetDistribution(globalOpts().root_dir));
 
     break;
   }
