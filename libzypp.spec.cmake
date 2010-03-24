@@ -11,16 +11,14 @@
 # norootforbuild
 
 Name:           @PACKAGE@
-License:        GPL v2 or later
+License:        GPLv2+
 Group:          System/Packages
 BuildRoot:      %{_tmppath}/%{name}-%{version}-build
-Autoreqprov:    on
 Summary:        Package, Patch, Pattern, and Product Management
 Version:        @VERSION@
 Release:        0
 Source:         %{name}-%{version}.tar.bz2
 Source1:        %{name}-rpmlintrc
-Prefix:         /usr
 Provides:       yast2-packagemanager
 Obsoletes:      yast2-packagemanager
 %if 0%{?suse_version}
@@ -29,13 +27,19 @@ Recommends:     logrotate
 BuildRequires:  cmake
 BuildRequires:  openssl-devel
 BuildRequires:  libudev-devel
-BuildRequires:  boost-devel dejagnu doxygen gcc-c++ gettext-devel graphviz libxml2-devel
+BuildRequires:  boost-devel
+BuildRequires:  dejagnu
+BuildRequires:  doxygen
+BuildRequires:  gcc-c++
+BuildRequires:  gettext-devel
+BuildRequires:  graphviz
+BuildRequires:  libxml2-devel
 
 BuildRequires:  libsatsolver-devel >= 0.14.17
 %if 0%{?suse_version}
 %requires_eq    satsolver-tools
 %else
-Requires:	satsolver-tools
+Requires:       satsolver-tools
 %endif
 
 # required for testsuite, webrick
@@ -48,19 +52,23 @@ BuildRequires:  expat-devel
 %endif
 
 %if 0%{?suse_version}
-BuildRequires:  hicolor-icon-theme update-desktop-files rpm-devel
-Requires: uuid-runtime
+BuildRequires:  hicolor-icon-theme
+BuildRequires:  update-desktop-files
+BuildRequires:  rpm-devel
+Requires:       uuid-runtime
 %endif
 
 %if 0%{?fedora_version}
-BuildRequires: glib2-devel popt-devel rpm-devel
+BuildRequires:  glib2-devel
+BuildRequires:  popt-devel
+BuildRequires:  rpm-devel
 %endif
 
 %if 0%{?mandriva_version}
 BuildRequires:  glib2-devel
 BuildRequires:  librpm-devel
 # uuidgen
-Requires: e2fsprogs
+Requires:       e2fsprogs
 %endif
 
 %if 0%{?suse_version}
@@ -80,7 +88,7 @@ Requires:       gnupg2
 %define use_translation_set sle-zypp
 # No requirement, but as we'd use it in case it is present,
 # check for a sufficient version:
-Conflicts:	aria2 < %{min_aria_version}
+Conflicts:      aria2 < %{min_aria_version}
 # ---------------------------------------------------------------
 %else
 # ---------------------------------------------------------------
@@ -88,15 +96,15 @@ Conflicts:	aria2 < %{min_aria_version}
 # need CURLOPT_REDIR_PROTOCOLS:
 %define min_curl_version 7.19.4
 # want aria2:
-Requires:      aria2 >= %{min_aria_version}
-BuildRequires: aria2 >= %{min_aria_version}
+Requires:       aria2 >= %{min_aria_version}
+BuildRequires:  aria2 >= %{min_aria_version}
 %endif
 # ---------------------------------------------------------------
 
 %if 0%{?suse_version}
-Requires:       libcurl4   >= %{min_curl_version}
+Requires:       libcurl4 >= %{min_curl_version}
 %else
-Requires:       libcurl   >= %{min_curl_version}
+Requires:       libcurl >= %{min_curl_version}
 %endif
 BuildRequires:  libcurl-devel >= %{min_curl_version}
 
@@ -115,16 +123,23 @@ Authors:
     Ladislav Slezak <lslezak@suse.cz>
 
 %package devel
-Requires:       libzypp == %{version}
-Requires:       libxml2-devel openssl-devel rpm-devel glibc-devel zlib-devel
-Requires:       bzip2 popt-devel boost-devel libstdc++-devel
+Requires:       libzypp = %{version}
+Requires:       libxml2-devel
+Requires:       openssl-devel
+Requires:       rpm-devel
+Requires:       glibc-devel
+Requires:       zlib-devel
+Requires:       bzip2
+Requires:       popt-devel
+Requires:       boost-devel
+Requires:       libstdc++-devel
 Requires:       libudev-devel
 Requires:       cmake
 Requires:       libcurl-devel >= %{min_curl_version}
 %if 0%{?suse_version}
 %requires_ge    libsatsolver-devel
 %else
-Requires:	libsatsolver-devel
+Requires:       libsatsolver-devel
 %endif
 Summary:        Package, Patch, Pattern, and Product Management - developers files
 Group:          System/Packages
@@ -152,20 +167,20 @@ Authors:
 mkdir build
 cd build
 export CFLAGS="$RPM_OPT_FLAGS"
-export CXXFLAGS="$CFLAGS"
-cmake -DCMAKE_INSTALL_PREFIX=%{prefix} \
+export CXXFLAGS="$RPM_OPT_FLAGS"
+cmake -DCMAKE_INSTALL_PREFIX=%{_prefix} \
       -DDOC_INSTALL_DIR=%{_docdir} \
       -DLIB=%{_lib} \
       -DCMAKE_BUILD_TYPE=Release \
       -DCMAKE_SKIP_RPATH=1 \
       %{?use_translation_set:-DUSE_TRANSLATION_SET=%use_translation_set} \
       ..
-make %{?jobs:-j %jobs} VERBOSE=1
-make -C doc/autodoc %{?jobs:-j %jobs}
-make -C po %{?jobs:-j %jobs} translations
+make %{?_smp_mflags} VERBOSE=1
+make -C doc/autodoc %{?_smp_mflags}
+make -C po %{?_smp_mflags} translations
 
 %if 0%{?run_testsuite}
-  make -C tests %{?jobs:-j %jobs}
+  make -C tests %{?_smp_mflags}
   pushd tests
   LD_LIBRARY_PATH=$PWD/../zypp:$LD_LIBRARY_PATH ctest .
   popd
@@ -178,12 +193,12 @@ rm -rf "$RPM_BUILD_ROOT"
 cd build
 make install DESTDIR=$RPM_BUILD_ROOT
 make -C doc/autodoc install DESTDIR=$RPM_BUILD_ROOT
-mkdir -p $RPM_BUILD_ROOT/etc/zypp/repos.d
-mkdir -p $RPM_BUILD_ROOT/etc/zypp/services.d
-mkdir -p $RPM_BUILD_ROOT/%{_usr}/lib/zypp
-mkdir -p $RPM_BUILD_ROOT/%{_var}/lib/zypp
-mkdir -p $RPM_BUILD_ROOT/%{_var}/log/zypp
-mkdir -p $RPM_BUILD_ROOT/%{_var}/cache/zypp
+mkdir -p $RPM_BUILD_ROOT%{_sysconfdir}/zypp/repos.d
+mkdir -p $RPM_BUILD_ROOT%{_sysconfdir}/zypp/services.d
+mkdir -p $RPM_BUILD_ROOT%{_prefix}/lib/zypp
+mkdir -p $RPM_BUILD_ROOT%{_var}/lib/zypp
+mkdir -p $RPM_BUILD_ROOT%{_var}/log/zypp
+mkdir -p $RPM_BUILD_ROOT%{_var}/cache/zypp
 
 %if 0%{?suse_version}
 %suse_update_desktop_file -G "" -C "" package-manager
@@ -202,8 +217,8 @@ if [ -f /var/cache/zypp/zypp.db ]; then rm /var/cache/zypp/zypp.db; fi
 # convert old lock file to new
 # TODO make this a separate file?
 # TODO run the sript only when updating form pre-11.0 libzypp versions
-LOCKSFILE=/etc/zypp/locks
-OLDLOCKSFILE=/etc/zypp/locks.old
+LOCKSFILE=%{_sysconfdir}/zypp/locks
+OLDLOCKSFILE=%{_sysconfdir}/zypp/locks.old
 
 is_old(){
   # if no such file, exit with false (1 in bash)
@@ -267,35 +282,34 @@ rm -rf "$RPM_BUILD_ROOT"
 
 %files -f zypp.lang
 %defattr(-,root,root)
-%dir               /etc/zypp
-%dir               /etc/zypp/repos.d
-%dir               /etc/zypp/services.d
-%config(noreplace) /etc/zypp/zypp.conf
-%config(noreplace) /etc/zypp/systemCheck
+%dir               %{_sysconfdir}/zypp
+%dir               %{_sysconfdir}/zypp/repos.d
+%dir               %{_sysconfdir}/zypp/services.d
+%config(noreplace) %{_sysconfdir}/zypp/zypp.conf
+%config(noreplace) %{_sysconfdir}/zypp/systemCheck
 %config(noreplace) %{_sysconfdir}/logrotate.d/zypp-history.lr
-                   %{_usr}/lib/zypp
 %dir               %{_var}/lib/zypp
 %dir               %{_var}/log/zypp
 %dir               %{_var}/cache/zypp
-%dir               %{prefix}/lib/zypp
-%{prefix}/share/zypp
-%{prefix}/share/applications/package-manager.desktop
-%{prefix}/share/icons/hicolor/scalable/apps/package-manager-icon.svg
-%{prefix}/share/icons/hicolor/16x16/apps/package-manager-icon.png
-%{prefix}/share/icons/hicolor/22x22/apps/package-manager-icon.png
-%{prefix}/share/icons/hicolor/24x24/apps/package-manager-icon.png
-%{prefix}/share/icons/hicolor/32x32/apps/package-manager-icon.png
-%{prefix}/share/icons/hicolor/48x48/apps/package-manager-icon.png
-%{prefix}/bin/*
+%dir               %{_prefix}/lib/zypp
+%{_datadir}/zypp
+%{_datadir}/applications/package-manager.desktop
+%{_datadir}/icons/hicolor/scalable/apps/package-manager-icon.svg
+%{_datadir}/icons/hicolor/16x16/apps/package-manager-icon.png
+%{_datadir}/icons/hicolor/22x22/apps/package-manager-icon.png
+%{_datadir}/icons/hicolor/24x24/apps/package-manager-icon.png
+%{_datadir}/icons/hicolor/32x32/apps/package-manager-icon.png
+%{_datadir}/icons/hicolor/48x48/apps/package-manager-icon.png
+%{_bindir}/*
 %{_libdir}/libzypp*so.*
-%doc %_mandir/man5/locks.5.*
+%doc %{_mandir}/man5/locks.5.*
 
 %files devel
 %defattr(-,root,root)
 %{_libdir}/libzypp.so
 %{_docdir}/%{name}
-%{prefix}/include/zypp
-%{prefix}/share/cmake/Modules/*
+%{_includedir}/zypp
+%{_datadir}/cmake/Modules/*
 %{_libdir}/pkgconfig/libzypp.pc
 
 %changelog
