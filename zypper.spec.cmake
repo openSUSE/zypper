@@ -11,25 +11,27 @@
 # norootforbuild
 
 Name:           @PACKAGE@
-BuildRequires:  libzypp-devel >= 6.30.0 boost-devel >= 1.33.1 gettext-devel >= 0.15
-BuildRequires:  readline-devel >= 5.1 augeas-devel >= 0.5.0
-BuildRequires:  gcc-c++ >= 4.1 cmake >= 2.4.6
-Requires:	procps
+BuildRequires:  libzypp-devel >= 6.30.0
+BuildRequires:  boost-devel >= 1.33.1
+BuildRequires:  gettext-devel >= 0.15
+BuildRequires:  readline-devel >= 5.1
+BuildRequires:  augeas-devel >= 0.5.0
+BuildRequires:  gcc-c++ >= 4.1
+BuildRequires:  cmake >= 2.4.6
+Requires:       procps
 %if 0%{?suse_version}
-%requires_ge	libzypp
+%requires_ge    libzypp
 Recommends:     logrotate cron
-PreReq:         permissions
+Requires(post): permissions
 %endif
-License:        GPL v2 or later
+License:        GPLv2+
 Group:          System/Packages
 BuildRoot:      %{_tmppath}/%{name}-%{version}-build
-Autoreqprov:    on
 Summary:        Command line software manager using libzypp
 Version:        @VERSION@
 Release:        0
 Source:         %{name}-%{version}.tar.bz2
 Source1:        %{name}-rpmlintrc
-Prefix:         /usr
 URL:            http://en.opensuse.org/Zypper
 Provides:       y2pmsh
 Obsoletes:      y2pmsh
@@ -64,19 +66,19 @@ cd build
 %define use_translation_set sle-zypper
 %endif
 
-cmake -DCMAKE_INSTALL_PREFIX=%{prefix} \
+cmake -DCMAKE_INSTALL_PREFIX=%{_prefix} \
       -DSYSCONFDIR=%{_sysconfdir} \
       -DMANDIR=%{_mandir} \
       -DCMAKE_VERBOSE_MAKEFILE=TRUE \
-      -DCMAKE_C_FLAGS_RELEASE:STRING="%{optflags}" \
-      -DCMAKE_CXX_FLAGS_RELEASE:STRING="%{optflags}" \
+      -DCMAKE_C_FLAGS_RELEASE:STRING="$RPM_OPT_FLAGS" \
+      -DCMAKE_CXX_FLAGS_RELEASE:STRING="$RPM_OPT_FLAGS" \
       -DCMAKE_BUILD_TYPE=Release \
       %{?use_translation_set:-DUSE_TRANSLATION_SET=%use_translation_set} \
       ..
 
 #gettextize -f
-make %{?jobs:-j %jobs}
-make -C po %{?jobs:-j %jobs} translations
+make %{?_smp_mflags}
+make -C po %{?_smp_mflags} translations
 
 %install
 cd build
@@ -86,8 +88,8 @@ make -C po install DESTDIR=$RPM_BUILD_ROOT
 # Create filelist with translations
 cd ..
 %{find_lang} zypper
-%{__install} -d -m755 %buildroot%_var/log
-touch %buildroot%_var/log/zypper.log
+%{__install} -d -m755 $RPM_BUILD_ROOT%{_var}/log
+touch $RPM_BUILD_ROOT%{_var}/log/zypper.log
 
 %if 0%{?suse_version}
 %post
@@ -98,7 +100,7 @@ touch %buildroot%_var/log/zypper.log
 %endif
 
 %clean
-
+rm -rf "$RPM_BUILD_ROOT"
 
 %files -f zypper.lang
 %defattr(-,root,root)
@@ -110,12 +112,12 @@ touch %buildroot%_var/log/zypper.log
 %{_bindir}/installation_sources
 %{_sbindir}/zypp-refresh
 %verify(not mode) %attr (755,root,root) %{_sbindir}/zypp-refresh-wrapper
-%dir %{prefix}/share/zypper
-%{prefix}/share/zypper/zypper.aug
-%dir %{prefix}/share/zypper/xml
-%{prefix}/share/zypper/xml/xmlout.rnc
-%dir %{prefix}/include/zypper
-%{prefix}/include/zypper/prompt.h
+%dir %{_datadir}/zypper
+%{_datadir}/zypper/zypper.aug
+%dir %{_datadir}/zypper/xml
+%{_datadir}/zypper/xml/xmlout.rnc
+%dir %{_includedir}/zypper
+%{_includedir}/zypper/prompt.h
 %doc %{_mandir}/*/*
 %doc %dir %{_datadir}/doc/packages/zypper
 %doc %{_datadir}/doc/packages/zypper/TODO
