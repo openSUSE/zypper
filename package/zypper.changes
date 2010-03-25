@@ -1,4 +1,10 @@
 -------------------------------------------------------------------
+Thu Mar 25 16:36:21 CET 2010 - jkupec@suse.cz
+
+- translations updated
+- 1.3.3
+
+-------------------------------------------------------------------
 Tue Mar 23 17:01:24 CET 2010 - jkupec@suse.cz
 
 - Fixed "removed locks:" message not translated (bnc #581332)
