@@ -110,34 +110,96 @@ BOOST_AUTO_TEST_CASE(SplitIdent)
   BOOST_CHECK_EQUAL( split.kind(), ResKind() );
   BOOST_CHECK_EQUAL( split.name(), IdString() );
 
-  // kind defaults to package
-  split = sat::Solvable::SplitIdent( "foo" );
-  BOOST_CHECK_EQUAL( split.ident(), "foo" );
-  BOOST_CHECK_EQUAL( split.kind(), ResKind::package );
-  BOOST_CHECK_EQUAL( split.name(), "foo" );
+  // - kind defaults to package
+  // - package and srcpackage have NO namespaced ident.
 
-  // kind package and srcpackage do not have namespaced ident
-  split = sat::Solvable::SplitIdent( "package:foo" );
-  BOOST_CHECK_EQUAL( split.ident(), "foo" );
-  BOOST_CHECK_EQUAL( split.kind(), ResKind::package );
-  BOOST_CHECK_EQUAL( split.name(), "foo" );
+  split = sat::Solvable::SplitIdent( 	"foo" );
+  BOOST_CHECK_EQUAL( split.ident(),	"foo" );
+  BOOST_CHECK_EQUAL( split.kind(),	ResKind::package );
+  BOOST_CHECK_EQUAL( split.name(),	"foo" );
 
-  split = sat::Solvable::SplitIdent( "srcpackage:foo" );
-  BOOST_CHECK_EQUAL( split.ident(), "foo" );
-  BOOST_CHECK_EQUAL( split.kind(), ResKind::srcpackage );
-  BOOST_CHECK_EQUAL( split.name(), "foo" );
+  split = sat::Solvable::SplitIdent(	"nokind:foo" );
+  BOOST_CHECK_EQUAL( split.ident(),	"nokind:foo" );
+  BOOST_CHECK_EQUAL( split.kind(),	ResKind::package );
+  BOOST_CHECK_EQUAL( split.name(),	"nokind:foo" );
 
-  // all other kinds do have namespaced ident
-  split = sat::Solvable::SplitIdent( "patch:foo" );
-  BOOST_CHECK_EQUAL( split.ident(), "patch:foo" );
-  BOOST_CHECK_EQUAL( split.kind(), ResKind::patch );
-  BOOST_CHECK_EQUAL( split.name(), "foo" );
+  split = sat::Solvable::SplitIdent(	"package:nokind:foo" );
+  BOOST_CHECK_EQUAL( split.ident(),	"nokind:foo" );
+  BOOST_CHECK_EQUAL( split.kind(),	ResKind::package );
+  BOOST_CHECK_EQUAL( split.name(),	"nokind:foo" );
 
-  // all other kinds do have namespaced ident
-  split = sat::Solvable::SplitIdent( "unknownkind:foo" );
-  BOOST_CHECK_EQUAL( split.ident(), "unknownkind:foo" );
-  BOOST_CHECK_EQUAL( split.kind(), ResKind("unknownkind") );
-  BOOST_CHECK_EQUAL( split.name(), "foo" );
+  split = sat::Solvable::SplitIdent(	"pattern:nokind:foo" );
+  BOOST_CHECK_EQUAL( split.ident(),	"pattern:nokind:foo" );
+  BOOST_CHECK_EQUAL( split.kind(),	ResKind::pattern );
+  BOOST_CHECK_EQUAL( split.name(),	"nokind:foo" );
+
+  split = sat::Solvable::SplitIdent(	"srcpackage:nokind:foo" );
+  BOOST_CHECK_EQUAL( split.ident(),	"nokind:foo" );	// !!!
+  BOOST_CHECK_EQUAL( split.kind(),	ResKind::srcpackage );
+  BOOST_CHECK_EQUAL( split.name(),	"nokind:foo" );
+
+  // now split from kind,name
+  // - kind spec in name wins!
+
+  split = sat::Solvable::SplitIdent(	ResKind::package,	"nokind:foo" );
+  BOOST_CHECK_EQUAL( split.ident(),	"nokind:foo" );
+  BOOST_CHECK_EQUAL( split.kind(),	ResKind::package );
+  BOOST_CHECK_EQUAL( split.name(),	"nokind:foo" );
+
+  split = sat::Solvable::SplitIdent(	ResKind::pattern,	"nokind:foo" );
+  BOOST_CHECK_EQUAL( split.ident(),	"pattern:nokind:foo" );
+  BOOST_CHECK_EQUAL( split.kind(),	ResKind::pattern );
+  BOOST_CHECK_EQUAL( split.name(),	"nokind:foo" );
+
+  split = sat::Solvable::SplitIdent(	ResKind::srcpackage,	"nokind:foo" );
+  BOOST_CHECK_EQUAL( split.ident(),	"nokind:foo" );
+  BOOST_CHECK_EQUAL( split.kind(),	ResKind::srcpackage );
+  BOOST_CHECK_EQUAL( split.name(),	"nokind:foo" );
+
+  split = sat::Solvable::SplitIdent(	ResKind::package,	"package:nokind:foo" );
+  BOOST_CHECK_EQUAL( split.ident(),	"nokind:foo" );
+  BOOST_CHECK_EQUAL( split.kind(),	ResKind::package );
+  BOOST_CHECK_EQUAL( split.name(),	"nokind:foo" );
+
+  split = sat::Solvable::SplitIdent(	ResKind::pattern,	"package:nokind:foo" );
+  BOOST_CHECK_EQUAL( split.ident(),	"nokind:foo" );
+  BOOST_CHECK_EQUAL( split.kind(),	ResKind::package );
+  BOOST_CHECK_EQUAL( split.name(),	"nokind:foo" );
+
+  split = sat::Solvable::SplitIdent(	ResKind::srcpackage,	"package:nokind:foo" );
+  BOOST_CHECK_EQUAL( split.ident(),	"nokind:foo" );
+  BOOST_CHECK_EQUAL( split.kind(),	ResKind::package );
+  BOOST_CHECK_EQUAL( split.name(),	"nokind:foo" );
+
+  split = sat::Solvable::SplitIdent(	ResKind::package,	"pattern:nokind:foo" );
+  BOOST_CHECK_EQUAL( split.ident(),	"pattern:nokind:foo" );
+  BOOST_CHECK_EQUAL( split.kind(),	ResKind::pattern );
+  BOOST_CHECK_EQUAL( split.name(),	"nokind:foo" );
+
+  split = sat::Solvable::SplitIdent(	ResKind::pattern,	"pattern:nokind:foo" );
+  BOOST_CHECK_EQUAL( split.ident(),	"pattern:nokind:foo" );
+  BOOST_CHECK_EQUAL( split.kind(),	ResKind::pattern );
+  BOOST_CHECK_EQUAL( split.name(),	"nokind:foo" );
+
+  split = sat::Solvable::SplitIdent(	ResKind::srcpackage,	"pattern:nokind:foo" );
+  BOOST_CHECK_EQUAL( split.ident(),	"pattern:nokind:foo" );
+  BOOST_CHECK_EQUAL( split.kind(),	ResKind::pattern );
+  BOOST_CHECK_EQUAL( split.name(),	"nokind:foo" );
+
+  split = sat::Solvable::SplitIdent(	ResKind::package,	"srcpackage:nokind:foo" );
+  BOOST_CHECK_EQUAL( split.ident(),	"nokind:foo" );
+  BOOST_CHECK_EQUAL( split.kind(),	ResKind::srcpackage );
+  BOOST_CHECK_EQUAL( split.name(),	"nokind:foo" );
+
+  split = sat::Solvable::SplitIdent(	ResKind::pattern,	"srcpackage:nokind:foo" );
+  BOOST_CHECK_EQUAL( split.ident(),	"nokind:foo" );
+  BOOST_CHECK_EQUAL( split.kind(),	ResKind::srcpackage );
+  BOOST_CHECK_EQUAL( split.name(),	"nokind:foo" );
+
+  split = sat::Solvable::SplitIdent(	ResKind::srcpackage,	"srcpackage:nokind:foo" );
+  BOOST_CHECK_EQUAL( split.ident(),	"nokind:foo" );
+  BOOST_CHECK_EQUAL( split.kind(),	ResKind::srcpackage );
+  BOOST_CHECK_EQUAL( split.name(),	"nokind:foo" );
 
 }
 

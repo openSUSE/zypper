@@ -119,37 +119,70 @@ BOOST_AUTO_TEST_CASE(capabilities_test)
 
 BOOST_AUTO_TEST_CASE(guessPackageSpec)
 {
-  BOOST_CHECK_EQUAL( Capability::guessPackageSpec( "" ),
-                     Capability( "", "", "", "" ) );
+  BOOST_CHECK_EQUAL( Capability::guessPackageSpec( "" ), Capability( "", "", "", "" ) );
+
+  // Remember:	'name OP ver-rel':	name may match provides
+  //		'name-ver-rel':		name may match package names only
 
   // With no libzypp in the pool, no guess should succeed:
   BOOST_REQUIRE( sat::WhatProvides(Capability("libzypp")).empty() );
 
   // these must be guessed
-  BOOST_CHECK_EQUAL( Capability::guessPackageSpec( "libzypp-1-2" ),	 Capability( "",     "libzypp-1-2",      "", "" ) );
-  BOOST_CHECK_EQUAL( Capability::guessPackageSpec( "libzypp-1-2.i586" ), Capability( "i586", "libzypp-1-2",      "", "" ) );
-  BOOST_CHECK_EQUAL( Capability::guessPackageSpec( "libzypp.i586-1-2" ), Capability( "",     "libzypp.i586-1-2", "", "" ) );
-
+  BOOST_CHECK_EQUAL( Capability::guessPackageSpec( "libzypp-1-2" ),		Capability( "",		"libzypp-1-2",	"",	"" ) );
+  BOOST_CHECK_EQUAL( Capability::guessPackageSpec( "libzypp-1-2.i586" ),	Capability( "i586",	"libzypp-1-2",	"",	"" ) );
+  BOOST_CHECK_EQUAL( Capability::guessPackageSpec( "libzypp.i586-1-2" ),	Capability( "",		"libzypp.i586-1-2", "",	"" ) );
   // these are unambiguous
-  BOOST_CHECK_EQUAL( Capability::guessPackageSpec( "patch:swmgmt=12" ), Capability( "", "swmgmt", "=", "12", ResKind::patch ) );
-  BOOST_CHECK_EQUAL( Capability::guessPackageSpec( "libzypp=0:1.0.2-2" ), Capability( "", "libzypp", "=", "0:1.0.2-2" ) );
+  BOOST_CHECK_EQUAL( Capability::guessPackageSpec( "patch:swmgmt=12" ),		Capability( "",		"swmgmt",	"=",	"12", ResKind::patch ) );
+  BOOST_CHECK_EQUAL( Capability::guessPackageSpec( "libzypp=0:1.0.2-2" ),	Capability( "",		"libzypp",	"=",	"0:1.0.2-2" ) );
 
   // now load some repo providing libzypp and see how the guessing changes:
   test.loadRepo( TESTS_SRC_DIR "/data/openSUSE-11.1", "opensuse" );
-
   BOOST_REQUIRE( ! sat::WhatProvides(Capability("libzypp")).empty() );
 
-  BOOST_CHECK_EQUAL( Capability::guessPackageSpec( "libzypp-1-2" ),      Capability( "",     "libzypp", "=", "1-2" ) );
-  BOOST_CHECK_EQUAL( Capability::guessPackageSpec( "libzypp-1-2.i586" ), Capability( "i586", "libzypp", "=", "1-2" ) );
-  BOOST_CHECK_EQUAL( Capability::guessPackageSpec( "libzypp.i586-1-2" ), Capability( "i586", "libzypp", "=", "1-2" ) );
-  BOOST_CHECK_EQUAL( Capability::guessPackageSpec( "libzypp<=1.0.2-2" ), Capability( "", "libzypp", "<=", "1.0.2-2" ) );
-  BOOST_CHECK_EQUAL( Capability::guessPackageSpec( "libzypp<=1:1.0.2-2" ), Capability( "", "libzypp", "<=", "1:1.0.2-2" ) );
-  BOOST_CHECK_EQUAL( Capability::guessPackageSpec( "libzypp-0:1.0.2-2" ), Capability( "", "libzypp", "=", "0:1.0.2-2" ) );
+  BOOST_CHECK_EQUAL( Capability::guessPackageSpec( "libzypp-1-2" ),		Capability( "",		"libzypp",	"=",	"1-2" ) );
+  BOOST_CHECK_EQUAL( Capability::guessPackageSpec( "libzypp-1-2.i586" ),	Capability( "i586",	"libzypp",	"=",	"1-2" ) );
+  BOOST_CHECK_EQUAL( Capability::guessPackageSpec( "libzypp.i586-1-2" ),	Capability( "i586",	"libzypp",	"=",	"1-2" ) );
+  BOOST_CHECK_EQUAL( Capability::guessPackageSpec( "libzypp<=1.0.2-2" ),	Capability( "", 	"libzypp",	"<=",	"1.0.2-2" ) );
+  BOOST_CHECK_EQUAL( Capability::guessPackageSpec( "libzypp<=1:1.0.2-2" ),	Capability( "", 	"libzypp",	"<=",	"1:1.0.2-2" ) );
+  BOOST_CHECK_EQUAL( Capability::guessPackageSpec( "libzypp-0:1.0.2-2" ),	Capability( "", 	"libzypp",	"=",	"0:1.0.2-2" ) );
+
+  // now with yast2-packagemanager which is just a provides. Guess must not lead to libzypp.
+  BOOST_CHECK_EQUAL( Capability::guessPackageSpec( "yast2-packagemanager-1-2" ),	Capability( "",		"yast2-packagemanager-1-2",	"",	"" ) );
+  BOOST_CHECK_EQUAL( Capability::guessPackageSpec( "yast2-packagemanager-1-2.i586" ),	Capability( "i586",	"yast2-packagemanager-1-2",	"",	"" ) );
+  BOOST_CHECK_EQUAL( Capability::guessPackageSpec( "yast2-packagemanager.i586-1-2" ),	Capability( "",		"yast2-packagemanager.i586-1-2","",	"" ) );
+  // these are unambiguous
+  BOOST_CHECK_EQUAL( Capability::guessPackageSpec( "yast2-packagemanager<=1.0.2-2" ),	Capability( "", 	"yast2-packagemanager",		"<=",	"1.0.2-2" ) );
+  BOOST_CHECK_EQUAL( Capability::guessPackageSpec( "yast2-packagemanager<=1:1.0.2-2" ),	Capability( "", 	"yast2-packagemanager",		"<=",	"1:1.0.2-2" ) );
+
 
   // Double arch spec: the trailing one succeeds, the other one gets part of the name.
   // As "libzypp.i586' is not in the pool, guessing fails. Result is a named cap.
   BOOST_CHECK_EQUAL( Capability::guessPackageSpec( "libzypp.i586-1-2.ppc" ),
                      Capability( "ppc",  "libzypp.i586-1-2", "", "" ) );
+
+  // Now check prepended kind specs.
+
+  Capability cap( "package:libzypp=1-2" );
+  BOOST_CHECK_EQUAL( cap, Capability( "",	"libzypp",		"=",	"1-2", ResKind::package ) );
+  BOOST_CHECK_EQUAL( cap, Capability( "",	"package:libzypp",	"=",	"1-2" ) );
+  BOOST_CHECK_EQUAL( cap, Capability( "",	"package:libzypp",	"=",	"1-2", ResKind::pattern ) ); // known name prefix wins
+  // 'package:' is the default
+  BOOST_CHECK_EQUAL( cap, Capability( "libzypp=1-2" ) );
+  BOOST_CHECK_EQUAL( cap, Capability( "",	"libzypp",		"=",	"1-2" ) );
+
+  BOOST_CHECK_EQUAL( cap, Capability::guessPackageSpec( "package:libzypp-1-2" ) );
+  BOOST_CHECK_EQUAL( cap, Capability::guessPackageSpec( "package:libzypp=1-2" ) );
+  BOOST_CHECK_EQUAL( cap, Capability::guessPackageSpec( "libzypp-1-2" ) );
+  BOOST_CHECK_EQUAL( cap, Capability::guessPackageSpec( "libzypp=1-2" ) );
+
+
+  cap = Capability( "pattern:32bit=1-2" );
+  BOOST_CHECK_EQUAL( cap, Capability( "",	"32bit",		"=",	"1-2", ResKind::pattern ) );
+  BOOST_CHECK_EQUAL( cap, Capability( "",	"pattern:32bit",	"=",	"1-2" ) );
+  BOOST_CHECK_EQUAL( cap, Capability( "",	"pattern:32bit",	"=",	"1-2", ResKind::package ) ); // known name prefix wins
+
+  BOOST_CHECK_EQUAL( cap, Capability::guessPackageSpec( "pattern:32bit-1-2" ) );
+  BOOST_CHECK_EQUAL( cap, Capability::guessPackageSpec( "pattern:32bit=1-2" ) );
 }
 
 

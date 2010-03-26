@@ -45,16 +45,17 @@ namespace zypp
    * A Capability: <tt>"name[.arch] [op edition]"</tt>
    *
    * If a certain \ref ResKind is specified upon construction, the
-   * capabilities name part is prefixed accordingly. If no \ref ResKind
-   * is specified, it's assumed you refer to a package or the name is
-   * already prefixed:
+   * capabilities name part is prefixed, unless it already conatins a
+   * well known kind spec. If no \ref ResKind is specified, it's assumed
+   * you refer to a package or the name is already prefixed:
    * \code
    * Capability( "foo" )                   ==> 'foo'
    * Capability( "foo", ResKind::package ) ==> 'foo'
    * Capability( "foo", ResKind::pattern ) ==> 'pattern:foo'
    * Capability( "pattern:foo" )           ==> 'pattern:foo'
-     * // avoid this:
-   * Capability( "pattern:foo", ResKind::pattern ) ==> 'pattern:pattern:foo'
+   * // in doubt an explicit name prefix wins:
+   * Capability( "pattern:foo", ResKind::package ) ==> 'pattern:foo'
+   * Capability( "package:foo", ResKind::pattern ) ==> 'foo'
    * \endcode
    */
   class Capability: protected sat::detail::PoolMember,
@@ -224,9 +225,9 @@ namespace zypp
        *
        * Assuming this Capability should be provided by some package in
        * the \ref ResPool, we check this. If unprovided, we substitute the last,
-       * (or one but last) \c '-' by a \c '='. If the name part
-       * (without version) of the resulting Capability is provided
-       * by the \ref ResPool, this Capability is returned.
+       * (or one but last) \c '-' by a \c '='. If the name part (without version)
+       * of the resulting Capability matches a package name (not provides!) in
+       * the \ref ResPool, this Capability is returned.
        *
        * Otherwise we return the Capability originally created from
        * \a str_r.

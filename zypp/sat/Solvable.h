@@ -254,8 +254,10 @@ namespace zypp
         Solvable nextInRepo() const;
 
         /** Helper that splits an identifier into kind and name or vice versa.
+	 * \note In case \c name_r is preceded by a well known kind spec, the
+	 * \c kind_r argument is ignored, and kind is derived from name.
          * \see \ref ident
-        */
+         */
         class SplitIdent
         {
           public:
@@ -269,6 +271,15 @@ namespace zypp
             IdString ident() const { return _ident; }
             ResKind  kind()  const { return _kind; }
             IdString name()  const { return _name; }
+
+	    /** Return an idents explicit kind prefix, or \ref ResKind() if none.
+	     * Mainly to detect wheter a given ident string is explicitly prefixed
+	     * by a known kind (e.g \c pattern:foo or \c package:foo).
+	     */
+	    static ResKind explicitKind( IdString ident_r )		{ return explicitKind( ident_r.c_str() );  }
+	    static ResKind explicitKind( const char * ident_r );
+	    static ResKind explicitKind( const std::string & ident_r )	{ return explicitKind( ident_r.c_str() );  }
+
           private:
             IdString  _ident;
             ResKind   _kind;

@@ -24,6 +24,7 @@
 
 #include "zypp/sat/detail/PoolImpl.h"
 #include "zypp/sat/Pool.h"
+#include "zypp/ResPool.h"
 
 using std::endl;
 
@@ -141,25 +142,15 @@ namespace zypp
                                     const ResKind & kind_r )
     {
       // First build the name, non-packages prefixed by kind
-      sat::detail::IdType nid( sat::detail::noId );
-      if ( ! kind_r || kind_r == ResKind::package )
-      {
-        nid = IdString( name_r ).id();
-      }
-      else if ( kind_r == ResKind::srcpackage )
+      sat::Solvable::SplitIdent split( kind_r, name_r );
+      sat::detail::IdType nid( split.ident().id() );
+
+      if ( split.kind() == ResKind::srcpackage )
       {
         // map 'kind srcpackage' to 'arch src', the pseudo architecture
         // satsolver uses.
-        nid = IdString( name_r ).id();
         nid = ::rel2id( pool_r, nid, IdString(ARCH_SRC).id(), REL_ARCH, /*create*/true );
       }
-      else
-      {
-        nid = IdString( str::form( "%s:%s",
-                        kind_r.c_str(),
-                        name_r.c_str() ) ).id();
-      }
-
 
       // Extend name by architecture, if provided and not a srcpackage
       if ( ! arch_r.empty() && kind_r != ResKind::srcpackage )
@@ -392,8 +383,10 @@ namespace zypp
       Capability guesscap( origArch, guess );
       detail = guesscap.detail();
 
-      if ( ! sat::WhatProvides( Capability(detail.name().id()) ).empty() )
-        return guesscap;
+      ResPool pool( ResPool::instance() );
+      // require name part matching a pool items name (not just provides!)
+      if ( pool.byIdentBegin( detail.name() ) != pool.byIdentEnd( detail.name() ) )
+	return guesscap;
 
       // try the one but last '-'
       if ( pos )
@@ -406,8 +399,9 @@ namespace zypp
           guesscap = Capability( origArch, guess );
           detail = guesscap.detail();
 
-          if ( ! sat::WhatProvides( Capability(detail.name().id()) ).empty() )
-            return guesscap;
+          // require name part matching a pool items name (not just provides!)
+          if ( pool.byIdentBegin( detail.name() ) != pool.byIdentEnd( detail.name() ) )
+	    return guesscap;
         }
       }
     }

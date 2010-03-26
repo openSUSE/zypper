@@ -42,40 +42,26 @@ namespace zypp
         if ( ! _ident )
           return;
 
-        const char * ident = _ident.c_str();
-        const char * sep = ::strchr( ident, ':' );
-
-        // no ':' in package names (hopefully)
-        if ( ! sep )
-        {
-          _kind = ResKind::package;
+	ResKind explicitKind = Solvable::SplitIdent::explicitKind( _ident.c_str() );
+	// NOTE: kind package and srcpackage do not have namespaced ident!
+	if ( ! explicitKind  )
+	{
           _name = _ident;
-          return;
-        }
-
-        // save name
-        _name = IdString( sep+1 );
-
-        // Quick check for well known kinds.
-        // NOTE: kind package and srcpackage do not
-        //       have namespaced ident!
-        if ( sep-ident >= 4 )
-        {
-          switch ( ident[3] )
-          {
-#define OUTS(K,S) if ( !::strncmp( ident, ResKind::K.c_str(), S ) ) _kind = ResKind::K
-          //             ----v
-            case 'c': OUTS( patch, 5 );       return; break;
-            case 'd': OUTS( product, 7 );     return; break;
-            case 'k': OUTS( package, 7 );     _ident = _name; return; break;
-            case 'p': OUTS( srcpackage, 10 ); _ident = _name; return; break;
-            case 't': OUTS( pattern, 7 );     return; break;
-#undef OUTS
-          }
-        }
-
-        // an unknown kind
-        _kind = ResKind( std::string( ident, sep-ident ) );
+	  // No kind defaults to package
+	  if ( !_kind )
+	    _kind = ResKind::package;
+	  if ( ! ( _kind == ResKind::package || _kind == ResKind::srcpackage ) )
+	    _ident = IdString( str::form( "%s:%s", _kind.c_str(), _ident.c_str() ) );
+	}
+	else
+	{
+	  // strip kind spec from name
+	  _name = IdString( ::strchr( _ident.c_str(), ':' )+1 );
+	  _kind = explicitKind;
+	  if ( _kind == ResKind::package || _kind == ResKind::srcpackage )
+	    _ident = _name;
+	}
+	return;
       }
     }
 
@@ -92,23 +78,40 @@ namespace zypp
     { _doSplit( _ident, _kind, _name ); }
 
     Solvable::SplitIdent::SplitIdent( ResKind kind_r, IdString name_r )
-    : _kind( kind_r )
-    , _name( name_r )
-    {
-      if ( kind_r == ResKind::package || kind_r == ResKind::srcpackage )
-        _ident = _name;
-      else
-        _ident = IdString( str::form( "%s:%s", kind_r.c_str(), name_r.c_str() ) );
-    }
+    : _ident( name_r )
+    , _kind( kind_r )
+    { _doSplit( _ident, _kind, _name ); }
 
     Solvable::SplitIdent::SplitIdent( ResKind kind_r, const C_Str & name_r )
-    : _kind( kind_r )
-    , _name( name_r )
+    : _ident( name_r )
+    , _kind( kind_r )
+    { _doSplit( _ident, _kind, _name ); }
+
+    ResKind Solvable::SplitIdent::explicitKind( const char * ident_r )
     {
-      if ( kind_r == ResKind::package || kind_r == ResKind::srcpackage )
-        _ident = _name;
-      else
-        _ident = IdString( str::form( "%s:%s", kind_r.c_str(), name_r.c_str() ) );
+      if ( ! ident_r )
+	return ResKind();
+
+      const char * sep = ::strchr( ident_r, ':' );
+      if ( ! sep )
+	return ResKind();
+
+      ResKind ret;
+      if ( sep-ident_r >= 4 )
+      {
+	switch ( ident_r[3] )
+	{
+	  #define OUTS(K,S) if ( !::strncmp( ident_r, ResKind::K.c_str(), S ) && ident_r[S] == ':' ) ret = ResKind::K
+	  //             ----v
+	  case 'c': OUTS( patch, 5 );       break;
+	  case 'd': OUTS( product, 7 );     break;
+	  case 'k': OUTS( package, 7 );     break;
+	  case 'p': OUTS( srcpackage, 10 ); break;
+	  case 't': OUTS( pattern, 7 );     break;
+	  #undef OUTS
+	}
+      }
+      return ret;
     }
 
     /////////////////////////////////////////////////////////////////
