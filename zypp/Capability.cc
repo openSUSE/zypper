@@ -416,7 +416,7 @@ namespace zypp
     return cap;
   }
 
-  Capability guessPackageSpec( const std::string & str_r )
+  Capability Capability::guessPackageSpec( const std::string & str_r )
   {
     bool dummy;
     return guessPackageSpec( str_r, dummy );
