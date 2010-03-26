@@ -1,4 +1,10 @@
 -------------------------------------------------------------------
+Fri Mar 26 13:50:08 CET 2010 - ma@suse.de
+
+- Fix guessing package spec to match package names only. (bnc#590864)
+- version 6.31.2 (31)
+
+-------------------------------------------------------------------
 Tue Mar 23 16:55:56 CET 2010 - ma@suse.de
 
 - Add static Target::distributionLabel to return the baseproducts 
