@@ -179,6 +179,9 @@ namespace zypp
 
    /////////////////////////////////////////////////////////////////
 
+    void Pool::setTextLocale( const Locale & locale_r )
+    { myPool().setTextLocale( locale_r ); }
+
     void Pool::setRequestedLocales( const LocaleSet & locales_r )
     { myPool().setRequestedLocales( locales_r ); }
 

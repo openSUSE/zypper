@@ -167,6 +167,11 @@ namespace zypp
       public:
         /** \name Requested locales. */
         //@{
+	/** Set the default language for retrieving translated texts.
+	 * Updated when calling \ref ZConfig::setTextLocale.
+	 */
+	void setTextLocale( const Locale & locale_r );
+
         /** Set the requested locales.
          * Languages to be supported by the system, e.g. language specific
          * packages to be installed.

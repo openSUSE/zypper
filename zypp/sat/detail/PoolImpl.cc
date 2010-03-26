@@ -248,19 +248,8 @@ namespace zypp
         }
         if ( ! _pool->languages )
         {
-          std::vector<std::string> fallbacklist;
-          for ( Locale l( ZConfig::instance().textLocale() ); l != Locale::noCode; l = l.fallback() )
-          {
-            fallbacklist.push_back( l.code() );
-          }
-          dumpRangeLine( MIL << "pool_set_languages: ", fallbacklist.begin(), fallbacklist.end() ) << endl;
-
-          std::vector<const char *> fallbacklist_cstr;
-          for_( it, fallbacklist.begin(), fallbacklist.end() )
-          {
-            fallbacklist_cstr.push_back( it->c_str() );
-          }
-          ::pool_set_languages( _pool, &fallbacklist_cstr.front(), fallbacklist_cstr.size() );
+	  // initial seting
+	  const_cast<PoolImpl*>(this)->setTextLocale( ZConfig::instance().textLocale() );
         }
       }
 
@@ -392,6 +381,23 @@ namespace zypp
             locale2Solver.insert( IdString( l.code() ) );
         }
         MIL << "New Solver Locales: " << locale2Solver << endl;
+      }
+
+      void PoolImpl::setTextLocale( const Locale & locale_r )
+      {
+	std::vector<std::string> fallbacklist;
+	for ( Locale l( locale_r ); l != Locale::noCode; l = l.fallback() )
+	{
+	  fallbacklist.push_back( l.code() );
+	}
+	dumpRangeLine( MIL << "pool_set_languages: ", fallbacklist.begin(), fallbacklist.end() ) << endl;
+
+	std::vector<const char *> fallbacklist_cstr;
+	for_( it, fallbacklist.begin(), fallbacklist.end() )
+	{
+	  fallbacklist_cstr.push_back( it->c_str() );
+	}
+	::pool_set_languages( _pool, &fallbacklist_cstr.front(), fallbacklist_cstr.size() );
       }
 
       void PoolImpl::setRequestedLocales( const LocaleSet & locales_r )

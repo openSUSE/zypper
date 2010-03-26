@@ -199,6 +199,7 @@ namespace zypp
         public:
           /** \name Requested locales. */
           //@{
+	  void setTextLocale( const Locale & locale_r );
           void setRequestedLocales( const LocaleSet & locales_r );
           bool addRequestedLocale( const Locale & locale_r );
           bool eraseRequestedLocale( const Locale & locale_r );
