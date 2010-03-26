@@ -52,6 +52,7 @@ using namespace zypp::filesystem;
 
 #define WARNINGMAILPATH		"/var/log/YaST2/"
 #define FILEFORBACKUPFILES	"YaSTBackupModifiedFiles"
+#define MAXRPMMESSAGELINES	10000
 
 namespace zypp
 {
@@ -1717,10 +1718,15 @@ void RpmDb::doInstallPackage( const Pathname & filename, RpmInstFlags flags, cal
   string line;
   string rpmmsg;
   vector<string> configwarnings;
-  vector<string> errorlines;
 
+  unsigned linecnt = 0;
   while (systemReadLine(line))
   {
+    if ( linecnt < MAXRPMMESSAGELINES )
+      ++linecnt;
+    else
+      continue;
+
     if (line.substr(0,2)=="%%")
     {
       int percent;
@@ -1735,6 +1741,9 @@ void RpmDb::doInstallPackage( const Pathname & filename, RpmInstFlags flags, cal
       configwarnings.push_back(line);
     }
   }
+  if ( linecnt > MAXRPMMESSAGELINES )
+    rpmmsg += "[truncated]\n";
+
   int rpm_status = systemStatus();
 
   // evaluate result
@@ -1887,10 +1896,17 @@ void RpmDb::doRemovePackage( const string & name_r, RpmInstFlags flags, callback
   // 50 - command completed
   // 100 if no error
   report->progress( 5 );
+  unsigned linecnt = 0;
   while (systemReadLine(line))
   {
+    if ( linecnt < MAXRPMMESSAGELINES )
+      ++linecnt;
+    else
+      continue;
     rpmmsg += line+'\n';
   }
+  if ( linecnt > MAXRPMMESSAGELINES )
+    rpmmsg += "[truncated]\n";
   report->progress( 50 );
   int rpm_status = systemStatus();
 
