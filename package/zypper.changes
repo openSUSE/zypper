@@ -1,4 +1,9 @@
 -------------------------------------------------------------------
+Fri Mar 26 13:08:10 CET 2010 - jkupec@suse.cz
+
+- --label added to 'targetos' command (bnc #586303)
+
+-------------------------------------------------------------------
 Tue Mar 23 17:00:21 CET 2010 - jkupec@suse.cz
 
 - Fixed "removed locks:" message not translated (bnc #581332)
