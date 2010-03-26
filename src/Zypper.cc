@@ -4167,8 +4167,8 @@ void Zypper::doCommand()
     {
       if (globalOpts().terse)
       {
-        cout << "labelLong\t" << str::escape(Target::distributionLabel(globalOpts().root_dir).summary) << endl;
-        cout << "labelShort\t" << str::escape(Target::distributionLabel(globalOpts().root_dir).shortName) << endl;
+        cout << "labelLong\t" << str::escape(Target::distributionLabel(globalOpts().root_dir).summary, '\t') << endl;
+        cout << "labelShort\t" << str::escape(Target::distributionLabel(globalOpts().root_dir).shortName, '\t') << endl;
       }
       else
       {
