@@ -430,6 +430,7 @@ void Zypper::processGlobalOptions()
   {
     _gopts.machine_readable = true;
     _gopts.no_abbrev = true;
+    _gopts.terse = true;
     //out().error("--terse is not implemented, does nothing");
   }
 
@@ -2175,16 +2176,19 @@ void Zypper::processCommandOptions()
   {
     static struct option options[] =
     {
-      {"help", no_argument, 0, 'h'},
+      {"help",  no_argument, 0, 'h'},
+      {"label", no_argument, 0, 'l'},
       {0, 0, 0, 0}
     };
     specific_options = options;
     _command_help = _(
-      "targetos (tos)\n"
+      "targetos (tos) [options]\n"
       "\n"
-      "Show the ID string of the target Operating System.\n"
+      "Show various information about the target operating system.\n"
+      "By default, an ID string is shown.\n"
       "\n"
-      "This command has no additional options.\n"
+      "  Command options:\n"
+      "-l, --label                 Show the operating system label.\n"
     );
     break;
   }
@@ -4153,7 +4157,29 @@ void Zypper::doCommand()
   {
     if (runningHelp()) { out().info(_command_help, Out::QUIET); return; }
 
-    out().info(Target::targetDistribution(globalOpts().root_dir));
+    if (out().type() == Out::TYPE_XML)
+    {
+      out().error("XML output not implemented for this command.");
+      break;
+    }
+
+    if (copts.find("label") != copts.end())
+    {
+      if (globalOpts().terse)
+      {
+        cout << "labelLong\t" << str::escape(Target::distributionLabel(globalOpts().root_dir).summary) << endl;
+        cout << "labelShort\t" << str::escape(Target::distributionLabel(globalOpts().root_dir).shortName) << endl;
+      }
+      else
+      {
+        out().info(str::form(_("Distribution Label: %s"),
+          Target::distributionLabel(globalOpts().root_dir).summary.c_str()));
+        out().info(str::form(_("Short Label: %s"),
+          Target::distributionLabel(globalOpts().root_dir).shortName.c_str()));
+      }
+    }
+    else
+      out().info(Target::targetDistribution(globalOpts().root_dir));
 
     break;
   }
@@ -4186,7 +4212,7 @@ void Zypper::doCommand()
       result = lhs.compare(rhs);
 
     // be terse when talking to machines
-    if (_gopts.machine_readable)
+    if (_gopts.terse)
     {
       out().info(str::numstring(result));
       break;
