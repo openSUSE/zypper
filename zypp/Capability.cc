@@ -365,7 +365,7 @@ namespace zypp
     return str::regex_match( name_r, what, filenameRegex );
   }
 
-  Capability Capability::guessPackageSpec( const std::string & str_r )
+  Capability Capability::guessPackageSpec( const std::string & str_r, bool & rewrote_r )
   {
     Capability cap( str_r );
     CapDetail detail( cap.detail() );
@@ -386,7 +386,10 @@ namespace zypp
       ResPool pool( ResPool::instance() );
       // require name part matching a pool items name (not just provides!)
       if ( pool.byIdentBegin( detail.name() ) != pool.byIdentEnd( detail.name() ) )
+      {
+	rewrote_r = true;
 	return guesscap;
+      }
 
       // try the one but last '-'
       if ( pos )
@@ -401,11 +404,22 @@ namespace zypp
 
           // require name part matching a pool items name (not just provides!)
           if ( pool.byIdentBegin( detail.name() ) != pool.byIdentEnd( detail.name() ) )
+	  {
+	    rewrote_r = true;
 	    return guesscap;
+	  }
         }
       }
     }
+
+    rewrote_r = false;
     return cap;
+  }
+
+  Capability guessPackageSpec( const std::string & str_r )
+  {
+    bool dummy;
+    return guessPackageSpec( str_r, dummy );
   }
 
   /******************************************************************

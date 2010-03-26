@@ -236,6 +236,11 @@ namespace zypp
        * result depends on the pools content.
        */
       static Capability guessPackageSpec( const std::string & str_r );
+      /** \overload Taking an additional bool indicating whether \c str_r made
+       * a valid \ref Capability (\c true) or the result was was guessed by
+       * rewiting a \c '-' to \c '='. (\c false).
+       */
+      static Capability guessPackageSpec( const std::string & str_r, bool & rewrote_r );
 
     public:
       /** Expert backdoor. */
