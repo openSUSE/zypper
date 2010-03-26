@@ -13,6 +13,7 @@
 #include "install.h"
 #include "update.h"
 #include "repos.h"
+#include "PackageArgs.h"
 
 using namespace std;
 using namespace zypp;
@@ -549,172 +550,72 @@ void install_remove(Zypper & zypper,
     return;
   }
 
-  string str, repo;
-  bool by_capability;
-  for_(it, argsnew.begin(), argsnew.end())
+  PackageArgs pargs(args);
+  for_(it, pargs.doCaps().begin(), pargs.doCaps().end())
   {
-    // For given arguments:
-    //    +vim
-    //    -emacs
-    //    libdnet1.i586
-    //    perl-devel:perl(Digest::MD5)
-    //    ~non-oss:opera-2:10.1-1.2.gcc44.x86_64
-    //    zypper>=1.2.15
+    // For given PackageArgs:
     //
-    // 1) check for and remove the install/remove modifiers
-    //    vim                          (install)
-    //    emacs                        (remove)
-    //    perl-devel:perl(Digest::MD5) (install/remove according to command)
-    //
-    // 2) check for and remove the repo specifier at the beginning of the arg
-    //    vim                           (no repo)
-    //    libdnet1.i586                 (no repo)
-    //    perl(Digest::MD5)             (perl-devel repo)
-    //    opera-2:10.1-1.2.gcc44.x86_64 (non-oss repo)
-    //    note: repo can be specified by number/alias/name/URI, use match_repo()
-    //
-    // 3) parse the rest of the string as standard zypp package specifier into
-    //    a Capability using Capability::guessPackageSpec
-    //                                  name, arch, op, evr, kind
-    //    vim                           'vim', '', '', '', 'package'
-    //    libdnet1.i586                 'libdnet', 'i586', '', '', 'package'
-    //    perl(Digest::MD5)             'perl(Digest::MD5)', '', '', '', 'package'
-    //    opera-2:10.1-1.2.gcc44.x86_64 'opera', 'x86_64', '=', '2:10.1-1.2.gcc44', 'package'
-    //    zypper>=1.2.15                'zypper', '', '>=', '1.2.15', 'package'
-    //    note: depends on whether the cap in the pool
-    //
-    // 4) if the capability only contains name and kind, and --capability was
+    // 1) if the capability only contains name and kind, and --capability was
     //    not specified, or --name was specified, try to install 'by-name'
     //    first, i.e. via ui::Selectable and/or PoolItem.
     //    note: wildcards must be supported here, use PoolQuery with match_glob
     //          to find the selectables
     //
-    // 5) if no package could be found by name, or the capability contains
+    // 2) if no package could be found by name, or the capability contains
     //    op+version/arch, or --capability was specified,
     //    install 'by-capability', i.e. using ResPool::addRequires(cap)
     //
     // NOTES
-    // * In both 4) and 5) check for already installed packages, available
+    // * In both cases check for already installed packages, available
     //   candidates, and report any problems back to user.
-    // * If repository match was found in 2), issue request forcing the repo and
+    // * If the argument contains repository, issue request forcing the repo and
     //   - if --force was specified, insist on installing from that repo (even
     //     downgrade or change vendor   TODO
     //   - if --force was NOT used, only install new, or upgrade without vendor
     //     change. If downgrade or vendor change is needed, report back to user
     //     and advice to use --force, if that's what is really wanted. TODO
 
-    str = *it; repo.clear();
-    by_capability = false;
-
-    // check for and remove the install/remove modifiers
-    if (str[0] == '+' || str[0] == '~')
-    {
-      install_not_remove = true;
-      str.erase(0, 1);
-    }
-    else if (str[0] == '-' || str[0] == '!')
-    {
-      install_not_remove = false;
-      str.erase(0, 1);
-    }
-
-    // force repository specified by prefixing 'repo:' to the package name
-    //
-    // check for and remove the 'repo:' prefix
-    // ignore colons coming after '(' or '=' (bnc #433679)
-    // e.g. 'perl(Digest::MD5)', or 'opera=2:10.00-4102.gcc4.shared.qt3'
-
-    string::size_type pos;
-    if ((pos = str.find(':')) != string::npos && str.find_first_of("(=") > pos)
-    {
-      repo = str.substr(0, pos);
-      if (match_repo(zypper, repo))
-      {
-        str = str.substr(pos + 1);
-        force_by_name = true; //! \todo until there is a solver API for this
-        DBG << "will install " << str << " from repo " << repo << endl;
-      }
-      // not a repo, continue as usual
-      else
-        repo.clear();
-    }
-
-    // parse the rest of the string as standard zypp package specifier
-    Capability parsedcap = Capability::guessPackageSpec(str);
-    Capability namecap("", str, "", "", kind);
-    sat::Solvable::SplitIdent splid(parsedcap.detail().name());
-
-    // set the right kind (bnc #580571)
-    // prefer those specified in args
-    // if not in args, use the one from --type
-    if (zypper.cOpts().count("type") && splid.kind() != kind)
-    {
-      // kind specified in arg, too - just warn and let it be
-      if (parsedcap.detail().name().asString().find(':') != string::npos)
-        zypper.out().warning(str::form(
-            _("Different package type specified in '%s' option and '%s' argument. Will use the latter."),
-            "--type", str.c_str()));
-      // no kind specified in arg, use --type
-      else
-        parsedcap = Capability(
-            Arch(parsedcap.detail().arch()),
-            splid.name().asString(),
-            parsedcap.detail().op(),
-            parsedcap.detail().ed(),
-            kind);
-    }
-
-    MIL << "got '" << parsedcap << "'" << endl;
+    sat::Solvable::SplitIdent splid(it->first.detail().name());
+    ResKind capkind = splid.kind();
+    string capname = splid.name().asString();
 
     // mark by name by force
     if (force_by_name)
     {
       //! \todo FIXME this does not work: mark_by_name does not pick the arch nor repo. Make an API in zypp for this
-      mark_by_name (zypper, install_not_remove, kind, str, repo, parsedcap.detail().arch().asString());
+      mark_by_name (zypper, true, capkind, capname, it->second, it->first.detail().arch().asString());
       continue;
     }
 
-    // recognize misplaced command line options given as packages (bnc#391644)
-    if ( str[0] == '-' )
-    {
-      zypper.out().error(boost::str(format(
-          //! \todo FIXME "not a valid package name or capability"
-          _("'%s' is not a valid package or capability name.")) % str));
-      zypper.setExitCode(ZYPPER_EXIT_ERR_INVALID_ARGS);
-      ZYPP_THROW(ExitRequestException());
-    }
-
-    // try intall by name first (if version or arch was not specified)
-    if (parsedcap == namecap)
+    // try to install by name first (if version or arch was not specified)
+    if (!(force_by_capability || it->first.detail().hasArch() || it->first.detail().isVersioned()))
     {
       PoolQuery q;
       q.addKind(kind);
-      q.addAttribute(sat::SolvAttr::name, str);
+      q.addAttribute(sat::SolvAttr::name, capname);
       q.setMatchGlob();
       bool found = false;
       for_(s, q.selectableBegin(), q.selectableEnd())
       {
         //! FIXME mark_selectable works via addRequires, change it to mark via selectable!!!
         // otherwise the solver is free to install any provider of the symbol
-        mark_selectable(zypper, **s, install_not_remove, force);
+        mark_selectable(zypper, **s, true, force);
         found = true;
       }
       // done with this requirement, skip to next argument
       if (found)
         continue;
     }
-    else
-      by_capability = true;
 
     // try by capability
-    sat::WhatProvides q(parsedcap);
+    sat::WhatProvides q(it->first);
 
     // is there a provider for the requested capability?
     if (q.empty())
     {
       // translators: meaning a package %s or provider of capability %s
-      zypper.out().error(str::form(_("'%s' not found."), str.c_str()));
-      WAR << str::form("'%s' not found", str.c_str()) << endl;
+      zypper.out().error(str::form(_("'%s' not found."), it->first.asString().c_str()));
+      WAR << str::form("'%s' not found", it->first.asString().c_str()) << endl;
       zypper.setExitCode(ZYPPER_EXIT_INF_CAP_NOT_FOUND);
       if (zypper.globalOpts().non_interactive)
         ZYPP_THROW(ExitRequestException());
@@ -738,29 +639,96 @@ void install_remove(Zypper & zypper,
     }
 
     // already installed, nothing to do
-    if (installed && install_not_remove)
+    if (installed)
     {
-      if (provider == str)
+      if (provider == capname)
         zypper.out().info(str::form(
-            _("'%s' is already installed."), str.c_str()));
+            _("'%s' is already installed."), capname.c_str()));
       else
         zypper.out().info(str::form(
             // translators: %s are package names
             _("'%s' providing '%s' is already installed."),
-            provider.c_str(), str.c_str()));
+            provider.c_str(), it->first.asString().c_str()));
 
-      MIL << str::form("skipping '%s': already installed", str.c_str()) << endl;
+      MIL << str::form("skipping '%s': already installed", it->first.asString().c_str()) << endl;
       continue;
     }
-    // not installed, nothing to do
-    else if (!installed && !install_not_remove)
+
+    mark_by_capability (zypper, true, capkind, it->first);
+  }
+
+  for_(it, pargs.dontCaps().begin(), pargs.dontCaps().end())
+  {
+    sat::Solvable::SplitIdent splid(it->first.detail().name());
+    ResKind capkind = splid.kind();
+    string capname = splid.name().asString();
+
+    // mark by name by force
+    if (force_by_name)
+    {
+      mark_by_name (zypper, true, capkind, capname,
+          it->second, it->first.detail().arch().asString());
+      continue;
+    }
+
+    // try to remove by name first (if version or arch was not specified)
+    if (!(force_by_capability || it->first.detail().hasArch() || it->first.detail().isVersioned()))
+    {
+      PoolQuery q;
+      q.addKind(kind);
+      q.addAttribute(sat::SolvAttr::name, capname);
+      q.setMatchGlob();
+      bool found = false;
+      for_(s, q.selectableBegin(), q.selectableEnd())
+      {
+        mark_selectable(zypper, **s, false, force);
+        found = true;
+      }
+      // done with this requirement, skip to next argument
+      if (found)
+        continue;
+    }
+
+    // try by capability
+    sat::WhatProvides q(it->first);
+
+    // is there a provider for the requested capability?
+    if (q.empty())
     {
       // translators: meaning a package %s or provider of capability %s
-      zypper.out().info(str::form(_("'%s' is not installed."), str.c_str()));
-      MIL << str::form("skipping '%s': not installed", str.c_str()) << endl;
+      zypper.out().error(str::form(_("'%s' not found."), it->first.asString().c_str()));
+      WAR << str::form("'%s' not found", it->first.asString().c_str()) << endl;
+      zypper.setExitCode(ZYPPER_EXIT_INF_CAP_NOT_FOUND);
+      if (zypper.globalOpts().non_interactive)
+        ZYPP_THROW(ExitRequestException());
       continue;
     }
 
-    mark_by_capability (zypper, install_not_remove, kind, parsedcap);
+    // is the provider installed?
+    bool installed = false;
+    string provider;
+    for_(solvit, q.poolItemBegin(), q.poolItemEnd())
+    {
+      if (traits::isPseudoInstalled(solvit->resolvable()->kind()))
+        installed = solvit->isSatisfied();
+      else
+        installed = solvit->status().isInstalled();
+      if (installed)
+      {
+        provider = solvit->resolvable()->name();
+        break;
+      }
+    }
+
+    // not installed, nothing to do
+    if (!installed)
+    {
+      // translators: meaning a package %s or provider of capability %s
+      zypper.out().info(str::form(_("'%s' is not installed."), capname.c_str()));
+      MIL << str::form("skipping '%s': not installed", capname.c_str()) << endl;
+      continue;
+    }
+
+    mark_by_capability (zypper, false, capkind, it->first);
   }
 }

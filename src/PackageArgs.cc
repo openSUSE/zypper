@@ -154,6 +154,8 @@ void PackageArgs::argsToCaps(const zypp::ResKind & kind)
       dont = true;
       arg.erase(0, 1);
     }
+    else if (zypper.command() == ZypperCommand::REMOVE)
+      dont = true;
     else
       dont = false;
 
@@ -199,6 +201,15 @@ void PackageArgs::argsToCaps(const zypp::ResKind & kind)
             parsedcap.detail().op(),
             parsedcap.detail().ed(),
             kind);
+    }
+
+    // recognize misplaced command line options given as packages (bnc#391644)
+    if (arg[0] == '-')
+    {
+      zypper.out().error(str::form(
+          _("'%s' is not a package name or capability."), arg.c_str()));
+      zypper.setExitCode(ZYPPER_EXIT_ERR_INVALID_ARGS);
+      ZYPP_THROW(ExitRequestException());
     }
 
     MIL << "got " << (dont?"un":"") << "wanted '" << parsedcap << "'";
