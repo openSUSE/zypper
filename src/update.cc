@@ -278,26 +278,6 @@ public:
   }
 };
 
-class SaveBetterEditionArch
-{
-public:
-  PoolItem best;
-
-  bool operator()(PoolItem provider)
-  {
-    if (!provider.status().isLocked() // is not locked (taboo)
-        && (!best                     // first match
-            // or a better architecture
-            || best->arch().compare(provider->arch()) < 0
-            // or a better edition than so-far-found
-            || best->edition().compare(provider->edition()) < 0))
-    {
-      best = provider;
-    }
-    return true;
-  }
-};
-
 // ----------------------------------------------------------------------------
 
 /**

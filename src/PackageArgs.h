@@ -46,6 +46,7 @@ public:
   { return _dont_caps; }
 
 protected:
+  /** join arguments at comparison operators ('=', '>=', and the like) */
   void preprocess(const std::vector<std::string> & args);
   void argsToCaps(const zypp::ResKind & kind);
 

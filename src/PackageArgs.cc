@@ -36,6 +36,8 @@ PackageArgs::PackageArgs(
   argsToCaps(kind);
 }
 
+// ---------------------------------------------------------------------------
+
 void PackageArgs::preprocess(const vector<string> & args)
 {
   vector<string>::size_type argc = args.size();
@@ -99,6 +101,8 @@ void PackageArgs::preprocess(const vector<string> & args)
   copy(_args.begin(), _args.end(), ostream_iterator<string>(DBG, " "));
   DBG << endl;
 }
+
+// ---------------------------------------------------------------------------
 
 void PackageArgs::argsToCaps(const zypp::ResKind & kind)
 {
