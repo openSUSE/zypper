@@ -253,52 +253,6 @@ mark_by_capability (Zypper & zypper,
 
 // ----------------------------------------------------------------------------
 
-// join arguments at comparison operators ('=', '>=', and the like)
-static void
-install_remove_preprocess_args(const Zypper::ArgList & args,
-                               Zypper::ArgList & argsnew)
-{
-  Zypper::ArgList::size_type argc = args.size();
-  argsnew.reserve(argc);
-  string tmp;
-  // preprocess the arguments
-  for(Zypper::ArgList::size_type i = 0, lastnew = 0; i < argc; ++i)
-  {
-    tmp = args[i];
-    if (i
-        && (tmp == "=" || tmp == "==" || tmp == "<"
-            || tmp == ">" || tmp == "<=" || tmp == ">=")
-        && i < argc - 1)
-    {
-      argsnew[lastnew-1] += tmp + args[++i];
-      continue;
-    }
-    else if (tmp.find_last_of("=<>") == tmp.size() - 1 && i < argc - 1)
-    {
-      argsnew.push_back(tmp + args[++i]);
-      ++lastnew;
-    }
-    else if (i && tmp.find_first_of("=<>") == 0)
-    {
-      argsnew[lastnew-1] += tmp;
-      ++i;
-    }
-    else
-    {
-      argsnew.push_back(tmp);
-      ++lastnew;
-    }
-  }
-
-  DBG << "old: ";
-  copy(args.begin(), args.end(), ostream_iterator<string>(DBG, " "));
-  DBG << endl << "new: ";
-  copy(argsnew.begin(), argsnew.end(), ostream_iterator<string>(DBG, " "));
-  DBG << endl;
-}
-
-// ----------------------------------------------------------------------------
-
 static void
 mark_selectable(Zypper & zypper,
                 ui::Selectable & s,
@@ -496,8 +450,7 @@ void install_remove(Zypper & zypper,
     ZYPP_THROW(ExitRequestException());
   }
 
-  Zypper::ArgList argsnew;
-  install_remove_preprocess_args(args, argsnew);
+  PackageArgs pargs(args);
 
   // --from
 
@@ -516,32 +469,34 @@ void install_remove(Zypper & zypper,
     }
 
     // for each argument search (glob) & mark
-    for_(strit, argsnew.begin(), argsnew.end())
+    for_(cit, pargs.doCaps().begin(), pargs.doCaps().end())
     {
+      sat::Solvable::SplitIdent splid(cit->first.detail().name());
+      ResKind capkind = splid.kind();
+      string capname = splid.name().asString();
+
       PoolQuery q;
-      q.addKind(kind);
-      q.addAttribute(sat::SolvAttr::name, *strit);
-      for_( it, repos.begin(), repos.end() )
-      {
+      q.addKind(capkind);
+      q.addAttribute(sat::SolvAttr::name, capname);
+      for_(it, repos.begin(), repos.end())
         q.addRepo(it->alias());
-      }
       q.setMatchGlob();
 
       // Get the best matching items and tag them for
       // installation.
-      PoolItemBest bestMatches( q.begin(), q.end() );
-      if ( ! bestMatches.empty() )
+      PoolItemBest bestMatches(q.begin(), q.end());
+      if (!bestMatches.empty())
       {
-        for_( sit, bestMatches.begin(), bestMatches.end() )
+        for_(sit, bestMatches.begin(), bestMatches.end())
         {
-          ui::asSelectable()( *sit )->setOnSystem( *sit, ResStatus::USER );
+          ui::asSelectable()(*sit)->setOnSystem(*sit, ResStatus::USER);
         }
       }
       else
       {
         // translators: meaning a package %s or provider of capability %s
-        zypper.out().error(str::form(_("'%s' not found."), strit->c_str()));
-        WAR << str::form("'%s' not found", strit->c_str()) << endl;
+        zypper.out().error(str::form(_("'%s' not found."), capname.c_str()));
+        WAR << str::form("'%s' not found", capname.c_str()) << endl;
         zypper.setExitCode(ZYPPER_EXIT_INF_CAP_NOT_FOUND);
         if (zypper.globalOpts().non_interactive)
           ZYPP_THROW(ExitRequestException());
@@ -550,7 +505,6 @@ void install_remove(Zypper & zypper,
     return;
   }
 
-  PackageArgs pargs(args);
   for_(it, pargs.doCaps().begin(), pargs.doCaps().end())
   {
     // For given PackageArgs:
