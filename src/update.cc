@@ -24,9 +24,6 @@ typedef set<PoolItem> Candidates;
 static void
 find_updates( const ResKindSet & kinds, Candidates & candidates );
 
-static PoolItem
-findInstalledItem( PoolItem item );
-
 // ----------------------------------------------------------------------------
 //
 // Updates
@@ -256,30 +253,6 @@ static bool list_patch_updates(Zypper & zypper)
 
 // ----------------------------------------------------------------------------
 
-/*
- * Collect items, select the best edition.
- * This is used to find the best available or installed pool item from a set.
- */
-class SaveBetterEdition : public zypp::resfilter::PoolItemFilterFunctor
-{
-public:
-  PoolItem best;
-
-  bool operator()(PoolItem provider)
-  {
-    if (!provider.status().isLocked() // is not locked (taboo)
-        && (!best                     // first match
-            // or a better edition than so-far-found
-            || best->edition().compare(provider->edition()) < 0))
-    {
-      best = provider;
-    }
-    return true;
-  }
-};
-
-// ----------------------------------------------------------------------------
-
 /**
  * Find all available updates of given kind.
  */
@@ -299,8 +272,13 @@ find_updates( const ResKind & kind, Candidates & candidates )
     for (; it != e; ++it)
       // show every package picked by doUpdate for installation
       // except the ones which are not currently installed (bnc #483910)
-      if (it->status().isToBeInstalled() && findInstalledItem(*it))
-        candidates.insert(*it);
+      if (it->status().isToBeInstalled())
+      {
+        ui::Selectable::constPtr s =
+            ui::Selectable::get((*it)->kind(), (*it)->name());
+        if (s->hasInstalledObj())
+          candidates.insert(*it);
+      }
     return;
   }
 
@@ -466,13 +444,6 @@ void list_updates(Zypper & zypper, const ResKindSet & kinds, bool best_effort)
       if (!best_effort)
       {
         // for packages show also the current installed version (bnc #466599)
-        //! \todo this deserves cleanup and optimization: e.g. findInstalledItem()
-        //! is called twice, once here and once in find_updates()
-        //! ma@: Use ui::Selectable instead of findInstalledItem, mainly because
-        //! it does not require to traverse the pool. Furthermore findInstalledItem
-        //! silently hides locked installed packages which is not appropriate here.
-        //! Either hide the whole update or show all.
-        //
         if (*it == ResKind::package)
         {
           ui::Selectable::Ptr sel( uipool.lookup( *ci ) );
@@ -516,29 +487,6 @@ mark_item_install (const PoolItem & pi)
 // best-effort update
 // ----------------------------------------------------------------------------
 
-/*
- * Find installed item matching passed one.
- * Use SaveBetterEdition as callback handler in order to cope with
- * multiple installed resolvables of the same name.
- * SaveBetterEdition will return the one with the highest edition.
- */
-static PoolItem
-findInstalledItem( PoolItem item )
-{
-  const zypp::ResPool& pool = God->pool();
-  SaveBetterEdition info;
-
-  invokeOnEach( pool.byIdentBegin( item->kind(), item->name() ),
-                pool.byIdentEnd( item->kind(), item->name() ),
-                resfilter::ByInstalled (),
-                functor::functorRef<bool,PoolItem> (info) );
-
-  XXX << "findInstalledItem(" << item << ") => " << info.best;
-  return info.best;
-}
-
-// ----------------------------------------------------------------------------
-
 // require update of installed item
 //   The PoolItem passed to require_item_update() is the installed resolvable
 //   to which an update candidate is guaranteed to exist.
@@ -548,7 +496,8 @@ findInstalledItem( PoolItem item )
 static bool require_item_update (const PoolItem& pi) {
   Resolver_Ptr resolver = zypp::getZYpp()->resolver();
 
-  PoolItem installed = findInstalledItem( pi );
+  ui::Selectable::constPtr s = ui::Selectable::get(pi->kind(), pi->name());
+  PoolItem installed = s->installedObj();
 
   // require anything greater than the installed version
   try {
