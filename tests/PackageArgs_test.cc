@@ -142,4 +142,19 @@ BOOST_AUTO_TEST_CASE(argToCaps_test)
   }
 }
 
+BOOST_AUTO_TEST_CASE(dupes_test)
+{
+  {
+    vector<string> rawargs;
+    rawargs.push_back("zypper>=1.4.0");
+    rawargs.push_back("zypper");
+    rawargs.push_back(">=");
+    rawargs.push_back("1.4.0");
+    rawargs.push_back("-zypper>=1.4.0");
+
+    PackageArgs args(rawargs);
+    BOOST_CHECK(args.empty());
+  }
+}
+
 // vim: set ts=2 sts=8 sw=2 ai et:

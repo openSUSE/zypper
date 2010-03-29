@@ -29,7 +29,9 @@ public:
   typedef std::set<CapRepoPair> CapRepoPairSet;
 
 public:
+  /** Processes current Zypper::arguments() */
   PackageArgs(const zypp::ResKind & kind = zypp::ResKind::package);
+  /** Takes arguments as a vector of strings */
   PackageArgs(
       const std::vector<std::string> & args,
       const zypp::ResKind & kind = zypp::ResKind::package);
@@ -44,6 +46,9 @@ public:
   /** Capabilities we don't want to install/upgrade or want to remove. */
   const CapRepoPairSet & dontCaps() const
   { return _dont_caps; }
+
+  bool empty() const
+  { return doCaps().empty() && dontCaps().empty(); }
 
 protected:
   /** join arguments at comparison operators ('=', '>=', and the like) */

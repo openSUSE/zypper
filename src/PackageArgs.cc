@@ -104,6 +104,21 @@ void PackageArgs::preprocess(const vector<string> & args)
 
 // ---------------------------------------------------------------------------
 
+static bool
+remove_duplicate(
+    PackageArgs::CapRepoPairSet & set, const PackageArgs::CapRepoPair & obj)
+{
+  PackageArgs::CapRepoPairSet::iterator match = set.find(obj);
+  if (match != set.end())
+  {
+    set.erase(match);
+    return true;
+  }
+  return false;
+}
+
+// ---------------------------------------------------------------------------
+
 void PackageArgs::argsToCaps(const zypp::ResKind & kind)
 {
   bool dont;
@@ -219,11 +234,14 @@ void PackageArgs::argsToCaps(const zypp::ResKind & kind)
     MIL << "got " << (dont?"un":"") << "wanted '" << parsedcap << "'";
     MIL << "; repo '" << repo << "'" << endl;
 
-    // store
-    // TODO remove equal +/- args here
+    // Store, but avoid duplicates in do and dont sets.
     if (dont)
-      _dont_caps.insert(CapRepoPair(parsedcap, repo));
-    else
+    {
+      if (!remove_duplicate(_do_caps, CapRepoPair(parsedcap, repo)))
+        _dont_caps.insert(CapRepoPair(parsedcap, repo));
+    }
+    else if (!remove_duplicate(_dont_caps, CapRepoPair(parsedcap, repo)))
       _do_caps.insert(CapRepoPair(parsedcap, repo));
   }
 }
+
