@@ -784,7 +784,7 @@ SATResolver::resolveQueue(const SolverQueueItemList &requestQueue,
     return ret;
 }
 
-
+/** \todo duplicate code to be joined with \ref solving. */
 void SATResolver::doUpdate()
 {
     MIL << "SATResolver::doUpdate()" << endl;
@@ -800,9 +800,18 @@ void SATResolver::doUpdate()
 
     _solv = solver_create( _SATPool );
     _solv->vendorCheckCb = &vendorCheck;
-
+    _solv->fixsystem = _fixsystem;
+    _solv->ignorealreadyrecommended = _ignorealreadyrecommended;
     _solv->updatesystem = true;
+    _solv->allowdowngrade = _allowdowngrade;
+    _solv->allowuninstall = _allowuninstall;
+    _solv->allowarchchange = _allowarchchange;
+    _solv->allowvendorchange = _allowvendorchange;
+    _solv->dosplitprovides = _dosplitprovides;
+    _solv->noupdateprovide = _noupdateprovide;
     _solv->dontinstallrecommended = true; // #FIXME dontinstallrecommended maybe set to false if it works correctly
+    _solv->distupgrade = _distupgrade;
+    _solv->distupgrade_removeunsupported = _distupgrade_removeunsupported;
 
     sat::Pool::instance().prepare();
 
