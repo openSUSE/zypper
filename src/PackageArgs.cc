@@ -20,8 +20,8 @@ using namespace std;
 using namespace zypp;
 
 
-PackageArgs::PackageArgs(const zypp::ResKind & kind)
-  : zypper(*Zypper::instance())
+PackageArgs::PackageArgs(const zypp::ResKind & kind, const Options & opts)
+  : zypper(*Zypper::instance()), _opts(opts)
 {
   preprocess(zypper.arguments());
   argsToCaps(kind);
@@ -29,8 +29,9 @@ PackageArgs::PackageArgs(const zypp::ResKind & kind)
 
 PackageArgs::PackageArgs(
     const vector<string> & args,
-    const zypp::ResKind & kind)
-  : zypper(*Zypper::instance())
+    const zypp::ResKind & kind,
+    const Options & opts)
+  : zypper(*Zypper::instance()), _opts(opts)
 {
   preprocess(args);
   argsToCaps(kind);
@@ -173,10 +174,10 @@ void PackageArgs::argsToCaps(const zypp::ResKind & kind)
       dont = true;
       arg.erase(0, 1);
     }
-    else if (zypper.command() == ZypperCommand::REMOVE)
-      dont = true;
-    else
+    else if (_opts.do_by_default)
       dont = false;
+    else
+      dont = true;
 
     // check for and remove the 'repo:' prefix
     // ignore colons coming after '(' or '=' (bnc #433679)
