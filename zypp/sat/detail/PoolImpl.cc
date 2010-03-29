@@ -180,11 +180,12 @@ namespace zypp
           ZYPP_THROW( Exception( _("Can not create sat-pool.") ) );
         }
         // initialialize logging
-        bool verbose = ( getenv("ZYPP_FULLLOG") || getenv("ZYPP_LIBSAT_FULLLOG") );
-	if (verbose)
-	    ::pool_setdebuglevel( _pool, 2 );
+	if ( getenv("ZYPP_LIBSAT_FULLLOG") )
+	  ::pool_setdebuglevel( _pool, 4 );
+	else if ( getenv("ZYPP_FULLLOG") )
+	  ::pool_setdebuglevel( _pool, 2 );
 	else
-	    ::pool_setdebugmask(_pool, SAT_DEBUG_JOB|SAT_DEBUG_STATS);
+	  ::pool_setdebugmask(_pool, SAT_DEBUG_JOB|SAT_DEBUG_STATS);
 
         ::pool_setdebugcallback( _pool, logSat, NULL );
 
