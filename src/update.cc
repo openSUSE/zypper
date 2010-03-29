@@ -699,6 +699,8 @@ void selectable_update_report(Zypper & zypper, const ui::Selectable & s)
 
   PoolItem highest = s.highestAvailableVersionObj();
   PoolItem installed = s.installedObj();
+  if (!installed)
+    return;
   DBG << "installed: " << installed << endl;
   DBG << "highest:   " << highest   << endl;
 
@@ -706,7 +708,8 @@ void selectable_update_report(Zypper & zypper, const ui::Selectable & s)
   if (identical(installed, theone))
   {
     // no update candidate at all
-    if (identical(installed, highest))
+    // (!highest means no available objects in repos. bnc #591760)
+    if (!highest || identical(installed, highest))
     {
       DBG << "the One (" << theone << ") is installed, skipping." << endl;
       zypper.out().info(str::form(
