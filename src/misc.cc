@@ -456,19 +456,19 @@ zypp::PoolQuery
 pkg_spec_to_poolquery(
     const string & glob,
     const ResKind & kind,
-    const list<RepoInfo> & repos)
+    const list<string> & repos)
 {
   PoolQuery q;
   q.addKind(kind);
   q.addAttribute(sat::SolvAttr::name, glob);
   q.setMatchGlob();
   for_(it, repos.begin(), repos.end())
-    q.addRepo(it->alias());
+    q.addRepo(*it);
   return q;
 }
 
 zypp::PoolQuery
-pkg_spec_to_poolquery(const Capability & cap, const list<RepoInfo> & repos)
+pkg_spec_to_poolquery(const Capability & cap, const list<string> & repos)
 {
   sat::Solvable::SplitIdent splid(cap.detail().name());
   return pkg_spec_to_poolquery(splid.name().asString(), splid.kind(), repos);
@@ -482,10 +482,8 @@ pkg_spec_to_poolquery(const Capability & cap, const string & repo)
   if (repo.empty())
    return pkg_spec_to_poolquery(splid.name().asString(), splid.kind());
 
-  RepoInfo repoinfo;
-  repoinfo.setAlias(repo);
-  list<RepoInfo> repos;
-  repos.push_back(repoinfo);
+  list<string> repos;
+  repos.push_back(repo);
   return pkg_spec_to_poolquery(splid.name().asString(), splid.kind(), repos);
 }
 

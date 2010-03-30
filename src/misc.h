@@ -66,12 +66,12 @@ zypp::PoolQuery
 pkg_spec_to_poolquery(
     const std::string & glob,
     const zypp::ResKind & kind = zypp::ResKind::package,
-    const std::list<zypp::RepoInfo> & repos = std::list<zypp::RepoInfo>());
+    const std::list<std::string> & repos = std::list<std::string>());
 
 zypp::PoolQuery
 pkg_spec_to_poolquery(
     const zypp::Capability & cap,
-    const std::list<zypp::RepoInfo> & repos = std::list<zypp::RepoInfo>());
+    const std::list<std::string> & repos = std::list<std::string>());
 
 zypp::PoolQuery
 pkg_spec_to_poolquery(
