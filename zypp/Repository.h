@@ -269,10 +269,10 @@ namespace zypp
          * the higher the priority. Subpriority is currently used to express
          * media preferences (\see \ref MediaPriority).
          */
-        //{@
+        //@{
         int satInternalPriority() const;
         int satInternalSubPriority() const;
-        //*}
+        //@}
     private:
 #ifndef SWIG // Swig treats it as syntax error
         friend base::SafeBool<Repository>::operator bool_type() const;
