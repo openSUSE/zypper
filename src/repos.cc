@@ -477,6 +477,31 @@ void report_unknown_repos(Out & out, list<string> not_found)
         "zypper repos"));
 }
 
+// ----------------------------------------------------------------------------
+
+unsigned repo_specs_to_aliases(Zypper & zypper,
+    const list<string> & rspecs, list<string> & aliases, bool enabled_only)
+{
+  list<string> not_found;
+  list<RepoInfo> repos;
+  get_repos(zypper, rspecs.begin(), rspecs.end(), repos, not_found);
+  if (!not_found.empty())
+  {
+    report_unknown_repos(zypper.out(), not_found);
+    zypper.setExitCode(ZYPPER_EXIT_ERR_INVALID_ARGS);
+    ZYPP_THROW(ExitRequestException("Unknown repo specified."));
+  }
+  for_(it, repos.begin(), repos.end())
+  {
+    if (!enabled_only || it->enabled())
+      aliases.push_back(it->alias());
+    else
+      zypper.out().warning(str::form(_("Ignoring disabled repository '%s'"),
+        zypper.config().show_alias ? it->alias().c_str() : it->name().c_str()));
+  }
+  return aliases.size();
+}
+
 // ---------------------------------------------------------------------------
 
 /**
