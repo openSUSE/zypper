@@ -21,6 +21,7 @@
 
 #include "zypp/PoolQuery.h"
 
+#include "Zypper.h"
 #include "main.h"
 #include "utils/misc.h"
 #include "utils/pager.h"
@@ -348,6 +349,8 @@ static SrcPackage::constPtr source_find( const string & arg )
     return srcpkg;
 }
 
+// ----------------------------------------------------------------------------
+
 void build_deps_install(Zypper & zypper)
 {
   /*
@@ -391,6 +394,8 @@ void build_deps_install(Zypper & zypper)
   }
 }
 
+// ----------------------------------------------------------------------------
+
 void mark_src_pkgs(Zypper & zypper)
 {
   /*
@@ -412,6 +417,8 @@ void mark_src_pkgs(Zypper & zypper)
           _("Source package '%s' not found.")) % (*it)));
   }
 }
+
+// ----------------------------------------------------------------------------
 
 void install_src_pkgs(Zypper & zypper)
 {
@@ -441,6 +448,45 @@ void install_src_pkgs(Zypper & zypper)
       zypper.setExitCode(ZYPPER_EXIT_ERR_ZYPP);
     }
   }
+}
+
+// ----------------------------------------------------------------------------
+
+zypp::PoolQuery
+pkg_spec_to_poolquery(
+    const string & glob,
+    const ResKind & kind,
+    const list<RepoInfo> & repos)
+{
+  PoolQuery q;
+  q.addKind(kind);
+  q.addAttribute(sat::SolvAttr::name, glob);
+  q.setMatchGlob();
+  for_(it, repos.begin(), repos.end())
+    q.addRepo(it->alias());
+  return q;
+}
+
+zypp::PoolQuery
+pkg_spec_to_poolquery(const Capability & cap, const list<RepoInfo> & repos)
+{
+  sat::Solvable::SplitIdent splid(cap.detail().name());
+  return pkg_spec_to_poolquery(splid.name().asString(), splid.kind(), repos);
+}
+
+zypp::PoolQuery
+pkg_spec_to_poolquery(const Capability & cap, const string & repo)
+{
+  sat::Solvable::SplitIdent splid(cap.detail().name());
+
+  if (repo.empty())
+   return pkg_spec_to_poolquery(splid.name().asString(), splid.kind());
+
+  RepoInfo repoinfo;
+  repoinfo.setAlias(repo);
+  list<RepoInfo> repos;
+  repos.push_back(repoinfo);
+  return pkg_spec_to_poolquery(splid.name().asString(), splid.kind(), repos);
 }
 
 // Local Variables:
