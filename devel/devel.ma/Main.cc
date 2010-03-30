@@ -9,6 +9,7 @@
 ///////////////////////////////////////////////////////////////////
 
 //static const Pathname sysRoot( getenv("SYSROOT") ? getenv("SYSROOT") : "/Local/ROOT" );
+//static const Pathname sysRoot( "/tmp/ToolScanRepos" );
 static const Pathname sysRoot( "/" );
 
 ///////////////////////////////////////////////////////////////////
@@ -58,6 +59,12 @@ namespace zypp
   }
 }
 
+std::ostream & operator<<( std::ostream & str, const sat::Solvable::SplitIdent & obj )
+{
+  str << "{" << obj.ident() << "}{" << obj.kind() << "}{" << obj.name () << "}" << endl;
+  return str;
+}
+
 int main( int argc, char * argv[] )
 try {
   --argc;
@@ -65,79 +72,24 @@ try {
   zypp::base::LogControl::instance().logToStdErr();
   INT << "===[START]==========================================" << endl;
   ///////////////////////////////////////////////////////////////////
-
-
-  DBG << Pathname("a\\b") << endl;
-  DBG << Pathname(".\\a/") << endl;
-  DBG << Pathname("/a\\b/c") << endl;
-
-  INT << "===[END]============================================" << endl << endl;
-  zypp::base::LogControl::instance().logNothing();
-  return 0;
-
-  ::unsetenv( "ZYPP_CONF" );
-  ZConfig::instance();
+  if ( sysRoot == "/" )
+    ::unsetenv( "ZYPP_CONF" );
+  ZConfig::instance().setTextLocale( Locale("de_DE") );
   ResPool   pool( ResPool::instance() );
   sat::Pool satpool( sat::Pool::instance() );
   ///////////////////////////////////////////////////////////////////
-  dumpRange( WAR, satpool.multiversionBegin(), satpool.multiversionEnd() ) << endl;
+  dumpRange( WAR << "satpool.multiversion " , satpool.multiversionBegin(), satpool.multiversionEnd() ) << endl;
   TestSetup::LoadSystemAt( sysRoot, Arch_i586 );
   ///////////////////////////////////////////////////////////////////
 
-  dumpRange( USR, satpool.reposBegin(), satpool.reposEnd() ) << endl;
-  USR << "pool: " << pool << endl;
+  ui::Selectable::Ptr s( getSel<Package>( "libzypp" ) );
+  MIL << s << endl;
+  DBG << s->setStatus( ui::S_Taboo ) << endl;
+  DBG << s->setStatus( ui::S_Protected ) << endl;
+  MIL << s << endl;
+  DBG << s->setStatus( ui::S_Update ) << endl;
+  MIL << s << endl;
 
-  dumpRange( WAR, satpool.multiversionBegin(), satpool.multiversionEnd() ) << endl;
-
-  ui::Selectable::Ptr sel( getSel<Package>( "test" ) );
-  WAR << dump( sel ) << endl;
-
-  DBG << sel->setStatus( ui::S_Update, ResStatus::USER ) << endl;
-  WAR << dump( sel ) << endl;
-
-  DBG << sel->setStatus( ui::S_Del, ResStatus::USER ) << endl;
-  WAR << dump( sel ) << endl;
-
-  DBG << sel->setStatus( ui::S_KeepInstalled, ResStatus::USER ) << endl;
-  WAR << dump( sel ) << endl;
-
-  DBG << sel->pickInstall( *(++++sel->availableBegin()) ) << endl;
-  WAR << dump( sel ) << endl;
-
-  DBG << sel->pickDelete( *(++sel->installedBegin()) ) << endl;
-  WAR << dump( sel ) << endl;
-
-  DBG << sel->pickInstall( *(sel->installedBegin()) ) << endl;
-  WAR << dump( sel ) << endl;
-
-  solve();
-  WAR << dump( sel ) << endl;
-  pool::GetResolvablesToInsDel collect( pool, pool::GetResolvablesToInsDel::ORDER_BY_MEDIANR );
-
-  ///////////////////////////////////////////////////////////////////
-  INT << "===[END]============================================" << endl << endl;
-  zypp::base::LogControl::instance().logNothing();
-  	return 0;
-   {
-    PoolQuery q;
-    q.addAttribute( sat::SolvAttr::name, "open" );
-    q.addKind( ResKind::patch );
-    MIL << dump(q) << endl;
-  }
-  {
-    PoolQuery q;
-    q.addAttribute( sat::SolvAttr::name, "patch:yast2-samba-server" );
-    MIL << dump(q) << endl;
-  }
-
-  if ( 0 )
-  {
-    getZYpp()->resolver()->addRequire( Capability("emacs") );
-    solve();
-    vdumpPoolStats( USR << "Transacting:"<< endl,
-                    make_filter_begin<resfilter::ByTransact>(pool),
-                    make_filter_end<resfilter::ByTransact>(pool) ) << endl;
-  }
 
   ///////////////////////////////////////////////////////////////////
   INT << "===[END]============================================" << endl << endl;

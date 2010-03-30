@@ -150,7 +150,7 @@ namespace zypp
        * located at the root of the media it is important to know the path
        * to the product directory relative to the media root. So a media
        * verifier can be set for that media. You may also read it as
-       * <tt>baseUrl = url to mount</tt> and <tt>path = path on the 
+       * <tt>baseUrl = url to mount</tt> and <tt>path = path on the
        * mounted media</tt>.
        *
        * It is not mandatory, and the default is \c /.
@@ -313,9 +313,17 @@ namespace zypp
       /** Return the locales the license is available for.
        * \ref Locale::noCode is included in case of \c license.txt which does
        * not specify a specific locale.
-      */
+       */
       LocaleSet getLicenseLocales() const;
       //@}
+
+      /** \name Repository global unique id
+       *
+       *
+       */
+      //@{
+      //@}
+
     public:
       /**
        * Write a human-readable representation of this RepoInfo object

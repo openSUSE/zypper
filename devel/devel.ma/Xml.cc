@@ -1,55 +1,39 @@
-#include "Tools.h"
-
-extern "C"
-{
-#include <libxml/xmlreader.h>
-#include <libxml/xmlerror.h>
-}
 #include <iostream>
-#include <fstream>
 #include <list>
 #include <map>
 #include <set>
 
-#include <boost/call_traits.hpp>
-
-#include <zypp/base/LogControl.h>
 #include <zypp/base/LogTools.h>
+#include <zypp/base/LogControl.h>
+#include <zypp/base/Exception.h>
 
-#include "zypp/base/Exception.h"
-#include "zypp/base/InputStream.h"
-#include "zypp/base/DefaultIntegral.h"
-#include <zypp/base/Function.h>
-#include <zypp/base/Iterator.h>
-#include <zypp/Pathname.h>
-#include <zypp/Edition.h>
-#include <zypp/CheckSum.h>
-#include <zypp/Date.h>
-#include <zypp/Rel.h>
-
-#include "zypp/parser/xml/Reader.h"
+#include <zypp/parser/xml/Reader.h>
+//#include <zypp/parser/xml/ParseDef.h>
+//#include <zypp/parser/xml/ParseDefConsume.h>
 
 using namespace std;
 using namespace zypp;
 
+#include <zypp/base/Measure.h>
+using zypp::debug::Measure;
+
 ///////////////////////////////////////////////////////////////////
 
-static const Pathname sysRoot( "/Local/ROOT" );
-
-///////////////////////////////////////////////////////////////////
-
-template<class _Cl>
-    void ti( const _Cl & c )
+/** Helper to detect an objects type. */
+template<class _Cl> void ti( const _Cl & c )
 {
   SEC << __PRETTY_FUNCTION__ << endl;
 }
 
-///////////////////////////////////////////////////////////////////
-
-bool dump( xml::Reader & reader_r )
+bool noop( xml::Reader & reader_r )
 {
-  MIL << *reader_r << endl;
+  return true;
 }
+struct Noop
+{
+  bool operator()( xml::Reader & reader_r ) const
+  { return true; }
+};
 
 ///////////////////////////////////////////////////////////////////
 
@@ -83,65 +67,33 @@ bool dumpNode( xml::Reader & reader_r )
 
 ///////////////////////////////////////////////////////////////////
 
-bool dumpEd( xml::Reader & reader_r )
+bool consume( xml::Reader & reader_r )
 {
-  static int num = 5;
-  if ( reader_r->nodeType() == XML_READER_TYPE_ELEMENT
-       && reader_r->name() == "version" )
-    {
-      MIL << *reader_r << endl;
-#define _show(x) DBG << #x << " = " << reader_r->getAttribute( #x ) << endl
-      _show( rel );
-      _show( ver );
-      _show( epoch );
-      WAR << Edition( reader_r->getAttribute( "ver" ).asString(),
-                      reader_r->getAttribute( "rel" ).asString(),
-                      reader_r->getAttribute( "epoch" ).asString() ) << endl;
-      --num;
-    }
-  return num;
-}
-
-///////////////////////////////////////////////////////////////////
-
-template<class _OutputIterator>
-  struct DumpDeps
+  switch ( reader_r->nodeType() )
   {
-    DumpDeps( _OutputIterator result_r )
-    : _result( result_r )
-    {}
+    case XML_READER_TYPE_ELEMENT:
+      //MIL << *reader_r << endl;
+      for ( int i = 0; i < reader_r->attributeCount(); ++i )
+      {
+	//MIL << " attr no " << i << " '" << reader_r->getAttributeNo( i ) << "'" << endl;
+      }
+      break;
 
-    bool operator()( xml::Reader & reader_r )
-    {
-      if ( reader_r->nodeType()     == XML_READER_TYPE_ELEMENT
-           && reader_r->prefix()    == "rpm"
-           && reader_r->localName() == "entry" )
-        {
-          string n( reader_r->getAttribute( "name" ).asString() );
-          Rel op( reader_r->getAttribute( "flags" ).asString() );
-          if ( op != Rel::ANY )
-            {
-              n += " ";
-              n += op.asString();
-              n += " ";
-              n += reader_r->getAttribute( "ver" ).asString();
-              n += "-";
-              n += reader_r->getAttribute( "rel" ).asString();
-            }
-          *_result = n;
-          ++_result;
-        }
-      return true;
-    }
+    case XML_READER_TYPE_ATTRIBUTE:
+      //WAR << *reader_r << endl;
+      break;
 
-    _OutputIterator _result;
-  };
+    case XML_READER_TYPE_TEXT:
+    case XML_READER_TYPE_CDATA:
+      //DBG << *reader_r << endl;
+      break;
 
-template<class _OutputIterator>
-  DumpDeps<_OutputIterator> dumpDeps( _OutputIterator result_r )
-  { return DumpDeps<_OutputIterator>( result_r ); }
-
-///////////////////////////////////////////////////////////////////
+    default:
+      //ERR << *reader_r << endl;
+      break;
+  }
+  return true;
+}
 
 /******************************************************************
 **
@@ -150,45 +102,40 @@ template<class _OutputIterator>
 */
 int main( int argc, char * argv[] )
 {
+  --argc, ++argv;
   INT << "===[START]==========================================" << endl;
 
-  --argc;
-  ++argv;
+  bool verbose( true );
+  Pathname input( "test.xml" );
+  xml::Reader::ProcessNode consumer( consume );
 
-  Pathname repodata;
-  if ( argc )
-    {
-      repodata = *argv;
-    }
-  else
-    {
-      repodata = "/Local/FACTORY/repodata";
-      repodata /= "primary.xml";
-    }
+  if ( argc && !strcmp( *argv, "-q" ) )
+  {
+    --argc, ++argv;
+    verbose = false;
+  }
 
-  if ( 1 )
+  {
+    Measure m( "Parse all" );
+    for ( ; argc; --argc, ++argv )
     {
-      Measure m( "Parse" );
-      xml::Reader reader( repodata );
-
-      switch ( 3 )
+      input = *argv;
+      if( 0 )
+      try {
+	Measure m( input.basename() );
+// 	zypp::base::LogControl::TmpLineWriter shutUp;
+	xml::Reader reader( input );
+	if ( verbose )
+	  reader.foreachNodeOrAttribute( consumer );
+	else
+	  reader.foreachNode( consumer );
+      }
+      catch ( const Exception & exp )
       {
-	case 1:
-	  reader.foreachNode( dumpNode );
-	  break;
-	case 2:
-	  reader.foreachNodeOrAttribute( dumpNode );
-	  break;
-	case 3:
-	  reader.foreachNode( dumpEd );
-	  break;
-
-	default:
-	  WAR << "NOP" << endl;
-	  break;
+	INT << exp << endl << exp.historyAsString();
       }
     }
-
+  }
   INT << "===[END]============================================" << endl << endl;
   return 0;
 }
