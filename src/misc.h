@@ -62,11 +62,6 @@ void install_src_pkgs(Zypper & zypper);
  */
 void build_deps_install(Zypper & zypper);
 
-zypp::PoolQuery
-pkg_spec_to_poolquery(
-    const std::string & glob,
-    const zypp::ResKind & kind = zypp::ResKind::package,
-    const std::list<std::string> & repos = std::list<std::string>());
 
 zypp::PoolQuery
 pkg_spec_to_poolquery(
