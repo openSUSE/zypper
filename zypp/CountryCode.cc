@@ -10,11 +10,11 @@
  *
 */
 #include <iostream>
-#include <map>
 
 #include "zypp/base/Logger.h"
 #include "zypp/base/String.h"
 #include "zypp/base/Gettext.h"
+#include "zypp/base/Tr1hash.h"
 
 #include "zypp/CountryCode.h"
 
@@ -31,7 +31,7 @@ namespace zypp
     /** Wrap static codemap data. */
     struct CodeMaps // singleton
     {
-      typedef std::map<std::string,std::string> CodeMap;
+      typedef std::tr1::unordered_map<std::string,std::string> CodeMap;
       typedef CodeMap::const_iterator Index;
 
       /** Return the CodeMap Index for \a code_r. */
@@ -50,37 +50,15 @@ namespace zypp
       /** Make shure the code is in the code maps and return it's index. */
       inline Index lookup( const std::string & code_r );
 
-      /** Return index of \a code_r, if it's in the code maps. */
-      inline Index lookupCode( const std::string & code_r );
-
     private:
-      /** Two letter codes. */
-      CodeMap iso3166;
-      /** All the stuff the application injects. */
-      CodeMap others;
+      /** All the codes. */
+      CodeMap codes;
     };
-
-    inline CodeMaps::Index CodeMaps::lookupCode( const std::string & code_r )
-    {
-      switch ( code_r.size() )
-        {
-        case 2:
-          {
-            Index it = iso3166.find( code_r );
-            if ( it != iso3166.end() )
-              return it;
-          }
-          break;
-        }
-      // not found: check others
-      // !!! not found at all returns others.end()
-      return others.find( code_r );
-    }
 
     inline CodeMaps::Index CodeMaps::lookup( const std::string & code_r )
     {
-      Index it = lookupCode( code_r );
-      if ( it != others.end() )
+      Index it = codes.find( code_r );
+      if ( it != codes.end() )
         return it;
 
       // not found: Remember a new code
@@ -95,13 +73,13 @@ namespace zypp
           WAR << "Malformed CountryCode '" << code_r << "' (not upper case)" << endl;
           // but maybe we're lucky with the upper case code
           // and find a country name.
-          it = lookupCode( lcode );
-          if ( it != others.end() )
+          it = codes.find( lcode );
+          if ( it != codes.end() )
             nval.second = it->second;
         }
 
       MIL << "Remember CountryCode '" << code_r << "': '" << nval.second << "'" << endl;
-      return others.insert( nval ).first;
+      return codes.insert( nval ).first;
     }
 
     /////////////////////////////////////////////////////////////////
@@ -212,7 +190,7 @@ namespace zypp
     CodeMaps::CodeMaps()
     {
       // Defined CountryCode constants
-      others[""]        = N_( "No Code" );
+      codes[""]        = N_( "No Code" );
 
       struct Init
       {
@@ -472,7 +450,7 @@ namespace zypp
       };
 
       for (const Init * i = init; i->iso3166 != NULL; ++i)
-	  iso3166[i->iso3166] = i->name;
+	  codes[i->iso3166] = i->name;
     }
 
     /////////////////////////////////////////////////////////////////
