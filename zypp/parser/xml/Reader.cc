@@ -20,6 +20,7 @@ extern "C"
 #include "zypp/base/LogControl.h"
 #include "zypp/base/LogTools.h"
 #include "zypp/base/Exception.h"
+#include "zypp/base/String.h"
 
 #include "zypp/parser/xml/Reader.h"
 
@@ -50,10 +51,21 @@ namespace zypp
       int ioclose( void * /*context_r*/ )
       { return 0; }
 
+
+      std::list<std::string> structuredErrors;
       void structuredErrorFunc( void * userData, xmlErrorPtr error )
       {
+	if ( error )
+	{
+	  // error->message is NL terminated
+	  std::string err( str::form( "%s[%d] %s", Pathname::basename(error->file).c_str(), error->line,
+				      str::stripSuffix( error->message, "\n" ).c_str() ) );
+	  structuredErrors.push_back( err );
+	  WAR << err << endl;
+	}
+#if 0
         if ( error )
-          {
+        {
 #define X(m) SEC << " " << #m << "\t" << error->m << endl
 #define XS(m) SEC << " " << #m << "\t" << (error->m?error->m:"NA") << endl
             X(domain);
@@ -71,8 +83,19 @@ namespace zypp
             X(node);
 #undef X
 #undef XS
-          }
+        }
+#endif
       }
+
+      struct ParseException : public Exception
+      {
+	ParseException()
+	: Exception( "Parse error: " + ( structuredErrors.empty() ? std::string("unknown error"): structuredErrors.back() ) )
+	{
+	  for_( it, structuredErrors.begin(), --structuredErrors.end() )
+	    addHistory( *it );
+	}
+      };
 
       /////////////////////////////////////////////////////////////////
     } // namespace
@@ -94,6 +117,8 @@ namespace zypp
       if ( ! _reader || ! stream_r.stream().good() )
         ZYPP_THROW( Exception( "Bad input stream" ) );
       // set error handler
+      // TODO: Fix using a global lastStructuredError string is not reentrant.
+      structuredErrors.clear();
       xmlTextReaderSetStructuredErrorHandler( _reader, structuredErrorFunc, NULL );
       // TODO: set validation
 
@@ -145,7 +170,7 @@ namespace zypp
       xmlTextReaderClose( _reader );
       if ( ret != 0 )
         {
-          ZYPP_THROW( Exception( "Parse error" ) );
+          ZYPP_THROW( ParseException() );
         }
       return false;
     }
@@ -164,7 +189,7 @@ namespace zypp
         }
       if ( ret != 0 )
         {
-          ZYPP_THROW( Exception( "Parse error" ) );
+          ZYPP_THROW( ParseException() );
         }
       return false;
     }
