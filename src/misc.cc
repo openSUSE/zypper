@@ -15,11 +15,13 @@
 #include "zypp/SrcPackage.h"
 #include "zypp/Package.h"
 #include "zypp/Capabilities.h"
+#include "zypp/ui/Selectable.h"
 
 
 #include "zypp/RepoInfo.h"
 
 #include "zypp/PoolQuery.h"
+#include "zypp/PoolItemBest.h"
 
 #include "Zypper.h"
 #include "main.h"
@@ -33,6 +35,7 @@
 
 using namespace std;
 using namespace zypp;
+using namespace zypp::ui;
 using namespace boost;
 
 extern ZYpp::Ptr God;
@@ -481,6 +484,40 @@ pkg_spec_to_poolquery(const Capability & cap, const string & repo)
     repos.push_back(repo);
   return pkg_spec_to_poolquery(cap, repos);
 }
+
+set<PoolItem>
+get_installed_providers(const Capability & cap)
+{
+  set<PoolItem> providers;
+
+  sat::WhatProvides q(cap);
+  for_(it, q.selectableBegin(), q.selectableEnd())
+  {
+    Selectable::constPtr s;
+    if (traits::isPseudoInstalled(s->kind()))
+    {
+      PoolItem best;
+      for_(ait, s->availableBegin(), s->availableEnd())
+      {
+        // this works also for patches - isSatisfied excludes !isRelevant
+        if (ait->isSatisfied())
+          // we don't care about repo priorities, vendorst and stuff like that
+          // here. All we want to know is what is the highest available version
+          // that already is satisified.
+          // TODO such funtion could be part of Selectable (or does theObj return such object?)
+          // TODO but we should care about repos
+          if (!best || best->edition() < (*ait)->edition())
+            best = *ait;
+      }
+      providers.insert(best);
+    }
+    else if (s->hasInstalledObj())
+      providers.insert(s->installedObj());
+  }
+
+  return providers;
+}
+
 
 // Local Variables:
 // c-basic-offset: 2

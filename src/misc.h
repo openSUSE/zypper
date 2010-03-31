@@ -73,4 +73,7 @@ pkg_spec_to_poolquery(
     const zypp::Capability & cap,
     const std::string & repo = std::string());
 
+std::set<zypp::PoolItem>
+get_installed_providers(const zypp::Capability & cap);
+
 #endif

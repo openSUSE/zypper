@@ -38,6 +38,7 @@
 #include "main.h"
 #include "Zypper.h"
 #include "Command.h"
+#include "SolverRequester.h"
 
 #include "Table.h"
 #include "utils/misc.h"
@@ -46,7 +47,6 @@
 #include "utils/misc.h"
 
 #include "repos.h"
-#include "install.h"
 #include "update.h"
 #include "solve-commit.h"
 #include "misc.h"
@@ -3230,6 +3230,28 @@ void Zypper::doCommand()
 
     bool install_not_remove = command() == ZypperCommand::INSTALL;
 
+    // can't remove patch
+    if (kind == ResKind::patch && !install_not_remove)
+    {
+      out().error(
+          _("Cannot uninstall patches."),
+          _("Installed status of a patch is determined solely based on its dependencies.\n"
+            "Patches are not installed in sense of copied files, database records,\n"
+            "or similar."));
+      setExitCode(ZYPPER_EXIT_ERR_INVALID_ARGS);
+      throw ExitRequestException("not implemented");
+    }
+
+    // can't remove pattern (for now)
+    if (kind == ResKind::pattern && !install_not_remove)
+    {
+      //! \todo define and implement pattern removal (bnc #407040)
+      out().error(
+          _("Uninstallation of a pattern is currently not defined and implemented."));
+      setExitCode(ZYPPER_EXIT_ERR_INVALID_ARGS);
+      throw ExitRequestException("not implemented");
+    }
+
     // parse the download options to check for errors
     get_download_option(*this);
 
@@ -3355,9 +3377,50 @@ void Zypper::doCommand()
     // needed to compute status of PPP
     resolve(*this);
 
+    // parse package arguments
+    PackageArgs args(kind);
+
     // tell the solver what we want
-    install_remove(*this, _arguments, install_not_remove, kind);
-    install_remove(*this, rpms_files_caps, true, kind);
+
+    SolverRequester::Options sropts;
+    if (copts.find("force") != copts.end())
+      sropts.force = true;
+    sropts.force_by_cap  = copts.find("capability") != copts.end();
+    sropts.force_by_name = copts.find("name") != copts.end();
+    if (sropts.force)
+      sropts.force_by_name = true;
+
+    if (sropts.force_by_cap && sropts.force_by_name)
+    {
+      // translators: meaning --capability contradicts --force/--name
+      out().error(str::form(_("%s contradicts %s"),
+          "--capability", (sropts.force ? "--force" : "--name")));
+      setExitCode(ZYPPER_EXIT_ERR_INVALID_ARGS);
+      ZYPP_THROW(ExitRequestException());
+    }
+
+    if (install_not_remove && sropts.force_by_cap && sropts.force)
+    {
+      // translators: meaning --force with --capability
+      out().error(str::form(_("%s cannot currently be used with %s"),
+          "--force", "--capability"));
+      setExitCode(ZYPPER_EXIT_ERR_INVALID_ARGS);
+      ZYPP_THROW(ExitRequestException());
+    }
+
+    if (install_not_remove && (optit = copts.find("from")) != copts.end())
+      repo_specs_to_aliases(*this, optit->second, sropts.from_repos);
+
+    SolverRequester sr(sropts);
+    if (install_not_remove)
+      sr.install(args);
+    else
+      sr.remove(args);
+    PackageArgs rpm_args(rpms_files_caps);
+    sr.install(rpm_args);
+
+    // give user feedback from package selection
+    // TODO feedback goes here
 
     solve_and_commit(*this);
 

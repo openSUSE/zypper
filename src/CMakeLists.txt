@@ -18,10 +18,10 @@ SET (zypper_HEADERS
   info.h
   Table.h
   locks.h
-  install.h
   update.h
   solve-commit.h
   PackageArgs.h
+  SolverRequester.h
   Summary.h
   callbacks/keyring.h
   callbacks/media.h
@@ -39,10 +39,10 @@ SET( zypper_SRCS
   info.cc
   Table.cc
   locks.cc
-  install.cc
   update.cc
   solve-commit.cc
   PackageArgs.cc
+  SolverRequester.cc
   Summary.cc
   callbacks/media.cc
   ${zypper_HEADERS}
