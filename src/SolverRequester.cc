@@ -12,11 +12,14 @@
 
 #include "zypp/ZYppFactory.h"
 #include "zypp/base/LogTools.h"
-#include "zypp/Capability.h"
+
 #include "zypp/PoolQuery.h"
 #include "zypp/PoolItemBest.h"
-#include "zypp/ui/Selectable.h"
+
+#include "zypp/Capability.h"
 #include "zypp/Resolver.h"
+#include "zypp/Patch.h"
+#include "zypp/ui/Selectable.h"
 
 #include "Zypper.h" // temporarily!!!
 #include "misc.h"
@@ -28,12 +31,12 @@ using namespace zypp;
 using namespace zypp::ui;
 
 void SolverRequester::install(const PackageArgs & args)
-{ install_remove(args, true); }
+{ installRemove(args, true); }
 
 void SolverRequester::remove(const PackageArgs & args)
-{ install_remove(args, true); }
+{ installRemove(args, true); }
 
-void SolverRequester::install_remove(const PackageArgs & args, bool doinst)
+void SolverRequester::installRemove(const PackageArgs & args, bool doinst)
 {
   if (args.empty())
     return;
@@ -239,7 +242,23 @@ void SolverRequester::remove(const Capability & cap)
 
 // ----------------------------------------------------------------------------
 
-/**
+void SolverRequester::update(const PackageArgs & args)
+{
+  if (args.empty())
+    return;
+
+  for_(it, args.doCaps().begin(), args.doCaps().end())
+    update(it->first, it->second);
+
+  /* TODO Solve and unmark dont which are setToBeInstalled in the pool?
+  for_(it, args.dontCaps().begin(), args.dontCaps().end())
+    remove(it->first);
+  */
+}
+
+// ----------------------------------------------------------------------------
+
+/*
  * Asserting that at least one provider of given \a cap is already installed,
  * this method checks for available update candidates and tries to select
  * the best for installation (thus update). Reports any problems or interesting
@@ -257,4 +276,80 @@ void SolverRequester::remove(const Capability & cap)
 void SolverRequester::update(const Capability & cap, const string & repoalias)
 {
   // TODO report 'newest already installed' (see mark_by_name)
+}
+
+// ----------------------------------------------------------------------------
+
+void SolverRequester::updatePatterns()
+{
+
+}
+
+// ----------------------------------------------------------------------------
+
+void SolverRequester::updatePatches()
+{
+  DBG << "going to mark needed patches for installation" << endl;
+
+  // search twice: if there are none with restartSuggested(), retry on all
+  // (in the first run, ignore_pkgmgmt == 0, in the second it is 1)
+  bool any_marked = false;
+  for (unsigned ignore_pkgmgmt = 0;
+       !any_marked && ignore_pkgmgmt < 2; ++ignore_pkgmgmt)
+  {
+    for_(it, zypp::getZYpp()->pool().proxy().byKindBegin(ResKind::patch),
+             zypp::getZYpp()->pool().proxy().byKindEnd  (ResKind::patch))
+    {
+      if (installPatch(**it, ignore_pkgmgmt))
+        any_marked = true;
+    }
+
+    if (any_marked && !ignore_pkgmgmt)
+      MIL << "got some pkgmgmt patches, will install these first" << endl;
+  }
+}
+
+// ----------------------------------------------------------------------------
+
+bool SolverRequester::installPatch(Selectable & s, bool ignore_pkgmgmt)
+{
+#warning get rid of zypper here
+  Zypper & zypper = *Zypper::instance();
+
+  Patch::constPtr patch = asKind<Patch>(s.candidateObj());
+  if (s.isBroken()) // bnc #506860
+  {
+    DBG << "broken candidate patch " << patch
+        << " affects_pkgmgmt: " << patch->restartSuggested()
+        << (ignore_pkgmgmt ? " (ignored)" : "") << endl;
+
+    if (ignore_pkgmgmt || patch->restartSuggested())
+    {
+      // bnc #221476
+      if (_opts.skip_interactive
+          && (patch->interactive() || !patch->licenseToConfirm().empty()))
+      {
+        // Skipping a patch because it is marked as interactive or has
+        // license to confirm and --skip-interactive is requested
+        // (i.e. also --non-interactive, since it implies --skip-interactive)
+        zypper.out().warning(str::form(
+          // translators: %s is the name of a patch
+          _("'%s' is interactive, skipping."),
+          string(patch->name() + string("-") + patch->edition().asString()).c_str()));
+        return false;
+      }
+      else
+      {
+        // TODO use _opts.force
+        bool result = s.setToInstall();
+        if (!result)
+          ERR << "Marking " << s << " for installation failed" << endl;
+        return result;
+      }
+    }
+  }
+  else
+    XXX << "candidate patch " << patch << " is satisfied or irrelevant" << endl;
+
+  return false;
 }
