@@ -1,6 +1,7 @@
 -------------------------------------------------------------------
 Thu Apr  1 10:11:27 CEST 2010 - jkupec@suse.cz
 
+- Merged rpm .spec file cleanup (Pavol Rusnák)
 - Fixed crash if no available packages found in repos (bnc #591760)
 - 1.4.1
 
