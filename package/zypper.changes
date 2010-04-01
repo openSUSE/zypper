@@ -1,4 +1,10 @@
 -------------------------------------------------------------------
+Thu Apr  1 10:11:27 CEST 2010 - jkupec@suse.cz
+
+- Fixed crash if no available packages found in repos (bnc #591760)
+- 1.4.1
+
+-------------------------------------------------------------------
 Fri Mar 26 13:08:10 CET 2010 - jkupec@suse.cz
 
 - --label added to 'targetos' command (bnc #586303)
