@@ -301,6 +301,7 @@ detectDE()
     if [ x"$KDE_FULL_SESSION" = x"true" ]; then DE=kde;
     elif [ x"$GNOME_DESKTOP_SESSION_ID" != x"" ]; then DE=gnome;
     elif xprop -root _DT_SAVE_MODE | grep ' = \"xfce4\"$' >/dev/null 2>&1; then DE=xfce;
+    elif [ x"$DESKTOP_SESSION" == x"LXDE" ]; then DE=lxde;
     fi
 }
 
@@ -376,6 +377,15 @@ su_xfce()
     fi
 }
 
+su_lxde()
+{
+    if which gnomesu &>/dev/null ; then
+        su_gnome
+    else
+        su_generic
+    fi
+}
+
 [ x"$1" != x"" ] || exit_failure_syntax
 
 user=
@@ -439,6 +449,10 @@ case "$DE" in
 
     xfce)
     su_xfce
+    ;;
+
+    lxde)
+    su_lxde
     ;;
 
     *)
