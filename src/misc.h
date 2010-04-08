@@ -76,4 +76,10 @@ pkg_spec_to_poolquery(
 std::set<zypp::PoolItem>
 get_installed_providers(const zypp::Capability & cap);
 
+
+std::string poolitem_user_string(const zypp::PoolItem & pi);
+
+/** Returns string("name-edition.arch"). */
+std::string resolvable_user_string(const zypp::Resolvable & res);
+
 #endif

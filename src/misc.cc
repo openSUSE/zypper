@@ -493,7 +493,7 @@ get_installed_providers(const Capability & cap)
   sat::WhatProvides q(cap);
   for_(it, q.selectableBegin(), q.selectableEnd())
   {
-    Selectable::constPtr s;
+    Selectable::constPtr s(*it);
     if (traits::isPseudoInstalled(s->kind()))
     {
       PoolItem best;
@@ -501,7 +501,7 @@ get_installed_providers(const Capability & cap)
       {
         // this works also for patches - isSatisfied excludes !isRelevant
         if (ait->isSatisfied())
-          // we don't care about repo priorities, vendorst and stuff like that
+          // we don't care about repo priorities, vendors and stuff like that
           // here. All we want to know is what is the highest available version
           // that already is satisified.
           // TODO such funtion could be part of Selectable (or does theObj return such object?)
@@ -516,6 +516,18 @@ get_installed_providers(const Capability & cap)
   }
 
   return providers;
+}
+
+string poolitem_user_string(const PoolItem & pi)
+{
+  return resolvable_user_string(*pi.resolvable());
+}
+
+string resolvable_user_string(const Resolvable & res)
+{
+  ostringstream str;
+  str << res.name() << "-" << res.edition() << "." << res.arch();
+  return str.str();
 }
 
 

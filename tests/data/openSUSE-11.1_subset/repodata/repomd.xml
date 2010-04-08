@@ -1,0 +1,9 @@
+<?xml version="1.0" ?>
+<repomd xmlns="http://linux.duke.edu/metadata/repo">
+  <data type="primary">
+    <location href="repodata/primary.xml.gz"/>
+    <checksum type="sha">a0cdd9d7870e38d6c395e92058e291f061728b23</checksum>
+    <timestamp>1270737163.0</timestamp>
+    <open-checksum type="sha">28470ad21a6bb95f4afdbdb72908243bfb3d4023</open-checksum>
+    </data>
+</repomd>

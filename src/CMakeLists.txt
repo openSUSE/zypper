@@ -42,6 +42,7 @@ SET( zypper_SRCS
   update.cc
   solve-commit.cc
   PackageArgs.cc
+  RequestFeedback.cc
   SolverRequester.cc
   Summary.cc
   callbacks/media.cc

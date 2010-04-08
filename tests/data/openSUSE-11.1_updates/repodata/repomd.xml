@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<repomd xmlns="http://linux.duke.edu/metadata/repo">
+  <data type="suseinfo">
+    <location href="repodata/suseinfo.xml"/>
+    <checksum type="sha">5cfb3cb27bb783553434a0fc2ff0a82726f72cc2</checksum>
+    <timestamp>1270562656</timestamp>
+    <open-checksum type="sha">5cfb3cb27bb783553434a0fc2ff0a82726f72cc2</open-checksum>
+  </data>
+  <data type="filelists">
+    <location href="repodata/filelists.xml.gz"/>
+    <checksum type="sha">5adcfad38c0aa41dba0e8be7a33e5b9c2fe815f7</checksum>
+    <timestamp>1270562628</timestamp>
+    <open-checksum type="sha">6a617fd6343803f34ba06270f4841bbce90ba09f</open-checksum>
+  </data>
+  <data type="primary">
+    <location href="repodata/primary.xml.gz"/>
+    <checksum type="sha">57ab2969e0462b7d41af20f927282a063e3e258d</checksum>
+    <timestamp>1270562623</timestamp>
+    <open-checksum type="sha">e5154a89dd47e04e38dd1aea6f59dd2d0e461d91</open-checksum>
+  </data>
+  <data type="updateinfo">
+    <location href="repodata/updateinfo.xml.gz"/>
+    <checksum type="sha">b73bd9422ab3ee013b5f87adf5ab9384517282b4</checksum>
+    <timestamp>1270562654</timestamp>
+    <open-checksum type="sha">1fd3b8e320be8d754dd7bc595f429084ca1492c8</open-checksum>
+  </data>
+  <data type="deltainfo">
+    <location href="repodata/deltainfo.xml.gz"/>
+    <checksum type="sha">1dc6d296953ceb103e88b9f8dbb090cf4c42c7dd</checksum>
+    <timestamp>1270562655</timestamp>
+    <open-checksum type="sha">af8233674be5f8399a45f19898f94e227318c9db</open-checksum>
+  </data>
+  <data type="other">
+    <location href="repodata/other.xml.gz"/>
+    <checksum type="sha">0a37172d55ef031eb020ba86fed3a184c953c609</checksum>
+    <timestamp>1270562653</timestamp>
+    <open-checksum type="sha">3dfa558bb0483cd3c696e06f443945e60fb8c871</open-checksum>
+  </data>
+  <data type="susedata">
+    <location href="repodata/susedata.xml.gz"/>
+    <checksum type="sha">b5925eee587fa8378b044bea9cca22767d45b16e</checksum>
+    <timestamp>1270562653</timestamp>
+    <open-checksum type="sha">ecbd59ac8b68a92a602f304a281a80dbcb6faeef</open-checksum>
+  </data>
+</repomd>

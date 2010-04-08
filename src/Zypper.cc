@@ -3419,6 +3419,16 @@ void Zypper::doCommand()
     PackageArgs rpm_args(rpms_files_caps);
     sr.install(rpm_args);
 
+    sr.printFeedback(out());
+
+    if (sr.hasFeedback(SolverRequester::Feedback::NOT_FOUND_NAME) ||
+        sr.hasFeedback(SolverRequester::Feedback::NOT_FOUND_CAP))
+    {
+      setExitCode(ZYPPER_EXIT_INF_CAP_NOT_FOUND);
+      if (globalOpts().non_interactive)
+        ZYPP_THROW(ExitRequestException());
+    }
+
     // give user feedback from package selection
     // TODO feedback goes here
 
@@ -3918,6 +3928,27 @@ void Zypper::doCommand()
           setExitCode(ZYPPER_EXIT_ERR_INVALID_ARGS);
           return;
         }
+
+        if (kind == ResKind::product)
+        {
+          out().error(_("Operation not supported."),
+              str::form(_("To update installed products use '%s'."),
+                  "zypper dup [--from <repo>]"));
+          setExitCode(ZYPPER_EXIT_ERR_INVALID_ARGS);
+          return;
+        }
+        else if (kind == ResKind::srcpackage)
+        {
+          out().error(_("Operation not supported."),
+              str::form(
+                  _("Zypper does not keep track of installed source"
+                    " packages. To install the latest source package and"
+                    " its build dependencies, use '%s'."),
+                  "zypper dup [--from <repo>]"));
+          setExitCode(ZYPPER_EXIT_ERR_INVALID_ARGS);
+          return;
+        }
+
         kinds.insert(kind);
       }
     }
@@ -3925,6 +3956,13 @@ void Zypper::doCommand()
       kinds.insert(ResKind::patch);
     else
       kinds.insert(ResKind::package);
+
+    if (!arguments().empty() && kinds.size() > 1)
+    {
+      out().error(_("Cannot use multiple types when specific packages are given as arguments."));
+      setExitCode(ZYPPER_EXIT_ERR_INVALID_ARGS);
+      return;
+    }
 
     bool best_effort = copts.count( "best-effort" );
     if (globalOpts().is_rug_compatible && best_effort)
@@ -3954,10 +3992,65 @@ void Zypper::doCommand()
     resolve(*this); // needed to compute status of PPP
 
 
+    // patch --bugzilla/--cve
     if (copts.count("bugzilla") || copts.count("bz") || copts.count("cve"))
       mark_updates_by_issue(*this);
+    // update without arguments
     else
-      mark_updates(*this, kinds, skip_interactive, best_effort);
+    {
+      SolverRequester::Options sropts;
+      if (copts.find("force") != copts.end())
+        sropts.force = true;
+      sropts.best_effort = best_effort;
+
+      SolverRequester sr(sropts);
+      if (arguments().empty())
+      {
+        for_(kit, kinds.begin(), kinds.end())
+        {
+          if (kind == ResKind::package)
+          {
+            MIL << "Computing package update..." << endl;
+            // this will do a complete pacakge update as far as possible
+            // while respecting solver policies
+            zypp::getZYpp()->resolver()->doUpdate();
+            // no need to call Resolver::resolvePool() afterwards
+            runtimeData().solve_before_commit = false;
+          }
+          // update -t patch; patch
+          else if (kind == ResKind::patch)
+          {
+            sropts.skip_interactive = skip_interactive;
+            sr.updatePatches();
+          }
+          else if (kind == ResKind::pattern)
+            sr.updatePatterns();
+          // should not get here (see above kind parsing code), but just in case
+          else
+          {
+            out().error(_("Operation not supported."));
+            setExitCode(ZYPPER_EXIT_ERR_INVALID_ARGS);
+            return;
+          }
+        }
+      }
+      // update with arguments
+      else
+      {
+        PackageArgs args(*kinds.begin());
+        sr.update(args);
+      }
+
+      sr.printFeedback(out());
+
+      if (sr.hasFeedback(SolverRequester::Feedback::NOT_FOUND_NAME) ||
+          sr.hasFeedback(SolverRequester::Feedback::NOT_FOUND_CAP))
+      {
+        setExitCode(ZYPPER_EXIT_INF_CAP_NOT_FOUND);
+        if (globalOpts().non_interactive)
+          ZYPP_THROW(ExitRequestException());
+      }
+    }
 
     solve_and_commit(*this);
 

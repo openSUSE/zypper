@@ -63,7 +63,7 @@ ZYPP_DECLARE_FLAGS_AND_OPERATORS( TestSetupOptions, TestSetupOptionBits );
  *
  * BOOST_AUTO_TEST_CASE(WhatProvides)
  * {
- *   // enabls loging fot the scope of this block:
+ *   // enables logging fot the scope of this block:
  *   // base::LogControl::TmpLineWriter shutUp( new log::FileLineWriter( "/tmp/YLOG" ) );
  *
  *   TestSetup test( Arch_x86_64 );
