@@ -34,7 +34,16 @@ void SolverRequester::install(const PackageArgs & args)
 { installRemove(args); }
 
 void SolverRequester::remove(const PackageArgs & args)
-{ installRemove(args); }
+{
+  if (args.options().do_by_default)
+  {
+    INT << "PackageArgs::Options::do_by_default == true."
+        << " Set it to 'false' when doing 'remove'" << endl;
+    return;
+  }
+
+  installRemove(args);
+}
 
 void SolverRequester::installRemove(const PackageArgs & args)
 {
@@ -101,12 +110,10 @@ void SolverRequester::install(const Capability & cap, const string & repoalias)
         else if (_requested_inst)
           asSelectable()(*sit)->setOnSystem(*sit, ResStatus::USER);
         else
-        {
           addFeedback(Feedback::NOT_INSTALLED, cap, repoalias);
-          return;
-        }
         // TODO handle patches (isBroken), patterns (isSatisfied instead of hasInstalledObj)
       }
+      return;
     }
     else if (_opts.force_by_name)
     {
@@ -160,9 +167,6 @@ void SolverRequester::install(const Capability & cap, const string & repoalias)
  */
 void SolverRequester::remove(const Capability & cap)
 {
-#warning get rid of zypper here
-  Zypper & zypper = *Zypper::instance();
-
   sat::Solvable::SplitIdent splid(cap.detail().name());
   ResKind capkind = splid.kind();
   string capname = splid.name().asString();
@@ -182,35 +186,26 @@ void SolverRequester::remove(const Capability & cap)
         it->status().setToBeUninstalled(ResStatus::USER);
       }
       // TODO handle patches (cannot uninstall!), patterns (remove content(?))
+      return;
     }
     else if (_opts.force_by_name)
     {
-      //! \todo report this via error class
-      // translators: meaning a package %s or provider of capability %s
-      zypper.out().error(str::form(_("'%s' not found."), capname.c_str()));
-      WAR << str::form("'%s' not found", capname.c_str()) << endl;
-      zypper.setExitCode(ZYPPER_EXIT_INF_CAP_NOT_FOUND);
-      if (zypper.globalOpts().non_interactive)
-        ZYPP_THROW(ExitRequestException());
+      addFeedback(Feedback::NOT_FOUND_NAME, cap);
+      WAR << "'" << cap << "' not found" << endl;
+      return;
     }
   }
 
-  if (_opts.force_by_name)
-    return;
-
   // try by capability
-  // TODO tell that we're falling back to search by capability
+
+  addFeedback(Feedback::NOT_FOUND_NAME_TRYING_CAPS, cap);
 
   // is there a provider for the requested capability?
   sat::WhatProvides q(cap);
   if (q.empty())
   {
-    // translators: meaning a package %s or provider of capability %s
-    zypper.out().error(str::form(_("'%s' not found."), cap.asString().c_str()));
+    addFeedback(Feedback::NOT_FOUND_CAP, cap);
     WAR << str::form("'%s' not found", cap.asString().c_str()) << endl;
-    zypper.setExitCode(ZYPPER_EXIT_INF_CAP_NOT_FOUND);
-    if (zypper.globalOpts().non_interactive)
-      ZYPP_THROW(ExitRequestException());
     return;
   }
 
@@ -220,8 +215,7 @@ void SolverRequester::remove(const Capability & cap)
   // not installed, nothing to do
   if (providers.empty())
   {
-    // translators: meaning a package %s or provider of capability %s
-    zypper.out().info(str::form(_("No provider of '%s' is installed."), cap.asString().c_str()));
+    addFeedback(Feedback::NO_INSTALLED_PROVIDER, cap);
     MIL << "no provider of " << cap << "is installed" << endl;
   }
   else

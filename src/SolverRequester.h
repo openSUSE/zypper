@@ -94,8 +94,10 @@ public:
       NOT_FOUND_NAME,
       NOT_FOUND_CAP,
 
-      /** update was requested, but there's no installed item */
+      /** Removal or update was requested, but there's no installed item. */
       NOT_INSTALLED,
+      /** Removal by capability requested, but no provider is installed. */
+      NO_INSTALLED_PROVIDER,
 
       /** selected object is already installed */
       ALREADY_INSTALLED,
@@ -148,8 +150,25 @@ public:
   /** Request installation of specified objects. */
   void install(const PackageArgs & args);
 
-  /** Request removal of specified objects. */
+  /**
+   * Request removal of specified objects.
+   * \note Passed \a args must be constructed with
+   *       PackageArgs::Options::do_by_default = false.
+   */
   void remove(const PackageArgs & args);
+
+  /**
+   * Variant of remove(const PackageArgs&) to avoid implicit conversion
+   * from vector<string> to PackageArgs.
+   */
+  void remove(
+      const std::vector<std::string> & rawargs,
+      const zypp::ResKind & kind = zypp::ResKind::package)
+  {
+    PackageArgs::Options opts;
+    opts.do_by_default = false;
+    remove(PackageArgs(rawargs, kind, opts));
+  }
 
   /** Request update of specified objects. */
   void update(const PackageArgs & args);

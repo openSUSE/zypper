@@ -71,6 +71,10 @@ string SolverRequester::Feedback::asUserString(
       return str::form(
         _("Package '%s' is not installed."), _reqcap.asString().c_str());
 
+  case NO_INSTALLED_PROVIDER:
+    // translators: meaning provider of capability %s
+    return str::form(_("No provider of '%s' is installed."), _reqcap.asString().c_str());
+
   case ALREADY_INSTALLED:
     if (_objinst->name() == splid.name())
       return str::form(
@@ -100,6 +104,7 @@ void SolverRequester::Feedback::print(
     break;
   case NOT_FOUND_NAME_TRYING_CAPS:
   case NOT_INSTALLED:
+  case NO_INSTALLED_PROVIDER:
   case ALREADY_INSTALLED:
     out.info(asUserString(opts));
     break;

@@ -53,6 +53,9 @@ public:
 
   ~PackageArgs() {}
 
+  const Options & options() const
+  {return _opts; }
+
   const StringSet & asStringSet() const
   { return _args; }
   /** Capabilities we want to install/upgrade and don't want to remove, plus
