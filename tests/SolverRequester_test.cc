@@ -12,8 +12,26 @@
 using namespace std;
 using namespace zypp;
 
+bool hasPoolItem(
+    const set<PoolItem> & set,
+    const string & name,
+    const Edition & ed = Edition(),
+    const Arch & arch = Arch_empty)
+{
+  for_(pit, set.begin(), set.end())
+  {
+    PoolItem pi(*pit);
+    if (pi->name() == name &&
+        (ed.empty() || ed == pi->edition()) &&
+        (arch.empty() || arch == pi->arch()))
+      return true;
+  }
+  return false;
+}
+
 BOOST_AUTO_TEST_CASE(setup)
 {
+  MIL << "============setup===========" << endl;
   TestSetup test(Arch_x86_64);
   // fake target from the whole 11.1 repo
   test.loadTargetRepo(TESTS_SRC_DIR "/data/openSUSE-11.1_subset");
@@ -31,7 +49,7 @@ BOOST_AUTO_TEST_CASE(setup)
 BOOST_AUTO_TEST_CASE(install1)
 {
   base::LogControl::TmpLineWriter shutUp(new log::FileLineWriter( "/tmp/zlog2"));
-  MIL << "<===========================>" << endl;
+  MIL << "<=============install1==============>" << endl;
 
   vector<string> rawargs;
   rawargs.push_back("nonsense");
@@ -42,6 +60,25 @@ BOOST_AUTO_TEST_CASE(install1)
 
   BOOST_CHECK(sr.hasFeedback(SolverRequester::Feedback::NOT_FOUND_NAME_TRYING_CAPS));
   BOOST_CHECK(sr.hasFeedback(SolverRequester::Feedback::NOT_FOUND_CAP));
+}
+
+// request : install vim
+// opts    : defaults
+// response: vim set to install, no fallback to caps
+BOOST_AUTO_TEST_CASE(install2)
+{
+  MIL << "<============install2===============>" << endl;
+
+  vector<string> rawargs;
+  rawargs.push_back("vim");
+  PackageArgs args(rawargs);
+  SolverRequester sr;
+
+  sr.install(rawargs);
+
+  BOOST_CHECK(sr.hasFeedback(SolverRequester::Feedback::SET_TO_INSTALL));
+  BOOST_CHECK_EQUAL(sr.toInstall().size(), 1);
+  BOOST_CHECK(hasPoolItem(sr.toInstall(), "vim", Edition("7.2-7.4.1"), Arch_x86_64));
 }
 
 ///////////////////////////////////////////////////////////////////////////

@@ -105,7 +105,14 @@ public:
       UPD_CANDIDATE_CHANGES_VERSION,
       UPD_CANDIDATE_HAS_LOWER_PRIO,
       UPD_CANDIDATE_IS_LOCKED,
-      INSTALLED_LOCKED
+      INSTALLED_LOCKED,
+
+      // zypp requests
+
+      SET_TO_INSTALL,
+      SET_TO_REMOVE,
+      ADDED_REQUIREMENT,
+      ADDED_CONFLICT
     };
 
     Feedback(
@@ -188,6 +195,11 @@ public:
   void printFeedback(Out & out) const
   { for_(fb, _feedback.begin(), _feedback.end()) fb->print(out, _opts); }
 
+  const std::set<zypp::PoolItem> & toInstall() const { return _toinst; }
+  const std::set<zypp::PoolItem> & toRemove() const { return _toremove; }
+  const std::set<zypp::Capability> & requires() const { return _requires; }
+  const std::set<zypp::Capability> & conflicts() const { return _conflicts; }
+
 private:
   void installRemove(const PackageArgs & args);
 
@@ -254,6 +266,11 @@ private:
   // TODO provide also public versions of these, taking optional Options and
   // reporting errors via an output argument.
 
+  void setToInstall(const zypp::PoolItem & pi);
+  void setToRemove(const zypp::PoolItem & pi);
+  void addRequirement(const zypp::Capability & cap);
+  void addConflict(const zypp::Capability & cap);
+
   void addFeedback(
       const Feedback::Id id,
       const zypp::Capability & reqcap,
@@ -273,6 +290,11 @@ private:
 
   /** Various feedback from the requester. */
   std::vector<Feedback> _feedback;
+
+  std::set<zypp::PoolItem> _toinst;
+  std::set<zypp::PoolItem> _toremove;
+  std::set<zypp::Capability> _requires;
+  std::set<zypp::Capability> _conflicts;
 };
 
 #endif /* SOLVERREQUESTER_H_ */

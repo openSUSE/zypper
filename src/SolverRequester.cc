@@ -108,7 +108,10 @@ void SolverRequester::install(const Capability & cap, const string & repoalias)
         if (asSelectable()(*sit)->hasInstalledObj())
           updateTo(cap, repoalias, *sit);
         else if (_requested_inst)
-          asSelectable()(*sit)->setOnSystem(*sit, ResStatus::USER);
+        {
+          setToInstall(*sit);
+          MIL << "installing " << *sit << endl;
+        }
         else
           addFeedback(Feedback::NOT_INSTALLED, cap, repoalias);
         // TODO handle patches (isBroken), patterns (isSatisfied instead of hasInstalledObj)
@@ -155,8 +158,7 @@ void SolverRequester::install(const Capability & cap, const string & repoalias)
   if (providers.empty())
   {
     DBG << "adding requirement " << cap << endl;
-    Resolver_Ptr resolver = zypp::getZYpp()->resolver();
-    resolver->addRequire(cap);
+    addRequirement(cap);
   }
 }
 
@@ -185,7 +187,7 @@ void SolverRequester::remove(const Capability & cap)
         if (it->status().isInstalled())
         {
           DBG << "Marking for deletion: " << *it << endl;
-          it->status().setToBeUninstalled(ResStatus::USER);
+          setToRemove(*it);
           got_installed = true;
         }
       }
@@ -233,8 +235,7 @@ void SolverRequester::remove(const Capability & cap)
   else
   {
     MIL << "adding conflict " << cap << endl;
-    Resolver_Ptr resolver = zypp::getZYpp()->resolver();
-    resolver->addConflict(cap);
+    addConflict(cap);
   }
 }
 
@@ -400,8 +401,7 @@ void SolverRequester::updateTo(
     {
       // require version greater than than the one installed
       Capability c(s->name(), Rel::GT, installed->edition(), s->kind());
-      zypp::getZYpp()->resolver()->addRequire(c);
-
+      addRequirement(c);
       zypper.out().info(
           str::form(_("Requiring '%s'."), c.asString().c_str()), Out::HIGH);
       MIL << *s << " update: adding requirement " << c << endl;
@@ -409,7 +409,7 @@ void SolverRequester::updateTo(
     else if (candidate->edition() > installed->edition())
     {
       // set 'candidate' for installation
-      s->setOnSystem(candidate, ResStatus::USER);
+      setToInstall(candidate);
 
       zypper.out().info(
           str::form(_("Selecting '%s-%s.%s' from repository '%s' for update."),
@@ -425,7 +425,7 @@ void SolverRequester::updateTo(
     else if (_opts.force)
     {
       // set 'candidate' for installation
-      s->setOnSystem(candidate, ResStatus::USER);
+      setToInstall(candidate);
 
       zypper.out().info(
           str::form(_("Forcing installation of '%s-%s.%s' from repository '%s'."),
@@ -559,6 +559,45 @@ void SolverRequester::updateTo(
 
   }
 }
+
+// ----------------------------------------------------------------------------
+
+void SolverRequester::setToInstall(const PoolItem & pi)
+{
+  // pi.status().setToBeInstalled(ResStatus::USER); ?
+  asSelectable()(pi)->setOnSystem(pi, ResStatus::USER);
+  addFeedback(Feedback::SET_TO_INSTALL, Capability(), "", pi);
+  _toinst.insert(pi);
+}
+
+// ----------------------------------------------------------------------------
+
+void SolverRequester::setToRemove(const zypp::PoolItem & pi)
+{
+  pi.status().setToBeUninstalled(ResStatus::USER);
+  addFeedback(Feedback::SET_TO_REMOVE, Capability(), "", pi);
+  _toremove.insert(pi);
+}
+
+// ----------------------------------------------------------------------------
+
+void SolverRequester::addRequirement(const zypp::Capability & cap)
+{
+  zypp::getZYpp()->resolver()->addRequire(cap);
+  addFeedback(Feedback::ADDED_REQUIREMENT, cap);
+  _requires.insert(cap);
+}
+
+// ----------------------------------------------------------------------------
+
+void SolverRequester::addConflict(const zypp::Capability & cap)
+{
+  zypp::getZYpp()->resolver()->addConflict(cap);
+  addFeedback(Feedback::ADDED_CONFLICT, cap);
+  _conflicts.insert(cap);
+}
+
+// ----------------------------------------------------------------------------
 
 bool SolverRequester::hasFeedback(const Feedback::Id id) const
 {
