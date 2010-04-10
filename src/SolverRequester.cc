@@ -176,17 +176,29 @@ void SolverRequester::remove(const Capability & cap)
   if (!_opts.force_by_cap)
   {
     PoolQuery q = pkg_spec_to_poolquery(cap, "");
-    q.setInstalledOnly();
 
     if (!q.empty())
     {
+      bool got_installed = false;
       for_(it, q.poolItemBegin(), q.poolItemEnd())
       {
-        DBG << "Marking for deletion: " << *it << endl;
-        it->status().setToBeUninstalled(ResStatus::USER);
+        if (it->status().isInstalled())
+        {
+          DBG << "Marking for deletion: " << *it << endl;
+          it->status().setToBeUninstalled(ResStatus::USER);
+          got_installed = true;
+        }
+      }
+      if (got_installed)
+        return;
+      else
+      {
+        addFeedback(Feedback::NOT_INSTALLED, cap);
+        MIL << "'" << cap << "' is not installed" << endl;
+        if (_opts.force_by_name)
+          return;
       }
       // TODO handle patches (cannot uninstall!), patterns (remove content(?))
-      return;
     }
     else if (_opts.force_by_name)
     {

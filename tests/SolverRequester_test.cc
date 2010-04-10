@@ -14,9 +14,6 @@ using namespace zypp;
 
 BOOST_AUTO_TEST_CASE(setup)
 {
-  // enables logging for the scope of this block:
-  base::LogControl::TmpLineWriter shutUp(new log::FileLineWriter( "/tmp/zlog"));
-
   TestSetup test(Arch_x86_64);
   // fake target from the whole 11.1 repo
   test.loadTargetRepo(TESTS_SRC_DIR "/data/openSUSE-11.1_subset");
@@ -24,11 +21,17 @@ BOOST_AUTO_TEST_CASE(setup)
   test.loadRepo(TESTS_SRC_DIR "/data/openSUSE-11.1_updates");
 }
 
+///////////////////////////////////////////////////////////////////////////
+// install
+///////////////////////////////////////////////////////////////////////////
 
-BOOST_AUTO_TEST_CASE(not_found)
+// request : install nonsense
+// opts    : defaults
+// response: not found by name, try caps, no cap found
+BOOST_AUTO_TEST_CASE(install1)
 {
   base::LogControl::TmpLineWriter shutUp(new log::FileLineWriter( "/tmp/zlog2"));
-  MIL << "not_found ===============>" << endl;
+  MIL << "<===========================>" << endl;
 
   vector<string> rawargs;
   rawargs.push_back("nonsense");
@@ -41,82 +44,145 @@ BOOST_AUTO_TEST_CASE(not_found)
   BOOST_CHECK(sr.hasFeedback(SolverRequester::Feedback::NOT_FOUND_CAP));
 }
 
-BOOST_AUTO_TEST_CASE(remove_cmd)
+///////////////////////////////////////////////////////////////////////////
+// remove
+///////////////////////////////////////////////////////////////////////////
+
+// request : remove nonsense
+// opts    : defaults
+// response: not found by name, try caps, no cap found
+BOOST_AUTO_TEST_CASE(remove1)
 {
-  base::LogControl::TmpLineWriter shutUp(new log::FileLineWriter( "/tmp/zlog2"));
-  MIL << "remove_cmd ===============>" << endl;
+  MIL << "<===========================>" << endl;
   PackageArgs::Options argopts;
   argopts.do_by_default = false;
 
-  // not found
-  {
-    vector<string> rawargs;
-    rawargs.push_back("nonsense");
-    PackageArgs args(rawargs, ResKind::package, argopts);
-    SolverRequester sr;
+  vector<string> rawargs;
+  rawargs.push_back("nonsense");
+  PackageArgs args(rawargs, ResKind::package, argopts);
+  SolverRequester sr;
 
-    sr.remove(args);
+  sr.remove(args);
 
-    BOOST_CHECK(!sr.hasFeedback(SolverRequester::Feedback::NOT_FOUND_NAME));
-    BOOST_CHECK(sr.hasFeedback(SolverRequester::Feedback::NOT_FOUND_NAME_TRYING_CAPS));
-    BOOST_CHECK(sr.hasFeedback(SolverRequester::Feedback::NOT_FOUND_CAP));
+  BOOST_CHECK(!sr.hasFeedback(SolverRequester::Feedback::NOT_FOUND_NAME));
+  BOOST_CHECK(sr.hasFeedback(SolverRequester::Feedback::NOT_FOUND_NAME_TRYING_CAPS));
+  BOOST_CHECK(sr.hasFeedback(SolverRequester::Feedback::NOT_FOUND_CAP));
+}
 
-    SolverRequester::Options sropts;
-    sropts.force_by_name = true;
-    SolverRequester sr1(sropts);
+// request : remove nonsense
+// opts    : --name
+// response: not found by name. Don't try caps.
+BOOST_AUTO_TEST_CASE(remove2)
+{
+  MIL << "<===========================>" << endl;
+  PackageArgs::Options argopts;
+  argopts.do_by_default = false;
 
-    sr1.remove(args);
-    BOOST_CHECK(sr1.hasFeedback(SolverRequester::Feedback::NOT_FOUND_NAME));
-    BOOST_CHECK(!sr1.hasFeedback(SolverRequester::Feedback::NOT_FOUND_NAME_TRYING_CAPS));
-    BOOST_CHECK(!sr1.hasFeedback(SolverRequester::Feedback::NOT_FOUND_CAP));
-  }
-  // not installed
-  MIL << "=============================>" << endl;
-  {
-    vector<string> rawargs;
-    rawargs.push_back("mc");
-    PackageArgs args(rawargs, ResKind::package, argopts);
-    SolverRequester sr;
+  vector<string> rawargs;
+  rawargs.push_back("nonsense");
+  PackageArgs args(rawargs, ResKind::package, argopts);
 
-    sr.remove(args);
+  SolverRequester::Options sropts;
+  sropts.force_by_name = true;
+  SolverRequester sr1(sropts);
 
-    BOOST_CHECK(sr.hasFeedback(SolverRequester::Feedback::NO_INSTALLED_PROVIDER));
-  }
+  sr1.remove(args);
+  BOOST_CHECK(sr1.hasFeedback(SolverRequester::Feedback::NOT_FOUND_NAME));
+  BOOST_CHECK(!sr1.hasFeedback(SolverRequester::Feedback::NOT_FOUND_NAME_TRYING_CAPS));
+  BOOST_CHECK(!sr1.hasFeedback(SolverRequester::Feedback::NOT_FOUND_CAP));
+}
+
+// request : remove mc
+// opts    : defaults
+// response: not installed, fall back to caps, no provider installed
+BOOST_AUTO_TEST_CASE(remove3)
+{
+  MIL << "<===========================>" << endl;
+  PackageArgs::Options argopts;
+  argopts.do_by_default = false;
+
+  vector<string> rawargs;
+  rawargs.push_back("mc");
+  PackageArgs args(rawargs, ResKind::package, argopts);
+  SolverRequester sr;
+
+  sr.remove(args);
+
+  BOOST_CHECK(sr.hasFeedback(SolverRequester::Feedback::NOT_INSTALLED));
+  BOOST_CHECK(sr.hasFeedback(SolverRequester::Feedback::NOT_FOUND_NAME_TRYING_CAPS));
+  BOOST_CHECK(sr.hasFeedback(SolverRequester::Feedback::NO_INSTALLED_PROVIDER));
+}
+
+// request : remove mc
+// opts    : defaults
+// response: not installed, fall back to caps, no provider installed
+// this one is done by sr.remove(vector<string>) instead of PackageArgs
+BOOST_AUTO_TEST_CASE(remove4)
+{
+  MIL << "<===========================>" << endl;
   // beware of implicit conversion from vector<string> to PackageArgs
   // if not avoided, the resulting PackageArgs would have
   // PackageArgs::Options::do_by_default == true! => args without +/- modifiers
   // would default to install/doCaps, not remove/dontCaps!
-  {
-    vector<string> rawargs;
-    rawargs.push_back("mc");
-    SolverRequester sr;
-
-    sr.remove(rawargs);
-
-    BOOST_CHECK(sr.hasFeedback(SolverRequester::Feedback::NO_INSTALLED_PROVIDER));
-  }
-  // TODO add NO_INSTALLED_PROVIDER test
-}
-
-
-/*
-BOOST_AUTO_TEST_CASE(simple_install)
-{
-  base::LogControl::TmpLineWriter shutUp(new log::FileLineWriter( "/tmp/zlog2"));
-
   vector<string> rawargs;
-  rawargs.push_back("zypper");
-  PackageArgs args(rawargs);
+  rawargs.push_back("mc");
   SolverRequester sr;
 
-  sr.install(rawargs);
+  sr.remove(rawargs);
+
+  BOOST_CHECK(sr.hasFeedback(SolverRequester::Feedback::NOT_INSTALLED));
+  BOOST_CHECK(sr.hasFeedback(SolverRequester::Feedback::NOT_FOUND_NAME_TRYING_CAPS));
+  BOOST_CHECK(sr.hasFeedback(SolverRequester::Feedback::NO_INSTALLED_PROVIDER));
+}
+
+// request : remove mc
+// opts    : --name
+// response: not installed. Don't fall back to caps.
+BOOST_AUTO_TEST_CASE(remove5)
+{
+  MIL << "<===========================>" << endl;
+  vector<string> rawargs;
+  rawargs.push_back("mc");
+  SolverRequester::Options sropts;
+  sropts.force_by_name = true;
+  SolverRequester sr(sropts);
+
+  sr.remove(rawargs);
+
+  BOOST_CHECK(sr.hasFeedback(SolverRequester::Feedback::NOT_INSTALLED));
+  BOOST_CHECK(!sr.hasFeedback(SolverRequester::Feedback::NOT_FOUND_NAME_TRYING_CAPS));
+  BOOST_CHECK(!sr.hasFeedback(SolverRequester::Feedback::NO_INSTALLED_PROVIDER));
+}
+
+/*
+// request : remove libzypp
+// opts    : defaults
+// response: libzypp marked for removal, along with zypper, ...
+BOOST_AUTO_TEST_CASE(remove5)
+{
+  MIL << "<===========================>" << endl;
+  vector<string> rawargs;
+  rawargs.push_back("libzypp");
+  SolverRequester sr;
+
+  sr.remove(rawargs);
+  solve
+
+  BOOST_CHECK(sr.hasFeedback(SolverRequester::Feedback::NOT_INSTALLED));
 }
 */
 
-BOOST_AUTO_TEST_CASE(simple_update)
+
+///////////////////////////////////////////////////////////////////////////
+// update
+///////////////////////////////////////////////////////////////////////////
+
+// request : update vim
+// opts    : defaults
+// response: not installed
+BOOST_AUTO_TEST_CASE(update1)
 {
-  base::LogControl::TmpLineWriter shutUp(new log::FileLineWriter( "/tmp/zlog2"));
-  MIL << "simple update ===============>" << endl;
+  MIL << "<===========================>" << endl;
 
   vector<string> rawargs;
   rawargs.push_back("vim");
@@ -125,5 +191,26 @@ BOOST_AUTO_TEST_CASE(simple_update)
 
   sr.update(rawargs);
   BOOST_CHECK(sr.hasFeedback(SolverRequester::Feedback::NOT_INSTALLED));
+  BOOST_CHECK(!sr.hasFeedback(SolverRequester::Feedback::NOT_FOUND_NAME_TRYING_CAPS));
+  BOOST_CHECK(!sr.hasFeedback(SolverRequester::Feedback::NO_INSTALLED_PROVIDER));
 }
 
+
+// request :
+// opts    :
+// response:
+/*BOOST_AUTO_TEST_CASE(installX)
+{
+  MIL << "<===========================>" << endl;
+
+  vector<string> rawargs;
+  rawargs.push_back("");
+  SolverRequester::Options sropts;
+  sropts.force_by_name = true;
+  SolverRequester sr(sropts);
+
+  sr.install(rawargs);
+
+  BOOST_CHECK(sr.hasFeedback(SolverRequester::Feedback::NOT_INSTALLED));
+}
+*/
