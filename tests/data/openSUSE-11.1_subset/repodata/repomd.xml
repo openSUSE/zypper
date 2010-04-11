@@ -2,8 +2,8 @@
 <repomd xmlns="http://linux.duke.edu/metadata/repo">
   <data type="primary">
     <location href="repodata/primary.xml.gz"/>
-    <checksum type="sha">a0cdd9d7870e38d6c395e92058e291f061728b23</checksum>
-    <timestamp>1270737163.0</timestamp>
-    <open-checksum type="sha">28470ad21a6bb95f4afdbdb72908243bfb3d4023</open-checksum>
+    <checksum type="sha">98741c2871c433e2a52d97cef546df015f8735a2</checksum>
+    <timestamp>1271025991.0</timestamp>
+    <open-checksum type="sha">109aeeca4c9555fbfdc0f5052a8349a92c89d3c2</open-checksum>
     </data>
 </repomd>

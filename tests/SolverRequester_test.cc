@@ -97,15 +97,33 @@ BOOST_AUTO_TEST_CASE(install3)
   BOOST_CHECK(hasPoolItem(sr.toInstall(), "zypper", Edition("1.0.13-0.1.1"), Arch_x86_64));
 }
 
-// request : install zypper
+// request : install netcfg
 // opts    : defaults
-// response: set zypper-1.0.13-0.1.1 from 11.1_updates to install (update)
+// response: already installed, no update candidate (the installed
+//           is higher than any available)
 BOOST_AUTO_TEST_CASE(install4)
 {
   MIL << "<============install4===============>" << endl;
 
   vector<string> rawargs;
   rawargs.push_back("netcfg");
+  SolverRequester sr;
+
+  sr.install(rawargs);
+
+  BOOST_CHECK(sr.hasFeedback(SolverRequester::Feedback::ALREADY_INSTALLED));
+  BOOST_CHECK(sr.hasFeedback(SolverRequester::Feedback::NO_UPD_CANDIDATE));
+}
+
+// request : install info
+// opts    : defaults
+// response: already installed (the highest available is identical to installed)
+BOOST_AUTO_TEST_CASE(install5)
+{
+  MIL << "<============install5===============>" << endl;
+
+  vector<string> rawargs;
+  rawargs.push_back("info");
   SolverRequester sr;
 
   sr.install(rawargs);
