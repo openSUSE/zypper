@@ -53,7 +53,6 @@ BOOST_AUTO_TEST_CASE(install1)
 
   vector<string> rawargs;
   rawargs.push_back("nonsense");
-  PackageArgs args(rawargs);
   SolverRequester sr;
 
   sr.install(rawargs);
@@ -71,7 +70,6 @@ BOOST_AUTO_TEST_CASE(install2)
 
   vector<string> rawargs;
   rawargs.push_back("vim");
-  PackageArgs args(rawargs);
   SolverRequester sr;
 
   sr.install(rawargs);
@@ -80,6 +78,43 @@ BOOST_AUTO_TEST_CASE(install2)
   BOOST_CHECK_EQUAL(sr.toInstall().size(), 1);
   BOOST_CHECK(hasPoolItem(sr.toInstall(), "vim", Edition("7.2-7.4.1"), Arch_x86_64));
 }
+
+// request : install zypper
+// opts    : defaults
+// response: set zypper-1.0.13-0.1.1 from 11.1_updates to install (update)
+BOOST_AUTO_TEST_CASE(install3)
+{
+  MIL << "<============install3===============>" << endl;
+
+  vector<string> rawargs;
+  rawargs.push_back("zypper");
+  SolverRequester sr;
+
+  sr.install(rawargs);
+
+  BOOST_CHECK(sr.hasFeedback(SolverRequester::Feedback::SET_TO_INSTALL));
+  BOOST_CHECK_EQUAL(sr.toInstall().size(), 1);
+  BOOST_CHECK(hasPoolItem(sr.toInstall(), "zypper", Edition("1.0.13-0.1.1"), Arch_x86_64));
+}
+
+// request : install zypper
+// opts    : defaults
+// response: set zypper-1.0.13-0.1.1 from 11.1_updates to install (update)
+BOOST_AUTO_TEST_CASE(install4)
+{
+  MIL << "<============install4===============>" << endl;
+
+  vector<string> rawargs;
+  rawargs.push_back("netcfg");
+  SolverRequester sr;
+
+  sr.install(rawargs);
+
+  BOOST_CHECK(sr.hasFeedback(SolverRequester::Feedback::ALREADY_INSTALLED));
+  BOOST_CHECK(sr.hasFeedback(SolverRequester::Feedback::NO_UPD_CANDIDATE));
+}
+
+
 
 ///////////////////////////////////////////////////////////////////////////
 // remove
@@ -219,7 +254,7 @@ BOOST_AUTO_TEST_CASE(remove5)
 // response: not installed
 BOOST_AUTO_TEST_CASE(update1)
 {
-  MIL << "<===========================>" << endl;
+  MIL << "<============update1===============>" << endl;
 
   vector<string> rawargs;
   rawargs.push_back("vim");

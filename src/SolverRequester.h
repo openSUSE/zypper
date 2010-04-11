@@ -99,12 +99,17 @@ public:
       /** Removal by capability requested, but no provider is installed. */
       NO_INSTALLED_PROVIDER,
 
-      /** selected object is already installed */
+      /** Selected object is already installed. */
       ALREADY_INSTALLED,
       NO_UPD_CANDIDATE,
       UPD_CANDIDATE_CHANGES_VERSION,
       UPD_CANDIDATE_HAS_LOWER_PRIO,
       UPD_CANDIDATE_IS_LOCKED,
+      /**
+       * Selected object is not the highest available, because of user
+       * restrictions like repo(s), version, architecture.
+       */
+      UPD_CANDIDATE_USER_RESTRICTED,
       INSTALLED_LOCKED,
 
       // zypp requests

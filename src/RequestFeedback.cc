@@ -10,12 +10,15 @@
  */
 
 #include "zypp/base/LogTools.h"
+#include "zypp/ui/Selectable.h"
 
 #include "Zypper.h"
+#include "misc.h"
 #include "SolverRequester.h"
 
 using namespace std;
 using namespace zypp;
+using namespace zypp::ui;
 
 string SolverRequester::Feedback::asUserString(
     const SolverRequester::Options & opts) const
@@ -76,6 +79,7 @@ string SolverRequester::Feedback::asUserString(
     return str::form(_("No provider of '%s' is installed."), _reqcap.asString().c_str());
 
   case ALREADY_INSTALLED:
+    // TODO Package/Pattern/Patch/Product
     if (_objinst->name() == splid.name())
       return str::form(
           _("'%s' is already installed."), _reqcap.asString().c_str());
@@ -84,6 +88,55 @@ string SolverRequester::Feedback::asUserString(
           // translators: %s are package names
           _("'%s' providing '%s' is already installed."),
           _objinst->name().c_str(), _reqcap.asString().c_str());
+
+  case NO_UPD_CANDIDATE:
+  {
+    PoolItem highest = asSelectable()(_objinst)->highestAvailableVersionObj();
+    if (identical(_objinst, highest) || _objinst->edition() > highest->edition())
+      return str::form(
+          _("No update candidate for '%s'."
+            " The highest available version is already installed."),
+          poolitem_user_string(_objinst).c_str());
+    else
+      return
+        str::form(_("No update candidate for '%s'."), _objinst->name().c_str());
+  }
+
+  case UPD_CANDIDATE_USER_RESTRICTED:
+  {
+    PoolItem highest = asSelectable()(_objsel)->highestAvailableVersionObj();
+    PoolItem installed = asSelectable()(_objsel)->installedObj();
+    return str::form(
+        _("There is an update candidate '%s' for '%s', but it does not match"
+          " specified version, architecture, or repository."),
+        poolitem_user_string(highest).c_str(),
+        poolitem_user_string(installed).c_str());
+  }
+
+  case SET_TO_INSTALL:
+    if (opts.force)
+      return str::form(
+          _("Forcing installation of '%s' from repository '%s'."),
+          resolvable_user_string(*_objsel.resolvable()).c_str(),
+          Zypper::instance()->config().show_alias ?
+              _objsel->repoInfo().alias().c_str() :
+              _objsel->repoInfo().name().c_str());
+    else
+      return str::form(
+          _("Selecting '%s' from repository '%s' for installation."),
+          resolvable_user_string(*_objsel.resolvable()).c_str(),
+          Zypper::instance()->config().show_alias ?
+              _objsel->repoInfo().alias().c_str() :
+              _objsel->repoInfo().name().c_str());
+
+  case SET_TO_REMOVE:
+    return "";
+
+  case ADDED_REQUIREMENT:
+    return str::form(_("Adding requirement: '%s'."), _reqcap.asString().c_str());
+
+  case ADDED_CONFLICT:
+    return str::form(_("Adding conflict: '%s'."), _reqcap.asString().c_str());
 
   default:
     INT << "unknown feedback id? " << _id << endl;
@@ -106,8 +159,14 @@ void SolverRequester::Feedback::print(
   case NOT_INSTALLED:
   case NO_INSTALLED_PROVIDER:
   case ALREADY_INSTALLED:
+  case NO_UPD_CANDIDATE:
     out.info(asUserString(opts));
     break;
+  case SET_TO_INSTALL:
+  case SET_TO_REMOVE:
+  case ADDED_REQUIREMENT:
+  case ADDED_CONFLICT:
+    out.info(asUserString(opts), Out::HIGH);
   default:
     INT << "unknown feedback id? " << _id << endl;
   }

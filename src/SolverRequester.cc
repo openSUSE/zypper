@@ -31,7 +31,10 @@ using namespace zypp;
 using namespace zypp::ui;
 
 void SolverRequester::install(const PackageArgs & args)
-{ installRemove(args); }
+{
+  _requested_inst = true;
+  installRemove(args);
+}
 
 void SolverRequester::remove(const PackageArgs & args)
 {
@@ -246,6 +249,8 @@ void SolverRequester::update(const PackageArgs & args)
   if (args.empty())
     return;
 
+  _requested_inst = false;
+
   for_(it, args.doCaps().begin(), args.doCaps().end())
     update(it->first, it->second);
 
@@ -276,8 +281,11 @@ void SolverRequester::update(const PackageArgs & args)
  */
 void SolverRequester::update(const Capability & cap, const string & repoalias)
 {
+  // FIXME this sucks
+  bool reqwasinst = _requested_inst;
   _requested_inst = false;
   install(cap, repoalias);
+  _requested_inst = reqwasinst;
 }
 
 // ----------------------------------------------------------------------------
@@ -402,40 +410,18 @@ void SolverRequester::updateTo(
       // require version greater than than the one installed
       Capability c(s->name(), Rel::GT, installed->edition(), s->kind());
       addRequirement(c);
-      zypper.out().info(
-          str::form(_("Requiring '%s'."), c.asString().c_str()), Out::HIGH);
       MIL << *s << " update: adding requirement " << c << endl;
     }
     else if (candidate->edition() > installed->edition())
     {
       // set 'candidate' for installation
       setToInstall(candidate);
-
-      zypper.out().info(
-          str::form(_("Selecting '%s-%s.%s' from repository '%s' for update."),
-              candidate->name().c_str(),
-              candidate->edition().asString().c_str(),
-              candidate->arch().asString().c_str(),
-              zypper.config().show_alias ?
-                  candidate->repoInfo().alias().c_str() :
-                  candidate->repoInfo().name().c_str()),
-          Out::HIGH);
       MIL << *s << " update: setting " << candidate << " to install" << endl;
     }
     else if (_opts.force)
     {
       // set 'candidate' for installation
       setToInstall(candidate);
-
-      zypper.out().info(
-          str::form(_("Forcing installation of '%s-%s.%s' from repository '%s'."),
-              candidate->name().c_str(),
-              candidate->edition().asString().c_str(),
-              candidate->arch().asString().c_str(),
-              zypper.config().show_alias ?
-                  candidate->repoInfo().alias().c_str() :
-                  candidate->repoInfo().name().c_str()),
-          Out::HIGH);
       MIL << *s << " update: setting " << candidate << " to install" << endl;
     }
   }
@@ -447,9 +433,8 @@ void SolverRequester::updateTo(
   // !availableEmpty() <=> theone && highest
   if (s->availableEmpty())
   {
+    addFeedback(Feedback::NO_UPD_CANDIDATE, cap, repoalias, PoolItem(), installed);
     DBG << "no available objects in repos, skipping update of " << s->name() << endl;
-    zypper.out().info(str::form(
-        _("No update candidate for '%s'."), s->name().c_str()));
     return;
   }
 
@@ -459,18 +444,19 @@ void SolverRequester::updateTo(
     // only say 'already installed' in case of install, if update was requested
     // only report if we fail to install the newest version (the code below)
     if (_requested_inst)
-      zypper.out().info(str::form(
-        _("Package '%s' is already installed."), installed->name().c_str()));
+    {
+      addFeedback(
+          Feedback::ALREADY_INSTALLED, cap, repoalias, candidate, installed);
+      MIL << "'" << cap << "'";
+      if (!repoalias.empty())
+        MIL << " from '" << repoalias << "'";
+      MIL << " already installed." << endl;
+    }
     // TODO other kinds
 
     // the highest version is already there
-    if (identical(installed, highest))
-    {
-      zypper.out().info(str::form(
-          _("No update candidate for '%s'."
-            " The highest available version is already installed."),
-          poolitem_user_string(installed).c_str() ));
-    }
+    if (identical(installed, highest) || highest->edition() < installed->edition())
+      addFeedback(Feedback::NO_UPD_CANDIDATE, cap, repoalias, candidate, installed);
 
     // there is higher version available than the selected candidate
     // this can happen because of repo priorities, locks, vendor lock, and
@@ -484,13 +470,8 @@ void SolverRequester::updateTo(
           || !_opts.from_repos.empty() || !repoalias.empty();
       if (userconstraints)
       {
+        addFeedback(Feedback::UPD_CANDIDATE_USER_RESTRICTED, cap, repoalias, candidate, installed);
         DBG << "Newer object exists, but has different repo/arch/version: " << highest << endl;
-
-        zypper.out().info(str::form(
-          _("There is an update candidate '%s' for '%s', but it does not match"
-            " specified version, architecture, or repository."),
-          poolitem_user_string(highest).c_str(),
-          poolitem_user_string(installed).c_str() ));
       }
 
       // update candidate locked
@@ -510,7 +491,9 @@ void SolverRequester::updateTo(
       // update candidate has different vendor
       else if (highest->vendor() != installed->vendor())
       {
-        DBG << "Newer object with different vendor exists: " << highest << endl;
+        DBG << "Newer object with different vendor exists: " << highest
+            << " (" << highest->vendor() << ")"
+            << ". Installed vendor: " << installed->vendor() << endl;
 
         ostringstream cmdhint;
         cmdhint << "zypper install " << highest->name()
