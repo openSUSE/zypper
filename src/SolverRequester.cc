@@ -131,7 +131,8 @@ void SolverRequester::install(const Capability & cap, const string & repoalias)
 
   // try by capability
 
-  addFeedback(Feedback::NOT_FOUND_NAME_TRYING_CAPS, cap, repoalias);
+  if (!_opts.force_by_cap)
+    addFeedback(Feedback::NOT_FOUND_NAME_TRYING_CAPS, cap, repoalias);
 
   // is there a provider for the requested capability?
   sat::WhatProvides q(cap);
@@ -149,13 +150,7 @@ void SolverRequester::install(const Capability & cap, const string & repoalias)
   {
     if (_requested_inst)
       addFeedback(Feedback::ALREADY_INSTALLED, cap, repoalias, *it, *it);
-
-    MIL << "provider '" << *it << "' of '" << cap << "' installed;"
-        << " will try to update" << endl;
-
-    Capability pcap((*it)->name(), (*it)->kind());
-    update(pcap, repoalias);
-    // TODO add check to avoid endless loops
+    MIL << "provider '" << *it << "' of '" << cap << "' installed" << endl;
   }
 
   if (providers.empty())

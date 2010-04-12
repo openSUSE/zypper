@@ -37,6 +37,7 @@ BOOST_AUTO_TEST_CASE(setup)
   test.loadTargetRepo(TESTS_SRC_DIR "/data/openSUSE-11.1_subset");
   test.loadRepo(TESTS_SRC_DIR "/data/openSUSE-11.1");
   test.loadRepo(TESTS_SRC_DIR "/data/openSUSE-11.1_updates");
+  test.loadRepo(TESTS_SRC_DIR "/data/misc");
 }
 
 ///////////////////////////////////////////////////////////////////////////
@@ -44,7 +45,6 @@ BOOST_AUTO_TEST_CASE(setup)
 ///////////////////////////////////////////////////////////////////////////
 
 // request : install nonsense
-// opts    : defaults
 // response: not found by name, try caps, no cap found
 BOOST_AUTO_TEST_CASE(install1)
 {
@@ -62,7 +62,6 @@ BOOST_AUTO_TEST_CASE(install1)
 }
 
 // request : install vim
-// opts    : defaults
 // response: vim set to install, no fallback to caps
 BOOST_AUTO_TEST_CASE(install2)
 {
@@ -80,7 +79,6 @@ BOOST_AUTO_TEST_CASE(install2)
 }
 
 // request : install zypper
-// opts    : defaults
 // response: set zypper-1.0.13-0.1.1 from 11.1_updates to install (update)
 BOOST_AUTO_TEST_CASE(install3)
 {
@@ -98,7 +96,6 @@ BOOST_AUTO_TEST_CASE(install3)
 }
 
 // request : install netcfg
-// opts    : defaults
 // response: already installed, no update candidate (the installed
 //           is higher than any available)
 BOOST_AUTO_TEST_CASE(install4)
@@ -116,7 +113,6 @@ BOOST_AUTO_TEST_CASE(install4)
 }
 
 // request : install info
-// opts    : defaults
 // response: already installed (the highest available is identical to installed)
 BOOST_AUTO_TEST_CASE(install5)
 {
@@ -130,6 +126,66 @@ BOOST_AUTO_TEST_CASE(install5)
 
   BOOST_CHECK(sr.hasFeedback(SolverRequester::Feedback::ALREADY_INSTALLED));
   BOOST_CHECK(sr.hasFeedback(SolverRequester::Feedback::NO_UPD_CANDIDATE));
+}
+
+// request : install 'perl(Net::SSL)'
+// response: fall back to --capability, addRequirement 'perl(Net::SSL)'
+//           (perl-Crypt-SSLeay-0.57-1.41.x86_64 from 11.1 provides it)
+BOOST_AUTO_TEST_CASE(install6)
+{
+  MIL << "<============install6===============>" << endl;
+
+  vector<string> rawargs;
+  rawargs.push_back("perl(Net::SSL)");
+  SolverRequester sr;
+
+  sr.install(rawargs);
+
+  BOOST_CHECK(sr.hasFeedback(SolverRequester::Feedback::NOT_FOUND_NAME_TRYING_CAPS));
+  BOOST_CHECK(sr.hasFeedback(SolverRequester::Feedback::ADDED_REQUIREMENT));
+  BOOST_CHECK_EQUAL(sr.toInstall().size(), 0);
+  BOOST_CHECK_EQUAL(sr.requires().size(), 1);
+  BOOST_CHECK(sr.requires().find(Capability("perl(Net::SSL)")) != sr.requires().end());
+}
+
+// request : install --name 'perl(Net::SSL)'
+// response: 'perl(Net::SSL)' not found
+// TODO: might be nice to inform users that a provider of such capability exists
+BOOST_AUTO_TEST_CASE(install7)
+{
+  MIL << "<============install7===============>" << endl;
+
+  vector<string> rawargs;
+  rawargs.push_back("perl(Net::SSL)");
+  SolverRequester::Options sropts;
+  sropts.force_by_name = true;
+  SolverRequester sr(sropts);
+
+  sr.install(rawargs);
+
+  BOOST_CHECK(sr.hasFeedback(SolverRequester::Feedback::NOT_FOUND_NAME));
+  BOOST_CHECK(!sr.hasFeedback(SolverRequester::Feedback::NOT_FOUND_NAME_TRYING_CAPS));
+}
+
+// request : install --capability 'y2pmsh'
+// response: zypper providing y2pmsh already installed (don't install package 'y2pmsh')
+BOOST_AUTO_TEST_CASE(install8)
+{
+  MIL << "<============install8===============>" << endl;
+
+  vector<string> rawargs;
+  rawargs.push_back("y2pmsh");
+  SolverRequester::Options sropts;
+  sropts.force_by_cap = true;
+  SolverRequester sr(sropts);
+
+  sr.install(rawargs);
+
+  BOOST_CHECK(!sr.hasFeedback(SolverRequester::Feedback::SET_TO_INSTALL));
+  BOOST_CHECK(!sr.hasFeedback(SolverRequester::Feedback::NOT_FOUND_NAME_TRYING_CAPS));
+  BOOST_CHECK(sr.hasFeedback(SolverRequester::Feedback::ALREADY_INSTALLED));
+  BOOST_CHECK(sr.toInstall().empty());
+  BOOST_CHECK(sr.requires().empty());
 }
 
 
