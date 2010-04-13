@@ -4008,7 +4008,7 @@ void Zypper::doCommand()
       {
         for_(kit, kinds.begin(), kinds.end())
         {
-          if (kind == ResKind::package)
+          if (*kit == ResKind::package)
           {
             MIL << "Computing package update..." << endl;
             // this will do a complete pacakge update as far as possible
@@ -4018,12 +4018,12 @@ void Zypper::doCommand()
             runtimeData().solve_before_commit = false;
           }
           // update -t patch; patch
-          else if (kind == ResKind::patch)
+          else if (*kit == ResKind::patch)
           {
             sropts.skip_interactive = skip_interactive;
             sr.updatePatches();
           }
-          else if (kind == ResKind::pattern)
+          else if (*kit == ResKind::pattern)
             sr.updatePatterns();
           // should not get here (see above kind parsing code), but just in case
           else
