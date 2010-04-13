@@ -36,6 +36,10 @@ int usage( const std::string & msg_r = std::string(), int exit_r = 100 )
   cerr << "  -n/-N    turn on/off looking for names       (default on)" << endl;
   cerr << "  -p/-P    turn on/off looking for provides    (default off)" << endl;
   cerr << "  -r/-R    turn on/off looking for requires    (default off)" << endl;
+  cerr << "  -c/-C    turn on/off looking for conflicts   (default off)" << endl;
+  cerr << "  -o/-O    turn on/off looking for obsoletes   (default off)" << endl;
+  cerr << "  -m/-M    turn on/off looking for recommends  (default off)" << endl;
+  cerr << "  -s/-S    turn on/off looking for suggests    (default off)" << endl;
   cerr << "  -a       short for -n -p -r" << endl;
   cerr << "  -A       short for -n -P -R" << endl;
   cerr << "" << endl;
@@ -163,6 +167,10 @@ int main( int argc, char * argv[] )
   bool names     ( true );
   bool provides  ( false );
   bool requires  ( false );
+  bool conflicts ( false );
+  bool obsoletes ( false );
+  bool recommends( false );
+  bool suggests  ( false );
 
   for ( ; argc; --argc,++argv )
   {
@@ -180,6 +188,14 @@ int main( int argc, char * argv[] )
         case 'R': requires =	false;	break;
         case 'p': provides =	true;	break;
         case 'P': provides =	false;	break;
+        case 'c': conflicts =	true;	break;
+        case 'C': conflicts =	false;	break;
+        case 'o': obsoletes =	true;	break;
+        case 'O': obsoletes =	false;	break;
+        case 'm': recommends =	true;	break;
+        case 'M': recommends =	false;	break;
+        case 's': suggests =	true;	break;
+        case 'S': suggests =	false;	break;
       }
       continue;
     }
@@ -213,9 +229,18 @@ int main( int argc, char * argv[] )
       q.addDependency( sat::SolvAttr::provides );
     if ( requires )
       q.addDependency( sat::SolvAttr::requires );
+    if ( conflicts )
+      q.addDependency( sat::SolvAttr::conflicts );
+    if ( obsoletes )
+      q.addDependency( sat::SolvAttr::obsoletes );
+    if ( recommends )
+      q.addDependency( sat::SolvAttr::recommends );
+    if ( suggests )
+      q.addDependency( sat::SolvAttr::suggests );
     }
 
-    message << *argv << " [" << (ignorecase?'i':'_') << (names?'n':'_') << (requires?'r':'_') << (provides?'p':'_') << "] {" << endl;
+    message << *argv << " [" << (ignorecase?'i':'_') << (names?'n':'_') << (requires?'r':'_') << (provides?'p':'_')
+	    << (conflicts?'c':'_') << (obsoletes?'o':'_') << (recommends?'m':'_') << (suggests?'s':'_') << "] {" << endl;
 
     for_( it, q.begin(), q.end() )
     {
@@ -225,7 +250,7 @@ int main( int argc, char * argv[] )
       {
         for_( match, it.matchesBegin(), it.matchesEnd() )
         {
-          tableOut( "", "", "", match->inSolvAttr().asString().substr( 9, 1 )+" " +match->asString() );
+          tableOut( "", "", "", match->inSolvAttr().asString().substr( 9, 3 )+": " +match->asString() );
         }
       }
     }
