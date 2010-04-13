@@ -29,20 +29,6 @@ void list_updates(Zypper & zypper,
 void list_patches_by_issue(Zypper & zypper);
 
 /**
- * Mark patches for installation or package for update.
- *
- * \param kinds  set of resolvable types
- * \param skip_interactive
- *               whether to skip updates that need user interaction
- * \param best_effort
- *               only require the resolvable name, let the solver choose
- */
-void mark_updates(Zypper & zypper,
-                  const ResKindSet & kinds,
-                  bool skip_interactive,
-                  bool best_effort);
-
-/**
  * Mark patches for installation according to bugzilla or CVE number specified
  * in --cve or --bugzilla or --bz.
  */
