@@ -102,7 +102,7 @@ public:
       /** Selected object is already installed. */
       ALREADY_INSTALLED,
       NO_UPD_CANDIDATE,
-      UPD_CANDIDATE_CHANGES_VERSION,
+      UPD_CANDIDATE_CHANGES_VENDOR,
       UPD_CANDIDATE_HAS_LOWER_PRIO,
       UPD_CANDIDATE_IS_LOCKED,
       /**

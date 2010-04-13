@@ -105,12 +105,23 @@ string SolverRequester::Feedback::asUserString(
   case UPD_CANDIDATE_USER_RESTRICTED:
   {
     PoolItem highest = asSelectable()(_objsel)->highestAvailableVersionObj();
-    PoolItem installed = asSelectable()(_objsel)->installedObj();
     return str::form(
         _("There is an update candidate '%s' for '%s', but it does not match"
           " specified version, architecture, or repository."),
         poolitem_user_string(highest).c_str(),
-        poolitem_user_string(installed).c_str());
+        poolitem_user_string(_objinst).c_str());
+  }
+
+  case UPD_CANDIDATE_CHANGES_VENDOR:
+  {
+    PoolItem highest = asSelectable()(_objinst)->highestAvailableVersionObj();
+    ostringstream cmdhint;
+    cmdhint << "zypper install " << poolitem_user_string(highest);
+
+    return str::form(
+      _("There is an update candidate for '%s', but it is from different"
+        " vendor. Use '%s' to install this candidate."),
+        _objinst->name().c_str(), cmdhint.str().c_str());
   }
 
   case SET_TO_INSTALL:
@@ -160,6 +171,8 @@ void SolverRequester::Feedback::print(
   case NO_INSTALLED_PROVIDER:
   case ALREADY_INSTALLED:
   case NO_UPD_CANDIDATE:
+  case UPD_CANDIDATE_USER_RESTRICTED:
+  case UPD_CANDIDATE_CHANGES_VENDOR:
     out.info(asUserString(opts));
     break;
   case SET_TO_INSTALL:

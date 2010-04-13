@@ -33,11 +33,12 @@ BOOST_AUTO_TEST_CASE(setup)
 {
   MIL << "============setup===========" << endl;
   TestSetup test(Arch_x86_64);
-  // fake target from the whole 11.1 repo
+  // fake target from a subset of the online 11.1 repo
   test.loadTargetRepo(TESTS_SRC_DIR "/data/openSUSE-11.1_subset");
-  test.loadRepo(TESTS_SRC_DIR "/data/openSUSE-11.1");
-  test.loadRepo(TESTS_SRC_DIR "/data/openSUSE-11.1_updates");
-  test.loadRepo(TESTS_SRC_DIR "/data/misc");
+  test.loadRepo(TESTS_SRC_DIR "/data/openSUSE-11.1", "main");
+  test.loadRepo(TESTS_SRC_DIR "/data/openSUSE-11.1_updates", "upd");
+  test.loadRepo(TESTS_SRC_DIR "/data/misc", "misc");
+  test.loadRepo(TESTS_SRC_DIR "/data/OBS_zypp_svn-11.1", "zypp");
 }
 
 ///////////////////////////////////////////////////////////////////////////
@@ -119,7 +120,7 @@ BOOST_AUTO_TEST_CASE(install5)
   MIL << "<============install5===============>" << endl;
 
   vector<string> rawargs;
-  rawargs.push_back("info");
+  rawargs.push_back("login");
   SolverRequester sr;
 
   sr.install(rawargs);
@@ -186,6 +187,25 @@ BOOST_AUTO_TEST_CASE(install8)
   BOOST_CHECK(sr.hasFeedback(SolverRequester::Feedback::ALREADY_INSTALLED));
   BOOST_CHECK(sr.toInstall().empty());
   BOOST_CHECK(sr.requires().empty());
+}
+
+// request : install 'info'
+// response: Already installed. Update candidate info-4.13-1.1 is available
+//           but has different vendor
+BOOST_AUTO_TEST_CASE(install9)
+{
+  MIL << "<============install9===============>" << endl;
+
+  vector<string> rawargs;
+  rawargs.push_back("info");
+  SolverRequester sr;
+
+  sr.install(rawargs);
+
+  BOOST_CHECK(sr.hasFeedback(SolverRequester::Feedback::SET_TO_INSTALL));
+  BOOST_CHECK_EQUAL(sr.toInstall().size(), 1);
+  BOOST_CHECK(hasPoolItem(sr.toInstall(), "info", Edition("4.12-1.111"), Arch_x86_64));
+  BOOST_CHECK(sr.hasFeedback(SolverRequester::Feedback::UPD_CANDIDATE_CHANGES_VENDOR));
 }
 
 

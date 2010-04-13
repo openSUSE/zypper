@@ -103,13 +103,26 @@ void SolverRequester::install(const Capability & cap, const string & repoalias)
       q.addRepo(repoalias);
 
     // get the best matching items and tag them for installation.
+    // FIXME this ignores vendor lock - we need some way to do --from which
+    // would respect vendor lock: e.g. a new Selectable::updateCandidateObj(Options&)
     PoolItemBest bestMatches(q.begin(), q.end());
     if (!bestMatches.empty())
     {
       for_(sit, bestMatches.begin(), bestMatches.end())
       {
-        if (asSelectable()(*sit)->hasInstalledObj())
-          updateTo(cap, repoalias, *sit);
+        Selectable::Ptr s(asSelectable()(*sit));
+        if (s->hasInstalledObj())
+        {
+          // whether user requested specific repo/version/arch
+          bool userconstraints =
+              cap.detail().isVersioned() || cap.detail().hasArch()
+              || !_opts.from_repos.empty() || !repoalias.empty();
+          PoolItem best = s->updateCandidateObj();
+          if (userconstraints || !best)
+            updateTo(cap, repoalias, *sit);
+          else
+            updateTo(cap, repoalias, best);
+        }
         else if (_requested_inst)
         {
           setToInstall(*sit);
@@ -127,12 +140,11 @@ void SolverRequester::install(const Capability & cap, const string & repoalias)
       WAR << "'" << cap << "' not found" << endl;
       return;
     }
+
+    addFeedback(Feedback::NOT_FOUND_NAME_TRYING_CAPS, cap, repoalias);
   }
 
   // try by capability
-
-  if (!_opts.force_by_cap)
-    addFeedback(Feedback::NOT_FOUND_NAME_TRYING_CAPS, cap, repoalias);
 
   // is there a provider for the requested capability?
   sat::WhatProvides q(cap);
@@ -390,7 +402,7 @@ void SolverRequester::updateTo(
 #warning TODO handle pseudoinstalled objects
   }
 
-  DBG << "chosen: "    << candidate << endl;
+  DBG << "selected:  " << candidate << endl;
   DBG << "best:      " << theone    << endl;
   DBG << "highest:   " << highest   << endl;
   DBG << "installed: " << installed << endl;
@@ -452,69 +464,6 @@ void SolverRequester::updateTo(
     // the highest version is already there
     if (identical(installed, highest) || highest->edition() < installed->edition())
       addFeedback(Feedback::NO_UPD_CANDIDATE, cap, repoalias, candidate, installed);
-
-    // there is higher version available than the selected candidate
-    // this can happen because of repo priorities, locks, vendor lock, and
-    // because of CLI restrictions: repos/arch/version
-    // (bnc #522223)
-    else
-    {
-      // whether user requested specific repo/version/arch
-      bool userconstraints =
-          cap.detail().isVersioned() || cap.detail().hasArch()
-          || !_opts.from_repos.empty() || !repoalias.empty();
-      if (userconstraints)
-      {
-        addFeedback(Feedback::UPD_CANDIDATE_USER_RESTRICTED, cap, repoalias, candidate, installed);
-        DBG << "Newer object exists, but has different repo/arch/version: " << highest << endl;
-      }
-
-      // update candidate locked
-      else if (s->status() == ui::S_Protected || highest.status().isLocked())
-      {
-        DBG << "Newer object exists, but is locked: " << highest << endl;
-
-        ostringstream cmdhint;
-        cmdhint << "zypper removelock " << highest->name();
-
-        zypper.out().info(str::form(
-          _("There is an update candidate for '%s', but it is locked."
-            " Use '%s' to unlock it."),
-          s->name().c_str(), cmdhint.str().c_str()));
-      }
-
-      // update candidate has different vendor
-      else if (highest->vendor() != installed->vendor())
-      {
-        DBG << "Newer object with different vendor exists: " << highest
-            << " (" << highest->vendor() << ")"
-            << ". Installed vendor: " << installed->vendor() << endl;
-
-        ostringstream cmdhint;
-        cmdhint << "zypper install " << highest->name()
-            << "-" << highest->edition() << "." << highest->arch();
-
-        zypper.out().info(str::form(
-          _("There is an update candidate for '%s', but it is from different"
-            " vendor. Use '%s' to install this candidate."),
-            s->name().c_str(), cmdhint.str().c_str()));
-      }
-
-      // update candidate is from low-priority (higher priority number) repo
-      else if (highest->repoInfo().priority() > installed->repoInfo().priority())
-      {
-        DBG << "Newer object exists in lower-priority repo: " << highest << endl;
-
-        ostringstream cmdhint;
-        cmdhint << "zypper install " << highest->name()
-            << "-" << highest->edition() << "." << highest->arch();
-
-        zypper.out().info(str::form(
-          _("There is an update candidate for '%s', but it comes from repository"
-             " with lower priority. Use '%s' to install this candidate."),
-            s->name().c_str(), cmdhint.str().c_str()));
-      }
-    }
   }
   else if (installed->edition() > candidate->edition())
   {
@@ -531,10 +480,59 @@ void SolverRequester::updateTo(
     zypper.out().info(str::form(
         _("Use '%s' to force installation of the package."), "--force"));
   }
-  // there is also higher version than candidate, but that won't be installed.
-  else if (!identical(candidate, highest))
-  {
 
+  // there is higher version available than the selected candidate
+  // this can happen because of repo priorities, locks, vendor lock, and
+  // because of CLI restrictions: repos/arch/version (bnc #522223)
+  if (!identical(candidate, highest) && highest->edition() > installed->edition())
+  {
+    // whether user requested specific repo/version/arch
+    bool userconstraints =
+        cap.detail().isVersioned() || cap.detail().hasArch()
+        || !_opts.from_repos.empty() || !repoalias.empty();
+    if (userconstraints)
+    {
+      addFeedback(Feedback::UPD_CANDIDATE_USER_RESTRICTED, cap, repoalias, candidate, installed);
+      DBG << "Newer object exists, but has different repo/arch/version: " << highest << endl;
+    }
+
+    // update candidate locked
+    else if (s->status() == ui::S_Protected || highest.status().isLocked())
+    {
+      DBG << "Newer object exists, but is locked: " << highest << endl;
+
+      ostringstream cmdhint;
+      cmdhint << "zypper removelock " << highest->name();
+
+      zypper.out().info(str::form(
+        _("There is an update candidate for '%s', but it is locked."
+          " Use '%s' to unlock it."),
+        s->name().c_str(), cmdhint.str().c_str()));
+    }
+
+    // update candidate has different vendor
+    else if (highest->vendor() != installed->vendor())
+    {
+      addFeedback(Feedback::UPD_CANDIDATE_CHANGES_VENDOR, cap, repoalias, candidate, installed);
+      DBG << "Newer object with different vendor exists: " << highest
+          << " (" << highest->vendor() << ")"
+          << ". Installed vendor: " << installed->vendor() << endl;
+    }
+
+    // update candidate is from low-priority (higher priority number) repo
+    else if (highest->repoInfo().priority() > installed->repoInfo().priority())
+    {
+      DBG << "Newer object exists in lower-priority repo: " << highest << endl;
+
+      ostringstream cmdhint;
+      cmdhint << "zypper install " << highest->name()
+          << "-" << highest->edition() << "." << highest->arch();
+
+      zypper.out().info(str::form(
+        _("There is an update candidate for '%s', but it comes from repository"
+           " with lower priority. Use '%s' to install this candidate."),
+          s->name().c_str(), cmdhint.str().c_str()));
+    }
   }
 }
 
