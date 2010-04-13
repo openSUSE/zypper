@@ -368,6 +368,27 @@ BOOST_AUTO_TEST_CASE(remove7)
   BOOST_CHECK(sr.conflicts().find(Capability("y2pmsh")) != sr.conflicts().end());
 }
 
+// request : remove onekit
+// response: set onekit for removal.
+//           must not add conflict 'onekit' ('onekit' exists, must mark by name
+//           first. Conflict 'onekit' would also remove 'newkit' which provides
+//           'onekit')
+// bnc #458318
+BOOST_AUTO_TEST_CASE(remove8)
+{
+  MIL << "<=============remove8==============>" << endl;
+  vector<string> rawargs;
+  rawargs.push_back("onekit");
+  SolverRequester sr;
+
+  sr.remove(rawargs);
+
+  BOOST_CHECK(sr.hasFeedback(SolverRequester::Feedback::SET_TO_REMOVE));
+  BOOST_CHECK_EQUAL(sr.toRemove().size(), 1);
+  BOOST_CHECK(hasPoolItem(sr.toRemove(), "onekit", Edition("0.0.2-1"), Arch_x86_64));
+  BOOST_CHECK(sr.conflicts().empty());
+}
+
 
 ///////////////////////////////////////////////////////////////////////////
 // update
