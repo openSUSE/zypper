@@ -1,4 +1,9 @@
 -------------------------------------------------------------------
+Tue Apr 13 14:36:31 CEST 2010 - ma@suse.de
+
+- Fix parsing port from IPv6 URL (bnc#593385)
+
+-------------------------------------------------------------------
 Fri Mar 26 19:23:59 CET 2010 - ma@suse.de
 
 - Propagate ZConfig::setTextLocale to pool. (bnc#588850)
