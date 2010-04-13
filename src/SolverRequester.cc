@@ -375,9 +375,9 @@ bool SolverRequester::installPatch(const string & name, bool ignore_pkgmgmt)
 // ----------------------------------------------------------------------------
 
 void SolverRequester::updateTo(
-      const Capability & cap, const string & repoalias, const PoolItem & candidate)
+      const Capability & cap, const string & repoalias, const PoolItem & selected)
 {
-  if (!candidate)
+  if (!selected)
   {
     INT << "Candidate is empty, returning! Pass PoolItem you want to update to."
         << endl;
@@ -386,7 +386,7 @@ void SolverRequester::updateTo(
 
 #warning get rid of zypper here
   Zypper & zypper = *Zypper::instance();
-  Selectable::Ptr s = asSelectable()(candidate);
+  Selectable::Ptr s = asSelectable()(selected);
 
   // the best object without repository, arch, or version restriction
   PoolItem theone = s->updateCandidateObj();
@@ -402,7 +402,7 @@ void SolverRequester::updateTo(
 #warning TODO handle pseudoinstalled objects
   }
 
-  DBG << "selected:  " << candidate << endl;
+  DBG << "selected:  " << selected << endl;
   DBG << "best:      " << theone    << endl;
   DBG << "highest:   " << highest   << endl;
   DBG << "installed: " << installed << endl;
@@ -410,7 +410,7 @@ void SolverRequester::updateTo(
 
   // ******* request ********
 
-  if (!identical(installed, candidate))
+  if (!identical(installed, selected))
   {
     if (_opts.best_effort)
     {
@@ -419,17 +419,17 @@ void SolverRequester::updateTo(
       addRequirement(c);
       MIL << *s << " update: adding requirement " << c << endl;
     }
-    else if (candidate->edition() > installed->edition())
+    else if (selected->edition() > installed->edition())
     {
       // set 'candidate' for installation
-      setToInstall(candidate);
-      MIL << *s << " update: setting " << candidate << " to install" << endl;
+      setToInstall(selected);
+      MIL << *s << " update: setting " << selected << " to install" << endl;
     }
     else if (_opts.force)
     {
       // set 'candidate' for installation
-      setToInstall(candidate);
-      MIL << *s << " update: setting " << candidate << " to install" << endl;
+      setToInstall(selected);
+      MIL << *s << " update: setting " << selected << " to install" << endl;
     }
   }
 
@@ -437,14 +437,14 @@ void SolverRequester::updateTo(
   // ******* report ********
 
   // the candidate is already installed
-  if (identical(installed, candidate))
+  if (identical(installed, selected))
   {
     // only say 'already installed' in case of install, if update was requested
     // only report if we fail to install the newest version (the code below)
     if (_requested_inst)
     {
       addFeedback(
-          Feedback::ALREADY_INSTALLED, cap, repoalias, candidate, installed);
+          Feedback::ALREADY_INSTALLED, cap, repoalias, selected, installed);
       MIL << "'" << cap << "'";
       if (!repoalias.empty())
         MIL << " from '" << repoalias << "'";
@@ -463,20 +463,20 @@ void SolverRequester::updateTo(
 
     // the highest version is already there
     if (identical(installed, highest) || highest->edition() < installed->edition())
-      addFeedback(Feedback::NO_UPD_CANDIDATE, cap, repoalias, candidate, installed);
+      addFeedback(Feedback::NO_UPD_CANDIDATE, cap, repoalias, selected, installed);
   }
-  else if (installed->edition() > candidate->edition())
+  else if (installed->edition() > selected->edition())
   {
     zypper.out().info(
         str::form(_(
             "The selected package '%s-%s.%s' from repository '%s' has lower"
             " version than the installed one."),
-            candidate->name().c_str(),
-            candidate->edition().asString().c_str(),
-            candidate->arch().asString().c_str(),
+            selected->name().c_str(),
+            selected->edition().asString().c_str(),
+            selected->arch().asString().c_str(),
             zypper.config().show_alias ?
-                candidate->repoInfo().alias().c_str() :
-                candidate->repoInfo().name().c_str()));
+                selected->repoInfo().alias().c_str() :
+                selected->repoInfo().name().c_str()));
     zypper.out().info(str::form(
         _("Use '%s' to force installation of the package."), "--force"));
   }
@@ -484,7 +484,7 @@ void SolverRequester::updateTo(
   // there is higher version available than the selected candidate
   // this can happen because of repo priorities, locks, vendor lock, and
   // because of CLI restrictions: repos/arch/version (bnc #522223)
-  if (!identical(candidate, highest) && highest->edition() > installed->edition())
+  if (!identical(selected, highest) && highest->edition() > installed->edition())
   {
     // whether user requested specific repo/version/arch
     bool userconstraints =
@@ -492,7 +492,7 @@ void SolverRequester::updateTo(
         || !_opts.from_repos.empty() || !repoalias.empty();
     if (userconstraints)
     {
-      addFeedback(Feedback::UPD_CANDIDATE_USER_RESTRICTED, cap, repoalias, candidate, installed);
+      addFeedback(Feedback::UPD_CANDIDATE_USER_RESTRICTED, cap, repoalias, selected, installed);
       DBG << "Newer object exists, but has different repo/arch/version: " << highest << endl;
     }
 
@@ -513,7 +513,7 @@ void SolverRequester::updateTo(
     // update candidate has different vendor
     else if (highest->vendor() != installed->vendor())
     {
-      addFeedback(Feedback::UPD_CANDIDATE_CHANGES_VENDOR, cap, repoalias, candidate, installed);
+      addFeedback(Feedback::UPD_CANDIDATE_CHANGES_VENDOR, cap, repoalias, selected, installed);
       DBG << "Newer object with different vendor exists: " << highest
           << " (" << highest->vendor() << ")"
           << ". Installed vendor: " << installed->vendor() << endl;
