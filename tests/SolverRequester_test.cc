@@ -90,6 +90,7 @@ BOOST_AUTO_TEST_CASE(install3)
 
   sr.install(rawargs);
 
+  BOOST_CHECK(sr.hasFeedback(SolverRequester::Feedback::ALREADY_INSTALLED));
   BOOST_CHECK(sr.hasFeedback(SolverRequester::Feedback::SET_TO_INSTALL));
   BOOST_CHECK_EQUAL(sr.toInstall().size(), 1);
   BOOST_CHECK(hasPoolItem(sr.toInstall(), "zypper", Edition("1.0.13-0.1.1"), Arch_x86_64));
@@ -201,6 +202,7 @@ BOOST_AUTO_TEST_CASE(install9)
 
   sr.install(rawargs);
 
+  BOOST_CHECK(sr.hasFeedback(SolverRequester::Feedback::ALREADY_INSTALLED));
   BOOST_CHECK(sr.hasFeedback(SolverRequester::Feedback::SET_TO_INSTALL));
   BOOST_CHECK_EQUAL(sr.toInstall().size(), 1);
   BOOST_CHECK(hasPoolItem(sr.toInstall(), "info", Edition("4.12-1.111"), Arch_x86_64));
@@ -393,9 +395,22 @@ BOOST_AUTO_TEST_CASE(remove8)
 ///////////////////////////////////////////////////////////////////////////
 // update
 ///////////////////////////////////////////////////////////////////////////
+//
+// Update is basically the same as install, except that in case the
+// requested package is not installed, update says NOT_INSTALLED or
+// NO_INSTALLED_PROVIDER whereas install says SET_TO_INSTALL. In case the
+// requested package is installed, update just performs the update; install
+// first says ALREADY_INSTALLED, and then performs the update.
+//
+// In other words:
+// install == get the best available version to system (while abiding policies)
+//            This means also update.
+// update  == the same as install, but only if some version of the package is
+//           already installed. If not, just say so and quit.
+///////////////////////////////////////////////////////////////////////////
+
 
 // request : update vim
-// opts    : defaults
 // response: not installed
 BOOST_AUTO_TEST_CASE(update1)
 {
@@ -412,9 +427,42 @@ BOOST_AUTO_TEST_CASE(update1)
   BOOST_CHECK(!sr.hasFeedback(SolverRequester::Feedback::NO_INSTALLED_PROVIDER));
 }
 
+// request : update nonsense
+// response: not found, fall back to caps, no provider found
+BOOST_AUTO_TEST_CASE(update2)
+{
+  MIL << "<============update2===============>" << endl;
+
+  vector<string> rawargs;
+  rawargs.push_back("nonsense");
+  PackageArgs args(rawargs);
+  SolverRequester sr;
+
+  sr.update(rawargs);
+  BOOST_CHECK(sr.hasFeedback(SolverRequester::Feedback::NOT_FOUND_NAME_TRYING_CAPS));
+  BOOST_CHECK(sr.hasFeedback(SolverRequester::Feedback::NOT_FOUND_CAP));
+}
+
+// response: vim set to install, no fallback to caps
+BOOST_AUTO_TEST_CASE(update3)
+{
+  MIL << "<============update3===============>" << endl;
+
+  vector<string> rawargs;
+  rawargs.push_back("info");
+  SolverRequester sr;
+
+  sr.update(rawargs);
+
+  BOOST_CHECK(!sr.hasFeedback(SolverRequester::Feedback::ALREADY_INSTALLED));
+  BOOST_CHECK(sr.hasFeedback(SolverRequester::Feedback::SET_TO_INSTALL));
+  BOOST_CHECK_EQUAL(sr.toInstall().size(), 1);
+  BOOST_CHECK(hasPoolItem(sr.toInstall(), "info", Edition("4.12-1.111"), Arch_x86_64));
+  BOOST_CHECK(sr.hasFeedback(SolverRequester::Feedback::UPD_CANDIDATE_CHANGES_VENDOR));
+}
+
 
 // request :
-// opts    :
 // response:
 /*BOOST_AUTO_TEST_CASE(installX)
 {

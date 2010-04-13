@@ -145,12 +145,17 @@ void SolverRequester::install(const Capability & cap, const string & repoalias)
         Selectable::Ptr s(asSelectable()(*sit));
         if (s->hasInstalledObj())
         {
+          if (_requested_inst)
+            addFeedback(Feedback::ALREADY_INSTALLED,
+                cap, repoalias, PoolItem(), s->installedObj());
+
           // whether user requested specific repo/version/arch
           bool userconstraints =
               cap.detail().isVersioned() || cap.detail().hasArch()
               || !_opts.from_repos.empty() || !repoalias.empty();
-          PoolItem best = s->updateCandidateObj();
-          if (userconstraints || !best)
+
+          PoolItem best;
+          if (userconstraints || !(best = s->updateCandidateObj()))
             updateTo(cap, repoalias, *sit);
           else
             updateTo(cap, repoalias, best);
