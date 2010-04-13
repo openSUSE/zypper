@@ -436,15 +436,6 @@ void SolverRequester::updateTo(
 
   // ******* report ********
 
-  // no available object (bnc #591760)
-  // !availableEmpty() <=> theone && highest
-  if (s->availableEmpty())
-  {
-    addFeedback(Feedback::NO_UPD_CANDIDATE, cap, repoalias, PoolItem(), installed);
-    DBG << "no available objects in repos, skipping update of " << s->name() << endl;
-    return;
-  }
-
   // the candidate is already installed
   if (identical(installed, candidate))
   {
@@ -460,6 +451,15 @@ void SolverRequester::updateTo(
       MIL << " already installed." << endl;
     }
     // TODO other kinds
+
+    // no available object (bnc #591760)
+    // !availableEmpty() <=> theone && highest
+    if (s->availableEmpty())
+    {
+      addFeedback(Feedback::NO_UPD_CANDIDATE, cap, repoalias, PoolItem(), installed);
+      DBG << "no available objects in repos, skipping update of " << s->name() << endl;
+      return;
+    }
 
     // the highest version is already there
     if (identical(installed, highest) || highest->edition() < installed->edition())

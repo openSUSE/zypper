@@ -208,6 +208,22 @@ BOOST_AUTO_TEST_CASE(install9)
   BOOST_CHECK(sr.hasFeedback(SolverRequester::Feedback::UPD_CANDIDATE_CHANGES_VENDOR));
 }
 
+// request : install stallarium
+// response: already installed, no update candidate (no available objects
+//           in repos)
+BOOST_AUTO_TEST_CASE(install10)
+{
+  MIL << "<============install10===============>" << endl;
+
+  vector<string> rawargs;
+  rawargs.push_back("stellarium");
+  SolverRequester sr;
+
+  sr.install(rawargs);
+
+  BOOST_CHECK(sr.hasFeedback(SolverRequester::Feedback::ALREADY_INSTALLED));
+  BOOST_CHECK(sr.hasFeedback(SolverRequester::Feedback::NO_UPD_CANDIDATE));
+}
 
 
 ///////////////////////////////////////////////////////////////////////////
