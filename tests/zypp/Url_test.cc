@@ -19,15 +19,36 @@
 using boost::unit_test::test_case;
 using namespace zypp;
 
+void testUrlAuthority( const Url & url_r,
+		       const std::string & host_r, const std::string & port_r = std::string(),
+		       const std::string & user_r = std::string(), const std::string & pass_r = std::string() )
+{
+  BOOST_CHECK_EQUAL( url_r.getUsername(),	user_r );
+  BOOST_CHECK_EQUAL( url_r.getPassword(),	pass_r );
+  BOOST_CHECK_EQUAL( url_r.getHost(),		host_r );
+  BOOST_CHECK_EQUAL( url_r.getPort(),		port_r );
+}
+
+
 BOOST_AUTO_TEST_CASE(test_ipv6_url)
 {
-    std::string str, one, two;
+    std::string str;
     zypp::Url   url;
 
     str = "http://[2001:DB8:0:F102::1]/64/sles11/RC1/CD1?device=eth0";
-    url = "http://[2001:db8:0:f102::1]/64/sles11/RC1/CD1?device=eth0";
-    
-    BOOST_CHECK_EQUAL( str, url.asString() );
+    url = Url( str );
+    BOOST_CHECK_EQUAL( str,url.asString() );
+    testUrlAuthority( url, "[2001:DB8:0:F102::1]", "", "", "" );
+
+    // bnc#
+    str = "http://[2001:DB8:0:F102::1]:8080/64/sles11/RC1/CD1?device=eth0";
+    url = Url( str );
+    testUrlAuthority( url, "[2001:DB8:0:F102::1]", "8080", "", "" );
+
+
+    str = "http://user:pass@[2001:DB8:0:F102::1]:8080/64/sles11/RC1/CD1?device=eth0";
+    url = Url( str );
+    testUrlAuthority( url, "[2001:DB8:0:F102::1]", "8080", "user", "pass" );
 }
 
 BOOST_AUTO_TEST_CASE(test_url1)
@@ -97,7 +118,7 @@ BOOST_AUTO_TEST_CASE(test_url1)
 
     str = "ldap://example.net/dc=example,dc=net?cn,sn?sub?(cn=*)#x";
     BOOST_CHECK_THROW( zypp::Url(str).asString(), url::UrlNotAllowedException );
-  
+
     str = "ldap://example.net/dc=example,dc=net?cn,sn?sub?(cn=*)";
     BOOST_CHECK_EQUAL( str, zypp::Url(str).asString() );
 

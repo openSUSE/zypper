@@ -850,10 +850,8 @@ namespace zypp
           setUsername(s.substr(0, p), zypp::url::E_ENCODED);
         s = s.substr(p+1);
       }
-      q = s.rfind(']');
-      if ((p = s.rfind(':')) != std::string::npos && p > q+1)
+      if ((p = s.rfind(':')) != std::string::npos && ( (q = s.rfind(']')) == std::string::npos || q < p) )
       {
-
         setHost(s.substr(0, p));
         setPort(s.substr(p+1));
       }
