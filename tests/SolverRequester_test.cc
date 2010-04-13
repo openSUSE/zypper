@@ -49,7 +49,6 @@ BOOST_AUTO_TEST_CASE(setup)
 // response: not found by name, try caps, no cap found
 BOOST_AUTO_TEST_CASE(install1)
 {
-  base::LogControl::TmpLineWriter shutUp(new log::FileLineWriter( "/tmp/zlog2"));
   MIL << "<=============install1==============>" << endl;
 
   vector<string> rawargs;
@@ -231,11 +230,10 @@ BOOST_AUTO_TEST_CASE(install10)
 ///////////////////////////////////////////////////////////////////////////
 
 // request : remove nonsense
-// opts    : defaults
 // response: not found by name, try caps, no cap found
 BOOST_AUTO_TEST_CASE(remove1)
 {
-  MIL << "<===========================>" << endl;
+  MIL << "<===========remove1================>" << endl;
   PackageArgs::Options argopts;
   argopts.do_by_default = false;
 
@@ -251,12 +249,11 @@ BOOST_AUTO_TEST_CASE(remove1)
   BOOST_CHECK(sr.hasFeedback(SolverRequester::Feedback::NOT_FOUND_CAP));
 }
 
-// request : remove nonsense
-// opts    : --name
+// request : remove --name nonsense
 // response: not found by name. Don't try caps.
 BOOST_AUTO_TEST_CASE(remove2)
 {
-  MIL << "<===========================>" << endl;
+  MIL << "<============remove2===============>" << endl;
   PackageArgs::Options argopts;
   argopts.do_by_default = false;
 
@@ -275,11 +272,10 @@ BOOST_AUTO_TEST_CASE(remove2)
 }
 
 // request : remove mc
-// opts    : defaults
 // response: not installed, fall back to caps, no provider installed
 BOOST_AUTO_TEST_CASE(remove3)
 {
-  MIL << "<===========================>" << endl;
+  MIL << "<============remove3===============>" << endl;
   PackageArgs::Options argopts;
   argopts.do_by_default = false;
 
@@ -296,12 +292,11 @@ BOOST_AUTO_TEST_CASE(remove3)
 }
 
 // request : remove mc
-// opts    : defaults
 // response: not installed, fall back to caps, no provider installed
 // this one is done by sr.remove(vector<string>) instead of PackageArgs
 BOOST_AUTO_TEST_CASE(remove4)
 {
-  MIL << "<===========================>" << endl;
+  MIL << "<==============remove4=============>" << endl;
   // beware of implicit conversion from vector<string> to PackageArgs
   // if not avoided, the resulting PackageArgs would have
   // PackageArgs::Options::do_by_default == true! => args without +/- modifiers
@@ -317,12 +312,11 @@ BOOST_AUTO_TEST_CASE(remove4)
   BOOST_CHECK(sr.hasFeedback(SolverRequester::Feedback::NO_INSTALLED_PROVIDER));
 }
 
-// request : remove mc
-// opts    : --name
+// request : remove --name mc
 // response: not installed. Don't fall back to caps.
 BOOST_AUTO_TEST_CASE(remove5)
 {
-  MIL << "<===========================>" << endl;
+  MIL << "<=============remove5==============>" << endl;
   vector<string> rawargs;
   rawargs.push_back("mc");
   SolverRequester::Options sropts;
@@ -336,23 +330,43 @@ BOOST_AUTO_TEST_CASE(remove5)
   BOOST_CHECK(!sr.hasFeedback(SolverRequester::Feedback::NO_INSTALLED_PROVIDER));
 }
 
-/*
 // request : remove libzypp
-// opts    : defaults
-// response: libzypp marked for removal, along with zypper, ...
-BOOST_AUTO_TEST_CASE(remove5)
+// response: libzypp marked for removal
+BOOST_AUTO_TEST_CASE(remove6)
 {
-  MIL << "<===========================>" << endl;
+  MIL << "<=============remove6==============>" << endl;
   vector<string> rawargs;
   rawargs.push_back("libzypp");
   SolverRequester sr;
 
   sr.remove(rawargs);
-  solve
 
-  BOOST_CHECK(sr.hasFeedback(SolverRequester::Feedback::NOT_INSTALLED));
+  BOOST_CHECK(sr.hasFeedback(SolverRequester::Feedback::SET_TO_REMOVE));
+  BOOST_CHECK_EQUAL(sr.toRemove().size(), 1);
+  BOOST_CHECK(hasPoolItem(sr.toRemove(), "libzypp", Edition("5.24.5-1.1"), Arch_x86_64));
+  BOOST_CHECK(sr.conflicts().empty());
 }
-*/
+
+// request : remove --capability y2pmsh
+// response: conflict 'y2pmsh' added despite a package named y2pmsh exists;
+//           the installed 'zypper' provides 'y2pmsh'
+BOOST_AUTO_TEST_CASE(remove7)
+{
+  MIL << "<=============remove7==============>" << endl;
+  vector<string> rawargs;
+  rawargs.push_back("y2pmsh");
+
+  SolverRequester::Options sropts;
+  sropts.force_by_cap = true;
+  SolverRequester sr(sropts);
+
+  sr.remove(rawargs);
+
+  BOOST_CHECK(sr.hasFeedback(SolverRequester::Feedback::ADDED_CONFLICT));
+  BOOST_CHECK(sr.toRemove().empty());
+  BOOST_CHECK_EQUAL(sr.conflicts().size(), 1);
+  BOOST_CHECK(sr.conflicts().find(Capability("y2pmsh")) != sr.conflicts().end());
+}
 
 
 ///////////////////////////////////////////////////////////////////////////

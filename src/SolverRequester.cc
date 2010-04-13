@@ -30,11 +30,41 @@ using namespace std;
 using namespace zypp;
 using namespace zypp::ui;
 
+
+/////////////////////////////////////////////////////////////////////////
+// SolverRequester::Options
+/////////////////////////////////////////////////////////////////////////
+
+void SolverRequester::Options::setForceByCap(bool value)
+{
+  if (value && force_by_name)
+    DBG << "resetting previously set force_by_name" << endl;
+
+  force_by_cap = value;
+  force_by_name = !force_by_cap;
+}
+
+void SolverRequester::Options::setForceByName(bool value)
+{
+  if (value && force_by_cap)
+    DBG << "resetting previously set force_by_cap" << endl;
+
+  force_by_name = value;
+  force_by_cap = !force_by_name;
+}
+
+
+/////////////////////////////////////////////////////////////////////////
+// SolverRequester
+/////////////////////////////////////////////////////////////////////////
+
 void SolverRequester::install(const PackageArgs & args)
 {
   _requested_inst = true;
   installRemove(args);
 }
+
+// ----------------------------------------------------------------------------
 
 void SolverRequester::remove(const PackageArgs & args)
 {
@@ -47,6 +77,8 @@ void SolverRequester::remove(const PackageArgs & args)
 
   installRemove(args);
 }
+
+// ----------------------------------------------------------------------------
 
 void SolverRequester::installRemove(const PackageArgs & args)
 {

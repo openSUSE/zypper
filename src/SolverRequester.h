@@ -40,6 +40,9 @@ public:
       , skip_interactive(false)
     {}
 
+    void setForceByName(bool value = true);
+    void setForceByCap (bool value = true);
+
     /**
      * If true, the requester will force the operation in some defined cases,
      * even if the operation would otherwise not be allowed.

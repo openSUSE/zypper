@@ -20,6 +20,11 @@ using namespace std;
 using namespace zypp;
 using namespace zypp::ui;
 
+
+/////////////////////////////////////////////////////////////////////////
+// SolverRequester::Feedback
+/////////////////////////////////////////////////////////////////////////
+
 string SolverRequester::Feedback::asUserString(
     const SolverRequester::Options & opts) const
 {
