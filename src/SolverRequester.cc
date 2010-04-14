@@ -143,22 +143,25 @@ void SolverRequester::install(const Capability & cap, const string & repoalias)
       for_(sit, bestMatches.begin(), bestMatches.end())
       {
         Selectable::Ptr s(asSelectable()(*sit));
-        if (s->hasInstalledObj())
+        PoolItem instobj(s->installedObj());
+        if (instobj)
         {
-          if (_requested_inst)
-            addFeedback(Feedback::ALREADY_INSTALLED,
-                cap, repoalias, PoolItem(), s->installedObj());
-
           // whether user requested specific repo/version/arch
           bool userconstraints =
               cap.detail().isVersioned() || cap.detail().hasArch()
               || !_opts.from_repos.empty() || !repoalias.empty();
+          // check vendor (since PoolItemBest does not do it)
+          bool changes_vendor = instobj->vendor() != (*sit)->vendor();
 
           PoolItem best;
-          if (userconstraints || !(best = s->updateCandidateObj()))
+          if (userconstraints)
             updateTo(cap, repoalias, *sit);
-          else
+          else if ((best = s->updateCandidateObj()))
             updateTo(cap, repoalias, best);
+          else if (changes_vendor)
+            updateTo(cap, repoalias, instobj);
+          else
+            updateTo(cap, repoalias, *sit);
         }
         else if (_requested_inst)
         {

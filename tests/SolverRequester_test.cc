@@ -90,7 +90,6 @@ BOOST_AUTO_TEST_CASE(install3)
 
   sr.install(rawargs);
 
-  BOOST_CHECK(sr.hasFeedback(SolverRequester::Feedback::ALREADY_INSTALLED));
   BOOST_CHECK(sr.hasFeedback(SolverRequester::Feedback::SET_TO_INSTALL));
   BOOST_CHECK_EQUAL(sr.toInstall().size(), 1);
   BOOST_CHECK(hasPoolItem(sr.toInstall(), "zypper", Edition("1.0.13-0.1.1"), Arch_x86_64));
@@ -190,8 +189,8 @@ BOOST_AUTO_TEST_CASE(install8)
 }
 
 // request : install 'info'
-// response: Already installed. Update candidate info-4.13-1.1 is available
-//           but has different vendor
+// response: Already installed. Update to info-4.12-1.111. Update candidate
+//           info-4.13-1.1 is available, too, but has different vendor.
 BOOST_AUTO_TEST_CASE(install9)
 {
   MIL << "<============install9===============>" << endl;
@@ -202,7 +201,6 @@ BOOST_AUTO_TEST_CASE(install9)
 
   sr.install(rawargs);
 
-  BOOST_CHECK(sr.hasFeedback(SolverRequester::Feedback::ALREADY_INSTALLED));
   BOOST_CHECK(sr.hasFeedback(SolverRequester::Feedback::SET_TO_INSTALL));
   BOOST_CHECK_EQUAL(sr.toInstall().size(), 1);
   BOOST_CHECK(hasPoolItem(sr.toInstall(), "info", Edition("4.12-1.111"), Arch_x86_64));
@@ -224,6 +222,25 @@ BOOST_AUTO_TEST_CASE(install10)
 
   BOOST_CHECK(sr.hasFeedback(SolverRequester::Feedback::ALREADY_INSTALLED));
   BOOST_CHECK(sr.hasFeedback(SolverRequester::Feedback::NO_UPD_CANDIDATE));
+}
+
+// request : install diffutils
+// response: Already installed. Update candidate diffutils-2.9.0-1 is available
+//           but has different vendor.
+BOOST_AUTO_TEST_CASE(install11)
+{
+  MIL << "<============install11===============>" << endl;
+
+  vector<string> rawargs;
+  rawargs.push_back("diffutils");
+  SolverRequester sr;
+
+  sr.install(rawargs);
+
+  BOOST_CHECK(sr.hasFeedback(SolverRequester::Feedback::ALREADY_INSTALLED));
+  BOOST_CHECK(!sr.hasFeedback(SolverRequester::Feedback::SET_TO_INSTALL));
+  BOOST_CHECK(sr.toInstall().empty());
+  BOOST_CHECK(sr.hasFeedback(SolverRequester::Feedback::UPD_CANDIDATE_CHANGES_VENDOR));
 }
 
 
@@ -400,13 +417,14 @@ BOOST_AUTO_TEST_CASE(remove8)
 // requested package is not installed, update says NOT_INSTALLED or
 // NO_INSTALLED_PROVIDER whereas install says SET_TO_INSTALL. In case the
 // requested package is installed, update just performs the update; install
-// first says ALREADY_INSTALLED, and then performs the update.
+// says ALREADY_INSTALLED (in case no update is selected) or performs
+// the update.
 //
 // In other words:
 // install == get the best available version to system (while abiding policies)
 //            This means also update.
 // update  == the same as install, but only if some version of the package is
-//           already installed. If not, just say so and quit.
+//            already installed. If not, just say so and quit.
 ///////////////////////////////////////////////////////////////////////////
 
 

@@ -132,6 +132,7 @@ public:
       : _id(id)
       , _reqcap(reqcap)
       , _reqrepo(reqrepo)
+      , _objsel(selected)
       , _objinst(installed)
     {}
 
@@ -150,10 +151,10 @@ public:
     zypp::Capability _reqcap;
     std::string _reqrepo;
 
-    /** The installed object */
-    zypp::PoolItem _objinst;
     /** The selected object */
     zypp::PoolItem _objsel;
+    /** The installed object */
+    zypp::PoolItem _objinst;
   };
 
 public:
