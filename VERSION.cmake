@@ -58,11 +58,11 @@
 # - Consider calling ./mkChangelog to edit the
 #   changes file. See './mkChangelog -h' for help.
 #
-SET(LIBZYPP_MAJOR "6")
-SET(LIBZYPP_COMPATMINOR "31")
-SET(LIBZYPP_MINOR "31")
-SET(LIBZYPP_PATCH "3")
+SET(LIBZYPP_MAJOR "7")
+SET(LIBZYPP_COMPATMINOR "0")
+SET(LIBZYPP_MINOR "0")
+SET(LIBZYPP_PATCH "0")
 #
-# LAST RELEASED: 6.31.3 (31)
+# LAST RELEASED: 7.0.0 (0)
 # (The number in parenthesis is LIBZYPP_COMPATMINOR)
 #=======

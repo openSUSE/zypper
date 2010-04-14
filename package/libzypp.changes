@@ -1,4 +1,11 @@
 -------------------------------------------------------------------
+Wed Apr 14 15:09:18 CEST 2010 - ma@suse.de
+
+- Using boost-1.42 requires -fno-strict-aliasing (bnc#595545)
+- Bump major version for 11.3 development.
+- version 7.0.0 (0)
+
+-------------------------------------------------------------------
 Tue Apr 13 14:36:31 CEST 2010 - ma@suse.de
 
 - Fix parsing port from IPv6 URL (bnc#593385)
