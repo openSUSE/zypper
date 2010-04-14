@@ -146,7 +146,8 @@ string SolverRequester::Feedback::asUserString(
               _objsel->repoInfo().name().c_str());
 
   case SET_TO_REMOVE:
-    return "";
+    return str::form(_("Selecting '%s' for removal."),
+        resolvable_user_string(*_objsel.resolvable()).c_str());
 
   case ADDED_REQUIREMENT:
     return str::form(_("Adding requirement: '%s'."), _reqcap.asString().c_str());
@@ -185,6 +186,7 @@ void SolverRequester::Feedback::print(
   case ADDED_REQUIREMENT:
   case ADDED_CONFLICT:
     out.info(asUserString(opts), Out::HIGH);
+    break;
   default:
     INT << "unknown feedback id? " << _id << endl;
   }

@@ -3378,7 +3378,10 @@ void Zypper::doCommand()
     resolve(*this);
 
     // parse package arguments
-    PackageArgs args(kind);
+    PackageArgs::Options argopts;
+    if (!install_not_remove)
+      argopts.do_by_default = false;
+    PackageArgs args(kind, argopts);
 
     // tell the solver what we want
 
