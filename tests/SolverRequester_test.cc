@@ -5,6 +5,61 @@
                              |__/|_|  |_|
 \*---------------------------------------------------------------------------*/
 
+/** \file tests/SolverRequester_test.cc
+ *
+ * Checks whether SolverRequester issued correct zypp/solver requests given
+ * specific command, package arguments and options.
+ *
+ * OPEN ISSUES:
+ * - zypper in/up repo:package
+ *   (see install12)
+ *   This currently ignores vendor lock. Maybe we want this, but maybe it would
+ *   be better to only allow the vendor change, if --force is added. Otherwise
+ *   just inform the user. More annoying, but safer.
+ * - zypper in/up packageOPversion.arch
+ *   (see install13, install14)
+ *   The vendor problem here as well. Maybe we want this if the request points
+ *   to one specific package, e.g. 'zypper in package-version' (the same
+ *   situation as above) - case install13.
+ *   But if zypper has to choose from more packages, it should not change
+ *   vendor, e.g. 'zypper in package>version' (case install14) should say
+ *   'package-1.0.1 is available but is from different vendor. Do
+ *   zypper in package-1.0.1 (or zypper in --force package>version to pick up
+ *   the best version from the matching versions despite vendor change)'
+ *   If we want this
+ *
+ * Proposed semantic of --force:
+ * 1) if only one package matches the request, (re)install that one, despite
+ *    arch change, downgrade, vendor change and similar. Just install it.
+ * 2) if multiple objects match the request, (re)install the best version
+ *    (the highest from the highest priority repos), despite vendor change,
+ *    arch change, downgrade, etc.
+ * 3) without force - don't change vendor, arch, downgrade etc, only inform user
+ *    Update only if the selected version is higher than installed, and does not
+ *    change vendor, and arch.
+ *
+ * UNAVAILABLE FUNCTIONALITY:
+ * - zypper in --capability --from repo package ...
+ * - zypper in --capability repo:package ...
+ *   Tell solver to satisfy that requirement from specified repo(s).
+ *   If we want this, we need API in libzypp/satsolver to add requirement
+ *   with restriction to repo(s),
+ *   e.g. Resolver::addRequire(constCapability&, set<string> repoaliases&)
+ * - zypper rm [--from repo] repo:package
+ *   Remove does not (nor it can) care from which repo the installed packages
+ *   come from. The only thing we could implement here is, that if the installed
+ *   packages have the same NEVRA conterparts in repos, only remove these. Or
+ *   we would need to store the id (recently added to metadata) of the repo
+ *   for the installed packages.
+ *
+ * INVALID REQUESTS
+ * - TODO
+ *
+ * \todo test/do non-packages
+ * \todo add feedback and tests for invalid requests and unavailable functions
+ * \todo adapt --best-effort concept to the new package selection
+ */
+
 #include "TestSetup.h"
 
 #include "SolverRequester.h"
@@ -241,6 +296,64 @@ BOOST_AUTO_TEST_CASE(install11)
   BOOST_CHECK(!sr.hasFeedback(SolverRequester::Feedback::SET_TO_INSTALL));
   BOOST_CHECK(sr.toInstall().empty());
   BOOST_CHECK(sr.hasFeedback(SolverRequester::Feedback::UPD_CANDIDATE_CHANGES_VENDOR));
+}
+
+
+// request : install info-4.13-1.1
+// response: Already installed. Update to info-4.13-1.1 despite the vendor
+//           change.
+BOOST_AUTO_TEST_CASE(install12)
+{
+  MIL << "<============install12===============>" << endl;
+
+  vector<string> rawargs;
+  rawargs.push_back("info-4.13-1.1");
+  SolverRequester sr;
+
+  sr.install(rawargs);
+
+  BOOST_CHECK(sr.hasFeedback(SolverRequester::Feedback::SET_TO_INSTALL));
+  BOOST_CHECK_EQUAL(sr.toInstall().size(), 1);
+  BOOST_CHECK(hasPoolItem(sr.toInstall(), "info", Edition("4.13-1.1"), Arch_x86_64));
+  BOOST_CHECK(!sr.hasFeedback(SolverRequester::Feedback::UPD_CANDIDATE_CHANGES_VENDOR));
+}
+
+// request : install misc:info
+// response: Already installed. Update to info-4.13-1.1 from misc, despite the
+//           vendor change.
+BOOST_AUTO_TEST_CASE(install13)
+{
+  MIL << "<============install13===============>" << endl;
+
+  vector<string> rawargs;
+  rawargs.push_back("misc:info");
+  SolverRequester sr;
+
+  sr.install(rawargs);
+
+  BOOST_CHECK(sr.hasFeedback(SolverRequester::Feedback::SET_TO_INSTALL));
+  BOOST_CHECK_EQUAL(sr.toInstall().size(), 1);
+  BOOST_CHECK(hasPoolItem(sr.toInstall(), "info", Edition("4.13-1.1"), Arch_x86_64));
+  BOOST_CHECK(!sr.hasFeedback(SolverRequester::Feedback::UPD_CANDIDATE_CHANGES_VENDOR));
+}
+
+// request : install info>4.12-1.109.
+// response: Already installed. Update to info-4.13-1.1 from misc, despite the
+//           vendor change.
+BOOST_AUTO_TEST_CASE(install14)
+{
+  MIL << "<============install14===============>" << endl;
+
+  vector<string> rawargs;
+  rawargs.push_back("info>4.12-1.109");
+  SolverRequester sr;
+
+  sr.install(rawargs);
+
+  BOOST_CHECK(sr.hasFeedback(SolverRequester::Feedback::SET_TO_INSTALL));
+  BOOST_CHECK_EQUAL(sr.toInstall().size(), 1);
+  BOOST_CHECK(hasPoolItem(sr.toInstall(), "info", Edition("4.13-1.1"), Arch_x86_64));
+  BOOST_CHECK(!sr.hasFeedback(SolverRequester::Feedback::UPD_CANDIDATE_CHANGES_VENDOR));
 }
 
 
