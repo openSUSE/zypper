@@ -312,9 +312,13 @@ namespace zypp
   //
   ///////////////////////////////////////////////////////////////////
 
-  ZYppFactoryException::ZYppFactoryException( const std::string & msg_r, pid_t locker_pid )
-    : Exception(msg_r),
-      _locker_pid (locker_pid)
+  ZYppFactoryException::ZYppFactoryException( const std::string & msg_r, pid_t lockerPid_r, const std::string & lockerName_r )
+    : Exception( msg_r )
+    , _lockerPid( lockerPid_r )
+    , _lockerName( lockerName_r )
+  {}
+
+  ZYppFactoryException::~ZYppFactoryException() throw ()
   {}
 
   ///////////////////////////////////////////////////////////////////
@@ -373,7 +377,7 @@ namespace zypp
                                   globalLock.locker_pid(),
                                   globalLock.locker_name().c_str()
                                  );
-	ZYPP_THROW(ZYppFactoryException(t, globalLock.locker_pid()));
+	ZYPP_THROW(ZYppFactoryException(t, globalLock.locker_pid(),globalLock.locker_name() ));
       }
       else
       {

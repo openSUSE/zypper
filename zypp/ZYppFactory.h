@@ -24,10 +24,16 @@ namespace zypp
   class ZYppFactoryException : public Exception
   {
   public:
-    ZYppFactoryException( const std::string & msg_r, pid_t locker_pid );
-    pid_t locker_pid() const { return _locker_pid; }
+    ZYppFactoryException( const std::string & msg_r, pid_t lockerPid_r, const std::string & lockerName_r );
+    virtual ~ZYppFactoryException() throw ();
+  public:
+    pid_t lockerPid() const { return _lockerPid; }
+    const std::string & lockerName() const { return _lockerName; }
+    /** \deprecated User lockerPid */
+    ZYPP_DEPRECATED pid_t locker_pid() const { return lockerPid(); }
   private:
-    pid_t _locker_pid;
+    pid_t _lockerPid;
+    std::string _lockerName;
   };
 
   ///////////////////////////////////////////////////////////////////
