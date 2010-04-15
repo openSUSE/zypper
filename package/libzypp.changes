@@ -1,4 +1,10 @@
 -------------------------------------------------------------------
+Thu Apr 15 12:49:01 CEST 2010 - ma@suse.de
+
+- Provide name of the lock holder in ZYppFactoryException. (bnc#580513)
+- version 7.1.0 (1)
+
+-------------------------------------------------------------------
 Wed Apr 14 15:09:18 CEST 2010 - ma@suse.de
 
 - Using boost-1.42 requires -fno-strict-aliasing (bnc#595545)
