@@ -424,8 +424,6 @@ void SolverRequester::updateTo(
     return;
   }
 
-#warning get rid of zypper here
-  Zypper & zypper = *Zypper::instance();
   Selectable::Ptr s = asSelectable()(selected);
 
   // the best object without repository, arch, or version restriction
@@ -507,18 +505,9 @@ void SolverRequester::updateTo(
   }
   else if (installed->edition() > selected->edition())
   {
-    zypper.out().info(
-        str::form(_(
-            "The selected package '%s-%s.%s' from repository '%s' has lower"
-            " version than the installed one."),
-            selected->name().c_str(),
-            selected->edition().asString().c_str(),
-            selected->arch().asString().c_str(),
-            zypper.config().show_alias ?
-                selected->repoInfo().alias().c_str() :
-                selected->repoInfo().name().c_str()));
-    zypper.out().info(str::form(
-        _("Use '%s' to force installation of the package."), "--force"));
+    addFeedback(Feedback::SELECTED_IS_OLDER, cap, repoalias, selected, installed);
+    MIL << "Selected is older than the installed."
+        " Will not downgrade unless --force is used" << endl;
   }
 
   // there is higher version available than the selected candidate
@@ -539,15 +528,8 @@ void SolverRequester::updateTo(
     // update candidate locked
     if (s->status() == ui::S_Protected || highest.status().isLocked())
     {
+      addFeedback(Feedback::UPD_CANDIDATE_IS_LOCKED, cap, repoalias, selected, installed);
       DBG << "Newer object exists, but is locked: " << highest << endl;
-
-      ostringstream cmdhint;
-      cmdhint << "zypper removelock " << highest->name();
-
-      zypper.out().info(str::form(
-        _("There is an update candidate for '%s', but it is locked."
-          " Use '%s' to unlock it."),
-        s->name().c_str(), cmdhint.str().c_str()));
     }
 
     // update candidate has different vendor

@@ -142,6 +142,34 @@ string SolverRequester::Feedback::asUserString(
         _objinst->name().c_str(), cmdhint.str().c_str());
   }
 
+  case UPD_CANDIDATE_IS_LOCKED:
+  {
+    PoolItem highest = asSelectable()(_objinst)->highestAvailableVersionObj();
+    ostringstream cmdhint;
+    cmdhint << "zypper removelock " << highest->name();
+
+    return str::form(
+        _("There is an update candidate for '%s', but it is locked."
+          " Use '%s' to unlock it."),
+        _objinst->name().c_str(), cmdhint.str().c_str());
+  }
+
+  case SELECTED_IS_OLDER:
+  {
+    ostringstream msg;
+    msg << str::form(_(
+      "The selected package '%s' from repository '%s' has lower"
+      " version than the installed one."),
+      resolvable_user_string(*_objsel.resolvable()).c_str(),
+      Zypper::instance()->config().show_alias ?
+          _objsel->repoInfo().alias().c_str() :
+          _objsel->repoInfo().name().c_str());
+    msg << str::form(
+        // translators: %s = "--force"
+        _("Use '%s' to force installation of the package."), "--force");
+    return msg.str();
+  }
+
   case SET_TO_INSTALL:
     if (opts.force)
       return str::form(
@@ -193,6 +221,8 @@ void SolverRequester::Feedback::print(
   case UPD_CANDIDATE_USER_RESTRICTED:
   case UPD_CANDIDATE_CHANGES_VENDOR:
   case UPD_CANDIDATE_HAS_LOWER_PRIO:
+  case UPD_CANDIDATE_IS_LOCKED:
+  case SELECTED_IS_OLDER:
     out.info(asUserString(opts));
     break;
   case SET_TO_INSTALL:

@@ -88,8 +88,10 @@ public:
   public:
     enum Id
     {
-      /** Given combination of arguments and options makes no sense or the
-       * functionality is not defined and implemented */
+      /**
+       * Given combination of arguments and options makes no sense or the
+       * functionality is not defined and implemented
+       */
       INVALID_REQUEST,
 
       /** The search for the string in object names failed, but will try caps */
@@ -99,6 +101,7 @@ public:
 
       /** Removal or update was requested, but there's no installed item. */
       NOT_INSTALLED,
+
       /** Removal by capability requested, but no provider is installed. */
       NO_INSTALLED_PROVIDER,
 
@@ -108,12 +111,19 @@ public:
       UPD_CANDIDATE_CHANGES_VENDOR,
       UPD_CANDIDATE_HAS_LOWER_PRIO,
       UPD_CANDIDATE_IS_LOCKED,
+
       /**
        * Selected object is not the highest available, because of user
        * restrictions like repo(s), version, architecture.
        */
       UPD_CANDIDATE_USER_RESTRICTED,
       INSTALLED_LOCKED,
+
+      /**
+       * Selected object is older that the installed. Won't allow downgrade
+       * unless --force is used.
+       */
+      SELECTED_IS_OLDER,
 
       // zypp requests
 
