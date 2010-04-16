@@ -129,6 +129,19 @@ string SolverRequester::Feedback::asUserString(
         _objinst->name().c_str(), cmdhint.str().c_str());
   }
 
+  case UPD_CANDIDATE_HAS_LOWER_PRIO:
+  {
+    PoolItem highest = asSelectable()(_objinst)->highestAvailableVersionObj();
+    ostringstream cmdhint;
+    cmdhint << "zypper install " << highest->name()
+        << "-" << highest->edition() << "." << highest->arch();
+
+    return str::form(
+      _("There is an update candidate for '%s', but it comes from repository"
+         " with lower priority. Use '%s' to install this candidate."),
+        _objinst->name().c_str(), cmdhint.str().c_str());
+  }
+
   case SET_TO_INSTALL:
     if (opts.force)
       return str::form(
@@ -179,6 +192,7 @@ void SolverRequester::Feedback::print(
   case NO_UPD_CANDIDATE:
   case UPD_CANDIDATE_USER_RESTRICTED:
   case UPD_CANDIDATE_CHANGES_VENDOR:
+  case UPD_CANDIDATE_HAS_LOWER_PRIO:
     out.info(asUserString(opts));
     break;
   case SET_TO_INSTALL:

@@ -537,7 +537,7 @@ void SolverRequester::updateTo(
     }
 
     // update candidate locked
-    else if (s->status() == ui::S_Protected || highest.status().isLocked())
+    if (s->status() == ui::S_Protected || highest.status().isLocked())
     {
       DBG << "Newer object exists, but is locked: " << highest << endl;
 
@@ -551,7 +551,7 @@ void SolverRequester::updateTo(
     }
 
     // update candidate has different vendor
-    else if (highest->vendor() != installed->vendor())
+    if (highest->vendor() != installed->vendor())
     {
       addFeedback(Feedback::UPD_CANDIDATE_CHANGES_VENDOR, cap, repoalias, selected, installed);
       DBG << "Newer object with different vendor exists: " << highest
@@ -560,20 +560,12 @@ void SolverRequester::updateTo(
     }
 
     // update candidate is from low-priority (higher priority number) repo
-    else if (highest->repoInfo().priority() > installed->repoInfo().priority())
+    if (highest->repoInfo().priority() > selected->repoInfo().priority())
     {
+      addFeedback(Feedback::UPD_CANDIDATE_HAS_LOWER_PRIO, cap, repoalias, selected, installed);
       DBG << "Newer object exists in lower-priority repo: " << highest << endl;
-
-      ostringstream cmdhint;
-      cmdhint << "zypper install " << highest->name()
-          << "-" << highest->edition() << "." << highest->arch();
-
-      zypper.out().info(str::form(
-        _("There is an update candidate for '%s', but it comes from repository"
-           " with lower priority. Use '%s' to install this candidate."),
-          s->name().c_str(), cmdhint.str().c_str()));
     }
-  }
+  } // !identical(selected, highest) && highest->edition() > installed->edition()
 }
 
 // ----------------------------------------------------------------------------

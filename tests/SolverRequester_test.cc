@@ -27,6 +27,11 @@
  *   zypper in package-1.0.1 (or zypper in --force package>version to pick up
  *   the best version from the matching versions despite vendor change)'
  *   If we want this
+ * - zypper in --best-effort name
+ *   Best effort means 'require name, let solver choose the version'. This is
+ *   in fact the same as 'zypper in --capability name' (uses
+ *   addRequire(Capability)), but first it checks whether the 'name' matches
+ *   some package name. We could deprecate this in favor of --capability...
  *
  * Proposed semantic of --force:
  * 1) if only one package matches the request, (re)install that one, despite
@@ -53,7 +58,9 @@
  *   for the installed packages.
  *
  * INVALID REQUESTS
- * - TODO
+ * - zypper in --best-effort specific-version
+ *   Best effort means 'require name, let solver choose the version'.
+ *   Specifying version, arch, repo is not allowed.
  *
  * \todo test/do non-packages
  * \todo add feedback and tests for invalid requests and unavailable functions
@@ -61,6 +68,8 @@
  */
 
 #include "TestSetup.h"
+#include "zypp/PoolQuery.h"
+#include "zypp/Locks.h"
 
 #include "SolverRequester.h"
 
@@ -84,16 +93,37 @@ bool hasPoolItem(
   return false;
 }
 
+struct ApplyLock
+{
+  void operator()(const PoolQuery& query) const
+  {
+    for_(it, query.begin(), query.end())
+    {
+      PoolItem item(*it);
+      item.status().setLock(true, ResStatus::USER);
+      DBG << "lock " << item << endl;
+    }
+  }
+};
+
+static TestSetup test(Arch_x86_64);
+
 BOOST_AUTO_TEST_CASE(setup)
 {
   MIL << "============setup===========" << endl;
-  TestSetup test(Arch_x86_64);
   // fake target from a subset of the online 11.1 repo
   test.loadTargetRepo(TESTS_SRC_DIR "/data/openSUSE-11.1_subset");
   test.loadRepo(TESTS_SRC_DIR "/data/openSUSE-11.1", "main");
-  test.loadRepo(TESTS_SRC_DIR "/data/openSUSE-11.1_updates", "upd");
   test.loadRepo(TESTS_SRC_DIR "/data/misc", "misc");
   test.loadRepo(TESTS_SRC_DIR "/data/OBS_zypp_svn-11.1", "zypp");
+
+  RepoInfo repo;
+  repo.setAlias("upd");
+  repo.addBaseUrl(Url("file://" TESTS_SRC_DIR "/data/openSUSE-11.1_updates"));
+  repo.setPriority(80);
+  repo.setGpgCheck(false);
+  test.loadRepo(repo);
+  //test.loadRepo(TESTS_SRC_DIR "/data/openSUSE-11.1_updates", "upd");
 }
 
 ///////////////////////////////////////////////////////////////////////////
@@ -244,7 +274,7 @@ BOOST_AUTO_TEST_CASE(install8)
 }
 
 // request : install 'info'
-// response: Already installed. Update to info-4.12-1.111. Update candidate
+// response: Update to info-4.12-1.111. Update candidate
 //           info-4.13-1.1 is available, too, but has different vendor.
 BOOST_AUTO_TEST_CASE(install9)
 {
@@ -355,6 +385,63 @@ BOOST_AUTO_TEST_CASE(install14)
   BOOST_CHECK(hasPoolItem(sr.toInstall(), "info", Edition("4.13-1.1"), Arch_x86_64));
   BOOST_CHECK(!sr.hasFeedback(SolverRequester::Feedback::UPD_CANDIDATE_CHANGES_VENDOR));
 }
+
+///////////////////////////////////////////////////////////////////////////
+// Locks
+
+// request : install zypper
+// response: Already installed & locked. Update candidate (zypper-1.0.13-0.1.1)
+//           exists but can't be installed.
+/*
+BOOST_AUTO_TEST_CASE(install100)
+{
+  MIL << "<============install100===============>" << endl;
+
+  PoolQuery q;
+  q.addAttribute(sat::SolvAttr::name, "zypper");
+  q.setMatchExact();
+
+  ApplyLock()(q);
+
+  vector<string> rawargs;
+  rawargs.push_back("zypper");
+  SolverRequester sr;
+
+  sr.install(rawargs);
+
+  BOOST_CHECK(sr.hasFeedback(SolverRequester::Feedback::ALREADY_INSTALLED));
+  BOOST_CHECK(!sr.hasFeedback(SolverRequester::Feedback::SET_TO_INSTALL));
+  BOOST_CHECK(sr.toInstall().empty());
+  BOOST_CHECK(sr.hasFeedback(SolverRequester::Feedback::UPD_CANDIDATE_IS_LOCKED));
+
+  // RemoveLock()(q);
+}
+*/
+///////////////////////////////////////////////////////////////////////////
+
+///////////////////////////////////////////////////////////////////////////
+// Repo Priority
+
+// request : install cron
+// response: Already installed
+BOOST_AUTO_TEST_CASE(install200)
+{
+  MIL << "<============install200===============>" << endl;
+
+  vector<string> rawargs;
+  rawargs.push_back("cron");
+  SolverRequester sr;
+
+  sr.install(rawargs);
+
+  BOOST_CHECK(sr.hasFeedback(SolverRequester::Feedback::SET_TO_INSTALL));
+  BOOST_CHECK_EQUAL(sr.toInstall().size(), 1);
+  BOOST_CHECK(hasPoolItem(sr.toInstall(), "cron", Edition("4.1-194.33.1"), Arch_x86_64));
+  BOOST_CHECK(sr.hasFeedback(SolverRequester::Feedback::UPD_CANDIDATE_HAS_LOWER_PRIO));
+  BOOST_CHECK(sr.hasFeedback(SolverRequester::Feedback::UPD_CANDIDATE_CHANGES_VENDOR));
+}
+///////////////////////////////////////////////////////////////////////////
+
 
 
 ///////////////////////////////////////////////////////////////////////////
