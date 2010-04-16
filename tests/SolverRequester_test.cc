@@ -423,7 +423,8 @@ BOOST_AUTO_TEST_CASE(install100)
 // Repo Priority
 
 // request : install cron
-// response: Already installed
+// response: install cron-4.1-194.33.1, report newer available (4.1-195.0), but
+//           from lower-priority repo.
 BOOST_AUTO_TEST_CASE(install200)
 {
   MIL << "<============install200===============>" << endl;
@@ -439,6 +440,27 @@ BOOST_AUTO_TEST_CASE(install200)
   BOOST_CHECK(hasPoolItem(sr.toInstall(), "cron", Edition("4.1-194.33.1"), Arch_x86_64));
   BOOST_CHECK(sr.hasFeedback(SolverRequester::Feedback::UPD_CANDIDATE_HAS_LOWER_PRIO));
   BOOST_CHECK(sr.hasFeedback(SolverRequester::Feedback::UPD_CANDIDATE_CHANGES_VENDOR));
+}
+
+// request : install cron-4.1-195.0.x86_64
+// response: install (update to) cron-4.1-195.0.x86_64, despite that there's
+//           another version in a higher-priority repo (upd).
+// see OPEN ISSUES: should this work only with --force?
+BOOST_AUTO_TEST_CASE(install201)
+{
+  MIL << "<============install201===============>" << endl;
+
+  vector<string> rawargs;
+  rawargs.push_back("cron-4.1-195.0.x86_64");
+  SolverRequester sr;
+
+  sr.install(rawargs);
+
+  BOOST_CHECK(sr.hasFeedback(SolverRequester::Feedback::SET_TO_INSTALL));
+  BOOST_CHECK_EQUAL(sr.toInstall().size(), 1);
+  BOOST_CHECK(hasPoolItem(sr.toInstall(), "cron", Edition("4.1-195.0"), Arch_x86_64));
+  BOOST_CHECK(!sr.hasFeedback(SolverRequester::Feedback::UPD_CANDIDATE_HAS_LOWER_PRIO));
+  BOOST_CHECK(!sr.hasFeedback(SolverRequester::Feedback::UPD_CANDIDATE_CHANGES_VENDOR));
 }
 ///////////////////////////////////////////////////////////////////////////
 
