@@ -82,4 +82,10 @@ std::string poolitem_user_string(const zypp::PoolItem & pi);
 /** Returns string("name-edition.arch"). */
 std::string resolvable_user_string(const zypp::Resolvable & res);
 
+/**
+ * Get the highest-version installed pacakge/product or satisfied patch/pattern
+ * from the selectable.
+ */
+zypp::PoolItem get_installed_obj(zypp::ui::Selectable::Ptr & s);
+
 #endif

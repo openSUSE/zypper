@@ -80,14 +80,16 @@ bool hasPoolItem(
     const set<PoolItem> & set,
     const string & name,
     const Edition & ed = Edition(),
-    const Arch & arch = Arch_empty)
+    const Arch & arch = Arch_empty,
+    const ResKind & kind = ResKind::package)
 {
   for_(pit, set.begin(), set.end())
   {
     PoolItem pi(*pit);
     if (pi->name() == name &&
         (ed.empty() || ed == pi->edition()) &&
-        (arch.empty() || arch == pi->arch()))
+        (arch.empty() || arch == pi->arch()) &&
+        kind == pi->kind())
       return true;
   }
   return false;
@@ -124,6 +126,9 @@ BOOST_AUTO_TEST_CASE(setup)
   repo.setGpgCheck(false);
   test.loadRepo(repo);
   //test.loadRepo(TESTS_SRC_DIR "/data/openSUSE-11.1_updates", "upd");
+
+  // resolve pool so that the satisfied status of patches/patterns becomes known
+  zypp::getZYpp()->resolver()->resolvePool();
 }
 
 ///////////////////////////////////////////////////////////////////////////
@@ -462,6 +467,84 @@ BOOST_AUTO_TEST_CASE(install201)
   BOOST_CHECK(!sr.hasFeedback(SolverRequester::Feedback::UPD_CANDIDATE_HAS_LOWER_PRIO));
   BOOST_CHECK(!sr.hasFeedback(SolverRequester::Feedback::UPD_CANDIDATE_CHANGES_VENDOR));
 }
+///////////////////////////////////////////////////////////////////////////
+
+
+///////////////////////////////////////////////////////////////////////////
+// Patches
+
+// request : install patch:dbus-1
+// response: install needed patch:dbus-1-717
+BOOST_AUTO_TEST_CASE(install300)
+{
+  MIL << "<============install300===============>" << endl;
+
+  vector<string> rawargs;
+  rawargs.push_back("patch:dbus-1");
+  SolverRequester sr;
+
+  sr.install(rawargs);
+
+  BOOST_CHECK(sr.hasFeedback(SolverRequester::Feedback::SET_TO_INSTALL));
+  BOOST_CHECK_EQUAL(sr.toInstall().size(), 1);
+  BOOST_CHECK(hasPoolItem(sr.toInstall(), "dbus-1", Edition("717"), Arch(), ResKind::patch));
+}
+
+// request : install patch:imap
+// response: the patch is not needed
+BOOST_AUTO_TEST_CASE(install301)
+{
+  MIL << "<============install301===============>" << endl;
+
+  vector<string> rawargs;
+  rawargs.push_back("patch:imap");
+  SolverRequester sr;
+
+  sr.install(rawargs);
+
+  BOOST_CHECK(!sr.hasFeedback(SolverRequester::Feedback::SET_TO_INSTALL));
+  BOOST_CHECK(sr.toInstall().empty());
+  BOOST_CHECK(sr.hasFeedback(SolverRequester::Feedback::PATCH_NOT_NEEDED));
+}
+
+// request : install patch:libxml2-434
+// response: the patch is already satisfied, but newer exists
+BOOST_AUTO_TEST_CASE(install302)
+{
+  MIL << "<============install302===============>" << endl;
+
+  vector<string> rawargs;
+  rawargs.push_back("patch:libxml2-434");
+  SolverRequester sr;
+  //zypp::getZYpp()->resolver()->createSolverTestcase(TESTS_BUILD_DIR "/testcase");
+  sr.install(rawargs);
+
+  BOOST_CHECK(!sr.hasFeedback(SolverRequester::Feedback::SET_TO_INSTALL));
+  BOOST_CHECK(sr.toInstall().empty());
+  BOOST_CHECK(sr.hasFeedback(SolverRequester::Feedback::ALREADY_INSTALLED));
+}
+
+// request : install patch:libxml2
+// response: install needed patch:libxml2-1175
+BOOST_AUTO_TEST_CASE(install303)
+{
+  MIL << "<============install303===============>" << endl;
+
+  vector<string> rawargs;
+  rawargs.push_back("patch:libxml2");
+  SolverRequester sr;
+
+  sr.install(rawargs);
+
+  BOOST_CHECK(sr.hasFeedback(SolverRequester::Feedback::SET_TO_INSTALL));
+  BOOST_CHECK_EQUAL(sr.toInstall().size(), 1);
+  BOOST_CHECK(hasPoolItem(sr.toInstall(), "libxml2", Edition("1175"), Arch(), ResKind::patch));
+}
+
+// TODO install locked patch
+// TODO install all needed patches (- locked)
+// TODO install all needed patches of specified category
+
 ///////////////////////////////////////////////////////////////////////////
 
 

@@ -21,10 +21,13 @@
 #include "zypp/Patch.h"
 #include "zypp/ui/Selectable.h"
 
-#include "Zypper.h" // temporarily!!!
 #include "misc.h"
 
 #include "SolverRequester.h"
+
+// libzypp logger settings
+#undef  ZYPP_BASE_LOGGER_LOGGROUP
+#define ZYPP_BASE_LOGGER_LOGGROUP "zypper:req"
 
 using namespace std;
 using namespace zypp;
@@ -60,7 +63,7 @@ void SolverRequester::Options::setForceByName(bool value)
 
 void SolverRequester::install(const PackageArgs & args)
 {
-  _requested_inst = true;
+  _command = ZypperCommand::INSTALL;
   installRemove(args);
 }
 
@@ -68,6 +71,7 @@ void SolverRequester::install(const PackageArgs & args)
 
 void SolverRequester::remove(const PackageArgs & args)
 {
+  _command = ZypperCommand::REMOVE;
   if (args.options().do_by_default)
   {
     INT << "PackageArgs::Options::do_by_default == true."
@@ -99,10 +103,10 @@ void SolverRequester::installRemove(const PackageArgs & args)
 
 // ----------------------------------------------------------------------------
 
-/**
+/*
  * For given Capability & repo & Options:
  *
- * 1) if the --capability was not specified, try to install 'by name' first.
+ * 1) if --capability option was not specified, try to install 'by name' first.
  *    I.e. via ui::Selectable and/or PoolItem.
  *    note: wildcards must be supported here, use PoolQuery with match_glob
  *          to find the selectables
@@ -112,9 +116,12 @@ void SolverRequester::installRemove(const PackageArgs & args)
  *    i.e. using ResPool::addRequires(cap)
  *
  * NOTES
- * - If the argument contains repository, issue request forcing the repo
  * - In both cases check for already installed packages, and if found, hand over
  *   to \ref updateTo(const Capability&, const string&, const PoolItem&) method.
+ * - If the requested command was UPDATE and the object is not installed,
+ *   do no action other than report the fact. The is the only difference between
+ *   install and update.
+ * - If the argument contains repository, issue request forcing the repo
  *
  * TODO
  * - maybe a check for glob wildcards in cap name would make sense before trying
@@ -143,34 +150,38 @@ void SolverRequester::install(const Capability & cap, const string & repoalias)
       for_(sit, bestMatches.begin(), bestMatches.end())
       {
         Selectable::Ptr s(asSelectable()(*sit));
-        PoolItem instobj(s->installedObj());
-        if (instobj)
-        {
-          // whether user requested specific repo/version/arch
-          bool userconstraints =
-              cap.detail().isVersioned() || cap.detail().hasArch()
-              || !_opts.from_repos.empty() || !repoalias.empty();
-          // check vendor (since PoolItemBest does not do it)
-          bool changes_vendor = instobj->vendor() != (*sit)->vendor();
-
-          PoolItem best;
-          if (userconstraints)
-            updateTo(cap, repoalias, *sit);
-          else if ((best = s->updateCandidateObj()))
-            updateTo(cap, repoalias, best);
-          else if (changes_vendor)
-            updateTo(cap, repoalias, instobj);
-          else
-            updateTo(cap, repoalias, *sit);
-        }
-        else if (_requested_inst)
-        {
-          setToInstall(*sit);
-          MIL << "installing " << *sit << endl;
-        }
+        if (s->kind() == ResKind::patch)
+          installPatch(cap, repoalias, *sit);
         else
-          addFeedback(Feedback::NOT_INSTALLED, cap, repoalias);
-        // TODO handle patches (isBroken), patterns (isSatisfied instead of hasInstalledObj)
+        {
+          PoolItem instobj = get_installed_obj(s);
+          if (instobj)
+          {
+            // whether user requested specific repo/version/arch
+            bool userconstraints =
+                cap.detail().isVersioned() || cap.detail().hasArch()
+                || !_opts.from_repos.empty() || !repoalias.empty();
+            // check vendor (since PoolItemBest does not do it)
+            bool changes_vendor = instobj->vendor() != (*sit)->vendor();
+
+            PoolItem best;
+            if (userconstraints)
+              updateTo(cap, repoalias, *sit);
+            else if ((best = s->updateCandidateObj()))
+              updateTo(cap, repoalias, best);
+            else if (changes_vendor)
+              updateTo(cap, repoalias, instobj);
+            else
+              updateTo(cap, repoalias, *sit);
+          }
+          else if (_command == ZypperCommand::INSTALL)
+          {
+            setToInstall(*sit);
+            MIL << "installing " << *sit << endl;
+          }
+          else
+            addFeedback(Feedback::NOT_INSTALLED, cap, repoalias);
+        }
       }
       return;
     }
@@ -200,7 +211,7 @@ void SolverRequester::install(const Capability & cap, const string & repoalias)
   // already installed, try to update()
   for_(it, providers.begin(), providers.end())
   {
-    if (_requested_inst)
+    if (_command == ZypperCommand::INSTALL)
       addFeedback(Feedback::ALREADY_INSTALLED, cap, repoalias, *it, *it);
     MIL << "provider '" << *it << "' of '" << cap << "' installed" << endl;
   }
@@ -296,43 +307,15 @@ void SolverRequester::update(const PackageArgs & args)
   if (args.empty())
     return;
 
-  _requested_inst = false;
+  _command = ZypperCommand::UPDATE;
 
   for_(it, args.doCaps().begin(), args.doCaps().end())
-    update(it->first, it->second);
+    install(it->first, it->second);
 
   /* TODO Solve and unmark dont which are setToBeInstalled in the pool?
   for_(it, args.dontCaps().begin(), args.dontCaps().end())
     remove(it->first);
   */
-}
-
-// ----------------------------------------------------------------------------
-
-/*
- * If at least one provider of given \a cap is already installed,
- * this method checks for available update candidates and tries to select
- * the best for installation (thus update). Reports any problems or interesting
- * info back to user.
- *
- * If no provider is installed, it does no action other than report the fact.
- *
- * NOTES
- * - If the argument contains repository, issue request forcing the repo and
- *   - if --force was specified, insist on installing from that repo (even
- *     downgrade or change vendor or low priority) TODO
- *   - if --force was NOT used, only upgrade without vendor change or priority
- *     violation. If downgrade or vendor change is needed to get the highest
- *     version, report back to user and advice to use --force,
- *     if that's what is really wanted. TODO
- */
-void SolverRequester::update(const Capability & cap, const string & repoalias)
-{
-  // FIXME this sucks
-  bool reqwasinst = _requested_inst;
-  _requested_inst = false;
-  install(cap, repoalias);
-  _requested_inst = reqwasinst;
 }
 
 // ----------------------------------------------------------------------------
@@ -357,7 +340,7 @@ void SolverRequester::updatePatches()
     for_(it, zypp::getZYpp()->pool().proxy().byKindBegin(ResKind::patch),
              zypp::getZYpp()->pool().proxy().byKindEnd  (ResKind::patch))
     {
-      if (installPatch((*it)->name(), ignore_pkgmgmt))
+      if (installPatch(Capability((*it)->name()), "", (*it)->candidateObj(), ignore_pkgmgmt))
         any_marked = true;
     }
 
@@ -368,16 +351,16 @@ void SolverRequester::updatePatches()
 
 // ----------------------------------------------------------------------------
 
-bool SolverRequester::installPatch(const string & name, bool ignore_pkgmgmt)
+bool SolverRequester::installPatch(
+    const Capability & cap,
+    const string & repoalias,
+    const PoolItem & selected,
+    bool ignore_pkgmgmt)
 {
-#warning get rid of zypper here
-  Zypper & zypper = *Zypper::instance();
-  Selectable::Ptr s = Selectable::get(ResKind::patch, name);
-
-  Patch::constPtr patch = asKind<Patch>(s->candidateObj());
-  if (s->isBroken()) // bnc #506860
+  Patch::constPtr patch = asKind<Patch>(selected);
+  if (selected.status().isBroken()) // bnc #506860
   {
-    DBG << "broken candidate patch " << patch
+    DBG << "Needed candidate patch " << patch
         << " affects_pkgmgmt: " << patch->restartSuggested()
         << (ignore_pkgmgmt ? " (ignored)" : "") << endl;
 
@@ -387,27 +370,34 @@ bool SolverRequester::installPatch(const string & name, bool ignore_pkgmgmt)
       if (_opts.skip_interactive
           && (patch->interactive() || !patch->licenseToConfirm().empty()))
       {
-        // Skipping a patch because it is marked as interactive or has
-        // license to confirm and --skip-interactive is requested
-        // (i.e. also --non-interactive, since it implies --skip-interactive)
-        zypper.out().warning(str::form(
-          // translators: %s is the name of a patch
-          _("'%s' is interactive, skipping."),
-          string(patch->name() + string("-") + patch->edition().asString()).c_str()));
+        addFeedback(Feedback::PATCH_INTERACTIVE_SKIPPED, cap, "", selected);
         return false;
       }
       else
       {
         // TODO use _opts.force
-        bool result = s->setToInstall();
-        if (!result)
-          ERR << "Marking " << *s << " for installation failed" << endl;
-        return result;
+        setToInstall(selected);
+        MIL << "installing " << selected << endl;
+        return true;
       }
     }
   }
+  else if (selected.status().isSatisfied())
+  {
+    if (_command == ZypperCommand::INSTALL || _command == ZypperCommand::UPDATE)
+    {
+      DBG << "candidate patch " << patch << " is already satisfied" << endl;
+      addFeedback(Feedback::ALREADY_INSTALLED, cap, "", selected, selected);
+    }
+  }
   else
-    XXX << "candidate patch " << patch << " is satisfied or irrelevant" << endl;
+  {
+    if (_command == ZypperCommand::INSTALL || _command == ZypperCommand::UPDATE)
+    {
+      addFeedback(Feedback::PATCH_NOT_NEEDED, cap, "", selected);
+      DBG << "candidate patch " << patch << " is irrelevant" << endl;
+    }
+  }
 
   return false;
 }
@@ -429,7 +419,7 @@ void SolverRequester::updateTo(
   // the best object without repository, arch, or version restriction
   PoolItem theone = s->updateCandidateObj();
   // the best installed object
-  PoolItem installed = s->installedObj();
+  PoolItem installed = get_installed_obj(s);
   // highest available version
   PoolItem highest = s->highestAvailableVersionObj();
 
@@ -479,7 +469,7 @@ void SolverRequester::updateTo(
   {
     // only say 'already installed' in case of install, if update was requested
     // only report if we fail to install the newest version (the code below)
-    if (_requested_inst)
+    if (_command == ZypperCommand::INSTALL)
     {
       addFeedback(
           Feedback::ALREADY_INSTALLED, cap, repoalias, selected, installed);

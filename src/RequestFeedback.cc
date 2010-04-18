@@ -170,6 +170,21 @@ string SolverRequester::Feedback::asUserString(
     return msg.str();
   }
 
+  case PATCH_INTERACTIVE_SKIPPED:
+  {
+    ostringstream pname;
+    pname << _objsel->name() << "-" << _objsel->edition();
+    return str::form(
+        _("Patch '%s' is interactive, skipping."), pname.str().c_str());
+  }
+
+  case PATCH_NOT_NEEDED:
+  {
+    ostringstream pname;
+    pname << _objsel->name() << "-" << _objsel->edition();
+    return str::form(_("Patch '%s' is not needed."), pname.str().c_str());
+  }
+
   case SET_TO_INSTALL:
     if (opts.force)
       return str::form(
@@ -223,6 +238,7 @@ void SolverRequester::Feedback::print(
   case UPD_CANDIDATE_HAS_LOWER_PRIO:
   case UPD_CANDIDATE_IS_LOCKED:
   case SELECTED_IS_OLDER:
+  case PATCH_NOT_NEEDED:
     out.info(asUserString(opts));
     break;
   case SET_TO_INSTALL:
@@ -230,6 +246,9 @@ void SolverRequester::Feedback::print(
   case ADDED_REQUIREMENT:
   case ADDED_CONFLICT:
     out.info(asUserString(opts), Out::HIGH);
+    break;
+  case PATCH_INTERACTIVE_SKIPPED:
+    out.warning(asUserString(opts));
     break;
   default:
     INT << "unknown feedback id? " << _id << endl;

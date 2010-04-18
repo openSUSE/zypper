@@ -530,6 +530,22 @@ string resolvable_user_string(const Resolvable & res)
   return str.str();
 }
 
+zypp::PoolItem get_installed_obj(zypp::ui::Selectable::Ptr & s)
+{
+  PoolItem installed;
+  if (traits::isPseudoInstalled(s->kind()))
+  {
+    for_(it, s->availableBegin(), s->availableEnd())
+      // this is OK also for patches - isSatisfied() excludes !isRelevant()
+      if (it->status().isSatisfied()
+          && (!installed || installed->edition() < (*it)->edition()))
+        installed = *it;
+  }
+  else
+    installed = s->installedObj();
+
+  return installed;
+}
 
 // Local Variables:
 // c-basic-offset: 2
