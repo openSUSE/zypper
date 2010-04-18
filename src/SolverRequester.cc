@@ -438,7 +438,7 @@ void SolverRequester::updateTo(
 
   // ******* request ********
 
-  if (!identical(installed, selected))
+  if (!identical(installed, selected) || _opts.force)
   {
     if (_opts.best_effort)
     {
@@ -457,7 +457,7 @@ void SolverRequester::updateTo(
     {
       // set 'candidate' for installation
       setToInstall(selected);
-      MIL << *s << " update: setting " << selected << " to install" << endl;
+      MIL << *s << " update: forced setting " << selected << " to install" << endl;
     }
   }
 
@@ -467,6 +467,9 @@ void SolverRequester::updateTo(
   // the candidate is already installed
   if (identical(installed, selected))
   {
+    if (_opts.force)
+      return;
+
     // only say 'already installed' in case of install, if update was requested
     // only report if we fail to install the newest version (the code below)
     if (_command == ZypperCommand::INSTALL)
@@ -544,9 +547,16 @@ void SolverRequester::updateTo(
 
 void SolverRequester::setToInstall(const PoolItem & pi)
 {
-  // pi.status().setToBeInstalled(ResStatus::USER); ?
-  asSelectable()(pi)->setOnSystem(pi, ResStatus::USER);
-  addFeedback(Feedback::SET_TO_INSTALL, Capability(), "", pi);
+  if (_opts.force)
+  {
+    pi.status().setToBeInstalled(ResStatus::USER);
+    addFeedback(Feedback::FORCED_INSTALL, Capability(), "", pi);
+  }
+  else
+  {
+    asSelectable()(pi)->setOnSystem(pi, ResStatus::USER);
+    addFeedback(Feedback::SET_TO_INSTALL, Capability(), "", pi);
+  }
   _toinst.insert(pi);
 }
 

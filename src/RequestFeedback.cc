@@ -186,20 +186,20 @@ string SolverRequester::Feedback::asUserString(
   }
 
   case SET_TO_INSTALL:
-    if (opts.force)
-      return str::form(
-          _("Forcing installation of '%s' from repository '%s'."),
-          resolvable_user_string(*_objsel.resolvable()).c_str(),
-          Zypper::instance()->config().show_alias ?
-              _objsel->repoInfo().alias().c_str() :
-              _objsel->repoInfo().name().c_str());
-    else
-      return str::form(
-          _("Selecting '%s' from repository '%s' for installation."),
-          resolvable_user_string(*_objsel.resolvable()).c_str(),
-          Zypper::instance()->config().show_alias ?
-              _objsel->repoInfo().alias().c_str() :
-              _objsel->repoInfo().name().c_str());
+    return str::form(
+        _("Selecting '%s' from repository '%s' for installation."),
+        resolvable_user_string(*_objsel.resolvable()).c_str(),
+        Zypper::instance()->config().show_alias ?
+            _objsel->repoInfo().alias().c_str() :
+            _objsel->repoInfo().name().c_str());
+
+  case FORCED_INSTALL:
+    return str::form(
+        _("Forcing installation of '%s' from repository '%s'."),
+        resolvable_user_string(*_objsel.resolvable()).c_str(),
+        Zypper::instance()->config().show_alias ?
+            _objsel->repoInfo().alias().c_str() :
+            _objsel->repoInfo().name().c_str());
 
   case SET_TO_REMOVE:
     return str::form(_("Selecting '%s' for removal."),
@@ -239,6 +239,7 @@ void SolverRequester::Feedback::print(
   case UPD_CANDIDATE_IS_LOCKED:
   case SELECTED_IS_OLDER:
   case PATCH_NOT_NEEDED:
+  case FORCED_INSTALL:
     out.info(asUserString(opts));
     break;
   case SET_TO_INSTALL:

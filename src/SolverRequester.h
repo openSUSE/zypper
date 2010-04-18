@@ -143,6 +143,7 @@ public:
       // ********** zypp requests *********************************************
 
       SET_TO_INSTALL,
+      FORCED_INSTALL,
       SET_TO_REMOVE,
       ADDED_REQUIREMENT,
       ADDED_CONFLICT
