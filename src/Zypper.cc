@@ -38,6 +38,7 @@
 #include "main.h"
 #include "Zypper.h"
 #include "Command.h"
+#include "SolverRequester.h"
 
 #include "Table.h"
 #include "utils/misc.h"
@@ -46,7 +47,6 @@
 #include "utils/misc.h"
 
 #include "repos.h"
-#include "install.h"
 #include "update.h"
 #include "solve-commit.h"
 #include "misc.h"
@@ -3230,6 +3230,28 @@ void Zypper::doCommand()
 
     bool install_not_remove = command() == ZypperCommand::INSTALL;
 
+    // can't remove patch
+    if (kind == ResKind::patch && !install_not_remove)
+    {
+      out().error(
+          _("Cannot uninstall patches."),
+          _("Installed status of a patch is determined solely based on its dependencies.\n"
+            "Patches are not installed in sense of copied files, database records,\n"
+            "or similar."));
+      setExitCode(ZYPPER_EXIT_ERR_INVALID_ARGS);
+      throw ExitRequestException("not implemented");
+    }
+
+    // can't remove pattern (for now)
+    if (kind == ResKind::pattern && !install_not_remove)
+    {
+      //! \todo define and implement pattern removal (bnc #407040)
+      out().error(
+          _("Uninstallation of a pattern is currently not defined and implemented."));
+      setExitCode(ZYPPER_EXIT_ERR_INVALID_ARGS);
+      throw ExitRequestException("not implemented");
+    }
+
     // parse the download options to check for errors
     get_download_option(*this);
 
@@ -3355,9 +3377,63 @@ void Zypper::doCommand()
     // needed to compute status of PPP
     resolve(*this);
 
+    // parse package arguments
+    PackageArgs::Options argopts;
+    if (!install_not_remove)
+      argopts.do_by_default = false;
+    PackageArgs args(kind, argopts);
+
     // tell the solver what we want
-    install_remove(*this, _arguments, install_not_remove, kind);
-    install_remove(*this, rpms_files_caps, true, kind);
+
+    SolverRequester::Options sropts;
+    if (copts.find("force") != copts.end())
+      sropts.force = true;
+    sropts.force_by_cap  = copts.find("capability") != copts.end();
+    sropts.force_by_name = copts.find("name") != copts.end();
+    if (sropts.force)
+      sropts.force_by_name = true;
+
+    if (sropts.force_by_cap && sropts.force_by_name)
+    {
+      // translators: meaning --capability contradicts --force/--name
+      out().error(str::form(_("%s contradicts %s"),
+          "--capability", (sropts.force ? "--force" : "--name")));
+      setExitCode(ZYPPER_EXIT_ERR_INVALID_ARGS);
+      ZYPP_THROW(ExitRequestException());
+    }
+
+    if (install_not_remove && sropts.force_by_cap && sropts.force)
+    {
+      // translators: meaning --force with --capability
+      out().error(str::form(_("%s cannot currently be used with %s"),
+          "--force", "--capability"));
+      setExitCode(ZYPPER_EXIT_ERR_INVALID_ARGS);
+      ZYPP_THROW(ExitRequestException());
+    }
+
+    if (install_not_remove && (optit = copts.find("from")) != copts.end())
+      repo_specs_to_aliases(*this, optit->second, sropts.from_repos);
+
+    SolverRequester sr(sropts);
+    if (install_not_remove)
+      sr.install(args);
+    else
+      sr.remove(args);
+    PackageArgs rpm_args(rpms_files_caps);
+    sr.install(rpm_args);
+
+    sr.printFeedback(out());
+
+    if (sr.hasFeedback(SolverRequester::Feedback::NOT_FOUND_NAME) ||
+        sr.hasFeedback(SolverRequester::Feedback::NOT_FOUND_CAP))
+    {
+      setExitCode(ZYPPER_EXIT_INF_CAP_NOT_FOUND);
+      if (globalOpts().non_interactive)
+        ZYPP_THROW(ExitRequestException());
+    }
+
+    // give user feedback from package selection
+    // TODO feedback goes here
 
     solve_and_commit(*this);
 
@@ -3855,6 +3931,27 @@ void Zypper::doCommand()
           setExitCode(ZYPPER_EXIT_ERR_INVALID_ARGS);
           return;
         }
+
+        if (kind == ResKind::product)
+        {
+          out().error(_("Operation not supported."),
+              str::form(_("To update installed products use '%s'."),
+                  "zypper dup [--from <repo>]"));
+          setExitCode(ZYPPER_EXIT_ERR_INVALID_ARGS);
+          return;
+        }
+        else if (kind == ResKind::srcpackage)
+        {
+          out().error(_("Operation not supported."),
+              str::form(
+                  _("Zypper does not keep track of installed source"
+                    " packages. To install the latest source package and"
+                    " its build dependencies, use '%s'."),
+                  "zypper dup [--from <repo>]"));
+          setExitCode(ZYPPER_EXIT_ERR_INVALID_ARGS);
+          return;
+        }
+
         kinds.insert(kind);
       }
     }
@@ -3862,6 +3959,13 @@ void Zypper::doCommand()
       kinds.insert(ResKind::patch);
     else
       kinds.insert(ResKind::package);
+
+    if (!arguments().empty() && kinds.size() > 1)
+    {
+      out().error(_("Cannot use multiple types when specific packages are given as arguments."));
+      setExitCode(ZYPPER_EXIT_ERR_INVALID_ARGS);
+      return;
+    }
 
     bool best_effort = copts.count( "best-effort" );
     if (globalOpts().is_rug_compatible && best_effort)
@@ -3891,10 +3995,65 @@ void Zypper::doCommand()
     resolve(*this); // needed to compute status of PPP
 
 
+    // patch --bugzilla/--cve
     if (copts.count("bugzilla") || copts.count("bz") || copts.count("cve"))
       mark_updates_by_issue(*this);
+    // update without arguments
     else
-      mark_updates(*this, kinds, skip_interactive, best_effort);
+    {
+      SolverRequester::Options sropts;
+      if (copts.find("force") != copts.end())
+        sropts.force = true;
+      sropts.best_effort = best_effort;
+
+      SolverRequester sr(sropts);
+      if (arguments().empty())
+      {
+        for_(kit, kinds.begin(), kinds.end())
+        {
+          if (*kit == ResKind::package)
+          {
+            MIL << "Computing package update..." << endl;
+            // this will do a complete pacakge update as far as possible
+            // while respecting solver policies
+            zypp::getZYpp()->resolver()->doUpdate();
+            // no need to call Resolver::resolvePool() afterwards
+            runtimeData().solve_before_commit = false;
+          }
+          // update -t patch; patch
+          else if (*kit == ResKind::patch)
+          {
+            sropts.skip_interactive = skip_interactive;
+            sr.updatePatches();
+          }
+          else if (*kit == ResKind::pattern)
+            sr.updatePatterns();
+          // should not get here (see above kind parsing code), but just in case
+          else
+          {
+            out().error(_("Operation not supported."));
+            setExitCode(ZYPPER_EXIT_ERR_INVALID_ARGS);
+            return;
+          }
+        }
+      }
+      // update with arguments
+      else
+      {
+        PackageArgs args(*kinds.begin());
+        sr.update(args);
+      }
+
+      sr.printFeedback(out());
+
+      if (sr.hasFeedback(SolverRequester::Feedback::NOT_FOUND_NAME) ||
+          sr.hasFeedback(SolverRequester::Feedback::NOT_FOUND_CAP))
+      {
+        setExitCode(ZYPPER_EXIT_INF_CAP_NOT_FOUND);
+        if (globalOpts().non_interactive)
+          ZYPP_THROW(ExitRequestException());
+      }
+    }
 
     solve_and_commit(*this);
 

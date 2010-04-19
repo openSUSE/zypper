@@ -36,6 +36,27 @@ void get_repos(Zypper & zypper,
 void report_unknown_repos(Out & out, std::list<std::string> not_found);
 
 /**
+ * Looks for known repos based on specified arguments and creates a list
+ * of aliases of found repos. Reports repos not found via zypper's output.
+ *
+ * By default, only enabled repos are returned. This can be changed via the
+ * \a enabled_only argument.
+ *
+ * \param zypper   The Zypper instance.
+ * \param repos    List of repository specifiers as strings (alias/name/#/URL)
+ * \param aliases  List of strings which should be fed by found aliases.
+ * \param enabled_only Whether to return only enabled repos. Default is true.
+ * \returns        Number of repos found.
+ *
+ * \throws ExitRequestException if one of the repos could not be found.
+ */
+unsigned repo_specs_to_aliases(
+    Zypper & zypper,
+    const std::list<std::string> & repos,
+    std::list<std::string> & aliases,
+    bool enabled_only = true);
+
+/**
  * Reads known enabled repositories and stores them in gData.
  * This command also refreshes repos with auto-refresh enabled.
  *

@@ -15,12 +15,15 @@
 #include "zypp/SrcPackage.h"
 #include "zypp/Package.h"
 #include "zypp/Capabilities.h"
+#include "zypp/ui/Selectable.h"
 
 
 #include "zypp/RepoInfo.h"
 
 #include "zypp/PoolQuery.h"
+#include "zypp/PoolItemBest.h"
 
+#include "Zypper.h"
 #include "main.h"
 #include "utils/misc.h"
 #include "utils/pager.h"
@@ -32,6 +35,7 @@
 
 using namespace std;
 using namespace zypp;
+using namespace zypp::ui;
 using namespace boost;
 
 extern ZYpp::Ptr God;
@@ -348,6 +352,8 @@ static SrcPackage::constPtr source_find( const string & arg )
     return srcpkg;
 }
 
+// ----------------------------------------------------------------------------
+
 void build_deps_install(Zypper & zypper)
 {
   /*
@@ -391,6 +397,8 @@ void build_deps_install(Zypper & zypper)
   }
 }
 
+// ----------------------------------------------------------------------------
+
 void mark_src_pkgs(Zypper & zypper)
 {
   /*
@@ -412,6 +420,8 @@ void mark_src_pkgs(Zypper & zypper)
           _("Source package '%s' not found.")) % (*it)));
   }
 }
+
+// ----------------------------------------------------------------------------
 
 void install_src_pkgs(Zypper & zypper)
 {
@@ -441,6 +451,100 @@ void install_src_pkgs(Zypper & zypper)
       zypper.setExitCode(ZYPPER_EXIT_ERR_ZYPP);
     }
   }
+}
+
+// ----------------------------------------------------------------------------
+
+zypp::PoolQuery
+pkg_spec_to_poolquery(const Capability & cap, const list<string> & repos)
+{
+  sat::Solvable::SplitIdent splid(cap.detail().name());
+
+  PoolQuery q;
+  q.addKind(splid.kind());
+  q.addAttribute(sat::SolvAttr::name, splid.name().asString());
+  q.setMatchGlob();
+  for_(it, repos.begin(), repos.end())
+    q.addRepo(*it);
+  if (cap.detail().hasArch())
+    q.addAttribute(sat::SolvAttr::arch, cap.detail().arch().asString());
+  if (cap.detail().isVersioned())
+    q.setEdition(cap.detail().ed(), cap.detail().op());
+
+  DBG << "query: " << q << endl;
+
+  return q;
+}
+
+zypp::PoolQuery
+pkg_spec_to_poolquery(const Capability & cap, const string & repo)
+{
+  list<string> repos;
+  if (!repo.empty())
+    repos.push_back(repo);
+  return pkg_spec_to_poolquery(cap, repos);
+}
+
+set<PoolItem>
+get_installed_providers(const Capability & cap)
+{
+  set<PoolItem> providers;
+
+  sat::WhatProvides q(cap);
+  for_(it, q.selectableBegin(), q.selectableEnd())
+  {
+    Selectable::constPtr s(*it);
+    if (traits::isPseudoInstalled(s->kind()))
+    {
+      PoolItem best;
+      for_(ait, s->availableBegin(), s->availableEnd())
+      {
+        // this works also for patches - isSatisfied excludes !isRelevant
+        if (ait->isSatisfied())
+          // we don't care about repo priorities, vendors and stuff like that
+          // here. All we want to know is what is the highest available version
+          // that already is satisified.
+          // TODO such funtion could be part of Selectable (or does theObj return such object?)
+          // TODO but we should care about repos
+          if (!best || best->edition() < (*ait)->edition())
+            best = *ait;
+      }
+      providers.insert(best);
+    }
+    else if (s->hasInstalledObj())
+      providers.insert(s->installedObj());
+  }
+
+  return providers;
+}
+
+string poolitem_user_string(const PoolItem & pi)
+{
+  return resolvable_user_string(*pi.resolvable());
+}
+
+string resolvable_user_string(const Resolvable & res)
+{
+  ostringstream str;
+  str << res.name() << "-" << res.edition() << "." << res.arch();
+  return str.str();
+}
+
+zypp::PoolItem get_installed_obj(zypp::ui::Selectable::Ptr & s)
+{
+  PoolItem installed;
+  if (traits::isPseudoInstalled(s->kind()))
+  {
+    for_(it, s->availableBegin(), s->availableEnd())
+      // this is OK also for patches - isSatisfied() excludes !isRelevant()
+      if (it->status().isSatisfied()
+          && (!installed || installed->edition() < (*it)->edition()))
+        installed = *it;
+  }
+  else
+    installed = s->installedObj();
+
+  return installed;
 }
 
 // Local Variables:

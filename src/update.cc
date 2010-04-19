@@ -24,9 +24,6 @@ typedef set<PoolItem> Candidates;
 static void
 find_updates( const ResKindSet & kinds, Candidates & candidates );
 
-static PoolItem
-findInstalledItem( PoolItem item );
-
 // ----------------------------------------------------------------------------
 //
 // Updates
@@ -256,50 +253,6 @@ static bool list_patch_updates(Zypper & zypper)
 
 // ----------------------------------------------------------------------------
 
-/*
- * Collect items, select the best edition.
- * This is used to find the best available or installed pool item from a set.
- */
-class SaveBetterEdition : public zypp::resfilter::PoolItemFilterFunctor
-{
-public:
-  PoolItem best;
-
-  bool operator()(PoolItem provider)
-  {
-    if (!provider.status().isLocked() // is not locked (taboo)
-        && (!best                     // first match
-            // or a better edition than so-far-found
-            || best->edition().compare(provider->edition()) < 0))
-    {
-      best = provider;
-    }
-    return true;
-  }
-};
-
-class SaveBetterEditionArch
-{
-public:
-  PoolItem best;
-
-  bool operator()(PoolItem provider)
-  {
-    if (!provider.status().isLocked() // is not locked (taboo)
-        && (!best                     // first match
-            // or a better architecture
-            || best->arch().compare(provider->arch()) < 0
-            // or a better edition than so-far-found
-            || best->edition().compare(provider->edition()) < 0))
-    {
-      best = provider;
-    }
-    return true;
-  }
-};
-
-// ----------------------------------------------------------------------------
-
 /**
  * Find all available updates of given kind.
  */
@@ -319,8 +272,13 @@ find_updates( const ResKind & kind, Candidates & candidates )
     for (; it != e; ++it)
       // show every package picked by doUpdate for installation
       // except the ones which are not currently installed (bnc #483910)
-      if (it->status().isToBeInstalled() && findInstalledItem(*it))
-        candidates.insert(*it);
+      if (it->status().isToBeInstalled())
+      {
+        ui::Selectable::constPtr s =
+            ui::Selectable::get((*it)->kind(), (*it)->name());
+        if (s->hasInstalledObj())
+          candidates.insert(*it);
+      }
     return;
   }
 
@@ -486,13 +444,6 @@ void list_updates(Zypper & zypper, const ResKindSet & kinds, bool best_effort)
       if (!best_effort)
       {
         // for packages show also the current installed version (bnc #466599)
-        //! \todo this deserves cleanup and optimization: e.g. findInstalledItem()
-        //! is called twice, once here and once in find_updates()
-        //! ma@: Use ui::Selectable instead of findInstalledItem, mainly because
-        //! it does not require to traverse the pool. Furthermore findInstalledItem
-        //! silently hides locked installed packages which is not appropriate here.
-        //! Either hide the whole update or show all.
-        //
         if (*it == ResKind::package)
         {
           ui::Selectable::Ptr sel( uipool.lookup( *ci ) );
@@ -536,29 +487,6 @@ mark_item_install (const PoolItem & pi)
 // best-effort update
 // ----------------------------------------------------------------------------
 
-/*
- * Find installed item matching passed one.
- * Use SaveBetterEdition as callback handler in order to cope with
- * multiple installed resolvables of the same name.
- * SaveBetterEdition will return the one with the highest edition.
- */
-static PoolItem
-findInstalledItem( PoolItem item )
-{
-  const zypp::ResPool& pool = God->pool();
-  SaveBetterEdition info;
-
-  invokeOnEach( pool.byIdentBegin( item->kind(), item->name() ),
-                pool.byIdentEnd( item->kind(), item->name() ),
-                resfilter::ByInstalled (),
-                functor::functorRef<bool,PoolItem> (info) );
-
-  XXX << "findInstalledItem(" << item << ") => " << info.best;
-  return info.best;
-}
-
-// ----------------------------------------------------------------------------
-
 // require update of installed item
 //   The PoolItem passed to require_item_update() is the installed resolvable
 //   to which an update candidate is guaranteed to exist.
@@ -568,7 +496,8 @@ findInstalledItem( PoolItem item )
 static bool require_item_update (const PoolItem& pi) {
   Resolver_Ptr resolver = zypp::getZYpp()->resolver();
 
-  PoolItem installed = findInstalledItem( pi );
+  ui::Selectable::constPtr s = ui::Selectable::get(pi->kind(), pi->name());
+  PoolItem installed = s->installedObj();
 
   // require anything greater than the installed version
   try {
@@ -680,171 +609,6 @@ mark_patch_updates( Zypper & zypper, bool skip_interactive )
             if ( mark_patch_update(**pit, skip_interactive, ignore_affects_pm))
               any_marked = true;
         }
-      }
-    }
-  }
-}
-
-// ----------------------------------------------------------------------------
-
-// report back when specified selectable can't be updated (bnc #522223)
-// TODO make this function return special Status object that can be both tested
-// and that can report itself as string or xml or terse
-void selectable_update_report(Zypper & zypper, const ui::Selectable & s)
-{
-  PoolItem theone = s.updateCandidateObj();
-  DBG << "best:      " << theone    << endl;
-  if (!theone)
-    theone = s.installedObj();
-
-  PoolItem highest = s.highestAvailableVersionObj();
-  PoolItem installed = s.installedObj();
-  if (!installed)
-    return;
-  DBG << "installed: " << installed << endl;
-  DBG << "highest:   " << highest   << endl;
-
-  // no installable update candidate
-  if (identical(installed, theone))
-  {
-    // no update candidate at all
-    // (!highest means no available objects in repos. bnc #591760)
-    if (!highest || identical(installed, highest))
-    {
-      DBG << "the One (" << theone << ") is installed, skipping." << endl;
-      zypper.out().info(str::form(
-          _("No update candidate for '%s'."), s.name().c_str()));
-    }
-    // update candidate locked
-    else if (s.status() == ui::S_Protected)
-    {
-      DBG << "Newer object exists, but is locked: " << highest << endl;
-
-      ostringstream cmdhint;
-      cmdhint << "zypper removelock " << highest.resolvable()->name();
-
-      zypper.out().info(str::form(
-        _("There is an update candidate for '%s', but it is locked."
-          " Use '%s' to unlock it."),
-        s.name().c_str(), cmdhint.str().c_str()));
-    }
-    // update candidate has different vendor
-    else if (highest->vendor() != installed->vendor())
-    {
-      DBG << "Newer object with different vendor exists: " << highest << endl;
-
-      ostringstream cmdhint;
-      cmdhint << "zypper install " << highest->name()
-          << "-" << highest->edition() << "." << highest->arch();
-
-      zypper.out().info(str::form(
-        _("There is an update candidate for '%s', but it is from different"
-          " vendor. Use '%s' to install this candidate."),
-          s.name().c_str(), cmdhint.str().c_str()));
-    }
-    // update candidate is from low-priority (higher priority number) repo
-    else if (highest->repoInfo().priority() > installed->repoInfo().priority())
-    {
-      DBG << "Newer object exists in lower-priority repo: " << highest << endl;
-
-      ostringstream cmdhint;
-      cmdhint << "zypper install " << highest->name()
-          << "-" << highest->edition() << "." << highest->arch();
-
-      zypper.out().info(str::form(
-        _("There is an update candidate for '%s', but it comes from repository"
-           " with lower priority. Use '%s' to install this candidate."),
-          s.name().c_str(), cmdhint.str().c_str()));
-    }
-  }
-  // got update candidate
-  else
-  {
-    zypper.out().info(
-        str::form(_("Selecting '%s' for update."), s.name().c_str()),
-        Out::HIGH);
-    Capability c(s.name(), Rel::GT, installed->edition(), s.kind());
-    DBG << s << " update: adding requirement " << c << endl;
-  }
-}
-
-// ----------------------------------------------------------------------------
-
-void mark_updates(Zypper & zypper, const ResKindSet & kinds, bool skip_interactive, bool best_effort )
-{
-  MIL << endl;
-
-  ResKindSet localkinds = kinds;
-
-  if (zypper.arguments().empty() || zypper.globalOpts().is_rug_compatible)
-  {
-    for_(kindit, localkinds.begin(), localkinds.end())
-    {
-      if (*kindit == ResKind::package)
-      {
-        MIL << "Computing package update..." << endl;
-        // this will do a complete pacakge update as far as possible
-        God->resolver()->doUpdate();
-        // no need to call Resolver::resolvePool() afterwards
-        zypper.runtimeData().solve_before_commit = false;
-      }
-      else if (*kindit == ResKind::patch)
-      {
-        mark_patch_updates(zypper, skip_interactive);
-      }
-      else
-      {
-        Candidates candidates;
-        find_updates (localkinds, candidates);
-        if (best_effort)
-          invokeOnEach (candidates.begin(), candidates.end(), require_item_update);
-        else
-          invokeOnEach (candidates.begin(), candidates.end(), mark_item_install);
-      }
-    }
-  }
-  // treat arguments as package names (+allow wildcards)
-  else if (!zypper.arguments().empty())
-  {
-    for_(kindit, localkinds.begin(), localkinds.end())
-    {
-      Resolver_Ptr solver = God->resolver();
-      for_(it, zypper.arguments().begin(), zypper.arguments().end())
-      {
-        PoolQuery q;
-        q.addKind(*kindit);
-        q.addAttribute(sat::SolvAttr::name, *it);
-        q.setMatchGlob();
-        q.setInstalledOnly();
-
-        if (q.empty())
-        {
-          if (it->find_first_of("?*") != string::npos) // wildcards used
-            zypper.out().info(str::form(
-                _("No packages matching '%s' are installed."), it->c_str()));
-          else
-            zypper.out().info(str::form(
-                _("Package '%s' is not installed."), it->c_str()));
-          zypper.setExitCode(ZYPPER_EXIT_INF_CAP_NOT_FOUND);
-        }
-        else
-          for_(solvit, q.selectableBegin(), q.selectableEnd())
-          {
-            ui::Selectable::Ptr s = *solvit;
-            PoolItem theone = s->updateCandidateObj();
-            if (!theone)
-              theone = s->installedObj();
-
-            if (!identical(s->installedObj(), theone))
-            {
-              //s->setCandidate(theone); ?
-              //s->setStatus(ui::S_Update); ?
-              Capability c(s->name(), Rel::GT, s->installedObj()->edition(), s->kind());
-              solver->addRequire(c);
-              DBG << *s << " update: adding requirement " << c << endl;
-            }
-            selectable_update_report(zypper, *s);
-          }
       }
     }
   }

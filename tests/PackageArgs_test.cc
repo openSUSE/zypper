@@ -142,4 +142,37 @@ BOOST_AUTO_TEST_CASE(argToCaps_test)
   }
 }
 
+BOOST_AUTO_TEST_CASE(dupes_test)
+{
+  {
+    vector<string> rawargs;
+    rawargs.push_back("zypper>=1.4.0");
+    rawargs.push_back("zypper");
+    rawargs.push_back(">=");
+    rawargs.push_back("1.4.0");
+    rawargs.push_back("-zypper>=1.4.0");
+
+    PackageArgs args(rawargs);
+    BOOST_CHECK(args.empty());
+  }
+}
+
+
+BOOST_AUTO_TEST_CASE(dont_by_default_test)
+{
+  {
+    vector<string> rawargs;
+    rawargs.push_back("package");
+    rawargs.push_back("-simon");
+    rawargs.push_back("+garfunkel");
+
+    PackageArgs::Options argopts;
+    argopts.do_by_default = false;
+    PackageArgs args(rawargs, ResKind::package, argopts);
+
+    BOOST_CHECK_EQUAL(args.dontCaps().size(), 2);
+    BOOST_CHECK_EQUAL(args.doCaps().size(), 1);
+  }
+}
+
 // vim: set ts=2 sts=8 sw=2 ai et:

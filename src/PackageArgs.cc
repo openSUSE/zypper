@@ -20,8 +20,8 @@ using namespace std;
 using namespace zypp;
 
 
-PackageArgs::PackageArgs(const zypp::ResKind & kind)
-  : zypper(*Zypper::instance())
+PackageArgs::PackageArgs(const zypp::ResKind & kind, const Options & opts)
+  : zypper(*Zypper::instance()), _opts(opts)
 {
   preprocess(zypper.arguments());
   argsToCaps(kind);
@@ -29,12 +29,15 @@ PackageArgs::PackageArgs(const zypp::ResKind & kind)
 
 PackageArgs::PackageArgs(
     const vector<string> & args,
-    const zypp::ResKind & kind)
-  : zypper(*Zypper::instance())
+    const zypp::ResKind & kind,
+    const Options & opts)
+  : zypper(*Zypper::instance()), _opts(opts)
 {
   preprocess(args);
   argsToCaps(kind);
 }
+
+// ---------------------------------------------------------------------------
 
 void PackageArgs::preprocess(const vector<string> & args)
 {
@@ -100,6 +103,23 @@ void PackageArgs::preprocess(const vector<string> & args)
   DBG << endl;
 }
 
+// ---------------------------------------------------------------------------
+
+static bool
+remove_duplicate(
+    PackageArgs::CapRepoPairSet & set, const PackageArgs::CapRepoPair & obj)
+{
+  PackageArgs::CapRepoPairSet::iterator match = set.find(obj);
+  if (match != set.end())
+  {
+    set.erase(match);
+    return true;
+  }
+  return false;
+}
+
+// ---------------------------------------------------------------------------
+
 void PackageArgs::argsToCaps(const zypp::ResKind & kind)
 {
   bool dont;
@@ -154,8 +174,10 @@ void PackageArgs::argsToCaps(const zypp::ResKind & kind)
       dont = true;
       arg.erase(0, 1);
     }
-    else
+    else if (_opts.do_by_default)
       dont = false;
+    else
+      dont = true;
 
     // check for and remove the 'repo:' prefix
     // ignore colons coming after '(' or '=' (bnc #433679)
@@ -201,14 +223,26 @@ void PackageArgs::argsToCaps(const zypp::ResKind & kind)
             kind);
     }
 
+    // recognize misplaced command line options given as packages (bnc#391644)
+    if (arg[0] == '-')
+    {
+      zypper.out().error(str::form(
+          _("'%s' is not a package name or capability."), arg.c_str()));
+      zypper.setExitCode(ZYPPER_EXIT_ERR_INVALID_ARGS);
+      ZYPP_THROW(ExitRequestException());
+    }
+
     MIL << "got " << (dont?"un":"") << "wanted '" << parsedcap << "'";
     MIL << "; repo '" << repo << "'" << endl;
 
-    // store
-    // TODO remove equal +/- args here
+    // Store, but avoid duplicates in do and dont sets.
     if (dont)
-      _dont_caps.insert(CapRepoPair(parsedcap, repo));
-    else
+    {
+      if (!remove_duplicate(_do_caps, CapRepoPair(parsedcap, repo)))
+        _dont_caps.insert(CapRepoPair(parsedcap, repo));
+    }
+    else if (!remove_duplicate(_dont_caps, CapRepoPair(parsedcap, repo)))
       _do_caps.insert(CapRepoPair(parsedcap, repo));
   }
 }
+

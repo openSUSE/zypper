@@ -28,12 +28,33 @@ public:
   typedef std::pair<zypp::Capability, std::string> CapRepoPair;
   typedef std::set<CapRepoPair> CapRepoPairSet;
 
+  struct Options
+  {
+    Options()
+      : do_by_default(true)
+    {}
+
+    /** Whether to do (install/update) or dont (remove) by default
+     *  (if +/- not specified in argument).*/
+    bool do_by_default;
+  };
+
 public:
-  PackageArgs(const zypp::ResKind & kind = zypp::ResKind::package);
+  /** Processes current Zypper::arguments() */
+  PackageArgs(
+      const zypp::ResKind & kind = zypp::ResKind::package,
+      const Options & opts = Options());
+
+  /** Takes arguments as a vector of strings */
   PackageArgs(
       const std::vector<std::string> & args,
-      const zypp::ResKind & kind = zypp::ResKind::package);
+      const zypp::ResKind & kind = zypp::ResKind::package,
+      const Options & opts = Options());
+
   ~PackageArgs() {}
+
+  const Options & options() const
+  {return _opts; }
 
   const StringSet & asStringSet() const
   { return _args; }
@@ -45,12 +66,19 @@ public:
   const CapRepoPairSet & dontCaps() const
   { return _dont_caps; }
 
+  bool empty() const
+  { return doCaps().empty() && dontCaps().empty(); }
+
 protected:
+  /** join arguments at comparison operators ('=', '>=', and the like) */
   void preprocess(const std::vector<std::string> & args);
   void argsToCaps(const zypp::ResKind & kind);
 
 private:
+  PackageArgs();
+
   Zypper & zypper;
+  Options _opts;
   StringSet _args;
   CapRepoPairSet _do_caps;
   CapRepoPairSet _dont_caps;

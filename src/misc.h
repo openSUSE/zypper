@@ -8,8 +8,15 @@
 #ifndef ZMART_MISC_H
 #define ZMART_MISC_H
 
-#include "Zypper.h"
+#include <string>
+#include <list>
 
+#include "zypp/PoolQuery.h"
+#include "zypp/ResKind.h"
+#include "zypp/RepoInfo.h"
+#include "zypp/Capability.h"
+
+class Zypper;
 
 /**
  * Loops through resolvables, checking if there is license to confirm. When
@@ -54,5 +61,31 @@ void install_src_pkgs(Zypper & zypper);
  * on command line options) to the pool.
  */
 void build_deps_install(Zypper & zypper);
+
+
+zypp::PoolQuery
+pkg_spec_to_poolquery(
+    const zypp::Capability & cap,
+    const std::list<std::string> & repos = std::list<std::string>());
+
+zypp::PoolQuery
+pkg_spec_to_poolquery(
+    const zypp::Capability & cap,
+    const std::string & repo = std::string());
+
+std::set<zypp::PoolItem>
+get_installed_providers(const zypp::Capability & cap);
+
+
+std::string poolitem_user_string(const zypp::PoolItem & pi);
+
+/** Returns string("name-edition.arch"). */
+std::string resolvable_user_string(const zypp::Resolvable & res);
+
+/**
+ * Get the highest-version installed pacakge/product or satisfied patch/pattern
+ * from the selectable.
+ */
+zypp::PoolItem get_installed_obj(zypp::ui::Selectable::Ptr & s);
 
 #endif
