@@ -1,4 +1,11 @@
 -------------------------------------------------------------------
+Tue Apr 20 11:47:33 CEST 2010 - jkupec@suse.cz
+
+- zypp-refresh-wrapper: set HOME so zypp/er credentials under
+  /root can be found (bnc #585789)
+- 1.0.15
+
+-------------------------------------------------------------------
 Wed Jan  6 11:30:06 CET 2010 - jkupec@suse.cz
 
 - Show patch conflicts instead of requires to provide a hint about
