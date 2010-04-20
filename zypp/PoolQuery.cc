@@ -1214,7 +1214,17 @@ attremptycheckend:
         string s = attrName;
         str::replaceAll( s,"_",":" );
         SolvAttr a(s);
-        addAttribute(a,attrValue);
+	if ( a == SolvAttr::name || isDependencyAttribute( a ) )
+	{
+	  Capability c( attrValue );
+	  CapDetail d( c );
+	  if ( d.isVersioned() )
+	    addDependency( a, d.name().asString(), d.op(), d.ed() );
+	  else
+	    addDependency( a, attrValue );
+	}
+	else
+	  addAttribute( a, attrValue );
       }
 
     } while ( true );
