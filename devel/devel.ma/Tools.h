@@ -51,7 +51,7 @@ void whichType()
 
 void waitForInput()
 {
-  int i;
+  std::string i;
   USR << "WAITING FOR INPUT!" << endl;
   std::cin >> i;
 }

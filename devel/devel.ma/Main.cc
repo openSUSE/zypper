@@ -5,6 +5,7 @@
 #include <zypp/parser/ProductFileReader.h>
 #include "zypp/pool/GetResolvablesToInsDel.h"
 #include "zypp/sat/WhatObsoletes.h"
+#include "zypp/ExternalProgram.h"
 
 ///////////////////////////////////////////////////////////////////
 
@@ -65,6 +66,14 @@ std::ostream & operator<<( std::ostream & str, const sat::Solvable::SplitIdent &
   return str;
 }
 
+namespace zypp {
+std::ostream & dumpOn( std::ostream & str, const Url & obj )
+{
+  str << "{" << obj.getHost() << "}{" << obj.getPort() << "}";
+  return str;
+}
+}
+
 int main( int argc, char * argv[] )
 try {
   --argc;
@@ -74,7 +83,6 @@ try {
   ///////////////////////////////////////////////////////////////////
   if ( sysRoot == "/" )
     ::unsetenv( "ZYPP_CONF" );
-  ZConfig::instance().setTextLocale( Locale("de_DE") );
   ResPool   pool( ResPool::instance() );
   sat::Pool satpool( sat::Pool::instance() );
   ///////////////////////////////////////////////////////////////////
@@ -82,13 +90,26 @@ try {
   TestSetup::LoadSystemAt( sysRoot, Arch_i586 );
   ///////////////////////////////////////////////////////////////////
 
-  ui::Selectable::Ptr s( getSel<Package>( "libzypp" ) );
-  MIL << s << endl;
-  DBG << s->setStatus( ui::S_Taboo ) << endl;
-  DBG << s->setStatus( ui::S_Protected ) << endl;
-  MIL << s << endl;
-  DBG << s->setStatus( ui::S_Update ) << endl;
-  MIL << s << endl;
+  PoolQuery q;
+  q.setMatchGlob();
+
+  //q.addDependency( sat::SolvAttr("solvable:provides"), Capability("zypper = 1.4.1-1.1") );
+  //q.addDependency( sat::SolvAttr("solvable:provides"), Capability("z* = 1.2.8") );
+  q.addDependency( sat::SolvAttr("solvable:name"), "zypp*", Rel("="), Edition("1.2.8") );
+  //q.addDependency( sat::SolvAttr("solvable:provides"), "zypp*" );
+  q.serialize( SEC );
+
+  for_( solvIter, q.begin(), q.end() )
+  {
+    sat::Solvable solvable( *solvIter );
+    USR << "Found matches in " << solvable << endl;
+    if ( true )
+      for_( attrIter, solvIter.matchesBegin(), solvIter.matchesEnd() )
+      {
+	sat::LookupAttr::iterator attr( *attrIter );
+	USR << "    " << attr.inSolvAttr() << "\t\"" << attr.asString() << "\"" << endl;
+      }
+  }
 
 
   ///////////////////////////////////////////////////////////////////

@@ -72,20 +72,20 @@ bool consume( xml::Reader & reader_r )
   switch ( reader_r->nodeType() )
   {
     case XML_READER_TYPE_ELEMENT:
-      //MIL << *reader_r << endl;
+      MIL << *reader_r << endl;
       for ( int i = 0; i < reader_r->attributeCount(); ++i )
       {
-	//MIL << " attr no " << i << " '" << reader_r->getAttributeNo( i ) << "'" << endl;
+	MIL << " attr no " << i << " '" << reader_r->getAttributeNo( i ) << "'" << endl;
       }
       break;
 
     case XML_READER_TYPE_ATTRIBUTE:
-      //WAR << *reader_r << endl;
+      WAR << *reader_r << endl;
       break;
 
     case XML_READER_TYPE_TEXT:
     case XML_READER_TYPE_CDATA:
-      //DBG << *reader_r << endl;
+      DBG << *reader_r << endl;
       break;
 
     default:
@@ -120,7 +120,7 @@ int main( int argc, char * argv[] )
     for ( ; argc; --argc, ++argv )
     {
       input = *argv;
-      if( 0 )
+
       try {
 	Measure m( input.basename() );
 // 	zypp::base::LogControl::TmpLineWriter shutUp;

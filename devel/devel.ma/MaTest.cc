@@ -154,7 +154,7 @@ std::ostream & testDump( std::ostream & str, const PoolItem & pi )
     l = Locale( "dsdf" );
     str << str::form("%-25s: ",l.code().c_str()) << p->summary(l) << endl;
     OUTS( summary );
-    OUTS( installsize );
+    OUTS( installSize );
     OUTS( downloadSize );
     OUTS( sourcePkgName );
     OUTS( sourcePkgEdition );
