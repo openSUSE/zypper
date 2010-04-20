@@ -1,4 +1,9 @@
 -------------------------------------------------------------------
+Wed Apr 21 01:13:38 CEST 2010 - ma@suse.de
+
+- Update translations.
+
+-------------------------------------------------------------------
 Tue Apr 20 16:56:59 CEST 2010 - ma@suse.de
 
 - /etc/zypp/locks: Allow to specify edition ranges with 
