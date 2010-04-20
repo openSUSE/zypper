@@ -1,4 +1,11 @@
 -------------------------------------------------------------------
+Tue Apr 20 16:56:59 CEST 2010 - ma@suse.de
+
+- /etc/zypp/locks: Allow to specify edition ranges with 
+  solvable:name and dependencies.
+- version 7.1.1 (1)
+
+-------------------------------------------------------------------
 Thu Apr 15 12:49:01 CEST 2010 - ma@suse.de
 
 - Provide name of the lock holder in ZYppFactoryException. (bnc#580513)
