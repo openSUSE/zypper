@@ -31,12 +31,6 @@
 #define DELAYED_VERIFY           1
 
 /*
-** Reuse foreign (user/automounter) mount points.
-** 0 = don't use, 1 = automounted only, 2 = all
-*/
-#define  REUSE_FOREIGN_MOUNTS    2
-
-/*
 ** Path to the vol_id tool (normal system, instsys)
 */
 #define VOL_ID_TOOL_PATHS        { "/sbin/vol_id", "/lib/udev/vol_id", NULL}
@@ -252,10 +246,10 @@ namespace zypp {
       //   mount /dev/<partition> /tmp_mount
       //   mount /tmp_mount/<dir> <to> --bind -o ro
       // FIXME: try all filesystems
-    
+
       if(_device.empty())
 	ZYPP_THROW(MediaBadUrlEmptyDestinationException(url()));
-    
+
       PathInfo dev_info(_device);
       if(!dev_info.isBlk())
         ZYPP_THROW(MediaBadUrlEmptyDestinationException(url()));
@@ -309,15 +303,8 @@ namespace zypp {
 	if( is_device && media->maj_nr == dev_info.major() &&
 	                 media->min_nr == dev_info.minor())
 	{
-#if REUSE_FOREIGN_MOUNTS > 0
 	  AttachPointRef ap( new AttachPoint(e->dir, false));
 	  AttachedMedia  am( media, ap);
-	  //
-	  // 1 = automounted only, 2 == all
-	  //
-#if REUSE_FOREIGN_MOUNTS == 1
-	  if( isAutoMountedMedia(am))
-#endif
 	  {
 	    DBG << "Using a system mounted media "
 		<< media->name
@@ -331,9 +318,6 @@ namespace zypp {
 	    setAttachPoint(ap);
 	    return;
 	  }
-#else
-	  media->bdir = e->dir;
-#endif
 	}
       }
 
@@ -434,7 +418,7 @@ namespace zypp {
     {
       MediaHandler::getFile( filename );
     }
-    
+
     ///////////////////////////////////////////////////////////////////
     //
     //	METHOD NAME : MediaDISK::getDir
@@ -446,7 +430,7 @@ namespace zypp {
     {
       MediaHandler::getDir( dirname, recurse_r );
     }
-    
+
     ///////////////////////////////////////////////////////////////////
     //
     //
@@ -460,7 +444,7 @@ namespace zypp {
     {
       MediaHandler::getDirInfo( retlist, dirname, dots );
     }
-    
+
     ///////////////////////////////////////////////////////////////////
     //
     //
@@ -478,8 +462,8 @@ namespace zypp {
     bool MediaDISK::getDoesFileExist( const Pathname & filename ) const
     {
       return MediaHandler::getDoesFileExist( filename );
-    }    
-    
+    }
+
   } // namespace media
 } // namespace zypp
 // vim: set ts=8 sts=2 sw=2 ai noet:

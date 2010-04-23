@@ -768,20 +768,13 @@ void MediaHandler::release( const std::string & ejectDev )
   MIL << "Released: " << *this << endl;
 }
 
-bool MediaHandler::isAutoMountedMedia(const AttachedMedia &media)
+void MediaHandler::forceRelaseAllMedia(bool matchMountFs)
 {
-  (void)media;
-  return false;
-}
-
-void MediaHandler::forceRelaseAllMedia(bool matchMountFs, bool autoMountedOny)
-{
-  forceRelaseAllMedia( attachedMedia().mediaSource, matchMountFs, autoMountedOny);
+  forceRelaseAllMedia( attachedMedia().mediaSource, matchMountFs);
 }
 
 void MediaHandler::forceRelaseAllMedia(const MediaSourceRef &ref,
-                                       bool                  matchMountFs,
-				       bool                  autoMountedOny)
+                                       bool                  matchMountFs)
 {
   if( !ref)
     return;
@@ -806,19 +799,6 @@ void MediaHandler::forceRelaseAllMedia(const MediaSourceRef &ref,
 
       if( ref->equals( media) && e->type != "subfs")
       {
-	if(autoMountedOny)
-	{
-	  try {
-	    AttachedMedia am(MediaSourceRef(new MediaSource(media)),
-	                     AttachPointRef(new AttachPoint(e->dir)));
-	    if( !isAutoMountedMedia(am))
-	      continue;
-	  }
-	  catch(...)
-	  {
-	      continue;
-	  }
-	}
         DBG << "Forcing release of media device "
             << ref->asString()
             << " in the mount table as "
@@ -840,19 +820,6 @@ void MediaHandler::forceRelaseAllMedia(const MediaSourceRef &ref,
       MediaSource media(mtype, e->src);
       if( ref->equals( media))
       {
-	if(autoMountedOny)
-	{
-	  try {
-	    AttachedMedia am(MediaSourceRef(new MediaSource(media)),
-	                     AttachPointRef(new AttachPoint(e->dir)));
-	    if( !isAutoMountedMedia(am))
-	      continue;
-	  }
-	  catch(...)
-	  {
-	      continue;
-	  }
-	}
 	DBG << "Forcing release of media name "
 	    << ref->asString()
 	    << " in the mount table as "

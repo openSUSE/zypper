@@ -56,8 +56,6 @@ namespace zypp {
 
         virtual void forceEject(const std::string & ejectDev);
 
-	virtual bool isAutoMountedMedia(const AttachedMedia &media);
-        
         virtual bool hasMoreDevices();
 
         virtual void

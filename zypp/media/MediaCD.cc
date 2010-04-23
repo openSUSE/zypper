@@ -32,20 +32,6 @@
 
 #include <linux/cdrom.h>
 
-#define NO_HAL
-
-/*
-** try umount of foreign (user/automounter) media on eject
-**   0 = don't force, 1 = automounted only, 2 == all
-*/
-#define  FORCE_RELEASE_FOREIGN   2
-
-/*
-** Reuse foreign (user/automounter) mount points.
-** 0 = don't use, 1 = automounted only, 2 = all
-*/
-#define  REUSE_FOREIGN_MOUNTS    2
-
 /*
 ** if to throw exception on eject errors or ignore them
 */
@@ -371,7 +357,6 @@ namespace zypp {
         break;
       }
 
-#if REUSE_FOREIGN_MOUNTS > 0
       {
         MediaManager  manager;
         MountEntries  entries( manager.getMountEntries());
@@ -393,12 +378,6 @@ namespace zypp {
           {
             AttachPointRef ap( new AttachPoint(e->dir, false));
             AttachedMedia  am( media, ap);
-            //
-            // 1 = automounted only, 2 == all
-            //
-#if REUSE_FOREIGN_MOUNTS == 1
-            if( isAutoMountedMedia(am))
-#endif
             {
               DBG << "Using a system mounted media "
                   << media->name
@@ -419,7 +398,6 @@ namespace zypp {
         if( mountsucceeded)
           break;
       }
-#endif  // REUSE_FOREIGN_MOUNTS
 
       // close tray
       closeTray( it->name );
@@ -531,10 +509,7 @@ namespace zypp {
       ZYPP_CAUGHT(excpt_r);
       if (!ejectDev.empty())
       {
-#if FORCE_RELEASE_FOREIGN > 0
-        /* 1 = automounted only, 2 = all */
-        forceRelaseAllMedia(false, FORCE_RELEASE_FOREIGN == 1);
-#endif
+        forceRelaseAllMedia(false);
         if(openTray( ejectDev ))
           return;
       }
@@ -544,10 +519,7 @@ namespace zypp {
     // eject device
     if (!ejectDev.empty())
     {
-#if FORCE_RELEASE_FOREIGN > 0
-      /* 1 = automounted only, 2 = all */
-      forceRelaseAllMedia(false, FORCE_RELEASE_FOREIGN == 1);
-#endif
+      forceRelaseAllMedia(false);
       if( !openTray( ejectDev ))
       {
 #if REPORT_EJECT_ERRORS
@@ -637,10 +609,7 @@ namespace zypp {
         AttachedMedia ret( findAttachedMedia( media));
         if( !ret.mediaSource)
         {
-#if FORCE_RELEASE_FOREIGN > 0
-          /* 1 = automounted only, 2 = all */
-          forceRelaseAllMedia(media, false, FORCE_RELEASE_FOREIGN == 1);
-#endif
+          forceRelaseAllMedia(media, false);
           if ( openTray( it->name ) )
           {
             ejected = true;
@@ -655,69 +624,6 @@ namespace zypp {
       ZYPP_THROW(MediaNotEjectedException());
 #endif
     }
-  }
-
-  bool MediaCD::isAutoMountedMedia(const AttachedMedia &media)
-  {
-    bool is_automounted = false;
-    if( media.mediaSource && !media.mediaSource->name.empty())
-    {
-#ifndef NO_HAL
-      using namespace zypp::target::hal;
-      try
-      {
-        HalContext hal(true);
-
-        HalVolume vol = hal.getVolumeFromDeviceFile(media.mediaSource->name);
-        if( vol)
-        {
-          std::string udi = vol.getUDI();
-          std::string key;
-          std::string mnt;
-
-          try
-          {
-            key = "info.hal_mount.created_mount_point";
-            mnt = hal.getDevicePropertyString(udi, key);
-
-            if(media.attachPoint->path == mnt)
-              is_automounted = true;
-          }
-          catch(const HalException &e1)
-          {
-            ZYPP_CAUGHT(e1);
-
-            try
-            {
-              key = "volume.mount_point";
-              mnt = hal.getDevicePropertyString(udi, key);
-
-              if(media.attachPoint->path == mnt)
-                is_automounted = true;
-            }
-            catch(const HalException &e2)
-            {
-              ZYPP_CAUGHT(e2);
-            }
-          }
-        }
-      }
-      catch(const HalException &e)
-      {
-        ZYPP_CAUGHT(e);
-      }
-#else // NO_HAL
-#warning Can not detect automounted media without HAL
-    INT << "Can not detect automounted media without HAL!" << endl;
-    // ma@: This codepath is probably unused due to 'REUSE_FOREIGN_MOUNTS == 2'
-    // Maybe we should cleanup all this automount-specail-handling.
-#endif
-    }
-    DBG << "Media "        << media.mediaSource->asString()
-        << " attached on " << media.attachPoint->path
-        << " is"           << (is_automounted ? "" : " not")
-        << " automounted"  << std::endl;
-    return is_automounted;
   }
 
   ///////////////////////////////////////////////////////////////////
