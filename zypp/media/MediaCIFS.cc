@@ -21,10 +21,7 @@
 #include "zypp/media/MediaUserAuth.h"
 #include "zypp/media/CredentialManager.h"
 #include "zypp/ZYppCallbacks.h"
-
-#warning FIXME: get rid of this dependency on Target
-#include "zypp/ZYppFactory.h" // for target->root()
-#include "zypp/Target.h" // for zypp->target->root()
+#include "zypp/ZConfig.h"
 
 #include "zypp/media/MediaCIFS.h"
 
@@ -409,8 +406,7 @@ namespace zypp {
     bool MediaCIFS::authenticate(AuthData & authdata, bool firstTry) const
     {
       //! \todo need a way to pass different CredManagerOptions here
-      Target_Ptr target = zypp::getZYpp()->getTarget();
-      CredentialManager cm(CredManagerOptions(target ? target->root() : ""));
+      CredentialManager cm(CredManagerOptions(ZConfig::instance().systemRoot()));
 
       // get stored credentials
       AuthData_Ptr cmcred = cm.getCred(_url);
