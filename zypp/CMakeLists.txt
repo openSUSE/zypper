@@ -572,20 +572,6 @@ INSTALL(  FILES
   DESTINATION ${CMAKE_INSTALL_PREFIX}/include/zypp/target
 )
 
-SET( zypp_target_hal_SRCS
-  target/hal/HalContext.cc
-)
-
-SET( zypp_target_hal_HEADERS
-  target/hal/HalContext.h
-  target/hal/HalException.h
-)
-
-INSTALL(  FILES
-  ${zypp_target_hal_HEADERS}
-  DESTINATION ${CMAKE_INSTALL_PREFIX}/include/zypp/target/hal
-)
-
 SET( zypp_target_modalias_SRCS
   target/modalias/Modalias.cc
 )
@@ -795,7 +781,6 @@ ${zypp_repo_yum_SRCS}
 ${zypp_repo_susetags_SRCS}
 ${zypp_repo_data_SRCS}
 ${zypp_target_rpm_SRCS}
-${zypp_target_hal_SRCS}
 ${zypp_target_modalias_SRCS}
 ${zypp_target_SRCS}
 ${zypp_solver_detail_SRCS}
@@ -821,7 +806,6 @@ ${zypp_parser_ws_HEADERS}
 ${zypp_parser_HEADERS}
 ${zypp_ui_HEADERS}
 ${zypp_media_HEADERS}
-${zypp_target_hal_HEADERS}
 ${zypp_media_proxyinfo_HEADERS}
 ${zypp_base_HEADERS}
 ${zypp_solver_detail_HEADERS}
@@ -861,7 +845,6 @@ SET_LOGGROUP( "satsolver" ${zypp_sat_SRCS} )
 #SET_LOGGROUP( "group" ${zypp_capability_SRCS} )
 #SET_LOGGROUP( "group" ${zypp_ui_SRCS} )
 #SET_LOGGROUP( "group" ${zypp_media_SRCS} )
-#SET_LOGGROUP( "group" ${zypp_target_hal_SRCS} )
 #SET_LOGGROUP( "group" ${zypp_parser_xml_SRCS} )
 #SET_LOGGROUP( "group" ${zypp_media_proxyinfo_SRCS} )
 #SET_LOGGROUP( "group" ${zypp_source_yum_SRCS} )
@@ -891,11 +874,8 @@ SET(UTIL_LIBRARY util)
 #SET(SIGNALS_LIBRARY boost_signals)
 SET(SIGNALS_LIBRARY boost_signals-mt)
 TARGET_LINK_LIBRARIES(zypp ${UTIL_LIBRARY} )
-TARGET_LINK_LIBRARIES(zypp ${DBUS_LIBRARY} )
 TARGET_LINK_LIBRARIES(zypp ${RPM_LIBRARY} )
 TARGET_LINK_LIBRARIES(zypp ${GETTEXT_LIBRARIES} )
-TARGET_LINK_LIBRARIES(zypp ${HAL_LIBRARY} )
-TARGET_LINK_LIBRARIES(zypp ${HAL_STORAGE_LIBRARY} )
 TARGET_LINK_LIBRARIES(zypp ${CURL_LIBRARY} )
 TARGET_LINK_LIBRARIES(zypp ${LIBXML_LIBRARY} )
 TARGET_LINK_LIBRARIES(zypp ${ZLIB_LIBRARY} )

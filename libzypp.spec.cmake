@@ -28,7 +28,7 @@ Recommends:     logrotate
 %endif
 BuildRequires:  cmake
 BuildRequires:  openssl-devel
-BuildRequires:  boost-devel dejagnu doxygen gcc-c++ gettext-devel graphviz hal-devel libxml2-devel
+BuildRequires:  boost-devel dejagnu doxygen gcc-c++ gettext-devel graphviz libxml2-devel
 
 BuildRequires:  libsatsolver-devel >= 0.14.13
 %if 0%{?suse_version}
@@ -52,7 +52,7 @@ Requires: uuid-runtime
 %endif
 
 %if 0%{?fedora_version}
-BuildRequires: glib2-devel popt-devel dbus-glib-devel rpm-devel
+BuildRequires: glib2-devel popt-devel rpm-devel
 %endif
 
 %if 0%{?mandriva_version}
@@ -116,7 +116,7 @@ Authors:
 %package devel
 Requires:       libzypp == %{version}
 Requires:       libxml2-devel openssl-devel rpm-devel glibc-devel zlib-devel
-Requires:       bzip2 popt-devel dbus-1-devel glib2-devel hal-devel boost-devel libstdc++-devel
+Requires:       bzip2 popt-devel boost-devel libstdc++-devel
 Requires:       cmake
 Requires:       libcurl-devel >= %{min_curl_version}
 %if 0%{?suse_version}
