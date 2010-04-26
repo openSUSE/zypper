@@ -392,11 +392,16 @@ static void make_solver_test_case(Zypper & zypper)
 ZYppCommitPolicy get_commit_policy(Zypper & zypper)
 {
   ZYppCommitPolicy policy;
+  const parsed_opts & opts = zypper.cOpts();
 
-  if (zypper.cOpts().count("dry-run"))
+  if (opts.find("dry-run") != opts.end())
     policy.dryRun(true);
 
-  if (zypper.cOpts().count("download-only") || zypper.cOpts().count("download"))
+  if (opts.find("download") != opts.end()
+      || opts.find("download-only") != opts.end()
+      || opts.find("download-in-advance") != opts.end()
+      || opts.find("download-in-heaps") != opts.end()
+      || opts.find("download-as-needed") != opts.end())
     policy.downloadMode(get_download_option(zypper));
 
   policy.syncPoolAfterCommit(policy.dryRun() ? false : zypper.runningShell());
