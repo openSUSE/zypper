@@ -1,4 +1,11 @@
 -------------------------------------------------------------------
+Mon Apr 26 11:57:23 CEST 2010 - ma@suse.de
+
+- Support URLs and ISOs ending on 'Media1', 'Media2', etc., when 
+  rewiting the URL to access a specific media number. By now only
+  nanmes ending on 'CD' or 'DVD' were supported. (bnc#594850)
+
+-------------------------------------------------------------------
 Fri Apr 23 01:13:34 CEST 2010 - ma@suse.de
 
 - Update translations.
