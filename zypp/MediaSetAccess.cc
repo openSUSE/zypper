@@ -390,7 +390,7 @@ IMPL_PTR_TYPE(MediaSetAccess);
       // code has to be adapted together with the MediaISO change.
       // maybe some MediaISOURL interface should be used.
       std::string isofile = url_r.getQueryParam("iso");
-      str::regex e("^(.*)(cd|dvd)[0-9]+\\.iso$", str::regex::icase);
+      str::regex e("^(.*)(cd|dvd|media)[0-9]+\\.iso$", str::regex::icase);
 
       str::smatch what;
       if(str::regex_match(isofile, what, e))
@@ -405,7 +405,7 @@ IMPL_PTR_TYPE(MediaSetAccess);
     else
     {
       std::string pathname = url_r.getPathName();
-      str::regex e("^(.*)(cd|dvd)[0-9]+(/)?$", str::regex::icase);
+      str::regex e("^(.*)(cd|dvd|media)[0-9]+(/)?$", str::regex::icase);
       str::smatch what;
       if(str::regex_match(pathname, what, e))
       {
