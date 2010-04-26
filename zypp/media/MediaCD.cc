@@ -9,7 +9,15 @@
 /** \file zypp/media/MediaCD.cc
  *
 */
+extern "C"
+{
+#include <sys/ioctl.h>
+#include <linux/cdrom.h>
+#include <libudev.h>
+}
 
+#include <cstring> // strerror
+#include <cstdlib> // getenv
 #include <iostream>
 
 #include "zypp/base/Logger.h"
@@ -18,19 +26,9 @@
 #include "zypp/media/MediaCD.h"
 #include "zypp/media/MediaManager.h"
 #include "zypp/Url.h"
+#include "zypp/AutoDispose.h"
 
-#include <cstring> // strerror
-#include <cstdlib> // getenv
 
-#include <errno.h>
-#include <dirent.h>
-
-#include <sys/ioctl.h>
-#include <sys/stat.h>
-#include <fcntl.h>
-#include <unistd.h> // geteuid, ...
-
-#include <linux/cdrom.h>
 
 /*
 ** if to throw exception on eject errors or ignore them
@@ -202,30 +200,62 @@ namespace zypp {
   //  METHOD NAME : MediaCD::detectDevices
   //  METHOD TYPE : MediaCD::DeviceList
   //
-  MediaCD::DeviceList
-  MediaCD::detectDevices(bool supportingDVD) const
+  MediaCD::DeviceList MediaCD::detectDevices( bool supportingDVD ) const
   {
+    zypp::AutoDispose<struct udev *> udev( ::udev_new(), ::udev_unref );
+    if ( ! udev )
+    {
+      ERR << "Can't create udev context." << endl;
+      return DeviceList();
+    }
+
+    zypp::AutoDispose<struct udev_enumerate *> enumerate( ::udev_enumerate_new(udev), ::udev_enumerate_unref );
+    if ( ! enumerate )
+    {
+      ERR << "Can't create udev list entry." << endl;
+      return DeviceList();
+    }
+
+    ::udev_enumerate_add_match_subsystem( enumerate, "block" );
+    ::udev_enumerate_add_match_property( enumerate, "ID_CDROM", "1" );
+    ::udev_enumerate_scan_devices( enumerate );
+
     DeviceList detected;
-
-#warning Poor CDROM devices detection without HAL
-    /** \todo rewite using e.g. 'hwinfo --cdrom' or libudev */
-    WAR << "Cdrom drive detection without HAL! " << std::endl;
-    PathInfo dvdinfo( "/dev/dvd" );
-    PathInfo cdrinfo( "/dev/cdrom" );
-    if ( dvdinfo.isBlk() )
+    struct udev_list_entry * entry = 0;
+    udev_list_entry_foreach( entry, ::udev_enumerate_get_list_entry( enumerate ) )
     {
-      MediaSource media( "cdrom", dvdinfo.path().asString(), dvdinfo.major(), dvdinfo.minor() );
-      DBG << "Found (NO_HAL): " << media << std::endl;
-      detected.push_back( media );
-    }
-    if ( cdrinfo.isBlk()
-         && ! ( cdrinfo.major() == dvdinfo.major() && cdrinfo.minor() == dvdinfo.minor() ) )
-    {
-      MediaSource media( "cdrom", cdrinfo.path().asString(), cdrinfo.major(), cdrinfo.minor() );
-      DBG << "Found (NO_HAL): " << media << std::endl;
-      detected.push_back( media );
-    }
+      zypp::AutoDispose<struct udev_device *> device( ::udev_device_new_from_syspath( ::udev_enumerate_get_udev( enumerate ),
+										      ::udev_list_entry_get_name( entry ) ),
+						      ::udev_device_unref );
+      if ( ! device )
+      {
+	ERR << "Can't create udev device." << endl;
+	continue;
+      }
 
+      if ( supportingDVD && ! ::udev_device_get_property_value( device, "ID_CDROM_DVD" ) )
+      {
+	continue;	// looking for dvd only
+      }
+
+      const char * devnodePtr( ::udev_device_get_devnode( device ) );
+      if ( ! devnodePtr )
+      {
+	ERR << "Got NULL devicenode." << endl;
+	continue;
+      }
+
+      // In case we need it someday:
+      //const char * mountpath = ::udev_device_get_property_value( device, "FSTAB_DIR" );
+
+      PathInfo devnode( devnodePtr );
+      if ( devnode.isBlk() )
+      {
+	MediaSource media( "cdrom", devnode.path().asString(), devnode.major(), devnode.minor() );
+	DBG << "Found (udev): " << media << std::endl;
+	detected.push_back( media );
+      }
+    }
     return detected;
   }
 
