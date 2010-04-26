@@ -11,6 +11,7 @@
 
 #include "zypp/ZYpp.h"
 #include "zypp/base/Algorithm.h"
+#include "zypp/Package.h"
 #include "zypp/Patch.h"
 #include "zypp/Pattern.h"
 #include "zypp/Product.h"
@@ -173,6 +174,7 @@ void printPkgInfo(Zypper & zypper, const ui::Selectable & s)
   PoolItem theone = s.updateCandidateObj();
   if (!theone)
     theone = installed;
+  Package::constPtr pkg = asKind<Package>(theone.resolvable());
 
   cout << (zypper.globalOpts().is_rug_compatible ? _("Catalog: ") : _("Repository: "))
        << (zypper.config().show_alias ?
@@ -180,6 +182,11 @@ void printPkgInfo(Zypper & zypper, const ui::Selectable & s)
            theone.resolvable()->repository().info().name()) << endl;
 
   printNVA(theone.resolvable());
+
+  // if running on SUSE Linux Enterprise, report unsupported packages
+  Product::constPtr platform = God->target()->baseProduct();
+  if (platform && platform->name().find("SUSE_SLE") != string::npos)
+    cout << _("Support Level: ") << asUserString(pkg->vendorSupport()) << endl;
 
   cout << _("Installed: ") << (installed ? _("Yes") : _("No")) << endl;
 
