@@ -363,7 +363,7 @@ namespace zypp
       //@{
       /** Returns true for packages, because packages are not
        * classified by the solver.
-      */
+       */
       bool isUndetermined() const;
 
       /** Returns true if the patch is relevant which means that at least
@@ -377,17 +377,20 @@ namespace zypp
       /** Whether a relevant patchs requirements are broken. */
       bool isBroken() const;
 
-      /** This includes still broken patches, as well as those already
-       *  selected to be installed.
-       * This is because already selected patches will be classified as
-       * \c satisfied.
+      /** This includes \c unlocked broken patches, as well as those already
+       * selected to be installed. This is because already selected
+       * patches will be classified as \c satisfied. \c Locked but broken
+       * patches will be classified as \ref isUnwanted.
        */
       bool isNeeded() const;
+
+      /** Broken (needed) but locked patches. */
+       bool isUnwanted() const;
       //@}
 
      public:
       /** \name Query and maip objects fate in case of commit.
-      */
+       */
       //@{
       enum Fate {
         TO_DELETE  = -1,

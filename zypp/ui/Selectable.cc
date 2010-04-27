@@ -182,7 +182,12 @@ namespace zypp
 
     bool Selectable::isNeeded() const
     {
-      return fate() == TO_INSTALL || isBroken() ;
+      return fate() == TO_INSTALL || ( ! locked() && isBroken() );
+    }
+
+    bool Selectable::isUnwanted() const
+    {
+      return locked() && isBroken() ;
     }
 
     ResStatus::TransactByValue Selectable::modifiedBy() const
