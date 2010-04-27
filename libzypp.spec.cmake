@@ -28,6 +28,7 @@ Recommends:     logrotate
 %endif
 BuildRequires:  cmake
 BuildRequires:  openssl-devel
+BuildRequires:  libudev-devel
 BuildRequires:  boost-devel dejagnu doxygen gcc-c++ gettext-devel graphviz libxml2-devel
 
 BuildRequires:  libsatsolver-devel >= 0.14.13
@@ -117,6 +118,7 @@ Authors:
 Requires:       libzypp == %{version}
 Requires:       libxml2-devel openssl-devel rpm-devel glibc-devel zlib-devel
 Requires:       bzip2 popt-devel boost-devel libstdc++-devel
+Requires:       libudev-devel
 Requires:       cmake
 Requires:       libcurl-devel >= %{min_curl_version}
 %if 0%{?suse_version}
