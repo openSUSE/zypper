@@ -1,4 +1,9 @@
 -------------------------------------------------------------------
+Wed Apr 28 01:13:37 CEST 2010 - ma@suse.de
+
+- Update translations.
+
+-------------------------------------------------------------------
 Tue Apr 27 17:42:20 CEST 2010 - ma@suse.de
 
 - Selectable: Classify broken but locked patch as isUnwanted (bnc#577118)
