@@ -1,4 +1,10 @@
 -------------------------------------------------------------------
+Tue Apr 27 17:42:20 CEST 2010 - ma@suse.de
+
+- Selectable: Classify broken but locked patch as isUnwanted (bnc#577118)
+- version 7.3.0 (2)
+
+-------------------------------------------------------------------
 Tue Apr 27 11:25:17 CEST 2010 - ma@suse.de
 
 - Use libudev to detect available cd/dvd devices (bnc#590707,fate#308980)
