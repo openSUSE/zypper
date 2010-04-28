@@ -1,4 +1,9 @@
 -------------------------------------------------------------------
+Wed Apr 28 13:51:17 CEST 2010 - ma@suse.de
+
+- Fix 'zypper ps' not printing the first file twice. (bnc#599265)
+
+-------------------------------------------------------------------
 Wed Apr 28 13:20:29 CEST 2010 - ma@suse.de
 
 - Fix segv when printing solver feedback. (bnc#600236)
