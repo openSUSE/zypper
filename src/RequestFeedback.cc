@@ -6,7 +6,7 @@
 \*---------------------------------------------------------------------------*/
 
 /** \file RequestFeedback.cc
- * 
+ *
  */
 
 #include "zypp/base/LogTools.h"
@@ -97,7 +97,7 @@ string SolverRequester::Feedback::asUserString(
   case NO_UPD_CANDIDATE:
   {
     PoolItem highest = asSelectable()(_objinst)->highestAvailableVersionObj();
-    if (identical(_objinst, highest) || _objinst->edition() > highest->edition())
+    if (highest  && (identical(_objinst, highest) || _objinst->edition() > highest->edition()))
       return str::form(
           _("No update candidate for '%s'."
             " The highest available version is already installed."),
