@@ -941,59 +941,64 @@ string SATResolver::SATprobleminfoString(Id problem, string &detail, Id &ignoreI
 
   ignoreId = 0;
   probr = solver_findproblemrule(_solv, problem);
-  switch (solver_problemruleinfo(_solv, &(_jobQueue), probr, &dep, &source, &target))
+  switch (solver_ruleinfo(_solv, probr, &source, &target, &dep))
   {
-      case SOLVER_PROBLEM_DISTUPGRADE_RULE:
+      case SOLVER_RULE_DISTUPGRADE:
 	  s = mapSolvable (source);
 	  ret = str::form (_("%s does not belong to a distupgrade repository"), s.asString().c_str());
   	  break;
-      case SOLVER_PROBLEM_INFARCH_RULE:
+      case SOLVER_RULE_INFARCH:
 	  s = mapSolvable (source);
 	  ret = str::form (_("%s has inferior architecture"), s.asString().c_str());
 	  break;
-      case SOLVER_PROBLEM_UPDATE_RULE:
+      case SOLVER_RULE_UPDATE:
 	  s = mapSolvable (source);
 	  ret = str::form (_("problem with installed package %s"), s.asString().c_str());
 	  break;
-      case SOLVER_PROBLEM_JOB_RULE:
+      case SOLVER_RULE_JOB:
 	  ret = _("conflicting requests");
 	  break;
-      case SOLVER_PROBLEM_RPM_RULE:
+      case SOLVER_RULE_RPM:
 	  ret = _("some dependency problem");
 	  break;
-      case SOLVER_PROBLEM_JOB_NOTHING_PROVIDES_DEP:
+      case SOLVER_RULE_JOB_NOTHING_PROVIDES_DEP:
 	  ret = str::form (_("nothing provides requested %s"), dep2str(pool, dep));
 	  detail += _("Have you enabled all requested repositories?");
 	  break;
-      case SOLVER_PROBLEM_NOT_INSTALLABLE:
+      case SOLVER_RULE_RPM_NOT_INSTALLABLE:
 	  s = mapSolvable (source);
 	  ret = str::form (_("%s is not installable"), s.asString().c_str());
 	  break;
-      case SOLVER_PROBLEM_NOTHING_PROVIDES_DEP:
+      case SOLVER_RULE_RPM_NOTHING_PROVIDES_DEP:
 	  ignoreId = source; // for setting weak dependencies
 	  s = mapSolvable (source);
 	  ret = str::form (_("nothing provides %s needed by %s"), dep2str(pool, dep), s.asString().c_str());
 	  break;
-      case SOLVER_PROBLEM_SAME_NAME:
+      case SOLVER_RULE_RPM_SAME_NAME:
 	  s = mapSolvable (source);
 	  s2 = mapSolvable (target);
 	  ret = str::form (_("cannot install both %s and %s"), s.asString().c_str(), s2.asString().c_str());
 	  break;
-      case SOLVER_PROBLEM_PACKAGE_CONFLICT:
+      case SOLVER_RULE_RPM_PACKAGE_CONFLICT:
 	  s = mapSolvable (source);
 	  s2 = mapSolvable (target);
 	  ret = str::form (_("%s conflicts with %s provided by %s"), s.asString().c_str(), dep2str(pool, dep), s2.asString().c_str());
 	  break;
-      case SOLVER_PROBLEM_PACKAGE_OBSOLETES:
+      case SOLVER_RULE_RPM_PACKAGE_OBSOLETES:
 	  s = mapSolvable (source);
 	  s2 = mapSolvable (target);
 	  ret = str::form (_("%s obsoletes %s provided by %s"), s.asString().c_str(), dep2str(pool, dep), s2.asString().c_str());
 	  break;
-      case SOLVER_PROBLEM_SELF_CONFLICT:
+      case SOLVER_RULE_RPM_INSTALLEDPKG_OBSOLETES:
+	  s = mapSolvable (source);
+	  s2 = mapSolvable (target);
+	  ret = str::form (_("installed %s obsoletes %s provided by %s"), s.asString().c_str(), dep2str(pool, dep), s2.asString().c_str());
+	  break;
+      case SOLVER_RULE_RPM_SELF_CONFLICT:
 	  s = mapSolvable (source);
 	  ret = str::form (_("solvable %s conflicts with %s provided by itself"), s.asString().c_str(), dep2str(pool, dep));
           break;
-      case SOLVER_PROBLEM_DEP_PROVIDERS_NOT_INSTALLABLE:
+      case SOLVER_RULE_RPM_PACKAGE_REQUIRES:
 	  ignoreId = source; // for setting weak dependencies
 	  s = mapSolvable (source);
 	  Capability cap(dep);
