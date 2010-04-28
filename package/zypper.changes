@@ -1,4 +1,9 @@
 -------------------------------------------------------------------
+Wed Apr 28 13:20:29 CEST 2010 - ma@suse.de
+
+- Fix segv when printing solver feedback. (bnc#600236)
+
+-------------------------------------------------------------------
 Mon Apr 26 10:58:57 CEST 2010 - jkupec@suse.cz
 
 - Fixed ignored --download-* options (bnc #598268).
