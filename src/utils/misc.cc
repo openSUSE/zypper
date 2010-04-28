@@ -432,7 +432,7 @@ void list_processes_using_deleted_files(Zypper & zypper)
     tr << it->pid << it->ppid << it->puid << it->login << it->command
       << it->service() << (fit != it->files.end() ? *fit : "");
     t << tr;
-    for (; fit != it->files.end(); ++fit)
+    for (++fit; fit != it->files.end(); ++fit)
     {
       TableRow tr1;
       tr1 << "" << "" << "" << "" << "" << "" << *fit;
