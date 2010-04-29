@@ -31,8 +31,8 @@
  * \endcode
 */
 #define arrayBegin(A) (&A[0])
-#define arrayEnd(A)   (&A[0] + (sizeof(A)/sizeof(*A)))
-
+#define arraySize(A)  (sizeof(A)/sizeof(*A))
+#define arrayEnd(A)   (&A[0] + arraySize(A))
 
 ///////////////////////////////////////////////////////////////////
 namespace zypp
