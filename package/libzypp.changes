@@ -1,4 +1,9 @@
 -------------------------------------------------------------------
+Fri Apr 30 01:13:46 CEST 2010 - ma@suse.de
+
+- Update translations.
+
+-------------------------------------------------------------------
 Thu Apr 29 17:10:29 CEST 2010 - ma@suse.de
 
 - Cleanup when deleting packages. New zypp.conf global option 
