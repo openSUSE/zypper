@@ -76,8 +76,7 @@ std::ostream & dumpOn( std::ostream & str, const Url & obj )
 
 int main( int argc, char * argv[] )
 try {
-  --argc;
-  ++argv;
+  --argc,++argv;
   zypp::base::LogControl::instance().logToStdErr();
   INT << "===[START]==========================================" << endl;
   ///////////////////////////////////////////////////////////////////
@@ -90,13 +89,43 @@ try {
   TestSetup::LoadSystemAt( sysRoot, Arch_i586 );
   ///////////////////////////////////////////////////////////////////
 
-  ui::Selectable::Ptr p( getSel<Package>( "kruler" ) );
-  if ( p )
+  char * fix[] = {
+      "test"
+  };
+  argv = fix;
+  argc = arraySize(fix);
+  for ( ; argc; --argc,++argv )
   {
-    USR << p->setToDelete() << endl;
-    getZYpp()->resolver()->setCleandepsOnRemove( true );
-    solve();
+    ui::Selectable::Ptr p( getSel<Package>( *argv ) );
+    if ( p )
+      USR << p->setToDelete() << endl;
+    else
+      ERR << p << endl;
   }
+
+  std::set<PoolItem> todel;
+  {
+    getZYpp()->resolver()->setCleandepsOnRemove( false );
+    SEC << "=== Solve noclean:" << endl;
+    solve();
+    std::copy( make_filter_begin<resfilter::ByTransact>(pool),
+	       make_filter_end<resfilter::ByTransact>(pool),
+	       std::inserter( todel, todel.begin() ) );
+    WAR << todel << endl;
+  }
+  {
+    getZYpp()->resolver()->setCleandepsOnRemove( true );
+    SEC << "=== Solve clean:" << endl;
+    solve();
+    SEC << "========================================================" << endl;
+    for_( it, make_filter_begin<resfilter::ByTransact>(pool), make_filter_end<resfilter::ByTransact>(pool) )
+    {
+      ( todel.find( *it ) == todel.end() ? INT : USR ) << *it << endl;
+    }
+    SEC << "========================================================" << endl;
+  }
+
+
 
   ///////////////////////////////////////////////////////////////////
   INT << "===[END]============================================" << endl << endl;
