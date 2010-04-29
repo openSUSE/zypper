@@ -620,12 +620,11 @@ namespace zypp
       if(str::regex_match(line, what, rxNoKey))
       {
         if ( what.size() >= 1 )
+	{
           id = what[1];
+	  break;
+	}
         //dumpRegexpResults(what);
-      }
-      else
-      {
-        MIL << "'" << line << "'" << endl;
       }
     }
 
