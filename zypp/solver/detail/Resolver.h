@@ -113,6 +113,7 @@ class Resolver : public base::ReferenceCounted, private base::NonCopyable {
                                   // packages, hardware packages (modalias)
     bool _allowVendorChange;	// whether the solver should allow or disallow vendor changes.
     bool _solveSrcPackages;	// whether to generate solver jobs for selected source packges.
+    bool _cleandepsOnRemove;	// whether removing a package should also remove no longer needed requirements
 
     bool _ignoreAlreadyRecommended;   //ignore recommended packages that have already been recommended by the installed packages
     //@}
@@ -168,8 +169,8 @@ class Resolver : public base::ReferenceCounted, private base::NonCopyable {
     void removeQueueItem( SolverQueueItem_Ptr item );
     void addQueueItem( SolverQueueItem_Ptr item );
 
-    CapabilitySet extraRequires()	{ return _extra_requires; }
-    CapabilitySet extraConflicts()	{ return _extra_conflicts; }
+    CapabilitySet extraRequires() const		{ return _extra_requires; }
+    CapabilitySet extraConflicts() const	{ return _extra_conflicts; }
 
     void addWeak( const PoolItem & item );
 
@@ -204,6 +205,9 @@ class Resolver : public base::ReferenceCounted, private base::NonCopyable {
 
     bool solveSrcPackages() const 		{ return _solveSrcPackages; }
     void setSolveSrcPackages( TriBool state_r )	{ _solveSrcPackages = indeterminate(state_r) ? false : bool(state_r); }
+
+    bool cleandepsOnRemove() const 		{ return _cleandepsOnRemove; }
+    void setCleandepsOnRemove( TriBool state_r );
     //@}
 
     ResolverProblemList problems() const;

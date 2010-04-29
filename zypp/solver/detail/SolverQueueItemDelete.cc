@@ -24,6 +24,7 @@ extern "C"
 
 #include "zypp/base/Logger.h"
 #include "zypp/IdString.h"
+#include "zypp/Resolver.h"
 #include "zypp/solver/detail/SolverQueueItemDelete.h"
 
 /////////////////////////////////////////////////////////////////////////
@@ -69,11 +70,13 @@ SolverQueueItemDelete::~SolverQueueItemDelete()
 
 bool SolverQueueItemDelete::addRule (_Queue & q)
 {
+#define MAYBE_CLEANDEPS (pool().resolver().cleandepsOnRemove()?SOLVER_CLEANDEPS:0)
+
     ::Id id = IdString(_name).id();
     if (_soft) {
-	queue_push( &(q), SOLVER_ERASE_SOLVABLE_NAME | SOLVER_WEAK);
+	queue_push( &(q), SOLVER_ERASE_SOLVABLE_NAME | SOLVER_WEAK | MAYBE_CLEANDEPS );
     } else {
-	queue_push( &(q), SOLVER_ERASE_SOLVABLE_NAME );
+	queue_push( &(q), SOLVER_ERASE_SOLVABLE_NAME | MAYBE_CLEANDEPS );
     }
     queue_push( &(q), id);
 

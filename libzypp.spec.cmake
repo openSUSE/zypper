@@ -31,7 +31,7 @@ BuildRequires:  openssl-devel
 BuildRequires:  libudev-devel
 BuildRequires:  boost-devel dejagnu doxygen gcc-c++ gettext-devel graphviz libxml2-devel
 
-BuildRequires:  libsatsolver-devel >= 0.14.13
+BuildRequires:  libsatsolver-devel >= 0.14.17
 %if 0%{?suse_version}
 %requires_eq    satsolver-tools
 %else

@@ -33,9 +33,8 @@ namespace zypp
   //	METHOD TYPE : Ctor
   //
   Resolver::Resolver( const ResPool & pool )
-  {
-    _pimpl = new solver::detail::Resolver(pool);
-  }
+  : _pimpl( new Impl(pool) )
+  {}
 
   ///////////////////////////////////////////////////////////////////
   //
@@ -75,14 +74,14 @@ namespace zypp
   { _pimpl->doUpdate(); }
 
   void Resolver::setForceResolve( bool yesno_r )	{ _pimpl->setForceResolve( yesno_r ); }
-  bool Resolver::forceResolve()				{ return _pimpl->forceResolve(); }
+  bool Resolver::forceResolve() const			{ return _pimpl->forceResolve(); }
 
   void Resolver::setIgnoreAlreadyRecommended( bool yesno_r) { _pimpl->setIgnoreAlreadyRecommended( yesno_r ); }
-  bool Resolver::ignoreAlreadyRecommended()		{ return _pimpl->ignoreAlreadyRecommended(); }
+  bool Resolver::ignoreAlreadyRecommended() const	{ return _pimpl->ignoreAlreadyRecommended(); }
 
   void Resolver::setOnlyRequires( bool yesno_r )	{ _pimpl->setOnlyRequires( yesno_r ); }
   void Resolver::resetOnlyRequires()			{ _pimpl->setOnlyRequires( indeterminate ); }
-  bool Resolver::onlyRequires()				{ return _pimpl->onlyRequires(); }
+  bool Resolver::onlyRequires() const			{ return _pimpl->onlyRequires(); }
 
   bool Resolver::upgradeMode() const			{ return _pimpl->isUpgradeMode(); }
 
@@ -98,6 +97,10 @@ namespace zypp
   void Resolver::setDefaultSolveSrcPackages()		{ _pimpl->setSolveSrcPackages( indeterminate ); }
   bool Resolver::solveSrcPackages() const		{ return _pimpl->solveSrcPackages(); }
 
+  void Resolver::setCleandepsOnRemove( bool yesno_r )	{ _pimpl->setCleandepsOnRemove( yesno_r ); }
+  void Resolver::setDefaultCleandepsOnRemove()		{ _pimpl->setCleandepsOnRemove( indeterminate ); }
+  bool Resolver::cleandepsOnRemove() const		{ return _pimpl->cleandepsOnRemove(); }
+
   void Resolver::addUpgradeRepo( Repository repo_r )	{ _pimpl->addUpgradeRepo( repo_r ); }
   bool Resolver::upgradingRepo( Repository repo_r ) const { return _pimpl->upgradingRepo( repo_r ); }
   void Resolver::removeUpgradeRepo( Repository repo_r )	{ _pimpl->removeUpgradeRepo( repo_r ); }
@@ -108,8 +111,8 @@ namespace zypp
   void Resolver::removeRequire( const Capability & capability )	{ _pimpl->removeExtraRequire( capability ); }
   void Resolver::removeConflict( const Capability & capability ){ _pimpl->removeExtraConflict( capability ); }
 
-  CapabilitySet Resolver::getRequire()	{ return _pimpl->extraRequires(); }
-  CapabilitySet Resolver::getConflict()	{ return _pimpl->extraConflicts(); }
+  CapabilitySet Resolver::getRequire() const	{ return _pimpl->extraRequires(); }
+  CapabilitySet Resolver::getConflict() const	{ return _pimpl->extraConflicts(); }
 
   std::list<PoolItem> Resolver::problematicUpdateItems() const
   { return _pimpl->problematicUpdateItems(); }
@@ -135,7 +138,8 @@ namespace zypp
   void Resolver::reset()
   { _pimpl->reset( false ); /* Do not keep extra requires/conflicts */ }
 
-
+  std::ostream & operator<<( std::ostream & str, const Resolver & obj )
+  { return str << *obj._pimpl; }
 
   /////////////////////////////////////////////////////////////////
 } // namespace zypp

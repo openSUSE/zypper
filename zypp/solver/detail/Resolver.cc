@@ -58,7 +58,19 @@ IMPL_PTR_TYPE(Resolver);
 
 std::ostream & Resolver::dumpOn( std::ostream & os ) const
 {
-    return os << "<resolver/>";
+  os << "<resolver>" << endl;
+  #define OUTS(t) os << "  " << #t << ":\t" << t << endl;
+  OUTS( _forceResolve );
+  OUTS( _upgradeMode );
+  OUTS( _updateMode );
+  OUTS( _verifying );
+  OUTS( _onlyRequires );
+  OUTS( _allowVendorChange );
+  OUTS( _solveSrcPackages );
+  OUTS( _cleandepsOnRemove );
+  OUTS( _ignoreAlreadyRecommended );
+  #undef OUT
+  return os << "<resolver/>";
 }
 
 
@@ -75,7 +87,8 @@ Resolver::Resolver (const ResPool & pool)
     , _onlyRequires		( ZConfig::instance().solver_onlyRequires() )
     , _allowVendorChange	( ZConfig::instance().solver_allowVendorChange() )
     , _solveSrcPackages		( false )
-    , _ignoreAlreadyRecommended	(false)
+    , _cleandepsOnRemove	( ZConfig::instance().solver_cleandepsOnRemove() )
+    , _ignoreAlreadyRecommended	(true)
 
 {
     sat::Pool satPool( sat::Pool::instance() );
@@ -98,6 +111,11 @@ void Resolver::setAllowVendorChange( TriBool state_r )
 void Resolver::setOnlyRequires( TriBool state_r )
 {
   _onlyRequires = indeterminate(state_r) ? ZConfig::instance().solver_onlyRequires() : bool(state_r);
+}
+
+void Resolver::setCleandepsOnRemove( TriBool state_r )
+{
+  _cleandepsOnRemove = indeterminate(state_r) ? ZConfig::instance().solver_cleandepsOnRemove() : bool(state_r);
 }
 
 //---------------------------------------------------------------------------
@@ -272,6 +290,7 @@ void Resolver::solverInit()
     _satResolver->setNoupdateprovide		(false);
     _satResolver->setDosplitprovides		(false);
     _satResolver->setSolveSrcPackages		( solveSrcPackages() );
+    _satResolver->setCleandepsOnRemove		( cleandepsOnRemove() );
 
     if (_upgradeMode) {
       // may overwrite some settings

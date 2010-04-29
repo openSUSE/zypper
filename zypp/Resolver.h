@@ -161,14 +161,14 @@ namespace zypp
      * This behaviour is favourited by ZMD.
      **/
     void setForceResolve( bool force );
-    bool forceResolve();
+    bool forceResolve() const;
 
     /**
      * Ignore recommended packages that were already recommended by
      * the installed packages
      **/
     void setIgnoreAlreadyRecommended( bool yesno_r );
-    bool ignoreAlreadyRecommended();
+    bool ignoreAlreadyRecommended() const;
 
     /**
      * Setting whether required packages are installed ONLY
@@ -177,7 +177,7 @@ namespace zypp
      **/
     void setOnlyRequires( bool yesno_r );
     void resetOnlyRequires(); // set back to default (described in zypp.conf)
-    bool onlyRequires();
+    bool onlyRequires() const;
 
     /**
      * Whether the \ref Resolver is in upgrade mode.
@@ -217,6 +217,14 @@ namespace zypp
     void setSolveSrcPackages( bool yesno_r );
     void setDefaultSolveSrcPackages();
     bool solveSrcPackages() const;
+
+    /**
+     * Cleanup when deleting packages. Whether the solver should per default
+     * try to remove packages exclusively required by the ones he's asked to delete.
+     */
+    void setCleandepsOnRemove( bool yesno_r );
+    void setDefaultCleandepsOnRemove(); // set back to default (in zypp.conf)
+    bool cleandepsOnRemove() const;
 
     /** \name Upgrade to content of a specific repository.
      * \note This is an ordinary solver request. You should simply
@@ -275,13 +283,13 @@ namespace zypp
      * Get all the additional requirements set by \ref addRequire(Capability).
      *
      */
-    CapabilitySet getRequire();
+    CapabilitySet getRequire() const;
 
     /**
      * Get all the additional conflicts set by \ref addConflict(Capability).
      *
      */
-    CapabilitySet getConflict();
+    CapabilitySet getConflict() const;
 
     /**
      * Generates a solver Testcase of the current state
@@ -357,11 +365,16 @@ namespace zypp
     solver::detail::ItemCapKindList installedSatisfied( const PoolItem & item );
 
 
-
   private:
-    solver::detail::Resolver_Ptr _pimpl;
+    friend std::ostream & operator<<( std::ostream & str, const Resolver & obj );
+
+    typedef solver::detail::Resolver Impl;
+    zypp::RW_pointer<Impl,rw_pointer::Intrusive<Impl> > _pimpl;
   };
   ///////////////////////////////////////////////////////////////////
+
+  /** \relates Resolver Stream output */
+  std::ostream & operator<<( std::ostream & str, const Resolver & obj );
 
   /////////////////////////////////////////////////////////////////
 } // namespace zypp

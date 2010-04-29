@@ -254,6 +254,11 @@ namespace zypp
       bool solver_allowVendorChange() const;
 
       /**
+       * Whether removing a package should also remove no longer needed requirements.
+       */
+      bool solver_cleandepsOnRemove() const;
+
+      /**
        * When committing a dist upgrade (e.g. <tt>zypper dup</tt>)
        * a solver testcase is written. It is needed in bugreports,
        * in case something went wrong. This returns the number of

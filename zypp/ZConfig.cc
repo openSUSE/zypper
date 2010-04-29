@@ -229,6 +229,7 @@ namespace zypp
         , commit_downloadMode		( DownloadDefault )
         , solver_onlyRequires		( false )
         , solver_allowVendorChange	( false )
+        , solver_cleandepsOnRemove	( false )
         , solver_upgradeTestcasesToKeep	( 2 )
         , solverUpgradeRemoveDroppedPackages( true )
         , apply_locks_file		( true )
@@ -356,6 +357,10 @@ namespace zypp
                 {
                   solver_allowVendorChange.set( str::strToBool( value, solver_allowVendorChange ) );
                 }
+                else if ( entry == "solver.cleandepsOnRemove" )
+                {
+                  solver_cleandepsOnRemove.set( str::strToBool( value, solver_cleandepsOnRemove ) );
+                }
                 else if ( entry == "solver.upgradeTestcasesToKeep" )
                 {
                   solver_upgradeTestcasesToKeep.set( str::strtonum<unsigned>( value ) );
@@ -479,6 +484,7 @@ namespace zypp
 
     Option<bool>	solver_onlyRequires;
     Option<bool>	solver_allowVendorChange;
+    Option<bool>	solver_cleandepsOnRemove;
     Option<unsigned>	solver_upgradeTestcasesToKeep;
     DefaultOption<bool> solverUpgradeRemoveDroppedPackages;
 
@@ -701,6 +707,9 @@ namespace zypp
 
   bool ZConfig::solver_allowVendorChange() const
   { return _pimpl->solver_allowVendorChange; }
+
+  bool ZConfig::solver_cleandepsOnRemove() const
+  { return _pimpl->solver_cleandepsOnRemove; }
 
   Pathname ZConfig::solver_checkSystemFile() const
   { return ( _pimpl->solver_checkSystemFile.empty()

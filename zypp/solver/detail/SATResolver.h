@@ -97,6 +97,7 @@ class SATResolver : public base::ReferenceCounted, private base::NonCopyable {
     bool _distupgrade;
     bool _distupgrade_removeunsupported;
     bool _solveSrcPackages;		// false: generate no job rule for source packages selected in the pool
+    bool _cleandepsOnRemove;		// whether removing a package should also remove no longer needed requirements
 
     // ---------------------------------- methods
     std::string SATprobleminfoString (Id problem, std::string &detail, Id &ignoreId);
@@ -200,6 +201,9 @@ class SATResolver : public base::ReferenceCounted, private base::NonCopyable {
 
     bool solveSrcPackages() const 		{ return _solveSrcPackages; }
     void setSolveSrcPackages( bool state_r )	{ _solveSrcPackages = state_r; }
+
+    bool cleandepsOnRemove() const 		{ return _cleandepsOnRemove; }
+    void setCleandepsOnRemove( bool state_r )	{ _cleandepsOnRemove = state_r; }
 
     PoolItemList problematicUpdateItems( void ) const { return _problem_items; }
 

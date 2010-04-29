@@ -66,6 +66,8 @@ using namespace std;
 
 IMPL_PTR_TYPE(SATResolver);
 
+#define MAYBE_CLEANDEPS (cleandepsOnRemove()?SOLVER_CLEANDEPS:0)
+
 //---------------------------------------------------------------------------
 // Callbacks for SAT policies
 //---------------------------------------------------------------------------
@@ -121,6 +123,7 @@ SATResolver::dumpOn( std::ostream & os ) const
 	os << "  distupgrade = " << _distupgrade << endl;
         os << "  distupgrade_removeunsupported = " << _distupgrade_removeunsupported << endl;
 	os << "  solveSrcPackages = " << _solveSrcPackages << endl;
+	os << "  cleandepsOnRemove = " << _cleandepsOnRemove << endl;
     } else {
 	os << "<NULL>";
     }
@@ -136,16 +139,17 @@ SATResolver::SATResolver (const ResPool & pool, Pool *SATPool)
     , _fixsystem(false)
     , _allowdowngrade(false)
     , _allowarchchange(false)
-    , _allowvendorchange(false)
+    , _allowvendorchange(ZConfig::instance().solver_allowVendorChange())
     , _allowuninstall(false)
     , _updatesystem(false)
     , _noupdateprovide(false)
     , _dosplitprovides(false)
     , _onlyRequires(ZConfig::instance().solver_onlyRequires())
-    , _ignorealreadyrecommended(false)
+    , _ignorealreadyrecommended(true)
     , _distupgrade(false)
     , _distupgrade_removeunsupported(false)
-
+    , _solveSrcPackages(false)
+    , _cleandepsOnRemove(ZConfig::instance().solver_cleandepsOnRemove())
 {
 }
 
@@ -694,7 +698,7 @@ SATResolver::resolvePool(const CapabilitySet & requires_caps,
 	    ERR << "Delete: " << *iter << " not found" << endl;
 	} else {
 	    MIL << "Delete " << *iter << endl;
-	    queue_push( &(_jobQueue), SOLVER_ERASE_SOLVABLE );
+	    queue_push( &(_jobQueue), SOLVER_ERASE_SOLVABLE | MAYBE_CLEANDEPS );
 	    queue_push( &(_jobQueue), id);
 	}
     }
@@ -713,7 +717,7 @@ SATResolver::resolvePool(const CapabilitySet & requires_caps,
     }
 
     for (CapabilitySet::const_iterator iter = conflict_caps.begin(); iter != conflict_caps.end(); iter++) {
-	queue_push( &(_jobQueue), SOLVER_ERASE_SOLVABLE_PROVIDES);
+	queue_push( &(_jobQueue), SOLVER_ERASE_SOLVABLE_PROVIDES | MAYBE_CLEANDEPS );
 	queue_push( &(_jobQueue), iter->id() );
 	MIL << "Conflicts " << *iter << endl;
     }
@@ -763,7 +767,7 @@ SATResolver::resolveQueue(const SolverQueueItemList &requestQueue,
     for (PoolItemList::const_iterator iter = _items_to_remove.begin(); iter != _items_to_remove.end(); iter++) {
         sat::detail::IdType ident( (*iter)->satSolvable().ident().id() );
 	MIL << "Delete " << *iter << ident << endl;
-	queue_push( &(_jobQueue), SOLVER_ERASE_SOLVABLE_NAME );
+	queue_push( &(_jobQueue), SOLVER_ERASE_SOLVABLE_NAME | MAYBE_CLEANDEPS );
 	queue_push( &(_jobQueue), ident);
     }
 
@@ -1379,7 +1383,7 @@ void SATResolver::setLocks()
 	    queue_push( &(_jobQueue), ident );
 	} else {
 	    MIL << "Lock NOT installed item " << *iter << endl;
-	    queue_push( &(_jobQueue), SOLVER_ERASE_SOLVABLE );
+	    queue_push( &(_jobQueue), SOLVER_ERASE_SOLVABLE | MAYBE_CLEANDEPS );
 	    queue_push( &(_jobQueue), ident );
 	}
     }
@@ -1392,7 +1396,7 @@ void SATResolver::setLocks()
 	    queue_push( &(_jobQueue), ident );
 	} else {
 	    MIL << "Keep NOT installed item " << *iter << ident << endl;
-	    queue_push( &(_jobQueue), SOLVER_ERASE_SOLVABLE | SOLVER_WEAK);
+	    queue_push( &(_jobQueue), SOLVER_ERASE_SOLVABLE | SOLVER_WEAK | MAYBE_CLEANDEPS );
 	    queue_push( &(_jobQueue), ident );
 	}
     }
@@ -1410,7 +1414,7 @@ void SATResolver::setSystemRequirements()
     }
 
     for (CapabilitySet::const_iterator iter = system_conflicts.begin(); iter != system_conflicts.end(); iter++) {
-	queue_push( &(_jobQueue), SOLVER_ERASE_SOLVABLE_PROVIDES);
+	queue_push( &(_jobQueue), SOLVER_ERASE_SOLVABLE_PROVIDES | MAYBE_CLEANDEPS );
 	queue_push( &(_jobQueue), iter->id() );
 	MIL << "SYSTEM Conflicts " << *iter << endl;
     }
