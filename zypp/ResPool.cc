@@ -14,6 +14,7 @@
 
 #include "zypp/base/SerialNumber.h"
 
+#include "zypp/ZYppFactory.h"
 #include "zypp/ResPool.h"
 #include "zypp/pool/PoolImpl.h"
 #include "zypp/pool/PoolStats.h"
@@ -52,6 +53,9 @@ namespace zypp
 
   ResPoolProxy ResPool::proxy() const
   { return _pimpl->proxy( *this ); }
+
+  Resolver & ResPool::resolver() const
+  { return *getZYpp()->resolver(); }
 
   const SerialNumber & ResPool::serial() const
   { return _pimpl->serial(); }

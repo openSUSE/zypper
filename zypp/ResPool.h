@@ -27,6 +27,7 @@ namespace zypp
 
   class SerialNumber;
   class ResPoolProxy;
+  class Resolver;
 
   ///////////////////////////////////////////////////////////////////
   //
@@ -61,6 +62,9 @@ namespace zypp
 
       /** preliminary */
       ResPoolProxy proxy() const;
+
+      /** The Resolver */
+      Resolver & resolver() const;
 
     public:
       /** The pools serial number. Changing whenever the
