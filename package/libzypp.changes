@@ -1,4 +1,15 @@
 -------------------------------------------------------------------
+Thu Apr 29 17:10:29 CEST 2010 - ma@suse.de
+
+- Cleanup when deleting packages. New zypp.conf global option 
+  solver.cleandepsOnRemove telling whether the solver should per 
+  default try to remove packages exclusively required by the ones 
+  he's asked to delete (default false).
+- Resolver::cleandepsOnRemove API to allow applications to change 
+  the solver option.
+- version 7.4.0 (4)
+
+-------------------------------------------------------------------
 Thu Apr 29 01:13:40 CEST 2010 - ma@suse.de
 
 - Update translations.
