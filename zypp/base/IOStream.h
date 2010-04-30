@@ -136,6 +136,9 @@ namespace zypp
 	/** Access the current line. */
 	const std::string & operator*() const
 	{ return _line; }
+	/** \overload non const access */
+	std::string & operator*()
+	{ return _line; }
 
 	/** Access the current line. */
 	const std::string * operator->() const
