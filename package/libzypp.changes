@@ -6,7 +6,7 @@ Fri Apr 30 01:13:46 CEST 2010 - ma@suse.de
 -------------------------------------------------------------------
 Thu Apr 29 17:10:29 CEST 2010 - ma@suse.de
 
-- Cleanup when deleting packages. New zypp.conf global option 
+- Cleanup when deleting packages. New zypp.conf expert option 
   solver.cleandepsOnRemove telling whether the solver should per 
   default try to remove packages exclusively required by the ones 
   he's asked to delete (default false).
