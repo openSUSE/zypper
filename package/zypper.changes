@@ -1,4 +1,10 @@
 -------------------------------------------------------------------
+Mon May  3 13:26:06 CEST 2010 - ma@suse.de
+
+- Don't suggest "zypper ps" after update, if zypper itself is the only 
+  process with deleted files open.
+
+-------------------------------------------------------------------
 Wed Apr 28 13:51:17 CEST 2010 - ma@suse.de
 
 - Fix 'zypper ps' not printing the first file twice. (bnc#599265)
