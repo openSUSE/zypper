@@ -1,4 +1,12 @@
 -------------------------------------------------------------------
+Mon May  3 18:12:36 CEST 2010 - ma@suse.de
+
+- Improve solver.cleandepsOnRemove result by evaluating the install 
+  history to find packages installed on behalf of a user request (not
+  auto added by the solver).
+- version 7.5.0 (5)
+
+-------------------------------------------------------------------
 Sat May  1 01:13:43 CEST 2010 - ma@suse.de
 
 - Update translations.
