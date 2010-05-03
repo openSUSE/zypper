@@ -1,4 +1,9 @@
 -------------------------------------------------------------------
+Tue May  4 01:13:43 CEST 2010 - ma@suse.de
+
+- Update translations.
+
+-------------------------------------------------------------------
 Mon May  3 18:12:36 CEST 2010 - ma@suse.de
 
 - Improve solver.cleandepsOnRemove result by evaluating the install 
