@@ -119,7 +119,7 @@ namespace zypp
           detail::SolvableIdType _addSolvables( ::_Repo * repo_r, unsigned count_r );
           //@}
 
-          /** Helper postprocessing the repo aftr adding solv or helix files. */
+          /** Helper postprocessing the repo after adding solv or helix files. */
           void _postRepoAdd( ::_Repo * repo_r );
 
         public:
@@ -226,7 +226,7 @@ namespace zypp
         public:
           /** \name Multiversion install. */
           //@{
-          typedef std::tr1::unordered_set<IdString> MultiversionList;
+          typedef IdStringSet MultiversionList;
 
           const MultiversionList & multiversionList() const
           {
@@ -240,7 +240,25 @@ namespace zypp
             const MultiversionList & l( multiversionList() );
             return l.find( ident_r ) != l.end();
           }
+          //@}
 
+        public:
+          /** \name Installed on behalf of a user request hint. */
+          //@{
+          typedef IdStringSet OnSystemByUserList;
+
+          const OnSystemByUserList & onSystemByUserList() const
+          {
+            if ( ! _onSystemByUserListPtr )
+	      onSystemByUserListInit();
+	    return *_onSystemByUserListPtr;
+          }
+
+          bool isOnSystemByUser( IdString ident_r ) const
+          {
+            const OnSystemByUserList & l( onSystemByUserList() );
+            return l.find( ident_r ) != l.end();
+          }
           //@}
 
         private:
@@ -261,6 +279,10 @@ namespace zypp
           /**  */
           void multiversionListInit() const;
           mutable scoped_ptr<MultiversionList> _multiversionListPtr;
+
+          /**  */
+          void onSystemByUserListInit() const;
+          mutable scoped_ptr<OnSystemByUserList> _onSystemByUserListPtr;
       };
       ///////////////////////////////////////////////////////////////////
 

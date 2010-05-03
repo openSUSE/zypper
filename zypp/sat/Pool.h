@@ -212,7 +212,7 @@ namespace zypp
          * at the same time. (\see \ref ZConfig::multiversionSpec)
          */
         //@{
-        typedef std::tr1::unordered_set<IdString>::const_iterator MultiversionIterator;
+        typedef IdStringSet::const_iterator MultiversionIterator;
 
         bool multiversionEmpty() const;
         size_t multiversionSize() const;
@@ -220,6 +220,21 @@ namespace zypp
         MultiversionIterator multiversionEnd() const;
 
         bool isMultiversion( IdString ident_r ) const;
+        //@}
+
+      public:
+        /** \name Installed on behalf of a user request hint.
+	 * This is a hint guessed by evaluating an available install history.
+         */
+        //@{
+        typedef IdStringSet::const_iterator OnSystemByUserIterator;
+
+        bool onSystemByUserEmpty() const;
+        size_t onSystemByUserSize() const;
+        OnSystemByUserIterator onSystemByUserBegin() const;
+        OnSystemByUserIterator onSystemByUserEnd() const;
+
+        bool isOnSystemByUser( IdString ident_r ) const;
         //@}
 
       public:

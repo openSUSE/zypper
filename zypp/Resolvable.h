@@ -57,6 +57,10 @@ namespace zypp
     bool isSystem() const
     { return sat::Solvable::isSystem(); }
 
+    /** \copydoc sat::Solvable::onSystemByUser() */
+    bool onSystemByUser() const
+    { return sat::Solvable::onSystemByUser(); }
+
     IdString ident() const
     { return sat::Solvable::ident(); }
 
@@ -83,10 +87,6 @@ namespace zypp
      * Per default \c false. \see also \ref ZConfig::multiversion.
      */
     bool multiversionInstall() const
-    { return sat::Solvable::multiversionInstall(); }
-
-    /** \deprecated Use \ref multiversionInstall. */
-    bool installOnly() const
     { return sat::Solvable::multiversionInstall(); }
 
     /** \name Dependencies. */

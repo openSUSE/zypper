@@ -209,6 +209,12 @@ namespace zypp
     Pool::MultiversionIterator Pool::multiversionEnd() const	{ return myPool().multiversionList().end(); }
     bool Pool::isMultiversion( IdString ident_r ) const		{ return myPool().isMultiversion( ident_r ); }
 
+    bool Pool::onSystemByUserEmpty() const			{ return myPool().onSystemByUserList().empty(); }
+    size_t Pool::onSystemByUserSize() const			{ return myPool().onSystemByUserList().size(); }
+    Pool::OnSystemByUserIterator Pool::onSystemByUserBegin() const	{ return myPool().onSystemByUserList().begin(); }
+    Pool::OnSystemByUserIterator Pool::onSystemByUserEnd() const	{ return myPool().onSystemByUserList().end(); }
+    bool Pool::isOnSystemByUser( IdString ident_r ) const	{ return myPool().isOnSystemByUser( ident_r ); }
+
    /******************************************************************
     **
     **	FUNCTION NAME : operator<<

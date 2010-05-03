@@ -80,8 +80,15 @@ namespace zypp
 
         /** Return whether this \ref Solvable belongs to the system repo.
          * \note This includes the otherwise hidden systemSolvable.
-        */
+	 */
         bool isSystem() const;
+
+	/** Whether this is known to be installed on behalf of a user request.
+	 * \note This is a hint guessed by evaluating an available install history.
+	 * Returns \c false for non-system (uninstalled) solvables, or if no history
+	 * is available.
+	 */
+	bool onSystemByUser() const;
 
         /** The \ref Repository this \ref Solvable belongs to. */
         Repository repository() const;
@@ -173,9 +180,6 @@ namespace zypp
          * Per default \c false. \see also \ref ZConfig::multiversion.
          */
         bool         multiversionInstall() const;
-
-        /** \deprecated Use \ref multiversionInstall. */
-	bool installOnly() const ZYPP_DEPRECATED;
 
         /** String representation <tt>"ident-edition.arch"</tt> or \c "noSolvable"
          * \code

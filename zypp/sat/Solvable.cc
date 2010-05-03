@@ -156,6 +156,11 @@ namespace zypp
       return myPool().isSystemRepo( _solvable->repo );
     }
 
+    bool Solvable::onSystemByUser() const
+    {
+      return myPool().isOnSystemByUser( ident() );
+    }
+
     IdString Solvable::ident() const
     {
       NO_SOLVABLE_RETURN( IdString() );
@@ -385,8 +390,6 @@ namespace zypp
     {
       return myPool().isMultiversion( ident() );
     }
-
-    bool Solvable::installOnly() const { return multiversionInstall(); }
 
     IdString Solvable::vendor() const
     {
