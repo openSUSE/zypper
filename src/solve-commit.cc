@@ -429,7 +429,8 @@ static void notify_processes_using_deleted_files(Zypper & zypper)
       zypper.out().error(e, _("Check failed:"));
   }
 
-  if (checker.begin() != checker.end())
+  // Don't suggest "zypper ps" if zypper is the only prog with deleted open files.
+  if (checker.size() > 1 || (checker.size() == 1 && checker.begin()->pid != zypp::str::numstring(::getpid())))
   {
     zypper.out().info(str::form(
         _("There are some running programs that use files deleted by recent upgrade."
