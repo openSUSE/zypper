@@ -66,7 +66,9 @@ namespace zypp
 
     public:
 
-      /** The target root directory. */
+      /** The target root directory.
+       * Returns an empty path if no target is set.
+       */
       Pathname systemRoot() const;
 
     public:
