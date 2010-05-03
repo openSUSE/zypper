@@ -616,14 +616,14 @@ SATResolver::solverInit(const PoolItemList & weakItems)
 	    ERR << "Weaken: " << *iter << " not found" << endl;
 	}
 	MIL << "Weaken dependencies of " << *iter << endl;
-	queue_push( &(_jobQueue), SOLVER_WEAKEN_SOLVABLE_DEPS );
+	queue_push( &(_jobQueue), SOLVER_WEAKENDEPS | SOLVER_SOLVABLE );
         queue_push( &(_jobQueue), id );
     }
 
     // Add rules for parallel installable resolvables with different versions
     for_( it, sat::Pool::instance().multiversionBegin(), sat::Pool::instance().multiversionEnd() )
     {
-      queue_push( &(_jobQueue), SOLVER_NOOBSOLETES_SOLVABLE_NAME );
+      queue_push( &(_jobQueue), SOLVER_NOOBSOLETES | SOLVABLE_NAME );
       queue_push( &(_jobQueue), it->id() );
     }
 
@@ -647,7 +647,7 @@ SATResolver::solverInit(const PoolItemList & weakItems)
             dumpRangeLine( MIL << "Droplist for " << (*it)->candidateObj() << ": " << droplist.size() << " ", droplist.begin(), droplist.end() ) << endl;
             for_( cap, droplist.begin(), droplist.end() )
             {
-              queue_push( &_jobQueue, SOLVER_DROP_ORPHANED|SOLVER_SOLVABLE_NAME );
+              queue_push( &_jobQueue, SOLVER_DROP_ORPHANED | SOLVER_SOLVABLE_NAME );
               queue_push( &_jobQueue, cap->id() );
             }
           }
@@ -705,19 +705,19 @@ SATResolver::resolvePool(const CapabilitySet & requires_caps,
 
     for_( iter, upgradeRepos.begin(), upgradeRepos.end() )
     {
-	queue_push( &(_jobQueue), SOLVER_DISTUPGRADE|SOLVER_SOLVABLE_REPO );
+	queue_push( &(_jobQueue), SOLVER_DISTUPGRADE | SOLVER_SOLVABLE_REPO );
 	queue_push( &(_jobQueue), iter->get()->repoid );
         MIL << "Upgrade repo " << *iter << endl;
     }
 
     for (CapabilitySet::const_iterator iter = requires_caps.begin(); iter != requires_caps.end(); iter++) {
-	queue_push( &(_jobQueue), SOLVER_INSTALL_SOLVABLE_PROVIDES );
+	queue_push( &(_jobQueue), SOLVER_INSTALL | SOLVER_SOLVABLE_PROVIDES );
 	queue_push( &(_jobQueue), iter->id() );
 	MIL << "Requires " << *iter << endl;
     }
 
     for (CapabilitySet::const_iterator iter = conflict_caps.begin(); iter != conflict_caps.end(); iter++) {
-	queue_push( &(_jobQueue), SOLVER_ERASE_SOLVABLE_PROVIDES | MAYBE_CLEANDEPS );
+	queue_push( &(_jobQueue), SOLVER_ERASE | SOLVER_SOLVABLE_PROVIDES | MAYBE_CLEANDEPS );
 	queue_push( &(_jobQueue), iter->id() );
 	MIL << "Conflicts " << *iter << endl;
     }
@@ -767,7 +767,7 @@ SATResolver::resolveQueue(const SolverQueueItemList &requestQueue,
     for (PoolItemList::const_iterator iter = _items_to_remove.begin(); iter != _items_to_remove.end(); iter++) {
         sat::detail::IdType ident( (*iter)->satSolvable().ident().id() );
 	MIL << "Delete " << *iter << ident << endl;
-	queue_push( &(_jobQueue), SOLVER_ERASE_SOLVABLE_NAME | MAYBE_CLEANDEPS );
+	queue_push( &(_jobQueue), SOLVER_ERASE | SOLVER_SOLVABLE_NAME | MAYBE_CLEANDEPS );
 	queue_push( &(_jobQueue), ident);
     }
 
@@ -1095,9 +1095,9 @@ SATResolver::problems ()
 		    if (p == SOLVER_SOLUTION_JOB) {
 			/* job, rp is index into job queue */
 			what = _jobQueue.elements[rp];
-			switch (_jobQueue.elements[rp-1])
+			switch (_jobQueue.elements[rp-1]&(SOLVER_SELECTMASK|SOLVER_JOBMASK))
 			{
-			    case SOLVER_INSTALL_SOLVABLE: {
+			    case SOLVER_INSTALL | SOLVER_SOLVABLE: {
 				s = mapSolvable (what);
 				PoolItem poolItem = _pool.find (s);
 				if (poolItem) {
@@ -1117,7 +1117,7 @@ SATResolver::problems ()
 				}
 			    }
 				break;
-			    case SOLVER_ERASE_SOLVABLE: {
+			    case SOLVER_ERASE | SOLVER_SOLVABLE: {
 				s = mapSolvable (what);
 				PoolItem poolItem = _pool.find (s);
 				if (poolItem) {
@@ -1137,7 +1137,7 @@ SATResolver::problems ()
 				}
 			    }
 				break;
-			    case SOLVER_INSTALL_SOLVABLE_NAME:
+			    case SOLVER_INSTALL | SOLVER_SOLVABLE_NAME:
 				{
 				IdString ident( what );
 				SolverQueueItemInstall_Ptr install =
@@ -1149,7 +1149,7 @@ SATResolver::problems ()
 				problemSolution->addDescription (description);
 				}
 				break;
-			    case SOLVER_ERASE_SOLVABLE_NAME:
+			    case SOLVER_ERASE | SOLVER_SOLVABLE_NAME:
 				{
 				// As we do not know, if this request has come from resolvePool or
 				// resolveQueue we will have to take care for both cases.
@@ -1170,7 +1170,7 @@ SATResolver::problems ()
 				problemSolution->addDescription (description);
 				}
 				break;
-			    case SOLVER_INSTALL_SOLVABLE_PROVIDES:
+			    case SOLVER_INSTALL | SOLVER_SOLVABLE_PROVIDES:
 				{
 				problemSolution->addSingleAction (Capability(what), REMOVE_EXTRA_REQUIRE);
 				string description = "";
@@ -1191,7 +1191,7 @@ SATResolver::problems ()
 				}
 				}
 				break;
-			    case SOLVER_ERASE_SOLVABLE_PROVIDES:
+			    case SOLVER_ERASE | SOLVER_SOLVABLE_PROVIDES:
 				{
 				problemSolution->addSingleAction (Capability(what), REMOVE_EXTRA_CONFLICT);
 				string description = "";
@@ -1213,7 +1213,7 @@ SATResolver::problems ()
 				}
 				}
 				break;
-			    case SOLVER_INSTALL_SOLVABLE_UPDATE:
+			    case SOLVER_UPDATE | SOLVER_SOLVABLE:
 				{
 				s = mapSolvable (what);
 				PoolItem poolItem = _pool.find (s);
@@ -1408,13 +1408,13 @@ void SATResolver::setSystemRequirements()
     CapabilitySet system_conflicts = SystemCheck::instance().conflictSystemCap();
 
     for (CapabilitySet::const_iterator iter = system_requires.begin(); iter != system_requires.end(); iter++) {
-	queue_push( &(_jobQueue), SOLVER_INSTALL_SOLVABLE_PROVIDES);
+	queue_push( &(_jobQueue), SOLVER_INSTALL | SOLVER_SOLVABLE_PROVIDES );
 	queue_push( &(_jobQueue), iter->id() );
 	MIL << "SYSTEM Requires " << *iter << endl;
     }
 
     for (CapabilitySet::const_iterator iter = system_conflicts.begin(); iter != system_conflicts.end(); iter++) {
-	queue_push( &(_jobQueue), SOLVER_ERASE_SOLVABLE_PROVIDES | MAYBE_CLEANDEPS );
+	queue_push( &(_jobQueue), SOLVER_ERASE | SOLVER_SOLVABLE_PROVIDES | MAYBE_CLEANDEPS );
 	queue_push( &(_jobQueue), iter->id() );
 	MIL << "SYSTEM Conflicts " << *iter << endl;
     }
@@ -1430,7 +1430,7 @@ void SATResolver::setSystemRequirements()
         if ( (*it)->isSystem() )
         {
           Capability archrule( (*it)->arch(), rpm.c_str(), Capability::PARSED );
-          queue_push( &(_jobQueue), SOLVER_INSTALL|SOLVABLE_NAME|SOLVER_ESSENTIAL );
+          queue_push( &(_jobQueue), SOLVER_INSTALL | SOLVABLE_NAME | SOLVER_ESSENTIAL );
           queue_push( &(_jobQueue), archrule.id() );
 
         }

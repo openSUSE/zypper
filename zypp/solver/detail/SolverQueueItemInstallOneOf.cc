@@ -79,9 +79,9 @@ bool SolverQueueItemInstallOneOf::addRule (_Queue & q)
     Queue qs;
 
     if (_soft) {
-	queue_push( &(q), SOLVER_INSTALL_SOLVABLE_ONE_OF | SOLVER_WEAK);
+	queue_push( &(q), SOLVER_INSTALL | SOLVER_SOLVABLE_ONE_OF | SOLVER_WEAK);
     } else {
-	queue_push( &(q), SOLVER_INSTALL_SOLVABLE_ONE_OF );
+	queue_push( &(q), SOLVER_INSTALL | SOLVER_SOLVABLE_ONE_OF );
     }
 
     queue_init(&qs);

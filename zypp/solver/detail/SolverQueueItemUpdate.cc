@@ -75,7 +75,7 @@ bool SolverQueueItemUpdate::addRule (_Queue & q)
 	return false;
     }
     MIL << "Update explicit " << _item << " with the SAT-Pool ID: " << id << endl;
-    queue_push( &(q), SOLVER_INSTALL_SOLVABLE_UPDATE );
+    queue_push( &(q), SOLVER_UPDATE | SOLVER_SOLVABLE );
     queue_push( &(q), id );
     return true;
 }

@@ -73,9 +73,9 @@ bool SolverQueueItemInstall::addRule (_Queue & q)
 {
     ::Id id = IdString(_name).id();
     if (_soft) {
-	queue_push( &(q), SOLVER_INSTALL_SOLVABLE_NAME | SOLVER_WEAK  );
+	queue_push( &(q), SOLVER_INSTALL | SOLVER_SOLVABLE_NAME | SOLVER_WEAK  );
     } else {
-	queue_push( &(q), SOLVER_INSTALL_SOLVABLE_NAME );
+	queue_push( &(q), SOLVER_INSTALL | SOLVER_SOLVABLE_NAME );
     }
     queue_push( &(q), id);
 
