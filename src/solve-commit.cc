@@ -261,6 +261,18 @@ static void set_force_resolution(Zypper & zypper)
   God->resolver()->setForceResolve(force_resolution);
 }
 
+static void set_clean_deps(Zypper & zypper)
+{
+  if (zypper.command() == ZypperCommand::REMOVE)
+  {
+    if (zypper.cOpts().find("clean-deps") != zypper.cOpts().end())
+      God->resolver()->setCleandepsOnRemove(true);
+    else if (zypper.cOpts().find("no-clean-deps") != zypper.cOpts().end())
+      God->resolver()->setCleandepsOnRemove(false);
+  }
+  DBG << "clean deps on remove: " << God->resolver()->cleandepsOnRemove() << endl;
+}
+
 static void set_no_recommends(Zypper & zypper)
 {
   bool no_recommends = !zypper.config().solver_installRecommends;
@@ -294,6 +306,7 @@ static void set_ignore_recommends_of_installed(Zypper & zypper)
 static void set_solver_flags(Zypper & zypper)
 {
   set_force_resolution(zypper);
+  set_clean_deps(zypper);
   set_no_recommends(zypper);
   set_ignore_recommends_of_installed(zypper);
 }

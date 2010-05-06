@@ -988,6 +988,8 @@ void Zypper::processCommandOptions()
       {"debug-solver", no_argument,     0, 0},
       {"no-force-resolution", no_argument, 0, 'R'},
       {"force-resolution", no_argument, 0,  0 },
+      {"clean-deps", no_argument,       0, 'u'},
+      {"no-clean-deps", no_argument,    0, 'U'},
       {"dry-run",    no_argument,       0, 'D'},
       // rug uses -N shorthand
       {"dry-run",    no_argument,       0, 'N'},
@@ -1015,6 +1017,8 @@ void Zypper::processCommandOptions()
       "                            let it ask.\n"
       "    --force-resolution      Force the solver to find a solution (even\n"
       "                            an aggressive one).\n"
+      "-u, --clean-deps            Automatically remove unneeded dependencies.\n"
+      "-U, --no-clean-deps         No automatic removal of unneeded dependencies.\n"
       "-D, --dry-run               Test the removal, do not actually remove.\n"
     ), "package, patch, pattern, product", "package");
     break;
