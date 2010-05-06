@@ -1,4 +1,9 @@
 -------------------------------------------------------------------
+Thu May  6 18:51:03 CEST 2010 - jkupec@suse.cz
+
+- Fixed empty 'not updated' lists (bnc #600134).
+
+-------------------------------------------------------------------
 Mon May  3 13:26:06 CEST 2010 - ma@suse.de
 
 - Don't suggest "zypper ps" after update, if zypper itself is the only 
