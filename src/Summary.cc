@@ -255,6 +255,7 @@ void Summary::readPool(const zypp::ResPool & pool)
 
       candidates[*kit].insert(ResPair(nullres, candidate));
     }
+
   // compare available updates with the list of packages to be upgraded
   for_(it, toupgrade.begin(), toupgrade.end())
     set_difference(
@@ -262,6 +263,15 @@ void Summary::readPool(const zypp::ResPool & pool)
         it->second.begin(), it->second.end(),
         inserter(notupdated[it->first], notupdated[it->first].begin()),
         Summary::ResPairNameCompare());
+
+  // remove kinds with empty sets after the set_difference
+  for (KindToResPairSet::iterator it = notupdated.begin(); it != notupdated.end();)
+  {
+    if (it->second.empty())
+      notupdated.erase(it++);
+    else
+      ++it;
+  }
 
   m.stop();
 }
