@@ -1,4 +1,10 @@
 -------------------------------------------------------------------
+Fri May  7 17:23:25 CEST 2010 - jkupec@suse.cz
+
+- Updated translations
+- 1.3.7
+
+-------------------------------------------------------------------
 Mon Apr 26 13:45:29 CEST 2010 - jkupec@suse.cz
 
 - Show support level of a package in 'zypper info' when SUSE
