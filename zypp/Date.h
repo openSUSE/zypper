@@ -36,6 +36,19 @@ namespace zypp
 
     typedef time_t ValueType;
 
+    static const ValueType second	= 1;
+    static const ValueType minute	= 60;
+    static const ValueType hour		= 3600;
+    static const ValueType day		= 86400;
+    static const ValueType month28	= 2419200;
+    static const ValueType month29	= 2505600;
+    static const ValueType month30	= 2592000;
+    static const ValueType month31	= 2678400;
+    static const ValueType month	= month30;
+    static const ValueType year365	= 31536000;
+    static const ValueType year366	= 31622400;
+    static const ValueType year		= year365;
+
     /** Default ctor: 0 */
     Date()
     : _date( 0 )
