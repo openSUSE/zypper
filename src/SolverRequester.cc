@@ -89,16 +89,16 @@ void SolverRequester::installRemove(const PackageArgs & args)
   if (args.empty())
     return;
 
-  for_(it, args.doCaps().begin(), args.doCaps().end())
-    install(it->first, it->second);
+  for_(it, args.dos().begin(), args.dos().end())
+    install(*it);
 
   // TODO solve before processing dontCaps? so that we could unset any
   // dontCaps that are already set for installation. This would allow
   //   $ zypper install pattern:lamp_sever -someunwantedpackage
   // and similar nice things.
 
-  for_(it, args.dontCaps().begin(), args.dontCaps().end())
-    remove(it->first);
+  for_(it, args.donts().begin(), args.donts().end())
+    remove(*it);
 }
 
 // ----------------------------------------------------------------------------
@@ -127,9 +127,9 @@ void SolverRequester::installRemove(const PackageArgs & args)
  * - maybe a check for glob wildcards in cap name would make sense before trying
  *   by-cap
  */
-void SolverRequester::install(const Capability & cap, const string & repoalias)
+void SolverRequester::install(const PackageSpec & pkg)
 {
-  sat::Solvable::SplitIdent splid(cap.detail().name());
+  sat::Solvable::SplitIdent splid(pkg.parsed_cap.detail().name());
   ResKind capkind = splid.kind();
   string capname = splid.name().asString();
 
@@ -137,9 +137,9 @@ void SolverRequester::install(const Capability & cap, const string & repoalias)
 
   if (!_opts.force_by_cap)
   {
-    PoolQuery q = pkg_spec_to_poolquery(cap, _opts.from_repos);
-    if (!repoalias.empty())
-      q.addRepo(repoalias);
+    PoolQuery q = pkg_spec_to_poolquery(pkg.parsed_cap, _opts.from_repos);
+    if (!pkg.repo_alias.empty())
+      q.addRepo(pkg.repo_alias);
 
     // get the best matching items and tag them for installation.
     // FIXME this ignores vendor lock - we need some way to do --from which
@@ -151,7 +151,7 @@ void SolverRequester::install(const Capability & cap, const string & repoalias)
       {
         Selectable::Ptr s(asSelectable()(*sit));
         if (s->kind() == ResKind::patch)
-          installPatch(cap, repoalias, *sit);
+          installPatch(pkg.parsed_cap, pkg.repo_alias, *sit);
         else
         {
           PoolItem instobj = get_installed_obj(s);
@@ -159,20 +159,22 @@ void SolverRequester::install(const Capability & cap, const string & repoalias)
           {
             // whether user requested specific repo/version/arch
             bool userconstraints =
-                cap.detail().isVersioned() || cap.detail().hasArch()
-                || !_opts.from_repos.empty() || !repoalias.empty();
+                pkg.parsed_cap.detail().isVersioned()
+                || pkg.parsed_cap.detail().hasArch()
+                || !_opts.from_repos.empty()
+                || !pkg.repo_alias.empty();
             // check vendor (since PoolItemBest does not do it)
             bool changes_vendor = instobj->vendor() != (*sit)->vendor();
 
             PoolItem best;
             if (userconstraints)
-              updateTo(cap, repoalias, *sit);
+              updateTo(pkg.parsed_cap, pkg.repo_alias, *sit);
             else if ((best = s->updateCandidateObj()))
-              updateTo(cap, repoalias, best);
+              updateTo(pkg.parsed_cap, pkg.repo_alias, best);
             else if (changes_vendor)
-              updateTo(cap, repoalias, instobj);
+              updateTo(pkg.parsed_cap, pkg.repo_alias, instobj);
             else
-              updateTo(cap, repoalias, *sit);
+              updateTo(pkg.parsed_cap, pkg.repo_alias, *sit);
           }
           else if (_command == ZypperCommand::INSTALL)
           {
@@ -180,46 +182,46 @@ void SolverRequester::install(const Capability & cap, const string & repoalias)
             MIL << "installing " << *sit << endl;
           }
           else
-            addFeedback(Feedback::NOT_INSTALLED, cap, repoalias);
+            addFeedback(Feedback::NOT_INSTALLED, pkg.parsed_cap, pkg.repo_alias);
         }
       }
       return;
     }
     else if (_opts.force_by_name)
     {
-      addFeedback(Feedback::NOT_FOUND_NAME, cap, repoalias);
-      WAR << "'" << cap << "' not found" << endl;
+      addFeedback(Feedback::NOT_FOUND_NAME, pkg.parsed_cap, pkg.repo_alias);
+      WAR << "'" << pkg.parsed_cap << "' not found" << endl;
       return;
     }
 
-    addFeedback(Feedback::NOT_FOUND_NAME_TRYING_CAPS, cap, repoalias);
+    addFeedback(Feedback::NOT_FOUND_NAME_TRYING_CAPS, pkg.parsed_cap, pkg.repo_alias);
   }
 
   // try by capability
 
   // is there a provider for the requested capability?
-  sat::WhatProvides q(cap);
+  sat::WhatProvides q(pkg.parsed_cap);
   if (q.empty())
   {
-    addFeedback(Feedback::NOT_FOUND_CAP, cap, repoalias);
-    WAR << str::form("'%s' not found", cap.asString().c_str()) << endl;
+    addFeedback(Feedback::NOT_FOUND_CAP, pkg.parsed_cap, pkg.repo_alias);
+    WAR << str::form("'%s' not found", pkg.parsed_cap.asString().c_str()) << endl;
     return;
   }
 
   // is the provider already installed?
-  set<PoolItem> providers = get_installed_providers(cap);
+  set<PoolItem> providers = get_installed_providers(pkg.parsed_cap);
   // already installed, try to update()
   for_(it, providers.begin(), providers.end())
   {
     if (_command == ZypperCommand::INSTALL)
-      addFeedback(Feedback::ALREADY_INSTALLED, cap, repoalias, *it, *it);
-    MIL << "provider '" << *it << "' of '" << cap << "' installed" << endl;
+      addFeedback(Feedback::ALREADY_INSTALLED, pkg.parsed_cap, pkg.repo_alias, *it, *it);
+    MIL << "provider '" << *it << "' of '" << pkg.parsed_cap << "' installed" << endl;
   }
 
   if (providers.empty())
   {
-    DBG << "adding requirement " << cap << endl;
-    addRequirement(cap);
+    DBG << "adding requirement " << pkg.parsed_cap << endl;
+    addRequirement(pkg.parsed_cap);
   }
 }
 
@@ -228,9 +230,9 @@ void SolverRequester::install(const Capability & cap, const string & repoalias)
 /**
  * Remove packages based on given Capability & Options from the system.
  */
-void SolverRequester::remove(const Capability & cap)
+void SolverRequester::remove(const PackageSpec & pkg)
 {
-  sat::Solvable::SplitIdent splid(cap.detail().name());
+  sat::Solvable::SplitIdent splid(pkg.parsed_cap.detail().name());
   ResKind capkind = splid.kind();
   string capname = splid.name().asString();
 
@@ -238,7 +240,7 @@ void SolverRequester::remove(const Capability & cap)
 
   if (!_opts.force_by_cap)
   {
-    PoolQuery q = pkg_spec_to_poolquery(cap, "");
+    PoolQuery q = pkg_spec_to_poolquery(pkg.parsed_cap, "");
 
     if (!q.empty())
     {
@@ -256,8 +258,8 @@ void SolverRequester::remove(const Capability & cap)
         return;
       else
       {
-        addFeedback(Feedback::NOT_INSTALLED, cap);
-        MIL << "'" << cap << "' is not installed" << endl;
+        addFeedback(Feedback::NOT_INSTALLED, pkg.parsed_cap);
+        MIL << "'" << pkg.parsed_cap << "' is not installed" << endl;
         if (_opts.force_by_name)
           return;
       }
@@ -265,38 +267,38 @@ void SolverRequester::remove(const Capability & cap)
     }
     else if (_opts.force_by_name)
     {
-      addFeedback(Feedback::NOT_FOUND_NAME, cap);
-      WAR << "'" << cap << "' not found" << endl;
+      addFeedback(Feedback::NOT_FOUND_NAME, pkg.parsed_cap);
+      WAR << "'" << pkg.parsed_cap << "' not found" << endl;
       return;
     }
   }
 
   // try by capability
 
-  addFeedback(Feedback::NOT_FOUND_NAME_TRYING_CAPS, cap);
+  addFeedback(Feedback::NOT_FOUND_NAME_TRYING_CAPS, pkg.parsed_cap);
 
   // is there a provider for the requested capability?
-  sat::WhatProvides q(cap);
+  sat::WhatProvides q(pkg.parsed_cap);
   if (q.empty())
   {
-    addFeedback(Feedback::NOT_FOUND_CAP, cap);
-    WAR << str::form("'%s' not found", cap.asString().c_str()) << endl;
+    addFeedback(Feedback::NOT_FOUND_CAP, pkg.parsed_cap);
+    WAR << str::form("'%s' not found", pkg.parsed_cap.asString().c_str()) << endl;
     return;
   }
 
   // is the provider already installed?
-  set<PoolItem> providers = get_installed_providers(cap);
+  set<PoolItem> providers = get_installed_providers(pkg.parsed_cap);
 
   // not installed, nothing to do
   if (providers.empty())
   {
-    addFeedback(Feedback::NO_INSTALLED_PROVIDER, cap);
-    MIL << "no provider of " << cap << "is installed" << endl;
+    addFeedback(Feedback::NO_INSTALLED_PROVIDER, pkg.parsed_cap);
+    MIL << "no provider of " << pkg.parsed_cap << "is installed" << endl;
   }
   else
   {
-    MIL << "adding conflict " << cap << endl;
-    addConflict(cap);
+    MIL << "adding conflict " << pkg.parsed_cap << endl;
+    addConflict(pkg.parsed_cap);
   }
 }
 
@@ -309,12 +311,12 @@ void SolverRequester::update(const PackageArgs & args)
 
   _command = ZypperCommand::UPDATE;
 
-  for_(it, args.doCaps().begin(), args.doCaps().end())
-    install(it->first, it->second);
+  for_(it, args.dos().begin(), args.dos().end())
+    install(*it);
 
   /* TODO Solve and unmark dont which are setToBeInstalled in the pool?
-  for_(it, args.dontCaps().begin(), args.dontCaps().end())
-    remove(it->first);
+  for_(it, args.donts().begin(), args.donts().end())
+    remove(*it);
   */
 }
 

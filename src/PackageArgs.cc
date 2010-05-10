@@ -107,11 +107,12 @@ void PackageArgs::preprocess(const vector<string> & args)
 
 static bool
 remove_duplicate(
-    PackageArgs::CapRepoPairSet & set, const PackageArgs::CapRepoPair & obj)
+    PackageArgs::PackageSpecSet & set, const PackageSpec & obj)
 {
-  PackageArgs::CapRepoPairSet::iterator match = set.find(obj);
+  PackageArgs::PackageSpecSet::iterator match = set.find(obj);
   if (match != set.end())
   {
+    DBG << "found dupe: '" << match->orig_str << "' : " << obj.orig_str << endl;
     set.erase(match);
     return true;
   }
@@ -129,6 +130,8 @@ void PackageArgs::argsToCaps(const zypp::ResKind & kind)
     arg = *it;
     repo.clear();
 
+    PackageSpec spec;
+    spec.orig_str = arg;
 
     // For given arguments:
     //    +vim
@@ -198,7 +201,7 @@ void PackageArgs::argsToCaps(const zypp::ResKind & kind)
     }
 
     // parse the rest of the string as standard zypp package specifier
-    Capability parsedcap = Capability::guessPackageSpec(arg);
+    Capability parsedcap = Capability::guessPackageSpec(arg, spec.modified);
 
     // set the right kind (bnc #580571)
     // prefer those specified in args
@@ -236,13 +239,15 @@ void PackageArgs::argsToCaps(const zypp::ResKind & kind)
     MIL << "; repo '" << repo << "'" << endl;
 
     // Store, but avoid duplicates in do and dont sets.
+    spec.parsed_cap = parsedcap;
+    spec.repo_alias = repo;
     if (dont)
     {
-      if (!remove_duplicate(_do_caps, CapRepoPair(parsedcap, repo)))
-        _dont_caps.insert(CapRepoPair(parsedcap, repo));
+      if (!remove_duplicate(_dos, spec))
+        _donts.insert(spec);
     }
-    else if (!remove_duplicate(_dont_caps, CapRepoPair(parsedcap, repo)))
-      _do_caps.insert(CapRepoPair(parsedcap, repo));
+    else if (!remove_duplicate(_donts, spec))
+      _dos.insert(spec);
   }
 }
 

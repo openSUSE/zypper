@@ -21,12 +21,33 @@
 
 class Zypper;
 
+struct PackageSpec
+{
+  PackageSpec() : modified(false) {}
+
+  std::string orig_str;
+  zypp::Capability parsed_cap;
+  std::string repo_alias;
+  bool modified;
+};
+
+/**
+ * Only comparing parsed capabilities. Even though repository may be different,
+ * if capability is the same, we must rule out one of them.
+ */
+struct PackageSpecCompare
+{
+  bool operator()(const PackageSpec & lhs, const PackageSpec & rhs) const
+  {
+    return lhs.parsed_cap < rhs.parsed_cap;
+  };
+};
+
 class PackageArgs
 {
 public:
   typedef std::set<std::string> StringSet;
-  typedef std::pair<zypp::Capability, std::string> CapRepoPair;
-  typedef std::set<CapRepoPair> CapRepoPairSet;
+  typedef std::set<PackageSpec, PackageSpecCompare> PackageSpecSet;
 
   struct Options
   {
@@ -60,14 +81,14 @@ public:
   { return _args; }
   /** Capabilities we want to install/upgrade and don't want to remove, plus
    * associated requested repo */
-  const CapRepoPairSet & doCaps() const
-  { return _do_caps; }
+  const PackageSpecSet & dos() const
+  { return _dos; }
   /** Capabilities we don't want to install/upgrade or want to remove. */
-  const CapRepoPairSet & dontCaps() const
-  { return _dont_caps; }
+  const PackageSpecSet & donts() const
+  { return _donts; }
 
   bool empty() const
-  { return doCaps().empty() && dontCaps().empty(); }
+  { return dos().empty() && donts().empty(); }
 
 protected:
   /** join arguments at comparison operators ('=', '>=', and the like) */
@@ -80,8 +101,8 @@ private:
   Zypper & zypper;
   Options _opts;
   StringSet _args;
-  CapRepoPairSet _do_caps;
-  CapRepoPairSet _dont_caps;
+  PackageSpecSet _dos;
+  PackageSpecSet _donts;
 };
 
 

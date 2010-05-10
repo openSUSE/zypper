@@ -126,19 +126,35 @@ BOOST_AUTO_TEST_CASE(argToCaps_test)
     rawargs.push_back("-irda");
 
     PackageArgs args(rawargs);
-    const PackageArgs::CapRepoPairSet & caps = args.doCaps();
-    BOOST_CHECK(caps.find(PackageArgs::CapRepoPair(
-        Capability("", "zypper", ">=", "1.4.0"),"")) != caps.end());
-    BOOST_CHECK(caps.find(PackageArgs::CapRepoPair(
-        Capability("perl(Math::BigInt)"),"")) != caps.end());
-    BOOST_CHECK(caps.find(PackageArgs::CapRepoPair(
-        Capability("laptop", ResKind::pattern),"")) != caps.end());
-    BOOST_CHECK_EQUAL(caps.size(), 3);
+    const PackageArgs::PackageSpecSet & specs = args.dos();
+    {
+      PackageSpec spec;
+      spec.orig_str = "zypper>=1.4.0";
+      spec.parsed_cap = Capability("", "zypper", ">=", "1.4.0");
+      BOOST_CHECK(specs.find(spec) != specs.end());
+    }
+    {
+      PackageSpec spec;
+      spec.orig_str = "perl(Math::BigInt)";
+      spec.parsed_cap = Capability("perl(Math::BigInt)");
+      BOOST_CHECK(specs.find(spec) != specs.end());
+    }
+    {
+      PackageSpec spec;
+      spec.orig_str = "pattern:laptop";
+      spec.parsed_cap = Capability("laptop", ResKind::pattern);
+      BOOST_CHECK(specs.find(spec) != specs.end());
+    }
+    BOOST_CHECK_EQUAL(specs.size(), 3);
 
-    const PackageArgs::CapRepoPairSet & dontcaps = args.dontCaps();
-    BOOST_CHECK(dontcaps.find(PackageArgs::CapRepoPair(
-        Capability("irda"),"")) != dontcaps.end());
-    BOOST_CHECK_EQUAL(dontcaps.size(), 1);
+    const PackageArgs::PackageSpecSet & dontspecs = args.donts();
+    {
+      PackageSpec spec;
+      spec.orig_str = "-irda";
+      spec.parsed_cap = Capability("irda");
+      BOOST_CHECK(dontspecs.find(spec) != dontspecs.end());
+    }
+    BOOST_CHECK_EQUAL(dontspecs.size(), 1);
   }
 }
 
@@ -170,8 +186,8 @@ BOOST_AUTO_TEST_CASE(dont_by_default_test)
     argopts.do_by_default = false;
     PackageArgs args(rawargs, ResKind::package, argopts);
 
-    BOOST_CHECK_EQUAL(args.dontCaps().size(), 2);
-    BOOST_CHECK_EQUAL(args.doCaps().size(), 1);
+    BOOST_CHECK_EQUAL(args.donts().size(), 2);
+    BOOST_CHECK_EQUAL(args.dos().size(), 1);
   }
 }
 

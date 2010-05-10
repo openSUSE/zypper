@@ -256,7 +256,7 @@ private:
    * \note Glob can be used in the capability name for matching by name.
    * \see Options
    */
-  void install(const zypp::Capability & cap, const std::string & repoalias = "");
+  void install(const PackageSpec & pkg);
 
   /**
    * Request removal of all packages matching given \a cap by name/edition/arch,
@@ -267,7 +267,7 @@ private:
    *
    * \see Options
    */
-  void remove(const zypp::Capability & cap);
+  void remove(const PackageSpec & pkg);
 
   /**
    * Update to specified \a candidate and report if there's any better
