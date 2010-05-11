@@ -9,11 +9,14 @@
 /** \file	zypp/PublicKey.cc
  *
 */
+#include <climits>
+
 #include <iostream>
 #include <vector>
 
 //#include "zypp/base/Logger.h"
 
+#include "zypp/base/Gettext.h"
 #include "zypp/base/String.h"
 #include "zypp/base/Regex.h"
 #include "zypp/PublicKey.h"
@@ -70,10 +73,13 @@ namespace zypp
       }
 
       std::string asString() const
-      { return "[" + id() + "-" + str::hexstring(created(),8).substr(2) + "] [" + name() + "] [" + fingerprint() + "]"; }
-
-      std::string armoredData() const
-      { return _data; }
+      {
+	return str::form( "[%s-%s] [%s] [%s] [TTL %d]",
+			  id().c_str(), str::hexstring(created(),8).substr(2).c_str(),
+			  name().c_str(),
+			  fingerprint().c_str(),
+			  daysToLive() );
+      }
 
       std::string id() const
       { return _id; }
@@ -84,14 +90,62 @@ namespace zypp
       std::string fingerprint() const
       { return _fingerprint; }
 
+      std::string gpgPubkeyVersion() const
+      { return _id.empty() ? _id : str::toLower( _id.substr(8,8) ); }
+
+      std::string gpgPubkeyRelease() const
+      { return _created ? str::hexstring( _created ).substr(2) : std::string(); }
+
       Date created() const
       { return _created; }
 
       Date expires() const
       { return _expires; }
 
+      std::string expiresAsString() const
+      {
+	if ( !_expires )
+	{ // translators: an annotation to a gpg keys expiry date
+	  return _("(does not expire)");
+	}
+	std::string ret( _expires.asString() );
+	int ttl( daysToLive() );
+	if ( ttl <= 90 )
+	{
+	  ret += " ";
+	  if ( ttl < 0 )
+	  { // translators: an annotation to a gpg keys expiry date
+	    ret += _("(EXPIRED)");
+	  }
+	  else if ( ttl == 0 )
+	  { // translators: an annotation to a gpg keys expiry date
+	    ret += _("(expires within 24h)");
+	  }
+	  else
+	  { // translators: an annotation to a gpg keys expiry date
+	    ret += str::form( _PL("(expires in %d day)", "(expires in %d days)", ttl ), ttl );
+	  }
+	}
+	return ret;
+      }
+
       Pathname path() const
       { return _data_file.path(); }
+
+      bool expired() const
+      {
+	Date exp( expires() );
+	return( exp && exp < Date::now() );
+      }
+
+      int daysToLive() const
+      {
+	Date exp( expires() );
+	if ( ! expires() )
+	  return INT_MAX;
+	exp -= Date::now();
+	return exp < 0 ? exp / Date::day - 1 : exp / Date::day;
+      }
 
     protected:
 
@@ -199,7 +253,6 @@ namespace zypp
       std::string _id;
       std::string _name;
       std::string _fingerprint;
-      std::string _data;
       Date        _created;
       Date        _expires;
 
@@ -245,9 +298,6 @@ namespace zypp
   std::string PublicKey::asString() const
   { return _pimpl->asString(); }
 
-  std::string PublicKey::armoredData() const
-  { return _pimpl->armoredData(); }
-
   std::string PublicKey::id() const
   { return _pimpl->id(); }
 
@@ -257,11 +307,26 @@ namespace zypp
   std::string PublicKey::fingerprint() const
   { return _pimpl->fingerprint(); }
 
+  std::string PublicKey::gpgPubkeyVersion() const
+  { return _pimpl->gpgPubkeyVersion(); }
+
+  std::string PublicKey::gpgPubkeyRelease() const
+  { return _pimpl->gpgPubkeyRelease(); }
+
   Date PublicKey::created() const
   { return _pimpl->created(); }
 
   Date PublicKey::expires() const
   { return _pimpl->expires(); }
+
+  std::string PublicKey::expiresAsString() const
+  { return _pimpl->expiresAsString(); }
+
+  bool PublicKey::expired() const
+  { return _pimpl->expired(); }
+
+  int PublicKey::daysToLive() const
+  { return _pimpl->daysToLive(); }
 
   Pathname PublicKey::path() const
   { return _pimpl->path(); }
@@ -284,7 +349,9 @@ namespace zypp
     str << "  fpr " << obj.fingerprint() << endl;
     str << "   id " << obj.id() << endl;
     str << "  cre " << obj.created() << endl;
-    str << "  exp " << obj.expires() << endl;
+    str << "  exp " << obj.expiresAsString() << endl;
+    str << "  ttl " << obj.daysToLive() << endl;
+    str << "  rpm " << obj.gpgPubkeyVersion() << "-" << obj.gpgPubkeyRelease() << endl;
     str << "]";
     return str;
   }
