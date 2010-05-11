@@ -21,7 +21,7 @@
 #define _(MSG) ::zypp::gettext::dgettext( MSG )
 
 /** Return translated text (plural form). */
-#define _PL(MSG1,MSG2,N) ::zypp::gettext::dngettext( MSG1; MSG2, N )
+#define _PL(MSG1,MSG2,N) ::zypp::gettext::dngettext( MSG1, MSG2, N )
 
 ///////////////////////////////////////////////////////////////////
 namespace zypp
