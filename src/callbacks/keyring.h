@@ -136,7 +136,9 @@ namespace zypp
         s
           << str::form(_("Key ID: %s"), keyid.c_str()) << std::endl
           << str::form(_("Key Name: %s"), keyname.c_str()) << std::endl
-          << str::form(_("Key Fingerprint: %s"), fingerprint.c_str()) << std::endl;
+          << str::form(_("Key Fingerprint: %s"), fingerprint.c_str()) << std::endl
+          << str::form(_("Key Created: %s"), key.created().asString().c_str()) << std::endl
+          << str::form(_("Key Expires: %s"), key.expiresAsString().c_str()) << std::endl;
         if (!context.empty())
           s << str::form(_("Repository: %s"), _show_alias ?
               context.repoInfo().alias().c_str() :
