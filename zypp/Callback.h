@@ -226,6 +226,7 @@ namespace zypp
      * to the ctor. The ReceiveReport is connected, a previously
      * connected ReceiveReport is remembered and re-connected in
      * the dtor.
+     * Use the default ctpr to temporarily disconnect any connected report.
      * \code
      *  struct FooReceive : public callback::ReceiveReport<Foo>
      *  {..};
@@ -249,6 +250,12 @@ namespace zypp
       {
         typedef ReceiveReport<_Report>    Receiver;
         typedef DistributeReport<_Report> Distributor;
+
+        TempConnect()
+        : _oldRec( Distributor::instance().getReceiver() )
+        {
+          Distributor::instance().noReceiver();
+        }
 
         TempConnect( Receiver & rec_r )
         : _oldRec( Distributor::instance().getReceiver() )
