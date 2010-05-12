@@ -858,54 +858,44 @@ void RpmDb::importZyppKeyRingTrustedKeys()
 void RpmDb::exportTrustedKeysInZyppKeyRing()
 {
   MIL << "Exporting rpm keyring into zypp trusted keyring" <<endl;
+  librpmDb::db_const_iterator keepDbOpen; // just to keep a ref.
 
   set<Edition>    rpm_keys( pubkeyEditions() );
   list<PublicKey> zypp_keys( getZYpp()->keyRing()->trustedPublicKeys() );
 
-  for_( it, rpm_keys.begin(), rpm_keys.end() )
-  {
-    // search the zypp key into the rpm keys
-    // long id is edition version + release
-    string id = str::toUpper( (*it).version() + (*it).release());
-    list<PublicKey>::iterator ik( find( zypp_keys.begin(), zypp_keys.end(), id) );
-    if ( ik != zypp_keys.end() )
-    {
-      MIL << "Key " << (*it) << " is already in zypp database." << endl;
-    }
-    else
-    {
-      // we export the rpm key into a file
-      RpmHeader::constPtr result( new RpmHeader() );
-      getData( string("gpg-pubkey"), *it, result );
-      TmpFile file(getZYpp()->tmpPath());
-      ofstream os;
-      try
-      {
-        os.open(file.path().asString().c_str());
-        // dump rpm key into the tmp file
-        os << result->tag_description();
-        //MIL << "-----------------------------------------------" << endl;
-        //MIL << result->tag_description() <<endl;
-        //MIL << "-----------------------------------------------" << endl;
-        os.close();
-      }
-      catch (exception &e)
-      {
-        ERR << "Could not dump key " << (*it) << " in tmp file " << file.path() << endl;
-        // just ignore the key
-      }
+  // Temporarily disconnect to prevent the attemt to re-import the exported keys.
+  callback::TempConnect<KeyRingSignals> tempDisconnect;
 
-      // now import the key in zypp
-      try
+  TmpFile tmpfile( getZYpp()->tmpPath() );
+  {
+    ofstream tmpos( tmpfile.path().c_str() );
+    for_( it, rpm_keys.begin(), rpm_keys.end() )
+    {
+      // search the zypp key into the rpm keys
+      // long id is edition version + release
+      string id = str::toUpper( (*it).version() + (*it).release());
+      list<PublicKey>::iterator ik( find( zypp_keys.begin(), zypp_keys.end(), id) );
+      if ( ik != zypp_keys.end() )
       {
-        getZYpp()->keyRing()->importKey( PublicKey(file), true /*trusted*/);
-        MIL << "Trusted key " << (*it) << " imported in zypp keyring." << endl;
+	MIL << "Key " << (*it) << " is already in zypp database." << endl;
       }
-      catch (Exception &e)
+      else
       {
-        ERR << "Could not import key " << (*it) << " in zypp keyring" << endl;
+	// we export the rpm key into a file
+	RpmHeader::constPtr result( new RpmHeader() );
+	getData( string("gpg-pubkey"), *it, result );
+	MIL <<  "Will export trusted key " << (*it) << " to zypp keyring." << endl;
+	tmpos << result->tag_description() << endl;
       }
     }
+  }
+  try
+  {
+    getZYpp()->keyRing()->multiKeyImport( tmpfile.path(), true /*trusted*/);
+  }
+  catch (Exception &e)
+  {
+    ERR << "Could not import keys into in zypp keyring" << endl;
   }
 }
 
