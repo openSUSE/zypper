@@ -1,4 +1,11 @@
 -------------------------------------------------------------------
+Wed May 12 19:09:54 CEST 2010 - ma@suse.de
+
+- Add methods to evaluate gpg geys expiration dates. 
+- Export all rpmDb keys to the zypp trusted keyring in one go.
+- version 7.6.0 (6)
+
+-------------------------------------------------------------------
 Wed May 12 17:35:44 CEST 2010 - ma@suse.de
 
 - Update zypp-po.tar.bz2
