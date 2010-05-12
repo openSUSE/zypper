@@ -170,14 +170,15 @@ namespace zypp
   public:
     /** Default ctor */
     KeyRing(const Pathname &baseTmpDir);
-    //explicit
-    //KeyRing(const Pathname &general_kr, const Pathname &trusted_kr);
 
     /**
      * imports a key from a file.
      * throw if key was not imported
      */
     void importKey( const PublicKey &key, bool trusted = false);
+
+    /** Initial import from \ref RpmDb. */
+    void multiKeyImport( const Pathname & keyfile_r, bool trusted_r = false );
 
     void dumpTrustedPublicKey( const std::string &id, std::ostream &stream )
     { dumpPublicKey(id, true, stream); }

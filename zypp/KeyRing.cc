@@ -94,6 +94,7 @@ namespace zypp
     }
 
     void importKey( const PublicKey &key, bool trusted = false);
+    void multiKeyImport( const Pathname & keyfile_r, bool trusted_r = false);
     void deleteKey( const string &id, bool trusted );
 
     string readSignatureKeyId( const Pathname &signature );
@@ -175,6 +176,11 @@ namespace zypp
       rpmdbEmitSignal->trustedKeyAdded( key );
       emitSignal->trustedKeyAdded( key );
     }
+  }
+
+  void KeyRing::Impl::multiKeyImport( const Pathname & keyfile_r, bool trusted_r )
+  {
+    importKey( keyfile_r, trusted_r ? trustedKeyRing() : generalKeyRing() );
   }
 
   void KeyRing::Impl::deleteKey( const string &id, bool trusted)
@@ -717,6 +723,11 @@ namespace zypp
   void KeyRing::importKey( const PublicKey &key, bool trusted )
   {
     _pimpl->importKey( key, trusted );
+  }
+
+  void KeyRing::multiKeyImport( const Pathname & keyfile_r, bool trusted_r )
+  {
+    _pimpl->multiKeyImport( keyfile_r, trusted_r );
   }
 
   string KeyRing::readSignatureKeyId( const Pathname &signature )
