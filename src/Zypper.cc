@@ -2474,7 +2474,6 @@ void Zypper::doCommand()
   try
   {
     const char *roh = getenv("ZYPP_READONLY_HACK");
-
     if (roh != NULL && roh[0] == '1')
       zypp_readonly_hack::IWantIt ();
 
@@ -2483,8 +2482,15 @@ void Zypper::doCommand()
              || command() == ZypperCommand::TARGET_OS )
       zypp_readonly_hack::IWantIt (); // #247001, #302152
 
+    God = zypp::getZYpp();
+  }
+  catch (ZYppFactoryException & excpt_r)
+  {
+    ZYPP_CAUGHT (excpt_r);
+
+    bool still_locked = true;
     // check for packagekit (bnc #580513)
-    else if (packagekit_running())
+    if (excpt_r.lockerName().find("packagekitd") != string::npos)
     {
       // ask user wheter to tell it to quit
       out().info(_(
@@ -2497,10 +2503,10 @@ void Zypper::doCommand()
           PROMPT_PACKAGEKIT_QUIT, _("Tell PackageKit to quit?"), false);
 
       // tell it to quit
-      while (reply)
+      while (reply && still_locked)
       {
         packagekit_suggest_quit();
-        ::sleep(1);
+        ::sleep(2);
         if (packagekit_running())
         {
           out().info(_("PackageKit is still running (probably busy)."));
@@ -2508,20 +2514,32 @@ void Zypper::doCommand()
               PROMPT_PACKAGEKIT_QUIT, _("Try again?"), false);
         }
         else
-          reply = false;
+          still_locked = false;
       }
     }
 
-    God = zypp::getZYpp();
-  }
-  catch (ZYppFactoryException & excpt_r)
-  {
-    ZYPP_CAUGHT (excpt_r);
-    ERR  << "A ZYpp transaction is already in progress." << endl;
-    out().error(excpt_r.asString());
+    if (still_locked)
+    {
+      ERR  << "A ZYpp transaction is already in progress." << endl;
+      out().error(excpt_r.asString());
 
-    setExitCode(ZYPPER_EXIT_ERR_ZYPP);
-    throw (ExitRequestException("ZYpp locked"));
+      setExitCode(ZYPPER_EXIT_ERR_ZYPP);
+      throw (ExitRequestException("ZYpp locked"));
+    }
+    else
+    {
+      // try to get the lock again
+      try { God = zypp::getZYpp(); }
+      catch (ZYppFactoryException & e)
+      {
+        // this should happen only rarely, so no special handling here
+        ERR  << "still locked." << endl;
+        out().error(e.asString());
+
+        setExitCode(ZYPPER_EXIT_ERR_ZYPP);
+        throw (ExitRequestException("ZYpp locked"));
+      }
+    }
   }
   catch (Exception & excpt_r)
   {

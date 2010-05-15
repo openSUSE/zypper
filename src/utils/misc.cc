@@ -544,10 +544,14 @@ bool packagekit_running()
 
   string line;
   for (line = pkcheck.receiveLine(); !line.empty(); line = pkcheck.receiveLine())
+  {
+    DBG << "dbus-send: " << line << endl;
     if (line.find("boolean") != string::npos && line.find("true") != string::npos)
       result = true;
+  }
 
   pkcheck.close();
+  DBG << result << endl;
   return result;
 }
 
