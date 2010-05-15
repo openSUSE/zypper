@@ -1,4 +1,9 @@
 -------------------------------------------------------------------
+Tue May 11 16:29:42 CEST 2010 - ma@suse.de
+
+- Show gpg keys creation and expire dates when asking to trust.
+
+-------------------------------------------------------------------
 Thu May  6 18:51:03 CEST 2010 - jkupec@suse.cz
 
 - Fixed empty 'not updated' lists (bnc #600134).
