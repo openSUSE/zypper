@@ -1,4 +1,9 @@
 -------------------------------------------------------------------
+Sun May 16 01:13:39 CEST 2010 - ma@suse.de
+
+- Update zypp-po.tar.bz2
+
+-------------------------------------------------------------------
 Wed May 12 19:09:54 CEST 2010 - ma@suse.de
 
 - Add methods to evaluate gpg geys expiration dates. 
