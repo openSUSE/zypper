@@ -164,10 +164,15 @@ void print_main_help(Zypper & zypper)
     "\t--non-interactive, -n\tDo not ask anything, use default answers\n"
     "\t\t\t\tautomatically.\n"
     "\t--xmlout, -x\t\tSwitch to XML output.\n"
-    "\t--reposd-dir, -D <dir>\tUse alternative repository definition files\n"
+  );
+
+  static string repo_manager_options = _(
+    "\t--reposd-dir, -D <dir>\tUse alternative repository definition file\n"
     "\t\t\t\tdirectory.\n"
-    "\t--cache-dir, -C <dir>\tUse alternative meta-data cache directory.\n"
+    "\t--cache-dir, -C <dir>\tUse alternative directory for all caches.\n"
     "\t--raw-cache-dir <dir>\tUse alternative raw meta-data cache directory.\n"
+    "\t--solv-cache-dir <dir>\tUse alternative solv file cache directory.\n"
+    "\t--solv-cache-dir <dir>\tUse alternative package cache directory.\n"
   );
 
   static string help_global_repo_options = _("     Repository Options:\n"
@@ -267,6 +272,7 @@ void print_main_help(Zypper & zypper)
 
   zypper.out().info(help_usage, Out::QUIET);
   zypper.out().info(help_global_options, Out::QUIET);
+  zypper.out().info(repo_manager_options, Out::QUIET);
   zypper.out().info(help_global_repo_options, Out::QUIET);
   zypper.out().info(help_global_target_options, Out::QUIET);
   zypper.out().info(help_commands, Out::QUIET);
@@ -330,6 +336,8 @@ void Zypper::processGlobalOptions()
     {"reposd-dir",                 required_argument, 0, 'D'},
     {"cache-dir",                  required_argument, 0, 'C'},
     {"raw-cache-dir",              required_argument, 0,  0 },
+    {"solv-cache-dir",             required_argument, 0,  0 },
+    {"pkg-cache-dir",              required_argument, 0,  0 },
     {"opt",                        optional_argument, 0, 'o'},
     // TARGET OPTIONS
     {"disable-system-resolvables", no_argument,       0,  0 },
@@ -494,17 +502,34 @@ void Zypper::processGlobalOptions()
     _gopts.rm_options.knownReposPath = it->second.front();
   }
 
-  if ((it = gopts.find("cache-dir")) != gopts.end()) {
-    _gopts.rm_options.repoCachePath = it->second.front();
-  }
+  // cache dirs
 
-  if ((it = gopts.find("raw-cache-dir")) != gopts.end()) {
+  if ((it = gopts.find("cache-dir")) != gopts.end())
+    _gopts.rm_options.repoCachePath = it->second.front();
+
+  if ((it = gopts.find("raw-cache-dir")) != gopts.end())
     _gopts.rm_options.repoRawCachePath = it->second.front();
-  }
+  else
+    _gopts.rm_options.repoRawCachePath =
+      _gopts.rm_options.repoCachePath / "raw";
+
+  if ((it = gopts.find("solv-cache-dir")) != gopts.end())
+    _gopts.rm_options.repoSolvCachePath = it->second.front();
+  else
+    _gopts.rm_options.repoSolvCachePath =
+      _gopts.rm_options.repoCachePath / "solv";
+
+  if ((it = gopts.find("pkg-cache-dir")) != gopts.end())
+    _gopts.rm_options.repoPackagesCachePath = it->second.front();
+  else
+    _gopts.rm_options.repoPackagesCachePath =
+      _gopts.rm_options.repoCachePath / "packages";
 
   DBG << "repos.d dir = " << _gopts.rm_options.knownReposPath << endl;
   DBG << "cache dir = " << _gopts.rm_options.repoCachePath << endl;
   DBG << "raw cache dir = " << _gopts.rm_options.repoRawCachePath << endl;
+  DBG << "solv cache dir = " << _gopts.rm_options.repoSolvCachePath << endl;
+  DBG << "package cache dir = " << _gopts.rm_options.repoPackagesCachePath << endl;
 
   if (gopts.count("disable-repositories"))
   {
