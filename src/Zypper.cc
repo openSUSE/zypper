@@ -172,7 +172,7 @@ void print_main_help(Zypper & zypper)
     "\t--cache-dir, -C <dir>\tUse alternative directory for all caches.\n"
     "\t--raw-cache-dir <dir>\tUse alternative raw meta-data cache directory.\n"
     "\t--solv-cache-dir <dir>\tUse alternative solv file cache directory.\n"
-    "\t--solv-cache-dir <dir>\tUse alternative package cache directory.\n"
+    "\t--pkg-cache-dir <dir>\tUse alternative package cache directory.\n"
   );
 
   static string help_global_repo_options = _("     Repository Options:\n"
