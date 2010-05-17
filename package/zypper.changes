@@ -1,4 +1,19 @@
 -------------------------------------------------------------------
+Mon May 17 15:48:32 CEST 2010 - jkupec@suse.cz
+
+- --clean-deps added to 'remove' command. The otion tells the
+  solver to remove any packages that become unneeded after removing
+  a packages that depended on them.
+  --no-clean-deps also added, to override zypp.conf's
+  solver.cleandepsOnRemove setting.
+- Check for running pkgkit only if acquiring of zypp lock actually
+  fails (bnc #580513)
+- Use --cache-dir as base for other --*-cache-dir options.
+  --pkg-cache-dir and --solv-cache-dir added
+- If name-version is auto-split, don't try caps (bnc #600471)
+- updated translations
+
+-------------------------------------------------------------------
 Tue May 11 16:29:42 CEST 2010 - ma@suse.de
 
 - Show gpg keys creation and expire dates when asking to trust.
