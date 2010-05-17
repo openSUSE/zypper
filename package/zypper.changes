@@ -12,6 +12,7 @@ Mon May 17 15:48:32 CEST 2010 - jkupec@suse.cz
   --pkg-cache-dir and --solv-cache-dir added
 - If name-version is auto-split, don't try caps (bnc #600471)
 - updated translations
+- 1.4.4
 
 -------------------------------------------------------------------
 Tue May 11 16:29:42 CEST 2010 - ma@suse.de
