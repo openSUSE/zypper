@@ -1,4 +1,11 @@
 -------------------------------------------------------------------
+Mon May 17 15:25:14 CEST 2010 - ma@suse.de
+
+- Fix package-manager-su to support LXDE (Andrea Florio) (bnc#582235)
+- Cleanup spec file (Pavol Rusnak)
+- version 7.6.0 (6)
+
+-------------------------------------------------------------------
 Sun May 16 01:13:39 CEST 2010 - ma@suse.de
 
 - Update zypp-po.tar.bz2
