@@ -187,10 +187,10 @@ void SolverRequester::install(const PackageSpec & pkg)
       }
       return;
     }
-    else if (_opts.force_by_name)
+    else if (_opts.force_by_name || pkg.modified)
     {
       addFeedback(Feedback::NOT_FOUND_NAME, pkg.parsed_cap, pkg.repo_alias);
-      WAR << "'" << pkg.parsed_cap << "' not found" << endl;
+      WAR << pkg << " not found" << endl;
       return;
     }
 
@@ -204,7 +204,7 @@ void SolverRequester::install(const PackageSpec & pkg)
   if (q.empty())
   {
     addFeedback(Feedback::NOT_FOUND_CAP, pkg.parsed_cap, pkg.repo_alias);
-    WAR << str::form("'%s' not found", pkg.parsed_cap.asString().c_str()) << endl;
+    WAR << pkg << " not found" << endl;
     return;
   }
 
@@ -265,10 +265,10 @@ void SolverRequester::remove(const PackageSpec & pkg)
       }
       // TODO handle patches (cannot uninstall!), patterns (remove content(?))
     }
-    else if (_opts.force_by_name)
+    else if (_opts.force_by_name || pkg.modified)
     {
       addFeedback(Feedback::NOT_FOUND_NAME, pkg.parsed_cap);
-      WAR << "'" << pkg.parsed_cap << "' not found" << endl;
+      WAR << pkg << "' not found" << endl;
       return;
     }
   }
@@ -282,7 +282,7 @@ void SolverRequester::remove(const PackageSpec & pkg)
   if (q.empty())
   {
     addFeedback(Feedback::NOT_FOUND_CAP, pkg.parsed_cap);
-    WAR << str::form("'%s' not found", pkg.parsed_cap.asString().c_str()) << endl;
+    WAR << pkg << " not found" << endl;
     return;
   }
 

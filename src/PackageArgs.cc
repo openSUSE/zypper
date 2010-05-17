@@ -251,3 +251,12 @@ void PackageArgs::argsToCaps(const zypp::ResKind & kind)
   }
 }
 
+std::ostream & operator<<(std::ostream & out, const PackageSpec & spec)
+{
+  out << spec.orig_str << " cap:" << spec.parsed_cap;
+  if (spec.modified)
+    out << " (mod)";
+  if (!spec.repo_alias.empty())
+    out << " repo: " << spec.repo_alias;
+  return out;
+}

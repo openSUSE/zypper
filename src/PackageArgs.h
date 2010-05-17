@@ -16,6 +16,7 @@
 #include <vector>
 #include <string>
 #include <utility>
+#include <iosfwd>
 
 #include "zypp/Capability.h"
 
@@ -105,5 +106,7 @@ private:
   PackageSpecSet _donts;
 };
 
+
+std::ostream & operator<<(std::ostream & out, const PackageSpec & spec);
 
 #endif /* ZYPPER_PACKAGEARGS_H_ */

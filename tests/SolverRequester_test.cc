@@ -391,6 +391,27 @@ BOOST_AUTO_TEST_CASE(install14)
   BOOST_CHECK(!sr.hasFeedback(SolverRequester::Feedback::UPD_CANDIDATE_CHANGES_VENDOR));
 }
 
+// bnc #600471
+// request : install openSUSE-release-usb-x11
+// response: 'openSUSE-release-usb-x11' not found
+//           should not fall back to caps, because
+BOOST_AUTO_TEST_CASE(install15)
+{
+  MIL << "<============install15===============>" << endl;
+
+  vector<string> rawargs;
+  rawargs.push_back("openSUSE-release-usb-x11");
+  SolverRequester sr;
+
+  sr.install(rawargs);
+
+  BOOST_CHECK(sr.hasFeedback(SolverRequester::Feedback::NOT_FOUND_NAME));
+  BOOST_CHECK(!sr.hasFeedback(SolverRequester::Feedback::NOT_FOUND_NAME_TRYING_CAPS));
+  BOOST_CHECK(!sr.hasFeedback(SolverRequester::Feedback::NOT_FOUND_CAP));
+  BOOST_CHECK(sr.toInstall().empty());
+}
+
+
 ///////////////////////////////////////////////////////////////////////////
 // Locks
 
