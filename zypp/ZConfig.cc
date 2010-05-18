@@ -58,11 +58,11 @@ namespace zypp
       Arch architecture( buf.machine );
       MIL << "Uname architecture is '" << buf.machine << "'" << endl;
 
-      // some CPUs report i686 but dont implement cx8 and cmov
-      // check for both flags in /proc/cpuinfo and downgrade
-      // to i586 if either is missing (cf bug #18885)
       if ( architecture == Arch_i686 )
       {
+	// some CPUs report i686 but dont implement cx8 and cmov
+	// check for both flags in /proc/cpuinfo and downgrade
+	// to i586 if either is missing (cf bug #18885)
         std::ifstream cpuinfo( "/proc/cpuinfo" );
         if ( cpuinfo )
         {
@@ -75,6 +75,40 @@ namespace zypp
               {
                 architecture = Arch_i586;
                 WAR << "CPU lacks 'cx8' or 'cmov': architecture downgraded to '" << architecture << "'" << endl;
+              }
+              break;
+            }
+          }
+        }
+        else
+        {
+          ERR << "Cant open " << PathInfo("/proc/cpuinfo") << endl;
+        }
+      }
+      else if ( architecture == Arch_sparc || architecture == Arch_sparc64 )
+      {
+	// Check for sun4[vum] to get the real arch. (bug #566291)
+	std::ifstream cpuinfo( "/proc/cpuinfo" );
+        if ( cpuinfo )
+        {
+          for( iostr::EachLine in( cpuinfo ); in; in.next() )
+          {
+            if ( str::hasPrefix( *in, "type" ) )
+            {
+              if ( in->find( "sun4v" ) != std::string::npos )
+              {
+                architecture = ( architecture == Arch_sparc64 ? Arch_sparc64v : Arch_sparcv9v );
+                WAR << "CPU has 'sun4v': architecture upgraded to '" << architecture << "'" << endl;
+              }
+              else if ( in->find( "sun4u" ) != std::string::npos )
+              {
+                architecture = ( architecture == Arch_sparc64 ? Arch_sparc64 : Arch_sparcv9 );
+                WAR << "CPU has 'sun4u': architecture upgraded to '" << architecture << "'" << endl;
+              }
+              else if ( in->find( "sun4m" ) != std::string::npos )
+              {
+                architecture = Arch_sparcv8;
+                WAR << "CPU has 'sun4m': architecture upgraded to '" << architecture << "'" << endl;
               }
               break;
             }
