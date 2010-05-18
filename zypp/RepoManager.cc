@@ -775,13 +775,20 @@ namespace zypp
         DBG << "current time: " << (Date::ValueType)Date::now() << endl;
         DBG << "last refresh = " << diff << " minutes ago" << endl;
 
-        if (diff < ZConfig::instance().repo_refresh_delay())
+        if ( diff < ZConfig::instance().repo_refresh_delay() )
         {
-          MIL << "Repository '" << info.alias()
-              << "' has been refreshed less than repo.refresh.delay ("
-              << ZConfig::instance().repo_refresh_delay()
-              << ") minutes ago. Advising to skip refresh" << endl;
-          return REPO_CHECK_DELAYED;
+	  if ( diff < 0 )
+	  {
+	    WAR << "Repository '" << info.alias() << "' was refreshed in the future!" << endl;
+	  }
+	  else
+	  {
+	    MIL << "Repository '" << info.alias()
+		<< "' has been refreshed less than repo.refresh.delay ("
+		<< ZConfig::instance().repo_refresh_delay()
+		<< ") minutes ago. Advising to skip refresh" << endl;
+	    return REPO_CHECK_DELAYED;
+	  }
         }
       }
 
