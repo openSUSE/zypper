@@ -198,7 +198,11 @@ namespace zypp
   /** \relates Arch */
   extern const Arch Arch_alpha;
 
+   /** \relates Arch */
+  extern const Arch Arch_sparc64v;
   /** \relates Arch */
+  extern const Arch Arch_sparcv9v;
+ /** \relates Arch */
   extern const Arch Arch_sparc64;
   /** \relates Arch */
   extern const Arch Arch_sparcv9;

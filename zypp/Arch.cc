@@ -184,6 +184,8 @@ namespace zypp
     DEF_BUILTIN( alphaev5 );
     DEF_BUILTIN( alpha );
 
+    DEF_BUILTIN( sparc64v );
+    DEF_BUILTIN( sparcv9v );
     DEF_BUILTIN( sparc64 );
     DEF_BUILTIN( sparcv9 );
     DEF_BUILTIN( sparcv8 );
@@ -302,9 +304,11 @@ namespace zypp
         //
         defCompatibleWith( _sparc,	_noarch );
         defCompatibleWith( _sparcv8,	_noarch,_sparc );
-        //
-        defCompatibleWith( _sparcv9,	_noarch,_sparc );
-        defCompatibleWith( _sparc64,	_noarch,_sparc,_sparcv9 );
+        defCompatibleWith( _sparcv9,	_noarch,_sparc,_sparcv8 );
+        defCompatibleWith( _sparc64,	_noarch,_sparc,_sparcv8,_sparcv9 );
+	//
+	defCompatibleWith( _sparcv9v,	_noarch,_sparc,_sparcv8,_sparcv9 );
+	defCompatibleWith( _sparc64v,	_noarch,_sparc,_sparcv8,_sparcv9,_sparcv9v,_sparc64 );
         //
         defCompatibleWith( _armv3l,	_noarch );
         defCompatibleWith( _armv4l,	_noarch,_armv3l );
@@ -412,6 +416,8 @@ namespace zypp
   const Arch Arch_alphaev5( _alphaev5 );
   const Arch Arch_alpha( _alpha );
 
+  const Arch Arch_sparc64v( _sparc64v );
+  const Arch Arch_sparcv9v( _sparcv9v );
   const Arch Arch_sparc64( _sparc64 );
   const Arch Arch_sparcv9( _sparcv9 );
   const Arch Arch_sparcv8( _sparcv8 );
