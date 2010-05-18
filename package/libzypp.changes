@@ -1,4 +1,12 @@
 -------------------------------------------------------------------
+Tue May 18 18:02:44 CEST 2010 - ma@suse.de
+
+- Fix arch detection on sprac (bug #566291)
+- Arch: add sparc64v and sparcv9v and armv7l
+- RepoManager: refresh repo if last refresh is in the future (bnc#593617)
+- version 7.6.1 (6)
+
+-------------------------------------------------------------------
 Mon May 17 15:25:14 CEST 2010 - ma@suse.de
 
 - Fix package-manager-su to support LXDE (Andrea Florio) (bnc#582235)
