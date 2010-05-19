@@ -324,7 +324,7 @@ namespace zypp
         defCompatibleWith( _sh4a,	_noarch,_sh4 );
         //
         ///////////////////////////////////////////////////////////////////
-        dumpOn( USR ) << endl;
+        // dumpOn( USR ) << endl;
       }
 
     private:
