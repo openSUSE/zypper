@@ -49,7 +49,6 @@ namespace zypp
     , _archStr( archStr_r )
     , _idBit( idBit_r )
     , _compatBits( idBit_r )
-    , _compatScore( idBit_r ? 1 : 0 ) // number of compatible archs
     {}
 
     CompatEntry( IdString archStr_r,
@@ -58,7 +57,6 @@ namespace zypp
     , _archStr( archStr_r.asString() )
     , _idBit( idBit_r )
     , _compatBits( idBit_r )
-    , _compatScore( idBit_r ? 1 : 0 ) // number of compatible archs
     {}
 
     void addCompatBit( const CompatBits & idBit_r ) const
@@ -66,7 +64,6 @@ namespace zypp
       if ( idBit_r && ! (_compatBits & idBit_r) )
         {
           _compatBits |= idBit_r;
-          ++_compatScore;
         }
     }
 
@@ -91,9 +88,9 @@ namespace zypp
     /** compare by score, then archStr. */
     int compare( const CompatEntry & rhs ) const
     {
-      if ( _compatScore != rhs._compatScore )
-        return( _compatScore < rhs._compatScore ? -1 : 1 );
-      return _archStr.compare( rhs._archStr );
+      if ( _idBit.value() != rhs. _idBit.value() )
+	return( _idBit.value() < rhs. _idBit.value() ? -1 : 1 );
+      return _archStr.compare( rhs._archStr ); // Id 1: non builtin
     }
 
     bool isBuiltIn() const
@@ -106,7 +103,6 @@ namespace zypp
     std::string         _archStr; // frequently used by the UI so we keep a reference
     CompatBits          _idBit;
     mutable CompatBits  _compatBits;
-    mutable unsigned    _compatScore;
   };
   ///////////////////////////////////////////////////////////////////
 
@@ -121,7 +117,7 @@ namespace zypp
       bit >>= 1;
     }
     return str << str::form( "%-15s ", obj._archStr.c_str() ) << str::numstring(bitnum,2) << ' '
-               << obj._compatBits << ' ' << obj._compatScore;
+               << obj._compatBits << ' ' << obj._compatBits.value();
   }
 
   /** \relates Arch::CompatEntry */
@@ -154,7 +150,7 @@ namespace zypp
     //       You have to change them accordingly.
     //
     // NOTE: Thake care CompatBits::IntT is able to provide one
-    //       bit for each architectue.
+    //       bit for each architecture.
     //
 #define DEF_BUILTIN(A) const IdString  _##A( #A );
     DEF_BUILTIN( noarch );
@@ -277,6 +273,9 @@ namespace zypp
         ///////////////////////////////////////////////////////////////////
         // Define the CompatibleWith relation:
         //
+        // NOTE: Order of definition is significant! (Arch::compare)
+	//       - define compatible (less) architectures first!
+        //
         defCompatibleWith( _i386,	_noarch );
         defCompatibleWith( _i486,	_noarch,_i386 );
         defCompatibleWith( _i586,	_noarch,_i386,_i486 );
@@ -305,9 +304,9 @@ namespace zypp
         defCompatibleWith( _sparc,	_noarch );
         defCompatibleWith( _sparcv8,	_noarch,_sparc );
         defCompatibleWith( _sparcv9,	_noarch,_sparc,_sparcv8 );
-        defCompatibleWith( _sparc64,	_noarch,_sparc,_sparcv8,_sparcv9 );
-	//
 	defCompatibleWith( _sparcv9v,	_noarch,_sparc,_sparcv8,_sparcv9 );
+	//
+        defCompatibleWith( _sparc64,	_noarch,_sparc,_sparcv8,_sparcv9 );
 	defCompatibleWith( _sparc64v,	_noarch,_sparc,_sparcv8,_sparcv9,_sparcv9v,_sparc64 );
         //
         defCompatibleWith( _armv3l,	_noarch );
@@ -325,7 +324,7 @@ namespace zypp
         defCompatibleWith( _sh4a,	_noarch,_sh4 );
         //
         ///////////////////////////////////////////////////////////////////
-        // dumpOn( USR ) << endl;
+        dumpOn( USR ) << endl;
       }
 
     private:
@@ -417,8 +416,8 @@ namespace zypp
   const Arch Arch_alpha( _alpha );
 
   const Arch Arch_sparc64v( _sparc64v );
-  const Arch Arch_sparcv9v( _sparcv9v );
   const Arch Arch_sparc64( _sparc64 );
+  const Arch Arch_sparcv9v( _sparcv9v );
   const Arch Arch_sparcv9( _sparcv9 );
   const Arch Arch_sparcv8( _sparcv8 );
   const Arch Arch_sparc( _sparc );

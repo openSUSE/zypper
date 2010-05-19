@@ -92,10 +92,10 @@ namespace zypp
     bool compatibleWith( const Arch & targetArch_r ) const;
 
     /** Arch comparison.
-     * Primary key is the number of compatible Archs, then
-     * the string representation. Thus Arch_noarch is the
-     * least Arch.
-    */
+     * Compatible architectures are treated as \c less (i.e. <tt>i686>i386>noarch</tt>).
+     * So \c Arch_noarch is the least Arch. Equivalent architectures
+     * (compatible in both directions) are ordered arbitrary.
+     */
     int compare( const Arch & rhs ) const;
 
     /** Arch comparison (static version). */
@@ -201,9 +201,9 @@ namespace zypp
    /** \relates Arch */
   extern const Arch Arch_sparc64v;
   /** \relates Arch */
-  extern const Arch Arch_sparcv9v;
- /** \relates Arch */
   extern const Arch Arch_sparc64;
+  /** \relates Arch */
+  extern const Arch Arch_sparcv9v;
   /** \relates Arch */
   extern const Arch Arch_sparcv9;
   /** \relates Arch */
