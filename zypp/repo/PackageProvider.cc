@@ -249,15 +249,8 @@ namespace zypp
           return ManagedFile();
         }
 
-      Pathname destination( Pathname::dirname( delta ) / defRpmFileName( _package ) );
-
-      if ( ! delta.getDispose() )
-      {
-        // There is no cleanup method associated with the deta. Thus the
-        // delta is not a temporary file, and we don't want to write in
-        // the package into this directory.
-        destination = filesystem::TmpPath::defaultLocation() / defRpmFileName( _package );
-      }
+      // build the package and put it into the cache
+      Pathname destination( _package->repoInfo().packagesPath() / _package->location().filename() );
 
       if ( ! applydeltarpm::provide( delta, destination,
                                      bind( &PackageProvider::progressDeltaApply, this, _1 ) ) )
