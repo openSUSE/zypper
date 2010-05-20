@@ -507,8 +507,10 @@ void SolverRequester::updateTo(
 
   // there is higher version available than the selected candidate
   // this can happen because of repo priorities, locks, vendor lock, and
-  // because of CLI restrictions: repos/arch/version (bnc #522223)
-  if (!identical(selected, highest) && highest->edition() > installed->edition())
+  // because of conditions given on comm. line: repos/arch/version (bnc #522223)
+  if (highest           // should not happen, but just in case (bnc #607482 c#4)
+      && !identical(selected, highest)
+      && highest->edition() > installed->edition())
   {
     // whether user requested specific repo/version/arch
     bool userconstraints =
