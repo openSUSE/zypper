@@ -1,4 +1,11 @@
 -------------------------------------------------------------------
+Thu May 20 21:01:05 CEST 2010 - ma@suse.de
+
+- Fix packages provided via delta rpm being placed in 
+  the wrong package cache (bnc#607583)
+- version 7.7.1 (6)
+
+-------------------------------------------------------------------
 Thu May 20 01:13:49 CEST 2010 - ma@suse.de
 
 - Update zypp-po.tar.bz2
