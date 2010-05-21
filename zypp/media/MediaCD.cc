@@ -202,6 +202,7 @@ namespace zypp {
   //
   MediaCD::DeviceList MediaCD::detectDevices( bool supportingDVD ) const
   {
+    // http://www.kernel.org/pub/linux/utils/kernel/hotplug/libudev/index.html
     zypp::AutoDispose<struct udev *> udev( ::udev_new(), ::udev_unref );
     if ( ! udev )
     {
@@ -256,6 +257,8 @@ namespace zypp {
 	detected.push_back( media );
       }
     }
+    if ( detected.empty() )
+      WAR << "Did not find any CD/DVD device." << endl;
     return detected;
   }
 
