@@ -1,4 +1,10 @@
 -------------------------------------------------------------------
+Fri May 21 20:00:55 CEST 2010 - ma@suse.de
+
+- Fix broken IdStringType comparison (bnc#607572)
+- version 7.7.2 (6)
+
+-------------------------------------------------------------------
 Thu May 20 21:01:05 CEST 2010 - ma@suse.de
 
 - Fix packages provided via delta rpm being placed in 
