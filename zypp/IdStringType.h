@@ -115,40 +115,42 @@ namespace zypp
       using base::SafeBool<Derived>::operator bool_type;
 #endif
     public:
-      static int compare( const Derived & lhs,    const Derived & rhs )      { return compare( lhs.idStr(), rhs.idStr() ); }
-      static int compare( const Derived & lhs,    const IdString & rhs )     { return compare( lhs.idStr(), rhs ); }
-      static int compare( const Derived & lhs,    const std::string & rhs )  { return Derived::_doCompare( lhs.c_str(), rhs.c_str() ); }
-      static int compare( const Derived & lhs,    const char * rhs )         { return Derived::_doCompare( lhs.c_str(), rhs );}
+      // - break it down to idString/const char* <=> idString/cont char*
+      // - handle idString(0)/NULL being the least value
+      // - everything else goes to _doCompare (no NULL)
+      static int compare( const Derived & lhs,     const Derived & rhs )     { return compare( lhs.idStr(), rhs.idStr() ); }
+      static int compare( const Derived & lhs,     const IdString & rhs )    { return compare( lhs.idStr(), rhs ); }
+      static int compare( const Derived & lhs,     const std::string & rhs ) { return compare( lhs.idStr(), rhs.c_str() ); }
+      static int compare( const Derived & lhs,     const char * rhs )        { return compare( lhs.idStr(), rhs );}
 
-      static int compare( const IdString & lhs,   const Derived & rhs )      { return compare( lhs, rhs.idStr() ); }
-      static int compare( const IdString & lhs,   const IdString & rhs )     { return lhs.compareEQ( rhs ) ? 0 :
-                                                                                      Derived::_doCompare( lhs.c_str(), rhs.c_str() ); }
-      static int compare( const IdString & lhs,   const std::string & rhs )  { return Derived::_doCompare( lhs.c_str(), rhs.c_str() ); }
-      static int compare( const IdString & lhs,   const char * rhs )         { return Derived::_doCompare( lhs.c_str(), rhs ); }
+      static int compare( const IdString & lhs,    const Derived & rhs )     { return compare( lhs, rhs.idStr() ); }
+      static int compare( const IdString & lhs,    const IdString & rhs )    { return lhs == rhs ? 0 : Derived::_doCompare( (lhs ? lhs.c_str() : (const char *)0 ),
+															    (rhs ? rhs.c_str() : (const char *)0 ) ); }
+      static int compare( const IdString & lhs,    const std::string & rhs ) { return compare( lhs, rhs.c_str() ); }
+      static int compare( const IdString & lhs,    const char * rhs )        { return Derived::_doCompare( (lhs ? lhs.c_str() : (const char *)0 ), rhs ); }
 
-      static int compare( const std::string & lhs, const Derived & rhs )     { return Derived::_doCompare( lhs.c_str(), rhs.c_str() );}
-      static int compare( const std::string & lhs, const IdString & rhs )    { return Derived::_doCompare( lhs.c_str(), rhs.c_str() ); }
-      static int compare( const std::string & lhs, const std::string & rhs ) { return Derived::_doCompare( lhs.c_str(), rhs.c_str() ); }
-      static int compare( const std::string & lhs, const char * rhs )        { return Derived::_doCompare( lhs.c_str(), rhs ); }
+      static int compare( const std::string & lhs, const Derived & rhs )     { return compare( lhs.c_str(), rhs.idStr() ); }
+      static int compare( const std::string & lhs, const IdString & rhs )    { return compare( lhs.c_str(), rhs ); }
+      static int compare( const std::string & lhs, const std::string & rhs ) { return compare( lhs.c_str(), rhs.c_str() ); }
+      static int compare( const std::string & lhs, const char * rhs )        { return compare( lhs.c_str(), rhs ); }
 
-      static int compare( const char * lhs,        const Derived & rhs )     { return Derived::_doCompare( lhs, rhs.c_str() );}
-      static int compare( const char * lhs,        const IdString & rhs )    { return Derived::_doCompare( lhs, rhs.c_str() ); }
-      static int compare( const char * lhs,        const std::string & rhs ) { return Derived::_doCompare( lhs, rhs.c_str() ); }
+      static int compare( const char * lhs,        const Derived & rhs )     { return compare( lhs, rhs.idStr() ); }
+      static int compare( const char * lhs,        const IdString & rhs )    { return Derived::_doCompare( lhs, (rhs ? rhs.c_str() : (const char *)0 ) ); }
+      static int compare( const char * lhs,        const std::string & rhs ) { return compare( lhs, rhs.c_str() ); }
       static int compare( const char * lhs,        const char * rhs )        { return Derived::_doCompare( lhs, rhs ); }
 
     public:
       int compare( const Derived & rhs )      const { return compare( idStr(), rhs.idStr() ); }
       int compare( const IdStringType & rhs ) const { return compare( idStr(), rhs.idStr() ); }
       int compare( const IdString & rhs )     const { return compare( idStr(), rhs ); }
-      int compare( const std::string & rhs )  const { return Derived::_doCompare( c_str(), rhs.c_str() ); }
-      int compare( const char * rhs )         const { return Derived::_doCompare( c_str(), rhs ); }
+      int compare( const std::string & rhs )  const { return compare( idStr(), rhs.c_str() ); }
+      int compare( const char * rhs )         const { return compare( idStr(), rhs ); }
 
     private:
       static int _doCompare( const char * lhs,  const char * rhs )
       {
-        if ( lhs == rhs ) return 0;
-        if ( lhs && rhs ) return ::strcmp( lhs, rhs );
-        return( lhs ? 1 : -1 );
+	if ( ! lhs ) return rhs ? -1 : 0;
+	return rhs ? ::strcmp( lhs, rhs ) : 1;
       }
 
     private:
@@ -167,7 +169,7 @@ namespace zypp
   /** \relates IdStringType Equal */
   template <class Derived>
   inline bool operator==( const IdStringType<Derived> & lhs, const IdStringType<Derived> & rhs )
-  { return lhs.idStr().compareEQ( rhs.idStr() ); }
+  { return lhs.compare( rhs ) == 0; }
   /** \overload */
   template <class Derived>
   inline bool operator==( const IdStringType<Derived> & lhs, const IdString & rhs )
@@ -196,7 +198,7 @@ namespace zypp
   /** \relates IdStringType NotEqual */
   template <class Derived>
   inline bool operator!=( const IdStringType<Derived> & lhs, const IdStringType<Derived> & rhs )
-  { return ! lhs.idStr().compareEQ( rhs.idStr() ); }
+  { return lhs.compare( rhs ) != 0; }
   /** \overload */
   template <class Derived>
   inline bool operator!=( const IdStringType<Derived> & lhs, const IdString & rhs )
