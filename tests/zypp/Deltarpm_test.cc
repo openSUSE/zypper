@@ -63,9 +63,7 @@ BOOST_AUTO_TEST_CASE(delta)
 
     cout << (it->edition() == "4.21.3-2") << endl;              // fine
     cout << (it->edition() == Edition("4.21.3-2")) << endl;     // fine
-    cout << (it->edition().match(Edition("4.21.3-2")) == 0) << endl; // !match returns -1,0,1
-    cout << (it->edition().match("4.21.3-2") == 0) << endl;          // !match returns -1,0,1
+    cout << (it->edition().match(Edition("4.21.3-2")) == 0) << endl; // match returns -1,0,1
+    cout << (it->edition().match("4.21.3-2") == 0) << endl;          // match returns -1,0,1
   }
-
-  //! \todo FIXME Edition("0:4.21.3-2") != Edition("4.21.3-2") (not even does Edition("0:4.21.3-2").match(Edition("4.21.3-2"))
 }

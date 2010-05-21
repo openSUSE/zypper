@@ -27,6 +27,8 @@ BOOST_AUTO_TEST_CASE(edition)
 
   BOOST_CHECK_EQUAL(_ed1, Edition ("1", ""));
   BOOST_CHECK_EQUAL(_ed2, Edition ("1.1", ""));
+  BOOST_CHECK_EQUAL(_ed2, Edition ("1_1", "")); // Edition strings may differ in separator (non alphanum)
+  BOOST_CHECK_EQUAL(_ed2, Edition ("0:1.1")); // epoch 0 is no epoch
   BOOST_CHECK_EQUAL(_ed3, Edition ("1", "", "1"));
   BOOST_CHECK_EQUAL(_ed3, Edition ("1", "", 1));
   BOOST_CHECK_EQUAL(_ed4, Edition ("1", "1", 2));
