@@ -1,4 +1,9 @@
 -------------------------------------------------------------------
+Thu Jun  3 01:14:08 CEST 2010 - ma@suse.de
+
+- Update zypp-po.tar.bz2
+
+-------------------------------------------------------------------
 Fri May 21 20:00:55 CEST 2010 - ma@suse.de
 
 - Fix broken IdStringType comparison (bnc#607572)
