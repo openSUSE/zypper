@@ -88,7 +88,7 @@ Resolver::Resolver (const ResPool & pool)
     , _allowVendorChange	( ZConfig::instance().solver_allowVendorChange() )
     , _solveSrcPackages		( false )
     , _cleandepsOnRemove	( ZConfig::instance().solver_cleandepsOnRemove() )
-    , _ignoreAlreadyRecommended	(true)
+    , _ignoreAlreadyRecommended	( false )
 
 {
     sat::Pool satPool( sat::Pool::instance() );
