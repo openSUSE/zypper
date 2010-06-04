@@ -1,4 +1,11 @@
 -------------------------------------------------------------------
+Fri Jun  4 17:14:17 CEST 2010 - ma@suse.de
+
+- Fix default evaluation of recommendations of installed 
+  packages (bnc#605490)
+- version 7.7.3 (6)
+
+-------------------------------------------------------------------
 Thu Jun  3 01:14:08 CEST 2010 - ma@suse.de
 
 - Update zypp-po.tar.bz2
