@@ -1,4 +1,9 @@
 -------------------------------------------------------------------
+Sun Jun  6 01:13:52 CEST 2010 - ma@suse.de
+
+- Update zypp-po.tar.bz2
+
+-------------------------------------------------------------------
 Fri Jun  4 17:14:17 CEST 2010 - ma@suse.de
 
 - Fix default evaluation of recommendations of installed 
