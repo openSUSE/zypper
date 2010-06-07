@@ -1,4 +1,12 @@
 -------------------------------------------------------------------
+Mon Jun  7 11:46:58 CEST 2010 - ma@suse.de
+
+- Prevent against daemons launched in rpm %post, that do not close
+  their filedescriptors. Original fix was accidentally reverted. 
+  (bnc#174548)
+- version 7.7.4 (6)
+
+-------------------------------------------------------------------
 Sun Jun  6 01:13:52 CEST 2010 - ma@suse.de
 
 - Update zypp-po.tar.bz2
