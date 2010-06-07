@@ -25,6 +25,19 @@ namespace zypp
   static std::string adjustLocale();
   static void restoreLocale(const std::string & locale);
 
+  const Date::ValueType Date::second;
+  const Date::ValueType Date::minute;
+  const Date::ValueType Date::hour;
+  const Date::ValueType Date::day;
+  const Date::ValueType Date::month28;
+  const Date::ValueType Date::month29;
+  const Date::ValueType Date::month30;
+  const Date::ValueType Date::month31;
+  const Date::ValueType Date::month;
+  const Date::ValueType Date::year365;
+  const Date::ValueType Date::year366;
+  const Date::ValueType Date::year;
+
   ///////////////////////////////////////////////////////////////////
   //
   //	METHOD NAME : Date::Date
