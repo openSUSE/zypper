@@ -1459,23 +1459,76 @@ RpmDb::run_rpm (const RpmArgVec& opts,
 /*--------------------------------------------------------------*/
 /* Read a line from the rpm process				*/
 /*--------------------------------------------------------------*/
-bool
-RpmDb::systemReadLine(string &line)
+bool RpmDb::systemReadLine( string & line )
 {
   line.erase();
 
   if ( process == NULL )
     return false;
 
-  line = process->receiveLine();
+  if ( process->inputFile() )
+  {
+    process->setBlocking( false );
+    FILE * inputfile = process->inputFile();
+    int    inputfileFd = ::fileno( inputfile );
+    do
+    {
+      /* Watch inputFile to see when it has input. */
+      fd_set rfds;
+      FD_ZERO( &rfds );
+      FD_SET( inputfileFd, &rfds );
 
-  if (line.length() == 0)
-    return false;
+      /* Wait up to 5 seconds. */
+      struct timeval tv;
+      tv.tv_sec = 5;
+      tv.tv_usec = 0;
 
-  if (line[line.length() - 1] == '\n')
-    line.erase(line.length() - 1);
+      int retval = select( inputfileFd+1, &rfds, NULL, NULL, &tv );
 
-  return true;
+      if ( retval == -1 )
+      {
+	ERR << "select error: " << strerror(errno) << endl;
+	if ( errno != EINTR )
+	  return false;
+      }
+      else if ( retval )
+      {
+	// Data is available now.
+	size_t linebuffer_size = 0;
+	char * linebuffer = 0;
+	ssize_t nread = getline( &linebuffer, &linebuffer_size, inputfile );
+	DBG << "getline " << nread << " " << ::feof( inputfile ) << " " << ::ferror( inputfile ) << endl;
+	if ( nread > 0 )
+	  DBG << "        '" << string( linebuffer, nread ) << "'" << endl;
+	if ( nread == -1 )
+	{
+	  if ( ::feof( inputfile ) )
+	    return line.size(); // in case of pending output
+	}
+	else
+	{
+	  if ( nread > 0 )
+	  {
+	    if ( linebuffer[nread-1] == '\n' )
+	      --nread;
+	    line += string( linebuffer, nread );
+	  }
+
+	  if ( ! ::ferror( inputfile ) || ::feof( inputfile ) )
+	    return true; // complete line
+	}
+	clearerr( inputfile );
+      }
+      else
+      {
+	// No data within time.
+	if ( ! process->running() )
+	  return false;
+      }
+    } while ( true );
+  }
+
+  return false;
 }
 
 /*--------------------------------------------------------------*/
