@@ -1,4 +1,9 @@
 -------------------------------------------------------------------
+Thu Jun 10 01:13:49 CEST 2010 - ma@suse.de
+
+- Update zypp-po.tar.bz2
+
+-------------------------------------------------------------------
 Mon Jun  7 17:52:50 CEST 2010 - ma@suse.de
 
 - Add missing Date constant declarations.
