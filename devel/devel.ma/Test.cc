@@ -5,7 +5,55 @@
 #include <zypp/PoolQuery.h>
 #include <zypp/sat/AttrMatcher.h>
 
-static TestSetup test( Arch_x86_64 );  // use x86_64 as system arch
+static const Pathname sysRoot( "/tmp/ToolScanRepos" );
+
+void addInstall( const std::string & pkgspec_r )
+{
+  bool rewrote( false );
+  Capability pkgspec( Capability::guessPackageSpec( pkgspec_r, rewrote ) );
+  MIL << "Add '" << pkgspec << "' for '" << pkgspec_r << "'" << endl;
+  ResPool::instance().resolver().addRequire( pkgspec );
+}
+
+void addConflict( const std::string & pkgspec_r )
+{
+  bool rewrote( false );
+  Capability pkgspec( Capability::guessPackageSpec( pkgspec_r, rewrote ) );
+  MIL << "Con '" << pkgspec << "' for '" << pkgspec_r << "'" << endl;
+  ResPool::instance().resolver().addConflict( pkgspec );
+}
+
+bool solve()
+{
+  bool rres = false;
+  {
+    //zypp::base::LogControl::TmpLineWriter shutUp;
+    //ResPool::instance().resolver().setOnlyRequires( true );
+    rres = ResPool::instance().resolver().resolvePool();
+  }
+  if ( ! rres )
+  {
+    ERR << "resolve " << rres << endl;
+    ResPool::instance().resolver().problems();
+    return false;
+  }
+  MIL << "resolve " << rres << endl;
+  vdumpPoolStats( USR << "Transacting:"<< endl,
+		  make_filter_begin<resfilter::ByTransact>(ResPool::instance()),
+                  make_filter_end<resfilter::ByTransact>(ResPool::instance()) ) << endl;
+
+  return true;
+}
+
+bool install()
+{
+  ZYppCommitPolicy pol;
+  pol.dryRun( true );
+  pol.rpmInstFlags( pol.rpmInstFlags().setFlag( target::rpm::RPMINST_JUSTDB ) );
+  SEC << getZYpp()->commit( pol ) << endl;
+  return true;
+}
+
 
 /******************************************************************
 **
@@ -15,39 +63,19 @@ static TestSetup test( Arch_x86_64 );  // use x86_64 as system arch
 int main( int argc, char * argv[] )
 {
   INT << "===[START]==========================================" << endl;
-  test.loadRepo( "/Local/ROOT/cache/solv/@System/solv" );
+  ///////////////////////////////////////////////////////////////////
+  if ( sysRoot == "/" )
+    ::unsetenv( "ZYPP_CONF" );
+  TestSetup::LoadSystemAt( sysRoot, Arch_x86_64 );
+  ///////////////////////////////////////////////////////////////////
+  ResPool   pool( ResPool::instance() );
+  sat::Pool satpool( sat::Pool::instance() );
+  ///////////////////////////////////////////////////////////////////
 
-  Match t( Match::REGEX );
-
-  MIL << (t|Match::STRING) << endl;
-  MIL << (t|Match::NOCASE) << endl;
-  MIL << (Match::STRING|t) << endl;
-  MIL << (Match::STRING|Match::NOCASE) << endl;
-
-
-  Match m = Match::STRING | Match::NOCASE | Match::GLOB ;
-  m = Match::NOCASE | Match::STRING;
-  MIL << m << endl;
-  MIL << m-Match::NOCASE << endl;
-
-  MIL << Match(8765) << endl;
-  MIL << Match() << endl;
-
-
-  INT << "===[END]============================================" << endl << endl;
-  return 0;
-
-
-
-  PoolQuery q;
-  q.addString("foo*|k?");
-  q.setMatchRegex();
-
-  for_( it, q.nbegin(), q.nend() )
-  {
-    zypp::PoolItem pi( zypp::ResPool::instance().find( *it ) );
-    MIL << pi.resolvable() << endl;
-  }
+//   addConflict( "kernel-default" );
+//   addConflict( "kernel-default-base" );
+  addInstall( "test");
+  solve();
 
   INT << "===[END]============================================" << endl << endl;
   return 0;
