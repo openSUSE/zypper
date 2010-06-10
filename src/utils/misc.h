@@ -70,7 +70,7 @@ zypp::Url make_url (const std::string & url_s);
 zypp::Url make_obs_url(
     const std::string & obsuri,
     const zypp::Url & base_url,
-    const std::string & default_platform = "");
+    const std::string & default_platform = "openSUSE_Factory");
 
 /**
  * Returns <code>true</code> if the string \a s contains a substring starting

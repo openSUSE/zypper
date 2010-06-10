@@ -281,7 +281,6 @@ Url make_obs_url (
   if (str::regex_match(obsuri, what, obs_uri_rx))
   {
     vector<string> obsrpath;
-    cout << what[1] << endl;
     str::split(what[1], back_inserter(obsrpath), ":");
     if (obsrpath.empty())
     {
