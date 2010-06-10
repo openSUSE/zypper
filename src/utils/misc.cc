@@ -15,6 +15,7 @@
 #include "zypp/base/Logger.h"
 #include "zypp/base/String.h"
 #include "zypp/base/Easy.h"
+#include "zypp/base/Regex.h"
 #include "zypp/media/MediaManager.h"
 #include "zypp/parser/xml/XmlEscape.h"
 #include "zypp/misc/CheckAccessDeleted.h"
@@ -197,11 +198,11 @@ bool looks_like_url (const string& s)
   }
 */
   string::size_type pos = s.find (':');
-  if (pos != string::npos) {
+  if (pos != string::npos)
+  {
     string scheme (s, 0, pos);
-    if (Url::isRegisteredScheme (scheme)) {
+    if (Url::isRegisteredScheme(scheme) || scheme == "obs")
       return true;
-    }
   }
   return false;
 }
@@ -257,6 +258,63 @@ Url make_url (const string & url_s)
     Zypper::instance()->out().error(s.str());
   }
   return u;
+}
+
+// ----------------------------------------------------------------------------
+
+// in the Estonian locale, a-z excludes t, for example. #302525
+// http://en.wikipedia.org/wiki/Estonian_alphabet
+#define ALNUM "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0-9_"
+
+// valid OBS project name regex from OBS' ApplicationController.valid_project_name? method:
+// http://gitorious.org/opensuse/build-service/blobs/master/src/webui/app/controllers/application_controller.rb
+#define OBS_PROJECT_NAME_RX "[" ALNUM "][-+" ALNUM "\\.:]+"
+
+Url make_obs_url (
+    const string & obsuri,
+    const Url & base_url,
+    const string & default_platform)
+{
+  // zypper's 'obs' URI regex
+  static str::regex obs_uri_rx("^obs://(" OBS_PROJECT_NAME_RX ")/?(.*)$");
+  str::smatch what;
+  if (str::regex_match(obsuri, what, obs_uri_rx))
+  {
+    vector<string> obsrpath;
+    cout << what[1] << endl;
+    str::split(what[1], back_inserter(obsrpath), ":");
+    if (obsrpath.empty())
+    {
+      Zypper::instance()->out().error(_("Empty OBS project name."));
+      return Url();
+    }
+
+    ostringstream urlstr; urlstr << "/";
+    unsigned i = 0;
+    for (; i < obsrpath.size() - 1; ++i)
+      urlstr << obsrpath[i] << ":/";
+    urlstr << obsrpath[i] << "/";         // no colon at the end
+
+    if (what[2].empty())
+      urlstr << default_platform;
+    else
+      urlstr << what[2];
+    urlstr << "/";
+
+    Url url = Url(base_url);
+    Pathname newpath(url.getPathName());
+    newpath = newpath / Pathname(urlstr.str());
+    url.setPathName(newpath.asString());
+
+    return url;
+  }
+  else
+  {
+    Zypper::instance()->out().error(_("Invalid OBS URI."), _("Correct form is obs://<project>/[platform]"));
+    Zypper::instance()->out().info(str::form(_("Example: %s"), "obs://server:http/openSUSE_11.3"));
+  }
+
+  return Url();
 }
 
 // ----------------------------------------------------------------------------

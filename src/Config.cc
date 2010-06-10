@@ -46,6 +46,8 @@ const ConfigOption ConfigOption::COLOR_NEGATIVE(ConfigOption::COLOR_NEGATIVE_e);
 const ConfigOption ConfigOption::COLOR_HIGHLIGHT(ConfigOption::COLOR_HIGHLIGHT_e);
 const ConfigOption ConfigOption::COLOR_PROMPT_OPTION(ConfigOption::COLOR_PROMPT_OPTION_e);
 const ConfigOption ConfigOption::COLOR_PROMPT_SHORTHAND(ConfigOption::COLOR_PROMPT_SHORTHAND_e);
+const ConfigOption ConfigOption::OBS_BASE_URL(ConfigOption::OBS_BASE_URL_e);
+const ConfigOption ConfigOption::OBS_PLATFORM(ConfigOption::OBS_PLATFORM_e);
 
 ConfigOption::ConfigOption(const std::string & strval_r)
   : _value(parse(strval_r))
@@ -98,6 +100,8 @@ const string ConfigOption::asString() const
     _table_str[COLOR_NEGATIVE_e] = "color/negative";
     _table_str[COLOR_HIGHLIGHT_e] = "color/highlight";
     _table_str[COLOR_PROMPT_OPTION_e] = "color/promptOption";
+    _table_str[OBS_BASE_URL_e] = "obs/baseUrl";
+    _table_str[OBS_PLATFORM_e] = "obs/platform";
   }
   map<ConfigOption::Option, string>::const_iterator it = _table_str.find(_value);
   if (it != _table_str.end())
@@ -120,6 +124,8 @@ Config::Config()
   , color_negative   ("red")
   , color_highlight  ("cyan")
   , color_promptOption("grey")
+  , obs_baseUrl("http://download.opensuse.org/repositories/")
+  , obs_platform("openSUSE_Factory")
 {}
 
 void Config::read(const string & file)
@@ -251,6 +257,23 @@ void Config::read(const string & file)
     }
     else
       color_promptOption = c;
+
+
+    // ---------------[ obs ]---------------------------------------------------
+
+    s = augeas.getOption(ConfigOption::OBS_BASE_URL.asString());
+    if (!s.empty())
+    {
+      try { obs_baseUrl = Url(s); }
+      catch (Exception & e)
+      {
+        ERR << "Invalid OBS base URL (" << e.msg() << "), will use the default." << endl;
+      }
+    }
+
+    s = augeas.getOption(ConfigOption::OBS_PLATFORM.asString());
+    if (!s.empty())
+      obs_platform = s;
 
     m.stop();
   }

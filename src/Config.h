@@ -11,6 +11,7 @@
 #include <string>
 #include <set>
 
+#include "zypp/Url.h"
 #include "Command.h"
 #include "utils/colors.h"
 
@@ -34,6 +35,9 @@ public:
   static const ConfigOption COLOR_PROMPT_OPTION;
   static const ConfigOption COLOR_PROMPT_SHORTHAND;
 
+  static const ConfigOption OBS_BASE_URL;
+  static const ConfigOption OBS_PLATFORM;
+
   enum Option
   {
     MAIN_SHOW_ALIAS_e,
@@ -51,7 +55,10 @@ public:
     COLOR_NEGATIVE_e,
     COLOR_HIGHLIGHT_e,
     COLOR_PROMPT_OPTION_e,
-    COLOR_PROMPT_SHORTHAND_e
+    COLOR_PROMPT_SHORTHAND_e,
+
+    OBS_BASE_URL_e,
+    OBS_PLATFORM_e
   };
 
   ConfigOption(Option option) : _value(option) {}
@@ -109,6 +116,11 @@ struct Config
   Color color_negative;
   Color color_highlight;
   Color color_promptOption;
+
+  /** zypper.conf: obs.baseUrl */
+  zypp::Url obs_baseUrl;
+  /** zypper.conf: obs.platform */
+  std::string obs_platform;
 };
 
 #endif /* ZYPPER_CONFIG_H_ */

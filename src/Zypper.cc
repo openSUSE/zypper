@@ -2906,7 +2906,11 @@ void Zypper::doCommand()
           break;
         }
       case 2:
-	Url url = make_url (_arguments[0]);
+	Url url;
+	if (_arguments[0].find("obs") == 0)
+	  url = make_obs_url(_arguments[0], config().obs_baseUrl, config().obs_platform);
+	else
+	  url = make_url(_arguments[0]);
         if (!url.isValid())
         {
           setExitCode(ZYPPER_EXIT_ERR_INVALID_ARGS);

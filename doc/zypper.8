@@ -32,6 +32,15 @@ To specify locations of repositories or other resources (RPM files, .repo
 files) you can use any type of URIs supported by libzypp. See
 http://en.opensuse.org/Libzypp/URI for a complete list and usage examples.
 
+Zypper also accepts special URIs identifying an openSUSE Build Service (OBS)
+repositories in the \fBaddrepo\fR command. These URIs have the form of
+\fBobs://<project>/<platform>\fR, where \fIproject\fR is the name of the
+OBS project and \fIplatform\fR is the target platform (OS) for which the
+repository is intended. For example: obs://server:http/openSUSE_11.3.
+
+If \fIplatform\fR is omitted, zypper.conf's \fIobs.platform\fR value is used.
+See also other options in the [obs] section of zypper.conf.
+
 In addition to these URIs you can use plain directory and file paths in which
 case zypper automatically treats them as dir:/path URIs.
 
@@ -703,7 +712,7 @@ openSUSE 11.1 and openSUSE 11.2.
 To avoid the above trouble, you can specify the repositories from
 which to do the upgrade using the --from or --repo options.
 The difference between these two is that when --repo is used, zypper
-acts as if it knew onle the specified repositories, while with --from
+acts as if it knew only the specified repositories, while with --from
 zypper can eventually use also the rest of enabled repositories to
 satisfy package dependencies.
 
@@ -741,7 +750,7 @@ Upgrade the system using 'factory' and 'packman' repository:
 .br
 .B $ zypper install zypper libzypp
 .br
-.B $ zypper dup -r factory -r packman
+.B $ zypper dup --from factory --from packman
 
 .SS Query Commands
 

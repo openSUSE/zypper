@@ -64,6 +64,15 @@ std::string string_patch_status(const zypp::PoolItem & pi);
 zypp::Url make_url (const std::string & url_s);
 
 /**
+ * Creates Url out of obs://project/platform URI with given base URL and default
+ * platform (used in case the platform is not specified in the URI).
+ */
+zypp::Url make_obs_url(
+    const std::string & obsuri,
+    const zypp::Url & base_url,
+    const std::string & default_platform = "");
+
+/**
  * Returns <code>true</code> if the string \a s contains a substring starting
  * at the beginning and ending before the first colon matches any of registered
  * schemes (Url::isRegisteredScheme()).
