@@ -1,4 +1,11 @@
 -------------------------------------------------------------------
+Thu Jun 10 12:30:06 CEST 2010 - jkupec@suse.cz
+
+- Enabled obs:// URI in addrepo (bnc #423098).
+- updated translations
+- 1.4.5
+
+-------------------------------------------------------------------
 Mon May 17 15:48:32 CEST 2010 - jkupec@suse.cz
 
 - --clean-deps added to 'remove' command. The otion tells the
