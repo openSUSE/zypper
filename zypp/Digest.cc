@@ -121,6 +121,7 @@ namespace zypp {
       {
     	EVP_MD_CTX_cleanup(&mdctx);
     	initialized = false;
+    	finalized = false;
       }
     }
 
@@ -150,6 +151,21 @@ namespace zypp {
       return _dp->name;
     }
 
+    bool Digest::reset()
+    {
+      if (!_dp->initialized)
+	return false;
+      if(!_dp->finalized)
+	{
+	  (void)EVP_DigestFinal_ex(&_dp->mdctx, _dp->md_value, &_dp->md_len);
+          _dp->finalized = true;
+	}
+      if(!EVP_DigestInit_ex(&_dp->mdctx, _dp->md, NULL))
+	return false;
+      _dp->finalized = false;
+      return true;
+    }
+
     std::string Digest::digest()
     {
       if(!_dp->maybeInit())
@@ -172,6 +188,24 @@ namespace zypp {
       }
 
       return std::string(mdtxt);
+    }
+
+    std::vector<unsigned char> Digest::digestVector()
+    {
+      std::vector<unsigned char> r;
+      if(!_dp->maybeInit())
+        return r;
+
+      if(!_dp->finalized)
+      {   
+        if(!EVP_DigestFinal_ex(&_dp->mdctx, _dp->md_value, &_dp->md_len))
+            return r;
+        _dp->finalized = true;
+      }   
+      r.reserve(_dp->md_len);
+      for(unsigned i = 0; i < _dp->md_len; ++i)
+	r.push_back(_dp->md_value[i]);
+      return r;
     }
 
     bool Digest::update(const char* bytes, size_t len)

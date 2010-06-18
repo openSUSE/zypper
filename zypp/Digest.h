@@ -17,6 +17,7 @@
 
 #include <string>
 #include <iosfwd>
+#include <vector>
 
 #include <zypp/Callback.h>
 #include <zypp/Pathname.h>
@@ -100,6 +101,22 @@ namespace zypp {
     	 * @return hex string representation of the digest
     	 * */
     	std::string digest();
+
+    	/** \brief get vector of unsigned char representation of the digest
+    	 *
+    	 * this function will finalize the digest computation. calls to update
+    	 * after this function will start from scratch
+    	 *
+    	 * @return vector representation of the digest
+    	 * */
+    	std::vector<unsigned char> digestVector();
+
+    	/** \brief reset internal digest state
+    	 *
+	 * this function is equivalent to calling create() with an unchanged name,
+	 * but it may be implemented in a more efficient way.
+	 */
+	bool reset();
 
     	/** \brief compute digest of a stream. convenience function
     	 *
