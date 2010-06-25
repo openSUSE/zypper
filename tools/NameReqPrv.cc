@@ -39,7 +39,7 @@ int usage( const std::string & msg_r = std::string(), int exit_r = 100 )
   cerr << "  -c/-C    turn on/off looking for conflicts   (default off)" << endl;
   cerr << "  -o/-O    turn on/off looking for obsoletes   (default off)" << endl;
   cerr << "  -m/-M    turn on/off looking for recommends  (default off)" << endl;
-  cerr << "  -s/-S    turn on/off looking for suggests    (default off)" << endl;
+  cerr << "  -s/-S    turn on/off looking for supplements (default off)" << endl;
   cerr << "  -a       short for -n -p -r" << endl;
   cerr << "  -A       short for -n -P -R" << endl;
   cerr << "" << endl;
@@ -163,14 +163,14 @@ int main( int argc, char * argv[] )
 
   ///////////////////////////////////////////////////////////////////
 
-  bool ignorecase( true );
-  bool names     ( true );
-  bool provides  ( false );
-  bool requires  ( false );
-  bool conflicts ( false );
-  bool obsoletes ( false );
-  bool recommends( false );
-  bool suggests  ( false );
+  bool ignorecase	( true );
+  bool names		( true );
+  bool provides		( false );
+  bool requires		( false );
+  bool conflicts	( false );
+  bool obsoletes	( false );
+  bool recommends	( false );
+  bool supplements	( false );
 
   for ( ; argc; --argc,++argv )
   {
@@ -194,8 +194,8 @@ int main( int argc, char * argv[] )
         case 'O': obsoletes =	false;	break;
         case 'm': recommends =	true;	break;
         case 'M': recommends =	false;	break;
-        case 's': suggests =	true;	break;
-        case 'S': suggests =	false;	break;
+        case 's': supplements =	true;	break;
+        case 'S': supplements =	false;	break;
       }
       continue;
     }
@@ -235,12 +235,12 @@ int main( int argc, char * argv[] )
       q.addDependency( sat::SolvAttr::obsoletes );
     if ( recommends )
       q.addDependency( sat::SolvAttr::recommends );
-    if ( suggests )
-      q.addDependency( sat::SolvAttr::suggests );
+    if ( supplements )
+      q.addDependency( sat::SolvAttr::supplements );
     }
 
     message << *argv << " [" << (ignorecase?'i':'_') << (names?'n':'_') << (requires?'r':'_') << (provides?'p':'_')
-	    << (conflicts?'c':'_') << (obsoletes?'o':'_') << (recommends?'m':'_') << (suggests?'s':'_') << "] {" << endl;
+	    << (conflicts?'c':'_') << (obsoletes?'o':'_') << (recommends?'m':'_') << (supplements?'s':'_') << "] {" << endl;
 
     for_( it, q.begin(), q.end() )
     {
