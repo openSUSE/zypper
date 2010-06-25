@@ -1,4 +1,9 @@
 -------------------------------------------------------------------
+Fri Jun 25 11:35:52 CEST 2010 - ma@suse.de
+
+- Don't bloat logfile by logging install progess values.
+
+-------------------------------------------------------------------
 Thu Jun 10 01:13:49 CEST 2010 - ma@suse.de
 
 - Update zypp-po.tar.bz2

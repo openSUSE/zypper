@@ -1497,9 +1497,6 @@ bool RpmDb::systemReadLine( string & line )
 	size_t linebuffer_size = 0;
 	char * linebuffer = 0;
 	ssize_t nread = getline( &linebuffer, &linebuffer_size, inputfile );
-	DBG << "getline " << nread << " " << ::feof( inputfile ) << " " << ::ferror( inputfile ) << endl;
-	if ( nread > 0 )
-	  DBG << "        '" << string( linebuffer, nread ) << "'" << endl;
 	if ( nread == -1 )
 	{
 	  if ( ::feof( inputfile ) )
