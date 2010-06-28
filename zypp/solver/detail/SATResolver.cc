@@ -823,7 +823,7 @@ void SATResolver::doUpdate()
     _solv->allowvendorchange = _allowvendorchange;
     _solv->dosplitprovides = true;
     _solv->noupdateprovide = _noupdateprovide;
-    _solv->dontinstallrecommended = true; // #FIXME dontinstallrecommended maybe set to false if it works correctly
+    _solv->dontinstallrecommended = _onlyRequires;
     _solv->distupgrade = _distupgrade;
     _solv->distupgrade_removeunsupported = _distupgrade_removeunsupported;
 
