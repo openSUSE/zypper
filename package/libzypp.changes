@@ -1,8 +1,12 @@
 -------------------------------------------------------------------
+Tue Jun 29 17:46:13 CEST 2010 - ma@suse.de
+
+- Fix CURLOPT_MAX_RECV_SPEED_LARGE expecting a curl_off_t argument.
+
+-------------------------------------------------------------------
 Tue Jun 29 10:22:06 CEST 2010 - ma@suse.de
 
 - Respect zypp.conf policy settings when solving for update.
-- version 7.7.5 (6)
 
 -------------------------------------------------------------------
 Fri Jun 25 11:35:52 CEST 2010 - ma@suse.de
