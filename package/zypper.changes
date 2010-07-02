@@ -1,4 +1,9 @@
 -------------------------------------------------------------------
+Fri Jul  2 12:59:52 CEST 2010 - ma@suse.de
+
+- Let zypper manpage be found via `apropos`. (bnc#613198)
+
+-------------------------------------------------------------------
 Thu Jun 10 12:30:06 CEST 2010 - jkupec@suse.cz
 
 - Enabled obs:// URI in addrepo (bnc #423098).
