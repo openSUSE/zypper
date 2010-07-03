@@ -1,4 +1,9 @@
 -------------------------------------------------------------------
+Sun Jul  4 01:13:29 CEST 2010 - ma@suse.de
+
+- Update zypp-po.tar.bz2
+
+-------------------------------------------------------------------
 Tue Jun 29 17:46:13 CEST 2010 - ma@suse.de
 
 - Fix CURLOPT_MAX_RECV_SPEED_LARGE expecting a curl_off_t argument.
