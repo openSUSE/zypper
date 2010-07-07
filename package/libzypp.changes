@@ -1,4 +1,10 @@
 -------------------------------------------------------------------
+Wed Jul  7 13:56:49 CEST 2010 - ma@suse.de
+
+- Add PoolQuery for name, edition AND architecture in one go. (bnc#614362)
+- version 7.8.0 (6)
+
+-------------------------------------------------------------------
 Mon Jul  5 13:03:57 CEST 2010 - ma@suse.de
 
 - Fix requirement to /usr/bin/uuidgen (bnc#613304)
