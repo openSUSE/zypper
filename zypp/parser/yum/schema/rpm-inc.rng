@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<grammar xmlns:rpm="http://linux.duke.edu/metadata/rpm" xmlns="http://relaxng.org/ns/structure/1.0">
+  <include href="common-inc.rng"/>
+  <define name="rpm.entry">
+    <element name="rpm:entry">
+      <optional>
+        <attribute name="pre">
+          <value>1</value>
+        </attribute>
+      </optional>
+      <optional>
+        <attribute name="kind">
+          <choice>
+            <value>atom</value>
+            <value>message</value>
+            <value>package</value>
+            <value>script</value>
+            <value>product</value>
+            <value>patch</value>
+            <value>pattern</value>
+          </choice>
+        </attribute>
+      </optional>
+      <attribute name="name"/>
+      <optional>
+        <ref name="private.evr"/>
+        <attribute name="flags">
+          <choice>
+            <value>EQ</value>
+            <value>GE</value>
+            <value>LE</value>
+            <value>LT</value>
+            <value>GT</value>
+          </choice>
+        </attribute>
+      </optional>
+    </element>
+  </define>
+  <define name="rpm.requires">
+    <element name="rpm:requires">
+      <optional>
+        <!-- pre should not be here, but it is in the wild -->
+        <attribute name="pre">
+          <value>1</value>
+        </attribute>
+      </optional>
+      <zeroOrMore>
+        <ref name="rpm.entry"/>
+      </zeroOrMore>
+    </element>
+  </define>
+  <define name="rpm.obsoletes">
+    <element name="rpm:obsoletes">
+      <oneOrMore>
+        <ref name="rpm.entry"/>
+      </oneOrMore>
+    </element>
+  </define>
+  <define name="rpm.provides">
+    <element name="rpm:provides">
+      <zeroOrMore>
+        <ref name="rpm.entry"/>
+      </zeroOrMore>
+    </element>
+  </define>
+  <define name="rpm.recommends">
+    <element name="rpm:recommends">
+      <zeroOrMore>
+        <ref name="rpm.entry"/>
+      </zeroOrMore>
+    </element>
+  </define>
+  <define name="rpm.supplements">
+    <element name="rpm:supplements">
+      <zeroOrMore>
+        <ref name="rpm.entry"/>
+      </zeroOrMore>
+    </element>
+  </define>
+  <define name="rpm.conflicts">
+    <element name="rpm:conflicts">
+      <oneOrMore>
+        <ref name="rpm.entry"/>
+      </oneOrMore>
+    </element>
+  </define>
+  <define name="rpm.enhances">
+    <element name="rpm:enhances">
+      <oneOrMore>
+        <ref name="rpm.entry"/>
+      </oneOrMore>
+    </element>
+  </define>
+  <define name="rpm.suggests">
+    <element name="rpm:suggests">
+      <zeroOrMore>
+        <ref name="rpm.entry"/>
+      </zeroOrMore>
+    </element>
+  </define>
+</grammar>

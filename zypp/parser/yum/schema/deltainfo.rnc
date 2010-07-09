@@ -1,0 +1,21 @@
+include "common-inc.rnc"
+
+start  = element deltainfo {
+  element newpackage {
+    attribute name { text },
+    attribute arch { private.archenum },
+    attribute version { text },
+    attribute release { text },
+    element delta {
+      attribute oldepoch { private.nonnegative },
+      # two different formats, with different attribute names with same data
+      ((attribute oldversion { text }, attribute oldrelease { text }) |
+       (attribute ver        { text }, attribute rel        { text })),
+      element filename { text },
+      element sequence { text },
+      element size { private.size },
+      element checksum { private.checksum }
+    }+
+  }*
+}
+

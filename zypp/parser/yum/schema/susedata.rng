@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<grammar xmlns:susedata="http://linux.duke.edu/metadata/susedata" xmlns="http://relaxng.org/ns/structure/1.0">
+  <include href="common-inc.rng"/>
+  <define name="ns.susedata">
+    <element name="susedata:susedata">
+      <attribute name="packages">
+        <ref name="private.nonnegative"/>
+      </attribute>
+      <zeroOrMore>
+        <element name="susedata:package">
+          <attribute name="pkgid"/>
+          <attribute name="name"/>
+          <attribute name="arch">
+            <ref name="private.archenum"/>
+          </attribute>
+          <element name="susedata:version">
+            <ref name="private.evr"/>
+          </element>
+          <optional>
+            <element name="susedata:eula">
+              <text/>
+            </element>
+          </optional>
+          <optional>
+            <element name="susedata:keyword">
+              <text/>
+            </element>
+          </optional>
+        </element>
+      </zeroOrMore>
+    </element>
+  </define>
+  <define name="plain.susedata">
+    <element name="susedata">
+      <attribute name="packages">
+        <ref name="private.nonnegative"/>
+      </attribute>
+      <zeroOrMore>
+        <element name="package">
+          <attribute name="pkgid"/>
+          <attribute name="name"/>
+          <attribute name="arch">
+            <ref name="private.archenum"/>
+          </attribute>
+          <element name="version">
+            <ref name="private.evr"/>
+          </element>
+          <optional>
+            <element name="eula">
+              <text/>
+            </element>
+          </optional>
+          <optional>
+            <element name="keyword">
+              <text/>
+            </element>
+          </optional>
+        </element>
+      </zeroOrMore>
+    </element>
+  </define>
+  <!-- Unfortunately there are some susedata files without namespaces in the wild -->
+  <start>
+    <choice>
+      <ref name="ns.susedata"/>
+      <ref name="plain.susedata"/>
+    </choice>
+  </start>
+</grammar>

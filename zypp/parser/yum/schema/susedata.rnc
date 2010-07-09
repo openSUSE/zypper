@@ -1,0 +1,31 @@
+namespace susedata = "http://linux.duke.edu/metadata/susedata"
+
+include "common-inc.rnc"
+
+ns.susedata = element susedata:susedata {
+  attribute packages { private.nonnegative },
+  element susedata:package {
+    attribute pkgid { text },
+    attribute name { text },
+    attribute arch { private.archenum },
+    element susedata:version { private.evr },
+    element susedata:eula { text }?,
+    element susedata:keyword { text }?
+  }*
+}
+
+plain.susedata = element susedata {
+  attribute packages { private.nonnegative },
+  element package {
+    attribute pkgid { text },
+    attribute name { text },
+    attribute arch { private.archenum },
+    element version { private.evr },
+    element eula { text }?,
+    element keyword { text }?
+  }*
+}
+
+# Unfortunately there are some susedata files without namespaces in the wild
+start = (ns.susedata | plain.susedata)
+

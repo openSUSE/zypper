@@ -1,37 +1,18 @@
 default namespace = "http://linux.duke.edu/metadata/other"
 
-element otherdata {
-  attribute packages { xsd:positiveInteger },
+include "common-inc.rnc"
+
+start = element otherdata {
+  attribute packages { private.nonnegative },
   element package {
     attribute pkgid { text },
     attribute name { text },
-    attribute arch {
-      "noarch"
-      | "athlon"
-      | "i386"
-      | "i486"
-      | "i586"
-      | "i686"
-      | "ia64"
-      | "ppc"
-      | "ppc64"
-      | "s390"
-      | "x390x"
-      | "x86_64"
-      | "src"
-    },
-    element version {
-      attribute epoch { xsd:nonNegativeInteger },
-      attribute ver { text },
-      attribute rel { text },
-      empty
-    },
-    element changelog {
+    attribute arch { private.archenum },
+    element version { private.evr },
+    element changelog { 
       attribute author { text },
-      attribute date { xsd:integer },
-      text
-    }*,
-    empty
-  }+,
-  empty
+      attribute date { private.unixts },
+      text 
+    }*
+  }*
 }

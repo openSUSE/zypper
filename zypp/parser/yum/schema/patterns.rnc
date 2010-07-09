@@ -1,16 +1,30 @@
-default namespace = "http://novell.com/package/metadata/suse/patterns"
+namespace suse = "http://novell.com/package/metadata/suse/pattern"
+namespace rpm = "http://linux.duke.edu/metadata/rpm"
 
-# repodata/patterns.xml schema
-#
-# This is a SUSE extension to the RPM Metadata
-# http://en.opensuse.org/Libzypp/Metadata/repomd/patterns
-# http://en.opensuse.org/Patterns
+include "rpm-inc.rnc"
 
-include "pattern.rnc" {
-  start = element-patterns
-}
+suse.uservisible = element suse:uservisible { empty }
 
-element-patterns = element patterns {
+suse.category = element suse:category { private.localizedtext } 
+
+suse.plaincat = element suse:category { text }
+
+start = element patterns {
+  # seen missing in the wild
   attribute count { xsd:nonNegativeInteger }?,
-  element-pattern+
+  element suse:pattern {
+    element suse:name { text },
+    element suse:arch { private.archenum }?,
+    element suse:version { private.evr }?,
+    element suse:summary { text },
+    element suse:description { text }?,
+    ((suse.uservisible, suse.category?) | (suse.plaincat, suse.uservisible?)),
+    rpm.provides?,
+    element rpm:freshens {
+      rpm.entry+
+    }?,
+    rpm.suggests?,
+    rpm.requires?,
+    rpm.recommends?
+  }+
 }

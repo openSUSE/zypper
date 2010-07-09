@@ -1,75 +1,38 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<grammar xmlns:ns1="http://novell.com/package/metadata/suse/products" xmlns="http://relaxng.org/ns/structure/1.0" datatypeLibrary="http://www.w3.org/2001/XMLSchema-datatypes">
-  <include href="suse-primary.rng">
-    <start>
-      <ref name="products"/>
-    </start>
-  </include>
-  <define name="products">
-    <element name="ns1:products">
+<grammar xmlns="http://relaxng.org/ns/structure/1.0">
+  <include href="common-inc.rng"/>
+  <start>
+    <element name="products">
       <oneOrMore>
-        <element name="ns1:product">
-          <attribute name="type"/>
-          <element name="ns1:vendor">
-            <text/>
-          </element>
-          <element name="ns1:name">
-            <text/>
-          </element>
-          <element name="ns1:version">
-            <attribute name="epoch">
-              <data type="nonNegativeInteger"/>
-            </attribute>
-            <attribute name="ver"/>
-            <attribute name="rel"/>
-          </element>
-          <oneOrMore>
-            <element name="ns1:displayname">
-              <ref name="localized-string"/>
-            </element>
-          </oneOrMore>
-          <zeroOrMore>
-            <element name="ns1:shortname">
-              <ref name="localized-string"/>
-            </element>
-          </zeroOrMore>
-          <element name="ns1:distribution">
-            <text/>
-          </element>
-          <element name="ns1:flavor">
-            <text/>
-          </element>
-          <element name="ns1:references">
-            <text/>
-          </element>
-          <oneOrMore>
-            <element name="ns1:description">
-              <ref name="localized-string"/>
-            </element>
-          </oneOrMore>
+        <element name="product">
           <optional>
-            <element name="ns1:release-notes-url">
-              <text/>
-            </element>
+            <attribute name="id"/>
           </optional>
-          <zeroOrMore>
-            <element name="ns1:update-url">
-              <text/>
-            </element>
-          </zeroOrMore>
-          <zeroOrMore>
-            <element name="ns1:optional-url">
-              <text/>
-            </element>
-          </zeroOrMore>
-          <zeroOrMore>
-            <element name="ns1:extra-url">
-              <text/>
-            </element>
-          </zeroOrMore>
-          <ref name="dependencies"/>
+          <optional>
+            <attribute name="schemeversion">
+              <value>0</value>
+            </attribute>
+          </optional>
+          <element name="name">
+            <text/>
+          </element>
+          <element name="version">
+            <ref name="private.evr"/>
+          </element>
+          <element name="arch">
+            <ref name="private.archenum"/>
+          </element>
+          <element name="vendor">
+            <text/>
+          </element>
+          <element name="summary">
+            <text/>
+          </element>
+          <element name="description">
+            <text/>
+          </element>
         </element>
       </oneOrMore>
     </element>
-  </define>
+  </start>
 </grammar>

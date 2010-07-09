@@ -1,0 +1,19 @@
+namespace yum = "http://linux.duke.edu/metadata/repo"
+
+include "common-inc.rnc"
+
+# There is a horribly broken suseinfo variant we have to handle
+good = element yum:suseinfo {
+  element yum:expire { private.positive }
+}
+
+bad = element suseinfo {
+  element keywords {
+    element k { empty }
+  },
+  element products {
+    element id { empty }
+  }
+}
+
+start = (good | bad)

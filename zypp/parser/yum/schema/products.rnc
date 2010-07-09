@@ -1,32 +1,15 @@
-default namespace = "http://linux.duke.edu/metadata/rpm"
-namespace ns1 = "http://novell.com/package/metadata/suse/products"
+include "common-inc.rnc"
 
-include "suse-primary.rnc" {
-  start = products
-}
-
-products = element ns1:products {
-  element ns1:product {
-    attribute type { text },
-    element ns1:vendor { text },
-    element ns1:name { text },
-    element ns1:version {
-      attribute epoch { xsd:nonNegativeInteger },
-      attribute ver { text },
-      attribute rel { text }
-    },
-    element ns1:displayname { localized-string }+,
-    element ns1:shortname { localized-string }*,
-    element ns1:distribution { text },
-    element ns1:flavor { text },
-    element ns1:references { text },
-    element ns1:description { localized-string }+,
-    element ns1:release-notes-url { text }?,
-    element ns1:update-url { text }*,
-    element ns1:optional-url { text }*,
-    element ns1:extra-url { text }*,
-    dependencies
+start = element products {
+  element product {
+    attribute id { text }?,
+    attribute schemeversion { "0" }?,
+    element name { text },
+    element version { private.evr },
+    element arch { private.archenum },
+    element vendor { text },
+    element summary { text },
+    element description { text }
   }+
 }
-
 

@@ -1,0 +1,45 @@
+namespace rpm = "http://linux.duke.edu/metadata/rpm"
+
+include "common-inc.rnc"
+
+rpm.entry =  element rpm:entry {
+  attribute pre { "1" }?,
+  attribute kind { "atom" | "message" | "package" | "script" | "product" | "patch" | "pattern" }?,
+  attribute name { text },
+  (private.evr,
+  attribute flags { "EQ" | "GE" | "LE" | "LT" | "GT" })?
+}
+
+rpm.requires = element rpm:requires {
+  # pre should not be here, but it is in the wild
+  attribute pre { "1" }?,
+  rpm.entry*
+}
+
+rpm.obsoletes = element rpm:obsoletes {
+  rpm.entry+
+}
+
+rpm.provides = element rpm:provides {
+  rpm.entry*
+}
+
+rpm.recommends = element rpm:recommends {
+  rpm.entry*
+}
+
+rpm.supplements = element rpm:supplements {
+  rpm.entry*
+}
+
+rpm.conflicts = element rpm:conflicts {
+  rpm.entry+
+}
+
+rpm.enhances = element rpm:enhances {
+  rpm.entry+
+}
+
+rpm.suggests = element rpm:suggests {
+  rpm.entry*
+}

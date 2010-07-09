@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<grammar xmlns:yum="http://linux.duke.edu/metadata/repo" xmlns="http://relaxng.org/ns/structure/1.0">
+  <include href="common-inc.rng"/>
+  <!-- There is a horribly broken suseinfo variant we have to handle -->
+  <define name="good">
+    <element name="yum:suseinfo">
+      <element name="yum:expire">
+        <ref name="private.positive"/>
+      </element>
+    </element>
+  </define>
+  <define name="bad">
+    <element name="suseinfo">
+      <element name="keywords">
+        <element name="k">
+          <empty/>
+        </element>
+      </element>
+      <element name="products">
+        <element name="id">
+          <empty/>
+        </element>
+      </element>
+    </element>
+  </define>
+  <start>
+    <choice>
+      <ref name="good"/>
+      <ref name="bad"/>
+    </choice>
+  </start>
+</grammar>

@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<grammar ns="http://novell.com/package/metadata/suse/product" xmlns="http://relaxng.org/ns/structure/1.0" datatypeLibrary="http://www.w3.org/2001/XMLSchema-datatypes">
+  <include href="rpm-inc.rng"/>
+  <start>
+    <element name="product">
+      <attribute name="type">
+        <choice>
+          <value>add-on</value>
+          <value>base</value>
+        </choice>
+      </attribute>
+      <element name="vendor">
+        <text/>
+      </element>
+      <element name="name">
+        <text/>
+      </element>
+      <element name="arch">
+        <ref name="private.archenum"/>
+      </element>
+      <element name="version">
+        <ref name="private.evr"/>
+      </element>
+      <element name="displayname">
+        <ref name="private.localizedtext"/>
+      </element>
+      <element name="shortname">
+        <text/>
+      </element>
+      <element name="distribution-name">
+        <text/>
+      </element>
+      <element name="distribution-edition">
+        <text/>
+      </element>
+      <element name="description">
+        <ref name="private.localizedtext"/>
+      </element>
+      <optional>
+        <element name="release-notes-url">
+          <data type="anyURI"/>
+        </element>
+      </optional>
+      <ref name="rpm.provides"/>
+      <optional>
+        <ref name="rpm.obsoletes"/>
+      </optional>
+      <optional>
+        <ref name="rpm.requires"/>
+      </optional>
+      <optional>
+        <ref name="rpm.conflicts"/>
+      </optional>
+    </element>
+  </start>
+</grammar>

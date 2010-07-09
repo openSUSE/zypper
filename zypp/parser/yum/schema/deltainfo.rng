@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<grammar xmlns="http://relaxng.org/ns/structure/1.0">
+  <include href="common-inc.rng"/>
+  <start>
+    <element name="deltainfo">
+      <zeroOrMore>
+        <element name="newpackage">
+          <attribute name="name"/>
+          <attribute name="arch">
+            <ref name="private.archenum"/>
+          </attribute>
+          <attribute name="version"/>
+          <attribute name="release"/>
+          <oneOrMore>
+            <element name="delta">
+              <attribute name="oldepoch">
+                <ref name="private.nonnegative"/>
+              </attribute>
+              <!-- two different formats, with different attribute names with same data -->
+              <choice>
+                <group>
+                  <attribute name="oldversion"/>
+                  <attribute name="oldrelease"/>
+                </group>
+                <group>
+                  <attribute name="ver"/>
+                  <attribute name="rel"/>
+                </group>
+              </choice>
+              <element name="filename">
+                <text/>
+              </element>
+              <element name="sequence">
+                <text/>
+              </element>
+              <element name="size">
+                <ref name="private.size"/>
+              </element>
+              <element name="checksum">
+                <ref name="private.checksum"/>
+              </element>
+            </element>
+          </oneOrMore>
+        </element>
+      </zeroOrMore>
+    </element>
+  </start>
+</grammar>

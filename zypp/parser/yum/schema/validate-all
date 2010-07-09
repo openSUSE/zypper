@@ -1,0 +1,149 @@
+#!/bin/bash
+DEBUG=1
+
+TARGET=/mounts/you
+#TARGET=/mounts/dist/ibs
+#TARGET=/mounts/mirror/SuSE/*
+
+SCHEMAS=$(dirname "$0")
+
+val_jing_compact() {
+    gzip -dcf "$2" | jing -c "$SCHEMAS/$1.rnc" /proc/self/fd/0
+}
+
+val_jing() {
+    gzip -dcf "$2" | jing "$SCHEMAS/$1.rng" /proc/self/fd/0
+}
+
+val_xmllint() {
+    gzip -dcf "$2" | xmllint --noout --relaxng "$SCHEMAS/$1.rng" - 2>/dev/null
+}
+
+validate() {
+    [ $DEBUG -gt 4 ] && echo "$2" >&2
+    if [ ! -f "$2" ]; then
+        echo "File missing: $2"
+        return 5
+    fi
+    $VAL "$1" "$2"
+    if [ $? -ne 0 ]; then
+        echo "Validation failed: $2 (using $1)"
+        return 2
+    fi
+}
+
+get_xpath_href() {
+    xpath "$1" "$2" 2>/dev/null | sed -r -e 's/ href="/\n/g;s/$/\n/' \
+    | sed -e 's/"$//' | tail -n +2
+}
+
+get_data_type() {
+    get_xpath_href "$1" '/repomd/data[@type="'"$2"'"]/location/@href'
+}
+
+get_patches() {
+    get_xpath_href "$1" '/patches/patch/location/@href'
+}
+
+if [ $(type -p xmllint) ]; then
+    VAL=val_xmllint
+elif [ $(type -p jing) ]; then
+    VAL=val_jing_compact
+else
+    echo "No validators found!!"
+    exit 100
+fi
+
+if [ -z $(type -p xpath) ]; then
+    echo "xpath command not fond"
+fi
+
+find $TARGET -noleaf -name 'repomd.xml' 2>/dev/null | while read FN; do
+    [ $DEBUG -gt 0 ] && echo "$FN" >&2 
+    validate repomd "$FN"   
+#    [ $? -eq 0 ] || break 
+    D=$(dirname "$FN")
+    BASE=$(dirname "$D")
+    B=$(basename "$D")
+    if [ "$B" != "repodata" ]; then
+        echo "Found $FN not in repodata directory"
+        exit 3
+    fi
+
+    get_data_type "$FN" patterns | while read UIFN; do 
+        [ $DEBUG -gt 1 ] && echo "$UIFN" >&2 
+        validate patterns "$BASE/$UIFN"
+        [ $? -eq 0 ] || exit 11
+    done
+
+    get_data_type "$FN" pattern | while read UIFN; do 
+        [ $DEBUG -gt 1 ] && echo "$UIFN" >&2 
+        validate patterns "$BASE/$UIFN"
+        [ $? -eq 0 ] || exit 11
+    done
+
+    get_data_type "$FN" primary | while read UIFN; do 
+        [ $DEBUG -gt 1 ] && echo "$UIFN" >&2 
+        validate primary "$BASE/$UIFN"
+        [ $? -eq 0 ] || exit 11
+    done
+
+    get_data_type "$FN" other | while read UIFN; do 
+        [ $DEBUG -gt 1 ] && echo "$UIFN" >&2 
+        validate other "$BASE/$UIFN"
+        [ $? -eq 0 ] || exit 11
+    done
+    
+    get_data_type "$FN" filelists | while read UIFN; do 
+        [ $DEBUG -gt 1 ] && echo "$UIFN" >&2 
+        validate filelists "$BASE/$UIFN"
+        [ $? -eq 0 ] || exit 11
+    done
+
+    get_data_type "$FN" suseinfo | while read UIFN; do 
+        [ $DEBUG -gt 1 ] && echo "$UIFN" >&2 
+        validate suseinfo "$BASE/$UIFN"
+        [ $? -eq 0 ] || exit 11
+    done
+
+    get_data_type "$FN" susedata | while read UIFN; do 
+        [ $DEBUG -gt 1 ] && echo "$UIFN" >&2 
+        validate susedata "$BASE/$UIFN"
+        [ $? -eq 0 ] || exit 11
+    done
+
+    get_data_type "$FN" product | while read UIFN; do 
+        [ $DEBUG -gt 1 ] && echo "$UIFN" >&2 
+        validate product "$BASE/$UIFN"
+        [ $? -eq 0 ] || exit 11
+    done
+
+    get_data_type "$FN" products | while read UIFN; do 
+        [ $DEBUG -gt 1 ] && echo "$UIFN" >&2 
+        validate products "$BASE/$UIFN"
+        [ $? -eq 0 ] || exit 11
+    done
+
+    get_data_type "$FN" updateinfo | while read UIFN; do 
+        [ $DEBUG -gt 1 ] && echo "$UIFN" >&2 
+        validate updateinfo "$BASE/$UIFN"
+        [ $? -eq 0 ] || exit 11
+    done
+
+    get_data_type "$FN" deltainfo | while read UIFN; do 
+        [ $DEBUG -gt 1 ] && echo "$UIFN" >&2 
+        validate deltainfo "$BASE/$UIFN"
+        [ $? -eq 0 ] || exit 11
+    done
+
+    get_data_type "$FN" patches | while read PFN; do
+        [ $DEBUG -gt 1 ] && echo "$PFN" >&2 
+        validate patches "$BASE/$PFN"
+        [ $? -eq 0 ] || exit 12
+        get_patches "$BASE/$PFN" | while read PATCH; do
+            [ $DEBUG -gt 2 ] && echo "$PATCH" >&2 
+            validate patch "$BASE/$PATCH"
+            [ $? -eq 0 ] || exit 13
+        done        
+    done
+done

@@ -1,68 +1,51 @@
-default namespace = "http://linux.duke.edu/metadata/other"
+default namespace = "http://novell.com/package/metadata/suse/updateinfo"
 
-element updates {
+include "common-inc.rnc"
+
+start = element updates {
   element update {
-    attribute from { xsd:string },
-    attribute status { "final" | "whatever" },
-    attribute type { "security" | "whatever" },
+    # Seen missing in the wild
+    attribute from { "maint-coord@suse.de" }?,
+    attribute status { "stable" },
+    attribute type { "recommended" | "security" | "optional" | "feature" },
     attribute version { xsd:string },
     element id { text },
     element title { text },
+    # Seen missing in the wild
+    element release { text }?,
+    # Usually with date attribute, but seen in the wild with content instead
     element issued {
-      attribute date { xsd:dateTime },
-      empty
+      (attribute date { private.unixts } | private.unixts)
     },
-    element updated {
-      attribute date { xsd:dateTime },
-      empty
-    },
+    # Seen missing in the wild
     element references {
       element reference {
+	# Appears to always start with https://bugzilla.novellc.om/show_bug.cgi?id=
+        #  if type="bugzilla" and http://cve.mitre.org/cgi-bin/cvename.cgi?name=
+        #  if type="cve"
         attribute href { xsd:anyURI },
         attribute id { xsd:string },
-        attribute type { "bugzilla" | "cve" },
-        empty
-      }*,
-      empty
-    },
+        attribute title { xsd:string },
+        attribute type { "bugzilla" | "cve" }
+      }+
+    }?,
     element description { text },
     element pkglist {
       element collection {
-        attribute short { xsd:string },
-        element name { text },
         element package {
-          attribute arch {
-            "noarch"
-            | "athlon"
-            | "i386"
-            | "i486"
-            | "i586"
-            | "i686"
-            | "ia64"
-            | "ppc"
-            | "ppc64"
-            | "s390"
-            | "x390x"
-            | "x86_64"
-            | "src"
-          },
-          attribute epoch { xsd:nonNegativeInteger },
-          attribute version { xsd:string },
-          attribute release { xsd:string },
-          attribute src { xsd:anyURI },
+	  attribute name { xsd:string },
+          attribute arch { private.archenum },
+          # not private.evr because "version" and "release" are spelled out
+          attribute epoch { private.nonnegative }?,
+          attribute version { text }?,
+          attribute release { text }?,
           element filename { text },
-          element sum {
-            attribute type { xsd:string },
-            text
-          },
-          empty
-        }*,
-        empty
-      },
-      empty
-    },
-    empty
-  }*,
-  empty
+	  element restart_suggested { "1" }?,
+	  element reboot_suggested { "1" }?,
+	  element relogin_suggested { "1" }?
+        }+
+      }
+    }
+  }+
 }
 

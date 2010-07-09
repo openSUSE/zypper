@@ -1,23 +1,16 @@
 default namespace = "http://novell.com/package/metadata/suse/patches"
 
-# This describes the patch file index XML file 'repodata/patches.xml' used in
-# code 10 SUSE systems. This file only references other files, which contain
-# the actual patch data.
-#
-# code 11 systems use yum's updateinfo.xml (updateinfo.rnc) to hold data of
-# all patches (updates).
+include "common-inc.rnc"
 
-element patches
-  {
+start  = element patches {
   element patch {
-    attribute id { text }&
-    element location {
-      attribute xml:base { xsd:anyURI }?,
-      attribute href { xsd:anyURI }
-    }&
+    attribute id { text },
     element checksum {
-      attribute type { "md5" | "sha" },
-      text
-    }
+      private.checksum
+    },
+    element location {
+      attribute href { xsd:anyURI }
+    },
+    element category { "recommended" | "security" | "optional" }?
   }*
 }

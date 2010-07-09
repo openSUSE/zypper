@@ -1,27 +1,87 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<grammar ns="http://novell.com/package/metadata/suse/patterns" xmlns="http://relaxng.org/ns/structure/1.0" datatypeLibrary="http://www.w3.org/2001/XMLSchema-datatypes">
-  <!--
-    repodata/patterns.xml schema
-    
-    This is a SUSE extension to the RPM Metadata
-    http://en.opensuse.org/Libzypp/Metadata/repomd/patterns
-    http://en.opensuse.org/Patterns
-  -->
-  <include href="pattern.rng">
-    <start>
-      <ref name="element-patterns"/>
-    </start>
-  </include>
-  <define name="element-patterns">
+<grammar xmlns:rpm="http://linux.duke.edu/metadata/rpm" xmlns:suse="http://novell.com/package/metadata/suse/pattern" xmlns="http://relaxng.org/ns/structure/1.0" datatypeLibrary="http://www.w3.org/2001/XMLSchema-datatypes">
+  <include href="rpm-inc.rng"/>
+  <define name="suse.uservisible">
+    <element name="suse:uservisible">
+      <empty/>
+    </element>
+  </define>
+  <define name="suse.category">
+    <element name="suse:category">
+      <ref name="private.localizedtext"/>
+    </element>
+  </define>
+  <define name="suse.plaincat">
+    <element name="suse:category">
+      <text/>
+    </element>
+  </define>
+  <start>
     <element name="patterns">
       <optional>
+        <!-- seen missing in the wild -->
         <attribute name="count">
           <data type="nonNegativeInteger"/>
         </attribute>
       </optional>
       <oneOrMore>
-        <ref name="element-pattern"/>
+        <element name="suse:pattern">
+          <element name="suse:name">
+            <text/>
+          </element>
+          <optional>
+            <element name="suse:arch">
+              <ref name="private.archenum"/>
+            </element>
+          </optional>
+          <optional>
+            <element name="suse:version">
+              <ref name="private.evr"/>
+            </element>
+          </optional>
+          <element name="suse:summary">
+            <text/>
+          </element>
+          <optional>
+            <element name="suse:description">
+              <text/>
+            </element>
+          </optional>
+          <choice>
+            <group>
+              <ref name="suse.uservisible"/>
+              <optional>
+                <ref name="suse.category"/>
+              </optional>
+            </group>
+            <group>
+              <ref name="suse.plaincat"/>
+              <optional>
+                <ref name="suse.uservisible"/>
+              </optional>
+            </group>
+          </choice>
+          <optional>
+            <ref name="rpm.provides"/>
+          </optional>
+          <optional>
+            <element name="rpm:freshens">
+              <oneOrMore>
+                <ref name="rpm.entry"/>
+              </oneOrMore>
+            </element>
+          </optional>
+          <optional>
+            <ref name="rpm.suggests"/>
+          </optional>
+          <optional>
+            <ref name="rpm.requires"/>
+          </optional>
+          <optional>
+            <ref name="rpm.recommends"/>
+          </optional>
+        </element>
       </oneOrMore>
     </element>
-  </define>
+  </start>
 </grammar>

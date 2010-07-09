@@ -1,0 +1,22 @@
+default namespace = "http://novell.com/package/metadata/suse/product"
+
+include "rpm-inc.rnc"
+
+start = element product {
+  attribute type { "add-on" | "base" }, 
+  element vendor { text },
+  element name { text },
+  element arch { private.archenum },
+  element version { private.evr },
+  element displayname { private.localizedtext },
+  element shortname { text },
+  element distribution-name { text },
+  element distribution-edition { text },
+  element description { private.localizedtext },
+  element release-notes-url { xsd:anyURI }?,
+  rpm.provides,
+  rpm.obsoletes?,
+  rpm.requires?,
+  rpm.conflicts?
+}
+
