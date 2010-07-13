@@ -1,4 +1,10 @@
 -------------------------------------------------------------------
+Tue Jul 13 16:17:39 CEST 2010 - jkupec@suse.cz
+
+- Show support level in package info when running on SLE
+  (bnc #599154)
+
+-------------------------------------------------------------------
 Fri Jul  2 12:59:52 CEST 2010 - ma@suse.de
 
 - Let zypper manpage be found via `apropos`. (bnc#613198)
