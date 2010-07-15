@@ -137,12 +137,6 @@ unsigned int get_prompt_reply(Zypper & zypper,
  */
 std::string get_text(const std::string & prompt, const std::string & prefilled = "");
 
-/**
- * Get text from user without showing the typed text on the terminal.
- * Uses getchar(), not suitable for machines.
- */
-std::string get_password();
-
 /*
 enum Error {
     NO_ERROR,
