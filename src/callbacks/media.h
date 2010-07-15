@@ -9,6 +9,7 @@
 #define ZMART_MEDIA_CALLBACKS_H
 
 #include <stdlib.h>
+#include <unistd.h>
 #include <ctime>
 #include <iostream>
 
@@ -194,7 +195,7 @@ namespace ZmartRecipients
       // input from human using readline
       else
       {
-        std::cout << description << std::endl;
+        Zypper::instance()->out().info(description, Out::QUIET);
         username = get_text(_("User Name") + std::string(": "), auth_data.username());
       }
       if (username.empty())
@@ -211,7 +212,7 @@ namespace ZmartRecipients
       if (Zypper::instance()->globalOpts().machine_readable)
         std::cin >> password;
       else
-        password = get_password();
+        password = getpass("");
       if (password.empty())
         return false;
       auth_data.setPassword(password);
