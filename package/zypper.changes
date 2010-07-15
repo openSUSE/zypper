@@ -1,4 +1,12 @@
 -------------------------------------------------------------------
+Thu Jul 15 11:45:12 CEST 2010 - jkupec@suse.cz
+
+- Use getpass() from stduni.h instead of our own function.
+  Fixes bnc #619196
+- updated translations
+- 1.4.6
+
+-------------------------------------------------------------------
 Tue Jul 13 16:17:39 CEST 2010 - jkupec@suse.cz
 
 - Show support level in package info when running on SLE
