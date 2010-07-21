@@ -1,4 +1,9 @@
 -------------------------------------------------------------------
+Thu Jul 22 01:13:27 CEST 2010 - ma@suse.de
+
+- Update zypp-po.tar.bz2
+
+-------------------------------------------------------------------
 Wed Jul  7 13:56:49 CEST 2010 - ma@suse.de
 
 - Add PoolQuery for name, edition AND architecture in one go. (bnc#614362)
