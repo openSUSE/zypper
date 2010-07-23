@@ -34,7 +34,8 @@ Also many commands and options take a repository as an arugment. See section
 .SS Resource Identfiers (URI)
 To specify locations of repositories or other resources (RPM files, .repo
 files) you can use any type of URIs supported by libzypp. See
-http://en.opensuse.org/Libzypp/URI for a complete list and usage examples.
+http://en.opensuse.org/openSUSE:Libzypp_URIs for a complete list and usage
+examples.
 
 Zypper also accepts special URIs identifying openSUSE Build Service (OBS)
 repositories in the \fBaddrepo\fR command. These URIs have the form of
@@ -85,7 +86,7 @@ a list of other repositories. This list can be generated dynamically by the
 server according to some URI parameters or user name, or can be static. Once
 such service is added to your system, zypper takes care of adding, modifying,
 or removing these repositories on your system to reflect the current list.
-See section Service Management and http://en.opensuse.org/Standards/Repository_Index_Service
+See section Service Management and http://old-en.opensuse.org/Standards/Repository_Index_Service
 for more details.
 
 .SS Package Types
@@ -121,7 +122,7 @@ as arguments of \fI--type\fR option in several commands like \fBinstall\fR,
 Software packages depend on each other in various ways. Packages usually
 require or recommend other packages, they can declare that they conflict
 with other packages, etc. Packages can also depend on specific hardware.
-See http://en.opensuse.org/Software_Management/Dependencies for more
+See http://old-en.opensuse.org/Software_Management/Dependencies for more
 information. Zypper utilizes a \fIdependency solver\fR to find out what
 packages are needed to be installed according to user's request.
 
@@ -1107,7 +1108,7 @@ Apply changes to all remote repositories (http/https/ftp).
 .I \-m, \-\-medium\-type <type>
 Apply changes to repositories of specified type. The type corresponds to the
 repository URI scheme identifier like http, dvd, etc. You can find complete
-list of valid types at http://en.opensuse.org/Libzypp/URI.
+list of valid types at http://en.opensuse.org/openSUSE:Libzypp_URIs.
 .TP
 Examples:
 
@@ -1483,8 +1484,7 @@ Switches to non-interactive mode. In this mode zypper doesn't ask user to type a
 .TP
 .I \-x, \-\-xmlout
 Switches to XML output. This option is useful for scripts or graphical frontends
-using zypper. For detailed information about this feature, see
-http://en.opensuse.org/Zypper/XML_Output.
+using zypper.
 .TP
 .I \-D, \-\-reposd\-dir <dir>
 Use the specified directory to look for the repository definition (*.repo) files.
@@ -1870,7 +1870,7 @@ of compatibility. Zypper (libzypp) implements this option by passing the
 
 .SH "HOMEPAGE"
 
-http://en.opensuse.org/Zypper
+http://en.opensuse.org/Portal:Zypper
 
 .SH "AUTHORS"
 .LP
