@@ -1,4 +1,10 @@
 -------------------------------------------------------------------
+Mon Jul 26 17:05:14 CEST 2010 - ma@suse.de
+
+- Bump heads major version after 11.3 branched away.
+- version 8.0.0 (0)
+
+-------------------------------------------------------------------
 Thu Jul 22 01:13:27 CEST 2010 - ma@suse.de
 
 - Update zypp-po.tar.bz2
