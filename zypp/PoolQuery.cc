@@ -850,8 +850,11 @@ attremptycheckend:
     {
       case Rel::ANY_e:	// no additional constraint on edition.
         if ( arch.empty() )	// no additional constraint on arch.
+	{
 	  addAttribute( attr, name );
-        return;
+	  return;
+	}
+	break;
 
       case Rel::NONE_e:	// will never match.
         return;

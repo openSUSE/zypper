@@ -778,6 +778,28 @@ BOOST_AUTO_TEST_CASE(addDependency)
     //dumpQ( std::cout, q );
     BOOST_CHECK_EQUAL( q.size(), 0 );
   }
+  {
+    cout << "****addDependency2d****"  << endl;
+    PoolQuery q;
+    q.setCaseSensitive( false );
+    q.setMatchSubstring();
+    // libzypp provides yast2-packagemanager...
+    q.addDependency( sat::SolvAttr::provides, "yast2-packagemanager", Arch_i586 ); // AND with arch i585
+    std::for_each(q.begin(), q.end(), PrintAndCount());
+    //dumpQ( std::cout, q );
+    BOOST_CHECK_EQUAL( q.size(), 2 );
+  }
+  {
+    cout << "****addDependency2e****"  << endl;
+    PoolQuery q;
+    q.setCaseSensitive( false );
+    q.setMatchSubstring();
+    // but no package named yast2-packagemanager
+    q.addDependency( sat::SolvAttr::name, "yast2-packagemanager", Arch_i586 ); // AND with arch i585
+    std::for_each(q.begin(), q.end(), PrintAndCount());
+    //dumpQ( std::cout, q );
+    BOOST_CHECK_EQUAL( q.size(), 0 );
+  }
 
   {
     cout << "****addDependency3****"  << endl;
