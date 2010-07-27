@@ -28,6 +28,7 @@
 #include "zypp/media/MediaCIFS.h"
 #include "zypp/media/MediaCurl.h"
 #include "zypp/media/MediaAria2c.h"
+#include "zypp/media/MediaMultiCurl.h"
 #include "zypp/media/MediaISO.h"
 
 using namespace std;
@@ -127,14 +128,32 @@ MediaAccess::open (const Url& url, const Pathname & preferred_attach_point)
     else if (scheme == "ftp" || scheme == "http" || scheme == "https")
     {
         // Another good idea would be activate MediaAria2c handler via external var
-        bool use_aria = true;
+        bool use_aria = false;
+        bool use_multicurl = true;
         const char *ariaenv = getenv( "ZYPP_ARIA2C" );
+        const char *multicurlenv = getenv( "ZYPP_MULTICURL" );
         // if user disabled it manually
-        if ( ariaenv && ( strcmp(ariaenv, "0" ) == 0 ) )
+        if ( use_multicurl && multicurlenv && ( strcmp(multicurlenv, "0" ) == 0 ) )
+        {
+            WAR << "multicurl manually disabled." << endl;
+            use_multicurl = false;
+        }
+        else if ( !use_multicurl && multicurlenv && ( strcmp(multicurlenv, "1" ) == 0 ) )
+	{
+            WAR << "multicurl manually enabled." << endl;
+            use_multicurl = true;
+	}
+        // if user disabled it manually
+        if ( use_aria && ariaenv && ( strcmp(ariaenv, "0" ) == 0 ) )
         {
             WAR << "aria2c manually disabled. Falling back to curl" << endl;
             use_aria = false;
         }
+        else if ( !use_aria && ariaenv && ( strcmp(ariaenv, "1" ) == 0 ) )
+	{
+            WAR << "aria2c manually enabled." << endl;
+            use_aria = true;
+	}
 
         // disable if it does not exist
         if ( use_aria && ! MediaAria2c::existsAria2cmd() )
@@ -145,7 +164,9 @@ MediaAccess::open (const Url& url, const Pathname & preferred_attach_point)
 
         if ( use_aria )
             _handler = new MediaAria2c (url,preferred_attach_point);
-        else
+        else if ( use_multicurl )
+            _handler = new MediaMultiCurl (url,preferred_attach_point);
+	else
             _handler = new MediaCurl (url,preferred_attach_point);
     }
     else
