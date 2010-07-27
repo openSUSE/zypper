@@ -42,7 +42,7 @@ namespace zypp
          *
          * \param info Repository information
          */
-        Downloader( const RepoInfo &info );
+        Downloader( const RepoInfo &info, const Pathname &delta_dir = Pathname() );
 
         /**
          * \short Download metadata to a local directory
@@ -66,6 +66,7 @@ namespace zypp
 
       private:
         parser::susetags::RepoIndex_Ptr _repoindex;
+	Pathname _delta_dir;
       };
 
     } // ns susetags

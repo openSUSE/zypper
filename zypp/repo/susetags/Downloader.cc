@@ -27,8 +27,8 @@ namespace repo
 namespace susetags
 {
 
-Downloader::Downloader( const RepoInfo &repoinfo )
-  : repo::Downloader(repoinfo)
+Downloader::Downloader( const RepoInfo &repoinfo, const Pathname &delta_dir )
+  : repo::Downloader(repoinfo), _delta_dir(delta_dir)
 {
 }
 
@@ -40,6 +40,15 @@ RepoStatus Downloader::status( MediaSetAccess &media )
   Pathname mediafile = media.provideFile( "/media.1/media" );
 
   return RepoStatus(content) && RepoStatus(mediafile);
+}
+
+// search old repository file file to run the delta algorithm on
+static Pathname search_deltafile( const Pathname &dir, const Pathname &file )
+{
+  Pathname deltafile(dir + file.basename());
+  if (PathInfo(deltafile).isExist())
+    return deltafile;
+  return Pathname();
 }
 
 void Downloader::download( MediaSetAccess &media,
@@ -185,7 +194,7 @@ void Downloader::download( MediaSetAccess &media,
     MIL << "adding job " << it->first << endl;
     OnMediaLocation location( repoInfo().path() + descr_dir + it->first, 1 );
     location.setChecksum( it->second );
-    this->enqueueDigested(location);
+    this->enqueueDigested(location, FileChecker(), search_deltafile(_delta_dir + descr_dir, it->first));
   }
 
   for_( it, _repoindex->mediaFileChecksums.begin(), _repoindex->mediaFileChecksums.end() )
@@ -197,7 +206,7 @@ void Downloader::download( MediaSetAccess &media,
     MIL << "adding job " << it->first << endl;
     OnMediaLocation location( repoInfo().path() + it->first, 1 );
     location.setChecksum( it->second );
-    this->enqueueDigested(location);
+    this->enqueueDigested(location, FileChecker(), search_deltafile(_delta_dir, it->first));
   }
 
   for_( it, _repoindex->signingKeys.begin(),_repoindex->signingKeys.end() )

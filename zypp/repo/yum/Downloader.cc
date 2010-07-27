@@ -33,8 +33,8 @@ namespace repo
 namespace yum
 {
 
-Downloader::Downloader( const RepoInfo &repoinfo )
-  : repo::Downloader(repoinfo), _media_ptr(0L)
+Downloader::Downloader( const RepoInfo &repoinfo , const Pathname &delta_dir)
+  : repo::Downloader(repoinfo), _delta_dir(delta_dir), _media_ptr(0L)
 {
 }
 
@@ -57,16 +57,38 @@ loc_with_path_prefix(const OnMediaLocation & loc,
   return loc_with_path;
 }
 
+// search old repository file file to run the delta algorithm on
+static Pathname search_deltafile( const Pathname &dir, const Pathname &file )
+{
+  Pathname deltafile;
+  if (!PathInfo(dir).isDir())
+    return deltafile;
+  string base = file.basename();
+  size_t hypoff = base.find("-");
+  if (hypoff != string::npos)
+    base.replace(0, hypoff + 1, "");
+  size_t basesize = base.size();
+  std::list<Pathname> retlist;
+  if (!filesystem::readdir(retlist, dir, false))
+  {
+    for_( it, retlist.begin(), retlist.end() )
+    {
+      string fn = it->asString();
+      if (fn.size() >= basesize && fn.substr(fn.size() - basesize, basesize) == base)
+	deltafile = *it;
+    }
+  }
+  return deltafile;
+}
 
 bool Downloader::patches_Callback( const OnMediaLocation &loc,
                                    const string &id )
 {
   OnMediaLocation loc_with_path(loc_with_path_prefix(loc, repoInfo().path()));
   MIL << id << " : " << loc_with_path << endl;
-  this->enqueueDigested(loc_with_path);
+  this->enqueueDigested(loc_with_path,  FileChecker(), search_deltafile(_delta_dir + "repodata", loc.filename()));
   return true;
 }
-
 
 bool Downloader::repomd_Callback( const OnMediaLocation &loc,
                                   const ResourceType &dtype )
@@ -88,7 +110,7 @@ bool Downloader::repomd_Callback( const OnMediaLocation &loc,
     return true;
   }
 
-  this->enqueueDigested(loc_with_path);
+  this->enqueueDigested(loc_with_path, FileChecker(), search_deltafile(_delta_dir + "repodata", loc.filename()));
 
   // We got a patches file we need to read, to add patches listed
   // there, so we transfer what we have in the queue, and
