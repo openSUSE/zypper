@@ -462,14 +462,15 @@ pkg_spec_to_poolquery(const Capability & cap, const list<string> & repos)
 
   PoolQuery q;
   q.addKind(splid.kind());
-  q.addAttribute(sat::SolvAttr::name, splid.name().asString());
   q.setMatchGlob();
   for_(it, repos.begin(), repos.end())
     q.addRepo(*it);
-  if (cap.detail().hasArch())
-    q.addAttribute(sat::SolvAttr::arch, cap.detail().arch().asString());
-  if (cap.detail().isVersioned())
-    q.setEdition(cap.detail().ed(), cap.detail().op());
+  q.addDependency( sat::SolvAttr::name, splid.name().asString(),
+		   // only package names (no provides)
+		   cap.detail().op(), cap.detail().ed(),
+		   // defaults to Rel::ANY (NOOP) if no versioned cap
+		   Arch( cap.detail().arch() ) );
+		   // defaults Arch_empty (NOOP) if no arch in cap
 
   DBG << "query: " << q << endl;
 
