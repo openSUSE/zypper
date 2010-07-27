@@ -378,6 +378,7 @@ class MediaAria2cInitException : public MediaException
       , _msg(msg_r)
       {}
       virtual ~MediaCurlException() throw() {};
+      std::string errstr() const { return _err; }
     protected:
       virtual std::ostream & dumpOn( std::ostream & str ) const;
       std::string _url;
