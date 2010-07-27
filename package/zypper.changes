@@ -1,4 +1,11 @@
 -------------------------------------------------------------------
+Tue Jul 27 16:21:27 CEST 2010 - ma@suse.de
+
+- Fix evaluation of package specs containing edition or arch.
+  (bnc#624320)
+- 1.4.7
+
+-------------------------------------------------------------------
 Fri Jul 23 17:39:54 CEST 2010 - jkupec@suse.cz
 
 - Fixed wiki links in the man page (bnc #623860)
