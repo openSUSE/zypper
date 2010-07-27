@@ -261,34 +261,6 @@ void MediaAria2c::releaseFrom( const std::string & ejectDev )
   MediaCurl::releaseFrom(ejectDev);
 }
 
-static Url getFileUrl(const Url & url, const Pathname & filename)
-{
-  Url newurl(url);
-  string path = url.getPathName();
-  if ( !path.empty() && path != "/" && *path.rbegin() == '/' &&
-       filename.absolute() )
-  {
-    // If url has a path with trailing slash, remove the leading slash from
-    // the absolute file name
-    path += filename.asString().substr( 1, filename.asString().size() - 1 );
-  }
-  else if ( filename.relative() )
-  {
-    // Add trailing slash to path, if not already there
-    if (path.empty()) path = "/";
-    else if (*path.rbegin() != '/' ) path += "/";
-    // Remove "./" from begin of relative file name
-    path += filename.asString().substr( 2, filename.asString().size() - 2 );
-  }
-  else
-  {
-    path += filename.asString();
-  }
-
-  newurl.setPathName(path);
-  return newurl;
-}
-
 void MediaAria2c::getFile( const Pathname & filename ) const
 {
     // Use absolute file name to prevent access of files outside of the
@@ -300,7 +272,7 @@ void MediaAria2c::getFileCopy( const Pathname & filename , const Pathname & targ
 {
   callback::SendReport<DownloadProgressReport> report;
 
-  Url fileurl(getFileUrl(_url, filename));
+  Url fileurl(getFileUrl(filename));
 
   bool retry = false;
 
