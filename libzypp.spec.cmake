@@ -96,7 +96,7 @@ Conflicts:      aria2 < %{min_aria_version}
 # need CURLOPT_REDIR_PROTOCOLS:
 %define min_curl_version 7.19.4
 # want aria2:
-Requires:       aria2 >= %{min_aria_version}
+Conflicts:      aria2 < %{min_aria_version}
 BuildRequires:  aria2 >= %{min_aria_version}
 %endif
 # ---------------------------------------------------------------
