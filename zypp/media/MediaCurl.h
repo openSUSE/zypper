@@ -40,6 +40,10 @@ class MediaCurl : public MediaHandler
         OPTION_RANGE = 0x1,
         /** only issue a HEAD (or equivalent) request */
         OPTION_HEAD = 0x02,
+        /** to not add a IFMODSINCE header if target exists */
+        OPTION_NO_IFMODSINCE = 0x04,
+        /** do not send a start ProgressReport */
+        OPTION_NO_REPORT_START = 0x08,
     };
     ZYPP_DECLARE_FLAGS(RequestOptions,RequestOption);
 
@@ -108,16 +112,22 @@ class MediaCurl : public MediaHandler
 
     static int progressCallback( void *clientp, double dltotal, double dlnow,
                                  double ultotal, double ulnow );
-  private:
     /**
-     * Return a comma separated list of available authentication methods
-     * supported by server.
-     */
-    std::string getAuthHint() const;
+     * check the url is supported by the curl library
+     * \throws MediaBadUrlException if there is a problem
+     **/
+    void checkProtocol(const Url &url) const;
 
-    bool authenticate(const std::string & availAuthTypes, bool firstTry) const;
-
-  private:
+    /**
+     * initializes the curl easy handle with the data from the url
+     * \throws MediaCurlSetOptException if there is a problem
+     **/
+    virtual void setupEasy();
+    /**
+     * concatenate the attach url and the filename to a complete
+     * download url
+     **/
+    Url getFileUrl(const Pathname & filename) const;
 
     /**
      * Evaluates a curl return code and throws the right MediaException
@@ -133,14 +143,29 @@ class MediaCurl : public MediaHandler
      */
     void evaluateCurlCode( const zypp::Pathname &filename, CURLcode code, bool timeout ) const;
 
-    CURL *_curl;
-    char _curlError[ CURL_ERROR_SIZE ];
+    void doGetFileCopyFile( const Pathname & srcFilename, const Pathname & dest, FILE *file, callback::SendReport<DownloadProgressReport> & _report, RequestOptions options = OPTION_NONE ) const;
+
+  private:
+    /**
+     * Return a comma separated list of available authentication methods
+     * supported by server.
+     */
+    std::string getAuthHint() const;
+
+    bool authenticate(const std::string & availAuthTypes, bool firstTry) const;
+
+    bool detectDirIndex() const;
+
+  private:
     long _curlDebug;
-    curl_slist *_customHeaders;
 
     std::string _currentCookieFile;
     static Pathname _cookieFile;
-protected:
+
+  protected:
+    CURL *_curl;
+    char _curlError[ CURL_ERROR_SIZE ];
+    curl_slist *_customHeaders;
     TransferSettings _settings;
 };
 ZYPP_DECLARE_OPERATORS_FOR_FLAGS(MediaCurl::RequestOptions);
