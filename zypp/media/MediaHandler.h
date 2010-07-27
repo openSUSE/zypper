@@ -100,6 +100,9 @@ class MediaHandler {
         /** timestamp of the the last attach verification */
         mutable time_t  _attach_mtime;
 
+	/** file usable for delta downloads */
+	mutable Pathname _deltafile;
+
     protected:
         /**
 	 * Url to handle
@@ -636,6 +639,16 @@ class MediaHandler {
 	 **/
 	void releasePath( Pathname pathname ) const;
 
+        /*
+         * set a deltafile to be used in the next download
+         */
+	void setDeltafile( const Pathname &filename = Pathname()) const;
+
+	/*
+	 * return the deltafile set with setDeltafile()
+	 */
+	Pathname deltafile () const;
+   
     public:
 
 	/**

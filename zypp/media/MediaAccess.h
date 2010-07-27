@@ -284,6 +284,11 @@ namespace zypp {
 	 **/
 	void releasePath( const Pathname & pathname ) const;
 
+	/**
+	 * set a deltafile to be used in the next download
+	 */
+	void setDeltafile( const Pathname & filename ) const;
+
     public:
 
 	/**

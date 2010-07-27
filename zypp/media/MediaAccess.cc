@@ -312,6 +312,16 @@ MediaAccess::provideFile( const Pathname & filename ) const
 }
 
 void
+MediaAccess::setDeltafile( const Pathname & filename ) const
+{
+  if ( !_handler ) {
+    ZYPP_THROW(MediaNotOpenException("setDeltafile(" + filename.asString() + ")"));
+  }
+
+  _handler->setDeltafile( filename );
+}
+
+void
 MediaAccess::releaseFile( const Pathname & filename ) const
 {
   if ( !_handler )

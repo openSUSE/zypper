@@ -808,6 +808,10 @@ namespace zypp
                          std::vector<std::string> & devices,
                          unsigned int & index) const;
 
+      void
+      setDeltafile(MediaAccessId   accessId,
+                  const Pathname &filename ) const;
+
     public:
       /**
        * Get the modification time of the /etc/mtab file.
