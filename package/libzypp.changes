@@ -1,4 +1,14 @@
 -------------------------------------------------------------------
+Tue Jul 27 15:38:00 CEST 2010 - ma@suse.de
+
+- Fix bug in PoolQuery::addDependency
+- Disable MediaAria and enable MultiCurl as default http/ftp backend.
+  MultiCurl implements MetaLink and Zsync support using libcurl. In 
+  case of trouble set ZYPP_MULTICURL=0 in the envirionment to disable 
+  the new backend.
+- version 8.0.1 (0)
+
+-------------------------------------------------------------------
 Mon Jul 26 17:05:14 CEST 2010 - ma@suse.de
 
 - Bump heads major version after 11.3 branched away.
