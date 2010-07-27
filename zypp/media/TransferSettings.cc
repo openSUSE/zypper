@@ -61,6 +61,7 @@ public:
     string _proxy;
     string _proxy_username;
     string _proxy_password;
+    string _authtype;
     long _timeout;
     long _connect_timeout;
     Url _url;
@@ -287,6 +288,17 @@ void TransferSettings::setCertificateAuthoritiesPath( const zypp::Pathname &path
 {
     _impl->_ca_path = path;
 }
+
+void TransferSettings::setAuthType( const std::string &authtype)
+{
+    _impl->_authtype = authtype;
+}
+
+std::string TransferSettings::authType() const
+{
+    return _impl->_authtype;
+}
+
 
 
 } // ns media

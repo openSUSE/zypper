@@ -234,6 +234,16 @@ public:
    */
   void setCertificateAuthoritiesPath( const zypp::Pathname &path );
 
+  /**
+   * set the allowed authentication types
+   */
+  void setAuthType( const std::string &authtype );
+
+  /**
+   * get the allowed authentication types
+   */
+  std::string authType() const;
+
 protected:
   class Impl;
   RWCOW_pointer<Impl> _impl;
