@@ -154,10 +154,10 @@ IMPL_PTR_TYPE(MediaSetAccess);
 
 
 
-  Pathname MediaSetAccess::provideFile( const OnMediaLocation & resource, ProvideFileOptions options )
+  Pathname MediaSetAccess::provideFile( const OnMediaLocation & resource, ProvideFileOptions options, const Pathname &deltafile )
   {
     ProvideFileOperation op;
-    provide( boost::ref(op), resource, options );
+    provide( boost::ref(op), resource, options, deltafile );
     return op.result;
   }
 
@@ -166,7 +166,7 @@ IMPL_PTR_TYPE(MediaSetAccess);
     OnMediaLocation resource;
     ProvideFileOperation op;
     resource.setLocation(file, media_nr);
-    provide( boost::ref(op), resource, options );
+    provide( boost::ref(op), resource, options, Pathname() );
     return op.result;
   }
 
@@ -175,13 +175,14 @@ IMPL_PTR_TYPE(MediaSetAccess);
     ProvideFileExistenceOperation op;
     OnMediaLocation resource;
     resource.setLocation(file, media_nr);
-    provide( boost::ref(op), resource, PROVIDE_DEFAULT);
+    provide( boost::ref(op), resource, PROVIDE_DEFAULT, Pathname());
     return op.result;
   }
 
   void MediaSetAccess::provide( ProvideOperation op,
                                 const OnMediaLocation &resource,
-                                ProvideFileOptions options )
+                                ProvideFileOptions options,
+                                const Pathname &deltafile )
   {
     Pathname file(resource.filename());
     unsigned media_nr(resource.medianr());
@@ -195,6 +196,7 @@ IMPL_PTR_TYPE(MediaSetAccess);
     {
       // get the mediaId, but don't try to attach it here
       media = getMediaAccessId( media_nr);
+      bool deltafileset = false;
 
       try
       {
@@ -203,12 +205,17 @@ IMPL_PTR_TYPE(MediaSetAccess);
         // try to attach the media
         if ( ! media_mgr.isAttached(media) )
           media_mgr.attach(media);
+	media_mgr.setDeltafile(media, deltafile);
+	deltafileset = true;
         op(media, file);
+	media_mgr.setDeltafile(media, Pathname());
         break;
       }
       catch ( media::MediaException & excp )
       {
         ZYPP_CAUGHT(excp);
+	if (deltafileset)
+	  media_mgr.setDeltafile(media, Pathname());
         media::MediaChangeReport::Action user = media::MediaChangeReport::ABORT;
         unsigned int devindex = 0;
         vector<string> devices;
@@ -329,11 +336,11 @@ IMPL_PTR_TYPE(MediaSetAccess);
     if ( recursive )
     {
         ProvideDirTreeOperation op;
-        provide( boost::ref(op), resource, options);
+        provide( boost::ref(op), resource, options, Pathname());
         return op.result;
     }
     ProvideDirOperation op;
-    provide( boost::ref(op), resource, options);
+    provide( boost::ref(op), resource, options, Pathname());
     return op.result;
   }
 

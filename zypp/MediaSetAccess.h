@@ -135,6 +135,9 @@ namespace zypp
        * If the resource is marked as optional, no Exception is thrown
        * and Pathname() is returned
        *
+       * the optional deltafile argument describes a file that can
+       * be used for delta download algorithms.
+       *
        * \note interaction with the user does not ocurr if
        * \ref ProvideFileOptions::NON_INTERACTIVE is set.
        *
@@ -142,7 +145,7 @@ namespace zypp
        *
        * \see zypp::media::MediaManager::provideFile()
        */
-      Pathname provideFile( const OnMediaLocation & resource, ProvideFileOptions options = PROVIDE_DEFAULT );
+      Pathname provideFile( const OnMediaLocation & resource, ProvideFileOptions options = PROVIDE_DEFAULT, const Pathname &deltafile = Pathname() );
 
       /**
        * Provides \a file from media \a media_nr.
@@ -268,7 +271,7 @@ namespace zypp
 
       typedef function<void( media::MediaAccessId, const Pathname & )> ProvideOperation;
 
-      void provide( ProvideOperation op, const OnMediaLocation &resource, ProvideFileOptions options );
+      void provide( ProvideOperation op, const OnMediaLocation &resource, ProvideFileOptions options, const Pathname &deltafile );
 
       media::MediaAccessId getMediaAccessId (media::MediaNr medianr);
       virtual std::ostream & dumpOn( std::ostream & str ) const;

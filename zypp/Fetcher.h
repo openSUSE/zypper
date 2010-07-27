@@ -190,9 +190,15 @@ namespace zypp
     * the user could be asked twice.
     *
     * \todo FIXME implement checker == operator to avoid this.
+    *
+    * the optional deltafile argument describes a file that can
+    * be used for delta download algorithms. Usable files are
+    * uncompressed files or files compressed with gzip --rsyncable.
+    * Other files like rpms do not work, as the compression
+    * breaks the delta algorithm.
     */
     void enqueueDigested( const OnMediaLocation &resource,
-                          const FileChecker &checker = FileChecker() );
+                          const FileChecker &checker = FileChecker(), const Pathname &deltafile = Pathname());
 
 
     /**

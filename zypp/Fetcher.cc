@@ -92,8 +92,9 @@ namespace zypp
     ZYPP_DECLARE_FLAGS(Flags, Flag);
 
 
-    FetcherJob( const OnMediaLocation &loc )
+    FetcherJob( const OnMediaLocation &loc, const Pathname dfile = Pathname())
       : location(loc)
+      , deltafile(dfile)
       , flags(None)
     {
       //MIL << location << endl;
@@ -105,6 +106,7 @@ namespace zypp
     }
 
     OnMediaLocation location;
+    Pathname deltafile;
     //CompositeFileChecker checkers;
     list<FileChecker> checkers;
     Flags flags;
@@ -141,7 +143,7 @@ namespace zypp
     void enqueueDigestedDir( const OnMediaLocation &resource, bool recursive, const FileChecker &checker = FileChecker() );
 
     void enqueue( const OnMediaLocation &resource, const FileChecker &checker = FileChecker()  );
-    void enqueueDigested( const OnMediaLocation &resource, const FileChecker &checker = FileChecker() );
+    void enqueueDigested( const OnMediaLocation &resource, const FileChecker &checker = FileChecker(), const Pathname &deltafile = Pathname() );
     void addCachePath( const Pathname &cache_dir );
     void reset();
     void start( const Pathname &dest_dir,
@@ -212,7 +214,7 @@ namespace zypp
       /**
        * Provide the resource to \ref dest_dir
        */
-      void provideToDest( MediaSetAccess &media, const OnMediaLocation &resource, const Pathname &dest_dir );
+      void provideToDest( MediaSetAccess &media, const OnMediaLocation &resource, const Pathname &dest_dir , const Pathname &deltafile);
 
   private:
     friend Impl * rwcowClone<Impl>( const Impl * rhs );
@@ -232,10 +234,10 @@ namespace zypp
   };
   ///////////////////////////////////////////////////////////////////
 
-  void Fetcher::Impl::enqueueDigested( const OnMediaLocation &resource, const FileChecker &checker )
+  void Fetcher::Impl::enqueueDigested( const OnMediaLocation &resource, const FileChecker &checker, const Pathname &deltafile )
   {
     FetcherJob_Ptr job;
-    job.reset(new FetcherJob(resource));
+    job.reset(new FetcherJob(resource, deltafile));
     job->flags |= FetcherJob:: AlwaysVerifyChecksum;
     _resources.push_back(job);
   }
@@ -534,7 +536,7 @@ namespace zypp
       }
   }
 
-  void Fetcher::Impl::provideToDest( MediaSetAccess &media, const OnMediaLocation &resource, const Pathname &dest_dir )
+  void Fetcher::Impl::provideToDest( MediaSetAccess &media, const OnMediaLocation &resource, const Pathname &dest_dir, const Pathname &deltafile )
   {
     bool got_from_cache = false;
 
@@ -548,7 +550,7 @@ namespace zypp
       // try to get the file from the net
       try
       {
-        Pathname tmp_file = media.provideFile(resource, resource.optional() ? MediaSetAccess::PROVIDE_NON_INTERACTIVE : MediaSetAccess::PROVIDE_DEFAULT );
+        Pathname tmp_file = media.provideFile(resource, resource.optional() ? MediaSetAccess::PROVIDE_NON_INTERACTIVE : MediaSetAccess::PROVIDE_DEFAULT, deltafile );
 
         Pathname dest_full_path = dest_dir + resource.filename();
 
@@ -788,7 +790,7 @@ namespace zypp
           autoaddIndexes(content, media, Pathname("/"), dest_dir);
       }
 
-      provideToDest(media, (*it_res)->location, dest_dir);
+      provideToDest(media, (*it_res)->location, dest_dir, (*it_res)->deltafile);
 
       // if the file was not transfered, and no exception, just
       // return, as it was an optional file
@@ -860,9 +862,9 @@ namespace zypp
     return _pimpl->options();
   }
 
-  void Fetcher::enqueueDigested( const OnMediaLocation &resource, const FileChecker &checker )
+  void Fetcher::enqueueDigested( const OnMediaLocation &resource, const FileChecker &checker, const Pathname &deltafile )
   {
-    _pimpl->enqueueDigested(resource, checker);
+    _pimpl->enqueueDigested(resource, checker, deltafile);
   }
 
   void Fetcher::enqueueDir( const OnMediaLocation &resource,
