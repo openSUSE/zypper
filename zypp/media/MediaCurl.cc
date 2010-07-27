@@ -383,12 +383,17 @@ static const char *const agentString()
 
 // we use this define to unbloat code as this C setting option
 // and catching exception is done frequently.
+/** \todo deprecate SET_OPTION and use the typed versions below. */
 #define SET_OPTION(opt,val) do { \
     ret = curl_easy_setopt ( _curl, opt, val ); \
     if ( ret != 0) { \
       ZYPP_THROW(MediaCurlSetOptException(_url, _curlError)); \
     } \
   } while ( false )
+
+#define SET_OPTION_OFFT(opt,val) SET_OPTION(opt,(curl_off_t)val)
+#define SET_OPTION_LONG(opt,val) SET_OPTION(opt,(long)val)
+#define SET_OPTION_VOID(opt,val) SET_OPTION(opt,(void*)val)
 
 MediaCurl::MediaCurl( const Url &      url_r,
                       const Pathname & attach_point_hint_r )
@@ -605,7 +610,7 @@ void MediaCurl::setupEasy()
   }
 
   if ( _settings.maxDownloadSpeed() != 0 )
-      SET_OPTION(CURLOPT_MAX_RECV_SPEED_LARGE, (curl_off_t)_settings.maxDownloadSpeed());
+      SET_OPTION_OFFT(CURLOPT_MAX_RECV_SPEED_LARGE, _settings.maxDownloadSpeed());
 
   /*---------------------------------------------------------------*
    *---------------------------------------------------------------*/

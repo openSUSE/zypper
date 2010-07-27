@@ -216,16 +216,19 @@ namespace zypp
      */
     void addAttribute( const sat::SolvAttr & attr, const std::string & value = "" );
 
-    /** \name Filter by dependencies matching a broken down capability <tt>name [op edition]</tt>.
+    /** \name Filter by dependencies matching a broken down capability <tt>name [op edition]</tt> and/or architecture.
      *
      * The capabilities \c name part may be defined as query string
      * like with \ref addAttribute. Globing and regex are supported.
      * Global query strings defined by \ref addString are considered.
      *
-     * So without any <tt>op edition</tt> addDependency behaves the
+     * So without any <tt>op edition arch</tt> addDependency behaves the
      * same as \ref addAttribute. If an edition range is given, matches
-     * are restricted accordingly. Thete are various overloads, so pick
+     * are restricted accordingly. There are various overloads, so pick
      * the one you like best.
+     *
+     * An optional \c arch argument will additionally require the matching
+     * solvable to be of this arch.
      *
      * \code
      * {
@@ -275,26 +278,43 @@ namespace zypp
     //@{
     /** Query <tt>"name|global op edition"</tt>. */
     void addDependency( const sat::SolvAttr & attr, const std::string & name, const Rel & op, const Edition & edition );
+    /**  \overload also restricting architecture */
+    void addDependency( const sat::SolvAttr & attr, const std::string & name, const Rel & op, const Edition & edition, const Arch & arch );
 
     /** \overload Query <tt>"name|global == edition"</tt>. */
     void addDependency( const sat::SolvAttr & attr, const std::string & name, const Edition & edition )
     { addDependency( attr, name, Rel::EQ, edition ); }
+    /**  \overload also restricting architecture */
+    void addDependency( const sat::SolvAttr & attr, const std::string & name, const Edition & edition, const Arch & arch )
+    { addDependency( attr, name, Rel::EQ, edition, arch ); }
 
     /** \overload Query <tt>"name|global"</tt>. */
     void addDependency( const sat::SolvAttr & attr, const std::string & name )
     { addDependency( attr, name, Rel::ANY, Edition() ); }
+    /**  \overload also restricting architecture */
+    void addDependency( const sat::SolvAttr & attr, const std::string & name, const Arch & arch )
+    { addDependency( attr, name, Rel::ANY, Edition(), arch ); }
 
     /** \overload Query <tt>"global op edition"</tt>.*/
     void addDependency( const sat::SolvAttr & attr, const Rel & op, const Edition & edition )
     { addDependency( attr, std::string(), op, edition ); }
+    /**  \overload also restricting architecture */
+    void addDependency( const sat::SolvAttr & attr, const Rel & op, const Edition & edition, const Arch & arch )
+    { addDependency( attr, std::string(), op, edition, arch ); }
 
     /** \overload Query <tt>"global == edition"</tt>. */
     void addDependency( const sat::SolvAttr & attr, const Edition & edition )
     { addDependency( attr, std::string(), Rel::EQ, edition ); }
+    /**  \overload also restricting architecture */
+    void addDependency( const sat::SolvAttr & attr, const Edition & edition, const Arch & arch )
+    { addDependency( attr, std::string(), Rel::EQ, edition, arch ); }
 
     /** \overload Query <tt>"global"</tt>. */
     void addDependency( const sat::SolvAttr & attr )
     { addDependency( attr, std::string(), Rel::ANY, Edition() ); }
+    /**  \overload also restricting architecture */
+    void addDependency( const sat::SolvAttr & attr, const Arch & arch )
+    { addDependency( attr, std::string(), Rel::ANY, Edition(), arch ); }
 
     /** \overload Query taking a \ref Capability (always exact name match).
      * \note If a non dependency attribute is passed, the \ref Capability

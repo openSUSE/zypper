@@ -25,6 +25,16 @@ namespace zypp
   static std::string adjustLocale();
   static void restoreLocale(const std::string & locale);
 
+  namespace
+  {
+    inline bool isDST( struct tm & tm )
+    {
+      time_t t = ::mktime( &tm );
+      struct tm *tm2 = ::localtime( &t );
+      return ( tm2 && tm2->tm_isdst > 0 );
+    }
+  }
+
   const Date::ValueType Date::second;
   const Date::ValueType Date::minute;
   const Date::ValueType Date::hour;
@@ -47,14 +57,20 @@ namespace zypp
   { str::strtonum( seconds_r, _date ); }
 
   Date::Date( const std::string & date_str, const std::string & format )
+    : _date( Date( date_str, format, TB_LOCALTIME ) )
+  {}
+
+  Date::Date( const std::string & date_str, const std::string & format, Date::TimeBase base_r )
     : _date(0)
   {
-    struct tm tm = {0};
+    struct tm tm = {0,0,0,0,0,0,0,0,0,0,0};
     std::string thisLocale = adjustLocale();
 
     char * res = ::strptime( date_str.c_str(), format.c_str(), &tm );
+    if ( isDST(tm) )
+      tm.tm_isdst = 1;
     if ( res != NULL )
-      _date = ::timelocal( &tm );
+      _date = (base_r == TB_UTC ? ::timegm : ::timelocal)( &tm );
 
     restoreLocale(thisLocale);
 
@@ -63,17 +79,18 @@ namespace zypp
           str::form( "Invalid date format: '%s'", date_str.c_str() ) );
   }
 
+
   ///////////////////////////////////////////////////////////////////
   //
   //	METHOD NAME : Date::form
   //	METHOD TYPE : std::string
   //
-  std::string Date::form( const std::string & format_r ) const
+  std::string Date::form( const std::string & format_r, Date::TimeBase base_r ) const
   {
     static char buf[1024];
     std::string thisLocale = adjustLocale();
 
-    if ( ! strftime( buf, 1024, format_r.c_str(), localtime( &_date ) ) )
+    if ( ! strftime( buf, 1024, format_r.c_str(), (base_r == TB_UTC ? gmtime : localtime)( &_date ) ) )
       *buf = '\0';
 
     restoreLocale(thisLocale);

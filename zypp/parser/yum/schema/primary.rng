@@ -1,196 +1,241 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<grammar ns="http://linux.duke.edu/metadata/common" xmlns:suse="http://novell.com/package/metadata/suse/common" xmlns="http://relaxng.org/ns/structure/1.0" datatypeLibrary="http://www.w3.org/2001/XMLSchema-datatypes">
-  <!-- defines element-format and format -->
-  <include href="rpm-ns.rng"/>
-  <start>
-    <ref name="element-metadata"/>
-  </start>
-  <define name="element-metadata">
-    <element name="metadata">
-      <ref name="metadata"/>
-    </element>
-  </define>
-  <define name="metadata">
-    <optional>
-      <attribute name="packages">
-        <data type="nonNegativeInteger"/>
-      </attribute>
-    </optional>
-    <oneOrMore>
-      <ref name="element-package"/>
-    </oneOrMore>
-  </define>
-  <define name="element-package">
-    <element name="package">
-      <ref name="package"/>
-    </element>
-  </define>
-  <!-- ?: for package in atoms (suse-broken) -->
-  <define name="package">
-    <interleave>
-      <attribute name="type">
-        <value>rpm</value>
-      </attribute>
-      <ref name="element-name"/>
-      <ref name="element-arch"/>
-      <ref name="element-version"/>
-      <ref name="element-checksum"/>
-      <zeroOrMore>
-        <ref name="element-summary"/>
-      </zeroOrMore>
-      <zeroOrMore>
-        <ref name="element-description"/>
-      </zeroOrMore>
-      <optional>
-        <ref name="element-packager"/>
-      </optional>
-      <optional>
-        <ref name="element-url"/>
-      </optional>
-      <ref name="element-time"/>
-      <ref name="element-size"/>
-      <ref name="element-location"/>
-      <ref name="element-format"/>
-      <optional>
-        <element name="suse:license-to-confirm">
-          <text/>
-        </element>
-      </optional>
-    </interleave>
-  </define>
-  <define name="element-name">
+<grammar ns="http://linux.duke.edu/metadata/common" xmlns:rpm="http://linux.duke.edu/metadata/rpm" xmlns:suse="http://novell.com/package/metadata/suse/common" xmlns="http://relaxng.org/ns/structure/1.0" datatypeLibrary="http://www.w3.org/2001/XMLSchema-datatypes">
+  <include href="rpm-inc.rng"/>
+  <define name="yum.name">
     <element name="name">
       <text/>
     </element>
   </define>
-  <define name="element-arch">
+  <define name="yum.arch">
     <element name="arch">
-      <ref name="arch"/>
+      <ref name="private.archenum"/>
     </element>
   </define>
-  <define name="arch">
-    <choice>
-      <value>noarch</value>
-      <value>athlon</value>
-      <value>i386</value>
-      <value>i486</value>
-      <value>i586</value>
-      <value>i686</value>
-      <value>ia64</value>
-      <value>ppc</value>
-      <value>ppc64</value>
-      <value>s390</value>
-      <value>s390x</value>
-      <value>x86_64</value>
-      <value>src</value>
-    </choice>
-  </define>
-  <define name="element-version">
+  <define name="yum.version">
     <element name="version">
-      <ref name="version"/>
+      <ref name="private.evr"/>
     </element>
   </define>
-  <define name="version">
+  <define name="group.deps">
     <optional>
-      <attribute name="epoch">
-        <data type="nonNegativeInteger"/>
-      </attribute>
+      <ref name="rpm.provides"/>
     </optional>
-    <attribute name="ver"/>
-    <attribute name="rel"/>
-    <empty/>
-  </define>
-  <define name="element-checksum">
-    <element name="checksum">
-      <ref name="checksum"/>
-    </element>
-  </define>
-  <define name="checksum">
-    <attribute name="type">
-      <choice>
-        <value>md5</value>
-        <value>sha</value>
-      </choice>
-    </attribute>
-    <attribute name="pkgid">
-      <choice>
-        <value>YES</value>
-        <value>NO</value>
-      </choice>
-    </attribute>
-    <text/>
-  </define>
-  <define name="localized-string">
     <optional>
-      <attribute name="lang"/>
+      <ref name="rpm.requires"/>
     </optional>
-    <text/>
+    <optional>
+      <ref name="rpm.conflicts"/>
+    </optional>
+    <optional>
+      <ref name="rpm.obsoletes"/>
+    </optional>
+    <optional>
+      <ref name="rpm.suggests"/>
+    </optional>
+    <optional>
+      <ref name="rpm.recommends"/>
+    </optional>
+    <optional>
+      <ref name="rpm.supplements"/>
+    </optional>
+    <optional>
+      <ref name="rpm.enhances"/>
+    </optional>
   </define>
-  <define name="element-summary">
-    <element name="summary">
-      <ref name="localized-string"/>
-    </element>
+  <define name="group.deps1">
+    <optional>
+      <ref name="rpm.provides"/>
+    </optional>
+    <optional>
+      <ref name="rpm.requires"/>
+    </optional>
+    <optional>
+      <ref name="rpm.conflicts"/>
+    </optional>
+    <optional>
+      <ref name="rpm.obsoletes"/>
+    </optional>
+    <optional>
+      <ref name="rpm.suggests"/>
+    </optional>
+    <optional>
+      <ref name="rpm.enhances"/>
+    </optional>
+    <optional>
+      <ref name="rpm.recommends"/>
+    </optional>
+    <optional>
+      <ref name="rpm.supplements"/>
+    </optional>
   </define>
-  <define name="element-description">
-    <element name="description">
-      <ref name="localized-string"/>
-    </element>
+  <define name="group.deps2">
+    <optional>
+      <ref name="rpm.provides"/>
+    </optional>
+    <optional>
+      <ref name="rpm.conflicts"/>
+    </optional>
+    <optional>
+      <ref name="rpm.obsoletes"/>
+    </optional>
+    <optional>
+      <ref name="rpm.enhances"/>
+    </optional>
+    <optional>
+      <ref name="rpm.supplements"/>
+    </optional>
+    <optional>
+      <ref name="rpm.suggests"/>
+    </optional>
+    <optional>
+      <ref name="rpm.recommends"/>
+    </optional>
+    <optional>
+      <ref name="rpm.requires"/>
+    </optional>
   </define>
-  <define name="element-packager">
-    <element name="packager">
-      <text/>
-    </element>
-  </define>
-  <define name="element-url">
-    <element name="url">
-      <data type="anyURI"/>
-    </element>
-  </define>
-  <define name="element-time">
-    <element name="time">
-      <ref name="time"/>
-    </element>
-  </define>
-  <define name="time">
-    <attribute name="file">
-      <data type="nonNegativeInteger"/>
-    </attribute>
-    <attribute name="build">
-      <data type="nonNegativeInteger"/>
-    </attribute>
-    <empty/>
-  </define>
-  <define name="element-size">
-    <element name="size">
-      <ref name="size"/>
-    </element>
-  </define>
-  <define name="size">
-    <attribute name="package">
-      <data type="nonNegativeInteger"/>
-    </attribute>
-    <attribute name="installed">
-      <data type="nonNegativeInteger"/>
-    </attribute>
-    <attribute name="archive">
-      <data type="nonNegativeInteger"/>
-    </attribute>
-    <empty/>
-  </define>
-  <define name="element-location">
+  <define name="yum.location">
     <element name="location">
-      <ref name="location"/>
-    </element>
-  </define>
-  <define name="location">
-    <optional>
-      <attribute name="xml:base">
+      <attribute name="href">
         <data type="anyURI"/>
       </attribute>
-    </optional>
-    <attribute name="href">
-      <data type="anyURI"/>
-    </attribute>
-    <empty/>
+    </element>
   </define>
+  <define name="yum.checksum">
+    <element name="checksum">
+      <attribute name="pkgid">
+        <value>YES</value>
+      </attribute>
+      <ref name="private.checksum"/>
+    </element>
+  </define>
+  <define name="yum.time">
+    <element name="time">
+      <attribute name="file">
+        <ref name="private.unixts"/>
+      </attribute>
+      <attribute name="build">
+        <ref name="private.unixts"/>
+      </attribute>
+    </element>
+  </define>
+  <define name="yum.size">
+    <element name="size">
+      <attribute name="package">
+        <ref name="private.size"/>
+      </attribute>
+      <!-- Found this blank in the wild -->
+      <attribute name="archive">
+        <choice>
+          <ref name="private.size"/>
+          <value/>
+        </choice>
+      </attribute>
+      <attribute name="installed">
+        <ref name="private.size"/>
+      </attribute>
+    </element>
+  </define>
+  <start>
+    <element name="metadata">
+      <attribute name="packages">
+        <ref name="private.nonnegative"/>
+      </attribute>
+      <zeroOrMore>
+        <element name="package">
+          <attribute name="type">
+            <value>rpm</value>
+          </attribute>
+          <ref name="yum.name"/>
+          <ref name="yum.arch"/>
+          <ref name="yum.version"/>
+          <ref name="yum.checksum"/>
+          <!-- Found unlocalized in the wild -->
+          <element name="summary">
+            <choice>
+              <ref name="private.localizedtext"/>
+              <text/>
+            </choice>
+          </element>
+          <element name="description">
+            <choice>
+              <ref name="private.localizedtext"/>
+              <text/>
+            </choice>
+          </element>
+          <element name="packager">
+            <text/>
+          </element>
+          <!-- 10-SP1 stuff has a broken URL in the wild -->
+          <element name="url">
+            <choice>
+              <data type="anyURI"/>
+              <text/>
+            </choice>
+          </element>
+          <ref name="yum.time"/>
+          <ref name="yum.size"/>
+          <ref name="yum.location"/>
+          <element name="format">
+            <element name="rpm:license">
+              <text/>
+            </element>
+            <element name="rpm:vendor">
+              <text/>
+            </element>
+            <element name="rpm:group">
+              <text/>
+            </element>
+            <element name="rpm:buildhost">
+              <text/>
+            </element>
+            <optional>
+              <!--
+                Two different options seen in the wild
+                one omits the element, the other leaves the value empty
+              -->
+              <element name="rpm:sourcerpm">
+                <choice>
+                  <text/>
+                  <empty/>
+                </choice>
+              </element>
+            </optional>
+            <element name="rpm:header-range">
+              <attribute name="start">
+                <ref name="private.positive"/>
+              </attribute>
+              <attribute name="end">
+                <ref name="private.positive"/>
+              </attribute>
+            </element>
+            <!-- any of these orders is valid, all are in use -->
+            <choice>
+              <ref name="group.deps"/>
+              <ref name="group.deps1"/>
+              <ref name="group.deps2"/>
+            </choice>
+            <zeroOrMore>
+              <element name="file">
+                <optional>
+                  <attribute name="type">
+                    <choice>
+                      <value>dir</value>
+                      <value>ghost</value>
+                    </choice>
+                  </attribute>
+                </optional>
+                <text/>
+              </element>
+            </zeroOrMore>
+          </element>
+          <optional>
+            <element name="suse:license-to-confirm">
+              <text/>
+            </element>
+          </optional>
+        </element>
+      </zeroOrMore>
+    </element>
+  </start>
 </grammar>

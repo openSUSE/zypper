@@ -17,19 +17,21 @@
 #include "zypp/solver/detail/Testcase.h"
 #include "zypp/base/Logger.h"
 #include "zypp/base/LogControl.h"
-#include "zypp/ZConfig.h"
-#include "zypp/PathInfo.h"
-#include "zypp/Product.h"
-#include "zypp/Package.h"
-#include "zypp/Edition.h"
-#include "zypp/parser/xml/XmlEscape.h"
+#include "zypp/base/GzStream.h"
 #include "zypp/base/String.h"
 #include "zypp/base/PtrTypes.h"
-#include "zypp/Capabilities.h"
-#include "zypp/sat/Solvable.h"
+#include "zypp/base/NonCopyable.h"
+#include "zypp/base/ReferenceCounted.h"
+
+#include "zypp/parser/xml/XmlEscape.h"
+
+#include "zypp/ZConfig.h"
+#include "zypp/PathInfo.h"
+#include "zypp/ResPool.h"
+#include "zypp/Repository.h"
+
 #include "zypp/sat/detail/PoolImpl.h"
 #include "zypp/solver/detail/SystemCheck.h"
-
 
 /////////////////////////////////////////////////////////////////////////
 namespace zypp
@@ -47,7 +49,7 @@ namespace zypp
 using namespace std;
 using namespace zypp::str;
 
-IMPL_PTR_TYPE(HelixResolvable);
+//---------------------------------------------------------------------------
 
 inline std::string xml_escape( const std::string &text )
 {
@@ -67,7 +69,6 @@ inline std::string xml_tag_enclose( const std::string &text, const std::string &
   result += "</" + tag + ">";
   return result;
 }
-
 
 template<class T>
 std::string helixXML( const T &obj ); //undefined
@@ -210,182 +211,34 @@ std::string helixXML( const PoolItem &item )
   return str.str();
 }
 
-//---------------------------------------------------------------------------
+///////////////////////////////////////////////////////////////////
+//
+//	CLASS NAME : HelixResolvable
+/**
+ * Creates a file in helix format which includes all available
+ * or installed packages,patches,selections.....
+ **/
+class  HelixResolvable : public base::ReferenceCounted, private base::NonCopyable{
 
-Testcase::Testcase()
-    :dumpPath("/var/log/YaST2/solverTestcase")
-{
-}
+  private:
+    std::string dumpFile; // Path of the generated testcase
+    ofgzstream *file;
 
-Testcase::Testcase(const std::string & path)
-    :dumpPath(path)
-{
-}
+  public:
+    HelixResolvable (const std::string & path);
+    ~HelixResolvable ();
 
+    void addResolvable (const PoolItem item)
+    { *file << helixXML (item); }
 
-Testcase::~Testcase()
-{
-}
+    std::string filename ()
+    { return dumpFile; }
+};
 
+DEFINE_PTR_TYPE(HelixResolvable);
+IMPL_PTR_TYPE(HelixResolvable);
 
-bool Testcase::createTestcasePool(const ResPool &pool)
-{
-    PathInfo path (dumpPath);
-
-    if ( !path.isExist() ) {
-	if (zypp::filesystem::mkdir (dumpPath)!=0) {
-	    ERR << "Cannot create directory " << dumpPath << endl;
-	    return false;
-	}
-    } else {
-	if (!path.isDir()) {
-	    ERR << dumpPath << " is not a directory." << endl;
-	    return false;
-	}
-	// remove old stuff
-	zypp::filesystem::clean_dir (dumpPath);
-    }
-
-    RepositoryTable		repoTable;
-    HelixResolvable 	system (dumpPath + "/solver-system.xml.gz");
-
-    for ( ResPool::const_iterator it = pool.begin(); it != pool.end(); ++it )
-    {
-	if ( it->status().isInstalled() ) {
-	    // system channel
-	    system.addResolvable (*it);
-	} else {
-	    // repo channels
-	    Repository repo  = it->resolvable()->satSolvable().repository();
-	    if (repoTable.find (repo) == repoTable.end()) {
-		repoTable[repo] = new HelixResolvable(dumpPath + "/"
-						      + str::numstring((long)repo.id())
-						      + "-package.xml.gz");
-	    }
-	    repoTable[repo]->addResolvable (*it);
-	}
-    }
-    return true;
-}
-
-bool Testcase::createTestcase(Resolver & resolver, bool dumpPool, bool runSolver)
-{
-    PathInfo path (dumpPath);
-
-    if ( !path.isExist() ) {
-	if (zypp::filesystem::assert_dir (dumpPath)!=0) {
-	    ERR << "Cannot create directory " << dumpPath << endl;
-	    return false;
-	}
-    } else {
-	if (!path.isDir()) {
-	    ERR << dumpPath << " is not a directory." << endl;
-	    return false;
-	}
-	// remove old stuff if pool will be dump
-	if (dumpPool)
-	    zypp::filesystem::clean_dir (dumpPath);
-    }
-
-    if (runSolver) {
-        zypp::base::LogControl::TmpLineWriter tempRedirect;
-	zypp::base::LogControl::instance().logfile( dumpPath +"/y2log" );
-	zypp::base::LogControl::TmpExcessive excessive;
-
-	resolver.resolvePool();
-    }
-
-    ResPool pool 	= resolver.pool();
-    RepositoryTable	repoTable;
-    PoolItemList	items_to_install;
-    PoolItemList 	items_to_remove;
-    PoolItemList 	items_locked;
-    PoolItemList 	items_keep;
-    HelixResolvable_Ptr	system = NULL;
-
-    if (dumpPool)
-	system = new HelixResolvable(dumpPath + "/solver-system.xml.gz");
-
-    for ( ResPool::const_iterator it = pool.begin(); it != pool.end(); ++it )
-    {
-	Resolvable::constPtr res = it->resolvable();
-
-	if ( system && it->status().isInstalled() ) {
-	    // system channel
-	    system->addResolvable (*it);
-	} else {
-	    // repo channels
-	    Repository repo  = it->resolvable()->satSolvable().repository();
-	    if (dumpPool) {
-		if (repoTable.find (repo) == repoTable.end()) {
-		    repoTable[repo] = new HelixResolvable(dumpPath + "/"
-							  + str::numstring((long)repo.id())
-							  + "-package.xml.gz");
-		}
-		repoTable[repo]->addResolvable (*it);
-	    }
-	}
-
-	if ( it->status().isToBeInstalled()
-	     && !(it->status().isBySolver())) {
-	    items_to_install.push_back (*it);
-	}
-	if ( it->status().isKept()
-	     && !(it->status().isBySolver())) {
-	    items_keep.push_back (*it);
-	}
-	if ( it->status().isToBeUninstalled()
-	     && !(it->status().isBySolver())) {
-	    items_to_remove.push_back (*it);
-	}
-	if ( it->status().isLocked()
-	     && !(it->status().isBySolver())) {
-	    items_locked.push_back (*it);
-	}
-    }
-
-    // writing control file "*-test.xml"
-    HelixControl control (dumpPath + "/solver-test.xml",
-			  repoTable,
-			  ZConfig::instance().systemArchitecture(),
-			  pool.getRequestedLocales(),
-			  "solver-system.xml.gz",
-			  resolver.forceResolve(),
-			  resolver.onlyRequires(),
-			  resolver.ignoreAlreadyRecommended() );
-
-    for (PoolItemList::const_iterator iter = items_to_install.begin(); iter != items_to_install.end(); iter++) {
-	control.installResolvable (iter->resolvable(), iter->status());
-    }
-
-    for (PoolItemList::const_iterator iter = items_locked.begin(); iter != items_locked.end(); iter++) {
-	control.lockResolvable (iter->resolvable(), iter->status());
-    }
-
-    for (PoolItemList::const_iterator iter = items_keep.begin(); iter != items_keep.end(); iter++) {
-	control.keepResolvable (iter->resolvable(), iter->status());
-    }
-
-    for (PoolItemList::const_iterator iter = items_to_remove.begin(); iter != items_to_remove.end(); iter++) {
-	control.deleteResolvable (iter->resolvable(), iter->status());
-    }
-
-    control.addDependencies (resolver.extraRequires(), resolver.extraConflicts());
-    control.addDependencies (SystemCheck::instance().requiredSystemCap(),
-			     SystemCheck::instance().conflictSystemCap());
-    control.addUpgradeRepos( resolver.upgradeRepos() );
-
-    if (resolver.isUpgradeMode())
-	control.distupgrade ();
-    if (resolver.isUpdateMode())
-	control.update();
-    if (resolver.isVerifyingMode())
-	control.verifySystem();
-
-    return true;
-}
-
-//---------------------------------------------------------------------------
+typedef std::map<Repository, HelixResolvable_Ptr> RepositoryTable;
 
 HelixResolvable::HelixResolvable(const std::string & path)
     :dumpFile (path)
@@ -404,13 +257,48 @@ HelixResolvable::~HelixResolvable()
     delete(file);
 }
 
+///////////////////////////////////////////////////////////////////
+//
+//	CLASS NAME : HelixControl
+/**
+ * Creates a file in helix format which contains all controll
+ * action of a testcase ( file is known as *-test.xml)
+ **/
+class  HelixControl {
 
-void HelixResolvable::addResolvable(const PoolItem item)
-{
-    *file << helixXML (item);
-}
+  private:
+    std::string dumpFile; // Path of the generated testcase
+    std::ofstream *file;
 
-//---------------------------------------------------------------------------
+  public:
+    HelixControl (const std::string & controlPath,
+		  const RepositoryTable & sourceTable,
+		  const Arch & systemArchitecture,
+		  const LocaleSet &languages,
+		  const std::string & systemPath = "solver-system.xml.gz",
+		  const bool forceResolve = false,
+		  const bool onlyRequires = false,
+		  const bool ignorealreadyrecommended = false);
+    HelixControl ();
+    ~HelixControl ();
+
+    void installResolvable (const ResObject::constPtr &resObject,
+			    const ResStatus &status);
+    void lockResolvable (const ResObject::constPtr &resObject,
+			 const ResStatus &status);
+    void keepResolvable (const ResObject::constPtr &resObject,
+			 const ResStatus &status);
+    void deleteResolvable (const ResObject::constPtr &resObject,
+			   const ResStatus &status);
+    void addDependencies (const CapabilitySet &capRequire, const CapabilitySet &capConflict);
+    void addUpgradeRepos( const std::set<Repository> & upgradeRepos_r );
+
+    void distupgrade ();
+    void verifySystem ();
+    void update ();
+
+    std::string filename () { return dumpFile; }
+};
 
 HelixControl::HelixControl(const std::string & controlPath,
 			   const RepositoryTable & repoTable,
@@ -554,6 +442,136 @@ void HelixControl::verifySystem()
 void HelixControl::update()
 {
     *file << "<update/>" << endl;
+}
+
+//---------------------------------------------------------------------------
+
+Testcase::Testcase()
+    :dumpPath("/var/log/YaST2/solverTestcase")
+{}
+
+Testcase::Testcase(const std::string & path)
+    :dumpPath(path)
+{}
+
+Testcase::~Testcase()
+{}
+
+bool Testcase::createTestcase(Resolver & resolver, bool dumpPool, bool runSolver)
+{
+    PathInfo path (dumpPath);
+
+    if ( !path.isExist() ) {
+	if (zypp::filesystem::assert_dir (dumpPath)!=0) {
+	    ERR << "Cannot create directory " << dumpPath << endl;
+	    return false;
+	}
+    } else {
+	if (!path.isDir()) {
+	    ERR << dumpPath << " is not a directory." << endl;
+	    return false;
+	}
+	// remove old stuff if pool will be dump
+	if (dumpPool)
+	    zypp::filesystem::clean_dir (dumpPath);
+    }
+
+    if (runSolver) {
+        zypp::base::LogControl::TmpLineWriter tempRedirect;
+	zypp::base::LogControl::instance().logfile( dumpPath +"/y2log" );
+	zypp::base::LogControl::TmpExcessive excessive;
+
+	resolver.resolvePool();
+    }
+
+    ResPool pool 	= resolver.pool();
+    RepositoryTable	repoTable;
+    PoolItemList	items_to_install;
+    PoolItemList 	items_to_remove;
+    PoolItemList 	items_locked;
+    PoolItemList 	items_keep;
+    HelixResolvable_Ptr	system = NULL;
+
+    if (dumpPool)
+	system = new HelixResolvable(dumpPath + "/solver-system.xml.gz");
+
+    for ( ResPool::const_iterator it = pool.begin(); it != pool.end(); ++it )
+    {
+	Resolvable::constPtr res = it->resolvable();
+
+	if ( system && it->status().isInstalled() ) {
+	    // system channel
+	    system->addResolvable (*it);
+	} else {
+	    // repo channels
+	    Repository repo  = it->resolvable()->satSolvable().repository();
+	    if (dumpPool) {
+		if (repoTable.find (repo) == repoTable.end()) {
+		    repoTable[repo] = new HelixResolvable(dumpPath + "/"
+							  + str::numstring((long)repo.id())
+							  + "-package.xml.gz");
+		}
+		repoTable[repo]->addResolvable (*it);
+	    }
+	}
+
+	if ( it->status().isToBeInstalled()
+	     && !(it->status().isBySolver())) {
+	    items_to_install.push_back (*it);
+	}
+	if ( it->status().isKept()
+	     && !(it->status().isBySolver())) {
+	    items_keep.push_back (*it);
+	}
+	if ( it->status().isToBeUninstalled()
+	     && !(it->status().isBySolver())) {
+	    items_to_remove.push_back (*it);
+	}
+	if ( it->status().isLocked()
+	     && !(it->status().isBySolver())) {
+	    items_locked.push_back (*it);
+	}
+    }
+
+    // writing control file "*-test.xml"
+    HelixControl control (dumpPath + "/solver-test.xml",
+			  repoTable,
+			  ZConfig::instance().systemArchitecture(),
+			  pool.getRequestedLocales(),
+			  "solver-system.xml.gz",
+			  resolver.forceResolve(),
+			  resolver.onlyRequires(),
+			  resolver.ignoreAlreadyRecommended() );
+
+    for (PoolItemList::const_iterator iter = items_to_install.begin(); iter != items_to_install.end(); iter++) {
+	control.installResolvable (iter->resolvable(), iter->status());
+    }
+
+    for (PoolItemList::const_iterator iter = items_locked.begin(); iter != items_locked.end(); iter++) {
+	control.lockResolvable (iter->resolvable(), iter->status());
+    }
+
+    for (PoolItemList::const_iterator iter = items_keep.begin(); iter != items_keep.end(); iter++) {
+	control.keepResolvable (iter->resolvable(), iter->status());
+    }
+
+    for (PoolItemList::const_iterator iter = items_to_remove.begin(); iter != items_to_remove.end(); iter++) {
+	control.deleteResolvable (iter->resolvable(), iter->status());
+    }
+
+    control.addDependencies (resolver.extraRequires(), resolver.extraConflicts());
+    control.addDependencies (SystemCheck::instance().requiredSystemCap(),
+			     SystemCheck::instance().conflictSystemCap());
+    control.addUpgradeRepos( resolver.upgradeRepos() );
+
+    if (resolver.isUpgradeMode())
+	control.distupgrade ();
+    if (resolver.isUpdateMode())
+	control.update();
+    if (resolver.isVerifyingMode())
+	control.verifySystem();
+
+    return true;
 }
 
 

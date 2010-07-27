@@ -1,123 +1,129 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<element name="updates" ns="http://linux.duke.edu/metadata/other" xmlns="http://relaxng.org/ns/structure/1.0" datatypeLibrary="http://www.w3.org/2001/XMLSchema-datatypes">
-  <zeroOrMore>
-    <element name="update">
-      <attribute name="from">
-        <data type="string"/>
-      </attribute>
-      <attribute name="status">
-        <choice>
-          <value>final</value>
-          <value>whatever</value>
-        </choice>
-      </attribute>
-      <attribute name="type">
-        <choice>
-          <value>security</value>
-          <value>whatever</value>
-        </choice>
-      </attribute>
-      <attribute name="version">
-        <data type="string"/>
-      </attribute>
-      <element name="id">
-        <text/>
-      </element>
-      <element name="title">
-        <text/>
-      </element>
-      <element name="issued">
-        <attribute name="date">
-          <data type="dateTime"/>
-        </attribute>
-        <empty/>
-      </element>
-      <element name="updated">
-        <attribute name="date">
-          <data type="dateTime"/>
-        </attribute>
-        <empty/>
-      </element>
-      <element name="references">
-        <zeroOrMore>
-          <element name="reference">
-            <attribute name="href">
-              <data type="anyURI"/>
+<grammar ns="http://novell.com/package/metadata/suse/updateinfo" xmlns="http://relaxng.org/ns/structure/1.0" datatypeLibrary="http://www.w3.org/2001/XMLSchema-datatypes">
+  <include href="common-inc.rng"/>
+  <start>
+    <element name="updates">
+      <oneOrMore>
+        <element name="update">
+          <optional>
+            <!-- Seen missing in the wild -->
+            <attribute name="from">
+              <value>maint-coord@suse.de</value>
             </attribute>
-            <attribute name="id">
-              <data type="string"/>
-            </attribute>
-            <attribute name="type">
-              <choice>
-                <value>bugzilla</value>
-                <value>cve</value>
-              </choice>
-            </attribute>
-            <empty/>
-          </element>
-        </zeroOrMore>
-        <empty/>
-      </element>
-      <element name="description">
-        <text/>
-      </element>
-      <element name="pkglist">
-        <element name="collection">
-          <attribute name="short">
+          </optional>
+          <attribute name="status">
+            <value>stable</value>
+          </attribute>
+          <attribute name="type">
+            <choice>
+              <value>recommended</value>
+              <value>security</value>
+              <value>optional</value>
+              <value>feature</value>
+            </choice>
+          </attribute>
+          <attribute name="version">
             <data type="string"/>
           </attribute>
-          <element name="name">
+          <element name="id">
             <text/>
           </element>
-          <zeroOrMore>
-            <element name="package">
-              <attribute name="arch">
-                <choice>
-                  <value>noarch</value>
-                  <value>athlon</value>
-                  <value>i386</value>
-                  <value>i486</value>
-                  <value>i586</value>
-                  <value>i686</value>
-                  <value>ia64</value>
-                  <value>ppc</value>
-                  <value>ppc64</value>
-                  <value>s390</value>
-                  <value>x390x</value>
-                  <value>x86_64</value>
-                  <value>src</value>
-                </choice>
-              </attribute>
-              <attribute name="epoch">
-                <data type="nonNegativeInteger"/>
-              </attribute>
-              <attribute name="version">
-                <data type="string"/>
-              </attribute>
-              <attribute name="release">
-                <data type="string"/>
-              </attribute>
-              <attribute name="src">
-                <data type="anyURI"/>
-              </attribute>
-              <element name="filename">
-                <text/>
-              </element>
-              <element name="sum">
-                <attribute name="type">
-                  <data type="string"/>
-                </attribute>
-                <text/>
-              </element>
-              <empty/>
+          <element name="title">
+            <text/>
+          </element>
+          <optional>
+            <!-- Seen missing in the wild -->
+            <element name="release">
+              <text/>
             </element>
-          </zeroOrMore>
-          <empty/>
+          </optional>
+          <!-- Usually with date attribute, but seen in the wild with content instead -->
+          <element name="issued">
+            <choice>
+              <attribute name="date">
+                <ref name="private.unixts"/>
+              </attribute>
+              <ref name="private.unixts"/>
+            </choice>
+          </element>
+          <optional>
+            <!-- Seen missing in the wild -->
+            <element name="references">
+              <oneOrMore>
+                <element name="reference">
+                  <!--
+                    Appears to always start with https://bugzilla.novellc.om/show_bug.cgi?id=
+                     if type="bugzilla" and http://cve.mitre.org/cgi-bin/cvename.cgi?name=
+                     if type="cve"
+                  -->
+                  <attribute name="href">
+                    <data type="anyURI"/>
+                  </attribute>
+                  <attribute name="id">
+                    <data type="string"/>
+                  </attribute>
+                  <attribute name="title">
+                    <data type="string"/>
+                  </attribute>
+                  <attribute name="type">
+                    <choice>
+                      <value>bugzilla</value>
+                      <value>cve</value>
+                    </choice>
+                  </attribute>
+                </element>
+              </oneOrMore>
+            </element>
+          </optional>
+          <element name="description">
+            <text/>
+          </element>
+          <element name="pkglist">
+            <element name="collection">
+              <oneOrMore>
+                <element name="package">
+                  <attribute name="name">
+                    <data type="string"/>
+                  </attribute>
+                  <attribute name="arch">
+                    <ref name="private.archenum"/>
+                  </attribute>
+                  <optional>
+                    <!-- not private.evr because "version" and "release" are spelled out -->
+                    <attribute name="epoch">
+                      <ref name="private.nonnegative"/>
+                    </attribute>
+                  </optional>
+                  <optional>
+                    <attribute name="version"/>
+                  </optional>
+                  <optional>
+                    <attribute name="release"/>
+                  </optional>
+                  <element name="filename">
+                    <text/>
+                  </element>
+                  <optional>
+                    <element name="restart_suggested">
+                      <value>1</value>
+                    </element>
+                  </optional>
+                  <optional>
+                    <element name="reboot_suggested">
+                      <value>1</value>
+                    </element>
+                  </optional>
+                  <optional>
+                    <element name="relogin_suggested">
+                      <value>1</value>
+                    </element>
+                  </optional>
+                </element>
+              </oneOrMore>
+            </element>
+          </element>
         </element>
-        <empty/>
-      </element>
-      <empty/>
+      </oneOrMore>
     </element>
-  </zeroOrMore>
-  <empty/>
-</element>
+  </start>
+</grammar>

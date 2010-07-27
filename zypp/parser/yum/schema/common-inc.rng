@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<grammar xmlns="http://relaxng.org/ns/structure/1.0" datatypeLibrary="http://www.w3.org/2001/XMLSchema-datatypes">
+  <!--
+    private is not an XML namespace, just a holder for reusable 
+      attribute/element sets
+  -->
+  <define name="private.positive">
+    <data type="positiveInteger">
+      <param name="pattern">[1-9][0-9]*</param>
+    </data>
+  </define>
+  <define name="private.nonnegative">
+    <choice>
+      <value>0</value>
+      <ref name="private.positive"/>
+    </choice>
+  </define>
+  <!--
+    Unix timestamp (seconds since epoch)
+    For our purposes, this is always positive
+  -->
+  <define name="private.unixts">
+    <ref name="private.positive"/>
+  </define>
+  <define name="private.size">
+    <ref name="private.nonnegative"/>
+  </define>
+  <define name="private.checksum">
+    <choice>
+      <group>
+        <attribute name="type">
+          <value>md5</value>
+        </attribute>
+        <data type="string">
+          <param name="length">32</param>
+          <param name="pattern">[0-9a-f]*</param>
+        </data>
+      </group>
+      <group>
+        <attribute name="type">
+          <value>sha</value>
+        </attribute>
+        <data type="string">
+          <param name="length">40</param>
+          <param name="pattern">[0-9a-f]*</param>
+        </data>
+      </group>
+      <group>
+        <attribute name="type">
+          <value>sha256</value>
+        </attribute>
+        <data type="string">
+          <param name="length">64</param>
+          <param name="pattern">[0-9a-f]*</param>
+        </data>
+      </group>
+      <group>
+        <attribute name="type">
+          <value>sha</value>
+        </attribute>
+        <data type="string">
+          <param name="length">32</param>
+          <param name="pattern">[0-9a-f]*</param>
+        </data>
+      </group>
+    </choice>
+  </define>
+  <!-- The last option is totally broken, but is in the wild!!! :( -->
+  <define name="private.evr">
+    <optional>
+      <attribute name="epoch">
+        <ref name="private.nonnegative"/>
+      </attribute>
+    </optional>
+    <attribute name="ver"/>
+    <optional>
+      <attribute name="rel"/>
+    </optional>
+  </define>
+  <define name="private.localizedtext">
+    <attribute name="lang">
+      <choice>
+        <value>en</value>
+        <value>de</value>
+      </choice>
+    </attribute>
+    <text/>
+  </define>
+  <define name="private.archenum">
+    <choice>
+      <value>noarch</value>
+      <value>armv4l</value>
+      <value>armv5el</value>
+      <value>armv5tel</value>
+      <value>armv7el</value>
+      <value>armv7l</value>
+      <value>athlon</value>
+      <value>i386</value>
+      <value>i486</value>
+      <value>i586</value>
+      <value>i686</value>
+      <value>ia64</value>
+      <value>ppc</value>
+      <value>ppc64</value>
+      <value>s390</value>
+      <value>s390x</value>
+      <value>sh4</value>
+      <value>x86_64</value>
+      <value>src</value>
+    </choice>
+  </define>
+</grammar>

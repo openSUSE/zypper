@@ -1,0 +1,47 @@
+# private is not an XML namespace, just a holder for reusable 
+#   attribute/element sets
+
+private.positive = xsd:positiveInteger { pattern="[1-9][0-9]*" }
+
+private.nonnegative = "0" | private.positive
+
+# Unix timestamp (seconds since epoch)
+# For our purposes, this is always positive
+private.unixts = private.positive
+
+private.size = private.nonnegative 
+
+private.checksum = 
+  (attribute type { "md5" }, xsd:string { length="32" pattern="[0-9a-f]*" }) |
+  (attribute type { "sha" }, xsd:string { length="40" pattern="[0-9a-f]*" }) |
+  (attribute type { "sha256" }, xsd:string { length="64" pattern="[0-9a-f]*" }) |
+  (attribute type { "sha" }, xsd:string { length="32" pattern="[0-9a-f]*" })
+# The last option is totally broken, but is in the wild!!! :(
+
+private.evr = 
+  attribute epoch { private.nonnegative }?,
+  attribute ver { text },
+  attribute rel { text }?
+
+private.localizedtext = attribute lang { "en" | "de" }, text
+
+private.archenum = "noarch"
+            | "armv4l"
+            | "armv5el"
+            | "armv5tel"
+            | "armv7el"
+            | "armv7l"
+            | "athlon"
+            | "i386"
+            | "i486"
+            | "i586"
+            | "i686"
+            | "ia64"
+            | "ppc"
+            | "ppc64"
+            | "s390"
+            | "s390x"
+            | "sh4"
+            | "x86_64"
+            | "src"
+

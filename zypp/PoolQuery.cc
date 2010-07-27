@@ -61,7 +61,7 @@ namespace zypp
       return false;
     }
 
-    /** Whether the current capabilities edition range ovelaps.
+    /** Whether the current capabilities edition range ovelaps and/or its solvables arch matches.
      * Query asserts \a iter_r points to a capability and we
      * have to check the range only.
      */
@@ -69,10 +69,18 @@ namespace zypp
     {
       EditionRangePredicate( const Rel & op, const Edition & edition )
         : _range( op, edition )
+        , _arch( Arch_empty )
+      {}
+      EditionRangePredicate( const Rel & op, const Edition & edition, const Arch & arch )
+        : _range( op, edition )
+        , _arch( arch )
       {}
 
       bool operator()( sat::LookupAttr::iterator iter_r )
       {
+	if ( !_arch.empty() && iter_r.inSolvable().arch() != _arch )
+	  return false;
+
         CapDetail cap( iter_r.id() );
         if ( ! cap.isSimple() )
           return false;
@@ -86,22 +94,32 @@ namespace zypp
         std::string ret( "EditionRange" );
         str::appendEscaped( ret, _range.op.asString() );
         str::appendEscaped( ret, _range.value.asString() );
+        str::appendEscaped( ret, _arch.asString() );
         return ret;
       }
 
       Edition::MatchRange _range;
-    };
+      Arch                _arch;
+   };
 
-    /** Whether the current Solvables edition is within a given range. */
+    /** Whether the current Solvables edition is within a given range and/or its arch matches. */
     struct SolvableRangePredicate
     {
       SolvableRangePredicate( const Rel & op, const Edition & edition )
         : _range( op, edition )
+        , _arch( Arch_empty )
+      {}
+
+      SolvableRangePredicate( const Rel & op, const Edition & edition, const Arch & arch )
+        : _range( op, edition )
+        , _arch( arch )
       {}
 
       bool operator()( sat::LookupAttr::iterator iter_r )
       {
-        return overlaps( Edition::MatchRange( Rel::EQ, iter_r.inSolvable().edition() ), _range );
+	if ( !_arch.empty() && iter_r.inSolvable().arch() != _arch )
+	  return false;
+	return overlaps( Edition::MatchRange( Rel::EQ, iter_r.inSolvable().edition() ), _range );
       }
 
       std::string serialize() const
@@ -109,10 +127,12 @@ namespace zypp
         std::string ret( "SolvableRange" );
         str::appendEscaped( ret, _range.op.asString() );
         str::appendEscaped( ret, _range.value.asString() );
+        str::appendEscaped( ret, _arch.asString() );
         return ret;
       }
 
       Edition::MatchRange _range;
+      Arch                _arch;
     };
 
     /** Whether the current capability matches a given one.
@@ -240,15 +260,33 @@ namespace zypp
         {
           if ( words[0] == "EditionRange" )
           {
-            if ( words.size() != 3 )
-              ZYPP_THROW( Exception( str::Str() << "Wrong number of words: " << str_r ) );
-            ret.predicate = EditionRangePredicate( Rel(words[1]), Edition(words[2]) );
+	    switch( words.size() )
+	    {
+	      case 3:
+		ret.predicate = EditionRangePredicate( Rel(words[1]), Edition(words[2]) );
+		break;
+	      case 4:
+		ret.predicate = EditionRangePredicate( Rel(words[1]), Edition(words[2]), Arch(words[3]) );
+		break;
+	      default:
+		ZYPP_THROW( Exception( str::Str() << "Wrong number of words: " << str_r ) );
+		break;
+	    }
           }
           else if ( words[0] == "SolvableRange" )
           {
-            if ( words.size() != 3 )
-              ZYPP_THROW( Exception( str::Str() << "Wrong number of words: " << str_r ) );
-            ret.predicate = SolvableRangePredicate( Rel(words[1]), Edition(words[2]) );
+	    switch( words.size() )
+	    {
+	      case 3:
+		ret.predicate = SolvableRangePredicate( Rel(words[1]), Edition(words[2]) );
+		break;
+	      case 4:
+		ret.predicate = SolvableRangePredicate( Rel(words[1]), Edition(words[2]), Arch(words[3]) );
+		break;
+	      default:
+		ZYPP_THROW( Exception( str::Str() << "Wrong number of words: " << str_r ) );
+		break;
+	    }
           }
           else if ( words[0] == "CapabilityMatch" )
           {
@@ -804,11 +842,15 @@ attremptycheckend:
   { _pimpl->_attrs[attr].insert(value); }
 
   void PoolQuery::addDependency( const sat::SolvAttr & attr, const std::string & name, const Rel & op, const Edition & edition )
+  { return addDependency( attr, name, op, edition, Arch_empty ); }
+
+  void PoolQuery::addDependency( const sat::SolvAttr & attr, const std::string & name, const Rel & op, const Edition & edition, const Arch & arch )
   {
     switch ( op.inSwitch() )
     {
       case Rel::ANY_e:	// no additional constraint on edition.
-        addAttribute( attr, name );
+        if ( arch.empty() )	// no additional constraint on arch.
+	  addAttribute( attr, name );
         return;
 
       case Rel::NONE_e:	// will never match.
@@ -823,9 +865,9 @@ attremptycheckend:
     AttrMatchData attrMatchData( attr, sat::AttrMatcher( name, Match::OTHER ) );
 
     if ( isDependencyAttribute( attr ) )
-      attrMatchData.addPredicate( EditionRangePredicate( op, edition ) );
+      attrMatchData.addPredicate( EditionRangePredicate( op, edition, arch ) );
     else
-      attrMatchData.addPredicate( SolvableRangePredicate( op, edition ) );
+      attrMatchData.addPredicate( SolvableRangePredicate( op, edition, arch ) );
 
     _pimpl->_uncompiledPredicated.insert( attrMatchData );
   }

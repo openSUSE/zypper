@@ -49,6 +49,8 @@ namespace zypp
     static const ValueType year366	= 31622400;
     static const ValueType year		= year365;
 
+    enum TimeBase { TB_LOCALTIME, TB_UTC };
+
     /** Default ctor: 0 */
     Date()
     : _date( 0 )
@@ -61,12 +63,14 @@ namespace zypp
     Date( const std::string & seconds_r );
 
     /**
-     * Ctor from a \a date_str formatted using \a format.
+     * Ctor from a \a date_str (in localtime) formatted using \a format.
      *
      * \throws DateFormatException in case \a date_str cannot be
      *         parsed according to \a format.
      */
-    Date( const std::string & date_str, const std::string & format);
+    Date( const std::string & date_str, const std::string & format );
+    /** \overload with explicitly given \ref TimeBase. */
+    Date( const std::string & date_str, const std::string & format, TimeBase base_r );
 
     /** Return the current time. */
     static Date now()
@@ -94,13 +98,16 @@ namespace zypp
     //@}
 
   public:
-    /** Return string representation according to format.
+    /** Return string representation according to format as localtime.
      * \see 'man strftime' (which is used internaly) for valid
      * conversion specifiers in format.
      *
      * \return An empty string on illegal format.
      **/
-    std::string form( const std::string & format_r ) const;
+    std::string form( const std::string & format_r ) const
+    { return form( format_r, TB_LOCALTIME ); }
+    /** \overload with explicitly given \ref TimeBase. */
+    std::string form( const std::string & format_r, TimeBase base_r ) const;
 
     /** Default string representation of Date.
      * The preferred date and time representation for the current locale.

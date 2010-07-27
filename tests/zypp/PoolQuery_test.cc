@@ -745,6 +745,39 @@ BOOST_AUTO_TEST_CASE(addDependency)
     //dumpQ( std::cout, q );
     BOOST_CHECK_EQUAL( q.size(), 7 );
   }
+  {
+    cout << "****addDependency2a****"  << endl;
+    PoolQuery q;
+    q.setCaseSensitive( false );
+    q.setMatchSubstring();
+    q.addDependency( sat::SolvAttr::provides, "libzypp", Rel::GT, Edition("5.0") );
+    q.addAttribute( sat::SolvAttr::arch, Arch_i586.asString() ); // OR with arch i585
+    std::for_each(q.begin(), q.end(), PrintAndCount());
+    //dumpQ( std::cout, q );
+    BOOST_CHECK_EQUAL( q.size(), 66 );
+  }
+  {
+    cout << "****addDependency2b****"  << endl;
+    PoolQuery q;
+    q.setCaseSensitive( false );
+    q.setMatchSubstring();
+    // libzypp provides yast2-packagemanager...
+    q.addDependency( sat::SolvAttr::provides, "yast2-packagemanager", Rel::GT, Edition("5.0"), Arch_i586 ); // AND with arch i585
+    std::for_each(q.begin(), q.end(), PrintAndCount());
+    //dumpQ( std::cout, q );
+    BOOST_CHECK_EQUAL( q.size(), 2 );
+  }
+  {
+    cout << "****addDependency2c****"  << endl;
+    PoolQuery q;
+    q.setCaseSensitive( false );
+    q.setMatchSubstring();
+    // but no package named yast2-packagemanager
+    q.addDependency( sat::SolvAttr::name, "yast2-packagemanager", Rel::GT, Edition("5.0"), Arch_i586 ); // AND with arch i585
+    std::for_each(q.begin(), q.end(), PrintAndCount());
+    //dumpQ( std::cout, q );
+    BOOST_CHECK_EQUAL( q.size(), 0 );
+  }
 
   {
     cout << "****addDependency3****"  << endl;

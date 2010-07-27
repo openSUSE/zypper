@@ -1,4 +1,46 @@
 -------------------------------------------------------------------
+Mon Jul 26 17:05:14 CEST 2010 - ma@suse.de
+
+- Bump heads major version after 11.3 branched away.
+- version 8.0.0 (0)
+
+-------------------------------------------------------------------
+Thu Jul 22 01:13:27 CEST 2010 - ma@suse.de
+
+- Update zypp-po.tar.bz2
+
+-------------------------------------------------------------------
+Wed Jul  7 13:56:49 CEST 2010 - ma@suse.de
+
+- Add PoolQuery for name, edition AND architecture in one go. (bnc#614362)
+- version 7.8.0 (6)
+
+-------------------------------------------------------------------
+Mon Jul  5 13:03:57 CEST 2010 - ma@suse.de
+
+- Fix requirement to /usr/bin/uuidgen (bnc#613304)
+
+-------------------------------------------------------------------
+Sun Jul  4 01:13:29 CEST 2010 - ma@suse.de
+
+- Update zypp-po.tar.bz2
+
+-------------------------------------------------------------------
+Tue Jun 29 17:46:13 CEST 2010 - ma@suse.de
+
+- Fix CURLOPT_MAX_RECV_SPEED_LARGE expecting a curl_off_t argument.
+
+-------------------------------------------------------------------
+Tue Jun 29 10:22:06 CEST 2010 - ma@suse.de
+
+- Respect zypp.conf policy settings when solving for update.
+
+-------------------------------------------------------------------
+Fri Jun 25 11:35:52 CEST 2010 - ma@suse.de
+
+- Don't bloat logfile by logging install progess values.
+
+-------------------------------------------------------------------
 Thu Jun 10 01:13:49 CEST 2010 - ma@suse.de
 
 - Update zypp-po.tar.bz2

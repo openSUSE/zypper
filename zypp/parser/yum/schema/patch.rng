@@ -1,139 +1,115 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<grammar xmlns:yum="http://linux.duke.edu/metadata/common" ns="http://novell.com/package/metadata/suse/patch" xmlns="http://relaxng.org/ns/structure/1.0" datatypeLibrary="http://www.w3.org/2001/XMLSchema-datatypes">
-  <include href="suse-primary.rng">
-    <start>
-      <ref name="element-patch"/>
-    </start>
-    <!-- patches use localized summary and description fields -->
-    <define name="element-summary">
-      <oneOrMore>
-        <element name="summary">
-          <ref name="localized-string"/>
-        </element>
-      </oneOrMore>
-    </define>
-    <define name="element-description">
-      <oneOrMore>
-        <element name="description">
-          <ref name="localized-string"/>
-        </element>
-      </oneOrMore>
-    </define>
-    <define name="element-license-to-confirm">
-      <element name="license-to-confirm">
-        <ref name="localized-string"/>
-      </element>
-    </define>
-    <!-- packages in patches have an additional rpmfiles element -->
-    <define name="element-package">
-      <element name="yum:package">
-        <interleave>
-          <ref name="package"/>
-          <ref name="element-pkgfiles"/>
-          <optional>
-            <element name="license-to-confirm">
-              <ref name="localized-string"/>
-            </element>
-          </optional>
-        </interleave>
-      </element>
-    </define>
-    <!-- first part made optional -->
-    <define name="format">
-      <optional>
-        <interleave>
-          <ref name="element-license"/>
-          <ref name="element-vendor"/>
-          <ref name="element-group"/>
-          <ref name="element-buildhost"/>
-          <ref name="element-sourcerpm"/>
-          <ref name="element-header-range"/>
-        </interleave>
-      </optional>
-      <zeroOrMore>
-        <choice>
-          <ref name="element-provides"/>
-          <ref name="element-conflicts"/>
-          <ref name="element-obsoletes"/>
-          <ref name="element-requires"/>
-          <ref name="element-recommends"/>
-          <ref name="element-enhances"/>
-          <ref name="element-supplements"/>
-          <ref name="element-suggests"/>
-        </choice>
-      </zeroOrMore>
-      <zeroOrMore>
-        <ref name="element-file"/>
-      </zeroOrMore>
-    </define>
-    <!-- wrong namespace again, grr -->
-    <define name="element-time">
-      <choice>
-        <element name="yum:time">
-          <ref name="time"/>
-        </element>
-        <element name="time">
-          <ref name="time"/>
-        </element>
-      </choice>
-    </define>
-    <define name="element-size">
-      <choice>
-        <element name="yum:size">
-          <ref name="size"/>
-        </element>
-        <!-- and wrong content too... -->
-        <element name="size">
-          <attribute name="package">
-            <data type="nonNegativeInteger"/>
-          </attribute>
-          <optional>
-            <attribute name="installed">
-              <data type="nonNegativeInteger"/>
-            </attribute>
-          </optional>
-          <attribute name="archive">
-            <data type="nonNegativeInteger"/>
-          </attribute>
-          <empty/>
-        </element>
-      </choice>
-    </define>
-  </include>
-  <define name="element-patch">
-    <element name="patch">
-      <ref name="patch"/>
+<grammar ns="http://novell.com/package/metadata/suse/patch" xmlns:yum="http://linux.duke.edu/metadata/common" xmlns:suse="http://novell.com/package/metadata/suse/common" xmlns="http://relaxng.org/ns/structure/1.0" datatypeLibrary="http://www.w3.org/2001/XMLSchema-datatypes">
+  <include href="rpm-inc.rng"/>
+  <define name="yum.name">
+    <element name="yum:name">
+      <text/>
     </element>
   </define>
-  <!-- &, fetchmsttfonts mixes up the order -->
-  <define name="patch">
-    <interleave>
+  <define name="yum.arch">
+    <element name="yum:arch">
+      <ref name="private.archenum"/>
+    </element>
+  </define>
+  <define name="yum.version">
+    <element name="yum:version">
+      <ref name="private.evr"/>
+    </element>
+  </define>
+  <define name="suse.freshens">
+    <element name="suse:freshens">
+      <oneOrMore>
+        <element name="suse:entry">
+          <attribute name="kind">
+            <value>package</value>
+          </attribute>
+          <attribute name="name"/>
+        </element>
+      </oneOrMore>
+    </element>
+  </define>
+  <define name="group.deps">
+    <optional>
+      <ref name="rpm.requires"/>
+    </optional>
+    <optional>
+      <ref name="rpm.obsoletes"/>
+    </optional>
+    <optional>
+      <ref name="rpm.provides"/>
+    </optional>
+    <optional>
+      <ref name="rpm.recommends"/>
+    </optional>
+    <optional>
+      <ref name="rpm.supplements"/>
+    </optional>
+    <optional>
+      <ref name="rpm.conflicts"/>
+    </optional>
+    <optional>
+      <ref name="suse.freshens"/>
+    </optional>
+  </define>
+  <define name="patch.location">
+    <element name="location">
+      <attribute name="href">
+        <data type="anyURI"/>
+      </attribute>
+    </element>
+  </define>
+  <define name="patch.checksum">
+    <element name="checksum">
+      <ref name="private.checksum"/>
+    </element>
+  </define>
+  <define name="patch.time">
+    <element name="time">
+      <attribute name="file">
+        <ref name="private.unixts"/>
+      </attribute>
+      <attribute name="build">
+        <ref name="private.unixts"/>
+      </attribute>
+    </element>
+  </define>
+  <define name="patch.size">
+    <element name="size">
+      <attribute name="package">
+        <ref name="private.size"/>
+      </attribute>
+      <attribute name="archive">
+        <ref name="private.size"/>
+      </attribute>
+    </element>
+  </define>
+  <start>
+    <element name="patch">
       <attribute name="patchid"/>
       <attribute name="timestamp">
-        <data type="nonNegativeInteger"/>
+        <ref name="private.unixts"/>
       </attribute>
-      <attribute name="engine"/>
-      <ref name="element-name"/>
-      <ref name="element-summary"/>
-      <ref name="element-description"/>
-      <zeroOrMore>
-        <ref name="element-license-to-confirm"/>
-      </zeroOrMore>
-      <ref name="element-version"/>
-      <zeroOrMore>
-        <choice>
-          <ref name="element-provides"/>
-          <ref name="element-conflicts"/>
-          <ref name="element-obsoletes"/>
-          <ref name="element-requires"/>
-          <ref name="element-freshens"/>
-          <ref name="element-recommends"/>
-          <ref name="element-suggests"/>
-          <ref name="element-supplements"/>
-          <ref name="element-enhances"/>
-        </choice>
-      </zeroOrMore>
-      <ref name="element-category"/>
+      <attribute name="engine">
+        <value>1.0</value>
+      </attribute>
+      <ref name="yum.name"/>
+      <oneOrMore>
+        <element name="summary">
+          <ref name="private.localizedtext"/>
+        </element>
+      </oneOrMore>
+      <oneOrMore>
+        <element name="description">
+          <ref name="private.localizedtext"/>
+        </element>
+      </oneOrMore>
+      <optional>
+        <element name="license-to-confirm">
+          <ref name="private.localizedtext"/>
+        </element>
+      </optional>
+      <ref name="yum.version"/>
+      <ref name="group.deps"/>
       <optional>
         <element name="reboot-needed">
           <empty/>
@@ -144,235 +120,151 @@
           <empty/>
         </element>
       </optional>
-      <optional>
-        <ref name="element-update-script"/>
-      </optional>
-      <oneOrMore>
-        <element name="atoms">
-          <oneOrMore>
-            <choice>
-              <ref name="element-package"/>
-              <ref name="element-script"/>
-              <ref name="element-message"/>
-            </choice>
-          </oneOrMore>
-        </element>
-      </oneOrMore>
-    </interleave>
-  </define>
-  <!-- shortcut since all atoms have the same dependency section -->
-  <define name="dependency-block">
-    <zeroOrMore>
-      <choice>
-        <ref name="element-provides"/>
-        <ref name="element-conflicts"/>
-        <ref name="element-obsoletes"/>
-        <ref name="element-requires"/>
-        <ref name="element-freshens"/>
-        <ref name="element-recommends"/>
-        <ref name="element-suggests"/>
-        <ref name="element-supplements"/>
-        <ref name="element-enhances"/>
-      </choice>
-    </zeroOrMore>
-  </define>
-  <define name="element-category">
-    <!--  element category { "youfix" | "security" | "recommended" | "bonus" | "beta" } -->
-    <element name="category">
-      <choice>
-        <value>optional</value>
-        <value>recommended</value>
-        <value>security</value>
-      </choice>
-    </element>
-  </define>
-  <define name="element-update-script">
-    <element name="update-script">
-      <text/>
-    </element>
-  </define>
-  <define name="element-script">
-    <element name="script">
-      <ref name="element-name"/>
-      <ref name="element-version"/>
-      <optional>
-        <element name="do">
-          <data type="string"/>
-        </element>
-      </optional>
-      <optional>
-        <element name="undo">
-          <data type="string"/>
-        </element>
-      </optional>
-      <optional>
-        <element name="do-location">
-          <optional>
-            <attribute name="xml:base">
-              <data type="anyURI"/>
-            </attribute>
-          </optional>
-          <attribute name="href">
-            <data type="anyURI"/>
-          </attribute>
-          <empty/>
-        </element>
-      </optional>
-      <optional>
-        <element name="do-checksum">
-          <attribute name="type">
-            <choice>
-              <value>md5</value>
-              <value>sha</value>
-            </choice>
-          </attribute>
-          <text/>
-        </element>
-      </optional>
-      <optional>
-        <element name="undo-location">
-          <optional>
-            <attribute name="xml:base">
-              <data type="anyURI"/>
-            </attribute>
-          </optional>
-          <attribute name="href">
-            <data type="anyURI"/>
-          </attribute>
-          <empty/>
-        </element>
-      </optional>
-      <optional>
-        <element name="undo-checksum">
-          <attribute name="type">
-            <choice>
-              <value>md5</value>
-              <value>sha</value>
-            </choice>
-          </attribute>
-          <text/>
-        </element>
-      </optional>
-      <ref name="dependency-block"/>
-    </element>
-  </define>
-  <define name="element-message">
-    <element name="message">
-      <ref name="element-name"/>
-      <ref name="element-version"/>
-      <oneOrMore>
-        <element name="text">
-          <ref name="localized-string"/>
-        </element>
-      </oneOrMore>
-      <ref name="dependency-block"/>
-    </element>
-  </define>
-  <define name="element-pkgfiles">
-    <element name="pkgfiles">
-      <zeroOrMore>
+      <element name="category">
         <choice>
-          <ref name="element-deltarpm"/>
-          <ref name="element-patchrpm"/>
-          <ref name="element-plainrpm"/>
+          <value>security</value>
+          <value>recommended</value>
+          <value>optional</value>
         </choice>
-      </zeroOrMore>
-    </element>
-  </define>
-  <define name="element-plainrpm">
-    <element name="plainrpm">
-      <ref name="shared-rpmfile-attributes"/>
-    </element>
-  </define>
-  <define name="element-patchrpm">
-    <element name="patchrpm">
-      <ref name="shared-rpmfile-attributes"/>
-      <element name="location">
-        <optional>
-          <attribute name="xml:base">
-            <data type="anyURI"/>
-          </attribute>
-        </optional>
-        <attribute name="href">
-          <data type="anyURI"/>
-        </attribute>
-        <empty/>
       </element>
-      <element name="checksum">
-        <attribute name="type">
-          <choice>
-            <value>md5</value>
-            <value>sha</value>
-          </choice>
-        </attribute>
-        <text/>
-      </element>
-      <ref name="element-time"/>
-      <ref name="element-size"/>
-      <oneOrMore>
-        <ref name="element-base-version"/>
-      </oneOrMore>
+      <optional>
+        <!--
+          This is in two places (with slightly different definiton)
+          because that is what is seen in the wild
+        -->
+        <element name="license-to-confirm">
+          <text/>
+        </element>
+      </optional>
+      <optional>
+        <element name="atoms">
+          <optional>
+            <element name="message">
+              <ref name="yum.name"/>
+              <ref name="yum.version"/>
+              <element name="text">
+                <ref name="private.localizedtext"/>
+              </element>
+              <ref name="group.deps"/>
+            </element>
+          </optional>
+          <zeroOrMore>
+            <element name="yum:package">
+              <attribute name="type">
+                <value>rpm</value>
+              </attribute>
+              <ref name="yum.name"/>
+              <ref name="yum.arch"/>
+              <ref name="yum.version"/>
+              <element name="yum:checksum">
+                <attribute name="pkgid">
+                  <value>YES</value>
+                </attribute>
+                <ref name="private.checksum"/>
+              </element>
+              <element name="yum:time">
+                <attribute name="file">
+                  <ref name="private.unixts"/>
+                </attribute>
+                <attribute name="build">
+                  <ref name="private.unixts"/>
+                </attribute>
+              </element>
+              <element name="yum:size">
+                <attribute name="package">
+                  <ref name="private.size"/>
+                </attribute>
+                <attribute name="installed">
+                  <ref name="private.size"/>
+                </attribute>
+                <attribute name="archive">
+                  <data type="nonNegativeInteger"/>
+                </attribute>
+              </element>
+              <element name="yum:location">
+                <attribute name="href">
+                  <data type="anyURI"/>
+                </attribute>
+              </element>
+              <element name="yum:format">
+                <ref name="group.deps"/>
+              </element>
+              <element name="pkgfiles">
+                <optional>
+                  <element name="patchrpm">
+                    <ref name="patch.location"/>
+                    <ref name="patch.checksum"/>
+                    <ref name="patch.time"/>
+                    <ref name="patch.size"/>
+                    <oneOrMore>
+                      <element name="base-version">
+                        <ref name="private.evr"/>
+                      </element>
+                    </oneOrMore>
+                  </element>
+                </optional>
+                <zeroOrMore>
+                  <element name="deltarpm">
+                    <ref name="patch.location"/>
+                    <ref name="patch.checksum"/>
+                    <ref name="patch.time"/>
+                    <ref name="patch.size"/>
+                    <element name="base-version">
+                      <ref name="private.evr"/>
+                      <attribute name="md5sum">
+                        <data type="string">
+                          <param name="length">32</param>
+                          <param name="pattern">[0-9a-f]*</param>
+                        </data>
+                      </attribute>
+                      <attribute name="buildtime">
+                        <ref name="private.unixts"/>
+                      </attribute>
+                      <attribute name="sequence_info"/>
+                    </element>
+                  </element>
+                </zeroOrMore>
+              </element>
+            </element>
+          </zeroOrMore>
+          <optional>
+            <element name="message">
+              <ref name="yum.name"/>
+              <ref name="yum.version"/>
+              <element name="text">
+                <ref name="private.localizedtext"/>
+              </element>
+              <ref name="group.deps"/>
+            </element>
+          </optional>
+          <optional>
+            <element name="script">
+              <ref name="yum.name"/>
+              <ref name="yum.version"/>
+              <!--
+                Script can either be remote (do-location and do-checksum) 
+                or inline (do), but not both
+              -->
+              <choice>
+                <group>
+                  <element name="do-location">
+                    <attribute name="href">
+                      <data type="anyURI"/>
+                    </attribute>
+                  </element>
+                  <element name="do-checksum">
+                    <ref name="private.checksum"/>
+                  </element>
+                </group>
+                <element name="do">
+                  <text/>
+                </element>
+              </choice>
+              <ref name="group.deps"/>
+            </element>
+          </optional>
+        </element>
+      </optional>
     </element>
-  </define>
-  <define name="element-deltarpm">
-    <element name="deltarpm">
-      <ref name="shared-rpmfile-attributes"/>
-      <element name="location">
-        <optional>
-          <attribute name="xml:base">
-            <data type="anyURI"/>
-          </attribute>
-        </optional>
-        <attribute name="href">
-          <data type="anyURI"/>
-        </attribute>
-        <empty/>
-      </element>
-      <element name="checksum">
-        <attribute name="type">
-          <choice>
-            <value>md5</value>
-            <value>sha</value>
-          </choice>
-        </attribute>
-        <text/>
-      </element>
-      <ref name="element-time"/>
-      <ref name="element-size"/>
-      <ref name="element-delta-base-version"/>
-    </element>
-  </define>
-  <!-- none used in fact... -->
-  <define name="shared-rpmfile-attributes">
-    <optional>
-      <attribute name="arch">
-        <ref name="arch"/>
-      </attribute>
-    </optional>
-    <optional>
-      <attribute name="filename"/>
-    </optional>
-    <optional>
-      <attribute name="downloadsize"/>
-    </optional>
-    <optional>
-      <attribute name="md5sum"/>
-    </optional>
-    <optional>
-      <attribute name="buildtime"/>
-    </optional>
-  </define>
-  <define name="element-base-version">
-    <element name="base-version">
-      <ref name="version"/>
-    </element>
-  </define>
-  <define name="element-delta-base-version">
-    <element name="base-version">
-      <ref name="version"/>
-      <attribute name="md5sum"/>
-      <attribute name="buildtime"/>
-      <attribute name="sequence_info"/>
-    </element>
-  </define>
+  </start>
 </grammar>

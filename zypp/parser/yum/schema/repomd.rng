@@ -1,79 +1,82 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!--
-  YUM repository index file schema.
-  
-  Upstream version: http://linux.duke.edu/projects/metadata/dtd/repomd.dtd
-  
-  Elements:
-  
-  repomd
-    Root element. May contain text (e.g. repository description?).
-    "patches", "patterns", and "products" are SUSE extensions to the upstream schema.
-  data
-    Repository file data. Contains location, checksum, timestamp of the metadata file.
-  location
-    Location of the metadata file. 'href' attribute contains path of the file, relative
-    to the repository root. 'xml:base' attribute seems to be unused.
-  checksum
-    Type and value of checksum of the metadata file.
-  timestamp
-    Timestamp of the metadata file in the repository.
-  open-checksum
-    ?
--->
-<element name="repomd" ns="http://linux.duke.edu/metadata/repo" xmlns="http://relaxng.org/ns/structure/1.0" datatypeLibrary="http://www.w3.org/2001/XMLSchema-datatypes">
-  <interleave>
-    <oneOrMore>
-      <element name="data">
-        <interleave>
+<grammar ns="http://linux.duke.edu/metadata/repo" xmlns="http://relaxng.org/ns/structure/1.0" datatypeLibrary="http://www.w3.org/2001/XMLSchema-datatypes">
+  <include href="common-inc.rng"/>
+  <define name="repomd.location">
+    <element name="location">
+      <attribute name="href">
+        <data type="anyURI"/>
+      </attribute>
+    </element>
+  </define>
+  <define name="repomd.meta">
+    <element name="checksum">
+      <ref name="private.checksum"/>
+    </element>
+    <!-- Oddity in the wild: a timestamp wiht a decimal -->
+    <element name="timestamp">
+      <choice>
+        <ref name="private.unixts"/>
+        <data type="decimal"/>
+      </choice>
+    </element>
+    <optional>
+      <element name="size">
+        <ref name="private.positive"/>
+      </element>
+    </optional>
+    <optional>
+      <element name="open-size">
+        <ref name="private.positive"/>
+      </element>
+    </optional>
+    <element name="open-checksum">
+      <ref name="private.checksum"/>
+    </element>
+  </define>
+  <start>
+    <element name="repomd">
+      <optional>
+        <element name="revision">
+          <ref name="private.unixts"/>
+        </element>
+      </optional>
+      <optional>
+        <element name="tags">
+          <element name="repo">
+            <data type="anyURI"/>
+          </element>
+        </element>
+      </optional>
+      <zeroOrMore>
+        <element name="data">
           <attribute name="type">
             <choice>
-              <value>other</value>
+              <value>deltainfo</value>
               <value>filelists</value>
+              <value>other</value>
               <value>primary</value>
-              <value>group</value>
-              <value>products</value>
+              <value>susedata</value>
+              <value>suseinfo</value>
+              <value>updateinfo</value>
               <value>patches</value>
+              <value>products</value>
+              <value>product</value>
               <value>patterns</value>
+              <value>pattern</value>
             </choice>
           </attribute>
-          <element name="location">
-            <optional>
-              <attribute name="xml:base">
-                <data type="anyURI"/>
-              </attribute>
-            </optional>
-            <attribute name="href">
-              <data type="anyURI"/>
-            </attribute>
-            <empty/>
-          </element>
-          <element name="checksum">
-            <attribute name="type">
-              <choice>
-                <value>md5</value>
-                <value>sha</value>
-              </choice>
-            </attribute>
-            <text/>
-          </element>
-          <element name="timestamp">
-            <data type="integer"/>
-          </element>
-          <optional>
-            <element name="open-checksum">
-              <attribute name="type">
-                <choice>
-                  <value>md5</value>
-                  <value>sha</value>
-                </choice>
-              </attribute>
-              <text/>
-            </element>
-          </optional>
-        </interleave>
-      </element>
-    </oneOrMore>
-    <text/>
-  </interleave>
-</element>
+          <choice>
+            <group>
+              <ref name="repomd.meta"/>
+              <ref name="repomd.location"/>
+            </group>
+            <group>
+              <ref name="repomd.location"/>
+              <ref name="repomd.meta"/>
+            </group>
+          </choice>
+        </element>
+      </zeroOrMore>
+    </element>
+  </start>
+</grammar>

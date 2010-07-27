@@ -1,48 +1,32 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<element name="otherdata" ns="http://linux.duke.edu/metadata/other" xmlns="http://relaxng.org/ns/structure/1.0" datatypeLibrary="http://www.w3.org/2001/XMLSchema-datatypes">
-  <attribute name="packages">
-    <data type="positiveInteger"/>
-  </attribute>
-  <oneOrMore>
-    <element name="package">
-      <attribute name="pkgid"/>
-      <attribute name="name"/>
-      <attribute name="arch">
-        <choice>
-          <value>noarch</value>
-          <value>athlon</value>
-          <value>i386</value>
-          <value>i486</value>
-          <value>i586</value>
-          <value>i686</value>
-          <value>ia64</value>
-          <value>ppc</value>
-          <value>ppc64</value>
-          <value>s390</value>
-          <value>x390x</value>
-          <value>x86_64</value>
-          <value>src</value>
-        </choice>
+<grammar ns="http://linux.duke.edu/metadata/other" xmlns="http://relaxng.org/ns/structure/1.0">
+  <include href="common-inc.rng"/>
+  <start>
+    <element name="otherdata">
+      <attribute name="packages">
+        <ref name="private.nonnegative"/>
       </attribute>
-      <element name="version">
-        <attribute name="epoch">
-          <data type="nonNegativeInteger"/>
-        </attribute>
-        <attribute name="ver"/>
-        <attribute name="rel"/>
-        <empty/>
-      </element>
       <zeroOrMore>
-        <element name="changelog">
-          <attribute name="author"/>
-          <attribute name="date">
-            <data type="integer"/>
+        <element name="package">
+          <attribute name="pkgid"/>
+          <attribute name="name"/>
+          <attribute name="arch">
+            <ref name="private.archenum"/>
           </attribute>
-          <text/>
+          <element name="version">
+            <ref name="private.evr"/>
+          </element>
+          <zeroOrMore>
+            <element name="changelog">
+              <attribute name="author"/>
+              <attribute name="date">
+                <ref name="private.unixts"/>
+              </attribute>
+              <text/>
+            </element>
+          </zeroOrMore>
         </element>
       </zeroOrMore>
-      <empty/>
     </element>
-  </oneOrMore>
-  <empty/>
-</element>
+  </start>
+</grammar>

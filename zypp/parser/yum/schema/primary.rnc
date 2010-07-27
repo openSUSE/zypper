@@ -1,120 +1,88 @@
 default namespace = "http://linux.duke.edu/metadata/common"
+namespace rpm = "http://linux.duke.edu/metadata/rpm"
 namespace suse = "http://novell.com/package/metadata/suse/common"
 
-grammar {
+include "rpm-inc.rnc"
 
-# defines element-format and format
-include "rpm-ns.rnc"
+yum.name = element name { text }
 
-start = element-metadata
-element-metadata = 
-  element metadata { metadata }
+yum.arch = element arch { private.archenum }
 
-metadata =
-  (
-    attribute packages { xsd:nonNegativeInteger }?,
-    element-package+
-  )
+yum.version =  element version {
+  private.evr
+}
 
-element-package = 
-  element package { package }
+group.deps = rpm.provides?, rpm.requires?, rpm.conflicts?, 
+             rpm.obsoletes?, rpm.suggests?, rpm.recommends?, 
+             rpm.supplements?, rpm.enhances?
 
-# ?: for package in atoms (suse-broken)
-package = 
-    attribute type { "rpm" } &
-    element-name &
-    element-arch &
-    element-version &
-    element-checksum &
-    element-summary* &
-    element-description* &
-    element-packager? &
-    element-url? &
-    element-time &
-    element-size &
-    element-location &
-    element-format &
-    element suse:license-to-confirm {text}?
-
-element-name =
-    element name { text }
-
-element-arch =
-    element arch { arch }
-
-arch =      
-    "noarch"
-    | "athlon"
-    | "i386"
-    | "i486"
-    | "i586"
-    | "i686"
-    | "ia64"
-    | "ppc"
-    | "ppc64"
-    | "s390"
-    | "s390x"
-    | "x86_64"
-    | "src"
-
-element-version =
-    element version { version }
-
-version =
-    attribute epoch { xsd:nonNegativeInteger }?,
-    attribute ver { text },
-    attribute rel { text },
-    empty
-
-element-checksum =
-    element checksum { checksum }
-
-checksum =
-    attribute type { "md5" | "sha" },
-    attribute pkgid { "YES" | "NO" },
-    text
-    
-localized-string =
-  attribute lang { text }?,
-  text    
-    
-element-summary =
-    element summary { localized-string }
-
-element-description =
-    element description { localized-string }
-
-element-packager =
-    element packager { text }
-
-element-url =
-    element url { xsd:anyURI }
-
-element-time =
-    element time { time }
-
-time =
-    attribute file { xsd:nonNegativeInteger },
-    attribute build { xsd:nonNegativeInteger },
-    empty
+group.deps1 = rpm.provides?, rpm.requires?, rpm.conflicts?, 
+              rpm.obsoletes?, rpm.suggests?, rpm.enhances?, rpm.recommends?, 
+              rpm.supplements?
 
 
-element-size =
-    element size { size }
+group.deps2 = rpm.provides?, rpm.conflicts?, rpm.obsoletes?, rpm.enhances?, 
+              rpm.supplements?, rpm.suggests?, rpm.recommends?,
+              rpm.requires?
 
-size =
-    attribute package { xsd:nonNegativeInteger },
-    attribute installed { xsd:nonNegativeInteger },
-    attribute archive { xsd:nonNegativeInteger },
-    empty
+yum.location = element location {
+  attribute href { xsd:anyURI }
+}
 
-element-location =
-    element location { location }
+yum.checksum = element checksum {
+  attribute pkgid { "YES" },
+  private.checksum
+}
+ 
+yum.time = element time {
+  attribute file { private.unixts },
+  attribute build { private.unixts }
+}
 
-location =
-    attribute xml:base { xsd:anyURI }?,
-    attribute href { xsd:anyURI },
-    empty
+yum.size = element size {
+  attribute package { private.size },
+  # Found this blank in the wild
+  attribute archive { private.size | "" },
+  attribute installed { private.size }
+}
 
+start = element metadata {
+  attribute packages { private.nonnegative },
+  element package {
+    attribute type { "rpm" },
+    yum.name,
+    yum.arch,
+    yum.version,
+    yum.checksum,
+    # Found unlocalized in the wild
+    element summary { private.localizedtext | text },
+    element description { private.localizedtext | text },
+    element packager { text },
+    # 10-SP1 stuff has a broken URL in the wild
+    element url { xsd:anyURI | text },
+    yum.time,
+    yum.size,
+    yum.location,
+    element format {
+      element rpm:license { text },
+      element rpm:vendor { text },
+      element rpm:group { text },
+      element rpm:buildhost { text },
+      # Two different options seen in the wild
+      # one omits the element, the other leaves the value empty
+      element rpm:sourcerpm { text | empty }?,
+      element rpm:header-range {
+        attribute start { private.positive },
+        attribute end { private.positive }
+      },
+      # any of these orders is valid, all are in use
+      (group.deps | group.deps1 | group.deps2),
+      element file { 
+        attribute type { "dir" | "ghost" }?,
+        text 
+      }*
+    },
+    element suse:license-to-confirm { text }?
+  }*
 }
 

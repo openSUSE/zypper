@@ -1,163 +1,146 @@
 default namespace = "http://novell.com/package/metadata/suse/patch"
-namespace ns1 = "http://novell.com/package/metadata/suse/common"
 namespace yum = "http://linux.duke.edu/metadata/common"
+namespace suse = "http://novell.com/package/metadata/suse/common"
 
-include "suse-primary.rnc" {
-  start = element-patch
+include "rpm-inc.rnc"
 
-# patches use localized summary and description fields
-  element-summary = element summary { localized-string }+
-  element-description = element description { localized-string }+
-  element-license-to-confirm = element license-to-confirm { localized-string }  
-# packages in patches have an additional rpmfiles element
-  element-package = element yum:package { package & element-pkgfiles & (element license-to-confirm { localized-string }?) }
+yum.name = element yum:name { text }
 
-# first part made optional
-  format =
-    ( element-license & element-vendor & element-group & element-buildhost & element-sourcerpm & element-header-range )?,
-    ( element-provides | element-conflicts | element-obsoletes | element-requires | element-recommends | element-enhances | element-supplements | element-suggests )*,
-    element-file*
+yum.arch = element yum:arch { private.archenum }
 
-# wrong namespace again, grr
-  element-time =
-    element yum:time {time} |
-    element time {time}
-  element-size =
-    element yum:size {size} |
-    # and wrong content too...
-    element size {
-      attribute package { xsd:nonNegativeInteger },
-      attribute installed { xsd:nonNegativeInteger }?,
-      attribute archive { xsd:nonNegativeInteger },
-      empty
-    }
-
+yum.version =  element yum:version {
+  private.evr
 }
 
+suse.freshens = element suse:freshens {
+  element suse:entry {
+    attribute kind { "package" },
+    attribute name { text }
+  }+
+}
 
-element-patch = element patch { patch }
+group.deps = rpm.requires?, rpm.obsoletes?, rpm.provides?, rpm.recommends?, rpm.supplements?, rpm.conflicts?, suse.freshens?
 
-# &, fetchmsttfonts mixes up the order
-patch =
-  attribute patchid { text }&
-  attribute timestamp { xsd:nonNegativeInteger }&
-  attribute engine { text }&
-  element-name&
-  element-summary&
-  element-description&
-  element-license-to-confirm*&
-  element-version&
-  ( element-provides | element-conflicts | element-obsoletes | element-requires | element-freshens | element-recommends | element-suggests | element-supplements | element-enhances )*&
-  element-category&
-  element reboot-needed { empty }?&
-  element package-manager { empty }?&
-  element-update-script?&
-  element atoms { (element-package | element-script | element-message)+ }+
+patch.location = element location {
+  attribute href { xsd:anyURI }
+}
 
-# shortcut since all atoms have the same dependency section
-dependency-block =
-  ( element-provides | element-conflicts | element-obsoletes | element-requires | element-freshens | element-recommends | element-suggests | element-supplements | element-enhances )*
+patch.checksum = element checksum {
+  private.checksum
+}
+ 
+patch.time = element time {
+  attribute file { private.unixts },
+  attribute build { private.unixts }
+}
 
-element-category =
-#  element category { "youfix" | "security" | "recommended" | "bonus" | "beta" }
-  element category { "optional" | "recommended" | "security" }
+patch.size = element size {
+  attribute package { private.size },
+  attribute archive { private.size }
+}
 
-element-update-script = element update-script { text }
-
-element-script =
-  element script {
-    element-name,
-    element-version,    
-    element do { xsd:string }?,
-    element undo { xsd:string }?,
-    element do-location {
-      attribute xml:base { xsd:anyURI }?,
-      attribute href { xsd:anyURI },
-      empty
+start = element patch {
+  attribute patchid { text },
+  attribute timestamp { private.unixts },
+  attribute engine { "1.0" },
+  yum.name,
+  element summary {
+    private.localizedtext
+  }+,
+  element description {
+    private.localizedtext
+  }+,
+  element license-to-confirm { 
+    private.localizedtext
+  }?,
+  yum.version,
+  group.deps,
+  element reboot-needed { empty }?,
+  element package-manager { empty }?,
+  element category { "security" | "recommended" | "optional" },
+  # This is in two places (with slightly different definiton)
+  # because that is what is seen in the wild
+  element license-to-confirm { 
+    text
+  }?,
+  element atoms {
+    element message {
+      yum.name,
+      yum.version,
+      element text { 
+        private.localizedtext
+      },
+      group.deps
     }?,
-    element do-checksum {
-      attribute type { "md5" | "sha" },
-      text
+    element yum:package {
+      attribute type { "rpm" },
+      yum.name,
+      yum.arch,
+      yum.version,
+      element yum:checksum {
+        attribute pkgid  { "YES" },
+        private.checksum
+      },
+      element yum:time {
+        attribute file { private.unixts },
+        attribute build { private.unixts }
+      },
+      element yum:size {
+        attribute package { private.size },
+        attribute installed { private.size },
+        attribute archive { xsd:nonNegativeInteger }
+      },
+      element yum:location {
+        attribute href { xsd:anyURI }
+      },
+      element yum:format {
+        group.deps
+      },
+      element pkgfiles {
+        element patchrpm {
+          patch.location,
+          patch.checksum,
+          patch.time,
+          patch.size,
+          element base-version {
+            private.evr
+          }+
+        }?,
+        element deltarpm {
+          patch.location,
+          patch.checksum,
+          patch.time,
+          patch.size,
+          element base-version {
+            private.evr,
+            attribute md5sum { xsd:string { length="32" pattern="[0-9a-f]*" } },
+            attribute buildtime { private.unixts },
+            attribute sequence_info { text }
+          }
+        }*
+      }
+    }*,
+    element message {
+      yum.name,
+      yum.version,
+      element text { 
+        private.localizedtext
+      },
+      group.deps
     }?,
-    element undo-location {
-      attribute xml:base { xsd:anyURI }?,
-      attribute href { xsd:anyURI },
-      empty
-    }?,
-    element undo-checksum {
-      attribute type { "md5" | "sha" },
-      text
-    }?,
-    dependency-block
-  }
-
-element-message =
-  element message {
-    element-name,
-    element-version,    
-    element text { localized-string }+,
-    dependency-block
-  }
-
-element-pkgfiles =
-  element pkgfiles {  ( element-deltarpm | element-patchrpm | element-plainrpm ) * }
-
-element-plainrpm =
-  element plainrpm {
-    shared-rpmfile-attributes
-  }
-
-element-patchrpm =
-  element patchrpm {
-    shared-rpmfile-attributes,
-    element location {
-      attribute xml:base { xsd:anyURI }?,
-      attribute href { xsd:anyURI },
-      empty
-    },
-    element checksum {
-      attribute type { "md5" | "sha" },
-      text
-    },
-    element-time,
-    element-size,
-    element-base-version +
-  }
-
-
-element-deltarpm =
-  element deltarpm {
-    shared-rpmfile-attributes,
-    element location {
-      attribute xml:base { xsd:anyURI }?,
-      attribute href { xsd:anyURI },
-      empty
-    },
-    element checksum {
-      attribute type { "md5" | "sha" },
-      text
-    },
-    element-time,
-    element-size,
-    element-delta-base-version
-  }
-
-# none used in fact...
-shared-rpmfile-attributes =
-  attribute arch { arch } ?,
-  attribute filename { text } ?,
-  attribute downloadsize { text } ? ,
-  attribute md5sum { text } ?,
-  attribute buildtime { text } ?
-
-element-base-version = 
-  element base-version { version }
-
-element-delta-base-version =
-  element base-version {
-    version,
-    attribute md5sum { text },
-    attribute buildtime { text },
-    attribute sequence_info { text }
-  }
+    element script {
+      yum.name,
+      yum.version,
+      # Script can either be remote (do-location and do-checksum) 
+      # or inline (do), but not both
+      ((element do-location {
+        attribute href { xsd:anyURI }
+      },
+      element do-checksum {
+        private.checksum
+      }) | element do { text }),
+      group.deps
+    }?
+  }?
+}
 
