@@ -1,4 +1,10 @@
 -------------------------------------------------------------------
+Mon Aug  2 11:58:57 CEST 2010 - ma@suse.de
+
+- Enhance PoolItem interface to assist patch classification. (bnc#627316)
+- version 8.1.0 (0)
+
+-------------------------------------------------------------------
 Tue Jul 27 15:38:00 CEST 2010 - ma@suse.de
 
 - Fix bug in PoolQuery::addDependency
