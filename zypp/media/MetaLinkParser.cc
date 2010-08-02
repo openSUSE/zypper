@@ -95,8 +95,8 @@ struct ml_parsedata {
 
   vector<unsigned char> sha1;
   int nsha1;
-  vector<unsigned char> zsync4;
-  int nzsync4;
+  vector<unsigned char> zsync;
+  int nzsync;
 
   vector<unsigned char> chksum;
   int chksuml;
@@ -180,7 +180,7 @@ startElement(void *userData, const char *name, const char **atts)
         pd->piece.clear();
 	if (!strcmp(type, "sha1"))
 	  pd->piecel = 20;
-	else if (!strcmp(type, "zsync4"))
+	else if (!strcmp(type, "zsync"))
 	  pd->piecel = 4;
 	else
 	  {
@@ -287,8 +287,8 @@ endElement(void *userData, const char *name)
     case STATE_PIECES:
       if (pd->piecel == 4)
 	{
-	  pd->zsync4 = pd->piece;
-	  pd->nzsync4 = pd->npiece;
+	  pd->zsync = pd->piece;
+	  pd->nzsync = pd->npiece;
 	}
       else
 	{
@@ -430,10 +430,10 @@ MetaLinkParser::getBlockList()
           if (int(i) < pd->nsha1)
 	    {
 	      bl.setChecksum(blkno, "SHA1", 20, &pd->sha1[20 * i]);
-	      if (int(i) < pd->nzsync4)
+	      if (int(i) < pd->nzsync)
 		{
-		  unsigned char *p = &pd->zsync4[4 * i];
-		  bl.setRsum(blkno, 4, p[0] << 24 | p[1] << 16 | p[2] << 8 | p[3], pd->blksize);
+		  unsigned char *p = &pd->zsync[4 * i];
+		  bl.setRsum(blkno, 4, p[0] | p[1] << 8 | p[2] << 16 | p[3] << 24, pd->blksize);
 		}
 	    }
 	  off += pd->blksize;
