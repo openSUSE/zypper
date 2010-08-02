@@ -95,6 +95,14 @@ namespace zypp
 
       /** Whether a relevant items requirements are broken. */
       bool isBroken() const;
+
+      /** This includes \c unlocked broken patches, as well as those already
+       * selected to be installed (otherwise classified as \c satisfied).
+       */
+      bool isNeeded() const;
+
+      /** Broken (needed) but locked patches. */
+      bool isUnwanted() const;
       //@}
 
       //@}

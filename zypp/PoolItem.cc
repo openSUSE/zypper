@@ -90,6 +90,16 @@ namespace zypp
 	  return status().isBroken();
       }
 
+      bool isNeeded() const
+      {
+	return status().isToBeInstalled() || ( isBroken() && ! status().isLocked() );
+      }
+
+      bool isUnwanted() const
+      {
+	return isBroken() && status().isLocked();
+      }
+
     private:
       mutable ResStatus     _status;
       ResObject::constPtr   _resolvable;
@@ -251,6 +261,12 @@ namespace zypp
 
   bool PoolItem::isBroken() const
   { return _pimpl->isBroken(); }
+
+  bool PoolItem::isNeeded() const
+  { return _pimpl->isNeeded(); }
+
+  bool PoolItem::isUnwanted() const
+  { return _pimpl->isUnwanted(); }
 
   void PoolItem::saveState() const
   { _pimpl->saveState(); }
