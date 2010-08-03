@@ -392,6 +392,9 @@ multifetchworker::~multifetchworker()
       close(_dnspipe);
       _dnspipe = -1;
     }
+  // the destructor in MediaCurl doesn't call disconnect() if
+  // the media is not attached, so we do it here manually
+  disconnectFrom();
 }
 
 static inline bool env_isset(string name)
