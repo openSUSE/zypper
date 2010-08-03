@@ -1494,8 +1494,8 @@ bool RpmDb::systemReadLine( string & line )
       else if ( retval )
       {
 	// Data is available now.
-	size_t linebuffer_size = 0;
-	char * linebuffer = 0;
+	static size_t linebuffer_size = 0;	// static because getline allocs
+	static char * linebuffer = 0; 		// and reallocs if buffer is too small
 	ssize_t nread = getline( &linebuffer, &linebuffer_size, inputfile );
 	if ( nread == -1 )
 	{
