@@ -20,6 +20,7 @@
 #include <expat.h>
 
 #include <vector>
+#include <algorithm>
 #include <iostream>
 #include <fstream>
 
@@ -387,11 +388,18 @@ MetaLinkParser::parseBytes(const char *buf, size_t len)
     ZYPP_THROW(Exception("Parse Error"));
 }
 
+static bool urlcmp(const ml_url &a, const ml_url &b)
+{
+  return a.priority < b.priority;
+}
+
 void
 MetaLinkParser::parseEnd()
 {
   if (XML_Parse(pd->parser, 0, 0, 1) == XML_STATUS_ERROR)
     ZYPP_THROW(Exception("Parse Error"));
+  if (pd->nurls)
+    stable_sort(pd->urls.begin(), pd->urls.end(), urlcmp);
 }
 
 std::vector<Url>
