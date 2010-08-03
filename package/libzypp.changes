@@ -1,4 +1,9 @@
 -------------------------------------------------------------------
+Tue Aug  3 16:17:04 CEST 2010 - ma@suse.de
+
+- Fix memory leaks.
+
+-------------------------------------------------------------------
 Mon Aug  2 11:58:57 CEST 2010 - ma@suse.de
 
 - Enhance PoolItem interface to assist patch classification. (bnc#627316)
