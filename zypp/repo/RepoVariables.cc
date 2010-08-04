@@ -34,36 +34,21 @@ std::string RepoVariablesStringReplacer::operator()( const std::string &value ) 
   string newvalue(value);
 
   // $arch
-  newvalue = str::gsub( newvalue,
-                        "$arch",
-                        ZConfig::instance().systemArchitecture().asString() );
+  Arch sysarch( ZConfig::instance().systemArchitecture() );
+  newvalue = str::gsub( newvalue, "$arch", sysarch.asString() );
+
   // $basearch
-
-  Arch::CompatSet cset( Arch::compatSet( ZConfig::instance().systemArchitecture() ) );
-  Arch::CompatSet::const_iterator it = cset.end();
-  --it;
-  // now at noarch
-  --it;
-
-  Arch basearch = *it;
-  if ( basearch == Arch_noarch )
+  Arch basearch( sysarch );
+  Arch::CompatSet cset( Arch::compatSet( sysarch ) );
+  if ( cset.size() > 2 )	// systemArchitecture, ..., basearch, noarch
   {
-    basearch = ZConfig::instance().systemArchitecture();
+    basearch = *(++++cset.rbegin());
   }
+  newvalue = str::gsub( newvalue, "$basearch", basearch.asString() );
 
-  newvalue = str::gsub( newvalue,
-                        "$basearch",
-                        basearch.asString() );
+  // $releasever (Target::distributionVersion assumes root=/ if target not initialized)
+  newvalue = str::gsub( newvalue, "$releasever", Target::distributionVersion(Pathname()/*guess*/) );
 
-  // only replace $releasever if the target is
-  // initialized
-  if ( getZYpp()->getTarget() )
-  {
-      newvalue = str::gsub( newvalue,
-                            "$releasever",
-                            getZYpp()->target()->distributionVersion() );
-  }
-  
   return newvalue;
 }
 
