@@ -1149,6 +1149,16 @@ MediaMultiCurl::~MediaMultiCurl()
       curl_multi_cleanup(_multi);
       _multi = 0;
     }
+  std::map<std::string, CURL *>::iterator it;
+  for (it = _easypool.begin(); it != _easypool.end(); it++)
+    {
+      CURL *easy = it->second;
+      if (easy)
+	{
+	  curl_easy_cleanup(easy);
+	  it->second = NULL;
+	}
+    }
 }
 
 void MediaMultiCurl::setupEasy()
@@ -1406,7 +1416,10 @@ CURL *MediaMultiCurl::fromEasyPool(const string &host) const
 
 void MediaMultiCurl::toEasyPool(const std::string &host, CURL *easy) const
 {
+  CURL *oldeasy = _easypool[host];
   _easypool[host] = easy;
+  if (oldeasy)
+    curl_easy_cleanup(oldeasy);
 }
 
   } // namespace media
