@@ -1261,7 +1261,7 @@ void MediaMultiCurl::doGetFileCopy( const Pathname & filename , const Pathname &
     WAR << "Could not get the reponse code." << endl;
   }
   char *ptr = NULL;
-  if (curl_easy_getinfo(_curl, CURLINFO_CONTENT_TYPE, &ptr) == CURLE_OK)
+  if (curl_easy_getinfo(_curl, CURLINFO_CONTENT_TYPE, &ptr) == CURLE_OK && ptr)
     {
       string ct = string(ptr);
       if (ct.find("application/metalink+xml") == 0 || ct.find("application/metalink4+xml") == 0)
