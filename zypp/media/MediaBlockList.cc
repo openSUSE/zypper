@@ -300,7 +300,7 @@ MediaBlockList::reuseBlocks(FILE *wfp, string filename)
       memset(ht, 0, (hm + 1) * sizeof(unsigned int));
       for (unsigned int i = 0; i < rsums.size(); i++)
 	{
-	  if (blocks[i].size != blksize && (i != nblks - 1 || rsumpad == blksize))
+	  if (blocks[i].size != blksize && (i != nblks - 1 || rsumpad != blksize))
 	    continue;
 	  unsigned int r = rsums[i];
 	  unsigned int h = r & hm;
