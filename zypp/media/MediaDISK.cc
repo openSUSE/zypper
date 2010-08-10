@@ -155,6 +155,7 @@ namespace zypp {
       // (there is no /dev/disk link for some of them)
       ExternalProgram::Arguments args;
       args.push_back( "blkid" );
+      args.push_back( "-p" );
       args.push_back( dev_name.asString() );
 
       ExternalProgram cmd( args, ExternalProgram::Stderr_To_Stdout );
