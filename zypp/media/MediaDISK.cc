@@ -30,11 +30,6 @@
 */
 #define DELAYED_VERIFY           1
 
-/*
-** Path to the vol_id tool (normal system, instsys)
-*/
-#define VOL_ID_TOOL_PATHS        { "/sbin/vol_id", "/lib/udev/vol_id", NULL}
-
 using namespace std;
 
 namespace zypp {
@@ -156,77 +151,23 @@ namespace zypp {
 	}
       }
 
-      // check if a filesystem volume using the /sbin/vol_id tool
+      // check if a filesystem volume using the 'blkid' tool
       // (there is no /dev/disk link for some of them)
-      for(const char *vol_id_paths[] = VOL_ID_TOOL_PATHS,
-	             **vol_id_path    = vol_id_paths;
-	  vol_id_path != NULL && *vol_id_path != NULL;
-	  vol_id_path++)
+      ExternalProgram::Arguments args;
+      args.push_back( "blkid" );
+      args.push_back( dev_name.asString() );
+
+      ExternalProgram cmd( args, ExternalProgram::Stderr_To_Stdout );
+      cmd >> DBG;
+      if ( cmd.close() != 0 )
       {
-	PathInfo vol_id_info(*vol_id_path);
-	if( !vol_id_info.isFile() || !vol_id_info.isXUsr())
-	  continue;
-
-	const char *cmd[3];
-	cmd[0] = *vol_id_path;
-	cmd[1] = dev_name.asString().c_str();
-	cmd[2] = NULL;
-
-	ExternalProgram vol_id(cmd, ExternalProgram::Stderr_To_Stdout);
-
-	std::string vol_fs_usage;
-	std::string vol_fs_uuid;
-	std::string vol_fs_type;
-
-	for(std::string out( vol_id.receiveLine());
-	    out.length(); out = vol_id.receiveLine())
-	{
-	  out = str::rtrim(out);
-
-	  if( out.compare(0, sizeof("ID_FS_USAGE=")-1, "ID_FS_USAGE=") == 0)
-	  {
-	    vol_fs_usage = out.substr(sizeof("ID_FS_USAGE=")-1);
-	  }
-	  else
-	  if( out.compare(0, sizeof("ID_FS_TYPE=")-1, "ID_FS_TYPE=")   == 0)
-	  {
-	    vol_fs_type  = out.substr(sizeof("ID_FS_TYPE=")-1);
-	  }
-	  else
-	  if( out.compare(0, sizeof("ID_FS_UUID=")-1, "ID_FS_UUID=")   == 0)
-	  {
-	    vol_fs_uuid  = out.substr(sizeof("ID_FS_UUID=")-1);
-	  }
-	}
-
-	if( vol_id.close() == 0)
-	{
-	  if( vol_fs_usage == "filesystem")
-	  {
-	    if(vol_fs_type == "iso9660" || vol_fs_type == "udf")
-	    {
-	      DBG << "Specified device name " << dev_name
-	          << " is a CD/DVD volume (type " << vol_fs_type << ")"
-	          << std::endl;
-	      return true;
-	    }
-	    else
-	    if(!vol_fs_type.empty() && !vol_fs_uuid.empty())
-	    {
-	      DBG << "Specified device name " << dev_name
-	          << " is a volume (type " << vol_fs_type
-		  << ", uuid " << vol_fs_uuid << ")"
-	          << std::endl;
-	      return true;
-	    }
-	  }
-	}
+	ERR << cmd.execError() << endl
+	    << "Specified device name " << dev_name
+	    << " is not a usable disk volume"
+	    << std::endl;
+	return false;
       }
-
-      ERR << "Specified device name " << dev_name
-	  << " is not a usable disk volume"
-          << std::endl;
-      return false;
+      return true;
     }
 
     ///////////////////////////////////////////////////////////////////
