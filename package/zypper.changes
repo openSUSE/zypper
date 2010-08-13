@@ -1,4 +1,9 @@
 -------------------------------------------------------------------
+Fri Aug 13 11:52:58 UTC 2010 - dmacvicar@suse.de
+
+- add -lrt to build on Fedora
+
+-------------------------------------------------------------------
 Tue Jul 27 16:21:27 CEST 2010 - ma@suse.de
 
 - Fix evaluation of package specs containing edition or arch.
