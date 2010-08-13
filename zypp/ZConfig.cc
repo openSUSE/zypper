@@ -818,7 +818,11 @@ namespace zypp
   ///////////////////////////////////////////////////////////////////
 
   std::string ZConfig::distroverpkg() const
-  { return "redhat-release"; }
+  {
+      if ( PathInfo(ZConfig::systemRoot() + "/etc/fedora-release").isExist() )
+          return "fedora-release";
+      return "redhat-release";      
+  }
 
   ///////////////////////////////////////////////////////////////////
 
