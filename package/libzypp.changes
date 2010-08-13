@@ -1,4 +1,10 @@
 -------------------------------------------------------------------
+Fri Aug 13 12:33:26 UTC 2010 - dmacvicar@novell.com
+
+- fix basearch url variable
+- use the right release package name on fedora
+
+-------------------------------------------------------------------
 Tue Aug 10 13:18:08 CEST 2010 - ma@suse.de
 
 - MediaDISK: Use blkid to verify disk volumes. (bnc#623226)
