@@ -222,8 +222,6 @@ namespace zypp
       replaced_urls.insert(replacer(*it));
     }
     return replaced_urls;
-
-    return _pimpl->baseUrls;
   }
 
   Pathname RepoInfo::path() const
