@@ -42,7 +42,7 @@ std::string RepoVariablesStringReplacer::operator()( const std::string &value ) 
   Arch::CompatSet cset( Arch::compatSet( sysarch ) );
   if ( cset.size() > 2 )	// systemArchitecture, ..., basearch, noarch
   {
-    basearch = *(++++cset.rbegin());
+    basearch = *(++cset.rbegin());
   }
   newvalue = str::gsub( newvalue, "$basearch", basearch.asString() );
 
