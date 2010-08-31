@@ -1123,6 +1123,14 @@ namespace zypp
                 continue;
               }
             }
+            else if ( (*it)->isKind<SrcPackage>() )
+	    {
+	      // provide on local disk
+	      repo::RepoMediaAccess access_r;
+	      repo::SrcPackageProvider prov( access_r );
+	      ManagedFile localfile = prov.provideSrcPackage( (*it)->asKind<SrcPackage>() );
+	      localfile.resetDispose(); // keep the package file in the cache
+	    }
           }
         }
 
