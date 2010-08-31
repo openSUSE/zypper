@@ -1,4 +1,10 @@
 -------------------------------------------------------------------
+Tue Aug 31 20:01:26 CEST 2010 - ma@suse.de
+
+- Fix download-only not to omit source packages (bnc#635596)
+- version 8.1.2 (0)
+
+-------------------------------------------------------------------
 Thu Aug 26 01:13:38 CEST 2010 - ma@suse.de
 
 - Update zypp-po.tar.bz2
