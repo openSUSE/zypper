@@ -65,7 +65,7 @@ module ZYpper =
     This could be relaxed a bit in the future to allow more commented
     keys, arbitrary comments, etc.
   *)
-  let option = [ seq "option" . description* . commented? . kv . del_str "\n" ]
+  let option = [ seq "option" . description* . commented? . del_opt_ws "" . kv . del_str "\n" ]
 
   (* ****************( section )*************** *)
 
