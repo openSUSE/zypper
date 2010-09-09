@@ -158,7 +158,7 @@ namespace zypp
 
     bool Solvable::onSystemByUser() const
     {
-      return myPool().isOnSystemByUser( ident() );
+      return isSystem() && myPool().isOnSystemByUser( ident() );
     }
 
     IdString Solvable::ident() const
