@@ -1,4 +1,10 @@
 -------------------------------------------------------------------
+Fr 10. Sep 17:06:34 CEST 2010 - dheidler@suse.de
+
+- fixed replacing basearch (for fedora systems) - (bnc#637473)
+- version 8.2.0 (0)
+
+-------------------------------------------------------------------
 Fri Sep 10 11:57:29 CEST 2010 - ma@suse.de
 
 - Report download failures in commit result (bnc#431854)
