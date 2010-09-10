@@ -1,4 +1,11 @@
 -------------------------------------------------------------------
+Fri Sep 10 11:57:29 CEST 2010 - ma@suse.de
+
+- Report download failures in commit result (bnc#431854)
+- Fix Solvable::onSystemByUser returning true for uninstalled solvables.
+- version 8.1.3 (0)
+
+-------------------------------------------------------------------
 Tue Aug 31 20:01:26 CEST 2010 - ma@suse.de
 
 - Fix download-only not to omit source packages (bnc#635596)
