@@ -1091,17 +1091,32 @@ namespace zypp
           // we may actually have more than one heap.
           for_( it, items.begin(), items.end() )
           {
-            if ( (*it)->isKind<Package>() )
+            if ( (*it)->isKind<Package>() || (*it)->isKind<SrcPackage>() )
             {
               ManagedFile localfile;
               try
               {
-                localfile = packageCache.get( it );
+		if ( (*it)->isKind<Package>() )
+		{
+		  localfile = packageCache.get( it );
+		}
+		else if ( (*it)->isKind<SrcPackage>() )
+		{
+		  repo::RepoMediaAccess access;
+		  repo::SrcPackageProvider prov( access );
+		  localfile = prov.provideSrcPackage( (*it)->asKind<SrcPackage>() );
+		}
+		else
+		{
+		  INT << "Don't know howto cache: Neither Package nor SrcPackage: " << *it << endl;
+		  continue;
+		}
                 localfile.resetDispose(); // keep the package file in the cache
               }
               catch ( const AbortRequestException & exp )
               {
                 miss = true;
+		result._errors.push_back( *it );
                 WAR << "commit cache preload aborted by the user" << endl;
                 ZYPP_THROW( TargetAbortedException( N_("Installation has been aborted as directed.") ) );
                 break;
@@ -1110,6 +1125,7 @@ namespace zypp
               {
                 ZYPP_CAUGHT( exp );
                 miss = true;
+		result._errors.push_back( *it );
                 WAR << "Skipping cache preload package " << (*it)->asKind<Package>() << " in commit" << endl;
                 continue;
               }
@@ -1119,18 +1135,11 @@ namespace zypp
                 // TODO see if packageCache fails to handle errors correctly.
                 ZYPP_CAUGHT( exp );
                 miss = true;
+		result._errors.push_back( *it );
                 INT << "Unexpected Error: Skipping cache preload package " << (*it)->asKind<Package>() << " in commit" << endl;
                 continue;
               }
             }
-            else if ( (*it)->isKind<SrcPackage>() )
-	    {
-	      // provide on local disk
-	      repo::RepoMediaAccess access_r;
-	      repo::SrcPackageProvider prov( access_r );
-	      ManagedFile localfile = prov.provideSrcPackage( (*it)->asKind<SrcPackage>() );
-	      localfile.resetDispose(); // keep the package file in the cache
-	    }
           }
         }
 
@@ -1212,12 +1221,16 @@ namespace zypp
             {
               WAR << "commit aborted by the user" << endl;
               abort = true;
-              break;
+	      result_r._errors.push_back( *it );
+	      remaining.insert( remaining.end(), it, items_r.end() );
+	      break;
             }
             catch ( const SkipRequestException &e )
             {
               ZYPP_CAUGHT( e );
               WAR << "Skipping package " << p << " in commit" << endl;
+	      result_r._errors.push_back( *it );
+	      remaining.push_back( *it );
               continue;
             }
             catch ( const Exception &e )
@@ -1226,6 +1239,8 @@ namespace zypp
               // TODO see if packageCache fails to handle errors correctly.
               ZYPP_CAUGHT( e );
               INT << "Unexpected Error: Skipping package " << p << " in commit" << endl;
+	      result_r._errors.push_back( *it );
+	      remaining.push_back( *it );
               continue;
             }
 
@@ -1262,6 +1277,8 @@ namespace zypp
                 WAR << "commit aborted by the user" << endl;
                 localfile.resetDispose(); // keep the package file in the cache
                 abort = true;
+		result_r._errors.push_back( *it );
+		remaining.insert( remaining.end(), it, items_r.end() );
                 break;
               }
               else
@@ -1277,6 +1294,8 @@ namespace zypp
               if ( policy_r.dryRun() )
               {
                 WAR << "dry run failed" << endl;
+		result_r._errors.push_back( *it );
+		remaining.insert( remaining.end(), it, items_r.end() );
                 break;
               }
               // else
@@ -1289,7 +1308,8 @@ namespace zypp
               {
                 WAR << "Install failed" << endl;
               }
-              remaining.push_back( *it );
+	      result_r._errors.push_back( *it );
+	      remaining.insert( remaining.end(), it, items_r.end() );
               break; // stop
             }
 
@@ -1318,6 +1338,7 @@ namespace zypp
               {
                 WAR << "commit aborted by the user" << endl;
                 abort = true;
+		result_r._errors.push_back( *it );
                 break;
               }
               else
@@ -1332,10 +1353,12 @@ namespace zypp
               {
                 WAR << "commit aborted by the user" << endl;
                 abort = true;
+		result_r._errors.push_back( *it );
                 break;
               }
               // else
               WAR << "removal of " << p << " failed";
+	      result_r._errors.push_back( *it );
             }
             if ( success && !policy_r.dryRun() )
             {
