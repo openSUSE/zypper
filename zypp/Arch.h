@@ -92,10 +92,12 @@ namespace zypp
     bool compatibleWith( const Arch & targetArch_r ) const;
 
     /**
-     * returns arch before noarch 
-     * if it's not a multilib arch(x86_64,sparc64v,sparc64,ppc64,s390x)
+     * \return the arch before noarch if it's not a multilib arch
+     * (e.g. x86_64,sparc64v,sparc64,ppc64,s390x).
     */
-    Arch baseArch( ) const;
+    Arch baseArch() const;
+
+    /** \overload static version. */
     static Arch baseArch( const Arch & targetArch_r )
     { return targetArch_r.baseArch(); }
 

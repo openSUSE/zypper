@@ -496,7 +496,7 @@ namespace zypp
   //
   bool Arch::compatibleWith( const Arch & targetArch_r ) const
   { return _entry->compatibleWith( *targetArch_r._entry ); }
-  
+
   ///////////////////////////////////////////////////////////////////
   //
   //	METHOD NAME : Arch::baseArch
@@ -504,6 +504,7 @@ namespace zypp
   //
   Arch Arch::baseArch( ) const
   {
+    // check the multilib archs:
     if (Arch_x86_64.compatibleWith(*this))
     {
       return Arch_x86_64;
@@ -513,7 +514,7 @@ namespace zypp
       return Arch_sparc64v;
     }
     if (Arch_sparc64.compatibleWith(*this))
-    {  
+    {
       return Arch_sparc64;
     }
     if (Arch_ppc64.compatibleWith(*this))
@@ -524,6 +525,7 @@ namespace zypp
     {
       return Arch_s390x;
     }
+    // Here: no multilib; return arch before noarch
     CompatSet cset( compatSet( *this ) );
     if ( cset.size() > 2 )	// systemArchitecture, ..., basearch, noarch
     {
