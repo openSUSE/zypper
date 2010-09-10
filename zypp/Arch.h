@@ -91,6 +91,14 @@ namespace zypp
     */
     bool compatibleWith( const Arch & targetArch_r ) const;
 
+    /**
+     * returns arch before noarch 
+     * if it's not a multilib arch(x86_64,sparc64v,sparc64,ppc64,s390x)
+    */
+    Arch baseArch( ) const;
+    static Arch baseArch( const Arch & targetArch_r )
+    { return targetArch_r.baseArch(); }
+
     /** Arch comparison.
      * Compatible architectures are treated as \c less (i.e. <tt>i686>i386>noarch</tt>).
      * So \c Arch_noarch is the least Arch. Equivalent architectures

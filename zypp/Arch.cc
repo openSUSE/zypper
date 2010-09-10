@@ -496,6 +496,41 @@ namespace zypp
   //
   bool Arch::compatibleWith( const Arch & targetArch_r ) const
   { return _entry->compatibleWith( *targetArch_r._entry ); }
+  
+  ///////////////////////////////////////////////////////////////////
+  //
+  //	METHOD NAME : Arch::baseArch
+  //	METHOD TYPE : Arch
+  //
+  Arch Arch::baseArch( ) const
+  {
+    if (Arch_x86_64.compatibleWith(*this))
+    {
+      return Arch_x86_64;
+    }
+    if (Arch_sparc64v.compatibleWith(*this))
+    {
+      return Arch_sparc64v;
+    }
+    if (Arch_sparc64.compatibleWith(*this))
+    {  
+      return Arch_sparc64;
+    }
+    if (Arch_ppc64.compatibleWith(*this))
+    {
+      return Arch_ppc64;
+    }
+    if (Arch_s390x.compatibleWith(*this))
+    {
+      return Arch_s390x;
+    }
+    CompatSet cset( compatSet( *this ) );
+    if ( cset.size() > 2 )	// systemArchitecture, ..., basearch, noarch
+    {
+      return *(++cset.rbegin());
+    }
+    return *this;
+  }
 
   ///////////////////////////////////////////////////////////////////
   //

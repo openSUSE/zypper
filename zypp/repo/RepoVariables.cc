@@ -38,12 +38,8 @@ std::string RepoVariablesStringReplacer::operator()( const std::string &value ) 
   newvalue = str::gsub( newvalue, "$arch", sysarch.asString() );
 
   // $basearch
-  Arch basearch( sysarch );
-  Arch::CompatSet cset( Arch::compatSet( sysarch ) );
-  if ( cset.size() > 2 )	// systemArchitecture, ..., basearch, noarch
-  {
-    basearch = *(++cset.rbegin());
-  }
+  Arch basearch( sysarch.baseArch( ) );
+
   newvalue = str::gsub( newvalue, "$basearch", basearch.asString() );
 
   // $releasever (Target::distributionVersion assumes root=/ if target not initialized)
