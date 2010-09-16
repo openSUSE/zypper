@@ -42,6 +42,7 @@
 #include "zypp/repo/yum/Downloader.h"
 #include "zypp/repo/susetags/Downloader.h"
 #include "zypp/parser/plaindir/RepoParser.h"
+#include "zypp/repo/LocalServices.h"
 
 #include "zypp/Target.h" // for Target::targetDistribution() for repo index services
 #include "zypp/ZYppFactory.h" // to get the Target from ZYpp instance
@@ -539,6 +540,8 @@ namespace zypp
         parser::ServiceFileReader(*it, ServiceCollector(services));
       }
     }
+
+    repo::LocalServices("/space/tmp/services", ServiceCollector(services));    
   }
 
   void RepoManager::Impl::init_knownRepositories()
