@@ -22,6 +22,7 @@
 #include <algorithm>
 
 
+#include "zypp/ZConfig.h"
 #include "zypp/base/Logger.h"
 #include "zypp/media/MediaMultiCurl.h"
 #include "zypp/media/MetaLinkParser.h"
@@ -1269,6 +1270,7 @@ void MediaMultiCurl::doGetFileCopy( const Pathname & filename , const Pathname &
 	  bool userabort = false;
 	  fclose(file);
 	  file = NULL;
+	  Pathname failedFile = ZConfig::instance().repoCachePath() / "MultiCurl.failed";
 	  try
 	    {
 	      MetaLinkParser mlp;
@@ -1285,6 +1287,13 @@ void MediaMultiCurl::doGetFileCopy( const Pathname & filename , const Pathname &
 		  bl.reuseBlocks(file, target.asString());
 		  DBG << bl << endl;
 		}
+	      if (bl.haveChecksum(1) && PathInfo(failedFile).isExist())
+		{
+		  DBG << "reusing blocks from file " << failedFile << endl;
+		  bl.reuseBlocks(file, failedFile.asString());
+		  DBG << bl << endl;
+		  filesystem::unlink(failedFile);
+		}
 	      Pathname df = deltafile();
 	      if (!df.empty())
 		{
@@ -1299,6 +1308,7 @@ void MediaMultiCurl::doGetFileCopy( const Pathname & filename , const Pathname &
 	      catch (MediaCurlException &ex)
 		{
 		  fclose(file);
+		  file = NULL;
 		  userabort = ex.errstr() == "User abort";
 		  ZYPP_RETHROW(ex);
 		}
@@ -1308,6 +1318,11 @@ void MediaMultiCurl::doGetFileCopy( const Pathname & filename , const Pathname &
 	      // something went wrong. fall back to normal download
 	      if (file)
 		fclose(file);
+	      if (PathInfo(destNew).size() >= 63336)
+		{
+		  ::unlink(failedFile.asString().c_str());
+		  filesystem::hardlinkCopy(destNew, failedFile);
+		}
 	      filesystem::unlink(destNew);
 	      if (userabort)
 		ZYPP_RETHROW(ex);
