@@ -32,11 +32,13 @@ namespace zypp
     static const ServiceType RIS;
     /** No service set. */
     static const ServiceType NONE;
+    static const ServiceType LOCAL;
 
     enum Type
     {
       NONE_e,
       RIS_e,
+      LOCAL_e,
     };
 
     ServiceType() : _type(NONE_e) {}

@@ -38,7 +38,7 @@
 
 #include "zypp/parser/RepoFileReader.h"
 #include "zypp/parser/ServiceFileReader.h"
-#include "zypp/parser/RepoindexFileReader.h"
+#include "zypp/repo/ServiceRepos.h"
 #include "zypp/repo/yum/Downloader.h"
 #include "zypp/repo/susetags/Downloader.h"
 #include "zypp/parser/plaindir/RepoParser.h"
@@ -145,6 +145,7 @@ namespace zypp
     repoPackagesCachePath = Pathname::assertprefix( root_r, ZConfig::instance().repoPackagesPath() );
     knownReposPath        = Pathname::assertprefix( root_r, ZConfig::instance().knownReposPath() );
     knownServicesPath     = Pathname::assertprefix( root_r, ZConfig::instance().knownServicesPath() );
+    localServicesPath     = Pathname::assertprefix( root_r, ZConfig::instance().localServicesPath() );
     probe                 = ZConfig::instance().repo_add_probe();
 
     rootDir = root_r;
@@ -159,6 +160,7 @@ namespace zypp
     ret.repoPackagesCachePath = root_r/"packages";
     ret.knownReposPath        = root_r/"repos.d";
     ret.knownServicesPath     = root_r/"services.d";
+    ret.localServicesPath     = root_r/"services-lib";
     ret.rootDir = root_r;
     return ret;
   }
@@ -405,6 +407,7 @@ namespace zypp
       init_knownRepositories();
     }
 
+    
     RepoManagerOptions options;
 
     RepoSet repos;
@@ -541,7 +544,7 @@ namespace zypp
       }
     }
 
-    repo::LocalServices("/space/tmp/services", ServiceCollector(services));    
+    repo::LocalServices(options.localServicesPath, ServiceCollector(services));    
   }
 
   void RepoManager::Impl::init_knownRepositories()
@@ -1559,7 +1562,7 @@ namespace zypp
         continue;
 
       // TODO match by url
-
+ 
       // we have a matcing repository, now we need to know
       // where it does come from.
       RepoInfo todelete = *it;
@@ -1888,17 +1891,6 @@ namespace zypp
       }
     }
 
-    // repoindex.xml must be fetched always without using cookies (bnc #573897)
-    Url serviceUrl( service.url() );
-    serviceUrl.setQueryParam( "cookies", "0" );
-
-    // download the repo index file
-    media::MediaManager mediamanager;
-    media::MediaAccessId mid = mediamanager.open( serviceUrl );
-    mediamanager.attach( mid );
-    mediamanager.provideFile( mid, "repo/repoindex.xml" );
-    Pathname path = mediamanager.localPath(mid, "repo/repoindex.xml" );
-
     // get target distro identifier
     std::string servicesTargetDistro = _pimpl->options.servicesTargetDistro;
     if ( servicesTargetDistro.empty() && getZYpp()->getTarget() )
@@ -1907,11 +1899,8 @@ namespace zypp
 
     // parse it
     RepoCollector collector(servicesTargetDistro);
-    parser::RepoindexFileReader reader( path, bind( &RepoCollector::collect, &collector, _1 ) );
-    mediamanager.release( mid );
-    mediamanager.close( mid );
-
-
+    ServiceRepos repos(service, bind( &RepoCollector::collect, &collector, _1 ));
+    
     // set service alias and base url for all collected repositories
     for_( it, collector.repos.begin(), collector.repos.end() )
     {

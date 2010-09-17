@@ -32,11 +32,10 @@ namespace zypp
    * \short List of RepoInfo's from a file.
    * \param file pathname of the file to read.
    */
-    static void repositories_in_file( const Pathname &file,
-                                      const RepoFileReader::ProcessRepo &callback,
-                                      const ProgressData::ReceiverFnc &progress )
+    static void repositories_in_stream( const InputStream &is,
+                                        const RepoFileReader::ProcessRepo &callback,
+                                        const ProgressData::ReceiverFnc &progress )
     {
-      InputStream is(file);
       parser::IniDict dict(is);
       for ( parser::IniDict::section_const_iterator its = dict.sectionsBegin();
             its != dict.sectionsEnd();
@@ -77,7 +76,7 @@ namespace zypp
           else
             ERR << "Unknown attribute in [" << *its << "]: " << it->second << " ignored" << endl;
         }
-        info.setFilepath(file);
+        info.setFilepath(is.path());
         MIL << info << endl;
         // add it to the list.
         callback(info);
@@ -97,12 +96,20 @@ namespace zypp
                                     const ProgressData::ReceiverFnc &progress )
       : _callback(callback)
     {
-      repositories_in_file(repo_file, _callback, progress);
-      //MIL << "Done" << endl;
+      repositories_in_stream(InputStream(repo_file), _callback, progress);
+    }
+
+    RepoFileReader::RepoFileReader( const InputStream &is,
+                                    const ProcessRepo & callback,
+                                    const ProgressData::ReceiverFnc &progress )
+      : _callback(callback)
+    {
+      repositories_in_stream(is, _callback, progress);
     }
 
     RepoFileReader::~RepoFileReader()
     {}
+
 
     std::ostream & operator<<( std::ostream & str, const RepoFileReader & obj )
     {

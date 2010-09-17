@@ -702,6 +702,7 @@ SET( zypp_repo_SRCS
   repo/RepoVariables.cc
   repo/RepoInfoBase.cc
   repo/LocalServices.cc
+  repo/ServiceRepos.cc
 )
 
 SET( zypp_repo_HEADERS
@@ -721,6 +722,7 @@ SET( zypp_repo_HEADERS
   repo/RepoInfoBase.h
   repo/RepoInfoBaseImpl.h
   repo/LocalServices.h
+  repo/ServiceRepos.h
 )
 
 INSTALL( FILES

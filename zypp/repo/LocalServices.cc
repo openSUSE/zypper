@@ -7,20 +7,20 @@
 |                                                                      |
 \---------------------------------------------------------------------*/
 #include <iostream>
+#include <sstream>
 #include "zypp/base/Logger.h"
 #include "zypp/base/Gettext.h"
 #include "zypp/base/String.h"
 #include "zypp/base/InputStream.h"
 #include "zypp/base/UserRequestException.h"
 
-#include "zypp/parser/IniDict.h"
 #include "zypp/repo/LocalServices.h"
 #include "zypp/ServiceInfo.h"
+#include "zypp/RepoInfo.h"
 #include "zypp/PathInfo.h"
-#include "zypp/ExternalProgram.h"
 
 using std::endl;
-using zypp::parser::IniDict;
+using std::stringstream;
 
 ///////////////////////////////////////////////////////////////////
 namespace zypp
@@ -52,18 +52,16 @@ namespace zypp
         //str::regex allowedServiceExt("^\\.service(_[0-9]+)?$");
         for_(it, entries.begin(), entries.end() )
         {
-          const char* argv[] = {
-            (*it).c_str(),
-            NULL
-          };
-          ExternalProgram prog(argv,ExternalProgram::Discard_Stderr, false, -1, true);
-          std::string line;
-          for(line = prog.receiveLine(); !line.empty(); line = prog.receiveLine())
-          {
-            std::cout << line << endl;
-          }
-          prog.close();
+          ServiceInfo service_info;
+          service_info.setAlias((*it).basename());
+          Url url;
+          url.setPathName((*it).asString());
+          url.setScheme("file");
+          service_info.setUrl(url);
+          service_info.setType(ServiceType::LOCAL);
+          callback(service_info);
         }
+
       }
     }
 
