@@ -1,4 +1,9 @@
 -------------------------------------------------------------------
+Mon Sep 20 19:49:48 CEST 2010 - jkupec@suse.cz
+
+- Fixed unrecognized patchname-with-version (bnc #640399)
+
+-------------------------------------------------------------------
 Thu Sep  9 10:00:34 CEST 2010 - jkupec@suse.cz
 
 - Fixed zypper.conf parsing: allow white space before key=value.
