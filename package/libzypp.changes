@@ -1,4 +1,13 @@
 -------------------------------------------------------------------
+Mon Sep 20 15:31:31 UTC 2010 - dmacvicar@novell.com
+
+- Allow per repository proxy settings like yum does.
+  Including setting it to _none_ overriding the 
+  system proxy.
+  Patch from Zhang, Qiang <qiang.z.zhang@intel.com> 
+- version 8.2.1 (0)
+
+-------------------------------------------------------------------
 Fr 10. Sep 17:06:34 CEST 2010 - dheidler@suse.de
 
 - fixed replacing basearch (for fedora systems) - (bnc#637473)
