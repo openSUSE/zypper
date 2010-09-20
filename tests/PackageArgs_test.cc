@@ -11,6 +11,13 @@
 using namespace std;
 using namespace zypp;
 
+static TestSetup test(Arch_x86_64);
+
+// TODO add tests for cases which rely on pool data, like "zypper-1.3.4"
+// yielding name=zypper edition=1.3.4 instead of name="zypper-1.3.4" if zypper
+// is found in pool
+// another example would be bnc #640399
+
 BOOST_AUTO_TEST_CASE(preprocess_test)
 {
   {
@@ -188,6 +195,25 @@ BOOST_AUTO_TEST_CASE(dont_by_default_test)
 
     BOOST_CHECK_EQUAL(args.donts().size(), 2);
     BOOST_CHECK_EQUAL(args.dos().size(), 1);
+  }
+}
+
+BOOST_AUTO_TEST_CASE(argToCaps_with_patch_test)
+{
+  {
+    vector<string> rawargs;
+    rawargs.push_back("openssl-CVE-2009-4355.patch");
+
+    PackageArgs args(rawargs, ResKind::patch);
+    const PackageArgs::PackageSpecSet & specs = args.dos();
+    {
+      PackageSpec spec;
+      spec.orig_str = "openssl-CVE-2009-4355.patch";
+      // if 'patch' were a known architecture, zypp would have parsed it as arch
+      // but since it's not, it's considered a part of the name
+      spec.parsed_cap = Capability("", "openssl-CVE-2009-4355.patch", "", "", ResKind::patch);
+      BOOST_CHECK(specs.find(spec) != specs.end());
+    }
   }
 }
 

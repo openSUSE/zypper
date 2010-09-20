@@ -201,7 +201,14 @@ void PackageArgs::argsToCaps(const zypp::ResKind & kind)
     }
 
     // parse the rest of the string as standard zypp package specifier
-    Capability parsedcap = Capability::guessPackageSpec(arg, spec.modified);
+    Capability parsedcap;
+    if (kind == ResKind::package ||
+        ( (pos = arg.find(':')) != string::npos && arg.find_first_of("(=") > pos) )
+      parsedcap = Capability::guessPackageSpec(arg, spec.modified);
+    else
+      // prepend the kind for non-packages if not already there (bnc #640399)
+      parsedcap = Capability::guessPackageSpec(
+          kind.asString() + ":" + arg, spec.modified);
 
     // set the right kind (bnc #580571)
     // prefer those specified in args
