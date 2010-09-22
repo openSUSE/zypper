@@ -1307,8 +1307,6 @@ void MediaMultiCurl::doGetFileCopy( const Pathname & filename , const Pathname &
 		}
 	      catch (MediaCurlException &ex)
 		{
-		  fclose(file);
-		  file = NULL;
 		  userabort = ex.errstr() == "User abort";
 		  ZYPP_RETHROW(ex);
 		}
@@ -1318,14 +1316,20 @@ void MediaMultiCurl::doGetFileCopy( const Pathname & filename , const Pathname &
 	      // something went wrong. fall back to normal download
 	      if (file)
 		fclose(file);
+	      file = NULL;
 	      if (PathInfo(destNew).size() >= 63336)
 		{
 		  ::unlink(failedFile.asString().c_str());
 		  filesystem::hardlinkCopy(destNew, failedFile);
 		}
-	      filesystem::unlink(destNew);
 	      if (userabort)
-		ZYPP_RETHROW(ex);
+		{
+	          filesystem::unlink(destNew);
+		  ZYPP_RETHROW(ex);
+		}
+	      file = fopen(destNew.c_str(), "w+");
+	      if (!file)
+		ZYPP_THROW(MediaWriteException(destNew));
 	      MediaCurl::doGetFileCopyFile(filename, dest, file, report, options | OPTION_NO_REPORT_START);
 	    }
 	}
