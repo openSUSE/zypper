@@ -1,4 +1,9 @@
 -------------------------------------------------------------------
+Thu Sep 23 01:13:45 CEST 2010 - ma@suse.de
+
+- Update zypp-po.tar.bz2
+
+-------------------------------------------------------------------
 Mon Sep 20 15:31:31 UTC 2010 - dmacvicar@novell.com
 
 - Allow per repository proxy settings like yum does.
