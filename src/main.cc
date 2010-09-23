@@ -72,7 +72,7 @@ int main(int argc, char **argv)
     logfile = ZYPPER_LOG;
   zypp::base::LogControl::instance().logfile( logfile );
 
-  MIL << "===== Hi, me zypper " VERSION " built " << __DATE__ << " " <<  __TIME__ << " =====" << endl;
+  MIL << "===== Hi, me zypper " VERSION << endl;
   zypp::dumpRange( MIL, argv, argv+argc, "===== ", "'", "' '", "'", " =====" ) << endl;
 
   OutNormal out(Out::QUIET);
