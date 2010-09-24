@@ -258,6 +258,8 @@ multifetchworker::headerfunction(char *p, size_t size)
     {
       WAR << "#" << _workerno << ": setting request filesize to " << filesize << endl;
       _request->_filesize = filesize;
+      if (_request->_totalsize == 0 && !_request->_blklist)
+	_request->_totalsize = filesize;
     }
   if (_request->_filesize != (off_t)filesize)
     {
