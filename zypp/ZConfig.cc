@@ -339,9 +339,9 @@ namespace zypp
                 {
                   cfg_known_services_path = Pathname(value);
                 }
-                else if ( entry == "localservicesdir" )
+                else if ( entry == "pluginservicesdir" )
                 {
-                  cfg_local_services_path = Pathname(value);
+                  cfg_plugin_services_path = Pathname(value);
                 }
                 else if ( entry == "repo.add.probe" )
                 {
@@ -497,7 +497,7 @@ namespace zypp
     Pathname cfg_config_path;
     Pathname cfg_known_repos_path;
     Pathname cfg_known_services_path;
-    Pathname cfg_local_services_path;
+    Pathname cfg_plugin_services_path;
     
     Pathname cfg_vendor_path;
     Pathname locks_file;
@@ -682,10 +682,10 @@ namespace zypp
         ? (configPath()/"services.d") : _pimpl->cfg_known_repos_path );
   }
 
-  Pathname ZConfig::localServicesPath() const
+  Pathname ZConfig::pluginServicesPath() const
   {
-    return ( _pimpl->cfg_local_services_path.empty()
-        ? ("/space/tmp/services") : _pimpl->cfg_local_services_path );
+    return ( _pimpl->cfg_plugin_services_path.empty()
+        ? ("/space/tmp/services") : _pimpl->cfg_plugin_services_path );
   }
 
   Pathname ZConfig::vendorPath() const

@@ -701,7 +701,7 @@ SET( zypp_repo_SRCS
   repo/Downloader.cc
   repo/RepoVariables.cc
   repo/RepoInfoBase.cc
-  repo/LocalServices.cc
+  repo/PluginServices.cc
   repo/ServiceRepos.cc
 )
 
@@ -721,7 +721,7 @@ SET( zypp_repo_HEADERS
   repo/RepoVariables.h
   repo/RepoInfoBase.h
   repo/RepoInfoBaseImpl.h
-  repo/LocalServices.h
+  repo/PluginServices.h
   repo/ServiceRepos.h
 )
 

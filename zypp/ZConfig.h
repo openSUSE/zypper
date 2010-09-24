@@ -151,12 +151,12 @@ namespace zypp
       Pathname knownServicesPath() const;
 
       /**
-       * Path where local services are installed
-       * local services are scripts returning a repository
+       * Path where plugin services are installed
+       * plugin services are scripts returning a repository
        * list
        * \ingroup g_ZC_CONFIGFILES
        */
-      Pathname localServicesPath() const;
+      Pathname pluginServicesPath() const;
 
       /**
        * Whether repository urls should be probed.

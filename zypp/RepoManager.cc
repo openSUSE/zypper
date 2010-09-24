@@ -42,7 +42,7 @@
 #include "zypp/repo/yum/Downloader.h"
 #include "zypp/repo/susetags/Downloader.h"
 #include "zypp/parser/plaindir/RepoParser.h"
-#include "zypp/repo/LocalServices.h"
+#include "zypp/repo/PluginServices.h"
 
 #include "zypp/Target.h" // for Target::targetDistribution() for repo index services
 #include "zypp/ZYppFactory.h" // to get the Target from ZYpp instance
@@ -145,7 +145,7 @@ namespace zypp
     repoPackagesCachePath = Pathname::assertprefix( root_r, ZConfig::instance().repoPackagesPath() );
     knownReposPath        = Pathname::assertprefix( root_r, ZConfig::instance().knownReposPath() );
     knownServicesPath     = Pathname::assertprefix( root_r, ZConfig::instance().knownServicesPath() );
-    localServicesPath     = Pathname::assertprefix( root_r, ZConfig::instance().localServicesPath() );
+    pluginServicesPath     = Pathname::assertprefix( root_r, ZConfig::instance().pluginServicesPath() );
     probe                 = ZConfig::instance().repo_add_probe();
 
     rootDir = root_r;
@@ -160,7 +160,7 @@ namespace zypp
     ret.repoPackagesCachePath = root_r/"packages";
     ret.knownReposPath        = root_r/"repos.d";
     ret.knownServicesPath     = root_r/"services.d";
-    ret.localServicesPath     = root_r/"services-lib";
+    ret.pluginServicesPath     = root_r/"plugin-services";
     ret.rootDir = root_r;
     return ret;
   }
@@ -544,7 +544,7 @@ namespace zypp
       }
     }
 
-    repo::LocalServices(options.localServicesPath, ServiceCollector(services));    
+    repo::PluginServices(options.pluginServicesPath, ServiceCollector(services));    
   }
 
   void RepoManager::Impl::init_knownRepositories()

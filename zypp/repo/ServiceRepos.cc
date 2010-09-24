@@ -57,12 +57,12 @@ public:
     }
 };
 
-class LocalServiceRepos : public ServiceRepos::Impl
+class PluginServiceRepos : public ServiceRepos::Impl
 {
 public:
     ServiceRepos::ProcessRepo _callback;
     
-    LocalServiceRepos(const ServiceInfo &service,
+    PluginServiceRepos(const ServiceInfo &service,
                       const ServiceRepos::ProcessRepo & callback,
                       const ProgressData::ReceiverFnc &progress = ProgressData::ReceiverFnc() )
         : _callback(callback)
@@ -78,7 +78,7 @@ public:
       parser::RepoFileReader parser(buffer, _callback);
     }
     
-    ~LocalServiceRepos()
+    ~PluginServiceRepos()
     {
 
     }
@@ -88,7 +88,7 @@ public:
 ServiceRepos::ServiceRepos(const ServiceInfo &service,
                            const ServiceRepos::ProcessRepo & callback,
                            const ProgressData::ReceiverFnc &progress)
-    : _impl( (service.type() == ServiceType::LOCAL) ? (ServiceRepos::Impl *)(new LocalServiceRepos(service, callback, progress)) : (ServiceRepos::Impl *)(new RIMServiceRepos(service, callback, progress)))
+    : _impl( (service.type() == ServiceType::PLUGIN) ? (ServiceRepos::Impl *)(new PluginServiceRepos(service, callback, progress)) : (ServiceRepos::Impl *)(new RIMServiceRepos(service, callback, progress)))
 {
 }
     

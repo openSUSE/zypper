@@ -10,7 +10,7 @@
 #include "zypp/PathInfo.h"
 #include "zypp/TmpPath.h"
 #include "zypp/ZConfig.h"
-#include "zypp/repo/LocalServices.h"
+#include "zypp/repo/PluginServices.h"
 #include "zypp/ServiceInfo.h"
 
 using std::cout;
@@ -42,11 +42,11 @@ private:
 };
 
 
-BOOST_AUTO_TEST_CASE(replace_text)
+BOOST_AUTO_TEST_CASE(plugin_services)
 {
   ServiceCollector::ServiceSet services;
     
-  LocalServices local("/space/tmp/services", ServiceCollector(services));
+  PluginServices local("/space/tmp/services", ServiceCollector(services));
 }
 
 // vim: set ts=2 sts=2 sw=2 ai et:

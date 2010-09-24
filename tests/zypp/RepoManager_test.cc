@@ -62,7 +62,7 @@ BOOST_AUTO_TEST_CASE(refresh_addon_in_subdir)
     BOOST_CHECK( r.info().hasLicense() );
 }
 
-BOOST_AUTO_TEST_CASE(localservices_test)
+BOOST_AUTO_TEST_CASE(pluginservices_test)
 {
   TmpDir tmpCachePath;
   RepoManagerOptions opts( RepoManagerOptions::makeTestSetup( tmpCachePath ) ) ;
@@ -70,22 +70,21 @@ BOOST_AUTO_TEST_CASE(localservices_test)
   filesystem::mkdir( opts.knownReposPath );
   filesystem::mkdir( opts.knownServicesPath );
 
-  opts.localServicesPath = DATADIR + "/local-service-lib-1";
-  BOOST_CHECK(PathInfo(opts.localServicesPath / "service").isExist());
+  opts.pluginServicesPath = DATADIR + "/plugin-service-lib-1";
+  BOOST_CHECK(PathInfo(opts.pluginServicesPath / "service").isExist());
 
   {
     RepoManager manager(opts);
-    BOOST_CHECK_EQUAL(1, manager.serviceSize());
+    BOOST_REQUIRE_EQUAL(1, manager.serviceSize());
     BOOST_CHECK(manager.repoEmpty());
 
     ServiceInfo service(*manager.serviceBegin());
     BOOST_CHECK_EQUAL("service", service.alias());
-    BOOST_CHECK_EQUAL( "file:" + DATADIR.asString() + "/local-service-lib-1/service", service.url().asString());
+    BOOST_CHECK_EQUAL( "file:" + DATADIR.asString() + "/plugin-service-lib-1/service", service.url().asString());
 
     // now refresh the service
     manager.refreshServices();
     BOOST_CHECK_EQUAL((unsigned) 2, manager.repoSize());
-
     //std::list<RepoInfo> infos;
     //manager.getRepositoriesInService("test",
     //  insert_iterator<std::list<RepoInfo> >(infos,infos.begin()));
@@ -93,14 +92,14 @@ BOOST_AUTO_TEST_CASE(localservices_test)
   }
   
   // Now simulate the service changed
-  opts.localServicesPath = DATADIR + "/local-service-lib-2";
+  opts.pluginServicesPath = DATADIR + "/plugin-service-lib-2";
   {
     RepoManager manager(opts);
-    BOOST_CHECK_EQUAL(1, manager.serviceSize());
+    BOOST_REQUIRE_EQUAL(1, manager.serviceSize());
 
     ServiceInfo service(*manager.serviceBegin());
     BOOST_CHECK_EQUAL("service", service.alias());
-    BOOST_CHECK_EQUAL( "file:" + DATADIR.asString() + "/local-service-lib-2/service", service.url().asString());
+    BOOST_CHECK_EQUAL( "file:" + DATADIR.asString() + "/plugin-service-lib-2/service", service.url().asString());
     // now refresh the service
     manager.refreshServices();
     BOOST_CHECK_EQUAL((unsigned) 1, manager.repoSize());
