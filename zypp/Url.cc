@@ -193,6 +193,7 @@ namespace zypp
                              zypp::url::ViewOption::EMPTY_AUTHORITY);
         addUrlByScheme("mailto", ref);
         addUrlByScheme("urn",    ref);
+        addUrlByScheme("plugin", ref);	// zypp plugable media handler:
 
         // RFC1738, 3.10: may contain a host
         ref->config("with_authority",   "y");   // allow host,
