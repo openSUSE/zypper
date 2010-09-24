@@ -12,6 +12,7 @@
 #include <iostream>
 #include "zypp/base/Logger.h"
 #include "zypp/base/String.h"
+#include "zypp/base/Regex.h"
 #include "zypp/base/InputStream.h"
 #include "zypp/base/UserRequestException.h"
 
@@ -43,6 +44,7 @@ namespace zypp
       {
         RepoInfo info;
         info.setAlias(*its);
+        Url url;
 
         for ( IniDict::entry_const_iterator it = dict.entriesBegin(*its);
               it != dict.entriesEnd(*its);
@@ -56,7 +58,7 @@ namespace zypp
           else if ( it->first == "priority" )
             info.setPriority( str::strtonum<unsigned>( it->second ) );
           else if ( it->first == "baseurl" && !it->second.empty())
-            info.addBaseUrl( Url(it->second) );
+            url = it->second;
           else if ( it->first == "path" )
             info.setPath( Pathname(it->second) );
           else if ( it->first == "type" )
@@ -73,9 +75,22 @@ namespace zypp
 	    info.setKeepPackages( str::strToTrue( it->second ) );
 	  else if ( it->first == "service" )
 	    info.setService( it->second );
-          else
+          else if ( it->first == "proxy" )
+          {
+	    if (it->second != "_none_" )
+            { 
+              str::regex ex("^(.*):([0-9]+)$");
+              str::smatch what;
+              if(str::regex_match(it->second, what, ex)){
+               url.setQueryParam("proxy", what[1]);
+               url.setQueryParam("proxyport", what[2]);
+              }
+            }
+          } else
             ERR << "Unknown attribute in [" << *its << "]: " << it->second << " ignored" << endl;
         }
+        if (url.isValid())
+            info.addBaseUrl(url);
         info.setFilepath(is.path());
         MIL << info << endl;
         // add it to the list.
