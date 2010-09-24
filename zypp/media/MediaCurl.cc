@@ -285,12 +285,17 @@ void fillSettingsFromUrl( const Url &url, TransferSettings &s )
     string proxy = url.getQueryParam( "proxy" );
     if ( ! proxy.empty() )
     {
-        string proxyport( url.getQueryParam( "proxyport" ) );
-        if ( ! proxyport.empty() ) {
-            proxy += ":" + proxyport;
+        if ( proxy == "_none_" ) {
+            s.setProxyEnabled(false);
         }
-        s.setProxy(proxy);
-        s.setProxyEnabled(true);
+        else {
+            string proxyport( url.getQueryParam( "proxyport" ) );
+            if ( ! proxyport.empty() ) {
+                proxy += ":" + proxyport;
+            }
+            s.setProxy(proxy);
+            s.setProxyEnabled(true);
+        }        
     }
 
     // HTTP authentication type
@@ -600,7 +605,11 @@ void MediaCurl::setupEasy()
         SET_OPTION(CURLOPT_PROXYUSERPWD, proxyuserpwd.c_str());
     }
   }
-
+  else
+  {
+      SET_OPTION(CURLOPT_NOPROXY, "*");
+  }
+  
   /** Speed limits */
   if ( _settings.minDownloadSpeed() != 0 )
   {

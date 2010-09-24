@@ -35,13 +35,19 @@ enum state {
   STATE_METALINK,
   STATE_FILES,
   STATE_FILE,
+  STATE_M4FILE,
   STATE_SIZE,
+  STATE_M4SIZE,
   STATE_VERIFICATION,
   STATE_HASH,
+  STATE_M4HASH,
   STATE_PIECES,
+  STATE_M4PIECES,
   STATE_PHASH,
+  STATE_M4PHASH,
   STATE_RESOURCES,
   STATE_URL,
+  STATE_M4URL,
   NUMSTATES
 };
 
@@ -55,6 +61,7 @@ struct stateswitch {
 static struct stateswitch stateswitches[] = {
   { STATE_START,        "metalink",     STATE_METALINK, 0 },
   { STATE_METALINK,     "files",        STATE_FILES, 0 },
+  { STATE_METALINK,     "file",         STATE_M4FILE, 0 },
   { STATE_FILES,        "file",         STATE_FILE, 0 },
   { STATE_FILE,         "size",         STATE_SIZE, 1 },
   { STATE_FILE,         "verification", STATE_VERIFICATION, 0 },
@@ -63,6 +70,11 @@ static struct stateswitch stateswitches[] = {
   { STATE_VERIFICATION, "pieces",       STATE_PIECES, 0 },
   { STATE_PIECES,       "hash",         STATE_PHASH, 1 },
   { STATE_RESOURCES,    "url",          STATE_URL, 1 },
+  { STATE_M4FILE,       "size",         STATE_M4SIZE, 1 },
+  { STATE_M4FILE,       "hash",         STATE_M4HASH, 1},
+  { STATE_M4FILE,       "url",          STATE_M4URL, 1},
+  { STATE_M4FILE,       "pieces",       STATE_M4PIECES, 0},
+  { STATE_M4PIECES,     "hash",         STATE_M4PHASH, 1 },
   { NUMSTATES }
 };
 
@@ -132,7 +144,7 @@ startElement(void *userData, const char *name, const char **atts)
       break;
   if (sw->from != pd->state)
     return;
-  if (sw->to == STATE_FILE && pd->gotfile++)
+  if ((sw->to == STATE_FILE || sw->to == STATE_M4FILE) && pd->gotfile++)
     return;	/* ignore all but the first file */
   //printf("start depth %d name %s\n", pd->depth, name);
   pd->state = sw->to;
@@ -143,6 +155,7 @@ startElement(void *userData, const char *name, const char **atts)
   switch(pd->state)
     {
     case STATE_URL:
+    case STATE_M4URL:
       {
 	const char *priority = find_attr("priority", atts);
 	const char *preference = find_attr("preference", atts);
@@ -158,6 +171,7 @@ startElement(void *userData, const char *name, const char **atts)
 	break;
       }
     case STATE_PIECES:
+    case STATE_M4PIECES:
       {
 	const char *type = find_attr("type", atts);
 	const char *length = find_attr("length", atts);
@@ -192,6 +206,7 @@ startElement(void *userData, const char *name, const char **atts)
 	break;
       }
     case STATE_HASH:
+    case STATE_M4HASH:
       {
 	const char *type = find_attr("type", atts);
 	if (!type)
@@ -209,6 +224,7 @@ startElement(void *userData, const char *name, const char **atts)
 	break;
       }
     case STATE_PHASH:
+    case STATE_M4PHASH:
       {
 	const char *piece = find_attr("piece", atts);
 	if (!piece || atoi(piece) != pd->npiece)
@@ -263,9 +279,11 @@ endElement(void *userData, const char *name)
   switch (pd->state)
     {
     case STATE_SIZE:
+    case STATE_M4SIZE:
       pd->size = (off_t)strtoull(pd->content, 0, 10);
       break;
     case STATE_HASH:
+    case STATE_M4HASH:
       pd->chksum.clear();
       pd->chksum.resize(pd->chksuml, 0);
       if (strlen(pd->content) != size_t(pd->chksuml) * 2 || !hexstr2bytes(&pd->chksum[0], pd->content, pd->chksuml))
@@ -275,6 +293,7 @@ endElement(void *userData, const char *name)
 	}
       break;
     case STATE_PHASH:
+    case STATE_M4PHASH:
       if (strlen(pd->content) != size_t(pd->piecel) * 2)
 	break;
       pd->piece.resize(pd->piecel * (pd->npiece + 1), 0);
@@ -286,6 +305,7 @@ endElement(void *userData, const char *name)
       pd->npiece++;
       break;
     case STATE_PIECES:
+    case STATE_M4PIECES:
       if (pd->piecel == 4)
 	{
 	  pd->zsync = pd->piece;
@@ -300,6 +320,7 @@ endElement(void *userData, const char *name)
       pd->piece.clear();
       break;
     case STATE_URL:
+    case STATE_M4URL:
       if (*pd->content)
 	{
 	  pd->urls[pd->nurls].url = string(pd->content);

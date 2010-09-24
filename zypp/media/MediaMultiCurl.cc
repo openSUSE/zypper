@@ -22,6 +22,7 @@
 #include <algorithm>
 
 
+#include "zypp/ZConfig.h"
 #include "zypp/base/Logger.h"
 #include "zypp/media/MediaMultiCurl.h"
 #include "zypp/media/MetaLinkParser.h"
@@ -257,6 +258,8 @@ multifetchworker::headerfunction(char *p, size_t size)
     {
       WAR << "#" << _workerno << ": setting request filesize to " << filesize << endl;
       _request->_filesize = filesize;
+      if (_request->_totalsize == 0 && !_request->_blklist)
+	_request->_totalsize = filesize;
     }
   if (_request->_filesize != (off_t)filesize)
     {
@@ -1269,6 +1272,7 @@ void MediaMultiCurl::doGetFileCopy( const Pathname & filename , const Pathname &
 	  bool userabort = false;
 	  fclose(file);
 	  file = NULL;
+	  Pathname failedFile = ZConfig::instance().repoCachePath() / "MultiCurl.failed";
 	  try
 	    {
 	      MetaLinkParser mlp;
@@ -1285,6 +1289,13 @@ void MediaMultiCurl::doGetFileCopy( const Pathname & filename , const Pathname &
 		  bl.reuseBlocks(file, target.asString());
 		  DBG << bl << endl;
 		}
+	      if (bl.haveChecksum(1) && PathInfo(failedFile).isExist())
+		{
+		  DBG << "reusing blocks from file " << failedFile << endl;
+		  bl.reuseBlocks(file, failedFile.asString());
+		  DBG << bl << endl;
+		  filesystem::unlink(failedFile);
+		}
 	      Pathname df = deltafile();
 	      if (!df.empty())
 		{
@@ -1298,7 +1309,6 @@ void MediaMultiCurl::doGetFileCopy( const Pathname & filename , const Pathname &
 		}
 	      catch (MediaCurlException &ex)
 		{
-		  fclose(file);
 		  userabort = ex.errstr() == "User abort";
 		  ZYPP_RETHROW(ex);
 		}
@@ -1308,9 +1318,20 @@ void MediaMultiCurl::doGetFileCopy( const Pathname & filename , const Pathname &
 	      // something went wrong. fall back to normal download
 	      if (file)
 		fclose(file);
-	      filesystem::unlink(destNew);
+	      file = NULL;
+	      if (PathInfo(destNew).size() >= 63336)
+		{
+		  ::unlink(failedFile.asString().c_str());
+		  filesystem::hardlinkCopy(destNew, failedFile);
+		}
 	      if (userabort)
-		ZYPP_RETHROW(ex);
+		{
+	          filesystem::unlink(destNew);
+		  ZYPP_RETHROW(ex);
+		}
+	      file = fopen(destNew.c_str(), "w+");
+	      if (!file)
+		ZYPP_THROW(MediaWriteException(destNew));
 	      MediaCurl::doGetFileCopyFile(filename, dest, file, report, options | OPTION_NO_REPORT_START);
 	    }
 	}
