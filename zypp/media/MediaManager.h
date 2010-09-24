@@ -432,6 +432,34 @@ namespace zypp
      *   proxy settings to curl, but curl fallbacks to use the content of
      *   the <tt>http_proxy</tt>, <tt>ftp_proxy</tt>, etc environment
      *   variables.
+     *
+     * \subsection MediaPlugin_Url MediaPlugin - custom media handler
+     * Media access is delegated to a script located in the libzypp
+     * media plugin directory. The URLs query options are translated
+     * into commandline arguments passed to the script.
+     *   - Scheme:
+     *     - <b>plugin</b>
+     *   - Examples:
+     *     \code
+     *       "plugin:script?loptv=lvalue&v=optv&lopt=&o&=foo"
+     *                      \__________/ \____/ \___/ | \_/
+     *                __________/__    ____/_    _|_  \   \___
+     *              /              \ /       \ /    \ /\ /    \
+     *       script --loptv "lvalue" -v "optv" --lopt -o -- foo
+     *     \endcode
+     *   - Query parameters:
+     *     - The URLs query options are translated into commandline
+     *       arguments passed to the script.
+     *     - \b Note: No option may appear twice, as the <tt>(option,value)</tt>
+     *       pairs are stored in a hash.
+     *     - \b Note: The order in which the query options are passes to the
+     *       script is arbitrary, except for an option with an empty key, which
+     *       is translated into <tt>'-- value'</tt> and passed as final option.
+     *     - <tt>'c[=[value]]'</tt> ist passed as <tt>'-c [value]'</tt>
+     *     - <tt>'word[=[value]]'</tt> ist passed as <tt>'--word [value]'</tt>
+     *     - <tt>'[=value]'</tt> ist passed as last args as <tt>'-- [value]'</tt>
+     *   - \c script<->libzypp communication:
+     *     - \TODO to be documented.
      */
     class MediaManager: private zypp::base::NonCopyable
     {
