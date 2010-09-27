@@ -151,14 +151,6 @@ namespace zypp
       Pathname knownServicesPath() const;
 
       /**
-       * Path where plugin services are installed
-       * plugin services are scripts returning a repository
-       * list
-       * \ingroup g_ZC_CONFIGFILES
-       */
-      Pathname pluginServicesPath() const;
-
-      /**
        * Whether repository urls should be probed.
        / config option
        * repo.add.probe
@@ -389,17 +381,17 @@ namespace zypp
       /**
        * Defaults to \c /usr/lib/zypp/plugins
        */
-      Pathname pluginsDir() const;
+      Pathname pluginsPath() const;
 
       /**
-       * Defaults to \ref pluginsDir()/media
+       * Defaults to \ref pluginsPath()/media
        */
-      Pathname mediaPluginsDir() const;
+      Pathname mediaPluginsPath() const;
 
        /**
-	* Defaults to \ref pluginsDir()/services
+	* Defaults to \ref pluginsPath()/services
 	*/
-       Pathname servicePluginsDir() const;
+       Pathname servicePluginsPath() const;
       //@}
     public:
       class Impl;

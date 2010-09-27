@@ -68,10 +68,10 @@ BOOST_AUTO_TEST_CASE(pluginservices_test)
   RepoManagerOptions opts( RepoManagerOptions::makeTestSetup( tmpCachePath ) ) ;
 
   filesystem::mkdir( opts.knownReposPath );
-  filesystem::mkdir( opts.knownServicesPath );
+  filesystem::mkdir( opts.servicePluginsPath );
 
-  opts.pluginServicesPath = DATADIR + "/plugin-service-lib-1";
-  BOOST_CHECK(PathInfo(opts.pluginServicesPath / "service").isExist());
+  opts.servicePluginsPath = DATADIR + "/plugin-service-lib-1";
+  BOOST_CHECK(PathInfo(opts.servicePluginsPath / "service").isExist());
 
   {
     RepoManager manager(opts);
@@ -92,7 +92,7 @@ BOOST_AUTO_TEST_CASE(pluginservices_test)
   }
   
   // Now simulate the service changed
-  opts.pluginServicesPath = DATADIR + "/plugin-service-lib-2";
+  opts.servicePluginsPath = DATADIR + "/plugin-service-lib-2";
   {
     RepoManager manager(opts);
     BOOST_REQUIRE_EQUAL(1, manager.serviceSize());

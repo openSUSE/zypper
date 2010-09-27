@@ -267,7 +267,7 @@ namespace zypp
         , solver_upgradeTestcasesToKeep	( 2 )
         , solverUpgradeRemoveDroppedPackages( true )
         , apply_locks_file		( true )
-        , pluginsDir			( "/usr/lib/zypp/plugins" )
+        , plugins_path			( "/usr/lib/zypp/plugins" )
       {
         MIL << "libzypp: " << VERSION << " built " << __DATE__ << " " <<  __TIME__ << endl;
         // override_r has higest prio
@@ -338,10 +338,6 @@ namespace zypp
                 else if ( entry == "servicesdir" )
                 {
                   cfg_known_services_path = Pathname(value);
-                }
-                else if ( entry == "pluginservicesdir" )
-                {
-                  cfg_plugin_services_path = Pathname(value);
                 }
                 else if ( entry == "repo.add.probe" )
                 {
@@ -497,7 +493,6 @@ namespace zypp
     Pathname cfg_config_path;
     Pathname cfg_known_repos_path;
     Pathname cfg_known_services_path;
-    Pathname cfg_plugin_services_path;
     
     Pathname cfg_vendor_path;
     Pathname locks_file;
@@ -540,7 +535,7 @@ namespace zypp
     Pathname credentials_global_dir_path;
     Pathname credentials_global_file_path;
 
-    Option<Pathname> pluginsDir;
+    Option<Pathname> plugins_path;
   };
   ///////////////////////////////////////////////////////////////////
 
@@ -682,12 +677,6 @@ namespace zypp
   {
     return ( _pimpl->cfg_known_services_path.empty()
         ? (configPath()/"services.d") : _pimpl->cfg_known_repos_path );
-  }
-
-  Pathname ZConfig::pluginServicesPath() const
-  {
-    return ( _pimpl->cfg_plugin_services_path.empty()
-        ? ("/space/tmp/services") : _pimpl->cfg_plugin_services_path );
   }
 
   Pathname ZConfig::vendorPath() const
@@ -836,14 +825,14 @@ namespace zypp
 
   ///////////////////////////////////////////////////////////////////
 
-  Pathname ZConfig::pluginsDir() const
-  { return _pimpl->pluginsDir.get(); }
+  Pathname ZConfig::pluginsPath() const
+  { return _pimpl->plugins_path.get(); }
 
-  Pathname ZConfig::mediaPluginsDir() const
-  { return pluginsDir() / "media"; }
+  Pathname ZConfig::mediaPluginsPath() const
+  { return pluginsPath() / "media"; }
 
-  Pathname ZConfig::servicePluginsDir() const
-  { return pluginsDir() / "services"; }
+  Pathname ZConfig::servicePluginsPath() const
+  { return pluginsPath() / "services"; }
 
   ///////////////////////////////////////////////////////////////////
 
