@@ -6,7 +6,7 @@
 |                         /_____||_| |_| |_|                           |
 |                                                                      |
 \---------------------------------------------------------------------*/
-/** \file zypp/media/MediaPLUGIN.h
+/** \file zypp/media/MediaPlugin.h
  *
 */
 #ifndef ZYPP_MEDIA_MEDIAPLUGIN_H
@@ -22,16 +22,16 @@ namespace zypp
   { //////////////////////////////////////////////////////////////////
 
     /**
-     * \brief Implementation class for PLUGIN MediaHandler
+     * \brief Implementation class for plugin MediaHandler
      *
      * @see MediaHandler
      */
-    class MediaPLUGIN : public MediaHandler
+    class MediaPlugin : public MediaHandler
     {
       public:
-	MediaPLUGIN( const Url & url_r, const Pathname & attach_point_hint_r );
+	MediaPlugin( const Url & url_r, const Pathname & attach_point_hint_r );
 
-        virtual ~MediaPLUGIN() { try { release(); } catch(...) {} }
+        virtual ~MediaPlugin() { try { release(); } catch(...) {} }
 
       protected:
 	virtual void attachTo( bool next_r = false );
