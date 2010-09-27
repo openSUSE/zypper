@@ -273,7 +273,7 @@ BOOST_AUTO_TEST_CASE(plugin_querystring_args)
 {
   // url querysting options without value must be possible
   // e.g. for plugin schema
-  Url u( "plugin://script?loptv=lvalue&v=optv&lopt=&o" );
+  Url u( "plugin:script?loptv=lvalue&v=optv&lopt=&o" );
   url::ParamMap pm( u.getQueryStringMap() );
   BOOST_CHECK_EQUAL( pm.size(), 4 );
   BOOST_CHECK_EQUAL( pm["loptv"], "lvalue" );
