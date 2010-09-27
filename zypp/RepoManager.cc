@@ -1966,9 +1966,14 @@ namespace zypp
       // Service explicitly requests the repo being enabled?
       // Service explicitly requests the repo being disabled?
       // And hopefully not both ;) If so, enable wins.
-      bool beEnabled = service.repoToEnableFind( it->alias() );
+      bool beEnabled = service.repoToEnableFind( it->alias() );        
       bool beDisabled = service.repoToDisableFind( it->alias() );
 
+      // Make sure the service repo is created with the
+      // appropriate enable
+      if ( beEnabled ) it->setEnabled(true);
+      if ( beDisabled ) it->setEnabled(false);
+      
       if ( beEnabled )
       {
         // Remove from enable request list.
@@ -1981,17 +1986,12 @@ namespace zypp
       RepoInfoList::iterator oldRepo( findAlias( it->alias(), oldRepos ) );
       if ( oldRepo == oldRepos.end() )
       {
-        // Not found in oldRepos ==> a new repo to add
-
-        // Make sure the service repo is created with the
-        // appropriate enable and autorefresh true.
-        it->setEnabled( beEnabled );
-        it->setAutorefresh( true );
-
+        // Not found in oldRepos ==> a new repo to add        
+        
         // At that point check whether a repo with the same alias
         // exists outside this service. Maybe forcefully re-alias
         // the existing repo?
-        DBG << "Service adds repo " << it->alias() << " " << (beEnabled?"enabled":"disabled") << endl;
+        DBG << "Service adds repo " << it->alias() << " " << (it->enabled()?"enabled":"disabled") << endl;
         addRepository( *it );
 
         // save repo credentials
@@ -2060,7 +2060,7 @@ namespace zypp
 
     ////////////////////////////////////////////////////////////////////////////
     // save service if modified:
-    if ( serviceModified )
+    if ( serviceModified && service.type() != ServiceType::PLUGIN )
     {
       // write out modified service file.
       modifyService( service.alias(), service );
