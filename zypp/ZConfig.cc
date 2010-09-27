@@ -267,7 +267,7 @@ namespace zypp
         , solver_upgradeTestcasesToKeep	( 2 )
         , solverUpgradeRemoveDroppedPackages( true )
         , apply_locks_file		( true )
-        , plugins_path			( "/usr/lib/zypp/plugins" )
+        , pluginsPath			( "/usr/lib/zypp/plugins" )
       {
         MIL << "libzypp: " << VERSION << " built " << __DATE__ << " " <<  __TIME__ << endl;
         // override_r has higest prio
@@ -493,7 +493,7 @@ namespace zypp
     Pathname cfg_config_path;
     Pathname cfg_known_repos_path;
     Pathname cfg_known_services_path;
-    
+
     Pathname cfg_vendor_path;
     Pathname locks_file;
 
@@ -535,7 +535,7 @@ namespace zypp
     Pathname credentials_global_dir_path;
     Pathname credentials_global_file_path;
 
-    Option<Pathname> plugins_path;
+    Option<Pathname> pluginsPath;
   };
   ///////////////////////////////////////////////////////////////////
 
@@ -826,7 +826,7 @@ namespace zypp
   ///////////////////////////////////////////////////////////////////
 
   Pathname ZConfig::pluginsPath() const
-  { return _pimpl->plugins_path.get(); }
+  { return _pimpl->pluginsPath.get(); }
 
   Pathname ZConfig::mediaPluginsPath() const
   { return pluginsPath() / "media"; }
