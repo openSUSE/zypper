@@ -7,8 +7,8 @@
 |                                                                      |
 \---------------------------------------------------------------------*/
 
-#ifndef ZYPP_REPO_LOCALSERVICES_H
-#define ZYPP_REPO_LOCALSERVICES_H
+#ifndef ZYPP_REPO_PLUGINSERVICES_H
+#define ZYPP_REPO_PLUGINSERVICES_H
 
 #include <iosfwd>
 
@@ -25,9 +25,9 @@ namespace zypp
   namespace repo
   { /////////////////////////////////////////////////////////////////
 
-    class LocalServices
+    class PluginServices
     {
-      friend std::ostream & operator<<( std::ostream & str, const LocalServices& obj );
+      friend std::ostream & operator<<( std::ostream & str, const PluginServices& obj );
     public:
       
      /**
@@ -43,18 +43,18 @@ namespace zypp
       class Impl;
 
     public:
-      LocalServices(const Pathname &path,
+      PluginServices(const Pathname &path,
                     const ProcessService & callback);
      
       /**
        * Dtor
        */
-      ~LocalServices();
+      ~PluginServices();
     };
     ///////////////////////////////////////////////////////////////////
 
     /** \relates ServiceFileReader Stream output */
-    std::ostream & operator<<( std::ostream & str, const LocalServices & obj );
+    std::ostream & operator<<( std::ostream & str, const PluginServices & obj );
 
     /////////////////////////////////////////////////////////////////
   } // namespace repo

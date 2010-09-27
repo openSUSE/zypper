@@ -22,6 +22,7 @@ namespace zypp
 
   const ServiceType ServiceType::RIS(ServiceType::RIS_e);
   const ServiceType ServiceType::NONE(ServiceType::NONE_e);
+  const ServiceType ServiceType::PLUGIN(ServiceType::PLUGIN_e);
 
   ServiceType::ServiceType(const std::string & strval_r)
     : _type(parse(strval_r))
@@ -36,6 +37,8 @@ namespace zypp
       _table["RIS"] = ServiceType::RIS_e;
       _table["nu"] = ServiceType::RIS_e;
       _table["NU"] = ServiceType::RIS_e;
+      _table["plugin"] = ServiceType::PLUGIN_e;
+      _table["PLUGIN"] = ServiceType::PLUGIN_e;
       _table["NONE"] = _table["none"] = ServiceType::NONE_e;
     }
 
@@ -57,6 +60,7 @@ namespace zypp
     {
       // initialize it
       _table[RIS_e]  = "ris";
+      _table[PLUGIN_e]  = "plugin";
       _table[NONE_e] = "NONE";
     }
     return _table[_type];

@@ -32,11 +32,21 @@ namespace zypp
     static const ServiceType RIS;
     /** No service set. */
     static const ServiceType NONE;
+    /**
+     * Plugin services are scripts installed on
+     * your system that provide the package manager with
+     * repositories.
+     *
+     * The mechanism used to create this repository list
+     * is completely up to the script
+     */
+    static const ServiceType PLUGIN;
 
     enum Type
     {
       NONE_e,
       RIS_e,
+      PLUGIN_e,
     };
 
     ServiceType() : _type(NONE_e) {}

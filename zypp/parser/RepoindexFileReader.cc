@@ -144,7 +144,13 @@ namespace zypp
           info.setTargetDistribution(s.asString());
 
         DBG << info << endl;
-
+        
+        // Set some defaults that are not contained in the repo information
+        info.setAutorefresh( true );
+        // enabled or disabled is controlled by the
+        // reposToEnable/Disable list
+        info.setEnabled(false);        
+        
         // ignore the rest
         _callback(info);
         return true;

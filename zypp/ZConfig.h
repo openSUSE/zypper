@@ -151,6 +151,14 @@ namespace zypp
       Pathname knownServicesPath() const;
 
       /**
+       * Path where plugin services are installed
+       * plugin services are scripts returning a repository
+       * list
+       * \ingroup g_ZC_CONFIGFILES
+       */
+      Pathname pluginServicesPath() const;
+
+      /**
        * Whether repository urls should be probed.
        / config option
        * repo.add.probe

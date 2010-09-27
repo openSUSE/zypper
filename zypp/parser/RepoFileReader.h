@@ -15,6 +15,7 @@
 #include <iosfwd>
 
 #include "zypp/base/PtrTypes.h"
+#include "zypp/base/InputStream.h"
 #include "zypp/RepoInfo.h"
 #include "zypp/ProgressData.h"
 
@@ -69,6 +70,21 @@ namespace zypp
       *
       */
       RepoFileReader( const Pathname & repo_file,
+                      const ProcessRepo & callback,
+                      const ProgressData::ReceiverFnc &progress = ProgressData::ReceiverFnc() );
+
+     /**
+      * \short Constructor. Creates the reader and start reading.
+      *
+      * \param is A valid input stream
+      * \param callback Callback that will be called for each repository.
+      * \param progress Optional progress function. \see ProgressData
+      *
+      * \throws AbortRequestException If the callback returns false
+      * \throws Exception If a error occurs at reading / parsing
+      *
+      */
+      RepoFileReader( const InputStream &is,
                       const ProcessRepo & callback,
                       const ProgressData::ReceiverFnc &progress = ProgressData::ReceiverFnc() );
      

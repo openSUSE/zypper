@@ -1,0 +1,13 @@
+#!/bin/bash
+echo "
+[repo1]
+name=Repository1
+baseurl=http://somehost.com/repo1
+type=rpmmd
+
+[repo12]
+name=Repository2
+baseurl=http://somehost.com/repo2
+type=rpmmd
+"
+
