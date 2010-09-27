@@ -366,7 +366,6 @@ namespace zypp
        */
       Pathname credentialsGlobalFile() const;
 
-
       /** Package telling the "product version" on systems not using /etc/product.d/baseproduct.
        *
        * On RHEL, Fedora and others the "product version" is determined by the first package
@@ -377,6 +376,23 @@ namespace zypp
        */
       std::string distroverpkg() const;
 
+      /** \name Plugins */
+      //@{
+      /**
+       * Defaults to \c /usr/lib/zypp/plugins
+       */
+      Pathname pluginsDir() const;
+
+      /**
+       * Defaults to \ref pluginsDir()/media
+       */
+      Pathname mediaPluginsDir() const;
+
+       /**
+	* Defaults to \ref pluginsDir()/services
+	*/
+       Pathname servicePluginsDir() const;
+      //@}
     public:
       class Impl;
       /** Dtor */

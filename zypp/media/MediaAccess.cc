@@ -30,6 +30,7 @@
 #include "zypp/media/MediaAria2c.h"
 #include "zypp/media/MediaMultiCurl.h"
 #include "zypp/media/MediaISO.h"
+#include "zypp/media/MediaPlugin.h"
 
 using namespace std;
 
@@ -169,6 +170,8 @@ MediaAccess::open (const Url& url, const Pathname & preferred_attach_point)
 	else
             _handler = new MediaCurl (url,preferred_attach_point);
     }
+    else if (scheme == "plugin" )
+	_handler = new MediaPlugin (url,preferred_attach_point);
     else
     {
 	ZYPP_THROW(MediaUnsupportedUrlSchemeException(url));

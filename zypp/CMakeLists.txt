@@ -264,6 +264,7 @@ SET( zypp_media_SRCS
   media/MediaMultiCurl.cc
   media/MediaAria2c.cc
   media/MediaISO.cc
+  media/MediaPlugin.cc
   media/MediaSource.cc
   media/MediaManager.cc
   media/MediaUserAuth.cc
@@ -289,6 +290,7 @@ SET( zypp_media_HEADERS
   media/MediaException.h
   media/MediaHandler.h
   media/MediaISO.h
+  media/MediaPlugin.h
   media/MediaManager.h
   media/MediaNFS.h
   media/MediaSource.h
