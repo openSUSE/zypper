@@ -1,4 +1,10 @@
 -------------------------------------------------------------------
+Di 28. Sep 17:12:51 CEST 2010 - dheidler@suse.de
+
+- fixed replacing releasever (for fedora systems) - (bnc#637470)
+- version 8.3.0 (0)
+
+-------------------------------------------------------------------
 Fri Sep 24 13:07:25 CEST 2010 - mls@suse.de
 
 - fix metalink4 parsing [bnc#641484]
