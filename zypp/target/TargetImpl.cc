@@ -1547,28 +1547,28 @@ namespace zypp
     {
       if ( _distributionVersion.empty() )
       {
-        // By default ZYpp looks for /etc/product.d/baseproduct..
-        _distributionVersion = baseproductdata( _root ).edition().version();
-
-        if ( _distributionVersion.empty() )
-        {
-          // ...But the baseproduct method is not expected to work on RedHat derivatives.
-          // On RHEL, Fedora and others the "product version" is determined by the first package
-          // providing 'redhat-release'. This value is not hardcoded in YUM and can be configured
-          // with the $distroverpkg variable.
-          rpm::librpmDb::db_const_iterator it;
-          if ( it.findByProvides( ZConfig::instance().distroverpkg() ) )
-            _distributionVersion = it->tag_version();
-        }
-
+        _distributionVersion = TargetImpl::distributionVersion(root());
         if ( !_distributionVersion.empty() )
           MIL << "Remember distributionVersion = '" << _distributionVersion << "'" << endl;
       }
       return _distributionVersion;
     }
-    // static version: (no fallback to init and read rpm db here)
+    // static version
     std::string TargetImpl::distributionVersion( const Pathname & root_r )
-    { return baseproductdata( staticGuessRoot(root_r) ).edition().version(); }
+    {
+      std:string distributionVersion = baseproductdata( staticGuessRoot(root_r) ).edition().version();
+      if ( distributionVersion.empty() )
+      {
+        // ...But the baseproduct method is not expected to work on RedHat derivatives.
+        // On RHEL, Fedora and others the "product version" is determined by the first package
+        // providing 'redhat-release'. This value is not hardcoded in YUM and can be configured
+        // with the $distroverpkg variable.
+        rpm::librpmDb::db_const_iterator it;
+        if ( it.findByProvides( ZConfig::instance().distroverpkg() ) )
+          distributionVersion = it->tag_version();
+      }
+      return distributionVersion;
+    }
 
 
     std::string TargetImpl::distributionFlavor() const
