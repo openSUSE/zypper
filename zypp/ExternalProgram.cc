@@ -33,7 +33,8 @@ using namespace std;
 namespace zypp {
 
     ExternalProgram::ExternalProgram()
-    : use_pty (false)
+      : use_pty (false)
+      , pid( -1 )
     {
     }
 
@@ -44,7 +45,8 @@ namespace zypp {
                                       int stderr_fd,
                                       bool default_locale,
                                       const Pathname & root )
-    : use_pty (use_pty)
+      : use_pty (use_pty)
+      , pid( -1 )
     {
       const char *argv[4];
       argv[0] = "/bin/sh";
@@ -67,7 +69,8 @@ namespace zypp {
                                       bool use_pty, int stderr_fd,
                                       bool default_locale,
                                       const Pathname& root)
-        : use_pty (use_pty)
+      : use_pty (use_pty)
+      , pid( -1 )
     {
         const char * argvp[argv.size() + 1];
         unsigned c = 0;
@@ -94,7 +97,8 @@ namespace zypp {
                                       bool use_pty, int stderr_fd,
                                       bool default_locale,
                                       const Pathname& root)
-        : use_pty (use_pty)
+      : use_pty (use_pty)
+      , pid( -1 )
     {
         const char * argvp[argv.size() + 1];
         unsigned c = 0;
@@ -123,7 +127,8 @@ namespace zypp {
                                       int stderr_fd,
                                       bool default_locale,
                                       const Pathname & root )
-    : use_pty (use_pty)
+      : use_pty (use_pty)
+      , pid( -1 )
     {
       const char* rootdir = NULL;
       if(!root.empty() && root != "/")
@@ -140,6 +145,7 @@ namespace zypp {
     				  int stderr_fd, bool default_locale,
     				  const Pathname& root)
       : use_pty (use_pty)
+      , pid( -1 )
     {
       const char* rootdir = NULL;
       if(!root.empty() && root != "/")
@@ -153,6 +159,7 @@ namespace zypp {
     ExternalProgram::ExternalProgram (const char *binpath, const char *const *argv_1,
     				  bool use_pty)
       : use_pty (use_pty)
+      , pid( -1 )
     {
       int i = 0;
       while (argv_1[i++])
@@ -168,6 +175,7 @@ namespace zypp {
     ExternalProgram::ExternalProgram (const char *binpath, const char *const *argv_1, const Environment & environment,
     				  bool use_pty)
       : use_pty (use_pty)
+      , pid( -1 )
     {
       int i = 0;
       while (argv_1[i++])
