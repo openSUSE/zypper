@@ -394,30 +394,76 @@ namespace zypp {
     {
       if (pid > 0)
       {
-        setBlocking( true );
-        while ( receiveLine().length() )
-          ; // discard any output instead of closing the pipe
-    	//ExternalDataSource::close();
+	if ( inputFile() )
+	{
+	  // Discard any output instead of closing the pipe,
+	  // but watch out for the command exiting while some
+	  // subprocess keeps the filedescriptor open.
+	  setBlocking( false );
+	  FILE * inputfile = inputFile();
+	  int    inputfileFd = ::fileno( inputfile );
+	  long   delay = 0;
+	  do
+	  {
+	    /* Watch inputFile to see when it has input. */
+	    fd_set rfds;
+	    FD_ZERO( &rfds );
+	    FD_SET( inputfileFd, &rfds );
 
-    	// Wait for child to exit
-    	int ret;
-        int status = 0;
-    	do
-    	{
-    	    ret = waitpid(pid, &status, 0);
-    	}
-    	while (ret == -1 && errno == EINTR);
+	    /* Wait up to 1 seconds. */
+	    struct timeval tv;
+	    tv.tv_sec  = (delay < 0 ? 1 : 0);
+	    tv.tv_usec = (delay < 0 ? 0 : delay*100000);
+	    if ( delay >= 0 && ++delay > 9 )
+	      delay = -1;
+	    int retval = select( inputfileFd+1, &rfds, NULL, NULL, &tv );
 
-    	if (ret != -1)
-    	{
-    	    status = checkStatus( status );
-    	}
-          pid = -1;
-          return status;
+	    if ( retval == -1 )
+	    {
+	      ERR << "select error: " << strerror(errno) << endl;
+	      if ( errno != EINTR )
+		break;
+	    }
+	    else if ( retval )
+	    {
+	      // Data is available now.
+	      static size_t linebuffer_size = 0;      // static because getline allocs
+	      static char * linebuffer = 0;           // and reallocs if buffer is too small
+	      ssize_t nread = getline( &linebuffer, &linebuffer_size, inputfile );
+	      // ::feof check is important as select returns
+	      // positive if the file was closed.
+	      if ( ::feof( inputfile ) )
+		break;
+	      clearerr( inputfile );
+	    }
+	    else
+	    {
+	      // No data within time.
+	      if ( ! running() )
+		break;
+	    }
+	  } while ( true );
+	}
+
+	// Wait for child to exit
+	int ret;
+	int status = 0;
+	do
+	{
+	  ret = waitpid(pid, &status, 0);
+	}
+	while (ret == -1 && errno == EINTR);
+
+	if (ret != -1)
+	{
+	  status = checkStatus( status );
+	}
+	pid = -1;
+	return status;
       }
       else
       {
-          return _exitStatus;
+	return _exitStatus;
       }
     }
 
