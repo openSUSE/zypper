@@ -13,4 +13,4 @@ ADD_CUSTOM_TARGET( ctest
 )
 
 ADD_TESTS( PackageArgs )
-ADD_TESTS( SolverRequester )
+ADD_TESTS( SolverRequester_DISABLED )
