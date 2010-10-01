@@ -83,28 +83,19 @@ MACRO(GENERATE_PACKAGING PACKAGE VERSION)
   # in absolute path + filename to find files or directories to be excluded
   # from source tarball.
   SET (CPACK_SOURCE_IGNORE_FILES
-  #svn files
-  "\\\\.svn/"
-  "\\\\.cvsignore$"
+  # hidden files
+  "/\\\\..+$"
   # temporary files
   "\\\\.swp$"
   # backup files
   "~$"
-  # eclipse files
-  "\\\\.cdtproject$"
-  "\\\\.cproject$"
-  "\\\\.project$"
-  "\\\\.settings/"
   # others
   "\\\\.#"
   "/#"
   "/build/"
   "/_build/"
-  "/\\\\.git/"
   # used before
   "/CVS/"
-  "/\\\\.libs/"
-  "/\\\\.deps/"
   "\\\\.o$"
   "\\\\.lo$"
   "\\\\.la$"
