@@ -23,6 +23,7 @@
 #include <stdlib.h>
 #include <string.h>
 
+#include <sstream>
 #include <string>
 
 #include "zypp/base/Logger.h"
@@ -74,34 +75,19 @@ namespace zypp {
     string
     ExternalDataSource::receiveUpto (char c)
     {
-      if (inputfile)
+      if (inputfile && !feof(inputfile))
       {
-    	string result;
-    	while (true)
-    	{
-    	    const size_t length = 4096;
-    	    char buffer[length];
-    	    char *writepointer = buffer;
-    	    size_t readbytes = 0;
-    	    int readc = -1;
-
-    	    while (!feof(inputfile) && readbytes < length)
-    	    {
-    		readc = fgetc(inputfile);
-    		if (readc == EOF) break;
-    		*writepointer++ = (char) readc;
-    		if ((char) readc == c) break;
-    		readbytes++;
-    	    }
-    	    *writepointer = 0;
-    	    result += buffer;
-    	    if (readbytes < length || (char) readc == c) break;
-
-    	}
-    	return result;
+    	std::ostringstream datas;
+	 while ( true )
+	 {
+	   int readc = fgetc(inputfile);
+	   if (readc == EOF) break;
+	   datas << (char)readc;
+	   if ((char)readc == c) break;
+	 }
+	 return datas.str();
       }
-
-      else return "";
+      return string();
     }
 
 
