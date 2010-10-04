@@ -15,6 +15,7 @@
 #include <iostream>
 
 #include "zypp/base/String.h"
+#include "zypp/base/LogTools.h"
 
 using std::string;
 
@@ -358,39 +359,43 @@ namespace zypp
       return std::string( buf.begin(), buf.end() );
     }
 
-
-
-    /******************************************************************
-    **
-    **
-    **      FUNCTION NAME : getline
-    **      FUNCTION TYPE : std::string
-    **
-    **      DESCRIPTION :
-    */
-    static inline std::string _getline( std::istream & str, const Trim trim_r )
-    {
-      const unsigned tmpBuffLen = 1024;
-      char           tmpBuff[tmpBuffLen];
-
-      std::string ret;
-      do {
-        str.clear();
-        str.getline( tmpBuff, tmpBuffLen ); // always writes '\0' terminated
-        ret += tmpBuff;
-      } while( str.rdstate() == std::ios::failbit );
-
-      return trim( ret, trim_r );
-    }
-
     std::string getline( std::istream & str, const Trim trim_r )
     {
-      return _getline(str, trim_r);
+      return trim( receiveUpTo( str, '\n' ), trim_r );
     }
 
-    std::string getline( std::istream & str, bool trim )
+    std::string getline( std::istream & str, bool trim_r )
     {
-      return _getline(str, trim?TRIM:NO_TRIM);
+      return trim( receiveUpTo( str, '\n' ), trim_r?TRIM:NO_TRIM );
+    }
+
+    std::string receiveUpTo( std::istream & str, const char delim_r, bool returnDelim_r )
+    {
+      std::ostringstream datas;
+      do {
+	char ch;
+	if ( str.get( ch ) )
+	{
+	  if ( ch != delim_r )
+	  {
+	    datas.put( ch );
+	  }
+	  else
+	  {
+	    if ( returnDelim_r )
+	      datas.put( ch );
+	    break;	// --> delimiter found
+	  }
+	}
+	else
+	{
+	  // clear fail bit if we read data before reaching EOF
+	  if ( str.eof() && datas.tellp() )
+	    str.clear( std::ios::eofbit );
+	  break;	// --> no consumable data.
+	}
+      } while ( true );
+      return datas.str();
     }
 
     /////////////////////////////////////////////////////////////////

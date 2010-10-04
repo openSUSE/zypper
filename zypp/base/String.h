@@ -780,9 +780,24 @@ namespace zypp
 
     std::string stripLastWord( std::string & line, const bool rtrim_first );
 
+    /** Return stream content up to (but not returning) the next newline.
+     * \see \ref receiveUpTo
+     */
     std::string getline( std::istream & str, bool trim = false );
 
+    /** Return stream content up to (but not returning) the next newline.
+     * \see \ref receiveUpTo
+     */
     std::string getline( std::istream & str, const Trim trim_r );
+
+    /** Return stream content up to the next ocurrence of \c delim_r or EOF
+     * \c delim_r, if found, is always read from the stream. Whether it is
+     * also returned in the string depends on \c returnDelim_r.
+     * If the stream status is \c good, \c delim_r was found in the stream.
+     * If we reached EOF while looking for \c delim_r, \c eof is set; and
+     * also \c fail, if we did not read any data before.
+     */
+    std::string receiveUpTo( std::istream & str, const char delim_r, bool returnDelim_r = false );
 
     ///////////////////////////////////////////////////////////////////
 
