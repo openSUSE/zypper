@@ -2,6 +2,7 @@
 #include <sstream>
 #include "zypp/base/Logger.h"
 #include "zypp/repo/ServiceRepos.h"
+#include "zypp/media/MediaException.h"
 #include "zypp/parser/RepoFileReader.h"
 #include "zypp/media/MediaManager.h"
 #include "zypp/parser/RepoindexFileReader.h"
@@ -70,11 +71,14 @@ public:
       Url serviceUrl( service.url() );
       stringstream buffer;
      
-      ExternalProgram prog(serviceUrl.getPathName(), ExternalProgram::Discard_Stderr, false, -1, true);
-      std::string line;
-      for(line = prog.receiveLine(); !line.empty(); line = prog.receiveLine() )
-          buffer << line;
-      prog.close();
+      ExternalProgram prog(serviceUrl.getPathName(), ExternalProgram::Stderr_To_Stdout, false, -1, true);
+      prog >> buffer;
+
+      // Services code in zypper is not ready to handle other
+      // types of exceptions yet
+      if ( prog.close() != 0 )
+          ZYPP_THROW(media::MediaException(buffer.str()));
+
       parser::RepoFileReader parser(buffer, _callback);
     }
     
