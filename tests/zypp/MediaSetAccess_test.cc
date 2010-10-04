@@ -28,7 +28,7 @@ public:
 
   virtual bool isDesiredMedia(const media::MediaAccessRef &ref)
   {
-    return ref->doesFileExist(Pathname("/." + _media_id ));
+    return ref->doesFileExist(Pathname("/x." + _media_id ));
   }
 
 private:
