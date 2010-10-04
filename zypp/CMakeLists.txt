@@ -22,6 +22,10 @@ SET( zypp_SRCS
   DownloadMode.cc
   Edition.cc
   ExternalProgram.cc
+  PluginFrame.cc
+  PluginFrameException.cc
+  PluginScript.cc
+  PluginScriptException.cc
   Fetcher.cc
   FileChecker.cc
   Glob.cc
@@ -104,6 +108,10 @@ SET( zypp_HEADERS
   DownloadMode.h
   Edition.h
   ExternalProgram.h
+  PluginFrame.h
+  PluginFrameException.h
+  PluginScript.h
+  PluginScriptException.h
   Fetcher.h
   FileChecker.h
   Glob.h

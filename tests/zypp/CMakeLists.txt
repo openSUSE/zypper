@@ -21,6 +21,7 @@ ADD_TESTS(
   Locks
   MediaSetAccess
   PathInfo
+  PluginFrame
   PoolQuery
   ProgressData
   PublicKey
