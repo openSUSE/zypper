@@ -163,6 +163,8 @@ namespace zypp
   //
   ///////////////////////////////////////////////////////////////////
 
+  const pid_t PluginScript::NotConnected( -1 );
+
   PluginScript::PluginScript()
     : _pimpl( new Impl )
   {}

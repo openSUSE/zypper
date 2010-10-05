@@ -68,7 +68,7 @@ namespace zypp
       typedef std::vector<std::string> Arguments;
 
       /** \c pid_t(-1) constant indicating no connection */
-      static const pid_t NotConnected = -1;
+      static const pid_t NotConnected;
 
     public:
       /** Default ctor */
