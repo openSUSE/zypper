@@ -125,7 +125,7 @@ namespace zypp
       ZYPP_THROW( PluginScriptException( "Not connected", str::Str() << *this ) );
 
     if ( frame_r.command().empty() )
-      ZYPP_THROW( PluginScriptException( "Send: No command in frame", str::Str() << frame_r ) );
+      WAR << "Send: No command in frame" << frame_r << endl;
 
     // TODO: dumb writer does not care about error or deadlocks
     std::string data;

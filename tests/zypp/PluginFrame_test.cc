@@ -2,7 +2,7 @@
 #include <sstream>
 
 #include "TestSetup.h"
-#include "zypp/PluginFrame.h"
+#include "zypp/PluginScript.h"
 
 BOOST_AUTO_TEST_CASE(PluginFrameDefaultCtor)
 {
@@ -88,3 +88,46 @@ BOOST_AUTO_TEST_CASE(PluginFrameExceptipn)
   doParse( "c\nh:v\n\nbody" );	// valid
   BOOST_CHECK_THROW( doParse( "c\nhv\n\nbody" ), PluginFrameException );	// no : in header
 }
+
+BOOST_AUTO_TEST_CASE(PluginScriptTest)
+{
+  PluginScript scr;
+  BOOST_CHECK_EQUAL( scr.isOpen(), false );
+  BOOST_CHECK_EQUAL( scr.getPid(), PluginScript::NotConnected );
+  BOOST_CHECK_EQUAL( scr.script(), "" );
+
+  BOOST_CHECK_THROW( scr.open( "bla" ), PluginScriptException );	// script does not exist
+  BOOST_CHECK_EQUAL( scr.isOpen(), false );				// stay closed
+  BOOST_CHECK_EQUAL( scr.getPid(), PluginScript::NotConnected );
+  BOOST_CHECK_EQUAL( scr.script(), "" );
+
+  scr.open( "/bin/cat" );
+  BOOST_CHECK_EQUAL( scr.isOpen(), true );
+  BOOST_CHECK_EQUAL( (scr.getPid() != PluginScript::NotConnected ), true );
+  BOOST_CHECK_EQUAL( scr.script(), "/bin/cat" );			// set after successfull open
+
+  BOOST_CHECK_THROW( scr.open( "/bin/ls" ), PluginScriptException );	// already open
+  BOOST_CHECK_EQUAL( scr.isOpen(), true );				// stay with "/bin/cat"
+  BOOST_CHECK_EQUAL( (scr.getPid() != PluginScript::NotConnected ), true );
+  BOOST_CHECK_EQUAL( scr.script(), "/bin/cat" );
+
+  PluginFrame f;
+  scr.send( f );
+  PluginFrame r( scr.receive() );
+  BOOST_CHECK_EQUAL( f, r );
+
+  f.setCommand( "CMD" );
+  f.addHeader( "a","value" );
+  f.setBody( "foo" );
+  scr.send( f );
+  r = scr.receive();
+  BOOST_CHECK_EQUAL( f, r );
+
+  scr.close();
+  BOOST_CHECK_EQUAL( scr.isOpen(), false );
+  BOOST_CHECK_EQUAL( scr.getPid(), PluginScript::NotConnected );
+  BOOST_CHECK_EQUAL( scr.script(), "/bin/cat" );			// not reset by close, may be reused by open()
+
+  scr.close();								// no exception on dupl. close.
+}
+
