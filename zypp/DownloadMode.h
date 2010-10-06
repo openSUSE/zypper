@@ -21,6 +21,7 @@ namespace zypp
   /** Supported commit download policies. */
   enum DownloadMode
   {
+    DownloadDefault, //!< libzypp will decide what to do.
     DownloadOnly,	//!< Just download all packages to the local cache.
 			//!< Do not install. Implies a dry-run.
     DownloadInAdvance,	//!< First download all packages to the local cache.
@@ -28,10 +29,9 @@ namespace zypp
     DownloadInHeaps,	//!< Similar to DownloadInAdvance, but try to split
 			//!< the transaction into heaps, where at the end of
 			//!< each heap a consistent system state is reached.
-    DownloadAsNeeded,	//!< Alternating download and install. Packages are
+    DownloadAsNeeded	//!< Alternating download and install. Packages are
 			//!< cached just to avid CD/DVD hopping. This is the
 			//!< traditional behaviour.
-    DownloadDefault = DownloadAsNeeded
   };
 
   /** \relates DownloadMode Parse from string.

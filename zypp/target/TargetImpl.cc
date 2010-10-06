@@ -918,8 +918,14 @@ namespace zypp
       if ( policy_r.restrictToMedia() > 1 )
         policy_r.allMedia();
 
+      if ( policy_r.downloadMode() == DownloadDefault ) {
+        if ( root() == "/" )
+          policy_r.downloadMode(DownloadInHeaps);
+        else
+          policy_r.downloadMode(DownloadAsNeeded);
+      }
       // DownloadOnly implies dry-run.
-      if ( policy_r.downloadMode() == DownloadOnly )
+      else if ( policy_r.downloadMode() == DownloadOnly )
         policy_r.dryRun( true );
       // ----------------------------------------------------------------- //
 
