@@ -5,14 +5,14 @@ Wed Oct  6 15:39:59 UTC 2010 - dmacvicar@novell.com
 - version 8.5.0 (5)
 
 -------------------------------------------------------------------
-Mi 6. Okt 16:54:15 CEST 2010 - dheidler@suse.de
+Wed Oct  6 16:54:15 CEST 2010 - dheidler@suse.de
 
 - Use DownloadInHeaps as default, when there is nothing configured
   and when the target root is set to "/". (bnc#591476)
 - version 8.4.0 (4)
 
 -------------------------------------------------------------------
-Di 28. Sep 17:12:51 CEST 2010 - dheidler@suse.de
+Tue Sep 28 17:12:51 CEST 2010 - dheidler@suse.de
 
 - fixed replacing releasever (for fedora systems) - (bnc#637470)
 - version 8.3.0 (0)
@@ -37,7 +37,7 @@ Mon Sep 20 15:31:31 UTC 2010 - dmacvicar@novell.com
 - version 8.2.1 (0)
 
 -------------------------------------------------------------------
-Fr 10. Sep 17:06:34 CEST 2010 - dheidler@suse.de
+Fri Sep 10 17:06:34 CEST 2010 - dheidler@suse.de
 
 - fixed replacing basearch (for fedora systems) - (bnc#637473)
 - version 8.2.0 (0)
