@@ -62,8 +62,7 @@ cat <<EOF
 |                                                                      |
 \---------------------------------------------------------------------*/
 /** \file	${FILE}
- *
-*/
+ */
 EOF
 }
 
@@ -102,13 +101,17 @@ $(intro $CLASS_H)
 #include <iosfwd>
 
 #include "zypp/base/PtrTypes.h"
+#include "zypp/base/SafeBool.h"
+#include "zypp/base/NonCopyable.h"
 
 $(nsopen)
 
-${INDENT}/** */
-${INDENT}class ${CLASS}
+${INDENT}/**
+${INDENT} */
+${INDENT}class ${CLASS} : protected base::SafeBool<${CLASS}>, private base::NonCopyable
 ${INDENT}{
 ${INDENT}  friend std::ostream & operator<<( std::ostream & str, const ${CLASS} & obj );
+${INDENT}  friend bool operator==( const ${CLASS} & lhs, const ${CLASS} & rhs );
 
 ${INDENT}  public:
 ${INDENT}    /** Default ctor */
@@ -117,7 +120,19 @@ ${INDENT}    /** Dtor */
 ${INDENT}    ~${CLASS}();
 
 ${INDENT}  public:
+${INDENT}    /**  Validate object in a boolean context. */
+${INDENT}    using base::SafeBool<${CLASS}>::operator bool_type;
 
+${INDENT}  private:
+${INDENT}    friend base::SafeBool<${CLASS}>::operator bool_type() const;
+${INDENT}    /**  Validate object in a boolean context. */
+${INDENT}    bool boolTest() const
+${INDENT}    {
+${INDENT}      /* !!! Perform Boolean logic here AND check implememtation of operator==!!!
+${INDENT}       * NOTE: SafeBool requires operator== otherwise equality is reduced to
+${INDENT}       *       ( bool(${CLASS}) == bool(${CLASS}) ).
+${INDENT}       */
+${INDENT}    }
 ${INDENT}  public:
 ${INDENT}    /** Implementation  */
 ${INDENT}    class Impl;
@@ -128,6 +143,13 @@ ${INDENT}};
 
 ${INDENT}/** \relates ${CLASS} Stream output */
 ${INDENT}std::ostream & operator<<( std::ostream & str, const ${CLASS} & obj );
+
+${INDENT}/** \relates ${CLASS} */
+${INDENT}bool operator==( const ${CLASS} & lhs, const ${CLASS} & rhs );
+
+${INDENT}/** \relates ${CLASS} */
+${INDENT}inline bool operator!=( const ${CLASS} & lhs, const ${CLASS} & rhs )
+${INDENT}{ return !( lhs == rhs ); }
 
 $(nsclose)
 #endif // $INCLUDE_DEF
@@ -148,7 +170,8 @@ using std::endl;
 
 $(nsopen)
 
-${INDENT}/** ${CLASS} implementation. */
+${INDENT}/** ${CLASS} implementation.
+${INDENT} */
 ${INDENT}struct ${CLASS}::Impl
 ${INDENT}{
 
@@ -186,6 +209,9 @@ ${INDENT}{}
 
 ${INDENT}std::ostream & operator<<( std::ostream & str, const ${CLASS} & obj )
 ${INDENT}{ return str << *obj._pimpl; }
+
+${INDENT}bool operator==( const ${CLASS} & lhs, const ${CLASS} & rhs )
+${INDENT}{ return lhs._pimpl == rhs_pimpl || lhs._pimpl && rhs_pimpl && *lhs._pimpl == *rhs_pimpl; }
 
 $(nsclose)
 EOF
