@@ -1,4 +1,11 @@
 -------------------------------------------------------------------
+Mi 6. Okt 16:54:15 CEST 2010 - dheidler@suse.de
+
+- Use DownloadInHeaps as default, when there is nothing configured
+  and when the target root is set to "/". (bnc#591476)
+- version 8.4.0 (4)
+
+-------------------------------------------------------------------
 Di 28. Sep 17:12:51 CEST 2010 - dheidler@suse.de
 
 - fixed replacing releasever (for fedora systems) - (bnc#637470)
