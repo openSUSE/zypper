@@ -383,15 +383,6 @@ namespace zypp
        */
       Pathname pluginsPath() const;
 
-      /**
-       * Defaults to \ref pluginsPath()/media
-       */
-      Pathname mediaPluginsPath() const;
-
-       /**
-	* Defaults to \ref pluginsPath()/services
-	*/
-       Pathname servicePluginsPath() const;
       //@}
     public:
       class Impl;

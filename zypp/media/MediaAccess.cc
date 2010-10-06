@@ -13,8 +13,11 @@
 #include <ctype.h>
 
 #include <iostream>
+#include <map>
 
 #include "zypp/base/Logger.h"
+#include "zypp/ZConfig.h"
+#include "zypp/PluginScript.h"
 #include "zypp/ExternalProgram.h"
 
 #include "zypp/media/MediaException.h"
@@ -31,6 +34,7 @@
 #include "zypp/media/MediaMultiCurl.h"
 #include "zypp/media/MediaISO.h"
 #include "zypp/media/MediaPlugin.h"
+#include "zypp/media/UrlResolverPlugin.h"
 
 using namespace std;
 
@@ -98,18 +102,21 @@ MediaAccess::dependsOnParent(MediaAccessId parentId,
 
 // open URL
 void
-MediaAccess::open (const Url& url, const Pathname & preferred_attach_point)
+MediaAccess::open (const Url& o_url, const Pathname & preferred_attach_point)
 {
-    if(!url.isValid()) {
+    if(!o_url.isValid()) {
 	MIL << "Url is not valid" << endl;
-        ZYPP_THROW(MediaBadUrlException(url));
+        ZYPP_THROW(MediaBadUrlException(o_url));
     }
 
     close();
 
+    UrlResolverPlugin::HeaderList custom_headers;
+    Url url = UrlResolverPlugin::resolveUrl(o_url, custom_headers);
+    
     std::string scheme = url.getScheme();
-
     MIL << "Trying scheme '" << scheme << "'" << endl;
+
     /*
     ** WARNING: Don't forget to update MediaAccess::downloads(url)
     **          if you are adding a new url scheme / handler!
@@ -163,12 +170,24 @@ MediaAccess::open (const Url& url, const Pathname & preferred_attach_point)
             use_aria = false;
         }
 
+        MediaCurl *curl;        
+
         if ( use_aria )
-            _handler = new MediaAria2c (url,preferred_attach_point);
-        else if ( use_multicurl )
-            _handler = new MediaMultiCurl (url,preferred_attach_point);
+            curl = new MediaAria2c (url,preferred_attach_point);        
+        else if ( use_multicurl )                     
+            curl = new MediaMultiCurl (url,preferred_attach_point); 
 	else
-            _handler = new MediaCurl (url,preferred_attach_point);
+            curl = new MediaCurl (url,preferred_attach_point);
+        
+        UrlResolverPlugin::HeaderList::const_iterator it;
+        for (it = custom_headers.begin();
+             it != custom_headers.end();
+             ++it) {
+            std::string header = it->first + ": " + it->second;            
+            MIL << "Added custom header -> " << header << endl;
+            curl->settings().addHeader(header);
+        }
+        _handler = curl;        
     }
     else if (scheme == "plugin" )
 	_handler = new MediaPlugin (url,preferred_attach_point);

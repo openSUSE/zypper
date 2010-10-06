@@ -313,6 +313,11 @@ void fillSettingsFromUrl( const Url &url, TransferSettings &s )
 	}
         s.setAuthType(use_auth);
     }
+
+    // workarounds
+    std::string head_requests( url.getQueryParam("head_requests"));
+    if( !head_requests.empty() && head_requests == "no")
+        s.setHeadRequestsAllowed(false);
 }
 
 /**
@@ -436,6 +441,12 @@ MediaCurl::MediaCurl( const Url &      url_r,
   }
 }
 
+TransferSettings & MediaCurl::settings()
+{
+    return _settings;    
+}
+      
+
 void MediaCurl::setCookieFile( const Pathname &fileName )
 {
   _cookieFile = fileName;
@@ -490,13 +501,14 @@ void MediaCurl::setupEasy()
   SET_OPTION(CURLOPT_FAILONERROR, 1L);
   SET_OPTION(CURLOPT_NOSIGNAL, 1L);
 
-  // reset settings in case we are re-attaching
-  _settings.reset();
+  // create non persistant settings
+  // so that we don't add headers twice
+  TransferSettings vol_settings(_settings);  
 
   // add custom headers
-  _settings.addHeader(anonymousIdHeader());
-  _settings.addHeader(distributionFlavorHeader());
-  _settings.addHeader("Pragma:");
+  vol_settings.addHeader(anonymousIdHeader());
+  vol_settings.addHeader(distributionFlavorHeader());
+  vol_settings.addHeader("Pragma:");
 
   _settings.setTimeout(TRANSFER_TIMEOUT);
   _settings.setConnectTimeout(CONNECT_TIMEOUT);
@@ -637,11 +649,12 @@ void MediaCurl::setupEasy()
   SET_OPTION(CURLOPT_PROXY_TRANSFER_MODE, 1L );
 
   // append settings custom headers to curl
-  for ( TransferSettings::Headers::const_iterator it = _settings.headersBegin();
-        it != _settings.headersEnd();
+  for ( TransferSettings::Headers::const_iterator it = vol_settings.headersBegin();
+        it != vol_settings.headersEnd();
         ++it )
   {
-
+      MIL << "HEADER " << *it << std::endl;
+      
       _customHeaders = curl_slist_append(_customHeaders, it->c_str());
       if ( !_customHeaders )
           ZYPP_THROW(MediaCurlInitException(_url));
@@ -962,7 +975,7 @@ void MediaCurl::evaluateCurlCode( const Pathname &filename,
 bool MediaCurl::doGetDoesFileExist( const Pathname & filename ) const
 {
   DBG << filename.asString() << endl;
-
+  
   if(!_url.isValid())
     ZYPP_THROW(MediaBadUrlException(_url));
 
@@ -1005,7 +1018,8 @@ bool MediaCurl::doGetDoesFileExist( const Pathname & filename ) const
   // works for ftp as well, because retrieving only headers
   // ftp will return always OK code ?
   // See http://curl.haxx.se/docs/knownbugs.html #58
-  if (  _url.getScheme() == "http" ||  _url.getScheme() == "https" )
+  if (  (_url.getScheme() == "http" ||  _url.getScheme() == "https") &&
+        _settings.headRequestsAllowed() )
     ret = curl_easy_setopt( _curl, CURLOPT_NOBODY, 1L );
   else
     ret = curl_easy_setopt( _curl, CURLOPT_RANGE, "0-1" );

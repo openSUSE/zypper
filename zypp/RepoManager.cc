@@ -145,7 +145,7 @@ namespace zypp
     repoPackagesCachePath = Pathname::assertprefix( root_r, ZConfig::instance().repoPackagesPath() );
     knownReposPath        = Pathname::assertprefix( root_r, ZConfig::instance().knownReposPath() );
     knownServicesPath     = Pathname::assertprefix( root_r, ZConfig::instance().knownServicesPath() );
-    servicePluginsPath     = Pathname::assertprefix( root_r, ZConfig::instance().servicePluginsPath() );
+    pluginsPath           = Pathname::assertprefix( root_r, ZConfig::instance().pluginsPath() );
     probe                 = ZConfig::instance().repo_add_probe();
 
     rootDir = root_r;
@@ -160,7 +160,7 @@ namespace zypp
     ret.repoPackagesCachePath = root_r/"packages";
     ret.knownReposPath        = root_r/"repos.d";
     ret.knownServicesPath     = root_r/"services.d";
-    ret.servicePluginsPath     = root_r/"plugin-services";
+    ret.pluginsPath     = root_r/"plugins";
     ret.rootDir = root_r;
     return ret;
   }
@@ -544,7 +544,7 @@ namespace zypp
       }
     }
 
-    repo::PluginServices(options.servicePluginsPath, ServiceCollector(services));    
+    repo::PluginServices(options.pluginsPath/"services", ServiceCollector(services));    
   }
 
   void RepoManager::Impl::init_knownRepositories()

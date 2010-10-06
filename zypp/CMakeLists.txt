@@ -286,6 +286,7 @@ SET( zypp_media_SRCS
   media/MetaLinkParser.cc
   media/ZsyncParser.cc
   media/MediaBlockList.cc
+  media/UrlResolverPlugin.cc
 )
 
 SET( zypp_media_HEADERS
@@ -315,6 +316,7 @@ SET( zypp_media_HEADERS
   media/MetaLinkParser.h
   media/ZsyncParser.h
   media/MediaBlockList.h
+  media/UrlResolverPlugin.h
 )
 
 INSTALL(  FILES

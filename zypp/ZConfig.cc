@@ -828,12 +828,6 @@ namespace zypp
   Pathname ZConfig::pluginsPath() const
   { return _pimpl->pluginsPath.get(); }
 
-  Pathname ZConfig::mediaPluginsPath() const
-  { return pluginsPath() / "media"; }
-
-  Pathname ZConfig::servicePluginsPath() const
-  { return pluginsPath() / "services"; }
-
   ///////////////////////////////////////////////////////////////////
 
   std::ostream & ZConfig::about( std::ostream & str ) const

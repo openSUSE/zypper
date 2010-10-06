@@ -99,6 +99,8 @@ class MediaCurl : public MediaHandler
 
     virtual ~MediaCurl() { try { release(); } catch(...) {} }
 
+    TransferSettings & settings();
+
     static void setCookieFile( const Pathname & );
 
     class Callbacks
