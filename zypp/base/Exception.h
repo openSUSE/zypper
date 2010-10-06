@@ -12,11 +12,12 @@
 #ifndef ZYPP_BASE_EXCEPTION_H
 #define ZYPP_BASE_EXCEPTION_H
 
-#include <cerrno>
 #include <iosfwd>
+#include <string>
 #include <list>
 #include <stdexcept>
-#include <string.h>
+
+#include "zypp/base/Errno.h"
 
 ///////////////////////////////////////////////////////////////////
 namespace zypp

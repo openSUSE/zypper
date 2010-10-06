@@ -215,6 +215,7 @@ SET( zypp_base_HEADERS
   base/Collector.h
   base/SerialNumber.h
   base/Easy.h
+  base/Errno.h
   base/Random.h
   base/Algorithm.h
   base/Counter.h
