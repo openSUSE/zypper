@@ -1,4 +1,10 @@
 -------------------------------------------------------------------
+Wed Oct  6 15:39:59 UTC 2010 - dmacvicar@novell.com
+
+- implementation for url resolver plugins
+- version 8.5.0 (5)
+
+-------------------------------------------------------------------
 Mi 6. Okt 16:54:15 CEST 2010 - dheidler@suse.de
 
 - Use DownloadInHeaps as default, when there is nothing configured
