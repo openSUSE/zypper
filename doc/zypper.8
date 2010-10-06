@@ -502,6 +502,13 @@ mean removing all packages with unfulfilled requirements.
 The default behavior is 'force' in the interactive mode and 'no-force' in the
 non-interactive mode. If this option is specified, it takes the preference.
 .TP
+.I \-u, \-\-clean\-deps
+Automatically remove dependencies which become unneeded after removal
+of requested packages.
+.TP
+.I \-U, \-\-no\-clean\-deps
+No automatic removal of unneeded dependencies.
+.TP
 .I \-D, \-\-dry\-run
 Test the removal of packages, do not actually remove anything. This option will
 add the \-\-test option to the rpm commands run by the remove command.
