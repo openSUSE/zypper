@@ -151,7 +151,7 @@ void SolverRequester::install(const PackageSpec & pkg)
       {
         Selectable::Ptr s(asSelectable()(*sit));
         if (s->kind() == ResKind::patch)
-          installPatch(pkg.parsed_cap, pkg.repo_alias, *sit);
+          installPatch(pkg, *sit);
         else
         {
           PoolItem instobj = get_installed_obj(s);
@@ -168,13 +168,13 @@ void SolverRequester::install(const PackageSpec & pkg)
 
             PoolItem best;
             if (userconstraints)
-              updateTo(pkg.parsed_cap, pkg.repo_alias, *sit);
+              updateTo(pkg, *sit);
             else if ((best = s->updateCandidateObj()))
-              updateTo(pkg.parsed_cap, pkg.repo_alias, best);
+              updateTo(pkg, best);
             else if (changes_vendor)
-              updateTo(pkg.parsed_cap, pkg.repo_alias, instobj);
+              updateTo(pkg, instobj);
             else
-              updateTo(pkg.parsed_cap, pkg.repo_alias, *sit);
+              updateTo(pkg, *sit);
           }
           else if (_command == ZypperCommand::INSTALL)
           {
@@ -182,19 +182,19 @@ void SolverRequester::install(const PackageSpec & pkg)
             MIL << "installing " << *sit << endl;
           }
           else
-            addFeedback(Feedback::NOT_INSTALLED, pkg.parsed_cap, pkg.repo_alias);
+            addFeedback(Feedback::NOT_INSTALLED, pkg);
         }
       }
       return;
     }
     else if (_opts.force_by_name || pkg.modified)
     {
-      addFeedback(Feedback::NOT_FOUND_NAME, pkg.parsed_cap, pkg.repo_alias);
+      addFeedback(Feedback::NOT_FOUND_NAME, pkg);
       WAR << pkg << " not found" << endl;
       return;
     }
 
-    addFeedback(Feedback::NOT_FOUND_NAME_TRYING_CAPS, pkg.parsed_cap, pkg.repo_alias);
+    addFeedback(Feedback::NOT_FOUND_NAME_TRYING_CAPS, pkg);
   }
 
   // try by capability
@@ -203,7 +203,7 @@ void SolverRequester::install(const PackageSpec & pkg)
   sat::WhatProvides q(pkg.parsed_cap);
   if (q.empty())
   {
-    addFeedback(Feedback::NOT_FOUND_CAP, pkg.parsed_cap, pkg.repo_alias);
+    addFeedback(Feedback::NOT_FOUND_CAP, pkg);
     WAR << pkg << " not found" << endl;
     return;
   }
@@ -214,14 +214,14 @@ void SolverRequester::install(const PackageSpec & pkg)
   for_(it, providers.begin(), providers.end())
   {
     if (_command == ZypperCommand::INSTALL)
-      addFeedback(Feedback::ALREADY_INSTALLED, pkg.parsed_cap, pkg.repo_alias, *it, *it);
+      addFeedback(Feedback::ALREADY_INSTALLED, pkg, *it, *it);
     MIL << "provider '" << *it << "' of '" << pkg.parsed_cap << "' installed" << endl;
   }
 
   if (providers.empty())
   {
     DBG << "adding requirement " << pkg.parsed_cap << endl;
-    addRequirement(pkg.parsed_cap);
+    addRequirement(pkg);
   }
 }
 
@@ -258,7 +258,7 @@ void SolverRequester::remove(const PackageSpec & pkg)
         return;
       else
       {
-        addFeedback(Feedback::NOT_INSTALLED, pkg.parsed_cap);
+        addFeedback(Feedback::NOT_INSTALLED, pkg);
         MIL << "'" << pkg.parsed_cap << "' is not installed" << endl;
         if (_opts.force_by_name)
           return;
@@ -267,7 +267,7 @@ void SolverRequester::remove(const PackageSpec & pkg)
     }
     else if (_opts.force_by_name || pkg.modified)
     {
-      addFeedback(Feedback::NOT_FOUND_NAME, pkg.parsed_cap);
+      addFeedback(Feedback::NOT_FOUND_NAME, pkg);
       WAR << pkg << "' not found" << endl;
       return;
     }
@@ -275,13 +275,13 @@ void SolverRequester::remove(const PackageSpec & pkg)
 
   // try by capability
 
-  addFeedback(Feedback::NOT_FOUND_NAME_TRYING_CAPS, pkg.parsed_cap);
+  addFeedback(Feedback::NOT_FOUND_NAME_TRYING_CAPS, pkg);
 
   // is there a provider for the requested capability?
   sat::WhatProvides q(pkg.parsed_cap);
   if (q.empty())
   {
-    addFeedback(Feedback::NOT_FOUND_CAP, pkg.parsed_cap);
+    addFeedback(Feedback::NOT_FOUND_CAP, pkg);
     WAR << pkg << " not found" << endl;
     return;
   }
@@ -292,13 +292,13 @@ void SolverRequester::remove(const PackageSpec & pkg)
   // not installed, nothing to do
   if (providers.empty())
   {
-    addFeedback(Feedback::NO_INSTALLED_PROVIDER, pkg.parsed_cap);
+    addFeedback(Feedback::NO_INSTALLED_PROVIDER, pkg);
     MIL << "no provider of " << pkg.parsed_cap << "is installed" << endl;
   }
   else
   {
     MIL << "adding conflict " << pkg.parsed_cap << endl;
-    addConflict(pkg.parsed_cap);
+    addConflict(pkg);
   }
 }
 
@@ -342,7 +342,10 @@ void SolverRequester::updatePatches()
     for_(it, zypp::getZYpp()->pool().proxy().byKindBegin(ResKind::patch),
              zypp::getZYpp()->pool().proxy().byKindEnd  (ResKind::patch))
     {
-      if (installPatch(Capability((*it)->name()), "", (*it)->candidateObj(), ignore_pkgmgmt))
+      PackageSpec patch;
+      patch.orig_str = (*it)->name();
+      patch.parsed_cap = Capability((*it)->name());
+      if (installPatch(patch, (*it)->candidateObj(), ignore_pkgmgmt))
         any_marked = true;
     }
 
@@ -354,12 +357,12 @@ void SolverRequester::updatePatches()
 // ----------------------------------------------------------------------------
 
 bool SolverRequester::installPatch(
-    const Capability & cap,
-    const string & repoalias,
+    const PackageSpec & patchspec,
     const PoolItem & selected,
     bool ignore_pkgmgmt)
 {
   Patch::constPtr patch = asKind<Patch>(selected);
+
   if (selected.status().isBroken()) // bnc #506860
   {
     DBG << "Needed candidate patch " << patch
@@ -372,7 +375,7 @@ bool SolverRequester::installPatch(
       if (_opts.skip_interactive
           && (patch->interactive() || !patch->licenseToConfirm().empty()))
       {
-        addFeedback(Feedback::PATCH_INTERACTIVE_SKIPPED, cap, "", selected);
+        addFeedback(Feedback::PATCH_INTERACTIVE_SKIPPED, patchspec, selected);
         return false;
       }
       else
@@ -389,14 +392,14 @@ bool SolverRequester::installPatch(
     if (_command == ZypperCommand::INSTALL || _command == ZypperCommand::UPDATE)
     {
       DBG << "candidate patch " << patch << " is already satisfied" << endl;
-      addFeedback(Feedback::ALREADY_INSTALLED, cap, "", selected, selected);
+      addFeedback(Feedback::ALREADY_INSTALLED, patchspec, selected, selected);
     }
   }
   else
   {
     if (_command == ZypperCommand::INSTALL || _command == ZypperCommand::UPDATE)
     {
-      addFeedback(Feedback::PATCH_NOT_NEEDED, cap, "", selected);
+      addFeedback(Feedback::PATCH_NOT_NEEDED, patchspec, selected);
       DBG << "candidate patch " << patch << " is irrelevant" << endl;
     }
   }
@@ -407,7 +410,7 @@ bool SolverRequester::installPatch(
 // ----------------------------------------------------------------------------
 
 void SolverRequester::updateTo(
-      const Capability & cap, const string & repoalias, const PoolItem & selected)
+    const PackageSpec & pkg, const PoolItem & selected)
 {
   if (!selected)
   {
@@ -446,7 +449,10 @@ void SolverRequester::updateTo(
     {
       // require version greater than than the one installed
       Capability c(s->name(), Rel::GT, installed->edition(), s->kind());
-      addRequirement(c);
+      PackageSpec pkg;
+      pkg.orig_str = s->name();
+      pkg.parsed_cap = c;
+      addRequirement(pkg);
       MIL << *s << " update: adding requirement " << c << endl;
     }
     else if (selected->edition() > installed->edition())
@@ -477,10 +483,10 @@ void SolverRequester::updateTo(
     if (_command == ZypperCommand::INSTALL)
     {
       addFeedback(
-          Feedback::ALREADY_INSTALLED, cap, repoalias, selected, installed);
-      MIL << "'" << cap << "'";
-      if (!repoalias.empty())
-        MIL << " from '" << repoalias << "'";
+          Feedback::ALREADY_INSTALLED, pkg, selected, installed);
+      MIL << "'" << pkg.parsed_cap << "'";
+      if (!pkg.repo_alias.empty())
+        MIL << " from '" << pkg.repo_alias << "'";
       MIL << " already installed." << endl;
     }
     // TODO other kinds
@@ -489,18 +495,18 @@ void SolverRequester::updateTo(
     // !availableEmpty() <=> theone && highest
     if (s->availableEmpty())
     {
-      addFeedback(Feedback::NO_UPD_CANDIDATE, cap, repoalias, PoolItem(), installed);
+      addFeedback(Feedback::NO_UPD_CANDIDATE, pkg, PoolItem(), installed);
       DBG << "no available objects in repos, skipping update of " << s->name() << endl;
       return;
     }
 
     // the highest version is already there
     if (identical(installed, highest) || highest->edition() < installed->edition())
-      addFeedback(Feedback::NO_UPD_CANDIDATE, cap, repoalias, selected, installed);
+      addFeedback(Feedback::NO_UPD_CANDIDATE, pkg, selected, installed);
   }
   else if (installed->edition() > selected->edition())
   {
-    addFeedback(Feedback::SELECTED_IS_OLDER, cap, repoalias, selected, installed);
+    addFeedback(Feedback::SELECTED_IS_OLDER, pkg, selected, installed);
     MIL << "Selected is older than the installed."
         " Will not downgrade unless --force is used" << endl;
   }
@@ -514,25 +520,25 @@ void SolverRequester::updateTo(
   {
     // whether user requested specific repo/version/arch
     bool userconstraints =
-        cap.detail().isVersioned() || cap.detail().hasArch()
-        || !_opts.from_repos.empty() || !repoalias.empty();
+        pkg.parsed_cap.detail().isVersioned() || pkg.parsed_cap.detail().hasArch()
+        || !_opts.from_repos.empty() || !pkg.repo_alias.empty();
     if (userconstraints)
     {
-      addFeedback(Feedback::UPD_CANDIDATE_USER_RESTRICTED, cap, repoalias, selected, installed);
+      addFeedback(Feedback::UPD_CANDIDATE_USER_RESTRICTED, pkg, selected, installed);
       DBG << "Newer object exists, but has different repo/arch/version: " << highest << endl;
     }
 
     // update candidate locked
     if (s->status() == ui::S_Protected || highest.status().isLocked())
     {
-      addFeedback(Feedback::UPD_CANDIDATE_IS_LOCKED, cap, repoalias, selected, installed);
+      addFeedback(Feedback::UPD_CANDIDATE_IS_LOCKED, pkg, selected, installed);
       DBG << "Newer object exists, but is locked: " << highest << endl;
     }
 
     // update candidate has different vendor
     if (highest->vendor() != installed->vendor())
     {
-      addFeedback(Feedback::UPD_CANDIDATE_CHANGES_VENDOR, cap, repoalias, selected, installed);
+      addFeedback(Feedback::UPD_CANDIDATE_CHANGES_VENDOR, pkg, selected, installed);
       DBG << "Newer object with different vendor exists: " << highest
           << " (" << highest->vendor() << ")"
           << ". Installed vendor: " << installed->vendor() << endl;
@@ -541,7 +547,7 @@ void SolverRequester::updateTo(
     // update candidate is from low-priority (higher priority number) repo
     if (highest->repoInfo().priority() > selected->repoInfo().priority())
     {
-      addFeedback(Feedback::UPD_CANDIDATE_HAS_LOWER_PRIO, cap, repoalias, selected, installed);
+      addFeedback(Feedback::UPD_CANDIDATE_HAS_LOWER_PRIO, pkg, selected, installed);
       DBG << "Newer object exists in lower-priority repo: " << highest << endl;
     }
   } // !identical(selected, highest) && highest->edition() > installed->edition()
@@ -554,12 +560,12 @@ void SolverRequester::setToInstall(const PoolItem & pi)
   if (_opts.force)
   {
     pi.status().setToBeInstalled(ResStatus::USER);
-    addFeedback(Feedback::FORCED_INSTALL, Capability(), "", pi);
+    addFeedback(Feedback::FORCED_INSTALL, PackageSpec(), pi);
   }
   else
   {
     asSelectable()(pi)->setOnSystem(pi, ResStatus::USER);
-    addFeedback(Feedback::SET_TO_INSTALL, Capability(), "", pi);
+    addFeedback(Feedback::SET_TO_INSTALL, PackageSpec(), pi);
   }
   _toinst.insert(pi);
 }
@@ -569,26 +575,26 @@ void SolverRequester::setToInstall(const PoolItem & pi)
 void SolverRequester::setToRemove(const zypp::PoolItem & pi)
 {
   pi.status().setToBeUninstalled(ResStatus::USER);
-  addFeedback(Feedback::SET_TO_REMOVE, Capability(), "", pi);
+  addFeedback(Feedback::SET_TO_REMOVE, PackageSpec(), pi);
   _toremove.insert(pi);
 }
 
 // ----------------------------------------------------------------------------
 
-void SolverRequester::addRequirement(const zypp::Capability & cap)
+void SolverRequester::addRequirement(const PackageSpec & pkg)
 {
-  zypp::getZYpp()->resolver()->addRequire(cap);
-  addFeedback(Feedback::ADDED_REQUIREMENT, cap);
-  _requires.insert(cap);
+  zypp::getZYpp()->resolver()->addRequire(pkg.parsed_cap);
+  addFeedback(Feedback::ADDED_REQUIREMENT, pkg);
+  _requires.insert(pkg.parsed_cap);
 }
 
 // ----------------------------------------------------------------------------
 
-void SolverRequester::addConflict(const zypp::Capability & cap)
+void SolverRequester::addConflict(const PackageSpec & pkg)
 {
-  zypp::getZYpp()->resolver()->addConflict(cap);
-  addFeedback(Feedback::ADDED_CONFLICT, cap);
-  _conflicts.insert(cap);
+  zypp::getZYpp()->resolver()->addConflict(pkg.parsed_cap);
+  addFeedback(Feedback::ADDED_CONFLICT, pkg);
+  _conflicts.insert(pkg.parsed_cap);
 }
 
 // ----------------------------------------------------------------------------

@@ -151,13 +151,11 @@ public:
 
     Feedback(
         const Id id,
-        const zypp::Capability & reqcap,
-        const std::string & reqrepo = std::string(),
+        const PackageSpec & reqpkg,
         const zypp::PoolItem & selected = zypp::PoolItem(),
         const zypp::PoolItem & installed = zypp::PoolItem())
       : _id(id)
-      , _reqcap(reqcap)
-      , _reqrepo(reqrepo)
+      , _reqpkg(reqpkg)
       , _objsel(selected)
       , _objinst(installed)
     {}
@@ -174,8 +172,8 @@ public:
   private:
     Id _id;
 
-    zypp::Capability _reqcap;
-    std::string _reqrepo;
+    /** Specification of requested package as devised from command line args. */
+    PackageSpec _reqpkg;
 
     /** The selected object */
     zypp::PoolItem _objsel;
@@ -270,34 +268,31 @@ private:
   void remove(const PackageSpec & pkg);
 
   /**
-   * Update to specified \a candidate and report if there's any better
+   * Update to specified \a selected and report if there's any better
    * candidate when restrictions like vendor change, repository priority,
    * requested repositories, arch, edition and similar are not applied.
-   * Use this method only if you have already chosen the candidate. The \a cap
-   * and \a repoalias only carry information about the original request so that
+   * Use this method only if you have already chosen the candidate. The \a pkg
+   * only carries information about the original request so that
    * proper feedback can be provided.
    *
-   * \param cap
-   * \param repoalias
-   * \param candidate
+   * \param pkg       Specification of required package
+   * \param selected  Corresponding selected pool item
    */
   void updateTo(
-      const zypp::Capability & cap,
-      const std::string & repoalias,
+      const PackageSpec & pkg,
       const zypp::PoolItem & selected);
 
   /**
    * Set the best version of the patch for installation.
    *
-   * \param cap            Capability describing the patch (can have version).
+   * \param pkg            Specification of required patch
    * \param ignore_pkgmgmt Whether to ignore the "affects package management"
    *                       flag. If false and the patch is flagged as such, this
    *                       method will do nothing and return false.
    * \return True if the patch was set for installation, false otherwise.
    */
   bool installPatch(
-      const zypp::Capability & cap,
-      const std::string & repoalias,
+      const PackageSpec & pkg,
       const zypp::PoolItem & selected,
       bool ignore_pkgmgmt = true);
 
@@ -306,17 +301,16 @@ private:
 
   void setToInstall(const zypp::PoolItem & pi);
   void setToRemove(const zypp::PoolItem & pi);
-  void addRequirement(const zypp::Capability & cap);
-  void addConflict(const zypp::Capability & cap);
+  void addRequirement(const PackageSpec & pkg);
+  void addConflict(const PackageSpec & pkg);
 
   void addFeedback(
       const Feedback::Id id,
-      const zypp::Capability & reqcap,
-      const std::string & reqrepo = std::string(),
+      const PackageSpec & reqpkg,
       const zypp::PoolItem & selected = zypp::PoolItem(),
       const zypp::PoolItem & installed = zypp::PoolItem())
   {
-    _feedback.push_back(Feedback(id, reqcap, reqrepo, selected, installed));
+    _feedback.push_back(Feedback(id, reqpkg, selected, installed));
   }
 
 private:

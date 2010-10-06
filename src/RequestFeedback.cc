@@ -28,71 +28,71 @@ using namespace zypp::ui;
 string SolverRequester::Feedback::asUserString(
     const SolverRequester::Options & opts) const
 {
-  sat::Solvable::SplitIdent splid(_reqcap.detail().name());
+  sat::Solvable::SplitIdent splid(_reqpkg.parsed_cap.detail().name());
   switch (_id)
   {
   case NOT_FOUND_NAME_TRYING_CAPS:
     return str::form(
         _("'%s' not found in package names. Trying capabilities."),
-        _reqcap.asString().c_str());
+        _reqpkg.orig_str.c_str());
 
   case NOT_FOUND_NAME:
-    if (_reqrepo.empty() && opts.from_repos.empty())
+    if (_reqpkg.repo_alias.empty() && opts.from_repos.empty())
     {
       if (splid.kind() == ResKind::package)
-        return str::form(_("Package '%s' not found."), splid.name().c_str());
+        return str::form(_("Package '%s' not found."), _reqpkg.orig_str.c_str());
       else if (splid.kind() == ResKind::patch)
-        return str::form(_("Patch '%s' not found."), splid.name().c_str());
+        return str::form(_("Patch '%s' not found."), _reqpkg.orig_str.c_str());
       else if (splid.kind() == ResKind::product)
-        return str::form(_("Product '%s' not found."), splid.name().c_str());
+        return str::form(_("Product '%s' not found."), _reqpkg.orig_str.c_str());
       else if (splid.kind() == ResKind::pattern)
-        return str::form(_("Pattern '%s' not found."), splid.name().c_str());
+        return str::form(_("Pattern '%s' not found."), _reqpkg.orig_str.c_str());
       else if (splid.kind() == ResKind::srcpackage)
-        return str::form(_("Source package '%s' not found."), splid.name().c_str());
+        return str::form(_("Source package '%s' not found."), _reqpkg.orig_str.c_str());
       else // just in case
-        return str::form(_("Object '%s' not found."), splid.name().c_str());
+        return str::form(_("Object '%s' not found."), _reqpkg.orig_str.c_str());
     }
     else
     {
       if (splid.kind() == ResKind::package)
-        return str::form(_("Package '%s' not found in specified repositories."), splid.name().c_str());
+        return str::form(_("Package '%s' not found in specified repositories."), _reqpkg.orig_str.c_str());
       else if (splid.kind() == ResKind::patch)
-        return str::form(_("Patch '%s' not found in specified repositories."), splid.name().c_str());
+        return str::form(_("Patch '%s' not found in specified repositories."), _reqpkg.orig_str.c_str());
       else if (splid.kind() == ResKind::product)
-        return str::form(_("Product '%s' not found in specified repositories."), splid.name().c_str());
+        return str::form(_("Product '%s' not found in specified repositories."), _reqpkg.orig_str.c_str());
       else if (splid.kind() == ResKind::pattern)
-        return str::form(_("Pattern '%s' not found in specified repositories."), splid.name().c_str());
+        return str::form(_("Pattern '%s' not found in specified repositories."), _reqpkg.orig_str.c_str());
       else if (splid.kind() == ResKind::srcpackage)
-        return str::form(_("Source package '%s' not found in specified repositories."), splid.name().c_str());
+        return str::form(_("Source package '%s' not found in specified repositories."), _reqpkg.orig_str.c_str());
       else // just in case
-        return str::form(_("Object '%s' not found in specified repositories."), splid.name().c_str());
+        return str::form(_("Object '%s' not found in specified repositories."), _reqpkg.orig_str.c_str());
     }
   case NOT_FOUND_CAP:
     // translators: meaning a package %s or provider of capability %s
-    return str::form(_("No provider of '%s' found."), _reqcap.asString().c_str());
+    return str::form(_("No provider of '%s' found."), _reqpkg.parsed_cap.asString().c_str());
 
   case NOT_INSTALLED:
-    if (splid.name().asString().find_first_of("?*") != string::npos) // wildcards used
+    if (_reqpkg.orig_str.find_first_of("?*") != string::npos) // wildcards used
       return str::form(
-        _("No package matching '%s' are installed."), _reqcap.asString().c_str());
+        _("No package matching '%s' are installed."), _reqpkg.orig_str.c_str());
     else
       return str::form(
-        _("Package '%s' is not installed."), _reqcap.asString().c_str());
+        _("Package '%s' is not installed."), _reqpkg.orig_str.c_str());
 
   case NO_INSTALLED_PROVIDER:
     // translators: meaning provider of capability %s
-    return str::form(_("No provider of '%s' is installed."), _reqcap.asString().c_str());
+    return str::form(_("No provider of '%s' is installed."), _reqpkg.parsed_cap.asString().c_str());
 
   case ALREADY_INSTALLED:
     // TODO Package/Pattern/Patch/Product
     if (_objinst->name() == splid.name())
       return str::form(
-          _("'%s' is already installed."), _reqcap.asString().c_str());
+          _("'%s' is already installed."), _reqpkg.parsed_cap.asString().c_str());
     else
       return str::form(
           // translators: %s are package names
           _("'%s' providing '%s' is already installed."),
-          _objinst->name().c_str(), _reqcap.asString().c_str());
+          _objinst->name().c_str(), _reqpkg.parsed_cap.asString().c_str());
 
   case NO_UPD_CANDIDATE:
   {
@@ -206,10 +206,10 @@ string SolverRequester::Feedback::asUserString(
         resolvable_user_string(*_objsel.resolvable()).c_str());
 
   case ADDED_REQUIREMENT:
-    return str::form(_("Adding requirement: '%s'."), _reqcap.asString().c_str());
+    return str::form(_("Adding requirement: '%s'."), _reqpkg.parsed_cap.asString().c_str());
 
   case ADDED_CONFLICT:
-    return str::form(_("Adding conflict: '%s'."), _reqcap.asString().c_str());
+    return str::form(_("Adding conflict: '%s'."), _reqpkg.parsed_cap.asString().c_str());
 
   default:
     INT << "unknown feedback id? " << _id << endl;
