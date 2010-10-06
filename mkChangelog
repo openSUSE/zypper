@@ -19,6 +19,8 @@ test -f "$CHANGESFILE" || errexit "No changes file '$CHANGESFILE'"
 VERSIONFILE="VERSION.cmake"
 test -f "$VERSIONFILE" || errexit "No version file '$VERSIONFILE'"
 
+LANG="en"
+
 ## Version.cmake tags in getversion() are still zypp specific.
 
 function usage() {
