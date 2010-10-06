@@ -1,4 +1,10 @@
 -------------------------------------------------------------------
+Wed Oct  6 21:43:23 CEST 2010 - jkupec@suse.cz
+
+- Use original user package string when reporting problems
+  (bnc #642051)
+
+-------------------------------------------------------------------
 Mon Sep 20 19:49:48 CEST 2010 - jkupec@suse.cz
 
 - Fixed unrecognized patchname-with-version (bnc #640399)
