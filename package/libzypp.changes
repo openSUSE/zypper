@@ -1,4 +1,9 @@
 -------------------------------------------------------------------
+Thu Oct  7 09:02:26 CEST 2010 - jkupec@suse.cz
+
+- Don't use aria2c for FTP (bnc #641328)
+
+-------------------------------------------------------------------
 Wed Oct  6 15:39:59 UTC 2010 - dmacvicar@novell.com
 
 - implementation for url resolver plugins
