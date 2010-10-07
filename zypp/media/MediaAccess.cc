@@ -159,8 +159,14 @@ MediaAccess::open (const Url& o_url, const Pathname & preferred_attach_point)
         }
         else if ( !use_aria && ariaenv && ( strcmp(ariaenv, "1" ) == 0 ) )
 	{
-            WAR << "aria2c manually enabled." << endl;
-            use_aria = true;
+            // no aria for ftp - no advantage in that over curl
+            if ( url.getScheme() == "ftp" )
+                WAR << "no aria2c for FTP, despite ZYPP_ARIA2C=1" << endl;
+            else
+            {
+                WAR << "aria2c manually enabled." << endl;
+                use_aria = true;
+            }
 	}
 
         // disable if it does not exist
