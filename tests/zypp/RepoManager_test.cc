@@ -106,6 +106,37 @@ BOOST_AUTO_TEST_CASE(pluginservices_test)
   }
 }
 
+// regression test for services bug
+// if you modify a service that you just
+// added and saved, the service was not associated with its
+// file internally
+BOOST_AUTO_TEST_CASE(service_file_link_bug)
+{
+  TmpDir tmpCachePath;
+  RepoManagerOptions opts( RepoManagerOptions::makeTestSetup( tmpCachePath ) ) ;
+
+  filesystem::mkdir( opts.knownReposPath );
+  filesystem::mkdir( opts.knownServicesPath );
+  RepoManager manager(opts);
+
+  //test service
+  Url urlS;
+  urlS.setPathName(DATADIR.asString());
+  urlS.setScheme("dir");
+  ServiceInfo service("test", urlS);
+  service.setEnabled(true);
+
+  manager.addService(service);
+  // now internally, service is associated with the file
+  // where it was saved
+
+  // the following line reset the file association with the bug
+  manager.modifyService(service.alias(), service);
+  // and the following modifyService fails because there is no
+  // association
+  manager.modifyService(service.alias(), service);
+}
+
 BOOST_AUTO_TEST_CASE(repomanager_test)
 {
   TmpDir tmpCachePath;

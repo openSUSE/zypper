@@ -2060,7 +2060,7 @@ namespace zypp
 
     ////////////////////////////////////////////////////////////////////////////
     // save service if modified:
-    if ( serviceModified && service.type() != ServiceType::PLUGIN )
+    if ( serviceModified )
     {
       // write out modified service file.
       modifyService( service.alias(), service );
@@ -2069,10 +2069,20 @@ namespace zypp
 
   ////////////////////////////////////////////////////////////////////////////
 
-  void RepoManager::modifyService(const std::string & oldAlias, const ServiceInfo & service)
+  void RepoManager::modifyService(const std::string & oldAlias, const ServiceInfo & newService)
   {
     MIL << "Going to modify service " << oldAlias << endl;
 
+    // we need a writable copy to link it to the file where
+    // it is saved if we modify it
+    ServiceInfo service(newService);    
+
+    if ( service.type() == ServiceType::PLUGIN )
+    {
+        MIL << "Not modifying plugin service '" << oldAlias << "'" << endl;
+        return;
+    }
+    
     const ServiceInfo & oldService = getService(oldAlias);
 
     Pathname location = oldService.filepath();
@@ -2094,9 +2104,10 @@ namespace zypp
     }
     service.dumpAsIniOn(file);
     file.close();
+    service.setFilepath(location);    
 
     _pimpl->services.erase(oldAlias);
-    _pimpl->services.insert(service);
+    _pimpl->services.insert(service);    
 
     // changed properties affecting also repositories
     if( oldAlias != service.alias()                    // changed alias
