@@ -1,4 +1,10 @@
 -------------------------------------------------------------------
+Fri Oct  8 08:43:02 UTC 2010 - dmacvicar@novell.com
+
+- fix services not being linked to their file after being
+  saved
+
+-------------------------------------------------------------------
 Thu Oct  7 09:02:26 CEST 2010 - jkupec@suse.cz
 
 - Don't use aria2c for FTP (bnc #641328)
