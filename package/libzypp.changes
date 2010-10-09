@@ -1,4 +1,9 @@
 -------------------------------------------------------------------
+Sun Oct 10 01:13:40 CEST 2010 - ma@suse.de
+
+- Update zypp-po.tar.bz2
+
+-------------------------------------------------------------------
 Fri Oct  8 08:43:02 UTC 2010 - dmacvicar@novell.com
 
 - fix services not being linked to their file after being
