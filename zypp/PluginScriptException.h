@@ -21,10 +21,6 @@
 namespace zypp
 { /////////////////////////////////////////////////////////////////
 
-  ///////////////////////////////////////////////////////////////////
-  //
-  //	CLASS NAME : PluginScriptException
-  //
   /** Base class for \ref PluginScript \ref Exception. */
   class PluginScriptException : public Exception
   {
@@ -34,7 +30,33 @@ namespace zypp
       PluginScriptException( const std::string & msg_r, const std::string & hist_r );
       virtual ~PluginScriptException() throw();
   };
-  ///////////////////////////////////////////////////////////////////
+
+  /** Convenience macro to declare more specific PluginScriptExceptions. */
+#define declException( EXCP, BASE )								\
+  class EXCP : public BASE {									\
+    public:											\
+      EXCP() : BASE( #EXCP ) {}									\
+      EXCP( const std::string & msg_r ) : BASE( msg_r ) {}					\
+      EXCP( const std::string & msg_r, const std::string & hist_r ) : BASE( msg_r, hist_r ) {}	\
+      virtual ~EXCP() throw() {}								\
+  }
+
+  /** Script connection not open. */
+  declException( PluginScriptNotConnected, PluginScriptException );
+
+  /** Script died unexpectedly. */
+  declException( PluginScriptDiedUnexpectedly, PluginScriptException );
+
+
+  /** Communication timeout. */
+  declException( PluginScriptTimeout, PluginScriptException );
+
+  /** Timeout while sending data. */
+  declException( PluginScriptSendTimeout, PluginScriptTimeout );
+
+  /** Timeout while receiving data. */
+  declException( PluginScriptReceiveTimeout, PluginScriptTimeout );
+
 
   /////////////////////////////////////////////////////////////////
 } // namespace zypp

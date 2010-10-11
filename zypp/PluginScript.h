@@ -26,12 +26,8 @@
 namespace zypp
 { /////////////////////////////////////////////////////////////////
 
-  ///////////////////////////////////////////////////////////////////
-  //
-  //	CLASS NAME : PluginScript
-  //
   /**
-   * \brief Interface to pluigin scripts using a \c Stomp inspired communication protocol
+   * \brief Interface to pluigin scripts using a \c Stomp inspired communication protocol.
    *
    * \note \ref PluginScript is copyable and assignable, but the connection is shared
    * among multiple copies. It gets automatically closed if the last copy goes out of
@@ -64,71 +60,85 @@ namespace zypp
     friend std::ostream & operator<<( std::ostream & str, const PluginScript & obj );
 
     public:
-      /** Commandline arguments passed to a script on \ref open */
+      /** Commandline arguments passed to a script on \ref open. */
       typedef std::vector<std::string> Arguments;
 
-      /** \c pid_t(-1) constant indicating no connection */
+      /** \c pid_t(-1) constant indicating no connection. */
       static const pid_t NotConnected;
 
     public:
-      /** Default ctor */
+      /** Default ctor. */
       PluginScript();
 
-      /** Ctor taking script path and no arguments */
+      /** Ctor taking script path and no arguments. */
       PluginScript( const Pathname & script_r );
 
-      /** Ctor taking script path and script arguments */
+      /** Ctor taking script path and script arguments. */
       PluginScript( const Pathname & script_r, const Arguments & args_r );
 
     public:
-      /** Return the script path if set */
+      /** Return the script path if set. */
       const Pathname & script() const;
 
-      /** Return the script arguments if set */
+      /** Return the script arguments if set. */
       const Arguments & args() const;
 
-      /** Whether we are connected to a script */
+      /** Whether we are connected to a script. */
       bool isOpen() const;
 
-      /** Return a connected scripts pid or \ref NotConnected */
+      /** Return a connected scripts pid or \ref NotConnected. */
       pid_t getPid() const;
 
+      /** Remembers a scripts return value after \ref close until next \ref open. */
+      int lastReturn() const;
+
+      /** Remembers a scripts execError string after \ref close until next \ref open.
+       * \see \ref ExternalProgram::execError.
+       */
+      const std::string & lastExecError() const;
+
     public:
-      /** Setup connection and execute script
+      /** Setup connection and execute script.
        * \throw PluginScriptException if already connected to a script
        * \throw PluginScriptException if script does not exist or is not executable
        * \throw PluginScriptException on error
        */
       void open();
 
-      /** \overload taking script path and no arguments */
+      /** \overload taking script path and no arguments. */
       void open( const Pathname & script_r );
 
-      /** \overload taking script path and script arguments */
+      /** \overload taking script path and script arguments. */
       void open( const Pathname & script_r, const Arguments & args_r );
 
       /** Close any open connection. */
-      void close();
+      int close();
 
     public:
-      /** Send a \ref PluginFrame
+      /** Send a \ref PluginFrame.
+       * \throw PluginScriptNotConnected
+       * \throw PluginScriptSendTimeout
+       * \throw PluginScriptDiedUnexpectedly (does not \ref close)
        * \throw PluginScriptException on error
+       *
        */
       void send( const PluginFrame & frame_r ) const;
 
-      /** Receive a \ref PluginFrame
+      /** Receive a \ref PluginFrame.
+       * \throw PluginScriptNotConnected
+       * \throw PluginScriptReceiveTimeout
+       * \throw PluginScriptDiedUnexpectedly (does not \ref close)
        * \throw PluginScriptException on error
        */
       PluginFrame receive() const;
 
     public:
-      /** Implementation  */
+      /** Implementation. */
       class Impl;
     private:
-      /** Pointer to implementation */
+      /** Pointer to implementation. */
       RW_pointer<Impl> _pimpl;
   };
-  ///////////////////////////////////////////////////////////////////
 
   /** \relates PluginScript Stream output */
   std::ostream & operator<<( std::ostream & str, const PluginScript & obj );

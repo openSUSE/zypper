@@ -34,7 +34,7 @@ namespace zypp
   { addHistory( hist_r ); }
 
   PluginScriptException::~PluginScriptException() throw()
-  {};
+  {}
 
   /////////////////////////////////////////////////////////////////
 } // namespace zypp

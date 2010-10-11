@@ -158,7 +158,7 @@ namespace zypp
 
   PluginFrame::Impl::Impl( std::istream & stream_r )
   {
-    DBG << "Parse from " << stream_r << endl;
+    //DBG << "Parse from " << stream_r << endl;
     if ( ! stream_r )
       ZYPP_THROW( PluginFrameException( "Bad Stream" ) );
 
@@ -198,7 +198,7 @@ namespace zypp
 
   std::ostream & PluginFrame::Impl::writeTo( std::ostream & stream_r ) const
   {
-    DBG << "Write " << *this << " to " << stream_r << endl;
+    //DBG << "Write " << *this << " to " << stream_r << endl;
     if ( ! stream_r )
       ZYPP_THROW( PluginFrameException( "Bad Stream" ) );
 
