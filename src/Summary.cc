@@ -273,6 +273,18 @@ void Summary::readPool(const zypp::ResPool & pool)
       ++it;
   }
 
+  // find multi-version packages, which actually have mult. versions installed
+  const set<string> & multies = ZConfig::instance().multiversionSpec();
+  for_(name, multies.begin(), multies.end())
+  {
+    ui::Selectable::Ptr s = pool.proxy().lookup(ResKind::package, *name);
+    bool got_multi = s && (
+        s->installedSize() > 1 ||
+        (s->installedSize() == 1 && s->toInstall()) );
+    if (got_multi)
+      multi_installed.insert(*name);
+  }
+
   m.stop();
 }
 
@@ -316,37 +328,29 @@ unsigned Summary::packagesToDowngrade() const
 
 void Summary::writeResolvableList(ostream & out, const ResPairSet & resolvables)
 {
-  // find multi-version packages
-  map<string, unsigned> dupes;
-  // no need to do this if SHOW_VERSION is on
-  if (!(_viewop & SHOW_VERSION))
-  {
-    for_(resit, resolvables.begin(), resolvables.end())
-      dupes[resit->second->name()]++;
-    // remove the single-versions from the map
-    for (map<string, unsigned>::iterator it = dupes.begin(); it != dupes.end(); /**/)
-    {
-      if (it->second == 1)
-        dupes.erase(it++); // postfix! Incrementing before erase
-      else
-        ++it;
-    }
-  }
-
   if ((_viewop & DETAILS) == 0)
   {
     ostringstream s;
     for (ResPairSet::const_iterator resit = resolvables.begin();
         resit != resolvables.end(); ++resit)
-        // name
+    {
+      // name
       s << (resit->second->kind() == ResKind::product ?
-              resit->second->summary() :
-              resit->second->name())
-        // version (if multiple versions are present)
-        << (dupes.find(resit->second->name()) != dupes.end() ?
-             string("-") + resit->second->edition().asString() :
-             string())
-        << " ";
+          resit->second->summary() :
+          resit->second->name());
+
+      // version (if multiple versions are present)
+      if (!(_viewop & SHOW_VERSION) && multi_installed.find(resit->second->name()) != multi_installed.end())
+      {
+        if (resit->first && resit->first->edition() != resit->second->edition())
+          s << "-" << resit->first->edition().asString()
+            << "->" << resit->second->edition().asString();
+        else
+          s << "-" << resit->second->edition().asString();
+      }
+
+      s << " ";
+    }
     mbs_write_wrapped(out, s.str(), 2, _wrap_width);
     out << endl;
     return;
@@ -359,14 +363,21 @@ void Summary::writeResolvableList(ostream & out, const ResPairSet & resolvables)
   {
     TableRow tr;
 
-    // name
-    tr << (resit->second->kind() == ResKind::product ?
+    string name = (resit->second->kind() == ResKind::product ?
         resit->second->summary() :
-        resit->second->name()) +
-      // version (if multiple versions are present)
-      (dupes.find(resit->second->name()) != dupes.end() && !(_viewop & SHOW_VERSION) ?
-        string("-") + resit->second->edition().asString() :
-        string());
+        resit->second->name());
+
+    // version (if multiple versions are present)
+    if (!(_viewop & SHOW_VERSION) && multi_installed.find(resit->second->name()) != multi_installed.end())
+    {
+      if (resit->first && resit->first->edition() != resit->second->edition())
+        name += string("-") + resit->first->edition().asString()
+             + "->" + resit->second->edition().asString();
+      else
+        name += string("-") + resit->second->edition().asString();
+    }
+
+    tr << name;
 
     if (_viewop & SHOW_VERSION)
     {

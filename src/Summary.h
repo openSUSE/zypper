@@ -14,6 +14,7 @@
 
 #include "zypp/base/PtrTypes.h"
 #include "zypp/ByteCount.h"
+#include "zypp/base/DefaultIntegral.h"
 #include "zypp/ResObject.h"
 #include "zypp/ResPool.h"
 
@@ -143,6 +144,10 @@ private:
   KindToResPairSet unsupported;
   /** objects from previous lists that need additional customer contract */
   KindToResPairSet support_needacc;
+
+  /** names of packages which have multiple versions (to-be-)installed */
+  std::set<std::string> multi_installed;
+
 
   /** \name For weak deps info.
    * @{
