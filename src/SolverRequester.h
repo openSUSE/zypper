@@ -15,6 +15,7 @@
 
 #include <string>
 
+#include "zypp/ZConfig.h"
 #include "zypp/PoolItem.h"
 
 #include "Command.h"
@@ -39,6 +40,7 @@ public:
       , force_by_name(false)
       , best_effort(false)
       , skip_interactive(false)
+      , allow_vendor_change(zypp::ZConfig::instance().solver_allowVendorChange())
     {}
 
     void setForceByName(bool value = true);
@@ -75,6 +77,9 @@ public:
      * Whether to skip installs/updates that need user interaction.
      */
     bool skip_interactive;
+
+    /** Whether to ignore vendor when selecting packages */
+    bool allow_vendor_change;
 
     /** Aliases of the repos from which the packages should be installed */
     std::list<std::string> from_repos;

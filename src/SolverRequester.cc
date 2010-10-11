@@ -173,7 +173,7 @@ void SolverRequester::install(const PackageSpec & pkg)
               updateTo(pkg, *sit);
             else if ((best = s->updateCandidateObj()))
               updateTo(pkg, best);
-            else if (changes_vendor)
+            else if (changes_vendor && !_opts.allow_vendor_change)
               updateTo(pkg, instobj);
             else
               updateTo(pkg, *sit);
@@ -538,7 +538,8 @@ void SolverRequester::updateTo(
     }
 
     // update candidate has different vendor
-    if (!VendorAttr::instance().equivalent(highest->vendor(), installed->vendor()))
+    if (!VendorAttr::instance().equivalent(highest->vendor(), installed->vendor()) &&
+        !_opts.allow_vendor_change)
     {
       addFeedback(Feedback::UPD_CANDIDATE_CHANGES_VENDOR, pkg, selected, installed);
       DBG << "Newer object with different vendor exists: " << highest
