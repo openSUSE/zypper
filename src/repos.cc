@@ -2967,10 +2967,14 @@ void load_repo_resolvables(Zypper & zypper)
        it !=  gData.repos.end(); ++it)
   {
     RepoInfo repo(*it);
-    MIL << "Loading " << repo.alias() << " resolvables." << endl;
 
-    if (! it->enabled())
+    if (it->enabled())
+      MIL << "Loading " << repo.alias() << " resolvables." << endl;
+    else
+    {
+      DBG << "Skipping disabled repo '" << repo.alias() << "'" << endl;
       continue;     // #217297
+    }
 
     try
     {
