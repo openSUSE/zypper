@@ -1,4 +1,10 @@
 -------------------------------------------------------------------
+Mon Oct 11 09:52:19 CEST 2010 - jkupec@suse.cz
+
+- In install summary, show version for packages which have multiple
+  versions installed (bnc #644820)
+
+-------------------------------------------------------------------
 Wed Oct  6 21:43:23 CEST 2010 - jkupec@suse.cz
 
 - Use original user package string when reporting problems
