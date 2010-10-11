@@ -1,4 +1,11 @@
 -------------------------------------------------------------------
+Mon Oct 11 17:06:17 CEST 2010 - ma@suse.de
+
+- Use timeouts in plugin script communication.
+- Fix ExternalProgram to correctly remember exit status.
+- version 8.6.0 (5)
+
+-------------------------------------------------------------------
 Sun Oct 10 01:13:40 CEST 2010 - ma@suse.de
 
 - Update zypp-po.tar.bz2
