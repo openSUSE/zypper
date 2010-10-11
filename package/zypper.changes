@@ -1,6 +1,8 @@
 -------------------------------------------------------------------
 Mon Oct 11 09:52:19 CEST 2010 - jkupec@suse.cz
 
+- Do not report changing to equivalent vendors as a vendor change
+  (bnc #605380)
 - In install summary, show version for packages which have multiple
   versions installed (bnc #644820)
 
