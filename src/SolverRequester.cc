@@ -163,8 +163,10 @@ void SolverRequester::install(const PackageSpec & pkg)
                 || pkg.parsed_cap.detail().hasArch()
                 || !_opts.from_repos.empty()
                 || !pkg.repo_alias.empty();
+
             // check vendor (since PoolItemBest does not do it)
-            bool changes_vendor = instobj->vendor() != (*sit)->vendor();
+            bool changes_vendor = ! VendorAttr::instance().equivalent(
+                instobj->vendor(), (*sit)->vendor());
 
             PoolItem best;
             if (userconstraints)
@@ -536,7 +538,7 @@ void SolverRequester::updateTo(
     }
 
     // update candidate has different vendor
-    if (highest->vendor() != installed->vendor())
+    if (!VendorAttr::instance().equivalent(highest->vendor(), installed->vendor()))
     {
       addFeedback(Feedback::UPD_CANDIDATE_CHANGES_VENDOR, pkg, selected, installed);
       DBG << "Newer object with different vendor exists: " << highest

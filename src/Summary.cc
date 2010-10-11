@@ -169,7 +169,7 @@ void Summary::readPool(const zypp::ResPool & pool)
             toupgrade[res->kind()].insert(rp);
             if (res->arch() != (*rmit)->arch())
               tochangearch[res->kind()].insert(rp);
-            if (res->vendor() != (*rmit)->vendor())
+            if (!VendorAttr::instance().equivalent(res->vendor(), (*rmit)->vendor()))
               tochangevendor[res->kind()].insert(rp);
           }
           // reinstall
@@ -179,7 +179,7 @@ void Summary::readPool(const zypp::ResPool & pool)
               tochangearch[res->kind()].insert(rp);
             else
               toreinstall[res->kind()].insert(rp);
-            if (res->vendor() != (*rmit)->vendor())
+            if (!VendorAttr::instance().equivalent(res->vendor(), (*rmit)->vendor()))
               tochangevendor[res->kind()].insert(rp);
           }
           // downgrade
@@ -188,7 +188,7 @@ void Summary::readPool(const zypp::ResPool & pool)
             todowngrade[res->kind()].insert(rp);
             if (res->arch() != (*rmit)->arch())
               tochangearch[res->kind()].insert(rp);
-            if (res->vendor() != (*rmit)->vendor())
+            if (!VendorAttr::instance().equivalent(res->vendor(), (*rmit)->vendor()))
               tochangevendor[res->kind()].insert(rp);
           }
 
@@ -405,9 +405,8 @@ void Summary::writeResolvableList(ostream & out, const ResPairSet & resolvables)
     }
     if (_viewop & SHOW_VENDOR)
     {
-      if (resit->first && resit->first->vendor() != resit->second->vendor())
-        tr << resit->first->vendor() + " -> " +
-              resit->second->vendor();
+      if (resit->first && ! VendorAttr::instance().equivalent(resit->first->vendor(), resit->second->vendor()))
+        tr << resit->first->vendor() + " -> " + resit->second->vendor();
       else
         tr << resit->second->vendor();
     }
