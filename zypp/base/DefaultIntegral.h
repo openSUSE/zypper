@@ -57,6 +57,9 @@ namespace zypp
       operator _Tp  () const { return get(); }
       //@}
 
+      /** Reset to the defined initial value. */
+      DefaultIntegral & reset()	{ _val = _Initial; return *this; }
+
       /** \name Arithmetic operations.
        * \c + \c - \c * \c / are provided via conversion to _Tp.
       */
