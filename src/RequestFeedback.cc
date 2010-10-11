@@ -164,6 +164,7 @@ string SolverRequester::Feedback::asUserString(
       Zypper::instance()->config().show_alias ?
           _objsel->repoInfo().alias().c_str() :
           _objsel->repoInfo().name().c_str());
+    msg << " ";
     msg << str::form(
         // translators: %s = "--force"
         _("Use '%s' to force installation of the package."), "--force");
