@@ -456,15 +456,12 @@ namespace zypp {
 
 	if (ret != -1)
 	{
-	  status = checkStatus( status );
+	 _exitStatus = checkStatus( status );
 	}
 	pid = -1;
-	return status;
       }
-      else
-      {
-	return _exitStatus;
-      }
+
+      return _exitStatus;
     }
 
 
@@ -483,7 +480,7 @@ namespace zypp {
     	    // if 'launch' is logged, completion should be logged,
     	    // even if successfull.
     	    DBG << "Pid " << pid << " successfully completed" << endl;
-            //_execError = _("Command successfully completed.");
+            _execError.clear(); // empty if running or successfully completed
     	}
       }
       else if (WIFSIGNALED (status))
