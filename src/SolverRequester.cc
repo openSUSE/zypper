@@ -380,6 +380,14 @@ bool SolverRequester::installPatch(
         addFeedback(Feedback::PATCH_INTERACTIVE_SKIPPED, patchspec, selected);
         return false;
       }
+      else if (selected.isUnwanted())
+      {
+        if (_command == ZypperCommand::INSTALL || _command == ZypperCommand::UPDATE)
+        {
+          DBG << "candidate patch " << patch << " is locked" << endl;
+          addFeedback(Feedback::PATCH_UNWANTED, patchspec, selected, selected);
+        }
+      }
       else
       {
         // TODO use _opts.force

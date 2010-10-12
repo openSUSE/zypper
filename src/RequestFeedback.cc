@@ -186,6 +186,15 @@ string SolverRequester::Feedback::asUserString(
     return str::form(_("Patch '%s' is not needed."), pname.str().c_str());
   }
 
+  case PATCH_UNWANTED:
+  {
+    ostringstream pname;
+    pname << _objsel->name() << "-" << _objsel->edition();
+    string cmd = "zypper rl patch:" + _objsel->name();
+    return str::form(_("Patch '%s' is locked. Use '%s' to install it, or unlock it using '%s'."),
+        pname.str().c_str(), "--force", cmd.c_str());
+  }
+
   case SET_TO_INSTALL:
     return str::form(
         _("Selecting '%s' from repository '%s' for installation."),
@@ -240,6 +249,7 @@ void SolverRequester::Feedback::print(
   case UPD_CANDIDATE_IS_LOCKED:
   case SELECTED_IS_OLDER:
   case PATCH_NOT_NEEDED:
+  case PATCH_UNWANTED:
   case FORCED_INSTALL:
     out.info(asUserString(opts));
     break;

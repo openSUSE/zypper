@@ -145,6 +145,15 @@ public:
        */
       PATCH_INTERACTIVE_SKIPPED,
 
+      /**
+       * Patch was requested (install/update command), but it's locked
+       * (set to ignore). Its installation can be forced with --force.
+       *
+       * In the 'patch' command, do not issue this feedback, silently skip
+       * the unwanted patch.
+       */
+      PATCH_UNWANTED,
+
       // ********** zypp requests *********************************************
 
       SET_TO_INSTALL,

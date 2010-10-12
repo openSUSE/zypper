@@ -200,7 +200,8 @@ static bool list_patch_updates(Zypper & zypper)
   {
     ResObject::constPtr res = it->resolvable();
 
-    if (all || it->isBroken())
+    // show only needed and wanted/unlocked (bnc #420606) patches unless --all
+    if (all || (it->isBroken() && !it->isUnwanted()))
     {
       Patch::constPtr patch = asKind<Patch>(res);
 
@@ -618,12 +619,12 @@ mark_patch_updates( Zypper & zypper, bool skip_interactive )
 
 void list_patches_by_issue(Zypper & zypper)
 {
-  // lu --issues               - list all issues which need to be fixed
-  // lu --issues=foo           - look for foo in issue # or description
-  // lu --bz                   - list all bugzilla issues
-  // lu --cve                  - list all CVE issues
-  // lu --bz=foo --cve=foo     - look for foo in bugzillas or CVEs
-  // --all                     - list all, not only needed patches
+  // lp --issues               - list all issues which need to be fixed
+  // lp --issues=foo           - look for foo in issue # or description
+  // lp --bz, --bugzilla       - list all bugzilla issues
+  // lp --cve                  - list all CVE issues
+  // lp --bz=foo --cve=foo     - look for foo in bugzillas or CVEs
+  // lp --all                  - list all, not only needed patches
 
   // --bz, --cve can't be used together with --issue; this case is ruled out
   // in the initial arguments validation in Zypper.cc
@@ -709,7 +710,7 @@ void list_patches_by_issue(Zypper & zypper)
     for_(it, q.begin(), q.end())
     {
       PoolItem pi(*it);
-      if (only_needed && !pi.status().isBroken())
+      if (only_needed && (!pi.isBroken() || pi.isUnwanted()))
         continue;
 
       Patch::constPtr patch = asKind<Patch>(pi.resolvable());
@@ -750,7 +751,7 @@ void list_patches_by_issue(Zypper & zypper)
     for_(it, q.begin(), q.end())
     {
       PoolItem pi(*it);
-      if (only_needed && !pi.status().isBroken())
+      if (only_needed && (!pi.isBroken() || pi.isUnwanted()))
         continue;
       Patch::constPtr patch = asKind<Patch>(pi.resolvable());
 
