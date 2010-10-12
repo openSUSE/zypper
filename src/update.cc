@@ -635,7 +635,7 @@ void list_patches_by_issue(Zypper & zypper)
 
   Table t;
   TableHeader th;
-  th << _("Issue") << _("No.") << _("Patch") << _("Category");
+  th << _("Issue") << _("No.") << _("Patch") << _("Category") << _("Status");
   t << th;
 
 #define FILL_ISSUES(TYPE, ID) \
@@ -729,6 +729,7 @@ void list_patches_by_issue(Zypper & zypper)
         tr << d->subFind(sat::SolvAttr::updateReferenceId).asString();
         tr << (patch->name() + "-" + patch->edition().asString());
         tr << patch->category();
+        tr << (pi.isBroken() ? _("needed") : _("not needed"));
         t << tr;
       }
     }
