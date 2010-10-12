@@ -474,48 +474,6 @@ void list_updates(Zypper & zypper, const ResKindSet & kinds, bool best_effort)
 
 // ----------------------------------------------------------------------------
 
-// may be useful as a functor
-static bool
-mark_item_install (const PoolItem & pi)
-{
-  bool result = pi.status().setToBeInstalled( zypp::ResStatus::USER );
-  if (!result)
-    ERR << "Marking " << pi << "for installation failed" << endl;
-  return result;
-}
-
-// ----------------------------------------------------------------------------
-// best-effort update
-// ----------------------------------------------------------------------------
-
-// require update of installed item
-//   The PoolItem passed to require_item_update() is the installed resolvable
-//   to which an update candidate is guaranteed to exist.
-//
-// may be useful as a functor
-
-static bool require_item_update (const PoolItem& pi) {
-  Resolver_Ptr resolver = zypp::getZYpp()->resolver();
-
-  ui::Selectable::constPtr s = ui::Selectable::get(pi->kind(), pi->name());
-  PoolItem installed = s->installedObj();
-
-  // require anything greater than the installed version
-  try {
-    Capability  cap( installed->name(), Rel::GT, installed->edition(), installed->kind() );
-    resolver->addRequire( cap );
-  }
-  catch (const Exception& e) {
-    ZYPP_CAUGHT(e);
-    Zypper::instance()->out().error(boost::str(format(
-      _("Cannot parse '%s < %s'")) % installed->name() % installed->edition()));
-  }
-
-  return true;
-}
-
-// ----------------------------------------------------------------------------
-
 static bool
 mark_patch_update(ui::Selectable & s,
                   bool skip_interactive, bool ignore_affects_pm)
@@ -555,64 +513,6 @@ mark_patch_update(ui::Selectable & s,
   }
 
   return false;
-}
-
-// ----------------------------------------------------------------------------
-
-static void
-mark_patch_updates( Zypper & zypper, bool skip_interactive )
-{
-  DBG << "going to mark patches to install" << endl;
-
-  // search twice: if there are none with restartSuggested(), retry on all
-  bool any_marked = false;
-  for(unsigned ignore_affects_pm = 0;
-      !any_marked && ignore_affects_pm < 2; ++ignore_affects_pm)
-  {
-    if (zypper.arguments().empty() || zypper.globalOpts().is_rug_compatible)
-    {
-      DBG << "marking all needed patches" << endl;
-
-      for_(it, God->pool().proxy().byKindBegin(ResKind::patch),
-               God->pool().proxy().byKindEnd  (ResKind::patch))
-      {
-        if (mark_patch_update(**it, skip_interactive, ignore_affects_pm))
-          any_marked = true;
-      }
-    }
-    else if (!zypper.arguments().empty())
-    {
-      for_(it, zypper.arguments().begin(), zypper.arguments().end())
-      {
-        // look for patches matching specified pattern
-        PoolQuery q;
-        q.addKind(ResKind::patch);
-        q.addAttribute(sat::SolvAttr::name, *it);
-        //! \todo should we look for patches requiring packages with matching name instead?
-        //q.addAttribute(sat::SolvAttr::require, *it);
-        q.setMatchGlob();
-
-        if (q.empty())
-        {
-          if (ignore_affects_pm) // avoid displaying this twice
-            continue;
-          if (it->find_first_of("?*") != string::npos) // wildcards used
-            zypper.out().info(str::form(
-                _("No patches matching '%s' found."), it->c_str()));
-          else
-            zypper.out().info(str::form(
-                _("Patch '%s' not found."), it->c_str()));
-          zypper.setExitCode(ZYPPER_EXIT_INF_CAP_NOT_FOUND);
-        }
-        else
-        {
-          for_(pit, q.selectableBegin(), q.selectableEnd())
-            if ( mark_patch_update(**pit, skip_interactive, ignore_affects_pm))
-              any_marked = true;
-        }
-      }
-    }
-  }
 }
 
 // ----------------------------------------------------------------------------
