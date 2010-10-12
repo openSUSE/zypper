@@ -297,9 +297,10 @@ private:
       const zypp::PoolItem & selected);
 
   /**
-   * Set the best version of the patch for installation.
+   * Set specified patch for installation.
    *
-   * \param pkg            Specification of required patch
+   * \param pkg            Specification of required patch (for feedback)
+   * \param selected       Selected patch
    * \param ignore_pkgmgmt Whether to ignore the "affects package management"
    *                       flag. If false and the patch is flagged as such, this
    *                       method will do nothing and return false.
