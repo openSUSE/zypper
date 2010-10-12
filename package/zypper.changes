@@ -1,4 +1,10 @@
 -------------------------------------------------------------------
+Tue Oct 12 16:20:26 CEST 2010 - jkupec@suse.cz
+
+- Skip locked patches in 'patch' and 'list-patches' (bnc #420606)
+- Added Status to 'lp --issues' table
+
+-------------------------------------------------------------------
 Mon Oct 11 09:52:19 CEST 2010 - jkupec@suse.cz
 
 - Do not report changing to equivalent vendors as a vendor change
