@@ -1276,7 +1276,7 @@ void MediaMultiCurl::doGetFileCopy( const Pathname & filename , const Pathname &
 	  try
 	    {
 	      MetaLinkParser mlp;
-	      mlp.parse(destNew);
+	      mlp.parse(Pathname(destNew));
 	      MediaBlockList bl = mlp.getBlockList();
 	      vector<Url> urls = mlp.getUrls();
 	      DBG << bl << endl;
