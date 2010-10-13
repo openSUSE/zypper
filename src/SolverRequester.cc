@@ -151,7 +151,7 @@ void SolverRequester::install(const PackageSpec & pkg)
       {
         Selectable::Ptr s(asSelectable()(*sit));
         if (s->kind() == ResKind::patch)
-          installPatch(pkg, *sit);
+          installPatch(pkg, *sit, false);
         else
         {
           PoolItem instobj = get_installed_obj(s);
