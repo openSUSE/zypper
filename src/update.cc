@@ -9,6 +9,7 @@
 
 #include "zypp/Patch.h"
 
+#include "SolverRequester.h"
 #include "Table.h"
 #include "update.h"
 #include "main.h"
@@ -474,49 +475,6 @@ void list_updates(Zypper & zypper, const ResKindSet & kinds, bool best_effort)
 
 // ----------------------------------------------------------------------------
 
-static bool
-mark_patch_update(ui::Selectable & s,
-                  bool skip_interactive, bool ignore_affects_pm)
-{
-  Patch::constPtr patch = asKind<Patch>(s.candidateObj());
-  XXX << "candidate patch " << patch->name() << " " << ignore_affects_pm << ", "
-        << patch->restartSuggested() << endl;
-  if (s.isBroken()) // bnc #506860
-  {
-    DBG << "candidate patch " << patch->name() << " " << ignore_affects_pm << ", "
-      << patch->restartSuggested() << endl;
-    if (ignore_affects_pm || patch->restartSuggested())
-    {
-      // #221476
-      if (skip_interactive
-          && (patch->interactive() || !patch->licenseToConfirm().empty()))
-      {
-        // Skipping a patch because it is marked as interactive or has
-        // license to confirm and --skip-interactive is requested
-        // (i.e. also --non-interactive, since it implies --skip-interactive)
-        Zypper::instance()->out().warning(str::form(
-          // translators: %s is the name of a patch
-          _("'%s' is interactive, skipping."),
-          string(patch->name() + string("-") + patch->edition().asString()).c_str()));
-        return false;
-      }
-      else
-      {
-        bool result = s.setToInstall();
-        if (!result)
-          ERR << "Marking " << s << " for installation failed" << endl;
-        return result;
-      }
-    }
-    else
-      XXX << "patch " << s.name() << "is satisfied or not relevant" << endl;
-  }
-
-  return false;
-}
-
-// ----------------------------------------------------------------------------
-
 void list_patches_by_issue(Zypper & zypper)
 {
   // lp --issues               - list all issues which need to be fixed
@@ -717,6 +675,10 @@ void mark_updates_by_issue(Zypper & zypper)
     for_(i, it->second.begin(), it->second.end())
       issues.insert(pair<string, string>("c", *i));
 
+  SolverRequester::Options sropts;
+  sropts.skip_interactive = zypper.cOpts().count("skip-interactive");
+  sropts.force = zypper.cOpts().count("force");
+
   for_(issue, issues.begin(), issues.end())
   {
     PoolQuery q;
@@ -728,10 +690,13 @@ void mark_updates_by_issue(Zypper & zypper)
     else if (issue->first == "c")
       q.addAttribute(sat::SolvAttr::updateReferenceId, issue->second);
 
+    SolverRequester sr(sropts);
+
     bool found = false;
-    for_(sit, q.begin(), q.end())
-    {
-      if (!PoolItem(*sit).status().isBroken()) // not needed
+    for_(sit, q.begin(), q.end()) // can't use poolItem iterator, since that
+    {                             // does not have matches iterator used below
+      PoolItem pi(*sit);
+      if (!pi.isBroken()) // not needed
         continue;
 
       DBG << "got: " << *sit << endl;
@@ -741,8 +706,7 @@ void mark_updates_by_issue(Zypper & zypper)
         if (issue->first == "b" &&
             d->subFind(sat::SolvAttr::updateReferenceType).asString() == "bugzilla")
         {
-          if (mark_patch_update(*God->pool().proxy().lookup(*sit),
-                zypper.cOpts().count("skip-interactive"), true))
+          if (sr.installPatch(pi))
             found = true;
           else
             DBG << str::form("fix for bugzilla issue number %s was not marked.",
@@ -751,8 +715,7 @@ void mark_updates_by_issue(Zypper & zypper)
         else if (issue->first == "c" &&
             d->subFind(sat::SolvAttr::updateReferenceType).asString() == "cve")
         {
-          if (mark_patch_update(*God->pool().proxy().lookup(*sit),
-                zypper.cOpts().count("skip-interactive"), true))
+          if (sr.installPatch(pi))
             found = true;
           else
             DBG << str::form("fix for CVE issue number %s was not marked.",
@@ -760,6 +723,7 @@ void mark_updates_by_issue(Zypper & zypper)
         }
       }
     }
+    sr.printFeedback(zypper.out());
     if (!found)
     {
       if (issue->first == "b")

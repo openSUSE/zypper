@@ -190,9 +190,10 @@ string SolverRequester::Feedback::asUserString(
   {
     ostringstream pname;
     pname << _objsel->name() << "-" << _objsel->edition();
-    string cmd = "zypper rl patch:" + _objsel->name();
+    string cmd1 = "zypper in --force patch:" + _objsel->name();
+    string cmd2 = "zypper rl patch:" + _objsel->name();
     return str::form(_("Patch '%s' is locked. Use '%s' to install it, or unlock it using '%s'."),
-        pname.str().c_str(), "--force", cmd.c_str());
+        pname.str().c_str(), cmd1.c_str(), cmd2.c_str());
   }
 
   case SET_TO_INSTALL:

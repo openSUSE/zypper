@@ -28,6 +28,19 @@ class Out;
 /**
  * Issue various requests to the dependency resolver, based on given
  * arguments (\ref PackageArgs) and options (\ref SolverRequester::Options).
+ *
+ *   SolverRequester::Options sropts;
+ *   sropts.force = cmdoptions.find("force") != cmdoptions.end()
+ *   ...
+ *
+ *   vector<string> args;
+ *   args.push_back("stellarium");
+ *   args.push_back("kstars");
+ *
+ *   SolverRequester sr(sropts);
+ *   sr.install(args);              // implicit conversion to PackageArgs
+ *
+ *   sr.printFeedback(out());
  */
 class SolverRequester
 {
@@ -237,6 +250,14 @@ public:
    * these get selected (need to call this again once these are installed).
    */
   void updatePatches();
+
+  /**
+   * Set specified patch for installation.
+   *
+   * \param selected  Selected patch
+   * \return True if the patch was set for installation, false otherwise.
+   */
+  bool installPatch(const zypp::PoolItem & selected);
 
   bool hasFeedback(const Feedback::Id id) const;
   void printFeedback(Out & out) const

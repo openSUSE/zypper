@@ -358,6 +358,19 @@ void SolverRequester::updatePatches()
 
 // ----------------------------------------------------------------------------
 
+bool SolverRequester::installPatch(const zypp::PoolItem & selected)
+{
+  PackageSpec patchspec;
+  patchspec.orig_str = str::form("%s-%s",
+      selected->name().c_str(), selected->edition().asString().c_str());
+  patchspec.parsed_cap =
+      Capability(selected->name(), Rel::EQ, selected->edition(), ResKind::patch);
+
+  return installPatch(patchspec, selected);
+}
+
+// ----------------------------------------------------------------------------
+
 bool SolverRequester::installPatch(
     const PackageSpec & patchspec,
     const PoolItem & selected,
@@ -382,11 +395,8 @@ bool SolverRequester::installPatch(
       }
       else if (selected.isUnwanted())
       {
-        if (_command == ZypperCommand::INSTALL || _command == ZypperCommand::UPDATE)
-        {
-          DBG << "candidate patch " << patch << " is locked" << endl;
-          addFeedback(Feedback::PATCH_UNWANTED, patchspec, selected, selected);
-        }
+        DBG << "candidate patch " << patch << " is locked" << endl;
+        addFeedback(Feedback::PATCH_UNWANTED, patchspec, selected, selected);
       }
       else
       {
