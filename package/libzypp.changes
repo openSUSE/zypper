@@ -1,4 +1,13 @@
 -------------------------------------------------------------------
+Wed Oct 13 16:14:13 CEST 2010 - dheidler@suse.de
+
+- Make MetaLinkParser accept InputStreams
+- Make MetaLinkParser accept Pathnames insted of strings
+- Fix MetaLinkv4 hash parsing
+- Add MetaLinkParser test
+- version 8.7.0 (7)
+
+-------------------------------------------------------------------
 Mon Oct 11 17:06:17 CEST 2010 - ma@suse.de
 
 - Use timeouts in plugin script communication.
