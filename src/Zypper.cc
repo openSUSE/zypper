@@ -3344,6 +3344,7 @@ void Zypper::doCommand()
             if (header)
             {
               string nvrcap =
+                TMP_RPM_REPO_ALIAS ":" +
                 header->tag_name() + "=" +
                 str::numstring(header->tag_epoch()) + ":" +
                 header->tag_version() + "-" +
