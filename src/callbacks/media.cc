@@ -5,10 +5,15 @@
                              |__/|_|  |_|
 \*---------------------------------------------------------------------------*/
 
+#include <boost/format.hpp>
+#include <iostream>
+#include <unistd.h>
+
 #include "callbacks/media.h"
 
 #include "utils/misc.h"
 #include "utils/messages.h"
+#include "utils/prompt.h"
 
 #include "zypp/media/MediaManager.h"
 
@@ -269,4 +274,77 @@ ZmartRecipients::MediaChangeReportReceiver::requestMedia(
     zypper.requestExit(false);
 
   return action;
+}
+
+
+// ---------------------------------------------------------------------------
+// - AuthenticationReportReceiver
+// ---------------------------------------------------------------------------
+
+bool ZmartRecipients::AuthenticationReportReceiver::prompt(
+    const Url & url,
+    const string & description,
+    media::AuthData & auth_data)
+{
+  Zypper & zypper = *Zypper::instance();
+
+  if (geteuid() != 0 && url.getQueryString().find("credentials=") != string::npos)
+  {
+    string credfile =
+      "/etc/zypp/credentials.d/" + url.getQueryParam("credentials");
+    zypper.out().warning(str::form(
+        _("Authentication required to access %s."
+          " You need to be root to be able to read the credentials from %s."),
+        url.asString().c_str(), credfile.c_str() ));
+  }
+
+  if (zypper.globalOpts().non_interactive)
+  {
+    MIL << "Non-interactive mode: aborting" << endl;
+    return false;
+  }
+
+  // curl authentication
+  media::CurlAuthData * curl_auth_data =
+    dynamic_cast<media::CurlAuthData*> (&auth_data);
+
+  if (curl_auth_data)
+    curl_auth_data->setAuthType("basic,digest");
+
+  // user name
+
+  string username;
+  // expect the input from machine on stdin
+  if (zypper.globalOpts().machine_readable)
+  {
+    zypper.out().prompt(
+        PROMPT_AUTH_USERNAME, _("User Name"), PromptOptions(), description);
+    cin >> username;
+  }
+  // input from human using readline
+  else
+  {
+    zypper.out().info(description, Out::QUIET);
+    username = get_text(_("User Name") + string(": "), auth_data.username());
+  }
+  if (username.empty())
+    return false;
+  auth_data.setUsername(username);
+
+  // password
+
+  zypper.out().prompt(
+      PROMPT_AUTH_PASSWORD, _("Password"), PromptOptions());
+
+  string password;
+  // expect the input from machine on stdin
+  if (zypper.globalOpts().machine_readable)
+    cin >> password;
+  else
+    password = getpass("");
+  if (password.empty())
+    return false;
+  auth_data.setPassword(password);
+
+  return true;
 }
