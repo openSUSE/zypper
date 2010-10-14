@@ -1,4 +1,11 @@
 -------------------------------------------------------------------
+Thu Oct 14 17:32:04 CEST 2010 - jkupec@suse.cz
+
+- Better message in case non-root tries to access
+  /etc/zypp/credentials.d to get credentials for authenticated URL
+  (bnc #448736)
+
+-------------------------------------------------------------------
 Tue Oct 12 16:20:26 CEST 2010 - jkupec@suse.cz
 
 - Skip locked patches in 'patch' and 'list-patches' (bnc #420606)
