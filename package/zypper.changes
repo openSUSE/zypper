@@ -1,4 +1,11 @@
 -------------------------------------------------------------------
+Thu Oct 14 17:24:32 CEST 2010 - jkupec@suse.cz
+
+- Better message in case non-root tries to access
+  /etc/zypp/credentials.d to get credentials for authenticated URL
+  (bnc #448736)
+
+-------------------------------------------------------------------
 Thu Jul 15 11:42:14 CEST 2010 - jkupec@suse.cz
 
 - Use getpass() from stduni.h instead of our own function.
