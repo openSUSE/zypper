@@ -1,6 +1,8 @@
 -------------------------------------------------------------------
 Thu Oct 14 17:32:04 CEST 2010 - jkupec@suse.cz
 
+- Make sure package gets installed from given .rpm file, not
+  repository (bnc #524280)
 - Better message in case non-root tries to access
   /etc/zypp/credentials.d to get credentials for authenticated URL
   (bnc #448736)
