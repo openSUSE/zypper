@@ -9,11 +9,7 @@
 #define ZMART_MEDIA_CALLBACKS_H
 
 #include <stdlib.h>
-#include <unistd.h>
 #include <ctime>
-#include <iostream>
-
-#include <boost/format.hpp>
 
 #include "zypp/ZYppCallbacks.h"
 #include "zypp/base/Logger.h"
@@ -21,9 +17,8 @@
 #include "zypp/Url.h"
 
 #include "Zypper.h"
-#include "utils/prompt.h"
 
-
+// auto-repeat counter limit
 #define REPEAT_LIMIT 3
 
 using zypp::media::MediaChangeReport;
@@ -167,58 +162,7 @@ namespace ZmartRecipients
   {
     virtual bool prompt(const zypp::Url & url,
                         const std::string & description,
-                        zypp::media::AuthData & auth_data)
-    {
-      if (Zypper::instance()->globalOpts().non_interactive)
-      {
-        MIL << "Non-interactive mode: aborting" << std::endl;
-        return false;
-      }
-
-      // curl authentication
-      zypp::media::CurlAuthData * curl_auth_data =
-        dynamic_cast<zypp::media::CurlAuthData*> (&auth_data);
-
-      if (curl_auth_data)
-        curl_auth_data->setAuthType("basic,digest");
-
-      // user name
-
-      std::string username;
-      // expect the input from machine on stdin
-      if (Zypper::instance()->globalOpts().machine_readable)
-      {
-        Zypper::instance()->out().prompt(
-            PROMPT_AUTH_USERNAME, _("User Name"), PromptOptions(), description);
-        std::cin >> username;
-      }
-      // input from human using readline
-      else
-      {
-        Zypper::instance()->out().info(description, Out::QUIET);
-        username = get_text(_("User Name") + std::string(": "), auth_data.username());
-      }
-      if (username.empty())
-        return false;
-      auth_data.setUsername(username);
-
-      // password
-
-      Zypper::instance()->out().prompt(
-          PROMPT_AUTH_PASSWORD, _("Password"), PromptOptions());
-
-      std::string password;
-      // expect the input from machine on stdin
-      if (Zypper::instance()->globalOpts().machine_readable)
-        std::cin >> password;
-      else
-        password = getpass("");
-      if (password.empty())
-        return false;
-      auth_data.setPassword(password);
-
-      return true;
-    }
+                        zypp::media::AuthData & auth_data);
   };
 
     ///////////////////////////////////////////////////////////////////
