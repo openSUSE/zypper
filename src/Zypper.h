@@ -176,8 +176,13 @@ public:
   const std::string & commandHelp() const { return _command_help; }
   const ArgList & arguments() const { return _arguments; }
   RuntimeData & runtimeData() { return _rdata; }
+
   zypp::RepoManager & repoManager()
   { if (!_rm) _rm.reset(new zypp::RepoManager(_gopts.rm_options)); return *_rm; }
+
+  void initRepoManager()
+  { _rm.reset(new zypp::RepoManager(_gopts.rm_options)); }
+
   int exitCode() const { return _exit_code; }
   void setExitCode(int exit) { _exit_code = exit; }
   bool runningShell() const { return _running_shell; }
@@ -205,9 +210,6 @@ private:
   void setCommand(const ZypperCommand & command) { _command = command; }
   void setRunningShell(bool value = true) { _running_shell = value; }
   void setRunningHelp(bool value = true) { _running_help = value; }
-
-  void initRepoManager()
-  { _rm.reset(new zypp::RepoManager(_gopts.rm_options)); }
 
 private:
 
