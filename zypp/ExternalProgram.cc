@@ -429,7 +429,7 @@ namespace zypp {
 	      // Data is available now.
 	      static size_t linebuffer_size = 0;      // static because getline allocs
 	      static char * linebuffer = 0;           // and reallocs if buffer is too small
-	      ssize_t nread = getline( &linebuffer, &linebuffer_size, inputfile );
+	      getline( &linebuffer, &linebuffer_size, inputfile );
 	      // ::feof check is important as select returns
 	      // positive if the file was closed.
 	      if ( ::feof( inputfile ) )
@@ -559,6 +559,72 @@ namespace zypp {
       for ( std::string line = receiveLine(); line.length(); line = receiveLine() )
         out_r << line;
       return out_r;
+    }
+
+    //////////////////////////////////////////////////////////////////////
+    //
+    // class ExternalProgramWithStderr
+    //
+    //////////////////////////////////////////////////////////////////////
+
+    namespace _ExternalProgram
+    {
+      EarlyPipe::EarlyPipe()
+      {
+	_fds[R] = _fds[W] = -1;
+	::pipe2( _fds, O_NONBLOCK );
+	_stderr = ::fdopen( _fds[R], "r" );
+      }
+
+      EarlyPipe::~EarlyPipe()
+      {
+	closeW();
+	if ( _stderr )
+	  ::fclose( _stderr );
+      }
+    }
+
+    bool ExternalProgramWithStderr::stderrGetUpTo( std::string & retval_r, const char delim_r, bool returnDelim_r )
+    {
+      if ( ! _stderr )
+	return false;
+      if ( delim_r && ! _buffer.empty() )
+      {
+	// check for delim already in buffer
+	std::string::size_type pos( _buffer.find( delim_r ) );
+	if ( pos != std::string::npos )
+	{
+	  retval_r = _buffer.substr( 0, returnDelim_r ? pos+1 : pos );
+	  _buffer.erase( 0, pos+1 );
+	  return true;
+	}
+      }
+      ::clearerr( _stderr );
+      do {
+	int ch = fgetc( _stderr );
+	if ( ch != EOF )
+	{
+	  if ( ch != delim_r || ! delim_r )
+	    _buffer.push_back( ch );
+	  else
+	  {
+	    if ( returnDelim_r )
+	      _buffer.push_back( delim_r );
+	    break;
+	  }
+	}
+	else if ( ::feof( _stderr ) )
+	{
+	  if ( _buffer.empty() )
+	    return false;
+	}
+	else if ( errno != EINTR )
+	  return false;
+      } while ( true );
+      // HERE: we left after readig at least one char (\n)
+      retval_r.swap( _buffer );
+      _buffer.clear();
+      return true;
     }
 
 
