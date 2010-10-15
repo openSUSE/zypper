@@ -44,7 +44,7 @@ namespace zypp
       if (PathInfo(path).isExist())
       {
         if ( filesystem::readdir( entries, path, false ) != 0 )
-        {          
+        {
           // TranslatorExplanation '%s' is a pathname
             ZYPP_THROW(Exception(str::form(_("Failed to read directory '%s'"), path.c_str())));
         }
@@ -59,6 +59,7 @@ namespace zypp
           url.setScheme("file");
           service_info.setUrl(url);
           service_info.setType(ServiceType::PLUGIN);
+	  DBG << "Plugin Service: " << service_info << endl;
           callback(service_info);
         }
 
