@@ -514,12 +514,9 @@ unsigned repo_specs_to_aliases(Zypper & zypper,
 template <class Container>
 void do_init_repos(Zypper & zypper, const Container & container)
 {
-  RepoManager & manager = zypper.repoManager();
-  RuntimeData & gData = zypper.runtimeData();
-
   MIL << "Refreshing autorefresh services." << endl;
 
-  const list<ServiceInfo> & services = manager.knownServices();
+  const list<ServiceInfo> & services = zypper.repoManager().knownServices();
   bool called_refresh = false;
   for_(s, services.begin(), services.end())
   {
@@ -534,6 +531,8 @@ void do_init_repos(Zypper & zypper, const Container & container)
     zypper.initRepoManager();
 
   MIL << "Going to initialize repositories." << endl;
+  RepoManager & manager = zypper.repoManager();
+  RuntimeData & gData = zypper.runtimeData();
 
   // load gpg keys
   init_target(zypper);
