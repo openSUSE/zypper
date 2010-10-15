@@ -31,11 +31,14 @@ using std::endl;
 namespace zypp
 { /////////////////////////////////////////////////////////////////
 
+
   namespace
   {
     static const char * PLUGIN_DEBUG = getenv( "ZYPP_PLUGIN_DEBUG" );
 
-    /** Dump buffer string if PLUGIN_DEBUG is on. */
+    /** Dump buffer string if PLUGIN_DEBUG is on.
+     * \ingroup g_RAII
+     */
     struct PluginDebugBuffer
     {
       PluginDebugBuffer( const std::string & buffer_r ) : _buffer( buffer_r ) {}
@@ -55,6 +58,21 @@ namespace zypp
 	}
       }
       const std::string & _buffer;
+    };
+
+    /** Dump buffer string if PLUGIN_DEBUG is on.
+     * \ingroup g_RAII
+     */
+    struct PluginDumpStderr
+    {
+      PluginDumpStderr( ExternalProgramWithStderr & prog_r ) : _prog( prog_r ) {}
+      ~PluginDumpStderr()
+      {
+	std::string line;
+	while ( _prog.stderrGetline( line ) )
+	  _WAR("PLUGIN") << "! " << line << endl;
+      }
+      ExternalProgramWithStderr & _prog;
     };
 
     inline void setBlocking( FILE * file_r, bool yesno_r = true )
@@ -137,7 +155,7 @@ namespace zypp
     private:
       Pathname _script;
       Arguments _args;
-      scoped_ptr<ExternalProgram> _cmd;
+      scoped_ptr<ExternalProgramWithStderr> _cmd;
       DefaultIntegral<int,0> _lastReturn;
       std::string _lastExecError;
   };
@@ -156,6 +174,7 @@ namespace zypp
   const long PluginScript::Impl::receive_timeout = 5;
 
   ///////////////////////////////////////////////////////////////////
+
   void PluginScript::Impl::open( const Pathname & script_r, const Arguments & args_r )
   {
     dumpRangeLine( DBG << "Open " << script_r, args_r.begin(), args_r.end() ) << endl;
@@ -175,7 +194,7 @@ namespace zypp
     args.reserve( args_r.size()+1 );
     args.push_back( script_r.asString() );
     args.insert( args.end(), args_r.begin(), args_r.end() );
-    _cmd.reset( new ExternalProgram( args, ExternalProgram::Discard_Stderr ) );
+    _cmd.reset( new ExternalProgramWithStderr( args ) );
 
     // Be protected against full pipe, etc.
     setNonBlocking( _cmd->outputFile() );
@@ -220,6 +239,7 @@ namespace zypp
       datas.str().swap( data );
     }
     DBG << "->send " << frame_r << endl;
+
     if ( PLUGIN_DEBUG )
     {
       std::istringstream datas( data );
@@ -237,6 +257,7 @@ namespace zypp
 
     //DBG << " ->[" << fd << " " << (::feof(filep)?'e':'_') << (::ferror(filep)?'F':'_') << "]" << endl;
     {
+      PluginDumpStderr _dump( *_cmd ); // dump scripts stderr before leaving
       SignalSaver sigsav( SIGPIPE, SIG_IGN );
       const char * buffer = data.c_str();
       ssize_t buffsize = data.size();
@@ -314,6 +335,7 @@ namespace zypp
     std::string data;
     {
       PluginDebugBuffer _debug( data ); // dump receive buffer if PLUGIN_DEBUG
+      PluginDumpStderr _dump( *_cmd ); // dump scripts stderr before leaving
       do {
 	int ch = fgetc( filep );
 	if ( ch != EOF )
