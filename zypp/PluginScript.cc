@@ -19,6 +19,7 @@
 #include "zypp/base/DefaultIntegral.h"
 #include "zypp/base/String.h"
 #include "zypp/base/Signal.h"
+#include "zypp/base/IOStream.h"
 
 #include "zypp/PluginScript.h"
 #include "zypp/ExternalProgram.h"
@@ -32,6 +33,30 @@ namespace zypp
 
   namespace
   {
+    static const char * PLUGIN_DEBUG = getenv( "ZYPP_PLUGIN_DEBUG" );
+
+    /** Dump buffer string if PLUGIN_DEBUG is on. */
+    struct PluginDebugBuffer
+    {
+      PluginDebugBuffer( const std::string & buffer_r ) : _buffer( buffer_r ) {}
+      ~PluginDebugBuffer()
+      {
+	if ( PLUGIN_DEBUG )
+	{
+	  if ( _buffer.empty() )
+	  {
+	    _DBG("PLUGIN") << "< (empty)" << endl;
+	  }
+	  else
+	  {
+	    std::istringstream datas( _buffer );
+	    iostr::copyIndent( datas, _DBG("PLUGIN"), "< "  ) << endl;
+	  }
+	}
+      }
+      const std::string & _buffer;
+    };
+
     inline void setBlocking( FILE * file_r, bool yesno_r = true )
     {
       if ( ! file_r )
@@ -195,6 +220,11 @@ namespace zypp
       datas.str().swap( data );
     }
     DBG << "->send " << frame_r << endl;
+    if ( PLUGIN_DEBUG )
+    {
+      std::istringstream datas( data );
+      iostr::copyIndent( datas, _DBG("PLUGIN") ) << endl;
+    }
 
     // try writing the pipe....
     FILE * filep = _cmd->outputFile();
@@ -282,59 +312,61 @@ namespace zypp
 
     ::clearerr( filep );
     std::string data;
-    do {
-      int ch = fgetc( filep );
-      if ( ch != EOF )
-      {
-	data.push_back( ch );
-	if ( ch == '\0' )
-	  break;
-      }
-      else if ( ::feof( filep ) )
-      {
-	WAR << "Unexpected EOF" << endl;
-	ZYPP_THROW( PluginScriptDiedUnexpectedly( "Receive: script died unexpectedly", str::Str() << Errno() ) );
-      }
-      else if ( errno != EINTR )
-      {
-	if ( errno == EWOULDBLOCK )
+    {
+      PluginDebugBuffer _debug( data ); // dump receive buffer if PLUGIN_DEBUG
+      do {
+	int ch = fgetc( filep );
+	if ( ch != EOF )
 	{
-	  // wait a while for fd to become ready for reading...
-	  fd_set rfds;
-	  FD_ZERO( &rfds );
-	  FD_SET( fd, &rfds );
+	  data.push_back( ch );
+	  if ( ch == '\0' )
+	    break;
+	}
+	else if ( ::feof( filep ) )
+	{
+	  WAR << "Unexpected EOF" << endl;
+	  ZYPP_THROW( PluginScriptDiedUnexpectedly( "Receive: script died unexpectedly", str::Str() << Errno() ) );
+	}
+	else if ( errno != EINTR )
+	{
+	  if ( errno == EWOULDBLOCK )
+	  {
+	    // wait a while for fd to become ready for reading...
+	    fd_set rfds;
+	    FD_ZERO( &rfds );
+	    FD_SET( fd, &rfds );
 
-	  struct timeval tv;
-	  tv.tv_sec = receive_timeout;
-	  tv.tv_usec = 0;
+	    struct timeval tv;
+	    tv.tv_sec = receive_timeout;
+	    tv.tv_usec = 0;
 
-	  int retval = select( fd+1, &rfds, NULL, NULL, &tv );
-	  if ( retval > 0 )	// FD_ISSET( fd, &rfds ) will be true.
-	  {
-	    ::clearerr( filep );
-	  }
-	  else if ( retval == 0 )
-	  {
-	    WAR << "Not ready to read within timeout." << endl;
-	    ZYPP_THROW( PluginScriptReceiveTimeout( "Not ready to read within timeout." ) );
-	  }
-	  else // ( retval == -1 )
-	  {
-	    if ( errno != EINTR )
+	    int retval = select( fd+1, &rfds, NULL, NULL, &tv );
+	    if ( retval > 0 )	// FD_ISSET( fd, &rfds ) will be true.
 	    {
-	      ERR << "select(): " << Errno() << endl;
-	      ZYPP_THROW( PluginScriptException( "Error waiting on file descriptor", str::Str() << Errno() ) );
+	      ::clearerr( filep );
+	    }
+	    else if ( retval == 0 )
+	    {
+	      WAR << "Not ready to read within timeout." << endl;
+	      ZYPP_THROW( PluginScriptReceiveTimeout( "Not ready to read within timeout." ) );
+	    }
+	    else // ( retval == -1 )
+	    {
+	      if ( errno != EINTR )
+	      {
+		ERR << "select(): " << Errno() << endl;
+		ZYPP_THROW( PluginScriptException( "Error waiting on file descriptor", str::Str() << Errno() ) );
+	      }
 	    }
 	  }
+	  else
+	  {
+	    ERR << "read(): " << Errno() << endl;
+	    ZYPP_THROW( PluginScriptException( "Receive: receive error", str::Str() << Errno() ) );
+	  }
 	}
-	else
-	{
-	  ERR << "read(): " << Errno() << endl;
-	  ZYPP_THROW( PluginScriptException( "Receive: receive error", str::Str() << Errno() ) );
-	}
-      }
-    } while ( true );
-
+      } while ( true );
+    }
     DBG << " <-read " << data.size() << endl;
     std::istringstream datas( data );
     PluginFrame ret( datas );
