@@ -59,6 +59,7 @@ namespace zypp
           url.setScheme("file");
           service_info.setUrl(url);
           service_info.setType(ServiceType::PLUGIN);
+          service_info.setAutorefresh( true );
 	  DBG << "Plugin Service: " << service_info << endl;
           callback(service_info);
         }
