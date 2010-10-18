@@ -19,6 +19,7 @@ class ConfigOption
 {
 public:
   static const ConfigOption MAIN_SHOW_ALIAS;
+  static const ConfigOption MAIN_REPO_LIST_COLUMNS;
 
   static const ConfigOption SOLVER_INSTALL_RECOMMENDS;
   static const ConfigOption SOLVER_FORCE_RESOLUTION_COMMANDS;
@@ -41,6 +42,7 @@ public:
   enum Option
   {
     MAIN_SHOW_ALIAS_e,
+    MAIN_REPO_LIST_COLUMNS_e,
 
     SOLVER_INSTALL_RECOMMENDS_e,
     SOLVER_FORCE_RESOLUTION_COMMANDS_e,
@@ -89,6 +91,9 @@ struct Config
 
   /** Whether to show repo alias instead of name wherever we need to show repo*/
   bool show_alias;
+
+  /** Which columns to show in repo list by default (string of short options).*/
+  std::string repo_list_columns;
 
   bool solver_installRecommends;
   std::set<ZypperCommand> solver_forceResolutionCommands;

@@ -1,4 +1,4 @@
-.TH "zypper" "8" "1.5.0" "zypper" "System Tools"
+.TH "zypper" "8" "1.5.1" "zypper" "System Tools"
 .SH "NAME"
 .LP
 zypper - Command\-line interface to ZYpp system management library (libzypp)
@@ -1003,12 +1003,13 @@ Ignore query string in the URI
 List all defined repositories or show detailed information about those
 specified as arguments
 .IP
-If no arguments are given, the following data are printed for each repository
-found on the sytem:
-# (repository number), Enabled (whether the repository is enabled), Refresh
-(whether auto-refresh is enabled for the repository), Type (rpm-md, yast2,
-plaindir), Alias (shorthand for Name), and Name. Other columns can be added
-using the options listed below.
+The following data can be printed for each repository found on the sytem:
+# (repository number), Alias (shorthand for Name), Name, Enabled (whether
+the repository is enabled), Refresh (whether auto-refresh is enabled for
+the repository), Priority, Type (repository meta-data type: rpm-md, yast2,
+plaindir). Which of the data is shown is determined by command line
+options listed below and the main.repoListColumns setting from zypper.conf.
+By default, #, Alias, Name, Enabled, and Refresh is shown.
 
 Repository number is a unique identifier of the repository in current
 set of repositories. If you add, remove or change a repository, the numbers may
@@ -1027,11 +1028,20 @@ repositories into a single file in repo file format.
 If '\-' is specified instead of a file name,
 the repositories will be written to the standard output.
 .TP
+.I \-a, \-\-alias
+Add alias column to the output.
+.TP
+.I \-n, \-\-name
+Add name column to the output.
+.TP
 .I \-u, \-\-uri
 Add base URI column to the output.
 .TP
 .I \-p, \-\-priority
 Add repository priority column to the output.
+.TP
+.I \-r, \-\-refresh
+Add the autorefresh column to the output.
 .TP
 .I \-d, \-\-details
 Show more information like URI, priority, type, etc.

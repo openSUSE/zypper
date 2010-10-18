@@ -33,6 +33,7 @@ using namespace zypp;
 static map<string, ConfigOption::Option> _table;
 static map<ConfigOption::Option, string> _table_str;
 const ConfigOption ConfigOption::MAIN_SHOW_ALIAS(ConfigOption::MAIN_SHOW_ALIAS_e);
+const ConfigOption ConfigOption::MAIN_REPO_LIST_COLUMNS(ConfigOption::MAIN_REPO_LIST_COLUMNS_e);
 const ConfigOption ConfigOption::SOLVER_INSTALL_RECOMMENDS(ConfigOption::SOLVER_INSTALL_RECOMMENDS_e);
 const ConfigOption ConfigOption::SOLVER_FORCE_RESOLUTION_COMMANDS(ConfigOption::SOLVER_FORCE_RESOLUTION_COMMANDS_e);
 const ConfigOption ConfigOption::COLOR_USE_COLORS(ConfigOption::COLOR_USE_COLORS_e);
@@ -58,7 +59,8 @@ ConfigOption::Option ConfigOption::parse(const std::string & strval_r)
   if (_table.empty())
   {
     // initialize it
-    _table["main/showAlias"] = SOLVER_INSTALL_RECOMMENDS_e;
+    _table["main/showAlias"] = MAIN_SHOW_ALIAS_e;
+    _table["main/repoListColumns"] = MAIN_REPO_LIST_COLUMNS_e;
     _table["solver/installRecommends"] = SOLVER_INSTALL_RECOMMENDS_e;
     _table["solver/forceResolutionCommands"] = SOLVER_FORCE_RESOLUTION_COMMANDS_e;
     _table["color/useColors"] = COLOR_USE_COLORS_e;
@@ -88,6 +90,7 @@ const string ConfigOption::asString() const
   {
     // initialize it
     _table_str[MAIN_SHOW_ALIAS_e] = "main/showAlias";
+    _table_str[MAIN_REPO_LIST_COLUMNS_e] = "main/repoListColumns";
     _table_str[SOLVER_INSTALL_RECOMMENDS_e] = "solver/installRecommends";
     _table_str[SOLVER_FORCE_RESOLUTION_COMMANDS_e] = "solver/forceResolutionCommands";
     _table_str[COLOR_USE_COLORS_e] = "color/useColors";
@@ -112,6 +115,7 @@ const string ConfigOption::asString() const
 
 Config::Config()
   : show_alias(false)
+  , repo_list_columns("anr")
   , solver_installRecommends(true)
   , do_colors        (false)
   , color_useColors  ("never")
@@ -148,6 +152,9 @@ void Config::read(const string & file)
       ZConfig::instance().repoLabelIsAlias(show_alias);
     }
 
+    s = augeas.getOption(ConfigOption::MAIN_REPO_LIST_COLUMNS.asString());
+    if (!s.empty()) // TODO add some validation
+      repo_list_columns = s;
 
     // ---------------[ solver ]------------------------------------------------
 

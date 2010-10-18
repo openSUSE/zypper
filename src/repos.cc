@@ -789,60 +789,140 @@ static void print_repo_list(Zypper & zypper,
 {
   Table tbl;
   bool all = zypper.cOpts().count("details");
-  bool showuri = zypper.cOpts().count("uri") || zypper.cOpts().count("url") || zypper.cOpts().count("sort-by-uri");
-  bool showprio = zypper.cOpts().count("priority") || zypper.cOpts().count("sort-by-priority");
+  string list_cols = zypper.config().repo_list_columns;
+  bool showalias = zypper.cOpts().count("alias")
+      || zypper.cOpts().count("sort-by-alias")
+      || list_cols.find_first_of("aA") != string::npos;
+  bool showname = zypper.cOpts().count("name")
+      || zypper.cOpts().count("sort-by-name")
+      || list_cols.find_first_of("nN") != string::npos;
+  bool showrefresh = zypper.cOpts().count("refresh")
+      || list_cols.find_first_of("rR") != string::npos;
+  bool showuri = zypper.cOpts().count("uri") || zypper.cOpts().count("url")
+      || zypper.cOpts().count("sort-by-uri")
+      || list_cols.find_first_of("uU") != string::npos;
+  bool showprio = zypper.cOpts().count("priority")
+      || zypper.cOpts().count("sort-by-priority")
+      || list_cols.find_first_of("pP") != string::npos;
   bool showservice = zypper.cOpts().count("service");
+  bool sort_override = zypper.cOpts().count("sort-by-uri")
+      || zypper.cOpts().count("sort-by-priority")
+      || zypper.cOpts().count("sort-by-alias")
+      || zypper.cOpts().count("sort-by-name");
 
   // header
   TableHeader th;
-  // fixed 'zypper repos' columns
-  th << "#"
-     << _("Alias")
-     << _("Name")
-     << _("Enabled")
-     // translators: 'zypper repos' column - whether autorefresh is enabled for the repository
-     << _("Refresh");
-  // optional columns
+  // keep count of columns so that we know which one to sort
+  // TODO might be worth to improve Table to allow named columns so this can be avoided
+  unsigned index = 0;
+  // number of the column to sort by
+  unsigned sort_index = 0;
+
+  // repo number
+  th << "#";
+
+  // alias
+  if (all || showalias)
+  {
+    th << _("Alias");
+    ++index;
+    // if (zypper.cOpts().count("sort-by-alias")
+    //    || (list_cols.find("A") != string::npos && !sort_override))
+    // sort by alias by default
+    sort_index = index;
+  }
+
+  // name
+  if (all || showname)
+  {
+     th << _("Name");
+     ++index;
+     if (zypper.cOpts().count("sort-by-name")
+         || (list_cols.find("N") != string::npos && !sort_override))
+       sort_index = index;
+  }
+
+  // 'enabled' flag
+  th << _("Enabled");
+  ++index;
+
+  // 'autorefresh' flag
+  if (all || showrefresh)
+  {
+    // translators: 'zypper repos' column - whether autorefresh is enabled
+    // for the repository
+    th << _("Refresh");
+    ++index;
+    if (list_cols.find("R") != string::npos && !sort_override)
+      sort_index = index;
+  }
+
+  // priority
   if (all || showprio)
+  {
     // translators: repository priority (in zypper repos -p or -d)
     th << _("Priority");
+    ++index;
+    if (zypper.cOpts().count("sort-by-priority")
+        || (list_cols.find("P") != string::npos && !sort_override))
+      sort_index = index;
+  }
+
+  // type
   if (all)
+  {
     th << _("Type");
+    ++index;
+  }
+
+  // URI
   if (all || showuri)
+  {
     th << _("URI");
+    ++index;
+    if (zypper.cOpts().count("sort-by-uri")
+        || (list_cols.find("U") != string::npos && !sort_override))
+      sort_index = index;
+  }
+
+  // service alias
   if (all || showservice)
+  {
     th << _("Service");
+    ++index;
+  }
+
   tbl << th;
 
+  // table data
   int i = 1;
-
-  for (std::list<RepoInfo>::const_iterator it = repos.begin();
+  unsigned nindent = repos.size() > 9 ? repos.size() > 99 ? 3 : 2 : 1;
+  for (list<RepoInfo>::const_iterator it = repos.begin();
        it !=  repos.end(); ++it)
   {
     RepoInfo repo = *it;
-    TableRow tr(all ? 8 : showprio || showuri ? 7 : 6);
+    TableRow tr(index);
 
     // number
-    tr << str::numstring (i);
+    tr << str::numstring (i, nindent);
     // alias
-    tr << repo.alias();
+    if (all || showalias) tr << repo.alias();
     // name
-    tr << repo.name();
+    if (all || showname) tr << repo.name();
     // enabled?
     tr << (repo.enabled() ? _("Yes") : _("No"));
     // autorefresh?
-    tr << (repo.autorefresh() ? _("Yes") : _("No"));
+    if (all || showrefresh) tr << (repo.autorefresh() ? _("Yes") : _("No"));
     // priority
     if (all || showprio)
-      tr << str::numstring (repo.priority(), 4); // output flush right; looks nicer and sorts correctly
+      // output flush right; looks nicer and sorts correctly
+      tr << str::numstring (repo.priority(), 4);
     // type
     if (all)
       tr << repo.type().asString();
     // url
     /**
-     * \todo properly handle multiple baseurls - show "(multiple)" and
-     * provide zypper lr [#|alias|URI] ... for showing full repo info
-     * (not in table)
+     * \todo properly handle multiple baseurls - show "(multiple)"
      */
     if (all || showuri)
       tr << (*repo.baseUrlsBegin()).asString();
@@ -860,33 +940,7 @@ static void print_repo_list(Zypper & zypper,
   else
   {
     // sort
-    if (zypper.cOpts().count("sort-by-uri"))
-    {
-      cout << "will sort by uri: ";
-      if (all)
-      {
-        tbl.sort(7);
-        cout << 7;
-      }
-      else if (showprio)
-      {
-        tbl.sort(6);
-        cout << 6;
-      }
-      else
-      {
-        tbl.sort(5);
-        cout << 5;
-      }
-      cout << endl;
-    }
-    else if (zypper.cOpts().count("sort-by-alias"))
-      tbl.sort(1);
-    else if (zypper.cOpts().count("sort-by-name"))
-      tbl.sort(2);
-    else if (zypper.cOpts().count("sort-by-priority"))
-      tbl.sort(5);
-
+    tbl.sort(sort_index);
     // print
     cout << tbl;
   }
