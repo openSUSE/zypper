@@ -1,4 +1,9 @@
 -------------------------------------------------------------------
+Mon Oct 18 10:18:36 CEST 2010 - jkupec@suse.cz
+
+- Fixed 'patch --skip-interactive' (bnc #647214)
+
+-------------------------------------------------------------------
 Fri Oct 15 14:01:36 CEST 2010 - jkupec@suse.cz
 
 - Auto-refresh services before loading repos.
