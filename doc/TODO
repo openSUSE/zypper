@@ -24,9 +24,8 @@ General
     in the summary
   + explain why a package has been selected for installation/removal
 + options to install/remove packages recommended/suggested packages
-+ testsuite
-+ exit gracefully in first SIGINT, immediately on the second (needs proper
-  implementation)
++ testsuite improvements
+? Add 'renamed/obsolete' section to install summary (bnc #548017)
 ? xml input (feed an xml with operation specification to zypper)
 ? move -vv output to zypper.log, leave only normal and verbose output levels?
   -vv e.g. displays full urls of downloaded files
