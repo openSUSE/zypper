@@ -2,6 +2,8 @@
 Mon Oct 18 17:22:36 CEST 2010 - jkupec@suse.cz
 
 - Make repository list data (repos/lr) configurable (bnc #543510)
+- Also load the solv file when refreshing to ensure it was created
+  with proper version of satsolver-tools (bnc #456718)
 
 -------------------------------------------------------------------
 Mon Oct 18 10:18:36 CEST 2010 - jkupec@suse.cz
