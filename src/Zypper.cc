@@ -4056,6 +4056,7 @@ void Zypper::doCommand()
       if (copts.find("force") != copts.end())
         sropts.force = true;
       sropts.best_effort = best_effort;
+      sropts.skip_interactive = skip_interactive; // bcn #647214
 
       SolverRequester sr(sropts);
       if (arguments().empty())
@@ -4073,10 +4074,7 @@ void Zypper::doCommand()
           }
           // update -t patch; patch
           else if (*kit == ResKind::patch)
-          {
-            sropts.skip_interactive = skip_interactive;
             sr.updatePatches();
-          }
           else if (*kit == ResKind::pattern)
             sr.updatePatterns();
           // should not get here (see above kind parsing code), but just in case
