@@ -246,6 +246,13 @@ static bool build_cache(Zypper & zypper, const RepoInfo &repo, bool force_build)
     RepoManager & manager = zypper.repoManager();
     manager.buildCache(repo, force_build ?
       RepoManager::BuildForced : RepoManager::BuildIfNeeded);
+
+    // Also load the solv file to check wheter it was created with the right
+    // version of satsolver-tools. If there's a version mismatch or some other
+    // problem, the solv file will be rebuilt even though the cookie files
+    // indicate the solv file is up to date with raw metadata (bnc #456718)
+    if (!force_build)
+      manager.loadFromCache(repo);
   }
   catch (const parser::ParseException & e)
   {
