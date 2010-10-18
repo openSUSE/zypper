@@ -1,4 +1,10 @@
 -------------------------------------------------------------------
+Mon Oct 18 10:21:54 CEST 2010 - jkupec@suse.cz
+
+- Fixed patch --skip-interactive (bnc #647214)
+- 1.4.8
+
+-------------------------------------------------------------------
 Tue Jul 27 16:36:07 CEST 2010 - ma@suse.de
 
 - Fix evaluation of package specs containing edition or arch.
