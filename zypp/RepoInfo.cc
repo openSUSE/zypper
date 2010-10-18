@@ -206,7 +206,10 @@ namespace zypp
   { return _pimpl->type; }
 
   Url RepoInfo::mirrorListUrl() const
-  { return _pimpl->mirrorlist_url; }
+  {
+    repo::RepoVariablesUrlReplacer replacer;
+    return replacer(_pimpl->mirrorlist_url);
+  }
 
   Url RepoInfo::gpgKeyUrl() const
   { return _pimpl->gpgkey_url; }
