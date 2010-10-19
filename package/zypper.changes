@@ -1,4 +1,10 @@
 -------------------------------------------------------------------
+Tue Oct 19 11:58:17 CEST 2010 - jkupec@suse.cz
+
+- Summary: ignore arch changes in the "not installed updates" list
+  (bnc #646410)
+
+-------------------------------------------------------------------
 Mon Oct 18 17:22:36 CEST 2010 - jkupec@suse.cz
 
 - Make repository list data (repos/lr) configurable (bnc #543510)
