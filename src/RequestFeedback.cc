@@ -156,6 +156,10 @@ string SolverRequester::Feedback::asUserString(
 
   case SELECTED_IS_OLDER:
   {
+    ostringstream cmdhint;
+    cmdhint << "zypper install --force " << _objsel->name() << "-" << _objsel->edition()
+        << "." << _objsel->arch();
+
     ostringstream msg;
     msg << str::form(_(
       "The selected package '%s' from repository '%s' has lower"
@@ -165,8 +169,8 @@ string SolverRequester::Feedback::asUserString(
           _objsel->repoInfo().alias().c_str() :
           _objsel->repoInfo().name().c_str());
     msg << str::form(
-        // translators: %s = "--force"
-        _("Use '%s' to force installation of the package."), "--force");
+        // translators: %s = "zypper install --force package-version.arch"
+        _("Use '%s' to force installation of the package."), cmdhint.str().c_str());
     return msg.str();
   }
 
