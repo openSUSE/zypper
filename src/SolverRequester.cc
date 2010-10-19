@@ -526,6 +526,9 @@ void SolverRequester::updateTo(
   }
   else if (installed->edition() > selected->edition())
   {
+    if (_opts.force)
+      return;
+
     addFeedback(Feedback::SELECTED_IS_OLDER, pkg, selected, installed);
     MIL << "Selected is older than the installed."
         " Will not downgrade unless --force is used" << endl;
