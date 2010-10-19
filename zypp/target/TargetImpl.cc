@@ -56,6 +56,8 @@
 
 #include "zypp/sat/Pool.h"
 
+#include "zypp/PluginScript.h"
+
 using namespace std;
 
 
