@@ -1,8 +1,14 @@
 -------------------------------------------------------------------
+Tue Oct 19 12:07:06 CEST 2010 - jkupec@suse.cz
+
+- Summary: ignore arch changes in the "not installed updates" list
+  (bnc #646410)
+- 1.4.8
+
+-------------------------------------------------------------------
 Mon Oct 18 10:21:54 CEST 2010 - jkupec@suse.cz
 
 - Fixed patch --skip-interactive (bnc #647214)
-- 1.4.8
 
 -------------------------------------------------------------------
 Tue Jul 27 16:36:07 CEST 2010 - ma@suse.de
