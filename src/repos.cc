@@ -251,8 +251,14 @@ static bool build_cache(Zypper & zypper, const RepoInfo &repo, bool force_build)
     // version of satsolver-tools. If there's a version mismatch or some other
     // problem, the solv file will be rebuilt even though the cookie files
     // indicate the solv file is up to date with raw metadata (bnc #456718)
-    if (!force_build)
+    if (!force_build &&
+        // only do this if the refresh commands are running
+        // this function is also used when loading repos for other commands
+        (zypper.command() == ZypperCommand::REFRESH
+         || zypper.command() == ZypperCommand::REFRESH_SERVICES))
+    {
       manager.loadFromCache(repo);
+    }
   }
   catch (const parser::ParseException & e)
   {
