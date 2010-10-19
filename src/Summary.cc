@@ -252,6 +252,11 @@ void Summary::readPool(const zypp::ResPool & pool)
         continue;
       if (compareByNVRA((*it)->installedObj().resolvable(), candidate) >= 0)
         continue;
+      // ignore higher versions with different arch (except noarch) bnc #646410
+      if ((*it)->installedObj()->arch() != candidate->arch()
+          && (*it)->installedObj()->arch() != Arch_noarch
+          && candidate->arch() != Arch_noarch)
+        continue;
 
       candidates[*kit].insert(ResPair(nullres, candidate));
     }
