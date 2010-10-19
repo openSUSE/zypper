@@ -194,8 +194,10 @@ mkdir -p $RPM_BUILD_ROOT%{_sysconfdir}/zypp/repos.d
 mkdir -p $RPM_BUILD_ROOT%{_sysconfdir}/zypp/services.d
 mkdir -p $RPM_BUILD_ROOT%{_prefix}/lib/zypp
 mkdir -p $RPM_BUILD_ROOT%{_prefix}/lib/zypp/plugins
-mkdir -p $RPM_BUILD_ROOT%{_prefix}/lib/zypp/plugins/media
+mkdir -p $RPM_BUILD_ROOT%{_prefix}/lib/zypp/plugins/commit
 mkdir -p $RPM_BUILD_ROOT%{_prefix}/lib/zypp/plugins/services
+mkdir -p $RPM_BUILD_ROOT%{_prefix}/lib/zypp/plugins/system
+mkdir -p $RPM_BUILD_ROOT%{_prefix}/lib/zypp/plugins/urlresolver
 mkdir -p $RPM_BUILD_ROOT%{_var}/lib/zypp
 mkdir -p $RPM_BUILD_ROOT%{_var}/log/zypp
 mkdir -p $RPM_BUILD_ROOT%{_var}/cache/zypp
