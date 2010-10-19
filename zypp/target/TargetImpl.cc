@@ -1587,7 +1587,7 @@ namespace zypp
     // static version
     std::string TargetImpl::distributionVersion( const Pathname & root_r )
     {
-      std:string distributionVersion = baseproductdata( staticGuessRoot(root_r) ).edition().version();
+      std::string distributionVersion = baseproductdata( staticGuessRoot(root_r) ).edition().version();
       if ( distributionVersion.empty() )
       {
         // ...But the baseproduct method is not expected to work on RedHat derivatives.
