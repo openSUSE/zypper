@@ -132,6 +132,12 @@ public:
       UPD_CANDIDATE_IS_LOCKED,
 
       /**
+       * The installed package is no longer available in repositories.
+       * => can't reinstall, can't update/downgrade..
+       */
+      NOT_IN_REPOS,
+
+      /**
        * Selected object is not the highest available, because of user
        * restrictions like repo(s), version, architecture.
        */

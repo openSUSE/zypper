@@ -157,6 +157,15 @@ void SolverRequester::install(const PackageSpec & pkg)
           PoolItem instobj = get_installed_obj(s);
           if (instobj)
           {
+            if (s->availableEmpty())
+            {
+              if (!_opts.force)
+                addFeedback(Feedback::ALREADY_INSTALLED, pkg, instobj, instobj);
+              addFeedback(Feedback::NOT_IN_REPOS, pkg, instobj, instobj);
+              MIL << s->name() << " not in repos, can't (re)install" << endl;
+              return;
+            }
+
             // whether user requested specific repo/version/arch
             bool userconstraints =
                 pkg.parsed_cap.detail().isVersioned()
@@ -171,6 +180,8 @@ void SolverRequester::install(const PackageSpec & pkg)
             PoolItem best;
             if (userconstraints)
               updateTo(pkg, *sit);
+            else if (_opts.force)
+                updateTo(pkg, s->highestAvailableVersionObj());
             else if ((best = s->updateCandidateObj()))
               updateTo(pkg, best);
             else if (changes_vendor && !_opts.allow_vendor_change)

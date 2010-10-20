@@ -311,7 +311,7 @@ BOOST_AUTO_TEST_CASE(install10)
   sr.install(rawargs);
 
   BOOST_CHECK(sr.hasFeedback(SolverRequester::Feedback::ALREADY_INSTALLED));
-  BOOST_CHECK(sr.hasFeedback(SolverRequester::Feedback::NO_UPD_CANDIDATE));
+  BOOST_CHECK(sr.hasFeedback(SolverRequester::Feedback::NOT_IN_REPOS));
 }
 
 // request : install diffutils

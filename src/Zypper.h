@@ -171,6 +171,7 @@ public:
   Out & out();
   Config & config() { return _config; }
   const GlobalOptions & globalOpts() const { return _gopts; }
+  GlobalOptions & globalOptsNoConst() { return _gopts; }
   const parsed_opts & cOpts() const { return _copts; }
   const ZypperCommand & command() const { return _command; }
   const std::string & commandHelp() const { return _command_help; }

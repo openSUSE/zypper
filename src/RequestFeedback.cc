@@ -154,6 +154,14 @@ string SolverRequester::Feedback::asUserString(
         _objinst->name().c_str(), cmdhint.str().c_str());
   }
 
+  case NOT_IN_REPOS:
+  {
+    return str::form(
+        _("Package '%s' is not available in your repositories."
+          " Cannot reinstall, upgrade, or downgrade."),
+        _objinst->name().c_str());
+  }
+
   case SELECTED_IS_OLDER:
   {
     ostringstream cmdhint;
@@ -252,6 +260,7 @@ void SolverRequester::Feedback::print(
   case UPD_CANDIDATE_CHANGES_VENDOR:
   case UPD_CANDIDATE_HAS_LOWER_PRIO:
   case UPD_CANDIDATE_IS_LOCKED:
+  case NOT_IN_REPOS:
   case SELECTED_IS_OLDER:
   case PATCH_NOT_NEEDED:
   case PATCH_UNWANTED:
