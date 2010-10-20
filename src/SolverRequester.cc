@@ -181,7 +181,7 @@ void SolverRequester::install(const PackageSpec & pkg)
             if (userconstraints)
               updateTo(pkg, *sit);
             else if (_opts.force)
-                updateTo(pkg, s->highestAvailableVersionObj());
+              updateTo(pkg, s->highestAvailableVersionObj());
             else if ((best = s->updateCandidateObj()))
               updateTo(pkg, best);
             else if (changes_vendor && !_opts.allow_vendor_change)
