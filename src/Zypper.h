@@ -169,6 +169,7 @@ public:
 
   // setters & getters
   Out & out();
+  void setOutputWriter(Out * out) { _out_ptr = out; }
   Config & config() { return _config; }
   const GlobalOptions & globalOpts() const { return _gopts; }
   GlobalOptions & globalOptsNoConst() { return _gopts; }

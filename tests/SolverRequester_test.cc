@@ -465,7 +465,6 @@ BOOST_AUTO_TEST_CASE(install200)
   BOOST_CHECK_EQUAL(sr.toInstall().size(), 1);
   BOOST_CHECK(hasPoolItem(sr.toInstall(), "cron", Edition("4.1-194.33.1"), Arch_x86_64));
   BOOST_CHECK(sr.hasFeedback(SolverRequester::Feedback::UPD_CANDIDATE_HAS_LOWER_PRIO));
-  BOOST_CHECK(sr.hasFeedback(SolverRequester::Feedback::UPD_CANDIDATE_CHANGES_VENDOR));
 }
 
 // request : install cron-4.1-195.0.x86_64
@@ -538,6 +537,7 @@ BOOST_AUTO_TEST_CASE(install302)
   rawargs.push_back("patch:libxml2-434");
   SolverRequester sr;
   //zypp::getZYpp()->resolver()->createSolverTestcase(TESTS_BUILD_DIR "/testcase");
+
   sr.install(rawargs);
 
   BOOST_CHECK(!sr.hasFeedback(SolverRequester::Feedback::SET_TO_INSTALL));

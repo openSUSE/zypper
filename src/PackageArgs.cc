@@ -215,7 +215,7 @@ void PackageArgs::argsToCaps(const zypp::ResKind & kind)
       string msg = str::form(
           _("'%s' not found in package names. Trying '%s'."),
           arg.c_str(), parsedcap.asString().c_str());
-      zypper.out().info(msg,Out::HIGH);
+      zypper.out().info(msg,Out::HIGH); // TODO this should not be called here
       DBG << "'" << arg << "' not found, trying '" << parsedcap <<  "'" << endl;
     }
 

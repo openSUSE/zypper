@@ -1,5 +1,5 @@
 # ma@: disabled subdirs and tests as thay fail on hudson
-#ADD_SUBDIRECTORY(lib)
+ADD_SUBDIRECTORY(lib)
 
 ENABLE_TESTING()
 INCLUDE_DIRECTORIES( ${ZYPPER_SOURCE_DIR}/tests/lib )
@@ -7,11 +7,11 @@ INCLUDE_DIRECTORIES( ${ZYPPER_SOURCE_DIR}/src )
 
 ADD_DEFINITIONS( -DTESTS_SRC_DIR="${CMAKE_CURRENT_SOURCE_DIR}" -DTESTS_BUILD_DIR="${CMAKE_CURRENT_BINARY_DIR}" )
 
-#ADD_SUBDIRECTORY( utils )
+ADD_SUBDIRECTORY( utils )
 
 ADD_CUSTOM_TARGET( ctest
    COMMAND ctest -a
 )
 
-#ADD_TESTS( PackageArgs )
-#ADD_TESTS( SolverRequester )
+ADD_TESTS( PackageArgs )
+ADD_TESTS( SolverRequester )

@@ -22,6 +22,7 @@ using boost::unit_test::test_case;
 #include "zypp/ResPool.h"
 
 #include "Zypper.h"
+#include "output/OutNormal.h"
 
 using std::cin;
 using std::cout;
@@ -401,12 +402,13 @@ class TestSetup
           filesystem::clean_dir( _rootdir );
       }
 
+      // set up the Zypper instance
 
       Zypper & zypper = *Zypper::instance();
       zypper.globalOptsNoConst().root_dir = _rootdir.asString();
       zypper.globalOptsNoConst().rm_options = zypp::RepoManagerOptions(_rootdir.asString());
       zypper.globalOptsNoConst().rm_options.knownReposPath = _rootdir / "repos.d";
-
+      zypper.setOutputWriter(new OutNormal(Out::DEBUG));
 
       if ( ! sysarch_r.empty() )
         ZConfig::instance().setSystemArchitecture( sysarch_r );
