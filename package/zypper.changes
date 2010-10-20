@@ -1,4 +1,12 @@
 -------------------------------------------------------------------
+Wed Oct 20 15:03:38 CEST 2010 - jkupec@suse.cz
+
+- zypper in --force plainpkgname (no repo,EVRA) to request install
+  of the highest version regardless of vendor/deps/locks.
+  (bnc #483426)
+- 1.5.1
+
+-------------------------------------------------------------------
 Tue Oct 19 16:21:27 CEST 2010 - jkupec@suse.cz
 
 - Proper hint for forcing downgrade of a package (bnc #620377)
