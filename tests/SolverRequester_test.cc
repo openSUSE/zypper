@@ -569,6 +569,94 @@ BOOST_AUTO_TEST_CASE(install303)
 ///////////////////////////////////////////////////////////////////////////
 
 
+///////////////////////////////////////////////////////////////////////////
+// Force (the --force)
+
+// request : install --force cron
+// response: force install of cron-4.1-195.0, despite lower-priority repo.
+BOOST_AUTO_TEST_CASE(install400)
+{
+  MIL << "<============install400===============>" << endl;
+
+  vector<string> rawargs;
+  rawargs.push_back("cron");
+  SolverRequester::Options sropts;
+  sropts.force = true;
+  SolverRequester sr(sropts);
+
+  sr.install(rawargs);
+
+  BOOST_CHECK(!sr.hasFeedback(SolverRequester::Feedback::ALREADY_INSTALLED));
+  BOOST_CHECK(sr.hasFeedback(SolverRequester::Feedback::FORCED_INSTALL));
+  BOOST_CHECK_EQUAL(sr.toInstall().size(), 1);
+  BOOST_CHECK(hasPoolItem(sr.toInstall(), "cron", Edition("4.1-195.0"), Arch_x86_64));
+  BOOST_CHECK(!sr.hasFeedback(SolverRequester::Feedback::UPD_CANDIDATE_HAS_LOWER_PRIO));
+}
+
+// request : install --force info
+// response: force install of info-4.13-1.1, despite changed vendor.
+BOOST_AUTO_TEST_CASE(install401)
+{
+  MIL << "<============install401===============>" << endl;
+
+  vector<string> rawargs;
+  rawargs.push_back("info");
+  SolverRequester::Options sropts;
+  sropts.force = true;
+  SolverRequester sr(sropts);
+
+  sr.install(rawargs);
+
+  BOOST_CHECK(!sr.hasFeedback(SolverRequester::Feedback::ALREADY_INSTALLED));
+  BOOST_CHECK(sr.hasFeedback(SolverRequester::Feedback::FORCED_INSTALL));
+  BOOST_CHECK_EQUAL(sr.toInstall().size(), 1);
+  BOOST_CHECK(hasPoolItem(sr.toInstall(), "info", Edition("4.13-1.1"), Arch_x86_64));
+  BOOST_CHECK(!sr.hasFeedback(SolverRequester::Feedback::UPD_CANDIDATE_CHANGES_VENDOR));
+}
+
+// request : install --force netcfg
+// response: already installed, no update candidate, reinstall with
+//           highest available (netcfg-11.0.42-22.5 => downgrade)
+BOOST_AUTO_TEST_CASE(install402)
+{
+  MIL << "<============install402===============>" << endl;
+
+  vector<string> rawargs;
+  rawargs.push_back("netcfg");
+  SolverRequester::Options sropts;
+  sropts.force = true;
+  SolverRequester sr(sropts);
+
+  sr.install(rawargs);
+
+  BOOST_CHECK(!sr.hasFeedback(SolverRequester::Feedback::ALREADY_INSTALLED));
+  BOOST_CHECK(sr.hasFeedback(SolverRequester::Feedback::FORCED_INSTALL));
+  BOOST_CHECK_EQUAL(sr.toInstall().size(), 1);
+  BOOST_CHECK(hasPoolItem(sr.toInstall(), "netcfg", Edition("11.0.42-22.5"), Arch_noarch));
+  BOOST_CHECK(!sr.hasFeedback(SolverRequester::Feedback::NO_UPD_CANDIDATE));
+}
+// request : install --force sed
+// response: already installed, no update candidate, reinstall
+BOOST_AUTO_TEST_CASE(install403)
+{
+  MIL << "<============install403===============>" << endl;
+
+  vector<string> rawargs;
+  rawargs.push_back("popt");
+  SolverRequester::Options sropts;
+  sropts.force = true;
+  SolverRequester sr(sropts);
+
+  sr.install(rawargs);
+
+  BOOST_CHECK(!sr.hasFeedback(SolverRequester::Feedback::ALREADY_INSTALLED));
+  BOOST_CHECK(sr.hasFeedback(SolverRequester::Feedback::FORCED_INSTALL));
+  BOOST_CHECK_EQUAL(sr.toInstall().size(), 1);
+  BOOST_CHECK(hasPoolItem(sr.toInstall(), "popt", Edition("1.7-5.5"), Arch_x86_64));
+  BOOST_CHECK(!sr.hasFeedback(SolverRequester::Feedback::NO_UPD_CANDIDATE));
+}
+///////////////////////////////////////////////////////////////////////////
+
 
 ///////////////////////////////////////////////////////////////////////////
 // remove
