@@ -57,6 +57,7 @@ namespace zypp
   /** Timeout while receiving data. */
   declException( PluginScriptReceiveTimeout, PluginScriptTimeout );
 
+#undef declException
 
   /////////////////////////////////////////////////////////////////
 } // namespace zypp

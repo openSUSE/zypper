@@ -49,6 +49,10 @@ namespace zypp
   : _msg( msg_r )
   {}
 
+  Exception::Exception( const std::string & msg_r, const Exception & history_r )
+  : _msg( msg_r )
+  { remember( history_r ); }
+
   Exception::~Exception() throw()
   {}
 
@@ -130,7 +134,7 @@ namespace zypp
   void Exception::log( const Exception & excpt_r, const CodeLocation & where_r,
                        const char *const prefix_r )
   {
-    INT << where_r << " " << prefix_r << " " << excpt_r << endl;
+    INT << where_r << " " << prefix_r << " " << excpt_r.asUserHistory() << endl;
   }
 
   /////////////////////////////////////////////////////////////////
