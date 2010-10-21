@@ -153,10 +153,10 @@ namespace zypp
                         _retry = true;
                         break;
                       case repo::DownloadResolvableReport::IGNORE:
-                        ZYPP_THROW(SkipRequestException("User requested skip of corrupted file"));
+                        ZYPP_THROW(SkipRequestException("User requested skip of corrupted file", excpt));
                         break;
                       case repo::DownloadResolvableReport::ABORT:
-                        ZYPP_THROW(AbortRequestException("User requested to abort"));
+                        ZYPP_THROW(AbortRequestException("User requested to abort", excpt));
                         break;
                       default:
                         ZYPP_RETHROW( excpt );
