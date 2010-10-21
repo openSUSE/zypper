@@ -50,19 +50,58 @@ namespace zypp
     namespace
     { /////////////////////////////////////////////////////////////////
 
-      /** Hack to extract progress information from source::DownloadFileReport.
+      /** Hack to extract progress information from media::DownloadProgressReport.
        * We redirect the static report triggered from RepoInfo::provideFile
-       * to feed the ProvideFilePolicy callbacks.
+       * to feed the ProvideFilePolicy callbacks in addition to any connected
+       * media::DownloadProgressReport.
       */
-      struct DownloadFileReportHack : public callback::ReceiveReport<repo::RepoReport>
+      struct DownloadFileReportHack : public callback::ReceiveReport<media::DownloadProgressReport>
       {
-        virtual bool progress( const ProgressData &progress )
-        {
+	typedef callback::ReceiveReport<ReportType> BaseType;
+	typedef function<bool(int)>                 RedirectType;
+
+	DownloadFileReportHack( RedirectType redirect_r )
+	: _oldRec( Distributor::instance().getReceiver() )
+	, _redirect( redirect_r )
+	{ connect(); }
+	~DownloadFileReportHack()
+	{ if ( _oldRec ) Distributor::instance().setReceiver( *_oldRec ); else Distributor::instance().noReceiver(); }
+
+	virtual void start( const Url & file, Pathname localfile )
+	{
+	  if ( _oldRec )
+	    _oldRec->start( file, localfile );
+	  else
+	    BaseType::start( file, localfile );
+	}
+
+	virtual bool progress( int value, const Url & file, double dbps_avg = -1, double dbps_current = -1 )
+	{
+	  bool ret = true;
+	  if ( _oldRec )
+	    ret &= _oldRec->progress( value, file, dbps_avg, dbps_current );
           if ( _redirect )
-            return _redirect( progress.val() );
-          return true;
-        }
-        function<bool ( int )> _redirect;
+            ret &= _redirect( value );
+	  return ret;
+	}
+
+	virtual Action problem( const Url & file, Error error, const std::string & description )
+	{
+	  if ( _oldRec )
+	    return _oldRec->problem( file, error, description );
+	  return BaseType::problem( file, error, description );
+	}
+	virtual void finish( const Url & file, Error error, const std::string & reason )
+	{
+	  if ( _oldRec )
+	    _oldRec->finish( file, error, reason );
+	  else
+	    BaseType::finish( file, error, reason );
+	}
+
+	private:
+	  Receiver * _oldRec;
+	  RedirectType _redirect;
       };
 
       /////////////////////////////////////////////////////////////////
@@ -213,13 +252,10 @@ namespace zypp
       // Arrange DownloadFileReportHack to recieve the source::DownloadFileReport
       // and redirect download progress triggers to call the ProvideFilePolicy
       // callback.
-      DownloadFileReportHack dumb;
-      dumb._redirect = bind( mem_fun_ref( &ProvideFilePolicy::progress ),
-                             ref( policy_r ), _1 );
-      callback::TempConnect<repo::RepoReport> temp( dumb );
+      DownloadFileReportHack dumb( bind( mem_fun_ref( &ProvideFilePolicy::progress ), ref( policy_r ), _1 ) );
 
       RepoException repo_excpt(repo_r,
-                            str::form(_("Can't provide file '%s' from repository '%s'"),
+			       str::form(_("Can't provide file '%s' from repository '%s'"),
                                loc_r.filename().c_str(),
                                repo_r.alias().c_str() ) );
 
