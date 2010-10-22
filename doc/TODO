@@ -23,19 +23,13 @@ General
   + show graphical (schubi's widget) or ascii dependency tree of the packages
     in the summary
   + explain why a package has been selected for installation/removal
+  + explain why a package cannot be updated (the "updates will NOT be
+    installed" section)
 + options to install/remove packages recommended/suggested packages
-+ testsuite improvements
 ? Add 'renamed/obsolete' section to install summary (bnc #548017)
 ? xml input (feed an xml with operation specification to zypper)
 ? move -vv output to zypper.log, leave only normal and verbose output levels?
   -vv e.g. displays full urls of downloaded files
-
-Repository management
-
-+ remake --force to do what user intuitively expects, needs to be defined, e.g.
-  - reinstall instead of saying "already installed"
-  - downgrade/upgrade from specified repo if --repo foo --force is used
-  - etc...
 
 Packages
 
