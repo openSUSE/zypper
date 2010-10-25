@@ -1,4 +1,9 @@
 -------------------------------------------------------------------
+Mon Oct 25 12:02:31 CEST 2010 - jkupec@suse.cz
+
+- Tell about download-only switched on (bnc #648606)
+
+-------------------------------------------------------------------
 Wed Oct 20 15:03:38 CEST 2010 - jkupec@suse.cz
 
 - zypper in --force plainpkgname (no repo,EVRA) to request install
