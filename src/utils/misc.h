@@ -141,7 +141,7 @@ void list_processes_using_deleted_files(Zypper & zypper);
  * Check whether one of --download-* or --download options was given and return
  * the specified mode.
  */
-zypp::DownloadMode get_download_option(Zypper & zypper);
+zypp::DownloadMode get_download_option(Zypper & zypper, bool quiet = false);
 
 /** Check whether packagekit is running using a DBus call */
 bool packagekit_running();

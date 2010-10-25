@@ -581,6 +581,9 @@ void solve_and_commit (Zypper & zypper)
 
     summary.setShowRepoAlias(zypper.config().show_alias);
 
+    if (get_download_option(zypper, true) == DownloadOnly)
+      summary.setDownloadOnly(true);
+
     // show the summary
     if (zypper.out().type() == Out::TYPE_XML)
       summary.dumpAsXmlTo(cout);

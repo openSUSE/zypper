@@ -44,7 +44,11 @@ bool Summary::ResPairNameCompare::operator()(
 // --------------------------------------------------------------------------
 
 Summary::Summary(const zypp::ResPool & pool, const ViewOptions options)
-  : _viewop(options), _show_repo_alias(false), _wrap_width(80), _force_no_color(false)
+  : _viewop(options)
+  , _show_repo_alias(false)
+  , _wrap_width(80)
+  , _force_no_color(false)
+  , _download_only(false)
 {
   readPool(pool);
 }
@@ -959,20 +963,25 @@ void Summary::writeDownloadAndInstalledSizeSummary(ostream & out)
   if (_todownload > 0)
     s << format(_("Overall download size: %s.")) % _todownload << " ";
 
-  // installed size change info
-  if (_inst_size_change > 0)
-    // TrasnlatorExplanation %s will be substituted by a byte count e.g. 212 K
-    s << format(_("After the operation, additional %s will be used."))
-        % _inst_size_change.asString(0,1,1);
-  else if (_inst_size_change == 0)
-    s << _("No additional space will be used or freed after the operation.");
+  if (_download_only)
+    s << _("Download only.");
   else
   {
-    // get the absolute size
-    ByteCount abs;
-    abs = (-_inst_size_change);
-    // TrasnlatorExplanation %s will be substituted by a byte count e.g. 212 K
-    s << format(_("After the operation, %s will be freed.")) % abs.asString(0,1,1);
+    // installed size change info
+    if (_inst_size_change > 0)
+      // TrasnlatorExplanation %s will be substituted by a byte count e.g. 212 K
+      s << format(_("After the operation, additional %s will be used."))
+          % _inst_size_change.asString(0,1,1);
+    else if (_inst_size_change == 0)
+      s << _("No additional space will be used or freed after the operation.");
+    else
+    {
+      // get the absolute size
+      ByteCount abs;
+      abs = (-_inst_size_change);
+      // TrasnlatorExplanation %s will be substituted by a byte count e.g. 212 K
+      s << format(_("After the operation, %s will be freed.")) % abs.asString(0,1,1);
+    }
   }
 
   mbs_write_wrapped(out, s.str(), 0, _wrap_width);

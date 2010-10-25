@@ -516,7 +516,7 @@ void list_processes_using_deleted_files(Zypper & zypper)
 
 // ----------------------------------------------------------------------------
 
-DownloadMode get_download_option(Zypper & zypper)
+DownloadMode get_download_option(Zypper & zypper, bool quiet)
 {
   DownloadMode mode;
   DownloadMode zconfig = ZConfig::instance().commit_downloadMode();
@@ -557,7 +557,7 @@ DownloadMode get_download_option(Zypper & zypper)
   }
 
   // warn about the override, both were specified
-  if (!download.empty() &&
+  if (!quiet && !download.empty() &&
       (zypper.cOpts().count("download-only") ||
        zypper.cOpts().count("download-in-advance") ||
        zypper.cOpts().count("download-in-heaps") ||
@@ -566,6 +566,9 @@ DownloadMode get_download_option(Zypper & zypper)
     zypper.out().warning(
       str::form(_("Option '%s' overrides '%s'."), "--download", "--download-*"));
   }
+
+  if (quiet)
+    return mode;
 
   MIL << "Download mode: ";
   if      (mode == DownloadInAdvance) MIL << "in-advance";

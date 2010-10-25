@@ -69,6 +69,8 @@ public:
   { _show_repo_alias = value; }
   void setForceNoColor(bool value = true)
   { _force_no_color = value; }
+  void setDownloadOnly(bool value = true)
+  { _download_only = value; }
 
   void writeNewlyInstalled(std::ostream & out);
   void writeRemoved(std::ostream & out);
@@ -118,6 +120,7 @@ private:
   bool _show_repo_alias;
   mutable unsigned _wrap_width;
   bool _force_no_color;
+  bool _download_only;
 
   bool _need_reboot;
   bool _need_restart;
