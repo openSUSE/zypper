@@ -263,6 +263,8 @@ int read_action_ari (PromptId pid, int default_action)
   // correspond to abort/retry/ignore in that order.
   // The answers should be lower case letters.
   PromptOptions popts(_("a/r/i"), (unsigned int) default_action);
+  if (!zypper.globalOpts().non_interactive)
+    clear_keyboard_buffer();
   zypper.out().prompt(pid, _("Abort, retry, ignore?"), popts);
   return get_prompt_reply(zypper, pid, popts);
 }
@@ -274,6 +276,8 @@ bool read_bool_answer(PromptId pid, const string & question, bool default_answer
   Zypper & zypper = *Zypper::instance();
   string yn = string(_("yes")) + "/" + _("no");
   PromptOptions popts(yn, default_answer ? 0 : 1);
+  if (!zypper.globalOpts().non_interactive)
+    clear_keyboard_buffer();
   zypper.out().prompt(pid, question, popts);
   return !get_prompt_reply(zypper, pid, popts);
 }

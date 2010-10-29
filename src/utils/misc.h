@@ -8,9 +8,9 @@
 #ifndef ZYPPER_UTILS_H
 #define ZYPPER_UTILS_H
 
-#include <ostream>
 #include <string>
 #include <set>
+#include <list>
 
 #include "zypp/Url.h"
 #include "zypp/Pathname.h"
@@ -31,16 +31,6 @@ namespace zypp
 
 
 typedef std::set<zypp::ResKind> ResKindSet;
-
-std::string readline_getline();
-
-/**
- * Reads COLUMNS environment variable or gets the screen width from readline,
- * in that order. Falls back to 80 if all that fails.
- * \NOTE In case stdout is not connected to a terminal max. unsigned
- * is returned. This should prevent clipping when output is redirected.
- */
-unsigned get_screen_width();
 
 bool is_changeable_media(const zypp::Url & url);
 

@@ -188,6 +188,8 @@ namespace zypp
           // translators: help text for the 'a' option in the 'r/t/a' prompt
           popts.setOptionHelp(2, _("Trust the key and import it into trusted keyring."));
 
+        if (!zypper.globalOpts().non_interactive)
+          clear_keyboard_buffer();
         zypper.out().prompt(PROMPT_YN_GPG_KEY_TRUST, s.str(), popts);
         unsigned prep =
           get_prompt_reply(zypper, PROMPT_YN_GPG_KEY_TRUST, popts);

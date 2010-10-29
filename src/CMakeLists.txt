@@ -67,6 +67,7 @@ SET( zypper_out_SRCS
 SET( zypper_utils_HEADERS
   utils/Augeas.h
   utils/colors.h
+  utils/console.h
   utils/getopt.h
   utils/messages.h
   utils/misc.h
@@ -79,6 +80,7 @@ SET( zypper_utils_HEADERS
 SET( zypper_utils_SRCS
   utils/Augeas.cc
   utils/colors.cc
+  utils/console.cc
   utils/getopt.cc
   utils/messages.cc
   utils/misc.cc

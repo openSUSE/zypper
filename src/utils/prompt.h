@@ -11,6 +11,7 @@
 #include <set>
 
 #include "output/prompt.h"
+#include "utils/console.h"
 #include "main.h" // for gettext macros
 
 /**

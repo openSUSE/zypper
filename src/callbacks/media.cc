@@ -7,13 +7,13 @@
 
 #include <boost/format.hpp>
 #include <iostream>
-#include <unistd.h>
+#include <unistd.h> // for getpass
 
 #include "callbacks/media.h"
 
-#include "utils/misc.h"
 #include "utils/messages.h"
 #include "utils/prompt.h"
+#include "utils/misc.h" // for is_changeable_media
 
 #include "zypp/media/MediaManager.h"
 
@@ -78,6 +78,8 @@ request_medium_https_handler(Zypper & zypper, Url & url)
   set_common_option_help(popts);
   popts.setOptionHelp(4, _("Disable SSL certificate authority check and continue."));
 
+  if (!zypper.globalOpts().non_interactive)
+    clear_keyboard_buffer();
   // translators: this is a prompt text
   zypper.out().prompt(PROMPT_ARI_MEDIA_PROBLEM, _("Abort, retry, ignore?"), popts);
   int reply = get_prompt_reply(zypper, PROMPT_ARI_MEDIA_PROBLEM, popts);
@@ -136,6 +138,8 @@ static void eject_drive_dialog(
     int devcount = devices.size();
     PromptOptions popts(numbers.str(), 0);
     popts.setOptionHelp(devcount, _("Cancel"));
+    if (!zypper.globalOpts().non_interactive)
+      clear_keyboard_buffer();
     zypper.out().prompt(PROMPT_MEDIA_EJECT, _("Select device to eject."), popts);
     int reply = get_prompt_reply(zypper, PROMPT_MEDIA_EJECT, popts);
     if (reply == devcount)
@@ -175,6 +179,8 @@ request_medium_dvd_handler(
   set_common_option_help(popts);
   popts.setOptionHelp(4, _("Eject medium."));
 
+  if (!zypper.globalOpts().non_interactive)
+    clear_keyboard_buffer();
   // translators: this is a prompt text
   zypper.out().prompt(PROMPT_ARI_MEDIA_PROBLEM, _("Abort, retry, ignore?"), popts);
   int reply = get_prompt_reply(zypper, PROMPT_ARI_MEDIA_PROBLEM, popts);
@@ -256,6 +262,8 @@ ZmartRecipients::MediaChangeReportReceiver::requestMedia(
     PromptOptions popts(_("a/r/i/u"), 0);
     set_common_option_help(popts);
 
+    if (!zypper.globalOpts().non_interactive)
+      clear_keyboard_buffer();
     // translators: this is a prompt text
     zypper.out().prompt(PROMPT_ARI_MEDIA_PROBLEM, _("Abort, retry, ignore?"), popts);
     int reply = get_prompt_reply(zypper, PROMPT_ARI_MEDIA_PROBLEM, popts);
@@ -341,7 +349,7 @@ bool ZmartRecipients::AuthenticationReportReceiver::prompt(
   if (zypper.globalOpts().machine_readable)
     cin >> password;
   else
-    password = getpass("");
+    password = ::getpass("");
   if (password.empty())
     return false;
   auth_data.setPassword(password);

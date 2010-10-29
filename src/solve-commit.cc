@@ -115,6 +115,8 @@ static TriBool show_problem (Zypper & zypper,
     popts.setOptions(numbers.str() + _("c"), default_reply);
   }
 
+  if (!zypper.globalOpts().non_interactive)
+    clear_keyboard_buffer();
   zypper.out().prompt(PROMPT_DEP_RESOLVE, prompt_text, popts, desc_stm.str());
   unsigned int reply =
     get_prompt_reply(zypper, PROMPT_DEP_RESOLVE, popts);
@@ -481,6 +483,8 @@ static void show_update_messages(Zypper & zypper, const UpdateNotifications & me
   string prompt_text = _("View the notifications now?");
   unsigned int reply;
 
+  if (!zypper.globalOpts().non_interactive)
+    clear_keyboard_buffer();
   zypper.out().prompt(PROMPT_YN_INST_REMOVE_CONTINUE, prompt_text, popts);
   reply = get_prompt_reply(zypper, PROMPT_YN_INST_REMOVE_CONTINUE, popts);
 
@@ -661,6 +665,8 @@ void solve_and_commit (Zypper & zypper)
       unsigned int reply;
       do
       {
+        if (!zypper.globalOpts().non_interactive)
+          clear_keyboard_buffer();
         zypper.out().prompt(PROMPT_YN_INST_REMOVE_CONTINUE, prompt_text, popts);
         reply = get_prompt_reply(zypper, PROMPT_YN_INST_REMOVE_CONTINUE, popts);
 

@@ -5,12 +5,9 @@
                              |__/|_|  |_|
 \*---------------------------------------------------------------------------*/
 
-#include <fstream>
 #include <sstream>
 #include <iostream>
-#include <unistd.h>
-#include <readline/readline.h>
-#include <readline/history.h>
+#include <unistd.h>          // for getcwd()
 
 #include "zypp/base/Logger.h"
 #include "zypp/base/String.h"
@@ -34,60 +31,6 @@
 
 using namespace std;
 using namespace zypp;
-
-// Read a string. "\004" (^D) on EOF.
-string readline_getline()
-{
-  // A static variable for holding the line.
-  static char *line_read = NULL;
-
-  /* If the buffer has already been allocated,
-     return the memory to the free pool. */
-  if (line_read) {
-    free (line_read);
-    line_read = NULL;
-  }
-
-  //::rl_catch_signals = 0;
-  /* Get a line from the user. */
-  line_read = ::readline ("zypper> ");
-
-  /* If the line has any text in it,
-     save it on the history. */
-  if (line_read && *line_read)
-    add_history (line_read);
-
-  if (line_read)
-    return line_read;
-  else
-    return "\004";
-}
-
-// ----------------------------------------------------------------------------
-
-unsigned get_screen_width()
-{
-  if (!::isatty(STDOUT_FILENO))
-    return -1; // no clipping
-
-  int width = 80;
-
-  const char *cols_env = getenv("COLUMNS");
-  if (cols_env)
-    width  = ::atoi (cols_env);
-  else
-  {
-    ::rl_initialize();
-    //::rl_reset_screen_size();
-    ::rl_get_screen_size (NULL, &width);
-  }
-
-  // safe default
-  if (!width)
-    width = 80;
-
-  return width;
-}
 
 // ----------------------------------------------------------------------------
 
@@ -226,7 +169,7 @@ Url make_url (const string & url_s)
     else
     {
       char buf[PATH_MAX];
-      if (getcwd(buf, PATH_MAX) != NULL)
+      if (::getcwd(buf, PATH_MAX) != NULL)
       {
         DBG <<  "current working directory: " << buf << endl;
         path = string(buf) + "/" + url_s;
