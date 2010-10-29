@@ -33,20 +33,30 @@ namespace repo
     if (_table.empty())
     {
       // initialize it
-      _table["repomd"] = RepoType::RPMMD_e;
-      _table["rpmmd"] = RepoType::RPMMD_e;
-      _table["rpm-md"] = RepoType::RPMMD_e;
-      _table["yum"] = RepoType::RPMMD_e;
-      _table["YUM"] = RepoType::RPMMD_e;
-      _table["susetags"] = RepoType::YAST2_e;
-      _table["yast"] = RepoType::YAST2_e;
-      _table["YaST"] = RepoType::YAST2_e;
-      _table["YaST2"] = RepoType::YAST2_e;
-      _table["YAST"] = RepoType::YAST2_e;
-      _table["YAST2"] = RepoType::YAST2_e;
-      _table["yast2"] = RepoType::YAST2_e;
-      _table["plaindir"] = _table["Plaindir"] = RepoType::RPMPLAINDIR_e;
-      _table["NONE"] = _table["none"] = RepoType::NONE_e;
+      _table["repomd"]
+      = _table["rpmmd"]
+      = _table["rpm-md"]
+      = _table["yum"]
+      = _table["YUM"]
+      = _table["up2date"]
+      = RepoType::RPMMD_e;
+
+      _table["susetags"]
+      = _table["yast"]
+      = _table["YaST"]
+      = _table["YaST2"]
+      = _table["YAST"]
+      = _table["YAST2"]
+      = _table["yast2"]
+      = RepoType::YAST2_e;
+
+      _table["plaindir"]
+      = _table["Plaindir"]
+      = RepoType::RPMPLAINDIR_e;
+
+      _table["NONE"]
+      = _table["none"]
+      = RepoType::NONE_e;
     }
 
     std::map<std::string,RepoType::Type>::const_iterator it
@@ -66,10 +76,10 @@ namespace repo
     if ( _table.empty() )
     {
       // initialize it
-      _table[RPMMD_e]   = "rpm-md";
-      _table[YAST2_e]   = "yast2";
-      _table[RPMPLAINDIR_e]   = "plaindir";
-      _table[NONE_e] = "NONE";
+      _table[RPMMD_e]		= "rpm-md";
+      _table[YAST2_e]		= "yast2";
+      _table[RPMPLAINDIR_e]	= "plaindir";
+      _table[NONE_e]		= "NONE";
     }
     return _table[_type];
   }
