@@ -1,4 +1,10 @@
 -------------------------------------------------------------------
+Fri Oct 29 15:10:24 CEST 2010 - jkupec@suse.cz
+
+- Clear keyboard buffer before showing the prompt message
+  to avoid unwanted <enter> hits (bnc #649248)
+
+-------------------------------------------------------------------
 Mon Oct 25 12:02:31 CEST 2010 - jkupec@suse.cz
 
 - Tell about download-only switched on (bnc #648606)
