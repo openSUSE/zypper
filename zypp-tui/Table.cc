@@ -4,7 +4,7 @@
 
 #include "zypp/base/Logger.h"
 
-#include "utils/misc.h"
+#include "utils/console.h"
 #include "utils/text.h"
 
 #include "Table.h"

@@ -6,6 +6,7 @@
 \*---------------------------------------------------------------------------*/
 
 #include <iostream>
+#include <fstream>
 #include <sstream>
 
 #include <unistd.h>
@@ -20,11 +21,7 @@
 
 #include "OutNormal.h"
 
-using std::cout;
-using std::cerr;
-using std::endl;
-using std::string;
-using std::ostringstream;
+using namespace std;
 
 OutNormal::OutNormal(Verbosity verbosity)
   : Out(TYPE_NORMAL, verbosity),
