@@ -1,4 +1,10 @@
 -------------------------------------------------------------------
+Sat Oct 30 17:48:24 CEST 2010 - jkupec@suse.cz
+
+- Summary: fixed not shown "not updated" list when there were no
+  installable updates when doing 'zypper up' (bnc #594282)
+
+-------------------------------------------------------------------
 Fri Oct 29 15:10:24 CEST 2010 - jkupec@suse.cz
 
 - Clear keyboard buffer before showing the prompt message
