@@ -245,6 +245,7 @@ void Summary::readPool(const zypp::ResPool & pool)
   kinds.insert(ResKind::package);
   kinds.insert(ResKind::product);
   for_(kit, kinds.begin(), kinds.end())
+  {
     for_(it, pool.proxy().byKindBegin(*kit), pool.proxy().byKindEnd(*kit))
     {
       if (!(*it)->hasInstalledObj())
@@ -264,13 +265,21 @@ void Summary::readPool(const zypp::ResPool & pool)
 
       candidates[*kit].insert(ResPair(nullres, candidate));
     }
+    MIL << *kit << " update candidates: " << candidates[*kit].size() << endl;
+    MIL << "to be actually updated: " << toupgrade[*kit].size() << endl;
+  }
 
   // compare available updates with the list of packages to be upgraded
-  for_(it, toupgrade.begin(), toupgrade.end())
+  //
+  // note: operator[] (kindToResPairSet[kind]) actually creates ResPairSet when
+  //       used. This avoids bnc #594282 which occured when there was
+  //       for_(it, toupgrade.begin(), toupgrade.end()) loop used here and there
+  //       were no upgrades for that kind.
+  for_(kit, kinds.begin(), kinds.end())
     set_difference(
-        candidates[it->first].begin(), candidates[it->first].end(),
-        it->second.begin(), it->second.end(),
-        inserter(notupdated[it->first], notupdated[it->first].begin()),
+        candidates[*kit].begin(), candidates[*kit].end(),
+        toupgrade [*kit].begin(), toupgrade [*kit].end(),
+        inserter(notupdated[*kit], notupdated[*kit].begin()),
         Summary::ResPairNameCompare());
 
   // remove kinds with empty sets after the set_difference
@@ -278,6 +287,13 @@ void Summary::readPool(const zypp::ResPool & pool)
   {
     if (it->second.empty())
       notupdated.erase(it++);
+    else
+      ++it;
+  }
+  for (KindToResPairSet::iterator it = toupgrade.begin(); it != toupgrade.end();)
+  {
+    if (it->second.empty())
+      toupgrade.erase(it++);
     else
       ++it;
   }
