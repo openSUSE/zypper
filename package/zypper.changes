@@ -1,4 +1,9 @@
 -------------------------------------------------------------------
+Sun Oct 31 10:56:24 CEST 2010 - jkupec@suse.cz
+- Fixed multiversion packages incorrectly shown in "not updated"
+  list (bnc #629197).
+
+-------------------------------------------------------------------
 Sat Oct 30 17:48:24 CEST 2010 - jkupec@suse.cz
 
 - Summary: fixed not shown "not updated" list when there were no
