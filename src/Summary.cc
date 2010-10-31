@@ -83,6 +83,18 @@ void Summary::readPool(const zypp::ResPool & pool)
   _todownload = ByteCount();
   _inst_size_change = ByteCount();
 
+  // find multi-version packages, which actually have mult. versions installed
+  const set<string> & multies = ZConfig::instance().multiversionSpec();
+  for_(name, multies.begin(), multies.end())
+  {
+    ui::Selectable::Ptr s = pool.proxy().lookup(ResKind::package, *name);
+    bool got_multi = s && (
+        s->installedSize() > 1 ||
+        (s->installedSize() == 1 && s->toInstall()) );
+    if (got_multi)
+      multi_installed.insert(*name);
+  }
+
   // collect resolvables to be installed/removed
 
   KindToResObjectSet to_be_installed;
@@ -170,6 +182,11 @@ void Summary::readPool(const zypp::ResPool & pool)
           // upgrade
           if (res->edition() > (*rmit)->edition())
           {
+            // don't put multiversion packages to 'toupgrade', they will
+            // always be reported as newly installed (and removed)
+            if (multi_installed.find(res->name()) != multi_installed.end())
+              continue;
+
             toupgrade[res->kind()].insert(rp);
             if (res->arch() != (*rmit)->arch())
               tochangearch[res->kind()].insert(rp);
@@ -189,6 +206,11 @@ void Summary::readPool(const zypp::ResPool & pool)
           // downgrade
           else
           {
+            // don't put multiversion packages to 'todowngrade', they will
+            // always be reported as newly installed (and removed)
+            if (multi_installed.find(res->name()) != multi_installed.end())
+              continue;
+
             todowngrade[res->kind()].insert(rp);
             if (res->arch() != (*rmit)->arch())
               tochangearch[res->kind()].insert(rp);
@@ -216,6 +238,9 @@ void Summary::readPool(const zypp::ResPool & pool)
   }
 
   m.elapsed();
+
+  // collect the rest (not upgraded/downgraded) of to_be_removed as 'toremove'
+  // and decrease installed size change accordingly
 
   //bool toremove_by_solver = false;
   for (KindToResObjectSet::const_iterator it = to_be_removed.begin();
@@ -253,6 +278,7 @@ void Summary::readPool(const zypp::ResPool & pool)
 
       ResObject::constPtr candidate =
         (*it)->highestAvailableVersionObj().resolvable();
+
       if (!candidate)
         continue;
       if (compareByNVRA((*it)->installedObj().resolvable(), candidate) >= 0)
@@ -261,6 +287,11 @@ void Summary::readPool(const zypp::ResPool & pool)
       if ((*it)->installedObj()->arch() != candidate->arch()
           && (*it)->installedObj()->arch() != Arch_noarch
           && candidate->arch() != Arch_noarch)
+        continue;
+      // mutliversion packages do not end up in toupgrade, so we need to remove
+      // them from candidates if the candidate actually installs (bnc #629197)
+      if (multi_installed.find(candidate->name()) != multi_installed.end()
+          && candidate->poolItem().status().isToBeInstalled())
         continue;
 
       candidates[*kit].insert(ResPair(nullres, candidate));
@@ -296,18 +327,6 @@ void Summary::readPool(const zypp::ResPool & pool)
       toupgrade.erase(it++);
     else
       ++it;
-  }
-
-  // find multi-version packages, which actually have mult. versions installed
-  const set<string> & multies = ZConfig::instance().multiversionSpec();
-  for_(name, multies.begin(), multies.end())
-  {
-    ui::Selectable::Ptr s = pool.proxy().lookup(ResKind::package, *name);
-    bool got_multi = s && (
-        s->installedSize() > 1 ||
-        (s->installedSize() == 1 && s->toInstall()) );
-    if (got_multi)
-      multi_installed.insert(*name);
   }
 
   m.stop();
