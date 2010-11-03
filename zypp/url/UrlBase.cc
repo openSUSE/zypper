@@ -1246,6 +1246,15 @@ namespace zypp
           setQueryStringMap(pmap);
     }
 
+    // ---------------------------------------------------------------
+    void
+    UrlBase::delQueryParam(const std::string &param)
+    {
+          zypp::url::ParamMap pmap( getQueryStringMap(zypp::url::E_DECODED));
+          pmap.erase(param);
+          setQueryStringMap(pmap);
+    }
+
 
     // ---------------------------------------------------------------
     std::string

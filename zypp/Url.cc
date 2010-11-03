@@ -815,6 +815,13 @@ namespace zypp
   }
 
   // -----------------------------------------------------------------
+  void
+  Url::delQueryParam(const std::string &param)
+  {
+    m_impl->delQueryParam(param);
+  }
+
+  // -----------------------------------------------------------------
   ViewOptions
   Url::getViewOptions() const
   {
