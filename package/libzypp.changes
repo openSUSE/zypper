@@ -1,4 +1,10 @@
 -------------------------------------------------------------------
+Wed Nov  3 16:06:46 CET 2010 - dheidler@suse.de
+
+- added metalink support
+- version 8.8.0 (7)
+
+-------------------------------------------------------------------
 Thu Oct 21 18:15:31 CEST 2010 - ma@suse.de
 
 - Feed the ProvideFilePolicy progress callback in addition to any 
