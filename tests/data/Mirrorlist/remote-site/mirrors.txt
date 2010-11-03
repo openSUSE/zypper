@@ -1,0 +1,5 @@
+http://ftp-stud.hs-esslingen.de/pub/fedora/linux/updates/13/x86_64/repodata/repomd.xml
+ftp://ftp-stud.hs-esslingen.de/pub/fedora/linux/updates/13/x86_64/repodata/repomd.xml
+rsync://ftp-stud.hs-esslingen.de/fedora/linux/updates/13/x86_64/repodata/repomd.xml
+http://mirror.eurid.eu/fedora/linux/updates/13/x86_64/repodata/repomd.xml
+ftp://mirror.eurid.eu/fedora/linux/updates/13/x86_64/repodata/repomd.xml

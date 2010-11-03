@@ -702,6 +702,7 @@ INSTALL(  FILES
 
 SET( zypp_repo_SRCS
   repo/RepoException.cc
+  repo/RepoMirrorList.cc
   repo/RepoType.cc
   repo/ServiceType.cc
   repo/PackageProvider.cc
@@ -721,6 +722,7 @@ SET( zypp_repo_SRCS
 
 SET( zypp_repo_HEADERS
   repo/RepoException.h
+  repo/RepoMirrorList.h
   repo/RepoType.h
   repo/ServiceType.h
   repo/PackageProvider.h
