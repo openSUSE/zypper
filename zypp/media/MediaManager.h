@@ -413,6 +413,8 @@ namespace zypp
      *       'spnego', 'gssnego'.
      *       Note, that this list depends on the list of methods supported
      *       by the curl library.
+     *     - <tt>mediahandler</tt>: Set the mediahandler for this url
+     *     Valid values are: 'curl', 'multicurl', 'aria2c'
      *   - Authority:
      *     The authority component has to provide a hostname. Optionally
      *     also a username and password. In case of the 'ftp' scheme,

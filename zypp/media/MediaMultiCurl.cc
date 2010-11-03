@@ -298,12 +298,7 @@ multifetchworker::multifetchworker(int no, multifetchrequest &request, const Url
   _maxspeed = _request->_maxspeed;
   _noendrange = false;
 
-  Url curlUrl(url);
-  curlUrl.setUsername( "" );
-  curlUrl.setPassword( "" );
-  curlUrl.setPathParams( "" );
-  curlUrl.setQueryString( "" );
-  curlUrl.setFragment( "" );
+  Url curlUrl( clearQueryString(url) );
   _urlbuf = curlUrl.asString();
   _curl = _request->_context->fromEasyPool(_url.getHost());
   if (_curl)
