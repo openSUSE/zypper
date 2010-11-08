@@ -1,4 +1,9 @@
 -------------------------------------------------------------------
+Mon Nov  8 12:07:12 CET 2010 - jkupec@suse.cz
+
+- modifyrepo: exit with error if repo not found (bnc #650822)
+
+-------------------------------------------------------------------
 Sun Oct 31 10:56:24 CEST 2010 - jkupec@suse.cz
 - Fixed multiversion packages incorrectly shown in "not updated"
   list (bnc #629197).
