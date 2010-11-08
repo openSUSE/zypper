@@ -61,7 +61,7 @@ void patch_check ()
     if (it->isRelevant() && !it->isSatisfied())
     {
       gData.patches_count++;
-      if (patch->category() == "security")
+      if (patch->categoryEnum() == Patch::CAT_SECURITY)
         gData.security_patches_count++;
     }
   }
