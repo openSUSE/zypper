@@ -3164,6 +3164,7 @@ void Zypper::doCommand()
           out().error(
             boost::str(format(_("Repository %s not found.")) % *arg));
           ERR << "Repo " << *arg << " not found" << endl;
+          setExitCode(ZYPPER_EXIT_ERR_INVALID_ARGS);
         }
       }
     }
