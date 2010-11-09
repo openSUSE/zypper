@@ -39,8 +39,6 @@ namespace zypp
     const long PLUGIN_SEND_TIMEOUT = str::strtonum<long>( getenv( "ZYPP_PLUGIN_SEND_TIMEOUT" ) );
     const long PLUGIN_RECEIVE_TIMEOUT = str::strtonum<long>( getenv( "ZYPP_PLUGIN_RECEIVE_TIMEOUT" ) );
 
-    const long PLUGIN_TIMEOUT = ( getenv( "ZYPP_PLUGIN_DEBUG" )
-
     /** Dump buffer string if PLUGIN_DEBUG is on.
      * \ingroup g_RAII
      */
