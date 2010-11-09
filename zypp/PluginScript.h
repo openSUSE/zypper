@@ -33,6 +33,10 @@ namespace zypp
    * among multiple copies. It gets automatically closed if the last copy goes out of
    * scope.
    *
+   * Timeout when sending/receiving data to/from a plugin default to 30 sec. The value
+   * (in seconds) my be changed via the environment variables \c ZYPP_PLUGIN_SEND_TIMEOUT,
+   * \c ZYPP_PLUGIN_RECEIVE_TIMEOUT or \c ZYPP_PLUGIN_TIMEOUT (both: send and receive).
+   *
    * \code
    *  // Setup comnnection to plugin script
    *  PluginScript scr;

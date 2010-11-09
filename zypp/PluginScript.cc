@@ -34,7 +34,12 @@ namespace zypp
 
   namespace
   {
-    static const char * PLUGIN_DEBUG = getenv( "ZYPP_PLUGIN_DEBUG" );
+    const char * PLUGIN_DEBUG = getenv( "ZYPP_PLUGIN_DEBUG" );
+    const long PLUGIN_TIMEOUT = str::strtonum<long>( getenv( "ZYPP_PLUGIN_TIMEOUT" ) );
+    const long PLUGIN_SEND_TIMEOUT = str::strtonum<long>( getenv( "ZYPP_PLUGIN_SEND_TIMEOUT" ) );
+    const long PLUGIN_RECEIVE_TIMEOUT = str::strtonum<long>( getenv( "ZYPP_PLUGIN_RECEIVE_TIMEOUT" ) );
+
+    const long PLUGIN_TIMEOUT = ( getenv( "ZYPP_PLUGIN_DEBUG" )
 
     /** Dump buffer string if PLUGIN_DEBUG is on.
      * \ingroup g_RAII
@@ -170,8 +175,10 @@ namespace zypp
 
   ///////////////////////////////////////////////////////////////////
 
-  const long PluginScript::Impl::send_timeout = 3;
-  const long PluginScript::Impl::receive_timeout = 5;
+  const long PluginScript::Impl::send_timeout = ( PLUGIN_SEND_TIMEOUT > 0 ? PLUGIN_SEND_TIMEOUT
+									  : ( PLUGIN_TIMEOUT > 0 ? PLUGIN_TIMEOUT : 30 ) );
+  const long PluginScript::Impl::receive_timeout = ( PLUGIN_RECEIVE_TIMEOUT > 0 ? PLUGIN_RECEIVE_TIMEOUT
+                                                                                : ( PLUGIN_TIMEOUT > 0 ? PLUGIN_TIMEOUT : 30 ) );
 
   ///////////////////////////////////////////////////////////////////
 
