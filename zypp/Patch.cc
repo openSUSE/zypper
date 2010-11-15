@@ -53,6 +53,7 @@ namespace zypp
     static const IdString cat_recommended	( "recommended" );
     static const IdString cat_bugfix		( "bugfix" );		// rhn
     static const IdString cat_optional		( "optional" );
+    static const IdString cat_feature		( "feature" );
     static const IdString cat_enhancement	( "enhancement" );	// rnh
     static const IdString cat_document		( "document" );
 
@@ -65,7 +66,7 @@ namespace zypp
       return CAT_SECURITY;
     if ( cat == cat_recommended || cat == cat_bugfix )
       return CAT_RECOMMENDED;
-    if ( cat == cat_optional || cat == cat_enhancement )
+    if ( cat == cat_optional || cat == cat_enhancement || cat == cat_feature )
       return CAT_OPTIONAL;
     if ( cat == cat_document )
       return CAT_DOCUMENT;
