@@ -1,4 +1,9 @@
 -------------------------------------------------------------------
+Fri Nov 19 11:24:39 CET 2010 - mls@suse.de
+
+- fix access of freed memory in MultiCurl (bnc#654600)
+
+-------------------------------------------------------------------
 Sun Nov  7 01:13:39 CET 2010 - ma@suse.de
 
 - Update zypp-po.tar.bz2

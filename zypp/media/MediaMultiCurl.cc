@@ -959,26 +959,27 @@ multifetchrequest::run(std::vector<Url> &urllist)
       // collect all curl results, reschedule new jobs
       CURLMsg *msg;
       while ((msg = curl_multi_info_read(_multi, &nqueue)) != 0)
-        {
-          if (msg->msg != CURLMSG_DONE)
-            continue;
-	  multifetchworker *worker;
-	  if (curl_easy_getinfo(msg->easy_handle, CURLINFO_PRIVATE, &worker) != CURLE_OK)
-	    ZYPP_THROW(MediaCurlException(_baseurl, "curl_easy_getinfo", "unknown error"));
+	{
+	  if (msg->msg != CURLMSG_DONE)
+	    continue;
+	  CURL *easy = msg->easy_handle;
 	  CURLcode cc = msg->data.result;
+	  multifetchworker *worker;
+	  if (curl_easy_getinfo(easy, CURLINFO_PRIVATE, &worker) != CURLE_OK)
+	    ZYPP_THROW(MediaCurlException(_baseurl, "curl_easy_getinfo", "unknown error"));
 	  if (worker->_blkreceived && now > worker->_blkstarttime)
 	    {
 	      if (worker->_avgspeed)
-	        worker->_avgspeed = (worker->_avgspeed + worker->_blkreceived / (now - worker->_blkstarttime)) / 2;
+		worker->_avgspeed = (worker->_avgspeed + worker->_blkreceived / (now - worker->_blkstarttime)) / 2;
 	      else
-	        worker->_avgspeed = worker->_blkreceived / (now - worker->_blkstarttime);
+		worker->_avgspeed = worker->_blkreceived / (now - worker->_blkstarttime);
 	    }
 	  DBG << "#" << worker->_workerno << ": BLK " << worker->_blkno << " done code " << cc << " speed " << worker->_avgspeed << endl;
-	  curl_multi_remove_handle(_multi, msg->easy_handle);
+	  curl_multi_remove_handle(_multi, easy);
 	  if (cc == CURLE_HTTP_RETURNED_ERROR)
-            {
-              long statuscode = 0;
-              (void)curl_easy_getinfo(msg->easy_handle, CURLINFO_RESPONSE_CODE, &statuscode);
+	    {
+	      long statuscode = 0;
+	      (void)curl_easy_getinfo(easy, CURLINFO_RESPONSE_CODE, &statuscode);
 	      DBG << "HTTP status " << statuscode << endl;
 	      if (statuscode == 416 && !_blklist)	/* Range error */
 		{
@@ -1001,7 +1002,7 @@ multifetchrequest::run(std::vector<Url> &urllist)
 		      continue;
 		    }
 		}
-            }
+	    }
 	  if (cc == 0)
 	    {
 	      if (!worker->checkChecksum())
@@ -1038,7 +1039,7 @@ multifetchrequest::run(std::vector<Url> &urllist)
 	      int maxworkerno = 0;
 	      int numbetter = 0;
 	      for (std::list<multifetchworker *>::iterator workeriter = _workers.begin(); workeriter != _workers.end(); ++workeriter)
-	        {
+		{
 		  multifetchworker *oworker = *workeriter;
 		  if (oworker->_state == WORKER_BROKEN)
 		    continue;
