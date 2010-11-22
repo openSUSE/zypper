@@ -263,7 +263,6 @@ BOOST_AUTO_TEST_CASE(repomanager_test)
 
   BOOST_CHECK_MESSAGE( !manager.isCached(repo),
                        "Repo cache was just deleted, should not be cached now" );
-
   // now cache should build normally
   manager.buildCache(repo);
 
@@ -276,6 +275,12 @@ BOOST_AUTO_TEST_CASE(repomanager_test)
   }
   MIL << "Parsing repository metadata..." << endl;
   manager.buildCache(repo);
+
+
+  // now test that loading twice a repo updates
+  // it instead of duplicating the solv file
+
+
 }
 
 BOOST_AUTO_TEST_CASE(repo_seting_test)

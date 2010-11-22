@@ -1,4 +1,71 @@
-/** \page Testcases Writing Testcases
+/** \page Testcases Writing and tunning testcases
+
+\section Introduction
+
+ZYpp has a suite of tests located in under test/ directory of the source tree.
+
+Right now, tests are grouped into
+
+- media : tests related to downloading and the http/ftp/nfs/iso abstraction layer
+- parser : tests related to classes that offer file format parsing
+- repo : tests related to repository handling
+- sat : tests related to the sat-solver integration
+- zypp : tests related to the main libzypp classes and APIs
+
+Tests are written using boost test library.
+
+- <a href="http://www.boost.org/doc/libs/1_36_0/libs/test/doc/html/index.html">Boost Test Library</a>
+- <a href="http://www.boost.org/doc/libs/1_36_0/libs/test/doc/html/utf.html">The Unit Test Framework</a>
+- <a href="http://www.boost.org/doc/libs/1_36_0/libs/test/doc/html/utf/testing-tools/reference.html">The UTF testing tools reference</a>
+
+\section Anatomy of a ZYpp testcase
+
+The file should be in one of the described groups, and by general rule it is named ClassName_test.cc where ClassName is the name of the class or module the test covers.
+
+Data and fixtures are stored in data/ directories in each test group. However groups may use and reference data from other test groups. The macro \ref TESTS_SRC_DIR is defined as the tests/ directory located in libzypp source directory. You can build the paths to the data/fixtures using that macro.
+
+A simple testcase:
+
+\code
+#include "zypp/Date.h"
+#include <boost/test/auto_unit_test.hpp>
+
+BOOST_AUTO_TEST_CASE(date_test)
+{
+  std::string format = "%Y-%m-%d %H:%M:%S";
+  std::string date = "2009-02-14 00:31:30";
+  BOOST_CHECK_EQUAL(zypp::Date(date,format).form(format), date);
+}
+\endcode
+
+\section Building and running the testsuite
+
+- Build the testsuite
+
+\verbatim
+$ cd build
+$ cmake -DCMAKE_INSTALL_PREFIX=/prefix ..
+$ cd tests
+$ make
+\endverbatim
+
+- Run a simple test
+
+\verbatim
+$ zypp/Date_test
+Running 1 test case...
+
+*** No errors detected
+\endverbatim
+
+- Run all tests
+
+\verbatim
+$ ctest .
+\endverbatim
+
+\section
+
 
 \verbatim
   - added tests/data/openSUSE-11.1 containing raw susetags metadata.
@@ -37,26 +104,18 @@
 \endverbatim
 
 \verbatim
-  - Added support for loading helix files e.g. from testcases. This is what 
+  - Added support for loading helix files e.g. from testcases. This is what
     you need to load all repos from a solver testcase into the pool:
 
 	#include "TestSetup.h"
-	
+
 	BOOST_AUTO_TEST_CASE(test)
-        { 
+        {
 		TestSetup test( Arch_x86_64 );
 	  	test.loadTestcaseRepos( "/suse/ma/BUGS/153548/YaST2/solverTestcase" );
 
 \endverbatim
 
-\verbatim
-Boost Test Library
-http://www.boost.org/doc/libs/1_36_0/libs/test/doc/html/index.html
+\section References
 
-  The Unit Test Framework
-  http://www.boost.org/doc/libs/1_36_0/libs/test/doc/html/utf.html
-
-  The UTF testing tools reference
-  http://www.boost.org/doc/libs/1_36_0/libs/test/doc/html/utf/testing-tools/reference.html
-\endverbatim
 */
