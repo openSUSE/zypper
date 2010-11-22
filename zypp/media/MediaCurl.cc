@@ -295,7 +295,7 @@ void fillSettingsFromUrl( const Url &url, TransferSettings &s )
             }
             s.setProxy(proxy);
             s.setProxyEnabled(true);
-        }        
+        }
     }
 
     // HTTP authentication type
@@ -326,7 +326,11 @@ void fillSettingsFromUrl( const Url &url, TransferSettings &s )
  */
 void fillSettingsSystemProxy( const Url&url, TransferSettings &s )
 {
+#ifdef _WITH_LIBPROXY_SUPPORT_
+    ProxyInfo proxy_info (ProxyInfo::ImplPtr(new ProxyInfoLibproxy()));
+#else
     ProxyInfo proxy_info (ProxyInfo::ImplPtr(new ProxyInfoSysconfig("proxy")));
+#endif
     s.setProxyEnabled( proxy_info.useProxyFor( url ) );
     if ( s.proxyEnabled() )
       s.setProxy(proxy_info.proxy(url));
@@ -465,9 +469,9 @@ Url MediaCurl::clearQueryString(const Url &url) const
 
 TransferSettings & MediaCurl::settings()
 {
-    return _settings;    
+    return _settings;
 }
-      
+
 
 void MediaCurl::setCookieFile( const Pathname &fileName )
 {
@@ -487,17 +491,17 @@ void MediaCurl::checkProtocol(const Url &url) const
     std::string        scheme( url.getScheme());
     bool               found = false;
     for(proto=curl_info->protocols; !found && *proto; ++proto)
-    {    
+    {
       if( scheme == std::string((const char *)*proto))
         found = true;
-    }    
+    }
     if( !found)
-    {    
+    {
       std::string msg("Unsupported protocol '");
       msg += scheme;
-      msg += "'"; 
+      msg += "'";
       ZYPP_THROW(MediaBadUrlException(_url, msg));
-    }    
+    }
   }
 }
 
@@ -525,7 +529,7 @@ void MediaCurl::setupEasy()
 
   // create non persistant settings
   // so that we don't add headers twice
-  TransferSettings vol_settings(_settings);  
+  TransferSettings vol_settings(_settings);
 
   // add custom headers
   vol_settings.addHeader(anonymousIdHeader());
@@ -643,7 +647,7 @@ void MediaCurl::setupEasy()
   {
       SET_OPTION(CURLOPT_NOPROXY, "*");
   }
-  
+
   /** Speed limits */
   if ( _settings.minDownloadSpeed() != 0 )
   {
@@ -676,7 +680,7 @@ void MediaCurl::setupEasy()
         ++it )
   {
       MIL << "HEADER " << *it << std::endl;
-      
+
       _customHeaders = curl_slist_append(_customHeaders, it->c_str());
       if ( !_customHeaders )
           ZYPP_THROW(MediaCurlInitException(_url));
@@ -997,7 +1001,7 @@ void MediaCurl::evaluateCurlCode( const Pathname &filename,
 bool MediaCurl::doGetDoesFileExist( const Pathname & filename ) const
 {
   DBG << filename.asString() << endl;
-  
+
   if(!_url.isValid())
     ZYPP_THROW(MediaBadUrlException(_url));
 

@@ -324,13 +324,20 @@ INSTALL(  FILES
   DESTINATION ${CMAKE_INSTALL_PREFIX}/include/zypp/media
 )
 
+IF ( LIBPROXY_FOUND )
+  SET(zypp_media_proxyinfo_libproxy_SRCS media/proxyinfo/ProxyInfoLibproxy.cc)
+  SET(zypp_media_proxyinfo_libproxy_HEADERS media/proxyinfo/ProxyInfoLibproxy.h)
+ENDIF( LIBPROXY_FOUND )
+
 SET( zypp_media_proxyinfo_SRCS
   media/proxyinfo/ProxyInfoSysconfig.cc
+  ${zypp_media_proxyinfo_libproxy_SRCS}
 )
 
 SET( zypp_media_proxyinfo_HEADERS
   media/proxyinfo/ProxyInfoImpl.h
   media/proxyinfo/ProxyInfoSysconfig.h
+  ${zypp_media_proxyinfo_libproxy_HEADERS}
   media/proxyinfo/ProxyInfos.h
 )
 
@@ -912,6 +919,7 @@ TARGET_LINK_LIBRARIES(zypp ${OPENSSL_LIBRARIES} )
 TARGET_LINK_LIBRARIES(zypp ${CRYPTO_LIBRARIES} )
 TARGET_LINK_LIBRARIES(zypp ${SIGNALS_LIBRARY} )
 TARGET_LINK_LIBRARIES(zypp ${UDEV_LIBRARY} )
+TARGET_LINK_LIBRARIES(zypp ${LIBPROXY_LIBRARIES} )
 
 INSTALL(TARGETS zypp LIBRARY DESTINATION ${LIB_INSTALL_DIR} )
 

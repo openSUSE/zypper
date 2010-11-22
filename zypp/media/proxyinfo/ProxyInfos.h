@@ -16,5 +16,8 @@
 #include <list>
 
 #include "zypp/media/proxyinfo/ProxyInfoSysconfig.h"
+#ifdef _WITH_LIBPROXY_SUPPORT_
+#include "zypp/media/proxyinfo/ProxyInfoLibproxy.h"
+#endif
 
 #endif // ZYPP_MEDIA_PROXYINFO_PROXYINFOS_H
