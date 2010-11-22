@@ -49,9 +49,9 @@ namespace zypp {
 	str::split(it->second, std::back_inserter(_no_proxy), ", \t");
     }
 
-    std::string ProxyInfoSysconfig::proxy(const std::string & protocol_r) const
+    std::string ProxyInfoSysconfig::proxy(const Url & url_r) const
     { 
-      map<string,string>::const_iterator it = _proxies.find(protocol_r);
+      map<string,string>::const_iterator it = _proxies.find(url_r.getScheme());
       if (it != _proxies.end())
 	return it->second;
       return "";

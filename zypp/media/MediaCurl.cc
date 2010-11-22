@@ -329,7 +329,7 @@ void fillSettingsSystemProxy( const Url&url, TransferSettings &s )
     ProxyInfo proxy_info (ProxyInfo::ImplPtr(new ProxyInfoSysconfig("proxy")));
     s.setProxyEnabled( proxy_info.useProxyFor( url ) );
     if ( s.proxyEnabled() )
-      s.setProxy(proxy_info.proxy(url.getScheme()));
+      s.setProxy(proxy_info.proxy(url));
 }
 
 Pathname MediaCurl::_cookieFile = "/var/lib/YaST2/cookies";

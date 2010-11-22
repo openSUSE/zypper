@@ -42,7 +42,7 @@ namespace zypp {
       /** Ctor */
       ProxyInfo(ProxyInfo::ImplPtr pimpl_r);
       bool enabled() const;
-      std::string proxy(const std::string & protocol_r) const;
+      std::string proxy(const Url & url) const;
       NoProxyList noProxy() const;
       NoProxyIterator noProxyBegin() const;
       NoProxyIterator noProxyEnd() const;

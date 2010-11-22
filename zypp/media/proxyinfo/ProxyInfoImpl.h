@@ -36,7 +36,7 @@ namespace zypp {
       /**  */
       virtual bool enabled() const = 0;
       /**  */
-      virtual std::string proxy(const std::string & prorocol_r) const = 0;
+      virtual std::string proxy(const Url & url_r) const = 0;
       /**  */
       virtual ProxyInfo::NoProxyList noProxy() const = 0;
       /**  */
@@ -47,7 +47,7 @@ namespace zypp {
       /** Return \c true if  \ref enabled and \a url_r does not match \ref noProxy. */
       bool useProxyFor( const Url & url_r ) const
       {
-        if ( ! enabled() || proxy( url_r.getScheme() ).empty() )
+        if ( ! enabled() && proxy( url_r ).empty() )
           return false;
 
         ProxyInfo::NoProxyList noproxy( noProxy() );

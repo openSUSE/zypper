@@ -32,7 +32,7 @@ namespace zypp {
       bool enabled() const
       { return _enabled; }
       /**  */
-      std::string proxy(const std::string & protocol_r) const;
+      std::string proxy(const Url & url_r) const;
       /**  */
       ProxyInfo::NoProxyList noProxy() const
       { return _no_proxy; }

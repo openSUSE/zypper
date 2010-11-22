@@ -35,8 +35,8 @@ namespace zypp {
     bool ProxyInfo::enabled() const
     { return _pimpl->enabled(); }
 
-    std::string ProxyInfo::proxy(const std::string & protocol_r) const
-    { return _pimpl->proxy(protocol_r); }
+    std::string ProxyInfo::proxy(const Url & url_r) const
+    { return _pimpl->proxy(url_r); }
 
     ProxyInfo::NoProxyList ProxyInfo::noProxy() const
     { return _pimpl->noProxy(); }
