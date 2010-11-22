@@ -193,7 +193,7 @@ startElement(void *userData, const char *name, const char **atts)
 	pd->blksize = blksize;
 	pd->npiece = 0;
         pd->piece.clear();
-	if (!strcmp(type, "sha1"))
+	if (!strcmp(type, "sha1") || !strcmp(type, "sha-1"))
 	  pd->piecel = 20;
 	else if (!strcmp(type, "zsync"))
 	  pd->piecel = 4;
@@ -211,9 +211,9 @@ startElement(void *userData, const char *name, const char **atts)
 	const char *type = find_attr("type", atts);
 	if (!type)
 	  type = "?";
-	if (!strcmp(type, "sha1") && pd->chksuml < 20)
+	if ((!strcmp(type, "sha1") || !strcmp(type, "sha-1")) && pd->chksuml < 20)
 	  pd->chksuml = 20;
-	else if (!strcmp(type, "sha256"))
+	else if (!strcmp(type, "sha256") || !strcmp(type, "sha-256"))
 	  pd->chksuml = 32;
 	else
 	  {
@@ -227,7 +227,7 @@ startElement(void *userData, const char *name, const char **atts)
     case STATE_M4PHASH:
       {
 	const char *piece = find_attr("piece", atts);
-	if (!piece || atoi(piece) != pd->npiece)
+	if (pd->state == STATE_PHASH && (!piece || atoi(piece) != pd->npiece))
 	  {
 	    pd->state = pd->sbtab[pd->state];
 	    pd->statedepth--;
@@ -386,16 +386,21 @@ MetaLinkParser::~MetaLinkParser()
 }
 
 void
-MetaLinkParser::parse(string filename)
+MetaLinkParser::parse(const Pathname &filename)
+{
+  parse(InputStream(filename));
+}
+
+void
+MetaLinkParser::parse(const InputStream &is)
 {
   char buf[4096];
-  std::ifstream is(filename.c_str());
-  if (!is)
+  if (!is.stream())
     ZYPP_THROW(Exception("MetaLinkParser: no such file"));
-  while (is.good())
+  while (is.stream().good())
     {
-      is.read(buf, sizeof(buf));
-      parseBytes(buf, is.gcount());
+      is.stream().read(buf, sizeof(buf));
+      parseBytes(buf, is.stream().gcount());
     }
   parseEnd();
 }

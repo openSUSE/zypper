@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<metalink version="3.0" xmlns="http://www.metalinker.org/" type="dynamic" pubdate="Wed, 03 Nov 2010 13:30:11 GMT" generator="mirrormanager" xmlns:mm0="http://fedorahosted.org/mirrormanager">
+  <files>
+    <file name="repomd.xml">
+      <mm0:timestamp>1288734483</mm0:timestamp>
+      <size>4834</size>
+      <verification>
+        <hash type="md5">8fd7745c38277ac8b5618107edb72b7e</hash>
+        <hash type="sha1">de06c2b34f5b13fe6029da59475359675931eb9d</hash>
+        <hash type="sha256">d6f8135c9d5ac370fafd258c89cfb574989cd8557044d9551eefd1aaf2c54c48</hash>
+        <hash type="sha512">f43d747fa0134e9990297f98771f74a7a449f1b5a53a6936949af5e0b51f3b3834b69af3e25ae4dd7c97415d5570abb5c0a4588ddfae673228f46a83f200b5cd</hash>
+      </verification>
+      <mm0:alternates>
+        <mm0:alternate>
+            <mm0:timestamp>1288642986</mm0:timestamp>
+            <size>4834</size>
+            <verification>
+              <hash type="md5">bd32127a8b2ae7a370be3dbf876afbc7</hash>
+              <hash type="sha1">b4b9ea2494aefd82ff08915c28f6548a31625744</hash>
+              <hash type="sha256">b0d8ae9c43bfd06829092273b409cb0f6e2b581fafd370f11752842c0cd0c2c6</hash>
+              <hash type="sha512">78d2eff26e6a12bb1b1bbc78956f548734e921335943afabcfbf4f3ba6d164e8820eb2e685fad78088d2b42b7ec75fe4bde8ad6f5d7e9cf44e70837ce23fb758</hash>
+            </verification>
+        </mm0:alternate>
+      </mm0:alternates>
+      <resources maxconnections="1">
+        <url protocol="http" type="http" location="DE" preference="100" >http://ftp-stud.hs-esslingen.de/pub/fedora/linux/updates/13/x86_64/repodata/repomd.xml</url>
+        <url protocol="ftp" type="ftp" location="DE" preference="100" >ftp://ftp-stud.hs-esslingen.de/pub/fedora/linux/updates/13/x86_64/repodata/repomd.xml</url>
+        <url protocol="rsync" type="rsync" location="DE" preference="100" >rsync://ftp-stud.hs-esslingen.de/fedora/linux/updates/13/x86_64/repodata/repomd.xml</url>
+        <url protocol="http" type="http" location="BE" preference="45" >http://mirror.eurid.eu/fedora/linux/updates/13/x86_64/repodata/repomd.xml</url>
+        <url protocol="ftp" type="ftp" location="BE" preference="45" >ftp://mirror.eurid.eu/fedora/linux/updates/13/x86_64/repodata/repomd.xml</url>
+      </resources>
+    </file>
+  </files>
+</metalink>

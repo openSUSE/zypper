@@ -144,6 +144,8 @@ namespace zypp
     template<class _Report>
       struct ReceiveReport : public _Report
       {
+	typedef _Report                   ReportType;
+	typedef ReceiveReport<_Report>    Receiver;
         typedef DistributeReport<_Report> Distributor;
 
         virtual ~ReceiveReport()
@@ -172,7 +174,9 @@ namespace zypp
       struct DistributeReport
       {
        public:
-         typedef ReceiveReport<_Report> Receiver;
+	typedef _Report                   ReportType;
+	typedef ReceiveReport<_Report>    Receiver;
+	typedef DistributeReport<_Report> Distributor;
 
          static DistributeReport & instance()
          {
@@ -208,6 +212,8 @@ namespace zypp
     template<class _Report>
       struct SendReport : private zypp::base::NonCopyable
       {
+	typedef _Report                   ReportType;
+        typedef ReceiveReport<_Report>    Receiver;
         typedef DistributeReport<_Report> Distributor;
 
         SendReport()
@@ -248,6 +254,7 @@ namespace zypp
     template<class _Report>
       struct TempConnect
       {
+	typedef _Report                   ReportType;
         typedef ReceiveReport<_Report>    Receiver;
         typedef DistributeReport<_Report> Distributor;
 

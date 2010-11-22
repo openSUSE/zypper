@@ -1,4 +1,48 @@
 -------------------------------------------------------------------
+Fri Nov 19 11:24:39 CET 2010 - mls@suse.de
+
+- fix access of freed memory in MultiCurl (bnc#654600)
+
+-------------------------------------------------------------------
+Sun Nov  7 01:13:39 CET 2010 - ma@suse.de
+
+- Update zypp-po.tar.bz2
+
+-------------------------------------------------------------------
+Wed Nov  3 16:06:46 CET 2010 - dheidler@suse.de
+
+- added metalink support
+- version 8.8.0 (7)
+
+-------------------------------------------------------------------
+Thu Oct 21 18:15:31 CEST 2010 - ma@suse.de
+
+- Feed the ProvideFilePolicy progress callback in addition to any 
+  connected media::DownloadProgressReport (bnc#545106)
+- version 8.7.1 (7)
+
+-------------------------------------------------------------------
+Wed Oct 13 16:14:13 CEST 2010 - dheidler@suse.de
+
+- Make MetaLinkParser accept InputStreams
+- Make MetaLinkParser accept Pathnames insted of strings
+- Fix MetaLinkv4 hash parsing
+- Add MetaLinkParser test
+- version 8.7.0 (7)
+
+-------------------------------------------------------------------
+Mon Oct 11 17:06:17 CEST 2010 - ma@suse.de
+
+- Use timeouts in plugin script communication.
+- Fix ExternalProgram to correctly remember exit status.
+- version 8.6.0 (5)
+
+-------------------------------------------------------------------
+Sun Oct 10 01:13:40 CEST 2010 - ma@suse.de
+
+- Update zypp-po.tar.bz2
+
+-------------------------------------------------------------------
 Fri Oct  8 08:43:02 UTC 2010 - dmacvicar@novell.com
 
 - fix services not being linked to their file after being

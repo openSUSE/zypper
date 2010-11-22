@@ -1,3 +1,6 @@
+#include <sys/types.h>
+#include <signal.h>
+
 #include <iostream>
 #include <sstream>
 
@@ -131,3 +134,30 @@ BOOST_AUTO_TEST_CASE(PluginScriptTest)
   scr.close();								// no exception on dupl. close.
 }
 
+BOOST_AUTO_TEST_CASE(PluginScriptSend)
+{
+  PluginFrame f( "a" );
+  f.setBody( std::string( 1020, '0' ) );
+
+  PluginScript scr( "/bin/cat" );
+  BOOST_CHECK_THROW( scr.send( f ), PluginScriptNotConnected );
+
+  scr.open();
+  BOOST_CHECK_THROW( do { scr.send( f ); } while ( true ), PluginScriptSendTimeout );
+
+  ::kill( scr.getPid(), SIGKILL);
+  BOOST_CHECK_THROW( scr.send( f ), PluginScriptDiedUnexpectedly );
+}
+
+BOOST_AUTO_TEST_CASE(PluginScriptReceive)
+{
+  PluginFrame f( "a" );
+  f.setBody( std::string( 1020, '0' ) );
+
+  PluginScript scr( "/bin/cat" );
+  scr.open();
+  BOOST_CHECK_THROW( scr.receive(), PluginScriptReceiveTimeout );
+
+  ::kill( scr.getPid(), SIGKILL);
+  BOOST_CHECK_THROW(  scr.receive(), PluginScriptDiedUnexpectedly );
+}

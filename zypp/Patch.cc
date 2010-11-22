@@ -48,11 +48,14 @@ namespace zypp
 
   Patch::Category Patch::categoryEnum() const
   {
-    static const IdString cat_yast( "yast" );
-    static const IdString cat_security( "security" );
-    static const IdString cat_recommended( "recommended" );
-    static const IdString cat_optional( "optional" );
-    static const IdString cat_document( "document" );
+    static const IdString cat_yast		( "yast" );
+    static const IdString cat_security		( "security" );
+    static const IdString cat_recommended	( "recommended" );
+    static const IdString cat_bugfix		( "bugfix" );		// rhn
+    static const IdString cat_optional		( "optional" );
+    static const IdString cat_feature		( "feature" );
+    static const IdString cat_enhancement	( "enhancement" );	// rnh
+    static const IdString cat_document		( "document" );
 
     // patch category is not poolized in the solv file (i.e. an IdString) ;(
     IdString cat( sat::LookupAttr( sat::SolvAttr::patchcategory, satSolvable() ).begin().c_str() );
@@ -61,9 +64,9 @@ namespace zypp
       return CAT_YAST;
     if ( cat == cat_security )
       return CAT_SECURITY;
-    if ( cat == cat_recommended )
+    if ( cat == cat_recommended || cat == cat_bugfix )
       return CAT_RECOMMENDED;
-    if ( cat == cat_optional )
+    if ( cat == cat_optional || cat == cat_enhancement || cat == cat_feature )
       return CAT_OPTIONAL;
     if ( cat == cat_document )
       return CAT_DOCUMENT;

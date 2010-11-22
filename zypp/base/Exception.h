@@ -160,6 +160,12 @@ namespace zypp
     */
     Exception( const std::string & msg_r );
 
+    /** Ctor taking a message and an exception to remember as history
+     * \see \ref remember
+     * Use \ref ZYPP_THROW to throw exceptions.
+    */
+    Exception( const std::string & msg_r, const Exception & history_r );
+
     /** Dtor. */
     virtual ~Exception() throw();
 

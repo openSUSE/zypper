@@ -223,6 +223,66 @@ namespace zypp {
 
     };
 
+
+  namespace _ExternalProgram
+  {
+    /** Helper providing pipe FDs for \ref ExternalProgramWithStderr.
+     * Moved to a basse class because the pipe needs to be initialized
+     * before the \ref ExternalProgram base class is initialized.
+     * \see \ref ExternalProgramWithStderr
+     */
+    struct EarlyPipe
+    {
+      enum { R=0, W=1 };
+      EarlyPipe();
+      ~EarlyPipe();
+      void closeW()		{ if ( _fds[W] != -1 ) { ::close( _fds[W] ); _fds[W] = -1; } }
+      FILE * stderr()		{ return _stderr; }
+      protected:
+	FILE * _stderr;
+	int _fds[2];
+    };
+  }
+
+  /** ExternalProgram extended to offer reading programs stderr.
+   * \see \ref ExternalProgram
+   */
+  class ExternalProgramWithStderr : private _ExternalProgram::EarlyPipe, public ExternalProgram
+  {
+    public:
+      ExternalProgramWithStderr( const Arguments & argv_r )
+	: ExternalProgram( argv_r, Stderr_To_FileDesc, /*use_pty*/false, _fds[W] )
+      { _initStdErr(); }
+
+      ExternalProgramWithStderr( const Arguments & argv_r, const Environment & environment_r )
+        : ExternalProgram( argv_r, environment_r, Stderr_To_FileDesc, /*use_pty*/false, _fds[W] )
+      { _initStdErr(); }
+
+    public:
+      /** Return \c FILE* to read programms stderr (O_NONBLOCK set). */
+      _ExternalProgram::EarlyPipe::stderr;
+
+      /** Read data up to \c delim_r from stderr (nonblocking).
+       * \note If \c delim_r is '\0', we read as much data as possible.
+       * \return \c false if data are not yet available (\c retval_r remains untouched then).
+       */
+      bool stderrGetUpTo( std::string & retval_r, const char delim_r, bool returnDelim_r = false );
+
+      /** Read next complete line from stderr (nonblocking).
+       * \return \c false if data are not yet available (\c retval_r remains untouched then).
+       */
+      bool stderrGetline( std::string & retval_r, bool returnDelim_r = false  )
+      { return stderrGetUpTo( retval_r, '\n', returnDelim_r ); }
+
+    private:
+      /** Close write end of the pipe (childs end). */
+      void _initStdErr()
+      { closeW(); }
+
+    private:
+      std::string _buffer;
+  };
+
 } // namespace zypp
 
 #endif // ZYPP_EXTERNALPROGRAM_H

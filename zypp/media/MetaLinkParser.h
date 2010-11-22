@@ -16,6 +16,7 @@
 
 #include "zypp/base/Exception.h"
 #include "zypp/base/NonCopyable.h"
+#include "zypp/base/InputStream.h"
 #include "zypp/media/MediaBlockList.h"
 #include "zypp/Url.h"
 
@@ -33,7 +34,13 @@ public:
    * parse a file consisting of metalink xml data
    * \throws Exception
    **/
-  void parse(std::string filename);
+  void parse(const Pathname &filename);
+
+  /**
+   * parse an InputStream consisting of metalink xml data
+   * \throws Exception
+   **/
+  void parse(const InputStream &is);
 
   /**
    * parse a chunk of a file consisting of metalink xml data.

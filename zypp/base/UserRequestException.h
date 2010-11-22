@@ -68,8 +68,10 @@ namespace zypp
     public:
       explicit
       UserRequestException( const std::string & msg_r = std::string() );
+      UserRequestException( const std::string & msg_r, const Exception & history_r );
       explicit
       UserRequestException( Kind kind_r, const std::string & msg_r = std::string() );
+      UserRequestException( Kind kind_r, const std::string & msg_r, const Exception & history_r );
     public:
       Kind kind() const
       { return _kind; }
@@ -80,37 +82,24 @@ namespace zypp
   };
   ///////////////////////////////////////////////////////////////////
 
-  struct IgnoreRequestException : public UserRequestException
-  {
-    explicit
-    IgnoreRequestException( const std::string & msg_r = std::string() )
-      : UserRequestException( IGNORE, msg_r )
-    {}
-  };
+  /** Convenience macro to declare more specific PluginScriptExceptions. */
+#define declException( EXCP, KIND )					\
+  struct EXCP : public UserRequestException {				\
+    explicit								\
+    EXCP( const std::string & msg_r = std::string() )			\
+      : UserRequestException( KIND, msg_r )				\
+    {}									\
+    EXCP( const std::string & msg_r, const Exception & history_r )	\
+      : UserRequestException( KIND, msg_r, history_r )			\
+    {}									\
+  }
 
-  struct SkipRequestException : public UserRequestException
-  {
-    explicit
-    SkipRequestException( const std::string & msg_r = std::string() )
-      : UserRequestException( SKIP, msg_r )
-    {}
-  };
+  declException( IgnoreRequestException, IGNORE );
+  declException( SkipRequestException, SKIP );
+  declException( RetryRequestException, RETRY );
+  declException( AbortRequestException, ABORT );
 
-  struct RetryRequestException : public UserRequestException
-  {
-    explicit
-    RetryRequestException( const std::string & msg_r = std::string() )
-      : UserRequestException( RETRY, msg_r )
-    {}
-  };
-
-  struct AbortRequestException : public UserRequestException
-  {
-    explicit
-    AbortRequestException( const std::string & msg_r = std::string() )
-      : UserRequestException( ABORT, msg_r )
-    {}
-  };
+#undef declException
 
   /////////////////////////////////////////////////////////////////
 } // namespace zypp

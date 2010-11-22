@@ -441,6 +441,28 @@ MediaCurl::MediaCurl( const Url &      url_r,
   }
 }
 
+Url MediaCurl::clearQueryString(const Url &url) const
+{
+  Url curlUrl (url);
+  curlUrl.setUsername( "" );
+  curlUrl.setPassword( "" );
+  curlUrl.setPathParams( "" );
+  curlUrl.setFragment( "" );
+  curlUrl.delQueryParam("cookies");
+  curlUrl.delQueryParam("proxy");
+  curlUrl.delQueryParam("proxyport");
+  curlUrl.delQueryParam("proxyuser");
+  curlUrl.delQueryParam("proxypass");
+  curlUrl.delQueryParam("ssl_capath");
+  curlUrl.delQueryParam("ssl_verify");
+  curlUrl.delQueryParam("timeout");
+  curlUrl.delQueryParam("auth");
+  curlUrl.delQueryParam("username");
+  curlUrl.delQueryParam("password");
+  curlUrl.delQueryParam("mediahandler");
+  return curlUrl;
+}
+
 TransferSettings & MediaCurl::settings()
 {
     return _settings;    
@@ -989,14 +1011,7 @@ bool MediaCurl::doGetDoesFileExist( const Pathname & filename ) const
     // (some proxies dislike them in the URL).
     // Curl seems to need the just scheme, hostname and a path;
     // the rest was already passed as curl options (in attachTo).
-  Url curlUrl( url );
-
-  // Use asString + url::ViewOptions instead?
-  curlUrl.setUsername( "" );
-  curlUrl.setPassword( "" );
-  curlUrl.setPathParams( "" );
-  curlUrl.setQueryString( "" );
-  curlUrl.setFragment( "" );
+  Url curlUrl( clearQueryString(url) );
 
   //
     // See also Bug #154197 and ftp url definition in RFC 1738:
@@ -1301,14 +1316,7 @@ void MediaCurl::doGetFileCopyFile( const Pathname & filename , const Pathname & 
     // (some proxies dislike them in the URL).
     // Curl seems to need the just scheme, hostname and a path;
     // the rest was already passed as curl options (in attachTo).
-    Url curlUrl( url );
-
-    // Use asString + url::ViewOptions instead?
-    curlUrl.setUsername( "" );
-    curlUrl.setPassword( "" );
-    curlUrl.setPathParams( "" );
-    curlUrl.setQueryString( "" );
-    curlUrl.setFragment( "" );
+    Url curlUrl( clearQueryString(url) );
 
     //
     // See also Bug #154197 and ftp url definition in RFC 1738:

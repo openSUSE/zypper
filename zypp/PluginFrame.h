@@ -25,10 +25,6 @@
 namespace zypp
 { /////////////////////////////////////////////////////////////////
 
-  ///////////////////////////////////////////////////////////////////
-  //
-  //	CLASS NAME : PluginFrame
-  //
   /** Command frame for communication with \ref PluginScript
    *
    * \code
@@ -220,7 +216,6 @@ namespace zypp
       /** Pointer to implementation */
       RWCOW_pointer<Impl> _pimpl;
   };
-  ///////////////////////////////////////////////////////////////////
 
   /** \relates PluginFrame Stream output for logging */
   std::ostream & operator<<( std::ostream & str, const PluginFrame & obj );

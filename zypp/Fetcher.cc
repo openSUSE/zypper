@@ -571,16 +571,15 @@ namespace zypp
       }
       catch (Exception & excpt_r)
       {
-        ZYPP_CAUGHT(excpt_r);
-        excpt_r.remember("Can't provide " + resource.filename().asString() + " : " + excpt_r.msg());
-
         if ( resource.optional() )
         {
+	    ZYPP_CAUGHT(excpt_r);
             WAR << "optional resource " << resource << " could not be transfered" << endl;
             return;
         }
         else
         {
+	    excpt_r.remember("Can't provide " + resource.filename().asString() );
             ZYPP_RETHROW(excpt_r);
         }
       }

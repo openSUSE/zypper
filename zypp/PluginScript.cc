@@ -9,11 +9,17 @@
 /** \file	zypp/PluginScript.cc
  *
 */
+#include <sys/types.h>
+#include <signal.h>
+
 #include <iostream>
 #include <sstream>
 
 #include "zypp/base/LogTools.h"
+#include "zypp/base/DefaultIntegral.h"
 #include "zypp/base/String.h"
+#include "zypp/base/Signal.h"
+#include "zypp/base/IOStream.h"
 
 #include "zypp/PluginScript.h"
 #include "zypp/ExternalProgram.h"
@@ -24,6 +30,80 @@ using std::endl;
 ///////////////////////////////////////////////////////////////////
 namespace zypp
 { /////////////////////////////////////////////////////////////////
+
+
+  namespace
+  {
+    const char * PLUGIN_DEBUG = getenv( "ZYPP_PLUGIN_DEBUG" );
+    const long PLUGIN_TIMEOUT = str::strtonum<long>( getenv( "ZYPP_PLUGIN_TIMEOUT" ) );
+    const long PLUGIN_SEND_TIMEOUT = str::strtonum<long>( getenv( "ZYPP_PLUGIN_SEND_TIMEOUT" ) );
+    const long PLUGIN_RECEIVE_TIMEOUT = str::strtonum<long>( getenv( "ZYPP_PLUGIN_RECEIVE_TIMEOUT" ) );
+
+    /** Dump buffer string if PLUGIN_DEBUG is on.
+     * \ingroup g_RAII
+     */
+    struct PluginDebugBuffer
+    {
+      PluginDebugBuffer( const std::string & buffer_r ) : _buffer( buffer_r ) {}
+      ~PluginDebugBuffer()
+      {
+	if ( PLUGIN_DEBUG )
+	{
+	  if ( _buffer.empty() )
+	  {
+	    _DBG("PLUGIN") << "< (empty)" << endl;
+	  }
+	  else
+	  {
+	    std::istringstream datas( _buffer );
+	    iostr::copyIndent( datas, _DBG("PLUGIN"), "< "  ) << endl;
+	  }
+	}
+      }
+      const std::string & _buffer;
+    };
+
+    /** Dump buffer string if PLUGIN_DEBUG is on.
+     * \ingroup g_RAII
+     */
+    struct PluginDumpStderr
+    {
+      PluginDumpStderr( ExternalProgramWithStderr & prog_r ) : _prog( prog_r ) {}
+      ~PluginDumpStderr()
+      {
+	std::string line;
+	while ( _prog.stderrGetline( line ) )
+	  _WAR("PLUGIN") << "! " << line << endl;
+      }
+      ExternalProgramWithStderr & _prog;
+    };
+
+    inline void setBlocking( FILE * file_r, bool yesno_r = true )
+    {
+      if ( ! file_r )
+	ZYPP_THROW( PluginScriptException( "setNonBlocking" ) );
+
+      int fd = ::fileno( file_r );
+      if ( fd == -1 )
+	ZYPP_THROW( PluginScriptException( "setNonBlocking" ) );
+
+      int flags = ::fcntl( fd, F_GETFL );
+      if ( flags == -1 )
+	ZYPP_THROW( PluginScriptException( "setNonBlocking" ) );
+
+      if ( ! yesno_r )
+	flags |= O_NONBLOCK;
+      else if ( flags & O_NONBLOCK )
+	flags ^= O_NONBLOCK;
+
+      flags = ::fcntl( fd, F_SETFL, flags );
+      if ( flags == -1 )
+	ZYPP_THROW( PluginScriptException( "setNonBlocking" ) );
+    }
+
+    inline void setNonBlocking( FILE * file_r, bool yesno_r = true )
+    { setBlocking( file_r, !yesno_r ); }
+  }
 
   ///////////////////////////////////////////////////////////////////
   //
@@ -42,6 +122,12 @@ namespace zypp
       { try { close(); } catch(...) {} }
 
     public:
+      /** Timeout (sec.) when sending data. */
+      static const long send_timeout;
+      /** Timeout (sec.) when receiving data. */
+      static const long receive_timeout;
+
+    public:
       const Pathname & script() const
       { return _script; }
 
@@ -54,10 +140,16 @@ namespace zypp
       bool isOpen() const
       { return _cmd; }
 
+      int lastReturn() const
+      { return _lastReturn; }
+
+      const std::string & lastExecError() const
+      { return _lastExecError; }
+
     public:
       void open( const Pathname & script_r = Pathname(), const Arguments & args_r = Arguments() );
 
-      void close();
+      int close();
 
       void send( const PluginFrame & frame_r ) const;
 
@@ -66,7 +158,9 @@ namespace zypp
     private:
       Pathname _script;
       Arguments _args;
-      scoped_ptr<ExternalProgram> _cmd;
+      scoped_ptr<ExternalProgramWithStderr> _cmd;
+      DefaultIntegral<int,0> _lastReturn;
+      std::string _lastExecError;
   };
   ///////////////////////////////////////////////////////////////////
 
@@ -76,6 +170,13 @@ namespace zypp
     return dumpRangeLine( str << "PluginScript[" << obj.getPid() << "] " << obj.script(),
 			  obj.args().begin(), obj.args().end() );
   }
+
+  ///////////////////////////////////////////////////////////////////
+
+  const long PluginScript::Impl::send_timeout = ( PLUGIN_SEND_TIMEOUT > 0 ? PLUGIN_SEND_TIMEOUT
+									  : ( PLUGIN_TIMEOUT > 0 ? PLUGIN_TIMEOUT : 30 ) );
+  const long PluginScript::Impl::receive_timeout = ( PLUGIN_RECEIVE_TIMEOUT > 0 ? PLUGIN_RECEIVE_TIMEOUT
+                                                                                : ( PLUGIN_TIMEOUT > 0 ? PLUGIN_TIMEOUT : 30 ) );
 
   ///////////////////////////////////////////////////////////////////
 
@@ -96,60 +197,203 @@ namespace zypp
     // TODO: ExternalProgram::maybe use Stderr_To_FileDesc for script loging
     Arguments args;
     args.reserve( args_r.size()+1 );
-    //args.push_back( "<"+script_r.asString() );
     args.push_back( script_r.asString() );
     args.insert( args.end(), args_r.begin(), args_r.end() );
-    _cmd.reset( new ExternalProgram( args, ExternalProgram::Discard_Stderr ) );
+    _cmd.reset( new ExternalProgramWithStderr( args ) );
+
+    // Be protected against full pipe, etc.
+    setNonBlocking( _cmd->outputFile() );
+    setNonBlocking( _cmd->inputFile() );
 
     // store running scripts data
     _script = script_r;
     _args = args_r;
+    _lastReturn.reset();
+    _lastExecError.clear();
 
     DBG << *this << endl;
   }
 
-  void PluginScript::Impl::close()
+  int PluginScript::Impl::close()
   {
     if ( _cmd )
     {
       DBG << "Close:" << *this << endl;
       _cmd->kill();
+      _lastReturn = _cmd->close();
+      _lastExecError = _cmd->execError();
       _cmd.reset();
+      DBG << *this << " -> [" << _lastReturn << "] " << _lastExecError << endl;
     }
-    DBG << *this << endl;
+    return _lastReturn;
   }
 
   void PluginScript::Impl::send( const PluginFrame & frame_r ) const
   {
     if ( !_cmd )
-      ZYPP_THROW( PluginScriptException( "Not connected", str::Str() << *this ) );
+      ZYPP_THROW( PluginScriptNotConnected( "Not connected", str::Str() << *this ) );
 
     if ( frame_r.command().empty() )
       WAR << "Send: No command in frame" << frame_r << endl;
 
-    // TODO: dumb writer does not care about error or deadlocks
+    // prepare frame data to write
     std::string data;
     {
       std::ostringstream datas;
       frame_r.writeTo( datas );
       datas.str().swap( data );
     }
-    DBG << frame_r << endl;
-    DBG << " ->write " << data.size() << endl;
+    DBG << "->send " << frame_r << endl;
 
-    FILE * outputfile = _cmd->outputFile();
-    if ( ::fwrite( data.c_str(), data.size(), 1, outputfile ) != 1 )
-      ZYPP_THROW( PluginScriptException( "Send: send error" ) );
-    ::fflush( outputfile );
+    if ( PLUGIN_DEBUG )
+    {
+      std::istringstream datas( data );
+      iostr::copyIndent( datas, _DBG("PLUGIN") ) << endl;
+    }
+
+    // try writing the pipe....
+    FILE * filep = _cmd->outputFile();
+    if ( ! filep )
+      ZYPP_THROW( PluginScriptException( "Bad file pointer." ) );
+
+    int fd = ::fileno( filep );
+    if ( fd == -1 )
+      ZYPP_THROW( PluginScriptException( "Bad file descriptor" ) );
+
+    //DBG << " ->[" << fd << " " << (::feof(filep)?'e':'_') << (::ferror(filep)?'F':'_') << "]" << endl;
+    {
+      PluginDumpStderr _dump( *_cmd ); // dump scripts stderr before leaving
+      SignalSaver sigsav( SIGPIPE, SIG_IGN );
+      const char * buffer = data.c_str();
+      ssize_t buffsize = data.size();
+      do {
+	fd_set wfds;
+	FD_ZERO( &wfds );
+	FD_SET( fd, &wfds );
+
+	struct timeval tv;
+	tv.tv_sec = send_timeout;
+	tv.tv_usec = 0;
+
+	int retval = select( fd+1, NULL, &wfds, NULL, &tv );
+	if ( retval > 0 )	// FD_ISSET( fd, &wfds ) will be true.
+	{
+	  //DBG << "Ready to write..." << endl;
+	  ssize_t ret = ::write( fd, buffer, buffsize );
+	  if ( ret == buffsize )
+	  {
+	    //DBG << "::write(" << buffsize << ") -> " << ret << endl;
+	    ::fflush( filep );
+	    break; 		// -> done
+	  }
+	  else if ( ret > 0 )
+	  {
+	    //WAR << "::write(" << buffsize << ") -> " << ret << " INCOMPLETE..." << endl;
+	    ::fflush( filep );
+	    buffsize -= ret;
+	    buffer += ret;	// -> continue
+	  }
+	  else // ( retval == -1 )
+	  {
+	    if ( errno != EINTR )
+	    {
+	      ERR << "write(): " << Errno() << endl;
+	      if ( errno == EPIPE )
+		ZYPP_THROW( PluginScriptDiedUnexpectedly( "Send: script died unexpectedly", str::Str() << Errno() ) );
+	      else
+		ZYPP_THROW( PluginScriptException( "Send: send error", str::Str() << Errno() ) );
+	    }
+	  }
+	}
+	else if ( retval == 0 )
+	{
+	  WAR << "Not ready to write within timeout." << endl;
+	  ZYPP_THROW( PluginScriptSendTimeout( "Not ready to write within timeout." ) );
+	}
+	else // ( retval == -1 )
+	{
+	  if ( errno != EINTR )
+	  {
+	    ERR << "select(): " << Errno() << endl;
+	    ZYPP_THROW( PluginScriptException( "Error waiting on file descriptor", str::Str() << Errno() ) );
+	  }
+	}
+      } while( true );
+    }
   }
 
   PluginFrame PluginScript::Impl::receive() const
   {
     if ( !_cmd )
-      ZYPP_THROW( PluginScriptException( "Not connected", str::Str() << *this ) );
+      ZYPP_THROW( PluginScriptNotConnected( "Not connected", str::Str() << *this ) );
 
-    // TODO: dumb writer does not care about error or deadlocks
-    std::string data( _cmd->receiveUpto( '\0' ) );
+    // try reading the pipe....
+    FILE * filep = _cmd->inputFile();
+    if ( ! filep )
+      ZYPP_THROW( PluginScriptException( "Bad file pointer." ) );
+
+    int fd = ::fileno( filep );
+    if ( fd == -1 )
+      ZYPP_THROW( PluginScriptException( "Bad file descriptor" ) );
+
+    ::clearerr( filep );
+    std::string data;
+    {
+      PluginDebugBuffer _debug( data ); // dump receive buffer if PLUGIN_DEBUG
+      PluginDumpStderr _dump( *_cmd ); // dump scripts stderr before leaving
+      do {
+	int ch = fgetc( filep );
+	if ( ch != EOF )
+	{
+	  data.push_back( ch );
+	  if ( ch == '\0' )
+	    break;
+	}
+	else if ( ::feof( filep ) )
+	{
+	  WAR << "Unexpected EOF" << endl;
+	  ZYPP_THROW( PluginScriptDiedUnexpectedly( "Receive: script died unexpectedly", str::Str() << Errno() ) );
+	}
+	else if ( errno != EINTR )
+	{
+	  if ( errno == EWOULDBLOCK )
+	  {
+	    // wait a while for fd to become ready for reading...
+	    fd_set rfds;
+	    FD_ZERO( &rfds );
+	    FD_SET( fd, &rfds );
+
+	    struct timeval tv;
+	    tv.tv_sec = receive_timeout;
+	    tv.tv_usec = 0;
+
+	    int retval = select( fd+1, &rfds, NULL, NULL, &tv );
+	    if ( retval > 0 )	// FD_ISSET( fd, &rfds ) will be true.
+	    {
+	      ::clearerr( filep );
+	    }
+	    else if ( retval == 0 )
+	    {
+	      WAR << "Not ready to read within timeout." << endl;
+	      ZYPP_THROW( PluginScriptReceiveTimeout( "Not ready to read within timeout." ) );
+	    }
+	    else // ( retval == -1 )
+	    {
+	      if ( errno != EINTR )
+	      {
+		ERR << "select(): " << Errno() << endl;
+		ZYPP_THROW( PluginScriptException( "Error waiting on file descriptor", str::Str() << Errno() ) );
+	      }
+	    }
+	  }
+	  else
+	  {
+	    ERR << "read(): " << Errno() << endl;
+	    ZYPP_THROW( PluginScriptException( "Receive: receive error", str::Str() << Errno() ) );
+	  }
+	}
+      } while ( true );
+    }
     DBG << " <-read " << data.size() << endl;
     std::istringstream datas( data );
     PluginFrame ret( datas );
@@ -189,6 +433,12 @@ namespace zypp
   pid_t PluginScript::getPid() const
   { return _pimpl->getPid(); }
 
+  int PluginScript::lastReturn() const
+  { return _pimpl->lastReturn(); }
+
+  const std::string & PluginScript::lastExecError() const
+  { return _pimpl->lastExecError(); }
+
   void PluginScript::open()
   { _pimpl->open( _pimpl->script(), _pimpl->args() ); }
 
@@ -198,8 +448,8 @@ namespace zypp
   void PluginScript::open( const Pathname & script_r, const Arguments & args_r )
   { _pimpl->open( script_r, args_r ); }
 
-  void PluginScript::close()
-  { _pimpl->close(); }
+  int PluginScript::close()
+  { return _pimpl->close(); }
 
   void PluginScript::send( const PluginFrame & frame_r ) const
   { _pimpl->send( frame_r ); }

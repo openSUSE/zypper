@@ -49,6 +49,8 @@ class MediaCurl : public MediaHandler
 
   protected:
 
+    Url clearQueryString(const Url &url) const;
+
     virtual void attachTo (bool next = false);
     virtual void releaseFrom( const std::string & ejectDev );
     virtual void getFile( const Pathname & filename ) const;

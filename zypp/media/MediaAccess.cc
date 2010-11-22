@@ -138,36 +138,59 @@ MediaAccess::open (const Url& o_url, const Pathname & preferred_attach_point)
         // Another good idea would be activate MediaAria2c handler via external var
         bool use_aria = false;
         bool use_multicurl = true;
-        const char *ariaenv = getenv( "ZYPP_ARIA2C" );
-        const char *multicurlenv = getenv( "ZYPP_MULTICURL" );
-        // if user disabled it manually
-        if ( use_multicurl && multicurlenv && ( strcmp(multicurlenv, "0" ) == 0 ) )
+        string urlmediahandler ( url.getQueryParam("mediahandler") );
+        if ( urlmediahandler == "multicurl" )
         {
-            WAR << "multicurl manually disabled." << endl;
-            use_multicurl = false;
+          use_aria = false;
+          use_multicurl = true;
         }
-        else if ( !use_multicurl && multicurlenv && ( strcmp(multicurlenv, "1" ) == 0 ) )
-	{
-            WAR << "multicurl manually enabled." << endl;
-            use_multicurl = true;
-	}
-        // if user disabled it manually
-        if ( use_aria && ariaenv && ( strcmp(ariaenv, "0" ) == 0 ) )
+        else if ( urlmediahandler == "aria2c" )
         {
-            WAR << "aria2c manually disabled. Falling back to curl" << endl;
-            use_aria = false;
+          use_aria = true;
+          use_multicurl = false;
         }
-        else if ( !use_aria && ariaenv && ( strcmp(ariaenv, "1" ) == 0 ) )
-	{
-            // no aria for ftp - no advantage in that over curl
-            if ( url.getScheme() == "ftp" )
-                WAR << "no aria2c for FTP, despite ZYPP_ARIA2C=1" << endl;
-            else
-            {
-                WAR << "aria2c manually enabled." << endl;
-                use_aria = true;
-            }
-	}
+        else if ( urlmediahandler == "curl" )
+        {
+          use_aria = false;
+          use_multicurl = false;
+        }
+        else
+        {
+          if ( urlmediahandler.empty() )
+          {
+            WAR << "unknown mediahandler set: " << urlmediahandler << endl;
+          }
+          const char *ariaenv = getenv( "ZYPP_ARIA2C" );
+          const char *multicurlenv = getenv( "ZYPP_MULTICURL" );
+          // if user disabled it manually
+          if ( use_multicurl && multicurlenv && ( strcmp(multicurlenv, "0" ) == 0 ) )
+          {
+              WAR << "multicurl manually disabled." << endl;
+              use_multicurl = false;
+          }
+          else if ( !use_multicurl && multicurlenv && ( strcmp(multicurlenv, "1" ) == 0 ) )
+          {
+              WAR << "multicurl manually enabled." << endl;
+              use_multicurl = true;
+          }
+          // if user disabled it manually
+          if ( use_aria && ariaenv && ( strcmp(ariaenv, "0" ) == 0 ) )
+          {
+              WAR << "aria2c manually disabled. Falling back to curl" << endl;
+              use_aria = false;
+          }
+          else if ( !use_aria && ariaenv && ( strcmp(ariaenv, "1" ) == 0 ) )
+          {
+              // no aria for ftp - no advantage in that over curl
+              if ( url.getScheme() == "ftp" )
+                  WAR << "no aria2c for FTP, despite ZYPP_ARIA2C=1" << endl;
+              else
+              {
+                  WAR << "aria2c manually enabled." << endl;
+                  use_aria = true;
+              }
+          }
+        }
 
         // disable if it does not exist
         if ( use_aria && ! MediaAria2c::existsAria2cmd() )

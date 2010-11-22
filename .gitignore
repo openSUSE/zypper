@@ -1,6 +1,7 @@
 build
 *.orig
 *.rej
+*.swp
 #*
 .#*
 *#

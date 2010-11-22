@@ -29,8 +29,16 @@ namespace zypp
   : Exception( msg_r ), _kind( UNSPECIFIED )
   {}
 
+  UserRequestException::UserRequestException( const std::string & msg_r, const Exception & history_r )
+  : Exception( msg_r, history_r ), _kind( UNSPECIFIED )
+  {}
+
   UserRequestException::UserRequestException( Kind kind_r, const std::string & msg_r )
   : Exception( msg_r ), _kind( kind_r )
+  {}
+
+  UserRequestException::UserRequestException( Kind kind_r, const std::string & msg_r, const Exception & history_r )
+  : Exception( msg_r, history_r ), _kind( kind_r )
   {}
 
   ///////////////////////////////////////////////////////////////////

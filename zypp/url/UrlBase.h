@@ -862,6 +862,17 @@ namespace zypp
       virtual void
       setQueryParam(const std::string &param, const std::string &value);
 
+      /**
+       * \brief remove the specified query parameter.
+       * \param param The decoded query parameter name.
+       * \throws UrlNotSupportedException if parameter parsing
+       *         is not supported for a URL (scheme).
+       * \throws UrlDecodingException if the decoded result string
+       *         would contain a '\\0' character.
+       */
+      virtual void
+      delQueryParam(const std::string &param);
+
 
       // -----------------
       /**

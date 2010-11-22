@@ -10,6 +10,7 @@
  *
 */
 #include <iostream>
+#include <vector>
 
 #include "zypp/base/Logger.h"
 #include "zypp/base/DefaultIntegral.h"
@@ -17,6 +18,7 @@
 
 #include "zypp/RepoInfo.h"
 #include "zypp/repo/RepoInfoBaseImpl.h"
+#include "zypp/repo/RepoMirrorList.h"
 #include "zypp/ExternalProgram.h"
 #include "zypp/media/MediaAccess.h"
 
@@ -39,6 +41,7 @@ namespace zypp
       , gpgcheck(indeterminate)
       ,	keeppackages(indeterminate)
       , type(repo::RepoType::NONE_e)
+      , emptybaseurls(false)
     {}
 
     ~Impl()
@@ -61,23 +64,57 @@ namespace zypp
     Pathname licenseTgz() const
     { return metadatapath.empty() ? Pathname() : metadatapath / path / "license.tar.gz"; }
 
+    Url getmirrorListUrl() const
+    {
+      repo::RepoVariablesUrlReplacer replacer;
+      return replacer(mirrorlist_url);
+    }
+
+    Url &setmirrorListUrl()
+    {
+      return mirrorlist_url;
+    }
+
+    const std::set<Url> &baseUrls() const
+    {
+      if ( _baseUrls.empty() && ! (getmirrorListUrl().asString().empty()) )
+      {
+        emptybaseurls = true;
+        repo::RepoMirrorList rmirrorlist (getmirrorListUrl());
+        std::vector<Url> rmurls = rmirrorlist.getUrls();
+        _baseUrls.insert(rmurls.begin(), rmurls.end());
+      }
+      return _baseUrls;
+    }
+
+    std::set<Url> &baseUrls()
+    {
+      return _baseUrls;
+    }
+
+    bool baseurl2dump() const
+    {
+      return !emptybaseurls && !_baseUrls.empty();
+    }
+
 
   public:
     TriBool gpgcheck;
     TriBool keeppackages;
     Url gpgkey_url;
     repo::RepoType type;
-    Url mirrorlist_url;
-    std::set<Url> baseUrls;
     Pathname path;
     std::string service;
     std::string targetDistro;
     Pathname metadatapath;
     Pathname packagespath;
     DefaultIntegral<unsigned,defaultPriority> priority;
-  public:
+    mutable bool emptybaseurls;
 
   private:
+    Url mirrorlist_url;
+    mutable std::set<Url> _baseUrls;
+
     friend Impl * rwcowClone<Impl>( const Impl * rhs );
     /** clone for RWCOW_pointer */
     Impl * clone() const
@@ -134,7 +171,7 @@ namespace zypp
 
   void RepoInfo::setMirrorListUrl( const Url &url )
   {
-    _pimpl->mirrorlist_url = url;
+    _pimpl->setmirrorListUrl() = url;
   }
 
   void RepoInfo::setGpgKeyUrl( const Url &url )
@@ -144,12 +181,12 @@ namespace zypp
 
   void RepoInfo::addBaseUrl( const Url &url )
   {
-    _pimpl->baseUrls.insert(url);
+    _pimpl->baseUrls().insert(url);
   }
 
   void RepoInfo::setBaseUrl( const Url &url )
   {
-    _pimpl->baseUrls.clear();
+    _pimpl->baseUrls().clear();
     addBaseUrl(url);
   }
 
@@ -206,7 +243,9 @@ namespace zypp
   { return _pimpl->type; }
 
   Url RepoInfo::mirrorListUrl() const
-  { return _pimpl->mirrorlist_url; }
+  {
+    return _pimpl->getmirrorListUrl();
+  }
 
   Url RepoInfo::gpgKeyUrl() const
   { return _pimpl->gpgkey_url; }
@@ -215,8 +254,8 @@ namespace zypp
   {
     RepoInfo::url_set replaced_urls;
     repo::RepoVariablesUrlReplacer replacer;
-    for ( url_set::const_iterator it = _pimpl->baseUrls.begin();
-          it != _pimpl->baseUrls.end();
+    for ( url_set::const_iterator it = _pimpl->baseUrls().begin();
+          it != _pimpl->baseUrls().end();
           ++it )
     {
       replaced_urls.insert(replacer(*it));
@@ -235,7 +274,7 @@ namespace zypp
 
   RepoInfo::urls_const_iterator RepoInfo::baseUrlsBegin() const
   {
-    return make_transform_iterator( _pimpl->baseUrls.begin(),
+    return make_transform_iterator( _pimpl->baseUrls().begin(),
                                     repo::RepoVariablesUrlReplacer() );
     //return _pimpl->baseUrls.begin();
   }
@@ -243,22 +282,22 @@ namespace zypp
   RepoInfo::urls_const_iterator RepoInfo::baseUrlsEnd() const
   {
     //return _pimpl->baseUrls.end();
-    return make_transform_iterator( _pimpl->baseUrls.end(),
+    return make_transform_iterator( _pimpl->baseUrls().end(),
                                     repo::RepoVariablesUrlReplacer() );
   }
 
   RepoInfo::urls_size_type RepoInfo::baseUrlsSize() const
-  { return _pimpl->baseUrls.size(); }
+  { return _pimpl->baseUrls().size(); }
 
   bool RepoInfo::baseUrlsEmpty() const
-  { return _pimpl->baseUrls.empty(); }
+  { return _pimpl->baseUrls().empty(); }
 
   // false by default (if not set by setKeepPackages)
   bool RepoInfo::keepPackages() const
   {
     if (indeterminate(_pimpl->keeppackages))
     {
-      if (_pimpl->baseUrls.empty())
+      if (_pimpl->baseUrls().empty())
         return false;
       else if ( baseUrlsBegin()->schemeIsDownloading() )
         return true;
@@ -362,11 +401,18 @@ namespace zypp
   std::ostream & RepoInfo::dumpOn( std::ostream & str ) const
   {
     RepoInfoBase::dumpOn(str);
-    for ( urls_const_iterator it = baseUrlsBegin();
-          it != baseUrlsEnd();
-          ++it )
+    if ( _pimpl->baseurl2dump() )
     {
-      str << "- url         : " << *it << std::endl;
+      for ( urls_const_iterator it = baseUrlsBegin();
+            it != baseUrlsEnd();
+            ++it )
+      {
+        str << "- url         : " << *it << std::endl;
+      }
+    }
+    if ( ! (_pimpl->getmirrorListUrl().asString().empty())  )
+    {
+      str << "- mirrorlist  : " << _pimpl->getmirrorListUrl() << std::endl;
     }
     str << "- path        : " << path() << std::endl;
     str << "- type        : " << type() << std::endl;
@@ -393,20 +439,22 @@ namespace zypp
   {
     RepoInfoBase::dumpAsIniOn(str);
 
-    if ( ! _pimpl->baseUrls.empty() )
-      str << "baseurl=";
-    for ( url_set::const_iterator it = _pimpl->baseUrls.begin();
-          it != _pimpl->baseUrls.end();
-          ++it )
+    if ( _pimpl->baseurl2dump() )
     {
-      str << *it << endl;
+      str << "baseurl=";
+      for ( url_set::const_iterator it = _pimpl->baseUrls().begin();
+            it != _pimpl->baseUrls().end();
+            ++it )
+      {
+        str << *it << endl;
+      }
     }
 
     if ( ! _pimpl->path.empty() )
       str << "path="<< path() << endl;
 
-    if ( ! (_pimpl->mirrorlist_url.asString().empty()) )
-      str << "mirrorlist=" << _pimpl->mirrorlist_url << endl;
+    if ( ! (_pimpl->getmirrorListUrl().asString().empty()) )
+      str << "mirrorlist=" << _pimpl->getmirrorListUrl() << endl;
 
     str << "type=" << type().asString() << endl;
 
@@ -449,9 +497,12 @@ namespace zypp
       str << " mirrorlist=\"" << escape(tmpstr) << "\"";
     str << ">" << endl;
 
-    for (RepoInfo::urls_const_iterator urlit = baseUrlsBegin();
-         urlit != baseUrlsEnd(); ++urlit)
-      str << "<url>" << escape(urlit->asString()) << "</url>" << endl;
+    if ( _pimpl->baseurl2dump() )
+    {
+      for (RepoInfo::urls_const_iterator urlit = baseUrlsBegin();
+           urlit != baseUrlsEnd(); ++urlit)
+        str << "<url>" << escape(urlit->asString()) << "</url>" << endl;
+    }
 
     str << "</repo>" << endl;
     return str;
