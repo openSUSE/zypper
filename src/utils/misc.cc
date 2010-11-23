@@ -402,8 +402,8 @@ void list_processes_using_deleted_files(Zypper & zypper)
   }
   catch(const zypp::Exception & e)
   {
-    if (zypper.out().verbosity() > Out::NORMAL)
-      zypper.out().error(e, _("Check failed:"));
+    zypper.out().error(e, _("Check failed:"));
+    return;
   }
 
   Table t;
