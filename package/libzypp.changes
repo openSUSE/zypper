@@ -1,4 +1,10 @@
 -------------------------------------------------------------------
+Wed Nov 24 11:55:59 CET 2010 - ma@suse.de
+
+- Properly handle FTP response 550. (bnc#645747)
+- version 8.8.1 (7)
+
+-------------------------------------------------------------------
 Fri Nov 19 11:24:39 CET 2010 - mls@suse.de
 
 - fix access of freed memory in MultiCurl (bnc#654600)
