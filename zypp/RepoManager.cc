@@ -160,7 +160,7 @@ namespace zypp
     ret.repoPackagesCachePath = root_r/"packages";
     ret.knownReposPath        = root_r/"repos.d";
     ret.knownServicesPath     = root_r/"services.d";
-    ret.pluginsPath     = root_r/"plugins";
+    ret.pluginsPath           = root_r/"plugins";
     ret.rootDir = root_r;
     return ret;
   }
@@ -407,7 +407,7 @@ namespace zypp
       init_knownRepositories();
     }
 
-    
+
     RepoManagerOptions options;
 
     RepoSet repos;
@@ -544,7 +544,7 @@ namespace zypp
       }
     }
 
-    repo::PluginServices(options.pluginsPath/"services", ServiceCollector(services));    
+    repo::PluginServices(options.pluginsPath/"services", ServiceCollector(services));
   }
 
   void RepoManager::Impl::init_knownRepositories()
@@ -1562,7 +1562,7 @@ namespace zypp
         continue;
 
       // TODO match by url
- 
+
       // we have a matcing repository, now we need to know
       // where it does come from.
       RepoInfo todelete = *it;
@@ -1893,14 +1893,16 @@ namespace zypp
 
     // get target distro identifier
     std::string servicesTargetDistro = _pimpl->options.servicesTargetDistro;
-    if ( servicesTargetDistro.empty() && getZYpp()->getTarget() )
-      servicesTargetDistro = getZYpp()->target()->targetDistribution();
+    if ( servicesTargetDistro.empty() )
+    {
+      servicesTargetDistro = Target::targetDistribution( Pathname() );
+    }
     DBG << "ServicesTargetDistro: " << servicesTargetDistro << endl;
 
     // parse it
     RepoCollector collector(servicesTargetDistro);
     ServiceRepos repos(service, bind( &RepoCollector::collect, &collector, _1 ));
-    
+
     // set service alias and base url for all collected repositories
     for_( it, collector.repos.begin(), collector.repos.end() )
     {
@@ -1966,14 +1968,14 @@ namespace zypp
       // Service explicitly requests the repo being enabled?
       // Service explicitly requests the repo being disabled?
       // And hopefully not both ;) If so, enable wins.
-      bool beEnabled = service.repoToEnableFind( it->alias() );        
+      bool beEnabled = service.repoToEnableFind( it->alias() );
       bool beDisabled = service.repoToDisableFind( it->alias() );
 
       // Make sure the service repo is created with the
       // appropriate enable
       if ( beEnabled ) it->setEnabled(true);
       if ( beDisabled ) it->setEnabled(false);
-      
+
       if ( beEnabled )
       {
         // Remove from enable request list.
@@ -1986,8 +1988,8 @@ namespace zypp
       RepoInfoList::iterator oldRepo( findAlias( it->alias(), oldRepos ) );
       if ( oldRepo == oldRepos.end() )
       {
-        // Not found in oldRepos ==> a new repo to add        
-        
+        // Not found in oldRepos ==> a new repo to add
+
         // At that point check whether a repo with the same alias
         // exists outside this service. Maybe forcefully re-alias
         // the existing repo?
@@ -2075,14 +2077,14 @@ namespace zypp
 
     // we need a writable copy to link it to the file where
     // it is saved if we modify it
-    ServiceInfo service(newService);    
+    ServiceInfo service(newService);
 
     if ( service.type() == ServiceType::PLUGIN )
     {
         MIL << "Not modifying plugin service '" << oldAlias << "'" << endl;
         return;
     }
-    
+
     const ServiceInfo & oldService = getService(oldAlias);
 
     Pathname location = oldService.filepath();
@@ -2104,10 +2106,10 @@ namespace zypp
     }
     service.dumpAsIniOn(file);
     file.close();
-    service.setFilepath(location);    
+    service.setFilepath(location);
 
     _pimpl->services.erase(oldAlias);
-    _pimpl->services.insert(service);    
+    _pimpl->services.insert(service);
 
     // changed properties affecting also repositories
     if( oldAlias != service.alias()                    // changed alias
