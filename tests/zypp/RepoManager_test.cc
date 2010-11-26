@@ -90,7 +90,7 @@ BOOST_AUTO_TEST_CASE(pluginservices_test)
     //  insert_iterator<std::list<RepoInfo> >(infos,infos.begin()));
     //BOOST_CHECK_EQUAL(infos.size(), 2); // 2 from new repoindex
   }
-  
+
   // Now simulate the service changed
   opts.pluginsPath = DATADIR + "/plugin-service-lib-2";
   {
@@ -141,6 +141,7 @@ BOOST_AUTO_TEST_CASE(repomanager_test)
 {
   TmpDir tmpCachePath;
   RepoManagerOptions opts( RepoManagerOptions::makeTestSetup( tmpCachePath ) ) ;
+  opts.servicesTargetDistro = "sles-10-i586"; // usually determined by the Target
 
   filesystem::mkdir( opts.knownReposPath );
   filesystem::mkdir( opts.knownServicesPath );
