@@ -9,6 +9,7 @@
 #include "zypp/ExternalProgram.h"
 
 using std::stringstream;
+using std::endl;
 
 namespace zypp
 {
@@ -21,7 +22,7 @@ public:
     Impl()
     {
     }
-    
+
     virtual ~Impl()
     {
     }
@@ -31,7 +32,7 @@ class RIMServiceRepos : public ServiceRepos::Impl
 {
 public:
     ServiceRepos::ProcessRepo _callback;
-    
+
     RIMServiceRepos(const ServiceInfo &service,
                     const ServiceRepos::ProcessRepo & callback,
                     const ProgressData::ReceiverFnc &progress = ProgressData::ReceiverFnc() )
@@ -40,7 +41,7 @@ public:
       // repoindex.xml must be fetched always without using cookies (bnc #573897)
       Url serviceUrl( service.url() );
       serviceUrl.setQueryParam( "cookies", "0" );
-      
+
       // download the repo index file
       media::MediaManager mediamanager;
       media::MediaAccessId mid = mediamanager.open( serviceUrl );
@@ -51,7 +52,7 @@ public:
       mediamanager.release( mid );
       mediamanager.close( mid );
     }
-    
+
     ~RIMServiceRepos()
     {
 
@@ -62,7 +63,7 @@ class PluginServiceRepos : public ServiceRepos::Impl
 {
 public:
     ServiceRepos::ProcessRepo _callback;
-    
+
     PluginServiceRepos(const ServiceInfo &service,
                       const ServiceRepos::ProcessRepo & callback,
                       const ProgressData::ReceiverFnc &progress = ProgressData::ReceiverFnc() )
@@ -70,36 +71,40 @@ public:
     {
       Url serviceUrl( service.url() );
       stringstream buffer;
-     
-      ExternalProgram prog(serviceUrl.getPathName(), ExternalProgram::Stderr_To_Stdout, false, -1, true);
+
+      // FIXME: Actually we want Stderr to an fd in order to report errors.
+      ExternalProgram prog(serviceUrl.getPathName(), ExternalProgram::Discard_Stderr, false, -1, true);
       prog >> buffer;
 
       // Services code in zypper is not ready to handle other
       // types of exceptions yet
       if ( prog.close() != 0 )
-          ZYPP_THROW(media::MediaException(buffer.str()));
-
+      {
+	// ignore error but we'd like to report it somehow.
+	// ZYPP_THROW(media::MediaException(buffer.str()));
+	ERR << "Cpture plugin error: TBI" << endl;
+      }
       parser::RepoFileReader parser(buffer, _callback);
     }
-    
+
     ~PluginServiceRepos()
     {
 
     }
 };
 
-    
+
 ServiceRepos::ServiceRepos(const ServiceInfo &service,
                            const ServiceRepos::ProcessRepo & callback,
                            const ProgressData::ReceiverFnc &progress)
     : _impl( (service.type() == ServiceType::PLUGIN) ? (ServiceRepos::Impl *)(new PluginServiceRepos(service, callback, progress)) : (ServiceRepos::Impl *)(new RIMServiceRepos(service, callback, progress)))
 {
 }
-    
+
 ServiceRepos::~ServiceRepos()
 {
 }
-    
+
 
 }
 }
