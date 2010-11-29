@@ -1,4 +1,10 @@
 -------------------------------------------------------------------
+Mon Nov 29 12:31:37 CET 2010 - ma@suse.de
+
+- Icons for libzypp should go into desktop-data. (bnc#329635)
+- version 8.8.2 (7)
+
+-------------------------------------------------------------------
 Wed Nov 24 11:55:59 CET 2010 - ma@suse.de
 
 - Properly handle FTP response 550. (bnc#645747)
