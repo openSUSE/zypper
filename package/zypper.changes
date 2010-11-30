@@ -1,4 +1,10 @@
 -------------------------------------------------------------------
+Tue Nov 30 11:49:05 CET 2010 - jkupec@suse.cz
+
+- do not autorefresh services if --no-refresh is given
+- load target before refreshing services
+
+-------------------------------------------------------------------
 Tue Nov 23 11:05:54 CET 2010 - ma@suse.de
 
 - Print error message if 'zypper ps' fails. (bnc #655402)
