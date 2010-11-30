@@ -12,6 +12,7 @@
 
 #include <vector>
 #include "zypp/Url.h"
+#include "zypp/Pathname.h"
 
 namespace zypp
 {
@@ -21,12 +22,16 @@ namespace zypp
     {
       public:
         RepoMirrorList( const Url &url );
+        RepoMirrorList( const Url &url, const Pathname &metadatapath );
         virtual ~RepoMirrorList();
         
         std::vector<Url> getUrls() const;
 
       private:
         std::vector<Url> urls;
+        void setUrls( std::vector<Url> my_urls );
+        std::vector<Url> parseXML( const Pathname &tmpfile ) const;
+        std::vector<Url> parseTXT( const Pathname &tmpfile ) const;
     };
 
   } // ns repo

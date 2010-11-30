@@ -80,8 +80,16 @@ namespace zypp
       if ( _baseUrls.empty() && ! (getmirrorListUrl().asString().empty()) )
       {
         emptybaseurls = true;
-        repo::RepoMirrorList rmirrorlist (getmirrorListUrl());
-        std::vector<Url> rmurls = rmirrorlist.getUrls();
+        repo::RepoMirrorList *rmirrorlist = NULL;
+
+        if( metadatapath.empty() )
+          rmirrorlist = new repo::RepoMirrorList (getmirrorListUrl() );
+        else
+          rmirrorlist = new repo::RepoMirrorList (getmirrorListUrl(), metadatapath );
+
+        std::vector<Url> rmurls = rmirrorlist->getUrls();
+        delete rmirrorlist;
+        rmirrorlist = NULL;
         _baseUrls.insert(rmurls.begin(), rmurls.end());
       }
       return _baseUrls;
