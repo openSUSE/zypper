@@ -1,4 +1,10 @@
 -------------------------------------------------------------------
+Tue Nov 30 11:40:43 CET 2010 - jkupec@suse.cz
+
+- do not autorefresh services if --no-refresh is given
+- make sure target is initialized before refreshing services
+
+-------------------------------------------------------------------
 Thu Nov 18 15:32:26 CET 2010 - ma@suse.de
 
 - Fixes for Auto-refresh services before loading repos.
