@@ -527,6 +527,11 @@ unsigned repo_specs_to_aliases(Zypper & zypper,
 template <class Container>
 void do_init_repos(Zypper & zypper, const Container & container)
 {
+  // load gpg keys & get target info
+  // the target must be known before refreshing services so that repo manager
+  // can ignore repos targetted for other systems
+  init_target(zypper);
+
   MIL << "Refreshing autorefresh services." << endl;
 
   const list<ServiceInfo> & services = zypper.repoManager().knownServices();
@@ -546,9 +551,6 @@ void do_init_repos(Zypper & zypper, const Container & container)
   MIL << "Going to initialize repositories." << endl;
   RepoManager & manager = zypper.repoManager();
   RuntimeData & gData = zypper.runtimeData();
-
-  // load gpg keys
-  init_target(zypper);
 
   // get repositories specified with --repo or --catalog or in the container
 
@@ -732,6 +734,7 @@ void init_target (Zypper & zypper)
   if (!done)
   {
     zypper.out().info(_("Initializing Target"), Out::HIGH);
+    MIL << "Initializing target" << endl;
 
     try
     {
