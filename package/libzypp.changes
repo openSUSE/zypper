@@ -1,4 +1,10 @@
 -------------------------------------------------------------------
+Tue Nov 30 17:11:32 CET 2010 - dheidler@suse.de
+
+- Added MirrorList caching
+- version 8.9.0 (7)
+
+-------------------------------------------------------------------
 Mon Nov 29 12:31:37 CET 2010 - ma@suse.de
 
 - Icons for libzypp should go into desktop-data. (bnc#329635)
