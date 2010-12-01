@@ -68,6 +68,8 @@ namespace zypp
       }
 
       setUrls( my_urls );
+      if( urls.empty() )
+        zypp::filesystem::unlink(cachefile);
     }
 
     RepoMirrorList::RepoMirrorList( const Url &url )
