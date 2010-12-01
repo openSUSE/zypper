@@ -66,7 +66,6 @@ namespace zypp
 
     Url getmirrorListUrl() const
     {
-      repo::RepoVariablesUrlReplacer replacer;
       return replacer(mirrorlist_url);
     }
 
@@ -118,6 +117,7 @@ namespace zypp
     Pathname packagespath;
     DefaultIntegral<unsigned,defaultPriority> priority;
     mutable bool emptybaseurls;
+    repo::RepoVariablesUrlReplacer replacer;
 
   private:
     Url mirrorlist_url;
@@ -261,12 +261,11 @@ namespace zypp
   std::set<Url> RepoInfo::baseUrls() const
   {
     RepoInfo::url_set replaced_urls;
-    repo::RepoVariablesUrlReplacer replacer;
     for ( url_set::const_iterator it = _pimpl->baseUrls().begin();
           it != _pimpl->baseUrls().end();
           ++it )
     {
-      replaced_urls.insert(replacer(*it));
+      replaced_urls.insert(_pimpl->replacer(*it));
     }
     return replaced_urls;
   }
@@ -283,7 +282,7 @@ namespace zypp
   RepoInfo::urls_const_iterator RepoInfo::baseUrlsBegin() const
   {
     return make_transform_iterator( _pimpl->baseUrls().begin(),
-                                    repo::RepoVariablesUrlReplacer() );
+                                    _pimpl->replacer );
     //return _pimpl->baseUrls.begin();
   }
 
@@ -291,7 +290,7 @@ namespace zypp
   {
     //return _pimpl->baseUrls.end();
     return make_transform_iterator( _pimpl->baseUrls().end(),
-                                    repo::RepoVariablesUrlReplacer() );
+                                    _pimpl->replacer );
   }
 
   RepoInfo::urls_size_type RepoInfo::baseUrlsSize() const
