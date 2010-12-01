@@ -14,6 +14,7 @@
 #include <string>
 
 #include "zypp/Url.h"
+#include "zypp/Arch.h"
 
 namespace zypp
 {
@@ -32,6 +33,13 @@ namespace zypp
     std::string operator()( const std::string &value ) const;
 
     ~RepoVariablesStringReplacer();
+
+    void resetVarCache( void );
+
+    private:
+      mutable Arch sysarch;
+      mutable Arch basearch;
+      mutable std::string releasever;
   };
 
   /**
@@ -46,6 +54,11 @@ namespace zypp
     Url operator()( const Url &url ) const;
 
     ~RepoVariablesUrlReplacer();
+
+    void resetVarCache( void );
+
+    private:
+      RepoVariablesStringReplacer replacer;
   };
 
   } // ns repo

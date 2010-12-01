@@ -24,26 +24,42 @@ namespace repo
 {
 
 RepoVariablesStringReplacer::RepoVariablesStringReplacer()
-{}
+{
+  sysarch = Arch_empty;
+  basearch = Arch_empty;
+}
 
 RepoVariablesStringReplacer::~RepoVariablesStringReplacer()
 {}
+
+void RepoVariablesStringReplacer::resetVarCache( void )
+{
+  sysarch = Arch_empty;
+  basearch = Arch_empty;
+  releasever = "";
+}
 
 std::string RepoVariablesStringReplacer::operator()( const std::string &value ) const
 {
   string newvalue(value);
 
   // $arch
-  Arch sysarch( ZConfig::instance().systemArchitecture() );
+  if( sysarch.empty() )
+    sysarch = ZConfig::instance().systemArchitecture();
+
   newvalue = str::gsub( newvalue, "$arch", sysarch.asString() );
 
   // $basearch
-  Arch basearch( sysarch.baseArch( ) );
+  if( basearch.empty() )
+    basearch = sysarch.baseArch();
 
   newvalue = str::gsub( newvalue, "$basearch", basearch.asString() );
 
   // $releasever (Target::distributionVersion assumes root=/ if target not initialized)
-  newvalue = str::gsub( newvalue, "$releasever", Target::distributionVersion(Pathname()/*guess*/) );
+  if( releasever.empty() )
+    releasever = Target::distributionVersion(Pathname()/*guess*/);
+
+  newvalue = str::gsub( newvalue, "$releasever", releasever );
 
   return newvalue;
 }
@@ -56,6 +72,11 @@ RepoVariablesUrlReplacer::RepoVariablesUrlReplacer()
 RepoVariablesUrlReplacer::~RepoVariablesUrlReplacer()
 {}
 
+void RepoVariablesUrlReplacer::resetVarCache( void )
+{
+  replacer.resetVarCache();
+}
+
 /*
  * Replaces '$arch' and '$basearch' in the path and query part of the URL
  * with the global ZYpp values. Examples:
@@ -66,7 +87,6 @@ RepoVariablesUrlReplacer::~RepoVariablesUrlReplacer()
 Url RepoVariablesUrlReplacer::operator()( const Url &value ) const
 {
   Url newurl = value;
-  RepoVariablesStringReplacer replacer;
   newurl.setPathData(replacer(value.getPathData()));
   newurl.setQueryString(replacer(value.getQueryString()));
 
