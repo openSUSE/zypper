@@ -2,7 +2,7 @@
 Encoding=UTF-8
 Name=Install/Remove Software
 Exec=package-manager --install %F
-Icon=package-manager-icon
+#Icon=package-manager-icon
 Terminal=false
 Type=Application
 Categories=PackageManager;X-SuSE-ControlCenter-System;
