@@ -789,18 +789,21 @@ void solve_and_commit (Zypper & zypper)
           bool refresh_needed = false;
           try
           {
-            for(RepoInfo::urls_const_iterator it = e.info().baseUrlsBegin();
-                      it != e.info().baseUrlsEnd(); ++it)
-              {
-                RepoManager::RefreshCheckStatus stat = manager.
-                              checkIfToRefreshMetadata(e.info(), *it,
-                              RepoManager::RefreshForced );
-                if ( stat == RepoManager::REFRESH_NEEDED )
+            if (!e.info().baseUrlsEmpty())
+            {
+              for(RepoInfo::urls_const_iterator it = e.info().baseUrlsBegin();
+                        it != e.info().baseUrlsEnd(); ++it)
                 {
-                  refresh_needed = true;
-                  break;
+                  RepoManager::RefreshCheckStatus stat = manager.
+                                checkIfToRefreshMetadata(e.info(), *it,
+                                RepoManager::RefreshForced );
+                  if ( stat == RepoManager::REFRESH_NEEDED )
+                  {
+                    refresh_needed = true;
+                    break;
+                  }
                 }
-              }
+            }
           }
           catch (const Exception &)
           { DBG << "check if to refresh exception caught, ignoring" << endl; }

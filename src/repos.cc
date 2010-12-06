@@ -83,48 +83,51 @@ static bool refresh_raw_metadata(Zypper & zypper,
           _("Checking whether to refresh metadata for %s")) %
               (show_alias ? repo.alias() : repo.name())),
           Out::HIGH);
-      for(RepoInfo::urls_const_iterator it = repo.baseUrlsBegin();
-          it != repo.baseUrlsEnd();)
+      if (!repo.baseUrlsEmpty())
       {
-        try
+        for(RepoInfo::urls_const_iterator it = repo.baseUrlsBegin();
+            it != repo.baseUrlsEnd();)
         {
-          RepoManager::RefreshCheckStatus stat = manager.
-              checkIfToRefreshMetadata(repo, *it,
-                zypper.command() == ZypperCommand::REFRESH ||
-                zypper.command() == ZypperCommand::REFRESH_SERVICES ?
-                  RepoManager::RefreshIfNeededIgnoreDelay :
-                  RepoManager::RefreshIfNeeded);
-          do_refresh = (stat == RepoManager::REFRESH_NEEDED);
-          if (!do_refresh &&
-              (zypper.command() == ZypperCommand::REFRESH ||
-               zypper.command() == ZypperCommand::REFRESH_SERVICES))
+          try
           {
-            switch (stat)
+            RepoManager::RefreshCheckStatus stat = manager.
+                checkIfToRefreshMetadata(repo, *it,
+                  zypper.command() == ZypperCommand::REFRESH ||
+                  zypper.command() == ZypperCommand::REFRESH_SERVICES ?
+                    RepoManager::RefreshIfNeededIgnoreDelay :
+                    RepoManager::RefreshIfNeeded);
+            do_refresh = (stat == RepoManager::REFRESH_NEEDED);
+            if (!do_refresh &&
+                (zypper.command() == ZypperCommand::REFRESH ||
+                 zypper.command() == ZypperCommand::REFRESH_SERVICES))
             {
-            case RepoManager::REPO_UP_TO_DATE:
-              zypper.out().info(boost::str(
-                format(_("Repository '%s' is up to date.")) %
-                    (show_alias ? repo.alias() : repo.name())));
-            break;
-            case RepoManager::REPO_CHECK_DELAYED:
-              zypper.out().info(boost::str(
-                format(_("The up-to-date check of '%s' has been delayed."))
-                    % (show_alias ? repo.alias() : repo.name())), Out::HIGH);
-            break;
-            default:
-              WAR << "new item in enum, which is not covered" << endl;
+              switch (stat)
+              {
+              case RepoManager::REPO_UP_TO_DATE:
+                zypper.out().info(boost::str(
+                  format(_("Repository '%s' is up to date.")) %
+                      (show_alias ? repo.alias() : repo.name())));
+              break;
+              case RepoManager::REPO_CHECK_DELAYED:
+                zypper.out().info(boost::str(
+                  format(_("The up-to-date check of '%s' has been delayed."))
+                      % (show_alias ? repo.alias() : repo.name())), Out::HIGH);
+              break;
+              default:
+                WAR << "new item in enum, which is not covered" << endl;
+              }
             }
+            break; // don't check all the urls, just the first successfull.
           }
-          break; // don't check all the urls, just the first successfull.
-        }
-        catch (const Exception & e)
-        {
-          ZYPP_CAUGHT(e);
-          Url badurl(*it);
-          if (++it == repo.baseUrlsEnd())
-            ZYPP_RETHROW(e);
-          ERR << badurl << " doesn't look good. Trying another url ("
-              << *it << ")." << endl;
+          catch (const Exception & e)
+          {
+            ZYPP_CAUGHT(e);
+            Url badurl(*it);
+            if (++it == repo.baseUrlsEnd())
+              ZYPP_RETHROW(e);
+            ERR << badurl << " doesn't look good. Trying another url ("
+                << *it << ")." << endl;
+          }
         }
       }
     }
@@ -360,28 +363,34 @@ bool match_repo(Zypper & zypper, string str, RepoInfo *repo)
       if (!(urlview.has(url::ViewOptions::WITH_PASSWORD)
             && urlview.has(url::ViewOptions::WITH_QUERY_STR)))
       {
-        for_(urlit, known_it->baseUrlsBegin(), known_it->baseUrlsEnd())
+        if (!known_it->baseUrlsEmpty())
         {
-          Url newrl(*urlit);
-          newrl.setPathName(Pathname(newrl.getPathName()).asString());
-          if (newrl.asString(urlview) == uurl.asString(urlview))
+          for_(urlit, known_it->baseUrlsBegin(), known_it->baseUrlsEnd())
           {
-            found = true;
-            break;
+            Url newrl(*urlit);
+            newrl.setPathName(Pathname(newrl.getPathName()).asString());
+            if (newrl.asString(urlview) == uurl.asString(urlview))
+            {
+              found = true;
+              break;
+            }
           }
         }
       }
       // ordinary == comparison suffices here (quicker)
       else
       {
-        for_(urlit, known_it->baseUrlsBegin(), known_it->baseUrlsEnd())
+        if (!known_it->baseUrlsEmpty())
         {
-          Url newrl(*urlit);
-          newrl.setPathName(Pathname(newrl.getPathName()).asString());
-          if (newrl == uurl)
+          for_(urlit, known_it->baseUrlsBegin(), known_it->baseUrlsEnd())
           {
-            found = true;
-            break;
+            Url newrl(*urlit);
+            newrl.setPathName(Pathname(newrl.getPathName()).asString());
+            if (newrl == uurl)
+            {
+              found = true;
+              break;
+            }
           }
         }
       }
@@ -415,19 +424,24 @@ static bool repo_cmp_alias_urls(const RepoInfo & lhs, const RepoInfo & rhs)
   else
   {
     // URIs (all of them must be in the other RepoInfo)
-    bool urlfound = false;
-    for (RepoInfo::urls_const_iterator urlit = lhs.baseUrlsBegin();
-        urlit != lhs.baseUrlsEnd(); ++urlit)
+    if (!lhs.baseUrlsEmpty())
     {
-      if (find(rhs.baseUrlsBegin(), rhs.baseUrlsEnd(), Url(*urlit))
-          != rhs.baseUrlsEnd())
-        urlfound = true;
-      if (!urlfound)
+      bool urlfound = false;
+      for (RepoInfo::urls_const_iterator urlit = lhs.baseUrlsBegin();
+          urlit != lhs.baseUrlsEnd(); ++urlit)
       {
-        equals = false;
-        break;
+        if (find(rhs.baseUrlsBegin(), rhs.baseUrlsEnd(), Url(*urlit))
+            != rhs.baseUrlsEnd())
+          urlfound = true;
+        if (!urlfound)
+        {
+          equals = false;
+          break;
+        }
       }
     }
+    else if (!rhs.baseUrlsEmpty())
+      equals = false;
   }
 
   return equals;
@@ -594,15 +608,15 @@ void do_init_repos(Zypper & zypper, const Container & container)
   bool no_remote = zypper.globalOpts().no_remote;
   for (list<RepoInfo>::iterator it = gData.repos.begin(); it !=  gData.repos.end();)
   {
-    if (no_cd && (it->baseUrlsBegin()->getScheme() == "cd"
-                  || it->baseUrlsBegin()->getScheme() == "dvd"))
+    if (no_cd && (it->url().getScheme() == "cd"
+                  || it->url().getScheme() == "dvd"))
     {
       zypper.out().info(str::form(
           _("Ignoring repository '%s' because of '%s' option."),
           (zypper.config().show_alias ? it->alias().c_str() : it->name().c_str()), "no-cd"));
       gData.repos.erase(it++);
     }
-    if (no_remote && (*it->baseUrlsBegin()).schemeIsDownloading())
+    if (no_remote && it->url().schemeIsDownloading())
     {
       zypper.out().info(str::form(
           _("Ignoring repository '%s' because of '%s' option."),
@@ -792,7 +806,7 @@ static void print_rug_sources_list(const std::list<zypp::RepoInfo> &repos)
     // name
     tr << repo.name();
     // url
-    tr << (*repo.baseUrlsBegin()).asString();
+    tr << (repo.baseUrlsEmpty() ? "n/a" : repo.url().asString());
 
     tbl << tr;
     i++;
@@ -944,7 +958,7 @@ static void print_repo_list(Zypper & zypper,
      * \todo properly handle multiple baseurls - show "(multiple)"
      */
     if (all || showuri)
-      tr << (*repo.baseUrlsBegin()).asString();
+      tr << (repo.baseUrlsEmpty() ? "n/a" : repo.url().asString());
 
     if (all || showservice)
       tr << repo.service();
@@ -1268,7 +1282,7 @@ bool refresh_repo(Zypper & zypper, const zypp::RepoInfo & repo)
 
     // without this a cd is required to be present in the drive on each refresh
     // (or more 'refresh needed' check)
-    bool is_cd = is_changeable_media(*repo.baseUrlsBegin());
+    bool is_cd = is_changeable_media(repo.url());
     if (!force_download && is_cd)
     {
       MIL << "Skipping refresh of a changeable read-only media." << endl;
@@ -1509,12 +1523,15 @@ void add_repo(Zypper & zypper, RepoInfo & repo)
   RuntimeData & gData = zypper.runtimeData();
 
   bool is_cd = true;
-  for(RepoInfo::urls_const_iterator it = repo.baseUrlsBegin();
-      it != repo.baseUrlsEnd(); ++it)
+  if (!repo.baseUrlsEmpty())
   {
-    is_cd = is_changeable_media(*it);
-    if (!is_cd)
-      break;
+    for(RepoInfo::urls_const_iterator it = repo.baseUrlsBegin();
+        it != repo.baseUrlsEnd(); ++it)
+    {
+      is_cd = is_changeable_media(*it);
+      if (!is_cd)
+        break;
+    }
   }
   if (is_cd)
   {
@@ -1562,9 +1579,12 @@ void add_repo(Zypper & zypper, RepoInfo & repo)
     ostringstream s;
     s << _("Could not determine the type of the repository."
         " Please check if the defined URIs (see below) point to a valid repository:");
-    for(RepoInfo::urls_const_iterator uit = repo.baseUrlsBegin();
-        uit != repo.baseUrlsEnd(); ++uit)
-      s << (*uit) << endl;
+    if (!repo.baseUrlsEmpty())
+    {
+      for(RepoInfo::urls_const_iterator uit = repo.baseUrlsBegin();
+          uit != repo.baseUrlsEnd(); ++uit)
+        s << (*uit) << endl;
+    }
 
     zypper.out().error(e,
       _("Can't find a valid repository at given location:"), s.str());
@@ -1600,7 +1620,7 @@ void add_repo(Zypper & zypper, RepoInfo & repo)
     s << ( repo.enabled() ? "[x]" : "[ ]" );
     s << ( repo.autorefresh() ? "* " : "  " );
     s << (zypper.config().show_alias ? repo.alias() : repo.name());
-    s << " (" << *repo.baseUrlsBegin() << ")" << endl;
+    s << " (" << (repo.baseUrlsEmpty() ? "n/a" : repo.url().asString()) << ")" << endl;
   }
   else
   {
@@ -1609,11 +1629,14 @@ void add_repo(Zypper & zypper, RepoInfo & repo)
     // TranslatorExplanation used as e.g. "Autorefresh: Yes"
     s << _("Autorefresh") << ": " << (repo.autorefresh() ? _("Yes") : _("No")) << endl;
 
-    s << "URI:";
-    for (RepoInfo::urls_const_iterator uit = repo.baseUrlsBegin();
-        uit != repo.baseUrlsEnd(); uit++)
-      s << " " << *uit;
-    s << endl;
+    if (!repo.baseUrlsEmpty())
+    {
+      s << "URI:";
+      for (RepoInfo::urls_const_iterator uit = repo.baseUrlsBegin();
+          uit != repo.baseUrlsEnd(); uit++)
+        s << " " << *uit;
+      s << endl;
+    }
   }
   zypper.out().info(s.str());
 
@@ -1854,7 +1877,7 @@ void modify_repos_by_option( Zypper & zypper )
     {
       if (!it->baseUrlsEmpty())
       {
-        if ( ! (*it->baseUrlsBegin()).schemeIsDownloading() )
+        if ( ! it->url().schemeIsDownloading() )
         {
           string alias = it->alias();
           toModify.insert( alias );
@@ -1869,7 +1892,7 @@ void modify_repos_by_option( Zypper & zypper )
     {
       if (!it->baseUrlsEmpty())
       {
-        if ( (*it->baseUrlsBegin()).schemeIsDownloading() )
+        if ( it->url().schemeIsDownloading() )
         {
           string alias = it->alias();
           toModify.insert( alias );
@@ -1887,7 +1910,7 @@ void modify_repos_by_option( Zypper & zypper )
     {
       if (!it->baseUrlsEmpty())
       {
-        if ( scheme.find(it->baseUrlsBegin()->getScheme())!= scheme.end() )
+        if ( scheme.find(it->url().getScheme())!= scheme.end() )
         {
           string alias = it->alias();
           toModify.insert( alias );
@@ -2129,12 +2152,15 @@ bool match_service(Zypper & zypper, string str, RepoInfoBase_Ptr & service_ptr)
           else
           {
             RepoInfo_Ptr r_ptr = dynamic_pointer_cast<RepoInfo>(*known_it);
-            for_(urlit, r_ptr->baseUrlsBegin(), r_ptr->baseUrlsEnd())
-              if (urlit->asString(urlview) == Url(str).asString(urlview))
-              {
-                found = true;
-                break;
-              }
+            if (!r_ptr->baseUrlsEmpty())
+            {
+              for_(urlit, r_ptr->baseUrlsBegin(), r_ptr->baseUrlsEnd())
+                if (urlit->asString(urlview) == Url(str).asString(urlview))
+                {
+                  found = true;
+                  break;
+                }
+            }
           }
         }
         else
@@ -2144,9 +2170,12 @@ bool match_service(Zypper & zypper, string str, RepoInfoBase_Ptr & service_ptr)
           else
           {
             RepoInfo_Ptr r_ptr = dynamic_pointer_cast<RepoInfo>(*known_it);
-            found =
-              find(r_ptr->baseUrlsBegin(), r_ptr->baseUrlsEnd(), Url(str))
-              != r_ptr->baseUrlsEnd();
+            if (!r_ptr->baseUrlsEmpty())
+            {
+              found =
+                find(r_ptr->baseUrlsBegin(), r_ptr->baseUrlsEnd(), Url(str))
+                != r_ptr->baseUrlsEnd();
+            }
           }
         }
       }
@@ -2316,7 +2345,7 @@ static void service_list_tr(
     if (service)
       tr << service->url().asString();
     else
-      tr << repo->baseUrlsBegin()->asString();
+      tr << repo->url().asString();
   }
 
   tbl << tr;
@@ -2988,7 +3017,7 @@ void modify_services_by_option( Zypper & zypper )
     {
       rptr = dynamic_pointer_cast<RepoInfo>(*it);
       if (!rptr->baseUrlsEmpty())
-        url = *rptr->baseUrlsBegin();
+        url = rptr->url();
     }
 
     if (url.isValid())

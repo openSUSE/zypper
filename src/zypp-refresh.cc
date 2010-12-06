@@ -129,7 +129,7 @@ int main(int argc, char **argv)
   unsigned repocount = 0, errcount = 0;
   for(list<RepoInfo>::iterator it = repos.begin(); it != repos.end(); ++it, ++repocount)
   {
-    Url url = *(it->baseUrlsBegin());
+    Url url = it->url();
     string scheme(url.getScheme());
 
     if (scheme == "cd" || scheme == "dvd")
