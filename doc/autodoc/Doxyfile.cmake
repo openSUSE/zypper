@@ -70,7 +70,7 @@ WARN_LOGFILE           =
 #---------------------------------------------------------------------------
 # configuration options related to the input files
 #---------------------------------------------------------------------------
-INPUT                  = @ZYPP_DOCINCLUDE_DIR@ @ZYPP_SOURCE_DIR@
+INPUT                  = @ZYPP_DOCINCLUDE_DIR@ @ZYPP_SOURCE_DIR@ @ZYPP_TESTUTILS_DIR@
 FILE_PATTERNS          = *.h *.hh *.hxx *.hpp *.h++ *.c *.cc *.cxx *.cpp *.c++ *.tcc *.hcc *.doc
 RECURSIVE              = YES
 EXCLUDE                =

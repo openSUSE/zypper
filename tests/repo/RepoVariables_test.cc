@@ -30,6 +30,8 @@ BOOST_AUTO_TEST_CASE(replace_text)
   BOOST_CHECK_EQUAL(replacer1("http://foo/$arch/bar"),
                     "http://foo/"+ ZConfig::instance().systemArchitecture().asString() + "/bar");
 
+  replacer1.resetVarCache();
+
   ZConfig::instance().setSystemArchitecture(Arch("i686"));
   BOOST_CHECK_EQUAL(replacer1("http://foo/$arch/bar/$basearch"),
                     "http://foo/i686/bar/i386");
@@ -63,6 +65,7 @@ BOOST_AUTO_TEST_CASE(replace_text)
   // make it the base product
   BOOST_CHECK( symlink(tmp.path() / "/etc/products.d/product.prod", tmp.path() / "/etc/products.d/baseproduct" ) == 0 );
 
+  replacer2.resetVarCache();
 
   z->initializeTarget( tmp.path() );
   // target activated, there should be replacement of

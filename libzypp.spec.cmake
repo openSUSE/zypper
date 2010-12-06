@@ -296,12 +296,6 @@ rm -rf "$RPM_BUILD_ROOT"
 %{_prefix}/lib/zypp
 %{_datadir}/zypp
 %{_datadir}/applications/package-manager.desktop
-%{_datadir}/icons/hicolor/scalable/apps/package-manager-icon.svg
-%{_datadir}/icons/hicolor/16x16/apps/package-manager-icon.png
-%{_datadir}/icons/hicolor/22x22/apps/package-manager-icon.png
-%{_datadir}/icons/hicolor/24x24/apps/package-manager-icon.png
-%{_datadir}/icons/hicolor/32x32/apps/package-manager-icon.png
-%{_datadir}/icons/hicolor/48x48/apps/package-manager-icon.png
 %{_bindir}/*
 %{_libdir}/libzypp*so.*
 %doc %{_mandir}/man5/locks.5.*
