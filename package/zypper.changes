@@ -1,4 +1,10 @@
 -------------------------------------------------------------------
+Mon Dec 06 16:03:05 CET 2010 - dheidler@suse.de
+
+- Try not to fail, when there is no baseurl (bnc#650920)
+- 1.5.2
+
+-------------------------------------------------------------------
 Tue Nov 30 11:49:05 CET 2010 - jkupec@suse.cz
 
 - do not autorefresh services if --no-refresh is given
