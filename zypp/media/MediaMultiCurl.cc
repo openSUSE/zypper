@@ -188,6 +188,21 @@ multifetchworker::writefunction(void *ptr, size_t size)
       return size;
     }
 
+  if (_blkstart && _off == _blkstart)
+    {
+      // make sure that the server replied with "partial content"
+      // for http requests
+      char *effurl;
+      (void)curl_easy_getinfo(_curl, CURLINFO_EFFECTIVE_URL, &effurl);
+      if (effurl && !strncasecmp(effurl, "http", 4))
+	{
+	  long statuscode = 0;
+	  (void)curl_easy_getinfo(_curl, CURLINFO_RESPONSE_CODE, &statuscode);
+	  if (statuscode != 206)
+	    return size ? 0 : 1;
+	}
+    }
+
   _blkreceived += len;
   _received += len;
 
