@@ -641,7 +641,8 @@ multifetchworker::stealjob()
       // lets see if we should sleep a bit
       DBG << "me #" << _workerno << ": " << _avgspeed << ", size " << best->_blksize << endl;
       DBG << "best #" << best->_workerno << ": " << best->_avgspeed << ", size " << (best->_blksize - best->_blkreceived) << endl;
-      if (_avgspeed && best->_avgspeed && (best->_blksize - best->_blkreceived) * _avgspeed < best->_blksize * best->_avgspeed)
+      if (_avgspeed && best->_avgspeed && best->_blksize - best->_blkreceived > 0 &&
+          (best->_blksize - best->_blkreceived) * _avgspeed < best->_blksize * best->_avgspeed)
 	{
 	  if (!now)
 	    now = currentTime();
