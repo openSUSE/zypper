@@ -2,6 +2,8 @@
 Wed Dec  8 14:15:12 CET 2010 - dheidler@suse.de
 
 - fix retrieval of distributionVersion if target is not initialized
+- MultiCurl: make sure the server responds with "partial content",
+  fixes corrupt downloads if the metalink file contains no checksums
 - version 8.10.1 (10)
 
 -------------------------------------------------------------------
