@@ -1,4 +1,10 @@
 -------------------------------------------------------------------
+Wed Dec  8 14:15:12 CET 2010 - dheidler@suse.de
+
+- fix retrieval of distributionVersion if target is not initialized
+- version 8.10.1 (10)
+
+-------------------------------------------------------------------
 Wed Dec  1 17:39:16 CET 2010 - dheidler@suse.de
 
 - Added ReplacerVar caching in RepoInfo
