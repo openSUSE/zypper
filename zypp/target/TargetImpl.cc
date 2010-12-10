@@ -1597,8 +1597,15 @@ namespace zypp
         scoped_ptr<rpm::RpmDb> tmprpmdb;
         if ( ZConfig::instance().systemRoot() == Pathname() )
         {
-          tmprpmdb.reset( new rpm::RpmDb );
-          tmprpmdb->initDatabase( "/", Pathname(), false );
+          try
+          {
+              tmprpmdb.reset( new rpm::RpmDb );
+              tmprpmdb->initDatabase( "/", Pathname(), false );
+          }
+          catch( ... )
+          {
+            return "";
+          }
         }
         rpm::librpmDb::db_const_iterator it;
         if ( it.findByProvides( ZConfig::instance().distroverpkg() ) )
