@@ -81,6 +81,7 @@ namespace zypp
         emptybaseurls = true;
         repo::RepoMirrorList *rmirrorlist = NULL;
 
+        DBG << "MetadataPath: " << metadatapath << endl;
         if( metadatapath.empty() )
           rmirrorlist = new repo::RepoMirrorList (getmirrorListUrl() );
         else
