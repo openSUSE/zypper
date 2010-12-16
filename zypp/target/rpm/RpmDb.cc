@@ -305,6 +305,8 @@ void RpmDb::initDatabase( Pathname root_r, Pathname dbPath_r, bool doRebuild_r )
   ///////////////////////////////////////////////////////////////////
   // Check arguments
   ///////////////////////////////////////////////////////////////////
+  bool quickinit( root_r.empty() );
+
   if ( root_r.empty() )
     root_r = "/";
 
@@ -318,7 +320,8 @@ void RpmDb::initDatabase( Pathname root_r, Pathname dbPath_r, bool doRebuild_r )
   }
 
   MIL << "Calling initDatabase: " << stringPath( root_r, dbPath_r )
-      << ( doRebuild_r ? " (rebuilddb)" : "" ) << endl;
+      << ( doRebuild_r ? " (rebuilddb)" : "" )
+      << ( quickinit ? " (quickinit)" : "" ) << endl;
 
   ///////////////////////////////////////////////////////////////////
   // Check whether already initialized
@@ -339,6 +342,13 @@ void RpmDb::initDatabase( Pathname root_r, Pathname dbPath_r, bool doRebuild_r )
   // init database
   ///////////////////////////////////////////////////////////////////
   librpmDb::unblockAccess();
+
+  if ( quickinit )
+  {
+    MIL << "QUICK initDatabase (no systemRoot set)" << endl;
+    return;
+  }
+
   DbStateInfoBits info = DbSI_NO_INIT;
   try
   {

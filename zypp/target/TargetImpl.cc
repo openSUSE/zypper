@@ -1600,7 +1600,7 @@ namespace zypp
           try
           {
               tmprpmdb.reset( new rpm::RpmDb );
-              tmprpmdb->initDatabase( "/", Pathname(), false );
+              tmprpmdb->initDatabase( /*default ctor uses / but no additional keyring exports */ );
           }
           catch( ... )
           {
