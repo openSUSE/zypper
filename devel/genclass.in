@@ -211,7 +211,7 @@ ${INDENT}std::ostream & operator<<( std::ostream & str, const ${CLASS} & obj )
 ${INDENT}{ return str << *obj._pimpl; }
 
 ${INDENT}bool operator==( const ${CLASS} & lhs, const ${CLASS} & rhs )
-${INDENT}{ return lhs._pimpl == rhs_pimpl || lhs._pimpl && rhs_pimpl && *lhs._pimpl == *rhs_pimpl; }
+${INDENT}{ return lhs._pimpl == rhs._pimpl || lhs._pimpl && rhs._pimpl && *lhs._pimpl == *rhs._pimpl; }
 
 $(nsclose)
 EOF
