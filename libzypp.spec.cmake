@@ -34,6 +34,7 @@ BuildRequires:  gcc-c++
 BuildRequires:  gettext-devel
 BuildRequires:  graphviz
 BuildRequires:  libxml2-devel
+BuildRequires:  libproxy-devel >= 0.4.6
 
 BuildRequires:  libsatsolver-devel >= 0.14.17
 %if 0%{?suse_version}
