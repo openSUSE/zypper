@@ -56,6 +56,7 @@ namespace zypp
         tmpfile = access.provideFile(filepath);
 
         zypp::filesystem::copy(tmpfile, cachefile);
+        DBG << "Copy MirrorList file to " << cachefile << endl;
       }
 
       if ( url.asString().find("/metalink") != string::npos )
@@ -69,7 +70,10 @@ namespace zypp
 
       setUrls( my_urls );
       if( urls.empty() )
+      {
+        DBG << "Removing Cachefile as it contains no URLs" << endl;
         zypp::filesystem::unlink(cachefile);
+      }
     }
 
     RepoMirrorList::RepoMirrorList( const Url &url )

@@ -81,6 +81,7 @@ namespace zypp
         emptybaseurls = true;
         repo::RepoMirrorList *rmirrorlist = NULL;
 
+        DBG << "MetadataPath: " << metadatapath << endl;
         if( metadatapath.empty() )
           rmirrorlist = new repo::RepoMirrorList (getmirrorListUrl() );
         else
@@ -305,7 +306,12 @@ namespace zypp
     if (indeterminate(_pimpl->keeppackages))
     {
       if (_pimpl->baseUrls().empty())
-        return false;
+      {
+        if ( _pimpl->getmirrorListUrl().schemeIsDownloading() )
+          return true;
+        else
+          return false;
+      }
       else if ( baseUrlsBegin()->schemeIsDownloading() )
         return true;
       else
@@ -427,7 +433,10 @@ namespace zypp
 
     str << "- gpgcheck    : " << gpgCheck() << std::endl;
     str << "- gpgkey      : " << gpgKeyUrl() << std::endl;
-    str << "- keeppackages: " << keepPackages() << std::endl;
+
+    if (!indeterminate(_pimpl->keeppackages))
+      str << "- keeppackages: " << keepPackages() << std::endl;
+
     str << "- service     : " << service() << std::endl;
 
     if (!targetDistribution().empty())

@@ -1594,6 +1594,19 @@ namespace zypp
         // On RHEL, Fedora and others the "product version" is determined by the first package
         // providing 'redhat-release'. This value is not hardcoded in YUM and can be configured
         // with the $distroverpkg variable.
+        scoped_ptr<rpm::RpmDb> tmprpmdb;
+        if ( ZConfig::instance().systemRoot() == Pathname() )
+        {
+          try
+          {
+              tmprpmdb.reset( new rpm::RpmDb );
+              tmprpmdb->initDatabase( /*default ctor uses / but no additional keyring exports */ );
+          }
+          catch( ... )
+          {
+            return "";
+          }
+        }
         rpm::librpmDb::db_const_iterator it;
         if ( it.findByProvides( ZConfig::instance().distroverpkg() ) )
           distributionVersion = it->tag_version();
