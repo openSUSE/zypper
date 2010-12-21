@@ -68,7 +68,12 @@ namespace zypp
           else if ( it->first == "mirrorlist" && !it->second.empty())
             info.setMirrorListUrl(Url(it->second));
           else if ( it->first == "gpgkey" && !it->second.empty())
-            info.setGpgKeyUrl( Url(it->second) );
+          {
+            std::vector<std::string> keys;
+            str::split( it->second, std::back_inserter(keys) );
+            if ( ! keys.empty() ) 
+              info.setGpgKeyUrl( Url(*keys.begin()) );
+          }
           else if ( it->first == "gpgcheck" )
             info.setGpgCheck( str::strToTrue( it->second ) );
 	  else if ( it->first == "keeppackages" )

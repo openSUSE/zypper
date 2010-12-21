@@ -3,4 +3,5 @@ ADD_SUBDIRECTORY( inifile )
 ADD_SUBDIRECTORY(ws)
 
 ADD_TESTS( ProductFileReader )
+ADD_TESTS( RepoFileReader )
 
