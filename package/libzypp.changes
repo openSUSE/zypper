@@ -1,4 +1,10 @@
 -------------------------------------------------------------------
+Tue Dec 21 13:29:06 CET 2010 - dheidler@suse.de
+
+- Fix caching of mirrorlist files
+- version 8.10.4 (10)
+
+-------------------------------------------------------------------
 Thu Dec 16 19:46:00 CET 2010 - ma@suse.de
 
 - Do not export keyring if rpmdb is initialised, but target isn't 
