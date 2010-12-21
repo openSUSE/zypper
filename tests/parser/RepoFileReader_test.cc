@@ -1,9 +1,13 @@
 #include <sstream>
 #include <string>
 #include <zypp/parser/RepoFileReader.h>
+#include <zypp/base/NonCopyable.h>
+
+#include "TestSetup.h"
 
 using std::stringstream;
 using std::string;
+using namespace zypp;
 
 static string suse_repo = "[factory-oss]\n"
 "name=factory-oss\n"
