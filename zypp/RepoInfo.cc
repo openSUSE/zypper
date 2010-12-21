@@ -306,7 +306,12 @@ namespace zypp
     if (indeterminate(_pimpl->keeppackages))
     {
       if (_pimpl->baseUrls().empty())
-        return false;
+      {
+        if ( _pimpl->getmirrorListUrl().schemeIsDownloading() )
+          return true;
+        else
+          return false;
+      }
       else if ( baseUrlsBegin()->schemeIsDownloading() )
         return true;
       else
