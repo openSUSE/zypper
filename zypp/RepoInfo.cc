@@ -428,7 +428,10 @@ namespace zypp
 
     str << "- gpgcheck    : " << gpgCheck() << std::endl;
     str << "- gpgkey      : " << gpgKeyUrl() << std::endl;
-    str << "- keeppackages: " << keepPackages() << std::endl;
+
+    if (!indeterminate(_pimpl->keeppackages))
+      str << "- keeppackages: " << keepPackages() << std::endl;
+
     str << "- service     : " << service() << std::endl;
 
     if (!targetDistribution().empty())
