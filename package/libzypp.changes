@@ -1,4 +1,10 @@
 -------------------------------------------------------------------
+Wed Dec 22 12:38:22 CET 2010 - dheidler@suse.de
+
+- moved keepPackages code to RepoInfo::Impl
+- version 8.10.5 (10)
+
+-------------------------------------------------------------------
 Tue Dec 21 13:29:06 CET 2010 - dheidler@suse.de
 
 - Fix caching of mirrorlist files
