@@ -105,6 +105,25 @@ namespace zypp
       return !emptybaseurls && !_baseUrls.empty();
     }
 
+    /** Compute a resonable default for keepPackages based on URL scheme. */
+    bool keepPackagesDefault() const
+    {
+      if (indeterminate(keeppackages))
+      {
+        if (_baseUrls.empty())
+        {
+          if ( mirrorlist_url.schemeIsDownloading() )
+            return true;
+          else
+            return false;
+        }
+        else if ( _baseUrls.begin()->schemeIsDownloading() )
+          return true;
+        else
+          return false;
+      }
+      return (bool) keeppackages;
+    }
 
   public:
     TriBool gpgcheck;
@@ -303,22 +322,7 @@ namespace zypp
   // false by default (if not set by setKeepPackages)
   bool RepoInfo::keepPackages() const
   {
-    if (indeterminate(_pimpl->keeppackages))
-    {
-      if (_pimpl->baseUrls().empty())
-      {
-        if ( _pimpl->getmirrorListUrl().schemeIsDownloading() )
-          return true;
-        else
-          return false;
-      }
-      else if ( baseUrlsBegin()->schemeIsDownloading() )
-        return true;
-      else
-        return false;
-    }
-
-    return (bool) _pimpl->keeppackages;
+    return _pimpl->keepPackagesDefault();
   }
 
   ///////////////////////////////////////////////////////////////////
