@@ -806,7 +806,7 @@ static void print_rug_sources_list(const std::list<zypp::RepoInfo> &repos)
     // name
     tr << repo.name();
     // url
-    tr << (repo.baseUrlsEmpty() ? "n/a" : repo.url().asString());
+    tr << (repo.baseUrlSet() ? repo.url().asString() : (repo.mirrorListUrl().asString().empty() ? "n/a" : repo.mirrorListUrl().asString() ));
 
     tbl << tr;
     i++;
@@ -958,7 +958,7 @@ static void print_repo_list(Zypper & zypper,
      * \todo properly handle multiple baseurls - show "(multiple)"
      */
     if (all || showuri)
-      tr << (repo.baseUrlsEmpty() ? "n/a" : repo.url().asString());
+      tr << (repo.baseUrlSet() ? repo.url().asString() : (repo.mirrorListUrl().asString().empty() ? "n/a" : repo.mirrorListUrl().asString() ));
 
     if (all || showservice)
       tr << repo.service();
@@ -996,7 +996,7 @@ static void print_repo_details(Zypper & zypper, list<RepoInfo> & repos)
 
     TableRow tr; tr << _("Alias") << repo.alias(); t << tr;
     TableRow tr_name; tr_name << _("Name") << repo.name(); t << tr_name;
-    TableRow tr_uri; tr_uri << _("URI") << repo.url().asString(); t << tr_uri;
+    TableRow tr_uri; tr_uri << _("URI") << (repo.baseUrlSet() ? repo.url().asString() : (repo.mirrorListUrl().asString().empty() ? "n/a" : repo.mirrorListUrl().asString() )); t << tr_uri;
     TableRow tr_en;
     tr_en << _("Enabled") << (repo.enabled() ? _("Yes") : _("No"));
     t << tr_en;
@@ -1620,7 +1620,7 @@ void add_repo(Zypper & zypper, RepoInfo & repo)
     s << ( repo.enabled() ? "[x]" : "[ ]" );
     s << ( repo.autorefresh() ? "* " : "  " );
     s << (zypper.config().show_alias ? repo.alias() : repo.name());
-    s << " (" << (repo.baseUrlsEmpty() ? "n/a" : repo.url().asString()) << ")" << endl;
+    s << " (" << (repo.baseUrlSet() ? repo.url().asString() : (repo.mirrorListUrl().asString().empty() ? "n/a" : repo.mirrorListUrl().asString() )) << ")" << endl;
   }
   else
   {
