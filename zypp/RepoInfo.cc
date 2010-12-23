@@ -111,16 +111,9 @@ namespace zypp
       if (indeterminate(keeppackages))
       {
         if (_baseUrls.empty())
-        {
-          if ( mirrorlist_url.schemeIsDownloading() )
-            return true;
-          else
-            return false;
-        }
-        else if ( _baseUrls.begin()->schemeIsDownloading() )
-          return true;
+          return mirrorlist_url.schemeIsDownloading();
         else
-          return false;
+          return _baseUrls.begin()->schemeIsDownloading();
       }
       return (bool) keeppackages;
     }
