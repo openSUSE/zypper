@@ -99,6 +99,10 @@ namespace zypp
        */
       bool baseUrlsEmpty() const;
       /**
+       * whether there are manualy configured repository urls
+       */
+      bool baseUrlSet() const;
+      /**
        * number of repository urls
        */
       urls_size_type baseUrlsSize() const;

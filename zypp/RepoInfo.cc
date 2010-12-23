@@ -312,6 +312,9 @@ namespace zypp
   bool RepoInfo::baseUrlsEmpty() const
   { return _pimpl->baseUrls().empty(); }
 
+  bool RepoInfo::baseUrlSet() const
+  { return _pimpl->baseurl2dump(); }
+
   // false by default (if not set by setKeepPackages)
   bool RepoInfo::keepPackages() const
   {
