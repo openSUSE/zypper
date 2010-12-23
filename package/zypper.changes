@@ -1,4 +1,10 @@
 -------------------------------------------------------------------
+Thu Dec 23 14:49:05 CET 2010 - dheidler@suse.de
+
+- view mirrorlist-url when there is no baseurl set (in the repo-file)
+- 1.5.3
+
+-------------------------------------------------------------------
 Mon Dec 06 16:03:05 CET 2010 - dheidler@suse.de
 
 - Try not to fail, when there is no baseurl (bnc#650920)
