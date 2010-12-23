@@ -1,4 +1,10 @@
 -------------------------------------------------------------------
+Thu Dec 23 14:42:02 CET 2010 - dheidler@suse.de
+
+- add method to check if there are manually configured urls
+- version 8.11.0 (10)
+
+-------------------------------------------------------------------
 Thu Dec 23 11:31:22 CET 2010 - dheidler@suse.de
 
 - create cache directory, if it doesn't exist
