@@ -1,4 +1,11 @@
 -------------------------------------------------------------------
+Thu Dec 23 11:31:22 CET 2010 - dheidler@suse.de
+
+- create cache directory, if it doesn't exist
+  when saving mirrorlist
+- version 8.10.6 (10)
+
+-------------------------------------------------------------------
 Wed Dec 22 12:38:22 CET 2010 - dheidler@suse.de
 
 - moved keepPackages code to RepoInfo::Impl
