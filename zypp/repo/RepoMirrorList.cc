@@ -55,8 +55,11 @@ namespace zypp
         MediaSetAccess access (abs_url);
         tmpfile = access.provideFile(filepath);
 
-        zypp::filesystem::copy(tmpfile, cachefile);
+        // Create directory, if not existing
+        zypp::filesystem::assert_dir(metadatapath);
+
         DBG << "Copy MirrorList file to " << cachefile << endl;
+        zypp::filesystem::copy(tmpfile, cachefile);
       }
 
       if ( url.asString().find("/metalink") != string::npos )
