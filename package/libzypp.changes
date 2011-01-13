@@ -1,4 +1,9 @@
 -------------------------------------------------------------------
+Thu Jan 13 01:13:32 CET 2011 - ma@suse.de
+
+- Update zypp-po.tar.bz2
+
+-------------------------------------------------------------------
 Thu Dec 23 14:42:02 CET 2010 - dheidler@suse.de
 
 - add method to check if there are manually configured urls
