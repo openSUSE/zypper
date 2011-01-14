@@ -240,10 +240,21 @@ namespace zypp
         ServiceNoUrlException( const ServiceInfo & service_r, const std::string & msg_r );
     };
 
+    /** Service plugin has trouble providing the metadata but this should not be treated as error.
+     */
+    class ServicePluginInformalException : public ServiceException
+    {
+      public:
+        ServicePluginInformalException();
+        ServicePluginInformalException( const std::string & msg_r );
+        ServicePluginInformalException( const ServiceInfo & service_r );
+        ServicePluginInformalException( const ServiceInfo & service_r, const std::string & msg_r );
+    };
+
     //@}
 
     /////////////////////////////////////////////////////////////////
-  } // namespace parser
+  } // namespace repo
   ///////////////////////////////////////////////////////////////////
   /////////////////////////////////////////////////////////////////
 } // namespace zypp

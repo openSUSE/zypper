@@ -115,6 +115,7 @@ namespace zypp
     DEF_CTORS( ServiceInvalidAliasException,  "Service has an invalid alias." );
     DEF_CTORS( ServiceAlreadyExistsException, "Service already exists." );
     DEF_CTORS( ServiceNoUrlException,         "Service has no or invalid url defined." );
+    DEF_CTORS( ServicePluginInformalException,"Service plugin has trouble providing the metadata but this should not be treated as error." );
 
 #undef DEF_CTORS
 
