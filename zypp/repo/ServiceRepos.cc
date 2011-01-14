@@ -2,6 +2,7 @@
 #include <sstream>
 #include "zypp/base/Logger.h"
 #include "zypp/repo/ServiceRepos.h"
+#include "zypp/repo/RepoException.h"
 #include "zypp/media/MediaException.h"
 #include "zypp/parser/RepoFileReader.h"
 #include "zypp/media/MediaManager.h"
@@ -80,17 +81,16 @@ public:
       // types of exceptions yet
       if ( prog.close() != 0 )
       {
-	// ignore error but we'd like to report it somehow.
+	// Ignore this error but we'd like to report it somehow.
 	// ZYPP_THROW(media::MediaException(buffer.str()));
-	ERR << "Cpture plugin error: TBI" << endl;
+	ERR << "Capture plugin error:[" << endl << buffer.str() << endl << ']' << endl;
+	ZYPP_THROW( repo::ServicePluginInformalException(buffer.str()));
       }
       parser::RepoFileReader parser(buffer, _callback);
     }
 
     ~PluginServiceRepos()
-    {
-
-    }
+    {}
 };
 
 
