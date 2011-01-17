@@ -73,19 +73,24 @@ public:
       Url serviceUrl( service.url() );
       stringstream buffer;
 
-      // FIXME: Actually we want Stderr to an fd in order to report errors.
-      ExternalProgram prog(serviceUrl.getPathName(), ExternalProgram::Discard_Stderr, false, -1, true);
+      ExternalProgram::Arguments args;
+      args.reserve( 3 );
+      args.push_back( "/bin/sh" );
+      args.push_back( "-c" );
+      args.push_back( serviceUrl.getPathName() );
+      ExternalProgramWithStderr prog( args );
       prog >> buffer;
 
-      // Services code in zypper is not ready to handle other
-      // types of exceptions yet
       if ( prog.close() != 0 )
       {
-	// Ignore this error but we'd like to report it somehow.
-	// ZYPP_THROW(media::MediaException(buffer.str()));
-	ERR << "Capture plugin error:[" << endl << buffer.str() << endl << ']' << endl;
-	ZYPP_THROW( repo::ServicePluginInformalException(buffer.str()));
+	// ServicePluginInformalException:
+	// Ignore this error but we'd like to report it somehow...
+	std::string errbuffer;
+	prog.stderrGetUpTo( errbuffer, '\0' );
+	ERR << "Capture plugin error:[" << endl << errbuffer << endl << ']' << endl;
+	ZYPP_THROW( repo::ServicePluginInformalException(errbuffer));
       }
+
       parser::RepoFileReader parser(buffer, _callback);
     }
 
