@@ -617,6 +617,7 @@ namespace zypp {
 	{
 	  if ( _buffer.empty() )
 	    return false;
+	  break;
 	}
 	else if ( errno != EINTR )
 	  return false;
