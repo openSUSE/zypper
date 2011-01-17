@@ -546,7 +546,7 @@ void do_init_repos(Zypper & zypper, const Container & container)
   // can ignore repos targetted for other systems
   init_target(zypper);
 
-  if (!zypper.globalOpts().no_refresh)
+  if (geteuid() == 0 && !zypper.globalOpts().no_refresh)
   {
     MIL << "Refreshing autorefresh services." << endl;
 
