@@ -2516,6 +2516,19 @@ static bool refresh_service(Zypper & zypper, const ServiceInfo & service)
     manager.refreshService(service);
     error = false;
   }
+  catch ( const repo::ServicePluginInformalException & e )
+  {
+    ZYPP_CAUGHT(e);
+    zypper.out().error(e,
+      str::form(
+        _("Problem retrieving the repository index file for service '%s':"),
+         (zypper.config().show_alias ? service.alias().c_str() : service.name().c_str())),
+      str::form(
+        _("Skipping service '%s' because of the above error."),
+	 (zypper.config().show_alias ? service.alias().c_str() : service.name().c_str())));
+    // this is just an informal note. The service will be used as is (usually empty)
+    error = false;
+  }
   catch (const MediaException & e)
   {
     ZYPP_CAUGHT(e);
