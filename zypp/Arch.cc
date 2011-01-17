@@ -187,6 +187,8 @@ namespace zypp
     DEF_BUILTIN( sparcv8 );
     DEF_BUILTIN( sparc );
 
+    DEF_BUILTIN( armv7nhl );
+    DEF_BUILTIN( armv7hl );
     DEF_BUILTIN( armv7l );
     DEF_BUILTIN( armv6l );
     DEF_BUILTIN( armv5tejl );
@@ -317,6 +319,8 @@ namespace zypp
         defCompatibleWith( _armv5tejl,	_noarch,_armv3l,_armv4l,_armv4tl,_armv5l,_armv5tel );
         defCompatibleWith( _armv6l,	_noarch,_armv3l,_armv4l,_armv4tl,_armv5l,_armv5tel,_armv5tejl );
         defCompatibleWith( _armv7l,	_noarch,_armv3l,_armv4l,_armv4tl,_armv5l,_armv5tel,_armv5tejl,_armv6l );
+        defCompatibleWith( _armv7hl,    _noarch );
+        defCompatibleWith( _armv7nhl,   _noarch, _armv7hl );
         //
         defCompatibleWith( _sh3,	_noarch );
         //

@@ -92,6 +92,8 @@
       <value>armv4l</value>
       <value>armv5el</value>
       <value>armv5tel</value>
+      <value>armv7hl</value>
+      <value>armv7nhl</value>
       <value>armv7el</value>
       <value>armv7l</value>
       <value>athlon</value>
