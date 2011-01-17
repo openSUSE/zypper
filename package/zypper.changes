@@ -1,4 +1,9 @@
 -------------------------------------------------------------------
+Mon Jan 17 11:38:05 CET 2011 - ma@suse.de
+
+- Don't perform automatic service refresh if non-root user.
+
+-------------------------------------------------------------------
 Fri Jan 14 12:48:51 CET 2011 - ma@suse.de
 
 - Report service plugin excetions during refresh, but continue. 
