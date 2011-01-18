@@ -14,6 +14,8 @@
 #include "zypp/base/String.h"
 #include "zypp/base/Logger.h"
 #include "zypp/base/Gettext.h"
+#include "zypp/base/InputStream.h"
+
 #include "zypp/Pathname.h"
 
 #include "zypp/parser/xml/Reader.h"
@@ -48,7 +50,7 @@ namespace zypp
      *
      * \see RepoindexFileReader::RepoindexFileReader(Pathname,ProcessResource)
      */
-    Impl(const Pathname &repoindex_file, const ProcessResource & callback);
+    Impl(const InputStream &is, const ProcessResource & callback);
 
     /**
      * Callback provided to the XML parser.
@@ -63,12 +65,12 @@ namespace zypp
   };
   ///////////////////////////////////////////////////////////////////////
 
-  RepoindexFileReader::Impl::Impl(
-      const Pathname &repoindex_file, const ProcessResource & callback)
+  RepoindexFileReader::Impl::Impl(const InputStream &is,
+                                  const ProcessResource & callback)
     : _callback(callback)
   {
-    Reader reader( repoindex_file );
-    MIL << "Reading " << repoindex_file << endl;
+    Reader reader( is );
+    MIL << "Reading " << is.path() << endl;
     reader.foreachNode( bind( &RepoindexFileReader::Impl::consumeNode, this, _1 ) );
   }
 
@@ -101,6 +103,11 @@ namespace zypp
         XmlString s;
 
         RepoInfo info;
+
+        // enabled or disabled is controlled by the
+        // reposToEnable/Disable list, unless the
+        // enabled attribute is set
+        info.setEnabled(false);
 
         // url and/or path
         string url_s;
@@ -143,14 +150,23 @@ namespace zypp
         if (s.get())
           info.setTargetDistribution(s.asString());
 
+        // optional priority
+        s = reader_r->getAttribute("priority");
+        if (s.get()) {
+          info.setPriority(str::strtonum<unsigned>(s.asString()));
+        }
+
+        // optional enabled
+        s = reader_r->getAttribute("enabled");
+        if (s.get()) {
+          info.setEnabled(str::strToTrue(s.asString()));
+        }
+
         DBG << info << endl;
-        
+
         // Set some defaults that are not contained in the repo information
         info.setAutorefresh( true );
-        // enabled or disabled is controlled by the
-        // reposToEnable/Disable list
-        info.setEnabled(false);        
-        
+
         // ignore the rest
         _callback(info);
         return true;
@@ -170,7 +186,12 @@ namespace zypp
   RepoindexFileReader::RepoindexFileReader(
       const Pathname & repoindex_file, const ProcessResource & callback)
     :
-      _pimpl(new Impl(repoindex_file, callback))
+      _pimpl(new Impl(InputStream(repoindex_file), callback))
+  {}
+
+  RepoindexFileReader::RepoindexFileReader(
+       const InputStream &is, const ProcessResource & callback )
+    : _pimpl(new Impl(is, callback))
   {}
 
   RepoindexFileReader::~RepoindexFileReader()

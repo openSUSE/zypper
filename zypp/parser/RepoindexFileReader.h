@@ -15,6 +15,8 @@
 #include "zypp/base/PtrTypes.h"
 #include "zypp/base/NonCopyable.h"
 #include "zypp/base/Function.h"
+#include "zypp/base/InputStream.h"
+#include "zypp/Pathname.h"
 
 namespace zypp
 {
@@ -34,7 +36,7 @@ namespace zypp
    *
    *
    * \code
-   * RepoindexFileReader reader(repoindex_file, 
+   * RepoindexFileReader reader(repoindex_file,
    *                  bind( &SomeClass::callbackfunc, &SomeClassInstance, _1) );
    * \endcode
    */
@@ -52,14 +54,25 @@ namespace zypp
 
    /**
     * CTOR. Creates also \ref xml::Reader and starts reading.
-    * 
+    *
     * \param repoindexFile is the repoindex.xml file you want to read
     * \param callback is a function.
     *
     * \see RepoindexFileReader::ProcessResource
     */
-    RepoindexFileReader(
-      const Pathname & repoindexFile, const ProcessResource & callback);
+    RepoindexFileReader( const zypp::Pathname & repoindexFile,
+                         const ProcessResource & callback);
+
+    /**
+     * \short Constructor. Creates the reader and start reading.
+     *
+     * \param is a valid input stream
+     * \param callback Callback that will be called for each repository.
+     *
+     * \see RepoindexFileReader::ProcessResource
+     */
+     RepoindexFileReader( const InputStream &is,
+                          const ProcessResource & callback );
 
     /**
      * DTOR
