@@ -1,8 +1,15 @@
 -------------------------------------------------------------------
+Tue Jan 18 12:28:19 UTC 2011 - dmacvicar@suse.de
+
+- allow for Repo Index Services to set the enabled state of
+  repositories from the server side.
+- Fix priority not being set on reading service indexes
+- version 8.12.0 (10)
+
+-------------------------------------------------------------------
 Fri Jan 14 12:45:18 CET 2011 - ma@suse.de
 
 - Add new ServicePlugin Exceptions.
-- version 8.12.0 (10)
 
 -------------------------------------------------------------------
 Thu Jan 13 01:13:32 CET 2011 - ma@suse.de
@@ -37,7 +44,7 @@ Tue Dec 21 13:29:06 CET 2010 - dheidler@suse.de
 -------------------------------------------------------------------
 Thu Dec 16 19:46:00 CET 2010 - ma@suse.de
 
-- Do not export keyring if rpmdb is initialised, but target isn't 
+- Do not export keyring if rpmdb is initialised, but target isn't
   (bnc#659494)
 - version 8.10.3 (10)
 
@@ -99,7 +106,7 @@ Wed Nov  3 16:06:46 CET 2010 - dheidler@suse.de
 -------------------------------------------------------------------
 Thu Oct 21 18:15:31 CEST 2010 - ma@suse.de
 
-- Feed the ProvideFilePolicy progress callback in addition to any 
+- Feed the ProvideFilePolicy progress callback in addition to any
   connected media::DownloadProgressReport (bnc#545106)
 - version 8.7.1 (7)
 
@@ -168,9 +175,9 @@ Thu Sep 23 01:13:45 CEST 2010 - ma@suse.de
 Mon Sep 20 15:31:31 UTC 2010 - dmacvicar@novell.com
 
 - Allow per repository proxy settings like yum does.
-  Including setting it to _none_ overriding the 
+  Including setting it to _none_ overriding the
   system proxy.
-  Patch from Zhang, Qiang <qiang.z.zhang@intel.com> 
+  Patch from Zhang, Qiang <qiang.z.zhang@intel.com>
 - version 8.2.1 (0)
 
 -------------------------------------------------------------------
@@ -235,8 +242,8 @@ Tue Jul 27 15:38:00 CEST 2010 - ma@suse.de
 
 - Fix bug in PoolQuery::addDependency
 - Disable MediaAria and enable MultiCurl as default http/ftp backend.
-  MultiCurl implements MetaLink and Zsync support using libcurl. In 
-  case of trouble set ZYPP_MULTICURL=0 in the envirionment to disable 
+  MultiCurl implements MetaLink and Zsync support using libcurl. In
+  case of trouble set ZYPP_MULTICURL=0 in the envirionment to disable
   the new backend.
 - version 8.0.1 (0)
 
@@ -297,7 +304,7 @@ Mon Jun  7 17:52:50 CEST 2010 - ma@suse.de
 Mon Jun  7 11:46:58 CEST 2010 - ma@suse.de
 
 - Prevent against daemons launched in rpm %post, that do not close
-  their filedescriptors. Original fix was accidentally reverted. 
+  their filedescriptors. Original fix was accidentally reverted.
   (bnc#174548)
 - version 7.7.4 (6)
 
@@ -309,7 +316,7 @@ Sun Jun  6 01:13:52 CEST 2010 - ma@suse.de
 -------------------------------------------------------------------
 Fri Jun  4 17:14:17 CEST 2010 - ma@suse.de
 
-- Fix default evaluation of recommendations of installed 
+- Fix default evaluation of recommendations of installed
   packages (bnc#605490)
 - version 7.7.3 (6)
 
@@ -327,7 +334,7 @@ Fri May 21 20:00:55 CEST 2010 - ma@suse.de
 -------------------------------------------------------------------
 Thu May 20 21:01:05 CEST 2010 - ma@suse.de
 
-- Fix packages provided via delta rpm being placed in 
+- Fix packages provided via delta rpm being placed in
   the wrong package cache (bnc#607583)
 - version 7.7.1 (6)
 
@@ -359,7 +366,7 @@ Sun May 16 01:13:39 CEST 2010 - ma@suse.de
 -------------------------------------------------------------------
 Wed May 12 19:09:54 CEST 2010 - ma@suse.de
 
-- Add methods to evaluate gpg geys expiration dates. 
+- Add methods to evaluate gpg geys expiration dates.
 - Export all rpmDb keys to the zypp trusted keyring in one go.
 - version 7.6.0 (6)
 
@@ -396,7 +403,7 @@ Tue May  4 01:13:43 CEST 2010 - ma@suse.de
 -------------------------------------------------------------------
 Mon May  3 18:12:36 CEST 2010 - ma@suse.de
 
-- Improve solver.cleandepsOnRemove result by evaluating the install 
+- Improve solver.cleandepsOnRemove result by evaluating the install
   history to find packages installed on behalf of a user request (not
   auto added by the solver).
 - version 7.5.0 (5)
@@ -414,11 +421,11 @@ Fri Apr 30 01:13:46 CEST 2010 - ma@suse.de
 -------------------------------------------------------------------
 Thu Apr 29 17:10:29 CEST 2010 - ma@suse.de
 
-- Cleanup when deleting packages. New zypp.conf expert option 
-  solver.cleandepsOnRemove telling whether the solver should per 
-  default try to remove packages exclusively required by the ones 
+- Cleanup when deleting packages. New zypp.conf expert option
+  solver.cleandepsOnRemove telling whether the solver should per
+  default try to remove packages exclusively required by the ones
   he's asked to delete (default false).
-- Resolver::cleandepsOnRemove API to allow applications to change 
+- Resolver::cleandepsOnRemove API to allow applications to change
   the solver option.
 - version 7.4.0 (4)
 
@@ -453,7 +460,7 @@ Tue Apr 27 11:25:17 CEST 2010 - ma@suse.de
 -------------------------------------------------------------------
 Mon Apr 26 11:57:23 CEST 2010 - ma@suse.de
 
-- Support URLs and ISOs ending on 'Media1', 'Media2', etc., when 
+- Support URLs and ISOs ending on 'Media1', 'Media2', etc., when
   rewiting the URL to access a specific media number. By now only
   nanmes ending on 'CD' or 'DVD' were supported. (bnc#594850)
 
@@ -470,7 +477,7 @@ Wed Apr 21 01:13:38 CEST 2010 - ma@suse.de
 -------------------------------------------------------------------
 Tue Apr 20 16:56:59 CEST 2010 - ma@suse.de
 
-- /etc/zypp/locks: Allow to specify edition ranges with 
+- /etc/zypp/locks: Allow to specify edition ranges with
   solvable:name and dependencies.
 - version 7.1.1 (1)
 
@@ -507,8 +514,8 @@ Fri Mar 26 13:50:08 CET 2010 - ma@suse.de
 -------------------------------------------------------------------
 Tue Mar 23 16:55:56 CET 2010 - ma@suse.de
 
-- Add static Target::distributionLabel to return the baseproducts 
-  shortName and summary. Mainlu used for the bootloader menu. (bnc #586303) 
+- Add static Target::distributionLabel to return the baseproducts
+  shortName and summary. Mainlu used for the bootloader menu. (bnc #586303)
 - version 6.31.1 (31)
 
 -------------------------------------------------------------------
@@ -533,7 +540,7 @@ Tue Feb 23 19:05:04 CET 2010 - jkupec@suse.cz
 -------------------------------------------------------------------
 Tue Feb 23 17:31:05 CET 2010 - ma@suse.de
 
-- Check if a downloaded file actually exists even if aria2c returned 0. 
+- Check if a downloaded file actually exists even if aria2c returned 0.
   (bnc #564816)
 - version 6.30.3 (19)
 
@@ -566,7 +573,7 @@ Thu Feb 11 13:40:49 CET 2010 - ma@suse.de
 -------------------------------------------------------------------
 Wed Feb 10 12:45:21 CET 2010 - ma@suse.de
 
-- Fix package-manager script wrongly escaping UTF-8 chars in path 
+- Fix package-manager script wrongly escaping UTF-8 chars in path
   names (bnc #571410)
 - version 6.29.4 (19)
 
@@ -579,8 +586,8 @@ Mon Feb  8 13:21:40 CET 2010 - ma@suse.de
 -------------------------------------------------------------------
 Wed Feb  3 15:57:13 CET 2010 - ma@suse.de
 
-- Remember the enabled state of removed service repositories. This 
-  way we are able to restore service repositories correctly after a 
+- Remember the enabled state of removed service repositories. This
+  way we are able to restore service repositories correctly after a
   subscrition expired and gets renewed. (bnc #572634)
 - version 6.29.2 (19)
 
@@ -593,7 +600,7 @@ Thu Jan 28 16:12:25 CET 2010 - jkupec@suse.cz
 -------------------------------------------------------------------
 Tue Jan 19 14:50:15 CET 2010 - ma@suse.de
 
-- Evaluate SolvAttr::repositoryToolVersion to prevent loading 
+- Evaluate SolvAttr::repositoryToolVersion to prevent loading
   outdated solv files. (bnc #570623)
 - version 6.29.0 (19)
 
@@ -643,7 +650,7 @@ Thu Dec  3 12:00:16 CET 2009 - ma@suse.de
 -------------------------------------------------------------------
 Wed Dec  2 13:10:43 CET 2009 - ma@suse.de
 
-- Add Selectable::highestAvailableVersionObj. Returns the highest 
+- Add Selectable::highestAvailableVersionObj. Returns the highest
   available package version, ignoring priorities and policies. (bnc #557557)
 - version 6.25.0 (19)
 
@@ -674,7 +681,7 @@ Wed Nov 25 16:28:29 CET 2009 - ma@suse.de
 -------------------------------------------------------------------
 Fri Nov 20 13:30:02 CET 2009 - ma@suse.de
 
-- Parse zypp.conf multiversion option and make the setting available 
+- Parse zypp.conf multiversion option and make the setting available
   in pool and resolver.
 - version 6.23.0 (19)
 
@@ -712,14 +719,14 @@ Thu Nov 12 11:53:04 CET 2009 - ma@suse.de
 - Following redirections also for https (bnc #545722).
 - Following https redirections requires at least libcurl4-7.19.4. (bnc #553895)
 - Do not report cached packages as being downloaded. (bnc #545295)
-- Per default do not collect and report deleted files outside bin and lib 
+- Per default do not collect and report deleted files outside bin and lib
   directories for 'zypper ps'. (bnc #554480)
 - version 6.22.1 (19)
 
 -------------------------------------------------------------------
 Wed Nov 11 13:54:52 CET 2009 - ma@suse.de
 
-- CheckAccessDeleted: Per default do not collect and report deleted files 
+- CheckAccessDeleted: Per default do not collect and report deleted files
   that outside bin and lib directories. 'zypper ps' reporting false positive
   seems to confuse. (bnc #554480)
 
@@ -751,7 +758,7 @@ Mon Nov  2 20:03:31 CET 2009 - ma@suse.de
 -------------------------------------------------------------------
 Mon Nov  2 16:35:33 CET 2009 - ma@suse.de
 
-- CheckAccessDeleted: Avoid reporting false positive due to insufficient 
+- CheckAccessDeleted: Avoid reporting false positive due to insufficient
   permission.
 
 -------------------------------------------------------------------
@@ -770,7 +777,7 @@ Fri Oct 30 12:30:48 CET 2009 - ma@suse.de
 -------------------------------------------------------------------
 Fri Oct 30 11:28:05 CET 2009 - ma@suse.de
 
-- New class PoolItemBest: Find the best candidates e.g. in a PoolQuery 
+- New class PoolItemBest: Find the best candidates e.g. in a PoolQuery
   result. ui::Selectabe enhancements. Both will aid applications to
   install package sets determined by query results. (bnc # 548392)
 - Fix upgradeRepo solution to keep obsolete packages. (bnc #550915)
@@ -793,7 +800,7 @@ Thu Oct 22 15:09:57 CEST 2009 - ma@suse.de
 Tue Oct 20 16:06:13 CEST 2009 - ma@suse.de
 
 - Credentials are passed as commandline options to aria2c, so strip any
-  'user@' from the URL. Otherwise aria will use an empty password for 
+  'user@' from the URL. Otherwise aria will use an empty password for
   this URL and authentication will fail. (bnc #544634)
 - version 6.19.2 (19)
 
@@ -808,7 +815,7 @@ Mon Oct 19 13:39:31 CEST 2009 - ma@suse.de
 Thu Oct 15 20:48:02 CEST 2009 - ma@suse.de
 
 - ResStatus: add isOrphaned to test whether a package is not provided
-  by any enabled repository. Orphaned packages are usually good candidates 
+  by any enabled repository. Orphaned packages are usually good candidates
   for cleanup unless the providing repository was intentionally disabled.
 - version 6.19.0 (19)
 
@@ -817,7 +824,7 @@ Thu Oct 15 17:28:38 CEST 2009 - dmacvicar@suse.de
 
 - aria2: pass credentials in a file instead of the command line
   which is logged.
-- aria2: we get the url in the progress if there is no response 
+- aria2: we get the url in the progress if there is no response
   from the server yet, handle that to avoid flooding the log.
 - version 6.18.2 (17)
 
@@ -825,36 +832,36 @@ Thu Oct 15 17:28:38 CEST 2009 - dmacvicar@suse.de
 Thu Oct 15 16:56:25 CEST 2009 - ma@suse.de
 
 - Performing a dist upgrade the solver may try to delete old and no
-  longer provided (dropped) packages, even if they do not cause any 
-  dependency problem. This behaviour may be trurned off via zypp.conf 
+  longer provided (dropped) packages, even if they do not cause any
+  dependency problem. This behaviour may be trurned off via zypp.conf
   option solver.upgradeRemoveDropedPackages. (bnc #539543)
 - New zypp.conf option solver.upgradeRemoveDropedPackages (true).
-- Add Product::droplist: List of dropped packages, i.e. packages no 
+- Add Product::droplist: List of dropped packages, i.e. packages no
   longer provided by a product.
 - version 6.18.1 (17)
 
 -------------------------------------------------------------------
 Wed Oct  7 16:45:21 CEST 2009 - ma@suse.de
 
-- Return update messages via ZYppCommitResult. Support variable 
+- Return update messages via ZYppCommitResult. Support variable
   substitution in notification command. (fate #301175)
 - Fix evaluation of no_proxy entries (bnc #543337)
-- aria/curl: Fix header data in case the target is 
+- aria/curl: Fix header data in case the target is
   not initialized when downloading.
 - version 6.18.0 (17)
 
 -------------------------------------------------------------------
 Thu Sep 24 17:21:45 CEST 2009 - ma@suse.de
 
-- Add zypp.conf option update.messages.notify: Command to be invoked 
+- Add zypp.conf option update.messages.notify: Command to be invoked
   to send update messages. (fate #301175)
 - version 6.17.2 (17)
 
 -------------------------------------------------------------------
 Tue Sep 22 20:32:38 CEST 2009 - ma@suse.de
 
-- Add Selectable::updateCandidateObj returning the candidate for 
-  update, if there is one. The updateCandidate must not violate 
+- Add Selectable::updateCandidateObj returning the candidate for
+  update, if there is one. The updateCandidate must not violate
   any active solver policy.
 - version 6.17.1 (17)
 
@@ -890,15 +897,15 @@ Wed Sep  9 15:02:18 CEST 2009 - ma@suse.de
 -------------------------------------------------------------------
 Mon Sep  7 17:31:20 CEST 2009 - ma@suse.de
 
-- Fix resolution to force installation even if dependencies are missing. 
+- Fix resolution to force installation even if dependencies are missing.
   (bnc #531564)
-- Rephrase solver resolution to point out if a package will break. 
+- Rephrase solver resolution to point out if a package will break.
   (bnc #520083)
 
 -------------------------------------------------------------------
 Fri Sep  4 12:19:50 CEST 2009 - ma@suse.de
 
-- Lock rpms architecture only on distupgrade of the running system. 
+- Lock rpms architecture only on distupgrade of the running system.
   (bnc #458520)
 - version 6.14.2 (11)
 
@@ -912,7 +919,7 @@ Thu Sep  3 13:41:31 CEST 2009 - ma@suse.de
 -------------------------------------------------------------------
 Mon Aug 31 15:17:01 CEST 2009 - ma@suse.de
 
-- package-manager script: Fall back to package selection if no 
+- package-manager script: Fall back to package selection if no
   packages are passed on the commandline. (bnc #529137)
 
 -------------------------------------------------------------------
@@ -932,15 +939,15 @@ Wed Aug 26 15:55:22 CEST 2009 - ma@suse.de
 Thu Aug  6 18:18:21 CEST 2009 - ma@suse.de
 
 - Provide class CheckAccessDeleted and command zypp-CheckAccessDeleted
-  to check for running processes which access meanwhile deleted files or 
-  libraries.  This may be used after commit, when trying to figure out 
+  to check for running processes which access meanwhile deleted files or
+  libraries.  This may be used after commit, when trying to figure out
   which services need to be restated. (fate #300763).
 - version 6.13.1 (11)
 
 -------------------------------------------------------------------
 Mon Aug  3 18:46:13 CEST 2009 - ma@suse.de
 
-- New Resolver::addUpgradeRepo to perform a dist upgrade restricted to 
+- New Resolver::addUpgradeRepo to perform a dist upgrade restricted to
   certain repositories.
 - version 6.13.0 (11)
 
@@ -975,13 +982,13 @@ Mon Jul 27 16:05:43 CEST 2009 - ma@suse.de
 -------------------------------------------------------------------
 Thu Jul 23 00:22:50 CEST 2009 - ma@km13.de
 
-- New misc::defaultLoadSystem: Convenience to create the ZYpp instance 
+- New misc::defaultLoadSystem: Convenience to create the ZYpp instance
   and load target and enabled repositories.
 
 -------------------------------------------------------------------
 Wed Jul 22 14:57:32 CEST 2009 - ma@suse.de
 
-- New class InstanceId to build strings to identify/retrieve specific 
+- New class InstanceId to build strings to identify/retrieve specific
   Solvables.
 - version 6.11.1 (11)
 
@@ -1005,15 +1012,15 @@ Thu Jul 16 17:05:27 CEST 2009 - dmacvicar@suse.de
 -------------------------------------------------------------------
 Thu Jul 16 16:25:24 CEST 2009 - ma@suse.de
 
-- New solver.upgradeTestcasesToKeep option in zypp.conf. It tells 
+- New solver.upgradeTestcasesToKeep option in zypp.conf. It tells
   how many dist upgrade solver testcases should be kept on the system.
-  Per default just the last two are kept. 
+  Per default just the last two are kept.
 - version 6.10.4 (10)
 
 -------------------------------------------------------------------
 Wed Jul 15 17:53:43 CEST 2009 - ma@suse.de
 
-- Don't write a solver testcase when solving for dist upgrade, 
+- Don't write a solver testcase when solving for dist upgrade,
   but when actually committing.
 - version 6.10.3 (10)
 
@@ -1030,15 +1037,15 @@ Tue Jul 15 14:38:51 CEST 2009 - jkupec@suse.cz
 -------------------------------------------------------------------
 Tue Jul 14 18:15:51 CEST 2009 - ma@suse.de
 
-- Support "product version" detection on systems not using 
+- Support "product version" detection on systems not using
   /etc/product.d/baseproduct by looking for the first package
-  providing ZConfig::distroverpkg (defaults to redhat-release). 
+  providing ZConfig::distroverpkg (defaults to redhat-release).
 - version 6.10.2 (10)
 
 -------------------------------------------------------------------
 Fri Jul 10 15:21:39 CEST 2009 - ma@suse.de
 
-- Adapt to boost_unit_test_framework-1.38. 
+- Adapt to boost_unit_test_framework-1.38.
 - version 6.10.1 (10)
 
 -------------------------------------------------------------------
@@ -1060,7 +1067,7 @@ Fri Jul  3 13:01:13 CEST 2009 - ma@suse.de
 -------------------------------------------------------------------
 Fri Jul  3 09:20:56 CEST 2009 - ma@suse.de
 
-- When unmounting ISO images, don't mix up exceptions thrown by the 
+- When unmounting ISO images, don't mix up exceptions thrown by the
   loop mounted ISO and those thrown by the media containing it.
   (bnc #517856)
 
@@ -1086,16 +1093,16 @@ Wed Jul  1 13:44:04 CEST 2009 - ma@suse.de
 -------------------------------------------------------------------
 Tue Jun 30 16:32:08 CEST 2009 - ma@suse.de
 
-- Enhance LookupAttr to allow direct query of attributes within 
+- Enhance LookupAttr to allow direct query of attributes within
   sub-structures (flexarrays).
 
 -------------------------------------------------------------------
 Fri Jun 26 12:06:51 CEST 2009 - ma@suse.de
 
-- Enhance PoolQueryIterator to allow detailed inspection of attribute 
+- Enhance PoolQueryIterator to allow detailed inspection of attribute
   matches.
-- Prefer datadir stored as repo attribute, but fallback searching in 
-  solvbales (old solv files do this). 
+- Prefer datadir stored as repo attribute, but fallback searching in
+  solvbales (old solv files do this).
 - version 6.9.0 (8)
 
 -------------------------------------------------------------------
@@ -1159,7 +1166,7 @@ Mon May  4 16:19:54 CEST 2009 - ma@suse.de
 -------------------------------------------------------------------
 Mon Apr 27 15:26:54 CEST 2009 - ma@suse.de
 
-- In update repos providing multiple release package versions for 
+- In update repos providing multiple release package versions for
   the same product, link a product to the latest version. (bnc #497696)
 
 -------------------------------------------------------------------
@@ -1179,15 +1186,15 @@ Thu Apr 16 12:49:40 CEST 2009 - ma@suse.de
 -------------------------------------------------------------------
 Tue Mar 31 15:51:32 CEST 2009 - ma@suse.de
 
-- New zypp.conf option 'download.media_preference': Hint which media 
+- New zypp.conf option 'download.media_preference': Hint which media
   to prefer when installing packages (download vs. CD).
 - version 6.4.0 (2)
 
 ------------------------------------------------------------------
 Thu Mar 12 18:38:30 CET 2009 - ma@suse.de
 
-- Add Resolver::setSolveSrcPackages. Per default disable solving 
-  of source package dependencies. We will later allow to enable 
+- Add Resolver::setSolveSrcPackages. Per default disable solving
+  of source package dependencies. We will later allow to enable
   it per package.
 - version 6.3.0 (2)
 
@@ -1232,7 +1239,7 @@ Tue Mar  3 12:44:24 CET 2009 - ma@suse.de
 Fri Feb 27 16:23:36 CET 2009 - dmacvicar@suse.de
 
 - Make sure Fetcher pass optional files as non-interactive
-- Fixes file does not exist error when key/sig does not exist 
+- Fixes file does not exist error when key/sig does not exist
 - version 6.2.0 (2)
 
 -------------------------------------------------------------------
@@ -1286,8 +1293,8 @@ Tue Feb 17 12:56:57 CET 2009 - jkupec@suse.cz
 -------------------------------------------------------------------
 Wed Feb 11 13:31:03 CET 2009 - ma@suse.de
 
-- Follow IEC and use the binary prefixes (KiB,MiB,GiB) for printing Byte 
-  counts based on a power of 1024 (formerly just K,M,G). Byte counts based 
+- Follow IEC and use the binary prefixes (KiB,MiB,GiB) for printing Byte
+  counts based on a power of 1024 (formerly just K,M,G). Byte counts based
   on a power of 1000 stay unaffected (kB,MB,GB).
 
 -------------------------------------------------------------------
@@ -1298,7 +1305,7 @@ Mon Feb  9 13:14:26 CET 2009 - ma@suse.de
 -------------------------------------------------------------------
 Tue Feb  3 18:07:38 CET 2009 - ma@suse.de
 
-- Send any output from rpm install/delete scripts via callback, so 
+- Send any output from rpm install/delete scripts via callback, so
   applications are able to display it. (bnc #369450)
 
 -------------------------------------------------------------------
@@ -1326,7 +1333,7 @@ Tue Jan 27 13:28:54 CET 2009 - jkupec@suse.cz
 -------------------------------------------------------------------
 Mon Jan 26 12:41:07 CET 2009 - ma@suse.de
 
-- Let vendor checks per default differ between 'openSUSE Build Service' 
+- Let vendor checks per default differ between 'openSUSE Build Service'
   and 'openSUSE' (bnc #467262).
 
 -------------------------------------------------------------------
@@ -1355,16 +1362,16 @@ Thu Dec 18 22:26:18 CET 2008 - ma@suse.de
 -------------------------------------------------------------------
 Thu Dec 18 13:02:27 CET 2008 - ma@suse.de
 
-- Add Package::filelist, faster and less memory consuming 
+- Add Package::filelist, faster and less memory consuming
   implementation of Package::filenames (now deprecated).
 - revision 11949
 
 -------------------------------------------------------------------
 Thu Dec 11 21:39:50 CET 2008 - ma@suse.de
 
-- Add str::hexencode and str::hexdecode to encode special characters 
+- Add str::hexencode and str::hexdecode to encode special characters
   in a string as %XX.
-- Hexdecode modalias strings in rpm dependencies because rpm does not 
+- Hexdecode modalias strings in rpm dependencies because rpm does not
   allow comma, blank and other special chars. (bnc #456695)
 - revision 11927
 
@@ -1377,9 +1384,9 @@ Thu Dec 11 17:13:06 CET 2008 - ma@suse.de
 -------------------------------------------------------------------
 Wed Dec 10 16:09:08 CET 2008 - ma@suse.de
 
-- Remove obsolete zypp.conf::productsdir and deprecate 
+- Remove obsolete zypp.conf::productsdir and deprecate
   ZConfig::productsPath().
-- Monitor /etc/products.d to determine if @system.solv needs to be 
+- Monitor /etc/products.d to determine if @system.solv needs to be
   rebuilt. (bnc #457933)
 - revision 11923
 - version 5.24.7 (23)
@@ -1424,7 +1431,7 @@ Mon Dec  1 19:38:24 CET 2008 - ma@suse.de
 -------------------------------------------------------------------
 Fri Nov 28 16:33:56 CET 2008 - ma@suse.de
 
-- Prune soft locks to prevent installation but not update of 
+- Prune soft locks to prevent installation but not update of
   already installed packages.
 - revision 11829
 - version 5.24.4 (23)
@@ -1434,12 +1441,12 @@ Fri Nov 28 11:36:03 CET 2008 - schubi@suse.de
 
 - Taking solutions which based on user requirements/conflict
   "by User" solutions (bnc #442718)
-- revision 11825 
+- revision 11825
 
 -------------------------------------------------------------------
 Fri Nov 28 00:05:17 CET 2008 - ma@suse.de
 
-- Take into account the requirements of all obsoleted packages uninstall 
+- Take into account the requirements of all obsoleted packages uninstall
   scripts when computing the installation order. (bnc #439802)
 - revision 11823
 - version 5.24.3 (23)
@@ -1471,7 +1478,7 @@ Mon Nov 24 17:47:35 CET 2008 - schubi@suse.de
 - activate locking for doUpdate (bnc #447684)
 - revision 11792
 - RELEASE: 5.24.1 (23)
- 
+
 -------------------------------------------------------------------
 Fri Nov 21 16:56:10 CET 2008 - dmacvicar@suse.de
 
@@ -1502,7 +1509,7 @@ Thu Nov 20 22:15:28 CET 2008 - ma@suse.de
 Thu Nov 20 19:30:05 CET 2008 - ma@suse.de
 
 - Enhance class LookupAttr and add convenience class LookupRepoAttr to
-  iterate those solv file attributes which are not acssociated with a 
+  iterate those solv file attributes which are not acssociated with a
   solvable. E.g. product or deltarpm info.
 - revision 11754
 
@@ -1530,7 +1537,7 @@ Tue Nov 18 18:37:30 CET 2008 - ma@suse.de
 Thu Nov 13 11:07:56 CET 2008 - schubi@suse.de
 
 - Taking care for ppc64 while distupgrade (bnc #443685)
-- revision 11670 
+- revision 11670
 
 -------------------------------------------------------------------
 Wed Nov 12 18:53:03 CET 2008 - ma@suse.de
@@ -1542,7 +1549,7 @@ Wed Nov 12 18:53:03 CET 2008 - ma@suse.de
 -------------------------------------------------------------------
 Wed Nov 12 14:31:20 CET 2008 - ma@suse.de
 
-- Take care to always reset CURLOPT_TIMECONDITION to prevent incomplete 
+- Take care to always reset CURLOPT_TIMECONDITION to prevent incomplete
   downloads. (bnc #444109)
 - revision 11656
 - version 5.23.0 (23)
@@ -1598,12 +1605,12 @@ Thu Nov  6 18:35:25 CET 2008 - dmacvicar@suse.de
 Thu Nov  6 16:23:03 CET 2008 - schubi@suse.de
 
 - added flag: ignorealreadyrecommended to the testcases (bnc #432136)
-- revsion 11539 
+- revsion 11539
 
 -------------------------------------------------------------------
 Thu Nov  6 09:41:48 CET 2008 - schubi@suse.de
 
-- Adding rule rpm-arch for installed rpm package in order to avoid 
+- Adding rule rpm-arch for installed rpm package in order to avoid
   unneeded architecture change. (bnc #441004)
 - revision 11585
 
@@ -1617,15 +1624,15 @@ Tue Nov  4 13:21:35 CET 2008 - jkupec@suse.cz
 -------------------------------------------------------------------
 Mon Nov  3 15:30:53 CET 2008 - dmacvicar@suse.de
 
-- merge contributions by Jon Nelson, the patches resolve 
+- merge contributions by Jon Nelson, the patches resolve
   the following issues:
-- disable the "Pragma: nocache" header which is automatically 
+- disable the "Pragma: nocache" header which is automatically
   used by curl.
-  re-enables the use of a caching http proxy (like squid or others) 
+  re-enables the use of a caching http proxy (like squid or others)
   and corrects (bnc #326208)
 - don't generate an If-Modified-Since header if we don't have a
   previous file to work with
-- don't generate a Proxy-Authenticate header if one is not called 
+- don't generate a Proxy-Authenticate header if one is not called
   for.
 
 -------------------------------------------------------------------
@@ -1647,7 +1654,7 @@ Thu Oct 30 14:24:57 CET 2008 - schubi@suse.de
 - solutions: keep/lock will be done by APPL_HIGH. So they will not be
   saved in the lockfiles
 - "keep obsolete" will be handled with lock by APPL_HIGH (bnc #439134)
-- revision  11549 
+- revision  11549
 
 -------------------------------------------------------------------
 Wed Oct 29 14:14:16 CET 2008 - jkupec@suse.cz
@@ -1678,12 +1685,12 @@ Tue Oct 28 16:47:36 CET 2008 - ma@suse.de
 Tue Oct 28 10:07:13 CET 2008 - schubi@suse.de
 
 - regarding "keep obsolete" in the solutions (bnc #439134)
-- revision 11517 
+- revision 11517
 
 -------------------------------------------------------------------
 Mon Oct 27 10:51:01 CET 2008 - dmacvicar@suse.de
 
-- fix broken aria2c command line (bnc#438971) 
+- fix broken aria2c command line (bnc#438971)
 
 -------------------------------------------------------------------
 Sun Oct 26 14:53:56 CET 2008 - coolo@suse.de
@@ -1693,7 +1700,7 @@ Sun Oct 26 14:53:56 CET 2008 - coolo@suse.de
 -------------------------------------------------------------------
 Fri Oct 24 18:12:34 CEST 2008 - ma@suse.de
 
-- Remove error prone methods from OnMediaLocation API to prevent 
+- Remove error prone methods from OnMediaLocation API to prevent
   accidental missuse. (bnc #437328)
 - revision 11487
 - version 5.19.0 (19)
@@ -1730,7 +1737,7 @@ Wed Oct 22 14:16:33 CEST 2008 - dmacvicar@suse.de
 Wed Oct 22 12:58:35 CEST 2008 - ma@suse.de
 
 - Adapt to satsolver-0.12 API.
-- Add Locale:: bestMatch to find the best match within a set of 
+- Add Locale:: bestMatch to find the best match within a set of
   available Locales.
 - revision 11441
 
@@ -1818,7 +1825,7 @@ Mon Oct 13 11:03:04 CEST 2008 - schubi@suse.de
 
 - regarding orphaned resolvables
 - removed old distupgrade algorithm
-- revision 11307 
+- revision 11307
 
 -------------------------------------------------------------------
 Sun Oct 12 13:55:51 CEST 2008 - jkupec@suse.cz
@@ -1837,7 +1844,7 @@ Thu Oct  9 17:37:18 CEST 2008 - ma@suse.de
 Thu Oct  9 17:18:18 CEST 2008 - schubi@suse.de
 
 - Taking the right solution actions for locked resolvables (bnc #400840)
-- revision 11289 
+- revision 11289
 
 -------------------------------------------------------------------
 Thu Oct  9 13:52:03 CEST 2008 - ma@suse.de
@@ -1864,7 +1871,7 @@ Wed Oct  8 15:39:08 CEST 2008 - jkupec@suse.cz
 -------------------------------------------------------------------
 Wed Oct  8 11:33:00 CEST 2008 - dmacvicar@suse.de
 
-- improve log message (bnc#429114) 
+- improve log message (bnc#429114)
 
 -------------------------------------------------------------------
 Wed Oct  8 11:15:20 CEST 2008 - lslezak@suse.cz
@@ -1876,14 +1883,14 @@ Wed Oct  8 11:15:20 CEST 2008 - lslezak@suse.cz
 Tue Oct  7 13:24:10 CEST 2008 - ma@suse.de
 
 - Fixed detection of loopback mounted iso-files. The mtab entry does
-  not necessarily mention the iso-file. (bnc #432504) 
+  not necessarily mention the iso-file. (bnc #432504)
 - revision 11252
 - version 5.15.0 (13)
 
 -------------------------------------------------------------------
 Thu Oct  2 19:46:13 CEST 2008 - ma@suse.de
 
-- Add zypp.conf option 'download.use_deltarpmr.always' to enable using 
+- Add zypp.conf option 'download.use_deltarpmr.always' to enable using
   delta rpms even if the package is available on a local source.
   (Axel C. Frinke)
 - revision 11235
@@ -1898,7 +1905,7 @@ Thu Oct  2 18:50:11 CEST 2008 - ma@suse.de
 -------------------------------------------------------------------
 Thu Oct  2 17:18:19 CEST 2008 - ma@suse.de
 
-- Do not consider self provided requirements whan computing the 
+- Do not consider self provided requirements whan computing the
   installation order.
 - revision 11231
 
@@ -1948,7 +1955,7 @@ Sat Sep 27 23:36:19 CEST 2008 - jkupec@suse.cz
 Fri Sep 26 15:37:50 CEST 2008 - ma@suse.de
 
 - Fix computation of Product::flavor.
-- Add Product::productLine. A vendor specific string denoting the 
+- Add Product::productLine. A vendor specific string denoting the
   product line.
 - revision 11182
 - version 5.13.0 (13)
@@ -2007,7 +2014,7 @@ Mon Sep 22 16:27:41 CEST 2008 - ma@suse.de
 -------------------------------------------------------------------
 Mon Sep 22 16:13:08 CEST 2008 - ma@suse.de
 
-- Add Url::hasCredentialsInAuthority test for username or password 
+- Add Url::hasCredentialsInAuthority test for username or password
   being encoded in the authority component. I.e. user:pass@host.
 - Handle repos to be disabled disable in service refresh.
 - revision 11126
@@ -2063,7 +2070,7 @@ Wed Sep 17 15:08:54 CEST 2008 - ma@suse.de
 -------------------------------------------------------------------
 Tue Sep 16 18:41:39 CEST 2008 - ma@suse.de
 
-- Service handling fixes. Added ServiceException. 
+- Service handling fixes. Added ServiceException.
 - revision 11077
 
 -------------------------------------------------------------------
@@ -2088,15 +2095,15 @@ Fri Sep 12 18:24:28 CEST 2008 - ma@suse.de
 -------------------------------------------------------------------
 Fri Sep 12 16:04:54 CEST 2008 - ma@suse.de
 
-- Make registerTarget and registerRelease abvailable for installed 
+- Make registerTarget and registerRelease abvailable for installed
   product. Required for registration.
 - revision 11043
 
 -------------------------------------------------------------------
 Fri Sep 12 12:59:50 CEST 2008 - ma@suse.de
 
-- Add url lists query to Product interface. A generic query and 
-  convenience methods to query urls for "releasenotes", "register", 
+- Add url lists query to Product interface. A generic query and
+  convenience methods to query urls for "releasenotes", "register",
   "updateurls", "extraurls",  "optionalurls" and "smolt" (bnc #413444)
 - revision 11029
 
@@ -2113,7 +2120,7 @@ Fri Sep 12 01:38:25 CEST 2008 - jkupec@suse.cz
 -------------------------------------------------------------------
 Thu Sep 11 16:01:57 CEST 2008 - dmacvicar@suse.de
 
-- add Repostiroy::updateKeys and 
+- add Repostiroy::updateKeys and
   Repository::providesUpdatesForKey(string) for repo and
   product matching
 - Provide Repository::isUpdateRepo
@@ -2122,7 +2129,7 @@ Thu Sep 11 16:01:57 CEST 2008 - dmacvicar@suse.de
 Thu Sep 11 14:41:28 CEST 2008 - ma@suse.de
 
 - Fix evaluation of vendor support flags.
-- Adapt retrieval of registration data (targetDistribution, 
+- Adapt retrieval of registration data (targetDistribution,
   targetDistributionRelease and targetDistributionFlavor).
 - revision 11013
 
@@ -2163,7 +2170,7 @@ Tue Sep  9 17:33:03 CEST 2008 - dmacvicar@suse.de
 -------------------------------------------------------------------
 Tue Sep  9 13:04:11 CEST 2008 - ma@suse.de
 
-- Add ServiceInfo interface to define a set of catalogs (repository 
+- Add ServiceInfo interface to define a set of catalogs (repository
   aliases) to be enabled on next refresh.
 - revision 10970
 
@@ -2211,7 +2218,7 @@ Tue Sep  2 11:04:52 CEST 2008 - schubi@suse.de
 
 - Enabled distupgrade of the SAT solver. In order to use the old
   distupgrade you can set the environment variable ZYPP_NO_SAT_UPDATE.
-  This variable will can be used until the old distupgrade mechanism will 
+  This variable will can be used until the old distupgrade mechanism will
   be removed from libzypp. Have a look to above changelogs.
 - revision 10911
 - version 5.7.0 (5)
@@ -2239,7 +2246,7 @@ Mon Aug 18 17:31:02 CEST 2008 - dmacvicar@suse.de
 -------------------------------------------------------------------
 Fri Aug 15 20:20:07 CEST 2008 - ma@suse.de
 
-- Add Target::targetDistribution. Returns "distribution-arch" of 
+- Add Target::targetDistribution. Returns "distribution-arch" of
   the installed base product. Used for registration and Service
   refresh. (for Fate #304915)
 - revision 10877
@@ -2248,7 +2255,7 @@ Fri Aug 15 20:20:07 CEST 2008 - ma@suse.de
 -------------------------------------------------------------------
 Fri Aug 15 17:42:58 CEST 2008 - ma@suse.de
 
-- Add method Product::replacedProducts to identify installed 
+- Add method Product::replacedProducts to identify installed
   Products that would be replaced by installing a new Product.
   (for Fate #301997)
 - revision 10876
@@ -2263,7 +2270,7 @@ Fri Aug 15 15:30:32 CEST 2008 - ma@suse.de
 Fri Aug 15 14:23:02 CEST 2008 - ma@suse.de
 
 - Add method ZYpp::getTarget that returns the Target or a NULL pointer,
-  if it is not yet initialized. This is to avoid try/catch blocks just 
+  if it is not yet initialized. This is to avoid try/catch blocks just
   to test whether the Target is initialized. (bnc #417556)
 - Add method Target::assertRootPrefix. Pass a pathname and get back the
   path prefixed with the tragets root, unless it already had that prefix.
@@ -2273,7 +2280,7 @@ Fri Aug 15 14:23:02 CEST 2008 - ma@suse.de
 Thu Aug 14 18:44:45 CEST 2008 - schubi@suse.de
 
 - Regarding error messages for Products correctly (FATE #304502)
-- rev 10863 
+- rev 10863
 
 -------------------------------------------------------------------
 Thu Aug 14 14:03:27 CEST 2008 - ma@suse.de
@@ -2286,9 +2293,9 @@ Thu Aug 14 14:03:27 CEST 2008 - ma@suse.de
 Wed Aug 13 21:01:25 CEST 2008 - ma@suse.de
 
 - Change Selectable API to support doing staus manipulation on
-  non-USER level. 
+  non-USER level.
 - revision 10847
-- version 5.5.0 (5) 
+- version 5.5.0 (5)
 
 -------------------------------------------------------------------
 Wed Aug 13 16:48:49 CEST 2008 - dmacvicar@suse.de
@@ -2320,13 +2327,13 @@ Tue Aug 12 12:05:49 CEST 2008 - ma@suse.de
 Mon Aug 11 18:00:40 CEST 2008 - ma@suse.de
 
 - Propagate default rpm install flags from zypp.conf via ZConfig and
-  ZYppCommitPolicy down to the installer. (FATE #302952) 
+  ZYppCommitPolicy down to the installer. (FATE #302952)
 - revision 10813
 
 -------------------------------------------------------------------
 Mon Aug 11 16:28:07 CEST 2008 - ma@suse.de
 
-- Add base::Flags (like qt's QFlags) a type-safe way of storing 
+- Add base::Flags (like qt's QFlags) a type-safe way of storing
   OR-combinations of enum values.
 - revision 10811
 
@@ -2334,7 +2341,7 @@ Mon Aug 11 16:28:07 CEST 2008 - ma@suse.de
 Fri Aug  8 17:01:00 CEST 2008 - ma@suse.de
 
 - Add static ui::Selectable::get methods as convenient ctor
-  substitute. 
+  substitute.
 - revision 10806
 
 -------------------------------------------------------------------
@@ -2353,8 +2360,8 @@ Fri Aug  8 14:11:03 CEST 2008 - ma@suse.de
 Fri Aug  8 13:27:42 CEST 2008 - ma@suse.de
 
 - Adapt to new product handling. Products are no longer pseudo
-  installed objects verified by the solver, but actually installed. 
-  Thus removed satisfiedProduct iterator, fixed Selctables. 
+  installed objects verified by the solver, but actually installed.
+  Thus removed satisfiedProduct iterator, fixed Selctables.
 - Removed class ProductInfo as we keep Product.
 - revision 10797
 
@@ -2366,7 +2373,7 @@ Thu Aug  7 22:00:55 CEST 2008 - dmacvicar@suse.de
 -------------------------------------------------------------------
 Wed Aug  6 18:21:30 CEST 2008 - ma@suse.de
 
-- Detect correct download path even if repository type 
+- Detect correct download path even if repository type
   is not set. (bnc #386386)
 - revision 10768
 
@@ -2421,7 +2428,7 @@ Thu Jul 31 19:01:14 CEST 2008 - ma@suse.de
 -------------------------------------------------------------------
 Wed Jul 30 19:12:00 CEST 2008 - ma@suse.de
 
-- /var/lib/zypp and /var/cache/zypp should be owned by libzypp 
+- /var/lib/zypp and /var/cache/zypp should be owned by libzypp
   (bnc #412094)
 - revision 10702
 
