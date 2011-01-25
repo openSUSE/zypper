@@ -1,4 +1,9 @@
 -------------------------------------------------------------------
+Tue Jan 25 10:09:22 CET 2011 - ma@suse.de
+
+- Apply patch introducing armv7nhl:armv7hl
+
+-------------------------------------------------------------------
 Tue Jan 18 12:28:19 UTC 2011 - dmacvicar@suse.de
 
 - allow for Repo Index Services to set the enabled state of
