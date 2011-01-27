@@ -133,7 +133,11 @@ do_update() {
       kpackagekit --updates "$@"
     ;;
     gnome-packagekit)
-      /usr/bin/gpk-update-viewer2 "$@"
+      if [ -e /usr/bin/gpk-update-viewer2 ]; then
+        /usr/bin/gpk-update-viewer2 "$@"
+      else
+        /usr/bin/gpk-update-viewer "$@"
+      fi
     ;;
     esac
 }
