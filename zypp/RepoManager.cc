@@ -1860,7 +1860,11 @@ namespace zypp
       if ( !it->enabled() )
         continue;
 
-      refreshService(*it);
+      try {
+	refreshService(*it);
+      }
+      catch ( const repo::ServicePluginInformalException & e )
+      { ;/* ignore ServicePluginInformalException */ }
     }
   }
 
@@ -1901,7 +1905,20 @@ namespace zypp
 
     // parse it
     RepoCollector collector(servicesTargetDistro);
-    ServiceRepos repos(service, bind( &RepoCollector::collect, &collector, _1 ));
+    // FIXME Ugly hack: ServiceRepos may throw ServicePluginInformalException
+    // which is actually a notification. Using an exception for this
+    // instead of signal/callback is bad. Needs to be fixed here, in refreshServices()
+    // and in zypper.
+    std::pair<DefaultIntegral<bool,false>, repo::ServicePluginInformalException> uglyHack;
+    try {
+      ServiceRepos repos(service, bind( &RepoCollector::collect, &collector, _1 ));
+    }
+    catch ( const repo::ServicePluginInformalException & e )
+    {
+      /* ignore ServicePluginInformalException and throw later */
+      uglyHack.first = true;
+      uglyHack.second = e;
+    }
 
     // set service alias and base url for all collected repositories
     for_( it, collector.repos.begin(), collector.repos.end() )
@@ -2066,6 +2083,11 @@ namespace zypp
     {
       // write out modified service file.
       modifyService( service.alias(), service );
+    }
+
+    if ( uglyHack.first )
+    {
+      throw( uglyHack.second ); // intentionally not ZYPP_THROW
     }
   }
 
