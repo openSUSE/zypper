@@ -290,8 +290,8 @@ namespace zypp
 
   bool operator==( const PluginFrame & lhs, const PluginFrame & rhs )
   {
-    return lhs._pimpl == rhs._pimpl
-        || lhs.command() == rhs.command() && lhs.headerList() == rhs.headerList() && lhs.body() == rhs.body();
+    return ( lhs._pimpl == rhs._pimpl )
+        || (( lhs.command() ==  rhs.command() ) && ( lhs.headerList() == rhs.headerList() ) && ( lhs.body() == rhs.body() ));
   }
 
   /////////////////////////////////////////////////////////////////
