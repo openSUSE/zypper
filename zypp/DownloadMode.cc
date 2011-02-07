@@ -36,6 +36,7 @@ namespace zypp
     switch ( obj )
     {
 #define OUTS(VAL) case VAL: return str << #VAL; break
+      OUTS( DownloadDefault );
       OUTS( DownloadOnly );
       OUTS( DownloadInAdvance );
       OUTS( DownloadInHeaps );
