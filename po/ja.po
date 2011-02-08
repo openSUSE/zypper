@@ -291,7 +291,7 @@ msgid "license"
 msgstr "ライセンス"
 
 #: src/zmart-misc.cc:843
-msgid "In order to install this package, you must agree to terms of the above licencse. Continue?"
+msgid "In order to install this package, you must agree to terms of the above license. Continue?"
 msgstr "このパッケージをインストールするには、上記のライセンス(使用許諾契約)の条項に同意する必要があります。 続行しますか?"
 
 #: src/zmart-misc.cc:853

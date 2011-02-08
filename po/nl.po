@@ -291,7 +291,7 @@ msgid "license"
 msgstr "licentie"
 
 #: src/zmart-misc.cc:843
-msgid "In order to install this package, you must agree to terms of the above licencse. Continue?"
+msgid "In order to install this package, you must agree to terms of the above license. Continue?"
 msgstr "Als u dit pakket wilt installeren, moet u akkoord gaan met de voorwaarden van de bovenstaande licentie. Doorgaan?"
 
 #: src/zmart-misc.cc:853

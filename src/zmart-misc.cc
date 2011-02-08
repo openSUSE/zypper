@@ -849,7 +849,7 @@ bool confirm_licenses(bool non_interactive)
         it->resolvable()->licenseToConfirm() << endl;
 
       string question = _("In order to install this package, you must agree"
-          " to terms of the above licencse. Continue?");
+          " to terms of the above license. Continue?");
 
       if (non_interactive || !read_bool_answer(question, false))
       {

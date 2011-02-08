@@ -291,7 +291,7 @@ msgid "license"
 msgstr "परवाना"
 
 #: src/zmart-misc.cc:843
-msgid "In order to install this package, you must agree to terms of the above licencse. Continue?"
+msgid "In order to install this package, you must agree to terms of the above license. Continue?"
 msgstr "या पॅकेजला प्रस्थापित करण्यासाठी आपल्याला उपरोक्त परवान्याच्या अटीमान्य कराव्या लागतील.  सुरू ठेवावयाचे?"
 
 #: src/zmart-misc.cc:853

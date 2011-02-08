@@ -318,7 +318,7 @@ msgid "license"
 msgstr "licenc"
 
 #: src/zmart-misc.cc:844
-msgid "In order to install this package, you must agree to terms of the above licencse. Continue?"
+msgid "In order to install this package, you must agree to terms of the above license. Continue?"
 msgstr "A csomag telepítése érdekében el kell fogadnia a fenti licenc feltételeit. Folytatja?"
 
 #: src/zmart-misc.cc:854

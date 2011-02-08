@@ -289,7 +289,7 @@ msgid "license"
 msgstr "licencia"
 
 #: src/zmart-misc.cc:775
-msgid "In order to install this package, you must agree to terms of the above licencse. Continue?"
+msgid "In order to install this package, you must agree to terms of the above license. Continue?"
 msgstr "Pred nainštalovaním tohoto balíčka musíte súhlasiť so znením jeho vyššie uvedenej licencie. Pokračovať?"
 
 #: src/zmart-misc.cc:786
