@@ -1,4 +1,9 @@
 -------------------------------------------------------------------
+Tue Feb  8 08:08:45 UTC 2011 - dmacvicar@suse.de
+
+- typo: licencse -> license (bnc#650306)
+
+-------------------------------------------------------------------
 Fri Oct  9 14:54:11 CEST 2009 - ma@suse.de
 
 - Init target when refreshing sources, otherwise we dont have the
