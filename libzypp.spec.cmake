@@ -53,8 +53,6 @@ BuildRequires:  expat-devel
 %endif
 
 %if 0%{?suse_version}
-BuildRequires:  hicolor-icon-theme
-BuildRequires:  update-desktop-files
 BuildRequires:  rpm-devel
 Requires:       /usr/bin/uuidgen
 %endif
@@ -203,10 +201,6 @@ mkdir -p $RPM_BUILD_ROOT%{_var}/lib/zypp
 mkdir -p $RPM_BUILD_ROOT%{_var}/log/zypp
 mkdir -p $RPM_BUILD_ROOT%{_var}/cache/zypp
 
-%if 0%{?suse_version}
-%suse_update_desktop_file -G "" -C "" package-manager
-%endif
-
 make -C po install DESTDIR=$RPM_BUILD_ROOT
 # Create filelist with translations
 cd ..
@@ -296,7 +290,6 @@ rm -rf "$RPM_BUILD_ROOT"
 %dir               %{_var}/cache/zypp
 %{_prefix}/lib/zypp
 %{_datadir}/zypp
-%{_datadir}/applications/package-manager.desktop
 %{_bindir}/*
 %{_libdir}/libzypp*so.*
 %doc %{_mandir}/man5/locks.5.*
