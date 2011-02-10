@@ -1,4 +1,10 @@
 -------------------------------------------------------------------
+Thu Feb 10 16:01:46 CET 2011 - ma@suse.de
+
+- Remove package-manager.desktop file (bnc#329635)
+- version 8.12.1 (10)
+
+-------------------------------------------------------------------
 Tue Jan 25 10:09:22 CET 2011 - ma@suse.de
 
 - Apply patch introducing armv7nhl:armv7hl
