@@ -56,10 +56,12 @@ std::string RepoVariablesStringReplacer::operator()( const std::string &value ) 
   newvalue = str::gsub( newvalue, "$basearch", basearch.asString() );
 
   // $releasever (Target::distributionVersion assumes root=/ if target not initialized)
-  if( releasever.empty() )
-    releasever = Target::distributionVersion(Pathname()/*guess*/);
+  if ( newvalue.find("$releasever") != string::npos ) {
+    if( releasever.empty() )
+      releasever = Target::distributionVersion(Pathname()/*guess*/);
 
-  newvalue = str::gsub( newvalue, "$releasever", releasever );
+    newvalue = str::gsub( newvalue, "$releasever", releasever );
+  } 
 
   return newvalue;
 }
