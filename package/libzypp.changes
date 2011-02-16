@@ -1,4 +1,11 @@
 -------------------------------------------------------------------
+Wed Feb 16 14:24:27 UTC 2011 - dmacvicar@suse.de
+
+- Do not look for $releasever 's value if there is no variable
+  in the url: parses product file again and again
+- version 8.12.2 (10)
+
+-------------------------------------------------------------------
 Thu Feb 10 16:01:46 CET 2011 - ma@suse.de
 
 - Remove package-manager.desktop file (bnc#329635)
