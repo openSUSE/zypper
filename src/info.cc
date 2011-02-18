@@ -171,7 +171,9 @@ Copy and modify /usr/share/vim/current/gvimrc to ~/.gvimrc if needed.
 void printPkgInfo(Zypper & zypper, const ui::Selectable & s)
 {
   PoolItem installed = s.installedObj();
-  PoolItem theone = s.updateCandidateObj();
+  // get the best available object
+  PoolItem theone = s.candidateObj();
+  // if none is available, show the installed one
   if (!theone)
     theone = installed;
   Package::constPtr pkg = asKind<Package>(theone.resolvable());
@@ -184,6 +186,8 @@ void printPkgInfo(Zypper & zypper, const ui::Selectable & s)
   printNVA(theone.resolvable());
 
   // if running on SUSE Linux Enterprise, report unsupported packages
+  // note: the support level is not stored in rpm db, it's in metadata only
+  // the installed object will not show it (bnc #651614)
   Product::constPtr platform = God->target()->baseProduct();
   if (platform && platform->name().find("SUSE_SLE") != string::npos)
     cout << _("Support Level: ") << asUserString(pkg->vendorSupport()) << endl;
