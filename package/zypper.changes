@@ -1,4 +1,10 @@
 -------------------------------------------------------------------
+Fri Feb 18 16:30:50 CET 2011 - jkupec@suse.cz
+
+- Show proper Support Level when the package is up to date
+  (bnc #651614)
+
+-------------------------------------------------------------------
 Mon Jan 17 13:11:54 CET 2011 - ma@suse.de
 
 - Report service plugin excetions during refresh, but continue. 
