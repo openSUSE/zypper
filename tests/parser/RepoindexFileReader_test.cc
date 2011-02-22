@@ -46,6 +46,10 @@ BOOST_AUTO_TEST_CASE(read_index_file)
     BOOST_CHECK_EQUAL("company-foo", repo.alias());
     BOOST_CHECK_EQUAL("sle-11-i386", repo.targetDistribution());
     BOOST_CHECK_EQUAL(20, repo.priority());
+    // "Repository is per default disabled"
+    BOOST_CHECK(!repo.enabled());
+    // "Repository autorefresh is per default enabled"
+    BOOST_CHECK(repo.autorefresh());
     BOOST_CHECK_EQUAL("/repo/products/foo", repo.path());
 
     collector.repos.pop_front( );
