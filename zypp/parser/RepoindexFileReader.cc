@@ -109,6 +109,9 @@ namespace zypp
         // enabled attribute is set
         info.setEnabled(false);
 
+        // Set some defaults that are not contained in the repo information
+        info.setAutorefresh( true );
+
         // url and/or path
         string url_s;
         s = reader_r->getAttribute("url");
@@ -163,9 +166,6 @@ namespace zypp
         }
 
         DBG << info << endl;
-
-        // Set some defaults that are not contained in the repo information
-        info.setAutorefresh( true );
 
         // ignore the rest
         _callback(info);
