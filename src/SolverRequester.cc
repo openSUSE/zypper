@@ -7,7 +7,7 @@
 
 
 /** \file SolverRequester.cc
- * 
+ *
  */
 
 #include "zypp/ZYppFactory.h"
@@ -398,8 +398,7 @@ bool SolverRequester::installPatch(
     if (ignore_pkgmgmt || patch->restartSuggested())
     {
       // bnc #221476
-      if (_opts.skip_interactive
-          && (patch->interactive() || !patch->licenseToConfirm().empty()))
+      if (_opts.skip_interactive && patch->interactive())
       {
         addFeedback(Feedback::PATCH_INTERACTIVE_SKIPPED, patchspec, selected);
         return false;
