@@ -346,15 +346,17 @@ Only download the packages for later installation.
 First download all packages, then start installing.
 .TP
 .I \ \ \ \ \-\-download\-in\-heaps
-TODO. Download a minimal set of packages that can be installed without leaving
+(Not yet implemented, currently the same as \fI--download-in-advance\fR).
+Download a minimal set of packages that can be installed without leaving
 the system in broken state, and install them. Then download and install another
 heap until all are installed. This helps to keep the system in consistent state
 without the need to download all package in advance, which combines the
-advantages of --download-in-advance and --download-as-needed.
+advantages of \fI--download-in-advance\fR and \fI--download-as-needed\fR.
+This is the default mode.
 .TP
 .I \ \ \ \ \-\-download\-as\-needed
 Download one package, install it immediately, and continue with the rest
-until all are installed. This is the default mode.
+until all are installed.
 .TP
 .I \ \ \ \ \-\-download <mode>
 Use the specified download-and-install mode. Available modes are:
