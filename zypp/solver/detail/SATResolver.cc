@@ -641,12 +641,12 @@ SATResolver::solverInit(const PoolItemList & weakItems, const std::set<Repositor
     {
       if ( ZConfig::instance().solverUpgradeRemoveDroppedPackages() )
       {
+        MIL << "Checking droplists ..." << endl;
         // Dropped packages: look for 'weakremover()' provides
         // in dup candidates of installed products.
         ResPoolProxy proxy( ResPool::instance().proxy() );
         for_( it, proxy.byKindBegin<Product>(), proxy.byKindEnd<Product>() )
         {
-          INT << *it << endl;
           if ( (*it)->onSystem() ) // (to install) or (not to delete)
           {
             Product::constPtr prodCand;
