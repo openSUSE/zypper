@@ -588,7 +588,7 @@ SATResolver::solving(const CapabilitySet & requires_caps,
 
 
 void
-SATResolver::solverInit(const PoolItemList & weakItems)
+SATResolver::solverInit(const PoolItemList & weakItems, const std::set<Repository> & upgradeRepos)
 {
     SATCollectTransact info (*this);
 
@@ -637,19 +637,35 @@ SATResolver::solverInit(const PoolItemList & weakItems)
       }
     }
 
-    if ( _distupgrade )
+    if ( _distupgrade || !upgradeRepos.empty() )
     {
       if ( ZConfig::instance().solverUpgradeRemoveDroppedPackages() )
       {
-        MIL << "Checking droplists ..." << endl;
         // Dropped packages: look for 'weakremover()' provides
         // in dup candidates of installed products.
         ResPoolProxy proxy( ResPool::instance().proxy() );
         for_( it, proxy.byKindBegin<Product>(), proxy.byKindEnd<Product>() )
         {
+          INT << *it << endl;
           if ( (*it)->onSystem() ) // (to install) or (not to delete)
           {
-            Product::constPtr prodCand( (*it)->candidateAsKind<Product>() );
+            Product::constPtr prodCand;
+            if ( _distupgrade )
+            {
+              prodCand = (*it)->candidateAsKind<Product>();
+            }
+            else // if ( !upgradeRepos.empty() )
+            {
+              for_( ait, (*it)->availableBegin(), (*it)->availableEnd() )
+              {
+                if ( upgradeRepos.find( (*ait).satSolvable().repository() ) != upgradeRepos.end() )
+                {
+                  prodCand = (*ait)->asKind<Product>();
+                  break;
+                }
+              }
+            }
+
             if ( ! prodCand || (*it)->identicalInstalledCandidate() )
               continue; // product no longer available or unchanged
 
@@ -689,7 +705,7 @@ SATResolver::resolvePool(const CapabilitySet & requires_caps,
     MIL << "SATResolver::resolvePool()" << endl;
 
     // initialize
-    solverInit(weakItems);
+    solverInit(weakItems, upgradeRepos);
 
     for (PoolItemList::const_iterator iter = _items_to_install.begin(); iter != _items_to_install.end(); iter++) {
 	Id id = (*iter)->satSolvable().id();
