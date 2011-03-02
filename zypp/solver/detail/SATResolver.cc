@@ -588,7 +588,7 @@ SATResolver::solving(const CapabilitySet & requires_caps,
 
 
 void
-SATResolver::solverInit(const PoolItemList & weakItems, const std::set<Repository> & upgradeRepos)
+SATResolver::solverInit(const PoolItemList & weakItems)
 {
     SATCollectTransact info (*this);
 
@@ -637,7 +637,7 @@ SATResolver::solverInit(const PoolItemList & weakItems, const std::set<Repositor
       }
     }
 
-    if ( _distupgrade || !upgradeRepos.empty() )
+    if ( _distupgrade )
     {
       if ( ZConfig::instance().solverUpgradeRemoveDroppedPackages() )
       {
@@ -649,23 +649,7 @@ SATResolver::solverInit(const PoolItemList & weakItems, const std::set<Repositor
         {
           if ( (*it)->onSystem() ) // (to install) or (not to delete)
           {
-            Product::constPtr prodCand;
-            if ( _distupgrade )
-            {
-              prodCand = (*it)->candidateAsKind<Product>();
-            }
-            else // if ( !upgradeRepos.empty() )
-            {
-              for_( ait, (*it)->availableBegin(), (*it)->availableEnd() )
-              {
-                if ( upgradeRepos.find( (*ait).satSolvable().repository() ) != upgradeRepos.end() )
-                {
-                  prodCand = (*ait)->asKind<Product>();
-                  break;
-                }
-              }
-            }
-
+            Product::constPtr prodCand( (*it)->candidateAsKind<Product>() );
             if ( ! prodCand || (*it)->identicalInstalledCandidate() )
               continue; // product no longer available or unchanged
 
@@ -705,7 +689,7 @@ SATResolver::resolvePool(const CapabilitySet & requires_caps,
     MIL << "SATResolver::resolvePool()" << endl;
 
     // initialize
-    solverInit(weakItems, upgradeRepos);
+    solverInit(weakItems);
 
     for (PoolItemList::const_iterator iter = _items_to_install.begin(); iter != _items_to_install.end(); iter++) {
 	Id id = (*iter)->satSolvable().id();

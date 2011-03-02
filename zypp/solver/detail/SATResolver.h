@@ -104,7 +104,7 @@ class SATResolver : public base::ReferenceCounted, private base::NonCopyable {
     void resetItemTransaction (PoolItem item);
 
     // Create a SAT solver and reset solver selection in the pool (Collecting
-    void solverInit(const PoolItemList & weakItems, const std::set<Repository> & upgradeRepos = std::set<Repository>());
+    void solverInit(const PoolItemList & weakItems);
     // common solver run with the _jobQueue; Save results back to pool
     bool solving(const CapabilitySet & requires_caps = CapabilitySet(),
 		 const CapabilitySet & conflict_caps = CapabilitySet());
