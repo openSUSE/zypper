@@ -1,4 +1,9 @@
 -------------------------------------------------------------------
+Sun Mar  6 01:13:41 CET 2011 - ma@suse.de
+
+- Update zypp-po.tar.bz2
+
+-------------------------------------------------------------------
 Wed Feb 16 14:24:27 UTC 2011 - dmacvicar@suse.de
 
 - Do not look for $releasever 's value if there is no variable
