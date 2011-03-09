@@ -1,0 +1,96 @@
+/**
+
+\page Services
+
+Services provide a list of repositories. So when the service is refreshed, the repositories belonging to this service are synced.
+
+\section service-types Classes of services
+
+There are two classes of services:
+
+\subsection services-remote Remote Services
+
+Remote services are a subscription to a remote server, that provide a list of repositories that will be synced with the previous list of repositories for the same service.
+
+By default, the remote services list is stored in the \ref /etc/zypp/services.d directory in standard INI files. Each file can contain more than one service.
+
+The format is the following:
+
+\verbatim
+[servicealias]
+name=My Service
+url=http://customers.maintenance.company.com/service
+enabled=true
+autorefresh=true
+type=nu
+\endverbatim
+
+The type "nu" stands for Novell Update, which gives a customer the repositories it is entitled to access. The type "ris" is an extended version of the "nu" type.
+Additionally, the file could contain "repostoenable" and "repostodisable" entries, which contain a list of repository aliases to enable or disable on the next refresh. This line is modified by other programs to force enabling or disabling a certain repository.
+
+From the remote side, the service url needs to provide a repoindex.xml file with the repository list:
+
+\verbatim
+<repoindex>
+  <repo url="http://foo.com/repo1" alias="a repository 1"/>
+  <repo url="http://foo.com/repo2" alias="a repository 2"/>
+...
+</repoindex>
+\endverbatim
+
+\subsection services-plugin Plugin Services
+
+"Plugin services” are simple scripts that return a list of repositories. T
+hey are installed by packages. For each script installed ZYpp will “see” a service of type “plugin”. When you refresh the service, the repositories this script returns will be added (or removed and kept in sync if they change afterwards).
+
+\section service-refresh Refreshing services
+
+Using zypper, you can refresh services by executing
+
+\verbatim
+zypper refs
+\endverbatim
+
+The repositories that are listed in the service will be added, using the reposotiy alias specified in the service index prefixed by the service alias: e.g. "myservice:myrepository". Repositories that vanished from the service will be automatically removed.
+
+\section service-examples Example usecases
+
+\subsection services-usecase-1 Usecase #1: The project with multiple repositories and layers
+
+Imagine the following usecase (with this one I am using some real request from our KDE guys)
+
+The build service provides a KDE4 repository. Which in turn requires the Qt4 repository, because is built on openSUSE 11.0 + the new Qt4 repo.
+
+When looking at this problem, repository dependencies is what comes to head in the first place. But forget about them. If package dependencies are complicated right now, imagine adding a secondary (and duplicated) layer of information. Packages already know their dependencies.
+
+Now imagine our KDE guys can provide an URL, which you add to zypper. And this url returns a dynamic list of repositories. And zypper adds and remove repositories based on the information returned by this url on every refresh.
+
+\subsection services-usecase-2 Usecase #2: Update repositories based on the customer
+
+This is actually where services where originated. Services were present in Novell ZenWorks. How it works?
+
+The service url nu.novell.com is added to the system. But in this url also a customer id is present as a http username. When you registered, Novell knows the product this customer is linked to, and can return a dynamic list of update repositories based on the customer preferences, products and entitlements and the customer does not need to keep them in sync.
+
+Now that we don’t have Zenworks in the base system, we still want this cool functionality for our customers.
+
+Technically, this even allows us to offer hotfixes to L3 supported customers on the fly!
+
+\subsection services-usecase-3 Usecase #3: Dynamic repository collections
+
+You are a build service user, and you have an account, and of course you have a list of watched projects you are interested to. What if you could keep your system repositores in sync with your watched project list.
+
+Or what if the build service could offer a service based on keywords or other data: like http://build.opensuse.org/services/mostpopular/repo/repoindex.xml would contain dynamically the 15 most popular repositories. You add that service, and then ZYpp does the work for you of adding new popular repositories, and remove the old ones.
+
+\section service-impl Developers: Implementation
+
+Services are implemented in the following classes:
+
+- \ref zypp::repo::ServiceType (Service types enumeration)
+- \ref zypp::parser::ServiceFileReader (.service file parser)
+- \ref zypp::ServiceInfo Information about a service (.service file data)
+- \ref zypp::repo::PluginServices (Services as plugins)
+- \ref zypp::parser::RepoindexFileReader (NU and RIS remote service index XML parser)
+- \ref zypp::repo::ServiceRepos (Repositories in a service)
+
+
+*/
