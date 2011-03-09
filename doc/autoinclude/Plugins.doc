@@ -1,0 +1,138 @@
+/**
+
+\page zypp-plugins Extending ZYpp: Plugins and Hooks
+
+\author Duncan Mac-Vicar P. <dmacvicar@suse.de>
+
+\section plugins-intro Introduction
+
+Plugins allow to extend the ZYpp package manager without the need to change
+code. Plugins are designed as external programs so that they can be written in any language.
+
+\section plugin-protocols Plugin protocols
+
+Depending on the complexity and need for future extension, plugins talk
+to ZYpp using two methods.
+
+\subsection plugin-protocol-stateless Stateless
+
+This type of plugin receive input reading the standard input, and answer ZYpp writing to the standard output. This means the plugin is executed once per hook and they are stateless (unless the plugin keeps the state out of process).
+
+\subsection plugin-protocol-stateful Stateful
+
+This type of plugin is called by ZYpp and a conversation using a simple protocol. The protocol is based on STOMP http://stomp.codehaus.org/Protocol (Streaming Text Orientated Messaging Protocol). Messages (called "frames") look like the following:
+
+\verbatim
+COMMAND
+param1:val1
+param2:val2
+...
+^@
+\endverbatim
+
+\note ^@ is a null (control-@ in ASCII) byte.
+
+\section plugin-services Service plugins
+
+ZYpp will find a subscribed service for each executable located in /usr/lib/zypp/plugins/services and will set the alias as the executable name. The type will be set to "plugin".
+
+Service plugins are used to provide a client a list of repositories from a central location where more complex logic is needed than a simple remote xml index accessible via http (in that case you can use \ref services-remote "Remote Services").
+
+\subsection plugin-services-example1 Example: Management console
+
+You have a custom mass management application that controls the repositories each client muss have. While you can use \ref services-remote "Remote Services" and subscribe each client to an url in the server providing a dynamic repoindex.xml based on the client, if you need to pass custom information in order for the server to calculate the repository list (e.g. number of CPUs) or the protocol that the client and the server and client speak is proprietary, you may implement the service locally, as an executable that will be installed in each client /usr/lib/zypp/plugins/services directory (it may be installed from a package).
+
+\subsection plugin-services-how How to write a Services plugin
+
+When listing services, ZYpp will find each plugin service as a subscribed service.
+
+Service plugins are Stateless. When services are refreshed, ZYpp will call each plugin and the repository list will be taken from the output of the script in INI format (same as how they are stored in /etc/zypp/repos.d).
+
+For our example:
+
+\verbatim
+# example plugin output
+# comments are ignored
+[repo1]
+name=Base repository
+summary=Standard repository
+baseurl=http://server.com/repo1
+type=rpm-md
+
+# multiple repositories can be present in the output
+
+[repo2]
+...
+
+\endverbatim
+
+The repositories will be added on service refresh with the alias present in the output, prefixed by the service alias (in this case, the executable name).
+
+\section plugin-url-resolver Url Resolver plugins
+
+Url resolver plugins convert urls of scheme "plugin" into the output of the plugin named $name using the protocol. Thanks to the protocol, each header returned is also added as HTTP headers. The current protocol sequence is:
+
+ZYpp sees a repository whose url has the format:
+
+\verbatim
+plugin:foo?param1=val1&param2=val2
+\endverbatim
+
+ZYpp tries to executa a plugin named foo (in /usr/lib/zypp/plugins/urlresolver) and calla it with the following protocol:
+
+\verbatim
+   RESOLVEURL
+   param1:val1
+   param2:val2
+   ...
+   ^@
+\endverbatim
+
+The plugin answers:
+
+\verbatim
+   RESOLVEDURL:
+   header1:val1
+   header2:val2
+   ...
+   http://realurl.com?opts=vals
+   ^@
+\endverbatim
+
+And this url is used instead.
+
+\subsection plugin-urlresolver-example Example
+
+You have a repository with url:
+
+   plugin:lan
+
+The script looks which distribution you have installed, and via SLP finds the right repositories in the lan and selects the update one and returns it url. But in addition, it adds a header with the update status that can be collected on the server side.
+
+This type of plugin can be combined with service plugins, because a local service could return a list of repos like this:
+
+\verbatim
+  [distro]
+  name=Distribution repository
+  baseurl=plugin:lan?repo=distro
+  [update]
+  name=Update repository
+  baseurl=plugin:lan?repo=update
+\endverbatim
+
+\note
+In this example, the service plugin could have inmediately resolved the urls and returned http://realurl, but the url resolver allows also to add HTTP headers to the request.
+
+\section plugins-impl Developers: Implementation
+
+Plugins are implemented in the following classes:
+
+- \ref zypp::PluginScript (Plugin as an external program)
+- \ref zypp::PluginScriptException
+- \ref zypp::PluginFrame (Message for the stateful protocol)
+- \ref zypp::PluginFrameException
+- \ref zypp::repo::PluginServices (Finds Service plugins)
+
+The plugins default location is obtained from \ref zypp::ZConfig::pluginsPath()
+
+*/

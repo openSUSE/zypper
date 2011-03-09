@@ -1,6 +1,8 @@
 /**
 
-\page Services
+\page zypp-services Services
+
+\author Duncan Mac-Vicar P. <dmacvicar@suse.de>
 
 Services provide a list of repositories. So when the service is refreshed, the repositories belonging to this service are synced.
 
@@ -40,8 +42,7 @@ From the remote side, the service url needs to provide a repoindex.xml file with
 
 \subsection services-plugin Plugin Services
 
-"Plugin services” are simple scripts that return a list of repositories. T
-hey are installed by packages. For each script installed ZYpp will “see” a service of type “plugin”. When you refresh the service, the repositories this script returns will be added (or removed and kept in sync if they change afterwards).
+\ref plugin-services "Plugin services" are simple scripts that return a list of repositories. They are installed by packages. For each script installed ZYpp will “see” a service of type “plugin”. When you refresh the service, the repositories this script returns will be added (or removed and kept in sync if they change afterwards).
 
 \section service-refresh Refreshing services
 
