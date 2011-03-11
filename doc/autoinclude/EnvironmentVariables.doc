@@ -1,0 +1,43 @@
+/**
+
+\page zypp-envars Environment Variables
+
+\author Michael Andres <ma@suse.de>
+
+\section zypp-envars Environment Variables
+
+Note that for Boolean variables we usually test whether the variable exists and not for the assigned value.
+
+\subsection zypp-envars-config Location of the zypp.conf file.
+
+\li \c ZYPP_CONF=<PATH> Location of the zypp.conf file.
+
+\subsection zypp-envars-logging Variables related to logging
+
+\li \c ZYPP_LOGFILE=<PATH> Location of the logfile to write or \c - for stderr.
+\li \c ZYPP_FULLLOG=1 Even more verbose logging (usually not needed).
+\li \c ZYPP_LIBSAT_FULLLOG=1 Verbose logging when resolving dependencies.
+\li \c ZYPP_MEDIA_CURL_DEBUG=<0|1> Log http headers, if \c 1 also log server responses.
+
+\subsection zypp-envars-mediabackend Selecting the mediabackend to use.
+
+\li \c ZYPP_MULTICURL=0 Turn off multicurl (metalink and zsync) and fall back to plain libcurl.
+\li \c ZYPP_ARIA2C=1 Enable aria2c backend (deprecated).
+
+\subsection zypp-envars-plugin Variables related to plugins
+
+\li \c PLUGIN_DEBUG=1 Verbose logging from plugin framework.
+\li \c PLUGIN_TIMEOUT=<sec> Send/receive timeout for plugin communication.
+\li \c PLUGIN_SEND_TIMEOUT=<sec> Send timeout for plugin communication.
+\li \c PLUGIN_RECEIVE_TIMEOUT=<sec> Receive timeout for plugin communication.
+
+\subsection zypp-envars-misc Variables \b not for common use (test and debug)
+
+\li \c ZYPP_MODALIAS_SYSFS=<PATH> Use this instead of \c /sys to evaluate modaliases.
+\li \c ZYPP_COMMIT_NO_PACKAGE_CACHE=1
+\li \c ZYPP_TESTSUITE_FAKE_ARCH Never use this!
+\li \c ZYPPTMPDIR=<PATH>
+\li \c ZYPP_LOCKFILE_ROOT=<PATH> Hack to circumvent the currently poor --root support.
+\li \c ZYPP_PROFILING=1
+
+*/
