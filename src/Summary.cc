@@ -146,7 +146,7 @@ void Summary::readPool(const zypp::ResPool & pool)
 
   for (list<SrcPackage::constPtr>::const_iterator it = zypper.runtimeData().srcpkgs_to_install.begin();
       it != zypper.runtimeData().srcpkgs_to_install.end(); ++it)
-    toinstall[ResKind::srcpackage].insert(*it);
+    _toinstall[ResKind::srcpackage].insert(*it);
 */
 
   // iterate the to_be_installed to find installs/upgrades/downgrades + size info
@@ -165,9 +165,9 @@ void Summary::readPool(const zypp::ResPool & pool)
       if (pkg)
       {
         if (pkg->vendorSupport() & VendorSupportACC)
-          support_needacc[res->kind()].insert(ResPair(nullres, res));
+          _support_needacc[res->kind()].insert(ResPair(nullres, res));
         else if (pkg->maybeUnsupported())
-          unsupported[res->kind()].insert(ResPair(nullres, res));
+          _unsupported[res->kind()].insert(ResPair(nullres, res));
       }
 
       // find in to_be_removed:
@@ -182,40 +182,40 @@ void Summary::readPool(const zypp::ResPool & pool)
           // upgrade
           if (res->edition() > (*rmit)->edition())
           {
-            // don't put multiversion packages to 'toupgrade', they will
+            // don't put multiversion packages to '_toupgrade', they will
             // always be reported as newly installed (and removed)
             if (multi_installed.find(res->name()) != multi_installed.end())
               continue;
 
-            toupgrade[res->kind()].insert(rp);
+            _toupgrade[res->kind()].insert(rp);
             if (res->arch() != (*rmit)->arch())
-              tochangearch[res->kind()].insert(rp);
+              _tochangearch[res->kind()].insert(rp);
             if (!VendorAttr::instance().equivalent(res->vendor(), (*rmit)->vendor()))
-              tochangevendor[res->kind()].insert(rp);
+              _tochangevendor[res->kind()].insert(rp);
           }
           // reinstall
           else if (res->edition() == (*rmit)->edition())
           {
             if (res->arch() != (*rmit)->arch())
-              tochangearch[res->kind()].insert(rp);
+              _tochangearch[res->kind()].insert(rp);
             else
-              toreinstall[res->kind()].insert(rp);
+              _toreinstall[res->kind()].insert(rp);
             if (!VendorAttr::instance().equivalent(res->vendor(), (*rmit)->vendor()))
-              tochangevendor[res->kind()].insert(rp);
+              _tochangevendor[res->kind()].insert(rp);
           }
           // downgrade
           else
           {
-            // don't put multiversion packages to 'todowngrade', they will
+            // don't put multiversion packages to '_todowngrade', they will
             // always be reported as newly installed (and removed)
             if (multi_installed.find(res->name()) != multi_installed.end())
               continue;
 
-            todowngrade[res->kind()].insert(rp);
+            _todowngrade[res->kind()].insert(rp);
             if (res->arch() != (*rmit)->arch())
-              tochangearch[res->kind()].insert(rp);
+              _tochangearch[res->kind()].insert(rp);
             if (!VendorAttr::instance().equivalent(res->vendor(), (*rmit)->vendor()))
-              tochangevendor[res->kind()].insert(rp);
+              _tochangevendor[res->kind()].insert(rp);
           }
 
           _inst_size_change += res->installSize() - (*rmit)->installSize();
@@ -229,7 +229,7 @@ void Summary::readPool(const zypp::ResPool & pool)
 
       if (!upgrade_downgrade)
       {
-        toinstall[res->kind()].insert(ResPair(NULL, res));
+        _toinstall[res->kind()].insert(ResPair(NULL, res));
         _inst_size_change += res->installSize();
       }
 
@@ -239,23 +239,23 @@ void Summary::readPool(const zypp::ResPool & pool)
 
   m.elapsed();
 
-  // collect the rest (not upgraded/downgraded) of to_be_removed as 'toremove'
+  // collect the rest (not upgraded/downgraded) of to_be_removed as '_toremove'
   // and decrease installed size change accordingly
 
-  //bool toremove_by_solver = false;
+  //bool _toremove_by_solver = false;
   for (KindToResObjectSet::const_iterator it = to_be_removed.begin();
       it != to_be_removed.end(); ++it)
     for (set<ResObject::constPtr>::const_iterator resit = it->second.begin();
         resit != it->second.end(); ++resit)
     {
       /** \todo this does not work
-      if (!toremove_by_solver)
+      if (!_toremove_by_solver)
       {
         PoolItem pi(*resit);
         if (pi.status() == ResStatus::SOLVER)
-          toremove_by_solver = true;
+          _toremove_by_solver = true;
       }*/
-      toremove[it->first].insert(ResPair(nullres, *resit));
+      _toremove[it->first].insert(ResPair(nullres, *resit));
       _inst_size_change -= (*resit)->installSize();
     }
 
@@ -288,7 +288,7 @@ void Summary::readPool(const zypp::ResPool & pool)
           && (*it)->installedObj()->arch() != Arch_noarch
           && candidate->arch() != Arch_noarch)
         continue;
-      // mutliversion packages do not end up in toupgrade, so we need to remove
+      // mutliversion packages do not end up in _toupgrade, so we need to remove
       // them from candidates if the candidate actually installs (bnc #629197)
       if (multi_installed.find(candidate->name()) != multi_installed.end()
           && candidate->poolItem().status().isToBeInstalled())
@@ -297,34 +297,34 @@ void Summary::readPool(const zypp::ResPool & pool)
       candidates[*kit].insert(ResPair(nullres, candidate));
     }
     MIL << *kit << " update candidates: " << candidates[*kit].size() << endl;
-    MIL << "to be actually updated: " << toupgrade[*kit].size() << endl;
+    MIL << "to be actually updated: " << _toupgrade[*kit].size() << endl;
   }
 
   // compare available updates with the list of packages to be upgraded
   //
   // note: operator[] (kindToResPairSet[kind]) actually creates ResPairSet when
   //       used. This avoids bnc #594282 which occured when there was
-  //       for_(it, toupgrade.begin(), toupgrade.end()) loop used here and there
+  //       for_(it, _toupgrade.begin(), _toupgrade.end()) loop used here and there
   //       were no upgrades for that kind.
   for_(kit, kinds.begin(), kinds.end())
     set_difference(
         candidates[*kit].begin(), candidates[*kit].end(),
-        toupgrade [*kit].begin(), toupgrade [*kit].end(),
-        inserter(notupdated[*kit], notupdated[*kit].begin()),
+        _toupgrade [*kit].begin(), _toupgrade [*kit].end(),
+        inserter(_notupdated[*kit], _notupdated[*kit].begin()),
         Summary::ResPairNameCompare());
 
   // remove kinds with empty sets after the set_difference
-  for (KindToResPairSet::iterator it = notupdated.begin(); it != notupdated.end();)
+  for (KindToResPairSet::iterator it = _notupdated.begin(); it != _notupdated.end();)
   {
     if (it->second.empty())
-      notupdated.erase(it++);
+      _notupdated.erase(it++);
     else
       ++it;
   }
-  for (KindToResPairSet::iterator it = toupgrade.begin(); it != toupgrade.end();)
+  for (KindToResPairSet::iterator it = _toupgrade.begin(); it != _toupgrade.end();)
   {
     if (it->second.empty())
-      toupgrade.erase(it++);
+      _toupgrade.erase(it++);
     else
       ++it;
   }
@@ -338,8 +338,8 @@ unsigned Summary::packagesToRemove() const
 {
   // total packages to remove (packages only - patches, patterns, and products
   // are virtual; srcpackages do not get removed by zypper)
-  KindToResPairSet::const_iterator it = toremove.find(ResKind::package);
-  if (it != toremove.end())
+  KindToResPairSet::const_iterator it = _toremove.find(ResKind::package);
+  if (it != _toremove.end())
     return it->second.size();
   return 0;
 }
@@ -350,8 +350,8 @@ unsigned Summary::packagesToUpgrade() const
 {
   // total packages to remove (packages only - patches, patterns, and products
   // are virtual; srcpackages do not get removed by zypper)
-  KindToResPairSet::const_iterator it = toupgrade.find(ResKind::package);
-  if (it != toupgrade.end())
+  KindToResPairSet::const_iterator it = _toupgrade.find(ResKind::package);
+  if (it != _toupgrade.end())
     return it->second.size();
   return 0;
 }
@@ -362,8 +362,8 @@ unsigned Summary::packagesToDowngrade() const
 {
   // total packages to remove (packages only - patches, patterns, and products
   // are virtual; srcpackages do not get removed by zypper)
-  KindToResPairSet::const_iterator it = todowngrade.find(ResKind::package);
-  if (it != todowngrade.end())
+  KindToResPairSet::const_iterator it = _todowngrade.find(ResKind::package);
+  if (it != _todowngrade.end())
     return it->second.size();
   return 0;
 }
@@ -464,7 +464,7 @@ void Summary::writeResolvableList(ostream & out, const ResPairSet & resolvables)
 
 void Summary::writeNewlyInstalled(ostream & out)
 {
-  for_(it, toinstall.begin(), toinstall.end())
+  for_(it, _toinstall.begin(), _toinstall.end())
   {
     string label;
     if (it->first == ResKind::package)
@@ -504,7 +504,7 @@ void Summary::writeRemoved(ostream & out)
 {
   ViewOptions vop = _viewop;
   unsetViewOption(SHOW_REPO); // never show repo here, it's always @System
-  for_(it, toremove.begin(), toremove.end())
+  for_(it, _toremove.begin(), _toremove.end())
   {
     string label;
     if (it->first == ResKind::package)
@@ -538,7 +538,7 @@ void Summary::writeRemoved(ostream & out)
 
 void Summary::writeUpgraded(ostream & out)
 {
-  for_(it, toupgrade.begin(), toupgrade.end())
+  for_(it, _toupgrade.begin(), _toupgrade.end())
   {
     string label;
     if (it->first == ResKind::package)
@@ -571,7 +571,7 @@ void Summary::writeUpgraded(ostream & out)
 
 void Summary::writeDowngraded(ostream & out)
 {
-  for_(it, todowngrade.begin(), todowngrade.end())
+  for_(it, _todowngrade.begin(), _todowngrade.end())
   {
     string label;
     if (it->first == ResKind::package)
@@ -604,7 +604,7 @@ void Summary::writeDowngraded(ostream & out)
 
 void Summary::writeReinstalled(ostream & out)
 {
-  for_(it, toreinstall.begin(), toreinstall.end())
+  for_(it, _toreinstall.begin(), _toreinstall.end())
   {
     string label;
     if (it->first == ResKind::package)
@@ -645,7 +645,7 @@ void Summary::collectInstalledRecommends(const ResObject::constPtr & obj)
   {
     sat::WhatProvides q(*capit);
     // not using selectables here: matching found resolvables against those
-    // in the toinstall set (the ones selected by the solver)
+    // in the _toinstall set (the ones selected by the solver)
     for_(sit, q.begin(), q.end())
     {
       if (sit->isSystem()) // is it necessary to have the system solvable?
@@ -656,10 +656,10 @@ void Summary::collectInstalledRecommends(const ResObject::constPtr & obj)
       XXX << "rec: " << *sit << endl;
       ResObject::constPtr recobj = makeResObject(*sit);
       ResPairSet::const_iterator match =
-        toinstall[sit->kind()].find(ResPair(nullres, recobj));
-      if (match != toinstall[sit->kind()].end())
+        _toinstall[sit->kind()].find(ResPair(nullres, recobj));
+      if (match != _toinstall[sit->kind()].end())
       {
-        if (recommended[sit->kind()].insert(*match).second)
+        if (_recommended[sit->kind()].insert(*match).second)
           collectInstalledRecommends(recobj);
         break;
       }
@@ -679,10 +679,10 @@ void Summary::collectInstalledRecommends(const ResObject::constPtr & obj)
       XXX << "req: " << *sit << endl;
       ResObject::constPtr reqobj = makeResObject(*sit);
       ResPairSet::const_iterator match =
-        toinstall[sit->kind()].find(ResPair(nullres, reqobj));
-      if (match != toinstall[sit->kind()].end())
+        _toinstall[sit->kind()].find(ResPair(nullres, reqobj));
+      if (match != _toinstall[sit->kind()].end())
       {
-        if (required[sit->kind()].insert(*match).second)
+        if (_required[sit->kind()].insert(*match).second)
           collectInstalledRecommends(reqobj);
         break;
       }
@@ -724,10 +724,10 @@ static void collectNotInstalledDeps(
 void Summary::writeRecommended(ostream & out)
 {
   // lazy-compute the installed recommended objects
-  if (recommended.empty())
+  if (_recommended.empty())
   {
     ResObject::constPtr obj;
-    for_(kindit, toinstall.begin(), toinstall.end())
+    for_(kindit, _toinstall.begin(), _toinstall.end())
       for_(it, kindit->second.begin(), kindit->second.end())
         // collect recommends of all packages request by user
         if (it->second->poolItem().status().getTransactByValue() != ResStatus::SOLVER)
@@ -735,16 +735,16 @@ void Summary::writeRecommended(ostream & out)
   }
 
   // lazy-compute the not-to-be-installed recommended objects
-  if (noinstrec.empty())
+  if (_noinstrec.empty())
   {
     ResObject::constPtr obj;
-    for_(kindit, toinstall.begin(), toinstall.end())
+    for_(kindit, _toinstall.begin(), _toinstall.end())
       for_(it, kindit->second.begin(), kindit->second.end())
         if (it->second->poolItem().status().getTransactByValue() != ResStatus::SOLVER)
-          collectNotInstalledDeps(Dep::RECOMMENDS, it->second, noinstrec);
+          collectNotInstalledDeps(Dep::RECOMMENDS, it->second, _noinstrec);
   }
 
-  for_(it, recommended.begin(), recommended.end())
+  for_(it, _recommended.begin(), _recommended.end())
   {
     string label = "The following recommended packages were selected automatically:";
     if (it->first == ResKind::package)
@@ -772,7 +772,7 @@ void Summary::writeRecommended(ostream & out)
     writeResolvableList(out, it->second);
   }
 
-  for_(it, noinstrec.begin(), noinstrec.end())
+  for_(it, _noinstrec.begin(), _noinstrec.end())
   {
     string label;
     if (it->first == ResKind::package)
@@ -815,17 +815,17 @@ void Summary::writeRecommended(ostream & out)
 
 void Summary::writeSuggested(ostream & out)
 {
-  if (noinstsug.empty())
+  if (_noinstsug.empty())
   {
     ResObject::constPtr obj;
-    for_(kindit, toinstall.begin(), toinstall.end())
+    for_(kindit, _toinstall.begin(), _toinstall.end())
       for_(it, kindit->second.begin(), kindit->second.end())
         // collect recommends of all packages request by user
         if (it->second->poolItem().status().getTransactByValue() != ResStatus::SOLVER)
-          collectNotInstalledDeps(Dep::SUGGESTS, it->second, noinstsug);
+          collectNotInstalledDeps(Dep::SUGGESTS, it->second, _noinstsug);
   }
 
-  for_(it, noinstsug.begin(), noinstsug.end())
+  for_(it, _noinstsug.begin(), _noinstsug.end())
   {
     string label;
     if (it->first == ResKind::package)
@@ -860,7 +860,7 @@ void Summary::writeChangedArch(ostream & out)
 {
   ViewOptions vop = _viewop;
   setViewOption(SHOW_ARCH); // always show arch here
-  for_(it, tochangearch.begin(), tochangearch.end())
+  for_(it, _tochangearch.begin(), _tochangearch.end())
   {
     string label;
     if (it->first == ResKind::package)
@@ -896,7 +896,7 @@ void Summary::writeChangedVendor(ostream & out)
 {
   ViewOptions vop = _viewop;
   setViewOption(SHOW_VENDOR); // always show vendor here
-  for_(it, tochangevendor.begin(), tochangevendor.end())
+  for_(it, _tochangevendor.begin(), _tochangevendor.end())
   {
     string label;
     if (it->first == ResKind::package)
@@ -930,7 +930,7 @@ void Summary::writeChangedVendor(ostream & out)
 
 void Summary::writeUnsupported(ostream & out)
 {
-  for_(it, unsupported.begin(), unsupported.end())
+  for_(it, _unsupported.begin(), _unsupported.end())
   {
     string label;
     // we only look at vendor support in packages
@@ -949,7 +949,7 @@ void Summary::writeUnsupported(ostream & out)
 
 void Summary::writeNeedACC(ostream & out)
 {
-  for_(it, support_needacc.begin(), support_needacc.end())
+  for_(it, _support_needacc.begin(), _support_needacc.end())
   {
     string label;
     // we only look at vendor support in packages
@@ -966,7 +966,7 @@ void Summary::writeNeedACC(ostream & out)
 
 void Summary::writeNotUpdated(std::ostream & out)
 {
-  for_(it, notupdated.begin(), notupdated.end())
+  for_(it, _notupdated.begin(), _notupdated.end())
   {
     string label;
     // we only look at update candidates for packages and products
@@ -990,7 +990,7 @@ void Summary::writeNotUpdated(std::ostream & out)
 
 void Summary::writeDownloadAndInstalledSizeSummary(ostream & out)
 {
-  if (!_inst_pkg_total && toremove.empty())
+  if (!_inst_pkg_total && _toremove.empty())
     return; // nothing to do, keep silent
 
   // download size info
@@ -1033,8 +1033,8 @@ void Summary::writePackageCounts(ostream & out)
   unsigned count;
   KindToResPairSet::const_iterator i;
 
-  i = toupgrade.find(ResKind::package);
-  if (i != toupgrade.end())
+  i = _toupgrade.find(ResKind::package);
+  if (i != _toupgrade.end())
   {
     count = i->second.size();
     fprint_color(s, str::form("%d ", count), COLOR_CONTEXT_HIGHLIGHT);
@@ -1042,8 +1042,8 @@ void Summary::writePackageCounts(ostream & out)
     s << _PL("package to upgrade", "packages to upgrade", count);
     gotcha = true;
   }
-  i = todowngrade.find(ResKind::package);
-  if (i != todowngrade.end())
+  i = _todowngrade.find(ResKind::package);
+  if (i != _todowngrade.end())
   {
     count = i->second.size();
     if (gotcha)
@@ -1057,8 +1057,8 @@ void Summary::writePackageCounts(ostream & out)
       s << _PL("package to downgrade", "packages to downgrade", count);
     gotcha = true;
   }
-  i = toinstall.find(ResKind::package);
-  if (i != toinstall.end())
+  i = _toinstall.find(ResKind::package);
+  if (i != _toinstall.end())
   {
     count = i->second.size();
     if (gotcha)
@@ -1072,8 +1072,8 @@ void Summary::writePackageCounts(ostream & out)
       s << _PL("new package to install", "new packages to install", count);
     gotcha = true;
   }
-  i = toreinstall.find(ResKind::package);
-  if (i != toreinstall.end())
+  i = _toreinstall.find(ResKind::package);
+  if (i != _toreinstall.end())
   {
     count = i->second.size();
     if (gotcha)
@@ -1087,8 +1087,8 @@ void Summary::writePackageCounts(ostream & out)
       s << _PL("package to reinstall", "packages to reinstall", count);
     gotcha = true;
   }
-  i = toremove.find(ResKind::package);
-  if (i != toremove.end())
+  i = _toremove.find(ResKind::package);
+  if (i != _toremove.end())
   {
     count = i->second.size();
     if (gotcha)
@@ -1102,8 +1102,8 @@ void Summary::writePackageCounts(ostream & out)
       s << _PL("package to remove", "packages to remove", count);
     gotcha = true;
   }
-  i = tochangevendor.find(ResKind::package);
-  if (i != tochangevendor.end())
+  i = _tochangevendor.find(ResKind::package);
+  if (i != _tochangevendor.end())
   {
     count = i->second.size();
     if (gotcha)
@@ -1117,8 +1117,8 @@ void Summary::writePackageCounts(ostream & out)
       s << _PL("package will change vendor", "packages will change vendor", count);
     gotcha = true;
   }
-  i = tochangearch.find(ResKind::package);
-  if (i != tochangearch.end())
+  i = _tochangearch.find(ResKind::package);
+  if (i != _tochangearch.end())
   {
     count = i->second.size();
     if (gotcha)
@@ -1215,60 +1215,60 @@ void Summary::dumpAsXmlTo(ostream & out)
   out << " space-usage-diff=\"" << ((ByteCount::SizeType) _inst_size_change) << "\"";
   out << ">" << endl;
 
-  if (!toupgrade.empty())
+  if (!_toupgrade.empty())
   {
     out << "<to-upgrade>" << endl;
-    writeXmlResolvableList(out, toupgrade);
+    writeXmlResolvableList(out, _toupgrade);
     out << "</to-upgrade>" << endl;
   }
 
-  if (!todowngrade.empty())
+  if (!_todowngrade.empty())
   {
     out << "<to-downgrade>" << endl;
-    writeXmlResolvableList(out, todowngrade);
+    writeXmlResolvableList(out, _todowngrade);
     out << "</to-downgrade>" << endl;
   }
 
-  if (!toinstall.empty())
+  if (!_toinstall.empty())
   {
     out << "<to-install>" << endl;
-    writeXmlResolvableList(out, toinstall);
+    writeXmlResolvableList(out, _toinstall);
     out << "</to-install>" << endl;
   }
 
-  if (!toreinstall.empty())
+  if (!_toreinstall.empty())
   {
     out << "<to-reinstall>" << endl;
-    writeXmlResolvableList(out, toreinstall);
+    writeXmlResolvableList(out, _toreinstall);
     out << "</to-reinstall>" << endl;
   }
 
-  if (!toremove.empty())
+  if (!_toremove.empty())
   {
     out << "<to-remove>" << endl;
-    writeXmlResolvableList(out, toremove);
+    writeXmlResolvableList(out, _toremove);
     out << "</to-remove>" << endl;
   }
 
-  if (!tochangearch.empty())
+  if (!_tochangearch.empty())
   {
     out << "<to-change-arch>" << endl;
-    writeXmlResolvableList(out, tochangearch);
+    writeXmlResolvableList(out, _tochangearch);
     out << "</to-change-arch>" << endl;
   }
 
-  if (!tochangevendor.empty())
+  if (!_tochangevendor.empty())
   {
     out << "<to-change-vendor>" << endl;
-    writeXmlResolvableList(out, tochangevendor);
+    writeXmlResolvableList(out, _tochangevendor);
     out << "</to-change-vendor>" << endl;
   }
 
-  if (_viewop & SHOW_UNSUPPORTED && !unsupported.empty())
+  if (_viewop & SHOW_UNSUPPORTED && !_unsupported.empty())
   {
-    out << "<unsupported>" << endl;
-    writeXmlResolvableList(out, unsupported);
-    out << "</unsupported>" << endl;
+    out << "<_unsupported>" << endl;
+    writeXmlResolvableList(out, _unsupported);
+    out << "</_unsupported>" << endl;
   }
 
   out << "</install-summary>" << endl;

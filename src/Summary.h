@@ -132,21 +132,21 @@ private:
 
   unsigned _inst_pkg_total;
 
-  KindToResPairSet toinstall;
-  KindToResPairSet toupgrade;
-  KindToResPairSet todowngrade;
-  KindToResPairSet toreinstall;
-  KindToResPairSet toremove;
-  KindToResPairSet tochangearch;
-  KindToResPairSet tochangevendor;
+  KindToResPairSet _toinstall;
+  KindToResPairSet _toupgrade;
+  KindToResPairSet _todowngrade;
+  KindToResPairSet _toreinstall;
+  KindToResPairSet _toremove;
+  KindToResPairSet _tochangearch;
+  KindToResPairSet _tochangevendor;
   /** Packages that have update candidate, but won't get updated.
    * In 'zypper up' this is because of vendor, repo priority, dependiencies,
    * etc; but the list can be used also generally. */
-  KindToResPairSet notupdated;
+  KindToResPairSet _notupdated;
   /** objects from previous lists that are marked as not supported */
-  KindToResPairSet unsupported;
+  KindToResPairSet _unsupported;
   /** objects from previous lists that need additional customer contract */
-  KindToResPairSet support_needacc;
+  KindToResPairSet _support_needacc;
 
   /** names of packages which have multiple versions (to-be-)installed */
   std::set<std::string> multi_installed;
@@ -155,12 +155,12 @@ private:
   /** \name For weak deps info.
    * @{
    */
-  KindToResPairSet required;
-  KindToResPairSet recommended;
+  KindToResPairSet _required;
+  KindToResPairSet _recommended;
   //! recommended but not to be installed
-  KindToResPairSet noinstrec;
+  KindToResPairSet _noinstrec;
   //! suggested but not to be installed
-  KindToResPairSet noinstsug;
+  KindToResPairSet _noinstsug;
   //! @}
 };
 
