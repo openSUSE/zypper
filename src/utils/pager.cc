@@ -53,6 +53,9 @@ static string pager_help_navigation(const string & pager)
 
 static bool show_in_pager(const string & pager, const Pathname & file)
 {
+  if (Zypper::instance()->globalOpts().non_interactive)
+    return true;
+
   ostringstream cmdline;
   cmdline << "'" << pager << "' '" << file << "'";
 
