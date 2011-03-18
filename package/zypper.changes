@@ -1,4 +1,11 @@
 -------------------------------------------------------------------
+Fri Mar 18 13:14:34 UTC 2011 - dmacvicar@suse.de
+
+- zypper -n display license interactively (bnc#660001)
+  Patch by Bernhard Wiedemann <bwiedemann@suse.de>
+- 1.5.4
+
+-------------------------------------------------------------------
 Mon Jan 17 11:38:05 CET 2011 - ma@suse.de
 
 - Don't perform automatic service refresh if non-root user.
