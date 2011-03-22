@@ -21,7 +21,9 @@ BuildRequires:  readline-devel >= 5.1 augeas-devel >= 0.5.0
 BuildRequires:  gcc-c++ >= 4.1 cmake >= 2.4.6
 Requires:	procps
 %if 0%{?suse_version}
+%if 0%{?suse_version} >= 1100
 %requires_ge	libzypp
+%endif
 Recommends:     logrotate cron
 PreReq:         permissions
 %endif
