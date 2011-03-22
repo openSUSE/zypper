@@ -572,7 +572,13 @@ namespace zypp {
       EarlyPipe::EarlyPipe()
       {
 	_fds[R] = _fds[W] = -1;
+#ifdef HAVE_PIPE2
 	::pipe2( _fds, O_NONBLOCK );
+#else
+        ::pipe( _fds );
+        ::fcntl(_fds[R], F_SETFD, O_NONBLOCK );
+        ::fcntl(_fds[W], F_SETFD, O_NONBLOCK );
+#endif
 	_stderr = ::fdopen( _fds[R], "r" );
       }
 
