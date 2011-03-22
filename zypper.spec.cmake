@@ -12,7 +12,7 @@
 
 Name:           @PACKAGE@
 BuildRequires:  libzypp-devel >= 6.35.0 boost-devel >= 1.33.1 
-if 0%{?suse_version} > 1100
+%if 0%{?suse_version} >= 1100
 BuildRequires:  gettext-devel >= 0.15
 %else
 BuildRequires:  gettext-devel
