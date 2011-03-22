@@ -656,8 +656,10 @@ void MediaCurl::setupEasy()
       SET_OPTION(CURLOPT_LOW_SPEED_TIME, 10L);
   }
 
+#if LIBCURL_VERSION_NUMBER >= 0x071505
   if ( _settings.maxDownloadSpeed() != 0 )
       SET_OPTION_OFFT(CURLOPT_MAX_RECV_SPEED_LARGE, _settings.maxDownloadSpeed());
+#endif
 
   /*---------------------------------------------------------------*
    *---------------------------------------------------------------*/
@@ -671,9 +673,10 @@ void MediaCurl::setupEasy()
   SET_OPTION(CURLOPT_PROGRESSFUNCTION, &progressCallback );
   SET_OPTION(CURLOPT_NOPROGRESS, 0L);
 
+#if LIBCURL_VERSION_NUMBER >= 0x071800
   // bnc #306272
-  SET_OPTION(CURLOPT_PROXY_TRANSFER_MODE, 1L );
-
+    SET_OPTION(CURLOPT_PROXY_TRANSFER_MODE, 1L );
+#endif
   // append settings custom headers to curl
   for ( TransferSettings::Headers::const_iterator it = vol_settings.headersBegin();
         it != vol_settings.headersEnd();
