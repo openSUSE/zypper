@@ -146,14 +146,14 @@ Requires:       cmake
 %if 0%{?suse_version}
 %if 0%{?suse_version} >= 1100
 # Code11+
-BuildRequires:  libcurl-devel >= %{min_curl_version}
+Requires:  libcurl-devel >= %{min_curl_version}
 %else
 # Code10
-BuildRequires:  curl-devel
+Requires:  curl-devel
 %endif
 %else
 # Other distros (Fedora)
-BuildRequires:  libcurl-devel >= %{min_curl_version}
+Requires:  libcurl-devel >= %{min_curl_version}
 %endif
 %if 0%{?suse_version} >= 1100
 %requires_ge    libsatsolver-devel
