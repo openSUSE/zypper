@@ -27,7 +27,7 @@
 ///////////////////////////////////////////////////////////////////
 namespace zypp
 { /////////////////////////////////////////////////////////////////
-  
+
   using std::endl;
 
   /** Print range defined by iterators (multiline style).
@@ -126,6 +126,10 @@ namespace zypp
 
   template<class _Tp>
     std::ostream & operator<<( std::ostream & str, const std::tr1::unordered_set<_Tp> & obj )
+    { return dumpRange( str, obj.begin(), obj.end() ); }
+
+  template<class _Tp>
+    std::ostream & operator<<( std::ostream & str, const std::multiset<_Tp> & obj )
     { return dumpRange( str, obj.begin(), obj.end() ); }
 
   template<class _Tp>
@@ -331,6 +335,10 @@ namespace zypp
 
   template<class _Key, class _Tp>
     std::ostream & operator<<( std::ostream & str, const std::tr1::unordered_map<_Key, _Tp> & obj )
+    { return str << dumpMap( obj ); }
+
+  template<class _Key, class _Tp>
+    std::ostream & operator<<( std::ostream & str, const std::multimap<_Key, _Tp> & obj )
     { return str << dumpMap( obj ); }
 
   /** Print stream status bits.
