@@ -34,6 +34,7 @@ namespace zypp
   class ResPoolProxy
   {
     friend std::ostream & operator<<( std::ostream & str, const ResPoolProxy & obj );
+    friend std::ostream & dumpOn( std::ostream & str, const ResPoolProxy & obj );
     typedef std::multimap<ResKind,ui::Selectable::Ptr> SelectablePool;
 
   public:
@@ -221,6 +222,9 @@ namespace zypp
 
   /** \relates ResPoolProxy Stream output */
   std::ostream & operator<<( std::ostream & str, const ResPoolProxy & obj );
+
+  /** \relates ResPoolProxy Verbose stream output */
+  std::ostream & dumpOn( std::ostream & str, const ResPoolProxy & obj );
 
   /////////////////////////////////////////////////////////////////
 } // namespace zypp

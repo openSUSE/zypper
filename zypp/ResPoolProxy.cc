@@ -12,9 +12,6 @@
 #include <iostream>
 #include "zypp/base/LogTools.h"
 
-#include "zypp/base/Measure.h"
-using zypp::debug::Measure;
-
 #include "zypp/base/Iterator.h"
 #include "zypp/base/Algorithm.h"
 #include "zypp/base/Functional.h"
@@ -93,8 +90,11 @@ namespace zypp
   */
   struct ResPoolProxy::Impl
   {
-    typedef std::tr1::unordered_map<sat::detail::IdType,ui::Selectable::Ptr>
-            SelectableIndex;
+    friend std::ostream & operator<<( std::ostream & str, const Impl & obj );
+    friend std::ostream & dumpOn( std::ostream & str, const Impl & obj );
+
+    typedef std::tr1::unordered_map<sat::detail::IdType,ui::Selectable::Ptr> SelectableIndex;
+    typedef ResPoolProxy::const_iterator const_iterator;
 
   public:
     Impl()
@@ -104,7 +104,6 @@ namespace zypp
     Impl( ResPool pool_r, const pool::PoolImpl & poolImpl_r )
     : _pool( pool_r )
     {
-      Measure( "id2item" );
       const pool::PoolImpl::Id2ItemT & id2item( poolImpl_r.id2item() );
       if ( ! id2item.empty() )
       {
@@ -213,7 +212,26 @@ namespace zypp
   /** \relates ResPoolProxy::Impl Stream output */
   inline std::ostream & operator<<( std::ostream & str, const ResPoolProxy::Impl & obj )
   {
-    return str << "ResPoolProxy::Impl";
+    return str << "ResPoolProxy (" << obj._pool.serial() << ") [" << obj._pool.size()
+               << "solv/" << obj.size()<< "sel]";
+  }
+
+  namespace detail
+  {
+    struct DumpFilter
+    {
+      bool operator()( const ui::Selectable::Ptr & selp ) const
+      { return selp->toModify(); }
+    };
+  }
+
+  /** \relates ResPoolProxy::Impl Verbose stream output */
+  inline std::ostream & dumpOn( std::ostream & str, const ResPoolProxy::Impl & obj )
+  {
+    detail::DumpFilter f;
+    return dumpRange( str << obj << " toModify: ",
+		      make_filter_begin( f, obj ),
+		      make_filter_end( f, obj ) );
   }
 
   ///////////////////////////////////////////////////////////////////
@@ -308,15 +326,11 @@ namespace zypp
   bool ResPoolProxy::diffState( const ResKind & kind_r ) const
   { return _pimpl->diffState( kind_r ); }
 
-  /******************************************************************
-   **
-   **	FUNCTION NAME : operator<<
-   **	FUNCTION TYPE : std::ostream &
-  */
   std::ostream & operator<<( std::ostream & str, const ResPoolProxy & obj )
-  {
-    return str << *obj._pimpl;
-  }
+  { return str << *obj._pimpl; }
+
+  std::ostream & dumpOn( std::ostream & str, const ResPoolProxy & obj )
+  { return dumpOn( str, *obj._pimpl ); }
 
   /////////////////////////////////////////////////////////////////
 } // namespace zypp
