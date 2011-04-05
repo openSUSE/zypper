@@ -241,6 +241,26 @@ namespace zypp
     inline typename MapKVIteratorTraits<_Map>::Value_const_iterator make_map_value_end( const _Map & map_r )
     { return make_transform_iterator( map_r.end(), GetPairSecond<typename _Map::value_type>() ); }
 
+  /** Convenience to create the key iterator from container::lower_bound() */
+  template<class _Map>
+    inline typename MapKVIteratorTraits<_Map>::Key_const_iterator make_map_key_lower_bound( const _Map & map_r, const typename _Map::key_type & key_r )
+    { return make_transform_iterator( map_r.lower_bound( key_r ), GetPairFirst<typename _Map::value_type>() ); }
+
+  /** Convenience to create the key iterator from container::upper_bound() */
+  template<class _Map>
+    inline typename MapKVIteratorTraits<_Map>::Key_const_iterator make_map_key_upper_bound( const _Map & map_r, const typename _Map::key_type & key_r )
+    { return make_transform_iterator( map_r.upper_bound( key_r ), GetPairFirst<typename _Map::value_type>() ); }
+
+  /** Convenience to create the value iterator from container::lower_bound() */
+  template<class _Map>
+    inline typename MapKVIteratorTraits<_Map>::Value_const_iterator make_map_value_lower_bound( const _Map & map_r, const typename _Map::key_type & key_r )
+    { return make_transform_iterator( map_r.lower_bound( key_r ), GetPairSecond<typename _Map::value_type>() ); }
+
+  /** Convenience to create the value iterator from container::upper_bound() */
+  template<class _Map>
+    inline typename MapKVIteratorTraits<_Map>::Value_const_iterator make_map_value_upper_bound( const _Map & map_r, const typename _Map::key_type & key_r )
+    { return make_transform_iterator( map_r.upper_bound( key_r ), GetPairSecond<typename _Map::value_type>() ); }
+
   /** \class function_output_iterator
    * An output iterator wrapping a unary function object; each time an
    * element is written into the dereferenced iterator, it is passed as
