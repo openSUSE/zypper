@@ -1,4 +1,13 @@
 -------------------------------------------------------------------
+Tue Apr  5 12:08:27 CEST 2011 - ma@suse.de
+
+- Switch ResPoolProxy to use multimap in order to allow iteration 
+  of all Selectables of all kinds.
+- Add upper/lower_bound iteration to MapKVIterator.
+- Add stream output for multimap/set.
+- version 9.0.0 (0)
+
+-------------------------------------------------------------------
 Mon Apr  4 15:08:08 CEST 2011 - ma@suse.de
 
 - Update zypp-po.tar.bz2
