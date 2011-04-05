@@ -156,6 +156,7 @@ SATResolver::SATResolver (const ResPool & pool, Pool *SATPool)
 
 SATResolver::~SATResolver()
 {
+  solverEnd();
 }
 
 //---------------------------------------------------------------------------
@@ -594,12 +595,8 @@ SATResolver::solverInit(const PoolItemList & weakItems)
 
     MIL << "SATResolver::solverInit()" << endl;
 
-    if (_solv) {
-	// remove old stuff
-	solver_free(_solv);
-	_solv = NULL;
-	queue_free( &(_jobQueue) );
-    }
+    // remove old stuff
+    solverEnd();
 
     queue_init( &_jobQueue );
     _items_to_install.clear();
@@ -673,10 +670,13 @@ SATResolver::solverInit(const PoolItemList & weakItems)
 void
 SATResolver::solverEnd()
 {
-    // cleanup
+  // cleanup
+  if ( _solv )
+  {
     solver_free(_solv);
     _solv = NULL;
     queue_free( &(_jobQueue) );
+  }
 }
 
 
@@ -740,9 +740,6 @@ SATResolver::resolvePool(const CapabilitySet & requires_caps,
 
     // solving
     bool ret = solving(requires_caps, conflict_caps);
-    // cleanup
-    if (ret)
-	solverEnd(); // remove solver only if no errors happend. Need it for solving problems
 
     (ret?MIL:WAR) << "SATResolver::resolvePool() done. Ret:" << ret <<  endl;
     return ret;
@@ -789,10 +786,6 @@ SATResolver::resolveQueue(const SolverQueueItemList &requestQueue,
 
     // solving
     bool ret = solving();
-
-    // cleanup
-    if (ret)
-	solverEnd(); // remove solver only if no errors happend. Need it for solving problems
 
     MIL << "SATResolver::resolveQueue() done. Ret:" << ret <<  endl;
     return ret;
@@ -880,10 +873,6 @@ void SATResolver::doUpdate()
 	  ERR << "id " << i << " not found in ZYPP pool." << endl;
       }
     }
-
-    // cleanup
-    solverEnd();
-
     MIL << "SATResolver::doUpdate() done" << endl;
 }
 
