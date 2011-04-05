@@ -117,7 +117,7 @@ namespace zypp
           {
             // starting a new Selectable, create the previous one
             ui::Selectable::Ptr p( makeSelectablePtr( cbegin, it ) );
-            _selPool[p->kind()].push_back( p );
+            _selPool.insert( SelectablePool::value_type( p->kind(), p ) );
             _selIndex[cbegin->first] = p;
             // remember new startpoint
             cbegin = it;
@@ -125,7 +125,7 @@ namespace zypp
         }
         // create the final one
         ui::Selectable::Ptr p( makeSelectablePtr( cbegin, id2item.end() ) );
-        _selPool[p->kind()].push_back( p );
+        _selPool.insert( SelectablePool::value_type( p->kind(), p ) );
         _selIndex[cbegin->first] = p;
       }
     }
@@ -140,17 +140,30 @@ namespace zypp
     }
 
   public:
+    bool empty() const
+    { return _selPool.empty(); }
+
+    size_type size() const
+    { return _selPool.size(); }
+
+    const_iterator begin() const
+    { return make_map_value_begin( _selPool ); }
+
+    const_iterator end() const
+    { return make_map_value_end( _selPool ); }
+
+  public:
     bool empty( const ResKind & kind_r ) const
-    { return _selPool[kind_r].empty(); }
+    { return( _selPool.count( kind_r ) == 0 );  }
 
     size_type size( const ResKind & kind_r ) const
-    { return _selPool[kind_r].size(); }
+    { return _selPool.count( kind_r ); }
 
     const_iterator byKindBegin( const ResKind & kind_r ) const
-    { return _selPool[kind_r].begin(); }
+    { return make_map_value_lower_bound( _selPool, kind_r ); }
 
     const_iterator byKindEnd( const ResKind & kind_r ) const
-    { return _selPool[kind_r].end(); }
+    { return make_map_value_upper_bound( _selPool, kind_r ); }
 
   public:
     size_type knownRepositoriesSize() const
@@ -243,6 +256,18 @@ namespace zypp
 
   ui::Selectable::Ptr ResPoolProxy::lookup( const pool::ByIdent & ident_r ) const
   { return _pimpl->lookup( ident_r ); }
+
+  bool ResPoolProxy::empty() const
+  { return _pimpl->empty(); }
+
+  ResPoolProxy::size_type ResPoolProxy::size() const
+  { return _pimpl->size(); }
+
+  ResPoolProxy::const_iterator ResPoolProxy::begin() const
+  { return _pimpl->begin(); }
+
+  ResPoolProxy::const_iterator ResPoolProxy::end() const
+  { return _pimpl->end(); }
 
   bool ResPoolProxy::empty( const ResKind & kind_r ) const
   { return _pimpl->empty( kind_r ); }

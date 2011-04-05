@@ -34,17 +34,14 @@ namespace zypp
   class ResPoolProxy
   {
     friend std::ostream & operator<<( std::ostream & str, const ResPoolProxy & obj );
-
-    typedef std::vector<ui::Selectable::Ptr>  SelectableKinds;
-    typedef std::map<ResKind,SelectableKinds> SelectablePool;
+    typedef std::multimap<ResKind,ui::Selectable::Ptr> SelectablePool;
 
   public:
     /** Implementation  */
     class Impl;
 
-    typedef SelectableKinds::iterator       iterator;
-    typedef SelectableKinds::const_iterator const_iterator;
-    typedef SelectableKinds::size_type      size_type;
+    typedef MapKVIteratorTraits<SelectablePool>::Value_const_iterator const_iterator;
+    typedef SelectablePool::size_type size_type;
 
     typedef ResPool::repository_iterator    repository_iterator;
 
@@ -84,7 +81,16 @@ namespace zypp
     //@}
 
   public:
+    /** \name Iterate through all Selectables of a all kind. */
+    //@{
+    bool empty() const;
+    size_type size() const;
+    const_iterator begin() const;
+    const_iterator end() const;
+    //@}
 
+    /** \name Iterate through all Selectables of a certain kind. */
+    //@{
     /** True if there are items of a certain kind. */
     bool empty( const ResKind & kind_r ) const;
 
@@ -99,8 +105,6 @@ namespace zypp
       size_type size() const
       { return size( ResTraits<_Res>::kind ); }
 
-    /** \name Iterate through all Selectables of a certain kind. */
-    //@{
     const_iterator byKindBegin( const ResKind & kind_r ) const;
 
     template<class _Res>
