@@ -111,11 +111,13 @@ ${INDENT} */
 ${INDENT}class ${CLASS} : protected base::SafeBool<${CLASS}>, private base::NonCopyable
 ${INDENT}{
 ${INDENT}  friend std::ostream & operator<<( std::ostream & str, const ${CLASS} & obj );
+${INDENT}  friend std::ostream & dumpOn( std::ostream & str, const ${CLASS} & obj );
 ${INDENT}  friend bool operator==( const ${CLASS} & lhs, const ${CLASS} & rhs );
 
 ${INDENT}  public:
 ${INDENT}    /** Default ctor */
 ${INDENT}    ${CLASS}();
+
 ${INDENT}    /** Dtor */
 ${INDENT}    ~${CLASS}();
 
@@ -143,6 +145,9 @@ ${INDENT}};
 
 ${INDENT}/** \relates ${CLASS} Stream output */
 ${INDENT}std::ostream & operator<<( std::ostream & str, const ${CLASS} & obj );
+
+${INDENT}/** \relates ${CLASS} Verbose stream output */
+${INDENT}std::ostream & dumOn( std::ostream & str, const ${CLASS} & obj );
 
 ${INDENT}/** \relates ${CLASS} */
 ${INDENT}bool operator==( const ${CLASS} & lhs, const ${CLASS} & rhs );
@@ -174,6 +179,10 @@ ${INDENT}/** ${CLASS} implementation.
 ${INDENT} */
 ${INDENT}struct ${CLASS}::Impl
 ${INDENT}{
+${INDENT}  friend std::ostream & operator<<( std::ostream & str, const Impl & obj );
+${INDENT}  friend std::ostream & dumpOn( std::ostream & str, const Impl & obj );
+
+${INDENT}  public:
 
 ${INDENT}  public:
 ${INDENT}    /** Offer default Impl. */
@@ -182,7 +191,6 @@ ${INDENT}    {
 ${INDENT}      static shared_ptr<Impl> _nullimpl( new Impl );
 ${INDENT}      return _nullimpl;
 ${INDENT}    }
-
 ${INDENT}  private:
 ${INDENT}    friend Impl * rwcowClone<Impl>( const Impl * rhs );
 ${INDENT}    /** clone for RWCOW_pointer */
@@ -193,6 +201,10 @@ ${INDENT}};
 ${INDENT}/** \relates ${CLASS}::Impl Stream output */
 ${INDENT}inline std::ostream & operator<<( std::ostream & str, const ${CLASS}::Impl & obj )
 ${INDENT}{ return str << "${CLASS}::Impl"; }
+
+${INDENT}/** \relates ${CLASS}::Impl Verbose stream output */
+${INDENT}inline std::ostream & dumpOn( std::ostream & str, const ${CLASS}::Impl & obj )
+${INDENT}{ return str << obj; }
 
 ${INDENT}///////////////////////////////////////////////////////////////////
 ${INDENT}//
@@ -209,6 +221,9 @@ ${INDENT}{}
 
 ${INDENT}std::ostream & operator<<( std::ostream & str, const ${CLASS} & obj )
 ${INDENT}{ return str << *obj._pimpl; }
+
+${INDENT}std::ostream & dumpOn( std::ostream & str, const ${CLASS} & obj )
+${INDENT}{ return dumpOn( str, *obj._pimpl ); }
 
 ${INDENT}bool operator==( const ${CLASS} & lhs, const ${CLASS} & rhs )
 ${INDENT}{ return lhs._pimpl == rhs._pimpl || lhs._pimpl && rhs._pimpl && *lhs._pimpl == *rhs._pimpl; }
