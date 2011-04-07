@@ -1676,6 +1676,7 @@ void Zypper::processCommandOptions()
       {"bz",                        required_argument, 0, 'b'},
       {"bugzilla",                  required_argument, 0, 'b'},
       {"cve",                       required_argument, 0,  0 },
+      {"category",                  required_argument, 0, 'g'},
       {"help", no_argument, 0, 'h'},
       {0, 0, 0, 0}
     };
@@ -1695,6 +1696,7 @@ void Zypper::processCommandOptions()
       "                            See man zypper for more details.\n"
       "-b, --bugzilla #            Install patch fixing the specified bugzilla issue.\n"
       "    --cve #                 Install patch fixing the specified CVE issue.\n"
+      "-g  --category <category>   Install all patches in this category.\n"
       "    --debug-solver          Create solver test case for debugging.\n"
       "    --no-recommends         Do not install recommended packages, only required.\n"
       "    --recommends            Install also recommended packages in addition\n"
@@ -1715,6 +1717,7 @@ void Zypper::processCommandOptions()
       {"bz",          optional_argument, 0, 'b'},
       {"bugzilla",    optional_argument, 0, 'b'},
       {"cve",         optional_argument, 0,  0 },
+      {"category",    required_argument, 0, 'g'},
       {"issues",      optional_argument, 0,  0 },
       {"all",         no_argument,       0, 'a'},
       {"help", no_argument, 0, 'h'},
@@ -1729,6 +1732,7 @@ void Zypper::processCommandOptions()
       "  Command options:\n"
       "-b, --bugzilla[=#]         List needed patches for Bugzilla issues.\n"
       "    --cve[=#]              List needed patches for CVE issues.\n"
+      "-g  --category <category>  List all patches in this category.\n"
       "    --issues[=string]      Look for issues matching the specified string.\n"
       "-a, --all                  List all patches, not only the needed ones.\n"
       "-r, --repo <alias|#|URI>   List only patches from the specified repository.\n"
@@ -3952,9 +3956,6 @@ void Zypper::doCommand()
       return;
     }
 
-    if (_copts.count("category"))
-      report_dummy_option(out(), "category");
-
     // rug compatibility code
     // switch on non-interactive mode if no-confirm specified
     if (copts.count("no-confirm"))
@@ -4065,6 +4066,20 @@ void Zypper::doCommand()
         sropts.force = true;
       sropts.best_effort = best_effort;
       sropts.skip_interactive = skip_interactive; // bcn #647214
+
+      // if --category is specified
+      {
+	parsed_opts::const_iterator optit;
+	optit = copts.find("category");
+	if (optit != copts.end())
+	{
+	  for_(i, optit->second.begin(), optit->second.end())
+	  {
+	    sropts.category = *i;
+	    break;
+	  }
+	}
+      }
 
       SolverRequester sr(sropts);
       if (arguments().empty())

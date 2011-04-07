@@ -91,6 +91,11 @@ public:
      */
     bool skip_interactive;
 
+    /**
+     * Whether to skip patches not in this category
+     */
+    std::string category;
+
     /** Whether to ignore vendor when selecting packages */
     bool allow_vendor_change;
 
@@ -172,6 +177,11 @@ public:
        * the unwanted patch.
        */
       PATCH_UNWANTED,
+
+      /**
+       * Patch is not in the specified category
+       */
+      PATCH_WRONG_CAT,
 
       // ********** zypp requests *********************************************
 

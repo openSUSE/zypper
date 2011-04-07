@@ -182,6 +182,32 @@ static bool list_patch_updates(Zypper & zypper)
 {
   bool all = zypper.cOpts().count("all");
 
+  // if --category is specified
+  string category;
+  {
+    parsed_opts::const_iterator it;
+    it = zypper.cOpts().find("category");
+    if (it != zypper.cOpts().end())
+    {
+      for_(i, it->second.begin(), it->second.end())
+      {
+        category = *i;
+        break;
+      }
+    }
+    else {
+      it = zypper.cOpts().find("g");
+      if (it != zypper.cOpts().end())
+      {
+        for_(i, it->second.begin(), it->second.end())
+        {
+          category = *i;
+          break;
+        }
+      }
+    }
+  }
+
   Table tbl;
   Table pm_tbl; // only those that affect packagemanager (restartSuggested()), they have priority
   TableHeader th;
@@ -205,6 +231,12 @@ static bool list_patch_updates(Zypper & zypper)
     if (all || (it->isBroken() && !it->isUnwanted()))
     {
       Patch::constPtr patch = asKind<Patch>(res);
+
+      if (!category.empty() && category != patch->category())
+      {
+        DBG << "candidate patch " << patch << " is not in the specified category" << endl;
+        continue;
+      }
 
       {
         TableRow tr (cols);

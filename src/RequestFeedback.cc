@@ -208,6 +208,14 @@ string SolverRequester::Feedback::asUserString(
         pname.str().c_str(), cmd1.c_str(), cmd2.c_str());
   }
 
+  case PATCH_WRONG_CAT:
+  {
+    ostringstream pname;
+    pname << _objsel->name() << "-" << _objsel->edition();
+    return str::form(_("Patch '%s' is not in the specified category."),
+	pname.str().c_str());
+  }
+
   case SET_TO_INSTALL:
     return str::form(
         _("Selecting '%s' from repository '%s' for installation."),
@@ -264,6 +272,7 @@ void SolverRequester::Feedback::print(
   case SELECTED_IS_OLDER:
   case PATCH_NOT_NEEDED:
   case PATCH_UNWANTED:
+  case PATCH_WRONG_CAT:
   case FORCED_INSTALL:
     out.info(asUserString(opts));
     break;
