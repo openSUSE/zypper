@@ -1,4 +1,10 @@
 -------------------------------------------------------------------
+Thu Apr 07 14:40:34 CET 2011 - dheidler@suse.de
+
+- zypper patch/lp category filter (fate#310085)
+- 1.5.5
+
+-------------------------------------------------------------------
 Fri Mar 18 13:14:34 UTC 2011 - dmacvicar@suse.de
 
 - zypper -n display license interactively (bnc#660001)
