@@ -189,7 +189,11 @@ rm -rf "$RPM_BUILD_ROOT"
 cd build
 make install DESTDIR=$RPM_BUILD_ROOT
 make -C doc/autodoc install DESTDIR=$RPM_BUILD_ROOT
+%if 0%{?fedora_version}
+ln -s %{_sysconfdir}/yum.repos.d $RPM_BUILD_ROOT%{_sysconfdir}/zypp/repos.d
+%else
 mkdir -p $RPM_BUILD_ROOT%{_sysconfdir}/zypp/repos.d
+%endif
 mkdir -p $RPM_BUILD_ROOT%{_sysconfdir}/zypp/services.d
 mkdir -p $RPM_BUILD_ROOT%{_prefix}/lib/zypp
 mkdir -p $RPM_BUILD_ROOT%{_prefix}/lib/zypp/plugins
@@ -280,7 +284,11 @@ rm -rf "$RPM_BUILD_ROOT"
 %files -f zypp.lang
 %defattr(-,root,root)
 %dir               %{_sysconfdir}/zypp
+%if 0%{?fedora_version}
+%{_sysconfdir}/zypp/repos.d
+%else
 %dir               %{_sysconfdir}/zypp/repos.d
+%endif
 %dir               %{_sysconfdir}/zypp/services.d
 %config(noreplace) %{_sysconfdir}/zypp/zypp.conf
 %config(noreplace) %{_sysconfdir}/zypp/systemCheck
