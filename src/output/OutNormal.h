@@ -9,6 +9,8 @@
 #define OUTNORMAL_H_
 
 #include "Out.h"
+#include <termios.h>
+#include <sys/ioctl.h>
 
 class OutNormal : public Out
 {
@@ -77,12 +79,17 @@ private:
   bool infoWarningFilter(Verbosity verbosity, Type mask);
   void displayProgress(const std::string & s, int percent);
   void displayTick(const std::string & s);
+  /* Return current terminal width
+   * or return 10000 when failed */
+  unsigned int termwidth() const;
 
   bool _use_colors;
   bool _isatty;
   /* Newline flag. false if the last output did not end with new line character
    * (like in a self-overwriting progress line), false otherwise. */
   bool _newline;
+  /* True if the last output line was longer than the terminal width */
+  bool _oneup;
 };
 
 #endif /*OUTNORMAL_H_*/
