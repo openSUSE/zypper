@@ -1,4 +1,10 @@
 -------------------------------------------------------------------
+Mon Apr 11 16:48:34 CET 2011 - dheidler@suse.de
+
+- detect terminal linebreak when printing status (bnc#304282)
+- 1.5.6
+
+-------------------------------------------------------------------
 Thu Apr 07 14:40:34 CET 2011 - dheidler@suse.de
 
 - zypper patch/lp category filter (fate#310085)
