@@ -25,7 +25,7 @@ using namespace std;
 
 OutNormal::OutNormal(Verbosity verbosity)
   : Out(TYPE_NORMAL, verbosity),
-    _use_colors(false), _isatty(isatty(STDOUT_FILENO)), _newline(true)
+    _use_colors(false), _isatty(isatty(STDOUT_FILENO)), _newline(true), _oneup(false)
 {}
 
 OutNormal::~OutNormal()
@@ -123,13 +123,27 @@ void OutNormal::displayProgress (const string & s, int percent)
 
   if (_isatty)
   {
-    cout << CLEARLN << s << " [";
+    string outline = s + " [";
     // dont display percents if invalid
     if (percent >= 0 && percent <= 100)
-      cout << percent << "%";
+    {
+      std::ostringstream oss;
+      oss << percent << "%";
+      outline += oss.str();
+    }
     else
-      cout << ++cursor;
-    cout << "]";
+    {
+      ++cursor;
+      outline += cursor.current();
+    }
+    outline += "]";
+
+    if(_oneup)
+      cout << CLEARLN << CURSORUP(1) << CLEARLN << outline;
+    else
+      cout << CLEARLN << outline;
+
+    _oneup = (outline.length() >= termwidth());
   }
   else
     cout << '.';
@@ -144,11 +158,20 @@ void OutNormal::displayTick (const string & s)
 
   if (_isatty)
   {
-    cout << CLEARLN << s << " [" << ++cursor << "]";
-    cout << std::flush;
+    string outline = s + " [";
+    ++cursor;
+    outline += cursor.current();
+    outline += "]";
+    if(_oneup)
+      cout << CLEARLN << CURSORUP(1) << CLEARLN << outline;
+    else
+      cout << CLEARLN << outline;
+
+    _oneup = (outline.length() >= termwidth());
   }
   else
-    cout << '.' << std::flush;
+    cout << '.';
+  cout << std::flush;
 }
 
 // ----------------------------------------------------------------------------
@@ -193,7 +216,16 @@ void OutNormal::progressEnd(const std::string & id, const string & label, bool e
     cout << get_color(COLOR_CONTEXT_MSG_STATUS);
 
   if (_isatty)
-    cout << CLEARLN << label << " [";
+  {
+    if(_oneup)
+    {
+      cout << CLEARLN << CURSORUP(1) << CLEARLN;
+      _oneup = false;
+    }
+    else
+      cout << CLEARLN;
+    cout << label << " [";
+  }
 
   if (error)
     print_color(_("error"), COLOR_CONTEXT_NEGATIVE);
@@ -348,4 +380,17 @@ void OutNormal::promptHelp(const PromptOptions & poptions)
   cout << endl << poptions.optionString() << ": " << std::flush;
   // prompt ends with newline (user hits <enter>) unless exited abnormaly
   _newline = true;
+}
+
+unsigned int OutNormal::termwidth() const {
+  if(!_isatty)
+    return 10000;
+  else
+  {
+    struct winsize wns;
+    if (!ioctl(1, TIOCGWINSZ, &wns))
+      return wns.ws_col;
+    else
+      return 10000;
+  }
 }
