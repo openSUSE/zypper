@@ -3129,13 +3129,23 @@ void load_repo_resolvables(Zypper & zypper)
 
       if (error)
       {
-        ostringstream s;
-        s << format(_("Problem loading data from '%s'"))
-            % (zypper.config().show_alias ? repo.alias() : repo.name()) << endl;
-        s << format(_("Resolvables from '%s' not loaded because of error."))
-            % (zypper.config().show_alias ? repo.alias() : repo.name());
-        zypper.out().error(s.str());
-        continue;
+        zypper.out().error(boost::str(format(
+        _("Problem loading data from '%s'"))
+        % (zypper.config().show_alias ? repo.alias() : repo.name())));
+
+        if (geteuid() != 0 && !zypper.globalOpts().changedRoot && manager.isCached(repo))
+        {
+          zypper.out().warning(boost::str(format(
+            _("Repository '%s' could not be refreshed. Using old cache."))
+            % (zypper.config().show_alias ? repo.alias() : repo.name())));
+        }
+        else
+        {
+          zypper.out().error(boost::str(format(
+          _("Resolvables from '%s' not loaded because of error."))
+          % (zypper.config().show_alias ? repo.alias() : repo.name())));
+          continue;
+        }
       }
 
       manager.loadFromCache(repo);
