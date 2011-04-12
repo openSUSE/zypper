@@ -13,11 +13,15 @@
 #include <set>
 
 #include "zypp/base/LogTools.h"
+#include "zypp/base/LogControl.h"
 #include "zypp/sat/Solvable.h"
 #include "zypp/sat/WhatObsoletes.h"
 #include "zypp/pool/GetResolvablesToInsDel.h"
 #include "zypp/pool/PoolStats.h"
 #include "zypp/solver/detail/InstallOrder.h"
+
+#include "zypp/Resolver.h"
+#include "zypp/sat/Transaction.h"
 
 using std::endl;
 using zypp::solver::detail::InstallOrder;
@@ -69,6 +73,7 @@ namespace zypp
     //
     GetResolvablesToInsDel::GetResolvablesToInsDel( ResPool pool_r, Order order_r )
     {
+      zypp::base::LogControl::TmpLineWriter shutUp;
       typedef std::set<PoolItem> PoolItemSet;
 
       PoolItemList & dellist_r( _toDelete );
@@ -300,6 +305,42 @@ namespace zypp
           ERR << "***************** Lost packages in InstallOrder sort." << endl;
         }
 
+    }
+
+    void GetResolvablesToInsDel::debugDiffTransaction() const
+    {
+      SEC << "START debugDiffTransaction" << endl;
+      sat::Transaction trans( ResPool::instance().resolver().getTransaction() );
+
+      {
+	const PoolItemList & clist( _toDelete );
+	for_( it, clist.begin(), clist.end() )
+	{
+	  sat::Transaction::const_iterator ci( trans.find( *it ) );
+	  if ( ci == trans.end() )
+	    ERR << "Missing to del in NEW trans: " << *it << endl;
+	}
+      }
+      {
+	const PoolItemList & clist( _toInstall );
+	for_( it, clist.begin(), clist.end() )
+	{
+	  sat::Transaction::const_iterator ci( trans.find( *it ) );
+	  if ( ci == trans.end() )
+	    ERR << "Missing to ins in NEW trans: " << *it << endl;
+	}
+      }
+      {
+	const PoolItemList & clist( _toSrcinstall );
+	for_( it, clist.begin(), clist.end() )
+	{
+	  sat::Transaction::const_iterator ci( trans.find( *it ) );
+	  if ( ci == trans.end() )
+	    ERR << "Missing srcins in NEW trans: " << *it << endl;
+	}
+      }
+
+      SEC << "END debugDiffTransaction" << endl;
     }
 
     /******************************************************************

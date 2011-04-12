@@ -16,6 +16,7 @@
 #include <list>
 
 #include "zypp/ResPool.h"
+#include "zypp/base/Deprecated.h"
 
 ///////////////////////////////////////////////////////////////////
 namespace zypp
@@ -31,10 +32,10 @@ namespace zypp
     /** Collect transacting items and sort according to prereqs and
      *  media access.
      *
-     * \todo Replace \c enum \c Order and take a functor that
-     * that determines how to group the resolvables.
+     * \deprecated Use class \ref sat::Transaction which does a better job
+     *             esp. when packages are to be deleted.
      */
-    struct GetResolvablesToInsDel
+    struct ZYPP_DEPRECATED GetResolvablesToInsDel
     {
       typedef std::list<PoolItem> PoolItemList;
 
@@ -50,6 +51,9 @@ namespace zypp
       /** */
       GetResolvablesToInsDel( ResPool pool_r,
                               Order order_r = ORDER_BY_SOURCE );
+
+      /** Diff with new style \ref Transacrion and write result to log. */
+      void debugDiffTransaction() const;
 
       PoolItemList _toDelete;
       PoolItemList _toInstall;
