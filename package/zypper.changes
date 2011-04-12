@@ -1,4 +1,11 @@
 -------------------------------------------------------------------
+Thu Apr 12 16:39:34 CET 2011 - dheidler@suse.de
+
+- use old repo cache when refresh failed for non-root users
+  (see bnc#683509)
+- 1.5.7
+
+-------------------------------------------------------------------
 Mon Apr 11 16:48:34 CET 2011 - dheidler@suse.de
 
 - detect terminal linebreak when printing status (bnc#304282)
