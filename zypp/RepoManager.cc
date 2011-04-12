@@ -941,10 +941,19 @@ namespace zypp
         }
 
         Pathname mediarootpath = rawcache_path_for_repoinfo( _pimpl->options, info );
-        filesystem::assert_dir(mediarootpath);
+        if( filesystem::assert_dir(mediarootpath) )
+        {
+          Exception ex(str::form( _("Can't create %s"), mediarootpath.c_str()) );
+          ZYPP_THROW(ex);
+        }
 
         // create temp dir as sibling of mediarootpath
         filesystem::TmpDir tmpdir( filesystem::TmpDir::makeSibling( mediarootpath ) );
+        if( tmpdir.path().empty() )
+        {
+          Exception ex(_("Can't create metadata cache directory."));
+          ZYPP_THROW(ex);
+        }
 
         if ( ( repokind.toEnum() == RepoType::RPMMD_e ) ||
              ( repokind.toEnum() == RepoType::YAST2_e ) )
@@ -1053,7 +1062,11 @@ namespace zypp
     Pathname mediarootpath = rawcache_path_for_repoinfo( _pimpl->options, info );
     Pathname productdatapath = rawproductdata_path_for_repoinfo( _pimpl->options, info );
 
-    filesystem::assert_dir(_pimpl->options.repoCachePath);
+    if( filesystem::assert_dir(_pimpl->options.repoCachePath) )
+    {
+      Exception ex(str::form( _("Can't create %s"), _pimpl->options.repoCachePath.c_str()) );
+      ZYPP_THROW(ex);
+    }
     RepoStatus raw_metadata_status = metadataStatus(info);
     if ( raw_metadata_status.empty() )
     {
@@ -1098,7 +1111,18 @@ namespace zypp
     MIL << info.alias() << " building cache..." << info.type() << endl;
 
     Pathname base = solv_path_for_repoinfo( _pimpl->options, info);
-    filesystem::assert_dir(base);
+
+    if( filesystem::assert_dir(base) )
+    {
+      Exception ex(str::form( _("Can't create %s"), base.c_str()) );
+      ZYPP_THROW(ex);
+    }
+
+    if( ! PathInfo(base).userMayW() )
+    {
+      Exception ex(str::form( _("Can't create cache at %s - no writing permissions."), base.c_str()) );
+      ZYPP_THROW(ex);
+    }
     Pathname solvfile = base / "solv";
 
     // do we have type?
