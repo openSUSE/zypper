@@ -39,6 +39,12 @@ namespace zypp
       {}
 
       explicit
+      IMediaKey( const PoolItem & obj_r )
+      : _repo( obj_r->repository() )
+      , _mediaNr( obj_r->mediaNr() )
+      {}
+
+      explicit
       IMediaKey( const ResObject::constPtr & obj_r )
       : _repo( obj_r->repository() )
       , _mediaNr( obj_r->mediaNr() )
@@ -79,14 +85,12 @@ namespace zypp
       typedef std::map<PoolItem,ManagedFile>     CacheMap;
 
     public:
-      CommitPackageCacheReadAhead( const_iterator          begin_r,
-                                   const_iterator          end_r,
-                                   const Pathname &        rootDir_r,
+      CommitPackageCacheReadAhead( const Pathname &        rootDir_r,
                                    const PackageProvider & packageProvider_r );
 
     public:
       /** Provide the package. Either from Source or from cache. */
-      virtual ManagedFile get( const_iterator citem_r );
+      virtual ManagedFile get( const PoolItem & citem_r );
 
     private:
       /** Return whether \a pi is located on a CD/DVD */
@@ -98,16 +102,15 @@ namespace zypp
        * Performs the read ahead of packages trying to avoid the necessity
        * of switching back to the current media later.
       */
-      void cacheLastInteractive( const_iterator citem_r );
+      void cacheLastInteractive( const PoolItem & citem_r );
 
       /** cacheLastInteractive helper . */
-      void doCacheLastInteractive( const_iterator citem_r );
+      void doCacheLastInteractive( const PoolItem & citem_r );
 
     private:
       DefaultIntegral<unsigned,0> _dbgChanges;
 
-      const_iterator       _commitListEnd;
-      IMediaKey            _lastInteractive;
+      IMediaKey                      _lastInteractive;
 
       Pathname                       _rootDir;
       shared_ptr<filesystem::TmpDir> _cacheDir;

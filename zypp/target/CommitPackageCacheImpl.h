@@ -39,7 +39,6 @@ namespace zypp
     class CommitPackageCache::Impl
     {
     public:
-      typedef CommitPackageCache::const_iterator   const_iterator;
       typedef CommitPackageCache::PackageProvider  PackageProvider;
 
     public:
@@ -54,14 +53,17 @@ namespace zypp
       /** Provide the package.
        * Derived classes overload this.
       */
-      virtual ManagedFile get( const_iterator citem_r )
+      virtual ManagedFile get( const PoolItem & citem_r )
       {
-        return sourceProvidePackage( *citem_r );
+        return sourceProvidePackage( citem_r );
       }
+
+      void setCommitList( std::vector<sat::Solvable> commitList_r )
+      { _commitList = commitList_r; }
 
     protected:
       /** Let the Source provide the package. */
-      ManagedFile sourceProvidePackage( const PoolItem & pi ) const
+      virtual ManagedFile sourceProvidePackage( const PoolItem & pi ) const
       {
         if ( ! _packageProvider )
           {
@@ -76,6 +78,9 @@ namespace zypp
 
         return ret;
       }
+
+    protected:
+      std::vector<sat::Solvable> _commitList;
 
     private:
       PackageProvider _packageProvider;

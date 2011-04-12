@@ -49,12 +49,9 @@ namespace zypp
     //	METHOD NAME : CommitPackageCacheReadAhead::CommitPackageCacheReadAhead
     //	METHOD TYPE : Ctor
     //
-    CommitPackageCacheReadAhead::CommitPackageCacheReadAhead( const_iterator          begin_r,
-                                                              const_iterator          end_r,
-                                                              const Pathname &        rootDir_r,
+    CommitPackageCacheReadAhead::CommitPackageCacheReadAhead( const Pathname &        rootDir_r,
                                                               const PackageProvider & packageProvider_r )
     : CommitPackageCache::Impl( packageProvider_r )
-    , _commitListEnd( end_r )
     , _rootDir( rootDir_r )
     {}
 
@@ -78,7 +75,7 @@ namespace zypp
     //	METHOD NAME : CommitPackageCacheReadAhead::cacheLastInteractive
     //	METHOD TYPE : void
     //
-    void CommitPackageCacheReadAhead::cacheLastInteractive( const_iterator citem_r )
+    void CommitPackageCacheReadAhead::cacheLastInteractive( const PoolItem & citem_r )
     {
       // Fill cache errors are never proagated.
       try
@@ -97,23 +94,24 @@ namespace zypp
     //	METHOD NAME : CommitPackageCacheReadAhead::doCacheLastInteractive
     //	METHOD TYPE : void
     //
-    void CommitPackageCacheReadAhead::doCacheLastInteractive( const_iterator citem_r )
+    void CommitPackageCacheReadAhead::doCacheLastInteractive( const PoolItem & citem_r )
     {
       CacheMap  addToCache;
       ByteCount addSize;
 
       // Collect all remaining packages to install from
       // _lastInteractive media. (just the PoolItem data)
-      for ( const_iterator it = citem_r; it != _commitListEnd; ++it )
+      for_( it,_commitList.begin(), _commitList.end() )
         {
-          if ( IMediaKey( *it ) == _lastInteractive
-               && isKind<Package>(it->resolvable())
-               && it->status().isToBeInstalled() )
+	  PoolItem pi( *it );
+          if ( IMediaKey( pi ) == _lastInteractive
+               && isKind<Package>(pi.resolvable())
+               && pi.status().isToBeInstalled() )
             {
-              if ( _cacheMap.find( *it ) == _cacheMap.end() )
+              if ( _cacheMap.find( pi ) == _cacheMap.end() )
                 {
-                  addToCache[*it];
-                  addSize += it->resolvable()->downloadSize();
+                  addToCache[pi];
+                  addSize += pi->downloadSize();
                 }
             }
         }
@@ -190,16 +188,16 @@ namespace zypp
     //	METHOD NAME : CommitPackageCacheReadAhead::get
     //	METHOD TYPE : ManagedFile
     //
-    ManagedFile CommitPackageCacheReadAhead::get( const_iterator citem_r )
+    ManagedFile CommitPackageCacheReadAhead::get( const PoolItem & citem_r )
     {
       // Non CD/DVD media provide their packages without cache.
-      if ( ! onInteractiveMedia( *citem_r ) )
+      if ( ! onInteractiveMedia( citem_r ) )
         {
-          return sourceProvidePackage( *citem_r );
+          return sourceProvidePackage( citem_r );
         }
 
       // Check whether it's cached.
-      CacheMap::iterator it = _cacheMap.find( *citem_r );
+      CacheMap::iterator it = _cacheMap.find( citem_r );
       if ( it != _cacheMap.end() )
         {
           // ManagedFile delivered to the application is removed
@@ -223,7 +221,7 @@ namespace zypp
       // In case we have to change the media to provide the requested
       // file, try to cache files from the current media, that are
       // required later.
-      IMediaKey current( *citem_r );
+      IMediaKey current( citem_r );
       if ( current != _lastInteractive )
         {
           if ( _lastInteractive != IMediaKey() )
@@ -237,7 +235,7 @@ namespace zypp
         }
 
       // Provide and return the file from media.
-      return sourceProvidePackage( *citem_r );
+      return sourceProvidePackage( citem_r );
     }
 
 

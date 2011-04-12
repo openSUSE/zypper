@@ -13,7 +13,6 @@
 #define ZYPP_TARGET_COMMITPACKAGECACHE_H
 
 #include <iosfwd>
-#include <list>
 
 #include "zypp/base/PtrTypes.h"
 #include "zypp/base/Function.h"
@@ -40,22 +39,26 @@ namespace zypp
       friend std::ostream & operator<<( std::ostream & str, const CommitPackageCache & obj );
 
     public:
-      typedef std::list<PoolItem>::const_iterator          const_iterator;
       typedef function<ManagedFile( const PoolItem & pi )> PackageProvider;
 
     public:
       /** Ctor */
-      CommitPackageCache( const_iterator          begin_r,
-                          const_iterator          end_r,
-                          const Pathname &        rootDir_r,
+      CommitPackageCache( const Pathname &        rootDir_r,
                           const PackageProvider & packageProvider_r );
 
       /** Dtor */
       ~CommitPackageCache();
 
     public:
+      /** Download(commit) sequence of solvables to compute read ahead. */
+      void setCommitList( std::vector<sat::Solvable> commitList_r );
+      /** \overload */
+      template <class _Iterator>
+      void setCommitList( _Iterator begin_r, _Iterator end_r )
+      { setCommitList( std::vector<sat::Solvable>( begin_r, end_r  ) ); }
+
       /** Provide a package. */
-      ManagedFile get( const_iterator citem_r );
+      ManagedFile get( const PoolItem & citem_r );
 
     public:
       /** Implementation. */

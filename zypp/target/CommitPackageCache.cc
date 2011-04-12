@@ -32,25 +32,13 @@ namespace zypp
     //
     ///////////////////////////////////////////////////////////////////
 
-    ///////////////////////////////////////////////////////////////////
-    //
-    //	METHOD NAME : CommitPackageCache::CommitPackageCache
-    //	METHOD TYPE : Ctor
-    //
     CommitPackageCache::CommitPackageCache( Impl * pimpl_r )
     : _pimpl( pimpl_r )
     {
       assert( _pimpl );
     }
 
-    ///////////////////////////////////////////////////////////////////
-    //
-    //	METHOD NAME : CommitPackageCache::CommitPackageCache
-    //	METHOD TYPE : Ctor
-    //
-    CommitPackageCache::CommitPackageCache( const_iterator          begin_r,
-                                            const_iterator          end_r,
-                                            const Pathname &        rootDir_r,
+    CommitPackageCache::CommitPackageCache( const Pathname &        rootDir_r,
                                             const PackageProvider & packageProvider_r )
     {
       if ( getenv("ZYPP_COMMIT_NO_PACKAGE_CACHE") )
@@ -60,26 +48,20 @@ namespace zypp
         }
       else
         {
-          _pimpl.reset( new CommitPackageCacheReadAhead( begin_r, end_r,
-                                                         rootDir_r, packageProvider_r ) );
+          _pimpl.reset( new CommitPackageCacheReadAhead( rootDir_r, packageProvider_r ) );
         }
       assert( _pimpl );
     }
 
-    ///////////////////////////////////////////////////////////////////
-    //
-    //	METHOD NAME : CommitPackageCache::~CommitPackageCache
-    //	METHOD TYPE : Dtor
-    //
     CommitPackageCache::~CommitPackageCache()
     {}
 
-    ///////////////////////////////////////////////////////////////////
-    //
-    //	METHOD NAME : CommitPackageCache::~CommitPackageCache
-    //	METHOD TYPE : Dtor
-    //
-    ManagedFile CommitPackageCache::get( const_iterator citem_r )
+    void CommitPackageCache::setCommitList( std::vector<sat::Solvable> commitList_r )
+    {
+      _pimpl->setCommitList( commitList_r );
+    }
+
+    ManagedFile CommitPackageCache::get( const PoolItem & citem_r )
     { return _pimpl->get( citem_r ); }
 
     /******************************************************************
