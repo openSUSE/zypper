@@ -14,7 +14,8 @@ stream-element =
       install-summary-element* | # for zypper install/remove/update
       repo-list-element? |       # for zypper repos
       service-list-element? |
-      selectable-list-element? | # for zypper search
+      selectable-list-element? |
+      search-result-element? |   # for zypper search
       selectable-info-element? | # for zypper info
 
       # random text can appear between tags - this text should be ignored
@@ -107,15 +108,28 @@ patch-update =
     attribute interactive { xsd:boolean } # needs user interaction?
   }
 
+search-result-element =
+  element search-result {
+    attribute version {xsd:string},
+    solvable-list-element
+  }
+
+solvable-list-element =
+  element solvable-list {
+    solvable-element*
+  }
+
 solvable-element =
   element solvable {
-    attribute type { "package" | "patch" | "pattern" | "product" },
+    attribute status { "installed" | "other-version" | "not-installed" },
+    attribute kind { "package" | "patch" | "pattern" | "product" },
     attribute name { xsd:string },
     attribute edition { xsd:string },      # target edition
     attribute edition-old { xsd:string }?, # currently installed version in case of upgrade
     attribute arch { xsd:string },
     attribute arch-old { xsd:string }?,    # currently installed architecture
     attribute summary { xsd:string }?,
+    attribute repository { xsd:string }?,
     text?
   }
 

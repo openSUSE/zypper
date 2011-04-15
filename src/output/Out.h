@@ -11,25 +11,27 @@
 
 #include "output/prompt.h"
 
+class Table;
+
 /**
  * Base class for producing common (for now) zypper output.
- * 
+ *
  * This is an abstract class providing interface for writing output like
  * info messages, warnings, error messages, user prompts, progress reports,
  * and download progress reports. See descriptions of the methods for more
  * details.
- * 
+ *
  * The output is produced using Out derived class instances.
- * 
+ *
  * <code>
- * 
+ *
  * // create output object
  * SomePointerType<Out> out;
  * if (options.count("xmlout"))
  *   out = new OutXML();
  * else
  *   out = new OutNormal();
- * 
+ *
  * out->info("output instance ready to use", Out::HIGH);
  * out->info("Doing foo");
  * try
@@ -83,7 +85,7 @@ public:
 public:
   /**
    * Show an info message.
-   * 
+   *
    * \param msg       The message to be displayed.
    * \param verbosity Minimal level o verbosity in which the message will be
    *                  shown. Out::QUIET means the message will be always be
@@ -92,13 +94,13 @@ public:
    *                  (-vv).
    * \param mask      Determines the types of output for which is this message
    *                  intended. By default, the message will be shown in all
-   *                  types of output. 
+   *                  types of output.
    */
   virtual void info(const std::string & msg, Verbosity verbosity = NORMAL, Type mask = TYPE_ALL) = 0;
 
   /**
    * Show a warning.
-   * 
+   *
    * \param msg       The warning message to be displayed.
    * \param verbosity Minimal level o verbosity in which the message will be
    *                  shown. Out::QUIET means the message will be always be
@@ -107,15 +109,15 @@ public:
    *                  (-vv).
    * \param mask      Determines the types of output for which is this message
    *                  intended. By default, the message will be shown in all
-   *                  types of output. 
+   *                  types of output.
    */
   virtual void warning(const std::string & msg, Verbosity verbosity = NORMAL, Type mask = TYPE_ALL) = 0;
 
   /**
    * Show an error message and an optional hint.
-   * 
+   *
    * An error message should be shown regardless of the verbosity level.
-   * 
+   *
    * \param problem_desc Problem description (what happend)
    * \param hint         Hint for the user (what to do, or explanation)
    */
@@ -124,7 +126,7 @@ public:
   /**
    * Prints the problem description caused by an exception, its cause and,
    * optionaly, a hint for the user.
-   * 
+   *
    * \param e Exception which caused the problem.
    * \param Problem description for the user.
    * \param Hint for the user how to cope with the problem.
@@ -139,7 +141,7 @@ public:
   //@{
   /**
    * Start of an operation with reported progress.
-   * 
+   *
    * \param id      Identifier. Any string used to match multiple overlapping
    *                progress reports (doesn't happen now,
    *                but probably will in the future).
@@ -153,7 +155,7 @@ public:
 
   /**
    * Progress report for an on-going operation.
-   * 
+   *
    * \param id      Identifier. Any string used to match multiple overlapping
    *                progress reports.
    * \param label   Progress description.
@@ -166,7 +168,7 @@ public:
 
   /**
    * End of an operation with reported progress.
-   * 
+   *
    * \param id      Identifier. Any string used to match multiple overlapping
    *                progress reports.
    * \param label   Progress description.
@@ -182,15 +184,15 @@ public:
   //@{
   /**
    * Reoprt start of a download.
-   * 
-   * \param uri   Uri of the file to download. 
+   *
+   * \param uri   Uri of the file to download.
    */
   virtual void dwnldProgressStart(const zypp::Url & uri) = 0;
 
   /**
    * Reports download progress.
-   * 
-   * \param uri   Uri of the file being downloaded. 
+   *
+   * \param uri   Uri of the file being downloaded.
    * \param value Value of the progress in percents. -1 if unknown.
    * \param rate  Current download rate in B/s. -1 if unknown.
    */
@@ -199,8 +201,8 @@ public:
                              long rate = -1) = 0;
   /**
    * Reports end of a download.
-   * 
-   * \param uri   Uri of the file to download. 
+   *
+   * \param uri   Uri of the file to download.
    * \param rate  Average download rate at the end. -1 if unknown.
    * \param error Error flag - did the download finish with error?
    */
@@ -210,15 +212,26 @@ public:
   //@}
 
   /**
+   * Print out a search result.
+   *
+   * Default implementation prints \a table_r on \c stdout.
+   *
+   * \param table_r Table containing the search result.
+   *
+   * \todo Using a more generic format than a Table is desired.
+   */
+  virtual void searchResult( const Table & table_r );
+
+  /**
    * Prompt the user for a decision.
-   * 
+   *
    * \param id           Unique prompt identifier for use by machines.
    * \param prompt       Prompt text.
    * \param options      A PromptOptions object
    * \param startdesc    Initial detailed description of the prompt to be
    *                     prepended to the \a prompt text. Should be used
    *                     only whe prompting for the first time and left empty
-   *                     when retrying after an invalid answer has been given. 
+   *                     when retrying after an invalid answer has been given.
    * \see prompt.h
    * \see ../zypper-prompt.h
    */
@@ -251,7 +264,7 @@ protected:
 
   /**
    * Determine whether to show progress.
-   * 
+   *
    * \return <tt>true</tt> if the progress should be filtered out,
    *         <tt>false</tt> if it should be shown.
    */
