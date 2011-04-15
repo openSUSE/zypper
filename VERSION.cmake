@@ -30,8 +30,8 @@
 #   note in the changes file.
 #
 SET(VERSION_MAJOR "1")
-SET(VERSION_MINOR "5")
-SET(VERSION_PATCH "8")
+SET(VERSION_MINOR "6")
+SET(VERSION_PATCH "0")
 
-# LAST RELEASED: 1.5.8
+# LAST RELEASED: 1.6.0
 #=======
