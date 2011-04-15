@@ -1,4 +1,12 @@
 -------------------------------------------------------------------
+Fri Apr 15 21:50:24 CEST 2011 - ma@suse.de
+
+- Fix list-patches/updates xml output to include architecture and 
+  patch status information (bnc#687529)
+- Fix search xml output to actually write xml. (bnc#687529)
+- 1.5.8
+
+-------------------------------------------------------------------
 Thu Apr 12 16:39:34 CET 2011 - dheidler@suse.de
 
 - use old repo cache when refresh failed for non-root users
