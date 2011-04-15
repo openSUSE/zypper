@@ -56,7 +56,7 @@ download-progress-done =
 
 message-element =
   element message {
-    attribute type { "info" | "warning" | "error" }, # considering yet another type "result", maybe a separate <result> element 
+    attribute type { "info" | "warning" | "error" }, # considering yet another type "result", maybe a separate <result> element
     text
   }
 
@@ -81,6 +81,7 @@ update-status-element =
 update-commons =
   attribute name { xsd:string },
   attribute edition { xsd:string },
+  attribute arch { xsd:string },
   element summary { text },
   element description { text },
   element license { text },
@@ -99,6 +100,7 @@ patch-update =
   element update {
     update-commons,
     attribute kind { "patch" },
+    attribute status { "needed" | "unwanted" | "applied" | "not-needed" | "undetermined" }?, #
     attribute category { xsd:string }?,   # patch category (security, recommended, ...)
     attribute pkgmanager { xsd:boolean }, # affect package management?
     attribute restart { xsd:boolean },    # needs restart of the machine?
@@ -181,7 +183,7 @@ selectable-info-element =
     common-selectable-info &
     (
       package-selectable-info |
-      patch-selectable-info 
+      patch-selectable-info
       #pattern-selectable-info |
       #product-selectable-info
     )
