@@ -40,6 +40,10 @@ FillSearchTableSolvable::FillSearchTableSolvable(
 
   TableHeader header;
 
+  //
+  // *** CAUTION: It's a mess, but adding/changing colums here requires
+  //              adapting OutXML::searchResult !
+  //
   if (_gopts.is_rug_compatible)
   {
     header
