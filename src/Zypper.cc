@@ -3717,7 +3717,8 @@ void Zypper::doCommand()
             t.allowAbbrev(2);
         }
 
-        cout << t; //! \todo out().table()?
+	//cout << t; //! \todo out().table()?
+	out().searchResult( t );
       }
     }
     catch (const Exception & e)

@@ -3,9 +3,11 @@
 #include <vector>
 
 #include "zypp/base/String.h"
+#include "zypp/base/String.h"
 
 #include "OutXML.h"
 #include "utils/misc.h"
+#include "Table.h"
 
 using std::cout;
 using std::endl;
@@ -184,6 +186,58 @@ void OutXML::dwnldProgressEnd(const zypp::Url & uri, long rate, bool error)
     << " rate=\"" << rate << "\""
     << " done=\"" << error << "\""
     << "/>" << endl;
+}
+
+void OutXML::searchResult( const Table & table_r )
+{
+  cout << "<search-result version=\"0.0\">" << endl;
+  cout << "<solvable-list>" << endl;
+
+  const Table::container & rows( table_r.rows() );
+  if ( ! rows.empty() )
+  {
+    //
+    // *** CAUTION: It's a mess, but must mtch the header list defined
+    //              in FillSearchTableSolvable ctor (search.cc)
+    //
+    static const char * header[] = {
+      "status",
+      "name",
+      "kind",
+      "edition",
+      "arch",
+      "repository"
+    };
+    for_( it, rows.begin(), rows.end() )
+    {
+      cout << "<solvable";
+      const TableRow::container & cols( it->columns() );
+      unsigned cidx = 0;
+      for_( cit, cols.begin(), cols.end() )
+      {
+	cout << ' ' << (cidx < 6 ? header[cidx] : "?" ) << "=\"";
+	if ( cidx == 0 )
+	{
+	  if ( *cit == "i" )
+	    cout << "installed\"";
+	  else if ( *cit == "v" )
+	    cout << "other-version\"";
+	  else
+	    cout << "not-installed\"";
+	}
+	else
+	{
+	  cout << *cit << '"';
+	}
+	++cidx;
+      }
+      cout << "/>" << endl;
+    }
+  }
+    //Out::searchResult( table_r );
+
+  cout << "</solvable-list>" << endl;
+  cout << "</search-result>" << endl;
 }
 
 void OutXML::prompt(PromptId id,
