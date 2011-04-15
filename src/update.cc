@@ -79,9 +79,20 @@ void patch_check ()
 }
 
 // ----------------------------------------------------------------------------
+inline const char *const patchStatusAsString( const PoolItem & pi_r )
+{
+  switch ( pi_r.status().validate() )
+  {
+    case zypp::ResStatus::UNDETERMINED:	return "undetermined";	break;
+    case zypp::ResStatus::BROKEN:	return pi_r.isUnwanted() ? "unwanted"
+								 : "needed";	break;
+    case zypp::ResStatus::SATISFIED:	return "applied";	break;
+    case zypp::ResStatus::NONRELEVANT:	return "not-needed";	break;
+  }
+}
 
 // returns true if restartSuggested() patches are availble
-static bool xml_list_patches ()
+static bool xml_list_patches (Zypper & zypper)
 {
   const zypp::ResPool& pool = God->pool();
 
@@ -107,7 +118,7 @@ static bool xml_list_patches ()
   it = pool.byKindBegin(ResKind::patch);
   for (; it != e; ++it, ++patchcount)
   {
-    if (it->isRelevant() && !it->isSatisfied())
+    if (zypper.cOpts().count("all") || it->isBroken())
     {
       ResObject::constPtr res = it->resolvable();
       Patch::constPtr patch = asKind<Patch>(res);
@@ -118,6 +129,8 @@ static bool xml_list_patches ()
         cout << " <update ";
         cout << "name=\"" << res->name () << "\" ";
         cout << "edition=\""  << res->edition ().asString() << "\" ";
+	cout << "arch=\""  << res->arch().asString() << "\" ";
+	cout << "status=\""  << patchStatusAsString( *it ) << "\" ";
         cout << "category=\"" <<  patch->category() << "\" ";
         cout << "pkgmanager=\"" << (patch->restartSuggested() ? "true" : "false") << "\" ";
         cout << "restart=\"" << (patch->rebootSuggested() ? "true" : "false") << "\" ";
@@ -160,6 +173,7 @@ static void xml_list_updates(const ResKindSet & kinds)
     cout << " <update ";
     cout << "name=\"" << res->name () << "\" " ;
     cout << "edition=\""  << res->edition ().asString() << "\" ";
+    cout << "arch=\""  << res->arch().asString() << "\" ";
     cout << "kind=\"" << res->kind() << "\" ";
     cout << ">" << endl;
     cout << "  <summary>" << xml_encode(res->summary()) << "  </summary>" << endl;
@@ -362,7 +376,7 @@ void list_updates(Zypper & zypper, const ResKindSet & kinds, bool best_effort)
   if(it != localkinds.end())
   {
     if (zypper.out().type() == Out::TYPE_XML)
-      affects_pkgmgr = xml_list_patches();
+      affects_pkgmgr = xml_list_patches(zypper);
     else
     {
       if (kinds.size() > 1)
