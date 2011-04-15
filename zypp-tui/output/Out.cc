@@ -1,10 +1,12 @@
+#include <iostream>
 #include <sstream>
 
 #include "Out.h"
+#include "Table.h"
 
 Out::~Out()
 {
-  
+
 }
 
 bool Out::progressFilter()
@@ -35,3 +37,9 @@ std::string Out::zyppExceptionReport(const zypp::Exception & e)
 
   return s.str();
 }
+
+void Out::searchResult( const Table & table_r )
+{
+  std::cout << table_r;
+}
+

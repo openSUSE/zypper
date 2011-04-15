@@ -67,6 +67,9 @@ public:
     }
   };
 
+  const container & columns() const
+  { return _columns; }
+
 private:
   container _columns;
   friend class Table;
@@ -84,7 +87,7 @@ TableRow& operator << (TableRow& tr, const string& s) {
   return tr;
 }
 
-
+/** \todo nice idea but poor interface */
 class Table {
 public:
   typedef list<TableRow> container;
@@ -101,6 +104,9 @@ public:
   void wrap(int force_break_after = -1);
   void allowAbbrev(unsigned column);
   void margin(unsigned margin);
+
+  const container & rows() const
+  { return _rows; }
 
   Table ();
 
