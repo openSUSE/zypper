@@ -1191,6 +1191,34 @@ void MediaMultiCurl::setupEasy()
   _customHeadersMetalink = curl_slist_append(_customHeadersMetalink, "Accept: */*, application/metalink+xml, application/metalink4+xml");
 }
 
+static bool looks_like_metalink(const Pathname & file)
+{
+  char buf[256], *p;
+  int fd, l;
+  if ((fd = open(file.asString().c_str(), O_RDONLY)) == -1)
+    return false;
+  while ((l = read(fd, buf, sizeof(buf) - 1)) == -1 && errno == EINTR)
+    ;
+  close(fd);
+  if (l == -1)
+    return 0;
+  buf[l] = 0;
+  p = buf;
+  while (*p == ' ' || *p == '\t' || *p == '\r' || *p == '\n')
+    p++;
+  if (!strncasecmp(p, "<?xml", 5))
+    {
+      while (*p && *p != '>')
+	p++;
+      if (*p == '>')
+	p++;
+      while (*p == ' ' || *p == '\t' || *p == '\r' || *p == '\n')
+	p++;
+    }
+  bool ret = !strncasecmp(p, "<metalink", 9) ? true : false;
+  DBG << "looks_like_metalink(" << file << "): " << ret << endl;
+  return ret;
+}
 
 void MediaMultiCurl::doGetFileCopy( const Pathname & filename , const Pathname & target, callback::SendReport<DownloadProgressReport> & report, RequestOptions options ) const
 {
@@ -1275,79 +1303,95 @@ void MediaMultiCurl::doGetFileCopy( const Pathname & filename , const Pathname &
   {
     WAR << "Could not get the reponse code." << endl;
   }
+
+  bool ismetalink = false;
+
   char *ptr = NULL;
   if (curl_easy_getinfo(_curl, CURLINFO_CONTENT_TYPE, &ptr) == CURLE_OK && ptr)
     {
       string ct = string(ptr);
       if (ct.find("application/metalink+xml") == 0 || ct.find("application/metalink4+xml") == 0)
+	ismetalink = true;
+    }
+
+  if (!ismetalink)
+    {
+      // some proxies do not store the content type, so also look at the file to find
+      // out if we received a metalink (bnc#649925)
+      fflush(file);
+      if (looks_like_metalink(Pathname(destNew)))
+	ismetalink = true;
+    }
+
+  if (ismetalink)
+    {
+      bool userabort = false;
+      fclose(file);
+      file = NULL;
+      Pathname failedFile = ZConfig::instance().repoCachePath() / "MultiCurl.failed";
+      try
 	{
-	  bool userabort = false;
-	  fclose(file);
-	  file = NULL;
-	  Pathname failedFile = ZConfig::instance().repoCachePath() / "MultiCurl.failed";
+	  MetaLinkParser mlp;
+	  mlp.parse(Pathname(destNew));
+	  MediaBlockList bl = mlp.getBlockList();
+	  vector<Url> urls = mlp.getUrls();
+	  DBG << bl << endl;
+	  file = fopen(destNew.c_str(), "w+");
+	  if (!file)
+	    ZYPP_THROW(MediaWriteException(destNew));
+	  if (PathInfo(target).isExist())
+	    {
+	      DBG << "reusing blocks from file " << target << endl;
+	      bl.reuseBlocks(file, target.asString());
+	      DBG << bl << endl;
+	    }
+	  if (bl.haveChecksum(1) && PathInfo(failedFile).isExist())
+	    {
+	      DBG << "reusing blocks from file " << failedFile << endl;
+	      bl.reuseBlocks(file, failedFile.asString());
+	      DBG << bl << endl;
+	      filesystem::unlink(failedFile);
+	    }
+	  Pathname df = deltafile();
+	  if (!df.empty())
+	    {
+	      DBG << "reusing blocks from file " << df << endl;
+	      bl.reuseBlocks(file, df.asString());
+	      DBG << bl << endl;
+	    }
 	  try
 	    {
-	      MetaLinkParser mlp;
-	      mlp.parse(Pathname(destNew));
-	      MediaBlockList bl = mlp.getBlockList();
-	      vector<Url> urls = mlp.getUrls();
-	      DBG << bl << endl;
-	      file = fopen(destNew.c_str(), "w+");
-	      if (!file)
-		ZYPP_THROW(MediaWriteException(destNew));
-	      if (PathInfo(target).isExist())
-		{
-		  DBG << "reusing blocks from file " << target << endl;
-		  bl.reuseBlocks(file, target.asString());
-		  DBG << bl << endl;
-		}
-	      if (bl.haveChecksum(1) && PathInfo(failedFile).isExist())
-		{
-		  DBG << "reusing blocks from file " << failedFile << endl;
-		  bl.reuseBlocks(file, failedFile.asString());
-		  DBG << bl << endl;
-		  filesystem::unlink(failedFile);
-		}
-	      Pathname df = deltafile();
-	      if (!df.empty())
-		{
-		  DBG << "reusing blocks from file " << df << endl;
-		  bl.reuseBlocks(file, df.asString());
-		  DBG << bl << endl;
-		}
-	      try
-		{
-		  multifetch(filename, file, &urls, &report, &bl);
-		}
-	      catch (MediaCurlException &ex)
-		{
-		  userabort = ex.errstr() == "User abort";
-		  ZYPP_RETHROW(ex);
-		}
+	      multifetch(filename, file, &urls, &report, &bl);
 	    }
-	  catch (Exception &ex)
+	  catch (MediaCurlException &ex)
 	    {
-	      // something went wrong. fall back to normal download
-	      if (file)
-		fclose(file);
-	      file = NULL;
-	      if (PathInfo(destNew).size() >= 63336)
-		{
-		  ::unlink(failedFile.asString().c_str());
-		  filesystem::hardlinkCopy(destNew, failedFile);
-		}
-	      if (userabort)
-		{
-	          filesystem::unlink(destNew);
-		  ZYPP_RETHROW(ex);
-		}
-	      file = fopen(destNew.c_str(), "w+");
-	      if (!file)
-		ZYPP_THROW(MediaWriteException(destNew));
-	      MediaCurl::doGetFileCopyFile(filename, dest, file, report, options | OPTION_NO_REPORT_START);
+	      userabort = ex.errstr() == "User abort";
+	      ZYPP_RETHROW(ex);
 	    }
 	}
+      catch (Exception &ex)
+	{
+	  // something went wrong. fall back to normal download
+	  if (file)
+	    fclose(file);
+	  file = NULL;
+	  if (PathInfo(destNew).size() >= 63336)
+	    {
+	      ::unlink(failedFile.asString().c_str());
+	      filesystem::hardlinkCopy(destNew, failedFile);
+	    }
+	  if (userabort)
+	    {
+	      filesystem::unlink(destNew);
+	      ZYPP_RETHROW(ex);
+	    }
+	  file = fopen(destNew.c_str(), "w+");
+	  if (!file)
+	    ZYPP_THROW(MediaWriteException(destNew));
+	  MediaCurl::doGetFileCopyFile(filename, dest, file, report, options | OPTION_NO_REPORT_START);
+	}
     }
+
   if (::fchmod( ::fileno(file), filesystem::applyUmaskTo( 0644 )))
     {
       ERR << "Failed to chmod file " << destNew << endl;
