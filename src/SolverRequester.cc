@@ -408,10 +408,18 @@ bool SolverRequester::installPatch(
         DBG << "candidate patch " << patch << " is locked" << endl;
         addFeedback(Feedback::PATCH_UNWANTED, patchspec, selected, selected);
       }
+
       else if (!_opts.category.empty() && _opts.category != patch->category())
       {
 	DBG << "candidate patch " << patch << " is not in the specified category" << endl;
 	addFeedback(Feedback::PATCH_WRONG_CAT, patchspec, selected, selected);
+      }
+
+      else if (_opts.date_limit != Date()
+               && patch->timestamp() > _opts.date_limit)
+      {
+        DBG << "candidate patch " << patch << " is newer than specified date" << endl;
+        addFeedback(Feedback::PATCH_TOO_NEW, patchspec, selected, selected);
       }
       else
       {

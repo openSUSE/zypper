@@ -7,7 +7,7 @@
 
 
 /** \file SolverRequester.h
- * 
+ *
  */
 
 #ifndef SOLVERREQUESTER_H_
@@ -16,6 +16,7 @@
 #include <string>
 
 #include "zypp/ZConfig.h"
+#include "zypp/Date.h"
 #include "zypp/PoolItem.h"
 
 #include "Command.h"
@@ -95,6 +96,11 @@ public:
      * Whether to skip patches not in this category
      */
     std::string category;
+
+    /**
+     * Whether to skip updates issued later than this date
+     */
+    zypp::Date date_limit;
 
     /** Whether to ignore vendor when selecting packages */
     bool allow_vendor_change;
@@ -182,6 +188,11 @@ public:
        * Patch is not in the specified category
        */
       PATCH_WRONG_CAT,
+
+      /**
+       * Patch is too new and a date limit was specified
+       */
+      PATCH_TOO_NEW,
 
       // ********** zypp requests *********************************************
 

@@ -195,6 +195,21 @@ static void xml_list_updates(const ResKindSet & kinds)
 static bool list_patch_updates(Zypper & zypper)
 {
   bool all = zypper.cOpts().count("all");
+  // if --date is specified
+  Date date_limit;
+  {
+    parsed_opts::const_iterator it;
+    it = zypper.cOpts().find("date");
+    if (it != zypper.cOpts().end())
+    {
+      for_(i, it->second.begin(), it->second.end())
+      {
+        // ISO 8601 format
+          date_limit = Date(*i, "%F");
+          break;
+      }
+    }
+  }
 
   // if --category is specified
   string category;
@@ -245,6 +260,10 @@ static bool list_patch_updates(Zypper & zypper)
     if (all || (it->isBroken() && !it->isUnwanted()))
     {
       Patch::constPtr patch = asKind<Patch>(res);
+      if (date_limit != Date() && patch->timestamp() > date_limit ) {
+          DBG << patch->ident() << " skipped. (too new and date limit specified)" << endl;
+          continue;
+      }
 
       if (!category.empty() && category != patch->category())
       {
@@ -252,6 +271,7 @@ static bool list_patch_updates(Zypper & zypper)
         continue;
       }
 
+      // table
       {
         TableRow tr (cols);
         tr << (zypper.config().show_alias ? patch->repoInfo().alias() : patch->repoInfo().name());

@@ -1677,6 +1677,7 @@ void Zypper::processCommandOptions()
       {"bugzilla",                  required_argument, 0, 'b'},
       {"cve",                       required_argument, 0,  0 },
       {"category",                  required_argument, 0, 'g'},
+      {"date",                      required_argument, 0,  0 },
       {"help", no_argument, 0, 'h'},
       {0, 0, 0, 0}
     };
@@ -1697,6 +1698,7 @@ void Zypper::processCommandOptions()
       "-b, --bugzilla #            Install patch fixing the specified bugzilla issue.\n"
       "    --cve #                 Install patch fixing the specified CVE issue.\n"
       "-g  --category <category>   Install all patches in this category.\n"
+     "    --date <YYYY-MM-DD>      Install patches issued until the specified date\n"
       "    --debug-solver          Create solver test case for debugging.\n"
       "    --no-recommends         Do not install recommended packages, only required.\n"
       "    --recommends            Install also recommended packages in addition\n"
@@ -1718,6 +1720,7 @@ void Zypper::processCommandOptions()
       {"bugzilla",    optional_argument, 0, 'b'},
       {"cve",         optional_argument, 0,  0 },
       {"category",    required_argument, 0, 'g'},
+      {"date",        required_argument, 0,  0 },
       {"issues",      optional_argument, 0,  0 },
       {"all",         no_argument,       0, 'a'},
       {"help", no_argument, 0, 'h'},
@@ -1736,6 +1739,7 @@ void Zypper::processCommandOptions()
       "    --issues[=string]      Look for issues matching the specified string.\n"
       "-a, --all                  List all patches, not only the needed ones.\n"
       "-r, --repo <alias|#|URI>   List only patches from the specified repository.\n"
+      "    --date <YYYY-MM-DD>    List patches issued up to the specified date\n"
     );
     break;
   }
@@ -4063,7 +4067,8 @@ void Zypper::doCommand()
     else
     {
       SolverRequester::Options sropts;
-      if (copts.find("force") != copts.end())
+      if (copts.find("force") !=
+copts.end())
         sropts.force = true;
       sropts.best_effort = best_effort;
       sropts.skip_interactive = skip_interactive; // bcn #647214
@@ -4080,6 +4085,22 @@ void Zypper::doCommand()
 	    break;
 	  }
 	}
+      }
+
+      // if --date is specified
+      {
+        parsed_opts::const_iterator optit;
+        optit = copts.find("date");
+        if (optit != copts.end())
+        {
+          for_(i, optit->second.begin(), optit->second.end())
+          {
+            // ISO 8601 format
+            sropts.date_limit = Date(*i, "%F");
+            break;
+          }
+        }
+
       }
 
       SolverRequester sr(sropts);
