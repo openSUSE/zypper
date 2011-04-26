@@ -83,12 +83,16 @@ inline const char *const patchStatusAsString( const PoolItem & pi_r )
 {
   switch ( pi_r.status().validate() )
   {
-    case zypp::ResStatus::UNDETERMINED:	return "undetermined";	break;
     case zypp::ResStatus::BROKEN:	return pi_r.isUnwanted() ? "unwanted"
 								 : "needed";	break;
     case zypp::ResStatus::SATISFIED:	return "applied";	break;
     case zypp::ResStatus::NONRELEVANT:	return "not-needed";	break;
+
+    case zypp::ResStatus::UNDETERMINED:	// fall through
+    default:
+      break;
   }
+  return "undetermined";
 }
 
 // returns true if restartSuggested() patches are availble
