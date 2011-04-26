@@ -1,4 +1,9 @@
 -------------------------------------------------------------------
+Tue Apr 26 12:55:24 CEST 2011 - ma@suse.de
+
+- make g++ happy
+
+-------------------------------------------------------------------
 Fri Apr 15 22:03:50 CEST 2011 - ma@suse.de
 
 - Fix list-patches/updates xml output to include architecture and 
