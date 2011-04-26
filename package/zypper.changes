@@ -1,4 +1,9 @@
 -------------------------------------------------------------------
+Mon Apr 18 08:27:15 UTC 2011 - dmacvicar@suse.de
+
+- fate#312127 list patches until certain date only
+
+-------------------------------------------------------------------
 Fri Apr 15 21:50:24 CEST 2011 - ma@suse.de
 
 - Fix list-patches/updates xml output to include architecture and 
