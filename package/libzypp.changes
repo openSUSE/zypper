@@ -1,4 +1,10 @@
 -------------------------------------------------------------------
+Wed Apr 27 17:17:00 CEST 2011 - dheidler@suse.de
+
+- fix max_concurrent_connections option in MultiCurl (bnc#596089)
+- version 9.0.2 (0)
+
+-------------------------------------------------------------------
 Sun Apr 17 01:13:40 CEST 2011 - ma@suse.de
 
 - Update zypp-po.tar.bz2
