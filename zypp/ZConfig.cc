@@ -256,7 +256,7 @@ namespace zypp
         , download_use_deltarpm   	( true )
         , download_use_deltarpm_always  ( false )
         , download_media_prefer_download( true )
-        , download_max_concurrent_connections( 2 )
+        , download_max_concurrent_connections( 5 )
         , download_min_download_speed	( 0 )
         , download_max_download_speed	( 0 )
         , download_max_silent_tries	( 5 )

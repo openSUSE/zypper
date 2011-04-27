@@ -154,10 +154,10 @@ public:
   double _timeout;
   double _connect_timeout;
   double _maxspeed;
+  int _maxworkers;
 };
 
 #define BLKSIZE		131072
-#define MAXWORKERS	5
 #define MAXURLS		10
 
 
@@ -805,6 +805,7 @@ multifetchrequest::multifetchrequest(const MediaMultiCurl *context, const Pathna
   _timeout = 0;
   _connect_timeout = 0;
   _maxspeed = 0;
+  _maxworkers = 0;
   if (blklist)
     {
       for (size_t blkno = 0; blkno < blklist->numBlocks(); blkno++)
@@ -844,7 +845,7 @@ multifetchrequest::run(std::vector<Url> &urllist)
 	  break;
 	}
 
-      if (_activeworkers < MAXWORKERS && urliter != urllist.end() && _workers.size() < MAXURLS)
+      if (_activeworkers < _maxworkers && urliter != urllist.end() && _workers.size() < MAXURLS)
 	{
 	  // spawn another worker!
 	  multifetchworker *worker = new multifetchworker(workerno++, *this, *urliter);
@@ -1089,8 +1090,8 @@ multifetchrequest::run(std::vector<Url> &urllist)
 		{
 		  double avg = _fetchedsize / (now - _starttime);
 		  avg = worker->_maxspeed * _maxspeed / avg;
-		  if (avg < _maxspeed / MAXWORKERS)
-		    avg = _maxspeed / MAXWORKERS;
+		  if (avg < _maxspeed / _maxworkers)
+		    avg = _maxspeed / _maxworkers;
 		  if (avg > _maxspeed)
 		    avg = _maxspeed;
 		  if (avg < 1024)
@@ -1434,6 +1435,10 @@ void MediaMultiCurl::multifetch(const Pathname & filename, FILE *fp, std::vector
   req._timeout = _settings.timeout();
   req._connect_timeout = _settings.connectTimeout();
   req._maxspeed = _settings.maxDownloadSpeed();
+  if(_settings.maxConcurrentConnections() <= MAXURLS)
+    req._maxworkers = _settings.maxConcurrentConnections();
+  else
+    req._maxworkers = MAXURLS;
   std::vector<Url> myurllist;
   for (std::vector<Url>::iterator urliter = urllist->begin(); urliter != urllist->end(); ++urliter)
     {
