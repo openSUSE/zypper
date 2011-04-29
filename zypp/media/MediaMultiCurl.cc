@@ -1435,10 +1435,11 @@ void MediaMultiCurl::multifetch(const Pathname & filename, FILE *fp, std::vector
   req._timeout = _settings.timeout();
   req._connect_timeout = _settings.connectTimeout();
   req._maxspeed = _settings.maxDownloadSpeed();
-  if(_settings.maxConcurrentConnections() <= MAXURLS)
-    req._maxworkers = _settings.maxConcurrentConnections();
-  else
+  req._maxworkers = _settings.maxConcurrentConnections();
+  if (req._maxworkers > MAXURLS)
     req._maxworkers = MAXURLS;
+  if (req._maxworkers <= 0)
+    req._maxworkers = 1;
   std::vector<Url> myurllist;
   for (std::vector<Url>::iterator urliter = urllist->begin(); urliter != urllist->end(); ++urliter)
     {
