@@ -1,4 +1,10 @@
 -------------------------------------------------------------------
+Fri Apr 29 15:11:18 CEST 2011 - dheidler@suse.de
+
+- suppress success message, when adding lock failed (bnc#539159)
+- 1.5.5
+
+-------------------------------------------------------------------
 Fri Apr 15 22:11:18 CEST 2011 - ma@suse.de
 
 - Fix list-patches/updates xml output to include architecture and 
