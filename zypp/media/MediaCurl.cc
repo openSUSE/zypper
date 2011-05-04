@@ -892,6 +892,7 @@ void MediaCurl::evaluateCurlCode( const Pathname &filename,
       case CURLE_URL_MALFORMAT:
       case CURLE_URL_MALFORMAT_USER:
           err = " Bad URL";
+          break;
       case CURLE_LOGIN_DENIED:
           ZYPP_THROW(
               MediaUnauthorizedException(url, "Login failed.", _curlError, ""));
