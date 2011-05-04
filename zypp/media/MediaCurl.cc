@@ -1059,7 +1059,6 @@ bool MediaCurl::doGetDoesFileExist( const Pathname & filename ) const
 
   FILE *file = ::fopen( "/dev/null", "w" );
   if ( !file ) {
-      ::fclose(file);
       ERR << "fopen failed for /dev/null" << endl;
       curl_easy_setopt( _curl, CURLOPT_NOBODY, 0L);
       curl_easy_setopt( _curl, CURLOPT_RANGE, NULL );
