@@ -1,4 +1,10 @@
 -------------------------------------------------------------------
+Thu May 05 15:06:22 CEST 2011 - dheidler@suse.de
+
+- add option to set/change gpgcheck flag for repos (bnc#524787)
+- 1.6.2
+
+-------------------------------------------------------------------
 Thu Apr 26 17:27:15 CEST 2011 - dheidler@suse.de
 
 - suppress success message, when adding lock failed (bnc#539159)
