@@ -76,6 +76,7 @@ namespace zypp
     , _package( package )
     , _deltas(deltas)
     , _access(access)
+    , _retry(false)
     {}
 
     PackageProvider::~PackageProvider()
