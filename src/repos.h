@@ -113,7 +113,8 @@ void add_repo_by_url(Zypper & zypper,
                      const std::string & type = "",
                      zypp::TriBool enabled = boost::indeterminate,
                      zypp::TriBool autorefresh = boost::indeterminate,
-                     zypp::TriBool keepPackages = boost::indeterminate);
+                     zypp::TriBool keepPackages = boost::indeterminate,
+                     zypp::TriBool gpgCheck  = boost::indeterminate);
 
 /**
  * Add repository specified in given repo file on \a repo_file_url. All repos
@@ -128,7 +129,8 @@ void add_repo_from_file(Zypper & zypper,
                         const std::string & repo_file_url,
                         zypp::TriBool enabled = boost::indeterminate,
                         zypp::TriBool autorefresh = boost::indeterminate,
-                        zypp::TriBool keepPackages = boost::indeterminate);
+                        zypp::TriBool keepPackages = boost::indeterminate,
+                        zypp::TriBool gpgCheck  = boost::indeterminate);
 
 
 /**

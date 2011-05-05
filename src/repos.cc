@@ -1628,6 +1628,8 @@ void add_repo(Zypper & zypper, RepoInfo & repo)
     s << _("Enabled") << ": " << (repo.enabled() ? _("Yes") : _("No")) << endl;
     // TranslatorExplanation used as e.g. "Autorefresh: Yes"
     s << _("Autorefresh") << ": " << (repo.autorefresh() ? _("Yes") : _("No")) << endl;
+    // TranslatorExplanation used as e.g. "GPG check: Yes"
+    s << _("GPG check") << ": " << (repo.gpgCheck() ? _("Yes") : _("No")) << endl;
 
     if (!repo.baseUrlsEmpty())
     {
@@ -1667,7 +1669,7 @@ void add_repo(Zypper & zypper, RepoInfo & repo)
 void add_repo_by_url( Zypper & zypper,
                      const zypp::Url & url, const string & alias,
                      const string & type,
-                     TriBool enabled, TriBool autorefresh, TriBool keepPackages)
+                     TriBool enabled, TriBool autorefresh, TriBool keepPackages, TriBool gpgCheck)
 {
   MIL << "going to add repository by url (alias=" << alias << ", url=" << url
       << ")" << endl;
@@ -1696,6 +1698,9 @@ void add_repo_by_url( Zypper & zypper,
   if ( !indeterminate(keepPackages) )
     repo.setKeepPackages(keepPackages);
 
+  if ( !indeterminate(gpgCheck) )
+    repo.setGpgCheck(gpgCheck);
+
   add_repo(zypper, repo);
 }
 
@@ -1703,7 +1708,7 @@ void add_repo_by_url( Zypper & zypper,
 
 void add_repo_from_file( Zypper & zypper,
                          const std::string & repo_file_url, TriBool enabled,
-                         TriBool autorefresh, TriBool keepPackages)
+                         TriBool autorefresh, TriBool keepPackages, TriBool gpgCheck)
 {
   Url url = make_url(repo_file_url);
   if (!url.isValid())
@@ -1778,6 +1783,9 @@ void add_repo_from_file( Zypper & zypper,
 
     if ( !indeterminate(keepPackages) )
       repo.setKeepPackages(keepPackages);
+
+    if ( !indeterminate(gpgCheck) )
+      repo.setGpgCheck(gpgCheck);
 
     MIL << "to-be-added: enabled: " << repo.enabled() << " autorefresh: " << repo.autorefresh() << endl;
 
@@ -1942,6 +1950,10 @@ void modify_repo(Zypper & zypper, const string & alias)
       zypper, "keep-packages", "no-keep-packages");
   DBG << "keepPackages = " << keepPackages << endl;
 
+  tribool gpgCheck = get_boolean_option(
+      zypper, "gpgcheck", "no-gpgcheck");
+  DBG << "gpgCheck = " << gpgCheck << endl;
+
   try
   {
     RepoManager & manager = zypper.repoManager();
@@ -1950,6 +1962,7 @@ void modify_repo(Zypper & zypper, const string & alias)
     bool changed_autoref = false;
     bool changed_prio = false;
     bool changed_keeppackages = false;
+    bool changed_gpgcheck = false;
 
     if (!indeterminate(enable))
     {
@@ -1970,6 +1983,13 @@ void modify_repo(Zypper & zypper, const string & alias)
       if (keepPackages != repo.keepPackages())
         changed_keeppackages = true;
       repo.setKeepPackages(keepPackages);
+    }
+
+    if (!indeterminate(gpgCheck))
+    {
+      if (gpgCheck != repo.gpgCheck())
+        changed_gpgcheck = true;
+      repo.setGpgCheck(gpgCheck);
     }
 
     long long prio = 0;
@@ -2009,7 +2029,7 @@ void modify_repo(Zypper & zypper, const string & alias)
     }
 
     if (chnaged_enabled || changed_autoref || changed_prio
-        || changed_keeppackages || !name.empty())
+        || changed_keeppackages || changed_gpgcheck || !name.empty())
     {
       manager.modifyRepository(alias, repo);
 
@@ -2041,6 +2061,16 @@ void modify_repo(Zypper & zypper, const string & alias)
         else
           zypper.out().info(boost::str(format(
             _("RPM files caching has been disabled for repository '%s'.")) % alias));
+      }
+
+      if (changed_gpgcheck)
+      {
+        if (repo.gpgCheck())
+          zypper.out().info(boost::str(format(
+            _("GPG check has been enabled for repository '%s'.")) % alias));
+        else
+          zypper.out().info(boost::str(format(
+            _("GPG check has been disabled for repository '%s'.")) % alias));
       }
 
       if (changed_prio)

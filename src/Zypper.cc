@@ -1316,6 +1316,8 @@ void Zypper::processCommandOptions()
       {"name", required_argument, 0, 'n'},
       {"keep-packages", no_argument, 0, 'k'},
       {"no-keep-packages", no_argument, 0, 'K'},
+      {"gpgcheck", no_argument, 0, 'g'},
+      {"no-gpgcheck", no_argument, 0, 'G'},
       {"refresh", no_argument, 0, 'f'},
       {0, 0, 0, 0}
     };
@@ -1337,6 +1339,8 @@ void Zypper::processCommandOptions()
       "-n, --name <name>       Specify descriptive name for the repository.\n"
       "-k, --keep-packages     Enable RPM files caching.\n"
       "-K, --no-keep-packages  Disable RPM files caching.\n"
+      "-g, --gpgcheck          Enable GPG check for this repository.\n"
+      "-G, --no-gpgcheck       Disable GPG check for this repository.\n"
       "-f, --refresh           Enable autorefresh of the repository.\n"
     ), "yast2, rpm-md, plaindir");
     break;
@@ -1453,6 +1457,8 @@ void Zypper::processCommandOptions()
       {"priority", required_argument, 0, 'p'},
       {"keep-packages", no_argument, 0, 'k'},
       {"no-keep-packages", no_argument, 0, 'K'},
+      {"gpgcheck", no_argument, 0, 'g'},
+      {"no-gpgcheck", no_argument, 0, 'G'},
       {"all", no_argument, 0, 'a' },
       {"local", no_argument, 0, 'l' },
       {"remote", no_argument, 0, 't' },
@@ -1478,6 +1484,8 @@ void Zypper::processCommandOptions()
       "-p, --priority <integer>  Set priority of the repository.\n"
       "-k, --keep-packages       Enable RPM files caching.\n"
       "-K, --no-keep-packages    Disable RPM files caching.\n"
+      "-g, --gpgcheck            Enable GPG check for this repository.\n"
+      "-G, --no-gpgcheck         Disable GPG check for this repository.\n"
       "\n"
       "-a, --all                 Apply changes to all repositories.\n"
       "-l, --local               Apply changes to all local repositories.\n"
@@ -2863,12 +2871,18 @@ void Zypper::doCommand()
     else if (copts.count("no-keep-packages"))
       keep_pkgs = false;
 
+    TriBool gpgCheck;
+    if (copts.count("gpgcheck"))
+      gpgCheck = true;
+    else if (copts.count("no-gpgcheck"))
+      gpgCheck = false;
+
     try
     {
       // add repository specified in .repo file
       if (copts.count("repo"))
       {
-        add_repo_from_file(*this,copts["repo"].front(), enabled, autorefresh, keep_pkgs);
+        add_repo_from_file(*this,copts["repo"].front(), enabled, autorefresh, keep_pkgs, gpgCheck);
         return;
       }
 
@@ -2916,7 +2930,7 @@ void Zypper::doCommand()
         else
         {
           initRepoManager();
-          add_repo_from_file(*this,_arguments[0], enabled, autorefresh, keep_pkgs);
+          add_repo_from_file(*this,_arguments[0], enabled, autorefresh, keep_pkgs, gpgCheck);
           break;
         }
       case 2:
@@ -2952,7 +2966,7 @@ void Zypper::doCommand()
         init_target(*this);
 
         add_repo_by_url(
-	    *this, url, _arguments[1]/*alias*/, type, enabled, autorefresh, keep_pkgs);
+	    *this, url, _arguments[1]/*alias*/, type, enabled, autorefresh, keep_pkgs, gpgCheck);
         return;
       }
     }
