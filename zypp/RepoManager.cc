@@ -554,6 +554,8 @@ namespace zypp
     if ( PathInfo(options.knownReposPath).isExist() )
     {
       RepoInfoList repol = repositories_in_dir(options.knownReposPath);
+      std::list<string> repo_esc_aliases;
+      std::list<string> entries;
       for ( RepoInfoList::iterator it = repol.begin();
             it != repol.end();
             ++it )
@@ -567,6 +569,20 @@ namespace zypp
 	(*it).setPackagesPath(packages_path);
 
         repos.insert(*it);
+        repo_esc_aliases.push_back(it->escaped_alias());
+      }
+
+      // delete metadata folders without corresponding repo (e.g. old tmp directories)
+      if ( filesystem::readdir( entries, options.repoRawCachePath, false ) == 0 )
+      {
+        std::set<string> oldfiles;
+        repo_esc_aliases.sort();
+        entries.sort();
+        set_difference(entries.begin(), entries.end(), repo_esc_aliases.begin(), repo_esc_aliases.end(), std::inserter(oldfiles, oldfiles.end()));
+        for_(it, oldfiles.begin(), oldfiles.end())
+        {
+          filesystem::recursive_rmdir(options.repoRawCachePath / *it);
+        }
       }
     }
 
