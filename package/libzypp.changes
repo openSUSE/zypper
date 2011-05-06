@@ -1,4 +1,10 @@
 -------------------------------------------------------------------
+Fri May  6 13:22:35 CEST 2011 - dheidler@suse.de
+
+- delete old metadata temp directories
+- version 9.0.3 (0)
+
+-------------------------------------------------------------------
 Wed Apr 27 17:17:00 CEST 2011 - dheidler@suse.de
 
 - fix max_concurrent_connections option in MultiCurl (bnc#596089)
