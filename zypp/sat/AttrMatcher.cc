@@ -186,7 +186,7 @@ namespace zypp
       {
         if ( !_matcher )
         {
-          if ( ! _flags.mode() == Match::OTHER )
+          if ( _flags.mode() == Match::OTHER )
             ZYPP_THROW( MatchUnknownModeException( _flags, _search ) );
 
           _matcher.reset( new ::_Datamatcher );

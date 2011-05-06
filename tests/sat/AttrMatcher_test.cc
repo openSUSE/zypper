@@ -76,6 +76,7 @@ BOOST_AUTO_TEST_CASE(Match_operator)
 BOOST_AUTO_TEST_CASE(AttrMatcher_defaultconstructed)
 {
   sat::AttrMatcher m;
+  BOOST_CHECK_EQUAL( m.flags(), Match::NOTHING );
   BOOST_CHECK( !m );	// eval in boolean context
   BOOST_CHECK( m.searchstring().empty() );
   BOOST_CHECK_EQUAL( m.flags(), Match() );
@@ -87,6 +88,12 @@ BOOST_AUTO_TEST_CASE(AttrMatcher_defaultconstructed)
 
   m.setSearchstring( "fau" );
   BOOST_CHECK( m );	// eval in boolean context
+}
+
+BOOST_AUTO_TEST_CASE(AttrMatcher_OTHER)
+{
+  sat::AttrMatcher m( "fau", Match::OTHER );
+  BOOST_CHECK_THROW( m.compile(), MatchUnknownModeException );
 }
 
 BOOST_AUTO_TEST_CASE(AttrMatcher_STRING)
