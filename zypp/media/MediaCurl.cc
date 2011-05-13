@@ -574,8 +574,10 @@ void MediaCurl::setupEasy()
 
   if ( _url.getScheme() == "https" )
   {
+#if LIBCURL_VERSION_NUMBER >= 0x071904
     // restrict following of redirections from https to https only
     SET_OPTION( CURLOPT_REDIR_PROTOCOLS, CURLPROTO_HTTPS );
+#endif
 
     if( _settings.verifyPeerEnabled() ||
         _settings.verifyHostEnabled() )
