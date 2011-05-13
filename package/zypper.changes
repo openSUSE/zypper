@@ -1,4 +1,11 @@
 -------------------------------------------------------------------
+Fri May 13 11:38:30 CEST 2011 - ma@suse.de
+
+- fix get_installed_providers by capability not to use selectables 
+  (bnc#693576)
+- 1.6.3
+
+-------------------------------------------------------------------
 Thu May 05 15:06:22 CEST 2011 - dheidler@suse.de
 
 - add option to set/change gpgcheck flag for repos (bnc#524787)
