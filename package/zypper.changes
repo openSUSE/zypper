@@ -1,4 +1,11 @@
 -------------------------------------------------------------------
+Fri May 13 11:47:57 CEST 2011 - ma@suse.de
+
+- fix get_installed_providers by capability not to use selectables 
+  (bnc#693576)
+- 1.5.6
+
+-------------------------------------------------------------------
 Fri Apr 29 15:11:18 CEST 2011 - dheidler@suse.de
 
 - suppress success message, when adding lock failed (bnc#539159)
