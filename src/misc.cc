@@ -492,28 +492,15 @@ get_installed_providers(const Capability & cap)
   set<PoolItem> providers;
 
   sat::WhatProvides q(cap);
-  for_(it, q.selectableBegin(), q.selectableEnd())
+  for_(it, q.poolItemBegin(), q.poolItemEnd())
   {
-    Selectable::constPtr s(*it);
-    if (traits::isPseudoInstalled(s->kind()))
+    if (traits::isPseudoInstalled( (*it).satSolvable().kind() ) )
     {
-      PoolItem best;
-      for_(ait, s->availableBegin(), s->availableEnd())
-      {
-        // this works also for patches - isSatisfied excludes !isRelevant
-        if (ait->isSatisfied())
-          // we don't care about repo priorities, vendors and stuff like that
-          // here. All we want to know is what is the highest available version
-          // that already is satisified.
-          // TODO such funtion could be part of Selectable (or does theObj return such object?)
-          // TODO but we should care about repos
-          if (!best || best->edition() < (*ait)->edition())
-            best = *ait;
-      }
-      providers.insert(best);
+      if ( (*it).isSatisfied() )
+	providers.insert( *it );
     }
-    else if (s->hasInstalledObj())
-      providers.insert(s->installedObj());
+    else if ( (*it).satSolvable().isSystem() )
+      providers.insert( *it );
   }
 
   return providers;
