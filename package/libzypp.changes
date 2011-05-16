@@ -1,4 +1,9 @@
 -------------------------------------------------------------------
+Mon May 16 14:42:09 CEST 2011 - dmacvicar@suse.de
+
+- forward port all changes to make it build in Code10 
+
+-------------------------------------------------------------------
 Mon May 16 11:51:51 UTC 2011 - dmacvicar@suse.de
 
 - make -Werror=format-security optional and used only if 
