@@ -37,7 +37,7 @@ BuildRequires:  libxml2-devel
 BuildRequires:  libproxy-devel
 
 BuildRequires:  libsatsolver-devel >= 0.14.17
-%if 0%{?suse_version}
+%if 0%{?suse_version} >= 1100
 %requires_eq    satsolver-tools
 %else
 Requires:       satsolver-tools
@@ -144,7 +144,7 @@ Requires:       libstdc++-devel
 Requires:       libudev-devel
 Requires:       cmake
 Requires:       libcurl-devel >= %{min_curl_version}
-%if 0%{?suse_version}
+%if 0%{?suse_version} >= 1100
 %requires_ge    libsatsolver-devel
 %else
 Requires:       libsatsolver-devel
