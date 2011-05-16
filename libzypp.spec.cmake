@@ -55,6 +55,9 @@ BuildRequires:  expat-devel
 %if 0%{?suse_version}
 BuildRequires:  rpm-devel
 Requires:       /usr/bin/uuidgen
+%if 0%{?suse_version} > 1020
+BuildRequires:  hicolor-icon-theme
+%endif
 %endif
 
 %if 0%{?fedora_version}
