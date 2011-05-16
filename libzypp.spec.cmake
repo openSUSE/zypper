@@ -102,7 +102,7 @@ Conflicts:      aria2 < %{min_aria_version}
 # ---------------------------------------------------------------
 
 %if 0%{?suse_version}
-%if 0%{?suse_version} >= 1100
+%if 0%{?suse_version} != 1010
 # Code11+
 BuildRequires:  libcurl-devel >= %{min_curl_version}
 Requires:       libcurl4   >= %{min_curl_version}
