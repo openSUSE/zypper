@@ -91,7 +91,6 @@ Requires:       gnupg2
 %define use_translation_set sle-zypp
 # No requirement, but as we'd use it in case it is present,
 # check for a sufficient version:
-Conflicts:      aria2 < %{min_aria_version}
 %else
 # Code10 still has this define
 %if 0%{?sles_version}
