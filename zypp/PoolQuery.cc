@@ -1514,12 +1514,20 @@ attremptycheckend:
 
 	  // Repo restriction:
 	  sat::Pool satpool( sat::Pool::instance() );
+
 	  for_( it, query_r->_repos.begin(), query_r->_repos.end() )
 	  {
 	    Repository r( satpool.reposFind( *it ) );
 	    if ( r )
 	      _repos.insert( r );
+	    else
+	      _neverMatchRepo = true;
 	  }
+	  // _neverMatchRepo: we just need to catch the case that no repo
+	  // matched, so we'd interpret the empty list as 'take from all'
+	  if ( _neverMatchRepo && ! _repos.empty() )
+	    _neverMatchRepo = false;
+
 	  // Kind restriction:
 	  _kinds = query_r->_kinds;
 	  // Edition restriction:
@@ -1539,6 +1547,9 @@ attremptycheckend:
 	base_iterator startNewQyery() const
 	{
 	  sat::LookupAttr q;
+
+	  if ( _neverMatchRepo )
+	    return q.end();
 
 	  // Repo restriction:
 	  if ( _repos.size() == 1 )
@@ -1650,6 +1661,7 @@ attremptycheckend:
       private:
         /** Repositories include in the search. */
         std::set<Repository> _repos;
+	DefaultIntegral<bool,false> _neverMatchRepo;
         /** Resolvable kinds to include. */
         std::set<ResKind> _kinds;
         /** Edition filter. */
