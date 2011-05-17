@@ -426,6 +426,8 @@ namespace zypp
   const Arch Arch_sparcv8( _sparcv8 );
   const Arch Arch_sparc( _sparc );
 
+  const Arch Arch_armv7nhl ( _armv7nhl );
+  const Arch Arch_armv7hl ( _armv7hl );
   const Arch Arch_armv7l( _armv7l );
   const Arch Arch_armv6l( _armv6l );
   const Arch Arch_armv5tejl( _armv5tejl );
