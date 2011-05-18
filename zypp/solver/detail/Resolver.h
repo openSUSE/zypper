@@ -47,6 +47,12 @@
 /////////////////////////////////////////////////////////////////////////
 namespace zypp
 { ///////////////////////////////////////////////////////////////////////
+
+  namespace sat
+  {
+    class Transaction;
+  }
+
   ///////////////////////////////////////////////////////////////////////
   namespace solver
   { /////////////////////////////////////////////////////////////////////
@@ -212,6 +218,9 @@ class Resolver : public base::ReferenceCounted, private base::NonCopyable {
 
     ResolverProblemList problems() const;
     void applySolutions( const ProblemSolutionList & solutions );
+
+    // Return the Transaction computed by the last solver run.
+    sat::Transaction getTransaction();
 
     // reset all SOLVER transaction in pool
     void undo();

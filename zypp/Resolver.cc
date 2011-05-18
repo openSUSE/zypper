@@ -16,6 +16,7 @@
 #include "zypp/TriBool.h"
 #include "zypp/solver/detail/Resolver.h"
 #include "zypp/solver/detail/Testcase.h"
+#include "zypp/sat/Transaction.h"
 
 using namespace std;
 
@@ -66,6 +67,9 @@ namespace zypp
 
   void Resolver::applySolutions( const ProblemSolutionList & solutions )
   { _pimpl->applySolutions (solutions); }
+
+  sat::Transaction Resolver::getTransaction()
+  { return _pimpl->getTransaction(); }
 
   bool Resolver::doUpgrade()
   { return _pimpl->doUpgrade(); }

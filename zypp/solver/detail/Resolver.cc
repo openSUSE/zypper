@@ -35,6 +35,7 @@
 #include "zypp/ResFilters.h"
 #include "zypp/sat/Pool.h"
 #include "zypp/sat/Solvable.h"
+#include "zypp/sat/Transaction.h"
 
 #define MAXSOLVERRUNS 5
 
@@ -355,6 +356,8 @@ bool Resolver::resolveQueue( solver::detail::SolverQueueItemList & queue )
     return _satResolver->resolveQueue(queue, _addWeak);
 }
 
+sat::Transaction Resolver::getTransaction()
+{ return _satResolver->getTransaction(); }
 
 //----------------------------------------------------------------------------
 // Getting more information about the solve results

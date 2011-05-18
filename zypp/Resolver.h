@@ -27,6 +27,10 @@
 namespace zypp
 { /////////////////////////////////////////////////////////////////
 
+  namespace sat
+  {
+    class Transaction;
+  }
 
   ///////////////////////////////////////////////////////////////////
   //
@@ -154,6 +158,10 @@ namespace zypp
      **/
     void applySolutions( const ProblemSolutionList & solutions );
 
+    /**
+     * Return the \ref Transaction computed by the last solver run.
+     */
+    sat::Transaction getTransaction();
 
     /**
      * Remove resolvables which are conflicts with others or

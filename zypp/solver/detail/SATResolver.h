@@ -43,10 +43,15 @@ extern "C"
 #include "zypp/Capability.h"
 #include "zypp/solver/detail/SolverQueueItem.h"
 
-
 /////////////////////////////////////////////////////////////////////////
 namespace zypp
 { ///////////////////////////////////////////////////////////////////////
+
+  namespace sat
+  {
+    class Transaction;
+  }
+
   ///////////////////////////////////////////////////////////////////////
   namespace solver
   { /////////////////////////////////////////////////////////////////////
@@ -153,6 +158,9 @@ class SATResolver : public base::ReferenceCounted, private base::NonCopyable {
 
     ResolverProblemList problems ();
     void applySolutions (const ProblemSolutionList &solutions);
+
+    // Return the Transaction computed by the last solver run.
+    sat::Transaction getTransaction();
 
     void addPoolItemToInstall (PoolItem item);
     void addPoolItemsToInstallFromList (PoolItemList & rl);

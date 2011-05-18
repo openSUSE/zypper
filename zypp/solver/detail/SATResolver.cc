@@ -51,6 +51,7 @@ extern "C"
 #include "zypp/solver/detail/SolverQueueItemInstall.h"
 #include "zypp/solver/detail/SolverQueueItemDelete.h"
 #include "zypp/solver/detail/SystemCheck.h"
+#include "zypp/sat/Transaction.h"
 
 /////////////////////////////////////////////////////////////////////////
 namespace zypp
@@ -161,13 +162,18 @@ SATResolver::~SATResolver()
 
 //---------------------------------------------------------------------------
 
+sat::Transaction SATResolver::getTransaction()
+{
+  if ( !_solv )
+    return sat::Transaction();
+  return sat::Transaction( _solv->trans );
+}
 
 ResPool
 SATResolver::pool (void) const
 {
     return _pool;
 }
-
 
 void
 SATResolver::resetItemTransaction (PoolItem item)
