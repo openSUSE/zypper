@@ -1,4 +1,10 @@
 -------------------------------------------------------------------
+Wed May 18 14:10:20 CEST 2011 - dmacvicar@suse.de
+
+- Allow MediaCD to build against HAL or nothing
+  if udev is not present
+
+-------------------------------------------------------------------
 Mon May 16 14:42:09 CEST 2011 - dmacvicar@suse.de
 
 - forward port all changes to make it build in Code10 
