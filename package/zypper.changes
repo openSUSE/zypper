@@ -1,4 +1,10 @@
 -------------------------------------------------------------------
+Wed May 18 10:28:13 CEST 2011 - dheidler@suse.de
+
+- print warning when searching in disabled repo (bnc#661976)
+- 1.6.4
+
+-------------------------------------------------------------------
 Fri May 13 11:38:30 CEST 2011 - ma@suse.de
 
 - fix get_installed_providers by capability not to use selectables 
