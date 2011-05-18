@@ -13,7 +13,7 @@ FOREACH( loop_var ${APLLPROG} )
   )
   TARGET_LINK_LIBRARIES( ${loop_var}
     zypp
-    boost_program_options-mt
+    ${Boost_PROGRAM_OPTIONS_LIBRARY}
   )
 ENDFOREACH( loop_var )
 
