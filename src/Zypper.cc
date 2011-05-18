@@ -3659,6 +3659,12 @@ void Zypper::doCommand()
       std::list<zypp::RepoInfo>::const_iterator repo_it;
       for (repo_it = _rdata.repos.begin();repo_it != _rdata.repos.end();++repo_it){
         query.addRepo( repo_it->alias());
+        if (! repo_it->enabled())
+        {
+          out().warning(boost::str(format(
+            _("Specified repository '%s' is disabled."))
+              % (config().show_alias ? repo_it->alias() : repo_it->name())));
+        }
       }
     }
 
