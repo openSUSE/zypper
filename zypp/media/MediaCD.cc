@@ -268,7 +268,7 @@ namespace zypp {
     }
     if ( detected.empty() )
       WAR << "Did not find any CD/DVD device." << endl;
-#elsif HAVE_HAL
+#elif HAVE_HAL
     using namespace zypp::target::hal;
     try
     {
