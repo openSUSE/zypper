@@ -13,8 +13,16 @@ extern "C"
 {
 #include <sys/ioctl.h>
 #include <linux/cdrom.h>
+#if HAVE_UDEV
 #include <libudev.h>
+#endif
 }
+
+#ifndef HAVE_UDEV
+#if HAVE_HAL
+#include "zypp/target/hal/HalContext.h"
+#endif
+#endif
 
 #include <cstring> // strerror
 #include <cstdlib> // getenv
@@ -202,6 +210,8 @@ namespace zypp {
   //
   MediaCD::DeviceList MediaCD::detectDevices( bool supportingDVD ) const
   {
+    DeviceList detected;
+#ifdef HAVE_UDEV
     // http://www.kernel.org/pub/linux/utils/kernel/hotplug/libudev/index.html
     zypp::AutoDispose<struct udev *> udev( ::udev_new(), ::udev_unref );
     if ( ! udev )
@@ -221,7 +231,6 @@ namespace zypp {
     ::udev_enumerate_add_match_property( enumerate, "ID_CDROM", "1" );
     ::udev_enumerate_scan_devices( enumerate );
 
-    DeviceList detected;
     struct udev_list_entry * entry = 0;
     udev_list_entry_foreach( entry, ::udev_enumerate_get_list_entry( enumerate ) )
     {
@@ -259,6 +268,81 @@ namespace zypp {
     }
     if ( detected.empty() )
       WAR << "Did not find any CD/DVD device." << endl;
+#elsif HAVE_HAL
+    using namespace zypp::target::hal;
+    try
+    {
+      HalContext hal(true);
+
+      std::vector<std::string> drv_udis;
+      drv_udis = hal.findDevicesByCapability("storage.cdrom");
+
+      DBG << "Found " << drv_udis.size() << " cdrom drive udis" << std::endl;
+      for(size_t d = 0; d < drv_udis.size(); d++)
+      {
+        HalDrive drv( hal.getDriveFromUDI( drv_udis[d]));
+
+        if( drv)
+        {
+          bool supportsDVD=false;
+          if( supportingDVD)
+          {
+            std::vector<std::string> caps;
+            try {
+              caps = drv.getCdromCapabilityNames();
+            }
+            catch(const HalException &e)
+            {
+              ZYPP_CAUGHT(e);
+            }
+
+            std::vector<std::string>::const_iterator ci;
+            for( ci=caps.begin(); ci != caps.end(); ++ci)
+            {
+              if( *ci == "dvd")
+                supportsDVD = true;
+            }
+          }
+
+          MediaSource media("cdrom", drv.getDeviceFile(),
+                            drv.getDeviceMajor(),
+                            drv.getDeviceMinor());
+          DBG << "Found " << drv_udis[d] << ": "
+              << media.asString() << std::endl;
+          if( supportingDVD && supportsDVD)
+          {
+            detected.push_front(media);
+          }
+          else
+          {
+            detected.push_back(media);
+          }
+        }
+      }
+    }
+    catch(const zypp::target::hal::HalException &e)
+    {
+      ZYPP_CAUGHT(e);
+    }
+#else // manual way
+#warning Poor CDROM devices detection without udev/HAL
+    WAR << "Cdrom drive detection without HAL! " << std::endl;
+    PathInfo dvdinfo( "/dev/dvd" );
+    PathInfo cdrinfo( "/dev/cdrom" );
+    if ( dvdinfo.isBlk() )
+    {
+      MediaSource media( "cdrom", dvdinfo.path().asString(), dvdinfo.major(), dvdinfo.minor() );
+      DBG << "Found (NO_HAL): " << media << std::endl;
+      detected.push_back( media );
+    }
+    if ( cdrinfo.isBlk()
+         && ! ( cdrinfo.major() == dvdinfo.major() && cdrinfo.minor() == dvdinfo.minor() ) )
+    {
+      MediaSource media( "cdrom", cdrinfo.path().asString(), cdrinfo.major(), cdrinfo.minor() );
+      DBG << "Found (NO_HAL): " << media << std::endl;
+      detected.push_back( media );
+    }
+#endif
     return detected;
   }
 
