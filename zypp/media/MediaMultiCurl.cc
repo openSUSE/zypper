@@ -207,7 +207,7 @@ multifetchworker::writefunction(void *ptr, size_t size)
   _received += len;
 
   _request->_lastprogress = now;
-    
+
   if (_state == WORKER_DISCARD || !_request->_fp)
     {
       // block is no longer needed
@@ -255,16 +255,16 @@ multifetchworker::headerfunction(char *p, size_t size)
     }
   if (l <= 14 || l >= 128 || strncasecmp(p, "Content-Range:", 14) != 0)
     return size;
-  p += 14; 
-  l -= 14; 
+  p += 14;
+  l -= 14;
   while (l && (*p == ' ' || *p == '\t'))
     p++, l--;
-  if (l < 6 || strncasecmp(p, "bytes", 5)) 
+  if (l < 6 || strncasecmp(p, "bytes", 5))
     return size;
   p += 5;
   l -= 5;
   char buf[128];
-  memcpy(buf, p, l); 
+  memcpy(buf, p, l);
   buf[l] = 0;
   unsigned long long start, off, filesize;
   if (sscanf(buf, "%llu-%llu/%llu", &start, &off, &filesize) != 3)
@@ -361,7 +361,7 @@ multifetchworker::multifetchworker(int no, multifetchrequest &request, const Url
 	    use_auth = "digest,basic";        // our default
 	  long auth = CurlAuthData::auth_type_str2long(use_auth);
 	  if( auth != CURLAUTH_NONE)
-	  {    
+	  {
 	    DBG << "#" << _workerno << ": Enabling HTTP authentication methods: " << use_auth
 		<< " (CURLOPT_HTTPAUTH=" << auth << ")" << std::endl;
 	    curl_easy_setopt(_curl, CURLOPT_HTTPAUTH, auth);
@@ -379,7 +379,9 @@ multifetchworker::~multifetchworker()
         curl_multi_remove_handle(_request->_multi, _curl);
       if (_state == WORKER_DONE || _state == WORKER_SLEEP)
 	{
+#if LIBCURL_VERSION_NUMBER >= 0x071505
 	  curl_easy_setopt(_curl, CURLOPT_MAX_RECV_SPEED_LARGE, (curl_off_t)0);
+#endif
 	  curl_easy_setopt(_curl, CURLOPT_PRIVATE, (void *)0);
 	  curl_easy_setopt(_curl, CURLOPT_WRITEFUNCTION, (void *)0);
 	  curl_easy_setopt(_curl, CURLOPT_WRITEDATA, (void *)0);
@@ -507,7 +509,7 @@ multifetchworker::adddnsfd(fd_set &rset, int &maxfd)
 void
 multifetchworker::dnsevent(fd_set &rset)
 {
-  
+
   if (_state != WORKER_LOOKUP || !FD_ISSET(_dnspipe, &rset))
     return;
   int status;
@@ -695,7 +697,7 @@ multifetchworker::nextjob()
       stealjob();
       return;
     }
-  
+
   MediaBlockList *blklist = _request->_blklist;
   if (!blklist)
     {
@@ -767,7 +769,7 @@ multifetchworker::run()
   if (_request->_blklist)
     _request->_blklist->createDigest(_dig);	// resets digest
   _state = WORKER_FETCH;
-  
+
   double now = currentTime();
   _blkstarttime = now;
   _blkreceived = 0;
@@ -1097,7 +1099,9 @@ multifetchrequest::run(std::vector<Url> &urllist)
 		  if (avg < 1024)
 		    avg = 1024;
 		  worker->_maxspeed = avg;
+#if LIBCURL_VERSION_NUMBER >= 0x071505
 		  curl_easy_setopt(worker->_curl, CURLOPT_MAX_RECV_SPEED_LARGE, (curl_off_t)(avg));
+#endif
 		}
 
 	      worker->nextjob();

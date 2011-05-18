@@ -647,7 +647,9 @@ void MediaCurl::setupEasy()
   }
   else
   {
+#if LIBCURL_VERSION_NUMBER >= 0x071904
       SET_OPTION(CURLOPT_NOPROXY, "*");
+#endif
   }
 
   /** Speed limits */
@@ -952,7 +954,9 @@ void MediaCurl::evaluateCurlCode( const Pathname &filename,
       }
       break;
       case CURLE_FTP_COULDNT_RETR_FILE:
+#if LIBCURL_VERSION_NUMBER >= 0x071600
       case CURLE_REMOTE_FILE_NOT_FOUND:
+#endif
       case CURLE_FTP_ACCESS_DENIED:
         err = "File not found";
         ZYPP_THROW(MediaFileNotFoundException(_url, filename));
