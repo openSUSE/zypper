@@ -1,4 +1,11 @@
 -------------------------------------------------------------------
+Thu May 19 14:51:47 CEST 2011 - dheidler@suse.de
+
+- don't install prompt.h - use "zypper --promptids" instead
+  (bnc#637352)
+- 1.6.5
+
+-------------------------------------------------------------------
 Wed May 18 10:28:13 CEST 2011 - dheidler@suse.de
 
 - print warning when searching in disabled repo (bnc#661976)
