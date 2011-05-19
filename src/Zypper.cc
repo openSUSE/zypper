@@ -154,6 +154,7 @@ void print_main_help(Zypper & zypper)
   static string help_global_options = _("  Global Options:\n"
     "\t--help, -h\t\tHelp.\n"
     "\t--version, -V\t\tOutput the version number.\n"
+    "\t--promptids\t\tOutput a list of zypper's user prompts.\n"
     "\t--config, -c <file>\tUse specified config file instead of the default.\n"
     "\t--quiet, -q\t\tSuppress normal output, print only error\n"
     "\t\t\t\tmessages.\n"
@@ -320,6 +321,7 @@ void Zypper::processGlobalOptions()
     {"verbose",                    no_argument,       0, 'v'},
     {"quiet",                      no_argument,       0, 'q'},
     {"version",                    no_argument,       0, 'V'},
+    {"promptids",                  no_argument,       0,  0 },
     // rug compatibility alias for -vv
     {"debug",                      no_argument,       0,  0 },
     // rug compatibility alias for the default output level => ignored
@@ -595,7 +597,7 @@ void Zypper::processGlobalOptions()
       }
     }
   }
-  else if (!gopts.count("version"))
+  else if (!(gopts.count("version") || gopts.count("promptids")))
     setRunningHelp();
 
   if (command() == ZypperCommand::HELP)
@@ -640,6 +642,13 @@ void Zypper::processGlobalOptions()
     {
       out().info(PACKAGE " " VERSION, Out::QUIET);
       ZYPP_THROW(ExitRequestException("version shown"));
+    }
+    else if (gopts.count("promptids"))
+    {
+      #define PR_ENUML(nam, val) out().info(#nam "=" #val, Out::QUIET);
+      #define PR_ENUM(nam, val) PR_ENUML(nam, val)
+      #include "output/prompt.h"
+      ZYPP_THROW(ExitRequestException("promptids shown"));
     }
     else
     {

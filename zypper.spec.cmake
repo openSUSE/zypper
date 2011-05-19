@@ -116,8 +116,6 @@ rm -rf "$RPM_BUILD_ROOT"
 %{_datadir}/zypper/zypper.aug
 %dir %{_datadir}/zypper/xml
 %{_datadir}/zypper/xml/xmlout.rnc
-%dir %{_includedir}/zypper
-%{_includedir}/zypper/prompt.h
 %doc %{_mandir}/*/*
 %doc %dir %{_datadir}/doc/packages/zypper
 %doc %{_datadir}/doc/packages/zypper/TODO
