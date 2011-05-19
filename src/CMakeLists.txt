@@ -106,11 +106,6 @@ INSTALL(
 MESSAGE ( "** ZYpper binary will be installed in ${INSTALL_PREFIX}/bin" )
 
 INSTALL(  FILES
-  output/prompt.h
-  DESTINATION ${CMAKE_INSTALL_PREFIX}/include/zypper
-)
-
-INSTALL(  FILES
   output/xmlout.rnc
   DESTINATION ${CMAKE_INSTALL_PREFIX}/share/zypper/xml
 )
