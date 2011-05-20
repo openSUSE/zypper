@@ -10,7 +10,7 @@
  *
 */
 #include "librpm.h"
-#if !defined(_RPM_4_4_COMPAT) && !defined(_RPM_5)
+#ifdef _RPM_4_4
 #include <rpm/ugid.h>
 #else
 ////////////////////////////////////////////////////////////////////

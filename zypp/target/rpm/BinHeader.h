@@ -19,6 +19,7 @@ extern "C"
 
 #include <iosfwd>
 #include <string>
+#include <vector>
 #include <list>
 
 #include "zypp/base/ReferenceCounted.h"
@@ -105,28 +106,29 @@ public:
 /**
  *
  **/
-class BinHeader::intList
+class BinHeader::intList : private base::NonCopyable
 {
-  intList            ( const intList & );
-  intList & operator=( const intList & );
-private:
-  unsigned cnt;
-  void *   val;
-  rpmTagType type;
-private:
-  friend class BinHeader;
-  unsigned set( void * val_r, unsigned cnt_r, rpmTagType type_r );
-public:
-  intList();
-  bool empty() const
-  {
-    return cnt==0;
-  }
-  unsigned size() const
-  {
-    return cnt;
-  }
-  int operator[]( const unsigned idx_r ) const;
+  public:
+    intList()
+      : _type( RPM_NULL_TYPE )
+    {}
+
+    bool empty() const
+    { return _data.empty(); }
+
+    unsigned size() const
+    { return _data.size(); }
+
+    long operator[]( const unsigned idx_r ) const
+    { return idx_r < _data.size() ? _data[idx_r] : 0; }
+
+  private:
+    friend class BinHeader;
+    unsigned set( void * val_r, unsigned cnt_r, rpmTagType type_r );
+
+  private:
+    std::vector<long> _data;
+    rpmTagType _type;
 };
 
 ///////////////////////////////////////////////////////////////////
@@ -137,32 +139,24 @@ public:
 /**
  *
  **/
-class BinHeader::stringList
+class BinHeader::stringList : private base::NonCopyable
 {
-  stringList            ( const stringList & );
-  stringList & operator=( const stringList & );
-private:
-  unsigned cnt;
-  char **  val;
-  void clear();
-private:
-  friend class BinHeader;
-  unsigned set( char ** val_r, unsigned cnt_r );
-public:
-  stringList();
-  ~stringList()
-  {
-    clear();
-  }
-  bool empty() const
-  {
-    return cnt==0;
-  }
-  unsigned size() const
-  {
-    return cnt;
-  }
-  std::string operator[]( const unsigned idx_r ) const;
+  public:
+    bool empty() const
+    { return _data.empty(); }
+
+    unsigned size() const
+    { return _data.size(); }
+
+    std::string operator[]( const unsigned idx_r ) const
+    { return idx_r < _data.size() ? _data[idx_r] : std::string(); }
+
+  private:
+    friend class BinHeader;
+    unsigned set( char ** val_r, unsigned cnt_r );
+
+  private:
+    std::vector<std::string> _data;
 };
 
 ///////////////////////////////////////////////////////////////////

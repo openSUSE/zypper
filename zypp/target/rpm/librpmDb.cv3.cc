@@ -12,21 +12,17 @@
 #include "librpm.h"
 extern "C"
 {
-#ifndef _RPM_4_4_COMPAT
 #ifdef _RPM_5
 typedef rpmuint32_t rpm_count_t;
-#else
+#elifdef _RPM_4_4
 typedef int32_t rpm_count_t;
 #endif
-#endif
 
-#if defined( _RPM_5 )
+#ifdef _RPM_5
 #define HGEPtr_t void *
 #define headerGetEntryMinMemory headerGetEntry
 #define headerNVR(h,n,v,r) headerNEVRA(h,n,NULL,v,r,NULL)
-#elif defined( _RPM_4_4_COMPAT )
-#define HGEPtr_t void *
-#else
+#elifdef _RPM_4_4
 #define HGEPtr_t const void *
 #endif
 }
@@ -38,6 +34,9 @@ typedef int32_t rpm_count_t;
 #include "zypp/target/rpm/librpmDb.h"
 #include "zypp/target/rpm/RpmCallbacks.h"
 #include "zypp/ZYppCallbacks.h"
+
+#define xmalloc malloc
+#define xstrdup strdup
 
 extern "C"
 {
@@ -68,7 +67,6 @@ namespace target
 {
 namespace rpm
 {
-
 static int fadFileSize;
 
 static ssize_t Pread(FD_t fd, void * buf, size_t count, off_t offset)
@@ -172,6 +170,7 @@ static int dncmp(const void * a, const void * b)
 /*@=boundsread@*/
 
 /*@-bounds@*/
+#ifndef _RPM_4_X
 static void compressFilelist(Header h)
 /*@*/
 {
@@ -362,6 +361,158 @@ exit:
                                 &pEVR, 1);
   }
 }
+#else
+static void compressFilelist(Header h)
+{
+    struct rpmtd_s fileNames;
+    char ** dirNames;
+    const char ** baseNames;
+    uint32_t * dirIndexes;
+    rpm_count_t count;
+    int xx, i;
+    int dirIndex = -1;
+
+    /*
+     * This assumes the file list is already sorted, and begins with a
+     * single '/'. That assumption isn't critical, but it makes things go
+     * a bit faster.
+     */
+
+    if (headerIsEntry(h, RPMTAG_DIRNAMES)) {
+        xx = headerDel(h, RPMTAG_OLDFILENAMES);
+        return;         /* Already converted. */
+    }
+
+    if (!headerGet(h, RPMTAG_OLDFILENAMES, &fileNames, HEADERGET_MINMEM))
+        return;
+    count = rpmtdCount(&fileNames);
+    if (count < 1)
+        return;
+
+    dirNames = (char**)malloc(sizeof(*dirNames) * count);      /* worst case */
+    baseNames = (const char**)malloc(sizeof(*dirNames) * count);
+    dirIndexes = (uint32_t*)malloc(sizeof(*dirIndexes) * count);
+
+    /* HACK. Source RPM, so just do things differently */
+    {   const char *fn = rpmtdGetString(&fileNames);
+        if (fn && *fn != '/') {
+            dirIndex = 0;
+            dirNames[dirIndex] = xstrdup("");
+            while ((i = rpmtdNext(&fileNames)) >= 0) {
+                dirIndexes[i] = dirIndex;
+                baseNames[i] = rpmtdGetString(&fileNames);
+            }
+            goto exit;
+        }
+    }
+
+    while ((i = rpmtdNext(&fileNames)) >= 0) {
+        char ** needle;
+        char savechar;
+        char * baseName;
+        size_t len;
+        const char *filename = rpmtdGetString(&fileNames);
+
+        if (filename == NULL)   /* XXX can't happen */
+            continue;
+        baseName = strrchr((char*)filename, '/') + 1;
+        len = baseName - filename;
+        needle = dirNames;
+        savechar = *baseName;
+        *baseName = '\0';
+        if (dirIndex < 0 ||
+            (needle = (char**)bsearch(&filename, dirNames, dirIndex + 1, sizeof(dirNames[0]), dncmp)) == NULL) {
+            char *s = (char*)malloc(len + 1);
+            rstrlcpy(s, filename, len + 1);
+            dirIndexes[i] = ++dirIndex;
+            dirNames[dirIndex] = s;
+        } else
+            dirIndexes[i] = needle - dirNames;
+
+        *baseName = savechar;
+        baseNames[i] = baseName;
+    }
+
+exit:
+    if (count > 0) {
+        headerPutUint32(h, RPMTAG_DIRINDEXES, dirIndexes, count);
+        headerPutStringArray(h, RPMTAG_BASENAMES, baseNames, count);
+        headerPutStringArray(h, RPMTAG_DIRNAMES,
+                             (const char **) dirNames, dirIndex + 1);
+    }
+
+    rpmtdFreeData(&fileNames);
+    for (i = 0; i <= dirIndex; i++) {
+        free(dirNames[i]);
+    }
+    free(dirNames);
+    free(baseNames);
+    free(dirIndexes);
+
+    xx = headerDel(h, RPMTAG_OLDFILENAMES);
+}
+
+/*
+ * Up to rpm 3.0.4, packages implicitly provided their own name-version-release.
+ * Retrofit an explicit "Provides: name = epoch:version-release.
+ */
+static void providePackageNVR(Header h)
+{
+    const char *name;
+    char *pEVR;
+    rpmsenseFlags pFlags = RPMSENSE_EQUAL;
+    int bingo = 1;
+    struct rpmtd_s pnames;
+    rpmds hds, nvrds;
+
+    /* Generate provides for this package name-version-release. */
+    pEVR = headerGetEVR(h, &name);
+    if (!(name && pEVR))
+        return;
+
+    /*
+     * Rpm prior to 3.0.3 does not have versioned provides.
+     * If no provides at all are available, we can just add.
+     */
+    if (!headerGet(h, RPMTAG_PROVIDENAME, &pnames, HEADERGET_MINMEM)) {
+        goto exit;
+    }
+
+    /*
+     * Otherwise, fill in entries on legacy packages.
+     */
+    if (!headerIsEntry(h, RPMTAG_PROVIDEVERSION)) {
+        while (rpmtdNext(&pnames) >= 0) {
+            uint32_t fdummy = RPMSENSE_ANY;
+
+            headerPutString(h, RPMTAG_PROVIDEVERSION, "");
+            headerPutUint32(h, RPMTAG_PROVIDEFLAGS, &fdummy, 1);
+        }
+        goto exit;
+    }
+
+    /* see if we already have this provide */
+    hds = rpmdsNew(h, RPMTAG_PROVIDENAME, 0);
+    nvrds = rpmdsSingle(RPMTAG_PROVIDENAME, name, pEVR, pFlags);
+    if (rpmdsFind(hds, nvrds) >= 0) {
+        bingo = 0;
+    }
+    rpmdsFree(hds);
+    rpmdsFree(nvrds);
+
+exit:
+    if (bingo) {
+        const char *evr = pEVR;
+	uint32_t fdummy = pFlags;
+        headerPutString(h, RPMTAG_PROVIDENAME, name);
+        headerPutString(h, RPMTAG_PROVIDEVERSION, evr);
+        headerPutUint32(h, RPMTAG_PROVIDEFLAGS, &fdummy, 1);
+    }
+    rpmtdFreeData(&pnames);
+    free(pEVR);
+}
+
+#endif
 
 ///////////////////////////////////////////////////////////////////
 ///////////////////////////////////////////////////////////////////
@@ -562,7 +713,7 @@ void convertV3toV4( const Pathname & v3db_r, const librpmDb::constPtr & v4db_r )
   report->start(v3db_r);
   try
   {
-    internal_convertV3toV4( v3db_r, v4db_r, report );
+    //internal_convertV3toV4( v3db_r, v4db_r, report );
   }
   catch (RpmException & excpt_r)
   {

@@ -452,7 +452,7 @@ unsigned librpmDb::size() const
   unsigned count = 0;
   if ( valid() )
   {
-#if defined(_RPM_4_4_COMPAT) || defined(_RPM_5)
+#ifndef _RPM_4_4
     // looks like rpm-4.7 has no public dbi interface anymore
     int dbi = ::rpmdbOpen("/", &_d._db, O_RDONLY, 0);
     if (dbi == 0) {
