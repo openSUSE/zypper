@@ -69,7 +69,7 @@ namespace rpm
   { ::headerGet( h_r, tag_r, _rpmtd, HEADERGET_DEFAULT ); }
   inline HeaderEntryGetter::~HeaderEntryGetter()
   { ::rpmtdFreeData( _rpmtd ); ::rpmtdFree( _rpmtd ); }
-  inline rpmTagType	HeaderEntryGetter::type()	{ return _rpmtd->type; }
+  inline rpmTagType	HeaderEntryGetter::type()	{ return rpmtdType( _rpmtd ); }
   inline rpm_count_t	HeaderEntryGetter::cnt()	{ return _rpmtd->count; }
   inline void *		HeaderEntryGetter::val()	{ return _rpmtd->data; }
 #else
