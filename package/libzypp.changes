@@ -1,4 +1,11 @@
 -------------------------------------------------------------------
+Fri May 20 13:43:38 CEST 2011 - ma@suse.de
+
+- Disable use if rpm-4.4 legacy interface (dropped in 4.9) (bnc#691089)
+- Fix poolquery handling repo restrictions correctly. (bnc#661976)
+- version 9.1.0 (1)
+
+-------------------------------------------------------------------
 Wed May 18 14:10:20 CEST 2011 - dmacvicar@suse.de
 
 - Allow MediaCD to build against HAL or nothing
