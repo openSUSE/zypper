@@ -713,7 +713,7 @@ void convertV3toV4( const Pathname & v3db_r, const librpmDb::constPtr & v4db_r )
   report->start(v3db_r);
   try
   {
-    //internal_convertV3toV4( v3db_r, v4db_r, report );
+    internal_convertV3toV4( v3db_r, v4db_r, report );
   }
   catch (RpmException & excpt_r)
   {
