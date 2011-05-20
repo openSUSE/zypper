@@ -40,7 +40,7 @@ public:
 
   const Pathname _root;   // root directory for all operations
   const Pathname _dbPath; // directory (below root) that contains the rpmdb
-  rpmdb          _db;     // database handle
+  rpmts _ts;     // transaction handle, includes database
   shared_ptr<RpmException> _error;  // database error
 
   friend ostream & operator<<( ostream & str, const D & obj )
@@ -52,7 +52,7 @@ public:
   D( const Pathname & root_r, const Pathname & dbPath_r, bool readonly_r )
       : _root  ( root_r )
       , _dbPath( dbPath_r )
-      , _db    ( 0 )
+      , _ts    ( 0 )
   {
     _error.reset();
     // set %_dbpath macro
@@ -60,31 +60,31 @@ public:
     const char * root = ( _root == "/" ? NULL : _root.asString().c_str() );
     int          perms = 0644;
 
+    _ts = ::rpmtsCreate();
+    ::rpmtsSetRootDir(ts, _root);
+
     // check whether to create a new db
     PathInfo master( _root + _dbPath + "Packages" );
     if ( ! master.isFile() )
     {
       // init database
-      int res = ::rpmdbInit( root, perms );
+      int res = ::rpmtsInit( _ts, perms );
       if ( res )
       {
         ERR << "rpmdbInit error(" << res << "): " << *this << endl;
         _error = shared_ptr<RpmInitException>(new RpmInitException(_root, _dbPath));
+	rpmtsFree(_ts);
         ZYPP_THROW(*_error);
       }
     }
 
     // open database
-    int res = ::rpmdbOpen( root, &_db, (readonly_r ? O_RDONLY : O_RDWR ), perms );
-    if ( res || !_db )
+    int res = ::rpmtsOpenDB( _ts, (readonly_r ? O_RDONLY : O_RDWR ));
+    if ( res )
     {
-      if ( _db )
-      {
-        ::rpmdbClose( _db );
-        _db = 0;
-      }
       ERR << "rpmdbOpen error(" << res << "): " << *this << endl;
       _error = shared_ptr<RpmDbOpenException>(new RpmDbOpenException(_root, _dbPath));
+      rpmtsFree(_ts);
       ZYPP_THROW(*_error);
       return;
     }
@@ -94,9 +94,9 @@ public:
 
   ~D()
   {
-    if ( _db )
+    if ( _ts )
     {
-      ::rpmdbClose( _db );
+      ::rpmtsFree(_ts);
     }
   }
 };
@@ -467,6 +467,8 @@ unsigned librpmDb::size() const
         ::rpmdbClose(_d._db);
     }
 #else
+# ifdef RPMDBI_NAME
+    // in rpm < 4.9 RPMDBI_NAME was a define
     dbiIndex dbi = dbiOpen( _d._db, RPMTAG_NAME, 0 );
     if ( dbi )
     {
@@ -482,6 +484,18 @@ unsigned librpmDb::size() const
       dbiCclose( dbi, dbcursor, 0 );
       /* no need to close dbi */
     }
+# else
+   // rpm-4.9 case, RPMDBI_NAME is an enum
+   rpmdbIndexIterator ii = rpmdbIndexIteratorInit(rpmtsGetRdb(_d._ts), RPMDBI_NAME);
+   if ( ii )
+   {
+     char * key;
+     size_t keylen;
+     while (rpmdbIndexIteratorNext(ii, &key, &keylen) == 0)
+       count += rpmdbIndexIteratorNumPkgs(ii);
+     rpmdbIndexIteratorFree(ii);
+   }
+# endif
 #endif
   }
   return count;
@@ -495,7 +509,7 @@ unsigned librpmDb::size() const
 //
 void * librpmDb::dont_call_it() const
 {
-  return _d._db;
+  return rpmtsGetRdb(_d._ts);
 }
 
 ///////////////////////////////////////////////////////////////////
@@ -641,7 +655,7 @@ public:
     destroy();
     if ( ! _dbptr )
       return false;
-    _mi = ::rpmdbInitIterator( _dbptr->_d._db, rpmTag(rpmtag), keyp, keylen );
+    _mi = ::rpmtsInitIterator( _dbptr->_d._ts, rpmTag(rpmtag), keyp, keylen );
     return _mi;
   }
 
