@@ -86,7 +86,7 @@ private:
   /**
    * For internal use. Pointer returned should immediately be
    * wrapped into librpmDb::Ptr.
-  *
+   *
    * \throws RpmException
    *
    **/
@@ -100,7 +100,7 @@ private:
    * outstanding reference goes out of scope. If no external reference is
    * created, you'll have to explicitly call @ref dbRelease to close the
    * database.
-  *
+   *
    * \throws RpmException
    *
    **/

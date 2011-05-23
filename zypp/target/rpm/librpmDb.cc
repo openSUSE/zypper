@@ -40,7 +40,7 @@ public:
 
   const Pathname _root;   // root directory for all operations
   const Pathname _dbPath; // directory (below root) that contains the rpmdb
-  rpmts _ts;     // transaction handle, includes database
+  rpmts _ts;              // transaction handle, includes database
   shared_ptr<RpmException> _error;  // database error
 
   friend ostream & operator<<( ostream & str, const D & obj )
@@ -61,14 +61,14 @@ public:
     int          perms = 0644;
 
     _ts = ::rpmtsCreate();
-    ::rpmtsSetRootDir(ts, _root);
+    ::rpmtsSetRootDir( _ts, _root.c_str() );
 
     // check whether to create a new db
     PathInfo master( _root + _dbPath + "Packages" );
     if ( ! master.isFile() )
     {
       // init database
-      int res = ::rpmtsInit( _ts, perms );
+      int res = ::rpmtsInitDB( _ts, perms );
       if ( res )
       {
         ERR << "rpmdbInit error(" << res << "): " << *this << endl;
@@ -452,51 +452,9 @@ unsigned librpmDb::size() const
   unsigned count = 0;
   if ( valid() )
   {
-#ifndef _RPM_4_4
-    // looks like rpm-4.7 has no public dbi interface anymore
-    int dbi = ::rpmdbOpen("/", &_d._db, O_RDONLY, 0);
-    if (dbi == 0) {
-        rpmdbMatchIterator mi = ::rpmdbInitIterator(_d._db, RPMTAG_NAME, NULL, 0);
-        if (mi != NULL) {
-            for (;;) {
-                Header rpmHeader = ::rpmdbNextIterator(mi);
-                if (rpmHeader != NULL)
-                    ++count;
-            }
-        }
-        ::rpmdbClose(_d._db);
-    }
-#else
-# ifdef RPMDBI_NAME
-    // in rpm < 4.9 RPMDBI_NAME was a define
-    dbiIndex dbi = dbiOpen( _d._db, RPMTAG_NAME, 0 );
-    if ( dbi )
-    {
-      DBC * dbcursor = 0;
-      dbiCopen( dbi, dbi->dbi_txnid, &dbcursor, 0 );
-
-      DBT key, data;
-      memset( &key, 0, sizeof(key) );
-      memset( &data, 0, sizeof(data) );
-      while ( dbiGet( dbi, dbcursor, &key, &data, DB_NEXT ) == 0 )
-        count += data.size / dbi->dbi_jlen;
-
-      dbiCclose( dbi, dbcursor, 0 );
-      /* no need to close dbi */
-    }
-# else
-   // rpm-4.9 case, RPMDBI_NAME is an enum
-   rpmdbIndexIterator ii = rpmdbIndexIteratorInit(rpmtsGetRdb(_d._ts), RPMDBI_NAME);
-   if ( ii )
-   {
-     char * key;
-     size_t keylen;
-     while (rpmdbIndexIteratorNext(ii, &key, &keylen) == 0)
-       count += rpmdbIndexIteratorNumPkgs(ii);
-     rpmdbIndexIteratorFree(ii);
-   }
-# endif
-#endif
+    db_const_iterator it( this );
+    for ( db_const_iterator it( this ); *it; ++it )
+      ++count;
   }
   return count;
 }
