@@ -1,4 +1,10 @@
 -------------------------------------------------------------------
+Mon May 23 16:12:32 CEST 2011 - dheidler@suse.de
+
+- respect patch content license when determinating interactive status
+- version 9.1.2 (1)
+
+-------------------------------------------------------------------
 Mon May 23 12:05:10 CEST 2011 - ma@suse.de
 
 - More rpm-4.9 fixes
