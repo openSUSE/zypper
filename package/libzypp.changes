@@ -2,7 +2,7 @@
 Mon May 23 12:05:10 CEST 2011 - ma@suse.de
 
 - More rpm-4.9 fixes
-- version 9.1.1 (1)
+- Disable rpm V3toV4 conversion while not working with rpm 4.9
 
 -------------------------------------------------------------------
 Sun May 22 01:14:21 CEST 2011 - ma@suse.de
