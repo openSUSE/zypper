@@ -102,7 +102,7 @@ namespace zypp
     Patch::Contents c( contents() );
     for_( it, c.begin(), c.end() )
     {
-      if ( ! licenseToConfirm().empty() )
+      if ( ! makeResObject(*it)->licenseToConfirm().empty() )
       {
         return true;
       }
