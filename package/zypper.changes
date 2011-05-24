@@ -1,4 +1,12 @@
 -------------------------------------------------------------------
+Tue May 24 14:58:47 CEST 2011 - dheidler@suse.de
+
+- add option --reboot-not-interact (bnc#665853)
+- allow installation of paches wich require a reboot
+  non-interactively
+- 1.6.6
+
+-------------------------------------------------------------------
 Thu May 19 14:51:47 CEST 2011 - dheidler@suse.de
 
 - don't install prompt.h - use "zypper --promptids" instead
