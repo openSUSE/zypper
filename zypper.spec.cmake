@@ -11,7 +11,7 @@
 # norootforbuild
 
 Name:           @PACKAGE@
-BuildRequires:  libzypp-devel >= 8.12.0
+BuildRequires:  libzypp-devel >= 9.2.0
 BuildRequires:  boost-devel >= 1.33.1
 BuildRequires:  gettext-devel >= 0.15
 BuildRequires:  readline-devel >= 5.1

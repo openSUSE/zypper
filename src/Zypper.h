@@ -44,6 +44,7 @@ struct GlobalOptions
   disable_system_resolvables(false),
   is_rug_compatible(false),
   non_interactive(false),
+  reboot_req_non_interactive(false),
   no_gpg_checks(false),
   gpg_auto_import_keys(false),
   machine_readable(false),
@@ -73,6 +74,7 @@ struct GlobalOptions
   bool disable_system_resolvables;
   bool is_rug_compatible;
   bool non_interactive;
+  bool reboot_req_non_interactive;
   bool no_gpg_checks;
   bool gpg_auto_import_keys;
   bool machine_readable;

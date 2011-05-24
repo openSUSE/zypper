@@ -25,6 +25,8 @@
 
 #include "SolverRequester.h"
 
+#include "Zypper.h"
+
 // libzypp logger settings
 #undef  ZYPP_BASE_LOGGER_LOGGROUP
 #define ZYPP_BASE_LOGGER_LOGGROUP "zypper:req"
@@ -398,7 +400,7 @@ bool SolverRequester::installPatch(
     if (ignore_pkgmgmt || patch->restartSuggested())
     {
       // bnc #221476
-      if (_opts.skip_interactive && patch->interactive())
+      if (_opts.skip_interactive && patch->interactive(Zypper::instance()->globalOpts().reboot_req_non_interactive))
       {
         addFeedback(Feedback::PATCH_INTERACTIVE_SKIPPED, patchspec, selected);
         return false;

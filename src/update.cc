@@ -138,7 +138,7 @@ static bool xml_list_patches (Zypper & zypper)
         cout << "category=\"" <<  patch->category() << "\" ";
         cout << "pkgmanager=\"" << (patch->restartSuggested() ? "true" : "false") << "\" ";
         cout << "restart=\"" << (patch->rebootSuggested() ? "true" : "false") << "\" ";
-        cout << "interactive=\"" << (patch->interactive() ? "true" : "false") << "\" ";
+        cout << "interactive=\"" << (patch->interactive(zypper.globalOpts().reboot_req_non_interactive) ? "true" : "false") << "\" ";
         cout << "kind=\"patch\"";
         cout << ">" << endl;
         cout << "  <summary>" << xml_encode(patch->summary()) << "  </summary>" << endl;
