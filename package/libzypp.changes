@@ -1,4 +1,10 @@
 -------------------------------------------------------------------
+Tue May 24 12:43:32 CEST 2011 - dheidler@suse.de
+
+- add option ignore_reboot_flag to Patch::interactive (bnc#665853)
+- version 9.2.0 (2)
+
+-------------------------------------------------------------------
 Mon May 23 16:12:32 CEST 2011 - dheidler@suse.de
 
 - respect patch content license when determinating interactive status
