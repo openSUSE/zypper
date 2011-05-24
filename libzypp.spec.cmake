@@ -11,7 +11,7 @@
 # norootforbuild
 
 Name:           @PACKAGE@
-License:        GPLv2+
+License:        GPLv2
 Group:          System/Packages
 BuildRoot:      %{_tmppath}/%{name}-%{version}-build
 Summary:        Package, Patch, Pattern, and Product Management
