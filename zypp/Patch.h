@@ -95,7 +95,7 @@ namespace zypp
       /**
        * Is the patch installation interactive? (does it need user input?)
        */
-      bool interactive() const;
+      bool interactive( const bool & ignore_reboot_flag = false ) const;
 
     public:
       /**

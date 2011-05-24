@@ -90,9 +90,9 @@ namespace zypp
   { return lookupBoolAttribute( sat::SolvAttr::reloginSuggested ); }
 
 
-  bool Patch::interactive() const
+  bool Patch::interactive( const bool & ignore_reboot_flag ) const
   {
-    if ( rebootSuggested()
+    if ( ( rebootSuggested() && !ignore_reboot_flag )
          || ! message().empty()
          || ! licenseToConfirm().empty() )
     {
