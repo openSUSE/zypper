@@ -164,7 +164,8 @@ void print_main_help(Zypper & zypper)
     "\t--rug-compatible, -r\tTurn on rug compatibility.\n"
     "\t--non-interactive, -n\tDo not ask anything, use default answers\n"
     "\t\t\t\tautomatically.\n"
-    "\t--reboot-not-interact\tDo not treat patches as interactive, which have\n"
+    "\t--non-interactive-include-reboot-patches\n"
+    "\t\t\t\tDo not treat patches as interactive, which have\n"
     "\t\t\t\tthe rebootSuggested-flag set.\n"
     "\t--xmlout, -x\t\tSwitch to XML output.\n"
   );
@@ -334,7 +335,7 @@ void Zypper::processGlobalOptions()
     {"table-style",                required_argument, 0, 's'},
     {"rug-compatible",             no_argument,       0, 'r'},
     {"non-interactive",            no_argument,       0, 'n'},
-    {"reboot-not-interact",        no_argument,       0, '0'},
+    {"non-interactive-include-reboot-patches", no_argument, 0, '0'},
     {"no-gpg-checks",              no_argument,       0,  0 },
     {"gpg-auto-import-keys",       no_argument,       0,  0 },
     {"root",                       required_argument, 0, 'R'},
@@ -472,7 +473,7 @@ void Zypper::processGlobalOptions()
     MIL << "Entering non-interactive mode" << endl;
   }
 
-  if (gopts.count("reboot-not-interact")) {
+  if (gopts.count("non-interactive-include-reboot-patches")) {
     _gopts.reboot_req_non_interactive = true;
     out().info(_("Patches having the flag rebootSuggested set will not be treated as interactive."), Out::HIGH);
     MIL << "Patches having the flag rebootSuggested set will not be treated as interactive" << endl;
