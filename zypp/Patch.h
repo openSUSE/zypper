@@ -94,8 +94,15 @@ namespace zypp
 
       /**
        * Is the patch installation interactive? (does it need user input?)
+       *
+       * For security reasons patches requiring a reboot are not
+       * installed in an unattended mode. They are considered to be
+       * \c interactive so the user gets informed about the need for
+       * reboot. \a ignoreRebootFlag_r may be used to explicitly turn
+       * off this behavior and include those patches (unless they actually
+       * contain interactive components as well, like messages or licenses).
        */
-      bool interactive( const bool & ignore_reboot_flag = false ) const;
+      bool interactive( bool ignoreRebootFlag_r = false ) const;
 
     public:
       /**
