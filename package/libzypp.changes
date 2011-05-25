@@ -1,4 +1,9 @@
 -------------------------------------------------------------------
+Thu May 26 01:13:43 CEST 2011 - ma@suse.de
+
+- Update zypp-po.tar.bz2
+
+-------------------------------------------------------------------
 Wed May 25 09:22:28 CEST 2011 - ma@suse.de
 
 - Add a fallback gnome-packagekit updater in package-manager (bnc#667504)
