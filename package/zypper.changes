@@ -1,4 +1,12 @@
 -------------------------------------------------------------------
+Wed May 25 10:28:47 CEST 2011 - dheidler@suse.de
+
+- rename an option
+  old: --reboot-not-interact
+  new: --non-interactive-include-reboot-patches
+- 1.6.7
+
+-------------------------------------------------------------------
 Tue May 24 14:58:47 CEST 2011 - dheidler@suse.de
 
 - add option --reboot-not-interact (bnc#665853)
