@@ -1,4 +1,9 @@
 -------------------------------------------------------------------
+Wed May 25 09:22:28 CEST 2011 - ma@suse.de
+
+- Add a fallback gnome-packagekit updater in package-manager (bnc#667504)
+
+-------------------------------------------------------------------
 Tue May 24 12:43:32 CEST 2011 - dheidler@suse.de
 
 - add option ignore_reboot_flag to Patch::interactive (bnc#665853)
