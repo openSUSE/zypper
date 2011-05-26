@@ -26,7 +26,11 @@ Recommends:     logrotate
 %endif
 BuildRequires:  cmake
 BuildRequires:  openssl-devel
+%if 0%{?suse_version} >= 1130
 BuildRequires:  libudev-devel
+%else
+BuildRequires:  hal-devel
+%endif
 BuildRequires:  boost-devel
 BuildRequires:  dejagnu
 BuildRequires:  doxygen
@@ -143,7 +147,11 @@ Requires:       bzip2
 Requires:       popt-devel
 Requires:       boost-devel
 Requires:       libstdc++-devel
+%if 0%{?suse_version} >= 1130
 Requires:       libudev-devel
+%else
+Requires:       hal-devel
+%endif
 Requires:       cmake
 %if 0%{?suse_version}
 %if 0%{?suse_version} >= 1100
