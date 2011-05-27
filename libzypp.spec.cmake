@@ -94,15 +94,6 @@ Requires:       gnupg2
 # this check should use 7.19.0 if SLE and 7.19.4 if not (backported
 # CURLOPT_REDIR_PROTOCOLS)
 %define min_curl_version 7.19.0-11.22
-#%define min_curl_version 7.19.4
-%define use_translation_set sle-zypp
-# No requirement, but as we'd use it in case it is present,
-# check for a sufficient version:
-%else
-# Code10 still has this define
-%if 0%{?sles_version}
-%define use_translation_set sle-zypp
-%endif
 %endif
 
 # ---------------------------------------------------------------
@@ -197,12 +188,19 @@ mkdir build
 cd build
 export CFLAGS="$RPM_OPT_FLAGS"
 export CXXFLAGS="$RPM_OPT_FLAGS"
+unset TRANSLATION_SET
+# SLE11-* might want its own translation set:
+%if 0%{?suse_version} == 1110
+if [ -f ../po/sle-zypp-po.tar.bz ]; then
+  export TRANSLATION_SET=sle-zypp
+fi
+%endif
 cmake -DCMAKE_INSTALL_PREFIX=%{_prefix} \
       -DDOC_INSTALL_DIR=%{_docdir} \
       -DLIB=%{_lib} \
       -DCMAKE_BUILD_TYPE=Release \
       -DCMAKE_SKIP_RPATH=1 \
-      %{?use_translation_set:-DUSE_TRANSLATION_SET=%use_translation_set} \
+      -DUSE_TRANSLATION_SET=${TRANSLATION_SET:-zypp} \
       ..
 make %{?_smp_mflags} VERBOSE=1
 make -C doc/autodoc %{?_smp_mflags}
