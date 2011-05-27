@@ -16,8 +16,10 @@ extern "C"
 #undef RPM_NULL_TYPE
 #define RPM_NULL_TYPE rpmTagType(0)
 typedef rpmuint32_t rpm_count_t;
-#elifdef _RPM_4_4
+#else
+#ifdef _RPM_4_4
 typedef int32_t rpm_count_t;
+#endif
 #endif
 }
 
@@ -82,7 +84,7 @@ namespace rpm
   { if ( _val && _type == RPM_STRING_ARRAY_TYPE ) free( _val ); }
   inline rpmTagType	HeaderEntryGetter::type()	{ return _type; }
   inline rpm_count_t	HeaderEntryGetter::cnt()	{ return _cnt; }
-  inline void *		HeaderEntryGetter::val( int i )	{ return _val; }
+  inline void *		HeaderEntryGetter::val()	{ return _val; }
 #endif //_RPM_4_X
 
 ///////////////////////////////////////////////////////////////////

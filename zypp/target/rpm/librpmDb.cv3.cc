@@ -15,16 +15,14 @@ extern "C"
 {
 #ifdef _RPM_5
 typedef rpmuint32_t rpm_count_t;
-#elifdef _RPM_4_4
-typedef int32_t rpm_count_t;
-#endif
-
-#ifdef _RPM_5
 #define HGEPtr_t void *
 #define headerGetEntryMinMemory headerGetEntry
 #define headerNVR(h,n,v,r) headerNEVRA(h,n,NULL,v,r,NULL)
-#elifdef _RPM_4_4
+#else
+#ifdef _RPM_4_4
+typedef int32_t rpm_count_t;
 #define HGEPtr_t const void *
+#endif
 #endif
 }
 
