@@ -12,6 +12,7 @@
 #ifndef ZYPP_PATCH_H
 #define ZYPP_PATCH_H
 
+#include "zypp/base/Flags.h"
 #include "zypp/sat/SolvAttr.h"
 #include "zypp/ResObject.h"
 
@@ -51,6 +52,18 @@ namespace zypp
         CAT_OPTIONAL,
         CAT_DOCUMENT
       };
+
+      /**
+       * Flags to set the flags to be ignored when checking if this
+       * patch is interactive.
+       */
+      enum InteractiveFlag {
+        NoFlags = 0x0000,
+        Reboot = 0x0001,
+        Message = 0x0002,
+        License = 0x0004
+      };
+      ZYPP_DECLARE_FLAGS(InteractiveFlags, InteractiveFlag);
 
     public:
       /**
@@ -93,6 +106,11 @@ namespace zypp
       std::string message( const Locale & lang_r = Locale() ) const;
 
       /**
+       * Is the patch still interactive when ignoring this flags?
+       */
+      bool interactiveWhenIgnoring( InteractiveFlags flags_r = NoFlags ) const ;
+
+      /**
        * Is the patch installation interactive? (does it need user input?)
        *
        * For security reasons patches requiring a reboot are not
@@ -102,7 +120,7 @@ namespace zypp
        * off this behavior and include those patches (unless they actually
        * contain interactive components as well, like messages or licenses).
        */
-      bool interactive( bool ignoreRebootFlag_r = false ) const;
+      bool interactive() const;
 
     public:
       /**
@@ -132,6 +150,7 @@ namespace zypp
       /** Dtor */
       virtual ~Patch();
   };
+  ZYPP_DECLARE_OPERATORS_FOR_FLAGS(Patch::InteractiveFlags);
 
 
   /**

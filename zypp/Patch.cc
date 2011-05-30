@@ -90,11 +90,11 @@ namespace zypp
   { return lookupBoolAttribute( sat::SolvAttr::reloginSuggested ); }
 
 
-  bool Patch::interactive( bool ignoreRebootFlag_r ) const
+  bool Patch::interactiveWhenIgnoring( InteractiveFlags flags_r ) const
   {
-    if ( ( ! ignoreRebootFlag_r && rebootSuggested() )
-         || ! message().empty()
-         || ! licenseToConfirm().empty() )
+    if ( ( ! (flags_r & Reboot) && rebootSuggested() )
+         || ( ! (flags_r & Message) && ! message().empty() )
+         || ( ! (flags_r & License) && ! licenseToConfirm().empty() ) )
     {
       return true;
     }
@@ -102,13 +102,18 @@ namespace zypp
     Patch::Contents c( contents() );
     for_( it, c.begin(), c.end() )
     {
-      if ( ! makeResObject(*it)->licenseToConfirm().empty() )
+      if ( ! (flags_r & License) && ! makeResObject(*it)->licenseToConfirm().empty() )
       {
         return true;
       }
     }
 
     return false;
+  }
+
+  bool Patch::interactive() const
+  {
+    return interactiveWhenIgnoring();
   }
 
   Patch::Contents Patch::contents() const
