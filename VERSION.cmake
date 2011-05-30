@@ -59,10 +59,10 @@
 #   changes file. See './mkChangelog -h' for help.
 #
 SET(LIBZYPP_MAJOR "9")
-SET(LIBZYPP_COMPATMINOR "2")
-SET(LIBZYPP_MINOR "2")
+SET(LIBZYPP_COMPATMINOR "3")
+SET(LIBZYPP_MINOR "3")
 SET(LIBZYPP_PATCH "0")
 #
-# LAST RELEASED: 9.2.0 (2)
+# LAST RELEASED: 9.3.0 (3)
 # (The number in parenthesis is LIBZYPP_COMPATMINOR)
 #=======

@@ -1,4 +1,10 @@
 -------------------------------------------------------------------
+Mon May 30 17:14:14 CEST 2011 - dheidler@suse.de
+
+- Switch patch interactive-check to flags
+- version 9.3.0 (3)
+
+-------------------------------------------------------------------
 Sun May 29 01:13:42 CEST 2011 - ma@suse.de
 
 - Update zypp-po.tar.bz2
