@@ -1,4 +1,10 @@
 -------------------------------------------------------------------
+Mon May 30 17:38:51 CEST 2011 - dheidler@suse.de
+
+- use the tag-based patch-interactive interface of libzypp
+- 1.6.8
+
+-------------------------------------------------------------------
 Wed May 25 10:28:47 CEST 2011 - dheidler@suse.de
 
 - rename an option
