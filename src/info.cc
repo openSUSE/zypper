@@ -267,7 +267,10 @@ void printPatchInfo(Zypper & zypper, const ui::Selectable & s )
     cout << _("Restart Required: ");
   cout << (patch->restartSuggested() ? _("Yes") : _("No")) << endl;
 
-  cout << _("Interactive: ") << (patch->interactive(zypper.globalOpts().reboot_req_non_interactive) ? _("Yes") : _("No")) << endl;
+  Patch::InteractiveFlags ignoreFlags = Patch::NoFlags;
+  ignoreFlags |= (zypper.globalOpts().reboot_req_non_interactive) ? Patch::Reboot : Patch::NoFlags;
+
+  cout << _("Interactive: ") << (patch->interactiveWhenIgnoring(ignoreFlags) ? _("Yes") : _("No")) << endl;
 
   printSummaryDesc(pool_item.resolvable());
 
