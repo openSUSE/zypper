@@ -88,7 +88,7 @@ namespace zypp
         Flags operator^( Flags rhs ) const    { return Flags( *this ) ^= rhs; }
         Flags operator^( Enum rhs ) const     { return Flags( *this ) ^= rhs; }
 
-        Flags operator~() const               { return ~_val; }
+        Flags operator~() const               { return Flags( ~_val ); }
 
       public:
         Flags & setFlag( Enum flag_r, bool newval_r )
