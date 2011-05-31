@@ -26,7 +26,7 @@ std::string Out::zyppExceptionReport(const zypp::Exception & e)
   //    - mid level error   |
   //    - first error      -+
   if (this->verbosity() > Out::NORMAL)
-    s << e.asUserHistory()
+    s << e.asUserHistory();
   else
     s << e.asUserString();
 
