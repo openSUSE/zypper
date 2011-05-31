@@ -400,7 +400,8 @@ bool SolverRequester::installPatch(
     if (ignore_pkgmgmt || patch->restartSuggested())
     {
       Patch::InteractiveFlags ignoreFlags = Patch::NoFlags;
-      ignoreFlags |= (Zypper::instance()->globalOpts().reboot_req_non_interactive) ? Patch::Reboot : Patch::NoFlags;
+      if (Zypper::instance()->globalOpts().reboot_req_non_interactive)
+        ignoreFlags |= Patch::Reboot;
 
       // bnc #221476
       if (_opts.skip_interactive && patch->interactiveWhenIgnoring(ignoreFlags))

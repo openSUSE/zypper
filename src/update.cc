@@ -140,7 +140,8 @@ static bool xml_list_patches (Zypper & zypper)
         cout << "restart=\"" << (patch->rebootSuggested() ? "true" : "false") << "\" ";
 
         Patch::InteractiveFlags ignoreFlags = Patch::NoFlags;
-        ignoreFlags |= (zypper.globalOpts().reboot_req_non_interactive) ? Patch::Reboot : Patch::NoFlags;
+        if (zypper.globalOpts().reboot_req_non_interactive)
+          ignoreFlags |= Patch::Reboot;
 
         cout << "interactive=\"" << (patch->interactiveWhenIgnoring(ignoreFlags) ? "true" : "false") << "\" ";
         cout << "kind=\"patch\"";

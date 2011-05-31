@@ -268,7 +268,8 @@ void printPatchInfo(Zypper & zypper, const ui::Selectable & s )
   cout << (patch->restartSuggested() ? _("Yes") : _("No")) << endl;
 
   Patch::InteractiveFlags ignoreFlags = Patch::NoFlags;
-  ignoreFlags |= (zypper.globalOpts().reboot_req_non_interactive) ? Patch::Reboot : Patch::NoFlags;
+  if (zypper.globalOpts().reboot_req_non_interactive)
+    ignoreFlags |= Patch::Reboot;
 
   cout << _("Interactive: ") << (patch->interactiveWhenIgnoring(ignoreFlags) ? _("Yes") : _("No")) << endl;
 
