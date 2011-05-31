@@ -74,6 +74,7 @@ namespace zypp
     std::ofstream 	_log;
     unsigned		_refcnt = 0;
     Pathname		_fname;
+    Pathname		_fnameLastFail;
 
     inline void openLog()
     {
@@ -82,8 +83,11 @@ namespace zypp
 
       _log.clear();
       _log.open( _fname.asString().c_str(), std::ios::out|std::ios::app );
-      if( !_log )
+      if( !_log && _fnameLastFail != _fname )
+      {
         ERR << "Could not open logfile '" << _fname << "'" << endl;
+	_fnameLastFail = _fname;
+      }
     }
 
     inline void closeLog()
