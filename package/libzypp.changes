@@ -1,4 +1,13 @@
 -------------------------------------------------------------------
+Tue May 31 11:46:57 CEST 2011 - dheidler@suse.de
+
+- fix var definition order in PackageProvider
+- fix operator~ return datatype for flags (ctor is explicit)
+- add method interactiveFlags to Patch describing what makes it
+  interactive
+- version 9.4.0 (3)
+
+-------------------------------------------------------------------
 Tue May 31 10:12:12 CEST 2011 - ma@suse.de
 
 - Recommend 'lsof' (for zypper ps) (bnc#694427, bnc#684466)
