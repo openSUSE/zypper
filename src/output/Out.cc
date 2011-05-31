@@ -19,19 +19,14 @@ bool Out::progressFilter()
 std::string Out::zyppExceptionReport(const zypp::Exception & e)
 {
   std::ostringstream s;
-  if (e.historySize())
-  {
-    if (this->verbosity() > Out::NORMAL)
-    {
-      // print the whole history
-      s << e.historyAsString();
-      // this exception
-      s << " - " << e.asUserString();
-    }
-    else
-      // print the root cause only
-      s << *(--e.historyEnd());
-  }
+  // The Exception history is a stack! So zypp::Exception::asUserHistory() prints:
+  //   This is bad!          <- Exception::asUserString()
+  //   History:            -+
+  //    - top level error   |<- Exception::historyAsString()
+  //    - mid level error   |
+  //    - first error      -+
+  if (this->verbosity() > Out::NORMAL)
+    s << e.asUserHistory()
   else
     s << e.asUserString();
 

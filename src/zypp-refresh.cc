@@ -167,7 +167,7 @@ int main(int argc, char **argv)
         << " Error:" << endl
         << str::form(
           "Could not refresh repository '%s':\n%s\n%s",
-          it->name().c_str(), excpt_r.msg().c_str(), excpt_r.historyAsString().c_str())
+          it->name().c_str(), excpt_r.asUserString().c_str(), excpt_r.historyAsString().c_str())
         << endl;
       ++errcount;
     }
@@ -177,7 +177,7 @@ int main(int argc, char **argv)
   {
     if (repocount == errcount)
       return 1; // the whole operation failed (all of the repos)
-  
+
     if (repocount > errcount)
       return 2; // some of the repos failed
   }
