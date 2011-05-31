@@ -74,9 +74,9 @@ namespace zypp
                                       const PackageProviderPolicy & policy_r )
     : _policy( policy_r )
     , _package( package )
+    , _retry(false)
     , _deltas(deltas)
     , _access(access)
-    , _retry(false)
     {}
 
     PackageProvider::~PackageProvider()
