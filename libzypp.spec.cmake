@@ -24,6 +24,8 @@ Obsoletes:      yast2-packagemanager
 %if 0%{?suse_version}
 Recommends:     logrotate
 %endif
+# lsof is used for 'zypper ps':
+Recommends:     lsof
 BuildRequires:  cmake
 BuildRequires:  openssl-devel
 %if 0%{?suse_version} >= 1130
