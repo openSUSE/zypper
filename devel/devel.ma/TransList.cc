@@ -1,262 +1,263 @@
 #include "Tools.h"
 
-#include <iostream>
-#include <fstream>
-#include <sstream>
-#include <list>
-#include <map>
-#include <set>
+#include <zypp/PoolQuery.h>
+#include <zypp/target/rpm/librpmDb.h>
+#include <zypp/parser/ProductFileReader.h>
+#include "zypp/pool/GetResolvablesToInsDel.h"
+#include "zypp/sat/WhatObsoletes.h"
+#include "zypp/ExternalProgram.h"
+#include <zypp/ZYppCallbacks.h>
 
-#include <boost/call_traits.hpp>
-
-#include <zypp/base/LogControl.h>
-#include <zypp/base/LogTools.h>
-
-#include "zypp/base/Exception.h"
-#include "zypp/base/InputStream.h"
-#include "zypp/base/DefaultIntegral.h"
-#include <zypp/base/Function.h>
-#include <zypp/base/Iterator.h>
-#include <zypp/Pathname.h>
-#include <zypp/Edition.h>
-#include <zypp/CheckSum.h>
-#include <zypp/Date.h>
-#include <zypp/Rel.h>
-#include <zypp/Bit.h>
-
-#include "zypp/parser/xml/Reader.h"
-#include "zypp/parser/xml/ParseDef.h"
-#include "zypp/parser/xml/ParseDefConsume.h"
-
-#include "zypp/parser/ProductFileReader.h"
-
-using namespace std;
-using namespace zypp;
+#include "zypp/sat/Transaction.h"
 
 ///////////////////////////////////////////////////////////////////
 
-static const Pathname sysRoot( "/Local/ROOT" );
+//static const Pathname sysRoot( getenv("SYSROOT") ? getenv("SYSROOT") : "/Local/ROOT" );
+//static const Pathname sysRoot( "/tmp/ToolScanRepos" );
+// static const Pathname sysRoot( "/tmp/updateTestcase" );
+static const Pathname sysRoot( "/tmp/ToolScanRepos" );
 
 ///////////////////////////////////////////////////////////////////
-
-template<class _Cl>
-  void ti( const _Cl & c )
-  {
-    SEC << __PRETTY_FUNCTION__ << endl;
-  }
-
-///////////////////////////////////////////////////////////////////
-
-bool nopNode( xml::Reader & reader_r )
+struct IRR : public zypp::callback::ReceiveReport<zypp::target::rpm::InstallResolvableReport>
 {
-  return true;
-}
-
-///////////////////////////////////////////////////////////////////
-
-bool accNode( xml::Reader & reader_r )
-{
-  int i;
-  xml::XmlString s;
-#define X(m) reader_r->m()
-      i=X(readState);
-      i=X(lineNumber);
-      i=X(columnNumber);
-      i=X(depth);
-      i=X(nodeType);
-      s=X(name);
-      s=X(prefix);
-      s=X(localName);
-      i=X(hasAttributes);
-      i=X(attributeCount);
-      i=X(hasValue);
-      s=X(value);
-#undef X
-      return true;
-}
-
-///////////////////////////////////////////////////////////////////
-
-bool dumpNode( xml::Reader & reader_r )
-{
-  switch ( reader_r->nodeType() )
-    {
-    case XML_READER_TYPE_ATTRIBUTE:
-    case XML_READER_TYPE_TEXT:
-    case XML_READER_TYPE_CDATA:
-       DBG << *reader_r << endl;
-       break;
-    case XML_READER_TYPE_ELEMENT:
-
-       MIL << *reader_r << endl;
-       break;
-    default:
-       //WAR << *reader_r << endl;
-       break;
-    }
-  return true;
-}
-
-///////////////////////////////////////////////////////////////////
-
-bool dumpEd( xml::Reader & reader_r )
-{
-  static int num = 5;
-  if ( reader_r->nodeType() == XML_READER_TYPE_ELEMENT
-       && reader_r->name() == "version" )
-    {
-      MIL << *reader_r << endl;
-      DBG << reader_r->getAttribute( "rel" ) << endl;
-      ERR << *reader_r << endl;
-      DBG << reader_r->getAttribute( "ver" ) << endl;
-      ERR << *reader_r << endl;
-      DBG << reader_r->getAttribute( "epoch" ) << endl;
-      ERR << *reader_r << endl;
-      WAR << Edition( reader_r->getAttribute( "ver" ).asString(),
-                      reader_r->getAttribute( "rel" ).asString(),
-                      reader_r->getAttribute( "epoch" ).asString() ) << endl;
-      --num;
-    }
-  return num;
-}
-
-///////////////////////////////////////////////////////////////////
-
-template<class _OutputIterator>
-  struct DumpDeps
-  {
-    DumpDeps( _OutputIterator result_r )
-    : _result( result_r )
-    {}
-
-    bool operator()( xml::Reader & reader_r )
-    {
-      if ( reader_r->nodeType()     == XML_READER_TYPE_ELEMENT
-           && reader_r->prefix()    == "rpm"
-           && reader_r->localName() == "entry" )
-        {
-          string n( reader_r->getAttribute( "name" ).asString() );
-          Rel op( reader_r->getAttribute( "flags" ).asString() );
-          if ( op != Rel::ANY )
-            {
-              n += " ";
-              n += op.asString();
-              n += " ";
-              n += reader_r->getAttribute( "ver" ).asString();
-              n += "-";
-              n += reader_r->getAttribute( "rel" ).asString();
-            }
-          *_result = n;
-          ++_result;
-        }
-      return true;
-    }
-
-    _OutputIterator _result;
+  IRR()
+  { connect(); }
+#if 0
+  enum Action {
+    ABORT,  // abort and return error
+    RETRY,	// retry
+    IGNORE	// ignore the failure
   };
 
-template<class _OutputIterator>
-  DumpDeps<_OutputIterator> dumpDeps( _OutputIterator result_r )
-  { return DumpDeps<_OutputIterator>( result_r ); }
+  enum Error {
+    NO_ERROR,
+    NOT_FOUND, 	// the requested Url was not found
+    IO,		// IO error
+    INVALID		// th resolvable is invalid
+  };
 
-///////////////////////////////////////////////////////////////////
+        // the level of RPM pushing
+  /** \deprecated We fortunately no longer do 3 attempts. */
+  enum RpmLevel {
+    RPM,
+    RPM_NODEPS,
+    RPM_NODEPS_FORCE
+  };
+#endif
 
-///////////////////////////////////////////////////////////////////
-namespace zypp
-{ /////////////////////////////////////////////////////////////////
-  ///////////////////////////////////////////////////////////////////
-  namespace xml
-  { /////////////////////////////////////////////////////////////////
+  virtual void reportbegin()
+  { /*SEC << endl;*/ }
+  virtual void reportend()
+  { /*SEC << endl;*/ }
 
+  virtual void start(Resolvable::constPtr /*resolvable*/)
+  { INT << endl; }
 
-    /////////////////////////////////////////////////////////////////
-  } // namespace xml
-  ///////////////////////////////////////////////////////////////////
-  /////////////////////////////////////////////////////////////////
-} // namespace zypp
-///////////////////////////////////////////////////////////////////
+  virtual bool progress(int /*value*/, Resolvable::constPtr /*resolvable*/)
+  {
+    static int i = 4;
+    if ( --i <= 0 )
+    {
+      INT << "return abort" << endl;
+      return false;
+    }
+    return true;
+  }
 
-bool Consumer( const parser::ProductFileData & data_r )
+  virtual Action problem(Resolvable::constPtr /*resolvable*/, Error /*error*/, const std::string &/*description*/, RpmLevel /*level*/)
+  {
+    INT << "return abort" << endl;
+    return ABORT;
+  }
+
+  virtual void finish(Resolvable::constPtr /*resolvable*/, Error /*error*/, const std::string &/*reason*/, RpmLevel /*level*/)
+  { INT << endl; }
+};
+
+struct RRR : public zypp::callback::ReceiveReport<zypp::target::rpm::RemoveResolvableReport>
 {
-  MIL << data_r << endl;
+  RRR()
+  { connect(); }
+#if 0
+  enum Action {
+    ABORT,  // abort and return error
+    RETRY,	// retry
+    IGNORE	// ignore the failure
+  };
+
+  enum Error {
+    NO_ERROR,
+    NOT_FOUND, 	// the requested Url was not found
+    IO,		// IO error
+    INVALID		// th resolvable is invalid
+  };
+#endif
+
+  virtual void reportbegin()
+  { /*SEC << endl;*/ }
+  virtual void reportend()
+  { /*SEC << endl;*/ }
+
+  virtual void start( Resolvable::constPtr /*resolvable*/ )
+  { INT << endl; }
+
+  virtual bool progress(int /*value*/, Resolvable::constPtr /*resolvable*/)
+  { INT << endl; return true; }
+
+  virtual Action problem( Resolvable::constPtr /*resolvable*/ , Error /*error*/ , const std::string &/*description*/ )
+  { INT << endl; return ABORT; }
+
+  virtual void finish( Resolvable::constPtr /*resolvable*/ , Error /*error*/ , const std::string &/*reason*/ )
+  { INT << endl; }
+};
+
+
+bool solve()
+{
+  bool rres = false;
+  {
+    //zypp::base::LogControl::TmpLineWriter shutUp;
+    //getZYpp()->resolver()->setOnlyRequires( true );
+    rres = getZYpp()->resolver()->resolvePool();
+  }
+  if ( ! rres )
+  {
+    ERR << "resolve " << rres << endl;
+    getZYpp()->resolver()->problems();
+    return false;
+  }
+  MIL << "resolve " << rres << endl;
   return true;
 }
 
-#include "zypp/base/Functional.h"
-#include "zypp/parser/ProductFileReader.h"
-
-/******************************************************************
-**
-**      FUNCTION NAME : main
-**      FUNCTION TYPE : int
-*/
-int main( int argc, char * argv[] )
+bool upgrade()
 {
-  INT << "===[START]==========================================" << endl;
-
+  bool rres = false;
   {
-    Measure x( "PARSE" );
+    zypp::base::LogControl::TmpLineWriter shutUp;
+    Measure x( "Upgrade" );
+    rres = getZYpp()->resolver()->doUpgrade();
+  }
+  if ( ! rres )
+  {
+    Measure x( "Upgrade Error" );
+    ERR << "upgrade " << rres << endl;
+    getZYpp()->resolver()->problems();
+    return false;
+  }
+  MIL << "upgrade " << rres << endl;
+  return true;
+}
 
-    std::vector<parser::ProductFileData> result;
-    parser::ProductFileReader::scanDir( functor::getAll( std::back_inserter( result ) ),
-                                        sysRoot / "etc/products.d" );
+bool install()
+{
+  ZYppCommitPolicy pol;
+  //pol.dryRun( true );
+  pol.downloadMode( DownloadAsNeeded );
+  pol.rpmInstFlags( pol.rpmInstFlags().setFlag( target::rpm::RPMINST_JUSTDB ) );
+  ZYppCommitResult res( getZYpp()->commit( pol ) );
+  SEC << res << endl;
+  MIL << res.transactionStepList() << endl;
+  return true;
+}
 
-    MIL << "Products: " << result << endl;
+///////////////////////////////////////////////////////////////////
+
+namespace zypp
+{
+  void tradOrder()
+  {
+    scoped_ptr<base::LogControl::TmpLineWriter> shutUp( new base::LogControl::TmpLineWriter );
+    ResPool pool( ResPool::instance() );
+    pool::GetResolvablesToInsDel collect( pool, pool::GetResolvablesToInsDel::ORDER_BY_SOURCE );
+    shutUp.reset();
+
+    MIL << "GetResolvablesToInsDel -" << collect._toDelete.size()
+    << " +" << (collect._toInstall.size() + collect._toSrcinstall.size()) << " {" << endl;
+    for_( it, collect._toDelete.begin(), collect._toDelete.end() )
+    {
+      MIL << " - " << *it << endl;
+    }
+    for_( it, collect._toInstall.begin(), collect._toInstall.end() )
+    {
+      MIL << " + " << *it << endl;
+    }
+    for_( it, collect._toSrcinstall.begin(), collect._toSrcinstall.end() )
+    {
+      MIL << " + " << *it << endl;
+    }
+    MIL << "}" << endl;
   }
 
-#if 0
-  bool write = false;
-  bool read = true;
+}
+///////////////////////////////////////////////////////////////////
+
+void checkTrans()
+{
+  ResPool pool( ResPool::instance() );
+  pool::GetResolvablesToInsDel collect( pool, pool::GetResolvablesToInsDel::ORDER_BY_SOURCE );
+  collect.debugDiffTransaction();
+}
+
+///////////////////////////////////////////////////////////////////
+int main( int argc, char * argv[] )
+try {
+  --argc;
+  ++argv;
+  zypp::base::LogControl::instance().logToStdErr();
+  INT << "===[START]==========================================" << endl;
+  ///////////////////////////////////////////////////////////////////
+  IRR _irr;
+  RRR _rrr;
+  if ( sysRoot == "/" )
+    ::unsetenv( "ZYPP_CONF" );
+
+  sat::Transaction();
+  const sat::Transaction a;
+  sat::Transaction b;
+  sat::Transaction c( a );
+  b = a;
+
+  ResPool   pool( ResPool::instance() );
+  sat::Pool satpool( sat::Pool::instance() );
+  ///////////////////////////////////////////////////////////////////
+  dumpRange( WAR << "satpool.multiversion " , satpool.multiversionBegin(), satpool.multiversionEnd() ) << endl;
+  TestSetup::LoadSystemAt( sysRoot, Arch_i586 );
+  getZYpp()->initializeTarget( sysRoot );
+
+  ///////////////////////////////////////////////////////////////////
 
   if ( 1 )
-    {
-      zypp::base::LogControl::TmpLineWriter shutUp;
-      getZYpp()->initTarget( sysRoot );
+  {
+    getPi<Product>( "openSUSE-CD-retail" ).status().setToBeInstalled( ResStatus::USER );
+    getPi<Pattern>( "devel_qt4" ).status().setToBeInstalled( ResStatus::USER );
+//     getPi<Pattern>( "devel_qt4" ).status().setToBeInstalled( ResStatus::USER );
+    solve();
+    sat::Transaction trans( pool.resolver().getTransaction() );
+    trans.order();
+    for_( it, trans.actionBegin(), trans.actionEnd() ) {
+      USR << makeResObject(*it)->mediaNr() << ' ' << *it << endl;
     }
-  if ( write )
-    {
-      ZYpp::LocaleSet lset;
-      lset.insert( Locale("gr") );
-      getZYpp()->setRequestedLocales( lset );
-    }
+    install();
+  }
 
-  ResPool pool( getZYpp()->pool() );
-  USR << pool << endl;
+  ///////////////////////////////////////////////////////////////////
+  //  ResPoolProxy selpool( pool.proxy() );
+  if ( 0 )
+  {
+    upgrade();
+    install();
+  }
 
-  if ( write )
-    {
-      syscontent::Writer contentW;
-      contentW.name( "mycollection" )
-              .edition( Edition( "1.0" ) )
-              .description( "All the cool stuff..." );
-      for_each( pool.begin(), pool.end(),
-                bind( &syscontent::Writer::addIf, ref(contentW), _1 ) );
-
-      ofstream s( "mycollection.xml" );
-      s << contentW;
-    }
-
-  if ( read )
-    {
-      Measure x( "Parse" );
-      std::ifstream input( "mycollection.xml" );
-      syscontent::Reader contentR;
-      try
-        {
-          contentR = syscontent::Reader( input );
-        }
-      catch( const Exception & excpt_r )
-        {
-          ERR << excpt_r << endl;
-        }
-
-      MIL << contentR << endl;
-
-      for_each( contentR.begin(), contentR.end(), Print() );
-    }
-#endif
+  ///////////////////////////////////////////////////////////////////
   INT << "===[END]============================================" << endl << endl;
   zypp::base::LogControl::instance().logNothing();
   return 0;
 }
+catch ( const Exception & exp )
+{
+  INT << exp << endl << exp.historyAsString();
+}
+catch (...)
+{}
 
