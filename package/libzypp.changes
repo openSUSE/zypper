@@ -1,4 +1,10 @@
 -------------------------------------------------------------------
+Tue May 31 17:27:45 CEST 2011 - ma@suse.de
+
+- Do commit based on sat::Transaction.
+- version 9.5.0 (5)
+
+-------------------------------------------------------------------
 Tue May 31 12:09:17 CEST 2011 - ma@suse.de
 
 - Assert rpm database directory is created before rpmtsInitDB is
