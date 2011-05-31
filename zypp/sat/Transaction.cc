@@ -35,15 +35,36 @@ namespace zypp
   { /////////////////////////////////////////////////////////////////
 
     /** Transaction implementation.
-     * \todo check whether the pool serial number changed!
+     *
+     * \NOTE After commit the @System repo is reloaded. This invalidates
+     * the ids off all installed items in the transaction, including their
+     * stepType. Thats why some information (stepType, NVRA) is be stored
+     * for post mortem access (i.e. tell after commit which NVRA were deleted).
+     *
      */
     struct Transaction::Impl : protected detail::PoolMember
     {
       friend std::ostream & operator<<( std::ostream & str, const Impl & obj );
 
       public:
-      typedef std::tr1::unordered_set<detail::IdType> set_type;
-      typedef std::tr1::unordered_map<detail::IdType,detail::IdType> map_type;
+	typedef std::tr1::unordered_set<detail::IdType> set_type;
+	typedef std::tr1::unordered_map<detail::IdType,detail::IdType> map_type;
+
+	struct PostMortem
+	{
+	  PostMortem()
+	  {}
+	  PostMortem( const sat::Solvable & solv_r )
+	    : _ident( solv_r.ident() )
+	    , _edition( solv_r.edition() )
+	    , _arch( solv_r.arch() )
+	  {}
+
+	  IdString _ident;
+	  Edition  _edition;
+	  Arch     _arch;
+	};
+	typedef std::tr1::unordered_map<detail::IdType,PostMortem> pmmap_type;
 
       public:
 	Impl()
@@ -60,6 +81,7 @@ namespace zypp
 	  for_( it, _trans.steps.elements, _trans.steps.elements + _trans.steps.count )
 	  {
 	    sat::Solvable solv( *it );
+	    // buddy list:
 	    if ( ! solv.isKind<Package>() )
 	    {
 	      PoolItem pi( solv );
@@ -67,6 +89,16 @@ namespace zypp
 	      {
 		_linkMap[*it] = pi.buddy().id();
 	      }
+	    }
+	    if ( solv.isSystem() )
+	    {
+	      // to delete list:
+	      if ( stepType( solv ) == TRANSACTION_ERASE )
+	      {
+		_systemErase.insert( *it );
+	      }
+	      // post mortem data
+	      _pmMap[*it] = solv;
 	    }
 	  }
 	}
@@ -145,23 +177,15 @@ namespace zypp
 	iterator find(const RW_pointer<Transaction::Impl> & self_r, const sat::Solvable & solv_r )
 	{ detail::IdType * it( _find( solv_r ) ); return it ? iterator( self_r, it ) : end( self_r ); }
 
-      private:
-	detail::IdType * _find( const sat::Solvable & solv_r ) const
-	{
-	  if ( solv_r && _trans.steps.elements )
-	  {
-	    for_( it, _trans.steps.elements, _trans.steps.elements + _trans.steps.count )
-	    {
-	      if ( *it == detail::IdType(solv_r.id()) )
-		return it;
-	    }
-	  }
-	  return 0;
-	}
-
       public:
 	StepType stepType( Solvable solv_r ) const
 	{
+	  if ( ! solv_r )
+	  {
+	    // post mortem @System solvable
+	    return isIn( _systemErase, solv_r.id() ) ? TRANSACTION_ERASE : TRANSACTION_IGNORE;
+	  }
+
 	  switch( ::transaction_type( &_trans, solv_r.id(), SOLVER_TRANSACTION_RPM_ONLY ) )
 	  {
 	    case SOLVER_TRANSACTION_ERASE: return TRANSACTION_ERASE; break;
@@ -177,8 +201,14 @@ namespace zypp
 	void stepStage( Solvable solv_r, StepStage newval_r )
 	{ stepStage( resolve( solv_r ), newval_r ); }
 
-      private:
+	const PostMortem & pmdata( Solvable solv_r ) const
+	{
+	  static PostMortem _none;
+	  pmmap_type::const_iterator it( _pmMap.find( solv_r.id() ) );
+	  return( it == _pmMap.end() ? _none : it->second );
+	}
 
+      private:
 	detail::IdType resolve( const Solvable & solv_r ) const
 	{
 	  map_type::const_iterator res( _linkMap.find( solv_r.id() ) );
@@ -213,14 +243,31 @@ namespace zypp
 	    }
 	  }
 	}
+
+      private:
+	detail::IdType * _find( const sat::Solvable & solv_r ) const
+	{
+	  if ( solv_r && _trans.steps.elements )
+	  {
+	    for_( it, _trans.steps.elements, _trans.steps.elements + _trans.steps.count )
+	    {
+	      if ( *it == detail::IdType(solv_r.id()) )
+		return it;
+	    }
+	  }
+	  return 0;
+	}
+
      private:
 	SerialNumberWatcher _watcher;
 	mutable ::Transaction _trans;
 	DefaultIntegral<bool,false> _ordered;
 	//
-	set_type _doneSet;
-	set_type _errSet;
-	map_type _linkMap;
+	set_type	_doneSet;
+	set_type	_errSet;
+	map_type	_linkMap;	// buddy map to adopt buddies StepResult
+	set_type	_systemErase;	// @System packages to be eased (otherse are TRANSACTION_IGNORE)
+	pmmap_type	_pmMap;		// Post mortem data of deleted @System solvables
 
       public:
         /** Offer default Impl. */
@@ -317,8 +364,24 @@ namespace zypp
     void Transaction::Step::stepStage( StepStage val_r )
     { _pimpl->stepStage( _solv, val_r ); }
 
+    IdString Transaction::Step::ident() const
+    { return _solv ? _solv.ident() : _pimpl->pmdata(_solv )._ident; }
+
+    Edition Transaction::Step::edition() const
+    { return _solv ? _solv.edition() : _pimpl->pmdata(_solv )._edition; }
+
+    Arch Transaction::Step::arch() const
+    { return _solv ? _solv.arch() : _pimpl->pmdata(_solv )._arch; }
+
     std::ostream & operator<<( std::ostream & str, const Transaction::Step & obj )
-    { return str << obj.stepType() << obj.stepStage() << " " << PoolItem( obj.satSolvable() ); }
+    {
+      str << obj.stepType() << obj.stepStage() << " ";
+      if ( obj.satSolvable() )
+	str << PoolItem( obj.satSolvable() );
+      else
+	str << '[' << obj.ident() << '-' << obj.edition() << '.' << obj.arch() << ']';
+      return str;
+    }
 
     std::ostream & operator<<( std::ostream & str, Transaction::StepType obj )
     {
@@ -331,6 +394,7 @@ namespace zypp
 	OUTS( TRANSACTION_MULTIINSTALL,	[M] );
 	#undef OUTS
       }
+      return str << "[?]";
     }
 
     std::ostream & operator<<( std::ostream & str, Transaction::StepStage obj )
@@ -343,6 +407,7 @@ namespace zypp
 	OUTS( STEP_ERROR,	[**] );
 	#undef OUTS
       }
+      return str << "[??]";
     }
     ///////////////////////////////////////////////////////////////////
     namespace detail

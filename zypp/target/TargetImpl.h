@@ -13,7 +13,6 @@
 #define ZYPP_TARGET_TARGETIMPL_H
 
 #include <iosfwd>
-#include <list>
 #include <set>
 
 #include "zypp/base/ReferenceCounted.h"
@@ -184,10 +183,9 @@ namespace zypp
 
     private:
       /** Commit ordered changes (internal helper) */
-      PoolItemList commit( const PoolItemList & items_r,
-                           const ZYppCommitPolicy & policy_r,
-                           ZYppCommitResult & result_r,
-                           CommitPackageCache & packageCache_r );
+      void commit( const ZYppCommitPolicy & policy_r,
+		   CommitPackageCache & packageCache_r,
+		   ZYppCommitResult & result_r );
 
     protected:
       /** Path to the target */

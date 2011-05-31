@@ -13,13 +13,21 @@
 #define ZYPP_ZYPPCOMMITRESULT_H
 
 #include <iosfwd>
+#include <vector>
 #include <list>
 
 #include "zypp/PoolItem.h"
+#include "zypp/sat/Transaction.h"
+#include "zypp/base/DefaultIntegral.h"
 
 ///////////////////////////////////////////////////////////////////
 namespace zypp
 { /////////////////////////////////////////////////////////////////
+
+  namespace sat
+  {
+    class Transaction;
+  }
 
   /** Pair of \ref sat::Solvable and \ref Pathname. */
   class UpdateNotificationFile
@@ -44,11 +52,18 @@ namespace zypp
   //
   /** Result returned from ZYpp::commit.
    *
+   * \note Transaction data are provided and maintained during commit.
+   * Though the interface does not inhibit manipulation of transaction
+   * data outside commit (those methods could have been made \c private:),
+   * this is not recommended as you may easily mess up things.
+   *
    * \see \ref ZYpp::commit
-   * \todo document fields.
    */
   class ZYppCommitResult
   {
+    public:
+      typedef std::vector<sat::Transaction::Step> TransactionStepList;
+
     public:
       ZYppCommitResult();
       ZYppCommitResult( const Pathname & root_r );
@@ -59,6 +74,26 @@ namespace zypp
        * targets root directory.
       */
       const Pathname & root() const;
+
+      /** The full transaction list.
+       * The complete list including transaction steps that do not require
+       * any action (like obsoletes or non-package actions). Depending on
+       * \ref ZYppCommitPolicy::restrictToMedia only a subset of this
+       * transaction might have been executed.
+       * \see \ref transactionStepList.
+       */
+      const sat::Transaction & transaction() const;
+
+      /** Manipulate \ref transaction */
+      sat::Transaction & rTransaction();
+
+      /** List of \ref sat::Transaction::Step to be executed by commit.
+       * The list of transaction step commit actually tried to execute.
+       */
+      const TransactionStepList & transactionStepList() const;
+
+      /** Manipulate \ref transactionStepList. */
+      TransactionStepList & rTransactionStepList();
 
       /** List of update messages installed during this commit.
        * \Note Pathnames are relative to the targets root directory.
@@ -89,32 +124,65 @@ namespace zypp
        */
       const UpdateNotifications & updateMessages() const;
 
-      /** Change list of update messages installed during this commit.
+      /** Manipulate \ref updateMessages
        * \Note Pathnames are relative to the targets root directory.
        */
-      UpdateNotifications & setUpdateMessages();
+      UpdateNotifications & rUpdateMessages();
+
+    public:
+
+      /** \name Some statistics based on \ref transaction
+       */
+      //@{
+	/** Basically std::pair<unsigned,unsigned>, but default ctor sets <0,0>. */
+	typedef std::pair<DefaultIntegral<unsigned,0>, DefaultIntegral<unsigned,0> > InsDelCnt;
+
+	/** Total number of install/delete actions to be performed. */
+	InsDelCnt totalCount() const;
+
+	/** Number of install/delete actions with result \a stage_r. */
+	InsDelCnt stepStageCount( sat::Transaction::StepStage stage_r ) const;
+
+	/** Number of install/delete actions done. */
+	InsDelCnt doneCount() const
+	{ return stepStageCount( sat::Transaction::STEP_DONE ); }
+
+	/** Number of install/delete actions that failed with error. */
+	InsDelCnt errorCount() const
+	{ return stepStageCount( sat::Transaction::STEP_ERROR ); }
+
+	/** Number of install/delete actions that were skipped (e.g. due to unwanted media). */
+	InsDelCnt skippedCount() const
+	{ return stepStageCount( sat::Transaction::STEP_TODO ); }
+
+	/** All in one go. */
+	void resultCount( InsDelCnt & total_r, InsDelCnt & done_r, InsDelCnt & error_r, InsDelCnt & skipped_r ) const;
+      //@}
 
     public:
       /** \name Oldstlye interface to be removed asap.
+       * \deprecated PoolItem is not suitable for reporting errors about
+       * packages to be deteled, as reloading the rpm database after commit
+       * invalidates them.
        */
       //@{
       typedef std::list<PoolItem> PoolItemList;
       /**
        * number of committed resolvables
        **/
-      int          _result;
+      int          _result ZYPP_DEPRECATED;
       /**
        * list of resolvables with error
        **/
-      PoolItemList _errors;
+      PoolItemList _errors ZYPP_DEPRECATED;
       /**
        * list of resolvables remaining (due to wrong media)
        **/
-      PoolItemList _remaining;
+      PoolItemList _remaining ZYPP_DEPRECATED;
       /**
        * list of kind:source resolvables remaining (due to wrong media)
        **/
-      PoolItemList _srcremaining;
+      PoolItemList _srcremaining ZYPP_DEPRECATED;
       //@}
 
     public:

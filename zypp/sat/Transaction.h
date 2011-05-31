@@ -168,6 +168,13 @@ namespace zypp
 
 
     /** A single step within a \ref Transaction.
+     *
+     * \note After commit, when the @System repo (rpm database) is reread, all
+     * @System solvables within the transaction are invalidated (they got deleted).
+     * Thats why we internally store the NVRA, so you can access \ref ident
+     * (\see \ref sat::Solvable::ident), \ref edition, \ref arch of a deleted package,
+     * even if the \ref satSolvable itself is meanwhile invalid.
+     *
      * \see \ref Transaction.
      */
     class Transaction::Step
@@ -191,9 +198,31 @@ namespace zypp
 	/** Set step action result. */
 	void stepStage( StepStage val_r );
 
-	/** Return the corresponding \ref Solvable. */
+	/** Return the corresponding \ref Solvable (or.
+	 *
+	 */
 	Solvable satSolvable() const
 	{ return _solv; }
+
+	/** \name Post mortem acccess to @System solvables
+	 * \code
+	 *   Transaction::Step step;
+	 *   if ( step.satSolvable() )
+	 *     std::cout << step.satSolvable() << endl;
+	 *   else
+	 *     std::cout << step.ident() << endl; // deleted @System solvable
+	 * \endcode
+	 */
+	//@{
+	/** \see \ref sat::Solvable::ident. */
+	IdString ident() const;
+
+	/** \see \ref sat::Solvable::edition. */
+	Edition edition() const;
+
+	/** \see \ref sat::Solvable::arch. */
+	Arch arch() const;
+	//@}
 
 	/** Implicit conversion to \ref Solvable */
 	operator const Solvable &() const { return _solv; }

@@ -9,6 +9,14 @@
 /** \file	zypp/target/TargetImpl.cc
  *
 */
+#ifdef _RPM_4_4
+#warning _RPM_4_4
+#else
+#ifdef _RPM_4_X
+#warning _RPM_4_X
+#endif
+#endif
+
 #include <iostream>
 #include <fstream>
 #include <sstream>
@@ -55,11 +63,11 @@
 #include "zypp/repo/SrcPackageProvider.h"
 
 #include "zypp/sat/Pool.h"
+#include "zypp/sat/Transaction.h"
 
 #include "zypp/PluginScript.h"
 
 using namespace std;
-
 
 ///////////////////////////////////////////////////////////////////
 namespace zypp
@@ -449,7 +457,7 @@ namespace zypp
 
             MIL << "Found update message " << *sit << endl;
             Pathname localPath( messagesPath_r/(*sit) ); // without root prefix
-            result_r.setUpdateMessages().push_back( UpdateNotificationFile( *it, localPath ) );
+            result_r.rUpdateMessages().push_back( UpdateNotificationFile( *it, localPath ) );
             historylog.comment( str::Str() << _("New update message") << " " << localPath, /*timestamp*/true );
           }
         }
@@ -1001,65 +1009,29 @@ namespace zypp
       ///////////////////////////////////////////////////////////////////
       // Compute transaction:
       ///////////////////////////////////////////////////////////////////
-
       ZYppCommitResult result( root() );
-      TargetImpl::PoolItemList to_uninstall;
-      TargetImpl::PoolItemList to_install;
-      TargetImpl::PoolItemList to_srcinstall;
-
-      {
-        pool::GetResolvablesToInsDel
-        collect( pool_r, policy_r.restrictToMedia() ? pool::GetResolvablesToInsDel::ORDER_BY_MEDIANR
-                 : pool::GetResolvablesToInsDel::ORDER_BY_SOURCE );
-        MIL << "GetResolvablesToInsDel: " << endl << collect << endl;
-        to_uninstall.swap ( collect._toDelete );
-        to_install.swap   ( collect._toInstall );
-        to_srcinstall.swap( collect._toSrcinstall );
-      }
-
+      result.rTransaction() = pool_r.resolver().getTransaction();
+      result.rTransaction().order();
+      // steps: this is our todo-list
+      ZYppCommitResult::TransactionStepList & steps( result.rTransactionStepList() );
       if ( policy_r.restrictToMedia() )
       {
-        MIL << "Restrict to media number " << policy_r.restrictToMedia() << endl;
-
-        TargetImpl::PoolItemList current_install;
-        TargetImpl::PoolItemList current_srcinstall;
-
-        // Collect until the 1st package from an unwanted media occurs.
+	// Collect until the 1st package from an unwanted media occurs.
         // Further collection could violate install order.
-        bool hitUnwantedMedia = false;
-        for ( TargetImpl::PoolItemList::iterator it = to_install.begin(); it != to_install.end(); ++it )
-        {
-          ResObject::constPtr res( it->resolvable() );
-
-          if ( hitUnwantedMedia
-               || ( res->mediaNr() && res->mediaNr() != policy_r.restrictToMedia() ) )
-          {
-            hitUnwantedMedia = true;
-            result._remaining.push_back( *it );
-          }
-          else
-          {
-            current_install.push_back( *it );
-          }
-        }
-
-        for (TargetImpl::PoolItemList::iterator it = to_srcinstall.begin(); it != to_srcinstall.end(); ++it)
-        {
-          Resolvable::constPtr res( it->resolvable() );
-          Package::constPtr pkg( asKind<Package>(res) );
-          if ( pkg && policy_r.restrictToMedia() != pkg->mediaNr() ) // check medianr for packages only
-          {
-            result._srcremaining.push_back( *it );
-          }
-          else
-          {
-            current_srcinstall.push_back( *it );
-          }
-        }
-
-        to_install.swap   ( current_install );
-        to_srcinstall.swap( current_srcinstall );
+	MIL << "Restrict to media number " << policy_r.restrictToMedia() << endl;
+#warning Also need to be able to compute ORDER_BY_MEDIANR
+	for_( it, result.transaction().begin(), result.transaction().end() )
+	{
+	  if ( makeResObject( *it )->mediaNr() > 1 )
+	    break;
+	  steps.push_back( *it );
+	}
       }
+      else
+      {
+	result.rTransactionStepList().insert( steps.end(), result.transaction().begin(), result.transaction().end() );
+      }
+      MIL << "Todo: " << result << endl;
 
       ///////////////////////////////////////////////////////////////////
       // First collect and display all messages
@@ -1067,23 +1039,25 @@ namespace zypp
       ///////////////////////////////////////////////////////////////////
       if ( ! policy_r.dryRun() )
       {
-        for_( it, to_install.begin(), to_install.end() )
+        for_( it, steps.begin(), steps.end() )
         {
-          if ( ! isKind<Patch>(it->resolvable()) )
-            continue;
-          if ( ! it->status().isToBeInstalled() )
+	  if ( ! it->satSolvable().isKind<Patch>() )
+	    continue;
+
+	  PoolItem pi( *it );
+          if ( ! pi.status().isToBeInstalled() )
             continue;
 
-          Patch::constPtr patch( asKind<Patch>(it->resolvable()) );
-          if ( ! patch->message().empty() )
-          {
-            MIL << "Show message for " << patch << endl;
-            callback::SendReport<target::PatchMessageReport> report;
-            if ( ! report->show( patch ) )
-            {
-              WAR << "commit aborted by the user" << endl;
-              ZYPP_THROW( TargetAbortedException( N_("Installation has been aborted as directed.") ) );
-            }
+          Patch::constPtr patch( asKind<Patch>(pi.resolvable()) );
+	  if ( ! patch ||patch->message().empty()  )
+	    continue;
+
+	  MIL << "Show message for " << patch << endl;
+	  callback::SendReport<target::PatchMessageReport> report;
+	  if ( ! report->show( patch ) )
+	  {
+	    WAR << "commit aborted by the user" << endl;
+	    ZYPP_THROW( TargetAbortedException( N_("Installation has been aborted as directed.") ) );
           }
         }
       }
@@ -1095,24 +1069,14 @@ namespace zypp
       ///////////////////////////////////////////////////////////////////
       // Remove/install packages.
       ///////////////////////////////////////////////////////////////////
-
       DBG << "commit log file is set to: " << HistoryLog::fname() << endl;
       if ( ! policy_r.dryRun() || policy_r.downloadMode() == DownloadOnly )
       {
-        // somewhat uggly constraint: The iterator passed to the CommitPackageCache
-        // must match begin and end of the install PoolItemList passed to commit.
-        // For the download policies it's the easiest, if we have just a single
-        // toInstall list. So we unify to_install and to_srcinstall. In case
-        // of errors we have to split it up again. This will be cleaned up when
-        // we introduce the new install order.
-        TargetImpl::PoolItemList items( to_install );
-        items.insert( items.end(), to_srcinstall.begin(), to_srcinstall.end() );
-
-        // prepare the package cache according to the download options:
+	// Prepare the package cache. Pass all items requiring download.
         repo::RepoMediaAccess access;
         RepoProvidePackage repoProvidePackage( access, pool_r );
-        CommitPackageCache packageCache( items.begin(), items.end(),
-                                         root() / "tmp", repoProvidePackage );
+        CommitPackageCache packageCache( root() / "tmp", repoProvidePackage );
+	packageCache.setCommitList( steps.begin(), steps.end() );
 
         bool miss = false;
         if ( policy_r.downloadMode() != DownloadAsNeeded )
@@ -1120,26 +1084,28 @@ namespace zypp
           // Preload the cache. Until now this means pre-loading all packages.
           // Once DownloadInHeaps is fully implemented, this will change and
           // we may actually have more than one heap.
-          for_( it, items.begin(), items.end() )
+          for_( it, steps.begin(), steps.end() )
           {
-            if ( (*it)->isKind<Package>() || (*it)->isKind<SrcPackage>() )
+	    PoolItem pi( *it );
+            if ( pi->isKind<Package>() || pi->isKind<SrcPackage>() )
             {
               ManagedFile localfile;
               try
               {
-		if ( (*it)->isKind<Package>() )
+		// TODO: unify packageCache.get for Package and SrcPackage
+		if ( pi->isKind<Package>() )
 		{
-		  localfile = packageCache.get( it );
+		  localfile = packageCache.get( pi );
 		}
-		else if ( (*it)->isKind<SrcPackage>() )
+		else if ( pi->isKind<SrcPackage>() )
 		{
 		  repo::RepoMediaAccess access;
 		  repo::SrcPackageProvider prov( access );
-		  localfile = prov.provideSrcPackage( (*it)->asKind<SrcPackage>() );
+		  localfile = prov.provideSrcPackage( pi->asKind<SrcPackage>() );
 		}
 		else
 		{
-		  INT << "Don't know howto cache: Neither Package nor SrcPackage: " << *it << endl;
+		  INT << "Don't know howto cache: Neither Package nor SrcPackage: " << pi << endl;
 		  continue;
 		}
                 localfile.resetDispose(); // keep the package file in the cache
@@ -1147,7 +1113,6 @@ namespace zypp
               catch ( const AbortRequestException & exp )
               {
                 miss = true;
-		result._errors.push_back( *it );
                 WAR << "commit cache preload aborted by the user" << endl;
                 ZYPP_THROW( TargetAbortedException( N_("Installation has been aborted as directed.") ) );
                 break;
@@ -1156,8 +1121,7 @@ namespace zypp
               {
                 ZYPP_CAUGHT( exp );
                 miss = true;
-		result._errors.push_back( *it );
-                WAR << "Skipping cache preload package " << (*it)->asKind<Package>() << " in commit" << endl;
+                WAR << "Skipping cache preload package " << pi->asKind<Package>() << " in commit" << endl;
                 continue;
               }
               catch ( const Exception & exp )
@@ -1166,8 +1130,7 @@ namespace zypp
                 // TODO see if packageCache fails to handle errors correctly.
                 ZYPP_CAUGHT( exp );
                 miss = true;
-		result._errors.push_back( *it );
-                INT << "Unexpected Error: Skipping cache preload package " << (*it)->asKind<Package>() << " in commit" << endl;
+                INT << "Unexpected Error: Skipping cache preload package " << pi->asKind<Package>() << " in commit" << endl;
                 continue;
               }
             }
@@ -1177,23 +1140,10 @@ namespace zypp
         if ( miss )
         {
           ERR << "Some packages could not be provided. Aborting commit."<< endl;
-          result._remaining.insert( result._remaining.end(), to_install.begin(), to_install.end() );
-          result._srcremaining.insert( result._srcremaining.end(), to_srcinstall.begin(), to_srcinstall.end() );
         }
         else if ( ! policy_r.dryRun() )
         {
-          commit ( to_uninstall, policy_r, result, packageCache );
-          TargetImpl::PoolItemList bad = commit( items, policy_r, result, packageCache );
-          if ( ! bad.empty() )
-          {
-            for_( it, bad.begin(), bad.end() )
-            {
-              if ( isKind<SrcPackage>(it->resolvable()) )
-                result._srcremaining.push_back( *it );
-              else
-                result._remaining.push_back( *it );
-            }
-          }
+          commit( policy_r, packageCache, result );
         }
         else
         {
@@ -1213,55 +1163,105 @@ namespace zypp
         buildCache();
       }
 
-      result._result = (to_install.size() - result._remaining.size());
+      // for DEPRECATED old ZyppCommitResult results:
+      ///////////////////////////////////////////////////////////////////
+      // build return statistics
+      ///////////////////////////////////////////////////////////////////
+      result._errors.clear();
+      result._remaining.clear();
+      result._srcremaining.clear();
+      unsigned toInstall = 0;
+      for_( step, steps.begin(), steps.end() )
+      {
+	if ( step->stepType() == sat::Transaction::TRANSACTION_IGNORE )
+	{
+	  // For non-packages only products might have beed installed.
+	  // All the rest is ignored.
+	  if ( step->satSolvable().isSystem() || ! step->satSolvable().isKind<Product>() )
+	    continue;
+	}
+	else if ( step->stepType() == sat::Transaction::TRANSACTION_ERASE )
+	{
+	  continue;
+	}
+	// to be installed:
+	++toInstall;
+	switch ( step->stepStage() )
+	{
+	  case sat::Transaction::STEP_TODO:
+	    if ( step->satSolvable().isKind<Package>() )
+	      result._remaining.push_back( PoolItem( *step ) );
+	    else if ( step->satSolvable().isKind<SrcPackage>() )
+	      result._srcremaining.push_back( PoolItem( *step ) );
+	    break;
+	  case sat::Transaction::STEP_DONE:
+	    // NOOP
+	    break;
+	  case sat::Transaction::STEP_ERROR:
+	    result._errors.push_back( PoolItem( *step ) );
+	    break;
+	}
+      }
+      result._result = (toInstall - result._remaining.size());
+      ///////////////////////////////////////////////////////////////////
+
       MIL << "TargetImpl::commit(<pool>, " << policy_r << ") returns: " << result << endl;
       return result;
     }
-
 
     ///////////////////////////////////////////////////////////////////
     //
     // COMMIT internal
     //
     ///////////////////////////////////////////////////////////////////
-    TargetImpl::PoolItemList
-    TargetImpl::commit( const TargetImpl::PoolItemList & items_r,
-                        const ZYppCommitPolicy & policy_r,
-                        ZYppCommitResult & result_r,
-                        CommitPackageCache & packageCache_r )
+    void TargetImpl::commit( const ZYppCommitPolicy & policy_r,
+			     CommitPackageCache & packageCache_r,
+			     ZYppCommitResult & result_r )
     {
-      MIL << "TargetImpl::commit(<list>" << policy_r << ")" << items_r.size() << endl;
+      // steps: this is our todo-list
+      ZYppCommitResult::TransactionStepList & steps( result_r.rTransactionStepList() );
+      MIL << "TargetImpl::commit(<list>" << policy_r << ")" << steps.size() << endl;
 
       bool abort = false;
       std::vector<sat::Solvable> successfullyInstalledPackages;
       TargetImpl::PoolItemList remaining;
 
-      for ( TargetImpl::PoolItemList::const_iterator it = items_r.begin(); it != items_r.end(); it++ )
+      for_( step, steps.begin(), steps.end() )
       {
-        if ( (*it)->isKind<Package>() )
+	PoolItem citem( *step );
+	if ( step->stepType() == sat::Transaction::TRANSACTION_IGNORE )
+	{
+	  if ( citem->isKind<Package>() )
+	  {
+	    // for packages this means being obsoleted (by rpm)
+	    // thius no additional action is needed.
+	    step->stepStage( sat::Transaction::STEP_DONE );
+	    continue;
+	  }
+	}
+
+        if ( citem->isKind<Package>() )
         {
-          Package::constPtr p = (*it)->asKind<Package>();
-          if (it->status().isToBeInstalled())
+          Package::constPtr p = citem->asKind<Package>();
+          if ( citem.status().isToBeInstalled() )
           {
             ManagedFile localfile;
             try
             {
-              localfile = packageCache_r.get( it );
+	      localfile = packageCache_r.get( citem );
             }
             catch ( const AbortRequestException &e )
             {
               WAR << "commit aborted by the user" << endl;
               abort = true;
-	      result_r._errors.push_back( *it );
-	      remaining.insert( remaining.end(), it, items_r.end() );
+	      step->stepStage( sat::Transaction::STEP_ERROR );
 	      break;
             }
             catch ( const SkipRequestException &e )
             {
               ZYPP_CAUGHT( e );
               WAR << "Skipping package " << p << " in commit" << endl;
-	      result_r._errors.push_back( *it );
-	      remaining.push_back( *it );
+	      step->stepStage( sat::Transaction::STEP_ERROR );
               continue;
             }
             catch ( const Exception &e )
@@ -1270,14 +1270,13 @@ namespace zypp
               // TODO see if packageCache fails to handle errors correctly.
               ZYPP_CAUGHT( e );
               INT << "Unexpected Error: Skipping package " << p << " in commit" << endl;
-	      result_r._errors.push_back( *it );
-	      remaining.push_back( *it );
+	      step->stepStage( sat::Transaction::STEP_ERROR );
               continue;
             }
 
 #warning Exception handling
             // create a installation progress report proxy
-            RpmInstallPackageReceiver progress( it->resolvable() );
+            RpmInstallPackageReceiver progress( citem.resolvable() );
             progress.connect(); // disconnected on destruction.
 
             bool success = false;
@@ -1300,21 +1299,21 @@ namespace zypp
             try
             {
               progress.tryLevel( target::rpm::InstallResolvableReport::RPM_NODEPS_FORCE );
-              rpm().installPackage( localfile, flags );
-              HistoryLog().install(*it);
+	      rpm().installPackage( localfile, flags );
+              HistoryLog().install(citem);
 
               if ( progress.aborted() )
               {
                 WAR << "commit aborted by the user" << endl;
                 localfile.resetDispose(); // keep the package file in the cache
                 abort = true;
-		result_r._errors.push_back( *it );
-		remaining.insert( remaining.end(), it, items_r.end() );
+		step->stepStage( sat::Transaction::STEP_ERROR );
                 break;
               }
               else
               {
                 success = true;
+		step->stepStage( sat::Transaction::STEP_DONE );
               }
             }
             catch ( Exception & excpt_r )
@@ -1325,8 +1324,7 @@ namespace zypp
               if ( policy_r.dryRun() )
               {
                 WAR << "dry run failed" << endl;
-		result_r._errors.push_back( *it );
-		remaining.insert( remaining.end(), it, items_r.end() );
+		step->stepStage( sat::Transaction::STEP_ERROR );
                 break;
               }
               // else
@@ -1339,21 +1337,20 @@ namespace zypp
               {
                 WAR << "Install failed" << endl;
               }
-	      result_r._errors.push_back( *it );
-	      remaining.insert( remaining.end(), it, items_r.end() );
+              step->stepStage( sat::Transaction::STEP_ERROR );
               break; // stop
             }
 
             if ( success && !policy_r.dryRun() )
             {
-              it->status().resetTransact( ResStatus::USER );
-              // Remember to check this package for presence of patch scripts.
-              successfullyInstalledPackages.push_back( it->satSolvable() );
+              citem.status().resetTransact( ResStatus::USER );
+              successfullyInstalledPackages.push_back( citem.satSolvable() );
+	      step->stepStage( sat::Transaction::STEP_DONE );
             }
           }
           else
           {
-            RpmRemovePackageReceiver progress( it->resolvable() );
+            RpmRemovePackageReceiver progress( citem.resolvable() );
             progress.connect(); // disconnected on destruction.
 
             bool success = false;
@@ -1362,19 +1359,20 @@ namespace zypp
             if (policy_r.dryRun()) flags |= rpm::RPMINST_TEST;
             try
             {
-              rpm().removePackage( p, flags );
-              HistoryLog().remove(*it);
+	      rpm().removePackage( p, flags );
+              HistoryLog().remove(citem);
 
               if ( progress.aborted() )
               {
                 WAR << "commit aborted by the user" << endl;
                 abort = true;
-		result_r._errors.push_back( *it );
+		step->stepStage( sat::Transaction::STEP_ERROR );
                 break;
               }
               else
               {
                 success = true;
+		step->stepStage( sat::Transaction::STEP_DONE );
               }
             }
             catch (Exception & excpt_r)
@@ -1384,16 +1382,17 @@ namespace zypp
               {
                 WAR << "commit aborted by the user" << endl;
                 abort = true;
-		result_r._errors.push_back( *it );
+		step->stepStage( sat::Transaction::STEP_ERROR );
                 break;
               }
               // else
               WAR << "removal of " << p << " failed";
-	      result_r._errors.push_back( *it );
+	      step->stepStage( sat::Transaction::STEP_ERROR );
             }
             if ( success && !policy_r.dryRun() )
             {
-              it->status().resetTransact( ResStatus::USER );
+              citem.status().resetTransact( ResStatus::USER );
+	      step->stepStage( sat::Transaction::STEP_DONE );
             }
           }
         }
@@ -1401,14 +1400,14 @@ namespace zypp
         {
           // Status is changed as the buddy package buddy
           // gets installed/deleted. Handle non-buddies only.
-          if ( ! it->buddy() )
+          if ( ! citem.buddy() )
           {
-            if ( (*it)->isKind<Product>() )
+            if ( citem->isKind<Product>() )
             {
-              Product::constPtr p = (*it)->asKind<Product>();
-              if ( it->status().isToBeInstalled() )
+              Product::constPtr p = citem->asKind<Product>();
+              if ( citem.status().isToBeInstalled() )
               {
-                ERR << "Can't install orphan product without release-package! " << (*it) << endl;
+                ERR << "Can't install orphan product without release-package! " << citem << endl;
               }
               else
               {
@@ -1417,7 +1416,7 @@ namespace zypp
                 std::string referenceFilename( p->referenceFilename() );
                 if ( referenceFilename.empty() )
                 {
-                  ERR << "Can't remove orphan product without 'referenceFilename'! " << (*it) << endl;
+                  ERR << "Can't remove orphan product without 'referenceFilename'! " << citem << endl;
                 }
                 else
                 {
@@ -1429,15 +1428,17 @@ namespace zypp
                 }
               }
             }
-            else if ( (*it)->isKind<SrcPackage>() && it->status().isToBeInstalled() )
+            else if ( citem->isKind<SrcPackage>() && citem.status().isToBeInstalled() )
             {
               // SrcPackage is install-only
-              SrcPackage::constPtr p = (*it)->asKind<SrcPackage>();
+              SrcPackage::constPtr p = citem->asKind<SrcPackage>();
               installSrcPackage( p );
             }
 
-            it->status().resetTransact( ResStatus::USER );
+            citem.status().resetTransact( ResStatus::USER );
+	    step->stepStage( sat::Transaction::STEP_DONE );
           }
+
         }  // other resolvables
 
       } // for
@@ -1455,17 +1456,17 @@ namespace zypp
         // send messages after scripts in case some script generates output,
         // that should be kept in t %ghost message file.
         RunUpdateMessages( _root, ZConfig::instance().update_messagesPath(),
-                           successfullyInstalledPackages,
-                           result_r );
+			   successfullyInstalledPackages,
+			   result_r );
       }
 
       if ( abort )
       {
         ZYPP_THROW( TargetAbortedException( N_("Installation has been aborted as directed.") ) );
       }
-
-     return remaining;
     }
+
+    ///////////////////////////////////////////////////////////////////
 
     rpm::RpmDb & TargetImpl::rpm()
     {
