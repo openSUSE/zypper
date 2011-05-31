@@ -54,7 +54,7 @@ namespace zypp
       };
 
       /**
-       * Flags to set the flags to be ignored when checking if this
+       * Flags defining if and why this
        * patch is interactive.
        */
       enum InteractiveFlag {
@@ -106,9 +106,14 @@ namespace zypp
       std::string message( const Locale & lang_r = Locale() ) const;
 
       /**
+       * Get the InteractiveFlags of this Patch
+       */
+      InteractiveFlags interactiveFlags() const;
+
+      /**
        * Is the patch still interactive when ignoring this flags?
        */
-      bool interactiveWhenIgnoring( InteractiveFlags flags_r = NoFlags ) const ;
+      bool interactiveWhenIgnoring( InteractiveFlags flags_r = NoFlags ) const;
 
       /**
        * Is the patch installation interactive? (does it need user input?)

@@ -89,26 +89,40 @@ namespace zypp
   bool Patch::reloginSuggested() const
   { return lookupBoolAttribute( sat::SolvAttr::reloginSuggested ); }
 
-
-  bool Patch::interactiveWhenIgnoring( InteractiveFlags flags_r ) const
+  Patch::InteractiveFlags Patch::interactiveFlags() const
   {
-    if ( ( ! (flags_r & Reboot) && rebootSuggested() )
-         || ( ! (flags_r & Message) && ! message().empty() )
-         || ( ! (flags_r & License) && ! licenseToConfirm().empty() ) )
-    {
-      return true;
-    }
+    InteractiveFlags patchFlags (NoFlags);
+    if ( rebootSuggested() )
+      patchFlags |= Reboot;
+
+    if ( ! message().empty() )
+      patchFlags |= Message;
+
+    if ( ! licenseToConfirm().empty() )
+      patchFlags |= License;
 
     Patch::Contents c( contents() );
     for_( it, c.begin(), c.end() )
     {
-      if ( ! (flags_r & License) && ! makeResObject(*it)->licenseToConfirm().empty() )
+      if ( ! makeResObject(*it)->licenseToConfirm().empty() )
       {
-        return true;
+        patchFlags |= License;
+        break;
       }
     }
+    return patchFlags;
+  }
 
-    return false;
+  bool Patch::interactiveWhenIgnoring( InteractiveFlags flags_r ) const
+  {
+    if ( interactiveFlags() & ( ~flags_r ) )
+    {
+      return true;
+    }
+    else
+    {
+      return false;
+    }
   }
 
   bool Patch::interactive() const
