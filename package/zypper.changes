@@ -1,4 +1,9 @@
 -------------------------------------------------------------------
+Tue May 31 10:54:46 CEST 2011 - ma@suse.de
+
+- Correctly print exception history (bnc#655402)
+
+-------------------------------------------------------------------
 Mon May 30 17:38:51 CEST 2011 - dheidler@suse.de
 
 - use the tag-based patch-interactive interface of libzypp
