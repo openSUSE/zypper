@@ -1,4 +1,9 @@
 -------------------------------------------------------------------
+Tue May 31 10:12:12 CEST 2011 - ma@suse.de
+
+- Recommend 'lsof' (for zypper ps) (bnc#694427, bnc#684466)
+
+-------------------------------------------------------------------
 Mon May 30 17:14:14 CEST 2011 - dheidler@suse.de
 
 - Switch patch interactive-check to flags
