@@ -14,6 +14,7 @@
 #include <iostream>
 
 #include "zypp/base/Logger.h"
+#include "zypp/PathInfo.h"
 #include "zypp/target/rpm/librpmDb.h"
 #include "zypp/target/rpm/RpmHeader.h"
 #include "zypp/target/rpm/RpmException.h"
@@ -57,8 +58,6 @@ public:
     _error.reset();
     // set %_dbpath macro
     ::addMacro( NULL, "_dbpath", NULL, _dbPath.asString().c_str(), RMIL_CMDLINE );
-    const char * root = ( _root == "/" ? NULL : _root.asString().c_str() );
-    int          perms = 0644;
 
     _ts = ::rpmtsCreate();
     ::rpmtsSetRootDir( _ts, _root.c_str() );
@@ -68,7 +67,13 @@ public:
     if ( ! master.isFile() )
     {
       // init database
-      int res = ::rpmtsInitDB( _ts, perms );
+      if ( filesystem::assert_dir(_root + _dbPath) != 0 )
+      {
+        ERR << "Could not create dbpath " << (_root + _dbPath).asString() << endl;
+        _error = shared_ptr<RpmInitException>(new RpmInitException(_root, _dbPath));
+        ZYPP_THROW(*_error);
+      }
+      int res = ::rpmtsInitDB( _ts, 0644 );
       if ( res )
       {
         ERR << "rpmdbInit error(" << res << "): " << *this << endl;
