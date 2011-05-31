@@ -1,4 +1,10 @@
 -------------------------------------------------------------------
+Tue May 31 12:09:17 CEST 2011 - ma@suse.de
+
+- Assert rpm database directory is created before rpmtsInitDB is
+  called (bnc#697115)
+
+-------------------------------------------------------------------
 Tue May 31 11:46:57 CEST 2011 - dheidler@suse.de
 
 - fix var definition order in PackageProvider
