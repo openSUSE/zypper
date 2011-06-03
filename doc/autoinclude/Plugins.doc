@@ -3,7 +3,9 @@
 \page zypp-plugins Extending ZYpp: Plugins and Hooks
 
 \author Duncan Mac-Vicar P. <dmacvicar@suse.de>
+\author Michael Andres <ma@suse.de>
 
+<HR><!-- ====================================================================== -->
 \section plugins-intro Introduction
 
 Plugins allow to extend the ZYpp package manager without the need to change
@@ -27,11 +29,63 @@ COMMAND
 param1:val1
 param2:val2
 ...
+Thus a COMMAND hollowed by key:value header lines
+and a multiline body separated from header
+by an empty line and terminated by NUL.
 ^@
 \endverbatim
 
 \note ^@ is a null (control-@ in ASCII) byte.
 
+<HR><!-- ====================================================================== -->
+\section plugin-writing Writing plugins
+
+A python class is offered as a helper to handle communication between the plugin and
+libzypp. It is available by installing \c zypp-plugin-python.
+
+\verbatim
+zypper in -C zypp-plugin-python
+\endverbatim
+
+The plugin must define a method for each message it may receive from \ref libzypp. Message header list and body are passed to the method as arguments.
+
+\verbatim
+#!/usr/bin/env python
+#
+# zypp plugin
+#
+import os
+import sys
+from zypp_plugin import Plugin
+
+class MyPlugin(Plugin):
+
+  def SAMPLE(self, headers, body):
+    # called upon revieving a SAMPLE message
+    ...
+    if ( ok ):
+      self.ack()
+    else:
+      self.error( { "aheader":"header value" }, "body\n(multiline text ok)" )
+
+plugin = MyPlugin()
+plugin.main()
+\endverbatim
+
+Two methods \c ack and \c error are available to send back a standard \c ACK or \c ERROR message. You may optionally pass header entries and a multiline body. For sending custom messages use \c answer, which takes the command name as 1st argument, followed by optional header entries and a multiline body.
+
+
+<HR><!-- ====================================================================== -->
+\section plugin-toc Supported plugins
+
+\subpage plugin-commit Escort installation of packages
+
+\ref plugin-services
+
+\ref plugin-url-resolver
+
+
+<HR><!-- ====================================================================== -->
 \section plugin-services Service plugins
 
 ZYpp will find a subscribed service for each executable located in /usr/lib/zypp/plugins/services and will set the alias as the executable name. The type will be set to "plugin".
@@ -68,6 +122,8 @@ type=rpm-md
 
 The repositories will be added on service refresh with the alias present in the output, prefixed by the service alias (in this case, the executable name).
 
+
+<HR><!-- ====================================================================== -->
 \section plugin-url-resolver Url Resolver plugins
 
 Url resolver plugins convert urls of scheme "plugin" into the output of the plugin named $name using the protocol. Thanks to the protocol, each header returned is also added as HTTP headers. The current protocol sequence is:
@@ -123,6 +179,7 @@ This type of plugin can be combined with service plugins, because a local servic
 \note
 In this example, the service plugin could have inmediately resolved the urls and returned http://realurl, but the url resolver allows also to add HTTP headers to the request.
 
+<HR><!-- ====================================================================== -->
 \section plugins-impl Developers: Implementation
 
 Plugins are implemented in the following classes:
