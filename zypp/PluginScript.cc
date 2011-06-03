@@ -131,7 +131,7 @@ namespace zypp
       { return _script; }
 
       const Arguments & args() const
-   { return _args; }
+      { return _args; }
 
       pid_t getPid() const
       { return _cmd ? _cmd->getpid() : NotConnected; }
@@ -225,14 +225,29 @@ namespace zypp
     if ( _cmd )
     {
       DBG << "Close:" << *this << endl;
-      {
-	PluginDumpStderr _dump( *_cmd ); // dump scripts stderr before leaving
+      bool doKill = true;
+      try {
+	// do not kill script if _DISCONNECT is ACKed.
+	send( PluginFrame( "_DISCONNECT" ) );
+	PluginFrame ret( receive() );
+	if ( ret.isAckCommand() )
+	{
+	  doKill = false;
+	  str::strtonum( ret.getHeaderNT( "exit" ), _lastReturn.get() );
+	  _lastExecError = ret.body();
+	}
       }
-      _cmd->kill();
-      _lastReturn = _cmd->close();
-      _lastExecError = _cmd->execError();
-      _cmd.reset();
+      catch (...)
+      { /* NOP */ }
+
+      if ( doKill )
+      {
+	_cmd->kill();
+	_lastReturn = _cmd->close();
+	_lastExecError = _cmd->execError();
+      }
       DBG << *this << " -> [" << _lastReturn << "] " << _lastExecError << endl;
+      _cmd.reset();
     }
     return _lastReturn;
   }
@@ -403,10 +418,10 @@ namespace zypp
 	}
       } while ( true );
     }
-    DBG << " <-read " << data.size() << endl;
+    // DBG << " <-read " << data.size() << endl;
     std::istringstream datas( data );
     PluginFrame ret( datas );
-    DBG << ret << endl;
+    DBG << "<-" << ret << endl;
     return ret;
   }
 
