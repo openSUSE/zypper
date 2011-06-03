@@ -9,14 +9,6 @@
 /** \file	zypp/target/TargetImpl.cc
  *
 */
-#ifdef _RPM_4_4
-#warning _RPM_4_4
-#else
-#ifdef _RPM_4_X
-#warning _RPM_4_X
-#endif
-#endif
-
 #include <iostream>
 #include <fstream>
 #include <sstream>
@@ -75,6 +67,119 @@ namespace zypp
   ///////////////////////////////////////////////////////////////////
   namespace target
   { /////////////////////////////////////////////////////////////////
+
+    /** Helper for commit plugin execution.
+     * \ingroup g_RAII
+     */
+    class CommitPlugins : private base::NonCopyable
+    {
+      public:
+
+      public:
+	/** Default ctor: Empty plugin list */
+	CommitPlugins()
+	{}
+
+	/** Dtor: Send PLUGINEND message and close plugins. */
+	~CommitPlugins()
+	{
+	  for_( it, _scripts.begin(), _scripts.end() )
+	  {
+	    MIL << "Unload plugin: " << *it << endl;
+	    try {
+	      it->send( PluginFrame( "PLUGINEND" ) );
+	      PluginFrame ret( it->receive() );
+	      if ( ! ret.isAckCommand() )
+	      {
+		WAR << "Failed to unload plugin: Bad plugin response." << endl;
+	      }
+	      it->close();
+	    }
+	    catch( const zypp::Exception &  )
+	    {
+	      WAR << "Failed to unload plugin." << endl;
+	    }
+	  }
+	  // _scripts dtor will disconnect all remaining plugins!
+	}
+
+	/** Find and launch plugins sending PLUGINSTART message.
+	 *
+	 * If \a path_r is a directory all executable files whithin are
+	 * expected to be plugins. Otherwise \a path_r must point to an
+	 * executable plugin.
+	 */
+	void load( const Pathname & path_r )
+	{
+	  PathInfo pi( path_r );
+	  if ( pi.isDir() )
+	  {
+	    std::list<Pathname> entries;
+	    if ( filesystem::readdir( entries, pi.path(), false ) != 0 )
+	    {
+	      WAR << "Plugin dir is not readable: " << pi << endl;
+	      return;
+	    }
+	    for_( it, entries.begin(), entries.end() )
+	    {
+	      PathInfo pii( *it );
+	      if ( pii.isFile() && pii.userMayRX() )
+		doLoad( pii );
+	    }
+	  }
+	  else if ( pi.isFile() )
+	  {
+	    if ( pi.userMayRX() )
+	      doLoad( pi );
+	    else
+	      WAR << "Plugin file is not executable: " << pi << endl;
+	  }
+	  else
+	  {
+	    WAR << "Plugin path is neither dir nor file: " << pi << endl;
+	  }
+	}
+
+      private:
+	void doLoad( const PathInfo & pi_r )
+	{
+	  MIL << "Load plugin: " << pi_r << endl;
+	  try {
+	    PluginScript plugin( pi_r.path() );
+	    plugin.open();
+	    plugin.send( PluginFrame( "PLUGINBEGIN" ) );
+	    PluginFrame ret( plugin.receive() );
+	    if ( ret.isAckCommand() )
+	    {
+	      _scripts.push_back( plugin );
+	    }
+	    else
+	    {
+	      WAR << "Failed to load plugin: Bad plugin response." << endl;
+	    }
+	  }
+	  catch( const zypp::Exception &  )
+	  {
+	     WAR << "Failed to load plugin." << endl;
+	  }
+	}
+
+      private:
+	std::list<PluginScript> _scripts;
+    };
+
+    void testCommitPlugins( const Pathname & path_r ) // for testing only
+    {
+      USR << "+++++" << endl;
+      {
+	CommitPlugins pl;
+	pl.load( path_r );
+	USR << "=====" << endl;
+      }
+      USR << "-----" << endl;
+    }
+
+    ///////////////////////////////////////////////////////////////////
 
     /** \internal Manage writing a new testcase when doing an upgrade. */
     void writeUpgradeTestcase()
@@ -963,6 +1068,16 @@ namespace zypp
       // ----------------------------------------------------------------- //
 
       MIL << "TargetImpl::commit(<pool>, " << policy_r << ")" << endl;
+
+      ///////////////////////////////////////////////////////////////////
+      // Prepare execution of commit plugins:
+      ///////////////////////////////////////////////////////////////////
+      CommitPlugins commitPlugins;
+      if ( root() == "/" && ! policy_r.dryRun() )
+      {
+	Pathname plugindir( Pathname::assertprefix( _root, ZConfig::instance().pluginsPath()/"commit" ) );
+	commitPlugins.load( plugindir );
+      }
 
       ///////////////////////////////////////////////////////////////////
       // Write out a testcase if we're in dist upgrade mode.
