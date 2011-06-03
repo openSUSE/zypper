@@ -60,7 +60,7 @@ from zypp_plugin import Plugin
 
 class MyPlugin(Plugin):
 
-  def SAMPLE(self, headers, body):
+  def SAMPLE( self, headers, body ):
     # called upon revieving a SAMPLE message
     ...
     if ( ok ):
@@ -74,6 +74,13 @@ plugin.main()
 
 Two methods \c ack and \c error are available to send back a standard \c ACK or \c ERROR message. You may optionally pass header entries and a multiline body. For sending custom messages use \c answer, which takes the command name as 1st argument, followed by optional header entries and a multiline body.
 
+Plugin closes \c stdin and exits when receiving a \c _DISCONNECT message. Upon an \c ACK response to \c _DISCONNECT libzypp will not attempt to kill the script. An exit value different than \c 0 may be set via an \c 'exit' header in \c ACK.
+
+\verbatim
+  def _DISCONNECT( self, headers, body ):
+    sys.stding.close()
+    self.ack( {'exit':'99'}, 'Famous last words.' )
+\endverbatim
 
 <HR><!-- ====================================================================== -->
 \section plugin-toc Supported plugins

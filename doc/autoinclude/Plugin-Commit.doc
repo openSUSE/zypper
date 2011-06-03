@@ -9,7 +9,7 @@
 
 This is a statefull plugin executed during \ref zypp::ZYpp::commit. At the beginning of a commit all plugins found in \c /usr/lib/zypp/plugins/commit are launched. The plugins will receive messages as commit proceeds. Unless otherwise specified messages received need to be confirmed by sending an \c ACC message. Sending back an \c ERROR message execution of the plugin will be canceled.
 
-If you have e.g. \c zypp-plugin-python installed a basic commit plugin could look like this (\see \ref plugin-writing):
+If you have e.g. \c zypp-plugin-python installed a basic commit plugin could look like this:
 
 \verbatim
 #!/usr/bin/env python
@@ -35,6 +35,7 @@ plugin = MyPlugin()
 plugin.main()
 \endverbatim
 
+\see \ref plugin-writing
 
 <HR><!-- ====================================================================== -->
 \section pluginbegin PLUGINBEGIN
