@@ -55,7 +55,7 @@ namespace zypp
     { ::queue_push( _pimpl, val_r ); }
 
     Queue::value_type Queue::pop()
-    { ::queue_pop( _pimpl ); }
+    { return ::queue_pop( _pimpl ); }
 
     Queue::value_type Queue::first() const
     {
