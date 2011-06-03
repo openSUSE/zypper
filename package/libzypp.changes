@@ -1,4 +1,11 @@
 -------------------------------------------------------------------
+Fri Jun  3 23:12:05 CEST 2011 - ma@suse.de
+
+- Basic commit plugins implemented. They may be used to implement pre/post
+  commit actions like taking file system snapshots (fate#303699)
+- version 9.6.0 (5)
+
+-------------------------------------------------------------------
 Tue May 31 17:27:45 CEST 2011 - ma@suse.de
 
 - Do commit based on sat::Transaction.
