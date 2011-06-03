@@ -71,6 +71,30 @@ namespace zypp
       static const pid_t NotConnected;
 
     public:
+      /** \name Get/set the global timeout settings.
+       * Timeout when sending/receiving data to/from a plugin default to 30 sec. The value
+       * (in seconds) my be changed via the environment variables \c ZYPP_PLUGIN_SEND_TIMEOUT,
+       * \c ZYPP_PLUGIN_RECEIVE_TIMEOUT or \c ZYPP_PLUGIN_TIMEOUT (both: send and receive).
+       */
+      //@{
+	/** Global default timeout (sec.) when sending data. */
+	static long defaultSendTimeout();
+
+	/** Global default timeout (sec.) when receiving data. */
+	static long defaultReceiveTimeout();
+
+	/** Set global default timeout (sec.) when sending data. */
+	static void defaultSendTimeout( long newval_r );
+
+	/** Set global default timeout (sec.) when receiving data. */
+	static void defaultReceiveTimeout( long newval_r );
+
+	/** Set global default timeout (sec.) (both: send and receive).*/
+	static void defaultTimeout( long newval_r )
+	{ defaultSendTimeout( newval_r ); defaultReceiveTimeout( newval_r ); }
+      //@}
+
+    public:
       /** Default ctor. */
       PluginScript();
 
@@ -101,7 +125,27 @@ namespace zypp
        */
       const std::string & lastExecError() const;
 
-    public:
+     public:
+      /** \name Get/set local timeout settings. */
+      //@{
+	/** Local default timeout (sec.) when sending data. */
+	long sendTimeout() const;
+
+	/** Local default timeout (sec.) when receiving data. */
+	long receiveTimeout() const;
+
+	/** Set local default timeout (sec.) when sending data. */
+	void sendTimeout( long newval_r );
+
+	/** Set local default timeout (sec.) when receiving data. */
+	void receiveTimeout( long newval_r );
+
+	/** Set local default timeout (sec.) (both: send and receive).*/
+	void timeout( long newval_r )
+	{ sendTimeout( newval_r ); receiveTimeout( newval_r ); }
+      //@}
+
+   public:
       /** Setup connection and execute script.
        * \throw PluginScriptException if already connected to a script
        * \throw PluginScriptException if script does not exist or is not executable

@@ -31,13 +31,9 @@ using std::endl;
 namespace zypp
 { /////////////////////////////////////////////////////////////////
 
-
   namespace
   {
     const char * PLUGIN_DEBUG = getenv( "ZYPP_PLUGIN_DEBUG" );
-    const long PLUGIN_TIMEOUT = str::strtonum<long>( getenv( "ZYPP_PLUGIN_TIMEOUT" ) );
-    const long PLUGIN_SEND_TIMEOUT = str::strtonum<long>( getenv( "ZYPP_PLUGIN_SEND_TIMEOUT" ) );
-    const long PLUGIN_RECEIVE_TIMEOUT = str::strtonum<long>( getenv( "ZYPP_PLUGIN_RECEIVE_TIMEOUT" ) );
 
     /** Dump buffer string if PLUGIN_DEBUG is on.
      * \ingroup g_RAII
@@ -63,7 +59,7 @@ namespace zypp
       const std::string & _buffer;
     };
 
-    /** Dump buffer string if PLUGIN_DEBUG is on.
+    /** Dump programms stderr.
      * \ingroup g_RAII
      */
     struct PluginDumpStderr
@@ -114,7 +110,9 @@ namespace zypp
   {
     public:
       Impl( const Pathname & script_r = Pathname(), const Arguments & args_r = Arguments() )
-        : _script( script_r )
+        : _sendTimeout( _defaultSendTimeout )
+        , _receiveTimeout( _defaultReceiveTimeout )
+        , _script( script_r )
         , _args( args_r )
       {}
 
@@ -122,17 +120,18 @@ namespace zypp
       { try { close(); } catch(...) {} }
 
     public:
-      /** Timeout (sec.) when sending data. */
-      static const long send_timeout;
-      /** Timeout (sec.) when receiving data. */
-      static const long receive_timeout;
+      static long _defaultSendTimeout;
+      static long _defaultReceiveTimeout;
 
-    public:
+      long _sendTimeout;
+      long _receiveTimeout;
+
+   public:
       const Pathname & script() const
       { return _script; }
 
       const Arguments & args() const
-      { return _args; }
+   { return _args; }
 
       pid_t getPid() const
       { return _cmd ? _cmd->getpid() : NotConnected; }
@@ -173,10 +172,17 @@ namespace zypp
 
   ///////////////////////////////////////////////////////////////////
 
-  const long PluginScript::Impl::send_timeout = ( PLUGIN_SEND_TIMEOUT > 0 ? PLUGIN_SEND_TIMEOUT
-									  : ( PLUGIN_TIMEOUT > 0 ? PLUGIN_TIMEOUT : 30 ) );
-  const long PluginScript::Impl::receive_timeout = ( PLUGIN_RECEIVE_TIMEOUT > 0 ? PLUGIN_RECEIVE_TIMEOUT
-                                                                                : ( PLUGIN_TIMEOUT > 0 ? PLUGIN_TIMEOUT : 30 ) );
+  namespace
+  {
+    const long PLUGIN_TIMEOUT = 	str::strtonum<long>( getenv( "ZYPP_PLUGIN_TIMEOUT" ) );
+    const long PLUGIN_SEND_TIMEOUT = 	str::strtonum<long>( getenv( "ZYPP_PLUGIN_SEND_TIMEOUT" ) );
+    const long PLUGIN_RECEIVE_TIMEOUT =	str::strtonum<long>( getenv( "ZYPP_PLUGIN_RECEIVE_TIMEOUT" ) );
+  }
+
+  long PluginScript::Impl::_defaultSendTimeout =    ( PLUGIN_SEND_TIMEOUT > 0    ? PLUGIN_SEND_TIMEOUT
+										 : ( PLUGIN_TIMEOUT > 0 ? PLUGIN_TIMEOUT : 30 ) );
+  long PluginScript::Impl::_defaultReceiveTimeout = ( PLUGIN_RECEIVE_TIMEOUT > 0 ? PLUGIN_RECEIVE_TIMEOUT
+										 : ( PLUGIN_TIMEOUT > 0 ? PLUGIN_TIMEOUT : 30 ) );
 
   ///////////////////////////////////////////////////////////////////
 
@@ -219,6 +225,9 @@ namespace zypp
     if ( _cmd )
     {
       DBG << "Close:" << *this << endl;
+      {
+	PluginDumpStderr _dump( *_cmd ); // dump scripts stderr before leaving
+      }
       _cmd->kill();
       _lastReturn = _cmd->close();
       _lastExecError = _cmd->execError();
@@ -272,7 +281,7 @@ namespace zypp
 	FD_SET( fd, &wfds );
 
 	struct timeval tv;
-	tv.tv_sec = send_timeout;
+	tv.tv_sec = _sendTimeout;
 	tv.tv_usec = 0;
 
 	int retval = select( fd+1, NULL, &wfds, NULL, &tv );
@@ -364,7 +373,7 @@ namespace zypp
 	    FD_SET( fd, &rfds );
 
 	    struct timeval tv;
-	    tv.tv_sec = receive_timeout;
+	    tv.tv_sec = _receiveTimeout;
 	    tv.tv_usec = 0;
 
 	    int retval = select( fd+1, &rfds, NULL, NULL, &tv );
@@ -408,6 +417,30 @@ namespace zypp
   ///////////////////////////////////////////////////////////////////
 
   const pid_t PluginScript::NotConnected( -1 );
+
+  long PluginScript::defaultSendTimeout()
+  { return Impl::_defaultSendTimeout; }
+
+  long PluginScript::defaultReceiveTimeout()
+  { return Impl::_defaultReceiveTimeout; }
+
+  void PluginScript::defaultSendTimeout( long newval_r )
+  { Impl::_defaultSendTimeout = newval_r > 0 ? newval_r : 0; }
+
+  void PluginScript::defaultReceiveTimeout( long newval_r )
+  { Impl::_defaultReceiveTimeout = newval_r > 0 ? newval_r : 0; }
+
+  long PluginScript::sendTimeout() const
+  { return _pimpl->_sendTimeout; }
+
+  long PluginScript::receiveTimeout() const
+  { return _pimpl->_receiveTimeout; }
+
+  void PluginScript::sendTimeout( long newval_r )
+  { _pimpl->_sendTimeout = newval_r > 0 ? newval_r : 0; }
+
+  void PluginScript::receiveTimeout( long newval_r )
+  { _pimpl->_receiveTimeout = newval_r > 0 ? newval_r : 0; }
 
   PluginScript::PluginScript()
     : _pimpl( new Impl )

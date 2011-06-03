@@ -7,6 +7,11 @@
 #include "TestSetup.h"
 #include "zypp/PluginScript.h"
 
+BOOST_AUTO_TEST_CASE(InitialSettings)
+{
+  PluginScript::defaultTimeout( 3 );
+}
+
 BOOST_AUTO_TEST_CASE(PluginFrameDefaultCtor)
 {
   PluginFrame f;
