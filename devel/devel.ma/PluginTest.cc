@@ -74,6 +74,14 @@ PluginFrame receive()
 } // namespace zypp
 ///////////////////////////////////////////////////////////////////
 
+#define DOLOG(C) USR << #C << ": " << endl; C;
+
+namespace zypp {
+  namespace target {
+    void testCommitPlugins( const Pathname & path_r );
+  }
+}
+
 /******************************************************************
 **
 **      FUNCTION NAME : main
@@ -85,6 +93,29 @@ try {
   zypp::base::LogControl::instance().logToStdErr();
   INT << "===[START]==========================================" << endl;
   //////////////////////////////////////////////////////////////////
+
+  zypp::target::testCommitPlugins( "/tmp/pltest" );
+
+  if ( 0 )
+  {
+  Pathname script( "PluginTest.py" );
+  PluginScript plugin( script );
+  USR << plugin << endl;
+
+  DOLOG( plugin.open() );
+
+  DOLOG( plugin.send( PluginFrame( "PLUGINBEGIN" ) ) );
+
+  PluginFrame ret;
+  DOLOG( ret = plugin.receive() );
+  MIL << ret << endl;
+
+  DOLOG( plugin.send( PluginFrame( "PLUGINEND" ) ) );
+  DOLOG( ret = plugin.receive() );
+  MIL << ret << endl;
+
+  DOLOG( plugin.close() );
+  }
 
   if ( 0 ) {
     Pathname script( ZConfig::instance().pluginsPath()/"system/spacewalkx" );
