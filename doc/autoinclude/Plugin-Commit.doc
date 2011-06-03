@@ -29,7 +29,6 @@ class MyPlugin(Plugin):
   def PLUGINEND(self, headers, body):
     # commit ended
     self.ack()
-    sys.exit(0)
 
 plugin = MyPlugin()
 plugin.main()
@@ -54,6 +53,6 @@ PLUGINEND
 
 ^@
 \endverbatim
-This message is sent at the end of commit. You should receive this message even if commit was aborted by some unexpected exception. You chould call \c exit immediately after having sent the \c ACC message.
+This message is sent at the end of commit. You should receive this message even if commit was aborted by some unexpected exception.
 
 */
