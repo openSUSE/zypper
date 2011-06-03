@@ -222,6 +222,18 @@ namespace zypp
   //
   ///////////////////////////////////////////////////////////////////
 
+  const std::string & PluginFrame::ackCommand()
+  {
+    static std::string _val( "ACK" );
+    return _val;
+  }
+
+  const std::string & PluginFrame::errorCommand()
+  {
+    static std::string _val( "ERROR" );
+    return _val;
+  }
+
   PluginFrame::PluginFrame()
     : _pimpl( Impl::nullimpl() )
   {}

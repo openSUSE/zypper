@@ -44,6 +44,12 @@ namespace zypp
     friend bool operator==( const PluginFrame & lhs, const PluginFrame & rhs );
 
     public:
+      /** "ACK" command. */
+      static const std::string & ackCommand();
+      /** "ERROR" command. */
+      static const std::string & errorCommand();
+
+    public:
       /** Default exception type */
       typedef PluginFrameException Exception;
 
@@ -81,6 +87,14 @@ namespace zypp
        * \throw PluginFrameException If illegal command string (e.g. multiline)
        */
       void setCommand( const std::string & command_r );
+
+      /** Convenience to identify an ACK command. */
+      bool isAckCommand() const
+      { return command() == ackCommand(); }
+
+      /** Convenience to identify an ERROR command. */
+      bool isErrorCommand() const
+      {return command() == errorCommand(); }
 
       /** Return the frame body. */
       const std::string & body() const;
