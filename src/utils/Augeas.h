@@ -56,7 +56,7 @@ private:
   bool _got_global_zypper_conf;
   bool _got_user_zypper_conf;
 
-  mutable bool _last_get_result;
+  mutable int _last_get_result;
 };
 
 #endif /* ZYPPER_UTIL_AUGEAS_H_ */
