@@ -143,7 +143,7 @@ string Augeas::get(const string & augpath) const
 {
   const char *value[1] = {};
   _last_get_result = ::aug_get(_augeas, augpath.c_str(), value);
-  if (_last_get_result)
+  if (_last_get_result == 1)
   {
     DBG << "Got " << augpath << " = " << value[0] << endl;
     return value[0];
@@ -173,7 +173,7 @@ string Augeas::getOption(const string & option) const
   {
     string augpath_u = userOptionPath(opt[0], opt[1]);
     string result = get(augpath_u);
-    if (_last_get_result && !isCommented(opt[0], opt[1], false))
+    if (_last_get_result == 1 && !isCommented(opt[0], opt[1], false))
       return result;
   }
 
@@ -181,7 +181,7 @@ string Augeas::getOption(const string & option) const
   {
     string augpath_g = global_option_path(opt[0], opt[1]);
     string result = get(augpath_g);
-    if (_last_get_result && !isCommented(opt[0], opt[1], true))
+    if (_last_get_result == 1 && !isCommented(opt[0], opt[1], true))
       return result;
   }
 
