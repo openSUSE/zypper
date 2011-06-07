@@ -1,4 +1,10 @@
 -------------------------------------------------------------------
+Tue Jun  7 12:42:20 CEST 2011 - ma@suse.de
+
+- Fix transaction ORDER_BY_MEDIANR.
+- version 9.7.0 (5)
+
+-------------------------------------------------------------------
 Fri Jun  3 23:12:05 CEST 2011 - ma@suse.de
 
 - Basic commit plugins implemented. They may be used to implement pre/post
