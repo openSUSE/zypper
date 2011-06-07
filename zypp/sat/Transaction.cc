@@ -115,39 +115,23 @@ namespace zypp
 	  if ( ! valid() )
 	    return false;
 #if 0
+	  // This is hwo we could implement out own order method.
+	  // As ::transaction already groups by MediaNr, we don't
+	  // need it for ORDER_BY_MEDIANR.
 	  ::transaction_order( &_trans, SOLVER_TRANSACTION_KEEP_ORDERDATA );
 	  detail::IdType chosen = 0;
 	  Queue choices;
 
-	  unsigned stopper = 10;
 	  while ( true )
 	  {
-//	    choices.clear();
 	    int ret = transaction_order_add_choices( &_trans, chosen, choices );
-//
-	    for_( it, choices.begin(), choices.end() )
-	    {
-	      if ( chosen )
-	      {
-		if ( *it == chosen )
-		  chosen = 0;
-		continue;
-	      }
-	      if ( makeResObject( sat::Solvable(*it) )->mediaNr() > 1 )
-		continue;
-	      chosen = *it;
-	      break;
-	    }
 	    MIL << ret << ": " << chosen << ": " << choices << endl;
+	    chosen = choices.pop_front(); // pick one out of choices
 	    if ( ! chosen )
 	      break;
-	    if ( !--stopper )
-	      break;
 	  }
-
 	  return true;
 #endif
-
 	  if ( !_ordered )
 	  {
 	    ::transaction_order( &_trans, 0 );

@@ -1134,7 +1134,6 @@ namespace zypp
 	// Collect until the 1st package from an unwanted media occurs.
         // Further collection could violate install order.
 	MIL << "Restrict to media number " << policy_r.restrictToMedia() << endl;
-#warning Also need to be able to compute ORDER_BY_MEDIANR
 	for_( it, result.transaction().begin(), result.transaction().end() )
 	{
 	  if ( makeResObject( *it )->mediaNr() > 1 )
