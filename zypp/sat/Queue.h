@@ -48,19 +48,44 @@ namespace zypp
 	const_iterator begin() const;
 	const_iterator end() const;
 
+	/** Return iterator to the 1st occurance of \a val_r or \ref end. */
+	const_iterator find( value_type val_r ) const;
+
+	/** Return whether the Queue contais at lest one element with value \a val_r. */
+	bool contains( value_type val_r ) const
+	{ return( find( val_r ) != end() ); }
+
+	/** Return the 1st Id in the queue or \c 0 if empty. */
+	value_type first() const;
+
+	/** Return the last Id in the queue or \c 0 if empty. */
+	value_type last() const;
+
 	/** Clear the queue. */
 	void clear();
 
+	/** Remove all occurances of \a val_r from the queue. */
+	void remove( value_type val_r );
+
 	/** Push a value to the end off the Queue. */
 	void push( value_type val_r );
+	/** \overload */
+	void push_back( value_type val_r )
+	{ push( val_r ); }
 
-	/** Return the 1st Id in the queue or \c 0 if empty. */
+	/** Pop and return the last Id from the queue or \c 0 if empty. */
 	value_type pop();
+	/** \overload */
+	value_type pop_back()
+	{ return pop(); }
 
-	/** Remove and return the 1st Id from the queue or \c 0 if empty. */
-	value_type first() const;
+	/** Push a value to the beginning off the Queue. */
+	void push_front( value_type val_r );
 
-      public:
+	/** Pop and return the 1st Id from the queue or \c 0 if empty. */
+	value_type pop_front();
+
+     public:
 	/** Backdoor */
 	operator struct ::_Queue *()
 	{ return _pimpl; }
