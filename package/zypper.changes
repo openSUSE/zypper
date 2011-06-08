@@ -1,7 +1,13 @@
 -------------------------------------------------------------------
+Wed Jun  8 13:11:23 CEST 2011 - ma@suse.de
+
+- Adapt to changed ZYppCommitResult api.
+
+-------------------------------------------------------------------
+
 Mon Jun  6 14:49:06 CEST 2011 - dheidler@suse.de
 
-- fix crashing zypper when there are double config entrys
+- fix crashing zypper when there are double config entries
   in zypper.conf (bnc#614646)
 - 1.6.10
 
