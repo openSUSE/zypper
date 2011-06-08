@@ -63,9 +63,8 @@ namespace zypp
       public:
         Flags()                               : _val( 0 ) {}
         Flags( Enum flag_r )                  : _val( flag_r ) {}
-        explicit Flags( unsigned flag_r )     : _val( flag_r ) {}
+        Flags( unsigned flag_r )              : _val( flag_r ) {}
 
-        Flags & operator&=( unsigned rhs )    { _val &= rhs;      return *this; }
         Flags & operator&=( Flags rhs )       { _val &= rhs._val; return *this; }
         Flags & operator&=( Enum rhs )        { _val &= rhs;      return *this; }
 
@@ -78,7 +77,6 @@ namespace zypp
       public:
         operator unsigned() const             { return _val; }
 
-        Flags operator&( unsigned rhs ) const { return Flags( *this ) &= rhs; }
         Flags operator&( Flags rhs ) const    { return Flags( *this ) &= rhs; }
         Flags operator&( Enum rhs ) const     { return Flags( *this ) &= rhs; }
 
