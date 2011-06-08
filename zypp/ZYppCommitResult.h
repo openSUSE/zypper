@@ -131,32 +131,34 @@ namespace zypp
 
     public:
 
-      /** \name Some statistics based on \ref transaction
+      /** \name Some statistics based on \ref Transaction
+       *
+       * Class \ref Transaction allows to count and iterate the action steps to
+       * get more detailed information about the transaction result. Here are just
+       * a few convenience methods for easy evaluation.
+       *
+       * \code
+       *    ZYppCommitResult result;
+       *    const sat::Transaction & trans( result.transaction() );
+       *    for_( it, trans.actionBegin(~sat::Transaction::STEP_DONE), trans.actionEnd() )
+       *    {
+       *       // process all steps not DONE (ERROR and TODO)
+       *       if ( it->satSolvable() )
+       *         std::cout << it->satSolvable() << endl;
+       *       else // deleted @System solvable: print post mortem data available
+       *         std::cout << it->ident() << endl;
+       *    }
+       * \endcode
+       * \see \ref Transaction, \ref transaction()
        */
       //@{
-	/** Basically std::pair<unsigned,unsigned>, but default ctor sets <0,0>. */
-	typedef std::pair<DefaultIntegral<unsigned,0>, DefaultIntegral<unsigned,0> > InsDelCnt;
+	/** Whether all steps were performed successfully (none skipped or error) */
+	bool allDone() const
+	{ transaction().actionEmpty( ~sat::Transaction::STEP_DONE );}
 
-	/** Total number of install/delete actions to be performed. */
-	InsDelCnt totalCount() const;
-
-	/** Number of install/delete actions with result \a stage_r. */
-	InsDelCnt stepStageCount( sat::Transaction::StepStage stage_r ) const;
-
-	/** Number of install/delete actions done. */
-	InsDelCnt doneCount() const
-	{ return stepStageCount( sat::Transaction::STEP_DONE ); }
-
-	/** Number of install/delete actions that failed with error. */
-	InsDelCnt errorCount() const
-	{ return stepStageCount( sat::Transaction::STEP_ERROR ); }
-
-	/** Number of install/delete actions that were skipped (e.g. due to unwanted media). */
-	InsDelCnt skippedCount() const
-	{ return stepStageCount( sat::Transaction::STEP_TODO ); }
-
-	/** All in one go. */
-	void resultCount( InsDelCnt & total_r, InsDelCnt & done_r, InsDelCnt & error_r, InsDelCnt & skipped_r ) const;
+	/** Whether an error ocurred (skipped streps are ok). */
+	bool noError() const
+	{ return transaction().actionEmpty( sat::Transaction::STEP_ERROR );}
       //@}
 
     public:

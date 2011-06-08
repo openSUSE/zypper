@@ -78,62 +78,23 @@ namespace zypp
   UpdateNotifications & ZYppCommitResult::rUpdateMessages()
   { return _pimpl->_updateMessages; }
 
-  ZYppCommitResult::InsDelCnt ZYppCommitResult::totalCount() const
-  {
-    InsDelCnt ret;
-    for_( it, _pimpl->_transaction.actionBegin(), _pimpl->_transaction.actionEnd() )
-    {
-      ++( it->stepType() == sat::Transaction::TRANSACTION_ERASE ? ret.second : ret.first );
-    }
-
-    return ret;
-  }
-
-  ZYppCommitResult::InsDelCnt ZYppCommitResult::stepStageCount( sat::Transaction::StepStage stage_r ) const
-  {
-    InsDelCnt ret;
-    for_( it, _pimpl->_transaction.actionBegin(), _pimpl->_transaction.actionEnd() )
-    {
-      if ( it->stepStage() != stage_r )
-	continue;
-      ++( it->stepType() == sat::Transaction::TRANSACTION_ERASE ? ret.second : ret.first );
-    }
-    return ret;
-  }
-
-  void  ZYppCommitResult::resultCount( InsDelCnt & total_r, InsDelCnt & done_r, InsDelCnt & error_r, InsDelCnt & skipped_r ) const
-  {
-    total_r = done_r = error_r = skipped_r = InsDelCnt();
-    for_( it, _pimpl->_transaction.actionBegin(), _pimpl->_transaction.actionEnd() )
-    {
-      ++( it->stepType() == sat::Transaction::TRANSACTION_ERASE ? total_r.second : total_r.first );
-      switch ( it->stepStage() )
-      {
-	case sat::Transaction::STEP_DONE:
-	  ++( it->stepType() == sat::Transaction::TRANSACTION_ERASE ? done_r.second : done_r.first );
-	  break;
-	case sat::Transaction::STEP_ERROR:
-	  ++( it->stepType() == sat::Transaction::TRANSACTION_ERASE ? error_r.second : error_r.first );
-	  break;
-	case sat::Transaction::STEP_TODO:
-	  ++( it->stepType() == sat::Transaction::TRANSACTION_ERASE ? skipped_r.second : skipped_r.first );
-	  break;
-      }
-    }
-  }
-
   ///////////////////////////////////////////////////////////////////
-
-  std::ostream & operator<<( std::ostream & str, const ZYppCommitResult::InsDelCnt & obj )
-  { return str << obj.first << '/' << obj.second; }
 
   std::ostream & operator<<( std::ostream & str, const ZYppCommitResult & obj )
   {
-    ZYppCommitResult::InsDelCnt result[4];
-    obj.resultCount( result[0], result[1], result[2], result[3] );
-
+    DefaultIntegral<unsigned,0> result[4];
+    for_( it, obj.transaction().actionBegin(), obj.transaction().actionEnd() )
+    {
+      ++result[0];
+      switch ( it->stepStage() )
+      {
+	case sat::Transaction::STEP_DONE :	++result[1]; break;
+	case sat::Transaction::STEP_ERROR :	++result[2]; break;
+	case sat::Transaction::STEP_TODO :	++result[3]; break;
+      }
+    }
     str << "CommitResult "
-        << " (ins/del total " << result[0]
+        << " (total " << result[0]
         << ", done " << result[1]
         << ", error " << result[2]
         << ", skipped " << result[3]
