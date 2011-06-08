@@ -1,8 +1,8 @@
 #!/bin/bash
-LIBZYPP_SOURCE_DIR="${1:-..}"
+SOURCE_DIR="${1:-..}"
 POTFILE="${2:-po/zypp.pot}"
 # search for sourcecode-files
-cd "$LIBZYPP_SOURCE_DIR"
+cd "$SOURCE_DIR"
 SRCFILES=`find examples tools zypp \
                            -type f -name "*.h" \
                                 -o -name "*.pm"  \
