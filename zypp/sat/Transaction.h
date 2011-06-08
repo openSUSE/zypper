@@ -18,6 +18,7 @@ extern "C"
 #include <iosfwd>
 
 #include "zypp/base/PtrTypes.h"
+#include "zypp/base/Flags.h"
 #include "zypp/base/SafeBool.h"
 #include "zypp/base/Iterator.h"
 #include "zypp/base/DefaultIntegral.h"
@@ -48,6 +49,9 @@ namespace zypp
      *       makes PoolItem and Selectable iterators automatically available.
      * \note Changing the \ref ResPool content (loading/unloading repositories)
      *       invalidates all outstanding transaction data. \see \ref valid.
+     * \note.The transaction may inlude steps of type \ref TRANSACTION_IGNORE which
+     *       do not cause/require any specific action. To skip those informal steps
+     *       when iterating, use the \ref actionBegin /\ref actionEnd methods.
      */
     class Transaction : public SolvIterMixin<Transaction, detail::Transaction_const_iterator>
 		      , protected base::SafeBool<Transaction>
@@ -63,19 +67,21 @@ namespace zypp
        /** Type of (rpm) action to perform in a \ref Step. */
        enum StepType
        {
-	 TRANSACTION_IGNORE,		/**< [ ] Nothing (includes implicit deletes due to obsoletes and non-package actions) */
-	 TRANSACTION_ERASE,		/**< [-] Delete item */
-	 TRANSACTION_INSTALL,		/**< [+] Install(update) item */
-	 TRANSACTION_MULTIINSTALL	/**< [M] Install(multiversion) item (\see \ref ZConfig::multiversion) */
+	 TRANSACTION_IGNORE		= 0x00,	/**< [ ] Nothing (includes implicit deletes due to obsoletes and non-package actions) */
+	 TRANSACTION_ERASE		= 0x10,	/**< [-] Delete item */
+	 TRANSACTION_INSTALL		= 0x20,	/**< [+] Install(update) item */
+	 TRANSACTION_MULTIINSTALL	= 0x30	/**< [M] Install(multiversion) item (\see \ref ZConfig::multiversion) */
        };
 
        /** \ref Step action result. */
        enum StepStage
        {
-	 STEP_TODO,		/**< [__] unprocessed */
-	 STEP_DONE,		/**< [OK] success */
-	 STEP_ERROR,		/**< [**] error */
+	 STEP_TODO	= (1 << 0),	/**< [__] unprocessed */
+	 STEP_DONE	= (1 << 1),	/**< [OK] success */
+	 STEP_ERROR	= (1 << 2),	/**< [**] error */
        };
+
+       ZYPP_DECLARE_FLAGS(StepStages,StepStage);
 
      public:
         /** Default ctor: empty transaction. */
@@ -107,8 +113,8 @@ namespace zypp
 	/** Number of steps in transaction steps. */
 	size_t size() const;
 
-       typedef detail::Transaction_iterator iterator;
-       typedef detail::Transaction_const_iterator const_iterator;
+	typedef detail::Transaction_iterator iterator;
+	typedef detail::Transaction_const_iterator const_iterator;
 
 	/** Iterator to the first \ref TransactionStep */
 	const_iterator begin() const;
@@ -131,13 +137,35 @@ namespace zypp
 	iterator find( const PoolItem & pi_r );
 
       public:
-	/** \name Omit iterating TRANSACTION_IGNORE steps.
+	/** \name Iterate action steps (omit TRANSACTION_IGNORE steps).
+	 *
+	 * All these methods allow to pass an optional OR'd combination of
+	 * \ref StepStages as filter. Per default all steps are processed/counted.
+	 *
+	 * \code
+	 *    Transaction trans;
+	 *    for_( it, trans.actionBegin(~sat::Transaction::STEP_DONE), trans.actionEnd() )
+	 *    {
+	 *       ... // process all steps not DONE (ERROR and TODO)
+	 *    }
+	 * \endcode
 	 */
 	//@{
 	struct FilterAction;
 	typedef filter_iterator<FilterAction,const_iterator> action_iterator;
-	action_iterator actionBegin() const;
+
+	/** Whether the [filtered] transaction contains any steps . */
+	bool actionEmpty( StepStages filter_r = StepStages() ) const;
+
+	/** Number of steps in [filtered] transaction steps. */
+	size_t actionSize( StepStages filter_r = StepStages() ) const;
+
+	/** Pointer to the 1st action step in [filtered] transaction. */
+	action_iterator actionBegin( StepStages filter_r = StepStages() ) const;
+
+	/** Pointer behind the last action step in transaction. */
 	action_iterator actionEnd() const;
+
 	//@}
 
       private:
@@ -152,6 +180,8 @@ namespace zypp
         /** Pointer to implementation */
         RW_pointer<Impl> _pimpl;
     };
+
+    ZYPP_DECLARE_OPERATORS_FOR_FLAGS(Transaction::StepStages);
 
     /** \relates Transaction Stream output */
     std::ostream & operator<<( std::ostream & str, const Transaction & obj );
@@ -198,8 +228,9 @@ namespace zypp
 	/** Set step action result. */
 	void stepStage( StepStage val_r );
 
-	/** Return the corresponding \ref Solvable (or.
-	 *
+	/** Return the corresponding \ref Solvable.
+	 * Returns \ref Solvable::noSolvable if the item is meanwhile deleted and
+	 * was removed from the pool. \see Post mortem acccess to @System solvables.
 	 */
 	Solvable satSolvable() const
 	{ return _solv; }
@@ -325,15 +356,35 @@ namespace zypp
 
     struct  Transaction::FilterAction
     {
+      FilterAction() {}
+      FilterAction( StepStages filter_r ) : _filter( filter_r ) {}
+
       bool operator()( const Transaction::Step & step_r ) const
-      { return step_r.stepType() != Transaction::TRANSACTION_IGNORE; }
+      {
+	if ( step_r.stepType() == Transaction::TRANSACTION_IGNORE )
+	  return false; // no action
+	return !_filter || _filter.testFlag( step_r.stepStage() );
+      }
+
+      StepStages _filter;
     };
 
-    inline Transaction::action_iterator Transaction::actionBegin() const
-    { return make_filter_begin( FilterAction(), *this ); }
+    inline Transaction::action_iterator Transaction::actionBegin( StepStages filter_r ) const
+    { return make_filter_begin( FilterAction( filter_r ), *this ); }
 
     inline Transaction::action_iterator Transaction::actionEnd() const
     { return make_filter_end( FilterAction(), *this ); }
+
+    inline bool Transaction::actionEmpty( StepStages filter_r ) const
+    { return( actionBegin( filter_r ) == actionEnd() ); }
+
+    inline size_t Transaction::actionSize( StepStages filter_r ) const
+    {
+      size_t cnt = 0;
+      for_( it, actionBegin( filter_r ), actionEnd() )
+	++cnt;
+      return cnt;
+    }
 
      /////////////////////////////////////////////////////////////////
   } // namespace sat
