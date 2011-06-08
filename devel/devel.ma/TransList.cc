@@ -199,6 +199,15 @@ void checkTrans()
   collect.debugDiffTransaction();
 }
 
+template <class _Iter>
+unsigned count( _Iter begin, _Iter end )
+{
+  unsigned cnt = 0;
+  for_( it, begin, end )
+    ++cnt;
+  return cnt;
+}
+
 ///////////////////////////////////////////////////////////////////
 int main( int argc, char * argv[] )
 try {
@@ -235,10 +244,16 @@ try {
     solve();
     sat::Transaction trans( pool.resolver().getTransaction() );
     trans.order();
-    for_( it, trans.actionBegin(), trans.actionEnd() ) {
-      USR << makeResObject(*it)->mediaNr() << ' ' << *it << endl;
-    }
-    install();
+
+    USR << count( trans.actionBegin(), trans.actionEnd() ) << endl;
+    USR << count( trans.actionBegin(sat::Transaction::STEP_TODO), trans.actionEnd() ) << endl;
+    USR << count( trans.actionBegin(sat::Transaction::STEP_DONE), trans.actionEnd() ) << endl;
+    USR << count( trans.actionBegin(sat::Transaction::STEP_ERROR), trans.actionEnd() ) << endl;
+    USR << count( trans.actionBegin(sat::Transaction::STEP_TODO|sat::Transaction::STEP_ERROR), trans.actionEnd() ) << endl;
+    USR << count( trans.actionBegin(~sat::Transaction::STEP_ERROR), trans.actionEnd() ) << endl;
+    USR << count( trans.actionBegin(~sat::Transaction::STEP_TODO), trans.actionEnd() ) << endl;
+
+    //install();
   }
 
   ///////////////////////////////////////////////////////////////////
