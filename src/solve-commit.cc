@@ -763,8 +763,7 @@ void solve_and_commit (Zypper & zypper)
 
           gData.show_media_progress_hack = false;
 
-	  ZYppCommitResult::InsDelCnt errors( result.errorCount() ); // failed install/delete actions
-          if ( errors.first || errors.second )
+          if ( ! result.noError() )
             zypper.setExitCode(ZYPPER_EXIT_ERR_ZYPP);
 
           s.clear(); s << result;
