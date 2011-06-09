@@ -1,4 +1,9 @@
 -------------------------------------------------------------------
+Thu Jun  9 09:21:02 CEST 2011 - ma@suse.de
+
+- Fix createPot script to allow automated translation processing
+
+-------------------------------------------------------------------
 Tue Oct 19 12:07:06 CEST 2010 - jkupec@suse.cz
 
 - Proper hint for forcing downgrade of a package (bnc #620377)
