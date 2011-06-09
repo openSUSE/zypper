@@ -1,4 +1,9 @@
 -------------------------------------------------------------------
+Thu Jun  9 09:19:26 CEST 2011 - ma@suse.de
+
+- Fix createPot script to allow automated translation processing
+
+-------------------------------------------------------------------
 Fri May 13 11:47:57 CEST 2011 - ma@suse.de
 
 - fix get_installed_providers by capability not to use selectables 
