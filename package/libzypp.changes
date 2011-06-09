@@ -1,4 +1,9 @@
 -------------------------------------------------------------------
+Thu Jun  9 09:34:51 CEST 2011 - ma@suse.de
+
+- Fix missing return value.
+
+-------------------------------------------------------------------
 Wed Jun  8 12:58:54 CEST 2011 - ma@suse.de
 
 - Simplify ZYppCommitResult by using filtered Transaction::action_iterator.
