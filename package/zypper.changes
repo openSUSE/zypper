@@ -1,4 +1,9 @@
 -------------------------------------------------------------------
+Thu Jun  9 09:25:27 CEST 2011 - ma@suse.de
+
+- Fix createPot script to allow automated translation processing
+
+-------------------------------------------------------------------
 Tue Apr 26 12:55:24 CEST 2011 - ma@suse.de
 
 - make g++ happy
