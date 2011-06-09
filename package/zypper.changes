@@ -1,4 +1,9 @@
 -------------------------------------------------------------------
+Thu Jun  9 09:28:14 CEST 2011 - ma@suse.de
+
+- Update sle-zypper-po.tar.bz2
+
+-------------------------------------------------------------------
 Thu Jun  9 09:25:27 CEST 2011 - ma@suse.de
 
 - Fix createPot script to allow automated translation processing
