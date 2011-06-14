@@ -1200,6 +1200,19 @@ namespace zypp
           // we may actually have more than one heap.
           for_( it, steps.begin(), steps.end() )
           {
+	    switch ( it->stepType() )
+	    {
+	      case sat::Transaction::TRANSACTION_INSTALL:
+	      case sat::Transaction::TRANSACTION_MULTIINSTALL:
+		// proceed: only install actionas may require download.
+		break;
+
+	      default:
+		// next: no download for or non-packages and delete actions.
+		continue;
+		break;
+	    }
+
 	    PoolItem pi( *it );
             if ( pi->isKind<Package>() || pi->isKind<SrcPackage>() )
             {
