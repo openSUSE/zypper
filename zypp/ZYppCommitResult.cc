@@ -99,7 +99,7 @@ namespace zypp
         << ", error " << result[2]
         << ", skipped " << result[3]
         << ", updateMessages " << obj.updateMessages().size()
-        << ")"
+        << ")";
     return str;
   }
 
