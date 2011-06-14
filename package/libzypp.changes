@@ -1,4 +1,10 @@
 -------------------------------------------------------------------
+Tue Jun 14 13:38:00 CEST 2011 - ma@suse.de
+
+- Fix download loop to skip non-install actions. (bnc#699435)
+- version 9.8.1 (8)
+
+-------------------------------------------------------------------
 Sun Jun 12 01:13:36 CEST 2011 - ma@suse.de
 
 - Update zypp-po.tar.bz2
