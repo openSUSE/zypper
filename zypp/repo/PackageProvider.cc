@@ -102,7 +102,6 @@ namespace zypp
              // match, even if loc.checksum() and the .rpm-files checksum do. Blame the metadata generator(s).
         {
           CheckSum cachechecksum( loc.checksum().type(), filesystem::checksum( cachepath.path(), loc.checksum().type() ) );
-          USR << cachechecksum << endl;
           if ( cachechecksum == loc.checksum() )
           {
             ManagedFile ret( cachepath.path() );

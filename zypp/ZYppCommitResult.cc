@@ -100,7 +100,6 @@ namespace zypp
         << ", skipped " << result[3]
         << ", updateMessages " << obj.updateMessages().size()
         << ")"
-        << std::endl << obj.transaction();
     return str;
   }
 
