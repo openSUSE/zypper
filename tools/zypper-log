@@ -1,0 +1,111 @@
+#!/usr/bin/env python
+
+# This tool helps you accessing the zypper logfile
+# see --help for more details
+
+import os, string, re, bz2, zlib, sys, time, argparse
+
+filenamelen = 0
+pidlen = 0
+verlen = 0
+
+def getLogFiles(rotate = 0):
+  logfiles = []
+  global filenamelen
+  for logfile in os.listdir('/var/log/'):
+    if logfile.find('zypper.log') != -1 and logfile.find('.zypper.log') == -1 and logfile != 'zypper.log':
+      filename = os.path.join('/var/log', logfile)
+      logfiles.append(filename)
+      if len(filename) > filenamelen:
+        filenamelen = len(filename)
+  logfiles.sort()
+  filename = os.path.join('/var/log', 'zypper.log')
+  if os.path.isfile(filename):
+    logfiles.append(filename)
+    if len(filename) > filenamelen:
+      filenamelen = len(filename)
+  return logfiles[-rotate-1::]
+
+def readFile(logfile):
+  logtxt = open(logfile).read()
+  fext = logfile.split('.')[-1]
+  if fext == 'bz2':
+    logtxt = bz2.decompress(logtxt)
+  elif fext == 'gz':
+    logtxt = zlib.decompress(logtxt)
+  return logtxt
+
+def getListFromLogFiles(logfiles):
+  logindex = []
+  global pidlen, verlen
+  c = re.compile(r"===== Hi, me zypper (\d+.\d+.\d+)\s(\d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2}).+\((\d+)\).+=====\s(.+)\s=====")
+
+  for logfile in logfiles:
+    print >> sys.stderr, "Reading %s" % logfile, '.' * (filenamelen - len(logfile) + 3),
+    sys.stderr.flush()
+    for run in c.findall(readFile(logfile)):
+      if len(run[2]) > pidlen:
+        pidlen = len(run[2])
+      if len(run[0]) > verlen:
+        verlen = len(run[0])
+      logindex.append({'version': run[0],
+                       'time': time.strptime(run[1], "%Y-%m-%d %H:%M:%S"),
+                       'pid': run[2],
+                       'cmd': run[3].replace("'", "")})
+    print >> sys.stderr, "DONE"
+    sys.stderr.flush()
+  print >> sys.stderr, ""
+  sys.stderr.flush()
+  return logindex
+
+def printList(logindex, date = False):
+  global pidlen, verlen
+  rows, columns = os.popen('stty size', 'r').read().split()
+
+  print "TIME              PID", ' ' * (pidlen - 3), "VER", ' ' * (verlen - 3), "CMD"
+  for logentry in logindex:
+    if date and date != time.strftime("%Y-%m-%d", logentry['time']):
+      continue
+    logentry['ptime'] = time.strftime("%Y-%m-%d %H:%M", logentry['time'])
+    spaceleft = int(columns) - (22 + pidlen + len(logentry['version']) + len(logentry['cmd']))
+    if spaceleft < 0:
+      logentry['cmd'] = logentry['cmd'][:spaceleft-3] + '...'
+    print "%(ptime)s  %(pid)s" % logentry, ' ' * (pidlen - len(logentry['pid'])), "%(version)s" % logentry, ' ' * (verlen - len(logentry['version'])),  "%(cmd)s" % logentry
+
+def printLogByPID(logfiles, pid):
+  output = []
+  c = re.compile(r"\d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2} \<\d\> \w+\(%d\).+" % pid)
+
+  for logfile in logfiles:
+    print >> sys.stderr, "Reading %s" % logfile, '.' * (filenamelen - len(logfile) + 3),
+    sys.stderr.flush()
+    output.extend( c.findall(readFile(logfile)) )
+    print >> sys.stderr, "DONE"
+    sys.stderr.flush()
+  print >> sys.stderr, ""
+  sys.stderr.flush()
+  print "\n".join(output)
+
+def main():
+  parser = argparse.ArgumentParser(description='This tool helps you to access the zypper logfile. Run this command without any arguments to get a list of your zypper runs. Provide the PID-File of a zypper run as an argument to query the log for this run.')
+  parser.add_argument('-l', dest='logfile', metavar='FILE', help='Read only this file')
+  parser.add_argument('-r', dest='rotate', metavar='N', type=int, default=0, help='Read N rotated logfiles')
+  parser.add_argument('-d', dest='date', metavar='YYYY-MM-DD', help='Get runs for this day')
+  parser.add_argument('pid', metavar='PID', nargs='?', type=int, help='Get log for this PID')
+  args = parser.parse_args()
+
+  if args.logfile:
+    global filenamelen
+    filenamelen = len(args.logfile)
+    logfiles = [args.logfile]
+  else:
+    logfiles = getLogFiles(args.rotate)
+  if args.pid:
+     printLogByPID(logfiles, args.pid)
+  else:
+    logindex = getListFromLogFiles(logfiles)
+    printList(logindex, args.date)
+
+
+if __name__ == "__main__":
+  main()
