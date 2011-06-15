@@ -21,7 +21,7 @@ BuildRequires:  cmake >= 2.4.6
 Requires:       procps
 %if 0%{?suse_version}
 %requires_ge    libzypp
-Recommends:     logrotate cron
+Recommends:     logrotate cron zypper-log
 Requires(post): permissions
 %endif
 License:        GPLv2+
