@@ -1,0 +1,38 @@
+.\" This is a comment
+.\" Contact Owen@thelinuxblog.com
+.TH zypper-log 8 "15 June 2011"
+.SH NAME
+zypper-log \- Zypper logfile reader
+.SH SYNOPSIS
+\fBzypper-log\fP [\fIoptions\fP] [\fIpid\fP]
+.SH DESCRIPTION
+zypper-log can read zypper's logfiles. It can also handle rotated logfiles, and will open plain, gz and bz2-compressed files.
+.sp
+By default zypper.log will be read in.
+.sp
+When you provide a \fIpid\fP, you will get the complete log for the corresponding zypper run.
+.SH OPTIONS
+.PP
+\-\-help
+.RS 4
+Print help and quit
+.RE
+.PP
+\-l \fIFILE\fP
+.RS 4
+Only read this logfile
+.RE
+.PP
+\-r \fIN\fP
+.RS 4
+Also read the \fIN\fP latest rotated logfiles.
+.RE
+.PP
+\-d \fIYYYY-MM-DD\fP
+.RS 4
+Only view zypper runs of the specified day.
+.RE
+.SH SEE ALSO
+zypper(8)
+.SH AUTHOR
+Dominik Heidler <dheidler@suse.de>

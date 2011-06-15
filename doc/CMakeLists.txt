@@ -4,6 +4,11 @@ INSTALL(
 )
 
 INSTALL(
+  FILES zypper-log.8
+  DESTINATION ${MANDIR}/man8
+)
+
+INSTALL(
   FILES TODO zypper-rug
   DESTINATION ${INSTALL_PREFIX}/share/doc/packages/${PACKAGE}
 )

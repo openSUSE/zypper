@@ -127,7 +127,7 @@ rm -rf "$RPM_BUILD_ROOT"
 %{_datadir}/zypper/zypper.aug
 %dir %{_datadir}/zypper/xml
 %{_datadir}/zypper/xml/xmlout.rnc
-%doc %{_mandir}/*/*
+%doc %{_mandir}/man8/zypper.8*
 %doc %dir %{_datadir}/doc/packages/zypper
 %doc %{_datadir}/doc/packages/zypper/TODO
 %doc %{_datadir}/doc/packages/zypper/zypper-rug
@@ -140,3 +140,4 @@ rm -rf "$RPM_BUILD_ROOT"
 %files log
 %defattr(-,root,root)
 %{_sbindir}/zypper-log
+%doc %{_mandir}/man8/zypper-log.8*
