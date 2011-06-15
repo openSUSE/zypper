@@ -79,3 +79,9 @@ INSTALL(
   DESTINATION ${SYSCONFDIR}/zypp
 )
 
+# zypper-log tool
+INSTALL(
+  PROGRAMS tools/zypper-log
+  DESTINATION ${INSTALL_PREFIX}/sbin
+)
+

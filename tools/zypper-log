@@ -2,6 +2,8 @@
 
 # This tool helps you accessing the zypper logfile
 # see --help for more details
+#
+# Author: Dominik Heidler <dheidler@suse.de>
 
 import os, string, re, bz2, zlib, sys, time, argparse
 

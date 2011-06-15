@@ -51,6 +51,16 @@ Authors:
     Martin Vidner <mvidner@suse.cz>
     Josef Reidinger <jreidinger@suse.cz>
 
+%package log
+Requires:       python >= 2.7
+Summary:        CLI for accessing the zypper logfile
+%description -n zypper-log
+CLI for accessing the zypper logfile
+
+Authors:
+--------
+    Dominik Heidler <dheidler@suse.de>
+
 %prep
 %setup -q
 
@@ -126,3 +136,7 @@ rm -rf "$RPM_BUILD_ROOT"
 # declare ownership of the log file but prevent
 # it from being erased by rpm -e
 %ghost %config(noreplace) %{_var}/log/zypper.log
+
+%files log
+%defattr(-,root,root)
+%{_sbindir}/zypper-log
