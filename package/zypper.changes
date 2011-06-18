@@ -1,4 +1,9 @@
 -------------------------------------------------------------------
+Sun Jun 19 01:15:41 CEST 2011 - ma@suse.de
+
+- Update zypper-po.tar.bz2
+
+-------------------------------------------------------------------
 Wed Jun 15 11:28:04 CEST 2011 - dheidler@suse.de
 
 - Add zypper-log tool (cli to access zypper logfile)
