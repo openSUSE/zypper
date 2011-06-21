@@ -1,4 +1,10 @@
 -------------------------------------------------------------------
+Tue Jun 21 10:44:47 CEST 2011 - dmacvicar@suse.de
+
+- Add configuration template for automatic kernel 
+  purge (feature#312018) to zypp.conf
+
+-------------------------------------------------------------------
 Tue Jun 14 13:38:00 CEST 2011 - ma@suse.de
 
 - Fix download loop to skip non-install actions. (bnc#699435)
