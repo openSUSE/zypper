@@ -8,3 +8,4 @@ build
 .*project
 .externalToolBuilders
 .settings
+*flymake.h.gch
