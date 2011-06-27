@@ -5,7 +5,7 @@
 #
 # Author: Dominik Heidler <dheidler@suse.de>
 
-import os, string, re, bz2, zlib, sys, time, argparse
+import os, string, re, bz2, zlib, sys, time, argparse, errno
 
 filenamelen = 0
 pidlen = 0
@@ -110,4 +110,8 @@ def main():
 
 
 if __name__ == "__main__":
-  main()
+  try:
+    main()
+  except IOError, e:
+    if e.errno != errno.EPIPE:
+      raise
