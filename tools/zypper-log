@@ -106,7 +106,11 @@ def main():
     logfiles = getLogFiles(args.rotate)
   if args.date:
     # Ensure date syntax
-    args.date = time.strftime("%Y-%m-%d", time.strptime(args.date, "%Y-%m-%d"))
+    try:
+      args.date = time.strftime("%Y-%m-%d", time.strptime(args.date, "%Y-%m-%d"))
+    except ValueError:
+      print >> sys.stderr, "ValueError: Time data '%s' does not match format 'YYYY-MM-DD'" % args.date
+      sys.exit(1)
   if args.pid:
      printLogByPID(logfiles, args.pid, args.date)
   else:
