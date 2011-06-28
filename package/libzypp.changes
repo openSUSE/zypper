@@ -1,4 +1,9 @@
 -------------------------------------------------------------------
+Tue Jun 28 16:04:50 CEST 2011 - ma@suse.de
+
+- Add feature provides for supported plugins.
+
+-------------------------------------------------------------------
 Tue Jun 21 10:44:47 CEST 2011 - dmacvicar@suse.de
 
 - Add configuration template for automatic kernel 

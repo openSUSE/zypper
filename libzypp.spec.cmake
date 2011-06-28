@@ -21,6 +21,13 @@ Source:         %{name}-%{version}.tar.bz2
 Source1:        %{name}-rpmlintrc
 Provides:       yast2-packagemanager
 Obsoletes:      yast2-packagemanager
+
+# Features we provide (update doc/autoinclude/FeatureTest.doc):
+Provides:       libzypp(plugin:commit) = 0
+Provides:       libzypp(plugin:services) = 0
+Provides:       libzypp(plugin:system) = 0
+Provides:       libzypp(plugin:urlresolver) = 0
+
 %if 0%{?suse_version}
 Recommends:     logrotate
 # lsof is used for 'zypper ps':
