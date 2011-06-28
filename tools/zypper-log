@@ -74,9 +74,11 @@ def printList(logindex, date = False):
       logentry['cmd'] = logentry['cmd'][:spaceleft-3] + '...'
     print "%(ptime)s  %(pid)s" % logentry, ' ' * (pidlen - len(logentry['pid'])), "%(version)s" % logentry, ' ' * (verlen - len(logentry['version'])),  "%(cmd)s" % logentry
 
-def printLogByPID(logfiles, pid):
+def printLogByPID(logfiles, pid, date = False):
+  if not date:
+    date = "\d{4}-\d{2}-\d{2}"
   output = []
-  c = re.compile(r"\d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2} \<\d\> \w+\(%d\).+" % pid)
+  c = re.compile(r"%s \d{2}:\d{2}:\d{2} \<\d\> \w+\(%d\).+" % (date, pid))
 
   for logfile in logfiles:
     print >> sys.stderr, "Reading %s" % logfile, '.' * (filenamelen - len(logfile) + 3),
@@ -102,8 +104,11 @@ def main():
     logfiles = [args.logfile]
   else:
     logfiles = getLogFiles(args.rotate)
+  if args.date:
+    # Ensure date syntax
+    args.date = time.strftime("%Y-%m-%d", time.strptime(args.date, "%Y-%m-%d"))
   if args.pid:
-     printLogByPID(logfiles, args.pid)
+     printLogByPID(logfiles, args.pid, args.date)
   else:
     logindex = getListFromLogFiles(logfiles)
     printList(logindex, args.date)
