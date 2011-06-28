@@ -1,4 +1,10 @@
 -------------------------------------------------------------------
+Tue Jun 28 12:17:34 CEST 2011 - dheidler@suse.de
+
+- better error msg for date format missmatch in zypper-log
+- 1.6.13
+
+-------------------------------------------------------------------
 Tue Jun 28 12:02:34 CEST 2011 - dheidler@suse.de
 
 - enable date option also for PID-Query in zypper-log
