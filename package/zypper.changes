@@ -1,4 +1,9 @@
 -------------------------------------------------------------------
+Thu Jun 30 01:13:58 CEST 2011 - ma@suse.de
+
+- Update zypper-po.tar.bz2
+
+-------------------------------------------------------------------
 Tue Jun 28 12:17:34 CEST 2011 - dheidler@suse.de
 
 - better error msg for date format missmatch in zypper-log
