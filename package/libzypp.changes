@@ -1,4 +1,9 @@
 -------------------------------------------------------------------
+Thu Jun 30 01:13:43 CEST 2011 - ma@suse.de
+
+- Update zypp-po.tar.bz2
+
+-------------------------------------------------------------------
 Wed Jun 29 12:23:24 CEST 2011 - ma@suse.de
 
 - Always compute transaction from pool (bnc#702576)
