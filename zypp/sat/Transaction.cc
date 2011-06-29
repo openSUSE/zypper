@@ -11,6 +11,7 @@
 extern "C"
 {
 #include <satsolver/transaction.h>
+#include <satsolver/bitmap.h>
 }
 #include <iostream>
 #include "zypp/base/LogTools.h"
@@ -23,7 +24,7 @@ extern "C"
 #include "zypp/sat/Transaction.h"
 #include "zypp/sat/Solvable.h"
 #include "zypp/sat/Queue.h"
-#include "zypp/PoolItem.h"
+#include "zypp/ResPool.h"
 
 using std::endl;
 
@@ -71,9 +72,21 @@ namespace zypp
 	{ memset( &_trans, 0, sizeof(_trans) ); }
 
 	Impl( ::_Transaction & trans_r )
-	  : _watcher(  myPool().serial() )
+	  : _watcher( myPool().serial() )
 	{
-	  ::transaction_init_clone( &_trans, &trans_r );
+	  memset( &_trans, 0, sizeof(_trans) );
+	  ::transaction_init( &_trans, myPool().getPool() );
+
+	  Queue decisionq;
+	  for_( it, ResPool::instance().begin(), ResPool::instance().end() )
+	  {
+	    if ( ! (*it).status().transacts() )
+	      continue;
+	    sat::Solvable solv( (*it).satSolvable() );
+	    decisionq.push( solv.isSystem() ? -solv.id() : solv.id() );
+	  }
+	  ::transaction_calculate( &_trans, decisionq, &trans_r.noobsmap );
+
 	  // NOTE: package/product buddies share the same ResStatus
 	  // so we also link the buddies stepStages. This assumes
 	  // only one buddy is acting during commit (package is installed,
@@ -114,6 +127,8 @@ namespace zypp
 	{
 	  if ( ! valid() )
 	    return false;
+	  if ( empty() )
+	    return true;
 #if 0
 	  // This is hwo we could implement out own order method.
 	  // As ::transaction already groups by MediaNr, we don't
