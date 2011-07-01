@@ -85,6 +85,8 @@ namespace zypp
 	    sat::Solvable solv( (*it).satSolvable() );
 	    decisionq.push( solv.isSystem() ? -solv.id() : solv.id() );
 	  }
+	  if ( trans_r.noobsmap.size )
+	    ::map_grow( &trans_r.noobsmap, myPool()->nsolvables );
 	  ::transaction_calculate( &_trans, decisionq, &trans_r.noobsmap );
 
 	  // NOTE: package/product buddies share the same ResStatus
