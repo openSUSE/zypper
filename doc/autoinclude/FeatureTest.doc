@@ -1,0 +1,56 @@
+/**
+
+\page feature-test Testing for provided features.
+
+\author Michael Andres <ma@suse.de>
+
+<HR><!-- ====================================================================== -->
+\section intro Introduction
+
+The libzypp rpm package will indicate the presence of certain features by using special \c Provides:
+
+\verbatim
+  # Provides:     libzypp(FEATURE) = FEATURE_VERSION
+  Provides:       libzypp(code10) = 0
+\endverbatim
+
+Packages requiring a feature may use the corresponding \c Requires: in their .spec file.
+
+
+<HR><!-- ====================================================================== -->
+\section features Features
+<DL>
+
+  <DT>plugin</DT>
+  <DD><DL>
+    <DT>version 0</DT>
+    <DD>General ability to provide and handle plugins.</DD>
+  </DL></DD>
+
+  <DT>plugin:commit</DT>
+  <DD><DL>
+    <DT>version 0</DT>
+    <DD>\see \ref plugin-commit </DD>
+  </DL></DD>
+
+  <DT>plugin:services</DT>
+  <DD><DL>
+    <DT>version 0</DT>
+    <DD>\see \ref plugin-services </DD>
+  </DL></DD>
+
+  <DT>plugin:system</DT>
+  <DD><DL>
+    <DT>version 0</DT>
+    <DD>Plugin executed when system content change is detected (by now SUSE Manager/spacewalk only).</DD>
+  </DL></DD>
+
+  <DT>plugin:urlresolver</DT>
+  <DD><DL>
+    <DT>version 0</DT>
+    <DD>\see \ref plugin-url-resolver </DD>
+  </DL></DD>
+
+</DL>
+
+*/
