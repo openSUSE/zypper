@@ -1239,6 +1239,7 @@ namespace zypp
               }
               catch ( const AbortRequestException & exp )
               {
+		it->stepStage( sat::Transaction::STEP_ERROR );
                 miss = true;
                 WAR << "commit cache preload aborted by the user" << endl;
                 ZYPP_THROW( TargetAbortedException( N_("Installation has been aborted as directed.") ) );
@@ -1247,6 +1248,7 @@ namespace zypp
               catch ( const SkipRequestException & exp )
               {
                 ZYPP_CAUGHT( exp );
+		it->stepStage( sat::Transaction::STEP_ERROR );
                 miss = true;
                 WAR << "Skipping cache preload package " << pi->asKind<Package>() << " in commit" << endl;
                 continue;
@@ -1256,6 +1258,7 @@ namespace zypp
                 // bnc #395704: missing catch causes abort.
                 // TODO see if packageCache fails to handle errors correctly.
                 ZYPP_CAUGHT( exp );
+		it->stepStage( sat::Transaction::STEP_ERROR );
                 miss = true;
                 INT << "Unexpected Error: Skipping cache preload package " << pi->asKind<Package>() << " in commit" << endl;
                 continue;
