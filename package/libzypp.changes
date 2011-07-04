@@ -1,4 +1,12 @@
 -------------------------------------------------------------------
+Mon Jul  4 10:41:42 CEST 2011 - ma@suse.de
+
+- Make fix for bnc#702576 more robust. 
+- Enhance fix for bnc#699435. Return an error if download in advance 
+  failed to provide all packages, so zypper does not silently quit.
+- version 9.8.3 (8)
+
+-------------------------------------------------------------------
 Thu Jun 30 01:13:43 CEST 2011 - ma@suse.de
 
 - Update zypp-po.tar.bz2
