@@ -54,6 +54,8 @@ Authors:
 %package log
 Requires:       python >= 2.7
 Summary:        CLI for accessing the zypper logfile
+License:        GPLv2+
+Group:          System/Packages
 %description -n zypper-log
 CLI for accessing the zypper logfile
 
