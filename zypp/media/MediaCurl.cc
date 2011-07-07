@@ -44,6 +44,8 @@
 #define  TRANSFER_TIMEOUT       60 * 3
 #define  TRANSFER_TIMEOUT_MAX   60 * 60
 
+#undef CURLVERSION_AT_LEAST
+#define CURLVERSION_AT_LEAST(M,N,O) LIBCURL_VERSION_NUM >= ((((M)<<8)+(N))<<8)+(O)
 
 using namespace std;
 using namespace zypp::base;
@@ -574,7 +576,7 @@ void MediaCurl::setupEasy()
 
   if ( _url.getScheme() == "https" )
   {
-#if LIBCURL_VERSION_NUMBER >= 0x071904
+#if CURLVERSION_AT_LEAST(7,19,4)
     // restrict following of redirections from https to https only
     SET_OPTION( CURLOPT_REDIR_PROTOCOLS, CURLPROTO_HTTPS );
 #endif
@@ -647,7 +649,7 @@ void MediaCurl::setupEasy()
   }
   else
   {
-#if LIBCURL_VERSION_NUMBER >= 0x071904
+#if CURLVERSION_AT_LEAST(7,19,4)
       SET_OPTION(CURLOPT_NOPROXY, "*");
 #endif
   }
@@ -660,7 +662,7 @@ void MediaCurl::setupEasy()
       SET_OPTION(CURLOPT_LOW_SPEED_TIME, 10L);
   }
 
-#if LIBCURL_VERSION_NUMBER >= 0x071505
+#if CURLVERSION_AT_LEAST(7,15,5)
   if ( _settings.maxDownloadSpeed() != 0 )
       SET_OPTION_OFFT(CURLOPT_MAX_RECV_SPEED_LARGE, _settings.maxDownloadSpeed());
 #endif
@@ -677,7 +679,7 @@ void MediaCurl::setupEasy()
   SET_OPTION(CURLOPT_PROGRESSFUNCTION, &progressCallback );
   SET_OPTION(CURLOPT_NOPROGRESS, 0L);
 
-#if LIBCURL_VERSION_NUMBER >= 0x071800
+#if CURLVERSION_AT_LEAST(7,18,0)
   // bnc #306272
     SET_OPTION(CURLOPT_PROXY_TRANSFER_MODE, 1L );
 #endif
@@ -954,7 +956,7 @@ void MediaCurl::evaluateCurlCode( const Pathname &filename,
       }
       break;
       case CURLE_FTP_COULDNT_RETR_FILE:
-#if LIBCURL_VERSION_NUMBER >= 0x071600
+#if CURLVERSION_AT_LEAST(7,16,0)
       case CURLE_REMOTE_FILE_NOT_FOUND:
 #endif
       case CURLE_FTP_ACCESS_DENIED:

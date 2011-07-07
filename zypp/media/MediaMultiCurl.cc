@@ -30,6 +30,9 @@
 using namespace std;
 using namespace zypp::base;
 
+#undef CURLVERSION_AT_LEAST
+#define CURLVERSION_AT_LEAST(M,N,O) LIBCURL_VERSION_NUM >= ((((M)<<8)+(N))<<8)+(O)
+
 namespace zypp {
   namespace media {
 
@@ -379,7 +382,7 @@ multifetchworker::~multifetchworker()
         curl_multi_remove_handle(_request->_multi, _curl);
       if (_state == WORKER_DONE || _state == WORKER_SLEEP)
 	{
-#if LIBCURL_VERSION_NUMBER >= 0x071505
+#if CURLVERSION_AT_LEAST(7,15,5)
 	  curl_easy_setopt(_curl, CURLOPT_MAX_RECV_SPEED_LARGE, (curl_off_t)0);
 #endif
 	  curl_easy_setopt(_curl, CURLOPT_PRIVATE, (void *)0);
@@ -1099,7 +1102,7 @@ multifetchrequest::run(std::vector<Url> &urllist)
 		  if (avg < 1024)
 		    avg = 1024;
 		  worker->_maxspeed = avg;
-#if LIBCURL_VERSION_NUMBER >= 0x071505
+#if CURLVERSION_AT_LEAST(7,15,5)
 		  curl_easy_setopt(worker->_curl, CURLOPT_MAX_RECV_SPEED_LARGE, (curl_off_t)(avg));
 #endif
 		}
