@@ -1,4 +1,10 @@
 -------------------------------------------------------------------
+Thu Jul  7 15:53:17 CEST 2011 - ma@suse.de
+
+- Fix tests for available libcurl version.
+- version 9.8.4 (8)
+
+-------------------------------------------------------------------
 Thu Jul  7 01:13:47 CEST 2011 - ma@suse.de
 
 - Update zypp-po.tar.bz2
@@ -6,8 +12,8 @@ Thu Jul  7 01:13:47 CEST 2011 - ma@suse.de
 -------------------------------------------------------------------
 Mon Jul  4 10:41:42 CEST 2011 - ma@suse.de
 
-- Make fix for bnc#702576 more robust. 
-- Enhance fix for bnc#699435. Return an error if download in advance 
+- Make fix for bnc#702576 more robust.
+- Enhance fix for bnc#699435. Return an error if download in advance
   failed to provide all packages, so zypper does not silently quit.
 - version 9.8.3 (8)
 
@@ -30,7 +36,7 @@ Tue Jun 28 16:04:50 CEST 2011 - ma@suse.de
 -------------------------------------------------------------------
 Tue Jun 21 10:44:47 CEST 2011 - dmacvicar@suse.de
 
-- Add configuration template for automatic kernel 
+- Add configuration template for automatic kernel
   purge (feature#312018) to zypp.conf
 
 -------------------------------------------------------------------
