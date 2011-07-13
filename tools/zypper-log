@@ -29,7 +29,11 @@ def getLogFiles(rotate = 0):
   return logfiles[-rotate-1::]
 
 def readFile(logfile):
-  logtxt = open(logfile).read()
+  try:
+    logtxt = open(logfile).read()
+  except IOError, e:
+    print >> sys.stderr, "\rIOError: %s: '%s'" % (e.strerror, e.filename)
+    sys.exit(1)
   fext = logfile.split('.')[-1]
   if fext == 'bz2':
     logtxt = bz2.decompress(logtxt)
