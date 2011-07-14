@@ -23,7 +23,6 @@ extern "C"
 #include "zypp/base/Iterator.h"
 #include "zypp/base/DefaultIntegral.h"
 
-#include "zypp/sat/detail/PoolImpl.h"
 #include "zypp/sat/SolvIterMixin.h"
 #include "zypp/sat/Solvable.h"
 
