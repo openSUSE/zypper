@@ -79,11 +79,57 @@ static struct stateswitch stateswitches[] = {
 };
 
 struct ml_url {
+  ml_url()
+    : priority( 0 )
+  {}
   int priority;
   string url;
 };
 
-struct ml_parsedata {
+static void XMLCALL startElement(void *userData, const char *name, const char **atts);
+static void XMLCALL endElement(void *userData, const char *name);
+static void XMLCALL characterData(void *userData, const XML_Char *s, int len);
+
+struct ml_parsedata : private zypp::base::NonCopyable {
+  ml_parsedata()
+    : parser( XML_ParserCreate(NULL) )
+    , depth( 0 )
+    , state( STATE_START )
+    , statedepth( 0 )
+    , content( reinterpret_cast<char *>(malloc(256)) )
+    , lcontent( 0 )
+    , acontent( 256 )
+    , docontent( 0 )
+    , called( 0 )
+    , gotfile( 0 )
+    , size( -1 )
+    , nurls( 0 )
+    , blksize( 0 )
+    , npiece( 0 )
+    , piecel( 0 )
+    , nsha1( 0 )
+    , nzsync( 0 )
+    , chksuml( 0 )
+  {
+    struct stateswitch *sw;
+    int i;
+    for (i = 0, sw = stateswitches; sw->from != NUMSTATES; i++, sw++)
+    {
+      if (!swtab[sw->from])
+	swtab[sw->from] = sw;
+      sbtab[sw->to] = sw->from;
+    }
+    XML_SetUserData(parser, this);
+    XML_SetElementHandler(parser, startElement, endElement);
+    XML_SetCharacterDataHandler(parser, characterData);
+  }
+
+  ~ml_parsedata()
+  {
+    XML_ParserFree(parser);
+    free(content);
+  }
+
   XML_Parser parser;
   int depth;
   enum state state;
@@ -357,31 +403,11 @@ characterData(void *userData, const XML_Char *s, int len)
 
 
 MetaLinkParser::MetaLinkParser()
-{
-  struct stateswitch *sw;
-  int i;
- 
-  pd = new ml_parsedata();
-  pd->size = off_t(-1);
-  for (i = 0, sw = stateswitches; sw->from != NUMSTATES; i++, sw++)
-    {
-      if (!pd->swtab[sw->from])
-        pd->swtab[sw->from] = sw;
-      pd->sbtab[sw->to] = sw->from;
-    }
-  pd->content = reinterpret_cast<char *>(malloc(256));
-  pd->acontent = 256;
-  pd->lcontent = 0;
-  pd->parser = XML_ParserCreate(NULL);
-  XML_SetUserData(pd->parser, pd);
-  XML_SetElementHandler(pd->parser, startElement, endElement);
-  XML_SetCharacterDataHandler(pd->parser, characterData);
-}
+  : pd( new ml_parsedata )
+{}
 
 MetaLinkParser::~MetaLinkParser()
 {
-  XML_ParserFree(pd->parser);
-  free(pd->content);
   delete pd;
 }
 
