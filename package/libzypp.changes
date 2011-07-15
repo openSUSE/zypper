@@ -1,4 +1,10 @@
 -------------------------------------------------------------------
+Fri Jul 15 15:15:01 CEST 2011 - ma@suse.de
+
+- Check for /etc/sysconfig/storage changes before solving (bnc#702365)
+- version 9.8.6 (8)
+
+-------------------------------------------------------------------
 Fri Jul 15 13:58:53 CEST 2011 - ma@suse.de
 
 - Properly initialize parser structures (bnc#705181)
