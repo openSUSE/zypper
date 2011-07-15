@@ -442,7 +442,7 @@ SATResolver::solving(const CapabilitySet & requires_caps,
     _solv->distupgrade = _distupgrade;
     _solv->distupgrade_removeunsupported = _distupgrade_removeunsupported;
 
-    sat::Pool::instance().prepare();
+    sat::Pool::instance().prepareForSolving();
 
     // Solve !
     MIL << "Starting solving...." << endl;
@@ -826,7 +826,7 @@ void SATResolver::doUpdate()
     _solv->distupgrade = _distupgrade;
     _solv->distupgrade_removeunsupported = _distupgrade_removeunsupported;
 
-    sat::Pool::instance().prepare();
+    sat::Pool::instance().prepareForSolving();
 
     // Solve !
     MIL << "Starting solving for update...." << endl;

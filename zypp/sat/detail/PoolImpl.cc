@@ -82,6 +82,13 @@ namespace zypp
         return _val;
       }
 
+      const Pathname & sysconfigStoragePath()
+      {
+	static const Pathname _val( "/etc/sysconfig/storage" );
+	return _val;
+      }
+
+
       /////////////////////////////////////////////////////////////////
 
       static void logSat( struct _Pool *, void *data, int type, const char *logString )
@@ -131,15 +138,7 @@ namespace zypp
 
           case NAMESPACE_FILESYSTEM:
           {
-            static const Pathname sysconfigStoragePath( "/etc/sysconfig/storage" );
-            static WatchFile      sysconfigFile( sysconfigStoragePath, WatchFile::NO_INIT );
-            static std::set<std::string> requiredFilesystems;
-            if ( sysconfigFile.hasChanged() )
-            {
-              requiredFilesystems.clear();
-              str::split( base::sysconfig::read( sysconfigStoragePath )["USED_FS_LIST"],
-                          std::inserter( requiredFilesystems, requiredFilesystems.end() ) );
-            }
+	    const std::set<std::string> & requiredFilesystems( reinterpret_cast<PoolImpl*>(data)->requiredFilesystems() );
             return requiredFilesystems.find( IdString(rhs).asString() ) != requiredFilesystems.end() ? RET_systemProperty : RET_unsupported;
           }
           break;
@@ -237,7 +236,7 @@ namespace zypp
 
       void PoolImpl::prepare() const
       {
-        if ( _watcher.remember( _serial ) )
+	if ( _watcher.remember( _serial ) )
         {
           // After repo/solvable add/remove:
           // set pool architecture
@@ -246,6 +245,7 @@ namespace zypp
         if ( ! _pool->whatprovides )
         {
           MIL << "pool_createwhatprovides..." << endl;
+
           ::pool_addfileprovides( _pool );
           ::pool_createwhatprovides( _pool );
         }
@@ -254,6 +254,19 @@ namespace zypp
 	  // initial seting
 	  const_cast<PoolImpl*>(this)->setTextLocale( ZConfig::instance().textLocale() );
         }
+      }
+
+      void PoolImpl::prepareForSolving() const
+      {
+	// additional /etc/sysconfig/storage check:
+	static WatchFile sysconfigFile( sysconfigStoragePath(), WatchFile::NO_INIT );
+	if ( sysconfigFile.hasChanged() )
+	{
+	  _requiredFilesystemsPtr.reset(); // recreated on demand
+	  const_cast<PoolImpl*>(this)->depSetDirty( "/etc/sysconfig/storage change" );
+	}
+	// finally prepare as usual:
+	prepare();
       }
 
       ///////////////////////////////////////////////////////////////////
@@ -597,6 +610,18 @@ namespace zypp
 	  }
 	}
 	MIL << "onSystemByUserList found: " << onSystemByUserList.size() << endl;
+      }
+
+      const std::set<std::string> & PoolImpl::requiredFilesystems() const
+      {
+	if ( ! _requiredFilesystemsPtr )
+	{
+	  _requiredFilesystemsPtr.reset( new std::set<std::string> );
+	  std::set<std::string> & requiredFilesystems( *_requiredFilesystemsPtr );
+	  str::split( base::sysconfig::read( sysconfigStoragePath() )["USED_FS_LIST"],
+		      std::inserter( requiredFilesystems, requiredFilesystems.end() ) );
+	}
+	return *_requiredFilesystemsPtr;
       }
 
       /////////////////////////////////////////////////////////////////

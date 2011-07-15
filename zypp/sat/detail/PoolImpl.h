@@ -67,6 +67,8 @@ namespace zypp
            * \todo actually requires a watcher.
            */
           void prepare() const;
+	  /** \ref prepare plus some expensive checks done before solving only. */
+	  void prepareForSolving() const;
 
         private:
           /** Invalidate housekeeping data (e.g. whatprovides) if the
@@ -261,6 +263,10 @@ namespace zypp
           }
           //@}
 
+	public:
+	  /** accessor for etc/sysconfig/storage reading file on demand */
+	  const std::set<std::string> & requiredFilesystems() const;
+
         private:
           /** sat-pool. */
           ::_Pool * _pool;
@@ -283,6 +289,9 @@ namespace zypp
           /**  */
           void onSystemByUserListInit() const;
           mutable scoped_ptr<OnSystemByUserList> _onSystemByUserListPtr;
+
+	  /** filesystems mentioned in /etc/sysconfig/storage */
+	  mutable scoped_ptr<std::set<std::string> > _requiredFilesystemsPtr;
       };
       ///////////////////////////////////////////////////////////////////
 

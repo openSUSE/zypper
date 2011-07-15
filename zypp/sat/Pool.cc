@@ -45,6 +45,9 @@ namespace zypp
     void Pool::prepare() const
     { return myPool().prepare(); }
 
+    void Pool::prepareForSolving() const
+    { return myPool().prepareForSolving(); }
+
     bool Pool::reposEmpty() const
     { return ! myPool()->nrepos; }
 

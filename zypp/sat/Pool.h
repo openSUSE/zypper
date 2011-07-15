@@ -65,6 +65,9 @@ namespace zypp
         /** Update housekeeping data if necessary (e.g. whatprovides). */
         void prepare() const;
 
+	/** \ref prepare plus some expensive checks done before solving only. */
+	void prepareForSolving() const;
+
       public:
         /** Whether \ref Pool contains repos. */
         bool reposEmpty() const;
