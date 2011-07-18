@@ -113,6 +113,8 @@ struct ml_parsedata : private zypp::base::NonCopyable {
   {
     struct stateswitch *sw;
     int i;
+    memset( swtab, 0, sizeof(swtab) );
+    memset( sbtab, 0, sizeof(sbtab) );
     for (i = 0, sw = stateswitches; sw->from != NUMSTATES; i++, sw++)
     {
       if (!swtab[sw->from])

@@ -720,7 +720,7 @@ multifetchworker::nextjob()
   else
     {
       MediaBlock blk = blklist->getBlock(_request->_blkno);
-      while (_request->_blkoff >= blk.off + blk.size)
+      while (_request->_blkoff >= (off_t)(blk.off + blk.size))
 	{
 	  if (++_request->_blkno == blklist->numBlocks())
 	    {
@@ -850,7 +850,7 @@ multifetchrequest::run(std::vector<Url> &urllist)
 	  break;
 	}
 
-      if (_activeworkers < _maxworkers && urliter != urllist.end() && _workers.size() < MAXURLS)
+      if ((int)_activeworkers < _maxworkers && urliter != urllist.end() && _workers.size() < MAXURLS)
 	{
 	  // spawn another worker!
 	  multifetchworker *worker = new multifetchworker(workerno++, *this, *urliter);

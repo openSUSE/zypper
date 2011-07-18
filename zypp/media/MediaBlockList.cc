@@ -44,9 +44,7 @@ size_t
 MediaBlockList::addBlock(off_t off, size_t size)
 {
   haveblocks = true;
-  blocks.push_back(MediaBlock());
-  blocks.back().off = off;
-  blocks.back().size = size;
+  blocks.push_back(MediaBlock( off, size ));
   return blocks.size() - 1;
 }
 
@@ -350,7 +348,7 @@ MediaBlockList::reuseBlocks(FILE *wfp, string filename)
 		}
 	      int oc = buf[i];
 	      buf[i] = c;
-	      a += c - oc; 
+	      a += c - oc;
 	      if (bshift)
 		b += a - (oc << bshift);
 	      else
@@ -370,7 +368,7 @@ MediaBlockList::reuseBlocks(FILE *wfp, string filename)
 		r = ((unsigned int)a & 255) << 16 | ((unsigned int)b & 65535);
 	      else
 		r = ((unsigned int)a & 65535) << 16 | ((unsigned int)b & 65535);
-	      unsigned int h = r & hm; 
+	      unsigned int h = r & hm;
 	      unsigned int hh = 7;
 	      for (; ht[h]; h = (h + hh++) & hm)
 		{
@@ -466,7 +464,7 @@ MediaBlockList::reuseBlocks(FILE *wfp, string filename)
   std::vector<MediaBlock> nblocks;
   std::vector<unsigned char> nchksums;
   std::vector<unsigned int> nrsums;
-  
+
   for (size_t blkno = 0; blkno < blocks.size(); ++blkno)
     {
       if (!found[blkno])

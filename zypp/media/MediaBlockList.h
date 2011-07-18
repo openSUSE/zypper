@@ -24,6 +24,10 @@ namespace zypp {
  * a single block from the blocklist, consisting of an offset and a size
  **/
 struct MediaBlock {
+  MediaBlock( off_t off_r, size_t size_r )
+  : off( off_r )
+  , size( size_r )
+  {}
   off_t off;
   size_t size;
 };
@@ -103,7 +107,7 @@ public:
   inline bool haveRsum(size_t blkno) const {
     return rsumlen && rsums.size() >= blkno + 1;
   }
-  
+
   /**
    * scan a file for blocks from our blocklist. if we find a suitable block,
    * it is removed from the list
