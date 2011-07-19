@@ -52,7 +52,12 @@ Authors:
     Josef Reidinger <jreidinger@suse.cz>
 
 %package log
+%if 0%{?suse_version} < 1140
+Requires:       python >= 2.6
+Requires:       python-argparse
+%else
 Requires:       python >= 2.7
+%endif
 Summary:        CLI for accessing the zypper logfile
 License:        GPLv2+
 Group:          System/Packages
