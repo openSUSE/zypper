@@ -1,3 +1,9 @@
+Tue Jul 19 11:41:59 CEST 2011 - dheidler@suse.de
+-------------------------------------------------------------------
+
+- zypper-log: require python2.6 and argparse insted of 2.7
+              on suse < 11.4
+
 Wed Jul 13 15:41:59 CEST 2011 - dheidler@suse.de
 -------------------------------------------------------------------
 
