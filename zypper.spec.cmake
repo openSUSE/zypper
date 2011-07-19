@@ -52,7 +52,7 @@ Authors:
     Josef Reidinger <jreidinger@suse.cz>
 
 %package log
-%if 0%{?suse_version} < 1140
+%if 0%{?suse_version} && 0%{?suse_version} < 1140
 Requires:       python >= 2.6
 Requires:       python-argparse
 %else
