@@ -105,6 +105,8 @@ public:
   void allowAbbrev(unsigned column);
   void margin(unsigned margin);
 
+  const TableHeader & header() const
+  { return _header; }
   const container & rows() const
   { return _rows; }
 
