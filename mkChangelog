@@ -1,0 +1,158 @@
+#! /bin/bash
+#
+
+function errexit() {
+  exec >&2
+  echo "Error: $@"
+  exit 1
+}
+
+export LC_ALL=""
+EDITOR=${EDITOR:-vi}
+
+TDIR=$(dirname $0)
+test -n "$TDIR" && cd $TDIR
+
+CHANGESFILE=$(ls package/*.changes)
+test -f "$CHANGESFILE" || errexit "No changes file '$CHANGESFILE'"
+
+VERSIONFILE="VERSION.cmake"
+test -f "$VERSIONFILE" || errexit "No version file '$VERSIONFILE'"
+
+LANG="en"
+
+## Version.cmake tags in getversion() are still zypper specific.
+
+function usage() {
+  exec >&2
+cat <<EOF
+
+Usage:   $(basename $0) [OPTIONS]
+Options: -h,-?,--help   This page.
+
+$(basename $0) will load the changes file '$CHANGESFILE'
+into your editor (\$EDITOR=$EDITOR), providing a new changes
+entry template:
+
+    -------------------------------------------------------------------
+    Wed Jul 30 18:20:06 CEST 2008 - ma@suse.de
+
+    -
+    #---delete-or-release---# LAST RELEASED: 5.3.2 (2) NEW RELEASE: 5.4.0 (4)
+
+The line '#---delete-or-release---#...' shows the last version submitted
+to autobuild ('# LAST RELEASED:; tag in $VERSIONFILE). And also the current
+version, asuming you already updated the $VERSIONFILE according to your changes.
+(The number in parenthesis is _COMPATMINOR)
+
+
+- Delete the line if you don't want to submit the package to autobuild.
+
+- Leave the line in place if you want to submit the package.
+
+
+Closing the editor you are prompted:
+
+    #---delete-or-release---# LAST RELEASED: 5.3.2 (2) NEW RELEASE: 5.4.0 (4)
+    (a)bort, (c)ontinue, (e)dit :
+
+Choosing (c)ontinue will write the new changes file. The '#---delete-or-release---#'
+line is missing in case you deleted it. It's presence will remind you
+that it is going to be converted into:
+
+    - version 5.4.0
+
+and the '# LAST RELEASED:; tag in $VERSIONFILE will be updated accordingly.
+Now check the result, check in your changes, build the package and submit
+to autobuild.
+
+Released by accident? Don't mind. Nothing bad will happen. If you want to
+undo the change, restore the 'LAST RELEASED: ' entry in $VERSIONFILE and
+delete the '- version' line in $CHANGESFILE'.
+
+EOF
+  exit 1
+}
+
+case "$1" in
+  -[hH?]*)
+    usage
+    ;;
+  --help)
+    usage
+    ;;
+esac
+
+function getversion() {
+  cat "$VERSIONFILE" \
+  | awk '
+  function getnum() {
+    gsub("^[^\"]*\"","")
+    gsub("\".*$","")
+  }
+  /^ *SET *\( *VERSION_MAJOR *"[0-9]+" *\)/       {getnum();major=$0}
+  /^ *SET *\( *VERSION_MINOR *"[0-9]+" *\)/       {getnum();minor=$0}
+  /^ *SET *\( *VERSION_PATCH *"[0-9]+" *\)/       {getnum();patch=$0}
+  /^# LAST RELEASED:/                             {gsub("^.*RELEASED: *","");gsub(" +$","");lastrelease=$0}
+  END {
+    thisrelease = major"."minor"."patch
+    if ( thisrelease == lastrelease )
+      print "#---delete-or-release---# LAST RELEASED: "lastrelease" UNCHANGED RELEASE: "thisrelease
+    else
+      print "#---delete-or-release---# LAST RELEASED: "lastrelease" NEW RELEASE: "thisrelease
+  }
+  '
+}
+
+test -r /etc/sysconfig/mail && source /etc/sysconfig/mail
+EMAIL="${USER}@${FROM_HEADER:-$(hostname -f)}"
+
+GOTVERSION="$(getversion)"
+
+TMPFILE=$(mktemp)
+exec 3>&1-
+exec >$TMPFILE
+echo "-------------------------------------------------------------------"
+echo "$(date) - $EMAIL"
+echo ""
+echo "- "
+echo "$GOTVERSION"
+echo ""
+cat $CHANGESFILE
+exec >&3
+
+RES=e
+while [ "$RES" == "e" ]; do
+  $EDITOR $TMPFILE
+  echo
+  NEWREL=$(grep '#---delete-or-release---#' $TMPFILE)
+  test -n "$NEWREL" && echo "$NEWREL"
+  read -n 1 -p "(a)bort, (c)ontinue, (e)dit : " RES
+  echo
+  echo
+  case "$RES" in
+    [eE]*)
+      RES=e
+      ;;
+    [cC])
+      test -n "$NEWREL" && {
+        echo "Remember new release in $VERSIONFILE"
+        sed -i 's/^.*#---delete-or-release---#.*RELEASE:/- version/' $TMPFILE
+        NEWREL=$(sed 's/^.*#---delete-or-release---#.*RELEASE:/# LAST RELEASED:/' <<<"$NEWREL")
+        sed -i "s/^# LAST RELEASED:.*$/$NEWREL/" $VERSIONFILE
+      }
+
+      echo "Store new $CHANGESFILE"
+      cp $TMPFILE $CHANGESFILE
+
+      echo "$(sed 's/^.*#---delete-or-release---#.*RELEASE:/# CURRENT RELEASE:/' <<<"$GOTVERSION")"
+      awk '{print}/^----------/{n=n+1; if ( n == 2 ) exit 0; }' $CHANGESFILE
+
+      ;;
+    *)
+      echo "Leave $CHANGESFILE untouched"
+      ;;
+  esac
+done
+
+rm -f $TMPFILE
