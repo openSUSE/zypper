@@ -197,17 +197,26 @@ void OutXML::searchResult( const Table & table_r )
   if ( ! rows.empty() )
   {
     //
-    // *** CAUTION: It's a mess, but must mtch the header list defined
+    // *** CAUTION: It's a mess, but must match the header list defined
     //              in FillSearchTableSolvable ctor (search.cc)
-    //
-    static const char * header[] = {
-      "status",
-      "name",
-      "kind",
-      "edition",
-      "arch",
-      "repository"
-    };
+    // We derive the XML tag from the header, applying some translation
+    // hence and there.
+    std::vector<std::string> header;
+    {
+      const TableHeader & theader( table_r.header() );
+      for_( it, theader.columns().begin(), theader.columns().end() )
+      {
+	if ( *it == "S" )
+	  header.push_back( "status" );
+	else if ( *it == "Type" )
+	  header.push_back( "kind" );
+	else if ( *it == "Version" )
+	  header.push_back( "edition" );
+	else
+	  header.push_back( zypp::str::toLower( *it ) );
+      }
+    }
+
     for_( it, rows.begin(), rows.end() )
     {
       cout << "<solvable";
@@ -215,7 +224,7 @@ void OutXML::searchResult( const Table & table_r )
       unsigned cidx = 0;
       for_( cit, cols.begin(), cols.end() )
       {
-	cout << ' ' << (cidx < 6 ? header[cidx] : "?" ) << "=\"";
+	cout << ' ' << (cidx < header.size() ? header[cidx] : "?" ) << "=\"";
 	if ( cidx == 0 )
 	{
 	  if ( *cit == "i" )

@@ -251,6 +251,10 @@ FillSearchTableSelectable::FillSearchTableSelectable(
   }
 
   TableHeader header;
+  //
+  // *** CAUTION: It's a mess, but adding/changing colums here requires
+  //              adapting OutXML::searchResult !
+  //
   // translators: S for installed Status
   header << _("S");
   header << _("Name");
