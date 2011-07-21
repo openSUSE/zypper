@@ -1,12 +1,18 @@
-Tue Jul 19 11:41:59 CEST 2011 - dheidler@suse.de
 -------------------------------------------------------------------
+Thu Jul 21 12:01:01 CEST 2011 - ma@suse.de
+
+- Fix 'zypper search' xml output (bnc#687529)
+- version 1.6.14
+
+-------------------------------------------------------------------
+Tue Jul 19 11:41:59 CEST 2011 - dheidler@suse.de
 
 - zypper-log: require python2.6 and argparse insted of 2.7
               on suse < 11.4
 - zypper-log: fix dependencies for other distros
 
-Wed Jul 13 15:41:59 CEST 2011 - dheidler@suse.de
 -------------------------------------------------------------------
+Wed Jul 13 15:41:59 CEST 2011 - dheidler@suse.de
 
 - zypper-log: view better error msg when logfile doesn't exist
 
