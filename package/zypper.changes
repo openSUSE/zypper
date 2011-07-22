@@ -1,4 +1,9 @@
 -------------------------------------------------------------------
+Fri Jul 22 15:17:04 CEST 2011 - ma@suse.de
+
+- Fix missing include header.
+
+-------------------------------------------------------------------
 Thu Jul 21 12:01:01 CEST 2011 - ma@suse.de
 
 - Fix 'zypper search' xml output (bnc#687529)
