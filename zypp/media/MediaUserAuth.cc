@@ -11,6 +11,8 @@
  */
 
 #include <list>
+#include <curl/curl.h>
+
 #include <boost/format.hpp>
 
 #include "zypp/base/Gettext.h"
@@ -64,11 +66,22 @@ std::ostream & AuthData::dumpAsIniOn( std::ostream & str ) const
   return str;
 }
 
+CurlAuthData::CurlAuthData()
+  : AuthData()
+  , _auth_type_str()
+  , _auth_type(CURLAUTH_NONE)
+{}
+
+CurlAuthData::CurlAuthData(const AuthData & authData)
+  : AuthData(authData)
+  , _auth_type_str()
+  , _auth_type(CURLAUTH_NONE)
+{}
+
 bool CurlAuthData::valid() const
 {
   return username().size() && password().size();
 }
-
 
 std::ostream & CurlAuthData::dumpOn( std::ostream & str ) const
 {

@@ -12,8 +12,6 @@
 #ifndef ZYPP_MEDIA_USER_AUTH_H
 #define ZYPP_MEDIA_USER_AUTH_H
 
-#include <curl/curl.h>
-
 #include "zypp/base/Deprecated.h"
 
 #include "zypp/Url.h"
@@ -79,14 +77,9 @@ public:
    * Default constructor. Initializes username and password to empty strings
    * and authetication type to CURLAUTH_NONE.
    */
-  CurlAuthData() : AuthData(), _auth_type_str(), _auth_type(CURLAUTH_NONE)
-  {}
+  CurlAuthData();
 
-  CurlAuthData(const AuthData & authData)
-    : AuthData(authData)
-    , _auth_type_str()
-    , _auth_type(CURLAUTH_NONE)
-  {}
+  CurlAuthData(const AuthData & authData);
 
   CurlAuthData(std::string & username, std::string & password, std::string & auth_type)
     : AuthData(username,password), _auth_type_str(auth_type)
