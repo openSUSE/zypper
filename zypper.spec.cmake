@@ -11,12 +11,20 @@
 # norootforbuild
 
 Name:           @PACKAGE@
-BuildRequires:  libzypp-devel >= 6.36.0 boost-devel >= 1.33.1 gettext-devel >= 0.15
+BuildRequires:  libzypp-devel >= 6.36.0 
+BuildRequires:  boost-devel >= 1.33.1 
+%if 0%{?suse_version} >= 1100
+BuildRequires:  gettext-devel >= 0.15
+%else
+BuildRequires:  gettext-devel
+%endif
 BuildRequires:  readline-devel >= 5.1 augeas-devel >= 0.5.0
 BuildRequires:  gcc-c++ >= 4.1 cmake >= 2.4.6
 Requires:	procps
 %if 0%{?suse_version}
+%if 0%{?suse_version} >= 1100
 %requires_ge	libzypp
+%endif
 Recommends:     logrotate cron
 PreReq:         permissions
 %endif

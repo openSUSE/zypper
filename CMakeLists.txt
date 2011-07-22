@@ -28,6 +28,17 @@ ELSE( ZYPP_FOUND )
   MESSAGE( FATAL_ERROR "libzypp not found" )
 ENDIF( ZYPP_FOUND )
 
+# In theory zypp-devel requires curl already
+# but MediaUserAuth.h leaks an include curl.h
+# in the header, so we need to add /usr/include/curl
+# to the include path
+FIND_PACKAGE( CURL REQUIRED )
+IF( CURL_FOUND )
+  INCLUDE_DIRECTORIES(${CURL_INCLUDE_DIRS})
+ELSE( CURL_FOUND )
+    MESSAGE( FATAL_ERROR "curl not found" )
+ENDIF( CURL_FOUND )
+
 FIND_PACKAGE( Gettext REQUIRED )
 IF( GETTEXT_FOUND )
   INCLUDE_DIRECTORIES(${GETTEXT_INCLUDE_DIR})
