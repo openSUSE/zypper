@@ -1,4 +1,10 @@
 -------------------------------------------------------------------
+Fri Jul 22 13:12:34 CEST 2011 - ma@suse.de
+
+- MediaUserAuth: Do not expose libcurl header files.
+- version 9.9.0 (8)
+
+-------------------------------------------------------------------
 Mon Jul 18 11:33:25 CEST 2011 - ma@suse.de
 
 - More initialize parser structure fixes. (bnc#705181)
