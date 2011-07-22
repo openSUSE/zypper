@@ -5,6 +5,7 @@
                              |__/|_|  |_|
 \*---------------------------------------------------------------------------*/
 
+#include <cstdio>
 #include <boost/format.hpp>
 #include <iostream>
 #include <unistd.h> // for getpass
