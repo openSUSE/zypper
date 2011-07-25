@@ -231,9 +231,7 @@ namespace zypp
       static inline MountEntries
       getMountEntries()
       {
-        // use "/etc/mtab" by default,
-        // fallback to "/proc/mounts"
-        return Mount::getEntries(/* "/etc/mtab" */);
+        return Mount::getEntries();
       }
 
     };

@@ -25,6 +25,8 @@
 #include "zypp/media/Mount.h"
 #include "zypp/media/MediaException.h"
 
+#include "zypp/PathInfo.h"
+
 #ifndef N_
 #define N_(STR) STR
 #endif
@@ -278,8 +280,15 @@ Mount::getEntries(const std::string &mtab)
 
   if( mtab.empty())
   {
-    mtabs.push_back("/etc/mtab");
     mtabs.push_back("/proc/mounts");
+    // Also read /etc/mtab if it is a file (on newer sytems
+    // mtab is a symlink to /proc/mounts). 
+    // Reason for this is the different representation of
+    // mounted loop devices:
+    //   /etc/mtab:    /tmp/SLES-11-SP2-MINI-ISO-x86_64-Beta2-DVD.iso on /mnt type iso9660 (ro,loop=/dev/loop0)
+    //   /proc/mounts: /dev/loop0 /mnt iso9660 ro,relatime 0 0
+    if ( PathInfo( "/etc/mtab", PathInfo::LSTAT ).isFile() )
+      mtabs.push_back("/etc/mtab");
   }
   else
   {

@@ -128,8 +128,9 @@ namespace zypp {
 	*
 	* @param mtab The name of the (mounted) file system description
 	*             file to read from. This file should be one /etc/mtab,
-	*             /etc/fstab or /proc/mounts. Default is to try the
-	*             /etc/mtab and fail back to /proc/mounts.
+	*             /etc/fstab or /proc/mounts. Default is to read
+	*             /proc/mounts and /etc/mtab in case is not a symlink
+	*             to /proc/mounts.
 	* @returns A vector with mount entries or empty vector if reading
 	*          or parsing of the mtab file(s) failed.
 	*/
