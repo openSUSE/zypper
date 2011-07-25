@@ -1,4 +1,10 @@
 -------------------------------------------------------------------
+Mon Jul 25 16:20:37 CEST 2011 - ma@suse.de
+
+- Always read /proc/mounts when looking for mounted media (bnc#705893)
+- version 9.9.1 (8)
+
+-------------------------------------------------------------------
 Fri Jul 22 13:12:34 CEST 2011 - ma@suse.de
 
 - MediaUserAuth: Do not expose libcurl header files.
