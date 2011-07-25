@@ -118,7 +118,7 @@ namespace zypp {
     };
 
     /** \relates AttachPoint Stream output */
-    inline std::ostream & operator<<( std::ostream & str, const AttachPoint & obj );
+    std::ostream & operator<<( std::ostream & str, const AttachPoint & obj );
 
     ///////////////////////////////////////////////////////////////////
     typedef zypp::RW_pointer<MediaSource> MediaSourceRef;
