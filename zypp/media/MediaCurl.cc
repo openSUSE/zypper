@@ -1363,7 +1363,28 @@ void MediaCurl::doGetFileCopyFile( const Pathname & filename , const Pathname & 
     }
 
     ret = curl_easy_perform( _curl );
-
+#if CURLVERSION_AT_LEAST(7,19,4)
+    // bnc#692260: If the client sends a request with an If-Modified-Since header
+    // with a future date for the server, the server may respond 200 sending a
+    // zero size file.
+    // curl-7.19.4 introduces CURLINFO_CONDITION_UNMET to check this condition.
+    if ( ftell(file) == 0 && ret == 0 )
+    {
+      long httpReturnCode = 33;
+      if ( curl_easy_getinfo( _curl, CURLINFO_RESPONSE_CODE, &httpReturnCode ) == CURLE_OK && httpReturnCode == 200 )
+      {
+	long conditionUnmet = 33;
+	if ( curl_easy_getinfo( _curl, CURLINFO_CONDITION_UNMET, &conditionUnmet ) == CURLE_OK && conditionUnmet )
+	{
+	  WAR << "TIMECONDITION unmet - retry without." << endl;
+	  curl_easy_setopt(_curl, CURLOPT_TIMECONDITION, CURL_TIMECOND_NONE);
+	  curl_easy_setopt(_curl, CURLOPT_TIMEVALUE, 0L);
+	  ret = curl_easy_perform( _curl );
+	}
+      }
+    }
+#endif
+        
     if ( curl_easy_setopt( _curl, CURLOPT_PROGRESSDATA, NULL ) != 0 ) {
       WAR << "Can't unset CURLOPT_PROGRESSDATA: " << _curlError << endl;;
     }
