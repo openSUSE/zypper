@@ -1,4 +1,11 @@
 -------------------------------------------------------------------
+Thu Jul 28 13:04:10 CEST 2011 - ma@suse.de
+
+- Evaluate CURLINFO_CONDITION_UNMET on zero sized successful transfers,
+  if compiled against libcurl-7.19.4 or above. (bnc#692260)
+- version 9.9.2 (8)
+
+-------------------------------------------------------------------
 Mon Jul 25 16:20:37 CEST 2011 - ma@suse.de
 
 - Always read /proc/mounts when looking for mounted media (bnc#705893)
