@@ -74,7 +74,7 @@ BuildRequires:  hicolor-icon-theme
 %endif
 %endif
 
-%if 0%{?fedora_version}
+%if 0%{?fedora_version} || 0%{?rhel_version} >= 600 || 0%{?centos_version} >= 600
 BuildRequires:  glib2-devel
 BuildRequires:  popt-devel
 BuildRequires:  rpm-devel
@@ -230,7 +230,7 @@ rm -rf "$RPM_BUILD_ROOT"
 cd build
 make install DESTDIR=$RPM_BUILD_ROOT
 make -C doc/autodoc install DESTDIR=$RPM_BUILD_ROOT
-%if 0%{?fedora_version}
+%if 0%{?fedora_version} || 0%{?rhel_version} >= 600 || 0%{?centos_version} >= 600
 ln -s %{_sysconfdir}/yum.repos.d $RPM_BUILD_ROOT%{_sysconfdir}/zypp/repos.d
 %else
 mkdir -p $RPM_BUILD_ROOT%{_sysconfdir}/zypp/repos.d
@@ -325,7 +325,7 @@ rm -rf "$RPM_BUILD_ROOT"
 %files -f zypp.lang
 %defattr(-,root,root)
 %dir               %{_sysconfdir}/zypp
-%if 0%{?fedora_version}
+%if 0%{?fedora_version} || 0%{?rhel_version} >= 600 || 0%{?centos_version} >= 600
 %{_sysconfdir}/zypp/repos.d
 %else
 %dir               %{_sysconfdir}/zypp/repos.d
