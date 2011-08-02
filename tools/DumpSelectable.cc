@@ -4,6 +4,7 @@
 
 #include <algorithm>
 #include <zypp/PoolQuery.h>
+#include <zypp/ResObjects.h>
 
 static std::string appname( "DumpSelectable" );
 
@@ -30,8 +31,21 @@ int usage( const std::string & msg_r = std::string(), int exit_r = 100 )
   cerr << "  Selectables names NAME" << endl;
   cerr << "  --root   Load repos from the system located below ROOTDIR. If ROOTDIR" << endl;
   cerr << "           denotes a sover testcase, the testcase is loaded." << endl;
+  cerr << "  -v       Verbose list solvables data." << endl;
   cerr << "" << endl;
   return exit_r;
+}
+
+void dumpPi( std::ostream & message, const PoolItem & pi )
+{
+  std::string indent("   ");
+  message << indent << "--------------------------------------------------" << endl;
+  message << indent << (pi->isSystem() ? "i " : "a ") <<  pi->satSolvable().asString() << endl;
+  message << indent << pi->summary() << endl;
+  if ( pi->isKind<Package>() )
+  {
+    message << indent << pi->asKind<Package>()->changelog() << endl;
+  }
 }
 
 /******************************************************************
@@ -45,6 +59,30 @@ int main( int argc, char * argv[] )
   appname = Pathname::basename( argv[0] );
   --argc,++argv;
 
+  Pathname sysRoot("/");
+  bool verbose = false;
+
+  while ( argc && (*argv)[0] == '-' )
+  {
+    if ( (*argv) == std::string("--root") )
+    {
+      --argc,++argv;
+      if ( ! argc )
+	return errexit("--root requires an argument.");
+
+      if ( ! PathInfo( *argv ).isDir() )
+	return errexit("--root requires a directory.");
+
+      sysRoot = *argv;
+    }
+    else if ( (*argv) == std::string("-v") )
+    {
+      verbose = true;
+    }
+
+    --argc,++argv;
+  }
+
   if ( ! argc )
   {
     return usage();
@@ -53,21 +91,7 @@ int main( int argc, char * argv[] )
   ///////////////////////////////////////////////////////////////////
 
   ZConfig::instance();
-  Pathname sysRoot("/");
   sat::Pool satpool( sat::Pool::instance() );
-
-  if ( (*argv) == std::string("--root") )
-  {
-    --argc,++argv;
-    if ( ! argc )
-      return errexit("--root requires an argument.");
-
-    if ( ! PathInfo( *argv ).isDir() )
-      return errexit("--root requires a directory.");
-
-    sysRoot = *argv;
-    --argc,++argv;
-  }
 
   if ( TestSetup::isTestcase( sysRoot ) )
   {
@@ -130,7 +154,15 @@ int main( int argc, char * argv[] )
 
   for ( ; argc; --argc,++argv )
   {
-    message << dump( ui::Selectable::get( IdString( *argv ) ) ) << endl;
+    ui::Selectable::Ptr sel( ui::Selectable::get( IdString( *argv ) ) );
+    message << dump( sel ) << endl;
+    if ( verbose )
+    {
+      for_( it, sel->installedBegin(), sel->installedEnd() )
+	dumpPi( message, *it );
+      for_( it, sel->availableBegin(), sel->availableEnd() )
+	dumpPi( message, *it );
+    }
   }
 
   INT << "===[END]============================================" << endl << endl;
