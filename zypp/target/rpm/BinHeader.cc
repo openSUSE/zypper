@@ -95,6 +95,7 @@ namespace rpm
 
 unsigned BinHeader::intList::set( void * val_r, unsigned cnt_r, rpmTagType type_r )
 {
+  _type = type_r; // remember the type!
   if ( val_r )
     switch ( _type )
     {
@@ -112,11 +113,11 @@ unsigned BinHeader::intList::set( void * val_r, unsigned cnt_r, rpmTagType type_
       case RPM_INT32_TYPE:
 	std::vector<long>( (int32_t*)val_r, ((int32_t*)val_r)+cnt_r ).swap( _data );
 	break;
-	#ifdef _RPM_4_X
+#ifdef _RPM_4_X
       case RPM_INT64_TYPE:
 	std::vector<long>( (int64_t*)val_r, ((int64_t*)val_r)+cnt_r ).swap( _data );
 	break;
-	#endif
+#endif
       default:
 	std::vector<long>( cnt_r, 0L ).swap( _data );
 	break;
@@ -256,10 +257,13 @@ unsigned BinHeader::int_list( tag tag_r, intList & lst_r ) const
       case RPM_INT8_TYPE:
       case RPM_INT16_TYPE:
       case RPM_INT32_TYPE:
+#ifdef _RPM_4_X
+      case RPM_INT64_TYPE:
+#endif
         return lst_r.set( headerget.val(), headerget.cnt(), headerget.type() );
 
       default:
-        INT << "RPM_TAG MISSMATCH: RPM_INT32_TYPE " << tag_r << " got type " << headerget.type() << endl;
+        INT << "RPM_TAG MISSMATCH: RPM_INTxx_TYPE " << tag_r << " got type " << headerget.type() << endl;
       }
     }
   }
@@ -327,9 +331,13 @@ int BinHeader::int_val( tag tag_r ) const
         return *((int16_t*)headerget.val());
       case RPM_INT32_TYPE:
         return *((int32_t*)headerget.val());
+#ifdef _RPM_4_X
+      case RPM_INT64_TYPE:
+        return *((int64_t*)headerget.val());
+#endif
 
       default:
-        INT << "RPM_TAG MISSMATCH: RPM_INT32_TYPE " << tag_r << " got type " << headerget.type() << endl;
+        INT << "RPM_TAG MISSMATCH: RPM_INTxx_TYPE " << tag_r << " got type " << headerget.type() << endl;
       }
     }
   }
