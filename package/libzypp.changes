@@ -1,4 +1,9 @@
 -------------------------------------------------------------------
+Thu Aug  4 01:14:00 CEST 2011 - ma@suse.de
+
+- Update zypp-po.tar.bz2
+
+-------------------------------------------------------------------
 Thu Jul 28 13:04:10 CEST 2011 - ma@suse.de
 
 - Evaluate CURLINFO_CONDITION_UNMET on zero sized successful transfers,
