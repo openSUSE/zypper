@@ -1,4 +1,11 @@
 -------------------------------------------------------------------
+Thu Aug  4 14:54:47 CEST 2011 - ma@suse.de
+
+- Allow to turn Resolvers upgrade mode on and off (bnc#709480)
+- Fix reading of integer arrays from rpm headers (bnc#709716)
+- version 9.10.0 (8)
+
+-------------------------------------------------------------------
 Thu Aug  4 01:14:00 CEST 2011 - ma@suse.de
 
 - Update zypp-po.tar.bz2
