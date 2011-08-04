@@ -119,6 +119,9 @@ namespace zypp
      * all packages with a special resolver algorithm which takes
      * care of package splits, pattern  and  product  updates,
      * etc.
+     * This call also turns the solver into \ref upgradeMode, so
+     * consecutive calls to \ref resolvePool performed in this
+     * mode too. Call \ref setUpgradeMode to turn this mode off.
      *
      * \see \ref addUpgradeRepo
      **/
@@ -188,8 +191,11 @@ namespace zypp
     bool onlyRequires() const;
 
     /**
-     * Whether the \ref Resolver is in upgrade mode.
+     * Setting whether the solver should perform in 'upgrade' mode or
+     * not.
+     * \see \ref doUpgrade.
      */
+    void setUpgradeMode( bool yesno_r );
     bool upgradeMode() const;
 
     /**

@@ -87,6 +87,7 @@ namespace zypp
   void Resolver::resetOnlyRequires()			{ _pimpl->setOnlyRequires( indeterminate ); }
   bool Resolver::onlyRequires() const			{ return _pimpl->onlyRequires(); }
 
+  void Resolver::setUpgradeMode( bool yesno_r )		{ return _pimpl->setUpgradeMode( yesno_r ); }
   bool Resolver::upgradeMode() const			{ return _pimpl->isUpgradeMode(); }
 
   void Resolver::setAllowVendorChange( bool yesno_r )	{ _pimpl->setAllowVendorChange( yesno_r ); }

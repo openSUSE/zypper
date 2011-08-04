@@ -91,7 +91,13 @@ namespace zypp
 ///////////////////////////////////////////////////////////////////
 //
 //	CLASS NAME : Resolver
-
+/** A mid layer class we should remove
+ * \todo Merge this and class SATResolver. Logic and date are horribly
+ * distributed between this and SATResolver. Either SATResolver becomes
+ * a pure wrapper adapting the libsolv C interface to fit our needs, and
+ * all the solver logic and problem handling goes here; or completely merge
+ * both classes.
+ */
 class Resolver : public base::ReferenceCounted, private base::NonCopyable {
 
   private:
@@ -200,6 +206,7 @@ class Resolver : public base::ReferenceCounted, private base::NonCopyable {
     void setForceResolve( TriBool state_r )	{ _forceResolve = indeterminate(state_r) ? false : bool(state_r); }
 
     bool isUpgradeMode() const 			{ return _upgradeMode; }// Resolver has been called with doUpgrade
+    void setUpgradeMode( bool yesno_r )		{ _upgradeMode = yesno_r; }
 
     bool isUpdateMode() const 			{ return _updateMode; }	// Resolver has been called with doUpdate
 

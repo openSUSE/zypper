@@ -301,9 +301,9 @@ void Resolver::solverInit()
     _satResolver->setSolveSrcPackages		( solveSrcPackages() );
     _satResolver->setCleandepsOnRemove		( cleandepsOnRemove() );
 
+    _satResolver->setDistupgrade		(_upgradeMode);
     if (_upgradeMode) {
       // may overwrite some settings
-      _satResolver->setDistupgrade			(true);
       _satResolver->setDistupgrade_removeunsupported	(false);
       _satResolver->setUpdatesystem			(true);
       _satResolver->setAllowdowngrade			(true);
