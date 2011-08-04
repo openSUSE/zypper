@@ -487,8 +487,6 @@ SET( zypp_solver_detail_SRCS
   solver/detail/ProblemSolutionIgnore.cc
   solver/detail/ProblemSolutionCombi.cc
   solver/detail/Resolver.cc
-  solver/detail/ResolverUpgrade.cc
-  solver/detail/Resolver_problems.cc
   solver/detail/SolutionAction.cc
   solver/detail/Testcase.cc
   solver/detail/SolverQueueItem.cc

@@ -36,6 +36,7 @@
 #include "zypp/sat/Pool.h"
 #include "zypp/sat/Solvable.h"
 #include "zypp/sat/Transaction.h"
+#include "zypp/ResolverProblem.h"
 
 #define MAXSOLVERRUNS 5
 
@@ -137,6 +138,13 @@ void Resolver::reset( bool keepExtras )
     _installs.clear();
     _satifiedByInstalled.clear();
     _installedSatisfied.clear();
+}
+
+bool Resolver::doUpgrade()
+{
+  // Setting Resolver to upgrade mode. SAT solver will do the update
+  _upgradeMode = true;
+  return resolvePool();
 }
 
 void Resolver::doUpdate()
@@ -362,6 +370,21 @@ sat::Transaction Resolver::getTransaction()
 //----------------------------------------------------------------------------
 // Getting more information about the solve results
 
+ResolverProblemList Resolver::problems() const
+{
+  MIL << "Resolver::problems()" << endl;
+  return _satResolver->problems();
+}
+
+void Resolver::applySolutions( const ProblemSolutionList & solutions )
+{
+  for_( iter, solutions.begin(), solutions.end() )
+  {
+    ProblemSolution_Ptr solution = *iter;
+    if ( !solution->apply( *this ) )
+      break;
+  }
+}
 
 void Resolver::collectResolverInfo()
 {
