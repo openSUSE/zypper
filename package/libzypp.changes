@@ -1,4 +1,10 @@
 -------------------------------------------------------------------
+Fri Aug  5 15:20:07 CEST 2011 - ma@suse.de
+
+- Attempt to fix smb mount entry comparison (bnc#710269)
+- version 9.10.1 (8)
+
+-------------------------------------------------------------------
 Thu Aug  4 14:54:47 CEST 2011 - ma@suse.de
 
 - Allow to turn Resolvers upgrade mode on and off (bnc#709480)
