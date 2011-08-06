@@ -1,4 +1,9 @@
 -------------------------------------------------------------------
+Sun Aug  7 01:16:07 CEST 2011 - ma@suse.de
+
+- Update zypp-po.tar.bz2
+
+-------------------------------------------------------------------
 Fri Aug  5 15:20:07 CEST 2011 - ma@suse.de
 
 - Attempt to fix smb mount entry comparison (bnc#710269)
