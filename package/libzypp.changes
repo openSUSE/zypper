@@ -1,4 +1,10 @@
 -------------------------------------------------------------------
+Mon Aug 29 10:51:04 CEST 2011 - ma@suse.de
+
+- Extend mount entry comparison fix (bnc#710269)
+- version 9.10.2 (8)
+
+-------------------------------------------------------------------
 Thu Aug 25 01:17:06 CEST 2011 - ma@suse.de
 
 - Update sle-zypp-po.tar.bz2
