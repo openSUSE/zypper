@@ -2876,21 +2876,21 @@ void Zypper::doCommand()
 
     // indeterminate indicates the user has not specified the values
 
-    TriBool enabled = indeterminate;
+    TriBool enabled( indeterminate );
     if (copts.count("disable"))
       enabled = false;
 
-    TriBool autorefresh = indeterminate;
+    TriBool autorefresh( indeterminate );
     if (copts.count("refresh"))
       autorefresh = true;
 
-    TriBool keep_pkgs;
+    TriBool keep_pkgs( indeterminate );
     if (copts.count("keep-packages"))
       keep_pkgs = true;
     else if (copts.count("no-keep-packages"))
       keep_pkgs = false;
 
-    TriBool gpgCheck;
+    TriBool gpgCheck( indeterminate );
     if (copts.count("gpgcheck"))
       gpgCheck = true;
     else if (copts.count("no-gpgcheck"))
