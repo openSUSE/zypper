@@ -1,4 +1,9 @@
 -------------------------------------------------------------------
+Thu Sep  1 01:14:00 CEST 2011 - ma@suse.de
+
+- Update zypper-po.tar.bz2
+
+-------------------------------------------------------------------
 Tue Aug 30 11:37:54 CEST 2011 - ma@suse.de
 
 - Restore default behavior for newly create repos to have gpg checks
