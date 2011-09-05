@@ -14,6 +14,7 @@
 
 #include <cstdio> // snprintf
 #include <openssl/evp.h>
+#include <openssl/engine.h>
 #include <string>
 #include <string.h>
 
@@ -93,6 +94,9 @@ namespace zypp {
     {
       if(!openssl_digests_added)
       {
+      	OPENSSL_config(NULL);
+      	ENGINE_load_builtin_engines();
+      	ENGINE_register_all_complete();
     	OpenSSL_add_all_digests();
     	openssl_digests_added = true;
       }
