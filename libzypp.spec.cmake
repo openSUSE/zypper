@@ -66,6 +66,8 @@ BuildRequires:  libexpat-devel
 BuildRequires:  expat-devel
 %endif
 
+Requires:	rpm
+
 %if 0%{?suse_version}
 BuildRequires:  rpm-devel
 Requires:       /usr/bin/uuidgen
