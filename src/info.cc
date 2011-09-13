@@ -9,7 +9,7 @@
 
 #include <boost/format.hpp>
 
-#include <zypp/base/LogTools.h>
+// #include <zypp/base/LogTools.h>
 #include <zypp/base/Algorithm.h>
 #include <zypp/ZYpp.h>
 #include <zypp/Package.h>
@@ -171,11 +171,18 @@ Copy and modify /usr/share/vim/current/gvimrc to ~/.gvimrc if needed.
  */
 void printPkgInfo(Zypper & zypper, const ui::Selectable & s)
 {
-  PoolItem installed = s.installedObj();
-  PoolItem theone = s.updateCandidateObj();
-  if (!theone)
-    theone = installed;
-  Package::constPtr pkg = asKind<Package>(theone.resolvable());
+  PoolItem installed( s.installedObj() );
+  PoolItem updateCand( s.updateCandidateObj() );
+  // An updateCandidate is always better than any installed object.
+  // If the best version is already installed try to look it up in
+  // the repo it came from, otherwise use the installed one.
+  PoolItem theone( updateCand );
+  if ( !theone )
+  {
+    theone = s.identicalAvailableObj( installed );
+    if ( !theone )
+      theone = installed;
+  }
 
   cout << (zypper.globalOpts().is_rug_compatible ? _("Catalog: ") : _("Repository: "))
        << (zypper.config().show_alias ?
@@ -187,22 +194,26 @@ void printPkgInfo(Zypper & zypper, const ui::Selectable & s)
   // if running on SUSE Linux Enterprise, report unsupported packages
   Product::constPtr platform = God->target()->baseProduct();
   if (platform && platform->name().find("SUSE_SLE") != string::npos)
+  {
+    Package::constPtr pkg = asKind<Package>(theone.resolvable());
     cout << _("Support Level: ") << asUserString(pkg->vendorSupport()) << endl;
+  }
 
   cout << _("Installed: ") << (installed ? _("Yes") : _("No")) << endl;
 
-  //! \todo fix this - arch?
   cout << _("Status: ");
-  if (installed &&
-      installed.resolvable()->edition() >= theone.resolvable()->edition())
+  if ( installed )
   {
-    cout << _("up-to-date") << endl;
-  }
-  else if (installed)
-  {
-    cout << str::form(_("out-of-date (version %s installed)"),
-        installed.resolvable()->edition().asString().c_str())
-      << endl;
+    if ( updateCand )
+    {
+      cout << str::form(_("out-of-date (version %s installed)"),
+			installed.resolvable()->edition().asString().c_str())
+           << endl;
+    }
+    else
+    {
+      cout << _("up-to-date") << endl;
+    }
   }
   else
     cout << _("not installed") << endl;
