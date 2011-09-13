@@ -143,7 +143,10 @@ namespace zypp
        */
       PoolItem updateCandidateObj() const
       {
-        if ( multiversionInstall() || installedEmpty() || ! _defaultCandidate )
+	if ( multiversionInstall() )
+	  return identicalInstalled( _defaultCandidate ) ? PoolItem() : _defaultCandidate;
+
+        if ( installedEmpty() || ! _defaultCandidate )
           return _defaultCandidate;
         // Here: installed and _defaultCandidate are non NULL and it's not a
         //       multiversion install.
