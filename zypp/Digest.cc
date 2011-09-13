@@ -14,6 +14,7 @@
 
 #include <cstdio> // snprintf
 #include <openssl/evp.h>
+#include <openssl/conf.h>
 #include <openssl/engine.h>
 #include <string>
 #include <string.h>
