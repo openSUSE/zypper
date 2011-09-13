@@ -10,7 +10,7 @@
 #include <stdlib.h>
 #include <string.h>
 
-#include "zypp/base/Logger.h"
+#include <zypp/base/Logger.h>
 
 #include "Zypper.h"
 
