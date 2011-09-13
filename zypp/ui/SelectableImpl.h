@@ -187,30 +187,38 @@ namespace zypp
 
       /** \copydoc Selectable::identicalAvailable( const PoolItem & )const */
       bool identicalAvailable( const PoolItem & rhs ) const
+      { return identicalAvailableObj( rhs ); }
+
+      /** \copydoc Selectable::identicalInstalled( const PoolItem & )const */
+      bool identicalInstalled( const PoolItem & rhs ) const
+      { return identicalInstalledObj( rhs ); }
+
+      /** \copydoc Selectable::identicalAvailableObj( const PoolItem & rhs ) const */
+      PoolItem identicalAvailableObj( const PoolItem & rhs ) const
       {
         if ( !availableEmpty() && rhs )
         {
           for_( it, _availableItems.begin(), _availableItems.end() )
           {
             if ( identical( *it, rhs ) )
-              return true;
+              return *it;
           }
         }
-        return false;
+        return PoolItem();
       }
 
-      /** \copydoc Selectable::identicalInstalled( const PoolItem & )const */
-      bool identicalInstalled( const PoolItem & rhs ) const
+      /** \copydoc Selectable::identicalInstalledObj( const PoolItem & rhs ) const */
+      PoolItem identicalInstalledObj( const PoolItem & rhs ) const
       {
         if ( !installedEmpty() && rhs )
         {
           for_( it, _installedItems.begin(), _installedItems.end() )
           {
             if ( identical( *it, rhs ) )
-              return true;
+              return *it;
           }
         }
-        return false;
+        return PoolItem();
       }
 
       /** Best among all objects. */

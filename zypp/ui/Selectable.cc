@@ -88,6 +88,12 @@ namespace zypp
     bool Selectable::identicalInstalled( const PoolItem & rhs ) const
     { return _pimpl->identicalInstalled( rhs ); }
 
+    PoolItem Selectable::identicalAvailableObj( const PoolItem & rhs ) const
+    { return _pimpl->identicalAvailableObj( rhs ); }
+
+    PoolItem Selectable::identicalInstalledObj( const PoolItem & rhs ) const
+    { return _pimpl->identicalInstalledObj( rhs ); }
+
     PoolItem Selectable::setCandidate( const PoolItem & newCandidate_r, ResStatus::TransactByValue causer_r )
     { return _pimpl->setCandidate( newCandidate_r, causer_r ); }
 

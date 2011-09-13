@@ -174,6 +174,17 @@ namespace zypp
       bool identicalInstalledUpdateCandidate() const
       { return identicalInstalled( updateCandidateObj() ); }
 
+      /** Return an available Object with the same content as \c rhs.
+       * Basically the same name, edition, arch, vendor and buildtime.
+       * \see \ref sat::Solvable::identical
+       */
+      PoolItem identicalAvailableObj( const PoolItem & rhs ) const;
+
+     /** \Return an installed Object with the same content as \c rhs.
+       * Basically the same name, edition, arch, vendor and buildtime.
+       * \see \ref sat::Solvable::identical
+       */
+      PoolItem identicalInstalledObj( const PoolItem & rhs ) const;
 
       /** Return the \ref installedObj resolvable casted to a specific kind.
        * \code
