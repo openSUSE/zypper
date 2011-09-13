@@ -13,17 +13,17 @@
 #include <iterator>
 #include <list>
 
-#include "zypp/ZYpp.h"
-#include "zypp/base/Logger.h"
-#include "zypp/base/IOStream.h"
-#include "zypp/base/String.h"
-#include "zypp/base/Flags.h"
+#include <zypp/ZYpp.h>
+#include <zypp/base/Logger.h>
+#include <zypp/base/IOStream.h>
+#include <zypp/base/String.h>
+#include <zypp/base/Flags.h>
 
-#include "zypp/RepoManager.h"
-#include "zypp/repo/RepoException.h"
-#include "zypp/parser/ParseException.h"
-#include "zypp/media/MediaException.h"
-#include "zypp/media/MediaAccess.h"
+#include <zypp/RepoManager.h>
+#include <zypp/repo/RepoException.h>
+#include <zypp/parser/ParseException.h>
+#include <zypp/media/MediaException.h>
+#include <zypp/media/MediaAccess.h>
 
 #include "output/Out.h"
 #include "main.h"

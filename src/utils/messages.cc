@@ -6,7 +6,7 @@
 \*---------------------------------------------------------------------------*/
 
 #include <sstream>
-#include "zypp/base/String.h"
+#include <zypp/base/String.h>
 #include "Zypper.h"
 
 #include "messages.h"

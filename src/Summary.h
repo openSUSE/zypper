@@ -12,11 +12,11 @@
 #include <map>
 #include <iosfwd>
 
-#include "zypp/base/PtrTypes.h"
-#include "zypp/ByteCount.h"
-#include "zypp/base/DefaultIntegral.h"
-#include "zypp/ResObject.h"
-#include "zypp/ResPool.h"
+#include <zypp/base/PtrTypes.h>
+#include <zypp/ByteCount.h>
+#include <zypp/base/DefaultIntegral.h>
+#include <zypp/ResObject.h>
+#include <zypp/ResPool.h>
 
 
 class Summary : private zypp::base::NonCopyable

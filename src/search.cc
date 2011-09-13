@@ -1,16 +1,16 @@
 #include <iostream>
 
-#include "zypp/ZYpp.h" // for zypp::ResPool::instance()
+#include <zypp/ZYpp.h> // for zypp::ResPool::instance()
 
-#include "zypp/base/Logger.h"
-#include "zypp/base/Algorithm.h"
-#include "zypp/Patch.h"
-#include "zypp/Pattern.h"
-#include "zypp/Product.h"
-#include "zypp/sat/Solvable.h"
+#include <zypp/base/Logger.h>
+#include <zypp/base/Algorithm.h>
+#include <zypp/Patch.h>
+#include <zypp/Pattern.h>
+#include <zypp/Product.h>
+#include <zypp/sat/Solvable.h>
 
-#include "zypp/PoolItem.h"
-#include "zypp/ResPoolProxy.h"
+#include <zypp/PoolItem.h>
+#include <zypp/ResPoolProxy.h>
 
 #include "main.h"
 #include "utils/misc.h" // for kind_to_string_localized and string_patch_status

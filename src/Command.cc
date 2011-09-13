@@ -7,8 +7,8 @@
 
 #include <map>
 
-#include "zypp/base/Exception.h"
-#include "zypp/base/String.h"
+#include <zypp/base/Exception.h>
+#include <zypp/base/String.h>
 
 #include "main.h"
 #include "Command.h"

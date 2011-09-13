@@ -9,18 +9,18 @@
 #include <iostream>
 #include <unistd.h>          // for getcwd()
 
-#include "zypp/base/Logger.h"
-#include "zypp/base/String.h"
-#include "zypp/base/Easy.h"
-#include "zypp/base/Regex.h"
-#include "zypp/media/MediaManager.h"
-#include "zypp/parser/xml/XmlEscape.h"
-#include "zypp/misc/CheckAccessDeleted.h"
-#include "zypp/ExternalProgram.h"
+#include <zypp/base/Logger.h>
+#include <zypp/base/String.h>
+#include <zypp/base/Easy.h>
+#include <zypp/base/Regex.h>
+#include <zypp/media/MediaManager.h>
+#include <zypp/parser/xml/XmlEscape.h>
+#include <zypp/misc/CheckAccessDeleted.h>
+#include <zypp/ExternalProgram.h>
 
-#include "zypp/PoolItem.h"
-#include "zypp/Product.h"
-#include "zypp/Pattern.h"
+#include <zypp/PoolItem.h>
+#include <zypp/Product.h>
+#include <zypp/Pattern.h>
 
 #include "main.h"
 #include "Zypper.h"

@@ -10,16 +10,16 @@
  *
  */
 
-#include "zypp/ZYppFactory.h"
-#include "zypp/base/LogTools.h"
+#include <zypp/ZYppFactory.h>
+#include <zypp/base/LogTools.h>
 
-#include "zypp/PoolQuery.h"
-#include "zypp/PoolItemBest.h"
+#include <zypp/PoolQuery.h>
+#include <zypp/PoolItemBest.h>
 
-#include "zypp/Capability.h"
-#include "zypp/Resolver.h"
-#include "zypp/Patch.h"
-#include "zypp/ui/Selectable.h"
+#include <zypp/Capability.h>
+#include <zypp/Resolver.h>
+#include <zypp/Patch.h>
+#include <zypp/ui/Selectable.h>
 
 #include "misc.h"
 

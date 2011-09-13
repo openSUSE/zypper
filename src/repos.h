@@ -10,10 +10,10 @@
 
 #include <list>
 
-#include "zypp/TriBool.h"
-#include "zypp/Url.h"
-#include "zypp/RepoInfo.h"
-#include "zypp/ServiceInfo.h"
+#include <zypp/TriBool.h>
+#include <zypp/Url.h>
+#include <zypp/RepoInfo.h>
+#include <zypp/ServiceInfo.h>
 
 #include "Zypper.h"
 

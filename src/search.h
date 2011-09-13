@@ -8,7 +8,7 @@
 #ifndef ZYPPERSEARCH_H_
 #define ZYPPERSEARCH_H_
 
-#include "zypp/TriBool.h"
+#include <zypp/TriBool.h>
 
 #include "Zypper.h"
 #include "Table.h"

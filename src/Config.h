@@ -11,7 +11,7 @@
 #include <string>
 #include <set>
 
-#include "zypp/Url.h"
+#include <zypp/Url.h>
 #include "Command.h"
 #include "utils/colors.h"
 

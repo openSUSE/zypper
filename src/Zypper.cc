@@ -22,18 +22,18 @@
 #include <boost/logic/tribool.hpp>
 #include <boost/format.hpp>
 
-#include "zypp/ZYppFactory.h"
-#include "zypp/zypp_detail/ZYppReadOnlyHack.h"
+#include <zypp/ZYppFactory.h>
+#include <zypp/zypp_detail/ZYppReadOnlyHack.h>
 
-#include "zypp/base/Logger.h"
-#include "zypp/base/Algorithm.h"
-#include "zypp/base/UserRequestException.h"
+#include <zypp/base/Logger.h>
+#include <zypp/base/Algorithm.h>
+#include <zypp/base/UserRequestException.h>
 
-#include "zypp/sat/SolvAttr.h"
-#include "zypp/PoolQuery.h"
-#include "zypp/Locks.h"
+#include <zypp/sat/SolvAttr.h>
+#include <zypp/PoolQuery.h>
+#include <zypp/Locks.h>
 
-#include "zypp/target/rpm/RpmHeader.h" // for install <.rpmURI>
+#include <zypp/target/rpm/RpmHeader.h> // for install <.rpmURI>
 
 #include "main.h"
 #include "Zypper.h"

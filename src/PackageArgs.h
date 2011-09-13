@@ -18,7 +18,7 @@
 #include <utility>
 #include <iosfwd>
 
-#include "zypp/Capability.h"
+#include <zypp/Capability.h>
 
 class Zypper;
 

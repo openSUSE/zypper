@@ -11,9 +11,9 @@
 
 #include <unistd.h>
 
-#include "zypp/Pathname.h"
-#include "zypp/ByteCount.h" // for download progress reporting
-#include "zypp/base/String.h" // for toUpper()
+#include <zypp/Pathname.h>
+#include <zypp/ByteCount.h> // for download progress reporting
+#include <zypp/base/String.h> // for toUpper()
 
 #include "main.h"
 #include "utils/colors.h"

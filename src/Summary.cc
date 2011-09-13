@@ -10,12 +10,12 @@
 #include <sstream>
 #include <boost/format.hpp>
 
-#include "zypp/base/Logger.h"
-#include "zypp/base/Measure.h"
-#include "zypp/ResPool.h"
-#include "zypp/Patch.h"
-#include "zypp/Package.h"
-#include "zypp/ui/Selectable.h"
+#include <zypp/base/Logger.h>
+#include <zypp/base/Measure.h>
+#include <zypp/ResPool.h>
+#include <zypp/Patch.h>
+#include <zypp/Package.h>
+#include <zypp/ui/Selectable.h>
 
 #include "main.h"
 #include "utils/text.h"

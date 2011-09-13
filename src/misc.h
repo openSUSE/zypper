@@ -11,10 +11,10 @@
 #include <string>
 #include <list>
 
-#include "zypp/PoolQuery.h"
-#include "zypp/ResKind.h"
-#include "zypp/RepoInfo.h"
-#include "zypp/Capability.h"
+#include <zypp/PoolQuery.h>
+#include <zypp/ResKind.h>
+#include <zypp/RepoInfo.h>
+#include <zypp/Capability.h>
 
 class Zypper;
 

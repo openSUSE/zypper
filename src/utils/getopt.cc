@@ -1,7 +1,7 @@
 #include "getopt.h"
 #include "main.h"
 #include <iostream>
-#include "zypp/base/String.h"
+#include <zypp/base/String.h>
 #include "Zypper.h"
 
 using namespace std;

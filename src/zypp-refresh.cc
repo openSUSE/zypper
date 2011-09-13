@@ -11,18 +11,18 @@
 
 #include <iostream>
 
-#include "zypp/ZYppFactory.h"
-#include "zypp/base/LogControl.h"
-#include "zypp/base/Logger.h"
-#include "zypp/base/String.h"
+#include <zypp/ZYppFactory.h>
+#include <zypp/base/LogControl.h>
+#include <zypp/base/Logger.h>
+#include <zypp/base/String.h>
 
-#include "zypp/ZYppCallbacks.h"
-#include "zypp/Pathname.h"
-#include "zypp/KeyRing.h"
-#include "zypp/Digest.h"
+#include <zypp/ZYppCallbacks.h>
+#include <zypp/Pathname.h>
+#include <zypp/KeyRing.h>
+#include <zypp/Digest.h>
 
-#include "zypp/RepoManager.h"
-#include "zypp/PathInfo.h"
+#include <zypp/RepoManager.h>
+#include <zypp/PathInfo.h>
 
 #undef  ZYPP_BASE_LOGGER_LOGGROUP
 #define ZYPP_BASE_LOGGER_LOGGROUP "zypp-refresh"

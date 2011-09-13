@@ -15,9 +15,9 @@
 
 #include <string>
 
-#include "zypp/ZConfig.h"
-#include "zypp/Date.h"
-#include "zypp/PoolItem.h"
+#include <zypp/ZConfig.h>
+#include <zypp/Date.h>
+#include <zypp/PoolItem.h>
 
 #include "Command.h"
 #include "PackageArgs.h"

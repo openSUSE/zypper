@@ -2,12 +2,12 @@
 #include <sstream>
 #include <boost/format.hpp>
 
-#include "zypp/base/Logger.h"
-#include "zypp/ZYppFactory.h"
-#include "zypp/base/Algorithm.h"
-#include "zypp/PoolQuery.h"
+#include <zypp/base/Logger.h>
+#include <zypp/ZYppFactory.h>
+#include <zypp/base/Algorithm.h>
+#include <zypp/PoolQuery.h>
 
-#include "zypp/Patch.h"
+#include <zypp/Patch.h>
 
 #include "SolverRequester.h"
 #include "Table.h"

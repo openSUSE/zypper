@@ -3,9 +3,9 @@
 
 #include <string>
 
-#include "zypp/base/NonCopyable.h"
-#include "zypp/base/Exception.h"
-#include "zypp/Url.h"
+#include <zypp/base/NonCopyable.h>
+#include <zypp/base/Exception.h>
+#include <zypp/Url.h>
 
 #include "utils/prompt.h"
 

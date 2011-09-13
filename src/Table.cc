@@ -2,7 +2,7 @@
 #include <cstring>
 #include <cstdlib>
 
-#include "zypp/base/Logger.h"
+#include <zypp/base/Logger.h>
 
 #include "utils/console.h"
 #include "utils/text.h"

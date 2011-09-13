@@ -9,13 +9,14 @@
 
 #include <boost/format.hpp>
 
-#include "zypp/ZYpp.h"
-#include "zypp/base/Algorithm.h"
-#include "zypp/Package.h"
-#include "zypp/Patch.h"
-#include "zypp/Pattern.h"
-#include "zypp/Product.h"
-#include "zypp/PoolQuery.h"
+#include <zypp/base/LogTools.h>
+#include <zypp/base/Algorithm.h>
+#include <zypp/ZYpp.h>
+#include <zypp/Package.h>
+#include <zypp/Patch.h>
+#include <zypp/Pattern.h>
+#include <zypp/Product.h>
+#include <zypp/PoolQuery.h>
 
 #include "Zypper.h"
 #include "main.h"

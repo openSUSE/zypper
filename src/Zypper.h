@@ -11,15 +11,15 @@
 #include <string>
 #include <vector>
 
-#include "zypp/base/Exception.h"
-#include "zypp/base/NonCopyable.h"
-#include "zypp/base/PtrTypes.h"
-#include "zypp/TriBool.h"
+#include <zypp/base/Exception.h>
+#include <zypp/base/NonCopyable.h>
+#include <zypp/base/PtrTypes.h>
+#include <zypp/TriBool.h>
 
-#include "zypp/RepoInfo.h"
-#include "zypp/RepoManager.h" // for RepoManagerOptions
-#include "zypp/SrcPackage.h"
-#include "zypp/TmpPath.h"
+#include <zypp/RepoInfo.h>
+#include <zypp/RepoManager.h> // for RepoManagerOptions
+#include <zypp/SrcPackage.h>
+#include <zypp/TmpPath.h>
 
 #include "Config.h"
 #include "Command.h"

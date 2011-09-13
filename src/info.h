@@ -8,9 +8,9 @@
 #ifndef ZYPPERINFO_H_
 #define ZYPPERINFO_H_
 
-#include "zypp/PoolItem.h"
-#include "zypp/ResKind.h"
-#include "zypp/ui/Selectable.h"
+#include <zypp/PoolItem.h>
+#include <zypp/ResKind.h>
+#include <zypp/ui/Selectable.h>
 
 #include "Zypper.h"
 

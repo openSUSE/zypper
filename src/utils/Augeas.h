@@ -15,8 +15,8 @@ extern "C"
   #include <augeas.h>
 }
 
-#include "zypp/base/NonCopyable.h"
-#include "zypp/TriBool.h"
+#include <zypp/base/NonCopyable.h>
+#include <zypp/TriBool.h>
 
 /**
  * Zypper's wrapper around Augeas.

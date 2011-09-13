@@ -1,4 +1,4 @@
-#include "zypp/PoolItem.h"
+#include <zypp/PoolItem.h>
 
 #include "Zypper.h"
 

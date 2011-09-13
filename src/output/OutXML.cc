@@ -2,8 +2,8 @@
 #include <sstream>
 #include <vector>
 
-#include "zypp/base/String.h"
-#include "zypp/base/String.h"
+#include <zypp/base/String.h>
+#include <zypp/base/String.h>
 
 #include "OutXML.h"
 #include "utils/misc.h"

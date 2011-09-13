@@ -9,14 +9,14 @@
 #include <sstream>
 #include <boost/format.hpp>
 
-#include "zypp/ZYppFactory.h"
-#include "zypp/base/Logger.h"
-#include "zypp/FileChecker.h"
-#include "zypp/base/InputStream.h"
-#include "zypp/base/IOStream.h"
+#include <zypp/ZYppFactory.h>
+#include <zypp/base/Logger.h>
+#include <zypp/FileChecker.h>
+#include <zypp/base/InputStream.h>
+#include <zypp/base/IOStream.h>
 
-#include "zypp/media/MediaException.h"
-#include "zypp/misc/CheckAccessDeleted.h"
+#include <zypp/media/MediaException.h>
+#include <zypp/misc/CheckAccessDeleted.h>
 
 #include "misc.h"              // confirm_licenses
 #include "repos.h"              // get_repo - used in dist_upgrade

@@ -16,7 +16,7 @@
 #include "utils/prompt.h"
 #include "utils/misc.h" // for is_changeable_media
 
-#include "zypp/media/MediaManager.h"
+#include <zypp/media/MediaManager.h>
 
 using namespace zypp;
 using namespace std;

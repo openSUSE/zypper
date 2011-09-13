@@ -2,8 +2,8 @@
 #include <signal.h>
 //#include <readline/readline.h>
 
-#include "zypp/base/LogTools.h"
-#include "zypp/base/LogControl.h"
+#include <zypp/base/LogTools.h>
+#include <zypp/base/LogControl.h>
 
 #include "main.h"
 #include "Zypper.h"

@@ -9,19 +9,19 @@
 #include <sstream>
 #include <boost/format.hpp>
 
-#include "zypp/ZYppFactory.h"
-#include "zypp/base/Logger.h"
+#include <zypp/ZYppFactory.h>
+#include <zypp/base/Logger.h>
 
-#include "zypp/SrcPackage.h"
-#include "zypp/Package.h"
-#include "zypp/Capabilities.h"
-#include "zypp/ui/Selectable.h"
+#include <zypp/SrcPackage.h>
+#include <zypp/Package.h>
+#include <zypp/Capabilities.h>
+#include <zypp/ui/Selectable.h>
 
 
-#include "zypp/RepoInfo.h"
+#include <zypp/RepoInfo.h>
 
-#include "zypp/PoolQuery.h"
-#include "zypp/PoolItemBest.h"
+#include <zypp/PoolQuery.h>
+#include <zypp/PoolItemBest.h>
 
 #include "Zypper.h"
 #include "main.h"

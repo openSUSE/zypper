@@ -14,10 +14,10 @@
 
 #include <boost/format.hpp>
 
-#include "zypp/base/Logger.h"
-#include "zypp/ZYppCallbacks.h"
-#include "zypp/Package.h"
-#include "zypp/Patch.h"
+#include <zypp/base/Logger.h>
+#include <zypp/ZYppCallbacks.h>
+#include <zypp/Package.h>
+#include <zypp/Patch.h>
 
 #include "Zypper.h"
 #include "output/prompt.h"

@@ -12,12 +12,12 @@
 #include <set>
 #include <list>
 
-#include "zypp/Url.h"
-#include "zypp/Pathname.h"
+#include <zypp/Url.h>
+#include <zypp/Pathname.h>
 
-#include "zypp/ResKind.h"
-#include "zypp/RepoInfo.h"
-#include "zypp/ZYppCommitPolicy.h"
+#include <zypp/ResKind.h>
+#include <zypp/RepoInfo.h>
+#include <zypp/ZYppCommitPolicy.h>
 
 class Zypper;
 

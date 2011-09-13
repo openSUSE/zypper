@@ -17,8 +17,8 @@
 
 #include <boost/format.hpp>
 
-#include "zypp/base/Logger.h"
-#include "zypp/base/String.h"
+#include <zypp/base/Logger.h>
+#include <zypp/base/String.h>
 
 #include "Zypper.h"
 #include "utils/colors.h"

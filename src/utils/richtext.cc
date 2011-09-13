@@ -3,8 +3,8 @@
 #include <vector>
 #include <string>
 
-#include "zypp/base/Logger.h"
-#include "zypp/base/String.h"
+#include <zypp/base/Logger.h>
+#include <zypp/base/String.h>
 
 using namespace std;
 

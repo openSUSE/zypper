@@ -11,10 +11,10 @@
 #include <sstream>
 #include <boost/format.hpp>
 
-#include "zypp/base/Logger.h"
-#include "zypp/ZYppCallbacks.h"
-#include "zypp/Pathname.h"
-#include "zypp/Url.h"
+#include <zypp/base/Logger.h>
+#include <zypp/ZYppCallbacks.h>
+#include <zypp/Pathname.h>
+#include <zypp/Url.h>
 
 #include "Zypper.h"
 #include "utils/prompt.h"

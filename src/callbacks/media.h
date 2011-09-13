@@ -11,10 +11,10 @@
 #include <stdlib.h>
 #include <ctime>
 
-#include "zypp/ZYppCallbacks.h"
-#include "zypp/base/Logger.h"
-#include "zypp/Pathname.h"
-#include "zypp/Url.h"
+#include <zypp/ZYppCallbacks.h>
+#include <zypp/base/Logger.h>
+#include <zypp/Pathname.h>
+#include <zypp/Url.h>
 
 #include "Zypper.h"
 
