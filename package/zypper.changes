@@ -1,4 +1,9 @@
 -------------------------------------------------------------------
+Thu Sep 15 01:13:38 CEST 2011 - ma@suse.de
+
+- Update zypper-po.tar.bz2
+
+-------------------------------------------------------------------
 Tue Sep 13 12:55:18 CEST 2011 - ma@suse.de
 
 - Fix 'zypper info's report of package support status (bnc#651614)
