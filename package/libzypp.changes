@@ -1,4 +1,10 @@
 -------------------------------------------------------------------
+Tue Sep 20 09:57:04 CEST 2011 - ma@suse.de
+
+- Bump major version for Factory; 9.x is continued on SLE-11-SP2-Branch
+- version 10.0.0 (0)
+
+-------------------------------------------------------------------
 Tue Sep 13 10:51:53 CEST 2011 - ma@suse.de
 
 - Enhance Selectable API
