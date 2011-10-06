@@ -37,7 +37,7 @@ namespace zypp
     ///////////////////////////////////////////////////////////////////
     // ProfilingFormater
     ///////////////////////////////////////////////////////////////////
-    
+
     std::string ProfilingFormater::format( const std::string & group_r,
                                                   logger::LogLevel    level_r,
                                                   const char *        file_r,
@@ -45,11 +45,10 @@ namespace zypp
                                                   int                 line_r,
                                                   const std::string & message_r )
     {
-       struct timeval tp;
-       int rtn;
-       rtn = gettimeofday( &tp, NULL);
-       
-        return str::form( "%ld.%ld [%d] <%d> %s(%s):%d %s",
+      struct timeval tp;
+      gettimeofday( &tp, NULL);
+
+      return str::form( "%ld.%ld [%d] <%d> %s(%s):%d %s",
                         tp.tv_sec,
                         tp.tv_usec,
                         level_r,

@@ -44,7 +44,7 @@ BuildRequires:  hal-devel
 BuildRequires:  boost-devel
 BuildRequires:  dejagnu
 BuildRequires:  doxygen
-BuildRequires:  gcc-c++
+BuildRequires:  gcc-c++ >= 4.5
 BuildRequires:  gettext-devel
 BuildRequires:  graphviz
 BuildRequires:  libxml2-devel

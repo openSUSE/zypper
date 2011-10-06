@@ -96,17 +96,18 @@ ProblemSolution::apply (solver::detail::Resolver & resolver)
 	solver::detail::SolutionAction_constPtr action = *iter;
 	if (! action->execute (resolver))
 	{
+	    WAR << "apply solution action failed: " << action << endl;
 	    ret = false;
 	    break;
 	}
     }
-    return true;
+    return ret;
 }
 
 
 /**
  * Add an action to the actions list.
- **/ 
+ **/
 void
 ProblemSolution::addAction (solver::detail::SolutionAction_constPtr action)
 {

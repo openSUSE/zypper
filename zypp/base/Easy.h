@@ -21,7 +21,7 @@
  *  }
  * \endcode
 */
-#define for_(IT,BEG,END) for ( typeof(BEG) IT = BEG, _for_end = END; IT != _for_end; ++IT )
+#define for_(IT,BEG,END) for ( auto IT = BEG, _for_end = END; IT != _for_end; ++IT )
 #define for_each_(IT,CONT) for_( IT, CONT.begin(), CONT.end() )
 
 /** Simple C-array iterator

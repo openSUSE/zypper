@@ -914,9 +914,9 @@ std::list<FileInfo> RpmHeader::tag_fileinfos() const
                         md5sums[i],
                         uid,
                         gid,
-                        filemodes[i],
+                        mode_t(filemodes[i]),
                         filemtimes[i],
-                        fileflags[i] & RPMFILE_GHOST,
+                        bool(fileflags[i] & RPMFILE_GHOST),
                         filelinks[i]
                       };
 
