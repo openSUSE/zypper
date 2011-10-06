@@ -1,0 +1,26 @@
+/**
+
+\page thread Libzypp and threads
+
+\author Michael Andres <ma@suse.de>
+
+\section thread_intro Libzypp and threads
+
+Libzypp is \b not thread safe.
+
+Before we can think about using threads in libzypp, or even libzypp in threads, a bunch of components have to be fixed.
+
+\li \c Logging as one one of the core components has to become threadsafe.
+
+\li \c SmartPointer as one of the core patterns implementing resource control need to become threadsafe
+
+\li \c ...more
+
+
+\subsection thread_loggin Logging in threads
+
+\see http://accu.org/index.php/journals/1539, http://www.pantheios.org/
+
+Need to estimate performance impact when making the current zypp::log implementation threadsafe. Current implementation is based on STL streams with a custom linebuffer.
+
+*/

@@ -15,7 +15,7 @@ ELSE ( NOT QT_FOUND )
   #)
 ENDIF( NOT QT_FOUND )
 
-SET(THREAD_LIBRARY boost_thread-mt)
+SET(THREAD_LIBRARY boost_thread)
 
 ## ############################################################
 
@@ -35,7 +35,7 @@ FOREACH( loop_var ${APLLPROG} )
    TARGET_LINK_LIBRARIES( ${loop_var}
     boost_signals
     zypp
-    #{THREAD_LIBRARY}
+    ${THREAD_LIBRARY}
    )
 ENDFOREACH( loop_var )
 

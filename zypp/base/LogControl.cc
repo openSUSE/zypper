@@ -145,6 +145,8 @@ namespace zypp
         /** */
         virtual int writeout( const char* s, std::streamsize n )
         {
+	  //logger::putStream( _group, _level, _file, _func, _line, _buffer );
+	  //return n;
           if ( s && n )
             {
               const char * c = s;
