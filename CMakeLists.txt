@@ -64,6 +64,8 @@ MACRO(ADD_TESTS)
 ENDMACRO(ADD_TESTS)
 
 ####################################################################
+# prefer packages using the same install prefix as we do
+SET(CMAKE_PREFIX_PATH ${CMAKE_INSTALL_PREFIX} usr/localX /usr/local /usr)
 
 FIND_PACKAGE(Rpm REQUIRED)
 IF ( NOT RPM_FOUND)
@@ -120,14 +122,15 @@ ELSE ( NOT ZLIB_FOUND)
   INCLUDE_DIRECTORIES(${ZLIB_INCLUDE_DIR})
 ENDIF( NOT ZLIB_FOUND)
 
-FIND_PACKAGE(Satsolver REQUIRED)
-IF ( NOT SATSOLVER_FOUND )
-  MESSAGE( FATAL_ERROR " libsatsolver not found" )
-ELSE ( NOT SATSOLVER_FOUND )
-  INCLUDE_DIRECTORIES( ${SATSOLVER_INCLUDE_DIR} )
-ENDIF( NOT SATSOLVER_FOUND )
+#SET(LibSolv_USE_STATIC_LIBS ON)
+FIND_PACKAGE(LibSolv REQUIRED ext)
+IF ( NOT LibSolv_FOUND )
+  MESSAGE( FATAL_ERROR " libsolv not found" )
+ELSE()
+  INCLUDE_DIRECTORIES( ${LibSolv_INCLUDE_DIRS} )
+ENDIF()
 
-# satsolver uses expat and has open references to it:
+# libsolv uses expat and has open references to it:
 FIND_PACKAGE(EXPAT REQUIRED)
 
 FIND_PACKAGE(OpenSSL REQUIRED)

@@ -50,11 +50,11 @@ BuildRequires:  graphviz
 BuildRequires:  libxml2-devel
 BuildRequires:  libproxy-devel
 
-BuildRequires:  libsatsolver-devel >= 0.14.17
+BuildRequires:  libsolv-devel
 %if 0%{?suse_version} >= 1100
-%requires_eq    satsolver-tools
+%requires_eq    libsolv-tools
 %else
-Requires:       satsolver-tools
+Requires:       libsolv-tools
 %endif
 
 # required for testsuite, webrick
@@ -95,7 +95,6 @@ Requires:       gpg2
 Requires:       gnupg2
 %endif
 
-%define min_aria_version 1.1.2
 # ---------------------------------------------------------------
 %if 0%{?suse_version} >= 1110
 # (almost) common codebase, but on SLES11-SP1 (according to Rudi
@@ -169,9 +168,9 @@ Requires:  curl-devel
 Requires:  libcurl-devel >= %{min_curl_version}
 %endif
 %if 0%{?suse_version} >= 1100
-%requires_ge    libsatsolver-devel
+%requires_ge    libsolv-devel
 %else
-Requires:       libsatsolver-devel
+Requires:       libsolv-devel
 %endif
 Summary:        Package, Patch, Pattern, and Product Management - developers files
 Group:          System/Packages
