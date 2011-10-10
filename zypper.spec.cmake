@@ -16,7 +16,7 @@ BuildRequires:  boost-devel >= 1.33.1
 BuildRequires:  gettext-devel >= 0.15
 BuildRequires:  readline-devel >= 5.1
 BuildRequires:  augeas-devel >= 0.5.0
-BuildRequires:  gcc-c++ >= 4.1
+BuildRequires:  gcc-c++ >= 4.5
 BuildRequires:  cmake >= 2.4.6
 Requires:       procps
 %if 0%{?suse_version}

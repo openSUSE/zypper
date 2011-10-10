@@ -509,7 +509,6 @@ static void show_update_messages(Zypper & zypper, const UpdateNotifications & me
 void solve_and_commit (Zypper & zypper)
 {
   bool need_another_solver_run = true;
-  bool commit_done = false;
   do
   {
     // CALL SOLVER
@@ -757,7 +756,6 @@ void solve_and_commit (Zypper & zypper)
           zypper.out().info(s.str(), Out::HIGH);
 
           ZYppCommitResult result = God->commit(get_commit_policy(zypper));
-          commit_done = true;
 
           MIL << endl << "DONE" << endl;
 
