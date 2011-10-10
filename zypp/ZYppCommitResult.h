@@ -66,6 +66,7 @@ namespace zypp
 
     public:
       ZYppCommitResult();
+      ZYppCommitResult( const ZYppCommitResult & lhs_r );
       ZYppCommitResult( const Pathname & root_r );
       ~ZYppCommitResult();
 
