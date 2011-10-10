@@ -29,12 +29,11 @@ using namespace zypp::base;
 BOOST_AUTO_TEST_CASE(WaitForTheOther)
 {
     int r = 0;
-    int status = 0;
-    { 
+    {
         MIL << "ready to fork" << endl;
-    
+
         r = fork();
-  
+
         if ( r < 0 )
         {
             BOOST_ERROR("Can't fork process");
@@ -52,10 +51,8 @@ BOOST_AUTO_TEST_CASE(WaitForTheOther)
             InterProcessMutex mutex(InterProcessMutex::Options(InterProcessMutex::Writer,"testcase"));
             // parent
             sleep(6);
-        }        
+        }
     }
-    //if ( r > 0 )
-    //    waitpid(r, &status, 0);
 }
 
 

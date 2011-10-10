@@ -89,7 +89,6 @@ int main( int argc, char * argv[] )
 
   ///////////////////////////////////////////////////////////////////
 
-  const std::vector<std::string> & keyFiles( vm["key-file"].as< std::vector<std::string> >() );
   for_each_( it, vm["key-file"].as< std::vector<std::string> >() )
   {
     cout << "=== " << PathInfo(*it) << endl;

@@ -30,12 +30,11 @@ using namespace zypp::base;
 BOOST_AUTO_TEST_CASE(Abort)
 {
     int r = 0;
-    int status = 0;
-    { 
+    {
         MIL << "ready to fork" << endl;
-    
+
         r = fork();
-  
+
         if ( r < 0 )
         {
             BOOST_ERROR("Can't fork process");
@@ -57,11 +56,9 @@ BOOST_AUTO_TEST_CASE(Abort)
             sleep(6);
             wait(NULL);
             MIL << "first lock will go out of scope" << endl;
-            
-        }        
+
+        }
     }
-    //if ( r > 0 )
-        
 }
 
 

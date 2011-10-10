@@ -67,6 +67,7 @@ namespace zypp
     public:
       ZYppCommitResult();
       ZYppCommitResult( const Pathname & root_r );
+      ~ZYppCommitResult();
 
     public:
       /** Remembered root directory of the target.

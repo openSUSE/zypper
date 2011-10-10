@@ -57,6 +57,9 @@ namespace zypp
   : _result(0), _pimpl( new Impl )
   { _pimpl->_root = root_r; }
 
+  ZYppCommitResult::~ZYppCommitResult()
+  {}
+
   const Pathname & ZYppCommitResult::root() const
   { return _pimpl->_root; }
 

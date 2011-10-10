@@ -704,9 +704,9 @@ BOOST_AUTO_TEST_CASE(pool_query_equal)
     v.push_back( q );
   }
 
-  for_( li, 0U, v.size() )
+  for_( li, 0LU, v.size() )
   {
-    for_( ri, 0U, v.size() )
+    for_( ri, 0LU, v.size() )
     {
       COUT << li << " <> " << ri << endl;
       bool equal( v[li] == v[ri] );

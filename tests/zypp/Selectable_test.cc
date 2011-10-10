@@ -264,7 +264,7 @@ struct StatusCombination
   }
   bool next()
   {
-    for_( i, 0U, _items.size() )
+    for_( i, 0LU, _items.size() )
     {
       switch ( _items[i].status().getTransactValue() )
       {

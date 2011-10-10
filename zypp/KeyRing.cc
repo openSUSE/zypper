@@ -549,12 +549,8 @@ namespace zypp
       NULL
     };
 
-    int code;
     ExternalProgram prog(argv,ExternalProgram::Discard_Stderr, false, -1, true);
-    code = prog.close();
-
-    //if ( code != 0 )
-    //  ZYPP_THROW(Exception("failed to import key"));
+    prog.close();
   }
 
   void KeyRing::Impl::deleteKey( const string &id, const Pathname &keyring )
