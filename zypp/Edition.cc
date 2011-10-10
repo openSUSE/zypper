@@ -120,14 +120,14 @@ namespace zypp
   int Edition::_doCompare( const char * lhs,  const char * rhs )
   {
     if ( lhs == rhs ) return 0;
-    if ( lhs && rhs ) return ::evrcmp_str( myPool().getPool(), lhs, rhs, EVRCMP_COMPARE );
+    if ( lhs && rhs ) return ::pool_evrcmp_str( myPool().getPool(), lhs, rhs, EVRCMP_COMPARE );
     return( lhs ? 1 : -1 );
   }
 
   int Edition::_doMatch( const char * lhs,  const char * rhs )
   {
     if ( lhs == rhs ) return 0;
-    if ( lhs && rhs ) return ::evrcmp_str( myPool().getPool(), lhs, rhs, EVRCMP_MATCH );
+    if ( lhs && rhs ) return ::pool_evrcmp_str( myPool().getPool(), lhs, rhs, EVRCMP_MATCH );
     return( lhs ? 1 : -1 );
   }
 

@@ -166,7 +166,11 @@ sat::Transaction SATResolver::getTransaction()
 {
   if ( !_solv )
     return sat::Transaction();
-  return sat::Transaction( _solv->trans );
+
+  ::Transaction * sattrans = ::solver_create_transaction( _solv );
+  sat::Transaction ret ( *sattrans );
+  ::transaction_free( sattrans );
+  return ret;
 }
 
 ResPool
@@ -703,7 +707,7 @@ SATResolver::resolvePool(const CapabilitySet & requires_caps,
 	    ERR << "Install: " << *iter << " not found" << endl;
 	} else {
 	    MIL << "Install " << *iter << endl;
-	    queue_push( &(_jobQueue), SOLVER_INSTALL_SOLVABLE );
+	    queue_push( &(_jobQueue), SOLVER_INSTALL | SOLVER_SOLVABLE );
 	    queue_push( &(_jobQueue), id );
 	}
     }
@@ -714,7 +718,7 @@ SATResolver::resolvePool(const CapabilitySet & requires_caps,
 	    ERR << "Delete: " << *iter << " not found" << endl;
 	} else {
 	    MIL << "Delete " << *iter << endl;
-	    queue_push( &(_jobQueue), SOLVER_ERASE_SOLVABLE | MAYBE_CLEANDEPS );
+	    queue_push( &(_jobQueue), SOLVER_ERASE | SOLVER_SOLVABLE | MAYBE_CLEANDEPS );
 	    queue_push( &(_jobQueue), id);
 	}
     }
@@ -773,7 +777,7 @@ SATResolver::resolveQueue(const SolverQueueItemList &requestQueue,
 	    ERR << "Install: " << *iter << " not found" << endl;
 	} else {
 	    MIL << "Install " << *iter << endl;
-	    queue_push( &(_jobQueue), SOLVER_INSTALL_SOLVABLE );
+	    queue_push( &(_jobQueue), SOLVER_INSTALL | SOLVER_SOLVABLE );
 	    queue_push( &(_jobQueue), id );
 	}
     }
@@ -971,7 +975,7 @@ string SATResolver::SATprobleminfoString(Id problem, string &detail, Id &ignoreI
 	  ret = _("some dependency problem");
 	  break;
       case SOLVER_RULE_JOB_NOTHING_PROVIDES_DEP:
-	  ret = str::form (_("nothing provides requested %s"), dep2str(pool, dep));
+	  ret = str::form (_("nothing provides requested %s"), pool_dep2str(pool, dep));
 	  detail += _("Have you enabled all requested repositories?");
 	  break;
       case SOLVER_RULE_RPM_NOT_INSTALLABLE:
@@ -981,7 +985,7 @@ string SATResolver::SATprobleminfoString(Id problem, string &detail, Id &ignoreI
       case SOLVER_RULE_RPM_NOTHING_PROVIDES_DEP:
 	  ignoreId = source; // for setting weak dependencies
 	  s = mapSolvable (source);
-	  ret = str::form (_("nothing provides %s needed by %s"), dep2str(pool, dep), s.asString().c_str());
+	  ret = str::form (_("nothing provides %s needed by %s"), pool_dep2str(pool, dep), s.asString().c_str());
 	  break;
       case SOLVER_RULE_RPM_SAME_NAME:
 	  s = mapSolvable (source);
@@ -991,21 +995,21 @@ string SATResolver::SATprobleminfoString(Id problem, string &detail, Id &ignoreI
       case SOLVER_RULE_RPM_PACKAGE_CONFLICT:
 	  s = mapSolvable (source);
 	  s2 = mapSolvable (target);
-	  ret = str::form (_("%s conflicts with %s provided by %s"), s.asString().c_str(), dep2str(pool, dep), s2.asString().c_str());
+	  ret = str::form (_("%s conflicts with %s provided by %s"), s.asString().c_str(), pool_dep2str(pool, dep), s2.asString().c_str());
 	  break;
       case SOLVER_RULE_RPM_PACKAGE_OBSOLETES:
 	  s = mapSolvable (source);
 	  s2 = mapSolvable (target);
-	  ret = str::form (_("%s obsoletes %s provided by %s"), s.asString().c_str(), dep2str(pool, dep), s2.asString().c_str());
+	  ret = str::form (_("%s obsoletes %s provided by %s"), s.asString().c_str(), pool_dep2str(pool, dep), s2.asString().c_str());
 	  break;
       case SOLVER_RULE_RPM_INSTALLEDPKG_OBSOLETES:
 	  s = mapSolvable (source);
 	  s2 = mapSolvable (target);
-	  ret = str::form (_("installed %s obsoletes %s provided by %s"), s.asString().c_str(), dep2str(pool, dep), s2.asString().c_str());
+	  ret = str::form (_("installed %s obsoletes %s provided by %s"), s.asString().c_str(), pool_dep2str(pool, dep), s2.asString().c_str());
 	  break;
       case SOLVER_RULE_RPM_SELF_CONFLICT:
 	  s = mapSolvable (source);
-	  ret = str::form (_("solvable %s conflicts with %s provided by itself"), s.asString().c_str(), dep2str(pool, dep));
+	  ret = str::form (_("solvable %s conflicts with %s provided by itself"), s.asString().c_str(), pool_dep2str(pool, dep));
           break;
       case SOLVER_RULE_RPM_PACKAGE_REQUIRES:
 	  ignoreId = source; // for setting weak dependencies
@@ -1037,7 +1041,7 @@ string SATResolver::SATprobleminfoString(Id problem, string &detail, Id &ignoreI
 	      }
 	  }
 
-	  ret = str::form (_("%s requires %s, but this requirement cannot be provided"), s.asString().c_str(), dep2str(pool, dep));
+	  ret = str::form (_("%s requires %s, but this requirement cannot be provided"), s.asString().c_str(), pool_dep2str(pool, dep));
 	  if (providerlistInstalled.size() > 0) {
 	      detail += _("deleted providers: ");
 	      for (ProviderList::const_iterator iter = providerlistInstalled.begin(); iter != providerlistInstalled.end(); iter++) {
@@ -1186,11 +1190,11 @@ SATResolver::problems ()
 				    resolverProblem->setDetails( resolverProblem->description() + "\n" + resolverProblem->details() );
 				    resolverProblem->setDescription(_("This request will break your system!"));
 				    description = _("ignore the warning of a broken system");
-                                    description += string(" (requires:")+dep2str(pool, what)+")";
+                                    description += string(" (requires:")+pool_dep2str(pool, what)+")";
                                     MIL << description << endl;
                                     problemSolution->addFrontDescription (description);
 				} else {
-				    description = str::form (_("do not ask to install a solvable providing %s"), dep2str(pool, what));
+				    description = str::form (_("do not ask to install a solvable providing %s"), pool_dep2str(pool, what));
                                     MIL << description << endl;
                                     problemSolution->addDescription (description);
 				}
@@ -1207,12 +1211,12 @@ SATResolver::problems ()
 				    resolverProblem->setDetails( resolverProblem->description() + "\n" + resolverProblem->details() );
 				    resolverProblem->setDescription(_("This request will break your system!"));
 				    description = _("ignore the warning of a broken system");
-                                    description += string(" (conflicts:")+dep2str(pool, what)+")";
+                                    description += string(" (conflicts:")+pool_dep2str(pool, what)+")";
                                     MIL << description << endl;
                                     problemSolution->addFrontDescription (description);
 
 				} else {
-				    description = str::form (_("do not ask to delete all solvables providing %s"), dep2str(pool, what));
+				    description = str::form (_("do not ask to delete all solvables providing %s"), pool_dep2str(pool, what));
                                     MIL << description << endl;
                                     problemSolution->addDescription (description);
 				}
@@ -1296,7 +1300,7 @@ SATResolver::problems ()
 			    if (itemFrom && itemTo) {
 				problemSolution->addSingleAction (itemTo, INSTALL);
 
-				if (evrcmp(pool, s.get()->evr, sd.get()->evr, EVRCMP_COMPARE ) > 0)
+				if (pool_evrcmp(pool, s.get()->evr, sd.get()->evr, EVRCMP_COMPARE ) > 0)
 				{
 				    string description = str::form (_("downgrade of %s to %s"), s.asString().c_str(), sd.asString().c_str());
 				    MIL << description << endl;
@@ -1384,11 +1388,11 @@ void SATResolver::setLocks()
         sat::detail::SolvableIdType ident( (*iter)->satSolvable().id() );
 	if (iter->status().isInstalled()) {
 	    MIL << "Lock installed item " << *iter << endl;
-	    queue_push( &(_jobQueue), SOLVER_INSTALL_SOLVABLE );
+	    queue_push( &(_jobQueue), SOLVER_INSTALL | SOLVER_SOLVABLE );
 	    queue_push( &(_jobQueue), ident );
 	} else {
 	    MIL << "Lock NOT installed item " << *iter << endl;
-	    queue_push( &(_jobQueue), SOLVER_ERASE_SOLVABLE | MAYBE_CLEANDEPS );
+	    queue_push( &(_jobQueue), SOLVER_ERASE | SOLVER_SOLVABLE | MAYBE_CLEANDEPS );
 	    queue_push( &(_jobQueue), ident );
 	}
     }
@@ -1397,11 +1401,11 @@ void SATResolver::setLocks()
         sat::detail::SolvableIdType ident( (*iter)->satSolvable().id() );
 	if (iter->status().isInstalled()) {
 	    MIL << "Keep installed item " << *iter << endl;
-	    queue_push( &(_jobQueue), SOLVER_INSTALL_SOLVABLE | SOLVER_WEAK);
+	    queue_push( &(_jobQueue), SOLVER_INSTALL | SOLVER_SOLVABLE | SOLVER_WEAK);
 	    queue_push( &(_jobQueue), ident );
 	} else {
 	    MIL << "Keep NOT installed item " << *iter << ident << endl;
-	    queue_push( &(_jobQueue), SOLVER_ERASE_SOLVABLE | SOLVER_WEAK | MAYBE_CLEANDEPS );
+	    queue_push( &(_jobQueue), SOLVER_ERASE | SOLVER_SOLVABLE | SOLVER_WEAK | MAYBE_CLEANDEPS );
 	    queue_push( &(_jobQueue), ident );
 	}
     }

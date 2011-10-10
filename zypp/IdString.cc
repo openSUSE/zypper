@@ -29,18 +29,18 @@ namespace zypp
   /////////////////////////////////////////////////////////////////
 
   IdString::IdString( const char * str_r )
-  : _id( ::str2id( myPool().getPool(), str_r, /*create*/true ) )
+  : _id( ::pool_str2id( myPool().getPool(), str_r, /*create*/true ) )
   {}
 
   IdString::IdString( const std::string & str_r )
-  : _id( ::str2id( myPool().getPool(), str_r.c_str(), /*create*/true ) )
+  : _id( ::pool_str2id( myPool().getPool(), str_r.c_str(), /*create*/true ) )
   {}
 
   unsigned IdString::size() const
   { return ::strlen( c_str() ); }
 
   const char * IdString::c_str() const
-  { return _id ? ::id2str( myPool().getPool(), _id ) : ""; }
+  { return _id ? ::pool_id2str( myPool().getPool(), _id ) : ""; }
 
   int IdString::compare( const IdString & rhs ) const
   {

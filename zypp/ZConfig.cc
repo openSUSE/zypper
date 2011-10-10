@@ -13,7 +13,7 @@ extern "C"
 {
 #include <sys/utsname.h>
 #include <unistd.h>
-#include <solv/satversion.h>
+#include <solv/solvversion.h>
 }
 #include <iostream>
 #include <fstream>
@@ -834,8 +834,8 @@ namespace zypp
   {
     str << "libzypp: " << VERSION << " built " << __DATE__ << " " <<  __TIME__ << endl;
 
-    str << "libsolv: " << sat_version;
-    if ( ::strcmp( sat_version, LIBSOLV_VERSION_STRING ) )
+    str << "libsolv: " << solv_version;
+    if ( ::strcmp( solv_version, LIBSOLV_VERSION_STRING ) )
       str << " (built against " << LIBSOLV_VERSION_STRING << ")";
     str << endl;
 

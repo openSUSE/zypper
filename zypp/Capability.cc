@@ -149,19 +149,19 @@ namespace zypp
       {
         // map 'kind srcpackage' to 'arch src', the pseudo architecture
         // libsolv uses.
-        nid = ::rel2id( pool_r, nid, IdString(ARCH_SRC).id(), REL_ARCH, /*create*/true );
+        nid = ::pool_rel2id( pool_r, nid, IdString(ARCH_SRC).id(), REL_ARCH, /*create*/true );
       }
 
       // Extend name by architecture, if provided and not a srcpackage
       if ( ! arch_r.empty() && kind_r != ResKind::srcpackage )
       {
-        nid = ::rel2id( pool_r, nid, arch_r.id(), REL_ARCH, /*create*/true );
+        nid = ::pool_rel2id( pool_r, nid, arch_r.id(), REL_ARCH, /*create*/true );
       }
 
       // Extend 'op edition', if provided
       if ( op_r != Rel::ANY && ed_r != Edition::noedition )
       {
-        nid = ::rel2id( pool_r, nid, ed_r.id(), op_r.bits(), /*create*/true );
+        nid = ::pool_rel2id( pool_r, nid, ed_r.id(), op_r.bits(), /*create*/true );
       }
 
       return nid;
@@ -300,7 +300,7 @@ namespace zypp
   {}
 
   const char * Capability::c_str() const
-  { return( _id ? ::dep2str( myPool().getPool(), _id ) : "" ); }
+  { return( _id ? ::pool_dep2str( myPool().getPool(), _id ) : "" ); }
 
   CapMatch Capability::_doMatch( sat::detail::IdType lhs,  sat::detail::IdType rhs )
   {

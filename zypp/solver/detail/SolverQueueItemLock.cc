@@ -77,15 +77,15 @@ bool SolverQueueItemLock::addRule (_Queue & q)
     MIL << "Lock " << _item << " with the SAT-Pool ID: " << id << endl;
     if (_item.status().isInstalled()) {
 	if (_soft) {
-	    queue_push( &(q), SOLVER_INSTALL_SOLVABLE | SOLVER_WEAK );
+	    queue_push( &(q), SOLVER_INSTALL | SOLVER_SOLVABLE | SOLVER_WEAK );
 	} else {
-	    queue_push( &(q), SOLVER_INSTALL_SOLVABLE );
+	    queue_push( &(q), SOLVER_INSTALL | SOLVER_SOLVABLE );
 	}
     } else {
 	if (_soft) {
-	    queue_push( &(q), SOLVER_ERASE_SOLVABLE | SOLVER_WEAK );
+	    queue_push( &(q), SOLVER_ERASE | SOLVER_SOLVABLE | SOLVER_WEAK );
 	} else {
-	    queue_push( &(q), SOLVER_ERASE_SOLVABLE );
+	    queue_push( &(q), SOLVER_ERASE | SOLVER_SOLVABLE );
 	}
     }
     queue_push( &(q), id );

@@ -44,6 +44,7 @@ namespace zypp
      *
      */
     struct Transaction::Impl : protected detail::PoolMember
+			     , private base::NonCopyable
     {
       friend std::ostream & operator<<( std::ostream & str, const Impl & obj );
 
@@ -69,14 +70,13 @@ namespace zypp
 
       public:
 	Impl()
-	{ memset( &_trans, 0, sizeof(_trans) ); }
+	  : _trans( ::transaction_create( nullptr ) )
+	{ memset( _trans, 0, sizeof(_trans) ); }
 
 	Impl( ::_Transaction & trans_r )
 	  : _watcher( myPool().serial() )
+	  , _trans( nullptr )
 	{
-	  memset( &_trans, 0, sizeof(_trans) );
-	  ::transaction_init( &_trans, myPool().getPool() );
-
 	  Queue decisionq;
 	  for_( it, ResPool::instance().begin(), ResPool::instance().end() )
 	  {
@@ -87,13 +87,13 @@ namespace zypp
 	  }
 	  if ( trans_r.noobsmap.size )
 	    ::map_grow( &trans_r.noobsmap, myPool()->nsolvables );
-	  ::transaction_calculate( &_trans, decisionq, &trans_r.noobsmap );
+	  _trans = ::transaction_create_decisionq( myPool().getPool(), decisionq, &trans_r.noobsmap );
 
 	  // NOTE: package/product buddies share the same ResStatus
 	  // so we also link the buddies stepStages. This assumes
 	  // only one buddy is acting during commit (package is installed,
 	  // but no extra operation for the product).
-	  for_( it, _trans.steps.elements, _trans.steps.elements + _trans.steps.count )
+	  for_( it, _trans->steps.elements, _trans->steps.elements + _trans->steps.count )
 	  {
 	    sat::Solvable solv( *it );
 	    // buddy list:
@@ -119,7 +119,7 @@ namespace zypp
 	}
 
 	~Impl()
-	{ ::transaction_free( &_trans ); }
+	{ ::transaction_free( _trans ); }
 
       public:
 	bool valid() const
@@ -135,13 +135,13 @@ namespace zypp
 	  // This is hwo we could implement out own order method.
 	  // As ::transaction already groups by MediaNr, we don't
 	  // need it for ORDER_BY_MEDIANR.
-	  ::transaction_order( &_trans, SOLVER_TRANSACTION_KEEP_ORDERDATA );
+	  ::transaction_order( _trans, SOLVER_TRANSACTION_KEEP_ORDERDATA );
 	  detail::IdType chosen = 0;
 	  Queue choices;
 
 	  while ( true )
 	  {
-	    int ret = transaction_order_add_choices( &_trans, chosen, choices );
+	    int ret = transaction_order_add_choices( _trans, chosen, choices );
 	    MIL << ret << ": " << chosen << ": " << choices << endl;
 	    chosen = choices.pop_front(); // pick one out of choices
 	    if ( ! chosen )
@@ -151,27 +151,27 @@ namespace zypp
 #endif
 	  if ( !_ordered )
 	  {
-	    ::transaction_order( &_trans, 0 );
+	    ::transaction_order( _trans, 0 );
 	    _ordered = true;
 	  }
 	  return true;
 	}
 
 	bool empty() const
-	{ return( _trans.steps.count == 0 ); }
+	{ return( _trans->steps.count == 0 ); }
 
 	size_t size() const
-	{ return _trans.steps.count; }
+	{ return _trans->steps.count; }
 
 	const_iterator begin( const RW_pointer<Transaction::Impl> & self_r ) const
-	{ return const_iterator( self_r, _trans.steps.elements ); }
+	{ return const_iterator( self_r, _trans->steps.elements ); }
 	iterator begin( const RW_pointer<Transaction::Impl> & self_r )
-	{ return iterator( self_r, _trans.steps.elements ); }
+	{ return iterator( self_r, _trans->steps.elements ); }
 
 	const_iterator end( const RW_pointer<Transaction::Impl> & self_r ) const
-	{ return const_iterator( self_r, _trans.steps.elements + _trans.steps.count ); }
+	{ return const_iterator( self_r, _trans->steps.elements + _trans->steps.count ); }
 	iterator end( const RW_pointer<Transaction::Impl> & self_r )
-	{ return iterator( self_r, _trans.steps.elements + _trans.steps.count ); }
+	{ return iterator( self_r, _trans->steps.elements + _trans->steps.count ); }
 
 	const_iterator find(const RW_pointer<Transaction::Impl> & self_r, const sat::Solvable & solv_r ) const
 	{ detail::IdType * it( _find( solv_r ) ); return it ? const_iterator( self_r, it ) : end( self_r ); }
@@ -187,7 +187,7 @@ namespace zypp
 	    return isIn( _systemErase, solv_r.id() ) ? TRANSACTION_ERASE : TRANSACTION_IGNORE;
 	  }
 
-	  switch( ::transaction_type( &_trans, solv_r.id(), SOLVER_TRANSACTION_RPM_ONLY ) )
+	  switch( ::transaction_type( _trans, solv_r.id(), SOLVER_TRANSACTION_RPM_ONLY ) )
 	  {
 	    case SOLVER_TRANSACTION_ERASE: return TRANSACTION_ERASE; break;
 	    case SOLVER_TRANSACTION_INSTALL: return TRANSACTION_INSTALL; break;
@@ -248,9 +248,9 @@ namespace zypp
       private:
 	detail::IdType * _find( const sat::Solvable & solv_r ) const
 	{
-	  if ( solv_r && _trans.steps.elements )
+	  if ( solv_r && _trans->steps.elements )
 	  {
-	    for_( it, _trans.steps.elements, _trans.steps.elements + _trans.steps.count )
+	    for_( it, _trans->steps.elements, _trans->steps.elements + _trans->steps.count )
 	    {
 	      if ( *it == detail::IdType(solv_r.id()) )
 		return it;
@@ -261,7 +261,7 @@ namespace zypp
 
      private:
 	SerialNumberWatcher _watcher;
-	mutable ::Transaction _trans;
+	mutable ::Transaction * _trans;
 	DefaultIntegral<bool,false> _ordered;
 	//
 	set_type	_doneSet;

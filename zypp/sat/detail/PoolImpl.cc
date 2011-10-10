@@ -93,9 +93,9 @@ namespace zypp
 
       static void logSat( struct _Pool *, void *data, int type, const char *logString )
       {
-	  if ( type & (SAT_FATAL|SAT_ERROR) ) {
+	  if ( type & (SOLV_FATAL|SOLV_ERROR) ) {
 	    _ERR("libsolv") << logString;
-	  } else if ( type & SAT_DEBUG_STATS ) {
+	  } else if ( type & SOLV_DEBUG_STATS ) {
 	    _DBG("libsolv") << logString;
 	  } else {
 	    _MIL("libsolv") << logString;
@@ -181,12 +181,12 @@ namespace zypp
           ZYPP_THROW( Exception( _("Can not create sat-pool.") ) );
         }
         // initialialize logging
-	if ( getenv("ZYPP_LIBSAT_FULLLOG") )
+	if ( getenv("ZYPP_LIBSOLV_FULLLOG") || getenv("ZYPP_LIBSAT_FULLLOG") )
 	  ::pool_setdebuglevel( _pool, 4 );
 	else if ( getenv("ZYPP_FULLLOG") )
 	  ::pool_setdebuglevel( _pool, 2 );
 	else
-	  ::pool_setdebugmask(_pool, SAT_DEBUG_JOB|SAT_DEBUG_STATS);
+	  ::pool_setdebugmask(_pool, SOLV_DEBUG_JOB|SOLV_DEBUG_STATS);
 
         ::pool_setdebugcallback( _pool, logSat, NULL );
 
