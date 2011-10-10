@@ -148,7 +148,7 @@ namespace zypp
       if ( split.kind() == ResKind::srcpackage )
       {
         // map 'kind srcpackage' to 'arch src', the pseudo architecture
-        // satsolver uses.
+        // libsolv uses.
         nid = ::rel2id( pool_r, nid, IdString(ARCH_SRC).id(), REL_ARCH, /*create*/true );
       }
 
@@ -487,7 +487,7 @@ namespace zypp
       _kind = EXPRESSION;
       return;
     }
-    // map back satsolvers pseudo arch 'src' to kind srcpackage
+    // map back libsolvs pseudo arch 'src' to kind srcpackage
     if ( _archIfSimple == ARCH_SRC )
     {
       _lhs = IdString( (ResKind::srcpackage.asString() + ":" + IdString(_lhs).c_str()).c_str() ).id();

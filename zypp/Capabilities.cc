@@ -47,7 +47,7 @@ namespace zypp
     if ( ! _begin )
       return 0;
 
-    // jump over satsolvers internal ids.
+    // jump over libsolvs internal ids.
     Capabilities::size_type ret = 0;
     for ( const sat::detail::IdType * end = _begin; *end; ++end )
     {

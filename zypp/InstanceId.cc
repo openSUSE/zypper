@@ -31,7 +31,7 @@ namespace zypp
     if ( ! ret.empty() )
       ret += ':';
 
-    if ( slv_r.isKind<SrcPackage>() ) // satsolver uses no namespace in SrcPackage ident!
+    if ( slv_r.isKind<SrcPackage>() ) // libsolv uses no namespace in SrcPackage ident!
     {
       ret += ResKind::srcpackage.c_str();
       ret += ':';

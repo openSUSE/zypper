@@ -10,7 +10,7 @@
  */
 extern "C"
 {
-#include "satsolver/queue.h"
+#include "solv/queue.h"
 }
 #include <iostream>
 #include "zypp/base/LogTools.h"

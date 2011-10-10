@@ -59,7 +59,7 @@ namespace zypp
 
     /** Enumarators provided \b only for use \ref inSwitch statement.
      * \see inSwitch
-     * \note Enumarator values also correspond to the values libsatsolver
+     * \note Enumarator values also correspond to the values libsolv
      * uses to encode these relations.
     */
     enum for_use_in_switch {
@@ -141,7 +141,7 @@ namespace zypp
     for_use_in_switch inSwitch() const
     { return _op; }
 
-    /** Enumarator values suitable for libsatsolver. */
+    /** Enumarator values suitable for libsolv. */
     unsigned bits() const
     { return _op; }
 

@@ -305,7 +305,7 @@ namespace zypp
         EXPRESSION = 0x04
       };
 
-      /** Enum values corresponding with libsatsolver defines.
+      /** Enum values corresponding with libsolv defines.
        * \note MPL check in PoolImpl.cc
       */
       enum CapRel

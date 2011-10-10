@@ -11,7 +11,7 @@
 */
 extern "C"
 {
-#include <satsolver/evr.h>
+#include <solv/evr.h>
 }
 #include "zypp/base/String.h"
 

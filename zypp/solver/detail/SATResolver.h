@@ -24,8 +24,8 @@
 
 extern "C"
 {
-#include <satsolver/solver.h>
-#include <satsolver/pool.h>
+#include <solv/solver.h>
+#include <solv/pool.h>
 }
 
 #include <iosfwd>

@@ -12,7 +12,7 @@
 #include <iostream>
 extern "C"
 {
-#include <satsolver/knownid.h>
+#include <solv/knownid.h>
 }
 
 #include "zypp/base/LogTools.h"

@@ -1407,7 +1407,7 @@ namespace zypp
     {
       Repository repo = sat::Pool::instance().addRepoSolv( solvfile, info );
       // test toolversion in order to rebuild solv file in case
-      // it was written by an old satsolver-tool parser.
+      // it was written by an old libsolv-tool parser.
       //
       // Known version strings used:
       //  - <no string>

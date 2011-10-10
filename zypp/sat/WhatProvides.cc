@@ -30,9 +30,9 @@ namespace zypp
     //
     /** WhatProvides implementation date.
      * Stores the offset into a O terminated Id array. Per default
-     * the satsolvers whatprovidesdata, otherwise private data.
+     * libsolvs whatprovidesdata, otherwise private data.
      *
-     * As the satsolvers whatprovidesdata might be realocated
+     * As libsolvs whatprovidesdata might be realocated
      * while iterating a result, the iterator takes an
      * <tt>const IdType *const*</tt>. Thats why we explicitly
      * provide _private and pass its adress to the iterator,
@@ -150,7 +150,7 @@ namespace zypp
       if ( _pimpl->_private )
         return const_iterator( _pimpl->_private );
 
-      // for satsolvers index use one more indirection, as it might get relocated.
+      // for libsolvs index use one more indirection, as it might get relocated.
       return const_iterator( &myPool().getPool()->whatprovidesdata, _pimpl->_offset );
     }
 

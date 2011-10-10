@@ -10,8 +10,8 @@
  */
 extern "C"
 {
-#include <satsolver/transaction.h>
-#include <satsolver/bitmap.h>
+#include <solv/transaction.h>
+#include <solv/bitmap.h>
 }
 #include <iostream>
 #include "zypp/base/LogTools.h"

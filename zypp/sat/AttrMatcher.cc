@@ -11,7 +11,7 @@
 */
 extern "C"
 {
-#include <satsolver/repo.h>
+#include <solv/repo.h>
 }
 
 #include <iostream>
@@ -112,7 +112,7 @@ namespace zypp
         sep = 0; // suppress 'NOTHING|'
         break;
       case Match::OTHER:
-        str << mode<<"("<<obj.modeval()<<")"; // check whether satsolver has introduced new modes!
+        str << mode<<"("<<obj.modeval()<<")"; // check whether libsolv has introduced new modes!
         break;
       default:
         str << mode;
@@ -133,7 +133,7 @@ namespace zypp
       if ( val )
       {
         if ( sep ) str << sep;
-        str << zypp::str::hexstring( val ); // check whether satsolver has introduced new flags.
+        str << zypp::str::hexstring( val ); // check whether libsolv has introduced new flags.
       }
     }
     return str;

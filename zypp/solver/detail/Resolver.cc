@@ -275,7 +275,7 @@ void Resolver::undo()
 
 void Resolver::solverInit()
 {
-    // Solving with the satsolver
+    // Solving with libsolv
     static bool poolDumped = false;
     MIL << "-------------- Calling SAT Solver -------------------" << endl;
     if ( getenv("ZYPP_FULLLOG") ) {

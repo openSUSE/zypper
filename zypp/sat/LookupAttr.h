@@ -437,7 +437,7 @@ namespace zypp
          *
          * These are usable iff \ref solvAttrSubEntry is \c true.
          *
-         * \note Unfortunately the underlying satsolver dataiterator as returned
+         * \note Unfortunately the underlying libsolv dataiterator as returned
          * by \ref subBegin and \ref subFind loses some context when being created.
          * Thus it's not possible to invoke \ref subBegin and \ref subFind on an
          * iterator that was previously returned by one of those methods. The result

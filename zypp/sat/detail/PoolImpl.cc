@@ -35,9 +35,9 @@
 
 extern "C"
 {
-// Workaround satsolver project not providing a common include
+// Workaround libsolv project not providing a common include
 // directory. (the -devel package does, but the git repo doesn't).
-// #include <satsolver/repo_helix.h>
+// #include <solv/repo_helix.h>
 void repo_add_helix( ::Repo *repo, FILE *fp, int flags );
 }
 
@@ -94,11 +94,11 @@ namespace zypp
       static void logSat( struct _Pool *, void *data, int type, const char *logString )
       {
 	  if ( type & (SAT_FATAL|SAT_ERROR) ) {
-	    _ERR("satsolver") << logString;
+	    _ERR("libsolv") << logString;
 	  } else if ( type & SAT_DEBUG_STATS ) {
-	    _DBG("satsolver") << logString;
+	    _DBG("libsolv") << logString;
 	  } else {
-	    _MIL("satsolver") << logString;
+	    _MIL("libsolv") << logString;
 	  }
       }
 
@@ -320,7 +320,7 @@ namespace zypp
             for_( it, sysarchs.begin(), sysarchs.end() )
               sysids.insert( it->id() );
 
-              // unfortunately satsolver treats src/nosrc as architecture:
+              // unfortunately libsolv treats src/nosrc as architecture:
             sysids.insert( ARCH_SRC );
             sysids.insert( ARCH_NOSRC );
           }
@@ -371,7 +371,7 @@ namespace zypp
         {
           bool dirty = false;
 
-          // satsolver priority is based on '<', while yum's repoinfo
+          // libsolv priority is based on '<', while yum's repoinfo
           // uses 1(highest)->99(lowest). Thus we use -info_r.priority.
           if ( repo->priority != int(-info_r.priority()) )
           {

@@ -70,7 +70,7 @@ $ ctest .
 \verbatim
   - added tests/data/openSUSE-11.1 containing raw susetags metadata.
   Keeping .solv files in svn is somewhat inconvenient, as you must rebuild them
-  if something in satsolver changes.
+  if something in libsolv changes.
 \endverbatim
 
 \verbatim

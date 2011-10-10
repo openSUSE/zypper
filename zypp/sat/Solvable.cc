@@ -235,7 +235,7 @@ namespace zypp
         static const sat::SolvAttr susetagsDatadir( "susetags:datadir" );
         Pathname ret;
         // First look for repo attribute "susetags:datadir". If not found,
-        // look into the solvables as Code11 satsolver placed it there.
+        // look into the solvables as Code11 libsolv placed it there.
         sat::LookupRepoAttr datadir( susetagsDatadir, repor_r );
         if ( ! datadir.empty() )
           ret = datadir.begin().asString();

@@ -27,7 +27,7 @@ namespace zypp
   namespace sat
   { /////////////////////////////////////////////////////////////////
 
-    /** Satsolver Id queue wrapper.
+    /** Libsolv Id queue wrapper.
      */
     class Queue : private base::NonCopyable
     {

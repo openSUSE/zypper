@@ -5,7 +5,7 @@
 
 extern "C"
 {
-#include <satsolver/repo.h>
+#include <solv/repo.h>
 }
 
 #include "zypp/ZYppFactory.h"

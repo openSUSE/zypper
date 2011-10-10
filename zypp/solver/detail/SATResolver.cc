@@ -20,13 +20,13 @@
  */
 extern "C"
 {
-#include <satsolver/repo_solv.h>
-#include <satsolver/poolarch.h>
-#include <satsolver/evr.h>
-#include <satsolver/poolvendor.h>
-#include <satsolver/policy.h>
-#include <satsolver/bitmap.h>
-#include <satsolver/queue.h>
+#include <solv/repo_solv.h>
+#include <solv/poolarch.h>
+#include <solv/evr.h>
+#include <solv/poolvendor.h>
+#include <solv/policy.h>
+#include <solv/bitmap.h>
+#include <solv/queue.h>
 }
 
 #include "zypp/solver/detail/Helper.h"

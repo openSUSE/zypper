@@ -262,7 +262,7 @@ namespace zypp
         ::_Repo * get() const;
         /** Expert backdoor. */
         IdType id() const { return _id; }
-        /** satsolver internal priorities.
+        /** libsolv internal priorities.
          * Unlike the \ref RepoInfo priority which tries to be YUM conform
          * (H[1-99]L), this one is the solvers internal priority representation.
          * It is type \c int and as one might expect it, the higher the value

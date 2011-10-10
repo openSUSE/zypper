@@ -68,7 +68,7 @@ namespace zypp
 
       sat::Pool satpool( sat::Pool::instance() );
 
-      // init satsolver result vector with mountpoints
+      // init libsolv result vector with mountpoints
       static const ::DUChanges _initdu = { 0, 0, 0 };
       std::vector< ::DUChanges> duchanges( result.size(), _initdu );
       {

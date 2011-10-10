@@ -58,8 +58,8 @@ namespace zypp
       explicit ResKind( const char * cstr_r )       : _str( str::toLower(cstr_r) ) {}
 
     public:
-      /** Return the satsolver identifier for name.
-       * Libsatsolver combines the objects kind and name in a single
+      /** Return libsolv identifier for name.
+       * Libsolv combines the objects kind and name in a single
        * identifier \c "pattern:kde_multimedia", \b except for packages
        * and source packes. They are not prefixed by any kind string.
       */

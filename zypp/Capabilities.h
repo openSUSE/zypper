@@ -28,7 +28,7 @@ namespace zypp
   //
   /** Container of \ref Capability (currently read only).
    *
-   * \note satsolver dependency lists may include internal ids
+   * \note libsolv dependency lists may include internal ids
    * which must be skipped on iteration or size calculation
    * (\see \ref detail::isDepMarkerId).
    */
@@ -146,7 +146,7 @@ namespace zypp
       }
 
       void increment()
-      { // jump over satsolvers internal ids.
+      { // jump over libsolvs internal ids.
         if ( sat::detail::isDepMarkerId( *(++base_reference()) ) )
         {
           _tagged = true;

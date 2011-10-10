@@ -13,7 +13,7 @@ extern "C"
 {
 #include <sys/utsname.h>
 #include <unistd.h>
-#include <satsolver/satversion.h>
+#include <solv/satversion.h>
 }
 #include <iostream>
 #include <fstream>
@@ -834,9 +834,9 @@ namespace zypp
   {
     str << "libzypp: " << VERSION << " built " << __DATE__ << " " <<  __TIME__ << endl;
 
-    str << "satsolver: " << sat_version;
-    if ( ::strcmp( sat_version, SATSOLVER_VERSION_STRING ) )
-      str << " (built against " << SATSOLVER_VERSION_STRING << ")";
+    str << "libsolv: " << sat_version;
+    if ( ::strcmp( sat_version, LIBSOLV_VERSION_STRING ) )
+      str << " (built against " << LIBSOLV_VERSION_STRING << ")";
     str << endl;
 
     str << "zypp.conf: '" << _pimpl->_parsedZyppConf << "'" << endl;

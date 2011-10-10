@@ -43,7 +43,7 @@ namespace zypp
       class Transaction_const_iterator;
     }
 
-    /** Satsolver transaction wrapper.
+    /** Libsolv transaction wrapper.
      * \note Note that Transaction is derived from \ref sat::SolvIterMixin which
      *       makes PoolItem and Selectable iterators automatically available.
      * \note Changing the \ref ResPool content (loading/unloading repositories)

@@ -11,7 +11,7 @@
 */
 extern "C"
 {
-#include <satsolver/knownid.h>
+#include <solv/knownid.h>
 }
 
 #include <iostream>
@@ -31,7 +31,7 @@ namespace sat
   const SolvAttr SolvAttr::noAttr;
 
 #warning STILL ATTRIBUTES HERE WHICH ARE NOT PROVIDED BY SOLV FILES
-// At least the ones that do nat have a satsolver/knownid.
+// At least the ones that do nat have a solv/knownid.
 
   const SolvAttr SolvAttr::name         ( SOLVABLE_NAME );
   const SolvAttr SolvAttr::edition      ( SOLVABLE_EVR );

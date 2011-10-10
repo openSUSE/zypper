@@ -44,7 +44,7 @@ namespace zypp
     //
     /** A \ref Solvable object within the sat \ref Pool.
      *
-     * \note Unfortunately libsatsolver combines the objects kind and
+     * \note Unfortunately libsolv combines the objects kind and
      * name in a single identifier \c "pattern:kde_multimedia",
      * \b except for packages and source packes. They are not prefixed
      * by any kind string. Instead the architecture is abused to store

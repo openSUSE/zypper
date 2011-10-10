@@ -13,11 +13,11 @@
 #define ZYPP_SAT_DETAIL_POOLIMPL_H
 extern "C"
 {
-#include <satsolver/pool.h>
-#include <satsolver/repo.h>
-#include <satsolver/solvable.h>
-#include <satsolver/poolarch.h>
-#include <satsolver/repo_solv.h>
+#include <solv/pool.h>
+#include <solv/repo.h>
+#include <solv/solvable.h>
+#include <solv/poolarch.h>
+#include <solv/repo_solv.h>
 }
 #include <iosfwd>
 

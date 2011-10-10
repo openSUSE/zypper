@@ -28,7 +28,7 @@ using namespace boost::unit_test;
  * from the metadata are preserved into
  * the final object
  *
- * so the test covers both satsolver-tools
+ * so the test covers both libsolv-tools
  * right insertion and parsing
  * and libzypp ResObject and friends data
  * extraction from solv files

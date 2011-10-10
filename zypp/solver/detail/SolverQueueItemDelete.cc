@@ -19,7 +19,7 @@
  */
 extern "C"
 {
-#include <satsolver/solver.h>
+#include <solv/solver.h>
 }
 
 #include "zypp/base/Logger.h"

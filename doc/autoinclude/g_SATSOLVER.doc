@@ -1,7 +1,0 @@
-/** \namespace zypp::sat \ref SATSOLVER
-*/
-/** \defgroup SATSOLVER Satsolver interface
-
-Interface to sat-pool and sat-solver.
-
-*/
