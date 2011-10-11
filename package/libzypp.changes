@@ -1,4 +1,10 @@
 -------------------------------------------------------------------
+Tue Oct 11 15:20:43 CEST 2011 - ma@suse.de
+
+- Switch to using libsolv instead of satsolver
+- version 10.1.0 (1)
+
+-------------------------------------------------------------------
 Sun Oct  9 01:13:16 CEST 2011 - ma@suse.de
 
 - Update zypp-po.tar.bz2
