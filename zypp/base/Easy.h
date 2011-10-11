@@ -21,7 +21,11 @@
  *  }
  * \endcode
 */
+#ifndef __GXX_EXPERIMENTAL_CXX0X__
+#define for_(IT,BEG,END) for ( typeof(BEG) IT = BEG, _for_end = END; IT != _for_end; ++IT )
+#else
 #define for_(IT,BEG,END) for ( auto IT = BEG, _for_end = END; IT != _for_end; ++IT )
+#endif
 #define for_each_(IT,CONT) for_( IT, CONT.begin(), CONT.end() )
 
 /** Simple C-array iterator
