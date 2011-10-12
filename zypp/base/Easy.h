@@ -12,6 +12,8 @@
 #ifndef ZYPP_BASE_EASY_H
 #define ZYPP_BASE_EASY_H
 
+#include <cstdio>
+
 /** Convenient for-loops using iterator.
  * \code
  *  std::set&lt;std::string&gt; _store;
@@ -38,6 +40,12 @@
 #define arrayBegin(A) (&A[0])
 #define arraySize(A)  (sizeof(A)/sizeof(*A))
 #define arrayEnd(A)   (&A[0] + arraySize(A))
+
+
+#define GCC_VERSION (__GNUC__ * 10000 + __GNUC_MINOR__ * 100  + __GNUC_PATCHLEVEL__)
+#if GCC_VERSION < 40600 || not defined(__GXX_EXPERIMENTAL_CXX0X__)
+#define nullptr NULL
+#endif
 
 ///////////////////////////////////////////////////////////////////
 namespace zypp
