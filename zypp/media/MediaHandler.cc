@@ -552,9 +552,18 @@ MediaHandler::checkAttached(bool matchMountFs) const
         if(!is_device && (!ref.mediaSource->maj_nr ||
 	                  !ref.mediaSource->bdir.empty()))
         {
-          std::string mtype(matchMountFs ? e->type : ref.mediaSource->type);
 	  if( ref.mediaSource->bdir.empty())
 	  {
+	    // bnc#710269: Type nfs may appear as nfs4 in in the mount table
+	    // and maybe vice versa. Similar cifs/smb. Need to unify these types:
+	    if ( matchMountFs && e->type != ref.mediaSource->type )
+	    {
+	      if ( str::hasPrefix( e->type, "nfs" ) && str::hasPrefix( ref.mediaSource->type, "nfs" ) )
+		matchMountFs = false;
+	      else if ( ( e->type == "cifs" || e->type == "smb" ) && ( ref.mediaSource->type == "cifs" || ref.mediaSource->type == "smb" ) )
+		matchMountFs = false;
+	    }
+	    std::string mtype(matchMountFs ? e->type : ref.mediaSource->type);
 	    MediaSource media(mtype, e->src);
 
 	    if( ref.mediaSource->equals( media) &&
