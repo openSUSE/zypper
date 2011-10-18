@@ -820,22 +820,26 @@ namespace zypp
     {
       MIL << "hardlinkCopy " << oldpath << " -> " << newpath;
 
-      PathInfo oldpi( oldpath, PathInfo::LSTAT );
-      if ( oldpi.isLink() )
+      PathInfo pi( oldpath, PathInfo::LSTAT );
+      if ( pi.isLink() )
       {
-	// dont hardlink symliknks!
+	// dont hardlink symlinks!
 	return copy( oldpath, newpath );
       }
 
-      // Here: no symlink
+      pi.lstat( newpath );
+      if ( pi.isExist() )
+      {
+	int res = unlink( newpath );
+	if ( res != 0 )
+	  return _Log_Result( res );
+      }
+
+      // Here: no symlink, no newpath
       if ( ::link( oldpath.asString().c_str(), newpath.asString().c_str() ) == -1 )
       {
         switch ( errno )
         {
-          case EEXIST: // newpath already exists
-            if ( unlink( newpath ) == 0 && ::link( oldpath.asString().c_str(), newpath.asString().c_str() ) != -1 )
-              return _Log_Result( 0 );
-            break;
           case EXDEV: // oldpath  and  newpath are not on the same mounted file system
             return copy( oldpath, newpath );
             break;
