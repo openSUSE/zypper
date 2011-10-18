@@ -24,20 +24,13 @@ using namespace zypp::repo;
 BOOST_AUTO_TEST_CASE(replace_text)
 {
   /* check RepoVariablesStringReplacer */
+  ZConfig::instance().setSystemArchitecture(Arch("i686"));
 
   RepoVariablesStringReplacer replacer1;
-
   BOOST_CHECK_EQUAL(replacer1("http://foo/$arch/bar"),
-                    "http://foo/"+ ZConfig::instance().systemArchitecture().asString() + "/bar");
-
-  replacer1.resetVarCache();
-
-  ZConfig::instance().setSystemArchitecture(Arch("i686"));
-  BOOST_CHECK_EQUAL(replacer1("http://foo/$arch/bar/$basearch"),
-                    "http://foo/i686/bar/i386");
+                    "http://foo/i686/bar");
 
   /* check RepoVariablesUrlReplacer */
-
   RepoVariablesUrlReplacer replacer2;
 
   BOOST_CHECK_EQUAL(replacer2(Url("ftp://user:secret@site.org/$arch/")).asCompleteString(),
@@ -49,14 +42,9 @@ BOOST_AUTO_TEST_CASE(replace_text)
   BOOST_CHECK_EQUAL(replacer2(Url("http://site.org/update/?arch=$arch")).asCompleteString(),
 		    "http://site.org/update/?arch=i686");
 
-  // no target activated yet, there should be no replacement of
-  // $distver
-  BOOST_CHECK_EQUAL(replacer2(Url("http://site.org/update/$distver/?arch=$arch")).asCompleteString(),
-		    "http://site.org/update/$distver/?arch=i686");
-    
   // now we initialize the target
   filesystem::TmpDir tmp;
-    
+
   ZYpp::Ptr z = getZYpp();
 
   // create the products.d directory
@@ -64,8 +52,6 @@ BOOST_AUTO_TEST_CASE(replace_text)
   BOOST_CHECK( copy( Pathname(TESTS_SRC_DIR) / "/zypp/data/Target/product.prod",  tmp.path() / "/etc/products.d/product.prod") == 0 );
   // make it the base product
   BOOST_CHECK( symlink(tmp.path() / "/etc/products.d/product.prod", tmp.path() / "/etc/products.d/baseproduct" ) == 0 );
-
-  replacer2.resetVarCache();
 
   z->initializeTarget( tmp.path() );
   // target activated, there should be replacement of
