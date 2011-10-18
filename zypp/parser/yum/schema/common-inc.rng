@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <grammar xmlns="http://relaxng.org/ns/structure/1.0" datatypeLibrary="http://www.w3.org/2001/XMLSchema-datatypes">
   <!--
-    private is not an XML namespace, just a holder for reusable 
+    private is not an XML namespace, just a holder for reusable
       attribute/element sets
   -->
   <define name="private.positive">
@@ -89,27 +89,46 @@
   <define name="private.archenum">
     <choice>
       <value>noarch</value>
-      <value>armv4l</value>
-      <value>armv5el</value>
-      <value>armv5tel</value>
-      <value>armv7hl</value>
-      <value>armv7nhl</value>
-      <value>armv7el</value>
-      <value>armv7l</value>
-      <value>athlon</value>
       <value>i386</value>
       <value>i486</value>
       <value>i586</value>
       <value>i686</value>
-      <value>ia64</value>
-      <value>ppc</value>
-      <value>ppc64</value>
+      <value>athlon</value>
+      <value>x86_64</value>
+      <value>pentium3</value>
+      <value>pentium4</value>
       <value>s390</value>
       <value>s390x</value>
+      <value>ppc</value>
+      <value>ppc64</value>
+      <value>ia64</value>
+      <value>alphaev67</value>
+      <value>alphaev6</value>
+      <value>alphapca56</value>
+      <value>alphaev56</value>
+      <value>alphaev5</value>
+      <value>alpha</value>
+      <value>sparc64v</value>
+      <value>sparcv9v</value>
+      <value>sparc64</value>
+      <value>sparcv9</value>
+      <value>sparcv8</value>
+      <value>sparc</value>
       <value>armv7tnhl</value>
       <value>armv7thl</value>
+      <value>armv7nhl</value>
+      <value>armv7hl</value>
+      <value>armv7l</value>
+      <value>armv6l</value>
+      <value>armv5tejl</value>
+      <value>armv5tel</value>
+      <value>armv5l</value>
+      <value>armv4tl</value>
+      <value>armv4l</value>
+      <value>armv3l</value>
+      <value>sh3</value>
       <value>sh4</value>
-      <value>x86_64</value>
+      <value>sh4a</value>
       <value>src</value>
     </choice>
   </define>
