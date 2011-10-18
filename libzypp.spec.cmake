@@ -1,22 +1,30 @@
 #
 # spec file for package libzypp
 #
-# Copyright (c) 2007 SUSE LINUX Products GmbH, Nuernberg, Germany.
-# This file and all modifications and additions to the pristine
-# package are under the same license as the package itself.
+# Copyright (c) 2005-2011 SUSE LINUX Products GmbH, Nuernberg, Germany.
 #
+# All modifications and additions to the file contributed by third parties
+# remain the property of their copyright owners, unless otherwise agreed
+# upon. The license for this file, and modifications and additions to the
+# file, is the same license as for the pristine package itself (unless the
+# license for the pristine package is not an Open Source License, in which
+# case the license is the MIT License). An "Open Source License" is a
+# license that conforms to the Open Source Definition (Version 1.9)
+# published by the Open Source Initiative.
+
 # Please submit bugfixes or comments via http://bugs.opensuse.org/
 #
 
 # norootforbuild
 
+
 Name:           @PACKAGE@
-License:        GPLv2
+License:        GPLv2+
 Group:          System/Packages
 BuildRoot:      %{_tmppath}/%{name}-%{version}-build
 Summary:        Package, Patch, Pattern, and Product Management
 Version:        @VERSION@
-Release:        0
+Release:        1
 Source:         %{name}-%{version}.tar.bz2
 Source1:        %{name}-rpmlintrc
 Provides:       yast2-packagemanager
@@ -66,7 +74,7 @@ BuildRequires:  libexpat-devel
 BuildRequires:  expat-devel
 %endif
 
-Requires:	rpm
+Requires:       rpm
 
 %if 0%{?suse_version}
 BuildRequires:  rpm-devel
@@ -139,6 +147,7 @@ Authors:
     Ladislav Slezak <lslezak@suse.cz>
 
 %package devel
+License:        GPLv2+
 Requires:       libzypp = %{version}
 Requires:       libxml2-devel
 Requires:       openssl-devel
@@ -158,14 +167,14 @@ Requires:       cmake
 %if 0%{?suse_version}
 %if 0%{?suse_version} >= 1100
 # Code11+
-Requires:  libcurl-devel >= %{min_curl_version}
+Requires:       libcurl-devel >= %{min_curl_version}
 %else
 # Code10
-Requires:  curl-devel
+Requires:       curl-devel
 %endif
 %else
 # Other distros (Fedora)
-Requires:  libcurl-devel >= %{min_curl_version}
+Requires:       libcurl-devel >= %{min_curl_version}
 %endif
 %if 0%{?suse_version} >= 1100
 %requires_ge    libsolv-devel
@@ -252,7 +261,6 @@ make -C po install DESTDIR=$RPM_BUILD_ROOT
 cd ..
 %{find_lang} zypp
 
-
 %post
 /sbin/ldconfig
 if [ -f /var/cache/zypp/zypp.db ]; then rm /var/cache/zypp/zypp.db; fi
@@ -316,7 +324,6 @@ if is_old ${LOCKSFILE}
     append_new_lock $line
   done
 fi
-
 
 %postun -p /sbin/ldconfig
 
