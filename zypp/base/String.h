@@ -21,6 +21,7 @@
 
 #include "zypp/base/Easy.h"
 #include "zypp/base/PtrTypes.h"
+#include "zypp/base/Function.h"
 
 ///////////////////////////////////////////////////////////////////
 namespace zypp
@@ -346,16 +347,25 @@ namespace zypp
      *
      * \note It only perform substtution in one pass
      */
-    std::string gsub( const std::string& sData, const std::string& sFrom, const std::string& sTo);
+    std::string gsub( const std::string & str_r, const std::string & from_r, const std::string & to_r );
+
+    /** \overload
+     * On each replacement a function is called to get the value to replace.
+     */
+    std::string gsubFun( const std::string & str_r, const std::string & from_r, function<std::string()> to_r );
 
     /**
      * \short Looks for text in string and replaces it in place
      *
-     *
      * \note It only perform substtution in one pass
-     * \note use only if you replace same lenght strings, otherwise use gsub
      */
-    std::string& replaceAll( std::string & str, const std::string & from, const std::string & to);
+    std::string & replaceAll( std::string & str_r, const std::string & from_r, const std::string & to_r );
+
+    /** \overload
+     * On each replacement a function is called to get the value to replaces.
+     */
+    std::string & replaceAllFun( std::string & str_r, const std::string & from_r, function<std::string()> to_r );
+
 
     ///////////////////////////////////////////////////////////////////
     /** \name Split. */

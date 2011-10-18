@@ -295,47 +295,46 @@ namespace zypp
       return ret;
     }
 
-    string gsub(const string& sData, const string& sFrom, const string& sTo)
+    std::string gsub( const std::string & str_r, const std::string & from_r, const std::string & to_r )
     {
-      string sNew;
-      sNew.reserve(sData.size());
-
-      if (! sData.empty())
-      {
-        string::size_type frLen = sFrom.length();
-        string::size_type loc = 0;
-        string::size_type oldLoc = 0;
-
-        while (string::npos != (loc = sData.find(sFrom, loc)))
-        {
-          sNew.append(sData,oldLoc,loc-oldLoc);
-          sNew.append(sTo);
-          loc += frLen;
-          oldLoc = loc;
-          if (loc >= sData.length())
-            break;
-        }
-        if (oldLoc!=sData.size())
-            sNew.append(sData,oldLoc,sData.size()-oldLoc);
-      }
-
-      return sNew;
+      std::string ret( str_r );
+      return replaceAll( ret, from_r, to_r );
     }
 
-    string & replaceAll(string & str, const string & from, const string & to)
+    std::string & replaceAll( std::string & str_r, const std::string & from_r, const std::string & to_r )
     {
-      string::size_type pos = 0;
-      while((pos = str.find(from, pos)) != string::npos)
+      std::string::size_type pos = 0;
+      while ( (pos = str_r.find( from_r, pos )) != std::string::npos )
       {
-        str.replace(pos, from.size(), to);
-        pos += to.size();
+        str_r.replace( pos, from_r.size(), to_r );
+        pos += to_r.size();
 
-        if (pos >= str.length())
+        if ( pos >= str_r.length() )
           break;
       }
-      return str;
+      return str_r;
     }
 
+    std::string gsubFun( const std::string & str_r, const std::string & from_r, function<std::string()> to_r )
+    {
+      std::string ret( str_r );
+      return replaceAllFun( ret, from_r, to_r );
+    }
+
+    std::string & replaceAllFun( std::string & str_r, const std::string & from_r, function<std::string()> to_r )
+    {
+      std::string::size_type pos = 0;
+      while ( (pos = str_r.find( from_r, pos )) != std::string::npos )
+      {
+	std::string to( to_r() );
+        str_r.replace( pos, from_r.size(), to );
+        pos += to.size();
+
+        if ( pos >= str_r.length() )
+          break;
+      }
+      return str_r;
+    }
 
     std::string escape( const C_Str & str_r, const char sep_r )
     {
