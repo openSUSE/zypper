@@ -7,95 +7,95 @@
 |                                                                      |
 \---------------------------------------------------------------------*/
 
-#include <iostream>
-#include <map>
-#include <algorithm>
+#include "zypp/base/LogTools.h"
 #include "zypp/base/String.h"
-#include "zypp/repo/RepoException.h"
+
 #include "zypp/ZConfig.h"
-#include "zypp/ZYppFactory.h"
-#include "RepoVariables.h"
+#include "zypp/Target.h"
+#include "zypp/Arch.h"
+#include "zypp/repo/RepoVariables.h"
+#include "zypp/base/NonCopyable.h"
 
-using namespace std;
-
+///////////////////////////////////////////////////////////////////
 namespace zypp
 {
-namespace repo
-{
+  ///////////////////////////////////////////////////////////////////
+  namespace repo
+  {
+    ///////////////////////////////////////////////////////////////////
+    namespace
+    {
+      /** \brief Provide lazy initialized repo variables
+       */
+      struct ReplacerData : private zypp::base::NonCopyable
+      {
+	const std::string & sysarch() const
+	{
+	  if ( _sysarch.empty() )
+	    initArchStr();
+	  return _sysarch;
+	}
 
-RepoVariablesStringReplacer::RepoVariablesStringReplacer()
-{
-  sysarch = Arch_empty;
-  basearch = Arch_empty;
-}
+	const std::string & basearch() const
+	{
+	  if ( _basearch.empty() )
+	    initArchStr();
+	  return _basearch;
+	}
 
-RepoVariablesStringReplacer::~RepoVariablesStringReplacer()
-{}
+	const std::string & releasever() const
+	{
+	  if( _releasever.empty() )
+	    _releasever = Target::distributionVersion( Pathname()/*guess*/ );
+	  return _releasever;
+	}
 
-void RepoVariablesStringReplacer::resetVarCache( void )
-{
-  sysarch = Arch_empty;
-  basearch = Arch_empty;
-  releasever = "";
-}
+      private:
+	void initArchStr() const
+	{
+	  Arch arch( ZConfig::instance().systemArchitecture() );
+	  _sysarch = arch.asString();
+	  _basearch = arch.baseArch().asString();
+	}
+      private:
+	mutable std::string _sysarch;
+	mutable std::string _basearch;
+	mutable std::string _releasever;
+      };
 
-std::string RepoVariablesStringReplacer::operator()( const std::string &value ) const
-{
-  string newvalue(value);
+      /** \brief Replace repo variables on demand
+       *
+       * Initialisation of repo variables is delayed until they actually occur in
+       * a string.
+       */
+      std::string replacer( const std::string & value_r )
+      {
+	static ReplacerData _data;
 
-  // $arch
-  if( sysarch.empty() )
-    sysarch = ZConfig::instance().systemArchitecture();
+	std::string ret( value_r );
+	ret = str::replaceAllFun( ret, "$arch",		[&_data]()-> std::string { return _data.sysarch(); } );
+	ret = str::replaceAllFun( ret, "$basearch",	[&_data]()-> std::string { return _data.basearch(); } );
+	ret = str::replaceAllFun( ret, "$releasever",	[&_data]()-> std::string { return _data.releasever(); } );
+	return ret;
+      }
 
-  newvalue = str::gsub( newvalue, "$arch", sysarch.asString() );
+    } // namespace
+    ///////////////////////////////////////////////////////////////////
 
-  // $basearch
-  if( basearch.empty() )
-    basearch = sysarch.baseArch();
+    std::string RepoVariablesStringReplacer::operator()( const std::string & value ) const
+    {
+      return replacer( value );
+    }
 
-  newvalue = str::gsub( newvalue, "$basearch", basearch.asString() );
+    Url RepoVariablesUrlReplacer::operator()( const Url & value ) const
+    {
+      Url newurl( value );
+      newurl.setPathData( replacer( value.getPathData() ) );
+      newurl.setQueryString( replacer( value.getQueryString() ) );
+      return newurl;
+    }
 
-  // $releasever (Target::distributionVersion assumes root=/ if target not initialized)
-  if ( newvalue.find("$releasever") != string::npos ) {
-    if( releasever.empty() )
-      releasever = Target::distributionVersion(Pathname()/*guess*/);
-
-    newvalue = str::gsub( newvalue, "$releasever", releasever );
-  } 
-
-  return newvalue;
-}
-
-//////////////////////////////////////////////////////////////////////
-
-RepoVariablesUrlReplacer::RepoVariablesUrlReplacer()
-{}
-
-RepoVariablesUrlReplacer::~RepoVariablesUrlReplacer()
-{}
-
-void RepoVariablesUrlReplacer::resetVarCache( void )
-{
-  replacer.resetVarCache();
-}
-
-/*
- * Replaces '$arch' and '$basearch' in the path and query part of the URL
- * with the global ZYpp values. Examples:
- *
- * ftp://user:secret@site.net/$arch/ -> ftp://user:secret@site.net/i686/
- * http://site.net/?basearch=$basearch -> http://site.net/?basearch=i386
- */
-Url RepoVariablesUrlReplacer::operator()( const Url &value ) const
-{
-  Url newurl = value;
-  newurl.setPathData(replacer(value.getPathData()));
-  newurl.setQueryString(replacer(value.getQueryString()));
-
-  return newurl;
-}
-
-} // ns repo
-} // ns zypp
-
-// vim: set ts=2 sts=2 sw=2 et ai:
+  } // namespace repo
+  ///////////////////////////////////////////////////////////////////
+} // namespace zypp
+///////////////////////////////////////////////////////////////////

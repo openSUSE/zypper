@@ -343,26 +343,21 @@ namespace zypp
     //@}
 
     /**
-     * \short Looks for text in a string and replaces it.
-     *
-     * \note It only perform substtution in one pass
+     * \short Return a string with all occurrences of \c from_r replaced with \c to_r.
      */
     std::string gsub( const std::string & str_r, const std::string & from_r, const std::string & to_r );
 
-    /** \overload
-     * On each replacement a function is called to get the value to replace.
+    /** \overload A function is called on demand to compute each replacement value.
      */
     std::string gsubFun( const std::string & str_r, const std::string & from_r, function<std::string()> to_r );
 
     /**
-     * \short Looks for text in string and replaces it in place
-     *
-     * \note It only perform substtution in one pass
+     * \short Replace all occurrences of \c from_r with \c to_r in \c str_r (inplace).
+     * A reference to \c str_r is also returned for convenience.
      */
     std::string & replaceAll( std::string & str_r, const std::string & from_r, const std::string & to_r );
 
-    /** \overload
-     * On each replacement a function is called to get the value to replaces.
+    /** \overload A function is called on demand to compute each replacement value.
      */
     std::string & replaceAllFun( std::string & str_r, const std::string & from_r, function<std::string()> to_r );
 
