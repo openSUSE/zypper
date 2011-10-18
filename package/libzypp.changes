@@ -1,4 +1,12 @@
 -------------------------------------------------------------------
+Tue Oct 18 16:45:13 CEST 2011 - ma@suse.de
+
+- Add arch armv7tnhl and armv7thl
+- Fix RepoVariablesReplacer to compute substitution values on demand only
+- PathInfo::hardlinkCopy: fix handling cross-device links
+- version 10.2.0 (1)
+
+-------------------------------------------------------------------
 Sun Oct 16 01:13:37 CEST 2011 - ma@suse.de
 
 - Update zypp-po.tar.bz2
