@@ -264,21 +264,20 @@ struct StatusCombination
   }
   bool next()
   {
-    for_( i, 0LU, _items.size() )
+    for (auto i : _items)
     {
-      switch ( _items[i].status().getTransactValue() )
+      switch ( i.status().getTransactValue() )
       {
         case ResStatus::KEEP_STATE:
-          _items[i].status().setTransactValue( ResStatus::LOCKED, ResStatus::USER );
+          i.status().setTransactValue( ResStatus::LOCKED, ResStatus::USER );
           return true;
           break;
         case ResStatus::LOCKED:
-          _items[i].status().setTransactValue( ResStatus::TRANSACT, ResStatus::USER );
+          i.status().setTransactValue( ResStatus::TRANSACT, ResStatus::USER );
           return true;
           break;
         case ResStatus::TRANSACT:
-          _items[i].status().setTransactValue( ResStatus::KEEP_STATE, ResStatus::USER );
-          // increment next i
+          i.status().setTransactValue( ResStatus::KEEP_STATE, ResStatus::USER );
           break;
       }
     }
