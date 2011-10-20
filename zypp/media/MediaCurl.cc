@@ -620,6 +620,7 @@ void MediaCurl::setupEasy()
     if ( ! _settings.proxy().empty() )
     {
       SET_OPTION(CURLOPT_PROXY, _settings.proxy().c_str());
+      SET_OPTION(CURLOPT_PROXYAUTH, CURLAUTH_BASIC|CURLAUTH_DIGEST|CURLAUTH_NTLM );
       /*---------------------------------------------------------------*
         CURLOPT_PROXYUSERPWD: [user name]:[password]
 
@@ -1384,7 +1385,7 @@ void MediaCurl::doGetFileCopyFile( const Pathname & filename , const Pathname & 
       }
     }
 #endif
-        
+
     if ( curl_easy_setopt( _curl, CURLOPT_PROGRESSDATA, NULL ) != 0 ) {
       WAR << "Can't unset CURLOPT_PROGRESSDATA: " << _curlError << endl;;
     }
