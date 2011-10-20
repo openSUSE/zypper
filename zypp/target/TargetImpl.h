@@ -118,7 +118,10 @@ namespace zypp
 
       /** The directory to store things. */
       Pathname home() const
-      { return _root / "/var/lib/zypp"; }
+      { return home( _root ); }
+
+      static Pathname home( const Pathname & root_r )
+      { return root_r / "/var/lib/zypp"; }
 
       /** Commit changes in the pool */
       ZYppCommitResult commit( ResPool pool_r, const ZYppCommitPolicy & policy_r );
@@ -150,6 +153,11 @@ namespace zypp
       /** \copydoc Target::baseProduct() */
       Product::constPtr baseProduct() const;
 
+      /** \copydoc Target::requestedLocales() */
+      LocaleSet requestedLocales() const
+      { return _requestedLocalesFile.locales(); }
+      /** \overload */
+      static LocaleSet requestedLocales( const Pathname & root_r );
 
       /** \copydoc Target::targetDistribution() */
       std::string targetDistribution() const;

@@ -103,6 +103,11 @@ namespace zypp
   Product::constPtr Target::baseProduct() const
   { return _pimpl->baseProduct(); }
 
+  LocaleSet Target::requestedLocales() const
+  { return _pimpl->requestedLocales(); }
+  LocaleSet Target::requestedLocales( const Pathname & root_r )
+  { return target::TargetImpl::requestedLocales( root_r ); }
+
   std::string Target::targetDistribution() const
   { return _pimpl->targetDistribution(); }
   std::string Target::targetDistribution( const Pathname & root_r )

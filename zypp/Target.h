@@ -119,6 +119,15 @@ namespace zypp
      */
     Product::constPtr baseProduct() const;
 
+    /**
+     * \brief Languages to be supported by the system.
+     * E.g. language specific packages to be installed.
+     */
+    LocaleSet requestedLocales() const;
+    /** \overload Use a specific root_r, if empty the default targets root, or '/'
+     */
+    static LocaleSet requestedLocales( const Pathname & root_r );
+
   public:
     /** \name Base product and registration.
      *

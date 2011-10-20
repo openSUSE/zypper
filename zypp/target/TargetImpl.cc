@@ -1615,21 +1615,6 @@ namespace zypp
     }
 
     ///////////////////////////////////////////////////////////////////
-
-    Product::constPtr TargetImpl::baseProduct() const
-    {
-      ResPool pool(ResPool::instance());
-      for_( it, pool.byKindBegin<Product>(), pool.byKindEnd<Product>() )
-      {
-        Product::constPtr p = (*it)->asKind<Product>();
-        if ( p->isTargetDistribution() )
-          return p;
-      }
-      return 0L;
-    }
-
-    ///////////////////////////////////////////////////////////////////
-
     namespace
     {
       parser::ProductFileData baseproductdata( const Pathname & root_r )
@@ -1673,6 +1658,28 @@ namespace zypp
         }
         return std::string();
       }
+    } // namescpace
+    ///////////////////////////////////////////////////////////////////
+
+    Product::constPtr TargetImpl::baseProduct() const
+    {
+      ResPool pool(ResPool::instance());
+      for_( it, pool.byKindBegin<Product>(), pool.byKindEnd<Product>() )
+      {
+        Product::constPtr p = (*it)->asKind<Product>();
+        if ( p->isTargetDistribution() )
+          return p;
+      }
+      return nullptr;
+    }
+
+    LocaleSet TargetImpl::requestedLocales( const Pathname & root_r )
+    {
+      const Pathname needroot( staticGuessRoot(root_r) );
+      const Target_constPtr target( getZYpp()->getTarget() );
+      if ( target && target->root() == needroot )
+	return target->requestedLocales();
+      return RequestedLocalesFile( home(needroot) / "RequestedLocales" ).locales();
     }
 
     std::string TargetImpl::targetDistribution() const
