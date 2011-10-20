@@ -163,6 +163,11 @@ namespace zypp
       unsigned repo_refresh_delay() const;
 
       /**
+       * List of locales for which translated package descriptions should be downloaded.
+       */
+      LocaleSet repoRefreshLocales() const;
+
+      /**
        * Whether to use repository alias or name in user messages (progress,
        * exceptions, ...).
        * True: use alias, false: use name.

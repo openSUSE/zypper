@@ -347,6 +347,17 @@ namespace zypp
                 {
                   str::strtonum(value, repo_refresh_delay);
                 }
+                else if ( entry == "repo.refresh.locales" )
+		{
+		  std::vector<std::string> tmp;
+		  str::split( value, back_inserter( tmp ), ", \t" );
+
+		  boost::function<Locale(const std::string &)> transform(
+		    [](const std::string & str_r)->Locale{ return Locale(str_r); }
+		  );
+		  repoRefreshLocales.insert( make_transform_iterator( tmp.begin(), transform ),
+					     make_transform_iterator( tmp.end(), transform ) );
+		}
                 else if ( entry == "download.use_deltarpm" )
                 {
                   download_use_deltarpm = str::strToBool( value, download_use_deltarpm );
@@ -502,9 +513,10 @@ namespace zypp
     Pathname update_messages_path;
     DefaultOption<std::string> updateMessagesNotify;
 
-    bool repo_add_probe;
-    unsigned repo_refresh_delay;
-    bool repoLabelIsAlias;
+    bool	repo_add_probe;
+    unsigned	repo_refresh_delay;
+    LocaleSet	repoRefreshLocales;
+    bool	repoLabelIsAlias;
 
     bool download_use_deltarpm;
     bool download_use_deltarpm_always;
@@ -694,14 +706,13 @@ namespace zypp
   ///////////////////////////////////////////////////////////////////
 
   bool ZConfig::repo_add_probe() const
-  {
-    return _pimpl->repo_add_probe;
-  }
+  { return _pimpl->repo_add_probe; }
 
   unsigned ZConfig::repo_refresh_delay() const
-  {
-    return _pimpl->repo_refresh_delay;
-  }
+  { return _pimpl->repo_refresh_delay; }
+
+  LocaleSet ZConfig::repoRefreshLocales() const
+  { return _pimpl->repoRefreshLocales.empty() ? Target::requestedLocales("") :_pimpl->repoRefreshLocales; }
 
   bool ZConfig::repoLabelIsAlias() const
   { return _pimpl->repoLabelIsAlias; }
