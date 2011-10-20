@@ -125,7 +125,7 @@ namespace zypp
      * Static methods herein allow to retrieve the values without explicitly
      * initializing the \ref Target. They take a targets root directory as
      * argument. If an empty \ref Pathname is passed, an already existing
-     * Targets root is used, otherwise \c "\" is assumed.
+     * Targets root is used, otherwise \c "/" is assumed.
      */
     //@{
     /** This is \c register.target attribute of the installed base product.
