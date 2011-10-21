@@ -2,8 +2,9 @@
 #include <iostream>
 #include <fstream>
 
-#include "zypp/base/Logger.h"
+#include "zypp/base/LogTools.h"
 #include "zypp/base/String.h"
+#include "zypp/base/Regex.h"
 #include "zypp/OnMediaLocation.h"
 #include "zypp/MediaSetAccess.h"
 #include "zypp/Fetcher.h"
@@ -61,17 +62,17 @@ void Downloader::download( MediaSetAccess &media,
 
   Pathname sig = repoInfo().path() + "/content.asc";
 
-  this->enqueue( OnMediaLocation( sig, 1 ).setOptional(true) );
-  this->start( dest_dir, media );
+  enqueue( OnMediaLocation( sig, 1 ).setOptional(true) );
+  start( dest_dir, media );
   // only if there is a signature in the destination directory
   if ( PathInfo(dest_dir / sig ).isExist() )
       sigchecker = SignatureFileChecker( dest_dir + sig/*, repoInfo().name() */);
-  this->reset();
+  reset();
 
   Pathname key = repoInfo().path() + "/content.key";
 
-  this->enqueue( OnMediaLocation( key, 1 ).setOptional(true) );
-  this->start( dest_dir, media );
+  enqueue( OnMediaLocation( key, 1 ).setOptional(true) );
+  start( dest_dir, media );
 
   KeyContext context;
   context.setRepoInfo(repoInfo());
@@ -83,16 +84,16 @@ void Downloader::download( MediaSetAccess &media,
   else
     sigchecker.setKeyContext(context);
 
-  this->reset();
+  reset();
 
   if ( ! repoInfo().gpgCheck() )
   {
     WAR << "Signature checking disabled in config of repository " << repoInfo().alias() << endl;
   }
-  this->enqueue( OnMediaLocation( repoInfo().path() + "/content", 1 ),
+  enqueue( OnMediaLocation( repoInfo().path() + "/content", 1 ),
                  repoInfo().gpgCheck() ? FileChecker(sigchecker) : FileChecker(NullFileChecker()) );
-  this->start( dest_dir, media );
-  this->reset();
+  start( dest_dir, media );
+  reset();
 
   Pathname descr_dir;
 
@@ -121,34 +122,32 @@ void Downloader::download( MediaSetAccess &media,
   descr_dir = _repoindex->descrdir; // path below reporoot
   //_datadir  = _repoIndex->datadir;  // path below reporoot
 
+  std::map<std::string,RepoIndex::FileChecksumMap::const_iterator> availablePackageTranslations;
 
   for_( it, _repoindex->metaFileChecksums.begin(), _repoindex->metaFileChecksums.end() )
   {
     // omit unwanted translations
     if ( str::hasPrefix( it->first, "packages" ) )
     {
-      std::string rest( str::stripPrefix( it->first, "packages" ) );
-      if ( ! (   rest.empty()
-              || rest == ".DU"
-              || rest == ".en"
-              || rest == ".gz"
-              || rest == ".DU.gz"
-              || rest == ".en.gz" ) )
+      static const str::regex rx_packages( "^packages((.gz)?|(.([^.]*))(.gz)?)$" );
+      str::smatch what;
+      if ( str::regex_match( it->first, what, rx_packages ) )
       {
-        // Not 100% correct as we take each fallback of textLocale
-        Locale toParse( ZConfig::instance().textLocale() );
-        while ( toParse != Locale::noCode )
-        {
-          if ( rest == ("."+toParse.code()) || (rest == ("."+toParse.code()+".gz")) )
-            break;
-          toParse = toParse.fallback();
-        }
-        if ( toParse == Locale::noCode )
-        {
-          // discard
-          continue;
-        }
+	if ( what[4].empty() // packages(.gz)?
+	  || what[4] == "DU"
+	  || what[4] == "en" )
+	{ ; /* always downloaded */ }
+	else if ( what[4] == "FL" )
+	{ continue; /* never downloaded */ }
+	else
+	{
+	  // remember and decide later
+	  availablePackageTranslations[what[4]] = it;
+	  continue;
+	}
       }
+      else
+	continue; // discard
     }
     else if ( it->first == "patterns.pat"
               || it->first == "patterns.pat.gz" )
@@ -194,7 +193,26 @@ void Downloader::download( MediaSetAccess &media,
     MIL << "adding job " << it->first << endl;
     OnMediaLocation location( repoInfo().path() + descr_dir + it->first, 1 );
     location.setChecksum( it->second );
-    this->enqueueDigested(location, FileChecker(), search_deltafile(_delta_dir + descr_dir, it->first));
+    enqueueDigested(location, FileChecker(), search_deltafile(_delta_dir + descr_dir, it->first));
+  }
+
+  // check whether to download more package translations:
+  LocaleSet wantedLocales( ZConfig::instance().repoRefreshLocales() );
+  for_( it, wantedLocales.begin(), wantedLocales.end() )
+  {
+    for ( Locale toGet( *it ); toGet != Locale::noCode; toGet = toGet.fallback() )
+    {
+      auto it( availablePackageTranslations.find( toGet.code() ) );
+      if ( it != availablePackageTranslations.end() )
+      {
+	auto mit( it->second );
+	MIL << "adding job " << mit->first << endl;
+	OnMediaLocation location( repoInfo().path() + descr_dir + mit->first, 1 );
+	location.setChecksum( mit->second );
+	enqueueDigested(location, FileChecker(), search_deltafile(_delta_dir + descr_dir, mit->first));
+	break;
+      }
+    }
   }
 
   for_( it, _repoindex->mediaFileChecksums.begin(), _repoindex->mediaFileChecksums.end() )
@@ -206,7 +224,7 @@ void Downloader::download( MediaSetAccess &media,
     MIL << "adding job " << it->first << endl;
     OnMediaLocation location( repoInfo().path() + it->first, 1 );
     location.setChecksum( it->second );
-    this->enqueueDigested(location, FileChecker(), search_deltafile(_delta_dir, it->first));
+    enqueueDigested(location, FileChecker(), search_deltafile(_delta_dir, it->first));
   }
 
   for_( it, _repoindex->signingKeys.begin(),_repoindex->signingKeys.end() )
@@ -214,10 +232,10 @@ void Downloader::download( MediaSetAccess &media,
     MIL << "adding job " << it->first << endl;
     OnMediaLocation location( repoInfo().path() + it->first, 1 );
     location.setChecksum( it->second );
-    this->enqueueDigested(location);
+    enqueueDigested(location);
   }
 
-  this->start( dest_dir, media );
+  start( dest_dir, media );
 }
 
 void Downloader::consumeIndex( const RepoIndex_Ptr & data_r )
