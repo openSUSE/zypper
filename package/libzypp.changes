@@ -1,4 +1,13 @@
 -------------------------------------------------------------------
+Fri Oct 21 11:47:39 CEST 2011 - ma@suse.de
+
+- Add zypp.conf option repo.refresh.locales: A list of locales for
+  which translated package descriptions should be downloaded if
+  available.
+- Explixitly set CURLOPT_PROXYAUTH
+- version 10.3.0 (1)
+
+-------------------------------------------------------------------
 Tue Oct 18 16:45:13 CEST 2011 - ma@suse.de
 
 - Add arch armv7tnhl and armv7thl
