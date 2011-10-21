@@ -12,6 +12,7 @@
 #ifndef ZYPP_BASE_REGEX_H
 #define ZYPP_BASE_REGEX_H
 
+#include <iosfwd>
 #include <string>
 #include <regex.h>
 
@@ -30,13 +31,26 @@ namespace zypp
     ///////////////////////////////////////////////////////////////////
     /** \defgroup ZYPP_STR_REGEX Regular expressions
      *
-     * Namespace zypp::str regular expressions \b using the glibc regex library.
+     * \brief Namespace zypp::str regular expressions \b using the glibc regex library.
+     * \see also \ref sat::AttrMatcher string matcher supporing regex, globing, etc.
      *
-     * \see \ref sat::AttrMatcher string matcher supporing regex, globing, etc.
+     * \code
+     *  str::regex rxexpr( "^(A)?([0-9]*) im" );
+     *  str::smatch what;
      *
-     * regex
-     * regex_match
-     * smatch
+     *  std::string mytext( "Y123 imXXXX" );
+     *  if ( str::regex_match( mytext, what, rxexpr ) )
+     *  {
+     *    MIL << "MATCH '" << what[0] << "'" << endl;
+     *    MIL << " subs: " << what.size()-1 << endl;
+     *    for_( i, 1U, what.size() )
+     *      MIL << "      [" << i << "] " << what[i] << endl;
+     *  }
+     *  else
+     *  {
+     *    WAR << "NO MATCH '" << rxexpr << "' in '" <<  mytext << endl;
+     *  }
+     * \endcode
      */
 
     typedef Exception regex_error;
@@ -44,16 +58,21 @@ namespace zypp
     class smatch;
     class regex;
 
+    /**
+     * \ingroup ZYPP_STR_REGEX
+     */
     bool regex_match(const char * s, str::smatch& matches, const regex& regex);
     inline bool regex_match(const std::string& s, str::smatch& matches, const regex& regex)
     { return regex_match( s.c_str(), matches, regex ); }
 
+    /**
+     * \ingroup ZYPP_STR_REGEX
+     */
     bool regex_match(const char * s, const regex& regex);
     inline bool regex_match(const std::string& s, const regex& regex)
     { return regex_match( s.c_str(), regex ); }
 
     /**
-     * \see \ref sat::AttrMatcher string matcher supporing regex, globing, etc.
      * \ingroup ZYPP_STR_REGEX
      */
     class regex {
@@ -102,9 +121,12 @@ namespace zypp
       bool m_valid;
     };
 
+    /** \relates regex Stream output */
+    inline std::ostream & operator<<( std::ostream & str, const regex & obj )
+    { return str << obj.asString(); }
+
     /**
      * \ingroup ZYPP_STR_REGEX
-     * \see regex
      */
     class smatch {
     public:

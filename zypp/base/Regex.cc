@@ -76,8 +76,9 @@ smatch::smatch()
 
 std::string smatch::operator[](unsigned i) const
 {
-  if (i < sizeof(pmatch)/sizeof(*pmatch) && pmatch[i].rm_so != -1)
-    return match_str.substr(pmatch[i].rm_so, pmatch[i].rm_eo-pmatch[i].rm_so);
+  if ( i < sizeof(pmatch)/sizeof(*pmatch) && pmatch[i].rm_so != -1 )
+    return match_str.substr( pmatch[i].rm_so, pmatch[i].rm_eo-pmatch[i].rm_so );
+
   return std::string();
 }
 
@@ -85,11 +86,14 @@ std::string smatch::operator[](unsigned i) const
 unsigned smatch::size() const
 {
   unsigned matches = 0;
-  while (matches <  ((sizeof(pmatch)/sizeof(*pmatch))-1) && pmatch[matches+1].rm_so != -1) {
-    //    std::cout << "match[" << matches << "]: *" << (*this)[matches
-    //        +1] << "*" << std::endl;
-    matches++;
+  // Get highest (pmatch[i].rm_so != -1). Just looking for the 1st
+  // (pmatch[i].rm_so == -1) is wrong as optional mayches "()?"
+  // may be embeded.
+  // NOTE: index is submatch size beacause match[0] is not counted
+  for ( unsigned i = 0; i < sizeof(pmatch)/sizeof(*pmatch); ++i )
+  {
+    if ( pmatch[i].rm_so != -1 )
+      matches = i;
   }
-
   return matches;
 }
