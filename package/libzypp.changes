@@ -1,4 +1,9 @@
 -------------------------------------------------------------------
+Sun Oct 23 01:13:11 CEST 2011 - ma@suse.de
+
+- Update zypp-po.tar.bz2
+
+-------------------------------------------------------------------
 Fri Oct 21 11:47:39 CEST 2011 - ma@suse.de
 
 - Add zypp.conf option repo.refresh.locales: A list of locales for
