@@ -1,4 +1,9 @@
 -------------------------------------------------------------------
+Mon Oct 24 13:35:56 CEST 2011 - ma@suse.de
+
+- Explicitly include textLocale in package translation download
+
+-------------------------------------------------------------------
 Mon Oct 24 09:37:31 CEST 2011 - ma@suse.de
 
 - Update libversion info (due to ABI change in 10.2.0 (bnc#725407)
