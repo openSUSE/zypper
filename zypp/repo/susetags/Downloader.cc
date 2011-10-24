@@ -197,22 +197,27 @@ void Downloader::download( MediaSetAccess &media,
   }
 
   // check whether to download more package translations:
-  LocaleSet wantedLocales( ZConfig::instance().repoRefreshLocales() );
-  for_( it, wantedLocales.begin(), wantedLocales.end() )
   {
-    for ( Locale toGet( *it ); toGet != Locale::noCode; toGet = toGet.fallback() )
-    {
-      auto it( availablePackageTranslations.find( toGet.code() ) );
-      if ( it != availablePackageTranslations.end() )
+    auto fnc_checkTransaltions( [&]( const Locale & locale_r ) {
+      for ( Locale toGet( locale_r ); toGet != Locale::noCode; toGet = toGet.fallback() )
       {
-	auto mit( it->second );
-	MIL << "adding job " << mit->first << endl;
-	OnMediaLocation location( repoInfo().path() + descr_dir + mit->first, 1 );
-	location.setChecksum( mit->second );
-	enqueueDigested(location, FileChecker(), search_deltafile(_delta_dir + descr_dir, mit->first));
-	break;
+	auto it( availablePackageTranslations.find( toGet.code() ) );
+	if ( it != availablePackageTranslations.end() )
+	{
+	  auto mit( it->second );
+	  MIL << "adding job " << mit->first << endl;
+	  OnMediaLocation location( repoInfo().path() + descr_dir + mit->first, 1 );
+	  location.setChecksum( mit->second );
+	  enqueueDigested(location, FileChecker(), search_deltafile(_delta_dir + descr_dir, mit->first));
+	  break;
+	}
       }
+    });
+    for ( const Locale & it : ZConfig::instance().repoRefreshLocales() )
+    {
+      fnc_checkTransaltions( it );
     }
+    fnc_checkTransaltions( ZConfig::instance().textLocale() );
   }
 
   for_( it, _repoindex->mediaFileChecksums.begin(), _repoindex->mediaFileChecksums.end() )
