@@ -1,4 +1,10 @@
 -------------------------------------------------------------------
+Mon Oct 24 09:37:31 CEST 2011 - ma@suse.de
+
+- Update libversion info (due to ABI change in 10.2.0 (bnc#725407)
+- version 10.3.1 (3)
+
+-------------------------------------------------------------------
 Sun Oct 23 01:13:11 CEST 2011 - ma@suse.de
 
 - Update zypp-po.tar.bz2
@@ -28,7 +34,7 @@ Sun Oct 16 01:13:37 CEST 2011 - ma@suse.de
 -------------------------------------------------------------------
 Thu Oct 13 11:50:26 CEST 2011 - ma@suse.de
 
-- Must not differ between type nfs and nfs4 when checking the mount 
+- Must not differ between type nfs and nfs4 when checking the mount
   table (bnc#710269)
 - version 10.1.1 (1)
 
