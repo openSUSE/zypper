@@ -1,4 +1,9 @@
 -------------------------------------------------------------------
+Thu Oct 27 01:14:10 CEST 2011 - ma@suse.de
+
+- Update zypp-po.tar.bz2
+
+-------------------------------------------------------------------
 Mon Oct 24 13:35:56 CEST 2011 - ma@suse.de
 
 - Explicitly include textLocale in package translation download
