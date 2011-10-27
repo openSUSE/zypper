@@ -1,4 +1,9 @@
 -------------------------------------------------------------------
+Thu Oct 27 11:16:53 CEST 2011 - dheidler@suse.de
+
+- Change zypper-log arch to noarch
+
+-------------------------------------------------------------------
 Thu Oct 27 01:14:20 CEST 2011 - ma@suse.de
 
 - Update zypper-po.tar.bz2
