@@ -52,6 +52,7 @@ namespace zypp
    *
    * namespace_settingName()
    *
+   * \ingroup ZyppConfig
    * \ingroup Singleton
   */
   class ZConfig : private base::NonCopyable

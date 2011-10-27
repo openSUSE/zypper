@@ -39,7 +39,15 @@ using namespace zypp::parser;
 ///////////////////////////////////////////////////////////////////
 namespace zypp
 { /////////////////////////////////////////////////////////////////
-
+  /** \addtogroup ZyppConfig Zypp Configuration Options
+   *
+   * The global \c zypp.conf configuration file is per default located in \c /etc/zypp/.
+   * An alternate config file can be set using the environment varaible \c ZYPP_CONF=<PATH>
+   * (see \ref zypp-envars).
+   *
+   * \section ZyppConfig_ZyppConfSample Sample zypp.conf
+   * \include ../zypp.conf
+   */
   ///////////////////////////////////////////////////////////////////
   namespace
   { /////////////////////////////////////////////////////////////////
