@@ -132,7 +132,6 @@ namespace zypp
       /**
        * Add a base url. \see baseUrls
        * \param url The base url for the repository.
-       * \note can change keepPackages,so change it after this call
        *
        * To recreate the base URLs list, use \ref setBaseUrl(const Url &) followed
        * by addBaseUrl().
@@ -140,7 +139,6 @@ namespace zypp
       void addBaseUrl( const Url &url );
       /**
        * Clears current base URL list and adds \a url.
-       * \note can change keepPackages,so change it after this call
        */
       void setBaseUrl( const Url &url );
 
