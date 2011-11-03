@@ -113,7 +113,7 @@ MediaAccess::open (const Url& o_url, const Pathname & preferred_attach_point)
 
     UrlResolverPlugin::HeaderList custom_headers;
     Url url = UrlResolverPlugin::resolveUrl(o_url, custom_headers);
-    
+
     std::string scheme = url.getScheme();
     MIL << "Trying scheme '" << scheme << "'" << endl;
 
@@ -156,7 +156,7 @@ MediaAccess::open (const Url& o_url, const Pathname & preferred_attach_point)
         }
         else
         {
-          if ( urlmediahandler.empty() )
+          if ( ! urlmediahandler.empty() )
           {
             WAR << "unknown mediahandler set: " << urlmediahandler << endl;
           }
@@ -199,24 +199,24 @@ MediaAccess::open (const Url& o_url, const Pathname & preferred_attach_point)
             use_aria = false;
         }
 
-        MediaCurl *curl;        
+        MediaCurl *curl;
 
         if ( use_aria )
-            curl = new MediaAria2c (url,preferred_attach_point);        
-        else if ( use_multicurl )                     
-            curl = new MediaMultiCurl (url,preferred_attach_point); 
+            curl = new MediaAria2c (url,preferred_attach_point);
+        else if ( use_multicurl )
+            curl = new MediaMultiCurl (url,preferred_attach_point);
 	else
             curl = new MediaCurl (url,preferred_attach_point);
-        
+
         UrlResolverPlugin::HeaderList::const_iterator it;
         for (it = custom_headers.begin();
              it != custom_headers.end();
              ++it) {
-            std::string header = it->first + ": " + it->second;            
+            std::string header = it->first + ": " + it->second;
             MIL << "Added custom header -> " << header << endl;
             curl->settings().addHeader(header);
         }
-        _handler = curl;        
+        _handler = curl;
     }
     else if (scheme == "plugin" )
 	_handler = new MediaPlugin (url,preferred_attach_point);
