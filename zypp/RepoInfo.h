@@ -269,11 +269,11 @@ namespace zypp
       void setGpgKeyUrl( const Url &gpgkey );
 
       /**
-       * \short Whether to keep the packages downloaded from this repository will be kept in local cache
+       * \short Whether packages downloaded from this repository will be kept in local cache
        */
       bool keepPackages() const;
       /**
-       * \short Set if the packaqes downloaded from this repository will be kept in local cache
+       * \short Set if packaqes downloaded from this repository will be kept in local cache
        *
        * If the setting is true, all downloaded packages from this repository will be
        * copied to the local raw cache.

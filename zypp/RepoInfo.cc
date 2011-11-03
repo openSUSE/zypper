@@ -65,14 +65,10 @@ namespace zypp
     { return metadatapath.empty() ? Pathname() : metadatapath / path / "license.tar.gz"; }
 
     Url getmirrorListUrl() const
-    {
-      return replacer(mirrorlist_url);
-    }
+    { return replacer(mirrorlist_url); }
 
     Url &setmirrorListUrl()
-    {
-      return mirrorlist_url;
-    }
+    { return mirrorlist_url; }
 
     const std::set<Url> &baseUrls() const
     {
@@ -96,27 +92,10 @@ namespace zypp
     }
 
     std::set<Url> &baseUrls()
-    {
-      return _baseUrls;
-    }
+    { return _baseUrls; }
 
     bool baseurl2dump() const
-    {
-      return !emptybaseurls && !_baseUrls.empty();
-    }
-
-    /** Compute a resonable default for keepPackages based on URL scheme. */
-    bool keepPackagesDefault() const
-    {
-      if (indeterminate(keeppackages))
-      {
-        if (_baseUrls.empty())
-          return mirrorlist_url.schemeIsDownloading();
-        else
-          return _baseUrls.begin()->schemeIsDownloading();
-      }
-      return (bool) keeppackages;
-    }
+    { return !emptybaseurls && !_baseUrls.empty(); }
 
   public:
     TriBool gpgcheck;
@@ -178,32 +157,24 @@ namespace zypp
 
   unsigned RepoInfo::priority() const
   { return _pimpl->priority; }
+
   unsigned RepoInfo::defaultPriority()
   { return Impl::defaultPriority; }
+
   void RepoInfo::setPriority( unsigned newval_r )
-  {
-    _pimpl->priority = newval_r ? newval_r : Impl::defaultPriority;
-  }
+  { _pimpl->priority = newval_r ? newval_r : Impl::defaultPriority; }
 
   void RepoInfo::setGpgCheck( bool check )
-  {
-    _pimpl->gpgcheck = check;
-  }
+  { _pimpl->gpgcheck = check; }
 
   void RepoInfo::setMirrorListUrl( const Url &url )
-  {
-    _pimpl->setmirrorListUrl() = url;
-  }
+  { _pimpl->setmirrorListUrl() = url; }
 
   void RepoInfo::setGpgKeyUrl( const Url &url )
-  {
-    _pimpl->gpgkey_url = url;
-  }
+  { _pimpl->gpgkey_url = url; }
 
   void RepoInfo::addBaseUrl( const Url &url )
-  {
-    _pimpl->baseUrls().insert(url);
-  }
+  { _pimpl->baseUrls().insert(url); }
 
   void RepoInfo::setBaseUrl( const Url &url )
   {
@@ -212,47 +183,35 @@ namespace zypp
   }
 
   void RepoInfo::setPath( const Pathname &path )
-  {
-    _pimpl->path = path;
-  }
+  { _pimpl->path = path; }
 
   void RepoInfo::setType( const repo::RepoType &t )
-  {
-    _pimpl->type = t;
-  }
+  { _pimpl->type = t; }
 
   void RepoInfo::setProbedType( const repo::RepoType &t ) const
   { _pimpl->setProbedType( t ); }
 
 
   void RepoInfo::setMetadataPath( const Pathname &path )
-  {
-    _pimpl->metadatapath = path;
-  }
+  { _pimpl->metadatapath = path; }
 
   void RepoInfo::setPackagesPath( const Pathname &path )
-  {
-    _pimpl->packagespath = path;
-  }
+  { _pimpl->packagespath = path; }
 
   void RepoInfo::setKeepPackages( bool keep )
-  {
-    _pimpl->keeppackages = keep;
-  }
+  { _pimpl->keeppackages = keep; }
 
   void RepoInfo::setService( const std::string& name )
-  {
-    _pimpl->service = name;
-  }
+  { _pimpl->service = name; }
 
-  void RepoInfo::setTargetDistribution(
-      const std::string & targetDistribution)
-  {
-    _pimpl->targetDistro = targetDistribution;
-  }
+  void RepoInfo::setTargetDistribution( const std::string & targetDistribution )
+  { _pimpl->targetDistro = targetDistribution; }
 
   bool RepoInfo::gpgCheck() const
-  { return indeterminate(_pimpl->gpgcheck) ? true : (bool) _pimpl->gpgcheck; }
+  { return indeterminate(_pimpl->gpgcheck) ? true : (bool)_pimpl->gpgcheck; }
+
+  bool RepoInfo::keepPackages() const
+  { return indeterminate(_pimpl->keeppackages) ? false : (bool)_pimpl->keeppackages; }
 
   Pathname RepoInfo::metadataPath() const
   { return _pimpl->metadatapath; }
@@ -264,9 +223,7 @@ namespace zypp
   { return _pimpl->type; }
 
   Url RepoInfo::mirrorListUrl() const
-  {
-    return _pimpl->getmirrorListUrl();
-  }
+  { return _pimpl->getmirrorListUrl(); }
 
   Url RepoInfo::gpgKeyUrl() const
   { return _pimpl->gpgkey_url; }
@@ -314,12 +271,6 @@ namespace zypp
 
   bool RepoInfo::baseUrlSet() const
   { return _pimpl->baseurl2dump(); }
-
-  // false by default (if not set by setKeepPackages)
-  bool RepoInfo::keepPackages() const
-  {
-    return _pimpl->keepPackagesDefault();
-  }
 
   ///////////////////////////////////////////////////////////////////
 
@@ -423,30 +374,27 @@ namespace zypp
         str << "- url         : " << *it << std::endl;
       }
     }
-    if ( ! (_pimpl->getmirrorListUrl().asString().empty())  )
-    {
-      str << "- mirrorlist  : " << _pimpl->getmirrorListUrl() << std::endl;
-    }
-    str << "- path        : " << path() << std::endl;
+
+    // print if non empty value
+    auto strif( [&] ( const std::string & tag_r, const std::string & value_r ) {
+      if ( ! value_r.empty() )
+	str << tag_r << value_r << std::endl;
+    });
+
+    strif( "- mirrorlist  : ", _pimpl->getmirrorListUrl().asString() );
+    strif( "- path        : ", path().asString() );
     str << "- type        : " << type() << std::endl;
     str << "- priority    : " << priority() << std::endl;
-
     str << "- gpgcheck    : " << gpgCheck() << std::endl;
-    str << "- gpgkey      : " << gpgKeyUrl() << std::endl;
+    strif( "- gpgkey      : ", gpgKeyUrl().asString() );
 
-    if (!indeterminate(_pimpl->keeppackages))
+    if ( ! indeterminate(_pimpl->keeppackages) )
       str << "- keeppackages: " << keepPackages() << std::endl;
 
-    str << "- service     : " << service() << std::endl;
-
-    if (!targetDistribution().empty())
-      str << "- targetdistro: " << targetDistribution() << std::endl;
-
-    if (!metadataPath().empty())
-      str << "- metadataPath: " << metadataPath() << std::endl;
-
-    if (!packagesPath().empty())
-      str << "- packagesPath: " << packagesPath() << std::endl;
+    strif( "- service     : ", service() );
+    strif( "- targetdistro: ", targetDistribution() );
+    strif( "- metadataPath: ", metadataPath().asString() );
+    strif( "- packagesPath: ", packagesPath().asString() );
 
     return str;
   }
