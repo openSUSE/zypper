@@ -1,4 +1,10 @@
 -------------------------------------------------------------------
+Thu Nov  3 14:58:42 CET 2011 - ma@suse.de
+
+- Let RepoInfo::keepPackages properly default to FALSE (bnc#727385)
+- version 10.3.2 (3)
+
+-------------------------------------------------------------------
 Thu Nov  3 01:13:12 CET 2011 - ma@suse.de
 
 - Update zypp-po.tar.bz2
