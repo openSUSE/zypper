@@ -1,4 +1,9 @@
 -------------------------------------------------------------------
+Sun Nov  6 01:14:12 CET 2011 - ma@suse.de
+
+- Update zypper-po.tar.bz2
+
+-------------------------------------------------------------------
 Fri Nov  4 13:43:19 CET 2011 - ma@suse.de
 
 - zypper-log: fix regex and on the fly support searching yast logs too
