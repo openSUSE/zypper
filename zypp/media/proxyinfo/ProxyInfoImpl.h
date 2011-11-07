@@ -47,7 +47,7 @@ namespace zypp {
       /** Return \c true if  \ref enabled and \a url_r does not match \ref noProxy. */
       bool useProxyFor( const Url & url_r ) const
       {
-        if ( ! enabled() && proxy( url_r ).empty() )
+        if ( ! enabled() || proxy( url_r ).empty() )
           return false;
 
         ProxyInfo::NoProxyList noproxy( noProxy() );
