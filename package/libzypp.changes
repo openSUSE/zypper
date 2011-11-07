@@ -1,4 +1,11 @@
 -------------------------------------------------------------------
+Mon Nov  7 13:49:44 UTC 2011 - dimstar@opensuse.org
+
+- Add pkg-config BuildRequires: We fail to detect libproxy due to
+  the missing pkg-config. Additionally, we have a .pc file
+  ourselfes, which we do not get the provides for [bnc#696805]
+
+-------------------------------------------------------------------
 Thu Nov  3 14:58:42 CET 2011 - ma@suse.de
 
 - Let RepoInfo::keepPackages properly default to FALSE (bnc#727385)

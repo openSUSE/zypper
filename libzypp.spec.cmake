@@ -57,6 +57,7 @@ BuildRequires:  gettext-devel
 BuildRequires:  graphviz
 BuildRequires:  libxml2-devel
 BuildRequires:  libproxy-devel
+BuildRequires:  pkg-config
 
 BuildRequires:  libsolv-devel
 %if 0%{?suse_version} >= 1100
