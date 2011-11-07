@@ -1,4 +1,10 @@
 -------------------------------------------------------------------
+Mon Nov  7 15:45:28 CET 2011 - ma@suse.de
+
+- Don't use proxy if disabled (bnc#696805)
+- version 10.3.3 (3)
+
+-------------------------------------------------------------------
 Mon Nov  7 13:49:44 UTC 2011 - dimstar@opensuse.org
 
 - Add pkg-config BuildRequires: We fail to detect libproxy due to
