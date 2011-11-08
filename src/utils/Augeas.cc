@@ -173,7 +173,7 @@ string Augeas::getOption(const string & option) const
   {
     string augpath_u = userOptionPath(opt[0], opt[1]);
     string result = get(augpath_u);
-    if (_last_get_result == 1 && !isCommented(opt[0], opt[1], false))
+    if (_last_get_result == 1)
       return result;
   }
 
@@ -181,7 +181,7 @@ string Augeas::getOption(const string & option) const
   {
     string augpath_g = global_option_path(opt[0], opt[1]);
     string result = get(augpath_g);
-    if (_last_get_result == 1 && !isCommented(opt[0], opt[1], true))
+    if (_last_get_result == 1)
       return result;
   }
 
@@ -189,56 +189,3 @@ string Augeas::getOption(const string & option) const
 }
 
 // ---------------------------------------------------------------------------
-
-TriBool Augeas::isCommented(
-    const string & section, const string & option, bool global) const
-{
-  // don't bother calling aug_get if we don't have the config read
-  if ((global && !_got_global_zypper_conf) ||
-      (!global && !_got_user_zypper_conf))
-    return TriBool::indeterminate_value;
-
-  Pathname path(global ?
-      global_option_path(section, option) :
-      userOptionPath(section, option));
-
-  TriBool result;
-
-  char ** matches;
-  int matchcount = ::aug_match(_augeas, path.c_str(), &matches);
-  if (matchcount == 1)
-  {
-    path = Pathname(matches[0]);
-    // the 'commented' flag is a sibling of the key=value node
-    path = path.dirname() + "/commented";
-    DBG << path << ": ";
-    int res = ::aug_get(_augeas, path.c_str(), NULL);
-    if (res)
-      result = true;
-    else if (res == 0)
-      result = false;
-    DBG << result << endl;
-  }
-  for (int i = 0; i < matchcount; ++i)
-    ::free(matches[i]);
-  if (matchcount)
-    ::free(matches);
-
-  return result;
-}
-
-// ---------------------------------------------------------------------------
-
-TriBool Augeas::isCommented(const string & option, bool global) const
-{
-  vector<string> opt;
-  str::split(option, back_inserter(opt), "/");
-
-  if (opt.size() != 2 || opt[0].empty() || opt[1].empty())
-  {
-    ERR << "invalid option " << option << endl;
-    return TriBool::indeterminate_value;
-  }
-
-  return isCommented(opt[0], opt[1], global);
-}
