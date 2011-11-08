@@ -24,26 +24,18 @@ extern "C"
 class Augeas : private zypp::base::NonCopyable
 {
 public:
-  Augeas(const std::string & file = "");
+  Augeas( const std::string & file = "" );
   ~Augeas();
 
-  std::string get(const std::string & augpath) const;
+  std::string get( const std::string & augpath ) const;
 
-  std::string getOption(const std::string & option) const;
-  zypp::TriBool isCommented(const std::string & option, bool global) const;
-  void comment(const std::string & option);
-  void uncomment(const std::string & option);
+  std::string getOption( const std::string & option ) const;
 
   ::augeas * getAugPtr()
   { return _augeas; }
 
 private:
-  std::string userOptionPath(
-      const std::string & section, const std::string & option) const;
-
-  zypp::TriBool isCommented(const std::string & section,
-      const std::string & option,
-      bool global) const;
+  std::string userOptionPath( const std::string & section, const std::string & option ) const;
 
 private:
   ::augeas * _augeas;
