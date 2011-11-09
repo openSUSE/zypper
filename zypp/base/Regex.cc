@@ -85,15 +85,14 @@ std::string smatch::operator[](unsigned i) const
 
 unsigned smatch::size() const
 {
-  unsigned matches = 0;
+  unsigned matches = unsigned(-1);
   // Get highest (pmatch[i].rm_so != -1). Just looking for the 1st
   // (pmatch[i].rm_so == -1) is wrong as optional mayches "()?"
   // may be embeded.
-  // NOTE: index is submatch size beacause match[0] is not counted
   for ( unsigned i = 0; i < sizeof(pmatch)/sizeof(*pmatch); ++i )
   {
     if ( pmatch[i].rm_so != -1 )
       matches = i;
   }
-  return matches;
+  return ++matches;
 }

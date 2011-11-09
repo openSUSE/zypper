@@ -379,7 +379,7 @@ namespace zypp
     catch( ... )
     {}
 
-    if(ret && out.size() == 5)
+    if(ret && out.size() == 6)
     {
       std::string scheme = out[1];
       if (scheme.size() > 1)
