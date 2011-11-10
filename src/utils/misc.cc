@@ -213,42 +213,48 @@ Url make_url (const string & url_s)
 // http://gitorious.org/opensuse/build-service/blobs/master/src/webui/app/controllers/application_controller.rb
 #define OBS_PROJECT_NAME_RX "[" ALNUM "][-+" ALNUM "\\.:]+"
 
-Url make_obs_url (
-    const string & obsuri,
-    const Url & base_url,
-    const string & default_platform)
+
+Url make_obs_url( const string & obsuri, const Url & base_url, const string & default_platform )
 {
-  // zypper's 'obs' URI regex
-  static str::regex obs_uri_rx("^obs://(" OBS_PROJECT_NAME_RX ")/?(.*)$");
+  // obs-server ==> < base_url, default_platform >
+  static std::map<std::string, std::pair<zypp::Url,std::string>> wellKnownServers({
+    { "build.opensuse.org",	{ Url("http://download.opensuse.org/repositories/"),	std::string() } }
+  });
+
+  static str::regex obs_uri_rx("^obs://(" OBS_PROJECT_NAME_RX ")(/(.*)?)?$");
   str::smatch what;
-  if (str::regex_match(obsuri, what, obs_uri_rx))
+
+  if ( str::regex_match( obsuri, what, obs_uri_rx ) )
   {
-    vector<string> obsrpath;
-    str::split(what[1], back_inserter(obsrpath), ":");
-    if (obsrpath.empty())
+    std::string project( what[1] );
+    std::string platform( what[3] );
+
+    // in case the project matches a well known obs://server,
+    // strip it and use it's base_url and platform defaults.
+    // If the servers platform default is empty, use the
+    // global one.
+    auto it( wellKnownServers.find( project ) );
+    if ( it != wellKnownServers.end() )
     {
-      Zypper::instance()->out().error(_("Empty OBS project name."));
-      return Url();
+      static str::regex obs_uri2_rx("^(" OBS_PROJECT_NAME_RX ")(/(.*)?)?$");
+      if ( str::regex_match( platform, what, obs_uri2_rx ) )
+      {
+	project = what[1];
+	platform = ( what[3].empty() ? it->second.second : what[3] );
+      }
+      else
+	it = wellKnownServers.end();	// we stay with the 1st match, thus will use the global defaults
     }
 
-    ostringstream urlstr; urlstr << "/";
-    unsigned i = 0;
-    for (; i < obsrpath.size() - 1; ++i)
-      urlstr << obsrpath[i] << ":/";
-    urlstr << obsrpath[i] << "/";         // no colon at the end
+    // Now bulid the url; ':' in project is replaced by ':/'
+    Url ret( it == wellKnownServers.end() ? base_url : it->second.first );
 
-    if (what[2].empty())
-      urlstr << default_platform;
-    else
-      urlstr << what[2];
-    urlstr << "/";
+    Pathname path( ret.getPathName() );
+    path /= str::gsub( project, ":", ":/" );
+    path /= ( platform.empty() ? default_platform : platform );
+    ret.setPathName( path.asString() );
 
-    Url url = Url(base_url);
-    Pathname newpath(url.getPathName());
-    newpath = newpath / Pathname(urlstr.str());
-    url.setPathName(newpath.asString());
-
-    return url;
+    return ret;
   }
   else
   {
