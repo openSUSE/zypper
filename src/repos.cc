@@ -489,6 +489,9 @@ void get_repos(Zypper & zypper,
   }
 }
 
+// Explicit instantiations required for other translation units:
+template void get_repos(Zypper &, const list<string>::const_iterator &, const list<string>::const_iterator &, list<RepoInfo> &, list<string> & );
+
 // ---------------------------------------------------------------------------
 
 /**
