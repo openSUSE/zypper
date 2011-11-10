@@ -48,7 +48,6 @@ namespace zypp
   // comparator for CredentialSet
   struct AuthDataComparator
   {
-    static const url::ViewOption vopt;
     bool operator()(const AuthData_Ptr & lhs, const AuthData_Ptr & rhs);
   };
 
