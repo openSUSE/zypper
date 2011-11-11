@@ -52,59 +52,180 @@ extern "C"
 
 using namespace std;
 
-namespace zypp {
-  namespace media {
-
-///////////////////////////////////////////////////////////////////
-//
-//  CLASS NAME : MediaCD
-//
-///////////////////////////////////////////////////////////////////
-
-
-  ///////////////////////////////////////////////////////////////////
-  //
-  //
-  //  METHOD NAME : MediaCD::MediaCD
-  //  METHOD TYPE : Constructor
-  //
-  //  DESCRIPTION :
-  //
-  MediaCD::MediaCD( const Url &      url_r,
-                    const Pathname & attach_point_hint_r )
-    : MediaHandler( url_r, attach_point_hint_r,
-                    url_r.getPathName(), // urlpath below attachpoint
-                    false ),
-      _lastdev(-1), _lastdev_tried(-1)
+//////////////////////////////////////////////////////////////////
+namespace zypp
+{
+  //////////////////////////////////////////////////////////////////
+  namespace media
   {
-    MIL << "MediaCD::MediaCD(" << url_r << ", " << attach_point_hint_r << ")"
-        << endl;
 
-    if( url_r.getScheme() != "dvd" && url_r.getScheme() != "cd")
+    //////////////////////////////////////////////////////////////////
+    namespace
+    {
+      typedef std::list<MediaSource> DeviceList;
+
+      //////////////////////////////////////////////////////////////////
+      /// \brief Try to detect cd/dvd devices using hal/udev
+      ///
+      /// Returns an empty device list on error.
+      ///
+      /// \todo I took the code more or less as it was from MediaCD::detectDevices
+      /// into this function. Semantic between HAL and UDEV seems to be slightly
+      /// different, esp. in supportingDVD mode. This should be investigated and fixed.
+      //////////////////////////////////////////////////////////////////
+      DeviceList systemDetectDevices( bool supportingDVD_r )
+      {
+	DeviceList detected;
+
+#ifdef HAVE_UDEV
+	// http://www.kernel.org/pub/linux/utils/kernel/hotplug/libudev/index.html
+	zypp::AutoDispose<struct udev *> udev( ::udev_new(), ::udev_unref );
+	if ( ! udev )
+	{
+	  ERR << "Can't create udev context." << endl;
+	  return DeviceList();
+	}
+
+	zypp::AutoDispose<struct udev_enumerate *> enumerate( ::udev_enumerate_new(udev), ::udev_enumerate_unref );
+	if ( ! enumerate )
+	{
+	  ERR << "Can't create udev list entry." << endl;
+	  return DeviceList();
+	}
+
+	::udev_enumerate_add_match_subsystem( enumerate, "block" );
+	::udev_enumerate_add_match_property( enumerate, "ID_CDROM", "1" );
+	::udev_enumerate_scan_devices( enumerate );
+
+	struct udev_list_entry * entry = 0;
+	udev_list_entry_foreach( entry, ::udev_enumerate_get_list_entry( enumerate ) )
+	{
+	  zypp::AutoDispose<struct udev_device *> device( ::udev_device_new_from_syspath( ::udev_enumerate_get_udev( enumerate ),
+											  ::udev_list_entry_get_name( entry ) ),
+							  ::udev_device_unref );
+	  if ( ! device )
+	  {
+	    ERR << "Can't create udev device." << endl;
+	    continue;
+	  }
+
+	  if ( supportingDVD_r && ! ::udev_device_get_property_value( device, "ID_CDROM_DVD" ) )
+	  {
+	    continue;	// looking for dvd only
+	  }
+
+	  const char * devnodePtr( ::udev_device_get_devnode( device ) );
+	  if ( ! devnodePtr )
+	  {
+	    ERR << "Got NULL devicenode." << endl;
+	    continue;
+	  }
+
+	  // In case we need it someday:
+	  //const char * mountpath = ::udev_device_get_property_value( device, "FSTAB_DIR" );
+
+	  PathInfo devnode( devnodePtr );
+	  if ( devnode.isBlk() )
+	  {
+	    MediaSource media( "cdrom", devnode.path().asString(), devnode.major(), devnode.minor() );
+	    DBG << "Found (udev): " << media << std::endl;
+	    detected.push_back( media );
+	  }
+	}
+	if ( detected.empty() )
+	{
+	  WAR << "Did not find any CD/DVD device." << endl;
+	}
+#elif HAVE_HAL
+	using namespace zypp::target::hal;
+	try
+	{
+	  HalContext hal(true);
+
+	  std::vector<std::string> drv_udis;
+	  drv_udis = hal.findDevicesByCapability("storage.cdrom");
+
+	  DBG << "Found " << drv_udis.size() << " cdrom drive udis" << std::endl;
+	  for(size_t d = 0; d < drv_udis.size(); d++)
+	  {
+	    HalDrive drv( hal.getDriveFromUDI( drv_udis[d]));
+
+	    if( drv)
+	    {
+	      bool supportsDVD=false;
+	      if( supportingDVD_r)
+	      {
+		std::vector<std::string> caps;
+		try {
+		  caps = drv.getCdromCapabilityNames();
+		}
+		catch(const HalException &e)
+		{
+		  ZYPP_CAUGHT(e);
+		}
+
+		std::vector<std::string>::const_iterator ci;
+		for( ci=caps.begin(); ci != caps.end(); ++ci)
+		{
+		  if( *ci == "dvd")
+		    supportsDVD = true;
+		}
+	      }
+
+	      MediaSource media("cdrom", drv.getDeviceFile(),
+		      drv.getDeviceMajor(),
+		      drv.getDeviceMinor());
+		  DBG << "Found " << drv_udis[d] << ": "
+		  << media.asString() << std::endl;
+		  if( supportingDVD_r && supportsDVD)
+		  {
+		    detected.push_front(media);
+		  }
+		  else
+		  {
+		    detected.push_back(media);
+		  }
+	    }
+	  }
+	}
+	catch(const zypp::target::hal::HalException &e)
+	{
+	  ZYPP_CAUGHT(e);
+	}
+#endif
+	return detected;
+      }
+
+    } // namespace
+    //////////////////////////////////////////////////////////////////
+
+
+  MediaCD::MediaCD( const Url & url_r, const Pathname & attach_point_hint_r )
+    : MediaHandler( url_r, attach_point_hint_r, url_r.getPathName(), false )
+    , _lastdev( -1 )
+    , _lastdev_tried( -1 )
+  {
+    MIL << "MediaCD::MediaCD(" << url_r << ", " << attach_point_hint_r << ")" << endl;
+
+    if ( url_r.getScheme() != "dvd" && url_r.getScheme() != "cd" )
     {
       ERR << "Unsupported schema in the Url: " << url_r.asString() << endl;
       ZYPP_THROW(MediaUnsupportedUrlSchemeException(_url));
     }
 
-    string devices = _url.getQueryParam("devices");
-    if (!devices.empty())
+    string devices = _url.getQueryParam( "devices" );
+    if ( ! devices.empty() )
     {
-      string::size_type pos;
-      DBG << "parse " << devices << endl;
-      while(!devices.empty())
+      std::vector<std::string> words;
+      str::split( devices, std::back_inserter(words), "," );
+      for ( const std::string & device : words )
       {
-        pos = devices.find(',');
-        string device = devices.substr(0,pos);
-        if (!device.empty())
-        {
-          MediaSource media("cdrom", device, 0, 0);
-          _devices.push_back( media);
-          DBG << "use device (delayed verify)" << device << endl;
-        }
-        if (pos!=string::npos)
-          devices=devices.substr(pos+1);
-        else
-          devices.erase();
+	if ( device.empty() )
+	  continue;
+
+	MediaSource media( "cdrom", device, 0, 0 );
+	_devices.push_back( media );
+	DBG << "use device (delayed verify)" << device << endl;
       }
     }
     else
@@ -113,7 +234,7 @@ namespace zypp {
       return;
     }
 
-    if( _devices.empty())
+    if ( _devices.empty() )
     {
       ERR << "Unable to find any cdrom drive for " << _url.asString() << endl;
       ZYPP_THROW(MediaBadUrlEmptyDestinationException(_url));
@@ -202,147 +323,71 @@ namespace zypp {
     return true;
   }
 
-  ///////////////////////////////////////////////////////////////////
-  //
-  //
-  //  METHOD NAME : MediaCD::detectDevices
-  //  METHOD TYPE : MediaCD::DeviceList
-  //
-  MediaCD::DeviceList MediaCD::detectDevices( bool supportingDVD ) const
+
+  MediaCD::DeviceList MediaCD::detectDevices( bool supportingDVD_r ) const
   {
-    DeviceList detected;
-#ifdef HAVE_UDEV
-    // http://www.kernel.org/pub/linux/utils/kernel/hotplug/libudev/index.html
-    zypp::AutoDispose<struct udev *> udev( ::udev_new(), ::udev_unref );
-    if ( ! udev )
+    DeviceList detected( systemDetectDevices( supportingDVD_r ) );
+
+    if ( detected.empty() )
     {
-      ERR << "Can't create udev context." << endl;
-      return DeviceList();
-    }
-
-    zypp::AutoDispose<struct udev_enumerate *> enumerate( ::udev_enumerate_new(udev), ::udev_enumerate_unref );
-    if ( ! enumerate )
-    {
-      ERR << "Can't create udev list entry." << endl;
-      return DeviceList();
-    }
-
-    ::udev_enumerate_add_match_subsystem( enumerate, "block" );
-    ::udev_enumerate_add_match_property( enumerate, "ID_CDROM", "1" );
-    ::udev_enumerate_scan_devices( enumerate );
-
-    struct udev_list_entry * entry = 0;
-    udev_list_entry_foreach( entry, ::udev_enumerate_get_list_entry( enumerate ) )
-    {
-      zypp::AutoDispose<struct udev_device *> device( ::udev_device_new_from_syspath( ::udev_enumerate_get_udev( enumerate ),
-										      ::udev_list_entry_get_name( entry ) ),
-						      ::udev_device_unref );
-      if ( ! device )
+      WAR << "CD/DVD drive detection with HAL/UDEV failed! Guessing..." << std::endl;
+      PathInfo dvdinfo( "/dev/dvd" );
+      PathInfo cdrinfo( "/dev/cdrom" );
+      if ( dvdinfo.isBlk() )
       {
-	ERR << "Can't create udev device." << endl;
-	continue;
+	MediaSource media( "cdrom", dvdinfo.path().asString(), dvdinfo.major(), dvdinfo.minor() );
+	DBG << "Found (GUESS): " << media << std::endl;
+	detected.push_back( media );
       }
-
-      if ( supportingDVD && ! ::udev_device_get_property_value( device, "ID_CDROM_DVD" ) )
+      if ( cdrinfo.isBlk()
+	&& ! ( cdrinfo.major() == dvdinfo.major() && cdrinfo.minor() == dvdinfo.minor() ) )
       {
-	continue;	// looking for dvd only
-      }
-
-      const char * devnodePtr( ::udev_device_get_devnode( device ) );
-      if ( ! devnodePtr )
-      {
-	ERR << "Got NULL devicenode." << endl;
-	continue;
-      }
-
-      // In case we need it someday:
-      //const char * mountpath = ::udev_device_get_property_value( device, "FSTAB_DIR" );
-
-      PathInfo devnode( devnodePtr );
-      if ( devnode.isBlk() )
-      {
-	MediaSource media( "cdrom", devnode.path().asString(), devnode.major(), devnode.minor() );
-	DBG << "Found (udev): " << media << std::endl;
+	MediaSource media( "cdrom", cdrinfo.path().asString(), cdrinfo.major(), cdrinfo.minor() );
+	DBG << "Found (GUESS): " << media << std::endl;
 	detected.push_back( media );
       }
     }
-    if ( detected.empty() )
-      WAR << "Did not find any CD/DVD device." << endl;
-#elif HAVE_HAL
-    using namespace zypp::target::hal;
-    try
+
+    // NOTE: On the fly build on-demand device list. Code was moved to
+    // here to get rid of code duplication, while keeping the ABI. Acuallty
+    // this code should be moved to a _devices accessor method.
+    if ( _devices.empty() )
     {
-      HalContext hal(true);
-
-      std::vector<std::string> drv_udis;
-      drv_udis = hal.findDevicesByCapability("storage.cdrom");
-
-      DBG << "Found " << drv_udis.size() << " cdrom drive udis" << std::endl;
-      for(size_t d = 0; d < drv_udis.size(); d++)
+      DBG << "creating on-demand device list" << endl;
+      //default is /dev/cdrom; for dvd: /dev/dvd if it exists
+      string device( "/dev/cdrom" );
+      if ( _url.getScheme() == "dvd" && PathInfo( "/dev/dvd" ).isBlk() )
       {
-        HalDrive drv( hal.getDriveFromUDI( drv_udis[d]));
+        device = "/dev/dvd";
+      }
 
-        if( drv)
-        {
-          bool supportsDVD=false;
-          if( supportingDVD)
-          {
-            std::vector<std::string> caps;
-            try {
-              caps = drv.getCdromCapabilityNames();
-            }
-            catch(const HalException &e)
-            {
-              ZYPP_CAUGHT(e);
-            }
-
-            std::vector<std::string>::const_iterator ci;
-            for( ci=caps.begin(); ci != caps.end(); ++ci)
-            {
-              if( *ci == "dvd")
-                supportsDVD = true;
-            }
-          }
-
-          MediaSource media("cdrom", drv.getDeviceFile(),
-                            drv.getDeviceMajor(),
-                            drv.getDeviceMinor());
-          DBG << "Found " << drv_udis[d] << ": "
-              << media.asString() << std::endl;
-          if( supportingDVD && supportsDVD)
-          {
-            detected.push_front(media);
-          }
-          else
-          {
-            detected.push_back(media);
-          }
-        }
+      PathInfo dinfo( device );
+      if ( dinfo.isBlk() )
+      {
+	MediaSource media( "cdrom", device, dinfo.major(), dinfo.minor() );
+	if ( detected.empty() )
+	{
+	  _devices.push_front( media );	// better try this than nothing
+	}
+	else
+	{
+	  for( const auto & d : detected )
+	  {
+	    // /dev/cdrom or /dev/dvd to the front
+	    if ( media.equals( d ) )
+	      _devices.push_front( d );
+	    else
+	      _devices.push_back( d );
+	  }
+	}
+      }
+      else
+      {
+	// no /dev/cdrom or /dev/dvd link
+	_devices = detected;
       }
     }
-    catch(const zypp::target::hal::HalException &e)
-    {
-      ZYPP_CAUGHT(e);
-    }
-#else // manual way
-#warning Poor CDROM devices detection without udev/HAL
-    WAR << "Cdrom drive detection without HAL! " << std::endl;
-    PathInfo dvdinfo( "/dev/dvd" );
-    PathInfo cdrinfo( "/dev/cdrom" );
-    if ( dvdinfo.isBlk() )
-    {
-      MediaSource media( "cdrom", dvdinfo.path().asString(), dvdinfo.major(), dvdinfo.minor() );
-      DBG << "Found (NO_HAL): " << media << std::endl;
-      detected.push_back( media );
-    }
-    if ( cdrinfo.isBlk()
-         && ! ( cdrinfo.major() == dvdinfo.major() && cdrinfo.minor() == dvdinfo.minor() ) )
-    {
-      MediaSource media( "cdrom", cdrinfo.path().asString(), cdrinfo.major(), cdrinfo.minor() );
-      DBG << "Found (NO_HAL): " << media << std::endl;
-      detected.push_back( media );
-    }
-#endif
+
     return detected;
   }
 
@@ -355,55 +400,21 @@ namespace zypp {
   //
   //  DESCRIPTION : Asserted that not already attached, and attachPoint is a directory.
   //
-  void MediaCD::attachTo(bool next)
+  void MediaCD::attachTo( bool next )
   {
     DBG << "next " << next << " last " << _lastdev << " last tried " << _lastdev_tried << endl;
-    if (next && _lastdev == -1)
+    if ( next && _lastdev == -1 )
       ZYPP_THROW(MediaNotSupportedException(url()));
 
-    DeviceList detected(
-      detectDevices(_url.getScheme() == "dvd" ? true : false));
-
-    if(_devices.empty())
-    {
-      DBG << "creating on-demand device list" << endl;
-      //default is /dev/cdrom; for dvd: /dev/dvd if it exists
-      string device( "/dev/cdrom" );
-      if ( _url.getScheme() == "dvd" && PathInfo( "/dev/dvd" ).isBlk() )
-      {
-        device = "/dev/dvd";
-      }
-
-      PathInfo dinfo(device);
-      if( dinfo.isBlk())
-      {
-        MediaSource media("cdrom", device, dinfo.major(), dinfo.minor());
-
-        DeviceList::const_iterator d( detected.begin());
-        for( ; d != detected.end(); ++d)
-        {
-          // /dev/cdrom or /dev/dvd to the front
-          if( media.equals( *d))
-            _devices.push_front( *d);
-          else
-            _devices.push_back( *d);
-        }
-      }
-      else
-      {
-        // no /dev/cdrom or /dev/dvd link
-        _devices = detected;
-      }
-    }
+    // This also fills the _devices list on demand
+    DeviceList detected( detectDevices( _url.getScheme() == "dvd" ? true : false ) );
 
     Mount mount;
-    string mountpoint = attachPoint().asString();
-    bool mountsucceeded = false;
-    int count = 0;
     MediaMountException merr;
+    string mountpoint = attachPoint().asString();
 
-    string options = _url.getQueryParam("mountoptions");
-    if (options.empty())
+    string options = _url.getQueryParam( "mountoptions" );
+    if ( options.empty() )
     {
       options="ro";
     }
@@ -418,9 +429,9 @@ namespace zypp {
     filesystems.push_back("iso9660");
 
     // try all devices in sequence
-    for (DeviceList::iterator it = _devices.begin()
-    ; !mountsucceeded && it != _devices.end()
-    ; ++it, count++ )
+    int count = 0;
+    bool mountsucceeded = false;
+    for ( DeviceList::iterator it = _devices.begin() ; ! mountsucceeded && it != _devices.end() ; ++it, ++count )
     {
       DBG << "count " << count << endl;
       if (next && count <=_lastdev_tried )
@@ -428,28 +439,32 @@ namespace zypp {
         DBG << "skipping device " << it->name << endl;
         continue;
       }
+      DBG << "trying device " << it->name << endl;
 
       _lastdev_tried = count;
+      bool valid( false );
 
-      MediaSource temp( *it);
-      bool        valid=false;
-      PathInfo    dinfo(temp.name);
-      if( dinfo.isBlk())
+      MediaSource temp( *it );
+      PathInfo dinfo( temp.name );
+      if ( dinfo.isBlk() )
       {
         temp.maj_nr = dinfo.major();
         temp.min_nr = dinfo.minor();
 
-        DeviceList::const_iterator d( detected.begin());
-        for( ; d != detected.end(); ++d)
-        {
-          if( temp.equals( *d))
-          {
-            valid = true;
-            break;
-          }
-        }
+	if ( detected.empty() )
+	  valid = true;	// better try this than nothing
+	else
+	  for ( const auto & d : detected )
+	  {
+	    if ( temp.equals( d ) )
+	    {
+	      valid = true;
+	      break;
+	    }
+	  }
       }
-      if( !valid)
+
+      if ( ! valid )
       {
         DBG << "skipping invalid device: " << it->name << endl;
         continue;
@@ -656,42 +671,11 @@ namespace zypp {
   //
   void MediaCD::forceEject(const std::string & ejectDev)
   {
-    bool ejected=false;
-    if ( !isAttached()) {	// no device mounted in this instance
-
-      DeviceList detected(
-          detectDevices(_url.getScheme() == "dvd" ? true : false));
-
-      if(_devices.empty())
-      {
-        DBG << "creating on-demand device list" << endl;
-        //default is /dev/cdrom; for dvd: /dev/dvd if it exists
-        string device( "/dev/cdrom" );
-        if ( _url.getScheme() == "dvd" && PathInfo( "/dev/dvd" ).isBlk() ) {
-          device = "/dev/dvd";
-        }
-
-        PathInfo dinfo(device);
-        if( dinfo.isBlk())
-        {
-          MediaSource media("cdrom", device, dinfo.major(), dinfo.minor());
-
-          DeviceList::const_iterator d( detected.begin());
-          for( ; d != detected.end(); ++d)
-          {
-            // /dev/cdrom or /dev/dvd to the front
-            if( media.equals( *d))
-              _devices.push_front( *d);
-            else
-              _devices.push_back( *d);
-          }
-        }
-        else
-        {
-          // no /dev/cdrom or /dev/dvd link
-          _devices = detected;
-        }
-      }
+    bool ejected = false;
+    if ( ! isAttached() )	// no device mounted in this instance
+    {
+      // This also fills the _devices list on demand
+      DeviceList detected( detectDevices( _url.getScheme() == "dvd" ? true : false ) );
 
       DeviceList::iterator it;
       for( it = _devices.begin(); it != _devices.end(); ++it ) {
@@ -802,16 +786,17 @@ namespace zypp {
   //
   //  DESCRIPTION : Asserted that media is attached and retlist is empty.
   //
-  void MediaCD::getDirInfo( filesystem::DirContent & retlist,
-                            const Pathname & dirname, bool dots ) const
+  void MediaCD::getDirInfo( filesystem::DirContent & retlist, const Pathname & dirname, bool dots ) const
   {
     MediaHandler::getDirInfo( retlist, dirname, dots );
   }
+
 
   bool MediaCD::getDoesFileExist( const Pathname & filename ) const
   {
     return MediaHandler::getDoesFileExist( filename );
   }
+
 
   bool MediaCD::hasMoreDevices()
   {
@@ -823,44 +808,27 @@ namespace zypp {
     return (unsigned) _lastdev_tried < _devices.size() - 1;
   }
 
-  void
-  MediaCD::getDetectedDevices(std::vector<std::string> & devices,
-                              unsigned int & index) const
+
+  void MediaCD::getDetectedDevices( std::vector<std::string> & devices, unsigned int & index ) const
   {
-    index = 0;
-    if (!devices.empty())
+    if ( ! devices.empty() )
       devices.clear();
 
-    for (DeviceList::const_iterator it = _devices.begin();
-         it != _devices.end(); ++it)
-      devices.push_back(it->name);
+    if ( _devices.empty() )
+      // This also fills the _devices list on demand
+      detectDevices( _url.getScheme() == "dvd" ? true : false );
 
-    if (_lastdev >= 0)
-      index = _lastdev;
+    for ( const auto & it : _devices )
+      devices.push_back( it.name );
 
-    // try to detect again if _devices are empty (maybe this method will be
-    // called before _devices get actually filled)
-    if (devices.empty())
-    {
-      DBG << "no device list so far, trying to detect" << endl;
-
-      DeviceList detected(
-        detectDevices(_url.getScheme() == "dvd" ? true : false));
-
-      for (DeviceList::const_iterator it = detected.begin();
-           it != detected.end(); ++it)
-        devices.push_back(it->name);
-
-      // don't know which one is in use in this case
-      index = 0;
-    }
+    index = ( _lastdev >= 0  ? (unsigned)_lastdev : 0 );
 
     MIL << "got " << devices.size() << " detected devices, current: "
         << (index < devices.size() ? devices[index] : "<none>")
         << "(" << index << ")" << endl;
   }
 
-
   } // namespace media
+  //////////////////////////////////////////////////////////////////
 } // namespace zypp
-// vim: set ts=8 sts=2 sw=2 ai noet:
+//////////////////////////////////////////////////////////////////
