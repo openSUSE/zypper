@@ -1,4 +1,12 @@
 -------------------------------------------------------------------
+Fri Nov 11 13:38:42 CET 2011 - ma@suse.de
+
+- Try to find and use some CD/DVD device even if HAL/UDEV detection 
+  fails (bnc#724807)
+- Static initialization problem fixes (by Harald Fernengel)
+- version 10.3.4 (3)
+
+-------------------------------------------------------------------
 Mon Nov  7 15:45:28 CET 2011 - ma@suse.de
 
 - Don't use proxy if disabled (bnc#696805)
