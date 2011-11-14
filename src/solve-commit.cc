@@ -559,6 +559,11 @@ void solve_and_commit (Zypper & zypper)
 
     Summary summary(God->pool());
 
+    if (zypper.out().verbosity() == Out::HIGH)
+      summary.setViewOption(Summary::SHOW_VERSION);
+    else if (zypper.out().verbosity() == Out::DEBUG)
+      summary.setViewOption(Summary::SHOW_ALL);
+
     // show not updated packages if 'zypper up' (-t package or -t product)
     ResKindSet kinds;
     if (zypper.cOpts().find("type") != zypper.cOpts().end())
@@ -576,11 +581,8 @@ void solve_and_commit (Zypper & zypper)
     Product::constPtr platform = God->target()->baseProduct();
     if (platform && platform->name().find("SUSE_SLE") != string::npos)
       summary.setViewOption(Summary::SHOW_UNSUPPORTED);
-
-    if (zypper.out().verbosity() == Out::HIGH)
-      summary.setViewOption(Summary::SHOW_VERSION);
-    else if (zypper.out().verbosity() == Out::DEBUG)
-      summary.setViewOption(Summary::SHOW_ALL);
+    else
+      summary.unsetViewOption(Summary::SHOW_UNSUPPORTED);
 
     summary.setShowRepoAlias(zypper.config().show_alias);
 
