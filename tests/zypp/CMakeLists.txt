@@ -24,6 +24,7 @@ ADD_TESTS(
   PluginFrame
   PoolQuery
   ProgressData
+  PtrTypes
   PublicKey
   RWPtr
   RepoInfo

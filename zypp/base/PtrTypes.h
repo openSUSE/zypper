@@ -324,6 +324,9 @@ namespace zypp
         _Ptr getPtr()
         { return _dptr; }
 
+        _constPtr cgetPtr()
+        { return _dptr; }
+
       private:
         _Ptr _dptr;
       };
@@ -335,8 +338,7 @@ namespace zypp
      * if the pointer is \c NULL.
     */
     template<class _D, class _Ptr>
-      inline std::ostream &
-      operator<<( std::ostream & str, const RW_pointer<_D, _Ptr> & obj )
+      inline std::ostream & operator<<( std::ostream & str, const RW_pointer<_D, _Ptr> & obj )
       {
         if ( obj.get() )
           return str << *obj.get();
@@ -345,19 +347,46 @@ namespace zypp
 
     /** \relates RW_pointer */
     template<class _D, class _Ptr>
-      inline bool
-      operator==( const RW_pointer<_D, _Ptr> & lhs, const RW_pointer<_D, _Ptr> & rhs )
-      {
-        return( lhs.get() == rhs.get() );
-      }
+      inline bool operator==( const RW_pointer<_D, _Ptr> & lhs, const RW_pointer<_D, _Ptr> & rhs )
+      { return( lhs.get() == rhs.get() ); }
+    /** \relates RW_pointer */
+     template<class _D, class _Ptr>
+       inline bool operator==( const RW_pointer<_D, _Ptr> & lhs, const typename _Ptr::_Ptr & rhs )
+       { return( lhs.get() == rhs.get() ); }
+    /** \relates RW_pointer */
+     template<class _D, class _Ptr>
+       inline bool operator==( const typename _Ptr::_Ptr & lhs, const RW_pointer<_D, _Ptr> & rhs )
+       { return( lhs.get() == rhs.get() ); }
+    /** \relates RW_pointer */
+     template<class _D, class _Ptr>
+       inline bool operator==( const RW_pointer<_D, _Ptr> & lhs, const typename _Ptr::_constPtr & rhs )
+       { return( lhs.get() == rhs.get() ); }
+    /** \relates RW_pointer */
+     template<class _D, class _Ptr>
+       inline bool operator==( const typename _Ptr::_constPtr & lhs, const RW_pointer<_D, _Ptr> & rhs )
+       { return( lhs.get() == rhs.get() ); }
+
 
     /** \relates RW_pointer */
     template<class _D, class _Ptr>
-      inline bool
-      operator!=( const RW_pointer<_D, _Ptr> & lhs, const RW_pointer<_D, _Ptr> & rhs )
-      {
-        return ! ( lhs == rhs );
-      }
+      inline bool operator!=( const RW_pointer<_D, _Ptr> & lhs, const RW_pointer<_D, _Ptr> & rhs )
+      { return ! ( lhs == rhs ); }
+    /** \relates RW_pointer */
+     template<class _D, class _Ptr>
+       inline bool operator!=( const RW_pointer<_D, _Ptr> & lhs, const typename _Ptr::_Ptr & rhs )
+       { return ! ( lhs == rhs ); }
+    /** \relates RW_pointer */
+     template<class _D, class _Ptr>
+       inline bool operator!=( const typename _Ptr::_Ptr & lhs, const RW_pointer<_D, _Ptr> & rhs )
+       { return ! ( lhs == rhs ); }
+    /** \relates RW_pointer */
+     template<class _D, class _Ptr>
+       inline bool operator!=( const RW_pointer<_D, _Ptr> & lhs, const typename _Ptr::_constPtr & rhs )
+       { return ! ( lhs == rhs ); }
+    /** \relates RW_pointer */
+     template<class _D, class _Ptr>
+       inline bool operator!=( const typename _Ptr::_constPtr & lhs, const RW_pointer<_D, _Ptr> & rhs )
+       { return ! ( lhs == rhs ); }
 
     ///////////////////////////////////////////////////////////////////
 
@@ -435,6 +464,9 @@ namespace zypp
         _Ptr getPtr()
         { assertUnshared(); return _dptr; }
 
+        _constPtr cgetPtr()
+        { return _dptr; }
+
       private:
 
         void assertUnshared()
@@ -465,8 +497,7 @@ namespace zypp
      * if the pointer is \c NULL.
     */
     template<class _D, class _Ptr>
-      inline std::ostream &
-      operator<<( std::ostream & str, const RWCOW_pointer<_D, _Ptr> & obj )
+      inline std::ostream & operator<<( std::ostream & str, const RWCOW_pointer<_D, _Ptr> & obj )
       {
         if ( obj.get() )
           return str << *obj.get();
@@ -475,19 +506,45 @@ namespace zypp
 
     /** \relates RWCOW_pointer */
     template<class _D, class _Ptr>
-      inline bool
-      operator==( const RWCOW_pointer<_D, _Ptr> & lhs, const RWCOW_pointer<_D, _Ptr> & rhs )
-      {
-        return( lhs.get() == rhs.get() );
-      }
+      inline bool operator==( const RWCOW_pointer<_D, _Ptr> & lhs, const RWCOW_pointer<_D, _Ptr> & rhs )
+      { return( lhs.get() == rhs.get() ); }
+    /** \relates RWCOW_pointer */
+    template<class _D, class _Ptr>
+      inline bool operator==( const RWCOW_pointer<_D, _Ptr> & lhs, const typename _Ptr::_Ptr & rhs )
+      { return( lhs.get() == rhs.get() ); }
+    /** \relates RWCOW_pointer */
+    template<class _D, class _Ptr>
+      inline bool operator==( const typename _Ptr::_Ptr & lhs, const RWCOW_pointer<_D, _Ptr> & rhs )
+      { return( lhs.get() == rhs.get() ); }
+    /** \relates RWCOW_pointer */
+    template<class _D, class _Ptr>
+      inline bool operator==( const RWCOW_pointer<_D, _Ptr> & lhs, const typename _Ptr::_constPtr & rhs )
+      { return( lhs.get() == rhs.get() ); }
+    /** \relates RWCOW_pointer */
+    template<class _D, class _Ptr>
+      inline bool operator==( const typename _Ptr::_constPtr & lhs, const RWCOW_pointer<_D, _Ptr> & rhs )
+      { return( lhs.get() == rhs.get() ); }
 
     /** \relates RWCOW_pointer */
     template<class _D, class _Ptr>
-      inline bool
-      operator!=( const RWCOW_pointer<_D, _Ptr> & lhs, const RWCOW_pointer<_D, _Ptr> & rhs )
-      {
-        return ! ( lhs == rhs );
-      }
+      inline bool operator!=( const RWCOW_pointer<_D, _Ptr> & lhs, const RWCOW_pointer<_D, _Ptr> & rhs )
+      { return ! ( lhs == rhs ); }
+    /** \relates RWCOW_pointer */
+    template<class _D, class _Ptr>
+      inline bool operator!=( const RWCOW_pointer<_D, _Ptr> & lhs, const typename _Ptr::_Ptr & rhs )
+      { return ! ( lhs == rhs ); }
+    /** \relates RWCOW_pointer */
+    template<class _D, class _Ptr>
+      inline bool operator!=( const typename _Ptr::_Ptr & lhs, const RWCOW_pointer<_D, _Ptr> & rhs )
+      { return ! ( lhs == rhs ); }
+    /** \relates RWCOW_pointer */
+    template<class _D, class _Ptr>
+      inline bool operator!=( const RWCOW_pointer<_D, _Ptr> & lhs, const typename _Ptr::_constPtr & rhs )
+      { return ! ( lhs == rhs ); }
+    /** \relates RWCOW_pointer */
+    template<class _D, class _Ptr>
+      inline bool operator!=( const typename _Ptr::_constPtr & lhs, const RWCOW_pointer<_D, _Ptr> & rhs )
+      { return ! ( lhs == rhs ); }
 
     ///////////////////////////////////////////////////////////////////
 

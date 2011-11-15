@@ -50,6 +50,7 @@ namespace zypp
     { return new Intrusive( *rhs ); }
 
 }
+
 /******************************************************************
 **
 */
@@ -57,8 +58,9 @@ namespace zypp
 #define T_NOT_NULL   assert( ptr )
 #define T_UNIQUE     assert( ptr.unique() ); assert( ptr.use_count() < 2 )
 #define T_NOT_UNIQUE assert( !ptr.unique() ); assert( ptr.use_count() >= 2 )
-#define T_EQ(a,b)   assert( a == b )
-#define T_NE(a,b)   assert( a != b )
+// Also comapre with underlying shared ptr type.
+#define T_EQ(a,b)   assert( a == b ); assert( a == b.cgetPtr() ); assert( a.cgetPtr() == b ); assert( a.cgetPtr() == b.cgetPtr() );
+#define T_NE(a,b)   assert( a != b ); assert( a != b.cgetPtr() ); assert( a.cgetPtr() != b ); assert( a.cgetPtr() != b.cgetPtr() );
 
 template<class _RW>
   void test()
