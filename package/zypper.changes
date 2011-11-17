@@ -1,4 +1,9 @@
 -------------------------------------------------------------------
+Thu Nov 17 01:13:55 CET 2011 - ma@suse.de
+
+- Update zypper-po.tar.bz2
+
+-------------------------------------------------------------------
 Mon Nov 14 15:31:37 CET 2011 - ma@suse.de
 
 - Never evaluate package support status on openSUSE (bnc#715057)
