@@ -4,7 +4,7 @@
 
 \author Duncan Mac-Vicar P. <dmacvicar@suse.de>
 
-Services provide a list of repositories. So when the service is refreshed, the repositories belonging to this service are synced.
+Services provide a list of repositories. So when the service is refreshed, the repositories specified by the service service is synced with the local repository list.
 
 \section service-types Classes of services
 
@@ -42,7 +42,46 @@ From the remote side, the service url needs to provide a repoindex.xml file with
 
 \subsection services-plugin Plugin Services
 
-\ref plugin-services "Plugin services" are simple scripts that return a list of repositories. They are installed by packages. For each script installed ZYpp will “see” a service of type “plugin”. When you refresh the service, the repositories this script returns will be added (or removed and kept in sync if they change afterwards).
+\ref plugin-services "Plugin services" are simple scripts that return a list of repositories. They are installed locally in the system using packages. For each script installed ZYpp will “see” a service of type “plugin”. When you refresh the service, the repositories this script returns as output will be added (or removed and kept in sync if they change afterwards).
+
+A plugin service is a program installed in /usr/lib/zypp/plugins/services.
+
+Once a program called "foobar" is installed, listing services will show it:
+
+\verbatim
+> zypper ls
+#  | Alias            | Name         | Enabled | Refresh | Type  
+---+------------------+--------------+---------+---------+-------
+1  | foobar           | foobar       | Yes     | Yes     | plugin
+...
+...
+\endverbatim
+
+When this service is refreshed, the program will be executed and it will return
+the list of repositories in the same .repo files format that can be found in
+/etc/zypp/repos.d:
+
+\verbatim
+# output returned by the plugin
+
+[repo-oss]
+name=oss
+enabled=1
+autorefresh=0
+baseurl=http://download.opensuse.org//distribution/11.4/repo/oss
+type=yast2
+keeppackages=0
+
+...
+\endverbatim
+
+As you can see, the main advantage of plugin services is that they can read information from the client and calculate the repository list from there. Nothing prevents a plugin service to still interact with a server to get the repository list.
+
+The main disadvantage is that you have logic in the client side that in case of bugs or changes, needs to be updated.
+
+Spacewalk integration is implemented using plugin services. The plugin talks XML-RPC to the server and asks for the list of channels the system is subscribed to. The plugin needs to read the server address and perform the login.
+
+However, the spacewalk plugin service does have an extra indirection, as the repository list returned are not plain urls, but urls of the type plugin:$name?params, which use the urlresolver plugin to get the real url. This is not necessary, and here it is done because it allows to add custom headers to the HTTP requests. You can read more about urlresolver plugins \ref plugin-url-resolver here.
 
 \section service-refresh Refreshing services
 
@@ -70,11 +109,11 @@ Now imagine our KDE guys can provide an URL, which you add to zypper. And this u
 
 This is actually where services where originated. Services were present in Novell ZenWorks. How it works?
 
-The service url nu.novell.com is added to the system. But in this url also a customer id is present as a http username. When you registered, Novell knows the product this customer is linked to, and can return a dynamic list of update repositories based on the customer preferences, products and entitlements and the customer does not need to keep them in sync.
+The service url nu.novell.com is added to the system. But in this url also a customer id is present as a http username. When you registered, Novell knows the subscription and products this system is linked to and what entitlements the customer has. The service can then return a dynamic list of repositories based on the customer preferences, products and entitlements. The customer does not need to keep them manually in sync.
 
-Now that we don’t have Zenworks in the base system, we still want this cool functionality for our customers.
+Now that we don’t have Zenworks in the base system, we still want this cool functionality for our customers, therefore ZYpp now implements services natively.
 
-Technically, this even allows us to offer hotfixes to L3 supported customers on the fly!
+Technically, this even allows us to offer hotfixes to L3 supported customers on the fly: the system is marked on the server side as being hotfixed, and an extra temporary repository with the PTF (Problem Temporary Fix) packages is added to this system list of repositories.
 
 \subsection services-usecase-3 Usecase #3: Dynamic repository collections
 
