@@ -187,7 +187,7 @@ namespace zypp {
           return;
         }
 
-      int tmpFd = ::mkstemp( buf );
+      int tmpFd = ::mkostemp( buf, O_CLOEXEC );
       if ( tmpFd != -1 )
         {
           // success; create _impl

@@ -302,7 +302,7 @@ Mount::getEntries(const std::string &mtab)
     {
       DBG << "Reading mount table from '" << *t << "'" << std::endl;
     }
-    FILE *fp = setmntent(t->c_str(), "r");
+    FILE *fp = setmntent(t->c_str(), "re");
     if( fp)
     {
       char          buf[PATH_MAX * 4];

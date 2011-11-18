@@ -17,7 +17,7 @@ int random_int()
   {
       unsigned int seed;
       init = true;
-      int fd = open("/dev/urandom", O_RDONLY);
+      int fd = open("/dev/urandom", O_RDONLY|O_CLOEXEC);
       if (fd < 0 || ::read(fd, &seed, sizeof(seed)) != sizeof(seed))
       {
             // No /dev/urandom... try something else.

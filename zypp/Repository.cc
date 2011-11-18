@@ -248,7 +248,7 @@ namespace zypp
     {
       NO_REPOSITORY_THROW( Exception( "Can't add solvables to norepo." ) );
 
-      AutoDispose<FILE*> file( ::fopen( file_r.c_str(), "r" ), ::fclose );
+      AutoDispose<FILE*> file( ::fopen( file_r.c_str(), "re" ), ::fclose );
       if ( file == NULL )
       {
         file.resetDispose();
@@ -270,7 +270,7 @@ namespace zypp
       std::string command( file_r.extension() == ".gz" ? "zcat " : "cat " );
       command += file_r.asString();
 
-      AutoDispose<FILE*> file( ::popen( command.c_str(), "r" ), ::pclose );
+      AutoDispose<FILE*> file( ::popen( command.c_str(), "re" ), ::pclose );
       if ( file == NULL )
       {
         file.resetDispose();

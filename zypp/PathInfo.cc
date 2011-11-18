@@ -1058,7 +1058,7 @@ namespace zypp
     {
       ZIP_TYPE ret = ZT_NONE;
 
-      int fd = open( file.asString().c_str(), O_RDONLY );
+      int fd = open( file.asString().c_str(), O_RDONLY|O_CLOEXEC );
 
       if ( fd != -1 ) {
         const int magicSize = 3;
