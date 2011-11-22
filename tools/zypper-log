@@ -88,7 +88,7 @@ def printList(logindex, date = False):
       continue
     logentry['ptime'] = time.strftime("%Y-%m-%d %H:%M", logentry['time'])
     spaceleft = int(columns) - (22 + pidlen + len(logentry['version']) + len(logentry['cmd']))
-    if spaceleft < 0:
+    if spaceleft < 0 and sys.stdout.isatty():
       logentry['cmd'] = logentry['cmd'][:spaceleft-3] + '...'
     print "%(ptime)s  %(pid)s" % logentry, ' ' * (pidlen - len(logentry['pid'])), "%(version)s" % logentry, ' ' * (verlen - len(logentry['version'])),  "%(cmd)s" % logentry
 
