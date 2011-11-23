@@ -18,7 +18,6 @@
 
 using namespace std;
 
-static map<string, string> str2esc;
 
 Color::Color(const string & color_str)
   : _value(parse(color_str))
@@ -26,32 +25,28 @@ Color::Color(const string & color_str)
 
 string Color::parse(const string & value)
 {
-  if (value.empty())
-    return value;
+  static map<string, string> str2esc = {
+    { "green",		COLOR_GREEN		},
+    { "lightgreen",	COLOR_GREEN_LIGHT	},
+    { "red",		COLOR_RED		},
+    { "lightred",	COLOR_RED_LIGHT		},
+    { "grey",		COLOR_WHITE		},
+    { "white",		COLOR_WHITE_LIGHT	},
+    { "brown",		COLOR_YELLOW		},
+    { "yellow",		COLOR_YELLOW_LIGHT	},
+    { "purple",		COLOR_PURPLE		},
+    { "lightpurple",	COLOR_PURPLE_LIGHT	},
+    { "blue",		COLOR_BLUE		},
+    { "lightblue",	COLOR_BLUE_LIGHT	},
+    { "cyan",		COLOR_CYAN		},
+    { "lightcyan",	COLOR_CYAN_LIGHT	},
+    { "black",		COLOR_BLACK		},
+    { "darkgrey",	COLOR_GREY_DARK		},
 
-  if (str2esc.empty())
-  {
-    str2esc["green"]          = COLOR_GREEN;
-    str2esc["lightgreen"]     = COLOR_GREEN_LIGHT;
-    str2esc["red"]            = COLOR_RED;
-    str2esc["lightred"]       = COLOR_RED_LIGHT;
-    str2esc["grey"]           = COLOR_WHITE;
-    str2esc["white"]          = COLOR_WHITE_LIGHT;
-    str2esc["brown"]          = COLOR_YELLOW;
-    str2esc["yellow"]         = COLOR_YELLOW_LIGHT;
-    str2esc["purple"]         = COLOR_PURPLE;
-    str2esc["lightpurple"]    = COLOR_PURPLE_LIGHT;
-    str2esc["blue"]           = COLOR_BLUE;
-    str2esc["lightblue"]      = COLOR_BLUE_LIGHT;
-    str2esc["cyan"]           = COLOR_CYAN;
-    str2esc["lightcyan"]      = COLOR_CYAN_LIGHT;
-    str2esc["black"]          = COLOR_BLACK;
-    str2esc["darkgrey"]       = COLOR_GREY_DARK;
+    { "reset",		COLOR_RESET		}
+  };
 
-    str2esc["reset"]          = COLOR_RESET;
-  }
-
-  map<string, string>::const_iterator it = str2esc.find(value);
+  auto it = str2esc.find(value);
   if (it == str2esc.end())
   {
     ERR << "Unknown color '" << value << "'" << endl;

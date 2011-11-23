@@ -71,7 +71,7 @@ public:
 
   ConfigOption::Option parse(const std::string & strval_r);
 
-  const std::string asString() const;
+  std::string asString() const;
 
 private:
   Option _value;

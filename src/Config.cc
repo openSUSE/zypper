@@ -6,7 +6,7 @@
 \*---------------------------------------------------------------------------*/
 
 #include <iostream>
-#include <map>
+#include <unordered_map>
 extern "C"
 {
   #include <libintl.h>
@@ -30,8 +30,6 @@ extern "C"
 using namespace std;
 using namespace zypp;
 
-static map<string, ConfigOption::Option> _table;
-static map<ConfigOption::Option, string> _table_str;
 const ConfigOption ConfigOption::MAIN_SHOW_ALIAS(ConfigOption::MAIN_SHOW_ALIAS_e);
 const ConfigOption ConfigOption::MAIN_REPO_LIST_COLUMNS(ConfigOption::MAIN_REPO_LIST_COLUMNS_e);
 const ConfigOption ConfigOption::SOLVER_INSTALL_RECOMMENDS(ConfigOption::SOLVER_INSTALL_RECOMMENDS_e);
@@ -50,64 +48,82 @@ const ConfigOption ConfigOption::COLOR_PROMPT_SHORTHAND(ConfigOption::COLOR_PROM
 const ConfigOption ConfigOption::OBS_BASE_URL(ConfigOption::OBS_BASE_URL_e);
 const ConfigOption ConfigOption::OBS_PLATFORM(ConfigOption::OBS_PLATFORM_e);
 
+//////////////////////////////////////////////////////////////////
+namespace
+{
+  typedef std::pair<std::string,ConfigOption::Option> OptionPair;
+  /* add new options here: */
+  const std::vector<OptionPair> & optionPairs()
+  {
+    static const std::vector<OptionPair> _data = {
+      { "main/showAlias",			ConfigOption::MAIN_SHOW_ALIAS_e			},
+      { "main/repoListColumns",			ConfigOption::MAIN_REPO_LIST_COLUMNS_e		},
+      { "solver/installRecommends",		ConfigOption::SOLVER_INSTALL_RECOMMENDS_e	},
+      { "solver/forceResolutionCommands",	ConfigOption::SOLVER_FORCE_RESOLUTION_COMMANDS_e},
+      { "color/useColors",			ConfigOption::COLOR_USE_COLORS_e		},
+      { "color/background",			ConfigOption::COLOR_BACKGROUND_e		},
+      { "color/result",				ConfigOption::COLOR_RESULT_e			},
+      { "color/msgStatus",			ConfigOption::COLOR_MSG_STATUS_e		},
+      { "color/msgError",			ConfigOption::COLOR_MSG_ERROR_e			},
+      { "color/msgWarning",			ConfigOption::COLOR_MSG_WARNING_e		},
+      { "color/positive",			ConfigOption::COLOR_POSITIVE_e			},
+      { "color/negative",			ConfigOption::COLOR_NEGATIVE_e			},
+      { "color/highlight",			ConfigOption::COLOR_HIGHLIGHT_e			},
+      { "color/promptOption",			ConfigOption::COLOR_PROMPT_OPTION_e		},
+      { "obs/baseUrl",				ConfigOption::OBS_BASE_URL_e			},
+      { "obs/platform",				ConfigOption::OBS_PLATFORM_e			}
+    };
+    return _data;
+  }
+} // namespace
+//////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////
+namespace std
+{
+  template<>
+  struct hash<ConfigOption::Option>
+  {
+    size_t operator()( const ConfigOption::Option & __s ) const
+    { return __s; }
+  };
+} // namespace std
+//////////////////////////////////////////////////////////////////
+
 ConfigOption::ConfigOption(const std::string & strval_r)
   : _value(parse(strval_r))
 {}
 
 ConfigOption::Option ConfigOption::parse(const std::string & strval_r)
 {
-  if (_table.empty())
+  static std::unordered_map<std::string,ConfigOption::Option> _index = [](){
+    // index into optionPairs
+    std::unordered_map<std::string,ConfigOption::Option> data;
+    for ( const auto & p : optionPairs() )
+      data[p.first] = p.second;
+    return data;
+  }();
+
+  auto it( _index.find( strval_r ) );
+  if ( it == _index.end() )
   {
-    // initialize it
-    _table["main/showAlias"] = MAIN_SHOW_ALIAS_e;
-    _table["main/repoListColumns"] = MAIN_REPO_LIST_COLUMNS_e;
-    _table["solver/installRecommends"] = SOLVER_INSTALL_RECOMMENDS_e;
-    _table["solver/forceResolutionCommands"] = SOLVER_FORCE_RESOLUTION_COMMANDS_e;
-    _table["color/useColors"] = COLOR_USE_COLORS_e;
-    _table["color/background"] = COLOR_BACKGROUND_e;
-    _table["color/result"] = COLOR_RESULT_e;
-    _table["color/msgStatus"] = COLOR_MSG_STATUS_e;
-    _table["color/msgError"] = COLOR_MSG_ERROR_e;
-    _table["color/msgWarning"] = COLOR_MSG_WARNING_e;
-    _table["color/positive"] = COLOR_POSITIVE_e;
-    _table["color/negative"] = COLOR_NEGATIVE_e;
-    _table["color/highlight"] = COLOR_HIGHLIGHT_e;
-    _table["color/promptOption"] = COLOR_PROMPT_OPTION_e;
-  }
-  map<string, ConfigOption::Option>::const_iterator it = _table.find(strval_r);
-  if (it == _table.end())
-  {
-    string message =
-      zypp::str::form(_("Unknown configuration option '%s'"), strval_r.c_str());
-    ZYPP_THROW(zypp::Exception(message));
+    ZYPP_THROW(zypp::Exception(
+      zypp::str::form(_("Unknown configuration option '%s'"), strval_r.c_str())));
   }
   return it->second;
 }
 
-const string ConfigOption::asString() const
+string ConfigOption::asString() const
 {
-  if (_table.empty())
-  {
-    // initialize it
-    _table_str[MAIN_SHOW_ALIAS_e] = "main/showAlias";
-    _table_str[MAIN_REPO_LIST_COLUMNS_e] = "main/repoListColumns";
-    _table_str[SOLVER_INSTALL_RECOMMENDS_e] = "solver/installRecommends";
-    _table_str[SOLVER_FORCE_RESOLUTION_COMMANDS_e] = "solver/forceResolutionCommands";
-    _table_str[COLOR_USE_COLORS_e] = "color/useColors";
-    _table_str[COLOR_BACKGROUND_e] = "color/background";
-    _table_str[COLOR_RESULT_e] = "color/result";
-    _table_str[COLOR_MSG_STATUS_e] = "color/msgStatus";
-    _table_str[COLOR_MSG_ERROR_e] = "color/msgError";
-    _table_str[COLOR_MSG_WARNING_e] = "color/msgWarning";
-    _table_str[COLOR_POSITIVE_e] = "color/positive";
-    _table_str[COLOR_NEGATIVE_e] = "color/negative";
-    _table_str[COLOR_HIGHLIGHT_e] = "color/highlight";
-    _table_str[COLOR_PROMPT_OPTION_e] = "color/promptOption";
-    _table_str[OBS_BASE_URL_e] = "obs/baseUrl";
-    _table_str[OBS_PLATFORM_e] = "obs/platform";
-  }
-  map<ConfigOption::Option, string>::const_iterator it = _table_str.find(_value);
-  if (it != _table_str.end())
+  static std::unordered_map<ConfigOption::Option,std::string> _index = [](){
+    // index into optionPairs
+    std::unordered_map<ConfigOption::Option,std::string> data;
+    for ( const auto & p : optionPairs() )
+      data[p.second] = p.first;
+    return data;
+  }();
+
+  auto it( _index.find( _value ) );
+  if ( it != _index.end() )
     return it->second;
   return string();
 }

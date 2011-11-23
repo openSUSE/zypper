@@ -133,13 +133,6 @@ string string_patch_status(const PoolItem & pi)
 
 bool looks_like_url (const string& s)
 {
-/*
-  static bool schemes_shown = false;
-  if (!schemes_shown) {
-    DBG << "Registered schemes: " << Url::getRegisteredSchemes () << endl;
-    schemes_shown = true;
-  }
-*/
   string::size_type pos = s.find (':');
   if (pos != string::npos)
   {
