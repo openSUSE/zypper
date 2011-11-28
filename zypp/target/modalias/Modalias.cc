@@ -115,7 +115,7 @@ read_modalias(const char *dir, const char *file, void *arg)
 		return 0;
 	}
 	snprintf(path, sizeof(path), "%s/%s", dir, file);
-	if ((fd = open(path, O_RDONLY)) == -1)
+	if ((fd = open(path, O_RDONLY|O_CLOEXEC)) == -1)
 		return 0;
 	len = read(fd, modalias, sizeof(modalias) - 1);
 	if (len < 0)

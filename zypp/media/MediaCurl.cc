@@ -1220,7 +1220,7 @@ void MediaCurl::doGetFileCopy( const Pathname & filename , const Pathname & targ
       ZYPP_THROW(MediaSystemException(url, "out of memory for temp file name"));
     }
 
-    int tmp_fd = ::mkstemp( buf );
+    int tmp_fd = ::mkostemp( buf, O_CLOEXEC );
     if( tmp_fd == -1)
     {
       free( buf);
@@ -1230,7 +1230,7 @@ void MediaCurl::doGetFileCopy( const Pathname & filename , const Pathname & targ
     destNew = buf;
     free( buf);
 
-    FILE *file = ::fdopen( tmp_fd, "w" );
+    FILE *file = ::fdopen( tmp_fd, "we" );
     if ( !file ) {
       ::close( tmp_fd);
       filesystem::unlink( destNew );

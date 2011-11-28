@@ -249,7 +249,7 @@ namespace zypp
   //
   bool MediaCD::openTray( const std::string & device_r )
   {
-    int fd = ::open( device_r.c_str(), O_RDONLY|O_NONBLOCK );
+    int fd = ::open( device_r.c_str(), O_RDONLY|O_NONBLOCK|O_CLOEXEC );
     int res = -1;
 
     if ( fd != -1)
@@ -308,7 +308,7 @@ namespace zypp
   //
   bool MediaCD::closeTray( const std::string & device_r )
   {
-    int fd = ::open( device_r.c_str(), O_RDONLY|O_NONBLOCK );
+    int fd = ::open( device_r.c_str(), O_RDONLY|O_NONBLOCK|O_CLOEXEC );
     if ( fd == -1 ) {
       WAR << "Unable to open '" << device_r << "' (" << ::strerror( errno ) << ")" << endl;
       return false;

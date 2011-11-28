@@ -479,7 +479,7 @@ multifetchworker::checkdns()
       struct addrinfo *ai, aihints;
       memset(&aihints, 0, sizeof(aihints));
       aihints.ai_family = PF_UNSPEC;
-      int tstsock = socket(PF_INET6, SOCK_DGRAM, 0);
+      int tstsock = socket(PF_INET6, SOCK_DGRAM | SOCK_CLOEXEC, 0);
       if (tstsock == -1)
 	aihints.ai_family = PF_INET;
       else
@@ -1203,7 +1203,7 @@ static bool looks_like_metalink(const Pathname & file)
 {
   char buf[256], *p;
   int fd, l;
-  if ((fd = open(file.asString().c_str(), O_RDONLY)) == -1)
+  if ((fd = open(file.asString().c_str(), O_RDONLY|O_CLOEXEC)) == -1)
     return false;
   while ((l = read(fd, buf, sizeof(buf) - 1)) == -1 && errno == EINTR)
     ;
@@ -1246,7 +1246,7 @@ void MediaMultiCurl::doGetFileCopy( const Pathname & filename , const Pathname &
     ZYPP_THROW(MediaSystemException(url, "out of memory for temp file name"));
   }
 
-  int tmp_fd = ::mkstemp( buf );
+  int tmp_fd = ::mkostemp( buf, O_CLOEXEC );
   if( tmp_fd == -1)
   {
     free( buf);
@@ -1256,7 +1256,7 @@ void MediaMultiCurl::doGetFileCopy( const Pathname & filename , const Pathname &
   destNew = buf;
   free( buf);
 
-  FILE *file = ::fdopen( tmp_fd, "w" );
+  FILE *file = ::fdopen( tmp_fd, "we" );
   if ( !file ) {
     ::close( tmp_fd);
     filesystem::unlink( destNew );
@@ -1344,7 +1344,7 @@ void MediaMultiCurl::doGetFileCopy( const Pathname & filename , const Pathname &
 	  MediaBlockList bl = mlp.getBlockList();
 	  vector<Url> urls = mlp.getUrls();
 	  DBG << bl << endl;
-	  file = fopen(destNew.c_str(), "w+");
+	  file = fopen(destNew.c_str(), "w+e");
 	  if (!file)
 	    ZYPP_THROW(MediaWriteException(destNew));
 	  if (PathInfo(target).isExist())
@@ -1393,7 +1393,7 @@ void MediaMultiCurl::doGetFileCopy( const Pathname & filename , const Pathname &
 	      filesystem::unlink(destNew);
 	      ZYPP_RETHROW(ex);
 	    }
-	  file = fopen(destNew.c_str(), "w+");
+	  file = fopen(destNew.c_str(), "w+e");
 	  if (!file)
 	    ZYPP_THROW(MediaWriteException(destNew));
 	  MediaCurl::doGetFileCopyFile(filename, dest, file, report, options | OPTION_NO_REPORT_START);
