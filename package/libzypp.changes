@@ -1,4 +1,13 @@
 -------------------------------------------------------------------
+Mon Nov 28 18:08:42 CET 2011 - ma@suse.de
+
+- Fix and optimize Pathname ctor and provide testcases (bnc#721128)
+- Open all file descriptors with O_CLOEXEC to avoid leaks and races
+- Some improvements to the services documentation
+- Fix RW_pointer comparison with underlying smart pointer type.
+- version 10.3.5 (3)
+
+-------------------------------------------------------------------
 Sun Nov 27 01:13:10 CET 2011 - ma@suse.de
 
 - Update zypp-po.tar.bz2
