@@ -53,7 +53,7 @@
 #     - Commit changes and version files together in a separate
 #       commit using -m 'changes MAJOR.MINOR.PATCH (COMPATMINOR)'
 #     - Tag the above commit with 'MAJOR.MINOR.PATCH' using
-#       -m "tagging MAJOR.
+#       -m "tagging MAJOR.MINOR.PATCH".
 #
 # - Consider calling ./mkChangelog to assist you.
 #   See './mkChangelog -h' for help.
