@@ -58,9 +58,6 @@ test -f "$CHANGESFILE" || errexit "No changes file '$CHANGESFILE'"
 VERSIONFILE="VERSION.cmake"
 test -f "$VERSIONFILE" || errexit "No version file '$VERSIONFILE'"
 
-SET(VERSION_MAJOR "1")
-SET(VERSION_MINOR "6")
-SET(VERSION_PATCH "17")
 function getversion() {
   cat "$VERSIONFILE" \
   | awk '
