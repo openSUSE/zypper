@@ -1,80 +1,42 @@
 #! /bin/bash
-#
+
+function Recho() { echo -e "\e[0;31m""$@""\e[0m"; }
+function Gecho() { echo -e "\e[0;32m""$@""\e[0m"; }
+function Becho() { echo -e "\e[0;34m""$@""\e[0m"; }
 
 function errexit() {
   exec >&2
-  echo "Error: $@"
+  Recho "Error: $@"
   exit 1
 }
 
-export LC_ALL=""
-EDITOR=${EDITOR:-vi}
-
-TDIR=$(dirname $0)
-test -n "$TDIR" && cd $TDIR
-
-CHANGESFILE=$(ls package/*.changes)
-test -f "$CHANGESFILE" || errexit "No changes file '$CHANGESFILE'"
-
-VERSIONFILE="VERSION.cmake"
-test -f "$VERSIONFILE" || errexit "No version file '$VERSIONFILE'"
-
-LANG="en"
-
-## Version.cmake tags in getversion() are still zypper specific.
-
 function usage() {
   exec >&2
-cat <<EOF
+  cat <<EOF
+  Usage:
+	$(basename $0) [OPTIONS]
 
-Usage:   $(basename $0) [OPTIONS]
-Options: -h,-?,--help   This page.
+  Options:
+	-h,-?,--help	This page.
+	-n		Dryrun.
 
-$(basename $0) will load the changes file '$CHANGESFILE'
-into your editor (\$EDITOR=$EDITOR), providing a new changes
-entry template:
+Prepare a new changes file entry preloaded with all commits since the last
+changes tag and load it into \$EDITOR (vi). If the version file was changed,
+optionally submitt and tag the new changes. Otherwise simply leave the changes
+in place.
 
-    -------------------------------------------------------------------
-    Wed Jul 30 18:20:06 CEST 2008 - ma@suse.de
-
-    -
-    #---delete-or-release---# LAST RELEASED: 5.3.2 (2) NEW RELEASE: 5.4.0 (4)
-
-The line '#---delete-or-release---#...' shows the last version submitted
-to autobuild ('# LAST RELEASED:; tag in $VERSIONFILE). And also the current
-version, asuming you already updated the $VERSIONFILE according to your changes.
-(The number in parenthesis is _COMPATMINOR)
-
-
-- Delete the line if you don't want to submit the package to autobuild.
-
-- Leave the line in place if you want to submit the package.
-
-
-Closing the editor you are prompted:
-
-    #---delete-or-release---# LAST RELEASED: 5.3.2 (2) NEW RELEASE: 5.4.0 (4)
-    (a)bort, (c)ontinue, (e)dit :
-
-Choosing (c)ontinue will write the new changes file. The '#---delete-or-release---#'
-line is missing in case you deleted it. It's presence will remind you
-that it is going to be converted into:
-
-    - version 5.4.0
-
-and the '# LAST RELEASED:; tag in $VERSIONFILE will be updated accordingly.
-Now check the result, check in your changes, build the package and submit
-to autobuild.
-
-Released by accident? Don't mind. Nothing bad will happen. If you want to
-undo the change, restore the 'LAST RELEASED: ' entry in $VERSIONFILE and
-delete the '- version' line in $CHANGESFILE'.
+Don't forgett to push created tags as well: git push --tags
 
 EOF
   exit 1
 }
 
+DRYRUN=0
+
 case "$1" in
+  -[n]*)
+    DRYRUN=1
+    ;;
   -[hH?]*)
     usage
     ;;
@@ -83,6 +45,22 @@ case "$1" in
     ;;
 esac
 
+
+export LC_ALL=""
+export LANG="en"
+EDITOR=${EDITOR:-vi}
+
+EMAIL="$(git config --get user.email)"
+
+CHANGESFILE=$(ls package/*.changes)
+test -f "$CHANGESFILE" || errexit "No changes file '$CHANGESFILE'"
+
+VERSIONFILE="VERSION.cmake"
+test -f "$VERSIONFILE" || errexit "No version file '$VERSIONFILE'"
+
+SET(VERSION_MAJOR "1")
+SET(VERSION_MINOR "6")
+SET(VERSION_PATCH "17")
 function getversion() {
   cat "$VERSIONFILE" \
   | awk '
@@ -93,66 +71,119 @@ function getversion() {
   /^ *SET *\( *VERSION_MAJOR *"[0-9]+" *\)/       {getnum();major=$0}
   /^ *SET *\( *VERSION_MINOR *"[0-9]+" *\)/       {getnum();minor=$0}
   /^ *SET *\( *VERSION_PATCH *"[0-9]+" *\)/       {getnum();patch=$0}
-  /^# LAST RELEASED:/                             {gsub("^.*RELEASED: *","");gsub(" +$","");lastrelease=$0}
+  /^# LAST RELEASED:/ {
+      gsub("^.*RELEASED: *","");
+      gsub(" +$","");
+      lastrelease=$0
+  }
   END {
     thisrelease = major"."minor"."patch
-    if ( thisrelease == lastrelease )
-      print "#---delete-or-release---# LAST RELEASED: "lastrelease" UNCHANGED RELEASE: "thisrelease
-    else
-      print "#---delete-or-release---# LAST RELEASED: "lastrelease" NEW RELEASE: "thisrelease
+    printf "LAST_RELEASE='%s'\n", lastrelease
+    printf "THIS_RELEASE='%s'\n", major"."minor"."patch
   }
   '
 }
 
-test -r /etc/sysconfig/mail && source /etc/sysconfig/mail
-EMAIL="${USER}@${FROM_HEADER:-$(hostname -f)}"
+function sameVersion() {
+  test "$LAST_RELEASE" == "$THIS_RELEASE"
+}
 
-GOTVERSION="$(getversion)"
+function getchanges() {
+  git log --no-merges --pretty=format:'- %s' "$LAST_RELEASE"..HEAD | grep -v 'po.tar.bz2'
+}
 
+function newchangesentry() {
+  echo "-------------------------------------------------------------------"
+  echo "$(date) - $EMAIL"
+  echo ""
+  echo "$(getchanges)"
+  sameVersion || {
+    echo "- version $THIS_RELEASE"
+  }
+  echo ""
+}
+
+git status --porcelain | grep '^[^ ]' | grep -v "$VERSIONFILE\|$CHANGESFILE" && {
+  Becho "!!! Files other than version and changes are added to the index."
+  Becho "!!! Doing dryrun..."
+  DRYRUN=1
+}
+if [ "$DRYRUN" == "1" ]; then
+  eval $(getversion)
+  newchangesentry
+  sameVersion && {
+    Becho "!!! Version is unchanged at $LAST_RELEASE."
+  }
+  exit 0
+fi
+
+
+# check version file
+#
+while true; do
+  # $LAST_RELEASE
+  # $THIS_RELEASE
+  eval $(getversion)
+  sameVersion && {
+    newchangesentry
+    Becho "!!! Version is unchanged at $LAST_RELEASE."
+    read -n 1 -p "$(Gecho "(a)bort, (c)ontinue, (e)dit version: ")" RES
+    echo
+    case "$RES" in
+      [eE]*)
+	$EDITOR $VERSIONFILE
+	continue
+	;;
+      [cC])
+	Becho "!!! Leave $VERSIONFILE untouched"
+	break
+	;;
+      *)
+	errexit "aborted"
+	;;
+    esac
+  }
+  break
+done
+
+# prepare changes file
+#
 TMPFILE=$(mktemp)
-exec 3>&1-
-exec >$TMPFILE
-echo "-------------------------------------------------------------------"
-echo "$(date) - $EMAIL"
-echo ""
-echo "- "
-echo "$GOTVERSION"
-echo ""
-cat $CHANGESFILE
-exec >&3
+trap " [ -f \"$TMPFILE\" ] && /bin/rm -f -- \"$TMPFILE\" " 0 1 2 3 13 15
+{ newchangesentry; cat $CHANGESFILE; } >$TMPFILE
 
 RES=e
 while [ "$RES" == "e" ]; do
   $EDITOR $TMPFILE
   echo
-  NEWREL=$(grep '#---delete-or-release---#' $TMPFILE)
-  test -n "$NEWREL" && echo "$NEWREL"
-  read -n 1 -p "(a)bort, (c)ontinue, (e)dit : " RES
-  echo
+  awk '{print}/^----------/{n=n+1; if ( n == 2 ) exit 0; }' $TMPFILE
+  read -n 1 -p "$(Gecho "(a)bort, (c)ontinue, (s)ubmitt, (e)dit : ")" RES
   echo
   case "$RES" in
     [eE]*)
       RES=e
       ;;
-    [cC])
-      test -n "$NEWREL" && {
-        echo "Remember new release in $VERSIONFILE"
-        sed -i 's/^.*#---delete-or-release---#.*RELEASE:/- version/' $TMPFILE
-        NEWREL=$(sed 's/^.*#---delete-or-release---#.*RELEASE:/# LAST RELEASED:/' <<<"$NEWREL")
-        sed -i "s/^# LAST RELEASED:.*$/$NEWREL/" $VERSIONFILE
+    [cCsS])
+      Becho "!!! Store new $CHANGESFILE"
+      mv $TMPFILE $CHANGESFILE
+
+      test "$RES" == "s" && {
+	if [ "$LAST_RELEASE" == "$THIS_RELEASE" ]; then
+	  git add "$CHANGESFILE" && git commit -m "changes"
+	else
+	  Becho "!!! Remember new version $THIS_RELEASE in $VERSIONFILE"
+	  sed -i "s/^# LAST RELEASED:.*$/# LAST RELEASED: $THIS_RELEASE/" $VERSIONFILE
+	  git add "$CHANGESFILE" "$VERSIONFILE" \
+	    && git commit -m "changes $THIS_RELEASE" \
+	    && git tag -m "tagging $THIS_RELEASE" "$THIS_RELEASE" HEAD
+	  Becho "!!!"
+	  Becho "!!! Do not forget to push the commit and the tag: $(Gecho git push --tags)"
+	  Becho "!!!"
+	fi
       }
-
-      echo "Store new $CHANGESFILE"
-      cp $TMPFILE $CHANGESFILE
-
-      echo "$(sed 's/^.*#---delete-or-release---#.*RELEASE:/# CURRENT RELEASE:/' <<<"$GOTVERSION")"
-      awk '{print}/^----------/{n=n+1; if ( n == 2 ) exit 0; }' $CHANGESFILE
-
       ;;
     *)
-      echo "Leave $CHANGESFILE untouched"
+      Becho "!!! Leave $CHANGESFILE untouched"
       ;;
   esac
 done
-
-rm -f $TMPFILE
