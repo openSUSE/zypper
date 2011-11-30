@@ -1,4 +1,10 @@
 -------------------------------------------------------------------
+Wed Nov 30 16:43:13 CET 2011 - ma@suse.de
+
+- Eat trailing whitespace in zypper.conf (bnc#687530)
+- Fix some static initializer issues
+
+-------------------------------------------------------------------
 Sun Nov 27 01:13:31 CET 2011 - ma@suse.de
 
 - Update zypper-po.tar.bz2
