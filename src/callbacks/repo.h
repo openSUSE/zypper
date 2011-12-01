@@ -179,7 +179,7 @@ struct DownloadResolvableReportReceiver : public zypp::callback::ReceiveReport<z
   virtual bool progress(int value, zypp::Resolvable::constPtr /*resolvable_ptr*/)
   {
     // seems this is never called, the progress is reported by the media backend anyway
-    INT << "not impelmented" << std::endl;
+    // INT << "not impelmented" << std::endl;
     // TranslatorExplanation This text is a progress display label e.g. "Retrieving [42%]"
 //    display_step( "download-resolvable", ~("Retrieving") /* + resolvable_ptr->name() */, value );
     return true;
