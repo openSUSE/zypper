@@ -96,7 +96,7 @@ def printLogByPID(logfiles, pid, date = False):
   if not date:
     date = "\d{4}-\d{2}-\d{2}"
   output = []
-  c = re.compile(r"%s \d{2}:\d{2}:\d{2} \<\d\> \w+\(%d\).+" % (date, pid))
+  c = re.compile(r"%s \d{2}:\d{2}:\d{2} \<\d+\> [^(]+\(%d\).+" % (date, pid))
 
   for logfile in logfiles:
     print >> sys.stderr, "Reading %s" % logfile, '.' * (filenamelen - len(logfile) + 3),
