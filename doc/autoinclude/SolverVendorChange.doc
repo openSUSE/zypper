@@ -1,0 +1,78 @@
+/**
+
+\page pg_zypp-solv-vendorchange Solver - Vendor protection
+
+\author Michael Andres <ma@suse.de>
+
+\section zypp-solv-vendorchange Vendor protection rule
+
+Tracing a packages origin \c libzypp uses the packages \c vendor string. The \c vendor string is part of the rpm header and thus defined at the time the package was built. It stays the same, no matter which repository was used to ship the package. Using \c rpm  is one way to retrieve a packages \c vendor string:
+
+\code
+$ rpm -q --qf '%{name} \tvendor: %{vendor}\n' libzypp nautilus libdvdread3
+libzypp         vendor: openSUSE
+nautilus        vendor: obs://build.opensuse.org/GNOME
+libdvdread3     vendor: http://packman.links2linux.de
+\endcode
+
+Also several \c zypper commands will display a packages \c vendor:
+
+\code
+$ zypper info libzypp
+
+Information for package libzypp:
+
+Repository: openSUSE-11.4-Update
+Name: libzypp
+Version: 8.12.6-0.2.1
+Arch: x86_64
+Vendor: openSUSE		<===
+Installed: Yes
+Status: up-to-date
+Installed Size: 7.0 MiB
+Summary: Package, Patch, Pattern, and Product Management
+Description:
+Package, Patch, Pattern, and Product Management
+\endcode
+
+\subsection zypp-solv-vendorchange-rule The vendor protection rule is quite simple:
+
+\note When looking for an installed packages \e update \e candidate, we are looking for a package originated by the \e same \e vendor (not repository!) as the \e installed one.
+
+
+\section zypp-solv-vendorchange-tune Vendor protection tuning
+
+The \e brute \e force method is to turn off all vendor protection in \c /etc/zypp/zypp.conf:
+
+\code
+##
+## EXPERTS ONLY: Per default the solver will not replace packages of
+## different vendors, unless you explicitly ask to do so. Setting this
+## option to TRUE will disable this vendor check (unless the application
+## explicitly re-enables it). Packages will then be considered based on
+## repository priority and version only. This may easily damage your system.
+##
+## CHANGING THE DEFAULT IS NOT RECOMMENDED.
+##
+## Valid values:  boolean
+## Default value: false
+##
+solver.allowVendorChange = true
+\endcode
+
+\subsection zypp-solv-vendorchange-equiv Groups of equivalent vendor strings
+
+A built in example for this are the \c vendor strings for \c SuSE  and \c openSUSE. All vendor strings starting (case insensitive) with either \c "suse" or \c "opensuse", are considered to be the \e same \e vendor and their packages may replace each other without asking.
+
+You may define your own classes of equivalent \c vendor strings by creating an entry in the \c /etc/zypp/vendors.d directory. The directory does not exist per default, so you may have to create it first. For each group of \c vendor strings create a file, name it as you like, with the following content:
+
+\code
+[main]
+## A comma separated list of vendor string (prefixes!)
+## Example: suse,opensuse
+vendors = <PUT YOUR LIST HERE>
+\endcode
+
+\note The built in rule unifying \c "suse"  and \c "opensuse" gets disabled as soon as you mention either of those string in a custom rule.
+
+*/
