@@ -50,7 +50,7 @@ Once a program called "foobar" is installed, listing services will show it:
 
 \verbatim
 > zypper ls
-#  | Alias            | Name         | Enabled | Refresh | Type  
+#  | Alias            | Name         | Enabled | Refresh | Type
 ---+------------------+--------------+---------+---------+-------
 1  | foobar           | foobar       | Yes     | Yes     | plugin
 ...

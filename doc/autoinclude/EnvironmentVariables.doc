@@ -33,7 +33,7 @@ Note that for Boolean variables we usually test whether the variable exists and 
 \li \c PLUGIN_SEND_TIMEOUT=<sec> Send timeout for plugin communication.
 \li \c PLUGIN_RECEIVE_TIMEOUT=<sec> Receive timeout for plugin communication.
 
-\subsection zypp-envars-misc Variables \b not for common use (test and debug)
+\subsection zypp-envars-misc Variables not for common use (test and debug)
 
 \li \c ZYPP_MODALIAS_SYSFS=<PATH> Use this instead of \c /sys to evaluate modaliases.
 \li \c ZYPP_COMMIT_NO_PACKAGE_CACHE=1
