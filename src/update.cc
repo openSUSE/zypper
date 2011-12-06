@@ -247,16 +247,19 @@ static bool list_patch_updates(Zypper & zypper)
   }
 
   Table tbl;
+  if (!Zypper::instance()->globalOpts().no_abbrev)
+    tbl.allowAbbrev(5);
   Table pm_tbl; // only those that affect packagemanager (restartSuggested()), they have priority
+  if (!Zypper::instance()->globalOpts().no_abbrev)
+    pm_tbl.allowAbbrev(5);
   TableHeader th;
   unsigned cols;
 
   th << (zypper.globalOpts().is_rug_compatible ? _("Catalog") : _("Repository"))
-     << _("Name") << _("Version") << _("Category") << _("Status");
-  cols = 5;
+     << _("Name") << _("Version") << _("Category")<< _("Status") << _("Summary");
+  cols = 6;
   tbl << th;
   pm_tbl << th;
-
   const zypp::ResPool& pool = God->pool();
   ResPool::byKind_iterator
     it = pool.byKindBegin(ResKind::patch),
@@ -287,6 +290,7 @@ static bool list_patch_updates(Zypper & zypper)
         tr << res->name () << res->edition ().asString();
         tr << patch->category();
         tr << (it->isBroken() ? _("needed") : _("not needed"));
+        tr << patch->summary();
 
         if (!all && patch->restartSuggested ())
           pm_tbl << tr;
