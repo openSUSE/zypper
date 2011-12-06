@@ -75,4 +75,9 @@ vendors = <PUT YOUR LIST HERE>
 
 \note The built in rule unifying \c "suse"  and \c "opensuse" gets disabled as soon as you mention either of those string in a custom rule.
 
+
+\section zypp-solv-vendorchange-Impl Related classes
+
+\li \ref zypp::VendorAttr (vendor string equivalence and \c vendors.d parser)
+
 */

@@ -34,9 +34,11 @@ namespace zypp {
  * Packages with equivalment vendor strings may replace themself without
  * creating a solver error.
  *
- * Per default vendor strings starting with \c "suse' or \c 'opensuse"
+ * Per default vendor strings starting with \c "suse" or \c "opensuse"
  * are treated equivalent. This may be changed by providing customized
  * vendor description files in \c /etc/zypp/vendors.d.
+ *
+ * \see \ref pg_zypp-solv-vendorchange
 */
 class VendorAttr
 {
