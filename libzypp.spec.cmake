@@ -104,20 +104,7 @@ Requires:       gpg2
 Requires:       gnupg2
 %endif
 
-# ---------------------------------------------------------------
-%if 0%{?suse_version} >= 1110
-# (almost) common codebase, but on SLES11-SP1 (according to Rudi
-# suse_version == 1110) we have a patched libcurl-7.19.0-11.22,
-# and no aria2. Furthermore SLE may use it's own set of .po files
-# from po/sle-zypp-po.tar.bz2.
-
-# this check should use 7.19.0 if SLE and 7.19.4 if not (backported
-# CURLOPT_REDIR_PROTOCOLS)
-%define min_curl_version 7.19.0-11.22
-%endif
-
-# ---------------------------------------------------------------
-
+%define min_curl_version 7.19.4
 %if 0%{?suse_version}
 %if 0%{?suse_version} >= 1100
 # Code11+
