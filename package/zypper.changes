@@ -1,4 +1,9 @@
 -------------------------------------------------------------------
+Mon Dec 19 14:22:19 CET 2011 - ma@suse.de
+
+- Update manpage to give some repo URI examples (bnc#680630)
+
+-------------------------------------------------------------------
 Tue Oct 11 15:09:56 CEST 2011 - ma@suse.de
 
 - Allow white space before key=value pair (bnc#722250)
