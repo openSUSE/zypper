@@ -1,4 +1,9 @@
 -------------------------------------------------------------------
+Mon Dec 19 14:15:36 CET 2011 - ma@suse.de
+
+- Update manpage to give some repo URI examples (bnc#680630)
+
+-------------------------------------------------------------------
 Tue Dec  6 18:27:25 CET 2011 - ma@suse.de
 
 - Print patch summary (bnc#733167)
