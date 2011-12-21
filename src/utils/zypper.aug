@@ -53,10 +53,10 @@ module ZYpper =
   let commented  = [ label "commented" . del /#[ \t]*/ "# " . store_to_eol? . eol ]
 
   (* Matches key=value, creates a new node out of key and stores the value *)
-  let kv = [ key kw_re . del /[ \t]*=[ \t]*/ " = " . store /[^ \t\n]([^\n]*[^ \t\n])?/ . del_opt_ws ""  ]
+  let kv = [ del_opt_ws "" . key kw_re . del /[ \t]*=[ \t]*/ " = " . store /[^ \t\n]([^\n]*[^ \t\n])?/ . eol ]
 
   (* An option consists of ## description, # commented lines and an optionall key=value pair. *)
-  let option = [ seq "option" . description* . commented* . del_opt_ws "" . kv? . del_str "\n" ]
+  let option = [ seq "option" . description* . commented* . kv? ]
 
   (* ****************( section )*************** *)
 
