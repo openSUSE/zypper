@@ -75,6 +75,20 @@ Authors:
 --------
     Dominik Heidler <dheidler@suse.de>
 
+%package aptitude
+Summary:        aptitude compatibility with zypper
+License:        GPLv2+
+Requires:       perl
+Supplements:    zypper
+BuildArch:      noarch
+Group:          System/Packages
+%description aptitude
+provides aptitude compatibility using zypper
+
+Authors:
+--------
+    Bernhard M. Wiedemann <bernhard+aptitude4zypp lsmod de>
+
 %prep
 %setup -q
 
@@ -155,5 +169,9 @@ rm -rf "$RPM_BUILD_ROOT"
 %defattr(-,root,root)
 %{_sbindir}/zypper-log
 %doc %{_mandir}/man8/zypper-log.8*
+
+%files aptitude
+%defattr(-,root,root)
+%{_bindir}/aptitude
 
 %changelog

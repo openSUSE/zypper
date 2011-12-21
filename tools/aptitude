@@ -1,0 +1,45 @@
+#!/usr/bin/perl -w
+# version 0.8
+# by Bernhard M. Wiedemann <bernhard+aptitude4zypp lsmod de>
+# License: GPL v2 or later
+
+use strict;
+my @options=();
+foreach(@ARGV) {
+	last unless (m/^-/);
+	push(@options, $_);
+}
+
+my @zopt;
+my @zopt2;
+foreach(@options) {
+	shift @ARGV;
+	if($_ eq "-s" || $_ eq "--simulate") {push @zopt2, "--dry-run"}
+	if($_ eq "-d" || $_ eq "--download-only") {push @zopt2, "--download-only"}
+	if($_ eq "-y" || $_ eq "--assume-yes") {push @zopt, "--non-interactive"}
+	if($_ eq "-q" || $_ eq "--quiet") {push @zopt, "--quiet"}
+	if($_ eq "-V" || $_ eq "-v" || $_ eq "--verbose") {push @zopt, "--verbose"}
+	if($_ eq "-u") {system("zypper", "refresh")}
+	if($_ eq "--without-recommends") {push @zopt2, "--no-recommends"}
+	if($_ eq "--with-recommends") {push @zopt, "--recommends"}
+}
+
+my $action=shift;
+if(!defined($action)) {exec "/sbin/yast2", "-i"}
+
+if($action eq "show") {$action="info"}
+elsif($action eq "purge") {$action="remove"}
+elsif($action eq "hold") {$action="addlock"}
+elsif($action eq "unhold") {$action="removelock"}
+elsif($action eq "update") {$action="refresh"}
+elsif($action eq "upgrade" || $action eq "safe-upgrade") {$action="update"}
+elsif($action eq "full-upgrade" || $action eq "dist-upgrade") {$action="dist-upgrade"}
+elsif($action eq "download") {$action="install"; unshift(@zopt2, "--download-only");}
+elsif($action eq "reinstall") {$action="install"; unshift(@zopt2, "--force");}
+elsif($action eq "source") {$action="source-install"}
+elsif($action=~m/build-dep(?:ends)?/) {$action="source-install"; unshift(@zopt2, "--build-deps-only");}
+elsif($action eq "changelog") {exec qw"rpm -q --changelog", @ARGV}
+elsif($action=~m/markauto|unmarkauto|forbid-version|autoclean|why|why-not/) { die "$action unavailabe?"}
+
+#system "echo", "zypper", @zopt, $action, @zopt2, @ARGV;
+exec "zypper", @zopt, $action, @zopt2, @ARGV;

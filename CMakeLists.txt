@@ -85,3 +85,8 @@ INSTALL(
   DESTINATION ${INSTALL_PREFIX}/sbin
 )
 
+# zypper-aptitude compat tool
+INSTALL(
+  PROGRAMS tools/aptitude
+  DESTINATION ${INSTALL_PREFIX}/bin
+)
