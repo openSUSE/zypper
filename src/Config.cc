@@ -116,7 +116,7 @@ const string ConfigOption::asString() const
 Config::Config()
   : show_alias(false)
   , repo_list_columns("anr")
-  , solver_installRecommends(true)
+  , solver_installRecommends(!ZConfig::instance().solver_onlyRequires())
   , do_colors        (false)
   , color_useColors  ("never")
   , color_background (false)    // dark background
