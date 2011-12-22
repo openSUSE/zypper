@@ -136,10 +136,6 @@ touch $RPM_BUILD_ROOT%{_var}/log/zypper.log
 %post
 %run_permissions
 
-%verifyscript
-%verify_permissions -e %{_sbindir}/zypp-refresh-wrapper
-%endif
-
 %clean
 rm -rf "$RPM_BUILD_ROOT"
 
@@ -152,7 +148,6 @@ rm -rf "$RPM_BUILD_ROOT"
 %{_bindir}/zypper
 %{_bindir}/installation_sources
 %{_sbindir}/zypp-refresh
-%verify(not mode) %attr (755,root,root) %{_sbindir}/zypp-refresh-wrapper
 %dir %{_datadir}/zypper
 %{_datadir}/zypper/zypper.aug
 %dir %{_datadir}/zypper/xml
