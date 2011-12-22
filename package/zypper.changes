@@ -1,4 +1,12 @@
 -------------------------------------------------------------------
+Thu Dec 22 11:47:14 CET 2011 - ma@suse.de
+
+- Fix zypper.conf lense to ignore commented option values.
+  Eat trailing whitespace in zypper.conf. (bnc#687530)
+- Intentionally bump version from .16 to .160 
+- version 1.6.160
+
+-------------------------------------------------------------------
 Mon Dec 19 14:20:39 CET 2011 - ma@suse.de
 
 - Update manpage to give some repo URI examples (bnc#680630)
