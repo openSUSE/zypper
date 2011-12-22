@@ -1,4 +1,9 @@
 -------------------------------------------------------------------
+Thu Dec 22 15:35:35 CET 2011 - ma@suse.de
+
+- Remove setuid root binary /usr/sbin/zypp-refresh-wrapper (bnc#724832)
+
+-------------------------------------------------------------------
 Wed Dec 21 17:57:31 CET 2011 - ma@suse.de
 
 - Fix zypp.conf lens (bnc#687530)
