@@ -256,6 +256,7 @@ void Config::read(const string & file)
   }
   catch (Exception & e)
   {
-    DBG << "Augeas exception. No config read, sticking with defaults." << endl;
+    std::cerr << e.asUserHistory() << endl;
+    std::cerr << "*** Augeas exception. No config read, sticking with defaults." << endl;
   }
 }

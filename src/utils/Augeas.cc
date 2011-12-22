@@ -74,21 +74,23 @@ Augeas::Augeas(const string & file)
       _user_conf_path = "/files" + _homedir + "/.zypper.conf";
 
     // global conf errors
-    _got_global_zypper_conf =
-      ::aug_get(_augeas, "/files/etc/zypp/zypper.conf", NULL) != 0;
+    _got_global_zypper_conf = ::aug_get(_augeas, "/files/etc/zypp/zypper.conf", NULL) != 0;
     if (::aug_get(_augeas, "/augeas/files/etc/zypp/zypper.conf/error/message", value))
-      error = value[0];
-
+      error = std::string("/etc/zypp/zypper.conf: ") + value[0];
   }
 
   // user conf errors
   if (!_user_conf_path.empty())
   {
-    _got_user_zypper_conf =
-      ::aug_get(_augeas, _user_conf_path.c_str(), NULL) != 0;
+    _got_user_zypper_conf = ::aug_get(_augeas, _user_conf_path.c_str(), NULL) != 0;
     string user_conf_err = "/augeas" + _user_conf_path + "/error/message";
     if (::aug_get(_augeas, user_conf_err.c_str(), value))
-      error += string("\n") + value[0];
+    {
+      if ( ! error.empty() ) error += string("\n");
+      error += _user_conf_path.substr( 6 );
+      error += ": ";
+      error += value[0];
+    }
   }
 
   if (!_got_global_zypper_conf && !_got_user_zypper_conf)
