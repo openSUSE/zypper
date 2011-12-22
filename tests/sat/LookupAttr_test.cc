@@ -25,7 +25,7 @@ BOOST_AUTO_TEST_CASE(bnc_435838)
 
 BOOST_AUTO_TEST_CASE(LookupAttr_init)
 {
-  test.loadTarget(); // initialize and load target
+  //test.loadTarget(); // initialize and load target
   test.loadRepo( TESTS_SRC_DIR "/data/openSUSE-11.1" );
   test.loadRepo( TESTS_SRC_DIR "/data/obs_virtualbox_11_1" );
   test.loadRepo( TESTS_SRC_DIR "/data/11.0-update" );
