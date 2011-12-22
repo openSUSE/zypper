@@ -16,6 +16,7 @@ ADD_TESTS(
   Edition
   Fetcher
   FileChecker
+  Flags
   InstanceId
   KeyRing
   Locks

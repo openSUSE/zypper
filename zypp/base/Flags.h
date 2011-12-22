@@ -63,7 +63,7 @@ namespace zypp
       public:
         Flags()                               : _val( 0 ) {}
         Flags( Enum flag_r )                  : _val( flag_r ) {}
-        Flags( unsigned flag_r )              : _val( flag_r ) {}
+        explicit Flags( unsigned flag_r )     : _val( flag_r ) {}
 
         Flags & operator&=( Flags rhs )       { _val &= rhs._val; return *this; }
         Flags & operator&=( Enum rhs )        { _val &= rhs;      return *this; }
@@ -89,13 +89,17 @@ namespace zypp
         Flags operator~() const               { return Flags( ~_val ); }
 
       public:
-        Flags & setFlag( Enum flag_r, bool newval_r )
-        { return( newval_r ? setFlag(flag_r) : unsetFlag(flag_r) ); }
+        Flags & setFlag( Flags flag_r, bool newval_r ) { return( newval_r ? setFlag(flag_r) : unsetFlag(flag_r) ); }
+        Flags & setFlag( Enum flag_r, bool newval_r )  { return( newval_r ? setFlag(flag_r) : unsetFlag(flag_r) ); }
 
-        Flags & setFlag( Enum flag_r )           { _val |= flag_r; return *this; }
-        Flags & unsetFlag( Enum flag_r )         { _val &= ~flag_r; return *this; }
+        Flags & setFlag( Flags flag_r )       { _val |= flag_r; return *this; }
+        Flags & setFlag( Enum flag_r )        { _val |= flag_r; return *this; }
 
-        bool testFlag( Enum flag_r ) const    { return _val & flag_r; }
+        Flags & unsetFlag( Flags flag_r )     { _val &= ~flag_r; return *this; }
+        Flags & unsetFlag( Enum flag_r )      { _val &= ~flag_r; return *this; }
+
+        bool testFlag( Flags flag_r ) const   { return ( _val & flag_r ) == flag_r; }
+        bool testFlag( Enum flag_r ) const    { return ( _val & flag_r ) == flag_r; }
 
       private:
         unsigned _val;
@@ -111,8 +115,13 @@ namespace zypp
 
     /** \relates Flags */
 #define ZYPP_DECLARE_OPERATORS_FOR_FLAGS(Name) \
-inline Name operator|( Name::enum_type lhs, Name::enum_type rhs )    { return Name( lhs ) |= rhs; } \
-inline Name operator|( Name::enum_type lhs, Name rhs )               { return rhs |= lhs; }
+inline Name operator&( Name::enum_type lhs, Name::enum_type rhs )	{ return Name( lhs ) &= rhs; }	\
+inline Name operator&( Name::enum_type lhs, Name rhs )			{ return rhs &= lhs; }		\
+inline Name operator|( Name::enum_type lhs, Name::enum_type rhs )	{ return Name( lhs ) |= rhs; }	\
+inline Name operator|( Name::enum_type lhs, Name rhs )			{ return rhs |= lhs; }		\
+inline Name operator^( Name::enum_type lhs, Name::enum_type rhs )	{ return Name( lhs ) ^= rhs; }	\
+inline Name operator^( Name::enum_type lhs, Name rhs )			{ return rhs ^= lhs; }		\
+inline Name operator~( Name::enum_type lhs )				{ return ~Name( lhs ); }
 
     /** \relates Flags */
 #define ZYPP_DECLARE_FLAGS_AND_OPERATORS(Name,Enum) \
