@@ -49,13 +49,21 @@ namespace zypp
     { return myPool().prepareForSolving(); }
 
     bool Pool::reposEmpty() const
-    { return ! myPool()->nrepos; }
+    { return ! myPool()->urepos; }
 
     Pool::size_type Pool::reposSize() const
-    { return myPool()->nrepos; }
+    { return myPool()->urepos; }
 
     Pool::RepositoryIterator Pool::reposBegin() const
-    { return RepositoryIterator( myPool()->repos ); }
+    {
+      if ( myPool()->urepos )
+      { // repos[0] == NULL
+	for_( it, myPool()->repos+1, myPool()->repos+myPool()->nrepos )
+	  if ( *it )
+	    return RepositoryIterator( it );
+      }
+      return reposEnd();
+    }
 
     Pool::RepositoryIterator Pool::reposEnd() const
     { return RepositoryIterator( myPool()->repos+myPool()->nrepos ); }

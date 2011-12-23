@@ -308,6 +308,22 @@ namespace zypp
 		   << "}";
     }
 
+    //////////////////////////////////////////////////////////////////
+    namespace detail
+    {
+      void RepositoryIterator::increment()
+      {
+	if ( base() )
+	{
+	  ::_Pool * satpool = sat::Pool::instance().get();
+	  do {
+	    ++base_reference();
+	  } while ( !*base() && base() < satpool->repos+satpool->nrepos );
+	}
+      }
+    } // namespace detail
+    //////////////////////////////////////////////////////////////////
+
     ///////////////////////////////////////////////////////////////////
     //
     // Repository::ProductInfoIterator
