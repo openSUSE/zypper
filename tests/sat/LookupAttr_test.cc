@@ -8,11 +8,6 @@ static TestSetup test( Arch_x86_64 );
 // Must be the first test!
 BOOST_AUTO_TEST_CASE(bnc_435838)
 {
-  // On the fly check that findSystemRepo does not
-  // cause loading the SystemRepo. check 2 times.
-  BOOST_REQUIRE( ! test.satpool().findSystemRepo() );
-  BOOST_REQUIRE( ! test.satpool().findSystemRepo() );
-
   // empty @system to pool
   test.satpool().systemRepo();
   BOOST_REQUIRE( test.satpool().findSystemRepo() );
