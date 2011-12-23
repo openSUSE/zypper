@@ -107,7 +107,7 @@ function newchangesentry() {
   echo ""
 }
 
-git status --porcelain | grep '^[^ ]' | grep -v "$VERSIONFILE\|$CHANGESFILE" && {
+git status --porcelain | grep '^[^ ?]' | grep -v "$VERSIONFILE\|$CHANGESFILE" && {
   Becho "!!! Files other than version and changes are added to the index."
   Becho "!!! Doing dryrun..."
   DRYRUN=1
