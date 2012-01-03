@@ -151,7 +151,7 @@ Requires:       bzip2
 Requires:       popt-devel
 Requires:       boost-devel
 Requires:       libstdc++-devel
-%if 0%{?suse_version} >= 1130
+%if 0%{?suse_version} >= 1130 || 0%{?fedora_version} >= 16
 Requires:       libudev-devel
 %else
 Requires:       hal-devel
