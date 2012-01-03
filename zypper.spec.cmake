@@ -79,7 +79,9 @@ Authors:
 Summary:        aptitude compatibility with zypper
 License:        GPLv2+
 Requires:       perl
+%if 0%{?suse_version}
 Supplements:    zypper
+%endif
 BuildArch:      noarch
 Group:          System/Packages
 %description aptitude
