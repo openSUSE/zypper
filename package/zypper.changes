@@ -1,4 +1,9 @@
 -------------------------------------------------------------------
+Mon Jan  9 16:30:52 CET 2012 - ma@suse.de
+
+- Update zypper-po.tar.bz2
+
+-------------------------------------------------------------------
 Thu Dec 22 15:35:35 CET 2011 - ma@suse.de
 
 - Remove setuid root binary /usr/sbin/zypp-refresh-wrapper (bnc#724832)
