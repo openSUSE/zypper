@@ -873,7 +873,7 @@ void SATResolver::doUpdate()
     Queue decisionq;
     queue_init(&decisionq);
     solver_get_decisionqueue(_solv, &decisionq);
-    for (int i = 0; i < _solv->decisionq.count; i++)
+    for (int i = 0; i < decisionq.count; i++)
     {
       Id p;
       p = decisionq.elements[i];
@@ -895,6 +895,7 @@ void SATResolver::doUpdate()
     for (int i = _solv->pool->installed->start; i < _solv->pool->installed->start + _solv->pool->installed->nsolvables; i++)
     {
       if (solver_get_decisionlevel(_solv, i) > 0)
+	  continue;
 
       PoolItem poolItem( _pool.find( sat::Solvable(i) ) );
       if (poolItem) {
@@ -1307,26 +1308,12 @@ SATResolver::problems ()
 		    } else {
 			/* policy, replace p with rp */
 			s = mapSolvable (p);
-			if (rp)
-			    sd = mapSolvable (rp);
-
 			PoolItem itemFrom = _pool.find (s);
-			if (s == sd && _solv->distupgrade)
-			{
-			    PoolItem poolItem = _pool.find (s);
-			    if (poolItem) {
-				problemSolution->addSingleAction (poolItem, LOCK); // for solver reason: NOT weak lock.
-				string description = str::form (_("keep obsolete %s"), s.asString().c_str());
-				MIL << description << endl;
-				problemSolution->addDescription (description);
-			    } else {
-				ERR << "SOLVER_INSTALL_SOLVABLE: No item found for " << s.asString() << endl;
-			    }
-			}
-			else if (rp)
+			if (rp)
 			{
 			    int gotone = 0;
 
+			    sd = mapSolvable (rp);
 			    PoolItem itemTo = _pool.find (sd);
 			    if (itemFrom && itemTo) {
 				problemSolution->addSingleAction (itemTo, INSTALL);
