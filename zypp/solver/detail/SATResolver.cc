@@ -527,28 +527,39 @@ SATResolver::solving(const CapabilitySet & requires_caps,
       }
     }
 
+    Queue recommendations;
+    Queue suggestions;
+    Queue orphaned;
+    queue_init(&recommendations);
+    queue_init(&suggestions);
+    queue_init(&orphaned);
+    solver_get_recommendations(_solv, &recommendations, &suggestions, 0);
+    solver_get_orphaned(_solv, &orphaned);
     /*  solvables which are recommended */
-    for ( int i = 0; i < _solv->recommendations.count; ++i )
+    for ( int i = 0; i < recommendations.count; ++i )
     {
-      PoolItem poolItem( getPoolItem( _solv->recommendations.elements[i] ) );
+      PoolItem poolItem( getPoolItem( recommendations.elements[i] ) );
       poolItem.status().setRecommended( true );
     }
 
     /*  solvables which are suggested */
-    for ( int i = 0; i < _solv->suggestions.count; ++i )
+    for ( int i = 0; i < suggestions.count; ++i )
     {
-      PoolItem poolItem( getPoolItem( _solv->suggestions.elements[i] ) );
+      PoolItem poolItem( getPoolItem( suggestions.elements[i] ) );
       poolItem.status().setSuggested( true );
     }
 
     _problem_items.clear();
     /*  solvables which are orphaned */
-    for ( int i = 0; i < _solv->orphaned.count; ++i )
+    for ( int i = 0; i < orphaned.count; ++i )
     {
-      PoolItem poolItem( getPoolItem( _solv->orphaned.elements[i] ) );
+      PoolItem poolItem( getPoolItem( orphaned.elements[i] ) );
       poolItem.status().setOrphaned( true );
       _problem_items.push_back( poolItem );
     }
+    queue_free(&recommendations);
+    queue_free(&suggestions);
+    queue_free(&orphaned);
 
     /* Write validation state back to pool */
     Queue flags, solvableQueue;
