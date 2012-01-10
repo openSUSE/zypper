@@ -3514,7 +3514,10 @@ void Zypper::doCommand()
       }
 
       if (t.empty())
+      {
         out().info(_("No packages found."), Out::QUIET);
+        setExitCode(ZYPPER_EXIT_INF_CAP_NOT_FOUND);
+      }
       else
       {
         cout << endl; //! \todo  out().separator()?
