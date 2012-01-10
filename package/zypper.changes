@@ -1,4 +1,12 @@
 -------------------------------------------------------------------
+Tue Jan 10 11:50:16 CET 2012 - ma@suse.de
+
+- Return nonzero (104 - INF_CAP_NOT_FOUND) when query matches no 
+  package (bnc#719690)
+- Warn if config file can not be parsed
+- version 1.6.20
+
+-------------------------------------------------------------------
 Wed Dec 21 18:00:24 CET 2011 - ma@suse.de
 
 - Fix zypp.conf lens (bnc#687530)
