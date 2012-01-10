@@ -100,7 +100,7 @@ function newchangesentry() {
   echo ""
 }
 
-git status --porcelain | grep '^[^ ]' | grep -v "$VERSIONFILE\|$CHANGESFILE" && {
+git status --porcelain | grep '^[^ ?]' | grep -v "$VERSIONFILE\|$CHANGESFILE" && {
   Becho "!!! Files other than version and changes are added to the index."
   Becho "!!! Doing dryrun..."
   DRYRUN=1
@@ -170,12 +170,18 @@ while [ "$RES" == "e" ]; do
 	else
 	  Becho "!!! Remember new version $THIS_RELEASE in $VERSIONFILE"
 	  sed -i "s/^# LAST RELEASED:.*$/# LAST RELEASED: $THIS_RELEASE/" $VERSIONFILE
-	  git add "$CHANGESFILE" "$VERSIONFILE" \
-	    && git commit -m "changes $THIS_RELEASE" \
-	    && git tag -m "tagging $THIS_RELEASE" "$THIS_RELEASE" HEAD
-	  Becho "!!!"
-	  Becho "!!! Do not forget to push the commit and the tag: $(Gecho git push --tags)"
-	  Becho "!!!"
+	  if git add "$CHANGESFILE" "$VERSIONFILE" \
+		&& git commit -m "changes $THIS_RELEASE" \
+		  && git tag -m "tagging $THIS_RELEASE" "$THIS_RELEASE" HEAD; then
+	    Becho "!!!"
+	    Becho "!!! Do not forget to push the commit and the tag: $(Gecho git push --tags origin HEAD)"
+	    Becho "!!!"
+	  else
+	    Recho "!!!"
+	    Recho "!!! Commit failed. Check manually. (git reset HEAD~)"
+	    Recho "!!!"
+	    exit 9
+	  fi
 	fi
       }
       ;;
