@@ -854,7 +854,7 @@ void SATResolver::doUpdate()
     solver_set_flag(_solv, SOLVER_FLAG_ALLOW_UNINSTALL, _allowuninstall);
     solver_set_flag(_solv, SOLVER_FLAG_ALLOW_ARCHCHANGE, _allowarchchange);
     solver_set_flag(_solv, SOLVER_FLAG_ALLOW_VENDORCHANGE, _allowvendorchange);
-    solver_set_flag(_solv, SOLVER_FLAG_SPLITPROVIDES, true);
+    solver_set_flag(_solv, SOLVER_FLAG_SPLITPROVIDES, _dosplitprovides);
     solver_set_flag(_solv, SOLVER_FLAG_NO_UPDATEPROVIDE, _noupdateprovide);
     solver_set_flag(_solv, SOLVER_FLAG_IGNORE_RECOMMENDED, _onlyRequires);
 
