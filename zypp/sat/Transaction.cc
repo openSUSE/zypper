@@ -11,6 +11,7 @@
 extern "C"
 {
 #include <solv/transaction.h>
+#include <solv/solver.h>
 #include <solv/bitmap.h>
 }
 #include <iostream>
@@ -69,11 +70,7 @@ namespace zypp
 	typedef std::tr1::unordered_map<detail::IdType,PostMortem> pmmap_type;
 
       public:
-	Impl()
-	  : _trans( ::transaction_create( nullptr ) )
-	{ memset( _trans, 0, sizeof(_trans) ); }
-
-	Impl( ::_Transaction & trans_r )
+	Impl( )
 	  : _watcher( myPool().serial() )
 	  , _trans( nullptr )
 	{
@@ -85,9 +82,18 @@ namespace zypp
 	    sat::Solvable solv( (*it).satSolvable() );
 	    decisionq.push( solv.isSystem() ? -solv.id() : solv.id() );
 	  }
-	  if ( trans_r.noobsmap.size )
-	    ::map_grow( &trans_r.noobsmap, myPool()->nsolvables );
-	  _trans = ::transaction_create_decisionq( myPool().getPool(), decisionq, &trans_r.noobsmap );
+	  Queue noobsq;
+	  for_( it, sat::Pool::instance().multiversionBegin(), sat::Pool::instance().multiversionEnd() )
+	  {
+	    noobsq.push( SOLVER_NOOBSOLETES | SOLVABLE_NAME );
+	    noobsq.push( it->id() );
+	  }
+	  Map noobsmap;
+	  ::map_init( &noobsmap, 0 );
+	  ::solver_calculate_noobsmap( myPool().getPool(), noobsq, &noobsmap );
+
+	  _trans = ::transaction_create_decisionq( myPool().getPool(), decisionq, &noobsmap );
+	  ::map_free( &noobsmap );
 
 	  // NOTE: package/product buddies share the same ResStatus
 	  // so we also link the buddies stepStages. This assumes
@@ -292,11 +298,7 @@ namespace zypp
     ///////////////////////////////////////////////////////////////////
 
     Transaction::Transaction()
-      : _pimpl( Impl::nullimpl() )
-    {}
-
-    Transaction::Transaction( ::_Transaction & trans_r )
-      : _pimpl( new Impl( trans_r ) )
+      : _pimpl( new Impl() )
     {}
 
     Transaction::~Transaction()

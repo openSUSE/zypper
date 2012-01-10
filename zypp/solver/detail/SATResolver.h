@@ -159,9 +159,6 @@ class SATResolver : public base::ReferenceCounted, private base::NonCopyable {
     ResolverProblemList problems ();
     void applySolutions (const ProblemSolutionList &solutions);
 
-    // Return the Transaction computed by the last solver run.
-    sat::Transaction getTransaction();
-
     void addPoolItemToInstall (PoolItem item);
     void addPoolItemsToInstallFromList (PoolItemList & rl);
 

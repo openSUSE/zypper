@@ -162,17 +162,6 @@ SATResolver::~SATResolver()
 
 //---------------------------------------------------------------------------
 
-sat::Transaction SATResolver::getTransaction()
-{
-  if ( !_solv )
-    return sat::Transaction();
-
-  ::Transaction * sattrans = ::solver_create_transaction( _solv );
-  sat::Transaction ret ( *sattrans );
-  ::transaction_free( sattrans );
-  return ret;
-}
-
 ResPool
 SATResolver::pool (void) const
 {

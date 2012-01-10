@@ -365,7 +365,10 @@ bool Resolver::resolveQueue( solver::detail::SolverQueueItemList & queue )
 }
 
 sat::Transaction Resolver::getTransaction()
-{ return _satResolver->getTransaction(); }
+{
+    return sat::Transaction();
+}
+
 
 //----------------------------------------------------------------------------
 // Getting more information about the solve results
