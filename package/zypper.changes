@@ -1,4 +1,11 @@
 -------------------------------------------------------------------
+Tue Jan 10 12:10:03 CET 2012 - ma@suse.de
+
+- Return nonzero (104 - INF_CAP_NOT_FOUND) when query matches no 
+  package (bnc#719690)
+- version 1.6.161
+
+-------------------------------------------------------------------
 Thu Dec 22 11:47:14 CET 2011 - ma@suse.de
 
 - Fix zypper.conf lense to ignore commented option values.
