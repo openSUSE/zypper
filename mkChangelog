@@ -179,12 +179,18 @@ while [ "$RES" == "e" ]; do
 	else
 	  Becho "!!! Remember new version $THIS_RELEASE in $VERSIONFILE"
 	  sed -i "s/^# LAST RELEASED:.*$/# LAST RELEASED: $THIS_RELEASE ($THIS_COMPAT)/" $VERSIONFILE
-	  git add "$CHANGESFILE" "$VERSIONFILE" \
-	    && git commit -m "changes $THIS_RELEASE ($THIS_COMPAT)" \
-	    && git tag -m "tagging $THIS_RELEASE" "$THIS_RELEASE" HEAD
-	  Becho "!!!"
-	  Becho "!!! Do not forget to push the commit and the tag: $(Gecho git push --tags)"
-	  Becho "!!!"
+	  if git add "$CHANGESFILE" "$VERSIONFILE" \
+		&& git commit -m "changes $THIS_RELEASE ($THIS_COMPAT)" \
+		  && git tag -m "tagging $THIS_RELEASE" "$THIS_RELEASE" HEAD; then
+	    Becho "!!!"
+	    Becho "!!! Do not forget to push the commit and the tag: $(Gecho git push --tags origin HEAD)"
+	    Becho "!!!"
+	  else
+	    Recho "!!!"
+	    Recho "!!! Commit failed. Check manually. (git reset HEAD~)"
+	    Recho "!!!"
+	    exit 9
+	  fi
 	fi
       }
       ;;
