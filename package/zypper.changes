@@ -1,4 +1,10 @@
 -------------------------------------------------------------------
+Wed Jan 11 11:23:03 CET 2012 - ma@suse.de
+
+- Fix man page --cache-dir description. (bnc#738677)
+- version 1.6.21
+
+-------------------------------------------------------------------
 Tue Jan 10 19:09:57 CET 2012 - ma@suse.de
 
 - Fix extra space in translation (bnc#674572)
