@@ -1573,12 +1573,20 @@ Use the specified directory to look for the repository definition (*.repo) files
 The default value is /etc/zypp/repos.d.
 .TP
 .I \-C, \-\-cache\-dir <dir>
-Use an alternative directory to look for the repository metadata cache database files (solv files).
-The default value is /var/cache/zypp/solv.
+Use an alternative root directory for all caches.
+The default value is /var/cache/zypp.
 .TP
 .I \ \ \ \ \-\-raw\-cache\-dir <dir>
 Use the specified directory for storing raw copies of repository metadata files.
 The default value is /var/cache/zypp/raw.
+.TP
+.I \ \ \ \ \-\-solv\-cache\-dir <dir>
+Use the specified directory to store the repository metadata cache database files (solv files).
+The default value is /var/cache/zypp/solv.
+.TP
+.I \ \ \ \ \-\-pkg\-cache\-dir <dir>
+Use the specified directory for storing downloaded rpm packages. (see \fBaddrepo --keep-packages\fR)
+The default value is /var/cache/zypp/packages.
 .LP
 Repository Options:
 .TP
