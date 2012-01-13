@@ -12,7 +12,6 @@ extern "C"
 {
 #include <solv/transaction.h>
 #include <solv/solver.h>
-#include <solv/bitmap.h>
 }
 #include <iostream>
 #include "zypp/base/LogTools.h"
@@ -25,6 +24,7 @@ extern "C"
 #include "zypp/sat/Transaction.h"
 #include "zypp/sat/Solvable.h"
 #include "zypp/sat/Queue.h"
+#include "zypp/sat/Map.h"
 #include "zypp/ResPool.h"
 
 using std::endl;
@@ -70,7 +70,11 @@ namespace zypp
 	typedef std::tr1::unordered_map<detail::IdType,PostMortem> pmmap_type;
 
       public:
-	Impl( )
+	Impl()
+	  : _trans( ::transaction_create( nullptr ) )
+	{ memset( _trans, 0, sizeof(_trans) ); }
+
+	Impl( Default )
 	  : _watcher( myPool().serial() )
 	  , _trans( nullptr )
 	{
@@ -89,11 +93,8 @@ namespace zypp
 	    noobsq.push( it->id() );
 	  }
 	  Map noobsmap;
-	  ::map_init( &noobsmap, 0 );
-	  ::solver_calculate_noobsmap( myPool().getPool(), noobsq, &noobsmap );
-
-	  _trans = ::transaction_create_decisionq( myPool().getPool(), decisionq, &noobsmap );
-	  ::map_free( &noobsmap );
+	  ::solver_calculate_noobsmap( myPool().getPool(), noobsq, noobsmap );
+	  _trans = ::transaction_create_decisionq( myPool().getPool(), decisionq, noobsmap );
 
 	  // NOTE: package/product buddies share the same ResStatus
 	  // so we also link the buddies stepStages. This assumes
@@ -298,7 +299,11 @@ namespace zypp
     ///////////////////////////////////////////////////////////////////
 
     Transaction::Transaction()
-      : _pimpl( new Impl() )
+      : _pimpl( Impl::nullimpl() )
+    {}
+
+    Transaction::Transaction( Default )
+      : _pimpl( new Impl( Default() ) )
     {}
 
     Transaction::~Transaction()

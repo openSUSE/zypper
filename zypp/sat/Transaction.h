@@ -83,8 +83,14 @@ namespace zypp
        ZYPP_DECLARE_FLAGS(StepStages,StepStage);
 
      public:
-        /** Ctor: create transaction from ResPool. */
+       struct Default {};	///< Ctor arg type
+
+     public:
+        /** Default ctor: empty transaction. */
         Transaction();
+
+        /** Ctor loading the default pools transaction. */
+        Transaction( Default );
 
         /** Dtor */
         ~Transaction();

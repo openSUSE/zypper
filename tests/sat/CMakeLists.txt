@@ -7,6 +7,7 @@ ADD_TESTS(
   IdString
   LookupAttr
   Pool
+  Map
   Solvable
   SolvParsing
   WhatObsoletes

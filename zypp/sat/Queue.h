@@ -104,6 +104,13 @@ namespace zypp
     /** \relates Queue Verbose stream output */
     std::ostream & dumpOn( std::ostream & str, const Queue & obj );
 
+    /** \relates Queue */
+    bool operator==( const Queue & lhs, const Queue & rhs );
+
+    /** \relates Queue */
+    inline bool operator!=( const Queue & lhs, const Queue & rhs )
+    { return !( lhs == rhs ); }
+
     /////////////////////////////////////////////////////////////////
   } // namespace sat
   ///////////////////////////////////////////////////////////////////

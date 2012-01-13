@@ -528,6 +528,7 @@ SET( zypp_sat_SRCS
   sat/Solvable.cc
   sat/SolvableSet.cc
   sat/SolvIterMixin.cc
+  sat/Map.cc
   sat/Queue.cc
   sat/Transaction.cc
   sat/WhatProvides.cc
@@ -543,7 +544,8 @@ SET( zypp_sat_HEADERS
   sat/Solvable.h
   sat/SolvableSet.h
   sat/SolvIterMixin.h
-  sat/Queue.cc
+  sat/Map.h
+  sat/Queue.h
   sat/Transaction.h
   sat/WhatProvides.h
   sat/WhatObsoletes.h

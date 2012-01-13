@@ -1,4 +1,9 @@
 -------------------------------------------------------------------
+Tue Jan 10 18:31:41 CET 2012 - ma@suse.de
+
+- Update zypp-po.tar.bz2
+
+-------------------------------------------------------------------
 Fri Dec 23 14:51:25 CET 2011 - ma@suse.de
 
 - Adapt Repository iteration to libsolv changes.
