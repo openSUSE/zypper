@@ -305,10 +305,6 @@ void Resolver::solverInit()
     if (_upgradeMode) {
       // may overwrite some settings
       _satResolver->setDistupgrade_removeunsupported	(false);
-      _satResolver->setUpdatesystem			(true);
-      _satResolver->setAllowdowngrade			(true);
-      _satResolver->setAllowarchchange			(true);
-      _satResolver->setAllowvendorchange		(true);
     }
 
     // Resetting additional solver information
