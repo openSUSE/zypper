@@ -10,7 +10,7 @@
  */
 extern "C"
 {
-#include "solv/queue.h"
+#include <solv/queue.h>
 }
 #include <iostream>
 #include "zypp/base/LogTools.h"
@@ -110,6 +110,13 @@ namespace zypp
 	  str << "  " << Solvable(*it) << endl;
       }
       return str << "}";
+    }
+
+    bool operator==( const Queue & lhs, const Queue & rhs )
+    {
+      const struct ::_Queue * l = lhs;
+      const struct ::_Queue * r = rhs;
+      return( l == r || ( l->count == r->count && ::memcmp( l->elements, r->elements, l->count ) == 0 ) );
     }
 
     /////////////////////////////////////////////////////////////////
