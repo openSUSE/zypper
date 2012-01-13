@@ -365,7 +365,7 @@ bool Resolver::resolveQueue( solver::detail::SolverQueueItemList & queue )
 
 sat::Transaction Resolver::getTransaction()
 {
-    return sat::Transaction();
+  return sat::Transaction( sat::Transaction::Default() );
 }
 
 
