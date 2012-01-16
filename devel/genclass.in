@@ -65,7 +65,8 @@ cat <<EOF
  */
 EOF
 }
-
+///////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////
 ######################################################################
 function nsopen() {
 ######################################################################
@@ -73,7 +74,7 @@ function nsopen() {
    for N in $NSLIST; do
       echo "${I}///////////////////////////////////////////////////////////////////"
       echo "${I}namespace $N"
-      echo "${I}{ /////////////////////////////////////////////////////////////////"
+      echo "${I}{"
       I="$I  "
    done
 }
@@ -83,7 +84,6 @@ function nsclose() {
 ######################################################################
    local I=${INDENT}
    for N in $SNLIST; do
-      echo "${I}/////////////////////////////////////////////////////////////////"
       I=${I#  }
       echo "${I}} // namespace $N"
       echo "${I}///////////////////////////////////////////////////////////////////"
@@ -105,9 +105,10 @@ $(intro $CLASS_H)
 #include "zypp/base/NonCopyable.h"
 
 $(nsopen)
-
-${INDENT}/**
-${INDENT} */
+${INDENT}///////////////////////////////////////////////////////////////////
+${INDENT}/// \class ${CLASS}
+${INDENT}/// \brief
+${INDENT}///////////////////////////////////////////////////////////////////
 ${INDENT}class ${CLASS} : protected base::SafeBool<${CLASS}>, private base::NonCopyable
 ${INDENT}{
 ${INDENT}  friend std::ostream & operator<<( std::ostream & str, const ${CLASS} & obj );
@@ -136,11 +137,9 @@ ${INDENT}       *       ( bool(${CLASS}) == bool(${CLASS}) ).
 ${INDENT}       */
 ${INDENT}    }
 ${INDENT}  public:
-${INDENT}    /** Implementation  */
-${INDENT}    class Impl;
+${INDENT}    class Impl;                 ///< Implementation class.
 ${INDENT}  private:
-${INDENT}    /** Pointer to implementation */
-${INDENT}    RWCOW_pointer<Impl> _pimpl;
+${INDENT}    RWCOW_pointer<Impl> _pimpl; ///< Pointer to implementation.
 ${INDENT}};
 
 ${INDENT}/** \relates ${CLASS} Stream output */
@@ -175,8 +174,10 @@ using std::endl;
 
 $(nsopen)
 
-${INDENT}/** ${CLASS} implementation.
-${INDENT} */
+${INDENT}///////////////////////////////////////////////////////////////////
+${INDENT}/// \class ${CLASS}::Impl
+${INDENT}/// \brief ${CLASS} implementation.
+${INDENT}///////////////////////////////////////////////////////////////////
 ${INDENT}struct ${CLASS}::Impl
 ${INDENT}{
 ${INDENT}  friend std::ostream & operator<<( std::ostream & str, const Impl & obj );
