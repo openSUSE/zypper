@@ -10,6 +10,8 @@
  *
 */
 #include <iostream>
+#include <unordered_map>
+#include <unordered_set>
 #include "zypp/base/LogTools.h"
 #include "zypp/base/String.h"
 #include "zypp/base/Exception.h"
@@ -39,23 +41,27 @@ namespace zypp
     // (ftkn).filedescriptor type linkcount filename
     //
     /////////////////////////////////////////////////////////////////
+
+    /** lsof output line + files extracted so far for this PID */
+    typedef std::pair<std::string,std::unordered_set<std::string>> CacheEntry;
+
     /** Add \c cache to \c data if the process is accessing deleted files.
      * \c pid string in \c cache is the proc line \c (pcuLR), \c iles
      * are lready in place. Always clear the \c cache.files!
     */
-    inline void addDataIf( std::vector<CheckAccessDeleted::ProcInfo> & data_r, CheckAccessDeleted::ProcInfo & cache_r )
+    inline void addDataIf( std::vector<CheckAccessDeleted::ProcInfo> & data_r, const CacheEntry & cache_r )
     {
-      if ( cache_r.files.empty() )
+      const auto & filelist( cache_r.second );
+
+      if ( filelist.empty() )
         return;
 
       // at least one file access so keep it:
       data_r.push_back( CheckAccessDeleted::ProcInfo() );
       CheckAccessDeleted::ProcInfo & pinfo( data_r.back() );
+      pinfo.files.insert( pinfo.files.begin(), filelist.begin(), filelist.end() );
 
-      std::string pline;
-      cache_r.pid.swap( pline );
-      cache_r.files.swap( pinfo.files ); // clears cache.files
-
+      const std::string & pline( cache_r.first );
       for_( ch, pline.begin(), pline.end() )
       {
         switch ( *ch )
@@ -87,16 +93,16 @@ namespace zypp
         if ( ! command.empty() )
           pinfo.command = command.basename();
       }
-
       //MIL << " Take " << pinfo << endl;
     }
 
-    /** Add line to cache if it refers to a deleted executable or library file:
+
+    /** Add file to cache if it refers to a deleted executable or library file:
      * - Either the link count \c(k) is \c 0, or no link cout is present.
      * - The type \c (t) is set to \c REG or \c DEL
      * - The filedescriptor \c (f) is set to \c txt, \c mem or \c DEL
     */
-    inline void addCacheIf( CheckAccessDeleted::ProcInfo & cache_r, const std::string & line_r, bool verbose_r  )
+    inline void addCacheIf( CacheEntry & cache_r, const std::string & line_r, bool verbose_r  )
     {
       const char * f = 0;
       const char * t = 0;
@@ -159,12 +165,8 @@ namespace zypp
             return;
         }
       }
-
-      if ( std::find( cache_r.files.begin(), cache_r.files.end(), n ) == cache_r.files.end() )
-      {
-        // Add if no duplicate
-        cache_r.files.push_back( n );
-      }
+      // Add if no duplicate
+      cache_r.second.insert( n );
     }
     /////////////////////////////////////////////////////////////////
   } // namespace
@@ -173,7 +175,6 @@ namespace zypp
   CheckAccessDeleted::size_type CheckAccessDeleted::check( bool verbose_r )
   {
     _data.clear();
-    std::vector<ProcInfo> data;
 
     static const char* argv[] =
     {
@@ -181,20 +182,22 @@ namespace zypp
     };
     ExternalProgram prog( argv, ExternalProgram::Discard_Stderr );
 
-    CheckAccessDeleted::ProcInfo cache;
+    // cachemap: PID => (deleted files)
+    std::map<pid_t,CacheEntry> cachemap;
+    pid_t cachepid;
     for( std::string line = prog.receiveLine(); ! line.empty(); line = prog.receiveLine() )
     {
+      // NOTE: line contains '\0' separeated fields!
       if ( line[0] == 'p' )
       {
-        addDataIf( data, cache );
-        cache.pid = line; //
+	str::strtonum( line.c_str()+1, cachepid );	// line is "p<PID>\0...."
+	cachemap[cachepid].first.swap( line );
       }
       else
       {
-        addCacheIf( cache, line, verbose_r );
+	addCacheIf( cachemap[cachepid], line, verbose_r );
       }
     }
-    addDataIf( data, cache );
 
     int ret = prog.close();
     if ( ret != 0 )
@@ -204,6 +207,11 @@ namespace zypp
       ZYPP_THROW( err );
     }
 
+    std::vector<ProcInfo> data;
+    for ( const auto & cached : cachemap )
+    {
+      addDataIf( data, cached.second );
+    }
     _data.swap( data );
     return _data.size();
   }
