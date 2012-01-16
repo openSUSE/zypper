@@ -10,7 +10,6 @@
  *
 */
 #include <iostream>
-#include <unordered_map>
 #include <unordered_set>
 #include "zypp/base/LogTools.h"
 #include "zypp/base/String.h"
