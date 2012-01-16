@@ -333,9 +333,19 @@ void fillSettingsSystemProxy( const Url&url, TransferSettings &s )
 #else
     ProxyInfo proxy_info (ProxyInfo::ImplPtr(new ProxyInfoSysconfig("proxy")));
 #endif
-    s.setProxyEnabled( proxy_info.useProxyFor( url ) );
-    if ( s.proxyEnabled() )
-      s.setProxy(proxy_info.proxy(url));
+    if ( proxy_info.useProxyFor( url ) )
+    {
+      // We must extract any 'user:pass' from the proxy url
+      // otherwise they won't make it into curl (.curlrc wins).
+      try {
+	Url u( proxy_info.proxy( url ) );
+	s.setProxy( u.asString( url::ViewOption::WITH_SCHEME + url::ViewOption::WITH_HOST + url::ViewOption::WITH_PORT ) );
+	s.setProxyUsername( u.getUsername( url::E_ENCODED ) );
+	s.setProxyPassword( u.getPassword( url::E_ENCODED ) );
+	s.setProxyEnabled( true );
+      }
+      catch (...) {}	// no proxy if URL is malformed
+    }
 }
 
 Pathname MediaCurl::_cookieFile = "/var/lib/YaST2/cookies";
@@ -642,10 +652,15 @@ void MediaCurl::setupEasy()
           DBG << "using proxy-user from ~/.curlrc" << endl;
         }
       }
+      else
+      {
+	DBG << "using provided proxy-user" << endl;
+      }
 
-      proxyuserpwd = unEscape( proxyuserpwd );
       if ( ! proxyuserpwd.empty() )
-        SET_OPTION(CURLOPT_PROXYUSERPWD, proxyuserpwd.c_str());
+      {
+	SET_OPTION(CURLOPT_PROXYUSERPWD, unEscape( proxyuserpwd ).c_str());
+      }
     }
   }
   else
