@@ -135,6 +135,7 @@ touch $RPM_BUILD_ROOT%{_var}/log/zypper.log
 %if 0%{?suse_version}
 %post
 %run_permissions
+%endif
 
 %clean
 rm -rf "$RPM_BUILD_ROOT"
