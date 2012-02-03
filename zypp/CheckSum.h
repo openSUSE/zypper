@@ -32,13 +32,22 @@ namespace zypp
   class CheckSum
   {
   public:
+    /** Default Ctor: empty checksum. */
+    CheckSum();
     /**
-     * Creates a checksum for algorithm \param type
+     * Creates a checksum auto probing the algorithm type.
+     * \throws CheckSumException if the checksum is invalid and can't be constructed
+     */
+    CheckSum( const std::string & checksum );
+    /**
+     * Creates a checksum for algorithm \param type.
      * \throws CheckSumException if the checksum is invalid and can't be constructed
      */
     CheckSum( const std::string & type, const std::string & checksum );
+    /**
+     * Reads the content of \param input_r and computes the checksum.
+     */
     CheckSum( const std::string & type, std::istream & input_r );
-    CheckSum();
 
   public:
     static const std::string & md5Type();

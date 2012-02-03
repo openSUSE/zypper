@@ -41,6 +41,11 @@ namespace zypp
   CheckSum::CheckSum()
   {}
 
+  CheckSum::CheckSum( const std::string & checksum )
+  {
+    *this = CheckSum( std::string(), checksum );
+  }
+
   CheckSum::CheckSum( const std::string & type, const std::string & checksum )
   : _type( str::toLower( type ) )
   , _checksum( checksum )
