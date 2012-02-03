@@ -1,4 +1,15 @@
 -------------------------------------------------------------------
+Fri Feb  3 13:18:01 CET 2012 - ma@suse.de
+
+- Add Fetcher support for CHECKSUMS file (replaceing SHA1SUMS) (bnc#744302)
+- Build with -fvisibility-inlines-hidden
+- CheckAccessDeleted: avoid duplicate entries for the same PID (bnc#716972)
+- Correctly use user:pass directly embedded in a proxy url (bnc#740764)
+- new sat::Map - Libsolv (bit)Map wrapper.
+- always set splitprovides to true now that libsolv handles them better
+- version 11.1.0 (1)
+
+-------------------------------------------------------------------
 Thu Feb  2 01:14:17 CET 2012 - ma@suse.de
 
 - Update zypp-po.tar.bz2
