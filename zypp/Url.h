@@ -20,6 +20,10 @@
 namespace zypp
 { ////////////////////////////////////////////////////////////////////
 
+  namespace filesystem {
+    class Pathname;
+  }
+  using filesystem::Pathname;
 
   /**
    * \class Url
@@ -673,6 +677,14 @@ namespace zypp
      */
     void
     setPathName(const std::string &path,
+                EEncoding         eflag = zypp::url::E_DECODED);
+    /** \overload */
+    void
+    setPathName(const Pathname &path,
+                EEncoding         eflag = zypp::url::E_DECODED);
+    /** \overload */
+    void
+    setPathName(const char *path,
                 EEncoding         eflag = zypp::url::E_DECODED);
 
     /**

@@ -11,6 +11,7 @@
  */
 
 #include <zypp/Url.h>
+#include <zypp/Pathname.h>
 #include <zypp/base/Gettext.h>
 #include <zypp/base/String.h>
 #include <zypp/base/Regex.h>
@@ -759,6 +760,19 @@ namespace zypp
     m_impl->setPathName(path, eflag);
   }
 
+  void
+  Url::setPathName(const Pathname &path,
+                   EEncoding         eflag)
+  {
+    m_impl->setPathName(path.asString(), eflag);
+  }
+
+  void
+  Url::setPathName(const char *path,
+                   EEncoding         eflag)
+  {
+    m_impl->setPathName(path, eflag);
+  }
 
   // -----------------------------------------------------------------
   void
