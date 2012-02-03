@@ -22,7 +22,7 @@ BOOST_AUTO_TEST_CASE(findSystemRepo)
   BOOST_REQUIRE( ! test.satpool().findSystemRepo() );
 }
 
-unsigned checkRepoIter()
+void checkRepoIter()
 {
   sat::Pool satpool( test.satpool() );
   sat::Pool::size_type count = satpool.reposSize();
