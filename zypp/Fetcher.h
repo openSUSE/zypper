@@ -88,12 +88,19 @@ namespace zypp
   * fetcher.reset();
   * \endcode
   *
-  * Indexes are supported in SHA1SUMS format (simple text file)
-  * with sha1sums and file name, or content file, whith
+  * Indexes are supported in CHECKSUMS format (simple text file)
+  * with checksum and file name, or content file, whith
   * HASH SHA1 line entries.
-  * 
+  *
   * \note The indexes file names are relative to the directory
   * where the index is.
+  *
+  * \note libzypp-11.x: Introduction of sha256 lead to the insight
+  * that using SHA1SUMS as filename was a bad choice. New media store
+  * the checksums in a CHECKSUMS file. If a CHECKSUMS file is not
+  * present, we fall back looking for a SHA1SUMS file. The checksum
+  * type (md5,sha1,sha256) is auto detected by looking at the cheksums
+  * length. No need to somehow encode it in the filename.
   */
   class Fetcher
   {
@@ -115,15 +122,15 @@ namespace zypp
        */
       AutoAddContentFileIndexes = 0x0001,
       /**
-       * If a SHA1SUMS file is found, it is
+       * If a CHECKSUMS file is found, it is
        * downloaded and read.
        */
-      AutoAddSha1sumsIndexes = 0x0002,
+      AutoAddChecksumsIndexes = 0x0002,
       /**
-       * If a content or SHA1SUMS file is found, 
+       * If a content or CHECKSUMS file is found,
        * it is downloaded and read.
        */
-      AutoAddIndexes = 0x0001 | 0x0002,
+      AutoAddIndexes = AutoAddContentFileIndexes | AutoAddChecksumsIndexes,
     };
     ZYPP_DECLARE_FLAGS(Options, Option);
 
@@ -171,7 +178,7 @@ namespace zypp
     *
     */
     void addIndex( const OnMediaLocation &resource );
-   
+
    /**
     * Enqueue a object for transferal, they will not
     * be transfered until \ref start() is called
@@ -179,7 +186,7 @@ namespace zypp
     */
     void enqueue( const OnMediaLocation &resource,
                   const FileChecker &checker = FileChecker() );
-    
+
     /**
     * Enqueue a object for transferal, they will not
     * be transfered until \ref start() is called
@@ -214,14 +221,14 @@ namespace zypp
      * using \ref AutoAddIndexes flag.
      *
      * Files are checked by providing a
-     * SHA1SUMS or content file listing
+     * CHECKSUMS or content file listing
      * <checksum> filename
-     * and a respective SHA1SUMS.asc/content.asc which has
+     * and a respective CHECKSUMS.asc/content.asc which has
      * the signature for the checksums.
      *
      * If you expect the user to not have the key of
      * the signature either in the trusted or untrusted
-     * keyring, you can offer it as SHA1SUMS.key (or content.key)
+     * keyring, you can offer it as CHECKSUMS.key (or content.key)
      *
      * \param recursive True if the complete tree should
      * be enqueued.
@@ -232,11 +239,11 @@ namespace zypp
      * so make sure you don't add another one or
      * the user could be asked twice.
      *
-     * \note The format of the file SHA1SUMS is the output of:
-     * ls | grep -v SHA1SUMS | xargs sha1sum > SHA1SUMS
+     * \note The format of the file CHECKSUMS is the output of:
+     * ls | grep -v CHECKSUMS | xargs sha256sum > CHECKSUMS
      * in each subdirectory.
      *
-     * \note Every file SHA1SUMS.* except of SHA1SUMS.(asc|key|(void)) will
+     * \note Every file CHECKSUMS.* except of CHECKSUMS.(asc|key|(void)) will
      * not be transfered and will be ignored.
      *
      */
@@ -259,14 +266,14 @@ namespace zypp
      * using \ref AutoAddIndexes flag.
      *
      * Files are checked by providing a
-     * SHA1SUMS or content file listing
+     * CHECKSUMS or content file listing
      * <checksum> filename
-     * and a respective SHA1SUMS.asc/content.asc which has
+     * and a respective CHECKSUMS.asc/content.asc which has
      * the signature for the checksums.
      *
      * If you expect the user to not have the key of
      * the signature either in the trusted or untrusted
-     * keyring, you can offer it as SHA1SUMS.key (or content.key)
+     * keyring, you can offer it as CHECKSUMS.key (or content.key)
      *
      * \param recursive True if the complete tree should
      * be enqueued.
@@ -276,30 +283,30 @@ namespace zypp
      * transfer job, so make sure you don't add another one or
      * the user could be asked twice.
      *
-     * \note The format of the file SHA1SUMS is the output of:
-     * ls | grep -v SHA1SUMS | xargs sha1sum > SHA1SUMS
+     * \note The format of the file CHECKSUMS is the output of:
+     * ls | grep -v CHECKSUMS | xargs sha256sum > CHECKSUMS
      * in each subdirectory.
      *
-     * \note Every file SHA1SUMS.* except of SHA1SUMS.(asc|key|(void)) will
+     * \note Every file CHECKSUMS.* except of CHECKSUMS.(asc|key|(void)) will
      * not be transfered and will be ignored.
      *
      */
     void enqueueDigestedDir( const OnMediaLocation &resource,
                              bool recursive = false,
                              const FileChecker &checker = FileChecker() );
-    
+
     /**
     * adds a directory to the list of directories
     * where to look for cached files
     */
     void addCachePath( const Pathname &cache_dir );
-    
+
     /**
      * Reset the transfer (jobs) list
      * \note It does not reset the cache directory list
      */
     void reset();
-    
+
     /**
     * start the transfer to a destination directory
     * \a dest_dir

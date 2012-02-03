@@ -176,10 +176,10 @@ namespace zypp
        */
       void readIndex( const Pathname &index, const Pathname &basedir );
 
-      /** specific version of \ref readIndex for SHA1SUMS file */
-      void readSha1sumsIndex( const Pathname &index, const Pathname &basedir );
+      /** specific version of \ref readIndex for CHECKSUMS file */
+      void readChecksumsIndex( const Pathname &index, const Pathname &basedir );
 
-      /** specific version of \ref readIndex for SHA1SUMS file */
+      /** specific version of \ref readIndex for content file */
       void readContentFileIndex( const Pathname &index, const Pathname &basedir );
 
       /** reads the content of a directory but keeps a cache **/
@@ -425,35 +425,26 @@ namespace zypp
                                       const OnMediaLocation &resource,
                                       const Pathname &dest_dir )
   {
-      if ( _options & AutoAddSha1sumsIndexes )
+      auto fnc_addIfInContent( [&]( const std::string & index_r ) -> bool
       {
-          // only try to add an index if it exists
-          filesystem::DirEntry shafile;
-          shafile.name = "SHA1SUMS"; shafile.type = filesystem::FT_FILE;
-          if ( find( content.begin(), content.end(), shafile ) != content.end() )
-          {
-              // add the index of this directory
-              OnMediaLocation indexloc(resource);
-              indexloc.changeFilename(resource.filename() + "SHA1SUMS");
-              addIndex(indexloc);
-              // we need to read it now
-              downloadAndReadIndexList(media, dest_dir);
-          }
+	if ( find( content.begin(), content.end(), filesystem::DirEntry(index_r,filesystem::FT_FILE) ) == content.end() )
+	  return false;
+	// add the index of this directory
+	OnMediaLocation indexloc( resource );
+	indexloc.changeFilename( resource.filename() + index_r );
+	addIndex( indexloc );
+	// we need to read it now
+	downloadAndReadIndexList( media, dest_dir );
+	return true;
+      } );
+
+      if ( _options & AutoAddChecksumsIndexes )
+      {
+	fnc_addIfInContent( "CHECKSUMS" ) || fnc_addIfInContent( "SHA1SUMS" );
       }
       if ( _options & AutoAddContentFileIndexes )
       {
-          // only try to add an index if it exists
-          filesystem::DirEntry contentfile;
-          contentfile.name = "content"; contentfile.type = filesystem::FT_FILE;
-          if ( find( content.begin(), content.end(), contentfile ) != content.end() )
-          {
-              // add the index of this directory
-              OnMediaLocation indexloc(resource);
-              indexloc.changeFilename(resource.filename() + "content");
-              addIndex(indexloc);
-              // we need to read it now
-              downloadAndReadIndexList(media, dest_dir);
-          }
+	fnc_addIfInContent( "content" );
       }
   }
 
@@ -488,7 +479,15 @@ namespace zypp
       // individual transfer jobs
       MIL << "Adding directory " << resource.filename() << endl;
       filesystem::DirContent content;
-      getDirectoryContent(media, resource, content);
+      try {
+	getDirectoryContent(media, resource, content);
+      }
+      catch ( media::MediaFileNotFoundException & exception )
+      {
+	ZYPP_CAUGHT( exception );
+	WAR << "Skiping subtree hidden at " << resource.filename() << endl;
+	return;
+      }
 
       // this method test for the option flags so indexes are added
       // only if the options are enabled
@@ -498,8 +497,8 @@ namespace zypp
             it != content.end();
             ++it )
       {
-          // skip SHA1SUMS* as they were already retrieved
-          if ( str::hasPrefix(it->name, "SHA1SUMS") )
+          // skip CHECKSUMS* as they were already retrieved
+          if ( str::hasPrefix(it->name, "CHECKSUMS") || str::hasPrefix(it->name, "SHA1SUMS") )
               continue;
 
           Pathname filename = resource.filename() + it->name;
@@ -609,8 +608,8 @@ namespace zypp
   // generic function for reading indexes
   void Fetcher::Impl::readIndex( const Pathname &index, const Pathname &basedir )
   {
-    if ( index.basename() == "SHA1SUMS" )
-      readSha1sumsIndex(index, basedir);
+    if ( index.basename() == "CHECKSUMS" || index.basename() == "SHA1SUMS" )
+      readChecksumsIndex(index, basedir);
     else if ( index.basename() == "content" )
       readContentFileIndex(index, basedir);
     else
@@ -630,26 +629,34 @@ namespace zypp
       }
   }
 
-  // reads a SHA1SUMS file index
-  void Fetcher::Impl::readSha1sumsIndex( const Pathname &index, const Pathname &basedir )
+  // reads a CHECKSUMS (old SHA1SUMS) file index
+  void Fetcher::Impl::readChecksumsIndex( const Pathname &index, const Pathname &basedir )
   {
       std::ifstream in( index.c_str() );
-      string buffer;
       if ( ! in.fail() )
       {
-          while ( getline(in, buffer) )
+	  std::string buffer;
+          while ( getline( in, buffer ) )
           {
-              vector<string> words;
-              str::split( buffer, back_inserter(words) );
-              if ( words.size() != 2 )
-                  ZYPP_THROW(Exception("Wrong format for SHA1SUMS file"));
-              //MIL << "check: '" << words[0] << "' | '" << words[1] << "'" << endl;
-              if ( ! words[1].empty() )
-                  _checksums[(basedir + words[1]).asString()] = CheckSum::sha1(words[0]);
+
+	      if ( buffer[0] == '#' )
+		continue;	// simple comment
+
+	      CheckSum checksum( str::stripFirstWord( buffer, /*ltrim before strip*/true ) );
+	      if ( checksum.empty() )
+		continue;	// empty line | unknown cheksum format
+
+	      if ( buffer.empty() )
+	      {
+		WAR << "Missing filename in CHECKSUMS file: " << index.asString() << " (" << checksum << ")" << endl;
+		continue;
+	      }
+
+	      _checksums[(basedir/buffer).asString()] = checksum;
           }
       }
       else
-          ZYPP_THROW(Exception("Can't open SHA1SUMS file: " + index.asString()));
+          ZYPP_THROW(Exception("Can't open CHECKSUMS file: " + index.asString()));
   }
 
   void Fetcher::Impl::downloadIndex( MediaSetAccess &media, const OnMediaLocation &resource, const Pathname &dest_dir)
@@ -761,7 +768,7 @@ namespace zypp
       // may be this code can be factored out
       // together with the autodiscovery of indexes
       // of addDirJobs
-      if ( ( _options & AutoAddSha1sumsIndexes ) ||
+      if ( ( _options & AutoAddChecksumsIndexes ) ||
            ( _options & AutoAddContentFileIndexes ) )
       {
           // if auto indexing is enabled, then we need to read the
