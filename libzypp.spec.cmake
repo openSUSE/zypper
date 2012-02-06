@@ -140,7 +140,7 @@ Authors:
     Ladislav Slezak <lslezak@suse.cz>
 
 %package devel
-License:        GPLv2+
+License:        GPL-2.0+
 Requires:       libzypp = %{version}
 Requires:       libxml2-devel
 Requires:       openssl-devel
