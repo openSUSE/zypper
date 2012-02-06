@@ -30,7 +30,7 @@ Requires:       procps
 Recommends:     logrotate cron zypper-log
 Requires(post): permissions
 %endif
-License:        GPLv2+
+License:        GPL-2.0+
 Group:          System/Packages
 BuildRoot:      %{_tmppath}/%{name}-%{version}-build
 Summary:        Command line software manager using libzypp
