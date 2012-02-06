@@ -66,7 +66,7 @@ Requires:       python >= 2.7
 %endif
 BuildArch:      noarch
 Summary:        CLI for accessing the zypper logfile
-License:        GPLv2+
+License:        GPL-2.0+
 Group:          System/Packages
 %description -n zypper-log
 CLI for accessing the zypper logfile
@@ -77,7 +77,7 @@ Authors:
 
 %package aptitude
 Summary:        aptitude compatibility with zypper
-License:        GPLv2+
+License:        GPL-2.0+
 Requires:       perl
 %if 0%{?suse_version}
 Supplements:    zypper
