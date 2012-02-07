@@ -1,4 +1,11 @@
 -------------------------------------------------------------------
+Tue Feb  7 11:54:39 CET 2012 - ma@suse.de
+
+- Fix handling of locked patches (bnc#742198)
+- Update manpage to give some repo URI examples (bnc#680630)
+- version 1.3.17
+
+-------------------------------------------------------------------
 Sun Jan 29 01:18:49 CET 2012 - ma@suse.de
 
 - Update sle-zypper-po.tar.bz2
