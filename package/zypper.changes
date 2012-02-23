@@ -1,4 +1,10 @@
 -------------------------------------------------------------------
+Thu Feb 23 12:25:22 CET 2012 - ma@suse.de
+
+- Fix augeas lense enforcing a non empty anonymous section (bnc#748144)
+- version 1.6.22
+
+-------------------------------------------------------------------
 Wed Jan 11 11:23:03 CET 2012 - ma@suse.de
 
 - Fix man page --cache-dir description. (bnc#738677)
