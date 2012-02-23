@@ -35,7 +35,7 @@ module ZYpper =
   let empty = [ eol ]
 
   (* Deletes optional whitespace and stores the rest 'till the end of line *)
-  let store_to_eol = del_opt_ws " " . store /([^ \t\n].*[^ \t\n])/
+  let store_to_eol = del_opt_ws " " . store /(.*[^ \t\n])?/
 
   (*
     Keyword regex.
@@ -71,7 +71,7 @@ module ZYpper =
 
 
   (* The lens matching and mapping the whole file *)
-  let lns = section_anon . section+
+  let lns = section_anon? . section+
 
   (*
     Filter for the xfm transformation.
