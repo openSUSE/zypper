@@ -120,7 +120,7 @@ SATResolver::dumpOn( std::ostream & os ) const
 	os << "  noupdateprovide = " << solver_get_flag(_solv, SOLVER_FLAG_NO_UPDATEPROVIDE) << endl;
 	os << "  dosplitprovides = " << solver_get_flag(_solv, SOLVER_FLAG_SPLITPROVIDES) << endl;
 	os << "  onlyRequires = " << solver_get_flag(_solv, SOLVER_FLAG_IGNORE_RECOMMENDED) << endl;
-	os << "  ignorealreadyrecommended = " << solver_get_flag(_solv, SOLVER_FLAG_IGNORE_ALREADY_RECOMMENDED) << endl;
+	os << "  ignorealreadyrecommended = " << !solver_get_flag(_solv, SOLVER_FLAG_ADD_ALREADY_RECOMMENDED) << endl;
 	os << "  distupgrade = " << _distupgrade << endl;
         os << "  distupgrade_removeunsupported = " << _distupgrade_removeunsupported << endl;
 	os << "  solveSrcPackages = " << _solveSrcPackages << endl;
@@ -438,7 +438,7 @@ SATResolver::solving(const CapabilitySet & requires_caps,
 	queue_push( &(_jobQueue), SOLVER_DROP_ORPHANED|SOLVER_SOLVABLE_ALL);
 	queue_push( &(_jobQueue), 0 );
     }
-    solver_set_flag(_solv, SOLVER_FLAG_IGNORE_ALREADY_RECOMMENDED, _ignorealreadyrecommended);
+    solver_set_flag(_solv, SOLVER_FLAG_ADD_ALREADY_RECOMMENDED, !_ignorealreadyrecommended);
     solver_set_flag(_solv, SOLVER_FLAG_ALLOW_DOWNGRADE, _allowdowngrade);
     solver_set_flag(_solv, SOLVER_FLAG_ALLOW_UNINSTALL, _allowuninstall);
     solver_set_flag(_solv, SOLVER_FLAG_ALLOW_ARCHCHANGE, _allowarchchange);
@@ -849,7 +849,7 @@ void SATResolver::doUpdate()
 	queue_push( &(_jobQueue), SOLVER_DROP_ORPHANED|SOLVER_SOLVABLE_ALL);
 	queue_push( &(_jobQueue), 0 );
     }
-    solver_set_flag(_solv, SOLVER_FLAG_IGNORE_ALREADY_RECOMMENDED, _ignorealreadyrecommended);
+    solver_set_flag(_solv, SOLVER_FLAG_ADD_ALREADY_RECOMMENDED, !_ignorealreadyrecommended);
     solver_set_flag(_solv, SOLVER_FLAG_ALLOW_DOWNGRADE, _allowdowngrade);
     solver_set_flag(_solv, SOLVER_FLAG_ALLOW_UNINSTALL, _allowuninstall);
     solver_set_flag(_solv, SOLVER_FLAG_ALLOW_ARCHCHANGE, _allowarchchange);
