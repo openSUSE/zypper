@@ -646,7 +646,7 @@ SATResolver::solverInit(const PoolItemList & weakItems)
     // Add rules for parallel installable resolvables with different versions
     for_( it, sat::Pool::instance().multiversionBegin(), sat::Pool::instance().multiversionEnd() )
     {
-      queue_push( &(_jobQueue), SOLVER_NOOBSOLETES | SOLVABLE_NAME );
+      queue_push( &(_jobQueue), SOLVER_NOOBSOLETES | SOLVER_SOLVABLE_NAME );
       queue_push( &(_jobQueue), it->id() );
     }
 
@@ -1401,7 +1401,7 @@ SATResolver::applySolutions (const ProblemSolutionList & solutions)
 
 void SATResolver::setLocks()
 {
-    for (PoolItemList::const_iterator iter = _items_to_lock.begin(); iter != _items_to_lock.end(); iter++) {
+    for (PoolItemList::const_iterator iter = _items_to_lock.begin(); iter != _items_to_lock.end(); ++iter) {
         sat::detail::SolvableIdType ident( (*iter)->satSolvable().id() );
 	if (iter->status().isInstalled()) {
 	    MIL << "Lock installed item " << *iter << endl;
@@ -1414,16 +1414,20 @@ void SATResolver::setLocks()
 	}
     }
 
-    for (PoolItemList::const_iterator iter = _items_to_keep.begin(); iter != _items_to_keep.end(); iter++) {
-        sat::detail::SolvableIdType ident( (*iter)->satSolvable().id() );
+    std::set<IdString> unifiedByName;
+    for (PoolItemList::const_iterator iter = _items_to_keep.begin(); iter != _items_to_keep.end(); ++iter) {
 	if (iter->status().isInstalled()) {
 	    MIL << "Keep installed item " << *iter << endl;
-	    queue_push( &(_jobQueue), SOLVER_INSTALL | SOLVER_SOLVABLE | SOLVER_WEAK);
-	    queue_push( &(_jobQueue), ident );
+	    queue_push( &(_jobQueue), SOLVER_INSTALL | SOLVER_SOLVABLE | SOLVER_WEAK );
+	    queue_push( &(_jobQueue), (*iter)->satSolvable().id() );
 	} else {
-	    MIL << "Keep NOT installed item " << *iter << ident << endl;
-	    queue_push( &(_jobQueue), SOLVER_ERASE | SOLVER_SOLVABLE | SOLVER_WEAK | MAYBE_CLEANDEPS );
-	    queue_push( &(_jobQueue), ident );
+	    IdString ident( (*iter)->satSolvable().ident() );
+	    MIL << "Keep NOT installed name " << ident << " (" << *iter << ")" << endl;
+	    if ( unifiedByName.insert( ident ).second )
+	    {
+	      queue_push( &(_jobQueue), SOLVER_ERASE | SOLVER_SOLVABLE_NAME | SOLVER_WEAK | MAYBE_CLEANDEPS );
+	      queue_push( &(_jobQueue), ident.id() );
+	    }
 	}
     }
 }
@@ -1433,13 +1437,13 @@ void SATResolver::setSystemRequirements()
     CapabilitySet system_requires = SystemCheck::instance().requiredSystemCap();
     CapabilitySet system_conflicts = SystemCheck::instance().conflictSystemCap();
 
-    for (CapabilitySet::const_iterator iter = system_requires.begin(); iter != system_requires.end(); iter++) {
+    for (CapabilitySet::const_iterator iter = system_requires.begin(); iter != system_requires.end(); ++iter) {
 	queue_push( &(_jobQueue), SOLVER_INSTALL | SOLVER_SOLVABLE_PROVIDES );
 	queue_push( &(_jobQueue), iter->id() );
 	MIL << "SYSTEM Requires " << *iter << endl;
     }
 
-    for (CapabilitySet::const_iterator iter = system_conflicts.begin(); iter != system_conflicts.end(); iter++) {
+    for (CapabilitySet::const_iterator iter = system_conflicts.begin(); iter != system_conflicts.end(); ++iter) {
 	queue_push( &(_jobQueue), SOLVER_ERASE | SOLVER_SOLVABLE_PROVIDES | MAYBE_CLEANDEPS );
 	queue_push( &(_jobQueue), iter->id() );
 	MIL << "SYSTEM Conflicts " << *iter << endl;
@@ -1456,7 +1460,7 @@ void SATResolver::setSystemRequirements()
         if ( (*it)->isSystem() )
         {
           Capability archrule( (*it)->arch(), rpm.c_str(), Capability::PARSED );
-          queue_push( &(_jobQueue), SOLVER_INSTALL | SOLVABLE_NAME | SOLVER_ESSENTIAL );
+          queue_push( &(_jobQueue), SOLVER_INSTALL | SOLVER_SOLVABLE_NAME | SOLVER_ESSENTIAL );
           queue_push( &(_jobQueue), archrule.id() );
 
         }

@@ -89,7 +89,7 @@ namespace zypp
 	  Queue noobsq;
 	  for_( it, sat::Pool::instance().multiversionBegin(), sat::Pool::instance().multiversionEnd() )
 	  {
-	    noobsq.push( SOLVER_NOOBSOLETES | SOLVABLE_NAME );
+	    noobsq.push( SOLVER_NOOBSOLETES | SOLVER_SOLVABLE_NAME );
 	    noobsq.push( it->id() );
 	  }
 	  Map noobsmap;
