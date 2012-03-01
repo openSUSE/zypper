@@ -38,7 +38,7 @@ extern "C"
 // Workaround libsolv project not providing a common include
 // directory. (the -devel package does, but the git repo doesn't).
 // #include <solv/repo_helix.h>
-void repo_add_helix( ::Repo *repo, FILE *fp, int flags );
+int repo_add_helix( ::Repo *repo, FILE *fp, int flags );
 }
 
 using std::endl;
@@ -295,7 +295,7 @@ namespace zypp
       int PoolImpl::_addSolv( ::_Repo * repo_r, FILE * file_r )
       {
         setDirty(__FUNCTION__, repo_r->name );
-        int ret = ::repo_add_solv( repo_r , file_r );
+        int ret = ::repo_add_solv( repo_r, file_r, 0 );
         if ( ret == 0 )
           _postRepoAdd( repo_r );
         return ret;
@@ -304,8 +304,9 @@ namespace zypp
       int PoolImpl::_addHelix( ::_Repo * repo_r, FILE * file_r )
       {
         setDirty(__FUNCTION__, repo_r->name );
-        ::repo_add_helix( repo_r , file_r, 0 ); // unfortunately void
-        _postRepoAdd( repo_r );
+        int ret = ::repo_add_helix( repo_r, file_r, 0 );
+        if ( ret == 0 )
+          _postRepoAdd( repo_r );
         return 0;
       }
 
