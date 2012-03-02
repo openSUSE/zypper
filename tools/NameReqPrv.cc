@@ -42,6 +42,7 @@ int usage( const std::string & msg_r = std::string(), int exit_r = 100 )
   cerr << "  -s/-S    turn on/off looking for supplements (default off)" << endl;
   cerr << "  -a       short for -n -p -r" << endl;
   cerr << "  -A       short for -n -P -R" << endl;
+  cerr << "  -D <pkg> dump dependencies of <pkg>" << endl;
   cerr << "" << endl;
   return exit_r;
 }
@@ -58,6 +59,27 @@ void tableOut( const std::string & s1 = std::string(),
   TABER( 1 ); TABEL( 2 ); TABEL( 3 ); TABEL( 4 ); TABEL( 5 );
 #undef TABEL
   message << endl;
+}
+
+
+///////////////////////////////////////////////////////////////////
+
+void dDump( const std::string & spec_r )
+{
+  message << "DUMP " << spec_r << " {";
+
+  sat::WhatProvides q( Capability::guessPackageSpec( spec_r ) );
+  if ( q.empty() )
+  {
+    message << "}" << endl;
+    return;
+  }
+
+  for ( const auto & el : q )
+  {
+    message << endl << "==============================" << endl << dump(el);
+  }
+  message << endl << "}" << endl;
 }
 
 /******************************************************************
@@ -178,8 +200,17 @@ int main( int argc, char * argv[] )
     {
       switch ( (*argv)[1] )
       {
-        case 'a':  names =	true, 	requires = provides =	true;	break;
-        case 'A':  names =	true, 	requires = provides =	false;	break;
+        case 'a': names =	true, 	requires = provides =	true;	break;
+        case 'A': names =	true, 	requires = provides =	false;	break;
+	case 'D':
+	  if ( argc > 1 )
+	  {
+	    --argc,++argv;
+	    dDump( *argv );
+	  }
+	  else
+	    return errexit("-D <pkgspec> requires an argument.");
+	  break;
         case 'i': ignorecase =	true;	break;
         case 'I': ignorecase =	false;	break;
         case 'n': names =	true;	break;
