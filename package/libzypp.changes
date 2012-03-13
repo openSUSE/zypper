@@ -1,4 +1,11 @@
 -------------------------------------------------------------------
+Tue Mar 13 13:04:48 CET 2012 - ma@suse.de
+
+- Force libproxy into using "/etc/sysconfig/proxy" if it exists (bnc#679322)
+- Apply soft locks by name and not per package (bnc#749418)
+- version 11.1.1 (1)
+
+-------------------------------------------------------------------
 Fri Feb  3 13:18:01 CET 2012 - ma@suse.de
 
 - Add Fetcher support for CHECKSUMS file (replaceing SHA1SUMS) (bnc#744302)
