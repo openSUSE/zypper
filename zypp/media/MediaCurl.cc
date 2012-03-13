@@ -21,7 +21,6 @@
 #include "zypp/base/Gettext.h"
 
 #include "zypp/media/MediaCurl.h"
-#include "zypp/media/proxyinfo/ProxyInfos.h"
 #include "zypp/media/ProxyInfo.h"
 #include "zypp/media/MediaUserAuth.h"
 #include "zypp/media/CredentialManager.h"
@@ -328,11 +327,7 @@ void fillSettingsFromUrl( const Url &url, TransferSettings &s )
  */
 void fillSettingsSystemProxy( const Url&url, TransferSettings &s )
 {
-#ifdef _WITH_LIBPROXY_SUPPORT_
-    ProxyInfo proxy_info (ProxyInfo::ImplPtr(new ProxyInfoLibproxy()));
-#else
-    ProxyInfo proxy_info (ProxyInfo::ImplPtr(new ProxyInfoSysconfig("proxy")));
-#endif
+    ProxyInfo proxy_info;
     if ( proxy_info.useProxyFor( url ) )
     {
       // We must extract any 'user:pass' from the proxy url

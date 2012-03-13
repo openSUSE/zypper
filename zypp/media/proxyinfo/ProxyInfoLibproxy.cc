@@ -15,6 +15,7 @@
 
 #include "zypp/base/Logger.h"
 #include "zypp/base/String.h"
+#include "zypp/base/WatchFile.h"
 #include "zypp/Pathname.h"
 
 #include "zypp/media/proxyinfo/ProxyInfoLibproxy.h"
@@ -25,21 +26,68 @@ using namespace zypp::base;
 namespace zypp {
   namespace media {
 
+    struct TmpUnsetEnv
+    {
+      TmpUnsetEnv( const char * var_r )
+      : _set( false )
+      , _var( var_r )
+      {
+	const char * val = getenv( _var.c_str() );
+	if ( val )
+	{
+	  _set = true;
+	  _val = val;
+	  ::unsetenv( _var.c_str() );
+	}
+      }
+
+      ~TmpUnsetEnv()
+      {
+	if ( _set )
+	{
+	  setenv( _var.c_str(), _val.c_str(), 1 );
+	}
+      }
+
+      bool _set;
+      std::string _var;
+      std::string _val;
+    };
+
+    static pxProxyFactory * getProxyFactory()
+    {
+      static pxProxyFactory * proxyFactory = 0;
+
+      // Force libproxy into using "/etc/sysconfig/proxy"
+      // if it exists.
+      static WatchFile sysconfigProxy( "/etc/sysconfig/proxy", WatchFile::NO_INIT );
+      if ( sysconfigProxy.hasChanged() )
+      {
+	MIL << "Build Libproxy Factory from /etc/sysconfig/proxy" << endl;
+	if ( proxyFactory )
+	  ::px_proxy_factory_free( proxyFactory );
+
+	TmpUnsetEnv env[] = { "KDE_FULL_SESSION", "GNOME_DESKTOP_SESSION_ID", "DESKTOP_SESSION" };
+	proxyFactory = ::px_proxy_factory_new();
+      }
+      else if ( ! proxyFactory )
+      {
+	MIL << "Build Libproxy Factory" << endl;
+	proxyFactory = ::px_proxy_factory_new();
+      }
+
+      return proxyFactory;
+    }
+
     ProxyInfoLibproxy::ProxyInfoLibproxy()
     : ProxyInfo::Impl()
     {
-      _factory = px_proxy_factory_new();
+      _factory = getProxyFactory();
       _enabled = !(_factory == NULL);
     }
 
     ProxyInfoLibproxy::~ProxyInfoLibproxy()
-    {
-      if (_enabled) {
-	px_proxy_factory_free(_factory);
-	_factory = NULL;
-	_enabled = false;
-      }
-    }
+    {}
 
     std::string ProxyInfoLibproxy::proxy(const Url & url_r) const
     {

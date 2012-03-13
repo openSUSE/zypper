@@ -50,7 +50,7 @@ namespace zypp {
     }
 
     std::string ProxyInfoSysconfig::proxy(const Url & url_r) const
-    { 
+    {
       map<string,string>::const_iterator it = _proxies.find(url_r.getScheme());
       if (it != _proxies.end())
 	return it->second;

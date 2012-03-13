@@ -37,10 +37,12 @@ namespace zypp {
       /** Implementation */
       struct Impl;
       typedef shared_ptr<Impl> ImplPtr;
-      /** Ctor */
+
+      /** Default Ctor: guess the best available implementation. */
       ProxyInfo();
-      /** Ctor */
-      ProxyInfo(ProxyInfo::ImplPtr pimpl_r);
+      /** Ctor taking a specific implementation. */
+      ProxyInfo( ProxyInfo::ImplPtr pimpl_r );
+
       bool enabled() const;
       std::string proxy(const Url & url) const;
       NoProxyList noProxy() const;

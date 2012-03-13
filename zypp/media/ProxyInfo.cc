@@ -16,6 +16,7 @@
 
 #include "zypp/media/ProxyInfo.h"
 #include "zypp/media/proxyinfo/ProxyInfoImpl.h"
+#include "zypp/media/proxyinfo/ProxyInfos.h"
 
 using namespace std;
 using namespace zypp::base;
@@ -26,8 +27,13 @@ namespace zypp {
     shared_ptr<ProxyInfo::Impl> ProxyInfo::Impl::_nullimpl;
 
     ProxyInfo::ProxyInfo()
-    : _pimpl( Impl::_nullimpl )
+#ifdef _WITH_LIBPROXY_SUPPORT_
+    : _pimpl( new ProxyInfoLibproxy() )
+#else
+    : _pimpl( new ProxyInfoSysconfig("proxy") )
+#endif
     {}
+
     ProxyInfo::ProxyInfo(ProxyInfo::ImplPtr pimpl_r)
     : _pimpl(pimpl_r)
     {}
