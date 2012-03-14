@@ -59,11 +59,27 @@ namespace zypp
        */
       enum InteractiveFlag {
         NoFlags = 0x0000,
-        Reboot = 0x0001,
+        Reboot  = 0x0001,
         Message = 0x0002,
         License = 0x0004
       };
       ZYPP_DECLARE_FLAGS(InteractiveFlags, InteractiveFlag);
+
+      /**
+       * \brief Possible severity levels for (security) patches.
+       * Metadata string values are mapped to this enum to ease
+       * computations. For a string representation call
+       * \ref asSring( const Patch::SeverityFlag & ).
+       */
+      enum SeverityFlag {
+	SEV_NONE	= 0,	//!< no value specified
+	SEV_OTHER	= 1,	//!< unknown value specified
+	SEV_LOW		= 1<<1,	//!< Low
+	SEV_MODERATE	= 1<<2,	//!< Moderate
+	SEV_IMPORTANT	= 1<<3,	//!< Important
+	SEV_CRITICAL	= 1<<4	//!< Critical
+      };
+      ZYPP_DECLARE_FLAGS(SeverityFlags, SeverityFlag);
 
     public:
       /**
@@ -82,6 +98,18 @@ namespace zypp
        * Unknown values are mapped to \ref CAT_OTHER.
        */
       Category categoryEnum() const;
+
+      /**
+       * Severity string as specified in metadata.
+       * For use in computaions see \ref severityFlag.
+       */
+      std::string severity() const;
+
+      /**
+       * Severity string mapped to an enum.
+       * Unknown string values are mapped to \ref SEV_OTHER
+       */
+      SeverityFlag severityFlag() const;
 
       /**
        * Does the system need to reboot to finish the update process?
@@ -156,7 +184,10 @@ namespace zypp
       virtual ~Patch();
   };
   ZYPP_DECLARE_OPERATORS_FOR_FLAGS(Patch::InteractiveFlags);
+  ZYPP_DECLARE_OPERATORS_FOR_FLAGS(Patch::SeverityFlags);
 
+  /** \relates Patch::SeverityFlag string representation.*/
+  std::string asString( const Patch::SeverityFlag & obj );
 
   /**
    * Query class for Patch issue references

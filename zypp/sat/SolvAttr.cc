@@ -86,6 +86,7 @@ namespace sat
   const SolvAttr SolvAttr::restartSuggested         ( UPDATE_RESTART );
   const SolvAttr SolvAttr::reloginSuggested         ( UPDATE_RELOGIN );
   const SolvAttr SolvAttr::message                  ( UPDATE_MESSAGE );
+  const SolvAttr SolvAttr::severity                 ( UPDATE_SEVERITY );
   const SolvAttr SolvAttr::updateCollection         ( UPDATE_COLLECTION );
   const SolvAttr SolvAttr::updateCollectionName     ( UPDATE_COLLECTION_NAME );
   const SolvAttr SolvAttr::updateCollectionEvr      ( UPDATE_COLLECTION_EVR );

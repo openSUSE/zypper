@@ -111,6 +111,7 @@ namespace sat
       static const SolvAttr restartSuggested;
       static const SolvAttr reloginSuggested;
       static const SolvAttr message;
+      static const SolvAttr severity;
       static const SolvAttr updateCollection;		// SUB-STRUCTURE:
       static const SolvAttr updateCollectionName;	// name
       static const SolvAttr updateCollectionEvr;	// evr

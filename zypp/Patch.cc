@@ -12,6 +12,7 @@
 #include <iostream>
 
 #include "zypp/base/LogTools.h"
+#include "zypp/base/String.h"
 #include "zypp/Patch.h"
 #include "zypp/sat/WhatProvides.h"
 
@@ -72,6 +73,61 @@ namespace zypp
       return CAT_DOCUMENT;
 
     return CAT_OTHER;
+  }
+
+  std::string Patch::severity() const
+  { return lookupStrAttribute( sat::SolvAttr::severity ); }
+
+  Patch::SeverityFlag Patch::severityFlag() const
+  {
+    std::string sev( severity() );
+    switch ( sev[0] )
+    {
+      case 'l':
+      case 'L':
+	if ( str::compareCI( sev, "low" ) == 0 )
+	  return SEV_LOW;
+	break;
+
+      case 'm':
+      case 'M':
+	if ( str::compareCI( sev, "moderate" ) == 0 )
+	  return SEV_MODERATE;
+	break;
+
+      case 'i':
+      case 'I':
+	if ( str::compareCI( sev, "important" ) == 0 )
+	  return SEV_IMPORTANT;
+	break;
+
+      case 'c':
+      case 'C':
+	if ( str::compareCI( sev, "critical" ) == 0 )
+	  return SEV_CRITICAL;
+	break;
+
+      case '\0':
+	return SEV_NONE;
+	break;
+    }
+    // default:
+    return SEV_OTHER;
+  }
+
+  std::string asString( const Patch::SeverityFlag & obj )
+  {
+    switch ( obj )
+    {
+      case Patch::SEV_NONE:	return std::string( "unspecified" );	break;
+      case Patch::SEV_OTHER:	return std::string( "unknown" );	break;
+      case Patch::SEV_LOW:	return std::string( "low" );		break;
+      case Patch::SEV_MODERATE:	return std::string( "moderate" );	break;
+      case Patch::SEV_IMPORTANT:return std::string( "important" );	break;
+      case Patch::SEV_CRITICAL:	return std::string( "critical" );	break;
+    }
+    // make gcc happy:
+    return std::string( "unknown" );
   }
 
   std::string Patch::message( const Locale & lang_r ) const
