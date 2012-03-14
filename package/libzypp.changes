@@ -1,4 +1,10 @@
 -------------------------------------------------------------------
+Thu Mar 15 00:31:25 CET 2012 - ma@suse.de
+
+- Add API for patch severity (bnc#733723, FATE#312633)
+- version 11.2.0 (1)
+
+-------------------------------------------------------------------
 Tue Mar 13 13:04:48 CET 2012 - ma@suse.de
 
 - Force libproxy into using "/etc/sysconfig/proxy" if it exists (bnc#679322)
