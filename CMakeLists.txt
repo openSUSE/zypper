@@ -4,6 +4,10 @@ SET( PACKAGE "libzypp" )
 SET( CMAKE_MODULE_PATH ${LIBZYPP_SOURCE_DIR}/cmake/modules )
 cmake_minimum_required(VERSION 2.6)
 
+
+OPTION (DISABLE_LIBPROXY "Build without libproxy support even if package is installed?" OFF)
+
+
 # allow name libraries by name mixed with full
 # paths
 if(COMMAND cmake_policy)
@@ -155,13 +159,17 @@ ELSE ( NOT UDEV_FOUND )
   ADD_DEFINITIONS(-DHAVE_UDEV)
 ENDIF ( NOT UDEV_FOUND )
 
-FIND_PACKAGE(libproxy)
-IF ( NOT LIBPROXY_FOUND )
-  MESSAGE( STATUS " libproxy not found" )
-ELSE ( NOT LIBPROXY_FOUND )
-  INCLUDE_DIRECTORIES( ${LIBPROXY_INCLUDE_DIR} )
-  ADD_DEFINITIONS(-D_WITH_LIBPROXY_SUPPORT_)
-ENDIF( NOT LIBPROXY_FOUND )
+IF( DISABLE_LIBPROXY )
+  MESSAGE( STATUS "libproxy support disabled" )
+ELSE( DISABLE_LIBPROXY )
+  FIND_PACKAGE(libproxy)
+  IF ( NOT LIBPROXY_FOUND )
+    MESSAGE( STATUS "libproxy not found" )
+  ELSE ( NOT LIBPROXY_FOUND )
+    INCLUDE_DIRECTORIES( ${LIBPROXY_INCLUDE_DIR} )
+    ADD_DEFINITIONS(-D_WITH_LIBPROXY_SUPPORT_)
+  ENDIF( NOT LIBPROXY_FOUND )
+ENDIF( DISABLE_LIBPROXY )
 
 FIND_PROGRAM( DOXYGEN doxygen )
 IF ( NOT DOXYGEN )

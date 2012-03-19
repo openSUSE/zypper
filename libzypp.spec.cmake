@@ -202,10 +202,12 @@ cd build
 export CFLAGS="$RPM_OPT_FLAGS"
 export CXXFLAGS="$RPM_OPT_FLAGS"
 unset TRANSLATION_SET
+unset EXTRA_CMAKE_OPTIONS
 # SLE11-* might want its own translation set:
 %if 0%{?suse_version} == 1110
 if [ -f ../po/sle-zypp-po.tar.bz ]; then
   export TRANSLATION_SET=sle-zypp
+  export EXTRA_CMAKE_OPTIONS="-DDISABLE_LIBPROXY=ON"
 fi
 %endif
 cmake -DCMAKE_INSTALL_PREFIX=%{_prefix} \
@@ -214,6 +216,7 @@ cmake -DCMAKE_INSTALL_PREFIX=%{_prefix} \
       -DCMAKE_BUILD_TYPE=Release \
       -DCMAKE_SKIP_RPATH=1 \
       -DUSE_TRANSLATION_SET=${TRANSLATION_SET:-zypp} \
+      ${EXTRA_CMAKE_OPTIONS} \
       ..
 make %{?_smp_mflags} VERBOSE=1
 make -C doc/autodoc %{?_smp_mflags}
