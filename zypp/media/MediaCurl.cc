@@ -274,50 +274,62 @@ void fillSettingsFromUrl( const Url &url, TransferSettings &s )
         }
     }
 
-    Pathname ca_path = Pathname(url.getQueryParam("ssl_capath")).asString();
+    Pathname ca_path( url.getQueryParam("ssl_capath") );
     if( ! ca_path.empty())
     {
-        if( !PathInfo(ca_path).isDir() || !Pathname(ca_path).absolute())
+        if( !PathInfo(ca_path).isDir() || ! ca_path.absolute())
             ZYPP_THROW(MediaBadUrlException(url, "Invalid ssl_capath path"));
         else
             s.setCertificateAuthoritiesPath(ca_path);
     }
 
-    string proxy = url.getQueryParam( "proxy" );
-    if ( ! proxy.empty() )
+    param = url.getQueryParam( "proxy" );
+    if ( ! param.empty() )
     {
-        if ( proxy == "_none_" ) {
+        if ( param == "_none_" ) {
+	    // Workaround TransferSettings shortcoming: With an
+	    // empty proxy string, code will continue to look for
+	    // valid proxy settings. So set proxy to some non-empty
+	    // string, to indicate it has been explicitly disabled.
+	    s.setProxy("_none_");
             s.setProxyEnabled(false);
         }
         else {
             string proxyport( url.getQueryParam( "proxyport" ) );
             if ( ! proxyport.empty() ) {
-                proxy += ":" + proxyport;
+                param += ":" + proxyport;
             }
-            s.setProxy(proxy);
+            s.setProxy(param);
             s.setProxyEnabled(true);
         }
     }
 
+    param = url.getQueryParam( "proxyuser" );
+    if ( ! param.empty() )
+    {
+      s.setProxyUsername(param);
+      s.setProxyPassword(url.getQueryParam( "proxypass" ));
+    }
+
     // HTTP authentication type
-    string use_auth = url.getQueryParam("auth");
-    if (!use_auth.empty() && (url.getScheme() == "http" || url.getScheme() == "https"))
+    param = url.getQueryParam("auth");
+    if (!param.empty() && (url.getScheme() == "http" || url.getScheme() == "https"))
     {
         try
         {
-	    CurlAuthData::auth_type_str2long(use_auth);	// check if we know it
+	    CurlAuthData::auth_type_str2long(param);	// check if we know it
         }
         catch (MediaException & ex_r)
 	{
 	    DBG << "Rethrowing as MediaUnauthorizedException.";
 	    ZYPP_THROW(MediaUnauthorizedException(url, ex_r.msg(), "", ""));
 	}
-        s.setAuthType(use_auth);
+        s.setAuthType(param);
     }
 
     // workarounds
-    std::string head_requests( url.getQueryParam("head_requests"));
-    if( !head_requests.empty() && head_requests == "no")
+    param = url.getQueryParam("head_requests");
+    if( !param.empty() && param == "no" )
         s.setHeadRequestsAllowed(false);
 }
 
@@ -335,8 +347,12 @@ void fillSettingsSystemProxy( const Url&url, TransferSettings &s )
       try {
 	Url u( proxy_info.proxy( url ) );
 	s.setProxy( u.asString( url::ViewOption::WITH_SCHEME + url::ViewOption::WITH_HOST + url::ViewOption::WITH_PORT ) );
-	s.setProxyUsername( u.getUsername( url::E_ENCODED ) );
-	s.setProxyPassword( u.getPassword( url::E_ENCODED ) );
+	// don't overwrite explicit auth settings
+	if ( s.proxyUsername().empty() )
+	{
+	  s.setProxyUsername( u.getUsername( url::E_ENCODED ) );
+	  s.setProxyPassword( u.getPassword( url::E_ENCODED ) );
+	}
 	s.setProxyEnabled( true );
       }
       catch (...) {}	// no proxy if URL is malformed
@@ -558,15 +574,12 @@ void MediaCurl::setupEasy()
       disconnectFrom();
       ZYPP_RETHROW(e);
   }
-
-  // if the proxy was not set by url, then look
+  // if the proxy was not set (or explicitly unset) by url, then look...
   if ( _settings.proxy().empty() )
   {
-      // at the system proxy settings
+      // ...at the system proxy settings
       fillSettingsSystemProxy(_url, _settings);
   }
-
-  DBG << "Proxy: " << (_settings.proxy().empty() ? "-none-" : _settings.proxy()) << endl;
 
  /**
   * Connect timeout
@@ -620,46 +633,45 @@ void MediaCurl::setupEasy()
     }
   }
 
-  if ( _settings.proxyEnabled() )
+  if ( _settings.proxyEnabled() && ! _settings.proxy().empty() )
   {
-    if ( ! _settings.proxy().empty() )
+    DBG << "Proxy: '" << _settings.proxy() << "'" << endl;
+    SET_OPTION(CURLOPT_PROXY, _settings.proxy().c_str());
+    SET_OPTION(CURLOPT_PROXYAUTH, CURLAUTH_BASIC|CURLAUTH_DIGEST|CURLAUTH_NTLM );
+    /*---------------------------------------------------------------*
+     *    CURLOPT_PROXYUSERPWD: [user name]:[password]
+     *
+     * Url::option(proxyuser and proxypassword) -> CURLOPT_PROXYUSERPWD
+     *  If not provided, $HOME/.curlrc is evaluated
+     *---------------------------------------------------------------*/
+
+    string proxyuserpwd = _settings.proxyUserPassword();
+
+    if ( proxyuserpwd.empty() )
     {
-      SET_OPTION(CURLOPT_PROXY, _settings.proxy().c_str());
-      SET_OPTION(CURLOPT_PROXYAUTH, CURLAUTH_BASIC|CURLAUTH_DIGEST|CURLAUTH_NTLM );
-      /*---------------------------------------------------------------*
-        CURLOPT_PROXYUSERPWD: [user name]:[password]
-
-        Url::option(proxyuser and proxypassword) -> CURLOPT_PROXYUSERPWD
-        If not provided, $HOME/.curlrc is evaluated
-        *---------------------------------------------------------------*/
-
-      string proxyuserpwd = _settings.proxyUserPassword();
-
-      if ( proxyuserpwd.empty() )
-      {
-        CurlConfig curlconf;
-        CurlConfig::parseConfig(curlconf); // parse ~/.curlrc
-        if (curlconf.proxyuserpwd.empty())
-          DBG << "~/.curlrc does not contain the proxy-user option" << endl;
-        else
-        {
-          proxyuserpwd = curlconf.proxyuserpwd;
-          DBG << "using proxy-user from ~/.curlrc" << endl;
-        }
-      }
+      CurlConfig curlconf;
+      CurlConfig::parseConfig(curlconf); // parse ~/.curlrc
+      if ( curlconf.proxyuserpwd.empty() )
+	DBG << "Proxy: ~/.curlrc does not contain the proxy-user option" << endl;
       else
       {
-	DBG << "using provided proxy-user" << endl;
+	proxyuserpwd = curlconf.proxyuserpwd;
+	DBG << "Proxy: using proxy-user from ~/.curlrc" << endl;
       }
+    }
+    else
+    {
+      DBG << "Proxy: using provided proxy-user '" << _settings.proxyUsername() << "'" << endl;
+    }
 
-      if ( ! proxyuserpwd.empty() )
-      {
-	SET_OPTION(CURLOPT_PROXYUSERPWD, unEscape( proxyuserpwd ).c_str());
-      }
+    if ( ! proxyuserpwd.empty() )
+    {
+      SET_OPTION(CURLOPT_PROXYUSERPWD, unEscape( proxyuserpwd ).c_str());
     }
   }
   else
   {
+      DBG << "Proxy: NOPROXY" << endl;
 #if CURLVERSION_AT_LEAST(7,19,4)
       SET_OPTION(CURLOPT_NOPROXY, "*");
 #endif
