@@ -50,30 +50,43 @@ namespace zypp
     static const IdString support_l2( "support_l2" );
     static const IdString support_l3( "support_l3" );
 
-    Keywords kw( keywords() );
-    for_( it, kw.begin(), kw.end() )
+    VendorSupportOption ret( VendorSupportUnknown );
+    // max over all identical packages
+    for ( const auto & solv : sat::WhatProvides( (Capability(ident().id())) ) )
     {
-      if ( *it == support_unsupported )
-        return VendorSupportUnsupported;
-      if ( *it == support_acc )
-        return VendorSupportACC;
-      if ( *it == support_l1 )
-        return VendorSupportLevel1;
-      if ( *it == support_l2 )
-        return VendorSupportLevel2;
-      if ( *it == support_l3 )
-        return VendorSupportLevel3;
+      if ( solv.edition() == edition()
+	&& solv.ident() == ident()
+	&& identical( solv ) )
+      {
+	for ( PackageKeyword kw : Keywords( sat::SolvAttr::keywords, solv ) )
+	{
+	  switch ( ret )
+	  {
+	    case VendorSupportUnknown:
+	      if ( kw == support_unsupported )	{ ret = VendorSupportUnsupported; break; }
+	    case VendorSupportUnsupported:
+	      if ( kw == support_acc )	{ ret = VendorSupportACC; break; }
+	    case VendorSupportACC:
+	      if ( kw == support_l1 )	{ ret = VendorSupportLevel1; break; }
+	    case VendorSupportLevel1:
+	      if ( kw == support_l2 )	{ ret = VendorSupportLevel2; break; }
+	    case VendorSupportLevel2:
+	      if ( kw == support_l3 )	{ return VendorSupportLevel3; break; }
+	    case VendorSupportLevel3:
+	      /* make gcc happy */ break;
+	  }
+	}
+      }
     }
-    return VendorSupportUnknown;
+    return ret;
   }
 
   bool Package::maybeUnsupported() const
   {
-      if ( ( vendorSupport() == VendorSupportUnknown ) ||
-           ( vendorSupport() == VendorSupportACC ) ||
-           ( vendorSupport() == VendorSupportUnsupported ) )
-          return true;
-      return false;
+    static const VendorSupportOptions unsupportedOpts( VendorSupportUnknown
+						     | VendorSupportUnsupported
+						     | VendorSupportACC );
+    return unsupportedOpts.testFlag( vendorSupport() );
   }
 
   Changelog Package::changelog() const
