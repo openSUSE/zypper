@@ -11,8 +11,8 @@
 # norootforbuild
 
 Name:           @PACKAGE@
-BuildRequires:  libzypp-devel >= 6.36.0 
-BuildRequires:  boost-devel >= 1.33.1 
+BuildRequires:  libzypp-devel >= 6.36.0
+BuildRequires:  boost-devel >= 1.33.1
 %if 0%{?suse_version} >= 1100
 BuildRequires:  gettext-devel >= 0.15
 %else
@@ -133,3 +133,9 @@ touch %buildroot%_var/log/zypper.log
 # declare ownership of the log file but prevent
 # it from being erased by rpm -e
 %ghost %config(noreplace) %{_var}/log/zypper.log
+%if 0%{?suse_version} < 1100
+# building on Code10: add locale directories _NOT_ owned by Code10 filesystem
+%dir %{prefix}/share/locale/si
+%dir %{prefix}/share/locale/si/LC_MESSAGES
+%endif
+
