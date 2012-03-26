@@ -1,4 +1,13 @@
 -------------------------------------------------------------------
+Mon Mar 26 14:47:59 CEST 2012 - ma@suse.de
+
+- Cleanup orphaned media attach points (bnc#751221)
+- Show max support status if package is in multiple repos (bnc#735841)
+- Parse proxy user/pass from url (bnc#752497)
+- Add CMake option to disable libproxy usage and disable it on SLE. (bnc#752500)
+- version 11.3.0 (1)
+
+-------------------------------------------------------------------
 Thu Mar 15 00:31:25 CET 2012 - ma@suse.de
 
 - Add API for patch severity (bnc#733723, FATE#312633)
