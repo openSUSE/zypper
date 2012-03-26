@@ -82,6 +82,12 @@ namespace zypp {
         path() const
         { return _path; }
 
+        bool autoCleanup() const
+        { return( _flags & Autodelete ); }
+
+        void autoCleanup( bool yesno_r )
+	{ _flags = yesno_r ? CtorDefault : NoOp; }
+
       private:
         Pathname _path;
         Flags    _flags;
@@ -156,6 +162,13 @@ namespace zypp {
       static Pathname p( getenv("ZYPPTMPDIR") ? getenv("ZYPPTMPDIR") : "/var/tmp" );
       return p;
     }
+
+    bool TmpPath::autoCleanup() const
+    { return _impl.get() ? _impl->autoCleanup() : false; }
+
+    void TmpPath::autoCleanup( bool yesno_r )
+    { if ( _impl.get() ) _impl->autoCleanup( yesno_r ); }
+
     ///////////////////////////////////////////////////////////////////
     //
     //	CLASS NAME : TmpFile
