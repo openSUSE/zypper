@@ -49,7 +49,7 @@ ProblemSolutionIgnore::ProblemSolutionIgnore( ResolverProblem_Ptr parent,
     : ProblemSolution (parent, "", "")
 {
     // TranslatorExplanation %s = name of package, patch, selection ...
-    _description = str::form (_("break %s by ignoring some of its dependencies"), item->name().c_str() );
+    _description = str::form (_("break %s by ignoring some of its dependencies"), item.satSolvable().asString().c_str() );
 
     addAction ( new InjectSolutionAction (item, WEAK));
 }

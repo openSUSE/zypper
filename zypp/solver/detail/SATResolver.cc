@@ -954,27 +954,26 @@ struct FindPackage : public resfilter::ResObjectFilterFunctor
 // e.g. The release package has a buddy to the concerning product item.
 // This user want's the message "Product foo conflicts with product bar" and
 // NOT "package release-foo conflicts with package release-bar"
+// (ma: that's why we should map just packages to buddies, not vice versa)
 //----------------------------------------------------------------------------
-
-
-PoolItem SATResolver::mapItem (const PoolItem &item)
+inline sat::Solvable mapBuddy( const PoolItem & item_r )
 {
-    sat::Solvable buddy = item.buddy();
-    if (buddy != sat::Solvable())
-    {
-	return _pool.find (buddy);
-    }
-    else
-    {
-	return item;
-    }
+  if ( item_r.satSolvable().isKind<Package>() )
+  {
+    sat::Solvable buddy = item_r.buddy();
+    if ( buddy )
+      return buddy;
+  }
+  return item_r.satSolvable();
 }
+inline sat::Solvable mapBuddy( sat::Solvable item_r )
+{ return mapBuddy( PoolItem( item_r ) ); }
 
-sat::Solvable SATResolver::mapSolvable (const Id &id)
-{
-    PoolItem item = _pool.find (sat::Solvable(id));
-    return mapItem(item).satSolvable();
-}
+PoolItem SATResolver::mapItem ( const PoolItem & item )
+{ return PoolItem( mapBuddy( item ) ); }
+
+sat::Solvable SATResolver::mapSolvable ( const Id & id )
+{ return mapBuddy( sat::Solvable(id) ); }
 
 string SATResolver::SATprobleminfoString(Id problem, string &detail, Id &ignoreId)
 {
