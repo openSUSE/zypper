@@ -193,7 +193,7 @@ namespace zypp
       return s ? s : std::string();
    }
 
-    unsigned Solvable::lookupNumAttribute( const SolvAttr & attr ) const
+    unsigned long long Solvable::lookupNumAttribute( const SolvAttr & attr ) const
     {
       NO_SOLVABLE_RETURN( 0 );
       return ::solvable_lookup_num( _solvable, attr.id(), 0 );
@@ -284,10 +284,10 @@ namespace zypp
           break;
       }
       ret.setLocation    ( path/file, medianr );
-      ret.setDownloadSize( ByteCount( lookupNumAttribute( SolvAttr::downloadsize ), ByteCount::K ) );
+      ret.setDownloadSize( ByteCount( lookupNumAttribute( SolvAttr::downloadsize ) ) );
       ret.setChecksum    ( lookupCheckSumAttribute( SolvAttr::checksum ) );
       // Not needed/available for solvables?
-      //ret.setOpenSize    ( ByteCount( lookupNumAttribute( SolvAttr::opensize ), ByteCount::K ) );
+      //ret.setOpenSize    ( ByteCount( lookupNumAttribute( SolvAttr::opensize ) ) );
       //ret.setOpenChecksum( lookupCheckSumAttribute( SolvAttr::openchecksum ) );
       return ret;
     }

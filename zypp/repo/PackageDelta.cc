@@ -83,7 +83,7 @@ namespace zypp
             break;
 
           case DELTA_DOWNLOADSIZE:
-            _location.setDownloadSize( ByteCount( it.asUnsigned(), ByteCount::K ) );
+            _location.setDownloadSize( ByteCount( it.asUnsignedLL() ) );
             break;
 
           case DELTA_CHECKSUM:

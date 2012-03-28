@@ -502,6 +502,8 @@ namespace zypp
         unsigned asUnsigned() const;
         /** \overload */
         bool asBool() const;
+        /** \overload */
+        unsigned long long asUnsignedLL() const;
 
         /** Conversion to string types. */
         const char * c_str() const;
@@ -586,6 +588,7 @@ namespace zypp
     //@{
     template<> inline int          LookupAttr::iterator::asType<int>()          const { return asInt(); }
     template<> inline unsigned     LookupAttr::iterator::asType<unsigned>()     const { return asUnsigned(); }
+    template<> inline unsigned long long LookupAttr::iterator::asType<unsigned long long>()     const { return asUnsignedLL(); }
     template<> inline bool         LookupAttr::iterator::asType<bool>()         const { return asBool(); }
     template<> inline const char * LookupAttr::iterator::asType<const char *>() const { return c_str(); }
     template<> inline std::string  LookupAttr::iterator::asType<std::string>()  const { return asString(); }

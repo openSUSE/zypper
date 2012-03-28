@@ -82,10 +82,10 @@ namespace zypp
   { return lookupStrAttribute( sat::SolvAttr::cpeid ); }
 
   ByteCount ResObject::installSize() const
-  { return ByteCount( lookupNumAttribute( sat::SolvAttr::installsize ), ByteCount::K ); }
+  { return ByteCount( lookupNumAttribute( sat::SolvAttr::installsize ) ); }
 
   ByteCount ResObject::downloadSize() const
-  { return ByteCount( lookupNumAttribute( sat::SolvAttr::downloadsize ), ByteCount::K ); }
+  { return ByteCount( lookupNumAttribute( sat::SolvAttr::downloadsize ) ); }
 
   unsigned ResObject::mediaNr() const
   { return lookupNumAttribute( sat::SolvAttr::medianr ); }

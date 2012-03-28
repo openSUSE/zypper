@@ -559,6 +559,22 @@ namespace zypp
     unsigned LookupAttr::iterator::asUnsigned() const
     { return asInt(); }
 
+    unsigned long long LookupAttr::iterator::asUnsignedLL() const
+    {
+      if ( _dip )
+      {
+        switch ( solvAttrType() )
+        {
+          case REPOKEY_TYPE_U32:
+          case REPOKEY_TYPE_NUM:
+          case REPOKEY_TYPE_CONSTANT:
+            return SOLV_KV_NUM64(&_dip->kv);
+            break;
+        }
+      }
+      return 0;
+    }
+
     bool LookupAttr::iterator::asBool() const
     { return asInt(); }
 
