@@ -121,7 +121,7 @@ namespace zypp
          * returns the numeric attribute value for \ref attr
          * or 0 if it does not exists.
          */
-        unsigned lookupNumAttribute( const SolvAttr & attr ) const;
+        unsigned long long lookupNumAttribute( const SolvAttr & attr ) const;
 
         /**
          * returns the boolean attribute value for \ref attr
