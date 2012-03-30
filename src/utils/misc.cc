@@ -454,6 +454,14 @@ void list_processes_using_deleted_files(Zypper & zypper)
           " in the above table."),
         "man zypper"));
   }
+
+  if ( geteuid() != 0 )
+  {
+    zypper.out().info("");
+    zypper.out().info(_("Note: Not running as root you are limited to searching for files"
+                        " you have permission to examine with the system stat(2) function."
+                        " The result might be incomplete."));
+  }
 }
 
 // ----------------------------------------------------------------------------
