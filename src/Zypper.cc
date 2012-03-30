@@ -2511,85 +2511,91 @@ void Zypper::doCommand()
   if (runningHelp()) { out().info(_command_help, Out::QUIET); return; }
 
   // === ZYpp lock ===
-
-  try
+  switch ( command().toEnum() )
   {
-    const char *roh = getenv("ZYPP_READONLY_HACK");
-    if (roh != NULL && roh[0] == '1')
-      zypp_readonly_hack::IWantIt ();
+    case ZypperCommand::PS_e:
+      // bnc#703598: Quick fix as few commands do not need a zypp lock
+      break;
 
-    else if (   command() == ZypperCommand::LIST_REPOS
-             || command() == ZypperCommand::LIST_SERVICES
-             || command() == ZypperCommand::TARGET_OS )
-      zypp_readonly_hack::IWantIt (); // #247001, #302152
-
-    God = zypp::getZYpp();
-  }
-  catch (ZYppFactoryException & excpt_r)
-  {
-    ZYPP_CAUGHT (excpt_r);
-
-    bool still_locked = true;
-    // check for packagekit (bnc #580513)
-    if (excpt_r.lockerName().find("packagekitd") != string::npos)
-    {
-      // ask user wheter to tell it to quit
-      out().info(_(
-        "PackageKit is blocking zypper. This happens if you have an"
-        " updater applet or other software management application using"
-        " PackageKit running."
-      ));
-
-      bool reply = read_bool_answer(
-          PROMPT_PACKAGEKIT_QUIT, _("Tell PackageKit to quit?"), false);
-
-      // tell it to quit
-      while (reply && still_locked)
+    default:
+      try
       {
-        packagekit_suggest_quit();
-        ::sleep(2);
-        if (packagekit_running())
-        {
-          out().info(_("PackageKit is still running (probably busy)."));
-          reply = read_bool_answer(
-              PROMPT_PACKAGEKIT_QUIT, _("Try again?"), false);
-        }
-        else
-          still_locked = false;
+	const char *roh = getenv("ZYPP_READONLY_HACK");
+	if (roh != NULL && roh[0] == '1')
+	  zypp_readonly_hack::IWantIt ();
+
+	else if (   command() == ZypperCommand::LIST_REPOS
+	  || command() == ZypperCommand::LIST_SERVICES
+	  || command() == ZypperCommand::TARGET_OS )
+	  zypp_readonly_hack::IWantIt (); // #247001, #302152
+
+	  God = zypp::getZYpp();
       }
-    }
-
-    if (still_locked)
-    {
-      ERR  << "A ZYpp transaction is already in progress." << endl;
-      out().error(excpt_r.asString());
-
-      setExitCode(ZYPPER_EXIT_ERR_ZYPP);
-      throw (ExitRequestException("ZYpp locked"));
-    }
-    else
-    {
-      // try to get the lock again
-      try { God = zypp::getZYpp(); }
-      catch (ZYppFactoryException & e)
+      catch (ZYppFactoryException & excpt_r)
       {
-        // this should happen only rarely, so no special handling here
-        ERR  << "still locked." << endl;
-        out().error(e.asString());
+	ZYPP_CAUGHT (excpt_r);
 
-        setExitCode(ZYPPER_EXIT_ERR_ZYPP);
-        throw (ExitRequestException("ZYpp locked"));
+	bool still_locked = true;
+	// check for packagekit (bnc #580513)
+	if (excpt_r.lockerName().find("packagekitd") != string::npos)
+	{
+	  // ask user wheter to tell it to quit
+	  out().info(_(
+	    "PackageKit is blocking zypper. This happens if you have an"
+	    " updater applet or other software management application using"
+	    " PackageKit running."
+	  ));
+
+	  bool reply = read_bool_answer(
+	    PROMPT_PACKAGEKIT_QUIT, _("Tell PackageKit to quit?"), false);
+
+	// tell it to quit
+	while (reply && still_locked)
+	{
+	  packagekit_suggest_quit();
+	  ::sleep(2);
+	  if (packagekit_running())
+	  {
+	    out().info(_("PackageKit is still running (probably busy)."));
+	    reply = read_bool_answer(
+	      PROMPT_PACKAGEKIT_QUIT, _("Try again?"), false);
+	  }
+	  else
+	    still_locked = false;
+	}
+	}
+
+	if (still_locked)
+	{
+	  ERR  << "A ZYpp transaction is already in progress." << endl;
+	  out().error(excpt_r.asString());
+
+	  setExitCode(ZYPPER_EXIT_ERR_ZYPP);
+	  throw (ExitRequestException("ZYpp locked"));
+	}
+	else
+	{
+	  // try to get the lock again
+	  try { God = zypp::getZYpp(); }
+	  catch (ZYppFactoryException & e)
+	  {
+	    // this should happen only rarely, so no special handling here
+	    ERR  << "still locked." << endl;
+	    out().error(e.asString());
+
+	    setExitCode(ZYPPER_EXIT_ERR_ZYPP);
+	    throw (ExitRequestException("ZYpp locked"));
+	  }
+	}
       }
-    }
+      catch (Exception & excpt_r)
+      {
+	ZYPP_CAUGHT (excpt_r);
+	out().error(excpt_r.msg());
+	setExitCode(ZYPPER_EXIT_ERR_ZYPP);
+	throw (ExitRequestException("ZYpp locked"));
+      }
   }
-  catch (Exception & excpt_r)
-  {
-    ZYPP_CAUGHT (excpt_r);
-    out().error(excpt_r.msg());
-    setExitCode(ZYPPER_EXIT_ERR_ZYPP);
-    throw (ExitRequestException("ZYpp locked"));
-  }
-
   // === execute command ===
 
   MIL << "Going to process command " << command().toEnum() << endl;
