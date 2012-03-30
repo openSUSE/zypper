@@ -302,7 +302,11 @@ namespace zypp
 
   namespace
   {
-    ZYppGlobalLock globalLock;
+    static ZYppGlobalLock & globalLock()
+    {
+      static ZYppGlobalLock lock;
+      return lock;
+    }
     bool           _haveZYpp = false;
   }
 
@@ -370,19 +374,19 @@ namespace zypp
           MIL << "ZYPP_READONLY active." << endl;
       }
       /*--------------------------------------------------*/
-      else if ( globalLock.zyppLocked() )
+      else if ( globalLock().zyppLocked() )
       {
 	std::string t = str::form(_("System management is locked by the application with pid %d (%s).\n"
                                      "Close this application before trying again."),
-                                  globalLock.locker_pid(),
-                                  globalLock.locker_name().c_str()
+                                  globalLock().locker_pid(),
+                                  globalLock().locker_name().c_str()
                                  );
-	ZYPP_THROW(ZYppFactoryException(t, globalLock.locker_pid(),globalLock.locker_name() ));
+	ZYPP_THROW(ZYppFactoryException(t, globalLock().locker_pid(), globalLock().locker_name() ));
       }
       else
       {
         _instance = new ZYpp( ZYpp::Impl_Ptr(new ZYpp::Impl) );
-        globalLock._clean_lock = true;
+        globalLock()._clean_lock = true;
       }
 
       if ( _instance )
