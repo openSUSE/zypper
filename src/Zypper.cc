@@ -2520,6 +2520,12 @@ void Zypper::doCommand()
     default:
       try
       {
+	if ( _gopts.changedRoot && _gopts.root_dir != "/" )
+	{
+	  // bnc#575096: Quick fix
+	  ::setenv( "ZYPP_LOCKFILE_ROOT", _gopts.root_dir.c_str(), 0 );
+	}
+
 	const char *roh = getenv("ZYPP_READONLY_HACK");
 	if (roh != NULL && roh[0] == '1')
 	  zypp_readonly_hack::IWantIt ();
