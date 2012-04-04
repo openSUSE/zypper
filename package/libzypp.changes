@@ -1,4 +1,9 @@
 -------------------------------------------------------------------
+Thu Apr  5 01:16:21 CEST 2012 - ma@suse.de
+
+- Update zypp-po.tar.bz2
+
+-------------------------------------------------------------------
 Mon Mar 26 14:47:59 CEST 2012 - ma@suse.de
 
 - Cleanup orphaned media attach points (bnc#751221)
