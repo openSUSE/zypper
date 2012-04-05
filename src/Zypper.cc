@@ -3363,7 +3363,16 @@ void Zypper::doCommand()
       throw ExitRequestException("not implemented");
     }
 
-    // parse the download options to check for errors
+     // can't remove source package
+    if (kind == ResKind::srcpackage && !install_not_remove)
+    {
+      out().error(
+          _("Uninstallation of a source packge not defined and implemented."));
+      setExitCode(ZYPPER_EXIT_ERR_INVALID_ARGS);
+      throw ExitRequestException("not implemented");
+    }
+
+   // parse the download options to check for errors
     get_download_option(*this);
 
     initRepoManager();

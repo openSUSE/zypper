@@ -1034,18 +1034,16 @@ void Summary::writePackageCounts(ostream & out)
   KindToResPairSet::const_iterator i;
 
   i = _toupgrade.find(ResKind::package);
-  if (i != _toupgrade.end())
+  if (i != _toupgrade.end() && (count = i->second.size()) )
   {
-    count = i->second.size();
     fprint_color(s, str::form("%d ", count), COLOR_CONTEXT_HIGHLIGHT);
     // translators: this text will be preceded by a number e.g. "5 packages to ..."
     s << _PL("package to upgrade", "packages to upgrade", count);
     gotcha = true;
   }
   i = _todowngrade.find(ResKind::package);
-  if (i != _todowngrade.end())
+  if (i != _todowngrade.end() && (count = i->second.size()) )
   {
-    count = i->second.size();
     if (gotcha)
       s << ", ";
     fprint_color(s, str::form("%d ", count), COLOR_CONTEXT_HIGHLIGHT);
@@ -1058,9 +1056,8 @@ void Summary::writePackageCounts(ostream & out)
     gotcha = true;
   }
   i = _toinstall.find(ResKind::package);
-  if (i != _toinstall.end())
+  if (i != _toinstall.end() && (count = i->second.size()) )
   {
-    count = i->second.size();
     if (gotcha)
       s << ", ";
     fprint_color(s, str::form("%d ", count), COLOR_CONTEXT_HIGHLIGHT);
@@ -1073,9 +1070,8 @@ void Summary::writePackageCounts(ostream & out)
     gotcha = true;
   }
   i = _toreinstall.find(ResKind::package);
-  if (i != _toreinstall.end())
+  if (i != _toreinstall.end() && (count = i->second.size()) )
   {
-    count = i->second.size();
     if (gotcha)
       s << ", ";
     fprint_color(s, str::form("%d ", count), COLOR_CONTEXT_HIGHLIGHT);
@@ -1088,9 +1084,8 @@ void Summary::writePackageCounts(ostream & out)
     gotcha = true;
   }
   i = _toremove.find(ResKind::package);
-  if (i != _toremove.end())
+  if (i != _toremove.end() && (count = i->second.size()) )
   {
-    count = i->second.size();
     if (gotcha)
       s << ", ";
     fprint_color(s, str::form("%d ", count), COLOR_CONTEXT_NEGATIVE);
@@ -1103,9 +1098,8 @@ void Summary::writePackageCounts(ostream & out)
     gotcha = true;
   }
   i = _tochangevendor.find(ResKind::package);
-  if (i != _tochangevendor.end())
+  if (i != _tochangevendor.end() && (count = i->second.size()) )
   {
-    count = i->second.size();
     if (gotcha)
       s << ", ";
     fprint_color(s, str::form("%d ", count), COLOR_CONTEXT_NEGATIVE);
@@ -1118,9 +1112,8 @@ void Summary::writePackageCounts(ostream & out)
     gotcha = true;
   }
   i = _tochangearch.find(ResKind::package);
-  if (i != _tochangearch.end())
+  if (i != _tochangearch.end() && (count = i->second.size()) )
   {
-    count = i->second.size();
     if (gotcha)
       s << ", ";
     fprint_color(s, str::form("%d ", count), COLOR_CONTEXT_HIGHLIGHT);
@@ -1130,6 +1123,20 @@ void Summary::writePackageCounts(ostream & out)
     else
       // translators: this text will be preceded by a number e.g. "5 packages ..."
       s << _PL("package will change arch", "packages will change arch", count);
+    gotcha = true;
+  }
+  i = _toinstall.find(ResKind::srcpackage);
+  if (i != _toinstall.end() && (count = i->second.size()) )
+  {
+    if (gotcha)
+      s << ", ";
+    fprint_color(s, str::form("%d ", count), COLOR_CONTEXT_HIGHLIGHT);
+    if (gotcha)
+      // translators: this text will be preceded by a number e.g. "5 new"
+      s << _PL("source package", "source packages", count);
+    else
+      // translators: this text will be preceded by a number e.g. "5 new to install"
+      s << _PL("source package to install", "source packages to install", count);
     gotcha = true;
   }
   s << "." <<  endl;
