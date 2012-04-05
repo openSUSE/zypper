@@ -22,6 +22,7 @@
 #include "zypp/ZYppCallbacks.h"
 #include "zypp/MediaSetAccess.h"
 #include "zypp/ZConfig.h"
+#include "zypp/ZYppFactory.h"
 #include "zypp/repo/SUSEMediaVerifier.h"
 #include "zypp/repo/RepoException.h"
 
@@ -267,8 +268,20 @@ namespace zypp
 
       Fetcher fetcher;
       fetcher.addCachePath( repo_r.packagesPath() );
-
       MIL << "Added cache path " << repo_r.packagesPath() << endl;
+
+      // Test whether download destination is writable, if not
+      // switch into the tmpspace (e.g. bnc#755239, download and
+      // install srpms as user).
+      Pathname destinationDir( repo_r.packagesPath() );
+      if ( ! PathInfo( destinationDir ).userMayW() )
+      {
+        WAR << "Destination dir '" << destinationDir << "' is not user writable, using tmp space." << endl;
+        destinationDir = getZYpp()->tmpPath() / destinationDir;
+	assert_dir( destinationDir );
+        fetcher.addCachePath( destinationDir );
+        MIL << "Added cache path " << destinationDir << endl;
+      }
 
       for ( RepoInfo::urls_const_iterator it = repo_r.baseUrlsBegin();
             it != repo_r.baseUrlsEnd();
@@ -285,10 +298,10 @@ namespace zypp
 	  fetcher.enqueue( loc_r );
 
 	  // FIXME: works for packages only
-	  fetcher.start( repo_r.packagesPath(), *access );
+	  fetcher.start( destinationDir, *access );
 
 	  // reached if no exception has been thrown, so this is the correct file
-          ManagedFile ret( repo_r.packagesPath() + loc_r.filename() );
+          ManagedFile ret( destinationDir + loc_r.filename() );
 
           std::string scheme( url.getScheme() );
           if ( !repo_r.keepPackages() )
