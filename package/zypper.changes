@@ -1,4 +1,11 @@
 -------------------------------------------------------------------
+Thu Apr  5 18:18:09 CEST 2012 - ma@suse.de
+
+- Improve source package related messages upon install and remove (bnc#755239)
+- Show note about possibly incomplete 'zypper ps' if not run as root (bnc#710872)
+- version 1.6.23
+
+-------------------------------------------------------------------
 Thu Apr  5 10:02:27 CEST 2012 - ma@suse.de
 
 - Update zypper-po.tar.bz2
