@@ -1,4 +1,9 @@
 -------------------------------------------------------------------
+Sun Apr  8 01:14:36 CEST 2012 - ma@suse.de
+
+- Update zypper-po.tar.bz2
+
+-------------------------------------------------------------------
 Thu Apr  5 18:18:09 CEST 2012 - ma@suse.de
 
 - Improve source package related messages upon install and remove (bnc#755239)
