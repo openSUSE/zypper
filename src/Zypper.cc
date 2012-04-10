@@ -3355,7 +3355,7 @@ void Zypper::doCommand()
     if (kind == ResKind::srcpackage && !install_not_remove)
     {
       out().error(
-          _("Uninstallation of a source packge not defined and implemented."));
+          _("Uninstallation of a source package not defined and implemented."));
       setExitCode(ZYPPER_EXIT_ERR_INVALID_ARGS);
       throw ExitRequestException("not implemented");
     }
