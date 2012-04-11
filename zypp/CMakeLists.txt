@@ -200,6 +200,8 @@ SET( zypp_base_SRCS
   base/InputStream.cc
   base/ReferenceCounted.cc
   base/String.cc
+  base/StrMatcher.h
+  base/StrMatcher.cc
   base/Regex.cc
   base/Unit.cc
   base/ExternalDataSource.cc
@@ -247,6 +249,7 @@ SET( zypp_base_HEADERS
   base/SafeBool.h
   base/Signal.h
   base/String.h
+  base/StrMatcher.h
   base/Regex.h
   base/Sysconfig.h
   base/Tr1hash.h
@@ -536,7 +539,6 @@ SET( zypp_sat_SRCS
   sat/LocaleSupport.cc
   sat/LookupAttr.cc
   sat/SolvAttr.cc
-  sat/AttrMatcher.cc
 )
 
 SET( zypp_sat_HEADERS
@@ -553,7 +555,6 @@ SET( zypp_sat_HEADERS
   sat/LookupAttr.h
   sat/LookupAttrTools.h
   sat/SolvAttr.h
-  sat/AttrMatcher.h
 )
 
 INSTALL(  FILES

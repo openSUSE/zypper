@@ -31,12 +31,11 @@ namespace zypp
   class CheckSum;
   class Match;
   class MatchException;
+  class StrMatcher;
 
   ///////////////////////////////////////////////////////////////////
   namespace sat
   { /////////////////////////////////////////////////////////////////
-
-    class AttrMatcher;
 
     ///////////////////////////////////////////////////////////////////
     //
@@ -179,23 +178,23 @@ namespace zypp
         /** \name Restrict attributes to match a pattern. */
         //@{
         /** The pattern to match.
-         * You can also evaluate \ref AttrMatcher in a boolean context,
-         * in order to test whether an \ref AttrMatcher is set:
+         * You can also evaluate \ref StrMatcher in a boolean context,
+         * in order to test whether an \ref StrMatcher is set:
          * \code
          *   LookupAttr q;
-         *   if ( q.attrMatcher() )
-         *     ...; // an AttrMatcher is set
+         *   if ( q.strMatcher() )
+         *     ...; // an StrMatcher is set
          * \endcode
         */
-        const AttrMatcher & attrMatcher() const;
+        const StrMatcher & strMatcher() const;
 
         /** Set the pattern to match.
-         * \throws MatchException Any of the exceptions thrown by \ref AttrMatcher::compile.
+         * \throws MatchException Any of the exceptions thrown by \ref StrMatcher::compile.
          */
-        void setAttrMatcher( const AttrMatcher & matcher_r );
+        void setStrMatcher( const StrMatcher & matcher_r );
 
         /** Reset the pattern to match. */
-        void resetAttrMatcher();
+        void resetStrMatcher();
        //@}
 
       public:

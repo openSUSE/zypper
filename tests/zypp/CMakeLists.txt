@@ -35,6 +35,7 @@ ADD_TESTS(
   ResKind
   ResStatus
   Selectable
+  StrMatcher
   Target
   Url
   Vendor

@@ -30,7 +30,7 @@ namespace zypp
     /// \defgroup ZYPP_STR_REGEX Regular expression matching
     /// \brief Regular expressions using the glibc regex library.
     ///
-    /// \see also \ref sat::AttrMatcher string matcher also supporting globing, etc.
+    /// \see also \ref StrMatcher string matcher also supporting globing, etc.
     ///
     /// \code
     ///  str::regex rxexpr( "^(A)?([0-9]*) im" );

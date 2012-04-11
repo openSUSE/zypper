@@ -22,7 +22,7 @@
 
 #include "zypp/sat/SolvIterMixin.h"
 #include "zypp/sat/LookupAttr.h"
-#include "zypp/sat/AttrMatcher.h"
+#include "zypp/base/StrMatcher.h"
 #include "zypp/sat/Pool.h"
 
 ///////////////////////////////////////////////////////////////////

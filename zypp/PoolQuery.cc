@@ -21,7 +21,7 @@
 
 #include "zypp/sat/Pool.h"
 #include "zypp/sat/Solvable.h"
-#include "zypp/sat/AttrMatcher.h"
+#include "zypp/base/StrMatcher.h"
 
 #include "zypp/PoolQuery.h"
 
@@ -165,13 +165,13 @@ namespace zypp
     /////////////////////////////////////////////////////////////////
     /** Match data per attribtue.
      *
-     * This includes the attribute itself, an optional \ref sat::AttrMatcher
+     * This includes the attribute itself, an optional \ref StrMatcher
      * to restrict the query to certain string values, and an optional
      * boolean \ref Predicate that may apply further restrictions that can
-     * not be expressed by the \ref attrMatcher.
+     * not be expressed by the \ref strMatcher.
      *
      * Example for such a \ref predicate would be an additional edition range
-     * check whan looking for dependencies. The \ref attrMatcher would
+     * check whan looking for dependencies. The \ref strMatcher would
      * find potential matches by looking at the dependencies name, the
      * predicate will then check the edition ranges.
      *
@@ -191,15 +191,15 @@ namespace zypp
       AttrMatchData()
       {}
 
-      AttrMatchData( sat::SolvAttr attr_r, const sat::AttrMatcher & attrMatcher_r )
+      AttrMatchData( sat::SolvAttr attr_r, const StrMatcher & strMatcher_r )
         : attr( attr_r )
-        , attrMatcher( attrMatcher_r )
+        , strMatcher( strMatcher_r )
       {}
 
-      AttrMatchData( sat::SolvAttr attr_r, const sat::AttrMatcher & attrMatcher_r,
+      AttrMatchData( sat::SolvAttr attr_r, const StrMatcher & strMatcher_r,
                      const Predicate & predicate_r, const std::string & predicateStr_r )
         : attr( attr_r )
-        , attrMatcher( attrMatcher_r )
+        , strMatcher( strMatcher_r )
         , predicate( predicate_r )
         , predicateStr( predicateStr_r )
       {}
@@ -225,11 +225,11 @@ namespace zypp
       {
         std::string ret( "AttrMatchData" );
         str::appendEscaped( ret, attr.asString() );
-        str::appendEscaped( ret, attrMatcher.searchstring() );
+        str::appendEscaped( ret, strMatcher.searchstring() );
         // TODO: Actually the flag should be serialized too, but for PoolQuery
         // it's by now sufficient to differ between mode OTHER and others,
         // i.e. whether to compile or not compile.
-        str::appendEscaped( ret, attrMatcher.flags().mode() == Match::OTHER ? "C" : "X" );
+        str::appendEscaped( ret, strMatcher.flags().mode() == Match::OTHER ? "C" : "X" );
         str::appendEscaped( ret, predicateStr );
         return ret;
       }
@@ -248,9 +248,9 @@ namespace zypp
 
         AttrMatchData ret;
         ret.attr = sat::SolvAttr( words[1] );
-        ret.attrMatcher = sat::AttrMatcher( words[2] );
+        ret.strMatcher = StrMatcher( words[2] );
         if ( words[3] == "C" )
-          ret.attrMatcher.setFlags( Match::OTHER );
+          ret.strMatcher.setFlags( Match::OTHER );
         ret.predicateStr = words[4];
 
         // now the predicate
@@ -301,7 +301,7 @@ namespace zypp
      }
 
       sat::SolvAttr    attr;
-      sat::AttrMatcher attrMatcher;
+      StrMatcher strMatcher;
       Predicate        predicate;
       std::string      predicateStr;
     };
@@ -309,7 +309,7 @@ namespace zypp
     /** \relates AttrMatchData */
     inline std::ostream & operator<<( std::ostream & str, const AttrMatchData & obj )
     {
-      str << obj.attr << ": " << obj.attrMatcher;
+      str << obj.attr << ": " << obj.strMatcher;
       if ( obj.predicate )
         str << " +(" << obj.predicateStr << ")";
       return str;
@@ -319,7 +319,7 @@ namespace zypp
     inline bool operator==( const AttrMatchData & lhs, const AttrMatchData & rhs )
     {
       return ( lhs.attr == rhs.attr
-               && lhs.attrMatcher == rhs.attrMatcher
+               && lhs.strMatcher == rhs.strMatcher
                && lhs.predicateStr == rhs.predicateStr );
     }
 
@@ -332,8 +332,8 @@ namespace zypp
     {
       if ( lhs.attr != rhs.attr )
         return (  lhs.attr < rhs.attr );
-      if ( lhs.attrMatcher != rhs.attrMatcher )
-        return (  lhs.attrMatcher < rhs.attrMatcher );
+      if ( lhs.strMatcher != rhs.strMatcher )
+        return (  lhs.strMatcher < rhs.strMatcher );
       if ( lhs.predicateStr != rhs.predicateStr )
         return (  lhs.predicateStr < rhs.predicateStr );
       return false;
@@ -420,11 +420,11 @@ namespace zypp
   public:
     /** Compile the regex.
      * Basically building the \ref _attrMatchList from strings.
-     * \throws MatchException Any of the exceptions thrown by \ref AttrMatcher::compile.
+     * \throws MatchException Any of the exceptions thrown by \ref StrMatcher::compile.
      */
     void compile() const;
 
-    /** AttrMatcher per attribtue. */
+    /** StrMatcher per attribtue. */
     mutable AttrMatchList _attrMatchList;
 
   private:
@@ -501,7 +501,7 @@ namespace zypp
       if (joined.size() > 1) // switch to regex for multiple strings
         cflags.setModeRegex();
       _attrMatchList.push_back( AttrMatchData( _attrs.begin()->first,
-                                sat::AttrMatcher( rcstrings, cflags ) ) );
+                                StrMatcher( rcstrings, cflags ) ) );
     }
 
     // // MULTIPLE ATTRIBUTES
@@ -559,8 +559,8 @@ attremptycheckend:
         }
         if (joined.size() > 1) // switch to regex for multiple strings
           cflags.setModeRegex();
-        // May use the same AttrMatcher for all
-        sat::AttrMatcher matcher( rcstrings, cflags );
+        // May use the same StrMatcher for all
+        StrMatcher matcher( rcstrings, cflags );
         for_( ai, _attrs.begin(), _attrs.end() )
         {
           _attrMatchList.push_back( AttrMatchData( ai->first, matcher ) );
@@ -582,7 +582,7 @@ attremptycheckend:
           if (joined.size() > 1) // switch to regex for multiple strings
             cflags.setModeRegex();
           _attrMatchList.push_back( AttrMatchData( ai->first,
-                                    sat::AttrMatcher( s, cflags ) ) );
+                                    StrMatcher( s, cflags ) ) );
         }
       }
     }
@@ -594,11 +594,11 @@ attremptycheckend:
       invokeOnEach( _strings.begin(), _strings.end(), EmptyFilter(), MyInserter(global) );
       for_( it, _uncompiledPredicated.begin(), _uncompiledPredicated.end() )
       {
-        if ( it->attrMatcher.flags().mode() == Match::OTHER )
+        if ( it->strMatcher.flags().mode() == Match::OTHER )
         {
           // need to compile:
           StrContainer joined( global );
-          const std::string & mstr( it->attrMatcher.searchstring() );
+          const std::string & mstr( it->strMatcher.searchstring() );
           if ( ! mstr.empty() )
             joined.insert( mstr );
 
@@ -608,7 +608,7 @@ attremptycheckend:
             cflags.setModeRegex();
 
           _attrMatchList.push_back( AttrMatchData( it->attr,
-                                    sat::AttrMatcher( rcstrings, cflags ),
+                                    StrMatcher( rcstrings, cflags ),
                                                       it->predicate, it->predicateStr ) );
         }
         else
@@ -627,13 +627,13 @@ attremptycheckend:
       if ( _strings.size() > 1 ) // switch to regex for multiple strings
         cflags.setModeRegex();
       _attrMatchList.push_back( AttrMatchData( sat::SolvAttr::allAttr,
-                                sat::AttrMatcher( rcstrings, cflags ) ) );
+                                StrMatcher( rcstrings, cflags ) ) );
     }
 
     // Finally check here, whether all involved regex compile.
     for_( it, _attrMatchList.begin(), _attrMatchList.end() )
     {
-      it->attrMatcher.compile(); // throws on error
+      it->strMatcher.compile(); // throws on error
     }
     //DBG << asString() << endl;
   }
@@ -865,7 +865,7 @@ attremptycheckend:
 
     // Match::OTHER indicates need to compile
     // (merge global search strings into name).
-    AttrMatchData attrMatchData( attr, sat::AttrMatcher( name, Match::OTHER ) );
+    AttrMatchData attrMatchData( attr, StrMatcher( name, Match::OTHER ) );
 
     if ( isDependencyAttribute( attr ) )
       attrMatchData.addPredicate( EditionRangePredicate( op, edition, arch ) );
@@ -882,7 +882,7 @@ attremptycheckend:
       return;
 
     // Matches STRING per default. (won't get compiled!)
-    AttrMatchData attrMatchData( attr, sat::AttrMatcher( cap.name().asString() ) );
+    AttrMatchData attrMatchData( attr, StrMatcher( cap.name().asString() ) );
 
     if ( isDependencyAttribute( attr ) )
       attrMatchData.addPredicate( CapabilityMatchPredicate( cap_r ) );
@@ -1487,8 +1487,8 @@ attremptycheckend:
             {
               const AttrMatchData & matchData( *mi );
               sat::LookupAttr q( matchData.attr, inSolvable );
-              if ( matchData.attrMatcher ) // an empty searchstring matches always
-                q.setAttrMatcher( matchData.attrMatcher );
+              if ( matchData.strMatcher ) // an empty searchstring matches always
+                q.setStrMatcher( matchData.strMatcher );
 
               if ( ! q.empty() ) // there are matches.
               {
@@ -1535,7 +1535,7 @@ attremptycheckend:
 	  _edition = query_r->_edition;
 	  // Status restriction:
 	  _status_flags = query_r->_status_flags;
-          // AttrMatcher
+          // StrMatcher
           _attrMatchList = query_r->_attrMatchList;
 	}
 
@@ -1561,8 +1561,8 @@ attremptycheckend:
 	  {
             const AttrMatchData & matchData( _attrMatchList.front() );
 	    q.setAttr( matchData.attr );
-            if ( matchData.attrMatcher ) // empty searchstring matches always
-              q.setAttrMatcher( matchData.attrMatcher );
+            if ( matchData.strMatcher ) // empty searchstring matches always
+              q.setStrMatcher( matchData.strMatcher );
 	  }
           else // more than 1 attr (but not all)
           {
@@ -1635,8 +1635,8 @@ attremptycheckend:
           {
             const AttrMatchData & matchData( *mi );
             sat::LookupAttr q( matchData.attr, inSolvable );
-            if ( matchData.attrMatcher ) // an empty searchstring matches always
-              q.setAttrMatcher( matchData.attrMatcher );
+            if ( matchData.strMatcher ) // an empty searchstring matches always
+              q.setStrMatcher( matchData.strMatcher );
 
             if ( ! q.empty() ) // there are matches.
             {
@@ -1669,7 +1669,7 @@ attremptycheckend:
         Edition _edition;
         /** Installed status filter flags. \see PoolQuery::StatusFilter */
         int _status_flags;
-        /** AttrMatcher per attribtue. */
+        /** StrMatcher per attribtue. */
         AttrMatchList _attrMatchList;
     };
     ///////////////////////////////////////////////////////////////////

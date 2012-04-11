@@ -1,6 +1,6 @@
 #include "TestSetup.h"
 #include <zypp/sat/LookupAttr.h>
-#include <zypp/sat/AttrMatcher.h>
+#include <zypp/base/StrMatcher.h>
 #include <zypp/ResObjects.h>
 
 ///////////////////////////////////////////////////////////////////
@@ -69,13 +69,13 @@ BOOST_AUTO_TEST_CASE(Match_operator)
 
 ///////////////////////////////////////////////////////////////////
 //
-//	CLASS NAME : AttrMatcher
+//	CLASS NAME : StrMatcher
 //
 ///////////////////////////////////////////////////////////////////
 
-BOOST_AUTO_TEST_CASE(AttrMatcher_defaultconstructed)
+BOOST_AUTO_TEST_CASE(StrMatcher_defaultconstructed)
 {
-  sat::AttrMatcher m;
+  StrMatcher m;
   BOOST_CHECK_EQUAL( m.flags(), Match::NOTHING );
   BOOST_CHECK( !m );	// eval in boolean context
   BOOST_CHECK( m.searchstring().empty() );
@@ -90,15 +90,15 @@ BOOST_AUTO_TEST_CASE(AttrMatcher_defaultconstructed)
   BOOST_CHECK( m );	// eval in boolean context
 }
 
-BOOST_AUTO_TEST_CASE(AttrMatcher_OTHER)
+BOOST_AUTO_TEST_CASE(StrMatcher_OTHER)
 {
-  sat::AttrMatcher m( "fau", Match::OTHER );
+  StrMatcher m( "fau", Match::OTHER );
   BOOST_CHECK_THROW( m.compile(), MatchUnknownModeException );
 }
 
-BOOST_AUTO_TEST_CASE(AttrMatcher_STRING)
+BOOST_AUTO_TEST_CASE(StrMatcher_STRING)
 {
-  sat::AttrMatcher m( "fau" );
+  StrMatcher m( "fau" );
   BOOST_CHECK_EQUAL( m.flags(), Match::STRING );
   BOOST_CHECK( !m( "" ) );
   BOOST_CHECK( !m( "a" ) );
@@ -106,9 +106,9 @@ BOOST_AUTO_TEST_CASE(AttrMatcher_STRING)
   BOOST_CHECK( !m( "default" ) );
 }
 
-BOOST_AUTO_TEST_CASE(AttrMatcher_STRINGSTART)
+BOOST_AUTO_TEST_CASE(StrMatcher_STRINGSTART)
 {
-  sat::AttrMatcher m( "fau", Match::STRINGSTART );
+  StrMatcher m( "fau", Match::STRINGSTART );
   BOOST_CHECK( !m( "" ) );
   BOOST_CHECK( !m( "a" ) );
   BOOST_CHECK( m( "fau" ) );
@@ -116,9 +116,9 @@ BOOST_AUTO_TEST_CASE(AttrMatcher_STRINGSTART)
   BOOST_CHECK( !m( "default" ) );
 }
 
-BOOST_AUTO_TEST_CASE(AttrMatcher_STRINGEND)
+BOOST_AUTO_TEST_CASE(StrMatcher_STRINGEND)
 {
-  sat::AttrMatcher m( "fau", Match::STRINGEND );
+  StrMatcher m( "fau", Match::STRINGEND );
   BOOST_CHECK( !m( "" ) );
   BOOST_CHECK( !m( "a" ) );
   BOOST_CHECK( m( "fau" ) );
@@ -126,9 +126,9 @@ BOOST_AUTO_TEST_CASE(AttrMatcher_STRINGEND)
   BOOST_CHECK( !m( "default" ) );
 }
 
-BOOST_AUTO_TEST_CASE(AttrMatcher_REGEX)
+BOOST_AUTO_TEST_CASE(StrMatcher_REGEX)
 {
-  sat::AttrMatcher m( "fau" );
+  StrMatcher m( "fau" );
 
   BOOST_CHECK( !m.isCompiled() );
   BOOST_CHECK_NO_THROW( m.compile() );
@@ -150,7 +150,7 @@ BOOST_AUTO_TEST_CASE(AttrMatcher_REGEX)
 }
 
 #if 0
-BOOST_AUTO_TEST_CASE(AttrMatcher_)
+BOOST_AUTO_TEST_CASE(StrMatcher_)
 {
   base::LogControl::TmpLineWriter shutUp( new log::FileLineWriter( "/tmp/YLOG" ) );
   MIL << "GO" << endl;

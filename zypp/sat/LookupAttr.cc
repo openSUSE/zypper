@@ -19,7 +19,7 @@
 
 #include "zypp/sat/Pool.h"
 #include "zypp/sat/LookupAttr.h"
-#include "zypp/sat/AttrMatcher.h"
+#include "zypp/base/StrMatcher.h"
 
 #include "zypp/CheckSum.h"
 
@@ -80,13 +80,13 @@ namespace zypp
             _parent = p;
         }
 
-        const AttrMatcher & attrMatcher() const
-        { return _attrMatcher; }
+        const StrMatcher & strMatcher() const
+        { return _strMatcher; }
 
-        void setAttrMatcher( const AttrMatcher & matcher_r )
+        void setStrMatcher( const StrMatcher & matcher_r )
         {
           matcher_r.compile();
-          _attrMatcher = matcher_r;
+          _strMatcher = matcher_r;
         }
 
       public:
@@ -135,7 +135,7 @@ namespace zypp
           else if ( _repo )
             whichRepo = _repo.id();
 
-          detail::DIWrap dip( whichRepo, _solv.id(), _attr.id(), _attrMatcher.searchstring(), _attrMatcher.flags().get() );
+          detail::DIWrap dip( whichRepo, _solv.id(), _attr.id(), _strMatcher.searchstring(), _strMatcher.flags().get() );
           if ( _parent != SolvAttr::noAttr )
             ::dataiterator_prepend_keyname( dip.get(), _parent.id() );
 
@@ -150,7 +150,7 @@ namespace zypp
         SolvAttr   _parent;
         Repository _repo;
         Solvable   _solv;
-        AttrMatcher _attrMatcher;
+        StrMatcher _strMatcher;
 
       private:
         friend Impl * rwcowClone<Impl>( const Impl * rhs );
@@ -199,11 +199,11 @@ namespace zypp
     void LookupAttr::setAttr( SolvAttr attr_r )
     { _pimpl->setAttr( attr_r ); }
 
-    const AttrMatcher & LookupAttr::attrMatcher() const
-    { return _pimpl->attrMatcher(); }
+    const StrMatcher & LookupAttr::strMatcher() const
+    { return _pimpl->strMatcher(); }
 
-    void LookupAttr::setAttrMatcher( const AttrMatcher & matcher_r )
-    { _pimpl->setAttrMatcher( matcher_r ); }
+    void LookupAttr::setStrMatcher( const StrMatcher & matcher_r )
+    { _pimpl->setStrMatcher( matcher_r ); }
 
     ///////////////////////////////////////////////////////////////////
 
