@@ -19,7 +19,6 @@ STRIP_FROM_INC_PATH    =
 SHORT_NAMES            = NO
 JAVADOC_AUTOBRIEF      = YES
 MULTILINE_CPP_IS_BRIEF = NO
-DETAILS_AT_TOP         = NO
 INHERIT_DOCS           = YES
 DISTRIBUTE_GROUP_DOC   = NO
 SEPARATE_MEMBER_PAGES  = NO
@@ -70,7 +69,7 @@ WARN_LOGFILE           =
 #---------------------------------------------------------------------------
 # configuration options related to the input files
 #---------------------------------------------------------------------------
-INPUT                  = @ZYPP_DOCINCLUDE_DIR@ @ZYPP_SOURCE_DIR@ @ZYPP_TESTUTILS_DIR@
+INPUT                  = @ZYPP_DOCINCLUDE_DIR@ @ZYPP_SOURCE_DIR@
 FILE_PATTERNS          = *.h *.hh *.hxx *.hpp *.h++ *.c *.cc *.cxx *.cpp *.c++ *.tcc *.hcc *.doc
 RECURSIVE              = YES
 EXCLUDE                =
