@@ -4,7 +4,7 @@
 
 \author Michael Andres <ma@suse.de>
 
-\section zypp-envars Environment Variables
+\section zypp-envars-intro Environment Variables
 
 Note that for Boolean variables we usually test whether the variable exists and not for the assigned value.
 
