@@ -21,7 +21,9 @@
 #include "zypp/base/Logger.h"
 #include "zypp/base/String.h"
 #include "zypp/base/IOStream.h"
+#include "zypp/base/StrMatcher.h"
 
+#include "zypp/AutoDispose.h"
 #include "zypp/ExternalProgram.h"
 #include "zypp/PathInfo.h"
 #include "zypp/Digest.h"
@@ -538,70 +540,87 @@ namespace zypp
       return _Log_Result( ret, "returned" );
     }
 
-    ///////////////////////////////////////////////////////////////////
-    //
-    //	METHOD NAME : readdir
-    //  METHOD TYPE : int
-    //
-    int readdir( std::list<std::string> & retlist,
-                 const Pathname & path, bool dots )
+    ///////////////////////////////////////////////////////////////////////
+    // dirForEach
+    ///////////////////////////////////////////////////////////////////////
+
+    const StrMatcher & matchNoDots()
     {
-      retlist.clear();
-
-      MIL << "readdir " << path << ' ';
-
-      DIR * dir = ::opendir( path.asString().c_str() );
-      if ( ! dir ) {
-        return _Log_Result( errno );
-      }
-
-      struct dirent *entry;
-      while ( (entry = ::readdir( dir )) != 0 ) {
-
-        if ( entry->d_name[0] == '.' ) {
-          if ( !dots )
-            continue;
-          if ( entry->d_name[1] == '\0'
-               || (    entry->d_name[1] == '.'
-                    && entry->d_name[2] == '\0' ) )
-            continue;
-        }
-        retlist.push_back( entry->d_name );
-      }
-
-      ::closedir( dir );
-
-      return _Log_Result( 0 );
+      static StrMatcher noDots( "[^.]*", Match::GLOB );
+      return noDots;
     }
 
-
-    ///////////////////////////////////////////////////////////////////
-    //
-    //	METHOD NAME : readdir
-    //	METHOD TYPE : int
-    //
-    int readdir( std::list<Pathname> & retlist,
-                 const Pathname & path, bool dots )
+    int dirForEach( const Pathname & dir_r, function<bool(const Pathname &, const char *const)> fnc_r )
     {
-      retlist.clear();
+      if ( ! fnc_r )
+	return 0;
 
-      std::list<string> content;
-      int res = readdir( content, path, dots );
+      AutoDispose<DIR *> dir( ::opendir( dir_r.c_str() ),
+			      []( DIR * dir_r ) { if ( dir_r ) ::closedir( dir_r ); } );
 
-      if ( !res ) {
-        for ( std::list<string>::const_iterator it = content.begin(); it != content.end(); ++it ) {
-          retlist.push_back( path + *it );
-        }
+      MIL << "readdir " << dir_r << ' ';
+      if ( ! dir )
+	return _Log_Result( errno );
+      MIL << endl; // close line before callbacks are invoked.
+
+      int ret = 0;
+      for ( struct dirent * entry = ::readdir( dir ); entry; entry = ::readdir( dir ) )
+      {
+        if ( entry->d_name[0] == '.' && ( entry->d_name[1] == '\0' || ( entry->d_name[1] == '.' && entry->d_name[2] == '\0' ) ) )
+	  continue; // omitt . and ..
+
+	if ( ! fnc_r( dir_r, entry->d_name ) )
+	{
+	  ret = -1;
+	  break;
+	}
       }
+      return ret;
+    }
 
-      return res;
+    int dirForEach( const Pathname & dir_r, const StrMatcher & matcher_r, function<bool( const Pathname &, const char *const)> fnc_r )
+    {
+      if ( ! fnc_r )
+	return 0;
+
+      bool nodots = ( &matcher_r == &matchNoDots() );
+      return dirForEach( dir_r,
+			 [&]( const Pathname & dir_r, const char *const name_r )->bool
+			 {
+			   if ( ( nodots && name_r[0] == '.' ) || ! matcher_r( name_r ) )
+			     return true;
+			   return fnc_r( dir_r, name_r );
+			 } );
     }
 
     ///////////////////////////////////////////////////////////////////
-    //
-    //	METHOD NAME : readdir
-    //	METHOD TYPE : int
-    //
+    // readdir
+    ///////////////////////////////////////////////////////////////////
+
+    int readdir( std::list<std::string> & retlist_r, const Pathname & path_r, bool dots_r )
+    {
+      retlist_r.clear();
+      return dirForEach( path_r,
+			 [&]( const Pathname & dir_r, const char *const name_r )->bool
+			 {
+			   if ( dots_r || name_r[0] != '.' )
+			     retlist_r.push_back( name_r );
+			   return true;
+			 } );
+    }
+
+
+    int readdir( std::list<Pathname> & retlist_r, const Pathname & path_r, bool dots_r )
+    {
+      retlist_r.clear();
+      return dirForEach( path_r,
+			 [&]( const Pathname & dir_r, const char *const name_r )->bool
+			 {
+			   if ( dots_r || name_r[0] != '.' )
+			     retlist_r.push_back( dir_r/name_r );
+			   return true;
+			 } );
+    }
 
     bool DirEntry::operator==( const DirEntry &rhs ) const
     {
@@ -611,49 +630,27 @@ namespace zypp
       return ((name == rhs.name ) && (type == rhs.type));
     }
 
-    int readdir( DirContent & retlist, const Pathname & path,
-                 bool dots, PathInfo::Mode statmode )
+    int readdir( DirContent & retlist_r, const Pathname & path_r, bool dots_r, PathInfo::Mode statmode_r )
     {
-      retlist.clear();
-
-      std::list<string> content;
-      int res = readdir( content, path, dots );
-
-      if ( !res ) {
-        for ( std::list<string>::const_iterator it = content.begin(); it != content.end(); ++it ) {
-          PathInfo p( path + *it, statmode );
-          retlist.push_back( DirEntry( *it, p.fileType() ) );
-        }
-      }
-
-      return res;
+      retlist_r.clear();
+      return dirForEach( path_r,
+			 [&]( const Pathname & dir_r, const char *const name_r )->bool
+			 {
+			   if ( dots_r || name_r[0] != '.' )
+			     retlist_r.push_back( DirEntry( name_r, PathInfo( dir_r/name_r, statmode_r ).fileType() ) );
+			   return true;
+			 } );
     }
 
     ///////////////////////////////////////////////////////////////////
-    //
-    //	METHOD NAME : is_empty_dir
-    //	METHOD TYPE : int
-    //
-    int is_empty_dir(const Pathname & path)
+    // is_empty_dir
+    ///////////////////////////////////////////////////////////////////
+
+    int is_empty_dir( const Pathname & path_r )
     {
-      DIR * dir = ::opendir( path.asString().c_str() );
-      if ( ! dir ) {
-        return _Log_Result( errno );
-      }
-
-      struct dirent *entry;
-      while ( (entry = ::readdir( dir )) != NULL )
-      {
-        std::string name(entry->d_name);
-
-        if ( name == "." || name == "..")
-	  continue;
-
-        break;
-      }
-      ::closedir( dir );
-
-      return entry != NULL ? -1 : 0;
+      return dirForEach( path_r,
+			 [&]( const Pathname & dir_r, const char *const name_r )->bool
+			 { return false; } );
     }
 
     ///////////////////////////////////////////////////////////////////
