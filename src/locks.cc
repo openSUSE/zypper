@@ -116,13 +116,12 @@ void safe_lexical_cast (Source s, Target &tr) {
 
 void add_locks(Zypper & zypper, const Zypper::ArgList & args, const ResKindSet & kinds)
 {
-  Locks::size_type start = 0;
   try
   {
     Locks & locks = Locks::instance();
     locks.read(Pathname::assertprefix
         (zypper.globalOpts().root_dir, ZConfig::instance().locksFile()));
-    start = locks.size();
+    Locks::size_type start = locks.size();
     for_(it,args.begin(),args.end())
     {
       PoolQuery q;
@@ -174,7 +173,7 @@ void add_locks(Zypper & zypper, const Zypper::ArgList & args, const ResKindSet &
 }
 
 
-void remove_locks(Zypper & zypper, const Zypper::ArgList & args)
+void remove_locks(Zypper & zypper, const Zypper::ArgList & args, const ResKindSet & kinds)
 {
   try
   {
@@ -199,11 +198,21 @@ void remove_locks(Zypper & zypper, const Zypper::ArgList & args)
         //TODO fill query in one method to have consistent add/remove
         //TODO what to do with repo and kinds?
         PoolQuery q;
-         // derive kind from the name: (rl should also support -t)
-        sat::Solvable::SplitIdent split( *args_it );
-        q.addAttribute( sat::SolvAttr::name, split.name().asString() );
-        q.addKind( split.kind() );
-        q.setMatchGlob();
+	if ( kinds.empty() ) // derive it from the name
+	{
+	  // derive kind from the name: (rl should also support -t)
+	  sat::Solvable::SplitIdent split( *args_it );
+	  q.addAttribute( sat::SolvAttr::name, split.name().asString() );
+	  q.addKind( split.kind() );
+	}
+	else
+	{
+	  q.addAttribute(sat::SolvAttr::name, *args_it);
+	  for_(itk, kinds.begin(), kinds.end()) {
+	    q.addKind(*itk);
+	  }
+	}
+	q.setMatchGlob();
         parsed_opts::const_iterator itr;
         if ((itr = copts.find("repo")) != copts.end())
         {
