@@ -1,4 +1,10 @@
 -------------------------------------------------------------------
+Mon Apr 16 21:07:59 CEST 2012 - ma@suse.de
+
+- Let zypper remove lock follow addlock with respect to args and behavior (bnc#751976)
+- version 1.3.19
+
+-------------------------------------------------------------------
 Fri Mar 23 13:15:00 CET 2012 - ma@suse.de
 
 - building on Code10: add locale directories _NOT_ owned by Code10 filesystem
