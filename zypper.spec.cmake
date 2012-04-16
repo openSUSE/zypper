@@ -1,10 +1,16 @@
+# spec file for package zypper
 #
-# spec file for package @PACKAGE@ (Version @VERSION@)
+# Copyright (c) 2006-2011 SUSE LINUX Products GmbH, Nuernberg, Germany.
 #
-# Copyright (c) 2007 SUSE LINUX Products GmbH, Nuernberg, Germany.
-# This file and all modifications and additions to the pristine
-# package are under the same license as the package itself.
-#
+# All modifications and additions to the file contributed by third parties
+# remain the property of their copyright owners, unless otherwise agreed
+# upon. The license for this file, and modifications and additions to the
+# file, is the same license as for the pristine package itself (unless the
+# license for the pristine package is not an Open Source License, in which
+# case the license is the MIT License). An "Open Source License" is a
+# license that conforms to the Open Source Definition (Version 1.9)
+# published by the Open Source Initiative.
+
 # Please submit bugfixes or comments via http://bugs.opensuse.org/
 #
 
