@@ -1,4 +1,10 @@
 -------------------------------------------------------------------
+Mon Apr 16 21:03:16 CEST 2012 - ma@suse.de
+
+- Let zypper remove lock follow addlock with respect to args and behavior (bnc#751976)
+- version 1.6.163
+
+-------------------------------------------------------------------
 Thu Feb 23 12:27:22 CET 2012 - ma@suse.de
 
 - Fix augeas lense enforcing a non empty anonymous section (bnc#748144)
