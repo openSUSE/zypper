@@ -52,6 +52,7 @@ extern "C"
 #include "zypp/solver/detail/SolverQueueItemDelete.h"
 #include "zypp/solver/detail/SystemCheck.h"
 #include "zypp/sat/Transaction.h"
+#include "zypp/sat/Queue.h"
 
 /////////////////////////////////////////////////////////////////////////
 namespace zypp
@@ -519,11 +520,14 @@ SATResolver::solving(const CapabilitySet & requires_caps,
     Queue recommendations;
     Queue suggestions;
     Queue orphaned;
+    Queue unneeded;
     queue_init(&recommendations);
     queue_init(&suggestions);
     queue_init(&orphaned);
+    queue_init(&unneeded);
     solver_get_recommendations(_solv, &recommendations, &suggestions, 0);
     solver_get_orphaned(_solv, &orphaned);
+    solver_get_unneeded(_solv, &unneeded, 1);
     /*  solvables which are recommended */
     for ( int i = 0; i < recommendations.count; ++i )
     {
@@ -546,9 +550,18 @@ SATResolver::solving(const CapabilitySet & requires_caps,
       poolItem.status().setOrphaned( true );
       _problem_items.push_back( poolItem );
     }
+
+    /*  solvables which are unneeded */
+    for ( int i = 0; i < unneeded.count; ++i )
+    {
+      PoolItem poolItem( getPoolItem( unneeded.elements[i] ) );
+      poolItem.status().setUnneeded( true );
+    }
+
     queue_free(&recommendations);
     queue_free(&suggestions);
     queue_free(&orphaned);
+    queue_free(&unneeded);
 
     /* Write validation state back to pool */
     Queue flags, solvableQueue;

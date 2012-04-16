@@ -71,7 +71,7 @@ namespace zypp
     typedef bit::Range<FieldType,TransactField::end,         2> TransactByField;
     typedef bit::Range<FieldType,TransactByField::end,       2> TransactDetailField;
     typedef bit::Range<FieldType,TransactDetailField::end,   1> LicenceConfirmedField;
-    typedef bit::Range<FieldType,LicenceConfirmedField::end, 3> WeakField;
+    typedef bit::Range<FieldType,LicenceConfirmedField::end, 4> WeakField;
     typedef bit::Range<FieldType,WeakField::end,             1> UserLockQueryField; // internal
     // enlarge FieldType if more bit's needed. It's not yet
     // checked by the compiler.
@@ -140,7 +140,8 @@ namespace zypp
         NO_WEAK 		= bit::RangeValue<WeakField,0>::value,
         SUGGESTED   		= bit::RangeValue<WeakField,1<<0>::value,
 	RECOMMENDED 		= bit::RangeValue<WeakField,1<<1>::value,
-	ORPHANED		= bit::RangeValue<WeakField,1<<2>::value
+	ORPHANED		= bit::RangeValue<WeakField,1<<2>::value,
+	UNNEEDED		= bit::RangeValue<WeakField,1<<3>::value
       };
 
     enum UserLockQuery // internal
@@ -187,6 +188,9 @@ namespace zypp
     bool isOrphaned() const
     { return _bitfield.test( ORPHANED ); }
 
+    bool isUnneeded() const
+    { return _bitfield.test( UNNEEDED ); }
+
     void resetWeak()
     { return fieldValueAssign<WeakField>( NO_WEAK ); }
 
@@ -198,6 +202,9 @@ namespace zypp
 
     void setOrphaned( bool toVal_r = true )
     { _bitfield.set( ORPHANED, toVal_r ); }
+
+    void setUnneeded( bool toVal_r = true )
+    { _bitfield.set( UNNEEDED, toVal_r ); }
 
   public:
     ValidateValue validate() const

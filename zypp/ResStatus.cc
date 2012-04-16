@@ -88,9 +88,10 @@ namespace zypp
 	( obj.isToBeUninstalledDueToUpgrade() ? "U" :
 	( obj.isToBeInstalledSoft() ? "S" : "_" ) ) );
 
-    str << (obj.isOrphaned() ? "o" : "" );
     str << (obj.isRecommended() ? "r" : "" );
     str << (obj.isSuggested() ? "s" : "" );
+    str << (obj.isOrphaned() ? "o" : "" );
+    str << (obj.isUnneeded() ? "u" : "" );
 
     return str;
   }
