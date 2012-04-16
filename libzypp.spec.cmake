@@ -16,6 +16,7 @@
 #
 
 # norootforbuild
+%define force_gcc_46 1
 
 
 Name:           @PACKAGE@
@@ -52,7 +53,11 @@ BuildRequires:  hal-devel
 BuildRequires:  boost-devel
 BuildRequires:  dejagnu
 BuildRequires:  doxygen
+%if %0%{?force_gcc_46}
+BuildRequires:  gcc-c++ = 4.6
+%else
 BuildRequires:  gcc-c++ >= 4.6
+%endif
 BuildRequires:  gettext-devel
 BuildRequires:  graphviz
 BuildRequires:  libxml2-devel
@@ -202,6 +207,10 @@ Authors:
 %build
 mkdir build
 cd build
+%if %0%{?force_gcc_46}
+export CC=gcc-4.6
+export CXX=gcc-4.6
+%endif
 export CFLAGS="$RPM_OPT_FLAGS"
 export CXXFLAGS="$RPM_OPT_FLAGS"
 unset TRANSLATION_SET
