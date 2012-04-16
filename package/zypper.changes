@@ -1,4 +1,15 @@
 -------------------------------------------------------------------
+Mon Apr 16 20:56:33 CEST 2012 - ma@suse.de
+
+- Let zypper remove lock follow addlock with respect to args and behavior (bnc#751976)
+- Typo (bnc#756192)
+- Improve source package related messages upon install and remove (bnc#755239)
+- Pass --root to libzypp early so lockfile is created chroot (bnc#575096)
+- Do not acquire a zypp lock for 'zypper ps' (bnc#703598)
+- Show note about possibly incomplete 'zypper ps' if not run as root (bnc#710872)
+- version 1.7.1
+
+-------------------------------------------------------------------
 Sun Apr 15 01:13:41 CEST 2012 - ma@suse.de
 
 - Update zypper-po.tar.bz2
