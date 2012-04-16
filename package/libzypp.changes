@@ -1,4 +1,19 @@
 -------------------------------------------------------------------
+Mon Apr 16 14:52:35 CEST 2012 - ma@suse.de
+
+- ResStatus: add 'unneeded' bit (determined by solver)
+- Force using gcc-4.6 until it builds with 4.7
+- Support multiversion definitions being read from files in /etc/zypp/multiversion.d.
+- Workaround doxygen SEGV and accept incomplete docs (until bnc#755402 is fixed)
+- Rename zypp::sat::AttrMatcher to zypp::StrMatcher (base/StrMatcher.h)
+- Support (source)package download by non-root user (bnc#755239)
+- Delay construction of ZYppGlobalLock until its actually needed (bnc#575096)
+- Fix buddy handling in solver results
+- Simplify Selectable::multiversionInstall
+- Don't cache defaultCandidate as it depends on solver::allowVendorChange flag (bnc#754286)
+- version 11.4.0 (4)
+
+-------------------------------------------------------------------
 Tue Apr 10 12:11:37 CEST 2012 - ma@suse.de
 
 - Update zypp-po.tar.bz2
