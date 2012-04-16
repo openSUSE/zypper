@@ -2183,6 +2183,7 @@ void Zypper::processCommandOptions()
   {
     static struct option options[] =
     {
+      {"type", required_argument, 0, 't'},
       {"repo", required_argument, 0, 'r'},
       // rug compatiblity (although rug does not seem to support this)
       {"catalog", required_argument, 0, 'c'},
@@ -2198,7 +2199,9 @@ void Zypper::processCommandOptions()
       "\n"
       "  Command options:\n"
       "-r, --repo <alias|#|URI>  Remove only locks with specified repository.\n"
-    ), "zypper locks");
+      "-t, --type <type>         Type of package (%s).\n"
+      "                          Default: %s.\n"
+    ), "zypper locks", "package, patch, pattern, product", "package");
     break;
   }
 
@@ -4390,21 +4393,34 @@ copts.end())
       return;
     }
 
-    if (_arguments.size() < 1)
+    if (_arguments.empty())
     {
       report_required_arg_missing(out(), _command_help);
       setExitCode(ZYPPER_EXIT_ERR_INVALID_ARGS);
       return;
     }
 
-    initRepoManager();
-    init_target(*this);
-    init_repos(*this);
-    if (exitCode() != ZYPPER_EXIT_OK)
-      return;
-    load_resolvables(*this);
+    ResKindSet kinds;
+    if (copts.count("type"))
+    {
+      std::list<std::string>::const_iterator it;
+      for (it = copts["type"].begin(); it != copts["type"].end(); ++it)
+      {
+        kind = string_to_kind( *it );
+        if (kind == ResObject::Kind())
+        {
+          out().error(boost::str(format(
+            _("Unknown package type '%s'.")) % *it));
+          setExitCode(ZYPPER_EXIT_ERR_INVALID_ARGS);
+          return;
+        }
+        kinds.insert(kind);
+      }
+    }
+    //else
+    //  let remove_locks determine the appropriate type
 
-    remove_locks(*this, _arguments);
+    remove_locks(*this, _arguments, kinds);
 
     break;
   }
