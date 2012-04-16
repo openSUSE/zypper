@@ -209,7 +209,7 @@ mkdir build
 cd build
 %if %0%{?force_gcc_46}
 export CC=gcc-4.6
-export CXX=gcc-4.6
+export CXX=g++-4.6
 %endif
 export CFLAGS="$RPM_OPT_FLAGS"
 export CXXFLAGS="$RPM_OPT_FLAGS"
