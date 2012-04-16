@@ -15,9 +15,11 @@
 #include <iosfwd>
 #include <boost/io/ios_state.hpp>
 
+#include "zypp/base/Flags.h"
 #include "zypp/base/PtrTypes.h"
-#include <zypp/base/SafeBool.h>
-#include <zypp/base/NonCopyable.h>
+#include "zypp/base/SafeBool.h"
+#include "zypp/base/Function.h"
+#include "zypp/base/NonCopyable.h"
 
 ///////////////////////////////////////////////////////////////////
 namespace zypp
@@ -171,40 +173,42 @@ namespace zypp
 
     /** Simple lineparser: Call functor \a consume_r for each line.
      *
-     * \param str_r The istream to read from.
-     * \param consume_r A reference to a function or functor. The loop is
-     * aborted if the function returns \c false.
-     * \code
-     * bool consume( const std::string & )
-     * { ... }
+     * \param str_r istream to read from.
+     * \param consume_r callback function taking linenumber and content
      *
-     * struct Consume : public std::unary_function<const std::string &, bool>
-     * {
-     *   bool operator()( const std::string & line_r )
-     *   { ... }
-     * };
+     * The loop is aborted if the callback  returns \c false.
+     *
+     * \code
+     *   iostr::forEachLine( InputStream( "/my/file/to/read.txt" ),
+     *                       []( int num_r, std::string line_r )->bool
+     *                       {
+     *                         MIL << " [" num_r << "]'" << line_r << "'" << endl;
+     *                         return true;
+     *                       } );
      * \endcode
      *
-     * \return A reference to \a consume_r.
-     *
-     * \todo Should be templated and specialized according to the
-     * functors return type, to allow \c void consumer.
+     * \return Number if lines consumed (negative if aborted by callback).
      */
-    template<class _Function>
-      _Function & forEachLine( std::istream & str_r, _Function & consume_r )
-      {
-        while ( str_r )
-          {
-            std::string l = getline( str_r );
-            if ( ! (str_r.fail() || str_r.bad()) )
-              {
-                // l contains valid data to be consumed.
-                if ( ! consume_r( l ) )
-                  break;
-              }
-          }
-        return consume_r;
-      }
+     int forEachLine( std::istream & str_r, function<bool(int, std::string)> consume_r );
+
+     /** \ref simpleParseFile modifications before consuming a line. */
+     enum ParseFlag
+     {
+       PF_LTRIM			= 1 << 0,		//< left trim whitespace
+       PF_RTRIM			= 1 << 1,		//< right trim whitespace
+       PF_TRIM			= PF_LTRIM | PF_RTRIM,	//< trim whitespace
+       PF_SKIP_EMPTY		= 1 << 2, 		//< skip lines containing whitespace only
+       PF_SKIP_SHARP_COMMENT	= 1 << 3		//< skip lines beginning with '#'
+     };
+     ZYPP_DECLARE_FLAGS( ParseFlags, ParseFlag );
+     ZYPP_DECLARE_OPERATORS_FOR_FLAGS( ParseFlags );
+
+     /** Simple lineparser optionally trimming and skipping comments. */
+     int simpleParseFile( std::istream & str_r, ParseFlags flags_r, function<bool(int, std::string)> consume_r );
+
+     /** \overload trimming lines, skipping '#'-comments and empty lines. */
+     inline int simpleParseFile( std::istream & str_r, function<bool(int, std::string)> consume_r )
+     { return simpleParseFile( str_r, PF_TRIM | PF_SKIP_EMPTY | PF_SKIP_SHARP_COMMENT , consume_r ); }
 
     /////////////////////////////////////////////////////////////////
   } // namespace iostr

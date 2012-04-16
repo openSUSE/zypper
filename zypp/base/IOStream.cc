@@ -10,12 +10,14 @@
  *
 */
 #include <iostream>
+#include <boost/mpl/assert.hpp>
+#include <boost/mpl/int.hpp>
 //#include "zypp/base/Logger.h"
 
 #include "zypp/base/IOStream.h"
+#include "zypp/base/String.h"
 
 using std::endl;
-
 ///////////////////////////////////////////////////////////////////
 namespace zypp
 { /////////////////////////////////////////////////////////////////
@@ -89,6 +91,63 @@ namespace zypp
 	return(_valid = false);
       }
       return(_valid = true);
+    }
+
+    ///////////////////////////////////////////////////////////////////
+    // forEachLine
+    ///////////////////////////////////////////////////////////////////
+
+    int forEachLine( std::istream & str_r, function<bool(int, std::string)> consume_r )
+    {
+      int lineno = 0;
+      while ( str_r )
+      {
+	std::string line( getline( str_r ) );
+	if ( ! (str_r.fail() || str_r.bad()) )
+	{
+	  // line contains valid data to be consumed.
+	  ++lineno;
+	  if ( consume_r && ! consume_r( lineno, line ) )
+	  {
+	    lineno = -lineno;
+	    break;
+	  }
+	}
+      }
+      return lineno;
+    }
+
+    // MPL checks to assert equal values for PF_?TRIM and str::?TRIM
+    BOOST_MPL_ASSERT_RELATION( int(PF_LTRIM), ==, int(str::L_TRIM) );
+    BOOST_MPL_ASSERT_RELATION( int(PF_RTRIM), ==, int(str::R_TRIM) );
+
+    int simpleParseFile( std::istream & str_r, ParseFlags flags_r, function<bool(int, std::string)> consume_r )
+    {
+      return forEachLine( str_r,
+			  [&]( int num_r, std::string line_r )->bool
+			  {
+			    if ( ! consume_r )
+			      return true;
+
+			    if ( flags_r )
+			    {
+			      if ( flags_r & PF_TRIM )
+				line_r = str::trim( line_r, str::Trim( unsigned(flags_r & PF_TRIM) ) );
+
+			      if ( flags_r & ~PF_TRIM )
+			      {
+				const char* firstNW = line_r.c_str();
+				while ( *firstNW == ' ' || *firstNW == '\t' )
+				  ++firstNW;
+				switch ( *firstNW )
+				{
+				  case '\0':	if ( flags_r & PF_SKIP_EMPTY )		return true; break;
+				  case '#':	if ( flags_r & PF_SKIP_SHARP_COMMENT )	return true; break;
+				}
+			      }
+			    }
+			    return consume_r( num_r, line_r );
+			  } );
     }
 
     /////////////////////////////////////////////////////////////////
