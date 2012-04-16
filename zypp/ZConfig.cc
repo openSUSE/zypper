@@ -402,6 +402,10 @@ namespace zypp
                 {
                   cfg_vendor_path = Pathname(value);
                 }
+                else if ( entry == "multiversiondir" )
+                {
+                  cfg_multiversion_path = Pathname(value);
+                }
                 else if ( entry == "solver.onlyRequires" )
                 {
                   solver_onlyRequires.set( str::strToBool( value, solver_onlyRequires ) );
@@ -428,7 +432,7 @@ namespace zypp
                 }
                 else if ( entry == "multiversion" )
                 {
-                  str::split( value, inserter( multiversion, multiversion.end() ), ", \t" );
+                  str::split( value, inserter( _multiversion, _multiversion.end() ), ", \t" );
                 }
                 else if ( entry == "locksfile.path" )
                 {
@@ -514,6 +518,7 @@ namespace zypp
     Pathname cfg_known_services_path;
 
     Pathname cfg_vendor_path;
+    Pathname cfg_multiversion_path;
     Pathname locks_file;
 
     Pathname update_data_path;
@@ -545,7 +550,8 @@ namespace zypp
 
     Pathname solver_checkSystemFile;
 
-    std::set<std::string> multiversion;
+    std::set<std::string> &		multiversion()		{ return getMultiversion(); }
+    const std::set<std::string> &	multiversion() const	{ return getMultiversion(); }
 
     bool apply_locks_file;
 
@@ -556,6 +562,35 @@ namespace zypp
     Pathname credentials_global_file_path;
 
     Option<Pathname> pluginsPath;
+
+  private:
+    std::set<std::string> & getMultiversion() const
+    {
+      if ( ! _multiversionInitialized )
+      {
+	Pathname multiversionDir( cfg_multiversion_path );
+	if ( multiversionDir.empty() )
+	  multiversionDir = ( cfg_config_path.empty() ? Pathname("/etc/zypp") : cfg_config_path ) / "multiversion.d";
+
+	filesystem::dirForEach( multiversionDir,
+				[&_multiversion]( const Pathname & dir_r, const char *const & name_r )->bool
+				{
+				  MIL << "Parsing " << dir_r/name_r << endl;
+				  iostr::simpleParseFile( InputStream( dir_r/name_r ),
+							  [&_multiversion]( int num_r, std::string line_r )->bool
+							  {
+							    DBG << "  found " << line_r << endl;
+							    _multiversion.insert( line_r );
+							    return true;
+							  } );
+				  return true;
+				} );
+	_multiversionInitialized = true;
+      }
+      return _multiversion;
+    }
+    mutable std::set<std::string> 	_multiversion;
+    mutable DefaultIntegral<bool,false>	_multiversionInitialized;
   };
   ///////////////////////////////////////////////////////////////////
 
@@ -778,9 +813,9 @@ namespace zypp
   void ZConfig::setSolverUpgradeRemoveDroppedPackages( bool val_r )	{ _pimpl->solverUpgradeRemoveDroppedPackages.set( val_r ); }
   void ZConfig::resetSolverUpgradeRemoveDroppedPackages()		{ _pimpl->solverUpgradeRemoveDroppedPackages.restoreToDefault(); }
 
-  const std::set<std::string> & ZConfig::multiversionSpec() const	{ return _pimpl->multiversion; }
-  void ZConfig::addMultiversionSpec( const std::string & name_r )	{ _pimpl->multiversion.insert( name_r ); }
-  void ZConfig::removeMultiversionSpec( const std::string & name_r )	{ _pimpl->multiversion.erase( name_r ); }
+  const std::set<std::string> & ZConfig::multiversionSpec() const	{ return _pimpl->multiversion(); }
+  void ZConfig::addMultiversionSpec( const std::string & name_r )	{ _pimpl->multiversion().insert( name_r ); }
+  void ZConfig::removeMultiversionSpec( const std::string & name_r )	{ _pimpl->multiversion().erase( name_r ); }
 
   bool ZConfig::apply_locks_file() const
   { return _pimpl->apply_locks_file; }
@@ -823,7 +858,6 @@ namespace zypp
     return ( _pimpl->history_log_path.empty() ?
         Pathname("/var/log/zypp/history") : _pimpl->history_log_path );
   }
-
 
   Pathname ZConfig::credentialsGlobalDir() const
   {
