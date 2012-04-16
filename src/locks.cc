@@ -158,6 +158,11 @@ void add_locks(Zypper & zypper, const Zypper::ArgList & args, const ResKindSet &
     }
     locks.save(Pathname::assertprefix
         (zypper.globalOpts().root_dir, ZConfig::instance().locksFile()));
+    if ( start != Locks::instance().size() )
+      zypper.out().info(_PL(
+	"Specified lock has been successfully added.",
+	"Specified locks have been successfully added.",
+	Locks::instance().size() - start));
   }
   catch(const Exception & e)
   {
@@ -165,11 +170,6 @@ void add_locks(Zypper & zypper, const Zypper::ArgList & args, const ResKindSet &
     zypper.out().error(e, _("Problem adding the package lock:"));
     zypper.setExitCode(ZYPPER_EXIT_ERR_ZYPP);
   }
-  if ( start != Locks::instance().size() )
-    zypper.out().info(_PL(
-      "Specified lock has been successfully added.",
-      "Specified locks have been successfully added.",
-      Locks::instance().size() - start));
 }
 
 
