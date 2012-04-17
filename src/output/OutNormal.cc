@@ -143,7 +143,7 @@ void OutNormal::displayProgress (const string & s, int percent)
     else
       cout << CLEARLN << outline;
 
-    _oneup = (outline.length() >= termwidth());
+    _oneup = (outline.length() > termwidth());
   }
   else
     cout << '.';
@@ -167,7 +167,7 @@ void OutNormal::displayTick (const string & s)
     else
       cout << CLEARLN << outline;
 
-    _oneup = (outline.length() >= termwidth());
+    _oneup = (outline.length() > termwidth());
   }
   else
     cout << '.';
@@ -249,17 +249,22 @@ void OutNormal::dwnldProgressStart(const zypp::Url & uri)
 
   if (_isatty)
     cout << CLEARLN;
-  cout << _("Retrieving:") << " ";
-  if (verbosity() == DEBUG)
-    cout << uri; //! \todo shorten to fit the width of the terminal
-  else
-    cout << zypp::Pathname(uri.getPathName()).basename();
-  if (_isatty)
-    cout << " [" << _("starting") << "]"; //! \todo align to the right
-  else
-    cout << " [" ;
 
-  cout << std::flush;
+  zypp::str::Str outstr;
+  outstr << _("Retrieving:") << " ";
+  if (verbosity() == DEBUG)
+    outstr << uri; //! \todo shorten to fit the width of the terminal
+  else
+    outstr << zypp::Pathname(uri.getPathName()).basename();
+  if (_isatty)
+    outstr << " [" << _("starting") << "]"; //! \todo align to the right
+  else
+    outstr << " [" ;
+
+  std::string outline( outstr );
+  cout << outline << std::flush;
+  _oneup = (outline.length() > termwidth());
+
   _newline = false;
 }
 
@@ -276,23 +281,30 @@ void OutNormal::dwnldProgress(const zypp::Url & uri,
     return;
   }
 
-  cout << CLEARLN << _("Retrieving:") << " ";
+  if(_oneup)
+    cout << CLEARLN << CURSORUP(1);
+  cout << CLEARLN;
+
+  zypp::str::Str outstr;
+  outstr << _("Retrieving:") << " ";
   if (verbosity() == DEBUG)
-    cout << uri; //! \todo shorten to fit the width of the terminal
+    outstr << uri; //! \todo shorten to fit the width of the terminal
   else
-    cout << zypp::Pathname(uri.getPathName()).basename();
+    outstr << zypp::Pathname(uri.getPathName()).basename();
   // dont display percents if invalid
   if ((value >= 0 && value <= 100) || rate >= 0)
   {
-    cout << " [";
+    outstr << " [";
     if (value >= 0 && value <= 100)
-      cout << value << "%";
+      outstr << value << "%";
     if (rate >= 0)
-      cout << " (" << zypp::ByteCount(rate) << "/s)";
-    cout << "]";
+      outstr << " (" << zypp::ByteCount(rate) << "/s)";
+    outstr << "]";
   }
 
-  cout << std::flush;
+  std::string outline( outstr );
+  cout << outline << std::flush;
+  _oneup = (outline.length() > termwidth());
   _newline = false;
 }
 
@@ -304,31 +316,36 @@ void OutNormal::dwnldProgressEnd(const zypp::Url & uri, long rate, bool error)
   if (!error && _use_colors)
     cout << get_color(COLOR_CONTEXT_MSG_STATUS);
 
+  zypp::str::Str outstr;
   if (_isatty)
   {
-    cout << CLEARLN << _("Retrieving:") << " ";
+    if(_oneup)
+      outstr << CLEARLN << CURSORUP(1);
+    outstr << CLEARLN;
+    outstr << _("Retrieving:") << " ";
     if (verbosity() == DEBUG)
-      cout << uri; //! \todo shorten to fit the width of the terminal
+      outstr << uri; //! \todo shorten to fit the width of the terminal
     else
-      cout << zypp::Pathname(uri.getPathName()).basename();
-    cout << " [";
+      outstr << zypp::Pathname(uri.getPathName()).basename();
+    outstr << " [";
     if (error)
-      print_color(_("error"), COLOR_CONTEXT_NEGATIVE);
+      fprint_color(outstr._str, _("error"), COLOR_CONTEXT_NEGATIVE);
     else
-      cout << _("done");
+      outstr << _("done");
   }
   else
-    cout << (error ? _("error") : _("done"));
+    outstr << (error ? _("error") : _("done"));
 
   if (rate >= 0)
-    cout << " (" << zypp::ByteCount(rate) << "/s)";
-  cout << "]";
+    outstr << " (" << zypp::ByteCount(rate) << "/s)";
+  outstr << "]";
+
+  std::string outline( outstr );
+  cout << outline << endl << std::flush;
+  _newline = true;
 
   if (!error && _use_colors)
-    cout << COLOR_RESET;
-
-  cout << endl << std::flush;
-  _newline = true;
+    outstr << COLOR_RESET;
 }
 
 void OutNormal::prompt(PromptId id,
