@@ -1,4 +1,10 @@
 -------------------------------------------------------------------
+Tue Apr 17 16:28:14 CEST 2012 - ma@suse.de
+
+- Fix eating terminal lines (bnc#735016)
+- version 1.6.164
+
+-------------------------------------------------------------------
 Mon Apr 16 21:03:16 CEST 2012 - ma@suse.de
 
 - Let zypper remove lock follow addlock with respect to args and behavior (bnc#751976)
