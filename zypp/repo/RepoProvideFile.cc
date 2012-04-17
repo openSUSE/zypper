@@ -274,7 +274,15 @@ namespace zypp
       // switch into the tmpspace (e.g. bnc#755239, download and
       // install srpms as user).
       Pathname destinationDir( repo_r.packagesPath() );
-      if ( ! PathInfo( destinationDir ).userMayW() )
+
+      PathInfo pi( destinationDir );
+      if ( ! pi.isExist() )
+      {
+	// try to create it...
+	assert_dir( destinationDir );
+	pi();
+      }
+      if ( ! pi.userMayW() )
       {
         WAR << "Destination dir '" << destinationDir << "' is not user writable, using tmp space." << endl;
         destinationDir = getZYpp()->tmpPath() / destinationDir;
