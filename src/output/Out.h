@@ -5,6 +5,9 @@
 
 #include <zypp/base/NonCopyable.h>
 #include <zypp/base/Exception.h>
+#include <zypp/base/String.h>
+#include <zypp/base/Flags.h>
+#include <zypp/base/DefaultIntegral.h>
 #include <zypp/Url.h>
 
 #include "utils/prompt.h"
@@ -12,6 +15,38 @@
 #include "output/prompt.h"
 
 class Table;
+
+// Too simple on small terminals as esc-sequences may get truncated.
+// A table like writer for attributed strings is desirable.
+struct TermLine
+{
+  enum SplitFlag
+  {
+    SF_CRUSH	= 1<<0,	//< truncate lhs, then rhs
+    SF_SPLIT	= 1<<1,	//< split line across two
+    SF_EXPAND	= 1<<2	//< expand short lines
+  };
+  ZYPP_DECLARE_FLAGS( SplitFlags, SplitFlag );
+
+  TermLine() {}
+  TermLine( SplitFlags flags_r ) : flagsHint( flags_r ) {}
+
+  zypp::str::Str lhs;				//< left side
+  zypp::str::Str rhs;				//< right side
+  zypp::DefaultIntegral<unsigned,0> lhidden;	//< size of embedded esc sequences
+  zypp::DefaultIntegral<unsigned,0> rhidden;	//< size of embedded esc sequences
+  SplitFlags flagsHint;				//< flags to use if no flags passed to \ref get
+
+  /** Return plain line made of lhs + rhs */
+  std::string get() const
+  { return std::string(lhs) + std::string(rhs); }
+
+  /** Return line optionally formated according to \a width_r and \a flags_r.
+   * If \a width_r or \a flags_r is zero a plain line made of lhs + rhs is returned.
+   */
+  std::string get( unsigned width_r, SplitFlags flags_r = SplitFlag(), char exp_r = ' ' ) const;
+};
+ZYPP_DECLARE_OPERATORS_FOR_FLAGS( TermLine::SplitFlags );
 
 /**
  * Base class for producing common (for now) zypper output.
@@ -97,6 +132,10 @@ public:
    *                  types of output.
    */
   virtual void info(const std::string & msg, Verbosity verbosity = NORMAL, Type mask = TYPE_ALL) = 0;
+
+  /** \ref info taking a \ref TermLine */
+  virtual void infoLine(const TermLine & msg_r, Verbosity verbosity_r = NORMAL, Type mask_r = TYPE_ALL)
+  { info( msg_r.get(), verbosity_r, mask_r ); }
 
   /**
    * Show a warning.

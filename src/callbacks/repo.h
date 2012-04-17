@@ -148,30 +148,27 @@ struct DownloadResolvableReportReceiver : public zypp::callback::ReceiveReport<z
     _url = url;
     Zypper & zypper = *Zypper::instance();
 
-    std::ostringstream s;
-    s << boost::format(_("Retrieving %s %s-%s.%s"))
+    TermLine outstr( TermLine::SF_SPLIT | TermLine::SF_EXPAND );
+    outstr.lhs << boost::format(_("Retrieving %s %s-%s.%s"))
         % kind_to_string_localized(_resolvable_ptr->kind(), 1)
         % _resolvable_ptr->name()
         % _resolvable_ptr->edition() % _resolvable_ptr->arch();
 
-    s << " (" << ++zypper.runtimeData().commit_pkg_current
-      << "/" << zypper.runtimeData().commit_pkgs_total << ")";
+    outstr.rhs << " (" << ++zypper.runtimeData().commit_pkg_current
+	<< "/" << zypper.runtimeData().commit_pkgs_total << ")";
 
     // temporary fix for bnc #545295
-    if (zypper.runtimeData().commit_pkg_current ==
-        zypper.runtimeData().commit_pkgs_total)
+    if ( zypper.runtimeData().commit_pkg_current == zypper.runtimeData().commit_pkgs_total )
       zypper.runtimeData().commit_pkg_current = 0;
 
-// grr, bad class??
-//    zypp::ResObject::constPtr ro =
-//      dynamic_pointer_cast<const zypp::ResObject::constPtr> (resolvable_ptr);
     zypp::Package::constPtr ro = zypp::asKind<zypp::Package> (resolvable_ptr);
-    if (ro) {
-      s << ", " << ro->downloadSize () << " "
+    if ( ro )
+    {
+      outstr.rhs << ", " << ro->downloadSize().asString( 5 ) << " "
           // TranslatorExplanation %s is package size like "5.6 M"
-          << boost::format(_("(%s unpacked)")) % ro->installSize();
+          << boost::format(_("(%s unpacked)")) % ro->installSize().asString( 5 );
     }
-    zypper.out().info(s.str());
+    zypper.out().infoLine( outstr );
     zypper.runtimeData().action_rpm_download = true;
   }
 

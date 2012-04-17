@@ -27,6 +27,11 @@ public:
   virtual void info(const std::string & msg, Verbosity verbosity = NORMAL, Type mask = TYPE_ALL);
 
   /**
+   * Prints info message optionally trunkated or expanded.
+   */
+  virtual void infoLine(const TermLine & msg, Verbosity verbosity = NORMAL, Type mask = TYPE_ALL);
+
+  /**
    * Prints \a msg prepended with <tt>"Warning: "</tt> to the standard output
    * and appends a newline.
    *
