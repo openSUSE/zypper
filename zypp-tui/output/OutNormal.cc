@@ -126,31 +126,31 @@ void OutNormal::displayProgress (const string & s, int percent)
 
   if (_isatty)
   {
-    string outline = s + " [";
+    TermLine outstr( TermLine::SF_CRUSH, '.' );
+    outstr.lhs << s;
+    outstr.rhs << " [";
     // dont display percents if invalid
     if (percent >= 0 && percent <= 100)
     {
-      std::ostringstream oss;
-      oss << percent << "%";
-      outline += oss.str();
+      outstr.rhs << percent << "%";
     }
     else
     {
       ++cursor;
-      outline += cursor.current();
+      outstr.rhs << cursor.current();
     }
-    outline += "]";
+    outstr.rhs << "]";
 
     if(_oneup)
-      cout << CLEARLN << CURSORUP(1) << CLEARLN << outline;
-    else
-      cout << CLEARLN << outline;
+      cout << CLEARLN << CURSORUP(1);
+    cout << CLEARLN;
 
+    std::string outline( outstr.get( termwidth() ) );
+    cout << outline << std::flush;
     _oneup = (outline.length() > termwidth());
   }
   else
-    cout << '.';
-  cout << std::flush;
+    cout << '.' << std::flush;
 }
 
 // ----------------------------------------------------------------------------
@@ -218,30 +218,40 @@ void OutNormal::progressEnd(const std::string & id, const string & label, bool e
   if (!error && _use_colors)
     cout << get_color(COLOR_CONTEXT_MSG_STATUS);
 
+  TermLine outstr( TermLine::SF_CRUSH, '.' );
   if (_isatty)
   {
     if(_oneup)
     {
-      cout << CLEARLN << CURSORUP(1) << CLEARLN;
+      cout << CLEARLN << CURSORUP(1);
       _oneup = false;
     }
+    cout << CLEARLN;
+
+    outstr.lhs << label;
+    outstr.rhs << " [";
+    if (error)
+    {
+      // a bit clmupsy and not perfect: hidden char counting
+      unsigned tag( std::string(outstr.rhs).size() );
+      std::string errstr( _("error") );
+      fprint_color(outstr.rhs._str, errstr, COLOR_CONTEXT_NEGATIVE);
+      outstr.rhidden += unsigned(std::string(outstr.rhs).size() - errstr.size()) - tag ;
+    }
     else
-      cout << CLEARLN;
-    cout << label << " [";
+      outstr.rhs << _("done");
   }
-
-  if (error)
-    print_color(_("error"), COLOR_CONTEXT_NEGATIVE);
   else
-    cout << _("done");
+    outstr.rhs << (error ? _("error") : _("done"));
 
-  cout << "]";
+  outstr.rhs << "]";
+
+  std::string outline( outstr.get( termwidth() ) );
+  cout << outline << endl << std::flush;
+  _newline = true;
 
   if (!error && _use_colors)
     cout << COLOR_RESET;
-
-  cout << endl << std::flush;
-  _newline = true;
 }
 
 // progress with download rate
@@ -253,7 +263,7 @@ void OutNormal::dwnldProgressStart(const zypp::Url & uri)
   if (_isatty)
     cout << CLEARLN;
 
-  TermLine outstr( TermLine::SF_CRUSH );
+  TermLine outstr( TermLine::SF_CRUSH, '.' );
   outstr.lhs << _("Retrieving:") << " ";
   if (verbosity() == DEBUG)
     outstr.lhs << uri;
@@ -288,7 +298,7 @@ void OutNormal::dwnldProgress(const zypp::Url & uri,
     cout << CLEARLN << CURSORUP(1);
   cout << CLEARLN;
 
-  TermLine outstr( TermLine::SF_CRUSH );
+  TermLine outstr( TermLine::SF_CRUSH, '.' );
   outstr.lhs << _("Retrieving:") << " ";
   if (verbosity() == DEBUG)
     outstr.lhs << uri;
@@ -319,7 +329,7 @@ void OutNormal::dwnldProgressEnd(const zypp::Url & uri, long rate, bool error)
   if (!error && _use_colors)
     cout << get_color(COLOR_CONTEXT_MSG_STATUS);
 
-  TermLine outstr( TermLine::SF_CRUSH );
+  TermLine outstr( TermLine::SF_CRUSH, '.' );
   if (_isatty)
   {
     if(_oneup)
