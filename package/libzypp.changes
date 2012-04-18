@@ -1,4 +1,9 @@
 -------------------------------------------------------------------
+Thu Apr 19 01:14:57 CEST 2012 - ma@suse.de
+
+- Update zypp-po.tar.bz2
+
+-------------------------------------------------------------------
 Wed Apr 18 18:38:06 CEST 2012 - ma@suse.de
 
 - Fix install progress hopping back and forth
