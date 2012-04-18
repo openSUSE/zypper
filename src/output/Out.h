@@ -28,14 +28,19 @@ struct TermLine
   };
   ZYPP_DECLARE_FLAGS( SplitFlags, SplitFlag );
 
-  TermLine() {}
+  TermLine( SplitFlags flags_r, char exp_r ) : flagsHint( flags_r ), expHint( exp_r ) {}
   TermLine( SplitFlags flags_r ) : flagsHint( flags_r ) {}
+  TermLine( char exp_r ) : expHint( exp_r ) {}
+  TermLine() {}
+
+  SplitFlags flagsHint;				//< flags to use if not passed to \ref get
+  zypp::DefaultIntegral<char,' '> expHint;	//< expand char to use if not passed to \ref get
 
   zypp::str::Str lhs;				//< left side
   zypp::str::Str rhs;				//< right side
   zypp::DefaultIntegral<unsigned,0> lhidden;	//< size of embedded esc sequences
   zypp::DefaultIntegral<unsigned,0> rhidden;	//< size of embedded esc sequences
-  SplitFlags flagsHint;				//< flags to use if no flags passed to \ref get
+
 
   /** Return plain line made of lhs + rhs */
   std::string get() const
@@ -44,7 +49,16 @@ struct TermLine
   /** Return line optionally formated according to \a width_r and \a flags_r.
    * If \a width_r or \a flags_r is zero a plain line made of lhs + rhs is returned.
    */
-  std::string get( unsigned width_r, SplitFlags flags_r = SplitFlag(), char exp_r = ' ' ) const;
+  std::string get( unsigned width_r, SplitFlags flags_r, char exp_r ) const;
+  /** \overload */
+  std::string get( unsigned width_r, SplitFlags flags_r ) const
+  { return get( width_r, flags_r, expHint ); }
+  /** \overload */
+  std::string get( unsigned width_r, char exp_r ) const
+  { return get( width_r, flagsHint, exp_r ); }
+  /** \overload */
+  std::string get( unsigned width_r ) const
+  { return get( width_r, flagsHint, expHint ); }
 };
 ZYPP_DECLARE_OPERATORS_FOR_FLAGS( TermLine::SplitFlags );
 

@@ -12,9 +12,6 @@ std::string TermLine::get( unsigned width_r, SplitFlags flags_r, char exp_r ) co
   if ( width_r == 0 )
     return l + r;	// plain sring if zero width
 
-  if ( ! flags_r && flagsHint )
-    flags_r = flagsHint;
-
   unsigned llen( l.length() - lhidden );
   unsigned rlen( r.length() - rhidden );
   int diff = width_r - llen - rlen;

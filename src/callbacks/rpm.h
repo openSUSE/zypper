@@ -23,19 +23,21 @@
 #include "output/prompt.h"
 
 
-static bool report_again(timespec * last)
+static bool report_again( timespec & lastTime_r, int & lastValue_r, int currentValue_r )
 {
-  // don't report more often than 5 times per sec
+  // Don't report more often than 5 times per sec,
+  // but also leaving 0%, more than 20% step and reaching 100%
   timespec now;
-  clock_gettime(CLOCK_REALTIME, &now);
-  if (now.tv_sec > last->tv_sec ||
-      (now.tv_sec == last->tv_sec && now.tv_nsec > last->tv_nsec + 200000000L))
+  clock_gettime( CLOCK_REALTIME, &now );
+  if ( now.tv_sec > lastTime_r.tv_sec
+    || ( now.tv_sec == lastTime_r.tv_sec && now.tv_nsec > lastTime_r.tv_nsec + 200000000L )
+    || ( lastValue_r != currentValue_r && ( lastValue_r + 20 <= currentValue_r || lastValue_r == 0 || currentValue_r == 100 ) ) )
   {
-    *last = now;
+    lastTime_r = now;
+    lastValue_r = currentValue_r;
     return true;
   }
-  else
-    return false;
+  return false;
 }
 
 ///////////////////////////////////////////////////////////////////
@@ -127,23 +129,25 @@ struct RemoveResolvableReportReceiver : public zypp::callback::ReceiveReport<zyp
 {
   std::string _label;
   timespec _last_reported;
+  zypp::DefaultIntegral<int,0> _last_percent;
 
   virtual void start( zypp::Resolvable::constPtr resolvable )
   {
     ::clock_gettime(CLOCK_REALTIME, &_last_reported);
+    _last_percent.reset();
     // translators: This text is a progress display label e.g. "Removing packagename-x.x.x [42%]"
     _label = boost::str(boost::format(_("Removing %s-%s"))
         % resolvable->name() % resolvable->edition());
     Zypper::instance()->out().progressStart("remove-resolvable", _label);
   }
 
-  virtual bool progress(int value, zypp::Resolvable::constPtr resolvable)
+  virtual bool progress( int value, zypp::Resolvable::constPtr resolvable )
   {
     // don't report too often
-    if (!report_again(&_last_reported))
-      return true;
-
-    Zypper::instance()->out().progress("remove-resolvable", _label, value);
+    if ( report_again( _last_reported, _last_percent, value ) )
+    {
+      Zypper::instance()->out().progress( "remove-resolvable", _label, value );
+    }
     return true;
   }
 
@@ -192,14 +196,12 @@ struct InstallResolvableReportReceiver : public zypp::callback::ReceiveReport<zy
   zypp::Resolvable::constPtr _resolvable;
   std::string _label;
   timespec _last_reported;
-
-  void display_step( zypp::Resolvable::constPtr resolvable, int value )
-  {
-  }
+  zypp::DefaultIntegral<int,0> _last_percent;
 
   virtual void start( zypp::Resolvable::constPtr resolvable )
   {
     clock_gettime(CLOCK_REALTIME, &_last_reported);
+    _last_percent.reset();
     _resolvable = resolvable;
     // TranslatorExplanation This text is a progress display label e.g. "Installing foo-1.1.2 [42%]"
     _label = boost::str(boost::format(_("Installing: %s-%s"))
@@ -207,13 +209,13 @@ struct InstallResolvableReportReceiver : public zypp::callback::ReceiveReport<zy
     Zypper::instance()->out().progressStart("install-resolvable", _label);
   }
 
-  virtual bool progress(int value, zypp::Resolvable::constPtr resolvable)
+  virtual bool progress( int value, zypp::Resolvable::constPtr resolvable )
   {
     // don't report too often
-    if (!report_again(&_last_reported))
-      return true;
-
-    Zypper::instance()->out().progress("install-resolvable", _label, value);
+    if ( report_again( _last_reported, _last_percent, value ) )
+    {
+      Zypper::instance()->out().progress( "install-resolvable", _label, value );
+    }
     return true;
   }
 
