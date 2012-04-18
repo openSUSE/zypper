@@ -1719,10 +1719,6 @@ void RpmDb::doInstallPackage( const Pathname & filename, RpmInstFlags flags, cal
     // FIXME status handling
     report->progress( 0 ); // allow 1% for backup creation.
   }
-  else
-  {
-    report->progress( 100 );
-  }
 
   // run rpm
   RpmArgVec opts;
