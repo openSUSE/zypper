@@ -1,6 +1,8 @@
 #include <iostream>
 #include <sstream>
 
+#include <zypp/AutoDispose.h>
+
 #include "Out.h"
 #include "Table.h"
 
@@ -19,7 +21,28 @@ std::string TermLine::get( unsigned width_r, SplitFlags flags_r, char exp_r ) co
   if ( diff > 0 )
   {
     // expand...
-    return l + std::string( diff, exp_r ) + r;
+    if ( ! flags_r.testFlag( SF_EXPAND ) )
+      return l + r;
+
+    if ( percentHint < 0 || percentHint > 100 )
+      return l + std::string( diff, exp_r ) + r;
+
+    // else:  draw % indicator
+    // -------
+    // <1%>===
+    // .<99%>=
+    // .<100%>
+    if ( percentHint == 0 )
+      return zypp::str::Str() << l << std::string( diff, '-' ) << r;
+
+    int pc = diff * percentHint / 100;
+    if ( diff < 6 )	// not enough space for fancy stuff
+      return l + std::string( pc, '.' ) + std::string( diff-pc, '=' ) + r;
+
+    // else: less boring
+    std::string tag( zypp::str::Str() << '<' << percentHint << "%>" );
+    pc = ( pc > tag.size() ? pc - tag.size() : 0 );
+    return zypp::str::Str() << l << std::string( pc, '.' ) << tag << std::string( diff-pc-tag.size(), '=' ) << r;
   }
   else if ( diff < 0 )
   {
