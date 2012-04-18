@@ -1,4 +1,10 @@
 -------------------------------------------------------------------
+Wed Apr 18 18:40:43 CEST 2012 - ma@suse.de
+
+- Some progress bar fixes
+- Fix eating terminal lines (bnc#735016)
+
+-------------------------------------------------------------------
 Mon Apr 16 20:56:33 CEST 2012 - ma@suse.de
 
 - Let zypper remove lock follow addlock with respect to args and behavior (bnc#751976)
