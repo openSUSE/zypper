@@ -35,6 +35,7 @@ struct TermLine
 
   SplitFlags flagsHint;				//< flags to use if not passed to \ref get
   zypp::DefaultIntegral<char,' '> expHint;	//< expand char to use if not passed to \ref get
+  zypp::DefaultIntegral<int,-1> percentHint;	//< draw progress indicator in expanded space if in [0,100]
 
   zypp::str::Str lhs;				//< left side
   zypp::str::Str rhs;				//< right side
