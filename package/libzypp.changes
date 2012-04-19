@@ -1,4 +1,9 @@
 -------------------------------------------------------------------
+Thu Apr 19 10:19:05 CEST 2012 - ma@suse.de
+
+- Always consider (block) devices passed as url option (bnc#755815)
+
+-------------------------------------------------------------------
 Thu Apr 19 01:14:57 CEST 2012 - ma@suse.de
 
 - Update zypp-po.tar.bz2
