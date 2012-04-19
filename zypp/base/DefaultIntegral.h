@@ -71,7 +71,7 @@ namespace zypp
       DefaultIntegral & operator/=( _Tp rhs ) { _val /= rhs; return *this; }
 
       DefaultIntegral & operator++(/*prefix*/) { ++_val; return *this; }
-      DefaultIntegral & operator--(/*prefix*/) { ++_val; return *this; }
+      DefaultIntegral & operator--(/*prefix*/) { --_val; return *this; }
 
       DefaultIntegral operator++(int/*postfix*/) { return _val++; }
       DefaultIntegral operator--(int/*postfix*/) { return _val--; }
