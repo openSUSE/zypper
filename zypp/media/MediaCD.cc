@@ -439,36 +439,19 @@ namespace zypp
         DBG << "skipping device " << it->name << endl;
         continue;
       }
-      DBG << "trying device " << it->name << endl;
-
       _lastdev_tried = count;
-      bool valid( false );
 
+      // bnc#755815: _devices contains either devices passed as url option
+      // 	or autodetected ones. Accept both as long as they are block
+      // 	devices.
       MediaSource temp( *it );
       PathInfo dinfo( temp.name );
-      if ( dinfo.isBlk() )
+      if ( ! dinfo.isBlk() )
       {
-        temp.maj_nr = dinfo.major();
-        temp.min_nr = dinfo.minor();
-
-	if ( detected.empty() )
-	  valid = true;	// better try this than nothing
-	else
-	  for ( const auto & d : detected )
-	  {
-	    if ( temp.equals( d ) )
-	    {
-	      valid = true;
-	      break;
-	    }
-	  }
+	WAR <<  "skipping non block device: " << dinfo << endl;
+	continue;
       }
-
-      if ( ! valid )
-      {
-        DBG << "skipping invalid device: " << it->name << endl;
-        continue;
-      }
+      DBG << "trying device " << dinfo << endl;
 
       MediaSourceRef media( new MediaSource(temp));
       AttachedMedia ret( findAttachedMedia( media));
@@ -669,48 +652,35 @@ namespace zypp
   //
   // Asserted that media is not attached.
   //
-  void MediaCD::forceEject(const std::string & ejectDev)
+  void MediaCD::forceEject( const std::string & ejectDev_r )
   {
     bool ejected = false;
     if ( ! isAttached() )	// no device mounted in this instance
     {
       // This also fills the _devices list on demand
       DeviceList detected( detectDevices( _url.getScheme() == "dvd" ? true : false ) );
-
-      DeviceList::iterator it;
-      for( it = _devices.begin(); it != _devices.end(); ++it ) {
-        MediaSourceRef media( new MediaSource( *it));
-        if (media->name != ejectDev)
+      for_( it, _devices.begin(), _devices.end() )
+      {
+        MediaSourceRef media( new MediaSource( *it ) );
+        if ( media->name != ejectDev_r )
           continue;
 
-        bool        valid=false;
-        PathInfo    dinfo(media->name);
-        if( dinfo.isBlk())
-        {
-          media->maj_nr = dinfo.major();
-          media->min_nr = dinfo.minor();
-
-          DeviceList::const_iterator d( detected.begin());
-          for( ; d != detected.end(); ++d)
-          {
-            if( media->equals( *d))
-            {
-              valid = true;
-              break;
-            }
-          }
-        }
-        if( !valid)
-        {
-          DBG << "skipping invalid device: " << it->name << endl;
-          continue;
-        }
+	// bnc#755815: _devices contains either devices passed as url option
+	// 	or autodetected ones. Accept both as long as they are block
+	// 	devices.
+	PathInfo dinfo( media->name );
+	if( ! dinfo.isBlk() )
+	{
+	  WAR <<  "skipping non block device: " << dinfo << endl;
+	  continue;
+	}
+	DBG << "trying device " << dinfo << endl;
 
         // FIXME: we have also to check if it is mounted in the system
         AttachedMedia ret( findAttachedMedia( media));
-        if( !ret.mediaSource)
+        if( !ret.mediaSource )
         {
-          forceRelaseAllMedia(media, false);
+          forceRelaseAllMedia( media, false );
           if ( openTray( it->name ) )
           {
             ejected = true;
@@ -719,12 +689,12 @@ namespace zypp
         }
       }
     }
+#if REPORT_EJECT_ERRORS
     if( !ejected)
     {
-#if REPORT_EJECT_ERRORS
       ZYPP_THROW(MediaNotEjectedException());
-#endif
     }
+#endif
   }
 
   ///////////////////////////////////////////////////////////////////
