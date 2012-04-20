@@ -53,7 +53,7 @@ BuildRequires:  hal-devel
 BuildRequires:  boost-devel
 BuildRequires:  dejagnu
 BuildRequires:  doxygen
-%if %0%{?force_gcc_46}
+%if 0%{?force_gcc_46}
 BuildRequires:  gcc-c++ = 4.6
 %else
 BuildRequires:  gcc-c++ >= 4.6
@@ -207,7 +207,7 @@ Authors:
 %build
 mkdir build
 cd build
-%if %0%{?force_gcc_46}
+%if 0%{?force_gcc_46}
 export CC=gcc-4.6
 export CXX=g++-4.6
 %endif

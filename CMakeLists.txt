@@ -6,7 +6,7 @@ cmake_minimum_required(VERSION 2.6)
 
 
 OPTION (DISABLE_LIBPROXY "Build without libproxy support even if package is installed?" OFF)
-
+OPTION (DISABLE_AUTODOCS "Do not require doxygen being installed (required to build autodocs)?" OFF)
 
 # allow name libraries by name mixed with full
 # paths
@@ -173,7 +173,11 @@ ENDIF( DISABLE_LIBPROXY )
 
 FIND_PROGRAM( DOXYGEN doxygen )
 IF ( NOT DOXYGEN )
-  MESSAGE( FATAL_ERROR "doxygen not found: install doxygen to build the documentation." )
+  IF ( DISABLE_AUTODOCS )
+    MESSAGE( STATUS "doxygen is not available. Can't build the documentation." )
+  ELSE ( DISABLE_AUTODOCS )
+    MESSAGE( FATAL_ERROR "doxygen not found: install doxygen to build the documentation!" )
+  ENDIF ( DISABLE_AUTODOCS )
 ELSE ( NOT DOXYGEN )
   MESSAGE( STATUS "doxygen found: ${DOXYGEN}" )
 ENDIF ( NOT DOXYGEN )

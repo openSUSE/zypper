@@ -4,17 +4,6 @@
 
 ## ############################################################
 
-INCLUDE( FindQt3 )
-IF ( NOT QT_FOUND )
-  MESSAGE( WARNING " qt3 not found" )
-ELSE ( NOT QT_FOUND )
-  ADD_DEFINITIONS( ${QT_DEFINITIONS} )
-  INCLUDE_DIRECTORIES( ${QT_INCLUDE_DIR} )
-  #SET( QT_LIBRARIES
-  #"/usr/lib${LIB_SUFFIX}/qt3/lib${LIB_SUFFIX}/libqassistantclient.a;/usr/lib${LIB_SUFFIX}/qt3/lib${LIB_SUFFIX}/libqt-mt.so;-lSM;-lICE;/usr/X11R6/lib${LIB_SUFFIX}/libX11.so;/usr/X11R6/lib${LIB_SUFFIX}/libXext.so;dl;-lpthread"
-  #)
-ENDIF( NOT QT_FOUND )
-
 SET(THREAD_LIBRARY boost_thread)
 
 ## ############################################################
