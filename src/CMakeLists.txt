@@ -55,6 +55,7 @@ SET( zypper_out_HEADERS
   output/OutXML.h
   output/prompt.h
   output/AliveCursor.h
+  output/Utf8.h
 )
 
 SET( zypper_out_SRCS
