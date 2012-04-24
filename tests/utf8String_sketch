@@ -1,0 +1,91 @@
+/*
+ sketch for utf8::string test
+*/
+#include "Utf8.h"
+
+template <class Str>
+void tst( const Str & str_r,
+	  typename Str::size_type pos_r = 0,
+	  typename Str::size_type len_r = Str::npos )
+{
+  cout << ">>" << str_r << "<<(" << pos_r << "," << len_r << ")["
+       << str_r.size() << "|" << strlen(str_r.c_str()) << "]"
+       << ">>";;
+  try {
+    cout << str_r.substr( pos_r, len_r );
+  }
+  catch (...)
+  {
+    cout << "OOPS";
+  }
+  cout << "<<" << endl;
+}
+
+void got( const std::string & str_r, const std::string & ustr_r )
+{
+  if ( 0 )
+  {
+    std::string::size_type p = 1;
+    std::string::size_type l = 0;
+    cout << "==================================================" << endl;
+    tst( std::string( str_r ), p, l );
+    tst( utf8::string( ustr_r ), p, l );
+    return;
+  }
+
+  cout << "==================================================" << endl;
+  for ( std::string::size_type p = 0; p <= str_r.size() + 1; ++p )
+  {
+    for ( std::string::size_type l = 0; l <= str_r.size() - p + 1; ++l )
+    {
+      cout << p << "," << l << "==================================================" << endl;
+      tst( std::string( str_r ), p, l );
+      tst( utf8::string( ustr_r ), p, l );
+    }
+  }
+}
+
+int main( int argc, const char * argv[] )
+{
+  --argc;
+  ++argv;
+
+  got( "", "" );
+
+  got( "a", "a" );
+  got( "a", "ä" );
+
+  got( "ao", "ao" );
+  got( "ao", "äo" );
+  got( "ao", "aö" );
+  got( "ao", "äö" );
+
+  got( "aou", "aou" );
+  got( "aou", "äou" );
+  got( "aou", "aöu" );
+  got( "aou", "aoü" );
+  got( "aou", "äöu" );
+  got( "aou", "äoü" );
+  got( "aou", "aöü" );
+  got( "aou", "äöü" );
+
+  got( "aous", "aous" );
+  got( "aous", "äous" );
+  got( "aous", "aöus" );
+  got( "aous", "aoüs" );
+  got( "aous", "aouß" );
+  got( "aous", "äöus" );
+  got( "aous", "äoüs" );
+  got( "aous", "äouß" );
+  got( "aous", "aöüs" );
+  got( "aous", "aöuß" );
+  got( "aous", "aoüß" );
+  got( "aous", "äöüs" );
+  got( "aous", "äöuß" );
+  got( "aous", "äoüß" );
+  got( "aous", "aöüs" );
+  got( "aous", "äöüß" );
+
+  return 0;
+}
+
