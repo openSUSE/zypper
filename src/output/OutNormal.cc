@@ -24,6 +24,8 @@
 
 using namespace std;
 
+#define SF_EXPAND_IF_TTY ( _isatty ? TermLine::SF_EXPAND : TermLine::SplitFlags() )
+
 OutNormal::OutNormal(Verbosity verbosity)
   : Out(TYPE_NORMAL, verbosity),
     _use_colors(false), _isatty(isatty(STDOUT_FILENO)), _newline(true), _oneup(false)
@@ -127,7 +129,7 @@ void OutNormal::displayProgress (const string & s, int percent)
 
   if (_isatty)
   {
-    TermLine outstr( TermLine::SF_CRUSH | TermLine::SF_EXPAND, '-' );
+    TermLine outstr( TermLine::SF_CRUSH | SF_EXPAND_IF_TTY, '-' );
     outstr.lhs << s << ' ';
 
     // dont display percents if invalid
@@ -144,7 +146,7 @@ void OutNormal::displayProgress (const string & s, int percent)
 
     std::string outline( outstr.get( termwidth() ) );
     cout << outline << std::flush;
-    _oneup = ( outline.length() > termwidth() );
+    // no _oneup if CRUSHed // _oneup = ( outline.length() > termwidth() );
   }
   else
     cout << '.' << std::flush;
@@ -158,7 +160,7 @@ void OutNormal::displayTick (const string & s)
 
   if (_isatty)
   {
-    TermLine outstr( TermLine::SF_CRUSH | TermLine::SF_EXPAND, '-' );
+    TermLine outstr( TermLine::SF_CRUSH | SF_EXPAND_IF_TTY, '-' );
     ++cursor;
     outstr.lhs << s << ' ';
     outstr.rhs << '[' << cursor.current() << ']';
@@ -169,7 +171,7 @@ void OutNormal::displayTick (const string & s)
 
     std::string outline( outstr.get( termwidth() ) );
     cout << outline << std::flush;
-    _oneup = ( outline.length() > termwidth() );
+    // no _oneup if CRUSHed // _oneup = ( outline.length() > termwidth() );
   }
   else
     cout << '.' << std::flush;
@@ -216,7 +218,7 @@ void OutNormal::progressEnd(const std::string & id, const string & label, bool e
   if (!error && _use_colors)
     cout << get_color(COLOR_CONTEXT_MSG_STATUS);
 
-  TermLine outstr( TermLine::SF_CRUSH | TermLine::SF_EXPAND, '.' );
+  TermLine outstr( TermLine::SF_CRUSH | SF_EXPAND_IF_TTY, '.' );
   if (_isatty)
   {
     if(_oneup)
@@ -261,7 +263,7 @@ void OutNormal::dwnldProgressStart(const zypp::Url & uri)
   if (_isatty)
     cout << CLEARLN;
 
-  TermLine outstr( TermLine::SF_CRUSH | TermLine::SF_EXPAND, '-' );
+  TermLine outstr( TermLine::SF_CRUSH | SF_EXPAND_IF_TTY, '-' );
   outstr.lhs << _("Retrieving:");
   if (verbosity() == DEBUG)
     outstr.lhs << uri << ' ';
@@ -275,7 +277,7 @@ void OutNormal::dwnldProgressStart(const zypp::Url & uri)
 
   std::string outline( outstr.get( termwidth() ) );
   cout << outline << std::flush;
-  _oneup = (outline.length() > termwidth());
+  // no _oneup if CRUSHed // _oneup = (outline.length() > termwidth());
 
   _newline = false;
 }
@@ -297,7 +299,7 @@ void OutNormal::dwnldProgress(const zypp::Url & uri,
     cout << CLEARLN << CURSORUP(1);
   cout << CLEARLN;
 
-  TermLine outstr( TermLine::SF_CRUSH | TermLine::SF_EXPAND, '-' );
+  TermLine outstr( TermLine::SF_CRUSH | SF_EXPAND_IF_TTY, '-' );
   outstr.lhs << _("Retrieving:") << " ";
   if (verbosity() == DEBUG)
     outstr.lhs << uri;
@@ -316,10 +318,9 @@ void OutNormal::dwnldProgress(const zypp::Url & uri,
     outstr.rhs << " (" << zypp::ByteCount(rate) << "/s)";
   outstr.rhs << ']';
 
-
   std::string outline( outstr.get( termwidth() ) );
   cout << outline << std::flush;
-  _oneup = (outline.length() > termwidth());
+  // no _oneup if CRUSHed // _oneup = (outline.length() > termwidth());
   _newline = false;
 }
 
@@ -331,7 +332,7 @@ void OutNormal::dwnldProgressEnd(const zypp::Url & uri, long rate, bool error)
   if (!error && _use_colors)
     cout << get_color(COLOR_CONTEXT_MSG_STATUS);
 
-  TermLine outstr( TermLine::SF_CRUSH | TermLine::SF_EXPAND, '.' );
+  TermLine outstr( TermLine::SF_CRUSH | SF_EXPAND_IF_TTY, '.' );
   if (_isatty)
   {
     if(_oneup)
