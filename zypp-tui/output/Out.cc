@@ -1,31 +1,38 @@
 #include <iostream>
 #include <sstream>
 
-#include <zypp/AutoDispose.h>
+//#include <zypp/AutoDispose.h>
 
 #include "Out.h"
 #include "Table.h"
+#include "Utf8.h"
+
+////////////////////////////////////////////////////////////////////////////////
+//	class TermLine
+////////////////////////////////////////////////////////////////////////////////
 
 std::string TermLine::get( unsigned width_r, SplitFlags flags_r, char exp_r ) const
 {
-  std::string l(lhs);
-  std::string r(rhs);
+  utf8::string l(lhs);
+  utf8::string r(rhs);
 
   if ( width_r == 0 )
-    return l + r;	// plain sring if zero width
+    return zypp::str::Str() << l << r;	// plain string if zero width
 
-  unsigned llen( l.length() - lhidden );
-  unsigned rlen( r.length() - rhidden );
+  unsigned llen( l.size() - lhidden );
+  unsigned rlen( r.size() - rhidden );
   int diff = width_r - llen - rlen;
+
+  //zypp::AutoDispose<int> _delay( 1, ::sleep );
 
   if ( diff > 0 )
   {
     // expand...
     if ( ! flags_r.testFlag( SF_EXPAND ) )
-      return l + r;
+      return zypp::str::Str() << l << r;
 
     if ( percentHint < 0 || percentHint > 100 )
-      return l + std::string( diff, exp_r ) + r;
+      return zypp::str::Str() << l << std::string( diff, exp_r ) << r;
 
     // else:  draw % indicator
     // -------
@@ -37,7 +44,7 @@ std::string TermLine::get( unsigned width_r, SplitFlags flags_r, char exp_r ) co
 
     int pc = diff * percentHint / 100;
     if ( diff < 6 )	// not enough space for fancy stuff
-      return l + std::string( pc, '.' ) + std::string( diff-pc, '=' ) + r;
+      return zypp::str::Str() << l <<  std::string( pc, '.' ) << std::string( diff-pc, '=' ) << r;
 
     // else: less boring
     std::string tag( zypp::str::Str() << '<' << percentHint << "%>" );
@@ -50,21 +57,25 @@ std::string TermLine::get( unsigned width_r, SplitFlags flags_r, char exp_r ) co
     if ( flags_r.testFlag( SF_CRUSH ) )
     {
       if ( rlen > width_r )
-	return r.substr( 0, width_r );
-      return l.substr( 0, width_r - rlen ) + r;
+	return r.substr( 0, width_r ).str();
+      return zypp::str::Str() << l.substr( 0, width_r - rlen ) << r;
     }
     else if ( flags_r.testFlag( SF_SPLIT ) )
     {
-      return( ( llen > width_r ? l.substr( 0, width_r ) : l )
-            + "\n"
-            + ( rlen > width_r ? r.substr( 0, width_r ) : std::string( width_r - rlen, ' ' ) + r ) );
+      return zypp::str::Str() << ( llen > width_r ? l.substr( 0, width_r ) : l )
+			      << "\n"
+			      << ( rlen > width_r ? r.substr( 0, width_r ) : std::string( width_r - rlen, ' ' ) + r );
     }
     // else:
-    return l + r;
+    return zypp::str::Str() << l << r;
   }
   // else: fits exactly
-  return l + r;
+  return zypp::str::Str() << l << r;
 }
+
+////////////////////////////////////////////////////////////////////////////////
+//	class Out
+////////////////////////////////////////////////////////////////////////////////
 
 Out::~Out()
 {}
