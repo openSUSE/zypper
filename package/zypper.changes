@@ -1,4 +1,11 @@
 -------------------------------------------------------------------
+Wed Apr 25 12:19:45 CEST 2012 - ma@suse.de
+
+- More fixes for multibyte string output (bnc#735016)
+- Add utf8::string
+- version 1.6.25
+
+-------------------------------------------------------------------
 Tue Apr 17 16:02:07 CEST 2012 - ma@suse.de
 
 - Fix eating terminal lines (bnc#735016)
