@@ -33,9 +33,9 @@ namespace utf8
     {
       // simply do not count continuation bytes '10xxxxxx'
       size_type ret = _str.size();
-      for ( auto ch : _str )
+      for ( const char * chp = _str.c_str(); *chp; ++chp )
       {
-	if ( isContinuationByte( ch ) )
+	if ( isContinuationByte( *chp ) )
 	  --ret;
       }
       return ret;
