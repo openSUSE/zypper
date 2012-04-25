@@ -18,6 +18,7 @@
 #include "main.h"
 #include "utils/colors.h"
 #include "AliveCursor.h"
+#include "Utf8.h"
 
 #include "OutNormal.h"
 
@@ -121,33 +122,32 @@ void OutNormal::displayProgress (const string & s, int percent)
 {
   static AliveCursor cursor;
 
-  if (_isatty)
+  if ( _isatty )
   {
-    string outline = s + " [";
+    zypp::str::Str outstr;
+    outstr << s << " [";
     // dont display percents if invalid
-    if (percent >= 0 && percent <= 100)
+    if ( percent >= 0 && percent <= 100 )
     {
-      std::ostringstream oss;
-      oss << percent << "%";
-      outline += oss.str();
+      outstr << percent << "%";
     }
     else
     {
       ++cursor;
-      outline += cursor.current();
+      outstr << cursor.current();
     }
-    outline += "]";
+    outstr << "]";
 
     if(_oneup)
-      cout << CLEARLN << CURSORUP(1) << CLEARLN << outline;
-    else
-      cout << CLEARLN << outline;
+      cout << CLEARLN << CURSORUP(1);
+    cout << CLEARLN;
 
+    utf8::string outline( outstr );
+    cout << outline << std::flush;
     _oneup = (outline.length() > termwidth());
   }
   else
-    cout << '.';
-  cout << std::flush;
+    cout << '.' << std::flush;
 }
 
 // ----------------------------------------------------------------------------
@@ -158,15 +158,16 @@ void OutNormal::displayTick (const string & s)
 
   if (_isatty)
   {
-    string outline = s + " [";
+    zypp::str::Str outstr;
     ++cursor;
-    outline += cursor.current();
-    outline += "]";
-    if(_oneup)
-      cout << CLEARLN << CURSORUP(1) << CLEARLN << outline;
-    else
-      cout << CLEARLN << outline;
+    outstr << s << " [" << cursor.current() << "]";
 
+    if(_oneup)
+      cout << CLEARLN << CURSORUP(1);
+    cout << CLEARLN;
+
+    utf8::string outline( outstr );
+    cout << outline << std::flush;
     _oneup = (outline.length() > termwidth());
   }
   else
@@ -261,7 +262,7 @@ void OutNormal::dwnldProgressStart(const zypp::Url & uri)
   else
     outstr << " [" ;
 
-  std::string outline( outstr );
+  utf8::string outline( outstr );
   cout << outline << std::flush;
   _oneup = (outline.length() > termwidth());
 
@@ -302,7 +303,7 @@ void OutNormal::dwnldProgress(const zypp::Url & uri,
     outstr << "]";
   }
 
-  std::string outline( outstr );
+  utf8::string outline( outstr );
   cout << outline << std::flush;
   _oneup = (outline.length() > termwidth());
   _newline = false;
