@@ -453,6 +453,8 @@ namespace zypp
       }
       DBG << "trying device " << dinfo << endl;
 
+      temp.maj_nr = dinfo.major();
+      temp.min_nr = dinfo.minor();
       MediaSourceRef media( new MediaSource(temp));
       AttachedMedia ret( findAttachedMedia( media));
 
@@ -540,9 +542,10 @@ namespace zypp
 
           // wait for /etc/mtab update ...
           // (shouldn't be needed)
-          int limit = 5;
+          int limit = 2;
           while( !(mountsucceeded=isAttached()) && --limit)
           {
+	    WAR << "Wait for /proc/mounts update and retry...." << endl;
             sleep(1);
           }
 
