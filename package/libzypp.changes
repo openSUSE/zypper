@@ -1,4 +1,9 @@
 -------------------------------------------------------------------
+Wed Apr 25 18:50:20 CEST 2012 - ma@suse.de
+
+- Fix lost device info when mounting CD/DVD
+
+-------------------------------------------------------------------
 Sun Apr 22 01:15:46 CEST 2012 - ma@suse.de
 
 - Update zypp-po.tar.bz2
