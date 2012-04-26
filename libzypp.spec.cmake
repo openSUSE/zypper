@@ -54,7 +54,8 @@ BuildRequires:  boost-devel
 BuildRequires:  dejagnu
 BuildRequires:  doxygen
 %if 0%{?force_gcc_46}
-BuildRequires:  gcc-c++ = 4.6
+BuildRequires:  gcc46
+BuildRequires:  gcc46-c++
 %else
 BuildRequires:  gcc-c++ >= 4.6
 %endif
