@@ -12,7 +12,7 @@
 #ifndef   ZYPP_THREAD_MUTEXLOCK_H
 #define   ZYPP_THREAD_MUTEXLOCK_H
 
-#include <zypp/thread/Mutex.h>
+#include "zypp/thread/Mutex.h"
 #include <cassert>
 
 

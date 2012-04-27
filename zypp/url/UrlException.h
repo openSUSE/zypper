@@ -12,7 +12,7 @@
 #ifndef   ZYPP_URL_URLEXCEPTION_H
 #define   ZYPP_URL_URLEXCEPTION_H
 
-#include <zypp/base/Exception.h>
+#include "zypp/base/Exception.h"
 
 
 //////////////////////////////////////////////////////////////////////

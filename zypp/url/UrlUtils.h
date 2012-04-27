@@ -12,7 +12,7 @@
 #ifndef   ZYPP_URL_URLUTILS_H
 #define   ZYPP_URL_URLUTILS_H
 
-#include <zypp/url/UrlException.h>
+#include "zypp/url/UrlException.h"
 
 #include <string>
 #include <vector>

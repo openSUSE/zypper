@@ -13,7 +13,7 @@
 #include <iosfwd>
 #include <string>
 #include <vector>
-#include <zypp/base/Function.h>
+#include "zypp/base/Function.h"
 
 #include "zypp/base/ReferenceCounted.h"
 #include "zypp/base/NonCopyable.h"

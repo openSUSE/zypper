@@ -10,11 +10,11 @@
  * \file zypp/Url.cc
  */
 
-#include <zypp/Url.h>
-#include <zypp/Pathname.h>
-#include <zypp/base/Gettext.h>
-#include <zypp/base/String.h>
-#include <zypp/base/Regex.h>
+#include "zypp/Url.h"
+#include "zypp/Pathname.h"
+#include "zypp/base/Gettext.h"
+#include "zypp/base/String.h"
+#include "zypp/base/Regex.h"
 #include <stdexcept>
 #include <iostream>
 

@@ -19,8 +19,8 @@
 #include <iosfwd>
 #include <vector>
 
-#include <zypp/Callback.h>
-#include <zypp/Pathname.h>
+#include "zypp/Callback.h"
+#include "zypp/Pathname.h"
 
 namespace zypp {
 

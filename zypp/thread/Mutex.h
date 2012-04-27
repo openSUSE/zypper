@@ -11,8 +11,8 @@
 #ifndef   ZYPP_THREAD_MUTEX_H
 #define   ZYPP_THREAD_MUTEX_H
 
-#include <zypp/base/NonCopyable.h>
-#include <zypp/thread/MutexException.h>
+#include "zypp/base/NonCopyable.h"
+#include "zypp/thread/MutexException.h"
 #include <pthread.h>
 
 //////////////////////////////////////////////////////////////////////

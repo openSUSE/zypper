@@ -10,7 +10,7 @@
  *
  *  \brief Hardware abstaction layer library wrapper implementation.
  */
-#include <zypp/target/hal/HalException.h>
+#include "zypp/target/hal/HalException.h"
 //////////////////////////////////////////////////////////////////////
 namespace zypp
 { ////////////////////////////////////////////////////////////////////
@@ -35,13 +35,13 @@ namespace zypp
 
 #ifndef NO_HAL // disables zypp's HAL dependency
 
-#include <zypp/target/hal/HalContext.h>
-#include <zypp/thread/Mutex.h>
-#include <zypp/thread/MutexLock.h>
-#include <zypp/base/NonCopyable.h>
-#include <zypp/base/Logger.h>
-#include <zypp/base/String.h>
-#include <zypp/base/Gettext.h>
+#include "zypp/target/hal/HalContext.h"
+#include "zypp/thread/Mutex.h"
+#include "zypp/thread/MutexLock.h"
+#include "zypp/base/NonCopyable.h"
+#include "zypp/base/Logger.h"
+#include "zypp/base/String.h"
+#include "zypp/base/Gettext.h"
 
 #include <hal/libhal.h>
 #include <hal/libhal-storage.h>
@@ -1100,8 +1100,8 @@ namespace zypp
 } // namespace zypp
 //////////////////////////////////////////////////////////////////////
 #else // NO_HAL
-#include <zypp/target/hal/HalContext.h>
-#include <zypp/target/hal/HalException.h>
+#include "zypp/target/hal/HalContext.h"
+#include "zypp/target/hal/HalException.h"
 namespace zypp
 { ////////////////////////////////////////////////////////////////////
   ////////////////////////////////////////////////////////////////////

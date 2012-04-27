@@ -8,9 +8,9 @@
 \---------------------------------------------------------------------*/
 /** \file zypp/thread/Mutex.cc
  */
-#include <zypp/thread/Mutex.h>
-#include <zypp/thread/MutexException.h>
-#include <zypp/base/Gettext.h>
+#include "zypp/thread/Mutex.h"
+#include "zypp/thread/MutexException.h"
+#include "zypp/base/Gettext.h"
 
 
 //////////////////////////////////////////////////////////////////////

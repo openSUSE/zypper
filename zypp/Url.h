@@ -12,8 +12,8 @@
 #ifndef   ZYPP_URL_H
 #define   ZYPP_URL_H
 
-#include <zypp/url/UrlBase.h>
-#include <zypp/url/UrlUtils.h>
+#include "zypp/url/UrlBase.h"
+#include "zypp/url/UrlUtils.h"
 
 
 //////////////////////////////////////////////////////////////////////

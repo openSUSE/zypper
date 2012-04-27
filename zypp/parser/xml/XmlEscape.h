@@ -13,7 +13,7 @@
 #define ZYPP_PARSER_XML_XMLESCAPE_H
 
 // from IoBind Library:
-#include <zypp/parser/xml/xml_escape_parser.hpp>
+#include "zypp/parser/xml/xml_escape_parser.hpp"
 
 ///////////////////////////////////////////////////////////////////
 namespace zypp

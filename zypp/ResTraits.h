@@ -38,7 +38,7 @@ namespace zypp
    * Forward declaration of all Resolvable smart pointer
    * types provided in \c ResTraits.h (recommended in header files):
    * \code
-   * #include<zypp/ResTraits.h>
+   * #include "zypp/ResTraits.h"
    *
    * Resolvable_Ptr                      // Resolvable *
    * ResTraits<Resolvable>::PtrType      // same as above
@@ -49,7 +49,7 @@ namespace zypp
    *
    * Synonym, but requires \c Resolvable.h being included:
    * \code
-   * #include<zypp/Resolvable.h>
+   * #include "zypp/Resolvable.h"
    *
    * Resolvable::Ptr        // same as Resolvable_Ptr but requires Resolvable.h
    * Resolvable::constPtr   // same as Resolvable_constPtr but requires Resolvable.h

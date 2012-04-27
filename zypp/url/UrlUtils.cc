@@ -9,9 +9,9 @@
 /**
  * \file zypp/url/UrlUtils.cc
  */
-#include <zypp/base/Gettext.h>
-#include <zypp/base/String.h>
-#include <zypp/url/UrlUtils.h>
+#include "zypp/base/Gettext.h"
+#include "zypp/base/String.h"
+#include "zypp/url/UrlUtils.h"
 
 #include <stdlib.h>   // strtol
 #include <cctype>     // isxdigit

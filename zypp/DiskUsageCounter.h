@@ -12,7 +12,7 @@
 #ifndef ZYPP_DISKUSAGE_COUNTER_H
 #define ZYPP_DISKUSAGE_COUNTER_H
 
-#include <zypp/ResPool.h>
+#include "zypp/ResPool.h"
 
 #include <set>
 #include <string>

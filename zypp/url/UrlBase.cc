@@ -9,10 +9,10 @@
 /**
  * \file zypp/url/UrlBase.cc
  */
-#include <zypp/url/UrlBase.h>
-#include <zypp/base/String.h>
-#include <zypp/base/Gettext.h>
-#include <zypp/base/Regex.h>
+#include "zypp/url/UrlBase.h"
+#include "zypp/base/String.h"
+#include "zypp/base/Gettext.h"
+#include "zypp/base/Regex.h"
 
 #include <stdexcept>
 #include <climits>

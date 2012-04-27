@@ -15,7 +15,7 @@
 #include <cerrno>
 #include <iosfwd>
 
-#include <zypp/base/String.h>
+#include "zypp/base/String.h"
 
 ///////////////////////////////////////////////////////////////////
 namespace zypp

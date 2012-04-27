@@ -13,8 +13,8 @@
 #ifndef ZYPP_TARGET_HAL_HALCONTEXT_H
 #define ZYPP_TARGET_HAL_HALCONTEXT_H
 
-#include <zypp/target/hal/HalException.h>
-#include <zypp/base/PtrTypes.h>
+#include "zypp/target/hal/HalException.h"
+#include "zypp/base/PtrTypes.h"
 #include <string>
 #include <vector>
 #include <stdint.h>

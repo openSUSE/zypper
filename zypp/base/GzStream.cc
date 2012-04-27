@@ -21,8 +21,8 @@
 
 #include <cerrno>
 #include <iostream>
-#include <zypp/base/LogControl.h>
-#include <zypp/base/LogTools.h>
+#include "zypp/base/LogControl.h"
+#include "zypp/base/LogTools.h"
 using std::endl;
 
 #include "zypp/base/GzStream.h"

@@ -37,7 +37,7 @@
 #include "zypp/ResFilters.h"
 #include "zypp/ResStatus.h"
 #include "zypp/sat/Pool.h"
-#include <zypp/sat/WhatObsoletes.h>
+#include "zypp/sat/WhatObsoletes.h"
 
 /////////////////////////////////////////////////////////////////////////
 namespace zypp

@@ -12,7 +12,7 @@
 #ifndef   ZYPP_THREAD_MUTEXEXCEPTION_H
 #define   ZYPP_THREAD_MUTEXEXCEPTION_H
 
-#include <zypp/base/Exception.h>
+#include "zypp/base/Exception.h"
 
 
 //////////////////////////////////////////////////////////////////////

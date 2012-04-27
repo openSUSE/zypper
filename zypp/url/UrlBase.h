@@ -12,8 +12,8 @@
 #ifndef   ZYPP_URL_URLBASE_H
 #define   ZYPP_URL_URLBASE_H
 
-#include <zypp/url/UrlUtils.h>
-#include <zypp/base/PtrTypes.h>
+#include "zypp/url/UrlUtils.h"
+#include "zypp/base/PtrTypes.h"
 
 
 //////////////////////////////////////////////////////////////////////

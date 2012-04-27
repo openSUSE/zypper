@@ -13,9 +13,9 @@
 #ifndef ZYPP_TARGET_HAL_HALEXCEPTION_H
 #define ZYPP_TARGET_HAL_HALEXCEPTION_H
 
-#include <zypp/base/Exception.h>
-#include <zypp/base/Gettext.h>
-#include <zypp/base/String.h>
+#include "zypp/base/Exception.h"
+#include "zypp/base/Gettext.h"
+#include "zypp/base/String.h"
 
 
 //////////////////////////////////////////////////////////////////////
