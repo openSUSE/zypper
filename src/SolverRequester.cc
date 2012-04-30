@@ -402,6 +402,8 @@ bool SolverRequester::installPatch(
       Patch::InteractiveFlags ignoreFlags = Patch::NoFlags;
       if (Zypper::instance()->globalOpts().reboot_req_non_interactive)
         ignoreFlags |= Patch::Reboot;
+      if ( Zypper::instance()->cOpts().count("auto-agree-with-licenses") || Zypper::instance()->cOpts().count("agree-to-third-party-licenses") )
+	ignoreFlags |= Patch::License;
 
       // bnc #221476
       if (_opts.skip_interactive && patch->interactiveWhenIgnoring(ignoreFlags))

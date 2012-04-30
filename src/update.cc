@@ -142,6 +142,8 @@ static bool xml_list_patches (Zypper & zypper)
         Patch::InteractiveFlags ignoreFlags = Patch::NoFlags;
         if (zypper.globalOpts().reboot_req_non_interactive)
           ignoreFlags |= Patch::Reboot;
+	if ( zypper.cOpts().count("auto-agree-with-licenses") || zypper.cOpts().count("agree-to-third-party-licenses") )
+	  ignoreFlags |= Patch::License;
 
         cout << "interactive=\"" << (patch->interactiveWhenIgnoring(ignoreFlags) ? "true" : "false") << "\" ";
         cout << "kind=\"patch\"";
