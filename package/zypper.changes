@@ -1,4 +1,11 @@
 -------------------------------------------------------------------
+Mon Apr 30 11:55:29 CEST 2012 - ma@suse.de
+
+- Don't treat patches with licensed packages as interactive is 
+  --auto-agree-with-licenses is used (bnc#730824)
+- version 1.6.26
+
+-------------------------------------------------------------------
 Wed Apr 25 12:19:45 CEST 2012 - ma@suse.de
 
 - More fixes for multibyte string output (bnc#735016)
