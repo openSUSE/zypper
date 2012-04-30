@@ -282,6 +282,8 @@ void printPatchInfo(Zypper & zypper, const ui::Selectable & s )
   Patch::InteractiveFlags ignoreFlags = Patch::NoFlags;
   if (zypper.globalOpts().reboot_req_non_interactive)
     ignoreFlags |= Patch::Reboot;
+  if ( zypper.cOpts().count("auto-agree-with-licenses") || zypper.cOpts().count("agree-to-third-party-licenses") )
+    ignoreFlags |= Patch::License;
 
   cout << _("Interactive: ") << (patch->interactiveWhenIgnoring(ignoreFlags) ? _("Yes") : _("No")) << endl;
 
