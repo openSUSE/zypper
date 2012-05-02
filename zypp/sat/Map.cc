@@ -69,7 +69,7 @@ namespace zypp
 	::memset( _pimpl->map, (val_r?-1:0), _pimpl->size );
     }
 
-#define M_RANGE_CKECK(IDX,LOC) if ( ((IDX) >> 3) >= _pimpl->size ) throw std::out_of_range( "zypp::sat::Map::" LOC )
+#define M_RANGE_CKECK(IDX,LOC) if ( ((IDX) >> 3) >= size_type(_pimpl->size) ) throw std::out_of_range( "zypp::sat::Map::" LOC )
 
     void Map::set( size_type idx_r )
     {
