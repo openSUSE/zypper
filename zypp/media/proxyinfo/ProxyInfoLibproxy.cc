@@ -67,7 +67,7 @@ namespace zypp {
 	if ( proxyFactory )
 	  ::px_proxy_factory_free( proxyFactory );
 
-	TmpUnsetEnv env[] = { "KDE_FULL_SESSION", "GNOME_DESKTOP_SESSION_ID", "DESKTOP_SESSION" };
+	TmpUnsetEnv envguard[] __attribute__ ((__unused__)) = { "KDE_FULL_SESSION", "GNOME_DESKTOP_SESSION_ID", "DESKTOP_SESSION" };
 	proxyFactory = ::px_proxy_factory_new();
       }
       else if ( ! proxyFactory )
