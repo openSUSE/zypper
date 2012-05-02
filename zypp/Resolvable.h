@@ -36,7 +36,7 @@ namespace zypp
   /** Interface base for resolvable objects (identification and dependencies).
    * \todo Merge with ResObject
   */
-  class Resolvable : protected sat::Solvable,
+  class Resolvable : protected zypp::sat::Solvable,	// Note: gcc bug #52841 prohibits using just sat::Solvable
                      public base::ReferenceCounted, private base::NonCopyable
   {
     friend std::ostream & operator<<( std::ostream & str, const Resolvable & obj );
@@ -51,7 +51,7 @@ namespace zypp
   public:
 #ifndef SWIG // Swig treats it as syntax error
     /** Whether this represents a valid- or no-solvable. */
-    using sat::Solvable::operator bool_type;
+    using zypp::sat::Solvable::operator bool_type;	// Note: gcc bug #52841 prohibits using just sat::Solvable
 #endif
     /** Whether this represents an installed solvable. */
     bool isSystem() const

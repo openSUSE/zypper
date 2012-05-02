@@ -69,7 +69,7 @@ namespace zypp
     template<class _Derived>
       struct SafeBool : private safebool_detail::SafeBoolBase
       {
-        typedef safebool_detail::SafeBoolBase::bool_type bool_type;
+        using safebool_detail::SafeBoolBase::bool_type;
         operator bool_type() const
         {
           return( (static_cast<const _Derived *>(this))->boolTest()
