@@ -1,8 +1,5 @@
-
-#include <cstdlib>
-#include <cstdio>
-#include <iostream>
 #include <fcntl.h>
+#include <unistd.h>
 #include "zypp/base/Random.h"
 
 using namespace std;
