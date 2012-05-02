@@ -260,7 +260,7 @@ namespace zypp {
 
     public:
       /** Return \c FILE* to read programms stderr (O_NONBLOCK set). */
-      _ExternalProgram::EarlyPipe::stderr;
+      using _ExternalProgram::EarlyPipe::stderr;
 
       /** Read data up to \c delim_r from stderr (nonblocking).
        * \note If \c delim_r is '\0', we read as much data as possible.
