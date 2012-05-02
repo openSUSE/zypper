@@ -73,9 +73,10 @@ namespace zypp
 	static ReplacerData _data;
 
 	std::string ret( value_r );
-	ret = str::replaceAllFun( ret, "$arch",		[&_data]()-> std::string { return _data.sysarch(); } );
-	ret = str::replaceAllFun( ret, "$basearch",	[&_data]()-> std::string { return _data.basearch(); } );
-	ret = str::replaceAllFun( ret, "$releasever",	[&_data]()-> std::string { return _data.releasever(); } );
+	// Don't need to capture static (non automatic) _data in lambda
+	ret = str::replaceAllFun( ret, "$arch",		[]()-> std::string { return _data.sysarch(); } );
+	ret = str::replaceAllFun( ret, "$basearch",	[]()-> std::string { return _data.basearch(); } );
+	ret = str::replaceAllFun( ret, "$releasever",	[]()-> std::string { return _data.releasever(); } );
 	return ret;
       }
 
