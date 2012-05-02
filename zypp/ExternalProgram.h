@@ -13,6 +13,8 @@
 #ifndef ZYPP_EXTERNALPROGRAM_H
 #define ZYPP_EXTERNALPROGRAM_H
 
+#include <unistd.h>
+
 #include <map>
 #include <string>
 #include <vector>
