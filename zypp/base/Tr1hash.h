@@ -16,8 +16,6 @@
 #include <tr1/unordered_set>
 #include <tr1/unordered_map>
 
-#include "zypp/base/PtrTypes.h"
-
 /** Define hash function for id based classes.
  * Class has to provide a method \c id() retuning a unique number.
  * \code
