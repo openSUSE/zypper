@@ -573,14 +573,14 @@ namespace zypp
 	  multiversionDir = ( cfg_config_path.empty() ? Pathname("/etc/zypp") : cfg_config_path ) / "multiversion.d";
 
 	filesystem::dirForEach( multiversionDir,
-				[&_multiversion]( const Pathname & dir_r, const char *const & name_r )->bool
+				[this]( const Pathname & dir_r, const char *const & name_r )->bool
 				{
 				  MIL << "Parsing " << dir_r/name_r << endl;
 				  iostr::simpleParseFile( InputStream( dir_r/name_r ),
-							  [&_multiversion]( int num_r, std::string line_r )->bool
+							  [this]( int num_r, std::string line_r )->bool
 							  {
 							    DBG << "  found " << line_r << endl;
-							    _multiversion.insert( line_r );
+							   _multiversion.insert( line_r );
 							    return true;
 							  } );
 				  return true;
