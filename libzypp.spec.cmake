@@ -16,7 +16,7 @@
 #
 
 # norootforbuild
-%define force_gcc_46 1
+%define force_gcc_46 0
 
 
 Name:           @PACKAGE@
