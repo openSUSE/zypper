@@ -1,4 +1,10 @@
 -------------------------------------------------------------------
+Fri May  4 11:18:17 CEST 2012 - ma@suse.de
+
+- build with gcc-4.7 (bnc#755324)
+- version 11.5.0 (5)
+
+-------------------------------------------------------------------
 Wed Apr 25 18:50:20 CEST 2012 - ma@suse.de
 
 - Fix lost device info when mounting CD/DVD
