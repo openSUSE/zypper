@@ -8,6 +8,7 @@
 /** \file console.cc
  * Miscellaneous console utilities.
  */
+#include <unistd.h>
 
 #include <string>
 #include <fstream>
