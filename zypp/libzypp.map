@@ -1,0 +1,12 @@
+ZYPP_plain {
+	global:
+	  extern "C++" {
+	    zypp::*;
+	    vtable?for?zypp::*;
+	    typeinfo?for?zypp::*;
+	    typeinfo?name?for?zypp::*;
+	    guard?variable?for?zypp::*;
+	  };
+	local:
+	  *;
+};
