@@ -10,7 +10,8 @@
  *
 */
 
-#include<string>
+#include <string>
+#include "zypp/parser/xml/XmlEscape.h"
 
 /*
 IoBind Library License:
@@ -34,7 +35,7 @@ namespace iobind
   ///////////////////////////////////////////////////////////////////
   namespace parser
   {
-    struct xml_escape_parser
+    struct ZYPP_LOCAL xml_escape_parser
     {
       std::string escape(const std::string &istr) const
       {

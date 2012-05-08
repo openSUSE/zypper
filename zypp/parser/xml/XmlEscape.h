@@ -12,6 +12,9 @@
 #ifndef ZYPP_PARSER_XML_XMLESCAPE_H
 #define ZYPP_PARSER_XML_XMLESCAPE_H
 
+#include <string>
+#include "zypp/APIConfig.h"
+
 ///////////////////////////////////////////////////////////////////
 namespace zypp
 {
@@ -20,10 +23,10 @@ namespace zypp
   {
 
     /** Escape xml special charaters (<tt>& -> &amp;</tt>; from IoBind library). */
-    std::string escape( const std::string & in_r );
+    ZYPP_API std::string escape( const std::string & in_r );
 
     /** Unescape xml special charaters (<tt>&amp; -> &</tt>; from IoBind library) */
-    std::string unescape( const std::string & in_r );
+    ZYPP_API std::string unescape( const std::string & in_r );
 
   } // namespace xml
   /////////////////////////////////////////////////////////////////
