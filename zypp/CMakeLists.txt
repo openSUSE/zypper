@@ -2,7 +2,7 @@
 # SOURCES                                                          #
 ####################################################################
 
-ADD_DEFINITIONS(-DLOCALEDIR="${CMAKE_INSTALL_PREFIX}/share/locale" -DTEXTDOMAIN="zypp" )
+ADD_DEFINITIONS(-DLOCALEDIR="${CMAKE_INSTALL_PREFIX}/share/locale" -DTEXTDOMAIN="zypp" -DZYPP_DLL )
 
 INCLUDE_DIRECTORIES(${CMAKE_CURRENT_BINARY_DIR})
 #FILE(WRITE filename "message to write"... )
@@ -89,6 +89,7 @@ SET( zypp_EARLY_SRCS
 )
 
 SET( zypp_HEADERS
+  APIConfig.h
   Arch.h
   AutoDispose.h
   Bit.h
