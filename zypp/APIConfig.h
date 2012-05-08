@@ -12,6 +12,8 @@
 #ifndef ZYPP_APICONFIG_H
 #define ZYPP_APICONFIG_H
 
+#include "zypp/base/Easy.h"	// some macros used almost everywhere
+
 /**
  * Generic helper definitions for shared library support.
  *

@@ -16,7 +16,7 @@
 
 /** Convenient for-loops using iterator.
  * \code
- *  std::set&lt;std::string&gt; _store;
+ *  std::set<std::string>; _store;
  *  for_( it, _store.begin(), _store.end() )
  *  {
  *    cout << *it << endl;
@@ -40,7 +40,6 @@
 #define arrayBegin(A) (&A[0])
 #define arraySize(A)  (sizeof(A)/sizeof(*A))
 #define arrayEnd(A)   (&A[0] + arraySize(A))
-
 
 #define GCC_VERSION (__GNUC__ * 10000 + __GNUC_MINOR__ * 100  + __GNUC_PATCHLEVEL__)
 #if GCC_VERSION < 40600 || not defined(__GXX_EXPERIMENTAL_CXX0X__)
