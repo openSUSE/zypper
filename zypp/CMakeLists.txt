@@ -367,7 +367,6 @@ SET( zypp_parser_HEADERS
   parser/HistoryLogReader.h
   parser/ParserProgress.h
   parser/RepoFileReader.h
-  parser/xml_escape_parser.hpp
   parser/RepoindexFileReader.h
   parser/ServiceFileReader.h
   parser/ProductFileReader.h
@@ -412,9 +411,9 @@ SET( zypp_parser_xml_SRCS
   parser/xml/ParseDefConsume.cc
   parser/xml/ParseDefException.cc
   parser/xml/Reader.cc
+  parser/xml/XmlEscape.cc
   parser/xml/XmlString.cc
   parser/xml/libxmlfwd.cc
-  parser/xml/xml_escape_parser.cpp
 )
 
 SET( zypp_parser_xml_HEADERS
@@ -428,7 +427,6 @@ SET( zypp_parser_xml_HEADERS
   parser/xml/XmlEscape.h
   parser/xml/XmlString.h
   parser/xml/libxmlfwd.h
-  parser/xml/xml_escape_parser.hpp
 )
 
 INSTALL(  FILES
