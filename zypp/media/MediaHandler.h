@@ -25,7 +25,7 @@
 
 #include "zypp/media/MediaSource.h"
 #include "zypp/media/MediaException.h"
-#include "zypp/base/Deprecated.h"
+#include "zypp/APIConfig.h"
 
 namespace zypp {
   namespace media {

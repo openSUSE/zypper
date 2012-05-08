@@ -17,7 +17,7 @@
 #include "zypp/base/Easy.h"
 #include "zypp/base/LogTools.h"
 #include "zypp/base/SerialNumber.h"
-#include "zypp/base/Deprecated.h"
+#include "zypp/APIConfig.h"
 
 #include "zypp/pool/PoolTraits.h"
 #include "zypp/ResPoolProxy.h"

@@ -15,7 +15,7 @@
 #include <iosfwd>
 #include <string>
 
-#include "zypp/base/Deprecated.h"
+#include "zypp/APIConfig.h"
 #include "zypp/base/String.h"
 #include "zypp/IdStringType.h"
 

@@ -14,7 +14,7 @@
 
 #include <iosfwd>
 
-#include "zypp/base/Deprecated.h"
+#include "zypp/APIConfig.h"
 #include "zypp/Pathname.h"
 #include "zypp/ByteCount.h"
 #include "zypp/CheckSum.h"

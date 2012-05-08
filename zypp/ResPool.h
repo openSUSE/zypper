@@ -14,7 +14,7 @@
 
 #include <iosfwd>
 
-#include "zypp/base/Deprecated.h"
+#include "zypp/APIConfig.h"
 #include "zypp/base/Iterator.h"
 
 #include "zypp/pool/PoolTraits.h"

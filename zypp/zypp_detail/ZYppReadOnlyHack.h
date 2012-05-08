@@ -14,7 +14,7 @@
 #define ZYPP_ZYPP_DETAIL_ZYPPREADONLYHACK_H
 #warning ZYPP_ZYPP_DETAIL_ZYPPREADONLYHACK_H
 
-#include "zypp/base/Deprecated.h"
+#include "zypp/APIConfig.h"
 
 ///////////////////////////////////////////////////////////////////
 namespace zypp

@@ -16,7 +16,7 @@
 #include <list>
 
 #include "zypp/ResPool.h"
-#include "zypp/base/Deprecated.h"
+#include "zypp/APIConfig.h"
 
 ///////////////////////////////////////////////////////////////////
 namespace zypp

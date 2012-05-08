@@ -15,7 +15,7 @@
 #include <iosfwd>
 
 #include "zypp/base/SafeBool.h"
-#include "zypp/base/Deprecated.h"
+#include "zypp/APIConfig.h"
 
 #include "zypp/sat/detail/PoolMember.h"
 

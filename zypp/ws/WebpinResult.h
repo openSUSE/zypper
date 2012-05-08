@@ -17,7 +17,7 @@
 #include <set>
 #include "zypp/base/PtrTypes.h"
 #include "zypp/base/Iterator.h"
-#include "zypp/base/Deprecated.h"
+#include "zypp/APIConfig.h"
 
 #include "zypp/CheckSum.h"
 #include "zypp/Edition.h"

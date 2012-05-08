@@ -14,7 +14,7 @@
 
 #include "zypp/media/MediaAccess.h"
 
-#include "zypp/base/Deprecated.h"
+#include "zypp/APIConfig.h"
 #include "zypp/base/NonCopyable.h"
 #include "zypp/base/PtrTypes.h"
 #include "zypp/Pathname.h"

@@ -22,7 +22,7 @@
 #include "zypp/base/Tr1hash.h"
 #include "zypp/base/Logger.h"
 #include "zypp/base/Iterator.h"
-#include "zypp/base/Deprecated.h"
+#include "zypp/APIConfig.h"
 
 ///////////////////////////////////////////////////////////////////
 namespace zypp

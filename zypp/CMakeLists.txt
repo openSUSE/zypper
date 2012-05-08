@@ -224,7 +224,6 @@ SET( zypp_base_HEADERS
   base/Counter.h
   base/Debug.h
   base/DefaultIntegral.h
-  base/Deprecated.h
   base/DtorReset.h
   base/Exception.h
   base/UserRequestException.h
