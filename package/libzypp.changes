@@ -1,4 +1,10 @@
 -------------------------------------------------------------------
+Thu May 31 10:07:37 UTC 2012 - dmacvicar@suse.com
+
+- fix an invalid read revealed by valgrind in
+  RepositoryIterator::increment()
+
+-------------------------------------------------------------------
 Sun May 20 01:13:30 CEST 2012 - ma@suse.de
 
 - Update zypp-po.tar.bz2
