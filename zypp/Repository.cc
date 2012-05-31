@@ -318,7 +318,7 @@ namespace zypp
 	  ::_Pool * satpool = sat::Pool::instance().get();
 	  do {
 	    ++base_reference();
-	  } while ( !*base() && base() < satpool->repos+satpool->nrepos );
+	  } while ( base() < satpool->repos+satpool->nrepos && !*base() );
 	}
       }
     } // namespace detail
