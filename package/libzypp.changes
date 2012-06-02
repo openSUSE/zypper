@@ -1,4 +1,9 @@
 -------------------------------------------------------------------
+Sun Jun  3 01:14:09 CEST 2012 - ma@suse.de
+
+- Update zypp-po.tar.bz2
+
+-------------------------------------------------------------------
 Thu May 31 10:07:37 UTC 2012 - dmacvicar@suse.com
 
 - fix an invalid read revealed by valgrind in
