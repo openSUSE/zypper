@@ -1,4 +1,17 @@
 -------------------------------------------------------------------
+Tue Jun  5 10:13:21 CEST 2012 - ma@suse.de
+
+- Backport zypper.conf parser fixes (bnc#765267)
+- Fix augeas lense enforcing a non empty anonymous section (bnc#748144)
+- At least warn if config file can not be parsed
+- Fix zypp.conf lens (bnc#687530)
+- Eat trailing whitespace in zypper.conf (bnc#687530)
+- Fix zypp.conf lense to ignore commented option values
+- fix crashing zypper when there are double config entrys in 
+  zypper.conf (bnc#614646)
+- version 1.3.20
+
+-------------------------------------------------------------------
 Mon Apr 16 21:07:59 CEST 2012 - ma@suse.de
 
 - Let zypper remove lock follow addlock with respect to args and behavior (bnc#751976)
