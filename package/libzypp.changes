@@ -1,4 +1,12 @@
 -------------------------------------------------------------------
+Fri Jun  8 14:16:15 CEST 2012 - ma@suse.de
+
+- Fix processing of weak locks (bnc#749418, bnc#765164)
+- [valgrind] don't dereference if we may be past the end of the repositories.
+- add armv7hl workaround for Adrian
+- version 11.6.2 (6)
+
+-------------------------------------------------------------------
 Sun Jun  3 01:14:09 CEST 2012 - ma@suse.de
 
 - Update zypp-po.tar.bz2
