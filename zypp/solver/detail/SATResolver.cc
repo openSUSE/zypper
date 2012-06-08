@@ -1426,21 +1426,25 @@ void SATResolver::setLocks()
 	}
     }
 
+    ///////////////////////////////////////////////////////////////////
+    // Weak locks: Ignore if an item with this name is already installed.
+    // If it's not installed try to keep it this way using a weak delete
+    ///////////////////////////////////////////////////////////////////
     std::set<IdString> unifiedByName;
     for (PoolItemList::const_iterator iter = _items_to_keep.begin(); iter != _items_to_keep.end(); ++iter) {
-	if (iter->status().isInstalled()) {
-	    MIL << "Keep installed item " << *iter << endl;
-	    queue_push( &(_jobQueue), SOLVER_INSTALL | SOLVER_SOLVABLE | SOLVER_WEAK );
-	    queue_push( &(_jobQueue), (*iter)->satSolvable().id() );
-	} else {
-	    IdString ident( (*iter)->satSolvable().ident() );
-	    MIL << "Keep NOT installed name " << ident << " (" << *iter << ")" << endl;
-	    if ( unifiedByName.insert( ident ).second )
-	    {
-	      queue_push( &(_jobQueue), SOLVER_ERASE | SOLVER_SOLVABLE_NAME | SOLVER_WEAK | MAYBE_CLEANDEPS );
-	      queue_push( &(_jobQueue), ident.id() );
-	    }
+      IdString ident( (*iter)->satSolvable().ident() );
+      if ( unifiedByName.insert( ident ).second )
+      {
+	if ( ! ui::Selectable::get( *iter )->hasInstalledObj() )
+	{
+	  MIL << "Keep NOT installed name " << ident << " (" << *iter << ")" << endl;
+	  if ( unifiedByName.insert( ident ).second )
+	  {
+	    queue_push( &(_jobQueue), SOLVER_ERASE | SOLVER_SOLVABLE_NAME | SOLVER_WEAK | MAYBE_CLEANDEPS );
+	    queue_push( &(_jobQueue), ident.id() );
+	  }
 	}
+      }
     }
 }
 
