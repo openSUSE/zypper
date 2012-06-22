@@ -203,7 +203,7 @@ struct InstallResolvableReportReceiver : public zypp::callback::ReceiveReport<zy
     clock_gettime(CLOCK_REALTIME, &_last_reported);
     _last_percent.reset();
     _resolvable = resolvable;
-    // TranslatorExplanation This text is a progress display label e.g. "Installing foo-1.1.2 [42%]"
+    // TranslatorExplanation This text is a progress display label e.g. "Installing: foo-1.1.2 [42%]"
     _label = boost::str(boost::format(_("Installing: %s-%s"))
         % resolvable->name() % resolvable->edition());
     Zypper::instance()->out().progressStart("install-resolvable", _label);
