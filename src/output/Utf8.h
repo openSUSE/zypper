@@ -1,6 +1,10 @@
 #ifndef UTF8_H_
 #define UTF8_H_
 
+#include <cstdlib>
+#include <cstring>
+#include <wchar.h>
+
 #include <iostream>
 #include <string>
 
@@ -31,6 +35,33 @@ namespace utf8
     /** utf8 size */
     size_type size() const
     {
+      // test for locales using dual width fonts:
+      static bool isCJK = []()->bool {
+	const char * lang = ::getenv( "LANG" );
+	return ( lang && ( !strncmp( lang, "zh", 2 )
+	                || !strncmp( lang, "ko", 2 )
+			|| !strncmp( lang, "ja", 2 ) ) );
+      }();
+
+      if ( isCJK )
+      {
+	// this should actually be correct for ALL locales:
+	size_type len = 0;
+	const char *s = _str.c_str();
+	for ( size_type slen = _str.size(); slen > 0; )
+	{
+	  wchar_t wc;
+	  size_t bytes = mbrtowc( &wc, s, slen, NULL );
+	  if ( bytes <= 0 )
+	    break;
+	  len += wcwidth( wc );
+	  slen -= bytes;
+	  s += bytes;
+	}
+	return len;
+      }
+
+      // NON CJK: faster and hopefully accurate enough:
       // simply do not count continuation bytes '10xxxxxx'
       size_type ret = _str.size();
       for ( auto ch : _str )
