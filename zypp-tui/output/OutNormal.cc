@@ -264,9 +264,9 @@ void OutNormal::dwnldProgressStart(const zypp::Url & uri)
     cout << CLEARLN;
 
   TermLine outstr( TermLine::SF_CRUSH | SF_EXPAND_IF_TTY, '-' );
-  outstr.lhs << _("Retrieving:");
+  outstr.lhs << _("Retrieving:") << ' ';
   if (verbosity() == DEBUG)
-    outstr.lhs << uri << ' ';
+    outstr.lhs << uri;
   else
     outstr.lhs << zypp::Pathname(uri.getPathName()).basename();
   outstr.lhs << ' ';
