@@ -383,6 +383,8 @@ namespace zypp
      *       Turn off using cookies by setting it to "0" (or false, no, off).
      *     - <tt>proxy</tt>:
      *       A proxy hostname or hostname and port separated by ':'.
+     *       Setting the hostname to '_none_' explicitly disables the use of a
+     *       proxy even if configured in /etc/sysconfig/proxy or the environment.
      *     - <tt>proxyport</tt>:
      *       Alternative way to provide the proxy port.
      *     - <tt>proxyuser</tt>:

@@ -43,6 +43,8 @@
 #define  TRANSFER_TIMEOUT       60 * 3
 #define  TRANSFER_TIMEOUT_MAX   60 * 60
 
+#define EXPLICITLY_NO_PROXY "_none_"
+
 #undef CURLVERSION_AT_LEAST
 #define CURLVERSION_AT_LEAST(M,N,O) LIBCURL_VERSION_NUM >= ((((M)<<8)+(N))<<8)+(O)
 
@@ -286,12 +288,12 @@ void fillSettingsFromUrl( const Url &url, TransferSettings &s )
     param = url.getQueryParam( "proxy" );
     if ( ! param.empty() )
     {
-        if ( param == "_none_" ) {
+        if ( param == EXPLICITLY_NO_PROXY ) {
 	    // Workaround TransferSettings shortcoming: With an
 	    // empty proxy string, code will continue to look for
 	    // valid proxy settings. So set proxy to some non-empty
 	    // string, to indicate it has been explicitly disabled.
-	    s.setProxy("_none_");
+	    s.setProxy(EXPLICITLY_NO_PROXY);
             s.setProxyEnabled(false);
         }
         else {
@@ -669,12 +671,19 @@ void MediaCurl::setupEasy()
       SET_OPTION(CURLOPT_PROXYUSERPWD, unEscape( proxyuserpwd ).c_str());
     }
   }
+#if CURLVERSION_AT_LEAST(7,19,4)
+  else if ( _settings.proxy() == EXPLICITLY_NO_PROXY )
+  {
+    // Explicitly disabled in URL (see fillSettingsFromUrl()).
+    // This should also prevent libcurl from looking into the environment.
+    DBG << "Proxy: explicitly NOPROXY" << endl;
+    SET_OPTION(CURLOPT_NOPROXY, "*");
+  }
+#endif
   else
   {
-      DBG << "Proxy: NOPROXY" << endl;
-#if CURLVERSION_AT_LEAST(7,19,4)
-      SET_OPTION(CURLOPT_NOPROXY, "*");
-#endif
+    // libcurl may look into the enviroanment
+    DBG << "Proxy: not explicitly set" << endl;
   }
 
   /** Speed limits */
