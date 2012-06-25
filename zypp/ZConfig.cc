@@ -747,7 +747,7 @@ namespace zypp
   Pathname ZConfig::knownServicesPath() const
   {
     return ( _pimpl->cfg_known_services_path.empty()
-        ? (configPath()/"services.d") : _pimpl->cfg_known_repos_path );
+        ? (configPath()/"services.d") : _pimpl->cfg_known_services_path );
   }
 
   Pathname ZConfig::vendorPath() const
