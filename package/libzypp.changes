@@ -1,4 +1,12 @@
 -------------------------------------------------------------------
+Mon Jun 25 15:23:10 CEST 2012 - ma@suse.de
+
+- zypp.conf:servicesdir is ignored (bnc#765528)
+- allow libcurl to take proxy from environment iff proxy is not
+  configured or disallowed (bnc#745404)
+- version 11.6.3 (6)
+
+-------------------------------------------------------------------
 Sun Jun 24 01:14:32 CEST 2012 - ma@suse.de
 
 - Update zypp-po.tar.bz2
