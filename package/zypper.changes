@@ -1,4 +1,13 @@
 -------------------------------------------------------------------
+Mon Jun 25 10:29:19 CEST 2012 - ma@suse.de
+
+- Fix spacing bug in progress bar (bnc#674572)
+- consider dual width fonts in output (bnc#766443)
+- Don't treat patches with licensed packages as interactive if 
+  --auto-agree-with-licenses is used (bnc#730824)
+- version 1.7.3
+
+-------------------------------------------------------------------
 Sun Jun 24 01:15:18 CEST 2012 - ma@suse.de
 
 - Update zypper-po.tar.bz2
