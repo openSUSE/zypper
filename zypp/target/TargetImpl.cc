@@ -669,29 +669,10 @@ namespace zypp
     /**
      * generates a random id using uuidgen
      */
-    static string generateRandomId()
+    static std::string generateRandomId()
     {
-      string id;
-      const char* argv[] =
-      {
-         "/usr/bin/uuidgen",
-         NULL
-      };
-
-      ExternalProgram prog( argv,
-                            ExternalProgram::Normal_Stderr,
-                            false, -1, true);
-      std::string line;
-      for(line = prog.receiveLine();
-          ! line.empty();
-          line = prog.receiveLine() )
-      {
-          MIL << line << endl;
-          id = line;
-          break;
-      }
-      prog.close();
-      return id;
+      std::ifstream uuidprovider( "/proc/sys/kernel/random/uuid" );
+      return iostr::getline( uuidprovider );
     }
 
     /**

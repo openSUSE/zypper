@@ -93,7 +93,6 @@ Requires:       rpm
 
 %if 0%{?suse_version}
 BuildRequires:  rpm-devel
-Requires:       /usr/bin/uuidgen
 %endif
 
 %if 0%{?fedora_version} || 0%{?rhel_version} >= 600 || 0%{?centos_version} >= 600
@@ -105,8 +104,6 @@ BuildRequires:  rpm-devel
 %if 0%{?mandriva_version}
 BuildRequires:  glib2-devel
 BuildRequires:  librpm-devel
-# uuidgen
-Requires:       e2fsprogs
 %endif
 
 %if 0%{?suse_version}
