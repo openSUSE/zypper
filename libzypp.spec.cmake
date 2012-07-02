@@ -94,9 +94,6 @@ Requires:       rpm
 %if 0%{?suse_version}
 BuildRequires:  rpm-devel
 Requires:       /usr/bin/uuidgen
-%if 0%{?suse_version} > 1020
-BuildRequires:  hicolor-icon-theme
-%endif
 %endif
 
 %if 0%{?fedora_version} || 0%{?rhel_version} >= 600 || 0%{?centos_version} >= 600
