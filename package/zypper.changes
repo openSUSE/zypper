@@ -1,4 +1,68 @@
 -------------------------------------------------------------------
+Thu Jul  5 01:14:10 CEST 2012 - ma@suse.de
+
+- Update zypper-po.tar.bz2
+
+-------------------------------------------------------------------
+Sun Jul  1 01:14:13 CEST 2012 - ma@suse.de
+
+- Update zypper-po.tar.bz2
+
+-------------------------------------------------------------------
+Thu Jun 28 01:15:17 CEST 2012 - ma@suse.de
+
+- Update zypper-po.tar.bz2
+
+-------------------------------------------------------------------
+Mon Jun 25 10:29:19 CEST 2012 - ma@suse.de
+
+- Fix spacing bug in progress bar (bnc#674572)
+- consider dual width fonts in output (bnc#766443)
+- Don't treat patches with licensed packages as interactive if 
+  --auto-agree-with-licenses is used (bnc#730824)
+- version 1.7.3
+
+-------------------------------------------------------------------
+Sun Jun 24 01:15:18 CEST 2012 - ma@suse.de
+
+- Update zypper-po.tar.bz2
+
+-------------------------------------------------------------------
+Thu Jun 14 01:14:19 CEST 2012 - ma@suse.de
+
+- Update zypper-po.tar.bz2
+
+-------------------------------------------------------------------
+Sun Jun 10 01:15:22 CEST 2012 - ma@suse.de
+
+- Update zypper-po.tar.bz2
+
+-------------------------------------------------------------------
+Thu Jun  7 01:14:32 CEST 2012 - ma@suse.de
+
+- Update zypper-po.tar.bz2
+
+-------------------------------------------------------------------
+Sun Jun  3 01:15:02 CEST 2012 - ma@suse.de
+
+- Update zypper-po.tar.bz2
+
+-------------------------------------------------------------------
+Thu May 31 01:13:25 CEST 2012 - ma@suse.de
+
+- Update zypper-po.tar.bz2
+
+-------------------------------------------------------------------
+Sun May 27 01:13:49 CEST 2012 - ma@suse.de
+
+- Update zypper-po.tar.bz2
+
+-------------------------------------------------------------------
+Thu May 24 01:15:08 CEST 2012 - ma@suse.de
+
+- Update zypper-po.tar.bz2
+
+-------------------------------------------------------------------
 Sun May 20 01:14:09 CEST 2012 - ma@suse.de
 
 - Update zypper-po.tar.bz2
