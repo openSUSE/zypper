@@ -1009,9 +1009,11 @@ void MediaCurl::evaluateCurlCode( const Pathname &filename,
         err = "Write error";
         break;
       case CURLE_PARTIAL_FILE:
-      case CURLE_ABORTED_BY_CALLBACK:
       case CURLE_OPERATION_TIMEDOUT:
-        if( timeout_reached)
+	timeout_reached	= true; // fall though to TimeoutException
+	// fall though...
+      case CURLE_ABORTED_BY_CALLBACK:
+         if( timeout_reached )
         {
           err  = "Timeout reached";
           ZYPP_THROW(MediaTimeoutException(url));
