@@ -120,7 +120,7 @@ INSTALL(
 )
 
 ADD_EXECUTABLE( zypp-refresh-wrapper zypp-refresh-wrapper.c )
-TARGET_LINK_LIBRARIES( zypp-refresh-wrapper ${ZYPP_LIBRARY} )
+TARGET_LINK_LIBRARIES( zypp-refresh-wrapper )
 INSTALL(
   TARGETS zypp-refresh-wrapper
   RUNTIME DESTINATION ${INSTALL_PREFIX}/sbin
