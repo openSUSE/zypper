@@ -1,4 +1,10 @@
 -------------------------------------------------------------------
+Tue Jul 10 12:26:49 CEST 2012 - ma@suse.de
+
+- don't link setuid wrapper against libzypp (bnc#770630)
+- version 1.6.166
+
+-------------------------------------------------------------------
 Thu Jun 14 01:16:45 CEST 2012 - ma@suse.de
 
 - Update sle-zypper-po.tar.bz2
