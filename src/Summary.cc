@@ -774,30 +774,70 @@ void Summary::writeRecommended(ostream & out)
 
   for_(it, _noinstrec.begin(), _noinstrec.end())
   {
-    string label;
+    // For packages, check the reason for not being installed.
+    // A package might be soft locked because the user has removed it manually (file:
+    // /var/lib/zypp/SoftLocks).
     if (it->first == ResKind::package)
-      label = _PL(
-        "The following package is recommended, but will not be installed:",
-        "The following packages are recommended, but will not be installed:",
-        it->second.size());
-    else if (it->first == ResKind::patch)
-      label = _PL(
-        "The following patch is recommended, but will not be installed:",
-        "The following patches are recommended, but will not be installed:",
-        it->second.size());
-    else if (it->first == ResKind::pattern)
-      label = _PL(
-        "The following pattern is recommended, but will not be installed:",
-        "The following patterns are recommended, but will not be installed:",
-        it->second.size());
-    else if (it->first == ResKind::product)
-      label = _PL(
-        "The following product is recommended, but will not be installed:",
-        "The following products are recommended, but will not be installed:",
-        it->second.size());
-    out << endl << label << endl;
+    {
+      string label1;  
+      string label2;
+      ResPairSet softLocked;
+      ResPairSet conflicts;
+        
+      for_( pair_it, it->second.begin(), it->second.end() )
+      {
+        if ( pair_it->second->poolItem().status().isSoftLocked() )
+        {
+          softLocked.insert(*pair_it);
+        }
+        else
+        {
+          conflicts.insert(*pair_it);
+        }
+      }
+      label1 = _PL(
+                   "The following package is recommended, but will not be installed because it's unwanted:",
+                   "The following packages are recommended, but will not be installed because they are unwanted:",
+                   it->second.size());
+      label2 = _PL(
+                   "The following package is recommended, but will not be installed due to conflicts:",
+                   "The following packages are recommended, but will not be installed due to conflicts:",
+                   it->second.size());
 
-    writeResolvableList(out, it->second);
+      if ( !softLocked.empty() )
+      {
+        out << endl << label1 << endl;
+        writeResolvableList(out, softLocked);
+      }
+      if ( !conflicts.empty() )
+      {
+        out << endl << label2 << endl;
+        writeResolvableList(out, problems); 
+      }
+    }
+    else
+    {
+      string label;
+      
+      if (it->first == ResKind::patch)
+        label = _PL(
+                    "The following patch is recommended, but will not be installed:",
+                    "The following patches are recommended, but will not be installed:",
+                    it->second.size());
+      else if (it->first == ResKind::pattern)
+        label = _PL(
+                    "The following pattern is recommended, but will not be installed:",
+                    "The following patterns are recommended, but will not be installed:",
+                    it->second.size());
+      else if (it->first == ResKind::product)
+        label = _PL(
+                    "The following product is recommended, but will not be installed:",
+                    "The following products are recommended, but will not be installed:",
+                    it->second.size());
+
+      out << endl << label << endl;
+      writeResolvableList(out, it->second);
+    }
   }
 
 /*
