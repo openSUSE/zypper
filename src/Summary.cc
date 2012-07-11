@@ -812,7 +812,7 @@ void Summary::writeRecommended(ostream & out)
       if ( !conflicts.empty() )
       {
         out << endl << label2 << endl;
-        writeResolvableList(out, problems); 
+        writeResolvableList(out, conflicts); 
       }
     }
     else
