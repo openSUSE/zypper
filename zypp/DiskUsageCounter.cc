@@ -264,6 +264,14 @@ namespace zypp
 	    }
 	    else
 	    {
+	      //
+	      // Filter zero sized devices (bnc#769819)
+	      //
+	      if ( sb.f_blocks == 0 || sb.f_bsize == 0 )
+	      {
+		DBG << "Filter zero-sized mount point : " << l << std::endl;
+		continue;
+	      }
 	      ret.insert( DiskUsageCounter::MountPoint( mp, sb.f_bsize,
 		((long long)sb.f_blocks)*sb.f_bsize/1024,
 		((long long)(sb.f_blocks - sb.f_bfree))*sb.f_bsize/1024, 0LL, ro ) );
