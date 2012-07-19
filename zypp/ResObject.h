@@ -231,6 +231,8 @@ namespace zypp
    * ResObject::Ptr q( make<ResObject>( s ) );
    * Package::Ptr   pkg( make<Package>( s ) );
    * \endcode
+   * \todo make<> was a poor choice (AFAIR because gcc had some trouble with
+   * asKind<>(sat::Solvable)). Remove it in favour of asKind<>(sat::Solvable)
   */
   template<class _Res>
   inline typename ResTraits<_Res>::PtrType make( const sat::Solvable & solvable_r )
@@ -239,6 +241,11 @@ namespace zypp
   template<>
   inline ResObject::Ptr make<ResObject>( const sat::Solvable & solvable_r )
   { return makeResObject( solvable_r ); }
+
+  /** Directly create a certain kind of ResObject from \ref sat::Solvable. */
+  template<class _Res>
+  inline typename ResTraits<_Res>::PtrType asKind( const sat::Solvable & solvable_r )
+  { return make<_Res>( solvable_r ); }
 
   /** Convert ResObject::Ptr into Ptr of a certain Kind.
    * \return \c NULL iff \a p is \c NULL or points to a Resolvable
