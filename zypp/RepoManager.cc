@@ -1403,6 +1403,7 @@ namespace zypp
     if ( ! PathInfo(solvfile).isExist() )
       ZYPP_THROW(RepoNotCachedException(info));
 
+    sat::Pool::instance().reposErase( info.alias() );
     try
     {
       Repository repo = sat::Pool::instance().addRepoSolv( solvfile, info );
