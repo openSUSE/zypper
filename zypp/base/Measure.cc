@@ -129,7 +129,7 @@ namespace zypp
         return str << obj.asString();
       }
 
-      
+
     ///////////////////////////////////////////////////////////////////
     //
     //	CLASS NAME : Measure::Impl
@@ -140,9 +140,11 @@ namespace zypp
     public:
       Impl( const std::string & ident_r )
       : _ident  ( ident_r )
+      , _level  ( _glevel )
       , _seq    ( 0 )
       {
-        INT << "START MEASURE(" << _ident << ")" << endl;
+	_glevel += "..";
+        INT << _level << "START MEASURE(" << _ident << ")" << endl;
         _start.get();
       }
 
@@ -150,21 +152,22 @@ namespace zypp
       {
         _stop.get();
         ++_seq;
-        std::ostream & str( INT << "MEASURE(" << _ident << ") " );
+        std::ostream & str( INT << _level << "MEASURE(" << _ident << ") " );
         dumpMeasure( str );
+	_glevel.erase( 0, 2 );
       }
 
       void restart()
       {
-        INT << "RESTART MEASURE(" << _ident << ")" << endl;
+        INT << _level << "RESTART MEASURE(" << _ident << ")" << endl;
         _start = _stop;
       }
-      
+
       void elapsed() const
       {
         _stop.get();
         ++_seq;
-        std::ostream & str( INT << "ELAPSED(" << _ident << ") " );
+        std::ostream & str( INT << _level << "ELAPSED(" << _ident << ") " );
         dumpMeasure( str );
         _elapsed = _stop;
       }
@@ -181,12 +184,18 @@ namespace zypp
       }
 
     private:
+      static std::string _glevel;
+
       std::string       _ident;
+      std::string       _level;
       Tm               _start;
       mutable unsigned _seq;
       mutable Tm       _elapsed;
       mutable Tm       _stop;
     };
+
+    std::string Measure::Impl::_glevel;
+
     ///////////////////////////////////////////////////////////////////
 
     ///////////////////////////////////////////////////////////////////
@@ -195,68 +204,33 @@ namespace zypp
     //
     ///////////////////////////////////////////////////////////////////
 
-    ///////////////////////////////////////////////////////////////////
-    //
-    //	METHOD NAME : Measure::Measure
-    //	METHOD TYPE : Ctor
-    //
     Measure::Measure()
     {}
 
-    ///////////////////////////////////////////////////////////////////
-    //
-    //	METHOD NAME : Measure::Measure
-    //	METHOD TYPE : Ctor
-    //
     Measure::Measure( const std::string & ident_r )
     : _pimpl( new Impl( ident_r ) )
     {}
 
-    ///////////////////////////////////////////////////////////////////
-    //
-    //	METHOD NAME : Measure::~Measure
-    //	METHOD TYPE : Dtor
-    //
     Measure::~Measure()
     {}
 
-    ///////////////////////////////////////////////////////////////////
-    //
-    //	METHOD NAME : Measure::start
-    //	METHOD TYPE : void
-    //
     void Measure::start( const std::string & ident_r )
     {
       stop();
       _pimpl.reset( new Impl( ident_r ) );
     }
 
-    ///////////////////////////////////////////////////////////////////
-    //
-    //	METHOD NAME : Measure::start
-    //	METHOD TYPE : void
-    //
     void Measure::restart()
     {
       _pimpl->restart();
     }
-    
-    ///////////////////////////////////////////////////////////////////
-    //
-    //	METHOD NAME : Measure::
-    //	METHOD TYPE : void
-    //
+
     void Measure::elapsed() const
     {
       if ( _pimpl )
         _pimpl->elapsed();
     }
 
-    ///////////////////////////////////////////////////////////////////
-    //
-    //	METHOD NAME : Measure::
-    //	METHOD TYPE : void
-    //
     void Measure::stop()
     {
       _pimpl.reset();
