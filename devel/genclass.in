@@ -101,14 +101,13 @@ $(intro $CLASS_H)
 
 #include "zypp/base/PtrTypes.h"
 #include "zypp/base/SafeBool.h"
-#include "zypp/base/NonCopyable.h"
 
 $(nsopen)
 ${INDENT}///////////////////////////////////////////////////////////////////
 ${INDENT}/// \class ${CLASS}
 ${INDENT}/// \brief
 ${INDENT}///////////////////////////////////////////////////////////////////
-${INDENT}class ${CLASS} : protected base::SafeBool<${CLASS}>, private base::NonCopyable
+${INDENT}class ${CLASS} : protected base::SafeBool<${CLASS}>
 ${INDENT}{
 ${INDENT}  friend std::ostream & operator<<( std::ostream & str, const ${CLASS} & obj );
 ${INDENT}  friend std::ostream & dumpOn( std::ostream & str, const ${CLASS} & obj );
@@ -166,6 +165,7 @@ cat <<EOF
 $(intro $CLASS_CC)
 #include <iostream>
 //#include "zypp/base/LogTools.h"
+#include "zypp/base/NonCopyable.h"
 
 #include "${INCLUDE_H}"
 
@@ -177,7 +177,7 @@ ${INDENT}///////////////////////////////////////////////////////////////////
 ${INDENT}/// \class ${CLASS}::Impl
 ${INDENT}/// \brief ${CLASS} implementation.
 ${INDENT}///////////////////////////////////////////////////////////////////
-${INDENT}struct ${CLASS}::Impl
+${INDENT}class ${CLASS}::Impl : private base::NonCopyable
 ${INDENT}{
 ${INDENT}  friend std::ostream & operator<<( std::ostream & str, const Impl & obj );
 ${INDENT}  friend std::ostream & dumpOn( std::ostream & str, const Impl & obj );
