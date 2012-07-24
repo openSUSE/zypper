@@ -14,26 +14,23 @@
 
 #include <iosfwd>
 
-#include "zypp/base/NonCopyable.h"
-
 #include "zypp/ZYppCallbacks.h"
 #include "zypp/Package.h"
 #include "zypp/ManagedFile.h"
-#include "zypp/repo/RepoProvideFile.h"
 #include "zypp/repo/DeltaCandidates.h"
+#include "zypp/repo/RepoProvideFile.h"
 
 ///////////////////////////////////////////////////////////////////
 namespace zypp
-{ /////////////////////////////////////////////////////////////////
+{
   ///////////////////////////////////////////////////////////////////
   namespace repo
-  { /////////////////////////////////////////////////////////////////
+  {
 
     ///////////////////////////////////////////////////////////////////
-    //
-    //	CLASS NAME : PackageProviderPolicy
-    //
-    /** */
+    /// \class PackageProviderPolicy
+    /// \brief Policies and options for \ref PackageProvider
+    ///////////////////////////////////////////////////////////////////
     class PackageProviderPolicy
     {
     public:
@@ -55,22 +52,16 @@ namespace zypp
     ///////////////////////////////////////////////////////////////////
 
     ///////////////////////////////////////////////////////////////////
-    //
-    //	CLASS NAME : PackageProvider
-    //
-    /** Provide a package from a Source.
-     * Use available deltarpm if apropriate.
-    */
-    class PackageProvider : private base::NonCopyable
+    /// \class PackageProvider
+    /// \brief Provide a package from a Repo.
+    ///
+    /// Use available deltarpm if apropriate.
+    ///////////////////////////////////////////////////////////////////
+    class PackageProvider
     {
-      typedef shared_ptr<void>                                       ScopedGuard;
-      typedef callback::SendReport<repo::DownloadResolvableReport> Report;
-
-      typedef packagedelta::DeltaRpm                         DeltaRpm;
-
     public:
       /** Ctor taking the Package to provide. */
-      PackageProvider( RepoMediaAccess &access,
+      PackageProvider( RepoMediaAccess & access,
                        const Package::constPtr & package,
                        const DeltaCandidates & deltas,
                        const PackageProviderPolicy & policy_r = PackageProviderPolicy() );
@@ -82,33 +73,15 @@ namespace zypp
       */
       ManagedFile providePackage() const;
 
+    public:
+      class Impl;              ///< Implementation class.
     private:
-      ManagedFile doProvidePackage() const;
-      ManagedFile tryDelta( const DeltaRpm & delta_r ) const;
-
-    private:
-      ScopedGuard newReport() const;
-      Report & report() const;
-      bool progressDeltaDownload( int value ) const;
-      void progressDeltaApply( int value ) const;
-      bool progressPackageDownload( int value ) const;
-      bool failOnChecksumError() const;
-      bool queryInstalled( const Edition & ed_r = Edition() ) const;
-
-    private:
-      PackageProviderPolicy      _policy;
-      Package::constPtr          _package;
-      mutable bool               _retry;
-      mutable shared_ptr<Report> _report;
-      DeltaCandidates            _deltas;
-      RepoMediaAccess &          _access;
+      RW_pointer<Impl> _pimpl; ///< Pointer to implementation.
     };
     ///////////////////////////////////////////////////////////////////
 
-    /////////////////////////////////////////////////////////////////
   } // namespace repo
   ///////////////////////////////////////////////////////////////////
-  /////////////////////////////////////////////////////////////////
 } // namespace zypp
 ///////////////////////////////////////////////////////////////////
 #endif // ZYPP_SOURCE_PACKAGEPROVIDER_H
