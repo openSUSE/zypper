@@ -33,9 +33,7 @@ namespace zypp
   namespace repo
   {
     ///////////////////////////////////////////////////////////////////
-    //
-    //	CLASS NAME : PackageProviderPolicy
-    //
+    //	class PackageProviderPolicy
     ///////////////////////////////////////////////////////////////////
 
     bool PackageProviderPolicy::queryInstalled( const std::string & name_r,
@@ -47,63 +45,151 @@ namespace zypp
       return false;
     }
 
+
     ///////////////////////////////////////////////////////////////////
     /// \class PackageProvider::Impl
     /// \brief PackageProvider implementation.
     ///////////////////////////////////////////////////////////////////
     class PackageProvider::Impl : private base::NonCopyable
     {
-      typedef shared_ptr<void>                                     ScopedGuard;
-      typedef callback::SendReport<repo::DownloadResolvableReport> Report;
-
-      typedef packagedelta::DeltaRpm                         DeltaRpm;
-
     public:
       /** Ctor taking the Package to provide. */
-      Impl( RepoMediaAccess &access,
-	    const Package::constPtr & package,
-	    const DeltaCandidates & deltas,
-	    const PackageProviderPolicy & policy_r );
+      Impl( RepoMediaAccess & access_r,
+	    const Package::constPtr & package_r,
+	    const DeltaCandidates & deltas_r,
+	    const PackageProviderPolicy & policy_r )
+      : _policy( policy_r )
+      , _package( package_r )
+      , _deltas( deltas_r )
+      , _access( access_r )
+      , _retry(false)
+      {}
+
+      virtual ~Impl() {}
+
+      /** Factory method providing the appropriate implementation.
+       * Called by PackageProvider ctor. Returned pointer should be
+       * immediately wrapped into a smartpointer.
+       */
+      static Impl * factoryMake( RepoMediaAccess & access_r,
+				 const Package::constPtr & package_r,
+				 const DeltaCandidates & deltas_r,
+				 const PackageProviderPolicy & policy_r );
 
     public:
       /** Provide the package.
+       * The basic workflow.
        * \throws Exception.
-      */
+       */
       ManagedFile providePackage() const;
 
-    private:
-      ManagedFile doProvidePackage() const;
-      ManagedFile tryDelta( const DeltaRpm & delta_r ) const;
+    protected:
+      typedef PackageProvider::Impl	Base;
+      typedef callback::SendReport<repo::DownloadResolvableReport>	Report;
+
+      /** Lookup the final rpm in cache.
+       *
+       * A non empty ManagedFile will be returned to the caller. File disposal
+       * depending on the repos keepPackages setting are handled in \ref providePackage.
+       *
+       * \note The provoided default implementation returns an empty ManagedFile
+       * (cache miss).
+       */
+      virtual ManagedFile providePackageFromCache() const = 0;
+
+      /** Actually provide the final rpm.
+       * Report start/problem/finish and retry loop are hadled by \ref providePackage.
+       * Here you trigger just progress and delta/plugin callbacks as needed.
+       *
+       * Proxy methods for progressPackageDownload and failOnChecksum are provided here.
+       * Create similar proxies for other progress callbacks in derived classes and link
+       * it to ProvideFilePolicy for download:
+       * \code
+       * ProvideFilePolicy policy;
+       * policy.progressCB( bind( &Base::progressPackageDownload, this, _1 ) );
+       * policy.failOnChecksumErrorCB( bind( &Base::failOnChecksumError, this ) );
+       * return _access.provideFile( _package->repoInfo(), loc, policy );
+       * \endcode
+       *
+       * \note The provoided default implementation retrieves the packages default
+       * location.
+       */
+      virtual ManagedFile doProvidePackage() const = 0;
+
+    protected:
+      /** Access to the DownloadResolvableReport */
+      Report & report() const
+      { return *_report; }
+
+      /** Redirect ProvideFilePolicy package download progress to this. */
+      bool progressPackageDownload( int value ) const
+      {	return report()->progress( value, _package ); }
+
+      /** Redirect ProvideFilePolicy failOnChecksumError to this if needed. */
+      bool failOnChecksumError() const
+      {
+	std::string package_str = _package->name() + "-" + _package->edition().asString();
+
+	// TranslatorExplanation %s = package being checked for integrity
+	switch ( report()->problem( _package, repo::DownloadResolvableReport::INVALID, str::form(_("Package %s seems to be corrupted during transfer. Do you want to retry retrieval?"), package_str.c_str() ) ) )
+	{
+	  case repo::DownloadResolvableReport::RETRY:
+	    _retry = true;
+	    break;
+	  case repo::DownloadResolvableReport::IGNORE:
+	    ZYPP_THROW(SkipRequestException("User requested skip of corrupted file"));
+	    break;
+	  case repo::DownloadResolvableReport::ABORT:
+	    ZYPP_THROW(AbortRequestException("User requested to abort"));
+	    break;
+	  default:
+	    break;
+	}
+	return true; // anyway a failure
+      }
+
+    protected:
+      PackageProviderPolicy	_policy;
+      Package::constPtr		_package;
+      DeltaCandidates		_deltas;
+      RepoMediaAccess &		_access;
 
     private:
-      ScopedGuard newReport() const;
-      Report & report() const;
-      bool progressDeltaDownload( int value ) const;
-      void progressDeltaApply( int value ) const;
-      bool progressPackageDownload( int value ) const;
-      bool failOnChecksumError() const;
-      bool queryInstalled( const Edition & ed_r = Edition() ) const;
+      typedef shared_ptr<void>	ScopedGuard;
 
-    private:
-      PackageProviderPolicy      _policy;
-      Package::constPtr          _package;
+      ScopedGuard newReport() const
+      {
+	_report.reset( new Report );
+	// Use a custom deleter calling _report.reset() when guard goes out of
+	// scope (cast required as reset is overloaded). We want report to end
+	// when leaving providePackage and not wait for *this going out of scope.
+	return shared_ptr<void>( static_cast<void*>(0),
+				 bind( mem_fun_ref( static_cast<void (shared_ptr<Report>::*)()>(&shared_ptr<Report>::reset) ),
+				       ref(_report) ) );
+      }
+
       mutable bool               _retry;
       mutable shared_ptr<Report> _report;
-      DeltaCandidates            _deltas;
-      RepoMediaAccess &          _access;
     };
     ///////////////////////////////////////////////////////////////////
 
-    PackageProvider::Impl::Impl(  RepoMediaAccess &access,
-				  const Package::constPtr & package,
-				  const DeltaCandidates & deltas,
-				  const PackageProviderPolicy & policy_r )
-    : _policy( policy_r )
-    , _package( package )
-    , _retry(false)
-    , _deltas(deltas)
-    , _access(access)
-    {}
+    /** Default implementation (cache miss). */
+    ManagedFile PackageProvider::Impl::providePackageFromCache() const
+    { return ManagedFile(); }
+
+    /** Default implementation (provide full package) */
+    ManagedFile PackageProvider::Impl::doProvidePackage() const
+    {
+      ManagedFile ret;
+      OnMediaLocation loc = _package->location();
+
+      ProvideFilePolicy policy;
+      policy.progressCB( bind( &Base::progressPackageDownload, this, _1 ) );
+      policy.failOnChecksumErrorCB( bind( &Base::failOnChecksumError, this ) );
+      return _access.provideFile( _package->repoInfo(), loc, policy );
+    }
+
+    ///////////////////////////////////////////////////////////////////
 
     ManagedFile PackageProvider::Impl::providePackage() const
     {
@@ -115,33 +201,21 @@ namespace zypp
       else
         url = * info.baseUrlsBegin();
 
-      { // check for cache hit:
-        OnMediaLocation loc( _package->location() );
-        PathInfo cachepath( info.packagesPath() / loc.filename() );
-
-        if ( cachepath.isFile() && ! loc.checksum().empty() ) // accept cache hit with matching checksum only!
-             // Tempting to do a quick check for matching .rpm-filesize before computing checksum,
-             // but real life shows that loc.downloadSize() and the .rpm-filesize frequently do not
-             // match, even if loc.checksum() and the .rpm-files checksum do. Blame the metadata generator(s).
-        {
-          CheckSum cachechecksum( loc.checksum().type(), filesystem::checksum( cachepath.path(), loc.checksum().type() ) );
-          if ( cachechecksum == loc.checksum() )
-          {
-            ManagedFile ret( cachepath.path() );
-            if ( ! info.keepPackages() )
-            {
-              ret.setDispose( filesystem::unlink );
-            }
-            MIL << "provided Package from cache " << _package << " at " << ret << endl;
-            return ret; // <-- cache hit
-          }
-        }
+      // check for cache hit:
+      ManagedFile ret( providePackageFromCache() );
+      if ( ! ret.value().empty() )
+      {
+	if ( ! info.keepPackages() )
+	{
+	  ret.setDispose( filesystem::unlink );
+	}
+	MIL << "provided Package from cache " << _package << " at " << ret << endl;
+	return ret; // <-- cache hit
       }
 
       // HERE: cache misss, do download:
       MIL << "provide Package " << _package << endl;
       ScopedGuard guardReport( newReport() );
-      ManagedFile ret;
       do {
         _retry = false;
         report()->start( _package, url );
@@ -194,7 +268,63 @@ namespace zypp
       return ret;
     }
 
-    ManagedFile PackageProvider::Impl::doProvidePackage() const
+
+    ///////////////////////////////////////////////////////////////////
+    /// \class RpmPackageProvider
+    /// \brief RPM PackageProvider implementation.
+    ///////////////////////////////////////////////////////////////////
+    class RpmPackageProvider : public PackageProvider::Impl
+    {
+    public:
+      RpmPackageProvider( RepoMediaAccess & access_r,
+			  const Package::constPtr & package_r,
+			  const DeltaCandidates & deltas_r,
+			  const PackageProviderPolicy & policy_r )
+      : PackageProvider::Impl( access_r, package_r, deltas_r, policy_r )
+      {}
+
+    protected:
+      virtual ManagedFile providePackageFromCache() const;
+
+      virtual ManagedFile doProvidePackage() const;
+
+    private:
+      typedef packagedelta::DeltaRpm	DeltaRpm;
+
+      ManagedFile tryDelta( const DeltaRpm & delta_r ) const;
+
+      bool progressDeltaDownload( int value ) const
+      { return report()->progressDeltaDownload( value ); }
+
+      void progressDeltaApply( int value ) const
+      { return report()->progressDeltaApply( value ); }
+
+      bool queryInstalled( const Edition & ed_r = Edition() ) const
+      { return _policy.queryInstalled( _package->name(), ed_r, _package->arch() ); }
+    };
+    ///////////////////////////////////////////////////////////////////
+
+    ManagedFile RpmPackageProvider::providePackageFromCache() const
+    {
+      RepoInfo info = _package->repoInfo();
+      OnMediaLocation loc( _package->location() );
+      PathInfo cachepath( info.packagesPath() / loc.filename() );
+
+      if ( cachepath.isFile() && ! loc.checksum().empty() ) // accept cache hit with matching checksum only!
+             // Tempting to do a quick check for matching .rpm-filesize before computing checksum,
+      // but real life shows that loc.downloadSize() and the .rpm-filesize frequently do not
+      // match, even if loc.checksum() and the .rpm-files checksum do. Blame the metadata generator(s).
+      {
+	CheckSum cachechecksum( loc.checksum().type(), filesystem::checksum( cachepath.path(), loc.checksum().type() ) );
+	if ( cachechecksum == loc.checksum() )
+	{
+	  return ManagedFile( cachepath.path() );  // <-- cache hit
+	}
+      }
+      return ManagedFile();	// <-- cache miss
+    }
+
+    ManagedFile RpmPackageProvider::doProvidePackage() const
     {
       Url url;
       RepoInfo info = _package->repoInfo();
@@ -231,16 +361,10 @@ namespace zypp
         }
 
       // no patch/delta -> provide full package
-      ManagedFile ret;
-      OnMediaLocation loc = _package->location();
-
-      ProvideFilePolicy policy;
-      policy.progressCB( bind( &PackageProvider::Impl::progressPackageDownload, this, _1 ) );
-      policy.failOnChecksumErrorCB( bind( &PackageProvider::Impl::failOnChecksumError, this ) );
-      return _access.provideFile( _package->repoInfo(), loc, policy );
+      return Base::doProvidePackage();
     }
 
-    ManagedFile PackageProvider::Impl::tryDelta( const DeltaRpm & delta_r ) const
+    ManagedFile RpmPackageProvider::tryDelta( const DeltaRpm & delta_r ) const
     {
       if ( delta_r.baseversion().edition() != Edition::noedition
            && ! queryInstalled( delta_r.baseversion().edition() ) )
@@ -255,7 +379,7 @@ namespace zypp
       try
         {
           ProvideFilePolicy policy;
-          policy.progressCB( bind( &PackageProvider::Impl::progressDeltaDownload, this, _1 ) );
+          policy.progressCB( bind( &RpmPackageProvider::progressDeltaDownload, this, _1 ) );
           delta = _access.provideFile( delta_r.repository().info(), delta_r.location(), policy );
         }
       catch ( const Exception & excpt )
@@ -276,7 +400,7 @@ namespace zypp
       Pathname destination( _package->repoInfo().packagesPath() / _package->location().filename() );
 
       if ( ! applydeltarpm::provide( delta, destination,
-                                     bind( &PackageProvider::Impl::progressDeltaApply, this, _1 ) ) )
+                                     bind( &RpmPackageProvider::progressDeltaApply, this, _1 ) ) )
         {
           report()->problemDeltaApply( _("applydeltarpm failed.") );
           return ManagedFile();
@@ -286,62 +410,56 @@ namespace zypp
       return ManagedFile( destination, filesystem::unlink );
     }
 
-    PackageProvider::Impl::ScopedGuard PackageProvider::Impl::newReport() const
+
+    ///////////////////////////////////////////////////////////////////
+    /// \class PluginPackageProvider
+    /// \brief Plugin PackageProvider implementation.
+    ///
+    /// Basically downloads the default package and calls a
+    /// 'stem'2rpm plugin to cteate the final .rpm package.
+    ///////////////////////////////////////////////////////////////////
+    class PluginPackageProvider : public PackageProvider::Impl
     {
-      _report.reset( new Report );
-      return shared_ptr<void>( static_cast<void*>(0),
-                               // custom deleter calling _report.reset()
-                               // (cast required as reset is overloaded)
-                               bind( mem_fun_ref( static_cast<void (shared_ptr<Report>::*)()>(&shared_ptr<Report>::reset) ),
-                                     ref(_report) ) );
-    }
+    public:
+      PluginPackageProvider( const std::string & stem_r,
+			     RepoMediaAccess & access_r,
+			     const Package::constPtr & package_r,
+			     const DeltaCandidates & deltas_r,
+			     const PackageProviderPolicy & policy_r )
+      : Base( access_r, package_r, deltas_r, policy_r )
+      {}
 
-    PackageProvider::Impl::Report & PackageProvider::Impl::report() const
-    { return *_report; }
+    protected:
+      virtual ManagedFile providePackageFromCache() const
+      {
+	return Base::providePackageFromCache();
+      }
 
-    bool PackageProvider::Impl::progressDeltaDownload( int value ) const
-    { return report()->progressDeltaDownload( value ); }
+      virtual ManagedFile doProvidePackage() const
+      {
+	return Base::doProvidePackage();
+      }
+    };
+    ///////////////////////////////////////////////////////////////////
 
-    void PackageProvider::Impl::progressDeltaApply( int value ) const
-    { return report()->progressDeltaApply( value ); }
-
-    bool PackageProvider::Impl::progressPackageDownload( int value ) const
-    { return report()->progress( value, _package ); }
-
-    bool PackageProvider::Impl::failOnChecksumError() const
-    {
-      std::string package_str = _package->name() + "-" + _package->edition().asString();
-
-      // TranslatorExplanation %s = package being checked for integrity
-      switch ( report()->problem( _package, repo::DownloadResolvableReport::INVALID, str::form(_("Package %s seems to be corrupted during transfer. Do you want to retry retrieval?"), package_str.c_str() ) ) )
-        {
-        case repo::DownloadResolvableReport::RETRY:
-          _retry = true;
-          break;
-          case repo::DownloadResolvableReport::IGNORE:
-          ZYPP_THROW(SkipRequestException("User requested skip of corrupted file"));
-          break;
-          case repo::DownloadResolvableReport::ABORT:
-          ZYPP_THROW(AbortRequestException("User requested to abort"));
-          break;
-        default:
-          break;
-        }
-      return true; // anyway a failure
-    }
-
-    bool PackageProvider::Impl::queryInstalled( const Edition & ed_r ) const
-    { return _policy.queryInstalled( _package->name(), ed_r, _package->arch() ); }
 
     ///////////////////////////////////////////////////////////////////
     //	class PackageProvider
     ///////////////////////////////////////////////////////////////////
 
-    PackageProvider::PackageProvider( RepoMediaAccess & access,
-				      const Package::constPtr & package,
-				      const DeltaCandidates & deltas,
+    PackageProvider::Impl * PackageProvider::Impl::factoryMake( RepoMediaAccess & access_r,
+								const Package::constPtr & package_r,
+								const DeltaCandidates & deltas_r,
+								const PackageProviderPolicy & policy_r )
+    {
+      return new RpmPackageProvider( access_r, package_r, deltas_r, policy_r );
+    }
+
+    PackageProvider::PackageProvider( RepoMediaAccess & access_r,
+				      const Package::constPtr & package_r,
+				      const DeltaCandidates & deltas_r,
 				      const PackageProviderPolicy & policy_r )
-    : _pimpl( new Impl( access, package, deltas, policy_r ) )
+    : _pimpl( Impl::factoryMake( access_r, package_r, deltas_r, policy_r ) )
     {}
 
     PackageProvider::~PackageProvider()
