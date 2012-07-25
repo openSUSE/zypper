@@ -282,7 +282,7 @@ namespace zypp
 	assert_dir( destinationDir );
 	pi();
       }
-      if ( ! pi.userMayW() )
+      if ( geteuid() != 0 && ! pi.userMayW() )
       {
         WAR << "Destination dir '" << destinationDir << "' is not user writable, using tmp space." << endl;
         destinationDir = getZYpp()->tmpPath() / destinationDir;
