@@ -810,11 +810,11 @@ void Summary::writeRecommended(ostream & out)
       }
       label1 = _PL(
                    "The following package is recommended, but will not be installed because it's unwanted (was manually removed before):",
-                   "The following packages are recommended, but will not be installed because they are unwanted (were manully removed before):",
+                   "The following packages are recommended, but will not be installed because they are unwanted (were manually removed before):",
                    it->second.size());
       label2 = _PL(
                    "The following package is recommended, but will not be installed due to conflicts or dependency issues:",
-                   "The following packages are recommended, but will not be installed due to conflicts or depemdency issues:",
+                   "The following packages are recommended, but will not be installed due to conflicts or dependency issues:",
                    it->second.size());
       label3 = _PL(
                    "The following package is recommended, but will not be installed (only required packages will be installed):",
