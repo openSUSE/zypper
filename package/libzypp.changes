@@ -1,4 +1,16 @@
 -------------------------------------------------------------------
+Wed Aug  1 15:32:40 CEST 2012 - ma@suse.de
+
+- Fixed typo (bnc#773467)
+- Erase any old repo instance from pool when (re)loading from cache
+- filter zero sized devices in disk usage counter(bnc#769819)
+- fix isSoftLocked computation
+- fix possibly reporting timeout as "aborted by user" (bnc#665327)
+- do not fork the uuidgen program, use kernel interface instead
+- remove obsolete hicolor-icon-theme BuildRequires
+- version 11.7.0 (6)
+
+-------------------------------------------------------------------
 Sun Jul 29 01:13:31 CEST 2012 - ma@suse.de
 
 - Update zypp-po.tar.bz2
