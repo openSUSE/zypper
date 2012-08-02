@@ -12,6 +12,10 @@ Note that for Boolean variables we usually test whether the variable exists and 
 
 \li \c ZYPP_CONF=<PATH> Location of the zypp.conf file.
 
+\subsection zypp-envars-commit Variables related to commit
+
+\li \c ZYPP_IS_RUNNING=1 Set during commit so packages pre/post/trigger scripts can detect whether rpm was called from within libzypp.
+
 \subsection zypp-envars-logging Variables related to logging
 
 \li \c ZYPP_LOGFILE=<PATH> Location of the logfile to write or \c - for stderr.
