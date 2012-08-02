@@ -122,6 +122,8 @@ namespace zypp
      * and target used for transact. */
     ZYppCommitResult ZYppImpl::commit( const ZYppCommitPolicy & policy_r )
     {
+      setenv( "ZYPP_IS_RUNNING", str::numstring(getpid()).c_str(), 1 );
+
       if ( getenv("ZYPP_TESTSUITE_FAKE_ARCH") )
       {
         ZYPP_THROW( Exception("ZYPP_TESTSUITE_FAKE_ARCH set. Commit not allowed and disabled.") );
