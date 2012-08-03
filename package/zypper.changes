@@ -1,4 +1,10 @@
 -------------------------------------------------------------------
+Fri Aug  3 12:51:42 CEST 2012 - ma@suse.de
+
+- properly encode data in XML output (bnc#773641)
+- version 1.6.27
+
+-------------------------------------------------------------------
 Mon Apr 30 11:55:29 CEST 2012 - ma@suse.de
 
 - Don't treat patches with licensed packages as interactive is 
