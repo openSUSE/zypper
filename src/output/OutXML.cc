@@ -236,7 +236,7 @@ void OutXML::searchResult( const Table & table_r )
 	}
 	else
 	{
-	  cout << *cit << '"';
+	  cout << xml_encode(*cit) << '"';
 	}
 	++cidx;
       }
