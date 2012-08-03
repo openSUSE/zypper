@@ -1,4 +1,10 @@
 -------------------------------------------------------------------
+Fri Aug  3 12:52:47 CEST 2012 - ma@suse.de
+
+- properly encode data in XML output (bnc#773641)
+- version 1.6.167
+
+-------------------------------------------------------------------
 Tue Jul 10 12:26:49 CEST 2012 - ma@suse.de
 
 - don't link setuid wrapper against libzypp (bnc#770630)
