@@ -678,18 +678,17 @@ namespace zypp
         }
         return std::string( buf.begin(), buf.end() );
       }
+    //@}
 
 
+    ///////////////////////////////////////////////////////////////////
+    /** \name Escape. */
+    //@{
       /**
        * Escape desired character \a c using a backslash.
        *
        * For use when printing \a c separated values, and where
        * \ref joinEscaped() is too heavy.
-       *
-       * \todo use C_Str instead of std::string to prevent unnecessary
-       * promotion to string if used with "string".
-       *
-       * \todo shoud not be documented in doxy-group 'Join'
        */
       std::string escape( const C_Str & str_r, const char c = ' ' );
 
