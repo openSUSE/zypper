@@ -341,6 +341,7 @@ namespace zypp
         // - "name-version-release"
         // - "name-version-release-*"
         bool abort = false;
+	std::map<std::string, Pathname> unify; // scripts <md5,path>
         for_( it, checkPackages_r.begin(), checkPackages_r.end() )
         {
           std::string prefix( str::form( "%s-%s", it->name().c_str(), it->edition().c_str() ) );
@@ -360,6 +361,24 @@ namespace zypp
             filesystem::addmod( script.path(), 0500 );
 
             Pathname localPath( scriptsPath_r/(*sit) ); // without root prefix
+
+	    // Unify scripts by md5sum
+	    std::string md5sum( filesystem::md5sum( script.path() ) );
+	    if ( unify[md5sum].empty() )
+	    {
+	      unify[md5sum] = localPath;
+	    }
+	    else
+	    {
+	      // translators: We may find the same script content in files with different names.
+	      // Only the first occurence is executed, subsequent ones are skipped. It's a one-line
+	      // message for a log file. Preferably start translation with "%s"
+	      std::string msg( str::form(_("%s already executed as %s)"), localPath.asString().c_str(), unify[md5sum].c_str() ) );
+              MIL << "Skip update script: " << msg << endl;
+              HistoryLog().comment( msg, /*timestamp*/true );
+	      continue;
+	    }
+
             if ( abort || aborting_r )
             {
               WAR << "Aborting: Skip update script " << *sit << endl;
