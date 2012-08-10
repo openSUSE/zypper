@@ -8,9 +8,10 @@
 
 Note that for Boolean variables we usually test whether the variable exists and not for the assigned value.
 
-\subsection zypp-envars-config Location of the zypp.conf file.
+\subsection zypp-envars-config zypp config options
 
 \li \c ZYPP_CONF=<PATH> Location of the zypp.conf file.
+\li \c ZYPP_LOCK_TIMEOUT=<sec> If zypp is locked by another process wait this number of seconds for the lock becoming available.
 
 \subsection zypp-envars-commit Variables related to commit
 

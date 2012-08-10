@@ -339,12 +339,45 @@ namespace zypp
       }
       else if ( globalLock().zyppLocked() )
       {
-	std::string t = str::form(_("System management is locked by the application with pid %d (%s).\n"
-                                     "Close this application before trying again."),
-                                  globalLock().lockerPid(),
-                                  globalLock().lockerName().c_str()
-                                 );
-	ZYPP_THROW(ZYppFactoryException(t, globalLock().lockerPid(), globalLock().lockerName() ));
+	bool failed = true;
+	const long LOCK_TIMEOUT = str::strtonum<long>( getenv( "ZYPP_LOCK_TIMEOUT" ) );
+	if ( LOCK_TIMEOUT > 0 )
+	{
+	  MIL << "Waiting whether pid " << globalLock().lockerPid() << " ends within $LOCK_TIMEOUT=" << LOCK_TIMEOUT << " sec." << endl;
+	  unsigned delay = 1;
+	  Pathname procdir( "/proc"/str::numstring(globalLock().lockerPid()) );
+	  for ( long i = 0; i < LOCK_TIMEOUT; i += delay )
+	  {
+	    if ( PathInfo( procdir ).isDir() )	// wait for /proc/pid to disapear
+	      sleep( delay );
+	    else
+	    {
+	      MIL << "Retry after " << i << " sec." << endl;
+	      failed = globalLock().zyppLocked();
+	      if ( failed )
+	      {
+		// another proc locked faster. maybe it ends fast as well....
+		MIL << "Waiting whether pid " << globalLock().lockerPid() << " ends within " << (LOCK_TIMEOUT-i) << " sec." << endl;
+		procdir = Pathname( "/proc"/str::numstring(globalLock().lockerPid()) );
+	      }
+	      else
+	      {
+		MIL << "Finally got the lock!" << endl;
+		break;	// gotcha
+	      }
+	    }
+	  }
+
+	}
+	if ( failed )
+	{
+	  std::string t = str::form(_("System management is locked by the application with pid %d (%s).\n"
+				      "Close this application before trying again."),
+				      globalLock().lockerPid(),
+				      globalLock().lockerName().c_str()
+				    );
+	  ZYPP_THROW(ZYppFactoryException(t, globalLock().lockerPid(), globalLock().lockerName() ));
+	}
       }
       // Here we go...
       _instance = new ZYpp( ZYpp::Impl_Ptr(new ZYpp::Impl) );
