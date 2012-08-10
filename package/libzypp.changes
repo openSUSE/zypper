@@ -1,4 +1,12 @@
 -------------------------------------------------------------------
+Fri Aug 10 12:53:47 CEST 2012 - ma@suse.de
+
+- Implement $ZYPP_LOCK_TIMEOUT: number of seconds to wait for a 
+  zypplock becoming available (bnc#772965)
+- Unify update-scripts with same content(md5sum) (bnc#773575)
+- version 12.0.1 (0)
+
+-------------------------------------------------------------------
 Thu Aug  9 01:15:12 CEST 2012 - ma@suse.de
 
 - Update zypp-po.tar.bz2
