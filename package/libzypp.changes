@@ -1,4 +1,9 @@
 -------------------------------------------------------------------
+Thu Aug 16 01:13:43 CEST 2012 - ma@suse.de
+
+- Update zypp-po.tar.bz2
+
+-------------------------------------------------------------------
 Fri Aug 10 12:53:47 CEST 2012 - ma@suse.de
 
 - Implement $ZYPP_LOCK_TIMEOUT: number of seconds to wait for a 
