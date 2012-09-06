@@ -1,4 +1,9 @@
 -------------------------------------------------------------------
+Thu Sep  6 14:05:26 CEST 2012 - ma@suse.de
+
+- Update zypper-po.tar.bz2
+
+-------------------------------------------------------------------
 Fri Aug  3 12:49:45 CEST 2012 - ma@suse.de
 
 - properly encode data in XML output (bnc#773641)
