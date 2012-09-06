@@ -101,13 +101,15 @@ namespace zypp
       Pathname _tmpSolvfilesPath;
 
     public:
-      void load();
+      void load( bool force = true );
 
       void unload();
 
+      void reload();
+      
       void clearCache();
 
-      void buildCache();
+      bool buildCache();
       //@}
 
     public:

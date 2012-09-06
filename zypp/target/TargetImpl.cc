@@ -818,7 +818,7 @@ namespace zypp
       filesystem::recursive_rmdir( base );
     }
 
-    void TargetImpl::buildCache()
+    bool TargetImpl::buildCache()
     {
       Pathname base = solvfilesPath();
       Pathname rpmsolv       = base/"solv";
@@ -958,6 +958,12 @@ namespace zypp
 	    }
 	}
       }
+      return build_rpm_solv;
+    }
+
+    void TargetImpl::reload()
+    {
+        load( false );
     }
 
     void TargetImpl::unload()
@@ -967,11 +973,12 @@ namespace zypp
         system.eraseFromPool();
     }
 
-
-    void TargetImpl::load()
+    void TargetImpl::load( bool force )
     {
-      buildCache();
-
+      bool newCache = buildCache();
+      MIL << "New cache built: " << (newCache?"true":"false") <<
+        ", force loading: " << (force?"true":"false") << endl;
+ 
       // now add the repos to the pool
       sat::Pool satpool( sat::Pool::instance() );
       Pathname rpmsolv( solvfilesPath() / "solv" );
@@ -979,10 +986,19 @@ namespace zypp
 
       // Providing an empty system repo, unload any old content
       Repository system( sat::Pool::instance().findSystemRepo() );
+
       if ( system && ! system.solvablesEmpty() )
       {
-        system.eraseFromPool(); // invalidates system
+        if ( newCache || force )
+        {
+          system.eraseFromPool(); // invalidates system
+        }
+        else
+        {
+          return;     // nothing to do
+        }
       }
+      
       if ( ! system )
       {
         system = satpool.systemRepo();
@@ -990,6 +1006,7 @@ namespace zypp
 
       try
       {
+        MIL << "adding " << rpmsolv << " to system" << endl;
         system.addSolv( rpmsolv );
       }
       catch ( const Exception & exp )

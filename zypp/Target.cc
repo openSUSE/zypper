@@ -79,6 +79,9 @@ namespace zypp
   void Target::load()
   { _pimpl->load(); }
 
+  void Target::reload()
+  { _pimpl->reload(); }
+  
   void Target::unload()
   { _pimpl->unload(); }
 
