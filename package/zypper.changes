@@ -1,4 +1,10 @@
 -------------------------------------------------------------------
+Mon Sep 10 15:52:50 CEST 2012 - ma@suse.de
+
+- Rephrase misleading sections about zypp.conf and zypper.conf (bnc#777323)
+- version 1.6.28
+
+-------------------------------------------------------------------
 Mon Sep 10 15:08:07 CEST 2012 - ma@suse.de
 
 - Enable zypper-log reading lzma (.xz) compressed logs.
