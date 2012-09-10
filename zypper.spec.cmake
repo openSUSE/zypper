@@ -64,6 +64,7 @@ Requires:       python-argparse
 %else
 Requires:       python >= 2.7
 %endif
+Requires:	xz
 BuildArch:      noarch
 Summary:        CLI for accessing the zypper logfile
 License:        GPLv2+
