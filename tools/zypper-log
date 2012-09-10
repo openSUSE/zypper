@@ -6,6 +6,7 @@
 # Author: Dominik Heidler <dheidler@suse.de>
 
 import os, string, re, bz2, zlib, sys, time, argparse, errno
+import subprocess
 
 filenamelen = 0
 pidlen = 0
@@ -35,7 +36,9 @@ def readFile(logfile):
     print >> sys.stderr, "\rIOError: %s: '%s'" % (e.strerror, e.filename)
     sys.exit(1)
   fext = logfile.split('.')[-1]
-  if fext == 'bz2':
+  if fext == 'xz':
+    logtxt = subprocess.Popen(['xzcat',logfile], stdout=subprocess.PIPE).stdout.read()
+  elif fext == 'bz2':
     logtxt = bz2.decompress(logtxt)
   elif fext == 'gz':
     logtxt = zlib.decompress(logtxt)
