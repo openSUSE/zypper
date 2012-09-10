@@ -1,4 +1,13 @@
 -------------------------------------------------------------------
+Mon Sep 10 16:57:27 CEST 2012 - ma@suse.de
+
+- Rephrase misleading sections about zypp.conf and zypper.conf
+  (bnc#777323)
+- Enable zypper-log reading lzma (.xz) compressed logs.
+- properly encode data in XML output (bnc#773641)
+- version 1.8.1
+
+-------------------------------------------------------------------
 Sun Sep  9 01:13:57 CEST 2012 - ma@suse.de
 
 - Update zypper-po.tar.bz2
