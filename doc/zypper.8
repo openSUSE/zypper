@@ -1527,7 +1527,7 @@ Help. If a \fBcommand\fR is specified together with --help option, command speci
 Print zypper version number and exit.
 .TP
 .I \-c, \-\-config <file>
-Use specified config file instead of the default files.
+Use specified zypper config file instead of the default files.
 Other command line options specified together with --config and having
 their counterpart in the config file are still prefered.
 The order of preference with --config is as follows:
@@ -1535,8 +1535,8 @@ The order of preference with --config is as follows:
 * Command line options
 .br
 * --config <file>
-.br
-* /etc/zypp/zypp.conf
+
+[ /etc/zypp/zypp.conf ] (system-wide defaults for all libzypp based applications)
 
 See also FILES section for more information.
 .TP
@@ -1649,29 +1649,27 @@ is not used.
 
 User's settings are prefered over global settings.
 Similarly, command line options override the settings in either of
-these files. Settings from zypp.conf (see below) having their
-counterparts in zypper.conf are overriden by zypper's values. To sum
-it up, the order of preference is as follows (from highest to lowest):
+these files. To sum it up, the order of preference is as follows
+(from highest to lowest):
 
 * Command line options
 .br
 * $HOME/.zypper.conf
 .br
 * /etc/zypp/zypper.conf
-.br
-* /etc/zypp/zypp.conf
+
+[ /etc/zypp/zypp.conf ] (system-wide defaults for all libzypp based applications)
 
 See the comments in /etc/zypp/zypper.conf for a list and description
 of available options.
 .TP
 .B /etc/zypp/zypp.conf
-ZYpp configuration file affecting all ZYpp-based applications.
+ZYpp configuration file affecting all libzypp based applications.
 See the comments in the file for desciption of configurable properties.
-Many of locations of files and directories listed in this section are
-also configurable via zypp.conf.
+Many locations of files and directories listed in this section are
+configurable via zypp.conf. The location for this file itself can be
+redefined only by setting $ZYPP_CONF in the environment.
 
-Options having their counterpart in zypper.conf are overriden by zypper's
-setting.
 .TP
 .B /etc/zypp/locks
 File with package lock definitions, see locks(5) manual page for details.
