@@ -1,4 +1,9 @@
 -------------------------------------------------------------------
+Mon Sep 10 15:08:07 CEST 2012 - ma@suse.de
+
+- Enable zypper-log reading lzma (.xz) compressed logs.
+
+-------------------------------------------------------------------
 Thu Aug 30 01:15:33 CEST 2012 - ma@suse.de
 
 - Update zypper-po.tar.bz2
