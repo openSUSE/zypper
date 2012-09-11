@@ -1,4 +1,10 @@
 -------------------------------------------------------------------
+Tue Sep 11 11:58:00 CEST 2012 - ma@suse.de
+
+- show reaosn for not installed recommended packages (bnc #698766)
+- version 1.8.2
+
+-------------------------------------------------------------------
 Mon Sep 10 16:57:27 CEST 2012 - ma@suse.de
 
 - Rephrase misleading sections about zypp.conf and zypper.conf
