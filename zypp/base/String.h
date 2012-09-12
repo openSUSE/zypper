@@ -827,6 +827,16 @@ namespace zypp
         return std::string( str_r, str_r.size() - suffix_r.size() );
       return str_r.c_str();
     }
+    /** Return size of the common prefix of \a lhs and \a rhs. */
+    inline std::string::size_type commonPrefix( const C_Str & lhs, const C_Str & rhs )
+    {
+      const char * lp = lhs.c_str();
+      const char * rp = rhs.c_str();
+      std::string::size_type ret = 0;
+      while ( *lp == *rp && *lp != '\0' )
+      { ++lp, ++rp, ++ret; }
+      return ret;
+    }
 
     /** alias for \ref hasPrefix */
     inline bool startsWith( const C_Str & str_r, const C_Str & prefix_r )

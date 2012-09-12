@@ -248,6 +248,13 @@ BOOST_AUTO_TEST_CASE(prefix_suffix)
   BOOST_CHECK( str::contains("abcXabcYabc", "XabcY") );
   BOOST_CHECK( ! str::contains("abcXabcYabc", "xabcy") );
   BOOST_CHECK( str::containsCI("abcXabcYabc", "xabcy") );
+
+  BOOST_CHECK_EQUAL( str::commonPrefix("", ""),		0 );
+  BOOST_CHECK_EQUAL( str::commonPrefix("a", ""),	0 );
+  BOOST_CHECK_EQUAL( str::commonPrefix("", "b"),	0 );
+  BOOST_CHECK_EQUAL( str::commonPrefix("a", "b"),	0 );
+  BOOST_CHECK_EQUAL( str::commonPrefix("c", "c"),	1 );
+  BOOST_CHECK_EQUAL( str::commonPrefix("ca", "cb"),	1 );
 }
 
 BOOST_AUTO_TEST_CASE(hexencode_hexdecode)
