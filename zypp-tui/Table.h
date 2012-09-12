@@ -14,6 +14,7 @@
 #include <iosfwd>
 #include <list>
 #include <vector>
+
 using std::string;
 using std::ostream;
 using std::list;
@@ -75,14 +76,22 @@ private:
   friend class Table;
 };
 
+/** \relates TableRow */
+inline TableRow & operator<<( TableRow & tr, const string & s )
+{
+  tr.add (s);
+  return tr;
+}
+
 class TableHeader : public TableRow {
 public:
   //! Constructor. Reserve place for c columns.
   TableHeader (unsigned c = 0): TableRow (c) {}
 };
 
-inline
-TableRow& operator << (TableRow& tr, const string& s) {
+/** \relates TableHeader */
+inline TableHeader & operator<<( TableHeader & tr, const string & s )
+{
   tr.add (s);
   return tr;
 }
@@ -112,6 +121,10 @@ public:
 
   Table ();
 
+  // poor workaroud missing column styles and table entry objects
+  void setEditionStyle( unsigned column )
+  { _editionStyle.insert( column ); }
+
 private:
   void dumpRule (ostream &stream) const;
   void updateColWidths (const TableRow& tr);
@@ -140,8 +153,36 @@ private:
   //! Whether to wrap the table if it exceeds _screen_width
   bool _do_wrap;
 
+  mutable bool _inHeader;
+  std::set<unsigned> _editionStyle;
+  bool editionStyle( unsigned column ) const
+  { return _editionStyle.find( column ) != _editionStyle.end(); }
+
   friend class TableRow;
 };
+
+namespace table
+{
+  /** TableHeader manipulator */
+  struct EditionStyleSetter
+  {
+    EditionStyleSetter( Table & table_r, const std::string & header_r )
+    : _table( table_r )
+    , _header( header_r )
+    {}
+    Table & _table;
+    std::string _header;
+  };
+
+  /** \relates table::EditionStyleSetter */
+  inline TableHeader & operator<< ( TableHeader & th, const EditionStyleSetter & obj )
+  {
+    obj._table.setEditionStyle( th.cols() );
+    th.add( obj._header );
+    return th;
+  }
+}
+
 
 inline
 Table& operator << (Table& table, const TableRow& tr) {
