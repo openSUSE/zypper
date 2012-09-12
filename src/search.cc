@@ -56,7 +56,7 @@ FillSearchTableSolvable::FillSearchTableSolvable(
       // translators: name (general header)
       << _("Name")
       // translators: package version (header)
-      << _("Version")
+      << table::EditionStyleSetter( *_table, _("Version") )
       // translators: package architecture (header)
       << _("Arch");
   }
@@ -70,7 +70,7 @@ FillSearchTableSolvable::FillSearchTableSolvable(
       // translators: type (general header)
       << _("Type")
       // translators: package version (header)
-      << _("Version")
+      << table::EditionStyleSetter( *_table, _("Version") )
       // translators: package architecture (header)
       << _("Arch")
       // translators: package's repository (header)
@@ -353,7 +353,7 @@ FillPatchesTable::FillPatchesTable( Table & table, zypp::TriBool inst_notinst )
     // translators: catalog (rug's word for repository) (header)
     << _("Catalog")
     << _("Name")
-    << _("Version")
+    << table::EditionStyleSetter( *_table, ("Version") )
     // translators: patch category (recommended, security)
     << _("Category")
     // translators: patch status (installed, uninstalled, needed)
@@ -476,7 +476,7 @@ static void list_pattern_table(Zypper & zypper)
 
   // translators: S for installed Status
   th << _("S");
-  th << _("Name") << _("Version");
+  th << _("Name") << table::EditionStyleSetter( tbl, _("Version") );
   if (!zypper.globalOpts().is_rug_compatible)
     th << _("Repository") << _("Dependency");
   tbl << th;
@@ -540,7 +540,7 @@ void list_packages(Zypper & zypper)
     th << _("Bundle");
   else
     th << _("Repository");
-  th << _("Name") << _("Version") << _("Arch");
+  th << _("Name") << table::EditionStyleSetter( tbl, _("Version") ) << _("Arch");
   tbl << th;
 
   bool installed_only = zypper.cOpts().count("installed-only");
@@ -657,7 +657,7 @@ static void list_product_table(Zypper & zypper)
   // product whereas simply Name is the official full name of the product.
   th << _("Internal Name");
   th << _("Name");
-  th << _("Version");
+  th << table::EditionStyleSetter( tbl, _("Version") );
   if (zypper.globalOpts().is_rug_compatible)
      // translators: product category (base/addon), the rug term
      th << _("Category");
