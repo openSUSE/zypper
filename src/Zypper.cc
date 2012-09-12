@@ -742,6 +742,9 @@ void Zypper::commandShell()
 
   setRunningShell(true);
 
+  God = zypp::getZYpp();
+  init_target( *this );
+
   string histfile;
   try {
     const char * env = getenv ("HOME");
@@ -779,6 +782,8 @@ void Zypper::commandShell()
 
     try
     {
+      MIL << "Reloading..." << endl;
+      God->target()->reload();   // reload system in case rpm database has changed
       setCommand(ZypperCommand(command_str));
       if (command() == ZypperCommand::SHELL_QUIT)
         break;
