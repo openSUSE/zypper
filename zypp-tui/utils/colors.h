@@ -52,7 +52,7 @@ typedef enum zypper_color_contexts
   COLOR_CONTEXT_MSG_STATUS           = 2,
   COLOR_CONTEXT_MSG_ERROR            = 3,
   COLOR_CONTEXT_MSG_WARNING          = 4,
-  COLOR_CONTEXT_POSTIVE              = 5,
+  COLOR_CONTEXT_POSITIVE              = 5,
   COLOR_CONTEXT_NEGATIVE             = 6,
   COLOR_CONTEXT_PROMPT_OPTION        = 7,
   COLOR_CONTEXT_PROMPT_SHORTHAND     = 8,
