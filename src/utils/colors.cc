@@ -78,7 +78,7 @@ static const string get_color(const Config & conf, const ColorContext context)
     return conf.color_msgWarning.value();
   case COLOR_CONTEXT_MSG_ERROR:
     return conf.color_msgError.value();
-  case COLOR_CONTEXT_POSTIVE:
+  case COLOR_CONTEXT_POSITIVE:
     return conf.color_positive.value();
   case COLOR_CONTEXT_NEGATIVE:
     return conf.color_negative.value();
