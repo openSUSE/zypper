@@ -258,7 +258,7 @@ static bool list_patch_updates(Zypper & zypper)
   unsigned cols;
 
   th << (zypper.globalOpts().is_rug_compatible ? _("Catalog") : _("Repository"))
-     << _("Name") << _("Version") << _("Category")<< _("Status") << _("Summary");
+     << _("Name") << table::EditionStyleSetter( tbl, _("Version") ) << _("Category") << _("Status") << _("Summary");
   cols = 6;
   tbl << th;
   pm_tbl << th;
@@ -497,8 +497,8 @@ void list_updates(Zypper & zypper, const ResKindSet & kinds, bool best_effort)
     if (!best_effort)
     {
       if (*it == ResKind::package)
-        th << _("Current Version");
-      th << _("Available Version") << _("Arch");
+        th << table::EditionStyleSetter( tbl, _("Current Version") );
+      th << table::EditionStyleSetter( tbl, _("Available Version") ) << _("Arch");
     }
 
     tbl << th;
@@ -677,7 +677,7 @@ void list_patches_by_issue(Zypper & zypper)
   // look for matches in patch descriptions
   Table t1;
   TableHeader th1;
-  th1 << _("Name") << _("Version") << _("Category") << _("Summary");
+  th1 << _("Name") << table::EditionStyleSetter( t1, _("Version") ) << _("Category") << _("Summary");
   t1 << th1;
   if (!issuesstr.empty())
   {
