@@ -1,7 +1,15 @@
 -------------------------------------------------------------------
+Wed Sep 12 13:55:56 CEST 2012 - ma@suse.de
+
+- Use edition style on table columns in color mode
+- Reload target before executing a new command in 'zypper shell'
+  (bnc #767880)
+- version 1.8.3
+
+-------------------------------------------------------------------
 Tue Sep 11 11:58:00 CEST 2012 - ma@suse.de
 
-- show reaosn for not installed recommended packages (bnc #698766)
+- show reason for not installed recommended packages (bnc #698766)
 - version 1.8.2
 
 -------------------------------------------------------------------
