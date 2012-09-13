@@ -24,7 +24,7 @@ struct TermLine
   {
     SF_CRUSH	= 1<<0,	//< truncate lhs, then rhs
     SF_SPLIT	= 1<<1,	//< split line across two
-    SF_EXPAND	= 1<<2	//< expand short lines
+    SF_EXPAND	= 1<<2	//< expand short lines iff stdout is a tty
   };
   ZYPP_DECLARE_FLAGS( SplitFlags, SplitFlag );
 

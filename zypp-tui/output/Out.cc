@@ -1,3 +1,5 @@
+#include <unistd.h>
+
 #include <iostream>
 #include <sstream>
 
@@ -28,7 +30,7 @@ std::string TermLine::get( unsigned width_r, SplitFlags flags_r, char exp_r ) co
   if ( diff > 0 )
   {
     // expand...
-    if ( ! flags_r.testFlag( SF_EXPAND ) )
+    if ( ! ( flags_r.testFlag( SF_EXPAND ) && ::isatty(STDOUT_FILENO) ) )
       return zypp::str::Str() << l << r;
 
     if ( percentHint < 0 || percentHint > 100 )
