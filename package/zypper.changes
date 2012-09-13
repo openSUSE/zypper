@@ -1,4 +1,10 @@
 -------------------------------------------------------------------
+Thu Sep 13 11:04:08 CEST 2012 - ma@suse.de
+
+- Use edition style on table columns
+- version 1.7.6
+
+-------------------------------------------------------------------
 Mon Sep 10 15:53:29 CEST 2012 - ma@suse.de
 
 - Rephrase misleading sections about zypp.conf and zypper.conf (bnc#777323)
