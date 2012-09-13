@@ -1,4 +1,10 @@
 -------------------------------------------------------------------
+Thu Sep 13 13:46:13 CEST 2012 - ma@suse.de
+
+- Fix zypper output if stdout is not a tty (bnc#779716)
+- version 1.7.7
+
+-------------------------------------------------------------------
 Thu Sep 13 11:04:08 CEST 2012 - ma@suse.de
 
 - Use edition style on table columns
