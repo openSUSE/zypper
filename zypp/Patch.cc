@@ -49,29 +49,60 @@ namespace zypp
 
   Patch::Category Patch::categoryEnum() const
   {
-    static const IdString cat_yast		( "yast" );
-    static const IdString cat_security		( "security" );
-    static const IdString cat_recommended	( "recommended" );
-    static const IdString cat_bugfix		( "bugfix" );		// rhn
-    static const IdString cat_optional		( "optional" );
-    static const IdString cat_feature		( "feature" );
-    static const IdString cat_enhancement	( "enhancement" );	// rnh
-    static const IdString cat_document		( "document" );
+    std::string cat( category() );
+    switch ( cat[0] )
+    {
+      //	CAT_YAST
+      case 'y':
+      case 'Y':
+	if ( str::compareCI( cat, "yast" ) == 0 )
+	  return CAT_YAST;
+	break;
 
-    // patch category is not poolized in the solv file (i.e. an IdString) ;(
-    IdString cat( sat::LookupAttr( sat::SolvAttr::patchcategory, satSolvable() ).begin().c_str() );
+      //	CAT_SECURITY
+      case 's':
+      case 'S':
+	if ( str::compareCI( cat, "security" ) == 0 )
+	  return CAT_SECURITY;
+	break;
 
-    if ( cat == cat_yast )
-      return CAT_YAST;
-    if ( cat == cat_security )
-      return CAT_SECURITY;
-    if ( cat == cat_recommended || cat == cat_bugfix )
-      return CAT_RECOMMENDED;
-    if ( cat == cat_optional || cat == cat_enhancement || cat == cat_feature )
-      return CAT_OPTIONAL;
-    if ( cat == cat_document )
-      return CAT_DOCUMENT;
+      //	CAT_RECOMMENDED
+      case 'r':
+      case 'R':
+	if ( str::compareCI( cat, "recommended" ) == 0 )
+	  return CAT_RECOMMENDED;
+	break;
+      case 'b':
+      case 'B':
+	if ( str::compareCI( cat, "bugfix" ) == 0 )	// rhn
+	  return CAT_RECOMMENDED;
+	break;
 
+      //	CAT_OPTIONAL
+      case 'o':
+      case 'O':
+	if ( str::compareCI( cat, "optional" ) == 0 )
+	  return CAT_OPTIONAL;
+	break;
+      case 'f':
+      case 'F':
+	if ( str::compareCI( cat, "feature" ) == 0 )
+	  return CAT_OPTIONAL;
+	break;
+      case 'e':
+      case 'E':
+	if ( str::compareCI( cat, "enhancement" ) == 0 )	// rhn
+	  return CAT_OPTIONAL;
+	break;
+
+      //	CAT_DOCUMENT
+      case 'd':
+      case 'D':
+	if ( str::compareCI( cat, "document" ) == 0 )
+	  return CAT_DOCUMENT;
+	break;
+    }
+    // default:
     return CAT_OTHER;
   }
 
@@ -220,7 +251,6 @@ namespace zypp
         continue;
       }
 
-#warning definition of patch contents is poor - needs review
       /* find exact providers first (this matches the _real_ 'collection content' of the patch */
       providers = sat::WhatProvides( Capability( arch, name.c_str(), Rel::EQ, edition, ResKind::package ) );
       if ( providers.empty() )
