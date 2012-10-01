@@ -4,6 +4,14 @@ Sun Oct  7 01:13:41 CEST 2012 - ma@suse.de
 - Update zypp-po.tar.bz2
 
 -------------------------------------------------------------------
+Mon Oct  1 11:00:42 CEST 2012 - ma@suse.de
+
+- Enable multiversion kernel and set multiversion.kernels in
+  /etc/zypp/zypp.conf to keep the latest, latest-1 and the running.
+- Fix typo (bnc#782801)
+- Relax evaluation of patch category tags (case insensitive)
+
+-------------------------------------------------------------------
 Sun Sep 30 01:13:18 CEST 2012 - ma@suse.de
 
 - Update zypp-po.tar.bz2
