@@ -1,4 +1,9 @@
 -------------------------------------------------------------------
+Mon Oct  8 11:01:02 CEST 2012 - dheidler@suse.de
+
+- add patch/list-patches option --category to man (bnc#783539)
+
+-------------------------------------------------------------------
 Thu Sep 13 13:46:13 CEST 2012 - ma@suse.de
 
 - Fix zypper output if stdout is not a tty (bnc#779716)
