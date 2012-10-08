@@ -1,4 +1,9 @@
 -------------------------------------------------------------------
+Mon Oct  8 10:57:14 CEST 2012 - dheidler@suse.de
+
+- add patch/list-patches option --category to man (bnc#783539)
+
+-------------------------------------------------------------------
 Fri Aug  3 12:52:47 CEST 2012 - ma@suse.de
 
 - properly encode data in XML output (bnc#773641)
