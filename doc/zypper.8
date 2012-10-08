@@ -632,6 +632,9 @@ number matches the given string.
 List available needed patches for all CVE issues, or issues whose number
 matches the given string.
 .TP
+\fI\-g, \-\-category\fR <category>
+List available patches in the specified category.
+.TP
 \fI \ \ \ \ \-\-issues\fR[=string]
 Look for issues whose number, summary, or description matches the specified
 string. Issues found by number are displayed separately from those found
@@ -678,6 +681,11 @@ needed patches for specific issues.
 Install patch fixing a MITRE's CVE issue specified by number. Use
 \fBlist-patches --cve\fR command to get a list of available
 needed patches for specific issues.
+.TP
+\fI\-g, \-\-category\fR <category>
+Install all patches in the specified category. Use
+\fBlist-patches --category\fR command to get a list of available
+patches for a specific category.
 .TP
 \fI\-r, \-\-repo\fR <alias|name|#|URI>
 Work only with the repository specified by the alias, name, number, or URI. This
