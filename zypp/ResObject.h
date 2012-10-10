@@ -130,6 +130,14 @@ namespace zypp
      */
     std::string licenseToConfirm( const Locale & lang_r = Locale() ) const;
 
+   /**
+     * \short Acceptance of Product License needed?  
+     *
+     * Returns whether a product license has to be accepted
+     * (no acceptance is needed for openSUSE)
+     */
+    bool needToAcceptLicense() const;
+    
     /**
      * \short Vendor
      *

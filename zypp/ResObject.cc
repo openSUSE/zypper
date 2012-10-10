@@ -75,6 +75,13 @@ namespace zypp
     return ret;
   }
 
+  bool ResObject::needToAcceptLicense() const
+  {
+    if ( isKind<Product>() )
+      return repoInfo().needToAcceptLicense( );
+    return true;
+  }
+
   std::string ResObject::distribution() const
   { return lookupStrAttribute( sat::SolvAttr::distribution ); }
 
