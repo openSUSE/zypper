@@ -120,6 +120,8 @@ bool confirm_licenses(Zypper & zypper)
 
   for (ResPool::const_iterator it = God->pool().begin(); it != God->pool().end(); ++it)
   {
+    bool to_accept = true;
+    
     if (it->status().isToBeInstalled() &&
         !it->resolvable()->licenseToConfirm().empty())
     {
@@ -167,15 +169,20 @@ bool confirm_licenses(Zypper & zypper)
           " (" + kind_to_string_localized(it->resolvable()->kind(), 1) + ")" :
           string();
 
-      // introduction
-      s << str::form(
-          // translators: the first %s is the name of the package, the second
-          // is " (package-type)" if other than "package" (patch/product/pattern)
-          _("In order to install '%s'%s, you must agree"
-            " to terms of the following license agreement:"),
-            get_display_name(it->resolvable()).c_str(), kindstr.c_str());
-      s << endl << endl;
-
+      if ( !it->resolvable()->needToAcceptLicense() )
+        to_accept = false;
+      
+      if (to_accept)
+      {
+        // introduction
+        s << str::form(
+                       // translators: the first %s is the name of the package, the second
+                       // is " (package-type)" if other than "package" (patch/product/pattern)
+                       _("In order to install '%s'%s, you must agree"
+                         " to terms of the following license agreement:"),
+                       get_display_name(it->resolvable()).c_str(), kindstr.c_str());
+        s << endl << endl;
+      }
       // license text
       const string& licenseText = it->resolvable()->licenseToConfirm();
       if (licenseText.find("DT:Rich")==licenseText.npos)
@@ -187,41 +194,44 @@ bool confirm_licenses(Zypper & zypper)
       if (zypper.globalOpts().machine_readable || !show_text_in_pager(s.str()))
         zypper.out().info(s.str(), Out::QUIET);
 
-      // lincense prompt
-      string question = _("Do you agree with the terms of the license?");
-      //! \todo add 'v' option to view the license again, add prompt help
-      if (!read_bool_answer(PROMPT_YN_LICENSE_AGREE, question, license_auto_agree))
+      if (to_accept)
       {
-        confirmed = false;
-
-        if (zypper.globalOpts().non_interactive)
+        // lincense prompt
+        string question = _("Do you agree with the terms of the license?");
+        //! \todo add 'v' option to view the license again, add prompt help
+        if (!read_bool_answer(PROMPT_YN_LICENSE_AGREE, question, license_auto_agree))
         {
-          zypper.out().info(
-            _("Aborting installation due to the need for license confirmation."),
-            Out::QUIET);
-          zypper.out().info(boost::str(format(
-            // translators: %sanslate the '--auto-agree-with-licenses',
-            // it is a command line option
-            _("Please restart the operation in interactive"
-              " mode and confirm your agreement with required licenses,"
-              " or use the %s option.")) % "--auto-agree-with-licenses"),
-            Out::QUIET);
+          confirmed = false;
 
-          MIL << "License(s) NOT confirmed (non-interactive without auto confirmation)" << endl;
-        }
-        else
-        {
-          zypper.out().info(boost::str(format(
-              // translators: e.g. "... with flash package license."
-              //! \todo fix this to allow proper translation
-              _("Aborting installation due to user disagreement with %s %s license."))
-                % get_display_name(it->resolvable())
-                % kind_to_string_localized(it->resolvable()->kind(), 1)),
-              Out::QUIET);
+          if (zypper.globalOpts().non_interactive)
+          {
+            zypper.out().info(
+                              _("Aborting installation due to the need for license confirmation."),
+                              Out::QUIET);
+            zypper.out().info(boost::str(format(
+                                                // translators: %sanslate the '--auto-agree-with-licenses',
+                                                // it is a command line option
+                                                _("Please restart the operation in interactive"
+                                                  " mode and confirm your agreement with required licenses,"
+                                                  " or use the %s option.")) % "--auto-agree-with-licenses"),
+                              Out::QUIET);
+
+            MIL << "License(s) NOT confirmed (non-interactive without auto confirmation)" << endl;
+          }
+          else
+          {
+            zypper.out().info(boost::str(format(
+                                                // translators: e.g. "... with flash package license."
+                                                //! \todo fix this to allow proper translation
+                                                _("Aborting installation due to user disagreement with %s %s license."))
+                                         % get_display_name(it->resolvable())
+                                         % kind_to_string_localized(it->resolvable()->kind(), 1)),
+                              Out::QUIET);
             MIL << "License(s) NOT confirmed (interactive)" << endl;
-        }
+          }
 
-        break;
+          break;
+        }
       }
     }
   }
