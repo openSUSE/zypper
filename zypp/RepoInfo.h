@@ -309,6 +309,11 @@ namespace zypp
       /** Whether there is a license associated with the repo. */
       bool hasLicense() const;
 
+      /** Whether the repo license has to be accepted, e.g. there is no
+       * no acceptance needed for openSUSE.
+       */ 
+      bool needToAcceptLicense() const;
+    
       /** Return the best license for the current (or a specified) locale. */
       std::string getLicense( const Locale & lang_r = Locale() );
 

@@ -283,6 +283,34 @@ namespace zypp
     return ! licenseTgz.empty() &&  PathInfo(licenseTgz).isFile();
   }
 
+  bool RepoInfo::needToAcceptLicense() const
+  {
+    static const std::string noAcceptanceFile = "no-acceptance-needed\n";
+    bool accept = true;
+    
+    Pathname licenseTgz( _pimpl->licenseTgz() );
+    if ( licenseTgz.empty() || ! PathInfo( licenseTgz ).isFile() )
+      return false;     // no licenses at all
+
+    ExternalProgram::Arguments cmd;
+    cmd.push_back( "tar" );
+    cmd.push_back( "-t" );
+    cmd.push_back( "-z" );
+    cmd.push_back( "-f" );
+    cmd.push_back( licenseTgz.asString() );
+
+    ExternalProgram prog( cmd, ExternalProgram::Stderr_To_Stdout );
+    for ( std::string output( prog.receiveLine() ); output.length(); output = prog.receiveLine() )
+    {
+      if ( output == noAcceptanceFile )
+      {
+        accept = false;
+      }
+    }
+    MIL << "License for " << this->name() << " has to be accepted: " << (accept?"true":"false" ) << endl;
+    return accept;
+  }
+
   std::string RepoInfo::getLicense( const Locale & lang_r )
   {
     LocaleSet avlocales( getLicenseLocales() );
@@ -350,10 +378,6 @@ namespace zypp
           ret.insert( Locale() );
         else
           ret.insert( Locale( std::string( output.c_str()+license.size(), output.size()- license.size() - dotTxt.size() ) ) );
-      }
-      else
-      {
-        WAR << "  " << output;
       }
     }
     prog.close();
