@@ -11,6 +11,7 @@
 */
 #include <iostream>
 #include "zypp/base/LogTools.h"
+#include "zypp/base/StrMatcher.h"
 
 #include "zypp/Product.h"
 #include "zypp/Url.h"
@@ -106,7 +107,7 @@ namespace zypp
 	StrMatcher matcher( referenceFilename() );
 	q.setStrMatcher( matcher );
 	if ( ! q.empty() )
-	  found = q.begin().inSolvAttr();
+	  found = q.begin().inSolvable();
       }
       else
 	INT << "Product referenceFilename unexpectedly empty!" << endl;
