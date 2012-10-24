@@ -1759,10 +1759,16 @@ zypper was invoked with an invalid command or option, or a bad syntax.
 Some of provided arguments were invalid. E.g. an invalid URI was provided to the addrepo command.
 .TP
 4 - ZYPPER_EXIT_ERR_ZYPP
-A problem reported by ZYPP library. E.g. another instance of ZYPP is running.
+A problem is reported by ZYPP library.
 .TP
 5 - ZYPPER_EXIT_ERR_PRIVILEGES
 User invoking zypper has insufficient privileges for specified operation.
+.TP
+6 - ZYPPER_EXIT_NO_REPOS    
+No repositories are defined.
+.TP
+7 - ZYPPER_EXIT_ZYPP_LOCKED
+The ZYPP library is locked, e.g. packagekit is running. 
 .TP
 100 - ZYPPER_EXIT_INF_UPDATE_NEEDED
 Returned by the patch-check command if there are patches available for installation.

@@ -14,6 +14,7 @@
 #define ZYPPER_EXIT_ERR_ZYPP               4 // error indicated from within libzypp, e.g. God = zypp::getZYpp() threw an exception
 #define ZYPPER_EXIT_ERR_PRIVILEGES         5 // unsufficient privileges for the operation
 #define ZYPPER_EXIT_NO_REPOS               6 // no repositories defined
+#define ZYPPER_EXIT_ZYPP_LOCKED            7 // libzypp is locked, e.g. packagekit is running 
 
 // info
 #define ZYPPER_EXIT_INF_UPDATE_NEEDED      100 // update needed
