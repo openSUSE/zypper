@@ -3583,11 +3583,10 @@ void Zypper::doCommand()
     }
 
     initRepoManager();
-
+    init_target(*this);
     init_repos(*this);
     if (exitCode() != ZYPPER_EXIT_OK)
       return;
-    init_target(*this);
     // if (!copts.count("no-build-deps")) // if target resolvables are not read, solver produces a weird result
     load_target_resolvables(*this);
     load_repo_resolvables(*this);
@@ -4578,10 +4577,10 @@ copts.end())
     }
 
     initRepoManager();
+    init_target(*this);
     init_repos(*this);
     if (exitCode() != ZYPPER_EXIT_OK)
       return;
-    init_target(*this);
     // now load resolvables:
     load_resolvables(*this);
     // needed to compute status of PPP
