@@ -1,4 +1,13 @@
 -------------------------------------------------------------------
+Wed Oct 24 10:22:24 CEST 2012 - ma@suse.de
+
+- return dedicated error code if libzypp is locked (bnc #772353)
+- Don't ask for license agreement for openSUSE (bnc #780659)
+- add patch/list-patches option --category to man
+- Fix zypper output if stdout is not a tty (bnc#779716)
+- version 1.8.4
+
+-------------------------------------------------------------------
 Thu Oct 18 01:14:10 CEST 2012 - ma@suse.de
 
 - Update zypper-po.tar.bz2
