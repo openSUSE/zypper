@@ -1,5 +1,5 @@
 ## Path:	Network/Proxy
-## Description:	
+## Description:
 ## Type:	yesno
 ## Default:	no
 ## Config:      kde,profiles
@@ -7,7 +7,7 @@
 # Enable a generation of the proxy settings to the profile.
 # This setting allows to turn the proxy on and off while
 # preserving the particular proxy setup.
-# 
+#
 PROXY_ENABLED="no"
 
 ## Type:	string
