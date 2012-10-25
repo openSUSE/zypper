@@ -1,4 +1,11 @@
 -------------------------------------------------------------------
+Thu Oct 25 18:40:17 CEST 2012 - ma@suse.de
+
+- Fix source-install to accept package names and lookup their
+  source package (bnc#785832)
+- version 1.6.168
+
+-------------------------------------------------------------------
 Mon Oct  8 10:57:14 CEST 2012 - dheidler@suse.de
 
 - add patch/list-patches option --category to man (bnc#783539)
