@@ -1,4 +1,11 @@
 -------------------------------------------------------------------
+Thu Oct 25 18:08:59 CEST 2012 - ma@suse.de
+
+- Fix source-install to accept package names and lookup their 
+  source package (bnc#785832)
+- version 1.8.5
+
+-------------------------------------------------------------------
 Wed Oct 24 10:22:24 CEST 2012 - ma@suse.de
 
 - return dedicated error code if libzypp is locked (bnc #772353)
