@@ -1,4 +1,11 @@
 -------------------------------------------------------------------
+Thu Oct 25 18:47:19 CEST 2012 - ma@suse.de
+
+- Fix source-install to accept package names and lookup their
+  source package (bnc#785832)
+- version 1.3.22
+
+-------------------------------------------------------------------
 Tue Jul 10 12:33:04 CEST 2012 - ma@suse.de
 
 - don't link setuid wrapper against libzypp (bnc#770630)
