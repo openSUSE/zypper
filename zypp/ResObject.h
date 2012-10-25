@@ -273,11 +273,11 @@ namespace zypp
 
   template<class _Res>
   inline typename ResTraits<_Res>::constPtrType ResObject::asKind() const
-  { return make<_Res>( *this ); }
+  { return dynamic_cast<const _Res *>( this ); }
 
   template<class _Res>
   inline typename ResTraits<_Res>::PtrType ResObject::asKind()
-  { return make<_Res>( *this ); }
+  { return dynamic_cast<_Res *>( this ); }
 
   /////////////////////////////////////////////////////////////////
 } // namespace zypp
