@@ -373,7 +373,6 @@ void build_deps_install(Zypper & zypper)
 
     if (srcpkg)
     {
-      zypper.runtimeData().srcpkgs_to_install.insert(srcpkg);
       DBG << format("Injecting build requieres for source package %s-%s")
           % srcpkg->name() % srcpkg->edition() << endl;
 
