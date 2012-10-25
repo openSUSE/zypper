@@ -120,7 +120,7 @@ struct RuntimeData
    */
   zypp::RepoInfo current_repo;
 
-  std::list<zypp::SrcPackage::constPtr> srcpkgs_to_install;
+  std::set<zypp::SrcPackage::constPtr> srcpkgs_to_install;
 
   // hack to enable media progress reporting in the commit phase in normal
   // output level
