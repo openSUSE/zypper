@@ -368,7 +368,9 @@ Install version 2.0.6 of virtualbox-ose package (any of the following):
 
 .TP
 .B source-install (si) <name> ...
-Install specified source packages and their build dependencies.
+Install specified source packages and their build dependencies. If the name of
+a binary package is given, the coresponding source package is looked up and
+installed instead.
 
 This command will try to find the newest available versions of the source
 packages and use rpm -i to install them and the packages that are required

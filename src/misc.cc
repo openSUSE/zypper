@@ -304,50 +304,44 @@ void report_licenses(Zypper & zypper)
 }
 
 // ----------------------------------------------------------------------------
-
-static SrcPackage::constPtr source_find( const string & arg )
+namespace
 {
-   /*
-   * Workflow:
-   *
-   * 1. interate all SrcPackage resolvables with specified name
-   * 2. find the latest version or version satisfying specification.
-   */
-    SrcPackage::constPtr srcpkg;
+  SrcPackage::constPtr source_find( Zypper & zypper_r, const string & arg_r )
+  {
+    /*
+     * Workflow:
+     *
+     * 1. return srcpackage "arg_r" if available
+     * 2. else if package "arg_r" is available, return it's srcpackage if available
+     * 3; else return 0
+     */
+    DBG << "looking for source package: " << arg_r << endl;
+    ui::Selectable::Ptr p( ui::Selectable::get( ResKind::srcpackage, arg_r ) );
+    if ( p )
+      return asKind<SrcPackage>( p->theObj().resolvable() );
 
-    ResPool pool(God->pool());
-    DBG << "looking source for : " << arg << endl;
-    for_( srcit, pool.byIdentBegin<SrcPackage>(arg),
-              pool.byIdentEnd<SrcPackage>(arg) )
+    // else: try package and packages sourcepackage
+    p = zypp::ui::Selectable::get( zypp::ResKind::package, arg_r );
+    if ( p )
     {
-      DBG << *srcit << endl;
-      if ( ! srcit->status().isInstalled() ) // this will be true for all of the srcpackages, won't it?
-      {
-        SrcPackage::constPtr _srcpkg = asKind<SrcPackage>(srcit->resolvable());
+      std::string name( p->theObj()->asKind<Package>()->sourcePkgName() );
+      DBG << "looking for source package of package: " << name << endl;
+      zypper_r.out().info( boost::str( format(_("Package '%s' has source package '%s'.")) % arg_r % name ) );
 
-        DBG << "Considering srcpakcage " << _srcpkg->name() << "-" << _srcpkg->edition() << ": ";
-        if (srcpkg)
-        {
-          if (_srcpkg->edition() > srcpkg->edition())
-          {
-            DBG << "newer edition (" << srcpkg->edition() << " > " << _srcpkg->edition() << ")";
-            _srcpkg.swap(srcpkg);
-          }
-          else
-            DBG << "is older than the current candidate";
-        }
-        else
-        {
-          DBG << "first candindate";
-          _srcpkg.swap(srcpkg);
-        }
-        DBG << endl;
-      }
+      p = zypp::ui::Selectable::get( ResKind::srcpackage, p->theObj()->asKind<Package>()->sourcePkgName() );
+      if ( p )
+	return asKind<SrcPackage>( p->theObj().resolvable() );
+      else
+	zypper_r.out().error( boost::str( format(_("Source package '%s' for package '%s' not found.")) % name % arg_r ) );
     }
+    else
+      zypper_r.out().error( boost::str( format(_("Source package '%s' not found.")) % arg_r ) );
 
-    return srcpkg;
-}
 
+    DBG << "no source package found for: " << arg_r << endl;
+    return SrcPackage::constPtr();
+  }
+} // namespace
 void build_deps_install(Zypper & zypper)
 {
   /*
@@ -360,7 +354,7 @@ void build_deps_install(Zypper & zypper)
   for (vector<string>::const_iterator it = zypper.arguments().begin();
        it != zypper.arguments().end(); ++it)
   {
-    SrcPackage::constPtr srcpkg = source_find(*it);
+    SrcPackage::constPtr srcpkg = source_find(zypper, *it);
 
     if (srcpkg)
     {
@@ -384,8 +378,6 @@ void build_deps_install(Zypper & zypper)
     }
     else
     {
-      zypper.out().error(boost::str(format(
-          _("Source package '%s' not found.")) % (*it)));
       zypper.setExitCode(ZYPPER_EXIT_INF_CAP_NOT_FOUND);
     }
   }
@@ -403,13 +395,10 @@ void mark_src_pkgs(Zypper & zypper)
   for (vector<string>::const_iterator it = zypper.arguments().begin();
        it != zypper.arguments().end(); ++it)
   {
-    SrcPackage::constPtr srcpkg = source_find(*it);
+    SrcPackage::constPtr srcpkg = source_find(zypper, *it);
 
-    if (srcpkg)
-      zypper.runtimeData().srcpkgs_to_install.push_back(srcpkg);
-    else
-      zypper.out().error(boost::str(format(
-          _("Source package '%s' not found.")) % (*it)));
+    if ( srcpkg )
+      zypper.runtimeData().srcpkgs_to_install.insert(srcpkg);
   }
 }
 
