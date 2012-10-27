@@ -1,4 +1,9 @@
 -------------------------------------------------------------------
+Sun Oct 28 01:14:13 CEST 2012 - ma@suse.de
+
+- Update zypper-po.tar.bz2
+
+-------------------------------------------------------------------
 Thu Oct 25 18:08:59 CEST 2012 - ma@suse.de
 
 - Fix source-install to accept package names and lookup their 
