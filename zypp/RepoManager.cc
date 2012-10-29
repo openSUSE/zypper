@@ -910,7 +910,9 @@ namespace zypp
     assert_urls(info);
 
     // we will throw this later if no URL checks out fine
-    RepoException rexception(_("Valid metadata not found at specified URL(s)"));
+    RepoException rexception(_PL("Valid metadata not found at specified URL",
+                                 "Valid metadata not found at specified URLs",
+				 info.baseUrlsSize() ) );
 
     // try urls one by one
     for ( RepoInfo::urls_const_iterator it = info.baseUrlsBegin(); it != info.baseUrlsEnd(); ++it )
