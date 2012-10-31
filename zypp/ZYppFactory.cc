@@ -15,11 +15,13 @@ extern "C"
 }
 #include <iostream>
 #include <fstream>
+#include <signal.h>
 
 #include "zypp/base/Logger.h"
 #include "zypp/base/Gettext.h"
 #include "zypp/base/IOStream.h"
 #include "zypp/base/Functional.h"
+#include "zypp/base/Backtrace.h"
 #include "zypp/PathInfo.h"
 
 #include "zypp/ZYppFactory.h"
@@ -39,6 +41,19 @@ using std::endl;
 ///////////////////////////////////////////////////////////////////
 namespace zypp
 { /////////////////////////////////////////////////////////////////
+
+  namespace
+  {
+    void sigsegvHandler( int sig );
+    ::sighandler_t lastSigsegvHandler = ::signal( SIGSEGV, sigsegvHandler );
+
+    /** SIGSEGV handler to log stack trace */
+    void sigsegvHandler( int sig )
+    {
+      INT << "Error: signal " << sig << endl << dumpBacktrace << endl;
+      ::signal( SIGSEGV, lastSigsegvHandler );
+    }
+  }
 
   namespace env
   {
