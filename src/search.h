@@ -32,7 +32,19 @@ struct FillSearchTableSolvable
       Table & table,
       zypp::TriBool inst_notinst = zypp::indeterminate );
 
-  bool operator()(const zypp::ui::Selectable::constPtr & s) const;
+  /** Add all items within this Selectable */
+  bool operator()( const zypp::ui::Selectable::constPtr & sel ) const;
+  /** Add this PoolItem */
+  bool operator()( const zypp::PoolItem & pi ) const;
+  /** Add this Solvable */
+  bool operator()( zypp::sat::Solvable solv ) const;
+
+  /** Helper to add a table row for \a sel's picklist item \c pi
+   * \note picklist item means that \a pi must not be an installed
+   * item in \a sel, if there is an identical available one. The
+   * code relies on this.
+   */
+  void addPicklistItem( const zypp::ui::Selectable::constPtr & sel, const zypp::PoolItem & pi ) const;
 };
 
 struct FillSearchTableSelectable
@@ -61,7 +73,7 @@ struct FillPatchesTable
   const GlobalOptions & _gopts;
   zypp::TriBool _inst_notinst;
   bool _show_alias;
-  
+
   FillPatchesTable( Table & table,
       zypp::TriBool inst_notinst = zypp::indeterminate );
 
