@@ -11,6 +11,7 @@
 
 #include <zypp/PoolItem.h>
 #include <zypp/ResPoolProxy.h>
+#include <zypp/ui/SelectableTraits.h>
 
 #include "main.h"
 #include "utils/misc.h" // for kind_to_string_localized and string_patch_status
@@ -21,7 +22,6 @@ using namespace zypp;
 using namespace std;
 
 extern ZYpp::Ptr God;
-
 
 FillSearchTableSolvable::FillSearchTableSolvable(
     Table & table, zypp::TriBool inst_notinst)
@@ -80,9 +80,104 @@ FillSearchTableSolvable::FillSearchTableSolvable(
   *_table << header;
 }
 
-bool FillSearchTableSolvable::operator()(const zypp::ui::Selectable::constPtr & s) const
+void FillSearchTableSolvable::addPicklistItem( const ui::Selectable::constPtr & sel, const PoolItem & pi ) const
 {
+  // --repo => we only want the repo resolvables, not @System (bnc #467106)
+  if ( !_repos.empty() && _repos.find( pi->repoInfo().alias() ) == _repos.end() )
+    return;
+
+  // hide patterns with user visible flag not set (bnc #538152)
+  if ( pi->isKind<Pattern>() && ! pi->asKind<Pattern>()->userVisible() )
+    return;
+
+  TableRow row;
+  // compute status indicator:
+  //   i  - exactly this version installed
+  //   v  - installed, but in different version
+  //      - not installed at all
+  if ( pi->isSystem() )
+  {
+    // picklist: ==> not available
+    if ( _inst_notinst == false )
+      return;	// show only not installed
+    row << "i";
+  }
+  else
+  {
+    // picklist: ==> available, maybe identical installed too
+    if ( sel->installedEmpty() )
+    {
+      if ( _inst_notinst == true )
+	return;	// show only installed
+      row << "";
+    }
+    else
+    {
+      bool identicalInstalledToo = ( traits::isPseudoInstalled( pi->kind() )
+				   ? ( pi.isSatisfied() )
+				   : ( sel->identicalInstalled( pi ) ) );
+      if ( identicalInstalledToo )
+      {
+	if ( _inst_notinst == false )
+	  return;	// show only not installed
+	row << "i";
+      }
+      else
+      {
+	if ( _inst_notinst == true )
+	  return;	// show only installed
+	row << "v";
+      }
+    }
+  }
+
+  if ( _gopts.is_rug_compatible )
+  {
+    row
+    << ( pi->isSystem()
+       ? _("System Packages")
+       : (_show_alias ? pi->repository().info().alias() : pi->repository().info().name() ) )
+    << ""
+    << pi->name()
+    << pi->edition().asString()
+    << pi->arch().asString();
+  }
+  else
+  {
+    row
+    << pi->name()
+    << kind_to_string_localized( pi->kind(), 1 )
+    << pi->edition().asString()
+    << pi->arch().asString()
+    << ( pi->isSystem()
+       ? (string("(") + _("System Packages") + ")")
+       : (_show_alias ? pi->repository().info().alias() : pi->repository().info().name()));
+  }
+  *_table << row;
+}
+
+
+bool FillSearchTableSolvable::operator()( const zypp::PoolItem & pi ) const
+{
+  ui::Selectable::constPtr sel( ui::Selectable::get( pi ) );
+  addPicklistItem( sel, pi );
+  return true;
+}
+
+bool FillSearchTableSolvable::operator()( zypp::sat::Solvable solv ) const
+{ return operator()( PoolItem( solv ) ); }
+
+bool FillSearchTableSolvable::operator()( const zypp::ui::Selectable::constPtr & sel ) const
+{
+  // picklist: available items list prepended by those installed items not identicalAvailable
+  for_( it, sel->picklistBegin(), sel->picklistEnd() )
+  {
+    addPicklistItem( sel, *it );
+  }
+  return true;
+
   // show available objects
+  const zypp::ui::Selectable::constPtr & s( sel );
   for_(it, s->availableBegin(), s->availableEnd())
   {
     TableRow row;
@@ -763,9 +858,51 @@ void list_what_provides(Zypper & zypper, const string & str)
     return;
   }
 
+  // Ugly task of sorting the query (would be cool if table would do this):
+  // 1st group by name
+  std::map<IdString, std::vector<sat::Solvable>> res;
+  for_( it, q.solvableBegin(), q.solvableEnd() )
+  {
+    res[(*it).ident()].push_back( *it );
+  }
+  // 2nd follow picklist (available items list prepended by those installed items not identicalAvailable)
   Table t;
+  FillSearchTableSolvable fsts(t);
+  for_( nameit, res.begin(), res.end() )
+  {
+    const ui::Selectable::Ptr sel( ui::Selectable::get( nameit->first ) );
+    // replace installed by identical availabe if exists
+    std::set<PoolItem> piset;
+    for_( solvit, nameit->second.begin(), nameit->second.end() )
+    {
+      PoolItem pi( *solvit );
+      if ( pi->isSystem() )
+      {
+	PoolItem identical( sel->identicalAvailableObj( pi ) );
+	piset.insert( identical ? identical : pi );
+      }
+      else
+	piset.insert( pi );
+    }
+    // follow picklist and print the ones we found
+    for_( it, sel->picklistBegin(), sel->picklistEnd() )
+    {
+      if ( piset.find( *it ) != piset.end() )
+	fsts.addPicklistItem( sel, *it );
+    }
+  }
+  cout << t;
+/*
+
   invokeOnEach(q.selectableBegin(), q.selectableEnd(), FillSearchTableSolvable(t) );
   cout << t;
+  {
+    zypp::ui::SelectableTraits::AvailableItemSet res( q.poolItemBegin(), q.poolItemEnd() );
+
+    Table t;
+    invokeOnEach(res.begin(), res.end(), FillSearchTableSolvable(t) );
+    cout << t;
+  }*/
 }
 
 // Local Variables:
