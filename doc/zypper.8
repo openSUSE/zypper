@@ -1603,6 +1603,13 @@ The default value is /var/cache/zypp/solv.
 .I \ \ \ \ \-\-pkg\-cache\-dir <dir>
 Use the specified directory for storing downloaded rpm packages. (see \fBaddrepo --keep-packages\fR)
 The default value is /var/cache/zypp/packages.
+.TP
+.I \ \ \ \ \-\-userdata <string>
+User data is expected to be a simple string without special chars or embedded newlines and may serve as
+transaction id. It will be written to all install history log entries created throughout this specific
+zypper call. It will also be passed on to zypp plugins executed during commit. This will enable e.g. a
+btrfs plugin to tag created snapshots with this string. For zypper itself this string has no special
+meaning.
 .LP
 Repository Options:
 .TP
