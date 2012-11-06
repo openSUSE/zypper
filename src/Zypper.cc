@@ -156,6 +156,7 @@ void print_main_help(Zypper & zypper)
     "\t--version, -V\t\tOutput the version number.\n"
     "\t--promptids\t\tOutput a list of zypper's user prompts.\n"
     "\t--config, -c <file>\tUse specified config file instead of the default.\n"
+    "\t--userdata <string>\tUser defined transaction id used in history and plugins.\n"
     "\t--quiet, -q\t\tSuppress normal output, print only error\n"
     "\t\t\t\tmessages.\n"
     "\t--verbose, -v\t\tIncrease verbosity.\n"
@@ -355,6 +356,7 @@ void Zypper::processGlobalOptions()
     {"no-remote",                  no_argument,       0,  0 },
     {"xmlout",                     no_argument,       0, 'x'},
     {"config",                     required_argument, 0, 'c'},
+    {"userdata",                   required_argument, 0,  0 },
     {0, 0, 0, 0}
   };
 
@@ -449,6 +451,16 @@ void Zypper::processGlobalOptions()
   }
 
   // ======== other global options ========
+
+  if ( (it = gopts.find( "userdata" )) != gopts.end() )
+  {
+    if ( ! ZConfig::instance().setUserData( it->second.front() ) )
+    {
+      out().error(_("User data string must not contain nonprintable or newline characters!"));
+      setExitCode(ZYPPER_EXIT_ERR_INVALID_ARGS);
+      ZYPP_THROW(ExitRequestException("userdata"));
+    }
+  }
 
   string rug_test(_argv[0]);
   if (gopts.count("rug-compatible") || rug_test.rfind("rug") == rug_test.size()-3 )
