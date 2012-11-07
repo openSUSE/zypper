@@ -1,6 +1,6 @@
 /** \page Testcases Writing and tunning testcases
 
-\section Introduction
+\section Introduction Introduction
 
 ZYpp has a suite of tests located in under test/ directory of the source tree.
 
@@ -18,7 +18,7 @@ Tests are written using boost test library.
 - <a href="http://www.boost.org/doc/libs/1_36_0/libs/test/doc/html/utf.html">The Unit Test Framework</a>
 - <a href="http://www.boost.org/doc/libs/1_36_0/libs/test/doc/html/utf/testing-tools/reference.html">The UTF testing tools reference</a>
 
-\section Anatomy of a ZYpp testcase
+\section Anatomy Anatomy of a ZYpp testcase
 
 The file should be in one of the described groups, and by general rule it is named ClassName_test.cc where ClassName is the name of the class or module the test covers.
 
@@ -38,7 +38,7 @@ BOOST_AUTO_TEST_CASE(date_test)
 }
 \endcode
 
-\section Building and running the testsuite
+\section Building Building and running the testsuite
 
 - Build the testsuite
 
