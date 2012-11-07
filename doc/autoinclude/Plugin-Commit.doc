@@ -24,6 +24,8 @@ class MyPlugin(Plugin):
 
   def PLUGINBEGIN(self, headers, body):
     # commit is going to start.
+    if headers.has_key('userdata'):
+      print "Commit starts with TID '%s'" % headers['userdata']
     self.ack()
 
   def PLUGINEND(self, headers, body):
@@ -40,10 +42,13 @@ plugin.main()
 \section pluginbegin PLUGINBEGIN
 \verbatim
 PLUGINBEGIN
+userdata:TIDfoo42
 
 ^@
 \endverbatim
 Sent as 1st message after the plugin was launched. Prepare your plugin and send an \c ACC message when you are done. Commit will start after all plugins are initialized.
+
+\li \c userdata:stringval Optional header sent if the application has provided a user data string. \see \ref zypp-userdata
 
 
 <HR><!-- ====================================================================== -->

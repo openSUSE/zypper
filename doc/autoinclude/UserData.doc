@@ -10,4 +10,6 @@ It is possible to store a user defined data string via \ref zypp::ZConfig::setUs
 
 \li Setting a new user data string, a line will be written to the log file. So you can \c grep for it, or for  <tt>'(setUserData)'</tt> to find all locations where user data strings were set.
 
+\li The user data string will also be passed to commit plugins, so they can make use of it. The btrfs e.g would be able to tag created snapshots with this string. \see \ref plugin-commit
+
 */

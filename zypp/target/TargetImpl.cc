@@ -145,9 +145,13 @@ namespace zypp
 	{
 	  MIL << "Load plugin: " << pi_r << endl;
 	  try {
+	    PluginFrame frame( "PLUGINBEGIN" );
+	    if ( ZConfig::instance().hasUserData() )
+	      frame.setHeader( "userdata", ZConfig::instance().userData() );
+
 	    PluginScript plugin( pi_r.path() );
 	    plugin.open();
-	    plugin.send( PluginFrame( "PLUGINBEGIN" ) );
+	    plugin.send( frame );
 	    PluginFrame ret( plugin.receive() );
 	    if ( ret.isAckCommand() )
 	    {
@@ -978,7 +982,7 @@ namespace zypp
       bool newCache = buildCache();
       MIL << "New cache built: " << (newCache?"true":"false") <<
         ", force loading: " << (force?"true":"false") << endl;
- 
+
       // now add the repos to the pool
       sat::Pool satpool( sat::Pool::instance() );
       Pathname rpmsolv( solvfilesPath() / "solv" );
@@ -998,7 +1002,7 @@ namespace zypp
           return;     // nothing to do
         }
       }
-      
+
       if ( ! system )
       {
         system = satpool.systemRepo();
