@@ -1,0 +1,13 @@
+/**
+\page zypp-userdata User data as transaction id
+
+\author Michael Andres <ma@suse.de>
+
+<HR><!-- ====================================================================== -->
+\section userdata-introduction Introduction
+
+It is possible to store a user defined data string via \ref zypp::ZConfig::setUserData inside libzypp for use as a transaction id. \c Zypper e.g. supports this via its global <tt>'--userdata <string>'</tt> option.
+
+\li Setting a new user data string, a line will be written to the log file. So you can \c grep for it, or for  <tt>'(setUserData)'</tt> to find all locations where user data strings were set.
+
+*/

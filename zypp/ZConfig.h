@@ -109,6 +109,24 @@ namespace zypp
       { setTextLocale( defaultTextLocale() ); }
 
     public:
+      /** \name Maintain user data
+       * \see \ref zypp-userdata
+       */
+      //@{
+      /** Whether a (non empty) user data sting is defined. */
+      bool hasUserData() const;
+
+      /** User defined string value to be passed to log, history, plugins... */
+      std::string userData() const;
+
+      /** Set a new \ref userData string.
+       * \returns \c TRUE if the string was accepted; \c FALSE if the
+       * string was rejected due to nonprintable characters or newlines.
+       */
+      bool setUserData( const std::string & str_r );
+      //@}
+
+    public:
       /**
        * Path where the caches are kept (/var/cache/zypp)
        * \ingroup g_ZC_REPOCACHE
