@@ -860,7 +860,7 @@ void list_what_provides(Zypper & zypper, const string & str)
 
   // Ugly task of sorting the query (would be cool if table would do this):
   // 1st group by name
-  std::map<IdString, std::vector<sat::Solvable>> res;
+  std::map<IdString, std::vector<sat::Solvable> > res;
   for_( it, q.solvableBegin(), q.solvableEnd() )
   {
     res[(*it).ident()].push_back( *it );
