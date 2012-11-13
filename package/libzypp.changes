@@ -1,4 +1,14 @@
 -------------------------------------------------------------------
+Tue Nov 13 15:40:10 CET 2012 - ma@suse.de
+
+- Forward userdata string to commit plugins in BEGINPLUGIN (fate#312521)
+- Extend ZConfig to store a user defined string value (fate#312521)
+- Add SIGSEGV handler trying to log a stack trace
+- Add zypp::dumpBacktrace to dump current stack trace to a stream.
+- Use gettext plural handling (bnc#784666)
+- version 12.4.0 (0)
+
+-------------------------------------------------------------------
 Sun Nov  4 01:13:21 CET 2012 - ma@suse.de
 
 - Update zypp-po.tar.bz2
