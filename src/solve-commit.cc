@@ -747,9 +747,12 @@ void solve_and_commit (Zypper & zypper)
           RuntimeData & gData = Zypper::instance()->runtimeData();
           gData.show_media_progress_hack = true;
           // Total packages to download & install.
-          // To be used to write overall progress.
+          // To be used to write overall progress of retrieving packages.
           gData.commit_pkgs_total = summary.packagesToGetAndInstall();
           gData.commit_pkg_current = 0;
+          // To be used to show overall progress of rpm transactions.
+          gData.rpm_pkgs_total = summary.packagesToGetAndInstall() + summary.packagesToRemove();
+          gData.rpm_pkg_current = 0;
 
           ostringstream s;
           s << _("committing"); MIL << "committing...";

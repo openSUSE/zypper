@@ -133,11 +133,14 @@ struct RemoveResolvableReportReceiver : public zypp::callback::ReceiveReport<zyp
 
   virtual void start( zypp::Resolvable::constPtr resolvable )
   {
+    Zypper & zypper = *Zypper::instance();
     ::clock_gettime(CLOCK_REALTIME, &_last_reported);
     _last_percent.reset();
     // translators: This text is a progress display label e.g. "Removing packagename-x.x.x [42%]"
     _label = boost::str(boost::format(_("Removing %s-%s"))
         % resolvable->name() % resolvable->edition());
+    _label += boost::str(boost::format( " ( %d/%d ) ")
+        % (++zypper.runtimeData().rpm_pkg_current) % (zypper.runtimeData().rpm_pkgs_total));
     Zypper::instance()->out().progressStart("remove-resolvable", _label);
   }
 
@@ -200,12 +203,15 @@ struct InstallResolvableReportReceiver : public zypp::callback::ReceiveReport<zy
 
   virtual void start( zypp::Resolvable::constPtr resolvable )
   {
+    Zypper & zypper = *Zypper::instance();
     clock_gettime(CLOCK_REALTIME, &_last_reported);
     _last_percent.reset();
     _resolvable = resolvable;
     // TranslatorExplanation This text is a progress display label e.g. "Installing: foo-1.1.2 [42%]"
     _label = boost::str(boost::format(_("Installing: %s-%s"))
         % resolvable->name() % resolvable->edition());
+    _label += boost::str(boost::format( " ( %d/%d ) ")
+        % (++zypper.runtimeData().rpm_pkg_current) % (zypper.runtimeData().rpm_pkgs_total));
     Zypper::instance()->out().progressStart("install-resolvable", _label);
   }
 
