@@ -105,6 +105,8 @@ struct RuntimeData
     , solve_before_commit(true)
     , commit_pkgs_total(0)
     , commit_pkg_current(0)
+    , rpm_pkgs_total(0)
+    , rpm_pkg_current(0)
     , seen_verify_hint(false)
     , action_rpm_download(false)
     , waiting_for_input(false)
@@ -146,6 +148,8 @@ struct RuntimeData
 
   unsigned int commit_pkgs_total;
   unsigned int commit_pkg_current;
+  unsigned int rpm_pkgs_total;
+  unsigned int rpm_pkg_current;
 
   bool seen_verify_hint;
   bool action_rpm_download;
