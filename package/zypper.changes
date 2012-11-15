@@ -1,4 +1,9 @@
 -------------------------------------------------------------------
+Thu Nov 15 01:14:13 CET 2012 - ma@suse.de
+
+- Update zypper-po.tar.bz2
+
+-------------------------------------------------------------------
 Tue Nov 13 15:42:10 CET 2012 - ma@suse.de
 
 - Add global '--userdata' option to allow defining transaction ids (fate#312521)
