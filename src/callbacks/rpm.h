@@ -15,6 +15,7 @@
 #include <boost/format.hpp>
 
 #include <zypp/base/Logger.h>
+#include <zypp/base/String.h>
 #include <zypp/ZYppCallbacks.h>
 #include <zypp/Package.h>
 #include <zypp/Patch.h>
@@ -133,10 +134,14 @@ struct RemoveResolvableReportReceiver : public zypp::callback::ReceiveReport<zyp
 
   virtual void start( zypp::Resolvable::constPtr resolvable )
   {
+    Zypper & zypper = *Zypper::instance();
     ::clock_gettime(CLOCK_REALTIME, &_last_reported);
     _last_percent.reset();
+    _label = zypp::str::form("( %*d/%d ) ", zypp::str::asString(zypper.runtimeData().rpm_pkgs_total).length(),
+                             ++zypper.runtimeData().rpm_pkg_current,
+                             zypper.runtimeData().rpm_pkgs_total );
     // translators: This text is a progress display label e.g. "Removing packagename-x.x.x [42%]"
-    _label = boost::str(boost::format(_("Removing %s-%s"))
+    _label += boost::str(boost::format(_("Removing %s-%s"))
         % resolvable->name() % resolvable->edition());
     Zypper::instance()->out().progressStart("remove-resolvable", _label);
   }
@@ -200,11 +205,15 @@ struct InstallResolvableReportReceiver : public zypp::callback::ReceiveReport<zy
 
   virtual void start( zypp::Resolvable::constPtr resolvable )
   {
+    Zypper & zypper = *Zypper::instance();
     clock_gettime(CLOCK_REALTIME, &_last_reported);
     _last_percent.reset();
     _resolvable = resolvable;
+    _label = zypp::str::form("( %*d/%d ) ", zypp::str::asString(zypper.runtimeData().rpm_pkgs_total).length(),
+                              ++zypper.runtimeData().rpm_pkg_current,
+                              zypper.runtimeData().rpm_pkgs_total );
     // TranslatorExplanation This text is a progress display label e.g. "Installing: foo-1.1.2 [42%]"
-    _label = boost::str(boost::format(_("Installing: %s-%s"))
+    _label += boost::str(boost::format(_("Installing: %s-%s"))
         % resolvable->name() % resolvable->edition());
     Zypper::instance()->out().progressStart("install-resolvable", _label);
   }
