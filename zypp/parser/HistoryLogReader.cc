@@ -44,107 +44,111 @@ namespace zypp
     HistoryItem::Ptr createHistoryItem(HistoryItem::FieldVector & fields);
     void parseLine(const string & line, unsigned int lineNr);
 
-    void readAll(const ProgressData::ReceiverFnc & progress);
-    void readFrom(const Date & date,
-        const ProgressData::ReceiverFnc & progress);
-    void readFromTo(
-        const Date & fromDate, const Date & toDate,
-        const ProgressData::ReceiverFnc & progress);
+    void readAll( const ProgressData::ReceiverFnc & progress );
+    void readFrom( const Date & date, const ProgressData::ReceiverFnc & progress );
+    void readFromTo( const Date & fromDate, const Date & toDate, const ProgressData::ReceiverFnc & progress );
 
     Pathname _filename;
     ProcessItem _callback;
     bool _ignoreInvalid;
   };
 
-  HistoryLogReader::Impl::Impl( const Pathname & historyFile,
-                                const ProcessItem & callback )
-    : _filename(historyFile), _callback(callback), _ignoreInvalid(false)
+
+  HistoryLogReader::Impl::Impl( const Pathname & historyFile, const ProcessItem & callback )
+    : _filename( historyFile )
+    , _callback( callback )
+    , _ignoreInvalid( false )
   {}
 
-  HistoryItem::Ptr
-  HistoryLogReader::Impl::createHistoryItem(HistoryItem::FieldVector & fields)
+
+  HistoryItem::Ptr HistoryLogReader::Impl::createHistoryItem( HistoryItem::FieldVector & fields )
   {
-    HistoryActionID aid(str::trim(fields[1]));
-    switch (aid.toEnum())
+    HistoryActionID aid( str::trim( fields[1] ) );
+    switch ( aid.toEnum() )
     {
     case HistoryActionID::INSTALL_e:
-        return HistoryItemInstall::Ptr(new HistoryItemInstall(fields));
+      return HistoryItemInstall::Ptr( new HistoryItemInstall( fields ) );
       break;
 
     case HistoryActionID::REMOVE_e:
-      return HistoryItemRemove::Ptr(new HistoryItemRemove(fields));
+      return HistoryItemRemove::Ptr( new HistoryItemRemove( fields ) );
       break;
 
     case HistoryActionID::REPO_ADD_e:
-      return HistoryItemRepoAdd::Ptr(new HistoryItemRepoAdd(fields));
+      return HistoryItemRepoAdd::Ptr( new HistoryItemRepoAdd( fields ) );
       break;
 
     case HistoryActionID::REPO_REMOVE_e:
-      return HistoryItemRepoRemove::Ptr(new HistoryItemRepoRemove(fields));
+      return HistoryItemRepoRemove::Ptr( new HistoryItemRepoRemove( fields ) );
       break;
 
     case HistoryActionID::REPO_CHANGE_ALIAS_e:
-      return HistoryItemRepoAliasChange::Ptr(new HistoryItemRepoAliasChange(fields));
+      return HistoryItemRepoAliasChange::Ptr( new HistoryItemRepoAliasChange( fields ) );
       break;
 
     case HistoryActionID::REPO_CHANGE_URL_e:
-      return HistoryItemRepoUrlChange::Ptr(new HistoryItemRepoUrlChange(fields));
+      return HistoryItemRepoUrlChange::Ptr( new HistoryItemRepoUrlChange( fields ) );
       break;
-
-    default:
-      WAR << "Unknown history log action type: " << fields[1] << endl;
     }
-
     return HistoryItem::Ptr();
   }
 
-  void HistoryLogReader::Impl::parseLine(const string & line, unsigned int lineNr)
+
+  void HistoryLogReader::Impl::parseLine( const string & line, unsigned int lineNr )
   {
-    HistoryItem::FieldVector fields;
-    HistoryItem::Ptr item_ptr;
-
     // parse into fields
-    str::splitEscaped(line, back_inserter(fields), "|", true);
+    HistoryItem::FieldVector fields;
+    str::splitEscaped( line, back_inserter(fields), "|", true );
 
-    if (fields.size() <= 2)
+    if ( fields.size() <= 2 )
     {
-      ParseException
-        e(str::form("Error in history log on line #%u.", lineNr));
-      e.addHistory(
-          str::form("Bad number of fields. Got %zd, expected more than %d.",
-              fields.size(), 2));
-      ZYPP_THROW(e);
-    }
-
-    try
-    {
-      item_ptr = createHistoryItem(fields);
-    }
-    catch (const Exception & e)
-    {
-      ZYPP_CAUGHT(e);
-      ERR << "Invalid history log entry on line #" << lineNr << ":" << endl
-          << line << endl;
-
-      if (!_ignoreInvalid)
+      if ( !_ignoreInvalid )
       {
-        ParseException newe(
-            str::form("Error in history log on line #%u.", lineNr ) );
-        newe.remember(e);
-        ZYPP_THROW(newe);
+	ParseException e( str::form( "Error in history log on line #%u.", lineNr ) );
+	e.addHistory( str::form( "Bad number of fields. Got %zd, expected more than %d.", fields.size(), 2 ) );
+	ZYPP_THROW( e );
+      }
+      else
+      {
+	WAR << "Ignoring suspicious non-comment entry on line #" << lineNr << endl;
+	return;
       }
     }
 
-    if (item_ptr)
-      _callback(item_ptr);
-    else if (!_ignoreInvalid)
+    HistoryItem::Ptr item_ptr;
+    try
     {
-      ParseException
-        e(str::form("Error in history log on line #%u.", lineNr));
-      e.addHistory("Unknown entry type.");
-      ZYPP_THROW(e);
+      item_ptr = createHistoryItem( fields );
+    }
+    catch ( const Exception & e )
+    {
+      ZYPP_CAUGHT(e);
+      ERR << "Invalid history log entry on line #" << lineNr << " '"<< line << "'" << endl;
+
+      if ( !_ignoreInvalid )
+      {
+        ParseException newe( str::form( "Error in history log on line #%u.", lineNr ) );
+	newe.remember( e );
+	ZYPP_THROW( newe );
+      }
+    }
+
+    if ( item_ptr )
+    {
+      _callback( item_ptr );
+    }
+    else if ( !_ignoreInvalid )
+    {
+      ParseException e( str::form( "Error in history log on line #%u.", lineNr ) );
+      e.addHistory( "Unknown entry type." );
+      ZYPP_THROW( e );
+    }
+    else
+    {
+      WAR << "Unknown history log action type: " << fields[1] << " on line #" << lineNr << endl;
     }
   }
+
 
   void HistoryLogReader::Impl::readAll(const ProgressData::ReceiverFnc & progress)
   {

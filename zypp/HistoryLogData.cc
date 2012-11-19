@@ -134,7 +134,7 @@ namespace zypp
   HistoryItemInstall::HistoryItemInstall(FieldVector & fields)
     : HistoryItem(fields)
   {
-    if (fields.size() != 8)
+    if (fields.size() < 8)
       ZYPP_THROW(ParseException(
         str::form("Bad number of fields. Got %zu, expected %u.",
           fields.size(), 8)));
@@ -175,7 +175,7 @@ namespace zypp
   HistoryItemRemove::HistoryItemRemove(FieldVector & fields)
     : HistoryItem(fields)
   {
-    if (fields.size() != 6)
+    if (fields.size() < 6)
       ZYPP_THROW(ParseException(
         str::form("Bad number of fields. Got %zu, expected %u.",
           fields.size(), 6)));
@@ -212,7 +212,7 @@ namespace zypp
   HistoryItemRepoAdd::HistoryItemRepoAdd(FieldVector & fields)
     : HistoryItem(fields)
   {
-    if (fields.size() != 4)
+    if (fields.size() < 4)
       ZYPP_THROW(ParseException(
         str::form("Bad number of fields. Got %zu, expected %u.",
           fields.size(), 4)));
@@ -245,7 +245,7 @@ namespace zypp
   HistoryItemRepoRemove::HistoryItemRepoRemove(FieldVector & fields)
     : HistoryItem(fields)
   {
-    if (fields.size() != 3)
+    if (fields.size() < 3)
       ZYPP_THROW(ParseException(
         str::form("Bad number of fields. Got %zu, expected %u.",
           fields.size(), 3)));
@@ -275,7 +275,7 @@ namespace zypp
   HistoryItemRepoAliasChange::HistoryItemRepoAliasChange(FieldVector & fields)
     : HistoryItem(fields)
   {
-    if (fields.size() != 4)
+    if (fields.size() < 4)
       ZYPP_THROW(ParseException(
         str::form("Bad number of fields. Got %zu, expected %u.",
           fields.size(), 4)));
@@ -306,7 +306,7 @@ namespace zypp
   HistoryItemRepoUrlChange::HistoryItemRepoUrlChange(FieldVector & fields)
     : HistoryItem(fields)
   {
-    if (fields.size() != 4)
+    if (fields.size() < 4)
       ZYPP_THROW(ParseException(
         str::form("Bad number of fields. Got %zu, expected %u.",
           fields.size(), 4)));
