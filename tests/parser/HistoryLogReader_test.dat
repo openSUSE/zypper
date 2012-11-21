@@ -1,0 +1,11 @@
+2009-09-29 07:24:46|radd   |InstallationImage|file:/usr/src/packages/BUILD/openSUSE-images-11.2/gnome_cd/home/rpmdir|
+2009-09-29 07:25:29|install|update-test-security|0-2.35|noarch|root@opensuse|InstallationImage|d99de2872270cbd436b0c10af85c286a1365a348|
+2011-07-18 18:08:09|install|kernel-source|2.6.37.6-0.5.1|noarch||repo-update|7823612d9ca3de086c2cd4dca936f6a3f3e9313d|
+# 2009-09-29 07:25:30 filesystem.rpm installed ok
+# Additional rpm output:
+#
+2009-09-29 07:47:59|remove |PolicyKit-doc|0.9-15.20|x86_64|root@opensuse|trans\|ID
+2009-09-29 07:47:32|rremove|InstallationImage|
+2010-06-01 16:11:17|remove |xchat-python|2.8.6-43.13|x86_64|2848:y2base|
+2010-06-01 16:11:17|bad |xchat-python|2.8.6-43.13|x86_64|2848:y2base|
+[/]
