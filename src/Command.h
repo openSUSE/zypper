@@ -99,6 +99,10 @@ struct ZypperCommand
 
   static const ZypperCommand NEEDS_REBOOTING;
 
+  static const ZypperCommand LOCALES;
+  static const ZypperCommand ADD_LOCALE;
+  static const ZypperCommand REMOVE_LOCALE;
+
   enum Command
   {
     NONE_e,
@@ -166,6 +170,10 @@ struct ZypperCommand
     RUG_PRODUCT_INFO_e,
     RUG_PATCH_SEARCH_e,
     RUG_PING_e,
+
+    LOCALES_e,
+    ADD_LOCALE_e,
+    REMOVE_LOCALE_e,
 
     NEEDS_REBOOTING_e
   };

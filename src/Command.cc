@@ -37,6 +37,9 @@
 #include "commands/shell.h"
 #include "commands/help.h"
 #include "commands/subcommand.h"
+#include "commands/locale/localescmd.h"
+#include "commands/locale/addlocalecmd.h"
+#include "commands/locale/removelocalecmd.h"
 
 using namespace zypp;
 
@@ -148,6 +151,10 @@ namespace
       makeCmd<ListLocksCmd> ( ZypperCommand::LIST_LOCKS_e , std::string(), { "locks", "ll", "lock-list" } ),
       makeCmd<CleanLocksCmd> ( ZypperCommand::CLEAN_LOCKS_e , std::string(), { "cleanlocks" , "cl", "lock-clean" } ),
 
+      makeCmd<LocalesCmd>   ( ZypperCommand::LOCALES_e , _("Locale Management:"), { "locales", "lloc" } ),
+      makeCmd<AddLocaleCmd> ( ZypperCommand::ADD_LOCALE_e , std::string(), { "addlocale", "aloc" } ),
+      makeCmd<RemoveLocaleCmd> ( ZypperCommand::REMOVE_LOCALE_e , std::string(), { "remove-locale", "rloc" } ),
+
       makeCmd<VersionCompareCmd> ( ZypperCommand::VERSION_CMP_e , _("Other Commands:"), { "versioncmp", "vcmp" } ),
       makeCmd<TargetOSCmd> ( ZypperCommand::TARGET_OS_e , std::string(), { "targetos", "tos" } ),
       makeCmd<LicensesCmd> ( ZypperCommand::LICENSES_e , std::string(), { "licenses" } ),
@@ -250,6 +257,10 @@ DEF_ZYPPER_COMMAND( RUG_PATTERN_INFO );
 DEF_ZYPPER_COMMAND( RUG_PRODUCT_INFO );
 DEF_ZYPPER_COMMAND( RUG_PATCH_SEARCH );
 DEF_ZYPPER_COMMAND( RUG_PING );
+
+DEF_ZYPPER_COMMAND( LOCALES );
+DEF_ZYPPER_COMMAND( ADD_LOCALE );
+DEF_ZYPPER_COMMAND( REMOVE_LOCALE );
 
 DEF_ZYPPER_COMMAND( NEEDS_REBOOTING );
 
