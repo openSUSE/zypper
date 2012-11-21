@@ -51,8 +51,10 @@ enum SetupSystemBits
  InitTarget		= (1 << 2),		//< Initialize the target
  InitRepos		= (1 << 3),		//< Initialize repositories
  NoSystemResolvables    = (1 << 4),             //< Disable the loading of system resolvables
- LoadResolvables        = (1 << 5),             //< Load resolvables
- Resolve                = (1 << 6),             //< compute status of PPP
+ LoadTargetResolvables  = (1 << 5),
+ LoadRepoResolvables    = (1 << 6),
+ LoadResolvables        = LoadTargetResolvables |  LoadRepoResolvables,            //< Load resolvables
+ Resolve                = (1 << 9),             //< compute status of PPP
  DefaultSetup           = ResetRepoManager | InitTarget | InitRepos | LoadResolvables | Resolve
 };
 ZYPP_DECLARE_FLAGS( SetupSystemFlags, SetupSystemBits );

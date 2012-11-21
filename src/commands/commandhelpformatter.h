@@ -61,6 +61,14 @@ struct CommandHelpFormater
   CommandHelpFormater & synopsis( const str::Format & text_r )
   { return synopsis( boost::string_ref(text_r.str()) ); }
 
+  /** Multiline text block
+     * \code
+     * "<multiline text_r>"
+     * \endcode
+     */
+  CommandHelpFormater & multiLineText( const std::string &text_r )
+  { _mww.writePar( text_r ); return *this; }
+
 
   /** Description block with leading gap
    * \code
@@ -69,7 +77,7 @@ struct CommandHelpFormater
    * \endcode
    */
   CommandHelpFormater & description( boost::string_ref text_r )
-  { _mww.gotoNextPar(); _mww.writePar( text_r ); return *this; }
+  { _mww.gotoNextPar(); return multiLineText(text_r.to_string()); }
   /** \overload const char * text */
   CommandHelpFormater & description( const char * text_r )
   { return description( boost::string_ref(text_r) ); }
@@ -85,6 +93,22 @@ struct CommandHelpFormater
   { // translator: %s is an other command: "This is an alias for 'zypper info -t patch'."
     return description( str::Format(_("This is an alias for '%s'.")) % command_r ); }
 
+  /** Extra section title
+     * \code
+     * ""
+     * "  <text_r:>"
+     * ""
+     * \endcode
+     */
+  CommandHelpFormater & extraSection( boost::string_ref text_r )
+  { _mww.gotoNextPar(); _mww.writePar( text_r, 2 ); _mww.gotoNextPar(); return *this; }
+
+  CommandHelpFormater & examplesSection()
+  { return optionSection(_("Examples:") ); }
+
+  CommandHelpFormater & argumentsSection()
+  { return optionSection(_("Arguments:") ); }
+
   /** Option section title
    * \code
    * ""
@@ -93,7 +117,7 @@ struct CommandHelpFormater
    * \endcode
    */
   CommandHelpFormater & optionSection( boost::string_ref text_r )
-  { _mww.gotoNextPar(); _mww.writePar( text_r, 2 ); _mww.gotoNextPar(); return *this; }
+  { return extraSection(text_r); }
 
   CommandHelpFormater & optionSectionCommandOptions()
   { return optionSection(_("Command options:") ); }

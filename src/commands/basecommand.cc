@@ -161,15 +161,20 @@ int ZypperBaseCommand::defaultSystemSetup( Zypper &zypper, SetupSystemFlags flag
   }
 
   DtorReset _tmp( zypper.configNoConst().disable_system_resolvables );
-  if ( flags_r.testFlag( LoadResolvables ) ) {
-    if ( flags_r.testFlag( NoSystemResolvables ) ) {
-      zypper.configNoConst().disable_system_resolvables = true;
-    }
-
-    load_resolvables( zypper );
-    if ( zypper.exitCode() != ZYPPER_EXIT_OK )
-      return zypper.exitCode();
+  if ( flags_r.testFlag( NoSystemResolvables ) ) {
+    zypper.configNoConst().disable_system_resolvables = true;
   }
+
+  if ( flags_r.testFlag( LoadResolvables ) ) {
+    load_resolvables( zypper );
+  } else if ( flags_r.testFlag( LoadRepoResolvables ) ) {
+    load_repo_resolvables( zypper );
+  } else if ( flags_r.testFlag( LoadTargetResolvables ) ) {
+    load_target_resolvables( zypper );
+  }
+
+  if ( zypper.exitCode() != ZYPPER_EXIT_OK )
+    return zypper.exitCode();
 
   if ( flags_r.testFlag ( Resolve ) ) {
     // have REPOS and TARGET

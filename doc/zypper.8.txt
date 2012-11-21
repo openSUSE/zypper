@@ -1438,6 +1438,53 @@ Package locks serve the purpose of preventing changes to the set of installed pa
 	+
 	This command looks for locks that do not currently (with regard to repositories used) lock any package and for each such lock it asks user whether to remove it.
 
+Locale Management
+~~~~~~~~~~~~~~~~~~~
+These commands give information about requested locales and the possibilty to manage those. A locale is defined by a language code. For many packages there are locale dependent packages available which provide translations or dictionaries. To get these installed, the locale for the desired language must be marked as requested by the package manager library.
+
+*locales* (*lloc*) [OPTIONS] [LOCALE] ...::
+ List requested locales. Called without argument, lists the locales which are already marked as requested. Specifying certain locale(s) prints information only for this(these).
++
+--
+ *-a*, *--all*::
+ List all available locales.
+
+ *-p*, *--packages*::
+ Show corresponding packages.
+--
+
+*add-locale* (*aloc*) [OPTIONS] <LOCALE> ...::
+ Add specified locale(s) to the list of requested locales..
++
+--
+ *-n*, *--no-packages*::
+ Do not install corresponding packages.
+--
+
+*remove-locale* (*rloc*) [OPTIONS] <LOCALE> ...::
+ Remove specified locale(s) from the list of requested locales..
++
+--
+ *-n*, *--no-packages*::
+ Do not remove corresponding packages.
+--
+
+Examples: :: {nop}
+
+	$ *zypper locales*;;
+	List requested locales.
+
+	$ *zypper locales --packages de en*;;
+	Get the lists of packages which are available for 'de' and 'en' (exact match).
+
+	$ *zypper locales en_*;;
+	Get all locales with lang code 'en' that have their own country code, excluding the fallback 'en'.
+
+	$ *zypper locales en**;;
+	Get all locales with lang code 'en' with or without country code.	
+	
+	$ *zypper aloc --packages de_CH* ;;
+	Request *de_CH* and install language dependent packages.
 
 Other Commands
 ~~~~~~~~~~~~~~

@@ -17,6 +17,7 @@ SET (zypper_HEADERS
   Command.h
   Config.h
   repos.h
+  locales.h
   misc.h
   search.h
   info.h
@@ -93,6 +94,9 @@ SET (zypper_HEADERS
   commands/help.h
   commands/configtest.h
   commands/subcommand.h
+  commands/locale/localescmd.h
+  commands/locale/addlocalecmd.h
+  commands/locale/removelocalecmd.h
 )
 
 SET( zypper_SRCS
@@ -100,6 +104,7 @@ SET( zypper_SRCS
   Command.cc
   Config.cc
   repos.cc
+  locales.cc
   misc.cc
   search.cc
   info.cc
@@ -166,6 +171,9 @@ SET( zypper_SRCS
   commands/help.cc
   commands/subcommand.cc
   commands/configtest.cc
+  commands/locale/localescmd.cc
+  commands/locale/addlocalecmd.cc
+  commands/locale/removelocalecmd.cc
   ${zypper_HEADERS}
 )
 
