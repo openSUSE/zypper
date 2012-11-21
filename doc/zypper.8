@@ -1461,6 +1461,59 @@ This command looks for locks that do not currently (with regard to
 repositories used) lock any package and for each such lock it asks user
 whether to remove it.
 
+.SS Language Support
+These commands give information about language support and the possibilty to manage it.
+A language is defined by a language code, also called a \fIlocale\fR.
+For many packages there are language dependent packages available which provide
+translations or dictionaries. To get these installed, the \fIlocale\fR for the
+desired language must be supported by the package manager library.
+
+.TP
+.B list-language-support (langs) [options] [LOCALE] ...
+List language codes (locales). Called without argument, lists the languages which
+are already supported. Specifying certain locale(s) prints information only for
+this(these).
+
+.I \-a, \-\-all
+List all available locales.
+
+.I \-p, \-\-packages
+Show corresponding packages.
+
+.TP
+.B add-language-support (alangs) [options] <LOCALE> ...
+Add locale to supported languages. Specify which \fIlocale(s)\fR to add.
+
+.I \-p, \-\-packages
+Install corresponding packages.
+* NOT yet available *
+
+.TP
+.B remove-language-support (rlangs) [options] <LOCALE> ...
+Remove locale from supported languages. Specify which \fIlocale(s)\fR to remove.
+
+.I \-p, \-\-packages
+Remove corresponding packages.
+* NOT yet available *
+
+.TP
+.B Examples:
+List supported locales:
+.br
+.B $ zypper langs
+
+Get the lists of packages which are available for 'de' and 'en':
+.br
+.B $ zypper langs --packages de en\fR
+
+Support \fIde_CH\fR and install language dependent packages:
+.br
+.B $ zypper alangs --packages de_CH\fR
+
+.TP
+.B Files:
+.br
+/var/lib/zypp/RequestedLocales
 
 .SS Other Commands
 
