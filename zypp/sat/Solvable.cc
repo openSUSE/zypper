@@ -255,9 +255,11 @@ namespace zypp
       NO_SOLVABLE_RETURN( OnMediaLocation() );
       // medianumber and path
       unsigned medianr;
-      const char * file = ::solvable_get_location( _solvable, &medianr );
+      const char * file = ::solvable_lookup_location( _solvable, &medianr );
       if ( ! file )
         return OnMediaLocation();
+      if ( ! medianr )
+	medianr = 1;
 
       OnMediaLocation ret;
 
