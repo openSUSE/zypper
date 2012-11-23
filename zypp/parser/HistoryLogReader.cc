@@ -89,6 +89,9 @@ namespace zypp
     case HistoryActionID::REPO_CHANGE_URL_e:
       return HistoryItemRepoUrlChange::Ptr( new HistoryItemRepoUrlChange( fields ) );
       break;
+
+    case HistoryActionID::NONE_e:
+      break;
     }
     return HistoryItem::Ptr();
   }

@@ -192,27 +192,25 @@ namespace zypp
       return;
 
     _log
-      << timestamp()                                   // 1 timestamp
-      << _sep << HistoryActionID::INSTALL.asString(true) // 2 action
-      << _sep << p->name()                             // 3 name
-      << _sep << p->edition()                          // 4 evr
-      << _sep << p->arch();                            // 5 arch
+      << timestamp()							// 1 timestamp
+      << _sep << HistoryActionID::INSTALL.asString(true)		// 2 action
+      << _sep << p->name()						// 3 name
+      << _sep << p->edition()						// 4 evr
+      << _sep << p->arch();						// 5 arch
 
     // ApplLow is what the solver selected on behalf of the user.
     if (pi.status().isByUser() || pi.status().isByApplLow() )
-      _log << _sep << userAtHostname();                // 6 reqested by
+      _log << _sep << userAtHostname();					// 6 reqested by
     else if (pi.status().isByApplHigh())
       _log << _sep << pidAndAppname();
     else
       _log << _sep;
 
     _log
-      << _sep << p->repoInfo().alias()                 // 7 repo alias
-      << _sep << p->checksum().checksum();             // 8 checksum
-
-    _log << endl;
-
-    //_log << pi << endl;
+      << _sep << p->repoInfo().alias()					// 7 repo alias
+      << _sep << p->checksum().checksum()				// 8 checksum
+      << _sep << str::escape(ZConfig::instance().userData(), _sep)	// 9 userdata
+      << endl;
   }
 
 
@@ -223,26 +221,23 @@ namespace zypp
       return;
 
     _log
-      << timestamp()                                   // 1 timestamp
-      << _sep << HistoryActionID::REMOVE.asString(true) // 2 action
-      << _sep << p->name()                             // 3 name
-      << _sep << p->edition()                          // 4 evr
-      << _sep << p->arch();                            // 5 arch
+      << timestamp()							// 1 timestamp
+      << _sep << HistoryActionID::REMOVE.asString(true)			// 2 action
+      << _sep << p->name()						// 3 name
+      << _sep << p->edition()						// 4 evr
+      << _sep << p->arch();						// 5 arch
 
     // ApplLow is what the solver selected on behalf of the user.
     if ( pi.status().isByUser() || pi.status().isByApplLow() )
-      _log << _sep << userAtHostname();                // 6 reqested by
+      _log << _sep << userAtHostname();					// 6 reqested by
     else if (pi.status().isByApplHigh())
       _log << _sep << pidAndAppname();
     else
       _log << _sep;
 
-    // we don't have checksum in rpm db
-    //  << _sep << p->checksum().checksum();           // x checksum
-
-    _log << endl;
-
-    //_log << pi << endl;
+    _log
+      << _sep << str::escape(ZConfig::instance().userData(), _sep)	// 7 userdata
+      << endl;
   }
 
   /////////////////////////////////////////////////////////////////////////
@@ -250,11 +245,11 @@ namespace zypp
   void HistoryLog::addRepository(const RepoInfo & repo)
   {
     _log
-      << timestamp()                                   // 1 timestamp
-      << _sep << HistoryActionID::REPO_ADD.asString(true) // 2 action
-      << _sep << str::escape(repo.alias(), _sep)       // 3 alias
-      // what about the rest of the URLs??
-      << _sep << *repo.baseUrlsBegin()                 // 4 primary URL
+      << timestamp()							// 1 timestamp
+      << _sep << HistoryActionID::REPO_ADD.asString(true)		// 2 action
+      << _sep << str::escape(repo.alias(), _sep)			// 3 alias
+      << _sep << *repo.baseUrlsBegin()					// 4 primary URL
+      << _sep << str::escape(ZConfig::instance().userData(), _sep)	// 5 userdata
       << endl;
   }
 
@@ -262,9 +257,10 @@ namespace zypp
   void HistoryLog::removeRepository(const RepoInfo & repo)
   {
     _log
-      << timestamp()                                   // 1 timestamp
-      << _sep << HistoryActionID::REPO_REMOVE.asString(true) // 2 action
-      << _sep << str::escape(repo.alias(), _sep)       // 3 alias
+      << timestamp()							// 1 timestamp
+      << _sep << HistoryActionID::REPO_REMOVE.asString(true)		// 2 action
+      << _sep << str::escape(repo.alias(), _sep)			// 3 alias
+      << _sep << str::escape(ZConfig::instance().userData(), _sep)	// 4 userdata
       << endl;
   }
 
@@ -275,20 +271,21 @@ namespace zypp
     if (oldrepo.alias() != newrepo.alias())
     {
       _log
-        << timestamp()                                    // 1 timestamp
-        << _sep << HistoryActionID::REPO_CHANGE_ALIAS.asString(true) // 2 action
-        << _sep << str::escape(oldrepo.alias(), _sep)     // 3 old alias
-        << _sep << str::escape(newrepo.alias(), _sep)     // 4 new alias
+        << timestamp()							// 1 timestamp
+        << _sep << HistoryActionID::REPO_CHANGE_ALIAS.asString(true)	// 2 action
+        << _sep << str::escape(oldrepo.alias(), _sep)			// 3 old alias
+        << _sep << str::escape(newrepo.alias(), _sep)			// 4 new alias
+        << _sep << str::escape(ZConfig::instance().userData(), _sep)	// 5 userdata
         << endl;
     }
-
     if (*oldrepo.baseUrlsBegin() != *newrepo.baseUrlsBegin())
     {
       _log
-        << timestamp()                                             //1 timestamp
-        << _sep << HistoryActionID::REPO_CHANGE_URL.asString(true) // 2 action
-        << _sep << str::escape(oldrepo.alias(), _sep)              // 3 old url
-        << _sep << *newrepo.baseUrlsBegin()                        // 4 new url
+        << timestamp()							// 1 timestamp
+        << _sep << HistoryActionID::REPO_CHANGE_URL.asString(true)	// 2 action
+        << _sep << str::escape(oldrepo.alias(), _sep)			// 3 old url
+        << _sep << *newrepo.baseUrlsBegin()				// 4 new url
+        << _sep << str::escape(ZConfig::instance().userData(), _sep)	// 5 userdata
         << endl;
     }
   }

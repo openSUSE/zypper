@@ -1,0 +1,89 @@
+/** \defgroup g_ZyppHistory Libzypp History File
+
+Log important events like installation/deletion of packages and repositories.
+
+
+\section g_ZyppHistory_Location Location
+
+The default location is \c /var/log/zypp/history. This can be changed via \c history.logfile key in \c /etc/zypp/zypp.conf.
+
+
+\section g_ZyppHistory_Format Format
+
+\li CSV file with pipe character (|) as the value separator
+\li one event per line
+\li different actions have different set of values (columns), see the tables below
+\li lines starting with # are treated as comments
+
+\see \ref zypp-userdata
+
+\subsection g_ZyppHistory_Format_Colummn Action Columns
+
+\subsubsection g_ZyppHistory_Format_Colummn_Install Install
+A package has been installed.
+\li \b 1 timestamp
+\li \b 2 action ID (\c "install")
+\li \b 3 package name
+\li \b 4 package epoch:version-release
+\li \b 5 package architecture
+\li \b 6 requested by (user@hostname, pid:appname, or empty (solver))
+\li \b 7 repository alias
+\li \b 8 package checksum
+\li \b 9 userdata/transactionId
+
+\subsubsection g_ZyppHistory_Format_Colummn_Remove Remove
+A package has been removed.
+\li \b 1 timestamp
+\li \b 2 action ID (\c "remove")
+\li \b 3 package name
+\li \b 4 package epoch:version-release
+\li \b 5 package architecture
+\li \b 6 requested by (user@hostname, pid:appname, or empty (solver))
+\li \b 7 userdata/transactionId
+
+\subsubsection g_ZyppHistory_Format_Colummn_Radd Radd
+A repository has been added.
+\li \b 1 timestamp
+\li \b 2 action ID (\c "radd")
+\li \b 3 repository alias
+\li \b 4 primary URL
+\li \b 5 userdata/transactionId
+
+\subsubsection g_ZyppHistory_Format_Colummn_Rremove Rremove
+A repository has been removed.
+\li \b 1 timestamp
+\li \b 2 action ID (\c "rremove")
+\li \b 3 repository alias
+\li \b 4 userdata/transactionId
+
+\subsubsection g_ZyppHistory_Format_Colummn_Ralias Ralias
+A repository alias has changed.
+\li \b 1 timestamp
+\li \b 2 action ID (\c "ralias")
+\li \b 3 old alias
+\li \b 4 new alias
+\li \b 5 userdata/transactionId
+
+\subsubsection g_ZyppHistory_Format_Colummn_Rurl Rurl
+The primary URL of a repository has changed.
+\li \b 1 timestamp
+\li \b 2 action ID (\c "rurl")
+\li \b 3 repository alias
+\li \b 4 new URL
+\li \b 5 userdata/transactionId
+
+
+\section g_ZyppHistory_Example Example
+
+\code
+2008-09-24 11:48:58|rremove|packman
+2008-09-24 11:50:02|radd   |packman|http://packman.iu-bremen.de/suse/11.0
+2008-09-24 11:53:10|install|amarok-yauap|1.4.10-25|x86_64||factory|4421dfa718ab73c805c1c695c97b1b67f39bf2f3
+2008-09-24 11:53:25|install|amarok-lang|1.4.10-25|x86_64||factory|691030edafcc4fbc22aa225350f9de32974e4bc2
+# Additional rpm output:
+# warning: /var/cache/zypp/packages/packman/x86_64/amarok-1.4.10-100.pm.1.x86_64.rpm: Header V3 DSA signature: NOKEY, key ID 9a795806
+#
+2008-09-24 11:53:45|install|amarok|1.4.10-100.pm.1|x86_64|root@kompost|packman|ee0fffa1e4eeaaeb8799bd05c6882ef74100d681
+\endcode
+
+*/

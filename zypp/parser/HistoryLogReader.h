@@ -29,47 +29,40 @@ namespace zypp
   namespace parser
   { /////////////////////////////////////////////////////////////////
 
-
+  ///////////////////////////////////////////////////////////////////
+  /// \class HistoryLogReader
+  /// \brief Zypp history file parser
+  /// \ingroup g_ZyppHistory
+  /// \ingroup g_ZyppParser
+  ///
+  /// Reads a zypp history log file and calls the ProcessItem function
+  /// passed in the constructor for each item read.
+  ///
+  /// \code
+  /// struct HistoryItemCollector
+  /// {
+  ///   vector<HistoryItem::Ptr> items;
+  ///
+  ///   bool operator()( const HistoryItem::Ptr & item_ptr )
+  ///   {
+  ///     items.push_back(item_ptr);
+  ///     return true;
+  ///   }
+  /// }
+  /// ...
+  /// HistoryItemCollector ic;
+  /// HistoryLogReader reader("/var/log/zypp/history", boost::ref(ic));
+  ///
+  /// try
+  /// {
+  ///   reader.readAll();
+  /// }
+  /// catch (const Exception & e)
+  /// {
+  ///   cout << e.asUserHistory() << endl;
+  /// }
+  /// \endcode
   /////////////////////////////////////////////////////////////////////
-  //
-  // CLASS NAME: HistoryLogReader
-  //
-  /**
-   * Reads a zypp history log file and calls the ProcessItem function passed
-   * in the constructor for each item read.
-   *
-   * Example:
-   * <code>
-   *
-   * struct HistoryItemCollector
-   * {
-   *   vector<HistoryItem::Ptr> items;
-   *
-   *   bool operator()( const HistoryItem::Ptr & item_ptr )
-   *   {
-   *     items.push_back(item_ptr);
-   *     return true;
-   *   }
-   * }
-   *
-   * ...
-   *
-   * HistoryItemCollector ic;
-   * HistoryLogReader reader("/var/log/zypp/history", boost::ref(ic));
-   *
-   * try
-   * {
-   *   reader.readAll();
-   * }
-   * catch (const Exception & e)
-   * {
-   *   cout << e.asUserHistory() << endl;
-   * }
-   *
-   * </code>
-   *
-   * \see http://en.opensuse.org/Libzypp/Package_History
-   */
   class HistoryLogReader
   {
   public:

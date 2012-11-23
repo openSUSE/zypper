@@ -22,40 +22,36 @@ namespace zypp
   class RepoInfo;
 
   ///////////////////////////////////////////////////////////////////
-  //
-  //	CLASS NAME : HistoryLog
-  /**
-   * Simple wrapper for progress log. Refcnt, filename and corresponding
-   * ofstream are static members. Logfile constructor raises, destructor
-   * lowers refcounter. On refcounter changing from 0->1, file is opened.
-   * Changing from 1->0 the file is closed. Thus Logfile objects should be
-   * local to those functions, writing the log, and must not be stored
-   * permanently.
-   *
-   * Usage:
-   * <code>
-   *  some method ()
-   *  {
-   *    PoolItem pi;
-   *    ...
-   *    HistoryLog().install(pi);
-   *    ...
-   *    HistoryLog().comment(someMessage);
-   *  }
-   * </code>
-   *
-   * \note Take care to set proper target root dir if needed. Either pass
-   *       it via the constructor, or set it via setRoot(Pathname) method.
-   *       The default location of the file is determined by
-   *       \ref ZConfig::historyLogPath() which defaults to
-   *       /var/log/zypp/history.
-   *
-   * \see http://en.opensuse.org/Libzypp/Package_History
-   *
-   * \todo The implementation as pseudo signleton is questionable.
-   * Use shared_ptr instead of handcrafted ref/unref. Manage multiple
-   * logs at different locations.
-   */
+  /// \class HistoryLog
+  /// \brief Writing the zypp history file
+  /// \ingroup g_ZyppHistory
+  ///
+  /// Reference counted signleton for writhing the zypp history file.
+  /// The history file is opened on demand and closed when the last
+  /// HistoryLog object drops its reference. Thus HistoryLog objects
+  /// should be local to those functions, writing the log, and must
+  /// not be stored permanently.
+  ///
+  /// \code
+  /// some method ()
+  /// {
+  ///   PoolItem pi;
+  ///   ...
+  ///   HistoryLog().install(pi);
+  ///   ...
+  ///   HistoryLog().comment(someMessage);
+  /// }
+  /// \endcode
+  ///
+  /// \note Take care to set proper target root dir if needed. Either pass
+  /// it via the constructor, or set it via setRoot(Pathname) method.
+  /// The default location of the file is determined by
+  /// \ref zypp::ZConfig::historyLogPath (default: \c /var/log/zypp/history).
+  ///
+  /// \todo The implementation as pseudo signleton is questionable.
+  /// Use shared_ptr instead of handcrafted ref/unref. Manage multiple
+  /// logs at different locations.
+  ///////////////////////////////////////////////////////////////////
   class HistoryLog
   {
     HistoryLog( const HistoryLog & );

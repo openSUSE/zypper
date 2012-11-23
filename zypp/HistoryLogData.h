@@ -25,17 +25,12 @@
 
 namespace zypp
 {
-
-
   ///////////////////////////////////////////////////////////////////
-  //
-  //  CLASS NAME : HistoryActionID
-  //
-  /**
-   * Enumeration of known history actions.
-   *
-   * \ingroup g_EnumerationClass
-   */
+  /// \class HistoryActionID
+  /// \brief Enumeration of known history actions.
+  /// \ingroup g_EnumerationClass
+  /// \ingroup g_ZyppHistory
+  ///////////////////////////////////////////////////////////////////
   struct HistoryActionID
   {
     static const HistoryActionID NONE;
