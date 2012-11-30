@@ -169,6 +169,7 @@ void print_main_help(Zypper & zypper)
     "\t\t\t\tDo not treat patches as interactive, which have\n"
     "\t\t\t\tthe rebootSuggested-flag set.\n"
     "\t--xmlout, -x\t\tSwitch to XML output.\n"
+    "\t--ignore-unknown, -i\tIgnore unknown packages.\n"
   );
 
   static string repo_manager_options = _(
@@ -357,6 +358,7 @@ void Zypper::processGlobalOptions()
     {"xmlout",                     no_argument,       0, 'x'},
     {"config",                     required_argument, 0, 'c'},
     {"userdata",                   required_argument, 0,  0 },
+    {"ignore-unknown",             no_argument,       0, 'i'},
     {0, 0, 0, 0}
   };
 
@@ -743,6 +745,9 @@ void Zypper::processGlobalOptions()
     }
     }
   }
+
+  if (gopts.count("ignore-unknown"))
+    _gopts.ignore_unknown = true;
 
   MIL << "DONE" << endl;
 }
@@ -3565,8 +3570,9 @@ void Zypper::doCommand()
 
     sr.printFeedback(out());
 
-    if (sr.hasFeedback(SolverRequester::Feedback::NOT_FOUND_NAME) ||
-        sr.hasFeedback(SolverRequester::Feedback::NOT_FOUND_CAP))
+    if (!globalOpts().ignore_unknown &&
+        (sr.hasFeedback(SolverRequester::Feedback::NOT_FOUND_NAME) ||
+         sr.hasFeedback(SolverRequester::Feedback::NOT_FOUND_CAP)))
     {
       setExitCode(ZYPPER_EXIT_INF_CAP_NOT_FOUND);
       if (globalOpts().non_interactive)
@@ -4222,8 +4228,9 @@ copts.end())
 
       sr.printFeedback(out());
 
-      if (sr.hasFeedback(SolverRequester::Feedback::NOT_FOUND_NAME) ||
-          sr.hasFeedback(SolverRequester::Feedback::NOT_FOUND_CAP))
+      if (!globalOpts().ignore_unknown &&
+          (sr.hasFeedback(SolverRequester::Feedback::NOT_FOUND_NAME) ||
+           sr.hasFeedback(SolverRequester::Feedback::NOT_FOUND_CAP)))
       {
         setExitCode(ZYPPER_EXIT_INF_CAP_NOT_FOUND);
         if (globalOpts().non_interactive)

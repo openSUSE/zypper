@@ -391,7 +391,7 @@ void build_deps_install(Zypper & zypper)
         DBG << "requiring: " << cap << endl;
       }
     }
-    else
+    else if (!zypper.globalOpts().ignore_unknown)
     {
       zypper.setExitCode(ZYPPER_EXIT_INF_CAP_NOT_FOUND);
     }
