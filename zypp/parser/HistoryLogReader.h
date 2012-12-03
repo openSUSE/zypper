@@ -14,20 +14,26 @@
 #define ZYPP_PARSER_HISTORYLOGREADER_H_
 
 #include "zypp/base/PtrTypes.h"
+#include "zypp/base/Flags.h"
 #include "zypp/ProgressData.h"
 #include "zypp/Pathname.h"
 
 #include "zypp/HistoryLogData.h"
 
+#if defined(WITH_DEPRECATED_HISTORYITEM_API)
+#warning Support for HistoryItem based parsing will be removed in the future.
+#warning Switch to the new HistoryLogData based HistoryLogReader API.
+#endif // WITH_DEPRECATED_HISTORYITEM_API
+
 ///////////////////////////////////////////////////////////////////
 namespace zypp
-{ /////////////////////////////////////////////////////////////////
+{
 
   class Date;
 
   ///////////////////////////////////////////////////////////////////
   namespace parser
-  { /////////////////////////////////////////////////////////////////
+  {
 
   ///////////////////////////////////////////////////////////////////
   /// \class HistoryLogReader
@@ -35,42 +41,69 @@ namespace zypp
   /// \ingroup g_ZyppHistory
   /// \ingroup g_ZyppParser
   ///
-  /// Reads a zypp history log file and calls the ProcessItem function
-  /// passed in the constructor for each item read.
+  /// Reads a zypp history log file and calls the \ref ProcessData callback
+  /// passed in the constructor for each valid history line read. The callbacks
+  /// return value indicates whether to continue parsing.
   ///
   /// \code
-  /// struct HistoryItemCollector
-  /// {
-  ///   vector<HistoryItem::Ptr> items;
-  ///
-  ///   bool operator()( const HistoryItem::Ptr & item_ptr )
+  ///   std::vector<HistoryLogData::Ptr> history;
+  ///   parser::HistoryLogReader parser( ZConfig::instance().historyLogFile(),
+  ///                                    HistoryLogReader::Options(),
+  ///     [&history]( HistoryLogData::Ptr ptr )->bool {
+  ///       history.push_back( ptr );
+  ///       return true;
+  ///     } );
+  ///   parser.readAll();
+  ///   ...
+  ///   if ( history[0]->action() == HistoryActionID::INSTALL )
   ///   {
-  ///     items.push_back(item_ptr);
-  ///     return true;
-  ///   }
-  /// }
-  /// ...
-  /// HistoryItemCollector ic;
-  /// HistoryLogReader reader("/var/log/zypp/history", boost::ref(ic));
+  ///     // generic access to data fields plain string values:
+  ///     MIL << (*p)[HistoryLogDataInstall::USERDATA_INDEX] << endl;
   ///
-  /// try
-  /// {
-  ///   reader.readAll();
-  /// }
-  /// catch (const Exception & e)
-  /// {
-  ///   cout << e.asUserHistory() << endl;
-  /// }
+  ///     // The same maybe more convenient though derived classes:
+  ///     HistoryLogDataInstall::Ptr ip( dynamic_pointer_cast<HistoryLogDataInstall>( p ) );
+  ///     MIL << ip->userdata() << endl;
+  ///   }
   /// \endcode
-  /////////////////////////////////////////////////////////////////////
+  /// \see \ref HistoryLogData for how to access the individual data fields.
+  ///
+#if defined(WITH_DEPRECATED_HISTORYITEM_API)
+  /// \note The old API based in HistoryItem instead of HistoryLogData
+  /// is deprecated and may vanish in the future. The new API no longer
+  /// allows direct access to data members, you have to call access methods
+  /// instead.
+  /// \code
+  ///   - // old style
+  ///   - HistoryItem::Ptr ptr;
+  ///   - Date d = ptr->date;
+  ///   + // new style
+  ///   + HistoryLogData::Ptr ptr;
+  ///   + Date d = ptr->date();
+  /// \endcode
+#endif // WITH_DEPRECATED_HISTORYITEM_API
+  ///////////////////////////////////////////////////////////////////
   class HistoryLogReader
   {
   public:
-    typedef function< bool( const HistoryItem::Ptr & )> ProcessItem;
+
+    enum OptionBits	///< Parser option flags
+    {
+      IGNORE_INVALID_ITEMS	= (1 << 0)	///< ignore invalid items and continue parsing
+    };
+    ZYPP_DECLARE_FLAGS( Options, OptionBits );
 
   public:
-    HistoryLogReader( const Pathname & repo_file,
-                      const ProcessItem & callback );
+    /** Callback type to consume a single history line split into fields.
+     * The return value indicates whether to continue parsing.
+     */
+    typedef function< bool( const HistoryLogData::Ptr & )> ProcessData;
+
+    /** Ctor taking file to parse and data consumer callback.
+     * As \a options_r argument pass \c HistoryLogReader::Options() to
+     * use the default stettings, or an OR'ed combination of \ref OptionBits.
+     */
+    HistoryLogReader( const Pathname & historyFile_r, const Options & options_r, const ProcessData & callback_r );
+
     ~HistoryLogReader();
 
     /**
@@ -78,8 +111,7 @@ namespace zypp
      *
      * \param progress An optional progress data receiver function.
      */
-    void readAll(
-      const ProgressData::ReceiverFnc &progress = ProgressData::ReceiverFnc() );
+    void readAll( const ProgressData::ReceiverFnc & progress = ProgressData::ReceiverFnc() );
 
     /**
      * Read log from specified \a date.
@@ -89,8 +121,7 @@ namespace zypp
      *
      * \see readFromTo()
      */
-    void readFrom( const Date & date,
-      const ProgressData::ReceiverFnc &progress = ProgressData::ReceiverFnc() );
+    void readFrom( const Date & date, const ProgressData::ReceiverFnc & progress = ProgressData::ReceiverFnc() );
 
     /**
      * Read log between \a fromDate and \a toDate.
@@ -111,8 +142,7 @@ namespace zypp
      * \param toDate   Date on which to stop reading.
      * \param progress An optional progress data receiver function.
      */
-    void readFromTo( const Date & fromDate, const Date & toDate,
-      const ProgressData::ReceiverFnc &progress = ProgressData::ReceiverFnc() );
+    void readFromTo( const Date & fromDate, const Date & toDate, const ProgressData::ReceiverFnc & progress = ProgressData::ReceiverFnc() );
 
     /**
      * Set the reader to ignore invalid log entries and continue with the rest.
@@ -132,14 +162,26 @@ namespace zypp
     /** Implementation */
     class Impl;
     RW_pointer<Impl,rw_pointer::Scoped<Impl> > _pimpl;
+
+#if defined(WITH_DEPRECATED_HISTORYITEM_API)
+  public:
+    /** \deprecated Old unextensible \ref zypp::parser::HistoryLogReader data class. */
+    typedef function< bool( const HistoryItem::Ptr & )> ProcessItem;
+    /** \deprecated Old unextensible \ref zypp::parser::HistoryLogReader data class.
+     * They grant direct access to data members, so can not be extended
+     * without losing binary compatibility.
+     */
+    HistoryLogReader( const Pathname & repo_file, const ProcessItem & callback ) ZYPP_DEPRECATED;
+#endif // WITH_DEPRECATED_HISTORYITEM_API
   };
+
+  /** \relates HistoryLogReader::Options */
+  ZYPP_DECLARE_OPERATORS_FOR_FLAGS( HistoryLogReader::Options );
+
   ///////////////////////////////////////////////////////////////////
 
-
+  } // namespace parser
   /////////////////////////////////////////////////////////////////
-} // namespace parser
-///////////////////////////////////////////////////////////////////
-/////////////////////////////////////////////////////////////////
 } // namespace zypp
 ///////////////////////////////////////////////////////////////////
 
