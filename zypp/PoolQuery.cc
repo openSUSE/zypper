@@ -1127,8 +1127,6 @@ attremptycheckend:
 
       PoolQueryAttr attribute( attrName );
 
-      MIL << "attribute name: " << attrName << endl;
-
       if ( attribute==PoolQueryAttr::repoAttr )
       {
         addRepo( attrValue );
