@@ -401,17 +401,30 @@ namespace zypp
 
     bool operator==( const PoolQuery::Impl & rhs ) const
     {
-      return ( _strings == rhs._strings
-               && _attrs == rhs._attrs
-               && _uncompiledPredicated == rhs._uncompiledPredicated
-               && _flags == rhs._flags
-               && _match_word == rhs._match_word
-               && _require_all == rhs._require_all
-               && _status_flags == rhs._status_flags
-               && _edition == rhs._edition
-               && _op == rhs._op
-               && _repos == rhs._repos
-               && _kinds == rhs._kinds );
+      if ( _flags == rhs._flags
+	// bnc#792901: while libzypp uses exact match mode for a single
+	// package name lock, zypper always uses glob. :(
+	// We unify those two forms to enable zypper to remove zypp locks
+	// without need to actually evaluate the query (which would require
+	// repos to be loaded).
+	|| ( _flags.isModeString() && rhs._flags.isModeGlob()
+	  || _flags.isModeGlob() && rhs._flags.isModeString() )
+	  && _strings.empty()
+	  && _attrs.size() == 1
+	  && _attrs.begin()->first == sat::SolvAttr::name )
+      {
+	return ( _strings == rhs._strings
+	      && _attrs == rhs._attrs
+	      && _uncompiledPredicated == rhs._uncompiledPredicated
+	      && _match_word == rhs._match_word
+	      && _require_all == rhs._require_all
+	      && _status_flags == rhs._status_flags
+	      && _edition == rhs._edition
+	      && _op == rhs._op
+	      && _repos == rhs._repos
+	      && _kinds == rhs._kinds );
+      }
+      return false;
     }
 
     bool operator!=( const PoolQuery::Impl & rhs ) const
