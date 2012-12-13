@@ -335,30 +335,23 @@ namespace zypp
         url = * info.baseUrlsBegin();
 
       // check whether to process patch/delta rpms
-      if ( url.schemeIsDownloading() || ZConfig::instance().download_use_deltarpm_always() )
-        {
-          std::list<DeltaRpm> deltaRpms;
-          if ( ZConfig::instance().download_use_deltarpm() )
-          {
-            _deltas.deltaRpms( _package ).swap( deltaRpms );
-          }
+      if ( ZConfig::instance().download_use_deltarpm()
+	&& ( url.schemeIsDownloading() || ZConfig::instance().download_use_deltarpm_always() ) )
+      {
+	std::list<DeltaRpm> deltaRpms;
+	_deltas.deltaRpms( _package ).swap( deltaRpms );
 
-          if ( ! ( deltaRpms.empty() )
-               && queryInstalled() )
-            {
-              if ( ! deltaRpms.empty() && applydeltarpm::haveApplydeltarpm() )
-                {
-                  for( std::list<DeltaRpm>::const_iterator it = deltaRpms.begin();
-                       it != deltaRpms.end(); ++it )
-                    {
-                      DBG << "tryDelta " << *it << endl;
-                      ManagedFile ret( tryDelta( *it ) );
-                      if ( ! ret->empty() )
-                        return ret;
-                    }
-                }
-            }
-        }
+	if ( ! deltaRpms.empty() && queryInstalled() && applydeltarpm::haveApplydeltarpm() )
+	{
+	  for_( it, deltaRpms.begin(), deltaRpms.end())
+	  {
+	    DBG << "tryDelta " << *it << endl;
+	    ManagedFile ret( tryDelta( *it ) );
+	    if ( ! ret->empty() )
+	      return ret;
+	  }
+	}
+      }
 
       // no patch/delta -> provide full package
       return Base::doProvidePackage();
