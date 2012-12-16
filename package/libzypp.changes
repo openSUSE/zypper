@@ -1,4 +1,9 @@
 -------------------------------------------------------------------
+Sun Dec 16 01:13:16 CET 2012 - ma@suse.de
+
+- Update zypp-po.tar.bz2
+
+-------------------------------------------------------------------
 Mon Dec  3 14:31:59 CET 2012 - ma@suse.de
 
 - HistoryLogReader: new HistoryLogData based API for parsing the new 
