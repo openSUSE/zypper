@@ -8,7 +8,7 @@
 \---------------------------------------------------------------------*/
 
 #include <iostream>
-#include <map>
+#include "zypp/base/NamedValue.h"
 #include "zypp/repo/RepoException.h"
 #include "RepoType.h"
 
@@ -16,72 +16,46 @@ namespace zypp
 {
 namespace repo
 {
+  ///////////////////////////////////////////////////////////////////
+  namespace
+  {
+    static NamedValue<RepoType::Type> & table()
+    {
+      static NamedValue<RepoType::Type> _t;
+      if ( _t.empty() )
+      {
+	_t( RepoType::RPMMD_e )		| "rpm-md"	| "rpmmd"|"repomd"|"yum"|"up2date";
+	_t( RepoType::YAST2_e )		| "yast2"	| "yast"|"susetags";
+	_t( RepoType::RPMPLAINDIR_e )	| "plaindir";
+	_t( RepoType::NONE_e )		| "NONE"	| "none";
+      }
+      return _t;
+    }
+  } // namespace
+  ///////////////////////////////////////////////////////////////////
 
-  static std::map<std::string,RepoType::Type> _table;
-
-  const RepoType RepoType::RPMMD(RepoType::RPMMD_e);
-  const RepoType RepoType::YAST2(RepoType::YAST2_e);
-  const RepoType RepoType::RPMPLAINDIR(RepoType::RPMPLAINDIR_e);
-  const RepoType RepoType::NONE(RepoType::NONE_e);
+  const RepoType RepoType::RPMMD	( RepoType::RPMMD_e );
+  const RepoType RepoType::YAST2	( RepoType::YAST2_e );
+  const RepoType RepoType::RPMPLAINDIR	( RepoType::RPMPLAINDIR_e );
+  const RepoType RepoType::NONE		( RepoType::NONE_e );
 
   RepoType::RepoType(const std::string & strval_r)
     : _type(parse(strval_r))
   {}
 
-  RepoType::Type RepoType::parse(const std::string & strval_r)
+  RepoType::Type RepoType::parse( const std::string & strval_r )
   {
-    if (_table.empty())
+    RepoType::Type type;
+    if ( ! table().getValue( str::toLower( strval_r ), type ) )
     {
-      // initialize it
-      _table["repomd"]
-      = _table["rpmmd"]
-      = _table["rpm-md"]
-      = _table["yum"]
-      = _table["YUM"]
-      = _table["up2date"]
-      = RepoType::RPMMD_e;
-
-      _table["susetags"]
-      = _table["yast"]
-      = _table["YaST"]
-      = _table["YaST2"]
-      = _table["YAST"]
-      = _table["YAST2"]
-      = _table["yast2"]
-      = RepoType::YAST2_e;
-
-      _table["plaindir"]
-      = _table["Plaindir"]
-      = RepoType::RPMPLAINDIR_e;
-
-      _table["NONE"]
-      = _table["none"]
-      = RepoType::NONE_e;
+      ZYPP_THROW( RepoUnknownTypeException( "Unknown repository type '" + strval_r + "'") );
     }
-
-    std::map<std::string,RepoType::Type>::const_iterator it
-      = _table.find(strval_r);
-    if (it == _table.end())
-    {
-      ZYPP_THROW(RepoUnknownTypeException(
-        "Unknown repository type '" + strval_r + "'"));
-    }
-    return it->second;
+    return type;
   }
-
 
   const std::string & RepoType::asString() const
   {
-    static std::map<Type, std::string> _table;
-    if ( _table.empty() )
-    {
-      // initialize it
-      _table[RPMMD_e]		= "rpm-md";
-      _table[YAST2_e]		= "yast2";
-      _table[RPMPLAINDIR_e]	= "plaindir";
-      _table[NONE_e]		= "NONE";
-    }
-    return _table[_type];
+    return table().getName( _type );
   }
 
 
