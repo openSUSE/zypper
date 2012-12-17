@@ -246,6 +246,7 @@ SET( zypp_base_HEADERS
   base/LogTools.h
   base/Logger.h
   base/Measure.h
+  base/NamedValue.h
   base/NonCopyable.h
   base/ProfilingFormater.h
   base/ProvideNumericId.h
