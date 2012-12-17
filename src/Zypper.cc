@@ -2629,7 +2629,7 @@ void Zypper::doCommand()
   }
   // === execute command ===
 
-  MIL << "Going to process command " << command().toEnum() << endl;
+  MIL << "Going to process command " << command() << endl;
   ResObject::Kind kind;
 
   switch(command().toEnum())

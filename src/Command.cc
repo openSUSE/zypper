@@ -7,6 +7,7 @@
 
 #include <map>
 
+#include <zypp/base/NamedValue.h>
 #include <zypp/base/Exception.h>
 #include <zypp/base/String.h>
 
@@ -19,162 +20,175 @@
 #endif
 #define _(MSG) ::gettext(MSG)
 
+///////////////////////////////////////////////////////////////////
+namespace
+{
+  static zypp::NamedValue<ZypperCommand::Command> & table()
+  {
+    static zypp::NamedValue<ZypperCommand::Command> _table;
+    if ( _table.empty() )
+    {
+#define _T(C) _table( ZypperCommand::C )
+      _T( NONE_e )		| "NONE"		| "none" | "";
 
-static std::map<std::string,ZypperCommand::Command> _table;
+      _T( ADD_SERVICE_e )	| "addservice"		| "as" | "service-add" | "sa";
+      _T( REMOVE_SERVICE_e )	| "removeservice"	| "rs" | "service-delete" | "sd";
+      _T( MODIFY_SERVICE_e )	| "modifyservice"	| "ms";
+      _T( LIST_SERVICES_e )	| "services"		| "ls" | "service-list" | "sl";
+      _T( REFRESH_SERVICES_e )	| "refresh-services"	| "refs";
 
-const ZypperCommand ZypperCommand::ADD_SERVICE(ZypperCommand::ADD_SERVICE_e);
-const ZypperCommand ZypperCommand::REMOVE_SERVICE(ZypperCommand::REMOVE_SERVICE_e);
-const ZypperCommand ZypperCommand::MODIFY_SERVICE(ZypperCommand::MODIFY_SERVICE_e);
-const ZypperCommand ZypperCommand::LIST_SERVICES(ZypperCommand::LIST_SERVICES_e);
-const ZypperCommand ZypperCommand::REFRESH_SERVICES(ZypperCommand::REFRESH_SERVICES_e);
+      _T( ADD_REPO_e )		| "addrepo" 		| "ar";
+      _T( REMOVE_REPO_e )	| "removerepo"		| "rr";
+      _T( RENAME_REPO_e )	| "renamerepo"		| "nr";
+      _T( MODIFY_REPO_e )	| "modifyrepo"		| "mr";
+      _T( LIST_REPOS_e )	| "repos"		| "lr" | "catalogs" | "ca";
+      _T( REFRESH_e )		| "refresh"		| "ref";
+      _T( CLEAN_e )		| "clean"		| "cc" | "clean-cache" | "you-clean-cache" | "yc";
 
-const ZypperCommand ZypperCommand::ADD_REPO(ZypperCommand::ADD_REPO_e);
-const ZypperCommand ZypperCommand::REMOVE_REPO(ZypperCommand::REMOVE_REPO_e);
-const ZypperCommand ZypperCommand::RENAME_REPO(ZypperCommand::RENAME_REPO_e);
-const ZypperCommand ZypperCommand::MODIFY_REPO(ZypperCommand::MODIFY_REPO_e);
-const ZypperCommand ZypperCommand::LIST_REPOS(ZypperCommand::LIST_REPOS_e);
-const ZypperCommand ZypperCommand::REFRESH(ZypperCommand::REFRESH_e);
-const ZypperCommand ZypperCommand::CLEAN(ZypperCommand::CLEAN_e);
+      _T( INSTALL_e )		| "install"		| "in";
+      _T( REMOVE_e )		| "remove"		| "rm";
+      _T( SRC_INSTALL_e )	| "source-install"	| "si";
+      _T( VERIFY_e )		| "verify"		| "ve";
+      _T( INSTALL_NEW_RECOMMENDS_e )| "install-new-recommends" | "inr";
 
-const ZypperCommand ZypperCommand::INSTALL(ZypperCommand::INSTALL_e);
-const ZypperCommand ZypperCommand::REMOVE(ZypperCommand::REMOVE_e);
-const ZypperCommand ZypperCommand::SRC_INSTALL(ZypperCommand::SRC_INSTALL_e);
-const ZypperCommand ZypperCommand::VERIFY(ZypperCommand::VERIFY_e);
-const ZypperCommand ZypperCommand::INSTALL_NEW_RECOMMENDS(ZypperCommand::INSTALL_NEW_RECOMMENDS_e);
+      _T( UPDATE_e )		| "update"		| "up";
+      _T( LIST_UPDATES_e )	| "list-updates"	| "lu";
+      _T( PATCH_e )		| "patch";
+      _T( LIST_PATCHES_e )	| "list-patches"	| "lp";
+      _T( PATCH_CHECK_e )	| "patch-check"		| "pchk";
+      _T( DIST_UPGRADE_e )	| "dist-upgrade"	| "dup";
 
-const ZypperCommand ZypperCommand::UPDATE(ZypperCommand::UPDATE_e);
-const ZypperCommand ZypperCommand::LIST_UPDATES(ZypperCommand::LIST_UPDATES_e);
-const ZypperCommand ZypperCommand::PATCH(ZypperCommand::PATCH_e);
-const ZypperCommand ZypperCommand::LIST_PATCHES(ZypperCommand::LIST_PATCHES_e);
-const ZypperCommand ZypperCommand::PATCH_CHECK(ZypperCommand::PATCH_CHECK_e);
-const ZypperCommand ZypperCommand::DIST_UPGRADE(ZypperCommand::DIST_UPGRADE_e);
+      _T( SEARCH_e )		| "search"		| "se";
+      _T( INFO_e )		| "info"		| "if";
+      _T( PACKAGES_e )		| "packages"		| "pa" | "pkg";
+      _T( PATCHES_e )		| "patches"		| "pch";
+      _T( PATTERNS_e )		| "patterns"		| "pt";
+      _T( PRODUCTS_e )		| "products"		| "pd";
 
-const ZypperCommand ZypperCommand::SEARCH(ZypperCommand::SEARCH_e);
-const ZypperCommand ZypperCommand::INFO(ZypperCommand::INFO_e);
-const ZypperCommand ZypperCommand::PACKAGES(ZypperCommand::PACKAGES_e);
-const ZypperCommand ZypperCommand::PATCHES(ZypperCommand::PATCHES_e);
-const ZypperCommand ZypperCommand::PATTERNS(ZypperCommand::PATTERNS_e);
-const ZypperCommand ZypperCommand::PRODUCTS(ZypperCommand::PRODUCTS_e);
-const ZypperCommand ZypperCommand::WHAT_PROVIDES(ZypperCommand::WHAT_PROVIDES_e);
-//const ZypperCommand ZypperCommand::WHAT_REQUIRES(ZypperCommand::WHAT_REQUIRES_e);
-//const ZypperCommand ZypperCommand::WHAT_CONFLICTS(ZypperCommand::WHAT_CONFLICTS_e);
+      _T( WHAT_PROVIDES_e )	| "what-provides"	| "wp";
+      //_T( WHAT_REQUIRES_e )	| "what-requires"	| "wr";
+      //_T( WHAT_CONFLICTS_e )	| "what-conflicts"	| "wc";
 
-const ZypperCommand ZypperCommand::ADD_LOCK(ZypperCommand::ADD_LOCK_e);
-const ZypperCommand ZypperCommand::REMOVE_LOCK(ZypperCommand::REMOVE_LOCK_e);
-const ZypperCommand ZypperCommand::LIST_LOCKS(ZypperCommand::LIST_LOCKS_e);
-const ZypperCommand ZypperCommand::CLEAN_LOCKS(ZypperCommand::CLEAN_LOCKS_e);
+      _T( ADD_LOCK_e )		| "addlock"		| "al" | "lock-add" | "la";
+      _T( REMOVE_LOCK_e )	| "removelock"		| "rl" | "lock-delete" | "ld";
+      _T( LIST_LOCKS_e )	| "locks"		| "ll" | "lock-list";
+      _T( CLEAN_LOCKS_e )	| "cleanlocks"		| "cl" | "lock-clean";
 
-const ZypperCommand ZypperCommand::TARGET_OS(ZypperCommand::TARGET_OS_e);
-const ZypperCommand ZypperCommand::VERSION_CMP(ZypperCommand::VERSION_CMP_e);
-const ZypperCommand ZypperCommand::LICENSES(ZypperCommand::LICENSES_e);
-const ZypperCommand ZypperCommand::PS(ZypperCommand::PS_e);
+      _T( TARGET_OS_e )		| "targetos"		| "tos";
+      _T( VERSION_CMP_e )	| "versioncmp"		| "vcmp";
+      _T( LICENSES_e )		| "licenses";
+      _T( PS_e )		| "ps";
 
-const ZypperCommand ZypperCommand::HELP(ZypperCommand::HELP_e);
-const ZypperCommand ZypperCommand::SHELL(ZypperCommand::SHELL_e);
-const ZypperCommand ZypperCommand::SHELL_QUIT(ZypperCommand::SHELL_QUIT_e);
-const ZypperCommand ZypperCommand::NONE(ZypperCommand::NONE_e);
-const ZypperCommand ZypperCommand::MOO(ZypperCommand::MOO_e);
+      _T( HELP_e )		| "help"		| "?";
+      _T( SHELL_e )		| "shell"		| "sh";
+      _T( SHELL_QUIT_e )	| "quit"		| "exit" | "\004";
+      _T( MOO_e )		| "moo";
 
+      _T( RUG_PATCH_INFO_e )	| "patch-info";
+      _T( RUG_PATTERN_INFO_e )	| "pattern-info";
+      _T( RUG_PRODUCT_INFO_e )	| "product-info";
+      _T( RUG_SERVICE_TYPES_e )	| "service-types"	| "st";
+      _T( RUG_LIST_RESOLVABLES_e )| "list-resolvables";	// "lr" CONFLICT with repos
+      _T( RUG_MOUNT_e )		| "mount";
+      //_T( RUG_INFO_PROVIDES_e )| "info-provides"	| "ip";
+      //_T( RUG_INFO_CONFLICTS_e )| "info-requirements"	| "ir";
+      //_T( RUG_INFO_OBSOLETES_e )| "info-conflicts"	| "ic";
+      //_T( RUG_INFO_REQUIREMENTS_e )| "info-obsoletes"	| "io";
+      _T( RUG_PATCH_SEARCH_e )	| "patch-search" | "pse";
+      _T( RUG_PING_e )		| "ping";
+#undef _T
+    }
+    return _table;
+  }
+} // namespace
+///////////////////////////////////////////////////////////////////
 
-const ZypperCommand ZypperCommand::RUG_PATCH_INFO(ZypperCommand::RUG_PATCH_INFO_e);
-const ZypperCommand ZypperCommand::RUG_PATTERN_INFO(ZypperCommand::RUG_PATTERN_INFO_e);
-const ZypperCommand ZypperCommand::RUG_PRODUCT_INFO(ZypperCommand::RUG_PRODUCT_INFO_e);
-const ZypperCommand ZypperCommand::RUG_SERVICE_TYPES(ZypperCommand::RUG_SERVICE_TYPES_e);
-const ZypperCommand ZypperCommand::RUG_LIST_RESOLVABLES(ZypperCommand::RUG_LIST_RESOLVABLES_e);
-const ZypperCommand ZypperCommand::RUG_MOUNT(ZypperCommand::RUG_MOUNT_e);
-//const ZypperCommand ZypperCommand::RUG_INFO_PROVIDES(ZypperCommand::RUG_INFO_PROVIDES_e);
-//const ZypperCommand ZypperCommand::RUG_INFO_CONFLICTS(ZypperCommand::RUG_INFO_CONFLICTS_e);
-//const ZypperCommand ZypperCommand::RUG_INFO_OBSOLETES(ZypperCommand::RUG_INFO_OBSOLETES_e);
-//const ZypperCommand ZypperCommand::RUG_INFO_REQUIREMENTS(ZypperCommand::RUG_INFO_REQUIREMENTS_e);
-const ZypperCommand ZypperCommand::RUG_PATCH_SEARCH(ZypperCommand::RUG_PATCH_SEARCH_e);
-const ZypperCommand ZypperCommand::RUG_PING(ZypperCommand::RUG_PING_e);
+#define DEF_ZYPPER_COMMAND(C) const ZypperCommand ZypperCommand::C( ZypperCommand::C##_e )
+DEF_ZYPPER_COMMAND( ADD_SERVICE );
+DEF_ZYPPER_COMMAND( REMOVE_SERVICE );
+DEF_ZYPPER_COMMAND( MODIFY_SERVICE );
+DEF_ZYPPER_COMMAND( LIST_SERVICES );
+DEF_ZYPPER_COMMAND( REFRESH_SERVICES );
 
+DEF_ZYPPER_COMMAND( ADD_REPO );
+DEF_ZYPPER_COMMAND( REMOVE_REPO );
+DEF_ZYPPER_COMMAND( RENAME_REPO );
+DEF_ZYPPER_COMMAND( MODIFY_REPO );
+DEF_ZYPPER_COMMAND( LIST_REPOS );
+DEF_ZYPPER_COMMAND( REFRESH );
+DEF_ZYPPER_COMMAND( CLEAN );
 
-ZypperCommand::ZypperCommand(const std::string & strval_r)
-  : _command(parse(strval_r))
+DEF_ZYPPER_COMMAND( INSTALL );
+DEF_ZYPPER_COMMAND( REMOVE );
+DEF_ZYPPER_COMMAND( SRC_INSTALL );
+DEF_ZYPPER_COMMAND( VERIFY );
+DEF_ZYPPER_COMMAND( INSTALL_NEW_RECOMMENDS );
+
+DEF_ZYPPER_COMMAND( UPDATE );
+DEF_ZYPPER_COMMAND( LIST_UPDATES );
+DEF_ZYPPER_COMMAND( PATCH );
+DEF_ZYPPER_COMMAND( LIST_PATCHES );
+DEF_ZYPPER_COMMAND( PATCH_CHECK );
+DEF_ZYPPER_COMMAND( DIST_UPGRADE );
+
+DEF_ZYPPER_COMMAND( SEARCH );
+DEF_ZYPPER_COMMAND( INFO );
+DEF_ZYPPER_COMMAND( PACKAGES );
+DEF_ZYPPER_COMMAND( PATCHES );
+DEF_ZYPPER_COMMAND( PATTERNS );
+DEF_ZYPPER_COMMAND( PRODUCTS );
+
+DEF_ZYPPER_COMMAND( WHAT_PROVIDES );
+//DEF_ZYPPER_COMMAND( WHAT_REQUIRES );
+//DEF_ZYPPER_COMMAND( WHAT_CONFLICTS );
+
+DEF_ZYPPER_COMMAND( ADD_LOCK );
+DEF_ZYPPER_COMMAND( REMOVE_LOCK );
+DEF_ZYPPER_COMMAND( LIST_LOCKS );
+DEF_ZYPPER_COMMAND( CLEAN_LOCKS );
+
+DEF_ZYPPER_COMMAND( TARGET_OS );
+DEF_ZYPPER_COMMAND( VERSION_CMP );
+DEF_ZYPPER_COMMAND( LICENSES );
+DEF_ZYPPER_COMMAND( PS );
+
+DEF_ZYPPER_COMMAND( HELP );
+DEF_ZYPPER_COMMAND( SHELL );
+DEF_ZYPPER_COMMAND( SHELL_QUIT );
+DEF_ZYPPER_COMMAND( NONE );
+DEF_ZYPPER_COMMAND( MOO );
+
+DEF_ZYPPER_COMMAND( RUG_PATCH_INFO );
+DEF_ZYPPER_COMMAND( RUG_PATTERN_INFO );
+DEF_ZYPPER_COMMAND( RUG_PRODUCT_INFO );
+DEF_ZYPPER_COMMAND( RUG_SERVICE_TYPES );
+DEF_ZYPPER_COMMAND( RUG_LIST_RESOLVABLES );
+DEF_ZYPPER_COMMAND( RUG_MOUNT );
+//DEF_ZYPPER_COMMAND( RUG_INFO_PROVIDES );
+//DEF_ZYPPER_COMMAND( RUG_INFO_CONFLICTS );
+//DEF_ZYPPER_COMMAND( RUG_INFO_OBSOLETES );
+//DEF_ZYPPER_COMMAND( RUG_INFO_REQUIREMENTS );
+DEF_ZYPPER_COMMAND( RUG_PATCH_SEARCH );
+DEF_ZYPPER_COMMAND( RUG_PING );
+
+#undef DEF_ZYPPER_COMMAND
+///////////////////////////////////////////////////////////////////
+
+ZypperCommand::ZypperCommand( const std::string & strval_r )
+  : _command( parse(strval_r ) )
 {}
 
-ZypperCommand::Command ZypperCommand::parse(const std::string & strval_r)
+ZypperCommand::Command ZypperCommand::parse( const std::string & strval_r ) const
 {
-  if (_table.empty())
+  ZypperCommand::Command cmd;
+  if ( ! table().getValue( strval_r, cmd ) )
   {
-    // initialize it
-    _table["addservice"] = _table["as"] = _table["service-add"] = _table["sa"] = ZypperCommand::ADD_SERVICE_e;
-    _table["removeservice"] = _table["rs"] = _table["service-delete"] = _table["sd"] = ZypperCommand::REMOVE_SERVICE_e;
-    _table["modifyservice"] = _table["ms"] = ZypperCommand::MODIFY_SERVICE_e;
-    _table["services"] = _table["ls"] = _table["service-list"] = _table["sl"] = ZypperCommand::LIST_SERVICES_e;
-    _table["refresh-services"] = _table["refs"] = ZypperCommand::REFRESH_SERVICES_e;
-
-    _table["addrepo"] = _table["ar"] = ZypperCommand::ADD_REPO_e;
-    _table["removerepo"] = _table["rr"] = ZypperCommand::REMOVE_REPO_e;
-    _table["renamerepo"]= _table["nr"] = ZypperCommand::RENAME_REPO_e;
-    _table["modifyrepo"]= _table["mr"] = ZypperCommand::MODIFY_REPO_e;
-    _table["repos"] = _table["lr"] = _table["catalogs"] = _table["ca"] = ZypperCommand::LIST_REPOS_e;
-    _table["refresh"] = _table["ref"] = ZypperCommand::REFRESH_e;
-    _table["clean"] = _table["clean-cache"] = _table["cc"] = _table["you-clean-cache"] = _table["yc"] = ZypperCommand::CLEAN_e;
-
-    _table["install"] = _table["in"] = ZypperCommand::INSTALL_e;
-    _table["remove"] = _table["rm"] = ZypperCommand::REMOVE_e;
-    _table["source-install"] = _table["si"] = ZypperCommand::SRC_INSTALL_e;
-    _table["verify"] = _table["ve"] = ZypperCommand::VERIFY_e;
-    _table["install-new-recommends"] = _table["inr"] = ZypperCommand::INSTALL_NEW_RECOMMENDS_e;
-
-    _table["update"] = _table["up"] = ZypperCommand::UPDATE_e;
-    _table["list-updates"] = _table["lu"] = ZypperCommand::LIST_UPDATES_e;
-    _table["patch"] = ZypperCommand::PATCH_e;
-    _table["list-patches"] = _table["lp"] = ZypperCommand::LIST_PATCHES_e;
-    _table["patch-check"] = _table["pchk"] = ZypperCommand::PATCH_CHECK_e;
-    _table["dist-upgrade"] = _table["dup"] = ZypperCommand::DIST_UPGRADE_e;
-
-    _table["search"] = _table["se"] = ZypperCommand::SEARCH_e;
-    _table["info"] = _table["if"] = ZypperCommand::INFO_e;
-    _table["packages"] = _table["pa"] = _table["pkg"] = ZypperCommand::PACKAGES_e;
-    _table["patches"] = _table["pch"] = ZypperCommand::PATCHES_e;
-    _table["patterns"] = _table["pt"] = ZypperCommand::PATTERNS_e;
-    _table["products"] = _table["pd"] = ZypperCommand::PRODUCTS_e;
-    _table["what-provides"] = _table["wp"] = ZypperCommand::WHAT_PROVIDES_e;
-    //_table["what-requires"] = _table["wr"] = ZypperCommand::WHAT_REQUIRES_e;
-    //_table["what-conflicts"] = _table["wc"] = ZypperCommand::WHAT_CONFLICTS_e;
-
-    _table["addlock"] = _table["al"] = _table["lock-add"] = _table["la"] = ZypperCommand::ADD_LOCK_e;
-    _table["removelock"] = _table["rl"] = _table["lock-delete"] = _table["ld"] = ZypperCommand::REMOVE_LOCK_e;
-    _table["locks"] = _table["ll"] = _table["lock-list"] = ZypperCommand::LIST_LOCKS_e;
-    _table["cleanlocks"] = _table["cl"] = _table["lock-clean"] = ZypperCommand::CLEAN_LOCKS_e;
-
-    _table["targetos"] = _table["tos"] = ZypperCommand::TARGET_OS_e;
-    _table["versioncmp"] = _table["vcmp"] = ZypperCommand::VERSION_CMP_e;
-    _table["licenses"] = ZypperCommand::LICENSES_e;
-    _table["ps"] = ZypperCommand::PS_e;
-
-    _table["help"] = _table["?"] = ZypperCommand::HELP_e;
-    _table["shell"] = _table["sh"] = ZypperCommand::SHELL_e;
-    _table["quit"] = _table["exit"] = _table["\004"] = ZypperCommand::SHELL_QUIT_e;
-    _table["NONE"] = _table["none"] = _table[""] = ZypperCommand::NONE_e;
-    _table["moo"] = ZypperCommand::MOO_e;
-
-
-    // rug commands doable with zypper commands
-    _table["patch-info"] = ZypperCommand::RUG_PATCH_INFO_e;
-    _table["pattern-info"] = ZypperCommand::RUG_PATTERN_INFO_e;
-    _table["product-info"] = ZypperCommand::RUG_PRODUCT_INFO_e;
-    _table["service-types"] = _table["st"] = ZypperCommand::RUG_SERVICE_TYPES_e;
-    _table["list-resolvables"] = /*_table["lr"] CONFLICT with repos =*/ ZypperCommand::RUG_LIST_RESOLVABLES_e;
-    _table["mount"] = ZypperCommand::RUG_MOUNT_e;
-    //_table["info-provides"] = _table["ip"] = ZypperCommand::RUG_INFO_PROVIDES_e;
-    //_table["info-requirements"] = _table["ir"] = ZypperCommand::RUG_INFO_REQUIREMENTS_e;
-    //_table["info-conflicts"] = _table["ic"] = ZypperCommand::RUG_INFO_CONFLICTS_e;
-    //_table["info-obsoletes"] = _table["io"] = ZypperCommand::RUG_INFO_OBSOLETES_e;
-    _table["patch-search"] = _table["pse"] = ZypperCommand::RUG_PATCH_SEARCH_e;
-    _table["ping"] = ZypperCommand::RUG_PING_e;
+    ZYPP_THROW( zypp::Exception( zypp::str::form(_("Unknown command '%s'"), strval_r.c_str() ) ) );
   }
+  return cmd;
+}
 
-  std::map<std::string,ZypperCommand::Command>::const_iterator it
-    = _table.find(strval_r);
-  if (it == _table.end())
-  {
-    std::string message =
-      zypp::str::form(_("Unknown command '%s'"), strval_r.c_str());
-    ZYPP_THROW(zypp::Exception(message));
-  }
-  return it->second;
+const std::string & ZypperCommand::asString() const
+{
+  return table().getName( _command );
 }
