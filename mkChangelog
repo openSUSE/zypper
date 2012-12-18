@@ -172,6 +172,7 @@ while [ "$RES" == "e" ]; do
     [cCsS])
       Becho "!!! Store new $CHANGESFILE"
       mv $TMPFILE $CHANGESFILE
+      chmod 644 $CHANGESFILE
 
       test "$RES" == "s" && {
 	if [ "$LAST_RELEASE" == "$THIS_RELEASE" ]; then
