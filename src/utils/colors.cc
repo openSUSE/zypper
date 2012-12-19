@@ -26,6 +26,7 @@ Color::Color(const string & color_str)
 string Color::parse(const string & value)
 {
   static map<string, string> str2esc = {
+    { "",		""			},	// no color
     { "green",		COLOR_GREEN		},
     { "lightgreen",	COLOR_GREEN_LIGHT	},
     { "red",		COLOR_RED		},
