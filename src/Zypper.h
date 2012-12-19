@@ -220,6 +220,25 @@ public:
   void cleanup();
 
 public:
+  /** Convenience to return properly casted _commandOptions. */
+  template<class _Opt>
+  shared_ptr<_Opt> commandOptionsAs() const
+  { return dynamic_pointer_cast<_Opt>( _commandOptions ); }
+
+  /** Convenience to return command options for \c _Op, either casted from _commandOptions or newly created. */
+  template<class _Opt>
+  shared_ptr<_Opt> assertCommandOptions()
+  {
+    shared_ptr<_Opt> myopt( commandOptionsAs<_Opt>() );
+    if ( ! myopt )
+    {
+      myopt.reset( new _Opt() );
+      _commandOptions = myopt;
+    }
+    return myopt;
+  }
+
+public:
   ~Zypper();
 private:
   Zypper();
@@ -262,25 +281,10 @@ private:
 
   /** Command specific options (see also _copts). */
   shared_ptr<Options>  _commandOptions;
-
-  /** Convenience to return properly casted _commandOptions. */
-  template<class _Opt>
-  shared_ptr<_Opt> commandOptionsAs() const
-  { return dynamic_pointer_cast<_Opt>( _commandOptions ); }
-
-  /** Convenience to return command options for \c _Op, either casted from _commandOptions or newly created. */
-  template<class _Opt>
-  shared_ptr<_Opt> assertCommandOptions()
-  {
-    shared_ptr<_Opt> myopt( commandOptionsAs<_Opt>() );
-    if ( ! myopt )
-    {
-      myopt.reset( new _Opt() );
-      _commandOptions = myopt;
-    }
-    return myopt;
-  }
 };
+
+/** \relates Zypper::LoadSystemFlags */
+ZYPP_DECLARE_OPERATORS_FOR_FLAGS( Zypper::LoadSystemFlags );
 
 void print_main_help(const Zypper & zypper);
 void print_unknown_command_hint(Zypper & zypper);
