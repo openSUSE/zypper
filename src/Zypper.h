@@ -26,9 +26,23 @@
 #include "utils/getopt.h"
 #include "output/Out.h"
 
+// As a matter of fact namespaces std, boost and zypp have overlapping
+// symbols (e.g. shared_ptr). We default to the ones used in namespace zypp.
+// Symbols from other namespaces should be used explicitly (std::set, boost::format)
+// and not by using the whole namespace.
+using namespace zypp;
+
+// Convenience
+using std::cout;
+using std::cerr;
+using std::endl;
+
 /** directory for storing manually installed (zypper install foo.rpm) RPM files
  */
 #define ZYPPER_RPM_CACHE_DIR "/var/cache/zypper/RPMS"
+
+/** Base class for command specific option classes. */
+struct Options { virtual ~Options() {} };
 
 /**
  * Structure for holding global options.
@@ -245,6 +259,27 @@ private:
 
   int _sh_argc;
   char **_sh_argv;
+
+  /** Command specific options (see also _copts). */
+  shared_ptr<Options>  _commandOptions;
+
+  /** Convenience to return properly casted _commandOptions. */
+  template<class _Opt>
+  shared_ptr<_Opt> commandOptionsAs() const
+  { return dynamic_pointer_cast<_Opt>( _commandOptions ); }
+
+  /** Convenience to return command options for \c _Op, either casted from _commandOptions or newly created. */
+  template<class _Opt>
+  shared_ptr<_Opt> assertCommandOptions()
+  {
+    shared_ptr<_Opt> myopt( commandOptionsAs<_Opt>() );
+    if ( ! myopt )
+    {
+      myopt.reset( new _Opt() );
+      _commandOptions = myopt;
+    }
+    return myopt;
+  }
 };
 
 void print_main_help(const Zypper & zypper);

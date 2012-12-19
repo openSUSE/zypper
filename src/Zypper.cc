@@ -57,9 +57,8 @@
 #include "output/OutNormal.h"
 #include "output/OutXML.h"
 
-using namespace std;
+using boost::format;
 using namespace zypp;
-using namespace boost;
 
 ZYpp::Ptr God = NULL;
 parsed_opts copts; // command options
@@ -602,7 +601,7 @@ void Zypper::processGlobalOptions()
   if ((it = gopts.find("opt")) != gopts.end()) {
     cout << "Opt arg: ";
     std::copy (it->second.begin(), it->second.end(),
-               ostream_iterator<string> (cout, ", "));
+               std::ostream_iterator<string> (cout, ", "));
     cout << endl;
   }
 
@@ -2516,7 +2515,7 @@ void Zypper::processCommandOptions()
 
   if (optind < argc())
   {
-    ostringstream s;
+    std::ostringstream s;
     s << _("Non-option program arguments: ");
     while (optind < argc())
     {
@@ -3074,7 +3073,7 @@ void Zypper::doCommand()
     if (command() == ZypperCommand::REMOVE_REPO)
     {
       // must store repository before remove to ensure correct match number
-      set<RepoInfo,RepoInfoAliasComparator> repo_to_remove;
+      std::set<RepoInfo,RepoInfoAliasComparator> repo_to_remove;
       for_(it, _arguments.begin(), _arguments.end())
       {
         RepoInfo repo;
@@ -3097,7 +3096,7 @@ void Zypper::doCommand()
     }
     else
     {
-      set<repo::RepoInfoBase_Ptr, ServiceAliasComparator> to_remove;
+      std::set<repo::RepoInfoBase_Ptr, ServiceAliasComparator> to_remove;
       for_(it, _arguments.begin(), _arguments.end())
       {
         repo::RepoInfoBase_Ptr s;
@@ -4303,7 +4302,7 @@ copts.end())
     {
       out().error(_("Required argument missing."));
       ERR << "Required argument missing." << endl;
-      ostringstream s;
+      std::ostringstream s;
       s << _("Usage") << ':' << endl;
       s << _command_help;
       out().info(s.str());
