@@ -14,6 +14,7 @@
 #include <zypp/base/Exception.h>
 #include <zypp/base/NonCopyable.h>
 #include <zypp/base/PtrTypes.h>
+#include <zypp/base/Flags.h>
 #include <zypp/TriBool.h>
 
 #include <zypp/RepoInfo.h>
@@ -220,6 +221,22 @@ public:
   void cleanup();
 
 public:
+   /** Flags for tuning \ref defaultLoadSystem. */
+  enum _LoadSystemFlags
+  {
+    NO_TARGET		= (1 << 0),		//< don't load target to pool
+    NO_REPOS		= (1 << 1),		//< don't load repos to pool
+    NO_POOL		= NO_TARGET | NO_REPOS	//< no pool at all
+  };
+  ZYPP_DECLARE_FLAGS( LoadSystemFlags, _LoadSystemFlags );
+
+  /** Prepare repos and pool according to \a flags_r.
+   * Defaults to load target and repos and in this case also adjusts
+   * the PPP status by doing an initial solver run.
+   */
+  int defaultLoadSystem( LoadSystemFlags flags_r = LoadSystemFlags() );
+
+public:
   /** Convenience to return properly casted _commandOptions. */
   template<class _Opt>
   shared_ptr<_Opt> commandOptionsAs() const
@@ -282,6 +299,9 @@ private:
   /** Command specific options (see also _copts). */
   shared_ptr<Options>  _commandOptions;
 };
+
+/** \relates Zypper::LoadSystemFlags */
+ZYPP_DECLARE_OPERATORS_FOR_FLAGS( Zypper::LoadSystemFlags );
 
 void print_main_help(const Zypper & zypper);
 void print_unknown_command_hint(Zypper & zypper);
