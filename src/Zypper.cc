@@ -48,6 +48,7 @@
 
 #include "repos.h"
 #include "update.h"
+#include "locales.h"
 #include "solve-commit.h"
 #include "misc.h"
 #include "locks.h"
@@ -221,6 +222,12 @@ void print_main_help(Zypper & zypper)
     "\trefresh-services, refs\tRefresh all services.\n"
   );
 
+  static string help_locale_commands = _("     Language Support:\n"
+    "\tlist-language-support, langs\tList languages codes (locales). \n"
+    "\tadd-language-support, alangs\tAdd languages(s) to supported languages.\n"
+    "\tremove-language-support, rlangs\tRemove language(s) from supported languages.\n"
+                                         );
+
   static string help_package_commands = _("     Software Management:\n"
     "\tinstall, in\t\tInstall packages.\n"
     "\tremove, rm\t\tRemove packages.\n"
@@ -283,6 +290,7 @@ void print_main_help(Zypper & zypper)
   zypper.out().info(help_commands, Out::QUIET);
   zypper.out().info(help_repo_commands, Out::QUIET);
   zypper.out().info(help_service_commands, Out::QUIET);
+  zypper.out().info(help_locale_commands, Out::QUIET);
   zypper.out().info(help_package_commands, Out::QUIET);
   zypper.out().info(help_update_commands, Out::QUIET);
   zypper.out().info(help_query_commands, Out::QUIET);
@@ -2480,6 +2488,101 @@ void Zypper::processCommandOptions()
       "This command has dummy implementation which always returns 0.\n"
       "It is provided for compatibility with rug.\n"
     );
+    break;
+  }
+
+  case ZypperCommand::LIST_LANG_SUPPORT_e:
+  {
+    static struct option options[] =
+    {
+      {"help", no_argument, 0, 'h'},
+      {"packages", no_argument, 0, 'p'},
+      {"all", no_argument, 0, 'a'},
+      {0, 0, 0, 0}
+    };
+    specific_options = options;
+    _command_help = str::form( _(
+      "list-language-support (langs) [options] [LOCALE] ...\n"
+      "\n"
+      "List language codes (locales) and corresponding packages.\n"
+      "\n"
+      "Called without arguments, lists the languages which are supported. If the\n"
+      "language packages for a supported language are not yet on the system, they can\n"
+      "be installed by calling '%s'.\n"
+      "\n"
+      "  Command options:\n"
+      "-a, --all                List all available locales.\n"
+      "-p, --packages           Show corresponding packages.\n"
+      "\n"
+      "  Arguments:\n"
+      "The locale(s) for which the information shall be printed.\n"
+      "\n"
+      "  Example:\n"
+      "Get the list of packages which are available for 'de' and 'en'.\n"
+      "'%s'\n"
+      "\n"
+      "  Files:\n"
+      "%s\n"), "zypper add-language-support --packages <LOCALE>",
+      "zypper langs --packages de en", "/var/lib/zypp/RequestedLocales" );
+
+    break;
+  }
+
+  case ZypperCommand::ADD_LANG_SUPPORT_e:
+  {
+    static struct option options[] =
+    {
+      {"help", no_argument, 0, 'h'},
+      {"packages", no_argument, 0, 'p'},
+      {0, 0, 0, 0}
+    };
+    specific_options = options;
+    _command_help = str::form( _(
+      "add-language-support (alangs) [options] <LOCALE> ...\n"
+      "\n"
+      "Add given locale(s) to the list of supported languages.\n"
+      "\n"
+      "  Command options:\n"
+      "-p, --packages         Install corresponding packages for given locale(s).\n"
+      "                       NOT yet available\n"
+      "\n"
+      "  Arguments:\n"
+      "Specify languages which shall be supported by the locale (the language code).\n"
+      "Get a list of all available locales by calling '%s'.\n"
+      "\n"
+      "  Files:\n"
+      "%s\n"
+      "\n" ), "zypper langs --all", "/var/lib/zypp/RequestedLocales" );
+
+    break;
+  }
+
+  case ZypperCommand::REMOVE_LANG_SUPPORT_e:
+  {
+    static struct option options[] =
+    {
+      {"help", no_argument, 0, 'h'},
+      {"packages", no_argument, 0, 'p'},
+      {0, 0, 0, 0}
+    };
+    specific_options = options;
+    _command_help = str::form( _(
+      "remove-language-support (rlangs) [options] <LOCALE> ...\n"
+      "\n"
+      "Remove given locale(s) from the list of supported languages.\n"
+      "\n"
+      "  Command options:\n"
+      "-p, --packages         Remove corresponding packages for given locale(s).\n"
+      "                       NOT yet available\n"
+      "\n"
+      "  Arguments:\n"
+      "Specify languages which shall be removed by the locale (the language code).\n"
+      "Get the list of supported locales by calling '%s'.\n"
+      "\n"
+      "  Files:\n"
+      "%s\n"
+      "\n" ), "zypper langs", "/var/lib/zypp/RequestedLocales" );
+
     break;
   }
 
@@ -4689,6 +4792,89 @@ copts.end())
   // dummy commands
   case ZypperCommand::RUG_PING_e:
   {
+    break;
+  }
+
+  case ZypperCommand::LIST_LANG_SUPPORT_e:
+  {
+    // TODO: supported -> without repo init because only the system is relevant
+
+    // prepare target (system/installed)
+    init_target(*this);
+    // init repos
+    initRepoManager();
+    init_repos(*this);
+
+    // load metadata
+    load_resolvables(*this);
+
+    bool showAll = copts.count("all") > 0;
+
+    if ( copts.count("packages") )
+    {
+      // needed to compute status of packages
+      resolve(*this);
+      localePackages( *this, _arguments, showAll );
+    }
+    else
+    {
+      listLocales( *this, _arguments, showAll );
+    }
+
+    break;
+  }
+
+  case ZypperCommand::ADD_LANG_SUPPORT_e:
+  {
+    if ( _arguments.empty() )
+    {
+      report_required_arg_missing(out(), _command_help);
+      setExitCode(ZYPPER_EXIT_ERR_INVALID_ARGS);
+      return;
+    }
+    // prepare target (system/installed)
+    init_target(*this);
+    // init repos
+    initRepoManager();
+    init_repos(*this);
+
+    // load metadata
+    load_resolvables(*this);
+
+    if ( copts.count("packages") )
+    {
+      addLocalePackages( *this, _arguments );
+    }
+    else
+    {
+      addLocales( *this, _arguments );
+    }
+
+    break;
+  }
+
+  case ZypperCommand::REMOVE_LANG_SUPPORT_e:
+  {
+    if ( _arguments.empty() )
+    {
+      report_required_arg_missing(out(), _command_help);
+      setExitCode(ZYPPER_EXIT_ERR_INVALID_ARGS);
+      return;
+    }
+    // prepare target (system/installed)
+    init_target(*this);
+    // load metadata
+    load_resolvables(*this);
+
+    if ( copts.count("packages") )
+    {
+      removeLocalePackages( *this, _arguments );
+    }
+    else
+    {
+      removeLocales( *this, _arguments );
+    }
+
     break;
   }
 
