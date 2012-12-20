@@ -283,9 +283,6 @@ private:
   shared_ptr<Options>  _commandOptions;
 };
 
-/** \relates Zypper::LoadSystemFlags */
-ZYPP_DECLARE_OPERATORS_FOR_FLAGS( Zypper::LoadSystemFlags );
-
 void print_main_help(const Zypper & zypper);
 void print_unknown_command_hint(Zypper & zypper);
 void print_command_help_hint(Zypper & zypper);
