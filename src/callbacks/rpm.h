@@ -137,7 +137,7 @@ struct RemoveResolvableReportReceiver : public zypp::callback::ReceiveReport<zyp
     Zypper & zypper = *Zypper::instance();
     ::clock_gettime(CLOCK_REALTIME, &_last_reported);
     _last_percent.reset();
-    _label = zypp::str::form("( %*d/%d ) ", zypp::str::asString(zypper.runtimeData().rpm_pkgs_total).length(),
+    _label = zypp::str::form("(%*d/%d) ", zypp::str::asString(zypper.runtimeData().rpm_pkgs_total).length(),
                              ++zypper.runtimeData().rpm_pkg_current,
                              zypper.runtimeData().rpm_pkgs_total );
     // translators: This text is a progress display label e.g. "Removing packagename-x.x.x [42%]"
@@ -209,7 +209,7 @@ struct InstallResolvableReportReceiver : public zypp::callback::ReceiveReport<zy
     clock_gettime(CLOCK_REALTIME, &_last_reported);
     _last_percent.reset();
     _resolvable = resolvable;
-    _label = zypp::str::form("( %*d/%d ) ", zypp::str::asString(zypper.runtimeData().rpm_pkgs_total).length(),
+    _label = zypp::str::form("(%*d/%d) ", zypp::str::asString(zypper.runtimeData().rpm_pkgs_total).length(),
                               ++zypper.runtimeData().rpm_pkg_current,
                               zypper.runtimeData().rpm_pkgs_total );
     // TranslatorExplanation This text is a progress display label e.g. "Installing: foo-1.1.2 [42%]"
