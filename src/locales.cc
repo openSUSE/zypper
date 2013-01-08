@@ -181,8 +181,8 @@ void localePackages( Zypper &zypper, vector<string> localeArgs, bool showAll )
   {
     const zypp::sat::LocaleSupport & myLocale(*it);
     cout << endl;
-    cout << str::form( _("Packages for %s (locale '%s'):"),
-                       (*it).name().c_str(), (*it).code().c_str() ) << endl;
+    zypper.out().info( str::form( _("Packages for %s (locale '%s'):"),
+                                  (*it).name().c_str(), (*it).code().c_str() ) );
     cout << endl;
     printLocalePackages( zypper, myLocale );
   }
@@ -201,16 +201,16 @@ void addLocales( Zypper &zypper, vector<string> localeArgs )
       success = God->pool().addRequestedLocale( *it );
       if ( success )
       {
-        cout << _("Added language code: ") << *it << endl;
+        zypper.out().info( str::form( _("Added language code: %s"), (*it).code().c_str() ) );
       }
       else
       {
-        cout << _("ERROR: cannot add ") << *it << endl;
+        zypper.out().error( str::form( _("ERROR: cannot add %s"), (*it).code().c_str() ) );
       }
     }
     else
     {
-      cout <<  *it << _(" is already supported.") << endl;
+      zypper.out().info( str::form( _(" %s is already supported."), (*it).code().c_str() ) );
     }
   }
   God->commit( ZYppCommitPolicy() );   // commit added locales
@@ -233,13 +233,13 @@ void removeLocales( Zypper &zypper, vector<string> localeArgs )
     {
       success = God->pool().eraseRequestedLocale( loc );
       if ( success )
-        cout << _("Removed language code: ")  << loc << endl;
+        zypper.out().info( str::form( _("Removed language code: %s"), (*it).c_str() ) );
       else
-        cout << _("ERROR: cannot remove ") << loc << endl;
+        zypper.out().error( str::form( _("ERROR: cannot remove %s"), (*it).c_str() ) ) ;
     }
     else
     {
-      cout << loc << _(" was not supported.") << endl;
+      zypper.out().info( str::form( _("%s was not supported."), (*it).c_str() ) );
     }
   }
   // commit necessary to remove locale from  /var/lib/zypp/RequestedLocales
@@ -250,4 +250,3 @@ void removeLocalePackages( Zypper &zypper, vector<string> localeArgs )
 {
   cout << _("Not yet supported") << endl;
 }
-
