@@ -118,7 +118,8 @@ class TestSetup
     ResPoolProxy poolProxy()   { return pool().proxy(); }
     sat::Pool    satpool()     { return sat::Pool::instance(); }
     Resolver &   resolver()    { return *getZYpp()->resolver(); }
-
+    Zypper &     zypper()      { return _zypper; }
+  
   public:
     /** Load target repo. */
     void loadTarget()
@@ -402,13 +403,14 @@ class TestSetup
           filesystem::clean_dir( _rootdir );
       }
 
+      zypp::base::LogControl::instance().logfile( "./zypper_test.log" );
+
       // set up the Zypper instance
 
-      Zypper & zypper = *Zypper::instance();
-      zypper.globalOptsNoConst().root_dir = _rootdir.asString();
-      zypper.globalOptsNoConst().rm_options = zypp::RepoManagerOptions(_rootdir.asString());
-      zypper.globalOptsNoConst().rm_options.knownReposPath = _rootdir / "repos.d";
-      zypper.setOutputWriter(new OutNormal(Out::DEBUG));
+      _zypper.globalOptsNoConst().root_dir = _rootdir.asString();
+      _zypper.globalOptsNoConst().rm_options = zypp::RepoManagerOptions(_rootdir.asString());
+      _zypper.globalOptsNoConst().rm_options.knownReposPath = _rootdir / "repos.d";
+      _zypper.setOutputWriter(new OutNormal(Out::DEBUG));
 
       if ( ! sysarch_r.empty() )
         ZConfig::instance().setSystemArchitecture( sysarch_r );
@@ -417,6 +419,7 @@ class TestSetup
   private:
     filesystem::TmpDir _tmprootdir;
     Pathname           _rootdir;
+    Zypper &           _zypper = *Zypper::instance();
 };
 
 
