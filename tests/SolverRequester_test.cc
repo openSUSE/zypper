@@ -112,20 +112,47 @@ static TestSetup test(Arch_x86_64);
 
 BOOST_AUTO_TEST_CASE(setup)
 {
-  MIL << "============setup===========" << endl;
-  // fake target from a subset of the online 11.1 repo
-  test.loadTargetRepo(TESTS_SRC_DIR "/data/openSUSE-11.1_subset");
-  test.loadRepo(TESTS_SRC_DIR "/data/openSUSE-11.1", "main");
-  test.loadRepo(TESTS_SRC_DIR "/data/misc", "misc");
-  test.loadRepo(TESTS_SRC_DIR "/data/OBS_zypp_svn-11.1", "zypp");
+  // set log file name
+  zypp::base::LogControl::instance().logfile( "./zypper_test.log" );
 
+  MIL << "============setup===========" << endl;
+
+  // fake target from a subset of the online 11.1 repo
+  try {
+    test.loadTargetRepo(TESTS_SRC_DIR "/data/openSUSE-11.1_subset");
+  }
+  catch ( const Exception & exp )
+  {
+    ERR << "Caught exception for target repo: " << exp << endl;
+  }
+
+  std::map<string, string> testRepos;
+  testRepos.insert( std::make_pair("/data/openSUSE-11.1", "main") );
+  testRepos.insert( std::make_pair("/data/misc", "misc") );
+  testRepos.insert( std::make_pair("/data/OBS_zypp_svn-11.1", "zypp") );
+  
+  for_( repo, testRepos.begin(), testRepos.end() )
+  {
+    try {
+      test.loadRepo( TESTS_SRC_DIR + repo->first, repo->second );
+    }
+    catch ( const Exception & exp ) {
+      ERR << "Caught exception: " << exp << endl;
+    }
+  }
+  
   RepoInfo repo;
   repo.setAlias("upd");
   repo.addBaseUrl(Url("file://" TESTS_SRC_DIR "/data/openSUSE-11.1_updates"));
   repo.setPriority(80);
   repo.setGpgCheck(false);
-  test.loadRepo(repo);
-  //test.loadRepo(TESTS_SRC_DIR "/data/openSUSE-11.1_updates", "upd");
+
+  try {
+    test.loadRepo(repo);
+  }
+  catch ( const Exception & exp ) {
+     ERR << "Caught exception for update repo: " << exp << endl;
+  }
 
   // resolve pool so that the satisfied status of patches/patterns becomes known
   zypp::getZYpp()->resolver()->resolvePool();
