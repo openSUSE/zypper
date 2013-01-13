@@ -122,8 +122,8 @@ Software packages depend on each other in various ways. Packages usually
 require or recommend other packages, they can declare that they conflict
 with other packages, etc. Packages can also depend on specific hardware.
 See http://old-en.opensuse.org/Software_Management/Dependencies for more
-information. Zypper utilizes a \fIdependency solver\fR to find out what
-packages are needed to be installed according to user's request.
+information. Zypper uses a \fIdependency solver\fR to find out what
+packages need to be installed to satisfy the user's request.
 
 
 .SH "COMMANDS"
@@ -729,14 +729,14 @@ If no repositories are specified via --from or --repo options, zypper
 will do the upgrade with all defined repositories. This can be a problem
 if the system contains conflicting repositories, like repositories
 for two different distribution releases. This often happens if one
-forgets to remove older release repository after adding a new one, say
+forgets to remove an older release repository after adding a new one, say
 openSUSE 11.1 and openSUSE 11.2.
 
 To avoid the above trouble, you can specify the repositories from
 which to do the upgrade using the --from or --repo options.
 The difference between these two is that when --repo is used, zypper
-acts as if it knew only the specified repositories, while with --from
-zypper can eventually use also the rest of enabled repositories to
+uses only the specified repositories, while with --from
+zypper can also use the rest of the enabled repositories to
 satisfy package dependencies.
 
 .TP
