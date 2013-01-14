@@ -112,9 +112,6 @@ static TestSetup test(Arch_x86_64);
 
 BOOST_AUTO_TEST_CASE(setup)
 {
-  // set log file name
-  zypp::base::LogControl::instance().logfile( "./zypper_test.log" );
-
   MIL << "============setup===========" << endl;
 
   // fake target from a subset of the online 11.1 repo
