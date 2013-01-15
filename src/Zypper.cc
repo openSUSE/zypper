@@ -4886,6 +4886,8 @@ copts.end())
       addLocales( *this, _arguments );
     }
 
+    God->commit( ZYppCommitPolicy() );
+     
     break;
   }
 
@@ -4911,6 +4913,8 @@ copts.end())
       removeLocales( *this, _arguments );
     }
 
+    God->commit( ZYppCommitPolicy() );
+    
     break;
   }
 

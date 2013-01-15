@@ -11,17 +11,19 @@
 
 #include "Zypper.h"
 
-void listLocales( Zypper & zypper, vector<string> localeArgs, bool showAll );
+extern ZYpp::Ptr God;
 
-void localePackages( Zypper & zypper, vector<string> localeArgs, bool showAll );
+void listLocales( Zypper & zypper, std::vector<std::string> localeArgs, bool showAll );
 
-void addLocales( Zypper & zypper, vector<string> localeArgs );
+void localePackages( Zypper & zypper, std::vector<std::string> localeArgs, bool showAll );
 
-void addLocalePackages( Zypper & zypper, vector<string> localeArgs );
+std::map<std::string, bool> addLocales( Zypper & zypper, std::vector<std::string> localeArgs );
 
-void removeLocales( Zypper & zypper, vector<string> localeArgs );
+void addLocalePackages( Zypper & zypper, std::vector<std::string> localeArgs );
 
-void removeLocalePackages( Zypper & zypper, vector<string> localeArgs );
+std::map<std::string, bool> removeLocales( Zypper & zypper, std::vector<std::string> localeArgs );
+
+void removeLocalePackages( Zypper & zypper, std::vector<std::string> localeArgs );
 
 
 #endif

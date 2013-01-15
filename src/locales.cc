@@ -32,7 +32,6 @@ using namespace std;
 using namespace boost;
 using namespace zypp;
 
-extern ZYpp::Ptr God;
 
 
 static std::string isRequestedLocale( zypp::Locale lang )
@@ -188,8 +187,10 @@ void localePackages( Zypper &zypper, vector<string> localeArgs, bool showAll )
   }
 }
 
-void addLocales( Zypper &zypper, vector<string> localeArgs )
+map<string, bool> addLocales( Zypper &zypper, vector<string> localeArgs )
 {
+  map<string, bool> result;
+  
   const zypp::LocaleSet & locales = relevantLocales( localeArgs, false );
 
   for_( it, locales.begin(), locales.end() )
@@ -202,19 +203,23 @@ void addLocales( Zypper &zypper, vector<string> localeArgs )
       if ( success )
       {
         zypper.out().info( str::form( _("Added language code: %s"), (*it).code().c_str() ) );
+        result[(*it).code().c_str()] = true;
       }
       else
       {
         zypper.out().error( str::form( _("ERROR: cannot add %s"), (*it).code().c_str() ) );
+        result[(*it).code().c_str()] = false;
       }
     }
     else
     {
       zypper.out().info( str::form( _(" %s is already supported."), (*it).code().c_str() ) );
+      result[(*it).code().c_str()] = false;
     }
   }
-  God->commit( ZYppCommitPolicy() );   // commit added locales
+  // commit is called in Zypper.cc
 
+  return result;
 }
 
 void addLocalePackages( Zypper &zypper, vector<string> localeArgs )
@@ -222,8 +227,10 @@ void addLocalePackages( Zypper &zypper, vector<string> localeArgs )
   cout << _("Not yet supported") << endl;
 }
 
-void removeLocales( Zypper &zypper, vector<string> localeArgs )
+map<string, bool> removeLocales( Zypper &zypper, vector<string> localeArgs )
 {
+  map<string, bool> result;
+  
   for_( it, localeArgs.begin(), localeArgs.end() )
   {
     bool success = false;
@@ -233,17 +240,25 @@ void removeLocales( Zypper &zypper, vector<string> localeArgs )
     {
       success = God->pool().eraseRequestedLocale( loc );
       if ( success )
+      {
         zypper.out().info( str::form( _("Removed language code: %s"), (*it).c_str() ) );
+        result[(*it)] = true;
+      }
       else
+      {
         zypper.out().error( str::form( _("ERROR: cannot remove %s"), (*it).c_str() ) ) ;
+        result[(*it)] = false;
+      }
     }
     else
     {
       zypper.out().info( str::form( _("%s was not supported."), (*it).c_str() ) );
+      result[(*it)] = false;
     }
   }
-  // commit necessary to remove locale from  /var/lib/zypp/RequestedLocales
-  God->commit( ZYppCommitPolicy() );
+  // commit is called in Zypper.cc
+
+  return result;
 }
 
 void removeLocalePackages( Zypper &zypper, vector<string> localeArgs )
