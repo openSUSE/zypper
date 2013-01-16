@@ -14,6 +14,9 @@
 #include <iosfwd>
 #include <list>
 #include <vector>
+
+#include <zypp/base/String.h>
+
 using std::string;
 using std::ostream;
 using std::list;
@@ -75,17 +78,26 @@ private:
   friend class Table;
 };
 
+/** \relates TableRow Add colummn. */
+template<class _Tp>
+TableRow & operator<<( TableRow & tr, const _Tp & val )
+{
+  tr.add( zypp::str::asString( val ) );
+  return tr;
+}
+
+
+
 class TableHeader : public TableRow {
 public:
   //! Constructor. Reserve place for c columns.
   TableHeader (unsigned c = 0): TableRow (c) {}
 };
 
-inline
-TableRow& operator << (TableRow& tr, const string& s) {
-  tr.add (s);
-  return tr;
-}
+/** \relates TableHeader  Add colummn. */
+template<class _Tp>
+TableHeader & operator<<( TableHeader & th, const _Tp & val )
+{ static_cast<TableRow&>( th ) << val; return th; }
 
 /** \todo nice idea but poor interface */
 class Table {
