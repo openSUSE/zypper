@@ -285,6 +285,11 @@ bool RpmHeader::isSrc() const
   return has_tag( RPMTAG_SOURCEPACKAGE );
 }
 
+bool RpmHeader::isNosrc() const
+{
+  return has_tag( RPMTAG_SOURCEPACKAGE ) && ( has_tag( RPMTAG_NOSOURCE ) || has_tag( RPMTAG_NOPATCH ) );
+}
+
 ///////////////////////////////////////////////////////////////////
 //
 //

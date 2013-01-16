@@ -83,7 +83,8 @@ public:
 
   virtual ~RpmHeader();
 
-  bool isSrc() const;
+  bool isSrc() const;	//< Either 'src' or 'nosrc'
+  bool isNosrc() const;	//< Only 'nosrc'
 
 public:
 
