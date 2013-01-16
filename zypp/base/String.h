@@ -115,6 +115,9 @@ namespace zypp
     inline std::string asString( const char * t )
     { return t; }
 
+    inline std::string asString( char * t )
+    { return t; }
+
     template<class _T>
         inline std::string asString( const _T &t )
         { return t.asString(); }
