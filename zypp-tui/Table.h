@@ -15,6 +15,8 @@
 #include <list>
 #include <vector>
 
+#include <zypp/base/String.h>
+
 using std::string;
 using std::ostream;
 using std::list;
@@ -76,12 +78,15 @@ private:
   friend class Table;
 };
 
-/** \relates TableRow */
-inline TableRow & operator<<( TableRow & tr, const string & s )
+/** \relates TableRow Add colummn. */
+template<class _Tp>
+TableRow & operator<<( TableRow & tr, const _Tp & val )
 {
-  tr.add (s);
+  tr.add( zypp::str::asString( val ) );
   return tr;
 }
+
+
 
 class TableHeader : public TableRow {
 public:
@@ -89,12 +94,10 @@ public:
   TableHeader (unsigned c = 0): TableRow (c) {}
 };
 
-/** \relates TableHeader */
-inline TableHeader & operator<<( TableHeader & tr, const string & s )
-{
-  tr.add (s);
-  return tr;
-}
+/** \relates TableHeader  Add colummn. */
+template<class _Tp>
+TableHeader & operator<<( TableHeader & th, const _Tp & val )
+{ static_cast<TableRow&>( th ) << val; return th; }
 
 /** \todo nice idea but poor interface */
 class Table {
