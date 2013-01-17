@@ -22,6 +22,7 @@
 #include "zypp/base/String.h"
 #include "zypp/base/IOStream.h"
 #include "zypp/base/StrMatcher.h"
+#include "zypp/base/Errno.h"
 
 #include "zypp/AutoDispose.h"
 #include "zypp/ExternalProgram.h"
@@ -264,17 +265,15 @@ namespace zypp
 
       str << obj.asString() << "{";
       if ( !obj.isExist() ) {
-        str << "does not exist}";
+        str << Errno( obj.error() );
       } else {
         str << obj.asStatMode() << " " << std::dec << obj.owner() << "/" << obj.group();
 
         if ( obj.isFile() )
           str << " size " << obj.size();
-
-        str << "}";
       }
 
-      return str;
+      return str << "}";
     }
 
     ///////////////////////////////////////////////////////////////////
