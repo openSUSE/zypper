@@ -1,4 +1,11 @@
 -------------------------------------------------------------------
+Fri Jan 18 20:10:06 CET 2013 - ma@suse.de
+
+- BuildRequire libzypp-9.33.0
+- Add source-download command (fate#313445)
+- version 1.6.301
+
+-------------------------------------------------------------------
 Thu Nov  8 13:02:49 CET 2012 - ma@suse.de
 
 - Add global '--userdata' option to allow defining transaction ids (fate#312521)
