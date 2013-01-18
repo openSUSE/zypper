@@ -1510,6 +1510,26 @@ This command can be useful for companies redistributiong a custom
 distribution (like appliances) to figure out what licenses they are bound by.
 
 .TP
+.B source-download
+Download source rpms for all installed packages to a local directory.
+
+.TP
+.I \-d, \-\-directory <dir>
+Download all source rpms to this directory. Default is \fB/var/cache/zypper/source-download\fR.
+
+.TP
+.I \-\-delete
+Delete extraneous source rpms in the local directory. This is the default.
+
+.TP
+.I \-\-no-delete
+Do not delete extraneous source rpms.
+
+.TP
+.I \-\-status
+Don't download any source rpms, but show which source rpms are missing or extraneous.
+
+.TP
 .B ps
 After each upgrade or removal of packages, there may be running processes
 on the system which then use files meanwhile deleted by the upgrade.

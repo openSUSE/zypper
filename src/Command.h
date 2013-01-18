@@ -68,6 +68,7 @@ struct ZypperCommand
   static const ZypperCommand VERSION_CMP;
   static const ZypperCommand LICENSES;
   static const ZypperCommand PS;
+  static const ZypperCommand SOURCE_DOWNLOAD;
 
   static const ZypperCommand HELP;
   static const ZypperCommand SHELL;
@@ -140,6 +141,7 @@ struct ZypperCommand
     VERSION_CMP_e,
     LICENSES_e,
     PS_e,
+    SOURCE_DOWNLOAD_e,
 
     HELP_e,
     SHELL_e,

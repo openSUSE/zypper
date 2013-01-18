@@ -78,6 +78,7 @@ namespace
       _T( VERSION_CMP_e )	| "versioncmp"		| "vcmp";
       _T( LICENSES_e )		| "licenses";
       _T( PS_e )		| "ps";
+      _T( SOURCE_DOWNLOAD_e )	| "source-download";
 
       _T( HELP_e )		| "help"		| "?";
       _T( SHELL_e )		| "shell"		| "sh";
@@ -151,6 +152,7 @@ DEF_ZYPPER_COMMAND( TARGET_OS );
 DEF_ZYPPER_COMMAND( VERSION_CMP );
 DEF_ZYPPER_COMMAND( LICENSES );
 DEF_ZYPPER_COMMAND( PS );
+DEF_ZYPPER_COMMAND( SOURCE_DOWNLOAD );
 
 DEF_ZYPPER_COMMAND( HELP );
 DEF_ZYPPER_COMMAND( SHELL );

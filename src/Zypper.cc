@@ -54,6 +54,7 @@
 #include "locks.h"
 #include "search.h"
 #include "info.h"
+#include "source-download.h"
 
 #include "output/OutNormal.h"
 #include "output/OutXML.h"
@@ -269,6 +270,8 @@ void print_main_help(Zypper & zypper)
     "\ttargetos, tos\t\tPrint the target operating system ID string.\n"
     "\tlicenses\t\tPrint report about licenses and EULAs of\n"
     "\t\t\t\tinstalled packages.\n"
+    "\tsource-download\t\tDownload source rpms for all installed packages\n"
+    "\t\t\t\tto a local directory.\n"
   );
 
   static string help_usage = _(
@@ -2381,6 +2384,42 @@ void Zypper::processCommandOptions()
   }
 
 
+  case ZypperCommand::SOURCE_DOWNLOAD_e:
+  {
+    shared_ptr<SourceDownloadOptions> myOpts( new SourceDownloadOptions() );
+    _commandOptions = myOpts;
+    static struct option options[] =
+    {
+      {"help",			no_argument, 0, 'h'},
+      {"directory",		required_argument, 0, 'd'},
+//       {"manifest",		no_argument, &myOpts->_manifest, 1},
+//       {"no-manifest",		no_argument, &myOpts->_manifest, 0},
+      {"delete",		no_argument, &myOpts->_delete, 1},
+      {"no-delete",		no_argument, &myOpts->_delete, 0},
+      {"status",		no_argument, &myOpts->_dryrun, 1},
+      {0, 0, 0, 0}
+    };
+    specific_options = options;
+    _command_help = _(
+      "source-download\n"
+      "\n"
+      "Download source rpms for all installed packages to a local directory.\n"
+      "\n"
+      "  Command options:\n"
+      "-d, --directory <dir>\n"
+      "                     Download all source rpms to this directory.\n"
+      "                     Default: /var/cache/zypper/source-download\n"
+      "--delete             Delete extraneous source rpms in the local directory.\n"
+      "--no-delete          Do not delete extraneous source rpms.\n"
+      "--status             Don't download any source rpms,\n"
+      "                     but show which source rpms are missing or extraneous.\n"
+    );
+//       "--manifest           Write MANIFEST of packages and coresponding source rpms.\n"
+//       "--no-manifest        Do not write MANIFEST.\n"
+    break;
+  }
+
+
   case ZypperCommand::SHELL_QUIT_e:
   {
     static struct option quit_options[] = {
@@ -4190,8 +4229,7 @@ void Zypper::doCommand()
     else
     {
       SolverRequester::Options sropts;
-      if (copts.find("force") !=
-copts.end())
+      if (copts.find("force") != copts.end())
         sropts.force = true;
       sropts.best_effort = best_effort;
       sropts.skip_interactive = skip_interactive; // bcn #647214
@@ -4662,6 +4700,29 @@ copts.end())
     break;
   }
 
+  case ZypperCommand::SOURCE_DOWNLOAD_e:
+  {
+    if (runningHelp()) { out().info(_command_help, Out::QUIET); return; }
+
+    if (!_arguments.empty())
+    {
+      report_too_many_arguments(_command_help);
+      setExitCode(ZYPPER_EXIT_ERR_INVALID_ARGS);
+      return;
+    }
+
+    shared_ptr<SourceDownloadOptions> myOpts( assertCommandOptions<SourceDownloadOptions>() );
+
+    if ( _copts.count( "directory" ) )
+      myOpts->_directory = _copts["directory"].back();	// last wins
+
+    if ( _copts.count( "dry-run" ) )
+      myOpts->_dryrun = true;
+
+    sourceDownload( *this );
+
+    break;
+  }
 
   // -----------------------------( shell )------------------------------------
 
