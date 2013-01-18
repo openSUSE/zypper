@@ -28,7 +28,6 @@ Requires:       procps
 %if 0%{?suse_version}
 %requires_ge    libzypp
 Recommends:     logrotate cron zypper-log
-Requires(post): permissions
 %endif
 License:        GPL-2.0+
 Group:          System/Packages
@@ -132,11 +131,6 @@ cd ..
 %{find_lang} zypper
 %{__install} -d -m755 $RPM_BUILD_ROOT%{_var}/log
 touch $RPM_BUILD_ROOT%{_var}/log/zypper.log
-
-%if 0%{?suse_version}
-%post
-%run_permissions
-%endif
 
 %clean
 rm -rf "$RPM_BUILD_ROOT"
