@@ -4,10 +4,14 @@
 #include "Out.h"
 #include "Table.h"
 
-Out::~Out()
-{
+#include "Zypper.h"
 
-}
+////////////////////////////////////////////////////////////////////////////////
+//	class Out
+////////////////////////////////////////////////////////////////////////////////
+
+Out::~Out()
+{}
 
 bool Out::progressFilter()
 {
@@ -38,3 +42,15 @@ void Out::searchResult( const Table & table_r )
   std::cout << table_r;
 }
 
+////////////////////////////////////////////////////////////////////////////////
+//	class Out::Error
+////////////////////////////////////////////////////////////////////////////////
+
+int Out::Error::report( Zypper & zypper_r ) const
+{
+  if ( ! ( _msg.empty() && _hint.empty() ) )
+    zypper_r.out().error( _msg, _hint );
+  if ( _exitcode != ZYPPER_EXIT_OK )	// ZYPPER_EXIT_OK indicates exitcode is already set.
+    zypper_r.setExitCode( _exitcode );
+  return zypper_r.exitCode();
+}
