@@ -25,9 +25,10 @@
 #include <zypp/ZYppFactory.h>
 #include <zypp/zypp_detail/ZYppReadOnlyHack.h>
 
-#include <zypp/base/Logger.h>
+#include <zypp/base/LogTools.h>
 #include <zypp/base/Algorithm.h>
 #include <zypp/base/UserRequestException.h>
+#include <zypp/base/DtorReset.h>
 
 #include <zypp/sat/SolvAttr.h>
 #include <zypp/PoolQuery.h>
@@ -308,6 +309,41 @@ void print_command_help_hint(Zypper & zypper)
     // zypper shell is running or not
     _("Type '%s' to get command-specific help."))
       % (zypper.runningShell() ? "help <command>" : "zypper help <command>")));
+}
+
+int Zypper::defaultLoadSystem( LoadSystemFlags flags_r )
+{
+  DBG << "FLAGS:" << flags_r << endl;
+  if ( ! flags_r.testFlag( NO_POOL ) )
+  {
+    init_target( *this );
+    if ( exitCode() != ZYPPER_EXIT_OK )
+      return exitCode();
+
+    if ( ! flags_r.testFlag( NO_REPOS ) )
+    {
+      init_repos(*this);
+      if ( exitCode() != ZYPPER_EXIT_OK )
+	return exitCode();
+    }
+
+    DtorReset _tmp( _gopts.disable_system_resolvables );
+    if ( flags_r.testFlag( NO_TARGET ) )
+    {
+      _gopts.disable_system_resolvables = true;
+    }
+    load_resolvables( *this );
+    if ( exitCode() != ZYPPER_EXIT_OK )
+      return exitCode();
+
+    if ( ! ( flags_r && NO_POOL ) )
+    {
+      // have REPOS and TARGET
+      // compute status of PPP
+      resolve(*this);
+    }
+  }
+  return exitCode();
 }
 
 /*
