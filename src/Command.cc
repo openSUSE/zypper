@@ -94,7 +94,7 @@ ZypperCommand::ZypperCommand(const std::string & strval_r)
   : _command(parse(strval_r))
 {}
 
-ZypperCommand::Command ZypperCommand::parse(const std::string & strval_r)
+ZypperCommand::Command ZypperCommand::parse(const std::string & strval_r) const
 {
   if (_table.empty())
   {

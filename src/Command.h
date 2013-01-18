@@ -17,6 +17,9 @@
  */
 struct ZypperCommand
 {
+  /** Special void command value meaning <b>not set</b> */
+  static const ZypperCommand NONE;
+
   static const ZypperCommand ADD_SERVICE;
   static const ZypperCommand REMOVE_SERVICE;
   static const ZypperCommand MODIFY_SERVICE;
@@ -50,6 +53,7 @@ struct ZypperCommand
   static const ZypperCommand PATCHES;
   static const ZypperCommand PATTERNS;
   static const ZypperCommand PRODUCTS;
+
   static const ZypperCommand WHAT_PROVIDES;
   //static const ZypperCommand WHAT_REQUIRES;
   //static const ZypperCommand WHAT_CONFLICTS;
@@ -70,9 +74,6 @@ struct ZypperCommand
   static const ZypperCommand SHELL_QUIT;
   static const ZypperCommand MOO;
 
-  /** Special void command value meaning <b>not set</b> */
-  static const ZypperCommand NONE;
-
   /** name rug commands */
   //!@{
   static const ZypperCommand RUG_PATCH_INFO;
@@ -91,73 +92,73 @@ struct ZypperCommand
 
   enum Command
   {
-    ADD_SERVICE_e                    = 1,
-    REMOVE_SERVICE_e                 = 2,
-    MODIFY_SERVICE_e                 = 3,
-    LIST_SERVICES_e                  = 4,
-    REFRESH_SERVICES_e               = 5,
+    NONE_e,
 
-    ADD_REPO_e                       = 10,
-    REMOVE_REPO_e                    = 11,
-    RENAME_REPO_e                    = 12,
-    MODIFY_REPO_e                    = 13,
-    LIST_REPOS_e                     = 14,
-    REFRESH_e                        = 15,
-    CLEAN_e                          = 16,
+    ADD_SERVICE_e,
+    REMOVE_SERVICE_e,
+    MODIFY_SERVICE_e,
+    LIST_SERVICES_e,
+    REFRESH_SERVICES_e,
 
-    INSTALL_e                        = 20,
-    REMOVE_e                         = 21,
-    SRC_INSTALL_e                    = 22,
-    VERIFY_e                         = 23,
-    INSTALL_NEW_RECOMMENDS_e         = 24,
+    ADD_REPO_e,
+    REMOVE_REPO_e,
+    RENAME_REPO_e,
+    MODIFY_REPO_e,
+    LIST_REPOS_e,
+    REFRESH_e,
+    CLEAN_e,
 
-    UPDATE_e                         = 30,
-    LIST_UPDATES_e                   = 31,
-    PATCH_e                          = 32,
-    LIST_PATCHES_e                   = 33,
-    PATCH_CHECK_e                    = 34,
-    DIST_UPGRADE_e                   = 35,
+    INSTALL_e,
+    REMOVE_e,
+    SRC_INSTALL_e,
+    VERIFY_e,
+    INSTALL_NEW_RECOMMENDS_e,
 
-    SEARCH_e                         = 40,
-    INFO_e                           = 41,
-    PACKAGES_e                       = 42,
-    PATCHES_e                        = 43,
-    PATTERNS_e                       = 44,
-    PRODUCTS_e                       = 45,
+    UPDATE_e,
+    LIST_UPDATES_e,
+    PATCH_e,
+    LIST_PATCHES_e,
+    PATCH_CHECK_e,
+    DIST_UPGRADE_e,
 
-    WHAT_PROVIDES_e                  = 50,
+    SEARCH_e,
+    INFO_e,
+    PACKAGES_e,
+    PATCHES_e,
+    PATTERNS_e,
+    PRODUCTS_e,
+
+    WHAT_PROVIDES_e,
     //WHAT_REQUIRES_e,
     //WHAT_CONFLICTS_e,
 
-    ADD_LOCK_e                       = 60,
-    REMOVE_LOCK_e                    = 61,
-    LIST_LOCKS_e                     = 62,
-    CLEAN_LOCKS_e                    = 63,
+    ADD_LOCK_e,
+    REMOVE_LOCK_e,
+    LIST_LOCKS_e,
+    CLEAN_LOCKS_e,
 
-    TARGET_OS_e                      = 80,
-    VERSION_CMP_e                    = 81,
-    LICENSES_e                       = 82,
-    PS_e                             = 83,
+    TARGET_OS_e,
+    VERSION_CMP_e,
+    LICENSES_e,
+    PS_e,
 
-    HELP_e                           = 90,
-    SHELL_e                          = 91,
-    SHELL_QUIT_e                     = 92,
-    MOO_e                            = 93,
+    HELP_e,
+    SHELL_e,
+    SHELL_QUIT_e,
+    MOO_e,
 
-    NONE_e                           = 0,
-
-    RUG_PATCH_INFO_e                 = 101,
-    RUG_PATTERN_INFO_e               = 102,
-    RUG_PRODUCT_INFO_e               = 103,
-    RUG_SERVICE_TYPES_e              = 104,
-    RUG_LIST_RESOLVABLES_e           = 105,
-    RUG_MOUNT_e                      = 106,
-    RUG_INFO_PROVIDES_e              = 107,
-    RUG_INFO_CONFLICTS_e             = 108,
-    RUG_INFO_OBSOLETES_e             = 109,
-    RUG_INFO_REQUIREMENTS_e          = 110,
-    RUG_PATCH_SEARCH_e               = 111,
-    RUG_PING_e                       = 112
+    RUG_PATCH_INFO_e,
+    RUG_PATTERN_INFO_e,
+    RUG_PRODUCT_INFO_e,
+    RUG_SERVICE_TYPES_e,
+    RUG_LIST_RESOLVABLES_e,
+    RUG_MOUNT_e,
+    //RUG_INFO_PROVIDES_e,
+    //RUG_INFO_CONFLICTS_e,
+    //RUG_INFO_OBSOLETES_e,
+    //RUG_INFO_REQUIREMENTS_e,
+    RUG_PATCH_SEARCH_e,
+    RUG_PING_e
   };
 
   ZypperCommand(Command command) : _command(command) {}
@@ -166,10 +167,9 @@ struct ZypperCommand
 
   Command toEnum() const { return _command; }
 
-  ZypperCommand::Command parse(const std::string & strval_r);
+  ZypperCommand::Command parse(const std::string & strval_r) const;
 
   const std::string & asString() const;
-
 
   Command _command;
 };
