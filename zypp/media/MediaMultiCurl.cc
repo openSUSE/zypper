@@ -24,6 +24,7 @@
 
 #include "zypp/ZConfig.h"
 #include "zypp/base/Logger.h"
+#include "zypp/base/UserRequestException.h"
 #include "zypp/media/MediaMultiCurl.h"
 #include "zypp/media/MetaLinkParser.h"
 
@@ -1371,9 +1372,9 @@ void MediaMultiCurl::doGetFileCopy( const Pathname & filename , const Pathname &
 	    {
 	      multifetch(filename, file, &urls, &report, &bl);
 	    }
-	  catch (MediaCurlException &ex)
+	  catch (AbortRequestException &ex)
 	    {
-	      userabort = ex.errstr() == "User abort";
+	      userabort = true;
 	      ZYPP_RETHROW(ex);
 	    }
 	}
