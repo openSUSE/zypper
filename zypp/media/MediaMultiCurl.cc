@@ -254,7 +254,7 @@ multifetchworker::headerfunction(char *p, size_t size)
       string line(p + 9, l - 9);
       if (line[l - 10] == '\r')
 	line.erase(l - 10, 1);
-      DBG << "#" << _workerno << ": redirecting to" << line << endl;
+      XXX << "#" << _workerno << ": redirecting to" << line << endl;
       return size;
     }
   if (l <= 14 || l >= 128 || strncasecmp(p, "Content-Range:", 14) != 0)
@@ -282,7 +282,7 @@ multifetchworker::headerfunction(char *p, size_t size)
     }
   if (_request->_filesize != (off_t)filesize)
     {
-      DBG << "#" << _workerno << ": filesize mismatch" << endl;
+      XXX << "#" << _workerno << ": filesize mismatch" << endl;
       _state = WORKER_BROKEN;
       strncpy(_curlError, "filesize mismatch", CURL_ERROR_SIZE);
     }
@@ -321,7 +321,7 @@ multifetchworker::multifetchworker(int no, multifetchrequest &request, const Url
   _urlbuf = curlUrl.asString();
   _curl = _request->_context->fromEasyPool(_url.getHost());
   if (_curl)
-    DBG << "reused worker from pool" << endl;
+    XXX << "reused worker from pool" << endl;
   if (!_curl && !(_curl = curl_easy_init()))
     {
       _state = WORKER_BROKEN;
@@ -366,7 +366,7 @@ multifetchworker::multifetchworker(int no, multifetchrequest &request, const Url
 	  long auth = CurlAuthData::auth_type_str2long(use_auth);
 	  if( auth != CURLAUTH_NONE)
 	  {
-	    DBG << "#" << _workerno << ": Enabling HTTP authentication methods: " << use_auth
+	    XXX << "#" << _workerno << ": Enabling HTTP authentication methods: " << use_auth
 		<< " (CURLOPT_HTTPAUTH=" << auth << ")" << std::endl;
 	    curl_easy_setopt(_curl, CURLOPT_HTTPAUTH, auth);
 	  }
@@ -455,7 +455,7 @@ multifetchworker::checkdns()
 	return;
     }
 
-  DBG << "checking DNS lookup of " << host << endl;
+  XXX << "checking DNS lookup of " << host << endl;
   int pipefds[2];
   if (pipe(pipefds))
     {
@@ -536,7 +536,7 @@ multifetchworker::dnsevent(fd_set &rset)
       return;
     }
   int exitcode = WEXITSTATUS(status);
-  DBG << "#" << _workerno << ": DNS lookup returned " << exitcode << endl;
+  XXX << "#" << _workerno << ": DNS lookup returned " << exitcode << endl;
   if (exitcode != 0)
     {
       _state = WORKER_BROKEN;
@@ -551,7 +551,7 @@ multifetchworker::dnsevent(fd_set &rset)
 bool
 multifetchworker::checkChecksum()
 {
-  // DBG << "checkChecksum block " << _blkno << endl;
+  // XXX << "checkChecksum block " << _blkno << endl;
   if (!_blksize || !_request->_blklist)
     return true;
   return _request->_blklist->verifyDigest(_blkno, _dig);
@@ -560,7 +560,7 @@ multifetchworker::checkChecksum()
 bool
 multifetchworker::recheckChecksum()
 {
-  // DBG << "recheckChecksum block " << _blkno << endl;
+  // XXX << "recheckChecksum block " << _blkno << endl;
   if (!_request->_fp || !_blksize || !_request->_blklist)
     return true;
   if (fseeko(_request->_fp, _blkstart, SEEK_SET))
@@ -585,7 +585,7 @@ multifetchworker::stealjob()
 {
   if (!_request->_stealing)
     {
-      DBG << "start stealing!" << endl;
+      XXX << "start stealing!" << endl;
       _request->_stealing = true;
     }
   multifetchworker *best = 0;
@@ -645,8 +645,8 @@ multifetchworker::stealjob()
 	}
 
       // lets see if we should sleep a bit
-      DBG << "me #" << _workerno << ": " << _avgspeed << ", size " << best->_blksize << endl;
-      DBG << "best #" << best->_workerno << ": " << best->_avgspeed << ", size " << (best->_blksize - best->_blkreceived) << endl;
+      XXX << "me #" << _workerno << ": " << _avgspeed << ", size " << best->_blksize << endl;
+      XXX << "best #" << best->_workerno << ": " << best->_avgspeed << ", size " << (best->_blksize - best->_blkreceived) << endl;
       if (_avgspeed && best->_avgspeed && best->_blksize - best->_blkreceived > 0 &&
           (best->_blksize - best->_blkreceived) * _avgspeed < best->_blksize * best->_avgspeed)
 	{
@@ -655,7 +655,7 @@ multifetchworker::stealjob()
 	  double sl = (best->_blksize - best->_blkreceived) / best->_avgspeed * 2;
 	  if (sl > 1)
 	    sl = 1;
-	  DBG << "#" << _workerno << ": going to sleep for " << sl * 1000 << " ms" << endl;
+	  XXX << "#" << _workerno << ": going to sleep for " << sl * 1000 << " ms" << endl;
 	  _sleepuntil = now + sl;
 	  _state = WORKER_SLEEP;
 	  _request->_sleepworkers++;
@@ -752,7 +752,7 @@ multifetchworker::run()
     sprintf(rangebuf, "%llu-", (unsigned long long)_blkstart);
   else
     sprintf(rangebuf, "%llu-%llu", (unsigned long long)_blkstart, (unsigned long long)_blkstart + _blksize - 1);
-  DBG << "#" << _workerno << ": BLK " << _blkno << ":" << rangebuf << " " << _url << endl;
+  XXX << "#" << _workerno << ": BLK " << _blkno << ":" << rangebuf << " " << _url << endl;
   if (curl_easy_setopt(_curl, CURLOPT_RANGE, !_noendrange || _blkstart != 0 ? rangebuf : (char *)0) != CURLE_OK)
     {
       _request->_activeworkers--;
@@ -847,7 +847,7 @@ multifetchrequest::run(std::vector<Url> &urllist)
 
       if (_finished)
 	{
-	  DBG << "finished!" << endl;
+	  XXX << "finished!" << endl;
 	  break;
 	}
 
@@ -972,7 +972,7 @@ multifetchrequest::run(std::vector<Url> &urllist)
 		continue;
 	      if (_minsleepuntil == worker->_sleepuntil)
 		_minsleepuntil = 0;
-	      DBG << "#" << worker->_workerno << ": sleep done, wake up" << endl;
+	      XXX << "#" << worker->_workerno << ": sleep done, wake up" << endl;
 	      _sleepworkers--;
 	      // nextjob chnages the state
 	      worker->nextjob();
@@ -997,20 +997,20 @@ multifetchrequest::run(std::vector<Url> &urllist)
 	      else
 		worker->_avgspeed = worker->_blkreceived / (now - worker->_blkstarttime);
 	    }
-	  DBG << "#" << worker->_workerno << ": BLK " << worker->_blkno << " done code " << cc << " speed " << worker->_avgspeed << endl;
+	  XXX << "#" << worker->_workerno << ": BLK " << worker->_blkno << " done code " << cc << " speed " << worker->_avgspeed << endl;
 	  curl_multi_remove_handle(_multi, easy);
 	  if (cc == CURLE_HTTP_RETURNED_ERROR)
 	    {
 	      long statuscode = 0;
 	      (void)curl_easy_getinfo(easy, CURLINFO_RESPONSE_CODE, &statuscode);
-	      DBG << "HTTP status " << statuscode << endl;
+	      XXX << "HTTP status " << statuscode << endl;
 	      if (statuscode == 416 && !_blklist)	/* Range error */
 		{
 		  if (_filesize == off_t(-1))
 		    {
 		      if (!worker->_noendrange)
 			{
-			  DBG << "#" << worker->_workerno << ": retrying with no end range" << endl;
+			  XXX << "#" << worker->_workerno << ": retrying with no end range" << endl;
 			  worker->_noendrange = true;
 			  worker->run();
 			  continue;
@@ -1046,7 +1046,7 @@ multifetchrequest::run(std::vector<Url> &urllist)
 		      // with something broken. Thus we have to re-check the block.
 		      if (!worker->recheckChecksum())
 			{
-			  DBG << "#" << worker->_workerno << ": recheck checksum error, refetch block" << endl;
+			  XXX << "#" << worker->_workerno << ": recheck checksum error, refetch block" << endl;
 			  // re-fetch! No need to worry about the bad workers,
 			  // they will now be set to DISCARD. At the end of their block
 			  // they will notice that they wrote bad data and go into BROKEN.
@@ -1082,7 +1082,7 @@ multifetchrequest::run(std::vector<Url> &urllist)
 		    ratio = ratio * ratio;
 		  if (ratio > .01)
 		    {
-		      DBG << "#" << worker->_workerno << ": too slow ("<< ratio << ", " << worker->_avgspeed << ", #" << maxworkerno << ": " << maxavg << "), going to sleep for " << ratio * 1000 << " ms" << endl;
+		      XXX << "#" << worker->_workerno << ": too slow ("<< ratio << ", " << worker->_avgspeed << ", #" << maxworkerno << ": " << maxavg << "), going to sleep for " << ratio * 1000 << " ms" << endl;
 		      worker->_sleepuntil = now + ratio;
 		      worker->_state = WORKER_SLEEP;
 		      _sleepworkers++;
@@ -1130,7 +1130,7 @@ multifetchrequest::run(std::vector<Url> &urllist)
 	  if (now > _starttime)
 	    avg = _fetchedsize / (now - _starttime);
 	  if (!(*(_report))->progress(percent, _baseurl, avg, _lastperiodstart == _starttime ? avg : _periodavg))
-	    ZYPP_THROW(MediaCurlException(_baseurl, "User abort", "cancelled"));
+	    ZYPP_THROW(AbortRequestException("User requested to abort",MediaCurlException(_baseurl, "User abort", "cancelled")));
 	}
 
       if (_timeout && now - _lastprogress > _timeout)
@@ -1344,29 +1344,29 @@ void MediaMultiCurl::doGetFileCopy( const Pathname & filename , const Pathname &
 	  mlp.parse(Pathname(destNew));
 	  MediaBlockList bl = mlp.getBlockList();
 	  vector<Url> urls = mlp.getUrls();
-	  DBG << bl << endl;
+	  XXX << bl << endl;
 	  file = fopen(destNew.c_str(), "w+e");
 	  if (!file)
 	    ZYPP_THROW(MediaWriteException(destNew));
 	  if (PathInfo(target).isExist())
 	    {
-	      DBG << "reusing blocks from file " << target << endl;
+	      XXX << "reusing blocks from file " << target << endl;
 	      bl.reuseBlocks(file, target.asString());
-	      DBG << bl << endl;
+	      XXX << bl << endl;
 	    }
 	  if (bl.haveChecksum(1) && PathInfo(failedFile).isExist())
 	    {
-	      DBG << "reusing blocks from file " << failedFile << endl;
+	      XXX << "reusing blocks from file " << failedFile << endl;
 	      bl.reuseBlocks(file, failedFile.asString());
-	      DBG << bl << endl;
+	      XXX << bl << endl;
 	      filesystem::unlink(failedFile);
 	    }
 	  Pathname df = deltafile();
 	  if (!df.empty())
 	    {
-	      DBG << "reusing blocks from file " << df << endl;
+	      XXX << "reusing blocks from file " << df << endl;
 	      bl.reuseBlocks(file, df.asString());
-	      DBG << bl << endl;
+	      XXX << bl << endl;
 	    }
 	  try
 	    {

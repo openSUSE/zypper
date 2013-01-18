@@ -728,7 +728,7 @@ void MediaCurl::setupEasy()
         it != vol_settings.headersEnd();
         ++it )
   {
-      MIL << "HEADER " << *it << std::endl;
+    // MIL << "HEADER " << *it << std::endl;
 
       _customHeaders = curl_slist_append(_customHeaders, it->c_str());
       if ( !_customHeaders )
