@@ -68,6 +68,7 @@ const ZypperCommand ZypperCommand::TARGET_OS(ZypperCommand::TARGET_OS_e);
 const ZypperCommand ZypperCommand::VERSION_CMP(ZypperCommand::VERSION_CMP_e);
 const ZypperCommand ZypperCommand::LICENSES(ZypperCommand::LICENSES_e);
 const ZypperCommand ZypperCommand::PS(ZypperCommand::PS_e);
+const ZypperCommand ZypperCommand::SOURCE_DOWNLOAD(ZypperCommand::SOURCE_DOWNLOAD_e);
 
 const ZypperCommand ZypperCommand::HELP(ZypperCommand::HELP_e);
 const ZypperCommand ZypperCommand::SHELL(ZypperCommand::SHELL_e);
@@ -145,6 +146,7 @@ ZypperCommand::Command ZypperCommand::parse(const std::string & strval_r) const
     _table["versioncmp"] = _table["vcmp"] = ZypperCommand::VERSION_CMP_e;
     _table["licenses"] = ZypperCommand::LICENSES_e;
     _table["ps"] = ZypperCommand::PS_e;
+    _table["source-download"] = ZypperCommand::SOURCE_DOWNLOAD_e;
 
     _table["help"] = _table["?"] = ZypperCommand::HELP_e;
     _table["shell"] = _table["sh"] = ZypperCommand::SHELL_e;

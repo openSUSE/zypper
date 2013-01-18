@@ -19,6 +19,7 @@ SET (zypper_HEADERS
   Table.h
   locks.h
   update.h
+  source-download.h
   solve-commit.h
   PackageArgs.h
   SolverRequester.h
@@ -40,6 +41,7 @@ SET( zypper_SRCS
   Table.cc
   locks.cc
   update.cc
+  source-download.cc
   solve-commit.cc
   PackageArgs.cc
   RequestFeedback.cc
