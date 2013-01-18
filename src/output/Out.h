@@ -2,6 +2,7 @@
 #define OUT_H_
 
 #include <string>
+#include <boost/format.hpp>
 
 #include <zypp/base/NonCopyable.h>
 #include <zypp/base/Exception.h>
@@ -9,12 +10,18 @@
 #include <zypp/base/Flags.h>
 #include <zypp/base/DefaultIntegral.h>
 #include <zypp/Url.h>
+#include <zypp/TriBool.h>
+#include <zypp/ProgressData.h>
 
 #include "utils/prompt.h"
-
 #include "output/prompt.h"
 
+using zypp::tribool;
+using zypp::indeterminate;
+using zypp::ProgressData;
+
 class Table;
+class Zypper;
 
 // Too simple on small terminals as esc-sequences may get truncated.
 // A table like writer for attributed strings is desirable.
@@ -147,6 +154,8 @@ public:
    *                  types of output.
    */
   virtual void info(const std::string & msg, Verbosity verbosity = NORMAL, Type mask = TYPE_ALL) = 0;
+  void info( const boost::format & msg, Verbosity verbosity = NORMAL, Type mask = TYPE_ALL )
+  { info( msg.str(), verbosity, mask ); }
 
   /** \ref info taking a \ref TermLine */
   virtual void infoLine(const TermLine & msg_r, Verbosity verbosity_r = NORMAL, Type mask_r = TYPE_ALL)
@@ -166,6 +175,11 @@ public:
    *                  types of output.
    */
   virtual void warning(const std::string & msg, Verbosity verbosity = NORMAL, Type mask = TYPE_ALL) = 0;
+  void warning( const boost::format & msg, Verbosity verbosity = NORMAL, Type mask = TYPE_ALL )
+  { warning( msg.str(), verbosity, mask ); }
+
+  /** Convenience class for error reporting. */
+  class Error;
 
   /**
    * Show an error message and an optional hint.
@@ -176,6 +190,8 @@ public:
    * \param hint         Hint for the user (what to do, or explanation)
    */
   virtual void error(const std::string & problem_desc, const std::string & hint = "") = 0;
+  void error( const boost::format & problem_desc, const std::string & hint = "")
+  { error( problem_desc.str(), hint ); }
 
   /**
    * Prints the problem description caused by an exception, its cause and,
@@ -193,6 +209,10 @@ public:
 
   /** \name Progress of an operation. */
   //@{
+
+  /** Convenience class for progress output. */
+  class ProgressBar;
+
   /**
    * Start of an operation with reported progress.
    *
@@ -333,5 +353,211 @@ private:
   Verbosity _verbosity;
   Type      _type;
 };
+
+///////////////////////////////////////////////////////////////////
+/// \class Out::ProgressBar
+/// \brief Convenience class for progress output.
+///
+/// Progress start and end messages are provided upon object
+/// construction and deletion. Progress data are sent through a
+/// zypp::ProgressData object accessible via \ref operator->.
+///
+/// \code
+///    {
+///      Out::ProgressBar report( _zypper.out(), "Prepare action" );
+///      for ( unsigned i = 0; i < 10; ++ i )
+///      {
+///        report->tick();	// turn wheel
+///        sleep(1);
+///      }
+///      report->range( 10 );	// switch to percent mode [0,10]
+///      report.print( "Running action" );
+///      for ( unsigned i = 0; i < 10; ++ i )
+///      {
+///        report->
+///        report->set( i );	// send 0%, 10%, ...
+///        sleep(1);
+///      }
+///      // report.error( "Action failed" );
+///    }
+/// \endcode
+///
+/// If non zero values for \a current_r or \a total_r are passed to
+/// the ctor, the label is prefixed by either "(#C)" or "(#C/#T)"
+///
+/// \todo ProgressData provides NumericId which might be used as
+/// id for_out.progress*().
+///////////////////////////////////////////////////////////////////
+class Out::ProgressBar : private zypp::base::NonCopyable
+{
+public:
+  /** Ctor displays initial progress bar.
+   * If non zero values for \a current_r or \a total_r are passed,
+   * the label is prefixed by either "(#C)" or "(#C/#T)"
+   */
+  ProgressBar( Out & out_r, const std::string & label_r, unsigned current_r = 0, unsigned total_r = 0 )
+  : _out( out_r )
+  , _error( indeterminate )
+  {
+    if ( total_r )
+      _labelPrefix = zypp::str::form( "(%*u/%u) ", numDigits( total_r ), current_r, total_r );
+    else if ( current_r )
+      _labelPrefix = zypp::str::form( "(%u) ", current_r );
+    _progress.name( label_r );
+    _progress.sendTo( Print( *this ) );
+    _out.progressStart( "", outLabel( _progress.name() ) );
+  }
+
+  /** Dtor displays final progress bar.
+    * Unless \ref error has explicitly been set, an error is indicated if
+    * a \ref ProgressData range has been set, but 100% were not reached.
+    */
+  ~ProgressBar()
+  {
+    _progress.noSend();	// suppress ~ProgressData final report
+    if ( indeterminate( _error ) )
+      _error = ( _progress.reportValue() != 100 && _progress.reportPercent() );
+    _out.progressEnd( "", outLabel( _progress.name() ), _error );
+  }
+
+  /** Immediately print the progress bar not waiting for a new trigger. */
+  void print()
+  { _out.progress( "", outLabel( _progress.name() ), _progress.reportValue() ); }
+
+  /** \overload also change the progress bar label. */
+  void print( const std::string & label_r )
+  { _progress.name( label_r ); print(); }
+
+  /** Explicitly indicate the error condition for the final progress bar. */
+  void error( tribool error_r = true )
+  { _error = error_r; }
+
+  /** \overload to disambiguate. */
+  void error( bool error_r )
+  { _error = error_r; }
+
+  /** \overload also change the progress bar label. */
+  void error( const std::string & label_r )
+  { _progress.name( label_r ); error( true ); }
+
+  /** \overload also change the progress bar label. */
+  void error( tribool error_r, const std::string & label_r )
+  { _progress.name( label_r ); error( error_r ); }
+
+public:
+  /** \name Access the embedded ProgressData object */
+  //@{
+  zypp::ProgressData * operator->()
+  { return &_progress; }
+
+  const zypp::ProgressData * operator->() const
+  { return &_progress; }
+
+  zypp::ProgressData & operator*()
+  { return _progress; }
+
+  const zypp::ProgressData & operator*() const
+  { return _progress; }
+  //@}
+
+private:
+  /** ProgressData::ReceiverFnc printing to a ProgressBar.
+    *
+    * \note This could also be used to let an external \ref ProgressData object
+    * trigger a \ref ProgressBar. \ref ProgressBar::label and \ref ProgressBar::print
+    * however use the embedded ProgressData object (esp. it's label). So don't mix this.
+    */
+  struct Print
+  {
+    Print( ProgressBar & bar_r ) : _bar( &bar_r ) {}
+    bool operator()( const ProgressData & progress_r )
+    { _bar->_out.progress( "", _bar->outLabel( progress_r.name() ), progress_r.reportValue() ); return true; }
+  private:
+    ProgressBar * _bar;
+  };
+
+  std::string outLabel( const std::string & msg_r ) const
+  { return _labelPrefix.empty() ? msg_r : _labelPrefix + msg_r; }
+
+  int numDigits( unsigned num_r ) const
+  { int ret = 1; while ( num_r /= 10 ) ++ret; return ret; }
+
+private:
+  Out & _out;
+  tribool _error;
+  ProgressData _progress;
+  std::string _labelPrefix;
+};
+///////////////////////////////////////////////////////////////////
+
+///////////////////////////////////////////////////////////////////
+/// \class Out::Error
+/// \brief Convenience class Error reporting.
+///
+/// Called action methods may \c throw this as exception. The calling function
+/// should catch and process it (e.g. by calling \ref report).
+///
+/// This allows e.g. active \ref Out::ProgressBar objects to close properly
+/// before the error message is displayed.
+///
+/// \code
+///     try {
+///       Out::ProgressBar report( zypper_r.out(), _("Scanning download directory") );
+///       report->range( todolist.size() );
+///       // now report will indicate an error id closed before reaching 100%
+///       ....
+///       if ( some error )
+///         throw( Out::Error( ZYPPER_EXIT_ERR_BUG,
+///                           _("Failed to read download directory"),
+///                           Errno().asString() ) );
+///
+///     }
+///     catch ( const SourceDownloadImpl::Error & error_r )
+///     {
+///       // Default way of processing a caught Error exception:
+///       // - Write error message and optional hint to screen.
+///       // - Set the ZYPPER_EXIT_ code if necessary.
+///       // - Return the current ZYPPER_EXIT_ code.
+///       return error_r.report( zypper_r );
+///     }
+/// \endcode
+///////////////////////////////////////////////////////////////////
+struct Out::Error
+{
+  Error()
+  : _exitcode( ZYPPER_EXIT_OK ) {}
+  Error( int exitcode_r )
+  : _exitcode( exitcode_r ) {}
+
+  Error( int exitcode_r, const std::string & msg_r, const std::string & hint_r = std::string() )
+  : _exitcode( exitcode_r ) , _msg( msg_r ) , _hint( hint_r ) {}
+  Error( int exitcode_r, const boost::format & msg_r, const std::string & hint_r = std::string() )
+  : _exitcode( exitcode_r ) , _msg( boost::str( msg_r ) ) , _hint( hint_r ) {}
+  Error( int exitcode_r, const std::string & msg_r, const boost::format & hint_r )
+  : _exitcode( exitcode_r ) , _msg( msg_r ) , _hint(  boost::str( hint_r ) ) {}
+  Error( int exitcode_r, const boost::format & msg_r, const boost::format & hint_r )
+  : _exitcode( exitcode_r ) , _msg( boost::str( msg_r ) ) , _hint( boost::str( hint_r ) ) {}
+
+  Error( const std::string & msg_r, const std::string & hint_r = std::string() )
+  : _exitcode( ZYPPER_EXIT_OK ) , _msg( msg_r ) , _hint( hint_r ) {}
+  Error( const boost::format & msg_r, const std::string & hint_r = std::string() )
+  : _exitcode( ZYPPER_EXIT_OK ) , _msg( boost::str( msg_r ) ) , _hint( hint_r ) {}
+  Error( const std::string & msg_r, const boost::format & hint_r )
+  : _exitcode( ZYPPER_EXIT_OK ) , _msg( msg_r ) , _hint(  boost::str( hint_r ) ) {}
+  Error( const boost::format & msg_r, const boost::format & hint_r )
+  : _exitcode( ZYPPER_EXIT_OK ) , _msg( boost::str( msg_r ) ) , _hint( boost::str( hint_r ) ) {}
+
+  /** Default way of processing a caught \ref Error exception.
+   * \li Write error message and optional hint to screen.
+   * \li Set the ZYPPER_EXIT_ code if necessary.
+   * \returns the zypper exitcode.
+   */
+  int report( Zypper & zypper_r ) const;
+
+  int _exitcode;	//< ZYPPER_EXIT_OK indicates exitcode is already set.
+  std::string _msg;
+  std::string _hint;
+};
+///////////////////////////////////////////////////////////////////
 
 #endif /*OUT_H_*/
