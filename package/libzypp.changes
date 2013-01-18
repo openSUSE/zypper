@@ -1,4 +1,11 @@
 -------------------------------------------------------------------
+Fri Jan 18 14:07:50 CET 2013 - ma@suse.de
+
+- Reduce logging
+- MediaMultiCurl: throw AbortRequestException if aborted by user
+- version 12.7.0 (0)
+
+-------------------------------------------------------------------
 Sun Jan 13 01:13:23 CET 2013 - ma@suse.de
 
 - Update zypp-po.tar.bz2
