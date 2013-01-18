@@ -24,7 +24,6 @@
 
 #include "zypp/ZConfig.h"
 #include "zypp/base/Logger.h"
-#include "zypp/base/UserRequestException.h"
 #include "zypp/media/MediaMultiCurl.h"
 #include "zypp/media/MetaLinkParser.h"
 
@@ -1130,7 +1129,7 @@ multifetchrequest::run(std::vector<Url> &urllist)
 	  if (now > _starttime)
 	    avg = _fetchedsize / (now - _starttime);
 	  if (!(*(_report))->progress(percent, _baseurl, avg, _lastperiodstart == _starttime ? avg : _periodavg))
-	    ZYPP_THROW(AbortRequestException("User requested to abort",MediaCurlException(_baseurl, "User abort", "cancelled")));
+	    ZYPP_THROW(MediaCurlException(_baseurl, "User abort", "cancelled"));
 	}
 
       if (_timeout && now - _lastprogress > _timeout)
@@ -1372,9 +1371,9 @@ void MediaMultiCurl::doGetFileCopy( const Pathname & filename , const Pathname &
 	    {
 	      multifetch(filename, file, &urls, &report, &bl);
 	    }
-	  catch (AbortRequestException &ex)
+	  catch (MediaCurlException &ex)
 	    {
-	      userabort = true;
+	      userabort = ex.errstr() == "User abort";
 	      ZYPP_RETHROW(ex);
 	    }
 	}
