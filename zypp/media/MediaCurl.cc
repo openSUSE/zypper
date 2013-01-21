@@ -157,9 +157,10 @@ namespace zypp {
   namespace {
     struct ProgressData
     {
-      ProgressData(const long _timeout, const zypp::Url &_url = zypp::Url(),
+      ProgressData(CURL *_curl, const long _timeout, const zypp::Url &_url = zypp::Url(),
                    callback::SendReport<DownloadProgressReport> *_report=NULL)
-        : timeout(_timeout)
+        : curl(_curl)
+        , timeout(_timeout)
         , reached(false)
         , report(_report)
         , drate_period(-1)
@@ -171,6 +172,7 @@ namespace zypp {
         , uload( 0)
         , url(_url)
       {}
+      CURL                                         *curl;
       long                                          timeout;
       bool                                          reached;
       callback::SendReport<DownloadProgressReport> *report;
@@ -1397,7 +1399,7 @@ void MediaCurl::doGetFileCopyFile( const Pathname & filename , const Pathname & 
     }
 
     // Set callback and perform.
-    ProgressData progressData(_settings.timeout(), url, &report);
+    ProgressData progressData(_curl, _settings.timeout(), url, &report);
     if (!(options & OPTION_NO_REPORT_START))
       report->start(url, dest);
     if ( curl_easy_setopt( _curl, CURLOPT_PROGRESSDATA, &progressData ) != 0 ) {
@@ -1515,6 +1517,11 @@ int MediaCurl::progressCallback( void *clientp,
   ProgressData *pdata = reinterpret_cast<ProgressData *>(clientp);
   if( pdata)
   {
+    // work around curl bug that gives us old data
+    long httpReturnCode = 0; 
+    if (curl_easy_getinfo(pdata->curl, CURLINFO_RESPONSE_CODE, &httpReturnCode) != CURLE_OK || httpReturnCode == 0)
+      return 0;
+
     time_t now   = time(NULL);
     if( now > 0)
     {
@@ -1595,6 +1602,12 @@ int MediaCurl::progressCallback( void *clientp,
     }
   }
   return 0;
+}
+
+CURL *MediaCurl::progressCallback_getcurl( void *clientp )
+{
+  ProgressData *pdata = reinterpret_cast<ProgressData *>(clientp);
+  return pdata ? pdata->curl : 0;
 }
 
 ///////////////////////////////////////////////////////////////////

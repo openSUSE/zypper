@@ -116,6 +116,7 @@ class MediaCurl : public MediaHandler
 
     static int progressCallback( void *clientp, double dltotal, double dlnow,
                                  double ultotal, double ulnow );
+    static CURL *progressCallback_getcurl( void *clientp );
     /**
      * check the url is supported by the curl library
      * \throws MediaBadUrlException if there is a problem
