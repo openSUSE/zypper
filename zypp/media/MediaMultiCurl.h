@@ -59,6 +59,7 @@ protected:
 
   virtual void setupEasy();
   void checkFileDigest(Url &url, FILE *fp, MediaBlockList *blklist) const;
+  static int progressCallback( void *clientp, double dltotal, double dlnow, double ultotal, double ulnow );
 
 private:
   // the custom headers from MediaCurl plus a "Accept: metalink" header

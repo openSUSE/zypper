@@ -1199,15 +1199,12 @@ void MediaMultiCurl::setupEasy()
   _customHeadersMetalink = curl_slist_append(_customHeadersMetalink, "Accept: */*, application/metalink+xml, application/metalink4+xml");
 }
 
-static bool looks_like_metalink(const Pathname & file)
+static bool looks_like_metalink_fd(int fd)
 {
   char buf[256], *p;
-  int fd, l;
-  if ((fd = open(file.asString().c_str(), O_RDONLY|O_CLOEXEC)) == -1)
-    return false;
-  while ((l = read(fd, buf, sizeof(buf) - 1)) == -1 && errno == EINTR)
+  int l;
+  while ((l = pread(fd, buf, sizeof(buf) - 1, (off_t)0)) == -1 && errno == EINTR)
     ;
-  close(fd);
   if (l == -1)
     return 0;
   buf[l] = 0;
@@ -1224,8 +1221,64 @@ static bool looks_like_metalink(const Pathname & file)
 	p++;
     }
   bool ret = !strncasecmp(p, "<metalink", 9) ? true : false;
+  return ret;
+}
+
+static bool looks_like_metalink(const Pathname & file)
+{
+  int fd;
+  if ((fd = open(file.asString().c_str(), O_RDONLY|O_CLOEXEC)) == -1)
+    return false;
+  bool ret = looks_like_metalink_fd(fd);
+  close(fd);
   DBG << "looks_like_metalink(" << file << "): " << ret << endl;
   return ret;
+}
+
+// here we try to suppress all progress coming from a metalink download
+int MediaMultiCurl::progressCallback( void *clientp, double dltotal, double dlnow, double ultotal, double ulnow)
+{
+  CURL *_curl = MediaCurl::progressCallback_getcurl(clientp);
+  if (!_curl)
+    return 0;
+
+  // work around curl bug that gives us old data
+  long httpReturnCode = 0;
+  if (curl_easy_getinfo(_curl, CURLINFO_RESPONSE_CODE, &httpReturnCode ) != CURLE_OK || httpReturnCode == 0)
+    return 0;
+
+  char *ptr = NULL;
+  bool ismetalink = false;
+  if (curl_easy_getinfo(_curl, CURLINFO_CONTENT_TYPE, &ptr) == CURLE_OK && ptr) 
+    {    
+      string ct = string(ptr);
+      if (ct.find("application/metalink+xml") == 0 || ct.find("application/metalink4+xml") == 0)
+        ismetalink = true;
+    }    
+  if (!ismetalink && dlnow < 256)
+    {
+      // can't tell yet, suppress callback
+      return 0;
+    }
+  if (!ismetalink)
+    {
+      FILE *fp = 0;
+      if (curl_easy_getinfo(_curl, CURLINFO_PRIVATE, &fp) != CURLE_OK)
+	return 0;
+      if (!fp)
+	return 0;	/* hmm */
+      fflush(fp);
+      ismetalink = looks_like_metalink_fd(fileno(fp));
+      DBG << "looks_like_metalink_fd: " << ismetalink << endl;
+    }
+  if (ismetalink)
+    {
+      // we're downloading the metalink file. no progress please.
+      curl_easy_setopt(_curl, CURLOPT_NOPROGRESS, 1L);
+      return 0;
+    }
+  curl_easy_setopt(_curl, CURLOPT_PROGRESSFUNCTION, &MediaCurl::progressCallback);
+  return MediaCurl::progressCallback(clientp, dltotal, dlnow, ultotal, ulnow);
 }
 
 void MediaMultiCurl::doGetFileCopy( const Pathname & filename , const Pathname & target, callback::SendReport<DownloadProgressReport> & report, RequestOptions options ) const
@@ -1279,6 +1332,9 @@ void MediaMultiCurl::doGetFileCopy( const Pathname & filename , const Pathname &
   }
   // change header to include Accept: metalink
   curl_easy_setopt(_curl, CURLOPT_HTTPHEADER, _customHeadersMetalink);
+  // change to our own progress funcion
+  curl_easy_setopt(_curl, CURLOPT_PROGRESSFUNCTION, &progressCallback);
+  curl_easy_setopt(_curl, CURLOPT_PRIVATE, file);
   try
     {
       MediaCurl::doGetFileCopyFile(filename, dest, file, report, options);
@@ -1290,11 +1346,13 @@ void MediaMultiCurl::doGetFileCopy( const Pathname & filename , const Pathname &
       curl_easy_setopt(_curl, CURLOPT_TIMECONDITION, CURL_TIMECOND_NONE);
       curl_easy_setopt(_curl, CURLOPT_TIMEVALUE, 0L);
       curl_easy_setopt(_curl, CURLOPT_HTTPHEADER, _customHeaders);
+      curl_easy_setopt(_curl, CURLOPT_PRIVATE, (void *)0);
       ZYPP_RETHROW(ex);
     }
   curl_easy_setopt(_curl, CURLOPT_TIMECONDITION, CURL_TIMECOND_NONE);
   curl_easy_setopt(_curl, CURLOPT_TIMEVALUE, 0L);
   curl_easy_setopt(_curl, CURLOPT_HTTPHEADER, _customHeaders);
+  curl_easy_setopt(_curl, CURLOPT_PRIVATE, (void *)0);
   long httpReturnCode = 0;
   CURLcode infoRet = curl_easy_getinfo(_curl, CURLINFO_RESPONSE_CODE, &httpReturnCode);
   if (infoRet == CURLE_OK)
