@@ -1,4 +1,12 @@
 -------------------------------------------------------------------
+Tue Jan 22 11:06:55 CET 2013 - ma@suse.de
+
+- make multicurl suppress progress reports for the metalink download
+- work around libcurl bug that sometimes gives us old values in the 
+  progress callback
+- version 12.8.0 (0)
+
+-------------------------------------------------------------------
 Fri Jan 18 14:07:50 CET 2013 - ma@suse.de
 
 - Reduce logging
