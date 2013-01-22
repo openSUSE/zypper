@@ -33,6 +33,7 @@
 #include <zypp/sat/SolvAttr.h>
 #include <zypp/PoolQuery.h>
 #include <zypp/Locks.h>
+#include <zypp/Edition.h>
 
 #include <zypp/target/rpm/RpmHeader.h> // for install <.rpmURI>
 
@@ -1890,6 +1891,12 @@ void Zypper::processCommandOptions()
       {"match-substrings", no_argument, 0, 0},
       {"match-words", no_argument, 0, 0},
       {"match-exact", no_argument, 0, 0},
+      {"provides", no_argument, 0, 0},
+      {"requires", no_argument, 0, 0},
+      {"recommends", no_argument, 0, 0},
+      {"conflicts", no_argument, 0, 0},
+      {"obsoletes", no_argument, 0, 0},
+      {"suggests", no_argument, 0, 0},
       {"search-descriptions", no_argument, 0, 'd'},
       {"case-sensitive", no_argument, 0, 'C'},
       {"type",    required_argument, 0, 't'},
@@ -1916,6 +1923,12 @@ void Zypper::processCommandOptions()
       "    --match-substrings     Search for a match to partial words (default).\n"
       "    --match-words          Search for a match to whole words only.\n"
       "    --match-exact          Searches for an exact package name.\n"
+      "    --provides             Search for packages which provide the search strings.\n"
+      "    --recommends           Search for packages which recommend the search strings.\n"
+      "    --requires             Search for packages which require the search strings.\n"
+      "    --suggests             Search what packages are suggested by the search strings.\n"
+      "    --conflicts            Search packages conflicting with search strings.\n"
+      "    --obsoletes            Search for packages which obsolete the search strings.\n"
       "-d, --search-descriptions  Search also in package summaries and descriptions.\n"
       "-C, --case-sensitive       Perform case-sensitive search.\n"
       "-i, --installed-only       Show only packages that are already installed.\n"
@@ -1928,6 +1941,7 @@ void Zypper::processCommandOptions()
       "                           on a separate line.\n"
       "\n"
       "* and ? wildcards can also be used within search strings.\n"
+      "If a search string is enclosed in '/', it's interpreted as a regular expression.\n"
     );
     break;
   }
@@ -3759,12 +3773,27 @@ void Zypper::doCommand()
     }
     if (copts.count("installed-only"))
       inst_notinst = true;
+
     //  query.setInstalledOnly();
     //if (copts.count("match-any")) options.setMatchAny();
-    if (copts.count("match-words"))
-      query.setMatchWord();
+
     if (copts.count("match-exact"))
+    {
       query.setMatchExact();
+    }
+
+    if (copts.count("match-words"))
+    {
+      if ( query.matchExact() )
+      {
+        out().info(_("Mode is set to 'match-exact'") );
+      }
+      else
+      {
+        query.setMatchWord();
+      }
+    }
+
     if (copts.count("case-sensitive"))
       query.setCaseSensitive();
 
@@ -3810,18 +3839,79 @@ void Zypper::doCommand()
       }
     }
 
-    for(vector<string>::const_iterator it = _arguments.begin();
-        it != _arguments.end(); ++it)
+    bool details = false;
+    // add argument strings and attributes to query
+    for ( vector<string>::const_iterator it = _arguments.begin();
+          it != _arguments.end(); ++it )
     {
-      query.addString(*it);
-      if (!query.matchGlob() && it->find_first_of("?*") != string::npos)
+      Capability cap = Capability::guessPackageSpec( *it );
+      string name = cap.detail().name().asString();
+
+      if ( !query.matchRegex() && !query.matchExact() && name.find_first_of("?*") != string::npos )
         query.setMatchGlob();
-    }
-    query.addAttribute(sat::SolvAttr::name);
-    if (cOpts().count("search-descriptions"))
-    {
-      query.addAttribute(sat::SolvAttr::summary);
-      query.addAttribute(sat::SolvAttr::description);
+
+      if ( cap.detail().isVersioned() )
+      {
+        // show details if any search string includes an edition
+        details = true;
+      }
+
+      if ( !query.matchGlob() && !query.matchExact() && str::regex_match(name.c_str(), string("^/.*/$")) )
+      {
+        name = name.substr( 1, name.size()-2 );
+        query.setMatchRegex();
+      }
+
+      zypp::sat::SolvAttr attr = sat::SolvAttr::name;
+
+      if (copts.count("provides"))
+      {
+        attr =  zypp::sat::SolvAttr::provides;
+        query.addDependency( attr , name, cap.detail().op(), cap.detail().ed(), Arch(cap.detail().arch()) );
+      }
+      if (copts.count("requires"))
+      {
+        attr =  zypp::sat::SolvAttr::requires;
+        query.addDependency( attr , name, cap.detail().op(), cap.detail().ed(), Arch(cap.detail().arch()) );
+      }
+      if (copts.count("recommends"))
+      {
+        attr = zypp::sat::SolvAttr::recommends;
+        query.addDependency( attr , name, cap.detail().op(), cap.detail().ed(), Arch(cap.detail().arch()) );
+      }
+      if (copts.count("suggests"))
+      {
+        attr =  zypp::sat::SolvAttr::suggests;
+        query.addDependency( attr , name, cap.detail().op(), cap.detail().ed(), Arch(cap.detail().arch()) );
+      }
+      if (copts.count("conflicts"))
+      {
+        attr = zypp::sat::SolvAttr::conflicts;
+        query.addDependency( attr , name, cap.detail().op(), cap.detail().ed(), Arch(cap.detail().arch()) );
+      }
+      if (copts.count("obsoletes"))
+      {
+        attr = zypp::sat::SolvAttr::obsoletes;
+        query.addDependency( attr , name, cap.detail().op(), cap.detail().ed(), Arch(cap.detail().arch()) );
+      }
+      if ( attr == sat::SolvAttr::name )
+      {
+        // addDependency can also be used for sat::SolvAttr::name
+        query.addDependency( attr, name, cap.detail().op(), cap.detail().ed(), Arch(cap.detail().arch()) );
+      }
+
+      if ( attr != sat::SolvAttr::name && cap.detail().isVersioned() )
+      {
+        // search in dependencies including edition only makes sense with exact match because
+        // all strings without an edition match to all editions
+        query.setMatchExact();
+      }
+      // for search in summary and description use addAttribute
+      if ( cOpts().count("search-descriptions") )
+      {
+        query.addAttribute(sat::SolvAttr::summary, name );
+        query.addAttribute(sat::SolvAttr::description, name );
+      }
     }
 
     init_target(*this);
@@ -3841,7 +3931,7 @@ void Zypper::doCommand()
         FillPatchesTable callback(t, inst_notinst);
         invokeOnEach(query.poolItemBegin(), query.poolItemEnd(), callback);
       }
-      else if (_gopts.is_rug_compatible || _copts.count("details"))
+      else if (_gopts.is_rug_compatible || _copts.count("details") || details)
       {
         FillSearchTableSolvable callback(t, inst_notinst);
         invokeOnEach(query.selectableBegin(), query.selectableEnd(), callback);
@@ -3992,6 +4082,10 @@ void Zypper::doCommand()
 
   case ZypperCommand::WHAT_PROVIDES_e:
   {
+    // The "what-provides" now is included in "search" command, e.g.
+    // zypper what-provides 'zypper>1.6'
+    // zypper se --match-exact --provides 'zypper>1.6'
+
     if (runningHelp()) { out().info(_command_help, Out::QUIET); return; }
 
     if (_arguments.empty())
