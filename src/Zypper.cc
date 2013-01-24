@@ -1157,8 +1157,9 @@ void Zypper::processCommandOptions()
       {"download-in-advance",       no_argument,       0,  0 },
       {"download-in-heaps",         no_argument,       0,  0 },
       {"download-as-needed",        no_argument,       0,  0 },
-      {"repo", required_argument, 0, 'r'},
-      {"no-recommends", no_argument, 0, 0},
+      {"repo",                      required_argument, 0, 'r'},
+      {"no-recommends",             no_argument,       0,  0 },
+      {"recommends",                no_argument,       0,  0 },
       {"help", no_argument, 0, 'h'},
       {"debug-solver", no_argument, 0, 0},
       {0, 0, 0, 0}
