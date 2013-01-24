@@ -66,7 +66,7 @@ namespace zypp
   namespace zypp_readonly_hack
   { /////////////////////////////////////////////////////////////////
 
-    static bool active = false;
+    static bool active = getenv("ZYPP_READONLY_HACK");
 
     void IWantIt()
     {
