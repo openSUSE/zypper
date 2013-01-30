@@ -512,7 +512,7 @@ void SolverRequester::updateTo(
       setToInstall(selected);
       MIL << *s << " update: setting " << selected << " to install" << endl;
     }
-    else if (_opts.force)
+    else if (_opts.force || _opts.oldpackage)
     {
       // set 'candidate' for installation
       setToInstall(selected);
@@ -557,12 +557,12 @@ void SolverRequester::updateTo(
   }
   else if (installed->edition() > selected->edition())
   {
-    if (_opts.force)
+    if (_opts.force || _opts.oldpackage)
       return;
 
     addFeedback(Feedback::SELECTED_IS_OLDER, pkg, selected, installed);
     MIL << "Selected is older than the installed."
-        " Will not downgrade unless --force is used" << endl;
+        " Will not downgrade unless --oldpackage is used" << endl;
   }
 
   // there is higher version available than the selected candidate
