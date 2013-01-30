@@ -50,6 +50,7 @@ public:
   {
     Options()
       : force(false)
+      , oldpackage(false)
       , force_by_cap(false)
       , force_by_name(false)
       , best_effort(false)
@@ -67,6 +68,12 @@ public:
      * \todo define the cases
      */
     bool force;
+
+    /**
+     * If true, an explicit version downgrade upon install will be allowed.
+     * Enables rollback without need to use the 'malicious --force'.
+     */
+    bool oldpackage;
 
     /**
      * Force package selection by capabilities they provide.
@@ -157,7 +164,7 @@ public:
 
       /**
        * Selected object is older that the installed. Won't allow downgrade
-       * unless --force is used.
+       * unless --oldpackage is used.
        */
       SELECTED_IS_OLDER,
 

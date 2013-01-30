@@ -296,7 +296,10 @@ detailed information about a product.
 Select packages by their name, don't try to select by capabilities.
 .TP
 .I \-f, \-\-force
-Install even if the item is already installed (reinstall)
+Install even if the item is already installed (reinstall), downgraded or changes vendor or architecture.
+.TP
+.I \ \ \ \ \-\-oldpackage
+Allow to replace a newer item with an older one. Handy if you are doing a rollback. Unlike --force it will not enforce a reinstall, if the item is already installed with the requested version.
 .TP
 .I \ \ \ \ \-\-from <alias|name|#|URI>
 Select packages from specified repository. If strings specified as arguments
