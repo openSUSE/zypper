@@ -41,6 +41,8 @@ URL:            http://en.opensuse.org/Zypper
 Provides:       y2pmsh
 Obsoletes:      y2pmsh
 
+Provides:       zypper(oldpackage)
+
 %description
 Zypper is a command line tool for managing software. It can be used to add
 package repositories, search for packages, install, remove, or update packages,
