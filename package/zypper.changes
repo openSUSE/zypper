@@ -1,4 +1,12 @@
 -------------------------------------------------------------------
+Wed Jan 30 12:32:41 CET 2013 - ma@suse.de
+
+- Add '--oldpackage' to allow rollback without malicious --force 
+  (bnc#795076)
+- Add missing --recommends to verify command (bnc#722551)
+- version 1.8.9
+
+-------------------------------------------------------------------
 Fri Jan 18 21:17:52 CET 2013 - ma@suse.de
 
 - Add source-download command (fate#313445)
