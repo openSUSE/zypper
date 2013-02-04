@@ -1,4 +1,9 @@
 -------------------------------------------------------------------
+Mon Feb  4 12:35:51 CET 2013 - ma@suse.de
+
+- Update zypp-po.tar.bz2
+
+-------------------------------------------------------------------
 Tue Jan 22 11:06:55 CET 2013 - ma@suse.de
 
 - make multicurl suppress progress reports for the metalink download
