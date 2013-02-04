@@ -1,4 +1,9 @@
 -------------------------------------------------------------------
+Mon Feb  4 12:36:21 CET 2013 - ma@suse.de
+
+- Update zypper-po.tar.bz2
+
+-------------------------------------------------------------------
 Wed Jan 30 12:32:41 CET 2013 - ma@suse.de
 
 - Add '--oldpackage' to allow rollback without malicious --force 
