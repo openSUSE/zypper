@@ -2076,6 +2076,7 @@ void Zypper::processCommandOptions()
   case ZypperCommand::INFO_e:
   {
     static struct option info_options[] = {
+      {"match-substrings", no_argument, 0, 's'},
       {"type", required_argument, 0, 't'},
       {"repo", required_argument, 0, 'r'},
       // rug compatibility option, we have --repo
@@ -2090,8 +2091,12 @@ void Zypper::processCommandOptions()
         "info (if) [options] <name> ...\n"
         "\n"
         "Show detailed information for specified packages.\n"
+        "By default the packages which match exactly the given names are shown.\n"
+        "To get also packages partially matching use option '--match-substrings'\n"
+        "or use wildcards (*?) in name.\n"
         "\n"
         "  Command options:\n"
+        "-s, --match-substrings    Print information for packages partially matching name.\n"
         "-r, --repo <alias|#|URI>  Work only with the specified repository.\n"
         "-t, --type <type>         Type of package (%s).\n"
         "                          Default: %s.\n"
