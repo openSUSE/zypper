@@ -904,6 +904,7 @@ void Zypper::processCommandOptions()
       // the default (ignored)
       {"name",                      no_argument,       0, 'n'},
       {"force",                     no_argument,       0, 'f'},
+      {"oldpackage",                no_argument,       0,  0 },
       {"capability",                no_argument,       0, 'C'},
       // rug compatibility, we have global --non-interactive
       {"no-confirm",                no_argument,       0, 'y'},
@@ -948,8 +949,11 @@ void Zypper::processCommandOptions()
       "                            Default: %s.\n"
       "-n, --name                  Select packages by plain name, not by capability.\n"
       "-C, --capability            Select packages by capability.\n"
-      "-f, --force                 Reinstall the package if the exact version is\n"
-      "                            available in repositories.\n"
+      "-f, --force                 Install even if the item is already installed (reinstall),\n"
+      "                            downgraded or changes vendor or architecture.\n"
+      "    --oldpackage            Allow to replace a newer item with an older one.\n"
+      "                            Handy if you are doing a rollback. Unlike --force\n"
+      "                            it will not enforce a reinstall.\n"
       "-l, --auto-agree-with-licenses\n"
       "                            Automatically say 'yes' to third party license\n"
       "                            confirmation prompt.\n"

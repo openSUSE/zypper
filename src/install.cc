@@ -761,6 +761,44 @@ void install_remove(Zypper & zypper,
       continue;
     }
 
+    if ( copts.count("oldpackage") )
+    {
+      // A crude hack as we cannot convince the resolver not to
+      // complain about package downgrades via addRequire(). OTOH
+      // we do _not_ want to set a global 'allowDowngrade' solver
+      // option.
+      // So explicitly select the 'best' PoolItem in the query, if it
+      // would be a downgrade.
+      ui::Selectable::Ptr sel( *q.selectableBegin() );
+      if ( sel && sel->hasInstalledObj() && !sel->locked() )
+      {
+	PoolItem win;
+	unsigned winidx = unsigned(-1);	// idx in selectables av_list
+	for_( pi, q.poolItemBegin(), q.poolItemEnd() )
+	{
+	  unsigned idx = unsigned(-1);
+	  for_( it, sel->availableBegin(), sel->availableEnd() )
+	  {
+	    ++idx;
+	    if ( idx >= winidx )
+	      break;
+	    if ( *it == *pi )
+	    {
+	      win = *pi;
+	      winidx = idx;
+	      break;
+	    }
+	  }
+	}
+	if ( win && win->edition() < sel->installedObj()->edition() )
+	{
+	  MIL << "explicitly choose oldpackage " << win << endl;
+	  win.status().setToBeInstalled( ResStatus::USER );
+	  continue;
+	}
+      }
+    }
+
     mark_by_capability (zypper, install_not_remove, kind, parsedcap);
   }
 }

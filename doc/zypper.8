@@ -282,7 +282,10 @@ detailed information about a product.
 Select packages by their name, don't try to select by capabilities.
 .TP
 .I \-f, \-\-force
-Install even if the item is already installed (reinstall)
+Install even if the item is already installed (reinstall), downgraded or changes vendor or architecture.
+.TP
+.I \ \ \ \ \-\-oldpackage
+Allow to replace a newer item with an older one. Handy if you are doing a rollback. Unlike --force it will not enforce a reinstall, if the item is already installed with the requested version.
 .TP
 .I \ \ \ \ \-\-from <alias|name|#|URI>
 Select packages from specified repository. If strings specified as arguments
@@ -307,7 +310,7 @@ By default, zypper installs also packages recommended by the requested ones.
 This option causes the recomended packages to be ignored and only the
 required ones to be installed.
 .TP
-.I \-R, \-\-no\-force\-resolution 
+.I \-R, \-\-no\-force\-resolution
 Do not force the solver to find a solution. Instead, report
 dependency problem and prompt the user to resolve it manually.
 .TP
@@ -411,7 +414,7 @@ to install or remove to fix them.
 By default, zypper installs also packages recommended by the requested ones
 (the ones needed to fix broken dependencies in this case).
 This option causes the recomended packages to be ignored and only the
-required ones to be installed. 
+required ones to be installed.
 .TP
 .I \-D, \-\-dry-run
 Test the repair, do not actually do anything to the system.
@@ -478,7 +481,7 @@ Select packages by capabilities.
 .I      \-\-debug\-solver
 Create solver test case for debugging. See the install command for details.
 .TP
-.I \-R, \-\-no\-force\-resolution 
+.I \-R, \-\-no\-force\-resolution
 Do not force the solver to find a solution. Instead, report
 dependency problem and prompt the user to resolve it manually.
 .TP
@@ -568,7 +571,7 @@ By default, zypper installs also packages recommended by the requested ones.
 This option causes the recomended packages to be ignored and only the
 required ones to be installed.
 .TP
-.I \-R, \-\-no\-force\-resolution 
+.I \-R, \-\-no\-force\-resolution
 Do not force the solver to find a solution. Instead, report
 dependency problem and prompt the user to resolve it manually.
 .TP
@@ -972,7 +975,7 @@ set using the commands described in this section below, or by manually
 editing the repository definition files (.repo files, see section FILES).
 
 .TP
-.B addrepo (ar) [options] <URI> <alias> 
+.B addrepo (ar) [options] <URI> <alias>
 .TP
 .B addrepo (ar) [options] <FILE.repo>
 
@@ -1275,7 +1278,7 @@ Modify properties of specified services.
 
 .TP
 Common Options
-These options are common to all types of services and repositories. 
+These options are common to all types of services and repositories.
 .TP
 .I \-d, \-\-disable
 Disable the service (but don't remove it).
@@ -1326,7 +1329,7 @@ Clear the list of RIS repositories to enable.
 .TP
 .I \-K, --cl-to-disable
 Clear the list of RIS repositories to disable.
- 
+
 
 .TP
 .B services (ls) [options]
@@ -1386,7 +1389,7 @@ List currently active package locks.
 .TP
 .B addlock (al) [options] <package-name> ...
 Add a package lock. Specify packages to lock by exact name or by a glob pattern using '*' and '?'
-wildcard characters. 
+wildcard characters.
 
 .TP
 .I \-r, \-\-repo <alias|name|#|URI>
@@ -1494,7 +1497,7 @@ The list contains the following information:
 
 .SH "GLOBAL OPTIONS"
 
-.TP 
+.TP
 .I \-h, \-\-help
 Help. If a \fBcommand\fR is specified together with --help option, command specific help is displayed.
 .TP
@@ -1605,7 +1608,7 @@ as well as temporary files. See also the FILES section.
 .I \ \ \ \ \-\-disable\-system\-resolvables
 This option serves mainly for testing purposes. It will cause zypper to act
 as if there were no packages installed in the system. Use with caution as you
-can damage your system using this option. 
+can damage your system using this option.
 
 
 .SH "FILES"
@@ -1743,7 +1746,7 @@ Returned upon exiting after receiving a SIGINT or SIGTERM.
 
 .SH "COMPATIBILITY WITH RUG"
 .LP
-zypper is designed to be compatible with rug, which is a command\-line interface to the ZENworks Linux Management (ZLM) agent. Compared to rug, zypper does not need the ZLM daemon to run, and is intented to provide more and improved functionality. Following is a list of zypper-rug command aliases, supported rug command line options, and compatibility notes. See also compatibility notes in descriptions of zypper commands. 
+zypper is designed to be compatible with rug, which is a command\-line interface to the ZENworks Linux Management (ZLM) agent. Compared to rug, zypper does not need the ZLM daemon to run, and is intented to provide more and improved functionality. Following is a list of zypper-rug command aliases, supported rug command line options, and compatibility notes. See also compatibility notes in descriptions of zypper commands.
 .LP
 To enable rug-compatible behavior, use the \fI\-r or \-\-rug\-compatible\fR global option with each command.
 
