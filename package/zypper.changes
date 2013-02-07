@@ -1,4 +1,11 @@
 -------------------------------------------------------------------
+Thu Feb  7 14:43:11 CET 2013 - ma@suse.de
+
+- zypper commandline args must not silently overrule locks
+  (bnc#742633,bnc#788863)
+- version 1.6.29
+
+-------------------------------------------------------------------
 Mon Sep 10 15:52:50 CEST 2012 - ma@suse.de
 
 - Rephrase misleading sections about zypp.conf and zypper.conf (bnc#777323)
