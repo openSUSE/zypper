@@ -244,6 +244,15 @@ string SolverRequester::Feedback::asUserString(
     return str::form(_("Selecting '%s' for removal."),
         resolvable_user_string(*_objsel.resolvable()).c_str());
 
+  case INSTALLED_LOCKED:
+  {
+    ostringstream cmdhint;
+    cmdhint << "zypper removelock " << _objsel->name();
+    return str::form(
+        _("'%s' is locked. Use '%s' to unlock it."),
+        _objsel->name().c_str(), cmdhint.str().c_str());
+  }
+
   case ADDED_REQUIREMENT:
     return str::form(_("Adding requirement: '%s'."), _reqpkg.parsed_cap.asString().c_str());
 
@@ -290,6 +299,9 @@ void SolverRequester::Feedback::print(
   case ADDED_REQUIREMENT:
   case ADDED_CONFLICT:
     out.info(asUserString(opts), Out::HIGH);
+    break;
+  case INSTALLED_LOCKED:
+    out.warning(asUserString(opts), Out::HIGH);
     break;
   case PATCH_INTERACTIVE_SKIPPED:
     out.warning(asUserString(opts));
