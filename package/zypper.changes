@@ -1,4 +1,11 @@
 -------------------------------------------------------------------
+Thu Feb  7 14:44:46 CET 2013 - ma@suse.de
+
+- zypper commandline args must not silently overrule locks
+  (bnc#742633,bnc#788863)
+- version 1.6.303
+
+-------------------------------------------------------------------
 Wed Jan 30 12:51:17 CET 2013 - ma@suse.de
 
 - Add '--oldpackage' to allow rollback without malicious --force 
