@@ -617,6 +617,21 @@ void SolverRequester::setToInstall(const PoolItem & pi)
     pi.status().setToBeInstalled(ResStatus::USER);
     addFeedback(Feedback::FORCED_INSTALL, PackageSpec(), pi);
   }
+  else if ( asSelectable()(pi)->locked() )
+  {
+    // Workaround: Use a solver request instead of selecting the item.
+    // This will enable the solver to report the lock conflict, while
+    // selecting the item will silently remove the lock.
+    // Basically the right way but zypp solver job API needs polishing
+    // as ther are better jobs than 'addRequire'.
+    sat::Solvable solv( pi.satSolvable() );
+    Capability cap( solv.arch(), solv.name(), Rel::EQ, solv.edition(), solv.kind() );
+    zypp::getZYpp()->resolver()->addRequire( cap );
+    _requires.insert( cap );
+    addFeedback(Feedback::SET_TO_INSTALL, PackageSpec(), pi);
+    addFeedback(Feedback::INSTALLED_LOCKED, PackageSpec(), pi);
+    return;
+  }
   else
   {
     asSelectable()(pi)->setOnSystem(pi, ResStatus::USER);
@@ -629,6 +644,21 @@ void SolverRequester::setToInstall(const PoolItem & pi)
 
 void SolverRequester::setToRemove(const zypp::PoolItem & pi)
 {
+  if ( asSelectable()(pi)->locked() )
+  {
+    // Workaround: Use a solver request instead of selecting the item.
+    // This will enable the solver to report the lock conflict, while
+    // selecting the item will silently remove the lock.
+    // Basically the right way but zypp solver job API needs polishing
+    // as ther are better jobs than 'addRequire'.
+    sat::Solvable solv( pi.satSolvable() );
+    Capability cap( solv.arch(), solv.name(), Rel::EQ, solv.edition(), solv.kind() );
+    zypp::getZYpp()->resolver()->addConflict( cap );
+    _conflicts.insert( cap );
+    addFeedback(Feedback::SET_TO_REMOVE, PackageSpec(), pi);
+    addFeedback(Feedback::INSTALLED_LOCKED, PackageSpec(), pi);
+    return;
+  }
   pi.status().setToBeUninstalled(ResStatus::USER);
   addFeedback(Feedback::SET_TO_REMOVE, PackageSpec(), pi);
   _toremove.insert(pi);
