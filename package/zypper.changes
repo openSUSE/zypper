@@ -1,4 +1,9 @@
 -------------------------------------------------------------------
+Sun Feb 10 01:13:38 CET 2013 - ma@suse.de
+
+- Update zypper-po.tar.bz2
+
+-------------------------------------------------------------------
 Thu Feb  7 14:30:47 CET 2013 - ma@suse.de
 
 - zypper commandline args must not silently overrule locks 
