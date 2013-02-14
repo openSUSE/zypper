@@ -56,15 +56,17 @@ using std::endl;
 using std::string;
 using namespace zypp::repo;
 
+#define OPT_PROGRESS const ProgressData::ReceiverFnc & = ProgressData::ReceiverFnc()
+
 ///////////////////////////////////////////////////////////////////
 namespace zypp
-{ /////////////////////////////////////////////////////////////////
-
+{
+  ///////////////////////////////////////////////////////////////////
   namespace
   {
     /** Simple media mounter to access non-downloading URLs e.g. for non-local plaindir repos.
      * \ingroup g_RAII
-    */
+     */
     class MediaMounter
     {
       public:
@@ -97,6 +99,7 @@ namespace zypp
       private:
         media::MediaAccessId _mid;
     };
+    ///////////////////////////////////////////////////////////////////
 
     /** Check if alias_r is present in repo/service container. */
     template <class Iterator>
@@ -129,59 +132,35 @@ namespace zypp
     template <class Container>
     inline typename Container::const_iterator findAlias( const std::string & alias_r, const Container & cont_r )
     { return findAlias( alias_r, cont_r.begin(), cont_r.end() ); }
-  }
 
-  ///////////////////////////////////////////////////////////////////
-  //
-  //	CLASS NAME : RepoManagerOptions
-  //
-  ///////////////////////////////////////////////////////////////////
 
-  RepoManagerOptions::RepoManagerOptions( const Pathname & root_r )
-  {
-    repoCachePath         = Pathname::assertprefix( root_r, ZConfig::instance().repoCachePath() );
-    repoRawCachePath      = Pathname::assertprefix( root_r, ZConfig::instance().repoMetadataPath() );
-    repoSolvCachePath     = Pathname::assertprefix( root_r, ZConfig::instance().repoSolvfilesPath() );
-    repoPackagesCachePath = Pathname::assertprefix( root_r, ZConfig::instance().repoPackagesPath() );
-    knownReposPath        = Pathname::assertprefix( root_r, ZConfig::instance().knownReposPath() );
-    knownServicesPath     = Pathname::assertprefix( root_r, ZConfig::instance().knownServicesPath() );
-    pluginsPath           = Pathname::assertprefix( root_r, ZConfig::instance().pluginsPath() );
-    probe                 = ZConfig::instance().repo_add_probe();
+    /** \short Generate a related filename from a repo/service infos alias */
+    inline std::string filenameFromAlias( const std::string & alias_r, const std::string & stem_r )
+    {
+      std::string filename( alias_r );
+      // replace slashes with underscores
+      str::replaceAll( filename, "/", "_" );
 
-    rootDir = root_r;
-  }
+      filename = Pathname(filename).extend("."+stem_r).asString();
+      MIL << "generating filename for " << stem_r << " [" << alias_r << "] : '" << filename << "'" << endl;
+      return filename;
+    }
 
-  RepoManagerOptions RepoManagerOptions::makeTestSetup( const Pathname & root_r )
-  {
-    RepoManagerOptions ret;
-    ret.repoCachePath         = root_r;
-    ret.repoRawCachePath      = root_r/"raw";
-    ret.repoSolvCachePath     = root_r/"solv";
-    ret.repoPackagesCachePath = root_r/"packages";
-    ret.knownReposPath        = root_r/"repos.d";
-    ret.knownServicesPath     = root_r/"services.d";
-    ret.pluginsPath           = root_r/"plugins";
-    ret.rootDir = root_r;
-    return ret;
-  }
-
-  ////////////////////////////////////////////////////////////////////////////
-
-  /**
-    * \short Simple callback to collect the results
-    *
-    * Classes like RepoFileParser call the callback
-    * once per each repo in a file.
-    *
-    * Passing this functor as callback, you can collect
-    * all results at the end, without dealing with async
-    * code.
-    *
-    * If targetDistro is set, all repos with non-empty RepoInfo::targetDistribution()
-    * will be skipped.
-    *
-    * \todo do this through a separate filter
-    */
+    /**
+     * \short Simple callback to collect the results
+     *
+     * Classes like RepoFileParser call the callback
+     * once per each repo in a file.
+     *
+     * Passing this functor as callback, you can collect
+     * all results at the end, without dealing with async
+     * code.
+     *
+     * If targetDistro is set, all repos with non-empty RepoInfo::targetDistribution()
+     * will be skipped.
+     *
+     * \todo do this through a separate filter
+     */
     struct RepoCollector : private base::NonCopyable
     {
       RepoCollector()
@@ -213,163 +192,144 @@ namespace zypp
       RepoInfoList repos;
       std::string targetDistro;
     };
+    ////////////////////////////////////////////////////////////////////////////
 
-  ////////////////////////////////////////////////////////////////////////////
-
-  /**
-   * Reads RepoInfo's from a repo file.
-   *
-   * \param file pathname of the file to read.
-   */
-  static std::list<RepoInfo> repositories_in_file( const Pathname & file )
-  {
-    MIL << "repo file: " << file << endl;
-    RepoCollector collector;
-    parser::RepoFileReader parser( file, bind( &RepoCollector::collect, &collector, _1 ) );
-    return collector.repos;
-  }
-
-  ////////////////////////////////////////////////////////////////////////////
-
-  /**
-   * \short List of RepoInfo's from a directory
-   *
-   * Goes trough every file ending with ".repo" in a directory and adds all
-   * RepoInfo's contained in that file.
-   *
-   * \param dir pathname of the directory to read.
-   */
-  static std::list<RepoInfo> repositories_in_dir( const Pathname &dir )
-  {
-    MIL << "directory " << dir << endl;
-    std::list<RepoInfo> repos;
-    std::list<Pathname> entries;
-    if ( filesystem::readdir( entries, dir, false ) != 0 )
+    /**
+     * Reads RepoInfo's from a repo file.
+     *
+     * \param file pathname of the file to read.
+     */
+    std::list<RepoInfo> repositories_in_file( const Pathname & file )
     {
-      // TranslatorExplanation '%s' is a pathname
-      ZYPP_THROW(Exception(str::form(_("Failed to read directory '%s'"), dir.c_str())));
+      MIL << "repo file: " << file << endl;
+      RepoCollector collector;
+      parser::RepoFileReader parser( file, bind( &RepoCollector::collect, &collector, _1 ) );
+      return collector.repos;
     }
 
-    str::regex allowedRepoExt("^\\.repo(_[0-9]+)?$");
-    for ( std::list<Pathname>::const_iterator it = entries.begin(); it != entries.end(); ++it )
+    ////////////////////////////////////////////////////////////////////////////
+
+    /**
+     * \short List of RepoInfo's from a directory
+     *
+     * Goes trough every file ending with ".repo" in a directory and adds all
+     * RepoInfo's contained in that file.
+     *
+     * \param dir pathname of the directory to read.
+     */
+    std::list<RepoInfo> repositories_in_dir( const Pathname &dir )
     {
-      if (str::regex_match(it->extension(), allowedRepoExt))
+      MIL << "directory " << dir << endl;
+      std::list<RepoInfo> repos;
+      std::list<Pathname> entries;
+      if ( filesystem::readdir( entries, dir, false ) != 0 )
       {
-        std::list<RepoInfo> tmp = repositories_in_file( *it );
-        repos.insert( repos.end(), tmp.begin(), tmp.end() );
-
-        //std::copy( collector.repos.begin(), collector.repos.end(), std::back_inserter(repos));
-        //MIL << "ok" << endl;
+	// TranslatorExplanation '%s' is a pathname
+	ZYPP_THROW(Exception(str::form(_("Failed to read directory '%s'"), dir.c_str())));
       }
+
+      str::regex allowedRepoExt("^\\.repo(_[0-9]+)?$");
+      for ( std::list<Pathname>::const_iterator it = entries.begin(); it != entries.end(); ++it )
+      {
+	if (str::regex_match(it->extension(), allowedRepoExt))
+	{
+	  std::list<RepoInfo> tmp = repositories_in_file( *it );
+	  repos.insert( repos.end(), tmp.begin(), tmp.end() );
+
+	  //std::copy( collector.repos.begin(), collector.repos.end(), std::back_inserter(repos));
+	  //MIL << "ok" << endl;
+	}
+      }
+      return repos;
     }
-    return repos;
-  }
 
-  ////////////////////////////////////////////////////////////////////////////
+    ////////////////////////////////////////////////////////////////////////////
 
-   std::list<RepoInfo> readRepoFile(const Url & repo_file)
-   {
-     // no interface to download a specific file, using workaround:
-     //! \todo add MediaManager::provideFile(Url file_url) to easily access any file URLs? (no need for media access id or media_nr)
-     Url url(repo_file);
-     Pathname path(url.getPathName());
-     url.setPathName ("/");
-     MediaSetAccess access(url);
-     Pathname local = access.provideFile(path);
+    inline void assert_alias( const RepoInfo & info )
+    {
+      if ( info.alias().empty() )
+	ZYPP_THROW( RepoNoAliasException() );
+      // bnc #473834. Maybe we can match the alias against a regex to define
+      // and check for valid aliases
+      if ( info.alias()[0] == '.')
+	ZYPP_THROW(RepoInvalidAliasException(
+	  info, _("Repository alias cannot start with dot.")));
+    }
 
-     DBG << "reading repo file " << repo_file << ", local path: " << local << endl;
+    inline void assert_alias( const ServiceInfo & info )
+    {
+      if ( info.alias().empty() )
+	ZYPP_THROW( ServiceNoAliasException() );
+      // bnc #473834. Maybe we can match the alias against a regex to define
+      // and check for valid aliases
+      if ( info.alias()[0] == '.')
+	ZYPP_THROW(ServiceInvalidAliasException(
+	  info, _("Service alias cannot start with dot.")));
+    }
 
-     return repositories_in_file(local);
-   }
+    ////////////////////////////////////////////////////////////////////////////
 
-  ////////////////////////////////////////////////////////////////////////////
+    inline void assert_urls( const RepoInfo & info )
+    {
+      if ( info.baseUrlsEmpty() )
+	ZYPP_THROW( RepoNoUrlException( info ) );
+    }
 
-  inline void assert_alias( const RepoInfo & info )
-  {
-    if ( info.alias().empty() )
-      ZYPP_THROW( RepoNoAliasException() );
-    // bnc #473834. Maybe we can match the alias against a regex to define
-    // and check for valid aliases
-    if ( info.alias()[0] == '.')
-      ZYPP_THROW(RepoInvalidAliasException(
-         info, _("Repository alias cannot start with dot.")));
-  }
+    inline void assert_url( const ServiceInfo & info )
+    {
+      if ( ! info.url().isValid() )
+	ZYPP_THROW( ServiceNoUrlException( info ) );
+    }
 
-  inline void assert_alias( const ServiceInfo & info )
-  {
-    if ( info.alias().empty() )
-      ZYPP_THROW( ServiceNoAliasException() );
-    // bnc #473834. Maybe we can match the alias against a regex to define
-    // and check for valid aliases
-    if ( info.alias()[0] == '.')
-      ZYPP_THROW(ServiceInvalidAliasException(
-         info, _("Service alias cannot start with dot.")));
-  }
+    ////////////////////////////////////////////////////////////////////////////
 
-  ////////////////////////////////////////////////////////////////////////////
+    /**
+     * \short Calculates the raw cache path for a repository, this is usually
+     * /var/cache/zypp/alias
+     */
+    inline Pathname rawcache_path_for_repoinfo( const RepoManagerOptions &opt, const RepoInfo &info )
+    {
+      assert_alias(info);
+      return opt.repoRawCachePath / info.escaped_alias();
+    }
 
-  inline void assert_urls( const RepoInfo & info )
-  {
-    if ( info.baseUrlsEmpty() )
-      ZYPP_THROW( RepoNoUrlException( info ) );
-  }
+    /**
+     * \short Calculates the raw product metadata path for a repository, this is
+     * inside the raw cache dir, plus an optional path where the metadata is.
+     *
+     * It should be different only for repositories that are not in the root of
+     * the media.
+     * for example /var/cache/zypp/alias/addondir
+     */
+    inline Pathname rawproductdata_path_for_repoinfo( const RepoManagerOptions &opt, const RepoInfo &info )
+    {
+      assert_alias(info);
+      return opt.repoRawCachePath / info.escaped_alias() / info.path();
+    }
 
-  inline void assert_url( const ServiceInfo & info )
-  {
-    if ( ! info.url().isValid() )
-      ZYPP_THROW( ServiceNoUrlException( info ) );
-  }
+    /**
+     * \short Calculates the packages cache path for a repository
+     */
+    inline Pathname packagescache_path_for_repoinfo( const RepoManagerOptions &opt, const RepoInfo &info )
+    {
+      assert_alias(info);
+      return opt.repoPackagesCachePath / info.escaped_alias();
+    }
 
-  ////////////////////////////////////////////////////////////////////////////
+    /**
+     * \short Calculates the solv cache path for a repository
+     */
+    inline Pathname solv_path_for_repoinfo( const RepoManagerOptions &opt, const RepoInfo &info)
+    {
+      assert_alias(info);
+      return opt.repoSolvCachePath / info.escaped_alias();
+    }
 
-  /**
-   * \short Calculates the raw cache path for a repository, this is usually
-   * /var/cache/zypp/alias
-   */
-  inline Pathname rawcache_path_for_repoinfo( const RepoManagerOptions &opt, const RepoInfo &info )
-  {
-    assert_alias(info);
-    return opt.repoRawCachePath / info.escaped_alias();
-  }
+    ////////////////////////////////////////////////////////////////////////////
 
-  /**
-   * \short Calculates the raw product metadata path for a repository, this is
-   * inside the raw cache dir, plus an optional path where the metadata is.
-   *
-   * It should be different only for repositories that are not in the root of
-   * the media.
-   * for example /var/cache/zypp/alias/addondir
-   */
-  inline Pathname rawproductdata_path_for_repoinfo( const RepoManagerOptions &opt, const RepoInfo &info )
-  {
-    assert_alias(info);
-    return opt.repoRawCachePath / info.escaped_alias() / info.path();
-  }
-
-
-  /**
-   * \short Calculates the packages cache path for a repository
-   */
-  inline Pathname packagescache_path_for_repoinfo( const RepoManagerOptions &opt, const RepoInfo &info )
-  {
-    assert_alias(info);
-    return opt.repoPackagesCachePath / info.escaped_alias();
-  }
-
-  /**
-   * \short Calculates the solv cache path for a repository
-   */
-  inline Pathname solv_path_for_repoinfo( const RepoManagerOptions &opt, const RepoInfo &info)
-  {
-    assert_alias(info);
-    return opt.repoSolvCachePath / info.escaped_alias();
-  }
-
-  ////////////////////////////////////////////////////////////////////////////
-
-  /** Functor collecting ServiceInfos into a ServiceSet. */
-  class ServiceCollector
-  {
+    /** Functor collecting ServiceInfos into a ServiceSet. */
+    class ServiceCollector
+    {
     public:
       typedef std::set<ServiceInfo> ServiceSet;
 
@@ -379,55 +339,212 @@ namespace zypp
 
       bool operator()( const ServiceInfo & service_r ) const
       {
-        _services.insert( service_r );
-        return true;
+	_services.insert( service_r );
+	return true;
       }
 
     private:
       ServiceSet & _services;
-  };
+    };
+    ////////////////////////////////////////////////////////////////////////////
 
-  ////////////////////////////////////////////////////////////////////////////
+  } // namespace
+  ///////////////////////////////////////////////////////////////////
+
+  std::list<RepoInfo> readRepoFile( const Url & repo_file )
+  {
+    // no interface to download a specific file, using workaround:
+    //! \todo add MediaManager::provideFile(Url file_url) to easily access any file URLs? (no need for media access id or media_nr)
+    Url url(repo_file);
+    Pathname path(url.getPathName());
+    url.setPathName ("/");
+    MediaSetAccess access(url);
+    Pathname local = access.provideFile(path);
+
+    DBG << "reading repo file " << repo_file << ", local path: " << local << endl;
+
+    return repositories_in_file(local);
+  }
 
   ///////////////////////////////////////////////////////////////////
   //
-  //	CLASS NAME : RepoManager::Impl
+  //	class RepoManagerOptions
   //
-  ///////////////////////////////////////////////////////////////////
+  ////////////////////////////////////////////////////////////////////
 
-  /**
-   * \short RepoManager implementation.
-   */
+  RepoManagerOptions::RepoManagerOptions( const Pathname & root_r )
+  {
+    repoCachePath         = Pathname::assertprefix( root_r, ZConfig::instance().repoCachePath() );
+    repoRawCachePath      = Pathname::assertprefix( root_r, ZConfig::instance().repoMetadataPath() );
+    repoSolvCachePath     = Pathname::assertprefix( root_r, ZConfig::instance().repoSolvfilesPath() );
+    repoPackagesCachePath = Pathname::assertprefix( root_r, ZConfig::instance().repoPackagesPath() );
+    knownReposPath        = Pathname::assertprefix( root_r, ZConfig::instance().knownReposPath() );
+    knownServicesPath     = Pathname::assertprefix( root_r, ZConfig::instance().knownServicesPath() );
+    pluginsPath           = Pathname::assertprefix( root_r, ZConfig::instance().pluginsPath() );
+    probe                 = ZConfig::instance().repo_add_probe();
+
+    rootDir = root_r;
+  }
+
+  RepoManagerOptions RepoManagerOptions::makeTestSetup( const Pathname & root_r )
+  {
+    RepoManagerOptions ret;
+    ret.repoCachePath         = root_r;
+    ret.repoRawCachePath      = root_r/"raw";
+    ret.repoSolvCachePath     = root_r/"solv";
+    ret.repoPackagesCachePath = root_r/"packages";
+    ret.knownReposPath        = root_r/"repos.d";
+    ret.knownServicesPath     = root_r/"services.d";
+    ret.pluginsPath           = root_r/"plugins";
+    ret.rootDir = root_r;
+    return ret;
+  }
+
+  ///////////////////////////////////////////////////////////////////
+  /// \class RepoManager::Impl
+  /// \brief RepoManager implementation.
+  ///
+  ///////////////////////////////////////////////////////////////////
   struct RepoManager::Impl
   {
+  public:
     Impl( const RepoManagerOptions &opt )
-      : options(opt)
+      : _options(opt)
     {
       init_knownServices();
       init_knownRepositories();
     }
 
+  public:
+    bool repoEmpty() const		{ return _repos.empty(); }
+    RepoSizeType repoSize() const	{ return _repos.size(); }
+    RepoConstIterator repoBegin() const	{ return _repos.begin(); }
+    RepoConstIterator repoEnd() const	{ return _repos.end(); }
 
-    RepoManagerOptions options;
+    bool hasRepo( const std::string & alias ) const
+    { return foundAliasIn( alias, _repos ); }
 
-    RepoSet repos;
-
-    ServiceSet services;
+    RepoInfo getRepo( const std::string & alias ) const
+    {
+      RepoConstIterator it( findAlias( alias, _repos ) );
+      return it == _repos.end() ? RepoInfo::noRepo : *it;
+    }
 
   public:
+    Pathname metadataPath( const RepoInfo & info ) const
+    { return rawcache_path_for_repoinfo( _options, info ); }
 
+    Pathname packagesPath( const RepoInfo & info ) const
+    { return packagescache_path_for_repoinfo( _options, info ); }
+
+    RepoStatus metadataStatus( const RepoInfo & info ) const;
+
+    RefreshCheckStatus checkIfToRefreshMetadata( const RepoInfo & info, const Url & url, RawMetadataRefreshPolicy policy );
+
+    void refreshMetadata( const RepoInfo & info, RawMetadataRefreshPolicy policy, OPT_PROGRESS );
+
+    void cleanMetadata( const RepoInfo & info, OPT_PROGRESS );
+
+    void cleanPackages( const RepoInfo & info, OPT_PROGRESS );
+
+    void buildCache( const RepoInfo & info, CacheBuildPolicy policy, OPT_PROGRESS );
+
+    repo::RepoType probe( const Url & url, const Pathname & path = Pathname() ) const;
+
+    void cleanCacheDirGarbage( OPT_PROGRESS );
+
+    void cleanCache( const RepoInfo & info, OPT_PROGRESS );
+
+    bool isCached( const RepoInfo & info ) const
+    { return PathInfo(solv_path_for_repoinfo( _options, info ) / "solv").isExist(); }
+
+    RepoStatus cacheStatus( const RepoInfo & info ) const
+    { return RepoStatus::fromCookieFile(solv_path_for_repoinfo(_options, info) / "cookie"); }
+
+    void loadFromCache( const RepoInfo & info, OPT_PROGRESS );
+
+    void addRepository( const RepoInfo & info, OPT_PROGRESS );
+
+    void addRepositories( const Url & url, OPT_PROGRESS );
+
+    void removeRepository( const RepoInfo & info, OPT_PROGRESS );
+
+    void modifyRepository( const std::string & alias, const RepoInfo & newinfo_r, OPT_PROGRESS );
+
+    RepoInfo getRepositoryInfo( const std::string & alias, OPT_PROGRESS );
+    RepoInfo getRepositoryInfo( const Url & url, const url::ViewOption & urlview, OPT_PROGRESS );
+
+  public:
+    bool serviceEmpty() const			{ return _services.empty(); }
+    ServiceSizeType serviceSize() const		{ return _services.size(); }
+    ServiceConstIterator serviceBegin() const	{ return _services.begin(); }
+    ServiceConstIterator serviceEnd() const	{ return _services.end(); }
+
+    bool hasService( const std::string & alias ) const
+    { return foundAliasIn( alias, _services ); }
+
+    ServiceInfo getService( const std::string & alias ) const
+    {
+      ServiceConstIterator it( findAlias( alias, _services ) );
+      return it == _services.end() ? ServiceInfo::noService : *it;
+    }
+
+  public:
+    void addService( const ServiceInfo & service );
+    void addService( const std::string & alias, const Url & url )
+    { addService( ServiceInfo( alias, url ) ); }
+
+    void removeService( const std::string & alias );
+    void removeService( const ServiceInfo & service )
+    { removeService( service.alias() ); }
+
+    void refreshServices();
+
+    void refreshService( const std::string & alias );
+    void refreshService( const ServiceInfo & service )
+    {  refreshService( service.alias() ); }
+
+    void modifyService( const std::string & oldAlias, const ServiceInfo & newService );
+
+    repo::ServiceType probeService( const Url & url ) const;
+
+  private:
     void saveService( ServiceInfo & service ) const;
 
-    Pathname generateNonExistingName( const Pathname &dir,
-                                      const std::string &basefilename ) const;
+    Pathname generateNonExistingName( const Pathname & dir, const std::string & basefilename ) const;
 
-    std::string generateFilename( const RepoInfo & info ) const;
-    std::string generateFilename( const ServiceInfo & info ) const;
+    std::string generateFilename( const RepoInfo & info ) const
+    { return filenameFromAlias( info.alias(), "repo" ); }
 
+    std::string generateFilename( const ServiceInfo & info ) const
+    { return filenameFromAlias( info.alias(), "service" ); }
+
+    void setCacheStatus( const RepoInfo & info, const RepoStatus & status )
+    {
+      Pathname base = solv_path_for_repoinfo( _options, info );
+      filesystem::assert_dir(base);
+      status.saveToCookieFile( base / "cookie" );
+    }
+
+    void touchIndexFile( const RepoInfo & info );
+
+    template<typename OutputIterator>
+    void getRepositoriesInService( const std::string & alias, OutputIterator out ) const
+    {
+      MatchServiceAlias filter( alias );
+      std::copy( boost::make_filter_iterator( filter, _repos.begin(), _repos.end() ),
+                 boost::make_filter_iterator( filter, _repos.end(), _repos.end() ),
+                 out);
+    }
 
   private:
     void init_knownServices();
     void init_knownRepositories();
+
+  private:
+    RepoManagerOptions	_options;
+    RepoSet 		_repos;
+    ServiceSet		_services;
 
   private:
     friend Impl * rwcowClone<Impl>( const Impl * rhs );
@@ -435,21 +552,18 @@ namespace zypp
     Impl * clone() const
     { return new Impl( *this ); }
   };
-
   ///////////////////////////////////////////////////////////////////
 
   /** \relates RepoManager::Impl Stream output */
   inline std::ostream & operator<<( std::ostream & str, const RepoManager::Impl & obj )
-  {
-    return str << "RepoManager::Impl";
-  }
+  { return str << "RepoManager::Impl"; }
 
   ///////////////////////////////////////////////////////////////////
 
   void RepoManager::Impl::saveService( ServiceInfo & service ) const
   {
-    filesystem::assert_dir( options.knownServicesPath );
-    Pathname servfile = generateNonExistingName( options.knownServicesPath,
+    filesystem::assert_dir( _options.knownServicesPath );
+    Pathname servfile = generateNonExistingName( _options.knownServicesPath,
                                                  generateFilename( service ) );
     service.setFilepath( servfile );
 
@@ -488,46 +602,16 @@ namespace zypp
     while ( PathInfo(dir + final_filename).isExist() )
     {
       final_filename = basefilename + "_" + str::numstring(counter);
-      counter++;
+      ++counter;
     }
     return dir + Pathname(final_filename);
   }
 
   ////////////////////////////////////////////////////////////////////////////
 
-  /**
-   * \short Generate a related filename from a repo info
-   *
-   * From a repo info, it will try to use the alias as a filename
-   * escaping it if necessary. Other fallbacks can be added to
-   * this function in case there is no way to use the alias
-   */
-  std::string RepoManager::Impl::generateFilename( const RepoInfo & info ) const
-  {
-    std::string filename = info.alias();
-    // replace slashes with underscores
-    str::replaceAll( filename, "/", "_" );
-
-    filename = Pathname(filename).extend(".repo").asString();
-    MIL << "generating filename for repo [" << info.alias() << "] : '" << filename << "'" << endl;
-    return filename;
-  }
-
-  std::string RepoManager::Impl::generateFilename( const ServiceInfo & info ) const
-  {
-    std::string filename = info.alias();
-    // replace slashes with underscores
-    str::replaceAll( filename, "/", "_" );
-
-    filename = Pathname(filename).extend(".service").asString();
-    MIL << "generating filename for service [" << info.alias() << "] : '" << filename << "'" << endl;
-    return filename;
-  }
-
-
   void RepoManager::Impl::init_knownServices()
   {
-    Pathname dir = options.knownServicesPath;
+    Pathname dir = _options.knownServicesPath;
     std::list<Pathname> entries;
     if (PathInfo(dir).isExist())
     {
@@ -540,20 +624,20 @@ namespace zypp
       //str::regex allowedServiceExt("^\\.service(_[0-9]+)?$");
       for_(it, entries.begin(), entries.end() )
       {
-        parser::ServiceFileReader(*it, ServiceCollector(services));
+        parser::ServiceFileReader(*it, ServiceCollector(_services));
       }
     }
 
-    repo::PluginServices(options.pluginsPath/"services", ServiceCollector(services));
+    repo::PluginServices(_options.pluginsPath/"services", ServiceCollector(_services));
   }
 
   void RepoManager::Impl::init_knownRepositories()
   {
     MIL << "start construct known repos" << endl;
 
-    if ( PathInfo(options.knownReposPath).isExist() )
+    if ( PathInfo(_options.knownReposPath).isExist() )
     {
-      RepoInfoList repol = repositories_in_dir(options.knownReposPath);
+      RepoInfoList repol = repositories_in_dir(_options.knownReposPath);
       std::list<string> repo_esc_aliases;
       std::list<string> entries;
       for ( RepoInfoList::iterator it = repol.begin();
@@ -561,19 +645,19 @@ namespace zypp
             ++it )
       {
         // set the metadata path for the repo
-        Pathname metadata_path = rawcache_path_for_repoinfo(options, (*it));
+        Pathname metadata_path = rawcache_path_for_repoinfo(_options, (*it));
         (*it).setMetadataPath(metadata_path);
 
 	// set the downloaded packages path for the repo
-	Pathname packages_path = packagescache_path_for_repoinfo(options, (*it));
+	Pathname packages_path = packagescache_path_for_repoinfo(_options, (*it));
 	(*it).setPackagesPath(packages_path);
 
-        repos.insert(*it);
+        _repos.insert(*it);
         repo_esc_aliases.push_back(it->escaped_alias());
       }
 
       // delete metadata folders without corresponding repo (e.g. old tmp directories)
-      if ( filesystem::readdir( entries, options.repoRawCachePath, false ) == 0 )
+      if ( filesystem::readdir( entries, _options.repoRawCachePath, false ) == 0 )
       {
         std::set<string> oldfiles;
         repo_esc_aliases.sort();
@@ -581,7 +665,7 @@ namespace zypp
         set_difference(entries.begin(), entries.end(), repo_esc_aliases.begin(), repo_esc_aliases.end(), std::inserter(oldfiles, oldfiles.end()));
         for_(it, oldfiles.begin(), oldfiles.end())
         {
-          filesystem::recursive_rmdir(options.repoRawCachePath / *it);
+          filesystem::recursive_rmdir(_options.repoRawCachePath / *it);
         }
       }
     }
@@ -590,96 +674,19 @@ namespace zypp
   }
 
   ///////////////////////////////////////////////////////////////////
-  //
-  //	CLASS NAME : RepoManager
-  //
-  ///////////////////////////////////////////////////////////////////
 
-  RepoManager::RepoManager( const RepoManagerOptions &opt )
-  : _pimpl( new Impl(opt) )
-  {}
-
-  ////////////////////////////////////////////////////////////////////////////
-
-  RepoManager::~RepoManager()
-  {}
-
-  ////////////////////////////////////////////////////////////////////////////
-
-  bool RepoManager::repoEmpty() const
-  { return _pimpl->repos.empty(); }
-
-  RepoManager::RepoSizeType RepoManager::repoSize() const
-  { return _pimpl->repos.size(); }
-
-  RepoManager::RepoConstIterator RepoManager::repoBegin() const
-  { return _pimpl->repos.begin(); }
-
-  RepoManager::RepoConstIterator RepoManager::repoEnd() const
-  { return _pimpl->repos.end(); }
-
-  RepoInfo RepoManager::getRepo( const std::string & alias ) const
+  RepoStatus RepoManager::Impl::metadataStatus( const RepoInfo & info ) const
   {
-    for_( it, repoBegin(), repoEnd() )
-      if ( it->alias() == alias )
-        return *it;
-    return RepoInfo::noRepo;
-  }
-
-  bool RepoManager::hasRepo( const std::string & alias ) const
-  {
-    for_( it, repoBegin(), repoEnd() )
-      if ( it->alias() == alias )
-        return true;
-    return false;
-  }
-
-  std::string RepoManager::makeStupidAlias( const Url & url_r )
-  {
-    std::string ret( url_r.getScheme() );
-    if ( ret.empty() )
-      ret = "repo-";
-    else
-      ret += "-";
-
-    std::string host( url_r.getHost() );
-    if ( ! host.empty() )
-    {
-      ret += host;
-      ret += "-";
-    }
-
-    static Date::ValueType serial = Date::now();
-    ret += Digest::digest( Digest::sha1(), str::hexstring( ++serial ) +url_r.asCompleteString() ).substr(0,8);
-    return ret;
-  }
-
-  ////////////////////////////////////////////////////////////////////////////
-
-  Pathname RepoManager::metadataPath( const RepoInfo &info ) const
-  {
-    return rawcache_path_for_repoinfo(_pimpl->options, info );
-  }
-
-  Pathname RepoManager::packagesPath( const RepoInfo &info ) const
-  {
-    return packagescache_path_for_repoinfo(_pimpl->options, info );
-  }
-
-  ////////////////////////////////////////////////////////////////////////////
-
-  RepoStatus RepoManager::metadataStatus( const RepoInfo &info ) const
-  {
-    Pathname mediarootpath = rawcache_path_for_repoinfo( _pimpl->options, info );
-    Pathname productdatapath = rawproductdata_path_for_repoinfo( _pimpl->options, info );
+    Pathname mediarootpath = rawcache_path_for_repoinfo( _options, info );
+    Pathname productdatapath = rawproductdata_path_for_repoinfo( _options, info );
     RepoType repokind = info.type();
     RepoStatus status;
 
     switch ( repokind.toEnum() )
     {
       case RepoType::NONE_e:
-      // unknown, probe the local metadata
-        repokind = probe( productdatapath.asUrl() );
+	// unknown, probe the local metadata
+	repokind = probe( productdatapath.asUrl() );
       break;
       default:
       break;
@@ -715,9 +722,10 @@ namespace zypp
     return status;
   }
 
-  void RepoManager::touchIndexFile(const RepoInfo & info)
+
+  void RepoManager::Impl::touchIndexFile( const RepoInfo & info )
   {
-    Pathname productdatapath = rawproductdata_path_for_repoinfo( _pimpl->options, info );
+    Pathname productdatapath = rawproductdata_path_for_repoinfo( _options, info );
 
     RepoType repokind = info.type();
     if ( repokind.toEnum() == RepoType::NONE_e )
@@ -751,10 +759,8 @@ namespace zypp
     filesystem::touch(p);
   }
 
-  RepoManager::RefreshCheckStatus RepoManager::checkIfToRefreshMetadata(
-                                              const RepoInfo &info,
-                                              const Url &url,
-                                              RawMetadataRefreshPolicy policy )
+
+  RepoManager::RefreshCheckStatus RepoManager::Impl::checkIfToRefreshMetadata( const RepoInfo & info, const Url & url, RawMetadataRefreshPolicy policy )
   {
     assert_alias(info);
 
@@ -766,7 +772,7 @@ namespace zypp
       MIL << "Going to try to check whether refresh is needed for " << url << endl;
 
       // first check old (cached) metadata
-      Pathname mediarootpath = rawcache_path_for_repoinfo( _pimpl->options, info );
+      Pathname mediarootpath = rawcache_path_for_repoinfo( _options, info );
       filesystem::assert_dir(mediarootpath);
       oldstatus = metadataStatus(info);
 
@@ -902,9 +908,8 @@ namespace zypp
     return REFRESH_NEEDED; // default
   }
 
-  void RepoManager::refreshMetadata( const RepoInfo &info,
-                                     RawMetadataRefreshPolicy policy,
-                                     const ProgressData::ReceiverFnc & progress )
+
+  void RepoManager::Impl::refreshMetadata( const RepoInfo & info, RawMetadataRefreshPolicy policy, const ProgressData::ReceiverFnc & progress )
   {
     assert_alias(info);
     assert_urls(info);
@@ -958,7 +963,7 @@ namespace zypp
           break;
         }
 
-        Pathname mediarootpath = rawcache_path_for_repoinfo( _pimpl->options, info );
+        Pathname mediarootpath = rawcache_path_for_repoinfo( _options, info );
         if( filesystem::assert_dir(mediarootpath) )
         {
           Exception ex(str::form( _("Can't create %s"), mediarootpath.c_str()) );
@@ -994,7 +999,7 @@ namespace zypp
            */
           for_( it, repoBegin(), repoEnd() )
           {
-            Pathname cachepath(rawcache_path_for_repoinfo( _pimpl->options, *it ));
+            Pathname cachepath(rawcache_path_for_repoinfo( _options, *it ));
             if ( PathInfo(cachepath).isExist() )
               downloader_ptr->addCachePath(cachepath);
           }
@@ -1052,37 +1057,35 @@ namespace zypp
 
   ////////////////////////////////////////////////////////////////////////////
 
-  void RepoManager::cleanMetadata( const RepoInfo &info,
-                                   const ProgressData::ReceiverFnc & progressfnc )
+  void RepoManager::Impl::cleanMetadata( const RepoInfo & info, const ProgressData::ReceiverFnc & progressfnc )
   {
     ProgressData progress(100);
     progress.sendTo(progressfnc);
 
-    filesystem::recursive_rmdir(rawcache_path_for_repoinfo(_pimpl->options, info));
+    filesystem::recursive_rmdir(rawcache_path_for_repoinfo(_options, info));
     progress.toMax();
   }
 
-  void RepoManager::cleanPackages( const RepoInfo &info,
-                                   const ProgressData::ReceiverFnc & progressfnc )
+
+  void RepoManager::Impl::cleanPackages( const RepoInfo & info, const ProgressData::ReceiverFnc & progressfnc )
   {
     ProgressData progress(100);
     progress.sendTo(progressfnc);
 
-    filesystem::recursive_rmdir(packagescache_path_for_repoinfo(_pimpl->options, info));
+    filesystem::recursive_rmdir(packagescache_path_for_repoinfo(_options, info));
     progress.toMax();
   }
 
-  void RepoManager::buildCache( const RepoInfo &info,
-                                CacheBuildPolicy policy,
-                                const ProgressData::ReceiverFnc & progressrcv )
+
+  void RepoManager::Impl::buildCache( const RepoInfo & info, CacheBuildPolicy policy, const ProgressData::ReceiverFnc & progressrcv )
   {
     assert_alias(info);
-    Pathname mediarootpath = rawcache_path_for_repoinfo( _pimpl->options, info );
-    Pathname productdatapath = rawproductdata_path_for_repoinfo( _pimpl->options, info );
+    Pathname mediarootpath = rawcache_path_for_repoinfo( _options, info );
+    Pathname productdatapath = rawproductdata_path_for_repoinfo( _options, info );
 
-    if( filesystem::assert_dir(_pimpl->options.repoCachePath) )
+    if( filesystem::assert_dir(_options.repoCachePath) )
     {
-      Exception ex(str::form( _("Can't create %s"), _pimpl->options.repoCachePath.c_str()) );
+      Exception ex(str::form( _("Can't create %s"), _options.repoCachePath.c_str()) );
       ZYPP_THROW(ex);
     }
     RepoStatus raw_metadata_status = metadataStatus(info);
@@ -1128,7 +1131,7 @@ namespace zypp
 
     MIL << info.alias() << " building cache..." << info.type() << endl;
 
-    Pathname base = solv_path_for_repoinfo( _pimpl->options, info);
+    Pathname base = solv_path_for_repoinfo( _options, info);
 
     if( filesystem::assert_dir(base) )
     {
@@ -1223,10 +1226,7 @@ namespace zypp
 
   ////////////////////////////////////////////////////////////////////////////
 
-  repo::RepoType RepoManager::probe( const Url & url ) const
-  { return probe( url, Pathname() ); }
-
-  repo::RepoType RepoManager::probe( const Url & url, const Pathname & path  ) const
+  repo::RepoType RepoManager::Impl::probe( const Url & url, const Pathname & path  ) const
   {
     MIL << "going to probe the repo type at " << url << " (" << path << ")" << endl;
 
@@ -1312,7 +1312,7 @@ namespace zypp
 
   ////////////////////////////////////////////////////////////////////////////
 
-  void RepoManager::cleanCacheDirGarbage( const ProgressData::ReceiverFnc & progressrcv )
+  void RepoManager::Impl::cleanCacheDirGarbage( const ProgressData::ReceiverFnc & progressrcv )
   {
     MIL << "Going to clean up garbage in cache dirs" << endl;
 
@@ -1321,9 +1321,9 @@ namespace zypp
     progress.toMin();
 
     std::list<Pathname> cachedirs;
-    cachedirs.push_back(_pimpl->options.repoRawCachePath);
-    cachedirs.push_back(_pimpl->options.repoPackagesCachePath);
-    cachedirs.push_back(_pimpl->options.repoSolvCachePath);
+    cachedirs.push_back(_options.repoRawCachePath);
+    cachedirs.push_back(_options.repoPackagesCachePath);
+    cachedirs.push_back(_options.repoSolvCachePath);
 
     for_( dir, cachedirs.begin(), cachedirs.end() )
     {
@@ -1359,48 +1359,24 @@ namespace zypp
 
   ////////////////////////////////////////////////////////////////////////////
 
-  void RepoManager::cleanCache( const RepoInfo &info,
-                                const ProgressData::ReceiverFnc & progressrcv )
+  void RepoManager::Impl::cleanCache( const RepoInfo & info, const ProgressData::ReceiverFnc & progressrcv )
   {
     ProgressData progress(100);
     progress.sendTo(progressrcv);
     progress.toMin();
 
     MIL << "Removing raw metadata cache for " << info.alias() << endl;
-    filesystem::recursive_rmdir(solv_path_for_repoinfo(_pimpl->options, info));
+    filesystem::recursive_rmdir(solv_path_for_repoinfo(_options, info));
 
     progress.toMax();
   }
 
   ////////////////////////////////////////////////////////////////////////////
 
-  bool RepoManager::isCached( const RepoInfo &info ) const
-  {
-    return PathInfo(solv_path_for_repoinfo( _pimpl->options, info ) / "solv").isExist();
-  }
-
-  RepoStatus RepoManager::cacheStatus( const RepoInfo &info ) const
-  {
-
-    Pathname cookiefile = solv_path_for_repoinfo(_pimpl->options, info) / "cookie";
-
-    return RepoStatus::fromCookieFile(cookiefile);
-  }
-
-  void RepoManager::setCacheStatus( const RepoInfo &info, const RepoStatus &status )
-  {
-    Pathname base = solv_path_for_repoinfo(_pimpl->options, info);
-    filesystem::assert_dir(base);
-    Pathname cookiefile = base / "cookie";
-
-    status.saveToCookieFile(cookiefile);
-  }
-
-  void RepoManager::loadFromCache( const RepoInfo & info,
-                                   const ProgressData::ReceiverFnc & progressrcv )
+  void RepoManager::Impl::loadFromCache( const RepoInfo & info, const ProgressData::ReceiverFnc & progressrcv )
   {
     assert_alias(info);
-    Pathname solvfile = solv_path_for_repoinfo(_pimpl->options, info) / "solv";
+    Pathname solvfile = solv_path_for_repoinfo(_options, info) / "solv";
 
     if ( ! PathInfo(solvfile).isExist() )
       ZYPP_THROW(RepoNotCachedException(info));
@@ -1437,8 +1413,7 @@ namespace zypp
 
   ////////////////////////////////////////////////////////////////////////////
 
-  void RepoManager::addRepository( const RepoInfo &info,
-                                   const ProgressData::ReceiverFnc & progressrcv )
+  void RepoManager::Impl::addRepository( const RepoInfo & info, const ProgressData::ReceiverFnc & progressrcv )
   {
     assert_alias(info);
 
@@ -1451,11 +1426,11 @@ namespace zypp
     MIL << "Try adding repo " << info << endl;
 
     RepoInfo tosave = info;
-    if(_pimpl->repos.find(tosave)!= _pimpl->repos.end())
-        ZYPP_THROW(RepoAlreadyExistsException(info));
+    if ( _repos.find(tosave) != _repos.end() )
+      ZYPP_THROW(RepoAlreadyExistsException(info));
 
     // check the first url for now
-    if ( _pimpl->options.probe )
+    if ( _options.probe )
     {
       DBG << "unknown repository type, probing" << endl;
 
@@ -1473,10 +1448,10 @@ namespace zypp
     progress.set(50);
 
     // assert the directory exists
-    filesystem::assert_dir(_pimpl->options.knownReposPath);
+    filesystem::assert_dir(_options.knownReposPath);
 
-    Pathname repofile = _pimpl->generateNonExistingName(
-        _pimpl->options.knownReposPath, _pimpl->generateFilename(tosave));
+    Pathname repofile = generateNonExistingName(
+        _options.knownReposPath, generateFilename(tosave));
     // now we have a filename that does not exists
     MIL << "Saving repo in " << repofile << endl;
 
@@ -1498,7 +1473,7 @@ namespace zypp
       oinfo.setMetadataPath( metadataPath( tosave ) );
       oinfo.setPackagesPath( packagesPath( tosave ) );
     }
-    _pimpl->repos.insert(tosave);
+    _repos.insert(tosave);
 
     progress.set(90);
 
@@ -1514,7 +1489,7 @@ namespace zypp
     if ( havePasswords )
     {
       media::CredentialManager cm(
-          media::CredManagerOptions(_pimpl->options.rootDir) );
+          media::CredManagerOptions(_options.rootDir) );
 
       for_(urlit, tosave.baseUrlsBegin(), tosave.baseUrlsEnd())
         if (urlit->hasCredentialsInAuthority())
@@ -1528,8 +1503,8 @@ namespace zypp
     MIL << "done" << endl;
   }
 
-  void RepoManager::addRepositories( const Url &url,
-                                     const ProgressData::ReceiverFnc & progressrcv )
+
+  void RepoManager::Impl::addRepositories( const Url & url, const ProgressData::ReceiverFnc & progressrcv )
   {
     std::list<RepoInfo> repos = readRepoFile(url);
     for ( std::list<RepoInfo>::const_iterator it = repos.begin();
@@ -1556,9 +1531,9 @@ namespace zypp
     }
 
     // assert the directory exists
-    filesystem::assert_dir(_pimpl->options.knownReposPath);
+    filesystem::assert_dir(_options.knownReposPath);
 
-    Pathname repofile = _pimpl->generateNonExistingName(_pimpl->options.knownReposPath, filename);
+    Pathname repofile = generateNonExistingName(_options.knownReposPath, filename);
     // now we have a filename that does not exists
     MIL << "Saving " << repos.size() << " repo" << ( repos.size() ? "s" : "" ) << " in " << repofile << endl;
 
@@ -1576,9 +1551,9 @@ namespace zypp
       MIL << "Saving " << (*it).alias() << endl;
       it->setFilepath(repofile.asString());
       it->dumpAsIniOn(file);
-      _pimpl->repos.insert(*it);
+      _repos.insert(*it);
 
-      HistoryLog(_pimpl->options.rootDir).addRepository(*it);
+      HistoryLog(_options.rootDir).addRepository(*it);
     }
 
     MIL << "done" << endl;
@@ -1586,8 +1561,7 @@ namespace zypp
 
   ////////////////////////////////////////////////////////////////////////////
 
-  void RepoManager::removeRepository( const RepoInfo & info,
-                                      const ProgressData::ReceiverFnc & progressrcv)
+  void RepoManager::Impl::removeRepository( const RepoInfo & info, const ProgressData::ReceiverFnc & progressrcv )
   {
     ProgressData progress;
     callback::SendReport<ProgressReport> report;
@@ -1659,9 +1633,9 @@ namespace zypp
           cleanCache( todelete, subprogrcv);
         // now delete metadata (#301037)
         cleanMetadata( todelete, cleansubprogrcv);
-        _pimpl->repos.erase(todelete);
+        _repos.erase(todelete);
         MIL << todelete.alias() << " sucessfully deleted." << endl;
-        HistoryLog(_pimpl->options.rootDir).removeRepository(todelete);
+        HistoryLog(_options.rootDir).removeRepository(todelete);
         return;
       } // else filepath is empty
 
@@ -1672,9 +1646,7 @@ namespace zypp
 
   ////////////////////////////////////////////////////////////////////////////
 
-  void RepoManager::modifyRepository( const std::string &alias,
-                                      const RepoInfo & newinfo_r,
-                                      const ProgressData::ReceiverFnc & progressrcv )
+  void RepoManager::Impl::modifyRepository( const std::string & alias, const RepoInfo & newinfo_r, const ProgressData::ReceiverFnc & progressrcv )
   {
     RepoInfo toedit = getRepositoryInfo(alias);
     RepoInfo newinfo( newinfo_r ); // need writable copy to upadte housekeeping data
@@ -1721,46 +1693,39 @@ namespace zypp
       }
 
       newinfo.setFilepath(toedit.filepath());
-      _pimpl->repos.erase(toedit);
-      _pimpl->repos.insert(newinfo);
-      HistoryLog(_pimpl->options.rootDir).modifyRepository(toedit, newinfo);
+      _repos.erase(toedit);
+      _repos.insert(newinfo);
+      HistoryLog(_options.rootDir).modifyRepository(toedit, newinfo);
       MIL << "repo " << alias << " modified" << endl;
     }
   }
 
   ////////////////////////////////////////////////////////////////////////////
 
-  RepoInfo RepoManager::getRepositoryInfo( const std::string &alias,
-                                           const ProgressData::ReceiverFnc & progressrcv )
+  RepoInfo RepoManager::Impl::getRepositoryInfo( const std::string & alias, const ProgressData::ReceiverFnc & progressrcv )
   {
-    RepoInfo info;
-    info.setAlias(alias);
-    RepoConstIterator it = _pimpl->repos.find( info );
-    if( it == repoEnd() )
-      ZYPP_THROW(RepoNotFoundException(info));
-    else
+    RepoConstIterator it( findAlias( alias, _repos ) );
+    if ( it != _repos.end() )
       return *it;
+    RepoInfo info;
+    info.setAlias( alias );
+    ZYPP_THROW( RepoNotFoundException(info) );
   }
 
-  ////////////////////////////////////////////////////////////////////////////
 
-  RepoInfo RepoManager::getRepositoryInfo( const Url & url,
-                                           const url::ViewOption & urlview,
-                                           const ProgressData::ReceiverFnc & progressrcv )
+  RepoInfo RepoManager::Impl::getRepositoryInfo( const Url & url, const url::ViewOption & urlview, const ProgressData::ReceiverFnc & progressrcv )
   {
     for_( it, repoBegin(), repoEnd() )
     {
-      for(RepoInfo::urls_const_iterator urlit = (*it).baseUrlsBegin();
-          urlit != (*it).baseUrlsEnd();
-          ++urlit)
+      for_( urlit, (*it).baseUrlsBegin(), (*it).baseUrlsEnd() )
       {
-        if ((*urlit).asString(urlview) == url.asString(urlview))
-          return *it;
+        if ( (*urlit).asString(urlview) == url.asString(urlview) )
+	  return *it;
       }
     }
     RepoInfo info;
-    info.setBaseUrl(url);
-    ZYPP_THROW(RepoNotFoundException(info));
+    info.setBaseUrl( url );
+    ZYPP_THROW( RepoNotFoundException(info) );
   }
 
   ////////////////////////////////////////////////////////////////////////////
@@ -1769,42 +1734,7 @@ namespace zypp
   //
   ////////////////////////////////////////////////////////////////////////////
 
-  bool RepoManager::serviceEmpty() const
-  { return _pimpl->services.empty(); }
-
-  RepoManager::ServiceSizeType RepoManager::serviceSize() const
-  { return _pimpl->services.size(); }
-
-  RepoManager::ServiceConstIterator RepoManager::serviceBegin() const
-  { return _pimpl->services.begin(); }
-
-  RepoManager::ServiceConstIterator RepoManager::serviceEnd() const
-  { return _pimpl->services.end(); }
-
-  ServiceInfo RepoManager::getService( const std::string & alias ) const
-  {
-    for_( it, serviceBegin(), serviceEnd() )
-      if ( it->alias() == alias )
-        return *it;
-    return ServiceInfo::noService;
-  }
-
-  bool RepoManager::hasService( const std::string & alias ) const
-  {
-    for_( it, serviceBegin(), serviceEnd() )
-      if ( it->alias() == alias )
-        return true;
-    return false;
-  }
-
-  ////////////////////////////////////////////////////////////////////////////
-
-  void RepoManager::addService( const std::string & alias, const Url & url )
-  {
-    addService( ServiceInfo(alias, url) );
-  }
-
-  void RepoManager::addService( const ServiceInfo & service )
+  void RepoManager::Impl::addService( const ServiceInfo & service )
   {
     assert_alias( service );
 
@@ -1815,14 +1745,14 @@ namespace zypp
     // Writable ServiceInfo is needed to save the location
     // of the .service file. Finaly insert into the service list.
     ServiceInfo toSave( service );
-    _pimpl->saveService( toSave );
-    _pimpl->services.insert( toSave );
+    saveService( toSave );
+    _services.insert( toSave );
 
     // check for credentials in Url (username:password, not ?credentials param)
     if ( toSave.url().hasCredentialsInAuthority() )
     {
       media::CredentialManager cm(
-          media::CredManagerOptions(_pimpl->options.rootDir) );
+          media::CredManagerOptions(_options.rootDir) );
 
       //! \todo use a method calling UI callbacks to ask where to save creds?
       cm.saveInUser(media::AuthData(toSave.url()));
@@ -1833,7 +1763,7 @@ namespace zypp
 
   ////////////////////////////////////////////////////////////////////////////
 
-  void RepoManager::removeService( const std::string & alias )
+  void RepoManager::Impl::removeService( const std::string & alias )
   {
     MIL << "Going to delete repo " << alias << endl;
 
@@ -1881,19 +1811,15 @@ namespace zypp
     // now remove all repositories added by this service
     RepoCollector rcollector;
     getRepositoriesInService( alias,
-      boost::make_function_output_iterator(
-          bind( &RepoCollector::collect, &rcollector, _1 ) ) );
+			      boost::make_function_output_iterator( bind( &RepoCollector::collect, &rcollector, _1 ) ) );
     // cannot do this directly in getRepositoriesInService - would invalidate iterators
     for_(rit, rcollector.repos.begin(), rcollector.repos.end())
       removeRepository(*rit);
   }
 
-  void RepoManager::removeService( const ServiceInfo & service )
-  { removeService(service.alias()); }
-
   ////////////////////////////////////////////////////////////////////////////
 
-  void RepoManager::refreshServices()
+  void RepoManager::Impl::refreshServices()
   {
     // copy the set of services since refreshService
     // can eventually invalidate the iterator
@@ -1911,10 +1837,7 @@ namespace zypp
     }
   }
 
-  void RepoManager::refreshService( const ServiceInfo & service )
-  { refreshService( service.alias() ); }
-
-  void RepoManager::refreshService( const std::string & alias )
+  void RepoManager::Impl::refreshService( const std::string & alias )
   {
     ServiceInfo service( getService( alias ) );
     assert_alias( service );
@@ -1939,7 +1862,7 @@ namespace zypp
     }
 
     // get target distro identifier
-    std::string servicesTargetDistro = _pimpl->options.servicesTargetDistro;
+    std::string servicesTargetDistro = _options.servicesTargetDistro;
     if ( servicesTargetDistro.empty() )
     {
       servicesTargetDistro = Target::targetDistribution( Pathname() );
@@ -2136,7 +2059,7 @@ namespace zypp
 
   ////////////////////////////////////////////////////////////////////////////
 
-  void RepoManager::modifyService(const std::string & oldAlias, const ServiceInfo & newService)
+  void RepoManager::Impl::modifyService( const std::string & oldAlias, const ServiceInfo & newService )
   {
     MIL << "Going to modify service " << oldAlias << endl;
 
@@ -2173,8 +2096,8 @@ namespace zypp
     file.close();
     service.setFilepath(location);
 
-    _pimpl->services.erase(oldAlias);
-    _pimpl->services.insert(service);
+    _services.erase(oldAlias);
+    _services.insert(service);
 
     // changed properties affecting also repositories
     if( oldAlias != service.alias()                    // changed alias
@@ -2203,7 +2126,7 @@ namespace zypp
 
   ////////////////////////////////////////////////////////////////////////////
 
-  repo::ServiceType RepoManager::probeService( const Url &url ) const
+  repo::ServiceType RepoManager::Impl::probeService( const Url & url ) const
   {
     try
     {
@@ -2231,12 +2154,169 @@ namespace zypp
     return repo::ServiceType::NONE;
   }
 
+  ///////////////////////////////////////////////////////////////////
+  //
+  //	CLASS NAME : RepoManager
+  //
+  ///////////////////////////////////////////////////////////////////
+
+  RepoManager::RepoManager( const RepoManagerOptions & opt )
+  : _pimpl( new Impl(opt) )
+  {}
+
+  RepoManager::~RepoManager()
+  {}
+
+  bool RepoManager::repoEmpty() const
+  { return _pimpl->repoEmpty(); }
+
+  RepoManager::RepoSizeType RepoManager::repoSize() const
+  { return _pimpl->repoSize(); }
+
+  RepoManager::RepoConstIterator RepoManager::repoBegin() const
+  { return _pimpl->repoBegin(); }
+
+  RepoManager::RepoConstIterator RepoManager::repoEnd() const
+  { return _pimpl->repoEnd(); }
+
+  RepoInfo RepoManager::getRepo( const std::string & alias ) const
+  { return _pimpl->getRepo( alias ); }
+
+  bool RepoManager::hasRepo( const std::string & alias ) const
+  { return _pimpl->hasRepo( alias ); }
+
+  std::string RepoManager::makeStupidAlias( const Url & url_r )
+  {
+    std::string ret( url_r.getScheme() );
+    if ( ret.empty() )
+      ret = "repo-";
+    else
+      ret += "-";
+
+    std::string host( url_r.getHost() );
+    if ( ! host.empty() )
+    {
+      ret += host;
+      ret += "-";
+    }
+
+    static Date::ValueType serial = Date::now();
+    ret += Digest::digest( Digest::sha1(), str::hexstring( ++serial ) +url_r.asCompleteString() ).substr(0,8);
+    return ret;
+  }
+
+  RepoStatus RepoManager::metadataStatus( const RepoInfo & info ) const
+  { return _pimpl->metadataStatus( info ); }
+
+  RepoManager::RefreshCheckStatus RepoManager::checkIfToRefreshMetadata( const RepoInfo &info, const Url &url, RawMetadataRefreshPolicy policy )
+  { return _pimpl->checkIfToRefreshMetadata( info, url, policy ); }
+
+  Pathname RepoManager::metadataPath( const RepoInfo &info ) const
+  { return _pimpl->metadataPath( info ); }
+
+  Pathname RepoManager::packagesPath( const RepoInfo &info ) const
+  { return _pimpl->packagesPath( info ); }
+
+  void RepoManager::refreshMetadata( const RepoInfo &info, RawMetadataRefreshPolicy policy, const ProgressData::ReceiverFnc & progressrcv )
+  { return _pimpl->refreshMetadata( info, policy, progressrcv ); }
+
+  void RepoManager::cleanMetadata( const RepoInfo &info, const ProgressData::ReceiverFnc & progressrcv )
+  { return _pimpl->cleanMetadata( info, progressrcv ); }
+
+  void RepoManager::cleanPackages( const RepoInfo &info, const ProgressData::ReceiverFnc & progressrcv )
+  { return _pimpl->cleanPackages( info, progressrcv ); }
+
+  RepoStatus RepoManager::cacheStatus( const RepoInfo &info ) const
+  { return _pimpl->cacheStatus( info ); }
+
+  void RepoManager::buildCache( const RepoInfo &info, CacheBuildPolicy policy, const ProgressData::ReceiverFnc & progressrcv )
+  { return _pimpl->buildCache( info, policy, progressrcv ); }
+
+  void RepoManager::cleanCache( const RepoInfo &info, const ProgressData::ReceiverFnc & progressrcv )
+  { return _pimpl->cleanCache( info, progressrcv ); }
+
+  bool RepoManager::isCached( const RepoInfo &info ) const
+  { return _pimpl->isCached( info ); }
+
+  void RepoManager::loadFromCache( const RepoInfo &info, const ProgressData::ReceiverFnc & progressrcv )
+  { return _pimpl->loadFromCache( info, progressrcv ); }
+
+  void RepoManager::cleanCacheDirGarbage( const ProgressData::ReceiverFnc & progressrcv )
+  { return _pimpl->cleanCacheDirGarbage( progressrcv ); }
+
+  repo::RepoType RepoManager::probe( const Url & url, const Pathname & path ) const
+  { return _pimpl->probe( url, path ); }
+
+  repo::RepoType RepoManager::probe( const Url & url ) const
+  { return _pimpl->probe( url ); }
+
+  void RepoManager::addRepository( const RepoInfo &info, const ProgressData::ReceiverFnc & progressrcv )
+  { return _pimpl->addRepository( info, progressrcv ); }
+
+  void RepoManager::addRepositories( const Url &url, const ProgressData::ReceiverFnc & progressrcv )
+  { return _pimpl->addRepositories( url, progressrcv ); }
+
+  void RepoManager::removeRepository( const RepoInfo & info, const ProgressData::ReceiverFnc & progressrcv )
+  { return _pimpl->removeRepository( info, progressrcv ); }
+
+  void RepoManager::modifyRepository( const std::string &alias, const RepoInfo & newinfo, const ProgressData::ReceiverFnc & progressrcv )
+  { return _pimpl->modifyRepository( alias, newinfo, progressrcv ); }
+
+  RepoInfo RepoManager::getRepositoryInfo( const std::string &alias, const ProgressData::ReceiverFnc & progressrcv )
+  { return _pimpl->getRepositoryInfo( alias, progressrcv ); }
+
+  RepoInfo RepoManager::getRepositoryInfo( const Url & url, const url::ViewOption & urlview, const ProgressData::ReceiverFnc & progressrcv )
+  { return _pimpl->getRepositoryInfo( url, urlview, progressrcv ); }
+
+  bool RepoManager::serviceEmpty() const
+  { return _pimpl->serviceEmpty(); }
+
+  RepoManager::ServiceSizeType RepoManager::serviceSize() const
+  { return _pimpl->serviceSize(); }
+
+  RepoManager::ServiceConstIterator RepoManager::serviceBegin() const
+  { return _pimpl->serviceBegin(); }
+
+  RepoManager::ServiceConstIterator RepoManager::serviceEnd() const
+  { return _pimpl->serviceEnd(); }
+
+  ServiceInfo RepoManager::getService( const std::string & alias ) const
+  { return _pimpl->getService( alias ); }
+
+  bool RepoManager::hasService( const std::string & alias ) const
+  { return _pimpl->hasService( alias ); }
+
+  repo::ServiceType RepoManager::probeService( const Url &url ) const
+  { return _pimpl->probeService( url ); }
+
+  void RepoManager::addService( const std::string & alias, const Url& url )
+  { return _pimpl->addService( alias, url ); }
+
+  void RepoManager::addService( const ServiceInfo & service )
+  { return _pimpl->addService( service ); }
+
+  void RepoManager::removeService( const std::string & alias )
+  { return _pimpl->removeService( alias ); }
+
+  void RepoManager::removeService( const ServiceInfo & service )
+  { return _pimpl->removeService( service ); }
+
+  void RepoManager::refreshServices()
+  { return _pimpl->refreshServices(); }
+
+  void RepoManager::refreshService( const std::string & alias )
+  { return _pimpl->refreshService( alias ); }
+
+  void RepoManager::refreshService( const ServiceInfo & service )
+  { return _pimpl->refreshService( service ); }
+
+  void RepoManager::modifyService( const std::string & oldAlias, const ServiceInfo & service )
+  { return _pimpl->modifyService( oldAlias, service ); }
+
   ////////////////////////////////////////////////////////////////////////////
 
   std::ostream & operator<<( std::ostream & str, const RepoManager & obj )
-  {
-    return str << *obj._pimpl;
-  }
+  { return str << *obj._pimpl; }
 
   /////////////////////////////////////////////////////////////////
 } // namespace zypp

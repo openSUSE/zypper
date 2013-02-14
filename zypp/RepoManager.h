@@ -685,18 +685,6 @@ namespace zypp
                  out);
     }
 
-  protected:
-    RepoStatus rawMetadataStatus( const RepoInfo &info );
-    void setCacheStatus( const RepoInfo &info, const RepoStatus &status );
-
-    /**
-     * Update timestamp of repository index file for the specified repository \a info.
-     * Used in \ref checkIfToRefreshMetadata() for repo.refresh.delay feature.
-     */
-    void touchIndexFile(const RepoInfo & info);
-
-  public:
-
   private:
     /** Pointer to implementation */
     RWCOW_pointer<Impl> _pimpl;
