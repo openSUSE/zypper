@@ -1,4 +1,10 @@
 -------------------------------------------------------------------
+Fri Feb 15 12:49:18 CET 2013 - ma@suse.de
+
+- Handle dangling update script symlinks in instsys. (bnc#803751)
+- version 12.8.1 (0)
+
+-------------------------------------------------------------------
 Thu Feb 14 01:13:28 CET 2013 - ma@suse.de
 
 - Update zypp-po.tar.bz2
