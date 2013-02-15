@@ -358,26 +358,37 @@ namespace zypp
               continue; // if not exact match it had to continue with '-'
 
             PathInfo script( scriptsDir / *sit );
-            if ( ! script.isFile() )
-              continue;
+            Pathname localPath( scriptsPath_r/(*sit) );	// without root prefix
+            std::string unifytag;			// must not stay empty
 
-            // Assert it's set executable
-            filesystem::addmod( script.path(), 0500 );
-
-            Pathname localPath( scriptsPath_r/(*sit) ); // without root prefix
-
-	    // Unify scripts by md5sum
-	    std::string md5sum( filesystem::md5sum( script.path() ) );
-	    if ( unify[md5sum].empty() )
+	    if ( script.isFile() )
 	    {
-	      unify[md5sum] = localPath;
+	      // Assert it's set executable, unify by md5sum.
+	      filesystem::addmod( script.path(), 0500 );
+	      unifytag = filesystem::md5sum( script.path() );
+	    }
+	    else if ( ! script.isExist() )
+	    {
+	      // Might be a dangling symlink, might be ok if we are in
+	      // instsys (absolute symlink within the system below /mnt).
+	      // readlink will tell....
+	      unifytag = filesystem::readlink( script.path() ).asString();
+	    }
+
+	    if ( unifytag.empty() )
+	      continue;
+
+	    // Unify scripts
+	    if ( unify[unifytag].empty() )
+	    {
+	      unify[unifytag] = localPath;
 	    }
 	    else
 	    {
 	      // translators: We may find the same script content in files with different names.
 	      // Only the first occurence is executed, subsequent ones are skipped. It's a one-line
 	      // message for a log file. Preferably start translation with "%s"
-	      std::string msg( str::form(_("%s already executed as %s)"), localPath.asString().c_str(), unify[md5sum].c_str() ) );
+	      std::string msg( str::form(_("%s already executed as %s)"), localPath.asString().c_str(), unify[unifytag].c_str() ) );
               MIL << "Skip update script: " << msg << endl;
               HistoryLog().comment( msg, /*timestamp*/true );
 	      continue;
