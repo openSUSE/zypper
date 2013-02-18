@@ -13,6 +13,7 @@
 #include <unordered_set>
 #include "zypp/base/LogTools.h"
 #include "zypp/base/String.h"
+#include "zypp/base/Gettext.h"
 #include "zypp/base/Exception.h"
 
 #include "zypp/PathInfo.h"
@@ -201,6 +202,10 @@ namespace zypp
     int ret = prog.close();
     if ( ret != 0 )
     {
+      if ( ret == 129 )
+      {
+	ZYPP_THROW( Exception(_("Please install package 'lsof' first.") ) );
+      }
       Exception err( str::form("Executing 'lsof' failed (%d).", ret) );
       err.remember( prog.execError() );
       ZYPP_THROW( err );
