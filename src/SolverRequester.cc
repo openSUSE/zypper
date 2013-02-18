@@ -512,6 +512,14 @@ void SolverRequester::updateTo(
       setToInstall(selected);
       MIL << *s << " update: setting " << selected << " to install" << endl;
     }
+    else if ( selected->edition() == installed->edition()
+	    && selected->arch() != installed->arch()
+	    && pkg.parsed_cap.detail().hasArch() /*userselected architecture*/ )
+    {
+      // set 'candidate' for installation
+      setToInstall(selected);
+      MIL << *s << " update: setting " << selected << " to install (arch change request)" << endl;
+    }
     else if (_opts.force || _opts.oldpackage)
     {
       // set 'candidate' for installation
