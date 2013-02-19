@@ -1,4 +1,11 @@
 -------------------------------------------------------------------
+Tue Feb 19 13:12:01 CET 2013 - ma@suse.de
+
+- Add '--oldpackage' to allow rollback without malicious --force
+  (bnc#795076)
+- version 1.7.11
+
+-------------------------------------------------------------------
 Thu Feb 14 01:14:35 CET 2013 - ma@suse.de
 
 - Update zypper-po.tar.bz2
