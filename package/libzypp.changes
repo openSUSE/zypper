@@ -1,4 +1,10 @@
 -------------------------------------------------------------------
+Wed Feb 27 08:41:18 CET 2013 - ma@suse.de
+
+- Rephrase error message if 'lsof' is not installed (bnc#694427)
+- version 12.9.0 (0)
+
+-------------------------------------------------------------------
 Fri Feb 15 12:49:18 CET 2013 - ma@suse.de
 
 - Handle dangling update script symlinks in instsys. (bnc#803751)
