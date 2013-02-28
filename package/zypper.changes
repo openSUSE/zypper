@@ -1,4 +1,11 @@
 -------------------------------------------------------------------
+Thu Feb 28 12:02:21 CET 2013 - ma@suse.de
+
+- Allow re-install with different arch upon explicit request (bnc#804219)
+- fix zypper disregarding zypp.conf cache path settings (bnc#806568)
+- version 1.6.171
+
+-------------------------------------------------------------------
 Thu Feb  7 14:47:01 CET 2013 - ma@suse.de
 
 - zypper commandline args must not silently overrule locks
