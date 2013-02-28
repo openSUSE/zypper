@@ -42,6 +42,9 @@ enum TableLineStyle {
 class Table;
 
 class TableRow {
+private:
+  void dumpDetails(ostream &stream, const Table & parent) const;
+
 public:
   //! Constructor. Reserve place for c columns.
   TableRow (unsigned c = 0) {
@@ -49,6 +52,8 @@ public:
   }
 
   void add (const string& s);
+
+  void addDetail (const string& s);
 
   // return number of columns
   unsigned int cols( void ) const;
@@ -75,6 +80,8 @@ public:
 
 private:
   container _columns;
+  container _details;
+
   friend class Table;
 };
 
@@ -120,6 +127,8 @@ public:
   const TableHeader & header() const
   { return _header; }
   const container & rows() const
+  { return _rows; }
+  container & rows()
   { return _rows; }
 
   Table ();
