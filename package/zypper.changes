@@ -1,4 +1,11 @@
 -------------------------------------------------------------------
+Thu Feb 28 11:46:36 CET 2013 - ma@suse.de
+
+- fix zypper disregarding zypp.conf cache path settings (bnc#806568)
+- Allow re-install with different arch upon explicit request (bnc#804219)
+- version 1.8.11
+
+-------------------------------------------------------------------
 Thu Feb 28 01:15:24 CET 2013 - ma@suse.de
 
 - Update zypper-po.tar.bz2
