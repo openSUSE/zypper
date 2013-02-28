@@ -569,25 +569,21 @@ void Zypper::processGlobalOptions()
   // cache dirs
 
   if ((it = gopts.find("cache-dir")) != gopts.end())
-    _gopts.rm_options.repoCachePath = it->second.front();
+  {
+    _gopts.rm_options.repoCachePath		= it->second.front();
+    _gopts.rm_options.repoRawCachePath		= _gopts.rm_options.repoCachePath / "raw";
+    _gopts.rm_options.repoSolvCachePath		= _gopts.rm_options.repoCachePath / "solv";
+    _gopts.rm_options.repoPackagesCachePath	= _gopts.rm_options.repoCachePath / "packages";
+  }
 
   if ((it = gopts.find("raw-cache-dir")) != gopts.end())
     _gopts.rm_options.repoRawCachePath = it->second.front();
-  else
-    _gopts.rm_options.repoRawCachePath =
-      _gopts.rm_options.repoCachePath / "raw";
 
   if ((it = gopts.find("solv-cache-dir")) != gopts.end())
     _gopts.rm_options.repoSolvCachePath = it->second.front();
-  else
-    _gopts.rm_options.repoSolvCachePath =
-      _gopts.rm_options.repoCachePath / "solv";
 
   if ((it = gopts.find("pkg-cache-dir")) != gopts.end())
     _gopts.rm_options.repoPackagesCachePath = it->second.front();
-  else
-    _gopts.rm_options.repoPackagesCachePath =
-      _gopts.rm_options.repoCachePath / "packages";
 
   DBG << "repos.d dir = " << _gopts.rm_options.knownReposPath << endl;
   DBG << "cache dir = " << _gopts.rm_options.repoCachePath << endl;
