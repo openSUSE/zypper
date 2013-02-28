@@ -10,6 +10,7 @@
 #include <zypp/sat/Solvable.h>
 
 #include <zypp/PoolItem.h>
+#include <zypp/PoolQuery.h>
 #include <zypp/ResPoolProxy.h>
 #include <zypp/ui/SelectableTraits.h>
 
@@ -153,9 +154,42 @@ void FillSearchTableSolvable::addPicklistItem( const ui::Selectable::constPtr & 
        ? (string("(") + _("System Packages") + ")")
        : (_show_alias ? pi->repository().info().alias() : pi->repository().info().name()));
   }
+
   *_table << row;
 }
 
+//
+// PoolQuery iterator as argument provides information about matches
+//
+bool FillSearchTableSolvable::operator()( const zypp::PoolQuery::const_iterator & it ) const
+{
+  // call FillSearchTableSolvable::operator()( const zypp::PoolItem & pi )
+  operator()(*it);
+
+  // after addPicklistItem( const ui::Selectable::constPtr & sel, const PoolItem & pi ) is
+  // done, add the details about matches to last row
+  TableRow & lastRow = _table->rows().back();
+
+  if ( !it.matchesEmpty() )
+  {
+    for_( match, it.matchesBegin(), it.matchesEnd() )
+    {
+      if ( match->inSolvAttr() == zypp::sat::SolvAttr::summary ||
+           match->inSolvAttr() == zypp::sat::SolvAttr::description )
+      {
+        // substr( 9 ) removes 'solvable:' from attribute
+        lastRow.addDetail( match->inSolvAttr().asString().substr( 9 ) + ":");
+        lastRow.addDetail( match->asString() );
+      }
+      else
+      {
+        // print attribute and match in one line, e.g. requires: libzypp >= 11.6.2
+        lastRow.addDetail( match->inSolvAttr().asString().substr( 9 ) + ": " + match->asString() );
+      }
+    }
+  }
+  return true;
+}
 
 bool FillSearchTableSolvable::operator()( const zypp::PoolItem & pi ) const
 {

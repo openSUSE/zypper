@@ -826,7 +826,7 @@ Searches for an exact name of the package.
 \fI    \-\-provides
 Search for packages which provide the search strings. A search string here might be also
 any symbol provided by a package, e.g. /bin/vi, libcurl.so.3, perl(Time::ParseDate),
-web_browser, e.g. search for the package which provide the shell:
+web_browser, e.g. search for the package which provides the shell:
 .B zypper se --provides /bin/sh
 .TP
 \fI    \-\-requires
@@ -881,6 +881,10 @@ Sort packages by catalog, not by name.
 .I \-s, \-\-details
 Show all available versions of found packages, each version in each repository
 on a separate line.
+.TP
+.I \-v, \-\-verbose
+Like --details with additional information where the search has matched (useful when searching
+for dependencies, e.g. --provides).
 .TP
 Examples:
 

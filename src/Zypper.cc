@@ -1908,6 +1908,7 @@ void Zypper::processCommandOptions()
       {"catalog", required_argument, 0, 'c'},
       {"repo", required_argument, 0, 'r'},
       {"details", no_argument, 0, 's'},
+      {"verbose", no_argument, 0, 'v'},
       {"help", no_argument, 0, 'h'},
       {0, 0, 0, 0}
     };
@@ -1939,6 +1940,8 @@ void Zypper::processCommandOptions()
       "    --sort-by-repo         Sort packages by repository.\n"
       "-s, --details              Show each available version in each repository\n"
       "                           on a separate line.\n"
+      "-v, --verbose              Like --details with additional information where the search\n"
+      "                           has matched (useful for dependencies).\n"
       "\n"
       "* and ? wildcards can also be used within search strings.\n"
       "If a search string is enclosed in '/', it's interpreted as a regular expression.\n"
@@ -3940,6 +3943,16 @@ void Zypper::doCommand()
       {
         FillSearchTableSolvable callback(t, inst_notinst);
         invokeOnEach(query.selectableBegin(), query.selectableEnd(), callback);
+      }
+      else if ( _copts.count("verbose") )
+      {
+        FillSearchTableSolvable callback(t, inst_notinst);
+        // Option 'verbose' shows where (e.g. in 'requires', 'name') the search has matched.
+        // Info is available from PoolQuery::const_iterator.
+        for_( it, query.begin(), query.end() )
+        {
+          callback( it );
+        }
       }
       else
       {

@@ -9,6 +9,7 @@
 #define ZYPPERSEARCH_H_
 
 #include <zypp/TriBool.h>
+#include <zypp/PoolQuery.h>
 
 #include "Zypper.h"
 #include "Table.h"
@@ -38,6 +39,8 @@ struct FillSearchTableSolvable
   bool operator()( const zypp::PoolItem & pi ) const;
   /** Add this Solvable */
   bool operator()( zypp::sat::Solvable solv ) const;
+  /** PoolQuery iterator provides info about matches*/
+  bool operator()( const zypp::PoolQuery::const_iterator & it ) const;
 
   /** Helper to add a table row for \a sel's picklist item \c pi
    * \note picklist item means that \a pi must not be an installed
