@@ -41,6 +41,11 @@ void TableRow::add (const string& s) {
   _columns.push_back (s);
 }
 
+void TableRow::addDetail(const string& s)
+{
+  _details.push_back(s);
+}
+
 unsigned int TableRow::cols( void ) const {
   return _columns.size();
 }
@@ -56,6 +61,42 @@ void TableRow::dumbDumpTo (ostream &stream) const {
     stream << *i;
   }
   stream << endl;
+}
+
+void TableRow::dumpDetails(ostream &stream, const Table & parent) const
+{
+  unsigned int width = (parent._width > parent._screen_width)?parent._screen_width:parent._width;
+  string indent( (parent._max_width[0]+parent._max_width[1])/2, ' ' );
+
+  for ( vector<string>::const_iterator it = _details.begin(); it != _details.end(); ++it )
+  {
+    vector<string> text;
+    zypp::str::split( *it, std::back_inserter(text), "\n" );
+
+    for_( line, text.begin(), text.end() )
+    {
+      unsigned int textSize = mbs_width( *line );
+      unsigned int startPos = 0;
+
+      while ( textSize > 0 )
+      {
+        unsigned int endPos;
+
+        if ( textSize + indent.length() <= width )
+        {
+          stream << indent << zypp::str::ltrim( (*line).substr(startPos)) << endl;
+          break;
+        }
+        else
+        {
+          stream << indent << zypp::str::ltrim( (*line).substr(startPos, width-indent.length()) ) << endl;
+          endPos = startPos + width - indent.length();
+          textSize = mbs_width( (*line).substr( endPos ) );
+          startPos = endPos;
+        }
+      }
+    }
+  }
 }
 
 void TableRow::dumpTo (ostream &stream, const Table & parent) const
@@ -172,6 +213,11 @@ void TableRow::dumpTo (ostream &stream, const Table & parent) const
     curpos += parent._max_width[c] + (parent._style != none ? 2 : 3);
   }
   stream << endl;
+
+  if ( !_details.empty() )
+  {
+    dumpDetails( stream, parent );
+  }
 }
 
 // ----------------------( Table )---------------------------------------------
