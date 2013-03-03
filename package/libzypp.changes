@@ -1,4 +1,9 @@
 -------------------------------------------------------------------
+Sun Mar  3 01:15:52 CET 2013 - ma@suse.de
+
+- Update zypp-po.tar.bz2
+
+-------------------------------------------------------------------
 Wed Feb 27 08:41:18 CET 2013 - ma@suse.de
 
 - Rephrase error message if 'lsof' is not installed (bnc#694427)
