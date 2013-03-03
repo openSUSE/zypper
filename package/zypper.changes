@@ -1,4 +1,9 @@
 -------------------------------------------------------------------
+Sun Mar  3 01:16:19 CET 2013 - ma@suse.de
+
+- Update zypper-po.tar.bz2
+
+-------------------------------------------------------------------
 Thu Feb 28 11:46:36 CET 2013 - ma@suse.de
 
 - fix zypper disregarding zypp.conf cache path settings (bnc#806568)
