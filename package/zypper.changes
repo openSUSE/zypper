@@ -1,4 +1,11 @@
 -------------------------------------------------------------------
+Mon Mar  4 15:26:37 CET 2013 - ma@suse.de
+
+- Fix 'zypper lu' also listing products (bnc#779740)
+- Fix -x printing edition values for arch-old (bnc#793809)
+- version 1.8.12
+
+-------------------------------------------------------------------
 Sun Mar  3 01:16:19 CET 2013 - ma@suse.de
 
 - Update zypper-po.tar.bz2
