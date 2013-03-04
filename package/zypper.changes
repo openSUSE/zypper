@@ -1,4 +1,11 @@
 -------------------------------------------------------------------
+Mon Mar  4 15:22:29 CET 2013 - ma@suse.de
+
+- Fix 'zypper lu' also listing products (bnc#779740)
+- Fix -x printing edition values for arch-old (bnc#793809)
+- version 1.6.172
+
+-------------------------------------------------------------------
 Thu Feb 28 12:02:21 CET 2013 - ma@suse.de
 
 - Allow re-install with different arch upon explicit request (bnc#804219)
