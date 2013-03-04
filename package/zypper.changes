@@ -1,4 +1,13 @@
 -------------------------------------------------------------------
+Mon Mar  4 15:17:32 CET 2013 - ma@suse.de
+
+- Fix 'zypper lu' also listing products (bnc#779740)
+- Fix -x printing edition values for arch-old (bnc#793809)
+- Allow re-install with different arch upon explicit request (bnc#804219)
+- fix zypper disregarding zypp.conf cache path settings (bnc#806568)
+- version 1.7.12
+
+-------------------------------------------------------------------
 Thu Feb 28 01:16:32 CET 2013 - ma@suse.de
 
 - Update zypper-po.tar.bz2
