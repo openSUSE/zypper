@@ -1,4 +1,11 @@
 -------------------------------------------------------------------
+Mon Mar  4 15:23:36 CET 2013 - ma@suse.de
+
+- Fix 'zypper lu' also listing products (bnc#779740)
+- Fix -x printing edition values for arch-old (bnc#793809)
+- version 1.6.305
+
+-------------------------------------------------------------------
 Thu Feb 28 11:56:41 CET 2013 - ma@suse.de
 
 - fix zypper disregarding zypp.conf cache path settings (bnc#806568)
