@@ -353,6 +353,10 @@ find_updates( const ResKind & kind, Candidates & candidates )
       it = God->pool().begin(),
       e  = God->pool().end();
     for (; it != e; ++it)
+    {
+      if ( (*it)->kind() != ResKind::package )
+	continue;	// package updates only (bnc#779740)
+
       // show every package picked by doUpdate for installation
       // except the ones which are not currently installed (bnc #483910)
       if (it->status().isToBeInstalled())
@@ -362,6 +366,7 @@ find_updates( const ResKind & kind, Candidates & candidates )
         if (s->hasInstalledObj())
           candidates.insert(*it);
       }
+    }
     return;
   }
 
