@@ -1266,7 +1266,7 @@ void Summary::writeXmlResolvableList(ostream & out, const KindToResPairSet & res
       if (rold)
       {
         out << " edition-old=\"" << rold->edition() << "\"";
-        out << " arch-old=\"" << rold->edition() << "\"";
+        out << " arch-old=\"" << rold->arch() << "\"";
       }
       if (!res->summary().empty())
         out << " summary=\"" << xml_encode(res->summary()) << "\"";
