@@ -783,8 +783,8 @@ Upgrade the system using 'factory' and 'packman' repository:
 
 .TP
 \fBsearch\fR (\fBse\fR) [\fIoptions\fR] [\fBquerystring|capability\fR] ...
-Search for packages matching given strings. * (any substring) and ? (any character)
-wildcards can also be used within search strings.
+Search for packages matching any of the given strings. * (any substring) and ?
+(any character) wildcards can also be used within search strings.
 If the search string is enclosed in '/', for example
 .B $ zypper se '/^k.*e$/',
 it's interpreted as a regular expression.
@@ -808,12 +808,6 @@ than specified.
 This command accepts the following options:
 
 .TP
-\fI    \-\-match\-all\fR
-Search for a match to all search strings (default).
-.TP
-\fI    \-\-match\-any\fR
-Search for a match to any of the search strings.
-.TP
 \fI    \-\-match\-substrings\fR
 Matches for search strings may be partial words (default).
 .TP
@@ -825,7 +819,7 @@ Searches for an exact name of the package.
 .TP
 \fI    \-\-provides
 Search for packages which provide the search strings. A search string here might be also
-any symbol provided by a package, e.g. /bin/vi, libcurl.so.3, perl(Time::ParseDate),
+any symbol provided by a package like /bin/vi, libcurl.so.3, perl(Time::ParseDate),
 web_browser, e.g. search for the package which provides the shell:
 .B zypper se --provides /bin/sh
 .TP
@@ -849,6 +843,9 @@ Search for packages conflicting with the search strings, e.g.
 \fI    \-\-obsoletes
 Search for packages wich obsolete the search strings, e.g.
 .B zypper se --obsoletes efence
+.TP
+.I \-n, \-\-name
+Useful together with dependency options, otherwise searching in package name is default.
 .TP
 .I \-d, \-\-search\-descriptions
 Search also in summaries and descriptions.
@@ -957,11 +954,13 @@ Show only products which are not installed.
 .B what-provides (wp) <capability>
 List all packages providing the specified capability. See also the \fBinstall\fR command for hint about capabilities.
 .br
-The option '--provides' of the \fBsearch\fR command can also be used to get the
-packages providing a capability. The difference is that 'search --provides'
-searches for substrings (and allows wildcards and regex), e.g.
+\fBwhat-provides\fR is replaced by the \fBsearch\fR command, which now has the functionality
+to search for dependencies (and allows various options).
+.br
+The command line is automatically transformed to the appropriate \fBsearch\fR, e.g.:
+.br
 .B $ zypper what-provides 'zypper>1.6'
-matches to
+to
 .B $ zypper se --provides --match-exact 'zypper>1.6'
 
 .SS Repository Management

@@ -914,6 +914,19 @@ void Zypper::safeDoCommand()
     processCommandOptions();
     if (command() == ZypperCommand::NONE || exitCode())
       return;
+
+    // "what-provides" is obsolete, functionality is provided by "search"
+    if (command() == ZypperCommand::WHAT_PROVIDES_e)
+    {
+      out().info( boost::str(format(_("Command '%s' is replaced by '%s'."))
+                             % "what-provides" % "search --provides --match-exact"));
+      out().info( boost::str(format(_("See '%s' for all available options.")) % "help search"));
+      setCommand(ZypperCommand::SEARCH_e);
+      _copts["provides"].push_back("");
+      _copts["match-exact"].push_back("");
+      ::copts = _copts;
+    }
+
     doCommand();
   }
   catch (const AbortRequestException & ex)
@@ -1886,8 +1899,6 @@ void Zypper::processCommandOptions()
     static struct option search_options[] = {
       {"installed-only", no_argument, 0, 'i'},
       {"uninstalled-only", no_argument, 0, 'u'},
-      {"match-all", no_argument, 0, 0},
-      {"match-any", no_argument, 0, 0},
       {"match-substrings", no_argument, 0, 0},
       {"match-words", no_argument, 0, 0},
       {"match-exact", no_argument, 0, 0},
@@ -1897,6 +1908,7 @@ void Zypper::processCommandOptions()
       {"conflicts", no_argument, 0, 0},
       {"obsoletes", no_argument, 0, 0},
       {"suggests", no_argument, 0, 0},
+      {"name", no_argument, 0, 'n'},
       {"search-descriptions", no_argument, 0, 'd'},
       {"case-sensitive", no_argument, 0, 'C'},
       {"type",    required_argument, 0, 't'},
@@ -1916,20 +1928,20 @@ void Zypper::processCommandOptions()
     _command_help = _(
       "search (se) [options] [querystring] ...\n"
       "\n"
-      "Search for packages matching given search strings.\n"
+      "Search for packages matching any of the given search strings.\n"
       "\n"
       "  Command options:\n"
-      "    --match-all            Search for a match with all search strings (default).\n"
-      "    --match-any            Search for a match with any of the search strings.\n"
       "    --match-substrings     Search for a match to partial words (default).\n"
       "    --match-words          Search for a match to whole words only.\n"
-      "    --match-exact          Searches for an exact package name.\n"
+      "    --match-exact          Searches for an exact match of the search strings.\n"
       "    --provides             Search for packages which provide the search strings.\n"
       "    --recommends           Search for packages which recommend the search strings.\n"
       "    --requires             Search for packages which require the search strings.\n"
       "    --suggests             Search what packages are suggested by the search strings.\n"
       "    --conflicts            Search packages conflicting with search strings.\n"
       "    --obsoletes            Search for packages which obsolete the search strings.\n"
+      "-n, --name                 Useful together with dependency options, otherwise\n"
+      "                           searching in package name is default.\n"
       "-d, --search-descriptions  Search also in package summaries and descriptions.\n"
       "-C, --case-sensitive       Perform case-sensitive search.\n"
       "-i, --installed-only       Show only packages that are already installed.\n"
@@ -1940,8 +1952,8 @@ void Zypper::processCommandOptions()
       "    --sort-by-repo         Sort packages by repository.\n"
       "-s, --details              Show each available version in each repository\n"
       "                           on a separate line.\n"
-      "-v, --verbose              Like --details with additional information where the search\n"
-      "                           has matched (useful for dependencies).\n"
+      "-v, --verbose              Like --details, with additional information where the\n"
+      "                           search has matched (useful for search in dependencies).\n"
       "\n"
       "* and ? wildcards can also be used within search strings.\n"
       "If a search string is enclosed in '/', it's interpreted as a regular expression.\n"
@@ -2541,8 +2553,6 @@ void Zypper::processCommandOptions()
     static struct option search_options[] = {
       {"installed-only", no_argument, 0, 'i'},
       {"uninstalled-only", no_argument, 0, 'u'},
-      {"match-all", no_argument, 0, 0},
-      {"match-any", no_argument, 0, 0},
       {"match-substrings", no_argument, 0, 0},
       {"match-words", no_argument, 0, 0},
       {"match-exact", no_argument, 0, 0},
@@ -3781,9 +3791,7 @@ void Zypper::doCommand()
     }
     if (copts.count("installed-only"))
       inst_notinst = true;
-
     //  query.setInstalledOnly();
-    //if (copts.count("match-any")) options.setMatchAny();
 
     if (copts.count("match-exact"))
     {
@@ -3902,12 +3910,11 @@ void Zypper::doCommand()
         attr = zypp::sat::SolvAttr::obsoletes;
         query.addDependency( attr , name, cap.detail().op(), cap.detail().ed(), Arch(cap.detail().arch()) );
       }
-      if ( attr == sat::SolvAttr::name )
+      if ( attr == sat::SolvAttr::name || copts.count("name") )
       {
         // addDependency can also be used for sat::SolvAttr::name
-        query.addDependency( attr, name, cap.detail().op(), cap.detail().ed(), Arch(cap.detail().arch()) );
+        query.addDependency( sat::SolvAttr::name, name, cap.detail().op(), cap.detail().ed(), Arch(cap.detail().arch()) );
       }
-
       if ( attr != sat::SolvAttr::name && cap.detail().isVersioned() )
       {
         // search in dependencies including edition only makes sense with exact match because
