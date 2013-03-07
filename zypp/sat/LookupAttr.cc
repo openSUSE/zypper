@@ -321,6 +321,7 @@ namespace zypp
         {
           _dip = new ::Dataiterator;
           ::dataiterator_init_clone( _dip, rhs._dip );
+	  ::dataiterator_strdup( _dip );
         }
       }
 
@@ -599,7 +600,10 @@ namespace zypp
             break;
 
           case REPOKEY_TYPE_DIRSTRARRAY:
-            return ::repodata_dir2str( _dip->data, _dip->kv.id, _dip->kv.str );
+	    // may or may not be stringified depending on SEARCH_FILES flag
+            return( _dip->flags & SEARCH_FILES
+		    ? _dip->kv.str
+		    : ::repodata_dir2str( _dip->data, _dip->kv.id, _dip->kv.str ) );
             break;
         }
       }
@@ -752,10 +756,19 @@ namespace zypp
 
     void LookupAttr::iterator::increment()
     {
-      if ( _dip && ! ::dataiterator_step( _dip.get() ) )
+      if ( _dip )
       {
-        _dip.reset();
-        base_reference() = 0;
+	if ( ! ::dataiterator_step( _dip.get() ) )
+	{
+	  _dip.reset();
+	  base_reference() = 0;
+	}
+	else
+	{
+	  INT << _dip->kv.str << endl;
+	  INT << "  " << *this << endl;
+	  ::dataiterator_strdup( _dip.get() );
+	}
       }
     }
 
