@@ -422,7 +422,7 @@ SATResolver::solving(const CapabilitySet & requires_caps,
 		     const CapabilitySet & conflict_caps)
 {
     _solv = solver_create( _SATPool );
-    _solv->vendorCheckCb = &vendorCheck;
+    ::pool_set_custom_vendorcheck( _SATPool, &vendorCheck );
     if (_fixsystem) {
 	queue_push( &(_jobQueue), SOLVER_VERIFY|SOLVER_SOLVABLE_ALL);
 	queue_push( &(_jobQueue), 0 );
@@ -845,7 +845,7 @@ void SATResolver::doUpdate()
     setLocks();
 
     _solv = solver_create( _SATPool );
-    _solv->vendorCheckCb = &vendorCheck;
+    ::pool_set_custom_vendorcheck( _SATPool, &vendorCheck );
     if (_fixsystem) {
 	queue_push( &(_jobQueue), SOLVER_VERIFY|SOLVER_SOLVABLE_ALL);
 	queue_push( &(_jobQueue), 0 );
