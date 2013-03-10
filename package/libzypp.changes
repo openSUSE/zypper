@@ -1,4 +1,9 @@
 -------------------------------------------------------------------
+Sun Mar 10 01:14:01 CET 2013 - ma@suse.de
+
+- Update zypp-po.tar.bz2
+
+-------------------------------------------------------------------
 Thu Mar  7 14:13:42 CET 2013 - ma@suse.de
 
 - Adapt to libsolv dataiterator fixes 
