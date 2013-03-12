@@ -3884,6 +3884,13 @@ void Zypper::doCommand()
       {
         attr =  zypp::sat::SolvAttr::provides;
         query.addDependency( attr , name, cap.detail().op(), cap.detail().ed(), Arch(cap.detail().arch()) );
+        if ( str::regex_match(name.c_str(), string("^/")) )
+        {
+          // in case of path names also search in file list
+          attr = zypp::sat::SolvAttr::filelist;
+          query.setFilesMatchFullPath(true);
+          query.addDependency( attr , name, cap.detail().op(), cap.detail().ed(), Arch(cap.detail().arch()) );
+        }
       }
       if (copts.count("requires"))
       {
