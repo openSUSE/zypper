@@ -1909,6 +1909,7 @@ void Zypper::processCommandOptions()
       {"obsoletes", no_argument, 0, 0},
       {"suggests", no_argument, 0, 0},
       {"name", no_argument, 0, 'n'},
+      {"file-list", no_argument, 0, 'f'},
       {"search-descriptions", no_argument, 0, 'd'},
       {"case-sensitive", no_argument, 0, 'C'},
       {"type",    required_argument, 0, 't'},
@@ -1942,6 +1943,7 @@ void Zypper::processCommandOptions()
       "    --obsoletes            Search for packages which obsolete the search strings.\n"
       "-n, --name                 Useful together with dependency options, otherwise\n"
       "                           searching in package name is default.\n"
+      "-f, --file-list            Search for a match in the file list of packages.\n"
       "-d, --search-descriptions  Search also in package summaries and descriptions.\n"
       "-C, --case-sensitive       Perform case-sensitive search.\n"
       "-i, --installed-only       Show only packages that are already installed.\n"
@@ -3915,6 +3917,11 @@ void Zypper::doCommand()
       if (copts.count("obsoletes"))
       {
         attr = zypp::sat::SolvAttr::obsoletes;
+        query.addDependency( attr , name, cap.detail().op(), cap.detail().ed(), Arch(cap.detail().arch()) );
+      }
+      if (copts.count("file-list"))
+      {
+        attr = zypp::sat::SolvAttr::filelist;
         query.addDependency( attr , name, cap.detail().op(), cap.detail().ed(), Arch(cap.detail().arch()) );
       }
       if ( attr == sat::SolvAttr::name || copts.count("name") )
