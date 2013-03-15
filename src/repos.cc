@@ -71,10 +71,10 @@ static bool refresh_raw_metadata(Zypper & zypper,
   // reset the gData.current_repo when going out of scope
   struct Bye { ~Bye() { Zypper::instance()->runtimeData().current_repo = RepoInfo(); } } reset __attribute__ ((__unused__));
 
+  RepoManager & manager = zypper.repoManager();
+
   try
   {
-    RepoManager & manager = zypper.repoManager();
-
     if (!force_download)
     {
       // check whether libzypp indicates a refresh is needed, and if so,
@@ -154,6 +154,41 @@ static bool refresh_raw_metadata(Zypper & zypper,
       zypper.out().progressEnd("raw-refresh", plabel);
       plabel.clear();
     }
+  }
+  catch (const AbortRequestException & e)
+  {
+    ZYPP_CAUGHT(e);
+    // rethrow ABORT exception, stop executing the command
+    ZYPP_RETHROW(e);
+  }
+  catch (const SkipRequestException & e)
+  {
+    ZYPP_CAUGHT(e);
+
+    std::string question = boost::str( boost::format(_("Do you want to disable the repository %s permanently?")) % repo.name().c_str() );
+
+    if ( read_bool_answer(PROMPT_YN_MEDIA_CHANGE, question, false) )
+    {
+      MIL << "Disabling repository " << repo.name().c_str() << " permanently." << endl;
+
+      try
+      {
+        RepoInfo origRepo( manager.getRepositoryInfo(repo.alias()) );
+
+        origRepo.setEnabled(false);
+        manager.modifyRepository(repo.alias(), origRepo);
+      }
+      catch (const Exception & ex)
+      {
+        ZYPP_CAUGHT(ex);
+        zypper.out().error( ex, boost::str(format(_("Error while disabling repository '%s'."))
+                                           % repo.alias()));
+
+        ERR << "Error while disabling the repository." << endl;
+      }
+    }
+    // will disable repo in gData.repos
+    return true;
   }
   catch (const MediaException & e)
   {
@@ -651,8 +686,8 @@ void do_init_repos(Zypper & zypper, const Container & container)
         if (refresh_raw_metadata(zypper, repo, false)
             || build_cache(zypper, repo, false))
         {
-          zypper.out().warning(boost::str(format(
-              _("Disabling repository '%s' because of the above error."))
+          zypper.out().info(boost::str(format(
+              _("Disabling repository '%s'."))
               % (zypper.config().show_alias ? repo.alias() : repo.name())), Out::QUIET);
           WAR << format("Disabling repository '%s' because of the above error.")
               % repo.alias() << endl;
