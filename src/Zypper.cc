@@ -1932,6 +1932,8 @@ void Zypper::processCommandOptions()
       "Search for packages matching any of the given search strings.\n"
       "\n"
       "  Command options:\n"
+      "    --installed-only       Show only installed packages.\n"
+      "    --uninstalled-only     Show only packages which are currently not installed.\n"
       "    --match-substrings     Search for a match to partial words (default).\n"
       "    --match-words          Search for a match to whole words only.\n"
       "    --match-exact          Searches for an exact match of the search strings.\n"
