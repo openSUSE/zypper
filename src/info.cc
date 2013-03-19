@@ -24,6 +24,7 @@
 #include "Table.h"
 #include "utils/richtext.h"
 #include "utils/misc.h" // for kind_to_string_localized and string_patch_status
+#include "utils/text.h"
 #include "search.h"
 #include "update.h"
 
@@ -74,7 +75,16 @@ void printInfo(Zypper & zypper, const ResKind & kind)
     PoolQuery q;
     q.addKind(kind);
     q.addAttribute(sat::SolvAttr::name, *nameit);
-    q.setMatchExact();
+
+    if ( !zypper.cOpts().count("match-substrings") )
+    {
+      q.setMatchExact();
+    }
+
+    if ( (*nameit).find_first_of("?*") != string::npos )
+    {
+      q.setMatchGlob();
+    }
 
     if (q.empty())
     {
@@ -86,30 +96,35 @@ void printInfo(Zypper & zypper, const ResKind & kind)
     }
     else
     {
-      ui::Selectable::constPtr s = *q.selectableBegin();
-      // print info
-      // TranslatorExplanation E.g. "Information for package zypper:"
-
-      if (zypper.out().type() != Out::TYPE_XML)
+      for ( zypp::PoolQuery::Selectable_iterator it = q.selectableBegin();
+	     it != q.selectableEnd(); it++)
       {
-        cout << endl << format(_("Information for %s %s:"))
-            % kind_to_string_localized(kind, 1) % *nameit;
+        // print info
+        // TranslatorExplanation E.g. "Information for package zypper:"
 
-        cout << endl << endl;
+        if (zypper.out().type() != Out::TYPE_XML)
+        {
+          string info = boost::str( format(_("Information for %s %s:"))
+                                    % kind_to_string_localized(kind, 1)
+                                    % (*it)->name() );
+
+          cout << endl << info << endl;
+          cout << string( mbs_width(info), '-' ) << endl;
+        }
+
+        if (kind == ResKind::package)
+          printPkgInfo(zypper, *(*it));
+        else if (kind == ResKind::patch)
+          printPatchInfo(zypper, *(*it));
+        else if (kind == ResKind::pattern)
+          printPatternInfo(zypper, *(*it));
+        else if (kind == ResKind::product)
+          printProductInfo(zypper, *(*it));
+        else
+          // TranslatorExplanation %s = resolvable type (package, patch, pattern, etc - untranslated).
+          zypper.out().info(
+                            boost::str(format(_("Info for type '%s' not implemented.")) % kind));
       }
-
-      if (kind == ResKind::package)
-        printPkgInfo(zypper, *s);
-      else if (kind == ResKind::patch)
-        printPatchInfo(zypper, *s);
-      else if (kind == ResKind::pattern)
-        printPatternInfo(zypper, *s);
-      else if (kind == ResKind::product)
-        printProductInfo(zypper, *s);
-      else
-        // TranslatorExplanation %s = resolvable type (package, patch, pattern, etc - untranslated).
-        zypper.out().info(
-          boost::str(format(_("Info for type '%s' not implemented.")) % kind));
     }
   }
 
@@ -345,6 +360,9 @@ void printPatternInfo(Zypper & zypper, const ui::Selectable & s)
 {
   const PoolItem & pool_item = s.theObj();
 
+  if ( !pool_item.resolvable()->isKind<Pattern>() )
+    return;
+
   cout << (zypper.globalOpts().is_rug_compatible ? _("Catalog: ") : _("Repository: "))
        << (zypper.config().show_alias ?
            pool_item.resolvable()->repository().info().alias() :
@@ -353,6 +371,7 @@ void printPatternInfo(Zypper & zypper, const ui::Selectable & s)
   printNVA(pool_item.resolvable());
 
   cout << _("Installed: ") << (pool_item.isSatisfied() ? _("Yes") : _("No")) << endl;
+  cout << _("Visible to User: ") << (pool_item.resolvable()->asKind<Pattern>()->userVisible() ? _("Yes") : _("No")) << endl;
 
   printSummaryDesc(pool_item.resolvable());
 

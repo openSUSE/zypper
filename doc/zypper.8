@@ -782,8 +782,16 @@ Upgrade the system using 'factory' and 'packman' repository:
 
 
 .TP
-\fBsearch\fR (\fBse\fR) [\fIoptions\fR] [\fBquerystring\fR] ...
-Search for packages matching given strings. * (any substring) and ? (any character) wildcards can also be used within search strings.
+\fBsearch\fR (\fBse\fR) [\fIoptions\fR] [\fBquerystring|capability\fR] ...
+Search for packages matching any of the given strings. * (any substring) and ?
+(any character) wildcards can also be used within search strings.
+If the search string is enclosed in '/', for example
+.B $ zypper se '/^k.*e$/',
+it's interpreted as a regular expression.
+It's also possible to specify a capability like "NAME[.ARCH][OP<EDITION>]", where ARCH
+is an architecture code, OP is <, <=, =, >=, or > and EDITION is VERSION[-RELEASE].
+Also quote here to protect the special characters from the shell, for example:
+.B $ zypper se 'libgcc>4.6'.
 
 Results of search are printed in a table with following columns:
 S (status), Catalog, Type (type of package), Name, Version,
@@ -800,12 +808,6 @@ than specified.
 This command accepts the following options:
 
 .TP
-\fI    \-\-match\-all\fR
-Search for a match to all search strings (default).
-.TP
-\fI    \-\-match\-any\fR
-Search for a match to any of the search strings.
-.TP
 \fI    \-\-match\-substrings\fR
 Matches for search strings may be partial words (default).
 .TP
@@ -814,6 +816,39 @@ Matches for search strings may only be whole words.
 .TP
 \fI    \-\-match-exact\fR
 Searches for an exact name of the package.
+.TP
+\fI    \-\-provides
+Search for packages which provide the search strings. A search string here might be also
+any symbol provided by a package like /bin/vi, libcurl.so.3, perl(Time::ParseDate),
+web_browser, e.g. search for the package which provides the shell:
+.B zypper se --provides /bin/sh
+.TP
+\fI    \-\-requires
+Search for packages which require the search strings. A search string here might be also
+any symbol required by a package, e.g. all packages which require the snapper library:
+.B zypper se --requires libsnapper.so
+.TP
+\fI    \-\-recommends
+Search for packages which recommend the search strings, e.g.
+.B zypper se --recommends usb_modeswitch
+.TP
+\fI    \-\-suggests
+Search for packages which suggest the search strings, e.g.
+.B zypper se --suggests acroread
+.TP
+\fI    \-\-conflicts
+Search for packages conflicting with the search strings, e.g.
+.B zypper se --conflicts aspell-hi
+.TP
+\fI    \-\-obsoletes
+Search for packages wich obsolete the search strings, e.g.
+.B zypper se --obsoletes efence
+.TP
+.I \-n, \-\-name
+Useful together with dependency options, otherwise searching in package name is default.
+.TP
+.I \-f, \-\-file\-list
+Search in file list of packages.
 .TP
 .I \-d, \-\-search\-descriptions
 Search also in summaries and descriptions.
@@ -846,6 +881,10 @@ Sort packages by catalog, not by name.
 .I \-s, \-\-details
 Show all available versions of found packages, each version in each repository
 on a separate line.
+.TP
+.I \-v, \-\-verbose
+Like --details with additional information where the search has matched (useful when searching
+for dependencies, e.g. --provides).
 .TP
 Examples:
 
@@ -917,7 +956,15 @@ Show only products which are not installed.
 .TP
 .B what-provides (wp) <capability>
 List all packages providing the specified capability. See also the \fBinstall\fR command for hint about capabilities.
-
+.br
+\fBwhat-provides\fR is replaced by the \fBsearch\fR command, which now has the functionality
+to search for dependencies (and allows various options).
+.br
+The command line is automatically transformed to the appropriate \fBsearch\fR, e.g.:
+.br
+.B $ zypper what-provides 'zypper>1.6'
+to
+.B $ zypper se --provides --match-exact 'zypper>1.6'
 
 .SS Repository Management
 .PP
