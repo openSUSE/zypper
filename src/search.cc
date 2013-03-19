@@ -106,7 +106,9 @@ void FillSearchTableSolvable::addPicklistItem( const ui::Selectable::constPtr & 
   else
   {
     // picklist: ==> available, maybe identical installed too
-    if ( sel->installedEmpty() )
+
+    // only check for sel->installedEmpty() if NOT pseudo installed
+    if ( !traits::isPseudoInstalled( pi->kind() ) && sel->installedEmpty() )
     {
       if ( _inst_notinst == true )
 	return;	// show only installed
@@ -170,6 +172,14 @@ bool FillSearchTableSolvable::operator()( const zypp::PoolQuery::const_iterator 
   // done, add the details about matches to last row
   TableRow & lastRow = _table->rows().back();
 
+  // don't show details for patterns with user visible flag not set (bnc #538152)
+  if (it->kind() == zypp::ResKind::pattern)
+  {
+    Pattern::constPtr ptrn = asKind<Pattern>(*it);
+    if (ptrn && !ptrn->userVisible())
+      return true;
+  }
+
   if ( !it.matchesEmpty() )
   {
     for_( match, it.matchesBegin(), it.matchesEnd() )
@@ -208,159 +218,6 @@ bool FillSearchTableSolvable::operator()( const zypp::ui::Selectable::constPtr &
   {
     addPicklistItem( sel, *it );
   }
-  return true;
-
-  // show available objects
-  const zypp::ui::Selectable::constPtr & s( sel );
-  for_(it, s->availableBegin(), s->availableEnd())
-  {
-    TableRow row;
-    zypp::PoolItem pi = *it;
-
-    // hide patterns with user visible flag not set (bnc #538152)
-    if (pi->kind() == zypp::ResKind::pattern)
-    {
-      Pattern::constPtr ptrn = asKind<Pattern>(pi.resolvable());
-      if (ptrn && !ptrn->userVisible())
-        continue;
-    }
-
-    // installed status
-
-    // patters
-    if (zypp::traits::isPseudoInstalled(s->kind()))
-    {
-      // patches/patterns are installed if satisfied
-      if (pi->kind() != zypp::ResKind::srcpackage && pi.isSatisfied())
-      {
-        // show only not installed
-        if (_inst_notinst == false)
-          continue;
-        row << "i";
-      }
-      else
-      {
-        // show only installed
-        if (_inst_notinst == true)
-          continue;
-        row << "";
-      }
-    }
-    else // packages/products
-    {
-      if (s->installedEmpty())
-      {
-        // show only installed
-        if (_inst_notinst == true)
-          continue;
-        row << "";
-      }
-      else
-      {
-        static bool installed;
-        installed = false;
-        for_(instit, s->installedBegin(), s->installedEnd())
-        {
-          if (identical(*instit, pi) &&
-               (_repos.empty() ||
-                _repos.find(pi.resolvable()->repoInfo().alias())!=_repos.end()))
-          {
-            installed = true;
-            break;
-          }
-        }
-
-        if (installed)
-        {
-          // show only not installed
-          if (_inst_notinst == false)
-            continue;
-          row << "i";
-        }
-        else
-        {
-          // show only installed
-          if (_inst_notinst == true)
-            continue;
-          row << "v";
-        }
-      }
-    }
-
-    if (_gopts.is_rug_compatible)
-    {
-      row
-        << (_show_alias ?
-            pi->repository().info().alias() : pi->repository().info().name())
-        << ""
-        << pi->name()
-        << pi->edition().asString()
-        << pi->arch().asString();
-    }
-    else
-    {
-      row
-        << pi->name()
-        << kind_to_string_localized(pi->kind(), 1)
-        << pi->edition().asString()
-        << pi->arch().asString()
-        << (_show_alias ?
-            pi->repository().info().alias() : pi->repository().info().name());
-    }
-
-    *_table << row;
-  }
-
-  // --uninstalled
-  if (_inst_notinst == false)
-    return true;
-  // --repo => we only want the repo resolvables, not @System (bnc #467106)
-  if (!_repos.empty())
-    return true;
-
-  // now list the system packages
-  for_(it, s->installedBegin(), s->installedEnd())
-  {
-    // show installed objects only if there is no counterpart in repos
-    bool has_counterpart = false;
-    for_(ait, s->availableBegin(), s->availableEnd())
-      if (identical(*it, *ait))
-      {
-        has_counterpart = true;
-        break;
-      }
-    if (has_counterpart)
-      continue;
-
-    TableRow row;
-    zypp::PoolItem pi = *it;
-    row << "i";
-    if (_gopts.is_rug_compatible)
-    {
-      row
-        << _("System Packages")
-        // TODO what about rug's Bundle?
-        << ""
-        << pi->name()
-        << pi->edition().asString()
-        << pi->arch().asString();
-    }
-    else
-    {
-      row
-        << pi->name()
-        << kind_to_string_localized(pi->kind(), 1)
-        << pi->edition().asString()
-        << pi->arch().asString()
-        << (string("(") + _("System Packages") + ")");
-    }
-
-    *_table << row;
-  }
-
-  //! \todo maintain an internal plaindir repo named "Local Packages"
-  // for plain rpms (as rug does). ?
-
   return true;
 }
 
@@ -879,7 +736,8 @@ void list_products(Zypper & zypper)
     list_product_table(zypper);
 }
 
-
+// list_what_provides() isn't called any longer, ZypperCommand::WHAT_PROVIDES_e is
+// replaced by Zypper::SEARCH_e with appropriate options (see Zypper.cc, line 919)
 void list_what_provides(Zypper & zypper, const string & str)
 {
   Capability cap(Capability::guessPackageSpec(str));
