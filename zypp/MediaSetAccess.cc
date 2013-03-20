@@ -284,7 +284,9 @@ IMPL_PTR_TYPE(MediaSetAccess);
           if( user == media::MediaChangeReport::ABORT )
           {
             DBG << "Aborting" << endl;
-            ZYPP_RETHROW ( excp );
+            AbortRequestException aexcp("Aborting requested by user");
+            aexcp.remember(excp);
+            ZYPP_THROW(aexcp);
           }
           else if ( user == media::MediaChangeReport::IGNORE )
           {
