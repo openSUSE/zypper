@@ -444,15 +444,28 @@ void printProductInfo(Zypper & zypper, const ui::Selectable & s)
 
     printNVA(pool_item.resolvable());
 
-    Product::constPtr product = asKind<Product>(pool_item.resolvable());
+    PoolItem installed;
+    if (!s.installedEmpty())
+      installed = s.installedObj();
+
+    Product::constPtr product;
+    if ( installed )
+      product = asKind<Product>(installed);
+    else
+      product = asKind<Product>(pool_item.resolvable());
+
     cout << _("Is Base")   << ": "
       << (product->isTargetDistribution()  ? _("Yes") : _("No")) << endl;
-    cout << _("Flavor")     << ": "
-      << product->flavor() << endl;
-    cout << _("Installed")  << ": "
-      << (pool_item.status().isInstalled() ? _("Yes") : _("No")) << endl;
-    cout << _("Short Name")
-      << ": " << product->shortName() << endl;
+
+    cout << _("Flavor") << ": "  << product->flavor() << endl;
+
+    if ( installed )
+      cout << _("Installed")  << ": " << _("Yes") << endl;
+    else
+      cout << _("Installed")  << ": " << _("No") << endl;
+
+    cout << _("Short Name") << ": " << product->shortName() << endl;
+
     printSummaryDesc(pool_item.resolvable());
   }
 }
