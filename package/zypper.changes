@@ -1,4 +1,9 @@
 -------------------------------------------------------------------
+Tue Mar 26 08:55:59 CET 2013 - ma@suse.de
+
+- Update zypper-po.tar.bz2
+
+-------------------------------------------------------------------
 Tue Mar 19 13:55:03 CET 2013 - ma@suse.de
 
 - disable repo permanently if required by user
