@@ -256,9 +256,10 @@ IMPL_PTR_TYPE(MediaSetAccess);
             reason = media::MediaChangeReport::IO_SOFT;
           }
 
-          // non interactive only bother the user if wrong medium is in the drive
-          // otherwise propagate the error
-          if ( ( options & PROVIDE_NON_INTERACTIVE ) && reason != media::MediaChangeReport::WRONG)
+          // Propagate the original error if _no_ callback receiver is connected, or
+	  // non_interactive mode (for optional files) is used (except for wrong media).
+          if ( ! callback::SendReport<media::MediaChangeReport>::Distributor::instance().getReceiver()
+	     || (( options & PROVIDE_NON_INTERACTIVE ) && reason != media::MediaChangeReport::WRONG ) )
           {
               MIL << "Can't provide file. Non-Interactive mode." << endl;
               ZYPP_RETHROW(excp);
