@@ -342,10 +342,11 @@ namespace zypp
      *     Mandatory URL component, that specifies the share name with
      *     optional subdirectory, where the desired files are located.
      *
-     * \subsection MediaCurl_Url MediaCurl - FTP/HTTP directory tree (ftp, http, https)
+     * \subsection MediaCurl_Url MediaCurl - FTP/HTTP directory tree (ftp, tftp, http, https)
      * The access handler to media directory tree on a ftp/http server.
      *   - Scheme:
      *     - <b>ftp</b>
+     *     - <b>tftp</b>
      *     - <b>http</b>
      *     - <b>https</b>
      *   - Examples:

@@ -240,7 +240,7 @@ void fillSettingsFromUrl( const Url &url, TransferSettings &s )
     else
     {
         // if there is no username, set anonymous auth
-        if ( url.getScheme() == "ftp" && s.username().empty() )
+        if ( ( url.getScheme() == "ftp" || url.getScheme() == "tftp" ) && s.username().empty() )
             s.setAnonymousAuth();
     }
 
@@ -1317,7 +1317,7 @@ void MediaCurl::doGetFileCopy( const Pathname & filename , const Pathname & targ
     {
       DBG << "HTTP response: " + str::numstring(httpReturnCode);
       if ( httpReturnCode == 304
-           || ( httpReturnCode == 213 && _url.getScheme() == "ftp" ) ) // not modified
+           || ( httpReturnCode == 213 && (_url.getScheme() == "ftp" || _url.getScheme() == "tftp") ) ) // not modified
       {
         DBG << " Not modified.";
         modified = false;

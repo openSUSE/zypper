@@ -215,6 +215,7 @@ namespace zypp
         ref->config("path_encode_slash2", "y"); // always encode 2. slash
         addUrlByScheme("ftp",    ref);
         addUrlByScheme("sftp",   ref);
+        addUrlByScheme("tftp",   ref);
       }
 
       bool
@@ -460,7 +461,7 @@ namespace zypp
 
   bool Url::schemeIsRemote( const std::string & scheme_r )
   {
-    static const char * val[] = { "http", "https", "nfs", "nfs4", "smb", "cifs", "ftp", "sftp" };
+    static const char * val[] = { "http", "https", "nfs", "nfs4", "smb", "cifs", "ftp", "sftp", "tftp" };
     return isInList( arrayBegin(val), arrayEnd(val), scheme_r );
   }
 
@@ -472,7 +473,7 @@ namespace zypp
 
   bool Url::schemeIsDownloading( const std::string & scheme_r )
   {
-    static const char * val[] = { "http", "https", "ftp", "sftp" };
+    static const char * val[] = { "http", "https", "ftp", "sftp", "tftp" };
     return isInList( arrayBegin(val), arrayEnd(val), scheme_r );
   }
   ///////////////////////////////////////////////////////////////////

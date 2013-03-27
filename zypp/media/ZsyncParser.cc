@@ -81,7 +81,7 @@ ZsyncParser::parse(string filename)
         (void)sscanf(buf + 14, "%d,%d,%d", &sql, &rsl, &csl);
       else if (!strncmp(buf, "Blocksize: ", 11))
         blksize = atoi(buf + 11);
-      else if (!strncmp(buf, "URL: http://", 12) || !strncmp(buf, "URL: https://", 13) || !strncmp(buf, "URL: ftp://", 11))
+      else if (!strncmp(buf, "URL: http://", 12) || !strncmp(buf, "URL: https://", 13) || !strncmp(buf, "URL: ftp://", 11) || !strncmp(buf, "URL: tftp://", 12) ) 
 	urls.push_back(buf + 5);
       else if (!strncmp(buf, "SHA-1: ", 7))
 	{

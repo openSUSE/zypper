@@ -33,7 +33,7 @@ namespace zypp
       /**
        * 4: local:     file,dir,hd
        * 3: remote:    nfs,cifs,smb
-       * ?: download:  http,https,ftp,sftp
+       * ?: download:  http,https,ftp,sftp, tftp
        * ?: volatile:  cd,dvd
        * 0:            the rest
       */
@@ -56,6 +56,10 @@ namespace zypp
 	  case 'f':
 	    RETURN_IF( "file",	4 );
 	    RETURN_IF( "ftp",	ZConfig::instance().download_media_prefer_download() ? 2 : 1);
+	    break;
+	  
+	  case 't':
+	    RETURN_IF( "tftp",	ZConfig::instance().download_media_prefer_download() ? 2 : 1);
 	    break;
 
 	  case 'h':

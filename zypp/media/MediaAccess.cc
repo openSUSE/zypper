@@ -133,7 +133,7 @@ MediaAccess::open (const Url& o_url, const Pathname & preferred_attach_point)
         _handler = new MediaDISK (url,preferred_attach_point);
     else if (scheme == "cifs" || scheme == "smb")
 	_handler = new MediaCIFS (url,preferred_attach_point);
-    else if (scheme == "ftp" || scheme == "http" || scheme == "https")
+    else if (scheme == "ftp" || scheme == "tftp" || scheme == "http" || scheme == "https")
     {
         // Another good idea would be activate MediaAria2c handler via external var
         bool use_aria = false;
@@ -182,7 +182,7 @@ MediaAccess::open (const Url& o_url, const Pathname & preferred_attach_point)
           else if ( !use_aria && ariaenv && ( strcmp(ariaenv, "1" ) == 0 ) )
           {
               // no aria for ftp - no advantage in that over curl
-              if ( url.getScheme() == "ftp" )
+              if ( url.getScheme() == "ftp" || url.getScheme() == "tftp" )
                   WAR << "no aria2c for FTP, despite ZYPP_ARIA2C=1" << endl;
               else
               {
