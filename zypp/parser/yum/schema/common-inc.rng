@@ -114,6 +114,7 @@
       <value>sparcv9</value>
       <value>sparcv8</value>
       <value>sparc</value>
+      <value>aarch64</value>
       <value>armv7tnhl</value>
       <value>armv7thl</value>
       <value>armv7nhl</value>
