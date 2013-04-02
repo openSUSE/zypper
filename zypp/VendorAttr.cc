@@ -164,13 +164,17 @@ namespace zypp
         _vendorMap["opensuse"] = suseit->second;
       }
 
-      // Take care 'opensuse build service' gets it's own class.
-      VendorMap::const_iterator obsit( _vendorMap.find("opensuse build service") );
-      if ( obsit == _vendorMap.end() )
+      // Legacy: Take care well known vendor strings (starting with suse or
+      // opensuse) get their own classes:
+      for ( auto v : { "opensuse build service"
+		     , "opensuse-education" } )
       {
-        _vendorMap["opensuse build service"] = ++vendorGroupCounter;
+	VendorMap::const_iterator it( _vendorMap.find( v ) );
+	if ( it == _vendorMap.end() )
+	{
+	  _vendorMap[v] = ++vendorGroupCounter;
+	}
       }
-
 
       MIL << *this << endl;
   }
