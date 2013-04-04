@@ -370,9 +370,23 @@ unsigned Summary::packagesToDowngrade() const
 }
 
 // --------------------------------------------------------------------------
+///////////////////////////////////////////////////////////////////
+namespace
+{
+  inline std::string ResPair2Name( const Summary::ResPairSet::value_type & resp_r )
+  {
+    if ( resp_r.second->kind() == ResKind::product )
+      // If two products are involved, show the old ones summary.
+      // (The following product is going to be upgraded/downgraded:)
+      return resp_r.first ? resp_r.first->summary() : resp_r.second->summary();
 
+    return resp_r.second->name();
+  }
+} // namespace
+///////////////////////////////////////////////////////////////////
 void Summary::writeResolvableList(ostream & out, const ResPairSet & resolvables)
 {
+
   if ((_viewop & DETAILS) == 0)
   {
     ostringstream s;
@@ -380,9 +394,7 @@ void Summary::writeResolvableList(ostream & out, const ResPairSet & resolvables)
         resit != resolvables.end(); ++resit)
     {
       // name
-      s << (resit->second->kind() == ResKind::product ?
-          resit->second->summary() :
-          resit->second->name());
+      s << ResPair2Name( *resit );
 
       // version (if multiple versions are present)
       if (!(_viewop & SHOW_VERSION) && multi_installed.find(resit->second->name()) != multi_installed.end())
@@ -408,9 +420,7 @@ void Summary::writeResolvableList(ostream & out, const ResPairSet & resolvables)
   {
     TableRow tr;
 
-    string name = (resit->second->kind() == ResKind::product ?
-        resit->second->summary() :
-        resit->second->name());
+    string name = ResPair2Name( *resit );
 
     // version (if multiple versions are present)
     if (!(_viewop & SHOW_VERSION) && multi_installed.find(resit->second->name()) != multi_installed.end())
