@@ -1,4 +1,10 @@
 -------------------------------------------------------------------
+Thu Apr  4 17:02:25 CEST 2013 - ma@suse.de
+
+- Show the right product in summary (bnc#811997)
+- version 1.6.173
+
+-------------------------------------------------------------------
 Mon Mar  4 15:22:29 CET 2013 - ma@suse.de
 
 - Fix 'zypper lu' also listing products (bnc#779740)
