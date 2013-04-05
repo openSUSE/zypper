@@ -1,4 +1,12 @@
 -------------------------------------------------------------------
+Fri Apr  5 14:26:35 CEST 2013 - ma@suse.de
+
+- added new fuction zypp::ZYpp::provideSrcPackage
+- Treat opensuse-education as separate vendor (bnc#812608)
+- AArch64 support
+- version 12.11.0 (0)
+
+-------------------------------------------------------------------
 Wed Mar 27 12:31:17 CET 2013 - ma@suse.de
 
 - added tftp-support (bnc#803316)
