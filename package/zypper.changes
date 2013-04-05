@@ -1,4 +1,11 @@
 -------------------------------------------------------------------
+Fri Apr  5 15:41:21 CEST 2013 - ma@suse.de
+
+- Added new option 'download-only' to source-install (bnc #640403)
+- Show the right product in summary (bnc#811997)
+- version 1.8.14
+
+-------------------------------------------------------------------
 Thu Apr  4 01:14:04 CEST 2013 - ma@suse.de
 
 - Update zypper-po.tar.bz2
