@@ -88,17 +88,22 @@ namespace zypp
         if ( ! lcent )
         {
           unsigned myid = 0;
-          // Compare this entry with the global vendor map.
-          // Reversed to get the longes prefix.
-          for ( VendorMap::reverse_iterator it = _vendorMap.rbegin(); it != _vendorMap.rend(); ++it )
-          {
-            if ( str::hasPrefix( lcvendor.c_str(), it->first ) )
-            {
-              myid = it->second;
-              break; // found
-            }
-          }
-          if ( ! myid )
+	  // bnc#812608: no pefix compare in opensuse namespace
+	  static const IdString openSUSE( "opensuse" );
+	  if ( lcvendor == openSUSE || ! str::hasPrefix( lcvendor.c_str(), openSUSE.c_str() ) )
+	  {
+	    // Compare this entry with the global vendor map.
+	    // Reversed to get the longest prefix.
+	    for ( VendorMap::reverse_iterator it = _vendorMap.rbegin(); it != _vendorMap.rend(); ++it )
+	    {
+	      if ( str::hasPrefix( lcvendor.c_str(), it->first ) )
+	      {
+		myid = it->second;
+		break; // found
+	      }
+	    }
+	  }
+	  if ( ! myid )
           {
             myid = --_nextId; // get a new class ID
           }
@@ -107,7 +112,7 @@ namespace zypp
         else
         {
           ent = lcent; // take the ID from the lowercased vendor string
-        }
+	}
       }
       return ent;
     }
@@ -164,18 +169,6 @@ namespace zypp
         _vendorMap["opensuse"] = suseit->second;
       }
 
-      // Legacy: Take care well known vendor strings (starting with suse or
-      // opensuse) get their own classes:
-      for ( auto v : { "opensuse build service"
-		     , "opensuse-education" } )
-      {
-	VendorMap::const_iterator it( _vendorMap.find( v ) );
-	if ( it == _vendorMap.end() )
-	{
-	  _vendorMap[v] = ++vendorGroupCounter;
-	}
-      }
-
       MIL << *this << endl;
   }
 
@@ -193,7 +186,7 @@ namespace zypp
         if (nextId != vendorGroupCounter + 1 &&
             nextId != _vendorMap[*it])
         {
-		    // We have at least 3 groups which has to be mixed --> mix the third group to the first
+	  // We have at least 3 groups which has to be mixed --> mix the third group to the first
           unsigned int moveID = _vendorMap[*it];
           for_( itMap, _vendorMap.begin(), _vendorMap.end() )
           {
