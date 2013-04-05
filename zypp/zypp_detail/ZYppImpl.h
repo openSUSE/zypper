@@ -21,6 +21,7 @@
 #include "zypp/ZYppCommit.h"
 #include "zypp/ResTraits.h"
 #include "zypp/DiskUsageCounter.h"
+#include "zypp/ManagedFile.h"
 
 using namespace zypp::filesystem;
 
@@ -91,6 +92,9 @@ namespace zypp
 
       /** Install a source package on the Target. */
       void installSrcPackage( const SrcPackage_constPtr & srcPackage_r );
+
+      /** Install a source package on the Target. */
+      ManagedFile provideSrcPackage( const SrcPackage_constPtr & srcPackage_r );
 
     public:
       /** Get the path where zypp related plugins store persistent data and caches   */

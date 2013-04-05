@@ -1812,14 +1812,19 @@ namespace zypp
     void TargetImpl::installSrcPackage( const SrcPackage_constPtr & srcPackage_r )
     {
       // provide on local disk
-      repo::RepoMediaAccess access_r;
-      repo::SrcPackageProvider prov( access_r );
-      ManagedFile localfile = prov.provideSrcPackage( srcPackage_r );
+      ManagedFile localfile = provideSrcPackage(srcPackage_r);
       // install it
       rpm().installPackage ( localfile );
     }
 
-    /////////////////////////////////////////////////////////////////
+    ManagedFile TargetImpl::provideSrcPackage( const SrcPackage_constPtr & srcPackage_r )
+    {
+      // provide on local disk
+      repo::RepoMediaAccess access_r;
+      repo::SrcPackageProvider prov( access_r );
+      return prov.provideSrcPackage( srcPackage_r );
+    }
+    ////////////////////////////////////////////////////////////////
   } // namespace target
   ///////////////////////////////////////////////////////////////////
   /////////////////////////////////////////////////////////////////

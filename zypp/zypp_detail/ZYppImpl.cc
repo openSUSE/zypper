@@ -162,6 +162,13 @@ namespace zypp
       _target->_pimpl->installSrcPackage( srcPackage_r );
     }
 
+    ManagedFile ZYppImpl::provideSrcPackage( const SrcPackage_constPtr & srcPackage_r )
+    {
+      if (! _target)
+        ZYPP_THROW( Exception("Target not initialized.") );
+      return _target->_pimpl->provideSrcPackage( srcPackage_r );
+    }
+
     //------------------------------------------------------------------------
     // target store path
 

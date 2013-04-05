@@ -20,6 +20,7 @@
 #include "zypp/APIConfig.h"
 
 #include "zypp/ZConfig.h"
+#include "zypp/ManagedFile.h"
 
 #include "zypp/ZYppCommit.h"
 #include "zypp/ResTraits.h"
@@ -117,6 +118,11 @@ namespace zypp
      * \throws Exception
      */
     void installSrcPackage( const SrcPackage_constPtr & srcPackage_r );
+
+    /** Provides a source package on the Target.
+     * \throws Exception
+     */
+    ManagedFile provideSrcPackage( const SrcPackage_constPtr & srcPackage_r );
 
   public:
     /** */

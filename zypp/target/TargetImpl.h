@@ -29,6 +29,7 @@
 #include "zypp/target/RequestedLocalesFile.h"
 #include "zypp/target/SoftLocksFile.h"
 #include "zypp/target/HardLocksFile.h"
+#include "zypp/ManagedFile.h"
 
 ///////////////////////////////////////////////////////////////////
 namespace zypp
@@ -130,6 +131,9 @@ namespace zypp
 
       /** Install a source package on the Target. */
       void installSrcPackage( const SrcPackage_constPtr & srcPackage_r );
+
+      /** Provides a source package on the Target. */
+      ManagedFile provideSrcPackage( const SrcPackage_constPtr & srcPackage_r );
 
       /** Overload to realize stream output. */
       virtual std::ostream & dumpOn( std::ostream & str ) const
