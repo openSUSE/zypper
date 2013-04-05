@@ -433,17 +433,28 @@ void install_src_pkgs(Zypper & zypper)
 
     try
     {
-      God->installSrcPackage(srcpkg);
+      if (zypper.cOpts().find("download-only") != zypper.cOpts().end())
+      {
+        God->provideSrcPackage(srcpkg).resetDispose();
 
-      zypper.out().info(boost::str(format(
-          _("Source package %s-%s successfully installed."))
-          % srcpkg->name() % srcpkg->edition()));
+        zypper.out().info(boost::str(format(
+            _("Source package %s-%s successfully retrieved."))
+            % srcpkg->name() % srcpkg->edition()));
+      }	 
+      else
+      {
+        God->installSrcPackage(srcpkg);
+
+        zypper.out().info(boost::str(format(
+            _("Source package %s-%s successfully installed."))
+            % srcpkg->name() % srcpkg->edition()));
+      }
     }
     catch (const Exception & ex)
     {
       ZYPP_CAUGHT(ex);
       zypper.out().error(ex,
-        boost::str(format(_("Problem installing source package %s-%s:"))
+          boost::str(format(_("Problem installing source package %s-%s:"))
           % srcpkg->name() % srcpkg->edition()));
 
       zypper.setExitCode(ZYPPER_EXIT_ERR_ZYPP);

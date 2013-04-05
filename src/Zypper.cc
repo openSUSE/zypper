@@ -1147,6 +1147,7 @@ void Zypper::processCommandOptions()
     static struct option src_install_options[] = {
       {"build-deps-only", no_argument, 0, 'd'},
       {"no-build-deps", no_argument, 0, 'D'},
+      {"download-only", no_argument, 0, 0},
       {"repo", required_argument, 0, 'r'},
       {"help", no_argument, 0, 'h'},
       {0, 0, 0, 0}
@@ -1161,6 +1162,7 @@ void Zypper::processCommandOptions()
       "-d, --build-deps-only    Install only build dependencies of specified packages.\n"
       "-D, --no-build-deps      Don't install build dependencies.\n"
       "-r, --repo <alias|#|URI> Install packages only from specified repositories.\n"
+      "    --download-only      Only download the packages, do not install.\n"
     );
     break;
   }
