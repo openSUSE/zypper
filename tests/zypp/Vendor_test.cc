@@ -38,6 +38,9 @@ BOOST_AUTO_TEST_CASE(vendor_test1)
   // but "opensuse build service" gets its own class:
   BOOST_REQUIRE( !VendorAttr::instance().equivalent("opensuse build service", "suse") );
   BOOST_REQUIRE( !VendorAttr::instance().equivalent("opensuse build service", "opensuse") );
-  BOOST_REQUIRE( VendorAttr::instance().equivalent("opensuse build service", "opensuse build service 2") );
+  // bnc#812608: All opensuse projects get their own class
+  BOOST_REQUIRE( !VendorAttr::instance().equivalent("opensuse-education", "suse") );
+  BOOST_REQUIRE( !VendorAttr::instance().equivalent("opensuse-education", "opensuse") );
+  BOOST_REQUIRE( !VendorAttr::instance().equivalent("opensuse-education", "opensuse build service") );
 }
 
