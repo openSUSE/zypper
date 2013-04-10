@@ -24,7 +24,7 @@ Note that for Boolean variables we usually test whether the variable exists and 
 \li \c ZYPP_LIBSOLV_FULLLOG=1 Verbose logging when resolving dependencies.
 \li (\c ZYPP_LIBSAT_FULLLOG=1) deprecated since \c libzypp-10.x, prefer \c ZYPP_LIBSOLV_FULLLOG
 
-\li \c ZYPP_MEDIA_CURL_DEBUG=<0|1> Log http headers, if \c 1 also log server responses.
+\li \c ZYPP_MEDIA_CURL_DEBUG=<1|2> Log http headers, if \c 2 also log server responses.
 
 \subsection zypp-envars-mediabackend Selecting the mediabackend to use.
 
