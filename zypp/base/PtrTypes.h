@@ -297,7 +297,7 @@ namespace zypp
         { return *_dptr; };
 
         const _D * operator->() const
-        { return _dptr.get(); }
+        { return _dptr.operator->(); }
 
         const _D * get() const
         { return _dptr.get(); }
@@ -306,7 +306,7 @@ namespace zypp
         { return *_dptr; }
 
         _D * operator->()
-        { return _dptr.get(); }
+        { return _dptr.operator->(); }
 
         _D * get()
         { return _dptr.get(); }
@@ -446,7 +446,7 @@ namespace zypp
         { return *_dptr; };
 
         const _D * operator->() const
-        { return _dptr.get(); }
+        { return _dptr.operator->(); }
 
         const _D * get() const
         { return _dptr.get(); }
@@ -455,7 +455,7 @@ namespace zypp
         { assertUnshared(); return *_dptr; }
 
         _D * operator->()
-        { assertUnshared(); return _dptr.get(); }
+        { assertUnshared(); return _dptr.operator->(); }
 
         _D * get()
         { assertUnshared(); return _dptr.get(); }
