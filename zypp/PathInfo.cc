@@ -226,9 +226,9 @@ namespace zypp
     {
       if ( !isExist() )
         return 0;
-      if ( owner() == getuid() ) {
+      if ( owner() == geteuid() ) {
         return( uperm()/0100 );
-      } else if ( group() == getgid() ) {
+      } else if ( group() == getegid() ) {
         return( gperm()/010 );
       }
       return operm();

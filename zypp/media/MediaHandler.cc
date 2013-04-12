@@ -385,7 +385,7 @@ MediaHandler::createAttachPoint(const Pathname &attach_root) const
   }
 
   PathInfo adir( attach_root );
-  if( !adir.isDir() || (getuid() != 0 && !adir.userMayRWX())) {
+  if( !adir.isDir() || (geteuid() != 0 && !adir.userMayRWX())) {
     DBG << "Create attach point: attach root is not a writable directory: '"
         << attach_root << "'" << std::endl;
     return apoint;
