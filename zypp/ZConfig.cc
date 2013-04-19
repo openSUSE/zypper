@@ -284,6 +284,7 @@ namespace zypp
         , download_min_download_speed	( 0 )
         , download_max_download_speed	( 0 )
         , download_max_silent_tries	( 5 )
+        , download_transfer_timeout	( 180 )
         , commit_downloadMode		( DownloadDefault )
         , solver_onlyRequires		( false )
         , solver_allowVendorChange	( false )
@@ -409,6 +410,12 @@ namespace zypp
                 else if ( entry == "download.max_silent_tries" )
                 {
                   str::strtonum(value, download_max_silent_tries);
+                }
+                else if ( entry == "download.transfer_timeout" )
+                {
+                  str::strtonum(value, download_transfer_timeout);
+		  if ( download_transfer_timeout < 0 )		download_transfer_timeout = 0;
+		  else if ( download_transfer_timeout > 3600 )	download_transfer_timeout = 3600;
                 }
                 else if ( entry == "commit.downloadMode" )
                 {
@@ -555,6 +562,7 @@ namespace zypp
     int download_min_download_speed;
     int download_max_download_speed;
     int download_max_silent_tries;
+    int download_transfer_timeout;
 
     Option<DownloadMode> commit_downloadMode;
 
@@ -832,6 +840,9 @@ namespace zypp
 
   long ZConfig::download_max_silent_tries() const
   { return _pimpl->download_max_silent_tries; }
+
+  long ZConfig::download_transfer_timeout() const
+  { return _pimpl->download_transfer_timeout; }
 
   DownloadMode ZConfig::commit_downloadMode() const
   { return _pimpl->commit_downloadMode; }

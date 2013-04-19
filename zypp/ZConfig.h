@@ -223,6 +223,11 @@ namespace zypp
        */
       long download_max_silent_tries() const;
 
+      /**
+       * Maximum time in seconds that you allow a transfer operation to take.
+       */
+      long download_transfer_timeout() const;
+
 
       /** Whether to consider using a deltarpm when downloading a package.
        * Config option <tt>download.use_deltarpm (true)</tt>

@@ -28,6 +28,7 @@
 #include "zypp/thread/Once.h"
 #include "zypp/Target.h"
 #include "zypp/ZYppFactory.h"
+#include "zypp/ZConfig.h"
 
 #include <cstdlib>
 #include <sys/types.h>
@@ -40,7 +41,6 @@
 
 #define  DETECT_DIR_INDEX       0
 #define  CONNECT_TIMEOUT        60
-#define  TRANSFER_TIMEOUT       60 * 3
 #define  TRANSFER_TIMEOUT_MAX   60 * 60
 
 #define EXPLICITLY_NO_PROXY "_none_"
@@ -563,7 +563,7 @@ void MediaCurl::setupEasy()
   vol_settings.addHeader(distributionFlavorHeader());
   vol_settings.addHeader("Pragma:");
 
-  _settings.setTimeout(TRANSFER_TIMEOUT);
+  _settings.setTimeout(ZConfig::instance().download_transfer_timeout());
   _settings.setConnectTimeout(CONNECT_TIMEOUT);
 
   _settings.setUserAgentString(agentString());
