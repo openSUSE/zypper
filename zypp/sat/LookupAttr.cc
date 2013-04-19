@@ -765,8 +765,6 @@ namespace zypp
 	}
 	else
 	{
-	  INT << _dip->kv.str << endl;
-	  INT << "  " << *this << endl;
 	  ::dataiterator_strdup( _dip.get() );
 	}
       }
