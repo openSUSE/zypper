@@ -28,7 +28,11 @@ namespace zypp
 
     // Obsoletes may either match against provides, or names.
     // Configuration depends on the behaviour of rpm.
+#ifdef _RPM_5
+    bool obsoleteUsesProvides = true;
+#else
     bool obsoleteUsesProvides = false;
+#endif
 
     ///////////////////////////////////////////////////////////////////
     namespace
