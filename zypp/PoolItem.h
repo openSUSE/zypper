@@ -16,6 +16,7 @@
 #include <functional>
 
 #include "zypp/base/PtrTypes.h"
+#include "zypp/base/SafeBool.h"
 #include "zypp/ResObject.h"
 #include "zypp/ResStatus.h"
 
@@ -47,7 +48,7 @@ namespace zypp
    * (i.e. the status) is always mutable.
    *
   */
-  class PoolItem
+  class PoolItem : protected base::SafeBool<PoolItem>
   {
     friend std::ostream & operator<<( std::ostream & str, const PoolItem & obj );
 
@@ -137,8 +138,7 @@ namespace zypp
 
       /** Conversion to bool to allow pointer style tests
        *  for nonNULL \ref resolvable. */
-      operator ResObject::constPtr::unspecified_bool_type() const
-      { return resolvable(); }
+      using base::SafeBool<PoolItem>::operator bool_type;
 
     private:
       friend class Impl;
@@ -151,6 +151,11 @@ namespace zypp
       explicit PoolItem( Impl * implptr_r );
       /** Pointer to implementation */
       RW_pointer<Impl> _pimpl;
+
+  private:
+    friend SafeBool<PoolItem>::operator bool_type() const;
+    bool boolTest() const
+    { return !!resolvable(); }
 
     private:
       /** \name tmp hack for save/restore state. */

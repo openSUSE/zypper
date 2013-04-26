@@ -172,12 +172,12 @@ namespace zypp
   // Specialization for Resolvable: Always true.
   template<>
     inline bool isKind<Resolvable>( const Resolvable::constPtr & p )
-    { return p; }
+    { return !!p; }
 
   // Specialization for ResObject: Always true.
   template<>
     inline bool isKind<ResObject>( const Resolvable::constPtr & p )
-    { return p; }
+    { return !!p; }
 
 
   /** Convert Resolvable::Ptr into Ptr of a certain Kind.

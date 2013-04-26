@@ -20,6 +20,11 @@
 #include <boost/weak_ptr.hpp>
 #include <boost/intrusive_ptr.hpp>
 
+// boost-1.53 removes implicit smart pointer conversion to
+// an unspecified_bool_type in favor of an explicit operator
+// bool. Not sure if we like this...
+#define ZYPP_SMARTPTR_HAS_UNSPECIFIED_BOOL_TYPE 0
+
 ///////////////////////////////////////////////////////////////////
 namespace zypp
 { /////////////////////////////////////////////////////////////////
@@ -266,7 +271,12 @@ namespace zypp
       {
         typedef typename _Traits::_Ptr               _Ptr;
         typedef typename _Traits::_constPtr          _constPtr;
+#if ZYPP_SMARTPTR_HAS_UNSPECIFIED_BOOL_TYPE
         typedef typename _Ptr::unspecified_bool_type unspecified_bool_type;
+#else
+	typedef RW_pointer<_D,_Traits> _ThisType;
+	typedef const _D * (_ThisType::*unspecified_bool_type)() const;
+#endif
 
         explicit
         RW_pointer( typename _Ptr::element_type * dptr = 0 )
@@ -291,7 +301,11 @@ namespace zypp
         { _dptr.swap( rhs ); }
 
         operator unspecified_bool_type() const
+#if ZYPP_SMARTPTR_HAS_UNSPECIFIED_BOOL_TYPE
         { return _dptr; }
+#else
+	{ return _dptr.get() == 0 ? 0 : (unspecified_bool_type)&_ThisType::get; }
+#endif
 
         const _D & operator*() const
         { return *_dptr; };
@@ -415,7 +429,12 @@ namespace zypp
       {
         typedef typename _Traits::_Ptr               _Ptr;
         typedef typename _Traits::_constPtr          _constPtr;
+#if ZYPP_SMARTPTR_HAS_UNSPECIFIED_BOOL_TYPE
         typedef typename _Ptr::unspecified_bool_type unspecified_bool_type;
+#else
+	typedef RWCOW_pointer<_D,_Traits> _ThisType;
+	typedef const _D * (_ThisType::*unspecified_bool_type)() const;
+#endif
 
         explicit
         RWCOW_pointer( typename _Ptr::element_type * dptr = 0 )
@@ -440,7 +459,11 @@ namespace zypp
         { _dptr.swap( rhs ); }
 
         operator unspecified_bool_type() const
+#if ZYPP_SMARTPTR_HAS_UNSPECIFIED_BOOL_TYPE
         { return _dptr; }
+#else
+	{ return _dptr ? 0 : (unspecified_bool_type)&_ThisType::get; }
+#endif
 
         const _D & operator*() const
         { return *_dptr; };
