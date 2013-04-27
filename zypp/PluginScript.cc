@@ -137,7 +137,7 @@ namespace zypp
       { return _cmd ? _cmd->getpid() : NotConnected; }
 
       bool isOpen() const
-      { return _cmd; }
+      { return _cmd != nullptr; }
 
       int lastReturn() const
       { return _lastReturn; }

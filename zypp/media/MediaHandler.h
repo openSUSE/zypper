@@ -520,7 +520,7 @@ class MediaHandler {
 	/**
 	 * True if media is attached.
 	 **/
-	virtual bool isAttached() const { return _mediaSource; }
+	virtual bool isAttached() const { return _mediaSource != nullptr; }
 
 	/**
 	 * Return the local directory that corresponds to medias url,
@@ -648,7 +648,7 @@ class MediaHandler {
 	 * return the deltafile set with setDeltafile()
 	 */
 	Pathname deltafile () const;
-   
+
     public:
 
 	/**

@@ -106,9 +106,7 @@ namespace zypp {
     //	METHOD TYPE : Constructor
     //
     TmpPath::TmpPath()
-    :_impl( 0 ) // empty Pathname
-    {
-    }
+    {}
 
     ///////////////////////////////////////////////////////////////////
     //
@@ -116,9 +114,8 @@ namespace zypp {
     //	METHOD TYPE : Constructor
     //
     TmpPath::TmpPath( const Pathname & tmpPath_r )
-    :_impl( tmpPath_r.empty() ? 0 : new Impl( tmpPath_r ) )
-    {
-    }
+    :_impl( tmpPath_r.empty() ? nullptr : new Impl( tmpPath_r ) )
+    {}
 
     ///////////////////////////////////////////////////////////////////
     //

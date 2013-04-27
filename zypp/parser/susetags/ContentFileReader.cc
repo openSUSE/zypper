@@ -55,13 +55,13 @@ namespace zypp
 	  }
 
 	  bool hasRepoIndex() const
-	  { return _repoindex; }
+	  { return _repoindex != nullptr; }
 
 	  RepoIndex_Ptr handoutRepoIndex()
 	  {
 	    RepoIndex_Ptr ret;
 	    ret.swap( _repoindex );
-	    _repoindex = 0;
+	    _repoindex = nullptr;
 	    return ret;
 	  }
 

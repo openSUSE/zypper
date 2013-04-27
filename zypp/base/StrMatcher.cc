@@ -197,7 +197,7 @@ namespace zypp
 
     /** Whether the pattern is already compiled. */
     bool isCompiled() const
-    { return _matcher; }
+    { return _matcher != nullptr; }
 
     /** Return whether string matches. */
     bool doMatch( const char * string_r ) const
