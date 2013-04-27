@@ -1,4 +1,9 @@
 -------------------------------------------------------------------
+Sun Apr 28 01:14:07 CEST 2013 - ma@suse.de
+
+- Update zypp-po.tar.bz2
+
+-------------------------------------------------------------------
 Fri Apr  5 14:26:35 CEST 2013 - ma@suse.de
 
 - added new fuction zypp::ZYpp::provideSrcPackage
