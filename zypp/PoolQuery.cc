@@ -407,11 +407,11 @@ namespace zypp
 	// We unify those two forms to enable zypper to remove zypp locks
 	// without need to actually evaluate the query (which would require
 	// repos to be loaded).
-	|| ( _flags.isModeString() && rhs._flags.isModeGlob()
-	  || _flags.isModeGlob() && rhs._flags.isModeString() )
+	|| ( ( _flags.isModeString() && rhs._flags.isModeGlob()
+	    || _flags.isModeGlob() && rhs._flags.isModeString() )
 	  && _strings.empty()
 	  && _attrs.size() == 1
-	  && _attrs.begin()->first == sat::SolvAttr::name )
+	  && _attrs.begin()->first == sat::SolvAttr::name ) )
       {
 	return ( _strings == rhs._strings
 	      && _attrs == rhs._attrs
