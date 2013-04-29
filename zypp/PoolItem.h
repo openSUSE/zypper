@@ -136,9 +136,11 @@ namespace zypp
       ResObject::constPtr operator->() const
       { return resolvable(); }
 
+#ifndef SWIG // Swig treats it as syntax error
       /** Conversion to bool to allow pointer style tests
        *  for nonNULL \ref resolvable. */
       using base::SafeBool<PoolItem>::operator bool_type;
+#endif
 
     private:
       friend class Impl;
@@ -153,7 +155,9 @@ namespace zypp
       RW_pointer<Impl> _pimpl;
 
   private:
+#ifndef SWIG // Swig treats it as syntax error
     friend SafeBool<PoolItem>::operator bool_type() const;
+#endif
     bool boolTest() const
     { return !!resolvable(); }
 
