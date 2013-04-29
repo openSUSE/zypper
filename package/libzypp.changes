@@ -1,4 +1,15 @@
 -------------------------------------------------------------------
+Mon Apr 29 10:41:46 CEST 2013 - ma@suse.de
+
+- Testsuite: Workaround boost::thread being not header only since 
+  boost-1.50 (boost ticket 7085)
+- Adaptions to smart_pointer changes in boost-1.53; mainly introduce 
+  explicit operator bool; constructible and comparable with nullptr_t.
+- Bump major version for Factory
+  12.x is continued on SuSE-Code-12_3-Branch
+- version 13.0.0 (0)
+
+-------------------------------------------------------------------
 Sun Apr 28 01:14:07 CEST 2013 - ma@suse.de
 
 - Update zypp-po.tar.bz2
