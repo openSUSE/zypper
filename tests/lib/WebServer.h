@@ -2,9 +2,6 @@
 #ifndef ZYPP_TEST_WEBSERVER_H
 #define ZYPP_TEST_WEBSERVER_H
 
-#include "boost/thread.hpp"
-#include "boost/smart_ptr.hpp"
-
 #include "zypp/Url.h"
 #include "zypp/Pathname.h"
 #include "zypp/base/PtrTypes.h"
@@ -25,9 +22,9 @@
  *      web.start();
  *
  *     MediaSetAccess media( Url("http://localhost:9099"), "/" );
- *     
+ *
  *     // do something with the url
- * 
+ *
  *
  *     web.stop();
  *
@@ -59,7 +56,7 @@ class WebServer
    * returns the base url where the webserver is listening
    */
   zypp::Url url() const;
- 
+
   /**
    * shows the log of last run
    */
