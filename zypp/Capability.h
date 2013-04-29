@@ -14,9 +14,7 @@
 
 #include <iosfwd>
 
-#include "zypp/base/SafeBool.h"
 #include "zypp/APIConfig.h"
-
 #include "zypp/sat/detail/PoolMember.h"
 
 #include "zypp/IdString.h"
@@ -58,8 +56,7 @@ namespace zypp
    * Capability( "package:foo", ResKind::pattern ) ==> 'foo'
    * \endcode
    */
-  class Capability: protected sat::detail::PoolMember,
-                    private base::SafeBool<Capability>
+  class Capability: protected sat::detail::PoolMember
   {
     public:
       enum CtorFlag { PARSED, UNPARSED };
@@ -134,10 +131,10 @@ namespace zypp
       static const Capability Empty;
 
     public:
-#ifndef SWIG // Swig treats it as syntax error
       /** Evaluate in a boolean context <tt>( ! empty() )</tt>. */
-      using base::SafeBool<Capability>::operator bool_type;
-#endif
+      explicit operator bool() const
+      { return ! empty(); }
+
       /** Whether the \ref Capability is empty.
        * This is true for \ref Null and \ref Empty.
        */
@@ -249,11 +246,6 @@ namespace zypp
     private:
       /** Match two Capabilities */
       static CapMatch _doMatch( sat::detail::IdType lhs,  sat::detail::IdType rhs );
-    private:
-#ifndef SWIG // Swig treats it as syntax error
-      friend base::SafeBool<Capability>::operator bool_type() const;
-#endif
-      bool boolTest() const { return ! empty(); }
     private:
       sat::detail::IdType _id;
   };

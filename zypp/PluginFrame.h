@@ -17,7 +17,6 @@
 #include <map>
 
 #include "zypp/base/PtrTypes.h"
-#include "zypp/base/SafeBool.h"
 
 #include "zypp/PluginFrameException.h"
 
@@ -38,7 +37,7 @@ namespace zypp
    *
    * \see PluginScript
    */
-  class PluginFrame : private base::SafeBool<PluginFrame>
+  class PluginFrame
   {
     friend std::ostream & operator<<( std::ostream & str, const PluginFrame & obj );
     friend bool operator==( const PluginFrame & lhs, const PluginFrame & rhs );
@@ -77,7 +76,8 @@ namespace zypp
       bool empty() const;
 
       /** Evaluate in a boolean context (empty frame) */
-      using base::SafeBool<PluginFrame>::operator bool_type;
+      explicit operator bool() const
+      { return empty(); }
 
     public:
       /** Return the frame command. */
@@ -218,11 +218,6 @@ namespace zypp
       static std::istream & readFrom( std::istream & stream_r, PluginFrame & frame_r )
       { frame_r = PluginFrame( stream_r ); return stream_r; }
 
-    private:
-      friend base::SafeBool<PluginFrame>::operator bool_type() const;
-      /** Evaluate in a boolean context */
-      bool boolTest() const
-      { return empty(); }
     public:
       /** Implementation */
       class Impl;

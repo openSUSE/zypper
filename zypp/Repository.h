@@ -13,7 +13,6 @@
 #define ZYPP_SAT_REPOSITORY_H
 
 #include <iosfwd>
-#include "zypp/base/SafeBool.h"
 #include "zypp/Pathname.h"
 #include "zypp/sat/detail/PoolMember.h"
 #include "zypp/sat/LookupAttr.h"     // LookupAttrTools.h included at EOF
@@ -35,8 +34,7 @@ namespace zypp
     //	CLASS NAME : Repository
     //
     /** */
-    class Repository : protected sat::detail::PoolMember,
-                       private base::SafeBool<Repository>
+    class Repository : protected sat::detail::PoolMember
     {
     public:
         typedef filter_iterator<detail::ByRepository, sat::detail::SolvableIterator> SolvableIterator;
@@ -58,10 +56,10 @@ namespace zypp
         /** Represents no \ref Repository. */
         static const Repository noRepository;
 
-#ifndef SWIG // Swig treats it as syntax error
         /** Evaluate \ref Repository in a boolean context (\c != \c noRepository). */
-        using base::SafeBool<Repository>::operator bool_type;
-#endif
+        explicit operator bool() const
+        { return get() != nullptr; }
+
         /** Reserved system repository alias \c @System. */
         static const std::string & systemRepoAlias();
 
@@ -273,11 +271,7 @@ namespace zypp
         int satInternalPriority() const;
         int satInternalSubPriority() const;
         //@}
-    private:
-#ifndef SWIG // Swig treats it as syntax error
-        friend base::SafeBool<Repository>::operator bool_type() const;
-#endif
-        bool boolTest() const { return get(); }
+
     private:
         IdType _id;
     };

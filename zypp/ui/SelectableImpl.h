@@ -189,11 +189,11 @@ namespace zypp
 
       /** \copydoc Selectable::identicalAvailable( const PoolItem & )const */
       bool identicalAvailable( const PoolItem & rhs ) const
-      { return identicalAvailableObj( rhs ); }
+      { return bool(identicalAvailableObj( rhs )); }
 
       /** \copydoc Selectable::identicalInstalled( const PoolItem & )const */
       bool identicalInstalled( const PoolItem & rhs ) const
-      { return identicalInstalledObj( rhs ); }
+      { return bool(identicalInstalledObj( rhs )); }
 
       /** \copydoc Selectable::identicalAvailableObj( const PoolItem & rhs ) const */
       PoolItem identicalAvailableObj( const PoolItem & rhs ) const

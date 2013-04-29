@@ -14,8 +14,6 @@
 
 #include <iosfwd>
 
-#include "zypp/base/SafeBool.h"
-
 #include "zypp/sat/detail/PoolMember.h"
 #include "zypp/sat/SolvAttr.h"
 #include "zypp/ResTraits.h"
@@ -54,8 +52,7 @@ namespace zypp
      * packages as an own kind of solvable and map their arch to
      * \ref Arch_noarch.
      */
-    class Solvable : protected detail::PoolMember,
-                     private base::SafeBool<Solvable>
+    class Solvable : protected detail::PoolMember
     {
       public:
         typedef sat::detail::SolvableIdType IdType;
@@ -73,10 +70,9 @@ namespace zypp
         /** Represents no \ref Solvable. */
         static const Solvable noSolvable;
 
-#ifndef SWIG // Swig treats it as syntax error
         /** Evaluate \ref Solvable in a boolean context (\c != \c noSolvable). */
-        using base::SafeBool<Solvable>::operator bool_type;
-#endif
+        explicit operator bool() const
+        { return get(); }
 
         /** Return whether this \ref Solvable belongs to the system repo.
          * \note This includes the otherwise hidden systemSolvable.
@@ -295,11 +291,7 @@ namespace zypp
         ::_Solvable * get() const;
         /** Expert backdoor. */
         IdType id() const { return _id; }
-      private:
-#ifndef SWIG // Swig treats it as syntax error
-        friend base::SafeBool<Solvable>::operator bool_type() const;
-#endif
-        bool boolTest() const { return get(); }
+
       private:
         IdType _id;
     };

@@ -83,10 +83,8 @@ namespace zypp
    * \ingroup g_CRTP
    */
   template <class Derived>
-  class IdStringType : protected sat::detail::PoolMember,
-                       private base::SafeBool<Derived>
+  class IdStringType : protected sat::detail::PoolMember
   {
-    typedef typename base::SafeBool<Derived>::bool_type bool_type;
     public:
       typedef IdString::IdType IdType;
 
@@ -110,10 +108,10 @@ namespace zypp
       IdType        id()          const { return idStr().id(); }
 
     public:
-#ifndef SWIG // Swig treats it as syntax error
       /** Evaluate in a boolean context <tt>( ! empty() )</tt>. */
-      using base::SafeBool<Derived>::operator bool_type;
-#endif
+      explicit operator bool() const
+      { return ! empty(); }
+
     public:
       // - break it down to idString/const char* <=> idString/cont char*
       // - handle idString(0)/NULL being the least value
@@ -152,12 +150,6 @@ namespace zypp
 	if ( ! lhs ) return rhs ? -1 : 0;
 	return rhs ? ::strcmp( lhs, rhs ) : 1;
       }
-
-    private:
-#ifndef SWIG // Swig treats it as syntax error
-      friend base::SafeBool<Derived>::operator bool_type() const;
-#endif
-      bool boolTest() const { return ! empty(); }
   };
   ///////////////////////////////////////////////////////////////////
 

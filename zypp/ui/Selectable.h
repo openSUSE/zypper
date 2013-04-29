@@ -286,7 +286,7 @@ namespace zypp
 
       /** True if candidate object is present. */
       bool hasCandidateObj() const
-      { return candidateObj(); }
+      { return bool(candidateObj()); }
 
       /** True if installed and candidate object is present */
       bool hasBothObjects() const

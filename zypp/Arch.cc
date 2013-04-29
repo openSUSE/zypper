@@ -82,7 +82,7 @@ namespace zypp
           break;
         }
       // This is a builtin: compatible if mentioned in targetEntry_r
-      return targetEntry_r._compatBits & _idBit;
+      return bool( targetEntry_r._compatBits & _idBit );
     }
 
     /** compare by score, then archStr. */

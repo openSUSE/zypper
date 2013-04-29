@@ -12,6 +12,8 @@
 #ifndef ZYPP_BASE_SAFEBOOL_H
 #define ZYPP_BASE_SAFEBOOL_H
 
+#warning Consider using 'explicit operator bool' instead
+
 ///////////////////////////////////////////////////////////////////
 namespace zypp
 { /////////////////////////////////////////////////////////////////
@@ -62,9 +64,9 @@ namespace zypp
      *   }
      * };
      * \endcode
-     * \todo Investigate why Bit refuses private inheritance
-     * and exposition of operator bool_type. Seems to be a gcc
-     * bug. protected works.
+     * \deprecated Drop it in favor of an <tt>explicit operator bool</tt>
+     * if the compiler supports explicit conversion operator.
+     *
     */
     template<class _Derived>
       struct SafeBool : private safebool_detail::SafeBoolBase

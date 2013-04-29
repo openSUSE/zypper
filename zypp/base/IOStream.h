@@ -17,7 +17,6 @@
 
 #include "zypp/base/Flags.h"
 #include "zypp/base/PtrTypes.h"
-#include "zypp/base/SafeBool.h"
 #include "zypp/base/Function.h"
 #include "zypp/base/NonCopyable.h"
 
@@ -109,20 +108,19 @@ namespace zypp
      * }
      * \endcode
      */
-    class EachLine : private base::SafeBool<EachLine>, private base::NonCopyable
+    class EachLine : private base::NonCopyable
     {
-      typedef base::SafeBool<EachLine> SafeBool;
-
       public:
 	/** Ctor taking a stream and reading the 1st line from it. */
 	EachLine( std::istream & str_r, unsigned lineNo_r = 0 );
 
-	/** Evaluate class in a boolean context. */
-	using SafeBool::operator bool_type;
-
 	/** Whether \c this contains a valid line to consume. */
 	bool valid() const
-	{ return boolTest(); }
+	{ return _valid; }
+
+	/** Evaluate class in a boolean context. */
+	explicit operator bool() const
+	{ return _valid; }
 
 	/** Return the current line number. */
 	unsigned lineNo() const
@@ -156,11 +154,6 @@ namespace zypp
 	    ; /* EMPTY */
 	  return valid();
 	}
-
-      private:
-	friend SafeBool::operator bool_type() const;
-	bool boolTest() const
-	{ return _valid; }
 
       private:
 	std::istream & _str;

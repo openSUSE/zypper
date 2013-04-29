@@ -140,10 +140,10 @@ namespace zypp
       // Queries
       //
       bool hasInstalled() const
-      { return inst; }
+      { return bool(inst); }
 
       bool hasCandidate() const
-      { return cand; }
+      { return bool(cand); }
 
       bool hasInstalledOnly() const
       { return inst && !cand; }

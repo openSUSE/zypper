@@ -16,7 +16,6 @@
 #include <string>
 
 #include "zypp/base/PtrTypes.h"
-#include "zypp/base/SafeBool.h"
 #include "zypp/base/Exception.h"
 
 ///////////////////////////////////////////////////////////////////
@@ -30,7 +29,7 @@ namespace zypp
   /// Match mode( Match::GLOB | Match::NOCASE );
   /// \endcode
   ///////////////////////////////////////////////////////////////////
-  class Match : private base::SafeBool<Match>
+  class Match
   {
   private:
     static const int _modemask;
@@ -93,10 +92,9 @@ namespace zypp
     : _val( val_r )
     {}
 
-#ifndef SWIG // Swig treats it as syntax error
     /** Evaluate in a boolean context <tt>( != 0 )</tt>. */
-    using base::SafeBool<Match>::operator bool_type;
-#endif
+    explicit operator bool() const
+    { return _val; }
 
   public:
     /** Test whether \c all of the \a rhs bits are set (same mode if \a rhs has one). */
@@ -208,9 +206,6 @@ namespace zypp
       std::string asString() const;
 
   private:
-    friend base::SafeBool<Match>::operator bool_type() const;
-    bool boolTest() const	{ return _val; }
-
     /** Numeric value for enum (short for <tt>Match(m).get()</tt>). */
     static int modeval( Mode mode_r );
 
@@ -299,7 +294,7 @@ namespace zypp
   ///
   /// \Note Those flags are always set: <tt>REG_EXTENDED | REG_NOSUB | REG_NEWLINE</tt>
   ///////////////////////////////////////////////////////////////////
-  class StrMatcher : private base::SafeBool<StrMatcher>
+  class StrMatcher
   {
     friend std::ostream & operator<<( std::ostream & str, const StrMatcher & obj );
 
@@ -329,10 +324,9 @@ namespace zypp
     /** Low level interface wraps \a flags into \ref Match. */
     StrMatcher( const std::string & search_r, int flags_r );
 
-    #ifndef SWIG // Swig treats it as syntax error
     /** Evaluate in a boolean context <tt>( ! searchstring().empty() )</tt>. */
-    using base::SafeBool<StrMatcher>::operator bool_type;
-    #endif
+    explicit operator bool() const
+    { return !searchstring().empty(); }
 
   public:
     /** Return whether string matches.
@@ -380,11 +374,6 @@ namespace zypp
      * \throws MatchException Any of the exceptions thrown by \ref StrMatcher::compile.
      */
     bool doMatch( const char * string_r ) const;
-
-  private:
-    friend base::SafeBool<StrMatcher>::operator bool_type() const;
-    bool boolTest() const
-    { return !searchstring().empty(); }
 
   private:
     /** Pointer to implementation */

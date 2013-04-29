@@ -15,8 +15,6 @@
 #include <iosfwd>
 #include <string>
 
-#include "zypp/base/SafeBool.h"
-
 ///////////////////////////////////////////////////////////////////
 namespace zypp
 { /////////////////////////////////////////////////////////////////
@@ -159,10 +157,7 @@ namespace zypp
     */
     template<class _IntT>
       class BitField  : public Range<_IntT, 0, MaxBits<_IntT>::value>
-                      , private base::SafeBool<BitField<_IntT> >
       {
-        typedef typename base::SafeBool<BitField<_IntT> >::bool_type bool_type;
-
       public:
         /** Default ctor: zero. */
         BitField()
@@ -175,7 +170,8 @@ namespace zypp
 
       public:
         /** Validate in a boolean context. */
-        using base::SafeBool<BitField<_IntT> >::operator bool_type;
+        explicit operator bool() const
+        { return _value != (_IntT)0; }
 
       public:
         /** Return the value. */
@@ -290,12 +286,6 @@ namespace zypp
 
         BitField operator~() const
         { return ~_value; }
-
-      private:
-        friend base::SafeBool<BitField<_IntT> >::operator bool_type() const;
-        /** \ref base::SafeBool test. */
-        bool boolTest() const
-        { return _value; }
 
       private:
         _IntT _value;

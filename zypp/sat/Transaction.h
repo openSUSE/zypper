@@ -19,7 +19,6 @@ extern "C"
 
 #include "zypp/base/PtrTypes.h"
 #include "zypp/base/Flags.h"
-#include "zypp/base/SafeBool.h"
 #include "zypp/base/Iterator.h"
 #include "zypp/base/DefaultIntegral.h"
 
@@ -53,7 +52,6 @@ namespace zypp
      *       when iterating, use the \ref actionBegin /\ref actionEnd methods.
      */
     class Transaction : public SolvIterMixin<Transaction, detail::Transaction_const_iterator>
-		      , protected base::SafeBool<Transaction>
     {
       friend std::ostream & operator<<( std::ostream & str, const Transaction & obj );
       friend std::ostream & dumpOn( std::ostream & str, const Transaction & obj );
@@ -100,7 +98,8 @@ namespace zypp
 	bool valid() const;
 
         /**  Validate object in a boolean context: valid */
-        using base::SafeBool<Transaction>::operator bool_type;
+        explicit operator bool() const
+        { return valid(); }
 
 	/** Order transaction steps for commit.
 	 * It's cheap to call it for an aleready ordered \ref Transaction.
@@ -170,11 +169,6 @@ namespace zypp
 
 	//@}
 
-      private:
-        friend base::SafeBool<Transaction>::operator bool_type() const;
-        /**  Validate object in a boolean context. */
-        bool boolTest() const
-        { return valid(); }
       public:
         /** Implementation  */
         class Impl;

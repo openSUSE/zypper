@@ -15,8 +15,6 @@
 #include <iosfwd>
 #include <string>
 
-#include "zypp/base/SafeBool.h"
-
 #include "zypp/sat/detail/PoolMember.h"
 
 ///////////////////////////////////////////////////////////////////
@@ -38,8 +36,7 @@ namespace zypp
    * While comparison differs between \ref IdString::Null and \ref IdString::Empty
    * ( \c NULL and \c "" ), both are represented by an empty string \c "".
    */
-  class IdString : protected sat::detail::PoolMember,
-                   private base::SafeBool<IdString>
+  class IdString : protected sat::detail::PoolMember
   {
     public:
       typedef sat::detail::IdType IdType;
@@ -65,10 +62,10 @@ namespace zypp
       static const IdString Empty;
 
     public:
-#ifndef SWIG // Swig treats it as syntax error
       /** Evaluate in a boolean context <tt>( != \c Null )</tt>. */
-      using base::SafeBool<IdString>::operator bool_type;
-#endif
+      explicit operator bool() const
+      { return _id; }
+
       /** Whether the string is empty.
        * This is true for \ref Null and \ref Empty.
        */
@@ -105,11 +102,7 @@ namespace zypp
       /** Expert backdoor. */
       IdType id() const
       { return _id; }
-    private:
-#ifndef SWIG // Swig treats it as syntax error
-      friend base::SafeBool<IdString>::operator bool_type() const;
-#endif
-      bool boolTest() const { return _id; }
+
     private:
       IdType _id;
   };

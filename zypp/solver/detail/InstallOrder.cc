@@ -158,10 +158,10 @@ InstallOrder::doesProvide( const Capability requirement, PoolItem item ) const
     Capabilities::const_iterator pend = item->dep( Dep::PROVIDES ).end();
     for( Capabilities::const_iterator pit = item->dep( Dep::PROVIDES ).begin(); pit != pend; ++pit) {
 	if( pit->matches( requirement ) == CapMatch::yes ) {
-	    return item;
+	    return true;
 	}
     }
-    return PoolItem();
+    return false;
 }
 
 

@@ -292,7 +292,7 @@ namespace zypp
        * Also maintains a copy of the matchstring in order to
        * keep the char* passed to the dataiterator valid.
        */
-      class DIWrap : private base::SafeBool<DIWrap>
+      class DIWrap
       {
         public:
           /** \c NULL \c ::_Dataiterator */
@@ -325,19 +325,16 @@ namespace zypp
           void reset()
           { DIWrap().swap( *this ); }
         public:
-#ifndef SWIG // Swig treats it as syntax error
           /** Evaluate in a boolean context <tt>( _dip != NULL )</tt>. */
-          using base::SafeBool<DIWrap>::operator bool_type;
-#endif
+          explicit operator bool() const
+          { return _dip; }
+
         public:
           ::_Dataiterator * operator->() const  { return _dip; }
           ::_Dataiterator * get()        const  { return _dip; }
           const std::string & getstr()   const  { return _mstring; }
-        private:
-          friend base::SafeBool<DIWrap>::operator bool_type() const;
-          bool boolTest() const
-          { return _dip; }
-        private:
+
+	private:
           ::_Dataiterator * _dip;
           std::string _mstring;
       };

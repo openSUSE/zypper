@@ -40,7 +40,7 @@ namespace zypp
     struct ByPoolItem
     {
       bool operator()( const PoolItem & pi ) const
-      { return pi; }
+      { return bool(pi); }
     };
 
     /** In CXX0X std::_Select2nd does no longer derive from std::unary_function
