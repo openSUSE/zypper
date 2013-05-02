@@ -669,7 +669,7 @@ static void list_product_table(Zypper & zypper)
     if (!s->installedEmpty())
       installed = s->installedObj();
 
-    bool missedInstalled = installed; // if no available hits, we need to print it
+    bool missedInstalled( installed ); // if no available hits, we need to print it
 
     // show available objects
     for_(it, s->availableBegin(), s->availableEnd())
