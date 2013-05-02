@@ -1,4 +1,10 @@
 -------------------------------------------------------------------
+Thu May  2 11:07:52 CEST 2013 - ma@suse.de
+
+- Discourage using SafeBool in favor of explicit operator bool
+- version 13.1.0 (1)
+
+-------------------------------------------------------------------
 Mon Apr 29 10:41:46 CEST 2013 - ma@suse.de
 
 - Testsuite: Workaround boost::thread being not header only since 
