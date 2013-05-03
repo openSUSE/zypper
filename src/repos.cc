@@ -880,6 +880,8 @@ static void print_repo_list(Zypper & zypper,
       || zypper.cOpts().count("sort-by-priority")
       || zypper.cOpts().count("sort-by-alias")
       || zypper.cOpts().count("sort-by-name");
+  bool show_enabled_only = zypper.cOpts().count("show-enabled-only");
+
 
   // header
   TableHeader th;
@@ -966,12 +968,16 @@ static void print_repo_list(Zypper & zypper,
   tbl << th;
 
   // table data
-  int i = 1;
+  int i = 0;
   unsigned nindent = repos.size() > 9 ? repos.size() > 99 ? 3 : 2 : 1;
-  for (list<RepoInfo>::const_iterator it = repos.begin();
-       it !=  repos.end(); ++it)
+  for_( it, repos.begin(), repos.end() )
   {
+    ++i; // continuous numbering including skipped ones
     RepoInfo repo = *it;
+
+    if ( show_enabled_only && !repo.enabled() )
+      continue;
+
     TableRow tr(index);
 
     // number
@@ -1002,7 +1008,6 @@ static void print_repo_list(Zypper & zypper,
       tr << repo.service();
 
     tbl << tr;
-    i++;
   }
 
   if (tbl.empty())
@@ -2464,19 +2469,20 @@ static void print_service_list(Zypper & zypper,
     th << _("URI");
   tbl << th;
 
-  int i = 1;
+  int i = 0;
 
-  for (list<RepoInfoBase_Ptr>::const_iterator it = services.begin();
-       it != services.end(); ++it)
+  bool show_enabled_only = zypper.cOpts().count("show-enabled-only");
+
+  for_( it, services.begin(), services.end() )
   {
-    service_list_tr(zypper, tbl, *it, i, flags);
+    ++i; // continuous numbering including skipped ones
 
-    // print also repos belonging to the service
+    bool servicePrinted = false;
+    // Unconditionally print the service before the 1st repo is
+    // printed. Undesired, but possible, that a disabled service
+    // owns (manually) enabled repos.
     if (with_repos && dynamic_pointer_cast<ServiceInfo>(*it))
     {
-      // indicate that we print repos of the current service
-      flags |= SF_SERVICE_REPO;
-
       RepoCollector collector;
       RepoManager & rm = zypper.repoManager();
 
@@ -2487,12 +2493,28 @@ static void print_service_list(Zypper & zypper,
       for_(repoit, collector.repos.begin(), collector.repos.end())
       {
         RepoInfoBase_Ptr ptr(new RepoInfo(*repoit));
-        service_list_tr(zypper, tbl, ptr, i, flags);
-      }
-      flags &= ~SF_SERVICE_REPO;
-    }
 
-    ++i;
+	if ( show_enabled_only && !repoit->enabled() )
+	  continue;
+
+	if ( !servicePrinted )
+	{
+	  service_list_tr(zypper, tbl, *it, i, flags);
+	  servicePrinted = true;
+	}
+	// SF_SERVICE_REPO: we print repos of the current service
+        service_list_tr(zypper, tbl, ptr, i, flags|SF_SERVICE_REPO);
+      }
+    }
+    if ( servicePrinted )
+      continue;
+
+    // Here: No repo enforced printing the service, so do so if
+    // necessary.
+    if ( show_enabled_only && !(*it)->enabled() )
+      continue;
+
+    service_list_tr(zypper, tbl, *it, i, flags);
   }
 
   if (tbl.empty())

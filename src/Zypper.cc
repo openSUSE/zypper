@@ -1355,8 +1355,8 @@ void Zypper::processCommandOptions()
       {"url", no_argument, 0, 'u'},
       {"priority", no_argument, 0, 'p'},
       {"details", no_argument, 0, 'd'},
-//      {"type", required_argument, 0, 't'},
       {"with-repos", no_argument, 0, 'r'},
+      {"show-enabled-only", no_argument, 0, 'E'},
       {"sort-by-uri", no_argument, 0, 'U'},
       {"sort-by-name", no_argument, 0, 'N'},
       {"sort-by-priority", no_argument, 0, 'P'},
@@ -1372,8 +1372,8 @@ void Zypper::processCommandOptions()
       "-u, --uri                 Show also base URI of repositories.\n"
       "-p, --priority            Show also repository priority.\n"
       "-d, --details             Show more information like URI, priority, type.\n"
-//      "-t, --type                List only services of specified type.\n"
       "-r, --with-repos          Show also repositories belonging to the services.\n"
+      "-E, --show-enabled-only   Show enabled repos only.\n"
       "-P, --sort-by-priority    Sort the list by repository priority.\n"
       "-U, --sort-by-uri         Sort the list by URI.\n"
       "-N, --sort-by-name        Sort the list by name.\n"
@@ -1453,6 +1453,7 @@ void Zypper::processCommandOptions()
       {"url", no_argument, 0, 'u'},
       {"priority", no_argument, 0, 'p'},
       {"details", no_argument, 0, 'd'},
+      {"show-enabled-only", no_argument, 0, 'E'},
       {"sort-by-priority", no_argument, 0, 'P'},
       {"sort-by-uri", no_argument, 0, 'U'},
       {"sort-by-alias", no_argument, 0, 'A'},
@@ -1495,6 +1496,7 @@ void Zypper::processCommandOptions()
       "-r, --refresh             Show also the autorefresh flag.\n"
       "-d, --details             Show more information like URI, priority, type.\n"
       "-s, --service             Show also alias of parent service.\n"
+      "-E, --show-enabled-only   Show enabled repos only.\n"
       "-U, --sort-by-uri         Sort the list by URI.\n"
       "-P, --sort-by-priority    Sort the list by repository priority.\n"
       "-A, --sort-by-alias       Sort the list by alias.\n"
