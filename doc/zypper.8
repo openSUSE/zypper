@@ -1124,6 +1124,9 @@ Add the autorefresh column to the output.
 .I \-d, \-\-details
 Show more information like URI, priority, type, etc.
 .TP
+.I \-E, \-\-show\-enabled\-only
+Show enabled repositories only.
+.TP
 .I \-U, \-\-sort\-by\-uri
 Add base URI column and sort the list it.
 .TP
@@ -1391,6 +1394,10 @@ Show also repositories belonging to the services.
 .TP
 .I \-P, \-\-sort\-by\-priority
 Sort the list by repository priority.
+.TP
+.I \-E, \-\-show\-enabled\-only
+Show enabled services only. If used together with \fI\-\-with\-repos\fR a disabled
+service owning (manually) enabled repositories is shown as well.
 .TP
 .I \-U, \-\-sort-by-uri
 Sort the list by URI.
