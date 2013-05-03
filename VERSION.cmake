@@ -33,8 +33,8 @@
 #   See './mkChangelog -h' for help.
 #
 SET(VERSION_MAJOR "1")
-SET(VERSION_MINOR "8")
-SET(VERSION_PATCH "14")
+SET(VERSION_MINOR "9")
+SET(VERSION_PATCH "0")
 
-# LAST RELEASED: 1.8.14
+# LAST RELEASED: 1.9.0
 #=======
