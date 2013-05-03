@@ -1,4 +1,11 @@
 -------------------------------------------------------------------
+Fri May  3 17:44:41 CEST 2013 - ma@suse.de
+
+- Add -E, --show-enabled-only option to list repos/services command
+  (FATE#314994)
+- version 1.6.174
+
+-------------------------------------------------------------------
 Thu Apr  4 17:02:25 CEST 2013 - ma@suse.de
 
 - Show the right product in summary (bnc#811997)
