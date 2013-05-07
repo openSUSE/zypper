@@ -1022,6 +1022,16 @@ string SATResolver::SATprobleminfoString(Id problem, string &detail, Id &ignoreI
 	  ret = str::form (_("nothing provides requested %s"), pool_dep2str(pool, dep));
 	  detail += _("Have you enabled all requested repositories?");
 	  break;
+      case SOLVER_RULE_JOB_UNKNOWN_PACKAGE:
+	  ret = str::form (_("package %s does not exist"), pool_dep2str(pool, dep));
+	  detail += _("Have you enabled all requested repositories?");
+	  break;
+      case SOLVER_RULE_JOB_UNSUPPORTED:
+	  ret = _("unsupported request");
+	  break;
+      case SOLVER_RULE_JOB_PROVIDED_BY_SYSTEM:
+	  ret = str::form (_("%s is provided by the system and cannot be erased"), pool_dep2str(pool, dep));
+	  break;
       case SOLVER_RULE_RPM_NOT_INSTALLABLE:
 	  s = mapSolvable (source);
 	  ret = str::form (_("%s is not installable"), s.asString().c_str());
