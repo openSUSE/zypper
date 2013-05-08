@@ -1,4 +1,9 @@
 -------------------------------------------------------------------
+Thu May  9 01:15:12 CEST 2013 - ma@suse.de
+
+- Update zypper-po.tar.bz2
+
+-------------------------------------------------------------------
 Fri May  3 17:52:19 CEST 2013 - ma@suse.de
 
 - Add -E, --show-enabled-only option to list repos/services command
