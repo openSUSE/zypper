@@ -1,4 +1,9 @@
 -------------------------------------------------------------------
+Thu May  9 01:13:54 CEST 2013 - ma@suse.de
+
+- Update zypp-po.tar.bz2
+
+-------------------------------------------------------------------
 Thu May  2 11:07:52 CEST 2013 - ma@suse.de
 
 - Discourage using SafeBool in favor of explicit operator bool
