@@ -258,7 +258,7 @@ IMPL_PTR_TYPE(MediaSetAccess);
 
           // Propagate the original error if _no_ callback receiver is connected, or
 	  // non_interactive mode (for optional files) is used (except for wrong media).
-          if ( ! callback::SendReport<media::MediaChangeReport>::Distributor::instance().getReceiver()
+          if ( ! callback::SendReport<media::MediaChangeReport>::connected()
 	     || (( options & PROVIDE_NON_INTERACTIVE ) && reason != media::MediaChangeReport::WRONG ) )
           {
               MIL << "Can't provide file. Non-Interactive mode." << endl;

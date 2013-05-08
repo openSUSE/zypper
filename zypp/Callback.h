@@ -222,6 +222,12 @@ namespace zypp
         ~SendReport()
         { Distributor::instance()->reportend(); }
 
+        static Receiver * whoIsConnected()
+        { return Distributor::instance().getReceiver(); }
+
+        static bool connected()
+        { return whoIsConnected(); }
+
         Distributor & operator->()
         { return Distributor::instance(); }
       };
