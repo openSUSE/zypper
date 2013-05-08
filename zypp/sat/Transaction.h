@@ -81,14 +81,15 @@ namespace zypp
        ZYPP_DECLARE_FLAGS(StepStages,StepStage);
 
      public:
-       struct Default {};	///< Ctor arg type
+       struct LoadFromPoolType {};	///< Ctor arg type
+       static constexpr LoadFromPoolType loadFromPool = LoadFromPoolType();
 
      public:
         /** Default ctor: empty transaction. */
         Transaction();
 
         /** Ctor loading the default pools transaction. */
-        Transaction( Default );
+        Transaction( LoadFromPoolType );
 
         /** Dtor */
         ~Transaction();

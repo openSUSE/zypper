@@ -74,7 +74,7 @@ namespace zypp
 	  : _trans( ::transaction_create( nullptr ) )
 	{ memset( _trans, 0, sizeof(_trans) ); }
 
-	Impl( Default )
+	Impl( LoadFromPoolType )
 	  : _watcher( myPool().serial() )
 	  , _trans( nullptr )
 	{
@@ -302,8 +302,8 @@ namespace zypp
       : _pimpl( Impl::nullimpl() )
     {}
 
-    Transaction::Transaction( Default )
-      : _pimpl( new Impl( Default() ) )
+    Transaction::Transaction( LoadFromPoolType )
+      : _pimpl( new Impl( loadFromPool ) )
     {}
 
     Transaction::~Transaction()
