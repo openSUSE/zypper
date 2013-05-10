@@ -470,13 +470,11 @@ INSTALL(  FILES
 
 
 SET( zypp_pool_SRCS
-  pool/GetResolvablesToInsDel.cc
   pool/PoolImpl.cc
   pool/PoolStats.cc
 )
 
 SET( zypp_pool_HEADERS
-  pool/GetResolvablesToInsDel.h
   pool/PoolImpl.h
   pool/PoolStats.h
   pool/PoolTraits.h
@@ -490,7 +488,6 @@ INSTALL(  FILES
 
 SET( zypp_solver_detail_SRCS
   solver/detail/Helper.cc
-  solver/detail/InstallOrder.cc
   solver/detail/ProblemSolutionIgnore.cc
   solver/detail/ProblemSolutionCombi.cc
   solver/detail/Resolver.cc
@@ -508,7 +505,6 @@ SET( zypp_solver_detail_SRCS
 
 SET( zypp_solver_detail_HEADERS
   solver/detail/Helper.h
-  solver/detail/InstallOrder.h
   solver/detail/ProblemSolutionIgnore.h
   solver/detail/ProblemSolutionCombi.h
   solver/detail/Resolver.h

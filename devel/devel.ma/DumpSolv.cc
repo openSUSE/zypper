@@ -2,7 +2,7 @@
 
 #include <zypp/ResObjects.h>
 #include <zypp/sat/WhatObsoletes.h>
-#include "zypp/pool/GetResolvablesToInsDel.h"
+
 
 static std::string appname( __FILE__ );
 static TestSetup test;

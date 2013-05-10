@@ -25,7 +25,7 @@
 #include "zypp/TmpPath.h"
 #include "zypp/ManagedFile.h"
 #include "zypp/MediaSetAccess.h"
-#include "zypp/pool/GetResolvablesToInsDel.h"
+
 
 #include "zypp/RepoManager.h"
 #include "zypp/Repository.h"

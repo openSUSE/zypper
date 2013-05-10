@@ -47,7 +47,6 @@
 
 #include "zypp/parser/ProductFileReader.h"
 
-#include "zypp/pool/GetResolvablesToInsDel.h"
 #include "zypp/solver/detail/Testcase.h"
 
 #include "zypp/repo/DeltaCandidates.h"

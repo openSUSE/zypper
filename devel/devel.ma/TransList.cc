@@ -3,7 +3,7 @@
 #include <zypp/PoolQuery.h>
 #include <zypp/target/rpm/librpmDb.h>
 #include <zypp/parser/ProductFileReader.h>
-#include "zypp/pool/GetResolvablesToInsDel.h"
+
 #include "zypp/sat/WhatObsoletes.h"
 #include "zypp/ExternalProgram.h"
 #include <zypp/ZYppCallbacks.h>
@@ -162,42 +162,6 @@ bool install()
 }
 
 ///////////////////////////////////////////////////////////////////
-
-namespace zypp
-{
-  void tradOrder()
-  {
-    scoped_ptr<base::LogControl::TmpLineWriter> shutUp( new base::LogControl::TmpLineWriter );
-    ResPool pool( ResPool::instance() );
-    pool::GetResolvablesToInsDel collect( pool, pool::GetResolvablesToInsDel::ORDER_BY_SOURCE );
-    shutUp.reset();
-
-    MIL << "GetResolvablesToInsDel -" << collect._toDelete.size()
-    << " +" << (collect._toInstall.size() + collect._toSrcinstall.size()) << " {" << endl;
-    for_( it, collect._toDelete.begin(), collect._toDelete.end() )
-    {
-      MIL << " - " << *it << endl;
-    }
-    for_( it, collect._toInstall.begin(), collect._toInstall.end() )
-    {
-      MIL << " + " << *it << endl;
-    }
-    for_( it, collect._toSrcinstall.begin(), collect._toSrcinstall.end() )
-    {
-      MIL << " + " << *it << endl;
-    }
-    MIL << "}" << endl;
-  }
-
-}
-///////////////////////////////////////////////////////////////////
-
-void checkTrans()
-{
-  ResPool pool( ResPool::instance() );
-  pool::GetResolvablesToInsDel collect( pool, pool::GetResolvablesToInsDel::ORDER_BY_SOURCE );
-  collect.debugDiffTransaction();
-}
 
 template <class _Iter>
 unsigned count( _Iter begin, _Iter end )

@@ -26,6 +26,5 @@
 #include "zypp/solver/detail/ResolverProblem.h"
 #include "zypp/solver/detail/ProblemSolution.h"
 #include "zypp/solver/detail/SolutionAction.h"
-#include "zypp/solver/detail/InstallOrder.h"
 
 #endif	// ZYPP_SOLVER_DETAIL_LIBZYPP_H
