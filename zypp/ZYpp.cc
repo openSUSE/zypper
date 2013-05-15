@@ -105,16 +105,6 @@ namespace zypp
   {return _pimpl->provideSrcPackage( srcPackage_r ); }
   ///////////////////////////////////////////////////////////////////
 
-  void ZYpp::setRequestedLocales( const LocaleSet & locales_r )
-  { sat::Pool::instance().setRequestedLocales( locales_r ); }
-
-  const LocaleSet & ZYpp::getRequestedLocales() const
-  { return sat::Pool::instance().getRequestedLocales(); }
-
-  const LocaleSet & ZYpp::getAvailableLocales() const
-  { return sat::Pool::instance().getAvailableLocales(); }
-
-
   Pathname ZYpp::homePath() const
   { return _pimpl->homePath(); }
 

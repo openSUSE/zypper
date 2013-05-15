@@ -128,42 +128,6 @@ namespace zypp
     /** */
     Resolver_Ptr resolver() const;
     KeyRing_Ptr keyRing() const;
-  public:
-    /** Set the preferred locale for translated labels, descriptions,
-     *  etc. passed to the UI.
-     * \deprecated Use ZConfig diretcly.
-     */
-    ZYPP_DEPRECATED void setTextLocale( const Locale & textLocale_r )
-    { ZConfig::instance().setTextLocale( textLocale_r ); }
-    /** \deprecated Use ZConfig diretcly. */
-    ZYPP_DEPRECATED Locale getTextLocale() const
-    { return ZConfig::instance().textLocale(); }
-
-  public:
-    /** \name move to pool
-     * \deprecated Use ResPool diretcly.
-    */
-    //@{
-    /** Set the requested locales.
-     * Languages to be supported by the system, e.g. language specific
-     * packages to be installed. This function operates on the pool,
-     * so only the locales that are available as resolvables
-     * are marked as requested. The rest is ignored.
-     * \deprecated Use ResPool diretcly.
-    */
-    void setRequestedLocales( const LocaleSet & locales_r ) ZYPP_DEPRECATED;
-
-    /** \deprecated Use ResPool diretcly. */
-    const LocaleSet & getRequestedLocales() const ZYPP_DEPRECATED;
-
-    /**
-     * Get the set of available locales.
-     * This is computed from the package data so it actually
-     * represents all locales packages claim to support.
-     * \deprecated Use ResPool diretcly.
-     */
-    const LocaleSet & getAvailableLocales() const ZYPP_DEPRECATED;
-    //@}
 
   public:
     /** Get the path where zypp related plugins store persistent data and caches   */
@@ -174,28 +138,6 @@ namespace zypp
 
     /** set the home, if you need to change it */
     void setHomePath( const Pathname & path );
-
-    /** Get the system architecture.
-      * \deprecated Use ZConfig diretcly.
-    */
-    ZYPP_DEPRECATED Arch architecture() const
-    { return ZConfig::instance().systemArchitecture(); }
-    /** Set the system architecture.
-     * This should be used for testing/debugging only since the Target backend
-     * won't be able to install incompatible packages ;-)
-     * \deprecated Use ZConfig diretcly.
-    */
-    ZYPP_DEPRECATED void setArchitecture( const Arch & arch )
-    { ZConfig::instance().setSystemArchitecture( arch ); }
-
-  public:
-
-   /**
-    * \deprecated Persistent locks are automatically maintained, kept in the pool, loaded and saved together with the Target.
-    * \ref ZConfig::apply_locks_file tells whether locks are applied or not.
-    */
-    ZYPP_DEPRECATED int applyLocks()
-    { return 0; }
 
   protected:
     /** Dtor */
