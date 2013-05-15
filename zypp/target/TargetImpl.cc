@@ -1324,48 +1324,6 @@ namespace zypp
         buildCache();
       }
 
-      // for DEPRECATED old ZyppCommitResult results:
-      ///////////////////////////////////////////////////////////////////
-      // build return statistics
-      ///////////////////////////////////////////////////////////////////
-      result._errors.clear();
-      result._remaining.clear();
-      result._srcremaining.clear();
-      unsigned toInstall = 0;
-      for_( step, steps.begin(), steps.end() )
-      {
-	if ( step->stepType() == sat::Transaction::TRANSACTION_IGNORE )
-	{
-	  // For non-packages only products might have beed installed.
-	  // All the rest is ignored.
-	  if ( step->satSolvable().isSystem() || ! step->satSolvable().isKind<Product>() )
-	    continue;
-	}
-	else if ( step->stepType() == sat::Transaction::TRANSACTION_ERASE )
-	{
-	  continue;
-	}
-	// to be installed:
-	++toInstall;
-	switch ( step->stepStage() )
-	{
-	  case sat::Transaction::STEP_TODO:
-	    if ( step->satSolvable().isKind<Package>() )
-	      result._remaining.push_back( PoolItem( *step ) );
-	    else if ( step->satSolvable().isKind<SrcPackage>() )
-	      result._srcremaining.push_back( PoolItem( *step ) );
-	    break;
-	  case sat::Transaction::STEP_DONE:
-	    // NOOP
-	    break;
-	  case sat::Transaction::STEP_ERROR:
-	    result._errors.push_back( PoolItem( *step ) );
-	    break;
-	}
-      }
-      result._result = (toInstall - result._remaining.size());
-      ///////////////////////////////////////////////////////////////////
-
       MIL << "TargetImpl::commit(<pool>, " << policy_r << ") returns: " << result << endl;
       return result;
     }

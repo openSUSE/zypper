@@ -164,32 +164,6 @@ namespace zypp
       //@}
 
     public:
-      /** \name Oldstlye interface to be removed asap.
-       * \deprecated PoolItem is not suitable for reporting errors about
-       * packages to be deteled, as reloading the rpm database after commit
-       * invalidates them.
-       */
-      //@{
-      typedef std::list<PoolItem> PoolItemList;
-      /**
-       * number of committed resolvables
-       **/
-      int          _result ZYPP_DEPRECATED;
-      /**
-       * list of resolvables with error
-       **/
-      PoolItemList _errors ZYPP_DEPRECATED;
-      /**
-       * list of resolvables remaining (due to wrong media)
-       **/
-      PoolItemList _remaining ZYPP_DEPRECATED;
-      /**
-       * list of kind:source resolvables remaining (due to wrong media)
-       **/
-      PoolItemList _srcremaining ZYPP_DEPRECATED;
-      //@}
-
-    public:
       /** Implementation  */
       class Impl;
     private:
