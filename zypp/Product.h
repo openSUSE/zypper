@@ -91,10 +91,8 @@ namespace zypp
      * Well, in an ideal world there is only one base product.
      * It's the installed product denoted by a symlink in
      * \c /etc/products.d.
-     * \deprecated Use isTargetDistribution to test for the installed base product,
-     * other wise type is empty for almost all products.
-    */
-    std::string type() const ZYPP_DEPRECATED;
+     */
+    std::string type() const;
 
     /** The product flags */
     std::list<std::string> flags() const;
