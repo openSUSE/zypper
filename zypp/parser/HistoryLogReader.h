@@ -20,11 +20,6 @@
 
 #include "zypp/HistoryLogData.h"
 
-#if defined(WITH_DEPRECATED_HISTORYITEM_API)
-#warning Support for HistoryItem based parsing will be removed in the future.
-#warning Switch to the new HistoryLogData based HistoryLogReader API.
-#endif // WITH_DEPRECATED_HISTORYITEM_API
-
 ///////////////////////////////////////////////////////////////////
 namespace zypp
 {
@@ -67,20 +62,6 @@ namespace zypp
   /// \endcode
   /// \see \ref HistoryLogData for how to access the individual data fields.
   ///
-#if defined(WITH_DEPRECATED_HISTORYITEM_API)
-  /// \note The old API based in HistoryItem instead of HistoryLogData
-  /// is deprecated and may vanish in the future. The new API no longer
-  /// allows direct access to data members, you have to call access methods
-  /// instead.
-  /// \code
-  ///   - // old style
-  ///   - HistoryItem::Ptr ptr;
-  ///   - Date d = ptr->date;
-  ///   + // new style
-  ///   + HistoryLogData::Ptr ptr;
-  ///   + Date d = ptr->date();
-  /// \endcode
-#endif // WITH_DEPRECATED_HISTORYITEM_API
   ///////////////////////////////////////////////////////////////////
   class HistoryLogReader
   {
@@ -162,17 +143,6 @@ namespace zypp
     /** Implementation */
     class Impl;
     RW_pointer<Impl,rw_pointer::Scoped<Impl> > _pimpl;
-
-#if defined(WITH_DEPRECATED_HISTORYITEM_API)
-  public:
-    /** \deprecated Old unextensible \ref zypp::parser::HistoryLogReader data class. */
-    typedef function< bool( const HistoryItem::Ptr & )> ProcessItem;
-    /** \deprecated Old unextensible \ref zypp::parser::HistoryLogReader data class.
-     * They grant direct access to data members, so can not be extended
-     * without losing binary compatibility.
-     */
-    HistoryLogReader( const Pathname & repo_file, const ProcessItem & callback ) ZYPP_DEPRECATED;
-#endif // WITH_DEPRECATED_HISTORYITEM_API
   };
 
   /** \relates HistoryLogReader::Options */

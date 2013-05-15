@@ -50,25 +50,10 @@ namespace zypp
     Pathname _filename;
     Options  _options;
     ProcessData _callback;
-
-#if defined(WITH_DEPRECATED_HISTORYITEM_API)
-    ProcessItem _oldAPICallback;
-  private:
-    HistoryItem::Ptr _oldAPIcreateHistoryItem( HistoryItem::FieldVector & fields );
-    void _oldAPIparseLine(const std::string & line, unsigned int lineNr);
-#endif // WITH_DEPRECATED_HISTORYITEM_API
   };
 
   bool HistoryLogReader::Impl::parseLine( const std::string & line_r, unsigned lineNr_r )
   {
-#if defined(WITH_DEPRECATED_HISTORYITEM_API)
-    if ( _oldAPICallback )
-    {
-      _oldAPIparseLine( line_r, lineNr_r );
-      return true;	// old api did not eavluate callback return value :(
-    }
-#endif // WITH_DEPRECATED_HISTORYITEM_API
-
     // parse into fields
     HistoryLogData::FieldVector fields;
     str::splitEscaped( line_r, std::back_inserter(fields), "|", true );
@@ -205,110 +190,11 @@ namespace zypp
     pd.toMax();
   }
 
-
-#if defined(WITH_DEPRECATED_HISTORYITEM_API)
-  HistoryItem::Ptr HistoryLogReader::Impl::_oldAPIcreateHistoryItem( HistoryItem::FieldVector & fields )
-  {
-    HistoryActionID aid( str::trim( fields[1] ) );
-    switch ( aid.toEnum() )
-    {
-    case HistoryActionID::INSTALL_e:
-      return HistoryItemInstall::Ptr( new HistoryItemInstall( fields ) );
-      break;
-
-    case HistoryActionID::REMOVE_e:
-      return HistoryItemRemove::Ptr( new HistoryItemRemove( fields ) );
-      break;
-
-    case HistoryActionID::REPO_ADD_e:
-      return HistoryItemRepoAdd::Ptr( new HistoryItemRepoAdd( fields ) );
-      break;
-
-    case HistoryActionID::REPO_REMOVE_e:
-      return HistoryItemRepoRemove::Ptr( new HistoryItemRepoRemove( fields ) );
-      break;
-
-    case HistoryActionID::REPO_CHANGE_ALIAS_e:
-      return HistoryItemRepoAliasChange::Ptr( new HistoryItemRepoAliasChange( fields ) );
-      break;
-
-    case HistoryActionID::REPO_CHANGE_URL_e:
-      return HistoryItemRepoUrlChange::Ptr( new HistoryItemRepoUrlChange( fields ) );
-      break;
-
-    case HistoryActionID::NONE_e:
-      break;
-    }
-    return HistoryItem::Ptr();
-  }
-  void HistoryLogReader::Impl::_oldAPIparseLine( const std::string & line, unsigned int lineNr )
-  {
-    // parse into fields
-    HistoryItem::FieldVector fields;
-    str::splitEscaped( line, back_inserter(fields), "|", true );
-
-    if ( fields.size() <= 2 )
-    {
-      if ( ! _options.testFlag( IGNORE_INVALID_ITEMS ) )
-      {
-	ParseException e( str::form( "Error in history log on line #%u.", lineNr ) );
-	e.addHistory( str::form( "Bad number of fields. Got %zd, expected more than %d.", fields.size(), 2 ) );
-	ZYPP_THROW( e );
-      }
-      else
-      {
-	WAR << "Ignoring suspicious non-comment entry on line #" << lineNr << endl;
-	return;
-      }
-    }
-
-    HistoryItem::Ptr item_ptr;
-    try
-    {
-      item_ptr = _oldAPIcreateHistoryItem( fields );
-    }
-    catch ( const Exception & e )
-    {
-      ZYPP_CAUGHT(e);
-      ERR << "Invalid history log entry on line #" << lineNr << " '"<< line << "'" << endl;
-
-      if ( ! _options.testFlag( IGNORE_INVALID_ITEMS ) )
-      {
-        ParseException newe( str::form( "Error in history log on line #%u.", lineNr ) );
-	newe.remember( e );
-	ZYPP_THROW( newe );
-      }
-    }
-
-    if ( item_ptr )
-    {
-      _oldAPICallback( item_ptr );
-    }
-    else if ( ! _options.testFlag( IGNORE_INVALID_ITEMS ) )
-    {
-      ParseException e( str::form( "Error in history log on line #%u.", lineNr ) );
-      e.addHistory( "Unknown entry type." );
-      ZYPP_THROW( e );
-    }
-    else
-    {
-      WAR << "Unknown history log action type: " << fields[1] << " on line #" << lineNr << endl;
-    }
-  }
-#endif // WITH_DEPRECATED_HISTORYITEM_API
-
   /////////////////////////////////////////////////////////////////////
   //
   //	class HistoryLogReader
   //
   /////////////////////////////////////////////////////////////////////
-
-#if defined(WITH_DEPRECATED_HISTORYITEM_API)
-  HistoryLogReader::HistoryLogReader( const Pathname & historyFile,
-                                      const ProcessItem & callback )
-  : _pimpl(new HistoryLogReader::Impl( historyFile, Options(), ProcessData() ) )
-  { _pimpl->_oldAPICallback = callback; }
-#endif // WITH_DEPRECATED_HISTORYITEM_API
 
   HistoryLogReader::HistoryLogReader( const Pathname & historyFile_r, const Options & options_r, const ProcessData & callback_r )
   : _pimpl( new HistoryLogReader::Impl( historyFile_r, options_r, callback_r ) )

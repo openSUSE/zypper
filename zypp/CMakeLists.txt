@@ -4,9 +4,6 @@
 
 ADD_DEFINITIONS(-DLOCALEDIR="${CMAKE_INSTALL_PREFIX}/share/locale" -DTEXTDOMAIN="zypp" -DZYPP_DLL )
 
-# 2012-12-03: HistoryLogReader: deprecate old API based in HistoryItem; use HistoryLogData based one
-ADD_DEFINITIONS(-DWITH_DEPRECATED_HISTORYITEM_API=1)
-
 INCLUDE_DIRECTORIES(${CMAKE_CURRENT_BINARY_DIR})
 #FILE(WRITE filename "message to write"... )
 

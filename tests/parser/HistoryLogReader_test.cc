@@ -1,34 +1,8 @@
 #include "TestSetup.h"
-#define WITH_DEPRECATED_HISTORYITEM_API
 #include "zypp/parser/HistoryLogReader.h"
 #include "zypp/parser/ParseException.h"
 
 using namespace zypp;
-
-#if defined(WITH_DEPRECATED_HISTORYITEM_API)
-namespace
-{
-  bool OldApi_ProcessItem( const HistoryItem::Ptr & ptr )
-  {
-    DBG << ptr << endl;
-    return true;
-  }
-}
-
-BOOST_AUTO_TEST_CASE(OldApi_basic)
-{
-  parser::HistoryLogReader parser( TESTS_SRC_DIR "/parser/HistoryLogReader_test.dat",
-				   OldApi_ProcessItem );
-
-  BOOST_CHECK_EQUAL( parser.ignoreInvalidItems(), false );
-  BOOST_CHECK_THROW( parser.readAll(), parser::ParseException );
-
-  parser.setIgnoreInvalidItems( true );
-  BOOST_CHECK_EQUAL( parser.ignoreInvalidItems(), true );
-  parser.readAll();
-}
-
-#endif // WITH_DEPRECATED_HISTORYITEM_API
 
 namespace
 {
