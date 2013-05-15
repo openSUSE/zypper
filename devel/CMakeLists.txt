@@ -4,4 +4,3 @@ CONFIGURE_FILE(${LIBZYPP_SOURCE_DIR}/devel/genclass.in ${LIBZYPP_BINARY_DIR}/dev
 
 ADD_SUBDIRECTORY(devel.dmacvicar)
 ADD_SUBDIRECTORY(devel.ma)
-ADD_SUBDIRECTORY(devel.jkupec)
