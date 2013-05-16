@@ -249,7 +249,6 @@ SET( zypp_base_HEADERS
   base/ProvideNumericId.h
   base/PtrTypes.h
   base/ReferenceCounted.h
-  base/SafeBool.h
   base/Signal.h
   base/String.h
   base/StrMatcher.h
