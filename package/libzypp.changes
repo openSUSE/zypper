@@ -1,4 +1,11 @@
 -------------------------------------------------------------------
+Thu May 16 12:22:48 CEST 2013 - ma@suse.de
+
+- Remove deprecated old stuff (aria2 support,
+  old InstallOrder, old History parser)
+- version 13.2.0 (2)
+
+-------------------------------------------------------------------
 Thu May 16 01:13:47 CEST 2013 - ma@suse.de
 
 - Update zypp-po.tar.bz2
@@ -22,9 +29,9 @@ Thu May  2 11:07:52 CEST 2013 - ma@suse.de
 -------------------------------------------------------------------
 Mon Apr 29 10:41:46 CEST 2013 - ma@suse.de
 
-- Testsuite: Workaround boost::thread being not header only since 
+- Testsuite: Workaround boost::thread being not header only since
   boost-1.50 (boost ticket 7085)
-- Adaptions to smart_pointer changes in boost-1.53; mainly introduce 
+- Adaptions to smart_pointer changes in boost-1.53; mainly introduce
   explicit operator bool; constructible and comparable with nullptr_t.
 - Bump major version for Factory
   12.x is continued on SuSE-Code-12_3-Branch
@@ -67,7 +74,7 @@ Sun Mar 10 01:14:01 CET 2013 - ma@suse.de
 -------------------------------------------------------------------
 Thu Mar  7 14:13:42 CET 2013 - ma@suse.de
 
-- Adapt to libsolv dataiterator fixes 
+- Adapt to libsolv dataiterator fixes
   (returning random data in some cases)
 - Require and adapt to changes in libsolv-0.3.0
 - version 12.10.0 (0)
@@ -113,7 +120,7 @@ Mon Feb  4 12:35:51 CET 2013 - ma@suse.de
 Tue Jan 22 11:06:55 CET 2013 - ma@suse.de
 
 - make multicurl suppress progress reports for the metalink download
-- work around libcurl bug that sometimes gives us old values in the 
+- work around libcurl bug that sometimes gives us old values in the
   progress callback
 - version 12.8.0 (0)
 
@@ -156,10 +163,10 @@ Sun Dec 16 01:13:16 CET 2012 - ma@suse.de
 -------------------------------------------------------------------
 Mon Dec  3 14:31:59 CET 2012 - ma@suse.de
 
-- HistoryLogReader: new HistoryLogData based API for parsing the new 
+- HistoryLogReader: new HistoryLogData based API for parsing the new
   history file entries (fate#312521)
-  The old HistoryItem based API is deprecated but will 
-  still be available for a while if you compile with 
+  The old HistoryItem based API is deprecated but will
+  still be available for a while if you compile with
   -DWITH_DEPRECATED_HISTORYITEM_API.
 - Write userdata string to history log (fate#312521)
 - Add HistoryLogReader testcases
@@ -195,7 +202,7 @@ Sun Nov  4 01:13:21 CET 2012 - ma@suse.de
 Wed Oct 24 10:40:38 CEST 2012 - ma@suse.de
 
 - Add simple sysconfig::write (bnc#766598)
-- For installed products also filelists when trying to find the buddy 
+- For installed products also filelists when trying to find the buddy
   (bnc#784900)
 - Provide information whether product license needs to be accepted.
 - version 12.3.0 (0)
@@ -242,7 +249,7 @@ Sun Sep  9 01:13:25 CEST 2012 - ma@suse.de
 -------------------------------------------------------------------
 Wed Sep  5 11:56:54 CEST 2012 - gs@suse.de
 
-- Provide Target::reload() 
+- Provide Target::reload()
 - version 12.1.0 (0)
 
 -------------------------------------------------------------------
@@ -268,7 +275,7 @@ Thu Aug 16 01:13:43 CEST 2012 - ma@suse.de
 -------------------------------------------------------------------
 Fri Aug 10 12:53:47 CEST 2012 - ma@suse.de
 
-- Implement $ZYPP_LOCK_TIMEOUT: number of seconds to wait for a 
+- Implement $ZYPP_LOCK_TIMEOUT: number of seconds to wait for a
   zypplock becoming available (bnc#772965)
 - Unify update-scripts with same content(md5sum) (bnc#773575)
 - version 12.0.1 (0)
@@ -419,7 +426,7 @@ Thu Apr 19 01:14:57 CEST 2012 - ma@suse.de
 Wed Apr 18 18:38:06 CEST 2012 - ma@suse.de
 
 - Fix install progress hopping back and forth
-- Try to create a missing destination dir before switching to tmp 
+- Try to create a missing destination dir before switching to tmp
   space (bnc#755239)
 
 -------------------------------------------------------------------
@@ -542,7 +549,7 @@ Thu Nov 17 01:13:15 CET 2011 - ma@suse.de
 -------------------------------------------------------------------
 Fri Nov 11 13:38:42 CET 2011 - ma@suse.de
 
-- Try to find and use some CD/DVD device even if HAL/UDEV detection 
+- Try to find and use some CD/DVD device even if HAL/UDEV detection
   fails (bnc#724807)
 - Static initialization problem fixes (by Harald Fernengel)
 - version 10.3.4 (3)
