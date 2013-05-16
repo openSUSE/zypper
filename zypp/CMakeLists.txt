@@ -278,7 +278,6 @@ SET( zypp_media_SRCS
   media/ProxyInfo.cc
   media/MediaCurl.cc
   media/MediaMultiCurl.cc
-  media/MediaAria2c.cc
   media/MediaISO.cc
   media/MediaPlugin.cc
   media/MediaSource.cc
@@ -301,7 +300,6 @@ SET( zypp_media_HEADERS
   media/MediaCIFS.h
   media/MediaCurl.h
   media/MediaMultiCurl.h
-  media/MediaAria2c.h
   media/MediaDIR.h
   media/MediaDISK.h
   media/MediaException.h

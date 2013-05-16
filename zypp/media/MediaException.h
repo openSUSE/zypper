@@ -214,34 +214,6 @@ namespace zypp
       std::string _url;
     };
 
-class MediaMetalinkInitException : public MediaException
-    {
-    public:
-      MediaMetalinkInitException(const Url & url_r)
-      : MediaException()
-      , _url(url_r.asString())
-      {}
-      virtual ~MediaMetalinkInitException() throw() {};
-    protected:
-      virtual std::ostream & dumpOn( std::ostream & str ) const;
-    private:
-      std::string _url;
-    };
-
-class MediaAria2cInitException : public MediaException
-    {
-    public:
-      MediaAria2cInitException(const Url & url_r)
-      : MediaException()
-      , _url(url_r.asString())
-      {}
-      virtual ~MediaAria2cInitException() throw() {};
-    protected:
-      virtual std::ostream & dumpOn( std::ostream & str ) const;
-    private:
-      std::string _url;
-    };
-
     class MediaSystemException : public MediaException
     {
     public:
@@ -395,74 +367,6 @@ class MediaAria2cInitException : public MediaException
       , _msg(msg_r)
       {}
       virtual ~MediaCurlSetOptException() throw() {};
-    protected:
-      virtual std::ostream & dumpOn( std::ostream & str ) const;
-      std::string _url;
-      std::string _msg;
-    };
-
-    class MediaMetalinkException : public MediaException
-    {
-    public:
-      MediaMetalinkException(const Url & url_r,
-			 const std::string & err_r,
-			 const std::string & msg_r)
-      : MediaException()
-      , _url(url_r.asString())
-      , _err(err_r)
-      , _msg(msg_r)
-      {}
-      virtual ~MediaMetalinkException() throw() {};
-    protected:
-      virtual std::ostream & dumpOn( std::ostream & str ) const;
-      std::string _url;
-      std::string _err;
-      std::string _msg;
-    };
-
-    class MediaMetalinkSetOptException : public MediaException
-    {
-    public:
-      MediaMetalinkSetOptException(const Url & url_r, const std::string & msg_r)
-      : MediaException()
-      , _url(url_r.asString())
-      , _msg(msg_r)
-      {}
-      virtual ~MediaMetalinkSetOptException() throw() {};
-    protected:
-      virtual std::ostream & dumpOn( std::ostream & str ) const;
-      std::string _url;
-      std::string _msg;
-    };
-
-    class MediaAria2cException : public MediaException
-    {
-    public:
-      MediaAria2cException(const Url & url_r,
-			 const std::string & err_r,
-			 const std::string & msg_r)
-      : MediaException()
-      , _url(url_r.asString())
-      , _err(err_r)
-      , _msg(msg_r)
-      {}
-      virtual ~MediaAria2cException() throw() {};
-    protected:
-      virtual std::ostream & dumpOn( std::ostream & str ) const;
-      std::string _url;
-      std::string _err;
-      std::string _msg;
-    };
-
-    class MediaAria2cSetOptException : public MediaException
-    {
-    public:
-      MediaAria2cSetOptException(const Url & url_r, const std::string & msg_r)
-      : MediaException()
-      , _url(url_r.asString())
-      , _msg(msg_r)
-      {}
-      virtual ~MediaAria2cSetOptException() throw() {};
     protected:
       virtual std::ostream & dumpOn( std::ostream & str ) const;
       std::string _url;

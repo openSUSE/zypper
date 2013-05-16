@@ -12,14 +12,13 @@
 
 using namespace std;
 
-#define ARIA2C_BINARY "/usr/bin/aria2c"
 #define CURL_BINARY "/usr/bin/curl"
 
 namespace zypp
 {
 namespace media
 {
-    
+
 class TransferSettings::Impl
 {
 public:
@@ -38,7 +37,7 @@ public:
     {}
 
     virtual ~Impl()
-    {}    
+    {}
 
     /** Offer default Impl. */
     static shared_ptr<Impl> nullimpl()
@@ -76,11 +75,11 @@ public:
     bool _verify_host;
     bool _verify_peer;
     Pathname _ca_path;
- 
+
     // workarounds
     bool _head_requests_allowed;
 };
-    
+
 TransferSettings::TransferSettings()
     : _impl(new TransferSettings::Impl())
 {
@@ -305,13 +304,13 @@ std::string TransferSettings::authType() const
 
 void TransferSettings::setHeadRequestsAllowed(bool allowed)
 {
-    _impl->_head_requests_allowed = allowed;    
-}    
+    _impl->_head_requests_allowed = allowed;
+}
 
 bool TransferSettings::headRequestsAllowed() const
 {
-    return _impl->_head_requests_allowed;    
-} 
+    return _impl->_head_requests_allowed;
+}
 
 } // ns media
 } // ns zypp

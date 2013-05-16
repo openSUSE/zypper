@@ -85,22 +85,6 @@ namespace zypp
         << endl;
     }
 
-   std::ostream & MediaMetalinkInitException::dumpOn( std::ostream & str) const
-    {
-      return str << form(
-        // TranslatorExplanation: curl is the name of a library, don't translate
-        _("Download (Metalink curl) initialization failed for '%s'"), _url.c_str())
-        << endl;
-    }
-
-   std::ostream & MediaAria2cInitException::dumpOn( std::ostream & str) const
-    {
-      return str << form(
-        // TranslatorExplanation: curl is the name of a library, don't translate
-        _("Download (Metalink curl) initialization failed for '%s'"), _url.c_str())
-        << endl;
-    }
-
     std::ostream & MediaSystemException::dumpOn( std::ostream & str) const
     {
       return str << form(
@@ -175,42 +159,6 @@ namespace zypp
       return str << form(
         // TranslatorExplanation: curl is the name of a library, don't translate
         _("Error occurred while setting download (curl) options for '%s':"),
-        _url.c_str())
-       << endl << _msg << endl;
-    }
-
-   std::ostream & MediaMetalinkException::dumpOn( std::ostream & str) const
-    {
-      // TranslatorExplanation: curl is the name of a library, don't translate
-      return str << form(_(
-        "Download (metalink curl) error for '%s':\n"
-        "Error code: %s\n"
-        "Error message: %s\n"), _url.c_str(), _err.c_str(), _msg.c_str());
-    }
-
-    std::ostream & MediaMetalinkSetOptException::dumpOn( std::ostream & str) const
-    {
-      return str << form(
-        // TranslatorExplanation: curl is the name of a library, don't translate
-        _("Error occurred while setting download (metalink curl) options for '%s':"),
-        _url.c_str())
-       << endl << _msg << endl;
-    }
-
-   std::ostream & MediaAria2cException::dumpOn( std::ostream & str) const
-    {
-      // TranslatorExplanation: curl is the name of a library, don't translate
-      return str << form(_(
-        "Download (metalink curl) error for '%s':\n"
-        "Error code: %s\n"
-        "Error message: %s\n"), _url.c_str(), _err.c_str(), _msg.c_str());
-    }
-
-    std::ostream & MediaAria2cSetOptException::dumpOn( std::ostream & str) const
-    {
-      return str << form(
-        // TranslatorExplanation: curl is the name of a library, don't translate
-        _("Error occurred while setting download (metalink curl) options for '%s':"),
         _url.c_str())
        << endl << _msg << endl;
     }

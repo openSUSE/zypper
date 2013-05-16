@@ -45,12 +45,12 @@ public:
   void addHeader( const std::string &header );
 
   /**
-   * begin iterators to additional headers 
+   * begin iterators to additional headers
    */
   Headers::const_iterator headersBegin() const;
 
   /**
-   * end iterators to additional headers 
+   * end iterators to additional headers
    */
   Headers::const_iterator headersEnd() const;
 
@@ -85,7 +85,7 @@ public:
   std::string password() const;
 
   /**
-   * returns the user and password as 
+   * returns the user and password as
    * a user:pass string
    */
   std::string userPassword() const;
@@ -136,7 +136,7 @@ public:
   std::string proxyPassword() const;
 
   /**
-   * returns the proxy user and password as 
+   * returns the proxy user and password as
    * a user:pass string
    */
   std::string proxyUserPassword() const;
@@ -176,7 +176,7 @@ public:
    * until the connection is dropped
    */
   long minDownloadSpeed() const;
-  
+
   /**
    * Set minimum download speed (bytes per second)
    * until the connection is dropped

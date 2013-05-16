@@ -29,7 +29,6 @@ Note that for Boolean variables we usually test whether the variable exists and 
 \subsection zypp-envars-mediabackend Selecting the mediabackend to use.
 
 \li \c ZYPP_MULTICURL=0 Turn off multicurl (metalink and zsync) and fall back to plain libcurl.
-\li \c ZYPP_ARIA2C=1 Enable aria2c backend (deprecated).
 
 \subsection zypp-envars-plugin Variables related to plugins
 
