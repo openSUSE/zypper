@@ -13,6 +13,7 @@
 #define ZYPP_TARGET_MODALIAS_MODALIAS_H
 
 #include <iosfwd>
+#include <vector>
 #include <string>
 
 #include "zypp/base/PtrTypes.h"
@@ -40,6 +41,8 @@ namespace zypp
         class Impl;
 
       public:
+	typedef std::vector<std::string> ModaliasList;
+
         /** Singleton access. */
         static Modalias & instance();
 
@@ -70,6 +73,9 @@ namespace zypp
         /** \overload */
         bool query( const std::string & cap_r ) const
         { return query( cap_r.c_str() ); }
+
+        /** List of modaliases found on system */
+        const ModaliasList & modaliasList() const;
 
       private:
         /** Singleton ctor. */
