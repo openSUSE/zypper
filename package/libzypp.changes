@@ -1,7 +1,7 @@
 -------------------------------------------------------------------
 Tue Jun 11 11:37:48 CEST 2013 - ma@suse.de
 
-- Speedup scanning for modaliases (bnc#823917)
+- Speedup scanning for modaliases (bnc#824110)
 - version 13.3.0 (2)
 
 -------------------------------------------------------------------
