@@ -188,6 +188,8 @@ namespace zypp
   extern const Arch Arch_s390;
 
   /** \relates Arch */
+  extern const Arch Arch_ppc64p7;
+  /** \relates Arch */
   extern const Arch Arch_ppc64;
   /** \relates Arch */
   extern const Arch Arch_ppc;
