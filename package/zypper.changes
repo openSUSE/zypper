@@ -1,4 +1,10 @@
 -------------------------------------------------------------------
+Wed Jun 19 12:20:03 CEST 2013 - ma@suse.de
+
+- Set default zypper.log mode to 0640 (bnc#825490)
+- version 1.6.308
+
+-------------------------------------------------------------------
 Fri May  3 17:43:12 CEST 2013 - ma@suse.de
 
 - Add -E, --show-enabled-only option to list repos/services command
