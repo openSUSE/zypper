@@ -46,17 +46,19 @@ namespace zypp
       }
       else
       {
+	if ( mode_r )
+	{
+          // not filesystem::assert_file as filesystem:: functions log,
+	  // and this FileWriter is not yet in place.
+	  int fd = ::creat( file_r.c_str(), mode_r );
+	  if ( fd != -1 )
+	    ::close( fd );
+	}
         // set unbuffered write
         std::ofstream * fstr = 0;
         _outs.reset( (fstr = new std::ofstream( file_r.asString().c_str(), std::ios_base::app )) );
         fstr->rdbuf()->pubsetbuf(0,0);
         _str = &(*fstr);
-        if ( mode_r )
-        {
-          // not filesystem::chmod, as filesystem:: functions log,
-          // and this FileWriter is not yet in place.
-          ::chmod( file_r.asString().c_str(), mode_r );
-        }
       }
     }
 
