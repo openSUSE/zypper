@@ -158,7 +158,7 @@ rm -rf "$RPM_BUILD_ROOT"
 %doc %{_datadir}/doc/packages/zypper/HACKING
 # declare ownership of the log file but prevent
 # it from being erased by rpm -e
-%ghost %config(noreplace) %{_var}/log/zypper.log
+%ghost %config(noreplace) %attr (640,root,root) %{_var}/log/zypper.log
 
 %files log
 %defattr(-,root,root)
