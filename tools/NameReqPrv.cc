@@ -4,6 +4,7 @@
 
 #include <algorithm>
 #include <zypp/PoolQuery.h>
+#include <zypp/ResObjects.h>
 
 static std::string appname( "NameReqPrv" );
 
@@ -78,6 +79,10 @@ void dDump( const std::string & spec_r )
   for ( const auto & el : q )
   {
     message << endl << "==============================" << endl << dump(el);
+    if ( isKind<Pattern>(el) )
+    {
+      message << endl << "CONTENT: " << make<Pattern>(el)->contents();
+    }
   }
   message << endl << "}" << endl;
 }
@@ -250,39 +255,47 @@ int main( int argc, char * argv[] )
     }
     else
     {
-    q.addString( qstr );
-    q.setMatchRegex();
-    q.setCaseSensitive( ! ignorecase );
+      sat::Solvable::SplitIdent ident( qstr );
+      if ( ident.kind() != ResKind::package )
+      {
+	q.addKind( ident.kind() );
+	q.addString( ident.name().asString() );
+      }
+      else
+	q.addString( qstr );
 
-    if ( names )
-      q.addAttribute( sat::SolvAttr::name );
-    if ( provides )
-      q.addDependency( sat::SolvAttr::provides );
-    if ( requires )
-      q.addDependency( sat::SolvAttr::requires );
-    if ( conflicts )
-      q.addDependency( sat::SolvAttr::conflicts );
-    if ( obsoletes )
-      q.addDependency( sat::SolvAttr::obsoletes );
-    if ( recommends )
-      q.addDependency( sat::SolvAttr::recommends );
-    if ( supplements )
-      q.addDependency( sat::SolvAttr::supplements );
+      q.setMatchRegex();
+      q.setCaseSensitive( ! ignorecase );
+
+      if ( names )
+	q.addAttribute( sat::SolvAttr::name );
+      if ( provides )
+	q.addDependency( sat::SolvAttr::provides );
+      if ( requires )
+	q.addDependency( sat::SolvAttr::requires );
+      if ( conflicts )
+	q.addDependency( sat::SolvAttr::conflicts );
+      if ( obsoletes )
+	q.addDependency( sat::SolvAttr::obsoletes );
+      if ( recommends )
+	q.addDependency( sat::SolvAttr::recommends );
+      if ( supplements )
+	q.addDependency( sat::SolvAttr::supplements );
     }
 
     message << *argv << " [" << (ignorecase?'i':'_') << (names?'n':'_') << (requires?'r':'_') << (provides?'p':'_')
-	    << (conflicts?'c':'_') << (obsoletes?'o':'_') << (recommends?'m':'_') << (supplements?'s':'_') << "] {" << endl;
+    << (conflicts?'c':'_') << (obsoletes?'o':'_') << (recommends?'m':'_') << (supplements?'s':'_') << "] {" << endl;
 
     for_( it, q.begin(), q.end() )
     {
       tableOut( str::numstring( it->id() ), it->asString(), it->repository().name(), it->vendor().asString(),
-                str::numstring( PoolItem(*it)->buildtime() ) );
+		str::numstring( PoolItem(*it)->buildtime() ) );
       if ( ! it.matchesEmpty() )
       {
-        for_( match, it.matchesBegin(), it.matchesEnd() )
-        {
-          tableOut( "", "", "", match->inSolvAttr().asString().substr( 9, 3 )+": " +match->asString() );
-        }
+	for_( match, it.matchesBegin(), it.matchesEnd() )
+	{
+	  tableOut( "", "", "", match->inSolvAttr().asString().substr( 9, 3 )+": " +match->asString() );
+	}
       }
     }
 
