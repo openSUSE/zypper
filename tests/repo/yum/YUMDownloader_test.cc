@@ -28,7 +28,7 @@ BOOST_AUTO_TEST_CASE(yum_download)
   keyring_callbacks.answerAcceptKey(KeyRingReport::KEY_TRUST_TEMPORARILY);
 
   Pathname p = DATADIR + "/10.2-updates-subset";
-  Url url("dir:" + p.asString());
+  Url url(p.asDirUrl());
   MediaSetAccess media(url);
   RepoInfo repoinfo;
   repoinfo.setAlias("testrepo");
@@ -37,9 +37,9 @@ BOOST_AUTO_TEST_CASE(yum_download)
   filesystem::TmpDir tmp;
 
   Pathname localdir(tmp.path());
-  
+
   yum.download(media, localdir);
-  
+
   const char* files[] =
   {
 //    "filelists.xml.gz",
@@ -57,7 +57,7 @@ BOOST_AUTO_TEST_CASE(yum_download)
     "repomd.xml.key",
     NULL
   };
-  
+
   int i=0;
   while ( files[i] != NULL )
   {

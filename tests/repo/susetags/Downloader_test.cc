@@ -28,20 +28,19 @@ BOOST_AUTO_TEST_CASE(susetags_download)
   keyring_callbacks.answerAcceptKey(KeyRingReport::KEY_TRUST_TEMPORARILY);
 
   Pathname p = DATADIR + "/stable-x86-subset";
-  Url url("dir:" + p.asString());
-  MediaSetAccess media(url);
+  MediaSetAccess media(p.asDirUrl());
   RepoInfo repoinfo;
   repoinfo.setAlias("testrepo");
   repoinfo.setPath("/");
   susetags::Downloader downloader(repoinfo);
   filesystem::TmpDir tmp;
-  
+
   Pathname localdir(tmp.path());
-  
+
   downloader.download(media,localdir);
-  
+
   MIL << "All files downloaded" << endl;
-  
+
   const char* files[] =
   {
     "/suse",
@@ -71,7 +70,7 @@ BOOST_AUTO_TEST_CASE(susetags_download)
     "/gpg-pubkey-0dfb3188-41ed929b.asc",
     NULL
   };
-  
+
   int i=0;
   while ( files[i] != NULL )
   {
@@ -87,18 +86,17 @@ BOOST_AUTO_TEST_CASE(susetags_gz_download)
   keyring_callbacks.answerAcceptKey(KeyRingReport::KEY_TRUST_TEMPORARILY);
 
   Pathname p = DATADIR + "/stable-x86-subset-gz";
-  Url url("dir:" + p.asString());
-  MediaSetAccess media(url);
+  MediaSetAccess media(p.asDirUrl());
   RepoInfo repoinfo;
   repoinfo.setAlias("testrepo");
   repoinfo.setPath("/");
   susetags::Downloader downloader(repoinfo);
   filesystem::TmpDir tmp;
-  
+
   Pathname localdir(tmp.path());
-  
+
   downloader.download(media,localdir);
-  
+
   const char* files[] =
   {
     "/suse",
@@ -130,7 +128,7 @@ BOOST_AUTO_TEST_CASE(susetags_gz_download)
     "/gpg-pubkey-0dfb3188-41ed929b.asc",
     NULL
   };
-  
+
   int i=0;
   while ( files[i] != NULL )
   {

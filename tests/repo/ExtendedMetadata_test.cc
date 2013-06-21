@@ -31,7 +31,7 @@ BOOST_AUTO_TEST_CASE(extended_metadata)
   KeyRingTestReceiver rec;
   //rec.answerAcceptUnknownKey(true);
   rec.answerAcceptUnsignedFile(true);
-  
+
 
 //  rec.answerImportKey(true);
   Pathname repodir(TEST_DIR );
@@ -39,12 +39,12 @@ BOOST_AUTO_TEST_CASE(extended_metadata)
   sat::Pool pool(sat::Pool::instance());
 
   TestSetup test( Arch_x86_64 );
-  test.loadRepo(Url(string("dir:") + repodir.absolutename().asString()), "updates");
+  test.loadRepo(repodir.absolutename().asDirUrl(), "updates");
 
   Repository repo = pool.reposFind("updates");
-  
+
   BOOST_CHECK_EQUAL( repo.generatedTimestamp(), Date(1227279057) );
-  BOOST_CHECK_EQUAL( repo.suggestedExpirationTimestamp(), Date(1227279057 + 3600) );  
+  BOOST_CHECK_EQUAL( repo.suggestedExpirationTimestamp(), Date(1227279057 + 3600) );
 
   // check that the attributes of product compatibility are ok
   int count = 0;
@@ -71,7 +71,7 @@ BOOST_AUTO_TEST_CASE(extended_metadata)
   cpeids.clear();
   labels.clear();
   count = 0;
-  
+
   for_( it,
         repo.updatesProductBegin(),
         repo.updatesProductEnd() )
@@ -94,7 +94,7 @@ BOOST_AUTO_TEST_CASE(extended_metadata)
 
   // reuse to count solvables
   count = 0;
-  
+
   /**
    * Now check for the extended metadata of the packages
    */
@@ -110,14 +110,14 @@ BOOST_AUTO_TEST_CASE(extended_metadata)
           BOOST_CHECK(p);
           BOOST_CHECK(p->maybeUnsupported() );
           BOOST_CHECK_EQUAL(p->vendorSupport(), VendorSupportUnknown );
-          
+
       }
       else if ( s.ident() == "foobar" )
       {
-            count++;            
+            count++;
             Package::Ptr p = asKind<Package>(makeResObject(s));
             BOOST_CHECK(p);
-            BOOST_CHECK_EQUAL(p->vendorSupport(), VendorSupportUnsupported ); 
+            BOOST_CHECK_EQUAL(p->vendorSupport(), VendorSupportUnsupported );
             BOOST_CHECK(p->maybeUnsupported() );
       }
       else if ( s.ident() == "foofoo" )
@@ -134,7 +134,7 @@ BOOST_AUTO_TEST_CASE(extended_metadata)
       {
           BOOST_FAIL(str::form("Repo has package not contemplated in test: %s", s.ident().c_str()).c_str());
       }
-      
+
     }
 
     // check that we actually found all testeable

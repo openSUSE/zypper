@@ -33,7 +33,6 @@ using namespace zypp::repo;
 
 #define REPODATADIR (Pathname(TESTS_SRC_DIR) + "/repo/susetags/data/addon_in_subdir")
 
-
 BOOST_AUTO_TEST_CASE(refresh_addon_in_subdir)
 {
     KeyRingTestReceiver keyring_callbacks;
@@ -47,7 +46,7 @@ BOOST_AUTO_TEST_CASE(refresh_addon_in_subdir)
     // make sure we can refresh an addon which is in a subpath in a media url
     TestSetup test( Arch_x86_64 );
     RepoInfo info;
-    info.setBaseUrl(Url(string("dir:") + REPODATADIR.asString()));
+    info.setBaseUrl( REPODATADIR.asDirUrl() );
     info.setPath("/updates");
     info.setType(RepoType::YAST2);
     info.setAlias("boooh");
@@ -80,7 +79,7 @@ BOOST_AUTO_TEST_CASE(pluginservices_test)
 
     ServiceInfo service(*manager.serviceBegin());
     BOOST_CHECK_EQUAL("service", service.alias());
-    BOOST_CHECK_EQUAL( "file:" + DATADIR.asString() + "/plugin-service-lib-1/services/service", service.url().asString());
+    BOOST_CHECK_EQUAL( (DATADIR / "/plugin-service-lib-1/services/service").asFileUrl(), service.url().asString());
 
     // now refresh the service
     manager.refreshServices();
@@ -99,7 +98,7 @@ BOOST_AUTO_TEST_CASE(pluginservices_test)
 
     ServiceInfo service(*manager.serviceBegin());
     BOOST_CHECK_EQUAL("service", service.alias());
-    BOOST_CHECK_EQUAL( "file:" + DATADIR.asString() + "/plugin-service-lib-2/services/service", service.url().asString());
+    BOOST_CHECK_EQUAL( (DATADIR / "/plugin-service-lib-2/services/service").asFileUrl(), service.url().asString());
     // now refresh the service
     manager.refreshServices();
     BOOST_CHECK_EQUAL((unsigned) 1, manager.repoSize());
@@ -120,10 +119,7 @@ BOOST_AUTO_TEST_CASE(service_file_link_bug)
   RepoManager manager(opts);
 
   //test service
-  Url urlS;
-  urlS.setPathName(DATADIR.asString());
-  urlS.setScheme("dir");
-  ServiceInfo service("test", urlS);
+  ServiceInfo service("test", DATADIR.asDirUrl() );
   service.setEnabled(true);
 
   manager.addService(service);
@@ -154,11 +150,7 @@ BOOST_AUTO_TEST_CASE(repomanager_test)
   BOOST_CHECK_EQUAL(repos.size(), (unsigned) 4);
 
   // now add a .repo file with 2 repositories in it
-  Url url;
-  url.setPathName((DATADIR + "/proprietary.repo").asString());
-  url.setScheme("file");
-
-  manager.addRepositories(url);
+  manager.addRepositories( (DATADIR / "/proprietary.repo").asFileUrl() );
 
   // check it was not overwriten the proprietary.repo file
   BOOST_CHECK( PathInfo(opts.knownReposPath + "/proprietary.repo_1").isExist() );
@@ -193,9 +185,7 @@ BOOST_AUTO_TEST_CASE(repomanager_test)
 
   //test service
 
-  Url urlS;
-  urlS.setPathName(DATADIR.asString());
-  urlS.setScheme("dir");
+  Url urlS( DATADIR.asDirUrl() );
 
   ServiceInfo service("test", urlS);
   service.setEnabled(true);
@@ -205,8 +195,8 @@ BOOST_AUTO_TEST_CASE(repomanager_test)
   BOOST_CHECK_EQUAL(manager.repoSize(), (unsigned) 7); // +3 from repoindex
 
   //simulate change of repoindex.xml
-  urlS.setPathName((DATADIR+"second").asString());
-  urlS.setScheme("dir");
+  urlS = (DATADIR / "second").asDirUrl();
+
   service.setUrl(urlS);
   service.setEnabled(true);
 
@@ -224,10 +214,8 @@ BOOST_AUTO_TEST_CASE(repomanager_test)
 
   RepoInfo repo;
   repo.setAlias("foo");
-  Url repourl("dir:" + string(TESTS_SRC_DIR) + "/repo/yum/data/10.2-updates-subset");
-  //Url repourl("dir:/mounts/dist/install/stable-x86/suse");
   //BOOST_CHECK_MESSAGE(0, repourl.asString());
-  repo.setBaseUrl(repourl);
+  repo.setBaseUrl( (Pathname(TESTS_SRC_DIR) / "/repo/yum/data/10.2-updates-subset").asDirUrl() );
 
   KeyRingTestReceiver keyring_callbacks;
   KeyRingTestSignalReceiver receiver;
