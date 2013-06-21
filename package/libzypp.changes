@@ -1,4 +1,13 @@
 -------------------------------------------------------------------
+Fri Jun 21 20:24:39 CEST 2013 - ma@suse.de
+
+- Fix testcases failing if local pathnames contain umlauts
+- Pathname: add move constructor and fix assign
+- Set logfile permission upon file creation only (bnc#825490)
+- Add arch ppc64p7
+- version 13.4.0 (4)
+
+-------------------------------------------------------------------
 Tue Jun 11 11:37:48 CEST 2013 - ma@suse.de
 
 - Speedup scanning for modaliases (bnc#824110)
