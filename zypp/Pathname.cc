@@ -29,13 +29,12 @@ namespace zypp
     //	METHOD NAME : Pathname::_assign
     //	METHOD TYPE : void
     //
-    void Pathname::_assign( const string & name_tv )
+    void Pathname::_assign( const string & name_r )
     {
-      prfx_i = 0;
-      name_t.clear();
-      if ( name_tv.empty() )
+      _name.clear();
+      if ( name_r.empty() )
         return;
-      name_t.reserve( name_tv.size() );
+      _name.reserve( name_r.size() );
 
       // Collect up to "/.."
       enum Pending {
@@ -47,9 +46,9 @@ namespace zypp
 
       // Assert relative path starting with "./"
       // We rely on this below!
-      if ( name_tv[0] != '/' )
+      if ( name_r[0] != '/' )
       {
-	name_t += '.';
+	_name += '.';
 	pending = P_slash;
       }
 
@@ -60,21 +59,21 @@ namespace zypp
       // [*/..]  + "/.."  ==> [*/../..]
       // [*/foo] + "/.."  ==> [*]
       auto goParent_f =  [&](){
-	if ( name_t.empty() )
+	if ( _name.empty() )
 	  /*NOOP*/;
-	else if ( name_t.size() == 1 ) // content is '.'
-	  name_t += "/..";
+	else if ( _name.size() == 1 ) // content is '.'
+	  _name += "/..";
 	else
 	{
-	  std::string::size_type pos = name_t.rfind( "/" );
-	  if ( pos == name_t.size() - 3 && name_t[pos+1] == '.' && name_t[pos+2] == '.' )
-	    name_t += "/..";
+	  std::string::size_type pos = _name.rfind( "/" );
+	  if ( pos == _name.size() - 3 && _name[pos+1] == '.' && _name[pos+2] == '.' )
+	    _name += "/..";
 	  else
-	    name_t.erase( pos );
+	    _name.erase( pos );
 	}
       };
 
-      for ( auto ch : name_tv )
+      for ( auto ch : name_r )
       {
 	switch ( ch )
 	{
@@ -91,10 +90,10 @@ namespace zypp
 	  case '.':
 	    switch ( pending )
 	    {
-	      case P_none:	name_t += '.'; break;
+	      case P_none:	_name += '.'; break;
 	      case P_slash:	pending = P_dot1; break;
 	      case P_dot1:	pending = P_dot2; break;
-	      case P_dot2:	name_t += "/..."; pending = P_none; break;
+	      case P_dot2:	_name += "/..."; pending = P_none; break;
 	    }
 	    break;
 
@@ -102,11 +101,11 @@ namespace zypp
 	    switch ( pending )
 	    {
 	      case P_none:	break;
-	      case P_slash:	name_t += '/';	 pending = P_none; break;
-	      case P_dot1:	name_t += "/.";	 pending = P_none; break;
-	      case P_dot2:	name_t += "/.."; pending = P_none; break;
+	      case P_slash:	_name += '/';	 pending = P_none; break;
+	      case P_dot1:	_name += "/.";	 pending = P_none; break;
+	      case P_dot2:	_name += "/.."; pending = P_none; break;
 	    }
-	    name_t += ch;
+	    _name += ch;
 	    break;
 	}
       }
@@ -114,9 +113,9 @@ namespace zypp
       switch ( pending )
       {
 	case P_none:	break;
-	case P_slash:	if ( name_t.empty() ) name_t = "/"; break;
-	case P_dot1:	if ( name_t.empty() ) name_t = "/"; break;
-	case P_dot2:	goParent_f(); if ( name_t.empty() ) name_t = "/"; break;
+	case P_slash:	if ( _name.empty() ) _name = "/"; break;
+	case P_dot1:	if ( _name.empty() ) _name = "/"; break;
+	case P_dot2:	goParent_f(); if ( _name.empty() ) _name = "/"; break;
       }
       return;
     }
@@ -126,20 +125,20 @@ namespace zypp
     //	METHOD NAME : Pathname::dirname
     //	METHOD TYPE : Pathname
     //
-    Pathname Pathname::dirname( const Pathname & name_tv )
+    Pathname Pathname::dirname( const Pathname & name_r )
     {
-      if ( name_tv.empty() )
+      if ( name_r.empty() )
         return Pathname();
 
-      Pathname ret_t( name_tv );
-      string::size_type idx = ret_t.name_t.find_last_of( '/' );
+      Pathname ret_t( name_r );
+      string::size_type idx = ret_t._name.find_last_of( '/' );
 
       if ( idx == string::npos ) {
-        ret_t.name_t = ".";
+        ret_t._name = ".";
       } else if ( idx == 0 ) {
-        ret_t.name_t = "/";
+        ret_t._name = "/";
       } else {
-        ret_t.name_t.erase( idx );
+        ret_t._name.erase( idx );
       }
 
       return ret_t;
@@ -150,12 +149,12 @@ namespace zypp
     //	METHOD NAME : Pathname::basename
     //	METHOD TYPE : string
     //
-    string Pathname::basename( const Pathname & name_tv )
+    string Pathname::basename( const Pathname & name_r )
     {
-      if ( name_tv.empty() )
+      if ( name_r.empty() )
         return string();
 
-      string ret_t( name_tv.asString() );
+      string ret_t( name_r.asString() );
       string::size_type idx = ret_t.find_last_of( '/' );
       if ( idx != string::npos && ( idx != 0 || ret_t.size() != 1 ) ) {
         ret_t.erase( 0, idx+1 );
@@ -169,12 +168,23 @@ namespace zypp
     //	METHOD NAME : Pathname::asUrl
     //	METHOD TYPE : Url
     //
-    Url Pathname::asUrl() const
+    Url Pathname::asUrl( const std::string & scheme_r ) const
     {
-      Url ret( "dir:///" );
+      Url ret;
       ret.setPathName( asString() );
+      ret.setScheme( scheme_r );
       return ret;
     }
+
+    Url Pathname::asUrl() const
+    { return asUrl( "dir" ); }
+
+    Url Pathname::asDirUrl() const
+    { return asUrl( "dir" ); }
+
+    Url Pathname::asFileUrl() const
+    { return asUrl( "file" ); }
+
 
     std::string Pathname::showRoot( const Pathname & root_r, const Pathname & path_r )
     {
@@ -193,12 +203,12 @@ namespace zypp
     //	METHOD NAME : Pathname::extension
     //	METHOD TYPE : string
     //
-    string Pathname::extension( const Pathname & name_tv )
+    string Pathname::extension( const Pathname & name_r )
     {
-      if ( name_tv.empty() )
+      if ( name_r.empty() )
         return string();
 
-      string base( basename( name_tv ) );
+      string base( basename( name_r ) );
       string::size_type pos = base.rfind( '.' );
       switch ( pos )
       {
@@ -236,17 +246,17 @@ namespace zypp
     //	METHOD NAME : Pathname::cat
     //	METHOD TYPE : Pathname
     //
-    Pathname Pathname::cat( const Pathname & name_tv, const Pathname & add_tv )
+    Pathname Pathname::cat( const Pathname & name_r, const Pathname & add_tv )
     {
       if ( add_tv.empty() )
-        return name_tv;
-      if ( name_tv.empty() )
+        return name_r;
+      if ( name_r.empty() )
         return add_tv;
 
-      string ret_ti( name_tv.name_t );
-      if( add_tv.name_t[0] != '/' )
+      string ret_ti( name_r._name );
+      if( add_tv._name[0] != '/' )
 	ret_ti += '/';
-      return ret_ti + add_tv.name_t;
+      return ret_ti + add_tv._name;
     }
 
     ///////////////////////////////////////////////////////////////////

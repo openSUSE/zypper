@@ -39,32 +39,42 @@ namespace zypp
      *
      * \todo Add support for handling extensions incl. stripping
      * extensions from basename (basename("/path/foo.baa", ".baa") ==> "foo")
-     * \todo Review. Maybe use COW pimpl, check storage.
-     * \todo remove prfx_i
     */
     class Pathname
     {
     public:
       /** Default ctor: an empty path. */
       Pathname()
-      : prfx_i( 0 )
       {}
 
       /** Ctor from string. */
-      Pathname( const std::string & name_tv )
-      { _assign( name_tv ); }
+      Pathname( const std::string & name_r )
+      { _assign( name_r ); }
 
       /** Ctor from char*. */
-      Pathname( const char * name_tv )
-      { _assign( name_tv ? name_tv : "" ); }
+      Pathname( const char * name_r )
+      { _assign( name_r ? name_r : "" ); }
+
+      /** Copy Ctor */
+      Pathname( const Pathname & rhs )
+      : _name( rhs._name )
+      {}
+
+      /** Swap */
+      friend void swap( Pathname & lhs, Pathname & rhs )
+      {
+	using std::swap;
+	swap( lhs._name, rhs._name );
+      }
+
+      /** Move Ctor */
+      Pathname( Pathname && tmp )
+      : _name( std::move( tmp._name ) )
+      {}
 
       /** Assign */
-      Pathname & operator=( const Pathname & path_tv )
-      {
-        prfx_i = path_tv.prfx_i;
-        name_t = path_tv.name_t;
-        return *this;
-      }
+      Pathname & operator=( Pathname rhs )
+      { swap( *this, rhs ); return *this; }
 
       /** Concatenate and assing. \see cat */
       Pathname & operator/=( const Pathname & path_tv )
@@ -78,7 +88,7 @@ namespace zypp
 
       /** String representation. */
       const std::string & asString() const
-      { return name_t; }
+      { return _name; }
 
       /** String representation as "(root)/path" */
       static std::string showRoot( const Pathname & root_r, const Pathname & path_r );
@@ -86,44 +96,50 @@ namespace zypp
       /** String representation as "(root)/path", unless \a root is \c "/" or empty. */
       static std::string showRootIf( const Pathname & root_r, const Pathname & path_r );
 
-      /** Url representation using \c dir schema. */
+      /** Url representation using \c scheme_r schema . */
+      Url asUrl( const std::string & scheme_r ) const;
+      /** \overload using \c dir schema. */
       Url asUrl() const;
+      /** \overload using \c dir schema. */
+      Url asDirUrl() const;
+      /** \overload using \c file schema. */
+      Url asFileUrl() const;
 
       /** String representation. */
       const char * c_str() const
-      { return name_t.c_str(); }
+      { return _name.c_str(); }
 
       /** Test for an empty path. */
-      bool empty()    const { return name_t.empty(); }
+      bool empty()    const { return _name.empty(); }
       /** Test for an absolute path. */
-      bool absolute() const { return !empty() && name_t[prfx_i] == '/'; }
+      bool absolute() const { return *_name.c_str() == '/'; }
       /** Test for a relative path. */
-      bool relative() const { return !empty() && name_t[prfx_i] != '/'; }
+      bool relative() const { return !( absolute() || empty() ); }
 
       /** Return all but the last component od this path. */
       Pathname dirname() const { return dirname( *this ); }
-      static Pathname dirname( const Pathname & name_tv );
+      static Pathname dirname( const Pathname & name_r );
 
       /** Return the last component of this path. */
       std::string basename() const { return basename( *this ); }
-      static std::string basename( const Pathname & name_tv );
+      static std::string basename( const Pathname & name_r );
 
       /** Return all of the characters in name after and including
        * the last dot in the last element of name.  If there is no dot
        * in the last element of name then returns the empty string.
       */
       std::string extension() const { return extension( *this ); }
-      static std::string extension( const Pathname & name_tv );
+      static std::string extension( const Pathname & name_r );
 
       /** Return this path, adding a leading '/' if relative. */
       Pathname absolutename() const { return absolutename( *this ); }
-      static Pathname absolutename( const Pathname & name_tv )
-      { return name_tv.relative() ? cat( "/", name_tv ) : name_tv; }
+      static Pathname absolutename( const Pathname & name_r )
+      { return name_r.relative() ? cat( "/", name_r ) : name_r; }
 
       /** Return this path, removing a leading '/' if absolute.*/
       Pathname relativename() const { return relativename( *this ); }
-      static Pathname relativename( const Pathname & name_tv )
-      { return name_tv.absolute() ? cat( ".", name_tv ) : name_tv; }
+      static Pathname relativename( const Pathname & name_r )
+      { return name_r.absolute() ? cat( ".", name_r ) : name_r; }
 
       /** Return \c path_r prefixed with \c root_r, unless it is already prefixed. */
       static Pathname assertprefix( const Pathname & root_r, const Pathname & path_r );
@@ -148,10 +164,8 @@ namespace zypp
       static Pathname extend( const Pathname & l, const std::string & r );
 
     private:
-      std::string::size_type prfx_i;
-      std::string            name_t;
-
-      void _assign( const std::string & name_tv );
+      std::string _name;
+      void _assign( const std::string & name_r );
     };
     ///////////////////////////////////////////////////////////////////
 
