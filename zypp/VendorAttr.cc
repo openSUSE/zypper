@@ -130,17 +130,11 @@ namespace zypp
   {
       vendorGroupCounter = 1;
       Pathname vendorPath (ZConfig::instance().vendorPath());
-      try
       {
-	  Target_Ptr trg( getZYpp()->target() );
-	  if ( trg )
-	      vendorPath = trg->root() / vendorPath;
+	Target_Ptr trg( getZYpp()->getTarget() );
+	if ( trg )
+	  vendorPath = trg->root() / vendorPath;
       }
-      catch ( ... )
-      {
-	  // noop: Someone decided to let target() throw if the ptr is NULL ;(
-      }
-
       // creating entries
       addVendorDirectory (vendorPath);
 
