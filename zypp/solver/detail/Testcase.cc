@@ -29,6 +29,7 @@
 #include "zypp/PathInfo.h"
 #include "zypp/ResPool.h"
 #include "zypp/Repository.h"
+#include "zypp/target/modalias/Modalias.h"
 
 #include "zypp/sat/detail/PoolImpl.h"
 #include "zypp/solver/detail/SystemCheck.h"
@@ -275,6 +276,8 @@ class  HelixControl {
 		  const RepositoryTable & sourceTable,
 		  const Arch & systemArchitecture,
 		  const LocaleSet &languages,
+		  const target::Modalias::ModaliasList & modaliasList,
+		  const std::set<std::string> & multiversionSpec,
 		  const std::string & systemPath = "solver-system.xml.gz",
 		  const bool forceResolve = false,
 		  const bool onlyRequires = false,
@@ -304,6 +307,8 @@ HelixControl::HelixControl(const std::string & controlPath,
 			   const RepositoryTable & repoTable,
 			   const Arch & systemArchitecture,
 			   const LocaleSet &languages,
+			   const target::Modalias::ModaliasList & modaliasList,
+			   const std::set<std::string> & multiversionSpec,
 			   const std::string & systemPath,
 			   const bool forceResolve,
 			   const bool onlyRequires,
@@ -342,8 +347,19 @@ HelixControl::HelixControl(const std::string & controlPath,
 	      << " priority=\"" << repo.priority()
 	      << "\" />" << endl << endl;
     }
+
     for (LocaleSet::const_iterator iter = languages.begin(); iter != languages.end(); iter++) {
 	*file << TAB << "<locale name=\"" <<  iter->code()
+	      << "\" />" << endl;
+    }
+
+    for_( it, modaliasList.begin(), modaliasList.end() ) {
+	*file << TAB << "<modalias name=\"" <<  *it
+	      << "\" />" << endl;
+    }
+
+    for_( it, multiversionSpec.begin(), multiversionSpec.end() ) {
+	*file << TAB << "<multiversion name=\"" <<  *it
 	      << "\" />" << endl;
     }
 
@@ -351,7 +367,6 @@ HelixControl::HelixControl(const std::string & controlPath,
 	*file << TAB << "<forceResolve/>" << endl;
     if (onlyRequires)
 	*file << TAB << "<onlyRequires/>" << endl;
-
     if (ignorealreadyrecommended)
 	*file << TAB << "<ignorealreadyrecommended/>" << endl;
 
@@ -538,6 +553,8 @@ bool Testcase::createTestcase(Resolver & resolver, bool dumpPool, bool runSolver
 			  repoTable,
 			  ZConfig::instance().systemArchitecture(),
 			  pool.getRequestedLocales(),
+			  target::Modalias::instance().modaliasList(),
+			  ZConfig::instance().multiversionSpec(),
 			  "solver-system.xml.gz",
 			  resolver.forceResolve(),
 			  resolver.onlyRequires(),
