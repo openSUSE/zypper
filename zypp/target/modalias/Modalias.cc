@@ -23,6 +23,7 @@ extern "C"
 
 #include "zypp/base/LogTools.h"
 #include "zypp/base/IOStream.h"
+#include "zypp/base/InputStream.h"
 #include "zypp/AutoDispose.h"
 #include "zypp/PathInfo.h"
 
@@ -99,9 +100,30 @@ namespace zypp
       Impl()
       {
 	const char * dir = getenv("ZYPP_MODALIAS_SYSFS");
-	if ( !dir )
+	if ( dir )
+	{
+	  PathInfo pi( dir );
+	  if (  pi.isFile() )
+	  {
+	    // Debug/testcases:
+	    //   find /sys/ -type f -name modalias -print0 | xargs -0 cat >/tmp/modaliases
+	    //   ZYPP_MODALIAS_SYSFS=/tmp/modaliases
+	    DBG << "Using $ZYPP_MODALIAS_SYSFS modalias file: " << dir << endl;
+	    iostr::forEachLine( InputStream( pi.path() ),
+	                        [&]( int num_r, std::string line_r )->bool
+	                        {
+		                  this->_modaliases.push_back( line_r );
+			          return true;
+				} );
+	    return;
+	  }
+	  DBG << "Using $ZYPP_MODALIAS_SYSFS: " << dir << endl;
+	}
+	else
+	{
 	  dir = "/sys";
-	DBG << "Using /sys directory : " << dir << endl;
+	  DBG << "Using /sys directory." << endl;
+	}
 
 	foreach_file_recursive( dir, _modaliases );
       }
@@ -184,6 +206,9 @@ namespace zypp
 
     const Modalias::ModaliasList & Modalias::modaliasList() const
     { return _pimpl->_modaliases; }
+
+    void Modalias::modaliasList( ModaliasList newlist_r )
+    { _pimpl->_modaliases.swap( newlist_r ); }
 
     std::ostream & operator<<( std::ostream & str, const Modalias & obj )
     { return str << *obj._pimpl; }
