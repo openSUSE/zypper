@@ -11,7 +11,7 @@
 #include <boost/format.hpp>
 
 #include <zypp/ZYppFactory.h>
-#include <zypp/base/Logger.h>
+#include <zypp/base/LogTools.h>
 #include <zypp/base/Measure.h>
 #include <zypp/ResPool.h>
 #include <zypp/Patch.h>
@@ -708,23 +708,38 @@ static void collectNotInstalledDeps(
     const ResObject::constPtr & obj,
     Summary::KindToResPairSet & result)
 {
-  XXX << obj << endl;
-  ResObject::constPtr nullres;
+  static std::vector<ui::Selectable::Ptr> tmp;	// reuse capacity
+  //DBG << obj << endl;
   Capabilities req = obj->dep(dep);
-  for_(capit, req.begin(), req.end())
+  for_( capit, req.begin(), req.end() )
   {
+    tmp.clear();
     sat::WhatProvides q(*capit);
-    for_(selit, q.selectableBegin(), q.selectableEnd())
+    for_( it, q.selectableBegin(), q.selectableEnd() )
     {
-      ui::Selectable::Ptr s = *selit;
-      if (s->name() == obj->name())
-        continue; // ignore self-deps
+      if ( (*it)->name() == obj->name() )
+        continue;		// ignore self-deps
 
-      XXX << dep << ": " << *s << endl;
-      if (s->status() == ui::S_NoInst)
+      if ( (*it)->offSystem() )
       {
-        result[s->kind()].insert(Summary::ResPair(nullres, s->candidateObj()));
-        break;
+	if ( (*it)->toDelete() )
+	  continue;		// ignore explicitly deleted
+	tmp.push_back( (*it) );	// remember uninstalled
+      }
+      else
+      {
+	// at least one of the recommendations is/gets installed: discard all
+	tmp.clear();
+	break;
+      }
+    }
+    if ( ! tmp.empty() )
+    {
+      // collect remembered ones
+      for_( it, tmp.begin(), tmp.end() )
+      {
+	//DBG << dep << " :" << (*it)->onSystem() << ": " << dump(*(*it)) << endl;
+	result[(*it)->kind()].insert(Summary::ResPair(nullptr, (*it)->candidateObj()));
       }
     }
   }
