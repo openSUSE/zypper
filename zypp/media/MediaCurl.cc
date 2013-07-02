@@ -1002,6 +1002,7 @@ void MediaCurl::evaluateCurlCode( const Pathname &filename,
       case CURLE_REMOTE_FILE_NOT_FOUND:
 #endif
       case CURLE_FTP_ACCESS_DENIED:
+      case CURLE_TFTP_NOTFOUND:
         err = "File not found";
         ZYPP_THROW(MediaFileNotFoundException(_url, filename));
         break;
@@ -1518,7 +1519,7 @@ int MediaCurl::progressCallback( void *clientp,
   if( pdata)
   {
     // work around curl bug that gives us old data
-    long httpReturnCode = 0; 
+    long httpReturnCode = 0;
     if (curl_easy_getinfo(pdata->curl, CURLINFO_RESPONSE_CODE, &httpReturnCode) != CURLE_OK || httpReturnCode == 0)
       return 0;
 
