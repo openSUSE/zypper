@@ -326,7 +326,7 @@ namespace zypp
         defCompatibleWith( _armv6l(),		_noarch(),_armv3l(),_armv4l(),_armv4tl(),_armv5l(),_armv5tel(),_armv5tejl() );
         defCompatibleWith( _armv6hl(),		_noarch() );
         defCompatibleWith( _armv7l(),		_noarch(),_armv3l(),_armv4l(),_armv4tl(),_armv5l(),_armv5tel(),_armv5tejl(),_armv6l() );
-        defCompatibleWith( _armv7hl(),		_noarch() );
+        defCompatibleWith( _armv7hl(),		_noarch(),_armv6hl() );
         defCompatibleWith( _armv7nhl(),		_noarch(),_armv7hl() );
         defCompatibleWith( _armv7thl(),		_noarch(),_armv7hl() );
         defCompatibleWith( _armv7tnhl(),	_noarch(),_armv7hl(),_armv7nhl(),_armv7thl() );
