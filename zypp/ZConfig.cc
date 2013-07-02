@@ -127,7 +127,7 @@ namespace zypp
           ERR << "Cant open " << PathInfo("/proc/cpuinfo") << endl;
         }
       }
-      else if ( architecture == Arch_armv7l)
+      else if ( architecture == Arch_armv7l || architecture == Arch_armv6l )
       {
 	std::ifstream platform( "/etc/rpm/platform" );
 	if (platform)
@@ -138,6 +138,12 @@ namespace zypp
 	    {
 	      architecture = Arch_armv7hl;
 	      WAR << "/etc/rpm/platform contains armv7hl-: architecture upgraded to '" << architecture << "'" << endl;
+	      break;
+	    }
+	    if ( str::hasPrefix( *in, "armv6hl-" ) )
+	    {
+	      architecture = Arch_armv6hl;
+	      WAR << "/etc/rpm/platform contains armv6hl-: architecture upgraded to '" << architecture << "'" << endl;
 	      break;
 	    }
 	  }

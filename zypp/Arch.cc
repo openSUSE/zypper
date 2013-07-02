@@ -194,6 +194,7 @@ namespace zypp
     DEF_BUILTIN( armv7nhl );
     DEF_BUILTIN( armv7hl );
     DEF_BUILTIN( armv7l );
+    DEF_BUILTIN( armv6hl );
     DEF_BUILTIN( armv6l );
     DEF_BUILTIN( armv5tejl );
     DEF_BUILTIN( armv5tel );
@@ -323,6 +324,7 @@ namespace zypp
         defCompatibleWith( _armv5tel(),		_noarch(),_armv3l(),_armv4l(),_armv4tl(),_armv5l() );
         defCompatibleWith( _armv5tejl(),	_noarch(),_armv3l(),_armv4l(),_armv4tl(),_armv5l(),_armv5tel() );
         defCompatibleWith( _armv6l(),		_noarch(),_armv3l(),_armv4l(),_armv4tl(),_armv5l(),_armv5tel(),_armv5tejl() );
+        defCompatibleWith( _armv6hl(),		_noarch() );
         defCompatibleWith( _armv7l(),		_noarch(),_armv3l(),_armv4l(),_armv4tl(),_armv5l(),_armv5tel(),_armv5tejl(),_armv6l() );
         defCompatibleWith( _armv7hl(),		_noarch() );
         defCompatibleWith( _armv7nhl(),		_noarch(),_armv7hl() );
@@ -441,6 +443,7 @@ namespace zypp
   const Arch Arch_armv7nhl ( _armv7nhl() );
   const Arch Arch_armv7hl ( _armv7hl() );
   const Arch Arch_armv7l( _armv7l() );
+  const Arch Arch_armv6hl ( _armv6hl() );
   const Arch Arch_armv6l( _armv6l() );
   const Arch Arch_armv5tejl( _armv5tejl() );
   const Arch Arch_armv5tel( _armv5tel() );
