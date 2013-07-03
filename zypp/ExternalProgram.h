@@ -97,6 +97,9 @@ namespace zypp {
        * If environment is provided, varaiables will be added to the childs environment,
        * overwriting existing ones.
        *
+       * Initial args starting with \c # are discarded but some are treated specially:
+       * 	#/[path] - chdir to /[path] before executing
+       *
        * Stdin redirection: If the \b 1st argument starts with a \b '<', the remaining
        * part is treated as file opened for reading on standard input (or \c /dev/null
        * if empty).

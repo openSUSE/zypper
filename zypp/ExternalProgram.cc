@@ -199,16 +199,33 @@ namespace zypp {
     {
       pid = -1;
       _exitStatus = 0;
-      int to_external[2], from_external[2];  // fds for pair of pipes
-      int master_tty,	slave_tty;	   // fds for pair of ttys
+      int to_external[2], from_external[2];	// fds for pair of pipes
+      int master_tty,	slave_tty;		// fds for pair of ttys
 
-      const char * redirectStdin = 0;
-      if ( argv[0] && *argv[0] == '<' )
+      // retrieve options at beginning of arglist
+      const char * redirectStdin = nullptr;	// <[file]
+      const char * chdirTo = nullptr;		// #/[path]
+
+      for ( bool strip = false; argv[0]; ++argv )
       {
-        redirectStdin = argv[0]+1;
-        if ( *redirectStdin == '\0' )
-          redirectStdin = "/dev/null";
-        ++argv;
+	strip = false;
+	switch ( argv[0][0] )
+	{
+	  case '<':
+	    strip = true;
+	    redirectStdin = argv[0]+1;
+	    if ( *redirectStdin == '\0' )
+	      redirectStdin = "/dev/null";
+	    break;
+
+	  case '#':
+	    strip = true;
+	    if ( argv[0][1] == '/' )	// #/[path]
+	      chdirTo = argv[0]+1;
+	    break;
+	}
+	if ( ! strip )
+	  break;
       }
 
       // do not remove the single quotes around every argument, copy&paste of
@@ -324,13 +341,17 @@ namespace zypp {
                 std::cerr << _execError << endl;// After fork log on stderr too
     		_exit (128);			// No sense in returning! I am forked away!!
     	    }
-    	    if(chdir("/") == -1)
-    	    {
-                _execError = str::form( _("Can't chdir to '/' inside chroot (%s)."), strerror(errno) );
-                std::cerr << _execError << endl;// After fork log on stderr too
-    		_exit (128);			// No sense in returning! I am forked away!!
-    	    }
+	    if ( ! chdirTo )
+	      chdirTo = "/";
     	}
+
+	if ( chdirTo && chdir( chdirTo ) == -1 )
+	{
+	  _execError = root ? str::form( _("Can't chdir to '%s' inside chroot '%s' (%s)."), chdirTo, root, strerror(errno) )
+			    : str::form( _("Can't chdir to '%s' (%s)."), chdirTo, strerror(errno) );
+	  std::cerr << _execError << endl;// After fork log on stderr too
+	  _exit (128);			// No sense in returning! I am forked away!!
+	}
 
     	// close all filedesctiptors above stderr
     	for ( int i = ::getdtablesize() - 1; i > 2; --i ) {
