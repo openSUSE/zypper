@@ -1417,7 +1417,7 @@ namespace zypp
 
             try
             {
-              progress.tryLevel( target::rpm::InstallResolvableReport::RPM_NODEPS_FORCE );
+              progress.tryLevel( target::rpm::InstallResolvableReport::RPM );
 	      rpm().installPackage( localfile, flags );
               HistoryLog().install(citem);
 
