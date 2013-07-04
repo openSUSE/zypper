@@ -54,6 +54,8 @@ using namespace zypp::filesystem;
 #define FILEFORBACKUPFILES	"YaSTBackupModifiedFiles"
 #define MAXRPMMESSAGELINES	10000
 
+#define WORKAROUNDRPMPWDBUG
+
 namespace zypp
 {
 namespace target
@@ -79,6 +81,26 @@ inline string rpmQuoteFilename( const Pathname & path_r )
   }
   return path;
 }
+
+
+  /** Workaround bnc#827609 - rpm needs a readable pwd so we
+   * chdir to /. Turn realtive pathnames into absolute ones
+   * by prepending cwd so rpm still finds them
+   */
+  inline Pathname workaroundRpmPwdBug( Pathname path_r )
+  {
+#if defined(WORKAROUNDRPMPWDBUG)
+    if ( path_r.relative() )
+    {
+      // try to prepend cwd
+      AutoDispose<char*> cwd( ::get_current_dir_name(), ::free );
+      if ( cwd )
+	return Pathname( cwd ) / path_r;
+      WAR << "Can't get cwd!" << endl;
+    }
+#endif
+    return path_r;	// no problem with absolute pathnames
+  }
 }
 
 struct KeyRingSignalReceiver : callback::ReceiveReport<KeyRingSignals>
@@ -1444,6 +1466,9 @@ RpmDb::run_rpm (const RpmArgVec& opts,
   RpmArgVec args;
 
   // always set root and dbpath
+#if defined(WORKAROUNDRPMPWDBUG)
+  args.push_back("#/");		// chdir to / to workaround bnc#819354
+#endif
   args.push_back("rpm");
   args.push_back("--root");
   args.push_back(_root.asString().c_str());
@@ -1755,7 +1780,7 @@ void RpmDb::doInstallPackage( const Pathname & filename, RpmInstFlags flags, cal
   opts.push_back("--");
 
   // rpm requires additional quoting of special chars:
-  string quotedFilename( rpmQuoteFilename( filename ) );
+  string quotedFilename( rpmQuoteFilename( workaroundRpmPwdBug( filename ) ) );
   opts.push_back ( quotedFilename.c_str() );
 
   modifyDatabase(); // BEFORE run_rpm
