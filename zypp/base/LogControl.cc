@@ -50,7 +50,7 @@ namespace zypp
 	{
           // not filesystem::assert_file as filesystem:: functions log,
 	  // and this FileWriter is not yet in place.
-	  int fd = ::creat( file_r.c_str(), mode_r );
+	  int fd = ::open( file_r.c_str(), O_CREAT|O_EXCL, mode_r );
 	  if ( fd != -1 )
 	    ::close( fd );
 	}
