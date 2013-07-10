@@ -66,12 +66,12 @@ namespace zypp
 	using std::swap;
 	swap( lhs._name, rhs._name );
       }
-
+#ifndef SWIG // Swig treats it as syntax error
       /** Move Ctor */
       Pathname( Pathname && tmp )
       : _name( std::move( tmp._name ) )
       {}
-
+#endif
       /** Assign */
       Pathname & operator=( Pathname rhs )
       { swap( *this, rhs ); return *this; }
