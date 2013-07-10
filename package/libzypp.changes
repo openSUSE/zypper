@@ -1,4 +1,9 @@
 -------------------------------------------------------------------
+Thu Jul 11 01:13:49 CEST 2013 - ma@suse.de
+
+- Update zypp-po.tar.bz2
+
+-------------------------------------------------------------------
 Fri Jun 21 20:24:39 CEST 2013 - ma@suse.de
 
 - Fix testcases failing if local pathnames contain umlauts
