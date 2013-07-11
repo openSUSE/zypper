@@ -1,7 +1,7 @@
 #
 # spec file for package libzypp
 #
-# Copyright (c) 2005-2011 SUSE LINUX Products GmbH, Nuernberg, Germany.
+# Copyright (c) 2005-2013 SUSE LINUX Products GmbH, Nuernberg, Germany.
 #
 # All modifications and additions to the file contributed by third parties
 # remain the property of their copyright owners, unless otherwise agreed
@@ -15,17 +15,16 @@
 # Please submit bugfixes or comments via http://bugs.opensuse.org/
 #
 
-# norootforbuild
+
 %define force_gcc_46 0
 
-
 Name:           @PACKAGE@
-License:        GPL-2.0+
-Group:          System/Packages
 BuildRoot:      %{_tmppath}/%{name}-%{version}-build
 Summary:        Package, Patch, Pattern, and Product Management
+License:        GPL-2.0+
+Group:          System/Packages
 Version:        @VERSION@
-Release:        1
+Release:        0
 Source:         %{name}-%{version}.tar.bz2
 Source1:        %{name}-rpmlintrc
 Provides:       yast2-packagemanager
@@ -143,17 +142,16 @@ Authors:
     Ladislav Slezak <lslezak@suse.cz>
 
 %package devel
-License:        GPL-2.0+
-Requires:       libzypp = %{version}
-Requires:       libxml2-devel
-Requires:       openssl-devel
-Requires:       rpm-devel
-Requires:       glibc-devel
-Requires:       zlib-devel
-Requires:       bzip2
-Requires:       popt-devel
 Requires:       boost-devel
+Requires:       bzip2
+Requires:       glibc-devel
 Requires:       libstdc++-devel
+Requires:       libxml2-devel
+Requires:       libzypp = %{version}
+Requires:       openssl-devel
+Requires:       popt-devel
+Requires:       rpm-devel
+Requires:       zlib-devel
 %if 0%{?suse_version} >= 1130 || 0%{?fedora_version} >= 16
 Requires:       libudev-devel
 %else
