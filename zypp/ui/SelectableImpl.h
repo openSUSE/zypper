@@ -145,8 +145,8 @@ namespace zypp
       {
 	PoolItem defaultCand( defaultCandidate() );
 
-	if ( multiversionInstall() )
-	  return identicalInstalled( defaultCand ) ? PoolItem() : defaultCand;
+	// multiversionInstall: This returns the candidate for the last
+	// instance installed. Actually we'd need a list here.
 
         if ( installedEmpty() || ! defaultCand )
           return defaultCand;
@@ -363,7 +363,7 @@ namespace zypp
 
       PoolItem defaultCandidate() const
       {
-        if ( ! ( multiversionInstall() || installedEmpty() ) )
+        if ( ! installedEmpty() )
         {
           // prefer the installed objects arch and vendor
           bool solver_allowVendorChange( ResPool::instance().resolver().allowVendorChange() );
