@@ -30,6 +30,8 @@ namespace zypp
   {
     class TmpFile;
   }
+  class Date;
+
 
   /**
    * Exception thrown when the supplied key is
@@ -61,18 +63,12 @@ namespace zypp
   };
 
 
-  // forward declaration of class Date
-  class Date;
-
   ///////////////////////////////////////////////////////////////////
-  //
-  //	CLASS NAME : PublicKey
-  //
-  /**
-   * Class that represent a GPG Public Key.
-   *
-   *
-   */
+  /// \class PublicKey
+  /// \brief Class representing one GPG Public Key.
+  /// If a key file actually contains multiple keys, the last one
+  /// is taken.
+  ///////////////////////////////////////////////////////////////////
   class PublicKey
   {
     friend std::ostream & operator<<( std::ostream & str, const PublicKey & obj );
