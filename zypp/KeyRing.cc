@@ -529,7 +529,7 @@ namespace zypp
     if ( ! PathInfo(keyfile).isExist() )
       // TranslatorExplanation first %s is key name, second is keyring name
       ZYPP_THROW(KeyRingException(boost::str(boost::format(
-          _("Tried to import not existant key %s into keyring %s"))
+          _("Tried to import not existent key %s into keyring %s"))
           % keyfile.asString() % keyring.asString())));
 
     const char* argv[] =
