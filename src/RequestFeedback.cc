@@ -112,7 +112,7 @@ string SolverRequester::Feedback::asUserString(
     PoolItem highest = asSelectable()(_objsel)->highestAvailableVersionObj();
     return str::form(
         _("There is an update candidate '%s' for '%s', but it does not match"
-          " specified version, architecture, or repository."),
+          " the specified version, architecture, or repository."),
         poolitem_user_string(highest).c_str(),
         poolitem_user_string(_objinst).c_str());
   }
@@ -124,7 +124,7 @@ string SolverRequester::Feedback::asUserString(
     cmdhint << "zypper install " << poolitem_user_string(highest);
 
     return str::form(
-      _("There is an update candidate for '%s', but it is from different"
+      _("There is an update candidate for '%s', but it is from a different"
         " vendor. Use '%s' to install this candidate."),
         _objinst->name().c_str(), cmdhint.str().c_str());
   }
@@ -137,8 +137,8 @@ string SolverRequester::Feedback::asUserString(
         << "-" << highest->edition() << "." << highest->arch();
 
     return str::form(
-      _("There is an update candidate for '%s', but it comes from repository"
-         " with lower priority. Use '%s' to install this candidate."),
+      _("There is an update candidate for '%s', but it comes from a repository"
+         " with a lower priority. Use '%s' to install this candidate."),
         _objinst->name().c_str(), cmdhint.str().c_str());
   }
 
