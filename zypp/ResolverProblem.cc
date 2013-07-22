@@ -38,9 +38,12 @@ ostream&
 operator<<( ostream& os, const ResolverProblem & problem)
 {
     os << "Problem:" << endl;
+    os << "==============================" << endl;
     os << problem._description << endl;
     os << problem._details << endl;
+    os << "------------------------------" << endl;
     os << problem._solutions;
+    os << "==============================" << endl;
     return os;
 }
 

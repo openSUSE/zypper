@@ -71,8 +71,6 @@ TransactionSolutionAction::dumpOn( ostream& os) const
 	case ADD_SOLVE_QUEUE_ITEM:	os << "Add SolveQueueItem " <<  _solverQueueItem; break;
 	case REMOVE_SOLVE_QUEUE_ITEM:	os << "Remove SolveQueueItem " <<  _solverQueueItem; break;
     }
-
-    os << endl;
     return os;
 }
 
@@ -110,7 +108,6 @@ InjectSolutionAction::dumpOn( ostream& os ) const
     }
     os << " ";
     os << _item;
-    os << endl;
     return os;
 }
 
@@ -159,7 +156,7 @@ TransactionSolutionAction::execute(Resolver & resolver) const
     	    _item.status().resetTransact (ResStatus::USER);
 	    ret = _item.status().setLock (true, ResStatus::APPL_HIGH); // APPL_HIGH: Locking should not be saved permanently
 	    if (!ret) ERR << "Cannot lock " << _item << endl;
-	    break;	    
+	    break;
 	case REMOVE_EXTRA_REQUIRE:
 	    resolver.removeExtraRequire (_capability);
 	    break;

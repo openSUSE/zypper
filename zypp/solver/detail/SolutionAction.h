@@ -108,7 +108,7 @@ namespace zypp
 	  // ---------------------------------- accessors
 
 	  const PoolItem item() const { return _item; }
-	  const Capability capability() const { return _capability; }	    
+	  const Capability capability() const { return _capability; }
 	  TransactionKind action() const { return _action; }
 
 	  // ---------------------------------- methods
@@ -119,7 +119,7 @@ namespace zypp
 	    PoolItem _item;
 	    Capability _capability;
 	    SolverQueueItem_Ptr _solverQueueItem;
-	    
+
 	    const TransactionKind _action;
 	};
 
@@ -148,7 +148,7 @@ namespace zypp
 	    InjectSolutionAction( PoolItem item,
 				  const InjectSolutionKind & kind)
 		: SolutionAction(),
-		  _item( item ), 
+		  _item( item ),
 		  _kind( kind ) {}
 
 	  // ---------------------------------- I/O

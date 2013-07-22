@@ -42,7 +42,8 @@ operator<<( ostream& os, const ProblemSolution & solution)
 {
     os << "Solution:" << endl;
     os << solution._description << endl;
-    os << solution._details << endl;
+    if ( ! solution._details.empty() )
+      os << solution._details << endl;
     os << solution._actions;
     return os;
 }
@@ -51,7 +52,7 @@ ostream&
 operator<<( ostream& os, const ProblemSolutionList & solutionlist)
 {
     for (ProblemSolutionList::const_iterator iter = solutionlist.begin(); iter != solutionlist.end(); ++iter) {
-	os << *(*iter) << endl;
+	os << *(*iter);
     }
     return os;
 }

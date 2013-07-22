@@ -23,7 +23,7 @@
 namespace zypp
 { ///////////////////////////////////////////////////////////////////////
 
-    
+
     /**
      * Class representing one possible solution to one problem found during resolving
      *
@@ -42,13 +42,13 @@ namespace zypp
     class ProblemSolution : public base::ReferenceCounted
     {
     protected:
-	    
+
 	/**
 	 * Clear all data.
 	 * In particular, delete all members of _actions.
 	 **/
 	void clear();
-	    
+
 	//
 	// Data members
 	//
@@ -103,7 +103,7 @@ namespace zypp
 
 	/**
 	 * Add an action to the actions list.
-	 **/ 
+	 **/
 	void addAction( solver::detail::SolutionAction_constPtr action );
 
 	solver::detail::CSolutionActionList actions() {return _actions;}
