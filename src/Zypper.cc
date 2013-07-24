@@ -2019,6 +2019,10 @@ void Zypper::processCommandOptions()
       {"catalog", required_argument, 0, 'c'},
       {"installed-only", no_argument, 0, 'i'},
       {"uninstalled-only", no_argument, 0, 'u'},
+      {"orphaned", no_argument, 0, 'o'},
+      {"suggested",  no_argument, 0, 's'},
+      {"recommended",  no_argument, 0, 'r'},
+      {"unneeded",  no_argument, 0, 'n'},
       {"sort-by-name", no_argument, 0, 'N'},
       {"sort-by-repo", no_argument, 0, 'R'},
       {"sort-by-catalog", no_argument, 0, 0},
@@ -2036,6 +2040,10 @@ void Zypper::processCommandOptions()
       "-r, --repo <alias|#|URI>  Just another means to specify repository.\n"
       "-i, --installed-only      Show only installed packages.\n"
       "-u, --uninstalled-only    Show only packages which are not installed.\n"
+      "-o, --orphaned            Show packages which are orphaned (without repository).\n"
+      "-s, --suggested           Show packages which are suggested.\n"
+      "-r, --recommended         Show packages which are recommended.\n"
+      "-n, --unneeded            Show packages which are unneeded.\n"
       "-N, --sort-by-name        Sort the list by package name.\n"
       "-R, --sort-by-repo        Sort the list by repository.\n"
     );
