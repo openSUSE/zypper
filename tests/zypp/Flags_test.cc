@@ -4,6 +4,7 @@
 #include <boost/test/auto_unit_test.hpp>
 #include "zypp/base/Logger.h"
 #include "zypp/base/Flags.h"
+#include <iostream>
 
 using boost::unit_test::test_case;
 using std::cout;
