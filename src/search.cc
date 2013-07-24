@@ -512,6 +512,28 @@ void list_patterns(Zypper & zypper)
     list_pattern_table(zypper);
 }
 
+static bool check_bits( PoolItem pi, Zypper & zypper )
+{
+  bool orphaned = zypper.cOpts().count("orphaned");
+  bool suggested = zypper.cOpts().count("suggested");
+  bool recommended = zypper.cOpts().count("recommended");
+  bool unneeded = zypper.cOpts().count("unneeded");
+
+  if ( orphaned && !pi.status().isOrphaned() )
+    return false;
+
+  if ( suggested && !pi.status().isSuggested() )
+    return false;
+
+  if ( recommended && !pi.status().isRecommended() )
+    return false;
+
+  if ( unneeded && !pi.status().isUnneeded() )
+    return false;
+
+  return true;
+}
+
 void list_packages(Zypper & zypper)
 {
   MIL << "Going to list packages." << std::endl;
@@ -531,6 +553,14 @@ void list_packages(Zypper & zypper)
 
   bool installed_only = zypper.cOpts().count("installed-only");
   bool notinst_only = zypper.cOpts().count("uninstalled-only");
+  bool check = false;
+
+  if ( zypper.cOpts().count("orphaned") || zypper.cOpts().count("suggested") ||
+       zypper.cOpts().count("recommended") || zypper.cOpts().count("unneeded") )
+  {
+    check = true;
+    God->resolver()->resolvePool();
+  }
 
   ResPoolProxy::const_iterator
     it = God->pool().proxy().byKindBegin(ResKind::package),
@@ -538,18 +568,50 @@ void list_packages(Zypper & zypper)
   for (; it != e; ++it )
   {
     ui::Selectable::constPtr s = *it;
+    bool found = false;
 
-    // get the first installed object
+    // get the installed object
     PoolItem installed;
     if (!s->installedEmpty())
       installed = s->installedObj();
 
-    // show available objects
-    for_(it, s->availableBegin(), s->availableEnd())
+    // If ask for package classification check the installed obj first because only for
+    // this the corresponding bits are set. The installed obj is NOT in the pick list
+    // if an identical obj (candidate) from a repo is available.
+    if ( check )
+    {
+      if ( installed )
+      {
+        if ( check_bits( installed, zypper ) )
+        {
+          found = true;
+        }
+      }
+      else
+      {
+        for_(it, s->picklistBegin(), s->picklistEnd())
+        {
+          if ( check_bits( (*it), zypper ) )
+          {
+            found = true;
+            continue;
+          }
+        }
+      }
+    }
+
+    if ( check && !found )
+      continue;
+
+    // Don't use availableBegin/End here, there would be packages lost. The pick list
+    // additionally contains packages without a repo (the orphaned ones) as well as
+    // the installed ones having other version than available from any repo.
+    for_(it, s->picklistBegin(), s->picklistEnd())
     {
       TableRow row;
 
       zypp::PoolItem pi = *it;
+
       if (installed)
       {
         if (notinst_only)

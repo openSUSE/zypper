@@ -907,8 +907,10 @@ Look for RSI acronym (case-sensitively), also in summaries and descriptions:
 
 .TP
 .B packages (pa) [options] [repository] ...
-List all available packages or all packages from specified repositories.
-Similar to \fBzypper search -s -t package\fR.
+List all available packages or all packages from specified repositories
+(similar to \fBzypper search -s -t package\fR).
+Also allows the options \fI\-\-orphaned\fR, \fI\-\-suggested\fR, \fI\-\-recommended\fR
+and \fI\-\-unneeded\fR to get corresponding lists of packages.
 .TP
 .I \-r, \-\-repo <alias|name|#|URI>
 Just another means to specify repositories.
@@ -918,6 +920,18 @@ Show only installed packages.
 .TP
 .I \-u, \-\-uninstalled\-only
 Show only packages which are not installed.
+.TP
+.I \-o, \-\-orphaned
+Show packages which are orphaned (without repository).
+.TP
+.I \-s, \-\-suggested
+Show packages which are suggested.
+.TP
+.I \-r, \-\-recommended
+Show packages which are recommeded.
+.TP
+.I \-n, \-\-unneeded
+Show packages which are unneeded.
 
 .TP
 .B patches (pch) [options] [repository] ...
