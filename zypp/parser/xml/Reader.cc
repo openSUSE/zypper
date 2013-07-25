@@ -9,11 +9,8 @@
 /** \file zypp/parser/xml/Reader.cc
  *
 */
-extern "C"
-{
 #include <libxml/xmlreader.h>
 #include <libxml/xmlerror.h>
-}
 
 #include <iostream>
 
