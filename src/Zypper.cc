@@ -1942,7 +1942,7 @@ void Zypper::processCommandOptions()
       "    --provides             Search for packages which provide the search strings.\n"
       "    --recommends           Search for packages which recommend the search strings.\n"
       "    --requires             Search for packages which require the search strings.\n"
-      "    --suggests             Search what packages are suggested by the search strings.\n"
+      "    --suggests             Search for packages which suggest the search strings.\n"
       "    --conflicts            Search packages conflicting with search strings.\n"
       "    --obsoletes            Search for packages which obsolete the search strings.\n"
       "-n, --name                 Useful together with dependency options, otherwise\n"
