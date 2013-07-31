@@ -58,6 +58,10 @@ using namespace zypp::filesystem;
 
 namespace zypp
 {
+  namespace zypp_readonly_hack
+  {
+    bool IGotIt(); // in readonly-mode
+  }
 namespace target
 {
 namespace rpm
@@ -1030,6 +1034,13 @@ void RpmDb::exportTrustedKeysInZyppKeyRing()
 void RpmDb::importPubkey( const PublicKey & pubkey_r )
 {
   FAILIFNOTINITIALIZED;
+
+  // bnc#828672: On the fly key import in READONLY
+  if ( zypp_readonly_hack::IGotIt() )
+  {
+    WAR << "Key " << pubkey_r << " can not be imported. (READONLY MODE)" << endl;
+    return;
+  }
 
   // check if the key is already in the rpm database
   Edition keyEd( pubkey_r.gpgPubkeyVersion(), pubkey_r.gpgPubkeyRelease() );
