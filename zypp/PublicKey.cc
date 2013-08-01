@@ -311,6 +311,9 @@ namespace zypp
       Pathname path() const
       { return _dataFile.path(); }
 
+      const std::list<PublicKeyData> & hiddenKeys() const
+      { return _hiddenKeys; }
+
     protected:
       void readFromFile()
       {
@@ -354,20 +357,25 @@ namespace zypp
 
 	  case 1:
 	    // ok.
+	    _keyData = scanner._keys.back();
+	    _hiddenKeys.clear();
 	    break;
 
 	  default:
 	    WAR << "File " << _dataFile.path().asString() << " contains multiple keys: " <<  scanner._keys << endl;
+	    _keyData = scanner._keys.back();
+	    scanner._keys.pop_back();
+	    _hiddenKeys.swap( scanner._keys );
 	    break;
 	}
 
-	_keyData = scanner._keys.back();
 	MIL << "Read pubkey from " << info.path() << ": " << _keyData << endl;
       }
 
     private:
       filesystem::TmpFile	_dataFile;
       PublicKeyData		_keyData;
+      std::list<PublicKeyData>  _hiddenKeys;
 
     public:
       /** Offer default Impl. */
@@ -412,6 +420,9 @@ namespace zypp
 
   Pathname PublicKey::path() const
   { return _pimpl->path(); }
+
+  const std::list<PublicKeyData> & PublicKey::hiddenKeys() const
+  { return _pimpl->hiddenKeys(); }
 
   std::string PublicKey::id() const
   { return keyData().id(); }

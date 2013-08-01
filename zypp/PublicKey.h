@@ -197,8 +197,13 @@ namespace zypp
   ///////////////////////////////////////////////////////////////////
   /// \class PublicKey
   /// \brief Class representing one GPG Public Key (PublicKeyData + ASCII armored in a tempfile).
+  ///
   /// If you don't need the ASCII armored version of the key stored in
   /// a tempfile, using \ref PublicKeyData might be sufficient.
+  ///
+  /// \note In case the ASCII armored blob actually contains multiple
+  /// keys, the \b last keys data are made available via the API. The
+  /// additional keys data are made available via \ref hiddenKeys.
   ///////////////////////////////////////////////////////////////////
   class PublicKey
   {
@@ -249,10 +254,12 @@ namespace zypp
     std::string gpgPubkeyRelease() const;	//!< \see \ref PublicKeyData
     std::string asString() const;		//!< \see \ref PublicKeyData
 
-
   public:
     /** File containig the ASCII armored key. */
     Pathname path() const;
+
+    /** Additional keys data in case the ASCII armored blob containes multiple keys. */
+    const std::list<PublicKeyData> & hiddenKeys() const;
 
   public:
     bool operator==( PublicKey rhs ) const;	// FIXME: change arg to const&
