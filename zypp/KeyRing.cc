@@ -129,6 +129,7 @@ namespace zypp
 	    "--no-default-keyring",
 	    "--quiet",
 	    "--with-colons",
+	    "--fixed-list-mode",
 	    "--with-fingerprint",
 	    "--with-sig-list",
 	    "--no-tty",
