@@ -457,10 +457,10 @@ namespace zypp
   std::string PublicKey::asString() const
   { return keyData().asString(); }
 
-  bool PublicKey::operator==( PublicKey rhs ) const
+  bool PublicKey::operator==( const PublicKey & rhs ) const
   { return rhs.keyData() == keyData(); }
 
-  bool PublicKey::operator==( std::string sid ) const
+  bool PublicKey::operator==( const std::string & sid ) const
   { return sid == id(); }
 
   std::ostream & dumpOn( std::ostream & str, const PublicKey & obj )

@@ -262,8 +262,8 @@ namespace zypp
     const std::list<PublicKeyData> & hiddenKeys() const;
 
   public:
-    bool operator==( PublicKey rhs ) const;	// FIXME: change arg to const&
-    bool operator==( std::string sid ) const;	// FIXME: change arg to const&
+    bool operator==( const PublicKey & rhs ) const;
+    bool operator==( const std::string & sid ) const;
 
   private:
     friend class KeyRing;
