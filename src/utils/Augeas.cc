@@ -93,16 +93,10 @@ Augeas::Augeas(const string & file)
     }
   }
 
-  if (!_got_global_zypper_conf && !_got_user_zypper_conf)
+  if (!_got_global_zypper_conf && !_got_user_zypper_conf && !error.empty() )
   {
-    if (error.empty())
-      ZYPP_THROW(Exception(
-          _("No configuration file exists or could be parsed.")));
-    else
-    {
-      string msg = _("Error parsing zypper.conf:") + string("\n") + error;
-      ZYPP_THROW(Exception(msg));
-    }
+    string msg = _("Error parsing zypper.conf:") + string("\n") + error;
+    ZYPP_THROW(Exception(msg));
   }
 
   MIL << "Done reading conf files:" << endl;
