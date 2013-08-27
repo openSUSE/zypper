@@ -21,6 +21,7 @@
 #include "zypp/base/PtrTypes.h"
 #include "zypp/base/Exception.h"
 #include "zypp/Pathname.h"
+#include "zypp/Date.h"
 
 ///////////////////////////////////////////////////////////////////
 namespace zypp
@@ -30,13 +31,11 @@ namespace zypp
   {
     class TmpFile;
   }
-  class Date;
 
-
-  /**
-   * Exception thrown when the supplied key is
-   * not a valid gpg key
-   */
+  ///////////////////////////////////////////////////////////////////
+  /// \class BadKeyException
+  /// \brief Exception thrown when the supplied key is not a valid gpg key
+  ///////////////////////////////////////////////////////////////////
   class BadKeyException : public Exception
   {
     public:
@@ -61,18 +60,153 @@ namespace zypp
     private:
       Pathname _keyfile;
   };
+  ///////////////////////////////////////////////////////////////////
+
+  ///////////////////////////////////////////////////////////////////
+  /// \class PublicKeyData
+  /// \brief Class representing one GPG Public Keys data.
+  /// \ref PublicKeyData are provided e.g. by a \ref PublicKey or
+  /// a \ref KeyRing. \ref PublicKeyData are usually easier to
+  /// retrieve and sufficient unless you actually need an ASCII
+  /// armored version of the key placed in a tempfile. In this
+  /// case use \ref PublicKey.
+  ///////////////////////////////////////////////////////////////////
+  class PublicKeyData
+  {
+  public:
+    /** Default constructed: empty data. */
+    PublicKeyData();
+
+    ~PublicKeyData();
+
+    /** Scan data from 'gpg --with-colons' key listings. */
+    friend class PublicKeyScanner;
+
+    /** Whether this contains valid data (not default constructed). */
+    explicit operator bool() const;
+
+  public:
+    /** Key ID. */
+    std::string id() const;
+
+    /** Key name.  */
+    std::string name() const;
+
+    /** Key fingerprint.*/
+    std::string fingerprint() const;
+
+    /** Creation / last modification date (latest selfsig). */
+    Date created() const;
+
+    /** Expiry date, or \c Date() if the key never expires. */
+    Date expires() const;
+
+    /**  Whether the key has expired. */
+    bool expired() const;
+
+    /** Number of days (24h) until the key expires (or since it exired).
+     * A value of \c 0 means the key will expire within the next 24h.
+     * Negative values indicate the key has expired less than \c N days ago.
+     * For keys without expiration date \c INT_MAX is returned.
+     */
+    int daysToLive() const;
+
+    /** * Expiry info in a human readable form.
+     * The exipry daye plus an annotation if the key has expired, or will
+     * expire within 90 days.
+     * \code
+     * (does not expire)
+     * Tue May 11 13:37:33 CEST 2010
+     * Tue May 11 13:37:33 CEST 2010 (expires in 90 days)
+     * Tue May 11 13:37:33 CEST 2010 (expires in 1 day)
+     * Tue May 11 13:37:33 CEST 2010 (expires within 24h)
+     * Tue May 11 13:37:33 CEST 2010 (EXPIRED)
+     * \endcode
+     */
+    std::string expiresAsString() const;
+
+    /** Gpg-pubkey version as computed by rpm (trailing 8 byte \ref id) */
+    std::string gpgPubkeyVersion() const;
+
+    /** Gpg-pubkey release as computed by rpm (hexencoded \ref created) */
+    std::string gpgPubkeyRelease() const;
+
+    /** Simple string representation.
+     * Encodes \ref id, \ref gpgPubkeyRelease, \ref name and \ref fingerprint.
+     * \code
+     * [E3A5C360307E3D54-4be01a65] [SuSE Package Signing Key <build@suse.de>] [4E98E67519D98DC7362A5990E3A5C360307E3D54]
+     * \endcode
+     */
+    std::string asString() const;
+
+  private:
+    class Impl;
+    RWCOW_pointer<Impl> _pimpl;
+  };
+  ///////////////////////////////////////////////////////////////////
+
+  /** \relates PublicKeyData Stream output */
+  inline std::ostream & operator<<( std::ostream & str, const PublicKeyData & obj )
+  { return str << obj.asString(); }
+
+  /** \relates PublicKeyData Detailed stream output */
+  std::ostream & dumpOn( std::ostream & str, const PublicKeyData & obj );
+
+  /** \relates PublicKeyData Equal based on  fingerprint anf creation date. */
+  bool operator==( const PublicKeyData & lhs, const PublicKeyData & rhs );
+
+  /** \relates PublicKeyData NotEqual. */
+  inline bool operator!=( const PublicKeyData & lhs, const PublicKeyData & rhs )
+  { return !( lhs == rhs ); }
+
+  ///////////////////////////////////////////////////////////////////
+  /// \class PublicKeyScanner
+  /// \brief Scan abstract from 'gpg --with-colons' key listings.
+  /// Feed gpg output line by line into \ref scan. The collected \ref PublicKeyData
+  /// contain the keys data (fingerprint, uid,...) but not the key itself (ASCII
+  /// armored stored in a file).
+  /// \code
+  ///   std::list<PublicKeyData> result;
+  ///   {
+  ///     PublicKeyScanner scanner;
+  ///     for ( std::string line = prog.receiveLine(); !line.empty(); line = prog.receiveLine() )
+  ///       scanner.scan( line );
+  ///     result.swap( scanner._keys );
+  ///   }
+  /// \endcode
+  /// \relates PublicKeyData
+  ///////////////////////////////////////////////////////////////////
+  struct PublicKeyScanner
+  {
+    PublicKeyScanner();
+    ~PublicKeyScanner();
+
+    /** Feed gpg output line by line into \ref scan. */
+    void scan( std::string line_r );
+
+    /** Extracted keys. */
+    std::list<PublicKeyData> _keys;
+
+  private:
+    class Impl;
+    RW_pointer<Impl, rw_pointer::Scoped<Impl> > _pimpl;
+  };
+  ///////////////////////////////////////////////////////////////////
 
 
   ///////////////////////////////////////////////////////////////////
   /// \class PublicKey
-  /// \brief Class representing one GPG Public Key.
-  /// If a key file actually contains multiple keys, the last one
-  /// is taken.
+  /// \brief Class representing one GPG Public Key (PublicKeyData + ASCII armored in a tempfile).
+  ///
+  /// If you don't need the ASCII armored version of the key stored in
+  /// a tempfile, using \ref PublicKeyData might be sufficient.
+  ///
+  /// \note In case the ASCII armored blob actually contains multiple
+  /// keys, the \b last keys data are made available via the API. The
+  /// additional keys data are made available via \ref hiddenKeys.
   ///////////////////////////////////////////////////////////////////
   class PublicKey
   {
-    friend std::ostream & operator<<( std::ostream & str, const PublicKey & obj );
-
   public:
     /** Implementation  */
     class Impl;
@@ -89,8 +223,7 @@ namespace zypp
      *
      * \throws when data does not make a key
      */
-    explicit
-    PublicKey( const Pathname & file );
+    explicit PublicKey( const Pathname & keyFile_r );
 
     /** Ctor reading the key from a \ref TmpFile.
      *
@@ -98,86 +231,44 @@ namespace zypp
      *
      * \throws when data does not make a key
      */
-    explicit
-    PublicKey( const filesystem::TmpFile & sharedfile );
+    explicit PublicKey( const filesystem::TmpFile & sharedFile_r );
 
     ~PublicKey();
 
+  public:
+    /** The public keys data (\see \ref PublicKeyData).*/
+    const PublicKeyData & keyData() const;
+
     bool isValid() const
-    { return ( ! id().empty() && ! fingerprint().empty() && !path().empty() ); }
+    { return ! ( id().empty() || fingerprint().empty() ); }
 
-    std::string asString() const;
-    std::string id() const;
-    std::string name() const;
-    std::string fingerprint() const;
+    std::string id() const;			//!< \see \ref PublicKeyData
+    std::string name() const;			//!< \see \ref PublicKeyData
+    std::string fingerprint() const;		//!< \see \ref PublicKeyData
+    Date created() const;			//!< \see \ref PublicKeyData
+    Date expires() const;			//!< \see \ref PublicKeyData
+    std::string expiresAsString() const;	//!< \see \ref PublicKeyData
+    bool expired() const;			//!< \see \ref PublicKeyData
+    int daysToLive() const;			//!< \see \ref PublicKeyData
+    std::string gpgPubkeyVersion() const;	//!< \see \ref PublicKeyData
+    std::string gpgPubkeyRelease() const;	//!< \see \ref PublicKeyData
+    std::string asString() const;		//!< \see \ref PublicKeyData
 
-    /** Version rpm would assign to this key if imported into the rpm database.
-     * Rpm uses the lowercased trailing 8 byte from \ref id as \c version, and the
-     * creations dates lowercased hexadecimal representation as \c release.
-     * \see \ref gpgPubkeyRelease
-     * \code
-     * [zypp OBS Project <zypp@build.opensuse.org>]
-     *   fpr 47D7CE1DD600935B3B90365733D38EBC7FB7F464
-     *    id 33D38EBC7FB7F464           <-- trailing 8 byte
-     *   cre Thu Mar 13 19:15:40 2008   <-- converted to hex
-     *   exp Sat May 22 20:15:40 2010
-     * ]
-     *
-     * Converting the creation date to its hexadecimal representation:
-     * $ bc <<<"obase=16;$(date -d 'Thu Mar 13 19:15:40 2008' +%s)"
-     * 47D96F4C
-     *
-     * Rpms name for this key: gpg-pubkey-7fb7f464-47d96f4c
-     * \endcode
-     */
-    std::string gpgPubkeyVersion() const;
-
-    /** Release rpm would assign to this key if imported into the rpm database.
-     * This is the creations dates hexadecimal representation as \c release lowercased.
-     * \see \ref gpgPubkeyVersion
-     */
-    std::string gpgPubkeyRelease() const;
-
-    /**
-     * Date when the key was created.
-     */
-    Date created() const;
-
-    /**
-     * Date when the key expires.
-     * If the key never expires the date is Date() (i.e. 0 seconds since the epoch (1.1.1970))
-     */
-    Date expires() const;
-
-    /**
-     * Expiry info in a human readable form.
-     * The exipry daye plus an annotation if the key has expired, or will
-     * expire within 90 days.
-     * \code
-     * (does not expire)
-     * Tue May 11 13:37:33 CEST 2010
-     * Tue May 11 13:37:33 CEST 2010 (expires in 90 days)
-     * Tue May 11 13:37:33 CEST 2010 (expires in 1 day)
-     * Tue May 11 13:37:33 CEST 2010 (expires within 24h)
-     * Tue May 11 13:37:33 CEST 2010 (EXPIRED)
-     * \endcode
-     */
-    std::string expiresAsString() const;
-
-    /** Whether the key has expired. */
-    bool expired() const;
-
-    /** Number of days (24h) until the key expires (or since it exired).
-     * A value of \c 0 means the key will expire within the next 24h.
-     * Negative values indicate the key has expired less than \c N days ago.
-     * For keys without expiration date \c INT_MAX is returned.
-     */
-    int daysToLive() const;
-
+  public:
+    /** File containig the ASCII armored key. */
     Pathname path() const;
 
-    bool operator==( PublicKey b ) const;
-    bool operator==( std::string sid ) const;
+    /** Additional keys data in case the ASCII armored blob containes multiple keys. */
+    const std::list<PublicKeyData> & hiddenKeys() const;
+
+  public:
+    bool operator==( PublicKey rhs ) const;	// FIXME: change arg to const&
+    bool operator==( std::string sid ) const;	// FIXME: change arg to const&
+
+  private:
+    friend class KeyRing;
+    /** KeyRing ctor: No need to parse file if KeyRing already had valid KeyData. */
+    PublicKey( const filesystem::TmpFile & sharedFile_r, const PublicKeyData & keyData_r );
 
   private:
     /** Pointer to implementation */

@@ -323,6 +323,17 @@ public:
   //
   ///////////////////////////////////////////////////////////////////
 public:
+  /** Sync mode for \ref syncTrustedKeys */
+  enum SyncTrustedKeyBits
+  {
+    SYNC_TO_KEYRING	= 1<<0,	//! export rpm trusted keys into zypp trusted keyring
+    SYNC_FROM_KEYRING	= 1<<1,	//! import zypp trusted keys into rpm database.
+    SYNC_BOTH		= SYNC_TO_KEYRING | SYNC_FROM_KEYRING
+  };
+  /**
+   * Sync trusted keys stored in rpm database and zypp trusted keyring.
+   */
+  void syncTrustedKeys( SyncTrustedKeyBits mode_r = SYNC_BOTH );
   /**
    * iterates through zypp keyring and import all non existant keys
    * into rpm keyring
@@ -332,6 +343,7 @@ public:
    * insert all rpm trusted keys into zypp trusted keyring
    */
   void exportTrustedKeysInZyppKeyRing();
+
 private:
   /**
    * The connection to the rpm process.

@@ -14,8 +14,6 @@
 #include <iostream>
 #include <vector>
 
-//#include "zypp/base/Logger.h"
-
 #include "zypp/base/Gettext.h"
 #include "zypp/base/String.h"
 #include "zypp/base/Regex.h"
@@ -24,7 +22,7 @@
 #include "zypp/TmpPath.h"
 #include "zypp/PathInfo.h"
 #include "zypp/base/Exception.h"
-#include "zypp/base/Logger.h"
+#include "zypp/base/LogTools.h"
 #include "zypp/Date.h"
 #include "zypp/TmpPath.h"
 
@@ -37,127 +35,286 @@ namespace zypp
 { /////////////////////////////////////////////////////////////////
 
   ///////////////////////////////////////////////////////////////////
+  /// \class PublicKeyData::Impl
+  /// \brief  PublicKeyData implementation.
+  ///////////////////////////////////////////////////////////////////
+  struct PublicKeyData::Impl
+  {
+    std::string _id;
+    std::string _name;
+    std::string _fingerprint;
+    Date        _created;
+    Date        _expires;
+
+  public:
+    /** Offer default Impl. */
+    static shared_ptr<Impl> nullimpl()
+    {
+      static shared_ptr<Impl> _nullimpl( new Impl );
+      return _nullimpl;
+    }
+
+  private:
+    friend Impl * rwcowClone<Impl>( const Impl * rhs );
+    /** clone for RWCOW_pointer */
+    Impl * clone() const
+    { return new Impl( *this ); }
+  };
+  ///////////////////////////////////////////////////////////////////
+
+  ///////////////////////////////////////////////////////////////////
+  /// class PublicKeyData
+  ///////////////////////////////////////////////////////////////////
+
+  PublicKeyData::PublicKeyData()
+    : _pimpl( Impl::nullimpl() )
+  {}
+
+  PublicKeyData::~PublicKeyData()
+  {}
+
+  PublicKeyData::operator bool() const
+  { return !_pimpl->_fingerprint.empty(); }
+
+  std::string PublicKeyData::id() const
+  { return _pimpl->_id; }
+
+  std::string PublicKeyData::name() const
+  { return _pimpl->_name; }
+
+  std::string PublicKeyData::fingerprint() const
+  { return _pimpl->_fingerprint; }
+
+  Date PublicKeyData::created() const
+  { return _pimpl->_created; }
+
+  Date PublicKeyData::expires() const
+  { return _pimpl->_expires; }
+
+  bool PublicKeyData::expired() const
+  { return( _pimpl->_expires && _pimpl->_expires < Date::now() ); }
+
+  int PublicKeyData::daysToLive() const
+  {
+    if ( _pimpl->_expires )
+    {
+      Date exp( _pimpl->_expires - Date::now() );
+      return exp < 0 ? exp / Date::day - 1 : exp / Date::day;
+    }
+    return INT_MAX;
+  }
+
+  std::string PublicKeyData::expiresAsString() const
+  {
+    if ( !_pimpl->_expires )
+    { // translators: an annotation to a gpg keys expiry date
+      return _("(does not expire)");
+    }
+    std::string ret( _pimpl->_expires.asString() );
+    int ttl( daysToLive() );
+    if ( ttl <= 90 )
+    {
+      ret += " ";
+      if ( ttl < 0 )
+      { // translators: an annotation to a gpg keys expiry date
+	ret += _("(EXPIRED)");
+      }
+      else if ( ttl == 0 )
+      { // translators: an annotation to a gpg keys expiry date
+	ret += _("(expires within 24h)");
+      }
+      else
+      { // translators: an annotation to a gpg keys expiry date
+	ret += str::form( _PL("(expires in %d day)", "(expires in %d days)", ttl ), ttl );
+      }
+    }
+    return ret;
+  }
+
+  std::string PublicKeyData::gpgPubkeyVersion() const
+  { return _pimpl->_id.empty() ? _pimpl->_id : str::toLower( _pimpl->_id.substr(8,8) ); }
+
+  std::string PublicKeyData::gpgPubkeyRelease() const
+  { return _pimpl->_created ? str::hexstring( _pimpl->_created ).substr(2) : std::string(); }
+
+  std::string PublicKeyData::asString() const
+  {
+    return str::form( "[%s-%s] [%s] [%s] [TTL %d]",
+		      _pimpl->_id.c_str(),
+		      gpgPubkeyRelease().c_str(),
+		      _pimpl->_name.c_str(),
+		      _pimpl->_fingerprint.c_str(),
+		      daysToLive() );
+  }
+
+  std::ostream & dumpOn( std::ostream & str, const PublicKeyData & obj )
+  {
+    str << "[" << obj.name() << "]" << endl;
+    str << "  fpr " << obj.fingerprint() << endl;
+    str << "   id " << obj.id() << endl;
+    str << "  cre " << Date::ValueType(obj.created()) << ' ' << obj.created() << endl;
+    str << "  exp " << Date::ValueType(obj.expires()) << ' ' << obj.expiresAsString() << endl;
+    str << "  ttl " << obj.daysToLive() << endl;
+    str << "  rpm " << obj.gpgPubkeyVersion() << "-" << obj.gpgPubkeyRelease() << endl;
+    str << "]";
+    return str;
+  }
+
+  bool operator==( const PublicKeyData & lhs, const PublicKeyData & rhs )
+  { return ( lhs.fingerprint() == rhs.fingerprint() && lhs.created() == rhs.created() ); }
+
+
+  ///////////////////////////////////////////////////////////////////
+  /// \class PublicKeyScanner::Impl
+  /// \brief  PublicKeyScanner implementation.
+  ///////////////////////////////////////////////////////////////////
+  struct PublicKeyScanner::Impl
+  {
+    std::vector<std::string>			_words;
+    enum { pNONE, pPUB, pSIG, pFPR, pUID }	_parseEntry;
+
+   Impl()
+      : _parseEntry( pNONE )
+    {}
+
+    void scan( std::string & line_r, std::list<PublicKeyData> & keys_r )
+    {
+      // pub:-:1024:17:A84EDAE89C800ACA:971961473:1214043198::-:SuSE Package Signing Key <build@suse.de>:
+      // fpr:::::::::79C179B2E1C820C1890F9994A84EDAE89C800ACA:
+      // sig:::17:A84EDAE89C800ACA:1087899198:::::[selfsig]::13x:
+      // sig:::17:9E40E310000AABA4:980442706::::[User ID not found]:10x:
+      // sig:::1:77B2E6003D25D3D9:980443247::::[User ID not found]:10x:
+      // sig:::17:A84EDAE89C800ACA:1318348291:::::[selfsig]::13x:
+      // sub:-:2048:16:197448E88495160C:971961490:1214043258::: [expires: 2008-06-21]
+      // sig:::17:A84EDAE89C800ACA:1087899258:::::[keybind]::18x:
+      if ( line_r.empty() )
+	return;
+
+      // quick check for interesting entries
+      _parseEntry = pNONE;
+      switch ( line_r[0] )
+      {
+	#define DOTEST( C1, C2, C3, E ) case C1: if ( line_r[1] == C2 && line_r[2] == C3 && line_r[3] == ':' ) _parseEntry = E; break
+	DOTEST( 'p', 'u', 'b', pPUB );
+	DOTEST( 's', 'i', 'g', pSIG );
+	DOTEST( 'f', 'p', 'r', pFPR );
+	DOTEST( 'u', 'i', 'd', pUID );
+	#undef DOTEST
+      }
+      if ( _parseEntry == pNONE )
+	return;
+
+      if ( line_r[line_r.size()-1] == '\n' )
+	line_r.erase( line_r.size()-1 );
+      // DBG << line_r << endl;
+
+      _words.clear();
+      str::splitFields( line_r, std::back_inserter(_words), ":" );
+
+      PublicKeyData * key( &keys_r.back() );
+
+      switch ( _parseEntry )
+      {
+	case pPUB:
+	  keys_r.push_back( PublicKeyData() );	// reset upon new key
+	  key = &keys_r.back();
+	  key->_pimpl->_id      = _words[4];
+	  key->_pimpl->_name    = str::replaceAll( _words[9], "\\x3a", ":" );
+	  key->_pimpl->_created = Date(str::strtonum<Date::ValueType>(_words[5]));
+	  key->_pimpl->_expires = Date(str::strtonum<Date::ValueType>(_words[6]));
+	  break;
+
+	case pSIG:
+	  // Update creation/modification date from signatures type "13x".
+	  if ( _words[_words.size()-2] == "13x" )
+	  {
+	    Date cdate(str::strtonum<Date::ValueType>(_words[5]));
+	    if ( key->_pimpl->_created < cdate )
+	      key->_pimpl->_created = cdate;
+	  }
+	  break;
+
+	case pFPR:
+	  if ( key->_pimpl->_fingerprint.empty() )
+	    key->_pimpl->_fingerprint = _words[9];
+	  break;
+
+	case pUID:
+	  if ( ! _words[9].empty() )
+	    key->_pimpl->_name = str::replaceAll( _words[9], "\\x3a", ":" );
+	  break;
+
+	case pNONE:
+	  break;
+      }
+    }
+  };
+  ///////////////////////////////////////////////////////////////////
+
+  ///////////////////////////////////////////////////////////////////
+  // class PublicKeyScanner
+  ///////////////////////////////////////////////////////////////////
+
+  PublicKeyScanner::PublicKeyScanner()
+    : _pimpl( new Impl )
+  {}
+
+  PublicKeyScanner::~PublicKeyScanner()
+  {}
+
+  void PublicKeyScanner::scan( std::string line_r )
+  { _pimpl->scan( line_r, _keys ); }
+
+
+  ///////////////////////////////////////////////////////////////////
   /// \class PublicKey::Impl
   /// \brief  PublicKey implementation.
   ///////////////////////////////////////////////////////////////////
   struct PublicKey::Impl
   {
-    /** Data we extract from one key. */
-    struct KeyData
-    {
-      std::string _id;
-      std::string _name;
-      std::string _fingerprint;
-      Date        _created;
-      Date        _expires;
-    };
-
     Impl()
     {}
 
-    Impl( const Pathname & keyfile )
+    Impl( const Pathname & keyFile_r )
     {
-      PathInfo info( keyfile );
-      MIL << "Takeing pubkey from " << keyfile << " of size " << info.size() << " and sha1 " << filesystem::checksum(keyfile, "sha1") << endl;
+      PathInfo info( keyFile_r );
+      MIL << "Taking pubkey from " << keyFile_r << " of size " << info.size() << " and sha1 " << filesystem::checksum(keyFile_r, "sha1") << endl;
 
       if ( !info.isExist() )
-        ZYPP_THROW(Exception("Can't read public key from " + keyfile.asString() + ", file not found"));
+        ZYPP_THROW(Exception("Can't read public key from " + keyFile_r.asString() + ", file not found"));
 
-      if ( copy( keyfile, _dataFile.path() ) != 0 )
-        ZYPP_THROW(Exception("Can't copy public key data from " + keyfile.asString() + " to " +  _dataFile.path().asString() ));
+      if ( filesystem::hardlinkCopy( keyFile_r, _dataFile.path() ) != 0 )
+	ZYPP_THROW(Exception("Can't copy public key data from " + keyFile_r.asString() + " to " +  _dataFile.path().asString() ));
 
       readFromFile();
     }
 
-    Impl( const filesystem::TmpFile & sharedfile )
-      : _dataFile( sharedfile )
+    Impl( const filesystem::TmpFile & sharedFile_r )
+      : _dataFile( sharedFile_r )
     { readFromFile(); }
 
+    Impl( const filesystem::TmpFile & sharedFile_r, const PublicKeyData & keyData_r )
+      : _dataFile( sharedFile_r )
+      , _keyData( keyData_r )
+    {
+      if ( ! keyData_r )
+      {
+	WAR << "Invalid PublicKeyData supplied: scanning from file" << endl;
+	readFromFile();
+      }
+    }
+
     public:
-      /** Offer default Impl. */
-      static shared_ptr<Impl> nullimpl()
-      {
-        static shared_ptr<Impl> _nullimpl( new Impl );
-        return _nullimpl;
-      }
-
-      std::string asString() const
-      {
-	return str::form( "[%s-%s] [%s] [%s] [TTL %d]",
-			  id().c_str(), str::hexstring(created(),8).substr(2).c_str(),
-			  name().c_str(),
-			  fingerprint().c_str(),
-			  daysToLive() );
-      }
-
-      std::string id() const
-      { return _keyData._id; }
-
-      std::string name() const
-      { return _keyData._name; }
-
-      std::string fingerprint() const
-      { return _keyData._fingerprint; }
-
-      std::string gpgPubkeyVersion() const
-      { return _keyData._id.empty() ? _keyData._id : str::toLower( _keyData._id.substr(8,8) ); }
-
-      std::string gpgPubkeyRelease() const
-      { return _keyData._created ? str::hexstring( _keyData._created ).substr(2) : std::string(); }
-
-      Date created() const
-      { return _keyData._created; }
-
-      Date expires() const
-      { return _keyData._expires; }
-
-      std::string expiresAsString() const
-      {
-	if ( !_keyData._expires )
-	{ // translators: an annotation to a gpg keys expiry date
-	  return _("(does not expire)");
-	}
-	std::string ret( _keyData._expires.asString() );
-	int ttl( daysToLive() );
-	if ( ttl <= 90 )
-	{
-	  ret += " ";
-	  if ( ttl < 0 )
-	  { // translators: an annotation to a gpg keys expiry date
-	    ret += _("(EXPIRED)");
-	  }
-	  else if ( ttl == 0 )
-	  { // translators: an annotation to a gpg keys expiry date
-	    ret += _("(expires within 24h)");
-	  }
-	  else
-	  { // translators: an annotation to a gpg keys expiry date
-	    ret += str::form( _PL("(expires in %d day)", "(expires in %d days)", ttl ), ttl );
-	  }
-	}
-	return ret;
-      }
+      const PublicKeyData & keyData() const
+      { return _keyData; }
 
       Pathname path() const
       { return _dataFile.path(); }
 
-      bool expired() const
-      {
-	Date exp( expires() );
-	return( exp && exp < Date::now() );
-      }
-
-      int daysToLive() const
-      {
-	Date exp( expires() );
-	if ( ! expires() )
-	  return INT_MAX;
-	exp -= Date::now();
-	return exp < 0 ? exp / Date::day - 1 : exp / Date::day;
-      }
+      const std::list<PublicKeyData> & hiddenKeys() const
+      { return _hiddenKeys; }
 
     protected:
-
       void readFromFile()
       {
         PathInfo info( _dataFile.path() );
@@ -183,98 +340,50 @@ namespace zypp
           _dataFile.path().asString().c_str(),
           NULL
         };
+        ExternalProgram prog( argv, ExternalProgram::Discard_Stderr, false, -1, true );
 
-        ExternalProgram prog(argv,ExternalProgram::Discard_Stderr, false, -1, true);
-
-        // pub:-:1024:17:A84EDAE89C800ACA:971961473:1214043198::-:SuSE Package Signing Key <build@suse.de>:
-        // fpr:::::::::79C179B2E1C820C1890F9994A84EDAE89C800ACA:
-        // sig:::17:A84EDAE89C800ACA:1087899198:::::[selfsig]::13x:
-        // sig:::17:9E40E310000AABA4:980442706::::[User ID not found]:10x:
-        // sig:::1:77B2E6003D25D3D9:980443247::::[User ID not found]:10x:
-        // sub:-:2048:16:197448E88495160C:971961490:1214043258::: [expires: 2008-06-21]
-        // sig:::17:A84EDAE89C800ACA:1087899258:::::[keybind]::18x:
-	KeyData keyData;
-        std::string line;
-	std::vector<std::string> words;
-	enum { pNONE, pPUB, pSIG, pFPR, pUID } parseEntry;
-	bool sawSig = false;
-        for ( line = prog.receiveLine(); !line.empty(); line = prog.receiveLine() )
+	PublicKeyScanner scanner;
+        for ( std::string line = prog.receiveLine(); !line.empty(); line = prog.receiveLine() )
         {
-          if ( line.empty() )
-            continue;
-
-	  // quick check for interesting entries
-	  parseEntry = pNONE;
-	  switch ( line[0] )
-	  {
-#define DOTEST( C1, C2, C3, E ) case C1: if ( line[1] == C2 && line[2] == C3 && line[3] == ':' ) parseEntry = E; break
-	    DOTEST( 'p', 'u', 'b', pPUB );
-	    DOTEST( 's', 'i', 'g', pSIG );
-	    DOTEST( 'f', 'p', 'r', pFPR );
-	    DOTEST( 'u', 'i', 'd', pUID );
-#undef DOTEST
-	  }
-	  if ( parseEntry == pNONE )
-	    continue;
-
-          if ( line[line.size()-1] == '\n' )
-            line.erase( line.size()-1 );
-
-	  words.clear();
-          str::splitFields( line, std::back_inserter(words), ":" );
-
-	  switch ( parseEntry )
-	  {
-	    case pPUB:
-	      keyData = KeyData();	// reset upon new key
-	      sawSig  = false;
-	      keyData._id      = words[4];
-	      keyData._name    = words[9];
-	      keyData._created = Date(str::strtonum<Date::ValueType>(words[5]));
-	      keyData._expires = Date(str::strtonum<Date::ValueType>(words[6]));
-	      break;
-
-	    case pSIG:
-	      if ( !sawSig && words[words.size()-2] == "13x"  )
-	      {
-		// update creation and expire dates from 1st signature type "13x"
-		if ( ! words[5].empty() )
-		  keyData._created = Date(str::strtonum<Date::ValueType>(words[5]));
-		if ( ! words[6].empty() )
-		  keyData._expires = Date(str::strtonum<Date::ValueType>(words[6]));
-		sawSig = true;
-	      }
-	      break;
-
-	    case pFPR:
-	      if ( ! words[9].empty() )
-		keyData._fingerprint = words[9];
-	      break;
-
-	    case pUID:
-	      if ( ! words[9].empty() )
-		keyData._name = words[9];
-	      break;
-
-	    case pNONE:
-	      break;
-	  }
-        }
+	  scanner.scan( line );
+	}
         prog.close();
 
-        if ( keyData._id.empty() )
-	  ZYPP_THROW( BadKeyException( "File " + _dataFile.path().asString() + " doesn't contain public key data" , _dataFile.path() ) );
+	switch ( scanner._keys.size() )
+	{
+	  case 0:
+	    ZYPP_THROW( BadKeyException( "File " + _dataFile.path().asString() + " doesn't contain public key data" , _dataFile.path() ) );
+	    break;
 
-        //replace all escaped semicolon with real ':'
-        str::replaceAll( keyData._name, "\\x3a", ":" );
+	  case 1:
+	    // ok.
+	    _keyData = scanner._keys.back();
+	    _hiddenKeys.clear();
+	    break;
 
-	_keyData = keyData;
-        MIL << "Read pubkey from " << info.path() << ": " << asString() << endl;
+	  default:
+	    WAR << "File " << _dataFile.path().asString() << " contains multiple keys: " <<  scanner._keys << endl;
+	    _keyData = scanner._keys.back();
+	    scanner._keys.pop_back();
+	    _hiddenKeys.swap( scanner._keys );
+	    break;
+	}
+
+	MIL << "Read pubkey from " << info.path() << ": " << _keyData << endl;
       }
 
     private:
       filesystem::TmpFile	_dataFile;
-      KeyData			_keyData;
+      PublicKeyData		_keyData;
+      std::list<PublicKeyData>  _hiddenKeys;
+
+    public:
+      /** Offer default Impl. */
+      static shared_ptr<Impl> nullimpl()
+      {
+        static shared_ptr<Impl> _nullimpl( new Impl );
+        return _nullimpl;
+      }
 
     private:
       friend Impl * rwcowClone<Impl>( const Impl * rhs );
@@ -285,85 +394,77 @@ namespace zypp
   ///////////////////////////////////////////////////////////////////
 
   ///////////////////////////////////////////////////////////////////
-  //
-  //	class PublicKey
-  //
+  // class PublicKey
   ///////////////////////////////////////////////////////////////////
   PublicKey::PublicKey()
   : _pimpl( Impl::nullimpl() )
   {}
 
   PublicKey::PublicKey( const Pathname & file )
-  : _pimpl( new Impl(file) )
+  : _pimpl( new Impl( file ) )
   {}
 
   PublicKey::PublicKey( const filesystem::TmpFile & sharedfile )
-  : _pimpl( new Impl(sharedfile) )
+  : _pimpl( new Impl( sharedfile ) )
+  {}
+
+  PublicKey::PublicKey( const filesystem::TmpFile & sharedfile, const PublicKeyData & keydata )
+  : _pimpl( new Impl( sharedfile, keydata ) )
   {}
 
   PublicKey::~PublicKey()
   {}
 
-  std::string PublicKey::asString() const
-  { return _pimpl->asString(); }
-
-  std::string PublicKey::id() const
-  { return _pimpl->id(); }
-
-  std::string PublicKey::name() const
-  { return _pimpl->name(); }
-
-  std::string PublicKey::fingerprint() const
-  { return _pimpl->fingerprint(); }
-
-  std::string PublicKey::gpgPubkeyVersion() const
-  { return _pimpl->gpgPubkeyVersion(); }
-
-  std::string PublicKey::gpgPubkeyRelease() const
-  { return _pimpl->gpgPubkeyRelease(); }
-
-  Date PublicKey::created() const
-  { return _pimpl->created(); }
-
-  Date PublicKey::expires() const
-  { return _pimpl->expires(); }
-
-  std::string PublicKey::expiresAsString() const
-  { return _pimpl->expiresAsString(); }
-
-  bool PublicKey::expired() const
-  { return _pimpl->expired(); }
-
-  int PublicKey::daysToLive() const
-  { return _pimpl->daysToLive(); }
+  const PublicKeyData & PublicKey::keyData() const
+  { return _pimpl->keyData(); }
 
   Pathname PublicKey::path() const
   { return _pimpl->path(); }
 
-  bool PublicKey::operator==( PublicKey b ) const
-  {
-    return (   b.id() == id()
-            && b.fingerprint() == fingerprint()
-            && b.created() == created() );
-  }
+  const std::list<PublicKeyData> & PublicKey::hiddenKeys() const
+  { return _pimpl->hiddenKeys(); }
+
+  std::string PublicKey::id() const
+  { return keyData().id(); }
+
+  std::string PublicKey::name() const
+  { return keyData().name(); }
+
+  std::string PublicKey::fingerprint() const
+  { return keyData().fingerprint(); }
+
+  Date PublicKey::created() const
+  { return keyData().created(); }
+
+  Date PublicKey::expires() const
+  { return keyData().expires(); }
+
+  bool PublicKey::expired() const
+  { return keyData().expired(); }
+
+  int PublicKey::daysToLive() const
+  { return keyData().daysToLive(); }
+
+  std::string PublicKey::expiresAsString() const
+  { return keyData().expiresAsString(); }
+
+  std::string PublicKey::gpgPubkeyVersion() const
+  { return keyData().gpgPubkeyVersion(); }
+
+  std::string PublicKey::gpgPubkeyRelease() const
+  { return keyData().gpgPubkeyRelease(); }
+
+  std::string PublicKey::asString() const
+  { return keyData().asString(); }
+
+  bool PublicKey::operator==( PublicKey rhs ) const
+  { return rhs.keyData() == keyData(); }
 
   bool PublicKey::operator==( std::string sid ) const
-  {
-    return sid == id();
-  }
+  { return sid == id(); }
 
   std::ostream & dumpOn( std::ostream & str, const PublicKey & obj )
-  {
-    str << "[" << obj.name() << "]" << endl;
-    str << "  fpr " << obj.fingerprint() << endl;
-    str << "   id " << obj.id() << endl;
-    str << "  cre " << obj.created() << endl;
-    str << "  exp " << obj.expiresAsString() << endl;
-    str << "  ttl " << obj.daysToLive() << endl;
-    str << "  rpm " << obj.gpgPubkeyVersion() << "-" << obj.gpgPubkeyRelease() << endl;
-    str << "]";
-    return str;
-  }
+  { return dumpOn( str, obj.keyData() ); }
 
   /////////////////////////////////////////////////////////////////
 } // namespace zypp
