@@ -696,28 +696,6 @@ namespace zypp
   std::list<PublicKeyData> KeyRing::trustedPublicKeyData()
   { return _pimpl->trustedPublicKeyData(); }
 
-  std::list<std::string> KeyRing::publicKeyIds()	// deprecated: use publicKeyData
-  {
-    const std::list<PublicKeyData> & keys( publicKeyData() );
-    std::list<std::string> ret;
-    for_( it, keys.begin(), keys.end() )
-    {
-      ret.push_back( (*it).id() );
-    }
-    return ret;
-  }
-
-  std::list<std::string> KeyRing::trustedPublicKeyIds()	// deprecated: use trustedPublicKeyData
-  {
-    const std::list<PublicKeyData> & keys( trustedPublicKeyData() );
-    std::list<std::string> ret;
-    for_( it, keys.begin(), keys.end() )
-    {
-      ret.push_back( (*it).id() );
-    }
-    return ret;
-  }
-
   bool KeyRing::verifyFileSignatureWorkflow(
       const Pathname & file,
       const std::string filedesc,

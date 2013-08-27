@@ -88,12 +88,9 @@ namespace zypp
     public:
 
       enum RegFlags {
-        optimize	= 0,		///< \deprecated legacy, obsolete
-        match_extra	= 0,		///< \deprecated legacy, obsolete
         icase		= REG_ICASE,	///< Do not differentiate case
         nosubs		= REG_NOSUB,	///< Support for substring addressing of matches is not required
         match_extended	= REG_EXTENDED, ///< Use POSIX Extended Regular Expression syntax when interpreting regex.
-        normal		= 1<<16		///< \deprecated legacy, use match_extended
       };
 
       regex();

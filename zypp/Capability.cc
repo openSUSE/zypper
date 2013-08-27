@@ -360,7 +360,7 @@ namespace zypp
     static       str::smatch what;
     static const str::regex  filenameRegex(
                  "/(s?bin|lib(64)?|etc)/|^/usr/(games/|share/(dict/words|magic\\.mime)$)|^/opt/gnome/games/",
-                 str::regex::optimize|str::regex::nosubs );
+                 str::regex::nosubs );
 
     return str::regex_match( name_r, what, filenameRegex );
   }

@@ -33,6 +33,7 @@ void regex::assign(const std::string& str,int flags)
   m_flags = flags;
   int err;
   char errbuff[100];
+  static const int normal = 1<<16; // deprecated legacy, use match_extended
   if (!(flags & normal)) {
     flags |= match_extended;
     flags &= ~(normal);

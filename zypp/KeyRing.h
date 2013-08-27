@@ -237,18 +237,6 @@ namespace zypp
     std::list<PublicKeyData> trustedPublicKeyData();
 
     /**
-     * Get a list of public key ids in the keyring
-     * \deprecated \ref publicKeyData is cheaper to retrieve and contains more key data
-     */
-    std::list<std::string> publicKeyIds() ZYPP_DEPRECATED;
-
-    /**
-     * Get a list of trusted public key ids in the keyring
-     * \deprecated \ref trustedPublicKeyData is cheaper to retrieve and contains more key data
-     */
-    std::list<std::string> trustedPublicKeyIds() ZYPP_DEPRECATED;
-
-    /**
      * Follows a signature verification interacting with the user.
      * The bool returned depends on user decision to trust or not.
      *
