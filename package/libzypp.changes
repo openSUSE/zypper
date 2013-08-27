@@ -1,4 +1,28 @@
 -------------------------------------------------------------------
+Tue Aug 27 19:10:37 CEST 2013 - ma@suse.de
+
+- remove deprecated methods
+- fix key expiry date parsing (bnc#828672)
+- Provide additional keys data in case the ASCII armored blob
+  containes multiple keys
+- No rpmdb key import in readony mode (bnc#828672)
+- Fix rpmdb key import/export (bnc#828672)
+- Reduce amount of gpg calls when importing/exporting keys.
+- Add public accessible PublicKeyData/PublicKeyScanner classes
+- fix ASCII armored PublicKey parsing (bnc#828672)
+- fix typo (bnc#761985)
+- Fix multiversion update candidate to respect an installed objects
+  arch and vendor (bnc#820444)
+- fix logfile truncation introduced by previous fix for (bnc#825490)
+- Swig can't handle move constructor
+- Workaround bnc#819354 by executing rpm in /. (bnc#827609)
+- Try to detect Arch_ppc64p7 (requires glibc-2.16: getauxval)
+- Fix file probing via tftp:// (bnc#803316)
+- Add armv7hl to armv6hl compat to be in sync with libsolv.
+- Support for armv6hl
+- version 13.5.0 (5)
+
+-------------------------------------------------------------------
 Thu Aug 22 01:13:25 CEST 2013 - ma@suse.de
 
 - Update zypp-po.tar.bz2
