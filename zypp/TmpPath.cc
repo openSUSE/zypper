@@ -132,7 +132,7 @@ namespace zypp {
     //      METHOD NAME : TmpPath::operator const void *
     //      METHOD TYPE :
     //
-    TmpPath::operator const void * () const
+    TmpPath::operator bool() const
     {
       return _impl.get();
     }
