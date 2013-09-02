@@ -466,7 +466,7 @@ namespace zypp
         enum RpmLevel {
             RPM,
             RPM_NODEPS,
-            RPM_NODEPS_FORCE
+            RPM_NODEPS_FORCE	//!< only this one used
         };
 
         virtual void start(
