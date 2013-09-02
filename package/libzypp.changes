@@ -1,4 +1,12 @@
 -------------------------------------------------------------------
+Mon Sep  2 17:04:37 CEST 2013 - ma@suse.de
+
+- Avoid parsing gpg subkeys
+- Use explicit operator bool in TmpPath
+- Must keep legacy rpm level flag (bnc#838039)
+- version 13.6.0 (6)
+
+-------------------------------------------------------------------
 Sun Sep  1 01:14:03 CEST 2013 - ma@suse.de
 
 - Update zypp-po.tar.bz2
