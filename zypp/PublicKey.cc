@@ -170,8 +170,8 @@ namespace zypp
   ///////////////////////////////////////////////////////////////////
   struct PublicKeyScanner::Impl
   {
-    std::vector<std::string>			_words;
-    enum { pNONE, pPUB, pSIG, pFPR, pUID }	_parseEntry;
+    std::vector<std::string>				_words;
+    enum { pNONE, pPUB, pSIG, pFPR, pUID, pSUB }	_parseEntry;
 
    Impl()
       : _parseEntry( pNONE )
@@ -187,6 +187,9 @@ namespace zypp
       // sig:::17:A84EDAE89C800ACA:1318348291:::::[selfsig]::13x:
       // sub:-:2048:16:197448E88495160C:971961490:1214043258::: [expires: 2008-06-21]
       // sig:::17:A84EDAE89C800ACA:1087899258:::::[keybind]::18x:
+      if ( _parseEntry == pSUB )
+	return;		// don't parse in subkeys
+
       if ( line_r.empty() )
 	return;
 
@@ -202,7 +205,11 @@ namespace zypp
 	#undef DOTEST
       }
       if ( _parseEntry == pNONE )
+      {
+	if ( line_r[0] == 's' && line_r[1] == 'u' && line_r[2] == 'b' && line_r[3] == ':' )
+	  _parseEntry = pSUB;
 	return;
+      }
 
       if ( line_r[line_r.size()-1] == '\n' )
 	line_r.erase( line_r.size()-1 );
@@ -245,7 +252,8 @@ namespace zypp
 	  break;
 
 	case pNONE:
-	  break;
+	case pSUB:
+	  break;	// intentionally no default:
       }
     }
   };
