@@ -183,17 +183,6 @@ struct RemoveResolvableReportReceiver : public zypp::callback::ReceiveReport<zyp
   }
 };
 
-std::ostream & operator << (std::ostream & stm,
-                            zypp::target::rpm::InstallResolvableReport::RpmLevel level)
-{
-  static const char * level_s[] = {
-    // TranslatorExplanation --nodeps and --force are options of the rpm command, don't translate
-    //! \todo use format
-    "", _("(with --nodeps)"), _("(with --nodeps --force)")
-  };
-  return stm << level_s[level];
-}
-
 ///////////////////////////////////////////////////////////////////
 // progress for installing a resolvable
 struct InstallResolvableReportReceiver : public zypp::callback::ReceiveReport<zypp::target::rpm::InstallResolvableReport>
@@ -228,33 +217,19 @@ struct InstallResolvableReportReceiver : public zypp::callback::ReceiveReport<zy
     return true;
   }
 
-  virtual Action problem( zypp::Resolvable::constPtr resolvable, Error error, const std::string & description, RpmLevel level )
+  virtual Action problem( zypp::Resolvable::constPtr resolvable, Error error, const std::string & description, RpmLevel /*unused*/ )
   {
-    if (level < RPM_NODEPS_FORCE)
-    {
-      DBG << "Install failed, will retry more aggressively"
-             " (with --nodeps, --force)." << std::endl;
-      return ABORT;
-    }
-
     Zypper::instance()->out().progressEnd("install-resolvable", _label, true);
     std::ostringstream s;
     s << boost::format(_("Installation of %s-%s failed:")) % resolvable->name() % resolvable->edition() << std::endl;
-    s << level << " " << zcb_error2str(error, description);
+    s << zcb_error2str(error, description);
     Zypper::instance()->out().error(s.str());
 
     return (Action) read_action_ari (PROMPT_ARI_RPM_INSTALL_PROBLEM, ABORT);
   }
 
-  virtual void finish( zypp::Resolvable::constPtr /*resolvable*/, Error error, const std::string & reason, RpmLevel level )
+  virtual void finish( zypp::Resolvable::constPtr /*resolvable*/, Error error, const std::string & reason, RpmLevel /*unused*/ )
   {
-    if (error != NO_ERROR && level < RPM_NODEPS_FORCE)
-    {
-      DBG << "level < RPM_NODEPS_FORCE: aborting without displaying an error"
-          << std::endl;
-      return;
-    }
-
     if (error != NO_ERROR)
       // don't write to output, the error should have been reported in problem() (bnc #381203)
       Zypper::instance()->setExitCode(ZYPPER_EXIT_ERR_ZYPP);
