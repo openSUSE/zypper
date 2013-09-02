@@ -282,7 +282,7 @@ namespace zypp
 
   private:
     /** Pointer to implementation */
-    RWCOW_pointer<Impl> _pimpl;
+    RW_pointer<Impl> _pimpl;
   };
   ///////////////////////////////////////////////////////////////////
 

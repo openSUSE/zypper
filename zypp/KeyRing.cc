@@ -249,20 +249,6 @@ namespace zypp
      * \endcode
      */
     CachedPublicKeyData cachedPublicKeyData;
-
-  public:
-    /** Offer default Impl. */
-    static shared_ptr<Impl> nullimpl()
-    {
-      static shared_ptr<Impl> _nullimpl( new Impl( filesystem::TmpPath::defaultLocation() ) );
-      return _nullimpl;
-    }
-
-  private:
-    friend Impl * rwcowClone<Impl>( const Impl * rhs );
-    /** clone for RWCOW_pointer */
-    Impl * clone() const
-    { return new Impl( *this ); }
   };
   ///////////////////////////////////////////////////////////////////
 
