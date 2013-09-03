@@ -368,78 +368,83 @@ bool match_repo(Zypper & zypper, string str, RepoInfo *repo)
   // expensive URL analysis only if the above did not find anything.
   // URL can be ambiguous, in which case the first found match will be returned.
   bool found = false;
-
-  for (RepoManager::RepoConstIterator known_it = manager.repoBegin();
-       known_it != manager.repoEnd(); ++known_it)
+  try
   {
-    try
+    Url strurl(str);	// no need to continue if str is no Url.
+
+    for (RepoManager::RepoConstIterator known_it = manager.repoBegin();
+	 known_it != manager.repoEnd(); ++known_it)
     {
-      // first strip any trailing slash from the path in URLs before comparing
-      // (bnc #585082)
-      // we can afford this because we expect that the repo urls are directories
-      // and it is common practice in servers and operating systems to accept
-      // directory paths both with and without trailing slashes.
-      Url uurl(str);
-      uurl.setPathName(Pathname(uurl.getPathName()).asString());
-
-      url::ViewOption urlview =
-          url::ViewOption::DEFAULTS + url::ViewOption::WITH_PASSWORD;
-      if (zypper.cOpts().count("loose-auth"))
+      try
       {
-        urlview = urlview
-            - url::ViewOptions::WITH_PASSWORD
-            - url::ViewOptions::WITH_USERNAME;
-      }
-      if (zypper.cOpts().count("loose-query"))
-        urlview = urlview - url::ViewOptions::WITH_QUERY_STR;
+	// first strip any trailing slash from the path in URLs before comparing
+	// (bnc #585082)
+	// we can afford this because we expect that the repo urls are directories
+	// and it is common practice in servers and operating systems to accept
+	// directory paths both with and without trailing slashes.
+	Url uurl(strurl);
+	uurl.setPathName(Pathname(uurl.getPathName()).asString());
 
-      // need to do asString(withurlview) comparison here because the user-given
-      // string is expected to have no credentials or query
-      if (!(urlview.has(url::ViewOptions::WITH_PASSWORD)
-            && urlview.has(url::ViewOptions::WITH_QUERY_STR)))
-      {
-        if (!known_it->baseUrlsEmpty())
-        {
-          for_(urlit, known_it->baseUrlsBegin(), known_it->baseUrlsEnd())
-          {
-            Url newrl(*urlit);
-            newrl.setPathName(Pathname(newrl.getPathName()).asString());
-            if (newrl.asString(urlview) == uurl.asString(urlview))
-            {
-              found = true;
-              break;
-            }
-          }
-        }
-      }
-      // ordinary == comparison suffices here (quicker)
-      else
-      {
-        if (!known_it->baseUrlsEmpty())
-        {
-          for_(urlit, known_it->baseUrlsBegin(), known_it->baseUrlsEnd())
-          {
-            Url newrl(*urlit);
-            newrl.setPathName(Pathname(newrl.getPathName()).asString());
-            if (newrl == uurl)
-            {
-              found = true;
-              break;
-            }
-          }
-        }
-      }
+	url::ViewOption urlview =
+	url::ViewOption::DEFAULTS + url::ViewOption::WITH_PASSWORD;
+	if (zypper.cOpts().count("loose-auth"))
+	{
+	  urlview = urlview
+	  - url::ViewOptions::WITH_PASSWORD
+	  - url::ViewOptions::WITH_USERNAME;
+	}
+	if (zypper.cOpts().count("loose-query"))
+	  urlview = urlview - url::ViewOptions::WITH_QUERY_STR;
 
-      if (found)
-      {
-        if (repo)
-          *repo = *known_it;
-        break;
-      }
-    }
-    catch(const url::UrlException &){}
+	// need to do asString(withurlview) comparison here because the user-given
+	// string is expected to have no credentials or query
+	if (!(urlview.has(url::ViewOptions::WITH_PASSWORD)
+	  && urlview.has(url::ViewOptions::WITH_QUERY_STR)))
+	{
+	  if (!known_it->baseUrlsEmpty())
+	  {
+	    for_(urlit, known_it->baseUrlsBegin(), known_it->baseUrlsEnd())
+	    {
+	      Url newrl(*urlit);
+	      newrl.setPathName(Pathname(newrl.getPathName()).asString());
+	      if (newrl.asString(urlview) == uurl.asString(urlview))
+	      {
+		found = true;
+		break;
+	      }
+	    }
+	  }
+	}
+	// ordinary == comparison suffices here (quicker)
+	else
+	{
+	  if (!known_it->baseUrlsEmpty())
+	  {
+	    for_(urlit, known_it->baseUrlsBegin(), known_it->baseUrlsEnd())
+	    {
+	      Url newrl(*urlit);
+	      newrl.setPathName(Pathname(newrl.getPathName()).asString());
+	      if (newrl == uurl)
+	      {
+		found = true;
+		break;
+	      }
+	    }
+	  }
+	}
 
-  } // END for all known repos
+	if (found)
+	{
+	  if (repo)
+	    *repo = *known_it;
+	  break;
+	}
+      }
+      catch(const url::UrlException &){}
+
+    } // END for all known repos
+  }
+  catch(const url::UrlException &){}
 
   return found;
 }
