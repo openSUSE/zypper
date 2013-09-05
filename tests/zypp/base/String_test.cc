@@ -276,8 +276,30 @@ BOOST_AUTO_TEST_CASE(hexencode_hexdecode)
   }
 
   std::string d( str::hexdecode( e ) );
+  // decoded equals original
   BOOST_CHECK( o == d );
-//   for ( unsigned i = 0; i < 255; ++i )
-//     if ( o[i] != d[i] )
-//       WAR << i << " " << unsigned(o[i]) << " != " << unsigned(d[i]) << endl;
+
+  // Test %XX is decoded for hexdigits only
+  const char *const dig = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+  for ( const char * d1 = dig; *d1; ++d1 )
+    for ( const char * d2 = dig; *d2; ++d2 )
+    {
+      std::string eu( "%" );
+      eu += *d1; eu += *d2;
+      std::string el( str::toLower(eu) );
+
+      std::string u( str::hexdecode( eu ) );
+      std::string l( str::hexdecode( el ) );
+
+      if ( *d1 <= 'F' &&  *d2 <= 'F' )
+      {
+	BOOST_CHECK_EQUAL( u, l );		// no matter if upper or lower case hexdigit
+	BOOST_CHECK_EQUAL( u.size(), 1 );	// size 1 == decoded
+      }
+      else
+      {
+	BOOST_CHECK_EQUAL( u, eu );		// no hexdigits remain unchanged
+	BOOST_CHECK_EQUAL( l, el );
+     }
+    }
 }
