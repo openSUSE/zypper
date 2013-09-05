@@ -48,5 +48,8 @@ BOOST_AUTO_TEST_CASE(publickey_test)
   BOOST_CHECK_EQUAL( k2.gpgPubkeyRelease(), "4be01af3" );
   BOOST_CHECK_EQUAL( k2.created(), zypp::Date(1272978163) );
   BOOST_CHECK_EQUAL( k2.expires(), zypp::Date(1399122163) );
+
+  k2 = zypp::PublicKey(DATADIR/"multikey2.asc");
+  BOOST_CHECK_EQUAL( k2.hiddenKeys().size(), 8 );
 }
 

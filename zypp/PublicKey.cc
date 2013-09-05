@@ -170,11 +170,13 @@ namespace zypp
   ///////////////////////////////////////////////////////////////////
   struct PublicKeyScanner::Impl
   {
-    std::vector<std::string>				_words;
-    enum { pNONE, pPUB, pSIG, pFPR, pUID, pSUB }	_parseEntry;
+    std::vector<std::string>			_words;
+    enum { pNONE, pPUB, pSIG, pFPR, pUID }	_parseEntry;
+    bool 					_parseOff;	// no 'sub:' key parsing
 
    Impl()
       : _parseEntry( pNONE )
+      , _parseOff( false )
     {}
 
     void scan( std::string & line_r, std::list<PublicKeyData> & keys_r )
@@ -187,29 +189,43 @@ namespace zypp
       // sig:::17:A84EDAE89C800ACA:1318348291:::::[selfsig]::13x:
       // sub:-:2048:16:197448E88495160C:971961490:1214043258::: [expires: 2008-06-21]
       // sig:::17:A84EDAE89C800ACA:1087899258:::::[keybind]::18x:
-      if ( _parseEntry == pSUB )
-	return;		// don't parse in subkeys
-
       if ( line_r.empty() )
 	return;
 
-      // quick check for interesting entries
+      // quick check for interesting entries, no parsing in subkeys
       _parseEntry = pNONE;
       switch ( line_r[0] )
       {
-	#define DOTEST( C1, C2, C3, E ) case C1: if ( line_r[1] == C2 && line_r[2] == C3 && line_r[3] == ':' ) _parseEntry = E; break
-	DOTEST( 'p', 'u', 'b', pPUB );
-	DOTEST( 's', 'i', 'g', pSIG );
-	DOTEST( 'f', 'p', 'r', pFPR );
-	DOTEST( 'u', 'i', 'd', pUID );
-	#undef DOTEST
+	case 'p':
+	  if ( line_r[1] == 'u' && line_r[2] == 'b' && line_r[3] == ':' )
+	  {
+	    _parseEntry = pPUB;
+	    _parseOff = false;
+	  }
+	  break;
+
+	case 'f':
+	  if ( line_r[1] == 'p' && line_r[2] == 'r' && line_r[3] == ':' )
+	    _parseEntry = pFPR;
+	  break;
+
+	case 'u':
+	  if ( line_r[1] == 'i' && line_r[2] == 'd' && line_r[3] == ':' )
+	    _parseEntry = pUID;
+	  break;
+
+	case 's':
+	  if ( line_r[1] == 'i' && line_r[2] == 'g' && line_r[3] == ':' )
+	    _parseEntry = pSIG;
+	  else if ( line_r[1] == 'u' && line_r[2] == 'b' && line_r[3] == ':' )
+	    _parseOff = true;
+	  break;
+
+	default:
+	  return;
       }
-      if ( _parseEntry == pNONE )
-      {
-	if ( line_r[0] == 's' && line_r[1] == 'u' && line_r[2] == 'b' && line_r[3] == ':' )
-	  _parseEntry = pSUB;
+      if ( _parseOff || _parseEntry == pNONE )
 	return;
-      }
 
       if ( line_r[line_r.size()-1] == '\n' )
 	line_r.erase( line_r.size()-1 );
@@ -252,7 +268,6 @@ namespace zypp
 	  break;
 
 	case pNONE:
-	case pSUB:
 	  break;	// intentionally no default:
       }
     }
@@ -343,8 +358,7 @@ namespace zypp
           "--no-tty",
           "--no-greeting",
           "--batch",
-          "--status-fd",
-          "1",
+          "--status-fd", "1",
           _dataFile.path().asString().c_str(),
           NULL
         };
