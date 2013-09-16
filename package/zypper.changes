@@ -1,4 +1,11 @@
 -------------------------------------------------------------------
+Mon Sep 16 18:36:10 CEST 2013 - ma@suse.de
+
+- Fix 'zypper --root sh' creating the zypp lockfile outside the
+  chroot (bnc#575096)
+- version 1.8.17
+
+-------------------------------------------------------------------
 Thu Aug  1 01:14:53 CEST 2013 - ma@suse.de
 
 - Update zypper-po.tar.bz2
