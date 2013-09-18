@@ -887,6 +887,8 @@ namespace zypp
   void ZConfig::resetSolverUpgradeRemoveDroppedPackages()		{ _pimpl->solverUpgradeRemoveDroppedPackages.restoreToDefault(); }
 
   const std::set<std::string> & ZConfig::multiversionSpec() const	{ return _pimpl->multiversion(); }
+  void ZConfig::multiversionSpec( std::set<std::string> new_r )		{ _pimpl->multiversion().swap( new_r ); }
+  void ZConfig::clearMultiversionSpec()					{ _pimpl->multiversion().clear(); }
   void ZConfig::addMultiversionSpec( const std::string & name_r )	{ _pimpl->multiversion().insert( name_r ); }
   void ZConfig::removeMultiversionSpec( const std::string & name_r )	{ _pimpl->multiversion().erase( name_r ); }
 

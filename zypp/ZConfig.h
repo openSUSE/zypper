@@ -324,6 +324,8 @@ namespace zypp
        */
       //@{
       const std::set<std::string> & multiversionSpec() const;
+      void multiversionSpec( std::set<std::string> new_r );
+      void clearMultiversionSpec();
       void addMultiversionSpec( const std::string & name_r );
       void removeMultiversionSpec( const std::string & name_r );
       //@}
