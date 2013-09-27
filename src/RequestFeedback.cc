@@ -73,8 +73,10 @@ string SolverRequester::Feedback::asUserString(
 
   case NOT_INSTALLED:
     if (_reqpkg.orig_str.find_first_of("?*") != string::npos) // wildcards used
-      return str::form(
-        _("No package matching '%s' are installed."), _reqpkg.orig_str.c_str());
+      // Do not return anything for regexes as solver report for every matched
+      // package if it is installed or not resulting in multiple useless
+      // messages see BNC#725872
+      return "";
     else
       return str::form(
         _("Package '%s' is not installed."), _reqpkg.orig_str.c_str());
