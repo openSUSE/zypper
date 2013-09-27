@@ -270,11 +270,16 @@ string SolverRequester::Feedback::asUserString(
 void SolverRequester::Feedback::print(
     Out & out, const SolverRequester::Options & opts) const
 {
+  const string &msg = asUserString(opts);
+
+  if (msg.empty())
+    return;
+
   switch (_id)
   {
   case NOT_FOUND_NAME:
   case NOT_FOUND_CAP:
-    out.error(asUserString(opts));
+    out.error(msg);
     break;
   case NOT_FOUND_NAME_TRYING_CAPS:
   case NOT_INSTALLED:
@@ -292,19 +297,19 @@ void SolverRequester::Feedback::print(
   case PATCH_WRONG_CAT:
   case PATCH_TOO_NEW:
   case FORCED_INSTALL:
-    out.info(asUserString(opts));
+    out.info(msg);
     break;
   case SET_TO_INSTALL:
   case SET_TO_REMOVE:
   case ADDED_REQUIREMENT:
   case ADDED_CONFLICT:
-    out.info(asUserString(opts), Out::HIGH);
+    out.info(msg, Out::HIGH);
     break;
   case INSTALLED_LOCKED:
-    out.warning(asUserString(opts), Out::HIGH);
+    out.warning(msg, Out::HIGH);
     break;
   case PATCH_INTERACTIVE_SKIPPED:
-    out.warning(asUserString(opts));
+    out.warning(msg);
     break;
   default:
     INT << "unknown feedback id? " << _id << endl;
