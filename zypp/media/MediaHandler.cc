@@ -509,7 +509,7 @@ MediaHandler::checkAttached(bool matchMountFs) const
 {
   bool _isAttached = false;
 
-  AttachedMedia ref( attachedMedia());
+  AttachedMedia ref( attachedMedia() );
   if( ref.mediaSource )
   {
     time_t old_mtime = _attach_mtime;
@@ -529,11 +529,13 @@ MediaHandler::checkAttached(bool matchMountFs) const
       MountEntries entries( MediaManager::getMountEntries());
       for_( e, entries.begin(), entries.end() )
       {
+	if ( ref.attachPoint->path != Pathname(e->dir) )
+	  continue;	// at least the mount points must match
+
         bool        is_device = false;
         PathInfo    dev_info;
-
         if( str::hasPrefix( Pathname(e->src).asString(), "/dev/" ) &&
-            dev_info(e->src) && dev_info.isBlk())
+            dev_info(e->src) && dev_info.isBlk() )
         {
           is_device = true;
         }
@@ -544,8 +546,7 @@ MediaHandler::checkAttached(bool matchMountFs) const
           std::string mtype(matchMountFs ? e->type : ref.mediaSource->type);
           MediaSource media(mtype, e->src, dev_info.major(), dev_info.minor());
 
-          if( ref.mediaSource->equals( media) &&
-              ref.attachPoint->path == Pathname(e->dir))
+          if( ref.mediaSource->equals( media ) )
           {
             DBG << "Found media device "
                 << ref.mediaSource->asString()
@@ -569,24 +570,34 @@ MediaHandler::checkAttached(bool matchMountFs) const
 		matchMountFs = false;
 	      else if ( ( e->type == "cifs" || e->type == "smb" ) && ( ref.mediaSource->type == "cifs" || ref.mediaSource->type == "smb" ) )
 		matchMountFs = false;
+	      else
+		continue;	// different types cannot match
 	    }
-	    std::string mtype(matchMountFs ? e->type : ref.mediaSource->type);
-	    MediaSource media(mtype, e->src);
+	    // Here: Types are ok or not to check.
+	    // Check the name except for nfs (bnc#804544; symlink resolution in mount path)
+	    //
+	    //   [fibonacci]$ ls -l /Local/ma/c12.1
+	    //   lrwxrwxrwx  /Local/ma/c12.1 -> zypp-SuSE-Code-12_1-Branch/
+	    //
+	    //   [localhost]$ mount -t nfs4 fibonacci:/Local/ma/c12.1 /mnt
+	    //   [localhost]$ mount
+	    //   fibonacci:/Local/ma/zypp-SuSE-Code-12_1-Branch on /mnt
 
-	    if( ref.mediaSource->equals( media) &&
-                ref.attachPoint->path == Pathname(e->dir))
+	    // std::string mtype(matchMountFs ? e->type : ref.mediaSource->type);
+	    // MediaSource media(mtype, e->src);
+
+	    if( ref.mediaSource->name == e->src || str::hasPrefix( ref.mediaSource->type, "nfs" ) )
 	    {
 	      DBG << "Found media name "
-                  << ref.mediaSource->asString()
-                  << " in the mount table as " << e->src << std::endl;
+	      << ref.mediaSource->asString()
+	      << " in the mount table as " << e->src << std::endl;
 	      _isAttached = true;
 	      break;
 	    }
 	  }
 	  else
 	  {
-	    if(ref.mediaSource->bdir == e->src &&
-	       ref.attachPoint->path == Pathname(e->dir))
+	    if ( ref.mediaSource->bdir == e->src )
 	    {
 	      DBG << "Found bound media "
 	          << ref.mediaSource->asString()
