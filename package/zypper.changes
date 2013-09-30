@@ -1,4 +1,10 @@
 -------------------------------------------------------------------
+Mon Sep 30 15:59:18 CEST 2013 - ma@suse.de
+
+- Avoid duplicated product entries (bnc#841473)
+- version 1.6.176
+
+-------------------------------------------------------------------
 Wed Jun 19 12:23:44 CEST 2013 - ma@suse.de
 
 - Set default zypper.log mode to 0640 (bnc#825490)
