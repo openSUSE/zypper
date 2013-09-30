@@ -791,13 +791,17 @@ static void list_product_table(Zypper & zypper)
       {
         if (identical(installed, pi))
         {
-          if (notinst_only)
+          if (notinst_only || !missedInstalled)
             continue;
           tr << "i";
           // this is needed, other isTargetDistribution would not return
           // true for the installed base product
           product = asKind<Product>(installed);
           missedInstalled = false;
+	  // bnc#841473: Downside of reporting the installed product (repo: @System)
+	  // instead of the available one (repo the product originated from) is that
+	  // you see multiple identical '@System' entries if multiple repos contain
+	  // the same product. Thus don't report again, if !missedInstalled.
         }
         else
         {
