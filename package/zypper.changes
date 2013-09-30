@@ -1,4 +1,15 @@
 -------------------------------------------------------------------
+Mon Sep 30 14:28:06 CEST 2013 - ma@suse.de
+
+- Suppress duplicate "No package matching" messages (bnc#725872)
+- Fix 'zypper --root sh' creating the zypp lockfile outside chroot (bnc#575096)
+- Fix exception thrown if no config file exists, that's no error.
+- correct command help for search option --suggests
+- add --orphaned, --suggested, --recommended, --unneeded to 'zypper packages'
+- Fix inappropriate message about not installed recommend package (bnc#826973)
+- version 1.9.2
+
+-------------------------------------------------------------------
 Sun Sep 29 01:15:27 CEST 2013 - ma@suse.de
 
 - Update zypper-po.tar.bz2
