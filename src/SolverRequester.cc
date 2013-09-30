@@ -149,6 +149,7 @@ void SolverRequester::install(const PackageSpec & pkg)
     PoolItemBest bestMatches(q.begin(), q.end());
     if (!bestMatches.empty())
     {
+      unsigned notInstalled = 0;
       for_(sit, bestMatches.begin(), bestMatches.end())
       {
         Selectable::Ptr s(asSelectable()(*sit));
@@ -197,8 +198,17 @@ void SolverRequester::install(const PackageSpec & pkg)
             MIL << "installing " << *sit << endl;
           }
           else
-            addFeedback(Feedback::NOT_INSTALLED, pkg);
+	  {
+	    ++notInstalled;
+            // addFeedback(Feedback::NOT_INSTALLED, pkg);
+	    // delay Feedback::NOT_INSTALLED until we know
+	    // there is not a single match installed.
+	  }
         }
+      }
+      if ( notInstalled == bestMatches.size() )
+      {
+	addFeedback(Feedback::NOT_INSTALLED, pkg);
       }
       return;
     }
