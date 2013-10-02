@@ -1,4 +1,12 @@
 -------------------------------------------------------------------
+Wed Oct  2 19:25:58 CEST 2013 - ma@suse.de
+
+- fix handling symlinks in export pathname on NFSv4 (bnc#804544)
+- Bump major version for Factory
+  13.1 is continued on SuSE-Code-13_1-Branch
+- version 14.0.0 (0)
+
+-------------------------------------------------------------------
 Sun Sep 29 01:15:02 CEST 2013 - ma@suse.de
 
 - Update zypp-po.tar.bz2
