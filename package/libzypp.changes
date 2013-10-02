@@ -1,4 +1,9 @@
 -------------------------------------------------------------------
+Thu Oct  3 01:14:59 CEST 2013 - ma@suse.de
+
+- Update zypp-po.tar.bz2
+
+-------------------------------------------------------------------
 Wed Oct  2 19:25:58 CEST 2013 - ma@suse.de
 
 - fix handling symlinks in export pathname on NFSv4 (bnc#804544)
