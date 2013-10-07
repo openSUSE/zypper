@@ -1,4 +1,12 @@
 -------------------------------------------------------------------
+Mon Oct  7 12:16:18 CEST 2013 - ma@suse.de
+
+- Avoid duplicated product entries (bnc#841473)
+- Bump  version for Factory
+  13.1 is continued on SuSE-Code-13_1-Branch
+- version 1.10.0
+
+-------------------------------------------------------------------
 Sun Oct  6 01:14:52 CEST 2013 - ma@suse.de
 
 - Update zypper-po.tar.bz2
