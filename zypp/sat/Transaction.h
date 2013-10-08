@@ -34,6 +34,8 @@ namespace zypp
   namespace sat
   { /////////////////////////////////////////////////////////////////
 
+    class Queue;
+
     namespace detail
     {
       /** Needs to be outside \ref Transaction in order to be usable in SolvIterMixin. */
@@ -169,6 +171,12 @@ namespace zypp
 	action_iterator actionEnd() const;
 
 	//@}
+
+      public:
+	/** Return all packages that would be installed after the transaction is run.
+	 * The new packages are put at the head of the queue, the number of new
+	 * packages is returned. (wraps libsolv::transaction_installedresult) */
+	int installedResult( Queue & result_r ) const;
 
       public:
         /** Implementation  */

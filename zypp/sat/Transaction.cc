@@ -186,6 +186,10 @@ namespace zypp
 	{ detail::IdType * it( _find( solv_r ) ); return it ? iterator( self_r, it ) : end( self_r ); }
 
       public:
+	int installedResult( Queue & result_r ) const
+	{ return ::transaction_installedresult( _trans, result_r ); }
+
+      public:
 	StepType stepType( Solvable solv_r ) const
 	{
 	  if ( ! solv_r )
@@ -338,6 +342,10 @@ namespace zypp
 
     Transaction::iterator Transaction::find( const sat::Solvable & solv_r )
     { return _pimpl->find( _pimpl, solv_r ); }
+
+    int Transaction::installedResult( Queue & result_r ) const
+    { return _pimpl->installedResult( result_r ); }
+
 
     std::ostream & operator<<( std::ostream & str, const Transaction & obj )
     { return str << *obj._pimpl; }
