@@ -150,7 +150,7 @@ namespace zypp
 
       /** Whether the header list contains at least one entry for \c key_r. */
       bool hasKey( const std::string & key_r ) const
-      { return keyEmpty( key_r ); }
+      { return ! keyEmpty( key_r ); }
 
       /** \overload */
       bool keyEmpty( const std::string & key_r ) const
