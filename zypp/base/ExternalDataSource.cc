@@ -7,10 +7,7 @@
 |                                                                      |
 \---------------------------------------------------------------------*/
 /** \file zypp/base/ExternalDataSource.cc
- *
- * \todo replace by Blocxx
- *
-*/
+ */
 
 #define _GNU_SOURCE 1 // for ::getline
 

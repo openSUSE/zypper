@@ -7,10 +7,7 @@
 |                                                                      |
 \---------------------------------------------------------------------*/
 /** \file zypp/base/ExternalDataSource.h
- *
- * \todo replace by Blocxx
- *
-*/
+ */
 
 #ifndef ZYPP_EXTERNALDATASOURCE_H
 #define ZYPP_EXTERNALDATASOURCE_H
@@ -30,11 +27,11 @@ namespace zypp {
     protected:
       FILE *inputfile;
       FILE *outputfile;
-    
+
     private:
       char *linebuffer;
       size_t linebuffer_size;
-    
+
     public:
       /**
        * Create a new instance.
@@ -43,25 +40,25 @@ namespace zypp {
        * Either can be NULL if no reading/writing is allowed.
        */
       ExternalDataSource(FILE *inputfile = 0, FILE *outputfile = 0);
-    
+
       /**
        * Implicitly close the connection.
        */
       virtual ~ExternalDataSource();
-    
+
       /**
        * Send some data to the output stream.
        * @param buffer The data to send
        * @param length The size of it
        */
       bool send (const char *buffer, size_t length);
-    
+
       /**
        * Send some data down the stream.
        * @param string The data to send
        */
       bool send (std::string s);
-    
+
       /**
        * Read some data from the input stream.
        * @param buffer Where to put the data
@@ -69,13 +66,13 @@ namespace zypp {
        * Returns the amount actually received
        */
       size_t receive(char *buffer, size_t length);
-    
+
       /**
        * Read one line from the input stream.
        * Returns the line read, including the terminator.
        */
       std::string receiveLine();
-    
+
       /**
        * Read characters into a string until character c is
        * read. C is put at the end of the string.
@@ -87,17 +84,17 @@ namespace zypp {
        * This is the initial default.
        */
       void setBlocking(bool mode);
-    
+
       /**
        * Close the input and output streams.
        */
       virtual int close();
-    
+
       /**
        * Return the input stream.
        */
       FILE *inputFile() const  { return inputfile; }
-    
+
       /**
        * Return the output stream.
        */
