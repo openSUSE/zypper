@@ -83,19 +83,34 @@ namespace zypp
        */
       ManagedFile providePackage() const;
 
+      /** Provide the package if it is cached. */
+      ManagedFile providePackageFromCache() const
+      {
+	ManagedFile ret( doProvidePackageFromCache() );
+	if ( ! ( ret->empty() ||  _package->repoInfo().keepPackages() ) )
+	  ret.setDispose( filesystem::unlink );
+	return ret;
+      }
+
+      /** Whether the package is cached. */
+      bool isCached() const
+      { return ! doProvidePackageFromCache()->empty(); }
+
     protected:
       typedef PackageProvider::Impl	Base;
       typedef callback::SendReport<repo::DownloadResolvableReport>	Report;
 
       /** Lookup the final rpm in cache.
        *
-       * A non empty ManagedFile will be returned to the caller. File disposal
-       * depending on the repos keepPackages setting are handled in \ref providePackage.
+       * A non empty ManagedFile will be returned to the caller.
+       *
+       * \note File disposal depending on the repos keepPackages setting
+       * are not set here, but in \ref providePackage or \ref providePackageFromCache.
        *
        * \note The provoided default implementation returns an empty ManagedFile
        * (cache miss).
        */
-      virtual ManagedFile providePackageFromCache() const = 0;
+      virtual ManagedFile doProvidePackageFromCache() const = 0;
 
       /** Actually provide the final rpm.
        * Report start/problem/finish and retry loop are hadled by \ref providePackage.
@@ -174,7 +189,7 @@ namespace zypp
     ///////////////////////////////////////////////////////////////////
 
     /** Default implementation (cache miss). */
-    ManagedFile PackageProvider::Impl::providePackageFromCache() const
+    ManagedFile PackageProvider::Impl::doProvidePackageFromCache() const
     { return ManagedFile(); }
 
     /** Default implementation (provide full package) */
@@ -193,6 +208,15 @@ namespace zypp
 
     ManagedFile PackageProvider::Impl::providePackage() const
     {
+      // check for cache hit:
+      ManagedFile ret( providePackageFromCache() );
+      if ( ! ret->empty() )
+      {
+	MIL << "provided Package from cache " << _package << " at " << ret << endl;
+	return ret; // <-- cache hit
+      }
+
+      // HERE: cache misss, do download:
       Url url;
       RepoInfo info = _package->repoInfo();
       // FIXME we only support the first url for now.
@@ -201,19 +225,6 @@ namespace zypp
       else
         url = * info.baseUrlsBegin();
 
-      // check for cache hit:
-      ManagedFile ret( providePackageFromCache() );
-      if ( ! ret.value().empty() )
-      {
-	if ( ! info.keepPackages() )
-	{
-	  ret.setDispose( filesystem::unlink );
-	}
-	MIL << "provided Package from cache " << _package << " at " << ret << endl;
-	return ret; // <-- cache hit
-      }
-
-      // HERE: cache misss, do download:
       MIL << "provide Package " << _package << endl;
       ScopedGuard guardReport( newReport() );
       do {
@@ -284,7 +295,7 @@ namespace zypp
       {}
 
     protected:
-      virtual ManagedFile providePackageFromCache() const;
+      virtual ManagedFile doProvidePackageFromCache() const;
 
       virtual ManagedFile doProvidePackage() const;
 
@@ -304,24 +315,9 @@ namespace zypp
     };
     ///////////////////////////////////////////////////////////////////
 
-    ManagedFile RpmPackageProvider::providePackageFromCache() const
+    ManagedFile RpmPackageProvider::doProvidePackageFromCache() const
     {
-      RepoInfo info = _package->repoInfo();
-      OnMediaLocation loc( _package->location() );
-      PathInfo cachepath( info.packagesPath() / loc.filename() );
-
-      if ( cachepath.isFile() && ! loc.checksum().empty() ) // accept cache hit with matching checksum only!
-             // Tempting to do a quick check for matching .rpm-filesize before computing checksum,
-      // but real life shows that loc.downloadSize() and the .rpm-filesize frequently do not
-      // match, even if loc.checksum() and the .rpm-files checksum do. Blame the metadata generator(s).
-      {
-	CheckSum cachechecksum( loc.checksum().type(), filesystem::checksum( cachepath.path(), loc.checksum().type() ) );
-	if ( cachechecksum == loc.checksum() )
-	{
-	  return ManagedFile( cachepath.path() );  // <-- cache hit
-	}
-      }
-      return ManagedFile();	// <-- cache miss
+      return ManagedFile( _package->cachedLocation() );
     }
 
     ManagedFile RpmPackageProvider::doProvidePackage() const
@@ -403,7 +399,7 @@ namespace zypp
       return ManagedFile( destination, filesystem::unlink );
     }
 
-
+#if 0
     ///////////////////////////////////////////////////////////////////
     /// \class PluginPackageProvider
     /// \brief Plugin PackageProvider implementation.
@@ -423,9 +419,9 @@ namespace zypp
       {}
 
     protected:
-      virtual ManagedFile providePackageFromCache() const
+      virtual ManagedFile doProvidePackageFromCache() const
       {
-	return Base::providePackageFromCache();
+	return Base::doProvidePackageFromCache();
       }
 
       virtual ManagedFile doProvidePackage() const
@@ -434,7 +430,7 @@ namespace zypp
       }
     };
     ///////////////////////////////////////////////////////////////////
-
+#endif
 
     ///////////////////////////////////////////////////////////////////
     //	class PackageProvider
@@ -461,6 +457,11 @@ namespace zypp
     ManagedFile PackageProvider::providePackage() const
     { return _pimpl->providePackage(); }
 
+    ManagedFile PackageProvider::providePackageFromCache() const
+    { return _pimpl->providePackageFromCache(); }
+
+    bool PackageProvider::isCached() const
+    { return _pimpl->isCached(); }
 
   } // namespace repo
   ///////////////////////////////////////////////////////////////////

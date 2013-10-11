@@ -70,8 +70,14 @@ namespace zypp
     public:
       /** Provide the package.
        * \throws Exception.
-      */
+       */
       ManagedFile providePackage() const;
+
+      /** Provide the package if it is cached. */
+      ManagedFile providePackageFromCache() const;
+
+      /** Whether the package is cached. */
+      bool isCached() const;
 
     public:
       class Impl;              ///< Implementation class.
