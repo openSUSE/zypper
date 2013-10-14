@@ -3252,7 +3252,7 @@ void load_repo_resolvables(Zypper & zypper)
       {
 
        zypper.out().warning(boost::str(format(
-              _("Repository '%s' appears to outdated. Consider using a different mirror or server."))
+              _("Repository '%s' appears to be outdated. Consider using a different mirror or server."))
               % (zypper.config().show_alias ? repo.alias() : repo.name())), Out::QUIET);
           WAR << format("Repository '%s' seems to be outdated")
               % repo.alias() << endl;
