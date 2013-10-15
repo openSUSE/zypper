@@ -83,6 +83,8 @@ const string PromptOptions::optionString() const
     if (shown_count)
       option_str << "/";
     fprint_color(option_str, "?", COLOR_CONTEXT_PROMPT_OPTION);
+    // translators: Press '?' to see all options embedded in this prompt: "Continue? [y/n/? shows all options] (y):"
+    option_str << " " << _("shows all options");
   }
 
   if (!_options.empty() && shown_count)
