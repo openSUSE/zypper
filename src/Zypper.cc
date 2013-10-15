@@ -31,6 +31,7 @@
 #include <zypp/base/DtorReset.h>
 
 #include <zypp/sat/SolvAttr.h>
+#include <zypp/AutoDispose.h>
 #include <zypp/PoolQuery.h>
 #include <zypp/Locks.h>
 #include <zypp/Edition.h>
@@ -4115,6 +4116,11 @@ void Zypper::doCommand()
       return;
     load_resolvables(*this);
     // needed to compute status of PPP
+    // Currently CleandepsOnRemove adds information about user selected packages,
+    // which enhances the computation of unneeded packages. Might be superfluous in the future.
+    AutoDispose<bool> restoreCleandepsOnRemove( God->resolver()->cleandepsOnRemove(),
+						bind( &Resolver::setCleandepsOnRemove, God->resolver(), _1 ) );
+    God->resolver()->setCleandepsOnRemove( true );
     resolve(*this);
 
     switch (command().toEnum())
