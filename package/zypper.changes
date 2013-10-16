@@ -1,4 +1,12 @@
 -------------------------------------------------------------------
+Wed Oct 16 11:05:36 CEST 2013 - ma@suse.de
+
+- Fix detection of multiversion packages in transaction summary (bnc#844373)
+- Improve prompt with more options hidden behind '?' (bnc#844373)
+- Fix message typo (bnc#845619)
+- version 1.8.18
+
+-------------------------------------------------------------------
 Thu Oct 10 01:15:20 CEST 2013 - ma@suse.de
 
 - Update zypper-po.tar.bz2
