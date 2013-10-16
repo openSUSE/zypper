@@ -84,17 +84,15 @@ void Summary::readPool(const zypp::ResPool & pool)
   _inst_size_change = ByteCount();
 
   // find multi-version packages, which actually have mult. versions installed
-  const set<string> & multies = ZConfig::instance().multiversionSpec();
-  for_(name, multies.begin(), multies.end())
+  for_( ident, sat::Pool::instance().multiversionBegin(), sat::Pool::instance().multiversionEnd() )
   {
-    ui::Selectable::Ptr s = pool.proxy().lookup(ResKind::package, *name);
+    ui::Selectable::Ptr s = pool.proxy().lookup(*ident);
     bool got_multi = s && (
         s->installedSize() > 1 ||
         (s->installedSize() == 1 && s->toInstall()) );
     if (got_multi)
-      multi_installed.insert(*name);
+      multi_installed.insert( s->name() );
   }
-
   // collect resolvables to be installed/removed
 
   KindToResObjectSet to_be_installed;
