@@ -1,4 +1,13 @@
 -------------------------------------------------------------------
+Wed Oct 16 11:04:56 CEST 2013 - ma@suse.de
+
+- Fix detection of multiversion packages in transaction summary (bnc#844373)
+- Improve prompt with more options hidden behind '?' (bnc#844373)
+- Fix message typo (bnc#845619)
+- Avoid duplicated product entries (bnc#841473)
+- version 1.9.3
+
+-------------------------------------------------------------------
 Mon Oct 14 13:35:39 CEST 2013 - ma@suse.de
 
 - Update zypper-po.tar.bz2
