@@ -1,4 +1,12 @@
 -------------------------------------------------------------------
+Wed Oct 16 11:06:54 CEST 2013 - ma@suse.de
+
+- Fix detection of multiversion packages in transaction summary (bnc#844373)
+- Improve prompt with more options hidden behind '?' (bnc#844373)
+- Fix message typo (bnc#845619)
+- version 1.6.310
+
+-------------------------------------------------------------------
 Mon Sep 30 15:56:57 CEST 2013 - ma@suse.de
 
 - Avoid duplicated product entries (bnc#841473)
