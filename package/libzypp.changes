@@ -1,4 +1,11 @@
 -------------------------------------------------------------------
+Thu Oct 17 17:57:54 CEST 2013 - ma@suse.de
+
+- Add Package isCached and cachedLocation methods
+- fixed PluginFrame::hasKey
+- version 14.1.0 (0)
+
+-------------------------------------------------------------------
 Thu Oct 10 01:13:48 CEST 2013 - ma@suse.de
 
 - Update zypp-po.tar.bz2
