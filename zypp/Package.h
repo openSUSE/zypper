@@ -122,6 +122,13 @@ namespace zypp
      */
     OnMediaLocation location() const;
 
+    /** Location of the downloaded package in cache or an empty path. */
+    Pathname cachedLocation() const;
+
+    /** Whether the package is cached. */
+    bool isCached() const
+    { return ! cachedLocation().empty(); }
+
   protected:
     friend Ptr make<Self>( const sat::Solvable & solvable_r );
     /** Ctor */

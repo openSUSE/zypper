@@ -9,6 +9,8 @@
 /** \file	zypp/Package.cc
  *
 */
+#include <fstream>
+
 #include "zypp/base/Logger.h"
 #include "zypp/base/String.h"
 #include "zypp/Package.h"
@@ -147,6 +149,43 @@ namespace zypp
 
   OnMediaLocation Package::location() const
   { return lookupLocation(); }
+
+  namespace
+  {
+    bool schemeIsLocalDir( const Url & url_r )
+    {
+      std::string s( url_r.getScheme() );
+      return s == "dir" || s == "file";
+    }
+  }
+
+  Pathname Package::cachedLocation() const
+  {
+    OnMediaLocation loc( location() );
+    PathInfo pi( repoInfo().packagesPath() / loc.filename() );
+
+    if ( ! pi.isExist() )
+      return Pathname();	// no file in cache
+
+    if ( loc.checksum().empty() )
+    {
+      Url url( repoInfo().url() );
+      if ( ! schemeIsLocalDir( url ) )
+	return Pathname();	// same name but no checksum to verify
+
+      // for local repos compare with the checksum in repo
+      if ( CheckSum( CheckSum::md5Type(), std::ifstream( (url.getPathName() / loc.filename()).c_str() ) )
+	!= CheckSum( CheckSum::md5Type(), std::ifstream( pi.c_str() ) ) )
+	return Pathname();	// same name but wrong checksum
+    }
+    else
+    {
+      if ( loc.checksum() != CheckSum( loc.checksum().type(), std::ifstream( pi.c_str() ) ) )
+	return Pathname();	// same name but wrong checksum
+    }
+
+    return pi.path();		// the right one
+  }
 
   std::string Package::sourcePkgName() const
   {
