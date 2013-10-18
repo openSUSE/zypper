@@ -82,10 +82,8 @@ namespace zypp
     /** */
     class CommitPackageCacheReadAhead : public CommitPackageCache::Impl
     {
-      typedef std::map<PoolItem,ManagedFile>     CacheMap;
-
     public:
-      CommitPackageCacheReadAhead( const Pathname &        rootDir_r,
+      CommitPackageCacheReadAhead( const Pathname &        /*rootDir_r*/,
                                    const PackageProvider & packageProvider_r );
 
     public:
@@ -109,12 +107,8 @@ namespace zypp
 
     private:
       DefaultIntegral<unsigned,0> _dbgChanges;
-
-      IMediaKey                      _lastInteractive;
-
-      Pathname                       _rootDir;
-      shared_ptr<filesystem::TmpDir> _cacheDir;
-      CacheMap                       _cacheMap;
+      IMediaKey                   _lastInteractive;
+      //Pathname                    _rootDir;
     };
     ///////////////////////////////////////////////////////////////////
 

@@ -39,7 +39,7 @@ namespace zypp
       friend std::ostream & operator<<( std::ostream & str, const CommitPackageCache & obj );
 
     public:
-      typedef function<ManagedFile( const PoolItem & pi )> PackageProvider;
+      typedef function<ManagedFile( const PoolItem & pi, bool fromCache_r )> PackageProvider;
 
     public:
       /** Ctor */
@@ -59,6 +59,9 @@ namespace zypp
 
       /** Provide a package. */
       ManagedFile get( const PoolItem & citem_r );
+      /** \overload */
+      ManagedFile get( sat::Solvable citem_r )
+      { return get( PoolItem(citem_r) ); }
 
     public:
       /** Implementation. */

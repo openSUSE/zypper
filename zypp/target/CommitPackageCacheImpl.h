@@ -61,6 +61,9 @@ namespace zypp
       void setCommitList( std::vector<sat::Solvable> commitList_r )
       { _commitList = commitList_r; }
 
+      const std::vector<sat::Solvable> & commitList() const
+      { return _commitList; }
+
     protected:
       /** Let the Source provide the package. */
       virtual ManagedFile sourceProvidePackage( const PoolItem & pi ) const
@@ -70,7 +73,7 @@ namespace zypp
             ZYPP_THROW( Exception("No package provider configured.") );
           }
 
-        ManagedFile ret( _packageProvider( pi ) );
+        ManagedFile ret( _packageProvider( pi, /*cached only*/false ) );
         if ( ret.value().empty() )
           {
             ZYPP_THROW( Exception("Package provider failed.") );
@@ -79,10 +82,19 @@ namespace zypp
         return ret;
       }
 
-    protected:
-      std::vector<sat::Solvable> _commitList;
+      /** Let the Source provide an already cached package. */
+      virtual ManagedFile sourceProvideCachedPackage( const PoolItem & pi ) const
+      {
+        if ( ! _packageProvider )
+          {
+            ZYPP_THROW( Exception("No package provider configured.") );
+          }
+
+        return _packageProvider( pi, /*cached only*/true );
+      }
 
     private:
+      std::vector<sat::Solvable> _commitList;
       PackageProvider _packageProvider;
     };
     ///////////////////////////////////////////////////////////////////

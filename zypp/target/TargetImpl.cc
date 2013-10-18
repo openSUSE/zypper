@@ -770,30 +770,30 @@ namespace zypp
     */
     struct RepoProvidePackage
     {
-      ResPool _pool;
       repo::RepoMediaAccess &_access;
+      std::list<Repository> _repos;
+      repo::PackageProviderPolicy _packageProviderPolicy;
 
       RepoProvidePackage( repo::RepoMediaAccess &access, ResPool pool_r )
-        : _pool(pool_r), _access(access)
-      {}
-
-      ManagedFile operator()( const PoolItem & pi )
+      : _access(access), _repos( pool_r.knownRepositoriesBegin(), pool_r.knownRepositoriesEnd() )
       {
-        // Redirect PackageProvider queries for installed editions
-        // (in case of patch/delta rpm processing) to rpmDb.
-        repo::PackageProviderPolicy packageProviderPolicy;
-        packageProviderPolicy.queryInstalledCB( QueryInstalledEditionHelper() );
+	_packageProviderPolicy.queryInstalledCB( QueryInstalledEditionHelper() );
+      }
 
+      ManagedFile operator()( const PoolItem & pi, bool fromCache_r )
+      {
         Package::constPtr p = asKind<Package>(pi.resolvable());
-
-        // Build a repository list for repos
-        // contributing to the pool
-        std::list<Repository> repos( _pool.knownRepositoriesBegin(), _pool.knownRepositoriesEnd() );
-        repo::DeltaCandidates deltas(repos, p->name());
-        repo::PackageProvider pkgProvider( _access, p, deltas, packageProviderPolicy );
-
-        ManagedFile ret( pkgProvider.providePackage() );
-        return ret;
+	if ( fromCache_r )
+	{
+	  repo::PackageProvider pkgProvider( _access, p, repo::DeltaCandidates(), _packageProviderPolicy );
+	  return pkgProvider.providePackageFromCache();
+	}
+	else
+	{
+	  repo::DeltaCandidates deltas( _repos, p->name() );
+	  repo::PackageProvider pkgProvider( _access, p, deltas, _packageProviderPolicy );
+	  return pkgProvider.providePackage();
+	}
       }
     };
     ///////////////////////////////////////////////////////////////////
@@ -1353,7 +1353,7 @@ namespace zypp
 	// Prepare the package cache. Pass all items requiring download.
         repo::RepoMediaAccess access;
         RepoProvidePackage repoProvidePackage( access, pool_r );
-        CommitPackageCache packageCache( root() / "tmp", repoProvidePackage );
+        CommitPackageCache packageCache( root(), repoProvidePackage );
 	packageCache.setCommitList( steps.begin(), steps.end() );
 
         bool miss = false;
