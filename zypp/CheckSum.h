@@ -49,6 +49,13 @@ namespace zypp
      */
     CheckSum( const std::string & type, std::istream & input_r );
 
+#ifndef SWIG // Swig treats it as syntax error
+      /** Move Ctor */
+      CheckSum( const std::string & type, std::istream && input_r )
+      : CheckSum( type, input_r )
+      {}
+#endif
+
   public:
     static const std::string & md5Type();
     static const std::string & shaType();
