@@ -1,4 +1,9 @@
 -------------------------------------------------------------------
+Sun Oct 20 01:15:00 CEST 2013 - ma@suse.de
+
+- Update zypper-po.tar.bz2
+
+-------------------------------------------------------------------
 Wed Oct 16 11:05:36 CEST 2013 - ma@suse.de
 
 - Fix detection of multiversion packages in transaction summary (bnc#844373)
