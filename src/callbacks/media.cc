@@ -52,13 +52,16 @@ handle_common_options(unsigned reply, Url & url)
       Url newurl(get_text(_("New URI") + string(": "), url.asString()));
       url = newurl;
     }
+    // fall through
     case 1: /* retry */
       action = MediaChangeReport::RETRY;
       break;
     case 2: /* ignore */
       action = MediaChangeReport::IGNORE;
+      break;
     default:
       WAR << "invalid prompt reply: " << reply << endl;
+      break;
   }
   return action;
 }
@@ -274,12 +277,17 @@ ZmartRecipients::MediaChangeReportReceiver::requestMedia(
 
   // if an rpm download failed and user chose to ignore that, advice to
   // run zypper verify afterwards
-  if (action == MediaChangeReport::IGNORE
-      && zypper.runtimeData().action_rpm_download
-      && !zypper.runtimeData().seen_verify_hint)
-    print_verify_hint(Zypper::instance()->out());
+  if ( action == MediaChangeReport::IGNORE )
+  {
+    if ( zypper.runtimeData().action_rpm_download
+      && !zypper.runtimeData().seen_verify_hint )
+    {
+      print_verify_hint(Zypper::instance()->out());
+    }
+    zypper.requestExit(false);
+  }
 
-  if (action == MediaChangeReport::RETRY)
+  if ( action == MediaChangeReport::RETRY )
     zypper.requestExit(false);
 
   return action;
