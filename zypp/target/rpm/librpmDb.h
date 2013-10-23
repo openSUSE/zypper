@@ -79,7 +79,7 @@ private:
   static librpmDb::constPtr _defaultDb;
 
   /**
-   * Wheter access is blocked (no _defaultDb will be available).
+   * Whether access is blocked (no _defaultDb will be available).
    **/
   static bool _dbBlocked;
 

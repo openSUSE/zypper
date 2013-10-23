@@ -44,7 +44,7 @@ namespace zypp
     typedef std::map< _Tp, std::string > ValueMap;
 
   public:
-    /** Wheter not initialized (no (name,value) pair remembered) */
+    /** Whether not initialized (no (name,value) pair remembered) */
     bool empty() const
     { return( _nameMap.empty() && _valueMap.empty() ); }
 

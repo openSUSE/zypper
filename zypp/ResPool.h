@@ -307,7 +307,7 @@ namespace zypp
       */
       const LocaleSet & getRequestedLocales() const;
 
-      /** Wheter this \ref Locale is in the set of requested locales. */
+      /** Whether this \ref Locale is in the set of requested locales. */
       bool isRequestedLocale( const Locale & locale_r ) const;
 
       /** Get the set of available locales.
@@ -316,7 +316,7 @@ namespace zypp
        */
       const LocaleSet & getAvailableLocales() const;
 
-      /** Wheter this \ref Locale is in the set of available locales. */
+      /** Whether this \ref Locale is in the set of available locales. */
       bool isAvailableLocale( const Locale & locale_r ) const;
       //@}
 

@@ -1441,7 +1441,7 @@ void MediaCurl::doGetFileCopyFile( const Pathname & filename , const Pathname & 
           << " bytes." << endl;
 
       // the timeout is determined by the progress data object
-      // which holds wheter the timeout was reached or not,
+      // which holds whether the timeout was reached or not,
       // otherwise it would be a user cancel
       try {
         evaluateCurlCode( filename, ret, progressData.reached);

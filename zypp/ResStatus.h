@@ -37,7 +37,7 @@ namespace zypp
    *        nonrelevant: it is unimportant for the user
    *	    satisfied: it important nothing has to be done
    *	    broken: it is incomplete. So e.g. an update is needed
-   * \li \c TransactField Wheter to transact this resolvable
+   * \li \c TransactField Whether to transact this resolvable
    *        (delete if installed install if uninstalled).
    *        In case the resolvable is locked, only USER may modify the
    *        transact bit.

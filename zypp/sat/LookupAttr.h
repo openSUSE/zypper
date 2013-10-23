@@ -200,19 +200,19 @@ namespace zypp
       public:
         /** \name Where to search. */
         //@{
-        /** Wheter to search in \ref Pool. */
+        /** Whether to search in \ref Pool. */
         bool pool() const;
 
         /** Set search in \ref Pool (all repositories). */
         void setPool( Location = SOLV_ATTR );
 
-        /** Wheter to search in one \ref Repository. */
+        /** Whether to search in one \ref Repository. */
         Repository repo() const;
 
         /** Set search in one \ref Repository. */
         void setRepo( Repository repo_r, Location = SOLV_ATTR );
 
-        /** Wheter to search in one \ref Solvable. */
+        /** Whether to search in one \ref Solvable. */
         Solvable solvable() const;
 
         /** Set search in one \ref Solvable. */
@@ -459,7 +459,7 @@ namespace zypp
          * \endcode
          */
         //@{
-        /** Wheter the sub-structure is empty. */
+        /** Whether the sub-structure is empty. */
         bool subEmpty() const;
 
         /** Ammount of attributes in the sub-structure.

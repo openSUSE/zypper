@@ -143,7 +143,7 @@ namespace zypp
         bool isUpdateRepo() const;
 
         /**
-         * wether the repository claims to update something \ref prod
+         * whether the repository claims to update something \ref prod
          * with key \ref cpeid
          *
          * \see zypp::Product::cpeId()

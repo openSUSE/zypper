@@ -102,7 +102,7 @@ namespace zypp
     ReposToEnable::const_iterator reposToEnableBegin() const;
     ReposToEnable::const_iterator reposToEnableEnd() const;
 
-    /** Wheter \c alias_r is mentioned in ReposToEnable. */
+    /** Whether \c alias_r is mentioned in ReposToEnable. */
     bool repoToEnableFind( const std::string & alias_r ) const;
 
     /** Add \c alias_r to the set of ReposToEnable. */
@@ -126,7 +126,7 @@ namespace zypp
     ReposToDisable::const_iterator reposToDisableBegin() const;
     ReposToDisable::const_iterator reposToDisableEnd() const;
 
-    /** Wheter \c alias_r is mentioned in ReposToDisable. */
+    /** Whether \c alias_r is mentioned in ReposToDisable. */
     bool repoToDisableFind( const std::string & alias_r ) const;
 
     /** Add \c alias_r to the set of ReposToDisable. */

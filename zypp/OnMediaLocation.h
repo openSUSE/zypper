@@ -126,7 +126,7 @@ namespace zypp
     { _openchecksum = val_r; return *this; }
 
     /**
-     * Set the wether the resource is optional or not
+     * Set the whether the resource is optional or not
      * \see optional
      */
     OnMediaLocation & setOptional( bool val )

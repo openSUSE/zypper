@@ -35,7 +35,7 @@ namespace zypp
    * needs. As a convention, a zero sizes range indicates that you are just
    * able to send <em>'still alive'</em> triggers.
    *
-   * The counter should be updated in reasonable intervals. Don't mind wheter
+   * The counter should be updated in reasonable intervals. Don't mind whether
    * the counter value actually increased or not. ProgressData will recognize
    * your triggers and knows when to actually send notification to a consumer.
    *
@@ -292,18 +292,18 @@ namespace zypp
       value_type val() const
       { return _d->_val; }
 
-      /** @return Wheter <tt>[min,max]</tt> defines a nonempty range. */
+      /** @return Whether <tt>[min,max]</tt> defines a nonempty range. */
       bool hasRange() const
       { return min() != max(); }
 
-      /** @return Wheter \ref reportValue will return a percent value.
+      /** @return Whether \ref reportValue will return a percent value.
        * Same as \ref hasRange.
        *  \see \ref reportAlive
        */
       bool reportPercent() const
       { return hasRange(); }
 
-      /** @return Wheter \ref reportValue always returns -1, because we
+      /** @return Whether \ref reportValue always returns -1, because we
        * trigger 'still alive' messages. I.e. \ref hasrange is \c false.
        * \see \ref reportPercent
       */
