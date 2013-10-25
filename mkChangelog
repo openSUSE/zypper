@@ -127,7 +127,7 @@ git status --porcelain | grep '^[^ ?]' | grep -v "$VERSIONFILE\|$CHANGESFILE" &&
 
 # A tag for $LAST_RELEASE must exist!
 eval $(getversion)
-test -e ".git/refs/tags/$LAST_RELEASE" || {
+git rev-parse -q --verify "$LAST_RELEASE" >/dev/null || {
   Recho "!!!"
   Recho "!!! There is no LAST_RELEASE tag '$LAST_RELEASE'. Check manually. "
   Recho "!!! (git tag -m 'tagging $LAST_RELEASE' '$LAST_RELEASE' ?commit?)"
