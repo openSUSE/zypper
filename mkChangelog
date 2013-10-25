@@ -107,20 +107,41 @@ function newchangesentry() {
   echo ""
 }
 
+function is_fast_forward() {
+  git fetch
+  test "$(git rev-list HEAD..origin/$(git name-rev --name-only HEAD) --count)" == "0"
+}
+
+is_fast_forward || {
+  Recho "!!!"
+  Recho "!!! Branch is not fast-forward. Pull changes first."
+  Recho "!!!"
+  exit 7
+}
+
 git status --porcelain | grep '^[^ ?]' | grep -v "$VERSIONFILE\|$CHANGESFILE" && {
   Becho "!!! Files other than version and changes are added to the index."
   Becho "!!! Doing dryrun..."
   DRYRUN=1
 }
+
+# A tag for $LAST_RELEASE must exist!
+eval $(getversion)
+test -e ".git/refs/tags/$LAST_RELEASE" || {
+  Recho "!!!"
+  Recho "!!! There is no LAST_RELEASE tag '$LAST_RELEASE'. Check manually. "
+  Recho "!!! (git tag -m 'tagging $LAST_RELEASE' '$LAST_RELEASE' ?commit?)"
+  Recho "!!!"
+  exit 8
+}
+
 if [ "$DRYRUN" == "1" ]; then
-  eval $(getversion)
   newchangesentry
   sameVersion && {
     Becho "!!! Version is unchanged at $LAST_RELEASE ($LAST_COMPAT)."
   }
   exit 0
 fi
-
 
 # check version file
 #
@@ -129,15 +150,15 @@ while true; do
   # $LAST_COMPAT
   # $THIS_RELEASE
   # $THIS_COMPAT
-  eval $(getversion)
   sameVersion && {
     newchangesentry
     Becho "!!! Version is unchanged at $LAST_RELEASE ($LAST_COMPAT)."
-    read -n 1 -p "$(Gecho "(a)bort, (c)ontinue, (e)dit version: ")" RES
+    read -n 1 -p "$(Gecho "(a)bort, (c)ontinue, (e)dit version [e]: ")" RES
     echo
-    case "$RES" in
+    case "${RES:-e}" in
       [eE]*)
 	$EDITOR $VERSIONFILE
+	eval $(getversion)
 	continue
 	;;
       [cC])
@@ -163,9 +184,9 @@ while [ "$RES" == "e" ]; do
   $EDITOR $TMPFILE
   echo
   awk '{print}/^----------/{n=n+1; if ( n == 2 ) exit 0; }' $TMPFILE
-  read -n 1 -p "$(Gecho "(a)bort, (c)ontinue, (s)ubmitt, (e)dit : ")" RES
+  read -n 1 -p "$(Gecho "(a)bort, (c)ontinue, (s)ubmitt, (e)dit [e]: ")" RES
   echo
-  case "$RES" in
+  case "${RES:-e}" in
     [eE]*)
       RES=e
       ;;
