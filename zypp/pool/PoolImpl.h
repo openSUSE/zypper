@@ -373,10 +373,7 @@ namespace zypp
             bool addedItems = false;
             std::list<PoolItem> addedProducts;
 
-            if ( pool.capacity() != _store.capacity() )
-            {
-              _store.resize( pool.capacity() );
-            }
+	    _store.resize( pool.capacity() );
 
             if ( pool.capacity() )
             {
