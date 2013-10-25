@@ -1,4 +1,10 @@
 -------------------------------------------------------------------
+Fri Oct 25 14:21:31 CEST 2013 - ma@suse.de
+
+- Always properly initialize pool storage (bnc#846565)
+- version 14.1.1 (0)
+
+-------------------------------------------------------------------
 Thu Oct 17 17:57:54 CEST 2013 - ma@suse.de
 
 - Add Package isCached and cachedLocation methods
