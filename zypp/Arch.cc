@@ -137,77 +137,81 @@ ZYPP_DEFINE_ID_HASHABLE( zypp::Arch::CompatEntry );
 namespace zypp
 { /////////////////////////////////////////////////////////////////
 
+  // Builtin architecture STRING VALUES to be
+  // used in defCompatibleWith below!
+  //
+  // const IdString  _foo( "foo" );
+  // const Arch Arch_foo( _foo() );
+  //
+  // NOTE: Builtin CLASS Arch CONSTANTS are defined below.
+  //       You have to change them accordingly in Arch.h.
+  //
+  // NOTE: Thake care CompatBits::IntT is able to provide one
+  //       bit for each architecture.
+  //
+  #define DEF_BUILTIN(A) \
+  namespace { static inline const IdString & _##A () { static IdString __str(#A); return __str; } } \
+  const Arch Arch_##A( _##A() )
+
+  DEF_BUILTIN( noarch );
+
+  DEF_BUILTIN( i386 );
+  DEF_BUILTIN( i486 );
+  DEF_BUILTIN( i586 );
+  DEF_BUILTIN( i686 );
+  DEF_BUILTIN( athlon );
+  DEF_BUILTIN( x86_64 );
+
+  DEF_BUILTIN( pentium3 );
+  DEF_BUILTIN( pentium4 );
+
+  DEF_BUILTIN( s390 );
+  DEF_BUILTIN( s390x );
+
+  DEF_BUILTIN( ppc );
+  DEF_BUILTIN( ppc64 );
+  DEF_BUILTIN( ppc64p7 );
+
+  DEF_BUILTIN( ia64 );
+
+  DEF_BUILTIN( alphaev67 );
+  DEF_BUILTIN( alphaev6 );
+  DEF_BUILTIN( alphapca56 );
+  DEF_BUILTIN( alphaev56 );
+  DEF_BUILTIN( alphaev5 );
+  DEF_BUILTIN( alpha );
+
+  DEF_BUILTIN( sparc64v );
+  DEF_BUILTIN( sparcv9v );
+  DEF_BUILTIN( sparc64 );
+  DEF_BUILTIN( sparcv9 );
+  DEF_BUILTIN( sparcv8 );
+  DEF_BUILTIN( sparc );
+
+  DEF_BUILTIN( aarch64 );
+  DEF_BUILTIN( armv7tnhl );
+  DEF_BUILTIN( armv7thl );
+  DEF_BUILTIN( armv7nhl );
+  DEF_BUILTIN( armv7hl );
+  DEF_BUILTIN( armv7l );
+  DEF_BUILTIN( armv6hl );
+  DEF_BUILTIN( armv6l );
+  DEF_BUILTIN( armv5tejl );
+  DEF_BUILTIN( armv5tel );
+  DEF_BUILTIN( armv5l );
+  DEF_BUILTIN( armv4tl );
+  DEF_BUILTIN( armv4l );
+  DEF_BUILTIN( armv3l );
+
+  DEF_BUILTIN( sh3 );
+
+  DEF_BUILTIN( sh4 );
+  DEF_BUILTIN( sh4a );
+#undef DEF_BUILTIN
+
   ///////////////////////////////////////////////////////////////////
   namespace
   { /////////////////////////////////////////////////////////////////
-
-    // Builtin architecture STRING VALUES to be
-    // used in defCompatibleWith below!
-    //
-    // const IdString  _foo( "foo" );
-    //
-    // NOTE: Builtin CLASS Arch CONSTANTS are defined below.
-    //       You have to change them accordingly.
-    //
-    // NOTE: Thake care CompatBits::IntT is able to provide one
-    //       bit for each architecture.
-    //
-#define DEF_BUILTIN(A) static inline const IdString & _##A () { static IdString __str(#A); return __str; }
-    DEF_BUILTIN( noarch );
-
-    DEF_BUILTIN( i386 );
-    DEF_BUILTIN( i486 );
-    DEF_BUILTIN( i586 );
-    DEF_BUILTIN( i686 );
-    DEF_BUILTIN( athlon );
-    DEF_BUILTIN( x86_64 );
-
-    DEF_BUILTIN( pentium3 );
-    DEF_BUILTIN( pentium4 );
-
-    DEF_BUILTIN( s390 );
-    DEF_BUILTIN( s390x );
-
-    DEF_BUILTIN( ppc );
-    DEF_BUILTIN( ppc64 );
-    DEF_BUILTIN( ppc64p7 );
-
-    DEF_BUILTIN( ia64 );
-
-    DEF_BUILTIN( alphaev67 );
-    DEF_BUILTIN( alphaev6 );
-    DEF_BUILTIN( alphapca56 );
-    DEF_BUILTIN( alphaev56 );
-    DEF_BUILTIN( alphaev5 );
-    DEF_BUILTIN( alpha );
-
-    DEF_BUILTIN( sparc64v );
-    DEF_BUILTIN( sparcv9v );
-    DEF_BUILTIN( sparc64 );
-    DEF_BUILTIN( sparcv9 );
-    DEF_BUILTIN( sparcv8 );
-    DEF_BUILTIN( sparc );
-
-    DEF_BUILTIN( aarch64 );
-    DEF_BUILTIN( armv7tnhl );
-    DEF_BUILTIN( armv7thl );
-    DEF_BUILTIN( armv7nhl );
-    DEF_BUILTIN( armv7hl );
-    DEF_BUILTIN( armv7l );
-    DEF_BUILTIN( armv6hl );
-    DEF_BUILTIN( armv6l );
-    DEF_BUILTIN( armv5tejl );
-    DEF_BUILTIN( armv5tel );
-    DEF_BUILTIN( armv5l );
-    DEF_BUILTIN( armv4tl );
-    DEF_BUILTIN( armv4l );
-    DEF_BUILTIN( armv3l );
-
-    DEF_BUILTIN( sh3 );
-
-    DEF_BUILTIN( sh4 );
-    DEF_BUILTIN( sh4a );
-#undef DEF_BUILTIN
 
     ///////////////////////////////////////////////////////////////////
     //
@@ -402,60 +406,7 @@ namespace zypp
   ///////////////////////////////////////////////////////////////////
 
   const Arch Arch_empty ( IdString::Empty );
-  const Arch Arch_noarch( _noarch() );
-
-  const Arch Arch_i386( _i386() );
-  const Arch Arch_i486( _i486() );
-  const Arch Arch_i586( _i586() );
-  const Arch Arch_i686( _i686() );
-  const Arch Arch_athlon( _athlon() );
-  const Arch Arch_x86_64( _x86_64() );
-
-  const Arch Arch_pentium3( _pentium3() );
-  const Arch Arch_pentium4( _pentium4() );
-
-  const Arch Arch_s390( _s390() );
-  const Arch Arch_s390x( _s390x() );
-
-  const Arch Arch_ppc( _ppc() );
-  const Arch Arch_ppc64( _ppc64() );
-  const Arch Arch_ppc64p7( _ppc64p7() );
-
-  const Arch Arch_ia64( _ia64() );
-
-  const Arch Arch_alphaev67( _alphaev67() );
-  const Arch Arch_alphaev6( _alphaev6() );
-  const Arch Arch_alphapca56( _alphapca56() );
-  const Arch Arch_alphaev56( _alphaev56() );
-  const Arch Arch_alphaev5( _alphaev5() );
-  const Arch Arch_alpha( _alpha() );
-
-  const Arch Arch_sparc64v( _sparc64v() );
-  const Arch Arch_sparc64( _sparc64() );
-  const Arch Arch_sparcv9v( _sparcv9v() );
-  const Arch Arch_sparcv9( _sparcv9() );
-  const Arch Arch_sparcv8( _sparcv8() );
-  const Arch Arch_sparc( _sparc() );
-
-  const Arch Arch_aarch64( _aarch64() );
-  const Arch Arch_armv7tnhl( _armv7tnhl() );
-  const Arch Arch_armv7thl( _armv7thl() );
-  const Arch Arch_armv7nhl ( _armv7nhl() );
-  const Arch Arch_armv7hl ( _armv7hl() );
-  const Arch Arch_armv7l( _armv7l() );
-  const Arch Arch_armv6hl ( _armv6hl() );
-  const Arch Arch_armv6l( _armv6l() );
-  const Arch Arch_armv5tejl( _armv5tejl() );
-  const Arch Arch_armv5tel( _armv5tel() );
-  const Arch Arch_armv5l( _armv5l() );
-  const Arch Arch_armv4tl( _armv4tl() );
-  const Arch Arch_armv4l( _armv4l() );
-  const Arch Arch_armv3l( _armv3l() );
-
-  const Arch Arch_sh3( _sh3() );
-
-  const Arch Arch_sh4( _sh4() );
-  const Arch Arch_sh4a( _sh4a() );
+  // remaining Arch_* constants are defined by DEF_BUILTIN above.
 
   ///////////////////////////////////////////////////////////////////
   //
