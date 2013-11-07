@@ -172,6 +172,8 @@ namespace zypp
   DEF_BUILTIN( ppc64 );
   DEF_BUILTIN( ppc64p7 );
 
+  DEF_BUILTIN( ppc64le );
+
   DEF_BUILTIN( ia64 );
 
   DEF_BUILTIN( alphaev67 );
@@ -305,6 +307,8 @@ namespace zypp
         defCompatibleWith( _ppc(),		_noarch() );
         defCompatibleWith( _ppc64(),		_noarch(),_ppc() );
         defCompatibleWith( _ppc64p7(),		_noarch(),_ppc(),_ppc64() );
+        //
+        defCompatibleWith( _ppc64le(),		_noarch() );
         //
         defCompatibleWith( _alpha(),		_noarch() );
         defCompatibleWith( _alphaev5(),		_noarch(),_alpha() );
