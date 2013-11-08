@@ -686,8 +686,8 @@ SATResolver::solverInit(const PoolItemList & weakItems)
           if ( (*it)->onSystem() ) // (to install) or (not to delete)
           {
             Product::constPtr prodCand( (*it)->candidateAsKind<Product>() );
-            if ( ! prodCand || (*it)->identicalInstalledCandidate() )
-              continue; // product no longer available or unchanged
+            if ( ! prodCand )
+              continue; // product no longer available
 
             CapabilitySet droplist( prodCand->droplist() );
             dumpRangeLine( MIL << "Droplist for " << (*it)->candidateObj() << ": " << droplist.size() << " ", droplist.begin(), droplist.end() ) << endl;
