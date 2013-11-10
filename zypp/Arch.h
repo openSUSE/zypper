@@ -262,6 +262,9 @@ namespace zypp
   extern const Arch Arch_sh4;
   /** \relates Arch */
   extern const Arch Arch_sh4a;
+
+  /** \relates Arch */
+  extern const Arch Arch_m68k;
   //@}
 
   ///////////////////////////////////////////////////////////////////
