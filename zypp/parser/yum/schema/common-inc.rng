@@ -130,6 +130,7 @@
       <value>sh3</value>
       <value>sh4</value>
       <value>sh4a</value>
+      <value>m68k</value>
       <value>src</value>
     </choice>
   </define>

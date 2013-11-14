@@ -67,5 +67,6 @@ private.archenum = "noarch"
             | "sh3"
             | "sh4"
             | "sh4a"
+            | "m68k"
             | "src"
 
