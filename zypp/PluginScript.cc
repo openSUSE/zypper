@@ -27,6 +27,9 @@
 
 using std::endl;
 
+#undef  ZYPP_BASE_LOGGER_LOGGROUP
+#define ZYPP_BASE_LOGGER_LOGGROUP "zypp::plugin"
+
 ///////////////////////////////////////////////////////////////////
 namespace zypp
 { /////////////////////////////////////////////////////////////////
@@ -166,8 +169,7 @@ namespace zypp
   /** \relates PluginScrip::Impl Stream output */
   inline std::ostream & operator<<( std::ostream & str, const PluginScript::Impl & obj )
   {
-    return dumpRangeLine( str << "PluginScript[" << obj.getPid() << "] " << obj.script(),
-			  obj.args().begin(), obj.args().end() );
+    return str << "PluginScript[" << obj.getPid() << "] " << obj.script();
   }
 
   ///////////////////////////////////////////////////////////////////
@@ -217,7 +219,7 @@ namespace zypp
     _lastReturn.reset();
     _lastExecError.clear();
 
-    DBG << *this << endl;
+    dumpRangeLine( DBG << *this, _args.begin(), _args.end() ) << endl;
   }
 
   int PluginScript::Impl::close()
@@ -267,7 +269,7 @@ namespace zypp
       frame_r.writeTo( datas );
       datas.str().swap( data );
     }
-    DBG << "->send " << frame_r << endl;
+    DBG << *this << " ->send " << frame_r << endl;
 
     if ( PLUGIN_DEBUG )
     {
@@ -421,7 +423,7 @@ namespace zypp
     // DBG << " <-read " << data.size() << endl;
     std::istringstream datas( data );
     PluginFrame ret( datas );
-    DBG << "<-" << ret << endl;
+    DBG << *this << " <-" << ret << endl;
     return ret;
   }
 
