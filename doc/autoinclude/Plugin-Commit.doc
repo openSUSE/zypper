@@ -7,7 +7,7 @@
 <HR><!-- ====================================================================== -->
 \section intro Introduction
 
-This is a statefull plugin executed during \ref zypp::ZYpp::commit. At the beginning of a commit all plugins found in \c /usr/lib/zypp/plugins/commit are launched. The plugins will receive messages as commit proceeds. Unless otherwise specified messages received need to be confirmed by sending an \c ACC message. Sending back an \c ERROR message execution of the plugin will be canceled.
+This is a statefull plugin executed during \ref zypp::ZYpp::commit. At the beginning of a commit all plugins found in \c /usr/lib/zypp/plugins/commit are launched. The plugins will receive messages as commit proceeds. Unless otherwise specified messages received need to be confirmed by sending an \c ACC message. Sending back an unexpected or \c ERROR message execution of the plugin will be canceled.
 
 If you have e.g. \c zypp-plugin-python installed a basic commit plugin could look like this:
 
@@ -50,6 +50,58 @@ Sent as 1st message after the plugin was launched. Prepare your plugin and send 
 
 \li \c userdata:stringval Optional header sent if the application has provided a user data string. \see \ref zypp-userdata
 
+
+<HR><!-- ====================================================================== -->
+\section commitbegin COMMITBEGIN (added in v1)
+\verbatim
+COMMITBEGIN
+
+{
+"TransactionStepList": [ <TransactionStep>,... ]
+}
+^@
+\endverbatim
+Sent before installation actually starts. The body contains a JSON encoded object providing the \c TransactionStepList, basically the list of install/remove actions the the commit is going to perform. Each \c TransactionStep is encoded as JSON object:
+\verbatim
+<TransactionStep> = {
+  "type":     <TypeString>    # [optional]
+  "stage":    <StageString>   # [optional]
+  "solvable": <Solvable>
+}
+
+<TypeString> = <missing>      # ignore; implicit or non-package actions
+	     | "-"            # remove
+	     | "+"            # install
+	     | "M"            # multi version install; install keeping the old version; e.g. kernel
+
+<StageString> = <missing>     # todo
+              | "ok"          # done
+              | "err"         # failed
+
+<Solvable> = {
+  "n": <string>               # name
+  "e": <number>               # epoch if not 0 [optional]
+  "v": <string>               # version
+  "r": <string>               # release
+  "a": <string>               # architecture
+}
+\endverbatim
+
+\see \ref zypp::sat::Transaction::Step
+
+<HR><!-- ====================================================================== -->
+\section commitend COMMITEND (added in v1)
+\verbatim
+COMMITEND
+
+{
+"TransactionStepList": [ <TransactionStep>,... ]
+}
+^@
+\endverbatim
+Sent at the end of commit. The body contains a JSON encoded object providing the final \c TransactionStepList. The \c StepStage indicates whether the action succeeded, failed or was skipped (still 'todo').
+
+\see \ref commitbegin
 
 <HR><!-- ====================================================================== -->
 \section pluginend PLUGINEND

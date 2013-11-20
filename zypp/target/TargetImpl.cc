@@ -26,6 +26,7 @@
 #include "zypp/base/IOStream.h"
 #include "zypp/base/Functional.h"
 #include "zypp/base/UserRequestException.h"
+#include "zypp/base/Json.h"
 
 #include "zypp/ZConfig.h"
 #include "zypp/ZYppFactory.h"
@@ -64,6 +65,98 @@ using namespace std;
 namespace zypp
 { /////////////////////////////////////////////////////////////////
   ///////////////////////////////////////////////////////////////////
+  namespace json
+  {
+    // Lazy via template specialisation / should switch to overloading
+
+    template<>
+    inline std::string toJSON( const ZYppCommitResult::TransactionStepList & steps_r )
+    {
+      using sat::Transaction;
+      json::Array ret;
+
+      for ( const Transaction::Step & step : steps_r )
+	// ignore implicit deletes due to obsoletes and non-package actions
+	if ( step.stepType() != Transaction::TRANSACTION_IGNORE )
+	  ret.add( step );
+
+      return ret.asJSON();
+    }
+
+    /** See \ref commitbegin on page \ref plugin-commit for the specs. */
+    template<>
+    inline std::string toJSON( const sat::Transaction::Step & step_r )
+    {
+      static const std::string strType( "type" );
+      static const std::string strStage( "stage" );
+      static const std::string strSolvable( "solvable" );
+
+      static const std::string strTypeDel( "-" );
+      static const std::string strTypeIns( "+" );
+      static const std::string strTypeMul( "M" );
+
+      static const std::string strStageDone( "ok" );
+      static const std::string strStageFailed( "err" );
+
+      static const std::string strSolvableN( "n" );
+      static const std::string strSolvableE( "e" );
+      static const std::string strSolvableV( "v" );
+      static const std::string strSolvableR( "r" );
+      static const std::string strSolvableA( "a" );
+
+      using sat::Transaction;
+      json::Object ret;
+
+      switch ( step_r.stepType() )
+      {
+	case Transaction::TRANSACTION_IGNORE:	/*empty*/ break;
+	case Transaction::TRANSACTION_ERASE:	ret.add( strType, strTypeDel ); break;
+	case Transaction::TRANSACTION_INSTALL:	ret.add( strType, strTypeIns ); break;
+	case Transaction::TRANSACTION_MULTIINSTALL: ret.add( strType, strTypeMul ); break;
+      }
+
+      switch ( step_r.stepStage() )
+      {
+	case Transaction::STEP_TODO:		/*empty*/ break;
+	case Transaction::STEP_DONE:		ret.add( strStage, strStageDone ); break;
+	case Transaction::STEP_ERROR:		ret.add( strStage, strStageFailed ); break;
+      }
+
+      {
+	IdString ident;
+	Edition ed;
+	Arch arch;
+	if ( sat::Solvable solv = step_r.satSolvable() )
+	{
+	  ident	= solv.ident();
+	  ed	= solv.edition();
+	  arch	= solv.arch();
+	}
+	else
+	{
+	  // deleted package; post mortem data stored in Transaction::Step
+	  ident	= step_r.ident();
+	  ed	= step_r.edition();
+	  arch	= step_r.arch();
+	}
+
+	json::Object s {
+	  { strSolvableN, ident.asString() },
+	  { strSolvableV, ed.version() },
+	  { strSolvableR, ed.release() },
+	  { strSolvableA, arch.asString() }
+	};
+	if ( Edition::epoch_t epoch = ed.epoch() )
+	  s.add( strSolvableE, epoch );
+
+	ret.add( strSolvable, s );
+      }
+
+      return ret.asJSON();
+    }
+  } // namespace json
+  ///////////////////////////////////////////////////////////////////
+  ///////////////////////////////////////////////////////////////////
   namespace target
   { /////////////////////////////////////////////////////////////////
 
@@ -73,8 +166,6 @@ namespace zypp
     class CommitPlugins : private base::NonCopyable
     {
       public:
-
-      public:
 	/** Default ctor: Empty plugin list */
 	CommitPlugins()
 	{}
@@ -82,24 +173,31 @@ namespace zypp
 	/** Dtor: Send PLUGINEND message and close plugins. */
 	~CommitPlugins()
 	{
-	  for_( it, _scripts.begin(), _scripts.end() )
+	  if ( ! _scripts.empty() )
+	    send( PluginFrame( "PLUGINEND" ) );
+	  // ~PluginScript will disconnect all remaining plugins!
+	}
+
+	/** Whether no plugins are waiting */
+	bool empty() const
+	{ return _scripts.empty(); }
+
+
+	/** Send \ref PluginFrame to all open plugins.
+	 * Failed plugins are removed from the execution list.
+	 */
+	void send( const PluginFrame & frame_r )
+	{
+	  DBG << "+++++++++++++++ send " << frame_r << endl;
+	  for ( auto it = _scripts.begin(); it != _scripts.end(); )
 	  {
-	    MIL << "Unload plugin: " << *it << endl;
-	    try {
-	      it->send( PluginFrame( "PLUGINEND" ) );
-	      PluginFrame ret( it->receive() );
-	      if ( ! ret.isAckCommand() )
-	      {
-		WAR << "Failed to unload plugin: Bad plugin response." << endl;
-	      }
-	      it->close();
-	    }
-	    catch( const zypp::Exception &  )
-	    {
-	      WAR << "Failed to unload plugin." << endl;
-	    }
+	    doSend( *it, frame_r );
+	    if ( it->isOpen() )
+	      ++it;
+	    else
+	      it = _scripts.erase( it );
 	  }
-	  // _scripts dtor will disconnect all remaining plugins!
+	  DBG << "--------------- send " << frame_r << endl;
 	}
 
 	/** Find and launch plugins sending PLUGINSTART message.
@@ -111,6 +209,7 @@ namespace zypp
 	void load( const Pathname & path_r )
 	{
 	  PathInfo pi( path_r );
+	  DBG << "+++++++++++++++ load " << pi << endl;
 	  if ( pi.isDir() )
 	  {
 	    std::list<Pathname> entries;
@@ -137,33 +236,55 @@ namespace zypp
 	  {
 	    WAR << "Plugin path is neither dir nor file: " << pi << endl;
 	  }
+	  DBG << "--------------- load " << pi << endl;
 	}
 
       private:
+	/** Send \ref PluginFrame and expect valid answer (ACK|_ENOMETHOD).
+	 * Upon invalid answer or error, close the plugin. and remove it from the
+	 * execution list.
+	 * \returns the received \ref PluginFrame (empty Frame upon Exception)
+	 */
+	PluginFrame doSend( PluginScript & script_r, const PluginFrame & frame_r )
+	{
+	  PluginFrame ret;
+
+	  try {
+	    script_r.send( frame_r );
+	    ret = script_r.receive();
+	  }
+	  catch( const zypp::Exception & e )
+	  { ZYPP_CAUGHT(e); }
+
+	  if ( ! ( ret.isAckCommand() || ret.isEnomethodCommand() ) )
+	  {
+	    WAR << "Bad plugin response from " << script_r << endl;
+	    WAR << dump(ret) << endl;
+	    script_r.close();
+	  }
+
+	  return ret;
+	}
+
+	/** Launch a plugin sending PLUGINSTART message. */
 	void doLoad( const PathInfo & pi_r )
 	{
 	  MIL << "Load plugin: " << pi_r << endl;
 	  try {
+	    PluginScript plugin( pi_r.path() );
+	    plugin.open();
+
 	    PluginFrame frame( "PLUGINBEGIN" );
 	    if ( ZConfig::instance().hasUserData() )
 	      frame.setHeader( "userdata", ZConfig::instance().userData() );
 
-	    PluginScript plugin( pi_r.path() );
-	    plugin.open();
-	    plugin.send( frame );
-	    PluginFrame ret( plugin.receive() );
-	    if ( ret.isAckCommand() )
-	    {
+	    doSend( plugin, frame );	// closes on error
+	    if ( plugin.isOpen() )
 	      _scripts.push_back( plugin );
-	    }
-	    else
-	    {
-	      WAR << "Failed to load plugin: Bad plugin response." << endl;
-	    }
 	  }
-	  catch( const zypp::Exception &  )
+	  catch( const zypp::Exception & e )
 	  {
-	     WAR << "Failed to load plugin." << endl;
+	     WAR << "Failed to load plugin " << pi_r << endl;
 	  }
 	}
 
@@ -182,6 +303,16 @@ namespace zypp
       USR << "-----" << endl;
     }
 
+    ///////////////////////////////////////////////////////////////////
+    namespace
+    {
+      inline PluginFrame transactionPluginFrame( const std::string & command_r, ZYppCommitResult::TransactionStepList & steps_r )
+      {
+	return PluginFrame( command_r, json::Object {
+	  { "TransactionStepList", steps_r }
+	}.asJSON() );
+      }
+    } // namespace
     ///////////////////////////////////////////////////////////////////
 
     /** \internal Manage writing a new testcase when doing an upgrade. */
@@ -1101,6 +1232,32 @@ namespace zypp
       MIL << "TargetImpl::commit(<pool>, " << policy_r << ")" << endl;
 
       ///////////////////////////////////////////////////////////////////
+      // Compute transaction:
+      ///////////////////////////////////////////////////////////////////
+      ZYppCommitResult result( root() );
+      result.rTransaction() = pool_r.resolver().getTransaction();
+      result.rTransaction().order();
+      // steps: this is our todo-list
+      ZYppCommitResult::TransactionStepList & steps( result.rTransactionStepList() );
+      if ( policy_r.restrictToMedia() )
+      {
+	// Collect until the 1st package from an unwanted media occurs.
+        // Further collection could violate install order.
+	MIL << "Restrict to media number " << policy_r.restrictToMedia() << endl;
+	for_( it, result.transaction().begin(), result.transaction().end() )
+	{
+	  if ( makeResObject( *it )->mediaNr() > 1 )
+	    break;
+	  steps.push_back( *it );
+	}
+      }
+      else
+      {
+	result.rTransactionStepList().insert( steps.end(), result.transaction().begin(), result.transaction().end() );
+      }
+      MIL << "Todo: " << result << endl;
+
+      ///////////////////////////////////////////////////////////////////
       // Prepare execution of commit plugins:
       ///////////////////////////////////////////////////////////////////
       CommitPlugins commitPlugins;
@@ -1109,6 +1266,8 @@ namespace zypp
 	Pathname plugindir( Pathname::assertprefix( _root, ZConfig::instance().pluginsPath()/"commit" ) );
 	commitPlugins.load( plugindir );
       }
+      if ( ! commitPlugins.empty() )
+	commitPlugins.send( transactionPluginFrame( "COMMITBEGIN", steps ) );
 
       ///////////////////////////////////////////////////////////////////
       // Write out a testcase if we're in dist upgrade mode.
@@ -1125,7 +1284,7 @@ namespace zypp
         }
       }
 
-      ///////////////////////////////////////////////////////////////////
+     ///////////////////////////////////////////////////////////////////
       // Store non-package data:
       ///////////////////////////////////////////////////////////////////
       if ( ! policy_r.dryRun() )
@@ -1151,32 +1310,6 @@ namespace zypp
       {
         DBG << "dryRun: Not stroring non-package data." << endl;
       }
-
-      ///////////////////////////////////////////////////////////////////
-      // Compute transaction:
-      ///////////////////////////////////////////////////////////////////
-      ZYppCommitResult result( root() );
-      result.rTransaction() = pool_r.resolver().getTransaction();
-      result.rTransaction().order();
-      // steps: this is our todo-list
-      ZYppCommitResult::TransactionStepList & steps( result.rTransactionStepList() );
-      if ( policy_r.restrictToMedia() )
-      {
-	// Collect until the 1st package from an unwanted media occurs.
-        // Further collection could violate install order.
-	MIL << "Restrict to media number " << policy_r.restrictToMedia() << endl;
-	for_( it, result.transaction().begin(), result.transaction().end() )
-	{
-	  if ( makeResObject( *it )->mediaNr() > 1 )
-	    break;
-	  steps.push_back( *it );
-	}
-      }
-      else
-      {
-	result.rTransactionStepList().insert( steps.end(), result.transaction().begin(), result.transaction().end() );
-      }
-      MIL << "Todo: " << result << endl;
 
       ///////////////////////////////////////////////////////////////////
       // First collect and display all messages
@@ -1315,6 +1448,12 @@ namespace zypp
       {
         DBG << "dryRun: Not downloading/installing/deleting anything." << endl;
       }
+
+      ///////////////////////////////////////////////////////////////////
+      // Send result to commit plugins:
+      ///////////////////////////////////////////////////////////////////
+      if ( ! commitPlugins.empty() )
+	commitPlugins.send( transactionPluginFrame( "COMMITEND", steps ) );
 
       ///////////////////////////////////////////////////////////////////
       // Try to rebuild solv file while rpm database is still in cache

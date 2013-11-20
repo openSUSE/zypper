@@ -32,7 +32,7 @@ Obsoletes:      yast2-packagemanager
 
 # Features we provide (update doc/autoinclude/FeatureTest.doc):
 Provides:       libzypp(plugin) = 0
-Provides:       libzypp(plugin:commit) = 0
+Provides:       libzypp(plugin:commit) = 1
 Provides:       libzypp(plugin:services) = 0
 Provides:       libzypp(plugin:system) = 0
 Provides:       libzypp(plugin:urlresolver) = 0
