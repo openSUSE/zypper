@@ -1,4 +1,15 @@
 -------------------------------------------------------------------
+Wed Nov 20 16:32:30 CET 2013 - ma@suse.de
+
+- Extend commit plugin to send the transaction list (Fate#316203)
+- Add base/Json.h: JSON encoder for e.g. sending data to plugins
+- Re-evaluate dropped packages list on upgrade, even if product 
+  remains unchanged (bnc#849251).
+- Add ppc64le architecture
+- Add m68k architecture
+- version 14.2.0 (2)
+
+-------------------------------------------------------------------
 Fri Oct 25 14:21:31 CEST 2013 - ma@suse.de
 
 - Always properly initialize pool storage (bnc#846565)
