@@ -50,12 +50,14 @@ BOOST_AUTO_TEST_CASE(PluginFrameCtorAssign)
   h.addHeader( "" ); // empty KV in header is ok, if you like it
   BOOST_CHECK_EQUAL( (g == h), false );
 
-  h.addHeader( "a", "a1" );
-  h.addHeader( "a", "a2" );
-  h.addHeader( "b", "b1" );
-  h.addHeader( "b", "b2" );
-  h.addHeader( "c", "c1" );
-  h.addHeader( "c", "c1" );
+  h.addHeader({
+    { "a", "a1" },
+    { "a", "a2" },
+    { "b", "b1" },
+    { "b", "b2" },
+    { "c", "c1" },
+    { "c", "c1" }
+  });
   BOOST_CHECK_EQUAL( h.headerSize(), 7 );
 
   h.setHeader( "b", "b" ); // replaces existing 'b:" headers

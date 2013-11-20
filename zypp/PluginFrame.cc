@@ -17,6 +17,9 @@
 
 using std::endl;
 
+#undef  ZYPP_BASE_LOGGER_LOGGROUP
+#define ZYPP_BASE_LOGGER_LOGGROUP "zypp::plugin"
+
 ///////////////////////////////////////////////////////////////////
 namespace zypp
 { /////////////////////////////////////////////////////////////////
@@ -35,9 +38,16 @@ namespace zypp
       Impl( const std::string & command_r )
       { setCommand( command_r ); }
 
-      Impl( const std::string & command_r, const std::string body_r )
+      Impl( const std::string & command_r, const std::string & body_r )
 	: _body( body_r )
       { setCommand( command_r ); }
+
+      Impl( const std::string & command_r, HeaderInitializerList contents_r )
+      { setCommand( command_r ); addHeader( contents_r ); }
+
+      Impl( const std::string & command_r, const std::string & body_r, HeaderInitializerList contents_r )
+	: _body( body_r )
+      { setCommand( command_r ); addHeader( contents_r ); }
 
       Impl( std::istream & stream_r );
 
@@ -120,6 +130,12 @@ namespace zypp
       void addHeader( const std::string & key_r, const std::string & value_r )
       {
 	_header.insert( mkHeaderPair( key_r, value_r ) );
+      }
+
+      void addHeader( HeaderInitializerList contents_r )
+      {
+	for ( const auto & el : contents_r )
+	  addHeader( el.first, el.second );
       }
 
       void clearHeader( const std::string & key_r )
@@ -234,6 +250,12 @@ namespace zypp
     return _val;
   }
 
+  const std::string & PluginFrame::enomethodCommand()
+  {
+    static std::string _val( "_ENOMETHOD" );
+    return _val;
+  }
+
   PluginFrame::PluginFrame()
     : _pimpl( Impl::nullimpl() )
   {}
@@ -242,8 +264,16 @@ namespace zypp
     : _pimpl( new Impl( command_r ) )
   {}
 
-  PluginFrame::PluginFrame( const std::string & command_r, const std::string body_r )
+  PluginFrame::PluginFrame( const std::string & command_r, const std::string & body_r )
     : _pimpl( new Impl( command_r, body_r ) )
+  {}
+
+  PluginFrame::PluginFrame( const std::string & command_r, HeaderInitializerList contents_r )
+    : _pimpl( new Impl( command_r, contents_r ) )
+  {}
+
+  PluginFrame::PluginFrame( const std::string & command_r, const std::string & body_r, HeaderInitializerList contents_r )
+    : _pimpl( new Impl( command_r, body_r, contents_r ) )
   {}
 
   PluginFrame::PluginFrame( std::istream & stream_r )
@@ -291,6 +321,9 @@ namespace zypp
 
   void PluginFrame::addHeader( const std::string & key_r, const std::string & value_r )
   { _pimpl->addHeader( key_r, value_r ); }
+
+  void PluginFrame::addHeader( HeaderInitializerList contents_r )
+  { _pimpl->addHeader( contents_r ); }
 
   void PluginFrame::clearHeader( const std::string & key_r )
   { _pimpl->clearHeader( key_r ); }
