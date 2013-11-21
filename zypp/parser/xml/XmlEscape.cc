@@ -42,7 +42,7 @@ namespace iobind
 	typedef unsigned char uchar;
 
 	std::string str( istr );
-        for_( i, size_t(0), str.size() )
+        for ( size_t i = 0; i < str.size(); ++i )
 	{
 	  switch (str[i])
 	  {
