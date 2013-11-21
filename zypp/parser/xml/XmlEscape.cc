@@ -39,20 +39,30 @@ namespace iobind
     {
       std::string escape(const std::string &istr) const
       {
-	size_t i;
-	std::string str = istr;
-	i = str.find_first_of("<>&'\"");
-	while (i != std::string::npos)
+	typedef unsigned char uchar;
+
+	std::string str( istr );
+        for_( i, size_t(0), str.size() )
 	{
 	  switch (str[i])
 	  {
 	    case '<': str.replace(i, 1, "&lt;"); i += 3; break;
 	    case '>': str.replace(i, 1, "&gt;"); i += 3; break;
 	    case '&': str.replace(i, 1, "&amp;"); i += 4; break;
-	    case '\'': str.replace(i, 1, "&apos;"); i += 5; break;
 	    case '"': str.replace(i, 1, "&quot;"); i += 5; break;
+	    case '\'': str.replace(i, 1, "&apos;"); i += 5; break;
+
+	    // control chars we allow:
+	    case '\n':
+	    case '\r':
+	    case '\t':
+	      break;
+
+	    default:
+	      if ( uchar(str[i]) < 32u )
+		str[i] = '?'; // filter problematic control chars (XML1.0)
+	      break;
 	  }
-	  i = str.find_first_of("<>&'\"", i + 1);
 	}
 	return str;
       }
