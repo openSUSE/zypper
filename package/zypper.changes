@@ -1,4 +1,12 @@
 -------------------------------------------------------------------
+Thu Nov 21 12:09:48 CET 2013 - ma@suse.de
+
+- Embed item count in summary output (bnc#756195)
+- Fix callback handling if media download error is ignored.
+- Improve computation of unneeded packages
+- version 1.9.4
+
+-------------------------------------------------------------------
 Sun Nov 17 01:14:36 CET 2013 - ma@suse.de
 
 - Update zypper-po.tar.bz2
