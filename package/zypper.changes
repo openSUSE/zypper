@@ -1,4 +1,15 @@
 -------------------------------------------------------------------
+Thu Nov 21 12:20:31 CET 2013 - ma@suse.de
+
+- Embed item count in summary output (bnc#756195)
+- Fix callback handling if media download error is ignored.
+- Fix detection of multiversion packages in transaction summary (bnc#844373)
+- Improve prompt with more options hidden behind '?' (bnc#844373)
+- Improve computation of unneeded packages
+- Fix message typo (bnc#845619)
+- version 1.10.1
+
+-------------------------------------------------------------------
 Sun Oct 13 01:14:15 CEST 2013 - ma@suse.de
 
 - Update zypper-po.tar.bz2
