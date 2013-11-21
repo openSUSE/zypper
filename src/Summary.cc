@@ -475,32 +475,34 @@ void Summary::writeNewlyInstalled(ostream & out)
 {
   for_(it, _toinstall.begin(), _toinstall.end())
   {
-    string label;
+    string label("%d");
     if (it->first == ResKind::package)
       label = _PL(
         "The following NEW package is going to be installed:",
-        "The following NEW packages are going to be installed:",
+        "The following %d NEW packages are going to be installed:",
         it->second.size());
     else if (it->first == ResKind::patch)
       label = _PL(
         "The following NEW patch is going to be installed:",
-        "The following NEW patches are going to be installed:",
+        "The following %d NEW patches are going to be installed:",
         it->second.size());
     else if (it->first == ResKind::pattern)
       label = _PL(
         "The following NEW pattern is going to be installed:",
-        "The following NEW patterns are going to be installed:",
+        "The following %d NEW patterns are going to be installed:",
         it->second.size());
     else if (it->first == ResKind::product)
       label = _PL(
         "The following NEW product is going to be installed:",
-        "The following NEW products are going to be installed:",
+        "The following %d NEW products are going to be installed:",
         it->second.size());
     else if (it->first == ResKind::srcpackage)
       label = _PL(
         "The following source package is going to be installed:",
-        "The following source packages are going to be installed:",
+        "The following %d source packages are going to be installed:",
         it->second.size());
+    if ( it->second.size() != 1 )
+      label = str::form( label.c_str(), it->second.size() );
     out << endl << label << endl;
 
     writeResolvableList(out, it->second);
@@ -515,27 +517,29 @@ void Summary::writeRemoved(ostream & out)
   unsetViewOption(SHOW_REPO); // never show repo here, it's always @System
   for_(it, _toremove.begin(), _toremove.end())
   {
-    string label;
+    string label("%d");
     if (it->first == ResKind::package)
       label = _PL(
         "The following package is going to be REMOVED:",
-        "The following packages are going to be REMOVED:",
+        "The following %d packages are going to be REMOVED:",
         it->second.size());
     else if (it->first == ResKind::patch)
       label = _PL(
         "The following patch is going to be REMOVED:",
-        "The following patches are going to be REMOVED:",
+        "The following %d patches are going to be REMOVED:",
         it->second.size());
     else if (it->first == ResKind::pattern)
       label = _PL(
         "The following pattern is going to be REMOVED:",
-        "The following patterns are going to be REMOVED:",
+        "The following %d patterns are going to be REMOVED:",
         it->second.size());
     else if (it->first == ResKind::product)
       label = _PL(
         "The following product is going to be REMOVED:",
-        "The following products are going to be REMOVED:",
+        "The following %d products are going to be REMOVED:",
         it->second.size());
+    if ( it->second.size() != 1 )
+      label = str::form( label.c_str(), it->second.size() );
     out << endl << label << endl;
 
     writeResolvableList(out, it->second);
@@ -549,27 +553,29 @@ void Summary::writeUpgraded(ostream & out)
 {
   for_(it, _toupgrade.begin(), _toupgrade.end())
   {
-    string label;
+    string label("%d");
     if (it->first == ResKind::package)
       label = _PL(
         "The following package is going to be upgraded:",
-        "The following packages are going to be upgraded:",
+        "The following %d packages are going to be upgraded:",
         it->second.size());
     else if (it->first == ResKind::patch)
       label = _PL(
         "The following patch is going to be upgraded:",
-        "The following patches are going to be upgraded:",
+        "The following %d patches are going to be upgraded:",
         it->second.size());
     else if (it->first == ResKind::pattern)
       label = _PL(
         "The following pattern is going to be upgraded:",
-        "The following patterns are going to be upgraded:",
+        "The following %d patterns are going to be upgraded:",
         it->second.size());
     else if (it->first == ResKind::product)
       label = _PL(
         "The following product is going to be upgraded:",
-        "The following products are going to be upgraded:",
+        "The following %d products are going to be upgraded:",
         it->second.size());
+    if ( it->second.size() != 1 )
+      label = str::form( label.c_str(), it->second.size() );
     out << endl << label << endl;
 
     writeResolvableList(out, it->second);
@@ -582,27 +588,29 @@ void Summary::writeDowngraded(ostream & out)
 {
   for_(it, _todowngrade.begin(), _todowngrade.end())
   {
-    string label;
+    string label("%d");
     if (it->first == ResKind::package)
       label = _PL(
         "The following package is going to be downgraded:",
-        "The following packages are going to be downgraded:",
+        "The following %d packages are going to be downgraded:",
         it->second.size());
     else if (it->first == ResKind::patch)
       label = _PL(
         "The following patch is going to be downgraded:",
-        "The following patches are going to be downgraded:",
+        "The following %d patches are going to be downgraded:",
         it->second.size());
     else if (it->first == ResKind::pattern)
       label = _PL(
         "The following pattern is going to be downgraded:",
-        "The following patterns are going to be downgraded:",
+        "The following %d patterns are going to be downgraded:",
         it->second.size());
     else if (it->first == ResKind::product)
       label = _PL(
         "The following product is going to be downgraded:",
-        "The following products are going to be downgraded:",
+        "The following %d products are going to be downgraded:",
         it->second.size());
+    if ( it->second.size() != 1 )
+      label = str::form( label.c_str(), it->second.size() );
     out << endl << label << endl;
 
     writeResolvableList(out, it->second);
@@ -615,27 +623,29 @@ void Summary::writeReinstalled(ostream & out)
 {
   for_(it, _toreinstall.begin(), _toreinstall.end())
   {
-    string label;
+    string label("%d");
     if (it->first == ResKind::package)
       label = _PL(
         "The following package is going to be reinstalled:",
-        "The following packages are going to be reinstalled:",
+        "The following %d packages are going to be reinstalled:",
         it->second.size());
     else if (it->first == ResKind::patch)
       label = _PL(
         "The following patch is going to be reinstalled:",
-        "The following patches are going to be reinstalled:",
+        "The following %d patches are going to be reinstalled:",
         it->second.size());
     else if (it->first == ResKind::pattern)
       label = _PL(
         "The following pattern is going to be reinstalled:",
-        "The following patterns are going to be reinstalled:",
+        "The following %d patterns are going to be reinstalled:",
         it->second.size());
     else if (it->first == ResKind::product)
       label = _PL(
         "The following product is going to be reinstalled:",
-        "The following products are going to be reinstalled:",
+        "The following %d products are going to be reinstalled:",
         it->second.size());
+    if ( it->second.size() != 1 )
+      label = str::form( label.c_str(), it->second.size() );
     out << endl << label << endl;
 
     writeResolvableList(out, it->second);
@@ -770,27 +780,34 @@ void Summary::writeRecommended(ostream & out)
 
   for_(it, _recommended.begin(), _recommended.end())
   {
-    string label = "The following recommended packages were selected automatically:";
+    string label( "%d" );
     if (it->first == ResKind::package)
       label = _PL(
         "The following recommended package was automatically selected:",
-        "The following recommended packages were automatically selected:",
+        "The following %d recommended packages were automatically selected:",
         it->second.size());
     else if (it->first == ResKind::patch)
       label = _PL(
         "The following recommended patch was automatically selected:",
-        "The following recommended patches were automatically selected:",
+        "The following %d recommended patches were automatically selected:",
         it->second.size());
     else if (it->first == ResKind::pattern)
       label = _PL(
         "The following recommended pattern was automatically selected:",
-        "The following recommended patterns were automatically selected:",
+        "The following %d recommended patterns were automatically selected:",
         it->second.size());
     else if (it->first == ResKind::product)
       label = _PL(
         "The following recommended product was automatically selected:",
-        "The following recommended products were automatically selected:",
+        "The following %d recommended products were automatically selected:",
         it->second.size());
+    else if (it->first == ResKind::srcpackage)
+      label = _PL(
+        "The following recommended source package was automatically selected:",
+        "The following %d recommended source packages were automatically selected:",
+        it->second.size());
+    if ( it->second.size() != 1 )
+      label = str::form( label.c_str(), it->second.size() );
     out << endl << label << endl;
 
     writeResolvableList(out, it->second);
@@ -798,7 +815,7 @@ void Summary::writeRecommended(ostream & out)
 
   for_(it, _noinstrec.begin(), _noinstrec.end())
   {
-    const char * label = nullptr;
+    std::string label( "%d" );;
     // For packages, check the reason for not being installed. One reason can be that
     // the solver is told to install only required packages. If not, a package might be
     // unwanted because the user has removed it manually (added to /var/lib/zypp/SoftLocks)
@@ -832,8 +849,10 @@ void Summary::writeRecommended(ostream & out)
       if ( resolver->onlyRequires() )
       {
 	label = _PL( "The following package is recommended, but will not be installed (only required packages will be installed):",
-		     "The following packages are recommended, but will not be installed (only required packages will be installed):",
+		     "The following %d packages are recommended, but will not be installed (only required packages will be installed):",
 		     it->second.size() );
+	if ( it->second.size() != 1 )
+	  label = str::form( label.c_str(), it->second.size() );
 	out << endl << label << endl;
 	writeResolvableList(out, notRequired);
       }
@@ -842,16 +861,20 @@ void Summary::writeRecommended(ostream & out)
         if ( !softLocked.empty() )
         {
 	  label = _PL( "The following package is recommended, but will not be installed because it's unwanted (was manually removed before):",
-		       "The following packages are recommended, but will not be installed because they are unwanted (were manually removed before):",
+		       "The following %d packages are recommended, but will not be installed because they are unwanted (were manually removed before):",
 		       it->second.size() );
-	  out << endl << label << endl;
+	if ( it->second.size() != 1 )
+	  label = str::form( label.c_str(), it->second.size() );
+	out << endl << label << endl;
 	  writeResolvableList(out, softLocked);
         }
         if ( !conflicts.empty() )
         {
 	  label = _PL( "The following package is recommended, but will not be installed due to conflicts or dependency issues:",
-		       "The following packages are recommended, but will not be installed due to conflicts or dependency issues:",
+		       "The following %d packages are recommended, but will not be installed due to conflicts or dependency issues:",
 		       it->second.size() );
+	  if ( it->second.size() != 1 )
+	    label = str::form( label.c_str(), it->second.size() );
           out << endl << label << endl;
           writeResolvableList(out, conflicts);
         }
@@ -861,16 +884,18 @@ void Summary::writeRecommended(ostream & out)
     {
       if (it->first == ResKind::patch)
         label = _PL( "The following patch is recommended, but will not be installed:",
-		     "The following patches are recommended, but will not be installed:",
+		     "The following %d patches are recommended, but will not be installed:",
 		     it->second.size() );
       else if (it->first == ResKind::pattern)
         label = _PL( "The following pattern is recommended, but will not be installed:",
-		     "The following patterns are recommended, but will not be installed:",
+		     "The following %d patterns are recommended, but will not be installed:",
 		     it->second.size() );
       else if (it->first == ResKind::product)
 	label = _PL( "The following product is recommended, but will not be installed:",
-		     "The following products are recommended, but will not be installed:",
+		     "The following %d products are recommended, but will not be installed:",
 		     it->second.size() );
+      if ( it->second.size() != 1 )
+	label = str::form( label.c_str(), it->second.size() );
       out << endl << label << endl;
       writeResolvableList(out, it->second);
     }
@@ -903,27 +928,29 @@ void Summary::writeSuggested(ostream & out)
 
   for_(it, _noinstsug.begin(), _noinstsug.end())
   {
-    string label;
+    string label("%d");
     if (it->first == ResKind::package)
       label = _PL(
         "The following package is suggested, but will not be installed:",
-        "The following packages are suggested, but will not be installed:",
+        "The following %d packages are suggested, but will not be installed:",
         it->second.size());
     else if (it->first == ResKind::patch)
       label = _PL(
         "The following patch is suggested, but will not be installed:",
-        "The following patches are suggested, but will not be installed:",
+        "The following %d patches are suggested, but will not be installed:",
         it->second.size());
     else if (it->first == ResKind::pattern)
       label = _PL(
         "The following pattern is suggested, but will not be installed:",
-        "The following patterns are suggested, but will not be installed:",
+        "The following %d patterns are suggested, but will not be installed:",
         it->second.size());
     else if (it->first == ResKind::product)
       label = _PL(
         "The following product is suggested, but will not be installed:",
-        "The following products are suggested, but will not be installed:",
+        "The following %d products are suggested, but will not be installed:",
         it->second.size());
+    if ( it->second.size() != 1 )
+      label = str::form( label.c_str(), it->second.size() );
     out << endl << label << endl;
 
     writeResolvableList(out, it->second);
@@ -938,27 +965,29 @@ void Summary::writeChangedArch(ostream & out)
   setViewOption(SHOW_ARCH); // always show arch here
   for_(it, _tochangearch.begin(), _tochangearch.end())
   {
-    string label;
+    string label("%d");
     if (it->first == ResKind::package)
       label = _PL(
         "The following package is going to change architecture:",
-        "The following packages are going to change architecture:",
+        "The following %d packages are going to change architecture:",
         it->second.size());
     else if (it->first == ResKind::patch)
       label = _PL(
         "The following patch is going to change architecture:",
-        "The following patches are going to change architecture:",
+        "The following %d patches are going to change architecture:",
         it->second.size());
     else if (it->first == ResKind::pattern)
       label = _PL(
         "The following pattern is going to change architecture:",
-        "The following patterns are going to change architecture:",
+        "The following %d patterns are going to change architecture:",
         it->second.size());
     else if (it->first == ResKind::product)
       label = _PL(
         "The following product is going to change architecture:",
-        "The following products are going to change architecture:",
+        "The following %d products are going to change architecture:",
         it->second.size());
+    if ( it->second.size() != 1 )
+      label = str::form( label.c_str(), it->second.size() );
     out << endl << label << endl;
 
     writeResolvableList(out, it->second);
@@ -974,27 +1003,29 @@ void Summary::writeChangedVendor(ostream & out)
   setViewOption(SHOW_VENDOR); // always show vendor here
   for_(it, _tochangevendor.begin(), _tochangevendor.end())
   {
-    string label;
+    string label("%d");
     if (it->first == ResKind::package)
       label = _PL(
         "The following package is going to change vendor:",
-        "The following packages are going to change vendor:",
+        "The following %d packages are going to change vendor:",
         it->second.size());
     else if (it->first == ResKind::patch)
       label = _PL(
         "The following patch is going to change vendor:",
-        "The following patches are going to change vendor:",
+        "The following %d patches are going to change vendor:",
         it->second.size());
     else if (it->first == ResKind::pattern)
       label = _PL(
         "The following pattern is going to change vendor:",
-        "The following patterns are going to change vendor:",
+        "The following %d patterns are going to change vendor:",
         it->second.size());
     else if (it->first == ResKind::product)
       label = _PL(
         "The following product is going to change vendor:",
-        "The following products are going to change vendor:",
+        "The following %d products are going to change vendor:",
         it->second.size());
+    if ( it->second.size() != 1 )
+      label = str::form( label.c_str(), it->second.size() );
     out << endl << label << endl;
 
     writeResolvableList(out, it->second);
@@ -1008,13 +1039,15 @@ void Summary::writeUnsupported(ostream & out)
 {
   for_(it, _unsupported.begin(), _unsupported.end())
   {
-    string label;
+    string label("%d");
     // we only look at vendor support in packages
     if (it->first == ResKind::package)
       label = _PL(
         "The following package is not supported by its vendor:",
-        "The following packages are not supported by their vendor:",
+        "The following %d packages are not supported by their vendor:",
         it->second.size());
+    if ( it->second.size() != 1 )
+      label = str::form( label.c_str(), it->second.size() );
     out << endl << label << endl;
 
     writeResolvableList(out, it->second);
@@ -1027,13 +1060,15 @@ void Summary::writeNeedACC(ostream & out)
 {
   for_(it, _support_needacc.begin(), _support_needacc.end())
   {
-    string label;
+    string label("%d");
     // we only look at vendor support in packages
     if (it->first == ResKind::package)
       label = _PL(
         "The following package needs additional customer contract to get support:",
-        "The following packages need additional customer contract to get support:",
+        "The following %d packages need additional customer contract to get support:",
         it->second.size());
+    if ( it->second.size() != 1 )
+      label = str::form( label.c_str(), it->second.size() );
     out << endl << label << endl;
 
     writeResolvableList(out, it->second);
@@ -1044,18 +1079,20 @@ void Summary::writeNotUpdated(std::ostream & out)
 {
   for_(it, _notupdated.begin(), _notupdated.end())
   {
-    string label;
+    string label("%d");
     // we only look at update candidates for packages and products
     if (it->first == ResKind::package)
       label = _PL(
         "The following package update will NOT be installed:",
-        "The following package updates will NOT be installed:",
+        "The following %d package updates will NOT be installed:",
         it->second.size());
     else if (it->first == ResKind::product)
       label = _PL(
         "The following product update will NOT be installed:",
-        "The following product updates will NOT be installed:",
+        "The following %d product updates will NOT be installed:",
         it->second.size());
+    if ( it->second.size() != 1 )
+      label = str::form( label.c_str(), it->second.size() );
     out << endl << label << endl;
 
     writeResolvableList(out, it->second);
