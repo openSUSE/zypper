@@ -43,11 +43,12 @@ struct FillSearchTableSolvable
   bool operator()( const zypp::PoolQuery::const_iterator & it ) const;
 
   /** Helper to add a table row for \a sel's picklist item \c pi
+   * \return whether a row was actually added.
    * \note picklist item means that \a pi must not be an installed
    * item in \a sel, if there is an identical available one. The
    * code relies on this.
    */
-  void addPicklistItem( const zypp::ui::Selectable::constPtr & sel, const zypp::PoolItem & pi ) const;
+  bool addPicklistItem( const zypp::ui::Selectable::constPtr & sel, const zypp::PoolItem & pi ) const;
 };
 
 struct FillSearchTableSelectable
