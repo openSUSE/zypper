@@ -1,4 +1,10 @@
 -------------------------------------------------------------------
+Tue Dec  3 14:24:54 CET 2013 - ma@suse.de
+
+- Fix detailed printing of query matches (bnc#853167)
+- version 1.8.19
+
+-------------------------------------------------------------------
 Sun Oct 20 01:15:00 CEST 2013 - ma@suse.de
 
 - Update zypper-po.tar.bz2
