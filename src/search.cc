@@ -81,15 +81,15 @@ FillSearchTableSolvable::FillSearchTableSolvable(
   *_table << header;
 }
 
-void FillSearchTableSolvable::addPicklistItem( const ui::Selectable::constPtr & sel, const PoolItem & pi ) const
+bool FillSearchTableSolvable::addPicklistItem( const ui::Selectable::constPtr & sel, const PoolItem & pi ) const
 {
   // --repo => we only want the repo resolvables, not @System (bnc #467106)
   if ( !_repos.empty() && _repos.find( pi->repoInfo().alias() ) == _repos.end() )
-    return;
+    return false;
 
   // hide patterns with user visible flag not set (bnc #538152)
   if ( pi->isKind<Pattern>() && ! pi->asKind<Pattern>()->userVisible() )
-    return;
+    return false;
 
   TableRow row;
   // compute status indicator:
@@ -100,7 +100,7 @@ void FillSearchTableSolvable::addPicklistItem( const ui::Selectable::constPtr & 
   {
     // picklist: ==> not available
     if ( _inst_notinst == false )
-      return;	// show only not installed
+      return false;	// show only not installed
     row << "i";
   }
   else
@@ -111,7 +111,7 @@ void FillSearchTableSolvable::addPicklistItem( const ui::Selectable::constPtr & 
     if ( !traits::isPseudoInstalled( pi->kind() ) && sel->installedEmpty() )
     {
       if ( _inst_notinst == true )
-	return;	// show only installed
+	return false;	// show only installed
       row << "";
     }
     else
@@ -122,13 +122,13 @@ void FillSearchTableSolvable::addPicklistItem( const ui::Selectable::constPtr & 
       if ( identicalInstalledToo )
       {
 	if ( _inst_notinst == false )
-	  return;	// show only not installed
+	  return false;	// show only not installed
 	row << "i";
       }
       else
       {
 	if ( _inst_notinst == true )
-	  return;	// show only installed
+	  return false;	// show only installed
 	row << "v";
       }
     }
@@ -158,6 +158,7 @@ void FillSearchTableSolvable::addPicklistItem( const ui::Selectable::constPtr & 
   }
 
   *_table << row;
+  return true;	// actually added a row
 }
 
 //
@@ -165,8 +166,9 @@ void FillSearchTableSolvable::addPicklistItem( const ui::Selectable::constPtr & 
 //
 bool FillSearchTableSolvable::operator()( const zypp::PoolQuery::const_iterator & it ) const
 {
-  // call FillSearchTableSolvable::operator()( const zypp::PoolItem & pi )
-  operator()(*it);
+  // all FillSearchTableSolvable::operator()( const zypp::PoolItem & pi )
+  if ( ! operator()(*it) )
+    return false;	// no row was added due to filter
 
   // after addPicklistItem( const ui::Selectable::constPtr & sel, const PoolItem & pi ) is
   // done, add the details about matches to last row
@@ -184,17 +186,21 @@ bool FillSearchTableSolvable::operator()( const zypp::PoolQuery::const_iterator 
   {
     for_( match, it.matchesBegin(), it.matchesEnd() )
     {
+      std::string attrib( match->inSolvAttr().asString() );
+      if ( str::startsWith( attrib, "solvable:" ) )	// strip 'solvable:' from attribute
+	attrib.erase( 0, 9 );
+
       if ( match->inSolvAttr() == zypp::sat::SolvAttr::summary ||
            match->inSolvAttr() == zypp::sat::SolvAttr::description )
       {
-        // substr( 9 ) removes 'solvable:' from attribute
-        lastRow.addDetail( match->inSolvAttr().asString().substr( 9 ) + ":");
+	// multiline matchstring
+        lastRow.addDetail( attrib + ":" );
         lastRow.addDetail( match->asString() );
       }
       else
       {
         // print attribute and match in one line, e.g. requires: libzypp >= 11.6.2
-        lastRow.addDetail( match->inSolvAttr().asString().substr( 9 ) + ": " + match->asString() );
+        lastRow.addDetail( attrib + ": " + match->asString() );
       }
     }
   }
@@ -204,8 +210,7 @@ bool FillSearchTableSolvable::operator()( const zypp::PoolQuery::const_iterator 
 bool FillSearchTableSolvable::operator()( const zypp::PoolItem & pi ) const
 {
   ui::Selectable::constPtr sel( ui::Selectable::get( pi ) );
-  addPicklistItem( sel, pi );
-  return true;
+  return addPicklistItem( sel, pi );
 }
 
 bool FillSearchTableSolvable::operator()( zypp::sat::Solvable solv ) const
@@ -213,12 +218,14 @@ bool FillSearchTableSolvable::operator()( zypp::sat::Solvable solv ) const
 
 bool FillSearchTableSolvable::operator()( const zypp::ui::Selectable::constPtr & sel ) const
 {
+  bool ret = false;
   // picklist: available items list prepended by those installed items not identicalAvailable
   for_( it, sel->picklistBegin(), sel->picklistEnd() )
   {
-    addPicklistItem( sel, *it );
+    if ( addPicklistItem( sel, *it ) || !ret )
+      ret = true;	// at least one row added
   }
-  return true;
+  return ret;
 }
 
 
