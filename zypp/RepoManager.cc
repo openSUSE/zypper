@@ -637,39 +637,37 @@ namespace zypp
 
     if ( PathInfo(_options.knownReposPath).isExist() )
     {
-      RepoInfoList repol = repositories_in_dir(_options.knownReposPath);
-      std::list<string> repo_esc_aliases;
-      std::list<string> entries;
-      for ( RepoInfoList::iterator it = repol.begin();
-            it != repol.end();
-            ++it )
+      std::list<std::string> repoEscAliases;
+      for ( RepoInfo & repoInfo : repositories_in_dir(_options.knownReposPath) )
       {
         // set the metadata path for the repo
-        Pathname metadata_path = rawcache_path_for_repoinfo(_options, (*it));
-        (*it).setMetadataPath(metadata_path);
-
+        repoInfo.setMetadataPath( rawcache_path_for_repoinfo(_options, repoInfo) );
 	// set the downloaded packages path for the repo
-	Pathname packages_path = packagescache_path_for_repoinfo(_options, (*it));
-	(*it).setPackagesPath(packages_path);
+	repoInfo.setPackagesPath( packagescache_path_for_repoinfo(_options, repoInfo) );
 
-        _repos.insert(*it);
-        repo_esc_aliases.push_back(it->escaped_alias());
+        _repos.insert( repoInfo );
+        repoEscAliases.push_back(repoInfo.escaped_alias());
       }
+      repoEscAliases.sort();
 
       // delete metadata folders without corresponding repo (e.g. old tmp directories)
-      if ( filesystem::readdir( entries, _options.repoRawCachePath, false ) == 0 )
+      for ( const Pathname & cachePath : { _options.repoRawCachePath
+					 , _options.repoSolvCachePath } )
       {
-        std::set<string> oldfiles;
-        repo_esc_aliases.sort();
-        entries.sort();
-        set_difference(entries.begin(), entries.end(), repo_esc_aliases.begin(), repo_esc_aliases.end(), std::inserter(oldfiles, oldfiles.end()));
-        for_(it, oldfiles.begin(), oldfiles.end())
-        {
-          filesystem::recursive_rmdir(_options.repoRawCachePath / *it);
-        }
+	std::list<std::string> entries;
+	if ( filesystem::readdir( entries, cachePath, false ) == 0 )
+	{
+	  entries.sort();
+	  std::set<std::string> oldfiles;
+	  set_difference( entries.begin(), entries.end(), repoEscAliases.begin(), repoEscAliases.end(),
+			  std::inserter( oldfiles, oldfiles.end() ) );
+	  for ( const std::string & old : oldfiles )
+	  {
+	    filesystem::recursive_rmdir( cachePath / old );
+	  }
+	}
       }
     }
-
     MIL << "end construct known repos" << endl;
   }
 
