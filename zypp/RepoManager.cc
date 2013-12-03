@@ -1626,13 +1626,15 @@ namespace zypp
           }
         }
 
-        CombinedProgressData subprogrcv(progress, 70);
-        CombinedProgressData cleansubprogrcv(progress, 30);
+        CombinedProgressData cSubprogrcv(progress, 20);
+        CombinedProgressData mSubprogrcv(progress, 40);
+        CombinedProgressData pSubprogrcv(progress, 40);
         // now delete it from cache
         if ( isCached(todelete) )
-          cleanCache( todelete, subprogrcv);
+          cleanCache( todelete, cSubprogrcv);
         // now delete metadata (#301037)
-        cleanMetadata( todelete, cleansubprogrcv);
+        cleanMetadata( todelete, mSubprogrcv );
+	cleanPackages( todelete, pSubprogrcv );
         _repos.erase(todelete);
         MIL << todelete.alias() << " sucessfully deleted." << endl;
         HistoryLog(_options.rootDir).removeRepository(todelete);
