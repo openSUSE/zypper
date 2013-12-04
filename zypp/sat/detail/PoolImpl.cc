@@ -48,7 +48,17 @@ using std::endl;
 
 // ///////////////////////////////////////////////////////////////////
 namespace zypp
-{ /////////////////////////////////////////////////////////////////
+{
+  /////////////////////////////////////////////////////////////////
+  namespace env
+  {
+    /**  */
+    inline int LIBSOLV_DEBUGMASK()
+    {
+      const char * envp = getenv("LIBSOLV_DEBUGMASK");
+      return envp ? str::strtonum<int>( envp ) : 0;
+    }
+  } // namespace env
   ///////////////////////////////////////////////////////////////////
   namespace sat
   { /////////////////////////////////////////////////////////////////
@@ -181,12 +191,19 @@ namespace zypp
           ZYPP_THROW( Exception( _("Can not create sat-pool.") ) );
         }
         // initialialize logging
-	if ( getenv("ZYPP_LIBSOLV_FULLLOG") || getenv("ZYPP_LIBSAT_FULLLOG") )
-	  ::pool_setdebuglevel( _pool, 4 );
-	else if ( getenv("ZYPP_FULLLOG") )
-	  ::pool_setdebuglevel( _pool, 2 );
+	if ( env::LIBSOLV_DEBUGMASK() )
+	{
+	  ::pool_setdebugmask(_pool, env::LIBSOLV_DEBUGMASK() );
+	}
 	else
-	  ::pool_setdebugmask(_pool, SOLV_DEBUG_JOB|SOLV_DEBUG_STATS);
+	{
+	  if ( getenv("ZYPP_LIBSOLV_FULLLOG") || getenv("ZYPP_LIBSAT_FULLLOG") )
+	    ::pool_setdebuglevel( _pool, 3 );
+	  else if ( getenv("ZYPP_FULLLOG") )
+	    ::pool_setdebuglevel( _pool, 2 );
+	  else
+	    ::pool_setdebugmask(_pool, SOLV_DEBUG_JOB|SOLV_DEBUG_STATS );
+	}
 
         ::pool_setdebugcallback( _pool, logSat, NULL );
 
