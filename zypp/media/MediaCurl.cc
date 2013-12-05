@@ -692,8 +692,8 @@ void MediaCurl::setupEasy()
 #endif
   else
   {
-    // libcurl may look into the enviroanment
     DBG << "Proxy: not explicitly set" << endl;
+    DBG << "Proxy: libcurl may look into the environment" << endl;
   }
 
   /** Speed limits */
