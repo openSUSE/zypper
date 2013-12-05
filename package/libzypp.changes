@@ -1,4 +1,12 @@
 -------------------------------------------------------------------
+Wed Dec  4 12:54:30 UTC 2013 - jreidinger@suse.com
+
+- Drop package-manager script as it is already deprecated and 
+  packagekit usage in desktop invalidates it. If someone really
+  need it, then place it to proper top level package which can 
+  decide what GUI is proper for given task.
+
+-------------------------------------------------------------------
 Wed Nov 20 16:32:30 CET 2013 - ma@suse.de
 
 - Extend commit plugin to send the transaction list (Fate#316203)
