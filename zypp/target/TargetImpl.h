@@ -107,7 +107,7 @@ namespace zypp
       void unload();
 
       void reload();
-      
+
       void clearCache();
 
       bool buildCache();
@@ -201,6 +201,8 @@ namespace zypp
 		   CommitPackageCache & packageCache_r,
 		   ZYppCommitResult & result_r );
 
+      /** Commit helper checking for file conflicts after download. */
+      void commitFindFileConflicts( const ZYppCommitPolicy & policy_r, ZYppCommitResult & result_r );
     protected:
       /** Path to the target */
       Pathname _root;

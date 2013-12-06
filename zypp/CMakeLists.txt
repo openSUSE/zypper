@@ -581,6 +581,7 @@ SET( zypp_target_SRCS
   target/TargetCallbackReceiver.cc
   target/TargetException.cc
   target/TargetImpl.cc
+  target/TargetImpl.commitFindFileConflicts.cc
 )
 
 SET( zypp_target_HEADERS

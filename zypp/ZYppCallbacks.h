@@ -442,6 +442,44 @@ namespace zypp
     };
 
     ///////////////////////////////////////////////////////////////////
+    /// \class FindFileConflictstReport
+    /// \brief Check for package file conflicts in commit (after download)
+    ///
+    /// File conflict check requires that all packages are downloaded and
+    /// now available in the cache (need to access the filelists). Missing
+    /// packages are omitted from check and their number is reported in
+    /// \a noFilelist_r. This usually happens if download mode 'as-needed'
+    /// is used.
+    ///////////////////////////////////////////////////////////////////
+    struct FindFileConflictstReport : public callback::ReportBase
+    {
+      /**
+       * \param progress_r	Progress counter for packages to check.
+       * \return \c true to continue, \c false upon user abort request.
+       */
+      virtual bool start( const ProgressData & progress_r )
+      { return true; }
+
+      /**
+       * \param progress_r	Progress counter for packages to check.
+       * \param noFilelist_r	Number of skipped packages (no filelist/not yet downloaded).
+       * \return \c true to continue, \c false upon user abort request.
+       */
+      virtual bool progress( const ProgressData & progress_r, unsigned noFilelist_r )
+      { return true; }
+
+      /**
+       * \param progress_r	Progress counter for packages to check.
+       * \param noFilelist_r	Number of skipped packages (no filelist/not yet downloaded).
+       * \param conflicts_r	Number of fileconflicts found.
+       * \return \c true to continue, \c false upon user abort request.
+       */
+      virtual bool result( const ProgressData & progress_r, unsigned noFilelist_r, unsigned conflicts_r )
+      { return true; }
+    };
+
+
+    ///////////////////////////////////////////////////////////////////
     namespace rpm
     {
 

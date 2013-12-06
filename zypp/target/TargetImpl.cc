@@ -1435,14 +1435,20 @@ namespace zypp
         {
           ERR << "Some packages could not be provided. Aborting commit."<< endl;
         }
-        else if ( ! policy_r.dryRun() )
-        {
-          commit( policy_r, packageCache, result );
-        }
         else
-        {
-          DBG << "dryRun: Not installing/deleting anything." << endl;
-        }
+	{
+	  // if cache is preloaded, check for file conflicts
+	  commitFindFileConflicts( policy_r, result );
+
+	  if ( ! policy_r.dryRun() )
+	  {
+	    commit( policy_r, packageCache, result );
+	  }
+	  else
+	  {
+	    DBG << "dryRun: Not installing/deleting anything." << endl;
+	  }
+	}
       }
       else
       {
