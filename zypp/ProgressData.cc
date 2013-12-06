@@ -32,71 +32,63 @@ namespace zypp
   //
   bool ProgressData::report()
   {
-    bool goOn     = true;  // continue per default
-    bool doReport = false;
+    Date now = Date::now();
 
     // compute value and check whether to report it
     if ( hasRange() )
     {
-      value_type newVal = _d->_val * 100;
-      newVal /= ( _d->_max - _d->_min );
+      value_type newVal = _d->_val * 100 / ( _d->_max - _d->_min );
 
-      if ( newVal - _d->_last_val > 20
-	   || Date::now() - _d->_last_send > 1
-	   || ( newVal == 100 && _d->_last_send != 100 )
-	   || _d->_state == END )
+      if ( newVal - _d->_last_val > 10
+	   || now - _d->_last_send > 1
+	   || ( _d->_last_val == 0 && newVal > 0 )
+	   || ( newVal == 100 && _d->_last_val != 100 )
+	   || ( newVal != 100 && _d->_last_val == 100 )
+	   || _d->_state != RUN /*INIT||END*/ )
       {
 	_d->_last_val  = newVal;
-	_d->_last_send = Date::now();
-	doReport = true;
+	_d->_last_send = now;
       }
+      else
+	return true;	// skip report, continue per default
     }
     else
     {
-      if ( Date::now() - _d->_last_send > 1 || _d->_state == END )
+      if ( now - _d->_last_send > 1 || _d->_state != RUN /*INIT||END*/ )
       {
 	_d->_last_val  = _d->_val;
-	_d->_last_send = Date::now();
-	doReport = true;
-      }
-    }
-
-    // report if necessary
-    if ( doReport )
-    {
-      if ( _d->_state == INIT )
-      {
-	_d->_state = RUN;
-      }
-
-      if ( _d->_receiver )
-      {
-	goOn = _d->_receiver( *this );
+	_d->_last_send = now;
       }
       else
+	return true;	// skip report, continue per default
+    }
+
+    // now send report
+    if ( _d->_state == INIT )
+    {
+      _d->_state = RUN;
+    }
+    // XXX << str::form( "{#%u|%s}(%lld%s)", numericId(), name().c_str(), _d->_last_val, ( hasRange() ? "%" : "!" ) ) << endl;
+
+    if ( _d->_receiver )
+    {
+      if ( ! _d->_receiver( *this ) )
       {
 	if ( _d->_state != END )
 	{
-	  XXX << str::form( "{#%u|%s}(%lld%s)",
-			    numericId(), name().c_str(),
-			    _d->_last_val, ( hasRange() ? "%" : "!" ) ) << endl;
+	  WAR << "User request to ABORT pending action. "
+	  << str::form( "{#%u|%s}(%lld%s)", numericId(), name().c_str(),
+			_d->_last_val, ( hasRange() ? "%" : "!" ) ) << endl;
 	}
-	else
-	{
-	  DBG << str::form( "{#%u|%s}END", numericId(), name().c_str() ) << endl;
-	}
+	return false;	// aborted by user
       }
     }
-
-    // log abort request and return
-    if ( ! goOn && _d->_state != END )
+    else if ( _d->_state == END )
     {
-      WAR << "User request to ABORT pending action. "
-	  << str::form( "{#%u|%s}(%lld%s)",
-			numericId(), name().c_str(),
-			_d->_last_val, ( hasRange() ? "%" : "!" ) ) << endl;
+      DBG << str::form( "{#%u|%s}END", numericId(), name().c_str() ) << endl;
     }
-    return goOn;
+
+    return true;	// continue per default
   }
 
   /******************************************************************
