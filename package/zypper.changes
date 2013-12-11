@@ -1,4 +1,10 @@
 -------------------------------------------------------------------
+Wed Dec 11 11:20:11 CET 2013 - ma@suse.de
+
+- Fix groff .TP commands in manpage (bnc#854784)
+- version 1.9.6
+
+-------------------------------------------------------------------
 Sun Dec  8 01:14:09 CET 2013 - ma@suse.de
 
 - Update zypper-po.tar.bz2
