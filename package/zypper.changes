@@ -1,4 +1,10 @@
 -------------------------------------------------------------------
+Wed Dec 11 11:19:21 CET 2013 - ma@suse.de
+
+- Fix groff .TP commands in manpage (bnc#854784)
+- version 1.8.20
+
+-------------------------------------------------------------------
 Tue Dec  3 14:24:54 CET 2013 - ma@suse.de
 
 - Fix detailed printing of query matches (bnc#853167)
