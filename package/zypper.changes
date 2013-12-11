@@ -1,4 +1,10 @@
 -------------------------------------------------------------------
+Wed Dec 11 11:23:31 CET 2013 - ma@suse.de
+
+- Fix groff .TP commands in manpage (bnc#854784)
+- version 1.3.25
+
+-------------------------------------------------------------------
 Mon Mar  4 15:21:10 CET 2013 - ma@suse.de
 
 - Fix -x printing edition values for arch-old (bnc#793809)
