@@ -984,16 +984,19 @@ uniquely identifies the repository on the system.
 The \fIalias\fR, \fIname\fR, \fIURI\fR, or the \fInumber\fR from \fBzypper repos\fR list can be used to
 specify a repository as an argument of various zypper commands and
 options like \fBrefresh\fR, \fB--repo\fR, or \fB--from\fR.
-.TP ============================================================================
+.TP
+.TP
 Supported URI formats:
-.TP ============================================================================
+.TP
+.TP
 CD or DVD drive
 Optionally with \fIdevices\fR list for probing.
 
 .B cd:///
 .br
 .B dvd:/subdir\fI?devices=/dev/sr0,/dev/sr1
-.TP ============================================================================
+.TP
+.TP
 FTP/HTTP/HTTPS directory tree
 The ftp URL scheme supports absolute and relative paths to the default ftp server directory (RFC1738, Section 3.2.2). To use an absolute path, you have to prepend the path with an additional slash, what results in a "/%2f" combination (second "/" encoded to "%2f") at the begin of the URL path. This is important, especially in user authenticated ftp, where the users home is usually the default directory of the server (except when the server chroots into the users home directory).
 
@@ -1010,16 +1013,19 @@ HTTP authentication methods to use can be defined as comma separated list via op
 .br
 .B https://user:pass@server/path\fI?proxy=foo&proxyuser=me&proxypass=pw
 
-.TP ============================================================================
+.TP
+.TP
 Disk volume (partition)
 Mandatory \fBdevice\fR parameter specifying the name of the block device to mount. The name of the optional \fIfilesystem\fR defaults to "auto".
 
 .B hd:/subdir?device=/dev/sda1\fI&filesystem=reiserfs
-.TP ============================================================================
+.TP
+.TP
 Local directory tree
 
 .B dir:/directory/name
-.TP ============================================================================
+.TP
+.TP
 Media in an ISO image (loopback mounted)
 Mandatory \fBiso\fR parameter specifying the name of the iso file. Optional \fIurl\fR parameter specifying the URL to the directory containing the iso file. Optional \fImnt\fR parameter specifying the preferred attach point for the source media url. Optional \fIfilesystem\fR name of the filesystem used in the iso file. Defaults to "auto".
 
@@ -1028,7 +1034,8 @@ Mandatory \fBiso\fR parameter specifying the name of the iso file. Optional \fIu
 .B iso:/?iso=CD1.iso\fI&url=hd:/?device=/dev/hda
 .br
 .B iso:/subdir?iso=DVD1.iso\fI&url=nfs://nfs-server/directory&mnt=/nfs/attach/point&filesystem=udf
-.TP ============================================================================
+.TP
+.TP
 NFS exported directory tree
 To use NFSv4 either use schema \fItnfsv4://\fR or pass an optional parameter \fItype=nfs4\fR. Additional \fImountoptions\fR can be passed as comma separated list. Defaults to "ro".
 
@@ -1037,7 +1044,8 @@ To use NFSv4 either use schema \fItnfsv4://\fR or pass an optional parameter \fI
 .B nfs://nfs-server/exported/path\fI?mountoptions=ro&type=nfs4
 .br
 .B nfs4://nfs-server/exported/path\fI?mountoptions=ro
-.TP ============================================================================
+.TP
+.TP
 CIFS/SMB directory tree
 There is no difference between cifs and smb scheme (any more). In both cases the \fIcifs\fR filesystem is used. Additional \fImountoptions\fR can be passed as comma separated list. Defaults to "ro,guest". Specify "noguest" to turn off "guest". This is necessary if Samba is configured to reject guest connections.
 
