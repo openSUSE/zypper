@@ -1,4 +1,11 @@
 -------------------------------------------------------------------
+Wed Dec 11 11:24:30 CET 2013 - ma@suse.de
+
+- Fix groff .TP commands in manpage (bnc#854784)
+- Fix callback handling if media download error is ignored.
+- version 1.6.311
+
+-------------------------------------------------------------------
 Wed Oct 16 11:06:54 CEST 2013 - ma@suse.de
 
 - Fix detection of multiversion packages in transaction summary (bnc#844373)
