@@ -19,6 +19,7 @@ extern "C"
 
 #include "zypp/base/Easy.h"
 #include "zypp/base/LogTools.h"
+#include "zypp/base/DtorReset.h"
 #include "zypp/base/String.h"
 
 #include "zypp/DiskUsageCounter.h"
@@ -37,7 +38,7 @@ namespace zypp
 
     struct SatMap : private base::NonCopyable
     {
-      SatMap( unsigned capacity_r = 1 )
+      SatMap()
       {
         ::map_init( &_installedmap, sat::Pool::instance().capacity() );
       }
@@ -56,10 +57,8 @@ namespace zypp
       mutable ::Map _installedmap;
     };
 
-    DiskUsageCounter::MountPointSet calcDiskUsage( const DiskUsageCounter::MountPointSet & mps_r, const SatMap & installedmap_r )
+    DiskUsageCounter::MountPointSet calcDiskUsage( DiskUsageCounter::MountPointSet result, const SatMap & installedmap_r )
     {
-      DiskUsageCounter::MountPointSet result = mps_r;
-
       if ( result.empty() )
       {
         // partitioning is not set
@@ -92,7 +91,6 @@ namespace zypp
         for_( it, result.begin(), result.end() )
         {
           static const ByteCount blockAdjust( 2, ByteCount::K ); // (files * blocksize) / (2 * 1K)
-
           it->pkg_size = it->used_size          // current usage
                        + duchanges[idx].kbytes  // package data size
                        + ( duchanges[idx].files * it->block_size / blockAdjust ); // half block per file
@@ -109,7 +107,7 @@ namespace zypp
 
   DiskUsageCounter::MountPointSet DiskUsageCounter::disk_usage( const ResPool & pool_r )
   {
-    SatMap installedmap( sat::Pool::instance().capacity() );
+    SatMap installedmap;
     // build installedmap (installed != transact)
     // stays installed or gets installed
     for_( it, pool_r.begin(), pool_r.end() )
@@ -126,6 +124,11 @@ namespace zypp
   {
     SatMap installedmap;
     installedmap.add( solv_r );
+
+    // temp. unset @system Repo
+    DtorReset tmp( sat::Pool::instance().get()->installed );
+    sat::Pool::instance().get()->installed = nullptr;
+
     return calcDiskUsage( mps, installedmap );
   }
 
