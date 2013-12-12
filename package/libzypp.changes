@@ -1,4 +1,10 @@
 -------------------------------------------------------------------
+Thu Dec 12 18:01:18 CET 2013 - ma@suse.de
+
+- Fix disk usage computation for single packages (bnc#852943)
+- version 14.2.1 (2)
+
+-------------------------------------------------------------------
 Wed Dec  4 12:54:30 UTC 2013 - jreidinger@suse.com
 
 - Drop package-manager script as it is already deprecated and 
