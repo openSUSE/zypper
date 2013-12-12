@@ -84,8 +84,16 @@ function getversion() {
     printf "LAST_COMPAT='%s'\n", lastcompat
     printf "THIS_RELEASE='%s'\n", major"."minor"."patch
     printf "THIS_COMPAT='%s'\n", compatminor
+    printf "THIS_MINOR='%s'\n", minor
+    printf "THIS_PATCH='%s'\n", patch
   }
   '
+}
+
+function setversion() {
+  local KEY="$1"
+  local VAL="$2"
+  sed -i "s/^ *SET *( *${KEY} .*/SET(${KEY} \"${VAL}\")/" "$VERSIONFILE"
 }
 
 function sameVersion() {
@@ -153,9 +161,9 @@ while true; do
   sameVersion && {
     newchangesentry
     Becho "!!! Version is unchanged at $LAST_RELEASE ($LAST_COMPAT)."
-    read -n 1 -p "$(Gecho "(a)bort, (c)ontinue, (e)dit version [e]: ")" RES
+    read -n 1 -p "$(Gecho "(a)bort, (c)ontinue, (P) patch, (M) minor, (I) incompat minor, (e)dit version [e]: ")" RES
     echo
-    case "${RES:-e}" in
+    case "${RES:-x}" in
       [eE]*)
 	$EDITOR $VERSIONFILE
 	eval $(getversion)
@@ -164,6 +172,24 @@ while true; do
       [cC])
 	Becho "!!! Leave $VERSIONFILE untouched"
 	break
+	;;
+      [P])
+	setversion LIBZYPP_PATCH $(($THIS_PATCH + 1))
+	eval $(getversion)
+	continue
+	;;
+      [M])
+	setversion LIBZYPP_MINOR $(($THIS_MINOR + 1))
+	setversion LIBZYPP_PATCH 0
+	eval $(getversion)
+	continue
+	;;
+      [I])
+	setversion LIBZYPP_COMPATMINOR $(($THIS_MINOR + 1))
+	setversion LIBZYPP_MINOR $(($THIS_MINOR + 1))
+	setversion LIBZYPP_PATCH 0
+	eval $(getversion)
+	continue
 	;;
       *)
 	errexit "aborted"
