@@ -130,13 +130,13 @@ namespace zypp
     std::string licenseToConfirm( const Locale & lang_r = Locale() ) const;
 
    /**
-     * \short Acceptance of Product License needed?  
+     * \short Acceptance of Product License needed?
      *
      * Returns whether a product license has to be accepted
      * (no acceptance is needed for openSUSE)
      */
     bool needToAcceptLicense() const;
-    
+
     /**
      * \short Vendor
      *
@@ -158,10 +158,30 @@ namespace zypp
      */
     std::string cpeId() const;
 
-    /** Installed size. */
+    /** Installed (unpacked) size.
+     * This is just a total number. Many objects provide even more detailed
+     * disk usage data. You can use \ref DiskUsageCounter to find out
+     * how objects data are distributed across partitions/directories.
+     * \code
+     *   // Load directory set into ducounter
+     *   DiskUsageCounter ducounter( { "/", "/usr", "/var" } );
+     *
+     *   // see how noch space the packages use
+     *   for ( const PoolItem & pi : pool )
+     *   {
+     *     cout << pi << ducounter.disk_usage( pi ) << endl;
+     *     // I__s_(7)GeoIP-1.4.8-3.1.2.x86_64(@System) {
+     *     // dir:[/] [ bs: 0 B ts: 0 B us: 0 B (+-: 1.0 KiB)]
+     *     // dir:[/usr] [ bs: 0 B ts: 0 B us: 0 B (+-: 133.0 KiB)]
+     *     // dir:[/var] [ bs: 0 B ts: 0 B us: 0 B (+-: 1.1 MiB)]
+     *     // }
+     *   }
+     * \endcode
+     * \see \ref DiskUsageCounter
+     */
     ByteCount installSize() const;
 
-    /** Size of the rpm package. */
+    /** Download size. */
     ByteCount downloadSize() const;
 
     /** \see \ref sat::Solvable::repository */

@@ -36,28 +36,7 @@ namespace zypp
   namespace
   { /////////////////////////////////////////////////////////////////
 
-    struct SatMap : private base::NonCopyable
-    {
-      SatMap()
-      {
-        ::map_init( &_installedmap, sat::Pool::instance().capacity() );
-      }
-
-      void add( sat::Solvable solv_r )
-      {
-        MAPSET( &_installedmap, solv_r.id() );
-      }
-
-      void add( const PoolItem & pi_r )
-      { add( pi_r->satSolvable() ); }
-
-      void add( const ResObject::constPtr & obj_r )
-      { add( obj_r->satSolvable() ); }
-
-      mutable ::Map _installedmap;
-    };
-
-    DiskUsageCounter::MountPointSet calcDiskUsage( DiskUsageCounter::MountPointSet result, const SatMap & installedmap_r )
+    DiskUsageCounter::MountPointSet calcDiskUsage( DiskUsageCounter::MountPointSet result, const Bitmap & installedmap_r )
     {
       if ( result.empty() )
       {
@@ -81,7 +60,7 @@ namespace zypp
 
       // now calc...
       ::pool_calc_duchanges( satpool.get(),
-                             &installedmap_r._installedmap,
+                             const_cast<Bitmap &>(installedmap_r),
                              &duchanges[0],
                              duchanges.size() );
 
@@ -105,34 +84,44 @@ namespace zypp
   } // namespace
   ///////////////////////////////////////////////////////////////////
 
-  DiskUsageCounter::MountPointSet DiskUsageCounter::disk_usage( const ResPool & pool_r )
+  DiskUsageCounter::MountPointSet DiskUsageCounter::disk_usage( const ResPool & pool_r ) const
   {
-    SatMap installedmap;
+    Bitmap bitmap( Bitmap::poolSize );
+
     // build installedmap (installed != transact)
     // stays installed or gets installed
     for_( it, pool_r.begin(), pool_r.end() )
     {
       if ( it->status().isInstalled() != it->status().transacts() )
       {
-        installedmap.add( *it );
+        bitmap.set( sat::asSolvable()(*it).id() );
       }
     }
-    return calcDiskUsage( mps, installedmap );
+    return calcDiskUsage( _mps, bitmap );
   }
 
-  DiskUsageCounter::MountPointSet DiskUsageCounter::disk_usage( sat::Solvable solv_r )
+  DiskUsageCounter::MountPointSet DiskUsageCounter::disk_usage( sat::Solvable solv_r ) const
   {
-    SatMap installedmap;
-    installedmap.add( solv_r );
+    Bitmap bitmap( Bitmap::poolSize );
+    bitmap.set( solv_r.id() );
 
     // temp. unset @system Repo
     DtorReset tmp( sat::Pool::instance().get()->installed );
     sat::Pool::instance().get()->installed = nullptr;
 
-    return calcDiskUsage( mps, installedmap );
+    return calcDiskUsage( _mps, bitmap );
   }
 
-  DiskUsageCounter::MountPointSet DiskUsageCounter::detectMountPoints(const std::string &rootdir)
+  DiskUsageCounter::MountPointSet DiskUsageCounter::disk_usage( const Bitmap & bitmap_r ) const
+  {
+    // temp. unset @system Repo
+    DtorReset tmp( sat::Pool::instance().get()->installed );
+    sat::Pool::instance().get()->installed = nullptr;
+
+    return calcDiskUsage( _mps, bitmap_r );
+  }
+
+  DiskUsageCounter::MountPointSet DiskUsageCounter::detectMountPoints( const std::string & rootdir )
   {
     DiskUsageCounter::MountPointSet ret;
 
