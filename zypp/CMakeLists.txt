@@ -92,6 +92,7 @@ SET( zypp_HEADERS
   Arch.h
   AutoDispose.h
   Bit.h
+  Bitmap.h
   ByteCount.h
   Callback.h
   Capabilities.h

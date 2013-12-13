@@ -18,6 +18,7 @@ extern "C"
 #include "zypp/base/String.h"
 
 #include "zypp/sat/Map.h"
+#include "zypp/sat/Pool.h"
 
 using std::endl;
 
@@ -44,6 +45,10 @@ namespace zypp
     Map::Map( size_type size_r )
       : _pimpl( new ::_Map )
     { ::map_init( _pimpl.get(), size_r ); }
+
+    Map::Map( PoolSizeType )
+      : _pimpl( new ::_Map )
+    { ::map_init( _pimpl.get(), Pool::instance().capacity() ); }
 
     Map::~Map()
     { ::map_free( _pimpl.get() ); }
