@@ -103,13 +103,6 @@ namespace zypp
   Date ResObject::installtime() const
   { return Date( lookupNumAttribute( sat::SolvAttr::installtime ) ); }
 
-#warning DUMMY diskusage
-  const DiskUsage & ResObject::diskusage() const
-  {
-    static DiskUsage _du;
-    return _du;
-  }
-
    /////////////////////////////////////////////////////////////////
 } // namespace zypp
 ///////////////////////////////////////////////////////////////////

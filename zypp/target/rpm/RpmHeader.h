@@ -20,7 +20,6 @@
 #include "zypp/Package.h"
 #include "zypp/Changelog.h"
 #include "zypp/Pathname.h"
-#include "zypp/DiskUsage.h"
 
 
 namespace zypp
@@ -161,11 +160,6 @@ public:
   std::list<FileInfo> tag_fileinfos() const;
 
   Changelog tag_changelog() const;
-
-  /**
-   * Returns reference to arg <code>dudata_r</code>.
-   **/
-  DiskUsage & tag_du( DiskUsage & dudata_r ) const;
 
 public:
 

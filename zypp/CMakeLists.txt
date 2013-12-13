@@ -17,7 +17,6 @@ SET( zypp_SRCS
   Date.cc
   Dep.cc
   Digest.cc
-  DiskUsage.cc
   DiskUsageCounter.cc
   DownloadMode.cc
   Edition.cc
@@ -105,7 +104,6 @@ SET( zypp_HEADERS
   Dep.h
   Digest.h
   DiskUsageCounter.h
-  DiskUsage.h
   DownloadMode.h
   Edition.h
   ExternalProgram.h

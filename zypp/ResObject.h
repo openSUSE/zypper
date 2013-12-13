@@ -19,7 +19,6 @@
 #include "zypp/Locale.h"
 #include "zypp/Vendor.h"
 #include "zypp/ByteCount.h"
-#include "zypp/DiskUsage.h"
 #include "zypp/OnMediaLocation.h"
 #include "zypp/Repository.h"
 
@@ -191,14 +190,6 @@ namespace zypp
      * 0 if the resolvable is not installed.
      */
     Date installtime() const;
-
-    /**
-     * \short Disk usage per directory
-     * A common attribute, although mostly packages require
-     * noticeable disk space. An e.g product could try to reserve
-     * a certain ammount of diskspace by providing DiskUsage data.
-     */
-    const DiskUsage & diskusage() const;
 
   protected:
     friend ResObject::Ptr makeResObject( const sat::Solvable & solvable_r );
