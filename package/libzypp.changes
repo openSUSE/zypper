@@ -1,4 +1,12 @@
 -------------------------------------------------------------------
+Fri Dec 13 19:36:34 CET 2013 - ma@suse.de
+
+- Polish DiskUsageCounter
+- Add Bitmap type (aka sat::Map)
+- Remove obsolete DiskUsage class
+- version 14.3.0 (3)
+
+-------------------------------------------------------------------
 Thu Dec 12 18:01:18 CET 2013 - ma@suse.de
 
 - Fix disk usage computation for single packages (bnc#852943)
