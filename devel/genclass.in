@@ -100,14 +100,13 @@ $(intro $CLASS_H)
 #include <iosfwd>
 
 #include "zypp/base/PtrTypes.h"
-#include "zypp/base/SafeBool.h"
 
 $(nsopen)
 ${INDENT}///////////////////////////////////////////////////////////////////
 ${INDENT}/// \class ${CLASS}
 ${INDENT}/// \brief
 ${INDENT}///////////////////////////////////////////////////////////////////
-${INDENT}class ${CLASS} : protected base::SafeBool<${CLASS}>
+${INDENT}class ${CLASS}
 ${INDENT}{
 ${INDENT}  friend std::ostream & operator<<( std::ostream & str, const ${CLASS} & obj );
 ${INDENT}  friend std::ostream & dumpOn( std::ostream & str, const ${CLASS} & obj );
@@ -122,12 +121,7 @@ ${INDENT}    ~${CLASS}();
 
 ${INDENT}  public:
 ${INDENT}    /**  Validate object in a boolean context. */
-${INDENT}    using base::SafeBool<${CLASS}>::operator bool_type;
-
-${INDENT}  private:
-${INDENT}    friend base::SafeBool<${CLASS}>::operator bool_type() const;
-${INDENT}    /**  Validate object in a boolean context. */
-${INDENT}    bool boolTest() const
+${INDENT}    explicit operator bool() const
 ${INDENT}    {
 ${INDENT}      /* !!! Perform Boolean logic here AND check implememtation of operator==!!!
 ${INDENT}       * NOTE: SafeBool requires operator== otherwise equality is reduced to
