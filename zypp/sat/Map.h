@@ -76,20 +76,30 @@ namespace zypp
       /** Assign \c val_r to all bits. */
       void assignAll( bool val_r );
 
-      /** Set bit \c idx_r. */
+      /** Set bit \c idx_r.
+       * \throws std::out_of_range if \a idx_r is out of range
+       */
       void set( size_type idx_r );
 
-      /** Clear bit \c idx_r. */
+      /** Clear bit \c idx_r.
+       * \throws std::out_of_range if \a idx_r is out of range
+       */
       void clear( size_type idx_r );
 
-      /** Assign \c val_r to bit \c idx_r. */
+      /** Assign \c val_r to bit \c idx_r.
+       * \throws std::out_of_range if \a idx_r is out of range
+       */
       void assign( size_type idx_r, bool val_r );
 
     public:
-      /** Test bit \c idx_r.*/
+      /** Test bit \c idx_r.
+       * \throws std::out_of_range if \a idx_r is out of range
+       */
       bool test( size_type idx_r ) const;
 
-      /** Test bit \c idx_r.*/
+      /** Test bit \c idx_r.
+       * \throws std::out_of_range if \a idx_r is out of range
+       */
       bool operator[]( size_type idx_r ) const
       { return test( idx_r ); }
 
