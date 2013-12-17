@@ -17,19 +17,20 @@ extern "C"
 }
 #include <iosfwd>
 
-#include "zypp/base/NonCopyable.h"
+#include "zypp/base/PtrTypes.h"
 #include "zypp/sat/detail/PoolMember.h"
 
 ///////////////////////////////////////////////////////////////////
 namespace zypp
-{ /////////////////////////////////////////////////////////////////
+{
   ///////////////////////////////////////////////////////////////////
   namespace sat
-  { /////////////////////////////////////////////////////////////////
-
-    /** Libsolv Id queue wrapper.
-     */
-    class Queue : private base::NonCopyable
+  {
+    ///////////////////////////////////////////////////////////////////
+    /// \class Queue
+    /// \brief Libsolv Id queue wrapper.
+    ///////////////////////////////////////////////////////////////////
+    class Queue
     {
       public:
 	typedef unsigned size_type;
@@ -61,6 +62,22 @@ namespace zypp
 	/** Return the last Id in the queue or \c 0 if empty. */
 	value_type last() const;
 
+	/** Return the Id at \a idx_r in the queue
+	 * \throws std::out_of_range if \a idx_r is out of range
+	 */
+	const value_type & at( size_type idx_r ) const;
+
+	/** Return the Id at \a idx_r in the queue
+	 * \throws std::out_of_range if \a idx_r is out of range
+	 */
+	value_type & at( size_type idx_r );
+
+	/** Return the Id at \a idx_r in the queue (no range check) */
+	const value_type & operator[]( size_type idx_r ) const;
+
+	/** Return the Id at \a idx_r in the queue (no range check) */
+	value_type & operator[]( size_type idx_r );
+
 	/** Clear the queue. */
 	void clear();
 
@@ -72,6 +89,9 @@ namespace zypp
 	/** \overload */
 	void push_back( value_type val_r )
 	{ push( val_r ); }
+
+	/** Push a value if it's not yet in the Queue. */
+	void pushUnique( value_type val_r );
 
 	/** Pop and return the last Id from the queue or \c 0 if empty. */
 	value_type pop();
@@ -86,22 +106,17 @@ namespace zypp
 	value_type pop_front();
 
      public:
-	/** Backdoor */
-	operator struct ::_Queue *()
-	{ return _pimpl; }
-	/** Backdoor */
-	operator const struct ::_Queue *() const
-	{ return _pimpl; }
-
+	operator struct ::_Queue *();			///< libsolv backdoor
+	operator const struct ::_Queue *() const	///< libsolv backdoor
+	{ return _pimpl.get(); }
       private:
-        /** Pointer to implementation */
-	struct ::_Queue * _pimpl;
+	RWCOW_pointer<struct ::_Queue> _pimpl;		///< Pointer to implementation
     };
 
     /** \relates Queue Stream output */
     std::ostream & operator<<( std::ostream & str, const Queue & obj );
 
-    /** \relates Queue Verbose stream output */
+    /** \relates Queue Stream output assuming a Solvable queue. */
     std::ostream & dumpOn( std::ostream & str, const Queue & obj );
 
     /** \relates Queue */
@@ -111,10 +126,12 @@ namespace zypp
     inline bool operator!=( const Queue & lhs, const Queue & rhs )
     { return !( lhs == rhs ); }
 
-    /////////////////////////////////////////////////////////////////
   } // namespace sat
   ///////////////////////////////////////////////////////////////////
-  /////////////////////////////////////////////////////////////////
+
+  /** \relates Queue Clone function for RWCOW_pointer */
+  template<> struct ::_Queue * rwcowClone<struct ::_Queue>( const struct ::_Queue * rhs );
+
 } // namespace zypp
 ///////////////////////////////////////////////////////////////////
 #endif // ZYPP_SAT_QUEUE_H
