@@ -163,7 +163,7 @@ while true; do
     Becho "!!! Version is unchanged at $LAST_RELEASE ($LAST_COMPAT)."
     read -n 1 -p "$(Gecho "(a)bort, (c)ontinue, (P) patch, (M) minor, (I) incompat minor, (e)dit version [e]: ")" RES
     echo
-    case "${RES:-x}" in
+    case "${RES:-e}" in
       [eE]*)
 	$EDITOR $VERSIONFILE
 	eval $(getversion)
