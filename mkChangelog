@@ -77,8 +77,16 @@ function getversion() {
     thisrelease = major"."minor"."patch
     printf "LAST_RELEASE='%s'\n", lastrelease
     printf "THIS_RELEASE='%s'\n", major"."minor"."patch
+    printf "THIS_MINOR='%s'\n", minor
+    printf "THIS_PATCH='%s'\n", patch
   }
   '
+}
+
+function setversion() {
+  local KEY="$1"
+  local VAL="$2"
+  sed -i "s/^ *SET *( *${KEY} .*/SET(${KEY} \"${VAL}\")/" "$VERSIONFILE"
 }
 
 function sameVersion() {
@@ -124,11 +132,22 @@ while true; do
   sameVersion && {
     newchangesentry
     Becho "!!! Version is unchanged at $LAST_RELEASE."
-    read -n 1 -p "$(Gecho "(a)bort, (c)ontinue, (e)dit version: ")" RES
+    read -n 1 -p "$(Gecho "(a)bort, (c)ontinue, (P) patch, (M) minor, (e)dit version [e]: ")" RES
     echo
-    case "$RES" in
+    case "${RES:-e}" in
       [eE]*)
 	$EDITOR $VERSIONFILE
+	continue
+	;;
+      [P])
+	setversion VERSION_PATCH $(($THIS_PATCH + 1))
+	eval $(getversion)
+	continue
+	;;
+      [M])
+	setversion VERSION_MINOR $(($THIS_MINOR + 1))
+	setversion VERSION_PATCH 0
+	eval $(getversion)
 	continue
 	;;
       [cC])
