@@ -1,4 +1,10 @@
 -------------------------------------------------------------------
+Wed Dec 18 12:25:06 CET 2013 - ma@suse.de
+
+- Upadte manpage (distribution upgrade)
+- version 1.7.17
+
+-------------------------------------------------------------------
 Wed Dec 11 11:18:29 CET 2013 - ma@suse.de
 
 - Fix groff .TP commands in manpage (bnc#854784)
