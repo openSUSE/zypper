@@ -18,10 +18,29 @@
 #include <vector>
 #include <string>
 #include <sstream>
+#include <boost/format.hpp>
 
 #include "zypp/base/Easy.h"
 #include "zypp/base/PtrTypes.h"
 #include "zypp/base/Function.h"
+
+
+///////////////////////////////////////////////////////////////////
+namespace boost
+{
+  /** A formater with (N)o (A)rgument (C)heck.
+   * It won't complain about missing or excess arguments. Sometimes
+   * usefull when dealing with translations or classes providing a
+   * default formater.
+   */
+  inline format formatNAC( const std::string & string_r ) {
+    using namespace boost::io;
+    format fmter( string_r );
+    fmter.exceptions( all_error_bits ^ ( too_many_args_bit | too_few_args_bit ) );
+    return fmter;
+  }
+} // namespace boost
+///////////////////////////////////////////////////////////////////
 
 ///////////////////////////////////////////////////////////////////
 namespace zypp
