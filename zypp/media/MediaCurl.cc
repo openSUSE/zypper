@@ -287,6 +287,15 @@ void fillSettingsFromUrl( const Url &url, TransferSettings &s )
             s.setCertificateAuthoritiesPath(ca_path);
     }
 
+    Pathname client_cert( url.getQueryParam("ssl_clientcert") );
+    if( ! client_cert.empty())
+    {
+        if( !PathInfo(client_cert).isFile() || !client_cert.absolute())
+            ZYPP_THROW(MediaBadUrlException(url, "Invalid ssl_clientcert file"));
+        else
+            s.setClientCertificatePath(client_cert);
+    }
+
     param = url.getQueryParam( "proxy" );
     if ( ! param.empty() )
     {
@@ -607,6 +616,11 @@ void MediaCurl::setupEasy()
         _settings.verifyHostEnabled() )
     {
       SET_OPTION(CURLOPT_CAPATH, _settings.certificateAuthoritiesPath().c_str());
+    }
+
+    if( ! _settings.clientCertificatePath().empty() )
+    {
+      SET_OPTION(CURLOPT_SSLCERT, _settings.clientCertificatePath().c_str());
     }
 
 #ifdef CURLSSLOPT_ALLOW_BEAST

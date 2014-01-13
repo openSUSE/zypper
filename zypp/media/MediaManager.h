@@ -408,6 +408,8 @@ namespace zypp
      *       - 'peer': Verifies whether the certificate provided by the
      *         server is authentic against the chain of digital signatures
      *         found in <tt>ssl_capath</tt>.
+     *     - <tt>ssl_clientcert</tt>
+     *       Path to a ssl client certificate for authentication to a repo.
      *     - <tt>timeout</tt>:
      *       Transfer timeout in seconds between 0 and 3600, 0 disables
      *       the timeout, default timeout is 180 seconds.

@@ -75,6 +75,7 @@ public:
     bool _verify_host;
     bool _verify_peer;
     Pathname _ca_path;
+    Pathname _client_cert_path;
 
     // workarounds
     bool _head_requests_allowed;
@@ -274,6 +275,16 @@ void TransferSettings::setVerifyHostEnabled( bool enabled )
 bool TransferSettings::verifyPeerEnabled() const
 {
     return _impl->_verify_peer;
+}
+
+Pathname TransferSettings::clientCertificatePath() const
+{
+    return _impl->_client_cert_path;
+}
+
+void TransferSettings::setClientCertificatePath( const zypp::Pathname &path )
+{
+    _impl->_client_cert_path = path;
 }
 
 

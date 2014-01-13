@@ -254,6 +254,16 @@ public:
    */
   bool headRequestsAllowed() const;
 
+  /**
+   * SSL client certificate file
+   */
+  Pathname clientCertificatePath() const;
+
+  /**
+   * Sets the SSL client certificate file
+   */
+  void setClientCertificatePath( const zypp::Pathname &path );
+
 protected:
   class Impl;
   RWCOW_pointer<Impl> _impl;
