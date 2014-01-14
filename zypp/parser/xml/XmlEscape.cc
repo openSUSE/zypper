@@ -37,36 +37,6 @@ namespace iobind
   {
     struct ZYPP_LOCAL xml_escape_parser
     {
-      std::string escape(const std::string &istr) const
-      {
-	typedef unsigned char uchar;
-
-	std::string str( istr );
-        for ( size_t i = 0; i < str.size(); ++i )
-	{
-	  switch (str[i])
-	  {
-	    case '<': str.replace(i, 1, "&lt;"); i += 3; break;
-	    case '>': str.replace(i, 1, "&gt;"); i += 3; break;
-	    case '&': str.replace(i, 1, "&amp;"); i += 4; break;
-	    case '"': str.replace(i, 1, "&quot;"); i += 5; break;
-	    case '\'': str.replace(i, 1, "&apos;"); i += 5; break;
-
-	    // control chars we allow:
-	    case '\n':
-	    case '\r':
-	    case '\t':
-	      break;
-
-	    default:
-	      if ( uchar(str[i]) < 32u )
-		str[i] = '?'; // filter problematic control chars (XML1.0)
-	      break;
-	  }
-	}
-	return str;
-      }
-
       std::string unescape(const std::string &istr) const
       {
 	size_t i;
@@ -103,8 +73,42 @@ namespace zypp
   ///////////////////////////////////////////////////////////////////
   namespace xml
   {
-    std::string escape( const std::string & in_r )
-    { return iobind::parser::xml_escape_parser().escape( in_r ); }
+    ///////////////////////////////////////////////////////////////////
+    namespace detail
+    {
+      std::ostream & EscapedString::dumpOn( std::ostream & str ) const
+      {
+	typedef unsigned char uchar;
+	for ( char ch : _in )
+	{
+	  switch ( ch )
+	  {
+	    case '<':	str << "&lt;";		break;
+	    case '>':	str << "&gt;";		break;
+	    case '&':	str << "&amp;";		break;
+	    case '"':	str << "&quot;";	break;
+	    case '\'':	str << "&apos;";	break;
+
+	    // control chars we allow:
+	    case '\n':
+	    case '\r':
+	    case '\t':
+	      str << ch;
+	      break;
+
+	    default:
+	      if ( uchar(ch) < 32u )
+		str << '?'; // filter problematic control chars (XML1.0)
+	      else
+		str << ch;
+	      break;
+	  }
+	}
+	return str;
+      }
+
+    } // detail
+    ///////////////////////////////////////////////////////////////////
 
     std::string unescape( const std::string & in_r )
     { return iobind::parser::xml_escape_parser().unescape( in_r ); }
