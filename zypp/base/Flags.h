@@ -61,9 +61,9 @@ namespace zypp
         typedef Enum enum_type;
 
       public:
-        Flags()                               : _val( 0 ) {}
-        Flags( Enum flag_r )                  : _val( flag_r ) {}
-        explicit Flags( unsigned flag_r )     : _val( flag_r ) {}
+        constexpr Flags()                               : _val( 0 ) {}
+        constexpr Flags( Enum flag_r )                  : _val( flag_r ) {}
+        constexpr explicit Flags( unsigned flag_r )     : _val( flag_r ) {}
 
         Flags & operator&=( Flags rhs )       { _val &= rhs._val; return *this; }
         Flags & operator&=( Enum rhs )        { _val &= rhs;      return *this; }
