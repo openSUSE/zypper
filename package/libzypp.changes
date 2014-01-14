@@ -1,4 +1,15 @@
 -------------------------------------------------------------------
+Tue Jan 14 18:38:49 CET 2014 - ma@suse.de
+
+- Improve ProgressData reporting.
+- Allow xml::escape directly dumping to a stream.
+- Add support for repo authentication using SSL client certificates 
+  (bnc#683914)
+- Enhance Queue to perform COW
+- fix documentation
+- version 14.4.0 (4)
+
+-------------------------------------------------------------------
 Thu Jan  9 01:13:40 CET 2014 - ma@suse.de
 
 - Update zypp-po.tar.bz2
