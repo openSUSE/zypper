@@ -71,7 +71,7 @@ namespace zypp
           {
             std::vector<std::string> keys;
             str::split( it->second, std::back_inserter(keys) );
-            if ( ! keys.empty() ) 
+            if ( ! keys.empty() )
               info.setGpgKeyUrl( Url(*keys.begin()) );
           }
           else if ( it->first == "gpgcheck" )
@@ -83,7 +83,7 @@ namespace zypp
           else if ( it->first == "proxy" )
           {
 	    if (it->second != "_none_" )
-            { 
+            {
               str::regex ex("^(.*):([0-9]+)$");
               str::smatch what;
               if(str::regex_match(it->second, what, ex)){
@@ -92,7 +92,7 @@ namespace zypp
               }
             }
           } else
-            ERR << "Unknown attribute in [" << *its << "]: " << it->second << " ignored" << endl;
+            ERR << "Unknown attribute in [" << *its << "]: " << it->first << "=" << it->second << " ignored" << endl;
         }
         if (url.isValid())
             info.addBaseUrl(url);
