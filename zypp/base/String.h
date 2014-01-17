@@ -131,6 +131,11 @@ namespace zypp
     inline std::string asString( const std::string &t )
     { return t; }
 
+#ifndef SWIG // Swig treats it as syntax error
+    inline std::string asString( std::string && t )
+    { return std::move(t); }
+#endif
+
     inline std::string asString( const char * t )
     { return t; }
 
