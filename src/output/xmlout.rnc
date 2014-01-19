@@ -161,6 +161,7 @@ repo-element =
     attribute name { xsd:string }?,
     attribute type { xsd:string }?,
     attribute enabled { xsd:boolean }?,
+    attribute priority { xsd:nonNegativeInteger }?,
     attribute autorefresh { xsd:boolean }?,
     attribute gpgcheck { xsd:boolean }?,
     attribute gpgkey { xsd:anyURI }?,
