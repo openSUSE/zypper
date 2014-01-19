@@ -1,4 +1,10 @@
 -------------------------------------------------------------------
+Sun Jan 19 16:12:30 CET 2014 - ma@suse.de
+
+- Fix missing priority in RepoInfo::dumpAsXML (bnc#855845)
+- version 1.6.179
+
+-------------------------------------------------------------------
 Wed Dec 11 11:23:59 CET 2013 - ma@suse.de
 
 - Fix groff .TP commands in manpage (bnc#854784)
