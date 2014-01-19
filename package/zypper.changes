@@ -1,4 +1,10 @@
 -------------------------------------------------------------------
+Sun Jan 19 16:12:56 CET 2014 - ma@suse.de
+
+- Fix missing priority in RepoInfo::dumpAsXML (bnc#855845)
+- version 1.8.22
+
+-------------------------------------------------------------------
 Thu Jan  9 01:15:01 CET 2014 - ma@suse.de
 
 - Update zypper-po.tar.bz2
