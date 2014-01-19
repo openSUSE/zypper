@@ -1,4 +1,10 @@
 -------------------------------------------------------------------
+Sun Jan 19 16:13:02 CET 2014 - ma@suse.de
+
+- Fix missing priority in RepoInfo::dumpAsXML (bnc#855845)
+- version 1.7.18
+
+-------------------------------------------------------------------
 Wed Dec 18 12:25:06 CET 2013 - ma@suse.de
 
 - Upadte manpage (distribution upgrade)
