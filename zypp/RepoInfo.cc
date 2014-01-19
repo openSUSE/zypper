@@ -287,7 +287,7 @@ namespace zypp
   {
     static const std::string noAcceptanceFile = "no-acceptance-needed\n";
     bool accept = true;
-    
+
     Pathname licenseTgz( _pimpl->licenseTgz() );
     if ( licenseTgz.empty() || ! PathInfo( licenseTgz ).isFile() )
       return false;     // no licenses at all
@@ -476,6 +476,7 @@ namespace zypp
     if (type() != repo::RepoType::NONE)
       str << " type=\"" << type().asString() << "\"";
     str
+      << " priority=\"" << priority() << "\""
       << " enabled=\"" << enabled() << "\""
       << " autorefresh=\"" << autorefresh() << "\""
       << " gpgcheck=\"" << gpgCheck() << "\"";
