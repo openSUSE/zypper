@@ -104,8 +104,15 @@ public:
    *                  types of output.
    */
   virtual void info(const std::string & msg, Verbosity verbosity = NORMAL, Type mask = TYPE_ALL) = 0;
+  /** \overload taking boost::format */
   void info( const boost::format & msg, Verbosity verbosity = NORMAL, Type mask = TYPE_ALL )
   { info( msg.str(), verbosity, mask ); }
+  /** \overload concatenating 2 strings (e.g. translated and untranslated parts) */
+  void info( std::string msg, const std::string & msg2, Verbosity verbosity = NORMAL, Type mask = TYPE_ALL )
+  { info( (msg+=msg2), verbosity, mask ); }
+  /** \overload concatenating 2 strings (e.g. translated and untranslated parts) */
+  void info( const boost::format & msg, const std::string & msg2, Verbosity verbosity = NORMAL, Type mask = TYPE_ALL )
+  { info( msg.str(), msg2, verbosity, mask ); }
 
   /**
    * Show a warning.
