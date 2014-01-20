@@ -1692,22 +1692,31 @@ void add_repo(Zypper & zypper, RepoInfo & repo)
 
   MIL << "Repository successfully added: " << repo << endl;
 
-  if(is_cd)
+  if ( is_cd )
   {
-    zypper.out().info(boost::str(
-      format(_("Reading data from '%s' media"))
-        % (zypper.config().show_alias ? repo.alias() : repo.name())));
-    bool error = refresh_raw_metadata(zypper, repo, false);
-    if (!error)
-      error = build_cache(zypper, repo, false);
-    if (error)
+    if ( ! copts.count("no-check") )
     {
-      zypper.out().error(boost::str(
-        format(_("Problem reading data from '%s' media"))
-          % (zypper.config().show_alias ? repo.alias() : repo.name())),
-        _("Please check if your installation media is valid and readable."));
-      zypper.setExitCode(ZYPPER_EXIT_ERR_ZYPP);
-      return;
+      zypper.out().info(boost::str(
+	format(_("Reading data from '%s' media"))
+	  % (zypper.config().show_alias ? repo.alias() : repo.name())));
+	bool error = refresh_raw_metadata(zypper, repo, false);
+	if (!error)
+	  error = build_cache(zypper, repo, false);
+	if (error)
+	{
+	  zypper.out().error(boost::str(
+	    format(_("Problem reading data from '%s' media"))
+	      % (zypper.config().show_alias ? repo.alias() : repo.name())),
+		   _("Please check if your installation media is valid and readable."));
+		   zypper.setExitCode(ZYPPER_EXIT_ERR_ZYPP);
+		   return;
+	}
+    }
+    else
+    {
+      zypper.out().info( boost::format(_("Reading data from '%s' media is delayed until next refresh."))
+                                       % (zypper.config().show_alias ? repo.alias() : repo.name()),
+			 " [--no-check]" );
     }
   }
 }
