@@ -1,4 +1,11 @@
 -------------------------------------------------------------------
+Mon Jan 20 14:30:37 CET 2014 - ma@suse.de
+
+- Zypper must refresh CD/DVD if no raw metadata are present. (bnc#859160)
+- Don't read metadata from CD/DVD repo if --no-check was used (bnc#859160)
+- version 1.6.313
+
+-------------------------------------------------------------------
 Sun Jan 19 16:12:22 CET 2014 - ma@suse.de
 
 - Fix missing priority in RepoInfo::dumpAsXML (bnc#855845)
