@@ -3941,6 +3941,7 @@ void Zypper::doCommand()
       if (copts.count("file-list"))
       {
         attr = zypp::sat::SolvAttr::filelist;
+	query.setFilesMatchFullPath( true );
         query.addDependency( attr , name, cap.detail().op(), cap.detail().ed(), Arch(cap.detail().arch()) );
       }
       if ( attr == sat::SolvAttr::name || copts.count("name") )
