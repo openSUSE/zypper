@@ -663,6 +663,8 @@ namespace zypp
 			  std::inserter( oldfiles, oldfiles.end() ) );
 	  for ( const std::string & old : oldfiles )
 	  {
+	    if ( old == Repository::systemRepoAlias() )	// don't remove the @System solv file
+	      continue;
 	    filesystem::recursive_rmdir( cachePath / old );
 	  }
 	}
