@@ -1,4 +1,18 @@
 -------------------------------------------------------------------
+Mon Jan 20 14:21:34 CET 2014 - ma@suse.de
+
+- Zypper must refresh CD/DVD if no raw metadata are present. (bnc#859160)
+- Don't read metadata from CD/DVD repo if --no-check was used (bnc#859160)
+- Fix filelist search to match full paths instead of basenames only (bnc#859211)
+- Fix missing priority in RepoInfo::dumpAsXML (bnc#855845)
+- Rephrase 'Disabling repository...' message (bnc#856809)
+- Hint to SDB and openSUSE release notes
+- Add note that openSUSE only supports "zypper dup" one release at a time.
+- Fix grof .TP commands in manpage (bnc#854784)
+- Fix detailed printing of query matches (bnc#853167)
+- version 1.10.2
+
+-------------------------------------------------------------------
 Thu Jan 16 01:14:19 CET 2014 - ma@suse.de
 
 - Update zypper-po.tar.bz2
