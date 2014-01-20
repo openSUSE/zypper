@@ -1,4 +1,11 @@
 -------------------------------------------------------------------
+Mon Jan 20 17:14:48 CET 2014 - ma@suse.de
+
+- Fix cleanup code removing the @System solv file. (bnc#853065)
+- Fix missing priority in RepoInfo::dumpAsXML (bnc#855845)
+- version 14.5.0 (4)
+
+-------------------------------------------------------------------
 Tue Jan 14 18:38:49 CET 2014 - ma@suse.de
 
 - Improve ProgressData reporting.
