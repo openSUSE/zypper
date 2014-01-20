@@ -1288,14 +1288,22 @@ bool refresh_repo(Zypper & zypper, const zypp::RepoInfo & repo)
     bool force_download =
       zypper.cOpts().count("force") || zypper.cOpts().count("force-download");
 
-    // without this a cd is required to be present in the drive on each refresh
-    // (or more 'refresh needed' check)
-    bool is_cd = is_changeable_media(repo.url());
-    if (!force_download && is_cd)
-    {
-      MIL << "Skipping refresh of a changeable read-only media." << endl;
-      return false;
-    }
+      ///////////////////////////////////////////////////////////////////
+      // ma: Actually the block below should not be necessary. libzypp asks for
+      // the CD/DVD only if no raw metadata are cached. Once the raw metadata are
+      // present, no refresh takes place. We may just rebuild the solv file in case
+      // it was lost, damaged or has an old format. If this does not work, fix libzypp!
+#if 0
+      // without this a cd is required to be present in the drive on each refresh
+      // (or more 'refresh needed' check)
+      bool is_cd = is_changeable_media(repo.url());
+      if (!force_download && is_cd)
+      {
+	MIL << "Skipping refresh of a changeable read-only media." << endl;
+	return false;
+      }
+#endif
+      ///////////////////////////////////////////////////////////////////
 
     MIL << "calling refreshMetadata" << (force_download ? ", forced" : "")
         << endl;
