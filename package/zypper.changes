@@ -1,4 +1,10 @@
 -------------------------------------------------------------------
+Mon Jan 20 09:41:39 CET 2014 - ma@suse.de
+
+- Fix filelist search to match full paths instead of basenames only (bnc#859211)
+- version 1.8.23
+
+-------------------------------------------------------------------
 Sun Jan 19 16:12:56 CET 2014 - ma@suse.de
 
 - Fix missing priority in RepoInfo::dumpAsXML (bnc#855845)
