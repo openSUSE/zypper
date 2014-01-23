@@ -7,7 +7,6 @@
 
 #include <iostream>
 #include <fstream>
-#include <boost/format.hpp>
 #include <boost/logic/tribool.hpp>
 #include <boost/lexical_cast.hpp>
 #include <iterator>
@@ -30,7 +29,7 @@
 #include "getopt.h"
 #include "Table.h"
 #include "utils/messages.h"
-#include "utils/misc.h" // for xml_encode
+#include "utils/misc.h"
 #include "repos.h"
 
 using namespace std;

@@ -77,7 +77,7 @@ void OutXML::info(const string & msg, Verbosity verbosity, Type mask)
   if (infoWarningFilter(verbosity, mask))
     return;
 
-  cout << "<message type=\"info\">" << xml_encode(msg)
+  cout << "<message type=\"info\">" << xml::escape(msg)
        << "</message>" << endl;
 }
 
@@ -86,13 +86,13 @@ void OutXML::warning(const string & msg, Verbosity verbosity, Type mask)
   if (infoWarningFilter(verbosity, mask))
     return;
 
-  cout << "<message type=\"warning\">" << xml_encode(msg)
+  cout << "<message type=\"warning\">" << xml::escape(msg)
        << "</message>" << endl;
 }
 
 void OutXML::error(const string & problem_desc, const string & hint)
 {
-  cout << "<message type=\"error\">" << xml_encode(problem_desc)
+  cout << "<message type=\"error\">" << xml::escape(problem_desc)
        << "</message>" << endl;
   //! \todo hint
 }
@@ -111,7 +111,7 @@ void OutXML::error(const zypp::Exception & e,
   if (!hint.empty())
     s << hint << endl;
 
-  cout << "<message type=\"error\">" << xml_encode(s.str())
+  cout << "<message type=\"error\">" << xml::escape(s.str())
        << "</message>" << endl;
 }
 
@@ -119,8 +119,8 @@ void OutXML::writeProgressTag(const string & id, const string & label,
                               int value, bool done, bool error)
 {
   cout << "<progress";
-  cout << " id=\"" << xml_encode(id) << "\"";
-  cout << " name=\"" << xml_encode(label) << "\"";
+  cout << " id=\"" << xml::escape(id) << "\"";
+  cout << " name=\"" << xml::escape(label) << "\"";
   if (done)
     cout << " done=\"" << error << "\"";
   // print value only if it is known (percentage progress)
@@ -162,7 +162,7 @@ void OutXML::progressEnd(const string & id, const string& label, bool error)
 void OutXML::dwnldProgressStart(const zypp::Url & uri)
 {
   cout << "<download"
-    << " url=\"" << xml_encode(uri.asString()) << "\""
+    << " url=\"" << xml::escape(uri.asString()) << "\""
     << " percent=\"-1\""
     << " rate=\"-1\""
     << "/>" << endl;
@@ -173,7 +173,7 @@ void OutXML::dwnldProgress(const zypp::Url & uri,
                            long rate)
 {
   cout << "<download"
-    << " url=\"" << xml_encode(uri.asString()) << "\""
+    << " url=\"" << xml::escape(uri.asString()) << "\""
     << " percent=\"" << value << "\""
     << " rate=\"" << rate << "\""
     << "/>" << endl;
@@ -182,7 +182,7 @@ void OutXML::dwnldProgress(const zypp::Url & uri,
 void OutXML::dwnldProgressEnd(const zypp::Url & uri, long rate, bool error)
 {
   cout << "<download"
-    << " url=\"" << xml_encode(uri.asString()) << "\""
+    << " url=\"" << xml::escape(uri.asString()) << "\""
     << " rate=\"" << rate << "\""
     << " done=\"" << error << "\""
     << "/>" << endl;
@@ -236,7 +236,7 @@ void OutXML::searchResult( const Table & table_r )
 	}
 	else
 	{
-	  cout << xml_encode(*cit) << '"';
+	  cout << xml::escape(*cit) << '"';
 	}
 	++cidx;
       }
@@ -256,8 +256,8 @@ void OutXML::prompt(PromptId id,
 {
   cout << "<prompt id=\"" << id << "\">" << endl;
   if (!startdesc.empty())
-    cout << "<description>" << xml_encode(startdesc) << "</description>" << endl;
-  cout << "<text>" << xml_encode(prompt) << "</text>" << endl;
+    cout << "<description>" << xml::escape(startdesc) << "</description>" << endl;
+  cout << "<text>" << xml::escape(prompt) << "</text>" << endl;
 
   unsigned int i = 0;
   for (PromptOptions::StrVector::const_iterator it = poptions.options().begin();
@@ -269,8 +269,8 @@ void OutXML::prompt(PromptId id,
     cout << "<option";
     if (poptions.defaultOpt() == i)
       cout << " default=\"1\"";
-    cout << " value=\"" << xml_encode(option) << "\"";
-    cout << " desc=\"" << xml_encode(poptions.optionHelp(i)) << "\"";
+    cout << " value=\"" << xml::escape(option) << "\"";
+    cout << " desc=\"" << xml::escape(poptions.optionHelp(i)) << "\"";
     cout << "/>" << endl;
   }
   cout << "</prompt>" << endl;

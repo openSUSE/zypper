@@ -148,14 +148,14 @@ static bool xml_list_patches (Zypper & zypper)
         cout << "interactive=\"" << (patch->interactiveWhenIgnoring(ignoreFlags) ? "true" : "false") << "\" ";
         cout << "kind=\"patch\"";
         cout << ">" << endl;
-        cout << "  <summary>" << xml_encode(patch->summary()) << "  </summary>" << endl;
-        cout << "  <description>" << xml_encode(patch->description()) << "</description>" << endl;
-        cout << "  <license>" << xml_encode(patch->licenseToConfirm()) << "</license>" << endl;
+        cout << "  <summary>" << xml::escape(patch->summary()) << "  </summary>" << endl;
+        cout << "  <description>" << xml::escape(patch->description()) << "</description>" << endl;
+        cout << "  <license>" << xml::escape(patch->licenseToConfirm()) << "</license>" << endl;
 
         if ( !patch->repoInfo().alias().empty() )
         {
-          cout << "  <source url=\"" << xml_encode(patch->repoInfo().url().asString());
-          cout << "\" alias=\"" << xml_encode(patch->repoInfo().alias()) << "\"/>" << endl;
+          cout << "  <source url=\"" << xml::escape(patch->repoInfo().url().asString());
+          cout << "\" alias=\"" << xml::escape(patch->repoInfo().alias()) << "\"/>" << endl;
         }
 
         cout << " </update>" << endl;
@@ -187,14 +187,14 @@ static void xml_list_updates(const ResKindSet & kinds)
     cout << "arch=\""  << res->arch().asString() << "\" ";
     cout << "kind=\"" << res->kind() << "\" ";
     cout << ">" << endl;
-    cout << "  <summary>" << xml_encode(res->summary()) << "  </summary>" << endl;
-    cout << "  <description>" << xml_encode(res->description()) << "</description>" << endl;
-    cout << "  <license>" << xml_encode(res->licenseToConfirm()) << "</license>" << endl;
+    cout << "  <summary>" << xml::escape(res->summary()) << "  </summary>" << endl;
+    cout << "  <description>" << xml::escape(res->description()) << "</description>" << endl;
+    cout << "  <license>" << xml::escape(res->licenseToConfirm()) << "</license>" << endl;
 
     if ( !res->repoInfo().alias().empty() )
     {
-        cout << "  <source url=\"" << xml_encode(res->repoInfo().url().asString());
-        cout << "\" alias=\"" << xml_encode(res->repoInfo().alias()) << "\"/>" << endl;
+        cout << "  <source url=\"" << xml::escape(res->repoInfo().url().asString());
+        cout << "\" alias=\"" << xml::escape(res->repoInfo().alias()) << "\"/>" << endl;
     }
 
     cout << " </update>" << endl;

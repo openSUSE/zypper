@@ -28,7 +28,7 @@ namespace zypp
   class Product;
   class Pattern;
 }
-
+using namespace zypp;
 
 typedef std::set<zypp::ResKind> ResKindSet;
 
@@ -84,8 +84,6 @@ bool looks_like_rpm_file(const std::string & s);
  */
 zypp::Pathname cache_rpm(const std::string & rpm_uri_str,
                          const std::string & cache_dir);
-
-std::string xml_encode(const std::string & text);
 
 std::string & indent(std::string & text, int columns);
 

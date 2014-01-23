@@ -14,7 +14,6 @@
 #include <zypp/base/Easy.h>
 #include <zypp/base/Regex.h>
 #include <zypp/media/MediaManager.h>
-#include <zypp/parser/xml/XmlEscape.h>
 #include <zypp/misc/CheckAccessDeleted.h>
 #include <zypp/ExternalProgram.h>
 
@@ -318,11 +317,6 @@ Pathname cache_rpm(const string & rpm_uri_str, const string & cache_dir)
   return Pathname();
 }
 
-string xml_encode(const string & text)
-{
-  return zypp::xml::escape(text);
-}
-
 std::string & indent(std::string & text, int columns)
 {
   string indent(columns, ' '); indent.insert(0, 1, '\n');
@@ -341,19 +335,19 @@ string asXML(const Product & p, bool is_installed)
   ostringstream str;
   str
     << "<product"
-       " name=\"" << xml_encode(p.name()) << "\""
+       " name=\"" << xml::escape(p.name()) << "\""
        " version=\"" << p.edition().version() << "\""
        " release=\"" << p.edition().release() << "\""
        " epoch=\"" << p.edition().epoch() << "\""
        " arch=\"" << p.arch() << "\""
        " productline=\"" << p.productLine() << "\""
-       " registerrelease=\"" << xml_encode(p.registerRelease()) << "\""
-       " vendor=\"" << xml_encode(p.vendor()) << "\""
-       " summary=\"" << xml_encode(p.summary()) << "\""
-       " shortname=\"" << xml_encode(p.shortName()) << "\""
-       " flavor=\"" << xml_encode(p.flavor()) << "\""
+       " registerrelease=\"" << xml::escape(p.registerRelease()) << "\""
+       " vendor=\"" << xml::escape(p.vendor()) << "\""
+       " summary=\"" << xml::escape(p.summary()) << "\""
+       " shortname=\"" << xml::escape(p.shortName()) << "\""
+       " flavor=\"" << xml::escape(p.flavor()) << "\""
        " isbase=\"" << (p.isTargetDistribution() ? 1 : 0) << "\""
-       " repo=\"" << xml_encode(p.repoInfo().alias()) << "\""
+       " repo=\"" << xml::escape(p.repoInfo().alias()) << "\""
        " installed=\"" << (is_installed ? 1 : 0) << "\"";
   if (p.description().empty())
     str << "/>";
@@ -369,14 +363,14 @@ string asXML(const Pattern & p, bool is_installed)
   ostringstream str;
   str
     << "<pattern"
-       " name=\"" << xml_encode(p.name()) << "\""
+       " name=\"" << xml::escape(p.name()) << "\""
        " version=\"" << p.edition().version() << "\""
        " release=\"" << p.edition().release() << "\""
        " epoch=\"" << p.edition().epoch() << "\""
        " arch=\"" << p.arch() << "\""
-       " vendor=\"" << xml_encode(p.vendor()) << "\""
-       " summary=\"" << xml_encode(p.summary()) << "\""
-       " repo=\"" << xml_encode(p.repoInfo().alias()) << "\""
+       " vendor=\"" << xml::escape(p.vendor()) << "\""
+       " summary=\"" << xml::escape(p.summary()) << "\""
+       " repo=\"" << xml::escape(p.repoInfo().alias()) << "\""
        " installed=\"" << (is_installed ? 1 : 0) << "\""
        " uservisible=\"" << (p.userVisible() ? 1 : 0) << "\"";
   if (p.description().empty())

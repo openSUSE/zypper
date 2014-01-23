@@ -1317,9 +1317,9 @@ void Summary::writeXmlResolvableList(ostream & out, const KindToResPairSet & res
         out << " arch-old=\"" << rold->arch() << "\"";
       }
       if (!res->summary().empty())
-        out << " summary=\"" << xml_encode(res->summary()) << "\"";
+        out << " summary=\"" << xml::escape(res->summary()) << "\"";
       if (!res->description().empty())
-        out << ">" << endl << xml_encode(res->description()) << "</solvable>" << endl;
+        out << ">" << endl << xml::escape(res->description()) << "</solvable>" << endl;
       else
         out << "/>" << endl;
     }
