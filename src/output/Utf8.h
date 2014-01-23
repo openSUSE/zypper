@@ -22,14 +22,11 @@ namespace utf8
     string() {}
     string( const char * rhs )		: _str( rhs ) {}
     string( const std::string & rhs )	: _str( rhs ) {}
-    string( const string & rhs )	: _str( rhs._str ) {}
 
   public:
     const char * c_str() const			{ return _str.c_str(); }
     const std::string & str() const		{ return _str; }
     std::string & str()				{ return _str; }
-    // operator const std::string &() const	{ return _str; }
-    // operator std::string()			{ return _str; }
 
   public:
     /** utf8 size */
