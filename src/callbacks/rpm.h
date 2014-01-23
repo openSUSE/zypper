@@ -12,10 +12,10 @@
 #include <sstream>
 #include <ctime>
 
-#include <boost/format.hpp>
-
 #include <zypp/base/Logger.h>
 #include <zypp/base/String.h>
+#include <zypp/sat/Queue.h>
+#include <zypp/sat/FileConflicts.h>
 #include <zypp/ZYppCallbacks.h>
 #include <zypp/Package.h>
 #include <zypp/Patch.h>
@@ -42,9 +42,87 @@ static bool report_again( timespec & lastTime_r, int & lastValue_r, int currentV
 }
 
 ///////////////////////////////////////////////////////////////////
+namespace out
+{
+  ///////////////////////////////////////////////////////////////////
+  /// \class FileConflictsListFormater
+  /// \brief Printing FileConflicts in List
+  ///////////////////////////////////////////////////////////////////
+  struct FileConflictsListFormater
+  {
+    typedef out::DefaultGapedListLayout ListLayout;
+
+    struct XmlFormater
+    {
+      std::string operator()( const sat::FileConflicts::Conflict & val_r ) const
+      { str::Str str; dumpAsXMLOn( str.stream(), val_r ); return str; }
+    };
+
+    std::string operator()( const sat::FileConflicts::Conflict & val_r ) const
+    { return asUserString( val_r ); }
+  };
+  ///////////////////////////////////////////////////////////////////
+
+  /** \relates SolvableListFormater Conversion to sat::Solvable */
+  template <class _Tp>
+  sat::Solvable asSolvable( const _Tp & val_r )
+  { return sat::asSolvable( val_r ); }
+
+  sat::Solvable asSolvable( int val_r )		// e.g. satQueues use int as SolvabeId
+  { return sat::Solvable( val_r ); }
+
+  ///////////////////////////////////////////////////////////////////
+  /// \class SolvableListFormater
+  /// \brief Printing Solvable based types in List (legacy format used in summary)
+  ///////////////////////////////////////////////////////////////////
+  struct SolvableListFormater
+  {
+    typedef out::CompressedListLayout ListLayout;
+
+    struct XmlFormater
+    {
+      template <class _Tp>
+      std::string operator()( const _Tp & val_r ) const
+      { return operator()( makeResObject( asSolvable( val_r ) ) ); }
+
+      std::string operator()( ResObject::Ptr val_r, ResObject::Ptr old_r = nullptr ) const
+      {
+	str::Str ret;
+	ret << "<solvable";
+	ret << " type=\""	<< val_r->kind() << "\"";
+	ret << " name=\""	<< val_r->name() << "\"";
+	ret << " edition=\""	<< val_r->edition() << "\"";
+	ret << " arch=\""	<< val_r->arch() << "\"";
+	{
+	  std::string text( val_r->summary() );
+	  if ( ! text.empty() )
+	    ret << " summary=\"" << xml::escape( text ) << "\"";
+	}
+	{ // legacy: description as solvable:PCDATA instead of a subnode
+	  std::string text( val_r->description() );
+	  if ( ! text.empty() )
+	    ret << ">\n" << xml::escape( text ) << "</solvable>";
+	  else
+	    ret << "/>";
+	}
+	return ret;
+      }
+    };
+
+    template <class _Tp>
+    std::string operator()( const _Tp & val_r ) const
+    { return operator()( makeResObject( asSolvable( val_r ) ) ); }
+
+    std::string operator()( ResObject::Ptr val_r, ResObject::Ptr old_r = nullptr ) const
+    { return val_r->ident().asString(); }
+  };
+
+} // namespace out
+///////////////////////////////////////////////////////////////////
+
+///////////////////////////////////////////////////////////////////
 namespace ZmartRecipients
 {
-
 
 // resolvable Message
 struct PatchMessageReportReceiver : public zypp::callback::ReceiveReport<zypp::target::PatchMessageReport>
@@ -245,6 +323,103 @@ struct InstallResolvableReportReceiver : public zypp::callback::ReceiveReport<zy
   }
 };
 
+///////////////////////////////////////////////////////////////////
+/// \class FindFileConflictstReportReceive
+/// \brief
+///////////////////////////////////////////////////////////////////
+struct FindFileConflictstReportReceiver : public zypp::callback::ReceiveReport<zypp::target::FindFileConflictstReport>
+{
+  FindFileConflictstReportReceiver()
+  : _progressId( "fileconflict-check" )
+  // TranslatorExplanation A progressbar label.
+  , _progressLabel(_("Checking for file conflicts:") )\
+  {}
+
+  virtual void reportbegin()
+  {
+    _progress.reset( new Out::ProgressBar( Zypper::instance()->out(), _progressLabel ) );
+  }
+
+  virtual bool start( const ProgressData & progress_r )
+  {
+    (*_progress)->set( progress_r );
+    return !Zypper::instance()->exitRequested();
+  }
+
+  virtual bool progress( const ProgressData & progress_r, const sat::Queue & noFilelist_r )
+  {
+    (*_progress)->set( progress_r );
+    return !Zypper::instance()->exitRequested();
+  }
+
+  virtual bool result( const ProgressData & progress_r, const sat::Queue & noFilelist_r, const sat::FileConflicts & conflicts_r )
+  {
+    // finsh progress
+    bool error = ! ( conflicts_r.empty() && noFilelist_r.empty() );
+    (*_progress).error( error );
+    _progress.reset();
+
+    if ( ! error )
+      return !Zypper::instance()->exitRequested();
+
+    // show error result
+    Out & out( Zypper::instance()->out() );
+    {
+      Out::XmlNode guard( out, "fileconflict-summary" );
+
+      if ( ! noFilelist_r.empty() )
+      {
+	out.warning( boost::formatNAC(
+		       // TranslatorExplanation %1%(commandline option)
+		       _("Checking for file conflicts requires not installed packages to be downloaded in advance "
+	                 "in order to access their file lists. See option '%1%' in the zypper manual page for details.")
+		     ) % "--download-in-advance" );
+	out.gap();
+
+	out.list( "no-filelist",
+		  // TranslatorExplanation %1%(number of packages); detailed list follows
+		  _PL("The following package had to be excluded from file conflicts check because it is not yet downloaded:",
+		      "The following %1% packages had to be excluded from file conflicts check because they are not yet downloaded:",
+		      noFilelist_r.size() ),
+		  noFilelist_r, out::SolvableListFormater() );
+	out.gap();
+      }
+
+      if ( ! conflicts_r.empty() )
+      {
+	out.list( "fileconflicts",
+		  // TranslatorExplanation %1%(number of conflicts); detailed list follows
+		  _PL("Detected %1% file conflict:",
+		      "Detected %1% file conflicts:",
+		      conflicts_r.size() ),
+		  conflicts_r, out::FileConflictsListFormater() );
+	out.gap();
+      }
+
+
+      bool cont = read_bool_answer( PROMPT_YN_CONTINUE_ON_FILECONFLICT, str::Str()
+		  // TranslatorExplanation Problem description before asking whether to "Continue? [yes/no] (no):"
+		  <<_("File conflicts happen when two packages attempt to install files with the same name but different contents. If you continue, conflicting files will be replaced losing the previous content.")
+		  << "\n"
+		  <<_("Continue?"),
+		  false );
+      out.gap();
+      if ( ! cont )
+	return false;		// aborted.
+    }
+
+    return !Zypper::instance()->exitRequested();
+  }
+
+  virtual void reportend()
+  { _progress.reset(); }
+
+private:
+  std::string	_progressId;
+  std::string	_progressLabel;
+  scoped_ptr<Out::ProgressBar>	_progress;
+};
+
 
 ///////////////////////////////////////////////////////////////////
 }; // namespace ZyppRecipients
@@ -257,6 +432,7 @@ class RpmCallbacks {
     ZmartRecipients::PatchScriptReportReceiver _scriptReceiver;
     ZmartRecipients::RemoveResolvableReportReceiver _installReceiver;
     ZmartRecipients::InstallResolvableReportReceiver _removeReceiver;
+    ZmartRecipients::FindFileConflictstReportReceiver _fileConflictsReceiver;
     int _step_counter;
 
   public:
@@ -267,6 +443,7 @@ class RpmCallbacks {
       _scriptReceiver.connect();
       _installReceiver.connect();
       _removeReceiver.connect();
+      _fileConflictsReceiver.connect();
     }
 
     ~RpmCallbacks()
@@ -275,6 +452,7 @@ class RpmCallbacks {
       _scriptReceiver.disconnect();
       _installReceiver.disconnect();
       _removeReceiver.disconnect();
+      _fileConflictsReceiver.disconnect();
     }
 };
 
