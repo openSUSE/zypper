@@ -420,15 +420,13 @@ void OutNormal::promptHelp(const PromptOptions & poptions)
   _newline = true;
 }
 
-unsigned int OutNormal::termwidth() const {
-  if(!_isatty)
-    return 10000;
-  else
+unsigned OutNormal::termwidth() const
+{
+  if ( _isatty )
   {
     struct winsize wns;
     if (!ioctl(1, TIOCGWINSZ, &wns))
       return wns.ws_col;
-    else
-      return 10000;
   }
+  return Out::termwidth();	// unlimited
 }

@@ -81,6 +81,9 @@ std::string TermLine::get( unsigned width_r, SplitFlags flags_r, char exp_r ) co
 //	class Out
 ////////////////////////////////////////////////////////////////////////////////
 
+constexpr Out::Type Out::TYPE_NONE;
+constexpr Out::Type Out::TYPE_ALL;
+
 Out::~Out()
 {}
 

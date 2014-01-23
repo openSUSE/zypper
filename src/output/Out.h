@@ -2,8 +2,11 @@
 #define OUT_H_
 
 #include <string>
+#include <sstream>
 #include <boost/format.hpp>
+#include <boost/smart_ptr.hpp>
 
+#include <zypp/parser/xml/XmlEscape.h>
 #include <zypp/base/NonCopyable.h>
 #include <zypp/base/Exception.h>
 #include <zypp/base/String.h>
@@ -16,12 +19,168 @@
 #include "utils/prompt.h"
 #include "output/prompt.h"
 
-using zypp::tribool;
-using zypp::indeterminate;
-using zypp::ProgressData;
+using namespace zypp;
 
 class Table;
 class Zypper;
+
+///////////////////////////////////////////////////////////////////
+namespace out
+{
+  /** \relates XmlNodeAttrFormater XML NODE ATTRIBUTE representation of types [str::asString] */
+  template <class _Tp>
+  std::string asXmlNodeAttr( const _Tp & val_r )
+  { using str::asString; return asString( val_r ); }
+
+  ///////////////////////////////////////////////////////////////////
+  /// \class XmlNodeAttrFormater
+  /// \brief Default representation of types as XmlNodeAttr [asXmlNodeAttr]
+  ///////////////////////////////////////////////////////////////////
+  struct XmlNodeAttrFormater
+  {
+    template <class _Tp>
+    std::string operator()( const _Tp & val_r ) const
+    { return asXmlNodeAttr( val_r ); }
+  };
+
+} // namespace out
+///////////////////////////////////////////////////////////////////
+
+///////////////////////////////////////////////////////////////////
+namespace out
+{
+  /** \relates ListFormater NORMAL representation of types in lists [no default] */
+  template <class _Tp>
+  std::string asListElement( const _Tp & val_r );
+
+  /** \relates ListFormater XML representation of types in lists [no default] */
+  template <class _Tp>
+  std::string asXmlListElement( const _Tp & val_r );
+
+  ///////////////////////////////////////////////////////////////////
+  /// \class ListLayout
+  /// \brief Basic list layout
+  /// \todo fix design made in eile
+  ///////////////////////////////////////////////////////////////////
+  struct ListLayout
+  {
+    ListLayout( bool singleline_r, bool wrapline_r, bool gaped_r, unsigned indent_r )
+    : _singleline( singleline_r )
+    , _wrapline( wrapline_r )
+    , _gaped( gaped_r )
+    , _indent( indent_r )
+    {}
+    bool	_singleline;	///< one list element per line
+    bool	_wrapline;	///< fold lines longer than \c _linewidth
+    bool	_gaped;		///< add extra NL before element (if singleline)
+    unsigned	_indent;	///< ammount of indent
+  };
+
+  namespace detail
+  {
+    template <bool _Singleline, bool _Wrapline, bool _Gaped, unsigned _Indent>
+    struct ListLayoutInit : public ListLayout { ListLayoutInit() : ListLayout( _Singleline, _Wrapline, _Gaped, _Indent ) {} };
+  }
+  typedef detail::ListLayoutInit<true, false,false, 0U>	XmlListLayout;
+  typedef detail::ListLayoutInit<true, true, false, 0U>	DefaultListLayout;	///< one element per line, no indent
+  typedef detail::ListLayoutInit<true, true, true,  0U>	DefaultGapedListLayout;	///< one element per line, no indent, gaped
+  typedef detail::ListLayoutInit<true, true, false, 2U>	IndentedListLayout;	///< one element per line, indented
+  typedef detail::ListLayoutInit<true, true, true,  2U>	IndentedGapedListLayout;///< one element per line, indented, gaped
+  typedef detail::ListLayoutInit<false,true, false, 2U>	CompressedListLayout;	///< multiple elements per line, indented
+
+  ///////////////////////////////////////////////////////////////////
+  /// \class ListFormater
+  /// \brief Default representation of types in Lists [asListElement|asXmlListElement]
+  ///////////////////////////////////////////////////////////////////
+  struct ListFormater
+  {
+    typedef DefaultListLayout ListLayout;	//< ListLayout for NORMAL lists
+
+    struct XmlFormater				//< XML representation of element
+    {
+      template <class _Tp>
+      std::string operator()( const _Tp & val_r ) const
+      { return asXmlListElement( val_r ); }
+    };
+
+    template <class _Tp>			//< NORMAL representation of element
+    std::string operator()( const _Tp & val_r ) const
+    { return asListElement( val_r ); }
+
+    std::string operator()( const std::string & val_r ) const
+    { return val_r; }
+
+    std::string operator()( const char * val_r ) const
+    { return val_r; }
+  };
+
+} // namespace out
+///////////////////////////////////////////////////////////////////
+
+///////////////////////////////////////////////////////////////////
+namespace out
+{
+  namespace detail
+  {
+    // TODO: wrap singlelines; support for atttibuted text;
+    struct BasicList
+    {
+      NON_COPYABLE( BasicList );
+
+      BasicList( ListLayout layout_r, unsigned linewidth_r )
+      : _layout( std::move(layout_r) )
+      , _linewidth( linewidth_r )
+      , _indent( _layout._indent, ' ' )
+      , _cpos( 0U )
+      {}
+
+      ~BasicList()
+      { if ( !_layout._singleline && _cpos ) std::cout << std::endl; }
+
+      void print( const std::string & val_r )
+      {
+	if ( _layout._singleline )
+	{
+	  if ( _layout._gaped )
+	    std::cout << std::endl;
+	  std::cout << _indent << val_r << std::endl;
+	}
+	else
+	{
+	  if ( _cpos != 0 && ! fitsOnLine( 1/*' '*/ + val_r.size() ) )
+	    endLine();
+
+	  if ( _cpos == 0 )
+	  {
+	    if ( !_indent.empty() )
+	      printAndCount( _indent );
+	  }
+	  else
+	    printAndCount( " " );
+
+	  printAndCount( val_r );
+	}
+      }
+
+    private:
+      bool fitsOnLine( unsigned val_r )
+      { return( !_layout._wrapline || _cpos + val_r <= _linewidth ); }
+
+      void printAndCount( const std::string & val_r )
+      { _cpos += val_r.size(); std::cout << val_r; }
+
+      void endLine()
+      { std::cout << std::endl; _cpos = 0U; }
+
+    private:
+      const ListLayout	_layout;
+      unsigned		_linewidth;	///< desired line width
+      const std::string	_indent;
+      unsigned		_cpos;
+    };
+  }
+} // namespace out
+///////////////////////////////////////////////////////////////////
 
 // Too simple on small terminals as esc-sequences may get truncated.
 // A table like writer for attributed strings is desirable.
@@ -114,32 +273,214 @@ public:
   /** Verbosity levels. */
   typedef enum
   {
-    /** Only important messages (no progress or status, only the result). */
-    QUIET  = 0,
-    /** Default output verbosity level. Progress for important tasks, moderate
-     * amount of status messages, operation information, result. */
-    NORMAL = 1,
-    /** More detailed description of the operations. */
-    HIGH   = 2,
-    /** \todo drop this level in favor of zypper.log? */
-    DEBUG  = 3
+    QUIET  = 0,		///< Only important messages (no progress or status, only the result).
+    NORMAL = 1,		///< Default output verbosity level. Progress for important tasks, moderate
+			///< amount of status messages, operation information, result.
+    HIGH   = 2,		///< More detailed description of the operations.
+    DEBUG  = 3		///< \todo drop this level in favor of zypper.log?
   } Verbosity;
 
   /** Known output types implemented by derived classes. */
-  typedef enum
+  enum TypeBit
   {
-    TYPE_NORMAL = 1,
-    TYPE_XML    = 2,
-    TYPE_ALL    = 0xff
-  } Type;
+    TYPE_NORMAL = 0x01<<0,	///< plain text output
+    TYPE_XML    = 0x01<<1	///< xml output
+  };
+  ZYPP_DECLARE_FLAGS(Type,TypeBit);
 
-public:
-  Out(Type type, Verbosity verbosity = NORMAL)
+  static constexpr Type TYPE_NONE	= TypeBit(0x00);
+  static constexpr Type TYPE_ALL	= TypeBit(0xff);
+
+protected:
+  Out(TypeBit type, Verbosity verbosity = NORMAL)
     : _verbosity(verbosity), _type(type)
   {}
-  virtual ~Out();
 
 public:
+  virtual ~Out();
+
+protected:
+  ///////////////////////////////////////////////////////////////////
+  /// \class ParentOut
+  /// \brief Convenience base class storing the back reference to Out.
+  struct ParentOut
+  {
+    NON_COPYABLE_BUT_MOVE( ParentOut );
+    ParentOut( Out & out_r ) : _out( out_r ) {}
+    Out & out() { return _out; }
+  private:
+    Out & _out;
+  };
+
+public:
+  ///////////////////////////////////////////////////////////////////
+  /// \class OnBlockEnd
+  /// \brief RAII writing out a remembered string when going out of scope
+  /// Helper class to store an end tag after the start tag was written.
+  /// As it's usually used in a RAII context the class is not copyable,
+  /// but it is movable. Use it like a std::ostringstream.
+  struct OnBlockEnd : protected ParentOut
+  {
+    NON_COPYABLE( OnBlockEnd );
+    OnBlockEnd( Out & out_r )		: ParentOut( out_r )	{}
+    OnBlockEnd( OnBlockEnd && rhs )	: ParentOut( rhs.out() ){ if ( rhs._strp ) _strp.swap( rhs._strp ); }
+    ~OnBlockEnd()						{ if ( _strp ) std::cout << _strp->str(); }
+    std::ostream & operator*() { if ( !_strp ) _strp.reset( new std::ostringstream ); return *_strp; }
+  private:
+    boost::scoped_ptr<std::ostringstream> _strp;
+  };
+
+  ///////////////////////////////////////////////////////////////////
+  /// \class XmlNode
+  /// \brief XML only: RAII writing a XML nodes start/end tag
+  /// \code
+  /// {
+  /// 	XmlNode( "node", { "attr", "val" } ); // <node attr="val">
+  /// 	...
+  /// }                                       // </node>
+  /// \endcode
+  struct XmlNode : protected ParentOut
+  {
+    ///////////////////////////////////////////////////////////////////
+    /// \class AttrDefType
+    /// \brief (Key, Value) string pair of XML node attributes
+    struct AttrDefType : public std::pair<std::string,std::string>
+    {
+      typedef std::pair<std::string,std::string> Pair;
+
+      template <typename _Type>
+      AttrDefType( std::string key_r, _Type && val_r )
+      : Pair( std::move(key_r), ::out::asXmlNodeAttr( std::forward<_Type>(val_r) ) )
+      {}
+    };
+    ///////////////////////////////////////////////////////////////////
+
+    /** Ctor taking nodename and attribute list. */
+    XmlNode( Out & out_r, const std::string & name_r, const std::initializer_list<AttrDefType> & attrs_r = {} )
+    : ParentOut( out_r ), _onend( out_r )
+    {
+      if ( out().typeXML() && ! name_r.empty() )
+      {
+	std::cout << "<" << name_r;
+	for ( const auto & pair : attrs_r )
+	  std::cout << " " << pair.first << "=\"" << xml::escape( pair.second ) << "\"";
+	std::cout << ">" << std::endl;
+	*_onend << "</" << name_r << ">" << std::endl;
+      }
+    }
+
+    /** Convenience ctor for one attribute pair */
+    XmlNode( Out & out_r, const std::string & name_r, AttrDefType attr_r )
+    : XmlNode( out_r, name_r, { attr_r } )
+    {}
+
+  private:
+    OnBlockEnd _onend;
+  };
+  ///////////////////////////////////////////////////////////////////
+
+  /** XML only: Write a leaf node without PCDATA
+   * \code
+   * <node attr="val"/>
+   * \endcode
+   */
+  void xmlNode( const std::string & name_r, const std::initializer_list<XmlNode::AttrDefType> & attrs_r = {} )
+  {
+    if ( typeXML() )
+    {
+      std::cout << "<" << name_r;
+      for ( const auto & pair : attrs_r )
+	std::cout << " " << pair.first << "=\"" << xml::escape(pair.second) << "\"";
+      std::cout << "/>" << std::endl;
+    }
+  }
+  /** \overload for one attribute pair */
+  void xmlNode( const std::string & name_r, XmlNode::AttrDefType attr_r )
+  { xmlNode( name_r, { attr_r } ); }
+
+  ///////////////////////////////////////////////////////////////////
+  /// \class TitleNode
+  /// \brief XmlNode with optional normal text headline (NL appended)
+  struct TitleNode : public XmlNode
+  {
+    TitleNode( XmlNode && node_r, const std::string & title_r = "" )
+    : XmlNode( std::move(node_r) )
+    { if ( out().typeNORMAL() && ! title_r.empty() ) std::cout << title_r << std::endl; }
+  };
+
+  ///////////////////////////////////////////////////////////////////
+  /// \class List<ListFormater>
+  /// \brief Printing a list
+  ///////////////////////////////////////////////////////////////////
+  template <class _ListFormater = out::ListFormater>
+  struct List : protected ParentOut
+  {
+    List( Out & out_r, _ListFormater formater_r, out::ListLayout layout_r = typename _ListFormater::ListLayout() )
+    : ParentOut( out_r ), _formater( std::move(formater_r) ), _base( std::move(layout_r), out_r.termwidth() )
+    {}
+
+    template <class _Tp>
+    List & operator<<( _Tp && val_r )
+    { _base.print( _formater( std::forward<_Tp>(val_r) ) ); return *this; }
+
+  private:
+    _ListFormater _formater;
+    out::detail::BasicList _base;
+  };
+  ///////////////////////////////////////////////////////////////////
+
+public:
+  /** Write list from iterator pair */
+  template <class _Iterator, class _ListFormater = out::ListFormater>
+  void list( _Iterator begin_r, _Iterator end_r, _ListFormater && formater_r = _ListFormater() )
+  {
+    switch ( type() )
+    {
+      case TYPE_NORMAL:
+      {
+	List<_ListFormater> mlist( *this, std::forward<_ListFormater>(formater_r) );
+	for_( it, begin_r, end_r ) mlist << ( *it );
+      }
+      break;
+      case TYPE_XML:
+      {
+	typedef typename _ListFormater::XmlFormater XmlFormater;
+	List<XmlFormater> mlist( *this, XmlFormater(), out::XmlListLayout() );
+	for_( it, begin_r, end_r ) mlist << ( *it );
+      }
+      break;
+    }
+  }
+
+  /** Write list from constainer */
+  template <class _Container, class _ListFormater = out::ListFormater>
+  void list( const _Container & container_r, _ListFormater && formater_r = _ListFormater() )
+  { list( container_r.begin(), container_r.end(), std::forward<_ListFormater>(formater_r) ); }
+
+  /** Write list from iterator pair enclosed by a \ref Node */
+  template <class _Iterator, class _ListFormater = out::ListFormater>
+  void list( XmlNode && node_r, _Iterator begin_r, _Iterator end_r, _ListFormater && formater_r = _ListFormater() )
+  { XmlNode guard( std::move(node_r) ); list( begin_r, end_r, std::forward<_ListFormater>(formater_r) ); }
+
+  /** Write list from constainer enclosed by a \ref Node */
+  template <class _Container, class _ListFormater = out::ListFormater>
+  void list( XmlNode && node_r, const _Container & container_r, _ListFormater && formater_r = _ListFormater() )
+  { XmlNode guard( std::move(node_r) ); list( container_r.begin(), container_r.end(), std::forward<_ListFormater>(formater_r) ); }
+
+  /** Write list from container creating a TitleNode with \c size="nnn" attribue and
+   * replacing optional \c %1% in \a title_r with size. */
+  template <class _Container, class _ListFormater = out::ListFormater>
+  void list( const std::string & nodeName_r, const std::string & title_r, const _Container & container_r, _ListFormater && formater_r = _ListFormater() )
+  {
+    TitleNode guard( XmlNode( *this, nodeName_r, XmlNode::AttrDefType( "size", str::numstring( container_r.size() ) ) ),
+		     (boost::formatNAC( title_r ) % container_r.size()).str() );
+    list( container_r, std::forward<_ListFormater>(formater_r) );
+  }
+
+public:
+  /** NORMAL: An empty line */
+  void gap() { if ( type() == TYPE_NORMAL ) std::cout << std::endl; }
+
   /**
    * Show an info message.
    *
@@ -329,15 +670,25 @@ public:
 
 public:
   /** Get current verbosity. */
-  Verbosity verbosity() { return _verbosity; }
+  Verbosity verbosity() const { return _verbosity; }
 
   /** Set current verbosity. */
   void setVerbosity(Verbosity verbosity) { _verbosity = verbosity; }
 
   /** Return the type of the instance. */
-  Type type() { return _type; }
+  TypeBit type() const { return _type; }
+
+  /** Test for a specific type */
+  bool type( TypeBit type_r ) const { return type() == type_r; }
+  /** \overload test for TYPE_NORMAL */
+  bool typeNORMAL() const { return type( TYPE_NORMAL ); }
+  /** \overload test for TPE_XML */
+  bool typeXML() const { return type( TYPE_XML ); }
 
 protected:
+  /** Width for formated output [unlimited]. */
+  virtual unsigned termwidth() const { return unsigned(-1); }
+
   /**
    * Determine whether the output is intended for the particular type.
    */
@@ -358,8 +709,10 @@ protected:
 
 private:
   Verbosity _verbosity;
-  Type      _type;
+  const TypeBit _type;
 };
+
+ZYPP_DECLARE_OPERATORS_FOR_FLAGS(Out::Type);
 
 ///////////////////////////////////////////////////////////////////
 /// \class Out::ProgressBar
@@ -445,6 +798,10 @@ public:
 
   /** \overload also change the progress bar label. */
   void error( const std::string & label_r )
+  { _progress.name( label_r ); error( true ); }
+
+  /** \overload also change the progress bar label and disambiguate. */
+  void error( const char * label_r )
   { _progress.name( label_r ); error( true ); }
 
   /** \overload also change the progress bar label. */
