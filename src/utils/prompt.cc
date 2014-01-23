@@ -163,7 +163,7 @@ read_action_ari_with_timeout(PromptId pid, unsigned timeout, int default_action)
 
   if (default_action > 2 || default_action < 0)
   {
-    WAR << "bad default action" << endl;
+    WAR << pid << " bad default action" << endl;
     default_action = 0;
   }
 
@@ -172,7 +172,7 @@ read_action_ari_with_timeout(PromptId pid, unsigned timeout, int default_action)
   {
     zypper.out().info(zypp::str::form(_("Retrying in %u seconds..."), timeout));
     sleep(timeout);
-    MIL << "running non-interactively, returning " << default_action << endl;
+    MIL << pid << " running non-interactively, returning " << default_action << endl;
     return default_action;
   }
 
@@ -194,11 +194,11 @@ read_action_ari_with_timeout(PromptId pid, unsigned timeout, int default_action)
     {
       reply = getchar();
       char reply_str[2] = {reply, 0};
-      DBG << " reply: " << reply << " (" << zypp::str::toLower(reply_str) << " lowercase)" << endl;
+      DBG << pid << " reply: " << reply << " (" << zypp::str::toLower(reply_str) << " lowercase)" << endl;
       bool got_valid_reply = false;
       for (unsigned int i = 0; i < poptions.options().size(); i++)
       {
-        DBG << "index: " << i << " option: " << poptions.options()[i] << endl;
+        DBG << pid << " index: " << i << " option: " << poptions.options()[i] << endl;
         if (poptions.options()[i] == zypp::str::toLower(reply_str))
         {
           reply_int = i;
@@ -216,13 +216,13 @@ read_action_ari_with_timeout(PromptId pid, unsigned timeout, int default_action)
       else if (feof(stdin))
       {
         zypper.out().info(zypp::str::form(_("Retrying in %u seconds..."), timeout));
-        WAR << "no good input, returning " << default_action
+        WAR << pid << " no good input, returning " << default_action
           << " in " << timeout << " seconds." << endl;
         sleep(timeout);
         return default_action;
       }
       else
-        WAR << "Unknown char " << reply << endl;
+        WAR << pid << " Unknown char " << reply << endl;
     }
 
     string msg = boost::str(
