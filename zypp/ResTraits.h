@@ -26,7 +26,7 @@ namespace zypp
     /** Those are denoted to be installed, if the
      *  solver verifies them as being satisfied. */
     inline bool isPseudoInstalled( ResKind kind_r )
-    { return( kind_r == ResKind::patch || kind_r == ResKind::pattern ); }
+    { return( kind_r == ResKind::patch ); }
 
     /////////////////////////////////////////////////////////////////
   } // namespace traits

@@ -1174,10 +1174,10 @@ namespace zypp
 
         ExternalProgram::Arguments cmd;
         cmd.push_back( "repo2solv.sh" );
-
         // repo2solv expects -o as 1st arg!
         cmd.push_back( "-o" );
         cmd.push_back( solvfile.asString() );
+	cmd.push_back( "-X" );	// autogenerate pattern from pattern-package
 
         if ( repokind == RepoType::RPMPLAINDIR )
         {
