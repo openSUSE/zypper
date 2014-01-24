@@ -46,6 +46,36 @@
 #define nullptr NULL
 #endif
 
+/** Delete copy ctor and copy assign */
+#define NON_COPYABLE(CLASS)			\
+  CLASS( const CLASS & ) = delete;		\
+  CLASS & operator=( const CLASS & ) = delete
+
+/** Default copy ctor and copy assign */
+#define DEFAULT_COPYABLE(CLASS)			\
+  CLASS( const CLASS & ) = default;		\
+  CLASS & operator=( const CLASS & ) = default
+
+/** Delete move ctor and move assign */
+#define NON_MOVABLE(CLASS)			\
+  CLASS( CLASS && ) = delete;			\
+  CLASS & operator=( CLASS && ) = delete
+
+/** Default move ctor and move assign */
+#define DEFAULT_MOVABLE(CLASS)			\
+  CLASS( CLASS && ) = default;			\
+  CLASS & operator=( CLASS && ) = default
+
+/** Delete copy ctor and copy assign but enable default move */
+#define NON_COPYABLE_BUT_MOVE( CLASS ) 		\
+  NON_COPYABLE(CLASS);				\
+  DEFAULT_MOVABLE(CLASS)
+
+/** Default move ctor and move assign but enable default copy */
+#define NON_MOVABLE_BUT_COPY( CLASS ) 		\
+  NON_MOVABLE(CLASS);				\
+  DEFAULT_COPYABLE(CLASS)
+
 ///////////////////////////////////////////////////////////////////
 namespace zypp
 { /////////////////////////////////////////////////////////////////
