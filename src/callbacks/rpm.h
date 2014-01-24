@@ -55,7 +55,7 @@ namespace out
     struct XmlFormater
     {
       std::string operator()( const sat::FileConflicts::Conflict & val_r ) const
-      { str::Str str; dumpAsXMLOn( str.stream(), val_r ); return str; }
+      { str::Str str; dumpAsXmlOn( str.stream(), val_r ); return str; }
     };
 
     std::string operator()( const sat::FileConflicts::Conflict & val_r ) const

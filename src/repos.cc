@@ -1088,7 +1088,7 @@ static void print_xml_repo_list(Zypper & zypper, list<RepoInfo> repos)
   cout << "<repo-list>" << endl;
   for (std::list<RepoInfo>::const_iterator it = repos.begin();
        it !=  repos.end(); ++it)
-    it->dumpAsXMLOn(cout);
+    it->dumpAsXmlOn(cout);
   cout << "</repo-list>" << endl;
 }
 
@@ -2591,12 +2591,12 @@ static void print_xml_service_list(Zypper & zypper,
               bind(&RepoCollector::collect, &collector, _1)));
       ostringstream sout;
       for_(repoit, collector.repos.begin(), collector.repos.end())
-        repoit->dumpAsXMLOn(sout);
-      (*it)->dumpAsXMLOn(cout, sout.str());
+        repoit->dumpAsXmlOn(sout);
+      (*it)->dumpAsXmlOn(cout, sout.str());
       continue;
     }
 
-    (*it)->dumpAsXMLOn(cout);
+    (*it)->dumpAsXmlOn(cout);
   }
 
   cout << "</service-list>" << endl;
