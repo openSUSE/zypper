@@ -511,6 +511,16 @@ namespace zypp
                         IdString( _solvable->arch ).c_str() );
     }
 
+    std::string Solvable::asUserString() const\
+    {
+      NO_SOLVABLE_RETURN( (_id == detail::systemSolvableId ? "systemSolvable" : "noSolvable") );
+      return str::form( "%s-%s.%s(%s)",
+                        IdString( _solvable->name ).c_str(),
+                        IdString( _solvable->evr ).c_str(),
+                        IdString( _solvable->arch ).c_str(),
+                        repository().asUserString().c_str() );
+    }
+
     bool Solvable::identical( Solvable rhs ) const
     {
       NO_SOLVABLE_RETURN( ! rhs.get() );

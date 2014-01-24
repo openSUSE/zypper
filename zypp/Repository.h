@@ -81,6 +81,10 @@ namespace zypp
         /** Label to display for this repo. */
         std::string name() const;
 
+	/** User string */
+	std::string asUserString() const
+	{ return name(); }
+
         /**
          * Timestamp when this repository was generated
          *

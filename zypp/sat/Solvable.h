@@ -186,6 +186,9 @@ namespace zypp
         */
         std::string asString() const;
 
+	/** String representation <tt>"ident-edition.arch(repo)"</tt> or \c "noSolvable" */
+        std::string asUserString() const;
+
         /** Test whether two Solvables have the same content.
          * Basically the same name, edition, arch, vendor and buildtime.
          */
