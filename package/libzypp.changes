@@ -1,4 +1,13 @@
 -------------------------------------------------------------------
+Fri Jan 24 08:41:13 CET 2014 - ma@suse.de
+
+- Check for file conflicts in commit (bnc#673720)
+- Add asUserSting: human readable (translated) string representation
+- Add file conflict detection during commit (bnc#673720)
+- Add Transaction::installedResult
+- version 14.6.0 (6)
+
+-------------------------------------------------------------------
 Mon Jan 20 17:14:48 CET 2014 - ma@suse.de
 
 - Fix cleanup code removing the @System solv file. (bnc#853065)
