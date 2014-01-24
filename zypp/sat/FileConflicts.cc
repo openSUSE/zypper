@@ -131,14 +131,14 @@ namespace zypp
     }
 
 
-    std::ostream & dumpAsXMLOn( std::ostream & str, const FileConflicts & obj )
+    std::ostream & dumpAsXmlOn( std::ostream & str, const FileConflicts & obj )
     {
       xmlout::Node guard( str, "fileconflicts", { "size", obj.size() } );
       if ( ! obj.empty() )
       {
 	*guard << "\n";
 	for ( const auto & el : obj )
-	  dumpAsXMLOn( *guard, el ) << "\n";
+	  dumpAsXmlOn( *guard, el ) << "\n";
       }
       return str;
     }
@@ -146,7 +146,7 @@ namespace zypp
     namespace
     {
       /// \todo
-      std::ostream & dumpAsXMLHelper( std::ostream & str, const std::string & tag_r, IdString filename_r, IdString md5sum_r, Solvable solv_r )
+      std::ostream & dumpAsXmlHelper( std::ostream & str, const std::string & tag_r, IdString filename_r, IdString md5sum_r, Solvable solv_r )
       {
 	xmlout::Node guard( str, tag_r );
 	*xmlout::Node( *guard, "file" ) << filename_r;
@@ -172,11 +172,11 @@ namespace zypp
       }
     }
 
-    std::ostream & dumpAsXMLOn( std::ostream & str, const FileConflicts::Conflict & obj )
+    std::ostream & dumpAsXmlOn( std::ostream & str, const FileConflicts::Conflict & obj )
     {
       xmlout::Node guard( str, "fileconflict" );
-      dumpAsXMLHelper( *guard<<"\n", "lhs", obj.lhsFilename(), obj.lhsFilemd5(), obj.lhsSolvable() );
-      dumpAsXMLHelper( *guard<<"\n", "rhs", obj.rhsFilename(), obj.rhsFilemd5(), obj.rhsSolvable() );
+      dumpAsXmlHelper( *guard<<"\n", "lhs", obj.lhsFilename(), obj.lhsFilemd5(), obj.lhsSolvable() );
+      dumpAsXmlHelper( *guard<<"\n", "rhs", obj.rhsFilename(), obj.rhsFilemd5(), obj.rhsSolvable() );
       return str;
     }
 

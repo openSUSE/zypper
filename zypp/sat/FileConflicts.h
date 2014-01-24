@@ -76,10 +76,10 @@ namespace zypp
     std::ostream & operator<<( std::ostream & str, const FileConflicts::Conflict & obj );
 
     /** \relates FileConflicts XML output */
-    std::ostream & dumpAsXMLOn( std::ostream & str, const FileConflicts & obj );
+    std::ostream & dumpAsXmlOn( std::ostream & str, const FileConflicts & obj );
 
     /** \relates FileConflicts::Conflict XML output */
-    std::ostream & dumpAsXMLOn( std::ostream & str, const FileConflicts::Conflict & obj );
+    std::ostream & dumpAsXmlOn( std::ostream & str, const FileConflicts::Conflict & obj );
 
     /** \relates FileConflicts */
     inline bool operator==( const FileConflicts & lhs, const FileConflicts & rhs )

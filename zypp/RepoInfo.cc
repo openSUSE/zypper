@@ -463,10 +463,7 @@ namespace zypp
     return str;
   }
 
-  std::ostream & RepoInfo::dumpAsXMLOn( std::ostream & str) const
-  { return dumpAsXMLOn(str, ""); }
-
-  std::ostream & RepoInfo::dumpAsXMLOn( std::ostream & str, const std::string & content) const
+  std::ostream & RepoInfo::dumpAsXmlOn( std::ostream & str, const std::string & content ) const
   {
     string tmpstr;
     str

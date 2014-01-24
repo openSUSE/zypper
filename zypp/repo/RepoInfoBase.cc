@@ -169,10 +169,7 @@ namespace zypp
     return str;
   }
 
-  std::ostream & RepoInfoBase::dumpAsXMLOn(std::ostream & str) const
-  { return dumpAsXMLOn(str, ""); }
-
-  std::ostream & RepoInfoBase::dumpAsXMLOn( std::ostream & str, const std::string & content) const
+  std::ostream & RepoInfoBase::dumpAsXmlOn( std::ostream & str, const std::string & content ) const
   {
     return str << "<!-- there's no XML representation of RepoInfoBase -->" << endl;
   }

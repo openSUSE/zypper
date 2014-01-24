@@ -147,18 +147,15 @@ namespace zypp
 
     /**
      * Write an XML representation of this ServiceInfo object.
-     */
-    virtual std::ostream & dumpAsXMLOn(std::ostream & str) const;
-
-    /**
-     * Write an XML representation of this ServiceInfo object.
      *
      * \param str
      * \param content if not empty, produces <service ...>content</service>
      *                otherwise <service .../>
      */
-    virtual std::ostream & dumpAsXMLOn(
-        std::ostream & str, const std::string & content) const;
+    virtual std::ostream & dumpAsXmlOn( std::ostream & str, const std::string & content = "" ) const;
+
+    /** \deprecated Use camel cased dumpAsXmlOn */
+    ZYPP_DEPRECATED std::ostream & dumpAsXMLOn( std::ostream & str, const std::string & content = "" ) const { return dumpAsXmlOn( str, content ); }
 
     class Impl;
 

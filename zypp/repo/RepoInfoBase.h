@@ -15,7 +15,7 @@
 #include <iosfwd>
 
 #include "zypp/base/PtrTypes.h"
-
+#include "zypp/APIConfig.h"
 #include "zypp/Pathname.h"
 
 ///////////////////////////////////////////////////////////////////
@@ -141,16 +141,12 @@ namespace zypp
       virtual std::ostream & dumpAsIniOn( std::ostream & str ) const;
 
       /**
-       * Write an XML representation of this object. Implement in
-       * derived classes.
-       */
-      virtual std::ostream & dumpAsXMLOn(std::ostream & str) const;
-
-      /**
        * Write an XML representation of this object with content (if available).
        */
-      virtual std::ostream & dumpAsXMLOn(
-          std::ostream & str, const std::string & content) const;
+      virtual std::ostream & dumpAsXmlOn( std::ostream & str, const std::string & content = "" ) const;
+
+      /** \deprecated Use camel cased dumpAsXmlOn */
+      ZYPP_DEPRECATED std::ostream & dumpAsXMLOn( std::ostream & str, const std::string & content = "" ) const { return dumpAsXmlOn( str, content ); }
 
       class Impl;
     private:

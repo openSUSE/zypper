@@ -178,10 +178,7 @@ namespace zypp
     return str;
   }
 
-  std::ostream & ServiceInfo::dumpAsXMLOn(std::ostream & str) const
-  { return dumpAsXMLOn(str, ""); }
-
-  ostream & ServiceInfo::dumpAsXMLOn( ostream & str, const string & content) const
+  ostream & ServiceInfo::dumpAsXmlOn( ostream & str, const string & content ) const
   {
     str
       << "<service"

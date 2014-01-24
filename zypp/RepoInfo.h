@@ -311,9 +311,9 @@ namespace zypp
 
       /** Whether the repo license has to be accepted, e.g. there is no
        * no acceptance needed for openSUSE.
-       */ 
+       */
       bool needToAcceptLicense() const;
-    
+
       /** Return the best license for the current (or a specified) locale. */
       std::string getLicense( const Locale & lang_r = Locale() );
 
@@ -345,17 +345,15 @@ namespace zypp
 
       /**
        * Write an XML representation of this RepoInfo object.
-       */
-      virtual std::ostream & dumpAsXMLOn(std::ostream & str) const;
-
-      /**
-       * Write an XML representation of this RepoInfo object.
        *
        * \param str
        * \param content this argument is ignored (used in other classed derived
        *                from RepoInfoBase.
        */
-      virtual std::ostream & dumpAsXMLOn( std::ostream & str, const std::string & content ) const;
+      virtual std::ostream & dumpAsXmlOn( std::ostream & str, const std::string & content = "" ) const;
+
+      /** \deprecated Use camel cased dumpAsXmlOn */
+      ZYPP_DEPRECATED std::ostream & dumpAsXMLOn( std::ostream & str, const std::string & content = "" ) const { return dumpAsXmlOn( str, content ); }
 
       class Impl;
     private:
