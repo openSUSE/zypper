@@ -210,6 +210,9 @@ namespace zypp
       operator std::string() const
       { return _str.str(); }
 
+      std::ostream & stream()
+      { return _str; }
+
       std::ostringstream _str;
     };
 
