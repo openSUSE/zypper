@@ -257,6 +257,7 @@ SET( zypp_base_HEADERS
   base/Tr1hash.h
   base/Unit.h
   base/WatchFile.h
+  base/Xml.h
 )
 
 INSTALL(  FILES
