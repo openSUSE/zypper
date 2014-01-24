@@ -178,9 +178,9 @@ namespace zypp
             && repo.targetDistribution() != targetDistro)
         {
           MIL
-            << "Skipping repository meant for '" << targetDistro
+            << "Skipping repository meant for '" << repo.targetDistribution()
             << "' distribution (current distro is '"
-            << repo.targetDistribution() << "')." << endl;
+            << targetDistro << "')." << endl;
 
           return true;
         }
