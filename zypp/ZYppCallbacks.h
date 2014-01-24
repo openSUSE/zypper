@@ -26,6 +26,14 @@
 namespace zypp
 { /////////////////////////////////////////////////////////////////
 
+  ///////////////////////////////////////////////////////////////////
+  namespace sat
+  {
+    class Queue;
+    class FileConflicts;
+  } // namespace sat
+  ///////////////////////////////////////////////////////////////////
+
   struct ProgressReport : public callback::ReportBase
   {
     virtual void start( const ProgressData &/*task*/ )
@@ -462,19 +470,19 @@ namespace zypp
 
       /**
        * \param progress_r	Progress counter for packages to check.
-       * \param noFilelist_r	Number of skipped packages (no filelist/not yet downloaded).
+       * \param noFilelist_r	Queue of so far skipped solvables (no filelist/not yet downloaded).
        * \return \c true to continue, \c false upon user abort request.
        */
-      virtual bool progress( const ProgressData & progress_r, unsigned noFilelist_r )
+      virtual bool progress( const ProgressData & progress_r, const sat::Queue & noFilelist_r )
       { return true; }
 
       /**
        * \param progress_r	Progress counter for packages to check.
-       * \param noFilelist_r	Number of skipped packages (no filelist/not yet downloaded).
-       * \param conflicts_r	Number of fileconflicts found.
+       * \param noFilelist_r	Queue of skipped solvables (no filelist/not yet downloaded).
+       * \param conflicts_r	File conflits queue.
        * \return \c true to continue, \c false upon user abort request.
        */
-      virtual bool result( const ProgressData & progress_r, unsigned noFilelist_r, unsigned conflicts_r )
+      virtual bool result( const ProgressData & progress_r, const sat::Queue & noFilelist_r, const sat::FileConflicts & conflicts_r )
       { return true; }
     };
 
