@@ -1,4 +1,10 @@
 -------------------------------------------------------------------
+Fri Jan 24 11:26:52 CET 2014 - ma@suse.de
+
+- Patterns are no longer pseudo installed (Fate#309385)
+- version 14.7.0 (7)
+
+-------------------------------------------------------------------
 Fri Jan 24 08:41:13 CET 2014 - ma@suse.de
 
 - Check for file conflicts in commit (bnc#673720)
