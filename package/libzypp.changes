@@ -1,4 +1,11 @@
 -------------------------------------------------------------------
+Sat Jan 25 17:07:45 CET 2014 - ma@suse.de
+
+- Collect and execute %posttrans scripts delayed (Fate#313506)
+- BuildRequire libsolv implementing (Fate#309385)
+- version 14.8.0 (7)
+
+-------------------------------------------------------------------
 Fri Jan 24 11:26:52 CET 2014 - ma@suse.de
 
 - Patterns are no longer pseudo installed (Fate#309385)
