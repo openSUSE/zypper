@@ -575,6 +575,7 @@ INSTALL(  FILES
 
 
 SET( zypp_target_SRCS
+  target/RpmPostTransCollector.cc
   target/RequestedLocalesFile.cc
   target/SoftLocksFile.cc
   target/HardLocksFile.cc
@@ -585,9 +586,11 @@ SET( zypp_target_SRCS
   target/TargetException.cc
   target/TargetImpl.cc
   target/TargetImpl.commitFindFileConflicts.cc
+
 )
 
 SET( zypp_target_HEADERS
+  target/RpmPostTransCollector.h
   target/RequestedLocalesFile.h
   target/SoftLocksFile.h
   target/HardLocksFile.h
