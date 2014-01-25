@@ -46,7 +46,8 @@ namespace zypp
         RPMINST_NODIGEST   = 0x0040,
         RPMINST_NOSIGNATURE= 0x0080,
         RPMINST_NOUPGRADE  = 0x0100,
-        RPMINST_TEST	   = 0x0200
+        RPMINST_TEST	   = 0x0200,
+	RPMINST_NOPOSTTRANS= 0x0400
       };
 
       /** \relates RpmInstFlag Type-safe way of storing OR-combinations. */

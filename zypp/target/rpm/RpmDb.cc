@@ -1892,6 +1892,8 @@ void RpmDb::doInstallPackage( const Pathname & filename, RpmInstFlags flags, cal
     opts.push_back ("--justdb");
   if (flags & RPMINST_TEST)
     opts.push_back ("--test");
+  if (flags & RPMINST_NOPOSTTRANS)
+    opts.push_back ("--noposttrans");
 
   opts.push_back("--");
 
