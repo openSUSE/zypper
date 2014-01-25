@@ -756,59 +756,44 @@ std::string RpmHeader::tag_url() const
 std::string RpmHeader::tag_os() const
 {
   return string_val( RPMTAG_OS );
+
 }
 
-///////////////////////////////////////////////////////////////////
-//
-//
-//        METHOD NAME : RpmHeader::tag_prein
-//        METHOD TYPE : std::string
-//
-//        DESCRIPTION :
-//
 std::string RpmHeader::tag_prein() const
-{
-  return string_val( RPMTAG_PREIN );
-}
+{ return string_val( RPMTAG_PREIN ); }
 
-///////////////////////////////////////////////////////////////////
-//
-//
-//        METHOD NAME : RpmHeader::tag_postin
-//        METHOD TYPE : std::string
-//
-//        DESCRIPTION :
-//
+std::string RpmHeader::tag_preinprog() const
+{ return string_val( RPMTAG_PREINPROG ); }
+
 std::string RpmHeader::tag_postin() const
-{
-  return string_val( RPMTAG_POSTIN );
-}
+{ return string_val( RPMTAG_POSTIN ); }
 
-///////////////////////////////////////////////////////////////////
-//
-//
-//        METHOD NAME : RpmHeader::tag_preun
-//        METHOD TYPE : std::string
-//
-//        DESCRIPTION :
-//
+std::string RpmHeader::tag_postinprog() const
+{ return string_val( RPMTAG_POSTINPROG ); }
+
 std::string RpmHeader::tag_preun() const
-{
-  return string_val( RPMTAG_PREUN );
-}
+{ return string_val( RPMTAG_PREUN ); }
 
-///////////////////////////////////////////////////////////////////
-//
-//
-//        METHOD NAME : RpmHeader::tag_postun
-//        METHOD TYPE : std::string
-//
-//        DESCRIPTION :
-//
+std::string RpmHeader::tag_preunprog() const
+{ return string_val( RPMTAG_PREUNPROG ); }
+
 std::string RpmHeader::tag_postun() const
-{
-  return string_val( RPMTAG_POSTUN );
-}
+{ return string_val( RPMTAG_POSTUN ); }
+
+std::string RpmHeader::tag_postunprog() const
+{ return string_val( RPMTAG_POSTUNPROG ); }
+
+std::string RpmHeader::tag_pretrans() const
+{ return string_val( RPMTAG_PRETRANS ); }
+
+std::string RpmHeader::tag_pretransprog() const
+{ return string_val( RPMTAG_PRETRANSPROG ); }
+
+std::string RpmHeader::tag_posttrans() const
+{ return string_val( RPMTAG_POSTTRANS ); }
+
+std::string RpmHeader::tag_posttransprog() const
+{ return string_val( RPMTAG_POSTTRANSPROG ); }
 
 ///////////////////////////////////////////////////////////////////
 //

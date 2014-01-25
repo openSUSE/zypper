@@ -145,9 +145,17 @@ public:
   std::string tag_url()          const;
   std::string tag_os()           const;
   std::string tag_prein()        const;
+  std::string tag_preinprog()    const;
   std::string tag_postin()       const;
+  std::string tag_postinprog()   const;
   std::string tag_preun()        const;
+  std::string tag_preunprog()    const;
   std::string tag_postun()       const;
+  std::string tag_postunprog()   const;
+  std::string tag_pretrans()     const;
+  std::string tag_pretransprog() const;
+  std::string tag_posttrans()    const;
+  std::string tag_posttransprog()const;
   std::string tag_sourcerpm()    const;
 
   /** just the list of names  */
