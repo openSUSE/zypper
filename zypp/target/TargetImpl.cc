@@ -45,6 +45,7 @@
 #include "zypp/target/TargetCallbackReceiver.h"
 #include "zypp/target/rpm/librpmDb.h"
 #include "zypp/target/CommitPackageCache.h"
+#include "zypp/target/RpmPostTransCollector.h"
 
 #include "zypp/parser/ProductFileReader.h"
 
@@ -1487,6 +1488,7 @@ namespace zypp
       MIL << "TargetImpl::commit(<list>" << policy_r << ")" << steps.size() << endl;
 
       bool abort = false;
+      RpmPostTransCollector postTransCollector( _root );
       std::vector<sat::Solvable> successfullyInstalledPackages;
       TargetImpl::PoolItemList remaining;
 
@@ -1563,6 +1565,8 @@ namespace zypp
             try
             {
               progress.tryLevel( target::rpm::InstallResolvableReport::RPM_NODEPS_FORCE );
+	      if ( postTransCollector.collectScriptFromPackage( localfile ) )
+		flags |= rpm::RPMINST_NOPOSTTRANS;
 	      rpm().installPackage( localfile, flags );
               HistoryLog().install(citem);
 
@@ -1706,6 +1710,12 @@ namespace zypp
         }  // other resolvables
 
       } // for
+
+      // process all remembered posttrans scripts.
+      if ( !abort )
+	postTransCollector.executeScripts();
+      else
+	postTransCollector.discardScripts();
 
       // Check presence of update scripts/messages. If aborting,
       // at least log omitted scripts.
