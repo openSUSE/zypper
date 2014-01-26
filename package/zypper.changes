@@ -1,4 +1,9 @@
 -------------------------------------------------------------------
+Sun Jan 26 01:15:43 CET 2014 - ma@suse.de
+
+- Update zypper-po.tar.bz2
+
+-------------------------------------------------------------------
 Mon Jan 20 15:36:10 CET 2014 - ma@suse.de
 
 - Zypper must refresh CD/DVD if no raw metadata are present. (bnc#859160)
