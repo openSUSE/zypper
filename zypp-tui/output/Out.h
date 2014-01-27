@@ -6,7 +6,7 @@
 #include <boost/format.hpp>
 #include <boost/smart_ptr.hpp>
 
-#include <zypp/parser/xml/XmlEscape.h>
+#include <zypp/base/Xml.h>
 #include <zypp/base/NonCopyable.h>
 #include <zypp/base/Exception.h>
 #include <zypp/base/String.h>
@@ -23,28 +23,6 @@ using namespace zypp;
 
 class Table;
 class Zypper;
-
-///////////////////////////////////////////////////////////////////
-namespace out
-{
-  /** \relates XmlNodeAttrFormater XML NODE ATTRIBUTE representation of types [str::asString] */
-  template <class _Tp>
-  std::string asXmlNodeAttr( const _Tp & val_r )
-  { using str::asString; return asString( val_r ); }
-
-  ///////////////////////////////////////////////////////////////////
-  /// \class XmlNodeAttrFormater
-  /// \brief Default representation of types as XmlNodeAttr [asXmlNodeAttr]
-  ///////////////////////////////////////////////////////////////////
-  struct XmlNodeAttrFormater
-  {
-    template <class _Tp>
-    std::string operator()( const _Tp & val_r ) const
-    { return asXmlNodeAttr( val_r ); }
-  };
-
-} // namespace out
-///////////////////////////////////////////////////////////////////
 
 ///////////////////////////////////////////////////////////////////
 namespace out
@@ -305,7 +283,6 @@ protected:
   /// \brief Convenience base class storing the back reference to Out.
   struct ParentOut
   {
-    NON_COPYABLE_BUT_MOVE( ParentOut );
     ParentOut( Out & out_r ) : _out( out_r ) {}
     Out & out() { return _out; }
   private:
@@ -313,23 +290,6 @@ protected:
   };
 
 public:
-  ///////////////////////////////////////////////////////////////////
-  /// \class OnBlockEnd
-  /// \brief RAII writing out a remembered string when going out of scope
-  /// Helper class to store an end tag after the start tag was written.
-  /// As it's usually used in a RAII context the class is not copyable,
-  /// but it is movable. Use it like a std::ostringstream.
-  struct OnBlockEnd : protected ParentOut
-  {
-    NON_COPYABLE( OnBlockEnd );
-    OnBlockEnd( Out & out_r )		: ParentOut( out_r )	{}
-    OnBlockEnd( OnBlockEnd && rhs )	: ParentOut( rhs.out() ){ if ( rhs._strp ) _strp.swap( rhs._strp ); }
-    ~OnBlockEnd()						{ if ( _strp ) std::cout << _strp->str(); }
-    std::ostream & operator*() { if ( !_strp ) _strp.reset( new std::ostringstream ); return *_strp; }
-  private:
-    boost::scoped_ptr<std::ostringstream> _strp;
-  };
-
   ///////////////////////////////////////////////////////////////////
   /// \class XmlNode
   /// \brief XML only: RAII writing a XML nodes start/end tag
@@ -341,41 +301,26 @@ public:
   /// \endcode
   struct XmlNode : protected ParentOut
   {
-    ///////////////////////////////////////////////////////////////////
-    /// \class AttrDefType
-    /// \brief (Key, Value) string pair of XML node attributes
-    struct AttrDefType : public std::pair<std::string,std::string>
-    {
-      typedef std::pair<std::string,std::string> Pair;
-
-      template <typename _Type>
-      AttrDefType( std::string key_r, _Type && val_r )
-      : Pair( std::move(key_r), ::out::asXmlNodeAttr( std::forward<_Type>(val_r) ) )
-      {}
-    };
-    ///////////////////////////////////////////////////////////////////
+    typedef zypp::xmlout::Node::Attr Attr;
 
     /** Ctor taking nodename and attribute list. */
-    XmlNode( Out & out_r, const std::string & name_r, const std::initializer_list<AttrDefType> & attrs_r = {} )
-    : ParentOut( out_r ), _onend( out_r )
+    XmlNode( Out & out_r, const std::string & name_r, const std::initializer_list<Attr> & attrs_r = {} )
+    : ParentOut( out_r )
     {
       if ( out().typeXML() && ! name_r.empty() )
-      {
-	std::cout << "<" << name_r;
-	for ( const auto & pair : attrs_r )
-	  std::cout << " " << pair.first << "=\"" << xml::escape( pair.second ) << "\"";
-	std::cout << ">" << std::endl;
-	*_onend << "</" << name_r << ">" << std::endl;
-      }
+      { _node.reset( new zypp::xmlout::Node( std::cout, name_r, attrs_r ) ); }
     }
 
     /** Convenience ctor for one attribute pair */
-    XmlNode( Out & out_r, const std::string & name_r, AttrDefType attr_r )
+    XmlNode( Out & out_r, const std::string & name_r, Attr attr_r )
     : XmlNode( out_r, name_r, { attr_r } )
     {}
 
+    /** Move ctor */
+    XmlNode( XmlNode && rhs ) : ParentOut( rhs ) { _node.swap( rhs._node ); }
+
   private:
-    OnBlockEnd _onend;
+    scoped_ptr<zypp::xmlout::Node> _node;
   };
   ///////////////////////////////////////////////////////////////////
 
@@ -384,18 +329,10 @@ public:
    * <node attr="val"/>
    * \endcode
    */
-  void xmlNode( const std::string & name_r, const std::initializer_list<XmlNode::AttrDefType> & attrs_r = {} )
-  {
-    if ( typeXML() )
-    {
-      std::cout << "<" << name_r;
-      for ( const auto & pair : attrs_r )
-	std::cout << " " << pair.first << "=\"" << xml::escape(pair.second) << "\"";
-      std::cout << "/>" << std::endl;
-    }
-  }
+  void xmlNode( const std::string & name_r, const std::initializer_list<XmlNode::Attr> & attrs_r = {} )
+  { if ( typeXML() ) { zypp::xmlout::node( std::cout, name_r, attrs_r ); } }
   /** \overload for one attribute pair */
-  void xmlNode( const std::string & name_r, XmlNode::AttrDefType attr_r )
+  void xmlNode( const std::string & name_r, XmlNode::Attr attr_r )
   { xmlNode( name_r, { attr_r } ); }
 
   ///////////////////////////////////////////////////////////////////
@@ -472,7 +409,7 @@ public:
   template <class _Container, class _ListFormater = out::ListFormater>
   void list( const std::string & nodeName_r, const std::string & title_r, const _Container & container_r, _ListFormater && formater_r = _ListFormater() )
   {
-    TitleNode guard( XmlNode( *this, nodeName_r, XmlNode::AttrDefType( "size", str::numstring( container_r.size() ) ) ),
+    TitleNode guard( XmlNode( *this, nodeName_r, XmlNode::Attr( "size", str::numstring( container_r.size() ) ) ),
 		     (boost::formatNAC( title_r ) % container_r.size()).str() );
     list( container_r, std::forward<_ListFormater>(formater_r) );
   }
