@@ -67,9 +67,10 @@ namespace zypp
     struct Node
     {
       NON_COPYABLE_BUT_MOVE( Node );
+      typedef NodeAttr Attr;
 
       /** Ctor taking nodename and attribute list */
-      Node( std::ostream & out_r, std::string name_r, const std::initializer_list<NodeAttr> & attrs_r = {} )
+      Node( std::ostream & out_r, std::string name_r, const std::initializer_list<Attr> & attrs_r = {} )
       : _out( out_r ), _name( std::move(name_r) )
       {
 	if ( ! _name.empty() )
@@ -82,13 +83,13 @@ namespace zypp
       }
 
       /** Convenience ctor for one attribute pair */
-      Node( std::ostream & out_r, std::string name_r, NodeAttr attr_r )
+      Node( std::ostream & out_r, std::string name_r, Attr attr_r )
       : Node( out_r, std::move(name_r), { attr_r } )
       {}
 
       /** Dtor wrting end tag */
       ~Node()
-      { _out << "</" << _name << ">"; }
+      { if ( ! _name.empty() ) _out << "</" << _name << ">"; }
 
       /** Return the output stream */
       std::ostream & operator*() { return _out; }
@@ -104,16 +105,16 @@ namespace zypp
      * <node attr="val"/>
      * \endcode
      */
-    void node( std::ostream & out_r, const std::string & name_r, const std::initializer_list<NodeAttr> & attrs_r = {} )
+    inline std::ostream & node( std::ostream & out_r, const std::string & name_r, const std::initializer_list<Node::Attr> & attrs_r = {} )
     {
       out_r << "<" << name_r;
       for ( const auto & pair : attrs_r )
 	out_r << " " << pair.first << "=\"" << xml::escape( pair.second ) << "\"";
-      out_r << "/>";
+      return out_r << "/>";
     }
     /** \overload for one attribute pair */
-    void node( const std::string & name_r, NodeAttr attr_r )
-    { node( name_r, { attr_r } ); }
+    inline std::ostream & node( std::ostream & out_r, const std::string & name_r, Node::Attr attr_r )
+    { return node( out_r, name_r, { attr_r } ); }
 
   } // namespace xmlout
   ///////////////////////////////////////////////////////////////////
