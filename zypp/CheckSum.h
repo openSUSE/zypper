@@ -96,6 +96,9 @@ namespace zypp
   /** \relates CheckSum Stream output. */
   std::ostream & operator<<( std::ostream & str, const CheckSum & obj );
 
+  /** \relates CheckSum XML output. */
+  std::ostream & dumpAsXmlOn( std::ostream & str, const CheckSum & obj );
+
   /** \relates CheckSum */
   bool operator==( const CheckSum & lhs, const CheckSum & rhs );
 

@@ -178,6 +178,15 @@ namespace zypp
   };
   ///////////////////////////////////////////////////////////////////
 
+  /** \relates Edition XML output. */
+  inline std::ostream & dumpAsXmlOn( std::ostream & str, const Edition & obj )
+  { return str << "<edition"
+	       << " epoch=\"" << obj.epoch() << "\""
+	       << " version=\"" << obj.version() << "\""
+	       << " release=\"" << obj.release() << "\""
+	       << "/>";
+  }
+
   /////////////////////////////////////////////////////////////////
 } // namespace zypp
 ///////////////////////////////////////////////////////////////////

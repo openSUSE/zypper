@@ -16,6 +16,7 @@
 #include "zypp/base/Exception.h"
 #include "zypp/base/Functional.h"
 #include "zypp/base/Collector.h"
+#include "zypp/base/Xml.h"
 
 #include "zypp/sat/detail/PoolImpl.h"
 #include "zypp/sat/Solvable.h"
@@ -672,6 +673,18 @@ namespace zypp
         OUTS(SUPPLEMENTS);
 #undef OUTS
       }
+      return str;
+    }
+
+    std::ostream & dumpAsXmlOn( std::ostream & str, const Solvable & obj )
+    {
+      xmlout::Node guard( str, "solvable" );
+
+      dumpAsXmlOn( *guard, obj.kind() );
+      *xmlout::Node( *guard, "name" ) << obj.name();
+      dumpAsXmlOn( *guard, obj.edition() );
+      dumpAsXmlOn( *guard, obj.arch() );
+      dumpAsXmlOn( *guard, obj.repository() );
       return str;
     }
 

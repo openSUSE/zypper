@@ -154,6 +154,19 @@ namespace zypp
     return str << ( obj.type().empty() ? std::string("UNKNOWN") : obj.type() ) << '-' << obj.checksum();
   }
 
+  std::ostream & dumpAsXmlOn( std::ostream & str, const CheckSum & obj )
+  {
+    const std::string & type( obj.type() );
+    const std::string & checksum( obj.checksum() );
+    str << "<checksum";
+    if ( ! type.empty() ) str << " type=\"" << type << "\"";
+    if ( checksum.empty() )
+      str << "/>";
+    else
+      str << ">" << checksum << "</checksum>";
+    return str;
+  }
+
    /** \relates CheckSum */
   bool operator==( const CheckSum & lhs, const CheckSum & rhs )
   { return lhs.checksum() == rhs.checksum() && lhs.type() == rhs.type(); }

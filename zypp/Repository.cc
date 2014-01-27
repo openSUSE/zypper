@@ -15,6 +15,7 @@
 #include "zypp/base/Logger.h"
 #include "zypp/base/Gettext.h"
 #include "zypp/base/Exception.h"
+#include "zypp/base/Xml.h"
 
 #include "zypp/AutoDispose.h"
 #include "zypp/Pathname.h"
@@ -306,6 +307,14 @@ namespace zypp
                    << "prio " << obj.get()->priority << '.' << obj.get()->subpriority
 		   << ", size " << obj.solvablesSize()
 		   << "}";
+    }
+
+    std::ostream & dumpAsXmlOn( std::ostream & str, const Repository & obj )
+    {
+      return xmlout::node( str, "repository", {
+	{ "alias", obj.name() },
+	{ "name", obj.alias() }
+      } );
     }
 
     //////////////////////////////////////////////////////////////////

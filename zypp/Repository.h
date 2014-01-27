@@ -284,6 +284,9 @@ namespace zypp
     /** \relates Repository Stream output */
     std::ostream & operator<<( std::ostream & str, const Repository & obj );
 
+    /** \relates Repository XML output */
+    std::ostream & dumpAsXmlOn( std::ostream & str, const Repository & obj );
+
     /** \relates Repository */
     inline bool operator==( const Repository & lhs, const Repository & rhs )
     { return lhs.get() == rhs.get(); }

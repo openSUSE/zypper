@@ -81,6 +81,10 @@ namespace zypp
       IdString _str;
   };
 
+  /** \relates ResKind XML output. */
+  inline std::ostream & dumpAsXmlOn( std::ostream & str, const ResKind & obj )
+  { return str << "<kind>" << obj <<  "</kind>"; }
+
   /////////////////////////////////////////////////////////////////
 } // namespace zypp
 ///////////////////////////////////////////////////////////////////

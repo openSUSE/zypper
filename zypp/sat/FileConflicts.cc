@@ -15,7 +15,7 @@
 #include "zypp/base/LogTools.h"
 #include "zypp/base/Gettext.h"
 #include "zypp/base/Xml.h"
-#include "zypp/Repository.h"
+#include "zypp/CheckSum.h"
 
 using std::endl;
 
@@ -145,29 +145,12 @@ namespace zypp
 
     namespace
     {
-      /// \todo
       std::ostream & dumpAsXmlHelper( std::ostream & str, const std::string & tag_r, IdString filename_r, IdString md5sum_r, Solvable solv_r )
       {
 	xmlout::Node guard( str, tag_r );
 	*xmlout::Node( *guard, "file" ) << filename_r;
-	*xmlout::Node( *guard, "checksum", { "type", "md5" } ) << md5sum_r;
-	{
-	  xmlout::Node guard( str, "solvable" );
-	  *xmlout::Node( *guard, "kind" ) << solv_r.kind();
-	  *xmlout::Node( *guard, "name" ) << solv_r.name();
-	  Edition solvEd( solv_r.edition() );
-	  xmlout::node( *guard, "edition", {
-	    { "epoch", solvEd.epoch() },
-	    { "version", solvEd.version() },
-	    { "release", solvEd.release() }
-	  } );
-	  *xmlout::Node( *guard, "arch" ) << solv_r.arch();
-	  Repository solvrep( solv_r.repository() );
-	  xmlout::node( *guard, "repository", {
-	     { "alias", solvrep.name() },
-	     { "name", solvrep.alias() }
-	  } );
-	}
+	dumpAsXmlOn( *guard, CheckSum( md5sum_r.asString() ) );
+	dumpAsXmlOn( *guard, solv_r );
 	return str;
       }
     }

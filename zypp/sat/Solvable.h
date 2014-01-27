@@ -306,6 +306,9 @@ namespace zypp
     /** \relates Solvable More verbose stream output including dependencies */
     std::ostream & dumpOn( std::ostream & str, const Solvable & obj );
 
+    /** \relates Solvable XML output */
+    std::ostream & dumpAsXmlOn( std::ostream & str, const Solvable & obj );
+
     /** \relates Solvable */
     inline bool operator==( const Solvable & lhs, const Solvable & rhs )
     { return lhs.get() == rhs.get(); }
