@@ -3,6 +3,7 @@ Wed Jan 29 10:57:54 CET 2014 - ma@suse.de
 
 - Don't treat missing packages due to download mode as error in 
   fileconflict check.
+- Add --replacefiles option to resolve file conflicts (bnc#673720)
 - version 1.10.4
 
 -------------------------------------------------------------------
