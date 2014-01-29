@@ -1438,16 +1438,15 @@ namespace zypp
         }
         else
 	{
-	  // if cache is preloaded, check for file conflicts
-	  commitFindFileConflicts( policy_r, result );
-
 	  if ( ! policy_r.dryRun() )
 	  {
+	    // if cache is preloaded, check for file conflicts
+	    commitFindFileConflicts( policy_r, result );
 	    commit( policy_r, packageCache, result );
 	  }
 	  else
 	  {
-	    DBG << "dryRun: Not installing/deleting anything." << endl;
+	    DBG << "dryRun/downloadOnly: Not installing/deleting anything." << endl;
 	  }
 	}
       }
