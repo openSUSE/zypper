@@ -125,6 +125,13 @@ See http://old-en.opensuse.org/Software_Management/Dependencies for more
 information. Zypper uses a \fIdependency solver\fR to find out what
 packages need to be installed to satisfy the user's request.
 
+.SS Package File Conflicts
+.LP
+File conflicts happen when two packages attempt to install files with the same name but different contents. This may happen if you are installing a newer version of a package without erasing the older version, of if two unrelated packages each install a file with the same name.
+.LP
+As checking for file conflicts requires access to the full filelist of each package being installed, zypper will check for file conflict only if all packages are downloaded in advance (see \fI--download-in-advance\fR).
+.LP
+As the reason for file conlicts usually is a poor package design or lack of coordination between the the people building the packages, they are not easy to resolve. By using the \fI--replacefiles\fR option you can force zypper to replace the conflicting files. Nevertheless this may damage the package whose file gets replaced.
 
 .SH "COMMANDS"
 .LP
@@ -323,6 +330,9 @@ install or remove command.
 By default, zypper installs also packages recommended by the requested ones.
 This option causes the recomended packages to be ignored and only the
 required ones to be installed.
+.TP
+.I \ \ \ \ \-\-replacefiles
+Install the packages even if they replace files from other, already installed, packages. Default is to treat file conflicts as an error. \fI--download-as-needed\fR disables the fileconflict check because access to all packages filelists is needed in advance in order to perform the check.
 .TP
 .I \-R, \-\-no\-force\-resolution
 Do not force the solver to find a solution. Instead, report
@@ -597,6 +607,9 @@ By default, zypper installs also packages recommended by the requested ones.
 This option causes the recomended packages to be ignored and only the
 required ones to be installed.
 .TP
+.I \ \ \ \ \-\-replacefiles
+Install the packages even if they replace files from other, already installed, packages. Default is to treat file conflicts as an error. \fI--download-as-needed\fR disables the fileconflict check because access to all packages filelists is needed in advance in order to perform the check.
+.TP
 .I \-R, \-\-no\-force\-resolution
 Do not force the solver to find a solution. Instead, report
 dependency problem and prompt the user to resolve it manually.
@@ -713,6 +726,9 @@ By default, zypper installs also packages recommended by the requested ones.
 This option causes the recomended packages to be ignored and only the
 required ones to be installed.
 .TP
+.I \ \ \ \ \-\-replacefiles
+Install the packages even if they replace files from other, already installed, packages. Default is to treat file conflicts as an error. \fI--download-as-needed\fR disables the fileconflict check because access to all packages filelists is needed in advance in order to perform the check.
+.TP
 .I \ \ \ \ \-\-debug\-solver
 Create test case for debugging of dependency resolver.
 .TP
@@ -767,6 +783,9 @@ Automatically say 'yes' to third party license confirmation prompt. By using thi
 By default, zypper installs also packages recommended by the requested ones.
 This option causes the recomended packages to be ignored and only the
 required ones to be installed.
+.TP
+.I \ \ \ \ \-\-replacefiles
+Install the packages even if they replace files from other, already installed, packages. Default is to treat file conflicts as an error. \fI--download-as-needed\fR disables the fileconflict check because access to all packages filelists is needed in advance in order to perform the check.
 .TP
 .I \ \ \ \ \-\-debug\-solver
 Create solver test case for debugging. See the install command for details.

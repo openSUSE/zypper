@@ -1027,6 +1027,7 @@ void Zypper::processCommandOptions()
       {"name",                      no_argument,       0, 'n'},
       {"force",                     no_argument,       0, 'f'},
       {"oldpackage",                no_argument,       0,  0 },
+      {"replacefiles",              no_argument,       0,  0 },
       {"capability",                no_argument,       0, 'C'},
       // rug compatibility, we have global --non-interactive
       {"no-confirm",                no_argument,       0, 'y'},
@@ -1076,6 +1077,9 @@ void Zypper::processCommandOptions()
       "    --oldpackage            Allow to replace a newer item with an older one.\n"
       "                            Handy if you are doing a rollback. Unlike --force\n"
       "                            it will not enforce a reinstall.\n"
+      "    --replacefiles          Install the packages even if they replace files from other,\n"
+      "                            already installed, packages. Default is to treat file conflicts\n"
+      "                            as an error. --download-as-needed disables the fileconflict check.\n"
       "-l, --auto-agree-with-licenses\n"
       "                            Automatically say 'yes' to third party license\n"
       "                            confirmation prompt.\n"
@@ -1712,6 +1716,7 @@ void Zypper::processCommandOptions()
       {"force-resolution",          no_argument,       0,  0 },
       {"no-recommends",             no_argument,       0,  0 },
       {"recommends",                no_argument,       0,  0 },
+      {"replacefiles",              no_argument,       0,  0 },
       {"dry-run",                   no_argument,       0, 'D'},
       // rug uses -N shorthand
       {"dry-run",                   no_argument,       0, 'N'},
@@ -1754,6 +1759,9 @@ void Zypper::processCommandOptions()
       "    --no-recommends         Do not install recommended packages, only required.\n"
       "    --recommends            Install also recommended packages in addition\n"
       "                            to the required.\n"
+      "    --replacefiles          Install the packages even if they replace files from other,\n"
+      "                            already installed, packages. Default is to treat file conflicts\n"
+      "                            as an error. --download-as-needed disables the fileconflict check.\n"
       "-R, --no-force-resolution   Do not force the solver to find solution,\n"
       "                            let it ask.\n"
       "    --force-resolution      Force the solver to find a solution (even\n"
@@ -1778,6 +1786,7 @@ void Zypper::processCommandOptions()
       {"debug-solver",              no_argument,       0,  0 },
       {"no-recommends",             no_argument,       0,  0 },
       {"recommends",                no_argument,       0,  0 },
+      {"replacefiles",              no_argument,       0,  0 },
       {"dry-run",                   no_argument,       0, 'D'},
       {"download",                  required_argument, 0,  0 },
       // aliases for --download
@@ -1816,6 +1825,9 @@ void Zypper::processCommandOptions()
       "    --no-recommends         Do not install recommended packages, only required.\n"
       "    --recommends            Install also recommended packages in addition\n"
       "                            to the required.\n"
+      "    --replacefiles          Install the packages even if they replace files from other,\n"
+      "                            already installed, packages. Default is to treat file conflicts\n"
+      "                            as an error. --download-as-needed disables the fileconflict check.\n"
       "-r, --repo <alias|#|URI>    Load only the specified repository.\n"
       "-D, --dry-run               Test the update, do not actually update.\n"
       "    --download              Set the download-install mode. Available modes:\n"
@@ -1864,6 +1876,7 @@ void Zypper::processCommandOptions()
       {"from",                      required_argument, 0,  0 },
       {"no-recommends",             no_argument,       0,  0 },
       {"recommends",                no_argument,       0,  0 },
+      {"replacefiles",              no_argument,       0,  0 },
       {"auto-agree-with-licenses",  no_argument,       0, 'l'},
       {"debug-solver",              no_argument,       0,  0 },
       {"dry-run",                   no_argument,       0, 'D'},
@@ -1897,6 +1910,9 @@ void Zypper::processCommandOptions()
       "    --no-recommends         Do not install recommended packages, only required.\n"
       "    --recommends            Install also recommended packages in addition\n"
       "                            to the required.\n"
+      "    --replacefiles          Install the packages even if they replace files from other,\n"
+      "                            already installed, packages. Default is to treat file conflicts\n"
+      "                            as an error. --download-as-needed disables the fileconflict check.\n"
       "-D, --dry-run               Test the upgrade, do not actually upgrade\n"
       "    --download              Set the download-install mode. Available modes:\n"
       "                            %s\n"

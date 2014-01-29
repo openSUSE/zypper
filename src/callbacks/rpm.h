@@ -395,17 +395,23 @@ struct FindFileConflictstReportReceiver : public zypp::callback::ReceiveReport<z
 		  conflicts_r, out::FileConflictsListFormater() );
 	out.gap();
 
+	if ( Zypper::instance()->cOpts().count("replacefiles") )
+	{
+	  out.info( _("Conflicting files will be replaced."), " [--replacefiles]" );
+	}
+	else
+	{
+	  bool cont = read_bool_answer( PROMPT_YN_CONTINUE_ON_FILECONFLICT, str::Str()
+		      // TranslatorExplanation Problem description before asking whether to "Continue? [yes/no] (no):"
+		      <<_("File conflicts happen when two packages attempt to install files with the same name but different contents. If you continue, conflicting files will be replaced losing the previous content.")
+		      << "\n"
+		      <<_("Continue?"),
+		      false );
+	  out.gap();
 
-	bool cont = read_bool_answer( PROMPT_YN_CONTINUE_ON_FILECONFLICT, str::Str()
-		    // TranslatorExplanation Problem description before asking whether to "Continue? [yes/no] (no):"
-		    <<_("File conflicts happen when two packages attempt to install files with the same name but different contents. If you continue, conflicting files will be replaced losing the previous content.")
-		    << "\n"
-		    <<_("Continue?"),
-		    false );
-	out.gap();
-
-	if ( ! cont )
-	  return false;		// aborted.
+	  if ( ! cont )
+	    return false;		// aborted.
+	}
       }
     }
 
