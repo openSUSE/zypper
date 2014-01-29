@@ -354,12 +354,12 @@ struct FindFileConflictstReportReceiver : public zypp::callback::ReceiveReport<z
 
   virtual bool result( const ProgressData & progress_r, const sat::Queue & noFilelist_r, const sat::FileConflicts & conflicts_r )
   {
-    // finsh progress
-    bool error = ! ( conflicts_r.empty() && noFilelist_r.empty() );
-    (*_progress).error( error );
+    // finsh progress; only conflicts count as error; missing filelists due
+    // to download-as-needed are just a warning. Different behavior breaks KIWI.
+    (*_progress).error( !conflicts_r.empty() );
     _progress.reset();
 
-    if ( ! error )
+    if ( conflicts_r.empty() && noFilelist_r.empty() )
       return !Zypper::instance()->exitRequested();
 
     // show error result
@@ -367,7 +367,7 @@ struct FindFileConflictstReportReceiver : public zypp::callback::ReceiveReport<z
     {
       Out::XmlNode guard( out, "fileconflict-summary" );
 
-      if ( ! noFilelist_r.empty() )
+      if ( ! noFilelist_r.empty() )	// warning
       {
 	out.warning( boost::formatNAC(
 		       // TranslatorExplanation %1%(commandline option)
@@ -385,7 +385,7 @@ struct FindFileConflictstReportReceiver : public zypp::callback::ReceiveReport<z
 	out.gap();
       }
 
-      if ( ! conflicts_r.empty() )
+      if ( ! conflicts_r.empty() )	// error + prompt
       {
 	out.list( "fileconflicts",
 		  // TranslatorExplanation %1%(number of conflicts); detailed list follows
@@ -394,18 +394,19 @@ struct FindFileConflictstReportReceiver : public zypp::callback::ReceiveReport<z
 		      conflicts_r.size() ),
 		  conflicts_r, out::FileConflictsListFormater() );
 	out.gap();
+
+
+	bool cont = read_bool_answer( PROMPT_YN_CONTINUE_ON_FILECONFLICT, str::Str()
+		    // TranslatorExplanation Problem description before asking whether to "Continue? [yes/no] (no):"
+		    <<_("File conflicts happen when two packages attempt to install files with the same name but different contents. If you continue, conflicting files will be replaced losing the previous content.")
+		    << "\n"
+		    <<_("Continue?"),
+		    false );
+	out.gap();
+
+	if ( ! cont )
+	  return false;		// aborted.
       }
-
-
-      bool cont = read_bool_answer( PROMPT_YN_CONTINUE_ON_FILECONFLICT, str::Str()
-		  // TranslatorExplanation Problem description before asking whether to "Continue? [yes/no] (no):"
-		  <<_("File conflicts happen when two packages attempt to install files with the same name but different contents. If you continue, conflicting files will be replaced losing the previous content.")
-		  << "\n"
-		  <<_("Continue?"),
-		  false );
-      out.gap();
-      if ( ! cont )
-	return false;		// aborted.
     }
 
     return !Zypper::instance()->exitRequested();
