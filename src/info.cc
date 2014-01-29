@@ -165,6 +165,16 @@ static void printRecommends(const PoolItem & pi)
   }
 }
 
+static void printProvides(const PoolItem & pi)
+{
+  cout << _("Provides:") << endl;
+  Capabilities capSet = pi->provides();
+  for (Capabilities::const_iterator it = capSet.begin(); it != capSet.end(); ++it)
+  {
+    cout << *it << endl;
+  }
+}
+
 /**
  * Print package information.
  * <p>
@@ -239,6 +249,7 @@ void printPkgInfo(Zypper & zypper, const ui::Selectable & s)
 
   bool requires = zypper.cOpts().count("requires");
   bool recommends = zypper.cOpts().count("recommends");
+  bool provides = zypper.cOpts().count("provides");
 
   if (requires)
     printRequires(theone);
@@ -250,6 +261,9 @@ void printPkgInfo(Zypper & zypper, const ui::Selectable & s)
 
     printRecommends(theone);
   }
+
+  if (provides)
+    printProvides(theone);
 }
 
 /**

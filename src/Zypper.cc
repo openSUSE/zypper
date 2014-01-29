@@ -2135,6 +2135,7 @@ void Zypper::processCommandOptions()
       {"catalog", required_argument, 0, 'c'},
       {"requires", no_argument, 0, 0},
       {"recommends", no_argument, 0, 0},
+      {"provides", no_argument, 0, 0},
       {"help", no_argument, 0, 'h'},
       {0, 0, 0, 0}
     };
@@ -2153,7 +2154,8 @@ void Zypper::processCommandOptions()
         "-t, --type <type>         Type of package (%s).\n"
         "                          Default: %s.\n"
         "    --requires            Show also requires and prerequires.\n"
-        "    --recommends          Show also recommends."
+        "    --recommends          Show also recommends.\n"
+        "    --provides            Show provides."
       ), "package, patch, pattern, product", "package");
 
     break;
