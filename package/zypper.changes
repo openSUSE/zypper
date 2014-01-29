@@ -1,4 +1,11 @@
 -------------------------------------------------------------------
+Wed Jan 29 10:57:54 CET 2014 - ma@suse.de
+
+- Don't treat missing packages due to download mode as error in 
+  fileconflict check.
+- version 1.10.4
+
+-------------------------------------------------------------------
 Sun Jan 26 01:14:20 CET 2014 - ma@suse.de
 
 - Update zypper-po.tar.bz2
