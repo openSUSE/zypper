@@ -175,6 +175,35 @@ static void printProvides(const PoolItem & pi)
   }
 }
 
+static void printSuggests(const PoolItem & pi)
+{
+  cout << _("Suggests:") << endl;
+  Capabilities capSet = pi->suggests();
+  for (Capabilities::const_iterator it = capSet.begin(); it != capSet.end(); ++it)
+  {
+    cout << *it << endl;
+  }
+}
+
+static void printConflicts(const PoolItem & pi)
+{
+  cout << _("Conflicts:") << endl;
+  Capabilities capSet = pi->conflicts();
+  for (Capabilities::const_iterator it = capSet.begin(); it != capSet.end(); ++it)
+  {
+    cout << *it << endl;
+  }
+}
+
+static void printObsoletes(const PoolItem & pi)
+{
+  cout << _("Obsoletes:") << endl;
+  Capabilities capSet = pi->obsoletes();
+  for (Capabilities::const_iterator it = capSet.begin(); it != capSet.end(); ++it)
+  {
+    cout << *it << endl;
+  }
+}
 /**
  * Print package information.
  * <p>
@@ -250,6 +279,9 @@ void printPkgInfo(Zypper & zypper, const ui::Selectable & s)
   bool requires = zypper.cOpts().count("requires");
   bool recommends = zypper.cOpts().count("recommends");
   bool provides = zypper.cOpts().count("provides");
+  bool suggests = zypper.cOpts().count("suggests");
+  bool obsoletes = zypper.cOpts().count("obsoletes");
+  bool conflicts = zypper.cOpts().count("conflicts");
 
   if (requires)
     printRequires(theone);
@@ -264,6 +296,15 @@ void printPkgInfo(Zypper & zypper, const ui::Selectable & s)
 
   if (provides)
     printProvides(theone);
+
+  if (suggests)
+    printSuggests(theone);
+
+  if (obsoletes)
+    printObsoletes(theone);
+
+  if (conflicts)
+    printConflicts(theone);
 }
 
 /**

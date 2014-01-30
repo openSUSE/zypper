@@ -2136,6 +2136,9 @@ void Zypper::processCommandOptions()
       {"requires", no_argument, 0, 0},
       {"recommends", no_argument, 0, 0},
       {"provides", no_argument, 0, 0},
+      {"suggests", no_argument, 0, 0},
+      {"conflicts", no_argument, 0, 0},
+      {"obsoletes", no_argument, 0, 0},
       {"help", no_argument, 0, 'h'},
       {0, 0, 0, 0}
     };
@@ -2155,7 +2158,10 @@ void Zypper::processCommandOptions()
         "                          Default: %s.\n"
         "    --requires            Show also requires and prerequires.\n"
         "    --recommends          Show also recommends.\n"
-        "    --provides            Show provides."
+        "    --provides            Show provides.\n"
+        "    --suggests            Show suggests.\n"
+        "    --conflicts           Show conflicts.\n"
+        "    --obsoletes           Show obsoletes.\n"
       ), "package, patch, pattern, product", "package");
 
     break;
