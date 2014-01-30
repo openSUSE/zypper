@@ -1,4 +1,9 @@
 -------------------------------------------------------------------
+Thu Jan 30 01:13:40 CET 2014 - ma@suse.de
+
+- Update zypp-po.tar.bz2
+
+-------------------------------------------------------------------
 Wed Jan 29 10:28:16 CET 2014 - ma@suse.de
 
 - No fileconflict check if DownloadOnly.
