@@ -27,6 +27,13 @@ class Zypper;
 ///////////////////////////////////////////////////////////////////
 namespace out
 {
+  static constexpr unsigned termwidthUnlimited = 0u;
+} // namespace out
+///////////////////////////////////////////////////////////////////
+
+///////////////////////////////////////////////////////////////////
+namespace out
+{
   /** \relates ListFormater NORMAL representation of types in lists [no default] */
   template <class _Tp>
   std::string asListElement( const _Tp & val_r );
@@ -142,7 +149,7 @@ namespace out
 
     private:
       bool fitsOnLine( unsigned val_r )
-      { return( !_layout._wrapline || _cpos + val_r <= _linewidth ); }
+      { return( !_layout._wrapline || _linewidth == out::termwidthUnlimited || _cpos + val_r <= _linewidth ); }
 
       void printAndCount( const std::string & val_r )
       { _cpos += val_r.size(); std::cout << val_r; }
@@ -623,8 +630,8 @@ public:
   bool typeXML() const { return type( TYPE_XML ); }
 
 protected:
-  /** Width for formated output [unlimited]. */
-  virtual unsigned termwidth() const { return unsigned(-1); }
+  /** Width for formated output [0==unlimited]. */
+  virtual unsigned termwidth() const { return out::termwidthUnlimited; }
 
   /**
    * Determine whether the output is intended for the particular type.

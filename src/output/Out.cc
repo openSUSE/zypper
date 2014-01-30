@@ -20,7 +20,7 @@ std::string TermLine::get( unsigned width_r, SplitFlags flags_r, char exp_r ) co
   utf8::string l(lhs);
   utf8::string r(rhs);
 
-  if ( width_r == 0 )
+  if ( width_r == out::termwidthUnlimited )
     return zypp::str::Str() << l << r;	// plain string if zero width
 
   unsigned llen( l.size() - lhidden );
