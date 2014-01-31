@@ -24,14 +24,11 @@ namespace zypp
 { /////////////////////////////////////////////////////////////////
 
   ///////////////////////////////////////////////////////////////////
-  //
-  //	CLASS NAME : ResKind
-  //
-  /** Resolvable kinds.
-   * A \b lowercased string and used as identification.
-   * Comparison against string values is always case
-   * insensitive.
-   */
+  /// \class ResKind
+  /// \brief Resolvable kinds.
+  /// A \b lowercased string and used as identification. Comparison
+  /// against string values is always case insensitive.
+  ///////////////////////////////////////////////////////////////////
   class ResKind : public IdStringType<ResKind>
   {
     public:
@@ -45,6 +42,7 @@ namespace zypp
       static const ResKind pattern;
       static const ResKind product;
       static const ResKind srcpackage;
+      static const ResKind application;
       //@}
 
     public:

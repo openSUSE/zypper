@@ -1045,7 +1045,8 @@ namespace zypp
         cmd << "rpmdb2solv";
         if ( ! _root.empty() )
           cmd << " -r '" << _root << "'";
-	cmd << " -X";	// autogenerate pattern from pattern-package
+	cmd << " -X";	// autogenerate pattern/product/... from -package
+	cmd << " -A";	// autogenerate application pseudo packages
         cmd << " -p '" << Pathname::assertprefix( _root, "/etc/products.d" ) << "'";
 
         if ( ! oldSolvFile.empty() )

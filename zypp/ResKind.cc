@@ -23,22 +23,25 @@ namespace zypp
 { /////////////////////////////////////////////////////////////////
 
   const ResKind ResKind::nokind;
-  const ResKind ResKind::package   ( "package" );
-  const ResKind ResKind::patch     ( "patch" );
-  const ResKind ResKind::pattern   ( "pattern" );
-  const ResKind ResKind::product   ( "product" );
-  const ResKind ResKind::srcpackage( "srcpackage" );
+  const ResKind ResKind::package	( "package" );
+  const ResKind ResKind::patch		( "patch" );
+  const ResKind ResKind::pattern	( "pattern" );
+  const ResKind ResKind::product	( "product" );
+  const ResKind ResKind::srcpackage	( "srcpackage" );
+  const ResKind ResKind::application	( "application" );
 
   template<>
-    const ResKind ResTraits<Package>   ::kind( ResKind::package );
+    const ResKind ResTraits<Package>	::kind( ResKind::package );
   template<>
-    const ResKind ResTraits<Patch>     ::kind( ResKind::patch );
+    const ResKind ResTraits<Patch>	::kind( ResKind::patch );
   template<>
-    const ResKind ResTraits<Pattern>   ::kind( ResKind::pattern );
+    const ResKind ResTraits<Pattern>	::kind( ResKind::pattern );
   template<>
-    const ResKind ResTraits<Product>   ::kind( ResKind::product );
+    const ResKind ResTraits<Product>	::kind( ResKind::product );
   template<>
-    const ResKind ResTraits<SrcPackage>::kind( ResKind::srcpackage );
+    const ResKind ResTraits<SrcPackage>	::kind( ResKind::srcpackage );
+  template<>
+    const ResKind ResTraits<Application>::kind( ResKind::application );
 
   std::string ResKind::satIdent( const ResKind & refers_r, const std::string & name_r )
   {

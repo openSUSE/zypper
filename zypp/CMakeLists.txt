@@ -8,6 +8,7 @@ INCLUDE_DIRECTORIES(${CMAKE_CURRENT_BINARY_DIR})
 #FILE(WRITE filename "message to write"... )
 
 SET( zypp_SRCS
+  Application.cc
   ByteCount.cc
   Capabilities.cc
   Capability.cc
@@ -89,6 +90,7 @@ SET( zypp_EARLY_SRCS
 
 SET( zypp_HEADERS
   APIConfig.h
+  Application.h
   Arch.h
   AutoDispose.h
   Bit.h

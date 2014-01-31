@@ -125,6 +125,7 @@ namespace zypp
     OUTS( Pattern );
     OUTS( Product );
     OUTS( SrcPackage );
+    OUTS( Application );
 #undef OUTS
     // unknow => return a plain ResObject
     return new ResObject( solvable_r );

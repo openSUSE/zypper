@@ -6,17 +6,26 @@
 |                         /_____||_| |_| |_|                           |
 |                                                                      |
 \---------------------------------------------------------------------*/
-/** \file	zypp/ResObjects.h
- *
-*/
-#ifndef ZYPP_RESOBJECTS_H
-#define ZYPP_RESOBJECTS_H
+/** \file	zypp/Application.cc
+ */
+#include <iostream>
 
-#include "zypp/Package.h"
-#include "zypp/Patch.h"
-#include "zypp/Pattern.h"
-#include "zypp/Product.h"
-#include "zypp/SrcPackage.h"
+//#include "zypp/base/LogTools.h"
 #include "zypp/Application.h"
 
-#endif // ZYPP_RESOBJECTS_H
+using std::endl;
+
+///////////////////////////////////////////////////////////////////
+namespace zypp
+{
+  IMPL_PTR_TYPE( Application );
+
+  Application::Application( const sat::Solvable & solvable_r )
+    : ResObject( solvable_r )
+  {}
+
+  Application::~Application()
+  {}
+
+} // namespace zypp
+///////////////////////////////////////////////////////////////////
