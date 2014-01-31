@@ -36,6 +36,36 @@ using boost::format;
 
 extern ZYpp::Ptr God;
 
+///////////////////////////////////////////////////////////////////
+namespace
+{
+  inline std::string asCliOption( Dep dep_r )
+  { return dep_r.asString(); }
+
+  inline std::string asInfoTag( Dep dep_r )
+  { return dep_r.asUserString(); }
+
+  inline const std::vector<Dep> & cliSupportedDepTypes()
+  {
+    static const std::vector<Dep> _deps = {
+      Dep::PROVIDES,
+      Dep::REQUIRES,
+      Dep::CONFLICTS,
+      Dep::OBSOLETES,
+      Dep::RECOMMENDS,
+      Dep::SUGGESTS
+    };
+    return _deps;
+  }
+
+  inline void printDepList( const PoolItem & pi_r, Dep dep_r )
+  {
+    cout << asInfoTag( dep_r ) << ':' << endl;
+    for ( auto && cap : pi_r->dep( dep_r ) )
+    { cout << "  " << cap << endl; }
+  }
+} // namespace out
+///////////////////////////////////////////////////////////////////
 
 void printNVA(const ResObject::constPtr & res)
 {
@@ -119,43 +149,8 @@ void printInfo(Zypper & zypper, const ResKind & kind)
       }
     }
   }
-
-  if (false)
-  {
-    string s00 = _("None");
-    string s0 = _("Requires");
-    string s1 = _("Provides");
-    string s2 = _("Conflicts");
-    string s3 = _("Obsoletes");
-    // translators: package requirements table header
-    string s4 = _("Requirement");
-    // translators: package requirements table header
-    string s5 = _("Provided By");
-    // translators: package conflicts table header
-    string s6 = _("Conflict");
-  }
 }
 
-static void printRequires(const PoolItem & pi)
-{
-  cout << _("Requires:") << endl;
-  std::list<Capability> capList = std::list<Capability>(pi->prerequires().begin(), pi->prerequires().end());
-  capList.assign(pi->requires().begin(), pi->requires().end());
-  for (std::list<Capability>::const_iterator it = capList.begin(); it != capList.end(); ++it)
-  {
-    cout << *it << endl;
-  }
-}
-
-static void printRecommends(const PoolItem & pi)
-{
-  cout << _("Recommends:") << endl;
-  Capabilities capSet = pi->recommends();
-  for (Capabilities::const_iterator it = capSet.begin(); it != capSet.end(); ++it)
-  {
-    cout << *it << endl;
-  }
-}
 
 /**
  * Print package information.
@@ -229,19 +224,9 @@ void printPkgInfo(Zypper & zypper, const ui::Selectable & s)
 
   printSummaryDesc(theone.resolvable());
 
-  bool requires = zypper.cOpts().count("requires");
-  bool recommends = zypper.cOpts().count("recommends");
-
-  if (requires)
-    printRequires(theone);
-
-  if (recommends)
-  {
-    if (requires)
-      cout << endl; // visual separator
-
-    printRecommends(theone);
-  }
+  // Print dependency lists if CLI requests it
+  for ( auto && dep : cliSupportedDepTypes() )
+  { if ( zypper.cOpts().count( asCliOption( dep ) ) ) printDepList( theone, dep ); }
 }
 
 /**
@@ -296,28 +281,19 @@ void printPatchInfo(Zypper & zypper, const ui::Selectable & s )
 
   printSummaryDesc(pool_item.resolvable());
 
-  cout << _("Provides:") << endl;
-  Capabilities capSet = pool_item.resolvable()->dep(zypp::Dep::PROVIDES);
-  // WhatProvides can be used here. The result can be represented as a table of
-  // a "Capability" (it->asString()) | "Provided By" (WhatProvides(c))
-  for (Capabilities::const_iterator it = capSet.begin(); it != capSet.end(); ++it)
-    cout << *it << endl;
-
-  cout << endl << _("Conflicts:") << endl;
-  capSet = pool_item.resolvable()->dep(zypp::Dep::CONFLICTS);
-  for (Capabilities::const_iterator it = capSet.begin(); it != capSet.end(); ++it)
-    cout << *it << endl;
-
-  if (zypper.cOpts().count("requires"))
+  // Print dependency lists if CLI requests it
+  for ( auto && dep : cliSupportedDepTypes() )
   {
-    cout << endl; // visual separator
-    printRequires(pool_item);
-  }
-
-  if (zypper.cOpts().count("recommends"))
-  {
-    cout << endl; // visual separator
-    printRecommends(pool_item);
+    switch ( dep.inSwitch() )
+    {
+      case Dep::PROVIDES_e:
+      case Dep::CONFLICTS_e:
+	printDepList( pool_item, dep );	// These dependency lists are always printed
+	break;
+      default:
+	if ( zypper.cOpts().count( asCliOption( dep ) ) ) printDepList( pool_item, dep );
+	break;
+    }
   }
 }
 
@@ -369,6 +345,10 @@ void printPatternInfo(Zypper & zypper, const ui::Selectable & s)
 
   if (zypper.globalOpts().is_rug_compatible)
     return;
+
+  // Print dependency lists if CLI requests it
+  for ( auto && dep : cliSupportedDepTypes() )
+  { if ( zypper.cOpts().count( asCliOption( dep ) ) ) printDepList( pool_item, dep ); }
 
   // show contents
   Table t;
@@ -459,6 +439,10 @@ void printProductInfo(Zypper & zypper, const ui::Selectable & s)
     cout << _("Short Name") << ": " << product->shortName() << endl;
 
     printSummaryDesc(pool_item.resolvable());
+
+    // Print dependency lists if CLI requests it
+    for ( auto && dep : cliSupportedDepTypes() )
+    { if ( zypper.cOpts().count( asCliOption( dep ) ) ) printDepList( pool_item, dep ); }
   }
 }
 
