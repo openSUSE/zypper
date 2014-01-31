@@ -49,15 +49,7 @@ void printSummaryDesc(const ResObject::constPtr & res)
 {
   cout << _("Summary: ") << res->summary() << endl;
   cout << _("Description: ") << endl;
-  const string& s = res->description();
-  if (s.find("DT:Rich")!=s.npos){
-    string ns = processRichText(s);
-    cout << ns << endl;
-  }
-  else
-  {
-    cout << s << endl;
-  }
+  printRichText( cout, res->description(), 2/*indented*/ );
 }
 
 /**

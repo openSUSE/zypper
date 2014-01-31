@@ -183,11 +183,7 @@ bool confirm_licenses(Zypper & zypper)
         s << endl << endl;
       }
       // license text
-      const string& licenseText = it->resolvable()->licenseToConfirm();
-      if (licenseText.find("DT:Rich")==licenseText.npos)
-        s << licenseText;
-      else
-        s << processRichText(licenseText);
+      printRichText( s, it->resolvable()->licenseToConfirm() );
 
       // show in pager unless we are read by a machine or the pager fails
       if (zypper.globalOpts().machine_readable || !show_text_in_pager(s.str()))
@@ -289,13 +285,7 @@ void report_licenses(Zypper & zypper)
       if (inst_with_repo && !inst_with_repo.resolvable()->licenseToConfirm().empty())
       {
         cout << _("EULA") << ":" << endl;
-
-        const string & licenseText =
-          inst_with_repo.resolvable()->licenseToConfirm();
-        if (licenseText.find("DT:Rich")==licenseText.npos)
-          cout << licenseText;
-        else
-          cout << processRichText(licenseText);
+	printRichText( cout, inst_with_repo.resolvable()->licenseToConfirm() );
         cout << endl;
 
         ++count_installed_eula;
@@ -440,7 +430,7 @@ void install_src_pkgs(Zypper & zypper)
         zypper.out().info(boost::str(format(
             _("Source package %s-%s successfully retrieved."))
             % srcpkg->name() % srcpkg->edition()));
-      }	 
+      }
       else
       {
         God->installSrcPackage(srcpkg);
