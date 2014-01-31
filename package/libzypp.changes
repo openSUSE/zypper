@@ -1,4 +1,10 @@
 -------------------------------------------------------------------
+Fri Jan 31 19:09:28 CET 2014 - ma@suse.de
+
+- Introduce new solvable kind: Application (as provided by appdata.xml)
+- version 14.11.0 (7)
+
+-------------------------------------------------------------------
 Fri Jan 31 17:37:29 CET 2014 - ma@suse.de
 
 - String helper for printing indented text.
