@@ -80,6 +80,11 @@ namespace zypp
     */
     const std::string & asString() const;
 
+    /** Translated dependency type (capitalized).
+     * \return The capitalized constants names translated.
+    */
+    std::string asUserString() const;
+
     /** Enumarator provided for use in \c switch statement. */
     for_use_in_switch inSwitch() const
     { return _type; }

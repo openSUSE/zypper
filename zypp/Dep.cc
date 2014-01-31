@@ -13,6 +13,7 @@
 #include <iostream>
 
 #include "zypp/base/Exception.h"
+#include "zypp/base/Gettext.h"
 #include "zypp/base/String.h"
 
 #include "zypp/Dep.h"
@@ -23,31 +24,25 @@ namespace zypp
 
   namespace
   {
-
-    std::map<std::string,Dep::for_use_in_switch> _table;
-
-    Dep::for_use_in_switch parse( const std::string & strval_r )
+    inline Dep::for_use_in_switch parse( const std::string & strval_r )
     {
-      if ( _table.empty() )
-        {
-          // initialize it
-          _table["provides"]    = Dep::PROVIDES_e;
-          _table["prerequires"] = Dep::PREREQUIRES_e;
-          _table["requires"]    = Dep::REQUIRES_e;
-          _table["conflicts"]   = Dep::CONFLICTS_e;
-          _table["obsoletes"]   = Dep::OBSOLETES_e;
-          _table["recommends"]  = Dep::RECOMMENDS_e;
-          _table["suggests"]    = Dep::SUGGESTS_e;
-          _table["enhances"]    = Dep::ENHANCES_e;
-          _table["supplements"]	= Dep::SUPPLEMENTS_e;
-        }
+      const std::map<std::string,Dep::for_use_in_switch> _table = {
+	{ "provides",		Dep::PROVIDES_e		},
+	{ "prerequires",	Dep::PREREQUIRES_e	},
+	{ "requires",		Dep::REQUIRES_e		},
+	{ "conflicts",		Dep::CONFLICTS_e	},
+	{ "obsoletes",		Dep::OBSOLETES_e	},
+	{ "recommends",		Dep::RECOMMENDS_e	},
+	{ "suggests",		Dep::SUGGESTS_e		},
+	{ "enhances",		Dep::ENHANCES_e		},
+	{ "supplements",	Dep::SUPPLEMENTS_e	}
+      };
 
-      std::map<std::string,Dep::for_use_in_switch>::const_iterator it
-      = _table.find( str::toLower( strval_r ) );
+      auto it = _table.find( str::toLower( strval_r ) );
       if ( it == _table.end() )
-        {
-          ZYPP_THROW( Exception("Dep parse: illegal string value '"+strval_r+"'") );
-        }
+      {
+	ZYPP_THROW( Exception("Dep parse: illegal string value '"+strval_r+"'") );
+      }
       return it->second;
     }
   }
@@ -80,21 +75,35 @@ namespace zypp
   //
   const std::string & Dep::asString() const
   {
-    static std::map<for_use_in_switch,std::string> _table;
-    if ( _table.empty() )
-      {
-        // initialize it
-        _table[PROVIDES_e]    = "provides";
-        _table[PREREQUIRES_e] = "prerequires";
-        _table[REQUIRES_e]    = "requires";
-        _table[CONFLICTS_e]   = "conflicts";
-        _table[OBSOLETES_e]   = "obsoletes";
-        _table[RECOMMENDS_e]  = "recommends";
-        _table[SUGGESTS_e]    = "suggests";
-        _table[ENHANCES_e]    = "enhances";
-        _table[SUPPLEMENTS_e] = "supplements";
-      }
-    return _table[_type];
+    static const std::map<for_use_in_switch,std::string> _table = {
+      { PROVIDES_e,	"provides"	},
+      { PREREQUIRES_e,	"prerequires"	},
+      { REQUIRES_e,	"requires"	},
+      { CONFLICTS_e,	"conflicts"	},
+      { OBSOLETES_e,	"obsoletes"	},
+      { RECOMMENDS_e,	"recommends"	},
+      { SUGGESTS_e,	"suggests"	},
+      { ENHANCES_e,	"enhances"	},
+      { SUPPLEMENTS_e,	"supplements"	}
+    };
+    return _table.at(_type);
+  }
+
+  std::string Dep::asUserString() const
+  {
+    switch ( inSwitch() )
+    {
+      case PROVIDES_e:		return _("Provides");		break;
+      case PREREQUIRES_e:	return _("Prerequires");	break;
+      case REQUIRES_e:		return _("Requires");		break;
+      case CONFLICTS_e:		return _("Conflicts");		break;
+      case OBSOLETES_e:		return _("Obsoletes");		break;
+      case RECOMMENDS_e:	return _("Recommends");		break;
+      case SUGGESTS_e:		return _("Suggests");		break;
+      case ENHANCES_e:		return _("Enhances");		break;
+      case SUPPLEMENTS_e:	return _("Supplements");	break;
+    }
+    return "<missing translation>";
   }
 
   /////////////////////////////////////////////////////////////////
