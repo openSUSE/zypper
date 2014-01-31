@@ -1,4 +1,11 @@
 -------------------------------------------------------------------
+Fri Jan 31 17:37:29 CET 2014 - ma@suse.de
+
+- String helper for printing indented text.
+- Offer translated names for dependency types.
+- version 14.10.0 (7)
+
+-------------------------------------------------------------------
 Thu Jan 30 01:13:40 CET 2014 - ma@suse.de
 
 - Update zypp-po.tar.bz2
