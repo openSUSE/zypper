@@ -1,4 +1,9 @@
 -------------------------------------------------------------------
+Sun Feb  2 01:13:59 CET 2014 - ma@suse.de
+
+- Update zypp-po.tar.bz2
+
+-------------------------------------------------------------------
 Fri Jan 31 19:09:28 CET 2014 - ma@suse.de
 
 - Introduce new solvable kind: Application (as provided by appdata.xml)
