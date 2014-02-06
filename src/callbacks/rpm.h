@@ -329,15 +329,12 @@ struct InstallResolvableReportReceiver : public zypp::callback::ReceiveReport<zy
 ///////////////////////////////////////////////////////////////////
 struct FindFileConflictstReportReceiver : public zypp::callback::ReceiveReport<zypp::target::FindFileConflictstReport>
 {
-  FindFileConflictstReportReceiver()
-  : _progressId( "fileconflict-check" )
-  // TranslatorExplanation A progressbar label.
-  , _progressLabel(_("Checking for file conflicts:") )\
-  {}
-
   virtual void reportbegin()
   {
-    _progress.reset( new Out::ProgressBar( Zypper::instance()->out(), _progressLabel ) );
+    _progress.reset( new Out::ProgressBar( Zypper::instance()->out(),
+					   "fileconflict-check",
+					   // TranslatorExplanation A progressbar label
+					   _("Checking for file conflicts:") ) );
   }
 
   virtual bool start( const ProgressData & progress_r )
@@ -422,8 +419,6 @@ struct FindFileConflictstReportReceiver : public zypp::callback::ReceiveReport<z
   { _progress.reset(); }
 
 private:
-  std::string	_progressId;
-  std::string	_progressLabel;
   scoped_ptr<Out::ProgressBar>	_progress;
 };
 
