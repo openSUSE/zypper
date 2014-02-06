@@ -29,7 +29,7 @@ static bool report_again( timespec & lastTime_r, int & lastValue_r, int currentV
   // Don't report more often than 5 times per sec,
   // but also leaving 0%, more than 20% step and reaching 100%
   timespec now;
-  clock_gettime( CLOCK_REALTIME, &now );
+  clock_gettime( CLOCK_REALTIME_COARSE, &now );
   if ( now.tv_sec > lastTime_r.tv_sec
     || ( now.tv_sec == lastTime_r.tv_sec && now.tv_nsec > lastTime_r.tv_nsec + 200000000L )
     || ( lastValue_r != currentValue_r && ( lastValue_r + 20 <= currentValue_r || lastValue_r == 0 || currentValue_r == 100 ) ) )
@@ -213,7 +213,7 @@ struct RemoveResolvableReportReceiver : public zypp::callback::ReceiveReport<zyp
   virtual void start( zypp::Resolvable::constPtr resolvable )
   {
     Zypper & zypper = *Zypper::instance();
-    ::clock_gettime(CLOCK_REALTIME, &_last_reported);
+    ::clock_gettime(CLOCK_REALTIME_COARSE, &_last_reported);
     _last_percent.reset();
     _label = zypp::str::form("(%*d/%d) ", (int)zypp::str::asString(zypper.runtimeData().rpm_pkgs_total).length(),
                              ++zypper.runtimeData().rpm_pkg_current,
@@ -273,7 +273,7 @@ struct InstallResolvableReportReceiver : public zypp::callback::ReceiveReport<zy
   virtual void start( zypp::Resolvable::constPtr resolvable )
   {
     Zypper & zypper = *Zypper::instance();
-    clock_gettime(CLOCK_REALTIME, &_last_reported);
+    clock_gettime(CLOCK_REALTIME_COARSE, &_last_reported);
     _last_percent.reset();
     _resolvable = resolvable;
     _label = zypp::str::form("(%*d/%d) ", (int)zypp::str::asString(zypper.runtimeData().rpm_pkgs_total).length(),
