@@ -23,24 +23,6 @@
 #include "Zypper.h"
 #include "output/prompt.h"
 
-
-static bool report_again( timespec & lastTime_r, int & lastValue_r, int currentValue_r )
-{
-  // Don't report more often than 5 times per sec,
-  // but also leaving 0%, more than 20% step and reaching 100%
-  timespec now;
-  clock_gettime( CLOCK_REALTIME, &now );
-  if ( now.tv_sec > lastTime_r.tv_sec
-    || ( now.tv_sec == lastTime_r.tv_sec && now.tv_nsec > lastTime_r.tv_nsec + 200000000L )
-    || ( lastValue_r != currentValue_r && ( lastValue_r + 20 <= currentValue_r || lastValue_r == 0 || currentValue_r == 100 ) ) )
-  {
-    lastTime_r = now;
-    lastValue_r = currentValue_r;
-    return true;
-  }
-  return false;
-}
-
 ///////////////////////////////////////////////////////////////////
 namespace out
 {
@@ -206,98 +188,106 @@ struct PatchScriptReportReceiver : public zypp::callback::ReceiveReport<zypp::ta
  // progress for removing a resolvable
 struct RemoveResolvableReportReceiver : public zypp::callback::ReceiveReport<zypp::target::rpm::RemoveResolvableReport>
 {
-  std::string _label;
-  timespec _last_reported;
-  zypp::DefaultIntegral<int,0> _last_percent;
-
   virtual void start( zypp::Resolvable::constPtr resolvable )
   {
     Zypper & zypper = *Zypper::instance();
-    ::clock_gettime(CLOCK_REALTIME, &_last_reported);
-    _last_percent.reset();
-    _label = zypp::str::form("(%*d/%d) ", (int)zypp::str::asString(zypper.runtimeData().rpm_pkgs_total).length(),
-                             ++zypper.runtimeData().rpm_pkg_current,
-                             zypper.runtimeData().rpm_pkgs_total );
-    // translators: This text is a progress display label e.g. "Removing packagename-x.x.x [42%]"
-    _label += boost::str(boost::format(_("Removing %s-%s"))
-        % resolvable->name() % resolvable->edition());
-    Zypper::instance()->out().progressStart("remove-resolvable", _label);
+    _progress.reset( new Out::ProgressBar( zypper.out(),
+					   "remove-resolvable",
+					   // translators: This text is a progress display label e.g. "Removing packagename-x.x.x [42%]"
+					   boost::format(_("Removing %s-%s"))
+							 % resolvable->name()
+							 % resolvable->edition(),
+					   ++zypper.runtimeData().rpm_pkg_current,
+					   zypper.runtimeData().rpm_pkgs_total ) );
+    (*_progress)->range( 100 );	// progress reports percent
   }
 
   virtual bool progress( int value, zypp::Resolvable::constPtr resolvable )
   {
-    // don't report too often
-    if ( report_again( _last_reported, _last_percent, value ) )
-    {
-      Zypper::instance()->out().progress( "remove-resolvable", _label, value );
-    }
+    if ( _progress )
+      (*_progress)->set( value );
     return true;
   }
 
   virtual Action problem( zypp::Resolvable::constPtr resolvable, Error error, const std::string & description )
   {
-    Zypper::instance()->out().progressEnd("remove-resolvable", _label, true);
+    // finsh progress; indicate error
+    if ( _progress )
+    {
+      (*_progress).error();
+      _progress.reset();
+    }
+
     std::ostringstream s;
     s << boost::format(_("Removal of %s failed:")) % resolvable << std::endl;
     s << zcb_error2str(error, description);
     Zypper::instance()->out().error(s.str());
+
     return (Action) read_action_ari (PROMPT_ARI_RPM_REMOVE_PROBLEM, ABORT);
   }
 
   virtual void finish( zypp::Resolvable::constPtr /*resolvable*/, Error error, const std::string & reason )
   {
+    // finsh progress; indicate error
+    if ( _progress )
+    {
+      (*_progress).error( error != NO_ERROR );
+      _progress.reset();
+    }
+
     if (error != NO_ERROR)
       // set proper exit code, don't write to output, the error should have been reported in problem()
       Zypper::instance()->setExitCode(ZYPPER_EXIT_ERR_ZYPP);
     else
     {
-      Zypper::instance()->out().progressEnd("remove-resolvable", _label);
-
       // print additional rpm output
       // bnc #369450
-      if (!reason.empty())
+      if ( !reason.empty() )
         Zypper::instance()->out().info(reason);
     }
   }
+
+  virtual void reportend()
+  { _progress.reset(); }
+
+private:
+  scoped_ptr<Out::ProgressBar>	_progress;
 };
 
 ///////////////////////////////////////////////////////////////////
 // progress for installing a resolvable
 struct InstallResolvableReportReceiver : public zypp::callback::ReceiveReport<zypp::target::rpm::InstallResolvableReport>
 {
-  zypp::Resolvable::constPtr _resolvable;
-  std::string _label;
-  timespec _last_reported;
-  zypp::DefaultIntegral<int,0> _last_percent;
-
   virtual void start( zypp::Resolvable::constPtr resolvable )
   {
     Zypper & zypper = *Zypper::instance();
-    clock_gettime(CLOCK_REALTIME, &_last_reported);
-    _last_percent.reset();
-    _resolvable = resolvable;
-    _label = zypp::str::form("(%*d/%d) ", (int)zypp::str::asString(zypper.runtimeData().rpm_pkgs_total).length(),
-                              ++zypper.runtimeData().rpm_pkg_current,
-                              zypper.runtimeData().rpm_pkgs_total );
-    // TranslatorExplanation This text is a progress display label e.g. "Installing: foo-1.1.2 [42%]"
-    _label += boost::str(boost::format(_("Installing: %s-%s"))
-        % resolvable->name() % resolvable->edition());
-    Zypper::instance()->out().progressStart("install-resolvable", _label);
+    _progress.reset( new Out::ProgressBar( zypper.out(),
+					   "install-resolvable",
+					   // TranslatorExplanation This text is a progress display label e.g. "Installing: foo-1.1.2 [42%]"
+					   boost::format(_("Installing: %s-%s"))
+							 % resolvable->name()
+							 % resolvable->edition(),
+					   ++zypper.runtimeData().rpm_pkg_current,
+					   zypper.runtimeData().rpm_pkgs_total ) );
+    (*_progress)->range( 100 );	// progress reports percent
   }
 
   virtual bool progress( int value, zypp::Resolvable::constPtr resolvable )
   {
-    // don't report too often
-    if ( report_again( _last_reported, _last_percent, value ) )
-    {
-      Zypper::instance()->out().progress( "install-resolvable", _label, value );
-    }
+    if ( _progress )
+      (*_progress)->set( value );
     return true;
   }
 
   virtual Action problem( zypp::Resolvable::constPtr resolvable, Error error, const std::string & description, RpmLevel /*unused*/ )
   {
-    Zypper::instance()->out().progressEnd("install-resolvable", _label, true);
+    // finsh progress; indicate error
+    if ( _progress )
+    {
+      (*_progress).error();
+      _progress.reset();
+    }
+
     std::ostringstream s;
     s << boost::format(_("Installation of %s-%s failed:")) % resolvable->name() % resolvable->edition() << std::endl;
     s << zcb_error2str(error, description);
@@ -308,19 +298,30 @@ struct InstallResolvableReportReceiver : public zypp::callback::ReceiveReport<zy
 
   virtual void finish( zypp::Resolvable::constPtr /*resolvable*/, Error error, const std::string & reason, RpmLevel /*unused*/ )
   {
-    if (error != NO_ERROR)
+    // finsh progress; indicate error
+    if ( _progress )
+    {
+      (*_progress).error( error != NO_ERROR );
+      _progress.reset();
+    }
+
+    if ( error != NO_ERROR )
       // don't write to output, the error should have been reported in problem() (bnc #381203)
       Zypper::instance()->setExitCode(ZYPPER_EXIT_ERR_ZYPP);
     else
     {
-      Zypper::instance()->out().progressEnd("install-resolvable", _label);
-
       // print additional rpm output
       // bnc #369450
-      if (!reason.empty())
+      if ( !reason.empty() )
         Zypper::instance()->out().info(reason);
     }
   }
+
+  virtual void reportend()
+  { _progress.reset(); }
+
+private:
+  scoped_ptr<Out::ProgressBar>	_progress;
 };
 
 ///////////////////////////////////////////////////////////////////
