@@ -401,9 +401,10 @@ public:
    * If non zero values for \a current_r or \a total_r are passed,
    * the label is prefixed by either "(#C)" or "(#C/#T)"
    */
-  ProgressBar( Out & out_r, const std::string & label_r, unsigned current_r = 0, unsigned total_r = 0 )
+  ProgressBar( Out & out_r, const std::string & progressId_r, const std::string & label_r, unsigned current_r = 0, unsigned total_r = 0 )
   : _out( out_r )
   , _error( indeterminate )
+  , _progressId( progressId_r )
   {
     if ( total_r )
       _labelPrefix = zypp::str::form( "(%*u/%u) ", numDigits( total_r ), current_r, total_r );
@@ -411,8 +412,20 @@ public:
       _labelPrefix = zypp::str::form( "(%u) ", current_r );
     _progress.name( label_r );
     _progress.sendTo( Print( *this ) );
-    _out.progressStart( "", outLabel( _progress.name() ) );
+    _out.progressStart( _progressId, outLabel( _progress.name() ) );
   }
+
+  ProgressBar( Out & out_r, const std::string & progressId_r, const boost::format & label_r, unsigned current_r = 0, unsigned total_r = 0 )
+  : ProgressBar( out_r, progressId_r, label_r.str(), current_r, total_r )
+  {}
+
+  ProgressBar( Out & out_r, const std::string & label_r, unsigned current_r = 0, unsigned total_r = 0 )
+  : ProgressBar( out_r, "", label_r, current_r, total_r )
+  {}
+
+  ProgressBar( Out & out_r, const boost::format & label_r, unsigned current_r = 0, unsigned total_r = 0 )
+  : ProgressBar( out_r, "", label_r.str(), current_r, total_r )
+  {}
 
   /** Dtor displays final progress bar.
     * Unless \ref error has explicitly been set, an error is indicated if
@@ -423,12 +436,12 @@ public:
     _progress.noSend();	// suppress ~ProgressData final report
     if ( indeterminate( _error ) )
       _error = ( _progress.reportValue() != 100 && _progress.reportPercent() );
-    _out.progressEnd( "", outLabel( _progress.name() ), _error );
+    _out.progressEnd( _progressId, outLabel( _progress.name() ), _error );
   }
 
   /** Immediately print the progress bar not waiting for a new trigger. */
   void print()
-  { _out.progress( "", outLabel( _progress.name() ), _progress.reportValue() ); }
+  { _out.progress( _progressId, outLabel( _progress.name() ), _progress.reportValue() ); }
 
   /** \overload also change the progress bar label. */
   void print( const std::string & label_r )
@@ -477,7 +490,7 @@ private:
   {
     Print( ProgressBar & bar_r ) : _bar( &bar_r ) {}
     bool operator()( const ProgressData & progress_r )
-    { _bar->_out.progress( "", _bar->outLabel( progress_r.name() ), progress_r.reportValue() ); return true; }
+    { _bar->_out.progress( _bar->_progressId, _bar->outLabel( progress_r.name() ), progress_r.reportValue() ); return true; }
   private:
     ProgressBar * _bar;
   };
@@ -492,6 +505,7 @@ private:
   Out & _out;
   tribool _error;
   ProgressData _progress;
+  std::string _progressId;
   std::string _labelPrefix;
 };
 ///////////////////////////////////////////////////////////////////
