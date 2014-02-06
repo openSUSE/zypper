@@ -1,4 +1,10 @@
 -------------------------------------------------------------------
+Thu Feb  6 19:33:45 CET 2014 - ma@suse.de
+
+- Remove license text from test data (bnc#862471)
+- version 1.6.314
+
+-------------------------------------------------------------------
 Mon Jan 20 14:30:37 CET 2014 - ma@suse.de
 
 - Zypper must refresh CD/DVD if no raw metadata are present. (bnc#859160)
