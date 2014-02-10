@@ -69,6 +69,8 @@ ResKind string_to_kind (const string & skind)
     return ResKind::patch;
   if (lskind == "srcpackage")
     return ResKind::srcpackage;
+  if (lskind == "application")
+    return ResKind::application;
   // not recognized
   return empty;
 }
@@ -103,6 +105,8 @@ string kind_to_string_localized(const zypp::ResKind & kind, unsigned long count)
     return _PL("patch", "patches", count);
   if (kind == ResKind::srcpackage)
     return _PL("srcpackage", "srcpackages", count);
+  if (kind == ResKind::application)
+    return _PL("application", "applications", count);
   // default
   return _PL("resolvable", "resolvables", count);
 }
