@@ -2160,7 +2160,7 @@ void Zypper::processCommandOptions()
         "    --requires            Show requires and prerequires.\n"
         "    --conflicts           Show conflicts.\n"
         "    --obsoletes           Show obsoletes.\n"
-        "    --recommends          Show recommends."
+        "    --recommends          Show recommends.\n"
         "    --suggests            Show suggests.\n"
       ), "package, patch, pattern, product", "package");
 
