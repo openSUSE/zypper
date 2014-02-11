@@ -1,4 +1,13 @@
 -------------------------------------------------------------------
+Tue Feb 11 21:24:24 CET 2014 - ma@suse.de
+
+- Show Product::endOfLife attribute in product info (Fate#316172)
+- Fix missing description tags and escaping in XML output.
+- Remove license text from test data (bnc#862471)
+- Add info command options to print dependencies.
+- version 1.10.6
+
+-------------------------------------------------------------------
 Sun Feb  2 01:14:35 CET 2014 - ma@suse.de
 
 - Update zypper-po.tar.bz2
