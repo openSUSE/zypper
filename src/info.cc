@@ -36,6 +36,11 @@ using boost::format;
 
 extern ZYpp::Ptr God;
 
+void printPkgInfo(Zypper & zypper, const zypp::ui::Selectable & s);
+void printPatchInfo(Zypper & zypper, const zypp::ui::Selectable & s);
+void printPatternInfo(Zypper & zypper, const zypp::ui::Selectable & s);
+void printProductInfo(Zypper & zypper, const zypp::ui::Selectable & s);
+
 ///////////////////////////////////////////////////////////////////
 namespace
 {
@@ -426,17 +431,15 @@ void printProductInfo(Zypper & zypper, const ui::Selectable & s)
     else
       product = asKind<Product>(pool_item.resolvable());
 
-    cout << _("Is Base")   << ": "
-      << (product->isTargetDistribution()  ? _("Yes") : _("No")) << endl;
-
     cout << _("Flavor") << ": "  << product->flavor() << endl;
 
-    if ( installed )
-      cout << _("Installed")  << ": " << _("Yes") << endl;
-    else
-      cout << _("Installed")  << ": " << _("No") << endl;
-
     cout << _("Short Name") << ": " << product->shortName() << endl;
+
+    cout << _("Installed")  << ": " << ( installed ? _("Yes") : _("No") )<< endl;
+
+    cout << _("Is Base")   << ": " << (product->isTargetDistribution()  ? _("Yes") : _("No")) << endl;
+
+    cout << _("End of Support") << ": " << product->endOfLife().printDate() << endl;
 
     printSummaryDesc(pool_item.resolvable());
 

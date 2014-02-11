@@ -337,30 +337,33 @@ std::string & indent(std::string & text, int columns)
 string asXML(const Product & p, bool is_installed)
 {
   ostringstream str;
-  str
-    << "<product"
-       " name=\"" << xml::escape(p.name()) << "\""
-       " version=\"" << p.edition().version() << "\""
-       " release=\"" << p.edition().release() << "\""
-       " epoch=\"" << p.edition().epoch() << "\""
-       " arch=\"" << p.arch() << "\""
-       " productline=\"" << p.productLine() << "\""
-       " registerrelease=\"" << xml::escape(p.registerRelease()) << "\""
-       " vendor=\"" << xml::escape(p.vendor()) << "\""
-       " summary=\"" << xml::escape(p.summary()) << "\""
-       " shortname=\"" << xml::escape(p.shortName()) << "\""
-       " flavor=\"" << xml::escape(p.flavor()) << "\""
-       " isbase=\"" << (p.isTargetDistribution() ? 1 : 0) << "\""
-       " repo=\"" << xml::escape(p.repoInfo().alias()) << "\""
-       " installed=\"" << (is_installed ? 1 : 0) << "\"";
   {
-    const std::string & text( p.description() );
-    if ( text.empty() )
-      str << "/>";
-    else
-      str
-      << ">\n" << "<description>" << xml::escape( text ) << "</description>"
-	<< endl << "</product>";
+    // Legacy: Encoded almost everything as attribute
+    // Think about using subnodes for new stuff.
+    xmlout::Node parent( str, "product", xmlout::Node::optionalContent, {
+      { "name", 	p.name() },
+      { "version",	p.edition().version() },
+      { "release",	p.edition().release() },
+      { "epoch",	p.edition().epoch() },
+      { "arch",		p.arch() },
+      { "vendor",	p.vendor() },
+      { "summary",	p.summary() },
+      { "repo",		p.repoInfo().alias() },
+      // ^^^ common --- specific vvv
+      { "productline",	p.productLine() },
+      { "registerrelease",p.registerRelease() },
+      { "shortname",	p.shortName() },
+      { "flavor",	p.flavor() },
+      { "isbase",	p.isTargetDistribution() },
+      { "installed",	is_installed },
+    } );
+
+    dumpAsXmlOn( *parent, p.endOfLife(), "endoflife" );
+    {
+      const std::string & text( p.description() );
+      if ( ! text.empty() )
+	*xmlout::Node( *parent, "description" ) << xml::escape( text );
+    }
   }
   return str.str();
 }
@@ -368,26 +371,27 @@ string asXML(const Product & p, bool is_installed)
 string asXML(const Pattern & p, bool is_installed)
 {
   ostringstream str;
-  str
-    << "<pattern"
-       " name=\"" << xml::escape(p.name()) << "\""
-       " version=\"" << p.edition().version() << "\""
-       " release=\"" << p.edition().release() << "\""
-       " epoch=\"" << p.edition().epoch() << "\""
-       " arch=\"" << p.arch() << "\""
-       " vendor=\"" << xml::escape(p.vendor()) << "\""
-       " summary=\"" << xml::escape(p.summary()) << "\""
-       " repo=\"" << xml::escape(p.repoInfo().alias()) << "\""
-       " installed=\"" << (is_installed ? 1 : 0) << "\""
-       " uservisible=\"" << (p.userVisible() ? 1 : 0) << "\"";
   {
-    const std::string & text( p.description() );
-    if ( text.empty() )
-      str << "/>";
-    else
-      str
-	<< ">\n" << "<description>" << xml::escape( text ) << "</description>"
-	<< endl << "</pattern>";
+    // Legacy: Encoded almost everything as attribute
+    // Think about using subnodes for new stuff.
+    xmlout::Node parent( str, "pattern", xmlout::Node::optionalContent, {
+      { "name",		p.name() },
+      { "version",	p.edition().version() },
+      { "release",	p.edition().release() },
+      { "epoch",	p.edition().epoch() },
+      { "arch",		p.arch() },
+      { "vendor",	p.vendor() },
+      { "summary",	p.summary() },
+      { "repo",		p.repoInfo().alias() },
+      // ^^^ common --- specific vvv
+      { "installed",	is_installed },
+      { "uservisible",	p.userVisible() },
+    } );
+    {
+      const std::string & text( p.description() );
+      if ( ! text.empty() )
+	*xmlout::Node( *parent, "description" ) << xml::escape( text );
+    }
   }
   return str.str();
 }
