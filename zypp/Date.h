@@ -105,7 +105,7 @@ namespace zypp
      * \see 'man strftime' (which is used internaly) for valid
      * conversion specifiers in format.
      *
-     * \return An empty string on illegal format.
+     * \return An empty string on illegal format, "0" if date is unspecified.
      **/
     std::string form( const std::string & format_r ) const
     { return form( format_r, TB_LOCALTIME ); }
@@ -124,7 +124,117 @@ namespace zypp
     std::string asSeconds() const
     { return form( "%s" ); }
 
-  private:
+  public:
+    /** \name Printing in various predefined formats */
+    //@{
+    /** Date formats for printing*/
+    enum class DateFormat {
+      none,	///< ""
+      calendar,	///< 2014-02-07
+      month,	///< 2014-02
+      year,	///< 2014
+      week,	///< 2014-W06
+      weekday,	///< 2014-W06-5 (1 is Monday)
+      ordinal,	///< 2014-038
+    };
+
+    /** Time formats for printing */
+    enum class TimeFormat {
+      none,	///< ""
+      seconds,	///< 07:06:41
+      minutes,	///< 07:06
+      hours,	///< 07
+    };
+
+    /** Timezone indicator for printing */
+    enum class TimeZoneFormat {
+      none,	///< ""
+      name,	///< UTC, CET, ...
+      offset,	///< +00[:00]
+    };
+
+    /** Default format is <tt>'2014-02-07 07:06:41 CET'</tt>
+     * The default is \ref DateFormat::calendar, \ref TimeFormat::seconds, \ref TimeZoneFormat::name and
+     * \ref TB_LOCALTIME. For other formats you don't have to repeat all the defaults, just pass the
+     * values where you differ.
+     */
+    std::string print( DateFormat dateFormat_r = DateFormat::calendar, TimeFormat timeFormat_r = TimeFormat::seconds, TimeZoneFormat timeZoneFormat_r = TimeZoneFormat::name, TimeBase base_r = TB_LOCALTIME ) const;
+    /** \overload */
+    std::string print( TimeFormat timeFormat_r, TimeZoneFormat timeZoneFormat_r = TimeZoneFormat::name, TimeBase base_r = TB_LOCALTIME ) const
+    { return print( DateFormat::calendar, timeFormat_r, timeZoneFormat_r, base_r ); }
+    /** \overload */
+    std::string print( DateFormat dateFormat_r, TimeZoneFormat timeZoneFormat_r, TimeBase base_r = TB_LOCALTIME ) const
+    { return print( dateFormat_r, TimeFormat::seconds, timeZoneFormat_r, base_r ); }
+    /** \overload */
+    std::string print( DateFormat dateFormat_r, TimeFormat timeFormat_r, TimeBase base_r ) const
+    { return print( dateFormat_r, timeFormat_r, TimeZoneFormat::name, base_r ); }
+    /** \overload */
+    std::string print( TimeZoneFormat timeZoneFormat_r, TimeBase base_r = TB_LOCALTIME ) const
+    { return print( DateFormat::calendar, TimeFormat::seconds, timeZoneFormat_r, base_r ); }
+    /** \overload */
+    std::string print( TimeFormat timeFormat_r, TimeBase base_r ) const
+    { return print( DateFormat::calendar, timeFormat_r, TimeZoneFormat::name, base_r ); }
+    /** \overload */
+    std::string print( DateFormat dateFormat_r, TimeBase base_r ) const
+    { return print( dateFormat_r, TimeFormat::seconds, TimeZoneFormat::name, base_r ); }
+    /** \overload */
+    std::string print( TimeBase base_r ) const
+    { return print( DateFormat::calendar, TimeFormat::seconds, TimeZoneFormat::name, base_r ); }
+
+    /** Convenience for printing the date only [<tt>'2014-02-07'</tt>]
+     * The default is \ref DateFormat::calendar and \ref TB_LOCALTIME
+     */
+    std::string printDate( DateFormat dateFormat_r = DateFormat::calendar, TimeBase base_r = TB_LOCALTIME ) const
+    { return print( dateFormat_r, TimeFormat::none, TimeZoneFormat::none, base_r ); }
+    /** \overload */
+    std::string printDate( TimeBase base_r ) const
+    { return printDate( DateFormat::calendar, base_r ); }
+
+    /** Convenience for printing the time only [<tt>'07:06:41 CET'</tt>]
+     * The default is \ref DateFormat::calendar and \ref TB_LOCALTIME
+     */
+    std::string printTime( TimeFormat timeFormat_r = TimeFormat::seconds, TimeZoneFormat timeZoneFormat_r = TimeZoneFormat::name, TimeBase base_r = TB_LOCALTIME ) const
+    { return print( DateFormat::none, timeFormat_r, timeZoneFormat_r, base_r ); }
+    /** \overload */
+    std::string printTime( TimeZoneFormat timeZoneFormat_r , TimeBase base_r = TB_LOCALTIME ) const
+    { return printTime( TimeFormat::seconds, timeZoneFormat_r, base_r ); }
+    /** \overload */
+    std::string printTime( TimeFormat timeFormat_r , TimeBase base_r ) const
+    { return printTime( timeFormat_r, TimeZoneFormat::name, base_r ); }
+    /** \overload */
+    std::string printTime( TimeBase base_r ) const
+    { return printTime( TimeFormat::seconds, TimeZoneFormat::name, base_r ); }
+
+    /** Default ISO 8601 format is <tt>'2014-02-07T07:06:41+01'</tt>
+     * \note As timezone names are not used in ISO, \ref TimeZoneFormat::name is the same as
+     * \ref TimeZoneFormat::offset when printing in \ref TB_LOCALTIME. When printing \ref TB_UTC
+     * it uses a \c 'Z' to indicate UTC (Zulu time) rather than printing \c '+00'.
+     */
+    std::string printISO( DateFormat dateFormat_r = DateFormat::calendar, TimeFormat timeFormat_r = TimeFormat::seconds, TimeZoneFormat timeZoneFormat_r = TimeZoneFormat::name, TimeBase base_r = TB_LOCALTIME ) const;
+    /** \overload */
+    std::string printISO( TimeFormat timeFormat_r, TimeZoneFormat timeZoneFormat_r = TimeZoneFormat::name, TimeBase base_r = TB_LOCALTIME ) const
+    { return printISO( DateFormat::calendar, timeFormat_r, timeZoneFormat_r, base_r ); }
+    /** \overload */
+    std::string printISO( DateFormat dateFormat_r, TimeZoneFormat timeZoneFormat_r, TimeBase base_r = TB_LOCALTIME ) const
+    { return printISO( dateFormat_r, TimeFormat::seconds, timeZoneFormat_r, base_r ); }
+    /** \overload */
+    std::string printISO( DateFormat dateFormat_r, TimeFormat timeFormat_r, TimeBase base_r ) const
+    { return printISO( dateFormat_r, timeFormat_r, TimeZoneFormat::name, base_r ); }
+    /** \overload */
+    std::string printISO( TimeZoneFormat timeZoneFormat_r, TimeBase base_r = TB_LOCALTIME ) const
+    { return printISO( DateFormat::calendar, TimeFormat::seconds, timeZoneFormat_r, base_r ); }
+    /** \overload */
+    std::string printISO( TimeFormat timeFormat_r, TimeBase base_r ) const
+    { return printISO( DateFormat::calendar, timeFormat_r, TimeZoneFormat::name, base_r ); }
+    /** \overload */
+    std::string printISO( DateFormat dateFormat_r, TimeBase base_r ) const
+    { return printISO( dateFormat_r, TimeFormat::seconds, TimeZoneFormat::name, base_r ); }
+    /** \overload */
+    std::string printISO( TimeBase base_r ) const
+    { return printISO( DateFormat::calendar, TimeFormat::seconds, TimeZoneFormat::name, base_r ); }
+    //@}
+
+ private:
     /** Calendar time.
      * The number of seconds elapsed since 00:00:00 on January 1, 1970,
      * Coordinated Universal Time (UTC).
@@ -137,6 +247,12 @@ namespace zypp
   inline std::ostream & operator<<( std::ostream & str, const Date & obj )
   { return str << obj.asString(); }
 
+  /** \relates Date XML output.
+   * Print \c time_t and \c text attribute. Allow alternate node name [date].
+   */
+  std::ostream & dumpAsXmlOn( std::ostream & str, const Date & obj, const std::string & name_r = "date" );
+
+  ///////////////////////////////////////////////////////////////////
   class DateFormatException : public Exception
   {
   public:
