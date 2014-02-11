@@ -62,41 +62,91 @@ namespace zypp
     /// {
     ///   Node node( std::cout, "node", { "attr", "val" } ); // <node attr="val">
     ///   *node << "write nodes body...."
-    /// }                                                          // </node>
+    /// }                                                    // </node>
     /// \endcode
+    /// \note If the \ref optionalContent flag is passed to the \c ctor, the start
+    /// node is kept open, until the first call to \ref operator*. The start node
+    /// is closed before returning the stream.
+    /// \code
+    /// {
+    ///   Node node( std::cout, "node", Node::optionalContent, { "attr", "val" } );
+    ///                                                      // <node attr="val"
+    /// }                                                    // />
+    /// {
+    ///   Node node( std::cout, "node", Node::optionalContent, { "attr", "val" } );
+    ///                                                      // <node attr="val"
+    ///   *node << "write nodes body...."                    // />write nodes body...
+    /// }                                                    // </node>
+    /// \endcode
+    ///
     struct Node
     {
       NON_COPYABLE_BUT_MOVE( Node );
       typedef NodeAttr Attr;
 
+      struct OptionalContentType {};	///< Ctor arg type
+      static constexpr OptionalContentType optionalContent = OptionalContentType();
+
       /** Ctor taking nodename and attribute list */
       Node( std::ostream & out_r, std::string name_r, const std::initializer_list<Attr> & attrs_r = {} )
-      : _out( out_r ), _name( std::move(name_r) )
-      {
-	if ( ! _name.empty() )
-	{
-	  _out << "<" << _name;
-	  for ( const auto & pair : attrs_r )
-	    _out << " " << pair.first << "=\"" << xml::escape( pair.second ) << "\"";
-	  _out << ">";
-	}
-      }
+      : _out( out_r ), _name( std::move(name_r) ), _hasContent( true )
+      { printStart( attrs_r ); }
 
       /** Convenience ctor for one attribute pair */
       Node( std::ostream & out_r, std::string name_r, Attr attr_r )
       : Node( out_r, std::move(name_r), { attr_r } )
       {}
 
+      /** Optional content ctor taking nodename and attribute list */
+      Node( std::ostream & out_r, std::string name_r, OptionalContentType, const std::initializer_list<Attr> & attrs_r = {} )
+      : _out( out_r ), _name( std::move(name_r) ), _hasContent( false )
+      { printStart( attrs_r ); }
+
+      /** Optional content Convenience ctor for one attribute pair */
+      Node( std::ostream & out_r, std::string name_r, OptionalContentType, Attr attr_r )
+      : Node( out_r, std::move(name_r), optionalContent, { attr_r } )
+      {}
+
       /** Dtor wrting end tag */
       ~Node()
-      { if ( ! _name.empty() ) _out << "</" << _name << ">"; }
+      {
+	if ( ! _name.empty() )
+	{
+	  if ( _hasContent )
+	    _out << "</" << _name << ">";
+	  else
+	    _out << "/>";
+	}
+      }
 
       /** Return the output stream */
-      std::ostream & operator*() { return _out; }
+      std::ostream & operator*()
+      {
+	if ( ! _hasContent )
+	{
+	  _hasContent = true;
+	  if ( ! _name.empty() )
+	    _out << ">";
+	}
+	return _out;
+      }
 
+    private:
+      void printStart( const std::initializer_list<Attr> & attrs_r )
+      {
+	if ( ! _name.empty() )
+	{
+	  _out << "<" << _name;
+	  for ( const auto & pair : attrs_r )
+	    _out << " " << pair.first << "=\"" << xml::escape( pair.second ) << "\"";
+	  if ( _hasContent )
+	    _out << ">";
+	}
+      }
     private:
       std::ostream & _out;
       std::string _name;
+      bool _hasContent;
     };
     ///////////////////////////////////////////////////////////////////
 
@@ -107,10 +157,8 @@ namespace zypp
      */
     inline std::ostream & node( std::ostream & out_r, const std::string & name_r, const std::initializer_list<Node::Attr> & attrs_r = {} )
     {
-      out_r << "<" << name_r;
-      for ( const auto & pair : attrs_r )
-	out_r << " " << pair.first << "=\"" << xml::escape( pair.second ) << "\"";
-      return out_r << "/>";
+      Node( out_r, name_r, Node::optionalContent, attrs_r );
+      return out_r;
     }
     /** \overload for one attribute pair */
     inline std::ostream & node( std::ostream & out_r, const std::string & name_r, Node::Attr attr_r )
