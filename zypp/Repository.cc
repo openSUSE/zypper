@@ -96,7 +96,7 @@ namespace zypp
       if ( q.empty() )
         return 0;
 
-      return generated + q.begin().asUnsigned();
+      return generated + Date(q.begin().asUnsigned());
     }
 
     Repository::Keywords Repository::keywords() const

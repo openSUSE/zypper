@@ -81,10 +81,13 @@ namespace zypp
     operator ValueType() const
     { return _date; }
 
-    /** \name Arithmetic operations.
-     * \c + \c - \c * \c / are provided via conversion to time_t.
-    */
+    /** \name Arithmetic operations. */
     //@{
+    Date operator+( const time_t rhs ) const { return _date + rhs; }
+    Date operator-( const time_t rhs ) const { return _date - rhs; }
+    Date operator*( const time_t rhs ) const { return _date * rhs; }
+    Date operator/( const time_t rhs ) const { return _date / rhs; }
+
     Date & operator+=( const time_t rhs ) { _date += rhs; return *this; }
     Date & operator-=( const time_t rhs ) { _date -= rhs; return *this; }
     Date & operator*=( const time_t rhs ) { _date *= rhs; return *this; }
