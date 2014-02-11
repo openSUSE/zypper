@@ -298,6 +298,7 @@ namespace zypp
           return setChanged;
        }
 
+#ifdef WITHSOFTLOCKS
       public:
         typedef PoolTraits::AutoSoftLocks          AutoSoftLocks;
         typedef PoolTraits::autoSoftLocks_iterator autoSoftLocks_iterator;
@@ -362,7 +363,7 @@ namespace zypp
             activeLocks_r.erase( *it );
           }
         }
-
+#endif
       public:
         const ContainerT & store() const
         {
@@ -393,11 +394,13 @@ namespace zypp
                   // remember products for buddy processing (requires clean store)
                   if ( s.isKind( ResKind::product ) )
                     addedProducts.push_back( pi );
+#ifdef WITHSOFTLOCKS
                   // and on the fly check for weak locks...
                   if ( autoSoftLockAppliesTo( s ) )
                   {
                     pi.status().setSoftLock( ResStatus::USER );
                   }
+#endif
                   if ( !addedItems )
                     addedItems = true;
                 }
@@ -477,8 +480,10 @@ namespace zypp
         mutable shared_ptr<ResPoolProxy>      _poolProxy;
 
       private:
+#ifdef WITHSOFTLOCKS
         /** Set of solvable idents that should be soft locked per default. */
         AutoSoftLocks                         _autoSoftLocks;
+#endif
         /** Set of queries that define hardlocks. */
         HardLockQueries                       _hardLockQueries;
     };

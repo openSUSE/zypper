@@ -83,6 +83,7 @@ namespace zypp
   Repository ResPool::reposFind( const std::string & alias_r ) const
   { return _pimpl->reposFind( alias_r ); }
 
+#ifdef WITHSOFTLOCKS
   bool ResPool::autoSoftLocksEmpty() const
   { return _pimpl->autoSoftLocks().empty(); }
 
@@ -100,7 +101,7 @@ namespace zypp
 
   void ResPool::getActiveSoftLocks( AutoSoftLocks & activeLocks_r )
   { _pimpl->getActiveSoftLocks( activeLocks_r ); }
-
+#endif
 
   bool ResPool::hardLockQueriesEmpty() const
   { return _pimpl->hardLockQueries().empty(); }

@@ -320,6 +320,7 @@ namespace zypp
       bool isAvailableLocale( const Locale & locale_r ) const;
       //@}
 
+#ifdef WITHSOFTLOCKS
     public:
       /** \name Handle automatic soft-locks.
        *
@@ -354,7 +355,7 @@ namespace zypp
       */
       void getActiveSoftLocks( AutoSoftLocks & activeLocks_r );
       //@}
-
+#endif
     public:
       /** \name Handle hard locks (e.g set from /etc/zypp/locks).
        *

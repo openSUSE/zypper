@@ -1178,6 +1178,7 @@ namespace zypp
           satpool.setRequestedLocales( requestedLocales );
         }
       }
+#ifdef WITHSOFTLOCKS
       {
         SoftLocksFile::Data softLocks( _softLocksFile.data() );
         if ( ! softLocks.empty() )
@@ -1190,6 +1191,7 @@ namespace zypp
           ResPool::instance().setAutoSoftLocks( softLocks );
         }
       }
+#endif
       if ( ZConfig::instance().apply_locks_file() )
       {
         const HardLocksFile::Data & hardLocks( _hardLocksFile.data() );
@@ -1294,12 +1296,14 @@ namespace zypp
         filesystem::assert_dir( home() );
         // requested locales
         _requestedLocalesFile.setLocales( pool_r.getRequestedLocales() );
-        // weak locks
+#ifdef WITHSOFTLOCKS
+	// weak locks
         {
           SoftLocksFile::Data newdata;
           pool_r.getActiveSoftLocks( newdata );
           _softLocksFile.setData( newdata );
         }
+#endif
         // hard locks
         if ( ZConfig::instance().apply_locks_file() )
         {
