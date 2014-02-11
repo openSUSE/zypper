@@ -81,7 +81,7 @@ namespace zypp
     std::string productLine() const;
 
   public:
-    /** Untranslated short name like <tt>SLES 10</tt>*/
+    /** Untranslated short name like <tt>SLES 10</tt> (fallback: name) */
     std::string shortName() const;
 
     /** The product flavor (LiveCD Demo, FTP edition,...). */

@@ -156,7 +156,12 @@ namespace zypp
   ///////////////////////////////////////////////////////////////////
 
   std::string Product::shortName() const
-  { return lookupStrAttribute( sat::SolvAttr::productShortlabel ); }
+  {
+    std::string ret( lookupStrAttribute( sat::SolvAttr::productShortlabel ) );
+    if ( ret.empty() ) ret = name();
+    return ret;
+
+  }
 
   std::string Product::flavor() const
   {
