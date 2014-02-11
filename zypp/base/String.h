@@ -169,7 +169,7 @@ namespace zypp
 
     template<>
         inline std::string asString( const bool &t )
-        { return t ? "+" : "-"; }
+        { return t ? "true" : "false"; }
 
     ///////////////////////////////////////////////////////////////////
     /** Printf style construction of std::string. */
