@@ -439,8 +439,10 @@ void printProductInfo(Zypper & zypper, const ui::Selectable & s)
 
     cout << _("Is Base")   << ": " << (product->isTargetDistribution()  ? _("Yes") : _("No")) << endl;
 
-    cout << _("End of Support") << ": " << product->endOfLife().printDate() << endl;
-
+    {
+      Date eol( product->endOfLife() );
+      cout << _("End of Support") << ": " << ( eol ? eol.printDate() : _("undefined") ) << endl;
+    }
     printSummaryDesc(pool_item.resolvable());
 
     // Print dependency lists if CLI requests it
