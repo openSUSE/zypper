@@ -1,4 +1,12 @@
 -------------------------------------------------------------------
+Tue Feb 11 21:22:58 CET 2014 - ma@suse.de
+
+- Add Product::endOfLife attribute (Fate#316172)
+- Let Product::shortName fallback to name.
+- Remove license text from test data (bnc#862471)
+- version 14.12.0 (12)
+
+-------------------------------------------------------------------
 Sun Feb  2 01:13:59 CET 2014 - ma@suse.de
 
 - Update zypp-po.tar.bz2
