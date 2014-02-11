@@ -99,7 +99,9 @@ namespace zypp
     if ( _pimpl->_expires )
     {
       Date exp( _pimpl->_expires - Date::now() );
-      return exp < 0 ? exp / Date::day - 1 : exp / Date::day;
+      int ret = exp / Date::day;
+      if ( exp < 0 ) ret -= 1;
+      return ret;
     }
     return INT_MAX;
   }
