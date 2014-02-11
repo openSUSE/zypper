@@ -76,14 +76,14 @@ namespace out
 	ret << " edition=\""	<< val_r->edition() << "\"";
 	ret << " arch=\""	<< val_r->arch() << "\"";
 	{
-	  std::string text( val_r->summary() );
+	  const std::string & text( val_r->summary() );
 	  if ( ! text.empty() )
 	    ret << " summary=\"" << xml::escape( text ) << "\"";
 	}
-	{ // legacy: description as solvable:PCDATA instead of a subnode
-	  std::string text( val_r->description() );
+	{
+	  const std::string & text( val_r->description() );
 	  if ( ! text.empty() )
-	    ret << ">\n" << xml::escape( text ) << "</solvable>";
+	    ret << ">\n" << "<description>" << xml::escape( text ) << "</description>" << "</solvable>";
 	  else
 	    ret << "/>";
 	}

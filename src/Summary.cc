@@ -1316,12 +1316,18 @@ void Summary::writeXmlResolvableList(ostream & out, const KindToResPairSet & res
         out << " edition-old=\"" << rold->edition() << "\"";
         out << " arch-old=\"" << rold->arch() << "\"";
       }
-      if (!res->summary().empty())
-        out << " summary=\"" << xml::escape(res->summary()) << "\"";
-      if (!res->description().empty())
-        out << ">" << endl << xml::escape(res->description()) << "</solvable>" << endl;
-      else
-        out << "/>" << endl;
+      {
+	const std::string & text( res->summary() );
+	if ( !text.empty() )
+	  out << " summary=\"" << xml::escape(text) << "\"";
+      }
+      {
+	const std::string & text( res->description() );
+	if ( !text.empty())
+	  out << ">\n" << "<description>" << xml::escape( text ) << "</description>" << "</solvable>" << endl;
+	else
+	  out << "/>" << endl;
+      }
     }
   }
 }

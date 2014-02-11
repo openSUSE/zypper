@@ -353,12 +353,15 @@ string asXML(const Product & p, bool is_installed)
        " isbase=\"" << (p.isTargetDistribution() ? 1 : 0) << "\""
        " repo=\"" << xml::escape(p.repoInfo().alias()) << "\""
        " installed=\"" << (is_installed ? 1 : 0) << "\"";
-  if (p.description().empty())
-    str << "/>";
-  else
-    str
-      << ">" << endl << "<description>" << p.description() << "</description>"
-      << endl << "</product>";
+  {
+    const std::string & text( p.description() );
+    if ( text.empty() )
+      str << "/>";
+    else
+      str
+      << ">\n" << "<description>" << xml::escape( text ) << "</description>"
+	<< endl << "</product>";
+  }
   return str.str();
 }
 
@@ -377,12 +380,15 @@ string asXML(const Pattern & p, bool is_installed)
        " repo=\"" << xml::escape(p.repoInfo().alias()) << "\""
        " installed=\"" << (is_installed ? 1 : 0) << "\""
        " uservisible=\"" << (p.userVisible() ? 1 : 0) << "\"";
-  if (p.description().empty())
-    str << "/>";
-  else
-    str
-      << ">" << endl << "<description>" << p.description() << "</description>"
-      << endl << "</pattern>";
+  {
+    const std::string & text( p.description() );
+    if ( text.empty() )
+      str << "/>";
+    else
+      str
+	<< ">\n" << "<description>" << xml::escape( text ) << "</description>"
+	<< endl << "</pattern>";
+  }
   return str.str();
 }
 
