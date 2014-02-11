@@ -97,6 +97,9 @@ namespace zypp
     /** The product flags */
     std::list<std::string> flags() const;
 
+    /** The date when this Product goes out of support as indicated by it's medadata. */
+    Date endOfLife() const;
+
   public:
     /** This is the \b installed product that is also targeted by the
      *  \c /etc/products.d/baseproduct symlink.

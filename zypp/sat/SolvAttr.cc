@@ -117,6 +117,7 @@ namespace sat
   const SolvAttr SolvAttr::productDistversion    ( PRODUCT_DISTVERSION );
   const SolvAttr SolvAttr::productType           ( PRODUCT_TYPE );
   const SolvAttr SolvAttr::productFlags          ( PRODUCT_FLAGS );
+  const SolvAttr SolvAttr::productEndOfLife      ( PRODUCT_ENDOFLIFE );
   const SolvAttr SolvAttr::productRegisterTarget ( PRODUCT_REGISTER_TARGET );
   const SolvAttr SolvAttr::productRegisterRelease( PRODUCT_REGISTER_RELEASE );
   const SolvAttr SolvAttr::productUrl            ( PRODUCT_URL );
