@@ -230,6 +230,7 @@ SET( zypp_base_HEADERS
   base/DtorReset.h
   base/Exception.h
   base/UserRequestException.h
+  base/EnumClass.h
   base/ExternalDataSource.h
   base/Fd.h
   base/Flags.h
