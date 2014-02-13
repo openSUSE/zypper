@@ -1036,6 +1036,10 @@ options like \fBrefresh\fR, \fB--repo\fR, or \fB--from\fR.
 .TP
 Supported URI formats:
 
+.B \fIscheme\fB: \fR[\fB//\fR[\fIuser\fR[\fB:\fIpassword\fR]\fB@\fR]\fIhost\fR[\fB:\fIport\fR]] \fB/\fIpath \fR[\fB?\fIquery\fR][\fB#\fIfragment\fR]
+.br
+Special characters occuring in URI components (like a '\fB@\fR' in a password) must be %-encoded ('\fB%40\fR').
+
 .TP
 CD or DVD drive
 Optionally with \fIdevices\fR list for probing.
