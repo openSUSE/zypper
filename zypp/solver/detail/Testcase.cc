@@ -278,7 +278,7 @@ class  HelixControl {
 		  const LocaleSet &languages,
 		  const target::Modalias::ModaliasList & modaliasList,
 		  const std::set<std::string> & multiversionSpec,
-		  const std::string & systemPath = "solver-system.xml.gz",
+		  const std::string & systemPath,
 		  const bool forceResolve,
 		  const bool onlyRequires,
 		  const bool ignorealreadyrecommended);
