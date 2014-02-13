@@ -279,9 +279,9 @@ class  HelixControl {
 		  const target::Modalias::ModaliasList & modaliasList,
 		  const std::set<std::string> & multiversionSpec,
 		  const std::string & systemPath = "solver-system.xml.gz",
-		  const bool forceResolve = false,
-		  const bool onlyRequires = false,
-		  const bool ignorealreadyrecommended = false);
+		  const bool forceResolve,
+		  const bool onlyRequires,
+		  const bool ignorealreadyrecommended);
     HelixControl ();
     ~HelixControl ();
 
