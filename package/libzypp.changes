@@ -1,4 +1,11 @@
 -------------------------------------------------------------------
+Thu Feb 13 10:28:24 CET 2014 - ma@suse.de
+
+- Adjust solver defaults to changed soft lock handling (bnc#863275)
+- Avoid confusing solver decisions by not storing soft locks (bnc#863275)
+- version 14.13.0 (13)
+
+-------------------------------------------------------------------
 Tue Feb 11 21:22:58 CET 2014 - ma@suse.de
 
 - Add Product::endOfLife attribute (Fate#316172)
