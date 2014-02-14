@@ -85,8 +85,8 @@ namespace zypp
   std::string ResObject::distribution() const
   { return lookupStrAttribute( sat::SolvAttr::distribution ); }
 
-  std::string ResObject::cpeId() const
-  { return lookupStrAttribute( sat::SolvAttr::cpeid ); }
+  CpeId ResObject::cpeId() const
+  { return CpeId( lookupStrAttribute( sat::SolvAttr::cpeid ), CpeId::noThrow ); }
 
   ByteCount ResObject::installSize() const
   { return ByteCount( lookupNumAttribute( sat::SolvAttr::installsize ) ); }

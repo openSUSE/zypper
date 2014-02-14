@@ -15,6 +15,7 @@ SET( zypp_SRCS
   CapMatch.cc
   Changelog.cc
   CheckSum.cc
+  CpeId.cc
   Date.cc
   Dep.cc
   Digest.cc
@@ -103,6 +104,7 @@ SET( zypp_HEADERS
   Changelog.h
   CheckSum.h
   CountryCode.h
+  CpeId.h
   Date.h
   Dep.h
   Digest.h

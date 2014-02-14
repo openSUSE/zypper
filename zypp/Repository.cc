@@ -77,7 +77,7 @@ namespace zypp
       return _repo->subpriority;
     }
 
-    Repository::ContentRevision contentRevision() const
+    Repository::ContentRevision Repository::contentRevision() const
     {
       NO_REPOSITORY_RETURN( ContentRevision() );
       sat::LookupRepoAttr q( sat::SolvAttr::repositoryRevision, *this );
@@ -142,20 +142,14 @@ namespace zypp
       return suggestedExpirationTimestamp() < Date::now();
     }
 
-    bool Repository::providesUpdatesFor( const std::string &key ) const
+    bool Repository::providesUpdatesFor( const CpeId & cpeid_r ) const
     {
       NO_REPOSITORY_RETURN( false );
-
-      for_( it,
-            updatesProductBegin(),
-            updatesProductEnd() )
+      for_( it, updatesProductBegin(), updatesProductEnd() )
       {
-        // FIXME implement real CPE matching here
-        // someday
-        if ( key == it.cpeId() )
-          return true;
+	if ( cpeid_r.match( it.cpeId() ) == CpeId::Match::subset )
+	  return true;
       }
-
       return false;
     }
 
@@ -366,8 +360,8 @@ namespace zypp
     std::string Repository::ProductInfoIterator::label() const
     { return base_reference().subFind( sat::SolvAttr::repositoryProductLabel ).asString(); }
 
-    std::string Repository::ProductInfoIterator::cpeId() const
-    { return base_reference().subFind( sat::SolvAttr::repositoryProductCpeid ).asString(); }
+    CpeId Repository::ProductInfoIterator::cpeId() const
+    { return CpeId( base_reference().subFind( sat::SolvAttr::repositoryProductCpeid ).asString(), CpeId::noThrow ); }
 
     /////////////////////////////////////////////////////////////////
 } // namespace zypp

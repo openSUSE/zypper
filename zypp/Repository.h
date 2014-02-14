@@ -19,6 +19,7 @@
 #include "zypp/sat/Solvable.h"
 #include "zypp/RepoInfo.h"
 #include "zypp/Date.h"
+#include "zypp/CpeId.h"
 
 ///////////////////////////////////////////////////////////////////
 namespace zypp
@@ -171,16 +172,8 @@ namespace zypp
          */
         bool isUpdateRepo() const;
 
-        /**
-         * whether the repository claims to update something \ref prod
-         * with key \ref cpeid
-         *
-         * \see zypp::Product::cpeId()
-         *
-         * See http://cpe.mitre.org/ for more information on the
-         * Common Platform Enumearation.
-         */
-        bool providesUpdatesFor( const std::string &cpeid ) const;
+        /** Whether the repository claims to provide updates for product identified by it's \ref CpeId */
+        bool providesUpdatesFor( const CpeId & cpeid_r ) const;
 
         /** Whether \ref Repository contains solvables. */
         bool solvablesEmpty() const;
@@ -353,18 +346,11 @@ namespace zypp
         ProductInfoIterator()
         {}
 
-        /**
-         * Product label
-         */
+        /** Product label */
         std::string label() const;
 
-        /**
-         * The Common Platform Enumeration name
-         * for this product.
-         *
-         * See http://cpe.mitre.org
-         */
-        std::string cpeId() const;
+        /** The Common Platform Enumeration name for this product. */
+        CpeId cpeId() const;
 
       private:
         friend class Repository;

@@ -21,6 +21,7 @@
 #include "zypp/ByteCount.h"
 #include "zypp/OnMediaLocation.h"
 #include "zypp/Repository.h"
+#include "zypp/CpeId.h"
 
 #include "zypp/sat/LookupAttr.h"
 #include "zypp/sat/SolvableSet.h"
@@ -150,13 +151,8 @@ namespace zypp
     */
     std::string distribution() const;
 
-    /**
-     * The Common Platform Enumeration name
-     * for this product.
-     *
-     * See http://cpe.mitre.org
-     */
-    std::string cpeId() const;
+    /** The Common Platform Enumeration name for this product. */
+    CpeId cpeId() const;
 
     /** Installed (unpacked) size.
      * This is just a total number. Many objects provide even more detailed
