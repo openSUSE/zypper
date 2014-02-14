@@ -43,6 +43,9 @@ namespace zypp
 
         typedef sat::ArrayAttr<std::string,std::string> Keywords;
 
+	typedef std::string ContentRevision;
+	typedef std::string ContentIdentifier;
+
     public:
         /** Default ctor creates \ref noRepository.*/
         Repository()
@@ -85,6 +88,25 @@ namespace zypp
 	std::string asUserString() const
 	{ return name(); }
 
+    public:
+	/** Timestamp or arbitrary user supplied string.
+	 * \c /repomd/revision/text() in \c repomd.xml.
+	 */
+	ContentRevision contentRevision() const;
+
+	/** Unique string identifying a repositories content.
+	 * \c /repomd/tags/repo/text() in \c repomd.xml.
+	 * \code
+	 * <repomd ....>
+	 *  <tags>
+	 *   <repo>obsrepository://build.suse.de/SUSE:Factory:Head:Internal/standard</repo>
+	 * \endcode
+	 * Semantically the value is just a plain string, even
+	 * if OBS often uses the location of the project as
+	 * unique identifyer.
+	 */
+	ContentIdentifier contentIdentifier() const;
+
         /**
          * Timestamp when this repository was generated
          *
@@ -125,6 +147,9 @@ namespace zypp
          * repository keywords (tags)
          */
         Keywords keywords() const;
+
+	/** Whether \a val_r is present in keywords. */
+	bool hasKeyword( const std::string & val_r ) const;
 
         /**
          * The suggested expiration date of this repository

@@ -77,6 +77,19 @@ namespace zypp
       return _repo->subpriority;
     }
 
+    Repository::ContentRevision contentRevision() const
+    {
+      NO_REPOSITORY_RETURN( ContentRevision() );
+      sat::LookupRepoAttr q( sat::SolvAttr::repositoryRevision, *this );
+      return q.empty() ? std::string() : q.begin().asString();
+    }
+
+    Repository::ContentIdentifier Repository::contentIdentifier() const
+    {
+      NO_REPOSITORY_RETURN( ContentIdentifier() );
+      sat::LookupRepoAttr q( sat::SolvAttr::repositoryRepoid, *this );
+      return q.empty() ? std::string() : q.begin().asString();
+    }
 
     zypp::Date Repository::generatedTimestamp() const
     {
@@ -103,6 +116,14 @@ namespace zypp
     {
       NO_REPOSITORY_RETURN( Keywords() );
       return Keywords( sat::SolvAttr::repositoryKeywords, *this, sat::LookupAttr::REPO_ATTR );
+    }
+
+    bool Repository::hasKeyword( const std::string & val_r ) const
+    {
+      for ( const auto & val : keywords() )
+	if ( val == val_r )
+	  return true;
+      return false;
     }
 
     bool Repository::maybeOutdated() const
