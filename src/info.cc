@@ -443,6 +443,22 @@ void printProductInfo(Zypper & zypper, const ui::Selectable & s)
       Date eol( product->endOfLife() );
       cout << _("End of Support") << ": " << ( eol ? eol.printDate() : _("undefined") ) << endl;
     }
+
+    std::list<Repository::ContentIdentifier> l;
+    unsigned cl = product->updateContentIdentifierSize( l );
+    if ( cl )
+    {
+      cout << _("Update Repositories")   << ": " << cl << endl;
+      unsigned n = 0;
+      for ( const auto & el : l )
+      {
+	cout << "[" << n << "] " << _("Update Repository Content Id")   << ": " << el << endl;
+      }
+    }
+    else
+      cout << _("Update Repositories")   << ": " << _("undefined") << endl;
+
+
     printSummaryDesc(pool_item.resolvable());
 
     // Print dependency lists if CLI requests it
