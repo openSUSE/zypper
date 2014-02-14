@@ -48,6 +48,7 @@ BOOST_AUTO_TEST_CASE(extended_metadata)
 
   // check that the attributes of product compatibility are ok
   int count = 0;
+#if 0
   vector<string> cpeids;
   vector<string> labels;
 
@@ -91,7 +92,7 @@ BOOST_AUTO_TEST_CASE(extended_metadata)
 
   BOOST_CHECK( repo.providesUpdatesFor("cpe://o:sle") );
   BOOST_CHECK( ! repo.providesUpdatesFor("cpe://o:windows") );
-
+#endif
   // reuse to count solvables
   count = 0;
 
