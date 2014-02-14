@@ -1,4 +1,14 @@
 -------------------------------------------------------------------
+Fri Feb 14 13:51:46 CET 2014 - ma@suse.de
+
+- Provide ContentIdentifier of required update repositories in Product
+  (Fate#316160)
+- Support CpeId in Repository and Product attributes (Fate#316160)
+- Add API for retrieving repository ContentRevision and ContentIdentifier
+  (Fate#316160)
+- version 14.14.0 (14)
+
+-------------------------------------------------------------------
 Thu Feb 13 10:28:24 CET 2014 - ma@suse.de
 
 - Adjust solver defaults to changed soft lock handling (bnc#863275)
