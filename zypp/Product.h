@@ -100,6 +100,11 @@ namespace zypp
     /** The date when this Product goes out of support as indicated by it's medadata. */
     Date endOfLife() const;
 
+    /** ContentIdentifier of required update repositories.
+     * \todo remove and provide iterator.
+     */
+    unsigned updateContentIdentifierSize( std::list<Repository::ContentIdentifier> & ret_r ) const;
+
   public:
     /** This is the \b installed product that is also targeted by the
      *  \c /etc/products.d/baseproduct symlink.

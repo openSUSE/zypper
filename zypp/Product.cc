@@ -205,6 +205,16 @@ namespace zypp
   Date Product::endOfLife() const
   { return Date( lookupNumAttribute( sat::SolvAttr::productEndOfLife ) );}
 
+  unsigned Product::updateContentIdentifierSize( std::list<Repository::ContentIdentifier> & ret_r ) const
+  {
+    sat::LookupAttr q( sat::SolvAttr::productUpdatesRepoid, sat::SolvAttr::productUpdates, *this );
+    for_( it, q.begin(), q.end() )
+    {
+      ret_r.push_back( it.asString() );
+    }
+    return q.size();
+  }
+
   bool Product::isTargetDistribution() const
   { return isSystem() && lookupStrAttribute( sat::SolvAttr::productType ) == "base"; }
 
