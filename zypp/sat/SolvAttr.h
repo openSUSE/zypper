@@ -151,22 +151,24 @@ namespace sat
       static const SolvAttr productRegisterRelease;
       static const SolvAttr productUrl;
       static const SolvAttr productUrlType;
-
+      static const SolvAttr productUpdates;		// SUB-STRUCTURE:
+      static const SolvAttr productUpdatesRepoid;	// repoid
       //@}
 
       /** \name repository */
       //@{
+      static const SolvAttr repositoryDeltaInfo;
+      static const SolvAttr repositoryAddedFileProvides;
+      static const SolvAttr repositoryRpmDbCookie;
       static const SolvAttr repositoryTimestamp;
       static const SolvAttr repositoryExpire;
-      static const SolvAttr repositoryKeywords;
       static const SolvAttr repositoryUpdates;
       static const SolvAttr repositoryDistros;
       static const SolvAttr repositoryProductLabel;
       static const SolvAttr repositoryProductCpeid;
+      static const SolvAttr repositoryRepoid;
+      static const SolvAttr repositoryKeywords;
       static const SolvAttr repositoryRevision;
-      static const SolvAttr repositoryAddedFileProvides;
-      static const SolvAttr repositoryRpmDbCookie;
-      static const SolvAttr repositoryDeltaInfo;
       static const SolvAttr repositoryToolVersion;
       //@}
 
