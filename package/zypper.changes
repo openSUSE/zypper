@@ -1,4 +1,11 @@
 -------------------------------------------------------------------
+Fri Feb 14 13:54:16 CET 2014 - ma@suse.de
+
+- Print Content Ids of required update repos in product info (Fate#316160)
+- Update man page
+- version 1.10.7
+
+-------------------------------------------------------------------
 Tue Feb 11 21:24:24 CET 2014 - ma@suse.de
 
 - Show Product::endOfLife attribute in product info (Fate#316172)
