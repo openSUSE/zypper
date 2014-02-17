@@ -519,136 +519,110 @@ void list_patterns(Zypper & zypper)
     list_pattern_table(zypper);
 }
 
-static bool check_bits( PoolItem pi, Zypper & zypper )
-{
-  bool orphaned = zypper.cOpts().count("orphaned");
-  bool suggested = zypper.cOpts().count("suggested");
-  bool recommended = zypper.cOpts().count("recommended");
-  bool unneeded = zypper.cOpts().count("unneeded");
-
-  if ( orphaned && !pi.status().isOrphaned() )
-    return false;
-
-  if ( suggested && !pi.status().isSuggested() )
-    return false;
-
-  if ( recommended && !pi.status().isRecommended() )
-    return false;
-
-  if ( unneeded && !pi.status().isUnneeded() )
-    return false;
-
-  return true;
-}
-
 void list_packages(Zypper & zypper)
 {
   MIL << "Going to list packages." << std::endl;
-
   Table tbl;
-  TableHeader th;
 
-  // translators: S for installed Status
-  th << _("S");
-  if (zypper.globalOpts().is_rug_compatible)
-    // translators: Bundle is a term used in rug. See rug for how to translate it.
-    th << _("Bundle");
-  else
-    th << _("Repository");
-  th << _("Name") << table::EditionStyleSetter( tbl, _("Version") ) << _("Arch");
-  tbl << th;
+  const auto & copts( zypper.cOpts() );
+  bool installed_only = copts.count("installed-only");
+  bool uninstalled_only = copts.count("uninstalled-only");
+  bool showInstalled = installed_only || !uninstalled_only;
+  bool showUninstalled = uninstalled_only || !installed_only;
 
-  bool installed_only = zypper.cOpts().count("installed-only");
-  bool notinst_only = zypper.cOpts().count("uninstalled-only");
-  bool check = false;
-
-  if ( zypper.cOpts().count("orphaned") || zypper.cOpts().count("suggested") ||
-       zypper.cOpts().count("recommended") || zypper.cOpts().count("unneeded") )
+  bool orphaned = copts.count("orphaned");
+  bool suggested = copts.count("suggested");
+  bool recommended = copts.count("recommended");
+  bool unneeded = copts.count("unneeded");
+  bool check = ( orphaned || suggested || recommended || unneeded );
+  if ( check )
   {
-    check = true;
     God->resolver()->resolvePool();
   }
+  auto checkStatus = [=]( ResStatus status_r )->bool {
+    return ( ( orphaned && status_r.isOrphaned() )
+	  || ( suggested && status_r.isSuggested() )
+	  || ( recommended && status_r.isRecommended() )
+	  || ( unneeded && status_r.isUnneeded() ) );
+  };
 
-  ResPoolProxy::const_iterator
-    it = God->pool().proxy().byKindBegin(ResKind::package),
-    e  = God->pool().proxy().byKindEnd(ResKind::package);
-  for (; it != e; ++it )
+  const auto & pproxy( God->pool().proxy() );
+  for_( it, pproxy.byKindBegin(ResKind::package), pproxy.byKindEnd(ResKind::package) )
   {
     ui::Selectable::constPtr s = *it;
-    bool found = false;
-
-    // get the first installed object
-    PoolItem installed;
-    if (!s->installedEmpty())
-      installed = s->installedObj();
-
-    // If asked for package classification and there is an installed obj, check this first.
-    // The corresponding bits are set only for installed packages and these are NOT in the
-    // pick list if an identical obj (candidate) from a repo is available.
-    if ( check )
+    // filter on selectable level
+    if ( s->hasInstalledObj() )
     {
-      if ( installed )
-      {
-        if ( check_bits( installed, zypper ) )
-        {
-          found = true;
-        }
-      }
-      else
-      {
-        for_(it, s->picklistBegin(), s->picklistEnd())
-        {
-          if ( check_bits( (*it), zypper ) )
-          {
-            found = true;
-            continue;
-          }
-        }
-      }
+      if ( ! showInstalled )
+	continue;
+    }
+    else
+    {
+      if ( ! showUninstalled )
+	continue;
     }
 
-    if ( check && !found )
-      continue;
-
-    // Don't use availableBegin/End here, there would be packages lost. The pick list
-    // additionally contains packages without a repo (the orphaned ones) as well as
-    // the installed ones having other version than available from any repo.
-    for_(it, s->picklistBegin(), s->picklistEnd())
+    for_( it, s->picklistBegin(), s->picklistEnd() )
     {
-      TableRow row;
-
       zypp::PoolItem pi = *it;
-
-      if (installed)
+      if ( check )
       {
-        if (notinst_only)
-          continue;
-        row << (identical(installed, pi) ? "i" : "v");
+	// if checks are more detailed, show only matches
+	// not whole selectables
+	if ( pi.status().isInstalled() )
+	{
+	  if ( ! checkStatus( pi.status() ) )
+	    continue;
+	}
+	else
+	{
+	  PoolItem ipi( s->identicalInstalledObj( pi ) );
+	  if ( !ipi || !checkStatus( ipi.status() ) )
+	    if ( ! checkStatus( pi.status() ) )
+	      continue;
+	}
+      }
+
+      TableRow row;
+      if ( s->hasInstalledObj() )
+      {
+	row << ( pi.status().isInstalled() || s->identicalInstalled( pi ) ? "i" : "v" );
       }
       else
       {
-        if (installed_only)
-          continue;
-        row << "";
+	row << "";
       }
       row << (zypper.globalOpts().is_rug_compatible ? "" : pi->repository().info().name())
           << pi->name()
           << pi->edition().asString()
           << pi->arch().asString();
-
       tbl << row;
     }
   }
-  if (zypper.cOpts().count("sort-by-repo") || zypper.cOpts().count("sort-by-catalog"))
-    tbl.sort(1); // Repo
-  else
-    tbl.sort(2); // Name
 
   if (tbl.empty())
     zypper.out().info(_("No packages found."));
   else
+  {
     // display the result, even if --quiet specified
+    TableHeader th;
+    // translators: S for installed Status
+    th << _("S");
+    if (zypper.globalOpts().is_rug_compatible)
+      // translators: Bundle is a term used in rug. See rug for how to translate it.
+    th << _("Bundle");
+    else
+      th << _("Repository");
+    th << _("Name") << table::EditionStyleSetter( tbl, _("Version") ) << _("Arch");
+    tbl << th;
+
+    if (zypper.cOpts().count("sort-by-repo") || zypper.cOpts().count("sort-by-catalog"))
+      tbl.sort(1); // Repo
+    else
+      tbl.sort(2); // Name
+
     cout << tbl;
+  }
 }
 
 static void list_products_xml(Zypper & zypper)
