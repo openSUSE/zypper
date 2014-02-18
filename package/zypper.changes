@@ -1,4 +1,10 @@
 -------------------------------------------------------------------
+Tue Feb 18 09:17:00 CET 2014 - ma@suse.de
+
+- Fix result list of 'packages' command (bnc#864198)
+- version 1.9.11
+
+-------------------------------------------------------------------
 Sun Feb  2 01:15:16 CET 2014 - ma@suse.de
 
 - Update zypper-po.tar.bz2
