@@ -65,7 +65,7 @@ namespace zypp
 	  {
 	    //DBG << "FCCB: " << sat::Solvable( id_r ) << " " << ret << endl;
 	    _visited.insert( id_r );
-	    if ( ! ret )
+	    if ( ! ret && sat::Solvable( id_r ).isKind<Package>() )	// only packages have filelists
 	      _noFilelist.push( id_r );
 	    _progress.incr();
 	  }
