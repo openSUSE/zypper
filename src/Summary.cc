@@ -501,8 +501,7 @@ void Summary::writeNewlyInstalled(ostream & out)
         "The following source package is going to be installed:",
         "The following %d source packages are going to be installed:",
         it->second.size());
-    if ( it->second.size() != 1 )
-      label = str::form( label.c_str(), it->second.size() );
+    label = str::form( label.c_str(), it->second.size() );
     out << endl << label << endl;
 
     writeResolvableList(out, it->second);
@@ -538,8 +537,7 @@ void Summary::writeRemoved(ostream & out)
         "The following product is going to be REMOVED:",
         "The following %d products are going to be REMOVED:",
         it->second.size());
-    if ( it->second.size() != 1 )
-      label = str::form( label.c_str(), it->second.size() );
+    label = str::form( label.c_str(), it->second.size() );
     out << endl << label << endl;
 
     writeResolvableList(out, it->second);
@@ -574,8 +572,7 @@ void Summary::writeUpgraded(ostream & out)
         "The following product is going to be upgraded:",
         "The following %d products are going to be upgraded:",
         it->second.size());
-    if ( it->second.size() != 1 )
-      label = str::form( label.c_str(), it->second.size() );
+    label = str::form( label.c_str(), it->second.size() );
     out << endl << label << endl;
 
     writeResolvableList(out, it->second);
@@ -609,8 +606,7 @@ void Summary::writeDowngraded(ostream & out)
         "The following product is going to be downgraded:",
         "The following %d products are going to be downgraded:",
         it->second.size());
-    if ( it->second.size() != 1 )
-      label = str::form( label.c_str(), it->second.size() );
+    label = str::form( label.c_str(), it->second.size() );
     out << endl << label << endl;
 
     writeResolvableList(out, it->second);
@@ -644,8 +640,7 @@ void Summary::writeReinstalled(ostream & out)
         "The following product is going to be reinstalled:",
         "The following %d products are going to be reinstalled:",
         it->second.size());
-    if ( it->second.size() != 1 )
-      label = str::form( label.c_str(), it->second.size() );
+    label = str::form( label.c_str(), it->second.size() );
     out << endl << label << endl;
 
     writeResolvableList(out, it->second);
@@ -806,8 +801,7 @@ void Summary::writeRecommended(ostream & out)
         "The following recommended source package was automatically selected:",
         "The following %d recommended source packages were automatically selected:",
         it->second.size());
-    if ( it->second.size() != 1 )
-      label = str::form( label.c_str(), it->second.size() );
+    label = str::form( label.c_str(), it->second.size() );
     out << endl << label << endl;
 
     writeResolvableList(out, it->second);
@@ -851,8 +845,7 @@ void Summary::writeRecommended(ostream & out)
 	label = _PL( "The following package is recommended, but will not be installed (only required packages will be installed):",
 		     "The following %d packages are recommended, but will not be installed (only required packages will be installed):",
 		     it->second.size() );
-	if ( it->second.size() != 1 )
-	  label = str::form( label.c_str(), it->second.size() );
+	label = str::form( label.c_str(), it->second.size() );
 	out << endl << label << endl;
 	writeResolvableList(out, notRequired);
       }
@@ -863,8 +856,7 @@ void Summary::writeRecommended(ostream & out)
 	  label = _PL( "The following package is recommended, but will not be installed because it's unwanted (was manually removed before):",
 		       "The following %d packages are recommended, but will not be installed because they are unwanted (were manually removed before):",
 		       it->second.size() );
-	if ( it->second.size() != 1 )
-	  label = str::form( label.c_str(), it->second.size() );
+	label = str::form( label.c_str(), it->second.size() );
 	out << endl << label << endl;
 	  writeResolvableList(out, softLocked);
         }
@@ -873,8 +865,7 @@ void Summary::writeRecommended(ostream & out)
 	  label = _PL( "The following package is recommended, but will not be installed due to conflicts or dependency issues:",
 		       "The following %d packages are recommended, but will not be installed due to conflicts or dependency issues:",
 		       it->second.size() );
-	  if ( it->second.size() != 1 )
-	    label = str::form( label.c_str(), it->second.size() );
+	  label = str::form( label.c_str(), it->second.size() );
           out << endl << label << endl;
           writeResolvableList(out, conflicts);
         }
@@ -894,8 +885,7 @@ void Summary::writeRecommended(ostream & out)
 	label = _PL( "The following product is recommended, but will not be installed:",
 		     "The following %d products are recommended, but will not be installed:",
 		     it->second.size() );
-      if ( it->second.size() != 1 )
-	label = str::form( label.c_str(), it->second.size() );
+      label = str::form( label.c_str(), it->second.size() );
       out << endl << label << endl;
       writeResolvableList(out, it->second);
     }
@@ -949,8 +939,7 @@ void Summary::writeSuggested(ostream & out)
         "The following product is suggested, but will not be installed:",
         "The following %d products are suggested, but will not be installed:",
         it->second.size());
-    if ( it->second.size() != 1 )
-      label = str::form( label.c_str(), it->second.size() );
+    label = str::form( label.c_str(), it->second.size() );
     out << endl << label << endl;
 
     writeResolvableList(out, it->second);
@@ -986,8 +975,7 @@ void Summary::writeChangedArch(ostream & out)
         "The following product is going to change architecture:",
         "The following %d products are going to change architecture:",
         it->second.size());
-    if ( it->second.size() != 1 )
-      label = str::form( label.c_str(), it->second.size() );
+    label = str::form( label.c_str(), it->second.size() );
     out << endl << label << endl;
 
     writeResolvableList(out, it->second);
@@ -1024,8 +1012,7 @@ void Summary::writeChangedVendor(ostream & out)
         "The following product is going to change vendor:",
         "The following %d products are going to change vendor:",
         it->second.size());
-    if ( it->second.size() != 1 )
-      label = str::form( label.c_str(), it->second.size() );
+    label = str::form( label.c_str(), it->second.size() );
     out << endl << label << endl;
 
     writeResolvableList(out, it->second);
@@ -1046,8 +1033,7 @@ void Summary::writeUnsupported(ostream & out)
         "The following package is not supported by its vendor:",
         "The following %d packages are not supported by their vendor:",
         it->second.size());
-    if ( it->second.size() != 1 )
-      label = str::form( label.c_str(), it->second.size() );
+    label = str::form( label.c_str(), it->second.size() );
     out << endl << label << endl;
 
     writeResolvableList(out, it->second);
@@ -1067,8 +1053,7 @@ void Summary::writeNeedACC(ostream & out)
         "The following package needs additional customer contract to get support:",
         "The following %d packages need additional customer contract to get support:",
         it->second.size());
-    if ( it->second.size() != 1 )
-      label = str::form( label.c_str(), it->second.size() );
+    label = str::form( label.c_str(), it->second.size() );
     out << endl << label << endl;
 
     writeResolvableList(out, it->second);
@@ -1091,8 +1076,7 @@ void Summary::writeNotUpdated(std::ostream & out)
         "The following product update will NOT be installed:",
         "The following %d product updates will NOT be installed:",
         it->second.size());
-    if ( it->second.size() != 1 )
-      label = str::form( label.c_str(), it->second.size() );
+    label = str::form( label.c_str(), it->second.size() );
     out << endl << label << endl;
 
     writeResolvableList(out, it->second);
