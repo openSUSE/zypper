@@ -1,4 +1,10 @@
 -------------------------------------------------------------------
+Tue Feb 18 18:00:16 CET 2014 - ma@suse.de
+
+- fix wrong processing of translated plural forms (bnc#756195)
+- version 1.9.12
+
+-------------------------------------------------------------------
 Tue Feb 18 09:17:00 CET 2014 - ma@suse.de
 
 - Fix result list of 'packages' command (bnc#864198)
