@@ -127,7 +127,7 @@ BOOST_AUTO_TEST_CASE(setup)
   test.loadRepo(repo);
   //test.loadRepo(TESTS_SRC_DIR "/data/openSUSE-11.1_updates", "upd");
 
-  // resolve pool so that the satisfied status of patches/patterns becomes known
+  // resolve pool so that the satisfied status of pseudo-installed kinds becomes known
   zypp::getZYpp()->resolver()->resolvePool();
 }
 

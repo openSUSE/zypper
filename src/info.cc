@@ -343,7 +343,7 @@ void printPatternInfo(Zypper & zypper, const ui::Selectable & s)
 
   printNVA(pool_item.resolvable());
 
-  cout << _("Installed: ") << (pool_item.isSatisfied() ? _("Yes") : _("No")) << endl;
+  cout << _("Installed: ") << (s.hasInstalledObj() ? _("Yes") : _("No")) << endl;
   cout << _("Visible to User: ") << (pool_item.resolvable()->asKind<Pattern>()->userVisible() ? _("Yes") : _("No")) << endl;
 
   printSummaryDesc(pool_item.resolvable());

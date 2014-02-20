@@ -443,18 +443,16 @@ static void list_patterns_xml(Zypper & zypper)
   bool installed_only = zypper.cOpts().count("installed-only");
   bool notinst_only = zypper.cOpts().count("uninstalled-only");
 
-  ResPool::byKind_iterator
-    it = God->pool().byKindBegin(ResKind::pattern),
-    e  = God->pool().byKindEnd(ResKind::pattern);
-  for (; it != e; ++it )
+  for_( it, God->pool().byKindBegin<Pattern>(), God->pool().byKindEnd<Pattern>() )
   {
-    if (it->isSatisfied() && notinst_only)
+    bool isInstalled = it->status().isInstalled();
+    if ( isInstalled && notinst_only && !installed_only )
       continue;
-    else if (!it->isSatisfied() && installed_only)
+    if ( !isInstalled && installed_only && !notinst_only )
       continue;
 
     Pattern::constPtr pattern = asKind<Pattern>(it->resolvable());
-    cout << asXML(*pattern, it->isSatisfied()) << endl;
+    cout << asXML(*pattern, isInstalled) << endl;
   }
 
   cout << "</pattern-list>" << endl;
@@ -477,14 +475,12 @@ static void list_pattern_table(Zypper & zypper)
   bool installed_only = zypper.cOpts().count("installed-only");
   bool notinst_only = zypper.cOpts().count("uninstalled-only");
 
-  ResPool::byKind_iterator
-    it = God->pool().byKindBegin(ResKind::pattern),
-    e  = God->pool().byKindEnd(ResKind::pattern);
-  for (; it != e; ++it )
+  for_( it, God->pool().byKindBegin<Pattern>(), God->pool().byKindEnd<Pattern>() )
   {
-    if (it->isSatisfied() && notinst_only)
+    bool isInstalled = it->status().isInstalled();
+    if ( isInstalled && notinst_only && !installed_only )
       continue;
-    else if (!it->isSatisfied() && installed_only)
+    else if ( !isInstalled && installed_only && !notinst_only )
       continue;
 
     Pattern::constPtr pattern = asKind<Pattern>(it->resolvable());
@@ -493,7 +489,7 @@ static void list_pattern_table(Zypper & zypper)
       continue;
 
     TableRow tr;
-    tr << (it->isSatisfied() ? "i" : "");
+    tr << (isInstalled ? "i" : "");
     tr << pattern->name () << pattern->edition().asString();
     if (!zypper.globalOpts().is_rug_compatible)
     {
