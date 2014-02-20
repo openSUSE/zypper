@@ -4,11 +4,8 @@
 #include <iosfwd>
 #include <zypp/base/String.h>
 
-/** Convert . */
-//std::string processRichText( const std::string& text );
-
 /** Print [Rich]Text optionally indented. */
-inline std::ostream & printRichText( std::ostream & str, std::string text, unsigned indent_r = 0U )
+inline std::ostream & printRichText( std::ostream & str, std::string text, unsigned indent_r = 0U, unsigned width_r = 0U )
 {
   std::string processRichText( const std::string& text );
 
@@ -18,9 +15,8 @@ inline std::ostream & printRichText( std::ostream & str, std::string text, unsig
   if ( text.find("DT:Rich") != std::string::npos )
     text = processRichText( text );
 
-  return str::printIndented( str, text, indent_r );	// even unindented as it also asaerts a trailing '/n'
+  return zypp::str::printIndented( str, text, indent_r, width_r );	// even unindented as it also asserts a trailing '/n'
 }
-
 
 #endif
 

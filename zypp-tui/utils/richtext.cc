@@ -68,7 +68,7 @@ void fillTagmap()
   _RTtagmap["center"] = CENTER;
   _RTtagmap["strong"] = BOLD; // same as necurses
   _RTtagmap["blockquote"] = BLOCKQUOTE; // same as necurses
-  
+
 }
 
 string closeTag(vector<tags>& tagStack)
@@ -115,7 +115,7 @@ string openTag(vector<tags>& tagStack, string& tag)
     case HR:
       tagStack.pop_back(); //hr haven't closing tag
       return "--------------------";
-    
+
     case PARAGRAPH:
       return "";
     case BREAK_LINE:
@@ -182,7 +182,7 @@ string getStringFromAmpr(const string& str)
       return "";
     }
   }
-  
+
   DBG << end <<" "<<str.substr(0,end) << endl;
   return ampersmap[str.substr(0,end)];
 
@@ -233,7 +233,7 @@ std::string processRichText(const std::string& text)
           if(tagEndPos==text.npos)
           {
             WAR << "ended with non-closed tag " << endl;
-            return res; 
+            return res;
           }
           string tagname = text.substr(pos+1,tagEndPos-pos-1);
           pos = tagEndPos;
