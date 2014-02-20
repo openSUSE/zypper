@@ -17,6 +17,7 @@
 #include <zypp/ProgressData.h>
 
 #include "utils/prompt.h"
+#include "utils/richtext.h"
 #include "output/prompt.h"
 
 using namespace zypp;
@@ -424,6 +425,9 @@ public:
 public:
   /** NORMAL: An empty line */
   void gap() { if ( type() == TYPE_NORMAL ) std::cout << std::endl; }
+
+  void printRichText( std::string text, unsigned indent_r = 0U )
+  { ::printRichText( std::cout, text, indent_r, termwidth() ); }
 
   /**
    * Show an info message.

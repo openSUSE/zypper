@@ -22,7 +22,6 @@
 #include "main.h"
 //#include "misc.h"
 #include "Table.h"
-#include "utils/richtext.h"
 #include "utils/misc.h" // for kind_to_string_localized and string_patch_status
 #include "utils/text.h"
 #include "search.h"
@@ -84,7 +83,7 @@ void printSummaryDesc(const ResObject::constPtr & res)
 {
   cout << _("Summary: ") << res->summary() << endl;
   cout << _("Description: ") << endl;
-  printRichText( cout, res->description(), 2/*indented*/ );
+  Zypper::instance()->out().printRichText( res->description(), 2/*indented*/ );
 }
 
 /**
