@@ -727,26 +727,48 @@ namespace zypp
     ///////////////////////////////////////////////////////////////////
     /** \name Indent. */
     //@{
-      /** Indent by string ["  "]
-       * Prints nothing for an empty string. Asserts a trainling '\n' on the last line.
+      /** Indent by string ["  "] optionally wrap.
+       * Prints nothing for an empty string. Asserts a trainling '\n' on
+       * the last line. Optionally wrap lines at ' ' at a given length.
        */
-      inline std::ostream & printIndented( std::ostream & str, const std::string & text_r, const std::string & indent_r = "  " )
+      inline std::ostream & printIndented( std::ostream & str, const std::string & text_r, const std::string & indent_r = "  ", unsigned maxWitdh_r = 0 )
       {
-	for ( const char * e = text_r.c_str(); *e; ++e )
+	if ( maxWitdh_r )
 	{
-	  const char * s = e;
+	  if ( indent_r.size() >= maxWitdh_r )
+	    maxWitdh_r = 0;	// nonsense: indent larger than line witdh
+	  else
+	    maxWitdh_r -= indent_r.size();
+	}
+	unsigned width = 0;
+	for ( const char * e = text_r.c_str(), * s = e; *e; s = ++e )
+	{
 	  for ( ; *e && *e != '\n'; ++e ) ;/*searching*/
+	  width = e-s;
+	  if ( maxWitdh_r && width > maxWitdh_r )
+	  {
+	    // must break line
+	    width = maxWitdh_r;
+	    for ( e = s+width; e > s && *e != ' '; --e ) ;/*searching*/
+	    if ( e > s )
+	      width = e-s;	// on a ' ', replaced by '\n'
+	    else
+	      e = s+width-1;	// cut line;
+	  }
 	  str << indent_r;
-	  str.write( s, e-s );
+	  str.write( s, width );
 	  str << "\n";
 	  if ( !*e )	// on '\0'
 	    break;
 	}
 	return str;
       }
-      /** \overload Indent by number of chars [' '] */
-      inline std::ostream & printIndented( std::ostream & str, const std::string & text_r, unsigned indent_r, char indentch_r = ' ' )
-      { return printIndented( str, text_r, std::string( indent_r, indentch_r ) ); }
+      /** \overload Indent by number of chars [' '] optionally wrap. */
+      inline std::ostream & printIndented( std::ostream & str, const std::string & text_r, unsigned indent_r, char indentch_r = ' ', unsigned maxWitdh_r = 0 )
+      { return printIndented( str, text_r, std::string( indent_r, indentch_r ), maxWitdh_r ); }
+      /** \overload Indent by number of chars [' '] wrap. */
+      inline std::ostream & printIndented( std::ostream & str, const std::string & text_r, unsigned indent_r, unsigned maxWitdh_r, char indentch_r = ' ' )
+      { return printIndented( str, text_r, std::string( indent_r, indentch_r ), maxWitdh_r ); }
 
       /** Prefix lines by string computed by function taking line begin/end [std::string(const char*, const char*)]
        * Prints nothing for an empty string. Asserts a trainling '\n' on the last line.
