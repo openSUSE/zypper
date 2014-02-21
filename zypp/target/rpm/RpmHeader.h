@@ -125,11 +125,14 @@ public:
    * @see #tag_provides
    **/
   CapabilitySet tag_suggests( std::set<std::string> * freq_r = 0 ) const;
-  /** Unsupported by rpm.
+  /**
    * @see #tag_provides
    **/
-  CapabilitySet tag_supplements( std::set<std::string> * freq_r = 0 ) const
-  { return CapabilitySet(); }
+  CapabilitySet tag_supplements( std::set<std::string> * freq_r = 0 ) const;
+  /**
+   * @see #tag_provides
+   **/
+  CapabilitySet tag_recommends( std::set<std::string> * freq_r = 0 ) const;
 
   ByteCount tag_size()        const;
   ByteCount tag_archivesize() const;

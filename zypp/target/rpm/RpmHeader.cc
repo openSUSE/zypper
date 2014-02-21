@@ -427,6 +427,32 @@ CapabilitySet RpmHeader::PkgRelList_val( tag tag_r, bool pre, std::set<std::stri
       kindFlags   = RPMTAG_CONFLICTFLAGS;
       kindVersion = RPMTAG_CONFLICTVERSION;
       break;
+#ifdef RPMTAG_OLDSUGGESTS
+    case RPMTAG_OLDENHANCESNAME:
+      kindFlags   = RPMTAG_OLDENHANCESFLAGS;
+      kindVersion = RPMTAG_OLDENHANCESVERSION;
+      break;
+    case RPMTAG_OLDSUGGESTSNAME:
+      kindFlags   = RPMTAG_OLDSUGGESTSFLAGS;
+      kindVersion = RPMTAG_OLDSUGGESTSVERSION;
+      break;
+    case RPMTAG_RECOMMENDNAME:
+      kindFlags   = RPMTAG_RECOMMENDFLAGS;
+      kindVersion = RPMTAG_RECOMMENDVERSION;
+      break;
+    case RPMTAG_SUPPLEMENTNAME:
+      kindFlags   = RPMTAG_SUPPLEMENTFLAGS;
+      kindVersion = RPMTAG_SUPPLEMENTVERSION;
+      break;
+    case RPMTAG_SUGGESTNAME:
+      kindFlags   = RPMTAG_SUGGESTFLAGS;
+      kindVersion = RPMTAG_SUGGESTVERSION;
+      break;
+    case RPMTAG_ENHANCENAME:
+      kindFlags   = RPMTAG_ENHANCEFLAGS;
+      kindVersion = RPMTAG_ENHANCEVERSION;
+      break;
+#else
     case RPMTAG_ENHANCESNAME:
       kindFlags   = RPMTAG_ENHANCESFLAGS;
       kindVersion = RPMTAG_ENHANCESVERSION;
@@ -435,6 +461,7 @@ CapabilitySet RpmHeader::PkgRelList_val( tag tag_r, bool pre, std::set<std::stri
       kindFlags   = RPMTAG_SUGGESTSFLAGS;
       kindVersion = RPMTAG_SUGGESTSVERSION;
       break;
+#endif
     default:
       INT << "Illegal RPMTAG_dependencyNAME " << tag_r << endl;
       return ret;
@@ -586,7 +613,11 @@ CapabilitySet RpmHeader::tag_obsoletes( std::set<std::string> * freq_r ) const
 //
 CapabilitySet RpmHeader::tag_enhances( std::set<std::string> * freq_r ) const
   {
+#ifdef RPMTAG_OLDSUGGESTS
+    return PkgRelList_val( RPMTAG_ENHANCENAME, false, freq_r );
+#else
     return PkgRelList_val( RPMTAG_ENHANCESNAME, false, freq_r );
+#endif
   }
 
 ///////////////////////////////////////////////////////////////////
@@ -599,7 +630,45 @@ CapabilitySet RpmHeader::tag_enhances( std::set<std::string> * freq_r ) const
 //
 CapabilitySet RpmHeader::tag_suggests( std::set<std::string> * freq_r ) const
   {
+#ifdef RPMTAG_OLDSUGGESTS
+    return PkgRelList_val( RPMTAG_SUGGESTNAME, false, freq_r );
+#else
     return PkgRelList_val( RPMTAG_SUGGESTSNAME, false, freq_r );
+#endif
+  }
+
+///////////////////////////////////////////////////////////////////
+//
+//
+//        METHOD NAME : RpmHeader::tag_supplements
+//        METHOD TYPE : CapabilitySet
+//
+//        DESCRIPTION :
+//
+CapabilitySet RpmHeader::tag_supplements( std::set<std::string> * freq_r ) const
+  {
+#ifdef RPMTAG_OLDSUGGESTS
+    return PkgRelList_val( RPMTAG_SUPPLEMENTNAME, false, freq_r );
+#else
+    return CapabilitySet();
+#endif
+  }
+
+///////////////////////////////////////////////////////////////////
+//
+//
+//        METHOD NAME : RpmHeader::tag_recommends
+//        METHOD TYPE : CapabilitySet
+//
+//        DESCRIPTION :
+//
+CapabilitySet RpmHeader::tag_recommends( std::set<std::string> * freq_r ) const
+  {
+#ifdef RPMTAG_OLDSUGGESTS
+    return PkgRelList_val( RPMTAG_RECOMMENDNAME, false, freq_r );
+#else
+    return CapabilitySet();
+#endif
   }
 
 ///////////////////////////////////////////////////////////////////
