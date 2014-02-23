@@ -363,7 +363,7 @@ void printPatternInfo(Zypper & zypper, const ui::Selectable & s)
   //God->resolver()->solve();
 
   Pattern::constPtr pattern = asKind<Pattern>(pool_item.resolvable());
-  Pattern::Contents contents = pattern->contents();
+  Pattern::Contents contents = pattern->contentsNoSuggests();	// (bnc#857671) don't include suggests as we can not deal with them .
   for_(sit, contents.selectableBegin(), contents.selectableEnd())
   {
     const ui::Selectable & s = **sit;
@@ -379,7 +379,10 @@ void printPatternInfo(Zypper & zypper, const ui::Selectable & s)
   if (t.empty())
     cout << " " << _("(empty)") << endl;
   else
+  {
+    t.sort( 1 );
     cout << endl << endl << t;
+  }
 }
 
 /**
