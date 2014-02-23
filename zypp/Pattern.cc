@@ -237,11 +237,11 @@ namespace zypp
     // the autoPackage or the (oldstype) pattern itself.
     // load requires
     CapabilitySet caps;
-    addCaps( caps, *this, Dep::PROVIDES );
+    addCaps( caps, *this, Dep::REQUIRES );
 
     sat::Solvable depKeeper( autoPackage() );
     if ( depKeeper )
-      addCaps( caps, depKeeper, Dep::PROVIDES );
+      addCaps( caps, depKeeper, Dep::REQUIRES );
     // get items providing the requirements
     sat::WhatProvides prv( caps );
     // return packages only.
@@ -249,22 +249,24 @@ namespace zypp
                               make_filter_end( filter::byKind<Package>(), prv ) );
   }
 
-  Pattern::Contents Pattern::depends() const
+  Pattern::Contents Pattern::depends( bool includeSuggests_r ) const
   {
     // Content dependencies are either associated with
     // the autoPackage or the (oldstype) pattern itself.
     // load requires, recommends[, suggests]
     CapabilitySet caps;
-    addCaps( caps, *this, Dep::PROVIDES );
+    addCaps( caps, *this, Dep::REQUIRES );
     addCaps( caps, *this, Dep::RECOMMENDS );
-    addCaps( caps, *this, Dep::SUGGESTS );
+    if ( includeSuggests_r )
+      addCaps( caps, *this, Dep::SUGGESTS );
 
     sat::Solvable depKeeper( autoPackage() );
     if ( depKeeper )
     {
-      addCaps( caps, depKeeper, Dep::PROVIDES );
+      addCaps( caps, depKeeper, Dep::REQUIRES );
       addCaps( caps, depKeeper, Dep::RECOMMENDS );
-      addCaps( caps, depKeeper, Dep::SUGGESTS );
+      if ( includeSuggests_r )
+	addCaps( caps, depKeeper, Dep::SUGGESTS );
     }
     // get items providing the above
     sat::WhatProvides prv( caps );
@@ -273,7 +275,7 @@ namespace zypp
                               make_filter_end( filter::byKind<Package>(), prv ) );
   }
 
-  Pattern::Contents Pattern::contents() const
+  Pattern::Contents Pattern::contents( bool includeSuggests_r ) const
   {
     PatternExpander expander;
     if ( ! expander.doExpand( this ) )
@@ -282,7 +284,7 @@ namespace zypp
     Contents result;
     for_( it, expander.begin(), expander.end() )
     {
-      Contents c( (*it)->depends() );
+      Contents c( (*it)->depends( includeSuggests_r ) );
       result.get().insert( c.begin(), c.end() );
     }
     return result;

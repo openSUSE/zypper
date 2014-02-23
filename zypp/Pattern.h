@@ -80,14 +80,21 @@ namespace zypp
       Contents core() const;
 
       /** Ui hint: Dependent packages.
-       * This also includes recommended and suggested packages.
+       * This also includes recommended and suggested (optionally exclude) packages.
       */
-      Contents depends() const;
+      Contents depends( bool includeSuggests_r = true ) const;
+      /** \overload Without SUGGESTS. */
+      Contents dependsNoSuggests() const
+      { return depends( false ); }
 
       /** The collection of packages associated with this pattern.
        * This also evaluates the patterns includes/extends relation.
+       * Optionally exclude \c SUGGESTED packages.
        */
-      Contents contents() const;
+      Contents contents( bool includeSuggests_r = true ) const;
+      /** \overload Without SUGGESTS. */
+      Contents contentsNoSuggests() const
+      { return contents( false ); }
 
     protected:
       friend Ptr make<Self>( const sat::Solvable & solvable_r );
