@@ -1,6 +1,8 @@
 -------------------------------------------------------------------
 Sun Feb 23 21:06:34 CET 2014 - ma@suse.de
 
+- Don't include suggested packages in pattern content, as we can't
+  handle them (bnc#857671)
 - Fix computation of pattern status (bnc#864412)
 - fix wrong processing of translated plural forms (bnc#756195)
 - Fix result list of 'packages' command (bnc#864198)
