@@ -54,6 +54,22 @@ namespace zypp
       std::string order() const;
 
     public:
+      /** \name Auto pattens (libyzpp-14)
+       * Patterns are no longer defined by separate metadate files, but via
+       * special dependencies provided by a corresponding patterns- package.
+       * The pattern itself requires only it's patterns- package, the package
+       * contains all further dependencies.
+       * This way pattens are no longer pseudo installed objects with a computed
+       * status, but installed, iff the corresponding patterns- package is
+       * installed.
+       */
+      //@{
+      /** This patterns is auto-defined by a patterns- package. */
+      bool isAutoPattern() const;
+      /** The corresponding patterns- package if \ref isAutoPattern. */
+      sat::Solvable autoPackage() const;
+      //@}
+    public:
       /** Ui hint: included patterns. */
       NameList includes() const;
 
@@ -64,7 +80,7 @@ namespace zypp
       Contents core() const;
 
       /** Ui hint: Dependent packages.
-       * This also includes recommended and suugested packages.
+       * This also includes recommended and suggested packages.
       */
       Contents depends() const;
 

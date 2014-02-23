@@ -20,11 +20,19 @@ using std::endl;
 
 ///////////////////////////////////////////////////////////////////
 namespace zypp
-{ /////////////////////////////////////////////////////////////////
-
+{
   ///////////////////////////////////////////////////////////////////
   namespace
-  { /////////////////////////////////////////////////////////////////
+  {
+    inline Capability autoCapability( const Capabilities & provides_r )
+    {
+      static const Capability autopattern( "autopattern()" );
+      for ( const auto & cap : provides_r )
+	if ( cap.matches( autopattern ) == CapMatch::yes )
+	  return cap;
+      return Capability();
+    }
+
     ///////////////////////////////////////////////////////////////////
     //
     //	CLASS NAME : PatternExpander
@@ -153,51 +161,55 @@ namespace zypp
       private:
         PatternMap _patternMap;
     };
-    /////////////////////////////////////////////////////////////////
   } // namespace
   ///////////////////////////////////////////////////////////////////
-  IMPL_PTR_TYPE(Pattern);
 
   ///////////////////////////////////////////////////////////////////
-  //
-  //	METHOD NAME : Pattern::Pattern
-  //	METHOD TYPE : Ctor
-  //
+  //	Pattern
+  ///////////////////////////////////////////////////////////////////
+
+  IMPL_PTR_TYPE(Pattern);
+
   Pattern::Pattern( const sat::Solvable & solvable_r )
   : ResObject( solvable_r )
   {}
 
-  ///////////////////////////////////////////////////////////////////
-  //
-  //	METHOD NAME : Pattern::~Pattern
-  //	METHOD TYPE : Dtor
-  //
   Pattern::~Pattern()
   {}
 
-  ///////////////////////////////////////////////////////////////////
-  //
-  //	Pattern interface forwarded to implementation
-  //
-  ///////////////////////////////////////////////////////////////////
-  /** */
   bool Pattern::isDefault() const
   { return lookupBoolAttribute( sat::SolvAttr::isdefault ); }
-  /** */
+
   bool Pattern::userVisible() const
   { return lookupBoolAttribute( sat::SolvAttr::isvisible ); }
-  /** */
+
   std::string Pattern::category( const Locale & lang_r ) const
   { return lookupStrAttribute( sat::SolvAttr::category, lang_r ); }
-  /** */
+
   Pathname Pattern::icon() const
   { return lookupStrAttribute( sat::SolvAttr::icon ); }
-  /** */
+
   Pathname Pattern::script() const
   { return lookupStrAttribute( sat::SolvAttr::script ); }
 
   std::string Pattern::order() const
   { return lookupStrAttribute( sat::SolvAttr::order ); }
+
+  bool Pattern::isAutoPattern() const
+  { return bool(autoCapability( provides() )); }
+
+  sat::Solvable Pattern::autoPackage() const
+  {
+    Capability autocap( autoCapability( provides() ) );
+    if ( autocap )
+    {
+      Capability pkgCap( arch(), autocap.detail().ed().asString(), Rel::EQ, edition() );
+      for ( const auto & solv: sat::WhatProvides( pkgCap ) )
+	if ( solv.repository() == repository() )
+	  return solv;
+    }
+    return sat::Solvable();
+  }
 
   Pattern::NameList Pattern::includes() const
   { return NameList( sat::SolvAttr::includes, satSolvable() ); }
@@ -205,10 +217,33 @@ namespace zypp
   Pattern::NameList Pattern::extends() const
   { return NameList( sat::SolvAttr::extends, satSolvable() ); }
 
+  ///////////////////////////////////////////////////////////////////
+  namespace
+  {
+    inline void addCaps( CapabilitySet & caps_r, sat::Solvable solv_r, Dep dep_r )
+    {
+      Capabilities c( solv_r[dep_r] );
+      if ( ! c.empty() )
+      {
+	caps_r.insert( c.begin(),c.end() );
+      }
+    }
+  } //namespace
+  ///////////////////////////////////////////////////////////////////
+
   Pattern::Contents Pattern::core() const
   {
+    // Content dependencies are either associated with
+    // the autoPackage or the (oldstype) pattern itself.
+    // load requires
+    CapabilitySet caps;
+    addCaps( caps, *this, Dep::PROVIDES );
+
+    sat::Solvable depKeeper( autoPackage() );
+    if ( depKeeper )
+      addCaps( caps, depKeeper, Dep::PROVIDES );
     // get items providing the requirements
-    sat::WhatProvides prv( requires() );
+    sat::WhatProvides prv( caps );
     // return packages only.
     return Pattern::Contents( make_filter_begin( filter::byKind<Package>(), prv ),
                               make_filter_end( filter::byKind<Package>(), prv ) );
@@ -216,15 +251,20 @@ namespace zypp
 
   Pattern::Contents Pattern::depends() const
   {
-    // load requires, recommends, suggests
+    // Content dependencies are either associated with
+    // the autoPackage or the (oldstype) pattern itself.
+    // load requires, recommends[, suggests]
     CapabilitySet caps;
+    addCaps( caps, *this, Dep::PROVIDES );
+    addCaps( caps, *this, Dep::RECOMMENDS );
+    addCaps( caps, *this, Dep::SUGGESTS );
+
+    sat::Solvable depKeeper( autoPackage() );
+    if ( depKeeper )
     {
-      Capabilities c( requires() );
-      caps.insert( c.begin(),c.end() );
-      c = recommends();
-      caps.insert( c.begin(),c.end() );
-      c = suggests();
-      caps.insert( c.begin(),c.end() );
+      addCaps( caps, depKeeper, Dep::PROVIDES );
+      addCaps( caps, depKeeper, Dep::RECOMMENDS );
+      addCaps( caps, depKeeper, Dep::SUGGESTS );
     }
     // get items providing the above
     sat::WhatProvides prv( caps );
