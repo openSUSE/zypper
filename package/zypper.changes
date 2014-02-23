@@ -1,4 +1,12 @@
 -------------------------------------------------------------------
+Sun Feb 23 21:06:34 CET 2014 - ma@suse.de
+
+- Fix computation of pattern status (bnc#864412)
+- fix wrong processing of translated plural forms (bnc#756195)
+- Fix result list of 'packages' command (bnc#864198)
+- version 1.10.8
+
+-------------------------------------------------------------------
 Fri Feb 14 13:54:16 CET 2014 - ma@suse.de
 
 - Print Content Ids of required update repos in product info (Fate#316160)
