@@ -1,4 +1,13 @@
 -------------------------------------------------------------------
+Sun Feb 23 21:52:55 CET 2014 - ma@suse.de
+
+- Optionally exclude suggested packages from pattern content (bnc#857671)
+- Fix pattern content for auto-pattens (bnc#864087)
+- Don't report missing filelists for non-packages (bnc#864314)
+- adapt to new rpm weak dependency tags
+- version 14.15.0 (15)
+
+-------------------------------------------------------------------
 Fri Feb 14 13:51:46 CET 2014 - ma@suse.de
 
 - Provide ContentIdentifier of required update repositories in Product
