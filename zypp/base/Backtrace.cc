@@ -28,18 +28,21 @@ namespace zypp
     void *array[arraySize];
     size_t size = ::backtrace( array, arraySize );
 
-    // print out all the frames to stderr
+    // Print out all frames to stderr. Separate sigsegvHandler stack
+    // [dumpBacktrace][sigsegvHandler][libc throwing] from actual
+    // code stack.
     char ** messages = ::backtrace_symbols( array, size );
     if ( messages )
     {
-      static const size_t first = 1;
+      static const size_t handlerStack = 3; // [dumpBacktrace][sigsegvHandler][libc throwing]
+      static const size_t first = 0;
       for ( size_t i = first; i < size; ++i )
       {
 	char * mangled_name = 0;
 	char * offset_begin = 0;
 	char * offset_end = 0;
 
-	// find parantheses and +address offset surrounding mangled name
+	// find parentheses and +address offset surrounding mangled name
 	for ( char * p = messages[i]; *p; ++p )
 	{
 	  if ( *p == '(' )
@@ -57,8 +60,14 @@ namespace zypp
 	  }
 	}
 
+	int btLevel = i-handlerStack; // negative level in sigsegvHandler
 	if ( i > first )
+	{
 	  stream_r << endl;
+	  if ( btLevel == 0 )
+	    stream_r << "vvvvvvvvvv----------------------------------------" << endl;
+	}
+	stream_r << "[" << (btLevel<0 ?"hd":"bt") << "]: (" << btLevel << ") ";
 
 	// if the line could be processed, attempt to demangle the symbol
 	if ( mangled_name && offset_begin && offset_end && mangled_name < offset_begin )
@@ -73,22 +82,19 @@ namespace zypp
 	  // if demangling is successful, output the demangled function name
 	  if ( status == 0 )
 	  {
-	    stream_r << "[bt]: (" << i << ") " << messages[i] << " : "
-	    << real_name << "+" << offset_begin << offset_end;
-
+	    stream_r << messages[i] << " : " << real_name << "+" << offset_begin << offset_end;
 	  }
 	  // otherwise, output the mangled function name
 	  else
 	  {
-	    stream_r << "[bt]: (" << i << ") " << messages[i] << " : "
-	    << mangled_name << "+" << offset_begin << offset_end;
+	    stream_r << messages[i] << " : " << mangled_name << "+" << offset_begin << offset_end;
 	  }
 	  ::free( real_name );
 	}
 	else
 	{
 	  // otherwise, print the whole line
-	  stream_r << "[bt]: (" << i << ") " << messages[i];
+	  stream_r << messages[i];
 	}
       }
       ::free( messages );
