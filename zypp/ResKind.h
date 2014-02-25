@@ -45,6 +45,19 @@ namespace zypp
       static const ResKind application;
       //@}
 
+      /** Return the builtin kind if \a str_r explicitly prefixed.
+       * \a str_r must start with a builtin kind followed by a \c ':'.
+       * If no builtin kind is detected, \ref nokind is returned,
+       * which usually indicates a \ref package or \ref srcpackage.
+       */
+      static ResKind explicitBuiltin( const char * str_r );
+      /** \overload */
+      static ResKind explicitBuiltin( const std::string & str_r )
+      { return explicitBuiltin( str_r.c_str() ); }
+      /** \overload */
+      static ResKind explicitBuiltin( const IdString & str_r )
+      { return explicitBuiltin( str_r.c_str() ); }
+
     public:
       /** Default ctor: \ref nokind */
       ResKind() {}

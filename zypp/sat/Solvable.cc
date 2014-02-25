@@ -43,7 +43,7 @@ namespace zypp
         if ( ! _ident )
           return;
 
-	ResKind explicitKind = Solvable::SplitIdent::explicitKind( _ident.c_str() );
+	ResKind explicitKind = ResKind::explicitBuiltin( _ident.c_str() );
 	// NOTE: kind package and srcpackage do not have namespaced ident!
 	if ( ! explicitKind  )
 	{
@@ -51,7 +51,7 @@ namespace zypp
 	  // No kind defaults to package
 	  if ( !_kind )
 	    _kind = ResKind::package;
-	  if ( ! ( _kind == ResKind::package || _kind == ResKind::srcpackage ) )
+	  else if ( ! ( _kind == ResKind::package || _kind == ResKind::srcpackage ) )
 	    _ident = IdString( str::form( "%s:%s", _kind.c_str(), _ident.c_str() ) );
 	}
 	else
@@ -87,33 +87,6 @@ namespace zypp
     : _ident( name_r )
     , _kind( kind_r )
     { _doSplit( _ident, _kind, _name ); }
-
-    ResKind Solvable::SplitIdent::explicitKind( const char * ident_r )
-    {
-      if ( ! ident_r )
-	return ResKind();
-
-      const char * sep = ::strchr( ident_r, ':' );
-      if ( ! sep )
-	return ResKind();
-
-      ResKind ret;
-      if ( sep-ident_r >= 4 )
-      {
-	switch ( ident_r[3] )
-	{
-	  #define OUTS(K,S) if ( !::strncmp( ident_r, ResKind::K.c_str(), S ) && ident_r[S] == ':' ) ret = ResKind::K
-	  //             ----v
-	  case 'c': OUTS( patch, 5 );       break;
-	  case 'd': OUTS( product, 7 );     break;
-	  case 'k': OUTS( package, 7 );     break;
-	  case 'p': OUTS( srcpackage, 10 ); break;
-	  case 't': OUTS( pattern, 7 );     break;
-	  #undef OUTS
-	}
-      }
-      return ret;
-    }
 
     /////////////////////////////////////////////////////////////////
 
@@ -307,30 +280,18 @@ namespace zypp
           break;
       }
 
+      // either explicitly prefixed...
       const char * ident = IdString( _solvable->name ).c_str();
+      ResKind knownKind( ResKind::explicitBuiltin( ident ) );
+      if ( knownKind )
+	return knownKind;
+
+      // ...or no ':' in package names (hopefully)...
       const char * sep = ::strchr( ident, ':' );
-
-      // no ':' in package names (hopefully)
       if ( ! sep )
-        return ResKind::package;
+	return ResKind::package;
 
-      // quick check for well known kinds
-      if ( sep-ident >= 4 )
-      {
-        switch ( ident[3] )
-        {
-#define OUTS(K,S) if ( !::strncmp( ident, ResKind::K.c_str(), S ) ) return ResKind::K
-          //             ----v
-          case 'c': OUTS( patch, 5 );       break;
-          case 'd': OUTS( product, 7 );     break;
-          case 'k': OUTS( package, 7 );     break;
-          case 'p': OUTS( srcpackage, 10 ); break;
-          case 't': OUTS( pattern, 7 );     break;
-#undef OUTS
-        }
-      }
-
-      // an unknown kind
+      // ...or something unknown.
       return ResKind( std::string( ident, sep-ident ) );
     }
 

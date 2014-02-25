@@ -275,14 +275,6 @@ namespace zypp
             ResKind  kind()  const { return _kind; }
             IdString name()  const { return _name; }
 
-	    /** Return an idents explicit kind prefix, or \ref ResKind() if none.
-	     * Mainly to detect whether a given ident string is explicitly prefixed
-	     * by a known kind (e.g \c pattern:foo or \c package:foo).
-	     */
-	    static ResKind explicitKind( IdString ident_r )		{ return explicitKind( ident_r.c_str() );  }
-	    static ResKind explicitKind( const char * ident_r );
-	    static ResKind explicitKind( const std::string & ident_r )	{ return explicitKind( ident_r.c_str() );  }
-
           private:
             IdString  _ident;
             ResKind   _kind;

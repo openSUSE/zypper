@@ -43,6 +43,28 @@ namespace zypp
   template<>
     const ResKind ResTraits<Application>::kind( ResKind::application );
 
+  ResKind ResKind::explicitBuiltin( const char * str_r )
+  {
+    if ( str_r && str_r[0] && str_r[1] && str_r[2] )
+    {
+      switch ( str_r[3] )
+      {
+	// NOTE: it needs to be assertd that the separating ':' is present
+	// if a known kind is retuirned. Dependent code relies on this!
+	#define OUTS(K,S) if ( !::strncmp( str_r, ResKind::K.c_str(), S ) && str_r[S] == ':' ) return ResKind::K
+	//             ----v
+	case 'c': OUTS( patch, 5 );       break;
+	case 'd': OUTS( product, 7 );     break;
+	case 'k': OUTS( package, 7 );     break;
+	case 'l': OUTS( application, 11 );break;
+	case 'p': OUTS( srcpackage, 10 ); break;
+	case 't': OUTS( pattern, 7 );     break;
+	#undef OUTS
+      }
+    }
+    return nokind;
+  }
+
   std::string ResKind::satIdent( const ResKind & refers_r, const std::string & name_r )
   {
     if ( ! refers_r || refers_r == package || refers_r == srcpackage )
