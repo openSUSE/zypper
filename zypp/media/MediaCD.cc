@@ -41,7 +41,7 @@ extern "C"
 /*
 ** if to throw exception on eject errors or ignore them
 */
-#define  REPORT_EJECT_ERRORS     1
+#define  REPORT_EJECT_ERRORS     0
 
 /*
 ** If defined to the full path of the eject utility,
