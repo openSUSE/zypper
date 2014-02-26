@@ -1,4 +1,10 @@
 -------------------------------------------------------------------
+Wed Feb 26 15:06:06 CET 2014 - ma@suse.de
+
+- Ignore failed-eject-exception on media change (bnc#865705)
+- version 14.16.1 (16)
+
+-------------------------------------------------------------------
 Tue Feb 25 13:42:13 CET 2014 - ma@suse.de
 
 - Remove duplicate code detecting known kinds and move it to 
