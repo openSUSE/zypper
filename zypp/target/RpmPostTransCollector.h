@@ -17,9 +17,6 @@
 #include "zypp/ManagedFile.h"
 #include "zypp/Pathname.h"
 
-#undef  ZYPP_BASE_LOGGER_LOGGROUP
-#define ZYPP_BASE_LOGGER_LOGGROUP "zypp:posttrans"
-
 ///////////////////////////////////////////////////////////////////
 namespace zypp
 {
