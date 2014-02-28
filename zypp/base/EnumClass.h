@@ -47,20 +47,32 @@ namespace zypp
     class EnumClass : public _EnumDef
     {
     public:
-      typedef typename _EnumDef::Enum Enum;	///< The underlying enum type
+      typedef typename _EnumDef::Enum Enum;		///< The underlying enum type
+      typedef typename std::underlying_type<Enum>::type Integral;///< The underlying integral type
 
       EnumClass( Enum val_r ) : _val( val_r ) {}
 
-      /** For use in switch
+      /** Underlying enum value for use in switch
        * \code
        * struct _ColorDef { enum Enum { R, G ,B }; }
        * typedef EnumClass<_ColorDef> Color;
        *
        * Color a;
-       * switch ( a.inSwitch() )
+       * switch ( a.asEnum() )
        * \endcode
        */
-      Enum inSwitch() const { return _val; }
+      Enum asEnum() const { return _val; }
+
+      /** Underlying integral value (e.g. array index)
+       * \code
+       * struct _ColorDef { enum Enum { R, G ,B }; }
+       * typedef EnumClass<_ColorDef> Color;
+       *
+       * Color a;
+       * std::string table[] = { "red", "green", "blue" };
+       * std::cout << table[a.asIntegral()] << std::endl;
+       */
+      Integral asIntegral() const { return static_cast<Integral>(_val); }
 
       friend bool operator==( const EnumClass & lhs, const EnumClass & rhs ) { return lhs._val == rhs._val; }
       friend bool operator!=( const EnumClass & lhs, const EnumClass & rhs ) { return lhs._val != rhs._val; }

@@ -99,7 +99,7 @@ namespace zypp
 	"%G-W%V-%u",	///< 2014-W06-5 (1 is Monday)
 	"%Y-%j",	///< 2014-038
       };
-      return fmt[static_cast<std::underlying_type<Date::DateFormat::Enum>::type>(dateFormat_r.inSwitch())];
+      return fmt[dateFormat_r.asIntegral()];
     }
 
     inline const char * _timeFormat( Date::TimeFormat timeFormat_r )
@@ -110,7 +110,7 @@ namespace zypp
 	"%H:%M",	///< 07:06
 	"%H",		///< 07
       };
-      return fmt[static_cast<std::underlying_type<Date::TimeFormat::Enum>::type>(timeFormat_r.inSwitch())];
+      return fmt[timeFormat_r.asIntegral()];
     }
 
     inline const char * _timeZoneFormat( Date::TimeZoneFormat timeZoneFormat_r )
@@ -120,7 +120,7 @@ namespace zypp
 	" %Z",		///< UTC, CET, ...
 	"%z",		///< +0000
       };
-      return fmt[static_cast<std::underlying_type<Date::TimeZoneFormat::Enum>::type>(timeZoneFormat_r.inSwitch())];
+      return fmt[timeZoneFormat_r.asIntegral()];
     }
 
     inline std::string doForm( const std::string & format_r, Date::TimeBase base_r, const Date::ValueType & date_r )
@@ -211,7 +211,7 @@ namespace zypp
       if ( dateFormat_r != DateFormat::none )
 	str << 'T';
       str << _timeFormat( timeFormat_r );
-      switch ( timeZoneFormat_r.inSwitch() )
+      switch ( timeZoneFormat_r.asEnum() )
       {
 	case TimeZoneFormat::none:
 	  break;
