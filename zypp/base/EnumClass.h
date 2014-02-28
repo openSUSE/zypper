@@ -25,8 +25,22 @@ namespace zypp
     /// \class EnumClass
     /// \brief Type safe enum (workaround SWIG not supporting enum class)
     /// \code
-    /// struct _ColorDef { enum Enum { R, G ,B }; }
+    /// struct _ColorDef { enum Enum { R, G ,B }; };
     /// typedef EnumClass<_ColorDef> Color;
+    /// \endcode
+    /// Conversion to from string can be easily added, e.g. like this:
+    /// \code
+    /// struct _ColorDef {
+    ///   enum Enum { R, G ,B };
+    ///   static Enum fromString( const std::string & val_r );
+    ///   static const std::string & asString( Enum val_r );
+    /// };
+    /// std::ostream & operator<<( std::ostream & str, const _ColorDef & obj )
+    /// { return str << _ColorDef::asString( obj.inSwitch() ); }
+    ///
+    /// typedef EnumClass<_ColorDef> Color;
+    /// Color red = Color::fromString("red");
+    /// cout << red << endl; // "red"
     /// \endcode
     ///////////////////////////////////////////////////////////////////
     template<typename _EnumDef>
