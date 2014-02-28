@@ -1649,9 +1649,11 @@ Don't download any source rpms, but show which source rpms are missing or extran
 .TP
 .B ps
 After each upgrade or removal of packages, there may be running processes
-on the system which then use files meanwhile deleted by the upgrade.
-\fBzypper ps\fR lists these processes, together with the corresponding
-deleted files, and a service name hint, in case it's a known service.
+on the system which continue to use meanwhile deleted files. \fBzypper ps\fR
+lists all processes using deleted files, together with the corresponding files,
+and a service name hint, in case it's a known service. This gives a hint which
+services may need to be restarted after an update. Usually programs which continue
+to use deleted shared libraries.
 The list contains the following information:
 
 * PID\ \ \ \ \ \ ID of the process

@@ -2456,7 +2456,7 @@ void Zypper::processCommandOptions()
     _command_help = _(
       "ps\n"
       "\n"
-      "List running processes which use files deleted by recent upgrades.\n"
+      "List running processes which might use files deleted by recent upgrades.\n"
       "\n"
       "This command has no additional options.\n"
     );
