@@ -41,6 +41,14 @@
 #define arraySize(A)  (sizeof(A)/sizeof(*A))
 #define arrayEnd(A)   (&A[0] + arraySize(A))
 
+/**
+ * \code
+ * defConstStr( strANY(), "ANY" );
+ * std::str str = strANY();
+ * \endcode
+ */
+#define defConstStr(FNC,STR) inline const std::string & FNC { static const std::string val( STR ); return val; }
+
 #define GCC_VERSION (__GNUC__ * 10000 + __GNUC_MINOR__ * 100  + __GNUC_PATCHLEVEL__)
 #if GCC_VERSION < 40600 || not defined(__GXX_EXPERIMENTAL_CXX0X__)
 #define nullptr NULL
