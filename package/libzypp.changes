@@ -1,4 +1,9 @@
 -------------------------------------------------------------------
+Tue Mar 18 14:55:11 CET 2014 - ma@suse.de
+
+- Update zypp-po.tar.bz2
+
+-------------------------------------------------------------------
 Wed Feb 26 15:06:06 CET 2014 - ma@suse.de
 
 - Ignore failed-eject-exception on media change (bnc#865705)
