@@ -3530,16 +3530,6 @@ void Zypper::doCommand()
       throw ExitRequestException("not implemented");
     }
 
-    // can't remove pattern (for now)
-    if (kind == ResKind::pattern && !install_not_remove)
-    {
-      //! \todo define and implement pattern removal (bnc #407040)
-      out().error(
-          _("Uninstallation of a pattern is currently not defined and implemented."));
-      setExitCode(ZYPPER_EXIT_ERR_INVALID_ARGS);
-      throw ExitRequestException("not implemented");
-    }
-
      // can't remove source package
     if (kind == ResKind::srcpackage && !install_not_remove)
     {
