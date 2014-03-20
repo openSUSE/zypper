@@ -1,4 +1,11 @@
 -------------------------------------------------------------------
+Thu Mar 20 19:03:40 CET 2014 - ma@suse.de
+
+- Add summary messages for application (bnc#869439)
+- Rephrase some 'zypper ps' related messages (bnc#866300)
+- version 1.11.0
+
+-------------------------------------------------------------------
 Tue Mar 18 14:55:23 CET 2014 - ma@suse.de
 
 - Update zypper-po.tar.bz2
