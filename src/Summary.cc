@@ -501,6 +501,11 @@ void Summary::writeNewlyInstalled(ostream & out)
         "The following source package is going to be installed:",
         "The following %d source packages are going to be installed:",
         it->second.size());
+    else if (it->first == ResKind::application)
+      label = _PL(
+        "The following application is going to be installed:",
+        "The following %d applications are going to be installed:",
+        it->second.size());
     label = str::form( label.c_str(), it->second.size() );
     out << endl << label << endl;
 
@@ -537,6 +542,11 @@ void Summary::writeRemoved(ostream & out)
         "The following product is going to be REMOVED:",
         "The following %d products are going to be REMOVED:",
         it->second.size());
+    else if (it->first == ResKind::application)
+      label = _PL(
+        "The following application is going to be REMOVED:",
+        "The following %d applications are going to be REMOVED:",
+        it->second.size());
     label = str::form( label.c_str(), it->second.size() );
     out << endl << label << endl;
 
@@ -572,6 +582,11 @@ void Summary::writeUpgraded(ostream & out)
         "The following product is going to be upgraded:",
         "The following %d products are going to be upgraded:",
         it->second.size());
+    else if (it->first == ResKind::application)
+      label = _PL(
+        "The following application is going to be upgraded:",
+        "The following %d applications are going to be upgraded:",
+        it->second.size());
     label = str::form( label.c_str(), it->second.size() );
     out << endl << label << endl;
 
@@ -606,6 +621,11 @@ void Summary::writeDowngraded(ostream & out)
         "The following product is going to be downgraded:",
         "The following %d products are going to be downgraded:",
         it->second.size());
+    else if (it->first == ResKind::application)
+      label = _PL(
+        "The following application is going to be downgraded:",
+        "The following %d applications are going to be downgraded:",
+        it->second.size());
     label = str::form( label.c_str(), it->second.size() );
     out << endl << label << endl;
 
@@ -639,6 +659,11 @@ void Summary::writeReinstalled(ostream & out)
       label = _PL(
         "The following product is going to be reinstalled:",
         "The following %d products are going to be reinstalled:",
+        it->second.size());
+    else if (it->first == ResKind::application)
+      label = _PL(
+        "The following application is going to be reinstalled:",
+        "The following %d applications are going to be reinstalled:",
         it->second.size());
     label = str::form( label.c_str(), it->second.size() );
     out << endl << label << endl;
@@ -801,6 +826,11 @@ void Summary::writeRecommended(ostream & out)
         "The following recommended source package was automatically selected:",
         "The following %d recommended source packages were automatically selected:",
         it->second.size());
+    else if (it->first == ResKind::application)
+      label = _PL(
+        "The following recommended application was automatically selected:",
+        "The following %d recommended applications were automatically selected:",
+        it->second.size());
     label = str::form( label.c_str(), it->second.size() );
     out << endl << label << endl;
 
@@ -885,6 +915,10 @@ void Summary::writeRecommended(ostream & out)
 	label = _PL( "The following product is recommended, but will not be installed:",
 		     "The following %d products are recommended, but will not be installed:",
 		     it->second.size() );
+      else if (it->first == ResKind::application)
+	label = _PL( "The following application is recommended, but will not be installed:",
+		     "The following %d applications are recommended, but will not be installed:",
+		     it->second.size() );
       label = str::form( label.c_str(), it->second.size() );
       out << endl << label << endl;
       writeResolvableList(out, it->second);
@@ -939,6 +973,11 @@ void Summary::writeSuggested(ostream & out)
         "The following product is suggested, but will not be installed:",
         "The following %d products are suggested, but will not be installed:",
         it->second.size());
+    else if (it->first == ResKind::application)
+      label = _PL(
+        "The following application is suggested, but will not be installed:",
+        "The following %d applications are suggested, but will not be installed:",
+        it->second.size());
     label = str::form( label.c_str(), it->second.size() );
     out << endl << label << endl;
 
@@ -974,6 +1013,11 @@ void Summary::writeChangedArch(ostream & out)
       label = _PL(
         "The following product is going to change architecture:",
         "The following %d products are going to change architecture:",
+        it->second.size());
+    else if (it->first == ResKind::application)
+      label = _PL(
+        "The following application is going to change architecture:",
+        "The following %d applications are going to change architecture:",
         it->second.size());
     label = str::form( label.c_str(), it->second.size() );
     out << endl << label << endl;
@@ -1011,6 +1055,11 @@ void Summary::writeChangedVendor(ostream & out)
       label = _PL(
         "The following product is going to change vendor:",
         "The following %d products are going to change vendor:",
+        it->second.size());
+    else if (it->first == ResKind::application)
+      label = _PL(
+        "The following application is going to change vendor:",
+        "The following %d applications are going to change vendor:",
         it->second.size());
     label = str::form( label.c_str(), it->second.size() );
     out << endl << label << endl;
@@ -1075,6 +1124,11 @@ void Summary::writeNotUpdated(std::ostream & out)
       label = _PL(
         "The following product update will NOT be installed:",
         "The following %d product updates will NOT be installed:",
+        it->second.size());
+    else if (it->first == ResKind::application)
+      label = _PL(
+        "The following application update will NOT be installed:",
+        "The following %d application updates will NOT be installed:",
         it->second.size());
     label = str::form( label.c_str(), it->second.size() );
     out << endl << label << endl;
