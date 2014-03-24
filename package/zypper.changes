@@ -3,6 +3,7 @@ Thu Mar 20 19:03:40 CET 2014 - ma@suse.de
 
 - Add summary messages for application (bnc#869439)
 - Rephrase some 'zypper ps' related messages (bnc#866300)
+- Message about uninstallable patters is obsolete (bnc#869616)
 - version 1.11.0
 
 -------------------------------------------------------------------
