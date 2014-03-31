@@ -1,4 +1,11 @@
 -------------------------------------------------------------------
+Mon Mar 31 10:23:42 CEST 2014 - ma@suse.de
+
+- Use dummy licenses in test data (bnc#862471)
+- Install zypp-NameReqPrv helper for evaluating testcases.
+- version 14.17.0 (17)
+
+-------------------------------------------------------------------
 Tue Mar 18 14:55:11 CET 2014 - ma@suse.de
 
 - Update zypp-po.tar.bz2
