@@ -588,7 +588,8 @@ namespace zypp
 
     /** Split \a line_r into fields.
      * Any single character in \a sepchars_r is treated as a
-     * field separator. The words are passed to OutputIterator
+     * field separator unless \-escaped. The words are passed
+     * to OutputIterator.
      * \a result_r.
      * \code
      * ""        -> words 0
@@ -618,7 +619,11 @@ namespace zypp
           {
             // skip non sepchars
             while( *cur && !::strchr( sepchars_r, *cur ) )
+	    {
+	      if ( *cur == '\\' && *(cur+1) )
+		++cur;
               ++cur;
+	    }
             // build string
             *result_r = std::string( beg, cur-beg );
             ++ret;
