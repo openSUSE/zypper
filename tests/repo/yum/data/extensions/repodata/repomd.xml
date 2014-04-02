@@ -1,6 +1,15 @@
 <?xml version="1.0" ?>
 <repomd xmlns="http://linux.duke.edu/metadata/repo">
-  <data type="other">
+  <tags>
+    <repo>obsrepository://build.suse.de/SUSE:openSUSE:11:standard</repo>
+    <content>opensuse</content>
+    <content>i386</content>
+    <content>other string</content>
+    <distro cpeid="cpe:/o:opensuse">openSUSE 11.0</distro>
+    <distro cpeid="cpe:/o:sle">SLE 11.0</distro>
+    <updates cpeid="cpe:/o:sle">SLE 11.0</updates>
+  </tags>
+   <data type="other">
     <location href="repodata/other.xml.gz"/>
     <checksum type="sha">603807e12e7418911fa9f158ef66b9c20f1df567</checksum>
     <timestamp>1215823452</timestamp>
@@ -18,14 +27,14 @@
     <timestamp>1215823454</timestamp>
     <open-checksum type="sha">c6bd3c6099de74d97ed045163235be10ffa8a85f</open-checksum>
   </data>
-  
+
   <data type="susedata">
     <location href="repodata/susedata.xml.gz"/>
     <checksum type="sha">359396be40992603aecf6e2832839111e09eb080</checksum>
     <timestamp>1227279057.0</timestamp>
     <open-checksum type="sha">b17c055bef95bca397faffdf028cfa91dd1b24bc</open-checksum>
   </data>
-  
+
   <data type="suseinfo">
     <location href="repodata/suseinfo.xml.gz"/>
     <checksum type="sha">e0b9149c1b7f48c952e9b3ea996669d8d0d9e1e8</checksum>

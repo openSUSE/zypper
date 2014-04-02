@@ -48,8 +48,7 @@ BOOST_AUTO_TEST_CASE(extended_metadata)
 
   // check that the attributes of product compatibility are ok
   int count = 0;
-#if 0
-  vector<string> cpeids;
+  vector<CpeId> cpeids;
   vector<string> labels;
 
   for_( it,
@@ -63,8 +62,8 @@ BOOST_AUTO_TEST_CASE(extended_metadata)
 
   // there were 2 compatible products
   BOOST_CHECK_EQUAL( count, 2 );
-  BOOST_CHECK_EQUAL( cpeids[0], "cpe://o:opensuse" );
-  BOOST_CHECK_EQUAL( cpeids[1], "cpe://o:sle" );
+  BOOST_CHECK_EQUAL( cpeids[0], "cpe:/o:opensuse" );
+  BOOST_CHECK_EQUAL( cpeids[1], "cpe:/o:sle" );
 
   BOOST_CHECK_EQUAL( labels[0], "openSUSE 11.0" );
   BOOST_CHECK_EQUAL( labels[1], "SLE 11.0" );
@@ -84,15 +83,14 @@ BOOST_AUTO_TEST_CASE(extended_metadata)
 
   // the repo updates one product
   BOOST_CHECK_EQUAL( count, 1 );
-  BOOST_CHECK_EQUAL( cpeids[0], "cpe://o:sle" );
+  BOOST_CHECK_EQUAL( cpeids[0], "cpe:/o:sle" );
   BOOST_CHECK_EQUAL( labels[0], "SLE 11.0" );
 
   // because this product updates something, it _is_ an update repo
   BOOST_CHECK( repo.isUpdateRepo() );
 
-  BOOST_CHECK( repo.providesUpdatesFor("cpe://o:sle") );
-  BOOST_CHECK( ! repo.providesUpdatesFor("cpe://o:windows") );
-#endif
+  BOOST_CHECK( repo.providesUpdatesFor(CpeId("cpe:/o:sle")) );
+  BOOST_CHECK( ! repo.providesUpdatesFor(CpeId("cpe:/o:windows")) );
   // reuse to count solvables
   count = 0;
 

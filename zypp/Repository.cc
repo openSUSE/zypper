@@ -147,7 +147,7 @@ namespace zypp
       NO_REPOSITORY_RETURN( false );
       for_( it, updatesProductBegin(), updatesProductEnd() )
       {
-	if ( cpeid_r.match( it.cpeId() ) == CpeId::Match::subset )
+	if ( compare( cpeid_r, it.cpeId(), SetRelation::subset ) )
 	  return true;
       }
       return false;
