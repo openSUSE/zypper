@@ -35,6 +35,7 @@ ADD_TESTS(
   ResKind
   ResStatus
   Selectable
+  SetRelationMixin
   StrMatcher
   Target
   Url

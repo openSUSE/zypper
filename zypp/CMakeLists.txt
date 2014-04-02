@@ -204,6 +204,7 @@ SET( zypp_base_SRCS
   base/IOStream.cc
   base/InputStream.cc
   base/ReferenceCounted.cc
+  base/SetRelationMixin.cc
   base/String.cc
   base/StrMatcher.h
   base/StrMatcher.cc
@@ -254,6 +255,7 @@ SET( zypp_base_HEADERS
   base/ProvideNumericId.h
   base/PtrTypes.h
   base/ReferenceCounted.h
+  base/SetRelationMixin.h
   base/Signal.h
   base/String.h
   base/StrMatcher.h
