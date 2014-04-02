@@ -1,4 +1,11 @@
 -------------------------------------------------------------------
+Wed Apr  2 18:09:47 CEST 2014 - ma@suse.de
+
+- CpeId: Basic functionality incl. matching
+- New SetRelationMixin
+- version 14.17.1 (17)
+
+-------------------------------------------------------------------
 Mon Mar 31 10:23:42 CEST 2014 - ma@suse.de
 
 - Use dummy licenses in test data (bnc#862471)
