@@ -64,6 +64,7 @@
   CLASS( const CLASS & ) = default;		\
   CLASS & operator=( const CLASS & ) = default
 
+#ifndef SWIG // Swig treats it as syntax error
 /** Delete move ctor and move assign */
 #define NON_MOVABLE(CLASS)			\
   CLASS( CLASS && ) = delete;			\
@@ -73,6 +74,10 @@
 #define DEFAULT_MOVABLE(CLASS)			\
   CLASS( CLASS && ) = default;			\
   CLASS & operator=( CLASS && ) = default
+#else
+#define NON_MOVABLE(CLASS)
+#define DEFAULT_MOVABLE(CLASS)
+#endif
 
 /** Delete copy ctor and copy assign but enable default move */
 #define NON_COPYABLE_BUT_MOVE( CLASS ) 		\
