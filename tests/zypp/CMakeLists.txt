@@ -9,6 +9,7 @@ ADD_TESTS(
   Arch
   Capabilities
   CheckSum
+  CpeId
   Date
   Dup
   Digest
