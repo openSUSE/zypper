@@ -842,12 +842,8 @@ namespace zypp
       }
 
       // check status
-      // DBG << "oldstatus: " << (Date::ValueType)oldstatus.timestamp() << endl;
-      // DBG << "           " << oldstatus.checksum() << endl;
-      // DBG << "newstatus: " << (Date::ValueType)newstatus.timestamp() << endl;
-      // DBG << "           " << newstatus.checksum() << endl;
       bool refresh = false;
-      if ( oldstatus.checksum() == newstatus.checksum() )
+      if ( oldstatus == newstatus )
       {
 	MIL << "repo has not changed" << endl;
 	if ( policy == RefreshForced )
@@ -1058,7 +1054,7 @@ namespace zypp
       MIL << info.alias() << " is already cached." << endl;
       RepoStatus cache_status = cacheStatus(info);
 
-      if ( cache_status.checksum() == raw_metadata_status.checksum() )
+      if ( cache_status == raw_metadata_status )
       {
         MIL << info.alias() << " cache is up to date with metadata." << endl;
         if ( policy == BuildIfNeeded ) {

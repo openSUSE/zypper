@@ -973,8 +973,7 @@ namespace zypp
       bool build_rpm_solv = true;
       // lets see if the rpm solv cache exists
 
-      RepoStatus rpmstatus( RepoStatus( _root/"/var/lib/rpm/Name" )
-                            && (_root/"/etc/products.d") );
+      RepoStatus rpmstatus( RepoStatus(_root/"var/lib/rpm/Name") && RepoStatus(_root/"etc/products.d") );
 
       bool solvexisted = PathInfo(rpmsolv).isExist();
       if ( solvexisted )
@@ -986,10 +985,10 @@ namespace zypp
         {
           RepoStatus status = RepoStatus::fromCookieFile(rpmsolvcookie);
           // now compare it with the rpm database
-          if ( status.checksum() == rpmstatus.checksum() )
-            build_rpm_solv = false;
-          MIL << "Read cookie: " << rpmsolvcookie << " says: "
-              << (build_rpm_solv ? "outdated" : "uptodate") << endl;
+          if ( status == rpmstatus )
+	    build_rpm_solv = false;
+	  MIL << "Read cookie: " << rpmsolvcookie << " says: "
+	  << (build_rpm_solv ? "outdated" : "uptodate") << endl;
         }
       }
 

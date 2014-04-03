@@ -22,108 +22,79 @@ namespace zypp
 { /////////////////////////////////////////////////////////////////
 
   ///////////////////////////////////////////////////////////////////
-  //
-  //	CLASS NAME : RepoStatus
-  //
-  /**
-   * \short Local facts about a repository
-   * This class represents the status of a
-   * repository on the system.
-   *
-   * Anything that is not provided on the metadata
-   * files, like the timestamp of the downloaded
-   * metadata, and its checksum.
-   */
+  /// \class RepoStatus
+  /// \brief Track changing files or directories.
+  ///
+  /// Compute timestamp and checksum for individual files or
+  /// directories (recursively) to track changing content.
+  ///
+  /// The timestamp most probably denotes the time the data were
+  /// changed the last time, that's why it is exposed.
+  ///
+  /// The checksum however is an implementation detail and of no
+  /// use outside this class. \ref operator== tells if the checksums
+  /// of two rRepoStatus are the same.
+  ///////////////////////////////////////////////////////////////////
   class RepoStatus
   {
     friend std::ostream & operator<<( std::ostream & str, const RepoStatus & obj );
-
-  public:
-
-    /**
-     * reads the status from a file which contains the
-     * checksum and timestamp in each line.
-     *
-     * \returns An empty \ref RepoStatus if the file does not
-     * exist or is not readable.
-     */
-    static RepoStatus fromCookieFile( const Pathname &path );
-
-    /**
-     * save the status information to a cookie file
-     * \throws Exception if the file can't be saved
-     */
-    void saveToCookieFile( const Pathname &path ) const;
-
-    /**
-     * Checksum of the repository.
-     * Usually the checksum of the index, but any
-     * checksum that changes when the repository changes
-     * in any way is sufficient.
-     */
-    std::string checksum() const;
-
-    /**
-     * timestamp of the repository. If the repository
-     * changes, it has to be updated as well with the
-     * new timestamp.
-     */
-    Date timestamp() const;
-
-    /**
-     * \short Is the status empty?
-     *
-     * An empty status means that the status
-     * was not calculated.
-     */
-    bool empty() const;
-
-    /**
-     * set the repository checksum \see checksum
-     * \param checksum
-     */
-    RepoStatus & setChecksum( const std::string &checksum );
-
-    /**
-     * set the repository timestamp \see timestamp
-     * \param timestamp
-     */
-    RepoStatus & setTimestamp( const Date &timestamp );
-
-    /** Implementation  */
-    class Impl;
+    friend RepoStatus operator&&( const RepoStatus & lhs, const RepoStatus & rhs );
+    friend bool operator==( const RepoStatus & lhs, const RepoStatus & rhs );
 
   public:
     /** Default ctor */
     RepoStatus();
 
-    /**
-     * \short Status of a single file or drectory (recursively)
+    /** Compute status for single file or directory (recursively)
      *
      * \note Construction from a non existing file will result
      * in an empty status.
      */
-    RepoStatus( const Pathname & path_r );
+    explicit RepoStatus( const Pathname & path_r );
 
     /** Dtor */
     ~RepoStatus();
 
   public:
+    /** Reads the status from a cookie file
+     * \returns An empty \ref RepoStatus if the file does not
+     * exist or is not readable.
+     * \see \ref saveToCookieFile
+     */
+    static RepoStatus fromCookieFile( const Pathname & path );
 
+    /** Save the status information to a cookie file
+     * \throws Exception if the file can't be saved
+     * \see \ref fromCookieFile
+     */
+    void saveToCookieFile( const Pathname & path_r ) const;
+
+  public:
+    /** Whether the status is empty (default constucted) */
+    bool empty() const;
+
+    /** The time the data were changed the last time */
+    Date timestamp() const;
+
+  public:
+    class Impl;			///< Implementation
   private:
-    /** Pointer to implementation */
-    RWCOW_pointer<Impl> _pimpl;
+    RWCOW_pointer<Impl> _pimpl;	///< Pointer to implementation
   };
   ///////////////////////////////////////////////////////////////////
 
   /** \relates RepoStatus Stream output */
   std::ostream & operator<<( std::ostream & str, const RepoStatus & obj );
 
-  /**
-   * combines 2 repostatus with a checksum based on both
-   * checksums and the newest timestamp
-   */
-  RepoStatus operator&&( const RepoStatus &lhs, const RepoStatus &rhs );
+  /** \relates RepoStatus Combine two RepoStatus (combined checksum and newest timestamp) */
+  RepoStatus operator&&( const RepoStatus & lhs, const RepoStatus & rhs );
+
+  /** \relates RepoStatus Whether 2 RepoStatus refer to the same content checksum */
+  bool operator==( const RepoStatus & lhs, const RepoStatus & rhs );
+
+  /** \relates RepoStatus Whether 2 RepoStatus refer to different content checksums */
+  inline bool operator!=( const RepoStatus & lhs, const RepoStatus & rhs )
+  { return ! ( lhs == rhs ); }
 
   /////////////////////////////////////////////////////////////////
 } // namespace zypp
