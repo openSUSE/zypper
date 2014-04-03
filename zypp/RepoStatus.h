@@ -98,23 +98,12 @@ namespace zypp
     RepoStatus();
 
     /**
-     * \short Status from a single file
-     * As most repository state is represented
-     * by the status of the index file, you can
-     * construct the status from a file.
+     * \short Status of a single file or drectory (recursively)
      *
-     * \note construct from a non existing
-     * file will result in an empty status
-     *
-     * \note construct from a directory, the
-     * directories mtime will be also used as
-     * checksum.
-     *
-     * \todo Add recursive option for dirs so we finaly get
-     * the same as \ref parser::plaindir::dirStatus and can
-     * unify both.
+     * \note Construction from a non existing file will result
+     * in an empty status.
      */
-    RepoStatus( const Pathname &file );
+    RepoStatus( const Pathname & path_r );
 
     /** Dtor */
     ~RepoStatus();

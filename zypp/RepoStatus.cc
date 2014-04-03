@@ -30,17 +30,27 @@ namespace zypp
   /** RepoStatus implementation. */
   struct RepoStatus::Impl
   {
-
   public:
-
     string checksum;
     Date timestamp;
 
-    /** Offer default Impl. */
-    static shared_ptr<Impl> nullimpl()
+    /** Recursive computation of max dir timestamp. */
+    static void recursive_timestamp( const Pathname & dir, time_t & max )
     {
-      static shared_ptr<Impl> _nullimpl( new Impl );
-      return _nullimpl;
+      std::list<std::string> dircontent;
+      if ( filesystem::readdir( dircontent, dir, false/*no dots*/ ) != 0 )
+	return; // readdir logged the error
+
+      for_( it, dircontent.begin(), dircontent.end() )
+      {
+	PathInfo pi( dir + *it, PathInfo::LSTAT );
+	if ( pi.isDir() )
+	{
+	  recursive_timestamp( pi.path(), max );
+	  if ( pi.mtime() > max )
+	    max = pi.mtime();
+	}
+      }
     }
 
   private:
@@ -54,7 +64,7 @@ namespace zypp
   /** \relates RepoStatus::Impl Stream output */
   inline std::ostream & operator<<( std::ostream & str, const RepoStatus::Impl & obj )
   {
-    return str << obj.checksum << " " << (time_t) obj.timestamp;
+    return str << obj.checksum << " " << (time_t)obj.timestamp;
   }
 
   ///////////////////////////////////////////////////////////////////
@@ -63,52 +73,50 @@ namespace zypp
   //
   ///////////////////////////////////////////////////////////////////
 
-  ///////////////////////////////////////////////////////////////////
-  //
-  //	METHOD NAME : RepoStatus::RepoStatus
-  //	METHOD TYPE : Ctor
-  //
   RepoStatus::RepoStatus()
     : _pimpl( new Impl() )
   {}
 
-  RepoStatus::RepoStatus( const Pathname &path )
+  RepoStatus::RepoStatus( const Pathname & path_r )
     : _pimpl( new Impl() )
   {
-      PathInfo info(path);
-      if ( info.isExist() )
+    PathInfo info( path_r );
+    if ( info.isExist() )
+    {
+      if ( info.isFile() )
       {
-        _pimpl->timestamp = Date(info.mtime());
-        if ( info.isFile() )
-          _pimpl->checksum = filesystem::sha1sum(path);
-        else // non files
-          _pimpl->checksum = str::numstring(info.mtime());
+	_pimpl->timestamp = Date( info.mtime() );
+	_pimpl->checksum = filesystem::sha1sum( path_r );
       }
+      else if ( info.isDir() )
+      {
+	time_t t = info.mtime();
+	Impl::recursive_timestamp( path_r, t );
+	_pimpl->timestamp = Date(t);
+	_pimpl->checksum = CheckSum::sha1FromString( str::numstring( t ) ).checksum();
+      }
+    }
   }
 
-  ///////////////////////////////////////////////////////////////////
-  //
-  //	METHOD NAME : RepoStatus::~RepoStatus
-  //	METHOD TYPE : Dtor
-  //
   RepoStatus::~RepoStatus()
   {}
 
-  RepoStatus RepoStatus::fromCookieFile( const Pathname &cookiefile )
+  RepoStatus RepoStatus::fromCookieFile( const Pathname & cookiefile_r )
   {
-    std::ifstream file(cookiefile.c_str());
-    if (!file) {
-      WAR << "No cookie file " << cookiefile << endl;
-      return RepoStatus();
+    RepoStatus ret;
+    std::ifstream file( cookiefile_r.c_str() );
+    if ( !file )
+    {
+      WAR << "No cookie file " << cookiefile_r << endl;
     }
-
-    RepoStatus status;
-    std::string buffer;
-    file >> buffer;
-    status.setChecksum(buffer);
-    file >> buffer;
-    status.setTimestamp(Date(str::strtonum<time_t>(buffer)));
-    return status;
+    else
+    {
+      // line := "[checksum] time_t"
+      std::string line( str::getline( file ) );
+      ret.setTimestamp( Date( str::strtonum<time_t>( str::stripLastWord( line ) ) ) );
+      ret.setChecksum( line );
+    }
+    return ret;
   }
 
   void RepoStatus::saveToCookieFile( const Pathname &cookiefile ) const
@@ -117,7 +125,7 @@ namespace zypp
     if (!file) {
       ZYPP_THROW (Exception( "Can't open " + cookiefile.asString() ) );
     }
-    file << this->checksum() << " " << (int) this->timestamp() << endl << endl;
+    file << checksum() << " " << (time_t)timestamp() << endl;
     file.close();
   }
 
@@ -151,9 +159,9 @@ namespace zypp
     if ( rhs.empty() )
       return lhs;
 
+    // order strings to assert && is kommutativ
     std::string lchk( lhs.checksum() );
     std::string rchk( rhs.checksum() );
-    // order strings to assert && is kommutativ
     stringstream ss( lchk < rchk ? lchk+rchk : rchk+lchk );
 
     RepoStatus result;
