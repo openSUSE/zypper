@@ -1,4 +1,12 @@
 -------------------------------------------------------------------
+Thu Apr  3 19:18:48 CEST 2014 - ma@suse.de
+
+- RepoManager: Fix RepoStatus computation and refresh of PLAINDIR repos.
+- Recreate solv file caches if content may change even if raw metadata
+  are unchanged (here: new pattern, product and application data).
+- version 14.17.2 (17)
+
+-------------------------------------------------------------------
 Wed Apr  2 18:09:47 CEST 2014 - ma@suse.de
 
 - CpeId: Basic functionality incl. matching
