@@ -14,6 +14,7 @@
 
 #include <iosfwd>
 #include <string>
+#include <sstream>
 
 #include "zypp/base/Exception.h"
 #include "zypp/Pathname.h"
@@ -33,27 +34,31 @@ namespace zypp
   {
   public:
     /** Default Ctor: empty checksum. */
-    CheckSum();
-    /**
-     * Creates a checksum auto probing the algorithm type.
-     * \throws CheckSumException if the checksum is invalid and can't be constructed
-     */
-    CheckSum( const std::string & checksum );
+    CheckSum()
+    {}
     /**
      * Creates a checksum for algorithm \param type.
      * \throws CheckSumException if the checksum is invalid and can't be constructed
      */
     CheckSum( const std::string & type, const std::string & checksum );
     /**
+     * Creates a checksum auto probing the algorithm type.
+     * \throws CheckSumException if the checksum is invalid and can't be constructed
+     */
+    CheckSum( const std::string & checksum )
+      : CheckSum( std::string(), checksum )
+    {}
+
+    /**
      * Reads the content of \param input_r and computes the checksum.
      */
     CheckSum( const std::string & type, std::istream & input_r );
 
-#ifndef SWIG // Swig treats it as syntax error
-      /** Move Ctor */
-      CheckSum( const std::string & type, std::istream && input_r )
+#ifndef SWIG // Swig treats it as syntax error0
+    /** Ctor from temporary istream */
+    CheckSum( const std::string & type, std::istream && input_r )
       : CheckSum( type, input_r )
-      {}
+    {}
 #endif
 
   public:
@@ -62,23 +67,35 @@ namespace zypp
     static const std::string & sha1Type();
     static const std::string & sha256Type();
 
-    static CheckSum md5( const std::string & checksum )
-    { return  CheckSum( md5Type(), checksum); }
-    static CheckSum sha( const std::string & checksum )
-    { return  CheckSum( shaType(), checksum); }
-    static CheckSum sha1( const std::string & checksum )
-    { return  CheckSum( sha1Type(), checksum); }
-    static CheckSum sha256( const std::string & checksum )
-    { return  CheckSum( sha256Type(), checksum); }
+    /** \name Creates a checksum for algorithm \param type. */
+    //@{
+    static CheckSum md5( const std::string & checksum )		{ return  CheckSum( md5Type(), checksum); }
+    static CheckSum sha( const std::string & checksum )		{ return  CheckSum( shaType(), checksum); }
+    static CheckSum sha1( const std::string & checksum )	{ return  CheckSum( sha1Type(), checksum); }
+    static CheckSum sha256( const std::string & checksum )	{ return  CheckSum( sha256Type(), checksum); }
+    //@}
 
-    static CheckSum md5( std::istream & input_r )
-    { return  CheckSum( md5Type(), input_r ); }
-    static CheckSum sha( std::istream & input_r )
-    { return  CheckSum( sha1Type(), input_r ); }
-    static CheckSum sha1( std::istream & input_r )
-    { return  CheckSum( sha1Type(), input_r ); }
-    static CheckSum sha256( std::istream & input_r )
-    { return  CheckSum( sha256Type(), input_r ); }
+    /** \name Reads the content of \param input_r and computes the checksum. */
+    //@{
+    static CheckSum md5( std::istream & input_r )		{ return  CheckSum( md5Type(), input_r ); }
+    static CheckSum sha( std::istream & input_r )		{ return  CheckSum( sha1Type(), input_r ); }
+    static CheckSum sha1( std::istream & input_r )		{ return  CheckSum( sha1Type(), input_r ); }
+    static CheckSum sha256( std::istream & input_r )		{ return  CheckSum( sha256Type(), input_r ); }
+#ifndef SWIG // Swig treats it as syntax error
+    static CheckSum md5( std::istream && input_r )		{ return  CheckSum( md5Type(), input_r ); }
+    static CheckSum sha( std::istream && input_r )		{ return  CheckSum( sha1Type(), input_r ); }
+    static CheckSum sha1( std::istream && input_r )		{ return  CheckSum( sha1Type(), input_r ); }
+    static CheckSum sha256( std::istream && input_r )		{ return  CheckSum( sha256Type(), input_r ); }
+#endif
+    //@}
+
+    /** \name Reads the content of \param input_r and computes the checksum. */
+    //@{
+    static CheckSum md5FromString( const std::string & input_r )	{ return md5( std::stringstream( input_r ) ); }
+    static CheckSum shaFromString( const std::string & input_r )	{ return sha( std::stringstream( input_r ) ); }
+    static CheckSum sha1FromString( const std::string & input_r )	{ return sha1( std::stringstream( input_r ) ); }
+    static CheckSum sha256FromString( const std::string & input_r )	{ return sha256( std::stringstream( input_r ) ); }
+    //@}
 
   public:
     std::string type() const;
