@@ -41,7 +41,6 @@
 #include "zypp/repo/ServiceRepos.h"
 #include "zypp/repo/yum/Downloader.h"
 #include "zypp/repo/susetags/Downloader.h"
-#include "zypp/parser/plaindir/RepoParser.h"
 #include "zypp/repo/PluginServices.h"
 
 #include "zypp/Target.h" // for Target::targetDistribution() for repo index services
@@ -679,39 +678,26 @@ namespace zypp
   {
     Pathname mediarootpath = rawcache_path_for_repoinfo( _options, info );
     Pathname productdatapath = rawproductdata_path_for_repoinfo( _options, info );
+
     RepoType repokind = info.type();
+    // If unknown, probe the local metadata
+    if ( repokind == RepoType::NONE )
+      repokind = probe( productdatapath.asUrl() );
+
     RepoStatus status;
-
-    switch ( repokind.toEnum() )
-    {
-      case RepoType::NONE_e:
-	// unknown, probe the local metadata
-	repokind = probe( productdatapath.asUrl() );
-      break;
-      default:
-      break;
-    }
-
     switch ( repokind.toEnum() )
     {
       case RepoType::RPMMD_e :
-      {
-        status = RepoStatus( productdatapath + "/repodata/repomd.xml");
-      }
-      break;
+        status = RepoStatus( productdatapath/"repodata/repomd.xml");
+	break;
 
       case RepoType::YAST2_e :
-      {
-        status = RepoStatus( productdatapath + "/content") && (RepoStatus( mediarootpath + "/media.1/media"));
-      }
-      break;
+        status = RepoStatus( productdatapath/"content" ) && RepoStatus( mediarootpath/"media.1/media" );
+	break;
 
       case RepoType::RPMPLAINDIR_e :
-      {
-        if ( PathInfo(Pathname(productdatapath + "/cookie")).isExist() )
-          status = RepoStatus( productdatapath + "/cookie");
-      }
-      break;
+	status = RepoStatus::fromCookieFile( productdatapath/"cookie" );
+	break;
 
       case RepoType::NONE_e :
 	// Return default RepoStatus in case of RepoType::NONE
@@ -763,18 +749,14 @@ namespace zypp
   RepoManager::RefreshCheckStatus RepoManager::Impl::checkIfToRefreshMetadata( const RepoInfo & info, const Url & url, RawMetadataRefreshPolicy policy )
   {
     assert_alias(info);
-
-    RepoStatus oldstatus;
-    RepoStatus newstatus;
-
     try
     {
       MIL << "Going to try to check whether refresh is needed for " << url << endl;
 
       // first check old (cached) metadata
       Pathname mediarootpath = rawcache_path_for_repoinfo( _options, info );
-      filesystem::assert_dir(mediarootpath);
-      oldstatus = metadataStatus(info);
+      filesystem::assert_dir( mediarootpath );
+      RepoStatus oldstatus = metadataStatus( info );
 
       if ( oldstatus.empty() )
       {
@@ -783,12 +765,15 @@ namespace zypp
       }
 
       {
-        std::string scheme( url.getScheme() );
-        if ( scheme == "cd" || scheme == "dvd" )
-        {
-          MIL << "never refresh CD/DVD" << endl;
+        if ( url.schemeIsVolatile() )
+	{
+	  MIL << "never refresh CD/DVD" << endl;
           return REPO_UP_TO_DATE;
-        }
+	}
+	if ( url.schemeIsLocal() )
+	{
+	  policy = RefreshIfNeededIgnoreDelay;
+	}
       }
 
       // now we've got the old (cached) status, we can decide repo.refresh.delay
@@ -824,79 +809,64 @@ namespace zypp
       filesystem::TmpDir tmpdir( filesystem::TmpDir::makeSibling( mediarootpath ) );
 
       repo::RepoType repokind = info.type();
-      // if the type is unknown, try probing.
+      // if unknown: probe it
+      if ( repokind == RepoType::NONE )
+	repokind = probe( url, info.path() );
+
+      // retrieve newstatus
+      RepoStatus newstatus;
       switch ( repokind.toEnum() )
       {
-        case RepoType::NONE_e:
-          // unknown, probe it \todo respect productdir
-          repokind = probe( url, info.path() );
-        break;
-        default:
-        break;
+	case RepoType::RPMMD_e:
+	{
+	  MediaSetAccess media( url );
+	  newstatus = yum::Downloader( info, mediarootpath ).status( media );
+	}
+	break;
+
+	case RepoType::YAST2_e:
+	{
+	  MediaSetAccess media( url );
+	  newstatus = susetags::Downloader( info, mediarootpath ).status( media );
+	}
+	break;
+
+	case RepoType::RPMPLAINDIR_e:
+	  newstatus = RepoStatus( MediaMounter(url).getPathName(info.path()) );	// dir status
+	  break;
+
+	default:
+	case RepoType::NONE_e:
+	  ZYPP_THROW( RepoUnknownTypeException( info ) );
+	  break;
       }
 
-      if ( ( repokind.toEnum() == RepoType::RPMMD_e ) ||
-           ( repokind.toEnum() == RepoType::YAST2_e ) )
+      // check status
+      // DBG << "oldstatus: " << (Date::ValueType)oldstatus.timestamp() << endl;
+      // DBG << "           " << oldstatus.checksum() << endl;
+      // DBG << "newstatus: " << (Date::ValueType)newstatus.timestamp() << endl;
+      // DBG << "           " << newstatus.checksum() << endl;
+      bool refresh = false;
+      if ( oldstatus.checksum() == newstatus.checksum() )
       {
-        MediaSetAccess media(url);
-        shared_ptr<repo::Downloader> downloader_ptr;
-
-        if ( repokind.toEnum() == RepoType::RPMMD_e )
-          downloader_ptr.reset(new yum::Downloader(info, mediarootpath));
-        else
-          downloader_ptr.reset( new susetags::Downloader(info, mediarootpath));
-
-        RepoStatus newstatus = downloader_ptr->status(media);
-        bool refresh = false;
-        if ( oldstatus.checksum() == newstatus.checksum() )
-        {
-          MIL << "repo has not changed" << endl;
-          if ( policy == RefreshForced )
-          {
-            MIL << "refresh set to forced" << endl;
-            refresh = true;
-          }
-        }
-        else
-        {
-          MIL << "repo has changed, going to refresh" << endl;
-          refresh = true;
-        }
-
-        if (!refresh)
-          touchIndexFile(info);
-
-        return refresh ? REFRESH_NEEDED : REPO_UP_TO_DATE;
-      }
-      else if ( repokind.toEnum() == RepoType::RPMPLAINDIR_e )
-      {
-        MediaMounter media( url );
-        RepoStatus newstatus = parser::plaindir::dirStatus( media.getPathName( info.path() ) );
-        bool refresh = false;
-        if ( oldstatus.checksum() == newstatus.checksum() )
-        {
-          MIL << "repo has not changed" << endl;
-          if ( policy == RefreshForced )
-          {
-            MIL << "refresh set to forced" << endl;
-            refresh = true;
-          }
-        }
-        else
-        {
-          MIL << "repo has changed, going to refresh" << endl;
-          refresh = true;
-        }
-
-        if (!refresh)
-          touchIndexFile(info);
-
-        return refresh ? REFRESH_NEEDED : REPO_UP_TO_DATE;
+	MIL << "repo has not changed" << endl;
+	if ( policy == RefreshForced )
+	{
+	  MIL << "refresh set to forced" << endl;
+	  refresh = true;
+	}
       }
       else
       {
-        ZYPP_THROW(RepoUnknownTypeException(info));
+	MIL << "repo has changed, going to refresh" << endl;
+	refresh = true;
       }
+
+      if (!refresh)
+	touchIndexFile(info);
+
+      return refresh ? REFRESH_NEEDED : REPO_UP_TO_DATE;
+
     }
     catch ( const Exception &e )
     {
@@ -936,32 +906,28 @@ namespace zypp
         repo::RepoType repokind = info.type();
 
         // if the type is unknown, try probing.
-        switch ( repokind.toEnum() )
-        {
-          case RepoType::NONE_e:
-            // unknown, probe it
-            repokind = probe( *it, info.path() );
+	if ( repokind == RepoType::NONE )
+	{
+	  // unknown, probe it
+	  repokind = probe( *it, info.path() );
 
-            if (repokind.toEnum() != RepoType::NONE_e)
-            {
-              // Adjust the probed type in RepoInfo
-              info.setProbedType( repokind ); // lazy init!
-              //save probed type only for repos in system
-              for_( it, repoBegin(), repoEnd() )
-              {
-                if ( info.alias() == (*it).alias() )
-                {
-                  RepoInfo modifiedrepo = info;
-                  modifiedrepo.setType( repokind );
-                  modifyRepository( info.alias(), modifiedrepo );
-                  break;
-                }
-              }
-            }
-          break;
-          default:
-          break;
-        }
+	  if (repokind.toEnum() != RepoType::NONE_e)
+	  {
+	    // Adjust the probed type in RepoInfo
+	    info.setProbedType( repokind ); // lazy init!
+	    //save probed type only for repos in system
+	    for_( it, repoBegin(), repoEnd() )
+	    {
+	      if ( info.alias() == (*it).alias() )
+	      {
+		RepoInfo modifiedrepo = info;
+		modifiedrepo.setType( repokind );
+		modifyRepository( info.alias(), modifiedrepo );
+		break;
+	      }
+	    }
+	  }
+	}
 
         Pathname mediarootpath = rawcache_path_for_repoinfo( _options, info );
         if( filesystem::assert_dir(mediarootpath) )
@@ -1009,23 +975,11 @@ namespace zypp
         else if ( repokind.toEnum() == RepoType::RPMPLAINDIR_e )
         {
           MediaMounter media( url );
-          RepoStatus newstatus = parser::plaindir::dirStatus( media.getPathName( info.path() ) );
+          RepoStatus newstatus = RepoStatus( media.getPathName( info.path() ) );	// dir status
 
           Pathname productpath( tmpdir.path() / info.path() );
           filesystem::assert_dir( productpath );
-          std::ofstream file( (productpath/"cookie").c_str() );
-          if ( !file )
-          {
-            // TranslatorExplanation '%s' is a filename
-            ZYPP_THROW( Exception(str::form( _("Can't open file '%s' for writing."), (productpath/"cookie").c_str() )));
-          }
-          file << url;
-          if ( ! info.path().empty() && info.path() != "/" )
-            file << " (" << info.path() << ")";
-          file << endl;
-          file << newstatus.checksum() << endl;
-
-          file.close();
+	  newstatus.saveToCookieFile( productpath/"cookie" );
         }
         else
         {
