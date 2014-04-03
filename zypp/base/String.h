@@ -900,9 +900,9 @@ namespace zypp
     { return trim( s, R_TRIM ); }
     //@}
 
-    std::string stripFirstWord( std::string & line, const bool ltrim_first );
+    std::string stripFirstWord( std::string & line, const bool ltrim_first = true );
 
-    std::string stripLastWord( std::string & line, const bool rtrim_first );
+    std::string stripLastWord( std::string & line, const bool rtrim_first = true );
 
     /** Return stream content up to (but not returning) the next newline.
      * \see \ref receiveUpTo
