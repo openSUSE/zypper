@@ -400,19 +400,6 @@ INSTALL(  FILES
   DESTINATION ${CMAKE_INSTALL_PREFIX}/include/zypp/parser/susetags
 )
 
-SET( zypp_parser_plaindir_SRCS
-  parser/plaindir/RepoParser.cc
-)
-
-SET( zypp_parser_plaindir_HEADERS
-  parser/plaindir/RepoParser.h
-)
-
-INSTALL(  FILES
-  ${zypp_parser_plaindir_HEADERS}
-  DESTINATION ${CMAKE_INSTALL_PREFIX}/include/zypp/parser/plaindir
-)
-
 SET( zypp_parser_xml_SRCS
   parser/xml/Node.cc
   parser/xml/ParseDef.cc
@@ -831,7 +818,6 @@ ${zypp_pool_SRCS}
 ${zypp_parser_susetags_SRCS}
 ${zypp_parser_xml_SRCS}
 ${zypp_parser_yum_SRCS}
-${zypp_parser_plaindir_SRCS}
 ${zypp_parser_ws_SRCS}
 ${zypp_parser_SRCS}
 ${zypp_media_proxyinfo_SRCS}
@@ -862,7 +848,6 @@ ${zypp_target_rpm_HEADERS}
 ${zypp_parser_tagfile_HEADERS}
 ${zypp_parser_susetags_HEADERS}
 ${zypp_parser_yum_HEADERS}
-${zypp_parser_plaindir_HEADERS}
 ${zypp_parser_xml_HEADERS}
 ${zypp_parser_ws_HEADERS}
 ${zypp_parser_HEADERS}
