@@ -900,7 +900,23 @@ namespace zypp
 	|| ( isWildchar( *value.rbegin() ) && evenNumberOfBackslashes( ++value.rbegin(), value.rend() ) ) );
   }
 
-  SetCompare CpeId::Value::setRelationMixinCompare( const CpeId::Value & trg ) const
+  ///////////////////////////////////////////////////////////////////
+  /// Symmetric attribute compare if wildcards are involved!
+  /// The specs define any comarison with a wildcarded attribute as
+  /// target to return \c uncomparable:
+  /// \code
+  ///    wildcardfree  <=>  wildcarded    ==>  uncomparable,
+  ///    wildcarded    <=>  wildcardfree  ==>  superset or disjoint
+  /// \endcode
+  /// But a symmetric result is much more intuitive:
+  /// \code
+  ///    wildcardfree  <=>  wildcarded    ==>  subset or disjoint
+  ///    wildcarded    <=>  wildcardfree  ==>  superset or disjoint
+  /// \endcode
+  ///////////////////////////////////////////////////////////////////
+#define WFN_STRICT_SPEC 0
+#if WFN_STRICT_SPEC
+  //SetCompare CpeId::Value::setRelationMixinCompare( const CpeId::Value & trg ) const
   {
     static const SetCompare _NeedsCloserLook( SetCompare::Enum(-1) );	// artificial Compare value
     static const SetCompare matchTabel[4][4] = {{
@@ -943,6 +959,78 @@ namespace zypp
     }
     return ret;
   }
+#else
+  SetCompare CpeId::Value::setRelationMixinCompare( const CpeId::Value & trg ) const
+  {
+    ///////////////////////////////////////////////////////////////////
+    // ANY,		ANY		=> equal
+    // ANY,		NA		=> properSuperset
+    // ANY,		wildcardfree	=> properSuperset
+    // ANY,		wildcarded	=> properSuperset
+    //
+    // NA,		ANY		=> properSubset
+    // NA,		NA		=> equal
+    // NA,		wildcardfree	=> disjoint
+    // NA,		wildcarded	=> disjoint
+    //
+    // wildcardfree,	ANY		=> properSubset
+    // wildcardfree,	NA		=> disjoint
+    // wildcardfree,	wildcardfree	=> NeedsCloserLook:	equal or disjoint
+    // wildcardfree,	wildcarded	=> NeedsCloserLook:	subset or disjoint
+    //
+    // wildcarded,	ANY		=> properSubset
+    // wildcarded,	NA		=> disjoint
+    // wildcarded,	wildcardfree	=> NeedsCloserLook:	superset or disjoint
+    // wildcarded,	wildcarded	=> NeedsCloserLook"	equal or uncomparable
+    ///////////////////////////////////////////////////////////////////
+
+    SetCompare ret = SetCompare::disjoint;
+
+    if ( isANY() )
+    {
+      ret = trg.isANY() ? SetCompare::equal : SetCompare::properSuperset;
+    }
+    else if ( trg.isANY() )
+    {
+      ret = SetCompare::properSubset;
+    }
+    else if ( isNA() )
+    {
+      if ( trg.isNA() ) ret = SetCompare::equal; // else: SetCompare::disjoint;
+    }
+    else if ( ! trg.isNA() ) // else: SetCompare::disjoint;
+    {
+      // NeedsCloserLook:
+      if ( isWildcarded() )
+      {
+	if ( trg.isWildcarded() )
+	{
+	  // simple string compare just to detect 'equal'
+	  ret = matchWildcardfreeString( *_value, *trg._value ) ? SetCompare::equal : SetCompare::uncomparable;
+	}
+	else
+	{
+	  // Needs wildcard compare (src,trg)
+	  if ( matchWildcardedString( *_value, *trg._value ) ) ret = SetCompare::properSuperset; // else: SetCompare::disjoint;
+	}
+      }
+      else
+      {
+	if ( trg.isWildcarded() )
+	{
+	  // Needs wildcard compare (trg,src)
+	  if ( matchWildcardedString( *trg._value, *_value ) ) ret = SetCompare::properSubset; // else: SetCompare::disjoint;
+	}
+	else
+	{
+	  // simple string compare
+	  if ( matchWildcardfreeString( *_value, *trg._value ) ) ret = SetCompare::equal; // else: SetCompare::disjoint;
+	}
+      }
+    }
+    return ret;
+  }
+#endif // WFN_STRICT_SPEC
 
   std::ostream & operator<<( std::ostream & str, const CpeId::Value & obj )
   { return str << obj.asString(); }

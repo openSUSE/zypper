@@ -9,6 +9,22 @@ using zypp::SetRelation;
 using zypp::CpeId;
 typedef CpeId::Value Value;
 
+///////////////////////////////////////////////////////////////////
+/// Symmetric attribute compare if wildcards are involved!
+/// The specs define any comarison with a wildcarded attribute as
+/// target to return \c uncomparable:
+/// \code
+///    wildcardfree  <=>  wildcarded    ==>  uncomparable,
+///    wildcarded    <=>  wildcardfree  ==>  superset or disjoint
+/// \endcode
+/// But a symmetric result is much more intuitive:
+/// \code
+///    wildcardfree  <=>  wildcarded    ==>  subset or disjoint
+///    wildcarded    <=>  wildcardfree  ==>  superset or disjoint
+/// \endcode
+///////////////////////////////////////////////////////////////////
+#define WFN_STRICT_SPEC 0
+
 #define defVALUE(N,S)			\
   const std::string N##Str( S );	\
   Value N( N##Str );
@@ -112,8 +128,12 @@ BOOST_AUTO_TEST_CASE(cpeid_value_string_wildcarded)
     BOOST_CHECK( c != Value::ANY );
     BOOST_CHECK( c != Value::NA );
     BOOST_CHECK( c != wildcardfree );
+#if WFN_STRICT_SPEC
     BOOST_CHECK( c != wildcarded );	// !!! According to the CPE Name Matching Specification Version 2.3
 					// unquoted wildcard characters yield an undefined result (not ==).
+#else
+    BOOST_CHECK( c == wildcarded );
+#endif
     BOOST_CHECK( ! c.isWildcardfree() );
     BOOST_CHECK( c.isWildcarded() );
     BOOST_CHECK_EQUAL( c.asFs(), wildcardedFs );
@@ -122,7 +142,11 @@ BOOST_AUTO_TEST_CASE(cpeid_value_string_wildcarded)
     BOOST_CHECK_EQUAL( c.asString(), c.asWfn() );
   }
 
+#if WFN_STRICT_SPEC
   BOOST_CHECK( wildcarded2 != wildcarded2 );	// unquoted wildcard characters yield an undefined result (not ==).
+#else
+  BOOST_CHECK( wildcarded2 == wildcarded2 );
+#endif
   BOOST_CHECK( wildcarded2 != wildcardfree );
   BOOST_CHECK( wildcarded2 != wildcarded );
   BOOST_CHECK( ! wildcarded2.isWildcardfree() );
@@ -268,26 +292,46 @@ BOOST_AUTO_TEST_CASE(cpeid_compare)
   BOOST_CHECK( compare( Value::ANY,	Value::ANY,	SetCompare::equal		) );
   BOOST_CHECK( compare( Value::ANY,	Value::NA,	SetCompare::properSuperset	) );
   BOOST_CHECK( compare( Value::ANY,	wildcardfree,	SetCompare::properSuperset	) );
+#if WFN_STRICT_SPEC
   BOOST_CHECK( compare( Value::ANY,	wildcarded,	SetCompare::uncomparable	) );
+#else
+  BOOST_CHECK( compare( Value::ANY,	wildcarded,	SetCompare::properSuperset	) );
+#endif
 
   BOOST_CHECK( compare( Value::NA,	Value::ANY,	SetCompare::properSubset	) );
   BOOST_CHECK( compare( Value::NA,	Value::NA,	SetCompare::equal		) );
   BOOST_CHECK( compare( Value::NA,	wildcardfree,	SetCompare::disjoint		) );
+#if WFN_STRICT_SPEC
   BOOST_CHECK( compare( Value::NA,	wildcarded,	SetCompare::uncomparable	) );
+#else
+  BOOST_CHECK( compare( Value::NA,	wildcarded,	SetCompare::disjoint		) );
+#endif
 
   BOOST_CHECK( compare( wildcardfree,	Value::ANY,	SetCompare::properSubset	) );
   BOOST_CHECK( compare( wildcardfree,	Value::NA,	SetCompare::disjoint		) );
   //BOOST_CHECK( compare( wildcardfree,	wildcardfree,	_NeedsCloserLook,	// equal or disjoint
   BOOST_CHECK( compare( wildcardfree,	wildcardfree,	SetCompare::equal		) );
   BOOST_CHECK( compare( wildcardfree,	wildcardfree2,	SetCompare::disjoint		) );
+#if WFN_STRICT_SPEC
   BOOST_CHECK( compare( wildcardfree,	wildcarded,	SetCompare::uncomparable	) );
+#else
+  //BOOST_CHECK( compare( wildcardfree,	wildcarded,	_NeedsCloserLook,	// subset or disjoint
+  BOOST_CHECK( compare( wildcardfree,	wildcarded,	SetCompare::properSubset	) );
+  BOOST_CHECK( compare( wildcardfree,	wildcarded2,	SetCompare::disjoint		) );
+#endif
 
   BOOST_CHECK( compare( wildcarded,	Value::ANY,	SetCompare::properSubset	) );
   BOOST_CHECK( compare( wildcarded,	Value::NA,	SetCompare::disjoint		) );
   //BOOST_CHECK( compare( wildcarded,	wildcardfree,	_NeedsCloserLook,	// superset or disjoint
   BOOST_CHECK( compare( wildcarded,	wildcardfree,	SetCompare::properSuperset	) );
   BOOST_CHECK( compare( wildcarded,	wildcardfree2,	SetCompare::disjoint		) );
+#if WFN_STRICT_SPEC
   BOOST_CHECK( compare( wildcarded,	wildcarded,	SetCompare::uncomparable	) );
+#else
+  //BOOST_CHECK( compare( wildcarded,	wildcarded,	_NeedsCloserLook,	// equal or uncomparable
+  BOOST_CHECK( compare( wildcarded,	wildcarded,	SetCompare::equal		) );
+  BOOST_CHECK( compare( wildcarded,	wildcarded2,	SetCompare::uncomparable	) );
+#endif
 }
 
 
@@ -377,6 +421,7 @@ BOOST_AUTO_TEST_CASE(cpeid_matches)
   CpeId win( "cpe:/o:windows" );
   CpeId any;
   CpeId ons( "cpe:2.3:o:??????s" );
+  CpeId oops( "cpe:2.3:o:?????s" );
 
   BOOST_CHECK_EQUAL( compare( sle, win ), SetRelation::disjoint );
 
@@ -386,9 +431,18 @@ BOOST_AUTO_TEST_CASE(cpeid_matches)
   BOOST_CHECK_EQUAL( compare( any, sle ), SetRelation::superset );
   BOOST_CHECK_EQUAL( compare( any, win ), SetRelation::superset );
 
+#if WFN_STRICT_SPEC
   BOOST_CHECK_EQUAL( compare( sle, ons ), SetRelation::uncomparable );
   BOOST_CHECK_EQUAL( compare( win, ons ), SetRelation::uncomparable );
+#else
+  BOOST_CHECK_EQUAL( compare( sle, ons ), SetRelation::subset );
+  BOOST_CHECK_EQUAL( compare( win, ons ), SetRelation::subset );
+#endif
 
   BOOST_CHECK_EQUAL( compare( ons, sle ), SetRelation::superset );
   BOOST_CHECK_EQUAL( compare( ons, win ), SetRelation::superset );
+
+  BOOST_CHECK_EQUAL( compare( oops, sle ), SetRelation::superset );
+  BOOST_CHECK_EQUAL( compare( oops, win ), SetRelation::disjoint );
+
 }
