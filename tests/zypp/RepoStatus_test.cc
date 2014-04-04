@@ -27,7 +27,7 @@ BOOST_AUTO_TEST_CASE(repostatus_test)
   BOOST_CHECK_EQUAL( fstatus.empty(), false );
   BOOST_CHECK_EQUAL( (fstatus&&status).empty(), false );
 
-  BOOST_CHECK_EQUAL( (fstatus&&status).checksum(), (status&&fstatus).checksum() );
-  BOOST_CHECK_EQUAL( (fstatus&&fstatus2).checksum(), (fstatus2&&fstatus).checksum() );
+  BOOST_CHECK_EQUAL( (fstatus&&status), (status&&fstatus) );
+  BOOST_CHECK_EQUAL( (fstatus&&fstatus2), (fstatus2&&fstatus) );
 
 }
