@@ -1,4 +1,10 @@
 -------------------------------------------------------------------
+Fri Apr  4 14:29:13 CEST 2014 - ma@suse.de
+
+- Log warning if baseproduct symlink is dangling or missing
+- version 14.17.3 (17)
+
+-------------------------------------------------------------------
 Thu Apr  3 19:18:48 CEST 2014 - ma@suse.de
 
 - RepoManager: Fix RepoStatus computation and refresh of PLAINDIR repos.
