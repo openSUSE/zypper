@@ -1782,7 +1782,7 @@ namespace zypp
         }
 	else if ( PathInfo( Pathname::assertprefix( root_r, "/etc/products.d" ) ).isDir() )
 	{
-	  ERR << "baseproduct symlink is dangling or missing: " << pi << end;
+	  ERR << "baseproduct symlink is dangling or missing: " << baseproduct << endl;
 	}
         return ret;
       }
