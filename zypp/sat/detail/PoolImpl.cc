@@ -153,13 +153,6 @@ namespace zypp
           }
           break;
 
-          case NAMESPACE_PRODUCTBUDDY:
-          {
-            PoolItem pi( (Solvable(rhs)) );
-            return( pi ? pi.buddy().id() : noId );
-          }
-
-          break;
         }
 
         WAR << "Unhandled " << Capability( lhs ) << " vs. " << Capability( rhs ) << endl;
