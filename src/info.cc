@@ -445,21 +445,46 @@ void printProductInfo(Zypper & zypper, const ui::Selectable & s)
       Date eol( product->endOfLife() );
       cout << _("End of Support") << ": " << ( eol ? eol.printDate() : _("undefined") ) << endl;
     }
-
-    std::list<Repository::ContentIdentifier> l;
-    unsigned cl = product->updateContentIdentifierSize( l );
-    if ( cl )
     {
-      cout << _("Update Repositories")   << ": " << cl << endl;
-      unsigned n = 0;
-      for ( const auto & el : l )
-      {
-	cout << "[" << n << "] " << _("Update Repository Content Id")   << ": " << el << endl;
-      }
+      cout << _("CPE Name") << ": ";
+      const CpeId & cpe( product->cpeId() );
+      if ( cpe )
+	cout << cpe << endl;
+      else if ( CpeId::NoThrowType::lastMalformed.empty() )
+	cout <<  _("undefined") << endl;
+      else
+	cout <<  _("invalid CPE Name") << ": " << CpeId::NoThrowType::lastMalformed << endl;
     }
-    else
-      cout << _("Update Repositories")   << ": " << _("undefined") << endl;
+    {
+      cout << _("Update Repositories");
+      std::list<Repository::ContentIdentifier> l;
+      unsigned cl = product->updateContentIdentifierSize( l );
+      if ( cl )
+      {
+	cout << ": " << cl << endl;
+	unsigned n = 0;
+	for ( const auto & el : l )
+	{
+	  cout << "[" << ++n << "] " << _("Content Id")   << ": " << el << endl;
+	  bool found = false;
+	  for_( it, sat::Pool::instance().reposBegin(), sat::Pool::instance().reposEnd() )
+	  {
+	    if ( (*it).hasContentIdentifier( el ) )
+	    {
+	      found = true;
+	      cout << "    " << _("Provided by enabled repository")   << ": " << (*it).name() << endl;
 
+	    }
+	  }
+	  if ( ! found )
+	  {
+	    cout << "    " << _("Not provided by any enabled repository")   << endl;
+	  }
+	}
+      }
+      else
+	cout << ": " << _("undefined") << endl;
+    }
 
     printSummaryDesc(pool_item.resolvable());
 
