@@ -1766,19 +1766,25 @@ namespace zypp
     {
       parser::ProductFileData baseproductdata( const Pathname & root_r )
       {
+	parser::ProductFileData ret;
         PathInfo baseproduct( Pathname::assertprefix( root_r, "/etc/products.d/baseproduct" ) );
+
         if ( baseproduct.isFile() )
         {
           try
           {
-            return parser::ProductFileReader::scanFile( baseproduct.path() );
+            ret = parser::ProductFileReader::scanFile( baseproduct.path() );
           }
           catch ( const Exception & excpt )
           {
             ZYPP_CAUGHT( excpt );
           }
         }
-        return parser::ProductFileData();
+	else if ( PathInfo( Pathname::assertprefix( root_r, "/etc/products.d" ) ).isDir() )
+	{
+	  ERR << "baseproduct symlink is dangling or missing: " << pi << end;
+	}
+        return ret;
       }
 
       inline Pathname staticGuessRoot( const Pathname & root_r )
