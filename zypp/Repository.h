@@ -108,6 +108,9 @@ namespace zypp
 	 */
 	ContentIdentifier contentIdentifier() const;
 
+	/** Whether \a id_r matches this repos content identifier. */
+	bool hasContentIdentifier( const ContentIdentifier & id_r ) const;
+
         /**
          * Timestamp when this repository was generated
          *

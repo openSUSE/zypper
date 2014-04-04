@@ -91,6 +91,16 @@ namespace zypp
       return q.empty() ? std::string() : q.begin().asString();
     }
 
+    bool Repository::hasContentIdentifier( const ContentIdentifier & id_r ) const
+    {
+      NO_REPOSITORY_RETURN( false );
+      sat::LookupRepoAttr q( sat::SolvAttr::repositoryRepoid, *this );
+      for_( it, q.begin(), q.end() )
+	if ( it.asString() == id_r )
+	  return true;
+      return false;
+    }
+
     zypp::Date Repository::generatedTimestamp() const
     {
       NO_REPOSITORY_RETURN( 0 );
