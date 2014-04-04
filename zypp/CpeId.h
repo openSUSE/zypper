@@ -57,7 +57,7 @@ namespace zypp
 
   public:
     /** Indicator type for non-trowing ctor. */
-    struct NoThrowType {};
+    struct NoThrowType { static std::string lastMalformed; };
     /** Indicator argument for non-trowing ctor. */
     static constexpr NoThrowType noThrow = NoThrowType();
 

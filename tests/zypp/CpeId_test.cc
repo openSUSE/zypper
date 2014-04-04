@@ -357,6 +357,9 @@ BOOST_AUTO_TEST_CASE(cpeid_basics)
 {
   BOOST_CHECK_THROW( CpeId( "malformed" ), std::invalid_argument );
   CpeId none( "malformed", CpeId::noThrow );
+  BOOST_CHECK_EQUAL( CpeId::NoThrowType::lastMalformed, "malformed" );
+  CpeId( "", CpeId::noThrow );
+  BOOST_CHECK_EQUAL( CpeId::NoThrowType::lastMalformed, "" );
 
   for ( const auto & c : { CpeId(), CpeId( nullptr ), CpeId( "" ), CpeId( std::string() ) } )
   {

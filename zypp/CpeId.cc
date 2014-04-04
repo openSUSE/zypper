@@ -365,6 +365,8 @@ namespace zypp
   //	class CpeId
   ///////////////////////////////////////////////////////////////////
 
+  std::string CpeId::NoThrowType::lastMalformed;
+
   CpeId::CpeId()
     : _pimpl( new Impl )
   {}
@@ -376,9 +378,15 @@ namespace zypp
   CpeId::CpeId( const std::string & cpe_r, NoThrowType )
   {
     try
-    { _pimpl.reset( new Impl( cpe_r ) ); }
+    {
+      _pimpl.reset( new Impl( cpe_r ) );
+      NoThrowType::lastMalformed.clear();
+    }
     catch(...)
-    { _pimpl.reset( new Impl ); }
+    {
+      _pimpl.reset( new Impl );
+      NoThrowType::lastMalformed = cpe_r;
+    }
   }
 
   CpeId::~CpeId()
