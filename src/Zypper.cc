@@ -564,6 +564,19 @@ void Zypper::processGlobalOptions()
     _gopts.rm_options = RepoManagerOptions(_gopts.root_dir);
   }
 
+  // on the fly check the baseproduct symlink
+  {
+    PathInfo pi( _gopts.root_dir + "/etc/products.d/baseproduct" );
+    if ( ! pi.isFile() && PathInfo( _gopts.root_dir + "/etc/products.d" ).isDir() )
+    {
+      ERR << "baseproduct symlink is dangling or missing: " << pi << endl;
+      out().warning(_(
+	"The /etc/products.d/baseproduct symlink is dangling or missing!\n"
+	"The link must point to your core products .prod file in /etc/products.d.\n"
+      ));
+    }
+  }
+
   if ((it = gopts.find("reposd-dir")) != gopts.end()) {
     _gopts.rm_options.knownReposPath = it->second.front();
   }
