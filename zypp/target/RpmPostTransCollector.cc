@@ -16,6 +16,7 @@
 
 #include "zypp/TmpPath.h"
 #include "zypp/PathInfo.h"
+#include "zypp/HistoryLog.h"
 #include "zypp/ExternalProgram.h"
 #include "zypp/target/rpm/RpmHeader.h"
 
@@ -78,21 +79,36 @@ namespace zypp
 	    return;
 
 	  Pathname noRootScriptDir( filesystem::TmpDir::defaultLocation() / tmpDir().basename() );
+	  HistoryLog historylog;
+	  std::string scriptmsg;
+	  static constexpr std::string::size_type maxscriptmsg( 512000 );
 
 	  for ( auto && script : _scripts )
 	  {
 	    MIL << "EXECUTE posttrans: " << script << endl;
             ExternalProgram prog( (noRootScriptDir/script).asString(), ExternalProgram::Stderr_To_Stdout, false, -1, true, _root );
+	    scriptmsg.clear();
 	    for( std::string line = prog.receiveLine(); ! line.empty(); line = prog.receiveLine() )
 	    {
 	      DBG << line;
+	      if ( scriptmsg.size() < maxscriptmsg )
+		scriptmsg += line;
 	    }
+	    if ( ( scriptmsg.size() > maxscriptmsg )
+	      scriptmsg += "[truncated]\n";
 	    int ret = prog.close();
 	    if ( ret != 0 )
 	    {
-	      ERR << "FAILED posttrans: (" << ret << ") " << script << endl;
-	      // HistoryLog()
-	      // continue on error?
+	      WAR << "FAILED posttrans: (" << ret << ") " << script << endl;
+	      historylog.comment(
+		str::Str() << "%posttrans " << script << " failed (" << ret << "): Additional output:\n" << scriptmsg,
+		true /*timestamp*/);
+	    }
+	    else if ( ! scriptmsg.empty() )
+	    {
+	      historylog.comment(
+		str::Str() << "%posttrans " << script << " succeeded: Additional output:\n" << scriptmsg,
+		true /*timestamp*/);
 	    }
 	  }
 	  _scripts.clear();
@@ -104,8 +120,14 @@ namespace zypp
 	  if ( _scripts.empty() )
 	    return;
 
+	  HistoryLog historylog;
 	  for ( auto && script : _scripts )
-	  { WAR << "UNEXECUTED posttrans: " << script << endl; }
+	  {
+	    WAR << "UNEXECUTED posttrans: " << script << endl;
+	    historylog.comment(
+	      str::Str() << "%posttrans " << script << " not executed (aborting)\n",
+	      true /*timestamp*/);
+	  }
 	  _scripts.clear();
 	}
 
