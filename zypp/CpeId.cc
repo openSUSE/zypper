@@ -228,7 +228,7 @@ namespace zypp
 		    break;
 		  // else: fallthrough
 		default:
-		  throw std::invalid_argument( "CpeId:Wfn:part: illegal value" );
+		  throw std::invalid_argument( str::Str() << "CpeId:Wfn:part: '" << wfn << "' illegal value; expected: 'h' | 'o' | 'a'"   );
 		  break;
 	      }
 	    }
@@ -251,7 +251,7 @@ namespace zypp
 		}
 	      }
 	      if ( wfn.size() != len )
-		throw std::invalid_argument( "CpeId:Wfn:language: illegal value" );
+		throw std::invalid_argument( str::Str() << "CpeId:Wfn:language: '" << wfn << "' illegal value; expected RFC5646 conform: language ['-' region]" );
 	    }
 	    break;
 
@@ -303,10 +303,10 @@ namespace zypp
 	ret = unbindFs( cpe_r );
       }
       else
-	throw std::invalid_argument( "CpeId: bad magic" );
+	throw std::invalid_argument( "CpeId: bad magic; expected: 'cpe:2.3:' | 'cpe:/'" );
     }
     else if ( cpe_r[0] != '\0' )
-      throw std::invalid_argument( "CpeId: bad magic" );
+      throw std::invalid_argument( "CpeId: bad magic; expected: 'cpe:2.3:' | 'cpe:/'" );
     return ret;
   }
 
@@ -314,11 +314,12 @@ namespace zypp
   {
     Wfn ret;
 
+    static constexpr unsigned numUriAttr = 7u;	// basic URI attibutes
     std::vector<std::string> field;
-    field.reserve( Attribute::numAttributes );
-    if ( str::splitFields( cpe_r.c_str()+5/* skip magic 'cpe:/' */, std::back_inserter(field), ":" ) > Attribute::numAttributes )
-      throw std::invalid_argument( "CpeId:Uri: too many fields" );
-    field.resize( Attribute::numAttributes );	// fillup with ANY("")
+    field.reserve( Attribute::numAttributes );	// reserve 7 + 4 for packed extened attrs in edition
+    if ( str::splitFields( cpe_r.c_str()+5/* skip magic 'cpe:/' */, std::back_inserter(field), ":" ) > numUriAttr )
+      throw std::invalid_argument( str::Str() << "CpeId:Uri: too many fields (" << field.size() << "); expected " << numUriAttr );
+    field.resize( Attribute::numAttributes );	// fillup with ANY(""),
 
     for ( auto ai : WFN_ATTRIBUTES )
     {
@@ -329,7 +330,7 @@ namespace zypp
 	std::vector<std::string> pack;
 	pack.reserve( numPacks );
 	if ( str::splitFields( field[ai], std::back_inserter(pack), "~" ) > numPacks )
-	  throw std::invalid_argument( "CpeId:Uri: too many packs" );
+	  throw std::invalid_argument( str::Str() << "CpeId:Uri:edition: too many packs (" << pack.size() << "); expected " << numPacks );
 	pack.resize( numPacks );	// fillup with ANY(""), should be noOP
 
 	pack[1].swap( field[Attribute::edition] );
@@ -350,7 +351,9 @@ namespace zypp
     std::vector<std::string> field;
     field.reserve( Attribute::numAttributes );
     if ( str::splitFields( cpe_r.c_str()+8/* skip magic 'cpe:2.3:' */, std::back_inserter(field), ":" ) > Attribute::numAttributes )
-      throw std::invalid_argument( "CpeId:Fs: too many fields" );
+      throw std::invalid_argument( str::Str() << "CpeId:Fs: too many fields (" << field.size() << "); expected 11" /*<< Attribute::numAttributes but g++ currently can't resoolve this as constexpr*/ );
+    if ( field.back().empty() )	// A trailing ':' leads to an empty (illegal) field, but we fillup missing fields with ANY|"*"
+      field.back() = "*";
     field.resize( Attribute::numAttributes, "*" );	// fillup with ANY|"*"
 
     for ( auto ai : WFN_ATTRIBUTES )
@@ -459,14 +462,14 @@ namespace zypp
 	    if ( ! chIsValidRange( *chp )  )
 	    {
 	      if ( *chp )
-		throw std::invalid_argument( "CpeId:Wfn: illegal quoted character" );
+		throw std::invalid_argument( str::Str() << "CpeId:Wfn: illegal quoted character '\\" << reinterpret_cast<void*>(*chp) << "'" );
 	      else
 		throw std::invalid_argument( "CpeId:Wfn: Backslash escapes nothing" );
 	    }
 	    else if ( chIsWfnUnescaped( *chp ) )
-	      throw std::invalid_argument( "CpeId:Wfn: unnecessarily quoted character" );
+	      throw std::invalid_argument( str::Str() << "CpeId:Wfn: unnecessarily quoted character '\\" << *chp << "'" );
 	    else if ( starting && *chp == '-' && chp+1 == value_r.end() )
-	      throw std::invalid_argument( "CpeId:Wfn: '\\-' is illegal value" );
+	      throw std::invalid_argument( str::Str() << "CpeId:Wfn: '\\-' is illegal value" );
 	    break;
 
 	  case '?':	// sequence at beginning or end of string
@@ -485,9 +488,9 @@ namespace zypp
 	    if ( ! chIsWfnUnescaped( *chp ) )
 	    {
 	      if ( chIsValidRange( *chp ) )
-		throw std::invalid_argument( "CpeId:Wfn: missing quote" );
+		throw std::invalid_argument( str::Str() << "CpeId:Wfn: missing quote before '" << *chp << "'" );
 	      else
-		throw std::invalid_argument( "CpeId:Wfn: illegal character" );
+		throw std::invalid_argument( str::Str() << "CpeId:Wfn: illegal character '" << reinterpret_cast<void*>(*chp) << "'" );
 	    }
 	    break;
 	}
@@ -521,7 +524,7 @@ namespace zypp
 	      else if ( chIsValidRange( *chp ) )
 		result << '\\' << *chp;
 	      else if ( *chp )
-		throw std::invalid_argument( "CpeId:Fs: illegal quoted character" );
+		throw std::invalid_argument( str::Str() << "CpeId:Fs: illegal quoted character '\\" << *chp << "'" );
 	      else
 		throw std::invalid_argument( "CpeId:Fs: Backslash escapes nothing" );
 	      break;
@@ -550,14 +553,14 @@ namespace zypp
 	      else if ( chIsValidRange( *chp ) )
 		result << '\\' << *chp;
 	      else
-		throw std::invalid_argument( "CpeId:Fs: illegal character" );
+		throw std::invalid_argument( str::Str() << "CpeId:Fs: illegal character '" << reinterpret_cast<void*>(*chp) << "'" );
 	      break;
 	  }
 	  if ( starting )
 	    starting = false;
 	}
 	if ( starting )
-	  throw std::invalid_argument( "CpeId:Fs: '' is illegal" );
+	  throw std::invalid_argument( "CpeId:Fs: '' value is illegal" );
 	_value.reset( new std::string( result ) );
       }
     }
@@ -620,12 +623,12 @@ namespace zypp
 		}
 		ch = (d1<<4)|d2;
 		if ( ! chIsValidRange( ch ) )
-		  throw std::invalid_argument( "CpeId:Uri: illegal % encoded character" );
+		  throw std::invalid_argument( str::Str() << "CpeId:Uri: illegal % encoded character '" << reinterpret_cast<void*>(ch) << "'" );
 	      }
 	    }
 	  }
 	  else if ( ! chIsValidRange( ch ) )
-	    throw std::invalid_argument( "CpeId:Uri: illegal character" );
+	    throw std::invalid_argument( str::Str() << "CpeId:Uri: illegal character '" << reinterpret_cast<void*>(ch) << "'" );
 
 	  if ( chIsWfnUnescaped( ch ) )
 	    result << ch;
