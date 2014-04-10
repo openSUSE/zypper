@@ -17,6 +17,7 @@
 #include "zypp/TmpPath.h"
 #include "zypp/PathInfo.h"
 #include "zypp/HistoryLog.h"
+#include "zypp/ZYppCallbacks.h"
 #include "zypp/ExternalProgram.h"
 #include "zypp/target/rpm/RpmHeader.h"
 
@@ -78,37 +79,45 @@ namespace zypp
 	  if ( _scripts.empty() )
 	    return;
 
-	  Pathname noRootScriptDir( filesystem::TmpDir::defaultLocation() / tmpDir().basename() );
 	  HistoryLog historylog;
-	  std::string scriptmsg;
-	  static constexpr std::string::size_type maxscriptmsg( 512000 );
+	  callback::SendReport<JobReport> report;
+
+	  Pathname noRootScriptDir( filesystem::TmpDir::defaultLocation() / tmpDir().basename() );
 
 	  for ( auto && script : _scripts )
 	  {
 	    MIL << "EXECUTE posttrans: " << script << endl;
             ExternalProgram prog( (noRootScriptDir/script).asString(), ExternalProgram::Stderr_To_Stdout, false, -1, true, _root );
-	    scriptmsg.clear();
+
+	    str::Str collect;
 	    for( std::string line = prog.receiveLine(); ! line.empty(); line = prog.receiveLine() )
 	    {
 	      DBG << line;
-	      if ( scriptmsg.size() < maxscriptmsg )
-		scriptmsg += line;
+	      collect << "    " << line;
 	    }
-	    if ( ( scriptmsg.size() > maxscriptmsg )
-	      scriptmsg += "[truncated]\n";
 	    int ret = prog.close();
-	    if ( ret != 0 )
+	    const std::string & scriptmsg( collect );
+
+	    if ( ret != 0 || ! scriptmsg.empty() )
 	    {
-	      WAR << "FAILED posttrans: (" << ret << ") " << script << endl;
-	      historylog.comment(
-		str::Str() << "%posttrans " << script << " failed (" << ret << "): Additional output:\n" << scriptmsg,
-		true /*timestamp*/);
-	    }
-	    else if ( ! scriptmsg.empty() )
-	    {
-	      historylog.comment(
-		str::Str() << "%posttrans " << script << " succeeded: Additional output:\n" << scriptmsg,
-		true /*timestamp*/);
+	      const std::string & pkgident( script.substr( 0, script.size()-6 ) );	// strip tmp file suffix
+
+	      if ( ! scriptmsg.empty() )
+	      {
+		str::Str msg;
+		msg << "Output of " << pkgident << " %posttrans script:\n" << scriptmsg;
+		historylog.comment( msg, true /*timestamp*/);
+		report->info( msg );
+	      }
+
+	      if ( ret != 0 )
+	      {
+		str::Str msg;
+		msg << pkgident << " %posttrans script failed (returned " << ret << ")";
+		WAR << msg << endl;
+		historylog.comment( msg, true /*timestamp*/);
+		report->warning( msg );
+	      }
 	    }
 	  }
 	  _scripts.clear();
@@ -121,13 +130,20 @@ namespace zypp
 	    return;
 
 	  HistoryLog historylog;
+	  callback::SendReport<JobReport> report;
+
+	  str::Str msg;
+	  msg << "%posttrans scripts skipped while aborting:\n";
 	  for ( auto && script : _scripts )
 	  {
+	    const std::string & pkgident( script.substr( 0, script.size()-6 ) );	// strip tmp file suffix
 	    WAR << "UNEXECUTED posttrans: " << script << endl;
-	    historylog.comment(
-	      str::Str() << "%posttrans " << script << " not executed (aborting)\n",
-	      true /*timestamp*/);
+	    msg << "    " << pkgident << "\n";
 	  }
+
+	  historylog.comment( msg, true /*timestamp*/);
+	  report->warning( msg );
+
 	  _scripts.clear();
 	}
 
