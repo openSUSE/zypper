@@ -226,8 +226,14 @@ namespace zypp
       std::ostream & stream()
       { return _str; }
 
+      void clear()
+      { _str.str( std::string() ); }
+
       std::ostringstream _str;
     };
+
+    inline std::ostream & operator<<( std::ostream & str, const Str & obj )
+    { return str << (std::string)obj; }
 
     ///////////////////////////////////////////////////////////////////
     /** \name String representation of number.
