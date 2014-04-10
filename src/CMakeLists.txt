@@ -28,6 +28,7 @@ SET (zypper_HEADERS
   callbacks/media.h
   callbacks/rpm.h
   callbacks/repo.h
+  callbacks/job.h
 )
 
 SET( zypper_SRCS
