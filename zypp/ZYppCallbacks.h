@@ -12,6 +12,7 @@
 #ifndef ZYPP_ZYPPCALLBACKS_H
 #define ZYPP_ZYPPCALLBACKS_H
 
+#include "zypp/base/EnumClass.h"
 #include "zypp/Callback.h"
 #include "zypp/Resolvable.h"
 #include "zypp/RepoInfo.h"
@@ -756,6 +757,35 @@ namespace zypp
      virtual void finish(
        Error /*error*/
       ) {}
+  };
+
+
+
+  ///////////////////////////////////////////////////////////////////
+  /// \class JobReport
+  /// \brief Generic report for sending messages.
+  ///////////////////////////////////////////////////////////////////
+  struct JobReport : public callback::ReportBase
+  {
+    /** message type (use like 'enum class \ref MsgType') */
+    struct _MsgTypeDef {
+      enum Enum { info, warning, error };
+    };
+    typedef base::EnumClass<_MsgTypeDef> MsgType;	///< 'enum class MsgType'
+
+    //     virtual bool start()
+    //     virtual bool progress()
+    //     virtual bool problem()
+    //     virtual bool finish()
+
+    /** Send a ready to show message text. */
+    virtual bool message( MsgType type_r, const std::string & msg_r ) const { return true; }
+    /** \overload */
+    bool info( const std::string & msg_r ) const	{ return message( MsgType::info, msg_r ); }
+    /** \overload */
+    bool warning( const std::string & msg_r ) const	{ return message( MsgType::warning, msg_r ); }
+    /** \overload */
+    bool error( const std::string & msg_r ) const	{ return message( MsgType::error, msg_r ); }
   };
 
 
