@@ -436,11 +436,9 @@ class RpmCallbacks {
     ZmartRecipients::RemoveResolvableReportReceiver _installReceiver;
     ZmartRecipients::InstallResolvableReportReceiver _removeReceiver;
     ZmartRecipients::FindFileConflictstReportReceiver _fileConflictsReceiver;
-    int _step_counter;
 
   public:
     RpmCallbacks()
-	: _step_counter( 0 )
     {
       _messageReceiver.connect();
       _scriptReceiver.connect();
