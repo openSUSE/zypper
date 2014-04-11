@@ -1,4 +1,11 @@
 -------------------------------------------------------------------
+Fri Apr 11 16:16:11 CEST 2014 - ma@suse.de
+
+- history: log %posttrans errors and output
+- adapt to libsolv cannges
+- version 14.17.4 (17)
+
+-------------------------------------------------------------------
 Fri Apr  4 14:29:13 CEST 2014 - ma@suse.de
 
 - Log warning if baseproduct symlink is dangling or missing
