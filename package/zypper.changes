@@ -1,4 +1,10 @@
 -------------------------------------------------------------------
+Fri Apr 11 15:06:28 CEST 2014 - ma@suse.de
+
+- packages: Remove conflicting short options (-r repo/reconmmends)
+- version 1.11.2
+
+-------------------------------------------------------------------
 Fri Apr  4 14:30:07 CEST 2014 - ma@suse.de
 
 - info product: show CPEid and report enabled/missing update repos
