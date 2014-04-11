@@ -957,6 +957,9 @@ void Zypper::safeDoCommand()
     out().setVerbosity(tmp);
 
     report_a_bug(out());
+    if ( ! exitCode() )
+      setExitCode( ZYPPER_EXIT_ERR_BUG );
+
   }
 }
 
