@@ -1811,8 +1811,8 @@ void Zypper::processCommandOptions()
       {"download-in-advance",       no_argument,       0,  0 },
       {"download-in-heaps",         no_argument,       0,  0 },
       {"download-as-needed",        no_argument,       0,  0 },
-      {"bz",                        required_argument, 0, 'b'},
       {"bugzilla",                  required_argument, 0, 'b'},
+      {"bz",                        required_argument, 0,  0 },
       {"cve",                       required_argument, 0,  0 },
       {"category",                  required_argument, 0, 'g'},
       {"date",                      required_argument, 0,  0 },
@@ -1857,8 +1857,8 @@ void Zypper::processCommandOptions()
   {
     static struct option list_updates_options[] = {
       {"repo",        required_argument, 0, 'r'},
-      {"bz",          optional_argument, 0, 'b'},
       {"bugzilla",    optional_argument, 0, 'b'},
+      {"bz",          optional_argument, 0,  0 },
       {"cve",         optional_argument, 0,  0 },
       {"category",    required_argument, 0, 'g'},
       {"date",        required_argument, 0,  0 },
