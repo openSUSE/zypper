@@ -1362,16 +1362,16 @@ void Zypper::processCommandOptions()
   {
     static struct option options[] =
     {
-      {"help", no_argument, 0, 'h'},
-      {"uri", no_argument, 0, 'u'},
-      {"url", no_argument, 0, 'u'},
-      {"priority", no_argument, 0, 'p'},
-      {"details", no_argument, 0, 'd'},
-      {"with-repos", no_argument, 0, 'r'},
-      {"show-enabled-only", no_argument, 0, 'E'},
-      {"sort-by-uri", no_argument, 0, 'U'},
-      {"sort-by-name", no_argument, 0, 'N'},
-      {"sort-by-priority", no_argument, 0, 'P'},
+      {"help",			no_argument,	0, 'h'},
+      {"uri",			no_argument,	0, 'u'},
+      {"url",			no_argument,	0,  0 },
+      {"priority",		no_argument,	0, 'p'},
+      {"details",		no_argument,	0, 'd'},
+      {"with-repos",		no_argument,	0, 'r'},
+      {"show-enabled-only",	no_argument,	0, 'E'},
+      {"sort-by-uri",		no_argument,	0, 'U'},
+      {"sort-by-name",		no_argument,	0, 'N'},
+      {"sort-by-priority",	no_argument,	0, 'P'},
       {0, 0, 0, 0}
     };
     specific_options = options;
@@ -1457,21 +1457,21 @@ void Zypper::processCommandOptions()
   case ZypperCommand::LIST_REPOS_e:
   {
     static struct option service_list_options[] = {
-      {"export", required_argument, 0, 'e'},
-      {"alias", no_argument, 0, 'a'},
-      {"name", no_argument, 0, 'n'},
-      {"refresh", no_argument, 0, 'r'},
-      {"uri", no_argument, 0, 'u'},
-      {"url", no_argument, 0, 'u'},
-      {"priority", no_argument, 0, 'p'},
-      {"details", no_argument, 0, 'd'},
-      {"show-enabled-only", no_argument, 0, 'E'},
-      {"sort-by-priority", no_argument, 0, 'P'},
-      {"sort-by-uri", no_argument, 0, 'U'},
-      {"sort-by-alias", no_argument, 0, 'A'},
-      {"sort-by-name", no_argument, 0, 'N'},
-      {"service", no_argument, 0, 's'},
-      {"help", no_argument, 0, 'h'},
+      {"export",		required_argument,	0, 'e'},
+      {"alias",			no_argument,		0, 'a'},
+      {"name",			no_argument,		0, 'n'},
+      {"refresh",		no_argument,		0, 'r'},
+      {"uri",			no_argument,		0, 'u'},
+      {"url",			no_argument,		0,  0 },
+      {"priority",		no_argument,		0, 'p'},
+      {"details",		no_argument,		0, 'd'},
+      {"show-enabled-only",	no_argument,		0, 'E'},
+      {"sort-by-priority",	no_argument,		0, 'P'},
+      {"sort-by-uri",		no_argument,		0, 'U'},
+      {"sort-by-alias",		no_argument,		0, 'A'},
+      {"sort-by-name",		no_argument,		0, 'N'},
+      {"service",		no_argument,		0, 's'},
+      {"help",			no_argument,		0, 'h'},
       {0, 0, 0, 0}
     };
     specific_options = service_list_options;
