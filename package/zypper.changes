@@ -1,7 +1,14 @@
 -------------------------------------------------------------------
+Sun Apr 13 20:42:58 CEST 2014 - ma@suse.de
+
+- more duplicate short options fixes
+- Fix typo in manpage
+- version 1.11.3
+
+-------------------------------------------------------------------
 Fri Apr 11 15:06:28 CEST 2014 - ma@suse.de
 
-- packages: Remove conflicting short options (-r repo/reconmmends)
+- packages: Remove conflicting short options (-r repo/recommends)
 - version 1.11.2
 
 -------------------------------------------------------------------
