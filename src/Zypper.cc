@@ -56,6 +56,7 @@
 #include "locks.h"
 #include "search.h"
 #include "info.h"
+#include "download.h"
 #include "source-download.h"
 
 #include "output/OutNormal.h"
@@ -272,6 +273,7 @@ void print_main_help(Zypper & zypper)
     "\ttargetos, tos\t\tPrint the target operating system ID string.\n"
     "\tlicenses\t\tPrint report about licenses and EULAs of\n"
     "\t\t\t\tinstalled packages.\n"
+    "\tdownload\t\tDownload rpms specified on the commandline to a local directory.\n"
     "\tsource-download\t\tDownload source rpms for all installed packages\n"
     "\t\t\t\tto a local directory.\n"
   );
@@ -2438,6 +2440,40 @@ void Zypper::processCommandOptions()
       "List running processes which use files deleted by recent upgrades.\n"
       "\n"
       "This command has no additional options.\n"
+    );
+    break;
+  }
+
+
+  case ZypperCommand::DOWNLOAD_e:
+  {
+    shared_ptr<DownloadOptions> myOpts( new DownloadOptions() );
+    _commandOptions = myOpts;
+    static struct option options[] =
+    {
+      {"help",			no_argument,		0, 'h'},
+      {"all-matches",		no_argument,		&myOpts->_allmatches, 1},
+      {"dry-run",		no_argument,		&myOpts->_dryrun, 1},
+      {0, 0, 0, 0}
+    };
+    specific_options = options;
+    _command_help = _(
+      "download [options] <packages>...\n"
+      "\n"
+      "Download rpms specified on the commandline to a local directory.\n"
+      "Per default packages are downloaded to the libzypp package cache\n"
+      "(/var/cache/zypp/packages), but this can be changed by using the\n"
+      "global --pkg-cache-dir option.\n"
+      "In XML output a <download-result> node is written for each\n"
+      "package zypper tried to downlad. Upon success the local path is\n"
+      "is found in 'download-result/localpath@path'.\n"
+      "\n"
+      "  Command options:\n"
+      "--all-matches        Download all versions matching the commandline\n"
+      "                     arguments. Otherwise only the best version of\n"
+      "                     each matching package is downloaded.\n"
+      "--dry-run            Don't download any package, just report what\n"
+      "                     would be done.\n"
     );
     break;
   }
@@ -4863,6 +4899,36 @@ void Zypper::doCommand()
 
     break;
   }
+
+
+  case ZypperCommand::DOWNLOAD_e:
+  {
+    if (runningHelp()) { out().info(_command_help, Out::QUIET); return; }
+
+    if (_arguments.empty())
+    {
+      report_required_arg_missing(out(), _command_help);
+      setExitCode(ZYPPER_EXIT_ERR_INVALID_ARGS);
+      return;
+    }
+
+    init_target( *this );
+    initRepoManager();
+    init_repos( *this );
+    if ( exitCode() != ZYPPER_EXIT_OK )
+      return;
+    // now load resolvables:
+    load_resolvables( *this );
+
+    shared_ptr<DownloadOptions> myOpts( assertCommandOptions<DownloadOptions>() );
+
+    if ( _copts.count( "dry-run" ) )
+      myOpts->_dryrun = true;
+
+    download( *this );
+    break;
+  }
+
 
   case ZypperCommand::SOURCE_DOWNLOAD_e:
   {
