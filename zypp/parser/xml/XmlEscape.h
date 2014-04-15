@@ -29,8 +29,10 @@ namespace zypp
       {
 	EscapedString( const std::string & in_r ) : _in( in_r ) {}
 	std::ostream & dumpOn( std::ostream & str ) const;
-	operator std::string() const
+	std::string asString() const
 	{ std::ostringstream str; dumpOn( str ); return str.str(); }
+	operator std::string() const
+	{ return asString(); }
       private:
 	const std::string & _in;
       };
