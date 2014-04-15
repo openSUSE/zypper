@@ -13,6 +13,8 @@
 #include <zypp/Url.h>
 #include <zypp/TriBool.h>
 #include <zypp/ProgressData.h>
+#include <zypp/ZYppCallbacks.h>
+#include <zypp/base/LogTools.h>
 
 #include "utils/prompt.h"
 #include "output/prompt.h"
@@ -218,6 +220,9 @@ public:
 
   /** Convenience class for progress output. */
   class ProgressBar;
+
+  /** Convenience class for download progress output. */
+  class DownloadProgress;
 
   /**
    * Start of an operation with reported progress.
@@ -535,6 +540,76 @@ private:
   ProgressData _progress;
   std::string _progressId;
   std::string _labelPrefix;
+};
+///////////////////////////////////////////////////////////////////
+
+///////////////////////////////////////////////////////////////////
+/// \class Out::DownloadProgress
+/// \brief Listen on media::DownloadProgressReport to feed a ProgressBar.
+///
+/// Connect to media::DownloadProgressReport to feed a ProgressBar, but forward
+/// callbacks to any original receiver.
+///////////////////////////////////////////////////////////////////
+struct Out::DownloadProgress : public callback::ReceiveReport<media::DownloadProgressReport>
+{
+  DownloadProgress( Out::ProgressBar & progressbar_r )
+  : _progressbar( &progressbar_r )
+  , _oldReceiver( Distributor::instance().getReceiver() )
+  {
+    connect();
+  }
+
+  ~DownloadProgress()
+  {
+    if ( _oldReceiver )
+      Distributor::instance().setReceiver( *_oldReceiver );
+    else
+      Distributor::instance().noReceiver();
+  }
+
+  virtual void start( const Url & file, Pathname localfile )
+  {
+    (*_progressbar)->range( 100 );	// we'll receive %
+
+    if ( _oldReceiver )
+      _oldReceiver->start( file, localfile );
+  }
+
+  virtual bool progress( int value, const Url & file, double dbps_avg = -1, double dbps_current = -1 )
+  {
+    (*_progressbar)->set( value );
+
+    if ( _oldReceiver )
+      return _oldReceiver->progress( value, file, dbps_avg, dbps_current );
+    return true;
+  }
+
+  virtual Action problem( const Url & file, Error error, const std::string & description )
+  {
+    ERR << description << endl;
+
+    if ( _oldReceiver )
+      return _oldReceiver->problem( file, error, description );
+    return Receiver::problem( file, error, description );
+  }
+
+  virtual void finish( const Url & file, Error error, const std::string & reason )
+  {
+    if ( error == NO_ERROR )
+      (*_progressbar)->toMax();
+    else
+    {
+      ERR << reason << std::endl;
+      _progressbar->error();
+    }
+
+    if ( _oldReceiver )
+      _oldReceiver->finish( file, error, reason );
+  }
+
+private:
+  Out::ProgressBar * _progressbar;
+  Receiver * _oldReceiver;
 };
 ///////////////////////////////////////////////////////////////////
 
