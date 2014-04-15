@@ -29,6 +29,27 @@ namespace zypp
   { /////////////////////////////////////////////////////////////////
 
     ///////////////////////////////////////////////////////////////////
+    /// \class RepoProvidePackage
+    /// \short Default PackageProvider for \ref CommitPackageCache
+    ///
+    /// \p pool_r \ref ResPool used to get candidates
+    /// \p pi item to be commited
+    ///////////////////////////////////////////////////////////////////
+    class RepoProvidePackage
+    {
+    public:
+      RepoProvidePackage();
+      ~RepoProvidePackage();
+
+      /** Provide package optionally fron cache only. */
+      ManagedFile operator()( const PoolItem & pi, bool fromCache_r );
+
+    private:
+      struct Impl;
+      RW_pointer<Impl> _impl;
+    };
+
+    ///////////////////////////////////////////////////////////////////
     //
     //	CLASS NAME : CommitPackageCache
     //
@@ -44,7 +65,7 @@ namespace zypp
     public:
       /** Ctor */
       CommitPackageCache( const Pathname &        rootDir_r,
-                          const PackageProvider & packageProvider_r );
+                          const PackageProvider & packageProvider_r = RepoProvidePackage() );
 
       /** Dtor */
       ~CommitPackageCache();

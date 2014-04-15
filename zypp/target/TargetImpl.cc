@@ -51,8 +51,6 @@
 
 #include "zypp/solver/detail/Testcase.h"
 
-#include "zypp/repo/DeltaCandidates.h"
-#include "zypp/repo/PackageProvider.h"
 #include "zypp/repo/SrcPackageProvider.h"
 
 #include "zypp/sat/Pool.h"
@@ -744,59 +742,6 @@ namespace zypp
                              ZYppCommitResult & result_r )
     { RunUpdateMessages( root_r, messagesPath_r, checkPackages_r, result_r ); }
 
-    /** Helper for PackageProvider queries during commit. */
-    struct QueryInstalledEditionHelper
-    {
-      bool operator()( const std::string & name_r,
-                       const Edition &     ed_r,
-                       const Arch &        arch_r ) const
-      {
-        rpm::librpmDb::db_const_iterator it;
-        for ( it.findByName( name_r ); *it; ++it )
-          {
-            if ( arch_r == it->tag_arch()
-                 && ( ed_r == Edition::noedition || ed_r == it->tag_edition() ) )
-              {
-                return true;
-              }
-          }
-        return false;
-      }
-    };
-
-    /**
-     * \short Let the Source provide the package.
-     * \p pool_r \ref ResPool used to get candidates
-     * \p pi item to be commited
-    */
-    struct RepoProvidePackage
-    {
-      repo::RepoMediaAccess &_access;
-      std::list<Repository> _repos;
-      repo::PackageProviderPolicy _packageProviderPolicy;
-
-      RepoProvidePackage( repo::RepoMediaAccess &access, ResPool pool_r )
-      : _access(access), _repos( pool_r.knownRepositoriesBegin(), pool_r.knownRepositoriesEnd() )
-      {
-	_packageProviderPolicy.queryInstalledCB( QueryInstalledEditionHelper() );
-      }
-
-      ManagedFile operator()( const PoolItem & pi, bool fromCache_r )
-      {
-        Package::constPtr p = asKind<Package>(pi.resolvable());
-	if ( fromCache_r )
-	{
-	  repo::PackageProvider pkgProvider( _access, p, repo::DeltaCandidates(), _packageProviderPolicy );
-	  return pkgProvider.providePackageFromCache();
-	}
-	else
-	{
-	  repo::DeltaCandidates deltas( _repos, p->name() );
-	  repo::PackageProvider pkgProvider( _access, p, deltas, _packageProviderPolicy );
-	  return pkgProvider.providePackage();
-	}
-      }
-    };
     ///////////////////////////////////////////////////////////////////
 
     IMPL_PTR_TYPE(TargetImpl);
@@ -1356,9 +1301,7 @@ namespace zypp
       if ( ! policy_r.dryRun() || policy_r.downloadMode() == DownloadOnly )
       {
 	// Prepare the package cache. Pass all items requiring download.
-        repo::RepoMediaAccess access;
-        RepoProvidePackage repoProvidePackage( access, pool_r );
-        CommitPackageCache packageCache( root(), repoProvidePackage );
+        CommitPackageCache packageCache( root() );
 	packageCache.setCommitList( steps.begin(), steps.end() );
 
         bool miss = false;
