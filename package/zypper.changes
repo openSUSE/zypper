@@ -1,4 +1,10 @@
 -------------------------------------------------------------------
+Tue Apr 15 17:27:28 CEST 2014 - ma@suse.de
+
+- Add 'download' command (Fate#317077)
+- version 1.11.4
+
+-------------------------------------------------------------------
 Sun Apr 13 20:42:58 CEST 2014 - ma@suse.de
 
 - more duplicate short options fixes
