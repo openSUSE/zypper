@@ -1,4 +1,10 @@
 -------------------------------------------------------------------
+Tue Apr 15 17:03:30 CEST 2014 - ma@suse.de
+
+- Factor out CommitPackageCache for standalone usage. (Fate#317077)
+- version 14.17.5 (17)
+
+-------------------------------------------------------------------
 Fri Apr 11 16:16:11 CEST 2014 - ma@suse.de
 
 - history: log %posttrans errors and output
