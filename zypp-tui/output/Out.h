@@ -699,14 +699,20 @@ ZYPP_DECLARE_OPERATORS_FOR_FLAGS(Out::Type);
 class Out::ProgressBar : private zypp::base::NonCopyable
 {
 public:
-  /** Ctor displays initial progress bar.
+  /** Indicator type for ctor not drawing an initial start bar. */
+  struct NoStartBar {};
+  /** Indicator argument for ctor not drawing an initial start bar.*/
+  static constexpr NoStartBar noStartBar = NoStartBar();
+
+public:
+  /** Ctor not displaying an initial progress bar.
    * If non zero values for \a current_r or \a total_r are passed,
    * the label is prefixed by either "(#C)" or "(#C/#T)"
    */
-  ProgressBar( Out & out_r, const std::string & progressId_r, const std::string & label_r, unsigned current_r = 0, unsigned total_r = 0 )
-  : _out( out_r )
-  , _error( indeterminate )
-  , _progressId( progressId_r )
+  ProgressBar( Out & out_r, NoStartBar, const std::string & progressId_r, const std::string & label_r, unsigned current_r = 0, unsigned total_r = 0 )
+    : _out( out_r )
+    , _error( indeterminate )
+    , _progressId( progressId_r )
   {
     if ( total_r )
       _labelPrefix = zypp::str::form( "(%*u/%u) ", numDigits( total_r ), current_r, total_r );
@@ -714,6 +720,28 @@ public:
       _labelPrefix = zypp::str::form( "(%u) ", current_r );
     _progress.name( label_r );
     _progress.sendTo( Print( *this ) );
+  }
+  ProgressBar( Out & out_r, NoStartBar, const std::string & progressId_r, const boost::format & label_r, unsigned current_r = 0, unsigned total_r = 0 )
+  : ProgressBar( out_r, noStartBar, progressId_r, label_r.str(), current_r, total_r )
+  {}
+
+  ProgressBar( Out & out_r,NoStartBar,  const std::string & label_r, unsigned current_r = 0, unsigned total_r = 0 )
+  : ProgressBar( out_r, noStartBar, "", label_r, current_r, total_r )
+  {}
+
+  ProgressBar( Out & out_r, NoStartBar, const boost::format & label_r, unsigned current_r = 0, unsigned total_r = 0 )
+  : ProgressBar( out_r, noStartBar, "", label_r.str(), current_r, total_r )
+  {}
+
+
+  /** Ctor displays initial progress bar.
+   * If non zero values for \a current_r or \a total_r are passed,
+   * the label is prefixed by either "(#C)" or "(#C/#T)"
+   */
+  ProgressBar( Out & out_r, const std::string & progressId_r, const std::string & label_r, unsigned current_r = 0, unsigned total_r = 0 )
+  : ProgressBar( out_r, noStartBar, progressId_r, label_r, current_r, total_r )
+  {
+    // print the initial progress bar
     _out.progressStart( _progressId, outLabel( _progress.name() ) );
   }
 
