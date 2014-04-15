@@ -337,8 +337,8 @@ namespace zypp
     std::ostream & dumpAsXmlOn( std::ostream & str, const Repository & obj )
     {
       return xmlout::node( str, "repository", {
-	{ "alias", obj.name() },
-	{ "name", obj.alias() }
+	{ "name", obj.name() },
+	{ "alias", obj.alias() }
       } );
     }
 
