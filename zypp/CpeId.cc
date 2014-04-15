@@ -9,6 +9,7 @@
 /** \file	zypp/CpeId.cc
  */
 #include <iostream>
+#include <array>
 
 #include "zypp/base/String.h"
 #include "zypp/base/LogTools.h"
