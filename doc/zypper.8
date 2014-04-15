@@ -1627,6 +1627,31 @@ This command can be useful for companies redistributiong a custom
 distribution (like appliances) to figure out what licenses they are bound by.
 
 .TP
+.B download
+Download rpms specified on the commandline to a local directory.
+
+Per default packages are downloaded to the libzypp package cache
+(/var/cache/zypp/packages), but this can be changed by using the
+global \fI--pkg-cache-dir\fR option.
+
+In XML output a \fB<download-result>\fR node is written for each
+package zypper tried to downlad. Upon success the local path is
+is found in \fBdownload-result/localpath@path\fR.
+
+.TP
+.I \-d, \-\-directory <dir>
+Download all source rpms to this directory. Default is \fB/var/cache/zypper/source-download\fR.
+
+.TP
+.I \-\-all-matches
+Download all versions matching the commandline arguments. Otherwise only the best version of
+each matching package is downloaded.
+
+.TP
+.I \-\-dry-run
+Don't download any package, just report what would be done.
+
+.TP
 .B source-download
 Download source rpms for all installed packages to a local directory.
 
