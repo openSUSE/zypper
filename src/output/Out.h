@@ -339,7 +339,14 @@ public:
   void setVerbosity(Verbosity verbosity) { _verbosity = verbosity; }
 
   /** Return the type of the instance. */
-  Type type() { return _type; }
+  Type type() const { return _type; }
+
+  /** Test for a specific type */
+  bool type( Type type_r ) const { return type() == type_r; }
+  /** \overload test for TYPE_NORMAL */
+  bool typeNORMAL() const { return type( TYPE_NORMAL ); }
+  /** \overload test for TPE_XML */
+  bool typeXML() const { return type( TYPE_XML ); }
 
 protected:
   /**
