@@ -4,6 +4,7 @@
 #include <string>
 #include <boost/format.hpp>
 
+#include <zypp/base/Xml.h>
 #include <zypp/base/NonCopyable.h>
 #include <zypp/base/Exception.h>
 #include <zypp/base/String.h>
@@ -16,9 +17,7 @@
 #include "utils/prompt.h"
 #include "output/prompt.h"
 
-using zypp::tribool;
-using zypp::indeterminate;
-using zypp::ProgressData;
+using namespace zypp;
 
 class Table;
 class Zypper;
