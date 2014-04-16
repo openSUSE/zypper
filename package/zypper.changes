@@ -1,4 +1,10 @@
 -------------------------------------------------------------------
+Wed Apr 16 13:20:57 CEST 2014 - ma@suse.de
+
+- Add 'download' command (Fate#317077)
+- version 1.9.14
+
+-------------------------------------------------------------------
 Fri Apr 11 15:20:37 CEST 2014 - ma@suse.de
 
 - packages: Remove conflicting short options (-r repo/reconmmends)
