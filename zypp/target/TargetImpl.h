@@ -27,7 +27,6 @@
 #include "zypp/target/rpm/RpmDb.h"
 #include "zypp/target/TargetException.h"
 #include "zypp/target/RequestedLocalesFile.h"
-#include "zypp/target/SoftLocksFile.h"
 #include "zypp/target/HardLocksFile.h"
 #include "zypp/ManagedFile.h"
 
@@ -210,8 +209,6 @@ namespace zypp
       rpm::RpmDb _rpm;
       /** Requested Locales database */
       RequestedLocalesFile _requestedLocalesFile;
-      /** Soft-locks database */
-      SoftLocksFile _softLocksFile;
       /** Hard-Locks database */
       HardLocksFile _hardLocksFile;
       /** Cache distributionVersion */

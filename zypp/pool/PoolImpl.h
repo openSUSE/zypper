@@ -298,72 +298,6 @@ namespace zypp
           return setChanged;
        }
 
-#ifdef WITHSOFTLOCKS
-      public:
-        typedef PoolTraits::AutoSoftLocks          AutoSoftLocks;
-        typedef PoolTraits::autoSoftLocks_iterator autoSoftLocks_iterator;
-
-        const AutoSoftLocks & autoSoftLocks() const
-        { return _autoSoftLocks; }
-
-        bool autoSoftLockAppliesTo( sat::Solvable solv_r ) const
-        { return( _autoSoftLocks.find( solv_r.ident() ) != _autoSoftLocks.end() ); }
-
-        void setAutoSoftLocks( const AutoSoftLocks & newLocks_r )
-        {
-          MIL << "Apply " << newLocks_r.size() << " AutoSoftLocks: " << newLocks_r << endl;
-          _autoSoftLocks = newLocks_r;
-          // now adjust the pool status
-          for_( it, begin(), end() )
-          {
-            if ( ! it->status().isKept() )
-              continue;
-
-            if ( autoSoftLockAppliesTo( it->satSolvable() ) )
-              it->status().setSoftLock( ResStatus::USER );
-            else
-              it->status().resetTransact( ResStatus::USER );
-          }
-        }
-
-        void getActiveSoftLocks( AutoSoftLocks & activeLocks_r )
-        {
-          activeLocks_r = _autoSoftLocks; // current soft-locks
-          AutoSoftLocks todel;            // + names to be deleted
-          AutoSoftLocks toins;            // - names to be installed
-
-          for_( it, begin(), end() )
-          {
-            ResStatus & status( it->status() );
-            if ( ! ( status.isByUser() || status.isByApplLow() ) )
-              continue; // ignore non-user requests; ApplLow means selected
-                        // by solver, but on behalf of a user request.
-
-            switch ( status.getTransactValue() )
-            {
-              case ResStatus::KEEP_STATE:
-                // Filter only items included in the last recommended set.
-                if ( status.isRecommended() )
-                  activeLocks_r.insert( it->satSolvable().ident() );
-                break;
-              case ResStatus::LOCKED:
-                //  NOOP
-                break;
-              case ResStatus::TRANSACT:
-                (status.isInstalled() ? todel : toins).insert( it->satSolvable().ident() );
-                break;
-            }
-          }
-          for_( it, todel.begin(), todel.end() )
-          {
-            activeLocks_r.insert( *it );
-          }
-          for_( it, toins.begin(), toins.end() )
-          {
-            activeLocks_r.erase( *it );
-          }
-        }
-#endif
       public:
         const ContainerT & store() const
         {
@@ -394,13 +328,6 @@ namespace zypp
                   // remember products for buddy processing (requires clean store)
                   if ( s.isKind( ResKind::product ) )
                     addedProducts.push_back( pi );
-#ifdef WITHSOFTLOCKS
-                  // and on the fly check for weak locks...
-                  if ( autoSoftLockAppliesTo( s ) )
-                  {
-                    pi.status().setSoftLock( ResStatus::USER );
-                  }
-#endif
                   if ( !addedItems )
                     addedItems = true;
                 }
@@ -480,10 +407,6 @@ namespace zypp
         mutable shared_ptr<ResPoolProxy>      _poolProxy;
 
       private:
-#ifdef WITHSOFTLOCKS
-        /** Set of solvable idents that should be soft locked per default. */
-        AutoSoftLocks                         _autoSoftLocks;
-#endif
         /** Set of queries that define hardlocks. */
         HardLockQueries                       _hardLockQueries;
     };

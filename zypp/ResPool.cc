@@ -83,26 +83,6 @@ namespace zypp
   Repository ResPool::reposFind( const std::string & alias_r ) const
   { return _pimpl->reposFind( alias_r ); }
 
-#ifdef WITHSOFTLOCKS
-  bool ResPool::autoSoftLocksEmpty() const
-  { return _pimpl->autoSoftLocks().empty(); }
-
-  ResPool::size_type ResPool::autoSoftLocksSize() const
-  { return _pimpl->autoSoftLocks().size(); }
-
-  ResPool::autoSoftLocks_iterator ResPool::autoSoftLocksBegin() const
-  { return _pimpl->autoSoftLocks().begin(); }
-
-  ResPool::autoSoftLocks_iterator ResPool::autoSoftLocksEnd() const
-  { return _pimpl->autoSoftLocks().end(); }
-
-  void ResPool::setAutoSoftLocks( const AutoSoftLocks & newLocks_r )
-  { _pimpl->setAutoSoftLocks( newLocks_r ); }
-
-  void ResPool::getActiveSoftLocks( AutoSoftLocks & activeLocks_r )
-  { _pimpl->getActiveSoftLocks( activeLocks_r ); }
-#endif
-
   bool ResPool::hardLockQueriesEmpty() const
   { return _pimpl->hardLockQueries().empty(); }
 

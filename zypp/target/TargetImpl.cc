@@ -764,7 +764,6 @@ namespace zypp
     TargetImpl::TargetImpl( const Pathname & root_r, bool doRebuild_r )
     : _root( root_r )
     , _requestedLocalesFile( home() / "RequestedLocales" )
-    , _softLocksFile( home() / "SoftLocks" )
     , _hardLocksFile( Pathname::assertprefix( _root, ZConfig::instance().locksFile() ) )
     {
       _rpm.initDatabase( root_r, Pathname(), doRebuild_r );
@@ -1122,20 +1121,8 @@ namespace zypp
           satpool.setRequestedLocales( requestedLocales );
         }
       }
-#ifdef WITHSOFTLOCKS
       {
-        SoftLocksFile::Data softLocks( _softLocksFile.data() );
-        if ( ! softLocks.empty() )
-        {
-          // Don't soft lock any installed item.
-          for_( it, system.solvablesBegin(), system.solvablesEnd() )
-          {
-            softLocks.erase( it->ident() );
-          }
-          ResPool::instance().setAutoSoftLocks( softLocks );
-        }
       }
-#endif
       if ( ZConfig::instance().apply_locks_file() )
       {
         const HardLocksFile::Data & hardLocks( _hardLocksFile.data() );
@@ -1240,14 +1227,8 @@ namespace zypp
         filesystem::assert_dir( home() );
         // requested locales
         _requestedLocalesFile.setLocales( pool_r.getRequestedLocales() );
-#ifdef WITHSOFTLOCKS
-	// weak locks
         {
-          SoftLocksFile::Data newdata;
-          pool_r.getActiveSoftLocks( newdata );
-          _softLocksFile.setData( newdata );
         }
-#endif
         // hard locks
         if ( ZConfig::instance().apply_locks_file() )
         {

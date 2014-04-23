@@ -84,12 +84,6 @@ namespace zypp
       /** list of known Repositories */
       typedef sat::Pool::RepositoryIterator	        repository_iterator;
 
-#ifdef WITHSOFTLOCKS
-      /** soft locks */
-      typedef std::tr1::unordered_set<IdString>		AutoSoftLocks;
-      typedef AutoSoftLocks::const_iterator             autoSoftLocks_iterator;
-#endif
-
       /** hard locks from etc/zypp/locks */
       typedef std::list<PoolQuery>			HardLockQueries;
       typedef HardLockQueries::const_iterator		hardLockQueries_iterator;
