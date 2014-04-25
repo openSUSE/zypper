@@ -139,7 +139,7 @@ Config::Config()
   , color_result     ("white")  // default colors for dark background
   , color_msgStatus  ("grey")   // if background is actually light, these
   , color_msgError   ("red")    // colors will be overwritten in read()
-  , color_msgWarning ("yellow")
+  , color_msgWarning ("purple")
   , color_positive   ("green")
   , color_negative   ("red")
   , color_highlight  ("cyan")
@@ -242,13 +242,7 @@ void Config::read(const string & file)
     ////// color/colorMsgWarning //////
 
     c = Color(augeas.getOption(ConfigOption::COLOR_MSG_WARNING.asString()));
-    if (c.value().empty())
-    {
-      // set a default for light background
-      if (color_background)
-        color_msgWarning = Color("brown");
-    }
-    else
+    if (!c.value().empty())
       color_msgWarning = c;
 
     ////// color/colorPositive //////
