@@ -318,6 +318,7 @@ void print_command_help_hint(Zypper & zypper)
       % (zypper.runningShell() ? "help <command>" : "zypper help <command>")));
 }
 
+/// \todo use it in all commands!
 int Zypper::defaultLoadSystem( LoadSystemFlags flags_r )
 {
   DBG << "FLAGS:" << flags_r << endl;
@@ -3591,7 +3592,7 @@ void Zypper::doCommand()
       throw ExitRequestException("not implemented");
     }
 
-   // parse the download options to check for errors
+    // parse the download options to check for errors
     get_download_option(*this);
 
     initRepoManager();
@@ -3705,9 +3706,14 @@ void Zypper::doCommand()
 
     if ( _rdata.repos.empty() )
     {
-      out().error(_("Warning: No repositories defined."
+      out().warning(_("No repositories defined."
           " Operating only with the installed resolvables."
           " Nothing can be installed."));
+      if ( command() == ZypperCommand::INSTALL )
+      {
+	setExitCode(ZYPPER_EXIT_NO_REPOS);
+	return;
+      }
     }
 
     // prepare target
@@ -3843,7 +3849,7 @@ void Zypper::doCommand()
 
     if ( _rdata.repos.empty() )
     {
-      out().error(_("Warning: No repositories defined."
+      out().warning(_("No repositories defined."
           " Operating only with the installed resolvables."
           " Nothing can be installed."));
     }

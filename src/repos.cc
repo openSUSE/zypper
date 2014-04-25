@@ -1014,9 +1014,11 @@ static void print_repo_list(Zypper & zypper,
     tbl << tr;
   }
 
-  if (tbl.empty())
-    zypper.out().info(_("No repositories defined."
-        " Use the 'zypper addrepo' command to add one or more repositories."));
+  if (tbl.empty()) {
+    zypper.out().warning(_("No repositories defined."));
+    zypper.out().info(_("Use the 'zypper addrepo' command to add one or more repositories."));
+    zypper.setExitCode(ZYPPER_EXIT_NO_REPOS);
+  }
   else
   {
     // sort
@@ -1287,13 +1289,12 @@ void refresh_repos(Zypper & zypper)
   // print the result message
   if (enabled_repo_count == 0)
   {
-    string hint = str::form(
-        _("Use '%s' or '%s' commands to add or enable repositories."),
-        "zypper addrepo", "zypper modifyrepo");
     if (!specified.empty() || !not_found.empty())
-      zypper.out().error(_("Specified repositories are not enabled or defined."), hint);
+      zypper.out().warning(_("Specified repositories are not enabled or defined."));
     else
-      zypper.out().error(_("There are no enabled repositories defined."), hint);
+      zypper.out().warning(_("There are no enabled repositories defined."));
+    zypper.out().info(str::form(_("Use '%s' or '%s' commands to add or enable repositories."),
+				  "zypper addrepo", "zypper modifyrepo"));
   }
   else if (error_count == enabled_repo_count)
   {
@@ -2754,7 +2755,8 @@ static bool refresh_service(Zypper & zypper, const ServiceInfo & service)
     zypper.out().error(e,
       str::form(
         _("Problem retrieving the repository index file for service '%s':"),
-         (zypper.config().show_alias ? service.alias().c_str() : service.name().c_str())),
+         (zypper.config().show_alias ? service.alias().c_str() : service.name().c_str())));
+    zypper.out().warning(
       str::form(
         _("Skipping service '%s' because of the above error."),
 	 (zypper.config().show_alias ? service.alias().c_str() : service.name().c_str())));
@@ -3193,6 +3195,7 @@ void load_resolvables(Zypper & zypper)
   load_repo_resolvables(zypper);
   if (!zypper.globalOpts().disable_system_resolvables)
     load_target_resolvables(zypper);
+
 
   done = true;
   MIL << "Done loading resolvables" << endl;
