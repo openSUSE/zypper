@@ -764,6 +764,7 @@ namespace zypp
     TargetImpl::TargetImpl( const Pathname & root_r, bool doRebuild_r )
     : _root( root_r )
     , _requestedLocalesFile( home() / "RequestedLocales" )
+    , _autoInstalledFile( home() / "AutoInstalled" )
     , _hardLocksFile( Pathname::assertprefix( _root, ZConfig::instance().locksFile() ) )
     {
       _rpm.initDatabase( root_r, Pathname(), doRebuild_r );
@@ -1122,6 +1123,10 @@ namespace zypp
         }
       }
       {
+	sat::StringQueue q;
+	for ( const auto & idstr : _autoInstalledFile.data() )
+	  q.push( idstr.id() );
+	satpool.setAutoInstalled( q );
       }
       if ( ZConfig::instance().apply_locks_file() )
       {
@@ -1227,7 +1232,12 @@ namespace zypp
         filesystem::assert_dir( home() );
         // requested locales
         _requestedLocalesFile.setLocales( pool_r.getRequestedLocales() );
+	// autoinstalled
         {
+	  SolvIdentFile::Data newdata;
+	  for ( sat::Queue::value_type id : result.rTransaction().autoInstalled() )
+	    newdata.insert( IdString(id) );
+	  _autoInstalledFile.setData( newdata );
         }
         // hard locks
         if ( ZConfig::instance().apply_locks_file() )
