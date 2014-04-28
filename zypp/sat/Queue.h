@@ -26,9 +26,14 @@ namespace zypp
   ///////////////////////////////////////////////////////////////////
   namespace sat
   {
+    class Queue;
+    typedef Queue SolvableQueue;	///< Queue with Solvable ids
+    typedef Queue StringQueue;		///< Queue with String ids
+
     ///////////////////////////////////////////////////////////////////
     /// \class Queue
     /// \brief Libsolv Id queue wrapper.
+    /// \todo template value_type to work with IString and other Id based types
     ///////////////////////////////////////////////////////////////////
     class Queue
     {
