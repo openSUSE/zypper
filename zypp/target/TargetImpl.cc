@@ -155,9 +155,70 @@ namespace zypp
     }
   } // namespace json
   ///////////////////////////////////////////////////////////////////
+
   ///////////////////////////////////////////////////////////////////
   namespace target
-  { /////////////////////////////////////////////////////////////////
+  {
+    ///////////////////////////////////////////////////////////////////
+    namespace
+    {
+      SolvIdentFile::Data getUserInstalledFromHistory( const Pathname & historyFile_r )
+      {
+	SolvIdentFile::Data onSystemByUserList;
+	// go and parse it: 'who' must constain an '@', then it was installed by user request.
+	// 2009-09-29 07:25:19|install|lirc-remotes|0.8.5-3.2|x86_64|root@opensuse|InstallationImage|a204211eb0...
+	std::ifstream infile( historyFile_r.c_str() );
+	for( iostr::EachLine in( infile ); in; in.next() )
+	{
+	  const char * ch( (*in).c_str() );
+	  // start with year
+	  if ( *ch < '1' || '9' < *ch )
+	    continue;
+	  const char * sep1 = ::strchr( ch, '|' );	// | after date
+	  if ( !sep1 )
+	    continue;
+	  ++sep1;
+	  // if logs an install or delete
+	  bool installs = true;
+	  if ( ::strncmp( sep1, "install|", 8 ) )
+	  {
+	    if ( ::strncmp( sep1, "remove |", 8 ) )
+	      continue; // no install and no remove
+	      else
+		installs = false; // remove
+	  }
+	  sep1 += 8;					// | after what
+	  // get the package name
+	  const char * sep2 = ::strchr( sep1, '|' );	// | after name
+	  if ( !sep2 || sep1 == sep2 )
+	    continue;
+	  (*in)[sep2-ch] = '\0';
+	  IdString pkg( sep1 );
+	  // we're done, if a delete
+	  if ( !installs )
+	  {
+	    onSystemByUserList.erase( pkg );
+	    continue;
+	  }
+	  // now guess whether user installed or not (3rd next field contains 'user@host')
+	  if ( (sep1 = ::strchr( sep2+1, '|' ))		// | after version
+	    && (sep1 = ::strchr( sep1+1, '|' ))		// | after arch
+	    && (sep2 = ::strchr( sep1+1, '|' )) )	// | after who
+	  {
+	    (*in)[sep2-ch] = '\0';
+	    if ( ::strchr( sep1+1, '@' ) )
+	    {
+	      // by user
+	      onSystemByUserList.insert( pkg );
+	      continue;
+	    }
+	  }
+	}
+	MIL << "onSystemByUserList found: " << onSystemByUserList.size() << endl;
+	return onSystemByUserList;
+      }
+    } // namespace
+    ///////////////////////////////////////////////////////////////////
 
     /** Helper for commit plugin execution.
      * \ingroup g_RAII
@@ -1123,6 +1184,26 @@ namespace zypp
         }
       }
       {
+	if ( ! PathInfo( _autoInstalledFile.file() ).isExist() )
+	{
+	  // Initialize from history, if it does not exist
+	  Pathname historyFile( Pathname::assertprefix( _root, ZConfig::instance().historyLogFile() ) );
+	  if ( PathInfo( historyFile ).isExist() )
+	  {
+	    SolvIdentFile::Data onSystemByUser( getUserInstalledFromHistory( historyFile ) );
+	    SolvIdentFile::Data onSystemByAuto;
+	    for_( it, system.solvablesBegin(), system.solvablesEnd() )
+	    {
+	      IdString ident( (*it).ident() );
+	      if ( onSystemByUser.find( ident ) == onSystemByUser.end() )
+		onSystemByAuto.insert( ident );
+	    }
+	    _autoInstalledFile.setData( onSystemByAuto );
+	  }
+	  // on the fly removed any obsolete SoftLocks file
+	  filesystem::unlink( home() / "SoftLocks" );
+	}
+	// read from AutoInstalled file
 	sat::StringQueue q;
 	for ( const auto & idstr : _autoInstalledFile.data() )
 	  q.push( idstr.id() );
