@@ -19,6 +19,7 @@
 #include "zypp/sat/detail/PoolMember.h"
 #include "zypp/Repository.h"
 #include "zypp/sat/WhatProvides.h"
+#include "zypp/sat/Queue.h"
 
 ///////////////////////////////////////////////////////////////////
 namespace zypp
@@ -226,18 +227,12 @@ namespace zypp
         //@}
 
       public:
-        /** \name Installed on behalf of a user request hint.
-	 * This is a hint guessed by evaluating an available install history.
-         */
+        /** \name Autoinstalled */
         //@{
-        typedef IdStringSet::const_iterator OnSystemByUserIterator;
-
-        bool onSystemByUserEmpty() const;
-        size_t onSystemByUserSize() const;
-        OnSystemByUserIterator onSystemByUserBegin() const;
-        OnSystemByUserIterator onSystemByUserEnd() const;
-
-        bool isOnSystemByUser( IdString ident_r ) const;
+        /** Get ident list of all autoinstalled solvables. */
+	Queue autoInstalled() const;
+	/** Set ident list of all autoinstalled solvables. */
+	void setAutoInstalled( const Queue & autoInstalled_r );
         //@}
 
       public:

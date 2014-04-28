@@ -25,6 +25,7 @@ extern "C"
 #include "zypp/base/NonCopyable.h"
 #include "zypp/base/SerialNumber.h"
 #include "zypp/sat/detail/PoolMember.h"
+#include "zypp/sat/Queue.h"
 #include "zypp/RepoInfo.h"
 #include "zypp/Locale.h"
 #include "zypp/Capability.h"
@@ -247,20 +248,16 @@ namespace zypp
         public:
           /** \name Installed on behalf of a user request hint. */
           //@{
-          typedef IdStringSet OnSystemByUserList;
+          /** Get ident list of all autoinstalled solvables. */
+	  StringQueue autoInstalled() const
+	  { return _autoinstalled; }
 
-          const OnSystemByUserList & onSystemByUserList() const
-          {
-            if ( ! _onSystemByUserListPtr )
-	      onSystemByUserListInit();
-	    return *_onSystemByUserListPtr;
-          }
+	  /** Set ident list of all autoinstalled solvables. */
+	  void setAutoInstalled( const StringQueue & autoInstalled_r )
+	  { _autoinstalled = autoInstalled_r; }
 
           bool isOnSystemByUser( IdString ident_r ) const
-          {
-            const OnSystemByUserList & l( onSystemByUserList() );
-            return l.find( ident_r ) != l.end();
-          }
+          { return !_autoinstalled.contains( ident_r.id() ); }
           //@}
 
 	public:
@@ -287,8 +284,7 @@ namespace zypp
           mutable scoped_ptr<MultiversionList> _multiversionListPtr;
 
           /**  */
-          void onSystemByUserListInit() const;
-          mutable scoped_ptr<OnSystemByUserList> _onSystemByUserListPtr;
+	  sat::StringQueue _autoinstalled;
 
 	  /** filesystems mentioned in /etc/sysconfig/storage */
 	  mutable scoped_ptr<std::set<std::string> > _requiredFilesystemsPtr;
