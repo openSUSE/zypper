@@ -663,15 +663,7 @@ SATResolver::solverInit(const PoolItemList & weakItems)
       queue_push( &(_jobQueue), it->id() );
     }
 
-    if ( cleandepsOnRemove() )
-    {
-      // Add all items known to be installed by user request (not solver selected).
-      for_( it, sat::Pool::instance().onSystemByUserBegin(), sat::Pool::instance().onSystemByUserEnd() )
-      {
-	queue_push( &(_jobQueue), SOLVER_USERINSTALLED | SOLVER_SOLVABLE_NAME );
-	queue_push( &(_jobQueue), it->id() );
-      }
-    }
+    ::pool_add_userinstalled_jobs(_SATPool, sat::Pool::instance().autoInstalled(), &(_jobQueue), GET_USERINSTALLED_NAMES|GET_USERINSTALLED_INVERTED);
 
     if ( _distupgrade )
     {
