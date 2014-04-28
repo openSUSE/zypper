@@ -1483,6 +1483,22 @@ void SATResolver::setSystemRequirements()
     }
 }
 
+sat::StringQueue SATResolver::autoInstalled() const
+{
+  sat::StringQueue ret;
+  if ( _solv )
+    ::solver_get_userinstalled( _solv, ret, GET_USERINSTALLED_NAMES|GET_USERINSTALLED_INVERTED );
+  return ret;
+}
+
+sat::StringQueue SATResolver::userInstalled() const
+{
+  sat::StringQueue ret;
+  if ( _solv )
+    ::solver_get_userinstalled( _solv, ret, GET_USERINSTALLED_NAMES );
+  return ret;
+}
+
 
 ///////////////////////////////////////////////////////////////////
 };// namespace detail

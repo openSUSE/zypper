@@ -361,7 +361,10 @@ bool Resolver::resolveQueue( solver::detail::SolverQueueItemList & queue )
 
 sat::Transaction Resolver::getTransaction()
 {
-  return sat::Transaction( sat::Transaction::loadFromPool );
+  // FIXME: That's an ugly way of pushing autoInstalled into the transaction.
+  sat::Transaction ret( sat::Transaction::loadFromPool );
+  ret.autoInstalled( _satResolver->autoInstalled() );
+  return ret;
 }
 
 

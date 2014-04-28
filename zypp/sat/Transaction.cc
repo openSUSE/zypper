@@ -189,6 +189,12 @@ namespace zypp
 	int installedResult( Queue & result_r ) const
 	{ return ::transaction_installedresult( _trans, result_r ); }
 
+	StringQueue autoInstalled() const
+	{ return _autoInstalled; }
+
+	void autoInstalled( const StringQueue & queue_r )
+	{ _autoInstalled = queue_r; }
+
       public:
 	StepType stepType( Solvable solv_r ) const
 	{
@@ -281,6 +287,8 @@ namespace zypp
 	set_type	_systemErase;	// @System packages to be eased (otherse are TRANSACTION_IGNORE)
 	pmmap_type	_pmMap;		// Post mortem data of deleted @System solvables
 
+	StringQueue	_autoInstalled;	// ident strings of all packages that would be auto-installed after the transaction is run.
+
       public:
         /** Offer default Impl. */
         static shared_ptr<Impl> nullimpl()
@@ -346,6 +354,11 @@ namespace zypp
     int Transaction::installedResult( Queue & result_r ) const
     { return _pimpl->installedResult( result_r ); }
 
+    StringQueue Transaction::autoInstalled() const
+    { return _pimpl->autoInstalled(); }
+
+    void Transaction::autoInstalled( const StringQueue & queue_r )
+    { _pimpl->autoInstalled( queue_r ); }
 
     std::ostream & operator<<( std::ostream & str, const Transaction & obj )
     { return str << *obj._pimpl; }

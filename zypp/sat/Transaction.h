@@ -24,6 +24,7 @@ extern "C"
 
 #include "zypp/sat/SolvIterMixin.h"
 #include "zypp/sat/Solvable.h"
+#include "zypp/sat/Queue.h"
 
 #include "zypp/PoolItem.h"
 
@@ -33,8 +34,6 @@ namespace zypp
   ///////////////////////////////////////////////////////////////////
   namespace sat
   { /////////////////////////////////////////////////////////////////
-
-    class Queue;
 
     namespace detail
     {
@@ -177,6 +176,12 @@ namespace zypp
 	 * The new packages are put at the head of the queue, the number of new
 	 * packages is returned. (wraps libsolv::transaction_installedresult) */
 	int installedResult( Queue & result_r ) const;
+
+	/** Return the ident strings of all packages that would be auto-installed after the transaction is run. */
+	StringQueue autoInstalled() const;
+
+	/** Set the ident strings of all packages that would be auto-installed after the transaction is run. */
+	void autoInstalled( const StringQueue & queue_r );
 
       public:
         /** Implementation  */

@@ -216,6 +216,8 @@ class SATResolver : public base::ReferenceCounted, private base::NonCopyable {
     PoolItemList resultItemsToRemove () { return _result_items_to_remove; }
     PoolItemList problematicUpdateItems() { return _problem_items; }
 
+    sat::StringQueue autoInstalled() const;
+    sat::StringQueue userInstalled() const;
 };
 
 ///////////////////////////////////////////////////////////////////
