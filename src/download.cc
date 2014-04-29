@@ -52,6 +52,30 @@ namespace
   };
   ///////////////////////////////////////////////////////////////////
 
+  inline void logXmlResult( const PoolItem & pi_r, const Pathname & localfile_r )
+  {
+    //   <download-result>
+    //     <solvable>
+    //       <kind>package</kind>
+    //       <name>glibc</name>
+    //       <edition epoch="0" version="2.18" release="4.11.1"/>
+    //       <arch>i586</arch>
+    //       <repository name="repo-oss-update" alias="repo-oss-update (13.1)"/>
+    //     </solvable>
+    //     <localfile path="/tmp/chroot/repo-oss-update/i586/glibc-2.18-4.11.1.i586.rpm"/>
+    //     <!-- <localfile/> on error -->
+    //   </download-result>
+    xmlout::Node guard( cout, "download-result" );
+    dumpAsXmlOn( *guard, pi_r.satSolvable() );
+    {
+      if ( localfile_r.empty() )
+	xmlout::Node( *guard, "localfile", xmlout::Node::optionalContent );
+      else
+	xmlout::Node( *guard, "localfile", xmlout::Node::optionalContent,
+		      { "path", xml::escape( localfile_r.asString() ) } );
+    }
+  }
+
   void DownloadImpl::download()
   {
     typedef ui::SelectableTraits::AvailableItemSet AvailableItemSet;
@@ -168,28 +192,7 @@ namespace
 	    //DBG << localfile << endl;
 	    localfile.resetDispose();
 	    if ( _zypper.out().typeXML() )
-	    {
-	      //   <download-result>
-	      //     <solvable>
-	      //       <kind>package</kind>
-	      //       <name>glibc</name>
-	      //       <edition epoch="0" version="2.18" release="4.11.1"/>
-	      //       <arch>i586</arch>
-	      //       <repository name="repo-oss-update" alias="repo-oss-update (13.1)"/>
-	      //     </solvable>
-	      //     <localfile path="/tmp/chroot/repo-oss-update/i586/glibc-2.18-4.11.1.i586.rpm"/>
-	      //     <!-- <localfile/> on error -->
-	      //   </download-result>
-	      xmlout::Node guard( cout, "download-result" );
-	      dumpAsXmlOn( *guard, pi.satSolvable() );
-	      {
-		if ( localfile->empty() )
-		  xmlout::Node( *guard, "localfile", xmlout::Node::optionalContent );
-		else
-		  xmlout::Node( *guard, "localfile", xmlout::Node::optionalContent,
-				{ "path", xml::escape( localfile->asString() ) } );
-	      }
-	    }
+	      logXmlResult( pi, localfile );
 
 	    if ( _zypper.exitRequested() )
 	      throw( Out::Error( ZYPPER_EXIT_ON_SIGNAL ) );
@@ -197,7 +200,10 @@ namespace
 	}
 	else
 	{
-	  Out::ProgressBar report( _zypper.out(), pkg->cachedLocation().asString(), current, total );
+	  const Pathname &  localfile( pkg->cachedLocation() );
+	  Out::ProgressBar report( _zypper.out(), localfile.asString(), current, total );
+	  if ( _zypper.out().typeXML() )
+	    logXmlResult( pi, localfile );
 	}
 
 	if ( !_options->_allmatches )
@@ -212,7 +218,6 @@ namespace
     else
       _zypper.out().info(_("Done.") );
   }
-
 
 } // namespace
 ///////////////////////////////////////////////////////////////////
