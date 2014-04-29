@@ -1,4 +1,10 @@
 -------------------------------------------------------------------
+Tue Apr 29 12:01:05 CEST 2014 - ma@suse.de
+
+- download: fix xml output when already cached
+- version 1.11.5
+
+-------------------------------------------------------------------
 Tue Apr 15 17:27:28 CEST 2014 - ma@suse.de
 
 - Add 'download' command (Fate#317077)
