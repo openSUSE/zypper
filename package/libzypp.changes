@@ -1,4 +1,9 @@
 -------------------------------------------------------------------
+Thu May  1 01:15:38 CEST 2014 - ma@suse.de
+
+- Update zypp-po.tar.bz2
+
+-------------------------------------------------------------------
 Mon Apr 28 15:34:44 CEST 2014 - ma@suse.de
 
 - Derive initial AutoInstalled file from history
