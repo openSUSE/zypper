@@ -60,6 +60,7 @@ BuildRequires:  gcc-c++ >= 4.6
 %endif
 BuildRequires:  gettext-devel
 BuildRequires:  graphviz
+BuildRequires:  graphviz-gnome
 BuildRequires:  libxml2-devel
 %if 0%{?suse_version} != 1110
 # No libproxy on SLES
