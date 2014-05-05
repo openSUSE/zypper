@@ -52,7 +52,7 @@ typedef enum zypper_color_contexts
   COLOR_CONTEXT_MSG_STATUS           = 2,
   COLOR_CONTEXT_MSG_ERROR            = 3,
   COLOR_CONTEXT_MSG_WARNING          = 4,
-  COLOR_CONTEXT_POSITIVE              = 5,
+  COLOR_CONTEXT_POSITIVE             = 5,
   COLOR_CONTEXT_NEGATIVE             = 6,
   COLOR_CONTEXT_PROMPT_OPTION        = 7,
   COLOR_CONTEXT_PROMPT_SHORTHAND     = 8,
@@ -61,9 +61,11 @@ typedef enum zypper_color_contexts
   COLOR_CONTEXT_DEFAULT              = -1
 } ColorContext;
 
-
 /** Simple check whether stdout can handle colors. */
 bool has_colors();
+
+/** If output is done in colors */
+bool do_colors();
 
 /** Get ISO terminal escape sequence for color in given \a context. */
 const std::string get_color(const ColorContext context);
@@ -71,21 +73,51 @@ const std::string get_color(const ColorContext context);
 /**
  * Print string \a s in given color to stdout.
  *
+ * \param str              stream top print on
  * \param s                string to print
  * \param color_seq        color to print with (ISO terminal escape sequence)
  * \param prev_color       color to restore after printing. If NULL,
  *                         COLOR_RESET will be used
  */
-void print_color(const std::string & s,
-    const char * color_seq, const char * prev_color = NULL);
+void print_color( std::ostream & str, const std::string & s, const char * color_seq, const char * prev_color = NULL );
+inline void print_color( const std::string & s, const char * color_seq, const char * prev_color = NULL )
+{ print_color( std::cout, s, color_seq, prev_color ); }
+/** leagacy (f)print_color */
+inline void fprint_color(std::ostream & str, const std::string & s, const char * ansi_color_seq, const char * prev_color = NULL)
+{ print_color( str, s, ansi_color_seq, prev_color ); }
 
-void fprint_color(std::ostream & str, const std::string & s,
-    const char * ansi_color_seq, const char * prev_color = NULL);
+inline void print_color( std::ostream & str, const std::string & s, const ColorContext cc, const ColorContext prev_color = COLOR_CONTEXT_DEFAULT )
+{ print_color( str, s, get_color(cc).c_str(), get_color(prev_color).c_str() ); }
+inline void print_color( const std::string & s, const ColorContext cc, const ColorContext prev_color = COLOR_CONTEXT_DEFAULT )
+{ print_color( std::cout, s, cc, prev_color ); }
+/** leagacy  (f)print_color */
+inline void fprint_color(std::ostream & str, const std::string & s, const ColorContext cc, const ColorContext prev_color = COLOR_CONTEXT_DEFAULT)
+{ print_color( str, s, cc, prev_color ); }
 
-void fprint_color(std::ostream & str, const std::string & s,
-    const ColorContext cc, const ColorContext prev_color = COLOR_CONTEXT_DEFAULT);
 
-void print_color(const std::string & s,
-    const ColorContext cc, const ColorContext prev_color = COLOR_CONTEXT_DEFAULT);
+template<ColorContext CC>
+struct PrintColor
+{
+  PrintColor( std::ostream & str_r = std::cout )
+  : _str( str_r )
+  { if ( do_colors() ) _str << get_color( CC ); }
+
+  ~PrintColor()
+  { if ( do_colors() ) _str << get_color( COLOR_CONTEXT_DEFAULT ); }
+
+  operator std::ostream &()
+  { return _str; }
+
+  template<class _Tp>
+  std::ostream & operator<<( const _Tp & val )
+  { return _str << val; }
+
+  std::ostream & _str;
+};
+
+typedef PrintColor<COLOR_CONTEXT_POSITIVE>	colGood;	///< good news (green)
+typedef PrintColor<COLOR_CONTEXT_MSG_WARNING>	colNote;	///< pay attention (magenta)
+typedef PrintColor<COLOR_CONTEXT_MSG_ERROR>	colBad;		///< bad news (red)
+typedef PrintColor<COLOR_CONTEXT_HIGHLIGHT>	colH;		///< highlight (cyan)
 
 #endif /* UTILS_COLORS_H_ */

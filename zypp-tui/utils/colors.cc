@@ -67,8 +67,14 @@ bool has_colors()
   return false;
 }
 
-static const string get_color(const Config & conf, const ColorContext context)
+bool do_colors()
 {
+  return Zypper::instance()->config().do_colors;
+}
+
+const string get_color( const ColorContext context )
+{
+  const Config & conf( Zypper::instance()->config() );
   switch (context)
   {
   case COLOR_CONTEXT_RESULT:
@@ -92,21 +98,9 @@ static const string get_color(const Config & conf, const ColorContext context)
   }
 }
 
-const string get_color(const ColorContext context)
+void print_color( ostream & str, const std::string & s, const char * ansi_color_seq, const char * prev_color )
 {
-  return get_color(Zypper::instance()->config(), context);
-}
-
-void print_color(const std::string & s,
-    const char * ansi_color_seq, const char * prev_color)
-{
-  fprint_color(cout, s, ansi_color_seq, prev_color);
-}
-
-void fprint_color(ostream & str, const std::string & s,
-    const char * ansi_color_seq, const char * prev_color)
-{
-  if (Zypper::instance()->config().do_colors)
+  if ( do_colors() )
   {
     if (prev_color)
       str << COLOR_RESET;
@@ -118,17 +112,4 @@ void fprint_color(ostream & str, const std::string & s,
   }
   else
     str << s;
-}
-
-void fprint_color(ostream & str, const std::string & s,
-    const ColorContext cc, const ColorContext prev_cc)
-{
-  const Config & conf = Zypper::instance()->config();
-  fprint_color(str, s, get_color(conf, cc).c_str(), get_color(conf, prev_cc).c_str());
-}
-
-void print_color(const std::string & s,
-    const ColorContext cc, const ColorContext prev_cc)
-{
-  fprint_color(cout, s, cc, prev_cc);
 }
