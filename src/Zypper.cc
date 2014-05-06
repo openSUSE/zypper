@@ -1725,7 +1725,8 @@ void Zypper::processCommandOptions()
       // rug compatibility option, we have global --non-interactive
       // note: rug used this uption only to auto-answer the 'continue with install?' prompt.
       {"no-confirm",                no_argument,       0, 'y'},
-      {"skip-interactive",          no_argument,       0, 0},
+      {"skip-interactive",          no_argument,       0,  0 },
+      {"with-interactive",          no_argument,       0,  0 },
       {"auto-agree-with-licenses",  no_argument,       0, 'l'},
       // rug compatibility, we have --auto-agree-with-licenses
       {"agree-to-third-party-licenses",  no_argument,  0, 0},
@@ -1767,6 +1768,7 @@ void Zypper::processCommandOptions()
       "                            Default: %s.\n"
       "-r, --repo <alias|#|URI>    Load only the specified repository.\n"
       "    --skip-interactive      Skip interactive updates.\n"
+      "    --with-interactive      Do not skip interactive updates.\n"
       "-l, --auto-agree-with-licenses\n"
       "                            Automatically say 'yes' to third party license\n"
       "                            confirmation prompt.\n"
