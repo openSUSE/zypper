@@ -173,9 +173,7 @@ string SolverRequester::Feedback::asUserString(
       "The selected package '%s' from repository '%s' has lower"
       " version than the installed one."),
       resolvable_user_string(*_objsel.resolvable()).c_str(),
-      Zypper::instance()->config().show_alias ?
-          _objsel->repoInfo().alias().c_str() :
-          _objsel->repoInfo().name().c_str());
+      _objsel->repoInfo().asUserString().c_str() );
     msg << " ";
     msg << str::form(
         // translators: %s = "zypper install --oldpackage package-version.arch"
@@ -228,17 +226,13 @@ string SolverRequester::Feedback::asUserString(
     return str::form(
         _("Selecting '%s' from repository '%s' for installation."),
         resolvable_user_string(*_objsel.resolvable()).c_str(),
-        Zypper::instance()->config().show_alias ?
-            _objsel->repoInfo().alias().c_str() :
-            _objsel->repoInfo().name().c_str());
+        _objsel->repoInfo().asUserString().c_str() );
 
   case FORCED_INSTALL:
     return str::form(
         _("Forcing installation of '%s' from repository '%s'."),
         resolvable_user_string(*_objsel.resolvable()).c_str(),
-        Zypper::instance()->config().show_alias ?
-            _objsel->repoInfo().alias().c_str() :
-            _objsel->repoInfo().name().c_str());
+        _objsel->repoInfo().asUserString().c_str() );
 
   case SET_TO_REMOVE:
     return str::form(_("Selecting '%s' for removal."),

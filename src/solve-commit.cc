@@ -584,8 +584,6 @@ void solve_and_commit (Zypper & zypper)
     else
       summary.unsetViewOption(Summary::SHOW_UNSUPPORTED);
 
-    summary.setShowRepoAlias(zypper.config().show_alias);
-
     if (get_download_option(zypper, true) == DownloadOnly)
       summary.setDownloadOnly(true);
 

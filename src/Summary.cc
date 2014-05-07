@@ -46,7 +46,6 @@ bool Summary::ResPairNameCompare::operator()(
 
 Summary::Summary(const zypp::ResPool & pool, const ViewOptions options)
   : _viewop(options)
-  , _show_repo_alias(false)
   , _wrap_width(80)
   , _force_no_color(false)
   , _download_only(false)
@@ -452,9 +451,7 @@ void Summary::writeResolvableList(ostream & out, const ResPairSet & resolvables)
     {
       // we do not know about repository changes, only show the repo from
       // which the package will be installed
-      tr << (_show_repo_alias ?
-          resit->second->repoInfo().alias() :
-          resit->second->repoInfo().name());
+      tr << resit->second->repoInfo().asUserString();
     }
     if (_viewop & SHOW_VENDOR)
     {

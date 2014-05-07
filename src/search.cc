@@ -29,7 +29,6 @@ FillSearchTableSolvable::FillSearchTableSolvable(
   : _table( &table )
   , _gopts(Zypper::instance()->globalOpts())
   , _inst_notinst(inst_notinst)
-  , _show_alias(Zypper::instance()->config().show_alias)
 {
   Zypper & zypper = *Zypper::instance();
   if (zypper.cOpts().find("repo") != zypper.cOpts().end())
@@ -139,7 +138,7 @@ bool FillSearchTableSolvable::addPicklistItem( const ui::Selectable::constPtr & 
     row
     << ( pi->isSystem()
        ? _("System Packages")
-       : (_show_alias ? pi->repository().info().alias() : pi->repository().info().name() ) )
+       : pi->repository().asUserString() )
     << ""
     << pi->name()
     << pi->edition().asString()
@@ -154,7 +153,7 @@ bool FillSearchTableSolvable::addPicklistItem( const ui::Selectable::constPtr & 
     << pi->arch().asString()
     << ( pi->isSystem()
        ? (string("(") + _("System Packages") + ")")
-       : (_show_alias ? pi->repository().info().alias() : pi->repository().info().name()));
+       : pi->repository().asUserString() );
   }
 
   *_table << row;
@@ -338,7 +337,6 @@ FillPatchesTable::FillPatchesTable( Table & table, zypp::TriBool inst_notinst )
   : _table( &table )
   , _gopts(Zypper::instance()->globalOpts())
   , _inst_notinst(inst_notinst)
-  , _show_alias(Zypper::instance()->config().show_alias)
 {
   TableHeader header;
 
@@ -369,8 +367,7 @@ bool FillPatchesTable::operator()(const zypp::PoolItem & pi) const
   zypp::Patch::constPtr patch = zypp::asKind<zypp::Patch>(pi.resolvable());
 
   row
-    << (_show_alias ?
-        pi->repository().info().alias() : pi->repository().info().name())
+    << pi->repository().asUserString()
     << pi->name()
     << pi->edition().asString()
     << patch->category()
