@@ -71,6 +71,10 @@ namespace zypp
        */
       std::string label() const;
 
+      /** User string: \ref label (alias or name) */
+      std::string asUserString() const
+      { return label(); }
+
       /**
        * If enabled is false, then this repository must be ignored as if does
        * not exists, except when checking for duplicate alias.

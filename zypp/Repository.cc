@@ -65,6 +65,9 @@ namespace zypp
     std::string Repository::name() const
     { return info().name(); }
 
+    std::string Repository::label() const
+    { return info().label(); }
+
     int Repository::satInternalPriority() const
     {
       NO_REPOSITORY_RETURN( INT_MIN );

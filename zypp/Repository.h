@@ -85,9 +85,12 @@ namespace zypp
         /** Label to display for this repo. */
         std::string name() const;
 
-	/** User string */
+	/** Alias or name, according to \ref ZConfig::repoLabelIsAlias */
+	std::string label() const;
+
+	/** User string: \ref label (alias or name) */
 	std::string asUserString() const
-	{ return name(); }
+	{ return label(); }
 
     public:
 	/** Timestamp or arbitrary user supplied string.
