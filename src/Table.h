@@ -93,7 +93,13 @@ TableRow & operator<<( TableRow & tr, const _Tp & val )
   return tr;
 }
 
-
+/** \relates TableRow Add colummn. */
+template<class _Tp>
+TableRow & operator<<( TableRow && tr, const _Tp & val )
+{
+  tr.add( zypp::str::asString( val ) );
+  return tr;
+}
 
 class TableHeader : public TableRow {
 public:
