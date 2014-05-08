@@ -59,6 +59,9 @@ namespace zypp
     _keyRingDefaultAccept = value_r;
   }
 
+  void KeyRingReport::infoVerify( const std::string & file_r, const PublicKeyData & keyData_r, const KeyContext & keycontext )
+  {}
+
   bool KeyRingReport::askUserToAcceptUnsignedFile( const std::string & file, const KeyContext & keycontext )
   { return _keyRingDefaultAccept.testFlag( KeyRing::ACCEPT_UNSIGNED_FILE ); }
 
@@ -402,13 +405,15 @@ namespace zypp
 	}
       }
 
+      if ( ! trustedKeyData )	// invalidated by previous import
+	trustedKeyData = publicKeyExists( id, trustedKeyRing() );
+      report->infoVerify( filedesc, trustedKeyData, context );
+
       // it exists, is trusted, does it validates?
       if ( verifyFile( file, signature, trustedKeyRing() ) )
         return true;
       else
       {
-	if ( ! trustedKeyData )	// invalidated by previous import
-	  trustedKeyData = publicKeyExists( id, trustedKeyRing() );
         return report->askUserToAcceptVerificationFailed( filedesc, exportKey( trustedKeyData, trustedKeyRing() ), context );
       }
     }

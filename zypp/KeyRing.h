@@ -76,6 +76,9 @@ namespace zypp
      */
     virtual KeyTrust askUserToAcceptKey( const PublicKey &key, const KeyContext &keycontext = KeyContext() );
 
+    /** Informal callback showing the trusted key that will be used for verification. */
+    virtual void infoVerify( const std::string & file_r, const PublicKeyData & keyData_r, const KeyContext &keycontext = KeyContext() );
+
     virtual bool askUserToAcceptUnsignedFile( const std::string &file, const KeyContext &keycontext = KeyContext() );
 
     /**
