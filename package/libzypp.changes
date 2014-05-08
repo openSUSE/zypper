@@ -1,4 +1,11 @@
 -------------------------------------------------------------------
+Thu May  8 18:54:25 CEST 2014 - ma@suse.de
+
+- KeyRingReport: New infoVerify callback showing the trusted key 
+  that will be used for verification.
+- version 14.19.0 (19)
+
+-------------------------------------------------------------------
 Sun May  4 01:15:49 CEST 2014 - ma@suse.de
 
 - Update zypp-po.tar.bz2
