@@ -1,4 +1,13 @@
 -------------------------------------------------------------------
+Thu May  8 19:01:49 CEST 2014 - ma@suse.de
+
+- Notify user about expiring trusted keys; show trusted keys in 
+  verbose mode.
+- Enable --with-interactive for update too (bnc#827953)
+- Highlight missing update repos in product info
+- version 1.11.6
+
+-------------------------------------------------------------------
 Sun May  4 01:15:57 CEST 2014 - ma@suse.de
 
 - Update zypper-po.tar.bz2
