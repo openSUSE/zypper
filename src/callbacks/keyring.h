@@ -37,7 +37,7 @@ namespace zypp
 	t << ( TableRow() << "" << _("Repository:") << context.repoInfo().asUserString() );
       }
       t << ( TableRow() << "" << _("Key Name:") << key.name() )
-	<< ( TableRow() << "" << _("Key Fingerprint:") << key.fingerprint() )
+	<< ( TableRow() << "" << _("Key Fingerprint:") << str::gapify( key.fingerprint(), 8 ) )
 	<< ( TableRow() << "" << _("Key Created:") << key.created() )
 	<< ( TableRow() << "" << _("Key Expires:") << key.expiresAsString() )
 	<< ( TableRow() << "" << _("Rpm Name:") << (boost::format( "gpg-pubkey-%1%-%2%" ) % key.gpgPubkeyVersion() % key.gpgPubkeyRelease()).str() );
