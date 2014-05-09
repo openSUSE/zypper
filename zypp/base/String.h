@@ -410,6 +410,28 @@ namespace zypp
      */
     std::string & replaceAllFun( std::string & str_r, const std::string & from_r, function<std::string()> to_r );
 
+    /** Enhance readability: insert gaps at regular distance
+     * \code
+     *   // no gaps
+     *   Key Fingerprint:  22C07BA534178CD02EFE22AAB88B2FD43DBDC284
+     *   // gapify 8
+     *   Key Fingerprint:  22C07BA5 34178CD0 2EFE22AA B88B2FD4 3DBDC284
+     *   // gapify 4
+     *   Key Fingerprint:  22C0 7BA5 3417 8CD0 2EFE 22AA B88B 2FD4 3DBD C284
+     *   // gapify 4, '-'
+     *   Key Fingerprint:  22C0-7BA5-3417-8CD0-2EFE-22AA-B88B-2FD4-3DBD-C284
+     * \endcode
+     */
+    inline std::string gapify( std::string inp_r, std::string::size_type gap_r = 1, char gapchar = ' ' )
+    {
+      if ( gap_r &&  inp_r.size() > gap_r )
+      {
+	inp_r.reserve( inp_r.size() + (inp_r.size()-1)/gap_r );
+	for ( std::string::size_type pos = gap_r; pos < inp_r.size(); pos += gap_r+1 )
+	  inp_r.insert( pos, 1, gapchar );
+      }
+      return inp_r;
+    }
 
     ///////////////////////////////////////////////////////////////////
     /** \name Split. */
