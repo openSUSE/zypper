@@ -131,10 +131,6 @@ void SolverRequester::installRemove(const PackageArgs & args)
  */
 void SolverRequester::install(const PackageSpec & pkg)
 {
-  sat::Solvable::SplitIdent splid(pkg.parsed_cap.detail().name());
-  ResKind capkind = splid.kind();
-  string capname = splid.name().asString();
-
   // first try by name
 
   if (!_opts.force_by_cap)
@@ -257,10 +253,6 @@ void SolverRequester::install(const PackageSpec & pkg)
  */
 void SolverRequester::remove(const PackageSpec & pkg)
 {
-  sat::Solvable::SplitIdent splid(pkg.parsed_cap.detail().name());
-  ResKind capkind = splid.kind();
-  string capname = splid.name().asString();
-
   // first try by name
 
   if (!_opts.force_by_cap)
