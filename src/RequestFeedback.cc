@@ -69,7 +69,7 @@ string SolverRequester::Feedback::asUserString(
     }
   case NOT_FOUND_CAP:
     // translators: meaning a package %s or provider of capability %s
-    return str::form(_("No provider of '%s' found."), _reqpkg.parsed_cap.asString().c_str());
+    return str::form(_("No provider of '%s' found."), _reqpkg.orig_str.c_str());
 
   case NOT_INSTALLED:
     if (_reqpkg.orig_str.find_first_of("?*") != string::npos) // wildcards used
@@ -81,7 +81,7 @@ string SolverRequester::Feedback::asUserString(
 
   case NO_INSTALLED_PROVIDER:
     // translators: meaning provider of capability %s
-    return str::form(_("No provider of '%s' is installed."), _reqpkg.parsed_cap.asString().c_str());
+    return str::form(_("No provider of '%s' is installed."), _reqpkg.orig_str.c_str());
 
   case ALREADY_INSTALLED:
     // TODO Package/Pattern/Patch/Product
