@@ -153,10 +153,6 @@ namespace zypp
         // Here: installed and defaultCand are non NULL and it's not a
         //       multiversion install.
 
-        // update candidate must come from the highest priority repo
-        if ( defaultCand->repoInfo().priority() != (*availableBegin())->repoInfo().priority() )
-          return PoolItem();
-
         PoolItem installed( installedObj() );
         // check vendor change
         if ( ! ( ResPool::instance().resolver().allowVendorChange()
