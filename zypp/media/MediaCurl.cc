@@ -598,6 +598,13 @@ void MediaCurl::setupEasy()
   * Connect timeout
   */
   SET_OPTION(CURLOPT_CONNECTTIMEOUT, _settings.connectTimeout());
+  // If a transfer timeout is set, also set CURLOPT_TIMEOUT to an upper limit
+  // just in case curl does not trigger its progress callback frequently
+  // enough.
+  if ( _settings.timeout() )
+  {
+    SET_OPTION(CURLOPT_TIMEOUT, 3600L);
+  }
 
   // follow any Location: header that the server sends as part of
   // an HTTP header (#113275)
@@ -715,7 +722,7 @@ void MediaCurl::setupEasy()
   {
       SET_OPTION(CURLOPT_LOW_SPEED_LIMIT, _settings.minDownloadSpeed());
       // default to 10 seconds at low speed
-      SET_OPTION(CURLOPT_LOW_SPEED_TIME, 10L);
+      SET_OPTION(CURLOPT_LOW_SPEED_TIME, 60L);
   }
 
 #if CURLVERSION_AT_LEAST(7,15,5)
