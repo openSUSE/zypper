@@ -162,7 +162,13 @@ namespace zypp
         // optional enabled
         s = reader_r->getAttribute("enabled");
         if (s.get()) {
-          info.setEnabled(str::strToTrue(s.asString()));
+          info.setEnabled(str::strToBool( s.asString(), info.enabled() ));
+        }
+
+        // optional autorefresh
+        s = reader_r->getAttribute("autorefresh");
+        if (s.get()) {
+          info.setAutorefresh(str::strToBool( s.asString(), info.autorefresh() ));
         }
 
         DBG << info << endl;

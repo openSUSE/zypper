@@ -14,7 +14,7 @@ static string service = "<repoindex>"
   "<repo alias=\"company-foo\" name=\"Company's Foo\""
   "      path=\"products/foo\" distro_target=\"sle-11-i386\" priority=\"20\"/>"
   "<repo alias=\"company-bar\" name=\"Company's Bar\""
-  "      path=\"products/bar\" distro_target=\"sle-11-i386\" enabled=\"true\"/>"
+  "      path=\"products/bar\" distro_target=\"sle-11-i386\" enabled=\"tRUe\" autorefresh=\"FaLsE\"/>"
   "<repo alias=\"company-foo-upd\" name=\"Company's Foo Updates\""
   "      path=\"products/foo/updates\" distro_target=\"sle-11-i386\" priority=\"1\"/>"
   "</repoindex>";
@@ -61,6 +61,8 @@ BOOST_AUTO_TEST_CASE(read_index_file)
     BOOST_CHECK_EQUAL(99, repo.priority());
     // "Repository is explicitly enabled"
     BOOST_CHECK(repo.enabled());
+    // "Repository autorefresh is explicitly disabled"
+    BOOST_CHECK(!repo.autorefresh());
 
 
   }
