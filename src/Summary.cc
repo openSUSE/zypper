@@ -81,6 +81,7 @@ void Summary::readPool(const zypp::ResPool & pool)
   _inst_pkg_total = 0;
 
   _todownload = ByteCount();
+  _incache = ByteCount();
   _inst_size_change = ByteCount();
 
   // find multi-version packages, which actually have mult. versions installed
@@ -231,7 +232,10 @@ void Summary::readPool(const zypp::ResPool & pool)
         _inst_size_change += res->installSize();
       }
 
-      _todownload += res->downloadSize();
+      if ( pkg && pkg->isCached() )
+	_incache += res->downloadSize();
+      else
+	_todownload += res->downloadSize();
     }
   }
 
@@ -1143,8 +1147,8 @@ void Summary::writeDownloadAndInstalledSizeSummary(ostream & out)
 
   // download size info
   ostringstream s;
-  if (_todownload > 0)
-    s << format(_("Overall download size: %s.")) % _todownload << " ";
+  if (_todownload || _incache )
+    s << format(_("Overall download size: %1%. Already cached: %2% ")) % _todownload % _incache << " ";
 
   if (_download_only)
     s << _("Download only.");

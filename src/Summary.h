@@ -92,6 +92,8 @@ public:
   unsigned packagesToDowngrade() const;
   const zypp::ByteCount & toDownload() const
   { return _todownload; }
+  const zypp::ByteCount & inCache() const
+  { return _incache; }
   const zypp::ByteCount & installedSizeChange() const
   { return _inst_size_change; }
 
@@ -122,6 +124,7 @@ private:
   bool _need_restart;
 
   zypp::ByteCount _todownload;
+  zypp::ByteCount _incache;
   zypp::ByteCount _inst_size_change;
 
   // STATS
