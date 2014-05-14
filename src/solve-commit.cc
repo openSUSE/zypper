@@ -874,10 +874,13 @@ void solve_and_commit (Zypper & zypper)
         }
 
         // check for running services (fate #300763)
-        if (summary.packagesToRemove() ||
-            summary.packagesToUpgrade() ||
-            summary.packagesToDowngrade())
+        if ( zypper.cOpts().find("download-only") == zypper.cOpts().end()
+	  && ( summary.packagesToRemove()
+	    || summary.packagesToUpgrade()
+	    || summary.packagesToDowngrade() ) )
+	{
           notify_processes_using_deleted_files(zypper);
+	}
       }
     }
     // noting to do
