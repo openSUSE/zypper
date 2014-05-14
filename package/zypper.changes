@@ -1,4 +1,12 @@
 -------------------------------------------------------------------
+Wed May 14 13:58:10 CEST 2014 - ma@suse.de
+
+- Notify about cached packages in download progess
+- Adjust download size by already cached packages in summary
+- Don't suggest 'zypper ps' after commit if --download-only
+- version 1.11.7
+
+-------------------------------------------------------------------
 Thu May  8 19:01:49 CEST 2014 - ma@suse.de
 
 - Notify user about expiring trusted keys; show trusted keys in 
