@@ -1,4 +1,12 @@
 -------------------------------------------------------------------
+Wed May 14 13:52:38 CEST 2014 - ma@suse.de
+
+- Add DownloadResolvableReport::infoInCache
+- Adjust transfer timeout settings (bnc#877405)
+- Fix computation of update candidate (bnc#834858)
+- version 14.20.0 (20)
+
+-------------------------------------------------------------------
 Thu May  8 18:54:25 CEST 2014 - ma@suse.de
 
 - KeyRingReport: New infoVerify callback showing the trusted key 
