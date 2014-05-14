@@ -208,25 +208,25 @@ namespace zypp
 
     ManagedFile PackageProvider::Impl::providePackage() const
     {
+      ScopedGuard guardReport( newReport() );
+
       // check for cache hit:
       ManagedFile ret( providePackageFromCache() );
       if ( ! ret->empty() )
       {
 	MIL << "provided Package from cache " << _package << " at " << ret << endl;
+	report()->infoInCache( _package, ret );
 	return ret; // <-- cache hit
       }
 
       // HERE: cache misss, do download:
-      Url url;
       RepoInfo info = _package->repoInfo();
       // FIXME we only support the first url for now.
       if ( info.baseUrlsEmpty() )
         ZYPP_THROW(Exception("No url in repository."));
-      else
-        url = * info.baseUrlsBegin();
 
       MIL << "provide Package " << _package << endl;
-      ScopedGuard guardReport( newReport() );
+      Url url = * info.baseUrlsBegin();
       do {
         _retry = false;
         report()->start( _package, url );

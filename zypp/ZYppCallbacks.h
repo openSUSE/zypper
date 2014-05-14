@@ -111,6 +111,12 @@ namespace zypp
         INVALID		// the downloaded file is invalid
       };
 
+      /** Hint that package is available in the local cache (no download needed).
+       * This will be the only trigger for an already cached package.
+       */
+      virtual void infoInCache( Resolvable::constPtr res_r, const Pathname & localfile_r )
+      {}
+
       virtual void start(
         Resolvable::constPtr /*resolvable_ptr*/
         , const Url &/*url*/
