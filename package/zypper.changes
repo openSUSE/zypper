@@ -1,4 +1,12 @@
 -------------------------------------------------------------------
+Thu May 15 10:31:12 CEST 2014 - ma@suse.de
+
+- Fix download options in man page
+- patch: fix duplicate -b option
+- lr/ls: fix duplicate -u option
+- version 1.9.16
+
+-------------------------------------------------------------------
 Thu May 15 01:14:26 CEST 2014 - ma@suse.de
 
 - Update zypper-po.tar.bz2
