@@ -90,7 +90,7 @@ Out::~Out()
 
 bool Out::progressFilter()
 {
-  if (this->verbosity() < Out::NORMAL)
+  if (verbosity() < Out::NORMAL)
       return true;
   return false;
 }
@@ -104,7 +104,7 @@ std::string Out::zyppExceptionReport(const zypp::Exception & e)
   //    - top level error   |<- Exception::historyAsString()
   //    - mid level error   |
   //    - first error      -+
-  if (this->verbosity() > Out::NORMAL)
+  if (verbosity() > Out::NORMAL)
     s << e.asUserHistory();
   else
     s << e.asUserString();
