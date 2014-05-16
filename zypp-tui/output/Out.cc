@@ -46,7 +46,8 @@ std::string TermLine::get( unsigned width_r, SplitFlags flags_r, char exp_r ) co
     if ( percentHint == 0 )
       return zypp::str::Str() << l << std::string( diff, '-' ) << r;
 
-    int pc = diff * percentHint / 100;
+
+    unsigned pc = diff * percentHint / 100; // diff > 0 && percentHint > 0
     if ( diff < 6 )	// not enough space for fancy stuff
       return zypp::str::Str() << l <<  std::string( pc, '.' ) << std::string( diff-pc, '=' ) << r;
 
