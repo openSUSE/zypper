@@ -2880,7 +2880,7 @@ void Zypper::doCommand()
 
     // needed to be able to retrieve target distribution
     init_target(*this);
-    this->_gopts.rm_options.servicesTargetDistro =
+    _gopts.rm_options.servicesTargetDistro =
       God->target()->targetDistribution();
 
     initRepoManager();
@@ -3208,15 +3208,15 @@ void Zypper::doCommand()
         if (copts.count("check"))
         {
           if (!copts.count("no-check"))
-            this->_gopts.rm_options.probe = true;
+            _gopts.rm_options.probe = true;
           else
-            this->out().warning(str::form(
+            out().warning(str::form(
               _("Cannot use %s together with %s. Using the %s setting."),
               "--check", "--no-check", "zypp.conf")
                 ,Out::QUIET);
         }
         else if (copts.count("no-check"))
-          this->_gopts.rm_options.probe = false;
+          _gopts.rm_options.probe = false;
 
         warn_if_zmd();
 
@@ -3485,7 +3485,7 @@ void Zypper::doCommand()
       }
       // needed to be able to retrieve target distribution
       init_target(*this);
-      this->_gopts.rm_options.servicesTargetDistro =
+      _gopts.rm_options.servicesTargetDistro =
             God->target()->targetDistribution();
       initRepoManager();
       refresh_services(*this);
@@ -4574,7 +4574,7 @@ void Zypper::doCommand()
 
     if (!copts.count("repo") && !copts.count("from")
         && repoManager().knownRepositories().size() > 1)
-      this->out().warning(str::form(_(
+      out().warning(str::form(_(
         "You are about to do a distribution upgrade with all enabled"
         " repositories. Make sure these repositories are compatible before you"
         " continue. See '%s' for more information about this command."),

@@ -15,7 +15,7 @@ using std::string;
 using std::ostringstream;
 using std::vector;
 
-OutXML::OutXML(Verbosity verbosity) : Out(TYPE_XML, verbosity)
+OutXML::OutXML(Verbosity verbosity_r) : Out(TYPE_XML, verbosity_r)
 {
   cout << "<?xml version='1.0'?>" << endl;
   cout << "<stream>" << endl;
@@ -34,11 +34,11 @@ bool OutXML::mine(Type type)
   return false;
 }
 
-bool OutXML::infoWarningFilter(Verbosity verbosity, Type mask)
+bool OutXML::infoWarningFilter(Verbosity verbosity_r, Type mask)
 {
   if (!mine(mask))
     return true;
-  if (this->verbosity() < verbosity)
+  if (verbosity() < verbosity_r)
     return true;
   return false;
 }
@@ -72,18 +72,18 @@ string xmlEncode(const string & s)
 }
 */
 
-void OutXML::info(const string & msg, Verbosity verbosity, Type mask)
+void OutXML::info(const string & msg, Verbosity verbosity_r, Type mask)
 {
-  if (infoWarningFilter(verbosity, mask))
+  if (infoWarningFilter(verbosity_r, mask))
     return;
 
   cout << "<message type=\"info\">" << xml::escape(msg)
        << "</message>" << endl;
 }
 
-void OutXML::warning(const string & msg, Verbosity verbosity, Type mask)
+void OutXML::warning(const string & msg, Verbosity verbosity_r, Type mask)
 {
-  if (infoWarningFilter(verbosity, mask))
+  if (infoWarningFilter(verbosity_r, mask))
     return;
 
   cout << "<message type=\"warning\">" << xml::escape(msg)
