@@ -966,16 +966,13 @@ void Zypper::safeDoCommand()
   catch (const Exception & ex)
   {
     ZYPP_CAUGHT(ex);
-
-    Out::Verbosity tmp = out().verbosity();
-    out().setVerbosity(Out::DEBUG);
-    out().error(ex, _("Unexpected exception."));
-    out().setVerbosity(tmp);
-
+    {
+      SCOPED_VERBOSITY( out(), Out::DEBUG );
+      out().error(ex, _("Unexpected exception."));
+    }
     report_a_bug(out());
     if ( ! exitCode() )
       setExitCode( ZYPPER_EXIT_ERR_BUG );
-
   }
 }
 
@@ -3683,13 +3680,9 @@ void Zypper::doCommand()
       repo.setPackagesPath(runtimeData().tmpdir);
 
       // shut up zypper
-      Out::Verbosity tmp = out().verbosity();
-      out().setVerbosity(Out::QUIET);
-
+      SCOPED_VERBOSITY( out(), Out::QUIET );
       add_repo(*this, repo);
       refresh_repo(*this, repo);
-
-      out().setVerbosity(tmp);
     }
     // no rpms and no other arguments either
     else if (_arguments.empty())
@@ -5062,12 +5055,8 @@ void Zypper::cleanup()
     if (it->alias() == TMP_RPM_REPO_ALIAS)
     {
       // shut up zypper
-      Out::Verbosity tmp = out().verbosity();
-      out().setVerbosity(Out::QUIET);
-
+      SCOPED_VERBOSITY( out(), Out::QUIET );
       remove_repo(*this, *it);
-
-      out().setVerbosity(tmp);
       break;
     }
 }
