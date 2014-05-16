@@ -12,6 +12,7 @@
 #include <zypp/base/String.h>
 #include <zypp/base/Flags.h>
 #include <zypp/base/DefaultIntegral.h>
+#include <zypp/base/DtorReset.h>
 #include <zypp/Url.h>
 #include <zypp/TriBool.h>
 #include <zypp/ProgressData.h>
@@ -628,6 +629,29 @@ public:
   /** Set current verbosity. */
   void setVerbosity(Verbosity verbosity) { _verbosity = verbosity; }
 
+  /** Convenience macro for exception safe scoped verbosity change
+   * \code
+   *   {
+   *     // shut up zypper
+   *     SCOPED_VERBOSITY( Zypper::instance()->out(), Out::QUIET );
+   *     // expands to:
+   *     // const auto & raii __attribute__ ((__unused__))( Zypper::instance()->out().scopedVerbosity( Out::QUIET ) );
+   *     ...
+   *     // leaving the block restores previous verbosity
+   *   }
+   * \endcode
+   */
+#define SCOPED_VERBOSITY( OUT, LEVEL ) const auto & raii __attribute__ ((__unused__))( (OUT).scopedVerbosity( LEVEL ))
+
+  /** Return RAII class for exception safe scoped verbosity change. */
+  DtorReset scopedVerbosity( Verbosity verbosity_r )
+  {
+    std::swap( _verbosity, verbosity_r );
+    return DtorReset( _verbosity, verbosity_r );
+  }
+
+
+public:
   /** Return the type of the instance. */
   TypeBit type() const { return _type; }
 
