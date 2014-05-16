@@ -64,6 +64,12 @@ namespace zypp
       const std::vector<sat::Solvable> & commitList() const
       { return _commitList; }
 
+      bool preloaded() const
+      { return _preloaded; }
+
+      void preloaded( bool newval_r )
+      { _preloaded = newval_r; }
+
     protected:
       /** Let the Source provide the package. */
       virtual ManagedFile sourceProvidePackage( const PoolItem & pi ) const
@@ -96,6 +102,7 @@ namespace zypp
     private:
       std::vector<sat::Solvable> _commitList;
       PackageProvider _packageProvider;
+      DefaultIntegral<bool,false> _preloaded;
     };
     ///////////////////////////////////////////////////////////////////
 

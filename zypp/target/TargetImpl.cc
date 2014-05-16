@@ -1449,6 +1449,7 @@ namespace zypp
               }
             }
           }
+          packageCache.preloaded( true ); // try to avoid duplicate infoInCache CBs in commit
         }
 
         if ( miss )

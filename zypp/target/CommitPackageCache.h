@@ -84,6 +84,14 @@ namespace zypp
       ManagedFile get( sat::Solvable citem_r )
       { return get( PoolItem(citem_r) ); }
 
+      /** Whether preloaded hint is set.
+       * If preloaded the cache tries to avoid trigering the infoInCache CB,
+       * based on the assumption this was already done when preloading the cache.
+       */
+      bool preloaded() const;
+      /** Set preloaded hint. */
+      void preloaded( bool newval_r );
+
     public:
       /** Implementation. */
       class Impl;

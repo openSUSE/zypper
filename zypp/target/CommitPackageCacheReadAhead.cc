@@ -140,27 +140,39 @@ namespace zypp
     //
     ManagedFile CommitPackageCacheReadAhead::get( const PoolItem & citem_r )
     {
-      // Non CD/DVD media provide their packages without cache.
-      if ( ! onInteractiveMedia( citem_r ) )
+      ManagedFile ret;
+      if ( preloaded() )
       {
-	return sourceProvidePackage( citem_r );
+	// Check whether it's cached.
+	ManagedFile ret( sourceProvideCachedPackage( citem_r ) );
+	if ( ! ret->empty() )
+	  return ret;
       }
+      // else: we head for sourceProvidePackage(), even if the package
+      // was cached. The actual difference is that sourceProvidePackage
+      // will trigger the infoInCache CB that informs the application.
+      // Once the cache is preloaded we try to avoid this CB.
 
-      // Check whether it's cached.
-      ManagedFile ret( sourceProvideCachedPackage( citem_r ) );
-      if ( ! ret->empty() )
-	return ret;
 
-      IMediaKey current( citem_r );
-      if ( current != _lastInteractive )
+      // Preload cache if a CD/DVD change is pending to avoid
+      // switching back and forth...
+      if ( onInteractiveMedia( citem_r ) )
       {
-	if ( _lastInteractive != IMediaKey() )
-	{
-	  cacheLastInteractive( citem_r );
-	}
+	ret = sourceProvideCachedPackage( citem_r );
+	if ( ! ret->empty() )
+	  return ret;
 
-	DBG << "Interactive change [" << ++_dbgChanges << "] from " << _lastInteractive << " to " << current << endl;
-	_lastInteractive = current;
+	IMediaKey current( citem_r );
+	if ( current != _lastInteractive )
+	{
+	  if ( _lastInteractive != IMediaKey() )
+	  {
+	    cacheLastInteractive( citem_r );
+	  }
+
+	  DBG << "Interactive change [" << ++_dbgChanges << "] from " << _lastInteractive << " to " << current << endl;
+	  _lastInteractive = current;
+	}
       }
 
       // Provide and return the file from media.

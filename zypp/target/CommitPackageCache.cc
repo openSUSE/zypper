@@ -127,12 +127,16 @@ namespace zypp
     {}
 
     void CommitPackageCache::setCommitList( std::vector<sat::Solvable> commitList_r )
-    {
-      _pimpl->setCommitList( commitList_r );
-    }
+    { _pimpl->setCommitList( commitList_r ); }
 
     ManagedFile CommitPackageCache::get( const PoolItem & citem_r )
     { return _pimpl->get( citem_r ); }
+
+    bool CommitPackageCache::preloaded() const
+    { return _pimpl->preloaded(); }
+
+    void CommitPackageCache::preloaded( bool newval_r )
+    { _pimpl->preloaded( newval_r ); }
 
     /******************************************************************
     **
