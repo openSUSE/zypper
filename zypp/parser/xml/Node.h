@@ -71,6 +71,9 @@ namespace zypp
       XmlString getAttribute( const char * name_r ) const
       { return XmlString( xmlTextReaderGetAttribute( _reader, reinterpret_cast<const xmlChar *>(name_r) ),
                           XmlString::FREE ); }
+      /** \overload */
+      XmlString getAttribute( const std::string & name_r ) const
+      { return getAttribute( name_r.c_str() ); }
 
       /** Provides a copy of the attribute value  with the specified
        * index relative to the containing element. */
