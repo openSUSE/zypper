@@ -61,7 +61,6 @@ namespace zypp
   private:
     /** Function for processing collected data. Passed-in through constructor. */
     ProcessResource _callback;
-    string _target_distro;
   };
   ///////////////////////////////////////////////////////////////////////
 
