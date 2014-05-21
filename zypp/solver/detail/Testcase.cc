@@ -120,6 +120,10 @@ std::string helixXML( const Capability &cap )
 	    str << "<dep name='packageand("
 		<< IdString(detail.lhs().id()) << ":"
 		<< IdString(detail.rhs().id()) << ")' />" << endl;
+	} else if (detail.capRel() == CapDetail::CAP_NAMESPACE
+	    && detail.lhs().id() == NAMESPACE_OTHERPROVIDERS) {
+	    str << "<dep name='otherproviders("
+		<< IdString(detail.rhs().id()) << ")' />" << endl;
 	} else {
 	    // modalias ?
 	    IdString packageName;
