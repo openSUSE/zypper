@@ -10,6 +10,7 @@
  * Implementation of repoindex.xml file reader.
  */
 #include <iostream>
+#include <unordered_map>
 
 #include "zypp/base/String.h"
 #include "zypp/base/Logger.h"
@@ -29,14 +30,68 @@
 #undef ZYPP_BASE_LOGGER_LOGGROUP
 #define ZYPP_BASE_LOGGER_LOGGROUP "parser"
 
-using namespace std;
-using namespace zypp::xml;
+using std::endl;
 
 namespace zypp
 {
   namespace parser
   {
+    using xml::Reader;
+    using xml::XmlString;
 
+    ///////////////////////////////////////////////////////////////////
+    namespace
+    {
+      class VarReplacer : private base::NonCopyable
+      {
+      public:
+	/** */
+	void setVar( const std::string & key_r, const std::string & val_r )
+	{
+	  MIL << "*** Inject " << key_r << " = " << val_r;
+	  _vars[key_r] = replace( val_r );
+	  MIL << " (" << _vars[key_r] << ")" << endl;
+	}
+
+	std::string replace( const std::string & val_r ) const
+	{
+	  std::string::size_type vbeg = val_r.find( "%{", 0 );
+	  if ( vbeg == std::string::npos )
+	    return val_r;
+
+	  str::Str ret;
+	  std::string::size_type cbeg = 0;
+	  for( ; vbeg != std::string::npos; vbeg = val_r.find( "%{", vbeg ) )
+	  {
+	    std::string::size_type nbeg = vbeg+2;
+	    std::string::size_type nend = val_r.find( "}", nbeg );
+	    if ( nend == std::string::npos )
+	    {
+	      WAR << "Incomplete variable in '" << val_r << "'" << endl;
+	      break;
+	    }
+	    const auto & iter = _vars.find( val_r.substr( nbeg, nend-nbeg ) );
+	    if ( iter != _vars.end() )
+	    {
+	      if ( cbeg < vbeg )
+		ret << val_r.substr( cbeg, vbeg-cbeg );
+	      ret << iter->second;
+	      cbeg = nend+1;
+	    }
+	    else
+	      WAR << "Undefined variable %{" << val_r.substr( nbeg, nend-nbeg ) << "} in '" << val_r << "'" << endl;
+	    vbeg = nend+1;
+	  }
+	  if ( cbeg < val_r.size() )
+	    ret << val_r.substr( cbeg );
+
+	  return ret;
+	}
+      private:
+	std::unordered_map<std::string,std::string> _vars;
+      };
+    } // namespace
+    ///////////////////////////////////////////////////////////////////
 
   ///////////////////////////////////////////////////////////////////////
   //
@@ -57,10 +112,23 @@ namespace zypp
      */
     bool consumeNode( Reader & reader_r );
 
+  private:
+    bool getAttrValue( const std::string & key_r, Reader & reader_r, std::string & value_r )
+    {
+      const XmlString & s( reader_r->getAttribute( key_r ) );
+      if ( s.get() )
+      {
+	value_r = _replacer.replace( s.asString() );
+	return !value_r.empty();
+      }
+      value_r.clear();
+      return false;
+    }
 
   private:
     /** Function for processing collected data. Passed-in through constructor. */
     ProcessResource _callback;
+    VarReplacer _replacer;
   };
   ///////////////////////////////////////////////////////////////////////
 
@@ -93,82 +161,78 @@ namespace zypp
       // xpath: /repoindex
       if ( reader_r->name() == "repoindex" )
       {
+	while ( reader_r.nextNodeAttribute() )
+	  _replacer.setVar( reader_r->localName().asString(), reader_r->value().asString() );
         return true;
       }
 
       // xpath: /repoindex/data (+)
       if ( reader_r->name() == "repo" )
       {
-        XmlString s;
-
         RepoInfo info;
-
-        // enabled or disabled is controlled by the
-        // reposToEnable/Disable list, unless the
-        // enabled attribute is set
-        info.setEnabled(false);
-
         // Set some defaults that are not contained in the repo information
         info.setAutorefresh( true );
+	info.setEnabled(false);
 
-        // url and/or path
-        string url_s;
-        s = reader_r->getAttribute("url");
-        if (s.get())
-          url_s = s.asString();
-        string path_s;
-        s = reader_r->getAttribute("path");
-        if (s.get())
-          path_s = s.asString();
+	std::string attrValue;
 
-        if (url_s.empty() && path_s.empty())
-          throw ParseException(str::form(_("One or both of '%s' or '%s' attributes is required."), "url", "path"));
-        //! \todo FIXME this hardcodes the "/repo/" fragment - should not be if we want it to be usable by others!
-        else if (url_s.empty())
-          info.setPath(Pathname(string("/repo/") + path_s));
-        else if (path_s.empty())
-          info.setBaseUrl(Url(url_s));
-        else
-          info.setBaseUrl(Url(url_s + "/repo/" + path_s));
+	// required alias
+	// mandatory, so we can allow it in var replacement without reset
+	if ( getAttrValue( "alias", reader_r, attrValue ) )
+	{
+	  info.setAlias( attrValue );
+	  _replacer.setVar( "alias", attrValue );
+	}
+	else
+	  throw ParseException(str::form(_("Required attribute '%s' is missing."), "alias"));
 
-        // required alias
-        s = reader_r->getAttribute("alias");
-        if (!s.get())
-          throw ParseException(str::form(_("Required attribute '%s' is missing."), "alias"));
-        info.setAlias(s.asString());
-
-        // optional type
-        s = reader_r->getAttribute("type");
-        if (s.get())
-          info.setType(repo::RepoType(s.asString()));
+        // required url
+	// SLES HACK: or path, but beware of the hardcoded '/repo' prefix!
+	{
+	  std::string urlstr;
+	  std::string pathstr;
+	  getAttrValue( "url", reader_r, urlstr );
+	  getAttrValue( "path", reader_r, pathstr );
+	  if ( urlstr.empty() )
+	  {
+	    if ( pathstr.empty() )
+	      throw ParseException(str::form(_("One or both of '%s' or '%s' attributes is required."), "url", "path"));
+	    else
+	      info.setPath( Pathname("/repo") / pathstr );
+	  }
+	  else
+	  {
+	    if ( pathstr.empty() )
+	      info.setBaseUrl( Url(urlstr) );
+	    else
+	    {
+	      Url url( urlstr );
+	      url.setPathName( Pathname(url.getPathName()) / "repo" / pathstr );
+	      info.setBaseUrl( url );
+	    }
+	  }
+	}
 
         // optional name
-        s = reader_r->getAttribute("name");
-        if (s.get())
-          info.setName(s.asString());
+        if ( getAttrValue( "name", reader_r, attrValue ) )
+          info.setName( attrValue );
 
         // optional targetDistro
-        s = reader_r->getAttribute("distro_target");
-        if (s.get())
-          info.setTargetDistribution(s.asString());
+        if ( getAttrValue( "distro_target", reader_r, attrValue ) )
+          info.setTargetDistribution( attrValue );
 
         // optional priority
-        s = reader_r->getAttribute("priority");
-        if (s.get()) {
-          info.setPriority(str::strtonum<unsigned>(s.asString()));
-        }
+        if ( getAttrValue( "priority", reader_r, attrValue ) )
+          info.setPriority( str::strtonum<unsigned>( attrValue ) );
+
 
         // optional enabled
-        s = reader_r->getAttribute("enabled");
-        if (s.get()) {
-          info.setEnabled(str::strToBool( s.asString(), info.enabled() ));
-        }
+        if ( getAttrValue( "enabled", reader_r, attrValue ) )
+          info.setEnabled( str::strToBool( attrValue, info.enabled() ) );
 
         // optional autorefresh
-        s = reader_r->getAttribute("autorefresh");
-        if (s.get()) {
-          info.setAutorefresh(str::strToBool( s.asString(), info.autorefresh() ));
-        }
+	if ( getAttrValue( "autorefresh", reader_r, attrValue ) )
+	  info.setAutorefresh( str::strToBool( attrValue, info.autorefresh() ) );
 
         DBG << info << endl;
 
