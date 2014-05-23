@@ -1294,7 +1294,7 @@ namespace zypp
             if ( subdir->basename() == r->escaped_alias() )
             { found = true; break; }
 
-          if ( ! found )
+          if ( ! found && ( Date::now()-PathInfo(*subdir).mtime() > Date::day ) )
             filesystem::recursive_rmdir( *subdir );
 
           progress.set( progress.val() + sdircurrent * 100 / sdircount );
