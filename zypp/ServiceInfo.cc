@@ -41,6 +41,8 @@ namespace zypp
     repo::ServiceType type;
     ReposToEnable  reposToEnable;
     ReposToDisable reposToDisable;
+    RepoStates     repoStates;
+
 
   public:
     Impl()
@@ -164,12 +166,43 @@ namespace zypp
   void ServiceInfo::clearReposToDisable()
   { _pimpl->reposToDisable.clear(); }
 
+  const ServiceInfo::RepoStates & ServiceInfo::repoStates() const
+  { return _pimpl->repoStates; }
+
+  void ServiceInfo::setRepoStates( RepoStates newStates_r )
+  { swap( _pimpl->repoStates, newStates_r ); }
+
+  std::ostream & operator<<( std::ostream & str, const ServiceInfo::RepoState & obj )
+  {
+    return str
+	<< "enabled=" << obj.enabled << " "
+	<< "autorefresh=" << obj.autorefresh << " "
+	<< "priority=" << obj.priority;
+  }
 
   std::ostream & ServiceInfo::dumpAsIniOn( std::ostream & str ) const
   {
     RepoInfoBase::dumpAsIniOn(str)
       << "url = " << url() << endl
       << "type = " << type() << endl;
+
+    if ( ! repoStates().empty() )
+    {
+      unsigned cnt = 0U;
+      for ( const auto & el : repoStates() )
+      {
+	std::string tag( "repo_" );
+	tag += str::numstring( ++cnt );
+	const RepoState & state( el.second );
+
+	str << tag << "=" << el.first << endl
+	    << tag << "_enabled=" << state.enabled << endl
+	    << tag << "_autorefresh=" << state.autorefresh << endl;
+	if ( state.priority != RepoInfo::defaultPriority() )
+	  str
+	    << tag << "_priority=" << state.priority << endl;
+      }
+    }
 
     if ( ! reposToEnableEmpty() )
       str << "repostoenable = " << str::joinEscaped( reposToEnableBegin(), reposToEnableEnd() ) << endl;

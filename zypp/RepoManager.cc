@@ -1838,12 +1838,24 @@ namespace zypp
       uglyHack.second = e;
     }
 
+    ////////////////////////////////////////////////////////////////////////////
+    // On the fly remember the new repo states as defined the reopoindex.xml.
+    // Move into ServiceInfo later.
+    ServiceInfo::RepoStates newRepoStates;
+
     // set service alias and base url for all collected repositories
     for_( it, collector.repos.begin(), collector.repos.end() )
     {
+      // First of all: Prepend service alias:
+      it->setAlias( str::form( "%s:%s", service.alias().c_str(), it->alias().c_str() ) );
+      // set refrence to the parent service
+      it->setService( service.alias() );
+
+      // remember the new parsed repo state
+      newRepoStates[it->alias()] = *it;
+
       // if the repo url was not set by the repoindex parser, set service's url
       Url url;
-
       if ( it->baseUrlsEmpty() )
         url = service.url();
       else
@@ -1862,13 +1874,8 @@ namespace zypp
         it->setPath("");
       }
 
-      // Prepend service alias:
-      it->setAlias( str::form( "%s:%s", service.alias().c_str(), it->alias().c_str() ) );
-
       // save the url
       it->setBaseUrl( url );
-      // set refrence to the parent service
-      it->setService( service.alias() );
     }
 
     ////////////////////////////////////////////////////////////////////////////
@@ -1877,22 +1884,29 @@ namespace zypp
     RepoInfoList oldRepos;
     getRepositoriesInService( service.alias(), std::back_inserter( oldRepos ) );
 
+    ////////////////////////////////////////////////////////////////////////////
     // find old repositories to remove...
-    for_( it, oldRepos.begin(), oldRepos.end() )
+    for_( oldRepo, oldRepos.begin(), oldRepos.end() )
     {
-      if ( ! foundAliasIn( it->alias(), collector.repos ) )
+      if ( ! foundAliasIn( oldRepo->alias(), collector.repos ) )
       {
-        if ( it->enabled() && ! service.repoToDisableFind( it->alias() ) )
-        {
-          DBG << "Service removes enabled repo " << it->alias() << endl;
-          service.addRepoToEnable( it->alias() );
-          serviceModified = true;
-        }
-        else
-        {
-          DBG << "Service removes disabled repo " << it->alias() << endl;
-        }
-        removeRepository( *it );
+	if ( oldRepo->enabled() )
+	{
+	  // Currently enabled. If this was a user modification remember the state.
+	  const auto & last = service.repoStates().find( oldRepo->alias() );
+	  if ( last != service.repoStates().end() && ! last->second.enabled )
+	  {
+	    DBG << "Service removes user enabled repo " << oldRepo->alias() << endl;
+	    service.addRepoToEnable( oldRepo->alias() );
+	    serviceModified = true;
+	  }
+	  else
+	    DBG << "Service removes enabled repo " << oldRepo->alias() << endl;
+	}
+	else
+	  DBG << "Service removes disabled repo " << oldRepo->alias() << endl;
+
+        removeRepository( *oldRepo );
       }
     }
 
@@ -1900,76 +1914,101 @@ namespace zypp
     // create missing repositories and modify exising ones if needed...
     for_( it, collector.repos.begin(), collector.repos.end() )
     {
-      // Service explicitly requests the repo being enabled?
-      // Service explicitly requests the repo being disabled?
+      // User explicitly requested the repo being enabled?
+      // User explicitly requested the repo being disabled?
       // And hopefully not both ;) If so, enable wins.
-      bool beEnabled = service.repoToEnableFind( it->alias() );
-      bool beDisabled = service.repoToDisableFind( it->alias() );
 
-      // Make sure the service repo is created with the
-      // appropriate enable
-      if ( beEnabled ) it->setEnabled(true);
-      if ( beDisabled ) it->setEnabled(false);
+      TriBool toBeEnabled( indeterminate );	// indeterminate - follow the service request
+      DBG << "Service request to " << (it->enabled()?"enable":"disable") << " service repo " << it->alias() << endl;
 
-      if ( beEnabled )
+      if ( service.repoToEnableFind( it->alias() ) )
       {
+	DBG << "User request to enable service repo " << it->alias() << endl;
+	toBeEnabled = true;
         // Remove from enable request list.
         // NOTE: repoToDisable is handled differently.
         //       It gets cleared on each refresh.
         service.delRepoToEnable( it->alias() );
         serviceModified = true;
       }
+      else if ( service.repoToDisableFind( it->alias() ) )
+      {
+	DBG << "User request to disable service repo " << it->alias() << endl;
+	toBeEnabled = false;
+      }
+
 
       RepoInfoList::iterator oldRepo( findAlias( it->alias(), oldRepos ) );
       if ( oldRepo == oldRepos.end() )
       {
         // Not found in oldRepos ==> a new repo to add
 
-        // At that point check whether a repo with the same alias
-        // exists outside this service. Maybe forcefully re-alias
-        // the existing repo?
+	// Make sure the service repo is created with the appropriate enablement
+	if ( ! indeterminate(toBeEnabled) )
+	  it->setEnabled( toBeEnabled );
+
         DBG << "Service adds repo " << it->alias() << " " << (it->enabled()?"enabled":"disabled") << endl;
         addRepository( *it );
-
-        // save repo credentials
-        // ma@: task for modifyRepository?
       }
       else
       {
         // ==> an exising repo to check
         bool oldRepoModified = false;
 
+	if ( indeterminate(toBeEnabled) )
+	{
+	  // No user request: check for an old user modificaton otherwise follow service request.
+	  // NOTE: Assert toBeEnabled is boolean afterwards!
+	  if ( oldRepo->enabled() == it->enabled() )
+	    toBeEnabled = it->enabled();	// service requests no change to the system
+	  else
+	  {
+	    const auto & last = service.repoStates().find( oldRepo->alias() );
+	    if ( last == service.repoStates().end() || last->second.enabled != it->enabled() )
+	      toBeEnabled = it->enabled();	// service request has changed since last refresh -> follow
+	    else
+	    {
+	      toBeEnabled = oldRepo->enabled();	// service request unchaned since last refresh -> keep user modification
+	      DBG << "User modified service repo " << it->alias() <<  " may stay " << (toBeEnabled?"enabled":"disabled") << endl;
+	    }
+	  }
+	}
+
         // changed enable?
-        if ( beEnabled )
+	if ( toBeEnabled == oldRepo->enabled() )
+	{
+	  DBG << "Service repo " << it->alias() << " stays " <<  (oldRepo->enabled()?"enabled":"disabled") << endl;
+	}
+	else if ( toBeEnabled )
+	{
+	  DBG << "Service repo " << it->alias() << " gets enabled" << endl;
+	  oldRepo->setEnabled( true );
+	  oldRepoModified = true;
+	}
+	else
         {
-          if ( ! oldRepo->enabled() )
-          {
-            DBG << "Service repo " << it->alias() << " gets enabled" << endl;
-            oldRepo->setEnabled( true );
-            oldRepoModified = true;
-          }
-          else
-          {
-            DBG << "Service repo " << it->alias() << " stays enabled" << endl;
-          }
-        }
-        else if ( beDisabled )
-        {
-          if ( oldRepo->enabled() )
-          {
-            DBG << "Service repo " << it->alias() << " gets disabled" << endl;
-            oldRepo->setEnabled( false );
-            oldRepoModified = true;
-          }
-          else
-          {
-            DBG << "Service repo " << it->alias() << " stays disabled" << endl;
-          }
-        }
-        else
-        {
-          DBG << "Service repo " << it->alias() << " stays " <<  (oldRepo->enabled()?"enabled":"disabled") << endl;
-        }
+	  DBG << "Service repo " << it->alias() << " gets disabled" << endl;
+	  oldRepo->setEnabled( false );
+	  oldRepoModified = true;
+	}
+
+	// all other attributes follow the service request:
+
+	// changed autorefresh
+	if ( oldRepo->autorefresh() != it->autorefresh() )
+	{
+	  DBG << "Service repo " << it->alias() << " gets new AUTOREFRESH " << it->autorefresh() << endl;
+	  oldRepo->setAutorefresh( it->autorefresh() );
+	  oldRepoModified = true;
+	}
+
+	// changed priority?
+	if ( oldRepo->priority() != it->priority() )
+	{
+	  DBG << "Service repo " << it->alias() << " gets new PRIORITY " << it->priority() << endl;
+	  oldRepo->setPriority( it->priority() );
+	  oldRepoModified = true;
+	}
 
         // changed url?
         // service repo can contain only one URL now, so no need to iterate.
@@ -1992,6 +2031,13 @@ namespace zypp
     if ( ! service.reposToDisableEmpty() )
     {
       service.clearReposToDisable();
+      serviceModified = true;
+    }
+
+    // Remember original service request for next refresh
+    if ( service.repoStates() != newRepoStates )
+    {
+      service.setRepoStates( std::move(newRepoStates) );
       serviceModified = true;
     }
 
