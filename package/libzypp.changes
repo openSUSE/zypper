@@ -1,4 +1,13 @@
 -------------------------------------------------------------------
+Tue May 27 16:31:21 CEST 2014 - ma@suse.de
+
+- Let ServiceRefresh en-/disable repos with respect to previous state 
+  and user modifications.
+- RepoindexFileReader: support variable substitution
+- Parse optional autorefresh attribute from repoindex.xml
+- version 14.21.0 (20)
+
+-------------------------------------------------------------------
 Wed May 14 13:52:38 CEST 2014 - ma@suse.de
 
 - Add DownloadResolvableReport::infoInCache
