@@ -1717,7 +1717,7 @@ namespace zypp
 
   void RepoManager::Impl::removeService( const std::string & alias )
   {
-    MIL << "Going to delete repo " << alias << endl;
+    MIL << "Going to delete service " << alias << endl;
 
     const ServiceInfo & service = getService( alias );
 
@@ -2067,7 +2067,7 @@ namespace zypp
 
     if ( service.type() == ServiceType::PLUGIN )
     {
-        MIL << "Not modifying plugin service '" << oldAlias << "'" << endl;
+        WAR << "Not modifying plugin service '" << oldAlias << "'" << endl;
         return;
     }
 
@@ -2098,23 +2098,29 @@ namespace zypp
     _services.insert(service);
 
     // changed properties affecting also repositories
-    if( oldAlias != service.alias()                    // changed alias
-        || oldService.enabled() != service.enabled()   // changed enabled status
-      )
+    if ( oldAlias != service.alias()			// changed alias
+      || oldService.enabled() != service.enabled() )	// changed enabled status
     {
       std::vector<RepoInfo> toModify;
       getRepositoriesInService(oldAlias, std::back_inserter(toModify));
       for_( it, toModify.begin(), toModify.end() )
       {
-        if (oldService.enabled() && !service.enabled())
-          it->setEnabled(false);
-        else if (!oldService.enabled() && service.enabled())
-        {
-          //! \todo do nothing? the repos will be enabled on service refresh
-          //! \todo how to know the service needs a (auto) refresh????
-        }
-        else
+	if ( oldService.enabled() != service.enabled() )
+	{
+	  if ( service.enabled() )
+	  {
+	    // reset to last refreshs state
+	    const auto & last = service.repoStates().find( it->alias() );
+	    if ( last != service.repoStates().end() )
+	      it->setEnabled( last->second.enabled );
+	  }
+	  else
+	    it->setEnabled( false );
+	}
+
+        if ( oldAlias != service.alias() )
           it->setService(service.alias());
+
         modifyRepository(it->alias(), *it);
       }
     }
