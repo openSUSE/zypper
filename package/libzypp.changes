@@ -1,4 +1,10 @@
 -------------------------------------------------------------------
+Wed May 28 13:41:22 CEST 2014 - ma@suse.de
+
+- Fix service methods to throw ServiceException, not RepoException.
+- version 14.22.0 (22)
+
+-------------------------------------------------------------------
 Tue May 27 16:31:21 CEST 2014 - ma@suse.de
 
 - Let ServiceRefresh en-/disable repos with respect to previous state 
