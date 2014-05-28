@@ -239,10 +239,27 @@ namespace zypp
         ServiceNoUrlException( const ServiceInfo & service_r );
         ServiceNoUrlException( const ServiceInfo & service_r, const std::string & msg_r );
     };
+    //@}
+
+
+    /** \name PLUGIN Service related exceptions.
+    */
+    //@{
+
+    /** PLUGIN Service related exceptions
+     */
+    class ServicePluginException : public ServiceException
+    {
+      public:
+        ServicePluginException();
+        ServicePluginException( const std::string & msg_r );
+        ServicePluginException( const ServiceInfo & service_r );
+        ServicePluginException( const ServiceInfo & service_r, const std::string & msg_r );
+    };
 
     /** Service plugin has trouble providing the metadata but this should not be treated as error.
      */
-    class ServicePluginInformalException : public ServiceException
+    class ServicePluginInformalException : public ServicePluginException
     {
       public:
         ServicePluginInformalException();
@@ -251,6 +268,16 @@ namespace zypp
         ServicePluginInformalException( const ServiceInfo & service_r, const std::string & msg_r );
     };
 
+    /** Service plugin is immutable.
+     */
+    class ServicePluginImmutableException : public ServicePluginException
+    {
+      public:
+        ServicePluginImmutableException();
+        ServicePluginImmutableException( const std::string & msg_r );
+        ServicePluginImmutableException( const ServiceInfo & service_r );
+        ServicePluginImmutableException( const ServiceInfo & service_r, const std::string & msg_r );
+    };
     //@}
 
     /////////////////////////////////////////////////////////////////

@@ -1724,7 +1724,7 @@ namespace zypp
     Pathname location = service.filepath();
     if( location.empty() )
     {
-      ZYPP_THROW(RepoException( _("Can't figure out where the service is stored.") ));
+      ZYPP_THROW(ServiceException( _("Can't figure out where the service is stored.") ));
     }
 
     ServiceSet tmpSet;
@@ -1736,7 +1736,7 @@ namespace zypp
       if ( filesystem::unlink(location) != 0 )
       {
         // TranslatorExplanation '%s' is a filename
-        ZYPP_THROW(RepoException(str::form( _("Can't delete '%s'"), location.c_str() )));
+        ZYPP_THROW(ServiceException(str::form( _("Can't delete '%s'"), location.c_str() )));
       }
       MIL << alias << " sucessfully deleted." << endl;
     }
@@ -2067,8 +2067,7 @@ namespace zypp
 
     if ( service.type() == ServiceType::PLUGIN )
     {
-        WAR << "Not modifying plugin service '" << oldAlias << "'" << endl;
-        return;
+      ZYPP_THROW(ServicePluginImmutableException());
     }
 
     const ServiceInfo & oldService = getService(oldAlias);
@@ -2076,7 +2075,7 @@ namespace zypp
     Pathname location = oldService.filepath();
     if( location.empty() )
     {
-      ZYPP_THROW(RepoException( _("Can't figure out where the service is stored.") ));
+      ZYPP_THROW(ServiceException( _("Can't figure out where the service is stored.") ));
     }
 
     // remember: there may multiple services being defined in one file:

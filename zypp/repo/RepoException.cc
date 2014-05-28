@@ -12,6 +12,7 @@
 #include <iostream>
 #include "zypp/repo/RepoException.h"
 #include "zypp/base/String.h"
+#include "zypp/base/Gettext.h"
 
 using std::endl;
 
@@ -106,19 +107,28 @@ namespace zypp
     ///////////////////////////////////////////////////////////////////
 
 #define DEF_CTORS( CLASS, MSG ) \
-    CLASS::CLASS()                                                           : ServiceException( MSG ) {} \
-    CLASS::CLASS( const std::string & msg_r )                                : ServiceException( msg_r ) {} \
-    CLASS::CLASS( const ServiceInfo & service_r )                            : ServiceException( service_r, MSG ) {} \
-    CLASS::CLASS( const ServiceInfo & service_r, const std::string & msg_r ) : ServiceException( service_r, msg_r ) {}
+    CLASS::CLASS()                                                           : DEF_BASECLASS( MSG ) {} \
+    CLASS::CLASS( const std::string & msg_r )                                : DEF_BASECLASS( msg_r ) {} \
+    CLASS::CLASS( const ServiceInfo & service_r )                            : DEF_BASECLASS( service_r, MSG ) {} \
+    CLASS::CLASS( const ServiceInfo & service_r, const std::string & msg_r ) : DEF_BASECLASS( service_r, msg_r ) {}
 
+#define DEF_BASECLASS ServiceException
     DEF_CTORS( ServiceNoAliasException,       "Service has no alias defined." );
     DEF_CTORS( ServiceInvalidAliasException,  "Service has an invalid alias." );
     DEF_CTORS( ServiceAlreadyExistsException, "Service already exists." );
     DEF_CTORS( ServiceNoUrlException,         "Service has no or invalid url defined." );
-    DEF_CTORS( ServicePluginInformalException,"Service plugin has trouble providing the metadata but this should not be treated as error." );
+
+    // sub classes:
+    DEF_CTORS( ServicePluginException,		"PLUGIN service exception." );
+
+    ///////////////////////////////////////////////////////////////////
+    // sub class: ServicePluginException
+#undef  DEF_BASECLASS
+#define DEF_BASECLASS ServicePluginException
+    DEF_CTORS( ServicePluginInformalException,	"Service plugin has trouble providing the metadata but this should not be treated as error." );
+    DEF_CTORS( ServicePluginImmutableException,	_("Service plugin does not support changing an attribute.") );
 
 #undef DEF_CTORS
-
    /////////////////////////////////////////////////////////////////
   } // namespace repo
   ///////////////////////////////////////////////////////////////////
