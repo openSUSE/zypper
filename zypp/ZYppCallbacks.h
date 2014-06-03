@@ -777,21 +777,25 @@ namespace zypp
     struct _MsgTypeDef {
       enum Enum { info, warning, error };
     };
-    typedef base::EnumClass<_MsgTypeDef> MsgType;	///< 'enum class MsgType'
 
-    //     virtual bool start()
-    //     virtual bool progress()
-    //     virtual bool problem()
-    //     virtual bool finish()
+    typedef base::EnumClass<_MsgTypeDef> MsgType;	///< 'enum class MsgType'
 
     /** Send a ready to show message text. */
     virtual bool message( MsgType type_r, const std::string & msg_r ) const { return true; }
-    /** \overload */
-    bool info( const std::string & msg_r ) const	{ return message( MsgType::info, msg_r ); }
-    /** \overload */
-    bool warning( const std::string & msg_r ) const	{ return message( MsgType::warning, msg_r ); }
-    /** \overload */
-    bool error( const std::string & msg_r ) const	{ return message( MsgType::error, msg_r ); }
+
+
+    /** \name Static sender instance */
+    //@{
+    /** Singleton sender instance */
+    static callback::SendReport<JobReport> & instance();	// impl in ZYppImpl.cc
+
+    /** send message text */
+    static bool info( const std::string & msg_r )	{ return instance()->message( MsgType::info, msg_r ); }
+    /** send warning text */
+    static bool warning( const std::string & msg_r )	{ return instance()->message( MsgType::warning, msg_r ); }
+    /** send error text */
+    static bool error( const std::string & msg_r )	{ return instance()->message( MsgType::error, msg_r ); }
+    //@}
   };
 
 

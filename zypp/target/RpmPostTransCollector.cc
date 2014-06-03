@@ -80,7 +80,6 @@ namespace zypp
 	    return;
 
 	  HistoryLog historylog;
-	  callback::SendReport<JobReport> report;
 
 	  Pathname noRootScriptDir( filesystem::TmpDir::defaultLocation() / tmpDir().basename() );
 
@@ -107,7 +106,7 @@ namespace zypp
 		str::Str msg;
 		msg << "Output of " << pkgident << " %posttrans script:\n" << scriptmsg;
 		historylog.comment( msg, true /*timestamp*/);
-		report->info( msg );
+		JobReport::info( msg );
 	      }
 
 	      if ( ret != 0 )
@@ -116,7 +115,7 @@ namespace zypp
 		msg << pkgident << " %posttrans script failed (returned " << ret << ")";
 		WAR << msg << endl;
 		historylog.comment( msg, true /*timestamp*/);
-		report->warning( msg );
+		JobReport::warning( msg );
 	      }
 	    }
 	  }
@@ -130,7 +129,6 @@ namespace zypp
 	    return;
 
 	  HistoryLog historylog;
-	  callback::SendReport<JobReport> report;
 
 	  str::Str msg;
 	  msg << "%posttrans scripts skipped while aborting:\n";
@@ -142,7 +140,7 @@ namespace zypp
 	  }
 
 	  historylog.comment( msg, true /*timestamp*/);
-	  report->warning( msg );
+	  JobReport::warning( msg );
 
 	  _scripts.clear();
 	}
