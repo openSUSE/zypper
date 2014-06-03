@@ -227,7 +227,7 @@ void Config::read(const string & file)
     {
       // set a default for light background
       if (color_background)
-        color_msgStatus = Color("default");
+        color_msgStatus = Color("black");
     }
     else
       color_msgStatus = c;
