@@ -2042,8 +2042,8 @@ namespace zypp
     }
 
     ////////////////////////////////////////////////////////////////////////////
-    // save service if modified:
-    if ( serviceModified )
+    // save service if modified: (unless a plugin service)
+    if ( serviceModified && service.type() != ServiceType::PLUGIN )
     {
       // write out modified service file.
       modifyService( service.alias(), service );
