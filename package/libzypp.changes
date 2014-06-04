@@ -1,4 +1,11 @@
 -------------------------------------------------------------------
+Wed Jun  4 11:49:32 CEST 2014 - ma@suse.de
+
+- Cleanup orphanded service repos on the fly (bnc#649846)
+- Service refresh must not attempt to modify plugin services
+- version 14.23.0 (23)
+
+-------------------------------------------------------------------
 Wed May 28 13:41:22 CEST 2014 - ma@suse.de
 
 - Fix service methods to throw ServiceException, not RepoException.
