@@ -790,11 +790,11 @@ namespace zypp
     static callback::SendReport<JobReport> & instance();	// impl in ZYppImpl.cc
 
     /** send message text */
-    static bool info( const std::string & msg_r )	{ return instance()->message( MsgType::info, msg_r ); }
+    static bool info( const MessageString & msg_r )	{ return instance()->message( MsgType::info, msg_r ); }
     /** send warning text */
-    static bool warning( const std::string & msg_r )	{ return instance()->message( MsgType::warning, msg_r ); }
+    static bool warning( const MessageString & msg_r )	{ return instance()->message( MsgType::warning, msg_r ); }
     /** send error text */
-    static bool error( const std::string & msg_r )	{ return instance()->message( MsgType::error, msg_r ); }
+    static bool error( const MessageString & msg_r )	{ return instance()->message( MsgType::error, msg_r ); }
     //@}
   };
 
