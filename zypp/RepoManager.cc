@@ -637,19 +637,52 @@ namespace zypp
     if ( PathInfo(_options.knownReposPath).isExist() )
     {
       std::list<std::string> repoEscAliases;
+      std::list<RepoInfo> orphanedRepos;
       for ( RepoInfo & repoInfo : repositories_in_dir(_options.knownReposPath) )
       {
         // set the metadata path for the repo
         repoInfo.setMetadataPath( rawcache_path_for_repoinfo(_options, repoInfo) );
 	// set the downloaded packages path for the repo
 	repoInfo.setPackagesPath( packagescache_path_for_repoinfo(_options, repoInfo) );
-
+	// remember it
         _repos.insert( repoInfo );
+
+	// detect orphaned repos belonging to a deleted service
+	const std::string & serviceAlias( repoInfo.service() );
+	if ( ! ( serviceAlias.empty() || hasService( serviceAlias ) ) )
+	{
+	  WAR << "Schedule orphaned service repo for deletion: " << repoInfo << endl;
+	  orphanedRepos.push_back( repoInfo );
+	  continue;	// don't remember it in repoEscAliases
+	}
+
         repoEscAliases.push_back(repoInfo.escaped_alias());
       }
-      repoEscAliases.sort();
+
+      // Cleanup orphanded service repos:
+      if ( ! orphanedRepos.empty() )
+      {
+	for ( auto & repoInfo : orphanedRepos )
+	{
+	  MIL << "Delete orphaned service repo " << repoInfo.alias() << endl;
+	  // translators: Cleanup a repository previously owned by a meanwhile unknown (deleted) service.
+	  //   %1% = service name
+	  //   %2% = repository name
+	  JobReport::warning( formatNAC(_("Unknown service '%1%': Removing orphaned service repository '%2%'" ))
+			      % repoInfo.service()
+			      % repoInfo.alias() );
+	  try {
+	    removeRepository( repoInfo );
+	  }
+	  catch ( const Exception & caugth )
+	  {
+	    JobReport::error( caugth.asUserHistory() );
+	  }
+	}
+      }
 
       // delete metadata folders without corresponding repo (e.g. old tmp directories)
+      repoEscAliases.sort();
       for ( const Pathname & cachePath : { _options.repoRawCachePath
 					 , _options.repoSolvCachePath } )
       {
