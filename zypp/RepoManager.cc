@@ -247,7 +247,7 @@ namespace zypp
     inline void assert_alias( const RepoInfo & info )
     {
       if ( info.alias().empty() )
-	ZYPP_THROW( RepoNoAliasException() );
+	ZYPP_THROW( RepoNoAliasException( info ) );
       // bnc #473834. Maybe we can match the alias against a regex to define
       // and check for valid aliases
       if ( info.alias()[0] == '.')
@@ -258,7 +258,7 @@ namespace zypp
     inline void assert_alias( const ServiceInfo & info )
     {
       if ( info.alias().empty() )
-	ZYPP_THROW( ServiceNoAliasException() );
+	ZYPP_THROW( ServiceNoAliasException( info ) );
       // bnc #473834. Maybe we can match the alias against a regex to define
       // and check for valid aliases
       if ( info.alias()[0] == '.')
@@ -914,9 +914,9 @@ namespace zypp
     assert_urls(info);
 
     // we will throw this later if no URL checks out fine
-    RepoException rexception(_PL("Valid metadata not found at specified URL",
-                                 "Valid metadata not found at specified URLs",
-				 info.baseUrlsSize() ) );
+    RepoException rexception( info, _PL("Valid metadata not found at specified URL",
+					"Valid metadata not found at specified URLs",
+					info.baseUrlsSize() ) );
 
     // try urls one by one
     for ( RepoInfo::urls_const_iterator it = info.baseUrlsBegin(); it != info.baseUrlsEnd(); ++it )
@@ -1012,7 +1012,7 @@ namespace zypp
         }
         else
         {
-          ZYPP_THROW(RepoUnknownTypeException());
+          ZYPP_THROW(RepoUnknownTypeException( info ));
         }
 
         // ok we have the metadata, now exchange
@@ -1198,7 +1198,7 @@ namespace zypp
       }
       break;
       default:
-        ZYPP_THROW(RepoUnknownTypeException( _("Unhandled repository type") ));
+        ZYPP_THROW(RepoUnknownTypeException( info, _("Unhandled repository type") ));
       break;
     }
     // update timestamp and checksum
@@ -1422,7 +1422,7 @@ namespace zypp
       if ( tosave.baseUrlsSize() > 0 )
       {
         if ( probedtype == RepoType::NONE )
-          ZYPP_THROW(RepoUnknownTypeException());
+          ZYPP_THROW(RepoUnknownTypeException(info));
         else
           tosave.setType(probedtype);
       }
@@ -1568,7 +1568,7 @@ namespace zypp
       RepoInfo todelete = *it;
       if (todelete.filepath().empty())
       {
-        ZYPP_THROW(RepoException( _("Can't figure out where the repo is stored.") ));
+        ZYPP_THROW(RepoException( todelete, _("Can't figure out where the repo is stored.") ));
       }
       else
       {
@@ -1580,7 +1580,7 @@ namespace zypp
           if ( filesystem::unlink(todelete.filepath()) != 0 )
           {
             // TranslatorExplanation '%s' is a filename
-            ZYPP_THROW(RepoException(str::form( _("Can't delete '%s'"), todelete.filepath().c_str() )));
+            ZYPP_THROW(RepoException( todelete, str::form( _("Can't delete '%s'"), todelete.filepath().c_str() )));
           }
           MIL << todelete.alias() << " sucessfully deleted." << endl;
         }
@@ -1644,7 +1644,7 @@ namespace zypp
 
     if (toedit.filepath().empty())
     {
-      ZYPP_THROW(RepoException( _("Can't figure out where the repo is stored.") ));
+      ZYPP_THROW(RepoException( toedit, _("Can't figure out where the repo is stored.") ));
     }
     else
     {
@@ -1757,7 +1757,7 @@ namespace zypp
     Pathname location = service.filepath();
     if( location.empty() )
     {
-      ZYPP_THROW(ServiceException( _("Can't figure out where the service is stored.") ));
+      ZYPP_THROW(ServiceException( service, _("Can't figure out where the service is stored.") ));
     }
 
     ServiceSet tmpSet;
@@ -1769,7 +1769,7 @@ namespace zypp
       if ( filesystem::unlink(location) != 0 )
       {
         // TranslatorExplanation '%s' is a filename
-        ZYPP_THROW(ServiceException(str::form( _("Can't delete '%s'"), location.c_str() )));
+        ZYPP_THROW(ServiceException( service, str::form( _("Can't delete '%s'"), location.c_str() ) ));
       }
       MIL << alias << " sucessfully deleted." << endl;
     }
@@ -2100,7 +2100,7 @@ namespace zypp
 
     if ( service.type() == ServiceType::PLUGIN )
     {
-      ZYPP_THROW(ServicePluginImmutableException());
+      ZYPP_THROW(ServicePluginImmutableException( service ));
     }
 
     const ServiceInfo & oldService = getService(oldAlias);
@@ -2108,7 +2108,7 @@ namespace zypp
     Pathname location = oldService.filepath();
     if( location.empty() )
     {
-      ZYPP_THROW(ServiceException( _("Can't figure out where the service is stored.") ));
+      ZYPP_THROW(ServiceException( oldService, _("Can't figure out where the service is stored.") ));
     }
 
     // remember: there may multiple services being defined in one file:
