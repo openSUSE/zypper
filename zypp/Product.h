@@ -111,8 +111,8 @@ namespace zypp
     */
     bool isTargetDistribution() const;
 
-    /** This is \c register.target attribute of an \b installed product.
-      * Used for registration.
+    /** This is \c register.target attribute of a product.
+      * Used for registration and filtering service repos.
       */
     std::string registerTarget() const;
 
