@@ -89,16 +89,29 @@ namespace zypp
       Date timestamp() const
       { return buildtime(); }
 
+      /** \name Patch Category */
+      //@{
       /**
        * Patch category (recommended, security,...)
        */
       std::string category() const;
 
-      /** Patch category as enum of wellknown categories.
+      /** This patch's category as enum of wellknown categories.
        * Unknown values are mapped to \ref CAT_OTHER.
        */
       Category categoryEnum() const;
 
+      /** Whether this patch's category matches \a category_r */
+      bool isCategory( const std::string & category_r ) const;
+
+      /** Patch category as enum of wellknown categories.
+       * Unknown values are mapped to \ref CAT_OTHER.
+       */
+      static Category categoryEnum( const std::string & category_r );
+      //@}
+
+      /** \name Patch Severity */
+      //@{
       /**
        * Severity string as specified in metadata.
        * For use in computaions see \ref severityFlag.
@@ -110,6 +123,15 @@ namespace zypp
        * Unknown string values are mapped to \ref SEV_OTHER
        */
       SeverityFlag severityFlag() const;
+
+      /** Whether this patch's severity matches \a severity_r */
+      bool isSeverity( const std::string & severity_r ) const;
+
+      /** Severity string mapped to an enum.
+       * Unknown string values are mapped to \ref SEV_OTHER
+       */
+      static SeverityFlag severityFlag( const std::string & category_r );
+      //@}
 
       /**
        * Does the system need to reboot to finish the update process?

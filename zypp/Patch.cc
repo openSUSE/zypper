@@ -42,63 +42,67 @@ namespace zypp
   {}
 
   ///////////////////////////////////////////////////////////////////
-  //
-  //	Patch interface forwarded to implementation
-  //
-  ///////////////////////////////////////////////////////////////////
+
+  std::string Patch::category() const
+  { return lookupStrAttribute( sat::SolvAttr::patchcategory ); }
 
   Patch::Category Patch::categoryEnum() const
+  { return categoryEnum( category() ); }
+
+  bool Patch::isCategory( const std::string & category_r ) const
+  { return( str::compareCI( category_r, category() ) == 0 ); }
+
+  Patch::Category Patch::categoryEnum( const std::string & category_r )
   {
-    std::string cat( category() );
-    switch ( cat[0] )
+    switch ( category_r[0] )
     {
       //	CAT_YAST
       case 'y':
       case 'Y':
-	if ( str::compareCI( cat, "yast" ) == 0 )
+	if ( str::compareCI( category_r, "yast" ) == 0 )
 	  return CAT_YAST;
 	break;
 
       //	CAT_SECURITY
       case 's':
       case 'S':
-	if ( str::compareCI( cat, "security" ) == 0 )
+	if ( str::compareCI( category_r, "security" ) == 0 )
 	  return CAT_SECURITY;
 	break;
 
       //	CAT_RECOMMENDED
       case 'r':
       case 'R':
-	if ( str::compareCI( cat, "recommended" ) == 0 )
+	if ( str::compareCI( category_r, "recommended" ) == 0 )
 	  return CAT_RECOMMENDED;
 	break;
       case 'b':
       case 'B':
-	if ( str::compareCI( cat, "bugfix" ) == 0 )	// rhn
+	if ( str::compareCI( category_r, "bugfix" ) == 0 )	// rhn
 	  return CAT_RECOMMENDED;
 	break;
 
       //	CAT_OPTIONAL
       case 'o':
       case 'O':
-	if ( str::compareCI( cat, "optional" ) == 0 )
+	if ( str::compareCI( category_r, "optional" ) == 0 )
 	  return CAT_OPTIONAL;
 	break;
       case 'f':
       case 'F':
-	if ( str::compareCI( cat, "feature" ) == 0 )
+	if ( str::compareCI( category_r, "feature" ) == 0 )
 	  return CAT_OPTIONAL;
 	break;
       case 'e':
       case 'E':
-	if ( str::compareCI( cat, "enhancement" ) == 0 )	// rhn
+	if ( str::compareCI( category_r, "enhancement" ) == 0 )	// rhn
 	  return CAT_OPTIONAL;
 	break;
 
       //	CAT_DOCUMENT
       case 'd':
       case 'D':
-	if ( str::compareCI( cat, "document" ) == 0 )
+	if ( str::compareCI( category_r, "document" ) == 0 )
 	  return CAT_DOCUMENT;
 	break;
     }
@@ -106,36 +110,49 @@ namespace zypp
     return CAT_OTHER;
   }
 
+  ///////////////////////////////////////////////////////////////////
+
   std::string Patch::severity() const
   { return lookupStrAttribute( sat::SolvAttr::severity ); }
 
   Patch::SeverityFlag Patch::severityFlag() const
+  { return severityFlag( severity() ); }
+
+  bool Patch::isSeverity( const std::string & severity_r ) const
+  { return( str::compareCI( severity_r, severity() ) == 0 ); }
+
+  Patch::SeverityFlag Patch::severityFlag( const std::string & severity_r )
   {
-    std::string sev( severity() );
-    switch ( sev[0] )
+    switch ( severity_r[0] )
     {
       case 'l':
       case 'L':
-	if ( str::compareCI( sev, "low" ) == 0 )
+	if ( str::compareCI( severity_r, "low" ) == 0 )
 	  return SEV_LOW;
 	break;
 
       case 'm':
       case 'M':
-	if ( str::compareCI( sev, "moderate" ) == 0 )
+	if ( str::compareCI( severity_r, "moderate" ) == 0 )
 	  return SEV_MODERATE;
 	break;
 
       case 'i':
       case 'I':
-	if ( str::compareCI( sev, "important" ) == 0 )
+	if ( str::compareCI( severity_r, "important" ) == 0 )
 	  return SEV_IMPORTANT;
 	break;
 
       case 'c':
       case 'C':
-	if ( str::compareCI( sev, "critical" ) == 0 )
+	if ( str::compareCI( severity_r, "critical" ) == 0 )
 	  return SEV_CRITICAL;
+	break;
+
+      case 'u':
+      case 'U':
+	if ( str::compareCI( severity_r, "unspecified" ) == 0 )
+	  return SEV_NONE;
 	break;
 
       case '\0':
@@ -161,11 +178,10 @@ namespace zypp
     return std::string( "unknown" );
   }
 
+  ///////////////////////////////////////////////////////////////////
+
   std::string Patch::message( const Locale & lang_r ) const
   { return lookupStrAttribute( sat::SolvAttr::message, lang_r ); }
-
-  std::string Patch::category() const
-  { return lookupStrAttribute( sat::SolvAttr::patchcategory ); }
 
   bool Patch::rebootSuggested() const
   { return lookupBoolAttribute( sat::SolvAttr::rebootSuggested ); }
