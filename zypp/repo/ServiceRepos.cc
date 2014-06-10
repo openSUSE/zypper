@@ -88,7 +88,7 @@ public:
 	std::string errbuffer;
 	prog.stderrGetUpTo( errbuffer, '\0' );
 	ERR << "Capture plugin error:[" << endl << errbuffer << endl << ']' << endl;
-	ZYPP_THROW( repo::ServicePluginInformalException(errbuffer));
+	ZYPP_THROW( repo::ServicePluginInformalException( service, errbuffer ) );
       }
 
       parser::RepoFileReader parser(buffer, _callback);
