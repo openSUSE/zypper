@@ -559,7 +559,9 @@ void solve_and_commit (Zypper & zypper)
 
     Summary summary(God->pool());
 
-    if (zypper.out().verbosity() == Out::HIGH)
+    if ( zypper.cOpts().count("details") )
+      summary.setViewOption(Summary::DETAILS);
+    else if (zypper.out().verbosity() == Out::HIGH)
       summary.setViewOption(Summary::SHOW_VERSION);
     else if (zypper.out().verbosity() == Out::DEBUG)
       summary.setViewOption(Summary::SHOW_ALL);

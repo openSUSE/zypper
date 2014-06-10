@@ -359,6 +359,9 @@ non-interactive mode. If this option is specified, it takes the preference.
 Test the installation, do not actually install any package. This option will
 add the \-\-test option to the rpm commands run by the install command.
 .TP
+.I \ \ \ \ \-\-details
+Show the detailed installation summary.
+.TP
 Download-and-install mode options:
 .TP
 .I \-d, \-\-download\-only
@@ -458,6 +461,9 @@ required ones to be installed.
 .I \-D, \-\-dry-run
 Test the repair, do not actually do anything to the system.
 .TP
+.I \ \ \ \ \-\-details
+Show the detailed installation summary.
+.TP
 \fI\-r, \-\-repo\fR <alias|name|#|URI>
 Work only with the repository specified by the alias, name, number, or URI. This
 option can be used multiple times.
@@ -478,6 +484,9 @@ option can be used multiple times.
 .TP
 .I \-D, \-\-dry-run
 Test the installation, do not actually install anything.
+.TP
+.I \ \ \ \ \-\-details
+Show the detailed installation summary.
 .TP
 .I \ \ \ \ \-\-debug\-solver
 Create solver test case for debugging. See the install command for details.
@@ -541,6 +550,9 @@ No automatic removal of unneeded dependencies.
 .I \-D, \-\-dry\-run
 Test the removal of packages, do not actually remove anything. This option will
 add the \-\-test option to the rpm commands run by the remove command.
+.TP
+.I \ \ \ \ \-\-details
+Show the detailed installation summary.
 
 
 .SS Update Management Commands
@@ -636,6 +648,9 @@ The default behavior is 'no-force'. If this option is specified, it takes the pr
 .I \-D, \-\-dry\-run
 Test the update, do not actually install or update any package. This option will
 add the \-\-test option to the rpm commands run by the update command.
+.TP
+.I \ \ \ \ \-\-details
+Show the detailed installation summary.
 .TP
 .I \ \ \ \ \-\-best\-effort
 Do a 'best effort' approach to update. This method does not explicitly select
@@ -750,6 +765,9 @@ Test the update, do not actually update.
 .TP
 This command also accepts the download-and-install mode options described
 in the \fBinstall\fR command description.
+.TP
+.I \ \ \ \ \-\-details
+Show the detailed installation summary.
 
 
 .TP
@@ -809,6 +827,9 @@ add the \-\-test option to the rpm commands run by the dist-upgrade command.
 .TP
 This command also accepts the download-and-install mode options described
 in the \fBinstall\fR command description.
+.TP
+.I \ \ \ \ \-\-details
+Show the detailed installation summary.
 .TP
 Examples:
 

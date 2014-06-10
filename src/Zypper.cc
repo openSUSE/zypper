@@ -1058,6 +1058,7 @@ void Zypper::processCommandOptions()
       {"dry-run",                   no_argument,       0, 'N'},
       {"no-recommends",             no_argument,       0,  0 },
       {"recommends",                no_argument,       0,  0 },
+      {"details",		    no_argument,       0,  0 },
       {"download",                  required_argument, 0,  0 },
       // aliases for --download
       // in --download-only, -d must be kept for backward and rug compatibility
@@ -1109,6 +1110,7 @@ void Zypper::processCommandOptions()
       "    --force-resolution      Force the solver to find a solution (even\n"
       "                            an aggressive one).\n"
       "-D, --dry-run               Test the installation, do not actually install.\n"
+      "    --details               Show the detailed installation summary.\n"
       "    --download              Set the download-install mode. Available modes:\n"
       "                            %s\n"
       "-d, --download-only         Only download the packages, do not install.\n"
@@ -1136,6 +1138,7 @@ void Zypper::processCommandOptions()
       {"clean-deps", no_argument,       0, 'u'},
       {"no-clean-deps", no_argument,    0, 'U'},
       {"dry-run",    no_argument,       0, 'D'},
+      {"details",		    no_argument,       0,  0 },
       // rug uses -N shorthand
       {"dry-run",    no_argument,       0, 'N'},
       {"help",       no_argument,       0, 'h'},
@@ -1165,6 +1168,7 @@ void Zypper::processCommandOptions()
       "-u, --clean-deps            Automatically remove unneeded dependencies.\n"
       "-U, --no-clean-deps         No automatic removal of unneeded dependencies.\n"
       "-D, --dry-run               Test the removal, do not actually remove.\n"
+      "    --details               Show the detailed installation summary.\n"
     ), "package, patch, pattern, product", "package");
     break;
   }
@@ -1202,6 +1206,7 @@ void Zypper::processCommandOptions()
       {"dry-run", no_argument, 0, 'D'},
       // rug uses -N shorthand
       {"dry-run", no_argument, 0, 'N'},
+      {"details",		    no_argument,       0,  0 },
       {"download",                  required_argument, 0,  0 },
       // aliases for --download
       // in --download-only, -d must be kept for backward and rug compatibility
@@ -1230,6 +1235,7 @@ void Zypper::processCommandOptions()
       "                            to the required.\n"
       "-D, --dry-run               Test the repair, do not actually do anything to\n"
       "                            the system.\n"
+      "    --details               Show the detailed installation summary.\n"
       "    --download              Set the download-install mode. Available modes:\n"
       "                            %s\n"
       "-d, --download-only         Only download the packages, do not install.\n"
@@ -1241,6 +1247,7 @@ void Zypper::processCommandOptions()
   {
     static struct option options[] = {
       {"dry-run", no_argument, 0, 'D'},
+      {"details",		    no_argument,       0,  0 },
       {"download",                  required_argument, 0,  0 },
       // aliases for --download
       // in --download-only, -d must be kept for backward and rug compatibility
@@ -1264,6 +1271,7 @@ void Zypper::processCommandOptions()
       "  Command options:\n"
       "-r, --repo <alias|#|URI>    Load only the specified repositories.\n"
       "-D, --dry-run               Test the installation, do not actually install.\n"
+      "    --details               Show the detailed installation summary.\n"
       "    --download              Set the download-install mode. Available modes:\n"
       "                            %s\n"
       "-d, --download-only         Only download the packages, do not install.\n"
@@ -1737,6 +1745,7 @@ void Zypper::processCommandOptions()
       {"dry-run",                   no_argument,       0, 'D'},
       // rug uses -N shorthand
       {"dry-run",                   no_argument,       0, 'N'},
+      {"details",		    no_argument,       0,  0 },
       {"download",                  required_argument, 0,  0 },
       // aliases for --download
       // in --download-only, -d must be kept for backward and rug compatibility
@@ -1785,6 +1794,7 @@ void Zypper::processCommandOptions()
       "    --force-resolution      Force the solver to find a solution (even\n"
       "                            an aggressive one).\n"
       "-D, --dry-run               Test the update, do not actually update.\n"
+      "    --details               Show the detailed installation summary.\n"
       "    --download              Set the download-install mode. Available modes:\n"
       "                            %s\n"
       "-d, --download-only         Only download the packages, do not install.\n"
@@ -1806,6 +1816,7 @@ void Zypper::processCommandOptions()
       {"recommends",                no_argument,       0,  0 },
       {"replacefiles",              no_argument,       0,  0 },
       {"dry-run",                   no_argument,       0, 'D'},
+      {"details",		    no_argument,       0,  0 },
       {"download",                  required_argument, 0,  0 },
       // aliases for --download
       // in --download-only, -d must be kept for backward and rug compatibility
@@ -1848,6 +1859,7 @@ void Zypper::processCommandOptions()
       "                            as an error. --download-as-needed disables the fileconflict check.\n"
       "-r, --repo <alias|#|URI>    Load only the specified repository.\n"
       "-D, --dry-run               Test the update, do not actually update.\n"
+      "    --details               Show the detailed installation summary.\n"
       "    --download              Set the download-install mode. Available modes:\n"
       "                            %s\n"
       "-d, --download-only         Only download the packages, do not install.\n"
@@ -1900,6 +1912,7 @@ void Zypper::processCommandOptions()
       {"dry-run",                   no_argument,       0, 'D'},
       // rug uses -N shorthand
       {"dry-run",                   no_argument,       0, 'N'},
+      {"details",		    no_argument,       0,  0 },
       {"download",                  required_argument, 0,  0 },
       // aliases for --download
       // in --download-only, -d must be kept for backward and rug compatibility
@@ -1932,6 +1945,7 @@ void Zypper::processCommandOptions()
       "                            already installed, packages. Default is to treat file conflicts\n"
       "                            as an error. --download-as-needed disables the fileconflict check.\n"
       "-D, --dry-run               Test the upgrade, do not actually upgrade\n"
+      "    --details               Show the detailed installation summary.\n"
       "    --download              Set the download-install mode. Available modes:\n"
       "                            %s\n"
       "-d, --download-only         Only download the packages, do not install.\n"
