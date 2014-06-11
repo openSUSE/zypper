@@ -1,4 +1,11 @@
 -------------------------------------------------------------------
+Wed Jun 11 07:38:37 CEST 2014 - ma@suse.de
+
+- Show patch severity (bnc#881373,FATE#312633)
+- Add '--details' to show the detailed installation summary (bnc#721823)
+- version 1.11.8
+
+-------------------------------------------------------------------
 Wed May 14 13:58:10 CEST 2014 - ma@suse.de
 
 - Notify about cached packages in download progess
