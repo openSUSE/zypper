@@ -129,7 +129,7 @@ string string_patch_status(const PoolItem & pi)
     return "";
   }
 
-  return _("Not Applicable"); //! \todo make this "Not Needed" after 11.0
+  return _("Not Needed");
 }
 
 // ----------------------------------------------------------------------------

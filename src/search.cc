@@ -341,13 +341,10 @@ FillPatchesTable::FillPatchesTable( Table & table, zypp::TriBool inst_notinst )
   TableHeader header;
 
   header
-    // translators: catalog (rug's word for repository) (header)
-    << _("Catalog")
+    << (_gopts.is_rug_compatible ? _("Catalog") : _("Repository"))
     << _("Name")
-    << table::EditionStyleSetter( *_table, ("Version") )
-    // translators: patch category (recommended, security)
     << _("Category")
-    // translators: patch status (installed, uninstalled, needed)
+    << _("Severity")
     << _("Status");
 
   *_table << header;
@@ -369,8 +366,8 @@ bool FillPatchesTable::operator()(const zypp::PoolItem & pi) const
   row
     << pi->repository().asUserString()
     << pi->name()
-    << pi->edition().asString()
     << patch->category()
+    << patch->severity()
     << string_patch_status(pi);
 
   *_table << row;

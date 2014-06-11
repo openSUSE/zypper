@@ -136,6 +136,7 @@ static bool xml_list_patches (Zypper & zypper)
 	cout << "arch=\""  << res->arch().asString() << "\" ";
 	cout << "status=\""  << patchStatusAsString( *it ) << "\" ";
         cout << "category=\"" <<  patch->category() << "\" ";
+        cout << "severity=\"" <<  patch->severity() << "\" ";
         cout << "pkgmanager=\"" << (patch->restartSuggested() ? "true" : "false") << "\" ";
         cout << "restart=\"" << (patch->rebootSuggested() ? "true" : "false") << "\" ";
 
@@ -258,7 +259,7 @@ static bool list_patch_updates(Zypper & zypper)
   unsigned cols;
 
   th << (zypper.globalOpts().is_rug_compatible ? _("Catalog") : _("Repository"))
-     << _("Name") << table::EditionStyleSetter( tbl, _("Version") ) << _("Category") << _("Status") << _("Summary");
+     << _("Name") << _("Category") << _("Severity") << _("Status") << _("Summary");
   cols = 6;
   tbl << th;
   pm_tbl << th;
@@ -279,7 +280,7 @@ static bool list_patch_updates(Zypper & zypper)
           continue;
       }
 
-      if (!category.empty() && category != patch->category())
+      if ( ! ( category.empty() || patch->isCategory( category ) ) )
       {
         DBG << "candidate patch " << patch << " is not in the specified category" << endl;
         continue;
@@ -289,8 +290,9 @@ static bool list_patch_updates(Zypper & zypper)
       {
         TableRow tr (cols);
         tr << patch->repoInfo().asUserString();
-        tr << res->name () << res->edition ().asString();
+        tr << res->name ();
         tr << patch->category();
+        tr << patch->severity();
         tr << (it->isBroken() ? _("needed") : _("not needed"));
         tr << patch->summary();
 
@@ -579,7 +581,7 @@ void list_patches_by_issue(Zypper & zypper)
 
   Table t;
   TableHeader th;
-  th << _("Issue") << _("No.") << _("Patch") << _("Category") << _("Status");
+  th << _("Issue") << _("No.") << _("Patch") << _("Category") << _("Severity") << _("Status");
   t << th;
 
 #define FILL_ISSUES(TYPE, ID) \
@@ -671,8 +673,9 @@ void list_patches_by_issue(Zypper & zypper)
         TableRow tr;
         tr << itype;
         tr << d->subFind(sat::SolvAttr::updateReferenceId).asString();
-        tr << (patch->name() + "-" + patch->edition().asString());
+        tr << patch->name();
         tr << patch->category();
+        tr << patch->severity();
         tr << (pi.isBroken() ? _("needed") : _("not needed"));
         t << tr;
       }
@@ -682,7 +685,7 @@ void list_patches_by_issue(Zypper & zypper)
   // look for matches in patch descriptions
   Table t1;
   TableHeader th1;
-  th1 << _("Name") << table::EditionStyleSetter( t1, _("Version") ) << _("Category") << _("Summary");
+  th1 << _("Name") << _("Category") << _("Severity") << _("Summary");
   t1 << th1;
   if (!issuesstr.empty())
   {
@@ -701,7 +704,7 @@ void list_patches_by_issue(Zypper & zypper)
       Patch::constPtr patch = asKind<Patch>(pi.resolvable());
 
       TableRow tr;
-      tr << patch->name() << patch->edition().asString() << patch->category();
+      tr << patch->name() << patch->category() << patch->severity();
       //! \todo could show a highlighted match with a portion of surrounding
       //! text. Needs case-insensitive find.
       tr << patch->summary();

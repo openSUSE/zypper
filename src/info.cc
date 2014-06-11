@@ -264,6 +264,7 @@ void printPatchInfo(Zypper & zypper, const ui::Selectable & s )
 
   Patch::constPtr patch = asKind<Patch>(pool_item.resolvable());
   cout << _("Category: ") << patch->category() << endl;
+  cout << _("Severity: ") << patch->severity() << endl;
   cout << _("Created On: ") << patch->timestamp().asString() << endl;
   cout << _("Reboot Required: ") << (patch->rebootSuggested() ? _("Yes") : _("No")) << endl;
 
