@@ -1,4 +1,11 @@
 -------------------------------------------------------------------
+Wed Jun 11 07:36:48 CEST 2014 - ma@suse.de
+
+- Patch: add isCategory/isSeverity convenience
+- If available provide info in ServiceException
+- version 14.24.0 (23)
+
+-------------------------------------------------------------------
 Wed Jun  4 11:49:32 CEST 2014 - ma@suse.de
 
 - Cleanup orphanded service repos on the fly (bnc#649846)
