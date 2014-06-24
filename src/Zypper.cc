@@ -789,6 +789,12 @@ void Zypper::commandShell()
 
   setRunningShell(true);
 
+  if ( _gopts.changedRoot && _gopts.root_dir != "/" )
+  {
+    // bnc#575096: Quick fix
+    ::setenv( "ZYPP_LOCKFILE_ROOT", _gopts.root_dir.c_str(), 0 );
+  }
+
   string histfile;
   try {
     const char * env = getenv ("HOME");
