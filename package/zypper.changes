@@ -1,4 +1,11 @@
 -------------------------------------------------------------------
+Tue Jun 24 14:10:47 CEST 2014 - ma@suse.de
+
+- Fix 'zypper --root sh' creating the zypp lockfile outside chroot
+  (bnc#575096)
+- version 1.6.315
+
+-------------------------------------------------------------------
 Thu Feb  6 19:33:45 CET 2014 - ma@suse.de
 
 - Remove license text from test data (bnc#862471)
