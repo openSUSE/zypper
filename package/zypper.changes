@@ -2,7 +2,7 @@
 Tue Jun 24 14:10:47 CEST 2014 - ma@suse.de
 
 - Fix 'zypper --root sh' creating the zypp lockfile outside chroot
-  (bnc#575096)
+  (bnc#575096,bnc#883411)
 - version 1.6.315
 
 -------------------------------------------------------------------
