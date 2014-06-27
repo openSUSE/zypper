@@ -989,6 +989,9 @@ string SATResolver::SATprobleminfoString(Id problem, string &detail, Id &ignoreI
   sat::Solvable s, s2;
 
   ignoreId = 0;
+
+  // FIXME: solver_findallproblemrules to get all rules for this problem
+  // (the 'most relevabt' one returned by solver_findproblemrule is embedded
   probr = solver_findproblemrule(_solv, problem);
   switch (solver_ruleinfo(_solv, probr, &source, &target, &dep))
   {
