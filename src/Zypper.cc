@@ -188,8 +188,10 @@ void print_main_help(Zypper & zypper)
   static string help_global_repo_options = _("     Repository Options:\n"
     "\t--no-gpg-checks\t\tIgnore GPG check failures and continue.\n"
     "\t--gpg-auto-import-keys\tAutomatically trust and import new repository\n"
-      "\t\t\t\tsigning keys.\n"
+    "\t\t\t\tsigning keys.\n"
     "\t--plus-repo, -p <URI>\tUse an additional repository.\n"
+    "\t--plus-content <tag>\tAdditionally use disabled repositories providing a specific keyword.\n"
+    "\t\t\t\tTry '--plus-content debug' to enable repos indicating to provide debug packages.\n"
     "\t--disable-repositories\tDo not read meta-data from repositories.\n"
     "\t--no-refresh\t\tDo not refresh the repositories.\n"
     "\t--no-cd\t\t\tIgnore CD/DVD repositories.\n"
@@ -394,6 +396,7 @@ void Zypper::processGlobalOptions()
     {"disable-system-resolvables", no_argument,       0,  0 },
     // REPO OPTIONS
     {"plus-repo",                  required_argument, 0, 'p'},
+    {"plus-content",               required_argument, 0,  0 },
     {"disable-repositories",       no_argument,       0,  0 },
     {"no-refresh",                 no_argument,       0,  0 },
     {"no-cd",                      no_argument,       0,  0 },
@@ -748,7 +751,7 @@ void Zypper::processGlobalOptions()
     }
   }
 
-  // additional repositories
+  // additional repositories by URL
   if (gopts.count("plus-repo"))
   {
     switch (command().toEnum())
@@ -794,6 +797,34 @@ void Zypper::processGlobalOptions()
         DBG << "got additional repo: " << url << endl;
         count++;
       }
+    }
+    }
+  }
+
+  // additional repositories by content (keywords)
+  if ( gopts.count("plus-content") )
+  {
+    switch ( command().toEnum())
+    {
+    case ZypperCommand::ADD_REPO_e:
+    case ZypperCommand::REMOVE_REPO_e:
+    case ZypperCommand::MODIFY_REPO_e:
+    case ZypperCommand::RENAME_REPO_e:
+    //case ZypperCommand::REFRESH_e:
+    case ZypperCommand::CLEAN_e:
+    case ZypperCommand::REMOVE_LOCK_e:
+    case ZypperCommand::LIST_LOCKS_e:
+    {
+      out().warning(boost::str(format(
+        // TranslatorExplanation The %s is "--option-name"
+        _("The %s option has no effect here, ignoring."))
+        % "--plus-content"));
+      break;
+    }
+    default:
+    {
+      const std::list<std::string> & content( gopts["plus-content"] );
+      _rdata.additional_content_repos.insert( content.begin(), content.end() );
     }
     }
   }

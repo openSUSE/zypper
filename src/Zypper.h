@@ -131,6 +131,7 @@ struct RuntimeData
 
   std::list<zypp::RepoInfo> repos;
   std::list<zypp::RepoInfo> additional_repos;
+  std::set<std::string>     additional_content_repos;
   int patches_count;
   int security_patches_count;
   /**

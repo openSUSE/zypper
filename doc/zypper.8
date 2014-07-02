@@ -1816,6 +1816,12 @@ Use an additional repository for this operation. The repository aliased tmp#
 and named by the specified URI will be added for this operation and removed
 at the end. You can specify this option multiple times.
 .TP
+.I \ \ \ \ \-\-plus\-content <tag>
+Additionaly use disabled repositories providing a specific keyword. Disabled repositories are refreshed
+and those providing the specifies keyword are temporarily endabled. To enable for example repositories
+which may provide additional \fB-debuginfo\fR or \fB-debugsource\fR packages use \fI--plus-content debug\fR.
+You can specify this option multiple times.
+.TP
 .I \ \ \ \ \-\-disable\-repositories
 Do not read metadata from repositories. This option will prevent loading of
 packages from repositories, thus making zypper work only with the installed
