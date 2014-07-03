@@ -129,6 +129,9 @@ cd build
 make install DESTDIR=$RPM_BUILD_ROOT
 make -C po install DESTDIR=$RPM_BUILD_ROOT
 
+# yzpper symlink
+ln -s zypper $RPM_BUILD_ROOT%{_bindir}/yzpper
+
 # Create filelist with translations
 cd ..
 %{find_lang} zypper
@@ -145,6 +148,7 @@ rm -rf "$RPM_BUILD_ROOT"
 %config(noreplace) %{_sysconfdir}/logrotate.d/zypp-refresh.lr
 %{_sysconfdir}/bash_completion.d/zypper.sh
 %{_bindir}/zypper
+%{_bindir}/yzpper
 %{_bindir}/installation_sources
 %{_sbindir}/zypp-refresh
 %dir %{_datadir}/zypper
