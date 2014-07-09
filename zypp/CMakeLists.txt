@@ -756,7 +756,6 @@ SET( zypp_repo_HEADERS
   repo/Downloader.h
   repo/RepoVariables.h
   repo/RepoInfoBase.h
-  repo/RepoInfoBaseImpl.h
   repo/PluginServices.h
   repo/ServiceRepos.h
 )

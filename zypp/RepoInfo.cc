@@ -17,7 +17,8 @@
 #include "zypp/parser/xml/XmlEscape.h"
 
 #include "zypp/RepoInfo.h"
-#include "zypp/repo/RepoInfoBaseImpl.h"
+#include "zypp/TriBool.h"
+#include "zypp/Pathname.h"
 #include "zypp/repo/RepoMirrorList.h"
 #include "zypp/ExternalProgram.h"
 #include "zypp/media/MediaAccess.h"
@@ -34,11 +35,10 @@ namespace zypp
   //	CLASS NAME : RepoInfo::Impl
   //
   /** RepoInfo implementation. */
-  struct RepoInfo::Impl : public repo::RepoInfoBase::Impl
+  struct RepoInfo::Impl
   {
     Impl()
-      : repo::RepoInfoBase::Impl()
-      , gpgcheck(indeterminate)
+      : gpgcheck(indeterminate)
       ,	keeppackages(indeterminate)
       , type(repo::RepoType::NONE_e)
       , emptybaseurls(false)

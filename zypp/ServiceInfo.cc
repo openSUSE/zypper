@@ -16,8 +16,6 @@
 #include "zypp/parser/xml/XmlEscape.h"
 
 #include "zypp/RepoInfo.h"
-#include "zypp/repo/RepoInfoBaseImpl.h"
-
 #include "zypp/ServiceInfo.h"
 
 using namespace std;
@@ -31,7 +29,7 @@ namespace zypp
   //
   //  CLASS NAME : ServiceInfo::Impl
   //
-  struct ServiceInfo::Impl : public repo::RepoInfoBase::Impl
+  struct ServiceInfo::Impl
   {
     typedef ServiceInfo::ReposToEnable  ReposToEnable;
     typedef ServiceInfo::ReposToDisable ReposToDisable;
@@ -46,13 +44,11 @@ namespace zypp
 
   public:
     Impl()
-      : repo::RepoInfoBase::Impl()
-      , type(repo::ServiceType::NONE_e)
+      : type(repo::ServiceType::NONE_e)
     {}
 
     Impl(const Url & url_)
-      : repo::RepoInfoBase::Impl()
-      , url(url_)
+      : url(url_)
       , type(repo::ServiceType::NONE_e)
     {}
 

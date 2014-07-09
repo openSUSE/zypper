@@ -15,44 +15,58 @@
 #include "zypp/repo/RepoVariables.h"
 
 #include "zypp/repo/RepoInfoBase.h"
-#include "zypp/repo/RepoInfoBaseImpl.h"
+#include "zypp/TriBool.h"
+#include "zypp/Pathname.h"
 
 using namespace std;
 
 ///////////////////////////////////////////////////////////////////
 namespace zypp
-{ /////////////////////////////////////////////////////////////////
+{
   ///////////////////////////////////////////////////////////////////
   namespace repo
-  { /////////////////////////////////////////////////////////////////
+  {
 
   ///////////////////////////////////////////////////////////////////
-  //
-  //    CLASS NAME : RepoInfoBase::Impl
-  //
+  /// \class RepoInfoBase::Impl
+  /// \brief RepoInfoBase data
   ///////////////////////////////////////////////////////////////////
-
-  /** \relates RepoInfo::Impl Stream output */
-  inline std::ostream & operator<<( std::ostream & str, const RepoInfoBase::Impl & obj )
+  struct RepoInfoBase::Impl
   {
-    return str << "RepoInfo::Impl";
-  }
+    Impl()
+      : _enabled( indeterminate )
+      , _autorefresh( indeterminate )
+    {}
 
-  void RepoInfoBase::Impl::setAlias(const string & alias_)
-  {
-    this->alias = alias_;
-    // replace slashes with underscores
-    std::string fnd="/";
-    std::string rep="_";
-    std::string escaped_alias = alias_;
-    size_t pos = escaped_alias.find(fnd);
-    while (pos != string::npos)
+    Impl( const std::string & alias_r )
+      : _enabled( indeterminate )
+      , _autorefresh( indeterminate )
+    { setAlias( alias_r ); }
+
+  public:
+    TriBool	_enabled;
+    TriBool	_autorefresh;
+    std::string	_alias;
+    std::string	_escaped_alias;
+    std::string	_name;
+    Pathname	_filepath;
+
+  public:
+
+    void setAlias( const std::string & alias_r )
     {
-      escaped_alias.replace(pos, fnd.length(), rep);
-      pos = escaped_alias.find(fnd, pos+rep.length());
+      _alias = _escaped_alias = alias_r;
+      // replace slashes with underscores
+      str::replaceAll( _escaped_alias, "/", "_" );
     }
-    this->escaped_alias = escaped_alias;
-  }
+
+  private:
+    friend Impl * rwcowClone<Impl>( const Impl * rhs );
+    /** clone for RWCOW_pointer */
+    Impl * clone() const
+    { return new Impl( *this ); }
+  };
+  ///////////////////////////////////////////////////////////////////
 
   ///////////////////////////////////////////////////////////////////
   //
@@ -60,80 +74,51 @@ namespace zypp
   //
   ///////////////////////////////////////////////////////////////////
 
-  ///////////////////////////////////////////////////////////////////
-  //
-  //    METHOD NAME : RepoInfoBase::RepoInfoBase
-  //    METHOD TYPE : Ctor
-  //
   RepoInfoBase::RepoInfoBase()
     : _pimpl( new Impl() )
   {}
 
-  ///////////////////////////////////////////////////////////////////
-  //
-  //    METHOD NAME : RepoInfoBase::RepoInfoBase
-  //    METHOD TYPE : Ctor
-  //
   RepoInfoBase::RepoInfoBase(const string & alias)
     : _pimpl( new Impl(alias) )
   {}
 
-  ///////////////////////////////////////////////////////////////////
-  //
-  //    METHOD NAME : RepoInfoBase::~RepoInfoBase
-  //    METHOD TYPE : Dtor
-  //
   RepoInfoBase::~RepoInfoBase()
   {}
 
   void RepoInfoBase::setEnabled( bool enabled )
-  {
-    _pimpl->enabled = enabled;
-  }
+  { _pimpl->_enabled = enabled; }
 
   void RepoInfoBase::setAutorefresh( bool autorefresh )
-  {
-    _pimpl->autorefresh = autorefresh;
-  }
+  { _pimpl->_autorefresh = autorefresh; }
 
   void RepoInfoBase::setAlias( const std::string &alias )
-  {
-    _pimpl->setAlias(alias);
-  }
+  { _pimpl->setAlias(alias); }
 
   void RepoInfoBase::setName( const std::string &name )
-  {
-    _pimpl->name = name;
-  }
+  { _pimpl->_name = name; }
 
   void RepoInfoBase::setFilepath( const Pathname &filepath )
-  {
-    _pimpl->filepath = filepath;
-  }
+  { _pimpl->_filepath = filepath; }
 
   // true by default (if not set by setEnabled())
   bool RepoInfoBase::enabled() const
-  { return indeterminate(_pimpl->enabled) ? true : (bool) _pimpl->enabled; }
+  { return indeterminate(_pimpl->_enabled) ? true : (bool) _pimpl->_enabled; }
 
   // false by default (if not set by setAutorefresh())
   bool RepoInfoBase::autorefresh() const
-  { return indeterminate(_pimpl->autorefresh) ? false : (bool) _pimpl->autorefresh; }
+  { return indeterminate(_pimpl->_autorefresh) ? false : (bool) _pimpl->_autorefresh; }
 
   std::string RepoInfoBase::alias() const
-  { return _pimpl->alias; }
+  { return _pimpl->_alias; }
 
   std::string RepoInfoBase::escaped_alias() const
-  { return _pimpl->escaped_alias; }
+  { return _pimpl->_escaped_alias; }
 
   std::string RepoInfoBase::name() const
   {
-    if ( _pimpl->name.empty() )
-    {
+    if ( _pimpl->_name.empty() )
       return alias();
-    }
-
-    repo::RepoVariablesStringReplacer replacer;
-    return replacer(_pimpl->name);
+    return repo::RepoVariablesStringReplacer()( _pimpl->_name );
   }
 
   std::string RepoInfoBase::label() const
@@ -144,7 +129,7 @@ namespace zypp
   }
 
   Pathname RepoInfoBase::filepath() const
-  { return _pimpl->filepath; }
+  { return _pimpl->_filepath; }
 
 
   std::ostream & RepoInfoBase::dumpOn( std::ostream & str ) const
@@ -178,11 +163,8 @@ namespace zypp
   {
     return obj.dumpOn(str);
   }
-  ///////////////////////////////////////////////////////////////////
 
-    /////////////////////////////////////////////////////////////////
   } // namespace repo
   ///////////////////////////////////////////////////////////////////
-  /////////////////////////////////////////////////////////////////
 } // namespace zypp
 ///////////////////////////////////////////////////////////////////
