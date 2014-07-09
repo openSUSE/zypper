@@ -23,7 +23,7 @@
 #include "zypp/ExternalProgram.h"
 #include "zypp/media/MediaAccess.h"
 
-using namespace std;
+using std::endl;
 using zypp::xml::escape;
 
 ///////////////////////////////////////////////////////////////////
@@ -465,7 +465,7 @@ namespace zypp
 
   std::ostream & RepoInfo::dumpAsXmlOn( std::ostream & str, const std::string & content ) const
   {
-    string tmpstr;
+    std::string tmpstr;
     str
       << "<repo"
       << " alias=\"" << escape(alias()) << "\""
