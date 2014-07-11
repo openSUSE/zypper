@@ -1,4 +1,11 @@
 -------------------------------------------------------------------
+Fri Jul 11 12:57:51 CEST 2014 - ma@suse.de
+
+- Enable --plus-content option (FATE#316287)
+- Add symlink yzpper -> zypper (bnc#885655)
+- version 1.11.9
+
+-------------------------------------------------------------------
 Wed Jun 11 07:38:37 CEST 2014 - ma@suse.de
 
 - Show patch severity (bnc#881373,FATE#312633)
