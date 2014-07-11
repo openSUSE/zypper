@@ -184,7 +184,6 @@ void Downloader::download( MediaSetAccess &media,
 
   this->reset();
 
-  Reader reader( dest_dir + repoInfo().path() + "/repodata/repomd.xml" );
   RepomdFileReader( dest_dir + repoInfo().path() + "/repodata/repomd.xml", bind( &Downloader::repomd_Callback, this, _1, _2));
 
   // ready, go!
