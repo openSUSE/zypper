@@ -1,4 +1,11 @@
 -------------------------------------------------------------------
+Fri Jul 11 13:42:43 CEST 2014 - ma@suse.de
+
+- Support RepoInfo content keywords (FATE#316287)
+- fix parsing repomd.xml twice
+- version 14.25.0 (23)
+
+-------------------------------------------------------------------
 Wed Jun 11 07:36:48 CEST 2014 - ma@suse.de
 
 - Patch: add isCategory/isSeverity convenience
