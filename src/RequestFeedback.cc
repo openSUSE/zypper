@@ -68,8 +68,13 @@ string SolverRequester::Feedback::asUserString(
         return str::form(_("Object '%s' not found in specified repositories."), _reqpkg.orig_str.c_str());
     }
   case NOT_FOUND_CAP:
+  {
     // translators: meaning a package %s or provider of capability %s
-    return str::form(_("No provider of '%s' found."), _reqpkg.orig_str.c_str());
+    std::string ret( str::form(_("No provider of '%s' found."), _reqpkg.orig_str.c_str()) );
+    if ( _reqpkg.orig_str.find("debuginfo") != std::string::npos )
+      ret += " ['--plus-content debug'?]";
+    return ret;
+  }
 
   case NOT_INSTALLED:
     if (_reqpkg.orig_str.find_first_of("?*") != string::npos) // wildcards used

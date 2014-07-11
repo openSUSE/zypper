@@ -262,7 +262,7 @@ static bool refresh_raw_metadata(Zypper & zypper,
 
 // ---------------------------------------------------------------------------
 
-static bool build_cache(Zypper & zypper, const RepoInfo &repo, bool force_build)
+static bool build_cache(Zypper & zypper, const RepoInfo & repo, bool force_build)
 {
   if (force_build)
     zypper.out().info(_("Forcing building of repository cache"));
@@ -660,6 +660,25 @@ void do_init_repos(Zypper & zypper, const Container & container)
     RepoInfo repo(*it);
     MIL << "checking if to refresh " << repo.alias() << endl;
 
+    // disabled repos may get temp. enabled to check for --plus-content
+    bool contentcheck = false;
+    if ( ! ( gData.additional_content_repos.empty() 
+          || repo.url().schemeIsVolatile()
+	  || repo.enabled() ) )
+    {
+      // Preliminarily enable if last content matches or no content info available.
+      // Final check is done after refresh.
+      if ( repo.hasContentAny( gData.additional_content_repos ) || ! repo.hasContent() )
+      {
+	contentcheck = true;
+	repo.setEnabled( true );
+	zypper.out().info( boost::format(_("Scanning content of disabled repository '%s'."))
+			  % repo.asUserString(),
+			  " [--plus-content]" );
+	MIL << "[--plus-content] check " << repo.alias() << endl;
+      }
+    }
+
     bool do_refresh =
       repo.enabled() &&
       repo.autorefresh() &&
@@ -682,6 +701,7 @@ void do_init_repos(Zypper & zypper, const Container & container)
               % repo.alias() << endl;
 
           it->setEnabled(false);
+	  contentcheck = false;
         }
       }
       // non-root user
@@ -719,6 +739,7 @@ void do_init_repos(Zypper & zypper, const Container & container)
               % repo.alias() << endl;
 
           it->setEnabled(false);
+	  contentcheck = false;
         }
       }
       // non-root user
@@ -741,7 +762,27 @@ void do_init_repos(Zypper & zypper, const Container & container)
               % repo.asUserString()));
           WAR << "Disabling repository '" << repo.alias() << "'" << endl;
           it->setEnabled(false);
+	  contentcheck = false;
         }
+      }
+    }
+
+    if ( contentcheck )
+    {
+      if ( repo.hasContentAny( gData.additional_content_repos ) )
+      {
+	zypper.out().info( boost::format(_("Temporarily enabling repository '%s'."))
+			   % repo.asUserString(),
+			   " [--plus-content]" );
+	it->setEnabled(true);
+	MIL << "[--plus-content] check says use " << repo.alias() << endl;
+      }
+      else
+      {
+	zypper.out().info( boost::format(_("Repository '%s' stays disabled."))
+			   % repo.asUserString(),
+			   " [--plus-content]" );
+	MIL << "[--plus-content] check says disable " << repo.alias() << endl;
       }
     }
   }
