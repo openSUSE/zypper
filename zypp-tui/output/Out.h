@@ -460,6 +460,33 @@ public:
   virtual void infoLine(const TermLine & msg_r, Verbosity verbosity_r = NORMAL, Type mask_r = TYPE_ALL)
   { info( msg_r.get(), verbosity_r, mask_r ); }
 
+  struct Info : protected ParentOut
+  {
+    NON_COPYABLE( Info );
+
+    Info( Out & out_r )
+      : ParentOut( out_r )
+      , _str( new std::ostringstream )
+    {}
+
+    Info( Out::Info && rhs )
+      : ParentOut( rhs )
+      , _str( std::move(rhs._str) )
+    {}
+
+    ~Info()
+    { out().info( _str->str() ); }
+
+    template<class _Tp>
+    std::ostream & operator<<( const _Tp & val )
+    { return (*_str) << val; /*return *this;*/ }
+
+   private:
+      std::unique_ptr<std::ostringstream> _str; // work around missing move ctor
+  };
+
+  Info info() { return Info( *this ); }
+
   /**
    * Show a warning.
    *
