@@ -23,6 +23,10 @@
 #include "zypp/ExternalProgram.h"
 #include "zypp/media/MediaAccess.h"
 
+#include "zypp/base/IOStream.h"
+#include "zypp/base/InputStream.h"
+#include "zypp/parser/xml/Reader.h"
+
 using std::endl;
 using zypp::xml::escape;
 
@@ -97,6 +101,56 @@ namespace zypp
     bool baseurl2dump() const
     { return !emptybaseurls && !_baseUrls.empty(); }
 
+
+    void addContent( const std::string & keyword_r )
+    { _keywords.insert( keyword_r ); }
+
+    bool hasContent( const std::string & keyword_r ) const
+    {
+      if ( _keywords.empty() && ! metadatapath.empty() )
+      {
+	// HACK directly check master index file until RepoManager offers
+	// some content probing ans zypepr uses it.
+	/////////////////////////////////////////////////////////////////
+	MIL << "Empty keywords...." << metadatapath << endl;
+	Pathname master;
+	if ( PathInfo( (master=metadatapath/"/repodata/repomd.xml") ).isFile() )
+	{
+	  //MIL << "GO repomd.." << endl;
+	  xml::Reader reader( master );
+	  while ( reader.seekToNode( 2, "content" ) )
+	  {
+	    _keywords.insert( reader.nodeText().asString() );
+	    reader.seekToEndNode( 2, "content" );
+	  }
+	  _keywords.insert( "" );	// valid content in _keywords even if empty
+	}
+	else if ( PathInfo( (master=metadatapath/"/content") ).isFile() )
+	{
+	  //MIL << "GO content.." << endl;
+	  iostr::forEachLine( InputStream( master ),
+                            [this]( int num_r, std::string line_r )->bool
+                            {
+                              if ( str::startsWith( line_r, "REPOKEYWORDS" ) )
+			      {
+				std::vector<std::string> words;
+				if ( str::split( line_r, std::back_inserter(words) ) > 1
+				  && words[0].length() == 12 /*"REPOKEYWORDS"*/ )
+				{
+				  this->_keywords.insert( ++words.begin(), words.end() );
+				}
+				return true; // mult. occurrances are ok.
+			      }
+			      return( ! str::startsWith( line_r, "META " ) );	// no need to parse into META section.
+			    } );
+	  _keywords.insert( "" );
+	}
+	/////////////////////////////////////////////////////////////////
+      }
+      return( _keywords.find( keyword_r ) != _keywords.end() );
+
+    }
+
   public:
     TriBool gpgcheck;
     TriBool keeppackages;
@@ -114,6 +168,7 @@ namespace zypp
   private:
     Url mirrorlist_url;
     mutable std::set<Url> _baseUrls;
+    mutable std::set<std::string> _keywords;
 
     friend Impl * rwcowClone<Impl>( const Impl * rhs );
     /** clone for RWCOW_pointer */
@@ -271,6 +326,13 @@ namespace zypp
 
   bool RepoInfo::baseUrlSet() const
   { return _pimpl->baseurl2dump(); }
+
+
+  void RepoInfo::addContent( const std::string & keyword_r )
+  { _pimpl->addContent( keyword_r ); }
+
+  bool RepoInfo::hasContent( const std::string & keyword_r ) const
+  { return _pimpl->hasContent( keyword_r ); }
 
   ///////////////////////////////////////////////////////////////////
 
