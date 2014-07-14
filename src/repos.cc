@@ -662,7 +662,7 @@ void do_init_repos(Zypper & zypper, const Container & container)
 
     // disabled repos may get temp. enabled to check for --plus-content
     bool contentcheck = false;
-    if ( ! ( gData.additional_content_repos.empty() 
+    if ( ! ( gData.additional_content_repos.empty()
           || repo.url().schemeIsVolatile()
 	  || repo.enabled() ) )
     {
@@ -2741,7 +2741,12 @@ static bool refresh_service(Zypper & zypper, const ServiceInfo & service)
   {
     zypper.out().info(
         str::form(_("Refreshing service '%s'."), service.asUserString().c_str()));
-    manager.refreshService(service);
+
+    RepoManager::RefreshServiceOptions opts;
+    if ( zypper.cOpts().count("restore-status") )
+      opts |= RepoManager::RefreshService_restoreStatus;
+    
+    manager.refreshService( service, opts );
     error = false;
   }
   catch ( const repo::ServicePluginInformalException & e )

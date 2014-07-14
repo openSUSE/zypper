@@ -1537,18 +1537,24 @@ Sort the list by name.
 
 .TP
 .B refresh-services (refs) [options] <alias|name|#|URI> ...
-Refreshing a service mean executing the service's special task.
+Refreshing a service means executing the service's special task.
 
 RIS services add, remove, or modify repositories on your system based on
-current content of the repository index. Services only manage defined
-repositories, they do not refresh them. To refresh also repositories,
-use \fI\-\-with\-repos\fR option or the \fBrefresh\fR command.
+current content of the repository index. A differing enabled/disabled
+state caused by manually calling \fBmodify-repo\fR on a service repository
+however will not be reverted unless the \fI\-\-restore\-status\fR option is used,
+or the repository index explicitly requests the change.
+
+Services only manage defined repositories, they do not refresh them. To refresh also
+repositories, use \fI\-\-with\-repos\fR option or the \fBrefresh\fR command.
 
 .TP
 .I \-r, \-\-with\-repos
-Refresh also repositories.
-
-TODO more info
+Refresh also the service repositories.
+.TP
+.I \-R, \-\-restore\-status
+Also restore service repositories enabled/disabled state to the repository index default.
+Useful after you manually changed some service repositories enabled state.
 
 
 .SS Package Locks Management

@@ -1456,8 +1456,9 @@ void Zypper::processCommandOptions()
   case ZypperCommand::REFRESH_SERVICES_e:
   {
     static struct option options[] = {
-      {"help", no_argument, 0, 'h'},
-      {"with-repos", no_argument, 0, 'r'},
+      {"help",			no_argument,	0, 'h'},
+      {"with-repos",		no_argument,	0, 'r'},
+      {"restore-status",	no_argument,	0, 'R'},
       {0, 0, 0, 0}
     };
     specific_options = options;
@@ -1467,7 +1468,8 @@ void Zypper::processCommandOptions()
       "Refresh defined repository index services.\n"
       "\n"
       "  Command options:\n"
-      "-r, --with-repos      Refresh also repositories.\n"
+      "-r, --with-repos      Refresh also the service repositories.\n"
+      "-R, --restore-status  Also restore service repositories enabled/disabled state.\n"
     );
     break;
   }
