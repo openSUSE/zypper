@@ -1,4 +1,11 @@
 -------------------------------------------------------------------
+Mon Jul 14 17:46:14 CEST 2014 - ma@suse.de
+
+- refreshService: add option to force repo status reset
+- Strip local filenames and args from URL.
+- version 14.26.0 (26)
+
+-------------------------------------------------------------------
 Fri Jul 11 13:42:43 CEST 2014 - ma@suse.de
 
 - Support RepoInfo content keywords (FATE#316287)
