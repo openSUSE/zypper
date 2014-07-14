@@ -157,8 +157,6 @@ rm -rf "$RPM_BUILD_ROOT"
 %{_datadir}/zypper/xml/xmlout.rnc
 %doc %{_mandir}/man8/zypper.8*
 %doc %dir %{_datadir}/doc/packages/zypper
-%doc %{_datadir}/doc/packages/zypper/TODO
-%doc %{_datadir}/doc/packages/zypper/zypper-rug
 %doc %{_datadir}/doc/packages/zypper/COPYING
 %doc %{_datadir}/doc/packages/zypper/HACKING
 # declare ownership of the log file but prevent
