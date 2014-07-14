@@ -17,6 +17,7 @@
 
 #include "zypp/base/PtrTypes.h"
 #include "zypp/base/Iterator.h"
+#include "zypp/base/Flags.h"
 
 #include "zypp/Pathname.h"
 #include "zypp/ZConfig.h"
@@ -141,10 +142,16 @@ namespace zypp
       BuildForced
     };
 
-    enum RepoRemovePolicy
+    /** Flags for tuning RefreshService */
+    enum RefreshServiceBit
     {
-
+      RefreshService_restoreStatus	= (1<<0)	///< Force restoring repo enabled/disabled staus
     };
+    ZYPP_DECLARE_FLAGS(RefreshServiceFlags,RefreshServiceBit);
+
+    /** Options tuning RefreshService */
+    typedef RefreshServiceFlags RefreshServiceOptions;
+
 
     /** \name Known repositories.
      *
@@ -591,7 +598,7 @@ namespace zypp
      *
      * \see refreshService(ServiceInfo)
      */
-    void refreshServices();
+    void refreshServices( const RefreshServiceOptions & options_r = RefreshServiceOptions() );
 
     /**
      * Refresh specific service.
@@ -601,9 +608,9 @@ namespace zypp
      * \throws RepoException if service is not found.
      * \throws MediaException If there's a problem downloading the repo index file.
      */
-    void refreshService( const std::string & alias );
+    void refreshService( const std::string & alias, const RefreshServiceOptions & options_r = RefreshServiceOptions() );
     /** \overload Take alias from ServiceInfo */
-    void refreshService( const ServiceInfo & service );
+    void refreshService( const ServiceInfo & service, const RefreshServiceOptions & options_r = RefreshServiceOptions() );
 
     /**
      * Modifies service file (rewrites it with new values) and underlying
@@ -689,6 +696,7 @@ namespace zypp
     /** Pointer to implementation */
     RWCOW_pointer<Impl> _pimpl;
   };
+  ZYPP_DECLARE_OPERATORS_FOR_FLAGS(RepoManager::RefreshServiceFlags);
   ///////////////////////////////////////////////////////////////////
 
   /** \relates RepoManager Stream output */

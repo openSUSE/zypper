@@ -497,11 +497,11 @@ namespace zypp
     void removeService( const ServiceInfo & service )
     { removeService( service.alias() ); }
 
-    void refreshServices();
+    void refreshServices( const RefreshServiceOptions & options_r );
 
-    void refreshService( const std::string & alias );
-    void refreshService( const ServiceInfo & service )
-    {  refreshService( service.alias() ); }
+    void refreshService( const std::string & alias, const RefreshServiceOptions & options_r );
+    void refreshService( const ServiceInfo & service, const RefreshServiceOptions & options_r )
+    {  refreshService( service.alias(), options_r ); }
 
     void modifyService( const std::string & oldAlias, const ServiceInfo & newService );
 
@@ -1804,7 +1804,7 @@ namespace zypp
 
   ////////////////////////////////////////////////////////////////////////////
 
-  void RepoManager::Impl::refreshServices()
+  void RepoManager::Impl::refreshServices( const RefreshServiceOptions & options_r )
   {
     // copy the set of services since refreshService
     // can eventually invalidate the iterator
@@ -1815,14 +1815,14 @@ namespace zypp
         continue;
 
       try {
-	refreshService(*it);
+	refreshService(*it, options_r);
       }
       catch ( const repo::ServicePluginInformalException & e )
       { ;/* ignore ServicePluginInformalException */ }
     }
   }
 
-  void RepoManager::Impl::refreshService( const std::string & alias )
+  void RepoManager::Impl::refreshService( const std::string & alias, const RefreshServiceOptions & options_r )
   {
     ServiceInfo service( getService( alias ) );
     assert_alias( service );
@@ -1831,7 +1831,7 @@ namespace zypp
     // Either when probing the type, or when adjusting the repositories
     // enable/disable state.:
     bool serviceModified = false;
-    MIL << "Going to refresh service '" << service.alias() << "', url: "<< service.url() << endl;
+    MIL << "Going to refresh service '" << service.alias() << "', url: "<< service.url() << ", opts: " << options_r << endl;
 
     //! \todo add callbacks for apps (start, end, repo removed, repo added, repo changed)
 
@@ -1954,22 +1954,34 @@ namespace zypp
       TriBool toBeEnabled( indeterminate );	// indeterminate - follow the service request
       DBG << "Service request to " << (it->enabled()?"enable":"disable") << " service repo " << it->alias() << endl;
 
-      if ( service.repoToEnableFind( it->alias() ) )
+      if ( options_r.testFlag( RefreshService_restoreStatus ) )
       {
-	DBG << "User request to enable service repo " << it->alias() << endl;
-	toBeEnabled = true;
-        // Remove from enable request list.
-        // NOTE: repoToDisable is handled differently.
-        //       It gets cleared on each refresh.
-        service.delRepoToEnable( it->alias() );
-        serviceModified = true;
+	DBG << "Opt RefreshService_restoreStatus " << it->alias() << endl;
+	// this overrides any pending request!
+	// Remove from enable request list.
+	// NOTE: repoToDisable is handled differently.
+	//       It gets cleared on each refresh.
+	service.delRepoToEnable( it->alias() );
+	// toBeEnabled stays indeterminate!
       }
-      else if ( service.repoToDisableFind( it->alias() ) )
+      else
       {
-	DBG << "User request to disable service repo " << it->alias() << endl;
-	toBeEnabled = false;
+	if ( service.repoToEnableFind( it->alias() ) )
+	{
+	  DBG << "User request to enable service repo " << it->alias() << endl;
+	  toBeEnabled = true;
+	  // Remove from enable request list.
+	  // NOTE: repoToDisable is handled differently.
+	  //       It gets cleared on each refresh.
+	  service.delRepoToEnable( it->alias() );
+	  serviceModified = true;
+	}
+	else if ( service.repoToDisableFind( it->alias() ) )
+	{
+	  DBG << "User request to disable service repo " << it->alias() << endl;
+	  toBeEnabled = false;
+	}
       }
-
 
       RepoInfoList::iterator oldRepo( findAlias( it->alias(), oldRepos ) );
       if ( oldRepo == oldRepos.end() )
@@ -1994,6 +2006,11 @@ namespace zypp
 	  // NOTE: Assert toBeEnabled is boolean afterwards!
 	  if ( oldRepo->enabled() == it->enabled() )
 	    toBeEnabled = it->enabled();	// service requests no change to the system
+	  else if (options_r.testFlag( RefreshService_restoreStatus ) )
+	  {
+	    toBeEnabled = it->enabled();	// RefreshService_restoreStatus forced
+	    DBG << "Opt RefreshService_restoreStatus " << it->alias() <<  " forces " << (toBeEnabled?"enabled":"disabled") << endl;
+	  }
 	  else
 	  {
 	    const auto & last = service.repoStates().find( oldRepo->alias() );
@@ -2337,14 +2354,14 @@ namespace zypp
   void RepoManager::removeService( const ServiceInfo & service )
   { return _pimpl->removeService( service ); }
 
-  void RepoManager::refreshServices()
-  { return _pimpl->refreshServices(); }
+  void RepoManager::refreshServices( const RefreshServiceOptions & options_r )
+  { return _pimpl->refreshServices( options_r ); }
 
-  void RepoManager::refreshService( const std::string & alias )
-  { return _pimpl->refreshService( alias ); }
+  void RepoManager::refreshService( const std::string & alias, const RefreshServiceOptions & options_r )
+  { return _pimpl->refreshService( alias, options_r ); }
 
-  void RepoManager::refreshService( const ServiceInfo & service )
-  { return _pimpl->refreshService( service ); }
+  void RepoManager::refreshService( const ServiceInfo & service, const RefreshServiceOptions & options_r )
+  { return _pimpl->refreshService( service, options_r ); }
 
   void RepoManager::modifyService( const std::string & oldAlias, const ServiceInfo & service )
   { return _pimpl->modifyService( oldAlias, service ); }
