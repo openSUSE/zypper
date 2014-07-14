@@ -166,7 +166,6 @@ void print_main_help(Zypper & zypper)
     "\t--verbose, -v\t\tIncrease verbosity.\n"
     "\t--no-abbrev, -A\t\tDo not abbreviate text in tables.\n"
     "\t--table-style, -s\tTable style (integer).\n"
-    "\t--rug-compatible, -r\tTurn on rug compatibility.\n"
     "\t--non-interactive, -n\tDo not ask anything, use default answers\n"
     "\t\t\t\tautomatically.\n"
     "\t--non-interactive-include-reboot-patches\n"
@@ -380,7 +379,7 @@ void Zypper::processGlobalOptions()
     {"terse",                      no_argument,       0, 't'},
     {"no-abbrev",                  no_argument,       0, 'A'},
     {"table-style",                required_argument, 0, 's'},
-    {"rug-compatible",             no_argument,       0, 'r'},
+    {"rug-compatible",             no_argument,       0, 'r'},	/* DEPRECATED and UNSUPPORTED SINCE SLE12 */
     {"non-interactive",            no_argument,       0, 'n'},
     {"non-interactive-include-reboot-patches", no_argument, 0, '0'},
     {"no-gpg-checks",              no_argument,       0,  0 },
@@ -510,13 +509,20 @@ void Zypper::processGlobalOptions()
     }
   }
 
+  ///////////////////////////////////////////////////////////////////
+  // Rug compatibility is dropped since SLE12.
+  // Rug options are removed from documantation(commit#53ffd419) but
+  // will stay active in code for a while.
   string rug_test(_argv[0]);
-  if (gopts.count("rug-compatible") || rug_test.rfind("rug") == rug_test.size()-3 )
+  if (gopts.count("rug-compatible") || Pathname::basename(_argv[0]) == "rug" )
   {
     _gopts.is_rug_compatible = true;
-    out().info("Switching to rug-compatible mode.", Out::DEBUG);
-    DBG << "Switching to rug-compatible mode." << endl;
+    INT << "Switching to (no longer supported) rug-compatible mode." << endl;
+    out().error("************************************************************************");
+    out().error("** Rug-compatible mode is deprecated and will vanish in a future version. [-r,--rug-compatible]");
+    out().error("************************************************************************");
   }
+  ///////////////////////////////////////////////////////////////////
 
   // Help is parsed by setting the help flag for a command, which may be empty
   // $0 -h,--help
@@ -1540,7 +1546,7 @@ void Zypper::processCommandOptions()
       specific_options = options;
 
       _command_help = _(
-        // translators: this is just a rug compatiblity command
+        // translators: this is just a legacy command
         "list-resolvables (lr)\n"
         "\n"
         "List available resolvable types.\n"
@@ -2244,7 +2250,7 @@ void Zypper::processCommandOptions()
       "\n"
       "Show detailed information for patches.\n"
       "\n"
-      "This is a rug compatibility alias for '%s'.\n"
+      "This is an alias for '%s'.\n"
     ), "zypper info -t patch");
     break;
   }
@@ -2263,7 +2269,7 @@ void Zypper::processCommandOptions()
       "\n"
       "Show detailed information for patterns.\n"
       "\n"
-      "This is a rug compatibility alias for '%s'.\n"
+      "This is an alias for '%s'.\n"
     ), "zypper info -t pattern");
     break;
   }
@@ -2282,7 +2288,7 @@ void Zypper::processCommandOptions()
       "\n"
       "Show detailed information for products.\n"
       "\n"
-      "This is a rug compatibility alias for '%s'.\n"
+      "This is an alias for '%s'.\n"
     ), "zypper info -t product");
     break;
   }
@@ -2639,7 +2645,7 @@ void Zypper::processCommandOptions()
     };
     specific_options = options;
     _command_help = _(
-      // translators: this is just a rug-compatiblity command
+      // translators: this is just a legacy command
       "service-types (st)\n"
       "\n"
       "List available service types.\n"
@@ -2655,7 +2661,7 @@ void Zypper::processCommandOptions()
     };
     specific_options = options;
     _command_help = _(
-      // translators: this is just a rug-compatiblity command
+      // translators: this is just a legacy command
       "list-resolvables (lr)\n"
       "\n"
       "List available resolvable types.\n"
@@ -2709,8 +2715,7 @@ void Zypper::processCommandOptions()
     _command_help = str::form(_(
       "patch-search [options] [querystring...]\n"
       "\n"
-      "Search for patches matching given search strings. This is a"
-      " rug-compatibility alias for '%s'. See zypper's manual page for details.\n"
+      "Search for patches matching given search strings. This is an alias for '%s'.\n"
     ), "zypper -r search -t patch --detail ...");
     break;
   }
@@ -2724,11 +2729,10 @@ void Zypper::processCommandOptions()
     };
     specific_options = options;
     _command_help = _(
-      // translators: this is just a rug-compatiblity command
+      // translators: this is just a legacy command
       "ping [options]\n"
       "\n"
       "This command has dummy implementation which always returns 0.\n"
-      "It is provided for compatibility with rug.\n"
     );
     break;
   }

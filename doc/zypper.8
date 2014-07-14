@@ -148,8 +148,7 @@ of the command arguments.
 .B help [command]
 Shows help texts. If invoked without any argument (just \'zypper\' or
 \'zypper\ help\'), zypper displays global help text which lists all available
-global options and commands (except those provided only for compatibility
-with rug).
+global options and commands.
 
 If invoked with a command name argument, zypper displays help for the
 specified command, if such command exists. Long as well as short variants
@@ -1752,14 +1751,10 @@ texts in some columns so that the table fits the width of the screen. If you
 need to see the whole text, use this option.
 .TP
 .I \-t, \-\-terse
-Terse output for machine consumption. Currently not used and provided only for
-compatibility with rug.
+Terse output for machine consumption.
 .TP
 .I \-s, \-\-table\-style
 Specifies table style to use. Table style is identified by an integer number. TODO
-.TP
-.I \-r, \-\-rug\-compatible
-Turns on rug compatibility. See section COMPATIBILITY WITH RUG for details.
 .TP
 .I \-n, \-\-non\-interactive
 Switches to non-interactive mode. In this mode zypper doesn't ask user to type answers to various prompts, but uses default answers automatically. The behaviour of this option is somewhat different than that of options like '--yes', since zypper can answer different answers to different questions. The answers also depend on other options like '--no-gpg-checks'.
@@ -1993,191 +1988,6 @@ or other capabilities.
 Returned upon exiting after receiving a SIGINT or SIGTERM.
 
 
-.SH "COMPATIBILITY WITH RUG"
-.LP
-zypper is designed to be compatible with rug, which is a command\-line interface to the ZENworks Linux Management (ZLM) agent. Compared to rug, zypper does not need the ZLM daemon to run, and is intented to provide more and improved functionality. Following is a list of zypper-rug command aliases, supported rug command line options, and compatibility notes. See also compatibility notes in descriptions of zypper commands.
-.LP
-To enable rug-compatible behavior, use the \fI\-r or \-\-rug\-compatible\fR global option with each command.
-
-.SS Service Management Commands
-.LP
-ZENworks uses different terminology than ZYpp. ZLM \fBservices\fR are ZYpp's
-repositories and services. Additionally some ZLM services can contain
-\fBcatalogs\fR (rpmmd-type repositories in ZYpp speak).
-
-Zypper tries to mimick rug's behavior in its service handling commands when
-used with the -r global option. It also supports the \fI\-\-catalog\fR option
-for specifying catalogs to work with in current operation (this is an alias
-for zypper's \-\-repo option).
-
-.TP
-.I rug service-add (sa)
-zypper addservice (as)
-When used with -r global option, this command probes the type of service
-or repository at the specified URI, if not explicitly specified. Without
--r option the URI is not accessed at all and the URI is added as ZYpp service.
-
-.TP
-.I rug service-delete (sd)
-zypper removeservice (rs)
-
-.TP
-.I rug service-list (sl)
-zypper services (ls)
-
-.TP
-.I rug catalogs (ca)
-zypper repos (lr)
-.IP
- zypper doesn't include 'Enabled' and 'Refresh' columns and prints rug's 'Status' column with values "Active" or "Disabled" instead.
-
-.TP
-.I rug subscribe
-This command is not implemented in zypper. Enabling zypper repositories is
-closest to rug's subscription of catalogs. Thus, you can use
-\fBzypper mr -e <alias|name|#|URI>\fR to enable repositories added by the service.
-Use \fBzypper lr\fR (or \fBzypper ca\fR) to list available repositories.
-
-.TP
-.I rug unsubscribe
-See \fBsubscribe\fR above, with the difference that \fI-d\fR will be used instead of \fI-e\fR
-in the \fBzypper mr\fR command.
-
-.SS Package Management Commands
-
-.TP
-.I rug install (in)
-zypper install (in)
-.RS
-.TP
-.I \-y, \-\-no\-confirm
-Don't require user interaction. This option is implemented using zypper's non-interactive mode.
-.TP
-.I      \-\-agree\-to\-third\-party\-licenses
-This option is an alias to zypper's \-\-auto-agree\-with\-licenses option.
-.TP
-.I \-R, \-\-force\-resolution <on|off>
-This option is not available in rug and zypper uses the 'force-resolution'
-solver mode by default when running in rug-compatible mode. However, it is
-possible to turn the forcing of resolution off using this option even in
-rug-compatible mode.
-.TP
-.I      \-\-entire\-catalog <catalog>
-This option serves for marking all packages from specified catalog for
-installation. This is achieved by simulating 'zypper in --from <repo> '*''.
-.RE
-
-.TP
-.I rug remove (rm)
-zypper remove (rm)
-.RS
-.TP
-.I \-y, \-\-no\-confirm
-Don't require user interaction. This option is implemented using zypper's non-interactive mode.
-.TP
-.I \-R, \-\-force\-resolution <on|off>
-This option is not available in rug and zypper uses the 'force-resolution'
-solver mode by default when running in rug-compatible mode. However, it is
-possible to turn the forcing of resolution off using this option even in
-rug-compatible mode.
-.RE
-
-.TP
-.I rug verify (ve)
-zypper verify (ve)
-.RS
-.TP
-.I \-y, \-\-no\-confirm
-Don't require user interaction. This option is implemented using zypper's non-interactive mode.
-.RE
-
-.TP
-.I rug update (up) [catalog] ...
-zypper update (up) [package] ...
-.IP
-Zypper interprets the update command arguments as repository identifiers in rug-compatibilty
-mode. The update operation is restricted to the specified repositories.
-.RS
-.TP
-.I \-y, \-\-no\-confirm
-Don't require user interaction. This option is implemented using zypper's non-interactive mode.
-.TP
-.I      \-\-agree\-to\-third\-party\-licenses
-This option is an alias to zypper's \-\-auto-agree\-with\-licenses option.
-.TP
-.I \-R, \-\-force\-resolution <on|off>
-This option is not available in rug and zypper uses the 'force-resolution'
-solver mode by default when running in rug-compatible mode. However, it is
-possible to turn the forcing of resolution off using this option even in
-rug-compatible mode.
-.TP
-.I \-d, \-\-downloade\-only
-This option has currently no effect.
-.TP
-.I      \-\-category
-This option has currently no effect.
-
-.RE
-
-.TP
-.I rug search (se)
-zypper search (se)
-.IP
-Instead of the Type column, rug's Bundle column is printed, however, with no contents.
-.RS
-.TP
-.I \-t, \-\-type
-In rug compatibility mode the --type option defaults to \fIpackage\fR. Zypper
-searches all package types by default.
-.TP
-\fI    \-\-sort\-by\-catalog\fR
-Sort packages by catalog, not by name. This option is an alias to zypper's
-\-\-sort\-by\-repo option.
-
-.SS Patch Management Commands
-
-.TP
-.I rug patch-info
-zypper info -t patch
-
-.SS Pattern Management Commands
-
-.TP
-.I rug pattern-info
-zypper info -t pattern
-
-.SS Product Management Commands
-
-.TP
-.I rug product-info
-zypper info -t product
-
-.SS System Commands
-.TP
-.I rug ping
-zypper ping
-.IP
-This command just returns 0 without producing any output or doing anything
-to the system. Rug's ping command is used to wake up the ZLM daemon
-or to check whether it is up and running. Since zypper does no require
-ZLM or any other daemon to run, it is safe to always return 0 here to
-indicate it is ready for operation.
-
-.SS Other Compatibility Notes
-
-.TP
-\fI\-c, \-\-catalog\fR <catalog>
-This option is an alias to zypper's \-\-repo <alias> and it will restrict
-the operation of commands like search, install, etc to the repository specified
-by the alias.
-
-.TP
-.I \-N, \-\-dry\-run
-Zypper uses -D shorthand for this option, but -N is provided for the sake
-of compatibility. Zypper (libzypp) implements this option by passing the
-\fB\-\-test\fR option to \fBrpm\fR. The option is used in \fBinstall\fR, \fBremove\fR,
-\fBupdate\fR, \fBdist-upgrade\fR (not available in rug), and \fBverify\fR commands.
-
 .SH "HOMEPAGE"
 
 http://en.opensuse.org/Portal:Zypper
@@ -2186,14 +1996,16 @@ http://en.opensuse.org/Portal:Zypper
 .LP
 Martin Vidner <mvidner@suse.cz>
 .br
+Jan Kupec <>
+.br
+Michael Andres <ma@suse.de>
+.br
 Duncan Mac-Vicar <dmacvicar@suse.de>
 .br
-Jan Kupec <jkupec@suse.cz>
+Josef Reidinger <jreidinger@suse.cz>
 .br
 Stanislav Visnovsky <visnov@suse.cz>
-.br
-Josef Reidinger <jreidinger@suse.cz>
 
 .SH "SEE ALSO"
 .LP
-rug(1), YaST2(8), locks(5), zypper-log(8)
+locks(5), zypper-log(8), YaST2(8)
