@@ -1,4 +1,13 @@
 -------------------------------------------------------------------
+Mon Jul 14 17:49:48 CEST 2014 - ma@suse.de
+
+- refresh-services: add option --restore-status to undo user 
+  modifications applied to service repositories
+- drop rug compatibility in manpage docs and help output
+  (FATE#317708)
+- version 1.11.10
+
+-------------------------------------------------------------------
 Fri Jul 11 12:57:51 CEST 2014 - ma@suse.de
 
 - Enable --plus-content option (FATE#316287)
