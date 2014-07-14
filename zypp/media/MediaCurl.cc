@@ -495,11 +495,14 @@ Url MediaCurl::clearQueryString(const Url &url) const
   curlUrl.delQueryParam("proxypass");
   curlUrl.delQueryParam("ssl_capath");
   curlUrl.delQueryParam("ssl_verify");
+  curlUrl.delQueryParam("ssl_clientcert");
   curlUrl.delQueryParam("timeout");
   curlUrl.delQueryParam("auth");
   curlUrl.delQueryParam("username");
   curlUrl.delQueryParam("password");
   curlUrl.delQueryParam("mediahandler");
+  curlUrl.delQueryParam("credentials");
+  curlUrl.delQueryParam("head_requests");
   return curlUrl;
 }
 
