@@ -494,7 +494,10 @@ void Zypper::processGlobalOptions()
   }
 
   if ((it = gopts.find("cache-dir")) != gopts.end()) {
-    _gopts.rm_options.repoCachePath = it->second.front();
+    _gopts.rm_options.repoCachePath		= it->second.front();
+    _gopts.rm_options.repoRawCachePath		= _gopts.rm_options.repoCachePath / "raw";
+    _gopts.rm_options.repoSolvCachePath		= _gopts.rm_options.repoCachePath / "solv";
+    _gopts.rm_options.repoPackagesCachePath	= _gopts.rm_options.repoCachePath / "packages";
   }
 
   if ((it = gopts.find("raw-cache-dir")) != gopts.end()) {
