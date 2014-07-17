@@ -836,31 +836,29 @@ void MediaCurl::releaseFrom( const std::string & ejectDev )
   disconnect();
 }
 
-Url MediaCurl::getFileUrl(const Pathname & filename) const
+Url MediaCurl::getFileUrl( const Pathname & filename_r ) const
 {
-  Url newurl(_url);
-  string path = _url.getPathName();
-  if ( !path.empty() && path != "/" && *path.rbegin() == '/' &&
-       filename.absolute() )
+  std::string path( _url.getPathName() );
+  // Simply extend the URLs pathname. An 'absolute' URL path
+  // is achieved by encoding the 2nd '/' in the URL:
+  //   URL: ftp://user@server	-> ~user
+  //   URL: ftp://user@server/	-> ~user
+  //   URL: ftp://user@server//	-> /
+  //                         ^- this '/' is just a separator
+  if ( path.empty() ||  path == "/" )	// empty URL path; the '/' is just a separator
   {
-    // If url has a path with trailing slash, remove the leading slash from
-    // the absolute file name
-    path += filename.asString().substr( 1, filename.asString().size() - 1 );
+    path = filename_r.absolutename().asString();
   }
-  else if ( filename.relative() )
+  else if ( *path.rbegin() == '/' )
   {
-    // Add trailing slash to path, if not already there
-    if (path.empty()) path = "/";
-    else if (*path.rbegin() != '/' ) path += "/";
-    // Remove "./" from begin of relative file name
-    path += filename.asString().substr( 2, filename.asString().size() - 2 );
+    path += filename_r.absolutename().asString().substr(1);
   }
   else
   {
-    path += filename.asString();
+    path += filename_r.absolutename().asString();
   }
-
-  newurl.setPathName(path);
+  Url newurl( _url );
+  newurl.setPathName( path );
   return newurl;
 }
 
