@@ -85,7 +85,7 @@ namespace zypp {
        * @param commandline a shell commandline that is appended to
        * <tt>/bin/sh -c</tt>.
        * @param default_locale whether to set LC_ALL=C before starting
-       * @param root directory to chroot into, / or empty to not chroot
+       * @param root directory to chroot into; or just 'cd' if '/'l;  nothing if empty
        */
       ExternalProgram (std::string commandline,
     		     Stderr_Disposition stderr_disp = Normal_Stderr,
