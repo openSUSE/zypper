@@ -24,7 +24,7 @@ namespace boost
   {
     class fake_error_category : public error_category
     {
-      virtual const char *     name() const
+      virtual const char *     name() const noexcept(true)
       { return "falke_name"; }
       virtual std::string      message( int ev ) const
       { return "falke_message"; }
