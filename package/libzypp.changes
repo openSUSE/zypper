@@ -1,4 +1,11 @@
 -------------------------------------------------------------------
+Fri Jul 18 08:57:39 CEST 2014 - ma@suse.de
+
+- Execute install scripts with cwd==/ (bnc#886764)
+- fix wrong '//' when extending URLs with an empty path (bnc#885254)
+- version 14.26.1 (26)
+
+-------------------------------------------------------------------
 Mon Jul 14 17:46:14 CEST 2014 - ma@suse.de
 
 - refreshService: add option to force repo status reset
