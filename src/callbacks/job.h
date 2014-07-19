@@ -40,6 +40,14 @@ namespace ZmartRecipients
 	case MsgType::error:
 	  out.error( msg_r );
 	  break;
+
+	case MsgType::debug:
+	  out.info( msg_r, Out::DEBUG, Out::TYPE_NORMAL );
+	  break;
+
+	default:
+	  INT << "Unhandled MsgType(" << type_r.asEnum() << "): " << msg_r << endl;
+	  break;
       }
       return true;
     }
