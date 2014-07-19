@@ -61,6 +61,10 @@ void OutNormal::info(const std::string & msg, Verbosity verbosity_r, Type mask)
 
   if (verbosity_r == Out::QUIET)
     print_color(msg, COLOR_CONTEXT_RESULT);
+  else if (verbosity_r == Out::DEBUG)
+  {
+    print_color(msg, COLOR_CONTEXT_OSDEBUG);
+  }
   else
     print_color(msg, COLOR_CONTEXT_MSG_STATUS);
 

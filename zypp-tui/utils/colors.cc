@@ -93,6 +93,8 @@ const string get_color( const ColorContext context )
     return conf.color_promptOption.value();
   case COLOR_CONTEXT_HIGHLIGHT:
     return conf.color_highlight.value();
+  case COLOR_CONTEXT_OSDEBUG:
+    return Color("brown").value();
   default:
     return COLOR_RESET;
   }
