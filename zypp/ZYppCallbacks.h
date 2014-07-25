@@ -14,6 +14,7 @@
 
 #include "zypp/base/EnumClass.h"
 #include "zypp/Callback.h"
+#include "zypp/UserData.h"
 #include "zypp/Resolvable.h"
 #include "zypp/RepoInfo.h"
 #include "zypp/Pathname.h"
@@ -765,23 +766,26 @@ namespace zypp
       ) {}
   };
 
-
-
   ///////////////////////////////////////////////////////////////////
   /// \class JobReport
   /// \brief Generic report for sending messages.
   ///////////////////////////////////////////////////////////////////
   struct JobReport : public callback::ReportBase
   {
+  public:
     /** message type (use like 'enum class \ref MsgType') */
     struct _MsgTypeDef {
-      enum Enum { info, warning, error };
+      enum Enum { debug, info, warning, error, important, data };
     };
-
     typedef base::EnumClass<_MsgTypeDef> MsgType;	///< 'enum class MsgType'
 
+    /** typsafe map of userdata */
+    typedef callback::UserData UserData;
+
+  public:
     /** Send a ready to show message text. */
-    virtual bool message( MsgType type_r, const std::string & msg_r ) const { return true; }
+    virtual bool message( MsgType type_r, const std::string & msg_r, const UserData & userData_r ) const
+    { return true; }
 
 
     /** \name Static sender instance */
@@ -789,12 +793,29 @@ namespace zypp
     /** Singleton sender instance */
     static callback::SendReport<JobReport> & instance();	// impl in ZYppImpl.cc
 
+    /** send debug message text */
+    static bool debug( const MessageString & msg_r, const UserData & userData_r = UserData() )
+    { return instance()->message( MsgType::debug, msg_r, userData_r ); }
+
     /** send message text */
-    static bool info( const MessageString & msg_r )	{ return instance()->message( MsgType::info, msg_r ); }
+    static bool info( const MessageString & msg_r, const UserData & userData_r = UserData() )
+    { return instance()->message( MsgType::info, msg_r, userData_r ); }
+
     /** send warning text */
-    static bool warning( const MessageString & msg_r )	{ return instance()->message( MsgType::warning, msg_r ); }
+    static bool warning( const MessageString & msg_r, const UserData & userData_r = UserData() )
+    { return instance()->message( MsgType::warning, msg_r, userData_r ); }
+
     /** send error text */
-    static bool error( const MessageString & msg_r )	{ return instance()->message( MsgType::error, msg_r ); }
+    static bool error( const MessageString & msg_r, const UserData & userData_r = UserData() )
+    { return instance()->message( MsgType::error, msg_r, userData_r ); }
+
+    /** send important message text */
+    static bool important( const MessageString & msg_r, const UserData & userData_r = UserData() )
+    { return instance()->message( MsgType::important, msg_r, userData_r ); }
+
+    /** send data message */
+    static bool data( const MessageString & msg_r, const UserData & userData_r = UserData() )
+    { return instance()->message( MsgType::data, msg_r, userData_r ); }
     //@}
   };
 
