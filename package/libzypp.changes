@@ -1,4 +1,12 @@
 -------------------------------------------------------------------
+Fri Jul 25 12:56:17 CEST 2014 - ma@suse.de
+
+- JobReport: extend callback to allow passing UserData
+- hardlinkCopy must not fail if proc/sys/fs/protected_hardlink is on
+- adapt to changed boost::error_category throw specifier
+- version 14.27.0 (27)
+
+-------------------------------------------------------------------
 Fri Jul 18 08:57:39 CEST 2014 - ma@suse.de
 
 - Execute install scripts with cwd==/ (bnc#886764)
