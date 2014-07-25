@@ -1,4 +1,10 @@
 -------------------------------------------------------------------
+Fri Jul 25 13:08:33 CEST 2014 - ma@suse.de
+
+- Rephrase 'verify' help text (bnc#885499)
+- version 1.11.11
+
+-------------------------------------------------------------------
 Mon Jul 14 17:49:48 CEST 2014 - ma@suse.de
 
 - refresh-services: add option --restore-status to undo user 
