@@ -180,6 +180,7 @@ SET( zypp_HEADERS
   TmpPath.h
   TriBool.h
   Url.h
+  UserData.h
   VendorAttr.h
   VendorSupportOptions.h
   ZConfig.h

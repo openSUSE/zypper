@@ -125,7 +125,11 @@ namespace zypp
    * \li \c whoIsConnected Return a 'ReceiveReport*' to the currently
    * connected ReceiveReport, or \c NULL if none is connected.
    *
-  */
+   * \par Passing Userdata via Callbacks
+   *
+   * For typesafe passing of user data via callbacks \see \ref UserData.
+   *
+   */
   namespace callback
   { /////////////////////////////////////////////////////////////////
 
