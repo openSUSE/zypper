@@ -103,6 +103,7 @@ SET( zypp_HEADERS
   CapMatch.h
   Changelog.h
   CheckSum.h
+  ContentType.h
   CountryCode.h
   CpeId.h
   Date.h
