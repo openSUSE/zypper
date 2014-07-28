@@ -122,29 +122,12 @@ namespace std
       return str << *obj;
     return str << std::string("NULL");
   }
-  /** \overload specialize for void */
-  template<>
-  inline std::ostream & operator<<( std::ostream & str, const zypp::shared_ptr<void> & obj )
-  {
-    if ( obj )
-      return str << (void*)obj.get();
-    return str << std::string("NULL");
-  }
-
   /** \relates zypp::shared_ptr Stream output. */
   template<class _D>
   inline std::ostream & dumpOn( std::ostream & str, const zypp::shared_ptr<_D> & obj )
   {
     if ( obj )
       return dumpOn( str, *obj );
-    return str << std::string("NULL");
-  }
-  /** \overload specialize for void */
-  template<>
-  inline std::ostream & dumpOn( std::ostream & str, const zypp::shared_ptr<void> & obj )
-  {
-    if ( obj )
-      return str << (void*)obj.get();
     return str << std::string("NULL");
   }
 
