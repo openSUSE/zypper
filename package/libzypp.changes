@@ -1,4 +1,9 @@
 -------------------------------------------------------------------
+Mon Jul 28 11:32:40 CEST 2014 - mls@suse.de
+
+- reverted last commit to make yast2-pkg-bindings build again
+
+-------------------------------------------------------------------
 Fri Jul 25 12:56:17 CEST 2014 - ma@suse.de
 
 - JobReport: extend callback to allow passing UserData
