@@ -251,7 +251,8 @@ namespace zypp
 
 	case pSIG:
 	  // Update creation/modification date from signatures type "13x".
-	  if ( _words[_words.size()-2] == "13x" )
+	  if ( ( _words.size() > 10 && _words[10] == "13x" )
+	    || ( _words.size() > 12 && _words[12] == "13x" ) )
 	  {
 	    Date cdate(str::strtonum<Date::ValueType>(_words[5]));
 	    if ( key->_pimpl->_created < cdate )
