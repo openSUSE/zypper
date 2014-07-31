@@ -1,4 +1,11 @@
 -------------------------------------------------------------------
+Thu Jul 31 19:22:56 CEST 2014 - ma@suse.de
+
+- Fix gpg key creation/modification date computation to properly
+  update trusted keys stored in the rpm database.
+- version 14.27.1 (27)
+
+-------------------------------------------------------------------
 Mon Jul 28 11:32:40 CEST 2014 - mls@suse.de
 
 - reverted last commit to make yast2-pkg-bindings build again
