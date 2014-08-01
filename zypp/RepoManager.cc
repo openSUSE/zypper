@@ -684,7 +684,8 @@ namespace zypp
       // delete metadata folders without corresponding repo (e.g. old tmp directories)
       repoEscAliases.sort();
       for ( const Pathname & cachePath : { _options.repoRawCachePath
-					 , _options.repoSolvCachePath } )
+					 , _options.repoSolvCachePath
+					 , _options.repoPackagesCachePath } )
       {
 	std::list<std::string> entries;
 	if ( filesystem::readdir( entries, cachePath, false ) == 0 )
