@@ -1549,6 +1549,9 @@ Services only manage defined repositories, they do not refresh them. To refresh 
 repositories, use \fI\-\-with\-repos\fR option or the \fBrefresh\fR command.
 
 .TP
+.I \-f, \-\-force
+Force a complete refresh of specified services. This option will cause both the download of raw metadata and parsing of the metadata to be forced even if everything indicates a refresh is not needed.
+.TP
 .I \-r, \-\-with\-repos
 Refresh also the service repositories.
 .TP
