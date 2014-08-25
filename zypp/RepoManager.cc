@@ -399,6 +399,21 @@ namespace zypp
     return ret;
   }
 
+  std:: ostream & operator<<( std::ostream & str, const RepoManagerOptions & obj )
+  {
+#define OUTS(X) str << "  " #X "\t" << obj.X << endl
+    str << "RepoManagerOptions (" << obj.rootDir << ") {" << endl;
+    OUTS( repoRawCachePath );
+    OUTS( repoSolvCachePath );
+    OUTS( repoPackagesCachePath );
+    OUTS( knownReposPath );
+    OUTS( knownServicesPath );
+    OUTS( pluginsPath );
+    str << "}" << endl;
+#undef OUTS
+    return str;
+  }
+
   ///////////////////////////////////////////////////////////////////
   /// \class RepoManager::Impl
   /// \brief RepoManager implementation.
@@ -630,6 +645,37 @@ namespace zypp
     repo::PluginServices(_options.pluginsPath/"services", ServiceCollector(_services));
   }
 
+  ///////////////////////////////////////////////////////////////////
+  namespace {
+    /** Delete \a cachePath_r subdirs not matching known aliases in \a repoEscAliases_r (must be sorted!)
+     * \note bnc#891515: Auto-cleanup only zypp.conf default locations. Otherwise
+     * we'd need some magic file to identify zypp cache directories. Without this
+     * we may easily remove user data (zypper --pkg-cache-dir . download ...)
+     */
+    inline void cleanupNonRepoMetadtaFolders( const Pathname & cachePath_r,
+					      const Pathname & defaultCachePath_r,
+					      const std::list<std::string> & repoEscAliases_r )
+    {
+      if ( cachePath_r != defaultCachePath_r )
+	return;
+
+      std::list<std::string> entries;
+      if ( filesystem::readdir( entries, cachePath_r, false ) == 0 )
+      {
+	entries.sort();
+	std::set<std::string> oldfiles;
+	set_difference( entries.begin(), entries.end(), repoEscAliases_r.begin(), repoEscAliases_r.end(),
+			std::inserter( oldfiles, oldfiles.end() ) );
+	for ( const std::string & old : oldfiles )
+	{
+	  if ( old == Repository::systemRepoAlias() )	// don't remove the @System solv file
+	    continue;
+	  filesystem::recursive_rmdir( cachePath_r / old );
+	}
+      }
+    }
+  } // namespace
+  ///////////////////////////////////////////////////////////////////
   void RepoManager::Impl::init_knownRepositories()
   {
     MIL << "start construct known repos" << endl;
@@ -682,26 +728,15 @@ namespace zypp
       }
 
       // delete metadata folders without corresponding repo (e.g. old tmp directories)
+      //
+      // bnc#891515: Auto-cleanup only zypp.conf default locations. Otherwise
+      // we'd need somemagic file to identify zypp cache directories. Without this
+      // we may easily remove user data (zypper --pkg-cache-dir . download ...)
       repoEscAliases.sort();
-      for ( const Pathname & cachePath : { _options.repoRawCachePath
-					 , _options.repoSolvCachePath
-					 , _options.repoPackagesCachePath } )
-      {
-	std::list<std::string> entries;
-	if ( filesystem::readdir( entries, cachePath, false ) == 0 )
-	{
-	  entries.sort();
-	  std::set<std::string> oldfiles;
-	  set_difference( entries.begin(), entries.end(), repoEscAliases.begin(), repoEscAliases.end(),
-			  std::inserter( oldfiles, oldfiles.end() ) );
-	  for ( const std::string & old : oldfiles )
-	  {
-	    if ( old == Repository::systemRepoAlias() )	// don't remove the @System solv file
-	      continue;
-	    filesystem::recursive_rmdir( cachePath / old );
-	  }
-	}
-      }
+      RepoManagerOptions defaultCache( _options.rootDir );
+      cleanupNonRepoMetadtaFolders( _options.repoRawCachePath,		defaultCache.repoRawCachePath,		repoEscAliases );
+      cleanupNonRepoMetadtaFolders( _options.repoSolvCachePath,		defaultCache.repoSolvCachePath,		repoEscAliases );
+      cleanupNonRepoMetadtaFolders( _options.repoPackagesCachePath,	defaultCache.repoPackagesCachePath,	repoEscAliases );
     }
     MIL << "end construct known repos" << endl;
   }
