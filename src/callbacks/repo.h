@@ -92,41 +92,6 @@ struct DownloadResolvableReportReceiver : public zypp::callback::ReceiveReport<z
     Zypper::instance()->out().progressEnd("apply-delta", _label_apply_delta);
   }
 
-  // Dowmload patch rpm:
-  // - path below url reported on start()
-  // - expected download size (0 if unknown)
-  // - download is interruptable
-  virtual void startPatchDownload( const zypp::Pathname & filename, const zypp::ByteCount & downloadsize )
-  {
-    _patch = filename.basename();
-    _patch_size = downloadsize;
-    std::ostringstream s;
-    s << _("Retrieving patch rpm") << ": " << _patch << ", " << _patch_size;
-    Zypper::instance()->out().info(s.str());
-  }
-
-  virtual bool progressPatchDownload( int value )
-  {
-    // seems this is never called, the progress is reported by the media backend anyway
-    INT << "not impelmented" << std::endl;
-    // TranslatorExplanation This text is a progress display label e.g. "Applying patch rpm [42%]"
-    //display_step( "apply-delta", _("Applying patch rpm") /* + _patch.asString() */, value );
-    return true;
-  }
-
-  virtual void problemPatchDownload( const std::string & description )
-  {
-    Zypper::instance()->out().error(description);
-  }
-
-  // implementation not needed prehaps - the media backend reports the download progress
-  /*
-  virtual void finishPatchDownload()
-  {
-    display_done ("apply-delta", cout_v);
-  }
-  */
-
   void fillsRhs( TermLine & outstr_r, Zypper & zypper_r, zypp::Package::constPtr pkg_r )
   {
     outstr_r.rhs << " (" << ++zypper_r.runtimeData().commit_pkg_current
