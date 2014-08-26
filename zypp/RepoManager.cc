@@ -874,9 +874,6 @@ namespace zypp
         }
       }
 
-      // To test the new matadta create temp dir as sibling of mediarootpath
-      filesystem::TmpDir tmpdir( filesystem::TmpDir::makeSibling( mediarootpath ) );
-
       repo::RepoType repokind = info.type();
       // if unknown: probe it
       if ( repokind == RepoType::NONE )
