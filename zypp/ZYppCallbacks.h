@@ -157,20 +157,20 @@ namespace zypp
       virtual void finishDeltaApply()
       {}
 
-      // Dowmload patch rpm:
-      // - path below url reported on start()
-      // - expected download size (0 if unknown)
-      // - download is interruptable
-      virtual void startPatchDownload( const Pathname & /*filename*/, const ByteCount & /*downloadsize*/ )
+      /** \deprecated Unused since 2008 */
+      virtual ZYPP_DEPRECATED void startPatchDownload( const Pathname & /*filename*/, const ByteCount & /*downloadsize*/ )
       {}
 
-      virtual bool progressPatchDownload( int /*value*/ )
+      /** \deprecated Unused since 2008 */
+      virtual ZYPP_DEPRECATED bool progressPatchDownload( int /*value*/ )
       { return true; }
 
-      virtual void problemPatchDownload( const std::string &/*description*/ )
+      /** \deprecated Unused since 2008 */
+      virtual ZYPP_DEPRECATED void problemPatchDownload( const std::string &/*description*/ )
       {}
 
-      virtual void finishPatchDownload()
+      /** \deprecated Unused since 2008 */
+      virtual ZYPP_DEPRECATED void finishPatchDownload()
       {}
 
 
