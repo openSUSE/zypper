@@ -51,14 +51,8 @@ struct DownloadResolvableReportReceiver : public zypp::callback::ReceiveReport<z
     Zypper::instance()->out().info(s.str());
   }
 
-  virtual bool progressDeltaDownload( int value )
-  {
-    // seems this is never called, the progress is reported by the media backend anyway
-    INT << "not impelmented" << std::endl;
-    // TranslatorExplanation This text is a progress display label e.g. "Retrieving delta [42%]"
-    //display_step( "apply-delta", ~("Retrieving delta") /*+ _delta.asString()*/, value );
-    return true;
-  }
+  // The progress is reported by the media backend
+  // virtual bool progressDeltaDownload( int value ) { return true; }
 
   virtual void problemDeltaDownload( const std::string & description )
   {
@@ -66,12 +60,7 @@ struct DownloadResolvableReportReceiver : public zypp::callback::ReceiveReport<z
   }
 
   // implementation not needed prehaps - the media backend reports the download progress
-  /*
-  virtual void finishDeltaDownload()
-  {
-    display_done ("download-resolvable", cout_v);
-  }
-  */
+  // virtual void finishDeltaDownload() { display_done ("download-resolvable", cout_v); }
 
   // Apply delta rpm:
   // - local path of downloaded delta
@@ -185,15 +174,8 @@ struct DownloadResolvableReportReceiver : public zypp::callback::ReceiveReport<z
     zypper.runtimeData().action_rpm_download = true;
   }
 
-  // return false if the download should be aborted right now
-  virtual bool progress(int value, zypp::Resolvable::constPtr /*resolvable_ptr*/)
-  {
-    // seems this is never called, the progress is reported by the media backend anyway
-    // INT << "not impelmented" << std::endl;
-    // TranslatorExplanation This text is a progress display label e.g. "Retrieving [42%]"
-//    display_step( "download-resolvable", ~("Retrieving") /* + resolvable_ptr->name() */, value );
-    return true;
-  }
+  // The progress is reported by the media backend
+  // virtual bool progress(int value, zypp::Resolvable::constPtr /*resolvable_ptr*/) { return true; }
 
   virtual Action problem( zypp::Resolvable::constPtr resolvable_ptr, Error /*error*/, const std::string & description )
   {
