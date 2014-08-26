@@ -153,32 +153,6 @@ using namespace zypp::ui;
 	USR << __PRETTY_FUNCTION__ << endl;
       }
 
-      // Dowmload patch rpm:
-      // - path below url reported on start()
-      // - expected download size (0 if unknown)
-      // - download is interruptable
-      virtual void startPatchDownload( const Pathname & /*filename*/, const ByteCount & /*downloadsize*/ )
-      {
-	USR << __PRETTY_FUNCTION__ << endl;
-      }
-
-      virtual bool progressPatchDownload( int /*value*/ )
-      {
-	USR << __PRETTY_FUNCTION__ << endl;
-	return true;
-      }
-
-      virtual void problemPatchDownload( const std::string &/*description*/ )
-      {
-	USR << __PRETTY_FUNCTION__ << endl;
-      }
-
-      virtual void finishPatchDownload()
-      {
-	USR << __PRETTY_FUNCTION__ << endl;
-      }
-
-
       // return false if the download should be aborted right now
       virtual bool progress(int value, Resolvable::constPtr resolvable_ptr)
       {
