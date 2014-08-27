@@ -10,6 +10,7 @@
  *
 */
 #include <iostream>
+#include <fstream>
 #include <sstream>
 #include "zypp/repo/PackageDelta.h"
 #include "zypp/base/Logger.h"
@@ -23,6 +24,7 @@
 #include "zypp/TmpPath.h"
 #include "zypp/ZConfig.h"
 #include "zypp/RepoInfo.h"
+#include "zypp/RepoManager.h"
 
 using std::endl;
 
@@ -219,8 +221,37 @@ namespace zypp
 	return ret; // <-- cache hit
       }
 
-      // HERE: cache misss, do download:
+      // HERE: cache misss, check toplevel cache or do download:
       RepoInfo info = _package->repoInfo();
+
+      // Check toplevel cache
+      {
+	RepoManagerOptions topCache;
+	if ( info.packagesPath().dirname() != topCache.repoPackagesCachePath )	// not using toplevel cache
+	{
+	  const OnMediaLocation & loc( _package->location() );
+	  if ( ! loc.checksum().empty() )	// no cache hit without checksum
+	  {
+	    PathInfo pi( topCache.repoPackagesCachePath / info.packagesPath().basename() / loc.filename() );
+	    if ( pi.isExist() && loc.checksum() == CheckSum( loc.checksum().type(), std::ifstream( pi.c_str() ) ) )
+	    {
+	      report()->start( _package, pi.path().asFileUrl() );
+	      const Pathname & dest( info.packagesPath() / loc.filename() );
+	      if ( filesystem::assert_dir( dest.dirname() ) == 0 && filesystem::hardlinkCopy( pi.path(), dest ) == 0 )
+	      {
+		ret = ManagedFile( dest );
+		if ( ! info.keepPackages() )
+		  ret.setDispose( filesystem::unlink );
+
+		MIL << "provided Package from toplevel cache " << _package << " at " << ret << endl;
+		report()->finish( _package, repo::DownloadResolvableReport::NO_ERROR, std::string() );
+		return ret; // <-- toplevel cache hit
+	      }
+	    }
+	  }
+	}
+      }
+
       // FIXME we only support the first url for now.
       if ( info.baseUrlsEmpty() )
         ZYPP_THROW(Exception("No url in repository."));
