@@ -197,6 +197,12 @@ namespace
 	    if ( _zypper.exitRequested() )
 	      throw( Out::Error( ZYPPER_EXIT_ON_SIGNAL ) );
 	  }
+	  else
+	  {
+	    _zypper.out().info( str::Str()
+	                        << boost::str( boost::format(_("Not downloading package '%s'.") ) % pi.satSolvable().asUserString() )
+				<< " (--dry-run)" );
+	  }
 	}
 	else
 	{
