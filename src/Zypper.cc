@@ -70,6 +70,51 @@ parsed_opts copts; // command options
 
 static void rug_list_resolvables(Zypper & zypper);
 
+///////////////////////////////////////////////////////////////////
+namespace {
+  /** Whether user may create \a dir_r or has rw-access to it. */
+  inline bool userMayUseDir( const Pathname & dir_r )
+  {
+    bool mayuse = true;
+    if ( dir_r.empty()  )
+      mayuse = false;
+    else
+    {
+      PathInfo pi( dir_r );
+      if ( pi.isExist() )
+      {
+	if ( ! ( pi.isDir() && pi.userMayRWX() ) )
+	  mayuse = false;
+      }
+      else
+	mayuse = userMayUseDir( dir_r.dirname() );
+    }
+    return mayuse;
+  }
+} //namespace
+///////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////
+namespace env {
+  /** XDG_CACHE_HOME: base directory relative to which user specific non-essential data files should be stored.
+   * http://standards.freedesktop.org/basedir-spec/basedir-spec-latest.html
+   */
+  inline Pathname XDG_CACHE_HOME()
+  {
+    Pathname ret;
+    const char * envp = getenv( "XDG_CACHE_HOME" );
+    if ( envp && *envp )
+      ret = envp;
+    else
+    {
+      ret = getenv( "HOME" );
+      ret /= ".cache";
+    }
+    return ret;
+  }
+} //namespace env
+///////////////////////////////////////////////////////////////////
+
+
 Zypper::Zypper()
   : _argc(0), _argv(NULL), _out_ptr(NULL),
     _command(ZypperCommand::NONE),
@@ -2555,8 +2600,9 @@ void Zypper::processCommandOptions()
       "\n"
       "Download rpms specified on the commandline to a local directory.\n"
       "Per default packages are downloaded to the libzypp package cache\n"
-      "(/var/cache/zypp/packages), but this can be changed by using the\n"
-      "global --pkg-cache-dir option.\n"
+      "(/var/cache/zypp/packages; for non-root users $XDG_CACHE_HOME/zypp/packages),\n"
+      "but this can be changed by using the global --pkg-cache-dir option.\n"
+      "\n"
       "In XML output a <download-result> node is written for each\n"
       "package zypper tried to downlad. Upon success the local path is\n"
       "is found in 'download-result/localpath@path'.\n"
@@ -4982,6 +5028,27 @@ void Zypper::doCommand()
       return;
     }
 
+    // Check for a usable pkg-cache-dir
+    if ( geteuid() != 0 )
+    {
+      bool mayuse = userMayUseDir( _gopts.rm_options.repoPackagesCachePath );
+      if ( ! mayuse && /* is the default path: */
+	   _gopts.rm_options.repoPackagesCachePath == RepoManagerOptions( _gopts.root_dir ).repoPackagesCachePath )
+      {
+	_gopts.rm_options.repoPackagesCachePath = env::XDG_CACHE_HOME() / "zypp/packages";
+	mayuse = userMayUseDir( _gopts.rm_options.repoPackagesCachePath );
+      }
+
+      if ( ! mayuse )
+      {
+	out().error( boost::format(_("Insufficient privileges to use download directory '%s'.") )
+		     % _gopts.rm_options.repoPackagesCachePath );
+	setExitCode( ZYPPER_EXIT_ERR_PRIVILEGES );
+	return;
+      }
+    }
+
+    // go
     init_target( *this );
     initRepoManager();
     init_repos( *this );

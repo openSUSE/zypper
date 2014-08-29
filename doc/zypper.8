@@ -1663,8 +1663,8 @@ distribution (like appliances) to figure out what licenses they are bound by.
 Download rpms specified on the commandline to a local directory.
 
 Per default packages are downloaded to the libzypp package cache
-(/var/cache/zypp/packages), but this can be changed by using the
-global \fI--pkg-cache-dir\fR option.
+(/var/cache/zypp/packages; for non-root users $XDG_CACHE_HOME/zypp/packages),
+but this can be changed by using the global \fI--pkg-cache-dir\fR option.
 
 In XML output a \fB<download-result>\fR node is written for each
 package zypper tried to downlad. Upon success the local path is
