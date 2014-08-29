@@ -1,4 +1,13 @@
 -------------------------------------------------------------------
+Fri Aug 29 15:06:07 CEST 2014 - ma@suse.de
+
+- download: use $XDG_CACHE_HOME/zypp/packages for non-root user 
+  (bnc#891515)
+- download --dry-run: list packages we would download
+- Accept -f,--force option with refresh-services(refs)
+- version 1.11.12
+
+-------------------------------------------------------------------
 Sun Aug 24 01:16:08 CEST 2014 - ma@suse.de
 
 - Update zypper-po.tar.bz2
