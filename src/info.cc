@@ -452,11 +452,10 @@ void printProductInfo(Zypper & zypper, const ui::Selectable & s)
     }
     {
       cout << _("Update Repositories");
-      std::list<Repository::ContentIdentifier> l;
-      unsigned cl = product->updateContentIdentifierSize( l );
-      if ( cl )
+      const std::vector<Repository::ContentIdentifier> & l( product->updateContentIdentifier() );
+      if ( ! l.empty() )
       {
-	cout << ": " << cl << endl;
+	cout << ": " << l.size() << endl;
 	unsigned n = 0;
 	for ( const auto & el : l )
 	{
