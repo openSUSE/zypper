@@ -72,7 +72,7 @@ namespace zypp
       public:
 	Impl()
 	  : _trans( ::transaction_create( nullptr ) )
-	{ memset( _trans, 0, sizeof(_trans) ); }
+	{ memset( _trans, 0, sizeof(*_trans) ); }
 
 	Impl( LoadFromPoolType )
 	  : _watcher( myPool().serial() )
