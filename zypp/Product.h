@@ -100,10 +100,21 @@ namespace zypp
     /** The date when this Product goes out of support as indicated by it's medadata. */
     Date endOfLife() const;
 
-    /** ContentIdentifier of required update repositories.
-     * \todo remove and provide iterator.
-     */
-    unsigned updateContentIdentifierSize( std::list<Repository::ContentIdentifier> & ret_r ) const;
+    /** ContentIdentifier of required update repositories. */
+    std::vector<Repository::ContentIdentifier> updateContentIdentifier() const;
+
+    /** Whether \a cident_r is listed as required update repository. */
+    bool hasUpdateContentIdentifier( const Repository::ContentIdentifier & cident_r ) const;
+
+    /** Whether one of the ContentIdentifier is listed as required update repository. */
+    template <class _Iterator>
+    bool hasUpdateContentIdentifier( _Iterator begin, _Iterator end ) const
+    {
+      for_( it, begin, end )
+	if ( hasUpdateContentIdentifier( *it ) )
+	  return true;
+      return false;
+    }
 
   public:
     /** This is the \b installed product that is also targeted by the

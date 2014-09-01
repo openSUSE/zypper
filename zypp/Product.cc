@@ -205,14 +205,28 @@ namespace zypp
   Date Product::endOfLife() const
   { return Date( lookupNumAttribute( sat::SolvAttr::productEndOfLife ) );}
 
-  unsigned Product::updateContentIdentifierSize( std::list<Repository::ContentIdentifier> & ret_r ) const
+  std::vector<Repository::ContentIdentifier> Product::updateContentIdentifier() const
+  {
+    std::vector<Repository::ContentIdentifier> ret;
+    sat::LookupAttr q( sat::SolvAttr::productUpdatesRepoid, sat::SolvAttr::productUpdates, *this );
+    if ( ! q.empty() )
+    {
+      ret.reserve( 2 );
+      for_( it, q.begin(), q.end() )
+	ret.push_back( it.asString() );
+    }
+    return ret;
+  }
+
+  bool Product::hasUpdateContentIdentifier( const Repository::ContentIdentifier & cident_r ) const
   {
     sat::LookupAttr q( sat::SolvAttr::productUpdatesRepoid, sat::SolvAttr::productUpdates, *this );
     for_( it, q.begin(), q.end() )
     {
-      ret_r.push_back( it.asString() );
+      if ( it.asString() == cident_r )
+	return true;
     }
-    return q.size();
+    return false;
   }
 
   bool Product::isTargetDistribution() const
