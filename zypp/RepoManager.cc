@@ -203,7 +203,7 @@ namespace zypp
       MIL << "repo file: " << file << endl;
       RepoCollector collector;
       parser::RepoFileReader parser( file, bind( &RepoCollector::collect, &collector, _1 ) );
-      return collector.repos;
+      return std::move(collector.repos);
     }
 
     ////////////////////////////////////////////////////////////////////////////
@@ -220,23 +220,35 @@ namespace zypp
     {
       MIL << "directory " << dir << endl;
       std::list<RepoInfo> repos;
-      std::list<Pathname> entries;
-      if ( filesystem::readdir( entries, dir, false ) != 0 )
+      bool nonroot( geteuid() != 0 );
+      if ( nonroot && ! PathInfo(dir).userMayRX() )
       {
-	// TranslatorExplanation '%s' is a pathname
-	ZYPP_THROW(Exception(str::form(_("Failed to read directory '%s'"), dir.c_str())));
+	JobReport::warning( formatNAC(_("Cannot read repo directory ‘%1%’: Permission denied")) % dir );
       }
-
-      str::regex allowedRepoExt("^\\.repo(_[0-9]+)?$");
-      for ( std::list<Pathname>::const_iterator it = entries.begin(); it != entries.end(); ++it )
+      else
       {
-	if (str::regex_match(it->extension(), allowedRepoExt))
+	std::list<Pathname> entries;
+	if ( filesystem::readdir( entries, dir, false ) != 0 )
 	{
-	  std::list<RepoInfo> tmp = repositories_in_file( *it );
-	  repos.insert( repos.end(), tmp.begin(), tmp.end() );
+	  // TranslatorExplanation '%s' is a pathname
+	  ZYPP_THROW(Exception(str::form(_("Failed to read directory '%s'"), dir.c_str())));
+	}
 
-	  //std::copy( collector.repos.begin(), collector.repos.end(), std::back_inserter(repos));
-	  //MIL << "ok" << endl;
+	str::regex allowedRepoExt("^\\.repo(_[0-9]+)?$");
+	for ( std::list<Pathname>::const_iterator it = entries.begin(); it != entries.end(); ++it )
+	{
+	  if ( str::regex_match(it->extension(), allowedRepoExt) )
+	  {
+	    if ( nonroot && ! PathInfo(*it).userMayR() )
+	    {
+	      JobReport::warning( formatNAC(_("Cannot read repo file ‘%1%’: Permission denied")) % *it );
+	    }
+	    else
+	    {
+	      const std::list<RepoInfo> & tmp( repositories_in_file( *it ) );
+	      repos.insert( repos.end(), tmp.begin(), tmp.end() );
+	    }
+	  }
 	}
       }
       return repos;
