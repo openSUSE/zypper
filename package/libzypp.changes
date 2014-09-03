@@ -1,4 +1,9 @@
 -------------------------------------------------------------------
+Thu Sep  4 01:14:34 CEST 2014 - ma@suse.de
+
+- Update zypp-po.tar.bz2
+
+-------------------------------------------------------------------
 Fri Aug 29 14:46:25 CEST 2014 - ma@suse.de
 
 - PackageProvider: consider toplevel cache if --root or --pkg-cachedir
