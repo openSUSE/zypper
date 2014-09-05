@@ -22,6 +22,8 @@
 
 #include "zypp/sat/detail/PoolImpl.h"
 #include "zypp/Repository.h"
+#include "zypp/ResPool.h"
+#include "zypp/Product.h"
 #include "zypp/sat/Pool.h"
 
 using std::endl;
@@ -158,10 +160,33 @@ namespace zypp
     bool Repository::providesUpdatesFor( const CpeId & cpeid_r ) const
     {
       NO_REPOSITORY_RETURN( false );
+      if ( ! cpeid_r )
+	return false;	// filter queries/products without CpeId, as an empty CpeId matches ANYthing.
+
+      // check in repository metadata
       for_( it, updatesProductBegin(), updatesProductEnd() )
       {
 	if ( compare( cpeid_r, it.cpeId(), SetRelation::subset ) )
 	  return true;
+      }
+
+      // check whether known products refer to this as update repo
+      sat::LookupRepoAttr myIds( sat::SolvAttr::repositoryRepoid, *this );	// usually just one, but...
+      if ( ! myIds.empty() )
+      {
+	const ResPool & pool( ResPool::instance() );
+	for_( it, pool.byKindBegin<Product>(), pool.byKindEnd<Product>() )
+	{
+	  Product::constPtr prod( (*it)->asKind<Product>() );
+	  if ( compare( cpeid_r, prod->cpeId(), SetRelation::superset ) )
+	  {
+	    for_( myId, myIds.begin(), myIds.end() )
+	    {
+	      if ( prod->hasUpdateContentIdentifier( myId.asString() ) )
+		return true;
+	    }
+	  }
+	}
       }
       return false;
     }
@@ -169,7 +194,26 @@ namespace zypp
     bool Repository::isUpdateRepo() const
     {
       NO_REPOSITORY_RETURN( false );
-      return ( updatesProductBegin() != updatesProductEnd() );
+
+      // check in repository metadata
+      if ( updatesProductBegin() != updatesProductEnd() )
+	return true;
+
+      // check whether known products refer to this as update repo
+      sat::LookupRepoAttr myIds( sat::SolvAttr::repositoryRepoid, *this );	// usually just one, but...
+      if ( ! myIds.empty() )
+      {
+	const ResPool & pool( ResPool::instance() );
+	for_( it, pool.byKindBegin<Product>(), pool.byKindEnd<Product>() )
+	{
+	  for_( myId, myIds.begin(), myIds.end() )
+	  {
+	    if ( (*it)->asKind<Product>()->hasUpdateContentIdentifier( myId.asString() ) )
+	      return true;
+	  }
+	}
+      }
+      return false;
     }
 
     bool Repository::solvablesEmpty() const

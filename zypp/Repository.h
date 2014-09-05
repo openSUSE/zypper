@@ -168,17 +168,20 @@ namespace zypp
          */
         bool maybeOutdated() const;
 
-        /**
-         * if the repository claims to update something then
-         * it is an update repository
-         *
-         * This is implemented by looking at the repository updates
-         * tag.
-         * \see http://en.opensuse.org/Standards/Rpm_Metadata#SUSE_repository_info_.28suseinfo.xml.29.2C_extensions_to_repomd.xml
+        /** Hint whether the Repo may provide updates for a product.
+	 *
+         * Either the repository claims to update a product via a repository updates
+         * tag in it's metadata or a known product lists the repositories ContentIdentifier
+	 * as required update repo.
          */
         bool isUpdateRepo() const;
 
-        /** Whether the repository claims to provide updates for product identified by it's \ref CpeId */
+        /** Hint whether the Repo may provide updates for a product identified by it's \ref CpeId
+	 *
+         * Either the repository claims to update a product via a repository updates
+         * tag in it's metadata or a known product lists the repositories ContentIdentifier
+	 * as required update repo.
+	 */
         bool providesUpdatesFor( const CpeId & cpeid_r ) const;
 
         /** Whether \ref Repository contains solvables. */
@@ -195,7 +198,7 @@ namespace zypp
 
     public:
 
-      /** Query class for Repository */
+      /** Query class for Repository related products */
       class ProductInfoIterator;
 
       /**
@@ -215,15 +218,18 @@ namespace zypp
       ProductInfoIterator compatibleWithProductEnd() const;
 
       /**
-       * Get an iterator to the beginning of the repository
-       * compatible distros.
+       * Get an iterator to the beginning of distos the repository
+       * provides upadates for.
+       * \note This is only a hint within the repositories metadata.
+       * The same realation might be expressed by a product listing
+       * this repositories ContentIdentifier as required update repo.
        * \see Repository::ProductInfoIterator
        */
       ProductInfoIterator updatesProductBegin() const;
 
       /**
-       * Get an iterator to the end of the repository
-       * compatible distros.
+       * Get an iterator to the end of distos the repository
+       * provides upadates for.
        * \see Repository::ProductInfoIterator
        */
       ProductInfoIterator updatesProductEnd() const;
@@ -327,6 +333,9 @@ namespace zypp
     /**
      * Query class for Repository related products
      *
+     * Products are identified by CpeIds within the repositories metadata.
+     * \see http://en.opensuse.org/Standards/Rpm_Metadata#SUSE_repository_info_.28suseinfo.xml.29.2C_extensions_to_repomd.xml
+     *
      * The iterator does not provide a dereference
      * operator so you can do * on it, but you can
      * access the attributes of each related product
@@ -335,7 +344,7 @@ namespace zypp
      * \code
      * for_( it, repo.compatibleWithProductBegin(), repo.compatibleWithProductEnd() )
      * {
-     *   cout << it.cpeid() << endl;
+     *   cout << it.label() << ": " << it.cpeid() << endl;
      * }
      * \endcode
      *
