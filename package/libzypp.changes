@@ -1,4 +1,13 @@
 -------------------------------------------------------------------
+Fri Sep  5 12:46:57 CEST 2014 - ma@suse.de
+
+- Make Repository::isUpdateRepo also check for being referenced
+  by products (bnc#892579)
+- Report repositories skipped as nonroot due to insufficient
+  permission (bnc#893260)
+- version 14.28.0 (28)
+
+-------------------------------------------------------------------
 Thu Sep  4 01:14:34 CEST 2014 - ma@suse.de
 
 - Update zypp-po.tar.bz2
