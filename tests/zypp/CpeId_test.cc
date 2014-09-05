@@ -361,7 +361,7 @@ BOOST_AUTO_TEST_CASE(cpeid_basics)
   CpeId( "", CpeId::noThrow );
   BOOST_CHECK_EQUAL( CpeId::NoThrowType::lastMalformed, "" );
 
-  for ( const auto & c : { CpeId(), CpeId( nullptr ), CpeId( "" ), CpeId( std::string() ) } )
+  for ( const auto & c : { CpeId(), CpeId( nullptr ), CpeId( "" ), CpeId( std::string() ), CpeId( "cpe:2.3:" ), CpeId( "cpe:/" ) } )
   {
     BOOST_CHECK( ! c );			// evaluate false in boolean context
     BOOST_CHECK_EQUAL( c.asString(), c.asFs() );

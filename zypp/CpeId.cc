@@ -353,7 +353,7 @@ namespace zypp
     field.reserve( Attribute::numAttributes );
     if ( str::splitFields( cpe_r.c_str()+8/* skip magic 'cpe:2.3:' */, std::back_inserter(field), ":" ) > Attribute::numAttributes )
       throw std::invalid_argument( str::Str() << "CpeId:Fs: too many fields (" << field.size() << "); expected 11" /*<< Attribute::numAttributes but g++ currently can't resoolve this as constexpr*/ );
-    if ( field.back().empty() )	// A trailing ':' leads to an empty (illegal) field, but we fillup missing fields with ANY|"*"
+    if ( !field.empty() && field.back().empty() )	// A trailing ':' leads to an empty (illegal) field, but we fillup missing fields with ANY|"*"
       field.back() = "*";
     field.resize( Attribute::numAttributes, "*" );	// fillup with ANY|"*"
 
