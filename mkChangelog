@@ -108,6 +108,18 @@ function newchangesentry() {
   echo ""
 }
 
+function is_fast_forward() {
+  git fetch
+  test "$(git rev-list HEAD..origin/$(git name-rev --name-only HEAD) --count)" == "0"
+}
+
+is_fast_forward || {
+  Recho "!!!"
+  Recho "!!! Branch is not fast-forward. Pull changes first."
+  Recho "!!!"
+  exit 7
+}
+
 git status --porcelain | grep '^[^ ?]' | grep -v "$VERSIONFILE\|$CHANGESFILE" && {
   Becho "!!! Files other than version and changes are added to the index."
   Becho "!!! Doing dryrun..."
