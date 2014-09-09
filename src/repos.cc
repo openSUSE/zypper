@@ -2745,7 +2745,7 @@ static bool refresh_service(Zypper & zypper, const ServiceInfo & service)
     RepoManager::RefreshServiceOptions opts;
     if ( zypper.cOpts().count("restore-status") )
       opts |= RepoManager::RefreshService_restoreStatus;
-    
+
     manager.refreshService( service, opts );
     error = false;
   }
@@ -3306,22 +3306,6 @@ void load_target_resolvables(Zypper & zypper)
 }
 
 // ---------------------------------------------------------------------------
-
-// ----------------------------------------------------------------------------
-
-// #217028
-void warn_if_zmd()
-{
-  if (system ("pgrep -lx zmd") == 0)
-  { // list name, exact match
-    Zypper::instance()->out().info(_("ZENworks Management Daemon is running.\n"
-              "WARNING: this command will not synchronize changes.\n"
-              "Use rug or yast2 for that."));
-    USR << ("ZMD is running. Tell the user this will get"
-        " ZMD and libzypp out of sync.") << endl;
-  }
-}
-
 // Local Variables:
 // c-basic-offset: 2
 // End:

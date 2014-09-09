@@ -387,7 +387,7 @@ class DigestCallbacks {
 };
 
 
-#endif // ZMD_BACKEND_KEYRINGCALLBACKS_H
+#endif // ZMART_KEYRINGCALLBACKS_H
 // Local Variables:
 // c-basic-offset: 2
 // End:

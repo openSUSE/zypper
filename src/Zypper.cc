@@ -3087,8 +3087,6 @@ void Zypper::doCommand()
       catch (const repo::RepoUnknownTypeException & e) {}
     }
 
-    warn_if_zmd();
-
     if (isservice)
       add_service_by_url(*this, url, _arguments[1], type, enabled);
     else
@@ -3318,8 +3316,6 @@ void Zypper::doCommand()
         else if (copts.count("no-check"))
           _gopts.rm_options.probe = false;
 
-        warn_if_zmd();
-
         initRepoManager();
 
         // load gpg keys
@@ -3370,8 +3366,6 @@ void Zypper::doCommand()
       setExitCode(ZYPPER_EXIT_ERR_INVALID_ARGS);
       return;
     }
-
-    warn_if_zmd ();
 
     initRepoManager();
 
@@ -3463,7 +3457,6 @@ void Zypper::doCommand()
       return;
     }
 
-    warn_if_zmd ();
     initRepoManager();
     try {
       RepoInfo repo;

@@ -214,14 +214,6 @@ void load_target_resolvables(Zypper & zypper);
  */
 void load_repo_resolvables(Zypper & zypper);
 
-
-/**
- * If ZMD process found, notify user that ZMD is running and that changes
- * to repositories will not be synchronized with it. To be used with commands
- * manipulating repositories like <tt>addrepo</tt> or <tt>rmrepo</tt>.
- */
-void warn_if_zmd();
-
 #endif
 // Local Variables:
 // mode: c++

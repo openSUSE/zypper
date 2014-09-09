@@ -457,7 +457,7 @@ class RpmCallbacks {
     }
 };
 
-#endif // ZMD_BACKEND_RPMCALLBACKS_H
+#endif // ZMART_RPM_CALLBACKS_H
 // Local Variables:
 // mode: c++
 // c-basic-offset: 2
