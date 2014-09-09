@@ -2061,7 +2061,7 @@ void Zypper::processCommandOptions()
       {"type",    required_argument, 0, 't'},
       {"sort-by-name", no_argument, 0, 0},
       // rug compatibility option, we have --sort-by-repo
-      {"sort-by-catalog", no_argument, 0, 0},
+      {"sort-by-catalog", no_argument, 0, 0},		// TRANSLATED into sort-by-repo
       {"sort-by-repo", no_argument, 0, 0},
       // rug compatibility option, we have --repo
       {"catalog", required_argument, 0, 'c'},
@@ -2167,7 +2167,7 @@ void Zypper::processCommandOptions()
       {"unneeded",		no_argument,		0,  0 },
       {"sort-by-name",		no_argument,		0, 'N'},
       {"sort-by-repo",		no_argument,		0, 'R'},
-      {"sort-by-catalog",	no_argument,		0,  0 },
+      {"sort-by-catalog",	no_argument,		0,  0 },	// TRANSLATED into sort-by-repo
       {"help",			no_argument,		0, 'h'},
       {0, 0, 0, 0}
     };
@@ -2758,7 +2758,7 @@ void Zypper::processCommandOptions()
       {"search-descriptions", no_argument, 0, 'd'},
       {"case-sensitive", no_argument, 0, 'C'},
       {"sort-by-name", no_argument, 0, 0},
-      {"sort-by-catalog", no_argument, 0, 0},
+      {"sort-by-catalog", no_argument, 0, 0},	// TRANSLATED into sort-by-repo
       {"help", no_argument, 0, 'h'},
       {0, 0, 0, 0}
     };
@@ -2804,14 +2804,23 @@ void Zypper::processCommandOptions()
     return;
 
   // parse command options
-  ::copts = _copts = parse_options (argc(), argv(), specific_options);
-  if (copts.count("_unknown") || copts.count("_missing_arg"))
+  _copts = parse_options (argc(), argv(), specific_options);
+  if (_copts.count("_unknown") || _copts.count("_missing_arg"))
   {
     setExitCode(ZYPPER_EXIT_ERR_SYNTAX);
     ERR << "Unknown option or missing argument, returning." << endl;
     return;
   }
 
+  // TRANSLATE sort-by-catalog into sort-by-repo
+  if ( _copts.count("sort-by-catalog") )
+  {
+    if ( ! copts.count("sort-by-repo") )
+      _copts["sort-by-repo"].push_back("");
+    _copts.erase("sort-by-catalog");
+  }
+
+  ::copts = _copts;
   MIL << "Done parsing options." << endl;
 
   // treat --help command option like global --help option from now on
@@ -3957,9 +3966,6 @@ void Zypper::doCommand()
   case ZypperCommand::SEARCH_e:
   case ZypperCommand::RUG_PATCH_SEARCH_e:
   {
-    if (command() == ZypperCommand::RUG_PATCH_SEARCH)
-      _gopts.is_rug_compatible = true;
-
     if (runningHelp()) { out().info(_command_help, Out::QUIET); return; }
 
     zypp::PoolQuery query;
@@ -4172,21 +4178,21 @@ void Zypper::doCommand()
 
         if (command() == ZypperCommand::RUG_PATCH_SEARCH)
         {
-          if (copts.count("sort-by-catalog") || copts.count("sort-by-repo"))
+          if (copts.count("sort-by-repo"))
             t.sort(1);
           else
             t.sort(3); // sort by name
         }
         else if (_gopts.is_rug_compatible)
         {
-          if (copts.count("sort-by-catalog") || copts.count("sort-by-repo"))
+          if (copts.count("sort-by-repo"))
             t.sort(1);
           else
             t.sort(3); // sort by name
         }
         else if (_copts.count("details"))
         {
-          if (copts.count("sort-by-catalog") || copts.count("sort-by-repo"))
+          if (copts.count("sort-by-repo"))
             t.sort(5);
           else
             t.sort(1); // sort by name

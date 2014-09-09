@@ -49,8 +49,8 @@ FillSearchTableSolvable::FillSearchTableSolvable(
     header
       // translators: S for 'installed Status'
       << _("S")
-      // translators: catalog (rug's word for repository) (header)
-      << _("Catalog")
+      // translators:  package's repository (header)
+      << _("Repository")
       // translators: Bundle is a term used in rug. See rug for how to translate it.
       << _("Bundle")
       // translators: name (general header)
@@ -341,7 +341,7 @@ FillPatchesTable::FillPatchesTable( Table & table, zypp::TriBool inst_notinst )
   TableHeader header;
 
   header
-    << (_gopts.is_rug_compatible ? _("Catalog") : _("Repository"))
+    << _("Repository")
     << _("Name")
     << _("Category")
     << _("Severity")
@@ -606,7 +606,7 @@ void list_packages(Zypper & zypper)
     th << _("Name") << table::EditionStyleSetter( tbl, _("Version") ) << _("Arch");
     tbl << th;
 
-    if (zypper.cOpts().count("sort-by-repo") || zypper.cOpts().count("sort-by-catalog"))
+    if (zypper.cOpts().count("sort-by-repo"))
       tbl.sort(1); // Repo
     else
       tbl.sort(2); // Name

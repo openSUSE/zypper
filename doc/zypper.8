@@ -854,8 +854,8 @@ Also quote here to protect the special characters from the shell, for example:
 .B $ zypper se 'libgcc>4.6'.
 
 Results of search are printed in a table with following columns:
-S (status), Catalog, Type (type of package), Name, Version,
-Arch (architecture). The status column can contain the following
+S (status), Name, Type (type of package), Version,
+Arch (architecture), Repository. The status column can contain the following
 values: i - installed, v - another version installed,
 or an empty space for neither of the former cases.
 
@@ -936,7 +936,7 @@ option can be used multiple times.
 Sort packages by name (default).
 .TP
 .I \ \ \ \ \-\-sort\-by\-repo
-Sort packages by catalog, not by name.
+Sort packages by repository, not by name.
 .TP
 .I \-s, \-\-details
 Show all available versions of found packages, each version in each repository

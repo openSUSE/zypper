@@ -258,7 +258,7 @@ static bool list_patch_updates(Zypper & zypper)
   TableHeader th;
   unsigned cols;
 
-  th << (zypper.globalOpts().is_rug_compatible ? _("Catalog") : _("Repository"))
+  th << _("Repository")
      << _("Name") << _("Category") << _("Severity") << _("Status") << _("Summary");
   cols = 6;
   tbl << th;
@@ -493,7 +493,7 @@ void list_updates(Zypper & zypper, const ResKindSet & kinds, bool best_effort)
     // TranslatorExplanation S stands for Status
     th << _("S");
     if (!hide_repo)
-      th << (zypper.globalOpts().is_rug_compatible ? _("Catalog") : _("Repository"));
+      th << _("Repository");
 
     if (zypper.globalOpts().is_rug_compatible)
       th << _("Bundle");

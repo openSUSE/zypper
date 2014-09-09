@@ -161,7 +161,7 @@ void printInfo(Zypper & zypper, const ResKind & kind)
  * <p>
  * Generates output like this:
 <pre>
-Catalog: system
+Repository: system
 Name: gvim
 Version: 6.4.6-19
 Arch: x86_64
@@ -190,7 +190,7 @@ void printPkgInfo(Zypper & zypper, const ui::Selectable & s)
       theone = installed;
   }
 
-  cout << (zypper.globalOpts().is_rug_compatible ? _("Catalog: ") : _("Repository: "))
+  cout << _("Repository: ")
        << theone.resolvable()->repository().asUserString() << endl;
 
   printNVA(theone.resolvable());
@@ -316,7 +316,7 @@ static string string_weak_status(const ResStatus & rs)
 <pre>
 Information for pattern sw_management:
 
-Catalog: factory
+Repository: factory
 Name: sw_management
 Version: 11.0-2
 Arch: x86_64
@@ -334,7 +334,7 @@ void printPatternInfo(Zypper & zypper, const ui::Selectable & s)
   if ( !pool_item.resolvable()->isKind<Pattern>() )
     return;
 
-  cout << (zypper.globalOpts().is_rug_compatible ? _("Catalog: ") : _("Repository: "))
+  cout << _("Repository: ")
        << pool_item.resolvable()->repository().asUserString() << endl;
 
   printNVA(pool_item.resolvable());
@@ -413,7 +413,7 @@ void printProductInfo(Zypper & zypper, const ui::Selectable & s)
   }
   else
   {
-    cout << (zypper.globalOpts().is_rug_compatible ? _("Catalog: ") : _("Repository: "))
+    cout << _("Repository: ")
          << pool_item.resolvable()->repository().asUserString() << endl;
 
     printNVA(pool_item.resolvable());

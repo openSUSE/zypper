@@ -39,7 +39,7 @@ void list_locks(Zypper & zypper)
     TableHeader th;
     th << "#" << _("Name");
     if (zypper.globalOpts().is_rug_compatible)
-      th << _("Catalog") << _("Importance");
+      th << _("Repository") << _("Importance");
     else
       th << _("Type") << _("Repository");
 
@@ -70,7 +70,7 @@ void list_locks(Zypper & zypper)
       set<string> strings;
       if (zypper.globalOpts().is_rug_compatible)
       {
-        // catalog
+        // repository
         copy(it->repos().begin(), it->repos().end(), inserter(strings, strings.end()));
         tr << get_string_for_table(strings);
         // importance
