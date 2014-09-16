@@ -23,6 +23,7 @@ extern "C"
 #include "zypp/base/String.h"
 
 #include "zypp/DiskUsageCounter.h"
+#include "zypp/ExternalProgram.h"
 #include "zypp/sat/Pool.h"
 #include "zypp/sat/detail/PoolImpl.h"
 
@@ -233,6 +234,7 @@ namespace zypp
 	    // Check whether mounted readonly
 	    //
 	    MountPoint::HintFlags hints;
+
 	    std::vector<std::string> flags;
 	    str::split( words[3], std::back_inserter(flags), "," );
 
@@ -245,6 +247,31 @@ namespace zypp
             if ( hints.testFlag( MountPoint::Hint_readonly ) ) {
 	      DBG << "Filter ro mount point : " << l << std::endl;
 	      continue;
+	    }
+
+	    //
+	    // check for snapshotting btrfs
+	    //
+	    if ( words[2] == "btrfs" )
+	    {
+	      if ( geteuid() != 0 )
+	      {
+		DBG << "Assume snapshots on " << words[1] << ": non-root user can't check" << std::endl;
+		hints |= MountPoint::Hint_growonly;
+	      }
+	      else
+	      {
+		// For now just check whether there is
+		// at least one snapshot on the volume:
+		ExternalProgram prog({"btrfs","subvolume","list","-s",words[1]});
+		std::string line( prog.receiveLine() );
+		if ( ! line.empty() )
+		{
+		  DBG << "Found a snapshot on " << words[1] << ": " << line; // has trailing std::endl
+		  hints |= MountPoint::Hint_growonly;
+		}
+		prog.kill();
+	      }
 	    }
 
 	    //

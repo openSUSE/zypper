@@ -189,8 +189,11 @@ namespace zypp
     const MountPointSet & getMountPoints() const
     { return _mps; }
 
-
-    /** Get mountpoints of system below \a rootdir */
+    /** Get mountpoints of system below \a rootdir
+     * If we happen to detect snapshotting btrfs partitions, the MountPoint::growonly
+     * hint is set. Disk usage computation will assume that deleted packages will not
+     * free any space (kept in a snapshot).
+     */
     static MountPointSet detectMountPoints( const std::string & rootdir = "/" );
 
     /** Only one entry for "/" to collect total sizes */
