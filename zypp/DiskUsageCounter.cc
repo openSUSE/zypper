@@ -47,17 +47,18 @@ namespace zypp
       sat::Pool satpool( sat::Pool::instance() );
 
       // init libsolv result vector with mountpoints
-      static const ::DUChanges _initdu = { 0, 0, 0 };
+      static const ::DUChanges _initdu = { 0, 0, 0, 0 };
       std::vector< ::DUChanges> duchanges( result.size(), _initdu );
       {
         unsigned idx = 0;
         for_( it, result.begin(), result.end() )
         {
           duchanges[idx].path = it->dir.c_str();
+	  if ( it->growonly )
+	    duchanges[idx].flags |= DUCHANGES_ONLYADD;
           ++idx;
         }
       }
-
       // now calc...
       ::pool_calc_duchanges( satpool.get(),
                              const_cast<Bitmap &>(installedmap_r),
@@ -231,17 +232,17 @@ namespace zypp
 	    //
 	    // Check whether mounted readonly
 	    //
-	    bool ro = false;
+	    MountPoint::HintFlags hints;
 	    std::vector<std::string> flags;
 	    str::split( words[3], std::back_inserter(flags), "," );
 
 	    for ( unsigned i = 0; i < flags.size(); ++i ) {
 	      if ( flags[i] == "ro" ) {
-		ro = true;
+		hints |= MountPoint::Hint_readonly;
 		break;
 	      }
 	    }
-            if ( ro ) {
+            if ( hints.testFlag( MountPoint::Hint_readonly ) ) {
 	      DBG << "Filter ro mount point : " << l << std::endl;
 	      continue;
 	    }
@@ -266,7 +267,7 @@ namespace zypp
 	      }
 	      ret.insert( DiskUsageCounter::MountPoint( mp, sb.f_bsize,
 		((long long)sb.f_blocks)*sb.f_bsize/1024,
-		((long long)(sb.f_blocks - sb.f_bfree))*sb.f_bsize/1024, 0LL, ro ) );
+		((long long)(sb.f_blocks - sb.f_bfree))*sb.f_bsize/1024, 0LL, hints ) );
 	    }
 	  }
 	}
@@ -288,9 +289,12 @@ namespace zypp
         << " ts: " << obj.totalSize()
         << " us: " << obj.usedSize()
         << " (+-: " << obj.commitDiff()
-        << ")]";
+        << ")" << (obj.readonly?"r":"") << (obj.growonly?"g":"") << " ]";
     return str;
   }
+
+  std::ostream & operator<<( std::ostream & str, const DiskUsageCounter::MountPointSet & obj )
+  { return dumpRange( str, obj.begin(), obj.end() ); }
 
   /////////////////////////////////////////////////////////////////
 } // namespace zypp

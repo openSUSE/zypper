@@ -18,6 +18,7 @@
 
 #include "zypp/ResPool.h"
 #include "zypp/Bitmap.h"
+#include "zypp/base/Flags.h"
 
 ///////////////////////////////////////////////////////////////////
 namespace zypp
@@ -40,25 +41,82 @@ namespace zypp
     ///////////////////////////////////////////////////////////////////
     struct MountPoint
     {
+      friend std::ostream & operator<<( std::ostream & str, const MountPoint & obj );
       std::string dir;			///< Directory name
       long long block_size;		///< Block size of the filesystem in B (0 if you don't care)
       long long total_size;		///< Total size of the filesystem in KiB (0 if you don't care)
       long long used_size;		///< Used size of the filesystem in KiB (0 if you don't care)
       mutable long long pkg_size;	///< Used size after installation in KiB (computed by \ref DiskUsageCoutner)
-      bool readonly;			///< hint for readonly partitions
+      // hint bits:
+      bool readonly:1;			///< hint for readonly partitions
+      bool growonly:1;			///< hint for growonly partitions (e.g. snapshotting btrfs)
+
+
+      /** HinFlags for ctor */
+      enum Hint
+      {
+	NoHint		= 0,
+	Hint_readonly	= (1<<0),	///< readonly partitions
+	Hint_growonly	= (1<<1),	///< growonly partitions (e.g. snapshotting btrfs)
+      };
+      ZYPP_DECLARE_FLAGS(HintFlags,Hint);
+
 
       /** Ctor initialize directory and sizes */
-      MountPoint( const std::string & d = "/", long long bs = 0LL, long long total = 0LL, long long used = 0LL, long long pkg = 0LL, bool ro=false)
-	: dir(d), block_size(bs), total_size(total), used_size(used), pkg_size(pkg), readonly(ro)
+      MountPoint( const std::string & d = "/",
+		  long long bs = 0LL, long long total = 0LL, long long used = 0LL, long long pkg = 0LL,
+		  HintFlags hints = NoHint )
+	: dir(d)
+	, block_size(bs), total_size(total), used_size(used), pkg_size(pkg)
+	, readonly(hints.testFlag(Hint_readonly))
+	, growonly(hints.testFlag(Hint_growonly))
       {}
-      /** \overload to allow e.g. initiailzer lists
+       /** \overload <tt>const char *</tt> to allow e.g. initiailzer lists
        * \code
        *   MountPointSet( { "/", "/usr", "/var" } )
        * \endcode
        */
-      MountPoint( const char * d, long long bs = 0LL, long long total = 0LL, long long used = 0LL, long long pkg = 0LL, bool ro=false)
-	: dir(d?d:""), block_size(bs), total_size(total), used_size(used), pkg_size(pkg), readonly(ro)
+      MountPoint( const char * d, long long bs = 0LL, long long total = 0LL, long long used = 0LL, long long pkg = 0LL, HintFlags hints = NoHint )
+	: MountPoint( std::string(d?d:""), bs, total, used, pkg, hints )
       {}
+
+      /** \overload just name and hints, all sizes 0 */
+      MountPoint( const std::string & d, HintFlags hints )
+	: MountPoint( d, 0LL, 0LL, 0LL, 0LL, hints )
+      {}
+      /** \overload just name and hints, all sizes 0 */
+      MountPoint( const char * d, HintFlags hints )
+	: MountPoint( std::string(d?d:""), hints )
+      {}
+      /** \overload just name and hints, all sizes 0 */
+      MountPoint( const std::string & d, Hint hint )	// !explicitly overload to prevent propagation enum value -> long long
+	: MountPoint( d, HintFlags(hint) )
+      {}
+      /** \overload just name and hints, all sizes 0 */
+      MountPoint( const char * d, Hint hint )		// !explicitly overload to prevent propagation enum value -> long long
+	: MountPoint( std::string(d?d:""), HintFlags(hint) )
+      {}
+
+
+      /** \deprecated Use HintFlags instead of a trailing 'bool ro' argument.
+       * \code
+       *   -  MountPoint( "/usr", ..., true ); // readonly
+       *   +  MountPoint( "/usr", ..., MountPoint::Hint_readonly );
+       * \endcode
+       */
+      ZYPP_DEPRECATED MountPoint( const std::string & d, long long bs, long long total, long long used, long long pkg, bool ro )
+	: MountPoint( d, bs, total, used, pkg, HintFlags(ro?Hint_readonly:NoHint) )
+      {}
+      /** \deprecated Use HintFlags instead of a trailing 'bool ro' argument.
+       * \code
+       *   -  MountPoint( "/usr", ..., true ); // readonly
+       *   +  MountPoint( "/usr", ..., MountPoint::Hint_readonly );
+       * \endcode
+       */
+      ZYPP_DEPRECATED MountPoint( const char * d, long long bs, long long total, long long used, long long pkg, bool ro )
+	: MountPoint( d, bs, total, used, pkg, HintFlags(ro?Hint_readonly:NoHint) )
+      {}
+
 
       /** Sort by directory name */
       bool operator<( const MountPoint & rhs ) const
@@ -150,8 +208,17 @@ namespace zypp
   };
   ///////////////////////////////////////////////////////////////////
 
+  ZYPP_DECLARE_OPERATORS_FOR_FLAGS(DiskUsageCounter::MountPoint::HintFlags);
+
   /** \relates DiskUsageCounter::MountPoint Stream output */
   std::ostream & operator<<( std::ostream & str, const DiskUsageCounter::MountPoint & obj );
+
+  /** \relates DiskUsageCounter::MountPointSet Stream output */
+  std::ostream & operator<<( std::ostream & str, const DiskUsageCounter::MountPointSet & obj );
+
+  /** \relates DiskUsageCounter Stream output */
+  inline std::ostream & operator<<( std::ostream & str, const DiskUsageCounter & obj )
+  { return str << obj.getMountPoints(); }
 
   /////////////////////////////////////////////////////////////////
 } // namespace zypp
