@@ -1,4 +1,11 @@
 -------------------------------------------------------------------
+Tue Sep 16 10:45:39 CEST 2014 - ma@suse.de
+
+- DiskUsageCounter: Support setting 'growonly' partition hint 
+  (bnc#896176)
+- version 14.29.0 (29)
+
+-------------------------------------------------------------------
 Fri Sep  5 12:46:57 CEST 2014 - ma@suse.de
 
 - Make Repository::isUpdateRepo also check for being referenced
