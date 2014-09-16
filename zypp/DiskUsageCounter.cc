@@ -141,12 +141,12 @@ namespace zypp
 	  if ( !(procmounts.fail() || procmounts.bad()) ) {
 	    // data to consume
 
-	    // rootfs 	/ 		rootfs 		rw 0 0
+	    // rootfs 		/ 		rootfs 		rw 0 0
 	    // /dev/root 	/ 		reiserfs	rw 0 0
-	    // proc 	/proc 		proc		rw 0 0
-	    // devpts 	/dev/pts 	devpts		rw 0 0
+	    // proc 		/proc 		proc		rw 0 0
+	    // devpts 		/dev/pts 	devpts		rw 0 0
 	    // /dev/hda5 	/boot 		ext2		rw 0 0
-	    // shmfs 	/dev/shm 	shm		rw 0 0
+	    // shmfs 		/dev/shm 	shm		rw 0 0
 	    // usbdevfs 	/proc/bus/usb 	usbdevfs	rw 0 0
 
 	    std::vector<std::string> words;
@@ -253,7 +253,7 @@ namespace zypp
 	    struct statvfs sb;
 	    if ( statvfs( words[1].c_str(), &sb ) != 0 ) {
 	      WAR << "Unable to statvfs(" << words[1] << "); errno " << errno << std::endl;
-	      ret.insert( DiskUsageCounter::MountPoint( mp ) );
+	      ret.insert( DiskUsageCounter::MountPoint( mp, words[2], 0LL, 0LL, 0LL, 0LL, hints ) );
 	    }
 	    else
 	    {
@@ -265,7 +265,7 @@ namespace zypp
 		DBG << "Filter zero-sized mount point : " << l << std::endl;
 		continue;
 	      }
-	      ret.insert( DiskUsageCounter::MountPoint( mp, sb.f_bsize,
+	      ret.insert( DiskUsageCounter::MountPoint( mp, words[2], sb.f_bsize,
 		((long long)sb.f_blocks)*sb.f_bsize/1024,
 		((long long)(sb.f_blocks - sb.f_bfree))*sb.f_bsize/1024, 0LL, hints ) );
 	    }
@@ -289,7 +289,7 @@ namespace zypp
         << " ts: " << obj.totalSize()
         << " us: " << obj.usedSize()
         << " (+-: " << obj.commitDiff()
-        << ")" << (obj.readonly?"r":"") << (obj.growonly?"g":"") << " ]";
+        << ")" << (obj.readonly?"r":"") << (obj.growonly?"g":"") << " " << obj.fstype << "]";
     return str;
   }
 

@@ -43,6 +43,7 @@ namespace zypp
     {
       friend std::ostream & operator<<( std::ostream & str, const MountPoint & obj );
       std::string dir;			///< Directory name
+      std::string fstype;		///< Filesystem type  (provided by \ref detectMountPoints)
       long long block_size;		///< Block size of the filesystem in B (0 if you don't care)
       long long total_size;		///< Total size of the filesystem in KiB (0 if you don't care)
       long long used_size;		///< Used size of the filesystem in KiB (0 if you don't care)
@@ -61,12 +62,12 @@ namespace zypp
       };
       ZYPP_DECLARE_FLAGS(HintFlags,Hint);
 
-
-      /** Ctor initialize directory and sizes */
+      /** Ctor initialize directory, fstype and sizes */
       MountPoint( const std::string & d = "/",
+		  const std::string & f = std::string(),
 		  long long bs = 0LL, long long total = 0LL, long long used = 0LL, long long pkg = 0LL,
 		  HintFlags hints = NoHint )
-	: dir(d)
+	: dir(d), fstype(f)
 	, block_size(bs), total_size(total), used_size(used), pkg_size(pkg)
 	, readonly(hints.testFlag(Hint_readonly))
 	, growonly(hints.testFlag(Hint_growonly))
@@ -76,24 +77,42 @@ namespace zypp
        *   MountPointSet( { "/", "/usr", "/var" } )
        * \endcode
        */
-      MountPoint( const char * d, long long bs = 0LL, long long total = 0LL, long long used = 0LL, long long pkg = 0LL, HintFlags hints = NoHint )
+      MountPoint( const char * d,
+		  const std::string & f = std::string(),
+		  long long bs = 0LL, long long total = 0LL, long long used = 0LL, long long pkg = 0LL,
+		  HintFlags hints = NoHint )
+	: MountPoint( std::string(d?d:""), f, bs, total, used, pkg, hints )
+      {}
+
+
+      /** Ctor initialize directory and sizes */
+      MountPoint( const std::string & d,
+		  long long bs, long long total = 0LL, long long used = 0LL, long long pkg = 0LL,
+		  HintFlags hints = NoHint )
+	: MountPoint( d, std::string(), bs, total, used, pkg, hints )
+      {}
+      /** \overload <tt>const char *</tt> */
+      MountPoint( const char * d,
+		  long long bs, long long total = 0LL, long long used = 0LL, long long pkg = 0LL,
+		  HintFlags hints = NoHint )
 	: MountPoint( std::string(d?d:""), bs, total, used, pkg, hints )
       {}
 
-      /** \overload just name and hints, all sizes 0 */
+
+      /** Ctor just name and hints, all sizes 0 */
       MountPoint( const std::string & d, HintFlags hints )
-	: MountPoint( d, 0LL, 0LL, 0LL, 0LL, hints )
+	: MountPoint( d, std::string(), 0LL, 0LL, 0LL, 0LL, hints )
       {}
-      /** \overload just name and hints, all sizes 0 */
+      /** \overload <tt>const char *</tt> */
       MountPoint( const char * d, HintFlags hints )
 	: MountPoint( std::string(d?d:""), hints )
       {}
-      /** \overload just name and hints, all sizes 0 */
-      MountPoint( const std::string & d, Hint hint )	// !explicitly overload to prevent propagation enum value -> long long
+      /** \overload to prevent propagation Hint -> long long */
+      MountPoint( const std::string & d, Hint hint )
 	: MountPoint( d, HintFlags(hint) )
       {}
-      /** \overload just name and hints, all sizes 0 */
-      MountPoint( const char * d, Hint hint )		// !explicitly overload to prevent propagation enum value -> long long
+      /** \overload to prevent propagation Hint -> long long */
+      MountPoint( const char * d, Hint hint )
 	: MountPoint( std::string(d?d:""), HintFlags(hint) )
       {}
 
