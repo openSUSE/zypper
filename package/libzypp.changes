@@ -1,6 +1,15 @@
 -------------------------------------------------------------------
+Wed Sep 17 13:18:23 CEST 2014 - ma@suse.de
+
+- adjust BuildRequires
+- version 14.29.1 (29)
+
+-------------------------------------------------------------------
 Tue Sep 16 10:45:39 CEST 2014 - ma@suse.de
 
+- DiskUsageCounter: Set growonly on detetcted snapshotting btrfs
+  partitions (bnc#896176)
+- DiskUsageCounter: Allow MountPoint to store fstype
 - DiskUsageCounter: Support setting 'growonly' partition hint 
   (bnc#896176)
 - version 14.29.0 (29)
