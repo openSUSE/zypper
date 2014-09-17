@@ -57,6 +57,25 @@ extern "C"
 /////////////////////////////////////////////////////////////////////////
 namespace zypp
 { ///////////////////////////////////////////////////////////////////////
+
+  /////////////////////////////////////////////////////////////////////////
+  namespace env
+  {
+    inline bool HACKENV( const char * var_r, bool default_r )
+    {
+      bool ret = default_r;
+      const char * val = ::getenv( var_r );
+      if ( val )
+      {
+	ret = str::strToBool( val, default_r );
+	if ( ret != default_r )
+	  INT << "HACKENV " << var_r << " = " << ret << endl;
+      }
+      return ret;
+    }
+  } // namespace env
+  /////////////////////////////////////////////////////////////////////////
+
   ///////////////////////////////////////////////////////////////////////
   namespace solver
   { /////////////////////////////////////////////////////////////////////
@@ -112,20 +131,33 @@ SATResolver::dumpOn( std::ostream & os ) const
 {
     os << "<resolver>" << endl;
     if (_solv) {
-	// os << "  fixsystem = " << _solv->fixsystem << endl;
-	// os << "  updatesystem = " << _solv->updatesystem << endl;
-	os << "  allowdowngrade = " << solver_get_flag(_solv, SOLVER_FLAG_ALLOW_DOWNGRADE) << endl;
-	os << "  allowarchchange = " << solver_get_flag(_solv, SOLVER_FLAG_ALLOW_ARCHCHANGE) << endl;
-	os << "  allowvendorchange = " <<  solver_get_flag(_solv, SOLVER_FLAG_ALLOW_VENDORCHANGE) << endl;
-	os << "  allowuninstall = " << solver_get_flag(_solv, SOLVER_FLAG_ALLOW_UNINSTALL) << endl;
-	os << "  noupdateprovide = " << solver_get_flag(_solv, SOLVER_FLAG_NO_UPDATEPROVIDE) << endl;
-	os << "  dosplitprovides = " << solver_get_flag(_solv, SOLVER_FLAG_SPLITPROVIDES) << endl;
-	os << "  onlyRequires = " << solver_get_flag(_solv, SOLVER_FLAG_IGNORE_RECOMMENDED) << endl;
-	os << "  ignorealreadyrecommended = " << !solver_get_flag(_solv, SOLVER_FLAG_ADD_ALREADY_RECOMMENDED) << endl;
-	os << "  distupgrade = " << _distupgrade << endl;
-        os << "  distupgrade_removeunsupported = " << _distupgrade_removeunsupported << endl;
-	os << "  solveSrcPackages = " << _solveSrcPackages << endl;
-	os << "  cleandepsOnRemove = " << _cleandepsOnRemove << endl;
+#define OUTS(X) os << "  " << #X << "\t= " << solver_get_flag(_solv, SOLVER_FLAG_##X) << endl
+	OUTS( ALLOW_DOWNGRADE );
+	OUTS( ALLOW_ARCHCHANGE );
+	OUTS( ALLOW_VENDORCHANGE );
+	OUTS( ALLOW_UNINSTALL );
+	OUTS( NO_UPDATEPROVIDE );
+	OUTS( SPLITPROVIDES );
+	OUTS( IGNORE_RECOMMENDED );
+	OUTS( ADD_ALREADY_RECOMMENDED );
+	OUTS( NO_INFARCHCHECK );
+	OUTS( ALLOW_NAMECHANGE );
+	OUTS( KEEP_EXPLICIT_OBSOLETES );
+	OUTS( BEST_OBEY_POLICY );
+	OUTS( NO_AUTOTARGET );
+	OUTS( DUP_ALLOW_DOWNGRADE );
+	OUTS( DUP_ALLOW_ARCHCHANGE );
+	OUTS( DUP_ALLOW_VENDORCHANGE );
+	OUTS( DUP_ALLOW_NAMECHANGE );
+	OUTS( KEEP_ORPHANS );
+	OUTS( BREAK_ORPHANS );
+	OUTS( FOCUS_INSTALLED );
+	OUTS( YUM_OBSOLETES );
+#undef OUTS
+	os << "  distupgrade	= "	<< _distupgrade << endl;
+        os << "  distupgrade_removeunsupported	= " << _distupgrade_removeunsupported << endl;
+	os << "  solveSrcPackages	= "	<< _solveSrcPackages << endl;
+	os << "  cleandepsOnRemove	= "	<< _cleandepsOnRemove << endl;
     } else {
 	os << "<NULL>";
     }
@@ -447,6 +479,13 @@ SATResolver::solving(const CapabilitySet & requires_caps,
     solver_set_flag(_solv, SOLVER_FLAG_SPLITPROVIDES, _dosplitprovides);
     solver_set_flag(_solv, SOLVER_FLAG_NO_UPDATEPROVIDE, _noupdateprovide);
     solver_set_flag(_solv, SOLVER_FLAG_IGNORE_RECOMMENDED, _onlyRequires);
+
+#define HACKENV(X,D) solver_set_flag(_solv, X, env::HACKENV( #X, D ) );
+    HACKENV( SOLVER_FLAG_DUP_ALLOW_DOWNGRADE,	true );
+    HACKENV( SOLVER_FLAG_DUP_ALLOW_ARCHCHANGE,	true );
+    HACKENV( SOLVER_FLAG_DUP_ALLOW_VENDORCHANGE,true );
+    HACKENV( SOLVER_FLAG_DUP_ALLOW_NAMECHANGE,	true );
+#undef HACKENV
 
     sat::Pool::instance().prepareForSolving();
 
