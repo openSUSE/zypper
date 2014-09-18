@@ -209,13 +209,20 @@ export CFLAGS="$RPM_OPT_FLAGS"
 export CXXFLAGS="$RPM_OPT_FLAGS"
 unset TRANSLATION_SET
 unset EXTRA_CMAKE_OPTIONS
-# SLE11-* might want its own translation set:
-%if 0%{?suse_version} == 1110
++# Same codebase, but SLES may use it's own translation set.
++#     suse_version
++# 	1110		SLES11
++# 	1315		SLES12
+%if 0%{?suse_version} == 1110 || 0%{?suse_version} == 1315
 if [ -f ../po/sle-zypp-po.tar.bz ]; then
   export TRANSLATION_SET=sle-zypp
-  export EXTRA_CMAKE_OPTIONS="-DDISABLE_LIBPROXY=ON"
 fi
 %endif
+# No libproxy on SLE11
+%if 0%{?suse_version} == 1110
+export EXTRA_CMAKE_OPTIONS="-DDISABLE_LIBPROXY=ON"
+%endif
+
 cmake -DCMAKE_INSTALL_PREFIX=%{_prefix} \
       -DDOC_INSTALL_DIR=%{_docdir} \
       -DLIB=%{_lib} \
