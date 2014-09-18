@@ -101,10 +101,12 @@ Authors:
 mkdir build
 cd build
 
-# The code base is the same, but SLES11-SP1 (suse_version == 1110)
-# may use it's own set of .po files from po/sle-zypper-po.tar.bz2.
+# Same codebase, but SLES may use it's own translation set.
+#     suse_version
+# 	1110		SLES11
+# 	1315		SLES12
 unset TRANSLATION_SET
-%if 0%{?suse_version} == 1110
+%if 0%{?suse_version} == 1110 || 0%{?suse_version} == 1315
 if [ -f ../po/sle-zypper-po.tar.bz ]; then
   export TRANSLATION_SET=sle-zypper
 fi
