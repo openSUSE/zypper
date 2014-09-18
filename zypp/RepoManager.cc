@@ -223,7 +223,7 @@ namespace zypp
       bool nonroot( geteuid() != 0 );
       if ( nonroot && ! PathInfo(dir).userMayRX() )
       {
-	JobReport::warning( formatNAC(_("Cannot read repo directory ‘%1%’: Permission denied")) % dir );
+	JobReport::warning( formatNAC(_("Cannot read repo directory '%1%': Permission denied")) % dir );
       }
       else
       {
@@ -241,7 +241,7 @@ namespace zypp
 	  {
 	    if ( nonroot && ! PathInfo(*it).userMayR() )
 	    {
-	      JobReport::warning( formatNAC(_("Cannot read repo file ‘%1%’: Permission denied")) % *it );
+	      JobReport::warning( formatNAC(_("Cannot read repo file '%1%': Permission denied")) % *it );
 	    }
 	    else
 	    {
