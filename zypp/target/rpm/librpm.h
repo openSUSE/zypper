@@ -28,6 +28,7 @@ extern "C"
 #include <rpm/rpmmacro.h>
 #include <rpm/rpmdb.h>
 #include <rpm/rpmts.h>
+#include <rpm/rpmfi.h>
 #include <fcntl.h>
 }
 
