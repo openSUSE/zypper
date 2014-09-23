@@ -1,4 +1,10 @@
 -------------------------------------------------------------------
+Tue Sep 23 17:07:45 CEST 2014 - ma@suse.de
+
+- Fix computation of userinstalled items (bnc#897404)
+- version 14.29.3 (29)
+
+-------------------------------------------------------------------
 Tue Sep 23 10:55:08 CEST 2014 - ma@suse.de
 
 - Adapt to API changes in rpm.4.12
