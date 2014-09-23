@@ -58,7 +58,7 @@ namespace zypp
     Queue::const_iterator Queue::find( value_type val_r ) const
     {
       for_( it, begin(), end() )
-	if ( *it != val_r )
+	if ( *it == val_r )
 	  return it;
       return end();
     }
@@ -96,11 +96,8 @@ namespace zypp
 
     void Queue::remove( value_type val_r )
     {
-      const_iterator it( find( val_r ) );
-      if ( it != end() )
-      {
+      for ( const_iterator it( find( val_r ) ); it != end(); it = find( val_r ) )
 	::queue_delete( _pimpl.get(), it - begin() );
-      }
     }
 
     void Queue::push( value_type val_r )

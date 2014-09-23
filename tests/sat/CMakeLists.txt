@@ -6,6 +6,7 @@ ADD_TESTS(
   IdString
   LookupAttr
   Pool
+  Queue
   Map
   Solvable
   SolvParsing
