@@ -1,4 +1,9 @@
 -------------------------------------------------------------------
+Thu Sep 25 01:15:42 CEST 2014 - ma@suse.de
+
+- Update zypp-po.tar.bz2
+
+-------------------------------------------------------------------
 Tue Sep 23 17:07:45 CEST 2014 - ma@suse.de
 
 - Fix computation of userinstalled items (bnc#897404)
