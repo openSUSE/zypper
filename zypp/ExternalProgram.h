@@ -108,6 +108,10 @@ namespace zypp {
        *   const char* argv[] = { "</tmp/x", "cat", NULL };
        *   ExternalProgram prog( argv );
        * \endcode
+       *
+       * Stdout redirection: If the \b 1st argument starts with a \b '>', the remaining
+       * part is treated as file opened for writing on standard output (or \c /dev/null
+       * if empty).
        */
 
       ExternalProgram();

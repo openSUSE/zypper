@@ -182,6 +182,7 @@ namespace zypp {
 
       // retrieve options at beginning of arglist
       const char * redirectStdin = nullptr;	// <[file]
+      const char * redirectStdout = nullptr;	// >[file]
       const char * chdirTo = nullptr;		// #/[path]
 
       if ( root )
@@ -211,6 +212,13 @@ namespace zypp {
 	      redirectStdin = "/dev/null";
 	    break;
 
+	  case '>':
+	    strip = true;
+	    redirectStdout = argv[0]+1;
+	    if ( *redirectStdout == '\0' )
+	      redirectStdout = "/dev/null";
+	    break;
+
 	  case '#':
 	    strip = true;
 	    if ( argv[0][1] == '/' )	// #/[path]
@@ -234,6 +242,8 @@ namespace zypp {
         }
         if ( redirectStdin )
           cmdstr << " < '" << redirectStdin << "'";
+        if ( redirectStdout )
+          cmdstr << " > '" << redirectStdout << "'";
         _command = cmdstr.str();
       }
       DBG << "Executing " << _command << endl;
@@ -299,6 +309,13 @@ namespace zypp {
           ::close( 0 );
           int inp_fd = open( redirectStdin, O_RDONLY );
           dup2( inp_fd, 0 );
+        }
+
+        if ( redirectStdout )
+        {
+          ::close( 1 );
+          int inp_fd = open( redirectStdout, O_WRONLY|O_CREAT|O_APPEND, 0600 );
+          dup2( inp_fd, 1 );
         }
 
     	// Handle stderr
