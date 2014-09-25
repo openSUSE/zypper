@@ -32,6 +32,7 @@ Obsoletes:      yast2-packagemanager
 
 # Features we provide (update doc/autoinclude/FeatureTest.doc):
 Provides:       libzypp(plugin) = 0
+Provides:       libzypp(plugin:appdata) = 0
 Provides:       libzypp(plugin:commit) = 1
 Provides:       libzypp(plugin:services) = 0
 Provides:       libzypp(plugin:system) = 0
@@ -260,6 +261,7 @@ mkdir -p $RPM_BUILD_ROOT%{_sysconfdir}/zypp/vendors.d
 mkdir -p $RPM_BUILD_ROOT%{_sysconfdir}/zypp/multiversion.d
 mkdir -p $RPM_BUILD_ROOT%{_prefix}/lib/zypp
 mkdir -p $RPM_BUILD_ROOT%{_prefix}/lib/zypp/plugins
+mkdir -p $RPM_BUILD_ROOT%{_prefix}/lib/zypp/plugins/appdata
 mkdir -p $RPM_BUILD_ROOT%{_prefix}/lib/zypp/plugins/commit
 mkdir -p $RPM_BUILD_ROOT%{_prefix}/lib/zypp/plugins/services
 mkdir -p $RPM_BUILD_ROOT%{_prefix}/lib/zypp/plugins/system

@@ -83,6 +83,19 @@ Plugin closes \c stdin and exits when receiving a \c _DISCONNECT message. Upon a
 \endverbatim
 
 <HR><!-- ====================================================================== -->
+\section plugins-impl Developers: Implementation
+
+Plugins are implemented in the following classes:
+
+- \ref zypp::PluginScript (Plugin as an external program)
+- \ref zypp::PluginScriptException
+- \ref zypp::PluginFrame (Message for the stateful protocol)
+- \ref zypp::PluginFrameException
+- \ref zypp::repo::PluginServices (Finds Service plugins)
+
+The plugins default location is obtained from \ref zypp::ZConfig::pluginsPath()
+
+<HR><!-- ====================================================================== -->
 \section plugin-toc Supported plugins
 
 \subpage plugin-commit Escort installation of packages
@@ -91,6 +104,7 @@ Plugin closes \c stdin and exits when receiving a \c _DISCONNECT message. Upon a
 
 \ref plugin-url-resolver
 
+\ref plugin-appdata
 
 <HR><!-- ====================================================================== -->
 \section plugin-services Service plugins
@@ -141,7 +155,7 @@ ZYpp sees a repository whose url has the format:
 plugin:foo?param1=val1&param2=val2
 \endverbatim
 
-ZYpp tries to executa a plugin named foo (in /usr/lib/zypp/plugins/urlresolver) and calla it with the following protocol:
+ZYpp tries to executa a plugin named foo (in /usr/lib/zypp/plugins/urlresolver) and call it with the following protocol:
 
 \verbatim
    RESOLVEURL
@@ -187,16 +201,17 @@ This type of plugin can be combined with service plugins, because a local servic
 In this example, the service plugin could have inmediately resolved the urls and returned http://realurl, but the url resolver allows also to add HTTP headers to the request.
 
 <HR><!-- ====================================================================== -->
-\section plugins-impl Developers: Implementation
+\section plugin-appdata Appdata refresh plugins (repo change)
 
-Plugins are implemented in the following classes:
+Stateless plugins found in /usr/lib/zypp/plugins/appdata are called whenever any of the system repos has changed (added/removed/renamed/modified) or has been refreshed. Detailed information \b what exactly has changed is not available. (scripts are executed IFF euid is '0' and --root is not used). For every enabled system repo we pass alias type and metadata path on the commandline like this:
 
-- \ref zypp::PluginScript (Plugin as an external program)
-- \ref zypp::PluginScriptException
-- \ref zypp::PluginFrame (Message for the stateful protocol)
-- \ref zypp::PluginFrameException
-- \ref zypp::repo::PluginServices (Finds Service plugins)
+\verbatim
+  -R REPO_ALIAS -t REPO_TYPE -p REPO_METADATA_PATH   -R NEXT_REPO....
+\endverbatim
 
-The plugins default location is obtained from \ref zypp::ZConfig::pluginsPath()
+\note REPO_TYPE can be e.g. "rpm-md", "yast2", "plaindir" or "NONE" indicating the repo was not yet probed.
 
+\note REPO_METADATA_PATH can be empty or a not existing directory, indicating valid metadata for the repo are not yet available.
+
+Scripts are executed 'fire and forget' whenever a RepoManager instance that performed changes goes out of scope. So it's up to the script to protect against concurrency.
 */

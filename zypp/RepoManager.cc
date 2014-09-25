@@ -21,6 +21,7 @@
 #include "zypp/base/InputStream.h"
 #include "zypp/base/LogTools.h"
 #include "zypp/base/Gettext.h"
+#include "zypp/base/DefaultIntegral.h"
 #include "zypp/base/Function.h"
 #include "zypp/base/Regex.h"
 #include "zypp/PathInfo.h"
@@ -441,19 +442,62 @@ namespace zypp
       init_knownRepositories();
     }
 
+    ~Impl()
+    {
+      // trigger appdata refresh if some repos change
+      if ( _reposDirty && geteuid() == 0 && ( _options.rootDir.empty() || _options.rootDir == "/" ) )
+      {
+	try {
+	  std::list<Pathname> entries;
+	  filesystem::readdir( entries, _options.pluginsPath/"appdata", false );
+	  if ( ! entries.empty() )
+	  {
+	    ExternalProgram::Arguments cmd;
+	    cmd.push_back( "<" );		// discard stdin
+	    cmd.push_back( ">" );		// discard stdout
+	    cmd.push_back( "PROGRAM" );		// [2] - fix index below if changing!
+	    for ( const auto & rinfo : repos() )
+	    {
+	      if ( ! rinfo.enabled() )
+		continue;
+	      cmd.push_back( "-R" );
+	      cmd.push_back( rinfo.alias() );
+	      cmd.push_back( "-t" );
+	      cmd.push_back( rinfo.type().asString() );
+	      cmd.push_back( "-p" );
+	      cmd.push_back( rinfo.metadataPath().asString() );
+	    }
+
+	    for_( it, entries.begin(), entries.end() )
+	    {
+	      PathInfo pi( *it );
+	      //DBG << "/tmp/xx ->" << pi << endl;
+	      if ( pi.isFile() && pi.userMayRX() )
+	      {
+		// trigger plugin
+		cmd[2] = pi.asString();		// [2] - PROGRAM
+		ExternalProgram prog( cmd, ExternalProgram::Stderr_To_Stdout );
+	      }
+	    }
+	  }
+	}
+	catch (...) {}	// no throw in dtor
+      }
+    }
+
   public:
-    bool repoEmpty() const		{ return _repos.empty(); }
-    RepoSizeType repoSize() const	{ return _repos.size(); }
-    RepoConstIterator repoBegin() const	{ return _repos.begin(); }
-    RepoConstIterator repoEnd() const	{ return _repos.end(); }
+    bool repoEmpty() const		{ return repos().empty(); }
+    RepoSizeType repoSize() const	{ return repos().size(); }
+    RepoConstIterator repoBegin() const	{ return repos().begin(); }
+    RepoConstIterator repoEnd() const	{ return repos().end(); }
 
     bool hasRepo( const std::string & alias ) const
-    { return foundAliasIn( alias, _repos ); }
+    { return foundAliasIn( alias, repos() ); }
 
     RepoInfo getRepo( const std::string & alias ) const
     {
-      RepoConstIterator it( findAlias( alias, _repos ) );
-      return it == _repos.end() ? RepoInfo::noRepo : *it;
+      RepoConstIterator it( findAlias( alias, repos() ) );
+      return it == repos().end() ? RepoInfo::noRepo : *it;
     }
 
   public:
@@ -558,8 +602,8 @@ namespace zypp
     void getRepositoriesInService( const std::string & alias, OutputIterator out ) const
     {
       MatchServiceAlias filter( alias );
-      std::copy( boost::make_filter_iterator( filter, _repos.begin(), _repos.end() ),
-                 boost::make_filter_iterator( filter, _repos.end(), _repos.end() ),
+      std::copy( boost::make_filter_iterator( filter, repos().begin(), repos().end() ),
+                 boost::make_filter_iterator( filter, repos().end(), repos().end() ),
                  out);
     }
 
@@ -567,10 +611,15 @@ namespace zypp
     void init_knownServices();
     void init_knownRepositories();
 
+    const RepoSet & repos() const { return _reposX; }
+    RepoSet & reposManip()        { if ( ! _reposDirty ) _reposDirty = true; return _reposX; }
+
   private:
     RepoManagerOptions	_options;
-    RepoSet 		_repos;
+    RepoSet 		_reposX;
     ServiceSet		_services;
+
+    DefaultIntegral<bool,false> _reposDirty;
 
   private:
     friend Impl * rwcowClone<Impl>( const Impl * rhs );
@@ -703,7 +752,7 @@ namespace zypp
 	// set the downloaded packages path for the repo
 	repoInfo.setPackagesPath( packagescache_path_for_repoinfo(_options, repoInfo) );
 	// remember it
-        _repos.insert( repoInfo );
+        _reposX.insert( repoInfo );	// direct access via _reposX in ctor! no reposManip.
 
 	// detect orphaned repos belonging to a deleted service
 	const std::string & serviceAlias( repoInfo.service() );
@@ -1063,6 +1112,7 @@ namespace zypp
         // ok we have the metadata, now exchange
         // the contents
 	filesystem::exchange( tmpdir.path(), mediarootpath );
+	reposManip();	// remember to trigger appdata refresh
 
         // we are done.
         return;
@@ -1454,7 +1504,7 @@ namespace zypp
     MIL << "Try adding repo " << info << endl;
 
     RepoInfo tosave = info;
-    if ( _repos.find(tosave) != _repos.end() )
+    if ( repos().find(tosave) != repos().end() )
       ZYPP_THROW(RepoAlreadyExistsException(info));
 
     // check the first url for now
@@ -1501,7 +1551,7 @@ namespace zypp
       oinfo.setMetadataPath( metadataPath( tosave ) );
       oinfo.setPackagesPath( packagesPath( tosave ) );
     }
-    _repos.insert(tosave);
+    reposManip().insert(tosave);
 
     progress.set(90);
 
@@ -1579,7 +1629,7 @@ namespace zypp
       MIL << "Saving " << (*it).alias() << endl;
       it->setFilepath(repofile.asString());
       it->dumpAsIniOn(file);
-      _repos.insert(*it);
+      reposManip().insert(*it);
 
       HistoryLog(_options.rootDir).addRepository(*it);
     }
@@ -1663,7 +1713,7 @@ namespace zypp
         // now delete metadata (#301037)
         cleanMetadata( todelete, mSubprogrcv );
 	cleanPackages( todelete, pSubprogrcv );
-        _repos.erase(todelete);
+        reposManip().erase(todelete);
         MIL << todelete.alias() << " sucessfully deleted." << endl;
         HistoryLog(_options.rootDir).removeRepository(todelete);
         return;
@@ -1723,8 +1773,8 @@ namespace zypp
       }
 
       newinfo.setFilepath(toedit.filepath());
-      _repos.erase(toedit);
-      _repos.insert(newinfo);
+      reposManip().erase(toedit);
+      reposManip().insert(newinfo);
       HistoryLog(_options.rootDir).modifyRepository(toedit, newinfo);
       MIL << "repo " << alias << " modified" << endl;
     }
@@ -1734,8 +1784,8 @@ namespace zypp
 
   RepoInfo RepoManager::Impl::getRepositoryInfo( const std::string & alias, const ProgressData::ReceiverFnc & progressrcv )
   {
-    RepoConstIterator it( findAlias( alias, _repos ) );
-    if ( it != _repos.end() )
+    RepoConstIterator it( findAlias( alias, repos() ) );
+    if ( it != repos().end() )
       return *it;
     RepoInfo info;
     info.setAlias( alias );
