@@ -21,7 +21,7 @@ namespace repo
   {
     static NamedValue<RepoType::Type> & table()
     {
-      static NamedValue<RepoType::Type> _t;
+      static NamedValue<RepoType::Type> & _t( *new NamedValue<RepoType::Type> );
       if ( _t.empty() )
       {
 	_t( RepoType::RPMMD_e )		| "rpm-md"	| "rpmmd"|"repomd"|"yum"|"up2date";
