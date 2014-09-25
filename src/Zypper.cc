@@ -5179,6 +5179,8 @@ void Zypper::cleanup()
       remove_repo(*this, *it);
       break;
     }
+
+  _rm.reset();	// release any pending appdata trigger now.
 }
 
 void rug_list_resolvables(Zypper & zypper)
