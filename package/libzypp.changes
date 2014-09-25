@@ -1,4 +1,12 @@
 -------------------------------------------------------------------
+Thu Sep 25 17:59:06 CEST 2014 - ma@suse.de
+
+- Trigger appdata plugin when system repos have changed (bnc#866257)
+- Protect against race when destructing globals
+- BuildRequire libsolv-tools as libsolv-devel no longer does
+- version 14.29.4 (29)
+
+-------------------------------------------------------------------
 Thu Sep 25 01:15:42 CEST 2014 - ma@suse.de
 
 - Update zypp-po.tar.bz2
