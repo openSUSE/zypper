@@ -1,4 +1,11 @@
 -------------------------------------------------------------------
+Thu Sep 25 17:57:51 CEST 2014 - ma@suse.de
+
+- Trigger appdata plugin when system repos have changed (bnc#866257)
+- SLE-12 (suse_version 1315) uses it's own translations set (bnc#897176)
+- version 1.11.14
+
+-------------------------------------------------------------------
 Sun Sep 21 01:13:38 CEST 2014 - ma@suse.de
 
 - Update zypper-po.tar.bz2
