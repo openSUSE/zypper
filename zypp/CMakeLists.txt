@@ -192,7 +192,7 @@ SET( zypp_HEADERS
   ZYpp.h
 )
 
-INSTALL(  FILES ${zypp_HEADERS} DESTINATION "${CMAKE_INSTALL_PREFIX}/include/zypp" )
+INSTALL(  FILES ${zypp_HEADERS} DESTINATION "${INCLUDE_INSTALL_DIR}/zypp" )
 
 SET( zypp_base_SRCS
   base/InterProcessMutex.cc
@@ -271,7 +271,7 @@ SET( zypp_base_HEADERS
 
 INSTALL(  FILES
   ${zypp_base_HEADERS}
-  DESTINATION ${CMAKE_INSTALL_PREFIX}/include/zypp/base
+  DESTINATION ${INCLUDE_INSTALL_DIR}/zypp/base
 )
 
 SET( zypp_media_SRCS
@@ -334,7 +334,7 @@ SET( zypp_media_HEADERS
 
 INSTALL(  FILES
   ${zypp_media_HEADERS}
-  DESTINATION ${CMAKE_INSTALL_PREFIX}/include/zypp/media
+  DESTINATION ${INCLUDE_INSTALL_DIR}/zypp/media
 )
 
 IF ( LIBPROXY_FOUND )
@@ -356,7 +356,7 @@ SET( zypp_media_proxyinfo_HEADERS
 
 INSTALL(  FILES
   ${zypp_media_proxyinfo_HEADERS}
-  DESTINATION ${CMAKE_INSTALL_PREFIX}/include/zypp/media/proxyinfo
+  DESTINATION ${INCLUDE_INSTALL_DIR}/zypp/media/proxyinfo
 )
 
 SET( zypp_parser_SRCS
@@ -384,7 +384,7 @@ SET( zypp_parser_HEADERS
 
 INSTALL(  FILES
   ${zypp_parser_HEADERS}
-  DESTINATION ${CMAKE_INSTALL_PREFIX}/include/zypp/parser
+  DESTINATION ${INCLUDE_INSTALL_DIR}/zypp/parser
 )
 
 SET( zypp_parser_susetags_SRCS
@@ -399,7 +399,7 @@ SET( zypp_parser_susetags_HEADERS
 
 INSTALL(  FILES
   ${zypp_parser_susetags_HEADERS}
-  DESTINATION ${CMAKE_INSTALL_PREFIX}/include/zypp/parser/susetags
+  DESTINATION ${INCLUDE_INSTALL_DIR}/zypp/parser/susetags
 )
 
 SET( zypp_parser_xml_SRCS
@@ -428,7 +428,7 @@ SET( zypp_parser_xml_HEADERS
 
 INSTALL(  FILES
   ${zypp_parser_xml_HEADERS}
-  DESTINATION ${CMAKE_INSTALL_PREFIX}/include/zypp/parser/xml
+  DESTINATION ${INCLUDE_INSTALL_DIR}/zypp/parser/xml
 )
 
 SET( zypp_parser_yum_SRCS
@@ -443,7 +443,7 @@ SET( zypp_parser_yum_HEADERS
 
 INSTALL(  FILES
   ${zypp_parser_yum_HEADERS}
-  DESTINATION ${CMAKE_INSTALL_PREFIX}/include/zypp/parser/yum
+  DESTINATION ${INCLUDE_INSTALL_DIR}/zypp/parser/yum
 )
 
 SET( zypp_parser_ws_SRCS
@@ -456,7 +456,7 @@ SET( zypp_parser_ws_HEADERS
 
 INSTALL(  FILES
   ${zypp_parser_ws_HEADERS}
-  DESTINATION ${CMAKE_INSTALL_PREFIX}/include/zypp/parser/ws
+  DESTINATION ${INCLUDE_INSTALL_DIR}/zypp/parser/ws
 )
 
 
@@ -474,7 +474,7 @@ SET( zypp_pool_HEADERS
 
 INSTALL(  FILES
   ${zypp_pool_HEADERS}
-  DESTINATION ${CMAKE_INSTALL_PREFIX}/include/zypp/pool
+  DESTINATION ${INCLUDE_INSTALL_DIR}/zypp/pool
 )
 
 SET( zypp_solver_detail_SRCS
@@ -514,7 +514,7 @@ SET( zypp_solver_detail_HEADERS
 
 INSTALL(  FILES
   ${zypp_solver_detail_HEADERS}
-  DESTINATION ${CMAKE_INSTALL_PREFIX}/include/zypp/solver/detail
+  DESTINATION ${INCLUDE_INSTALL_DIR}/zypp/solver/detail
 )
 
 SET( zypp_sat_SRCS
@@ -552,7 +552,7 @@ SET( zypp_sat_HEADERS
 
 INSTALL(  FILES
   ${zypp_sat_HEADERS}
-  DESTINATION ${CMAKE_INSTALL_PREFIX}/include/zypp/sat
+  DESTINATION ${INCLUDE_INSTALL_DIR}/zypp/sat
 )
 
 SET( zypp_sat_detail_SRCS
@@ -566,7 +566,7 @@ SET( zypp_sat_detail_HEADERS
 
 INSTALL(  FILES
   ${zypp_sat_detail_HEADERS}
-  DESTINATION ${CMAKE_INSTALL_PREFIX}/include/zypp/sat/detail
+  DESTINATION ${INCLUDE_INSTALL_DIR}/zypp/sat/detail
 )
 
 
@@ -600,7 +600,7 @@ SET( zypp_target_HEADERS
 
 INSTALL(  FILES
   ${zypp_target_HEADERS}
-  DESTINATION ${CMAKE_INSTALL_PREFIX}/include/zypp/target
+  DESTINATION ${INCLUDE_INSTALL_DIR}/zypp/target
 )
 
 IF(NOT UDEV_FOUND)
@@ -626,7 +626,7 @@ SET( zypp_target_modalias_HEADERS
 
 INSTALL(  FILES
   ${zypp_target_modalias_HEADERS}
-  DESTINATION ${CMAKE_INSTALL_PREFIX}/include/zypp/target/modalias
+  DESTINATION ${INCLUDE_INSTALL_DIR}/zypp/target/modalias
 )
 
 SET( zypp_target_rpm_SRCS
@@ -652,7 +652,7 @@ SET( zypp_target_rpm_HEADERS
 
 INSTALL(  FILES
   ${zypp_target_rpm_HEADERS}
-  DESTINATION ${CMAKE_INSTALL_PREFIX}/include/zypp/target/rpm
+  DESTINATION ${INCLUDE_INSTALL_DIR}/zypp/target/rpm
 )
 
 SET( zypp_thread_SRCS
@@ -668,7 +668,7 @@ SET( zypp_thread_HEADERS
 
 INSTALL(  FILES
   ${zypp_thread_HEADERS}
-  DESTINATION ${CMAKE_INSTALL_PREFIX}/include/zypp/thread
+  DESTINATION ${INCLUDE_INSTALL_DIR}/zypp/thread
 )
 
 SET( zypp_ui_SRCS
@@ -689,7 +689,7 @@ SET( zypp_ui_HEADERS
 
 INSTALL(  FILES
   ${zypp_ui_HEADERS}
-  DESTINATION ${CMAKE_INSTALL_PREFIX}/include/zypp/ui
+  DESTINATION ${INCLUDE_INSTALL_DIR}/zypp/ui
 )
 
 SET( zypp_url_SRCS
@@ -705,7 +705,7 @@ SET( zypp_url_HEADERS
 
 INSTALL(  FILES
   ${zypp_url_HEADERS}
-  DESTINATION ${CMAKE_INSTALL_PREFIX}/include/zypp/url
+  DESTINATION ${INCLUDE_INSTALL_DIR}/zypp/url
 )
 
 SET( zypp_zypp_detail_SRCS
@@ -719,7 +719,7 @@ SET( zypp_zypp_detail_HEADERS
 
 INSTALL(  FILES
   ${zypp_zypp_detail_HEADERS}
-  DESTINATION ${CMAKE_INSTALL_PREFIX}/include/zypp/zypp_detail
+  DESTINATION ${INCLUDE_INSTALL_DIR}/zypp/zypp_detail
 )
 
 SET( zypp_repo_SRCS
@@ -764,7 +764,7 @@ SET( zypp_repo_HEADERS
 
 INSTALL( FILES
   ${zypp_repo_HEADERS}
-  DESTINATION ${CMAKE_INSTALL_PREFIX}/include/zypp/repo
+  DESTINATION ${INCLUDE_INSTALL_DIR}/zypp/repo
 )
 
 SET( zypp_repo_yum_SRCS
@@ -808,7 +808,7 @@ SET( zypp_misc_SRCS
 
 INSTALL( FILES
   ${zypp_misc_HEADERS}
-  DESTINATION ${CMAKE_INSTALL_PREFIX}/include/zypp/misc
+  DESTINATION ${INCLUDE_INSTALL_DIR}/zypp/misc
 )
 
 ####################################################################

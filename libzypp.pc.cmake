@@ -1,7 +1,7 @@
 prefix=@CMAKE_INSTALL_PREFIX@
 exec_prefix=@LIB_INSTALL_DIR@/zypp
 libdir=@LIB_INSTALL_DIR@
-includedir=@CMAKE_INSTALL_PREFIX@/include
+includedir=@INCLUDE_INSTALL_DIR@
 
 Name: @PACKAGE@
 Version: @VERSION@
