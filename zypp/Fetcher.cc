@@ -573,7 +573,7 @@ namespace zypp
         if ( resource.optional() )
         {
 	    ZYPP_CAUGHT(excpt_r);
-            WAR << "optional resource " << resource << " could not be transfered" << endl;
+            WAR << "optional resource " << resource << " could not be transferred" << endl;
             return;
         }
         else
@@ -798,7 +798,7 @@ namespace zypp
 
       provideToDest(media, (*it_res)->location, dest_dir, (*it_res)->deltafile);
 
-      // if the file was not transfered, and no exception, just
+      // if the file was not transferred, and no exception, just
       // return, as it was an optional file
       if ( ! PathInfo(dest_dir + (*it_res)->location.filename()).isExist() )
           return;

@@ -222,7 +222,7 @@ namespace zypp
        * If the specified candidate is not already installed (\ref identicalInstalled),
        * and the \a causer_r has sufficient permisssion, then \a newCandidate_r is set as the new
        * candidate (\ref setCandidate) and selected for installation.
-       * \returns \c True if \a newCandidate_r is already installed or sucessfully selected for installation.
+       * \returns \c True if \a newCandidate_r is already installed or successfully selected for installation.
        */
       bool setOnSystem( const PoolItem & newCandidate_r, ResStatus::TransactByValue causer_r = ResStatus::USER );
 

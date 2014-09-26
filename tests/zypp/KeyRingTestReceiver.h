@@ -124,9 +124,9 @@ struct KeyRingTestSignalReceiver : zypp::callback::ReceiveReport<zypp::KeyRingSi
 
   virtual void trustedKeyAdded( const zypp::PublicKey &key )
   {
-    MIL << "TEST: trusted key added to zypp Keyring. Syncronizing keys with fake rpm keyring" << std::endl;
+    MIL << "TEST: trusted key added to zypp Keyring. Synchronizing keys with fake rpm keyring" << std::endl;
     _trusted_key_added_called = true;
-    //std::cout << "trusted key added to zypp Keyring. Syncronizing keys with rpm keyring" << std::endl;
+    //std::cout << "trusted key added to zypp Keyring. Synchronizing keys with rpm keyring" << std::endl;
     //_rpmdb.importZyppKeyRingTrustedKeys();
     //_rpmdb.exportTrustedKeysInZyppKeyRing();
   }

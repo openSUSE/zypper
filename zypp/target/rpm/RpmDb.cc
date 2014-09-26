@@ -426,7 +426,7 @@ void RpmDb::initDatabase( Pathname root_r, Pathname dbPath_r, bool doRebuild_r )
     }
   }
 
-  MIL << "Syncronizing keys with zypp keyring" << endl;
+  MIL << "Synchronizing keys with zypp keyring" << endl;
   syncTrustedKeys();
 
   // Close the database in case any write acces (create/convert)

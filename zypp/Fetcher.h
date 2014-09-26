@@ -158,7 +158,7 @@ namespace zypp
     * checksums ) that will be retrieved and read
     * before the job processing starts.
     *
-    * Nothing will be transfered or checked
+    * Nothing will be transferred or checked
     * until \ref start() is called.
     *
     * The index is relative to the media path, and
@@ -181,7 +181,7 @@ namespace zypp
 
    /**
     * Enqueue a object for transferal, they will not
-    * be transfered until \ref start() is called
+    * be transferred until \ref start() is called
     *
     */
     void enqueue( const OnMediaLocation &resource,
@@ -189,7 +189,7 @@ namespace zypp
 
     /**
     * Enqueue a object for transferal, they will not
-    * be transfered until \ref start() is called
+    * be transferred until \ref start() is called
     *
     * \note As \ref OnMediaLocation contains the digest information,
     * a \ref ChecksumFileChecker is automatically added to the
@@ -244,7 +244,7 @@ namespace zypp
      * in each subdirectory.
      *
      * \note Every file CHECKSUMS.* except of CHECKSUMS.(asc|key|(void)) will
-     * not be transfered and will be ignored.
+     * not be transferred and will be ignored.
      *
      */
     void enqueueDir( const OnMediaLocation &resource,
@@ -288,7 +288,7 @@ namespace zypp
      * in each subdirectory.
      *
      * \note Every file CHECKSUMS.* except of CHECKSUMS.(asc|key|(void)) will
-     * not be transfered and will be ignored.
+     * not be transferred and will be ignored.
      *
      */
     void enqueueDigestedDir( const OnMediaLocation &resource,

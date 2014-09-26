@@ -1677,7 +1677,7 @@ namespace zypp
             // TranslatorExplanation '%s' is a filename
             ZYPP_THROW(RepoException( todelete, str::form( _("Can't delete '%s'"), todelete.filepath().c_str() )));
           }
-          MIL << todelete.alias() << " sucessfully deleted." << endl;
+          MIL << todelete.alias() << " successfully deleted." << endl;
         }
         else
         {
@@ -1714,7 +1714,7 @@ namespace zypp
         cleanMetadata( todelete, mSubprogrcv );
 	cleanPackages( todelete, pSubprogrcv );
         reposManip().erase(todelete);
-        MIL << todelete.alias() << " sucessfully deleted." << endl;
+        MIL << todelete.alias() << " successfully deleted." << endl;
         HistoryLog(_options.rootDir).removeRepository(todelete);
         return;
       } // else filepath is empty
@@ -1866,7 +1866,7 @@ namespace zypp
         // TranslatorExplanation '%s' is a filename
         ZYPP_THROW(ServiceException( service, str::form( _("Can't delete '%s'"), location.c_str() ) ));
       }
-      MIL << alias << " sucessfully deleted." << endl;
+      MIL << alias << " successfully deleted." << endl;
     }
     else
     {
@@ -1885,7 +1885,7 @@ namespace zypp
           it->dumpAsIniOn(file);
       }
 
-      MIL << alias << " sucessfully deleted from file " << location <<  endl;
+      MIL << alias << " successfully deleted from file " << location <<  endl;
     }
 
     // now remove all repositories added by this service

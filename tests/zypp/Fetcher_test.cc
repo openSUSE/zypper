@@ -289,7 +289,7 @@ BOOST_AUTO_TEST_CASE(enqueue_digested_images_file_content_autoindex_unsigned)
         // it should throw because unsigned file throws
         BOOST_CHECK_THROW( fetcher.start( dest.path(), media ), FileCheckException);
         fetcher.reset();
-        // the target file was NOT transfered
+        // the target file was NOT transferred
         BOOST_CHECK( ! PathInfo(dest.path() + "/images/images.xml").isExist() );
         fetcher.reset();
   }
@@ -359,7 +359,7 @@ BOOST_AUTO_TEST_CASE(enqueuedir_http)
 
       BOOST_CHECK( ! PathInfo(dest.path() + "/complexdir-broken/subdir2/subdir2-file1.txt").isExist() );
 
-      // this one got transfered before the failure, so it is there
+      // this one got transferred before the failure, so it is there
       BOOST_CHECK( PathInfo(dest.path() + "/complexdir-broken/subdir1/subdir1-file1.txt").isExist() );
       BOOST_CHECK( ! PathInfo(dest.path() + "/complexdir-broken/subdir1/subdir1-file2.txt").isExist() );
 
