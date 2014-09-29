@@ -11,6 +11,26 @@ OPTION (ENABLE_BUILD_TESTS "Build and run test suite by default?" OFF)
 OPTION (DISABLE_LIBPROXY "Build without libproxy support even if package is installed?" OFF)
 OPTION (DISABLE_AUTODOCS "Do not require doxygen being installed (required to build autodocs)?" OFF)
 
+#--------------------------------------------------------------------------------
+SET (have_system x)
+
+IF (DEBIAN)
+  MESSAGE (STATUS "Building for Debian")
+  SET (ENABLE_BUILD_DOCS ON)
+  SET (ENABLE_BUILD_TRANS ON)
+  SET (ENABLE_BUILD_TESTS ON)
+  SET (have_system ${have_system}x)
+ENDIF (DEBIAN)
+
+IF (${have_system} STREQUAL x)
+  MESSAGE (STATUS "Building for SUSE")
+ENDIF (${have_system} STREQUAL x)
+
+IF (${have_system} STRGREATER xx)
+  MESSAGE (FATAL_ERROR "Can only build for one system type.")
+ENDIF (${have_system} STRGREATER xx)
+#--------------------------------------------------------------------------------
+
 # allow name libraries by name mixed with full
 # paths
 if(COMMAND cmake_policy)
