@@ -13,5 +13,5 @@ ADD_SUBDIRECTORY( repo )
 ADD_SUBDIRECTORY( sat )
 
 ADD_CUSTOM_TARGET( ctest
-   COMMAND ctest -a
+   COMMAND ctest -VV -a
 )

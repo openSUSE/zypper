@@ -4,6 +4,9 @@ SET( PACKAGE "libzypp" )
 SET( CMAKE_MODULE_PATH ${LIBZYPP_SOURCE_DIR}/cmake/modules )
 cmake_minimum_required(VERSION 2.6)
 
+OPTION (ENABLE_BUILD_DOCS "Build documentation by default?" OFF)
+OPTION (ENABLE_BUILD_TRANS "Build translation files by default?" OFF)
+OPTION (ENABLE_BUILD_TESTS "Build and run test suite by default?" OFF)
 
 OPTION (DISABLE_LIBPROXY "Build without libproxy support even if package is installed?" OFF)
 OPTION (DISABLE_AUTODOCS "Do not require doxygen being installed (required to build autodocs)?" OFF)
@@ -213,15 +216,23 @@ INSTALL( FILES ${LIBZYPP_SOURCE_DIR}/zypp-history.lr DESTINATION ${SYSCONFDIR}/l
 ####################################################################
 
 ADD_SUBDIRECTORY( zypp )
-#ADD_SUBDIRECTORY( zypp2 )
 # do not build devel by default
 ADD_SUBDIRECTORY( devel EXCLUDE_FROM_ALL )
 ADD_SUBDIRECTORY( tools )
 ADD_SUBDIRECTORY( examples )
-ADD_SUBDIRECTORY( po EXCLUDE_FROM_ALL )
 ADD_SUBDIRECTORY( doc )
 ADD_SUBDIRECTORY( vendor )
-ADD_SUBDIRECTORY( tests EXCLUDE_FROM_ALL )
 
+IF ( ENABLE_BUILD_TRANS )
+  ADD_SUBDIRECTORY( po )
+ELSE ( ENABLE_BUILD_TRANS )
+  ADD_SUBDIRECTORY( po EXCLUDE_FROM_ALL )
+ENDIF ( ENABLE_BUILD_TRANS )
+
+IF ( ENABLE_BUILD_TESTS )
+  ADD_SUBDIRECTORY( tests )
+ELSE ( ENABLE_BUILD_TESTS )
+  ADD_SUBDIRECTORY( tests EXCLUDE_FROM_ALL )
+ENDIF ( ENABLE_BUILD_TESTS )
 INCLUDE(CTest)
 ENABLE_TESTING()
