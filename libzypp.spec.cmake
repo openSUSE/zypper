@@ -365,7 +365,8 @@ rm -rf "$RPM_BUILD_ROOT"
 %{_datadir}/zypp
 %{_bindir}/*
 %{_libdir}/libzypp*so.*
-%doc %{_mandir}/man5/locks.5.*
+%doc %{_mandir}/man1/*.1.*
+%doc %{_mandir}/man5/*.5.*
 
 %files devel
 %defattr(-,root,root)
