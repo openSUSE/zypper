@@ -28,8 +28,7 @@ int usage( const std::string & msg_r = std::string(), int exit_r = 100 )
   }
   cerr << "Usage: " << appname << " [--root ROOTDIR] [OPTIONS] NAME... [[OPTIONS] NAME...]..." << endl;
   cerr << "  Load all enabled repositories (no refresh) and search for" << endl;
-  cerr << "  occurrences of NAME (regex) in package names, provides or" << endl;
-  cerr << "  requires." << endl;
+  cerr << "  occurrences of NAME (regex) in package names or dependencies" << endl;
   cerr << "  --root   Load repos from the system located below ROOTDIR. If ROOTDIR" << endl;
   cerr << "           denotes a sover testcase, the testcase is loaded." << endl;
   cerr << "  --installed Process installed packages only." << endl;
