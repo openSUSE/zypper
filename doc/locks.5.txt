@@ -1,0 +1,153 @@
+locks(5)
+========
+:man manual: LIBZYPP
+:man source: libzypp
+
+
+NAME
+----
+locks - libzypp locking file
+
+
+DESCRIPTION
+-----------
+The file '/etc/zypp/locks' is read by libzypp at start-up if 'zypp.conf' allows it. The entries are used for initial locking of packages. Locking a package means not allowing to install or uninstall it.
+
+Valid entries are of the form:
+
+'attribute'*:* 'value'::
+      Where attributes and their values are described below.
+
+Locks are separated by an empty lines.
+
+
+ATTRIBUTES
+----------
+All attributes are lower-case.
+
+*repo*::
+	specifies repository restriction. Only alias is accepted. +
+	By default all repositories match.
+
+*type*::
+	resolvable type restriction. The values can be *package*, *patch*, *pattern*, *product* and *srcpackage*. +
+	By default all types match.
+
+
+*case_sensitive*::
+	if strings are matched case sensitive. The values are *true*, *false*, *on*, *off*. +
+	The default is case insensitive.
+
+
+*install_status*::
+	status of object. Possible states are *installed*, *not-installed* and *all*. If more install statuses are specified then the last one is used. The values are *installed* for all packages which are installed, *non-installed* for packages which can be installed or reinstalled and *all* for both. +
+	The default is *all*.
+
+
+*match_type*::
+	type of string matching in values. Does not affect *type* and *repo* which must be specified exactly. The values are *exact*, *substring*, *regex* for regular expressions, *glob* for matching as on the command line, and *word*. +
+	The default is *substring*.
+
+*query_string*::
+	String to be matched in multiple attributes. Should be restricted by another attribute with empty value (it is recommended, because without restriction expect some performance problems).
+
+*version*::
+	Restrict the lock only to some versions. It contains two parts: an optional operator and the version. +
+	The operator is *==*, *!=*, *<*, *>*, *<=*, *>=*.  If operator is not specified then *==* is used. +
+	The version has the format ['epoch'*:*+]+'version'[*-*'release']. +
+	Example: *version: < 0:0.11.4-2*
+
+*solvable_name*::
+	name of object (e.g. zypper)
+
+*solvable_summary*::
+	summary of object
+
+*solvable_arch*::
+	architecture of object (e.g. x86_64, i586)
+
+*solvable_description*::
+	description of object
+
+*solvable_eula*::
+	license text of objects which request accepting license by user
+
+*solvable_license*::
+	license of package (only for package) (e.g. GPL2)
+
+*solvable_keywords*::
+	keywords which specify package (only for package)
+
+*solvable_authors*::
+	authors of package (only for package)
+
+*solvable_group*::
+	package group (only for package) (e.g. Development/Tools/Version Control )
+
+*update_reference_type*::
+	reference for update (e.g. bugzilla,cve) (only for patches)
+
+
+EXAMPLES
+--------
+*Exact Package*::
+	This is the way YaST UI does it. Lock k3b (e.g. you don't want to update it).
+--------------------
+-----locks-----
+type: package
+solvable_name: k3b
+match_type: exact
+case_sensitive: on
+--------------------
+
+*Package Wildcard*::
+	This is the way "zypper addlock cross-*-gcc-icecream-backend" does it.
+--------------------
+-----locks-----
+type: package
+solvable_name: cross-*-gcc-icecream-backend
+match_type: glob
+case_sensitive: on
+--------------------
+
+*Versioned Lock*::
+	Do not install new GCC. This format is used when converting from the openSUSE-10.3 lock format.
+--------------------
+-----locks-----
+solvable_name: gcc
+match_type: glob
+version: > 4.2
+--------------------
+
+*Anything named KDE*::
+	Locks everything which contains kde in the name.
+--------------------
+-----locks-----
+solvable_name: kde
+--------------------
+
+*Anything mentioning KDE*::
+	Locks everything which contains kde in the name, summary, or description.
+--------------------
+-----locks-----
+query_string: kde
+solvable_name:
+solvable_summary:
+solvable_description:
+--------------------
+
+
+HOMEPAGE
+--------
+This manual page only covers the most important attributes. The complete list is available at http://en.opensuse.org/Libzypp/Locksfile
+
+
+AUTHORS
+-------
+Josef Reidinger <jreidinger@suse.cz>
+Manual page contributions by Martin Vidner <mvidner@suse.cz>.
+
+
+SEE ALSO
+--------
+zypper(8)

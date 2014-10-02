@@ -1,0 +1,49 @@
+'\" t
+.\"     Title: zypp-CheckAccessDeleted
+.\"    Author: [see the "AUTHORS" section]
+.\" Generator: DocBook XSL Stylesheets v1.78.1 <http://docbook.sf.net/>
+.\"      Date: 10/02/2014
+.\"    Manual: LIBZYPP
+.\"    Source: libzypp
+.\"  Language: English
+.\"
+.TH "ZYPP\-CHECKACCESSDEL" "1" "10/02/2014" "libzypp" "LIBZYPP"
+.\" -----------------------------------------------------------------
+.\" * Define some portability stuff
+.\" -----------------------------------------------------------------
+.\" ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+.\" http://bugs.debian.org/507673
+.\" http://lists.gnu.org/archive/html/groff/2009-02/msg00013.html
+.\" ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+.ie \n(.g .ds Aq \(aq
+.el       .ds Aq '
+.\" -----------------------------------------------------------------
+.\" * set default formatting
+.\" -----------------------------------------------------------------
+.\" disable hyphenation
+.nh
+.\" disable justification (adjust text to left margin only)
+.ad l
+.\" -----------------------------------------------------------------
+.\" * MAIN CONTENT STARTS HERE *
+.\" -----------------------------------------------------------------
+.SH "NAME"
+zypp-CheckAccessDeleted \- List processes which access deleted files
+.SH "SYNOPSIS"
+.sp
+\fBzypp\-CheckAccessDeleted\fR [\fIOPTION\fR]\&...
+.SH "DESCRIPTION"
+.sp
+List running processes which access deleted files\&. This may help to identify services and processes which need to be restarted after an update, e\&.g\&. if they still refer to meanwhile deleted libraries\&. The output is similar to \(oq\fBzypper ps\fR\(cq but does not sort out processes accessing normal files only\&.
+.SH "OPTIONS"
+.PP
+\fB\-\-help\fR
+.RS 4
+display help and exit
+.RE
+.SH "AUTHORS"
+.sp
+Michael Andres <ma@suse\&.de>
+.SH "SEE ALSO"
+.sp
+zypper(8)

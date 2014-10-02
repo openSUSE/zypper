@@ -1,0 +1,72 @@
+zypp-NameReqPrv(1)
+==================
+:man manual: LIBZYPP
+:man source: libzypp
+
+
+NAME
+----
+zypp-NameReqPrv - Investigate packages and dependencies in solver test-cases
+
+
+SYNOPSIS
+--------
+*zypp-NameReqPrv* [*--root* 'DIR'] [['OPTIONS'] 'NAME'...]...
+
+
+DESCRIPTION
+-----------
+Load all enabled repositories (without refresh) and search for occurrences of regular expression 'NAME' in package names or dependencies. In case 'DIR' denotes a directory containing a solver test-case, repositories and settings provided by the test-case are loaded instead.
+
+A solver test-case is an abstract of repositories, packages, hardware and dependency resolution related settings which can be created by using zyppers *--debug-solver* option. Attached to a bug report the test-case helps investigating the reported behavior. Options and output of this command are tailored to this use-case and may change as needed.
+
+Reported matches show the packages 'internal id', 'name', 'version' and 'architecture', 'priority' and name of the providing 'repository', 'vendor', 'buildtime' and the locations matching 'NAME'.
+
+--------------------
+2431  zypper-1.9.16-22.2.x86_64  (99)@System  openSUSE  1400499579
+                                              nam: zypper
+40947  zypper-1.9.3-1.1.x86_64    (99)repo-oss (13.1)  openSUSE     1383049437
+                                                       nam: zypper
+56140  zypper-1.9.16-22.2.x86_64  (99)repo-oss-update (13.1)  openSUSE     1400499579
+                                                              nam: zypper
+--------------------
+
+
+OPTIONS
+-------
+*--root* 'DIR'::
+	  Load repos from the system located below 'DIR'. If 'DIR' denotes a solver test-case, the test-case is loaded.
+*--installed*::
+	  Process installed packages only.
+*-i*/*-I*::
+	  Turn on/off case insensitive search (default on)
+*-n*/*-N*::
+	  Turn on/off looking for names       (default on)
+*-p*/*-P*::
+	  Turn on/off looking for provides    (default off)
+*-r*/*-R*::
+	  Turn on/off looking for requires    (default off)
+*-c*/*-C*::
+	  Turn on/off looking for conflicts   (default off)
+*-o*/*-O*::
+	  Turn on/off looking for obsoletes   (default off)
+*-m*/*-M*::
+	  Turn on/off looking for recommends  (default off)
+*-s*/*-S*::
+	  Turn on/off looking for supplements (default off)
+*-a*::
+	  Short for *-n -p -r*
+*-A*::
+	  Short for *-n -P -R*
+*-D* 'PKG'::
+	  Dump dependencies of package 'PKG' (exact name).
+
+
+AUTHORS
+-------
+Michael Andres <ma@suse.de>
+
+
+SEE ALSO
+--------
+zypper(8)

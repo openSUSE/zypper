@@ -1,0 +1,135 @@
+'\" t
+.\"     Title: zypp-NameReqPrv
+.\"    Author: [see the "AUTHORS" section]
+.\" Generator: DocBook XSL Stylesheets v1.78.1 <http://docbook.sf.net/>
+.\"      Date: 10/02/2014
+.\"    Manual: LIBZYPP
+.\"    Source: libzypp
+.\"  Language: English
+.\"
+.TH "ZYPP\-NAMEREQPRV" "1" "10/02/2014" "libzypp" "LIBZYPP"
+.\" -----------------------------------------------------------------
+.\" * Define some portability stuff
+.\" -----------------------------------------------------------------
+.\" ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+.\" http://bugs.debian.org/507673
+.\" http://lists.gnu.org/archive/html/groff/2009-02/msg00013.html
+.\" ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+.ie \n(.g .ds Aq \(aq
+.el       .ds Aq '
+.\" -----------------------------------------------------------------
+.\" * set default formatting
+.\" -----------------------------------------------------------------
+.\" disable hyphenation
+.nh
+.\" disable justification (adjust text to left margin only)
+.ad l
+.\" -----------------------------------------------------------------
+.\" * MAIN CONTENT STARTS HERE *
+.\" -----------------------------------------------------------------
+.SH "NAME"
+zypp-NameReqPrv \- Investigate packages and dependencies in solver test\-cases
+.SH "SYNOPSIS"
+.sp
+\fBzypp\-NameReqPrv\fR [\fB\-\-root\fR \fIDIR\fR] [[\fIOPTIONS\fR] \fINAME\fR\&...]\&...
+.SH "DESCRIPTION"
+.sp
+Load all enabled repositories (without refresh) and search for occurrences of regular expression \fINAME\fR in package names or dependencies\&. In case \fIDIR\fR denotes a directory containing a solver test\-case, repositories and settings provided by the test\-case are loaded instead\&.
+.sp
+A solver test\-case is an abstract of repositories, packages, hardware and dependency resolution related settings which can be created by using zyppers \fB\-\-debug\-solver\fR option\&. Attached to a bug report the test\-case helps investigating the reported behavior\&. Options and output of this command are tailored to this use\-case and may change as needed\&.
+.sp
+Reported matches show the packages \fIinternal id\fR, \fIname\fR, \fIversion\fR and \fIarchitecture\fR, \fIpriority\fR and name of the providing \fIrepository\fR, \fIvendor\fR, \fIbuildtime\fR and the locations matching \fINAME\fR\&.
+.sp
+.if n \{\
+.RS 4
+.\}
+.nf
+2431  zypper\-1\&.9\&.16\-22\&.2\&.x86_64  (99)@System  openSUSE  1400499579
+                                              nam: zypper
+40947  zypper\-1\&.9\&.3\-1\&.1\&.x86_64    (99)repo\-oss (13\&.1)  openSUSE     1383049437
+                                                       nam: zypper
+56140  zypper\-1\&.9\&.16\-22\&.2\&.x86_64  (99)repo\-oss\-update (13\&.1)  openSUSE     1400499579
+                                                              nam: zypper
+.fi
+.if n \{\
+.RE
+.\}
+.SH "OPTIONS"
+.PP
+\fB\-\-root\fR \fIDIR\fR
+.RS 4
+Load repos from the system located below
+\fIDIR\fR\&. If
+\fIDIR\fR
+denotes a solver test\-case, the test\-case is loaded\&.
+.RE
+.PP
+\fB\-\-installed\fR
+.RS 4
+Process installed packages only\&.
+.RE
+.PP
+\fB\-i\fR/\fB\-I\fR
+.RS 4
+Turn on/off case insensitive search (default on)
+.RE
+.PP
+\fB\-n\fR/\fB\-N\fR
+.RS 4
+Turn on/off looking for names (default on)
+.RE
+.PP
+\fB\-p\fR/\fB\-P\fR
+.RS 4
+Turn on/off looking for provides (default off)
+.RE
+.PP
+\fB\-r\fR/\fB\-R\fR
+.RS 4
+Turn on/off looking for requires (default off)
+.RE
+.PP
+\fB\-c\fR/\fB\-C\fR
+.RS 4
+Turn on/off looking for conflicts (default off)
+.RE
+.PP
+\fB\-o\fR/\fB\-O\fR
+.RS 4
+Turn on/off looking for obsoletes (default off)
+.RE
+.PP
+\fB\-m\fR/\fB\-M\fR
+.RS 4
+Turn on/off looking for recommends (default off)
+.RE
+.PP
+\fB\-s\fR/\fB\-S\fR
+.RS 4
+Turn on/off looking for supplements (default off)
+.RE
+.PP
+\fB\-a\fR
+.RS 4
+Short for
+\fB\-n \-p \-r\fR
+.RE
+.PP
+\fB\-A\fR
+.RS 4
+Short for
+\fB\-n \-P \-R\fR
+.RE
+.PP
+\fB\-D\fR \fIPKG\fR
+.RS 4
+Dump dependencies of package
+\fIPKG\fR
+(exact name)\&.
+.RE
+.SH "AUTHORS"
+.sp
+Michael Andres <ma@suse\&.de>
+.SH "SEE ALSO"
+.sp
+zypper(8)
