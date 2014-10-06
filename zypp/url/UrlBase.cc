@@ -231,7 +231,11 @@ namespace zypp
                   const std::string &querystr,
                   const std::string &fragment)
     {
-      setScheme(scheme);
+      if ( scheme.empty() && *pathdata.c_str() == '/' )
+	setScheme("file");
+      else
+	setScheme(scheme);
+
       setAuthority(authority);
       setPathData(pathdata);
       setQueryString(querystr);

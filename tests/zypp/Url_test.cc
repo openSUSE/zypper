@@ -95,6 +95,10 @@ BOOST_AUTO_TEST_CASE(test_url1)
     BOOST_CHECK_EQUAL( one, url.asString() );
     BOOST_CHECK_EQUAL( two, url.asCompleteString() );
 
+    // absolute path defaults to 'file://'
+    str = "/some/local/path";
+    BOOST_CHECK_EQUAL( zypp::Url(str).asString(), "file://"+str );
+
     str = "file:./srv/ftp";
     BOOST_CHECK_EQUAL( zypp::Url(str).asString(), str );
 
