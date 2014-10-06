@@ -91,6 +91,13 @@ namespace {
     }
     return mayuse;
   }
+
+  inline std::string legacyCLI( const std::string & old_r, const std::string & new_r )
+  {
+    return boost::str( boost::formatNAC(_("Legacy commandline option %1% detected. Please use %2% instead."))
+		     % old_r
+		     % new_r );
+  }
 } //namespace
 ///////////////////////////////////////////////////////////////////
 ///////////////////////////////////////////////////////////////////
@@ -1127,8 +1134,7 @@ void Zypper::processCommandOptions()
       {"oldpackage",                no_argument,       0,  0 },
       {"replacefiles",              no_argument,       0,  0 },
       {"capability",                no_argument,       0, 'C'},
-      // rug compatibility, we have global --non-interactive
-      {"no-confirm",                no_argument,       0, 'y'},
+      {"no-confirm",                no_argument,       0, 'y'},	// rug legacy: use --non-interactive
       {"auto-agree-with-licenses",  no_argument,       0, 'l'},
       // rug compatibility, we have --auto-agree-with-licenses
       {"agree-to-third-party-licenses",  no_argument,  0,  0 },
@@ -1212,8 +1218,7 @@ void Zypper::processCommandOptions()
       // the default (ignored)
       {"name",       no_argument,       0, 'n'},
       {"capability", no_argument,       0, 'C'},
-      // rug compatibility, we have global --non-interactive
-      {"no-confirm", no_argument,       0, 'y'},
+      {"no-confirm", no_argument,       0, 'y'},	// rug legacy: use --non-interactive
       {"debug-solver", no_argument,     0, 0},
       {"no-force-resolution", no_argument, 0, 'R'},
       {"force-resolution", no_argument, 0,  0 },
@@ -1283,8 +1288,7 @@ void Zypper::processCommandOptions()
   case ZypperCommand::VERIFY_e:
   {
     static struct option verify_options[] = {
-      // rug compatibility option, we have global --non-interactive
-      {"no-confirm", no_argument, 0, 'y'},
+      {"no-confirm", no_argument, 0, 'y'},	// rug legacy: use --non-interactive
       {"dry-run", no_argument, 0, 'D'},
       // rug uses -N shorthand
       {"dry-run", no_argument, 0, 'N'},
@@ -1814,9 +1818,7 @@ void Zypper::processCommandOptions()
       // rug compatibility option, we have --repo
       {"catalog",                   required_argument, 0, 'c'},
       {"type",                      required_argument, 0, 't'},
-      // rug compatibility option, we have global --non-interactive
-      // note: rug used this uption only to auto-answer the 'continue with install?' prompt.
-      {"no-confirm",                no_argument,       0, 'y'},
+      {"no-confirm",                no_argument,       0, 'y'},	// rug legacy: use --non-interactive
       {"skip-interactive",          no_argument,       0,  0 },
       {"with-interactive",          no_argument,       0,  0 },
       {"auto-agree-with-licenses",  no_argument,       0, 'l'},
@@ -2812,13 +2814,27 @@ void Zypper::processCommandOptions()
     return;
   }
 
-  // TRANSLATE sort-by-catalog into sort-by-repo
+  // RUG TRANSLATE sort-by-catalog into sort-by-repo
   if ( _copts.count("sort-by-catalog") )
   {
-    if ( ! copts.count("sort-by-repo") )
+    out().warning( legacyCLI( "--sort-by-catalog", "--sort-by-repo" ) );
+    if ( ! _copts.count("sort-by-repo") )
       _copts["sort-by-repo"].push_back("");
     _copts.erase("sort-by-catalog");
   }
+
+  // RUG TRANSLATE no-confirm into non-interactive mode
+  if ( _copts.count("no-confirm") )
+  {
+    out().warning( legacyCLI( "-y/--no-confirm", "-n/--non-interactive" ) );
+    if ( ! _gopts.non_interactive )
+    {
+      out().info(_("Entering non-interactive mode."), Out::HIGH);
+      MIL << "Entering non-interactive mode" << endl;
+     _gopts.non_interactive = true;
+    }
+  }
+
 
   ::copts = _copts;
   MIL << "Done parsing options." << endl;
@@ -3644,11 +3660,6 @@ void Zypper::doCommand()
     }
 
     // rug compatibility code
-    // switch on non-interactive mode if no-confirm specified
-    if (copts.count("no-confirm"))
-      _gopts.non_interactive = true;
-
-    // rug compatibility code
     parsed_opts::const_iterator optit;
     if ((optit = _copts.find("entire-catalog")) != _copts.end())
     {
@@ -3929,11 +3940,6 @@ void Zypper::doCommand()
       setExitCode(ZYPPER_EXIT_ERR_INVALID_ARGS);
       return;
     }
-
-    // rug compatibility code
-    // switch on non-interactive mode if no-confirm specified
-    if (copts.count("no-confirm"))
-      _gopts.non_interactive = true;
 
     // parse the download options to check for errors
     get_download_option(*this);
@@ -4449,11 +4455,6 @@ void Zypper::doCommand()
       setExitCode(ZYPPER_EXIT_ERR_INVALID_ARGS);
       return;
     }
-
-    // rug compatibility code
-    // switch on non-interactive mode if no-confirm specified
-    if (copts.count("no-confirm"))
-      _gopts.non_interactive = true;
 
     bool skip_interactive = false;
     if (copts.count("skip-interactive"))
