@@ -29,131 +29,118 @@ namespace zypp
   namespace repo
   { /////////////////////////////////////////////////////////////////
 
-    RepoMirrorList::RepoMirrorList( const Url &url, const Pathname &metadatapath )
+    ///////////////////////////////////////////////////////////////////
+    namespace
     {
-      std::vector<Url> my_urls;
-      Pathname tmpfile, cachefile;
+      /** Provide mirrorlist in a local file */
+      Pathname RepoMirrorListProvide( const Url & url_r )
+      {
+	Url abs_url( url_r );
+	abs_url.setPathName( "/" );
+	abs_url.setQueryParam( "mediahandler", "curl" );
+	MediaSetAccess access( abs_url );
+	return access.provideFile( url_r.getPathName() );
+      }
 
-      if ( url.asString().find("/metalink") != string::npos )
-        cachefile = metadatapath / "mirrorlist.xml";
+      inline std::vector<Url> RepoMirrorListParseXML( const Pathname &tmpfile )
+      {
+	InputStream tmpfstream (tmpfile);
+	media::MetaLinkParser metalink;
+	metalink.parse(tmpfstream);
+	return metalink.getUrls();
+      }
+
+      inline std::vector<Url> RepoMirrorListParseTXT( const Pathname &tmpfile )
+      {
+	InputStream tmpfstream (tmpfile);
+	std::vector<Url> my_urls;
+	string tmpurl;
+	while (getline(tmpfstream.stream(), tmpurl))
+	{
+	  my_urls.push_back(Url(tmpurl));
+	}
+	return my_urls;
+      }
+
+      /** Parse a local mirrorlist \a listfile_r and return usable URLs */
+      inline std::vector<Url> RepoMirrorListParse( const Url & url_r, const Pathname & listfile_r )
+      {
+	std::vector<Url> mirrorurls;
+	if ( url_r.asString().find( "/metalink" ) != string::npos )
+	  mirrorurls = RepoMirrorListParseXML( listfile_r );
+	else
+	  mirrorurls = RepoMirrorListParseTXT( listfile_r );
+
+
+	std::vector<Url> ret;
+	for ( auto & murl : mirrorurls )
+	{
+	  if ( murl.getScheme() != "rsync" )
+	  {
+	    size_t delpos = murl.getPathName().find("repodata/repomd.xml");
+	    if( delpos != string::npos )
+	    {
+	      murl.setPathName( murl.getPathName().erase(delpos)  );
+	    }
+	    ret.push_back( murl );
+
+	    if ( ret.size() >= 4 )	// why 4?
+	      break;
+	  }
+	}
+	return ret;
+      }
+
+    } // namespace
+    ///////////////////////////////////////////////////////////////////
+
+
+    RepoMirrorList::RepoMirrorList( const Url & url_r, const Pathname & metadatapath_r )
+    {
+      if ( url_r.getScheme() == "file" )
+      {
+	// no cache for local mirrorlist
+	_urls = RepoMirrorListParse( url_r, url_r.getPathName() );
+      }
       else
-        cachefile = metadatapath / "mirrorlist.txt";
-        //cachefile = ZConfig::instance().repoMetadataPath() / Pathname(escaped_alias) / "mirrorlist.txt";
-
-      zypp::filesystem::PathInfo cacheinfo (cachefile);
-
-      if ( !cacheinfo.isFile() || cacheinfo.mtime() < time(NULL) - (long) ZConfig::instance().repo_refresh_delay() * 60 )
       {
-        Pathname filepath (url.getPathName());
-        Url abs_url (url);
+	Pathname cachefile( metadatapath_r );
+	if ( url_r.asString().find( "/metalink" ) != string::npos )
+	  cachefile /= "mirrorlist.xml";
+	else
+	  cachefile /= "mirrorlist.txt";
 
-        DBG << "Getting MirrorList from URL: " << abs_url << endl;
+	zypp::filesystem::PathInfo cacheinfo( cachefile );
+	if ( !cacheinfo.isFile() || cacheinfo.mtime() < time(NULL) - (long) ZConfig::instance().repo_refresh_delay() * 60 )
+	{
+	  DBG << "Getting MirrorList from URL: " << url_r << endl;
+	  Pathname localfile( RepoMirrorListProvide( url_r ) );
 
-        abs_url.setPathName("");
-        abs_url.setQueryParam("mediahandler", "curl");
+	  // Create directory, if not existing
+	  DBG << "Copy MirrorList file to " << cachefile << endl;
+	  zypp::filesystem::assert_dir( metadatapath_r );
+	  zypp::filesystem::hardlinkCopy( localfile, cachefile );
+	}
 
-        MediaSetAccess access (abs_url);
-        tmpfile = access.provideFile(filepath);
-
-        // Create directory, if not existing
-        zypp::filesystem::assert_dir(metadatapath);
-
-        DBG << "Copy MirrorList file to " << cachefile << endl;
-        zypp::filesystem::copy(tmpfile, cachefile);
-      }
-
-      if ( url.asString().find("/metalink") != string::npos )
-      {
-        my_urls = parseXML(cachefile);
-      }
-      else
-      {
-        my_urls = parseTXT(cachefile);
-      }
-
-      setUrls( my_urls );
-      if( urls.empty() )
-      {
-        DBG << "Removing Cachefile as it contains no URLs" << endl;
-        zypp::filesystem::unlink(cachefile);
+	_urls = RepoMirrorListParse( url_r, cachefile );
+	if( _urls.empty() )
+	{
+	  DBG << "Removing Cachefile as it contains no URLs" << endl;
+	  zypp::filesystem::unlink( cachefile );
+	}
       }
     }
 
-    RepoMirrorList::RepoMirrorList( const Url &url )
+    RepoMirrorList::RepoMirrorList( const Url & url_r )
     {
-      std::vector<Url> my_urls;
-      Pathname tmpfile;
-
-      Pathname filepath (url.getPathName());
-      Url abs_url (url);
-
-      DBG << "Getting MirrorList from URL: " << abs_url << endl;
-
-      abs_url.setPathName("");
-      abs_url.setQueryParam("mediahandler", "curl");
-
-      MediaSetAccess access (abs_url);
-      tmpfile = access.provideFile(filepath);
-
-      if ( url.asString().find("/metalink") != string::npos )
-      {
-        my_urls = parseXML(tmpfile);
-      }
-      else
-      {
-        my_urls = parseTXT(tmpfile);
-      }
-
-      setUrls( my_urls );
+      DBG << "Getting MirrorList from URL: " << url_r << endl;
+      Pathname localfile( url_r.getScheme() == "file"
+                        ? url_r.getPathName()
+			: RepoMirrorListProvide( url_r ) );
+      _urls = RepoMirrorListParse( url_r, localfile );
     }
 
-    void RepoMirrorList::setUrls( std::vector<Url> my_urls )
-    {
-      int valid_urls = 0;
-      for (std::vector<Url>::iterator it = my_urls.begin() ; it != my_urls.end() and valid_urls < 4 ; ++it)
-      {
-        if ( it->getScheme() != "rsync" )
-        {
-          size_t delpos = it->getPathName().find("repodata/repomd.xml");
-          if( delpos != string::npos )
-          {
-            it->setPathName( it->getPathName().erase(delpos)  );
-          }
-          urls.push_back(*it);
-          ++valid_urls;
-        }
-      }
-    }
-
-    std::vector<Url> RepoMirrorList::parseXML( const Pathname &tmpfile ) const
-    {
-      InputStream tmpfstream (tmpfile);
-      media::MetaLinkParser metalink;
-      metalink.parse(tmpfstream);
-      return metalink.getUrls();
-    }
-
-    std::vector<Url> RepoMirrorList::parseTXT( const Pathname &tmpfile ) const
-    {
-      InputStream tmpfstream (tmpfile);
-      std::vector<Url> my_urls;
-      string tmpurl;
-      while (getline(tmpfstream.stream(), tmpurl))
-      {
-        my_urls.push_back(Url(tmpurl));
-      }
-      return my_urls;
-    }
-    
-    std::vector<Url> RepoMirrorList::getUrls() const
-    {
-      return urls;
-    }
-
-    RepoMirrorList::~RepoMirrorList()
-    {}
-
-   /////////////////////////////////////////////////////////////////
+    /////////////////////////////////////////////////////////////////
   } // namespace repo
   ///////////////////////////////////////////////////////////////////
   /////////////////////////////////////////////////////////////////
