@@ -149,7 +149,7 @@ namespace zypp
     /**
      * \short Simple callback to collect the results
      *
-     * Classes like RepoFileParser call the callback
+     * Classes like RepoFileReader call the callback
      * once per each repo in a file.
      *
      * Passing this functor as callback, you can collect
