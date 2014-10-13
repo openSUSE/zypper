@@ -13,6 +13,7 @@
 
 #include <iosfwd>
 #include <string>
+#include <stdexcept>
 
 ///////////////////////////////////////////////////////////////////
 namespace zypp
