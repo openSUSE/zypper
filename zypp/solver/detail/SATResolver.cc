@@ -158,6 +158,7 @@ SATResolver::dumpOn( std::ostream & os ) const
         os << "  distupgrade_removeunsupported	= " << _distupgrade_removeunsupported << endl;
 	os << "  solveSrcPackages	= "	<< _solveSrcPackages << endl;
 	os << "  cleandepsOnRemove	= "	<< _cleandepsOnRemove << endl;
+        os << "  fixsystem		= "	<< _fixsystem << endl;
     } else {
 	os << "<NULL>";
     }
