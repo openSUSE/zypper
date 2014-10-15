@@ -308,12 +308,10 @@ namespace zypp
   {
     return make_transform_iterator( _pimpl->baseUrls().begin(),
                                     _pimpl->replacer );
-    //return _pimpl->baseUrls.begin();
   }
 
   RepoInfo::urls_const_iterator RepoInfo::baseUrlsEnd() const
   {
-    //return _pimpl->baseUrls.end();
     return make_transform_iterator( _pimpl->baseUrls().end(),
                                     _pimpl->replacer );
   }
@@ -339,9 +337,6 @@ namespace zypp
   bool RepoInfo::hasLicense() const
   {
     Pathname licenseTgz( _pimpl->licenseTgz() );
-    SEC << licenseTgz << endl;
-    SEC << PathInfo(licenseTgz) << endl;
-
     return ! licenseTgz.empty() &&  PathInfo(licenseTgz).isFile();
   }
 
