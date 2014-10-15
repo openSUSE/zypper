@@ -453,11 +453,9 @@ namespace zypp
     RepoInfoBase::dumpOn(str);
     if ( _pimpl->baseurl2dump() )
     {
-      for ( urls_const_iterator it = baseUrlsBegin();
-            it != baseUrlsEnd();
-            ++it )
+      for ( const auto & url : _pimpl->baseUrls() )
       {
-        str << "- url         : " << *it << std::endl;
+        str << "- url         : " << url << std::endl;
       }
     }
 
@@ -492,11 +490,11 @@ namespace zypp
     if ( _pimpl->baseurl2dump() )
     {
       str << "baseurl=";
-      for ( url_set::const_iterator it = _pimpl->baseUrls().begin();
-            it != _pimpl->baseUrls().end();
-            ++it )
+      std::string indent;
+      for ( const auto & url : _pimpl->baseUrls() )
       {
-        str << *it << endl;
+        str << indent << url << endl;
+	if ( indent.empty() ) indent = "        ";	// "baseurl="
       }
     }
 
@@ -547,9 +545,8 @@ namespace zypp
 
     if ( _pimpl->baseurl2dump() )
     {
-      for (RepoInfo::urls_const_iterator urlit = baseUrlsBegin();
-           urlit != baseUrlsEnd(); ++urlit)
-        str << "<url>" << escape(urlit->asString()) << "</url>" << endl;
+      for (  const auto & url : _pimpl->baseUrls() )
+	str << "<url>" << escape(url.asString()) << "</url>" << endl;
     }
 
     str << "</repo>" << endl;

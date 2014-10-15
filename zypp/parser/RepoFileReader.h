@@ -35,15 +35,24 @@ namespace zypp
      * The \ref _callback is provided on construction.
      *
      * \code
-     * RepoFileReader reader(repo_file, 
+     * RepoFileReader reader(repo_file,
      *                bind( &SomeClass::callbackfunc, &SomeClassInstance, _1, _2 ) );
      * \endcode
+     *
+     * \note Multiple baseurls in a repo file are supported using this style:
+     * \code
+     * baseurl=http://server.a/path/to/repo
+     *         http://server.b/path/to/repo
+     *         http://server.c/path/to/repo
+     * \endcode
+     * Repeating the \c baseurl= tag on each line is also accepted, but when the
+     * file has to be written, the preferred style is used.
      */
     class RepoFileReader
     {
       friend std::ostream & operator<<( std::ostream & str, const RepoFileReader & obj );
     public:
-      
+
      /**
       * Callback definition.
       * First parameter is a \ref RepoInfo object with the resource
@@ -53,7 +62,7 @@ namespace zypp
       * to be thrown and the processing to be cancelled.
       */
       typedef function< bool( const RepoInfo & )> ProcessRepo;
-      
+
       /** Implementation  */
       class Impl;
 
@@ -87,7 +96,7 @@ namespace zypp
       RepoFileReader( const InputStream &is,
                       const ProcessRepo & callback,
                       const ProgressData::ReceiverFnc &progress = ProgressData::ReceiverFnc() );
-     
+
       /**
        * Dtor
        */

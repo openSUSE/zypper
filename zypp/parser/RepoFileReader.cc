@@ -10,7 +10,7 @@
  *
 */
 #include <iostream>
-#include "zypp/base/Logger.h"
+#include "zypp/base/LogTools.h"
 #include "zypp/base/String.h"
 #include "zypp/base/Regex.h"
 #include "zypp/base/InputStream.h"
@@ -20,14 +20,63 @@
 #include "zypp/parser/RepoFileReader.h"
 
 using std::endl;
-using zypp::parser::IniDict;
 
 ///////////////////////////////////////////////////////////////////
 namespace zypp
-{ /////////////////////////////////////////////////////////////////
+{
   ///////////////////////////////////////////////////////////////////
   namespace parser
-  { /////////////////////////////////////////////////////////////////
+  {
+    ///////////////////////////////////////////////////////////////////
+    namespace {
+
+      ///////////////////////////////////////////////////////////////////
+      /// \class RepoFileParser
+      /// \brief Modified \ref IniDict to allow parsing multiple 'baseurl=' entries
+      ///////////////////////////////////////////////////////////////////
+      class RepoFileParser : public IniDict
+      {
+      public:
+	RepoFileParser( const InputStream & is_r )
+	{ read( is_r ); }
+
+	using IniDict::consume;	// don't hide overloads we don't redefine here
+
+	virtual void consume( const std::string & section_r, const std::string & key_r, const std::string & value_r )
+	{
+	  if ( key_r == "baseurl" )
+	  {
+	    setInBaseurls( true );
+	    _baseurls[section_r].push_back( Url(value_r) );
+	  }
+	  else
+	  {
+	    setInBaseurls( false );
+	    IniDict::consume( section_r, key_r, value_r );
+	  }
+	}
+
+	virtual void garbageLine( const std::string & section_r, const std::string & line_r )
+	{
+	  if ( _inBaseurls )
+	    _baseurls[section_r].push_back( Url(line_r) );
+	  else
+	    IniDict::garbageLine( section_r, line_r );	// throw
+	}
+
+	std::list<Url> & baseurls( const std::string & section_r )
+	{ return _baseurls[section_r]; }
+
+      private:
+	void setInBaseurls( bool yesno_r )
+	{ if ( _inBaseurls != yesno_r ) _inBaseurls = yesno_r; }
+
+	DefaultIntegral<bool,false> _inBaseurls;
+	std::map<std::string,std::list<Url>> _baseurls;
+      };
+
+    } //namespace
+    ///////////////////////////////////////////////////////////////////
 
     /**
    * \short List of RepoInfo's from a file.
@@ -37,18 +86,15 @@ namespace zypp
                                         const RepoFileReader::ProcessRepo &callback,
                                         const ProgressData::ReceiverFnc &progress )
     {
-      parser::IniDict dict(is);
-      for ( parser::IniDict::section_const_iterator its = dict.sectionsBegin();
-            its != dict.sectionsEnd();
-            ++its )
+      RepoFileParser dict(is);
+      for_( its, dict.sectionsBegin(), dict.sectionsEnd() )
       {
         RepoInfo info;
         info.setAlias(*its);
-        Url url;
+	std::string proxy;
+	std::string proxyport;
 
-        for ( IniDict::entry_const_iterator it = dict.entriesBegin(*its);
-              it != dict.entriesEnd(*its);
-              ++it )
+        for_( it, dict.entriesBegin(*its), dict.entriesEnd(*its) )
         {
           //MIL << (*it).first << endl;
           if (it->first == "name" )
@@ -57,8 +103,6 @@ namespace zypp
             info.setEnabled( str::strToTrue( it->second ) );
           else if ( it->first == "priority" )
             info.setPriority( str::strtonum<unsigned>( it->second ) );
-          else if ( it->first == "baseurl" && !it->second.empty())
-            url = it->second;
           else if ( it->first == "path" )
             info.setPath( Pathname(it->second) );
           else if ( it->first == "type" )
@@ -81,21 +125,37 @@ namespace zypp
 	  else if ( it->first == "service" )
 	    info.setService( it->second );
           else if ( it->first == "proxy" )
-          {
-	    if (it->second != "_none_" )
-            {
-              str::regex ex("^(.*):([0-9]+)$");
-              str::smatch what;
-              if(str::regex_match(it->second, what, ex)){
-               url.setQueryParam("proxy", what[1]);
-               url.setQueryParam("proxyport", what[2]);
-              }
-            }
-          } else
+	  {
+	    // Translate it into baseurl queryparams
+	    // NOTE: The hack here does not add proxy to mirrorlist urls but the
+	    //       original code worked without complains, so keep it for now.
+	    static const str::regex ex( ":[0-9]+$" );	// portspec
+	    str::smatch what;
+	    if ( str::regex_match( it->second, what, ex ) )
+	    {
+	      proxy = it->second.substr( 0, it->second.size() - what[0].size() );
+	      proxyport = what[0].substr( 1 );
+	    }
+	    else
+	    {
+	      proxy = it->second;
+	    }
+	  }
+          else
             ERR << "Unknown attribute in [" << *its << "]: " << it->first << "=" << it->second << " ignored" << endl;
         }
-        if (url.isValid())
-            info.addBaseUrl(url);
+
+	USR << dict.baseurls( *its ) << endl;
+	for ( auto & url : dict.baseurls( *its ) )
+	{
+	  if ( ! proxy.empty() && url.getQueryParam( "proxy" ).empty() )
+	  {
+	    url.setQueryParam( "proxy", proxy );
+	    url.setQueryParam( "proxyport", proxyport );
+	  }
+	  info.addBaseUrl( url );
+	}
+
         info.setFilepath(is.path());
         MIL << info << endl;
         // add it to the list.
@@ -136,9 +196,7 @@ namespace zypp
       return str;
     }
 
-    /////////////////////////////////////////////////////////////////
   } // namespace parser
   ///////////////////////////////////////////////////////////////////
-  /////////////////////////////////////////////////////////////////
 } // namespace zypp
 ///////////////////////////////////////////////////////////////////
