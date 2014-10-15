@@ -1,4 +1,16 @@
 -------------------------------------------------------------------
+Wed Oct 15 15:07:09 CEST 2014 - ma@suse.de
+
+- Store baseurls in list as order expresses preference
+- Support parsing multiple baseurls from a repo file (bnc#899510)
+- Fix handling local mirrorlist= files in .repo (bnc#899510)
+- Provide missing man pages (fixes #33)
+- Enable building autodocs, translations and test per default on debian
+- Fix several typos in output messages and comments (fixes #29)
+- Make the include dir path configurable (fixes #27)
+- version 14.30.0 (30)
+
+-------------------------------------------------------------------
 Fri Oct 10 16:01:31 CEST 2014 - ma@suse.de
 
 - Update zypp-po.tar.bz2 (bnc#899603)
