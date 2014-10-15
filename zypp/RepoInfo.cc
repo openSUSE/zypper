@@ -74,28 +74,21 @@ namespace zypp
     Url &setmirrorListUrl()
     { return mirrorlist_url; }
 
-    const std::set<Url> &baseUrls() const
+    const url_set & baseUrls() const
     {
-      if ( _baseUrls.empty() && ! (getmirrorListUrl().asString().empty()) )
+      if ( _baseUrls.empty() && ! getmirrorListUrl().asString().empty() )
       {
         emptybaseurls = true;
-        repo::RepoMirrorList *rmirrorlist = NULL;
-
         DBG << "MetadataPath: " << metadatapath << endl;
-        if( metadatapath.empty() )
-          rmirrorlist = new repo::RepoMirrorList (getmirrorListUrl() );
-        else
-          rmirrorlist = new repo::RepoMirrorList (getmirrorListUrl(), metadatapath );
-
-        std::vector<Url> rmurls = rmirrorlist->getUrls();
-        delete rmirrorlist;
-        rmirrorlist = NULL;
-        _baseUrls.insert(rmurls.begin(), rmurls.end());
+	const std::vector<Url> & rmurls( ( metadatapath.empty()
+					 ? repo::RepoMirrorList( getmirrorListUrl() )
+					 : repo::RepoMirrorList( getmirrorListUrl(), metadatapath ) ).getUrls() );
+	 _baseUrls.insert( _baseUrls.end(), rmurls.begin(), rmurls.end() );
       }
       return _baseUrls;
     }
 
-    std::set<Url> &baseUrls()
+    url_set & baseUrls()
     { return _baseUrls; }
 
     bool baseurl2dump() const
@@ -167,7 +160,7 @@ namespace zypp
 
   private:
     Url mirrorlist_url;
-    mutable std::set<Url> _baseUrls;
+    mutable url_set _baseUrls;
     mutable std::set<std::string> _keywords;
 
     friend Impl * rwcowClone<Impl>( const Impl * rhs );
@@ -222,19 +215,24 @@ namespace zypp
   void RepoInfo::setGpgCheck( bool check )
   { _pimpl->gpgcheck = check; }
 
-  void RepoInfo::setMirrorListUrl( const Url &url )
-  { _pimpl->setmirrorListUrl() = url; }
+  void RepoInfo::setMirrorListUrl( const Url & url_r )
+  { _pimpl->setmirrorListUrl() = url_r; }
 
-  void RepoInfo::setGpgKeyUrl( const Url &url )
-  { _pimpl->gpgkey_url = url; }
+  void RepoInfo::setGpgKeyUrl( const Url & url_r )
+  { _pimpl->gpgkey_url = url_r; }
 
-  void RepoInfo::addBaseUrl( const Url &url )
-  { _pimpl->baseUrls().insert(url); }
+  void RepoInfo::addBaseUrl( const Url & url_r )
+  {
+    for ( const auto & url : _pimpl->baseUrls() )	// unique!
+      if ( url == url_r )
+	return;
+    _pimpl->baseUrls().push_back( url_r );
+  }
 
-  void RepoInfo::setBaseUrl( const Url &url )
+  void RepoInfo::setBaseUrl( const Url & url_r )
   {
     _pimpl->baseUrls().clear();
-    addBaseUrl(url);
+    _pimpl->baseUrls().push_back( url_r );
   }
 
   void RepoInfo::setPath( const Pathname &path )
@@ -283,17 +281,8 @@ namespace zypp
   Url RepoInfo::gpgKeyUrl() const
   { return _pimpl->gpgkey_url; }
 
-  std::set<Url> RepoInfo::baseUrls() const
-  {
-    RepoInfo::url_set replaced_urls;
-    for ( url_set::const_iterator it = _pimpl->baseUrls().begin();
-          it != _pimpl->baseUrls().end();
-          ++it )
-    {
-      replaced_urls.insert(_pimpl->replacer(*it));
-    }
-    return replaced_urls;
-  }
+  RepoInfo::url_set RepoInfo::baseUrls() const
+  { return url_set( baseUrlsBegin(), baseUrlsEnd() ); }	// Variables replaced!
 
   Pathname RepoInfo::path() const
   { return _pimpl->path; }

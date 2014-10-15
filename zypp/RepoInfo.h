@@ -54,6 +54,7 @@ namespace zypp
    * name=Ruby repository (openSUSE_10.2)
    * type=rpm-md
    * baseurl=http://software.opensuse.org/download/ruby/openSUSE_10.2/
+   *         http://some.opensuse.mirror/ruby/openSUSE_10.2/
    * gpgcheck=1
    * gpgkey=http://software.opensuse.org/openSUSE-Build-Service.asc
    * enabled=1
@@ -91,7 +92,7 @@ namespace zypp
        */
       void setPriority( unsigned newval_r );
 
-      typedef std::set<Url>           url_set;
+      typedef std::list<Url>          url_set;
       typedef url_set::size_type      urls_size_type;
       typedef transform_iterator<repo::RepoVariablesUrlReplacer, url_set::const_iterator> urls_const_iterator;
       /**
@@ -125,10 +126,8 @@ namespace zypp
        * This can't be empty in order the repository to be valid
        * unless the download of the mirror list succeeds and it
        * contains a valid url.
-       *
-       * \deprecated IMO superfluous as we provide begin/end iterator.
        */
-      std::set<Url> baseUrls() const;
+      url_set baseUrls() const;
       /**
        * Add a base url. \see baseUrls
        * \param url The base url for the repository.
