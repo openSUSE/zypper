@@ -38,7 +38,7 @@ BOOST_AUTO_TEST_CASE(repoinfo_test)
 
   ri.setMirrorListUrl(weburl);
 
-  BOOST_CHECK(ri.url().asString() == "ftp://ftp-stud.hs-esslingen.de/pub/fedora/linux/updates/13/x86_64/");
+  BOOST_CHECK(ri.url().asString() == "http://ftp-stud.hs-esslingen.de/pub/fedora/linux/updates/13/x86_64/");
 
   ostringstream ostr;
   ri.dumpAsIniOn(ostr);
