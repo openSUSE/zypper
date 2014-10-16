@@ -1,4 +1,9 @@
 -------------------------------------------------------------------
+Thu Oct 16 11:03:11 CEST 2014 - ma@suse.de
+
+- Update zypp-po.tar.bz2
+
+-------------------------------------------------------------------
 Wed Oct 15 15:07:09 CEST 2014 - ma@suse.de
 
 - Store baseurls in list as order expresses preference
