@@ -62,6 +62,7 @@ namespace zypp
 	shared_ptr<MediaSetAccess> _access;
 	Pathname _localfile;
       };
+      ///////////////////////////////////////////////////////////////////
 
       inline std::vector<Url> RepoMirrorListParseXML( const Pathname &tmpfile )
       {
@@ -122,11 +123,18 @@ namespace zypp
     {
       if ( url_r.getScheme() == "file" )
       {
-	// no cache for local mirrorlist
+	// never cache for local mirrorlist
 	_urls = RepoMirrorListParse( url_r, url_r.getPathName() );
+      }
+      else if ( ! PathInfo( metadatapath_r).isDir() )
+      {
+	// no cachedir
+	RepoMirrorListTempProvider provider( url_r );	// RAII: lifetime of any downloaded files
+	_urls = RepoMirrorListParse( url_r, provider.localfile() );
       }
       else
       {
+	// have cachedir
 	Pathname cachefile( metadatapath_r );
 	if ( url_r.asString().find( "/metalink" ) != string::npos )
 	  cachefile /= "mirrorlist.xml";
@@ -152,15 +160,6 @@ namespace zypp
 	  zypp::filesystem::unlink( cachefile );
 	}
       }
-    }
-
-    RepoMirrorList::RepoMirrorList( const Url & url_r )
-    {
-      DBG << "Getting MirrorList from URL: " << url_r << endl;
-      RepoMirrorListTempProvider provider( url_r.getScheme() == "file"
-					 ? url_r.getPathName()
-					 : url_r );	// RAII: lifetime of any downloaded files
-      _urls = RepoMirrorListParse( url_r, provider.localfile() );
     }
 
     /////////////////////////////////////////////////////////////////

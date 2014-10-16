@@ -12,7 +12,7 @@
 #include <iostream>
 #include <vector>
 
-#include "zypp/base/Logger.h"
+#include "zypp/base/LogTools.h"
 #include "zypp/base/DefaultIntegral.h"
 #include "zypp/parser/xml/XmlEscape.h"
 
@@ -80,10 +80,8 @@ namespace zypp
       {
         emptybaseurls = true;
         DBG << "MetadataPath: " << metadatapath << endl;
-	const std::vector<Url> & rmurls( ( metadatapath.empty()
-					 ? repo::RepoMirrorList( getmirrorListUrl() )
-					 : repo::RepoMirrorList( getmirrorListUrl(), metadatapath ) ).getUrls() );
-	 _baseUrls.insert( _baseUrls.end(), rmurls.begin(), rmurls.end() );
+	repo::RepoMirrorList rmurls( getmirrorListUrl(), metadatapath );
+	_baseUrls.insert( _baseUrls.end(), rmurls.getUrls().begin(), rmurls.getUrls().end() );
       }
       return _baseUrls;
     }
