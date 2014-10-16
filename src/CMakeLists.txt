@@ -13,6 +13,7 @@ SET (zypper_HEADERS
   Command.h
   Config.h
   repos.h
+  locales.h
   misc.h
   search.h
   info.h
@@ -37,6 +38,7 @@ SET( zypper_SRCS
   Command.cc
   Config.cc
   repos.cc
+  locales.cc
   misc.cc
   search.cc
   info.cc
