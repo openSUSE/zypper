@@ -32,15 +32,36 @@ namespace zypp
     ///////////////////////////////////////////////////////////////////
     namespace
     {
-      /** Provide mirrorlist in a local file */
-      Pathname RepoMirrorListProvide( const Url & url_r )
+      ///////////////////////////////////////////////////////////////////
+      /// \class RepoMirrorListTempProvider
+      /// \brief Provide access to downloaded mirror list (in temp space)
+      /// \ingroup g_RAII
+      ///
+      /// Tempspace (and mirror list) are deleted when provider goes out
+      /// of scope.
+      struct RepoMirrorListTempProvider
       {
-	Url abs_url( url_r );
-	abs_url.setPathName( "/" );
-	abs_url.setQueryParam( "mediahandler", "curl" );
-	MediaSetAccess access( abs_url );
-	return access.provideFile( url_r.getPathName() );
-      }
+	RepoMirrorListTempProvider()
+	{}
+	RepoMirrorListTempProvider( const Pathname & localfile_r )
+	: _localfile( localfile_r )
+	{}
+	RepoMirrorListTempProvider( const Url & url_r )
+	{
+	  Url abs_url( url_r );
+	  abs_url.setPathName( "/" );
+	  abs_url.setQueryParam( "mediahandler", "curl" );
+	  _access.reset( new MediaSetAccess( abs_url ) );
+	  _localfile = _access->provideFile( url_r.getPathName() );
+	}
+
+	const Pathname & localfile() const
+	{ return _localfile; }
+
+      private:
+	shared_ptr<MediaSetAccess> _access;
+	Pathname _localfile;
+      };
 
       inline std::vector<Url> RepoMirrorListParseXML( const Pathname &tmpfile )
       {
@@ -65,6 +86,8 @@ namespace zypp
       /** Parse a local mirrorlist \a listfile_r and return usable URLs */
       inline std::vector<Url> RepoMirrorListParse( const Url & url_r, const Pathname & listfile_r )
       {
+	USR << url_r << " " << listfile_r << endl;
+
 	std::vector<Url> mirrorurls;
 	if ( url_r.asString().find( "/metalink" ) != string::npos )
 	  mirrorurls = RepoMirrorListParseXML( listfile_r );
@@ -114,12 +137,12 @@ namespace zypp
 	if ( !cacheinfo.isFile() || cacheinfo.mtime() < time(NULL) - (long) ZConfig::instance().repo_refresh_delay() * 60 )
 	{
 	  DBG << "Getting MirrorList from URL: " << url_r << endl;
-	  Pathname localfile( RepoMirrorListProvide( url_r ) );
+	  RepoMirrorListTempProvider provider( url_r );	// RAII: lifetime of downloaded file
 
 	  // Create directory, if not existing
 	  DBG << "Copy MirrorList file to " << cachefile << endl;
 	  zypp::filesystem::assert_dir( metadatapath_r );
-	  zypp::filesystem::hardlinkCopy( localfile, cachefile );
+	  zypp::filesystem::hardlinkCopy( provider.localfile(), cachefile );
 	}
 
 	_urls = RepoMirrorListParse( url_r, cachefile );
@@ -134,10 +157,10 @@ namespace zypp
     RepoMirrorList::RepoMirrorList( const Url & url_r )
     {
       DBG << "Getting MirrorList from URL: " << url_r << endl;
-      Pathname localfile( url_r.getScheme() == "file"
-                        ? url_r.getPathName()
-			: RepoMirrorListProvide( url_r ) );
-      _urls = RepoMirrorListParse( url_r, localfile );
+      RepoMirrorListTempProvider provider( url_r.getScheme() == "file"
+					 ? url_r.getPathName()
+					 : url_r );	// RAII: lifetime of any downloaded files
+      _urls = RepoMirrorListParse( url_r, provider.localfile() );
     }
 
     /////////////////////////////////////////////////////////////////
