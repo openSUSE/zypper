@@ -94,7 +94,7 @@ Tue Sep 16 10:45:39 CEST 2014 - ma@suse.de
 - DiskUsageCounter: Set growonly on detetcted snapshotting btrfs
   partitions (bnc#896176)
 - DiskUsageCounter: Allow MountPoint to store fstype
-- DiskUsageCounter: Support setting 'growonly' partition hint 
+- DiskUsageCounter: Support setting 'growonly' partition hint
   (bnc#896176)
 - version 14.29.0 (29)
 
@@ -117,7 +117,7 @@ Fri Aug 29 14:46:25 CEST 2014 - ma@suse.de
 
 - PackageProvider: consider toplevel cache if --root or --pkg-cachedir
   is used.
-- Cleanup orpahned cache dirs only at zypp.conf default locations 
+- Cleanup orpahned cache dirs only at zypp.conf default locations
   (bnc#891515)
 - Remove orphaned package caches on refresh (bnc#888919)
 - version 14.27.2 (27)
@@ -196,7 +196,7 @@ Wed May 28 13:41:22 CEST 2014 - ma@suse.de
 -------------------------------------------------------------------
 Tue May 27 16:31:21 CEST 2014 - ma@suse.de
 
-- Let ServiceRefresh en-/disable repos with respect to previous state 
+- Let ServiceRefresh en-/disable repos with respect to previous state
   and user modifications.
 - RepoindexFileReader: support variable substitution
 - Parse optional autorefresh attribute from repoindex.xml
@@ -213,7 +213,7 @@ Wed May 14 13:52:38 CEST 2014 - ma@suse.de
 -------------------------------------------------------------------
 Thu May  8 18:54:25 CEST 2014 - ma@suse.de
 
-- KeyRingReport: New infoVerify callback showing the trusted key 
+- KeyRingReport: New infoVerify callback showing the trusted key
   that will be used for verification.
 - version 14.19.0 (19)
 
@@ -289,7 +289,7 @@ Wed Feb 26 15:06:06 CET 2014 - ma@suse.de
 -------------------------------------------------------------------
 Tue Feb 25 13:42:13 CET 2014 - ma@suse.de
 
-- Remove duplicate code detecting known kinds and move it to 
+- Remove duplicate code detecting known kinds and move it to
   ResKind::explicitBuiltin.
 - version 14.16.0 (16)
 
@@ -390,7 +390,7 @@ Tue Jan 14 18:38:49 CET 2014 - ma@suse.de
 
 - Improve ProgressData reporting.
 - Allow xml::escape directly dumping to a stream.
-- Add support for repo authentication using SSL client certificates 
+- Add support for repo authentication using SSL client certificates
   (bnc#683914)
 - Enhance Queue to perform COW
 - fix documentation
@@ -418,9 +418,9 @@ Thu Dec 12 18:01:18 CET 2013 - ma@suse.de
 -------------------------------------------------------------------
 Wed Dec  4 12:54:30 UTC 2013 - jreidinger@suse.com
 
-- Drop package-manager script as it is already deprecated and 
+- Drop package-manager script as it is already deprecated and
   packagekit usage in desktop invalidates it. If someone really
-  need it, then place it to proper top level package which can 
+  need it, then place it to proper top level package which can
   decide what GUI is proper for given task.
 
 -------------------------------------------------------------------
@@ -428,7 +428,7 @@ Wed Nov 20 16:32:30 CET 2013 - ma@suse.de
 
 - Extend commit plugin to send the transaction list (Fate#316203)
 - Add base/Json.h: JSON encoder for e.g. sending data to plugins
-- Re-evaluate dropped packages list on upgrade, even if product 
+- Re-evaluate dropped packages list on upgrade, even if product
   remains unchanged (bnc#849251).
 - Add ppc64le architecture
 - Add m68k architecture
@@ -8014,7 +8014,7 @@ Fri Aug 11 17:01:33 CEST 2006 - dmacvicar@suse.de
 
 - forward port 3924:3939
 - Add explicit finish callbacks for subtasks during ProvidePackage
-  to avoid UI confusion.
+  to avoid UI confusion.
 - rev3957
 
 -------------------------------------------------------------------
@@ -8105,7 +8105,7 @@ Tue Jul 18 17:42:45 CEST 2006 - dmacvicar@suse.de
 Tue Jul 18 12:56:17 CEST 2006 - dmacvicar@suse.de
 
 - Digest: Don't read the stream character wise but reading blocks,
-  as advised by matz profiling.
+  as advised by matz profiling.
 - r3819
 
 -------------------------------------------------------------------
@@ -8298,7 +8298,7 @@ Wed Jun  7 01:00:05 CEST 2006 - dmacvicar@suse.de
 - Fixes unneeded file download, and add download callbacks
   (still need yast side) #181204 and #160206
 - Fix stalle tmpdir due to cyclic references, using a master
-  TmpDir for zypp. # 178292
+  TmpDir for zypp. # 178292
 
 -------------------------------------------------------------------
 Wed Jun  7 00:02:18 CEST 2006 - ma@suse.de
@@ -8401,11 +8401,11 @@ Wed May 24 15:30:32 CEST 2006 - dmacvicar@suse.de
 
 - dont pass root on init but before.
 - implement rpm db modification timestamp
-  not used yet
+  not used yet
 - move Helix source to testsuite out of the solver
   so we can use it for target, storage tests
 - add Source_Ref::timestamp(), default to now()
-  in order to implement smart sync of sources by zmd
+  in order to implement smart sync of sources by zmd
 - don't parse desc and summary twice
 - fix a segfault with tranlated text
 - fix broken size tag introduced in rev 3427
@@ -8618,7 +8618,7 @@ Wed May  3 17:40:45 CEST 2006 - dmacvicar@suse.de
 Wed May  3 15:34:00 CEST 2006 - dmacvicar@suse.de
 
 - use --no-default-keyring to avoid creating a
-  default gpg dir in / (#171055)
+  default gpg dir in / (#171055)
 - rev 3335
 
 -------------------------------------------------------------------
