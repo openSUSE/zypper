@@ -838,27 +838,15 @@ void MediaCurl::releaseFrom( const std::string & ejectDev )
 
 Url MediaCurl::getFileUrl( const Pathname & filename_r ) const
 {
-  std::string path( _url.getPathName() );
   // Simply extend the URLs pathname. An 'absolute' URL path
-  // is achieved by encoding the 2nd '/' in the URL:
-  //   URL: ftp://user@server	-> ~user
-  //   URL: ftp://user@server/	-> ~user
-  //   URL: ftp://user@server//	-> /
+  // is achieved by encoding the leading '/' in an URL path:
+  //   URL: ftp://user@server		-> ~user
+  //   URL: ftp://user@server/		-> ~user
+  //   URL: ftp://user@server//		-> ~user
+  //   URL: ftp://user@server/%2F	-> /
   //                         ^- this '/' is just a separator
-  if ( path.empty() ||  path == "/" )	// empty URL path; the '/' is just a separator
-  {
-    path = filename_r.absolutename().asString();
-  }
-  else if ( *path.rbegin() == '/' )
-  {
-    path += filename_r.absolutename().asString().substr(1);
-  }
-  else
-  {
-    path += filename_r.absolutename().asString();
-  }
   Url newurl( _url );
-  newurl.setPathName( path );
+  newurl.setPathName( ( Pathname("./"+_url.getPathName()) / filename_r ).asString().substr(1) );
   return newurl;
 }
 
