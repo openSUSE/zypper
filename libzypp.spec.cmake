@@ -19,12 +19,13 @@
 %define force_gcc_46 0
 
 Name:           @PACKAGE@
-BuildRoot:      %{_tmppath}/%{name}-%{version}-build
-Summary:        Package, Patch, Pattern, and Product Management
-License:        GPL-2.0+
-Group:          System/Packages
 Version:        @VERSION@
 Release:        0
+License:        GPL-2.0+
+Url:            git://gitorious.org/opensuse/libzypp.git
+Summary:        Package, Patch, Pattern, and Product Management
+Group:          System/Packages
+BuildRoot:      %{_tmppath}/%{name}-%{version}-build
 Source:         %{name}-%{version}.tar.bz2
 Source1:        %{name}-rpmlintrc
 Provides:       yast2-packagemanager
@@ -145,6 +146,10 @@ Authors:
     Ladislav Slezak <lslezak@suse.cz>
 
 %package devel
+Summary:        Package, Patch, Pattern, and Product Management - developers files
+Group:          Development/Libraries/C and C++
+Provides:       yast2-packagemanager-devel
+Obsoletes:      yast2-packagemanager-devel
 Requires:       boost-devel
 Requires:       bzip2
 Requires:       glibc-devel
@@ -178,24 +183,18 @@ Requires:       libcurl-devel >= %{min_curl_version}
 %else
 Requires:       libsolv-devel
 %endif
+
+%description devel
+Package, Patch, Pattern, and Product Management - developers files
+
+%package devel-doc
 Summary:        Package, Patch, Pattern, and Product Management - developers files
-Group:          System/Packages
+Group:          Documentation/HTML
 Provides:       yast2-packagemanager-devel
 Obsoletes:      yast2-packagemanager-devel
 
-%description -n libzypp-devel
+%description devel-doc
 Package, Patch, Pattern, and Product Management - developers files
-
-Authors:
---------
-    Michael Andres <ma@suse.de>
-    Jiri Srain <jsrain@suse.cz>
-    Stefan Schubert <schubi@suse.de>
-    Duncan Mac-Vicar <dmacvicar@suse.de>
-    Klaus Kaempf <kkaempf@suse.de>
-    Marius Tomaschewski <mt@suse.de>
-    Stanislav Visnovsky <visnov@suse.cz>
-    Ladislav Slezak <lslezak@suse.cz>
 
 %prep
 %setup -q
@@ -371,9 +370,12 @@ rm -rf "$RPM_BUILD_ROOT"
 %files devel
 %defattr(-,root,root)
 %{_libdir}/libzypp.so
-%{_docdir}/%{name}
 %{_includedir}/zypp
 %{_datadir}/cmake/Modules/*
 %{_libdir}/pkgconfig/libzypp.pc
+
+%files devel-doc
+%defattr(-,root,root)
+%{_docdir}/%{name}
 
 %changelog
