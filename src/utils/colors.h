@@ -8,8 +8,8 @@
 #ifndef UTILS_COLORS_H_
 #define UTILS_COLORS_H_
 
+#include <iostream>
 #include <string>
-#include <iosfwd>
 
 #define COLOR_BLACK             "\033[30m"
 #define COLOR_GREY_DARK         "\033[1;30m"
