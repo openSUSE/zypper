@@ -9,6 +9,7 @@
 /** \file	zypp/target/TargetCallbackReceiver.cc
  *
 */
+#include <iostream>
 
 #include "zypp/target/TargetCallbackReceiver.h"
 

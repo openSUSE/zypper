@@ -9,6 +9,7 @@
 /** \file	zypp/Package.cc
  *
 */
+#include <iostream>
 #include <fstream>
 
 #include "zypp/base/Logger.h"
