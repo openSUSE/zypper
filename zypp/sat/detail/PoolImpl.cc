@@ -183,6 +183,9 @@ namespace zypp
         {
           ZYPP_THROW( Exception( _("Can not create sat-pool.") ) );
         }
+        // by now we support only a RPM backend
+        ::pool_setdisttype(_pool, DISTTYPE_RPM );
+
         // initialialize logging
 	if ( env::LIBSOLV_DEBUGMASK() )
 	{
