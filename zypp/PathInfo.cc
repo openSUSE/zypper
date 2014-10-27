@@ -18,7 +18,7 @@
 #include <fstream>
 #include <iomanip>
 
-#include "zypp/base/Logger.h"
+#include "zypp/base/LogTools.h"
 #include "zypp/base/String.h"
 #include "zypp/base/IOStream.h"
 #include "zypp/base/StrMatcher.h"
@@ -640,6 +640,9 @@ namespace zypp
 			   return true;
 			 } );
     }
+
+    std::ostream & operator<<( std::ostream & str, const DirContent & obj )
+    { return dumpRange( str, obj.begin(), obj.end() ); }
 
     ///////////////////////////////////////////////////////////////////
     // is_empty_dir

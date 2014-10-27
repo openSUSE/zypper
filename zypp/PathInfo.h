@@ -540,8 +540,13 @@ namespace zypp
       bool operator==( const DirEntry &rhs ) const;
     };
 
+    inline std::ostream & operator<<( std::ostream & str, const DirEntry & obj )
+    { return str << '[' << obj.type << "] " << obj.name; }
+
     /** Returned by readdir. */
     typedef std::list<DirEntry> DirContent;
+
+    std::ostream & operator<<( std::ostream & str, const DirContent & obj );
 
     /**
      * Return content of directory via retlist. If dots is false
