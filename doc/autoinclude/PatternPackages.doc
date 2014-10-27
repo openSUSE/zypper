@@ -1,0 +1,66 @@
+/**
+
+\page zypp-pattern-packages Code 12 Pattern Packages
+
+\author Michael Andres <ma@suse.de>
+
+<HR><!-- ====================================================================== -->
+
+\section zypp-pattern-packages_intro Intro
+
+Since Code12 (SLES-12) we utilizes a new method of defining patterns, as opposed to the older XML-based patterns files. A pattern and it's dependencies are now represented by an rpm package and the few pattern specific properties are provided by the package. No extra XML-file is needed.
+
+By convention a patterns package for a \c pattern:FOO is named \c patterns-*-FOO and is must provide \c pattern() \c = \c apparmor. The pattens content is expressed by dependencies to other packages and patterns-packages.
+
+The list of provides used for the new pattern pseudo-package autogeneration:
+
+\code
+  Provides:  pattern-category() = STRING
+  Provides:  pattern-category(de) = STRING
+	     (... other languages ...)
+  Provides:  pattern-includes() = STRING
+  Provides:  pattern-extends() = STRING
+  Provides:  pattern-icon() = STRING
+  Provides:  pattern-order() = STRING
+  Provides:  pattern-visible()
+
+  STRING must be url-hexencoded so that it does not contain any characters
+  that rpm provides can't have. E.g.:
+    ' ' => %20
+    ',' => %2C
+    '-' => %2D
+\endcode
+
+\code
+patterns-sles-Minimal-12-37.1.x86_64.rpm
+ PROVIDES {
+  pattern() == Minimal
+  pattern-icon() == pattern-basis
+  pattern-order() == 1099
+  pattern-visible()
+  pattern-category() == Base%20Technologies
+  pattern-category(ar) == %D8%A7%D9%84%D8%AA%D9%83%D9%86%D9%88%D9%84%D9%88%D8%AC%D9%8A%D8%A7%D8%AA%20%D8%A7%D9%84%D8%A3%D8%B3%D8%A7%D8%B3%D9%8A%D8%A9
+  pattern-category(ca) == Tecnologies%20de%20base
+  pattern-category(cs) == Z%C3%A1kladn%C3%AD%20technologie
+  pattern-category(da) == Basisteknologier
+  pattern-category(de) == Basistechnologien
+  ...
+}
+ REQUIRES {
+  systemd
+  coreutils
+  insserv
+  aaa_base
+  ...
+}
+ RECOMMENDS (22){
+  grub2
+  rpcbind
+  nfs-client
+  rsyslog
+  ...
+}
+\endcode
+
+
+*/
