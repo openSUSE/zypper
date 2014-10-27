@@ -1,4 +1,14 @@
 -------------------------------------------------------------------
+Mon Oct 27 11:38:00 CET 2014 - ma@suse.de
+
+- doc: add hint to code 12 pattern packages
+- MediaCurl: Fix URL path concatenation (bnc#901590)
+- Move doxygen html doc to libzypp-devel-doc (bnc#901691)
+- Remove non-breaking spaces from changes file
+- Control lifetime of downloaded mirrorlist
+- version 14.30.1 (30)
+
+-------------------------------------------------------------------
 Thu Oct 16 11:03:11 CEST 2014 - ma@suse.de
 
 - Update zypp-po.tar.bz2
