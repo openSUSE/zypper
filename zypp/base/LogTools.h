@@ -120,8 +120,8 @@ namespace zypp
     std::ostream & operator<<( std::ostream & str, const std::vector<_Tp> & obj )
     { return dumpRange( str, obj.begin(), obj.end() ); }
 
-  template<class _Tp>
-    std::ostream & operator<<( std::ostream & str, const std::set<_Tp> & obj )
+  template<class _Tp, class _Cmp, class _Alloc>
+    std::ostream & operator<<( std::ostream & str, const std::set<_Tp,_Cmp,_Alloc> & obj )
     { return dumpRange( str, obj.begin(), obj.end() ); }
 
   template<class _Tp>
