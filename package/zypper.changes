@@ -1,4 +1,12 @@
 -------------------------------------------------------------------
+Mon Nov  3 15:54:47 CET 2014 - ma@suse.de
+
+- Provide missing man pages (fixes #51)
+- Create man pages from asciidoc (fixes #53)
+- Warn if legacy CLI options are used (bnc#899781)
+- version 1.11.15
+
+-------------------------------------------------------------------
 Thu Oct 16 11:03:31 CEST 2014 - ma@suse.de
 
 - Update zypper-po.tar.bz2
