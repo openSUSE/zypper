@@ -1,6 +1,6 @@
 
 SET (my_MAN8
-     zypper.8 zypper-log.8)
+     zypper.8 zypper-log.8 zypp-refresh.8)
 
 SET (my_MAN
      ${my_MAN8})

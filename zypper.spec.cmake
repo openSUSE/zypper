@@ -158,6 +158,7 @@ rm -rf "$RPM_BUILD_ROOT"
 %dir %{_datadir}/zypper/xml
 %{_datadir}/zypper/xml/xmlout.rnc
 %doc %{_mandir}/man8/zypper.8*
+%doc %{_mandir}/man8/zypp-refresh.8*
 %doc %dir %{_datadir}/doc/packages/zypper
 %doc %{_datadir}/doc/packages/zypper/COPYING
 %doc %{_datadir}/doc/packages/zypper/HACKING
