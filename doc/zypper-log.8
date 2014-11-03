@@ -1,36 +1,94 @@
-.TH zypper-log 8 "15 June 2011"
-.SH NAME
+'\" t
+.\"     Title: zypper-log
+.\"    Author: [see the "AUTHORS" section]
+.\" Generator: DocBook XSL Stylesheets v1.78.1 <http://docbook.sf.net/>
+.\"      Date: 10/27/2014
+.\"    Manual: ZYPPER
+.\"    Source: zypper-log
+.\"  Language: English
+.\"
+.TH "ZYPPER\-LOG" "8" "10/27/2014" "zypper\-log" "ZYPPER"
+.\" -----------------------------------------------------------------
+.\" * Define some portability stuff
+.\" -----------------------------------------------------------------
+.\" ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+.\" http://bugs.debian.org/507673
+.\" http://lists.gnu.org/archive/html/groff/2009-02/msg00013.html
+.\" ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+.ie \n(.g .ds Aq \(aq
+.el       .ds Aq '
+.\" -----------------------------------------------------------------
+.\" * set default formatting
+.\" -----------------------------------------------------------------
+.\" disable hyphenation
+.nh
+.\" disable justification (adjust text to left margin only)
+.ad l
+.\" -----------------------------------------------------------------
+.\" * MAIN CONTENT STARTS HERE *
+.\" -----------------------------------------------------------------
+.SH "NAME"
 zypper-log \- Zypper logfile reader
-.SH SYNOPSIS
-\fBzypper-log\fP [\fIoptions\fP] [\fIpid\fP]
-.SH DESCRIPTION
-zypper-log can read zypper's logfiles. It can also handle rotated logfiles, and will open plain, xz, gz and bz2-compressed files.
+.SH "SYNOPSIS"
 .sp
-By default zypper.log will be read in.
+\fBzypper\-log\fR [\fIOPTIONS\fR] [\fIPID\fR]
+.SH "DESCRIPTION"
 .sp
-When you provide a \fIpid\fP, you will get the complete log for the corresponding zypper run.
-.SH OPTIONS
-.PP
-\-\-help
+\fBzypper\-log\fR can read zyppers logfiles\&. It can also handle rotated logfiles, and will open plain, xz, gz and bz2\-compressed files\&.
+.sp
+By default \fB/var/log/zypper\&.log\fR will be read and a list of all \fBzypper\fR invocations is shown:
+.sp
+.if n \{\
 .RS 4
-Print help and quit
+.\}
+.nf
+$ zypper\-log
+Reading /var/log/zypper\&.log \&.\&.\&.\&.\&.\&.\&.\&.\&.\&.\&.\&.\&.\&.\&. DONE
+
+TIME              PID    VER      CMD
+2013\-10\-15 11:01  2195   1\&.11\&.14  /usr/bin/zypper se spell
+2013\-10\-15 11:03  2703   1\&.11\&.14  /usr/bin/zypper in aspell\-en aspell\-ispell aspell\-de
+2013\-10\-15 15:00  22463  1\&.11\&.14  /usr/bin/zypper lr \-u
+2013\-10\-15 15:00  22479  1\&.11\&.14  /usr/bin/zypper lr \-s
+.fi
+.if n \{\
+.RE
+.\}
+.sp
+When you provide a pid, you will get the complete log for the corresponding zypper run\&.
+.SH "OPTIONS"
+.PP
+\fB\-d\fR \fIYYYY\-MM\-DD\fR
+.RS 4
+Only view zypper runs of the specified day\&.
 .RE
 .PP
-\-l \fIFILE\fP
+\fB\-l\fR \fIFILE\fR
 .RS 4
-Only read this logfile
+Only read this logfile\&.
 .RE
 .PP
-\-r \fIN\fP
+\fB\-r\fR \fINUMBER\fR
 .RS 4
-Also read the \fIN\fP latest rotated logfiles.
+Also read the
+\fINUMBER\fR
+latest rotated logfiles\&.
 .RE
 .PP
-\-d \fIYYYY-MM-DD\fP
+\fB\-\-help\fR
 .RS 4
-Only view zypper runs of the specified day.
+Print help and quit\&.
 .RE
-.SH SEE ALSO
+.SH "FILES"
+.PP
+\fB/var/log/zypper\&.log\fR
+.RS 4
+\fBzypper\fR
+default logfile\&.
+.RE
+.SH "AUTHORS"
+.sp
+Dominik Heidler <dheidler@suse\&.de>
+.SH "SEE ALSO"
+.sp
 zypper(8)
-.SH AUTHOR
-Dominik Heidler <dheidler@suse.de>

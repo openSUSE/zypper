@@ -1,2020 +1,2934 @@
-.TH "zypper" "8" "1.5.1" "zypper" "System Tools"
+'\" t
+.\"     Title: zypper
+.\"    Author: [see the "AUTHORS" section]
+.\" Generator: DocBook XSL Stylesheets v1.78.1 <http://docbook.sf.net/>
+.\"      Date: 11/03/2014
+.\"    Manual: ZYPPER
+.\"    Source: zypper
+.\"  Language: English
+.\"
+.TH "ZYPPER" "8" "11/03/2014" "zypper" "ZYPPER"
+.\" -----------------------------------------------------------------
+.\" * Define some portability stuff
+.\" -----------------------------------------------------------------
+.\" ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+.\" http://bugs.debian.org/507673
+.\" http://lists.gnu.org/archive/html/groff/2009-02/msg00013.html
+.\" ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+.ie \n(.g .ds Aq \(aq
+.el       .ds Aq '
+.\" -----------------------------------------------------------------
+.\" * set default formatting
+.\" -----------------------------------------------------------------
+.\" disable hyphenation
+.nh
+.\" disable justification (adjust text to left margin only)
+.ad l
+.\" -----------------------------------------------------------------
+.\" * MAIN CONTENT STARTS HERE *
+.\" -----------------------------------------------------------------
 .SH "NAME"
-.LP
-zypper - Command\-line interface to ZYpp system management library (libzypp)
-
-.SH "SYNTAX"
-.LP
-zypper [\fI\-\-global\-opts\fR] <\fBcommand\fR> [\fI\-\-command\-opts\fR] [\fBcommand-arguments\fR]
-
-zypper \fBhelp\fR [\fBcommand\fR]
+zypper \- Command\-line interface to ZYpp system management library (libzypp)
+.SH "SYNOPSIS"
+.sp
+\fBzypper\fR [\fI\-\-global\-opts\fR] \fIcommand\fR [\fI\-\-command\-opts\fR] [\fIcommand\-arguments\fR]
+.sp
+\fBzypper\fR \fBhelp\fR \fIcommand\fR
 .SH "DESCRIPTION"
-.LP
-zypper is a command\-line interface to ZYpp system management library.
-It can be used to install, update, remove software, manage repositories, perform
-various queries, and more.
-
-.SH CONCEPTS
-
-Most of the following concepts are common for all applications based on the
-libzypp package management library, but there are some zypper specifics.
-
-.SS Repositories
-.LP
-Libzypp works with package metadata, that is information about packages and their
-relations extracted from RPM packages and other data like patch information,
-pattern definitions, etc. These data are stored together with the RPM files in
-folders called \fBrepositories\fR. Repositories can be placed on various media
-like an HTTP or FTP server, DVD, or a folder on a local disc.
-
-There is a special set of commands in zypper intented to manipulate repositories.
-Also many commands and options take a repository as an argument. See section
-\fBCOMMANDS\fR, subsection \fBRepository Management\fR for more details.
-
-.SS Resource Identfiers (URI)
-To specify locations of repositories or other resources (RPM files, .repo
-files) you can use any type of URIs supported by libzypp. See
-http://en.opensuse.org/openSUSE:Libzypp_URIs for a complete list and usage
-examples.
-
-Zypper also accepts special URIs identifying openSUSE Build Service (OBS)
-repositories in the \fBaddrepo\fR command. These URIs have the form of
-\fBobs://<project>/[platform]\fR, where \fIproject\fR is the name of the
-OBS project and \fIplatform\fR is the target platform (OS) for which the
-repository is intended. For example: obs://server:http/openSUSE_11.3.
-
-If \fIplatform\fR is omitted, zypper.conf's \fIobs.platform\fR value is used.
-See also other options in the [obs] section of zypper.conf.
-
-In addition to these URIs you can use plain directory and file paths in which
-case zypper automatically treats them as dir:/path URIs.
-
-.SS Refresh
-.LP
-Refreshing a repository means downloading metadata of packages from the medium
-(if needed), storing it in local cache (typically under
-/var/cache/zypp/raw/<alias> directory) and preparsing the metadata into .solv
-files (building the solv cache), typically under /var/cache/zypp/solv/<alias>.
-.LP
-The metadata get refreshed either automatically or on user request. An
-\fBautomatic refresh\fR takes place right before reading metadata from
-the database if the \fBauto-refresh is enabled\fR for the repository and the
-metada is reported to be out of date. If the \fBauto-refresh is disabled\fR,
-the repository will only be refreshed on user request. You can request
-a refresh by calling \fBzypper refresh\fR (see the documentation of the refresh
-command for details).
-.LP
-The repository metadata are checked for changes before actually doing the
-refresh. A change is detected by downloading one or two metadata index files
-(small files) and comparing the checksums of the cached ones and the remote
-ones. If the files differ, the repository is out of date and will be refreshed.
-.LP
-To delay the up-to-date check (and thus the automatic refresh) for a certain
-number of minutes, edit the value of the repo.refresh.delay attribute of ZYpp
-config file (/etc/zypp/zypp.conf). This means, zypper will not even try
-to download and check the index files, and you will be able to use zypper for
-operations like search or info without internet access or root privileges.
-
-.SS Services
-.LP
-Services are one level above repositories and serve to manage repositories
-or to do some special tasks. Libzypp currently supports only one type of
-services, the Repository Index Service (RIS).
-.LP
-Repository Index Service (RIS) is a special type of repository which contains
-a list of other repositories. This list can be generated dynamically by the
-server according to some URI parameters or user name, or can be static. Once
-such service is added to your system, zypper takes care of adding, modifying,
-or removing these repositories on your system to reflect the current list.
-See section Service Management and http://old-en.opensuse.org/Standards/Repository_Index_Service
-for more details.
-
-.SS Package Types
-.LP
-zypper works with several types of resource objects, called
-.BR resolvables.
-A resolvable is a package, patch, pattern, or a product.
-.LP
-.B package
-\- an ordinary RPM package.
-.br
-.B patch
-\- update of one or more packages. A patch can include special scripts and
-messages to be run or shown during installation of the update.
-.br
-.B pattern
-\- group of packages required or recommended to install some functionality.
-.br
-.B product
-\- group of packages which are necessary to install a product.
-.br
-.B srcpackage
-\- source code package (.src.rpm). This type works in \fBsearch\fR and \fBinstall\fR commands.
-.LP
-Throughout this manual we will refer to resolvables simply as \fIpackages\fR
-and to resolvable types as \fIpackage types\fR. These type names can be used
-as arguments of \fI--type\fR option in several commands like \fBinstall\fR,
-\fBinfo\fR, or \fBsearch\fR.
-
-.SS Package Dependencies
-.LP
-Software packages depend on each other in various ways. Packages usually
-require or recommend other packages, they can declare that they conflict
-with other packages, etc. Packages can also depend on specific hardware.
-See http://old-en.opensuse.org/Software_Management/Dependencies for more
-information. Zypper uses a \fIdependency solver\fR to find out what
-packages need to be installed to satisfy the user's request.
-
-.SS Package File Conflicts
-.LP
-File conflicts happen when two packages attempt to install files with the same name but different contents. This may happen if you are installing a newer version of a package without erasing the older version, of if two unrelated packages each install a file with the same name.
-.LP
-As checking for file conflicts requires access to the full filelist of each package being installed, zypper will check for file conflict only if all packages are downloaded in advance (see \fI--download-in-advance\fR).
-.LP
-As the reason for file conlicts usually is a poor package design or lack of coordination between the the people building the packages, they are not easy to resolve. By using the \fI--replacefiles\fR option you can force zypper to replace the conflicting files. Nevertheless this may damage the package whose file gets replaced.
-
+.sp
+zypper is a command\-line interface to ZYpp system management library (libzypp)\&. It can be used to install, update, remove software, manage repositories, perform various queries, and more\&.
+.SH "CONCEPTS"
+.sp
+Most of the following concepts are common for all applications based on the libzypp package management library, but there are some zypper specifics\&.
+.SS "Repositories"
+.sp
+Libzypp works with package metadata, that is information about packages and their relations extracted from RPM packages and other data like patch information, pattern definitions, etc\&. These data are stored together with the RPM files in folders called \fIrepositories\fR\&. Repositories can be placed on various media like an HTTP or FTP server, DVD, or a folder on a local disc\&.
+.sp
+There is a special set of commands in zypper intended to manipulate repositories\&. Also many commands and options take a repository as an argument\&. See section \fBCOMMANDS\fR, subsection \fBRepository Management\fR for more details\&.
+.SS "Resource Identifiers (URI)"
+.sp
+To specify locations of repositories or other resources (RPM files, \&.repo files) you can use any type of URIs supported by libzypp\&. See section \fBCOMMANDS\fR, subsection \fBRepository Management\fR for a complete list and usage examples\&.
+.sp
+Zypper also accepts special URIs identifying openSUSE Build Service (OBS) repositories in the \fBaddrepo\fR command\&. These URIs have the form of \fBobs://\fR\fIproject\fR\fB/\fR[\fIplatform\fR], where \fIproject\fR is the name of the OBS project and \fIplatform\fR is the target platform (OS) for which the repository is intended\&. If \fIplatform\fR is omitted, the \fBobs\&.platform\fR value from zypper\&.conf is used\&. See also other options in the [obs] section of zypper\&.conf\&.
+.sp
+For example: \fBobs://server:http/openSUSE_11\&.3\fR\&.
+.sp
+In addition to these URIs you can use plain directory and file paths in which case zypper automatically treats them as \fBdir:/\fR\fIpath\fR URI\&.
+.SS "Refresh"
+.sp
+Refreshing a repository means downloading metadata of packages from the medium (if needed), storing it in local cache (typically under \fB/var/cache/zypp/raw/\fR\fIalias\fR directory) and preparsing the metadata into \fI\&.solv\fR files (building the solv cache), typically under \fB/var/cache/zypp/solv/\fR\fIalias\fR\&.
+.sp
+The metadata get refreshed either automatically or on user request\&. An \fIautomatic refresh\fR takes place right before reading metadata from the database if the \fBauto\-refresh is enabled\fR for the repository and the metadata is reported to be out of date\&. If the \fIauto\-refresh is disabled\fR, the repository will only be refreshed on user request\&. You can request a refresh by calling \fBzypper refresh\fR (see the documentation of the \fBrefresh\fR command for details)\&.
+.sp
+The repository metadata are checked for changes before actually doing the refresh\&. A change is detected by downloading one or two metadata index files (small files) and comparing the checksums of the cached ones and the remote ones\&. If the files differ, the repository is out of date and will be refreshed\&.
+.sp
+To delay the up\-to\-date check (and thus the automatic refresh) for a certain number of minutes, edit the value of the \fBrepo\&.refresh\&.delay\fR attribute of ZYpp config file (\fB/etc/zypp/zypp\&.conf\fR)\&. This means, zypper will not even try to download and check the index files, and you will be able to use zypper for operations like search or info without internet access or root privileges\&.
+.SS "Services"
+.sp
+Services are one level above repositories and serve to manage repositories or to do some special tasks\&. Libzypp currently supports \fIRepository Index Service\fR (RIS) and \fIPlugin Service\fR\&.
+.sp
+Repository Index Service (RIS) is a special type of repository which contains a list of other repositories\&. This list can be generated dynamically by the server according to some URI parameters or user name, or can be static\&. Once such service is added to your system, zypper takes care of adding, modifying, or removing these repositories on your system to reflect the current list\&. See section \fBService Management\fR and http://old\-en\&.opensuse\&.org/Standards/Repository_Index_Service for more details\&.
+.SS "Package Types"
+.sp
+Zypper works with several types of resource objects, called \fIresolvables\fR\&. A resolvable might be a \fBpackage\fR, \fBpatch\fR, \fBpattern\fR, \fBproduct\fR; basically any \fIkind of object\fR with dependencies to other objects\&.
+.PP
+\fBpackage\fR
+.RS 4
+An ordinary RPM package\&.
+.RE
+.PP
+\fBpatch\fR
+.RS 4
+A released patch conflicts with the affected/vulnerable versions of a collection of packages\&. As long as any of these affected/vulnerable versions is installed, the conflict triggers and the patch is classified as
+\fBneeded\fR\&. Selecting the patch, the conflict is resolved by updating all installed and affected/vulnerable packages to a version providing the fix\&.
+.RE
+.PP
+\fBpattern\fR
+.RS 4
+A group of packages required or recommended to install some functionality\&.
+.RE
+.PP
+\fBproduct\fR
+.RS 4
+A group of packages which are necessary to install a product\&.
+.RE
+.PP
+\fBsrcpackage\fR
+.RS 4
+Source code package (\&.src\&.rpm)\&. This type works in
+\fBsearch\fR
+and
+\fBinstall\fR
+commands\&.
+.RE
+.PP
+\fBapplication\fR
+.RS 4
+Focuses on packages a user might want to install and hide away supporting packages which are selected via package dependencies anyway (see
+\fIhttp://people\&.freedesktop\&.org/~hughsient/appdata/\fR)
+.RE
+.sp
+Throughout this manual we will often refer to resolvables simply as \fIpackages\fR and to resolvable types as \fIpackage type\fR or \fIkind\fR\&. These type names can be used as arguments of \fB\-\-type\fR option in several commands like \fBinstall\fR, \fBinfo\fR, or \fBsearch\fR\&. Commands should also allow to specify resolvables as \fIKIND\fR\fB:\fR\fINAME\fR (e\&.g\&. \fBpatch:openSUSE\-2014\-7\fR)\&.
+.SS "Package Dependencies"
+.sp
+Software packages depend on each other in various ways\&. Packages usually \fIrequire\fR or \fIrecommend\fR other packages, but they can also \fIconflict\fR with other packages\&. Packages can also support specific hardware or language settings\&. Zypper uses a \fIdependency solver\fR to find out what packages need to be installed to satisfy the user\(cqs request\&. See http://old\-en\&.opensuse\&.org/Software_Management/Dependencies for more information\&.
+.SS "Package File Conflicts"
+.sp
+File conflicts happen when two packages attempt to install files with the same name but different contents\&. This may happen if you are installing a newer version of a package without erasing the older version, of if two unrelated packages each install a file with the same name\&.
+.sp
+As checking for file conflicts requires access to the full filelist of each package being installed, zypper will check for file conflict only if all packages are downloaded in advance (see \fB\-\-download\-in\-advance\fR)\&.
+.sp
+As the reason for file conflicts usually is a poor package design or lack of coordination between the the people building the packages, they are not easy to resolve\&. By using the \fB\-\-replacefiles\fR option you can force zypper to replace the conflicting files\&. Nevertheless this may damage the package whose file gets replaced\&.
 .SH "COMMANDS"
-.LP
-zypper provides a number of \fBcommands\fR. Each command accepts the options
-listed in the GLOBAL OPTIONS section. These options must be specified
-\fIbefore\fR the command name. In addition, many commands have specific
-options, which are listed in this section. These command-specific options must
-be specified \fIafter\fR the name of the command and \fIbefore\fR any
-of the command arguments.
+.sp
+zypper provides a number of \fIcommands\fR\&. Each command accepts the options listed in the \fBGLOBAL OPTIONS\fR section\&. These options must be specified \fIbefore\fR the command name\&. In addition, many commands have specific options, which are listed in this section\&. These command\-specific options must be specified \fIafter\fR the name of the command and \fIbefore\fR any of the command arguments\&.
+.SS "General Commands"
+.PP
+\fBhelp\fR [\fIcommand\fR]
+.RS 4
+Shows help texts\&. If invoked without any argument (just
+\fBzypper\fR
+or
+\fBzypper help\fR), zypper displays global help text which lists all available global options and commands\&.
 
-.SS General Commands
+If invoked with a
+\fIcommand\fR
+name argument, zypper displays help for the specified command, if such command exists\&. Long as well as short variants of the command names can be used\&.
 
-.TP
-.B help [command]
-Shows help texts. If invoked without any argument (just \'zypper\' or
-\'zypper\ help\'), zypper displays global help text which lists all available
-global options and commands.
+For your convenience,
+\fBzypper help\fR
+can also be invoked in any of the following ways:
+.TS
+tab(:);
+lt lt
+lt lt.
+T{
 
-If invoked with a command name argument, zypper displays help for the
-specified command, if such command exists. Long as well as short variants
-of the command names can be used.
+T}:T{
+$
+\fBzypper \-h\fR|\fB\-\-help\fR
+[\fIcommand\fR]
+T}
+T{
 
-For your convenience, zypper help can be invoked in any of the following ways:
+T}:T{
+$
+\fBzypper\fR
+[\fIcommand\fR]
+\fB\-h\fR|\fB\-\-help\fR
+T}
+.TE
+.sp 1
+.RE
+.PP
+\fBshell\fR (\fBsh\fR)
+.RS 4
+Starts a shell for entering multiple commands in one session\&. Exit the shell using
+\fBexit\fR,
+\fBquit\fR, or
+\fICtrl\-D\fR\&.
 
-.B $ zypper help [command]
-.br
-.B $ zypper -h|--help [command]
-.br
-.B $ zypper [command] -h|--help
+The shell support is not complete so expect bugs there\&. However, there\(cqs no urgent need to use the shell since libzypp became so fast thanks to the SAT solver and its tools (openSUSE 11\&.0), but still, you\(cqre welcome to experiment with it\&.
+.RE
+.SS "Package Management Commands"
+.PP
+\fBinfo\fR (\fBif\fR) [\fIoptions\fR] \fIname\fR\&...
+.RS 4
+Displays detailed information about the specified packages\&.
 
-.TP
-.B shell (sh)
-Starts a shell for entering multiple commands in one session.
-Exit the shell using "exit", "quit", or Ctrl-D.
-
-The shell support is not complete
-so expect bugs there. However, there's no urgent need to use the shell
-since libzypp became so fast thanks to the SAT solver and its tools
-(openSUSE 11.0), but still, you're welcome to experiment with it.
-
-
-.SS Package Management Commands
-
-.TP
-.B info (if) [options] <name> ...
-Displays detailed information about the specified packages.
-
-For each specified package, zypper finds the best available version in defined
-repositories and shows information for this package.
-
-.TP
-\fI\-r, \-\-repo\fR <alias|name|#|URI>
-Work only with the repository specified by the alias, name, number or URI. This
-option can be used multiple times.
-.TP
-.I \-t, \-\-type <type>
-Type of package (default: package). See section \fBPackage Types\fR for list
-of available package types.
-.TP
-.I \ \ \ \ \-\-provides
-Show symbols the package provides.
-.TP
-.I \ \ \ \ \-\-requires
-Show symbols the package requires.
-.TP
-.I \ \ \ \ \-\-conflicts
-Show symbols the package conflits with.
-.TP
-.I \ \ \ \ \-\-obsoletes
-Show symbols the package obsoletes.
-.TP
-.I \ \ \ \ \-\-recommends
-Show symbols the package recommends.
-.TP
-.I \ \ \ \ \-\-suggests
-Show symbols the package suggests.
-.TP
+For each specified package, zypper finds the best available version in defined repositories and shows information for this package\&.
+.PP
+\fB\-r\fR, \fB\-\-repo\fR \fIalias\fR|\fIname\fR|\fI#\fR|\fIURI\fR
+.RS 4
+Work only with the repository specified by the alias, name, number or URI\&. This option can be used multiple times\&.
+.RE
+.PP
+\fB\-t\fR, \fB\-\-type\fR \fItype\fR
+.RS 4
+Type of package (default: package)\&. See section
+\fBPackage Types\fR
+for list of available package types\&.
+.RE
+.PP
+\fB\-\-provides\fR
+.RS 4
+Show symbols the package provides\&.
+.RE
+.PP
+\fB\-\-requires\fR
+.RS 4
+Show symbols the package requires\&.
+.RE
+.PP
+\fB\-\-conflicts\fR
+.RS 4
+Show symbols the package conflicts with\&.
+.RE
+.PP
+\fB\-\-obsoletes\fR
+.RS 4
+Show symbols the package obsoletes\&.
+.RE
+.PP
+\fB\-\-recommends\fR
+.RS 4
+Show symbols the package recommends\&.
+.RE
+.PP
+\fB\-\-suggests\fR
+.RS 4
+Show symbols the package suggests\&.
+.RE
+.PP
 Examples:
+.RS 4
+.PP
+$ \fBzypper info workrave\fR
+.RS 4
+Show information about
+\fIpackage workrave\fR
+.RE
+.PP
+$ \fBzypper info \-t patch libzypp\fR
+.RS 4
+Show information about
+\fIpatch libzypp\fR
+.RE
+.PP
+$ \fBzypper info \-t pattern lamp_server\fR
+.RS 4
+Show information about
+\fIpattern lamp_server\fR
+.RE
+.RE
+.RE
+.PP
+\fBinstall\fR (\fBin\fR) [\fIoptions\fR] \fIname\fR|\fIcapability\fR|\fIrpm_file_uri\fR\&...
+.RS 4
+Install or update packages\&.
+.PP
+The packages can be selected by their \fIname\fR or by a \fIcapability\fR they provide\&.
+.RS 4
 
-Show information about package 'workrave':
-.br
-.B $ zypper info workrave
+A
+\fIcapability\fR
+is formed by "\fINAME\fR[\fB\&.\fR\fIARCH\fR][
+\fIOP EDITION\fR]", where
+\fIARCH\fR
+is an architecture code,
+\fIOP\fR
+is one of
+\fB<\fR,
+\fB<=\fR,
+\fB=\fR,
+\fB>=\fR, or
+\fB>\fR
+and
+\fIEDITION\fR
+is "\fIVERSION\fR[\fB\-\fR\fIRELEASE\fR]"\&. For example:
+\fBzypper=0\&.8\&.8\-2\fR
+The
+\fINAME\fR
+component of a capability is not only a package name but any symbol provided by packages:
+\fB/bin/vi\fR,
+\fBlibcurl\&.so\&.3\fR,
+\fBperl(Time::ParseDate)\fR\&. Just remember to quote to protect the special characters from the shell, for example:
+\fBzypper\e>0\&.8\&.10\fR
+or
+\fB\*(Aqzypper>0\&.8\&.10\*(Aq\fR\&.
 
-Show information about patch 'libzypp':
-.br
-.B $ zypper info -t patch libzypp
+If
+\fIEDITION\fR
+is not specified, the newest installable version will be installed\&. This also means that if the package is already installed and newer versions are available, it will get upgraded to the newest installable version\&.
 
-Show information about pattern 'lamp_server':
-.br
-.B $ zypper info -t pattern lamp_server
+If
+\fIARCH\fR
+is not specified, or the last dot of the capability name string is not followed by known architecture, the solver will treat the whole string as a capability name\&. If the ARCH is known, the solver will select a package matching that architecture and complain if such package cannot be found\&.
+.RE
+.PP
+Zypper is also able to install \fIplain RPM files\fR while trying to satisfy their dependencies using packages from defined repositories\&. You can install a plain RPM file by specifying its location in the install command arguments either as a local path or an URI\&. E\&.g\&.:
+.RS 4
 
-.TP
-.B install (in) [options] <name|capability|rpm_file_uri> ...
-Install or update packages.
+$
+\fBzypper install ~/rpms/foo\&.rpm \fR\fBhttp://some\&.site/bar\&.rpm\fR\&.
 
-The packages can be selected by their name or by a capability they provide.
+Zypper will report packages that it cannot find\&. Further, in interactive mode, zypper proceeds with installation of the rest of requested packages, and it will abort immediately in non\-interactive mode\&. In both cases zypper returns
+\fBZYPPER_EXIT_INF_CAP_NOT_FOUND\fR
+after finishing the operation\&.
 
-Capability is: NAME, or "NAME[.ARCH][OP<EDITION>]", where ARCH is architecture
-code, OP is <, <=, =, >=, or > and EDITION is VERSION[-RELEASE].
-For example: zypper=0.8.8-2.
+Zypper will download the files into its cache directory (/var/cache/zypper/RPMS), add this directory as a temporary
+\fBplaindir\fR
+repository and mark the respective packages for installation\&.
+.RE
+.PP
+In the install command, you can specify also packages you wish to remove in addition to the packages you wish to install, by prepending their names by a \fI\-\fR or \fI~\fR character\&. For example:
+.RS 4
 
-The NAME component of a capability is not only a package name but any symbol
-provided by packages: /bin/vi, libcurl.so.3, perl(Time::ParseDate).
-Just remember to quote to protect the special characters from the shell,
-for example: zypper\\>0.8.10 or 'zypper>0.8.10'
+$
+\fI\fBzypper install vim \-emacs\fR\fR\ \&
 
-If EDITION is not specified, the newest installable version will be installed.
-This also means that if the package is already installed and newer versions
-are available, it will get upgraded to the newest installable version.
+$
+\fBzypper remove emacs +vim\fR\ \&
 
-If ARCH is not specified, or the last dot of the capability name string is not
-followed by known architecture, the solver will treat the whole string
-as a capability name. If the ARCH is known, the solver will select a package
-matching that architecture and complain if such package cannot be found.
+will both
+\fIinstall vim\fR
+and
+\fIremove emacs\fR\&. Note that if you choose to use
+\fB\-\fR
+with the first package you specify, you need to write
+\fB\-\-\fR
+before it to prevent its interpretation as a command option:
 
-Zypper will report packages that it cannot find. Further, in interactive
-mode, zypper proceeds with installation of the rest of requested packages,
-and it will abort immediately in non-interactive mode. In both cases
-zypper returns ZYPPER_EXIT_INF_CAP_NOT_FOUND after finishing
-the operation.
+$
+\fBzypper install \(em \-boring\-game great\-game great\-game\-manual\fR\ \&
+.RE
+.PP
+\-r, \-\-repo alias|name|#|URI
+.RS 4
+Work only with the repository specified by the alias, name, number or URI\&. This option can be used multiple times\&.
 
-Zypper is also able to install plain RPM files while trying to satisfy their
-dependencies using packages from defined repositories. You can install a plain
-RPM file by specifying its location in the install command arguments either
-as a local path or an URI. E.g.:
+Using \-\-repo is
+\fIdiscouraged\fR
+as it currently hides unmentioned repositories from the resolver, leading to inexpertly decisions\&. In the future \-\-repo will become an alias for
+\fB\-\-from\fR\&.
+.RE
+.PP
+\fB\-t\fR, \fB\-\-type\fR \fItype\fR
+.RS 4
+Type of package to install (default: package)\&. See section
+\fBPackage Types\fR
+for list of available package types\&. Use
+\fI\fBzypper se \-t\fR\fR\fI type\fR
+[\fIname\fR] to look for available items of this type and
+\fI\fBzypper info \-t\fR\fR\fI type name\fR
+to display more detailed information about the item\&.
 
-\fB$ zypper install ~/rpms/foo.rpm http://some.site/bar.rpm\fR
+If
+\fIpatch\fR
+is specified, zypper will install and/or remove packages to satisfy specified patch\&. This is a way to ensure that specific bug fix is installed\&. Use
+\fBzypper list\-patches\fR
+to look for available
+\fIneeded\fR
+patches\&.
 
-Zypper will download the files into its cache directory (/var/cache/zypper/RPMS),
-add this directory as a temporary \fBplaindir\fR repository and mark the
-respective packages for installation.
+If
+\fIproduct\fR
+or
+\fIpattern\fR
+are specified, zypper ensures that all required (and optionally recommended) packages are installed\&.
+.RE
+.PP
+\fB\-n\fR, \fB\-\-name\fR
+.RS 4
+Select packages by their name, don\(cqt try to select by capabilities\&.
+.RE
+.PP
+\fB\-f\fR, \fB\-\-force\fR
+.RS 4
+Install even if the item is already installed (reinstall), downgraded or changes vendor or architecture\&.
+.RE
+.PP
+\fB\-\-oldpackage\fR
+.RS 4
+Allow to replace a newer item with an older one\&. Handy if you are doing a rollback\&. Unlike \-\-force it will not enforce a reinstall, if the item is already installed with the requested version\&.
+.RE
+.PP
+\fB\-\-from\fR \fIalias|name|#|URI\fR
+.RS 4
+Select packages from specified repository\&. If strings specified as arguments to the install command match packages in repositories specified in this option, they will be marked for installation\&. This option currently implies
+\fB\-\-name\fR, but allows using wildcards for specifying packages\&.
+.RE
+.PP
+\fB\-C\fR, \fB\-\-capability\fR
+.RS 4
+Select packages by capabilities\&.
+.RE
+.PP
+\fB\-l\fR, \fB\-\-auto\-agree\-with\-licenses\fR
+.RS 4
+Automatically say
+\fIyes\fR
+to third party license confirmation prompt\&. By using this option, you choose to agree with licenses of all third\-party software this command will install\&. This option is particularly useful for administrators installing the same set of packages on multiple machines (by an automated process) and have the licenses confirmed before\&.
+.RE
+.PP
+\fB\-\-debug\-solver\fR
+.RS 4
+Create solver test case for debugging\&. Use this option, if you think the dependencies were not solved all right and attach the resulting /var/log/zypper\&.solverTestCase directory to your bug report\&. To use this option, simply add it to the problematic install or remove command\&.
+.RE
+.PP
+\fB\-\-no\-recommends\fR
+.RS 4
+By default, zypper installs also packages recommended by the requested ones\&. This option causes the recomended packages to be ignored and only the required ones to be installed\&.
+.RE
+.PP
+\fB\-\-replacefiles\fR
+.RS 4
+Install the packages even if they replace files from other, already installed, packages\&. Default is to treat file conflicts as an error\&.
+\fB\-\-download\-as\-needed\fR
+disables the file conflict check because access to all packages file lists is needed in advance in order to perform the check\&.
+.RE
+.PP
+\fB\-R\fR, \fB\-\-no\-force\-resolution\fR
+.RS 4
+Do not force the solver to find a solution\&. Instead, report dependency problem and prompt the user to resolve it manually\&.
+.RE
+.PP
+\fB\-\-force\-resolution\fR
+.RS 4
+Force the solver to find a solution, even if it would mean removing all packages with unfulfilled requirements\&. The default behavior is
+\fIforce in the interactive mode\fR
+and
+\fIno\-force in the non\-interactive mode\fR\&. If this option is specified, it takes the preference\&.
+.RE
+.PP
+\fB\-D\fR, \fB\-\-dry\-run\fR
+.RS 4
+Test the installation, do not actually install any package\&. This option will add the
+\fB\-\-test\fR
+option to the rpm commands run by the install command\&.
+.RE
+.PP
+\fB\-\-details\fR
+.RS 4
+Show the detailed installation summary\&.
+.RE
+.PP
+Download\-and\-install mode options:
+.RS 4
+.RE
+.PP
+\fB\-d\fR, \fB\-\-download\-only\fR
+.RS 4
+Only download the packages for later installation\&.
+.RE
+.PP
+\fB\-\-download\-in\-advance\fR
+.RS 4
+First download all packages, then start installing\&.
+.RE
+.PP
+\fB\-\-download\-in\-heaps\fR
+.RS 4
+Download a minimal set of packages that can be installed without leaving the system in broken state, and install them\&. Then download and install another heap until all are installed\&. This helps to keep the system in consistent state without the need to download
+\fIall\fR
+packages in advance, which combines the advantages of
+\fB\-\-download\-in\-advance\fR
+and
+\fB\-\-download\-as\-needed\fR\&. This is the default mode\&.
 
-In the install command, you can specify also packages you wish to remove in
-addition to the packages you wish to install, by prepending their names by
-a '-' or '~' character. For example:
-
-.B $ zypper install vim -emacs
-.br
-.B $ zypper remove emacs +vim
-
-will both install vim and remove emacs. Note that if you choose to use '-' with the
-first package you specify, you need to write '--' before it to prevent its
-interpretation as a command option.
-
-.B $ zypper install -- -boring-game great-game great-game-manual
-.TP
-\fI\-r, \-\-repo\fR <alias|name|#|URI>
-Work only with the repository specified by the alias, name, number or URI. This
-option can be used multiple times.
-.TP
-\fI\-t, \-\-type\fR <type>
-Type of package to install (default: package). See section \fBPackage Types\fR
-for list of available package types.
-
-If \fIpattern\fR is specified, and the pattern is not yet installed,
-all packages required and recommended by the pattern will be installed.
-A pattern is considered installed if all the packages and patterns
-it requires are installed. Thus a pattern can be evalueated as installed
-even if you do not install the pattern itself, but rather the packages
-it requries. Use \fBzypper search -t pattern [name]\fR to look for available
-patterns and \fBzypper info -t pattern <name>\fR to list its contents.
-
-If \fIpatch\fR is specified, zypper will install and/or remove packages
-to satisfy specified patch. This is a way to ensure that specific
-bug fix is installed. Like patterns, patches can also be evaluated as installed
-by installing the packages needed to satisfy the patch.
-Use \fBzypper list-patches\fR to look for available
-needed patches and \fBzypper info -t patch <name>\fR to display detailed
-information about a patch.
-
-If \fIproduct\fR is specified, zypper ensures all packages required
-by the product are installed. Use \fBzypper se -t product [name]\fR to look
-for available products and \fBzypper info -t product <name>\fR to display
-detailed information about a product.
-
-.TP
-.I \-n, \-\-name
-Select packages by their name, don't try to select by capabilities.
-.TP
-.I \-f, \-\-force
-Install even if the item is already installed (reinstall), downgraded or changes vendor or architecture.
-.TP
-.I \ \ \ \ \-\-oldpackage
-Allow to replace a newer item with an older one. Handy if you are doing a rollback. Unlike --force it will not enforce a reinstall, if the item is already installed with the requested version.
-.TP
-.I \ \ \ \ \-\-from <alias|name|#|URI>
-Select packages from specified repository. If strings specified as arguments
-to the install command match packages in repositories specified in this option,
-they will be marked for installation. This option currently implies
-\fI\-\-name\fR, but allows using wildcards for specifying packages.
-.TP
-.I \-C, \-\-capability
-Select packages by capabilities.
-.TP
-.I \-l, \-\-auto\-agree\-with\-licenses
-Automatically say 'yes' to third party license confirmation prompt. By using this option, you choose to agree with licenses of all third-party software this command will install. This option is particularly useful for administators installing the same set of packages on multiple machines (by an automated process) and have the licenses confirmed before.
-.TP
-.I \ \ \ \ \-\-debug\-solver
-Create solver test case for debugging. Use this option, if you think the
-dependencies were not solved all right and attach the resulting /var/log/zypper.solverTestCase
-directory to your bug report. To use this option, simply add it to the problematic
-install or remove command.
-.TP
-.I \ \ \ \ \-\-no\-recommends
-By default, zypper installs also packages recommended by the requested ones.
-This option causes the recomended packages to be ignored and only the
-required ones to be installed.
-.TP
-.I \ \ \ \ \-\-replacefiles
-Install the packages even if they replace files from other, already installed, packages. Default is to treat file conflicts as an error. \fI--download-as-needed\fR disables the fileconflict check because access to all packages filelists is needed in advance in order to perform the check.
-.TP
-.I \-R, \-\-no\-force\-resolution
-Do not force the solver to find a solution. Instead, report
-dependency problem and prompt the user to resolve it manually.
-.TP
-.I \ \ \ \ \-\-force\-resolution
-Force the solver to find a solution, even if it would
-mean removing all packages with unfulfilled requirements.
-
-The default behavior is 'force' in the interactive mode and 'no-force' in the
-non-interactive mode. If this option is specified, it takes the preference.
-.TP
-.I \-D, \-\-dry\-run
-Test the installation, do not actually install any package. This option will
-add the \-\-test option to the rpm commands run by the install command.
-.TP
-.I \ \ \ \ \-\-details
-Show the detailed installation summary.
-.TP
-Download-and-install mode options:
-.TP
-.I \-d, \-\-download\-only
-Only download the packages for later installation.
-.TP
-.I \ \ \ \ \-\-download\-in\-advance
-First download all packages, then start installing.
-.TP
-.I \ \ \ \ \-\-download\-in\-heaps
-(Not yet implemented, currently the same as \fI--download-in-advance\fR).
-Download a minimal set of packages that can be installed without leaving
-the system in broken state, and install them. Then download and install another
-heap until all are installed. This helps to keep the system in consistent state
-without the need to download all package in advance, which combines the
-advantages of \fI--download-in-advance\fR and \fI--download-as-needed\fR.
-This is the default mode.
-.TP
-.I \ \ \ \ \-\-download\-as\-needed
-Download one package, install it immediately, and continue with the rest
-until all are installed.
-.TP
-.I \ \ \ \ \-\-download <mode>
-Use the specified download-and-install mode. Available modes are:
-\fBonly\fR, \fBin-advance\fR, \fBin-heaps\fR, \fBas-needed\fR.
-See corresponding \fI--download-<mode>\fR options for their description.
-
-.TP
-More examples:
-
-Install lamp_server pattern:
-.br
-.B $ zypper install -t pattern lamp_server
-
-Install GhostScript viewer, but ignore recommended packages:
-.br
-.B $ zypper install --no-recommends gv
-
-Install version 2.0.6 of virtualbox-ose package (any of the following):
-.br
-.B $ zypper install virtualbox-ose-2.0.6
-.br
-.B $ zypper install virtualbox-ose=2.0.6
-.br
-.B $ zypper install virtualbox-ose = 2.0.6
-
-
-.TP
-.B source-install (si) <name> ...
-Install specified source packages and their build dependencies. If the name of
-a binary package is given, the coresponding source package is looked up and
-installed instead.
-
-This command will try to find the newest available versions of the source
-packages and use rpm -i to install them and the packages that are required
-to build the source package.
-
-Note that the source packages must be available in repositories you are using.
-You can check whether a repository contains any source packages using the
-following command:
-
-.B $ zypper search -t srcpackage -r <alias|name|#|URI>
-
-.TP
-.I \-d, \-\-build\-deps\-only
-Install only build dependencies of specified packages.
-.TP
-.I \-D, \-\-no\-build\-deps
-Don't install build dependencies.
-.TP
-\fI\-r, \-\-repo\fR <alias|name|#|URI>
-Work only with the repository specified by the alias, name, number, or URI. This
-option can be used multiple times.
-.TP
-.I \ \ \ \ \-\-download\-only
-Only download the packages, do not install.
-.TP
+NOTE: While the resolver is not capable of building heaps, this behaves the same as
+\fB\-\-download\-in\-advance\fR\&.
+.RE
+.PP
+\fB\-\-download\-as\-needed\fR
+.RS 4
+Download one package, install it immediately, and continue with the rest until all are installed\&.
+.RE
+.PP
+\fB\-\-download\fR \fImode\fR
+.RS 4
+Use the specified download\-and\-install mode\&. Available modes are:
+\fBonly\fR,
+\fBin\-advance\fR,
+\fBin\-heaps\fR,
+\fBas\-needed\fR\&. See corresponding
+\fB\-\-download\-\fR\fImode\fR
+options for their description\&.
+.RE
+.PP
 Examples:
+.RS 4
+.PP
+$ \fBzypper install \-t pattern lamp_server\fR
+.RS 4
+Install lamp_server pattern\&.
+.RE
+.PP
+$ \fBzypper install \-\-no\-recommends gv\fR
+.RS 4
+Install GhostScript viewer, but ignore recommended packages\&.
+.RE
+.PP
+$ \fBzypper install virtualbox\-ose\-2\&.0\&.6\fR
+.RS 4
+.RE
+.PP
+$ \fBzypper install virtualbox\-ose=2\&.0\&.6\fR
+.RS 4
+.RE
+.PP
+$ \fBzypper install virtualbox\-ose = 2\&.0\&.6\fR
+.RS 4
+Install version 2\&.0\&.6 of virtualbox\-ose package\&.
+.RE
+.RE
+.RE
+.PP
+\fBsource\-install\fR (\fBsi\fR) \fIname\fR\&...
+.RS 4
+Install specified source packages and their build dependencies\&. If the name of a binary package is given, the corresponding source package is looked up and installed instead\&.
 
-Install build dependencies of dbus-1 source package:
-.br
-.B $ zypper si -d dbus-1
+This command will try to find the newest available versions of the source packages and uses
+\fBrpm \-i\fR
+to install them and the packages that are required to build the source package\&.
 
-.TP
-.B verify (ve) [options]
-Check whether dependencies of installed packages are satisfied.
+Note that the source packages must be available in repositories you are using\&. You can check whether a repository contains any source packages using the following command:
+.PP
+.RS 4
+$
+\fI\fBzypper search \-t srcpackage \-r\fR\fR\fI alias\fR|\fIname\fR|\fI#\fR|\fIURI\fR
+.RE
+.PP
+\fB\-d\fR, \fB\-\-build\-deps\-only\fR
+.RS 4
+Install only build dependencies of specified packages\&.
+.RE
+.PP
+\fB\-D\fR, \fB\-\-no\-build\-deps\fR
+.RS 4
+Don\(cqt install build dependencies\&.
+.RE
+.PP
+\fB\-r\fR, \fB\-\-repo\fR \fIalias\fR|\fIname\fR|\fI#\fR|\fIURI\fR
+.RS 4
+Work only with the repository specified by the alias, name, number, or URI\&. This option can be used multiple times\&.
+.RE
+.PP
+\fB\-\-download\-only\fR
+.RS 4
+Only download the packages, do not install\&.
+.RE
+.PP
+Examples:
+.RS 4
+.PP
+$ \fBzypper si \-d dbus\-1\fR
+.RS 4
+Install build dependencies of dbus\-1 source package\&.
+.RE
+.RE
+.RE
+.PP
+\fBverify\fR (\fBve\fR) [\fIoptions\fR]
+.RS 4
+Check whether dependencies of installed packages are satisfied\&.
 
-In case that any dependency problems are found, zypper suggests packages
-to install or remove to fix them.
+In case that any dependency problems are found, zypper suggests packages to install or remove to fix them\&.
+.PP
+\fB\-\-no\-recommends\fR
+.RS 4
+By default, zypper installs also packages recommended by the requested ones (the ones needed to fix broken dependencies in this case)\&. This option causes the recommended packages to be ignored and only the required ones to be installed\&.
+.RE
+.PP
+\fB\-D\fR, \fB\-\-dry\-run\fR
+.RS 4
+Test the repair, do not actually do anything to the system\&.
+.RE
+.PP
+\fB\-\-details\fR
+.RS 4
+Show the detailed installation summary\&.
+.RE
+.PP
+\fB\-r\fR, \fB\-\-repo\fR \fIalias\fR|\fIname\fR|\fI#\fR|\fIURI\fR
+.RS 4
+Work only with the repository specified by the alias, name, number, or URI\&. This option can be used multiple times\&.
+.RE
+.PP
+\fB\-\-debug\-solver\fR
+.RS 4
+Create solver test case for debugging\&. See the install command for details\&.
+.RE
+.RE
+.PP
+\fBinstall\-new\-recommends\fR (\fBinr\fR) [\fIoptions\fR]
+.RS 4
+Install newly added packages recommended by already installed ones\&. This can typically be used to install language packages recently added to repositories or drivers for newly added hardware\&.
+.PP
+\fB\-r\fR, \fB\-\-repo\fR \fIalias\fR|\fIname\fR|\fI#\fR|\fIURI\fR
+.RS 4
+Work only with the repository specified by the alias, name, number, or URI\&. This option can be used multiple times\&.
+.RE
+.PP
+\fB\-D\fR, \fB\-\-dry\-run\fR
+.RS 4
+Test the installation, do not actually install anything\&.
+.RE
+.PP
+\fB\-\-details\fR
+.RS 4
+Show the detailed installation summary\&.
+.RE
+.PP
+\fB\-\-debug\-solver\fR
+.RS 4
+Create solver test case for debugging\&. See the install command for details\&.
+.RE
+.PP
+This command also accepts the \fBDownload\-and\-install mode options\fR described in the \fBinstall\fR command\&.
+.RS 4
+.RE
+.RE
+.PP
+\fBremove\fR (\fBrm\fR) [\fIoptions\fR] \fIname\fR\&...
+.RS 4
+.RE
+.PP
+\fBremove\fR (\fBrm\fR) [\fIoptions\fR] \fB\-\-capability\fR \fIcapability\fR\&...
+.RS 4
+Remove (uninstall) packages\&.
 
-.TP
-.I \ \ \ \ \-\-no\-recommends
-By default, zypper installs also packages recommended by the requested ones
-(the ones needed to fix broken dependencies in this case).
-This option causes the recomended packages to be ignored and only the
-required ones to be installed.
-.TP
-.I \-D, \-\-dry-run
-Test the repair, do not actually do anything to the system.
-.TP
-.I \ \ \ \ \-\-details
-Show the detailed installation summary.
-.TP
-\fI\-r, \-\-repo\fR <alias|name|#|URI>
-Work only with the repository specified by the alias, name, number, or URI. This
-option can be used multiple times.
-.TP
-.I \ \ \ \ \-\-debug\-solver
-Create solver test case for debugging. See the install command for details.
+The packages can be selected by their name or by a capability they provide\&. For details on package selection see the
+\fBinstall\fR
+command description\&.
+.PP
+\fB\-r\fR, \fB\-\-repo\fR \fIalias\fR|\fIname\fR|\fI#\fR|\fIURI\fR
+.RS 4
+Work only with the repository specified by the alias, name, number, or URI\&. This option can be used multiple times\&.
+.RE
+.PP
+\fB\-t\fR, \fB\-\-type\fR \fItype\fR
+.RS 4
+Type of package (default: package)\&. See section
+\fBPackage Types\fR
+for list of available package types\&.
 
-.TP
-.B install-new-recommends (inr) [options]
-Install newly added packages recommended by already installed ones.
-This can typically be used to install language packages recently added
-to repositories or drivers for newly added hardware.
+Since
+\fBpatches\fR
+are not installed in sense of copying files or recording a database entry, they cannot be uninstalled, even though zypper shows them as installed\&. The installed status is determined solely based on the installed status of its required dependencies\&. If these dependencies are satisfied, the patch is rendered installed\&.
+.RE
+.PP
+\fB\-n\fR, \fB\-\-name\fR
+.RS 4
+Select packages by their name (default)\&.
+.RE
+.PP
+\fB\-C\fR, \fB\-\-capability\fR
+.RS 4
+Select packages by capabilities\&.
+.RE
+.PP
+\fB\-\-debug\-solver\fR
+.RS 4
+Create solver test case for debugging\&. See the install command for details\&.
+.RE
+.PP
+\fB\-R\fR, \fB\-\-no\-force\-resolution\fR
+.RS 4
+Do not force the solver to find a solution\&. Instead, report dependency problem and prompt the user to resolve it manually\&.
+.RE
+.PP
+\fB\-\-force\-resolution\fR
+.RS 4
+Force the solver to find a solution, even if it would mean removing all packages with unfulfilled requirements\&.
 
-.TP
-\fI\-r, \-\-repo\fR <alias|name|#|URI>
-Work only with the repository specified by the alias, name, number, or URI. This
-option can be used multiple times.
-.TP
-.I \-D, \-\-dry-run
-Test the installation, do not actually install anything.
-.TP
-.I \ \ \ \ \-\-details
-Show the detailed installation summary.
-.TP
-.I \ \ \ \ \-\-debug\-solver
-Create solver test case for debugging. See the install command for details.
-.TP
-This command also accepts the download-and-install mode options described
-in the \fBinstall\fR command description.
+The default behavior is
+\fIforce\fR
+in the
+\fIinteractive mode\fR
+and
+\fIno\-force\fR
+in the
+\fInon\-interactive mode\fR\&. If this option is specified, it takes the preference\&.
+.RE
+.PP
+\fB\-u\fR, \fB\-\-clean\-deps\fR
+.RS 4
+Automatically remove dependencies which become unneeded after removal of requested packages\&.
+.RE
+.PP
+\fB\-U\fR, \fB\-\-no\-clean\-deps\fR
+.RS 4
+No automatic removal of unneeded dependencies\&.
+.RE
+.PP
+\fB\-D\fR, \fB\-\-dry\-run\fR
+.RS 4
+Test the removal of packages, do not actually remove anything\&. This option will add the
+\fB\-\-test\fR
+option to the rpm commands run by the remove command\&.
+.RE
+.PP
+\fB\-\-details\fR
+.RS 4
+Show the detailed installation summary\&.
+.RE
+.RE
+.SS "Update Management Commands"
+.PP
+\fBlist\-updates\fR (\fBlu\fR) [\fIoptions\fR]
+.RS 4
+List available updates\&.
 
-.TP
-.B remove (rm) [options] <name> ...
-.TP
-.B remove (rm) [options] --capability <capability> ...
-Remove (uninstall) packages.
+This command will list only installable updates, i\&.e\&. updates which have no dependency problems, or which do not change package vendor\&. This list is what the
+\fBupdate\fR
+command will propose to install\&. To list all packages for which newer version are available, use
+\fB\-\-all\fR
+option\&.
+.PP
+\fB\-t\fR, \fB\-\-type\fR \fItype\fR
+.RS 4
+Type of package (default: package)\&. See section
+\fBPackage Types\fR
+for list of available package types\&.
 
-The packages can be selected by their name or by a capability they provide.
-For details on package selection see the \fBinstall\fR command description.
+If
+\fBpatch\fR
+is specified, zypper acts as if the
+\fBlist\-patches\fR
+command was executed\&.
+.RE
+.PP
+\fB\-r\fR, \fB\-\-repo\fR \fIalias\fR|\fIname\fR|\fI#\fR|\fIURI\fR
+.RS 4
+Work only with the repository specified by the alias, name, number, or URI\&. This option can be used multiple times\&.
+.RE
+.PP
+\fB\-a\fR, \fB\-\-all\fR
+.RS 4
+List all packages for which newer versions are available, regardless whether they are installable or not\&.
+.RE
+.PP
+\fB\-\-best\-effort\fR
+.RS 4
+See the
+\fBupdate\fR
+command for description\&.
+.RE
+.RE
+.PP
+\fBupdate\fR (\fBup\fR) [\fIoptions\fR] [\fIpackagename\fR]\&...
+.RS 4
+Update installed packages with newer versions, where possible\&.
 
-.TP
-\fI\-r, \-\-repo\fR <alias|name|#|URI>
-Work only with the repository specified by the alias, name, number, or URI. This
-option can be used multiple times.
-.TP
-\fI\-t, -\-type\fR <type>
-Type of package (default: package). See section \fBPackage Types\fR for list
-of available package types.
+This command will not update packages which would require change of package vendor unless the vendor is specified in
+\fB/etc/zypp/vendors\&.d\fR, or which would require manual resolution of problems with dependencies\&. Such non\-installable updates will then be listed in separate section of the summary as "\fIThe following package updates will NOT be installed:\fR"\&.
 
-Since \fBpatches\fR are not installed in sense of copying files or recording
-a database entry, they cannot be uninstalled, even though zypper shows
-them as installed. The installed status is determined solely based on
-the installed status of its required dependencies. If these dependencies
-are satisified, the patch is rendered installed.
+To update individual packages, specify one or more package names\&. You can use the
+\fB*\fR
+and
+\fB?\fR
+wildcard characters in the package names to specify multiple packages matching the pattern\&.
+.PP
+\fB\-t\fR, \fB\-\-type\fR \fItype\fR
+.RS 4
+Type of package (default: package)\&. See section
+\fBPackage Types\fR
+for list of available package types\&.
 
-Uninstallation of \fBpatterns\fR is currently not implemented.
-.TP
-.I \-n, \-\-name
-Select packages by their name (default).
-.TP
-.I \-C, \-\-capability
-Select packages by capabilities.
-.TP
-.I      \-\-debug\-solver
-Create solver test case for debugging. See the install command for details.
-.TP
-.I \-R, \-\-no\-force\-resolution
-Do not force the solver to find a solution. Instead, report
-dependency problem and prompt the user to resolve it manually.
-.TP
-.I \ \ \ \ \-\-force\-resolution
-Force the solver to find a solution, even if it would
-mean removing all packages with unfulfilled requirements.
+If
+\fBpatch\fR
+is specified, zypper acts as if the
+\fBpatches\fR
+command was executed\&.
+.RE
+.PP
+\fB\-r\fR, \fB\-\-repo\fR \fIalias\fR|\fIname\fR|\fI#\fR|\fIURI\fR
+.RS 4
+Work only with the repository specified by the alias, name, number, or URI\&. This option can be used multiple times\&.
+.RE
+.PP
+\fB\-\-skip\-interactive\fR
+.RS 4
+This will skip interactive patches, that is, those that need reboot, contain a message, or update a package whose license needs to be confirmed\&.
+.RE
+.PP
+\fB\-\-with\-interactive\fR
+.RS 4
+Avoid skipping of interactive patches when in non\-interactive mode\&.
+.RE
+.PP
+\fB\-l\fR, \fB\-\-auto\-agree\-with\-licenses\fR
+.RS 4
+Automatically say
+\fIyes\fR
+to third party license confirmation prompt\&. By using this option, you choose to agree with licenses of all third\-party software this command will install\&. This option is particularly useful for administrators installing the same set of packages on multiple machines (by an automated process) and have the licenses confirmed before\&.
+.RE
+.PP
+\fB\-\-debug\-solver\fR
+.RS 4
+Create solver test case for debugging\&. See the install command for details\&.
+.RE
+.PP
+\fB\-\-no\-recommends\fR
+.RS 4
+By default, zypper installs also packages recommended by the requested ones\&. This option causes the recommended packages to be ignored and only the required ones to be installed\&.
+.RE
+.PP
+\fB\-\-replacefiles\fR
+.RS 4
+Install the packages even if they replace files from other, already installed, packages\&. Default is to treat file conflicts as an error\&.
+\fB\-\-download\-as\-needed\fR
+disables the fileconflict check because access to all packages filelists is needed in advance in order to perform the check\&.
+.RE
+.PP
+\fB\-R\fR, \fB\-\-no\-force\-resolution\fR
+.RS 4
+Do not force the solver to find a solution\&. Instead, report dependency problem and prompt the user to resolve it manually\&.
+.RE
+.PP
+\fB\-\-force\-resolution\fR
+.RS 4
+Force the solver to find a solution, even if it would mean removing all packages with unfulfilled requirements\&.
 
-The default behavior is 'force' in the interactive mode and 'no-force' in the
-non-interactive mode. If this option is specified, it takes the preference.
-.TP
-.I \-u, \-\-clean\-deps
-Automatically remove dependencies which become unneeded after removal
-of requested packages.
-.TP
-.I \-U, \-\-no\-clean\-deps
-No automatic removal of unneeded dependencies.
-.TP
-.I \-D, \-\-dry\-run
-Test the removal of packages, do not actually remove anything. This option will
-add the \-\-test option to the rpm commands run by the remove command.
-.TP
-.I \ \ \ \ \-\-details
-Show the detailed installation summary.
+The default behavior is
+\fIno\-force\fR\&. If this option is specified, it takes the preference\&.
+.RE
+.PP
+\fB\-D\fR, \fB\-\-dry\-run\fR
+.RS 4
+Test the update, do not actually install or update any package\&. This option will add the
+\fB\-\-test\fR
+option to the rpm commands run by the update command\&.
+.RE
+.PP
+\fB\-\-details\fR
+.RS 4
+Show the detailed installation summary\&.
+.RE
+.PP
+\fB\-\-best\-effort\fR
+.RS 4
+Do a
+\fIbest effort\fR
+approach to update\&. This method does not explicitly select packages with best version and architecture, but instead requests installation of a package with higher version than the installed one and leaves the rest on the dependency solver\&. This method is always used for packages, and is optional for products and patterns\&. It is not applicable to patches\&.
+.RE
+.PP
+This command also accepts the download\-and\-install mode options described in the \fBinstall\fR command description\&.
+.RS 4
+.RE
+.RE
+.PP
+\fBlist\-patches\fR (\fBlp\fR) [\fIoptions\fR]
+.RS 4
+List all available needed patches\&.
 
+This command is similar to
+\fBzypper list\-updates \-t patch\fR\&.
 
-.SS Update Management Commands
-
-
-.TP
-.B list-updates (lu) [options]
-List available updates.
-
-This command will list only installable updates, i.e. updates which have
-no dependency problems, or which do not change package vendor. This list
-is what the \fBupdate\fR command will propose to install. To list
-all packages for which newer version are available, use \fI\-\-all\fR option.
-
-.TP
-\fI\-t, --type\fR <type>
-Type of package (default: package). See section \fBPackage Types\fR for list
-of available package types.
-
-If \fIpatch\fR is specified, zypper acts as if the \fBlist-patches\fR command
-was executed.
-.TP
-\fI\-r, \-\-repo\fR <alias|name|#|URI>
-Work only with the repository specified by the alias, name, number, or URI. This
-option can be used multiple times.
-.TP
-.I \-a, \-\-all
-List all packages for which newer versions are available, regardles whether
-they are installable or not.
-.TP
-.I \ \ \ \ \-\-best\-effort
-See the \fBupdate\fR command for description.
-
-
-.TP
-.B update (up) [options] [packagename] ...
-Update installed packages with newer versions, where possible.
-
-This command will not update packages which would require change of package
-vendor unless the vendor is specified in /etc/zypp/vendors.d, or which would
-require manual resolution of problems with dependencies. Such non-installable
-updates will then be listed in separate section of the summary as
-"The following package updates will NOT be installed:".
-
-To update individual packages, specify one or more package names. You can
-use the '*' and '?' wildcard characters in the package names to specify
-multiple packages matching the pattern.
-
-.TP
-\fI\-t, -\-type\fR <type>
-Type of package (default: package). See section \fBPackage Types\fR for list
-of available package types.
-
-If \fIpatch\fR is specified, zypper acts as if the \fBpatche\fR command
-was executed.
-.TP
-\fI\-r, \-\-repo\fR <alias|name|#|URI>
-Work only with the repository specified by the alias, name, number, or URI. This
-option can be used multiple times.
-.TP
-.I \ \ \ \ \-\-skip\-interactive
-This will skip interactive patches, that is, those that need reboot,
-contain a message, or update a package whose license needs to be
-confirmed.
-.TP
-.I \ \ \ \ \-\-with\-interactive
-Avoid skipping of interactive patches when in non-interactive mode.
-.TP
-.I \-l, \-\-auto\-agree\-with\-licenses
-Automatically say 'yes' to third party license confirmation prompt. By using this option, you choose to agree with licenses of all third-party software this command will install. This option is particularly useful for administators installing the same set of packages on multiple machines (by an automated process) and have the licenses confirmed before.
-.TP
-.I \ \ \ \ \-\-debug\-solver
-Create solver test case for debugging. See the install command for details.
-.TP
-.I \ \ \ \ \-\-no\-recommends
-By default, zypper installs also packages recommended by the requested ones.
-This option causes the recomended packages to be ignored and only the
-required ones to be installed.
-.TP
-.I \ \ \ \ \-\-replacefiles
-Install the packages even if they replace files from other, already installed, packages. Default is to treat file conflicts as an error. \fI--download-as-needed\fR disables the fileconflict check because access to all packages filelists is needed in advance in order to perform the check.
-.TP
-.I \-R, \-\-no\-force\-resolution
-Do not force the solver to find a solution. Instead, report
-dependency problem and prompt the user to resolve it manually.
-.TP
-.I \ \ \ \ \-\-force\-resolution
-Force the solver to find a solution, even if it would
-mean removing all packages with unfulfilled requirements.
-
-The default behavior is 'no-force'. If this option is specified, it takes the preference.
-.TP
-.I \-D, \-\-dry\-run
-Test the update, do not actually install or update any package. This option will
-add the \-\-test option to the rpm commands run by the update command.
-.TP
-.I \ \ \ \ \-\-details
-Show the detailed installation summary.
-.TP
-.I \ \ \ \ \-\-best\-effort
-Do a 'best effort' approach to update. This method does not explicitly select
-packages with best version and architecture, but instead requests installation
-of a package with higher version than the installed one and leaves the rest
-on the dependency solver. This method is always used for packages, and is
-optional for products and patterns. It is not applicable to patches.
-.TP
-This command also accepts the download-and-install mode options described
-in the \fBinstall\fR command description.
-
-
-.TP
-.B list-patches (lp) [options]
-List all available needed patches.
-
-This command is similar to 'zypper list-updates -t patch'.
-
-Note that since the arguments of some of the following options are not
-required, they must be specified using '=' instead of a space.
-
-.TP
-\fI\-b, \-\-bugzilla\fR[=#]
-List available needed patches for all Bugzilla issues, or issues whose
-number matches the given string.
-.TP
-\fI \ \ \ \ \-\-cve\fR[=#]
-List available needed patches for all CVE issues, or issues whose number
-matches the given string.
-.TP
-\fI\-g, \-\-category\fR <category>
-List available patches in the specified category.
-.TP
-\fI \ \ \ \ \-\-issues\fR[=string]
+Note that
+\fIoptional arguments\fR
+of some of the following options must be specified using
+\fB=\fR
+instead of a space\&.
+.PP
+\fB\-b\fR, \fB\-\-bugzilla\fR[\fB=\fR\fI#\fR]
+.RS 4
+List available needed patches for all Bugzilla issues, or issues whose number matches the given string\&.
+.RE
+.PP
+\fB\-\-cve\fR[\fB=\fR\fI#\fR]
+.RS 4
+List available needed patches for all CVE issues, or issues whose number matches the given string\&.
+.RE
+.PP
+\fB\-g\fR, \fB\-\-category\fR \fIcategory\fR
+.RS 4
+List available patches in the specified category\&.
+.RE
+.PP
+\fB\-\-issues\fR[\fB=\fR\fIstring\fR]
+.RS 4
 Look for issues whose number, summary, or description matches the specified
-string. Issues found by number are displayed separately from those found
-by descriptions. In the latter case, use \fBzypper patch-info <patchname>\fR
-to get information about issues the patch fixes.
-.TP
-.I \-a, \-\-all
-By default, only patches that are relevant and needed on your system are listed.
-This option causes all available released patches to be listed. This option can
-be combined with all the rest of the \fBlist-updates\fR command options.
-.TP
-\fI\-r, \-\-repo\fR <alias|name|#|URI>
-Work only with the repository specified by the alias, name, number, or URI. This
-option can be used multiple times.
-
-.TP
-.B patch-check (pchk)
-Check for patches. Displays a count of applicable patches and how many
-of them have the security category.
+\fIstring\fR\&. Issues found by number are displayed separately from those found by descriptions\&. In the latter case, use
+\fI\fBzypper patch\-info\fR\fR\fI patchname\fR
+to get information about issues the patch fixes\&.
+.RE
 .PP
-See also the EXIT CODES section for details on exit status of 0, 100, and 101
-returned by this command.
-.TP
-.I \-r, \-\-repo <alias|name|#|URI>
-Check for patches only in the repository specified by the alias, name, number, or URI.
-This option can be used multiple times.
+\fB\-a\fR, *\-\-all
+.RS 4
+By default, only patches that are relevant and needed on your system are listed\&. This option causes all available released patches to be listed\&. This option can be combined with all the rest of the
+\fBlist\-updates\fR
+command options\&.
+.RE
+.PP
+\fB\-r\fR, \fB\-\-repo\fR \fIalias\fR|\fIname\fR|\fI#\fR|\fIURI\fR
+.RS 4
+Work only with the repository specified by the alias, name, number, or URI\&. This option can be used multiple times\&.
+.RE
+.RE
+.PP
+\fBpatch\-check\fR (\fBpchk\fR)
+.RS 4
+Check for patches\&. Displays a count of applicable patches and how many of them have the security category\&.
 
-.TP
-.B patch [options]
-Install all available needed patches.
+See also the
+\fBEXIT CODES\fR
+section for details on exit status of
+\fB0\fR,
+\fB100\fR, and
+\fB101\fR
+returned by this command\&.
+.PP
+\fB\-r\fR, \fB\-\-repo\fR \fIalias\fR|\fIname\fR|\fI#\fR|\fIURI\fR
+.RS 4
+Check for patches only in the repository specified by the alias, name, number, or URI\&. This option can be used multiple times\&.
+.RE
+.RE
+.PP
+\fBpatch\fR [\fIoptions\fR]
+.RS 4
+Install all available needed patches\&.
 
-If there are patches that affect the package management itself, those will
-be installed first and you will be asked to run the \fBpatch\fR command again.
+If there are patches that affect the package management itself, those will be installed first and you will be asked to run the
+\fBpatch\fR
+command again\&.
 
-This command is similar to 'zypper update -t patch'.
+This command is similar to
+\fBzypper update \-t patch\fR\&.
+.PP
+\fB\-b\fR, \fB\-\-bugzilla\fR \fI#\fR
+.RS 4
+Install patch fixing a Bugzilla issue specified by number\&. Use
+\fBlist\-patches \-\-bugzilla\fR
+command to get a list of available needed patches for specific issues\&.
+.RE
+.PP
+\fB\-\-cve\fR \fI#\fR
+.RS 4
+Install patch fixing a MITRE\(cqs CVE issue specified by number\&. Use
+\fBlist\-patches \-\-cve\fR
+command to get a list of available needed patches for specific issues\&.
+.RE
+.PP
+\fB\-g\fR, \fB\-\-category\fR \fIcategory\fR
+.RS 4
+Install all patches in the specified category\&. Use
+\fBlist\-patches \-\-category\fR
+command to get a list of available patches for a specific category\&.
+.RE
+.PP
+\fB\-r\fR, \fB\-\-repo\fR \fIalias\fR|\fIname\fR|\fI#\fR|\fIURI\fR
+.RS 4
+Work only with the repository specified by the alias, name, number, or URI\&. This option can be used multiple times\&.
+.RE
+.PP
+\fB\-\-skip\-interactive\fR
+.RS 4
+Skip interactive patches\&.
+.RE
+.PP
+\fB\-\-with\-interactive\fR
+.RS 4
+Avoid skipping of interactive patches when in non\-interactive mode\&.
+.RE
+.PP
+\fB\-l\fR, \fB\-\-auto\-agree\-with\-licenses\fR
+.RS 4
+See the
+\fBupdate\fR
+command for description of this option\&.
+.RE
+.PP
+\fB\-\-no\-recommends\fR
+.RS 4
+By default, zypper installs also packages recommended by the requested ones\&. This option causes the recommended packages to be ignored and only the required ones to be installed\&.
+.RE
+.PP
+\fB\-\-replacefiles\fR
+.RS 4
+Install the packages even if they replace files from other, already installed, packages\&. Default is to treat file conflicts as an error\&.
+\fB\-\-download\-as\-needed\fR
+disables the fileconflict check because access to all packages filelists is needed in advance in order to perform the check\&.
+.RE
+.PP
+\fB\-\-debug\-solver\fR
+.RS 4
+Create test case for debugging of dependency resolver\&.
+.RE
+.PP
+\fB\-D\fR, \fB\-\-dry\-run\fR
+.RS 4
+Test the update, do not actually update\&.
+.RE
+.PP
+\fB\-\-details\fR
+.RS 4
+Show the detailed installation summary\&.
+.RE
+.PP
+This command also accepts the \fBdownload\-and\-install\fR mode options described in the \fBinstall\fR command description\&.
+.RS 4
+.RE
+.RE
+.PP
+\fBdist\-upgrade\fR (\fBdup\fR) [\fIoptions\fR]
+.RS 4
+Perform a distribution upgrade\&. This command applies the state of (specified) repositories onto the system; upgrades (or even downgrades) installed packages to versions found in repositories, removes packages that are no longer in the repositories and pose a dependency problem for the upgrade, handles package splits and renames, etc\&.
 
-.TP
-\fI\-b, \-\-bugzilla\fR <#>
-Install patch fixing a Bugzilla issue specified by number. Use
-\fBlist-patches --bugzilla\fR command to get a list of available
-needed patches for specific issues.
-.TP
-\fI \ \ \ \ \-\-cve\fR <#>
-Install patch fixing a MITRE's CVE issue specified by number. Use
-\fBlist-patches --cve\fR command to get a list of available
-needed patches for specific issues.
-.TP
-\fI\-g, \-\-category\fR <category>
-Install all patches in the specified category. Use
-\fBlist-patches --category\fR command to get a list of available
-patches for a specific category.
-.TP
-\fI\-r, \-\-repo\fR <alias|name|#|URI>
-Work only with the repository specified by the alias, name, number, or URI. This
-option can be used multiple times.
-.TP
-.I \ \ \ \ \-\-skip\-interactive
-Skip interactive patches.
-.TP
-.I \ \ \ \ \-\-with\-interactive
-Avoid skipping of  interactive patches when in non-interactive mode.
-.TP
-.I \-l, \-\-auto\-agree\-with\-licenses
-See the \fBupdate\fR command for description of this option.
-.TP
-.I \ \ \ \ \-\-no\-recommends
-By default, zypper installs also packages recommended by the requested ones.
-This option causes the recomended packages to be ignored and only the
-required ones to be installed.
-.TP
-.I \ \ \ \ \-\-replacefiles
-Install the packages even if they replace files from other, already installed, packages. Default is to treat file conflicts as an error. \fI--download-as-needed\fR disables the fileconflict check because access to all packages filelists is needed in advance in order to perform the check.
-.TP
-.I \ \ \ \ \-\-debug\-solver
-Create test case for debugging of dependency resolver.
-.TP
-.I \-D, \-\-dry\-run
-Test the update, do not actually update.
-.TP
-This command also accepts the download-and-install mode options described
-in the \fBinstall\fR command description.
-.TP
-.I \ \ \ \ \-\-details
-Show the detailed installation summary.
+If no repositories are specified via
+\fB\-\-from\fR
+(or \-\-repo) options, zypper will do the upgrade with all defined repositories\&. This can be a problem if the system contains conflicting repositories, like repositories for two different distribution releases\&. This often happens if one forgets to remove an older release repository after adding a new one, say openSUSE 11\&.1 and openSUSE 11\&.2\&.
 
+To avoid the above trouble, you can specify the repositories from which to do the upgrade using the
+\fB\-\-from\fR
+(or \-\-repo) options\&. Using
+\fI\-\-repo is discouraged\fR
+as it currently hides unmentioned repositories from the resolver, leading to inexpertly decisions\&. In the future \-\-repo will become an alias for
+\fB\-\-from\fR\&.
 
-.TP
-.B dist-upgrade (dup) [options]
-Perform a distribution upgrade. This command applies the state of (specified)
-repositories onto the system; upgrades (or even downgrades) installed packages
-to versions found in repositories, removes packages that are no longer in the
-repositories and pose a dependency problem for the upgrade, handles package
-splits and renames, etc.
+Note: distribution upgrades in openSUSE are currently only supported between consecutive releases\&. To upgrade multiple releases, upgrade each consecutive release one at a time\&. For more details see
+\fBhttp://en\&.opensuse\&.org/SDB:System_upgrade\fR
+and the
+\fIopenSUSE release notes\fR
+at
+\fBhttp://doc\&.opensuse\&.org/release\-notes/\fR\&.
+.PP
+\fB\-\-from\fR \fIalias\fR|\fIname\fR|\fI#\fR|\fIURI\fR
+.RS 4
+Restricts the upgrade to the specified repositories (the option can be used multiple times) only, but can satisfy dependencies also from the rest of enabled repositories\&.
+.RE
+.PP
+\-r, \-\-repo alias|name|#|URI
+.RS 4
+Work only with the repository specified by the alias, name, number, or URI\&.
 
-If no repositories are specified via --from or --repo options, zypper
-will do the upgrade with all defined repositories. This can be a problem
-if the system contains conflicting repositories, like repositories
-for two different distribution releases. This often happens if one
-forgets to remove an older release repository after adding a new one, say
-openSUSE 11.1 and openSUSE 11.2.
-
-To avoid the above trouble, you can specify the repositories from
-which to do the upgrade using the --from or --repo options.
-The difference between these two is that when --repo is used, zypper
-uses only the specified repositories, while with --from
-zypper can also use the rest of the enabled repositories to
-satisfy package dependencies.
-
-Note: distribution upgrades in openSUSE are currently only supported between
-consecutive releases. To upgrade multiple releases, upgrade each consecutive
-release one at a time. For more details see http://en.opensuse.org/SDB:System_upgrade
-and the openSUSE release notes at http://doc.opensuse.org/release-notes/.
-
-.TP
-\fI\ \ \ \ \-\-from\fR <alias|name|#|URI>
-Restricts the upgrade to the specified repositories (the option can be used
-multiple times) only, but can satisfy dependencies also from the rest
-of enabled repositories.
-.TP
-\fI\-r, \-\-repo\fR <alias|name|#|URI>
-Work only with the repository specified by the alias, name, number, or URI. This
-option can be used multiple times.
-.TP
-.I \-l, \-\-auto\-agree\-with\-licenses
-Automatically say 'yes' to third party license confirmation prompt. By using this option, you choose to agree with licenses of all third-party software this command will install. This option is particularly useful for administators installing the same set of packages on multiple machines (by an automated process) and have the licenses confirmed before.
-.TP
-.I \ \ \ \ \-\-no\-recommends
-By default, zypper installs also packages recommended by the requested ones.
-This option causes the recomended packages to be ignored and only the
-required ones to be installed.
-.TP
-.I \ \ \ \ \-\-replacefiles
-Install the packages even if they replace files from other, already installed, packages. Default is to treat file conflicts as an error. \fI--download-as-needed\fR disables the fileconflict check because access to all packages filelists is needed in advance in order to perform the check.
-.TP
-.I \ \ \ \ \-\-debug\-solver
-Create solver test case for debugging. See the install command for details.
-.TP
-.I \-D, \-\-dry\-run
-Test the upgrade, do not actually install or update any package. This option will
-add the \-\-test option to the rpm commands run by the dist-upgrade command.
-.TP
-This command also accepts the download-and-install mode options described
-in the \fBinstall\fR command description.
-.TP
-.I \ \ \ \ \-\-details
-Show the detailed installation summary.
-.TP
+Using \-\-repo is
+\fIdiscouraged\fR
+as it currently hides unmentioned repositories from the resolver, leading to inexpertly decisions\&. In the future \-\-repo will become an alias for
+\fB\-\-from\fR\&.
+.RE
+.PP
+\fB\-l\fR, \fB\-\-auto\-agree\-with\-licenses\fR
+.RS 4
+Automatically say
+\fIyes\fR
+to third party license confirmation prompt\&. By using this option, you choose to agree with licenses of all third\-party software this command will install\&. This option is particularly useful for administrators installing the same set of packages on multiple machines (by an automated process) and have the licenses confirmed before\&.
+.RE
+.PP
+\fB\-\-no\-recommends\fR
+.RS 4
+By default, zypper installs also packages recommended by the requested ones\&. This option causes the recommended packages to be ignored and only the required ones to be installed\&.
+.RE
+.PP
+\fB\-\-replacefiles\fR
+.RS 4
+Install the packages even if they replace files from other, already installed, packages\&. Default is to treat file conflicts as an error\&.
+\fB\-\-download\-as\-needed\fR
+disables the fileconflict check because access to all packages filelists is needed in advance in order to perform the check\&.
+.RE
+.PP
+\fB\-\-debug\-solver\fR
+.RS 4
+Create solver test case for debugging\&. See the install command for details\&.
+.RE
+.PP
+\fB\-D\fR, \fB\-\-dry\-run\fR
+.RS 4
+Test the upgrade, do not actually install or update any package\&. This option will add the
+\fB\-\-test\fR
+option to the rpm commands run by the dist\-upgrade command\&.
+.RE
+.PP
+\fB\-\-details\fR
+.RS 4
+Show the detailed installation summary\&.
+.RE
+.PP
+This command also accepts the download\-and\-install mode options described in the \fBinstall\fR command description\&.
+.RS 4
+.RE
+.PP
 Examples:
+.RS 4
+.PP
+$ \fBzypper dup \-\-from factory \-\-from packman\fR
+.RS 4
+Upgrade the system to the lates versions provided by the
+\fIfactory\fR
+and
+\fIpackman\fR
+repositories\&.
+.RE
+.RE
+.RE
+.SS "Query Commands"
+.PP
+\fBsearch\fR (\fBse\fR) [\fIoptions\fR] [\fIquerystring\fR|\fIcapability\fR]\&...
+.RS 4
+Search for packages matching any of the given search strings\&.
+\fB*\fR
+and
+\fI\fB?\fR\fR\fI wildcard\fR
+characters can be used within search strings\&. If the search string is enclosed in
+\fB/\fR
+(e\&.g\&.
+\fB/^k\&.*e$/\fR) it\(cqs interpreted as a
+\fIregular expression\fR\&. See the
+\fBinstall\fR
+command for details about how to specify a
+\fIcapability\fR\&.
 
-Upgrade the system using 'factory' and 'packman' repository:
-.br
-.B $ zypper install zypper libzypp
-.br
-.B $ zypper dup --from factory --from packman
+Results of the search are printed in a table\&. with columns
+\fBS\fRtatus,
+\fBName\fR,
+\fBType\fR
+of package,
+\fBVersion\fR,
+\fBArch\fRitecture
+and
+\fBRepository\fR\&. The
+\fBS\fRtatus
+column can contain the following values:
+.TS
+tab(:);
+lt lt
+lt lt
+lt lt.
+T{
+\fBi\fR
+T}:T{
+installed
+T}
+T{
+\fBv\fR
+T}:T{
+a different version is installed
+T}
+T{
+\fIempty\fR
+T}:T{
+neither of the former cases
+T}
+.TE
+.sp 1
+The
+\fBv\fR
+status is only shown if the version or the repository matters (see
+\fB\-\-details\fR
+or
+\fB\-\-repo\fR), and the installed version differs from the one listed or is from a repository other than specified\&.
 
-.SS Query Commands
-
-
-.TP
-\fBsearch\fR (\fBse\fR) [\fIoptions\fR] [\fBquerystring|capability\fR] ...
-Search for packages matching any of the given strings. * (any substring) and ?
-(any character) wildcards can also be used within search strings.
-If the search string is enclosed in '/', for example
-.B $ zypper se '/^k.*e$/',
-it's interpreted as a regular expression.
-It's also possible to specify a capability like "NAME[.ARCH][OP<EDITION>]", where ARCH
-is an architecture code, OP is <, <=, =, >=, or > and EDITION is VERSION[-RELEASE].
-Also quote here to protect the special characters from the shell, for example:
-.B $ zypper se 'libgcc>4.6'.
-
-Results of search are printed in a table with following columns:
-S (status), Name, Type (type of package), Version,
-Arch (architecture), Repository. The status column can contain the following
-values: i - installed, v - another version installed,
-or an empty space for neither of the former cases.
-
-The 'v' status is only shown if the version or the repository
-matters (\fI\-\-details\fR or \fI\-\-repo\fR is used), and the installed
-version differs from the one listed or is from a repository other
-than specified.
-
-.IP
 This command accepts the following options:
-
-.TP
-\fI    \-\-match\-substrings\fR
-Matches for search strings may be partial words (default).
-.TP
-\fI    \-\-match\-words\fR
-Matches for search strings may only be whole words.
-.TP
-\fI    \-\-match-exact\fR
-Searches for an exact name of the package.
-.TP
-\fI    \-\-provides
-Search for packages which provide the search strings. A search string here might be also
-any symbol provided by a package like /bin/vi, libcurl.so.3, perl(Time::ParseDate),
-web_browser, e.g. search for the package which provides the shell:
-.B zypper se --provides /bin/sh
-.TP
-\fI    \-\-requires
-Search for packages which require the search strings. A search string here might be also
-any symbol required by a package, e.g. all packages which require the snapper library:
-.B zypper se --requires libsnapper.so
-.TP
-\fI    \-\-recommends
-Search for packages which recommend the search strings, e.g.
-.B zypper se --recommends usb_modeswitch
-.TP
-\fI    \-\-suggests
-Search for packages which suggest the search strings, e.g.
-.B zypper se --suggests acroread
-.TP
-\fI    \-\-conflicts
-Search for packages conflicting with the search strings, e.g.
-.B zypper se --conflicts aspell-hi
-.TP
-\fI    \-\-obsoletes
-Search for packages wich obsolete the search strings, e.g.
-.B zypper se --obsoletes efence
-.TP
-.I \-n, \-\-name
-Useful together with dependency options, otherwise searching in package name is default.
-.TP
-.I \-f, \-\-file\-list
-Search in file list of packages.
-.TP
-.I \-d, \-\-search\-descriptions
-Search also in summaries and descriptions.
-.TP
-.I \-C, \-\-case\-sensitive
-Perform case-sensitive search.
-.TP
-.I \-i, \-\-installed\-only
-Show only packages that are already installed.
-.TP
-.I \-u, \-\-uninstalled\-only
-Show only packages that are not currently installed.
-.TP
-.I \-t, -\-type <type>
-Search only for packages of specified type. See section \fBPackage Types\fR for list
-of available package types. Multiple \-t option are allowed.
-
-See also the type-specific query commands like \fBpackages\fR, \fBpatterns\fR, etc.
-.TP
-\fI\-r, \-\-repo\fR <alias|name|#|URI>
-Work only with the repository specified by the alias, name, number, or URI. This
-option can be used multiple times.
-.TP
-.I \ \ \ \ \-\-sort\-by\-name
-Sort packages by name (default).
-.TP
-.I \ \ \ \ \-\-sort\-by\-repo
-Sort packages by repository, not by name.
-.TP
-.I \-s, \-\-details
-Show all available versions of found packages, each version in each repository
-on a separate line.
-.TP
-.I \-v, \-\-verbose
-Like --details with additional information where the search has matched (useful when searching
-for dependencies, e.g. --provides).
-.TP
-Examples:
-
-Search for YaST packages (quote the string to prevent the shell
-from expanding the wildcard):
-.br
-.B $ zypper se 'yast*'
-
-Show all available versions of package 'kernel-default':
-.br
-.B $ zypper se -s --match-exact kernel-default
-
-Look for RSI acronym (case-sensitively), also in summaries and descriptions:
-.br
-.B $ zypper se -dC --match-words RSI
-
-
-.TP
-.B packages (pa) [options] [repository] ...
-List all available packages or all packages from specified repositories
-(similar to \fBzypper search -s -t package\fR).
-Also allows the options \fI\-\-orphaned\fR, \fI\-\-suggested\fR, \fI\-\-recommended\fR
-and \fI\-\-unneeded\fR to get corresponding lists of packages.
-.TP
-.I \-r, \-\-repo <alias|name|#|URI>
-Just another means to specify repositories.
-.TP
-.I \-i, \-\-installed\-only
-Show only installed packages.
-.TP
-.I \-u, \-\-uninstalled\-only
-Show only packages which are not installed.
-.TP
-.I \-\-orphaned
-Show packages which are orphaned (without repository).
-.TP
-.I \-\-suggested
-Show packages which are suggested.
-.TP
-.I \-\-recommended
-Show packages which are recommeded.
-.TP
-.I \-\-unneeded
-Show packages which are unneeded.
-
-.TP
-.B patches (pch) [options] [repository] ...
-List all available patches from specified repositories, including those not
-needed. Similar to \fBzypper search -s -t patch\fR.
-.TP
-\fI\-r, \-\-repo\fR <alias|name|#|URI>
-Just another means to specify repositories.
-
-.TP
-.B patterns (pt) [options] [repository] ...
-List all available patterns or all patterns from specified repositories.
-Similar to \fBzypper search -s -t pattern\fR.
-.TP
-.I \-r, \-\-repo <alias|name|#|URI>
-Just another means to specify repositories.
-.TP
-.I \-i, \-\-installed\-only
-Show only installed patterns.
-.TP
-.I \-u, \-\-uninstalled\-only
-Show only patterns which are not installed.
-
-.TP
-.B products (pd) [options] [repository] ...
-List all available products or all products from specified repositories.
-Similar to \fBzypper search -s -t product\fR, but shows also the type of the product
-(base, add-on).
-.TP
-.I \-r, \-\-repo <alias|name|#|URI>
-Just another means to specify repositories.
-.TP
-.I \-i, \-\-installed\-only
-Show only installed products.
-.TP
-.I \-u, \-\-uninstalled\-only
-Show only products which are not installed.
-
-.TP
-.B what-provides (wp) <capability>
-List all packages providing the specified capability. See also the \fBinstall\fR command for hint about capabilities.
-.br
-\fBwhat-provides\fR is replaced by the \fBsearch\fR command, which now has the functionality
-to search for dependencies (and allows various options).
-.br
-The command line is automatically transformed to the appropriate \fBsearch\fR, e.g.:
-.br
-.B $ zypper what-provides 'zypper>1.6'
-to
-.B $ zypper se --provides --match-exact 'zypper>1.6'
-
-.SS Repository Management
 .PP
-Zypper is able to work with YaST, RPM-MD (yum) software repositories, and
-plain directories containing .rpm files.
+\fB\-\-match\-substrings\fR
+.RS 4
+Matches for search strings may be partial words (default)\&.
+.RE
+.PP
+\fB\-\-match\-words\fR
+.RS 4
+Matches for search strings may only be whole words\&.
+.RE
+.PP
+\fB\-\-match\-exact\fR
+.RS 4
+Searches for an exact name of the package\&.
+.RE
+.PP
+\fB\-\-provides\fR
+.RS 4
+Search for packages which provide the search strings\&.
+.RE
+.PP
+\fB\-\-requires\fR
+.RS 4
+Search for packages which require the search strings\&.
+.RE
+.PP
+\fB\-\-recommends\fR
+.RS 4
+Search for packages which recommend the search strings\&.
+.RE
+.PP
+\fB\-\-suggests\fR
+.RS 4
+Search for packages which suggest the search strings\&.
+.RE
+.PP
+\fB\-\-conflicts\fR
+.RS 4
+Search for packages conflicting with the search strings\&.
+.RE
+.PP
+\fB\-\-obsoletes\fR
+.RS 4
+Search for packages which obsolete the search strings\&.
+.RE
+.PP
+\fB\-n\fR, \fB\-\-name\fR
+.RS 4
+Useful together with dependency options, otherwise searching in package name is default\&.
+.RE
+.PP
+\fB\-f\fR, \fB\-\-file\-list\fR
+.RS 4
+Search in file list of packages\&.
+.RE
+.PP
+\fB\-d\fR, \fB\-\-search\-descriptions\fR
+.RS 4
+Search also in summaries and descriptions\&.
+.RE
+.PP
+\fB\-C\fR, \fB\-\-case\-sensitive\fR
+.RS 4
+Perform case\-sensitive search\&.
+.RE
+.PP
+\fB\-i\fR, \fB\-\-installed\-only\fR
+.RS 4
+Show only packages that are already installed\&.
+.RE
+.PP
+\fB\-u\fR, \fB\-\-uninstalled\-only\fR
+.RS 4
+Show only packages that are not currently installed\&.
+.RE
+.PP
+\fB\-t\fR, \fB\-\-type\fR \fItype\fR
+.RS 4
+Search only for packages of specified type\&. See section
+\fBPackage Types\fR
+for list of available package types\&. Multiple
+\fB\-\-type\fR
+options are allowed\&.
 
-Repositories are primarily identified using their \fIURI\fR or \fIalias\fR.
-Alias serves as a shorthand for the long URI or name of the repository.
-The \fIname\fR of the repository should briefly describe the repository and
-is shown to the user in tables and messages. The name is not required, and
-if not known, the alias is shown instead. The alias is required and
-uniquely identifies the repository on the system.
-
-The \fIalias\fR, \fIname\fR, \fIURI\fR, or the \fInumber\fR from \fBzypper repos\fR list can be used to
-specify a repository as an argument of various zypper commands and
-options like \fBrefresh\fR, \fB--repo\fR, or \fB--from\fR.
-
-.TP
+See also the type\-specific query commands like
+\fBpackages\fR,
+\fBpatterns\fR, etc\&.
+.RE
+.PP
+\fB\-r\fR, \fB\-\-repo\fR \fIalias\fR|\fIname\fR|\fI#\fR|\fIURI\fR
+.RS 4
+Work only with the repository specified by the alias, name, number, or URI\&. This option can be used multiple times\&.
+.RE
+.PP
+\fB\-\-sort\-by\-name\fR
+.RS 4
+Sort packages by name (default)\&.
+.RE
+.PP
+\fB\-\-sort\-by\-repo\fR
+.RS 4
+Sort packages by repository, not by name\&.
+.RE
+.PP
+\fB\-s\fR, \fB\-\-details\fR
+.RS 4
+Show all available versions of mayching packages, each version in each repository on a separate line\&.
+.RE
+.PP
+\fB\-v\fR, \fB\-\-verbose\fR
+.RS 4
+Like
+\fB\-\-details\fR
+with additional information where the search has matched (useful when searching for dependencies, e\&.g\&.
+\fB\-\-provides\fR)\&.
+.RE
+.PP
+Examples:
+.RS 4
+.PP
+$ \fBzypper se \*(Aqyast*\*(Aq\fR
+.RS 4
+Search for YaST packages (quote the string to prevent the shell from expanding the wildcard)\&.
+.RE
+.PP
+$ \fBzypper se \-s \-\-match\-exact kernel\-default\fR
+.RS 4
+Show all available versions of package kernel\-default
+.RE
+.PP
+$ \fBzypper se \-dC \-\-match\-words RSI\fR
+.RS 4
+Look for RSI acronym (case\-sensitively), also in summaries and descriptions\&.
+.RE
+.RE
+.RE
+.PP
+\fBpackages\fR (\fBpa\fR) [\fIoptions\fR] [\fIrepository\fR]\&...
+.RS 4
+List all available packages or all packages from specified repositories\&. Similar to
+\fBzypper search \-s \-t package\fR\&.
+.PP
+\fB\-r\fR, \fB\-\-repo\fR \fIalias\fR|\fIname\fR|\fI#\fR|\fIURI\fR
+.RS 4
+Just another means to specify repositories\&.
+.RE
+.PP
+\fB\-i\fR, \fB\-\-installed\-only\fR
+.RS 4
+Show only installed packages\&.
+.RE
+.PP
+\fB\-u\fR, \fB\-\-uninstalled\-only\fR
+.RS 4
+Show only packages which are not installed\&.
+.RE
+.PP
+\fB\-\-orphaned\fR
+.RS 4
+Show packages which are orphaned (without repository)\&.
+.RE
+.PP
+\fB\-\-suggested\fR
+.RS 4
+Show packages which are suggested\&.
+.RE
+.PP
+\fB\-\-recommended\fR
+.RS 4
+Show packages which are recommended\&.
+.RE
+.PP
+\fB\-\-unneeded\fR
+.RS 4
+Show packages which are unneeded\&.
+.RE
+.RE
+.PP
+\fBpatches\fR (\fBpch\fR) [\fIoptions\fR] [\fIrepository\fR]\&...
+.RS 4
+List all available patches from specified repositories, including those not needed\&. Similar to
+\fBzypper search \-s \-t patch\fR\&.
+.PP
+\fB\-r\fR, \fB\-\-repo\fR \fIalias\fR|name\*(Aq|\fI#\fR|\fIURI\fR
+.RS 4
+Just another means to specify repositories\&.
+.RE
+.RE
+.PP
+\fBpatterns\fR (\fBpt\fR) [\fIoptions\fR] [\fIrepository\fR]\&...
+.RS 4
+List all available patterns or all patterns from specified repositories\&. Similar to
+\fBzypper search \-s \-t pattern\fR\&.
+.PP
+\fB\-r\fR, \fB\-\-repo\fR \fIalias\fR|\fIname\fR|\fI#\fR|\fIURI\fR
+.RS 4
+Just another means to specify repositories\&.
+.RE
+.PP
+\fB\-i\fR, \fB\-\-installed\-only\fR
+.RS 4
+Show only installed patterns\&.
+.RE
+.PP
+\fB\-u\fR, \fB\-\-uninstalled\-only\fR
+.RS 4
+Show only patterns which are not installed\&.
+.RE
+.RE
+.PP
+\fBproducts\fR (\fBpd\fR) [\fIoptions\fR] [\fIrepository\fR]\&...
+.RS 4
+List all available products or all products from specified repositories\&. Similar to
+\fBzypper search \-s \-t product\fR, but shows also the type of the product (\fBbase\fR,
+\fBadd\-on\fR)\&.
+.PP
+\fB\-r\fR, \fB\-\-repo\fR \fI\*(Aqalias\fR|\fIname\fR|\fI#\fR|\fIURI\fR
+.RS 4
+Just another means to specify repositories\&.
+.RE
+.PP
+\fB\-i\fR, \fB\-\-installed\-only\fR
+.RS 4
+Show only installed products\&.
+.RE
+.PP
+\fB\-u\fR, \fB\-\-uninstalled\-only\fR
+.RS 4
+Show only products which are not installed\&.
+.RE
+.RE
+.PP
+\fBwhat\-provides\fR (\fBwp\fR) \fIcapability\fR
+.RS 4
+List all packages providing the specified capability\&. See also the
+\fBinstall\fR
+command for info about specifying
+\fIcapabilities\fR\&.
+.PP
+The command line is automatically transformed into the appropriate \fBsearch\fR command, e\&.g\&.:
+.RS 4
+.PP
+$ \fBzypper what\-provides \*(Aqzypper>1\&.6\*(Aq\fR
+.RS 4
+.RE
+.PP
+$ \fBzypper se \-\-provides \-\-match\-exact \*(Aqzypper>1\&.6\*(Aq\fR
+.RS 4
+.RE
+.RE
+.RE
+.SS "Repository Management"
+.sp
+Zypper is able to work with YaST, RPM\-MD (yum) software repositories, and plain directories containing \&.rpm files\&.
+.sp
+Repositories are primarily identified using their \fIURI\fR or \fIalias\fR\&. Alias serves as a shorthand for the long URI or name of the repository\&. The \fIname\fR of the repository should briefly describe the repository and is shown to the user in tables and messages\&. The name is not required, and if not known, the alias is shown instead\&. The alias is required and uniquely identifies the repository on the system\&.
+.sp
+The \fIalias\fR, \fIname\fR, \fIURI\fR, or the \fInumber\fR from \fBzypper repos\fR list can be used to specify a repository as an argument of various zypper commands and options like \fBrefresh\fR, \fB\-\-repo\fR, or \fB\-\-from\fR\&.
+.PP
 Supported URI formats:
-
-.B \fIscheme\fB: \fR[\fB//\fR[\fIuser\fR[\fB:\fIpassword\fR]\fB@\fR]\fIhost\fR[\fB:\fIport\fR]] \fB/\fIpath \fR[\fB?\fIquery\fR][\fB#\fIfragment\fR]
-.br
-Special characters occuring in URI components (like a '\fB@\fR' in a password) must be %-encoded ('\fB%40\fR').
-
-.TP
-CD or DVD drive
-Optionally with \fIdevices\fR list for probing.
-
-.B cd:///
-.br
-.B dvd:/subdir\fI?devices=/dev/sr0,/dev/sr1
-
-.TP
-FTP/HTTP/HTTPS directory tree
-The ftp URL scheme supports absolute and relative paths to the default ftp server directory (RFC1738, Section 3.2.2). To use an absolute path, you have to prepend the path with an additional slash, what results in a "/%2f" combination (second "/" encoded to "%2f") at the begin of the URL path. This is important, especially in user authenticated ftp, where the users home is usually the default directory of the server (except when the server chroots into the users home directory).
-
-Explicit proxy settings may be passed via optional parameters \fIproxy\fR, \fIproxyport\fR, \fIproxyuser\fR and \fIproxypass\fR.
-
-HTTP authentication methods to use can be defined as comma separated list via optional parameter \fIauth\fR. Valid methods are e.g. 'basic', 'digest', 'ntlm', 'negotiate'. Note, that this list depends on the list of methods supported by the curl library.
-
-.br
-.B ftp://user:pass@server/path/to/media/dir
-.br
-.B ftp://user:pass@server/%2fhome/user/path/to/media/dir
-.br
-.B http://user:pass@server/path
-.br
-.B https://user:pass@server/path\fI?proxy=foo&proxyuser=me&proxypass=pw
-
-.TP
-Disk volume (partition)
-Mandatory \fBdevice\fR parameter specifying the name of the block device to mount. The name of the optional \fIfilesystem\fR defaults to "auto".
-
-.B hd:/subdir?device=/dev/sda1\fI&filesystem=reiserfs
-.TP
-Local directory tree
-
-.B dir:/directory/name
-.TP
-Media in an ISO image (loopback mounted)
-Mandatory \fBiso\fR parameter specifying the name of the iso file. Optional \fIurl\fR parameter specifying the URL to the directory containing the iso file. Optional \fImnt\fR parameter specifying the preferred attach point for the source media url. Optional \fIfilesystem\fR name of the filesystem used in the iso file. Defaults to "auto".
-
-.B iso:/?iso=CD1.iso\fI&url=nfs://server/path/to/media
-.br
-.B iso:/?iso=CD1.iso\fI&url=hd:/?device=/dev/hda
-.br
-.B iso:/subdir?iso=DVD1.iso\fI&url=nfs://nfs-server/directory&mnt=/nfs/attach/point&filesystem=udf
-
-.TP
-NFS exported directory tree
-To use NFSv4 either use schema \fItnfsv4://\fR or pass an optional parameter \fItype=nfs4\fR. Additional \fImountoptions\fR can be passed as comma separated list. Defaults to "ro".
-
-.B nfs://nfs-server/exported/path
-.br
-.B nfs://nfs-server/exported/path\fI?mountoptions=ro&type=nfs4
-.br
-.B nfs4://nfs-server/exported/path\fI?mountoptions=ro
-
-.TP
-CIFS/SMB directory tree
-There is no difference between cifs and smb scheme (any more). In both cases the \fIcifs\fR filesystem is used. Additional \fImountoptions\fR can be passed as comma separated list. Defaults to "ro,guest". Specify "noguest" to turn off "guest". This is necessary if Samba is configured to reject guest connections.
-
-Optional \fIworkgroup\fR or \fIdomain\fR parameter set the name of the workgroup. As alternative to passing \fIusername:password\fR in the URI authority the parameters \fIuser\fR and \fIpass\fR can be used.
-
-.B smb://servername/share/path/on/the/share
-.br
-.B cifs://usenr:passw@servername/share/path/on/the/share\fI?mountoptions=ro,noguest
-.br
-.B cifs://usern:passw@servername/share/path/on/the/share\fI?workgroup=mygroup
-.br
-.B cifs://servername/share/path/on/the/share\fI?user=usern&pass=passw
+.RS 4
 .PP
-Apart from the above, repositories have several other properties which can be
-set using the commands described in this section below, or by manually
-editing the repository definition files (.repo files, see section FILES).
+\fIscheme\fR\fB:\fR [\fB//\fR[\fIuser\fR[\fB:\fR\fIpassword\fR]\fI\fB@\fR\fR]\fIhost\fR[\fB:\fR\fIport\fR]] \fB/\fR\fIpath\fR [\fB?\fR\fIquery\fR] [\fB#\fR\fIfragment\fR]
+.RS 4
+Special characters occurring in URI components (like a
+\fI\fB@\fR\fR
+in a password) must be %\-encoded (\fI\fB%40\fR\fR)\&.
+.RE
+.PP
+CD or DVD drive
+.RS 4
+Optionally with
+\fIdevices\fR
+list for probing\&.
+.TS
+tab(:);
+lt lt
+lt lt.
+T{
 
-.TP
-.B addrepo (ar) [options] <URI> <alias>
-.TP
-.B addrepo (ar) [options] <FILE.repo>
+T}:T{
+\fBcd:///\fR
+T}
+T{
 
-Add a new repository specified by URI and assign specified alias to it or specify URI to a .repo file.
+T}:T{
+\fBdvd:/subdir\fR\fI?devices=/dev/sr0,/dev/sr1\fR
+T}
+.TE
+.sp 1
+.RE
+.PP
+FTP/HTTP/HTTPS directory tree
+.RS 4
+The ftp URL scheme supports absolute and relative paths to the default ftp server directory (RFC1738, Section 3\&.2\&.2)\&. To use an absolute path, you have to prepend the path with an additional slash, what results in a
+\fB/%2f\fR
+combination (second
+\fB/\fR
+encoded to
+\fB%2f\fR) at the begin of the URL path\&. This is important, especially in user authenticated ftp, where the users home is usually the default directory of the server (except when the server chroots into the users home directory)\&.
 
-Newly added repositories have auto-refresh disabled by default (except for repositories
-imported from a .repo, having the auto-refresh enabled). To enable auto-refresh, use the
-\fB\-\-refresh\fR option of the \fBmodifyrepo\fR command.
+Explicit proxy settings may be passed via optional parameters
+\fIproxy\fR,
+\fIproxyport\fR,
+\fIproxyuser\fR
+and
+\fIproxypass\fR\&.
 
-Also, this command does not automatically refresh the newly added repositories.
-The repositories will get refreshed when used for the first time, or you can use
-the \fBrefresh\fR command after finishing your modifications with \fB*repo\fR commands.
-See also METADATA REFRESH POLICY section for more details.
+HTTP authentication methods to use can be defined as comma separated list via optional parameter
+\fIauth\fR\&. Valid methods are e\&.g\&.
+\fIbasic\fR,
+\fIdigest\fR,
+\fIntlm\fR,
+\fInegotiate\fR\&. Note, that this list depends on the list of methods supported by the curl library\&.
+.TS
+tab(:);
+lt lt
+lt lt
+lt lt
+lt lt.
+T{
 
-.TP
-\fI\-r, \-\-repo\fR <file.repo>
-Read URI and alias from specified .repo file
-.TP
-\fI\-t, \-\-type\fR <type>
-Type of repository (yast2, rpm-md, or plaindir). There are several aliases
-defined for these types:
-\fByast2\fR - susetags, yast, YaST, YaST2, YAST;
-\fBrpm-md\fR - repomd, rpmmd, yum, YUM;
-\fBplaindir\fR - Plaindir.
-.TP
-\fI\-d, \-\-disable\fR
-Add the repository as disabled. Repositories are added as enabled by default.
-.TP
-\fI\-c, \-\-check\fR
-Probe given URI.
-.TP
-\fI\-C, \-\-nocheck\fR
-Don't probe URI, probe later during refresh.
-.TP
-\fI\-n, \-\-name\fR
-Specify descriptive name for the repository.
-.TP
-\fI\-k, \-\-keep\-packages\fR
-Enable RPM files caching for the repository.
-.TP
-\fI\-K, \-\-no-keep-packages\fR
-Disable RPM files caching.
-.TP
-.I \-f, \-\-refresh
-Enable autorefresh of the repository. The autorefresh is disabled by default when adding
-new repositories.
-.TP
+T}:T{
+\fBftp://user:pass@server/path/to/media/dir\fR
+T}
+T{
+
+T}:T{
+\fBftp://user:pass@server/%2fhome/user/path/to/media/dir\fR
+T}
+T{
+
+T}:T{
+\fBhttp://user:pass@server/path\fR
+T}
+T{
+
+T}:T{
+\fBhttps://user:pass@server/path\fR\fI?proxy=foo&proxyuser=me&proxypass=pw\fR
+T}
+.TE
+.sp 1
+.RE
+.PP
+Disk volume (partition)
+.RS 4
+Mandatory
+\fBdevice\fR
+parameter specifying the name of the block device to mount\&. The name of the optional
+\fIfilesystem\fR
+defaults to "auto"\&.
+.PP
+.RS 4
+\fBhd:/subdir?device=/dev/sda1\fR\fI&filesystem=reiserfs\fR
+.RE
+.RE
+.PP
+Local directory tree
+.RS 4
+.PP
+.RS 4
+\fBdir:/directory/name\fR
+.RE
+.RE
+.PP
+Media in an ISO image (loopback mounted)
+.RS 4
+
+Mandatory
+\fBiso\fR
+parameter specifying the name of the iso file\&. Optional
+\fIurl\fR
+parameter specifying the URL to the directory containing the iso file\&. Optional
+\fImnt\fR
+parameter specifying the preferred attach point for the source media url\&. Optional
+\fIfilesystem\fR
+name of the filesystem used in the iso file\&. Defaults to "auto"\&.
+.TS
+tab(:);
+lt lt
+lt lt
+lt lt.
+T{
+
+T}:T{
+\fBiso:/?iso=CD1\&.iso\fR\fI&url=nfs://server/path/to/media\fR
+T}
+T{
+
+T}:T{
+\fBiso:/?iso=CD1\&.iso\fR\fI&url=hd:/?device=/dev/hda\fR
+T}
+T{
+
+T}:T{
+\fBiso:/subdir?iso=DVD1\&.iso\fR\fI&url=nfs://nfs\-server/directory&mnt=/nfs/attach/point&filesystem=udf\fR
+T}
+.TE
+.sp 1
+.RE
+.PP
+NFS exported directory tree
+.RS 4
+To use NFSv4 either use schema
+\fItnfsv4://\fR
+or pass an optional parameter
+\fItype=nfs4\fR\&. Additional
+\fImountoptions\fR
+can be passed as comma separated list\&. Defaults to "ro"\&.
+.TS
+tab(:);
+lt lt
+lt lt
+lt lt.
+T{
+
+T}:T{
+\fBnfs://nfs\-server/exported/path\fR
+T}
+T{
+
+T}:T{
+\fBnfs://nfs\-server/exported/path\fR\fI?mountoptions=ro&type=nfs4\fR
+T}
+T{
+
+T}:T{
+\fBnfs4://nfs\-server/exported/path\fR\fI?mountoptions=ro\fR
+T}
+.TE
+.sp 1
+.RE
+.PP
+CIFS/SMB directory tree
+.RS 4
+There is no difference between cifs and smb scheme (any more)\&. In both cases the
+\fIcifs\fR
+filesystem is used\&. Additional
+\fImountoptions\fR
+can be passed as comma separated list\&. Defaults to "ro,guest"\&. Specify "noguest" to turn off "guest"\&. This is necessary if Samba is configured to reject guest connections\&.
+
+Optional
+\fIworkgroup\fR
+or
+\fIdomain\fR
+parameter set the name of the workgroup\&. As alternative to passing
+\fIusername:password\fR
+in the URI authority the parameters
+\fIuser\fR
+and
+\fIpass\fR
+can be used\&.
+.TS
+tab(:);
+lt lt
+lt lt
+lt lt
+lt lt.
+T{
+
+T}:T{
+\fBsmb://servername/share/path/on/the/share\fR
+T}
+T{
+
+T}:T{
+\fBcifs://usenr:passw@servername/share/path/on/the/share\fR\fI?mountoptions=ro,noguest\fR
+T}
+T{
+
+T}:T{
+\fBcifs://usern:passw@servername/share/path/on/the/share\fR\fI?workgroup=mygroup\fR
+T}
+T{
+
+T}:T{
+\fBcifs://servername/share/path/on/the/share\fR\fI?user=usern&pass=passw\fR
+T}
+.TE
+.sp 1
+.RE
+.RE
+.sp
+Apart from the above, repositories have several other properties which can be set using the commands described in this section below, or by manually editing the repository definition files (\&.repo files, see section \fBFILES\fR)\&.
+.PP
+\fBaddrepo\fR (\fBar\fR) [\fIoptions\fR] \fIURI\fR \fIalias\fR
+.RS 4
+.RE
+.PP
+\fBaddrepo\fR (\fBar\fR) [\fIoptions\fR] \fIFILE\fR\fB\&.repo\fR
+.RS 4
+Add a new repository specified by URI and assign specified alias to it or specify URI to a \&.repo file\&.
+
+Newly added repositories have auto\-refresh disabled by default (except for repositories imported from a \&.repo, having the auto\-refresh enabled)\&. To enable auto\-refresh, use the
+\fB\-\-refresh\fR
+option of the
+\fBmodifyrepo\fR
+command\&.
+
+Also, this command does not automatically refresh the newly added repositories\&. The repositories will get refreshed when used for the first time, or you can use the
+\fBrefresh\fR
+command after finishing your modifications with
+\fB*repo\fR
+commands\&. See also
+\fBMETADATA REFRESH POLICY\fR
+section for more details\&.
+.PP
+\fB\-r\fR, \fB\-\-repo\fR \fIfile\fR\fB\&.repo\fR
+.RS 4
+Read URI and alias from specified \&.repo file
+.RE
+.PP
+\fB\-t\fR, \fB\-\-type\fR \fItype\fR
+.RS 4
+Type of repository (yast2, rpm\-md, or plaindir) in case the autodetection fails\&. There are several aliases defined for these types:
+.TS
+tab(:);
+lt lt
+lt lt
+lt lt.
+T{
+\fByast2\fR
+T}:T{
+susetags, yast, YaST, YaST2, YAST
+T}
+T{
+\fBrpm\-md\fR
+T}:T{
+repomd, rpmmd, yum, YUM
+T}
+T{
+\fBplaindir\fR
+T}:T{
+Plaindir
+T}
+.TE
+.sp 1
+.RE
+.PP
+\fB\-d\fR, \fB\-\-disable\fR
+.RS 4
+Add the repository as disabled\&. Repositories are added as enabled by default\&.
+.RE
+.PP
+\fB\-c\fR, \fB\-\-check\fR
+.RS 4
+Probe given URI\&.
+.RE
+.PP
+\fB\-C\fR, \fB\-\-nocheck\fR
+.RS 4
+Don\(cqt probe URI, probe later during refresh\&.
+.RE
+.PP
+\fB\-n\fR, \fB\-\-name\fR
+.RS 4
+Specify descriptive name for the repository\&.
+.RE
+.PP
+\fB\-k\fR, \fB\-\-keep\-packages\fR
+.RS 4
+Enable RPM files caching for the repository\&.
+.RE
+.PP
+\fB\-K\fR, \fB\-\-no\-keep\-packages\fR
+.RS 4
+Disable RPM files caching\&.
+.RE
+.PP
+\fB\-f\fR, \fB\-\-refresh\fR
+.RS 4
+Enable autorefresh of the repository\&. The autorefresh is disabled by default when adding new repositories\&.
+.RE
+.PP
 Examples:
-
-Add an HTTP repository, probe it, name it 'Packman 11.1 repo', and use 'packman' as alias:
-.br
-.B $ zypper ar -c -n 'Packman 11.1 repo' http://packman.iu-bremen.de/suse/11.1 packman
-
-Add repositories from a repo file:
-.br
-.B $ zypper ar http://download.opensuse.org/repositories/zypp:/svn/openSUSE_Factory/zypp:svn.repo
-.br
-.B $ zypper ar myreposbackup.repo
-
-.TP
-.B removerepo (rr) [options] <alias|name|#|URI> ...
-Delete repositories specified by aliases, names, numbers or URIs.
-.TP
-.I --loose-auth
+.RS 4
+.PP
+$ \fBzypper ar \-c \-n \*(AqPackman 11\&.1 repo\*(Aq \fR\fBhttp://packman\&.iu\-bremen\&.de/suse/11\&.1\fR\fB packman\fR
+.RS 4
+Add a HTTP repository, probe it, name it
+\fIPackman 11\&.1 repo\fR, and use
+\fIpackman\fR
+as alias\&.
+.RE
+.PP
+$ \fBzypper ar \fR\fBhttp://download\&.opensuse\&.org/repositories/zypp:/svn/openSUSE_Factory/zypp:svn\&.repo\fR
+.RS 4
+.RE
+.PP
+$ \fBzypper ar myreposbackup\&.repo\fR
+.RS 4
+Add repositories from a \&.repo file\&.
+.RE
+.RE
+.RE
+.PP
+\fBremoverepo\fR (\fBrr\fR) [\fIoptions\fR] \fIalias\fR|\fIname\fR|\fI#\fR|\fIURI\fR\&...
+.RS 4
+Delete repositories specified by aliases, names, numbers or URIs\&.
+.PP
+\fB\-\-loose\-auth\fR
+.RS 4
 Ignore user authentication data in the URI
-.TP
-.I --loose-query
+.RE
+.PP
+\fB\-\-loose\-query\fR
+.RS 4
 Ignore query string in the URI
+.RE
+.RE
+.PP
+\fBrepos\fR (\fBlr\fR) [\fIoptions\fR] [\fIrepo\fR]\&...
+.RS 4
+List all defined repositories or show detailed information about those specified as arguments
 
-.TP
-.B repos (lr) [options] [repo] ...
-List all defined repositories or show detailed information about those
-specified as arguments
-.IP
 The following data can be printed for each repository found on the sytem:
-# (repository number), Alias (shorthand for Name), Name, Enabled (whether
-the repository is enabled), Refresh (whether auto-refresh is enabled for
-the repository), Priority, Type (repository meta-data type: rpm-md, yast2,
-plaindir). Which of the data is shown is determined by command line
-options listed below and the main.repoListColumns setting from zypper.conf.
-By default, #, Alias, Name, Enabled, and Refresh is shown.
+\fI#\fR
+(repository number),
+\fIAlias\fR
+(unique identifier),
+\fIName\fR,
+\fIEnabled\fR
+(whether the repository is enabled),
+\fIRefresh\fR
+(whether auto\-refresh is enabled for the repository),
+\fIPriority\fR,
+\fIType\fR
+(repository meta\-data type: rpm\-md, yast2, plaindir)\&. Which of the data is shown is determined by command line options listed below and the main\&.repoListColumns setting from zypper\&.conf\&. By default, #, Alias, Name, Enabled, and Refresh is shown\&.
 
-Repository number is a unique identifier of the repository in current
-set of repositories. If you add, remove or change a repository, the numbers may
-change. Keep that in mind when using the numbers with the repository handling
-commands. On the other hand, using the alias instead of the number is always
-safe.
+Repository number is a unique identifier of the repository in current set of repositories\&. If you add, remove or change a repository, the numbers may change\&. Keep that in mind when using the numbers with the repository handling commands\&. On the other hand, using the alias instead of the number is always safe\&.
 
-To show detailed information about specific repositories, specify them
-as arguments, either by alias, name, number from simple \fBzypper lr\fR, or by
-URI; e.g. fB \fBzypper lr factory\fR, or \fBzypper lr 2\fR.
-
-.TP
-.I \-e, \-\-export <FILE.repo|->
-This option causes zypper to write repository definition of all defined
-repositories into a single file in repo file format.
-If '\-' is specified instead of a file name,
-the repositories will be written to the standard output.
-.TP
-.I \-a, \-\-alias
-Add alias column to the output.
-.TP
-.I \-n, \-\-name
-Add name column to the output.
-.TP
-.I \-u, \-\-uri
-Add base URI column to the output.
-.TP
-.I \-p, \-\-priority
-Add repository priority column to the output.
-.TP
-.I \-r, \-\-refresh
-Add the autorefresh column to the output.
-.TP
-.I \-d, \-\-details
-Show more information like URI, priority, type, etc.
-.TP
-.I \-E, \-\-show\-enabled\-only
-Show enabled repositories only.
-.TP
-.I \-U, \-\-sort\-by\-uri
-Add base URI column and sort the list it.
-.TP
-.I \-P, \-\-sort\-by\-priority
-Add repository priority column and sort the list by it.
-.TP
-.I \-A, \-\-sort\-by\-alias
-Sort the list by alias.
-.TP
-.I \-N, \-\-sort\-by\-name
-Sort the list by name.
-.TP
+To show detailed information about specific repositories, specify them as arguments, either by alias, name, number from simple
+\fBzypper lr\fR, or by URI; e\&.g\&. fB
+\fBzypper lr factory\fR, or
+\fBzypper lr 2\fR\&.
+.PP
+\fB\-e\fR, \fB\-\-export\fR \fIFILE\fR\fB\&.repo\fR|\fI\-\fR
+.RS 4
+This option causes zypper to write repository definition of all defined repositories into a single file in repo file format\&. If
+\fB\-\fR
+is specified instead of a file name, the repositories will be written to the standard output\&.
+.RE
+.PP
+\fB\-a\fR, \fB\-\-alias\fR
+.RS 4
+Add alias column to the output\&.
+.RE
+.PP
+\fB\-n\fR, \fB\-\-name\fR
+.RS 4
+Add name column to the output\&.
+.RE
+.PP
+\fB\-u\fR, \fB\-\-uri\fR
+.RS 4
+Add base URI column to the output\&.
+.RE
+.PP
+\fB\-p\fR, \fB\-\-priority\fR
+.RS 4
+Add repository priority column to the output\&.
+.RE
+.PP
+\fB\-r\fR, \fB\-\-refresh\fR
+.RS 4
+Add the autorefresh column to the output\&.
+.RE
+.PP
+\fB\-d\fR, \fB\-\-details\fR
+.RS 4
+Show more information like URI, priority, type, etc\&.
+.RE
+.PP
+\fB\-E\fR, \fB\-\-show\-enabled\-only\fR
+.RS 4
+Show enabled repositories only\&.
+.RE
+.PP
+\fB\-U\fR, \fB\-\-sort\-by\-uri\fR
+.RS 4
+Add base URI column and sort the list it\&.
+.RE
+.PP
+\fB\-P\fR, \fB\-\-sort\-by\-priority\fR
+.RS 4
+Add repository priority column and sort the list by it\&.
+.RE
+.PP
+\fB\-A\fR, \fB\-\-sort\-by\-alias\fR
+.RS 4
+Sort the list by alias\&.
+.RE
+.PP
+\fB\-N\fR, \fB\-\-sort\-by\-name\fR
+.RS 4
+Sort the list by name\&.
+.RE
+.PP
 Examples:
-
+.RS 4
+.PP
+$ \fBzypper repos \-e myreposbackup\&.repo\fR
+.RS 4
 Backup your repository setup:
-.br
-.B $ zypper repos -e myreposbackup.repo
-
+.RE
+.PP
+$ \fBzypper lr \-pu\fR
+.RS 4
 List repositories with their URIs and priorities:
-.br
-.B $ zypper lr -pu
-
-.TP
-.B renamerepo (nr) <alias|name|#|URI> <new-alias>
-Assign new alias to the repository specified by alias, name, number, or URI.
-.TP
-Example:
-
-Rename repository number 8 to 'myrepo' (useful if the repo has some
-dreadful alias which is not usable on the command line).
-.br
-.B $ zypper nr 8 myrepo
-
-.TP
-.B modifyrepo (mr) <options> <alias|name|#|URI> ...
-.TP
-.B modifyrepo (mr) <options> <--all|--remote|--local|--medium-type>
-Modify properties of repositories specified by alias, name, number, or URI or
-one of the aggregate options.
-.TP
-\fI\-e, \-\-enable\fR
-Enable the repository.
-.TP
-\fI\-d, \-\-disable\fR
-Disable the repository.
-.TP
-\fI\-r, \-\-refresh\fR
-Enable auto-refresh for the repository.
-.TP
-\fI\-R, \-\-no\-refresh\fR
-Disable auto-refresh for the repository.
-.TP
-.I \-p, \-\-priority <positive-integer>
-Set priority of the repository. Priority of 1 is the highest, the higher the
-number the lower the priority. Default priority is 99. Packages from
-repositories with higher priority will be preferred even in case there is
-a higher installable version available in the repository with a lower priority.
-.TP
-.I \-n, \-\-name
-Set a descriptive name for the repository.
-.TP
-.I \-k, \-\-keep\-packages
-Enable RPM files caching.
-.TP
-.I \-K, \-\-no\-keep\-packages
-Disable RPM files caching.
-.TP
-.I \-a, \-\-all
-Apply changes to all repositories.
-.TP
-.I \-l, \-\-local
-Apply changes to all local repositories.
-.TP
-.I \-t, \-\-remote
-Apply changes to all remote repositories (http/https/ftp).
-.TP
-.I \-m, \-\-medium\-type <type>
-Apply changes to repositories of specified type. The type corresponds to the
-repository URI scheme identifier like http, dvd, etc. You can find complete
-list of valid types at http://en.opensuse.org/openSUSE:Libzypp_URIs.
-.TP
+.RE
+.RE
+.RE
+.PP
+\fBrenamerepo\fR (\fBnr\fR) \fIalias\fR|\fIname\fR|\fI#\fR|\fIURI\fR \fInew\-alias\fR
+.RS 4
+Assign new alias to the repository specified by alias, name, number, or URI\&.
+.PP
 Examples:
+.RS 4
+.PP
+$ \fBzypper nr 8 myrepo\fR
+.RS 4
+Rename repository
+\fInumber 8\fR
+to
+\fBmyrepo\fR
+(useful if the repo has some dreadful alias which is not usable on the command line)\&.
+.RE
+.RE
+.RE
+.PP
+\fBmodifyrepo\fR (\fBmr\fR) \fIoptions\fR \fIalias\fR|\fIname\fR|\fI#\fR|\fIURI\fR\&...
+.RS 4
+.RE
+.PP
+\fBmodifyrepo\fR (\fBmr\fR) \fIoptions\fR \fB\-\-all\fR|\fB\-\-remote\fR|\fB\-\-local\fR|\fB\-\-medium\-type\fR
+.RS 4
+Modify properties of repositories specified by alias, name, number, or URI or one of the aggregate options\&.
+.PP
+\fB\-e\fR, \fB\-\-enable\fR
+.RS 4
+Enable the repository\&.
+.RE
+.PP
+\fB\-d\fR, \fB\-\-disable\fR
+.RS 4
+Disable the repository\&.
+.RE
+.PP
+\fB\-r\fR, \fB\-\-refresh\fR
+.RS 4
+Enable auto\-refresh for the repository\&.
+.RE
+.PP
+\fB\-R\fR, \fB\-\-no\-refresh\fR
+.RS 4
+Disable auto\-refresh for the repository\&.
+.RE
+.PP
+\fB\-p\fR, \fB\-\-priority\fR \fIpositive\-integer\fR
+.RS 4
+Set priority of the repository\&. Priority of 1 is the highest, the higher the number the lower the priority\&. Default priority is 99\&. Packages from repositories with higher priority will be preferred even in case there is a higher installable version available in the repository with a lower priority\&.
+.RE
+.PP
+\fB\-n\fR, \fB\-\-name\fR
+.RS 4
+Set a descriptive name for the repository\&.
+.RE
+.PP
+\fB\-k\fR, \fB\-\-keep\-packages\fR
+.RS 4
+Enable RPM files caching\&.
+.RE
+.PP
+\fB\-K\fR, \fB\-\-no\-keep\-packages\fR
+.RS 4
+Disable RPM files caching\&.
+.RE
+.PP
+\fB\-a\fR, \fB\-\-all\fR
+.RS 4
+Apply changes to all repositories\&.
+.RE
+.PP
+\fB\-l\fR, \fB\-\-local\fR
+.RS 4
+Apply changes to all local repositories\&.
+.RE
+.PP
+\fB\-t\fR, \fB\-\-remote\fR
+.RS 4
+Apply changes to all remote repositories (http/https/ftp)\&.
+.RE
+.PP
+\fB\-m\fR, \fB\-\-medium\-type\fR \fItype\fR
+.RS 4
+Apply changes to repositories of specified type\&. The type corresponds to the repository URI scheme identifier like http, dvd, etc\&. You can find complete list of valid types at
+http://en\&.opensuse\&.org/openSUSE:Libzypp_URIs\&.
+.RE
+.PP
+Examples:
+.RS 4
+.PP
+$ \fBzypper mr \-kt\fR
+.RS 4
+Enable keeping of packages for all remote repositories\&.
+.RE
+.PP
+$ \fBzypper mr \-er updates\fR
+.RS 4
+Enable repository
+\fIupdates\fR
+and switch on autorefresh for the repo\&.
+.RE
+.PP
+$ \fBzypper mr \-da\fR
+.RS 4
+Disable all repositories\&.
+.RE
+.RE
+.RE
+.PP
+\fBrefresh\fR (\fBref\fR) [\fIalias\fR|\fIname\fR|\fI#\fR|\fIURI\fR]\&...
+.RS 4
+Refresh repositories specified by their alias, name, number, or URI\&. If no repositories are specified, all enabled repositories will be refreshed\&.
 
-Enable keeping of packages for all remote repositories:
-.br
-.B $ zypper mr -kt
+See also
+\fBMETADATA REFRESH POLICY\fR
+section for more details\&.
+.PP
+\fB\-f\fR, \fB\-\-force\fR
+.RS 4
+Force a complete refresh of specified repositories\&. This option will cause both the download of raw metadata and parsing of the metadata to be forced even if everything indicates a refresh is not needed\&.
+.RE
+.PP
+\fB\-b\fR, \fB\-\-force\-build\fR
+.RS 4
+Force only reparsing of cached metadata and rebuilding of the database\&. Raw metadata download will not be forced\&.
+.RE
+.PP
+\fB\-d\fR, \fB\-\-force\-download\fR
+.RS 4
+Force only download of current copy of repository metadata\&. Parsing and rebuild of the database will not be forced\&.
+.RE
+.PP
+\fB\-B\fR, \fB\-\-build\-only\fR
+.RS 4
+Only parse the metadata and build the database, don\(cqt download raw metadata into the cache\&. This will enable you to repair damaged database from cached data without accessing network at all\&.
+.RE
+.PP
+\fB\-D\fR, \fB\-\-download\-only\fR
+.RS 4
+Only download the raw metadata, don\(cqt parse it or build the database\&.
+.RE
+.PP
+\fB\-s\fR, \fB\-\-services\fR
+.RS 4
+Refresh also services before refreshing repositories\&.
+.RE
+.RE
+.PP
+\fBclean\fR (\fBcc\fR) [\fIoptions\fR] [\fIalias\fR|\fIname\fR|\fI#\fR|\fIURI\fR]\&...
+.RS 4
+Clean the local caches for all known or specified repositories\&. By default, only caches of downloaded packages are cleaned\&.
+.PP
+\fB\-m\fR, \fB\-\-metadata\fR
+.RS 4
+Clean repository metadata cache instead of package cache\&.
+.RE
+.PP
+\fB\-M\fR, \fB\-\-raw\-metadata\fR
+.RS 4
+Clean repository raw metadata cache instead of package cache\&.
+.RE
+.PP
+\fB\-a\fR, \fB\-\-all\fR
+.RS 4
+Clean both repository metadata and package caches\&.
+.RE
+.RE
+.SS "Service Management"
+.sp
+The \fBservices\fR, \fBaddservice\fR, \fBremoveservice\fR, \fBmodifyservice\fR, and \fBrefresh\-services\fR commands serve for manipulating services\&. A service is specified by its URI and needs to have a unique alias defined (among both services and repositories)\&.
+.sp
+Standalone repositories (not belonging to any service) are treated like services, too\&. The \fBls\fR command will list them, \fBms\fR command will modify them, etc\&. Repository specific options, like \fB\-\-keep\-packages\fR are not available here, though\&. You can use repository handling commands to manipulate them\&.
+.PP
+\fBaddservice\fR (\fBas\fR) [\fIoptions\fR] \fIURI\fR \fIalias\fR
+.RS 4
+Adds a service specified by
+\fBURI\fR
+to the system\&. The
+\fIalias\fR
+must be unique and serves to identify the service\&.
 
-Enable repository 'updates' and switch on autorefresh for the repo:
-.br
-.B $ zypper mr -er updates
-
-Disable all repositories:
-.br
-.B $ zypper mr -da
-
-.TP
-.B refresh (ref) [alias|name|#|URI] ...
-Refresh repositories specified by their alias, name, number, or URI. If no repositories are specified, all enabled repositories will be refreshed.
-.IP
-See also METADATA REFRESH POLICY section for more details.
-.TP
-.I \-f, \-\-force
-Force a complete refresh of specified repositories. This option will cause both the download of raw metadata and parsing of the metadata to be forced even if everything indicates a refresh is not needed.
-.TP
-.I \-b, \-\-force\-build
-Force only reparsing of cached metadata and rebuilding of the database. Raw metadata download will not be forced.
-.TP
-.I \-d, \-\-force\-download
-Force only download of current copy of repository metadata. Parsing and rebuild of the database will not be forced.
-.TP
-.I \-B, \-\-build\-only
-Only parse the metadata and build the database, don't download raw metadata into the cache. This will enable you to repair damaged database from cached data without accessing network at all.
-.TP
-.I \-D, \-\-download\-only
-Only download the raw metadata, don't parse it or build the database.
-.TP
-.I \-s, \-\-services
-Refresh also services before refreshing repositories.
-
-.TP
-.B clean (cc) [options] [alias|name|#|URI] ...
-Clean the local caches for all known or specified repositories. By default,
- only caches of downloaded packages are cleaned.
-.TP
-.I \-m, \-\-metadata
-Clean repository metadata cache instead of package cache.
-.TP
-.I \-M, \-\-raw\-metadata
-Clean repository raw metadata cache instead of package cache.
-.TP
-.I \-a, \-\-all
-Clean both repository metadata and package caches.
-
-
-.SS Service Management
-
-The \fBservices\fR, \fBaddservice\fR, \fBremoveservice\fR, \fBmodifyservice\fR,
-and \fBrefresh-services\fR commands serve for manipulating services. A service
-is specified by its URI and needs to have a unique alias defined (among
-both services and repositories).
-
-Standalone repositories (not belonging to any service) are treated like
-services, too. The \fBls\fR command will list them, \fBms\fR command will modify
-them, etc. Repository specific options, like --keep-packages
-are not available here, though. You can use repository handling commands
-to manipulate them.
-
-
-.TP
-.B addservice (as) [options] <URI> <alias>
-Adds a service specified by \fBURI\fR to the system. The \fBalias\fR must be
-unique and serves to identify the service.
-
-Newly added services are not refereshed automatically. Use the
-\fBrefresh-services\fR command to refresh them. Zypper does not access the
-service URI when adding the service, so the type of the services is unknown
-until it is refreshed.
+Newly added services are not refreshed automatically\&. Use the
+\fBrefresh\-services\fR
+command to refresh them\&. Zypper does not access the service URI when adding the service, so the type of the services is unknown until it is refreshed\&.
 
 This command also allows to add also ordinary repositories when used with
---type option, where you specify the type of the repository. See the addrepo
-command for the list of supported repository types.
-
-.TP
-.I \-t, \-\-type <TYPE>
-Type of the service (possible values: ris). There are several aliases
-defined for this type:
-\fBris\fR - RIS, nu, NU
-.TP
-.I \-d, \-\-disable
-Add the service as disabled.
-.TP
-.I \-n, \-\-name
-Specify descriptive name for the service.
-
-.TP
-.B removeservice (rs) [options] <alias|name|#|URI> ...
-
-Remove specified repository index service from the sytem.
-
-Removing an RIS service will result in removing of all of its repositories.
-
-.TP
-.I \-\-loose\-auth
-Ignore user authentication data in the URI.
-.TP
-.I \-\-loose-query
-Ignore query string in the URI.
-
-.TP
-.B modifyservice (ms) <options> <alias|name|#|URI>
-.B modifyservice (ms) <options> <--all|--remote|--local|--medium-type>
-Modify properties of specified services.
-
-.TP
+\fB\-\-type\fR
+option, where you specify the type of the repository\&. See the addrepo command for the list of supported repository types\&.
+.PP
+\fB\-t\fR, \fB\-\-type\fR \fItype\fR
+.RS 4
+Type of the service (possible values:
+\fBris\fR) in case the autodetection fails\&. There are several aliases defined for this type:
+.TS
+tab(:);
+lt lt.
+T{
+\fBris\fR
+T}:T{
+RIS, nu, NU
+T}
+.TE
+.sp 1
+.RE
+.PP
+\fB\-d\fR, \fB\-\-disable\fR
+.RS 4
+Add the service as disabled\&.
+.RE
+.PP
+\fB\-n\fR, \fB\-\-name\fR
+.RS 4
+Specify descriptive name for the service\&.
+.RE
+.RE
+.PP
+\fBremoveservice\fR (\fBrs\fR) [\fIoptions\fR] \fIalias\fR|\fIname\fR|\fI#\fR|\fIURI\fR\&...
+.RS 4
+Remove specified service from the system\&. Removing a service will also remove of all of its repositories\&.
+.PP
+\fB\-\-loose\-auth\fR
+.RS 4
+Ignore user authentication data in the URI\&.
+.RE
+.PP
+\fB\-\-loose\-query\fR
+.RS 4
+Ignore query string in the URI\&.
+.RE
+.RE
+.PP
+\fBmodifyservice\fR (\fBms\fR) \fIoptions\fR \fIalias\fR|\fIname\fR|\fI#\fR|\fIURI\fR
+.RS 4
+.RE
+.PP
+\fBmodifyservice\fR (\fBms\fR) \fIoptions\fR \fB\-\-all\fR|\fB\-\-remote\fR|\fB\-\-local\fR|\fB\-\-medium\-type\fR
+.RS 4
+Modify properties of specified services\&.
+.PP
 Common Options
-These options are common to all types of services and repositories.
-.TP
-.I \-d, \-\-disable
-Disable the service (but don't remove it).
-.TP
-.I \-e, \-\-enable
-Enable a disabled service.
-.TP
-.I \-r, \-\-refresh
-Enable auto-refresh of the service.
-.TP
-.I \-R, \-\-no\-refresh
-Disable auto-refresh of the service.
-.TP
-.I \-n, \-\-name
-Set a descriptive name for the service.
-.TP
-.I \-a, \-\-all
-Apply changes to all services.
-.TP
-.I \-l, \-\-local
-Apply changes to all local services.
-.TP
-.I \-t, \-\-remote
-Apply changes to all remote services.
-.TP
-.I \-m, \-\-medium\-type <type>
-Apply changes to services of specified type.
-
-.TP
+.RS 4
+These options are common to all types of services and repositories\&.
+.RE
+.PP
+\fB\-d\fR, \fB\-\-disable\fR
+.RS 4
+Disable the service (but don\(cqt remove it)\&.
+.RE
+.PP
+\fB\-e\fR, \fB\-\-enable\fR
+.RS 4
+Enable a disabled service\&.
+.RE
+.PP
+\fB\-r\fR, \fB\-\-refresh\fR
+.RS 4
+Enable auto\-refresh of the service\&.
+.RE
+.PP
+\fB\-R\fR, \fB\-\-no\-refresh\fR
+.RS 4
+Disable auto\-refresh of the service\&.
+.RE
+.PP
+\fB\-n\fR, \fB\-\-name\fR
+.RS 4
+Set a descriptive name for the service\&.
+.RE
+.PP
+\fB\-a\fR, \fB\-\-all\fR
+.RS 4
+Apply changes to all services\&.
+.RE
+.PP
+\fB\-l\fR, \fB\-\-local\fR
+.RS 4
+Apply changes to all local services\&.
+.RE
+.PP
+\fB\-t\fR, \fB\-\-remote\fR
+.RS 4
+Apply changes to all remote services\&.
+.RE
+.PP
+\fB\-m\fR, \fB\-\-medium\-type\fR \fItype\fR
+.RS 4
+Apply changes to services of specified type\&.
+.RE
+.PP
 RIS Service Specific Options
-These options are ignored by services other than Repository Index Services.
+.RS 4
+These options are ignored by services other than Repository Index Services\&.
+.RE
+.PP
+\fB\-i\fR, \fB\-\-ar\-to\-enable\fR \fIalias\fR
+.RS 4
+Schedule an RIS service repository to be enabled at next service refresh\&.
+.RE
+.PP
+\fB\-I\fR, \fB\-\-ar\-to\-disable\fR \fIalias\fR
+.RS 4
+Schedule an RIS service repository to be disabled at next service refresh\&.
+.RE
+.PP
+\fB\-j\fR, \fB\-\-rr\-to\-enable\fR \fIalias\fR
+.RS 4
+Remove a RIS service repository to enable\&.
+.RE
+.PP
+\fB\-J\fR, \fB\-\-rr\-to\-disable\fR "alias\*(Aq
+.RS 4
+Remove a RIS service repository to disable\&.
+.RE
+.PP
+\fB\-k\fR, \fB\-\-cl\-to\-enable\fR
+.RS 4
+Clear the list of RIS repositories to enable\&.
+.RE
+.PP
+\fB\-K\fR, \fB\-\-cl\-to\-disable\fR
+.RS 4
+Clear the list of RIS repositories to disable\&.
+.RE
+.RE
+.PP
+\fBservices\fR (\fBls\fR) [\fIoptions\fR]
+.RS 4
+List services defined on the system\&.
+.PP
+\fB\-u\fR, \fB\-\-uri\fR
+.RS 4
+Show also base URI of repositories\&.
+.RE
+.PP
+\fB\-p\fR, \fB\-\-priority\fR
+.RS 4
+Show also repository priority\&.
+.RE
+.PP
+\fB\-d\fR, \fB\-\-details\fR
+.RS 4
+Show more information like URI, priority, type\&.
+.RE
+.PP
+\fB\-r\fR, \fB\-\-with\-repos\fR
+.RS 4
+Show also repositories belonging to the services\&.
+.RE
+.PP
+\fB\-P\fR, \fB\-\-sort\-by\-priority\fR
+.RS 4
+Sort the list by repository priority\&.
+.RE
+.PP
+\fB\-E\fR, \fB\-\-show\-enabled\-only\fR
+.RS 4
+Show enabled services only\&. If used together with
+\fB\-\-with\-repos\fR
+a disabled services owning (manually) enabled repositories are shown as well\&.
+.RE
+.PP
+\fB\-U\fR, \fB\-\-sort\-by\-uri\fR
+.RS 4
+Sort the list by URI\&.
+.RE
+.PP
+\fB\-N\fR, \fB\-\-sort\-by\-name\fR
+.RS 4
+Sort the list by name\&.
+.RE
+.RE
+.PP
+\fBrefresh\-services\fR (\fBrefs\fR) [\fIoptions\fR] \fIalias\fR|\fIname\fR|\fI#\fR|\fIURI\fR\&...
+.RS 4
+Refreshing a service means executing the service\(cqs special task\&.
 
-.TP
-.I \-i, --ar-to-enable <alias>
-Schedule an RIS service repository to be enabled at next service refresh.
-.TP
-.I \-I, --ar-to-disable <alias>
-Schedule an RIS service repository to be disabled at next service refresh.
-.TP
-.I \-j, --rr-to-enable <alias>
-Remove a RIS service repository to enable.
-.TP
-.I \-J, --rr-to-disable <alias>
-Remove a RIS service repository to disable.
-.TP
-.I \-k, --cl-to-enable
-Clear the list of RIS repositories to enable.
-.TP
-.I \-K, --cl-to-disable
-Clear the list of RIS repositories to disable.
+RIS services add, remove, or modify repositories on your system based on current content of the repository index\&. A differing enabled/disabled state caused by manually calling
+\fBmodify\-repo\fR
+on a service repository however will not be reverted unless the
+\fB\-\-restore\-status\fR
+option is used, or the repository index explicitly requests the change\&.
 
+Services only manage defined repositories, they do not refresh them\&. To refresh also repositories, use
+\fB\-\-with\-repos\fR
+option or the
+\fBrefresh\fR
+command\&.
+.PP
+\fB\-f\fR, \fB\-\-force\fR
+.RS 4
+Force a complete refresh of specified services\&. This option will cause both the download of raw metadata and parsing of the metadata to be forced even if everything indicates a refresh is not needed\&.
+.RE
+.PP
+\fB\-r\fR, \fB\-\-with\-repos\fR
+.RS 4
+Refresh also the service repositories\&.
+.RE
+.PP
+\fB\-R\fR, \fB\-\-restore\-status\fR
+.RS 4
+Also restore service repositories enabled/disabled state to the repository index default\&. Useful after you manually changed some service repositories enabled state\&.
+.RE
+.RE
+.SS "Package Locks Management"
+.sp
+Package locks serve the purpose of preventing changes to the set of installed packages on the system\&. The locks are stored in form of a \fIquery\fR in /etc/zypp/locks file (see also locks(5))\&. Packages matching this query are then forbidden to change their installed status; an installed package can\(cqt be removed, not installed package can\(cqt be installed\&. When requesting to install or remove such locked package, you will get a dependency problem dialog\&.
+.PP
+\fBlocks\fR (\fBll\fR)
+.RS 4
+List currently active package locks\&.
+.RE
+.PP
+\fBaddlock\fR (\fBal\fR) [\fIoptions\fR] \fIpackage\-name\fR\&...
+.RS 4
+Add a package lock\&. Specify packages to lock by exact name or by a glob pattern using
+\fB*\fR
+and
+\fI\fB?\fR\fR
+wildcard characters\&.
+.PP
+\fB\-r\fR, \fB\-\-repo\fR \fIalias\fR|\fIname\fR|\fI#\fR|\fIURI\fR
+.RS 4
+Restrict the lock to the specified repository\&.
+.RE
+.PP
+\fB\-t\fR, \fB\-\-type\fR \fItype\fR
+.RS 4
+Lock only packages of specified type (default: package)\&. See section
+\fBPackage Types\fR
+for list of available package types\&.
+.RE
+.RE
+.PP
+\fBremovelock\fR (\fBrl\fR) [\fIoptions\fR] \fIlock\-number\fR|\fIpackage\-name\fR\&...
+.RS 4
+Remove specified package lock\&. Specify the lock to remove by its number obtained with
+\fBzypper locks\fR
+or by the package name\&.
+.PP
+\fB\-r\fR, \fB\-\-repo\fR \fIalias\fR|\fIname\fR|\fI#\fR|\fIURI\fR
+.RS 4
+Restrict the lock to the specified repository\&.
+.RE
+.PP
+\fB\-t\fR, \fB\-\-type\fR \fItype\fR
+.RS 4
+Restrict the lock to packages of specified type (default: package)\&. See section
+\fBPackage Types\fR
+for list of available package types\&.
+.RE
+.RE
+.PP
+\fBcleanlocks\fR (\fBcl\fR)
+.RS 4
+Remove unused locks\&.
 
-.TP
-.B services (ls) [options]
-List services defined on the system.
+This command looks for locks that do not currently (with regard to repositories used) lock any package and for each such lock it asks user whether to remove it\&.
+.RE
+.SS "Other Commands"
+.PP
+\fBversioncmp\fR (\fBvcmp\fR) \fIversion1\fR \fIversion2\fR
+.RS 4
+Compare the versions supplied as arguments and tell whether version1 is older or newer than version2 or the two version strings match\&.
 
-.TP
-.I \-u, \-\-uri
-Show also base URI of repositories.
-.TP
-.I \-p, \-\-priority
-Show also repository priority.
-.TP
-.I \-d, \-\-details
-Show more information like URI, priority, type.
-.TP
-.I \-r, \-\-with\-repos
-Show also repositories belonging to the services.
-.TP
-.I \-P, \-\-sort\-by\-priority
-Sort the list by repository priority.
-.TP
-.I \-E, \-\-show\-enabled\-only
-Show enabled services only. If used together with \fI\-\-with\-repos\fR a disabled
-service owning (manually) enabled repositories is shown as well.
-.TP
-.I \-U, \-\-sort-by-uri
-Sort the list by URI.
-.TP
-.I \-N, \-\-sort\-by\-name
-Sort the list by name.
+The default output is in human\-friendly form\&. If
+\fB\-\-terse\fR
+global option is used, the result is an integer number, negative/positive if version1 is older/newer than version2, zero if they match\&.
+.PP
+\fB\-m\fR, \fB\-\-match\fR
+.RS 4
+Takes missing release number as any release\&.
+.PP
+For example:
+.RS 4
+.PP
+$ \fBzypper vcmp \-m 0\&.15\&.3 0\&.15\&.3\-2\fR
+.RS 4
+0\&.15\&.3
+\fImatches\fR
+0\&.15\&.3\-2
+.RE
+.PP
+$ \fBzypper vcmp 0\&.15\&.3 0\&.15\&.3\-2\fR
+.RS 4
+0\&.15\&.3
+\fIis older than\fR
+0\&.15\&.3\-2
+.RE
+.RE
+.RE
+.RE
+.PP
+\fBtargetos\fR (\fBtos\fR)
+.RS 4
+Shows the ID string of the target operating system\&. The string has a form of
+\fIdistroname\-architecture\fR\&. The string is determined by libzypp, the
+\fIdistroname\fR
+is read from (\fIcurrent\-rootdir\fR)\fB/etc/products\&.d/baseproduct\fR
+and the
+\fIarchitecture\fR
+is determined from
+\fBuname\fR
+and
+\fICPU flags\fR\&.
+.RE
+.PP
+\fBlicenses\fR
+.RS 4
+Prints a report about
+\fIlicenses\fR
+and \*(AqEULA\(cqs of installed packages to standard output\&.
 
-.TP
-.B refresh-services (refs) [options] <alias|name|#|URI> ...
-Refreshing a service means executing the service's special task.
+First, a list of all packages and their licenses and/or EULAs is shown\&. This is followed by a summary, including the total number of installed packages, the number of installed packages with EULAs that required a confirmation from the user\&. Since the EULAs are not stored on the system and can only be read from repository metadata, the summary includes also the number of installed packages that have their counterpart in repositories\&. The report ends with a list of all licenses uses by the installed packages\&.
 
-RIS services add, remove, or modify repositories on your system based on
-current content of the repository index. A differing enabled/disabled
-state caused by manually calling \fBmodify-repo\fR on a service repository
-however will not be reverted unless the \fI\-\-restore\-status\fR option is used,
-or the repository index explicitly requests the change.
+This command can be useful for companies redistributing a custom distribution (like appliances) to figure out what licenses they are bound by\&.
+.RE
+.PP
+\fBdownload\fR
+.RS 4
+Download rpms specified on the commandline to a local directory\&.
 
-Services only manage defined repositories, they do not refresh them. To refresh also
-repositories, use \fI\-\-with\-repos\fR option or the \fBrefresh\fR command.
+Per default packages are downloaded to the libzypp package cache (\fB/var/cache/zypp/packages\fR; for non\-root users
+\fB$XDG_CACHE_HOME/zypp/packages\fR), but this can be changed by using the global
+\fB\-\-pkg\-cache\-dir\fR
+option\&.
 
-.TP
-.I \-f, \-\-force
-Force a complete refresh of specified services. This option will cause both the download of raw metadata and parsing of the metadata to be forced even if everything indicates a refresh is not needed.
-.TP
-.I \-r, \-\-with\-repos
-Refresh also the service repositories.
-.TP
-.I \-R, \-\-restore\-status
-Also restore service repositories enabled/disabled state to the repository index default.
-Useful after you manually changed some service repositories enabled state.
-
-
-.SS Package Locks Management
-Package locks serve the purpose of preventing changes to the set of installed
-packages on the system. The locks are stored in form of a \fIquery\fR in
-/etc/zypp/locks file (see also locks(5)).
-Packages matching this query are then forbidden to change their installed
-status; an installed package can't be removed, not installed package can't be installed.
-When requesting to install or remove such locked package, you will get a dependency problem
-dialog.
-
-.TP
-.B locks (ll)
-List currently active package locks.
-
-.TP
-.B addlock (al) [options] <package-name> ...
-Add a package lock. Specify packages to lock by exact name or by a glob pattern using '*' and '?'
-wildcard characters.
-
-.TP
-.I \-r, \-\-repo <alias|name|#|URI>
-Restrict the lock to the specified repository.
-.TP
-.I \-t, \-\-type <type>
-Lock only packages of specified type (default: package).
-See section \fBPackage Types\fR for list
-of available package types.
-
-.TP
-.B removelock (rl) [options] <lock-number|package-name> ...
-Remove specified package lock. Specify the lock to remove by its number obtained with \fBzypper locks\fR
-or by the package name.
-
-.TP
-.I \-r, \-\-repo <alias|name|#|URI>
-Restrict the lock to the specified repository.
-.TP
-.I \-t, \-\-type <type>
-Restrict the lock to packages of specified type (default: package).
-See section \fBPackage Types\fR for list
-of available package types.
-
-
-.TP
-.B cleanlocks (cl)
-Remove unused locks.
-
-This command looks for locks that do not currently (with regard to
-repositories used) lock any package and for each such lock it asks user
-whether to remove it.
-
-
-.SS Other Commands
-
-.TP
-.B versioncmp (vcmp) <version1> <version2>
-Compare the versions supplied as arguments and tell whether version1 is older
-or newer than version2 or the two version strings match.
-
-The default output is in human-friendly form. If \fB--terse\fR global option
-is used, the result is an integer number, negative/positive if version1 is
-older/newer than version2, zero if they match.
-
-.TP
-.I \-m, \-\-match
-Takes missing release number as any release. For example
-.br
-$ zypper vcmp -m 0.15.3 0.15.3-2
-.br
-0.15.3 matches 0.15.3-2
-.br
-$ zypper vcmp 0.15.3 0.15.3-2
-.br
-0.15.3 is older than 0.15.3-2
-
-.TP
-.B targetos (tos)
-Shows the ID string of the target operating system. The string has a form of
-\fBdistroname-arch\fR. The string is determined by libzypp, the \fBdistroname\fR
-is read from <current-rootdir>/etc/products.d/baseproduct and the architecture
-is determined from uname and CPU flags.
-
-.TP
-.B licenses
-Prints a report about \fBlicenses\fR and \fBEULA\fRs of installed packages
-to standard output.
-
-First, a list of all packages and their licenses and/or EULAs is shown.
-This is followed by a summary, including the total number of installed
-packages, the number of installed
-packages with EULAs that required a confirmation from the user. Since the
-EULAs are not stored on the system and can only be read from repository
-metadata, the summary includes also the number of installed packages
-that have their counterpart in repositories. The report ends with a list
-of all licenses uses by the installed packages.
-
-This command can be useful for companies redistributiong a custom
-distribution (like appliances) to figure out what licenses they are bound by.
-
-.TP
-.B download
-Download rpms specified on the commandline to a local directory.
-
-Per default packages are downloaded to the libzypp package cache
-(/var/cache/zypp/packages; for non-root users $XDG_CACHE_HOME/zypp/packages),
-but this can be changed by using the global \fI--pkg-cache-dir\fR option.
-
-In XML output a \fB<download-result>\fR node is written for each
-package zypper tried to downlad. Upon success the local path is
-is found in \fBdownload-result/localpath@path\fR.
-
-.TP
-.I \-\-all-matches
-Download all versions matching the commandline arguments. Otherwise only the best version of
-each matching package is downloaded.
-
-.TP
-.I \-\-dry-run
-Don't download any package, just report what would be done.
-
-.TP
-.B source-download
-Download source rpms for all installed packages to a local directory.
-
-.TP
-.I \-d, \-\-directory <dir>
-Download all source rpms to this directory. Default is \fB/var/cache/zypper/source-download\fR.
-
-.TP
-.I \-\-delete
-Delete extraneous source rpms in the local directory. This is the default.
-
-.TP
-.I \-\-no-delete
-Do not delete extraneous source rpms.
-
-.TP
-.I \-\-status
-Don't download any source rpms, but show which source rpms are missing or extraneous.
-
-.TP
-.B ps
-After each upgrade or removal of packages, there may be running processes
-on the system which continue to use meanwhile deleted files. \fBzypper ps\fR
-lists all processes using deleted files, together with the corresponding files,
-and a service name hint, in case it's a known service. This gives a hint which
-services may need to be restarted after an update. Usually programs which continue
-to use deleted shared libraries.
-The list contains the following information:
-
-* PID\ \ \ \ \ \ ID of the process
-.br
-* PPID\ \ \ \ \ ID of the parent process
-.br
-* UID\ \ \ \ \ \ ID of the user running the process
-.br
-* Login\ \ \ \ login name of the user running the process
-.br
-* Command\ \ command used to execute the process
-.br
-* Service\ \ guessed name of the service. If an init script exists for this
- \ \ \ \ \ \ \ \ \ \ service, you can do "rcservicename restart" to restart it.
-.br
-* Files\ \ \ \ the list of the deleted files
-
-
+In XML output a
+\fB<download\-result>\fR
+node is written for each package zypper tried to downlad\&. Upon success the local path is is found in
+\fBdownload\-result/localpath@path\fR\&.
+.PP
+\fB\-\-all\-matches\fR
+.RS 4
+Download all versions matching the commandline arguments\&. Otherwise only the best version of each matching package is downloaded\&.
+.RE
+.PP
+\fB\-\-dry\-run\fR
+.RS 4
+Don\(cqt download any package, just report what would be done\&.
+.RE
+.RE
+.PP
+\fBsource\-download\fR
+.RS 4
+Download source rpms for all installed packages to a local directory\&.
+.PP
+\fB\-d\fR, \fB\-\-directory\fR \fIdir\fR
+.RS 4
+Download all source rpms to this directory\&. Default is
+\fB/var/cache/zypper/source\-download\fR\&.
+.RE
+.PP
+\fB\-\-delete\fR
+.RS 4
+Delete extraneous source rpms in the local directory\&. This is the default\&.
+.RE
+.PP
+\fB\-\-no\-delete\fR
+.RS 4
+Do not delete extraneous source rpms\&.
+.RE
+.PP
+\fB\-\-status\fR
+.RS 4
+Don\(cqt download any source rpms, but show which source rpms are missing or extraneous\&.
+.RE
+.RE
+.PP
+\fBps\fR
+.RS 4
+After each upgrade or removal of packages, there may be running processes on the system which continue to use meanwhile deleted files\&.
+\fBzypper ps\fR
+lists all processes using deleted files, together with the corresponding files, and a service name hint, in case it\(cqs a known service\&. This gives a hint which services may need to be restarted after an update\&. Usually programs which continue to use deleted shared libraries\&. The list contains the following information:
+.TS
+tab(:);
+lt lt
+lt lt
+lt lt
+lt lt
+lt lt
+lt lt
+lt lt.
+T{
+\fBPID\fR
+T}:T{
+ID of the process
+T}
+T{
+\fBPPID\fR
+T}:T{
+ID of the parent process
+T}
+T{
+\fBUID\fR
+T}:T{
+ID of the user running the process
+T}
+T{
+\fBLogin\fR
+T}:T{
+Login name of the user running the process
+T}
+T{
+\fBCommand\fR
+T}:T{
+Command used to execute the process
+T}
+T{
+\fBService\fR
+T}:T{
+Guessed name of the service\&. If an init script exists for this service, you can do "rcservicename restart" to restart it\&.
+T}
+T{
+\fBFiles\fR
+T}:T{
+The list of the deleted files
+T}
+.TE
+.sp 1
+.RE
 .SH "GLOBAL OPTIONS"
-
-.TP
-.I \-h, \-\-help
-Help. If a \fBcommand\fR is specified together with --help option, command specific help is displayed.
-.TP
-.I \-V, \-\-version
-Print zypper version number and exit.
-.TP
-.I \-c, \-\-config <file>
-Use specified zypper config file instead of the default files.
-Other command line options specified together with --config and having
-their counterpart in the config file are still prefered.
-The order of preference with --config is as follows:
-
-* Command line options
-.br
-* --config <file>
-
-[ /etc/zypp/zypp.conf ] (system-wide defaults for all libzypp based applications)
-
-See also FILES section for more information.
-.TP
-.I \-v, \-\-verbose
-Increase verbosity. For debugging output specify this option twice.
-.TP
-.I \-q, \-\-quiet
-Suppress normal output. Brief (esp. result notification) messages and error messages will still be printed, though. If used together with conflicting --verbose option, the --verbose option takes preference.
-.TP
-.I \-A, \-\-no\-abbrev
-Do not abbreviate text in tables. By default zypper will try to abbreviate
-texts in some columns so that the table fits the width of the screen. If you
-need to see the whole text, use this option.
-.TP
-.I \-t, \-\-terse
-Terse output for machine consumption.
-.TP
-.I \-s, \-\-table\-style
-Specifies table style to use. Table style is identified by an integer number. TODO
-.TP
-.I \-n, \-\-non\-interactive
-Switches to non-interactive mode. In this mode zypper doesn't ask user to type answers to various prompts, but uses default answers automatically. The behaviour of this option is somewhat different than that of options like '--yes', since zypper can answer different answers to different questions. The answers also depend on other options like '--no-gpg-checks'.
-.TP
-.I \-x, \-\-xmlout
-Switches to XML output. This option is useful for scripts or graphical frontends
-using zypper.
-.TP
-.I \-i, \-\-ignore\-unknown
-Ignore unknown packages. This option is useful for scripts.
-.TP
-.I \-D, \-\-reposd\-dir <dir>
-Use the specified directory to look for the repository definition (*.repo) files.
-The default value is /etc/zypp/repos.d.
-.TP
-.I \-C, \-\-cache\-dir <dir>
-Use an alternative root directory for all caches.
-The default value is /var/cache/zypp.
-.TP
-.I \ \ \ \ \-\-raw\-cache\-dir <dir>
-Use the specified directory for storing raw copies of repository metadata files.
-The default value is /var/cache/zypp/raw.
-.TP
-.I \ \ \ \ \-\-solv\-cache\-dir <dir>
-Use the specified directory to store the repository metadata cache database files (solv files).
-The default value is /var/cache/zypp/solv.
-.TP
-.I \ \ \ \ \-\-pkg\-cache\-dir <dir>
-Use the specified directory for storing downloaded rpm packages. (see \fBaddrepo --keep-packages\fR)
-The default value is /var/cache/zypp/packages.
-.TP
-.I \ \ \ \ \-\-userdata <string>
-User data is expected to be a simple string without special chars or embedded newlines and may serve as
-transaction id. It will be written to all install history log entries created throughout this specific
-zypper call. It will also be passed on to zypp plugins executed during commit. This will enable e.g. a
-btrfs plugin to tag created snapshots with this string. For zypper itself this string has no special
-meaning.
-.LP
+.PP
+\fB\-h\fR, \fB\-\-help\fR
+.RS 4
+Help\&. If a
+\fIcommand\fR
+is specified together with
+\fB\-\-help\fR
+option, command specific help is displayed\&.
+.RE
+.PP
+\fB\-V\fR, \fB\-\-version\fR
+.RS 4
+Print zypper version number and exit\&.
+.RE
+.PP
+\fB\-c\fR, \fB\-\-config\fR \fIfile\fR
+.RS 4
+Use specified zypper config file instead of the default files\&. Other command line options specified together with
+\fB\-\-config\fR
+and having their counterpart in the config file are still preferred\&. The order of preference with
+\fB\-\-config\fR
+is as follows:
+.sp
+.RS 4
+.ie n \{\
+\h'-04' 1.\h'+01'\c
+.\}
+.el \{\
+.sp -1
+.IP "  1." 4.2
+.\}
+Command line options
+.RE
+.sp
+.RS 4
+.ie n \{\
+\h'-04' 2.\h'+01'\c
+.\}
+.el \{\
+.sp -1
+.IP "  2." 4.2
+.\}
+\fB\-\-config \fR\fB\fIfile\fR\fR
+.RE
+.sp
+.RS 4
+.ie n \{\
+\h'-04' 3.\h'+01'\c
+.\}
+.el \{\
+.sp -1
+.IP "  3." 4.2
+.\}
+[\fB/etc/zypp/zypp\&.conf\fR] (system\-wide defaults for all libzypp based applications)
+.RE
+.sp
+See also
+\fBFILES\fR
+section for more information\&.
+.RE
+.PP
+\fB\-v\fR, \fB\-\-verbose\fR
+.RS 4
+Increase verbosity\&. For debugging output specify this option twice\&.
+.RE
+.PP
+\fB\-q\fR, \fB\-\-quiet\fR
+.RS 4
+Suppress normal output\&. Brief (esp\&. result notification) messages and error messages will still be printed, though\&. If used together with conflicting
+\fB\-\-verbose\fR
+option, the
+\fB\-\-verbose\fR
+option takes preference\&.
+.RE
+.PP
+\fB\-A\fR, \fB\-\-no\-abbrev\fR
+.RS 4
+Do not abbreviate text in tables\&. By default zypper will try to abbreviate texts in some columns so that the table fits the width of the screen\&. If you need to see the whole text, use this option\&.
+.RE
+.PP
+\fB\-t\fR, \fB\-\-terse\fR
+.RS 4
+Terse output for machine consumption\&.
+.RE
+.PP
+\fB\-s\fR, \fB\-\-table\-style\fR
+.RS 4
+Specifies table style to use\&. Table style is identified by an integer number\&. TODO
+.RE
+.PP
+\fB\-n\fR, \fB\-\-non\-interactive\fR
+.RS 4
+Switches to non\-interactive mode\&. In this mode zypper doesn\(cqt ask user to type answers to various prompts, but uses default answers automatically\&. The behaviour of this option is somewhat different than that of options like
+\fB\-\-yes\fR, since zypper can answer different answers to different questions\&. The answers also depend on other options like
+\fB\-\-no\-gpg\-checks\fR\&.
+.RE
+.PP
+\fB\-x\fR, \fB\-\-xmlout\fR
+.RS 4
+Switches to XML output\&. This option is useful for scripts or graphical frontends using zypper\&.
+.RE
+.PP
+\fB\-i\fR, \fB\-\-ignore\-unknown\fR
+.RS 4
+Ignore unknown packages\&. This option is useful for scripts\&.
+.RE
+.PP
+\fB\-D\fR, \fB\-\-reposd\-dir\fR \fIdir\fR
+.RS 4
+Use the specified directory to look for the repository definition (\fB\&.repo) files\&. The default value is */etc/zypp/repos\&.d\fR\&.
+.RE
+.PP
+\fB\-C\fR, \fB\-\-cache\-dir\fR \fIdir\fR
+.RS 4
+Use an alternative root directory for all caches\&. The default value is
+\fB/var/cache/zypp\fR\&.
+.RE
+.PP
+\fB\-\-raw\-cache\-dir\fR \fIdir\fR
+.RS 4
+Use the specified directory for storing raw copies of repository metadata files\&. The default value is
+\fB/var/cache/zypp/raw\fR\&.
+.RE
+.PP
+\fB\-\-solv\-cache\-dir\fR \fIdir\fR
+.RS 4
+Use the specified directory to store the repository metadata cache database files (solv files)\&. The default value is
+\fB/var/cache/zypp/solv\fR\&.
+.RE
+.PP
+\fB\-\-pkg\-cache\-dir\fR \fIdir\fR
+.RS 4
+Use the specified directory for storing downloaded rpm packages\&. (see
+\fBaddrepo \-\-keep\-packages\fR) The default value is
+\fB/var/cache/zypp/packages\fR\&.
+.RE
+.PP
+\fB\-\-userdata\fR \fIstring\fR
+.RS 4
+User data is expected to be a simple string without special chars or embedded newlines and may serve as transaction id\&. It will be written to all install history log entries created throughout this specific zypper call\&. It will also be passed on to zypp plugins executed during commit\&. This will enable e\&.g\&. a btrfs plugin to tag created snapshots with this string\&. For zypper itself this string has no special meaning\&.
+.RE
+.PP
 Repository Options:
-.TP
-.I \ \ \ \ \-\-no\-gpg\-checks
-Ignore GPG check failures and continue. If a GPG issue occurs when using this
-option zypper prints and logs a warning and automatically continues without
-interrupting the operation. Use this option with caution, as you can easily
-overlook security problems by using it.
-.TP
-.I \ \ \ \ \-\-gpg\-auto\-import\-keys
-If new repository signing key is found, do not ask what to do; trust and
-import it automatically. This option causes that the new key is imported
-also in non-interactive mode, where it would otherwise got rejected.
-.TP
-.I \-p, \-\-plus\-repo <URI>
-Use an additional repository for this operation. The repository aliased tmp#
-and named by the specified URI will be added for this operation and removed
-at the end. You can specify this option multiple times.
-.TP
-.I \ \ \ \ \-\-plus\-content <tag>
-Additionaly use disabled repositories providing a specific keyword. Disabled repositories are refreshed
-and those providing the specifies keyword are temporarily endabled. To enable for example repositories
-which may provide additional \fB-debuginfo\fR or \fB-debugsource\fR packages use \fI--plus-content debug\fR.
-You can specify this option multiple times.
-.TP
-.I \ \ \ \ \-\-disable\-repositories
-Do not read metadata from repositories. This option will prevent loading of
-packages from repositories, thus making zypper work only with the installed
-packages (if \-\-disable\-system\-resolvables was not specified).
-.TP
-.I \ \ \ \ \-\-no\-refresh
-Do not auto-refresh repositories (ignore the auto-refresh setting). Useful to save
-time when doing operations like search, if there is not a need to have
-a completely up to date metadata.
-.TP
-.I \ \ \ \ \-\-no\-cd
-Ignore CD/DVD repositories. When this option is specified, zypper acts as if
-the CD/DVD repositories were not defined at all.
-.TP
-.I \ \ \ \ \-\-no\-remote
-Ignore remote repositories like http, ftp, smb and similar. This makes using
-zypper easier when being offline. When this option is specified, zypper acts
-as if the remote repositories were not defined at all.
-.LP
+.RS 4
+.RE
+.PP
+\fB\-\-no\-gpg\-checks\fR
+.RS 4
+Ignore GPG check failures and continue\&. If a GPG issue occurs when using this option zypper prints and logs a warning and automatically continues without interrupting the operation\&. Use this option with caution, as you can easily overlook security problems by using it\&.
+.RE
+.PP
+\fB\-\-gpg\-auto\-import\-keys\fR
+.RS 4
+If new repository signing key is found, do not ask what to do; trust and import it automatically\&. This option causes that the new key is imported also in non\-interactive mode, where it would otherwise got rejected\&.
+.RE
+.PP
+\fB\-p\fR, \fB\-\-plus\-repo\fR \fIURI\fR
+.RS 4
+Use an additional repository for this operation\&. The repository aliased tmp# and named by the specified URI will be added for this operation and removed at the end\&. You can specify this option multiple times\&.
+.RE
+.PP
+\fB\-\-plus\-content\fR \fItag\fR
+.RS 4
+Additionaly use disabled repositories providing a specific keyword\&. Disabled repositories are refreshed and those providing the specified
+\fItag\fR
+keyword are temporarily endabled\&. To enable for example repositories which may provide additional
+\fB\-debuginfo\fR
+or
+\fB\-debugsource\fR
+packages use
+\fB\-\-plus\-content debug\fR\&. You can specify this option multiple times\&.
+.RE
+.PP
+\fB\-\-disable\-repositories\fR
+.RS 4
+Do not read metadata from repositories\&. This option will prevent loading of packages from repositories, thus making zypper work only with the installed packages (if
+\fB\-\-disable\-system\-resolvables\fR
+was not specified)\&.
+.RE
+.PP
+\fB\-\-no\-refresh\fR
+.RS 4
+Do not auto\-refresh repositories (ignore the auto\-refresh setting)\&. Useful to save time when doing operations like search, if there is not a need to have a completely up to date metadata\&.
+.RE
+.PP
+\fB\-\-no\-cd\fR
+.RS 4
+Ignore CD/DVD repositories\&. When this option is specified, zypper acts as if the CD/DVD repositories were not defined at all\&.
+.RE
+.PP
+\fB\-\-no\-remote\fR
+.RS 4
+Ignore remote repositories like http, ftp, smb and similar\&. This makes using zypper easier when being offline\&. When this option is specified, zypper acts as if the remote repositories were not defined at all\&.
+.RE
+.PP
 Target Options:
-.TP
-.I \-R, \-\-root <dir>
-Operates on a different root directory. This option influences the location
-of the repos.d directory and the metadata cache directory and also causes rpm
-to be run with the --root option to do the actual installation or removal of
-packages. Note that the ZYpp lock is still created in the original system,
-as well as temporary files. See also the FILES section.
-.TP
-.I \ \ \ \ \-\-disable\-system\-resolvables
-This option serves mainly for testing purposes. It will cause zypper to act
-as if there were no packages installed in the system. Use with caution as you
-can damage your system using this option.
-
-
+.RS 4
+.RE
+.PP
+\fB\-R\fR, \fB\-\-root\fR \fIdir\fR
+.RS 4
+Operates on a different root directory\&. This option influences the location of the repos\&.d directory and the metadata cache directory and also causes rpm to be run with the
+\fB\-\-root\fR
+option to do the actual installation or removal of packages\&. See also the
+\fBFILES\fR
+section\&.
+.RE
+.PP
+\fB\-\-disable\-system\-resolvables\fR
+.RS 4
+This option serves mainly for testing purposes\&. It will cause zypper to act as if there were no packages installed in the system\&. Use with caution as you can damage your system using this option\&.
+.RE
 .SH "FILES"
-.TP
-.B /etc/zypp/zypper.conf, $HOME/.zypper.conf
-Global (system-wide) and user's configuration file for zypper.
-These files are read when zypper starts up and \fI--config\fR option
-is not used.
+.PP
+\fB/etc/zypp/zypper\&.conf\fR, \fB$HOME/\&.zypper\&.conf\fR
+.RS 4
+Global (system\-wide) and user\(cqs configuration file for zypper\&. These files are read when zypper starts up and
+\fB\-\-config\fR
+option is not used\&.
 
-User's settings are prefered over global settings.
-Similarly, command line options override the settings in either of
-these files. To sum it up, the order of preference is as follows
-(from highest to lowest):
+User\(cqs settings are preferred over global settings\&. Similarly, command line options override the settings in either of these files\&. To sum it up, the order of preference is as follows (from highest to lowest):
+.sp
+.RS 4
+.ie n \{\
+\h'-04' 1.\h'+01'\c
+.\}
+.el \{\
+.sp -1
+.IP "  1." 4.2
+.\}
+\fICommand line options\fR
+.RE
+.sp
+.RS 4
+.ie n \{\
+\h'-04' 2.\h'+01'\c
+.\}
+.el \{\
+.sp -1
+.IP "  2." 4.2
+.\}
+\fB$HOME/\&.zypper\&.conf\fR
+.RE
+.sp
+.RS 4
+.ie n \{\
+\h'-04' 3.\h'+01'\c
+.\}
+.el \{\
+.sp -1
+.IP "  3." 4.2
+.\}
+\fB/etc/zypp/zypper\&.conf\fR
+.RE
+.sp
+.RS 4
+.ie n \{\
+\h'-04' 4.\h'+01'\c
+.\}
+.el \{\
+.sp -1
+.IP "  4." 4.2
+.\}
+[\fB/etc/zypp/zypp\&.conf\fR] (system\-wide defaults for all libzypp based applications)
+.RE
+.sp
+See the comments in
+\fB/etc/zypp/zypper\&.conf\fR
+for a list and description of available options\&.
+.RE
+.PP
+\fB/etc/zypp/zypp\&.conf\fR
+.RS 4
+ZYpp configuration file affecting all libzypp based applications\&. See the comments in the file for description of configurable properties\&. Many locations of files and directories listed in this section are configurable via zypp\&.conf\&. The location for this file itself can be redefined only by setting
+\fB$ZYPP_CONF\fR
+in the environment\&.
+.RE
+.PP
+\fB/etc/zypp/locks\fR
+.RS 4
+File with package lock definitions, see
+\fIlocks(5)\fR
+manual page for details\&. The package lock commands (\fBaddlock\fR,
+\fBremovelock\fR, etc\&.) can be used to manipulate this file\&.
 
-* Command line options
-.br
-* $HOME/.zypper.conf
-.br
-* /etc/zypp/zypper.conf
+This file is used by all ZYpp\-based applications\&.
+.RE
+.PP
+\fB/etc/zypp/repos\&.d\fR
+.RS 4
+Directory containing repository definition (\fI*\&.repo\fR) files\&. You can use the Repository Management commands to manipulate these files, or you can edit them yourself\&. In either case, after doing the modifications, executing
+\fBzypper refresh\fR
+is strongly recommended\&.
 
-[ /etc/zypp/zypp.conf ] (system-wide defaults for all libzypp based applications)
+You can use the
+\fB\-\-reposd\-dir\fR
+global option to use an alternative directory for this purpose or the
+\fB\-\-root\fR
+option to make this directory relative to the specified root directory\&.
 
-See the comments in /etc/zypp/zypper.conf for a list and description
-of available options.
-.TP
-.B /etc/zypp/zypp.conf
-ZYpp configuration file affecting all libzypp based applications.
-See the comments in the file for desciption of configurable properties.
-Many locations of files and directories listed in this section are
-configurable via zypp.conf. The location for this file itself can be
-redefined only by setting $ZYPP_CONF in the environment.
+This directory is used by all ZYpp\-based applications\&.
+.RE
+.PP
+\fB/etc/zypp/services\&.d\fR
+.RS 4
+Directory containing service definition (\fI*\&.service\fR) files\&. You can use the Service Management Commands to manipulate these files, or you can edit them yourself\&. Running
+\fBzypper refs\fR
+is recommended after modifications have been done\&.
 
-.TP
-.B /etc/zypp/locks
-File with package lock definitions, see locks(5) manual page for details.
-The package lock commands (addlock, removelock, etc.) can be used
-to manipulate this file.
+This directory is used by all ZYpp\-based applications\&.
+.RE
+.PP
+\fB/var/cache/zypp/raw\fR
+.RS 4
+Directory for storing raw metadata contained in repositories\&. Use the
+\fB\-\-raw\-cache\-dir\fR
+global option to use an alternative directory for this purpose or the
+\fB\-\-root\fR
+option to make this directory relative to the specified root directory\&.
 
-This file is used by all ZYpp-based applications.
-.TP
-.B /etc/zypp/repos.d
-Directory containing repository definition (*.repo) files.
-You can use the Repository Management commands to manipulate these files,
-or you can edit them yourself. In either case, after doing the modifications,
-executing \fBzypper refresh\fR is strongly recommended.
+This directory is used by all ZYpp\-based applications\&.
+.RE
+.PP
+\fB/var/cache/zypp/solv\fR
+.RS 4
+Directory containing preparsed metadata in form of
+\fIsolv\fR
+files\&.
 
-This directory is used by all ZYpp-based applications.
+This directory is used by all ZYpp\-based applications\&.
+.RE
+.PP
+\fB/var/cache/zypp/packages\fR
+.RS 4
+If
+\fBkeeppackages\fR
+property is set for a repository (see the
+\fBmodifyrepo\fR
+command), all the RPM file downloaded during installation will be kept here\&. See also the
+\fBclean\fR
+command for cleaning these cache directories\&.
 
-You can use the \-\-reposd\-dir global option to use an alternative directory
-for this purpose or the \-\-root option to make this directory relative to the
-specified root directory.
-.TP
-.B /etc/zypp/services.d
-Directory containing service definition (*.service) files.
-You can use the Service Management Commands to manipulate theese files, or
-you can edit them youself. Running \fBzypper refs\fR is recommended after
-modifications have been done.
-
-This directory is used by all ZYpp-based applications.
-.TP
-.B /var/cache/zypp/raw
-Directory for storing raw metadata contained in repositories.
-This directory is used by all ZYpp-based applications.
-Use the \-\-raw\-cache\-dir global option to use an alternative directory
-for this purpose or the \-\-root option to make this directory relative to the
-specified root directory.
-.TP
-.B /var/cache/zypp/solv
-Directory containing preparsed metadata in form of \fBsolv\fR files.
-This directory is used by all ZYpp-based applications.
-.TP
-.B /var/cache/zypp/packages
-If \fBkeeppackages\fR property is set for a repository (see the
-\fBmodifyrepo\fR command), all the RPM file downloaded during installation
-will be kept here. See also the \fBclean\fR command for cleaning these
-cache directories.
-
-This directory is used by all ZYpp-based applications.
-.TP
-.B /var/log/zypp/history
-Installation history log.
-.TP
-.B ~/.zypper_history
-Command history for the shell.
-
+This directory is used by all ZYpp\-based applications\&.
+.RE
+.PP
+\fB/var/log/zypp/history\fR
+.RS 4
+Installation history log\&.
+.RE
+.PP
+\fB~/\&.zypper_history\fR
+.RS 4
+Command history for the zypper shell (see the
+\fBshell\fR
+command)\&.
+.RE
 .SH "EXIT CODES"
-.LP
-There are several exit codes defined for zypper for use e.g. within
-scripts. These codes are defined in header file src/zypper-main.h
-found in zypper source package. Codes from interval (1-5) denote an
-error, numbers (100-105) provide a specific information, 0
-represents a normal successful run. Following is a list of these
-codes with descriptions.
-.TP
-0 - ZYPPER_EXIT_OK
-Successfull run of zypper with no special info.
-.TP
-1 - ZYPPER_EXIT_ERR_BUG
-Unexpected situation occured, probably caused by a bug.
-.TP
-2 - ZYPPER_EXIT_ERR_SYNTAX
-zypper was invoked with an invalid command or option, or a bad syntax.
-.TP
-3 - ZYPPER_EXIT_ERR_INVALID_ARGS
-Some of provided arguments were invalid. E.g. an invalid URI was provided to the addrepo command.
-.TP
-4 - ZYPPER_EXIT_ERR_ZYPP
-A problem is reported by ZYPP library.
-.TP
-5 - ZYPPER_EXIT_ERR_PRIVILEGES
-User invoking zypper has insufficient privileges for specified operation.
-.TP
-6 - ZYPPER_EXIT_NO_REPOS
-No repositories are defined.
-.TP
-7 - ZYPPER_EXIT_ZYPP_LOCKED
-The ZYPP library is locked, e.g. packagekit is running.
-.TP
-100 - ZYPPER_EXIT_INF_UPDATE_NEEDED
-Returned by the patch-check command if there are patches available for installation.
-.TP
-101 - ZYPPER_EXIT_INF_SEC_UPDATE_NEEDED
-Returned by the patch-check command if there are security patches available for installation.
-.TP
-102 - ZYPPER_EXIT_INF_REBOOT_NEEDED
-Returned after a successfull installation of a patch which requires reboot of computer.
-.TP
-103 - ZYPPER_EXIT_INF_RESTART_NEEDED
-Returned after a successfull installation of a patch which requires restart of the package manager itself. This means that one of patches to be installed affects the package manager itself and the command used (e.g. zypper update) needs to be executed once again to install any remaining patches.
-.TP
-104 - ZYPPER_EXIT_INF_CAP_NOT_FOUND
-Returned by the \fBinstall\fR and the \fBremove\fR command in case any of the
-arguments does not match any of the available (or installed) package names
-or other capabilities.
-.TP
-105 - ZYPPER_EXIT_ON_SIGNAL
-Returned upon exiting after receiving a SIGINT or SIGTERM.
-
-
+.sp
+There are several exit codes defined for zypper for use e\&.g\&. within scripts\&. These codes are defined in header file src/zypper\-main\&.h found in zypper source package\&. Codes from interval (1\-5) denote an error, numbers (100\-105) provide a specific information, 0 represents a normal successful run\&. Following is a list of these codes with descriptions\&.
+.PP
+\fB0\fR \- \fBZYPPER_EXIT_OK\fR
+.RS 4
+Successfull run of zypper with no special info\&.
+.RE
+.PP
+\fB1\fR \- \fBZYPPER_EXIT_ERR_BUG\fR
+.RS 4
+Unexpected situation occurred, probably caused by a bug\&.
+.RE
+.PP
+\fB2\fR \- \fBZYPPER_EXIT_ERR_SYNTAX\fR
+.RS 4
+zypper was invoked with an invalid command or option, or a bad syntax\&.
+.RE
+.PP
+\fB3\fR \- \fBZYPPER_EXIT_ERR_INVALID_ARGS\fR
+.RS 4
+Some of provided arguments were invalid\&. E\&.g\&. an invalid URI was provided to the
+\fBaddrepo\fR
+command\&.
+.RE
+.PP
+\fB4\fR \- \fBZYPPER_EXIT_ERR_ZYPP\fR
+.RS 4
+A problem is reported by ZYPP library\&.
+.RE
+.PP
+\fB5\fR \- \fBZYPPER_EXIT_ERR_PRIVILEGES\fR
+.RS 4
+User invoking zypper has insufficient privileges for specified operation\&.
+.RE
+.PP
+\fB6\fR \- \fBZYPPER_EXIT_NO_REPOS\fR
+.RS 4
+No repositories are defined\&.
+.RE
+.PP
+\fB7\fR \- \fBZYPPER_EXIT_ZYPP_LOCKED\fR
+.RS 4
+The ZYPP library is locked, e\&.g\&. packagekit is running\&.
+.RE
+.PP
+\fB100\fR \- \fBZYPPER_EXIT_INF_UPDATE_NEEDED\fR
+.RS 4
+Returned by the patch\-check command if there are patches available for installation\&.
+.RE
+.PP
+\fB101\fR \- \fBZYPPER_EXIT_INF_SEC_UPDATE_NEEDED\fR
+.RS 4
+Returned by the patch\-check command if there are security patches available for installation\&.
+.RE
+.PP
+\fB102\fR \- \fBZYPPER_EXIT_INF_REBOOT_NEEDED\fR
+.RS 4
+Returned after a successfull installation of a patch which requires reboot of computer\&.
+.RE
+.PP
+\fB103\fR \- \fBZYPPER_EXIT_INF_RESTART_NEEDED\fR
+.RS 4
+Returned after a successful installation of a patch which requires restart of the package manager itself\&. This means that one of patches to be installed affects the package manager itself and the command used (e\&.g\&.
+\fBzypper update\fR) needs to be executed once again to install any remaining patches\&.
+.RE
+.PP
+\fB104\fR \- \fBZYPPER_EXIT_INF_CAP_NOT_FOUND\fR
+.RS 4
+Returned by the
+\fBinstall\fR
+and the
+\fBremove\fR
+command in case any of the arguments does not match any of the available (or installed) package names or other capabilities\&.
+.RE
+.PP
+\fB105\fR \- \fBZYPPER_EXIT_ON_SIGNAL\fR
+.RS 4
+Returned upon exiting after receiving a SIGINT or SIGTERM\&.
+.RE
 .SH "HOMEPAGE"
-
-http://en.opensuse.org/Portal:Zypper
-
+.sp
+https://github\&.com/openSUSE/zypper
 .SH "AUTHORS"
-.LP
-Martin Vidner <mvidner@suse.cz>
-.br
+.sp
+.if n \{\
+.RS 4
+.\}
+.nf
+Martin Vidner <mvidner@suse\&.cz>
 Jan Kupec <>
-.br
-Michael Andres <ma@suse.de>
-.br
-Duncan Mac-Vicar <dmacvicar@suse.de>
-.br
-Josef Reidinger <jreidinger@suse.cz>
-.br
-Stanislav Visnovsky <visnov@suse.cz>
-
+Michael Andres <ma@suse\&.de>
+Duncan Mac\-Vicar <dmacvicar@suse\&.de>
+Josef Reidinger <jreidinger@suse\&.cz>
+Stanislav Visnovsky <visnov@suse\&.cz>
+.fi
+.if n \{\
+.RE
+.\}
 .SH "SEE ALSO"
-.LP
-locks(5), zypper-log(8), YaST2(8)
+.sp
+locks(5), zypper\-log(8), YaST2(8)
