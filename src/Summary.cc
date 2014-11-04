@@ -390,12 +390,35 @@ void Summary::writeResolvableList(ostream & out, const ResPairSet & resolvables)
 
   if ((_viewop & DETAILS) == 0)
   {
+    static const char* quoteCh = "\"";
+    char firstCh = 0;
     ostringstream s;
     for (ResPairSet::const_iterator resit = resolvables.begin();
         resit != resolvables.end(); ++resit)
     {
       // name
-      s << ResPair2Name( *resit );
+      const std::string & name( ResPair2Name( *resit ) );
+      // quote names with spaces
+      bool quote( name.find_first_of( " " ) != std::string::npos );
+
+      // extra space if 1st char changes
+      if ( firstCh != name[0] )
+      {
+	if ( firstCh )
+	  s << " ";
+	firstCh = name[0];
+      }
+
+      // quote?
+      if ( quote ) fprint_color(s, quoteCh, COLOR_CONTEXT_HIGHLIGHT);
+
+      // highlight 1st char
+      fprint_color(s, str::form("%c", name[0]), COLOR_CONTEXT_HIGHLIGHT);
+      s << name.substr(1);
+
+      // quote?
+      if ( quote ) fprint_color(s, quoteCh, COLOR_CONTEXT_HIGHLIGHT);
+
 
       // version (if multiple versions are present)
       if (!(_viewop & SHOW_VERSION) && multi_installed.find(resit->second->name()) != multi_installed.end())
