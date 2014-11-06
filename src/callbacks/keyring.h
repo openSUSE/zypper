@@ -324,22 +324,48 @@ namespace zypp
 
       virtual bool askUserToAcceptWrongDigest( const Pathname &file, const std::string &requested, const std::string &found )
       {
-        if (_gopts.no_gpg_checks)
-        {
-          WAR << boost::format(
-              "Ignoring failed digest verification for %s (expected %s, found %s).")
-              % file % requested % found << std::endl;
-          Zypper::instance()->out().warning(boost::str(boost::format(
-              _("Ignoring failed digest verification for %s (expected %s, found %s)."))
-              % file % requested % found),
-              Out::QUIET);
-          return true;
-        }
+	Zypper & zypper = *Zypper::instance();
+	std::string unblock( found.substr( 0, 4 ) );
 
-	std::string question = boost::str(boost::format(
-	    _("Digest verification failed for %s. Expected %s, found %s."))
-	    % file.basename() % requested % found) + " " + _("Continue?");
-        return read_bool_answer(PROMPT_GPG_WRONG_DIGEST_ACCEPT, question, false);
+	zypper.out().gap();
+	// translators: !!! BOOST STYLE PLACEHOLDERS ( %N% - reorder and multiple occurance is OK )
+	// translators: %1%      - a file name
+	// translators: %2%      - full path name
+	// translators: %3%, %4% - checksum strings (>60 chars), please keep them alligned
+	zypper.out().warning( boost::formatNAC(_(
+		"Digest verification failed for file '%1%'\n"
+		"[%2%]\n"
+		"\n"
+		"  expected %3%\n"
+		"  but got  %4%\n" ) )
+		% file.basename()
+		% file
+		% requested
+		% found
+	);
+
+	// translators: !!! BOOST STYLE PLACEHOLDERS ( %N% - reorder and multiple occurance is OK )
+	// translators: %1%      - abbreviated checksum (4 chars)
+	zypper.out().info( boost::formatNAC(_(
+		"However if you made certain that the file with checksum '%1%..' is secure, correct\n"
+		"and should be used within this operation, enter the first 4 characters of the checksum\n"
+		"to unblock using this file on your own risk. Empty input will discard the file.\n" ) )
+		% unblock
+	);
+
+	// translators: A prompt option
+	PromptOptions popts( unblock+"/"+_("discard"), 1 );
+	// translators: A prompt option help text
+	popts.setOptionHelp( 0, _("Unblock using this file on your own risk.") );
+	// translators: A prompt option help text
+	popts.setOptionHelp( 1, _("Discard the file.") );
+	popts.setShownCount( 1 );
+	if ( !zypper.globalOpts().non_interactive )
+	  clear_keyboard_buffer();
+	// translators: A prompt text
+	zypper.out().prompt( PROMPT_GPG_WRONG_DIGEST_ACCEPT, _("Unblock or discard?"), popts );
+	int reply = get_prompt_reply( zypper, PROMPT_GPG_WRONG_DIGEST_ACCEPT, popts );
+	return( reply == 0 );
       }
 
     private:
