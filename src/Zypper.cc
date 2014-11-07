@@ -4048,7 +4048,7 @@ void Zypper::doCommand()
       }
     }
 
-    bool details = false;
+    bool details = _copts.count("details") || _copts.count("verbose");
     // add argument strings and attributes to query
     for ( vector<string>::const_iterator it = _arguments.begin();
           it != _arguments.end(); ++it )
@@ -4152,20 +4152,18 @@ void Zypper::doCommand()
         FillPatchesTable callback(t, inst_notinst);
         invokeOnEach(query.poolItemBegin(), query.poolItemEnd(), callback);
       }
-      else if (_gopts.is_rug_compatible || _copts.count("details") || details)
+      else if (_gopts.is_rug_compatible || details)
       {
         FillSearchTableSolvable callback(t, inst_notinst);
-        invokeOnEach(query.selectableBegin(), query.selectableEnd(), callback);
-      }
-      else if ( _copts.count("verbose") )
-      {
-        FillSearchTableSolvable callback(t, inst_notinst);
-        // Option 'verbose' shows where (e.g. in 'requires', 'name') the search has matched.
-        // Info is available from PoolQuery::const_iterator.
-        for_( it, query.begin(), query.end() )
-        {
-          callback( it );
-        }
+	if ( _copts.count("verbose") )
+	{
+	  // Option 'verbose' shows where (e.g. in 'requires', 'name') the search has matched.
+	  // Info is available from PoolQuery::const_iterator.
+	  for_( it, query.begin(), query.end() )
+	    callback( it );
+	}
+	else
+	  invokeOnEach(query.selectableBegin(), query.selectableEnd(), callback);
       }
       else
       {
