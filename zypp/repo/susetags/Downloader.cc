@@ -3,6 +3,7 @@
 #include <fstream>
 
 #include "zypp/base/LogTools.h"
+#include "zypp/base/Gettext.h"
 #include "zypp/base/String.h"
 #include "zypp/base/Regex.h"
 #include "zypp/OnMediaLocation.h"
@@ -15,7 +16,6 @@
 #include "zypp/parser/ParseException.h"
 #include "zypp/parser/susetags/RepoIndex.h"
 #include "zypp/base/UserRequestException.h"
-#include "zypp/KeyContext.h" // for SignatureFileChecker
 
 using namespace std;
 using namespace zypp::parser;
@@ -52,54 +52,20 @@ static Pathname search_deltafile( const Pathname &dir, const Pathname &file )
   return Pathname();
 }
 
+
+/** \todo: Downloading/sigcheck of master index shoudl be common in base class */
 void Downloader::download( MediaSetAccess &media,
                            const Pathname &dest_dir,
                            const ProgressData::ReceiverFnc & progress )
 {
   downloadMediaInfo( dest_dir, media );
 
-  SignatureFileChecker sigchecker/*(repoInfo().name())*/;
-
-  Pathname sig = repoInfo().path() + "/content.asc";
-
-  enqueue( OnMediaLocation( sig, 1 ).setOptional(true) );
-  start( dest_dir, media );
-  // only if there is a signature in the destination directory
-  if ( PathInfo(dest_dir / sig ).isExist() )
-      sigchecker = SignatureFileChecker( dest_dir + sig/*, repoInfo().name() */);
-  reset();
-
-  Pathname key = repoInfo().path() + "/content.key";
-
-  enqueue( OnMediaLocation( key, 1 ).setOptional(true) );
-  start( dest_dir, media );
-
-  KeyContext context;
-  context.setRepoInfo(repoInfo());
-  // only if there is a key in the destination directory
-  if ( PathInfo(dest_dir / key).isExist() )
-    sigchecker.addPublicKey(dest_dir + key, context);
-  // set the checker context even if the key is not known (unsigned repo, key
-  // file missing; bnc #495977)
-  else
-    sigchecker.setKeyContext(context);
-
-  reset();
-
-  if ( ! repoInfo().gpgCheck() )
-  {
-    WAR << "Signature checking disabled in config of repository " << repoInfo().alias() << endl;
-  }
-  enqueue( OnMediaLocation( repoInfo().path() + "/content", 1 ),
-                 repoInfo().gpgCheck() ? FileChecker(sigchecker) : FileChecker(NullFileChecker()) );
-  start( dest_dir, media );
-  reset();
-
-  Pathname descr_dir;
+  Pathname masterIndex( repoInfo().path() / "/content" );
+  defaultDownloadMasterIndex( media, dest_dir, masterIndex );
 
   // Content file first to get the repoindex
   {
-    Pathname inputfile( dest_dir +  repoInfo().path() + "/content" );
+    Pathname inputfile( dest_dir / masterIndex );
     ContentFileReader content;
     content.setRepoIndexConsumer( bind( &Downloader::consumeIndex, this, _1 ) );
     content.parse( inputfile );
@@ -119,7 +85,7 @@ void Downloader::download( MediaSetAccess &media,
   }
 
   // Prepare parsing
-  descr_dir = _repoindex->descrdir; // path below reporoot
+  Pathname descr_dir = _repoindex->descrdir; // path below reporoot
   //_datadir  = _repoIndex->datadir;  // path below reporoot
 
   std::map<std::string,RepoIndex::FileChecksumMap::const_iterator> availablePackageTranslations;

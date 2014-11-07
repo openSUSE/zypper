@@ -25,7 +25,7 @@ namespace zypp
     /**
       * \short Downloader base class
       *
-      * a Downloader encapsulates all the knowledge of 
+      * a Downloader encapsulates all the knowledge of
       * which files have to be downloaded to the local disk.
       *
       */
@@ -56,6 +56,10 @@ namespace zypp
       virtual RepoStatus status( MediaSetAccess &media );
 
       const RepoInfo & repoInfo() const { return _repoinfo; }
+
+      protected:
+	/** Common workflow downloading a (signed) master index file */
+	void defaultDownloadMasterIndex( MediaSetAccess & media_r, const Pathname & destdir_r, const Pathname & masterIndex_r );
 
       private:
         RepoInfo _repoinfo;
