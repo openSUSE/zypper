@@ -46,7 +46,7 @@ private:
 };
 
 
-typedef enum zypper_color_contexts
+enum ColorContext
 {
   COLOR_CONTEXT_RESULT               = 1,
   COLOR_CONTEXT_MSG_STATUS           = 2,
@@ -59,8 +59,13 @@ typedef enum zypper_color_contexts
   COLOR_CONTEXT_HIGHLIGHT            = 9,
   COLOR_CONTEXT_OSDEBUG              = 10,
 
+  COLOR_CONTEXT_GOOD	= COLOR_CONTEXT_POSITIVE,
+  COLOR_CONTEXT_NOTE	= COLOR_CONTEXT_MSG_WARNING,
+  COLOR_CONTEXT_BAD	= COLOR_CONTEXT_NEGATIVE,
+  COLOR_CONTEXT_HIGH	= COLOR_CONTEXT_HIGHLIGHT,
+
   COLOR_CONTEXT_DEFAULT              = -1
-} ColorContext;
+};
 
 /** Simple check whether stdout can handle colors. */
 bool has_colors();
@@ -116,9 +121,9 @@ struct PrintColor
   std::ostream & _str;
 };
 
-typedef PrintColor<COLOR_CONTEXT_POSITIVE>	colGood;	///< good news (green)
-typedef PrintColor<COLOR_CONTEXT_MSG_WARNING>	colNote;	///< pay attention (magenta)
-typedef PrintColor<COLOR_CONTEXT_MSG_ERROR>	colBad;		///< bad news (red)
-typedef PrintColor<COLOR_CONTEXT_HIGHLIGHT>	colH;		///< highlight (cyan)
+typedef PrintColor<COLOR_CONTEXT_GOOD>	colGood;	///< good news (green)
+typedef PrintColor<COLOR_CONTEXT_NOTE>	colNote;	///< pay attention (magenta)
+typedef PrintColor<COLOR_CONTEXT_BAD>	colBad;		///< bad news (red)
+typedef PrintColor<COLOR_CONTEXT_HIGH>	colHigh;	///< highlight (cyan)
 
 #endif /* UTILS_COLORS_H_ */
