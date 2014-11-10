@@ -685,13 +685,21 @@ void Summary::writeReinstalled(ostream & out)
         "The following %d products are going to be reinstalled:",
         it->second.size());
     else if (it->first == ResKind::application)
+    {
+      // Suppress 'reinstalled' message for applications.
+      // As applications don't have an edition, they are not updated
+      // if the package updates. Technically every app-package update
+      // is an 'application reinstall', because the providing package
+      // changes.
+      return;
       label = _PL(
         "The following application is going to be reinstalled:",
         "The following %d applications are going to be reinstalled:",
         it->second.size());
+    }
+
     label = str::form( label.c_str(), it->second.size() );
     out << endl << label << endl;
-
     writeResolvableList(out, it->second);
   }
 }
