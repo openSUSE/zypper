@@ -37,13 +37,15 @@ const char * lines[][3] = {
   { ":", "-", "+" },                                 ///< colon separated values
 };
 
-void TableRow::add (const string& s) {
+TableRow & TableRow::add (const string& s) {
   _columns.push_back (s);
+  return *this;
 }
 
-void TableRow::addDetail(const string& s)
+TableRow & TableRow::addDetail(const string& s)
 {
   _details.push_back(s);
+  return *this;
 }
 
 unsigned int TableRow::cols( void ) const {
@@ -65,8 +67,9 @@ void TableRow::dumbDumpTo (ostream &stream) const {
 
 void TableRow::dumpDetails(ostream &stream, const Table & parent) const
 {
-  unsigned int width = (parent._width > parent._screen_width)?parent._screen_width:parent._width;
-  string indent( (parent._max_width[0]+parent._max_width[1])/2, ' ' );
+  unsigned width = parent._screen_width;
+  //string indent( parent._max_width[0] + (parent._style == none ? 2 : 3), ' ' );
+  string indent( 4, ' ' );
 
   for ( vector<string>::const_iterator it = _details.begin(); it != _details.end(); ++it )
   {
@@ -101,7 +104,7 @@ void TableRow::dumpDetails(ostream &stream, const Table & parent) const
 
 void TableRow::dumpTo (ostream &stream, const Table & parent) const
 {
-  const char * vline = parent._style != none ? lines[parent._style][0] : "";
+  const char * vline = parent._style == none ? "" : lines[parent._style][0];
 
   unsigned int ssize = 0; // string size in columns
   bool seen_first = false;
@@ -129,7 +132,7 @@ void TableRow::dumpTo (ostream &stream, const Table & parent) const
         // table is wider than screen
         parent._width > parent._screen_width && (
         // the next table column would exceed the screen size
-        curpos + (int) parent._max_width[c] + (parent._style != none ? 2 : 3) >
+        curpos + (int) parent._max_width[c] + (parent._style == none ? 2 : 3) >
           parent._screen_width ||
         // or the user wishes to first break after the previous column
         parent._force_break_after == (int) (c - 1));
@@ -210,7 +213,7 @@ void TableRow::dumpTo (ostream &stream, const Table & parent) const
       stream.width (parent._max_width[c] - ssize);
     }
     stream << "";
-    curpos += parent._max_width[c] + (parent._style != none ? 2 : 3);
+    curpos += parent._max_width[c] + (parent._style == none ? 2 : 3);
   }
   stream << endl;
 
@@ -235,15 +238,15 @@ Table::Table()
   , _inHeader( false )
 {}
 
-void Table::add (const TableRow& tr) {
+Table & Table::add (const TableRow& tr) {
   _rows.push_back (tr);
-  updateColWidths (tr);
+  return *this;
 }
 
-void Table::setHeader (const TableHeader& tr) {
+Table & Table::setHeader (const TableHeader& tr) {
   _has_header = true;
   _header = tr;
-  updateColWidths (tr);
+  return *this;
 }
 
 void Table::allowAbbrev(unsigned column) {
@@ -254,27 +257,26 @@ void Table::allowAbbrev(unsigned column) {
   _abbrev_col[column] = true;
 }
 
-void Table::updateColWidths (const TableRow& tr) {
+void Table::updateColWidths (const TableRow& tr) const
+{
   // how much columns spearators add to the width of the table
   int sepwidth = _style == none ? 2 : 3;
   // initialize the width to -sepwidth (the first column does not have a line
   // on the left)
   _width = -sepwidth;
 
-  TableRow::container::const_iterator
-    i = tr._columns.begin (),
-    e = tr._columns.end ();
-  for (unsigned c = 0; i != e; ++i, ++c) {
-    // ensure that _max_width[c] exists
-    if (_max_col < c)
-    {
-      _max_col = c;
-      _max_width.resize (_max_col + 1);
-      _max_width[c] = 0;
-    }
+  // ensure that _max_width[col] exists
+  if ( _max_width.size() < tr._columns.size() )
+  {
+    _max_width.resize( tr._columns.size(), 0 );
+    _max_col = _max_width.size()-1;
+  }
 
-    unsigned &max = _max_width[c];
-    unsigned cur = mbs_width (*i);
+  unsigned c = 0;
+  for ( const auto & col : tr._columns )
+  {
+    unsigned &max = _max_width[c++];
+    unsigned cur = mbs_width (col);
 
     if (max < cur)
       max = cur;
@@ -306,6 +308,11 @@ void Table::dumpRule (ostream &stream) const {
 }
 
 void Table::dumpTo (ostream &stream) const {
+  // compute column sizes
+  if ( _has_header )
+    updateColWidths( _header );
+  for ( const auto & row : _rows )
+    updateColWidths( row );
 
   // reset column widths for columns that can be abbreviated
   //! \todo allow abbrev of multiple columns?
@@ -330,13 +337,8 @@ void Table::dumpTo (ostream &stream) const {
     dumpRule (stream);
   }
 
-  container::const_iterator
-    b = _rows.begin (),
-    e = _rows.end (),
-    i;
-  for (i = b; i != e; ++i) {
-    i->dumpTo (stream, *this);
-  }
+  for ( const auto & row : _rows )
+    row.dumpTo( stream, *this );
 }
 
 void Table::wrap(int force_break_after)
