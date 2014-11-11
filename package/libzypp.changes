@@ -1,4 +1,13 @@
 -------------------------------------------------------------------
+Tue Nov 11 17:09:28 CET 2014 - ma@suse.de
+
+- Call rpm with '--noglob' (bnc#892431)
+- Downloader: unify workflow downloading a (signed) master index file
+- Fix iostream includes (fixes #34)
+- Explicitly call libsolv:pool_setdisttype (fixes #36)
+- version 14.30.2 (30)
+
+-------------------------------------------------------------------
 Sun Nov  9 01:13:17 CET 2014 - ma@suse.de
 
 - Update zypp-po.tar.bz2
