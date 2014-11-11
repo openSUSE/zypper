@@ -1,4 +1,13 @@
 -------------------------------------------------------------------
+Tue Nov 11 17:12:56 CET 2014 - ma@suse.de
+
+- Warn about repositories with 'gpgcheck=0' (bnc#848054)
+- search: fix --verbose implies --details
+- Enhance 'Digest verification failed' dialog (FATE#315008)
+- Summary: quote names including spaces (bnc#903675)
+- version 1.11.16
+
+-------------------------------------------------------------------
 Mon Nov  3 15:54:47 CET 2014 - ma@suse.de
 
 - Provide missing man pages (fixes #51)
