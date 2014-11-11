@@ -19,6 +19,24 @@
 using namespace std;
 
 
+bool has_colors()
+{
+  if (::isatty(STDOUT_FILENO))
+  {
+    char *term = ::getenv("TERM");
+    if ( term && ::strcmp(term, "dumb") )
+      return true;
+  }
+  return false;
+}
+
+bool do_colors()
+{
+  return Zypper::instance()->config().do_colors;
+}
+
+
+
 Color::Color(const string & color_str)
   : _value(parse(color_str))
 {}
@@ -56,22 +74,6 @@ string Color::parse(const string & value)
   return it->second;
 }
 
-bool has_colors()
-{
-  if (::isatty(STDOUT_FILENO))
-  {
-    char *term = ::getenv("TERM");
-    if (term && ::strcmp(term, "dumb"))
-      return true;
-  }
-  return false;
-}
-
-bool do_colors()
-{
-  return Zypper::instance()->config().do_colors;
-}
-
 const string get_color( const ColorContext context )
 {
   const Config & conf( Zypper::instance()->config() );
@@ -93,6 +95,8 @@ const string get_color( const ColorContext context )
     return conf.color_promptOption.value();
   case COLOR_CONTEXT_HIGHLIGHT:
     return conf.color_highlight.value();
+  case COLOR_CONTEXT_LOWLIGHT:
+    return Color("grey").value();
   case COLOR_CONTEXT_OSDEBUG:
     return Color("brown").value();
   default:
