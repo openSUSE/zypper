@@ -67,7 +67,7 @@ namespace zypp
 	if ( keyData_r.expired() )
 	{
 	  Zypper::instance()->out().warning( boost::format(_("The gpg key signing file '%1%' has expired.")) % file_r );
-	  dumpKeyInfo( colNote(), keyData_r, context );
+	  dumpKeyInfo( Paint( CC_NOTE ), keyData_r, context );
 	}
 	else if ( keyData_r.daysToLive() < 15 )
 	{

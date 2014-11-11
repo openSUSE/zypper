@@ -57,15 +57,19 @@ enum ColorContext
   COLOR_CONTEXT_PROMPT_OPTION        = 7,
   COLOR_CONTEXT_PROMPT_SHORTHAND     = 8,
   COLOR_CONTEXT_HIGHLIGHT            = 9,
-  COLOR_CONTEXT_OSDEBUG              = 10,
+  COLOR_CONTEXT_LOWLIGHT             = 10,
+  COLOR_CONTEXT_OSDEBUG              = 11,
 
-  COLOR_CONTEXT_GOOD	= COLOR_CONTEXT_POSITIVE,
-  COLOR_CONTEXT_NOTE	= COLOR_CONTEXT_MSG_WARNING,
-  COLOR_CONTEXT_BAD	= COLOR_CONTEXT_NEGATIVE,
-  COLOR_CONTEXT_HIGH	= COLOR_CONTEXT_HIGHLIGHT,
+  COLOR_CONTEXT_DEFAULT              = -1,
 
-  COLOR_CONTEXT_DEFAULT              = -1
+  CC_GOOD	= COLOR_CONTEXT_POSITIVE,	///< good news		(green)
+  CC_NOTE	= COLOR_CONTEXT_MSG_WARNING,	///< pay attention	(magenta)
+  CC_BAD	= COLOR_CONTEXT_NEGATIVE,	///< bad news		(red)
+  CC_HIGH	= COLOR_CONTEXT_HIGHLIGHT,	///< highlight		(cyan)
+  CC_DIM	= COLOR_CONTEXT_LOWLIGHT,	///< dim		(grey)
+  CC_DEFAULT	= COLOR_CONTEXT_DEFAULT
 };
+
 
 /** Simple check whether stdout can handle colors. */
 bool has_colors();
@@ -101,29 +105,114 @@ inline void fprint_color(std::ostream & str, const std::string & s, const ColorC
 { print_color( str, s, cc, prev_color ); }
 
 
-template<ColorContext CC>
-struct PrintColor
+///////////////////////////////////////////////////////////////////
+/// \class ColorString
+/// \brief Attributed string
+/// The plain string value is attributed if colors are used and
+/// if it is printed on a stream.
+///////////////////////////////////////////////////////////////////
+class ColorString
 {
-  PrintColor( std::ostream & str_r = std::cout )
-  : _str( str_r )
-  { if ( do_colors() ) _str << get_color( CC ); }
+public:
+  ColorString( ColorContext cc_r = CC_DEFAULT )
+  : _cc( cc_r )
+  {}
 
-  ~PrintColor()
-  { if ( do_colors() ) _str << get_color( COLOR_CONTEXT_DEFAULT ); }
+  ColorString( const std::string & val_r, ColorContext cc_r = CC_DEFAULT  )
+  : _str( val_r )
+  , _cc( cc_r )
+  {}
+
+  ColorString( const char * val_r, ColorContext cc_r = CC_DEFAULT  )
+  : ColorString( std::string( val_r ? val_r : "" ), cc_r )
+  {}
+
+  template<class _Tp>
+  ColorString( const _Tp & val_r, ColorContext cc_r = CC_DEFAULT  )
+  : ColorString( zypp::str::asString( val_r ), cc_r )
+  {}
+
+public:
+  /** Get the plain string */
+  const std::string & str() const
+  { return _str; }
+
+  /** Set the plain string */
+  ColorString & operator=( const std::string & rhs )
+  { _str = rhs; return *this; }
+
+  /** Set the plain string */
+  ColorString & operator=( const char * rhs )
+  { _str = ( rhs ? rhs : "" ); return *this; }
+
+
+  /** Get the ColorContext */
+  ColorContext cc() const
+  { return _cc; }
+
+  /** Set the ColorContext */
+  ColorString & operator=( ColorContext rhs )
+  { _cc = rhs; return *this; }
+
+
+  /** Get the attribured string */
+  std::string paintStr() const
+  { return zypp::str::Str() << *this; }
+
+private:
+  std::string _str;
+  ColorContext _cc;
+};
+
+
+///////////////////////////////////////////////////////////////////
+/// \class Paint
+/// \brief Paint atributed to stream if colors are used.
+///////////////////////////////////////////////////////////////////
+class Paint
+{
+public:
+  Paint( ColorContext cc_r, std::ostream & str_r = std::cout, ColorContext reset_r = CC_DEFAULT )
+  : _str( str_r )
+  , _cc( cc_r )
+  , _reset( reset_r )
+  { if ( do_colors() ) _str << get_color( cc_r ); }
+
+  Paint( ColorContext cc_r, ColorContext reset_r )
+  : Paint( cc_r, std::cout, reset_r )
+  {}
+
+  ~Paint()
+  { if ( do_colors() ) _str << get_color( _reset ); }
 
   operator std::ostream &()
   { return _str; }
 
   template<class _Tp>
-  std::ostream & operator<<( const _Tp & val )
-  { return _str << val; }
+  Paint & operator<<( const _Tp & val_r )
+  { _str << val_r; return *this; }
 
+  Paint & operator<<( std::ostream & (*omanip)( std:: ostream & ) )
+  { _str << omanip; return *this; }
+
+  Paint & operator<<( const ColorString & val_r )
+  {
+    if ( val_r.cc() != CC_DEFAULT && val_r.cc() != _cc )
+      Paint( val_r.cc(), _str, _cc ) << val_r.str();
+    else
+      _str << val_r.str();
+    return *this;
+  }
+
+private:
   std::ostream & _str;
+  ColorContext _cc;
+  ColorContext _reset;
 };
 
-typedef PrintColor<COLOR_CONTEXT_GOOD>	colGood;	///< good news (green)
-typedef PrintColor<COLOR_CONTEXT_NOTE>	colNote;	///< pay attention (magenta)
-typedef PrintColor<COLOR_CONTEXT_BAD>	colBad;		///< bad news (red)
-typedef PrintColor<COLOR_CONTEXT_HIGH>	colHigh;	///< highlight (cyan)
+
+/** \relates ColorString print attributed string */
+inline std::ostream & operator<<( std::ostream & str, const ColorString & obj )
+{ return Paint( obj.cc(), str ) << obj.str(); }
 
 #endif /* UTILS_COLORS_H_ */

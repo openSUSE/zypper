@@ -448,7 +448,7 @@ void printProductInfo(Zypper & zypper, const ui::Selectable & s)
       else if ( CpeId::NoThrowType::lastMalformed.empty() )
 	cout <<  _("undefined") << endl;
       else
-	colBad() <<  _("invalid CPE Name") << ": " << CpeId::NoThrowType::lastMalformed << endl;
+	Paint( CC_BAD ) <<  _("invalid CPE Name") << ": " << CpeId::NoThrowType::lastMalformed << endl;
     }
     {
       cout << _("Update Repositories");
@@ -472,7 +472,7 @@ void printProductInfo(Zypper & zypper, const ui::Selectable & s)
 	  }
 	  if ( ! found )
 	  {
-	    colNote() << "    " << _("Not provided by any enabled repository")   << endl;
+	    Paint( CC_NOTE )  << "    " << _("Not provided by any enabled repository")   << endl;
 	  }
 	}
       }
