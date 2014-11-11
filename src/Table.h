@@ -10,12 +10,17 @@
 #ifndef ZYPPER_TABULATOR_H
 #define ZYPPER_TABULATOR_H
 
+#include <iostream>
+#include <sstream>
 #include <string>
 #include <iosfwd>
+#include <set>
 #include <list>
 #include <vector>
 
 #include <zypp/base/String.h>
+
+#include "utils/colors.h"
 
 using std::string;
 using std::ostream;
@@ -51,9 +56,13 @@ public:
     _columns.reserve (c);
   }
 
-  void add (const string& s);
+  TableRow & add (const string& s);
 
-  void addDetail (const string& s);
+  TableRow & addDetail (const string& s);
+
+  template<class _Tp>
+  TableRow & addDetail( const _Tp & val_r )
+  { return addDetail( zypp::str::asString( val_r ) ); }
 
   // return number of columns
   unsigned int cols( void ) const;
@@ -78,8 +87,12 @@ public:
   const container & columns() const
   { return _columns; }
 
+  container & columns()
+  { return _columns; }
+
 private:
   container _columns;
+
   container _details;
 
   friend class Table;
@@ -89,16 +102,14 @@ private:
 template<class _Tp>
 TableRow & operator<<( TableRow & tr, const _Tp & val )
 {
-  tr.add( zypp::str::asString( val ) );
-  return tr;
+  return tr.add( zypp::str::asString( val ) );
 }
 
 /** \relates TableRow Add colummn. */
 template<class _Tp>
 TableRow & operator<<( TableRow && tr, const _Tp & val )
 {
-  tr.add( zypp::str::asString( val ) );
-  return tr;
+  return tr.add( zypp::str::asString( val ) );
 }
 
 class TableHeader : public TableRow {
@@ -119,8 +130,8 @@ public:
 
   static TableLineStyle defaultStyle;
 
-  void add (const TableRow& tr);
-  void setHeader (const TableHeader& tr);
+  Table & add (const TableRow& tr);
+  Table & setHeader (const TableHeader& tr);
   void dumpTo (ostream& stream) const;
   bool empty () const { return _rows.empty(); }
   void sort (unsigned by_column);       // columns start with 0...
@@ -145,18 +156,18 @@ public:
 
 private:
   void dumpRule (ostream &stream) const;
-  void updateColWidths (const TableRow& tr);
+  void updateColWidths (const TableRow& tr) const;
 
   bool _has_header;
   TableHeader _header;
   container _rows;
 
   //! maximum column index seen in this table
-  unsigned _max_col;
+  mutable unsigned _max_col;
   //! maximum width of respective columns
   mutable vector<unsigned> _max_width;
   //! table width (columns)
-  int _width;
+  mutable int _width;
   //! table line drawing style
   TableLineStyle _style;
   //! amount of space we have to print this table
@@ -204,14 +215,12 @@ namespace table
 
 inline
 Table& operator << (Table& table, const TableRow& tr) {
-  table.add (tr);
-  return table;
+  return table.add (tr);
 }
 
 inline
 Table& operator << (Table& table, const TableHeader& tr) {
-  table.setHeader (tr);
-  return table;
+  return table.setHeader (tr);
 }
 
 inline
