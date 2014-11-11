@@ -19,6 +19,7 @@
 #include <vector>
 
 #include <zypp/base/String.h>
+#include <zypp/base/Gettext.h>
 
 #include "utils/colors.h"
 
@@ -228,6 +229,102 @@ ostream& operator << (ostream& stream, const Table& table) {
   table.dumpTo (stream);
   return stream;
 }
+
+///////////////////////////////////////////////////////////////////
+/// \class PropertyTable
+/// \brief Alligned key/value with multiline support
+/// Key       : value 1
+/// LongKey   : value 2
+/// Multiline :
+///     line 1
+///     line 2
+/// Next Key  : value 3
+///
+///////////////////////////////////////////////////////////////////
+class PropertyTable : public base::SetRelationMixin<CpeId>
+{
+public:
+  PropertyTable()
+  { _table.lineStyle( ::Colon ); }
+
+public:
+  ///////////////////////////////////////////////////////////////////
+  // Key / Value
+  template <class KeyType, class ValueType>
+  PropertyTable & add( const KeyType & key_r, const ValueType & val_r )
+  { _table << ( TableRow() << key_r << val_r ); return *this; }
+
+  template <class KeyType>
+  PropertyTable & add( const KeyType & key_r, bool val_r )
+  { _table << ( TableRow() << key_r << (val_r ? _("Yes") : _("No")) ); return *this; }
+
+  ///////////////////////////////////////////////////////////////////
+  // Key / Container<Value>
+  template <class KeyType, class _Iterator >
+  PropertyTable & add( const KeyType & key_r, _Iterator begin_r, _Iterator end_r )
+  {
+    TableRow r;
+    r << key_r;
+    if ( begin_r != end_r )
+    {
+      _Iterator first = begin_r++;
+      if ( begin_r != end_r )
+      {
+	unsigned cnt = 1;
+	r.addDetail( *first );	// list in details
+	while ( begin_r != end_r )
+	{
+	  ++cnt;
+	  r.addDetail( *(begin_r++) );
+	}
+	r << cnt;		// size as value
+
+      }
+      else
+	r << *first;		// only one value
+   }
+    else
+      r << "";			// dummy to get the ":"
+    _table << r;
+    return *this;
+  }
+
+  template <class KeyType, class ContainerType>
+  PropertyTable & lst( const KeyType & key_r, const ContainerType & lst_r )
+  { return add( key_r, lst_r.begin(), lst_r.end() ); }
+
+  template <class KeyType, class ValueType>
+  PropertyTable & add( const KeyType & key_r, const std::set<ValueType> & lst_r )
+  { return lst( key_r, lst_r );  }
+  template <class KeyType, class ValueType>
+  PropertyTable & add( const KeyType & key_r, const std::list<ValueType> & lst_r )
+  { return lst( key_r, lst_r );  }
+  template <class KeyType, class ValueType>
+  PropertyTable & add( const KeyType & key_r, const std::vector<ValueType> & lst_r )
+  { return lst( key_r, lst_r ); }
+
+  ///////////////////////////////////////////////////////////////////
+  // misc
+  PropertyTable & paint( ColorContext cc_r, bool cond_r = true )
+  {
+    if ( cond_r )
+    {
+      std::string & lastval( _table.rows().back().columns().back() );
+      lastval = ColorString( lastval, cc_r ).paintStr();
+    }
+    return *this;
+  }
+
+public:
+  friend std::ostream & operator << ( std::ostream & str, const PropertyTable & obj )
+  { return str << obj._table; }
+
+private:
+  Table _table;
+};
+
+
+
 // Local Variables:
 // c-basic-offset: 2
 // End:
