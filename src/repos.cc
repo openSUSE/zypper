@@ -1671,6 +1671,17 @@ void add_repo(Zypper & zypper, RepoInfo & repo)
     return;
   }
 
+
+  if ( !repo.gpgCheck() )
+  {
+    zypper.out().warning( boost::formatNAC(
+      // translators: BOOST STYLE POSITIONAL DIRECTIVES ( %N% )
+      // translators: %1% - a repository name
+      _("GPG checking is disabled in configuration of repository '%1%'. Integrity and origin of packages cannot be verified."))
+      % repo.asUserString()
+    );
+  }
+
   ostringstream s;
   s << format(_("Repository '%s' successfully added")) % repo.asUserString();
   s << endl;
@@ -1684,23 +1695,22 @@ void add_repo(Zypper & zypper, RepoInfo & repo)
   }
   else
   {
-    // TranslatorExplanation used as e.g. "Enabled: Yes"
-    s << _("Enabled") << ": " << (repo.enabled() ? _("Yes") : _("No")) << endl;
-    // TranslatorExplanation used as e.g. "Autorefresh: Yes"
-    s << _("Autorefresh") << ": " << (repo.autorefresh() ? _("Yes") : _("No")) << endl;
-    // TranslatorExplanation used as e.g. "GPG check: Yes"
-    s << _("GPG check") << ": " << (repo.gpgCheck() ? _("Yes") : _("No")) << endl;
+    PropertyTable p;
+    // translators: property name; short; used like "Name: value"
+    p.add( _("Enabled"),	repo.enabled() );
+    // translators: property name; short; used like "Name: value"
+    p.add( _("Autorefresh"),	repo.autorefresh() );
+    // translators: property name; short; used like "Name: value"
+    p.add( _("GPG check"), 	repo.gpgCheck() ).paint( CC_NOTE, repo.gpgCheck() == false );
+    // translators: property name; short; used like "Name: value"
+    p.add( _("URI"),		repo.baseUrlsBegin(), repo.baseUrlsEnd() );
+    s << p;
 
-    if (!repo.baseUrlsEmpty())
-    {
-      s << "URI:";
-      for (RepoInfo::urls_const_iterator uit = repo.baseUrlsBegin();
-          uit != repo.baseUrlsEnd(); uit++)
-        s << " " << *uit;
-      s << endl;
-    }
+    //GPG checking for the repository is disabled. Integrity and origin of packages cannot be checked.
   }
   zypper.out().info(s.str());
+
+
 
   MIL << "Repository successfully added: " << repo << endl;
 
