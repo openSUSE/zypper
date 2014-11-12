@@ -94,22 +94,38 @@ for more details.
 zypper works with several types of resource objects, called
 .BR resolvables.
 A resolvable is a package, patch, pattern, or a product.
-.LP
-.B package
-\- an ordinary RPM package.
-.br
-.B patch
-\- update of one or more packages. A patch can include special scripts and
-messages to be run or shown during installation of the update.
-.br
-.B pattern
-\- group of packages required or recommended to install some functionality.
-.br
-.B product
-\- group of packages which are necessary to install a product.
-.br
-.B srcpackage
-\- source code package (.src.rpm). This type works in \fBsearch\fR and \fBinstall\fR commands.
+
+.PP
+\fBpackage\fR
+.RS 4
+An ordinary RPM package\&.
+.RE
+.PP
+\fBpatch\fR
+.RS 4
+A released patch conflicts with the affected/vulnerable versions of a collection of packages\&. As long as any of these affected/vulnerable versions is installed, the conflict triggers and the patch is classified as
+\fBneeded\fR\&. Selecting the patch, the conflict is resolved by updating all installed and affected/vulnerable packages to a version providing the fix\&. When updating the packages zypper always aims for the latest available version\&.
+.RE
+.PP
+\fBpattern\fR
+.RS 4
+A group of packages required or recommended to install some functionality\&.
+.RE
+.PP
+\fBproduct\fR
+.RS 4
+A group of packages which are necessary to install a product\&.
+.RE
+.PP
+\fBsrcpackage\fR
+.RS 4
+Source code package (\&.src\&.rpm)\&. This type works in
+\fBsearch\fR
+and
+\fBinstall\fR
+commands\&.
+.RE
+
 .LP
 Throughout this manual we will refer to resolvables simply as \fIpackages\fR
 and to resolvable types as \fIpackage types\fR. These type names can be used
