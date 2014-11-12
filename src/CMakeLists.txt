@@ -21,6 +21,7 @@ SET (zypper_HEADERS
   update.h
   download.h
   source-download.h
+  configtest.h
   solve-commit.h
   PackageArgs.h
   SolverRequester.h
@@ -45,6 +46,7 @@ SET( zypper_SRCS
   update.cc
   download.cc
   source-download.cc
+  configtest.cc
   solve-commit.cc
   PackageArgs.cc
   RequestFeedback.cc

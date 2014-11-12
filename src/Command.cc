@@ -86,6 +86,8 @@ namespace
       _T( SHELL_QUIT_e )	| "quit"		| "exit" | "\004";
       _T( MOO_e )		| "moo";
 
+      _T( CONFIGTEST_e)		|  "configtest";
+
       _T( RUG_PATCH_INFO_e )	| "patch-info";
       _T( RUG_PATTERN_INFO_e )	| "pattern-info";
       _T( RUG_PRODUCT_INFO_e )	| "product-info";

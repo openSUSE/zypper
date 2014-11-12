@@ -76,6 +76,8 @@ struct ZypperCommand
   static const ZypperCommand SHELL_QUIT;
   static const ZypperCommand MOO;
 
+  static const ZypperCommand CONFIGTEST;
+
   //!@{
   static const ZypperCommand RUG_PATCH_INFO;
   static const ZypperCommand RUG_PATTERN_INFO;
@@ -149,6 +151,8 @@ struct ZypperCommand
     SHELL_e,
     SHELL_QUIT_e,
     MOO_e,
+
+    CONFIGTEST_e,
 
     RUG_PATCH_INFO_e,
     RUG_PATTERN_INFO_e,

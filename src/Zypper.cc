@@ -58,6 +58,7 @@
 #include "info.h"
 #include "download.h"
 #include "source-download.h"
+#include "configtest.h"
 
 #include "output/OutNormal.h"
 #include "output/OutXML.h"
@@ -2790,6 +2791,17 @@ void Zypper::processCommandOptions()
     break;
   }
 
+  case ZypperCommand::CONFIGTEST_e:
+  {
+    static struct option options[] = {
+      {"help",	no_argument,	 0, 'h' },
+      {0, 0, 0, 0}
+    };
+    specific_options = options;
+    _command_help = "This command is for debuging purposes only.";
+    break;
+  }
+
   default:
   {
     if (runningHelp())
@@ -5151,6 +5163,13 @@ void Zypper::doCommand()
   // dummy commands
   case ZypperCommand::RUG_PING_e:
   {
+    break;
+  }
+
+  // Configtest debug command
+  case ZypperCommand::CONFIGTEST_e:
+  {
+    configtest( *this );
     break;
   }
 
