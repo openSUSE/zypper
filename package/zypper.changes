@@ -1,4 +1,10 @@
 -------------------------------------------------------------------
+Wed Nov 12 12:32:57 CET 2014 - ma@suse.de
+
+- man: improve patch description (bnc#904737)
+- version 1.6.316
+
+-------------------------------------------------------------------
 Tue Jun 24 14:10:47 CEST 2014 - ma@suse.de
 
 - Fix 'zypper --root sh' creating the zypp lockfile outside chroot
