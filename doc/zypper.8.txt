@@ -65,7 +65,7 @@ Zypper works with several types of resource objects, called 'resolvables'. A res
 *package*::
 	An ordinary RPM package.
 *patch*::
-	A released patch conflicts with the affected/vulnerable versions of a collection of packages. As long as any of these affected/vulnerable versions is installed, the conflict triggers and the patch is classified as *needed*. Selecting the patch, the conflict is resolved by updating all installed and affected/vulnerable packages to a version providing the fix.
+	A released patch conflicts with the affected/vulnerable versions of a collection of packages. As long as any of these affected/vulnerable versions are installed, the conflict triggers and the patch is classified as *needed*. Selecting the patch, the conflict is resolved by updating all installed and affected/vulnerable packages to a version providing the fix. When updating the packages zypper always aims for the latest available version.
 *pattern*::
 	A group of packages required or recommended to install some functionality.
 *product*::
