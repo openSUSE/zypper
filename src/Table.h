@@ -278,7 +278,6 @@ public:
 	  r.addDetail( *(begin_r++) );
 	}
 	r << cnt;		// size as value
-
       }
       else
 	r << *first;		// only one value

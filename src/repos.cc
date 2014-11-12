@@ -1705,8 +1705,6 @@ void add_repo(Zypper & zypper, RepoInfo & repo)
     // translators: property name; short; used like "Name: value"
     p.add( _("URI"),		repo.baseUrlsBegin(), repo.baseUrlsEnd() );
     s << p;
-
-    //GPG checking for the repository is disabled. Integrity and origin of packages cannot be checked.
   }
   zypper.out().info(s.str());
 
