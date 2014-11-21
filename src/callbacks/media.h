@@ -36,8 +36,11 @@ namespace ZmartRecipients
       bool counter_overrun(const zypp::Url & u){
         if (u==url)
         {
-          if (++counter==REPEAT_LIMIT)
+          if (++counter>=REPEAT_LIMIT)
+	  {
+	    counter = 0;	// reset!: next request might use the same URL again.
             return true;
+	  }
         }
         else
         {
