@@ -303,14 +303,17 @@ namespace zypp
 
     std::string & replaceAll( std::string & str_r, const std::string & from_r, const std::string & to_r )
     {
-      std::string::size_type pos = 0;
-      while ( (pos = str_r.find( from_r, pos )) != std::string::npos )
+      if ( ! from_r.empty() )
       {
-        str_r.replace( pos, from_r.size(), to_r );
-        pos += to_r.size();
+	std::string::size_type pos = 0;
+	while ( (pos = str_r.find( from_r, pos )) != std::string::npos )
+	{
+	  str_r.replace( pos, from_r.size(), to_r );
+	  pos += to_r.size();
 
-        if ( pos >= str_r.length() )
-          break;
+	  if ( pos >= str_r.length() )
+	    break;
+	}
       }
       return str_r;
     }
@@ -323,15 +326,18 @@ namespace zypp
 
     std::string & replaceAllFun( std::string & str_r, const std::string & from_r, function<std::string()> to_r )
     {
-      std::string::size_type pos = 0;
-      while ( (pos = str_r.find( from_r, pos )) != std::string::npos )
+      if ( ! from_r.empty() )
       {
-	std::string to( to_r() );
-        str_r.replace( pos, from_r.size(), to );
-        pos += to.size();
+	std::string::size_type pos = 0;
+	while ( (pos = str_r.find( from_r, pos )) != std::string::npos )
+	{
+	  std::string to( to_r() );
+	  str_r.replace( pos, from_r.size(), to );
+	  pos += to.size();
 
-        if ( pos >= str_r.length() )
-          break;
+	  if ( pos >= str_r.length() )
+	    break;
+	}
       }
       return str_r;
     }
