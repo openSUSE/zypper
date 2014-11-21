@@ -1,4 +1,10 @@
 -------------------------------------------------------------------
+Fri Nov 21 11:03:26 CET 2014 - ma@suse.de
+
+- properly reset auto-retry counter (bnc#906549)
+- version 1.9.18
+
+-------------------------------------------------------------------
 Sun Oct 19 01:14:49 CEST 2014 - ma@suse.de
 
 - Update zypper-po.tar.bz2
