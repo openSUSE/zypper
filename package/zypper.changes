@@ -1,4 +1,10 @@
 -------------------------------------------------------------------
+Fri Nov 21 12:38:32 CET 2014 - ma@suse.de
+
+- Enhance 'Digest verification failed' dialog (FATE#315008)
+- version 1.6.400
+
+-------------------------------------------------------------------
 Fri Nov 21 11:03:00 CET 2014 - ma@suse.de
 
 - properly reset auto-retry counter (bnc#906549)
