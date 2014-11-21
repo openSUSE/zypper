@@ -1,4 +1,10 @@
 -------------------------------------------------------------------
+Fri Nov 21 11:03:00 CET 2014 - ma@suse.de
+
+- properly reset auto-retry counter (bnc#906549)
+- version 1.6.317
+
+-------------------------------------------------------------------
 Wed Nov 12 12:32:57 CET 2014 - ma@suse.de
 
 - man: improve patch description (bnc#904737)
