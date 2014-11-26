@@ -241,7 +241,7 @@ ostream& operator << (ostream& stream, const Table& table) {
 /// Next Key  : value 3
 ///
 ///////////////////////////////////////////////////////////////////
-class PropertyTable : public base::SetRelationMixin<CpeId>
+class PropertyTable
 {
 public:
   PropertyTable()
