@@ -1,4 +1,11 @@
 -------------------------------------------------------------------
+Thu Nov 27 07:40:30 UTC 2014 - dimstar@opensuse.org
+
+- Do not provide/obsolete yast2-packagemanager-devel by the -doc
+  package: the -devel package already does that.
+- Minor .spec cleanup (remove Authors section).
+
+-------------------------------------------------------------------
 Tue Nov 11 17:09:28 CET 2014 - ma@suse.de
 
 - Call rpm with '--noglob' (bnc#892431)
