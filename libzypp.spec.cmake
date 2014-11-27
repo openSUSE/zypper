@@ -134,17 +134,6 @@ Requires:       libcurl   >= %{min_curl_version}
 %description
 Package, Patch, Pattern, and Product Management
 
-Authors:
---------
-    Michael Andres <ma@suse.de>
-    Jiri Srain <jsrain@suse.cz>
-    Stefan Schubert <schubi@suse.de>
-    Duncan Mac-Vicar <dmacvicar@suse.de>
-    Klaus Kaempf <kkaempf@suse.de>
-    Marius Tomaschewski <mt@suse.de>
-    Stanislav Visnovsky <visnov@suse.cz>
-    Ladislav Slezak <lslezak@suse.cz>
-
 %package devel
 Summary:        Package, Patch, Pattern, and Product Management - developers files
 Group:          Development/Libraries/C and C++
@@ -190,8 +179,6 @@ Package, Patch, Pattern, and Product Management - developers files
 %package devel-doc
 Summary:        Package, Patch, Pattern, and Product Management - developers files
 Group:          Documentation/HTML
-Provides:       yast2-packagemanager-devel
-Obsoletes:      yast2-packagemanager-devel
 
 %description devel-doc
 Package, Patch, Pattern, and Product Management - developers files
