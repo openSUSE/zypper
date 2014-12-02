@@ -21,6 +21,7 @@
 #include <zypp/base/String.h>
 #include <zypp/base/Gettext.h>
 
+#include "utils/ansi.h"
 #include "utils/colors.h"
 
 using std::string;
@@ -304,12 +305,13 @@ public:
 
   ///////////////////////////////////////////////////////////////////
   // misc
-  PropertyTable & paint( ColorContext cc_r, bool cond_r = true )
+  PropertyTable & paint( ansi::Color color_r, bool cond_r = true )
   {
     if ( cond_r )
     {
+      // FIXME re-coloring like this works ony once
       std::string & lastval( _table.rows().back().columns().back() );
-      lastval = ColorString( lastval, cc_r ).paintStr();
+      lastval = ColorString( lastval, color_r ).str();
     }
     return *this;
   }

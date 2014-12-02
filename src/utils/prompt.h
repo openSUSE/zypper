@@ -13,6 +13,7 @@
 #include "output/prompt.h"
 #include "utils/console.h"
 #include "main.h" // for gettext macros
+#include "ansi.h"
 
 /**
  * Example:
@@ -53,12 +54,12 @@ public:
   const StrVector & options() const { return _options; }
   void setOptions(const std::string & option_str, unsigned int default_opt);
   unsigned int defaultOpt() const { return _default; }
-  const std::string optionString() const;
-  const std::string optionStringColored() const;
+  /** Option string (may have embedded color codes) */
+  ColorString optionString() const;
   bool empty() const { return _options.empty(); }
   bool isYesNoPrompt() const;
 
-  const std::string optionHelp(unsigned int opt) const
+  const std::string & optionHelp(unsigned int opt) const
   { static std::string empty; return opt < _opt_help.size() ? _opt_help[opt] : empty; }
   //const std::string getOptionHelp(const std::string & opt_str);
   void setOptionHelp(unsigned int opt, const std::string & help_str);

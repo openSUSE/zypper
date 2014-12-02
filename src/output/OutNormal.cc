@@ -51,7 +51,7 @@ bool OutNormal::infoWarningFilter(Verbosity verbosity_r, Type mask)
   return false;
 }
 
-void OutNormal::info(const std::string & msg, Verbosity verbosity_r, Type mask)
+void OutNormal::info(const std::string & msg_r, Verbosity verbosity_r, Type mask)
 {
   if (infoWarningFilter(verbosity_r, mask))
     return;
@@ -59,16 +59,13 @@ void OutNormal::info(const std::string & msg, Verbosity verbosity_r, Type mask)
   if (!_newline)
     cout << endl;
 
-  if (verbosity_r == Out::QUIET)
-    print_color(msg, COLOR_CONTEXT_RESULT);
-  else if (verbosity_r == Out::DEBUG)
-  {
-    print_color(msg, COLOR_CONTEXT_OSDEBUG);
-  }
-  else
-    print_color(msg, COLOR_CONTEXT_MSG_STATUS);
+  ColorString msg( msg_r, ColorContext::MSG_STATUS );
+  if ( verbosity_r == Out::QUIET )
+    msg = ColorContext::RESULT;
+  else if ( verbosity_r == Out::DEBUG )
+    msg = ColorContext::OSDEBUG;
 
-  cout << endl;
+  cout << msg << endl;
   _newline = true;
 }
 
@@ -83,8 +80,7 @@ void OutNormal::warning(const std::string & msg, Verbosity verbosity_r, Type mas
   if (!_newline)
     cout << endl;
 
-  print_color(_("Warning: "), COLOR_CONTEXT_MSG_WARNING);
-  cout << msg << endl;
+  cout << ( ColorContext::MSG_WARNING << _("Warning: ") ) << msg << endl;
   _newline = true;
 }
 
@@ -93,7 +89,7 @@ void OutNormal::error(const std::string & problem_desc, const std::string & hint
   if (!_newline)
     cout << endl;
 
-  fprint_color(cerr, problem_desc, COLOR_CONTEXT_MSG_ERROR);
+  cerr << ( ColorContext::MSG_ERROR << problem_desc );
   if (!hint.empty() && verbosity() > Out::QUIET)
     cerr << endl << hint;
   cerr << endl;
@@ -109,12 +105,8 @@ void OutNormal::error(const zypp::Exception & e,
   if (!_newline)
     cout << endl;
 
-  // problem
-  fprint_color(cerr, problem_desc, COLOR_CONTEXT_MSG_ERROR);
-  cerr << endl;
-  // cause
-  fprint_color(cerr, zyppExceptionReport(e), COLOR_CONTEXT_MSG_ERROR);
-  cerr << endl;
+  // problem and cause
+  cerr << ( ColorContext::MSG_ERROR << problem_desc << endl << zyppExceptionReport(e) ) << endl;
 
   // hint
   if (!hint.empty() && verbosity() > Out::QUIET)
@@ -218,7 +210,7 @@ void OutNormal::progressEnd(const std::string & id, const string & label, bool e
     return;
 
   if (!error && _use_colors)
-    cout << get_color(COLOR_CONTEXT_MSG_STATUS);
+    cout << ColorContext::MSG_STATUS;
 
   TermLine outstr( TermLine::SF_CRUSH | TermLine::SF_EXPAND, '.' );
   if (_isatty)
@@ -236,8 +228,8 @@ void OutNormal::progressEnd(const std::string & id, const string & label, bool e
     {
       // a bit clmupsy and not perfect: hidden char counting
       unsigned tag( std::string(outstr.rhs).size() );
-      std::string errstr( _("error") );
-      fprint_color(outstr.rhs._str, errstr, COLOR_CONTEXT_NEGATIVE);
+      ColorString errstr( _("error"), ColorContext::NEGATIVE );
+      outstr.rhs << errstr;
       outstr.rhidden += unsigned(std::string(outstr.rhs).size() - errstr.size()) - tag ;
     }
     else
@@ -253,7 +245,7 @@ void OutNormal::progressEnd(const std::string & id, const string & label, bool e
   _newline = true;
 
   if (!error && _use_colors)
-    cout << COLOR_RESET;
+    cout << ColorContext::DEFAULT;
 }
 
 // progress with download rate
@@ -332,7 +324,7 @@ void OutNormal::dwnldProgressEnd(const zypp::Url & uri, long rate, bool error)
     return;
 
   if (!error && _use_colors)
-    cout << get_color(COLOR_CONTEXT_MSG_STATUS);
+    cout << ColorContext::MSG_STATUS;
 
   TermLine outstr( TermLine::SF_CRUSH | TermLine::SF_EXPAND, '.' );
   if (_isatty)
@@ -351,8 +343,8 @@ void OutNormal::dwnldProgressEnd(const zypp::Url & uri, long rate, bool error)
     {
       // a bit clmupsy and not perfect: hidden char counting
       unsigned tag( std::string(outstr.rhs).size() );
-      std::string errstr( _("error") );
-      fprint_color(outstr.rhs._str, errstr, COLOR_CONTEXT_NEGATIVE);
+      ColorString errstr( _("error"), ColorContext::NEGATIVE );
+      outstr.rhs << errstr;
       outstr.rhidden += unsigned(std::string(outstr.rhs).size() - errstr.size()) - tag ;
     }
     else
@@ -370,7 +362,7 @@ void OutNormal::dwnldProgressEnd(const zypp::Url & uri, long rate, bool error)
   _newline = true;
 
   if (!error && _use_colors)
-    cout << COLOR_RESET;
+    cout << ColorContext::DEFAULT;
 }
 
 void OutNormal::prompt(PromptId id,

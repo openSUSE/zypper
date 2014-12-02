@@ -1701,7 +1701,7 @@ void add_repo(Zypper & zypper, RepoInfo & repo)
     // translators: property name; short; used like "Name: value"
     p.add( _("Autorefresh"),	repo.autorefresh() );
     // translators: property name; short; used like "Name: value"
-    p.add( _("GPG check"), 	repo.gpgCheck() ).paint( CC_NOTE, repo.gpgCheck() == false );
+    p.add( _("GPG check"), 	repo.gpgCheck() ).paint( ColorContext::MSG_WARNING, repo.gpgCheck() == false );
     // translators: property name; short; used like "Name: value"
     p.add( _("URI"),		repo.baseUrlsBegin(), repo.baseUrlsEnd() );
     s << p;

@@ -57,47 +57,36 @@ void PromptOptions::setOptions(const std::string & option_str, unsigned int defa
 
 
 
-const string PromptOptions::optionString() const
+ColorString PromptOptions::optionString() const
 {
-  ostringstream option_str;
-  StrVector::const_iterator it;
-  unsigned int shown_count = _shown_count < 0 ? options().size() : _shown_count;
+  ostringstream str;
 
-  if ((it = options().begin()) != options().end() && shown_count)
+  unsigned shown = 0;
+  unsigned maxidx = _shown_count < 0 ? _options.size()
+                                     : ( (unsigned)_shown_count < _options.size() ? _shown_count : _options.size() );
+  for ( unsigned idx = 0; idx < maxidx; ++idx )
   {
-    option_str << "[";
-    fprint_color(option_str, *it, COLOR_CONTEXT_PROMPT_OPTION);
-    // fprint_color(option_str, *it, COLOR_CONTEXT_PROMPT_SHORTHAND);
-    ++it;
-  }
-  for (unsigned int i = 1; it != options().end() && i < shown_count; ++it, ++i)
-    if (isEnabled(i))
+    if ( isEnabled( idx ) )
     {
-      option_str << "/";
-      fprint_color(option_str, *it, COLOR_CONTEXT_PROMPT_OPTION);
-      //fprint_color(option_str, *it, COLOR_CONTEXT_PROMPT_SHORTHAND);
+      str << ( shown ? "/" : "[" ) << ( ColorContext::PROMPT_OPTION << _options[idx] );
+      ++shown;
     }
+  }
 
-  if (!_opt_help.empty())
+  if ( !_opt_help.empty() )
   {
-    if (shown_count)
-      option_str << "/";
-    fprint_color(option_str, "?", COLOR_CONTEXT_PROMPT_OPTION);
+    if ( shown )
+      str << "/";
     // translators: Press '?' to see all options embedded in this prompt: "Continue? [y/n/? shows all options] (y):"
-    option_str << " " << _("shows all options");
+    str << ( ColorContext::PROMPT_OPTION << "?" ) << " " << _("shows all options");
   }
 
-  if (!_options.empty() && shown_count)
+  if ( shown )
   {
-    option_str << "]";
-
-    // default option
-    option_str << " (";
-    fprint_color(option_str, _options[_default], COLOR_CONTEXT_PROMPT_OPTION);
-    option_str << ")";
+    str << "] (" << ( ColorContext::PROMPT_OPTION << _options[_default] ) << ")";
   }
 
-  return option_str.str();
+  return ColorString( str.str() );
 }
 
 

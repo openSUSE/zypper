@@ -390,7 +390,7 @@ void Summary::writeResolvableList(ostream & out, const ResPairSet & resolvables)
 
   if ((_viewop & DETAILS) == 0)
   {
-    static const char* quoteCh = "\"";
+    static const ColorString quoteCh( "\"", ColorContext::HIGHLIGHT );
     char firstCh = 0;
     ostringstream s;
     for (ResPairSet::const_iterator resit = resolvables.begin();
@@ -398,6 +398,9 @@ void Summary::writeResolvableList(ostream & out, const ResPairSet & resolvables)
     {
       // name
       const std::string & name( ResPair2Name( *resit ) );
+      if ( name.empty() )
+	continue;
+
       // quote names with spaces
       bool quote( name.find_first_of( " " ) != std::string::npos );
 
@@ -410,15 +413,11 @@ void Summary::writeResolvableList(ostream & out, const ResPairSet & resolvables)
       }
 
       // quote?
-      if ( quote ) fprint_color(s, quoteCh, COLOR_CONTEXT_HIGHLIGHT);
-
+      if ( quote ) s << quoteCh;
       // highlight 1st char
-      fprint_color(s, str::form("%c", name[0]), COLOR_CONTEXT_HIGHLIGHT);
-      s << name.substr(1);
-
+      s << ( ColorContext::HIGHLIGHT << name[0] ) << name.c_str()+1;
       // quote?
-      if ( quote ) fprint_color(s, quoteCh, COLOR_CONTEXT_HIGHLIGHT);
-
+      if ( quote ) s << quoteCh;
 
       // version (if multiple versions are present)
       if (!(_viewop & SHOW_VERSION) && multi_installed.find(resit->second->name()) != multi_installed.end())
@@ -1219,7 +1218,7 @@ void Summary::writePackageCounts(ostream & out)
   i = _toupgrade.find(ResKind::package);
   if (i != _toupgrade.end() && (count = i->second.size()) )
   {
-    fprint_color(s, str::form("%d ", count), COLOR_CONTEXT_HIGHLIGHT);
+    s << ( ColorContext::HIGHLIGHT << count ) << " ";
     // translators: this text will be preceded by a number e.g. "5 packages to ..."
     s << _PL("package to upgrade", "packages to upgrade", count);
     gotcha = true;
@@ -1229,7 +1228,7 @@ void Summary::writePackageCounts(ostream & out)
   {
     if (gotcha)
       s << ", ";
-    fprint_color(s, str::form("%d ", count), COLOR_CONTEXT_HIGHLIGHT);
+    s << ( ColorContext::HIGHLIGHT << count ) << " ";
     if (gotcha)
       // translators: this text will be preceded by a number e.g. "5 to ..."
       s << _PL("to downgrade", "to downgrade", count);
@@ -1243,7 +1242,7 @@ void Summary::writePackageCounts(ostream & out)
   {
     if (gotcha)
       s << ", ";
-    fprint_color(s, str::form("%d ", count), COLOR_CONTEXT_HIGHLIGHT);
+    s << ( ColorContext::HIGHLIGHT << count ) << " ";
     if (gotcha)
       // translators: this text will be preceded by a number e.g. "5 new"
       s << _PL("new", "new", count);
@@ -1257,7 +1256,7 @@ void Summary::writePackageCounts(ostream & out)
   {
     if (gotcha)
       s << ", ";
-    fprint_color(s, str::form("%d ", count), COLOR_CONTEXT_HIGHLIGHT);
+    s << ( ColorContext::HIGHLIGHT << count ) << " ";
     if (gotcha)
       // translators: this text will be preceded by a number e.g. "5 to ..."
       s << _PL("to reinstall", "to reinstall", count);
@@ -1271,7 +1270,7 @@ void Summary::writePackageCounts(ostream & out)
   {
     if (gotcha)
       s << ", ";
-    fprint_color(s, str::form("%d ", count), COLOR_CONTEXT_NEGATIVE);
+    s << ( ColorContext::NEGATIVE << count ) << " ";
     if (gotcha)
       // translators: this text will be preceded by a number e.g. "5 to ..."
       s << _PL("to remove", "to remove", count);
@@ -1285,7 +1284,7 @@ void Summary::writePackageCounts(ostream & out)
   {
     if (gotcha)
       s << ", ";
-    fprint_color(s, str::form("%d ", count), COLOR_CONTEXT_NEGATIVE);
+    s << ( ColorContext::NEGATIVE << count ) << " ";
     if (gotcha)
       // translators: this text will be preceded by a number e.g. "5 to ..."
       s << _PL("to change vendor", " to change vendor", count);
@@ -1299,7 +1298,7 @@ void Summary::writePackageCounts(ostream & out)
   {
     if (gotcha)
       s << ", ";
-    fprint_color(s, str::form("%d ", count), COLOR_CONTEXT_HIGHLIGHT);
+    s << ( ColorContext::HIGHLIGHT << count ) << " ";
     if (gotcha)
       // translators: this text will be preceded by a number e.g. "5 to ..."
       s << _PL("to change arch", "to change arch", count);
@@ -1313,7 +1312,7 @@ void Summary::writePackageCounts(ostream & out)
   {
     if (gotcha)
       s << ", ";
-    fprint_color(s, str::form("%d ", count), COLOR_CONTEXT_HIGHLIGHT);
+    s << ( ColorContext::HIGHLIGHT << count ) << " ";
     if (gotcha)
       // translators: this text will be preceded by a number e.g. "5 new"
       s << _PL("source package", "source packages", count);
