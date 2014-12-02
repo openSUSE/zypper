@@ -12,71 +12,9 @@
 #include <set>
 
 #include <zypp/Url.h>
+
 #include "Command.h"
 #include "utils/colors.h"
-
-class ConfigOption
-{
-public:
-  static const ConfigOption MAIN_SHOW_ALIAS;
-  static const ConfigOption MAIN_REPO_LIST_COLUMNS;
-
-  static const ConfigOption SOLVER_INSTALL_RECOMMENDS;
-  static const ConfigOption SOLVER_FORCE_RESOLUTION_COMMANDS;
-
-  static const ConfigOption COLOR_USE_COLORS;
-  static const ConfigOption COLOR_BACKGROUND;
-  static const ConfigOption COLOR_RESULT;
-  static const ConfigOption COLOR_MSG_STATUS;
-  static const ConfigOption COLOR_MSG_ERROR;
-  static const ConfigOption COLOR_MSG_WARNING;
-  static const ConfigOption COLOR_POSITIVE;
-  static const ConfigOption COLOR_NEGATIVE;
-  static const ConfigOption COLOR_HIGHLIGHT;
-  static const ConfigOption COLOR_PROMPT_OPTION;
-  static const ConfigOption COLOR_PROMPT_SHORTHAND;
-
-  static const ConfigOption OBS_BASE_URL;
-  static const ConfigOption OBS_PLATFORM;
-
-  enum Option
-  {
-    MAIN_SHOW_ALIAS_e,
-    MAIN_REPO_LIST_COLUMNS_e,
-
-    SOLVER_INSTALL_RECOMMENDS_e,
-    SOLVER_FORCE_RESOLUTION_COMMANDS_e,
-
-    COLOR_USE_COLORS_e,
-    COLOR_BACKGROUND_e,
-    COLOR_RESULT_e,
-    COLOR_MSG_STATUS_e,
-    COLOR_MSG_ERROR_e,
-    COLOR_MSG_WARNING_e,
-    COLOR_POSITIVE_e,
-    COLOR_NEGATIVE_e,
-    COLOR_HIGHLIGHT_e,
-    COLOR_PROMPT_OPTION_e,
-    COLOR_PROMPT_SHORTHAND_e,
-
-    OBS_BASE_URL_e,
-    OBS_PLATFORM_e
-  };
-
-  ConfigOption(Option option) : _value(option) {}
-
-  explicit ConfigOption(const std::string & strval_r);
-
-  Option toEnum() const { return _value; }
-
-  ConfigOption::Option parse(const std::string & strval_r);
-
-  std::string asString() const;
-
-private:
-  Option _value;
-};
-
 
 /**
  *
@@ -104,20 +42,16 @@ struct Config
   /** zypper.conf: color.useColors */
   std::string color_useColors;
 
-  /**
-   * zypper.conf: color.background
-   * dark (false) or light (true)
-   */
-  bool color_background;
-
-  Color color_result;
-  Color color_msgStatus;
-  Color color_msgError;
-  Color color_msgWarning;
-  Color color_positive;
-  Color color_negative;
-  Color color_highlight;
-  Color color_promptOption;
+  ansi::Color color_result;
+  ansi::Color color_msgStatus;
+  ansi::Color color_msgError;
+  ansi::Color color_msgWarning;
+  ansi::Color color_promptOption;
+  ansi::Color color_positive;
+  ansi::Color color_negative;
+  ansi::Color color_highlight;
+  ansi::Color color_lowlight;
+  ansi::Color color_osdebug;
 
   /** zypper.conf: obs.baseUrl */
   zypp::Url obs_baseUrl;

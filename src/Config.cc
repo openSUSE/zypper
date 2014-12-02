@@ -5,12 +5,11 @@
                              |__/|_|  |_|
 \*---------------------------------------------------------------------------*/
 
-#include <iostream>
-#include <unordered_map>
 extern "C"
 {
   #include <libintl.h>
 }
+#include <iostream>
 
 #include <zypp/base/Logger.h>
 #include <zypp/base/Measure.h>
@@ -27,132 +26,161 @@ extern "C"
 #endif
 #define _(MSG) ::gettext(MSG)
 
-using namespace std;
 using namespace zypp;
-
-const ConfigOption ConfigOption::MAIN_SHOW_ALIAS(ConfigOption::MAIN_SHOW_ALIAS_e);
-const ConfigOption ConfigOption::MAIN_REPO_LIST_COLUMNS(ConfigOption::MAIN_REPO_LIST_COLUMNS_e);
-const ConfigOption ConfigOption::SOLVER_INSTALL_RECOMMENDS(ConfigOption::SOLVER_INSTALL_RECOMMENDS_e);
-const ConfigOption ConfigOption::SOLVER_FORCE_RESOLUTION_COMMANDS(ConfigOption::SOLVER_FORCE_RESOLUTION_COMMANDS_e);
-const ConfigOption ConfigOption::COLOR_USE_COLORS(ConfigOption::COLOR_USE_COLORS_e);
-const ConfigOption ConfigOption::COLOR_BACKGROUND(ConfigOption::COLOR_BACKGROUND_e);
-const ConfigOption ConfigOption::COLOR_RESULT(ConfigOption::COLOR_RESULT_e);
-const ConfigOption ConfigOption::COLOR_MSG_STATUS(ConfigOption::COLOR_MSG_STATUS_e);
-const ConfigOption ConfigOption::COLOR_MSG_ERROR(ConfigOption::COLOR_MSG_ERROR_e);
-const ConfigOption ConfigOption::COLOR_MSG_WARNING(ConfigOption::COLOR_MSG_WARNING_e);
-const ConfigOption ConfigOption::COLOR_POSITIVE(ConfigOption::COLOR_POSITIVE_e);
-const ConfigOption ConfigOption::COLOR_NEGATIVE(ConfigOption::COLOR_NEGATIVE_e);
-const ConfigOption ConfigOption::COLOR_HIGHLIGHT(ConfigOption::COLOR_HIGHLIGHT_e);
-const ConfigOption ConfigOption::COLOR_PROMPT_OPTION(ConfigOption::COLOR_PROMPT_OPTION_e);
-const ConfigOption ConfigOption::COLOR_PROMPT_SHORTHAND(ConfigOption::COLOR_PROMPT_SHORTHAND_e);
-const ConfigOption ConfigOption::OBS_BASE_URL(ConfigOption::OBS_BASE_URL_e);
-const ConfigOption ConfigOption::OBS_PLATFORM(ConfigOption::OBS_PLATFORM_e);
+using std::endl;
 
 //////////////////////////////////////////////////////////////////
 namespace
 {
-  typedef std::pair<std::string,ConfigOption::Option> OptionPair;
-  /* add new options here: */
-  const std::vector<OptionPair> & optionPairs()
+  /** Color names (case insensitive) accepted in the config file. */
+  ansi::Color namedColor( std::string name_r )
   {
-    static const std::vector<OptionPair> _data = {
-      { "main/showAlias",			ConfigOption::MAIN_SHOW_ALIAS_e			},
-      { "main/repoListColumns",			ConfigOption::MAIN_REPO_LIST_COLUMNS_e		},
-      { "solver/installRecommends",		ConfigOption::SOLVER_INSTALL_RECOMMENDS_e	},
-      { "solver/forceResolutionCommands",	ConfigOption::SOLVER_FORCE_RESOLUTION_COMMANDS_e},
-      { "color/useColors",			ConfigOption::COLOR_USE_COLORS_e		},
-      { "color/background",			ConfigOption::COLOR_BACKGROUND_e		},
-      { "color/result",				ConfigOption::COLOR_RESULT_e			},
-      { "color/msgStatus",			ConfigOption::COLOR_MSG_STATUS_e		},
-      { "color/msgError",			ConfigOption::COLOR_MSG_ERROR_e			},
-      { "color/msgWarning",			ConfigOption::COLOR_MSG_WARNING_e		},
-      { "color/positive",			ConfigOption::COLOR_POSITIVE_e			},
-      { "color/negative",			ConfigOption::COLOR_NEGATIVE_e			},
-      { "color/highlight",			ConfigOption::COLOR_HIGHLIGHT_e			},
-      { "color/promptOption",			ConfigOption::COLOR_PROMPT_OPTION_e		},
-      { "obs/baseUrl",				ConfigOption::OBS_BASE_URL_e			},
-      { "obs/platform",				ConfigOption::OBS_PLATFORM_e			}
+    static const std::map<std::string, ansi::Color> _def =  {
+      { "black",	ansi::Color::Black		},
+      { "darkgrey",	ansi::Color::BrightBlack	},
+      { "red",		ansi::Color::Red		},
+      { "green",	ansi::Color::Green		},
+      { "brown",	ansi::Color::Yellow		},
+      { "yellow",	ansi::Color::BrightYellow	},
+      { "blue",		ansi::Color::Blue		},
+      { "magenta",	ansi::Color::Magenta		},
+      { "purple",	ansi::Color::Magenta		},
+      { "cyan",		ansi::Color::Cyan		},
+      { "grey",		ansi::Color::White		},
+      { "white",	ansi::Color::BrightWhite	},
+      { "default",	ansi::Color::Default		},
+      { "",		ansi::Color::Default		},  // matches "bold" "light" "bright" NOT ""
     };
-    return _data;
+
+    ansi::Color ret = ansi::Color::nocolor();
+
+    if ( name_r.empty() )	// "" when undefined in config file
+      return ret;
+
+    name_r = str::toLower( name_r );
+
+    if ( str::hasPrefix( name_r, "bold" ) )
+    {
+      name_r.erase( 0, 4 );
+      ret <= ansi::Color::Attr::Bright;
+    }
+    else if (str::hasPrefix( name_r, "light" ) )
+    {
+      name_r.erase( 0, 5 );
+      ret <= ansi::Color::Attr::Bright;
+    }
+    else if (str::hasPrefix( name_r, "bright" ) )
+    {
+      name_r.erase( 0, 6 );
+      ret <= ansi::Color::Attr::Bright;
+    }
+
+    auto && it = _def.find( name_r );
+    if ( it == _def.end() )
+    {
+      ERR << "Unknown color name '" << name_r << "'" << endl;
+      ret = ansi::Color::Default;
+    }
+    else
+    {
+      ret = ( it->second < ret );
+    }
+    return ret;
   }
 } // namespace
 //////////////////////////////////////////////////////////////////
+
 //////////////////////////////////////////////////////////////////
-namespace std
+namespace
 {
-  template<>
-  struct hash<ConfigOption::Option>
-  {
-    size_t operator()( const ConfigOption::Option & __s ) const
-    { return __s; }
+  enum class ConfigOption {
+    MAIN_SHOW_ALIAS,
+    MAIN_REPO_LIST_COLUMNS,
+
+    SOLVER_INSTALL_RECOMMENDS,
+    SOLVER_FORCE_RESOLUTION_COMMANDS,
+
+    COLOR_USE_COLORS,
+    COLOR_RESULT,
+    COLOR_MSG_STATUS,
+    COLOR_MSG_ERROR,
+    COLOR_MSG_WARNING,
+    COLOR_PROMPT_OPTION,
+    COLOR_POSITIVE,
+    COLOR_NEGATIVE,
+    COLOR_HIGHLIGHT,
+    COLOR_LOWLIGHT,
+    COLOR_OSDEBUG,
+
+    OBS_BASE_URL,
+    OBS_PLATFORM
   };
-} // namespace std
-//////////////////////////////////////////////////////////////////
 
-ConfigOption::ConfigOption(const std::string & strval_r)
-  : _value(parse(strval_r))
-{}
-
-ConfigOption::Option ConfigOption::parse(const std::string & strval_r)
-{
-  static std::unordered_map<std::string,ConfigOption::Option> _index = [](){
-    // index into optionPairs
-    std::unordered_map<std::string,ConfigOption::Option> data;
-    for ( const auto & p : optionPairs() )
-      data[p.first] = p.second;
-    return data;
-  }();
-
-  auto it( _index.find( strval_r ) );
-  if ( it == _index.end() )
+  const std::vector<std::pair<std::string,ConfigOption>> & optionPairs()
   {
-    ZYPP_THROW(zypp::Exception(
-      zypp::str::form(_("Unknown configuration option '%s'"), strval_r.c_str())));
+    static const std::vector<std::pair<std::string,ConfigOption>> _data = {
+      { "main/showAlias",			ConfigOption::MAIN_SHOW_ALIAS			},
+      { "main/repoListColumns",			ConfigOption::MAIN_REPO_LIST_COLUMNS		},
+      { "solver/installRecommends",		ConfigOption::SOLVER_INSTALL_RECOMMENDS		},
+      { "solver/forceResolutionCommands",	ConfigOption::SOLVER_FORCE_RESOLUTION_COMMANDS	},
+
+      { "color/useColors",			ConfigOption::COLOR_USE_COLORS			},
+      //"color/background"			LEGACY
+      { "color/result",				ConfigOption::COLOR_RESULT			},
+      { "color/msgStatus",			ConfigOption::COLOR_MSG_STATUS			},
+      { "color/msgError",			ConfigOption::COLOR_MSG_ERROR			},
+      { "color/msgWarning",			ConfigOption::COLOR_MSG_WARNING			},
+      { "color/promptOption",			ConfigOption::COLOR_PROMPT_OPTION		},
+      { "color/positive",			ConfigOption::COLOR_POSITIVE			},
+      { "color/negative",			ConfigOption::COLOR_NEGATIVE			},
+      { "color/highlight",			ConfigOption::COLOR_HIGHLIGHT			},
+      { "color/lowlight",			ConfigOption::COLOR_LOWLIGHT			},
+      { "color/osdebug",			ConfigOption::COLOR_OSDEBUG			},
+
+      { "obs/baseUrl",				ConfigOption::OBS_BASE_URL			},
+      { "obs/platform",				ConfigOption::OBS_PLATFORM			}
+    };
+    return _data;
   }
-  return it->second;
-}
 
-string ConfigOption::asString() const
-{
-  static std::unordered_map<ConfigOption::Option,std::string> _index = [](){
-    // index into optionPairs
-    std::unordered_map<ConfigOption::Option,std::string> data;
+  std::string asString( ConfigOption value_r )
+  {
     for ( const auto & p : optionPairs() )
-      data[p.second] = p.first;
-    return data;
-  }();
+    {
+      if ( p.second == value_r )
+	return p.first;
+    }
+    return std::string();
+  }
 
-  auto it( _index.find( _value ) );
-  if ( it != _index.end() )
-    return it->second;
-  return string();
-}
-
+} // namespace
+//////////////////////////////////////////////////////////////////
 
 Config::Config()
   : repo_list_columns("anr")
   , solver_installRecommends(!ZConfig::instance().solver_onlyRequires())
-  , do_colors        (false)
-  , color_useColors  ("never")
-  , color_background (false)    // dark background
-  , color_result     ("white")  // default colors for dark background
-  , color_msgStatus  ("grey")   // if background is actually light, these
-  , color_msgError   ("red")    // colors will be overwritten in read()
-  , color_msgWarning ("purple")
-  , color_positive   ("green")
-  , color_negative   ("red")
-  , color_highlight  ("cyan")
-  , color_promptOption("grey")
+  , do_colors		(false)
+  , color_useColors	("never")
+  , color_result	(namedColor("default"))	// default colors for dark background
+  , color_msgStatus	(namedColor("default"))	// if background is actually light, these
+  , color_msgError	(namedColor("red"))	// colors will be overwritten in read()
+  , color_msgWarning	(namedColor("purple"))
+  , color_promptOption	(namedColor("bold"))
+  , color_positive	(namedColor("green"))
+  , color_negative	(namedColor("red"))
+  , color_highlight	(namedColor("cyan"))
+  , color_lowlight	(namedColor("brown"))
+  , color_osdebug	(namedColor("default") < ansi::Color::Attr::Reverse)
   , obs_baseUrl("http://download.opensuse.org/repositories/")
   , obs_platform("openSUSE_Factory")
 {}
 
-void Config::read(const string & file)
+void Config::read( const std::string & file )
 {
   try
   {
     debug::Measure m("ReadConfig");
-    string s;
+    std::string s;
 
     Augeas augeas(file);
 
@@ -160,31 +188,31 @@ void Config::read(const string & file)
 
     // ---------------[ main ]--------------------------------------------------
 
-    s = augeas.getOption(ConfigOption::MAIN_SHOW_ALIAS.asString());
+    s = augeas.getOption(asString( ConfigOption::MAIN_SHOW_ALIAS ));
     if (!s.empty())
     {
       // using Repository::asUserString() will follow repoLabelIsAlias!
       ZConfig::instance().repoLabelIsAlias( str::strToBool(s, false) );
     }
 
-    s = augeas.getOption(ConfigOption::MAIN_REPO_LIST_COLUMNS.asString());
+    s = augeas.getOption(asString( ConfigOption::MAIN_REPO_LIST_COLUMNS ));
     if (!s.empty()) // TODO add some validation
       repo_list_columns = s;
 
     // ---------------[ solver ]------------------------------------------------
 
-    s = augeas.getOption(ConfigOption::SOLVER_INSTALL_RECOMMENDS.asString());
+    s = augeas.getOption(asString( ConfigOption::SOLVER_INSTALL_RECOMMENDS ));
     if (s.empty())
       solver_installRecommends = !ZConfig::instance().solver_onlyRequires();
     else
       solver_installRecommends = str::strToBool(s, true);
 
-    s = augeas.getOption(ConfigOption::SOLVER_FORCE_RESOLUTION_COMMANDS.asString());
+    s = augeas.getOption(asString( ConfigOption::SOLVER_FORCE_RESOLUTION_COMMANDS ));
     if (s.empty())
       solver_forceResolutionCommands.insert(ZypperCommand::REMOVE);
     else
     {
-      list<string> cmdstr;
+      std::list<std::string> cmdstr;
       str::split(s, std::back_inserter(cmdstr), ",");
       for_(c, cmdstr.begin(), cmdstr.end())
         solver_forceResolutionCommands.insert(ZypperCommand(str::trim(*c)));
@@ -193,91 +221,37 @@ void Config::read(const string & file)
 
     // ---------------[ colors ]------------------------------------------------
 
-    color_useColors = augeas.getOption(ConfigOption::COLOR_USE_COLORS.asString());
+    color_useColors = augeas.getOption(asString( ConfigOption::COLOR_USE_COLORS ));
     do_colors =
       (color_useColors == "autodetect" && has_colors())
       || color_useColors == "always";
 
-    ////// color/background //////
-
-    s = augeas.getOption(ConfigOption::COLOR_BACKGROUND.asString());
-    if (s == "light")
-      color_background = true;
-    else if (!s.empty() && s != "dark")
-      ERR << "invalid color/background value: " << s << endl;
-
-    Color c("");
-
-    ////// color/colorResult //////
-
-    c = Color(augeas.getOption(ConfigOption::COLOR_RESULT.asString()));
-    if (c.value().empty())
+    ansi::Color c;
+    for ( const auto & el : std::initializer_list<std::pair<ansi::Color &, ConfigOption>> {
+      { color_result,		ConfigOption::COLOR_RESULT		},
+      { color_msgStatus,	ConfigOption::COLOR_MSG_STATUS		},
+      { color_msgError,		ConfigOption::COLOR_MSG_ERROR		},
+      { color_msgWarning,	ConfigOption::COLOR_MSG_WARNING		},
+      { color_positive,		ConfigOption::COLOR_POSITIVE		},
+      { color_negative,		ConfigOption::COLOR_NEGATIVE		},
+      { color_highlight,	ConfigOption::COLOR_HIGHLIGHT		},
+      { color_lowlight,		ConfigOption::COLOR_LOWLIGHT		},
+      { color_promptOption,	ConfigOption::COLOR_PROMPT_OPTION	},
+    } )
     {
-      // set a default for light background
-      if (color_background)
-        color_result = Color("black");
+      c = namedColor( augeas.getOption( asString( el.second ) ) );
+      if ( c )
+	el.first = c;
+      ;
     }
-    else
-      color_result = c;
 
-    ////// color/colorMsgStatus //////
-
-    c = Color(augeas.getOption(ConfigOption::COLOR_MSG_STATUS.asString()));
-    if (c.value().empty())
-    {
-      // set a default for light background
-      if (color_background)
-        color_msgStatus = Color("black");
-    }
-    else
-      color_msgStatus = c;
-
-    ////// color/colorMsgError //////
-
-    c = Color(augeas.getOption(ConfigOption::COLOR_MSG_ERROR.asString()));
-    if (!c.value().empty())
-      color_msgError = c;
-
-    ////// color/colorMsgWarning //////
-
-    c = Color(augeas.getOption(ConfigOption::COLOR_MSG_WARNING.asString()));
-    if (!c.value().empty())
-      color_msgWarning = c;
-
-    ////// color/colorPositive //////
-
-    c = Color(augeas.getOption(ConfigOption::COLOR_POSITIVE.asString()));
-    if (!c.value().empty())
-      color_positive = c;
-
-    ////// color/colorNegative //////
-
-    c = Color(augeas.getOption(ConfigOption::COLOR_NEGATIVE.asString()));
-    if (!c.value().empty())
-      color_negative = c;
-
-    ////// color/highlight //////
-
-    c = Color(augeas.getOption(ConfigOption::COLOR_HIGHLIGHT.asString()));
-    if (!c.value().empty())
-      color_highlight = c;
-
-    ////// color/colorPromptOption //////
-
-    c = Color(augeas.getOption(ConfigOption::COLOR_PROMPT_OPTION.asString()));
-    if (c.value().empty())
-    {
-      // set a default for light background
-      if (color_background)
-        color_promptOption = Color("darkgrey");
-    }
-    else
-      color_promptOption = c;
-
+    s = augeas.getOption("color/background");	// legacy
+    if ( !s.empty() )
+      WAR << "zypper.conf: ignore legacy option 'color/background'" << endl;
 
     // ---------------[ obs ]---------------------------------------------------
 
-    s = augeas.getOption(ConfigOption::OBS_BASE_URL.asString());
+    s = augeas.getOption(asString( ConfigOption::OBS_BASE_URL ));
     if (!s.empty())
     {
       try { obs_baseUrl = Url(s); }
@@ -287,7 +261,7 @@ void Config::read(const string & file)
       }
     }
 
-    s = augeas.getOption(ConfigOption::OBS_PLATFORM.asString());
+    s = augeas.getOption(asString( ConfigOption::OBS_PLATFORM ));
     if (!s.empty())
       obs_platform = s;
 
