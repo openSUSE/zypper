@@ -178,7 +178,7 @@ void TableRow::dumpTo (ostream &stream, const Table & parent) const
 
 	  if ( editionSep == 0 )
 	  {
-	    fprint_color( stream, s, COLOR_CONTEXT_HIGHLIGHT );
+	    stream << ( ColorContext::HIGHLIGHT << s );
 	  }
 	  else if ( editionSep == s.size() )
 	  {
@@ -186,8 +186,7 @@ void TableRow::dumpTo (ostream &stream, const Table & parent) const
 	  }
 	  else
 	  {
-	    stream << s.substr( 0, editionSep );
-	    fprint_color( stream, s.substr( editionSep ), COLOR_CONTEXT_HIGHLIGHT );
+	    stream << s.substr( 0, editionSep ) << ( ColorContext::HIGHLIGHT << s.substr( editionSep ) );
 	  }
 	}
 	else
@@ -196,9 +195,7 @@ void TableRow::dumpTo (ostream &stream, const Table & parent) const
 	  editionSep = s.find( '-' );
 	  if ( editionSep != std::string::npos )
 	  {
-	    stream << s.substr( 0, editionSep );
-	    fprint_color( stream, "-", COLOR_CONTEXT_HIGHLIGHT );
-	    stream << s.substr( editionSep+1 );
+	    stream << s.substr( 0, editionSep ) << ( ColorContext::HIGHLIGHT << "-" ) << s.substr( editionSep+1 );
 	  }
 	  else	// no release part
 	  {
