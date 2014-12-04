@@ -109,7 +109,7 @@ public:
 
 private:
   void readPool(const zypp::ResPool & pool);
-  void writeResolvableList(std::ostream & out, const ResPairSet & resolvables);
+  void writeResolvableList(std::ostream & out, const ResPairSet & resolvables, enum ColorContext = COLOR_CONTEXT_DEFAULT);
   void writeXmlResolvableList(std::ostream & out, const KindToResPairSet & resolvables);
 
   void collectInstalledRecommends(const zypp::ResObject::constPtr & obj);

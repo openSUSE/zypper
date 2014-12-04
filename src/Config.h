@@ -25,15 +25,16 @@ public:
   static const ConfigOption SOLVER_FORCE_RESOLUTION_COMMANDS;
 
   static const ConfigOption COLOR_USE_COLORS;
-  static const ConfigOption COLOR_BACKGROUND;
   static const ConfigOption COLOR_RESULT;
   static const ConfigOption COLOR_MSG_STATUS;
   static const ConfigOption COLOR_MSG_ERROR;
   static const ConfigOption COLOR_MSG_WARNING;
   static const ConfigOption COLOR_POSITIVE;
+  static const ConfigOption COLOR_CHANGE;
   static const ConfigOption COLOR_NEGATIVE;
   static const ConfigOption COLOR_HIGHLIGHT;
-  static const ConfigOption COLOR_PROMPT_OPTION;
+  static const ConfigOption COLOR_INFO;
+  static const ConfigOption COLOR_PROMPT;
   static const ConfigOption COLOR_PROMPT_SHORTHAND;
 
   static const ConfigOption OBS_BASE_URL;
@@ -48,15 +49,16 @@ public:
     SOLVER_FORCE_RESOLUTION_COMMANDS_e,
 
     COLOR_USE_COLORS_e,
-    COLOR_BACKGROUND_e,
     COLOR_RESULT_e,
     COLOR_MSG_STATUS_e,
     COLOR_MSG_ERROR_e,
     COLOR_MSG_WARNING_e,
     COLOR_POSITIVE_e,
+    COLOR_CHANGE_e,
     COLOR_NEGATIVE_e,
     COLOR_HIGHLIGHT_e,
-    COLOR_PROMPT_OPTION_e,
+    COLOR_INFO_e,
+    COLOR_PROMPT_e,
     COLOR_PROMPT_SHORTHAND_e,
 
     OBS_BASE_URL_e,
@@ -104,20 +106,17 @@ struct Config
   /** zypper.conf: color.useColors */
   std::string color_useColors;
 
-  /**
-   * zypper.conf: color.background
-   * dark (false) or light (true)
-   */
-  bool color_background;
+  bool color_highlight;
 
   Color color_result;
   Color color_msgStatus;
   Color color_msgError;
   Color color_msgWarning;
   Color color_positive;
+  Color color_change;
   Color color_negative;
-  Color color_highlight;
-  Color color_promptOption;
+  Color color_info;
+  Color color_prompt;
 
   /** zypper.conf: obs.baseUrl */
   zypp::Url obs_baseUrl;

@@ -388,10 +388,13 @@ void OutNormal::prompt(PromptId id,
   }
   else
     cout << startdesc << endl;
-  cout << prompt;
+
+  std::string s = prompt;
   if (!poptions.empty())
-    cout << " " << poptions.optionString();
-  cout << ": " << std::flush;
+    s += " " + poptions.optionString();
+  s += ": ";
+  fprint_color(cout, s, COLOR_CONTEXT_PROMPT);
+  cout << std::flush;
   // prompt ends with newline (user hits <enter>) unless exited abnormaly
   _newline = true;
 }

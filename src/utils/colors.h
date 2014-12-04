@@ -11,24 +11,25 @@
 #include <iostream>
 #include <string>
 
-#define COLOR_BLACK             "\033[30m"
+#define COLOR_BOLD              "\033[0;1m"
+#define COLOR_BLACK             "\033[0;30m"
 #define COLOR_GREY_DARK         "\033[1;30m"
-#define COLOR_BLUE              "\033[34m"
+#define COLOR_BLUE              "\033[0;34m"
 #define COLOR_BLUE_LIGHT        "\033[1;34m"
-#define COLOR_CYAN              "\033[36m"
+#define COLOR_CYAN              "\033[0;36m"
 #define COLOR_CYAN_LIGHT        "\033[1;36m"
-#define COLOR_GREEN             "\033[32m"
+#define COLOR_GREEN             "\033[0;32m"
 #define COLOR_GREEN_LIGHT       "\033[1;32m"
-#define COLOR_PURPLE            "\033[35m"
+#define COLOR_PURPLE            "\033[0;35m"
 #define COLOR_PURPLE_LIGHT      "\033[1;35m"
-#define COLOR_RED               "\033[31m"
+#define COLOR_RED               "\033[0;31m"
 #define COLOR_RED_LIGHT         "\033[1;31m"
-#define COLOR_WHITE             "\033[37m"    // grey
+#define COLOR_WHITE             "\033[0;37m"    // grey
 #define COLOR_WHITE_LIGHT       "\033[1;37m"
-#define COLOR_YELLOW            "\033[33m"    // brown
+#define COLOR_YELLOW            "\033[0;33m"    // brown
 #define COLOR_YELLOW_LIGHT      "\033[1;33m"
 
-#define COLOR_RESET             "\033[m"
+#define COLOR_RESET             "\033[0m"
 
 
 class Color
@@ -48,24 +49,24 @@ private:
 
 enum ColorContext
 {
-  COLOR_CONTEXT_RESULT               = 1,
-  COLOR_CONTEXT_MSG_STATUS           = 2,
-  COLOR_CONTEXT_MSG_ERROR            = 3,
-  COLOR_CONTEXT_MSG_WARNING          = 4,
-  COLOR_CONTEXT_POSITIVE             = 5,
-  COLOR_CONTEXT_NEGATIVE             = 6,
-  COLOR_CONTEXT_PROMPT_OPTION        = 7,
-  COLOR_CONTEXT_PROMPT_SHORTHAND     = 8,
-  COLOR_CONTEXT_HIGHLIGHT            = 9,
-  COLOR_CONTEXT_LOWLIGHT             = 10,
-  COLOR_CONTEXT_OSDEBUG              = 11,
+  COLOR_CONTEXT_RESULT = 1,
+  COLOR_CONTEXT_MSG_STATUS,
+  COLOR_CONTEXT_MSG_ERROR,
+  COLOR_CONTEXT_MSG_WARNING,
+  COLOR_CONTEXT_POSITIVE,
+  COLOR_CONTEXT_CHANGE,
+  COLOR_CONTEXT_NEGATIVE,
+  COLOR_CONTEXT_INFO,
+  COLOR_CONTEXT_PROMPT,
+  COLOR_CONTEXT_PROMPT_SHORTHAND,
+  COLOR_CONTEXT_LOWLIGHT,
+  COLOR_CONTEXT_OSDEBUG,
 
   COLOR_CONTEXT_DEFAULT              = -1,
 
   CC_GOOD	= COLOR_CONTEXT_POSITIVE,	///< good news		(green)
   CC_NOTE	= COLOR_CONTEXT_MSG_WARNING,	///< pay attention	(magenta)
   CC_BAD	= COLOR_CONTEXT_NEGATIVE,	///< bad news		(red)
-  CC_HIGH	= COLOR_CONTEXT_HIGHLIGHT,	///< highlight		(cyan)
   CC_DIM	= COLOR_CONTEXT_LOWLIGHT,	///< dim		(grey)
   CC_DEFAULT	= COLOR_CONTEXT_DEFAULT
 };
@@ -92,7 +93,7 @@ const std::string get_color(const ColorContext context);
 void print_color( std::ostream & str, const std::string & s, const char * color_seq, const char * prev_color = NULL );
 inline void print_color( const std::string & s, const char * color_seq, const char * prev_color = NULL )
 { print_color( std::cout, s, color_seq, prev_color ); }
-/** leagacy (f)print_color */
+/** legacy (f)print_color */
 inline void fprint_color(std::ostream & str, const std::string & s, const char * ansi_color_seq, const char * prev_color = NULL)
 { print_color( str, s, ansi_color_seq, prev_color ); }
 

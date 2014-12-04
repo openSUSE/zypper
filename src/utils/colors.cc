@@ -61,6 +61,7 @@ string Color::parse(const string & value)
     { "lightcyan",	COLOR_CYAN_LIGHT	},
     { "black",		COLOR_BLACK		},
     { "darkgrey",	COLOR_GREY_DARK		},
+    { "bold",		COLOR_BOLD		},
 
     { "reset",		COLOR_RESET		}
   };
@@ -89,12 +90,14 @@ const string get_color( const ColorContext context )
     return conf.color_msgError.value();
   case COLOR_CONTEXT_POSITIVE:
     return conf.color_positive.value();
+  case COLOR_CONTEXT_CHANGE:
+    return conf.color_change.value();
   case COLOR_CONTEXT_NEGATIVE:
     return conf.color_negative.value();
-  case COLOR_CONTEXT_PROMPT_OPTION:
-    return conf.color_promptOption.value();
-  case COLOR_CONTEXT_HIGHLIGHT:
-    return conf.color_highlight.value();
+  case COLOR_CONTEXT_INFO:
+    return conf.color_info.value();
+  case COLOR_CONTEXT_PROMPT:
+    return conf.color_prompt.value();
   case COLOR_CONTEXT_LOWLIGHT:
     return Color("grey").value();
   case COLOR_CONTEXT_OSDEBUG:

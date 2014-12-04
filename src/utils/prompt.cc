@@ -64,25 +64,16 @@ const string PromptOptions::optionString() const
   unsigned int shown_count = _shown_count < 0 ? options().size() : _shown_count;
 
   if ((it = options().begin()) != options().end() && shown_count)
-  {
-    option_str << "[";
-    fprint_color(option_str, *it, COLOR_CONTEXT_PROMPT_OPTION);
-    // fprint_color(option_str, *it, COLOR_CONTEXT_PROMPT_SHORTHAND);
-    ++it;
-  }
+    option_str << "[" << *it++;
   for (unsigned int i = 1; it != options().end() && i < shown_count; ++it, ++i)
     if (isEnabled(i))
-    {
-      option_str << "/";
-      fprint_color(option_str, *it, COLOR_CONTEXT_PROMPT_OPTION);
-      //fprint_color(option_str, *it, COLOR_CONTEXT_PROMPT_SHORTHAND);
-    }
+      option_str << "/" << *it;
 
   if (!_opt_help.empty())
   {
     if (shown_count)
       option_str << "/";
-    fprint_color(option_str, "?", COLOR_CONTEXT_PROMPT_OPTION);
+    option_str << "?";
     // translators: Press '?' to see all options embedded in this prompt: "Continue? [y/n/? shows all options] (y):"
     option_str << " " << _("shows all options");
   }
@@ -92,9 +83,7 @@ const string PromptOptions::optionString() const
     option_str << "]";
 
     // default option
-    option_str << " (";
-    fprint_color(option_str, _options[_default], COLOR_CONTEXT_PROMPT_OPTION);
-    option_str << ")";
+    option_str << " (" << _options[_default] << ")";
   }
 
   return option_str.str();
