@@ -98,13 +98,33 @@ namespace zypp
     private:
       struct Cache
       {
-	scoped_ptr<WatchFile> _keyringP;
-	std::list<PublicKeyData> _data;
-
 	// Empty copy ctor to allow insert into std::map as
 	// scoped_ptr is noncopyable.
 	Cache() {}
 	Cache( const Cache & rhs ) {}
+
+	void assertCache( const Pathname & keyring_r )
+	{
+	    ExternalProgram("ls -l "+keyring_r.asString()) >> SEC;
+	  // .kbx since gpg2-2.1
+	  if ( !_keyringK )
+	    _keyringK.reset( new WatchFile( keyring_r/"pubring.kbx", WatchFile::NO_INIT ) );
+	  if ( !_keyringP )
+	    _keyringP.reset( new WatchFile( keyring_r/"pubring.gpg", WatchFile::NO_INIT ) );
+	}
+
+	bool hasChanged() const
+	{
+	  bool k = _keyringK->hasChanged();	// be sure both files are checked
+	  bool p = _keyringP->hasChanged();
+	  return k || p;
+	}
+
+	std::list<PublicKeyData> _data;
+
+      private:
+	scoped_ptr<WatchFile> _keyringK;
+	scoped_ptr<WatchFile> _keyringP;
       };
 
       typedef std::map<Pathname,Cache> CacheMap;
@@ -112,17 +132,14 @@ namespace zypp
       const std::list<PublicKeyData> & getData( const Pathname & keyring_r ) const
       {
 	Cache & cache( _cacheMap[keyring_r] );
-	if ( ! cache._keyringP )
-	{
-	  // init new cache entry
-	  cache._keyringP.reset( new WatchFile( keyring_r/"pubring.gpg", WatchFile::NO_INIT ) );
-	}
+	// init new cache entry
+	cache.assertCache( keyring_r );
 	return getData( keyring_r, cache );
       }
 
       const std::list<PublicKeyData> & getData( const Pathname & keyring_r, Cache & cache_r ) const
       {
-	if ( cache_r._keyringP->hasChanged() )
+	if ( cache_r.hasChanged() )
 	{
 	  const char* argv[] =
 	  {
