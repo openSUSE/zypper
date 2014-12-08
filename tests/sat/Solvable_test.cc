@@ -87,7 +87,7 @@ BOOST_AUTO_TEST_CASE(attributes)
     BOOST_CHECK_EQUAL(c, 2);
 }
 
-BOOST_AUTO_TEST_CASE(asString)
+BOOST_AUTO_TEST_CASE(asStringTest)
 {
   BOOST_CHECK_EQUAL( sat::Solvable(0).asString(), "noSolvable" );
   BOOST_CHECK_EQUAL( sat::Solvable(1).asString(), "systemSolvable" );

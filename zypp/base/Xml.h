@@ -32,10 +32,10 @@ namespace zypp
     using xml::escape;
     using xml::unescape;
 
-    /** \relates NodeAttr NODE ATTRIBUTE representation of types [str::asString] */
+    /** \relates NodeAttr NODE ATTRIBUTE representation of types [asString] */
     template <class _Tp>
     std::string asXmlNodeAttr( const _Tp & val_r )
-    { return str::asString( val_r ); }
+    { return asString( val_r ); }
 
     ///////////////////////////////////////////////////////////////////
     /// \class NodeAttr
