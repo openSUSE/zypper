@@ -1,4 +1,5 @@
 #include <boost/test/auto_unit_test.hpp>
+#include <iostream>
 #include <set>
 #include "zypp/ContentType.h"
 
