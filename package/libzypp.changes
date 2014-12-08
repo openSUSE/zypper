@@ -1,4 +1,12 @@
 -------------------------------------------------------------------
+Mon Dec  8 14:53:00 CET 2014 - ma@suse.de
+
+- Adapt to gpg-2.1 (bnc#908135)
+- rpm: do not obsolete yast2-packagemanager-devel by libzypp-devel-doc
+- replaceAll: fix endless loop on empty search string
+- version 14.31.0 (30)
+
+-------------------------------------------------------------------
 Thu Nov 27 07:40:30 UTC 2014 - dimstar@opensuse.org
 
 - Do not provide/obsolete yast2-packagemanager-devel by the -doc
