@@ -105,7 +105,6 @@ namespace zypp
 
 	void assertCache( const Pathname & keyring_r )
 	{
-	    ExternalProgram("ls -l "+keyring_r.asString()) >> SEC;
 	  // .kbx since gpg2-2.1
 	  if ( !_keyringK )
 	    _keyringK.reset( new WatchFile( keyring_r/"pubring.kbx", WatchFile::NO_INIT ) );
