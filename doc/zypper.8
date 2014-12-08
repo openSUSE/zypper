@@ -2,12 +2,12 @@
 .\"     Title: zypper
 .\"    Author: [see the "AUTHORS" section]
 .\" Generator: DocBook XSL Stylesheets v1.78.1 <http://docbook.sf.net/>
-.\"      Date: 11/21/2014
+.\"      Date: 12/08/2014
 .\"    Manual: ZYPPER
 .\"    Source: zypper
 .\"  Language: English
 .\"
-.TH "ZYPPER" "8" "11/21/2014" "zypper" "ZYPPER"
+.TH "ZYPPER" "8" "12/08/2014" "zypper" "ZYPPER"
 .\" -----------------------------------------------------------------
 .\" * Define some portability stuff
 .\" -----------------------------------------------------------------
@@ -2549,6 +2549,14 @@ option, the
 option takes preference\&.
 .RE
 .PP
+\fB\-\-\fR[\fBno\-\fR]\fBcolor\fR
+.RS 4
+Whether to use colors in output if tty supports it\&. For details see the
+\fB[color]\fR
+section in
+\fBzypper\&.conf\fR\&.
+.RE
+.PP
 \fB\-A\fR, \fB\-\-no\-abbrev\fR
 .RS 4
 Do not abbreviate text in tables\&. By default zypper will try to abbreviate texts in some columns so that the table fits the width of the screen\&. If you need to see the whole text, use this option\&.
@@ -2556,7 +2564,10 @@ Do not abbreviate text in tables\&. By default zypper will try to abbreviate tex
 .PP
 \fB\-t\fR, \fB\-\-terse\fR
 .RS 4
-Terse output for machine consumption\&.
+Terse output for machine consumption\&. Implies
+\fB\-\-no\-abbrev\fR
+and
+\fB\-\-no\-color\fR\&.
 .RE
 .PP
 \fB\-s\fR, \fB\-\-table\-style\fR

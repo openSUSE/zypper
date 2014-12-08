@@ -1339,11 +1339,14 @@ GLOBAL OPTIONS
 *-q*, *--quiet*::
 	Suppress normal output. Brief (esp. result notification) messages and error messages will still be printed, though. If used together with conflicting *--verbose* option, the *--verbose* option takes preference.
 
+*--*[*no-*]*color*::
+	Whether to use colors in output if tty supports it. For details see the *[color]* section in *zypper.conf*.
+
 *-A*, *--no-abbrev*::
 	Do not abbreviate text in tables. By default zypper will try to abbreviate texts in some columns so that the table fits the width of the screen. If you need to see the whole text, use this option.
 
 *-t*, *--terse*::
-	Terse output for machine consumption.
+	Terse output for machine consumption. Implies *--no-abbrev* and *--no-color*.
 
 *-s*, *--table-style*::
 	Specifies table style to use. Table style is identified by an integer number. TODO

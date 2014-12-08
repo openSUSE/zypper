@@ -217,6 +217,7 @@ void print_main_help(Zypper & zypper)
     "\t--quiet, -q\t\tSuppress normal output, print only error\n"
     "\t\t\t\tmessages.\n"
     "\t--verbose, -v\t\tIncrease verbosity.\n"
+    "\t--[no-]color\t\tWhether to use colors in output if tty supports it.\n"
     "\t--no-abbrev, -A\t\tDo not abbreviate text in tables.\n"
     "\t--table-style, -s\tTable style (integer).\n"
     "\t--non-interactive, -n\tDo not ask anything, use default answers\n"
@@ -417,6 +418,8 @@ int Zypper::defaultLoadSystem( LoadSystemFlags flags_r )
 void Zypper::processGlobalOptions()
 {
   MIL << "START" << endl;
+  static const int indeterminate = -1;
+  int optvalColor = indeterminate;
 
   static struct option global_options[] = {
     {"help",                       no_argument,       0, 'h'},
@@ -424,11 +427,12 @@ void Zypper::processGlobalOptions()
     {"quiet",                      no_argument,       0, 'q'},
     {"version",                    no_argument,       0, 'V'},
     {"promptids",                  no_argument,       0,  0 },
+    {"color",			   no_argument,	&optvalColor, 1},
+    {"no-color",		   no_argument,	&optvalColor, 0},
     // rug compatibility alias for -vv
     {"debug",                      no_argument,       0,  0 },
     // rug compatibility alias for the default output level => ignored
     {"normal-output",              no_argument,       0,  0 },
-    // not implemented currently => ignored
     {"terse",                      no_argument,       0, 't'},
     {"no-abbrev",                  no_argument,       0, 'A'},
     {"table-style",                required_argument, 0, 's'},
@@ -508,8 +512,20 @@ void Zypper::processGlobalOptions()
   if (gopts.count("debug"))
     verbosity = Out::DEBUG;
 
-  // create output object
+  if (gopts.count("terse"))
+  {
+    _gopts.machine_readable = true;
+    _gopts.no_abbrev = true;
+    _gopts.terse = true;
+    if ( optvalColor == indeterminate )
+      optvalColor = false;
+  }
 
+  // adjust --[no-]color from CLI
+  if ( optvalColor != indeterminate )
+    _config.do_colors = optvalColor;
+
+  // create output object
   //// --xml-out
   if (gopts.count("xmlout"))
   {
@@ -540,14 +556,6 @@ void Zypper::processGlobalOptions()
     else
       out().error(str::form(_("Invalid table style %d."), s),
           str::form(_("Use an integer number from %d to %d"), 0, 8));
-  }
-
-  if (gopts.count("terse"))
-  {
-    _gopts.machine_readable = true;
-    _gopts.no_abbrev = true;
-    _gopts.terse = true;
-    //out().error("--terse is not implemented, does nothing");
   }
 
   // ======== other global options ========
