@@ -1,4 +1,10 @@
 -------------------------------------------------------------------
+Wed Dec 10 16:06:04 CET 2014 - ma@suse.de
+
+- suppress informal license (no need to accept) upon update (bnc#908976)
+- version 14.32.0 (30)
+
+-------------------------------------------------------------------
 Mon Dec  8 14:53:00 CET 2014 - ma@suse.de
 
 - Adapt to gpg-2.1 (bnc#908135)
