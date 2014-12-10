@@ -17,6 +17,8 @@
 #include "zypp/RepoInfo.h"
 #include "zypp/IdString.h"
 
+#include "zypp/ui/Selectable.h"
+
 using namespace zypp;
 using namespace std;
 
@@ -71,7 +73,11 @@ namespace zypp
   {
     std::string ret = lookupStrAttribute( sat::SolvAttr::eula, lang_r );
     if ( ret.empty() && isKind<Product>() )
-      return repoInfo().getLicense( lang_r );
+    {
+      const RepoInfo & ri( repoInfo() );
+      if ( ri.needToAcceptLicense() || ! ui::Selectable::get( *this )->hasInstalledObj() )
+	ret = ri.getLicense( lang_r ); // bnc#908976: suppress informal license upon update
+    }
     return ret;
   }
 
