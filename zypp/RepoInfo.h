@@ -348,7 +348,8 @@ namespace zypp
       bool needToAcceptLicense() const;
 
       /** Return the best license for the current (or a specified) locale. */
-      std::string getLicense( const Locale & lang_r = Locale() );
+      std::string getLicense( const Locale & lang_r = Locale() ) const;
+      std::string getLicense( const Locale & lang_r = Locale() ); // LEGACY API
 
       /** Return the locales the license is available for.
        * \ref Locale::noCode is included in case of \c license.txt which does

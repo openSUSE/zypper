@@ -356,6 +356,9 @@ namespace zypp
   }
 
   std::string RepoInfo::getLicense( const Locale & lang_r )
+  { return const_cast<const RepoInfo *>(this)->getLicense( lang_r );  }
+
+  std::string RepoInfo::getLicense( const Locale & lang_r ) const
   {
     LocaleSet avlocales( getLicenseLocales() );
     if ( avlocales.empty() )
