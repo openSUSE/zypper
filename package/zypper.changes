@@ -1,4 +1,14 @@
 -------------------------------------------------------------------
+Thu Dec 11 15:22:41 CET 2014 - ma@suse.de
+
+- Add --[no-]color global option
+- Fix additional spaces in zypper output and
+  new colorization code (bnc#908345)
+- properly reset auto-retry counter (bnc#906549)
+- man: improve patch description (bnc#904737)
+- version 1.12.0
+
+-------------------------------------------------------------------
 Tue Nov 11 17:12:56 CET 2014 - ma@suse.de
 
 - Warn about repositories with 'gpgcheck=0' (bnc#848054)
