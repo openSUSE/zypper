@@ -385,13 +385,15 @@ namespace
   }
 } // namespace
 ///////////////////////////////////////////////////////////////////
-void Summary::writeResolvableList(ostream & out, const ResPairSet & resolvables)
+void Summary::writeResolvableList(ostream & out, const ResPairSet & resolvables, ansi::Color color)
 {
-
   if ((_viewop & DETAILS) == 0)
   {
     static const ColorString quoteCh( "\"", ColorContext::HIGHLIGHT );
+
+    zypp::TriBool pkglistHighlight = Zypper::instance()->config().color_pkglistHighlight;
     char firstCh = 0;
+
     ostringstream s;
     for (ResPairSet::const_iterator resit = resolvables.begin();
         resit != resolvables.end(); ++resit)
@@ -402,20 +404,23 @@ void Summary::writeResolvableList(ostream & out, const ResPairSet & resolvables)
 	continue;
 
       // quote names with spaces
-      bool quote( name.find_first_of( " " ) != std::string::npos );
-
-      // extra space if 1st char changes
-      if ( firstCh != name[0] )
-      {
-	if ( firstCh )
-	  s << " ";
-	firstCh = name[0];
-      }
+      bool quote = name.find_first_of( " " ) != std::string::npos;
 
       // quote?
       if ( quote ) s << quoteCh;
-      // highlight 1st char
-      s << ( ColorContext::HIGHLIGHT << name[0] ) << name.c_str()+1;
+
+      // highlight 1st char?
+      if ( pkglistHighlight || ( indeterminate(pkglistHighlight) && name[0] != firstCh ) )
+      {
+	s << ( color << name[0] ) << name.c_str()+1;
+	if ( indeterminate(pkglistHighlight) )
+	   firstCh = name[0];
+      }
+      else
+      {
+	s << name;
+      }
+
       // quote?
       if ( quote ) s << quoteCh;
 
@@ -530,9 +535,9 @@ void Summary::writeNewlyInstalled(ostream & out)
         "The following %d applications are going to be installed:",
         it->second.size());
     label = str::form( label.c_str(), it->second.size() );
-    out << endl << label << endl;
 
-    writeResolvableList(out, it->second);
+    out << endl << ( ColorContext::POSITIVE << label ) << endl;
+    writeResolvableList(out, it->second, ColorContext::POSITIVE);
   }
 }
 
@@ -571,9 +576,9 @@ void Summary::writeRemoved(ostream & out)
         "The following %d applications are going to be REMOVED:",
         it->second.size());
     label = str::form( label.c_str(), it->second.size() );
-    out << endl << label << endl;
 
-    writeResolvableList(out, it->second);
+    out << endl << ( ColorContext::NEGATIVE << label ) << endl;
+    writeResolvableList(out, it->second, ColorContext::NEGATIVE);
   }
   _viewop = vop;
 }
@@ -611,9 +616,9 @@ void Summary::writeUpgraded(ostream & out)
         "The following %d applications are going to be upgraded:",
         it->second.size());
     label = str::form( label.c_str(), it->second.size() );
-    out << endl << label << endl;
 
-    writeResolvableList(out, it->second);
+    out << endl << ( ColorContext::POSITIVE << label ) << endl;
+    writeResolvableList(out, it->second, ColorContext::POSITIVE);
   }
 }
 
@@ -650,9 +655,9 @@ void Summary::writeDowngraded(ostream & out)
         "The following %d applications are going to be downgraded:",
         it->second.size());
     label = str::form( label.c_str(), it->second.size() );
-    out << endl << label << endl;
 
-    writeResolvableList(out, it->second);
+    out << endl << ( ColorContext::NEGATIVE << label ) << endl;
+    writeResolvableList(out, it->second, ColorContext::NEGATIVE);
   }
 }
 
@@ -696,10 +701,10 @@ void Summary::writeReinstalled(ostream & out)
         "The following %d applications are going to be reinstalled:",
         it->second.size());
     }
-
     label = str::form( label.c_str(), it->second.size() );
-    out << endl << label << endl;
-    writeResolvableList(out, it->second);
+
+    out << endl << ( ColorContext::CHANGE << label ) << endl;
+    writeResolvableList(out, it->second, ColorContext::CHANGE);
   }
 }
 
@@ -863,9 +868,9 @@ void Summary::writeRecommended(ostream & out)
         "The following %d recommended applications were automatically selected:",
         it->second.size());
     label = str::form( label.c_str(), it->second.size() );
-    out << endl << label << endl;
 
-    writeResolvableList(out, it->second);
+    out << endl << ( ColorContext::POSITIVE << label ) << endl;
+    writeResolvableList(out, it->second, ColorContext::POSITIVE);
   }
 
   for_(it, _noinstrec.begin(), _noinstrec.end())
@@ -907,8 +912,9 @@ void Summary::writeRecommended(ostream & out)
 		     "The following %d packages are recommended, but will not be installed (only required packages will be installed):",
 		     it->second.size() );
 	label = str::form( label.c_str(), it->second.size() );
-	out << endl << label << endl;
-	writeResolvableList(out, notRequired);
+
+	out << endl << ( ColorContext::HIGHLIGHT << label ) << endl;
+	writeResolvableList(out, notRequired, ColorContext::HIGHLIGHT);
       }
       else
       {
@@ -917,9 +923,10 @@ void Summary::writeRecommended(ostream & out)
 	  label = _PL( "The following package is recommended, but will not be installed because it's unwanted (was manually removed before):",
 		       "The following %d packages are recommended, but will not be installed because they are unwanted (were manually removed before):",
 		       it->second.size() );
-	label = str::form( label.c_str(), it->second.size() );
-	out << endl << label << endl;
-	  writeResolvableList(out, softLocked);
+	  label = str::form( label.c_str(), it->second.size() );
+
+	  out << endl << ( ColorContext::HIGHLIGHT << label ) << endl;
+	  writeResolvableList(out, softLocked, ColorContext::HIGHLIGHT);
         }
         if ( !conflicts.empty() )
         {
@@ -927,8 +934,9 @@ void Summary::writeRecommended(ostream & out)
 		       "The following %d packages are recommended, but will not be installed due to conflicts or dependency issues:",
 		       it->second.size() );
 	  label = str::form( label.c_str(), it->second.size() );
-          out << endl << label << endl;
-          writeResolvableList(out, conflicts);
+
+	  out << endl << ( ColorContext::HIGHLIGHT << label ) << endl;
+          writeResolvableList(out, conflicts, ColorContext::HIGHLIGHT);
         }
       }
     }
@@ -951,8 +959,9 @@ void Summary::writeRecommended(ostream & out)
 		     "The following %d applications are recommended, but will not be installed:",
 		     it->second.size() );
       label = str::form( label.c_str(), it->second.size() );
-      out << endl << label << endl;
-      writeResolvableList(out, it->second);
+
+      out << endl << ( ColorContext::HIGHLIGHT << label ) << endl;
+      writeResolvableList(out, it->second, ColorContext::HIGHLIGHT);
     }
   }
 
@@ -1010,9 +1019,9 @@ void Summary::writeSuggested(ostream & out)
         "The following %d applications are suggested, but will not be installed:",
         it->second.size());
     label = str::form( label.c_str(), it->second.size() );
-    out << endl << label << endl;
 
-    writeResolvableList(out, it->second);
+    out << endl << ( ColorContext::HIGHLIGHT << label ) << endl;
+    writeResolvableList(out, it->second, ColorContext::HIGHLIGHT);
   }
 }
 
@@ -1051,9 +1060,9 @@ void Summary::writeChangedArch(ostream & out)
         "The following %d applications are going to change architecture:",
         it->second.size());
     label = str::form( label.c_str(), it->second.size() );
-    out << endl << label << endl;
 
-    writeResolvableList(out, it->second);
+    out << endl << ( ColorContext::CHANGE << label ) << endl;
+    writeResolvableList(out, it->second, ColorContext::CHANGE);
   }
   _viewop = vop;
 }
@@ -1093,9 +1102,9 @@ void Summary::writeChangedVendor(ostream & out)
         "The following %d applications are going to change vendor:",
         it->second.size());
     label = str::form( label.c_str(), it->second.size() );
-    out << endl << label << endl;
 
-    writeResolvableList(out, it->second);
+    out << endl << ( ColorContext::CHANGE << label ) << endl;
+    writeResolvableList(out, it->second, ColorContext::CHANGE);
   }
   _viewop = vop;
 }
@@ -1114,9 +1123,9 @@ void Summary::writeUnsupported(ostream & out)
         "The following %d packages are not supported by their vendor:",
         it->second.size());
     label = str::form( label.c_str(), it->second.size() );
-    out << endl << label << endl;
 
-    writeResolvableList(out, it->second);
+    out << endl << ( ColorContext::HIGHLIGHT << label ) << endl;
+    writeResolvableList(out, it->second, ColorContext::HIGHLIGHT);
   }
 }
 
@@ -1134,9 +1143,9 @@ void Summary::writeNeedACC(ostream & out)
         "The following %d packages need additional customer contract to get support:",
         it->second.size());
     label = str::form( label.c_str(), it->second.size() );
-    out << endl << label << endl;
 
-    writeResolvableList(out, it->second);
+    out << endl << ( ColorContext::HIGHLIGHT << label ) << endl;
+    writeResolvableList(out, it->second, ColorContext::HIGHLIGHT);
   }
 }
 
@@ -1162,9 +1171,9 @@ void Summary::writeNotUpdated(std::ostream & out)
         "The following %d application updates will NOT be installed:",
         it->second.size());
     label = str::form( label.c_str(), it->second.size() );
-    out << endl << label << endl;
 
-    writeResolvableList(out, it->second);
+    out << endl << ( ColorContext::HIGHLIGHT << label ) << endl;
+    writeResolvableList(out, it->second, ColorContext::HIGHLIGHT);
   }
 }
 
@@ -1218,7 +1227,7 @@ void Summary::writePackageCounts(ostream & out)
   i = _toupgrade.find(ResKind::package);
   if (i != _toupgrade.end() && (count = i->second.size()) )
   {
-    s << ( ColorContext::HIGHLIGHT << count ) << " ";
+    s << ( ColorContext::POSITIVE << count ) << " ";
     // translators: this text will be preceded by a number e.g. "5 packages to ..."
     s << _PL("package to upgrade", "packages to upgrade", count);
     gotcha = true;
@@ -1228,7 +1237,7 @@ void Summary::writePackageCounts(ostream & out)
   {
     if (gotcha)
       s << ", ";
-    s << ( ColorContext::HIGHLIGHT << count ) << " ";
+    s << ( ColorContext::NEGATIVE << count ) << " ";
     if (gotcha)
       // translators: this text will be preceded by a number e.g. "5 to ..."
       s << _PL("to downgrade", "to downgrade", count);
@@ -1242,7 +1251,7 @@ void Summary::writePackageCounts(ostream & out)
   {
     if (gotcha)
       s << ", ";
-    s << ( ColorContext::HIGHLIGHT << count ) << " ";
+    s << ( ColorContext::POSITIVE << count ) << " ";
     if (gotcha)
       // translators: this text will be preceded by a number e.g. "5 new"
       s << _PL("new", "new", count);
@@ -1256,7 +1265,7 @@ void Summary::writePackageCounts(ostream & out)
   {
     if (gotcha)
       s << ", ";
-    s << ( ColorContext::HIGHLIGHT << count ) << " ";
+    s << ( ColorContext::CHANGE << count ) << " ";
     if (gotcha)
       // translators: this text will be preceded by a number e.g. "5 to ..."
       s << _PL("to reinstall", "to reinstall", count);
@@ -1284,7 +1293,7 @@ void Summary::writePackageCounts(ostream & out)
   {
     if (gotcha)
       s << ", ";
-    s << ( ColorContext::NEGATIVE << count ) << " ";
+    s << ( ColorContext::CHANGE << count ) << " ";
     if (gotcha)
       // translators: this text will be preceded by a number e.g. "5 to ..."
       s << _PL("to change vendor", " to change vendor", count);
@@ -1298,7 +1307,7 @@ void Summary::writePackageCounts(ostream & out)
   {
     if (gotcha)
       s << ", ";
-    s << ( ColorContext::HIGHLIGHT << count ) << " ";
+    s << ( ColorContext::CHANGE << count ) << " ";
     if (gotcha)
       // translators: this text will be preceded by a number e.g. "5 to ..."
       s << _PL("to change arch", "to change arch", count);
@@ -1312,7 +1321,7 @@ void Summary::writePackageCounts(ostream & out)
   {
     if (gotcha)
       s << ", ";
-    s << ( ColorContext::HIGHLIGHT << count ) << " ";
+    s << ( ColorContext::POSITIVE << count ) << " ";
     if (gotcha)
       // translators: this text will be preceded by a number e.g. "5 new"
       s << _PL("source package", "source packages", count);

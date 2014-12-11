@@ -46,12 +46,16 @@ struct Config
   ansi::Color color_msgStatus;
   ansi::Color color_msgError;
   ansi::Color color_msgWarning;
+  ansi::Color color_prompt;
   ansi::Color color_promptOption;
   ansi::Color color_positive;
+  ansi::Color color_change;
   ansi::Color color_negative;
   ansi::Color color_highlight;
   ansi::Color color_lowlight;
   ansi::Color color_osdebug;
+
+  zypp::TriBool color_pkglistHighlight;	// true:all; indeterminate:first; false:no
 
   /** zypper.conf: obs.baseUrl */
   zypp::Url obs_baseUrl;

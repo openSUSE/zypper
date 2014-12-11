@@ -29,12 +29,15 @@ enum class ColorContext
   MSG_STATUS,
   MSG_ERROR,
   MSG_WARNING,
+  PROMPT,
+  PROMPT_OPTION,
   POSITIVE,
+  CHANGE,
   NEGATIVE,
   HIGHLIGHT,
   LOWLIGHT,
-  PROMPT_OPTION,
-  OSDEBUG,
+
+  OSDEBUG
 };
 
 /** \relates ColorContext map to \ref ansi::Color */

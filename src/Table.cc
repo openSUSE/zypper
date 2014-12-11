@@ -178,7 +178,7 @@ void TableRow::dumpTo (ostream &stream, const Table & parent) const
 
 	  if ( editionSep == 0 )
 	  {
-	    stream << ( ColorContext::HIGHLIGHT << s );
+	    stream << ( ColorContext::CHANGE << s );
 	  }
 	  else if ( editionSep == s.size() )
 	  {
@@ -186,7 +186,7 @@ void TableRow::dumpTo (ostream &stream, const Table & parent) const
 	  }
 	  else
 	  {
-	    stream << s.substr( 0, editionSep ) << ( ColorContext::HIGHLIGHT << s.substr( editionSep ) );
+	    stream << s.substr( 0, editionSep ) << ( ColorContext::CHANGE << s.substr( editionSep ) );
 	  }
 	}
 	else

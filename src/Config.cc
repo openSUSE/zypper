@@ -105,12 +105,16 @@ namespace
     COLOR_MSG_STATUS,
     COLOR_MSG_ERROR,
     COLOR_MSG_WARNING,
+    COLOR_PROMPT,
     COLOR_PROMPT_OPTION,
     COLOR_POSITIVE,
+    COLOR_CHANGE,
     COLOR_NEGATIVE,
     COLOR_HIGHLIGHT,
     COLOR_LOWLIGHT,
     COLOR_OSDEBUG,
+
+    COLOR_PKGLISTHIGHLIGHT,
 
     OBS_BASE_URL,
     OBS_PLATFORM
@@ -130,12 +134,16 @@ namespace
       { "color/msgStatus",			ConfigOption::COLOR_MSG_STATUS			},
       { "color/msgError",			ConfigOption::COLOR_MSG_ERROR			},
       { "color/msgWarning",			ConfigOption::COLOR_MSG_WARNING			},
+      { "color/prompt",				ConfigOption::COLOR_PROMPT			},
       { "color/promptOption",			ConfigOption::COLOR_PROMPT_OPTION		},
       { "color/positive",			ConfigOption::COLOR_POSITIVE			},
+      { "color/change",				ConfigOption::COLOR_CHANGE			},
       { "color/negative",			ConfigOption::COLOR_NEGATIVE			},
       { "color/highlight",			ConfigOption::COLOR_HIGHLIGHT			},
       { "color/lowlight",			ConfigOption::COLOR_LOWLIGHT			},
       { "color/osdebug",			ConfigOption::COLOR_OSDEBUG			},
+
+      { "color/pkglistHighlight",		ConfigOption::COLOR_PKGLISTHIGHLIGHT		},
 
       { "obs/baseUrl",				ConfigOption::OBS_BASE_URL			},
       { "obs/platform",				ConfigOption::OBS_PLATFORM			}
@@ -160,17 +168,20 @@ Config::Config()
   : repo_list_columns("anr")
   , solver_installRecommends(!ZConfig::instance().solver_onlyRequires())
   , do_colors		(false)
-  , color_useColors	("never")
-  , color_result	(namedColor("default"))	// default colors for dark background
-  , color_msgStatus	(namedColor("default"))	// if background is actually light, these
-  , color_msgError	(namedColor("red"))	// colors will be overwritten in read()
+  , color_useColors	("autodetect")
+  , color_result	(namedColor("default"))
+  , color_msgStatus	(namedColor("default"))
+  , color_msgError	(namedColor("red"))
   , color_msgWarning	(namedColor("purple"))
-  , color_promptOption	(namedColor("bold"))
+  , color_prompt	(namedColor("bold"))
+  , color_promptOption	(ansi::Color::nocolor())	// follow color_prompt
   , color_positive	(namedColor("green"))
+  , color_change	(namedColor("brown"))
   , color_negative	(namedColor("red"))
   , color_highlight	(namedColor("cyan"))
   , color_lowlight	(namedColor("brown"))
   , color_osdebug	(namedColor("default") < ansi::Color::Attr::Reverse)
+  , color_pkglistHighlight(true)
   , obs_baseUrl("http://download.opensuse.org/repositories/")
   , obs_platform("openSUSE_Factory")
 {}
@@ -221,10 +232,11 @@ void Config::read( const std::string & file )
 
     // ---------------[ colors ]------------------------------------------------
 
-    color_useColors = augeas.getOption(asString( ConfigOption::COLOR_USE_COLORS ));
-    do_colors =
-      (color_useColors == "autodetect" && has_colors())
-      || color_useColors == "always";
+    s = augeas.getOption( asString( ConfigOption::COLOR_USE_COLORS ) );
+    if (!s.empty())
+      color_useColors = s;
+
+    do_colors = ( color_useColors == "autodetect" && has_colors() ) || color_useColors == "always";
 
     ansi::Color c;
     for ( const auto & el : std::initializer_list<std::pair<ansi::Color &, ConfigOption>> {
@@ -232,17 +244,32 @@ void Config::read( const std::string & file )
       { color_msgStatus,	ConfigOption::COLOR_MSG_STATUS		},
       { color_msgError,		ConfigOption::COLOR_MSG_ERROR		},
       { color_msgWarning,	ConfigOption::COLOR_MSG_WARNING		},
+      { color_prompt,		ConfigOption::COLOR_PROMPT		},
+      { color_promptOption,	ConfigOption::COLOR_PROMPT_OPTION	},
       { color_positive,		ConfigOption::COLOR_POSITIVE		},
+      { color_change,		ConfigOption::COLOR_CHANGE		},
       { color_negative,		ConfigOption::COLOR_NEGATIVE		},
       { color_highlight,	ConfigOption::COLOR_HIGHLIGHT		},
       { color_lowlight,		ConfigOption::COLOR_LOWLIGHT		},
-      { color_promptOption,	ConfigOption::COLOR_PROMPT_OPTION	},
     } )
     {
       c = namedColor( augeas.getOption( asString( el.second ) ) );
       if ( c )
 	el.first = c;
       ;
+    }
+
+    s = augeas.getOption( asString( ConfigOption::COLOR_PKGLISTHIGHLIGHT ) );
+    if (!s.empty())
+    {
+      if ( s == "all" )
+	color_pkglistHighlight = true;
+      else if ( s == "first" )
+	color_pkglistHighlight = indeterminate;
+      else if ( s == "no" )
+	color_pkglistHighlight = false;
+      else
+	WAR << "zypper.conf: color/pkglistHighlight: unknown value '" << s << "'" << endl;
     }
 
     s = augeas.getOption("color/background");	// legacy
