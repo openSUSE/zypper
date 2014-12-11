@@ -380,9 +380,11 @@ void OutNormal::prompt(PromptId id,
   }
   else
     cout << startdesc << endl;
+
+  ColorStream cout( std::cout, ColorContext::PROMPT ); // scoped color on std::cout
   cout << prompt;
-  if (!poptions.empty())
-    cout << " " << poptions.optionString();
+  if ( ! poptions.empty() )
+    cout << " " << ColorString(poptions.optionString()); 
   cout << ": " << std::flush;
   // prompt ends with newline (user hits <enter>) unless exited abnormaly
   _newline = true;
@@ -411,7 +413,8 @@ void OutNormal::promptHelp(const PromptOptions & poptions)
     }
   }
 
-  cout << endl << poptions.optionString() << ": " << std::flush;
+  ColorStream cout( std::cout, ColorContext::PROMPT ); // scoped color on std::cout
+  cout << endl << ColorString(poptions.optionString()) << ": " << std::flush;
   // prompt ends with newline (user hits <enter>) unless exited abnormaly
   _newline = true;
 }

@@ -5,10 +5,6 @@
                              |__/|_|  |_|
 \*---------------------------------------------------------------------------*/
 
-// #include <unistd.h>
-// #include <stdlib.h>
-// #include <string.h>
-
 #include <iostream>
 #include <map>
 
@@ -44,9 +40,11 @@ ansi::Color customColorCtor( ColorContext ctxt_r )
     case ColorContext::MSG_STATUS:	return conf.color_msgStatus;
     case ColorContext::MSG_WARNING:	return conf.color_msgWarning;
     case ColorContext::MSG_ERROR:	return conf.color_msgError;
-    case ColorContext::POSITIVE:	return conf.color_positive;
-    case ColorContext::NEGATIVE:	return conf.color_negative;
+    case ColorContext::PROMPT:		return conf.color_prompt;
     case ColorContext::PROMPT_OPTION:	return conf.color_promptOption;
+    case ColorContext::POSITIVE:	return conf.color_positive;
+    case ColorContext::CHANGE:		return conf.color_change;
+    case ColorContext::NEGATIVE:	return conf.color_negative;
     case ColorContext::HIGHLIGHT:	return conf.color_highlight;
     case ColorContext::LOWLIGHT:	return conf.color_lowlight;
     case ColorContext::OSDEBUG:		return conf.color_osdebug;
