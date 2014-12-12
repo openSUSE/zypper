@@ -1,4 +1,10 @@
 -------------------------------------------------------------------
+Fri Dec 12 14:00:01 CET 2014 - ma@suse.de
+
+- CheckAccessDeleted: Filter PIDs running in a container (bnc#909143)
+- version 14.32.1 (30)
+
+-------------------------------------------------------------------
 Wed Dec 10 16:06:04 CET 2014 - ma@suse.de
 
 - suppress informal license (no need to accept) upon update (bnc#908976)
