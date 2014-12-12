@@ -46,8 +46,8 @@ namespace zypp
     typedef std::pair<std::string,std::unordered_set<std::string>> CacheEntry;
 
     /** Add \c cache to \c data if the process is accessing deleted files.
-     * \c pid string in \c cache is the proc line \c (pcuLR), \c iles
-     * are lready in place. Always clear the \c cache.files!
+     * \c pid string in \c cache is the proc line \c (pcuLR), \c files
+     * are already in place. Always clear the \c cache.files!
     */
     inline void addDataIf( std::vector<CheckAccessDeleted::ProcInfo> & data_r, const CacheEntry & cache_r )
     {
