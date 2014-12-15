@@ -1,4 +1,11 @@
 -------------------------------------------------------------------
+Mon Dec 15 16:45:01 CET 2014 - ma@suse.de
+
+- Add Product::endOfLife attribute (Fate#316172)
+- BuildRequire libzypp-9.38.0
+- version 1.6.318
+
+-------------------------------------------------------------------
 Thu Dec  4 01:17:57 CET 2014 - ma@suse.de
 
 - Update sle-zypper-po.tar.bz2
