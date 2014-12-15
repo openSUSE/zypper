@@ -355,13 +355,15 @@ string asXML(const Product & p, bool is_installed)
        " flavor=\"" << xml_encode(p.flavor()) << "\""
        " isbase=\"" << (p.isTargetDistribution() ? 1 : 0) << "\""
        " repo=\"" << xml_encode(p.repoInfo().alias()) << "\""
-       " installed=\"" << (is_installed ? 1 : 0) << "\"";
-  if (p.description().empty())
-    str << "/>";
-  else
-    str
-      << ">" << endl << "<description>" << p.description() << "</description>"
-      << endl << "</product>";
+       " installed=\"" << (is_installed ? 1 : 0) << "\""
+       ">";
+  str << dumpAsXmlOn( str, p.endOfLife(), "endoflife" );
+  {
+    const std::string & text( p.description() );
+    if ( ! text.empty() )
+      str << "<description>" << p.description() << "</description>";
+  }
+  str << "</product>";
   return str.str();
 }
 
