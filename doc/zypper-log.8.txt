@@ -50,6 +50,8 @@ FILES
 */var/log/zypper.log*::
           *zypper* default logfile.
 
+*/var/log/YaST2/y2log*::
+	  As YAST uses a similar logfile format, you should be able to scan the YAST logfiles as well, using the *-l* switch.
 
 
 AUTHORS
