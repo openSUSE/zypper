@@ -145,7 +145,6 @@ namespace zypp
             ERR << "Unknown attribute in [" << *its << "]: " << it->first << "=" << it->second << " ignored" << endl;
         }
 
-	USR << dict.baseurls( *its ) << endl;
 	for ( auto & url : dict.baseurls( *its ) )
 	{
 	  if ( ! proxy.empty() && url.getQueryParam( "proxy" ).empty() )
