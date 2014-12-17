@@ -695,9 +695,9 @@ void do_init_repos(Zypper & zypper, const Container & container)
             || build_cache(zypper, repo, false))
         {
           zypper.out().info(boost::str(format(
-              _("Disabling repository '%s' because of the above error."))
+              _("Skipping repository '%s' because of the above error."))
               % repo.asUserString()), Out::QUIET);
-          WAR << format("Disabling repository '%s' because of the above error.")
+          WAR << format("Skipping repository '%s' because of the above error.")
               % repo.alias() << endl;
 
           it->setEnabled(false);
@@ -733,9 +733,9 @@ void do_init_repos(Zypper & zypper, const Container & container)
         if (build_cache(zypper, repo, false))
         {
           zypper.out().warning(boost::str(format(
-              _("Disabling repository '%s' because of the above error."))
+              _("Skipping repository '%s' because of the above error."))
               % repo.asUserString()), Out::QUIET);
-          WAR << format("Disabling repository '%s' because of the above error.")
+          WAR << format("Skipping repository '%s' because of the above error.")
               % repo.alias() << endl;
 
           it->setEnabled(false);
