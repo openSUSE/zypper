@@ -487,7 +487,16 @@ namespace zypp
 
     /** Split \a line_r into words with respect to escape delimeters.
      * Any sequence of characters in \a sepchars_r is treated as
-     * delimiter if not inside "" or "" or escaped by \, but not \\.
+     * delimiter if not inside \c "" or \c '' or escaped by \c \.
+     *
+     * \li A non-quoted backslash (\) preserves the literal value of the next character.
+     * \li Enclosing characters in single quotes preserves the literal value of each
+     *     character within the quotes.  A single quote may not occur between single
+     *     quotes, even when preceded by a backslash.
+     * \li Enclosing characters in double quotes preserves the literal value of all
+     *     characters within the quotes, with the exception of \c \. The backslash
+     *     retains its special meaning only when followed by \c " or \c \.
+     *
      * The words are passed to OutputIterator \a result_r.
      *
      * \see \ref splitEscaped
@@ -500,10 +509,10 @@ namespace zypp
      * \code
      * example splitted strings
      * normal line -> 2 elements ( "normal", "line" )
-     * escaped\ line -> 1 element( "escaped line" )
+     * escaped\ line -> 1 element(escaped line)
      * "quoted line" -> 1 element same as above
      * 'quoted line' -> 1 element same as above
-     * "escaped quote\'" -> 1 element ( "escaped quote'" )
+     * "escaped quote\"" -> 1 element (escaped quote")
      *
      * \param line_r   The string to parse.
      * \param result_r
@@ -541,91 +550,86 @@ namespace zypp
         }
 
         // after the leading sepchars
+	enum class Quote { None, Slash, Single, Double, DoubleSlash };
+	std::vector<char> buf;
+	Quote quoting = Quote::None;
         for ( beg = cur; *beg; beg = cur, ++result_r, ++ret )
-          {
-            if ( *cur == '"'  || *cur == '\'' )
-            {
-              char closeChar = *cur;
-              ++cur;
-              bool cont = true;
-              while (cont)
-              {
-                while ( *cur && *cur != closeChar)
-                  ++cur;
-                if ( *cur == '\0' )
-                {
-                  return ret; //TODO parsing exception no closing quote
-                }
-                int escCount = 0;
-                const char * esc = cur-1;
-                while ( esc != beg && *esc == '\\' )
-                {
-                  escCount++;
-                  --esc;
-                }
-                cont = (escCount % 2 == 1); // find some non escaped escape char
-                cur++; //skip quote
-              }
+	{
+	  // read next value until unquoted sepchar
+	  buf.clear();
+	  quoting = Quote::None;
+	  do {
+	    switch ( quoting )
+	    {
+	      case Quote::None:
+		switch ( *cur )
+		{
+		  case '\\':	quoting = Quote::Slash;		break;
+		  case '\'':	quoting = Quote::Single;	break;
+		  case '"':	quoting = Quote::Double;	break;
+		  default:	buf.push_back( *cur );		break;
+		}
+		break;
 
-              std::string s( beg+1, cur-beg-2 ); //without quotes
-              //transform escaped escape
-              replaceAll( s, "\\\\", "\\" );
-              //transform escaped quotes (only same as open
-              char tmpn[2] = { closeChar, 0 };
-              char tmpo[3] = { '\\', closeChar, 0 };
-              replaceAll( s, tmpo, tmpn );
+	      case Quote::Slash:
+		buf.push_back( *cur );
+		quoting = Quote::None;
+		break;
 
-              *result_r = s;
-            }
-            else
-            {
-              // skip non sepchars
-              while( *cur && !::strchr( sepchars_r, *cur ) )
-              {
-                //ignore char after backslash
-                if ( *cur == '\\' )
-                {
-                  ++cur;
-                }
-                ++cur;
-              }
-              // build string
-              std::string s( beg, cur-beg );
-              //transform escaped escape
-              replaceAll( s, "\\\\", "\\" );
+	      case Quote::Single:
+		switch ( *cur )
+		{
+		  case '\'':	quoting = Quote::None;		break;
+		  default:	buf.push_back( *cur );		break;
+		}
+		break;
 
-              const char *delimeter = sepchars_r;
-              while ( *delimeter )
-              {
-                std::string ds("\\");
-                const char tmp[2] = { *delimeter, '\0' };
-                std::string del(tmp);
-                ds+= del;
-                replaceAll( s, ds, del );
-                ++delimeter;
-              }
+	      case Quote::Double:
+		switch ( *cur )
+		{
+		  case '\"':	quoting = Quote::None;		break;
+		  case '\\':	quoting = Quote::DoubleSlash;	break;
+		  default:	buf.push_back( *cur );		break;
+		}
+		break;
 
-              *result_r = s;
-            }
-            // skip sepchars
-            if ( *cur && ::strchr( sepchars_r, *cur ) )
-              ++cur;
-            while ( *cur && ::strchr( sepchars_r, *cur ) )
-            {
-              ++cur;
-              if (withEmpty)
-              {
-                *result_r = "";
-                ++ret;
-              }
-            }
-            // the last was a separator => one more field
-            if ( !*cur && withEmpty && ::strchr( sepchars_r, *(cur-1) ) )
-            {
-              *result_r = "";
-              ++ret;
-            }
-          }
+	      case Quote::DoubleSlash:
+		switch ( *cur )
+		{
+		  case '\"':	/*fallthrough*/
+		  case '\\':	buf.push_back( *cur );		break;
+		  default:
+		    buf.push_back( '\\' );
+		    buf.push_back( *cur );
+		    break;
+		}
+		quoting = Quote::Double;
+		break;
+	    }
+	    ++cur;
+	  } while ( *cur && ( quoting != Quote::None || !::strchr( sepchars_r, *cur ) ) );
+	  *result_r = std::string( buf.begin(), buf.end() );
+
+
+	  // skip sepchars
+	  if ( *cur && ::strchr( sepchars_r, *cur ) )
+	    ++cur;
+	  while ( *cur && ::strchr( sepchars_r, *cur ) )
+	  {
+	    ++cur;
+	    if (withEmpty)
+	    {
+	      *result_r = "";
+	      ++ret;
+	    }
+	  }
+	  // the last was a separator => one more field
+	  if ( !*cur && withEmpty && ::strchr( sepchars_r, *(cur-1) ) )
+	  {
+	    *result_r = "";
+	    ++ret;
+	  }
+	}
         return ret;
       }
 
