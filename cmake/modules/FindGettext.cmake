@@ -49,6 +49,8 @@ MACRO( GETTEXT_CREATE_TARBALL_TRANSLATIONS _translation_set_basename )
         ADD_CUSTOM_COMMAND(
                 OUTPUT ${TRANSLATION_SET_CONTENT}
                 COMMAND tar xfj ${CMAKE_CURRENT_SOURCE_DIR}/${TRANSLATION_SET}
+                COMMAND sed -i  '/^msgid/s/do not forbid installation of %s/remove lock to allow installation of %s/' *.po
+                COMMAND sed -i  '/^msgid/s/do not keep %s installed/remove lock to allow removal of %s/' *.po
                 DEPENDS ${CMAKE_CURRENT_SOURCE_DIR}/${TRANSLATION_SET}
         )
 
