@@ -1,4 +1,13 @@
 -------------------------------------------------------------------
+Wed Dec 17 18:38:43 CET 2014 - ma@suse.de
+
+- Enhance 'Digest verification failed' message (FATE#315008)
+- Enhance message text when skipping repos due to an error (bnc#909244)
+- zypper.conf: fix wrong default mentioned in comment
+- zypper-log(8): Update man page
+- version 1.11.18
+
+-------------------------------------------------------------------
 Thu Dec 11 15:22:41 CET 2014 - ma@suse.de
 
 - Add --[no-]color global option
