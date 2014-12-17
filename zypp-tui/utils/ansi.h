@@ -440,6 +440,17 @@ namespace ansi
     , _color( color_r )
     {}
 
+    /** Ctor from color and string */
+    ColorString( Color color_r, const std::string & str_r )
+    : _str( str_r )
+    , _color( color_r )
+    {}
+    /** \overload moving */
+    ColorString( Color color_r, std::string && str_r )
+    : _str( std::move(str_r) )
+    , _color( color_r )
+    {}
+
   public:
     /** Assign new string */
     ColorString & operator=( const std::string & str_r )
