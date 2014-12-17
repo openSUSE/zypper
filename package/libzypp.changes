@@ -1,4 +1,12 @@
 -------------------------------------------------------------------
+Wed Dec 17 18:44:26 CET 2014 - ma@suse.de
+
+- Improve conflict message for locked packages (bnc#828631)
+- Fix broken de-escaping in str::splitEscaped (bnc#909772)
+- cleanup loging
+- version 14.32.2 (30)
+
+-------------------------------------------------------------------
 Fri Dec 12 14:00:01 CET 2014 - ma@suse.de
 
 - CheckAccessDeleted: Filter PIDs running in a container (bnc#909143)
