@@ -88,4 +88,22 @@ void fprint_color(std::ostream & str, const std::string & s,
 void print_color(const std::string & s,
     const ColorContext cc, const ColorContext prev_color = COLOR_CONTEXT_DEFAULT);
 
+/// \class ColorString
+/// \brief mimic ansi::ColorString in backported code
+struct ColorString
+{
+  ColorString( const std::string & str_r = "", ColorContext ctx_r = COLOR_CONTEXT_DEFAULT )
+  : _str( str_r )
+  , _ctx( ctx_r )
+  {}
+  ColorString( ColorContext ctx_r, const std::string & str_r = "" )
+  : _str( str_r )
+  , _ctx( ctx_r )
+  {}
+  std::string str() const;
+private:
+  std::string _str;
+  ColorContext _ctx;
+};
+
 #endif /* UTILS_COLORS_H_ */
