@@ -8,7 +8,7 @@ Thu Dec 18 18:15:57 CET 2014 - ma@suse.de
 -------------------------------------------------------------------
 Mon Dec 15 16:45:01 CET 2014 - ma@suse.de
 
-- Add Product::endOfLife attribute (Fate#316172)
+- Add Product::endOfLife attribute (Fate#316172,Fate#300591)
 - BuildRequire libzypp-9.38.0
 - version 1.6.318
 
