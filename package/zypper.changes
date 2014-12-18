@@ -1,4 +1,11 @@
 -------------------------------------------------------------------
+Thu Dec 18 18:15:57 CET 2014 - ma@suse.de
+
+- BuildRequires:  libzypp-devel >= 9.38.2
+- Enhance 'Digest verification failed' dialog (FATE#315008)
+- version 1.6.319
+
+-------------------------------------------------------------------
 Mon Dec 15 16:45:01 CET 2014 - ma@suse.de
 
 - Add Product::endOfLife attribute (Fate#316172)
