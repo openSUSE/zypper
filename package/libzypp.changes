@@ -1,4 +1,9 @@
 -------------------------------------------------------------------
+Thu Dec 18 01:13:20 CET 2014 - ma@suse.de
+
+- Update zypp-po.tar.bz2
+
+-------------------------------------------------------------------
 Wed Dec 17 18:44:26 CET 2014 - ma@suse.de
 
 - Improve conflict message for locked packages (bnc#828631)
