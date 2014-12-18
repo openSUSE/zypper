@@ -136,3 +136,19 @@ void print_color(const std::string & s,
 {
   fprint_color(cout, s, cc, prev_cc);
 }
+
+std::string ColorString::str() const
+{
+  std::string ret;
+  if ( Zypper::instance()->config().do_colors )
+  {
+    ret = get_color( _ctx );
+    ret += _str;
+    ret +=  get_color( COLOR_CONTEXT_DEFAULT );
+  }
+  else
+  {
+    ret = _str;
+  }
+  return ret;
+}

@@ -90,6 +90,9 @@ public:
   virtual ~Out();
 
 public:
+  /** NORMAL: An empty line */
+  void gap() { if ( type() == TYPE_NORMAL ) std::cout << std::endl; }
+
   /**
    * Show an info message.
    *
