@@ -1,4 +1,10 @@
 -------------------------------------------------------------------
+Fri Dec 19 13:41:55 CET 2014 - ma@suse.de
+
+- info: show new product:registerflavor attribute (bnc#896224)
+- version 1.11.19
+
+-------------------------------------------------------------------
 Thu Dec 18 01:13:39 CET 2014 - ma@suse.de
 
 - Update zypper-po.tar.bz2
