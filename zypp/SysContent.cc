@@ -335,7 +335,7 @@ namespace zypp
 
         virtual void text( const Node & node_r )
         {
-          *_value = node_r.value().asString();
+          *_value = Date(node_r.value().asString());
         }
 
         Date *_value;

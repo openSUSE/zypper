@@ -61,7 +61,7 @@ namespace zypp
     : _date( date_r )
     {}
     /** Ctor taking time_t value as string. */
-    Date( const std::string & seconds_r );
+    explicit Date( const std::string & seconds_r );
 
     /**
      * Ctor from a \a date_str (in localtime) formatted using \a format.
