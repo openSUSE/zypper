@@ -153,7 +153,7 @@ namespace zypp
     /** \overload */
     static std::string targetDistributionRelease( const Pathname & root_r );
 
-    /** This is \c register.release attribute of the installed base product.
+    /** This is \c register.flavor attribute of the installed base product.
      * Used for registration.
      * \note don't mistake this for \ref distributionFlavor
      */
