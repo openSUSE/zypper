@@ -76,6 +76,7 @@ namespace zypp
       std::string _productline;
       std::string _registerTarget;
       std::string _registerRelease;
+      std::string _registerFlavor;
 
       std::string _updaterepokey;
 
@@ -97,6 +98,7 @@ namespace zypp
     std::string ProductFileData::productline()     const { return _pimpl->_productline; }
     std::string ProductFileData::registerTarget()  const { return _pimpl->_registerTarget; }
     std::string ProductFileData::registerRelease() const { return _pimpl->_registerRelease; }
+    std::string ProductFileData::registerFlavor()  const { return _pimpl->_registerFlavor; }
 
     std::string ProductFileData::updaterepokey() const { return _pimpl->_updaterepokey; }
 
@@ -157,6 +159,7 @@ namespace zypp
         (*this)["register"]
             ("target",        OPTIONAL,   xml::parseDefAssign( _pdata._registerTarget ) )
             ("release",       OPTIONAL,   xml::parseDefAssign( _pdata._registerRelease ) )
+            ("flavor",        OPTIONAL,   xml::parseDefAssign( _pdata._registerFlavor ) )
             ;
 
         (*this)["upgrades"]

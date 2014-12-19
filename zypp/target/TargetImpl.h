@@ -175,6 +175,11 @@ namespace zypp
       /** \overload */
       static std::string targetDistributionRelease( const Pathname & root_r );
 
+      /** \copydoc Target::targetDistributionFlavor()*/
+      std::string targetDistributionFlavor() const;
+      /** \overload */
+      static std::string targetDistributionFlavor( const Pathname & root_r );
+
       /** \copydoc Target::distributionVersion()*/
       Target::DistributionLabel distributionLabel() const;
       /** \overload */

@@ -149,6 +149,7 @@ namespace sat
       static const SolvAttr productEndOfLife;
       static const SolvAttr productRegisterTarget;
       static const SolvAttr productRegisterRelease;
+      static const SolvAttr productRegisterFlavor;
       static const SolvAttr productUrl;
       static const SolvAttr productUrlType;
       static const SolvAttr productUpdates;		// SUB-STRUCTURE:

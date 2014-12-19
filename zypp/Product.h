@@ -132,6 +132,11 @@ namespace zypp
       */
     std::string registerRelease() const;
 
+    /** This is \c register.flavor attribute of a product.
+      * Used for registration.
+      */
+    std::string registerFlavor() const;
+
   public:
     /***/
     class UrlList;

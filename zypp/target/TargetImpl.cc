@@ -1863,6 +1863,12 @@ namespace zypp
     std::string TargetImpl::targetDistributionRelease( const Pathname & root_r )
     { return baseproductdata( staticGuessRoot(root_r) ).registerRelease();}
 
+    std::string TargetImpl::targetDistributionFlavor() const
+    { return baseproductdata( _root ).registerFlavor(); }
+    // static version:
+    std::string TargetImpl::targetDistributionFlavor( const Pathname & root_r )
+    { return baseproductdata( staticGuessRoot(root_r) ).registerFlavor();}
+
     Target::DistributionLabel TargetImpl::distributionLabel() const
     {
       Target::DistributionLabel ret;

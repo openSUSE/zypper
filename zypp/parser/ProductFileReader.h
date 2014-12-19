@@ -61,6 +61,7 @@ namespace zypp
         std::string productline()     const;
         std::string registerTarget()  const;
         std::string registerRelease() const;
+        std::string registerFlavor()  const;
 
       public:
         std::string updaterepokey() const;

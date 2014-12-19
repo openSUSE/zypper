@@ -121,6 +121,11 @@ namespace zypp
   std::string Target::targetDistributionRelease( const Pathname & root_r )
   { return target::TargetImpl::targetDistributionRelease( root_r ); }
 
+  std::string Target::targetDistributionFlavor() const
+  { return _pimpl->targetDistributionFlavor(); }
+  std::string Target::targetDistributionFlavor( const Pathname & root_r )
+  { return target::TargetImpl::targetDistributionFlavor( root_r ); }
+
   Target::DistributionLabel Target::distributionLabel() const
   { return _pimpl->distributionLabel(); }
   Target::DistributionLabel Target::distributionLabel( const Pathname & root_r )

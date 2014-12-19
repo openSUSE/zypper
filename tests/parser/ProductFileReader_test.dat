@@ -39,6 +39,7 @@ This is the Server product of the SUSE Linux Enterprise edition. It is an altern
     <register>
         <target>sle-11-i586</target>
         <release>whatever</release>
+        <flavor>module</flavor>
     </register>
     <buildconfig>
         <!-- This section is needed to generate the installation media -->

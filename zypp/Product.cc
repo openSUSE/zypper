@@ -238,6 +238,9 @@ namespace zypp
   std::string Product::registerRelease() const
   { return lookupStrAttribute( sat::SolvAttr::productRegisterRelease ); }
 
+  std::string Product::registerFlavor() const
+  { return lookupStrAttribute( sat::SolvAttr::productRegisterFlavor ); }
+  
   /////////////////////////////////////////////////////////////////
 
   Product::UrlList Product::urls( const std::string & key_r ) const

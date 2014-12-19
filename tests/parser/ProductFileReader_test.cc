@@ -19,6 +19,7 @@ BOOST_AUTO_TEST_CASE(basic)
   BOOST_CHECK_EQUAL( data.productline(), "" );
   BOOST_CHECK_EQUAL( data.registerTarget(), "sle-11-i586" );
   BOOST_CHECK_EQUAL( data.registerRelease(), "whatever" );
+  BOOST_CHECK_EQUAL( data.registerFlavor(), "module" );
   BOOST_CHECK_EQUAL( data.updaterepokey(), "A43242DKD" );
 
   BOOST_REQUIRE_EQUAL( data.upgrades().size(), 2 );

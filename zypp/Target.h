@@ -153,6 +153,14 @@ namespace zypp
     /** \overload */
     static std::string targetDistributionRelease( const Pathname & root_r );
 
+    /** This is \c register.release attribute of the installed base product.
+     * Used for registration.
+     * \note don't mistake this for \ref distributionFlavor
+     */
+    std::string targetDistributionFlavor() const;
+    /** \overload */
+    static std::string targetDistributionFlavor( const Pathname & root_r );
+
     struct DistributionLabel { std::string shortName; std::string summary; };
     /** This is \c shortName and \c summary attribute of the installed base product.
      * Used e.g. for the bootloader menu.
@@ -175,6 +183,7 @@ namespace zypp
      * the last used one. It can be empty is the target has never
      * been loaded, as the value is not present in the system
      * but computer from a package provides
+     * \note don't mistake this for \ref targetDistributionFlavor
      */
     std::string distributionFlavor() const;
     /** \overload */
