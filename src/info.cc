@@ -68,6 +68,14 @@ namespace
     for ( auto && cap : pi_r->dep( dep_r ) )
     { cout << "  " << cap << endl; }
   }
+
+  inline std::ostream & appendWord( std::ostream & str, const std::string & word_r )
+  {
+    if ( word_r.empty() )
+      return str;
+    return str << " " << word_r;
+  }
+
 } // namespace out
 ///////////////////////////////////////////////////////////////////
 
@@ -428,7 +436,10 @@ void printProductInfo(Zypper & zypper, const ui::Selectable & s)
     else
       product = asKind<Product>(pool_item.resolvable());
 
-    cout << _("Flavor") << ": "  << product->flavor() << endl;
+    cout << _("Flavor") << ":";
+    appendWord( cout, product->flavor() );
+    appendWord( cout, product->registerFlavor() );
+    cout << endl;
 
     cout << _("Short Name") << ": " << product->shortName() << endl;
 

@@ -359,6 +359,7 @@ string asXML(const Product & p, bool is_installed)
     } );
 
     dumpAsXmlOn( *parent, p.endOfLife(), "endoflife" );
+    dumpAsXmlOn( *parent, p.registerFlavor(), "registerflavor" );
     {
       const std::string & text( p.description() );
       if ( ! text.empty() )
