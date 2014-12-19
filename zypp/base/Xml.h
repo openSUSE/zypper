@@ -79,6 +79,8 @@ namespace zypp
     /// }                                                    // </node>
     /// \endcode
     ///
+    /// \note If the nodename is empty or starts with an \c !, a comment is written.
+    ///
     struct Node
     {
       NON_COPYABLE_BUT_MOVE( Node );
@@ -110,7 +112,9 @@ namespace zypp
       /** Dtor wrting end tag */
       ~Node()
       {
-	if ( ! _name.empty() )
+	if ( _name.empty() )
+	  _out << "-->";
+	else
 	{
 	  if ( _hasContent )
 	    _out << "</" << _name << ">";
@@ -125,7 +129,9 @@ namespace zypp
 	if ( ! _hasContent )
 	{
 	  _hasContent = true;
-	  if ( ! _name.empty() )
+	  if ( _name.empty() )
+	    _out << "|";
+	  else
 	    _out << ">";
 	}
 	return _out;
@@ -134,14 +140,19 @@ namespace zypp
     private:
       void printStart( const std::initializer_list<Attr> & attrs_r )
       {
-	if ( ! _name.empty() )
+	if ( _name.empty() || _name[0] == '!' )
 	{
-	  _out << "<" << _name;
-	  for ( const auto & pair : attrs_r )
-	    _out << " " << pair.first << "=\"" << xml::escape( pair.second ) << "\"";
-	  if ( _hasContent )
-	    _out << ">";
+	  _out << "<!--" << _name;
+	  _name.clear();
 	}
+	else
+	  _out << "<" << _name;
+
+	for ( const auto & pair : attrs_r )
+	  _out << " " << pair.first << "=\"" << xml::escape( pair.second ) << "\"";
+
+	if ( ! _name.empty() && _hasContent )
+	  _out << ">";
       }
     private:
       std::ostream & _out;
@@ -166,6 +177,20 @@ namespace zypp
 
   } // namespace xmlout
   ///////////////////////////////////////////////////////////////////
+
+  /// \name Default dumpAsXmlOn based on asString.
+  ///
+  //@{
+  template <class _Tp>
+  inline std::ostream & dumpAsXmlOn( std::ostream & str, const _Tp & obj, const std::string & name_r )
+  {
+    xmlout::Node guard( str, name_r, xmlout::Node::optionalContent );
+    const std::string & content( asString( obj ) );
+    if ( ! content.empty() ) *guard << content;
+    return str;
+  }
+  //@}
+  //
 } // namespace zypp
 ///////////////////////////////////////////////////////////////////
 #endif // ZYPP_BASE_XML_H
