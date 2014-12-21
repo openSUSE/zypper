@@ -1,4 +1,9 @@
 -------------------------------------------------------------------
+Sun Dec 21 01:13:33 CET 2014 - ma@suse.de
+
+- Update zypp-po.tar.bz2
+
+-------------------------------------------------------------------
 Fri Dec 19 10:05:00 CET 2014 - ma@suse.de
 
 - Parse and offer productRegisterFlavor attribute (bnc#896224)
