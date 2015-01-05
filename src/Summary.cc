@@ -392,6 +392,8 @@ void Summary::writeResolvableList(ostream & out, const ResPairSet & resolvables,
     static const ColorString quoteCh( "\"", ColorContext::HIGHLIGHT );
 
     zypp::TriBool pkglistHighlight = Zypper::instance()->config().color_pkglistHighlight;
+    bool nl_separator = Zypper::instance()->config().resolvables_list_nl_separator;
+
     char firstCh = 0;
 
     ostringstream s;
@@ -403,14 +405,17 @@ void Summary::writeResolvableList(ostream & out, const ResPairSet & resolvables,
       if ( name.empty() )
 	continue;
 
-      // quote names with spaces
-      bool quote = name.find_first_of( " " ) != std::string::npos;
+      bool quote = false;
+      if(!nl_separator)
+        quote = name.find_first_of( " " ) != std::string::npos;
+        // quote names with spaces unless resolvables are separated by
+        // newlines instead of spaces.
 
       // quote?
       if ( quote ) s << quoteCh;
 
       // highlight 1st char?
-      if ( pkglistHighlight || ( indeterminate(pkglistHighlight) && name[0] != firstCh ) )
+      if (!nl_separator && (pkglistHighlight || ( indeterminate(pkglistHighlight) && name[0] != firstCh )))
       {
 	s << ( color << name[0] ) << name.c_str()+1;
 	if ( indeterminate(pkglistHighlight) )
@@ -434,10 +439,21 @@ void Summary::writeResolvableList(ostream & out, const ResPairSet & resolvables,
           s << "-" << resit->second->edition().asString();
       }
 
-      s << " ";
+      if (nl_separator) {
+        mbs_write_wrapped(out, s.str(), 2, _wrap_width);
+        out << endl;
+        s.str("");
+      }
+      else
+      {
+        s << " ";
+      }
+
     }
-    mbs_write_wrapped(out, s.str(), 2, _wrap_width);
-    out << endl;
+    if (!nl_separator) {
+      mbs_write_wrapped(out, s.str(), 2, _wrap_width);
+      out << endl;
+    }
     return;
   }
 

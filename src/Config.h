@@ -33,6 +33,7 @@ struct Config
   bool solver_installRecommends;
   std::set<ZypperCommand> solver_forceResolutionCommands;
 
+  bool resolvables_list_nl_separator;
   /**
    * Whether to colorize the output. This is evaluated according to
    * color_useColors and has_colors()
