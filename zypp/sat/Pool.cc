@@ -48,6 +48,12 @@ namespace zypp
     void Pool::prepareForSolving() const
     { return myPool().prepareForSolving(); }
 
+    Pathname Pool::rootDir() const
+    { return myPool().rootDir(); }
+
+    void Pool::rootDir( const Pathname & root_r )
+    { return myPool().rootDir( root_r ); }
+
     bool Pool::reposEmpty() const
     { return ! myPool()->urepos; }
 

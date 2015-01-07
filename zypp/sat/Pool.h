@@ -69,6 +69,12 @@ namespace zypp
 	/** \ref prepare plus some expensive checks done before solving only. */
 	void prepareForSolving() const;
 
+	/** Get rootdir (for file conflicts check) */
+	Pathname rootDir() const;
+
+	/** Set rootdir (for file conflicts check) */
+	void rootDir( const Pathname & root_r );
+
       public:
         /** Whether \ref Pool contains repos. */
         bool reposEmpty() const;

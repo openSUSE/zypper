@@ -94,6 +94,22 @@ namespace zypp
           ::_Repo * systemRepo() const
           { return _pool->installed; }
 
+          /** Get rootdir (for file conflicts check) */
+	  Pathname rootDir() const
+	  {
+	    const char * rd = ::pool_get_rootdir( _pool );
+	    return( rd ? rd : "/" );
+	  }
+
+	  /** Set rootdir (for file conflicts check) */
+	  void rootDir( const Pathname & root_r )
+	  {
+	    if ( root_r.empty() || root_r == "/" )
+	      ::pool_set_rootdir( _pool, nullptr );
+	    else
+	      ::pool_set_rootdir( _pool, root_r.c_str() );
+	  }
+
         public:
           /** \name Actions invalidating housekeeping data.
            *
