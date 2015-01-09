@@ -96,6 +96,7 @@ namespace
   enum class ConfigOption {
     MAIN_SHOW_ALIAS,
     MAIN_REPO_LIST_COLUMNS,
+    MAIN_NL_SEPARATOR,
 
     SOLVER_INSTALL_RECOMMENDS,
     SOLVER_FORCE_RESOLUTION_COMMANDS,
@@ -125,6 +126,7 @@ namespace
     static const std::vector<std::pair<std::string,ConfigOption>> _data = {
       { "main/showAlias",			ConfigOption::MAIN_SHOW_ALIAS			},
       { "main/repoListColumns",			ConfigOption::MAIN_REPO_LIST_COLUMNS		},
+      { "main/separateResolvablesByNL",		ConfigOption::MAIN_NL_SEPARATOR			},
       { "solver/installRecommends",		ConfigOption::SOLVER_INSTALL_RECOMMENDS		},
       { "solver/forceResolutionCommands",	ConfigOption::SOLVER_FORCE_RESOLUTION_COMMANDS	},
 
@@ -210,6 +212,11 @@ void Config::read( const std::string & file )
     if (!s.empty()) // TODO add some validation
       repo_list_columns = s;
 
+    s = augeas.getOption(asString( ConfigOption::MAIN_NL_SEPARATOR ));
+    if (!s.empty())
+    {
+      resolvables_list_nl_separator = str::strToBool(s, false);
+    }
     // ---------------[ solver ]------------------------------------------------
 
     s = augeas.getOption(asString( ConfigOption::SOLVER_INSTALL_RECOMMENDS ));
