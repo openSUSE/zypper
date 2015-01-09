@@ -93,9 +93,11 @@ namespace {
     return mayuse;
   }
 
-  inline std::string legacyCLI( const std::string & old_r, const std::string & new_r )
+  inline std::string legacyCLI( const std::string & old_r, const std::string & new_r, bool global_r = false )
   {
-    return boost::str( boost::formatNAC(_("Legacy commandline option %1% detected. Please use %2% instead."))
+    return boost::str( boost::formatNAC( global_r
+					 ? _("Legacy commandline option %1% detected. Please use global option %2% instead.")
+					 : _("Legacy commandline option %1% detected. Please use %2% instead.") )
 		     % old_r
 		     % new_r );
   }
@@ -2846,7 +2848,7 @@ void Zypper::processCommandOptions()
   // RUG TRANSLATE no-confirm into non-interactive mode
   if ( _copts.count("no-confirm") )
   {
-    out().warning( legacyCLI( "-y/--no-confirm", "-n/--non-interactive" ) );
+    out().warning( legacyCLI( "-y/--no-confirm", "-n/--non-interactive", true/*global option*/ ) );
     if ( ! _gopts.non_interactive )
     {
       out().info(_("Entering non-interactive mode."), Out::HIGH);
