@@ -25,6 +25,18 @@ namespace zypp
      *
      * Replaces '$arch', '$basearch' and $releasever in a string
      * with the global ZYpp values.
+     *
+     * \note The $releasever value is overwritten by the environment
+     * variable \c ZYPP_REPO_RELEASEVER. This might  be handy for
+     * distribution upogrades like this:
+     * \code
+     *   $ export ZYPP_REPO_RELEASEVER=13.2
+     *   $ zypper lr -u
+     *   $ zypper dup
+     *   ....upgrades to 13.2...
+     * \endcode
+     * (see \ref zypp-envars)
+     *
      * \code
      * Example:
      * ftp://user:secret@site.net/$arch/ -> ftp://user:secret@site.net/i686/

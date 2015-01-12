@@ -13,6 +13,10 @@
 \li \c ZYPP_CONF=<PATH> Location of the zypp.conf file.
 \li \c ZYPP_LOCK_TIMEOUT=<sec> If zypp is locked by another process wait this number of seconds for the lock becoming available.
 
+\subsection zypp-envars-repos Variables related to repositories
+
+\li \c ZYPP_REPO_RELEASEVER=<ver> Overwrite the \c $releasever variable in repository URLs and names (\see zypp::repo::RepoVariablesStringReplacer).
+
 \subsection zypp-envars-commit Variables related to commit
 
 \li \c ZYPP_IS_RUNNING=1 Set during commit so packages pre/post/trigger scripts can detect whether rpm was called from within libzypp.

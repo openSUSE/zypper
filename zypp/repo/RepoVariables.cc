@@ -19,6 +19,16 @@
 ///////////////////////////////////////////////////////////////////
 namespace zypp
 {
+  namespace env
+  {
+    /** Use faked releasever (e.g. for 'zupper dup' to next distro version */
+    inline std::string ZYPP_REPO_RELEASEVER()
+    {
+      const char * env = getenv("ZYPP_REPO_RELEASEVER");
+      return( env ? env : "" );
+    }
+  }
+
   ///////////////////////////////////////////////////////////////////
   namespace repo
   {
@@ -46,7 +56,13 @@ namespace zypp
 	const std::string & releasever() const
 	{
 	  if( _releasever.empty() )
-	    _releasever = Target::distributionVersion( Pathname()/*guess*/ );
+	  {
+	    _releasever = env::ZYPP_REPO_RELEASEVER();
+	    if( _releasever.empty() )
+	      _releasever = Target::distributionVersion( Pathname()/*guess*/ );
+	    else
+	      WAR << "ENV overwrites $releasever=" << _releasever << endl;
+	  }
 	  return _releasever;
 	}
 
