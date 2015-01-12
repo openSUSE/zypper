@@ -68,19 +68,22 @@ namespace zypp
     Pathname licenseTgz() const
     { return metadatapath.empty() ? Pathname() : metadatapath / path / "license.tar.gz"; }
 
-    Url getmirrorListUrl() const
+    Url mirrorListUrl() const
     { return replacer(mirrorlist_url); }
 
-    Url &setmirrorListUrl()
+    void mirrorListUrl( const Url & url_r )
+    { mirrorlist_url = url_r; }
+
+    const Url & rawMirrorListUrl() const
     { return mirrorlist_url; }
 
     const url_set & baseUrls() const
     {
-      if ( _baseUrls.empty() && ! getmirrorListUrl().asString().empty() )
+      if ( _baseUrls.empty() && ! mirrorListUrl().asString().empty() )
       {
         emptybaseurls = true;
         DBG << "MetadataPath: " << metadatapath << endl;
-	repo::RepoMirrorList rmurls( getmirrorListUrl(), metadatapath );
+	repo::RepoMirrorList rmurls( mirrorListUrl(), metadatapath );
 	_baseUrls.insert( _baseUrls.end(), rmurls.getUrls().begin(), rmurls.getUrls().end() );
       }
       return _baseUrls;
@@ -214,7 +217,7 @@ namespace zypp
   { _pimpl->gpgcheck = check; }
 
   void RepoInfo::setMirrorListUrl( const Url & url_r )
-  { _pimpl->setmirrorListUrl() = url_r; }
+  { _pimpl->mirrorListUrl( url_r ); }
 
   void RepoInfo::setGpgKeyUrl( const Url & url_r )
   { _pimpl->gpgkey_url = url_r; }
@@ -274,7 +277,10 @@ namespace zypp
   { return _pimpl->type; }
 
   Url RepoInfo::mirrorListUrl() const
-  { return _pimpl->getmirrorListUrl(); }
+  { return _pimpl->mirrorListUrl(); }
+
+  Url RepoInfo::rawMirrorListUrl() const
+  { return _pimpl->rawMirrorListUrl(); }
 
   Url RepoInfo::gpgKeyUrl() const
   { return _pimpl->gpgkey_url; }
@@ -290,6 +296,9 @@ namespace zypp
 
   std::string RepoInfo::targetDistribution() const
   { return _pimpl->targetDistro; }
+
+  Url RepoInfo::rawUrl() const
+  { return( _pimpl->baseUrls().empty() ? Url() : *_pimpl->baseUrls().begin() ); }
 
   RepoInfo::urls_const_iterator RepoInfo::baseUrlsBegin() const
   {
@@ -351,7 +360,7 @@ namespace zypp
         accept = false;
       }
     }
-    MIL << "License for " << this->name() << " has to be accepted: " << (accept?"true":"false" ) << endl;
+    MIL << "License for " << name() << " has to be accepted: " << (accept?"true":"false" ) << endl;
     return accept;
   }
 
@@ -450,7 +459,7 @@ namespace zypp
 	str << tag_r << value_r << std::endl;
     });
 
-    strif( "- mirrorlist  : ", _pimpl->getmirrorListUrl().asString() );
+    strif( "- mirrorlist  : ", _pimpl->rawMirrorListUrl().asString() );
     strif( "- path        : ", path().asString() );
     str << "- type        : " << type() << std::endl;
     str << "- priority    : " << priority() << std::endl;
@@ -486,8 +495,8 @@ namespace zypp
     if ( ! _pimpl->path.empty() )
       str << "path="<< path() << endl;
 
-    if ( ! (_pimpl->getmirrorListUrl().asString().empty()) )
-      str << "mirrorlist=" << _pimpl->getmirrorListUrl() << endl;
+    if ( ! (_pimpl->rawMirrorListUrl().asString().empty()) )
+      str << "mirrorlist=" << _pimpl->rawMirrorListUrl() << endl;
 
     str << "type=" << type().asString() << endl;
 
@@ -530,8 +539,8 @@ namespace zypp
 
     if ( _pimpl->baseurl2dump() )
     {
-      for (  const auto & url : _pimpl->baseUrls() )
-	str << "<url>" << escape(url.asString()) << "</url>" << endl;
+      for_( it, baseUrlsBegin(), baseUrlsEnd() )	// !transform iterator replaces variables
+	str << "<url>" << escape((*it).asString()) << "</url>" << endl;
     }
 
     str << "</repo>" << endl;

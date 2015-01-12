@@ -63,6 +63,9 @@ namespace zypp
    *
    * \note A RepoInfo is a hint about how
    * to create a Repository.
+   *
+   * \note Name, baseUrls and mirrorUrl are subject to repo variable replacement
+   * (\see \ref RepoVariablesStringReplacer).
    */
   class RepoInfo : public repo::RepoInfoBase
   {
@@ -100,7 +103,8 @@ namespace zypp
        */
       bool baseUrlsEmpty() const;
       /**
-       * whether there are manualy configured repository urls
+       * Whether there are manualy configured repository urls.
+       * If \c false, a mirrorlist might be used.
        */
       bool baseUrlSet() const;
       /**
@@ -120,6 +124,10 @@ namespace zypp
        */
       Url url() const
       { return( baseUrlsEmpty() ? Url() : *baseUrlsBegin()); }
+      /**
+       * Pars pro toto: The first repository url (no variables replaced)
+       */
+      Url rawUrl() const;
       /**
        * A Url under which the metadata are located, or a set of mirrors.
        *
@@ -173,6 +181,10 @@ namespace zypp
        * If empty, the base url will be used.
        */
       Url mirrorListUrl() const;
+      /**
+       * The raw mirrorListUrl (no variables replaced).
+       */
+      Url rawMirrorListUrl() const;
       /**
        * Set mirror list url. \see mirrorListUrl
        * \param url The base url for the list
@@ -374,11 +386,13 @@ namespace zypp
 
       /**
        * Write this RepoInfo object into \a str in a <tr>.repo</tt> file format.
+       * Raw values, no variable replacement.
        */
       virtual std::ostream & dumpAsIniOn( std::ostream & str ) const;
 
       /**
        * Write an XML representation of this RepoInfo object.
+       * Repo variables replaced.
        *
        * \param str
        * \param content this argument is ignored (used in other classed derived

@@ -1989,7 +1989,7 @@ namespace zypp
       else
       {
         // service repo can contain only one URL now, so no need to iterate.
-        url = *it->baseUrlsBegin();
+        url = it->rawUrl();	// raw!
       }
 
       // libzypp currently has problem with separate url + path handling
@@ -2139,6 +2139,14 @@ namespace zypp
 
 	// all other attributes follow the service request:
 
+	// changed name (raw!)
+	if ( oldRepo->rawName() != it->rawName() )
+	{
+	  DBG << "Service repo " << it->alias() << " gets new NAME " << it->rawName() << endl;
+	  oldRepo->setName( it->rawName() );
+	  oldRepoModified = true;
+	}
+
 	// changed autorefresh
 	if ( oldRepo->autorefresh() != it->autorefresh() )
 	{
@@ -2157,10 +2165,10 @@ namespace zypp
 
         // changed url?
         // service repo can contain only one URL now, so no need to iterate.
-        if ( oldRepo->url() != it->url() )
+        if ( oldRepo->rawUrl() != it->rawUrl() )
         {
-          DBG << "Service repo " << it->alias() << " gets new URL " << it->url() << endl;
-          oldRepo->setBaseUrl( it->url() );
+          DBG << "Service repo " << it->alias() << " gets new URL " << it->rawUrl() << endl;
+          oldRepo->setBaseUrl( it->rawUrl() );
           oldRepoModified = true;
         }
 

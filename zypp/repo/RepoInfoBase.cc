@@ -116,10 +116,13 @@ namespace zypp
 
   std::string RepoInfoBase::name() const
   {
-    if ( _pimpl->_name.empty() )
+    if ( rawName().empty() )
       return alias();
-    return repo::RepoVariablesStringReplacer()( _pimpl->_name );
+    return repo::RepoVariablesStringReplacer()( rawName() );
   }
+
+  std::string RepoInfoBase::rawName() const
+  { return _pimpl->_name; }
 
   std::string RepoInfoBase::label() const
   {
@@ -136,7 +139,8 @@ namespace zypp
   {
     str << "--------------------------------------" << std::endl;
     str << "- alias       : " << alias() << std::endl;
-    str << "- name        : " << name() << std::endl;
+    if ( ! rawName().empty() )
+      str << "- name        : " << rawName() << std::endl;
     str << "- enabled     : " << enabled() << std::endl;
     str << "- autorefresh : " << autorefresh() << std::endl;
 
@@ -147,7 +151,8 @@ namespace zypp
   {
     // we save the original data without variable replacement
     str << "[" << alias() << "]" << endl;
-    str << "name=" << name() << endl;
+    if ( ! rawName().empty() )
+      str << "name=" << rawName() << endl;
     str << "enabled=" << (enabled() ? "1" : "0") << endl;
     str << "autorefresh=" << (autorefresh() ? "1" : "0") << endl;
 
