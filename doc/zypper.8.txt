@@ -1361,7 +1361,7 @@ GLOBAL OPTIONS
 	Ignore unknown packages. This option is useful for scripts.
 
 *-D*, *--reposd-dir* 'dir'::
-	Use the specified directory to look for the repository definition (*.repo) files. The default value is */etc/zypp/repos.d*.
+	Use the specified directory to look for the repository definition (*.repo*) files. The default value is */etc/zypp/repos.d*.
 
 *-C*, *--cache-dir* 'dir'::
 	Use an alternative root directory for all caches. The default value is */var/cache/zypp*.
