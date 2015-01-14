@@ -251,6 +251,7 @@ void print_main_help(Zypper & zypper)
     "\t--no-refresh\t\tDo not refresh the repositories.\n"
     "\t--no-cd\t\t\tIgnore CD/DVD repositories.\n"
     "\t--no-remote\t\tIgnore remote repositories.\n"
+    "\t--releasever\t\tSet the value of $releasever in all .repo files (default: distribution version)\n"
   );
 
   static string help_global_target_options = _("     Target Options:\n"
@@ -459,6 +460,7 @@ void Zypper::processGlobalOptions()
     {"no-refresh",                 no_argument,       0,  0 },
     {"no-cd",                      no_argument,       0,  0 },
     {"no-remote",                  no_argument,       0,  0 },
+    {"releasever",                 required_argument, 0,  0 },
     {"xmlout",                     no_argument,       0, 'x'},
     {"config",                     required_argument, 0, 'c'},
     {"userdata",                   required_argument, 0,  0 },
@@ -561,6 +563,20 @@ void Zypper::processGlobalOptions()
   }
 
   // ======== other global options ========
+
+  if ( (it = gopts.find( "releasever" )) != gopts.end() )
+  {
+    ::setenv( "ZYPP_REPO_RELEASEVER", it->second.front().c_str(), 1 );
+  }
+  {
+    const char * env = ::getenv( "ZYPP_REPO_RELEASEVER" );
+    if ( env && *env )
+    {
+      out().warning( str::Str() << _("Enforced setting") << ": $releasever=" << env );
+      WAR << "Enforced setting: $releasever=" << env << endl;
+    }
+  }
+
 
   if ( (it = gopts.find( "userdata" )) != gopts.end() )
   {

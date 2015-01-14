@@ -2,12 +2,12 @@
 .\"     Title: zypper
 .\"    Author: [see the "AUTHORS" section]
 .\" Generator: DocBook XSL Stylesheets v1.78.1 <http://docbook.sf.net/>
-.\"      Date: 01/12/2015
+.\"      Date: 01/14/2015
 .\"    Manual: ZYPPER
 .\"    Source: zypper
 .\"  Language: English
 .\"
-.TH "ZYPPER" "8" "01/12/2015" "zypper" "ZYPPER"
+.TH "ZYPPER" "8" "01/14/2015" "zypper" "ZYPPER"
 .\" -----------------------------------------------------------------
 .\" * Define some portability stuff
 .\" -----------------------------------------------------------------
@@ -996,16 +996,24 @@ This command also accepts the \fBdownload\-and\-install\fR mode options describe
 .RS 4
 Perform a distribution upgrade\&. This command applies the state of (specified) repositories onto the system; upgrades (or even downgrades) installed packages to versions found in repositories, removes packages that are no longer in the repositories and pose a dependency problem for the upgrade, handles package splits and renames, etc\&.
 
-If no repositories are specified via
+If no repositories are specified via the
 \fB\-\-from\fR
-(or \-\-repo) options, zypper will do the upgrade with all defined repositories\&. This can be a problem if the system contains conflicting repositories, like repositories for two different distribution releases\&. This often happens if one forgets to remove an older release repository after adding a new one, say openSUSE 11\&.1 and openSUSE 11\&.2\&.
+option, zypper will do the upgrade with all defined repositories\&. This can be a problem if the system contains conflicting repositories, like repositories for two different distribution releases\&. This often happens if one forgets to remove an older release repository after adding a new one, say openSUSE 13\&.1 and openSUSE 13\&.2\&.
 
-To avoid the above trouble, you can specify the repositories from which to do the upgrade using the
-\fB\-\-from\fR
-(or \-\-repo) options\&. Using
-\fI\-\-repo is discouraged\fR
-as it currently hides unmentioned repositories from the resolver, leading to inexpertly decisions\&. In the future \-\-repo will become an alias for
-\fB\-\-from\fR\&.
+For all repositories which have the distribution version within their URL (like
+http://download\&.opensuse\&.org/distribution/\fI13\&.1\fR/repo/oss) using the
+\fB$releasever\fR
+variable instead may be helpful (http://download\&.opensuse\&.org/distribution/\fB$releasever\fR/repo/oss)\&. The variable is per default substituted by the current distributions version (\fI13\&.1\fR) This value can be overwritten using the
+\fB\-\-releasever\fR
+global option\&. Calling
+\fBzypper \-\-releasever 13\&.2\fR\fI\&...\fR
+will cause these repos to use the new location (http://download\&.opensuse\&.org/distribution/\fI13\&.2\fR/repo/oss) without need to add/remove anything\&. Once the
+\fBdup\fR
+is performed,
+\fB$releasever\fR
+will default to the new distribution version\&. See section
+\fBRepository Management\fR
+for more info about variable substitution\&.
 
 Note: distribution upgrades in openSUSE are currently only supported between consecutive releases\&. To upgrade multiple releases, upgrade each consecutive release one at a time\&. For more details see
 \fBhttp://en\&.opensuse\&.org/SDB:System_upgrade\fR
@@ -1398,8 +1406,65 @@ Zypper is able to work with YaST, RPM\-MD (yum) software repositories, and plain
 Repositories are primarily identified using their \fIURI\fR or \fIalias\fR\&. Alias serves as a shorthand for the long URI or name of the repository\&. The \fIname\fR of the repository should briefly describe the repository and is shown to the user in tables and messages\&. The name is not required, and if not known, the alias is shown instead\&. The alias is required and uniquely identifies the repository on the system\&.
 .sp
 The \fIalias\fR, \fIname\fR, \fIURI\fR, or the \fInumber\fR from \fBzypper repos\fR list can be used to specify a repository as an argument of various zypper commands and options like \fBrefresh\fR, \fB\-\-repo\fR, or \fB\-\-from\fR\&.
+.sp
+Apart from the above, repositories have several other properties which can be set using the commands described in this section below, or by manually editing the repository definition files (\fB\&.repo\fR files, see section \fBFILES\fR)\&.
+.sp
+.it 1 an-trap
+.nr an-no-space-flag 1
+.nr an-break-flag 1
+.br
+.ps +1
+\fBVariable substitution:\fR
+.RS 4
+.sp
+You can use the following built\-in variables within a \fB\&.repo\fR files \fIname\fR and \fIURI\fR values:
 .PP
-Supported URI formats:
+\fB$arch\fR
+.RS 4
+Use this variable to refer to the system\(cqs CPU architecture\&.
+.RE
+.PP
+\fB$basearch\fR
+.RS 4
+Use this variable to refer to the base architecture of the system\&. For example, iX86 machines have a base architecture of
+\fBi386\fR, while AMD64 and Intel64 have
+\fBx86_64\fR\&.
+.RE
+.PP
+\fB$releasever\fR
+.RS 4
+Use this variable to refer to the version of your openSUSE or SUSE Linux\&. The value is obtained from the
+\fI/product/version\fR
+XML\-node in
+\fB/etc/products\&.d/baseproduct\fR\&.
+
+This is useful for related repositories like packman (\fBhttp://ftp\&.gwdg\&.de/pub/linux/packman/suse/$releasever\fR), which shall always fit the installed distribution, even after a distribution upgrade\&. To help performing a distribution upgrade, the value of
+\fB$releasever\fR
+can be overwritten using the
+\fB\-\-releasever\fR
+global option\&. This way you can easily switch all repositories using
+\fB$releasever\fR
+to the new version (provided the server layouts did not change and new repos are already available)\&.
+.RE
+.PP
+Remember to protect the \fB$\fR when using these variables on a shell command line:
+.RS 4
+zypper ar \-f
+http://ftp\&.gwdg\&.de/pub/linux/packman/suse/\fB\e$\fRreleasever packman
+.RE
+.PP
+To check where you already use \fB$releasever\fR call:
+.RS 4
+\fBzypper \-\-releasever @\-\-HERE\-\-@ lr \-u\fR
+.RE
+.RE
+.sp
+.it 1 an-trap
+.nr an-no-space-flag 1
+.nr an-break-flag 1
+.br
+.ps +1
+\fBSupported URI formats:\fR
 .RS 4
 .PP
 \fIscheme\fR\fB:\fR [\fB//\fR[\fIuser\fR[\fB:\fR\fIpassword\fR]\fI\fB@\fR\fR]\fIhost\fR[\fB:\fR\fIport\fR]] \fB/\fR\fIpath\fR [\fB?\fR\fIquery\fR] [\fB#\fR\fIfragment\fR]
@@ -1622,8 +1687,7 @@ T}
 .sp 1
 .RE
 .RE
-.sp
-Apart from the above, repositories have several other properties which can be set using the commands described in this section below, or by manually editing the repository definition files (\&.repo files, see section \fBFILES\fR)\&.
+.SS ""
 .PP
 \fBaddrepo\fR (\fBar\fR) [\fIoptions\fR] \fIURI\fR \fIalias\fR
 .RS 4
@@ -2679,6 +2743,25 @@ Ignore CD/DVD repositories\&. When this option is specified, zypper acts as if t
 \fB\-\-no\-remote\fR
 .RS 4
 Ignore remote repositories like http, ftp, smb and similar\&. This makes using zypper easier when being offline\&. When this option is specified, zypper acts as if the remote repositories were not defined at all\&.
+.RE
+.PP
+\fB\-\-releasever\fR \fIversion\fR
+.RS 4
+Set the value of the
+\fB$releasever\fR
+variable in all
+\fB\&.repo\fR
+files (default:
+\fIcurrent distribution version\fR)\&. This can be used to switch to new distribution repositories when performing a distribution upgrade\&. See section
+\fBRepository Management\fR
+and the
+\fBdist\-upgrade\fR
+(\fBdup\fR) command for details\&.
+.PP
+To check where you already use \fB$releasever\fR call:
+.RS 4
+\fBzypper \-\-releasever @\-\-HERE\-\-@ lr \-u\fR
+.RE
 .RE
 .PP
 Target Options:

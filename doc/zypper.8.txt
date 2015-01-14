@@ -563,10 +563,9 @@ Update Management Commands
 *dist-upgrade* (*dup*) ['options']::
 	Perform a distribution upgrade. This command applies the state of (specified) repositories onto the system; upgrades (or even downgrades) installed packages to versions found in repositories, removes packages that are no longer in the repositories and pose a dependency problem for the upgrade, handles package splits and renames, etc.
 	+
-	If no repositories are specified via *--from* (or --repo) options, zypper will do the upgrade with all defined repositories. This can be a problem if the system contains conflicting repositories, like repositories for two different distribution releases. This often happens if one forgets to remove an older release repository after adding a new one, say openSUSE 11.1 and openSUSE 11.2.
+	If no repositories are specified via the *--from* option, zypper will do the upgrade with all defined repositories. This can be a problem if the system contains conflicting repositories, like repositories for two different distribution releases. This often happens if one forgets to remove an older release repository after adding a new one, say openSUSE 13.1 and openSUSE 13.2.
 	+
-	To avoid the above trouble, you can specify the repositories from which to do the upgrade using the *--from* (or --repo) options.
-	Using '--repo is discouraged' as it currently hides unmentioned repositories from the resolver, leading to inexpertly decisions. In the future --repo will become an alias for *--from*.
+	For all repositories which have the distribution version within their URL (like http://download.opensuse.org/distribution/'13.1'/repo/oss) using the *$releasever* variable instead may be helpful (http://download.opensuse.org/distribution/*$releasever*/repo/oss). The variable is per default substituted by the current distributions version ('13.1') This value can be overwritten using the *--releasever* global option. Calling *zypper --releasever 13.2*'...' will cause these repos to use the new location (http://download.opensuse.org/distribution/'13.2'/repo/oss) without need to add/remove anything. Once the *dup* is performed, *$releasever* will default to the new distribution version. See section *Repository Management* for more info about variable substitution.
 	+
 	Note: distribution upgrades in openSUSE are currently only supported between consecutive releases. To upgrade multiple releases, upgrade each consecutive release one at a time. For more details see *http://en.opensuse.org/SDB:System_upgrade* and the 'openSUSE release notes' at *http://doc.opensuse.org/release-notes/*.
 +
@@ -783,7 +782,33 @@ Repositories are primarily identified using their 'URI' or 'alias'. Alias serves
 
 The 'alias', 'name', 'URI', or the 'number' from *zypper repos* list can be used to specify a repository as an argument of various zypper commands and options like *refresh*, *--repo*, or *--from*.
 
-Supported URI formats: :: {nop}
+Apart from the above, repositories have several other properties which can be set using the commands described in this section below, or by manually editing the repository definition files (*.repo* files, see section *FILES*).
+
+Variable substitution:
+^^^^^^^^^^^^^^^^^^^^^^
+
+You can use the following built-in variables within a *.repo* files 'name' and 'URI' values:
+
+	*$arch*:::
+		Use this variable to refer to the system's CPU architecture.
+
+	*$basearch*:::
+		Use this variable to refer to the base architecture of the system. For example, iX86 machines have a base architecture of *i386*, while AMD64 and Intel64 have *x86_64*.
+
+	*$releasever*:::
+		Use this variable to refer to the version of your openSUSE or SUSE Linux. The value is obtained from the '/product/version' XML-node in */etc/products.d/baseproduct*.
+		+
+		This is useful for related repositories like packman (*http://ftp.gwdg.de/pub/linux/packman/suse/$releasever*), which shall always fit the installed distribution, even after a distribution upgrade. To help performing a distribution upgrade, the value of *$releasever* can be overwritten using the *--releasever* global option. This way you can easily switch all repositories using *$releasever* to the new version (provided the server layouts did not change and new repos are already available).
+
+	Remember to protect the *$* when using these variables on a shell command line: :::
+		zypper ar -f http://ftp.gwdg.de/pub/linux/packman/suse/*\$*{nop}releasever packman
+
+	To check where you already use *$releasever* call: :::
+		*zypper --releasever @--HERE--@ lr -u*
+
+
+Supported URI formats:
+^^^^^^^^^^^^^^^^^^^^^^
 
 	'scheme'*:* [*//*['user'[*:*'password']'*@*']'host'[*:*'port']] */*'path' [*?*'query'] [*#*'fragment']:::
 		Special characters occurring in URI components (like a '*@*' in a password) must be %-encoded ('*%40*').
@@ -840,8 +865,8 @@ Supported URI formats: :: {nop}
 		;; *cifs://usern:passw@servername/share/path/on/the/share*'?workgroup=mygroup'
 		;; *cifs://servername/share/path/on/the/share*'?user=usern&pass=passw'
 
-Apart from the above, repositories have several other properties which can be set using the commands described in this section below, or by manually editing the repository definition files (.repo files, see section *FILES*).
-
+{nop}
+~~~~~
 
 *addrepo* (*ar*) ['options'] 'URI' 'alias':: {nop}
 *addrepo* (*ar*) ['options'] 'FILE'*.repo*::
@@ -1404,6 +1429,12 @@ Repository Options: :: {nop}
 *--no-remote*::
 	Ignore remote repositories like http, ftp, smb and similar. This makes using zypper easier when being offline. When this option is specified, zypper acts as if the remote repositories were not defined at all.
 
+*--releasever* 'version'::
+	Set the value of the *$releasever* variable in all *.repo* files (default: 'current distribution version'). This can be used to switch to new distribution repositories when performing a distribution upgrade. See section *Repository Management* and the *dist-upgrade* (*dup*) command for details.
+	+
+	To check where you already use *$releasever* call: :::
+		*zypper --releasever @--HERE--@ lr -u*
+
 Target Options: :: {nop}
 
 *-R*, *--root* 'dir'::
@@ -1508,7 +1539,6 @@ There are several exit codes defined for zypper for use e.g. within scripts. The
 HOMEPAGE
 --------
 https://github.com/openSUSE/zypper
-
 
 AUTHORS
 -------
