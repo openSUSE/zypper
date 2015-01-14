@@ -1,4 +1,15 @@
 -------------------------------------------------------------------
+Wed Jan 14 11:30:43 CET 2015 - ma@suse.de
+
+- New global option --releasever: Set the value of the $releasever
+  variable in all .repo files. This can be used to switch to new 
+  distribution repositories when performing a distribution upgrade.
+  (bnc#911658)
+- BuildRequires:  libzypp-devel >= 14.34.0
+- Clarify legacy warning (bnc#911335)
+- version 1.11.20
+
+-------------------------------------------------------------------
 Sun Jan 11 01:13:23 CET 2015 - ma@suse.de
 
 - Update zypper-po.tar.bz2
