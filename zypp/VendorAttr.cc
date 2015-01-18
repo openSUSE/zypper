@@ -253,14 +253,7 @@ namespace zypp
 
   bool VendorAttr::addVendorDirectory( const Pathname & dirname ) const
   {
-      parser::IniDict dict;
-
-      if ( PathInfo(dirname).isExist())
-      {
-          InputStream is(dirname);
-          dict.read(is);
-      }
-      else
+      if ( ! PathInfo(dirname).isExist() )
       {
           MIL << dirname << " not found." << endl;
           return false;
