@@ -1,4 +1,9 @@
 -------------------------------------------------------------------
+Sun Jan 18 01:13:20 CET 2015 - ma@suse.de
+
+- Update zypper-po.tar.bz2
+
+-------------------------------------------------------------------
 Wed Jan 14 11:30:43 CET 2015 - ma@suse.de
 
 - New global option --releasever: Set the value of the $releasever
