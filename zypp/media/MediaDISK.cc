@@ -114,8 +114,8 @@ namespace zypp {
 	  for(it = dlist.begin(); it != dlist.end(); ++it)
 	  {
 	    PathInfo vol_info(*it);
-	    if( vol_info.isBlk() && vol_info.major() == dev_info.major() &&
-	                            vol_info.minor() == dev_info.minor())
+	    if( vol_info.isBlk() && vol_info.devMajor() == dev_info.devMajor() &&
+	                            vol_info.devMinor() == dev_info.devMinor())
 	    {
 	      DBG << "Specified device name " << dev_name
 		  << " is a volume (disk/by-uuid link "
@@ -138,8 +138,8 @@ namespace zypp {
 	  for(it = dlist.begin(); it != dlist.end(); ++it)
 	  {
 	    PathInfo vol_info(*it);
-	    if( vol_info.isBlk() && vol_info.major() == dev_info.major() &&
-	                            vol_info.minor() == dev_info.minor())
+	    if( vol_info.isBlk() && vol_info.devMajor() == dev_info.devMajor() &&
+	                            vol_info.devMinor() == dev_info.devMinor())
 	    {
 	      DBG << "Specified device name " << dev_name
 		  << " is a volume (disk/by-label link "
@@ -207,7 +207,7 @@ namespace zypp {
 	ZYPP_THROW(MediaBadUrlEmptyFilesystemException(url()));
 
       MediaSourceRef media( new MediaSource(
-      	"disk", _device, dev_info.major(), dev_info.minor()
+	"disk", _device, dev_info.devMajor(), dev_info.devMinor()
       ));
       AttachedMedia  ret( findAttachedMedia( media));
 
@@ -242,8 +242,8 @@ namespace zypp {
 	  is_device = true;
 	}
 
-	if( is_device && media->maj_nr == dev_info.major() &&
-	                 media->min_nr == dev_info.minor())
+	if( is_device && media->maj_nr == dev_info.devMajor() &&
+	                 media->min_nr == dev_info.devMinor())
 	{
 	  AttachPointRef ap( new AttachPoint(e->dir, false));
 	  AttachedMedia  am( media, ap);

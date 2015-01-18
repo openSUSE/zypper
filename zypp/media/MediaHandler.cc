@@ -544,7 +544,7 @@ MediaHandler::checkAttached(bool matchMountFs) const
 	                   ref.mediaSource->bdir.empty()))
         {
           std::string mtype(matchMountFs ? e->type : ref.mediaSource->type);
-          MediaSource media(mtype, e->src, dev_info.major(), dev_info.minor());
+          MediaSource media(mtype, e->src, dev_info.devMajor(), dev_info.devMinor());
 
           if( ref.mediaSource->equals( media ) )
           {
@@ -822,7 +822,7 @@ void MediaHandler::forceRelaseAllMedia(const MediaSourceRef &ref,
     if( is_device &&  ref->maj_nr)
     {
       std::string mtype(matchMountFs ? e->type : ref->type);
-      MediaSource media(mtype, e->src, dev_info.major(), dev_info.minor());
+      MediaSource media(mtype, e->src, dev_info.devMajor(), dev_info.devMinor());
 
       if( ref->equals( media) && e->type != "subfs")
       {

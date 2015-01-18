@@ -236,22 +236,22 @@ namespace zypp
 
     /******************************************************************
      **
-     **	FUNCTION NAME : PathInfo::major
+     **	FUNCTION NAME : PathInfo::devMajor
      **	FUNCTION TYPE : unsigned int
      */
-    unsigned int PathInfo::major() const
+    unsigned int PathInfo::devMajor() const
     {
-      return isBlk() || isChr() ? ::major(statbuf_C.st_rdev) : 0;
+      return isBlk() || isChr() ? major(statbuf_C.st_rdev) : 0;
     }
 
     /******************************************************************
      **
-     **	FUNCTION NAME : PathInfo::minor
+     **	FUNCTION NAME : PathInfo::devMinor
      **	FUNCTION TYPE : unsigned int
      */
-    unsigned int PathInfo::minor() const
+    unsigned int PathInfo::devMinor() const
     {
-      return isBlk() || isChr() ? ::minor(statbuf_C.st_rdev) : 0;
+      return isBlk() || isChr() ? minor(statbuf_C.st_rdev) : 0;
     }
 
     /******************************************************************

@@ -359,8 +359,8 @@ namespace zypp
       dev_t  dev()     const { return isExist() ? statbuf_C.st_dev  : 0; }
       dev_t  rdev()    const { return isExist() ? statbuf_C.st_rdev : 0; }
 
-      unsigned int major() const;
-      unsigned int minor() const;
+      unsigned int devMajor() const;
+      unsigned int devMinor() const;
       //@}
 
       /** \name Size info. */
