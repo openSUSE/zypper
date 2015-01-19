@@ -7,4 +7,4 @@ ADD_LIBRARY(zypp_test_utils
  WebServer.cc
 )
 
-TARGET_LINK_LIBRARIES(zypp_test_utils mongoose zypp ${Boost_thread_LIBRARY})
+TARGET_LINK_LIBRARIES(zypp_test_utils mongoose zypp ${Boost_THREAD_LIBRARY})
