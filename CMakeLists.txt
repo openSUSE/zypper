@@ -113,7 +113,7 @@ ELSE ( NOT RPM_FOUND)
   endif ( RPM_SUSPECT_VERSION STREQUAL "5.x" )
 ENDIF( NOT RPM_FOUND)
 
-FIND_PACKAGE(Boost REQUIRED COMPONENTS program_options unit_test_framework)
+FIND_PACKAGE(Boost REQUIRED COMPONENTS program_options thread unit_test_framework)
 IF (Boost_FOUND)
   MESSAGE( STATUS "boost found: includes in ${Boost_INCLUDE_DIRS}, library in ${Boost_LIBRARY_DIRS}")
   INCLUDE_DIRECTORIES(${Boost_INCLUDE_DIRS})
