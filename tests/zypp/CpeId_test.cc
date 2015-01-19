@@ -160,7 +160,7 @@ BOOST_AUTO_TEST_CASE(cpeid_value_valid)
 {
   static const char *const hdig = "0123456789abcdef";
 
-  for ( char ch = 0x00; ch >= 0; ++ch )
+  for ( char ch = 0; ch < CHAR_MAX; ++ch )
   {
     // cout << "==== " << unsigned(ch) << endl;
     char qchstr[] = { '\\', ch, '\0' };
