@@ -1,9 +1,0 @@
-
-API Cleanups:
-=============
-
-Source.h
-- remove const from return types:
-  ie: const Pathname providePackage( Package::constPtr package );
-- pass by reference
-  resolvables(zypp::Resolvable::Kind kind) const;
