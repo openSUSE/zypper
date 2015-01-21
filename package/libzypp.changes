@@ -1,4 +1,11 @@
 -------------------------------------------------------------------
+Wed Jan 21 10:28:49 CET 2015 - ma@suse.de
+
+- PathInfo: Deprecate major/minor in favor of new devMajor/devMinor.
+  The old names clash with GNU libc macros.
+- version 14.35.0 (30)
+
+-------------------------------------------------------------------
 Sun Jan 18 01:13:09 CET 2015 - ma@suse.de
 
 - Update zypp-po.tar.bz2
