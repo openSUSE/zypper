@@ -657,7 +657,9 @@ namespace zypp
   //
   void MediaCD::forceEject( const std::string & ejectDev_r )
   {
+#if REPORT_EJECT_ERRORS
     bool ejected = false;
+#endif
     if ( ! isAttached() )	// no device mounted in this instance
     {
       // This also fills the _devices list on demand
@@ -686,7 +688,9 @@ namespace zypp
           forceRelaseAllMedia( media, false );
           if ( openTray( it->name ) )
           {
+#if REPORT_EJECT_ERRORS
             ejected = true;
+#endif
             break; // on 1st success
           }
         }
