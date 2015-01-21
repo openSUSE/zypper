@@ -27,6 +27,7 @@ extern "C"
 #include <set>
 #include <map>
 
+#include "zypp/APIConfig.h"
 #include "zypp/Pathname.h"
 #include "zypp/CheckSum.h"
 #include "zypp/ByteCount.h"
@@ -359,8 +360,13 @@ namespace zypp
       dev_t  dev()     const { return isExist() ? statbuf_C.st_dev  : 0; }
       dev_t  rdev()    const { return isExist() ? statbuf_C.st_rdev : 0; }
 
-      unsigned int major() const;
-      unsigned int minor() const;
+      unsigned int devMajor() const;
+      unsigned int devMinor() const;
+
+      /** \deprecated Name clashes with GNU libc macro, use \ref devMajor instead. */
+      unsigned int major() const ZYPP_DEPRECATED;
+      /** \deprecated Name clashes with GNU libc macro, use \ref devMinor instead. */
+      unsigned int minor() const ZYPP_DEPRECATED;
       //@}
 
       /** \name Size info. */

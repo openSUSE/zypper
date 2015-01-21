@@ -222,8 +222,8 @@ namespace zypp
       PathInfo dinfo(loopdev);
       if( dinfo.isBlk())
       {
-        media->maj_nr = dinfo.major();
-        media->min_nr = dinfo.minor();
+        media->maj_nr = dinfo.devMajor();
+        media->min_nr = dinfo.devMinor();
       }
       else
         ERR << loopdev << " is not a block device" << endl;

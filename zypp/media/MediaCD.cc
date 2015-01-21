@@ -127,7 +127,7 @@ namespace zypp
 	  PathInfo devnode( devnodePtr );
 	  if ( devnode.isBlk() )
 	  {
-	    MediaSource media( "cdrom", devnode.path().asString(), devnode.major(), devnode.minor() );
+	    MediaSource media( "cdrom", devnode.path().asString(), devnode.devMajor(), devnode.devMinor() );
 	    DBG << "Found (udev): " << media << std::endl;
 	    detected.push_back( media );
 	  }
@@ -335,14 +335,14 @@ namespace zypp
       PathInfo cdrinfo( "/dev/cdrom" );
       if ( dvdinfo.isBlk() )
       {
-	MediaSource media( "cdrom", dvdinfo.path().asString(), dvdinfo.major(), dvdinfo.minor() );
+	MediaSource media( "cdrom", dvdinfo.path().asString(), dvdinfo.devMajor(), dvdinfo.devMinor() );
 	DBG << "Found (GUESS): " << media << std::endl;
 	detected.push_back( media );
       }
       if ( cdrinfo.isBlk()
-	&& ! ( cdrinfo.major() == dvdinfo.major() && cdrinfo.minor() == dvdinfo.minor() ) )
+	&& ! ( cdrinfo.devMajor() == dvdinfo.devMajor() && cdrinfo.devMinor() == dvdinfo.devMinor() ) )
       {
-	MediaSource media( "cdrom", cdrinfo.path().asString(), cdrinfo.major(), cdrinfo.minor() );
+	MediaSource media( "cdrom", cdrinfo.path().asString(), cdrinfo.devMajor(), cdrinfo.devMinor() );
 	DBG << "Found (GUESS): " << media << std::endl;
 	detected.push_back( media );
       }
@@ -364,7 +364,7 @@ namespace zypp
       PathInfo dinfo( device );
       if ( dinfo.isBlk() )
       {
-	MediaSource media( "cdrom", device, dinfo.major(), dinfo.minor() );
+	MediaSource media( "cdrom", device, dinfo.devMajor(), dinfo.devMinor() );
 	if ( detected.empty() )
 	{
 	  _devices.push_front( media );	// better try this than nothing
@@ -453,8 +453,8 @@ namespace zypp
       }
       DBG << "trying device " << dinfo << endl;
 
-      temp.maj_nr = dinfo.major();
-      temp.min_nr = dinfo.minor();
+      temp.maj_nr = dinfo.devMajor();
+      temp.min_nr = dinfo.devMinor();
       MediaSourceRef media( new MediaSource(temp));
       AttachedMedia ret( findAttachedMedia( media));
 
@@ -490,8 +490,8 @@ namespace zypp
             is_device = true;
           }
 
-          if( is_device && media->maj_nr == dev_info.major() &&
-                           media->min_nr == dev_info.minor())
+          if( is_device && media->maj_nr == dev_info.devMajor() &&
+                           media->min_nr == dev_info.devMinor())
           {
             AttachPointRef ap( new AttachPoint(e->dir, false));
             AttachedMedia  am( media, ap);
