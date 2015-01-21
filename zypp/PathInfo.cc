@@ -241,7 +241,7 @@ namespace zypp
      */
     unsigned int PathInfo::devMajor() const
     {
-      return isBlk() || isChr() ? ::major(statbuf_C.st_rdev) : 0;
+      return isBlk() || isChr() ? major(statbuf_C.st_rdev) : 0;
     }
 
     /******************************************************************
@@ -251,13 +251,8 @@ namespace zypp
      */
     unsigned int PathInfo::devMinor() const
     {
-      return isBlk() || isChr() ? ::minor(statbuf_C.st_rdev) : 0;
+      return isBlk() || isChr() ? minor(statbuf_C.st_rdev) : 0;
     }
-
-    unsigned int PathInfo::major() const
-    { INT << "Cleanup the code: This method is deprecated" << endl; return devMajor(); }
-    unsigned int PathInfo::minor() const
-    { INT << "Cleanup the code: This method is deprecated" << endl; return devMinor(); }
 
     /******************************************************************
      **

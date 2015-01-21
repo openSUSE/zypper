@@ -27,7 +27,6 @@ extern "C"
 #include <set>
 #include <map>
 
-#include "zypp/APIConfig.h"
 #include "zypp/Pathname.h"
 #include "zypp/CheckSum.h"
 #include "zypp/ByteCount.h"
@@ -362,11 +361,6 @@ namespace zypp
 
       unsigned int devMajor() const;
       unsigned int devMinor() const;
-
-      /** \deprecated Name clashes with GNU libc macro, use \ref devMajor instead. */
-      unsigned int major() const ZYPP_DEPRECATED;
-      /** \deprecated Name clashes with GNU libc macro, use \ref devMinor instead. */
-      unsigned int minor() const ZYPP_DEPRECATED;
       //@}
 
       /** \name Size info. */
