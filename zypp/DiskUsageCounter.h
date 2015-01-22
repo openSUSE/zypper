@@ -116,27 +116,6 @@ namespace zypp
 	: MountPoint( std::string(d?d:""), HintFlags(hint) )
       {}
 
-
-      /** \deprecated Use HintFlags instead of a trailing 'bool ro' argument.
-       * \code
-       *   -  MountPoint( "/usr", ..., true ); // readonly
-       *   +  MountPoint( "/usr", ..., MountPoint::Hint_readonly );
-       * \endcode
-       */
-      ZYPP_DEPRECATED MountPoint( const std::string & d, long long bs, long long total, long long used, long long pkg, bool ro )
-	: MountPoint( d, bs, total, used, pkg, HintFlags(ro?Hint_readonly:NoHint) )
-      {}
-      /** \deprecated Use HintFlags instead of a trailing 'bool ro' argument.
-       * \code
-       *   -  MountPoint( "/usr", ..., true ); // readonly
-       *   +  MountPoint( "/usr", ..., MountPoint::Hint_readonly );
-       * \endcode
-       */
-      ZYPP_DEPRECATED MountPoint( const char * d, long long bs, long long total, long long used, long long pkg, bool ro )
-	: MountPoint( d, bs, total, used, pkg, HintFlags(ro?Hint_readonly:NoHint) )
-      {}
-
-
       /** Sort by directory name */
       bool operator<( const MountPoint & rhs ) const
       { return dir < rhs.dir; }
