@@ -157,9 +157,6 @@ namespace zypp
        */
       virtual std::ostream & dumpAsXmlOn( std::ostream & str, const std::string & content = "" ) const;
 
-      /** \deprecated Use camel cased dumpAsXmlOn */
-      ZYPP_DEPRECATED std::ostream & dumpAsXMLOn( std::ostream & str, const std::string & content = "" ) const { return dumpAsXmlOn( str, content ); }
-
       class Impl;
     private:
       /** Pointer to implementation */
