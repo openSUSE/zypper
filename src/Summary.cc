@@ -392,6 +392,7 @@ void Summary::writeResolvableList(ostream & out, const ResPairSet & resolvables,
     static const ColorString quoteCh( "\"", ColorContext::HIGHLIGHT );
 
     zypp::TriBool pkglistHighlight = Zypper::instance()->config().color_pkglistHighlight;
+    ansi::Color   pkglistHighlightAttribute = Zypper::instance()->config().color_pkglistHighlightAttribute;
     char firstCh = 0;
 
     ostringstream s;
@@ -412,7 +413,7 @@ void Summary::writeResolvableList(ostream & out, const ResPairSet & resolvables,
       // highlight 1st char?
       if ( pkglistHighlight || ( indeterminate(pkglistHighlight) && name[0] != firstCh ) )
       {
-	s << ( color << name[0] ) << name.c_str()+1;
+	s << ( color << pkglistHighlightAttribute << name[0] ) << name.c_str()+1;
 	if ( indeterminate(pkglistHighlight) )
 	   firstCh = name[0];
       }

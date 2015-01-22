@@ -56,6 +56,7 @@ struct Config
   ansi::Color color_osdebug;
 
   zypp::TriBool color_pkglistHighlight;	// true:all; indeterminate:first; false:no
+  ansi::Color   color_pkglistHighlightAttribute;
 
   /** zypper.conf: obs.baseUrl */
   zypp::Url obs_baseUrl;

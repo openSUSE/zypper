@@ -115,6 +115,7 @@ namespace
     COLOR_OSDEBUG,
 
     COLOR_PKGLISTHIGHLIGHT,
+    COLOR_PKGLISTHIGHLIGHT_ATTRIBUTE,
 
     OBS_BASE_URL,
     OBS_PLATFORM
@@ -144,6 +145,7 @@ namespace
       { "color/osdebug",			ConfigOption::COLOR_OSDEBUG			},
 
       { "color/pkglistHighlight",		ConfigOption::COLOR_PKGLISTHIGHLIGHT		},
+      { "color/pkglistHighlightAttribute",	ConfigOption::COLOR_PKGLISTHIGHLIGHT_ATTRIBUTE	},
 
       { "obs/baseUrl",				ConfigOption::OBS_BASE_URL			},
       { "obs/platform",				ConfigOption::OBS_PLATFORM			}
@@ -182,6 +184,7 @@ Config::Config()
   , color_lowlight	(namedColor("brown"))
   , color_osdebug	(namedColor("default") < ansi::Color::Attr::Reverse)
   , color_pkglistHighlight(true)
+  , color_pkglistHighlightAttribute(ansi::Color::nocolor())
   , obs_baseUrl("http://download.opensuse.org/repositories/")
   , obs_platform("openSUSE_Factory")
 {}
@@ -251,12 +254,22 @@ void Config::read( const std::string & file )
       { color_negative,		ConfigOption::COLOR_NEGATIVE		},
       { color_highlight,	ConfigOption::COLOR_HIGHLIGHT		},
       { color_lowlight,		ConfigOption::COLOR_LOWLIGHT		},
+      { color_pkglistHighlightAttribute, ConfigOption::COLOR_PKGLISTHIGHLIGHT_ATTRIBUTE },
     } )
     {
       c = namedColor( augeas.getOption( asString( el.second ) ) );
       if ( c )
 	el.first = c;
-      ;
+      // Fix color attributes: Default is mapped to Unchanged to allow
+      // using the ColorStreams default rather than the terminal default.
+      if ( el.second == ConfigOption::COLOR_PKGLISTHIGHLIGHT_ATTRIBUTE )	// currently the only one
+      {
+	ansi::Color & c( el.first );
+	if ( c.fg() == ansi::Color::Fg::Default )
+	  c.fg( ansi::Color::Fg::Unchanged );
+	if ( c.bg() == ansi::Color::Bg::Default )
+	  c.bg( ansi::Color::Bg::Unchanged );
+      }
     }
 
     s = augeas.getOption( asString( ConfigOption::COLOR_PKGLISTHIGHLIGHT ) );
