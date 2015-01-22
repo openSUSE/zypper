@@ -1,4 +1,9 @@
 -------------------------------------------------------------------
+Thu Jan 22 01:13:36 CET 2015 - ma@suse.de
+
+- Update zypp-po.tar.bz2
+
+-------------------------------------------------------------------
 Wed Jan 21 10:28:49 CET 2015 - ma@suse.de
 
 - PathInfo: Deprecate major/minor in favor of new devMajor/devMinor.
