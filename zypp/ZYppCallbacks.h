@@ -157,23 +157,6 @@ namespace zypp
       virtual void finishDeltaApply()
       {}
 
-      /** \deprecated Unused since 2008 */
-      virtual ZYPP_DEPRECATED void startPatchDownload( const Pathname & /*filename*/, const ByteCount & /*downloadsize*/ )
-      {}
-
-      /** \deprecated Unused since 2008 */
-      virtual ZYPP_DEPRECATED bool progressPatchDownload( int /*value*/ )
-      { return true; }
-
-      /** \deprecated Unused since 2008 */
-      virtual ZYPP_DEPRECATED void problemPatchDownload( const std::string &/*description*/ )
-      {}
-
-      /** \deprecated Unused since 2008 */
-      virtual ZYPP_DEPRECATED void finishPatchDownload()
-      {}
-
-
       // return false if the download should be aborted right now
       virtual bool progress(int /*value*/, Resolvable::constPtr /*resolvable_ptr*/)
       { return true; }
