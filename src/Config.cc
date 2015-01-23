@@ -114,8 +114,7 @@ const string ConfigOption::asString() const
 
 
 Config::Config()
-  : show_alias(false)
-  , repo_list_columns("anr")
+  : repo_list_columns("anr")
   , solver_installRecommends(!ZConfig::instance().solver_onlyRequires())
   , do_colors        (false)
   , color_useColors  ("never")
@@ -148,8 +147,8 @@ void Config::read(const string & file)
     s = augeas.getOption(ConfigOption::MAIN_SHOW_ALIAS.asString());
     if (!s.empty())
     {
-      show_alias = str::strToBool(s, false);
-      ZConfig::instance().repoLabelIsAlias(show_alias);
+      // using Repository::label() will follow repoLabelIsAlias!
+      ZConfig::instance().repoLabelIsAlias( str::strToBool(s, false) );
     }
 
     s = augeas.getOption(ConfigOption::MAIN_REPO_LIST_COLUMNS.asString());

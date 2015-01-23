@@ -32,7 +32,6 @@ namespace zypp
     {
       KeyRingReceive()
           : _gopts(Zypper::instance()->globalOpts())
-          , _show_alias(Zypper::instance()->config().show_alias)
           {}
 
       ////////////////////////////////////////////////////////////////////
@@ -53,7 +52,7 @@ namespace zypp
           else
             Zypper::instance()->out().warning(boost::str(
               boost::format(_("Accepting an unsigned file '%s' from repository '%s'."))
-                % file % (_show_alias ? context.repoInfo().alias() : context.repoInfo().name())),
+                % file % context.repoInfo().label()),
               Out::HIGH);
 
           return true;
@@ -68,7 +67,7 @@ namespace zypp
           question = boost::str(boost::format(
             // TranslatorExplanation: speaking of a file
             _("File '%s' from repository '%s' is unsigned, continue?"))
-            % file % (_show_alias ? context.repoInfo().alias() : context.repoInfo().name()));
+            % file % context.repoInfo().label());
 
         return read_bool_answer(PROMPT_YN_GPG_UNSIGNED_FILE_ACCEPT, question, false);
       }
@@ -95,7 +94,7 @@ namespace zypp
           else
             Zypper::instance()->out().warning(boost::str(boost::format(
                 _("Accepting file '%s' from repository '%s' signed with an unknown key '%s'."))
-                % file % (_show_alias ? context.repoInfo().alias() : context.repoInfo().name()) % id));
+                % file % context.repoInfo().label() % id));
 
           return true;
         }
@@ -109,7 +108,7 @@ namespace zypp
           question = boost::str(boost::format(
             // translators: the last %s is gpg key ID
             _("File '%s' from repository '%s' is signed with an unknown key '%s'. Continue?"))
-             % file % (_show_alias ? context.repoInfo().alias() : context.repoInfo().name()) % id);
+             % file % context.repoInfo().label() % id);
 
         return read_bool_answer(PROMPT_YN_GPG_UNKNOWN_KEY_ACCEPT, question, false);
       }
@@ -140,9 +139,7 @@ namespace zypp
           << str::form(_("Key Created: %s"), key.created().asString().c_str()) << std::endl
           << str::form(_("Key Expires: %s"), key.expiresAsString().c_str()) << std::endl;
         if (!context.empty())
-          s << str::form(_("Repository: %s"), _show_alias ?
-              context.repoInfo().alias().c_str() :
-              context.repoInfo().name().c_str())
+          s << str::form(_("Repository: %s"), context.repoInfo().label().c_str())
             << std::endl;
 
         // if --gpg-auto-import-keys or --no-gpg-checks print info and don't ask
@@ -227,7 +224,7 @@ namespace zypp
             msg << boost::format(
                 _("Ignoring failed signature verification for file '%s'"
                   " from repository '%s'!")) % file
-                  % (_show_alias ? context.repoInfo().alias() : context.repoInfo().name());
+                  % context.repoInfo().label();
 
           msg
             << std::endl
@@ -245,7 +242,7 @@ namespace zypp
         else
           question << boost::format(
             _("Signature verification failed for file '%s' from repository '%s'."))
-              % file % (_show_alias ? context.repoInfo().alias() : context.repoInfo().name());
+              % file % context.repoInfo().label();
 
         question
           << std::endl
@@ -258,7 +255,6 @@ namespace zypp
 
     private:
       const GlobalOptions & _gopts;
-      bool _show_alias;
     };
 
     ///////////////////////////////////////////////////////////////////

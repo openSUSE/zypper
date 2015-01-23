@@ -185,9 +185,7 @@ void printPkgInfo(Zypper & zypper, const ui::Selectable & s)
   }
 
   cout << (zypper.globalOpts().is_rug_compatible ? _("Catalog: ") : _("Repository: "))
-       << (zypper.config().show_alias ?
-           theone.resolvable()->repository().info().alias() :
-           theone.resolvable()->repository().info().name()) << endl;
+       << theone.resolvable()->repository().info().label() << endl;
 
   printNVA(theone.resolvable());
 
@@ -344,9 +342,7 @@ void printPatternInfo(Zypper & zypper, const ui::Selectable & s)
   const PoolItem & pool_item = s.theObj();
 
   cout << (zypper.globalOpts().is_rug_compatible ? _("Catalog: ") : _("Repository: "))
-       << (zypper.config().show_alias ?
-           pool_item.resolvable()->repository().info().alias() :
-           pool_item.resolvable()->repository().info().name()) << endl;
+       << pool_item.resolvable()->repository().info().label() << endl;
 
   printNVA(pool_item.resolvable());
 
@@ -417,9 +413,7 @@ void printProductInfo(Zypper & zypper, const ui::Selectable & s)
   else
   {
     cout << (zypper.globalOpts().is_rug_compatible ? _("Catalog: ") : _("Repository: "))
-         << (zypper.config().show_alias ?
-             pool_item.resolvable()->repository().info().alias() :
-             pool_item.resolvable()->repository().info().name()) << endl;
+         << pool_item.resolvable()->repository().info().label() << endl;
 
     printNVA(pool_item.resolvable());
 

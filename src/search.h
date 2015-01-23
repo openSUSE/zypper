@@ -26,7 +26,6 @@ struct FillSearchTableSolvable
   /** Aliases of repos specified as --repo */
   std::set<std::string> _repos;
   zypp::TriBool _inst_notinst;
-  bool _show_alias;
 
   FillSearchTableSolvable(
       Table & table,
@@ -72,7 +71,6 @@ struct FillPatchesTable
   Table * _table;
   const GlobalOptions & _gopts;
   zypp::TriBool _inst_notinst;
-  bool _show_alias;
 
   FillPatchesTable( Table & table,
       zypp::TriBool inst_notinst = zypp::indeterminate );

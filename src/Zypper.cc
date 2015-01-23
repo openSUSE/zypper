@@ -3783,7 +3783,7 @@ void Zypper::doCommand()
         {
           out().warning(boost::str(format(
             _("Specified repository '%s' is disabled."))
-              % (config().show_alias ? repo_it->alias() : repo_it->name())));
+              % repo_it->label()));
         }
       }
     }

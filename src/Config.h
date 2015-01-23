@@ -89,9 +89,6 @@ struct Config
   /** Reads zypper.conf and stores the result */
   void read(const std::string & file = "");
 
-  /** Whether to show repo alias instead of name wherever we need to show repo*/
-  bool show_alias;
-
   /** Which columns to show in repo list by default (string of short options).*/
   std::string repo_list_columns;
 
