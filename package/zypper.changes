@@ -1,4 +1,14 @@
 -------------------------------------------------------------------
+Fri Jan 23 16:27:38 CET 2015 - ma@suse.de
+
+- Refresh plugin services on 'lr' 'ls -r' and 'ref' (bnc#893294)
+  Repositories provided by a plugin service (SUSE Manager) must always
+  be (auto-)refreshed to reflect server side changes immediately.
+- zypper.conf: new color/pkglistHighlightAttribute (bnc#914284)
+  Tune the color atrribute used for package list highlighting.
+- version 1.11.21
+
+-------------------------------------------------------------------
 Thu Jan 22 01:14:19 CET 2015 - ma@suse.de
 
 - Update zypper-po.tar.bz2
