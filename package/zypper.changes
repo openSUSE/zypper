@@ -7,7 +7,7 @@ Fri Jan 23 17:14:16 CET 2015 - ma@suse.de
 -------------------------------------------------------------------
 Fri Jan 23 16:27:38 CET 2015 - ma@suse.de
 
-- Refresh plugin services on 'lr' 'ls -r' and 'ref' (bnc#893294)
+- Refresh plugin services on 'lr' 'ls -r' and 'ref' (bnc#893294)(FATE#318117)
   Repositories provided by a plugin service (SUSE Manager) must always
   be (auto-)refreshed to reflect server side changes immediately.
 - zypper.conf: new color/pkglistHighlightAttribute (bnc#914284)
