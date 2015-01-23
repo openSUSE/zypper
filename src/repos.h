@@ -184,6 +184,9 @@ void modify_service(Zypper & zypper, const std::string & alias);
 
 void refresh_services(Zypper & zypper);
 
+/** If root, refresh any plugin services before lr/ls/ref (bnc#893294) */
+void checkIfToRefreshPluginServices( Zypper & zypper );
+
 bool match_service(Zypper & zypper,
                    std::string str,
                    zypp::repo::RepoInfoBase_Ptr & service_ptr);

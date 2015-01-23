@@ -2715,7 +2715,8 @@ void Zypper::doCommand()
     if (runningHelp()) { out().info(_command_help, Out::QUIET); return; }
 
     initRepoManager();
-
+    if ( copts.count( "with-repos" ) )
+      checkIfToRefreshPluginServices(*this);
     list_services(*this);
 
     break;
@@ -2939,12 +2940,8 @@ void Zypper::doCommand()
     if (runningHelp()) { out().info(_command_help, Out::QUIET); return; }
 
     initRepoManager();
-
-    //! \todo this conflicts with other 'lr' aliases
-    //if (_gopts.is_rug_compatible)
-    //  rug_list_resolvables(*this);
-    //else
-      list_repos(*this);
+    checkIfToRefreshPluginServices(*this);
+    list_repos(*this);
 
     break;
   }
@@ -3332,6 +3329,7 @@ void Zypper::doCommand()
         _("The '%s' global option has no effect here.")) % "--no-refresh"));
 
     // by default refresh only repositories
+    initRepoManager();
     if (copts.count("services"))
     {
       if (!_arguments.empty())
@@ -3343,12 +3341,14 @@ void Zypper::doCommand()
       }
       // needed to be able to retrieve target distribution
       init_target(*this);
-      this->_gopts.rm_options.servicesTargetDistro =
+      _gopts.rm_options.servicesTargetDistro =
             God->target()->targetDistribution();
-      initRepoManager();
       refresh_services(*this);
     }
-    initRepoManager();
+    else
+    {
+      checkIfToRefreshPluginServices(*this);
+    }
     refresh_repos(*this);
     break;
   }

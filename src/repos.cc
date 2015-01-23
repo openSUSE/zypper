@@ -2694,7 +2694,7 @@ void remove_service(Zypper & zypper, const ServiceInfo & service)
 static bool refresh_service(Zypper & zypper, const ServiceInfo & service)
 {
   MIL << "going to refresh service '" << service.alias() << "'" << endl;
-
+  init_target(zypper);	// need targetDistribution for service refresh
   RepoManager & manager = zypper.repoManager();
 
   bool error = true;
@@ -2872,6 +2872,34 @@ void refresh_services(Zypper & zypper)
 
   MIL << "DONE";
 }
+
+void checkIfToRefreshPluginServices( Zypper & zypper )
+{
+  // check root user
+  if ( geteuid() != 0 )
+    return;
+
+  RepoManager & repoManager = zypper.repoManager();
+  for_( it, repoManager.serviceBegin(), repoManager.serviceEnd() )
+  {
+    const ServiceInfo & service( *it );
+    if ( service.type() != ServiceType::PLUGIN )
+      continue;
+    if ( ! service.enabled() )
+      continue;
+    if ( ! service.autorefresh() )
+      continue;
+
+    bool error = refresh_service( zypper, service );
+    if (error)
+    {
+      static const char * msg = N_("Skipping service '%s' because of the above error.");
+      zypper.out().error(boost::str(format(_(msg)) % service.label().c_str()));
+      ERR << format(msg) % service.alias() << endl;
+    }
+  }
+}
+
 
 // ---------------------------------------------------------------------------
 
