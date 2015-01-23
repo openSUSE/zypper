@@ -10,4 +10,4 @@ SRCFILES=`find examples tools zypp \
                                 -o -name "*.cc"  \
                                 -o -name "*.cpp"`
 #calling xgettext with the sourcefiles
-xgettext -L C++ --boost -s --no-wrap --add-comments --add-location --keyword=_ --keyword=_:1,2 --keyword=__ --keyword=N_ --foreign-user --copyright-holder="SuSE Linux Products GmbH, Nuernberg" --default-domain=libzypp --output="$POTFILE" $SRCFILES
+xgettext -L C++ --boost -s --no-wrap --add-comments --add-location --keyword=_ --keyword=_:1,2 --keyword=__ --keyword=N_ --foreign-user --copyright-holder="SuSE Linux GmbH, Nuernberg" --package-name=libzypp --default-domain=libzypp --output="$POTFILE" $SRCFILES
