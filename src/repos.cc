@@ -1043,7 +1043,6 @@ static void print_repo_list(Zypper & zypper,
   if (tbl.empty()) {
     zypper.out().warning(_("No repositories defined."));
     zypper.out().info(_("Use the 'zypper addrepo' command to add one or more repositories."));
-    zypper.setExitCode(ZYPPER_EXIT_NO_REPOS);
   }
   else
   {
@@ -1194,6 +1193,9 @@ void list_repos(Zypper & zypper)
   // print repo list as table
   else
     print_repo_list(zypper, repos);
+
+  if ( repos.empty() )
+    zypper.setExitCode(ZYPPER_EXIT_NO_REPOS);
 }
 
 // ----------------------------------------------------------------------------
