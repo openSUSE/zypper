@@ -2652,10 +2652,6 @@ void list_services(Zypper & zypper)
   // print repo list as xml
   else if (zypper.out().type() == Out::TYPE_XML)
     print_xml_service_list(zypper, services);
-  // print repo list the rug's way
-  //else if (zypper.globalOpts().is_rug_compatible)
-    //print_rug_service_list(repos);
-  // print repo list as table
   else
     print_service_list(zypper, services);
 }

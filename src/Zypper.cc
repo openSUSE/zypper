@@ -3243,10 +3243,6 @@ void Zypper::doCommand()
 
     initRepoManager();
 
-    //! \todo this conflicts with other 'lr' aliases
-    //if (_gopts.is_rug_compatible)
-    //  rug_list_resolvables(*this);
-    //else
       list_repos(*this);
 
     break;
