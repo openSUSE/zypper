@@ -588,16 +588,14 @@ namespace ansi
     struct nullDeleter { void operator() (void const *) const {}; };
 
   public:
-//#define OSD cout << "<("<<_color.<<")>" <<
-#define OSD
     /** Default Ctor (\ref Color::Default) */
     ColorStream()
-    {OSD}
+    {}
 
     /** Ctor taking a \ref Color */
     explicit ColorStream( Color color_r )
     : _color( color_r )
-    {OSD}
+    {}
 
     /** Ctor directly printing to a \ref std::ostream (\ref Color::Default) */
     explicit ColorStream( std::ostream & direct_r  )
