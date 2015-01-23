@@ -19,8 +19,8 @@
 #include <vector>
 
 #include <zypp/base/String.h>
-#include <zypp/base/Gettext.h>
 
+#include "main.h"
 #include "utils/ansi.h"
 #include "utils/colors.h"
 
