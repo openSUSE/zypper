@@ -1,4 +1,10 @@
 -------------------------------------------------------------------
+Fri Jan 23 17:14:16 CET 2015 - ma@suse.de
+
+- repos(lr): Fix wrong exit status using the --xmlout option (bnc#914258)
+- version 1.11.22
+
+-------------------------------------------------------------------
 Fri Jan 23 16:27:38 CET 2015 - ma@suse.de
 
 - Refresh plugin services on 'lr' 'ls -r' and 'ref' (bnc#893294)
