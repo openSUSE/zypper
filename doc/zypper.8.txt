@@ -796,12 +796,19 @@ You can use the following built-in variables within a *.repo* files 'name' and '
 		Use this variable to refer to the base architecture of the system. For example, iX86 machines have a base architecture of *i386*, while AMD64 and Intel64 have *x86_64*.
 
 	*$releasever*:::
+	*$releasever_major*:::
+	*$releasever_minor*:::
 		Use this variable to refer to the version of your openSUSE or SUSE Linux. The value is obtained from the '/product/version' XML-node in */etc/products.d/baseproduct*.
 		+
 		This is useful for related repositories like packman (*http://ftp.gwdg.de/pub/linux/packman/suse/$releasever*), which shall always fit the installed distribution, even after a distribution upgrade. To help performing a distribution upgrade, the value of *$releasever* can be overwritten using the *--releasever* global option. This way you can easily switch all repositories using *$releasever* to the new version (provided the server layouts did not change and new repos are already available).
+		+
+		In addition *$releasever_major* will be set to the leading portion up to (but not including) the 1st dot; *$releasever_minor* to the trailing portion after the 1st dot. If there's no dot in *$releasever*, *$releasever_major* is the same as *$releasever* and *$releasever_minor* is empty.
 
 	Remember to protect the *$* when using these variables on a shell command line: :::
 		zypper ar -f http://ftp.gwdg.de/pub/linux/packman/suse/*\$*{nop}releasever packman
+
+	If a variable is followed by an alphanumeric chracter or underscore it needs to be enclosed in *{}*: :::
+		zypper ar -f http://ftp.gwdg.de/pub/linux/packman/suse/*\$*{nop}{releasever} packman
 
 	To check where you already use *$releasever* call: :::
 		*zypper --releasever @--HERE--@ lr -u*

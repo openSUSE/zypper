@@ -2,12 +2,12 @@
 .\"     Title: zypper
 .\"    Author: [see the "AUTHORS" section]
 .\" Generator: DocBook XSL Stylesheets v1.78.1 <http://docbook.sf.net/>
-.\"      Date: 01/14/2015
+.\"      Date: 01/28/2015
 .\"    Manual: ZYPPER
 .\"    Source: zypper
 .\"  Language: English
 .\"
-.TH "ZYPPER" "8" "01/14/2015" "zypper" "ZYPPER"
+.TH "ZYPPER" "8" "01/28/2015" "zypper" "ZYPPER"
 .\" -----------------------------------------------------------------
 .\" * Define some portability stuff
 .\" -----------------------------------------------------------------
@@ -1431,7 +1431,7 @@ Use this variable to refer to the base architecture of the system\&. For example
 \fBx86_64\fR\&.
 .RE
 .PP
-\fB$releasever\fR
+\fB$releasever\fR, \fB$releasever_major\fR, \fB$releasever_minor\fR
 .RS 4
 Use this variable to refer to the version of your openSUSE or SUSE Linux\&. The value is obtained from the
 \fI/product/version\fR
@@ -1445,12 +1445,29 @@ can be overwritten using the
 global option\&. This way you can easily switch all repositories using
 \fB$releasever\fR
 to the new version (provided the server layouts did not change and new repos are already available)\&.
+
+In addition
+\fB$releasever_major\fR
+will be set to the leading portion up to (but not including) the 1st dot;
+\fB$releasever_minor\fR
+to the trailing portion after the 1st dot\&. If there\(cqs no dot in
+\fB$releasever\fR,
+\fB$releasever_major\fR
+is the same as
+\fB$releasever\fR
+and
+\fB$releasever_minor\fR
+is empty\&.
 .RE
 .PP
 Remember to protect the \fB$\fR when using these variables on a shell command line:
 .RS 4
 zypper ar \-f
 http://ftp\&.gwdg\&.de/pub/linux/packman/suse/\fB\e$\fRreleasever packman
+.RE
+.PP
+If a variable is followed by an alphanumeric chracter or underscore it needs to be enclosed in \fB{}\fR:
+.RS 4
 .RE
 .PP
 To check where you already use \fB$releasever\fR call:
