@@ -26,6 +26,10 @@ namespace zypp
      * Replaces '$arch', '$basearch' and $releasever in a string
      * with the global ZYpp values.
      *
+     * Additionally $releasever_major and $releasever_minor can be used
+     * to refer to $releasever major number (everything up to the 1st \c '.' )
+     * and minor number (everything after the 1st \c '.' ).
+     *
      * \note The $releasever value is overwritten by the environment
      * variable \c ZYPP_REPO_RELEASEVER. This might  be handy for
      * distribution upogrades like this:
@@ -33,6 +37,12 @@ namespace zypp
      *   $ export ZYPP_REPO_RELEASEVER=13.2
      *   $ zypper lr -u
      *   $ zypper dup
+     *   ....upgrades to 13.2...
+     * \endcode
+     * The same can be achieved by using zyppers --releasever global option:
+     * \code
+     *   $ zypper --releasever 13.2 lr -u
+     *   $ zypper --releasever 13.2 dup
      *   ....upgrades to 13.2...
      * \endcode
      * (see \ref zypp-envars)
