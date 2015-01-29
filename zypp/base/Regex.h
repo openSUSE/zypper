@@ -151,6 +151,15 @@ namespace zypp
 
       unsigned size() const;
 
+      /** Begin index of subexpression \c i in \a match_str (or std::string::npos) */
+      std::string::size_type begin( unsigned i ) const;
+
+      /** End index of subexpression \c i in \a match_str (or std::string::npos) */
+      std::string::size_type end( unsigned i ) const;
+
+      /** Size of subexpression \c i (or std::string::npos) */
+      std::string::size_type size( unsigned i ) const;
+
       std::string match_str;
       regmatch_t pmatch[12];
     };

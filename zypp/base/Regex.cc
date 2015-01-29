@@ -83,6 +83,14 @@ std::string smatch::operator[](unsigned i) const
   return std::string();
 }
 
+std::string::size_type smatch::begin( unsigned i ) const
+{ return( i < sizeof(pmatch)/sizeof(*pmatch) && pmatch[i].rm_so != -1 ? pmatch[i].rm_so : std::string::npos ); }
+
+std::string::size_type smatch::end( unsigned i ) const
+{ return( i < sizeof(pmatch)/sizeof(*pmatch) && pmatch[i].rm_so != -1 ? pmatch[i].rm_eo : std::string::npos ); }
+
+std::string::size_type smatch::size( unsigned i ) const
+{ return( i < sizeof(pmatch)/sizeof(*pmatch) && pmatch[i].rm_so != -1 ? pmatch[i].rm_eo-pmatch[i].rm_so : std::string::npos ); }
 
 unsigned smatch::size() const
 {
