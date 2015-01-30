@@ -1,4 +1,10 @@
 -------------------------------------------------------------------
+Fri Jan 30 10:16:51 CET 2015 - ma@suse.de
+
+- ps: Change column header from 'Login' to 'User' (bnc#915461)
+- version 1.9.19
+
+-------------------------------------------------------------------
 Sun Jan 18 01:13:39 CET 2015 - ma@suse.de
 
 - Update zypper-po.tar.bz2
