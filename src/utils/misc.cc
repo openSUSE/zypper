@@ -415,7 +415,7 @@ void list_processes_using_deleted_files(Zypper & zypper)
   // process user ID
   th << _("UID");
   // process login name
-  th << _("Login");
+  th << _("User");
   // process command name
   th << _("Command");
   // "/etc/init.d/ script that might be used to restart the command (guessed)
