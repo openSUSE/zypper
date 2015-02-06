@@ -28,6 +28,9 @@
 
 #include <ctime>
 
+/** \todo Fix duplicate define in PublicKey/KeyRing */
+#define GPG_BINARY "/usr/bin/gpg2"
+
 using std::endl;
 
 ///////////////////////////////////////////////////////////////////
@@ -349,7 +352,7 @@ namespace zypp
         static filesystem::TmpDir dir;
         const char* argv[] =
         {
-          "gpg",
+          GPG_BINARY,
           "-v",
           "--no-default-keyring",
           "--fixed-list-mode",
