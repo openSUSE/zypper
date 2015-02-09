@@ -10,6 +10,7 @@
 #include "zypp/PathInfo.h"
 #include "zypp/TmpPath.h"
 #include "zypp/ZConfig.h"
+#include "zypp/base/ValueTransform.h"
 #include "zypp/repo/RepoVariables.h"
 
 using std::cout;
@@ -20,6 +21,65 @@ using namespace boost::unit_test;
 using namespace zypp::repo;
 
 #define DATADIR (Pathname(TESTS_SRC_DIR) +  "/repo/yum/data")
+
+typedef std::list<std::string> ListType;
+
+namespace std {
+  std::ostream & operator<<( std::ostream & str, const ListType & obj )
+  {
+    str << "[";
+    for ( const auto & el : obj )
+      str << " " << el;
+    return str << " ]";
+  }
+}
+
+// plain functor
+struct PlainTransformator
+{
+  std::string operator()( const std::string & value_r ) const
+  { return "{"+value_r+"}"; }
+};
+
+// plain functor + std::unary_function typedefs
+struct FncTransformator : public PlainTransformator, public std::unary_function<const std::string &, std::string>
+{};
+
+
+BOOST_AUTO_TEST_CASE(value_transform)
+{
+  using zypp::base::ValueTransform;
+  using zypp::base::ContainerTransform;
+
+  typedef ValueTransform<std::string, FncTransformator> ReplacedString;
+  typedef ContainerTransform<ListType, FncTransformator> ReplacedStringList;
+
+  ReplacedString r( "val" );
+  BOOST_CHECK_EQUAL( r.raw(), "val" );
+  BOOST_CHECK_EQUAL( r.transformed(),	"{val}" );
+
+  r.raw() = "new";
+  BOOST_CHECK_EQUAL( r.raw(), "new" );
+  BOOST_CHECK_EQUAL( r.transformed(),	"{new}" );
+
+  ReplacedStringList rl;
+  BOOST_CHECK_EQUAL( rl.empty(), true );
+  BOOST_CHECK_EQUAL( rl.size(), 0 );
+  BOOST_CHECK_EQUAL( rl.raw(), ListType() );
+  BOOST_CHECK_EQUAL( rl.transformed(), ListType() );
+
+  rl.raw().push_back("a");
+  rl.raw().push_back("b");
+  rl.raw().push_back("c");
+
+  BOOST_CHECK_EQUAL( rl.empty(), false );
+  BOOST_CHECK_EQUAL( rl.size(), 3 );
+  BOOST_CHECK_EQUAL( rl.raw(), ListType({ "a","b","c" }) );
+  BOOST_CHECK_EQUAL( rl.transformed(), ListType({ "{a}", "{b}", "{c}" }) );
+
+  BOOST_CHECK_EQUAL( rl.transformed( rl.rawBegin() ), "{a}" );
+}
+
 BOOST_AUTO_TEST_CASE(replace_text)
 {
   /* check RepoVariablesStringReplacer */
