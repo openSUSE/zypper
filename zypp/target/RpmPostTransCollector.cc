@@ -63,7 +63,7 @@ namespace zypp
 	  script.autoCleanup( false );	// no autodelete; within a tmpdir
 	  {
 	    std::ofstream out( script.path().c_str() );
-	    out << "# " << pkg->tag_posttransprog() << endl
+	    out << "#! " << pkg->tag_posttransprog() << endl
 	        << pkg->tag_posttrans() << endl;
 	  }
 	  _scripts.push_back( script.path().basename() );
@@ -81,7 +81,7 @@ namespace zypp
 
 	  HistoryLog historylog;
 
-	  Pathname noRootScriptDir( filesystem::TmpDir::defaultLocation() / tmpDir().basename() );
+	  Pathname noRootScriptDir( ZConfig::instance().update_scriptsPath() / tmpDir().basename() );
 
 	  for ( auto && script : _scripts )
 	  {
@@ -149,7 +149,7 @@ namespace zypp
 	/** Lazy create tmpdir on demand. */
 	Pathname tmpDir()
 	{
-	  if ( !_ptrTmpdir ) _ptrTmpdir.reset( new filesystem::TmpDir( _root / filesystem::TmpDir::defaultLocation(), "posttrans" ) );
+	  if ( !_ptrTmpdir ) _ptrTmpdir.reset( new filesystem::TmpDir( _root / ZConfig::instance().update_scriptsPath(), "posttrans" ) );
 	  DBG << _ptrTmpdir->path() << endl;
 	  return _ptrTmpdir->path();
 	}
