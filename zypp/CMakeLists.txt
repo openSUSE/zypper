@@ -264,6 +264,7 @@ SET( zypp_base_HEADERS
   base/Regex.h
   base/Sysconfig.h
   base/Tr1hash.h
+  base/TypeTraits.h
   base/Unit.h
   base/WatchFile.h
   base/Xml.h
