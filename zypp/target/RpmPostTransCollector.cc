@@ -20,7 +20,7 @@
 #include "zypp/ZYppCallbacks.h"
 #include "zypp/ExternalProgram.h"
 #include "zypp/target/rpm/RpmHeader.h"
-
+#include "zypp/ZConfig.h"
 
 using std::endl;
 #undef ZYPP_BASE_LOGGER_LOGGROUP
