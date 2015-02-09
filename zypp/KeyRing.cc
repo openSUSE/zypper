@@ -37,6 +37,7 @@ using std::endl;
 #undef  ZYPP_BASE_LOGGER_LOGGROUP
 #define ZYPP_BASE_LOGGER_LOGGROUP "zypp::KeyRing"
 
+/** \todo Fix duplicate define in PublicKey/KeyRing */
 #define GPG_BINARY "/usr/bin/gpg2"
 
 ///////////////////////////////////////////////////////////////////
