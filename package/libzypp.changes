@@ -1,4 +1,14 @@
 -------------------------------------------------------------------
+Mon Feb  9 16:05:38 CET 2015 - ma@suse.de
+
+- Don't execute scripts in /tmp or /var/tmp, as they could be 
+  mounted noexec for security reasons (bnc#915928)
+- zypp/PublicKey.cc: Use GPG_BINARY from KeyRing
+- Support $releasever_major/$releasever_minor repo variables 
+  (FATE#318354)
+- version 14.36.0 (30)
+
+-------------------------------------------------------------------
 Sun Feb  8 01:13:14 CET 2015 - ma@suse.de
 
 - Update zypp-po.tar.bz2
