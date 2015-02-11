@@ -11,6 +11,7 @@
 #define ZYPP_REPO_VARIABLES_H_
 
 #include <string>
+#include "zypp/base/ValueTransform.h"
 #include "zypp/Url.h"
 
 ///////////////////////////////////////////////////////////////////
@@ -19,7 +20,6 @@ namespace zypp
   ///////////////////////////////////////////////////////////////////
   namespace repo
   {
-
     /**
      * \short Functor replacing repository variables
      *
@@ -68,9 +68,21 @@ namespace zypp
     {
       Url operator()( const Url & url_r ) const;
     };
-
   } // namespace repo
   ///////////////////////////////////////////////////////////////////
+
+  /** \relates RepoVariablesStringReplacer Helper managing repo variables replaced strings */
+  typedef base::ValueTransform<std::string, repo::RepoVariablesStringReplacer> RepoVariablesReplacedString;
+
+  /** \relates RepoVariablesStringReplacer Helper managing repo variables replaced string lists */
+  typedef base::ContainerTransform<std::list<std::string>, repo::RepoVariablesStringReplacer> RepoVariablesReplacedStringList;
+
+  /** \relates RepoVariablesUrlReplacer Helper managing repo variables replaced urls */
+  typedef base::ValueTransform<Url, repo::RepoVariablesUrlReplacer> RepoVariablesReplacedUrl;
+
+  /** \relates RepoVariablesUrlReplacer Helper managing repo variables replaced url lists */
+  typedef base::ContainerTransform<std::list<Url>, repo::RepoVariablesUrlReplacer> RepoVariablesReplacedUrlList;
+
 } // namespace zypp
 ///////////////////////////////////////////////////////////////////
 
