@@ -68,28 +68,20 @@ namespace zypp
     Pathname licenseTgz() const
     { return metadatapath.empty() ? Pathname() : metadatapath / path / "license.tar.gz"; }
 
-    Url mirrorListUrl() const
-    { return replacer(mirrorlist_url); }
-
-    void mirrorListUrl( const Url & url_r )
-    { mirrorlist_url = url_r; }
-
-    const Url & rawMirrorListUrl() const
-    { return mirrorlist_url; }
-
-    const url_set & baseUrls() const
+    const RepoVariablesReplacedUrlList & baseUrls() const
     {
-      if ( _baseUrls.empty() && ! mirrorListUrl().asString().empty() )
+      const Url & mlurl( _mirrorListUrl.transformed() );	// Variables replaced!
+      if ( _baseUrls.empty() && ! mlurl.asString().empty() )
       {
         emptybaseurls = true;
         DBG << "MetadataPath: " << metadatapath << endl;
-	repo::RepoMirrorList rmurls( mirrorListUrl(), metadatapath );
-	_baseUrls.insert( _baseUrls.end(), rmurls.getUrls().begin(), rmurls.getUrls().end() );
+	repo::RepoMirrorList rmurls( mlurl, metadatapath );
+	_baseUrls.raw().insert( _baseUrls.raw().end(), rmurls.getUrls().begin(), rmurls.getUrls().end() );
       }
       return _baseUrls;
     }
 
-    url_set & baseUrls()
+    RepoVariablesReplacedUrlList & baseUrls()
     { return _baseUrls; }
 
     bool baseurl2dump() const
@@ -142,13 +134,13 @@ namespace zypp
 	/////////////////////////////////////////////////////////////////
       }
       return( _keywords.find( keyword_r ) != _keywords.end() );
-
     }
 
   public:
     TriBool gpgcheck;
     TriBool keeppackages;
-    Url gpgkey_url;
+    RepoVariablesReplacedUrl _gpgKeyUrl;
+    RepoVariablesReplacedUrl _mirrorListUrl;
     repo::RepoType type;
     Pathname path;
     std::string service;
@@ -160,8 +152,7 @@ namespace zypp
     repo::RepoVariablesUrlReplacer replacer;
 
   private:
-    Url mirrorlist_url;
-    mutable url_set _baseUrls;
+    mutable RepoVariablesReplacedUrlList _baseUrls;
     mutable std::set<std::string> _keywords;
 
     friend Impl * rwcowClone<Impl>( const Impl * rhs );
@@ -216,24 +207,24 @@ namespace zypp
   void RepoInfo::setGpgCheck( bool check )
   { _pimpl->gpgcheck = check; }
 
-  void RepoInfo::setMirrorListUrl( const Url & url_r )
-  { _pimpl->mirrorListUrl( url_r ); }
+  void RepoInfo::setMirrorListUrl( const Url & url_r )	// Raw
+  { _pimpl->_mirrorListUrl.raw() = url_r; }
 
   void RepoInfo::setGpgKeyUrl( const Url & url_r )
-  { _pimpl->gpgkey_url = url_r; }
+  { _pimpl->_gpgKeyUrl.raw() = url_r; }
 
   void RepoInfo::addBaseUrl( const Url & url_r )
   {
-    for ( const auto & url : _pimpl->baseUrls() )	// unique!
+    for ( const auto & url : _pimpl->baseUrls().raw() )	// Raw unique!
       if ( url == url_r )
 	return;
-    _pimpl->baseUrls().push_back( url_r );
+    _pimpl->baseUrls().raw().push_back( url_r );
   }
 
   void RepoInfo::setBaseUrl( const Url & url_r )
   {
-    _pimpl->baseUrls().clear();
-    _pimpl->baseUrls().push_back( url_r );
+    _pimpl->baseUrls().raw().clear();
+    _pimpl->baseUrls().raw().push_back( url_r );
   }
 
   void RepoInfo::setPath( const Pathname &path )
@@ -276,17 +267,23 @@ namespace zypp
   repo::RepoType RepoInfo::type() const
   { return _pimpl->type; }
 
-  Url RepoInfo::mirrorListUrl() const
-  { return _pimpl->mirrorListUrl(); }
+  Url RepoInfo::mirrorListUrl() const			// Variables replaced!
+  { return _pimpl->_mirrorListUrl.transformed(); }
 
-  Url RepoInfo::rawMirrorListUrl() const
-  { return _pimpl->rawMirrorListUrl(); }
+  Url RepoInfo::rawMirrorListUrl() const		// Raw
+  { return _pimpl->_mirrorListUrl.raw(); }
 
-  Url RepoInfo::gpgKeyUrl() const
-  { return _pimpl->gpgkey_url; }
+  Url RepoInfo::gpgKeyUrl() const			// Variables replaced!
+  { return _pimpl->_gpgKeyUrl.transformed(); }
 
-  RepoInfo::url_set RepoInfo::baseUrls() const
-  { return url_set( baseUrlsBegin(), baseUrlsEnd() ); }	// Variables replaced!
+  Url RepoInfo::rawGpgKeyUrl() const			// Raw
+  {  return _pimpl->_gpgKeyUrl.raw(); }
+
+  RepoInfo::url_set RepoInfo::baseUrls() const		// Variables replaced!
+  { return _pimpl->baseUrls().transformed(); }
+
+  RepoInfo::url_set RepoInfo::rawBaseUrls() const	// Raw
+  { return _pimpl->baseUrls().raw(); }
 
   Pathname RepoInfo::path() const
   { return _pimpl->path; }
@@ -298,19 +295,13 @@ namespace zypp
   { return _pimpl->targetDistro; }
 
   Url RepoInfo::rawUrl() const
-  { return( _pimpl->baseUrls().empty() ? Url() : *_pimpl->baseUrls().begin() ); }
+  { return( _pimpl->baseUrls().empty() ? Url() : *_pimpl->baseUrls().rawBegin() ); }
 
   RepoInfo::urls_const_iterator RepoInfo::baseUrlsBegin() const
-  {
-    return make_transform_iterator( _pimpl->baseUrls().begin(),
-                                    _pimpl->replacer );
-  }
+  { return _pimpl->baseUrls().transformedBegin(); }
 
   RepoInfo::urls_const_iterator RepoInfo::baseUrlsEnd() const
-  {
-    return make_transform_iterator( _pimpl->baseUrls().end(),
-                                    _pimpl->replacer );
-  }
+  { return _pimpl->baseUrls().transformedEnd(); }
 
   RepoInfo::urls_size_type RepoInfo::baseUrlsSize() const
   { return _pimpl->baseUrls().size(); }
@@ -447,7 +438,7 @@ namespace zypp
     RepoInfoBase::dumpOn(str);
     if ( _pimpl->baseurl2dump() )
     {
-      for ( const auto & url : _pimpl->baseUrls() )
+      for ( const auto & url : _pimpl->baseUrls().raw() )
       {
         str << "- url         : " << url << std::endl;
       }
@@ -459,12 +450,12 @@ namespace zypp
 	str << tag_r << value_r << std::endl;
     });
 
-    strif( "- mirrorlist  : ", _pimpl->rawMirrorListUrl().asString() );
+    strif( "- mirrorlist  : ", rawMirrorListUrl().asString() );
     strif( "- path        : ", path().asString() );
     str << "- type        : " << type() << std::endl;
     str << "- priority    : " << priority() << std::endl;
     str << "- gpgcheck    : " << gpgCheck() << std::endl;
-    strif( "- gpgkey      : ", gpgKeyUrl().asString() );
+    strif( "- gpgkey      : ", rawGpgKeyUrl().asString() );
 
     if ( ! indeterminate(_pimpl->keeppackages) )
       str << "- keeppackages: " << keepPackages() << std::endl;
@@ -485,7 +476,7 @@ namespace zypp
     {
       str << "baseurl=";
       std::string indent;
-      for ( const auto & url : _pimpl->baseUrls() )
+      for ( const auto & url : _pimpl->baseUrls().raw() )
       {
         str << indent << url << endl;
 	if ( indent.empty() ) indent = "        ";	// "baseurl="
@@ -495,8 +486,8 @@ namespace zypp
     if ( ! _pimpl->path.empty() )
       str << "path="<< path() << endl;
 
-    if ( ! (_pimpl->rawMirrorListUrl().asString().empty()) )
-      str << "mirrorlist=" << _pimpl->rawMirrorListUrl() << endl;
+    if ( ! (rawMirrorListUrl().asString().empty()) )
+      str << "mirrorlist=" << rawMirrorListUrl() << endl;
 
     str << "type=" << type().asString() << endl;
 
@@ -505,8 +496,9 @@ namespace zypp
 
     if (!indeterminate(_pimpl->gpgcheck))
       str << "gpgcheck=" << (gpgCheck() ? "1" : "0") << endl;
-    if ( ! (gpgKeyUrl().asString().empty()) )
-      str << "gpgkey=" <<gpgKeyUrl() << endl;
+
+    if ( ! (rawGpgKeyUrl().asString().empty()) )
+      str << "gpgkey=" << rawGpgKeyUrl() << endl;
 
     if (!indeterminate(_pimpl->keeppackages))
       str << "keeppackages=" << keepPackages() << endl;

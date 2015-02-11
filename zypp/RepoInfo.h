@@ -119,23 +119,29 @@ namespace zypp
        * iterator that points at end of repository urls
        */
       urls_const_iterator baseUrlsEnd() const;
+
       /**
        * Pars pro toto: The first repository url
        */
       Url url() const
       { return( baseUrlsEmpty() ? Url() : *baseUrlsBegin()); }
       /**
-       * Pars pro toto: The first repository url (no variables replaced)
+       * Pars pro toto: The first repository raw url (no variables replaced)
        */
       Url rawUrl() const;
+
       /**
-       * A Url under which the metadata are located, or a set of mirrors.
+       * The complete set of repository urls
        *
-       * This can't be empty in order the repository to be valid
-       * unless the download of the mirror list succeeds and it
-       * contains a valid url.
+       * These are either the configured baseurls, or if empty, the downloaded
+       * mirror list (\see \ref mirrorListUrl)
        */
       url_set baseUrls() const;
+      /**
+       * The complete set of raw repository urls (no variables replaced)
+       */
+      url_set rawBaseUrls() const;
+
       /**
        * Add a base url. \see baseUrls
        * \param url The base url for the repository.
@@ -177,8 +183,7 @@ namespace zypp
       void setPath( const Pathname &path );
 
       /**
-       * Url of a file which contains a list of Urls
-       * If empty, the base url will be used.
+       * Url of a file which contains a list of repository urls
        */
       Url mirrorListUrl() const;
       /**
@@ -266,6 +271,10 @@ namespace zypp
        *
        */
       Url gpgKeyUrl() const;
+      /**
+       * The raw gpgKeyUrl (no variables replaced).
+       */
+      Url rawGpgKeyUrl() const;
       /**
        * \short Key to use for gpg checking of this repository
        *

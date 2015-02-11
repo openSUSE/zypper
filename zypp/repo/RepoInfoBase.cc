@@ -48,7 +48,7 @@ namespace zypp
     TriBool	_autorefresh;
     std::string	_alias;
     std::string	_escaped_alias;
-    std::string	_name;
+    RepoVariablesReplacedString _name;
     Pathname	_filepath;
 
   public:
@@ -95,7 +95,7 @@ namespace zypp
   { _pimpl->setAlias(alias); }
 
   void RepoInfoBase::setName( const std::string &name )
-  { _pimpl->_name = name; }
+  { _pimpl->_name.raw() = name; }
 
   void RepoInfoBase::setFilepath( const Pathname &filepath )
   { _pimpl->_filepath = filepath; }
@@ -122,7 +122,7 @@ namespace zypp
   }
 
   std::string RepoInfoBase::rawName() const
-  { return _pimpl->_name; }
+  { return _pimpl->_name.raw(); }
 
   std::string RepoInfoBase::label() const
   {
