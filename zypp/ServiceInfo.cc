@@ -35,7 +35,7 @@ namespace zypp
     typedef ServiceInfo::ReposToDisable ReposToDisable;
 
   public:
-    Url url;
+    RepoVariablesReplacedUrl url;
     repo::ServiceType type;
     ReposToEnable  reposToEnable;
     ReposToDisable reposToDisable;
@@ -96,8 +96,14 @@ namespace zypp
   ServiceInfo::~ServiceInfo()
   {}
 
-  Url ServiceInfo::url() const { return _pimpl->url; }
-  void ServiceInfo::setUrl( const Url& url ) { _pimpl->url = url; }
+  Url ServiceInfo::url() const			// Variables replaced
+  { return _pimpl->url.transformed(); }
+
+  Url ServiceInfo::rawUrl() const		// Raw
+  { return _pimpl->url.raw(); }
+
+  void ServiceInfo::setUrl( const Url& url )	// Raw
+  { _pimpl->url.raw() = url; }
 
   repo::ServiceType ServiceInfo::type() const
   { return _pimpl->type; }
@@ -179,7 +185,7 @@ namespace zypp
   std::ostream & ServiceInfo::dumpAsIniOn( std::ostream & str ) const
   {
     RepoInfoBase::dumpAsIniOn(str)
-      << "url = " << url() << endl
+      << "url = " << rawUrl() << endl
       << "type = " << type() << endl;
 
     if ( ! repoStates().empty() )

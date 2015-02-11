@@ -26,10 +26,12 @@ namespace zypp
 { /////////////////////////////////////////////////////////////////
 
   ///////////////////////////////////////////////////////////////////
-  //
-  //	CLASS NAME : ServiceInfo
-  //
-  /** */
+  /// \class ServiceInfo
+  /// \brief Service data
+  ///
+  /// \note Name and Url are subject to repo variable replacement
+  /// (\see \ref RepoVariablesStringReplacer).
+  ///
   class ServiceInfo : public repo::RepoInfoBase
   {
   public:
@@ -59,32 +61,23 @@ namespace zypp
 
   public:
 
-    /**
-     * Gets url to service
-     *
-     * \return url to service
-     */
+    /** The service url */
     Url url() const;
 
-    /**
-     * Sets url for this service
-     *
-     * \param url url to this service
-     */
+    /** The service raw url (no variables replaced) */
+    Url rawUrl() const;
+
+    /** Set the service url (raw value) */
     void setUrl( const Url& url );
 
-    /**
-     *
-     */
+
+    /** Service type */
     repo::ServiceType type() const;
 
-    /**
-     * Set service type.
-     *
-     * \param type the new type
-     */
+    /** Set service type */
     void setType( const repo::ServiceType & type );
 
+    /** Lazy init service type */
     void setProbedType( const repo::ServiceType & t ) const;
 
 

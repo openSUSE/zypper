@@ -1985,7 +1985,7 @@ namespace zypp
       // if the repo url was not set by the repoindex parser, set service's url
       Url url;
       if ( it->baseUrlsEmpty() )
-        url = service.url();
+        url = service.rawUrl();
       else
       {
         // service repo can contain only one URL now, so no need to iterate.
