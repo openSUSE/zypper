@@ -1,4 +1,9 @@
 -------------------------------------------------------------------
+Thu Feb 12 01:13:34 CET 2015 - ma@suse.de
+
+- Update zypp-po.tar.bz2
+
+-------------------------------------------------------------------
 Mon Feb  9 16:05:38 CET 2015 - ma@suse.de
 
 - Don't execute scripts in /tmp or /var/tmp, as they could be 
