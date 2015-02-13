@@ -2105,10 +2105,19 @@ void modify_repo(Zypper & zypper, const string & alias)
     if (chnaged_enabled || changed_autoref || changed_prio
         || changed_keeppackages || changed_gpgcheck || !name.empty())
     {
+      std::string volatileNote;	// service repos changes may be volatile
+      if (  ! repo.service().empty() )
+      {
+	// translators: used as 'XYZ changed to SOMETHING [volatile]' to tag specific property changes.
+	volatileNote = std::string( " [" + ColorString( ColorContext::MSG_WARNING, _("volatile") ).str() + "]" );
+      }
+      bool didVolatileChanges = false;
+
       manager.modifyRepository(alias, repo);
 
       if (chnaged_enabled)
       {
+	// the by now only persistent change for service repos.
         if (repo.enabled())
           zypper.out().info(boost::str(format(
             _("Repository '%s' has been successfully enabled.")) % alias));
@@ -2119,44 +2128,57 @@ void modify_repo(Zypper & zypper, const string & alias)
 
       if (changed_autoref)
       {
+	if ( !volatileNote.empty() ) didVolatileChanges = true;
         if (repo.autorefresh())
           zypper.out().info(boost::str(format(
-            _("Autorefresh has been enabled for repository '%s'.")) % alias));
+            _("Autorefresh has been enabled for repository '%s'.")) % alias)+volatileNote);
         else
           zypper.out().info(boost::str(format(
-            _("Autorefresh has been disabled for repository '%s'.")) % alias));
+            _("Autorefresh has been disabled for repository '%s'.")) % alias)+volatileNote);
       }
 
       if (changed_keeppackages)
       {
+	if ( !volatileNote.empty() ) didVolatileChanges = true;
         if (repo.keepPackages())
           zypper.out().info(boost::str(format(
-            _("RPM files caching has been enabled for repository '%s'.")) % alias));
+            _("RPM files caching has been enabled for repository '%s'.")) % alias)+volatileNote);
         else
           zypper.out().info(boost::str(format(
-            _("RPM files caching has been disabled for repository '%s'.")) % alias));
+            _("RPM files caching has been disabled for repository '%s'.")) % alias)+volatileNote);
       }
 
       if (changed_gpgcheck)
       {
+	if ( !volatileNote.empty() ) didVolatileChanges = true;
         if (repo.gpgCheck())
           zypper.out().info(boost::str(format(
-            _("GPG check has been enabled for repository '%s'.")) % alias));
+            _("GPG check has been enabled for repository '%s'.")) % alias)+volatileNote);
         else
           zypper.out().info(boost::str(format(
-            _("GPG check has been disabled for repository '%s'.")) % alias));
+            _("GPG check has been disabled for repository '%s'.")) % alias)+volatileNote);
       }
 
       if (changed_prio)
       {
+	if ( !volatileNote.empty() ) didVolatileChanges = true;
         zypper.out().info(boost::str(format(
-          _("Repository '%s' priority has been set to %d.")) % alias % prio));
+          _("Repository '%s' priority has been set to %d.")) % alias % prio)+volatileNote);
       }
 
       if (!name.empty())
       {
+	if ( !volatileNote.empty() ) didVolatileChanges = true;
         zypper.out().info(boost::str(format(
-          _("Name of repository '%s' has been set to '%s'.")) % alias % name));
+          _("Name of repository '%s' has been set to '%s'.")) % alias % name)+volatileNote);
+      }
+
+      if ( didVolatileChanges )
+      {
+	zypper.out().warning(boost::str(format(
+	  // translators: 'Volatile' refers to changes we previously tagged as 'XYZ changed to SOMETHING [volatile]'
+	  _("Repo '%1%' is managed by service '%2%'. Volatile changes are reset by the next service refresh!")
+	) % alias % repo.service() ));
       }
     }
     else
