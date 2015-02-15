@@ -991,6 +991,52 @@ void Summary::writeNotUpdated(std::ostream & out)
   }
 }
 
+void Summary::writeLocked(std::ostream & out)
+{
+  ResPairSet instlocks;			// locked + installed
+  std::set<std::string> avidents;	// avaialble locked
+  ResPoolProxy selPool( ResPool::instance().proxy() );
+  for_( it, selPool.begin(), selPool.end() )
+  {
+    if ( (*it)->locked() )
+    {
+      if ( (*it)->hasInstalledObj() )
+	for_( iit, (*it)->installedBegin(), (*it)->installedEnd() )
+	  instlocks.insert( ResPair( NULL, *iit ) );
+      else
+	avidents.insert( (*it)->ident().asString() );
+    }
+  }
+  if ( ! ( instlocks.empty() && avidents.empty() ) )
+  {
+    string label = _PL(
+      "The following item is locked and will not be changed by any action:",
+      "The following items are locked and will not be changed by any action:",
+      ( instlocks.size() + avidents.size() )
+    );
+    out << endl << label << endl;
+
+    if ( ! instlocks.empty() )
+    {
+      // translators: used as 'tag:' (i.e. followed by ':')
+      out << "  " << _("Installed") << ':' << endl;
+      writeResolvableList( out, instlocks );
+    }
+    if ( ! avidents.empty() )
+    {
+      // translators: used as 'tag:' (i.e. followed by ':')
+      out << "  " << _("Available") << ':' << endl;
+      ostringstream s;
+      for_( it, avidents.begin(), avidents.end() )
+      {
+	s << *it << " ";
+      }
+      mbs_write_wrapped( out, s.str(), 2, _wrap_width );
+      out << endl;
+    }
+  }
+}
+
 // --------------------------------------------------------------------------
 
 void Summary::writeDownloadAndInstalledSizeSummary(ostream & out)
@@ -1157,6 +1203,7 @@ void Summary::dumpTo(ostream & out)
 
   _wrap_width = get_screen_width();
 
+  writeLocked(out);
   if (_viewop & SHOW_NOT_UPDATED)
     writeNotUpdated(out);
   writeNewlyInstalled(out);
