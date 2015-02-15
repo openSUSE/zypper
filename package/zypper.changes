@@ -1,4 +1,10 @@
 -------------------------------------------------------------------
+Sun Feb 15 13:33:18 CET 2015 - ma@suse.de
+
+- Show locked packages in zypper summary (FATE#318256)
+- version 1.6.321
+
+-------------------------------------------------------------------
 Fri Jan 23 19:23:53 CET 2015 - ma@suse.de
 
 - Refresh plugin services on 'lr' 'ls -r' and 'ref' (bnc#893294)(FATE#317863)
