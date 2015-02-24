@@ -17,11 +17,18 @@
 /** Just tag text for translation. */
 #define N_(MSG) MSG
 
+#ifdef ZYPP_DLL //defined if zypp is compiled as DLL
+
 /** Return translated text. */
 #define _(MSG) ::zypp::gettext::dgettext( MSG )
 
 /** Return translated text (plural form). */
 #define _PL(MSG1,MSG2,N) ::zypp::gettext::dngettext( MSG1, MSG2, N )
+
+#else
+#define _(MSG) ::gettext( MSG )
+#define _PL(MSG1,MSG2,N) ::ngettext( MSG1, MSG2, N )
+#endif
 
 ///////////////////////////////////////////////////////////////////
 namespace zypp
