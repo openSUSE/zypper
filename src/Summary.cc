@@ -547,7 +547,7 @@ void Summary::writeNewlyInstalled(ostream & out)
 
 void Summary::writeRemoved(ostream & out)
 {
-  ViewOptions vop = _viewop;
+  DtorReset guard( _viewop );
   unsetViewOption(SHOW_REPO); // never show repo here, it's always @System
   for_(it, _toremove.begin(), _toremove.end())
   {
@@ -582,7 +582,6 @@ void Summary::writeRemoved(ostream & out)
     out << endl << ( ColorContext::NEGATIVE << label ) << endl;
     writeResolvableList(out, it->second, ColorContext::NEGATIVE);
   }
-  _viewop = vop;
 }
 
 // --------------------------------------------------------------------------
@@ -1031,7 +1030,7 @@ void Summary::writeSuggested(ostream & out)
 
 void Summary::writeChangedArch(ostream & out)
 {
-  ViewOptions vop = _viewop;
+  DtorReset guard( _viewop );
   setViewOption(SHOW_ARCH); // always show arch here
   for_(it, _tochangearch.begin(), _tochangearch.end())
   {
@@ -1066,14 +1065,13 @@ void Summary::writeChangedArch(ostream & out)
     out << endl << ( ColorContext::CHANGE << label ) << endl;
     writeResolvableList(out, it->second, ColorContext::CHANGE);
   }
-  _viewop = vop;
 }
 
 // --------------------------------------------------------------------------
 
 void Summary::writeChangedVendor(ostream & out)
 {
-  ViewOptions vop = _viewop;
+  DtorReset guard( _viewop );
   setViewOption(SHOW_VENDOR); // always show vendor here
   for_(it, _tochangevendor.begin(), _tochangevendor.end())
   {
@@ -1108,7 +1106,6 @@ void Summary::writeChangedVendor(ostream & out)
     out << endl << ( ColorContext::CHANGE << label ) << endl;
     writeResolvableList(out, it->second, ColorContext::CHANGE);
   }
-  _viewop = vop;
 }
 
 // --------------------------------------------------------------------------
