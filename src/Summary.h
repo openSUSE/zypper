@@ -83,6 +83,7 @@ public:
   void writeNotUpdated(std::ostream & out);
   void writePackageCounts(std::ostream & out);
   void writeDownloadAndInstalledSizeSummary(std::ostream & out);
+  void writeLocked(std::ostream & out);
 
 
   unsigned packagesToGetAndInstall() const

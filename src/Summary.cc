@@ -13,6 +13,7 @@
 #include <zypp/ZYppFactory.h>
 #include <zypp/base/LogTools.h>
 #include <zypp/base/Measure.h>
+#include <zypp/base/DtorReset.h>
 #include <zypp/ResPool.h>
 #include <zypp/Patch.h>
 #include <zypp/Package.h>
@@ -426,7 +427,7 @@ void Summary::writeResolvableList(ostream & out, const ResPairSet & resolvables,
       if ( quote ) s << quoteCh;
 
       // version (if multiple versions are present)
-      if (!(_viewop & SHOW_VERSION) && multi_installed.find(resit->second->name()) != multi_installed.end())
+      if (multi_installed.find(resit->second->name()) != multi_installed.end())
       {
         if (resit->first && resit->first->edition() != resit->second->edition())
           s << "-" << resit->first->edition().asString()
@@ -1178,6 +1179,49 @@ void Summary::writeNotUpdated(std::ostream & out)
   }
 }
 
+void Summary::writeLocked(std::ostream & out)
+{
+  ResPairSet instlocks;	// locked + installed
+  ResPairSet avidents;	// avaialble locked
+  ResPoolProxy selPool( ResPool::instance().proxy() );
+  for_( it, selPool.begin(), selPool.end() )
+  {
+    if ( (*it)->locked() )
+    {
+      if ( (*it)->hasInstalledObj() )
+       for_( iit, (*it)->installedBegin(), (*it)->installedEnd() )
+         instlocks.insert( ResPair( NULL, *iit ) );
+      else
+       avidents.insert( ResPair( NULL, (*it)->theObj() ) );
+    }
+  }
+  if ( ! ( instlocks.empty() && avidents.empty() ) )
+  {
+    string label = _PL(
+      "The following item is locked and will not be changed by any action:",
+      "The following %d items are locked and will not be changed by any action:",
+      ( instlocks.size() + avidents.size() )
+    );
+    label = str::form( label.c_str(), instlocks.size() + avidents.size() );
+    out << endl << ( ColorContext::HIGHLIGHT << label ) << endl;
+
+    if ( ! avidents.empty() )
+    {
+      DtorReset guard( _viewop );
+      _viewop = DEFAULT;	// always as plain name list
+      // translators: used as 'tag:' (i.e. followed by ':')
+      out << " " << _("Available") << ':' << endl;
+      writeResolvableList( out, avidents, ColorContext::HIGHLIGHT );
+    }
+    if ( ! instlocks.empty() )
+    {
+      // translators: used as 'tag:' (i.e. followed by ':')
+      out << " " << _("Installed") << ':' << endl;
+      writeResolvableList( out, instlocks, ColorContext::HIGHLIGHT );
+    }
+  }
+}
+
 // --------------------------------------------------------------------------
 
 void Summary::writeDownloadAndInstalledSizeSummary(ostream & out)
@@ -1351,6 +1395,7 @@ void Summary::dumpTo(ostream & out)
 
   _wrap_width = get_screen_width();
 
+  writeLocked(out);
   if (_viewop & SHOW_NOT_UPDATED)
     writeNotUpdated(out);
   writeNewlyInstalled(out);
