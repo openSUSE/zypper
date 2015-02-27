@@ -351,6 +351,7 @@ void SolverRequester::updatePatches()
   // search twice: if there are none with restartSuggested(), retry on all
   // (in the first run, ignore_pkgmgmt == 0, in the second it is 1)
   bool any_marked = false;
+  bool dateLimit = ( _opts.date_limit != Date() );
   for (unsigned ignore_pkgmgmt = 0;
        !any_marked && ignore_pkgmgmt < 2; ++ignore_pkgmgmt)
   {
@@ -360,7 +361,22 @@ void SolverRequester::updatePatches()
       PackageSpec patch;
       patch.orig_str = (*it)->name();
       patch.parsed_cap = Capability((*it)->name());
-      if (installPatch(patch, (*it)->candidateObj(), ignore_pkgmgmt))
+
+      // bnc#919709: a date limit must ignore newer patch candidates
+      zypp::PoolItem candidateObj( (*it)->candidateObj() );
+      if ( dateLimit && asKind<Patch>(candidateObj)->timestamp() > _opts.date_limit )
+      {
+	for_( iit, (*it)->availableBegin(), (*it)->availableEnd() )
+	{
+	  if ( asKind<Patch>(*iit)->timestamp() <= _opts.date_limit )
+	  {
+	    candidateObj = *iit;
+	    break;
+	  }
+	}
+      }
+
+      if (installPatch(patch, candidateObj, ignore_pkgmgmt))
         any_marked = true;
     }
 
