@@ -1,4 +1,10 @@
 -------------------------------------------------------------------
+Fri Feb 27 12:43:06 CET 2015 - ma@suse.de
+
+- patch: A date limit must ignore newer patch candidates (bnc#919709)
+- version 1.6.322
+
+-------------------------------------------------------------------
 Sun Feb 15 13:33:18 CET 2015 - ma@suse.de
 
 - Show locked packages in zypper summary (FATE#318256)
