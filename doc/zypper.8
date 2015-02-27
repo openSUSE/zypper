@@ -2,12 +2,12 @@
 .\"     Title: zypper
 .\"    Author: [see the "AUTHORS" section]
 .\" Generator: DocBook XSL Stylesheets v1.78.1 <http://docbook.sf.net/>
-.\"      Date: 01/28/2015
+.\"      Date: 02/27/2015
 .\"    Manual: ZYPPER
 .\"    Source: zypper
 .\"  Language: English
 .\"
-.TH "ZYPPER" "8" "01/28/2015" "zypper" "ZYPPER"
+.TH "ZYPPER" "8" "02/27/2015" "zypper" "ZYPPER"
 .\" -----------------------------------------------------------------
 .\" * Define some portability stuff
 .\" -----------------------------------------------------------------
@@ -862,6 +862,11 @@ List available needed patches for all Bugzilla issues, or issues whose number ma
 List available needed patches for all CVE issues, or issues whose number matches the given string\&.
 .RE
 .PP
+\fB\-\-date\fR \fIYYYY\-MM\-DD\fR
+.RS 4
+List patches issued up to the specified date\&.
+.RE
+.PP
 \fB\-g\fR, \fB\-\-category\fR \fIcategory\fR
 .RS 4
 List available patches in the specified category\&.
@@ -929,6 +934,11 @@ command to get a list of available needed patches for specific issues\&.
 Install patch fixing a MITRE\(cqs CVE issue specified by number\&. Use
 \fBlist\-patches \-\-cve\fR
 command to get a list of available needed patches for specific issues\&.
+.RE
+.PP
+\fB\-\-date\fR \fIYYYY\-MM\-DD\fR
+.RS 4
+Install patches issued up to the specified date\&.
 .RE
 .PP
 \fB\-g\fR, \fB\-\-category\fR \fIcategory\fR
