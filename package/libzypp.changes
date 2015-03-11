@@ -1,4 +1,17 @@
 -------------------------------------------------------------------
+Wed Mar 11 09:22:46 CET 2015 - ma@suse.de
+
+- New RepoVarExpand: Functor expanding repo variables in a 
+  string . Supports bash style default ${v:-w}' and alternate ${v:+w}
+  values (FATE#318354)
+- Easy.h: Use __typeof__ rather than typeof in header
+- Support repo variable replacement in service url
+- Support repo variable replacement in gpg url
+- Gettext.h: Fallback to ::gettext if accidentally included 
+  outside libzypp
+- version 14.37.0 (30)
+
+-------------------------------------------------------------------
 Sun Feb 22 01:13:12 CET 2015 - ma@suse.de
 
 - Update zypp-po.tar.bz2
