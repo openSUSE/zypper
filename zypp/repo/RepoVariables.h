@@ -6,11 +6,13 @@
 |                         /_____||_| |_| |_|                           |
 |                                                                      |
 \---------------------------------------------------------------------*/
-
+/** \file	zypp/repo/RepoVariables.h
+ */
 #ifndef ZYPP_REPO_VARIABLES_H_
 #define ZYPP_REPO_VARIABLES_H_
 
 #include <string>
+#include "zypp/base/Function.h"
 #include "zypp/base/ValueTransform.h"
 #include "zypp/Url.h"
 
@@ -20,6 +22,51 @@ namespace zypp
   ///////////////////////////////////////////////////////////////////
   namespace repo
   {
+    ///////////////////////////////////////////////////////////////////
+    /// \class RepoVarExpand
+    /// \brief Functor expanding repo variables in a string
+    ///
+    /// Known variables are determined by a callback function taking a variable
+    /// name and returning a pointer to the variable value or \c nullptr if unset.
+    ///
+    /// The \c $ character introduces variable expansion. A valid variable name
+    /// is any non-empty case-insensitive sequence of <tt>[[:alnum:]_]</tt>.
+    /// The variable name to be expanded may be enclosed in braces, which are
+    /// optional but serve to protect the variable to be expanded from characters
+    /// immediately following it which could be interpreted as part of the name.
+    ///
+    /// When braces are used, the matching ending brace is the first \c } not
+    /// escaped by a backslash and not within an embedded variable expansion.
+    /// Within braces only \c $, \c } and \c backslash are escaped by a
+    /// backslash. There is no escaping outside braces, to stay comaptible
+    /// with \c YUM (which does not support braces).
+    ///
+    /// <ul>
+    /// <li> \c ${variable}
+    /// If \c variable is unset the original is preserved like in \c YUM.
+    /// Otherwise, the value of \c variable is substituted.</li>
+    ///
+    /// <li> \c ${variable:-word} (default value)
+    /// If \c variable is unset or empty, the expansion of \c word is substituted.
+    /// Otherwise, the value of \c variable is substituted.</li>
+    ///
+    /// <li> \c ${variable:+word} (alternate value)
+    /// If variable is unset or empty nothing is substituted.
+    /// Otherwise, the expansion of \c word is substituted.</li>
+    /// </ul>
+    struct RepoVarExpand
+    {
+      /** Function taking a variable name and returning a pointer to the variable value or \c nullptr if unset. */
+      typedef function<const std::string * ( const std::string & )> VarRetriever;
+
+      /** Return a copy of \a value_r with embedded variables expanded. */
+      std::string operator()( const std::string & value_r, VarRetriever varRetriever_r ) const;
+#ifndef SWIG // Swig treats it as syntax error
+      /** \overload moving */
+      std::string operator()( std::string && value_r, VarRetriever varRetriever_r ) const;
+#endif
+    };
+
     /**
      * \short Functor replacing repository variables
      *

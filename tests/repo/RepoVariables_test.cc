@@ -1,24 +1,18 @@
-#include <stdio.h>
-#include <iostream>
-#include <fstream>
-#include <vector>
-#include <list>
 #include <boost/test/auto_unit_test.hpp>
+#include <iostream>
+#include <list>
+#include <map>
 
-#include "zypp/ZYppFactory.h"
-#include "zypp/Url.h"
-#include "zypp/PathInfo.h"
-#include "zypp/TmpPath.h"
 #include "zypp/ZConfig.h"
+#include "zypp/Pathname.h"
+#include "zypp/Url.h"
 #include "zypp/base/ValueTransform.h"
 #include "zypp/repo/RepoVariables.h"
 
 using std::cout;
 using std::endl;
-using std::string;
 using namespace zypp;
 using namespace boost::unit_test;
-using namespace zypp::repo;
 
 #define DATADIR (Pathname(TESTS_SRC_DIR) +  "/repo/yum/data")
 
@@ -34,14 +28,14 @@ namespace std {
   }
 }
 
-// plain functor
+// A plain functor
 struct PlainTransformator
 {
   std::string operator()( const std::string & value_r ) const
   { return "{"+value_r+"}"; }
 };
 
-// plain functor + std::unary_function typedefs
+// plain functor + required std::unary_function typedefs
 struct FncTransformator : public PlainTransformator, public std::unary_function<const std::string &, std::string>
 {};
 
@@ -80,13 +74,114 @@ BOOST_AUTO_TEST_CASE(value_transform)
   BOOST_CHECK_EQUAL( rl.transformed( rl.rawBegin() ), "{a}" );
 }
 
+void helperGenRepVarExpandResults()
+{
+  // Generate test result strings for RepVarExpand:
+  //   ( STRING, REPLACED_all_vars_undef, REPLACED_all_vars_defined )
+  // Crefully check whether new stings are correct before
+  // adding them to the testccse.
+  std::map<std::string,std::string> vartable;
+  std::map<std::string,std::pair<std::string,std::string>> result;
+  bool varsoff = true;
+
+  auto varLookup = [&vartable,&varsoff]( const std::string & name_r )->const std::string *
+  {
+    if ( varsoff )
+      return nullptr;
+    std::string & val( vartable[name_r] );
+    if ( val.empty() )
+    { val = "["+name_r+"]"; }
+    return &val;
+  };
+
+  for ( auto && value : {
+    ""
+    , "$"
+    , "$${}"
+    , "$_:"
+    , "$_A:"
+    , "$_A_:"
+    , "$_A_B:"
+    , "${_A_B}"
+    , "\\${_A_B}"	// no escape on level 0
+    , "${_A_B\\}"	// no close brace
+    , "${C:-a$Bba}"
+    , "${C:+a$Bba}"
+    , "${C:+a${B}ba}"
+    , "${C:+a\\$Bba}"	// escape on level > 0; no var $Bba
+    , "${C:+a$Bba\\}"	// escape on level > 0; no close brace C
+    , "${C:+a${B}ba}"
+    , "${C:+a\\${B}ba}"	// escape on level > 0; no var ${B}
+    , "${C:+a${B\\}ba}"	// escape on level > 0; no close brace B
+    , "${C:+a\\${B\\}ba}"
+    , "__${D:+\\$X--{${E:-==\\$X{o\\}==}  }--}__\\${B}${}__"
+    , "__${D:+\\$X--{${E:-==\\$X{o\\}==}\\}--}__\\${B}${}__"
+  } ) {
+    varsoff = true;
+    result[value].first = repo::RepoVarExpand()( value, varLookup );
+    varsoff = false;
+    result[value].second = repo::RepoVarExpand()( value, varLookup );
+  }
+
+  for ( const auto & el : result )
+  {
+#define CSTR(STR) str::form( "%-40s", str::gsub( "\""+STR+"\"", "\\", "\\\\" ).c_str() )
+    cout << "RepVarExpandTest( " << CSTR(el.first) << ", " << CSTR(el.second.first) << ", " << CSTR(el.second.second) << " );" << endl;
+  }
+}
+
+void RepVarExpandTest( const std::string & string_r, const std::string & allUndef_r, const std::string & allDef_r )
+{
+  std::map<std::string,std::string> vartable;
+  bool varsoff = true;
+
+  auto varLookup = [&vartable,&varsoff]( const std::string & name_r )->const std::string *
+  {
+    if ( varsoff )
+      return nullptr;
+    std::string & val( vartable[name_r] );
+    if ( val.empty() )
+    { val = "["+name_r+"]"; }
+    return &val;
+  };
+
+  varsoff = true;
+  BOOST_CHECK_EQUAL( repo::RepoVarExpand()( string_r, varLookup ), allUndef_r );
+  varsoff = false;
+  BOOST_CHECK_EQUAL( repo::RepoVarExpand()( string_r, varLookup ), allDef_r );
+}
+
+BOOST_AUTO_TEST_CASE(RepVarExpand)
+{ //              ( STRING                                  , REPLACED_all_vars_undef                 , REPLACED_all_vars_defined                )
+  RepVarExpandTest( ""                                      , ""                                      , ""                                       );
+  RepVarExpandTest( "$"                                     , "$"                                     , "$"                                      );
+  RepVarExpandTest( "$${}"                                  , "$${}"                                  , "$${}"                                   );
+  RepVarExpandTest( "$_:"                                   , "$_:"                                   , "[_]:"                                   );
+  RepVarExpandTest( "$_A:"                                  , "$_A:"                                  , "[_A]:"                                  );
+  RepVarExpandTest( "$_A_:"                                 , "$_A_:"                                 , "[_A_]:"                                 );
+  RepVarExpandTest( "$_A_B:"                                , "$_A_B:"                                , "[_A_B]:"                                );
+  RepVarExpandTest( "${C:+a$Bba\\}"                         , "${C:+a$Bba\\}"                         , "${C:+a[Bba]\\}"                         );
+  RepVarExpandTest( "${C:+a$Bba}"                           , ""                                      , "a[Bba]"                                 );
+  RepVarExpandTest( "${C:+a${B\\}ba}"                       , "${C:+a${B\\}ba}"                       , "${C:+a${B\\}ba}"                        );
+  RepVarExpandTest( "${C:+a${B}ba}"                         , ""                                      , "a[B]ba"                                 );
+  RepVarExpandTest( "${C:+a\\$Bba}"                         , ""                                      , "a$Bba"                                  );
+  RepVarExpandTest( "${C:+a\\${B\\}ba}"                     , ""                                      , "a${B}ba"                                );
+  RepVarExpandTest( "${C:+a\\${B}ba}"                       , "ba}"                                   , "a${Bba}"                                );
+  RepVarExpandTest( "${C:-a$Bba}"                           , "a$Bba"                                 , "[C]"                                    );
+  RepVarExpandTest( "${_A_B\\}"                             , "${_A_B\\}"                             , "${_A_B\\}"                              );
+  RepVarExpandTest( "${_A_B}"                               , "${_A_B}"                               , "[_A_B]"                                 );
+  RepVarExpandTest( "\\${_A_B}"                             , "\\${_A_B}"                             , "\\[_A_B]"                               );
+  RepVarExpandTest( "__${D:+\\$X--{${E:-==\\$X{o\\}==}  }--}__\\${B}${}__", "__--}__\\${B}${}__"      , "__$X--{[E]  --}__\\[B]${}__"            );
+  RepVarExpandTest( "__${D:+\\$X--{${E:-==\\$X{o\\}==}\\}--}__\\${B}${}__", "____\\${B}${}__"         , "__$X--{[E]}--__\\[B]${}__"              );
+}
+
 BOOST_AUTO_TEST_CASE(replace_text)
 {
   /* check RepoVariablesStringReplacer */
   ZConfig::instance().setSystemArchitecture(Arch("i686"));
   ::setenv( "ZYPP_REPO_RELEASEVER", "13.2", 1 );
 
-  RepoVariablesStringReplacer replacer1;
+  repo::RepoVariablesStringReplacer replacer1;
   BOOST_CHECK_EQUAL( replacer1(""),		"" );
   BOOST_CHECK_EQUAL( replacer1("$"),		"$" );
   BOOST_CHECK_EQUAL( replacer1("$arc"),		"$arc" );
@@ -110,7 +205,7 @@ BOOST_AUTO_TEST_CASE(replace_text)
   BOOST_CHECK_EQUAL(replacer1("http://foo/$arch/bar"), "http://foo/i686/bar");
 
   /* check RepoVariablesUrlReplacer */
-  RepoVariablesUrlReplacer replacer2;
+  repo::RepoVariablesUrlReplacer replacer2;
 
   BOOST_CHECK_EQUAL(replacer2(Url("ftp://user:secret@site.org/$arch/")).asCompleteString(),
 		    "ftp://user:secret@site.org/i686/");
