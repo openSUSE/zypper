@@ -793,7 +793,7 @@ Apart from the above, repositories have several other properties which can be se
 Variable substitution:
 ^^^^^^^^^^^^^^^^^^^^^^
 
-You can use the following built-in variables within a *.repo* files 'name' and 'URI' values:
+You can use the following built-in variables within a *.repo* or *.service* files 'name' and 'URI' values:
 
 	*$arch*:::
 		Use this variable to refer to the system's CPU architecture.
@@ -813,8 +813,11 @@ You can use the following built-in variables within a *.repo* files 'name' and '
 	Remember to protect the *$* when using these variables on a shell command line: :::
 		zypper ar -f http://ftp.gwdg.de/pub/linux/packman/suse/*\$*{nop}releasever packman
 
-	If a variable is followed by an alphanumeric chracter or underscore it needs to be enclosed in *{}*: :::
-		zypper ar -f http://ftp.gwdg.de/pub/linux/packman/suse/*\$*{nop}{releasever} packman
+	If a variable is followed by an alphanumeric character or underscore it needs to be enclosed in *{}*: :::
+		zypper ar -f http://ftp.gwdg.de/pub/linux/packman/suse/*\${*'releasever'*}*{nop}_packman
+
+	Bash style definition of default *${*'variable'*:-*'word'*}* and alternate *${*'variable'*:+*'word'*}* values: :::
+		SLE-*${*'releasever_major'*}${*'releasever_minor'*:+*-SP-'$releasever_minor'*}*
 
 	To check where you already use *$releasever* call: :::
 		*zypper --releasever @--HERE--@ lr -u*

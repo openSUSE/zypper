@@ -2,12 +2,12 @@
 .\"     Title: zypper
 .\"    Author: [see the "AUTHORS" section]
 .\" Generator: DocBook XSL Stylesheets v1.78.1 <http://docbook.sf.net/>
-.\"      Date: 02/27/2015
+.\"      Date: 03/11/2015
 .\"    Manual: ZYPPER
 .\"    Source: zypper
 .\"  Language: English
 .\"
-.TH "ZYPPER" "8" "02/27/2015" "zypper" "ZYPPER"
+.TH "ZYPPER" "8" "03/11/2015" "zypper" "ZYPPER"
 .\" -----------------------------------------------------------------
 .\" * Define some portability stuff
 .\" -----------------------------------------------------------------
@@ -1427,7 +1427,7 @@ Apart from the above, repositories have several other properties which can be se
 \fBVariable substitution:\fR
 .RS 4
 .sp
-You can use the following built\-in variables within a \fB\&.repo\fR files \fIname\fR and \fIURI\fR values:
+You can use the following built\-in variables within a \fB\&.repo\fR or \fB\&.service\fR files \fIname\fR and \fIURI\fR values:
 .PP
 \fB$arch\fR
 .RS 4
@@ -1476,8 +1476,15 @@ zypper ar \-f
 http://ftp\&.gwdg\&.de/pub/linux/packman/suse/\fB\e$\fRreleasever packman
 .RE
 .PP
-If a variable is followed by an alphanumeric chracter or underscore it needs to be enclosed in \fB{}\fR:
+If a variable is followed by an alphanumeric character or underscore it needs to be enclosed in \fB{}\fR:
 .RS 4
+zypper ar \-f
+http://ftp\&.gwdg\&.de/pub/linux/packman/suse/\fB\e${\fR\fIreleasever\fR\fB}\fR_packman
+.RE
+.PP
+Bash style definition of default \fB${\fR\fIvariable\fR\fB:\-\fR\fIword\fR\fB}\fR and alternate \fB${\fR\fIvariable\fR\fB:+\fR\fIword\fR\fB}\fR values:
+.RS 4
+SLE\-\fB${\fR\fIreleasever_major\fR\fB}${\fR\fIreleasever_minor\fR\fB:+\fR\-SP\-\fI$releasever_minor\fR\fB}\fR
 .RE
 .PP
 To check where you already use \fB$releasever\fR call:
