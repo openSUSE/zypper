@@ -1,4 +1,16 @@
 -------------------------------------------------------------------
+Wed Mar 11 11:58:26 CET 2015 - ma@suse.de
+
+- patch: A date limit must ignore newer patch candidates (bnc#919709)
+- Show locked packages in zypper summary (FATE#318326,FATE#318299)
+- modify repo: Notify about volatile changes to service repos (bnc#916254)
+- ps: Change column header from 'Login' to 'User' (bnc#915461)
+- man: add missing patch --date option
+- man: mention $releasever_major/minor repo variables
+- man: Update repo variable substitution (default and alternate values)
+- version 1.11.23
+
+-------------------------------------------------------------------
 Sun Mar  8 01:13:24 CET 2015 - ma@suse.de
 
 - Update zypper-po.tar.bz2
