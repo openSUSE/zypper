@@ -38,6 +38,7 @@ Provides:       libzypp(plugin:commit) = 1
 Provides:       libzypp(plugin:services) = 0
 Provides:       libzypp(plugin:system) = 0
 Provides:       libzypp(plugin:urlresolver) = 0
+Provides:       libzypp(repovarexpand) = 0
 
 %if 0%{?suse_version}
 Recommends:     logrotate

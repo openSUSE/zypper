@@ -51,6 +51,11 @@ Packages requiring a feature may use the corresponding \c Requires: in their .sp
     <DD>\see \ref plugin-url-resolver </DD>
   </DL></DD>
 
+  <DT>repovarexpand</DT>
+  <DD><DL>
+    <DT>version 0</DT>
+    <DD>Also support braced variables, shell like default and alternate values. \see \ref zypp-repovars</DD>
+  </DL></DD>
 </DL>
 
 */
