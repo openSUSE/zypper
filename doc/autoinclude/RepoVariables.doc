@@ -1,0 +1,33 @@
+/**
+
+\page zypp-repovars Repository Variables
+
+\author Michael Andres <ma@suse.de>
+
+\section zypp-repovars-intro Repository Variables
+
+Within a \c .repo or \c .serivce file, the name and URLs are subject to variable substitution.
+
+Variables are e.g. usefull for related repositories like packman (<tt>http://ftp.gwdg.de/pub/linux/packman/suse/$releasever<\tt>), which shall always fit the installed distribution, even after a distribution upgrade. To help performing a distribution upgrade, the value of \c $releasever can be overwritten in zypper using the \c --releasever global option. This way you can easily switch all repositories using \c $releasever to the new version (provided the server layouts did not change and new repos are already available).
+
+The variable expander also supports shell like definition of default and alternate values.
+
+\see \ref zypp::repo::RepoVarExpand Variable expander
+
+
+\subsection zypp-repoars-builtin Builtin repository variables
+
+\li \c $arch -
+	The system's CPU architecture.
+
+\li \c $basearch -
+	The base architecture of the system. For example, iX86 machines have a base architecture of \c i386, while AMD64 and Intel64 have \c x86_64.
+
+\li \c $releasever -
+	The version of your openSUSE or SUSE Linux. The value is obtained from the <tt>/product/version</tt> XML-node in <tt>/etc/products.d/baseproduct</tt>.
+
+\li \c $releasever_minor
+\li \c $releasever_major -
+	\c $releasever_major will be set to the leading portion up to (but not including) the 1st dot; \c $releasever_minor to the trailing portion after the 1st dot. If there's no dot in \c $releasever, \c $releasever_major is the same as \c $releasever and \c $releasever_minor is empty.
+
+*/
