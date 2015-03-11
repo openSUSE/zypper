@@ -391,9 +391,9 @@ namespace zypp
     {
       /** \brief Provide lazy initialized repo variables
        */
-      struct ReplacerData : private zypp::base::NonCopyable
+      struct RepoVars : private zypp::base::NonCopyable
       {
-	typedef const std::string & (ReplacerData::*Getter)() const;
+	typedef const std::string & (RepoVars::*Getter)() const;
 
 	const std::string & arch() const
 	{
@@ -435,6 +435,7 @@ namespace zypp
 	    _basearch = arch.baseArch().asString();
 	  }
 	}
+
 	void assertReleaseverStr() const
 	{
 	  if ( _releasever.empty() )
@@ -467,60 +468,26 @@ namespace zypp
 	mutable std::string _releaseverMinor;
       };
 
-     /** \brief Replace repo variables on demand
-       *
-       * Initialisation of repo variables is delayed until they actually occur in
-       * a string.
-       */
-      std::string replacer( std::string value_r )
+      /** \brief */
+      const std::string * repoVarLookup( const std::string & name_r )
       {
-	std::string ret;
-	if ( ! value_r.empty() )
+	RepoVars::Getter getter = nullptr;
+	switch ( name_r.size() )
 	{
-	  static const str::regex rxVAR( "^([^$]*)\\$(\\{[[:alnum:]_]+\\}|[[:alnum:]_]+)([^$]*)" );
-	  str::smatch what;
-	  while ( str::regex_match( value_r, what, rxVAR ) )
-	  {
-	    ReplacerData::Getter getter = nullptr;
-
-	    const char * varStart = value_r.c_str() + what.begin( 2 );
-	    std::string::size_type varSize = what.size( 2 );
-	    if ( *varStart == '{' )	// enclosed in {}
-	    {
-	      ++varStart;
-	      varSize -= 2;
-	    }
-
-	    switch ( varSize )
-	    {
-#define ASSIGN_IF(NAME,GETTER) if ( ::strncmp( varStart, NAME, varSize ) == 0 ) getter = GETTER
-
-	      case  4:	ASSIGN_IF( "arch",		&ReplacerData::arch );			break;
-	      case  8:	ASSIGN_IF( "basearch",		&ReplacerData::basearch );		break;
-	      case 10:	ASSIGN_IF( "releasever",	&ReplacerData::releasever );		break;
-	      case 16:	ASSIGN_IF( "releasever_major",	&ReplacerData::releaseverMajor );
-	           else	ASSIGN_IF( "releasever_minor",	&ReplacerData::releaseverMinor );	break;
+#define ASSIGN_IF(NAME,GETTER) if ( name_r == NAME ) getter = GETTER
+	  case  4:	ASSIGN_IF( "arch",		&RepoVars::arch );		break;
+	  case  8:	ASSIGN_IF( "basearch",		&RepoVars::basearch );		break;
+	  case 10:	ASSIGN_IF( "releasever",	&RepoVars::releasever );	break;
+	  case 16:	ASSIGN_IF( "releasever_major",	&RepoVars::releaseverMajor );
+	      else	ASSIGN_IF( "releasever_minor",	&RepoVars::releaseverMinor );	break;
 #undef ASSIGN_IF
-	    }
+	}
 
-	    if ( getter )	// known var?
-	    {
-	      static const ReplacerData _data;
-	      if ( what.size( 1 ) > 0 ) ret += what[1];	// pre
-	      ret += (_data.*getter)();			// var
-	      if ( what.size( 3 ) > 0 ) ret += what[3];	// post
-	    }
-	    else
-	    {
-	      ret += what[0];	// unchanged
-	    }
-
-	    value_r.erase( 0, what.size( 0 ) );
-	    if ( value_r.empty() )
-	      break;
-	  }
-	  if ( ! value_r.empty() )
-	    ret += std::move(value_r);		// no match
+	const std::string * ret = nullptr;
+	if ( getter )	// known var
+	{
+	  static const RepoVars _repoVars;
+	  ret = &(_repoVars.*getter)();
 	}
 	return ret;
       }
@@ -529,14 +496,19 @@ namespace zypp
 
     std::string RepoVariablesStringReplacer::operator()( const std::string & value ) const
     {
-      return replacer( value );
+      return RepoVarExpand()( value, repoVarLookup );
+    }
+    std::string RepoVariablesStringReplacer::operator()( std::string && value ) const
+    {
+      return RepoVarExpand()( value, repoVarLookup );
     }
 
     Url RepoVariablesUrlReplacer::operator()( const Url & value ) const
     {
+      RepoVarExpand expand;
       Url newurl( value );
-      newurl.setPathData( replacer( value.getPathData() ) );
-      newurl.setQueryString( replacer( value.getQueryString() ) );
+      newurl.setPathData( expand( value.getPathData(), repoVarLookup ) );
+      newurl.setQueryString( expand( value.getQueryString(), repoVarLookup ) );
       return newurl;
     }
 

@@ -99,10 +99,16 @@ namespace zypp
      * ftp://user:secret@site.net/$arch/ -> ftp://user:secret@site.net/i686/
      * http://site.net/?basearch=$basearch -> http://site.net/?basearch=i386
      * \endcode
+     *
+     * \see \ref RepoVarExpand for supported variable syntax.
      */
     struct RepoVariablesStringReplacer : public std::unary_function<const std::string &, std::string>
     {
       std::string operator()( const std::string & value_r ) const;
+#ifndef SWIG // Swig treats it as syntax error
+      /** \overload moving */
+      std::string operator()( std::string && value_r ) const;
+#endif
     };
 
     /**
