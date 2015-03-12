@@ -28,6 +28,8 @@ using namespace zypp;
 class Table;
 class Zypper;
 
+#define OSD ColorStream( std::cout, ColorContext::OSDEBUG )
+
 ///////////////////////////////////////////////////////////////////
 namespace out
 {
