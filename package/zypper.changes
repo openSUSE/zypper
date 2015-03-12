@@ -1,4 +1,9 @@
 -------------------------------------------------------------------
+Thu Mar 12 01:13:36 CET 2015 - ma@suse.de
+
+- Update zypper-po.tar.bz2
+
+-------------------------------------------------------------------
 Wed Mar 11 11:58:26 CET 2015 - ma@suse.de
 
 - patch: A date limit must ignore newer patch candidates (bnc#919709)
