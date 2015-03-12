@@ -2,12 +2,12 @@
 .\"     Title: zypper
 .\"    Author: [see the "AUTHORS" section]
 .\" Generator: DocBook XSL Stylesheets v1.78.1 <http://docbook.sf.net/>
-.\"      Date: 03/11/2015
+.\"      Date: 03/12/2015
 .\"    Manual: ZYPPER
 .\"    Source: zypper
 .\"  Language: English
 .\"
-.TH "ZYPPER" "8" "03/11/2015" "zypper" "ZYPPER"
+.TH "ZYPPER" "8" "03/12/2015" "zypper" "ZYPPER"
 .\" -----------------------------------------------------------------
 .\" * Define some portability stuff
 .\" -----------------------------------------------------------------
@@ -410,15 +410,13 @@ disables the file conflict check because access to all packages file lists is ne
 .PP
 \fB\-R\fR, \fB\-\-no\-force\-resolution\fR
 .RS 4
-Do not force the solver to find a solution\&. Instead, report dependency problem and prompt the user to resolve it manually\&.
+Do not force the solver to find a solution\&. Instead, report dependency problems and prompt the user to resolve them manually\&.
 .RE
 .PP
 \fB\-\-force\-resolution\fR
 .RS 4
-Force the solver to find a solution, even if it would mean removing all packages with unfulfilled requirements\&. The default behavior is
-\fIforce in the interactive mode\fR
-and
-\fIno\-force in the non\-interactive mode\fR\&. If this option is specified, it takes the preference\&.
+Force the solver to find a solution by allowing to remove packages with unfulfilled requirements\&. This is the default when removing packages (\fBzypper remove *)\&. This option overrides *\-\-no\-force\-resolution\fR
+in case both are specified on the command line\&.
 .RE
 .PP
 \fB\-D\fR, \fB\-\-dry\-run\fR
@@ -655,21 +653,13 @@ Create solver test case for debugging\&. See the install command for details\&.
 .PP
 \fB\-R\fR, \fB\-\-no\-force\-resolution\fR
 .RS 4
-Do not force the solver to find a solution\&. Instead, report dependency problem and prompt the user to resolve it manually\&.
+Do not force the solver to find a solution\&. Instead, report dependency problems and prompt the user to resolve them manually\&.
 .RE
 .PP
 \fB\-\-force\-resolution\fR
 .RS 4
-Force the solver to find a solution, even if it would mean removing all packages with unfulfilled requirements\&.
-
-The default behavior is
-\fIforce\fR
-in the
-\fIinteractive mode\fR
-and
-\fIno\-force\fR
-in the
-\fInon\-interactive mode\fR\&. If this option is specified, it takes the preference\&.
+Force the solver to find a solution by allowing to remove packages with unfulfilled requirements\&. This is the default when removing packages (\fBzypper remove *)\&. This option overrides *\-\-no\-force\-resolution\fR
+in case both are specified on the command line\&.
 .RE
 .PP
 \fB\-u\fR, \fB\-\-clean\-deps\fR
@@ -804,15 +794,13 @@ disables the fileconflict check because access to all packages filelists is need
 .PP
 \fB\-R\fR, \fB\-\-no\-force\-resolution\fR
 .RS 4
-Do not force the solver to find a solution\&. Instead, report dependency problem and prompt the user to resolve it manually\&.
+Do not force the solver to find a solution\&. Instead, report dependency problems and prompt the user to resolve them manually\&.
 .RE
 .PP
 \fB\-\-force\-resolution\fR
 .RS 4
-Force the solver to find a solution, even if it would mean removing all packages with unfulfilled requirements\&.
-
-The default behavior is
-\fIno\-force\fR\&. If this option is specified, it takes the preference\&.
+Force the solver to find a solution by allowing to remove packages with unfulfilled requirements\&. This is the default when removing packages (\fBzypper remove *)\&. This option overrides *\-\-no\-force\-resolution\fR
+in case both are specified on the command line\&.
 .RE
 .PP
 \fB\-D\fR, \fB\-\-dry\-run\fR
