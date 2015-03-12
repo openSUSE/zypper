@@ -538,6 +538,13 @@ void SolverRequester::updateTo(
       setToInstall(selected);
       MIL << *s << " update: setting " << selected << " to install (arch change request)" << endl;
     }
+    else if ( selected->edition() == installed->edition()
+	    && !pkg.repo_alias.empty() /*userselected repo*/ )
+    {
+      // set 'candidate' for installation
+      setToInstall(selected);
+      MIL << *s << " update: setting " << selected << " to install (repo change request)" << endl;
+    }
     else if (_opts.force || _opts.oldpackage)
     {
       // set 'candidate' for installation
