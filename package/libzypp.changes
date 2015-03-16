@@ -1,4 +1,10 @@
 -------------------------------------------------------------------
+Mon Mar 16 14:05:28 CET 2015 - ma@suse.de
+
+- add support for SHA224/384/512
+- version 14.37.1 (30)
+
+-------------------------------------------------------------------
 Wed Mar 11 09:22:46 CET 2015 - ma@suse.de
 
 - New RepoVarExpand: Functor expanding repo variables in a 
