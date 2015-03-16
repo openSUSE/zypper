@@ -26,17 +26,25 @@ namespace zypp
 { /////////////////////////////////////////////////////////////////
 
   const std::string & CheckSum::md5Type()
-  { static std::string _type( "md5" ); return _type; }
+  { return Digest::md5(); }
 
   const std::string & CheckSum::shaType()
   { static std::string _type( "sha" ); return _type; }
 
   const std::string & CheckSum::sha1Type()
-  { static std::string _type( "sha1" ); return _type; }
+  { return Digest::sha1(); }
+
+  const std::string & CheckSum::sha224Type()
+  { return Digest::sha224(); }
 
   const std::string & CheckSum::sha256Type()
-  { static std::string _type( "sha256" ); return _type; }
+  { return Digest::sha256(); }
 
+  const std::string & CheckSum::sha384Type()
+  { return Digest::sha384(); }
+
+  const std::string & CheckSum::sha512Type()
+  { return Digest::sha512(); }
 
   CheckSum::CheckSum( const std::string & type, const std::string & checksum )
   : _type( str::toLower( type ) )
@@ -44,12 +52,45 @@ namespace zypp
   {
     switch ( checksum.size() )
     {
+      case 128:
+        if ( _type == sha512Type() )
+          return;
+        if ( _type.empty() || _type == shaType() )
+        {
+          _type = sha512Type();
+          return;
+        }
+        // else: dubious
+        break;
+
+      case 96:
+        if ( _type == sha384Type() )
+          return;
+        if ( _type.empty() || _type == shaType() )
+        {
+          _type = sha384Type();
+          return;
+        }
+        // else: dubious
+        break;
+
       case 64:
         if ( _type == sha256Type() )
           return;
         if ( _type.empty() || _type == shaType() )
         {
           _type = sha256Type();
+          return;
+        }
+        // else: dubious
+        break;
+
+      case 56:
+        if ( _type == sha224Type() )
+          return;
+        if ( _type.empty() || _type == shaType() )
+        {
+          _type = sha224Type();
           return;
         }
         // else: dubious
@@ -97,7 +138,10 @@ namespace zypp
     if (    _type == md5Type()
          || _type == shaType()
          || _type == sha1Type()
-         || _type == sha256Type() )
+         || _type == sha224Type()
+         || _type == sha256Type()
+         || _type == sha384Type()
+         || _type == sha512Type() )
     {
       ZYPP_THROW( CheckSumException( msg ) );
     }

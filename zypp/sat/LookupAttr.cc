@@ -695,8 +695,20 @@ namespace zypp
             return CheckSum::sha1( ::repodata_chk2str( _dip->data, solvAttrType(), (unsigned char *)_dip->kv.str ) );
             break;
 
+          case REPOKEY_TYPE_SHA224:
+            return CheckSum::sha224( ::repodata_chk2str( _dip->data, solvAttrType(), (unsigned char *)_dip->kv.str ) );
+            break;
+
           case REPOKEY_TYPE_SHA256:
             return CheckSum::sha256( ::repodata_chk2str( _dip->data, solvAttrType(), (unsigned char *)_dip->kv.str ) );
+            break;
+
+          case REPOKEY_TYPE_SHA384:
+            return CheckSum::sha384( ::repodata_chk2str( _dip->data, solvAttrType(), (unsigned char *)_dip->kv.str ) );
+            break;
+
+          case REPOKEY_TYPE_SHA512:
+            return CheckSum::sha512( ::repodata_chk2str( _dip->data, solvAttrType(), (unsigned char *)_dip->kv.str ) );
             break;
         }
       }

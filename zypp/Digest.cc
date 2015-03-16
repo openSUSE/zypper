@@ -46,8 +46,17 @@ namespace zypp {
     const std::string & Digest::sha1()
     { static std::string _type( "sha1" ); return _type; }
 
+    const std::string & Digest::sha224()
+    { static std::string _type( "sha224" ); return _type; }
+
     const std::string & Digest::sha256()
     { static std::string _type( "sha256" ); return _type; }
+
+    const std::string & Digest::sha384()
+    { static std::string _type( "sha384" ); return _type; }
+
+    const std::string & Digest::sha512()
+    { static std::string _type( "sha512" ); return _type; }
 
     // private data
     class Digest::P

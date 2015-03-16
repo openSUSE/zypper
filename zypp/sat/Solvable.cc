@@ -196,7 +196,10 @@ namespace zypp
       {
         case REPOKEY_TYPE_MD5:    return CheckSum::md5( s );
         case REPOKEY_TYPE_SHA1:   return CheckSum::sha1( s );
+        case REPOKEY_TYPE_SHA224: return CheckSum::sha224( s );
         case REPOKEY_TYPE_SHA256: return CheckSum::sha256( s );
+        case REPOKEY_TYPE_SHA384: return CheckSum::sha384( s );
+        case REPOKEY_TYPE_SHA512: return CheckSum::sha512( s );
       }
       return CheckSum( std::string(), s ); // try to autodetect
     }

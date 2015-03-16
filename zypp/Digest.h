@@ -60,8 +60,14 @@ namespace zypp {
 	static const std::string & md5();
 	/** sha1 */
 	static const std::string & sha1();
+	/** sha224 */
+	static const std::string & sha224();
 	/** sha256 */
 	static const std::string & sha256();
+	/** sha384 */
+	static const std::string & sha384();
+	/** sha512 */
+	static const std::string & sha512();
 	//@}
 
       public:

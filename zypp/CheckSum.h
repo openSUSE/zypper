@@ -65,14 +65,20 @@ namespace zypp
     static const std::string & md5Type();
     static const std::string & shaType();
     static const std::string & sha1Type();
+    static const std::string & sha224Type();
     static const std::string & sha256Type();
+    static const std::string & sha384Type();
+    static const std::string & sha512Type();
 
     /** \name Creates a checksum for algorithm \param type. */
     //@{
     static CheckSum md5( const std::string & checksum )		{ return  CheckSum( md5Type(), checksum); }
     static CheckSum sha( const std::string & checksum )		{ return  CheckSum( shaType(), checksum); }
     static CheckSum sha1( const std::string & checksum )	{ return  CheckSum( sha1Type(), checksum); }
+    static CheckSum sha224( const std::string & checksum )	{ return  CheckSum( sha224Type(), checksum); }
     static CheckSum sha256( const std::string & checksum )	{ return  CheckSum( sha256Type(), checksum); }
+    static CheckSum sha384( const std::string & checksum )	{ return  CheckSum( sha384Type(), checksum); }
+    static CheckSum sha512( const std::string & checksum )	{ return  CheckSum( sha512Type(), checksum); }
     //@}
 
     /** \name Reads the content of \param input_r and computes the checksum. */
@@ -80,12 +86,18 @@ namespace zypp
     static CheckSum md5( std::istream & input_r )		{ return  CheckSum( md5Type(), input_r ); }
     static CheckSum sha( std::istream & input_r )		{ return  CheckSum( sha1Type(), input_r ); }
     static CheckSum sha1( std::istream & input_r )		{ return  CheckSum( sha1Type(), input_r ); }
+    static CheckSum sha224( std::istream & input_r )		{ return  CheckSum( sha224Type(), input_r ); }
     static CheckSum sha256( std::istream & input_r )		{ return  CheckSum( sha256Type(), input_r ); }
+    static CheckSum sha384( std::istream & input_r )		{ return  CheckSum( sha384Type(), input_r ); }
+    static CheckSum sha512( std::istream & input_r )		{ return  CheckSum( sha512Type(), input_r ); }
 #ifndef SWIG // Swig treats it as syntax error
     static CheckSum md5( std::istream && input_r )		{ return  CheckSum( md5Type(), input_r ); }
     static CheckSum sha( std::istream && input_r )		{ return  CheckSum( sha1Type(), input_r ); }
     static CheckSum sha1( std::istream && input_r )		{ return  CheckSum( sha1Type(), input_r ); }
+    static CheckSum sha224( std::istream && input_r )		{ return  CheckSum( sha224Type(), input_r ); }
     static CheckSum sha256( std::istream && input_r )		{ return  CheckSum( sha256Type(), input_r ); }
+    static CheckSum sha384( std::istream && input_r )		{ return  CheckSum( sha384Type(), input_r ); }
+    static CheckSum sha512( std::istream && input_r )		{ return  CheckSum( sha512Type(), input_r ); }
 #endif
     //@}
 
@@ -94,7 +106,10 @@ namespace zypp
     static CheckSum md5FromString( const std::string & input_r )	{ return md5( std::stringstream( input_r ) ); }
     static CheckSum shaFromString( const std::string & input_r )	{ return sha( std::stringstream( input_r ) ); }
     static CheckSum sha1FromString( const std::string & input_r )	{ return sha1( std::stringstream( input_r ) ); }
+    static CheckSum sha224FromString( const std::string & input_r )	{ return sha224( std::stringstream( input_r ) ); }
     static CheckSum sha256FromString( const std::string & input_r )	{ return sha256( std::stringstream( input_r ) ); }
+    static CheckSum sha384FromString( const std::string & input_r )	{ return sha384( std::stringstream( input_r ) ); }
+    static CheckSum sha512FromString( const std::string & input_r )	{ return sha512( std::stringstream( input_r ) ); }
     //@}
 
   public:
