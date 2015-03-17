@@ -10,5 +10,5 @@ dnl   phase)
 dnl ==================================================
 m4_define([ZYPPER_MAJOR], 	 [0])
 m4_define([ZYPPER_MINOR],	 [6])
-m4_define([ZYPPER_PATCH],	 [202])
+m4_define([ZYPPER_PATCH],	 [203])
 dnl ==================================================

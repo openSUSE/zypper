@@ -1,4 +1,10 @@
 -------------------------------------------------------------------
+Tue Mar 17 14:49:04 CET 2015 - ma@suse.de
+
+- Add --download-only option for install/update (bnc#897216)
+- 0.6.203
+
+-------------------------------------------------------------------
 Tue Feb  8 08:08:45 UTC 2011 - dmacvicar@suse.de
 
 - typo: licencse -> license (bnc#650306)
