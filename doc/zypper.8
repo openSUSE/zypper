@@ -65,6 +65,9 @@ Don't require user confirmation.
 .TP
 .I \-l, \-\-auto\-agree\-with\-licenses
 Automatically say 'yes' to third party license confirmation prompt. By using this option, you choose to agree with licenses of all third-party software this command will install. This option is particularly useful for administators installing the same set of packages on multiple machines (by an automated process) and have the licenses confirmed before.
+.TP
+.I \-d, \-\-download-only
+Only download the packages to /var/cache/zypp/packages, do not install.
 
 .TP
 .B list-updates (lu)
@@ -103,6 +106,9 @@ confirmed.
 .TP
 .I \-l, \-\-auto\-agree\-with\-licenses
 Automatically say 'yes' to third party license confirmation prompt. By using this option, you choose to agree with licenses of all third-party software this command will install. This option is particularly useful for administators installing the same set of packages on multiple machines (by an automated process) and have the licenses confirmed before.
+.TP
+.I \-d, \-\-download-only
+Only download the packages to /var/cache/zypp/packages, do not install.
 
 .B NOTE:
 Zypper prefers to update only those packages for which a patch

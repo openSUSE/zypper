@@ -6,6 +6,9 @@
 #include <zypp/base/Algorithm.h>
 #include <zypp/solver/detail/Helper.h>
 
+#include <zypp/Source.h>
+#include <zypp/source/PackageProvider.h>
+
 #include "zmart.h"
 #include "zmart-misc.h"
 #include "zypper-callbacks.h"
@@ -743,6 +746,126 @@ void mark_updates( const ResObject::Kind &kind, bool skip_interactive )
   }
 }
 
+///////////////////////////////////////////////////////////////////
+// --download-only
+namespace zypp
+{
+  namespace filesystem
+  {
+    inline int _Log_Result( const int res, const char * rclass = "errno" )
+    {
+      if ( res )
+        DBG << " FAILED: " << rclass << " " << res;
+      DBG << std::endl;
+      return res;
+    }
+
+    inline int hardlinkCopy( const Pathname & oldpath, const Pathname & newpath )
+    {
+      DBG << "hardlinkCopy " << oldpath << " -> " << newpath;
+
+      PathInfo pi( oldpath, PathInfo::LSTAT );
+      if ( pi.isLink() )
+      {
+	// dont hardlink symlinks!
+	return copy( oldpath, newpath );
+      }
+
+      pi.lstat( newpath );
+      if ( pi.isExist() )
+      {
+	int res = unlink( newpath );
+	if ( res != 0 )
+	  return _Log_Result( res );
+      }
+
+      // Here: no symlink, no newpath
+      if ( ::link( oldpath.asString().c_str(), newpath.asString().c_str() ) == -1 )
+      {
+	switch ( errno )
+	{
+	  case EPERM: // /proc/sys/fs/protected_hardlink in proc(5)
+	  case EXDEV: // oldpath  and  newpath are not on the same mounted file system
+	    return copy( oldpath, newpath );
+	    break;
+	}
+	return _Log_Result( errno );
+      }
+      return _Log_Result( 0 );
+    }
+  }
+}
+namespace
+{
+  inline Pathname commitDownloadOnlyDir()
+  {
+    static const Pathname _dir( "/var/cache/zypp/packages" );
+    return gSettings.root_dir + _dir;
+  }
+
+  inline std::string makeDirname( std::string name_r )
+  { return str::replace_all( name_r, "/", "_" ); }
+
+  int commitDownloadOnly()
+  {
+    Pathname cacheRoot( commitDownloadOnlyDir() );
+    const ResPool & pool( God->pool() );
+    for_( it, pool.begin(), pool.end() )
+    {
+      const PoolItem & pi( *it );
+      if ( pi.status().isToBeInstalled() && isKind<Package>(pi.resolvable()) )
+      {
+	Package::constPtr pkg = asKind<Package>(pi.resolvable());
+
+	Pathname cachePath( cacheRoot );
+	cachePath /= makeDirname(pkg->source().alias());
+	cachePath /= pkg->location();
+	int res = assert_dir( cachePath.dirname() );
+	if ( res != 0 )
+	{
+	  cerr << format(_("Failed to create cache dir %s")) % cachePath.dirname()
+	       << " [" << res << ":" << ::strerror( res ) << "]"
+	       << endl;
+	  return ZYPPER_EXIT_ERR_ZYPP;
+	}
+
+	if ( ! is_checksum( cachePath, pkg->checksum() ) )
+	{
+	  ManagedFile localfile;
+	  try
+	  {
+	    localfile = source::PackageProvider( pkg ).providePackage();
+	    res = hardlinkCopy( *localfile, cachePath );
+	    if ( res != 0 )
+	    {
+	      cerr << format(_("Failed to copy %s to %s")) % *localfile % cachePath
+	      << " [" << res << ":" << ::strerror( res ) << "]"
+	      << endl;
+	      return ZYPPER_EXIT_ERR_ZYPP;
+	    }
+	  }
+	  catch ( const source::SkipRequestedException & err )
+	  {
+	    ZYPP_CAUGHT( err );
+	    WAR << "Skipping package " << pkg << " in download" << endl;
+	    continue;
+	  }
+	  catch ( const Exception & err )
+	  {
+	    ZYPP_CAUGHT(err);
+	    cerr << _("Unexpected exception.") << endl;
+	    cerr << err.asUserString() << endl;
+	    return ZYPPER_EXIT_ERR_ZYPP;
+	  }
+	}
+	cerr << " -> " <<  cachePath << endl;
+      }
+    }
+    return ZYPPER_EXIT_OK;
+  }
+}
+// --download-only
+///////////////////////////////////////////////////////////////////
 
 /**
  * @return ZYPPER_EXIT_OK - successful commit,
@@ -763,12 +886,21 @@ int solve_and_commit (bool non_interactive) {
     }
   }
 
-
   // returns -1, 0, ZYPPER_EXIT_INF_REBOOT_NEEDED, or ZYPPER_EXIT_INF_RESTART_NEEDED
   int retv = show_summary();
 
   if (retv >= 0) { // there are resolvables to install/uninstall
+    if ( gSettings.downloadOnly )
+    {
+      cerr << "[--download-only] "
+           // TranslatorExplanation: %s is a directory name.
+	   << format(_("Packages will be downloaded to %s")) % commitDownloadOnlyDir() << endl;
+    }
     if (non_interactive || read_bool_answer(_("Continue?"), true)) {
+      if ( gSettings.downloadOnly )
+      {
+	return commitDownloadOnly();
+      }
       if (!confirm_licenses(non_interactive)) return ZYPPER_EXIT_OK;
 
       cerr_v << _("committing") << endl;

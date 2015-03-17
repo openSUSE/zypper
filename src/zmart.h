@@ -56,6 +56,7 @@ struct Settings
   non_interactive(false),
   no_gpg_checks(false),
   license_auto_agree(false),
+  downloadOnly(false),
   root_dir("/")
   {}
 
@@ -70,6 +71,7 @@ struct Settings
   bool non_interactive;
   bool no_gpg_checks;
   bool license_auto_agree;
+  bool downloadOnly;
   std::string root_dir;
 };
 

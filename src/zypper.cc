@@ -238,6 +238,7 @@ int one_command(const string& command, int argc, char **argv)
       // rug compatibility, we have --auto-agree-with-licenses
       {"agree-to-third-party-licenses",  no_argument,  0, 0},
       {"help",       no_argument,       0, 'h'},
+      {"download-only",		no_argument,	0, 'd'},
       {0, 0, 0, 0}
     };
     specific_options = install_options;
@@ -249,6 +250,8 @@ int one_command(const string& command, int argc, char **argv)
       "\t--auto-agree-with-licenses,-l\tAutomatically say 'yes' to third party license confirmation prompt.\n"
       "\t\t\t\t\tSee man zypper for more details.\n"
       );
+    // TranslatorExplanation: Command option help; leave leading tabs (\t) in place
+    specific_help += _("\t--download-only,-d\t\tOnly download the packages, do not install.\n");
   }
   else if (command == "remove" || command == "rm") {
     static struct option remove_options[] = {
@@ -371,6 +374,7 @@ int one_command(const string& command, int argc, char **argv)
       // rug compatibility, we have --auto-agree-with-licenses
       {"agree-to-third-party-licenses",  no_argument,  0, 0},
       {"help", no_argument, 0, 'h'},
+      {"download-only",		no_argument,	0, 'd'},
       {0, 0, 0, 0}
     };
     specific_options = update_options;
@@ -382,6 +386,8 @@ int one_command(const string& command, int argc, char **argv)
       "\t--auto-agree-with-licenses,-l\tAutomatically say 'yes' to third party license confirmation prompt.\n"
       "\t\t\t\t\tSee man zypper for more details.\n"
       );
+    // TranslatorExplanation: Command option help; leave leading tabs (\t) in place
+    specific_help += _("\t--download-only,-d\t\tOnly download the packages, do not install.\n");
   }
   else if (command == "search" || command == "se") {
     static struct option search_options[] = {
@@ -722,6 +728,9 @@ int one_command(const string& command, int argc, char **argv)
       gData.packages_to_install = arguments;
     }
 
+    if (copts.count("download-only"))
+      gSettings.downloadOnly = true;
+
     if (copts.count("auto-agree-with-licenses")
 	|| copts.count("agree-to-third-party-licenses"))
       gSettings.license_auto_agree = true;
@@ -907,6 +916,9 @@ int one_command(const string& command, int argc, char **argv)
 	;
       return !ghelp;
     }
+
+    if (copts.count("download-only"))
+      gSettings.downloadOnly = true;
 
     if (copts.count("auto-agree-with-licenses") ||
         copts.count("agree-to-third-party-licenses"))
