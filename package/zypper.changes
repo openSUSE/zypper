@@ -1,4 +1,12 @@
 -------------------------------------------------------------------
+Thu Mar 19 16:45:39 CET 2015 - ma@suse.de
+
+- suppress MediaChangeReport while testing multiple baseurls (bnc#899510)
+- allow repo:package to reinstall from a different repo (bnc#725867)
+- fix wrong description of --force-resolution defaults
+- version 1.11.24
+
+-------------------------------------------------------------------
 Thu Mar 12 01:13:36 CET 2015 - ma@suse.de
 
 - Update zypper-po.tar.bz2
