@@ -32,11 +32,28 @@ using std::endl;
 namespace zypp
 { /////////////////////////////////////////////////////////////////
 
+  ///////////////////////////////////////////////////////////////////
+  namespace media
+  {
+    ScopedDisableMediaChangeReport::ScopedDisableMediaChangeReport( bool condition_r )
+    {
+      static weak_ptr<callback::TempConnect<media::MediaChangeReport> > globalguard;
+      if ( condition_r && ! (_guard = globalguard.lock()) )
+      {
+	// aquire a new one....
+	_guard.reset( new callback::TempConnect<media::MediaChangeReport>() );
+	globalguard = _guard;
+      }
+    }
+  } // namespace media
+  ///////////////////////////////////////////////////////////////////
+
   callback::SendReport<JobReport> & JobReport::instance()
   {
     static callback::SendReport<JobReport> _report;
     return _report;
   }
+
 
   ///////////////////////////////////////////////////////////////////
   namespace zypp_detail

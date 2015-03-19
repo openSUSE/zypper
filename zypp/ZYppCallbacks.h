@@ -337,6 +337,19 @@ namespace zypp
       ) { return ABORT; }
     };
 
+    ///////////////////////////////////////////////////////////////////
+    /// \class ScopedDisableMediaChangeReport
+    /// \brief Temporarily disable MediaChangeReport
+    /// Sometimes helpful to suppress interactive messages connected to
+    /// MediaChangeReport while fallback URLs are avaialble.
+    struct ScopedDisableMediaChangeReport
+    {
+      /** Disbale MediaChangeReport if \a condition_r is \c true.*/
+      ScopedDisableMediaChangeReport( bool condition_r = true );
+    private:
+      shared_ptr<callback::TempConnect<media::MediaChangeReport> > _guard;
+    };
+
     // progress for downloading a file
     struct DownloadProgressReport : public callback::ReportBase
     {
