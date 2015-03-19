@@ -1012,6 +1012,9 @@ namespace zypp
 					"Valid metadata not found at specified URLs",
 					info.baseUrlsSize() ) );
 
+    // Suppress (interactive) media::MediaChangeReport if we in have multiple basurls (>1)
+    media::ScopedDisableMediaChangeReport guard( info.baseUrlsSize() > 1 );
+
     // try urls one by one
     for ( RepoInfo::urls_const_iterator it = info.baseUrlsBegin(); it != info.baseUrlsEnd(); ++it )
     {
