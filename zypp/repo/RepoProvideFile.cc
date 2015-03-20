@@ -291,6 +291,9 @@ namespace zypp
         MIL << "Added cache path " << destinationDir << endl;
       }
 
+      // Suppress (interactive) media::MediaChangeReport if we in have multiple basurls (>1)
+      media::ScopedDisableMediaChangeReport guard( repo_r.baseUrlsSize() > 1 );
+
       for ( RepoInfo::urls_const_iterator it = repo_r.baseUrlsBegin();
             it != repo_r.baseUrlsEnd();
             /* incremented in the loop */ )
