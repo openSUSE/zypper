@@ -37,6 +37,7 @@ namespace zypp
        * \li repository priority
        * \li best Arch (arch/noarch changes are ok)
        * \li best Edition
+       * \li newer buildtime
        * \li ResObject::constPtr as fallback.
       */
       struct AVOrder : public std::binary_function<PoolItem,PoolItem,bool>
@@ -64,6 +65,11 @@ namespace zypp
           int res = lhs->edition().compare( rhs->edition() );
           if ( res )
             return res > 0;
+
+	  lprio = lhs->buildtime();
+	  rprio = rhs->buildtime();
+	  if ( lprio != rprio )
+            return( lprio > rprio );
 
           lprio = lhs->satSolvable().repository().satInternalSubPriority();
           rprio = rhs->satSolvable().repository().satInternalSubPriority();
