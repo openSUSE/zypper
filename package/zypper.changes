@@ -15,7 +15,6 @@ Thu Mar 12 01:13:36 CET 2015 - ma@suse.de
 Wed Mar 11 11:58:26 CET 2015 - ma@suse.de
 
 - patch: A date limit must ignore newer patch candidates (bnc#919709)
-- Show locked packages in zypper summary (FATE#318326,FATE#318299)
 - modify repo: Notify about volatile changes to service repos (bnc#916254)
 - ps: Change column header from 'Login' to 'User' (bnc#915461)
 - man: add missing patch --date option

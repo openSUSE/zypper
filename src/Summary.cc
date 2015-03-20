@@ -1178,6 +1178,7 @@ void Summary::writeNotUpdated(std::ostream & out)
 
 void Summary::writeLocked(std::ostream & out)
 {
+  return;
   ResPairSet instlocks;	// locked + installed
   ResPairSet avidents;	// avaialble locked
   ResPoolProxy selPool( ResPool::instance().proxy() );
@@ -1189,7 +1190,7 @@ void Summary::writeLocked(std::ostream & out)
        for_( iit, (*it)->installedBegin(), (*it)->installedEnd() )
          instlocks.insert( ResPair( NULL, *iit ) );
       else
-       avidents.insert( ResPair( NULL, (*it)->theObj() ) );
+       ;//avidents.insert( ResPair( NULL, (*it)->theObj() ) );
     }
   }
   if ( ! ( instlocks.empty() && avidents.empty() ) )
