@@ -511,7 +511,7 @@ void SolverRequester::updateTo(
 
 
   // ******* request ********
-
+  bool action = true;
   if (!identical(installed, selected) || _opts.force)
   {
     if (_opts.best_effort)
@@ -551,13 +551,17 @@ void SolverRequester::updateTo(
       setToInstall(selected);
       MIL << *s << " update: forced setting " << selected << " to install" << endl;
     }
+    else
+      action = false;
   }
+  else
+    action = false;
 
 
   // ******* report ********
 
   // the candidate is already installed
-  if (identical(installed, selected))
+  if (identical(installed, selected) || (!action && installed->edition() == selected->edition()))
   {
     if (_opts.force)
       return;
@@ -585,7 +589,7 @@ void SolverRequester::updateTo(
     }
 
     // the highest version is already there
-    if (identical(installed, highest) || highest->edition() < installed->edition())
+    if (identical(installed, highest) || highest->edition() <= installed->edition())
       addFeedback(Feedback::NO_UPD_CANDIDATE, pkg, selected, installed);
   }
   else if (installed->edition() > selected->edition())
@@ -597,6 +601,7 @@ void SolverRequester::updateTo(
     MIL << "Selected is older than the installed."
         " Will not downgrade unless --oldpackage is used" << endl;
   }
+
 
   // there is higher version available than the selected candidate
   // this can happen because of repo priorities, locks, vendor lock, and
