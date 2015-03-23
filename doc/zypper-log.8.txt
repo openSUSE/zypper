@@ -16,7 +16,7 @@ SYNOPSIS
 
 DESCRIPTION
 -----------
-*zypper-log* can read zyppers logfiles. It can also handle rotated logfiles, and will open plain, xz, gz and bz2-compressed files.
+*zypper-log* can read zypper's logfiles. It can also handle rotated logfiles, and will open plain, xz, gz and bz2-compressed files.
 
 By default */var/log/zypper.log* will be read and a list of all *zypper* invocations is shown:
 
