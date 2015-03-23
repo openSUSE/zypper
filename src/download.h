@@ -20,7 +20,7 @@ class Zypper;
       "(/var/cache/zypp/packages), but this can be changed by using the\n"
       "global --pkg-cache-dir option.\n"
       "In XML output a <download-result> node is written for each\n"
-      "package zypper tried to downlad. Upon success the local path is\n"
+      "package zypper tried to download. Upon success the local path is\n"
       "is found in 'download-result/localpath@path'.\n"
       "\n"
       "  Command options:\n"
