@@ -398,7 +398,7 @@ Create solver test case for debugging\&. Use this option, if you think the depen
 .PP
 \fB\-\-no\-recommends\fR
 .RS 4
-By default, zypper installs also packages recommended by the requested ones\&. This option causes the recomended packages to be ignored and only the required ones to be installed\&.
+By default, zypper installs also packages recommended by the requested ones\&. This option causes the recommended packages to be ignored and only the required ones to be installed\&.
 .RE
 .PP
 \fB\-\-replacefiles\fR
@@ -1080,7 +1080,7 @@ Examples:
 .PP
 $ \fBzypper dup \-\-from factory \-\-from packman\fR
 .RS 4
-Upgrade the system to the lates versions provided by the
+Upgrade the system to the latest versions provided by the
 \fIfactory\fR
 and
 \fIpackman\fR
@@ -1252,7 +1252,7 @@ Sort packages by repository, not by name\&.
 .PP
 \fB\-s\fR, \fB\-\-details\fR
 .RS 4
-Show all available versions of mayching packages, each version in each repository on a separate line\&.
+Show all available versions of matching packages, each version in each repository on a separate line\&.
 .RE
 .PP
 \fB\-v\fR, \fB\-\-verbose\fR
@@ -1693,7 +1693,7 @@ T}
 T{
 
 T}:T{
-\fBcifs://usenr:passw@servername/share/path/on/the/share\fR\fI?mountoptions=ro,noguest\fR
+\fBcifs://usern:passw@servername/share/path/on/the/share\fR\fI?mountoptions=ro,noguest\fR
 T}
 T{
 
@@ -1841,7 +1841,7 @@ Ignore query string in the URI
 .RS 4
 List all defined repositories or show detailed information about those specified as arguments
 
-The following data can be printed for each repository found on the sytem:
+The following data can be printed for each repository found on the system:
 \fI#\fR
 (repository number),
 \fIAlias\fR
@@ -2467,7 +2467,7 @@ option\&.
 
 In XML output a
 \fB<download\-result>\fR
-node is written for each package zypper tried to downlad\&. Upon success the local path is is found in
+node is written for each package zypper tried to download\&. Upon success the local path is is found in
 \fBdownload\-result/localpath@path\fR\&.
 .PP
 \fB\-\-all\-matches\fR
@@ -2735,9 +2735,9 @@ Use an additional repository for this operation\&. The repository aliased tmp# a
 .PP
 \fB\-\-plus\-content\fR \fItag\fR
 .RS 4
-Additionaly use disabled repositories providing a specific keyword\&. Disabled repositories are refreshed and those providing the specified
+Additionally use disabled repositories providing a specific keyword\&. Disabled repositories are refreshed and those providing the specified
 \fItag\fR
-keyword are temporarily endabled\&. To enable for example repositories which may provide additional
+keyword are temporarily enabled\&. To enable for example repositories which may provide additional
 \fB\-debuginfo\fR
 or
 \fB\-debugsource\fR
@@ -2953,7 +2953,7 @@ There are several exit codes defined for zypper for use e\&.g\&. within scripts\
 .PP
 \fB0\fR \- \fBZYPPER_EXIT_OK\fR
 .RS 4
-Successfull run of zypper with no special info\&.
+Successful run of zypper with no special info\&.
 .RE
 .PP
 \fB1\fR \- \fBZYPPER_EXIT_ERR_BUG\fR
@@ -3005,7 +3005,7 @@ Returned by the patch\-check command if there are security patches available for
 .PP
 \fB102\fR \- \fBZYPPER_EXIT_INF_REBOOT_NEEDED\fR
 .RS 4
-Returned after a successfull installation of a patch which requires reboot of computer\&.
+Returned after a successful installation of a patch which requires reboot of computer\&.
 .RE
 .PP
 \fB103\fR \- \fBZYPPER_EXIT_INF_RESTART_NEEDED\fR

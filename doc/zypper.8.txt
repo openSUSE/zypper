@@ -223,7 +223,7 @@ Package Management Commands
 		Create solver test case for debugging. Use this option, if you think the dependencies were not solved all right and attach the resulting /var/log/zypper.solverTestCase directory to your bug report. To use this option, simply add it to the problematic install or remove command.
 
 	*--no-recommends*::
-		By default, zypper installs also packages recommended by the requested ones. This option causes the recomended packages to be ignored and only the required ones to be installed.
+		By default, zypper installs also packages recommended by the requested ones. This option causes the recommended packages to be ignored and only the required ones to be installed.
 
 	*--replacefiles*::
 		Install the packages even if they replace files from other, already installed, packages. Default is to treat file conflicts as an error. *--download-as-needed* disables the file conflict check because access to all packages file lists is needed in advance in order to perform the check.
@@ -603,7 +603,7 @@ Update Management Commands
 	Examples: :: {nop}
 
 		$ *zypper dup --from factory --from packman*;;
-		Upgrade the system to the lates versions provided by the 'factory' and 'packman' repositories.
+		Upgrade the system to the latest versions provided by the 'factory' and 'packman' repositories.
 --
 
 Query Commands
@@ -686,7 +686,7 @@ Query Commands
 		Sort packages by repository, not by name.
 
 	*-s*, *--details*::
-		Show all available versions of mayching packages, each version in each repository on a separate line.
+		Show all available versions of matching packages, each version in each repository on a separate line.
 
 	*-v*, *--verbose*::
 		Like *--details* with additional information where the search has matched (useful when searching for dependencies, e.g. *--provides*).
@@ -873,7 +873,7 @@ Supported URI formats:
 		Optional 'workgroup' or 'domain' parameter set the name of the workgroup. As alternative to passing 'username:password' in the URI authority the parameters 'user' and 'pass' can be used.
 [horizontal]
 		;; *smb://servername/share/path/on/the/share*
-		;; *cifs://usenr:passw@servername/share/path/on/the/share*'?mountoptions=ro,noguest'
+		;; *cifs://usern:passw@servername/share/path/on/the/share*'?mountoptions=ro,noguest'
 		;; *cifs://usern:passw@servername/share/path/on/the/share*'?workgroup=mygroup'
 		;; *cifs://servername/share/path/on/the/share*'?user=usern&pass=passw'
 
@@ -944,7 +944,7 @@ Supported URI formats:
 *repos* (*lr*) ['options'] ['repo']...::
 	List all defined repositories or show detailed information about those specified as arguments
 	+
-	The following data can be printed for each repository found on the sytem: '#' (repository number), 'Alias' (unique identifier), 'Name', 'Enabled' (whether the repository is enabled), 'Refresh' (whether auto-refresh is enabled for the repository), 'Priority', 'Type' (repository meta-data type: rpm-md, yast2, plaindir). Which of the data is shown is determined by command line options listed below and the main.repoListColumns setting from zypper.conf. By default, #, Alias, Name, Enabled, and Refresh is shown.
+	The following data can be printed for each repository found on the system: '#' (repository number), 'Alias' (unique identifier), 'Name', 'Enabled' (whether the repository is enabled), 'Refresh' (whether auto-refresh is enabled for the repository), 'Priority', 'Type' (repository meta-data type: rpm-md, yast2, plaindir). Which of the data is shown is determined by command line options listed below and the main.repoListColumns setting from zypper.conf. By default, #, Alias, Name, Enabled, and Refresh is shown.
 	+
 	Repository number is a unique identifier of the repository in current set of repositories. If you add, remove or change a repository, the numbers may change. Keep that in mind when using the numbers with the repository handling commands. On the other hand, using the alias instead of the number is always safe.
 	+
@@ -1310,7 +1310,7 @@ Other Commands
 	+
 	Per default packages are downloaded to the libzypp package cache (*/var/cache/zypp/packages*; for non-root users *$XDG_CACHE_HOME/zypp/packages*), but this can be changed by using the global *--pkg-cache-dir* option.
 	+
-	In XML output a *<download-result>* node is written for each package zypper tried to downlad. Upon success the local path is is found in *download-result/localpath@path*.
+	In XML output a *<download-result>* node is written for each package zypper tried to download. Upon success the local path is is found in *download-result/localpath@path*.
 +
 --
 	*--all-matches*::
@@ -1427,7 +1427,7 @@ Repository Options: :: {nop}
 	Use an additional repository for this operation. The repository aliased tmp# and named by the specified URI will be added for this operation and removed at the end. You can specify this option multiple times.
 
 *--plus-content* 'tag'::
-	Additionaly use disabled repositories providing a specific keyword. Disabled repositories are refreshed and those providing the specified 'tag' keyword are temporarily endabled. To enable for example repositories which may provide additional *-debuginfo* or *-debugsource* packages use *--plus-content debug*. You can specify this option multiple times.
+	Additionally use disabled repositories providing a specific keyword. Disabled repositories are refreshed and those providing the specified 'tag' keyword are temporarily enabled. To enable for example repositories which may provide additional *-debuginfo* or *-debugsource* packages use *--plus-content debug*. You can specify this option multiple times.
 
 *--disable-repositories*::
 	Do not read metadata from repositories. This option will prevent loading of packages from repositories, thus making zypper work only with the installed packages (if *--disable-system-resolvables* was not specified).
@@ -1519,7 +1519,7 @@ EXIT CODES
 There are several exit codes defined for zypper for use e.g. within scripts. These codes are defined in header file src/zypper-main.h found in zypper source package. Codes from interval (1-5) denote an error, numbers (100-105) provide a specific information, 0 represents a normal successful run. Following is a list of these codes with descriptions.
 
 *0* - *ZYPPER_EXIT_OK*::
-	Successfull run of zypper with no special info.
+	Successful run of zypper with no special info.
 *1* - *ZYPPER_EXIT_ERR_BUG*::
 	Unexpected situation occurred, probably caused by a bug.
 *2* - *ZYPPER_EXIT_ERR_SYNTAX*::
@@ -1539,7 +1539,7 @@ There are several exit codes defined for zypper for use e.g. within scripts. The
 *101* - *ZYPPER_EXIT_INF_SEC_UPDATE_NEEDED*::
 	Returned by the patch-check command if there are security patches available for installation.
 *102* - *ZYPPER_EXIT_INF_REBOOT_NEEDED*::
-	Returned after a successfull installation of a patch which requires reboot of computer.
+	Returned after a successful installation of a patch which requires reboot of computer.
 *103* - *ZYPPER_EXIT_INF_RESTART_NEEDED*::
 	Returned after a successful installation of a patch which requires restart of the package manager itself. This means that one of patches to be installed affects the package manager itself and the command used (e.g. *zypper update*) needs to be executed once again to install any remaining patches.
 *104* - *ZYPPER_EXIT_INF_CAP_NOT_FOUND*::
