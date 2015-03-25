@@ -88,7 +88,7 @@ Supplements:    zypper
 BuildArch:      noarch
 
 %description aptitude
-provides aptitude compatibility using zypper
+provides compatibility to Debian's aptitude command using zypper
 
 Authors:
 --------

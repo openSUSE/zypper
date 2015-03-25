@@ -1,6 +1,6 @@
 #!/usr/bin/perl -w
-# version 0.8
-# by Bernhard M. Wiedemann <bernhard+aptitude4zypp lsmod de>
+# version 0.9
+# (C) 2011-2015 by Bernhard M. Wiedemann <bernhard+aptitude4zypp lsmod de>
 # License: GPL v2 or later
 
 use strict;
@@ -44,6 +44,10 @@ elsif($action eq "source") {$action="source-install"}
 elsif($action=~m/build-dep(?:ends)?/) {$action="source-install"; unshift(@zopt2, "--build-deps-only");}
 elsif($action eq "changelog") {exec qw"rpm -q --changelog", @ARGV}
 elsif($action=~m/markauto|unmarkauto|forbid-version|autoclean|autoremove|check|why|why-not/) { print "aptitude '$action' unavailabe in zypper\n"; exit 0 }
+
+foreach my $map (</etc/zypp/apt-packagemap.d/*.pm>) {
+	do $map;
+}
 
 #system "echo", "zypper", @zopt, $action, @zopt2, @ARGV;
 exec "zypper", @zopt, $action, @zopt2, @ARGV;
