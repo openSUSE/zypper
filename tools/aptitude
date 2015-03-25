@@ -5,8 +5,11 @@
 
 use strict;
 my @options=();
+my $option;
 foreach(@ARGV) {
-	last unless (m/^-/);
+	last unless ($option || m/^-/);
+	if($option) {$option=0} # skip
+	if($_ eq "--option") {$option=1}
 	push(@options, $_);
 }
 
