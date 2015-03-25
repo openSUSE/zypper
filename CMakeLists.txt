@@ -94,3 +94,7 @@ INSTALL(
   PROGRAMS tools/aptitude
   DESTINATION ${INSTALL_PREFIX}/bin
 )
+INSTALL(
+  FILES tools/apt-packagemap.d/10-packagemap.pm tools/apt-packagemap.d/50-libperl.pm tools/apt-packagemap.d/50-libruby.pm tools/apt-packagemap.d/90-devel.pm
+  DESTINATION ${SYSCONFDIR}/zypp/apt-packagemap.d
+)
