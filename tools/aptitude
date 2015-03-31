@@ -1,12 +1,15 @@
 #!/usr/bin/perl -w
-# version 0.8
-# by Bernhard M. Wiedemann <bernhard+aptitude4zypp lsmod de>
+# version 0.9
+# (C) 2011-2015 by Bernhard M. Wiedemann <bernhard+aptitude4zypp lsmod de>
 # License: GPL v2 or later
 
 use strict;
 my @options=();
+my $option;
 foreach(@ARGV) {
-	last unless (m/^-/);
+	last unless ($option || m/^-/);
+	if($option) {$option=0} # skip
+	if($_ eq "--option") {$option=1}
 	push(@options, $_);
 }
 
@@ -27,6 +30,7 @@ foreach(@options) {
 my $action=shift;
 if(!defined($action)) {exec "/sbin/yast2", "-i"}
 
+# install, remove are the same
 if($action eq "show") {$action="info"}
 elsif($action eq "purge") {$action="remove"}
 elsif($action eq "hold") {$action="addlock"}
@@ -39,7 +43,11 @@ elsif($action eq "reinstall") {$action="install"; unshift(@zopt2, "--force");}
 elsif($action eq "source") {$action="source-install"}
 elsif($action=~m/build-dep(?:ends)?/) {$action="source-install"; unshift(@zopt2, "--build-deps-only");}
 elsif($action eq "changelog") {exec qw"rpm -q --changelog", @ARGV}
-elsif($action=~m/markauto|unmarkauto|forbid-version|autoclean|why|why-not/) { die "$action unavailabe?"}
+elsif($action=~m/markauto|unmarkauto|forbid-version|autoclean|autoremove|check|why|why-not/) { print "aptitude '$action' unavailabe in zypper\n"; exit 0 }
+
+foreach my $map (</etc/zypp/apt-packagemap.d/*.pm>) {
+	do $map;
+}
 
 #system "echo", "zypper", @zopt, $action, @zopt2, @ARGV;
 exec "zypper", @zopt, $action, @zopt2, @ARGV;

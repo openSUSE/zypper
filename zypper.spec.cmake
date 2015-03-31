@@ -88,7 +88,7 @@ Supplements:    zypper
 BuildArch:      noarch
 
 %description aptitude
-provides aptitude compatibility using zypper
+provides compatibility to Debian's aptitude command using zypper
 
 Authors:
 --------
@@ -174,5 +174,7 @@ rm -rf "$RPM_BUILD_ROOT"
 %files aptitude
 %defattr(-,root,root)
 %{_bindir}/aptitude
+%dir %{_sysconfdir}/zypp/apt-packagemap.d/
+%config(noreplace) %{_sysconfdir}/zypp/apt-packagemap.d/*
 
 %changelog
