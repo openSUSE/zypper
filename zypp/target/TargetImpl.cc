@@ -1059,7 +1059,7 @@ namespace zypp
 
         cmd << "  > '" << tmpsolv.path() << "'";
 
-        MIL << "Executing: " << cmd << endl;
+        MIL << "Executing: " << cmd.str() << endl;
         ExternalProgram prog( cmd.str(), ExternalProgram::Stderr_To_Stdout );
 
         cmd << endl;
