@@ -1,4 +1,11 @@
 -------------------------------------------------------------------
+Thu Apr  2 18:26:18 CEST 2015 - ma@suse.de
+
+- Fix prompt returning undefined default value after wrong input
+  (bnc#925696)
+- version 1.6.323
+
+-------------------------------------------------------------------
 Fri Feb 27 12:43:06 CET 2015 - ma@suse.de
 
 - patch: A date limit must ignore newer patch candidates (bnc#919709)
