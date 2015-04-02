@@ -1,4 +1,11 @@
 -------------------------------------------------------------------
+Thu Apr  2 18:26:53 CEST 2015 - ma@suse.de
+
+- Fix prompt returning undefined default value after wrong input
+  (bnc#925696)
+- version 1.9.20
+
+-------------------------------------------------------------------
 Thu Feb 12 01:14:44 CET 2015 - ma@suse.de
 
 - Update zypper-po.tar.bz2
