@@ -1,4 +1,16 @@
 -------------------------------------------------------------------
+Thu Apr  2 19:15:08 CEST 2015 - ma@suse.de
+
+- Fix prompt returning undefined default value after wrong input (bnc#925696)
+- aptitude: add some package name mappings
+- aptitude: add debian package name mapping mechanism
+- aptitude: handle more apt-get operations
+- aptitude: ignore --option params
+- man: fix typo (bnc#923800)
+- Bump minor version for Factory, 1.11 is continued on SuSE-SLE-12-Branch
+- version 1.12.0
+
+-------------------------------------------------------------------
 Thu Apr  2 01:13:18 CEST 2015 - ma@suse.de
 
 - Update zypper-po.tar.bz2
