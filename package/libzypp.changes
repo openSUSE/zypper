@@ -1,4 +1,11 @@
 -------------------------------------------------------------------
+Thu Apr  2 19:06:56 CEST 2015 - ma@suse.de
+
+- POODLE: libzypp should only talk TLS (bnc#903405)
+- Bump major version for Factory, 14.x is continued on SuSE-SLE-12-Branch
+- version 15.0.0 (0)
+
+-------------------------------------------------------------------
 Thu Apr  2 16:01:43 CEST 2015 - ma@suse.de
 
 - Fixes to build with gcc5
