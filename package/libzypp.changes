@@ -1,4 +1,12 @@
 -------------------------------------------------------------------
+Thu Apr  2 16:01:43 CEST 2015 - ma@suse.de
+
+- Fixes to build with gcc5
+- RepoProvideFile: Suppress MediaChangeReport while testing
+  multiple baseurls (bnc#899510)
+- version 14.38.1 (30)
+
+-------------------------------------------------------------------
 Thu Mar 19 16:44:39 CET 2015 - ma@suse.de
 
 - Suppress MediaChangeReport while testing multiple baseurls (bnc#899510)
