@@ -302,7 +302,7 @@ unsigned int get_prompt_reply(Zypper & zypper,
   // istream & stm = cin;
 
   string reply;
-  int reply_int = poptions.defaultOpt();
+  int reply_int = -1;
   bool stmgood;
   while ((stmgood = stm.good()))
   {
@@ -310,7 +310,10 @@ unsigned int get_prompt_reply(Zypper & zypper,
 
     // empty reply is a good reply (on enter)
     if (reply.empty())
+    {
+      reply_int = poptions.defaultOpt();
       break;
+    }
 
     if (reply == "?")
     {
