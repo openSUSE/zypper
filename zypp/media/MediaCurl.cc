@@ -643,6 +643,8 @@ void MediaCurl::setupEasy()
 #endif
     SET_OPTION(CURLOPT_SSL_VERIFYPEER, _settings.verifyPeerEnabled() ? 1L : 0L);
     SET_OPTION(CURLOPT_SSL_VERIFYHOST, _settings.verifyHostEnabled() ? 2L : 0L);
+    // bnc#903405 - POODLE: libzypp should only talk TLS
+    SET_OPTION(CURLOPT_SSLVERSION, CURL_SSLVERSION_TLSv1);
   }
 
   SET_OPTION(CURLOPT_USERAGENT, _settings.userAgentString().c_str() );
