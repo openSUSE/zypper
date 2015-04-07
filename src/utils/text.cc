@@ -170,6 +170,11 @@ void mbs_write_wrapped(ostream & out, const string & text,
     }
 
     bytes_read = mbrtowc (&wc, s, s_bytes, &shift_state);
+    if (bytes_read >= (size_t) -2) // incomplete (-2) or invalid (-1) sequence
+    {
+      out << endl << "WCHAR ERROR" << endl;
+      return;
+    }
     if (bytes_read > 0)
     {
       col += wcwidth_without_ctrlseq(wc, in_ctrlseq);
@@ -225,16 +230,11 @@ void mbs_write_wrapped(ostream & out, const string & text,
         s += bytes_read;
     }
     // we're at the end of the string
-    else if (bytes_read == 0)
+    else
     {
       // print the rest of the text
       for(; *linep; ++linep)
         out << *linep;
-    }
-    else
-    {
-      out << endl << "WCHAR ERROR" << endl;
-      return;
     }
   }
   while(bytes_read > 0);
