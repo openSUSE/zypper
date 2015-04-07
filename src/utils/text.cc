@@ -13,6 +13,21 @@
 
 using namespace std;
 
+namespace {
+  inline int wcwidth_without_ctrlseq(wchar_t wc, bool &in_ctrlseq)
+  {
+    // ignore the length of terminal control sequences in order
+    // to compute the length of colored text correctly
+    if (!in_ctrlseq && ::wcsncmp(&wc, L"\033", 1) == 0)
+      in_ctrlseq = true;
+    else if (in_ctrlseq && ::wcsncmp(&wc, L"m", 1) == 0)
+      in_ctrlseq = false;
+    else if (!in_ctrlseq)
+      return ::wcwidth(wc);
+    return 0;
+  }
+}
+
 // A non-ASCII string has 3 different lengths:
 // - bytes
 // - characters (non-ASCII ones have multiple bytes in UTF-8)
@@ -42,14 +57,7 @@ int mbs_width_e (const string & str)
     if (c_bytes >= (size_t) -2) // incomplete (-2) or invalid (-1) sequence
       return -1;
 
-    // ignore the length of terminal control sequences in order
-    // to compute the length of colored text correctly
-    if (!in_ctrlseq && ::wcsncmp(&wc, L"\033", 1) == 0)
-      in_ctrlseq = true;
-    else if (in_ctrlseq && ::wcsncmp(&wc, L"m", 1) == 0)
-      in_ctrlseq = false;
-    else if (!in_ctrlseq)
-      s_cols += ::wcwidth(wc);
+    s_cols += wcwidth_without_ctrlseq(wc, in_ctrlseq);
 
     s_bytes -= c_bytes;
     ptr += c_bytes;
@@ -97,14 +105,7 @@ std::string mbs_substr_by_width(
       return str.substr(pos, n); // default to normal string substr
 
     s_cols_prev = s_cols;
-    // ignore the length of terminal control sequences in order
-    // to compute the length of the string correctly
-    if (!in_ctrlseq && ::wcsncmp(&wc, L"\033", 1) == 0)
-      in_ctrlseq = true;
-    else if (in_ctrlseq && ::wcsncmp(&wc, L"m", 1) == 0)
-      in_ctrlseq = false;
-    else if (!in_ctrlseq)
-      s_cols += ::wcwidth(wc);
+    s_cols += wcwidth_without_ctrlseq(wc, in_ctrlseq);
 
     // mark the beginning
     if (sptr == NULL && (unsigned) s_cols >= pos)
@@ -169,16 +170,14 @@ void mbs_write_wrapped(ostream & out, const string & text,
     }
 
     bytes_read = mbrtowc (&wc, s, s_bytes, &shift_state);
+    if (bytes_read >= (size_t) -2) // incomplete (-2) or invalid (-1) sequence
+    {
+      out << endl << "WCHAR ERROR" << endl;
+      return;
+    }
     if (bytes_read > 0)
     {
-      // ignore the length of terminal control sequences in order
-      // to wrap colored text correctly
-      if (!in_ctrlseq && ::wcsncmp(&wc, L"\033", 1) == 0)
-        in_ctrlseq = true;
-      else if (in_ctrlseq && ::wcsncmp(&wc, L"m", 1) == 0)
-        in_ctrlseq = false;
-      else if (!in_ctrlseq)
-        col += ::wcwidth(wc);
+      col += wcwidth_without_ctrlseq(wc, in_ctrlseq);
 
       if (::iswspace(wc))
         in_word = false;
@@ -231,16 +230,11 @@ void mbs_write_wrapped(ostream & out, const string & text,
         s += bytes_read;
     }
     // we're at the end of the string
-    else if (bytes_read == 0)
+    else
     {
       // print the rest of the text
       for(; *linep; ++linep)
         out << *linep;
-    }
-    else
-    {
-      out << endl << "WCHAR ERROR" << endl;
-      return;
     }
   }
   while(bytes_read > 0);
