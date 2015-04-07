@@ -210,6 +210,8 @@ namespace ansi
 #else
       static const std::string _reset( "\033[0m" );
 #endif
+      static const std::string _noreset( "" );
+      if(!do_colors()) return _noreset;
       return _reset;
     }
 
