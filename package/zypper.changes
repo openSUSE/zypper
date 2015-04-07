@@ -1,4 +1,10 @@
 -------------------------------------------------------------------
+Tue Apr  7 12:12:51 CEST 2015 - ma@suse.de
+
+- only use ANSI codes on terminals (bnc#925678)
+- version 1.11.26
+
+-------------------------------------------------------------------
 Thu Apr  2 18:25:19 CEST 2015 - ma@suse.de
 
 - Fix prompt returning undefined default value after wrong input 
