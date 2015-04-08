@@ -10,6 +10,7 @@
  *
  * Debuging tools which should not be used in released code.
 */
+#ifndef ZYPP_NDEBUG
 #warning ZYPP_BASE_DEBUG_H included
 #ifndef ZYPP_BASE_DEBUG_H
 #define ZYPP_BASE_DEBUG_H
@@ -170,3 +171,4 @@ namespace zypp
 } // namespace zypp
 ///////////////////////////////////////////////////////////////////
 #endif // ZYPP_BASE_DEBUG_H
+#endif // ZYPP_NDEBUG
