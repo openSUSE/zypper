@@ -289,13 +289,14 @@ int main( int argc, char * argv[] )
     {
       tableOut( str::numstring( it->id() ), it->asString(),
 		str::form( "(%d)%s", it->repository().info().priority(), it->repository().name().c_str() ),
-		it->vendor().asString(),
 		str::numstring( PoolItem(*it)->buildtime() ) );
+      tableOut( "", "",
+		it->vendor().asString() );
       if ( ! it.matchesEmpty() )
       {
 	for_( match, it.matchesBegin(), it.matchesEnd() )
 	{
-	  tableOut( "", "", "", match->inSolvAttr().asString().substr( 9, 3 )+": " +match->asString() );
+	  tableOut( "", "", match->inSolvAttr().asString().substr( 9, 3 )+": " +match->asString() );
 	}
       }
     }
