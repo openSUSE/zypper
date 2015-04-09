@@ -26,6 +26,43 @@ using std::endl;
 namespace zypp
 { /////////////////////////////////////////////////////////////////
 
+#ifndef ZYPP_NDEBUG
+  namespace debug
+  {
+    void osdlog( const std::string & msg_r, unsigned level_r )
+    {
+      // Fg::Black:   30  Bg: 40 Attr::Normal:  22;27
+      // Fg::Red:     31  ...    Attr::Bright:  1
+      // Fg::Green:   32         Attr::Reverse: 7
+      // Fg::Yellow:  33
+      // Fg::Blue:    34
+      // Fg::Magenta: 35
+      // Fg::Cyan:    36
+      // Fg::White:   37
+      // Fg::Default: 39
+      static const char * ansi[] = {
+	"\033[37;40m",		// 0 w
+	"\033[36;40m",		// 1 c
+	"\033[33;1;40m",	// 2 y
+	"\033[32;40m",		// 3 g
+	"\033[31;1;40m",	// 4 r
+	"\033[35;40m",		// 5 m
+      };
+      static const unsigned n = sizeof(ansi)/sizeof(const char *);
+      switch ( level_r )
+      {
+	case 'w': level_r = 0; break;
+	case 'c': level_r = 1; break;
+	case 'y': level_r = 2; break;
+	case 'g': level_r = 3; break;
+	case 'r': level_r = 4; break;
+	case 'm': level_r = 5; break;
+      }
+      std::cerr << ansi[level_r%n] << "OSD[" << msg_r << "]\033[0m" << std::endl;
+    }
+}
+#endif // ZYPP_NDEBUG
+
   ///////////////////////////////////////////////////////////////////
   namespace log
   { /////////////////////////////////////////////////////////////////

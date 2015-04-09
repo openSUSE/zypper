@@ -11,9 +11,26 @@
 */
 #ifndef ZYPP_BASE_LOGGER_H
 #define ZYPP_BASE_LOGGER_H
-
-#include <iosfwd>
 #include <cstring>
+#include <iosfwd>
+#include <string>
+
+///////////////////////////////////////////////////////////////////
+#ifdef ZYPP_NDEBUG
+#define OSDLOG( MSG )
+#define OSMLOG( L, MSG )
+#else
+namespace zypp
+{
+  namespace debug
+  {
+    void osdlog( const std::string & msg_r, unsigned level_r );	// LogControl.cc
+  }
+}
+#define OSDLOG( MSG )    ::zypp::debug::osdlog( MSG, 0 )
+#define OSMLOG( L, MSG ) ::zypp::debug::osdlog( MSG, L )
+#endif // ZYPP_NDEBUG
+///////////////////////////////////////////////////////////////////
 
 /** \defgroup ZYPP_BASE_LOGGER_MACROS ZYPP_BASE_LOGGER_MACROS
  *  Convenience macros for logging.
