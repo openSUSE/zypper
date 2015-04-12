@@ -98,7 +98,7 @@ Authors:
 %setup -q
 
 %build
-mkdir build
+mkdir -p build
 cd build
 
 # Same codebase, but SLES may use it's own translation set.
