@@ -400,7 +400,7 @@ namespace zypp
 	}
       }
       // Here we go...
-      _instance = new ZYpp( ZYpp::Impl_Ptr(new ZYpp::Impl) );
+      _instance.reset( new ZYpp( ZYpp::Impl_Ptr(new ZYpp::Impl) ) );
       if ( _instance )
         _haveZYpp = true;
     }

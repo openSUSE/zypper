@@ -14,7 +14,6 @@
 
 #include <iosfwd>
 
-#include "zypp/base/ReferenceCounted.h"
 #include "zypp/base/NonCopyable.h"
 #include "zypp/base/PtrTypes.h"
 #include "zypp/APIConfig.h"
@@ -52,12 +51,14 @@ namespace zypp
    * \todo define Exceptions
    * ZYpp API main interface
    */
-  class ZYpp : public base::ReferenceCounted, private base::NonCopyable
+  class ZYpp : private base::NonCopyable
   {
-  public:
+    friend std::ostream & operator<<( std::ostream & str, const ZYpp & obj );
 
-    typedef intrusive_ptr<ZYpp>       Ptr;
-    typedef intrusive_ptr<const ZYpp> constPtr;
+  public:
+    // can't get swig working if shared_ptr is without namespace here
+    typedef ::boost::shared_ptr<ZYpp>       Ptr;
+    typedef ::boost::shared_ptr<const ZYpp> constPtr;
 
   public:
 
@@ -139,21 +140,18 @@ namespace zypp
     /** set the home, if you need to change it */
     void setHomePath( const Pathname & path );
 
-  protected:
-    /** Dtor */
-    virtual ~ZYpp();
-    /** Stream output */
-    virtual std::ostream & dumpOn( std::ostream & str ) const;
   private:
     /** Factory */
     friend class ZYppFactory;
-
-    /** */
     typedef zypp_detail::ZYppImpl Impl;
     typedef shared_ptr<Impl>      Impl_Ptr;
     /** Factory ctor */
-    explicit
-    ZYpp( const Impl_Ptr & impl_r );
+    explicit ZYpp( const Impl_Ptr & impl_r );
+  private:
+    /** Deleted via shared_ptr */
+    friend void ::boost::checked_delete<ZYpp>(ZYpp*);	// template<class T> inline void checked_delete(T * x)
+    /** Dtor */
+    ~ZYpp();
   private:
     /** Pointer to implementation */
     RW_pointer<Impl> _pimpl;

@@ -23,32 +23,15 @@ using std::endl;
 namespace zypp
 { /////////////////////////////////////////////////////////////////
 
-  ///////////////////////////////////////////////////////////////////
-  //
-  //	METHOD NAME : ZYpp::ZYpp
-  //	METHOD TYPE : Ctor
-  //
   ZYpp::ZYpp( const Impl_Ptr & impl_r )
   : _pimpl( impl_r )
   {}
 
-  ///////////////////////////////////////////////////////////////////
-  //
-  //	METHOD NAME : ZYpp::~ZYpp
-  //	METHOD TYPE : Dtor
-  //
   ZYpp::~ZYpp()
   {}
 
-  ///////////////////////////////////////////////////////////////////
-  //
-  //	METHOD NAME : ZYpp::dumpOn
-  //	METHOD TYPE : std::ostream &
-  //
-  std::ostream & ZYpp::dumpOn( std::ostream & str ) const
-  {
-    return str << *_pimpl;
-  }
+  std::ostream & operator<<( std::ostream & str, const ZYpp & obj )
+  { return str << *obj._pimpl; }
 
   ///////////////////////////////////////////////////////////////////
   //
