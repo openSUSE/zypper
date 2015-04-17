@@ -37,7 +37,8 @@ struct DownloadOptions : public Options
   static const Pathname _defaultDirectory;
 
   DownloadOptions()
-    : _dryrun( false )
+    : Options( ZypperCommand::DOWNLOAD)
+    , _dryrun( false )
     , _allmatches( false )
   {}
 

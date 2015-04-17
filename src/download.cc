@@ -35,20 +35,16 @@ namespace
   /// \class DownloadImpl
   /// \brief Implementation of download commands.
   ///////////////////////////////////////////////////////////////////
-  class DownloadImpl
+  class DownloadImpl : public CommandBase<DownloadImpl,DownloadOptions>
   {
+    typedef CommandBase<DownloadImpl,DownloadOptions> CommandBase;
   public:
     DownloadImpl( Zypper & zypper_r )
-    : _zypper( zypper_r )
-    , _options( _zypper.commandOptionsAs<DownloadOptions>() )
+    : CommandBase( zypper_r )
     { MIL << "Download " << _options << endl; }
 
   public:
     void download();
-
-  private:
-    Zypper & _zypper;				//< my Zypper
-    shared_ptr<DownloadOptions> _options;	//< my Options
   };
   ///////////////////////////////////////////////////////////////////
 
@@ -216,13 +212,6 @@ namespace
 	  break;	// first==best version only.
       }
     }
-
-    // finished
-    cout << endl;
-    if ( _zypper.exitCode() != ZYPPER_EXIT_OK )
-      _zypper.out().info(_("Finished with error.") );
-    else
-      _zypper.out().info(_("Done.") );
   }
 
 } // namespace
@@ -230,13 +219,5 @@ namespace
 
 int download( Zypper & zypper_r )
 {
-  try
-  {
-    DownloadImpl( zypper_r ).download();
-  }
-  catch ( const Out::Error & error_r )
-  {
-    return error_r.report( zypper_r );
-  }
-  return zypper_r.exitCode();
+  return DownloadImpl( zypper_r ).execute( &DownloadImpl::download );
 }

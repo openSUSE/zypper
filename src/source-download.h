@@ -38,7 +38,8 @@ struct SourceDownloadOptions : public Options
   static const std::string _manifestName;
 
   SourceDownloadOptions()
-    : _directory( _defaultDirectory )
+    : Options( ZypperCommand::SOURCE_DOWNLOAD )
+    , _directory( _defaultDirectory )
 //     , _manifest( true )
     , _delete( true )
     , _dryrun( false )
