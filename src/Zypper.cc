@@ -468,12 +468,15 @@ void Zypper::processGlobalOptions()
     {0, 0, 0, 0}
   };
 
-  // parse global options
-  parsed_opts gopts = parse_options (_argc, _argv, global_options);
-  if (gopts.count("_unknown") || gopts.count("_missing_arg"))
+  // ====== parse global options ======
+  parsed_opts gopts = parse_options( _argc, _argv, global_options );
+  for ( const char * opterr : { "_unknown", "_missing_arg" } )
   {
-    setExitCode(ZYPPER_EXIT_ERR_SYNTAX);
-    return;
+    if ( gopts.count( opterr ) )
+    {
+      setExitCode( ZYPPER_EXIT_ERR_SYNTAX );
+      ZYPP_THROW( ExitRequestException( std::string("global")+opterr ) );
+    }
   }
 
   parsed_opts::const_iterator it;
@@ -562,6 +565,96 @@ void Zypper::processGlobalOptions()
           str::form(_("Use an integer number from %d to %d"), 0, 8));
   }
 
+  //  ======== get command ========
+  // Print and exit global opts: --version and --propmtids
+  // Actually they should be turned into a command ...
+  if ( gopts.count("version") )
+  {
+    out().info( PACKAGE " " VERSION, Out::QUIET );
+    ZYPP_THROW( ExitRequestException("version shown") );
+  }
+  if ( gopts.count("promptids") )
+  {
+    #define PR_ENUML(nam, val) out().info(#nam "=" #val, Out::QUIET);
+    #define PR_ENUM(nam, val) PR_ENUML(nam, val)
+    #include "output/prompt.h"
+    ZYPP_THROW( ExitRequestException("promptids shown") );
+  }
+
+  if ( optind < _argc )
+  {
+    try { setCommand( ZypperCommand( _argv[optind++] ) ); }
+    // exception from command parsing
+    catch ( const Exception & e )
+    {
+      out().error( e.asUserString() );
+      print_unknown_command_hint( *this );
+      setExitCode( ZYPPER_EXIT_ERR_SYNTAX );
+      ZYPP_THROW( ExitRequestException("unknown command") );
+    }
+  }
+
+  // Help is parsed by setting the help flag for a command, which may be empty
+  // $0 -h,--help
+  // $0 command -h,--help
+  // The help command is eaten and transformed to the help option
+  // $0 help
+  // $0 help command
+  if ( gopts.count( "help" ) )
+    setRunningHelp( true );	// help for current command
+  else if ( command() == ZypperCommand::NONE )
+    setRunningHelp( true );	// no command => global help
+  else if ( command() == ZypperCommand::HELP )
+  {
+    setRunningHelp( true );
+    if ( optind < _argc )	// help on help or next command
+    {
+      std::string arg = _argv[optind++];
+      if ( arg != "-h" && arg != "--help" )
+      {
+	try { setCommand( ZypperCommand( arg ) ); }
+	// exception from command parsing
+	catch ( const Exception & e )
+	{
+	  out().error( e.asUserString() );
+	  print_unknown_command_hint( *this );
+	  setExitCode( ZYPPER_EXIT_ERR_SYNTAX );
+	  ZYPP_THROW( ExitRequestException("unknown command") );
+	}
+      }
+    }
+    else
+      setCommand( ZypperCommand::NONE );	// global help
+  }
+
+  if ( runningHelp() )
+  {
+    if ( command() == ZypperCommand::NONE )	// global help
+    {
+      print_main_help( *this );
+      ZYPP_THROW( ExitRequestException("help provided") );
+    }
+    else if ( command() == ZypperCommand::HELP )// help on help
+    {
+      print_unknown_command_hint( *this );
+      print_command_help_hint( *this );
+      ZYPP_THROW( ExitRequestException("help provided") );
+    }
+  }
+  else if ( command() == ZypperCommand::SHELL && optind < _argc )
+  {
+    // shell command args are handled here because
+    // the command is treated differently in main
+    std::string arg = _argv[optind++];
+    if ( arg == "-h" || arg == "--help" )
+      setRunningHelp(true);
+    else
+    {
+      report_too_many_arguments( "shell\n" );
+      setExitCode( ZYPPER_EXIT_ERR_INVALID_ARGS );
+      ZYPP_THROW(ExitRequestException("invalid args"));
+    }
+  }
   // ======== other global options ========
 
   if ( (it = gopts.find( "releasever" )) != gopts.end() )
@@ -602,15 +695,6 @@ void Zypper::processGlobalOptions()
     out().error("************************************************************************");
   }
   ///////////////////////////////////////////////////////////////////
-
-  // Help is parsed by setting the help flag for a command, which may be empty
-  // $0 -h,--help
-  // $0 command -h,--help
-  // The help command is eaten and transformed to the help option
-  // $0 help
-  // $0 help command
-  if (gopts.count("help"))
-    setRunningHelp(true);
 
   if (gopts.count("non-interactive")) {
     _gopts.non_interactive = true;
@@ -744,96 +828,6 @@ void Zypper::processGlobalOptions()
     std::copy (it->second.begin(), it->second.end(),
                std::ostream_iterator<string> (cout, ", "));
     cout << endl;
-  }
-
-  // get command
-  if (optind < _argc)
-  {
-    try { setCommand(ZypperCommand(_argv[optind++])); }
-    // exception from command parsing
-    catch (Exception & e)
-    {
-      out().error(e.asUserString());
-      if (runningHelp())
-      {
-        print_unknown_command_hint(*this);
-        ZYPP_THROW(ExitRequestException("help provided"));
-      }
-    }
-  }
-  else if (!(gopts.count("version") || gopts.count("promptids")))
-    setRunningHelp();
-
-  if (command() == ZypperCommand::HELP)
-  {
-    // -h already present, print help on help and quit
-    if (runningHelp())
-    {
-      print_unknown_command_hint(*this);
-      print_command_help_hint(*this);
-      ZYPP_THROW(ExitRequestException("help provided"));
-    }
-
-    setRunningHelp(true);
-    if (optind < _argc)
-    {
-      // set the next argument as command (to provide help later)
-      string arg = _argv[optind++];
-      try { setCommand(ZypperCommand(arg)); }
-      catch (Exception e)
-      {
-        // unknown command, print hint and exit
-        if (!arg.empty() && arg != "-h" && arg != "--help")
-        {
-          out().info(e.asUserString(), Out::QUIET);
-          print_unknown_command_hint(*this);
-          ZYPP_THROW(ExitRequestException("help provided"));
-        }
-      }
-    }
-    // plain help command, print main help and quit
-    else
-    {
-      print_main_help(*this);
-      ZYPP_THROW(ExitRequestException("help provided"));
-    }
-  }
-  else if (command() == ZypperCommand::NONE)
-  {
-    if (runningHelp())
-      print_main_help(*this);
-    else if (gopts.count("version"))
-    {
-      out().info(PACKAGE " " VERSION, Out::QUIET);
-      ZYPP_THROW(ExitRequestException("version shown"));
-    }
-    else if (gopts.count("promptids"))
-    {
-      #define PR_ENUML(nam, val) out().info(#nam "=" #val, Out::QUIET);
-      #define PR_ENUM(nam, val) PR_ENUML(nam, val)
-      #include "output/prompt.h"
-      ZYPP_THROW(ExitRequestException("promptids shown"));
-    }
-    else
-    {
-      print_unknown_command_hint(*this);
-      setExitCode(ZYPPER_EXIT_ERR_SYNTAX);
-    }
-  }
-  else if (command() == ZypperCommand::SHELL && optind < _argc)
-  {
-    string arg = _argv[optind++];
-    if (!arg.empty())
-    {
-      if (arg == "-h" || arg == "--help")
-        setRunningHelp(true);
-      else
-      {
-        report_too_many_arguments("shell\n");
-        setExitCode(ZYPPER_EXIT_ERR_INVALID_ARGS);
-        ZYPP_THROW(ExitRequestException("help provided"));
-      }
-    }
   }
 
   // additional repositories by URL
@@ -1118,7 +1112,7 @@ void Zypper::processCommandOptions()
           // and doCommand()
           if (!cmd.empty() && cmd != "-h" && cmd != "--help")
           {
-            out().info(ex.asUserString(), Out::QUIET);
+            out().error(ex.asUserString());
             print_unknown_command_hint(*this);
             ZYPP_THROW(ExitRequestException("help provided"));
           }
