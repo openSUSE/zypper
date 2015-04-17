@@ -111,6 +111,8 @@ namespace zypp
             info.setAutorefresh( str::strToTrue( it->second ) );
           else if ( it->first == "mirrorlist" && !it->second.empty())
             info.setMirrorListUrl(Url(it->second));
+	  else if ( it->first == "metalink" && !it->second.empty())
+	    info.setMetalinkUrl(Url(it->second));
           else if ( it->first == "gpgkey" && !it->second.empty())
           {
             std::vector<std::string> keys;

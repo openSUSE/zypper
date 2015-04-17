@@ -91,12 +91,12 @@ namespace zypp
       }
 
       /** Parse a local mirrorlist \a listfile_r and return usable URLs */
-      inline std::vector<Url> RepoMirrorListParse( const Url & url_r, const Pathname & listfile_r )
+      inline std::vector<Url> RepoMirrorListParse( const Url & url_r, const Pathname & listfile_r, bool mirrorListForceMetalink_r )
       {
 	USR << url_r << " " << listfile_r << endl;
 
 	std::vector<Url> mirrorurls;
-	if ( url_r.asString().find( "/metalink" ) != string::npos )
+	if ( mirrorListForceMetalink_r || url_r.asString().find( "/metalink" ) != string::npos )
 	  mirrorurls = RepoMirrorListParseXML( listfile_r );
 	else
 	  mirrorurls = RepoMirrorListParseTXT( listfile_r );
@@ -124,25 +124,24 @@ namespace zypp
     } // namespace
     ///////////////////////////////////////////////////////////////////
 
-
-    RepoMirrorList::RepoMirrorList( const Url & url_r, const Pathname & metadatapath_r )
+    RepoMirrorList::RepoMirrorList( const Url & url_r, const Pathname & metadatapath_r, bool mirrorListForceMetalink_r )
     {
       if ( url_r.getScheme() == "file" )
       {
 	// never cache for local mirrorlist
-	_urls = RepoMirrorListParse( url_r, url_r.getPathName() );
+	_urls = RepoMirrorListParse( url_r, url_r.getPathName(), mirrorListForceMetalink_r );
       }
       else if ( ! PathInfo( metadatapath_r).isDir() )
       {
 	// no cachedir
 	RepoMirrorListTempProvider provider( url_r );	// RAII: lifetime of any downloaded files
-	_urls = RepoMirrorListParse( url_r, provider.localfile() );
+	_urls = RepoMirrorListParse( url_r, provider.localfile(), mirrorListForceMetalink_r );
       }
       else
       {
 	// have cachedir
 	Pathname cachefile( metadatapath_r );
-	if ( url_r.asString().find( "/metalink" ) != string::npos )
+	if ( mirrorListForceMetalink_r || url_r.asString().find( "/metalink" ) != string::npos )
 	  cachefile /= "mirrorlist.xml";
 	else
 	  cachefile /= "mirrorlist.txt";
@@ -159,7 +158,7 @@ namespace zypp
 	  zypp::filesystem::hardlinkCopy( provider.localfile(), cachefile );
 	}
 
-	_urls = RepoMirrorListParse( url_r, cachefile );
+	_urls = RepoMirrorListParse( url_r, cachefile, mirrorListForceMetalink_r );
 	if( _urls.empty() )
 	{
 	  DBG << "Removing Cachefile as it contains no URLs" << endl;

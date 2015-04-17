@@ -21,7 +21,11 @@ namespace zypp
     class RepoMirrorList
     {
       public:
-        RepoMirrorList( const Url & url_r, const Pathname & metadatapath_r = Pathname() );
+	RepoMirrorList( const Url & url_r, const Pathname & metadatapath_r, bool mirrorListForceMetalink_r );
+
+        RepoMirrorList( const Url & url_r )
+	: RepoMirrorList( url_r, Pathname(), false )
+	{}
 
         const std::vector<Url> & getUrls() const
         { return _urls; }
