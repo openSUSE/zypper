@@ -79,7 +79,13 @@ namespace zypp
 	string tmpurl;
 	while (getline(tmpfstream.stream(), tmpurl))
 	{
-	  my_urls.push_back(Url(tmpurl));
+	  if ( tmpurl[0] == '#' )
+	    continue;
+	  try {
+	    my_urls.push_back(Url(tmpurl));
+	  }
+	  catch (...)
+	  {;}	// ignore malformed urls
 	}
 	return my_urls;
       }
