@@ -239,7 +239,6 @@ ADD_SUBDIRECTORY( zypp )
 # do not build devel by default
 ADD_SUBDIRECTORY( devel EXCLUDE_FROM_ALL )
 ADD_SUBDIRECTORY( tools )
-ADD_SUBDIRECTORY( examples )
 ADD_SUBDIRECTORY( doc )
 ADD_SUBDIRECTORY( vendor )
 
