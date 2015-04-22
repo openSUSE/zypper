@@ -1,4 +1,16 @@
 -------------------------------------------------------------------
+Wed Apr 22 10:50:00 CEST 2015 - ma@suse.de
+
+- ZYpp: Changed ZYpp::Ptr to be a shared_ptr; 
+  a precondition for fixing bnc-899755
+- rpmmd: support 'metalink=' in .repo (for zypper#63)
+- RepoMirrorList: ignore comments and malformed urls in mirrorlist
+- PathInfo: remove minor/major conflicting with GNU libc macros
+  DiskUsageCounter: remove ctors taking 'magic' bool flags
+  ZyppCallbacks: remove unused PatchDownload callbacks
+- version 15.1.0 (1)
+
+-------------------------------------------------------------------
 Thu Apr  2 19:06:56 CEST 2015 - ma@suse.de
 
 - POODLE: libzypp should only talk TLS (bnc#903405)
