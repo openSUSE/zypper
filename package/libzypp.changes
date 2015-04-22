@@ -1,4 +1,9 @@
 -------------------------------------------------------------------
+Thu Apr 23 01:13:15 CEST 2015 - ma@suse.de
+
+- Update zypp-po.tar.bz2
+
+-------------------------------------------------------------------
 Wed Apr 22 10:50:00 CEST 2015 - ma@suse.de
 
 - ZYpp: Changed ZYpp::Ptr to be a shared_ptr; 
