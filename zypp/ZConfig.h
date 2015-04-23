@@ -24,6 +24,7 @@
 #include "zypp/Locale.h"
 #include "zypp/Pathname.h"
 #include "zypp/IdString.h"
+#include "zypp/TriBool.h"
 
 #include "zypp/DownloadMode.h"
 #include "zypp/target/rpm/RpmFlags.h"
@@ -262,6 +263,24 @@ namespace zypp
        */
       DownloadMode commit_downloadMode() const;
 
+      /** \name Signature checking (repodata and packages)
+       * If \ref gpgcheck is \c on (the default) we will either check the signature
+       * of repo metadata (packages are secured via checksum in the metadata), or the
+       * signature of an rpm package to install if it's repo metadata are not signed
+       * or not checked. If \ref gpgcheck is \c off, no checks are performed.
+       *
+       * The default behavior can be altered by explicitly setting \ref repo_gpgcheck and/or
+       * \ref pkg_gpgcheck to perform those checks always (\c on) or never (\c off).
+       *
+       * Explicitly setting \c gpgcheck, \c repo_gpgcheck or \c pkg_gpgcheck in a
+       * repositories \a .repo file will overwrite the defaults here.
+       */
+      //@{
+      bool gpgCheck() const;		///< Turn signature checking on/off (on)
+      TriBool repoGpgCheck() const;	///< Check repo matadata signatures (indeterminate - according to gpgcheck)
+      TriBool pkgGpgCheck() const;	///< Check rpm package signatures (indeterminate - according to gpgcheck)
+      //@}
+      //
       /**
        * Directory for equivalent vendor definitions  (configPath()/vendors.d)
        * \ingroup g_ZC_CONFIGFILES
