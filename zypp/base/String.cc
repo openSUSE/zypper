@@ -17,6 +17,8 @@
 #include "zypp/base/String.h"
 #include "zypp/base/LogTools.h"
 
+#include "zypp/TriBool.h"
+
 using std::string;
 
 ///////////////////////////////////////////////////////////////////
@@ -84,6 +86,13 @@ namespace zypp
                  || t == "off"
                  || t == "-"
                );
+    }
+
+    TriBool strToTriBool( const C_Str & str )	// from TriBool.h
+    {
+      if ( strToTrue( str ) )	return true;
+      if ( !strToFalse( str ) )	return false;
+      return indeterminate;
     }
 
     ///////////////////////////////////////////////////////////////////

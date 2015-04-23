@@ -24,6 +24,10 @@
 #include "zypp/base/PtrTypes.h"
 #include "zypp/base/Function.h"
 
+///////////////////////////////////////////////////////////////////
+namespace boost { namespace logic { class tribool; } }
+namespace zypp { typedef boost::logic::tribool TriBool; }
+///////////////////////////////////////////////////////////////////
 
 ///////////////////////////////////////////////////////////////////
 namespace boost
@@ -403,6 +407,9 @@ namespace zypp
       if ( !strToFalse( str ) ) return (return_r = false);
       return return_r;
     }
+
+    /** Parse \c str into a bool if it's a legal \c true or \c false string; else \c indterminate. */
+    TriBool strToTriBool( const C_Str & str );
 
     //@}
 
