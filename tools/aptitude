@@ -13,6 +13,21 @@ foreach(@ARGV) {
 	push(@options, $_);
 }
 
+my $os={};
+if(open(my $osfd, "/etc/os-release")) {
+	while(<$osfd>) {
+		m/^(\w+)="?(.*?)"?$/;
+		$os->{$1}=$2;
+	}
+	close $osfd;
+}
+
+sub os_is($)
+{
+	my ($osstr)=@_;
+	return $os->{ID} =~ m/$osstr/i || ($os->{ID_LIKE} && $os->{ID_LIKE} =~/$osstr/i);
+}
+
 my @zopt;
 my @zopt2;
 foreach(@options) {
