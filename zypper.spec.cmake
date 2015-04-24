@@ -82,6 +82,7 @@ Authors:
 Summary:        aptitude compatibility with zypper
 Group:          System/Packages
 Requires:       perl
+Requires:       zypper
 %if 0%{?suse_version}
 Supplements:    zypper
 %endif
