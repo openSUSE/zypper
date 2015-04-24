@@ -178,24 +178,12 @@ namespace zypp
 
   const RepoInfo RepoInfo::noRepo;
 
-  ///////////////////////////////////////////////////////////////////
-  //
-  //	METHOD NAME : RepoInfo::RepoInfo
-  //	METHOD TYPE : Ctor
-  //
   RepoInfo::RepoInfo()
   : _pimpl( new Impl() )
   {}
 
-  ///////////////////////////////////////////////////////////////////
-  //
-  //	METHOD NAME : RepoInfo::~RepoInfo
-  //	METHOD TYPE : Dtor
-  //
   RepoInfo::~RepoInfo()
-  {
-    //MIL << std::endl;
-  }
+  {}
 
   unsigned RepoInfo::priority() const
   { return _pimpl->priority; }

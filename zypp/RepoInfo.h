@@ -383,13 +383,6 @@ namespace zypp
       LocaleSet getLicenseLocales() const;
       //@}
 
-      /** \name Repository global unique id
-       *
-       *
-       */
-      //@{
-      //@}
-
     public:
       /**
        * Write a human-readable representation of this RepoInfo object
