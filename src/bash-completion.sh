@@ -112,9 +112,12 @@ _zypper() {
 	fi
 
 	if test -n "$command" ; then
-      		opts=$(LC_ALL=POSIX $ZYPPER -q help $command 2>&1 | sed -e "1,/$magic_string/d" -e 's/.*--/--/' -e 's/ .*//')
+		if ! [[ $cur =~ ^[^-] ]] ; then
+			opts=$(LC_ALL=POSIX $ZYPPER -q help $command 2>&1 | sed -e "1,/$magic_string/d" -e 's/.*--/--/' -e 's/ .*//')
+		fi
 
 		#handling individual commands if they need more then we can dig from help
+		if ! [[ $cur =~ ^- ]] ; then
 		case "$command" in
 			help | \?)
 				opts=(${ZYPPER_CMDLIST[@]})
@@ -147,6 +150,7 @@ _zypper() {
 					}'))
 			;;
 		esac
+		fi
 		IFS=$'\n'
 		COMPREPLY=($(compgen -W "${opts[*]}" -- ${cur}))
 		_strip
