@@ -1,4 +1,10 @@
 -------------------------------------------------------------------
+Mon Apr 27 09:56:22 CEST 2015 - ma@suse.de
+
+- fix manpage format (bnc#927261)
+- version 1.6.324
+
+-------------------------------------------------------------------
 Thu Apr  2 18:26:18 CEST 2015 - ma@suse.de
 
 - Fix prompt returning undefined default value after wrong input
