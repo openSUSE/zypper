@@ -350,6 +350,9 @@ namespace zypp
         MIL << "Reading pubkey from " << info.path() << " of size " << info.size() << " and sha1 " << filesystem::checksum(info.path(), "sha1") << endl;
 
         static filesystem::TmpDir dir;
+	std::string tmppath( dir.path().asString() );
+	std::string datapath( _dataFile.path().asString() );
+
         const char* argv[] =
         {
           GPG_BINARY,
@@ -359,13 +362,13 @@ namespace zypp
           "--with-fingerprint",
           "--with-colons",
           "--homedir",
-          dir.path().asString().c_str(),
+          tmppath.c_str(),
           "--quiet",
           "--no-tty",
           "--no-greeting",
           "--batch",
           "--status-fd", "1",
-          _dataFile.path().asString().c_str(),
+          datapath.c_str(),
           NULL
         };
         ExternalProgram prog( argv, ExternalProgram::Discard_Stderr, false, -1, true );

@@ -584,11 +584,12 @@ namespace zypp
     MIL << "Determining key id if signature " << signature << endl;
     // HACK create a tmp keyring with no keys
     filesystem::TmpDir dir( _base_dir, "fake-keyring" );
+    std::string tmppath( dir.path().asString() );
 
     const char* argv[] =
     {
       GPG_BINARY,
-      "--homedir", dir.path().asString().c_str(),
+      "--homedir", tmppath.c_str(),
       "--no-default-keyring",
       "--quiet",
       "--no-tty",
