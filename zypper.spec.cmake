@@ -82,6 +82,7 @@ Authors:
 Summary:        aptitude compatibility with zypper
 Group:          System/Packages
 Requires:       perl
+Requires:       zypper
 %if 0%{?suse_version}
 Supplements:    zypper
 %endif
@@ -98,7 +99,7 @@ Authors:
 %setup -q
 
 %build
-mkdir build
+mkdir -p build
 cd build
 
 # Same codebase, but SLES may use it's own translation set.
