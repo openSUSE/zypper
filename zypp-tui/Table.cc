@@ -358,13 +358,8 @@ void Table::margin(unsigned margin) {
 }
 
 void Table::sort (unsigned by_column) {
-  if (by_column > _max_col) {
-    ERR << "by_column >= _max_col (" << by_column << ">=" << _max_col << ")" << endl;
-    return;
-  }
-
-  TableRow::Less comp (by_column);
-  _rows.sort (comp);
+  TableRow::Less comp(by_column);
+  _rows.sort( comp );
 }
 
 // Local Variables:

@@ -82,6 +82,10 @@ public:
     Less (unsigned by_column): _by_column (by_column) {}
 
     bool operator ()(const TableRow& a, const TableRow& b) const {
+      bool noL = _by_column >= a._columns.size();
+      bool noR = _by_column >= b._columns.size();
+      if ( noL || noR )
+      {	return noL && ! noR; }
       return a._columns[_by_column] < b._columns[_by_column];
     }
   };
