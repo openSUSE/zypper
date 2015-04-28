@@ -23,7 +23,7 @@ suse => {qw(
 	pylint			python-pylint
 	python-migrate		python-sqlalchemy-migrate
 	)},
-fedora => {qw(
+"fedora|centos|rhel" => {qw(
 	libldap2-dev		openldap-devel
 	locate			findutils
 	open-iscsi-utils	iscsi-initiator-utils
