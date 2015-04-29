@@ -246,6 +246,11 @@ namespace zypp
      * To propagate user decisions, either connect to the \ref KeyRingReport
      * or use its static methods to set the desired defaults.
      *
+     * A second bool passed as reference arg \a sigValid_r tells whether the
+     * signature was actually successfully verified. If \a sigValid_r returns
+     * \c false, but the method \c true, you know it's due to user callback or
+     * defaults.
+     *
      * \code
      * struct KeyRingReportReceive : public callback::ReceiveReport<KeyRingReport>
      * {
@@ -260,15 +265,13 @@ namespace zypp
      * \param file Path of the file to be verified
      * \param filedesc Description of the file (to give the user some context)
      * \param signature Signature to verify the file against
+     * \param sigValid_r Returns whether signature was successfully verified
      *
      * \see \ref KeyRingReport
      */
-    bool verifyFileSignatureWorkflow(
-        const Pathname &file,
-        const std::string filedesc,
-        const Pathname &signature,
-        const KeyContext &keycontext = KeyContext());
-
+    bool verifyFileSignatureWorkflow( const Pathname &file, const std::string &filedesc, const Pathname &signature, bool & sigValid_r, const KeyContext &keycontext = KeyContext());
+    /** \overload legacy version without 'bool & sigValid_r' */
+    bool verifyFileSignatureWorkflow( const Pathname &file, const std::string filedesc, const Pathname &signature, const KeyContext &keycontext = KeyContext());
 
     /**
      * Verifies a file against a signature, with no user interaction
