@@ -18,18 +18,20 @@
 
 using namespace std;
 
+#undef ZYPP_BASE_LOGGER_LOGGROUP
+#define ZYPP_BASE_LOGGER_LOGGROUP "FileChecker"
+
 ///////////////////////////////////////////////////////////////////
 namespace zypp
 { /////////////////////////////////////////////////////////////////
 
   ChecksumFileChecker::ChecksumFileChecker( const CheckSum &checksum )
     : _checksum(checksum)
-  {
-  }
+  {}
 
   void ChecksumFileChecker::operator()( const Pathname &file ) const
   {
-      //MIL << "checking " << file << " file against checksum '" << _checksum << "'" << endl;
+    //MIL << "checking " << file << " file against checksum '" << _checksum << "'" << endl;
     callback::SendReport<DigestReport> report;
 
     if ( _checksum.empty() )
@@ -42,7 +44,7 @@ namespace zypp
       }
       else
       {
-        ZYPP_THROW( FileCheckException( file.basename() + " has no checksum" ) );
+        ZYPP_THROW( ExceptionType( file.basename() + " has no checksum" ) );
       }
     }
     else
@@ -57,7 +59,7 @@ namespace zypp
         }
         else
         {
-          ZYPP_THROW( FileCheckException( file.basename() + " has wrong checksum" ) );
+          ZYPP_THROW( ExceptionType( file.basename() + " has wrong checksum" ) );
         }
       }
     }
@@ -87,23 +89,15 @@ namespace zypp
   }
 
   void CompositeFileChecker::add( const FileChecker &checker )
-  {
-    //MIL << "||# " << _checkers.size() << endl;
-    _checkers.push_back(checker);
-    //MIL << "||* " << _checkers.size() << endl;
+  { _checkers.push_back(checker); }
 
-  }
 
-   SignatureFileChecker::SignatureFileChecker( const Pathname &signature )
+  SignatureFileChecker::SignatureFileChecker( const Pathname & signature )
        : _signature(signature)
-  {
-
-  }
-
+  {}
 
   SignatureFileChecker::SignatureFileChecker()
-  {
-  }
+  {}
 
   void SignatureFileChecker::setKeyContext(const KeyContext & keycontext)
   { _context = keycontext; }
@@ -119,19 +113,18 @@ namespace zypp
 
   void SignatureFileChecker::operator()(const Pathname &file ) const
   {
-    ZYpp::Ptr z = getZYpp();
-
-    if ( (! PathInfo(_signature).isExist()) && (!_signature.empty()))
+    if ( (! PathInfo(_signature).isExist()) && (!_signature.empty()) )
     {
-      ZYPP_THROW(FileCheckException("Signature " + _signature.asString() + " not found."));
+      ZYPP_THROW( ExceptionType("Signature " + _signature.asString() + " not found.") );
     }
 
     MIL << "checking " << file << " file validity using digital signature.." << endl;
-    bool valid = z->keyRing()->verifyFileSignatureWorkflow( file, file.basename(), _signature, _context);
+    _fileValidated = false;
+    _fileAccepted = getZYpp()->keyRing()->verifyFileSignatureWorkflow( file, file.basename(), _signature, _fileValidated, _context );
 
-    if (!valid)
-      ZYPP_THROW( FileCheckException( "Signature verification failed for "  + file.basename() ) );
-  }
+    if ( !_fileAccepted )
+      ZYPP_THROW( ExceptionType( "Signature verification failed for "  + file.basename() ) );
+ }
 
   /******************************************************************
   **
