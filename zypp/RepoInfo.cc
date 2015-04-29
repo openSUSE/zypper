@@ -19,6 +19,7 @@
 #include "zypp/RepoInfo.h"
 #include "zypp/TriBool.h"
 #include "zypp/Pathname.h"
+#include "zypp/ZConfig.h"
 #include "zypp/repo/RepoMirrorList.h"
 #include "zypp/ExternalProgram.h"
 #include "zypp/media/MediaAccess.h"
@@ -42,7 +43,10 @@ namespace zypp
   struct RepoInfo::Impl
   {
     Impl()
-      : gpgcheck(indeterminate)
+      : _gpgCheck( indeterminate )
+      , _repoGpgCheck( indeterminate )
+      , _pkgGpgCheck( indeterminate )
+      , _validRepoSignature( indeterminate )
       ,	keeppackages(indeterminate)
       , _mirrorListForceMetalink(false)
       , type(repo::RepoType::NONE_e)
@@ -137,8 +141,67 @@ namespace zypp
       return( _keywords.find( keyword_r ) != _keywords.end() );
     }
 
+    /** Signature check result needs to be stored/retrieved from _metadatapath.
+     * Don't call them from outside validRepoSignature/setValidRepoSignature
+     */
+    //@{
+    TriBool internalValidRepoSignature() const
+    {
+      if ( ! indeterminate(_validRepoSignature) )		return _validRepoSignature;
+      // check metadata:
+      if ( ! metadatapath.empty() )
+      {
+	//TODO: a missing ".repo_gpgcheck" might be plaindir(no Downloader) or not yet refreshed signed repo!
+	TriBool linkval = triBoolFromPath( metadatapath / ".repo_gpgcheck" );
+	return linkval;
+      }
+      return indeterminate;
+    }
+
+    void internalSetValidRepoSignature( TriBool value_r )
+    {
+      if ( PathInfo(metadatapath).isDir() )
+      {
+	TriBool linkval( indeterminate );
+	if ( triBoolFromPath( metadatapath / ".repo_gpgcheck", linkval ) && linkval == value_r )
+	  return;	// existing symlink fits value_r
+
+	filesystem::unlink( metadatapath / ".repo_gpgcheck" );
+	filesystem::symlink( asString(value_r), metadatapath / ".repo_gpgcheck" );
+      }
+      _validRepoSignature = value_r;
+    }
+
+    bool triBoolFromPath( const Pathname & path_r, TriBool & ret_r ) const
+    {
+      static const Pathname truePath( "true" );
+      static const Pathname falsePath( "false" );
+      static const Pathname indeterminatePath( "indeterminate" );
+      Pathname linkval( filesystem::readlink( path_r ) );
+      bool known = true;
+      if ( linkval == truePath )
+	ret_r = true;
+      else if ( linkval == falsePath )
+	ret_r = false;
+      else if ( linkval == indeterminatePath )
+	ret_r = indeterminate;
+      else
+	known = false;
+      return known;
+    }
+
+    TriBool triBoolFromPath( const Pathname & path_r ) const
+    { TriBool ret(indeterminate); triBoolFromPath( path_r, ret ); return ret; }
+
+    //@}
+
   public:
-    TriBool gpgcheck;
+    TriBool _gpgCheck;		///< default gpgcheck behavior: Y/N/ZConf
+    TriBool _repoGpgCheck;	///< need to check repo sign.: Y/N/(ZConf(Y/N/gpgCheck))
+    TriBool _pkgGpgCheck;	///< need to check pkg sign.: Y/N/(ZConf(Y/N/gpgCheck && no valid repo sign.))
+  private:
+    TriBool _validRepoSignature;///< have  signed and valid repo metadata
+  public:
     TriBool keeppackages;
     RepoVariablesReplacedUrl _gpgKeyUrl;
     RepoVariablesReplacedUrl _mirrorListUrl;
@@ -194,8 +257,52 @@ namespace zypp
   void RepoInfo::setPriority( unsigned newval_r )
   { _pimpl->priority = newval_r ? newval_r : Impl::defaultPriority; }
 
-  void RepoInfo::setGpgCheck( bool check )
-  { _pimpl->gpgcheck = check; }
+
+  bool RepoInfo::gpgCheck() const
+  { return indeterminate(_pimpl->_gpgCheck) ? ZConfig::instance().gpgCheck() : (bool)_pimpl->_gpgCheck; }
+
+  void RepoInfo::setGpgCheck( TriBool value_r )
+  { _pimpl->_gpgCheck = value_r; }
+
+  void RepoInfo::setGpgCheck( bool value_r ) // deprecated legacy and for squid
+  { setGpgCheck( TriBool(value_r) ); }
+
+
+  bool RepoInfo::repoGpgCheck() const
+  {
+    if ( ! indeterminate(_pimpl->_repoGpgCheck) )		return _pimpl->_repoGpgCheck;
+    if ( ! indeterminate(ZConfig::instance().repoGpgCheck()) )	return ZConfig::instance().repoGpgCheck();
+    return gpgCheck();	// no preference: follow gpgCheck
+  }
+
+  void RepoInfo::setRepoGpgCheck( TriBool value_r )
+  { _pimpl->_repoGpgCheck = value_r; }
+
+
+  bool RepoInfo::pkgGpgCheck() const
+  {
+    if ( ! indeterminate(_pimpl->_pkgGpgCheck) )		return _pimpl->_pkgGpgCheck;
+    if ( ! indeterminate(ZConfig::instance().pkgGpgCheck()) )	return ZConfig::instance().pkgGpgCheck();
+    // no preference: follow gpgCheck and check package if repo signature not available or not checked
+    return gpgCheck() && ( !repoGpgCheck() || !(bool)validRepoSignature() );	// !(bool)TriBool ==> false or indeterminate
+  }
+
+  void RepoInfo::setPkgGpgCheck( TriBool value_r )
+  { _pimpl->_pkgGpgCheck = value_r; }
+
+
+  TriBool RepoInfo::validRepoSignature() const
+  {
+    TriBool ret = _pimpl->internalValidRepoSignature();
+    // keep indeterminate(=unsigned) but invalidate any signature if !repoGpgCheck
+    if ( !indeterminate(ret) && !repoGpgCheck() )
+      ret = false;
+    return ret;
+  }
+
+  void RepoInfo::setValidRepoSignature( TriBool value_r )
+  { _pimpl->internalSetValidRepoSignature( value_r ); }
+
 
   void RepoInfo::setMirrorListUrl( const Url & url_r )	// Raw
   { _pimpl->_mirrorListUrl.raw() = url_r; _pimpl->_mirrorListForceMetalink = false; }
@@ -244,9 +351,6 @@ namespace zypp
 
   void RepoInfo::setTargetDistribution( const std::string & targetDistribution )
   { _pimpl->targetDistro = targetDistribution; }
-
-  bool RepoInfo::gpgCheck() const
-  { return indeterminate(_pimpl->gpgcheck) ? true : (bool)_pimpl->gpgcheck; }
 
   bool RepoInfo::keepPackages() const
   { return indeterminate(_pimpl->keeppackages) ? false : (bool)_pimpl->keeppackages; }
@@ -447,7 +551,16 @@ namespace zypp
     strif( "- path        : ", path().asString() );
     str << "- type        : " << type() << std::endl;
     str << "- priority    : " << priority() << std::endl;
-    str << "- gpgcheck    : " << gpgCheck() << std::endl;
+
+    // Yes No Default(Y) Default(N)
+#define OUTS(T,B) ( indeterminate(T) ? (std::string("D(")+(B?"Y":"N")+")") : ((bool)T?"Y":"N") )
+    str << "- gpgcheck    : " << OUTS(_pimpl->_gpgCheck,gpgCheck())
+                              << " repo" << OUTS(_pimpl->_repoGpgCheck,repoGpgCheck())
+			      << " sig" << asString( validRepoSignature(), "?", "Y", "N" )
+			      << " pkg" << OUTS(_pimpl->_pkgGpgCheck,pkgGpgCheck())
+			      << std::endl;
+#undef OUTS
+
     strif( "- gpgkey      : ", rawGpgKeyUrl().asString() );
 
     if ( ! indeterminate(_pimpl->keeppackages) )
@@ -487,8 +600,14 @@ namespace zypp
     if ( priority() != defaultPriority() )
       str << "priority=" << priority() << endl;
 
-    if (!indeterminate(_pimpl->gpgcheck))
-      str << "gpgcheck=" << (gpgCheck() ? "1" : "0") << endl;
+    if ( ! indeterminate(_pimpl->_gpgCheck) )
+      str << "gpgcheck=" << (_pimpl->_gpgCheck ? "1" : "0") << endl;
+
+    if ( ! indeterminate(_pimpl->_repoGpgCheck) )
+      str << "repo_gpgcheck=" << (_pimpl->_repoGpgCheck ? "1" : "0") << endl;
+
+    if ( ! indeterminate(_pimpl->_pkgGpgCheck) )
+      str << "pkg_gpgcheck=" << (_pimpl->_pkgGpgCheck ? "1" : "0") << endl;
 
     if ( ! (rawGpgKeyUrl().asString().empty()) )
       str << "gpgkey=" << rawGpgKeyUrl() << endl;
@@ -515,7 +634,9 @@ namespace zypp
       << " priority=\"" << priority() << "\""
       << " enabled=\"" << enabled() << "\""
       << " autorefresh=\"" << autorefresh() << "\""
-      << " gpgcheck=\"" << gpgCheck() << "\"";
+      << " gpgcheck=\"" << gpgCheck() << "\""
+      << " repo_gpgcheck=\"" << repoGpgCheck() << "\""
+      << " pkg_gpgcheck=\"" << pkgGpgCheck() << "\"";
     if (!(tmpstr = gpgKeyUrl().asString()).empty())
       str << " gpgkey=\"" << escape(tmpstr) << "\"";
     if (!(tmpstr = mirrorListUrl().asString()).empty())
