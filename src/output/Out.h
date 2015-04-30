@@ -199,8 +199,6 @@ struct TermLine
 
   zypp::str::Str lhs;				//< left side
   zypp::str::Str rhs;				//< right side
-  zypp::DefaultIntegral<unsigned,0> lhidden;	//< size of embedded esc sequences
-  zypp::DefaultIntegral<unsigned,0> rhidden;	//< size of embedded esc sequences
 
 
   /** Return plain line made of lhs + rhs */

@@ -17,14 +17,14 @@
 
 std::string TermLine::get( unsigned width_r, SplitFlags flags_r, char exp_r ) const
 {
-  utf8::string l(lhs);
+  utf8::string l(lhs);	// utf8::string::size() returns visible chars (ignores ansi SGR)!
   utf8::string r(rhs);
 
   if ( width_r == out::termwidthUnlimited )
     return zypp::str::Str() << l << r;	// plain string if zero width
 
-  unsigned llen( l.size() - lhidden );
-  unsigned rlen( r.size() - rhidden );
+  unsigned llen = l.size();
+  unsigned rlen = r.size();
   int diff = width_r - llen - rlen;
 
   //zypp::AutoDispose<int> _delay( 1, ::sleep );
