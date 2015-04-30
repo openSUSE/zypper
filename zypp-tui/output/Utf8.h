@@ -47,6 +47,16 @@ namespace utf8
 	const char *s = _str.c_str();
 	for ( size_type slen = _str.size(); slen > 0; )
 	{
+	  if ( *s == '\033' && *(s+1) == '[' )	// skip ansi SGR
+	  {
+	    slen -= 2; s += 2;
+	    while ( slen > 0 && *s != 'm' )
+	    { --slen; ++s; }
+	    if ( slen > 0 )
+	    { --slen; ++s; }
+	    continue;
+	  }
+
 	  wchar_t wc;
 	  size_t bytes = mbrtowc( &wc, s, slen, NULL );
 	  if ( bytes <= 0 )
@@ -61,10 +71,29 @@ namespace utf8
       // NON CJK: faster and hopefully accurate enough:
       // simply do not count continuation bytes '10xxxxxx'
       size_type ret = _str.size();
+      size_type ansi = 0;
       for ( auto ch : _str )
       {
+	if ( ansi )
+	{
+	  if ( ansi == 1 && ch == '[' )
+	  {
+	    ansi = 2;
+	    continue;
+	  }
+	  else if ( ansi >= 2 ) // not testing for in [0-9;m]
+	  {
+	    ++ansi;
+	    if ( ch == 'm' ) // SGR end
+	    { ret -= ansi; ansi = 0; }
+	    continue;
+	  }
+	}
+
 	if ( isContinuationByte( ch ) )
 	  --ret;
+	else if ( ch == '\033' )
+	  ansi = 1;
       }
       return ret;
     }
