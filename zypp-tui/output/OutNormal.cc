@@ -225,13 +225,7 @@ void OutNormal::progressEnd(const std::string & id, const string & label, bool e
     outstr.lhs << label << ' ';
     outstr.rhs << '[';
     if (error)
-    {
-      // a bit clmupsy and not perfect: hidden char counting
-      unsigned tag( std::string(outstr.rhs).size() );
-      ColorString errstr( _("error"), ColorContext::NEGATIVE );
-      outstr.rhs << errstr;
-      outstr.rhidden += unsigned(std::string(outstr.rhs).size() - errstr.size()) - tag ;
-    }
+      outstr.rhs << ColorString( _("error"), ColorContext::NEGATIVE );
     else
       outstr.rhs << _("done");
   }
@@ -340,13 +334,7 @@ void OutNormal::dwnldProgressEnd(const zypp::Url & uri, long rate, bool error)
     outstr.lhs << ' ';
     outstr.rhs << '[';
     if (error)
-    {
-      // a bit clmupsy and not perfect: hidden char counting
-      unsigned tag( std::string(outstr.rhs).size() );
-      ColorString errstr( _("error"), ColorContext::NEGATIVE );
-      outstr.rhs << errstr;
-      outstr.rhidden += unsigned(std::string(outstr.rhs).size() - errstr.size()) - tag ;
-    }
+      outstr.rhs << ColorString( _("error"), ColorContext::NEGATIVE );
     else
       outstr.rhs << _("done");
   }
