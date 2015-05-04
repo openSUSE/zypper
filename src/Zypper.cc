@@ -536,6 +536,7 @@ void Zypper::processGlobalOptions()
   //// --xml-out
   if (gopts.count("xmlout"))
   {
+    _config.do_colors = false;	// no color in xml mode!
     _out_ptr = new OutXML(verbosity);
     _gopts.machine_readable = true;
     _gopts.no_abbrev = true;
