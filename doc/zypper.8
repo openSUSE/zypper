@@ -2,12 +2,12 @@
 .\"     Title: zypper
 .\"    Author: [see the "AUTHORS" section]
 .\" Generator: DocBook XSL Stylesheets v1.78.1 <http://docbook.sf.net/>
-.\"      Date: 03/12/2015
+.\"      Date: 05/05/2015
 .\"    Manual: ZYPPER
 .\"    Source: zypper
 .\"  Language: English
 .\"
-.TH "ZYPPER" "8" "03/12/2015" "zypper" "ZYPPER"
+.TH "ZYPPER" "8" "05/05/2015" "zypper" "ZYPPER"
 .\" -----------------------------------------------------------------
 .\" * Define some portability stuff
 .\" -----------------------------------------------------------------
@@ -2465,10 +2465,36 @@ Per default packages are downloaded to the libzypp package cache (\fB/var/cache/
 \fB\-\-pkg\-cache\-dir\fR
 option\&.
 
-In XML output a
+Parsable XML\-output produced by
+\fBzypper \-\-xmlout\fR
+will include a
 \fB<download\-result>\fR
-node is written for each package zypper tried to download\&. Upon success the local path is is found in
-\fBdownload\-result/localpath@path\fR\&.
+node for each package zypper tried to download\&. Upon success the location of the downloaded package is found in the
+\fBpath\fR
+attribute of the
+\fB<localfile>\fR
+subnode (xpath:
+\fBdownload\-result/localpath@path\fR):
+.RE
+.sp
+.if n \{\
+.RS 4
+.\}
+.nf
+        <download\-result>
+          <solvable>
+            <kind>package</kind>
+            <name>zypper</name>
+            <edition epoch="0" version="1\&.9\&.17" release="26\&.1"/>
+            <arch>x86_64</arch>
+            <repository name="repo\-oss\-update (13\&.1)" alias="openSUSE:repo\-oss\-update"/>
+          </solvable>
+          <localfile path="/var/cache/zypp/packages/openSUSE:repo\-oss\-update/x86_64/zypper\-1\&.9\&.17\-26\&.1\&.x86_64\&.rpm"/>
+        </download\-result>
+.fi
+.if n \{\
+.RE
+.\}
 .PP
 \fB\-\-all\-matches\fR
 .RS 4
@@ -2478,7 +2504,6 @@ Download all versions matching the commandline arguments\&. Otherwise only the b
 \fB\-\-dry\-run\fR
 .RS 4
 Don\(cqt download any package, just report what would be done\&.
-.RE
 .RE
 .PP
 \fBsource\-download\fR

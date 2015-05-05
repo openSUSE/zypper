@@ -1310,8 +1310,20 @@ Other Commands
 	+
 	Per default packages are downloaded to the libzypp package cache (*/var/cache/zypp/packages*; for non-root users *$XDG_CACHE_HOME/zypp/packages*), but this can be changed by using the global *--pkg-cache-dir* option.
 	+
-	In XML output a *<download-result>* node is written for each package zypper tried to download. Upon success the local path is is found in *download-result/localpath@path*.
-+
+	Parsable XML-output produced by *zypper --xmlout* will include a *<download-result>* node for each package zypper tried to download. Upon success the location of the downloaded package is found in the *path* attribute of the *<localfile>* subnode (xpath: *download-result/localpath@path*):
+	+
+.....
+	<download-result>
+	  <solvable>
+	    <kind>package</kind>
+	    <name>zypper</name>
+	    <edition epoch="0" version="1.9.17" release="26.1"/>
+	    <arch>x86_64</arch>
+	    <repository name="repo-oss-update (13.1)" alias="openSUSE:repo-oss-update"/>
+	  </solvable>
+	  <localfile path="/var/cache/zypp/packages/openSUSE:repo-oss-update/x86_64/zypper-1.9.17-26.1.x86_64.rpm"/>
+	</download-result>
+.....
 --
 	*--all-matches*::
 		Download all versions matching the commandline arguments. Otherwise only the best version of
