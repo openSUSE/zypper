@@ -1,4 +1,20 @@
 -------------------------------------------------------------------
+Tue May  5 13:10:45 CEST 2015 - ma@suse.de
+
+- man: clarify zypper download description (fixes #68)
+- fix table sort (bnc#832519)
+- aptitude: install all package name mappings
+- aptitude: re-order rules
+- aptitude: apply fedora rules to centos and redhat
+- aptitude: require zypper
+- aptitude: add os-specific package-maps
+- aptitude: add os_is function
+- aptitude: add generic python package mapping
+- only use ANSI codes on terminals (bnc#925678)
+- Don't use color in XML mode.
+- version 1.12.1
+
+-------------------------------------------------------------------
 Thu Apr 23 01:13:26 CEST 2015 - ma@suse.de
 
 - Update zypper-po.tar.bz2
