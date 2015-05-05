@@ -266,11 +266,13 @@ RpmHeader::constPtr RpmHeader::readPackage( const Pathname & path_r,
 //
 std::ostream & RpmHeader::dumpOn( std::ostream & str ) const
 {
-  return BinHeader::dumpOn( str ) << '{' << tag_name() << "-"
-         << (tag_epoch()==0?"":(tag_epoch()+":"))
-         << tag_version()
-         << (tag_release().empty()?"":(std::string("-")+tag_release()))
-         << ( isSrc() ? ".src}" : "}");
+  str << BinHeader::dumpOn( str ) << '{' << tag_name() << "-";
+  if ( tag_epoch() != 0 )
+    str << tag_epoch() << ":";
+  str << tag_version()
+      << (tag_release().empty()?"":(std::string("-")+tag_release()))
+      << ( isSrc() ? ".src}" : "}");
+  return str;
 }
 
 
