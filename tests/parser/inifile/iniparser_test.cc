@@ -41,7 +41,7 @@ class WithSpacesTest : public IniParser
   virtual void consume( const std::string &section )
   {
     MIL << section << endl;
-    BOOST_CHECK(section == "base" || section == "equal");
+    BOOST_CHECK(section == "base" || section == "equal" || section == "te]st");
   }
 
   virtual void consume( const std::string &section, const std::string &key, const std::string &value )

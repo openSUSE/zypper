@@ -99,7 +99,7 @@ void IniParser::parse( const InputStream & input_r, const ProgressData::Receiver
 
     if (trimmed[0] == '[')
     {
-      std::string::size_type pos = trimmed.find(']');
+      std::string::size_type pos = trimmed.rfind(']');
       if ( pos != std::string::npos )
       {
 	std::string section = trimmed.substr(1, pos-1);
