@@ -20,8 +20,8 @@ FIND_PROGRAM(GETTEXT_MSGFMT_EXECUTABLE msgfmt)
 # Macro to be called if .po files are shipped as tar ball.
 #
 # _translation_set_basename: Serves two purposes; a) the stem of the
-# default tarball %{_translation_set_basename}-po.tar.bz2 unless its over
-# riden by -DUSE_TRANSLATION_SET; b) the basename of the .gmo files.
+# default tarball %{_translation_set_basename}-po.tar.bz2, optionally
+# overlayed by -DUSE_TRANSLATION_SET; b) the basename of the .gmo files.
 #
 # We expect a po-file tarball to unpack the .po file to the current
 # directory!
@@ -32,14 +32,26 @@ MACRO( GETTEXT_CREATE_TARBALL_TRANSLATIONS _translation_set_basename )
                 SET( USE_TRANSLATION_SET ${_translation_set_basename} )
         ENDIF( NOT USE_TRANSLATION_SET )
 
-        SET( TRANSLATION_SET "${USE_TRANSLATION_SET}-po.tar.bz2" )
-        MESSAGE( STATUS "Translation set: ${TRANSLATION_SET}" )
+	SET( DEFAULT_TRANSLATION_SET "${_translation_set_basename}-po.tar.bz2" )
+        SET( OVERLAY_TRANSLATION_SET "${USE_TRANSLATION_SET}-po.tar.bz2" )
+
+        MESSAGE( STATUS "Translation set: ${OVERLAY_TRANSLATION_SET}" )
+
+	EXECUTE_PROCESS(
+	  COMMAND tar tfj ${CMAKE_CURRENT_SOURCE_DIR}/${DEFAULT_TRANSLATION_SET}
+	  OUTPUT_VARIABLE TRANSLATION_SET_CONTENT_D
+	)
+	EXECUTE_PROCESS(
+	  COMMAND tar tfj ${CMAKE_CURRENT_SOURCE_DIR}/${OVERLAY_TRANSLATION_SET}
+	  OUTPUT_VARIABLE TRANSLATION_SET_CONTENT_O
+	)
 
         # For those not familiar with 'sed': the tarball might list './' and './*.po'.
         # We process just the '*.po' lines and strip off any leading './'.
         EXECUTE_PROCESS(
-                COMMAND tar tfj ${CMAKE_CURRENT_SOURCE_DIR}/${TRANSLATION_SET}
+                COMMAND echo ${TRANSLATION_SET_CONTENT_D} ${TRANSLATION_SET_CONTENT_O}
                 COMMAND sed -n "/\\.po$/s%.*/%%p"
+		COMMAND sort -u
                 COMMAND awk "{printf $1\";\"}"
                 OUTPUT_VARIABLE TRANSLATION_SET_CONTENT
         )
@@ -48,8 +60,9 @@ MACRO( GETTEXT_CREATE_TARBALL_TRANSLATIONS _translation_set_basename )
         # Create 'LANG.po's from po.tar.bz2
         ADD_CUSTOM_COMMAND(
                 OUTPUT ${TRANSLATION_SET_CONTENT}
-                COMMAND tar xfj ${CMAKE_CURRENT_SOURCE_DIR}/${TRANSLATION_SET}
-                DEPENDS ${CMAKE_CURRENT_SOURCE_DIR}/${TRANSLATION_SET}
+                COMMAND tar xfj ${CMAKE_CURRENT_SOURCE_DIR}/${DEFAULT_TRANSLATION_SET}
+                COMMAND tar xfj ${CMAKE_CURRENT_SOURCE_DIR}/${OVERLAY_TRANSLATION_SET}
+                DEPENDS ${CMAKE_CURRENT_SOURCE_DIR}/${OVERLAY_TRANSLATION_SET} ${CMAKE_CURRENT_SOURCE_DIR}/${DEFAULT_TRANSLATION_SET}
         )
 
         # LANG.po ->msgfmt-> LANG.gmo

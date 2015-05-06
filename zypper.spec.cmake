@@ -108,7 +108,7 @@ cd build
 # 	1315		SLES12
 unset TRANSLATION_SET
 %if 0%{?suse_version} == 1110 || 0%{?suse_version} == 1315
-if [ -f ../po/sle-zypper-po.tar.bz ]; then
+if [ -f ../po/sle-zypper-po.tar.bz2 ]; then
   export TRANSLATION_SET=sle-zypper
 fi
 %endif
