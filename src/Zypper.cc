@@ -1960,7 +1960,7 @@ void Zypper::processCommandOptions()
       "-b, --bugzilla #            Install patch fixing the specified bugzilla issue.\n"
       "    --cve #                 Install patch fixing the specified CVE issue.\n"
       "-g  --category <category>   Install all patches in this category.\n"
-     "    --date <YYYY-MM-DD>      Install patches issued until the specified date\n"
+      "    --date <YYYY-MM-DD>     Install patches issued up to, but not including, the specified date\n"
       "    --debug-solver          Create solver test case for debugging.\n"
       "    --no-recommends         Do not install recommended packages, only required.\n"
       "    --recommends            Install also recommended packages in addition\n"
@@ -2005,7 +2005,7 @@ void Zypper::processCommandOptions()
       "    --issues[=string]      Look for issues matching the specified string.\n"
       "-a, --all                  List all patches, not only the needed ones.\n"
       "-r, --repo <alias|#|URI>   List only patches from the specified repository.\n"
-      "    --date <YYYY-MM-DD>    List patches issued up to the specified date\n"
+      "    --date <YYYY-MM-DD>    List patches issued up to, but not including, the specified date\n"
     );
     break;
   }

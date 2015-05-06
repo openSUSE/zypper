@@ -485,7 +485,7 @@ Update Management Commands
 		List available needed patches for all CVE issues, or issues whose number matches the given string.
 
 	*--date* 'YYYY-MM-DD'::
-		List patches issued up to the specified date.
+		List patches issued up to, but not including, the specified date.
 
 	*-g*, *--category* 'category'::
 		List available patches in the specified category.
@@ -526,7 +526,7 @@ Update Management Commands
 		Install patch fixing a MITRE's CVE issue specified by number. Use *list-patches --cve* command to get a list of available needed patches for specific issues.
 
 	*--date* 'YYYY-MM-DD'::
-		Install patches issued up to the specified date.
+		Install patches issued up to, but not including, the specified date.
 
 	*-g*, *--category* 'category'::
 		Install all patches in the specified category. Use *list-patches --category* command to get a list of available patches for a specific category.
