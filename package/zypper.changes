@@ -1,4 +1,10 @@
 -------------------------------------------------------------------
+Wed May  6 12:49:58 CEST 2015 - ma@suse.de
+
+- Clarify 'zypper lp --date' description (bnc#929593)
+- version 1.6.325
+
+-------------------------------------------------------------------
 Mon Apr 27 09:56:22 CEST 2015 - ma@suse.de
 
 - fix manpage format (bnc#927261)
