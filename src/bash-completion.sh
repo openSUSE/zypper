@@ -3,9 +3,7 @@
 # A hackweek gift from Marek Stopka <mstopka@opensuse.org>
 # Major rewrite by Josef Reidinger <jreidinger@suse.cz>
 # 2009/02/19 Allow empty spaces in repos names, Werner Fink <werner@suse.de>
-#
-# some TODOs:
-# - complete package names for install/remove/update
+# 2014/07/12 Enable completion for packages, patterns, prodcuts, updates, and patches; Thomas Wagner <wagner-thomas@gmx.at>
 
 _strip()
 {
@@ -146,6 +144,42 @@ _zypper() {
 						p
 					}'))
 			;;
+			product-info)
+				# list installed products
+				 opts=(${opts[@]}$(echo; LC_ALL=POSIX $ZYPPER -q -x products -i | \
+				 	grep -o -P '(?<=name\=\").*(?=\" version)' ))				 
+			;;
+			pattern-info)
+				# list installed patterns
+				 opts=(${opts[@]}$(echo; LC_ALL=POSIX $ZYPPER -q -x patterns -i | \
+				 	grep -o -P '(?<=name\=\").*(?=\" version)' ))
+			;;
+			patch-info )
+				# list installed patches
+				opts=(${opts[@]}$(echo; LC_ALL=POSIX $ZYPPER -q --no-refresh -x se -i --type=patch ${cur}* | \
+					grep -o -P '(?<=name\=\").*(?=\" summary)' ))
+			;;
+			update | up)
+				# list updateable packages
+				opts=(${opts[@]}$(echo; LC_ALL=POSIX $ZYPPER -x lu | \
+					grep -o -P '(?<=name\=\").*(?=\" edition)'))
+			;;
+			download | source-install | install)
+				# complete all packages
+				opts=(${opts[@]}$(echo; LC_ALL=POSIX $ZYPPER -q --no-refresh -x se ${cur}* | \
+					grep -o -P '(?<=name\=\").*(?=\" summary)' ))
+			;;
+			install | in)
+				# complete not-installed packages
+				opts=(${opts[@]}$(echo; LC_ALL=POSIX $ZYPPER -q --no-refresh -x se -u ${cur}* | \
+					grep -o -P '(?<=name\=\").*(?=\" summary)' ))
+			;;
+			info | if | remove | rm)
+				# complete installed packages
+				opts=(${opts[@]}$(echo; LC_ALL=POSIX $ZYPPER -q --no-refresh -x se -i ${cur}* | \
+                                	grep -o -P '(?<=name\=\").*(?=\" summary)' ))
+                                                       
+			;;                                                                     	
 		esac
 		IFS=$'\n'
 		COMPREPLY=($(compgen -W "${opts[*]}" -- ${cur}))
