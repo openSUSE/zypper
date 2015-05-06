@@ -1,4 +1,10 @@
 -------------------------------------------------------------------
+Wed May  6 12:44:02 CEST 2015 - ma@suse.de
+
+- Clarify 'zypper lp --date' description (bnc#929593)
+- version 1.11.29
+
+-------------------------------------------------------------------
 Mon May  4 12:44:57 CEST 2015 - ma@suse.de
 
 - Don't use color in XML mode.
