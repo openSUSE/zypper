@@ -1,4 +1,10 @@
 -------------------------------------------------------------------
+Thu May  7 17:17:03 CEST 2015 - ma@suse.de
+
+- Allow to overlay the default translation set. (bnc#928945)
+- version 1.6.326
+
+-------------------------------------------------------------------
 Thu May  7 16:57:40 CEST 2015 - ma@suse.de
 
 - Update sle-zypper-po.tar.bz2
