@@ -81,7 +81,7 @@ cd build
 # may use it's own set of .po files from po/sle-zypper-po.tar.bz2.
 unset TRANSLATION_SET
 %if 0%{?suse_version} == 1110
-if [ -f ../po/sle-zypper-po.tar.bz ]; then
+if [ -f ../po/sle-zypper-po.tar.bz2 ]; then
   export TRANSLATION_SET=sle-zypper
 fi
 %endif
