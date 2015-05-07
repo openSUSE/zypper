@@ -1,4 +1,9 @@
 -------------------------------------------------------------------
+Thu May  7 16:57:40 CEST 2015 - ma@suse.de
+
+- Update sle-zypper-po.tar.bz2
+
+-------------------------------------------------------------------
 Wed May  6 12:49:58 CEST 2015 - ma@suse.de
 
 - Clarify 'zypper lp --date' description (bnc#929593)
