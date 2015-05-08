@@ -1,4 +1,12 @@
 -------------------------------------------------------------------
+Fri May  8 11:44:44 CEST 2015 - ma@suse.de
+
+- gcc5 fixes
+- Fix repo alias containing ']' not handled correctly (bnc#929528)
+- Fix SEGV when dumping rpm header with epoch (bnc#929483)
+- version 15.1.2 (1)
+
+-------------------------------------------------------------------
 Mon Apr 27 14:43:53 CEST 2015 - ma@suse.de
 
 - PubliKey: fix reference to temporary data
