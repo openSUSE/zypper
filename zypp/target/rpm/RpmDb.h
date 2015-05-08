@@ -539,6 +539,9 @@ protected:
   void doRebuildDatabase(callback::SendReport<RebuildDBReport> & report);
 };
 
+/** \relates RpmDb::checkPackageResult Stream output */
+std::ostream & operator<<( std::ostream & str, RpmDb::checkPackageResult obj );
+
 } // namespace rpm
 } // namespace target
 } // namespace zypp

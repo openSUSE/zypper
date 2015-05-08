@@ -2279,6 +2279,28 @@ void RpmDb::setBackupPath(const Pathname& path)
   _backuppath = path;
 }
 
+std::ostream & operator<<( std::ostream & str, RpmDb::checkPackageResult obj )
+{
+  switch ( obj )
+  {
+#define OUTS(E,S) case RpmDb::E: return str << "["<< (unsigned)obj << "-"<< S << "]"; break
+    // translators: possible rpm package signature check result [brief]
+    OUTS( CHK_OK,		_("Signature is OK") );
+    // translators: possible rpm package signature check result [brief]
+    OUTS( CHK_NOTFOUND,		_("Unknown type of signature") );
+    // translators: possible rpm package signature check result [brief]
+    OUTS( CHK_FAIL,		_("Signature does not verify") );
+    // translators: possible rpm package signature check result [brief]
+    OUTS( CHK_NOTTRUSTED,	_("Signature is OK, but key is not trusted") );
+    // translators: possible rpm package signature check result [brief]
+    OUTS( CHK_NOKEY,		_("Signatures public key is not available") );
+    // translators: possible rpm package signature check result [brief]
+    OUTS( CHK_ERROR,		_("File does not exist or signature can't be checked") );
+#undef OUTS
+  }
+  return str << "UnknowSignatureCheckError("+str::numstring(obj)+")";
+}
+
 } // namespace rpm
 } // namespace target
 } // namespace zypp
