@@ -13,6 +13,7 @@
 #define ZYPP_CALLBACK_H
 
 #include "zypp/base/NonCopyable.h"
+#include "zypp/UserData.h"
 
 ///////////////////////////////////////////////////////////////////
 namespace zypp
@@ -136,6 +137,7 @@ namespace zypp
     /**  */
     struct ReportBase
     {
+      typedef callback::UserData UserData;
       virtual ~ReportBase()
       {}
     };
@@ -149,6 +151,7 @@ namespace zypp
       struct ReceiveReport : public _Report
       {
 	typedef _Report                   ReportType;
+	typedef typename ReportType::UserData UserData;
 	typedef ReceiveReport<_Report>    Receiver;
         typedef DistributeReport<_Report> Distributor;
 
@@ -179,6 +182,7 @@ namespace zypp
       {
        public:
 	typedef _Report                   ReportType;
+	typedef typename ReportType::UserData UserData;
 	typedef ReceiveReport<_Report>    Receiver;
 	typedef DistributeReport<_Report> Distributor;
 
@@ -217,6 +221,7 @@ namespace zypp
       struct SendReport : private zypp::base::NonCopyable
       {
 	typedef _Report                   ReportType;
+	typedef typename ReportType::UserData UserData;
         typedef ReceiveReport<_Report>    Receiver;
         typedef DistributeReport<_Report> Distributor;
 
@@ -265,6 +270,7 @@ namespace zypp
       struct TempConnect
       {
 	typedef _Report                   ReportType;
+	typedef typename ReportType::UserData UserData;
         typedef ReceiveReport<_Report>    Receiver;
         typedef DistributeReport<_Report> Distributor;
 
