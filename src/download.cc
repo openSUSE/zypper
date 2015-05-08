@@ -181,6 +181,10 @@ namespace
 	    {
 	      error_r.report( _zypper );
 	    }
+	    catch ( const AbortRequestException & exp )
+	    {
+	      ZYPP_RETHROW(exp);
+	    }
 	    catch ( const Exception & exp )
 	    {
 	      // TODO: Need class Out::Error support for exceptions
