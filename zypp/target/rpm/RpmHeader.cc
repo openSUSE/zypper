@@ -266,7 +266,7 @@ RpmHeader::constPtr RpmHeader::readPackage( const Pathname & path_r,
 //
 std::ostream & RpmHeader::dumpOn( std::ostream & str ) const
 {
-  str << BinHeader::dumpOn( str ) << '{' << tag_name() << "-";
+  BinHeader::dumpOn( str ) << '{' << tag_name() << "-";
   if ( tag_epoch() != 0 )
     str << tag_epoch() << ":";
   str << tag_version()
