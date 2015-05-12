@@ -167,6 +167,21 @@ namespace zypp
 	, const std::string &/*description*/
       ) { return ABORT; }
 
+
+      /** Detail information about the result of a performed pkgGpgCheck.
+       *
+       * Userdata sent:
+       * \param "Package"	Package::constPtr of the package
+       * \param "Localpath"	Pathname to downloaded package on disk
+       * \param "CheckPackageResult"	RpmDb::checkPackageResult of signature check
+       * \param "CheckPackageDetail"	RpmDb::CheckPackageDetail logmessages of rpm signature check
+       *
+       *  Userdata accepted:
+       * \param "Action"	DownloadResolvableReport::Action user advice how to behave on error (ABORT).
+       */
+      virtual void pkgGpgCheck( const UserData & userData_r = UserData() )
+      {}
+
       virtual void finish(Resolvable::constPtr /*resolvable_ptr*/
         , Error /*error*/
         , const std::string &/*reason*/
