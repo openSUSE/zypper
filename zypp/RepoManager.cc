@@ -1293,6 +1293,7 @@ namespace zypp
 
         // We keep it.
         guard.resetDispose();
+	sat::updateSolvFileIndex( solvfile );	// content digest for zypper bash completion
       }
       break;
       default:

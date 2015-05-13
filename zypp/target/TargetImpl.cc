@@ -1086,6 +1086,7 @@ namespace zypp
 
         // We keep it.
         guard.resetDispose();
+	sat::updateSolvFileIndex( rpmsolv );	// content digest for zypper bash completion
 
 	// Finally send notification to plugins
 	// NOTE: quick hack looking for spacewalk plugin only

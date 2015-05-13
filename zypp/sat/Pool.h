@@ -261,6 +261,9 @@ namespace zypp
     inline bool operator!=( const Pool & lhs, const Pool & rhs )
     { return lhs.get() != rhs.get(); }
 
+    /** Create solv file content digest for zypper bash completion */
+    void updateSolvFileIndex( const Pathname & solvfile_r );
+
     /////////////////////////////////////////////////////////////////
   } // namespace sat
   ///////////////////////////////////////////////////////////////////
