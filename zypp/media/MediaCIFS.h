@@ -25,7 +25,7 @@ namespace zypp {
     /**
      * @short Implementation class for CIFS MediaHandler
      *
-     * NOTE: The implementation serves both, "smb" and "cifs" URL's,
+     * NOTE: The implementation serves both, "smb" and "cifs" URLs,
      * but passes "cifs" to the mount command in any case.
      * @see MediaHandler
      **/

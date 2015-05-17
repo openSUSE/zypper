@@ -144,7 +144,7 @@ namespace zypp
      * The MediaManager uses several media access handlers (backends),
      * that can be specified by a Media Access URL in its open() method.
      *
-     * All URL's may contain following query parameters, that are
+     * All URLs may contain following query parameters, that are
      * reserved by the Source classes and unused/ignored by the media
      * manager:
      * - <tt>alias</tt>: A source specific media alias string.

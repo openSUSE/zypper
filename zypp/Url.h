@@ -45,7 +45,7 @@ namespace zypp
    *
    * Using the Url::registerScheme() method, it is possible to register
    * a preconfigured or derived UrlBase object for a specific scheme
-   * name. The registered object will be cloned to handle all URL's
+   * name. The registered object will be cloned to handle all URLs
    * containing the specified scheme name.
    *
    * \par RFC3986, Syntax Components:
@@ -131,7 +131,7 @@ namespace zypp
      * \brief Construct a Url object from percent-encoded URL string.
      *
      * Parses the \p encodedUrl string using the parseUrl() method
-     * and assings the result to the new created object.
+     * and assigns the result to the newly created object.
      *
      * \param encodedUrl A percent-encoded URL string.
      * \throws url::UrlParsingException if parsing of the url fails.
@@ -147,8 +147,8 @@ namespace zypp
     /**
      * \brief Parse a percent-encoded URL string.
      *
-     * Trys to parses the given string into generic URL components
-     * and created a clone of a scheme-specialized object or a new
+     * Tries to parse the given string into generic URL components
+     * and creates a clone of a scheme-specialized object or a new
      * UrlBase object.
      *
      * \param encodedUrl A percent-encoded URL string.
@@ -184,10 +184,10 @@ namespace zypp
 
 
     /**
-     * \brief Assign shared copy of \p url to the current object.
+     * \brief Assign a shared copy of \p url to the current object.
      *
      * Upon return, both objects will point to the same underlying
-     * object. This state will remain until one of the object is
+     * object. This state will remain until one of the objects is
      * modified.
      *
      * \param url The Url object to make a copy of.
@@ -234,7 +234,7 @@ namespace zypp
 
 
     /**
-     * \brief Verifies specified scheme name.
+     * \brief Verifies the specified scheme name.
      *
      * Verifies the generic syntax of the specified \p scheme name
      * and if it is contained in the current object's list of known
@@ -315,7 +315,7 @@ namespace zypp
      *
      * This function ignores the configuration of the view options
      * in the current object (see setViewOption()) and forces to
-     * return an string with all URL components included.
+     * return a string with all URL components included.
      *
      * \return A complete string representation of the Url object.
      */
@@ -488,8 +488,8 @@ namespace zypp
      * Returns the encoded query string component of the URL.
      *
      * The query string is returned without first "?" (separator)
-     * character. Further "?" characters as in e.g. LDAP URL's
-     * remains in the returned string.
+     * character. Further "?" characters as in e.g. LDAP URLs
+     * remain in the returned string.
      *
      * \return The encoded query string component of the URL.
      */
