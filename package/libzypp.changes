@@ -1,4 +1,18 @@
 -------------------------------------------------------------------
+Mon May 18 10:46:10 CEST 2015 - ma@suse.de
+
+- zypp.conf: Add config values for gpgcheck, repo_gpgcheck 
+  and pkg_gpgcheck. The default behavior 'gpgcheck=On' will
+  automatically turn on the gpg signature check for packages 
+  downloaded from repository with unsigned metadata. If the
+  repo metadata are signed, a faster comparison via checksums
+  is done. By explicitly setting repo_gpgcheck or pkg_gpgcheck
+  you can enforce the signature check of repository metadata
+  or downloaded packages to be always performed. Those defaults 
+  can be overwritten per repository. (FATE#314603) 
+- version 15.2.0 (2)
+
+-------------------------------------------------------------------
 Wed May 13 14:04:04 CEST 2015 - ma@suse.de
 
 - Write solv.idx to speed up bash tab completion (bnc#928650)
