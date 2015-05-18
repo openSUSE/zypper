@@ -178,6 +178,7 @@ namespace zypp
        *
        *  Userdata accepted:
        * \param "Action"	DownloadResolvableReport::Action user advice how to behave on error (ABORT).
+       *                        If you set just an empty value here, a default probelm report will be triggered.
        */
       virtual void pkgGpgCheck( const UserData & userData_r = UserData() )
       {}

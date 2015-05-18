@@ -333,9 +333,13 @@ namespace zypp
 
 	      if ( res != RpmDb::CHK_OK )
 	      {
-		if ( userData.hasvalue( "Action" ) )	// pkgGpgCheck provided an user error action
+		if ( userData.hasvalue( "Action" ) )	// pkgGpgCheck report provided an user error action
 		{
 		  resolveSignatureErrorAction( userData.get( "Action", repo::DownloadResolvableReport::ABORT ) );
+		}
+		else if ( userData.haskey( "Action" ) )	// pkgGpgCheck reportrequests the default problem report
+		{
+		  defaultReportSignatureError( res );
 		}
 		else					// no advice from user => usedefaults
 		{
