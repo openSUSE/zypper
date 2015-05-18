@@ -10,7 +10,11 @@
  *
 */
 #include "librpm.h"
-
+extern "C"
+{
+#include <rpm/rpmcli.h>
+#include <rpm/rpmlog.h>
+}
 #include <cstdlib>
 #include <cstdio>
 #include <ctime>
@@ -1440,11 +1444,56 @@ void RpmDb::getData( const string & name_r, const Edition & ed_r,
 }
 
 ///////////////////////////////////////////////////////////////////
+namespace
+{
+  struct RpmlogCapture : public std::string
+  {
+    RpmlogCapture()
+    { rpmlog()._cap = this; }
+
+    ~RpmlogCapture()
+    { rpmlog()._cap = nullptr; }
+
+  private:
+    struct Rpmlog
+    {
+      Rpmlog()
+      : _cap( nullptr )
+      {
+	rpmlogSetCallback( rpmLogCB, this );
+	rpmSetVerbosity( RPMLOG_INFO );
+	_f = ::fopen( "/dev/null","w");
+	rpmlogSetFile( _f );
+      }
+
+      ~Rpmlog()
+      { if ( _f ) ::fclose( _f ); }
+
+      static int rpmLogCB( rpmlogRec rec_r, rpmlogCallbackData data_r )
+      { return reinterpret_cast<Rpmlog*>(data_r)->rpmLog( rec_r ); }
+
+      int rpmLog( rpmlogRec rec_r )
+      {
+	if ( _cap ) (*_cap) = rpmlogRecMessage( rec_r );
+	return RPMLOG_DEFAULT;
+      }
+
+      FILE * _f;
+      std::string * _cap;
+    };
+
+    static Rpmlog & rpmlog()
+    { static Rpmlog _rpmlog; return _rpmlog; }
+  };
+
+
+} // namespace
+///////////////////////////////////////////////////////////////////
 //
 //	METHOD NAME : RpmDb::checkPackage
 //	METHOD TYPE : RpmDb::checkPackageResult
 //
-RpmDb::checkPackageResult RpmDb::checkPackage( const Pathname & path_r )
+RpmDb::checkPackageResult RpmDb::checkPackage( const Pathname & path_r, CheckPackageDetail & detail_r )
 {
   PathInfo file( path_r );
   if ( ! file.isFile() )
@@ -1461,40 +1510,71 @@ RpmDb::checkPackageResult RpmDb::checkPackage( const Pathname & path_r )
       ::Fclose( fd );
     return CHK_ERROR;
   }
-
   rpmts ts = ::rpmtsCreate();
   ::rpmtsSetRootDir( ts, root().asString().c_str() );
   ::rpmtsSetVSFlags( ts, RPMVSF_DEFAULT );
-  int res = ::rpmReadPackageFile( ts, fd, path_r.asString().c_str(), NULL );
-  ts = rpmtsFree(ts);
 
+  rpmQVKArguments_s qva;
+  memset( &qva, 0, sizeof(rpmQVKArguments_s) );
+  qva.qva_flags = (VERIFY_DIGEST|VERIFY_SIGNATURE);
+
+  RpmlogCapture vresult;
+  int res = ::rpmVerifySignatures( &qva, ts, fd, path_r.basename().c_str() );
+
+  ts = rpmtsFree(ts);
   ::Fclose( fd );
 
-  switch ( res )
+
+  if ( res == 0 )
   {
-  case RPMRC_OK:
+    detail_r.push_back( CheckPackageDetail::value_type( CHK_OK, std::move(vresult) ) );
     return CHK_OK;
-    break;
-  case RPMRC_NOTFOUND:
-    WAR << "Signature is unknown type. " << file << endl;
-    return CHK_NOTFOUND;
-    break;
-  case RPMRC_FAIL:
-    WAR << "Signature does not verify. " << file << endl;
-    return CHK_FAIL;
-    break;
-  case RPMRC_NOTTRUSTED:
-    WAR << "Signature is OK, but key is not trusted. " << file << endl;
-    return CHK_NOTTRUSTED;
-    break;
-  case RPMRC_NOKEY:
-    WAR << "Public key is unavailable. " << file << endl;
-    return CHK_NOKEY;
-    break;
   }
-  ERR << "Error reading header." << file << endl;
-  return CHK_ERROR;
+
+  // results per line...
+  WAR << vresult;
+  std::vector<std::string> lines;
+  str::split( vresult, std::back_inserter(lines), "\n" );
+  unsigned count[6] = { 0, 0, 0, 0, 0, 0 };
+
+  for ( unsigned i = 1; i < lines.size(); ++i )
+  {
+    std::string & line( lines[i] );
+    checkPackageResult lineres = CHK_ERROR;
+    if ( line.find( ": OK" ) != std::string::npos )
+    { lineres = CHK_OK; }
+    else if ( line.find( ": NOKEY" ) != std::string::npos )
+    { lineres = CHK_NOKEY; }
+    else if ( line.find( ": BAD" ) != std::string::npos )
+    { lineres = CHK_FAIL; }
+    else if ( line.find( ": UNKNOWN" ) != std::string::npos )
+    { lineres = CHK_NOTFOUND; }
+    else if ( line.find( ": NOTRUSTED" ) != std::string::npos )
+    { lineres = CHK_NOTTRUSTED; }
+
+    ++count[lineres];
+    detail_r.push_back( CheckPackageDetail::value_type( lineres, std::move(line) ) );
+  }
+
+  checkPackageResult ret = CHK_ERROR;
+  if ( count[CHK_FAIL] )
+    ret = CHK_FAIL;
+
+  else if ( count[CHK_NOTFOUND] )
+    ret = CHK_NOTFOUND;
+
+  else if ( count[CHK_NOKEY] )
+    ret = CHK_NOKEY;
+
+  else if ( count[CHK_NOTTRUSTED] )
+    ret = CHK_NOTTRUSTED;
+
+  return ret;
 }
+
+RpmDb::checkPackageResult RpmDb::checkPackage( const Pathname & path_r )
+{ CheckPackageDetail dummy; return checkPackage( path_r, dummy ); }
+
 
 // determine changed files of installed package
 bool
@@ -2277,6 +2357,35 @@ bool RpmDb::backupPackage(const string& packageName)
 void RpmDb::setBackupPath(const Pathname& path)
 {
   _backuppath = path;
+}
+
+std::ostream & operator<<( std::ostream & str, RpmDb::checkPackageResult obj )
+{
+  switch ( obj )
+  {
+#define OUTS(E,S) case RpmDb::E: return str << "["<< (unsigned)obj << "-"<< S << "]"; break
+    // translators: possible rpm package signature check result [brief]
+    OUTS( CHK_OK,		_("Signature is OK") );
+    // translators: possible rpm package signature check result [brief]
+    OUTS( CHK_NOTFOUND,		_("Unknown type of signature") );
+    // translators: possible rpm package signature check result [brief]
+    OUTS( CHK_FAIL,		_("Signature does not verify") );
+    // translators: possible rpm package signature check result [brief]
+    OUTS( CHK_NOTTRUSTED,	_("Signature is OK, but key is not trusted") );
+    // translators: possible rpm package signature check result [brief]
+    OUTS( CHK_NOKEY,		_("Signatures public key is not available") );
+    // translators: possible rpm package signature check result [brief]
+    OUTS( CHK_ERROR,		_("File does not exist or signature can't be checked") );
+#undef OUTS
+  }
+  return str << "UnknowSignatureCheckError("+str::numstring(obj)+")";
+}
+
+std::ostream & operator<<( std::ostream & str, const RpmDb::CheckPackageDetail & obj )
+{
+  for ( const auto & el : obj )
+    str << el.second << endl;
+  return str;
 }
 
 } // namespace rpm

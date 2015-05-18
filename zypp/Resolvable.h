@@ -85,6 +85,9 @@ namespace zypp
     bool multiversionInstall() const
     { return sat::Solvable::multiversionInstall(); }
 
+    using sat::Solvable::asString;
+    using sat::Solvable::asUserString;
+
     /** \name Dependencies. */
     //@{
     /** Select by Dep. */

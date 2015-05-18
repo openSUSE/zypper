@@ -305,6 +305,9 @@ namespace zypp
         , download_max_silent_tries	( 5 )
         , download_transfer_timeout	( 180 )
         , commit_downloadMode		( DownloadDefault )
+	, gpgCheck			( true )
+	, repoGpgCheck			( indeterminate )
+	, pkgGpgCheck			( indeterminate )
         , solver_onlyRequires		( false )
         , solver_allowVendorChange	( false )
         , solver_cleandepsOnRemove	( false )
@@ -440,6 +443,18 @@ namespace zypp
                 {
                   commit_downloadMode.set( deserializeDownloadMode( value ) );
                 }
+                else if ( entry == "gpgcheck" )
+		{
+		  gpgCheck.set( str::strToBool( value, gpgCheck ) );
+		}
+		else if ( entry == "repo_gpgcheck" )
+		{
+		  repoGpgCheck.set( str::strToTriBool( value ) );
+		}
+		else if ( entry == "pkg_gpgcheck" )
+		{
+		  pkgGpgCheck.set( str::strToTriBool( value ) );
+		}
                 else if ( entry == "vendordir" )
                 {
                   cfg_vendor_path = Pathname(value);
@@ -584,6 +599,10 @@ namespace zypp
     int download_transfer_timeout;
 
     Option<DownloadMode> commit_downloadMode;
+
+    Option<bool>	gpgCheck;
+    Option<TriBool>	repoGpgCheck;
+    Option<TriBool>	pkgGpgCheck;
 
     Option<bool>	solver_onlyRequires;
     Option<bool>	solver_allowVendorChange;
@@ -865,6 +884,15 @@ namespace zypp
 
   DownloadMode ZConfig::commit_downloadMode() const
   { return _pimpl->commit_downloadMode; }
+
+  bool ZConfig::gpgCheck() const
+  { return _pimpl->gpgCheck; }
+
+  TriBool ZConfig::repoGpgCheck() const
+  { return _pimpl->repoGpgCheck; }
+
+  TriBool ZConfig::pkgGpgCheck() const
+  { return _pimpl->pkgGpgCheck; }
 
   bool ZConfig::solver_onlyRequires() const
   { return _pimpl->solver_onlyRequires; }

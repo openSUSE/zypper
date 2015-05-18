@@ -436,13 +436,23 @@ public:
     CHK_ERROR         = 5  /*!< File does not exist or can't be opened. */
   };
 
+  /** Detailed rpm signature check log messages
+   * A single multiline message if \ref CHK_OK. Otherwise each message line
+   * together with it's \ref checkPackageResult.
+   */
+  struct CheckPackageDetail : std::vector<std::pair<checkPackageResult,std::string>>
+  {};
+
   /**
    * Check signature of rpm file on disk.
    *
-   * @param filename which file to check
+   * @param path_r which file to check
+   * @param detail_r Return detailed rpm log messages
    *
    * @return checkPackageResult
   */
+  checkPackageResult checkPackage( const Pathname & path_r, CheckPackageDetail & detail_r );
+  /** \overload Ignoring the \a datails_r */
   checkPackageResult checkPackage( const Pathname & path_r );
 
   /** install rpm package
@@ -538,6 +548,12 @@ protected:
   void doInstallPackage( const Pathname & filename, RpmInstFlags flags, callback::SendReport<RpmInstallReport> & report );
   void doRebuildDatabase(callback::SendReport<RebuildDBReport> & report);
 };
+
+/** \relates RpmDb::checkPackageResult Stream output */
+std::ostream & operator<<( std::ostream & str, RpmDb::checkPackageResult obj );
+
+/** \relates RpmDb::checkPackageDetail Stream output */
+std::ostream & operator<<( std::ostream & str, const RpmDb::CheckPackageDetail & obj );
 
 } // namespace rpm
 } // namespace target

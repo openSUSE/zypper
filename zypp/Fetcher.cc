@@ -801,7 +801,7 @@ namespace zypp
       // if the file was not transferred, and no exception, just
       // return, as it was an optional file
       if ( ! PathInfo(dest_dir + (*it_res)->location.filename()).isExist() )
-          return;
+          continue;
 
       // if the checksum is empty, but the checksum is in one of the
       // indexes checksum, then add a checker

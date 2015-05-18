@@ -51,38 +51,49 @@ void Downloader::defaultDownloadMasterIndex( MediaSetAccess & media_r, const Pat
   Pathname sigpath = masterIndex_r.extend( ".asc" );
   Pathname keypath = masterIndex_r.extend( ".key" );
 
-  SignatureFileChecker sigchecker;
-
+  // always download them, even if repoGpgCheck is disabled
   enqueue( OnMediaLocation( sigpath, 1 ).setOptional( true ) );
-  start( destdir_r, media_r );
-  reset();
-
-  // only add the signature if it exists
-  if ( PathInfo(destdir_r / sigpath).isExist() )
-    sigchecker = SignatureFileChecker( destdir_r / sigpath );
-
   enqueue( OnMediaLocation( keypath, 1 ).setOptional( true ) );
   start( destdir_r, media_r );
   reset();
 
-  KeyContext context;
-  context.setRepoInfo( repoInfo() );
-  // only add the key if it exists
-  if ( PathInfo(destdir_r / keypath).isExist() )
-    sigchecker.addPublicKey( destdir_r / keypath, context );
-  else
-    // set the checker context even if the key is not known (unsigned repo, key
-    // file missing; bnc #495977)
-    sigchecker.setKeyContext( context );
+  FileChecker checker;	// set to sigchecker if appropriate, else Null.
+  SignatureFileChecker sigchecker;
+  bool isSigned = PathInfo(destdir_r / sigpath).isExist();
 
-  if ( ! repoInfo().gpgCheck() )
+  if ( repoInfo().repoGpgCheck() )
+  {
+    // only add the signature if it exists
+    if ( isSigned )
+      sigchecker = SignatureFileChecker( destdir_r / sigpath );
+
+    KeyContext context;
+    context.setRepoInfo( repoInfo() );
+    // only add the key if it exists
+    if ( PathInfo(destdir_r / keypath).isExist() )
+      sigchecker.addPublicKey( destdir_r / keypath, context );
+    else
+      // set the checker context even if the key is not known (unsigned repo, key
+      // file missing; bnc #495977)
+      sigchecker.setKeyContext( context );
+
+    checker = FileChecker( ref(sigchecker) );	// ref() to the local sigchecker is important as we want back fileValidated!
+  }
+  else
   {
     WAR << "Signature checking disabled in config of repository " << repoInfo().alias() << endl;
   }
-  enqueue( OnMediaLocation( masterIndex_r, 1 ),
-	   repoInfo().gpgCheck() ? FileChecker(sigchecker) : FileChecker(NullFileChecker()) );
+
+  enqueue( OnMediaLocation( masterIndex_r, 1 ), checker ? checker : FileChecker(NullFileChecker()) );
   start( destdir_r, media_r );
   reset();
+
+  // Accepted!
+  _repoinfo.setMetadataPath( destdir_r );
+  if ( isSigned )
+    _repoinfo.setValidRepoSignature( sigchecker.fileValidated() );
+  else
+    _repoinfo.setValidRepoSignature( indeterminate );
 }
 
 

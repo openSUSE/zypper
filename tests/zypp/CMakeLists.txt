@@ -41,6 +41,7 @@ ADD_TESTS(
   StrMatcher
   Target
   Url
+  UserData
   Vendor
   Vendor2
 )

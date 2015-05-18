@@ -36,27 +36,24 @@ namespace zypp
     /** Ctor taking <tt>"type[/subtype]"</tt>
      * \throws std::invalid_argument if string is malformed
      */
-    explicit ContentType( const std::string & type_r )
+    explicit ContentType( std::string type_r )
     {
       std::string::size_type pos = type_r.find( "/" );
-      if ( pos == std::string::npos )
+      if ( pos != std::string::npos )
       {
-	testAndSet( _type, type_r );
-      }
-      else
-      {
-	testAndSet( _type,    type_r.substr( 0, pos ) );
 	testAndSet( _subtype, type_r.substr( pos+1 ) );
+	type_r.erase( pos );
       }
+      testAndSet( _type, std::move(type_r) );
     }
 
     /** Ctor taking type and subtype
      * \throws std::invalid_argument if string is malformed
      */
-    ContentType( const std::string & type_r, const std::string & subtype_r )
+    ContentType( std::string type_r, std::string subtype_r )
     {
-      testAndSet( _type,    type_r );
-      testAndSet( _subtype, subtype_r );
+      testAndSet( _type,    std::move(type_r) );
+      testAndSet( _subtype, std::move(subtype_r) );
     }
 
   public:
@@ -67,8 +64,8 @@ namespace zypp
     /** Set type
      * \throws std::invalid_argument if string is malformed
      */
-    void type( const std::string & type_r )
-    { _type = type_r; }
+    void type( std::string type_r )
+    { _type = std::move(type_r); }
 
     /**  Get subtype */
     const std::string & subtype() const
@@ -77,8 +74,8 @@ namespace zypp
     /**  Set subtype
      * \throws std::invalid_argument if string is malformed
      */
-    void subtype( const std::string & subtype_r )
-    { _subtype = subtype_r; }
+    void subtype( std::string subtype_r )
+    { _subtype = std::move(subtype_r); }
 
   public:
     /** Whether type and subtype are empty */
@@ -100,11 +97,11 @@ namespace zypp
     { std::string ret( type() ); if ( ! emptySubtype() ) { ret += "/"; ret += subtype(); } return ret; }
 
   private:
-    void testAndSet( std::string & var_r, const std::string & val_r )
+    void testAndSet( std::string & var_r, std::string val_r )
     {
       if ( val_r.find_first_of( "/ \t\r\n" ) != std::string::npos )
 	throw std::invalid_argument( "ContentType: illegal char in '" + val_r + "'" );
-      var_r = val_r;
+      var_r = std::move(val_r);
     }
   private:
     std::string	_type;

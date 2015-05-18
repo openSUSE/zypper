@@ -121,7 +121,11 @@ namespace zypp
               info.setGpgKeyUrl( Url(*keys.begin()) );
           }
           else if ( it->first == "gpgcheck" )
-            info.setGpgCheck( str::strToTrue( it->second ) );
+            info.setGpgCheck( str::strToTriBool( it->second ) );
+          else if ( it->first == "repo_gpgcheck" )
+            info.setRepoGpgCheck( str::strToTrue( it->second ) );
+          else if ( it->first == "pkg_gpgcheck" )
+            info.setPkgGpgCheck( str::strToTrue( it->second ) );
 	  else if ( it->first == "keeppackages" )
 	    info.setKeepPackages( str::strToTrue( it->second ) );
 	  else if ( it->first == "service" )

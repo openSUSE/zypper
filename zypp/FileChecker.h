@@ -14,6 +14,7 @@
 
 #include <iosfwd>
 #include <list>
+#include "zypp/base/DefaultIntegral.h"
 #include "zypp/base/Exception.h"
 #include "zypp/base/Function.h"
 #include "zypp/PathInfo.h"
@@ -45,12 +46,18 @@ namespace zypp
 
   class CheckSumCheckException : public FileCheckException
   {
-    //TODO
+  public:
+    CheckSumCheckException(const std::string &msg)
+      : FileCheckException(msg)
+    {}
   };
 
   class SignatureCheckException : public FileCheckException
   {
-    //TODO
+  public:
+    SignatureCheckException(const std::string &msg)
+      : FileCheckException(msg)
+    {}
   };
 
   /**
@@ -63,6 +70,7 @@ namespace zypp
    class ChecksumFileChecker
    {
    public:
+     typedef CheckSumCheckException ExceptionType;
      /**
       * Constructor.
       * \param checksum Checksum that validates the file
@@ -84,6 +92,10 @@ namespace zypp
     */
    class SignatureFileChecker
    {
+     public:
+       typedef SignatureCheckException ExceptionType;
+       typedef function<void ( const SignatureFileChecker & checker,  const Pathname & file )> OnSigValidated;
+
      public:
       /**
       * Constructor.
@@ -108,6 +120,24 @@ namespace zypp
        */
       void setKeyContext(const KeyContext & keycontext);
 
+      /** Return the current context */
+      const KeyContext & keyContext() const
+      { return _context; }
+
+      /** Return whether the last file passed to \ref operator() was accepted.
+       * If this is \ref false \ref operator() was not invoked or threw a
+       * \ref SignatureCheckException.
+       */
+      bool fileAccepted() const
+      { return _fileAccepted; }
+
+      /** Return whether the last file passed to \ref operator() was actually sucessfully verified.
+       * If this is \c false but \ref fileAccepted, the file was accepted due to user interaction or
+       * global settings, but the signature was not verified.
+       */
+      bool fileValidated() const
+      { return _fileValidated; }
+
       /**
        * add a public key to the list of known keys
        */
@@ -116,16 +146,24 @@ namespace zypp
       void addPublicKey( const Pathname & publickey, const KeyContext & keycontext = KeyContext());
 
       /**
-      * \short Try to validate the file
-      * \param file File to validate.
-      *
-      * \throws SignatureCheckException if validation fails
-      */
+       * Calls \ref KeyRing::verifyFileSignatureWorkflow to verify the file.
+       *
+       * Keep in mind the the workflow may return \c true (file accepted) due to user interaction
+       * or global defaults even if a signature was not actually sucessfully verified. Whether a
+       * signature was actually sucessfully verified can be determined by checking \ref fileValidated
+       * which is invokes IFF a signature for this file actually validated.
+       *
+       * \param file File to validate.fileValidated
+       *
+       * \throws SignatureCheckException if validation fails
+       */
       void operator()( const Pathname &file ) const;
 
      protected:
       Pathname _signature;
       KeyContext _context;
+      mutable DefaultIntegral<bool,false> _fileAccepted;
+      mutable DefaultIntegral<bool,false> _fileValidated;
    };
 
    /**

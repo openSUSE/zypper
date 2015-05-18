@@ -20,6 +20,7 @@
 
 #include "zypp/Url.h"
 #include "zypp/Locale.h"
+#include "zypp/TriBool.h"
 #include "zypp/repo/RepoType.h"
 #include "zypp/repo/RepoVariables.h"
 
@@ -246,24 +247,40 @@ namespace zypp
        */
       void setPackagesPath( const Pathname &path );
 
-      /**
-       * \short Whether to check or not this repository with gpg
+
+      /** Whether default signature checking should be performed for this repo.
        *
-       * \note This is a just a hint to the application and can
-       * be ignored.
+       * This will turn on \ref repoGpgCheck for signed repos and
+       * \ref pkgGpgCheck for unsigned ones or if \ref repoGpgCheck is off.
        *
+       * The default is \c true but may be overwritten by \c zypp.conf or a \ref .repo file.
        */
       bool gpgCheck() const;
-      /**
-       * \short Whether to check or not this repository with gpg
-       *
-       * \param check true (check) or false (dont'check)
-       *
-       * \note This is a just a hint to the application and can
-       * be ignored.
-       *
+      /** Set the value for \ref gpgCheck (or \c indeterminate to use the default). */
+      void setGpgCheck( TriBool value_r );
+      /** \overload \deprecated legacy and for squid */
+      void setGpgCheck( bool value_r );
+
+      /** Whether the signature of repo metadata should be checked for this repo.
+       * The default is defined by \ref gpgCheck but may be overwritten by \c zypp.conf or a \ref .repo file.
        */
-      void setGpgCheck( bool check );
+      bool repoGpgCheck() const;
+      /** Set the value for \ref repoGpgCheck (or \c indeterminate to use the default). */
+      void setRepoGpgCheck( TriBool value_r );
+
+      /** Whether the signature of rpm packages should be checked for this repo.
+       * The default is defined by \ref gpgCheck but may be overwritten by \c zypp.conf or a \ref .repo file.
+       */
+      bool pkgGpgCheck() const;
+      /** Set the value for \ref pkgGpgCheck (or \c indeterminate to use the default). */
+      void setPkgGpgCheck( TriBool value_r );
+
+      /** Whether the repo metadata are signed and successfully validated or \c indeterminate if unsigned.
+       * The value is usually set by \ref repo::Downloader when retrieving the metadata.
+       */
+      TriBool validRepoSignature() const;
+      /** Set the value for \ref validRepoSignature (or \c indeterminate if unsigned). */
+      void setValidRepoSignature( TriBool value_r );
 
       /**
        * \short Key to use for gpg checking of this repository
@@ -381,13 +398,6 @@ namespace zypp
        * not specify a specific locale.
        */
       LocaleSet getLicenseLocales() const;
-      //@}
-
-      /** \name Repository global unique id
-       *
-       *
-       */
-      //@{
       //@}
 
     public:
