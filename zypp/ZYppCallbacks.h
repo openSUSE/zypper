@@ -173,7 +173,7 @@ namespace zypp
        * Userdata sent:
        * \param "Package"	Package::constPtr of the package
        * \param "Localpath"	Pathname to downloaded package on disk
-       * \param "CheckPackageResult"	RpmDb::checkPackageResult of signature check
+       * \param "CheckPackageResult"	RpmDb::CheckPackageResult of signature check
        * \param "CheckPackageDetail"	RpmDb::CheckPackageDetail logmessages of rpm signature check
        *
        *  Userdata accepted:

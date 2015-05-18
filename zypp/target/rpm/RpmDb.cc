@@ -1491,9 +1491,9 @@ namespace
 ///////////////////////////////////////////////////////////////////
 //
 //	METHOD NAME : RpmDb::checkPackage
-//	METHOD TYPE : RpmDb::checkPackageResult
+//	METHOD TYPE : RpmDb::CheckPackageResult
 //
-RpmDb::checkPackageResult RpmDb::checkPackage( const Pathname & path_r, CheckPackageDetail & detail_r )
+RpmDb::CheckPackageResult RpmDb::checkPackage( const Pathname & path_r, CheckPackageDetail & detail_r )
 {
   PathInfo file( path_r );
   if ( ! file.isFile() )
@@ -1540,7 +1540,7 @@ RpmDb::checkPackageResult RpmDb::checkPackage( const Pathname & path_r, CheckPac
   for ( unsigned i = 1; i < lines.size(); ++i )
   {
     std::string & line( lines[i] );
-    checkPackageResult lineres = CHK_ERROR;
+    CheckPackageResult lineres = CHK_ERROR;
     if ( line.find( ": OK" ) != std::string::npos )
     { lineres = CHK_OK; }
     else if ( line.find( ": NOKEY" ) != std::string::npos )
@@ -1556,7 +1556,7 @@ RpmDb::checkPackageResult RpmDb::checkPackage( const Pathname & path_r, CheckPac
     detail_r.push_back( CheckPackageDetail::value_type( lineres, std::move(line) ) );
   }
 
-  checkPackageResult ret = CHK_ERROR;
+  CheckPackageResult ret = CHK_ERROR;
   if ( count[CHK_FAIL] )
     ret = CHK_FAIL;
 
@@ -1572,7 +1572,7 @@ RpmDb::checkPackageResult RpmDb::checkPackage( const Pathname & path_r, CheckPac
   return ret;
 }
 
-RpmDb::checkPackageResult RpmDb::checkPackage( const Pathname & path_r )
+RpmDb::CheckPackageResult RpmDb::checkPackage( const Pathname & path_r )
 { CheckPackageDetail dummy; return checkPackage( path_r, dummy ); }
 
 
@@ -2359,7 +2359,7 @@ void RpmDb::setBackupPath(const Pathname& path)
   _backuppath = path;
 }
 
-std::ostream & operator<<( std::ostream & str, RpmDb::checkPackageResult obj )
+std::ostream & operator<<( std::ostream & str, RpmDb::CheckPackageResult obj )
 {
   switch ( obj )
   {

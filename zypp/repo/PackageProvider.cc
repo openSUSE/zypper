@@ -173,12 +173,12 @@ namespace zypp
 
       typedef target::rpm::RpmDb RpmDb;
 
-      RpmDb::checkPackageResult packageSigCheck( const Pathname & path_r, UserData & userData ) const
+      RpmDb::CheckPackageResult packageSigCheck( const Pathname & path_r, UserData & userData ) const
       {
 	if ( !_target )
 	  _target = getZYpp()->getTarget();
 
-	RpmDb::checkPackageResult ret = RpmDb::CHK_ERROR;
+	RpmDb::CheckPackageResult ret = RpmDb::CHK_ERROR;
 	RpmDb::CheckPackageDetail detail;
 	if ( _target )
 	  ret = _target->rpmDb().checkPackage( path_r, detail );
@@ -210,7 +210,7 @@ namespace zypp
       }
 
       /** Default signature verrification error handling. */
-      void defaultReportSignatureError( RpmDb::checkPackageResult ret ) const
+      void defaultReportSignatureError( RpmDb::CheckPackageResult ret ) const
       {
 	std::string msg( str::Str() << _package->asUserString() << ": " << _("Signature verification failed") << " " << ret );
 	resolveSignatureErrorAction( report()->problem( _package, repo::DownloadResolvableReport::INVALID, msg ) );
@@ -327,7 +327,7 @@ namespace zypp
 	      UserData userData( "pkgGpgCheck" );
 	      userData.set( "Package", _package );
 	      userData.set( "Localpath", ret.value() );
-	      RpmDb::checkPackageResult res = packageSigCheck( ret, userData );
+	      RpmDb::CheckPackageResult res = packageSigCheck( ret, userData );
 	      // publish the checkresult, even if it is OK. Apps may want to report something...
 	      report()->pkgGpgCheck( userData );
 

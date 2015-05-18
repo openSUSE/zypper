@@ -426,7 +426,7 @@ public:
    * checkPackage result
    * @see checkPackage
    * */
-  enum checkPackageResult
+  enum CheckPackageResult
   {
     CHK_OK            = 0, /*!< Signature is OK. */
     CHK_NOTFOUND      = 1, /*!< Signature is unknown type. */
@@ -438,9 +438,9 @@ public:
 
   /** Detailed rpm signature check log messages
    * A single multiline message if \ref CHK_OK. Otherwise each message line
-   * together with it's \ref checkPackageResult.
+   * together with it's \ref CheckPackageResult.
    */
-  struct CheckPackageDetail : std::vector<std::pair<checkPackageResult,std::string>>
+  struct CheckPackageDetail : std::vector<std::pair<CheckPackageResult,std::string>>
   {};
 
   /**
@@ -449,11 +449,11 @@ public:
    * @param path_r which file to check
    * @param detail_r Return detailed rpm log messages
    *
-   * @return checkPackageResult
+   * @return CheckPackageResult
   */
-  checkPackageResult checkPackage( const Pathname & path_r, CheckPackageDetail & detail_r );
+  CheckPackageResult checkPackage( const Pathname & path_r, CheckPackageDetail & detail_r );
   /** \overload Ignoring the \a datails_r */
-  checkPackageResult checkPackage( const Pathname & path_r );
+  CheckPackageResult checkPackage( const Pathname & path_r );
 
   /** install rpm package
    *
@@ -549,8 +549,8 @@ protected:
   void doRebuildDatabase(callback::SendReport<RebuildDBReport> & report);
 };
 
-/** \relates RpmDb::checkPackageResult Stream output */
-std::ostream & operator<<( std::ostream & str, RpmDb::checkPackageResult obj );
+/** \relates RpmDb::CheckPackageResult Stream output */
+std::ostream & operator<<( std::ostream & str, RpmDb::CheckPackageResult obj );
 
 /** \relates RpmDb::checkPackageDetail Stream output */
 std::ostream & operator<<( std::ostream & str, const RpmDb::CheckPackageDetail & obj );
