@@ -35,16 +35,15 @@ void signal_handler(int sig)
     }
     else*/
     {
-      // translators: this will show up if you press ctrl+c twice (but outside of zypper shell)
-      cerr << endl << _("OK OK! Exiting immediately...") << endl;
+      cerr << endl << "OK OK! Exiting immediately..." << endl;
       zypper.cleanup();
-      exit(ZYPPER_EXIT_ON_SIGNAL);
+      _exit(ZYPPER_EXIT_ON_SIGNAL);
     }
   }
   else if (zypper.runtimeData().waiting_for_input)
   {
     zypper.cleanup();
-    exit(ZYPPER_EXIT_ON_SIGNAL);
+    _exit(ZYPPER_EXIT_ON_SIGNAL);
   }
   else
   {
