@@ -487,6 +487,10 @@ namespace zypp
                 {
                   solver_checkSystemFile = Pathname(value);
                 }
+                else if ( entry == "solver.checkSystemFileDir" )
+                {
+                  solver_checkSystemFileDir = Pathname(value);
+                }
                 else if ( entry == "multiversion" )
                 {
                   str::split( value, inserter( _multiversion, _multiversion.end() ), ", \t" );
@@ -611,6 +615,7 @@ namespace zypp
     DefaultOption<bool> solverUpgradeRemoveDroppedPackages;
 
     Pathname solver_checkSystemFile;
+    Pathname solver_checkSystemFileDir;
 
     std::set<std::string> &		multiversion()		{ return getMultiversion(); }
     const std::set<std::string> &	multiversion() const	{ return getMultiversion(); }
@@ -906,6 +911,10 @@ namespace zypp
   Pathname ZConfig::solver_checkSystemFile() const
   { return ( _pimpl->solver_checkSystemFile.empty()
       ? (configPath()/"systemCheck") : _pimpl->solver_checkSystemFile ); }
+
+  Pathname ZConfig::solver_checkSystemFileDir() const
+  { return ( _pimpl->solver_checkSystemFileDir.empty()
+      ? (configPath()/"systemCheck.d") : _pimpl->solver_checkSystemFileDir ); }
 
   unsigned ZConfig::solver_upgradeTestcasesToKeep() const
   { return _pimpl->solver_upgradeTestcasesToKeep; }
