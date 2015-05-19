@@ -244,6 +244,7 @@ ln -s %{_sysconfdir}/yum.repos.d $RPM_BUILD_ROOT%{_sysconfdir}/zypp/repos.d
 mkdir -p $RPM_BUILD_ROOT%{_sysconfdir}/zypp/repos.d
 %endif
 mkdir -p $RPM_BUILD_ROOT%{_sysconfdir}/zypp/services.d
+mkdir -p $RPM_BUILD_ROOT%{_sysconfdir}/zypp/systemCheck.d
 mkdir -p $RPM_BUILD_ROOT%{_sysconfdir}/zypp/vendors.d
 mkdir -p $RPM_BUILD_ROOT%{_sysconfdir}/zypp/multiversion.d
 mkdir -p $RPM_BUILD_ROOT%{_prefix}/lib/zypp
@@ -340,6 +341,7 @@ rm -rf "$RPM_BUILD_ROOT"
 %dir               %{_sysconfdir}/zypp/repos.d
 %endif
 %dir               %{_sysconfdir}/zypp/services.d
+%dir               %{_sysconfdir}/zypp/systemCheck.d
 %dir               %{_sysconfdir}/zypp/vendors.d
 %dir               %{_sysconfdir}/zypp/multiversion.d
 %config(noreplace) %{_sysconfdir}/zypp/zypp.conf
