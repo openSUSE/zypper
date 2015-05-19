@@ -299,6 +299,13 @@ namespace zypp
       Pathname solver_checkSystemFile() const;
 
       /**
+       * Directory, which may or may not contain files in which
+       * dependencies described which has to be fulfilled for a
+       * running system.
+       */
+      Pathname solver_checkSystemFileDir() const;
+
+      /**
        * Whether vendor check is by default enabled.
        */
       bool solver_allowVendorChange() const;

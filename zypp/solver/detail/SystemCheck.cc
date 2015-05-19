@@ -30,6 +30,7 @@ namespace zypp
 { /////////////////////////////////////////////////////////////////
 
     Pathname		_file = "";
+    Pathname            _dir = "";
     CapabilitySet	_require;
     CapabilitySet	_conflict;
 
@@ -42,22 +43,38 @@ namespace zypp
     }
 
 
-    SystemCheck::SystemCheck() {
+  SystemCheck::SystemCheck() {
 	if (_file.empty()) {
 	    _file = ZConfig::instance().solver_checkSystemFile();
-	    loadFile();
+	    loadFile(_file);
 	}
+        if (_dir.empty()) {
+          _dir = ZConfig::instance().solver_checkSystemFileDir();
+          loadFiles();
+        }
     }
 
     bool SystemCheck::setFile(const Pathname & file) const{
 	MIL << "Setting checkFile to : " << file << endl;
 	_file = file;
-	loadFile();
+	loadFile(_file);
 	return true;
+    }
+
+    bool SystemCheck::setDir(const Pathname & dir) const {
+      MIL << "Setting checkFile directory to : " << dir << endl;
+      loadFile(_file);
+      _dir = dir;
+      loadFiles();
+      return true;
     }
 
     const Pathname & SystemCheck::file() {
 	return _file;
+    }
+
+    const Pathname & SystemCheck::dir() {
+	return _dir;
     }
 
     const CapabilitySet & SystemCheck::requiredSystemCap() const{
@@ -68,21 +85,23 @@ namespace zypp
 	return _conflict;
     }
 
-    bool SystemCheck::loadFile() const{
+    bool SystemCheck::loadFile(Pathname & file, bool reset_caps) const{
         Target_Ptr trg( getZYpp()->getTarget() );
         if ( trg )
-          _file = trg->assertRootPrefix( _file );
+          file = trg->assertRootPrefix( file );
 
-	PathInfo pi( _file );
+	PathInfo pi( file );
 	if ( ! pi.isFile() ) {
-	    WAR << "Can't read " << _file << " " << pi << endl;
+	    WAR << "Can't read " << file << " " << pi << endl;
 	    return false;
 	}
 
-	_require.clear();
-	_conflict.clear();
+        if (reset_caps) {
+          _require.clear();
+          _conflict.clear();
+        }
 
-	std::ifstream infile( _file.c_str() );
+	std::ifstream infile( file.c_str() );
 	for( iostr::EachLine in( infile ); in; in.next() ) {
 	    std::string l( str::trim(*in) );
 	    if ( ! l.empty() && l[0] != '#' )
@@ -106,6 +125,25 @@ namespace zypp
 	MIL << "Read " << pi << endl;
 	return true;
     }
+
+  bool SystemCheck::loadFiles() const {
+
+    filesystem::dirForEach(_dir,
+                           [this](const Pathname & dir_r, const char *const & name_r)->bool
+                           {
+                             const std::string wanted = ".check";
+                             Pathname pth = dir_r/name_r;
+                             if (pth.extension() != wanted) {
+                               MIL << "Skipping " << pth << " (not a *.check file)" << endl;
+                               return true;
+                             }
+                             else {
+                               MIL << "Reading " << pth << endl;
+                               return loadFile(pth, false /* do not reset caps */);
+                             }
+                           });
+    return true;
+  }
 
 
     /******************************************************************
