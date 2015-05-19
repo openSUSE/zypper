@@ -1,5 +1,6 @@
 #include <iostream>
 #include <signal.h>
+#include <fcntl.h>
 //#include <readline/readline.h>
 
 #include <zypp/base/LogTools.h>
@@ -19,6 +20,15 @@
 
 using namespace std;
 
+static void set_zypper_cleanup_marker()
+{
+  int fd = open("/var/cache/zypp/cleanup-needed", O_WRONLY|O_CREAT|O_TRUNC, 0644);
+  if (fd >= 0)
+  {
+    close(fd);
+  }
+}
+
 void signal_handler(int sig)
 {
   Zypper & zypper = *Zypper::instance();
@@ -35,14 +45,14 @@ void signal_handler(int sig)
     }
     else*/
     {
+      set_zypper_cleanup_marker();
       cerr << endl << "OK OK! Exiting immediately..." << endl;
-      zypper.cleanup();
       _exit(ZYPPER_EXIT_ON_SIGNAL);
     }
   }
   else if (zypper.runtimeData().waiting_for_input)
   {
-    zypper.cleanup();
+    set_zypper_cleanup_marker();
     _exit(ZYPPER_EXIT_ON_SIGNAL);
   }
   else
