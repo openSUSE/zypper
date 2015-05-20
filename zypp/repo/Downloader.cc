@@ -63,21 +63,28 @@ void Downloader::defaultDownloadMasterIndex( MediaSetAccess & media_r, const Pat
 
   if ( repoInfo().repoGpgCheck() )
   {
-    // only add the signature if it exists
-    if ( isSigned )
-      sigchecker = SignatureFileChecker( destdir_r / sigpath );
+    if ( isSigned || !repoInfo().pkgGpgCheck() )
+    {
+      // only add the signature if it exists
+      if ( isSigned )
+	sigchecker = SignatureFileChecker( destdir_r / sigpath );
 
-    KeyContext context;
-    context.setRepoInfo( repoInfo() );
-    // only add the key if it exists
-    if ( PathInfo(destdir_r / keypath).isExist() )
-      sigchecker.addPublicKey( destdir_r / keypath, context );
+      KeyContext context;
+      context.setRepoInfo( repoInfo() );
+      // only add the key if it exists
+      if ( PathInfo(destdir_r / keypath).isExist() )
+	sigchecker.addPublicKey( destdir_r / keypath, context );
+      else
+	// set the checker context even if the key is not known (unsigned repo, key
+	// file missing; bnc #495977)
+	sigchecker.setKeyContext( context );
+
+      checker = FileChecker( ref(sigchecker) );	// ref() to the local sigchecker is important as we want back fileValidated!
+    }
     else
-      // set the checker context even if the key is not known (unsigned repo, key
-      // file missing; bnc #495977)
-      sigchecker.setKeyContext( context );
-
-    checker = FileChecker( ref(sigchecker) );	// ref() to the local sigchecker is important as we want back fileValidated!
+    {
+      WAR << "Accept unsigned repository because pkgGpgCheck is on for " << repoInfo().alias() << endl;
+    }
   }
   else
   {
