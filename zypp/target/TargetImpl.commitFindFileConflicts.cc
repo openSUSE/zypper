@@ -138,7 +138,10 @@ namespace zypp
 	// lambda receives progress trigger and translates into report
 	auto sendProgress = [&]( const ProgressData & progress_r )->bool {
 	  if ( ! report->progress( progress_r, cb.noFilelist() ) )
+	  {
+	    progress.noSend();	// take care progress DTOR does not trigger a final report (2nd exeption)
 	    ZYPP_THROW( AbortRequestException() );
+	  }
 	  return true;
 	};
 	progress.sendTo( sendProgress );
