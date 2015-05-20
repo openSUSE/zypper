@@ -162,12 +162,16 @@ namespace zypp
     {
       if ( PathInfo(metadatapath).isDir() )
       {
-	TriBool linkval( indeterminate );
-	if ( triBoolFromPath( metadatapath / ".repo_gpgcheck", linkval ) && linkval == value_r )
-	  return;	// existing symlink fits value_r
-
-	filesystem::unlink( metadatapath / ".repo_gpgcheck" );
-	filesystem::symlink( asString(value_r), metadatapath / ".repo_gpgcheck" );
+	Pathname gpgcheckFile( metadatapath / ".repo_gpgcheck" );
+	if ( PathInfo(gpgcheckFile).isExist() )
+	{
+	  TriBool linkval( indeterminate );
+	  if ( triBoolFromPath( gpgcheckFile, linkval ) && linkval == value_r )
+	    return;	// existing symlink fits value_r
+	  else
+	    filesystem::unlink( gpgcheckFile );	// will write a new one
+	}
+	filesystem::symlink( asString(value_r), gpgcheckFile );
       }
       _validRepoSignature = value_r;
     }
