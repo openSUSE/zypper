@@ -1,4 +1,9 @@
 -------------------------------------------------------------------
+Sun May 24 01:13:19 CEST 2015 - ma@suse.de
+
+- Update zypp-po.tar.bz2
+
+-------------------------------------------------------------------
 Mon May 18 10:46:10 CEST 2015 - ma@suse.de
 
 - zypp.conf: Add config values for gpgcheck, repo_gpgcheck 
