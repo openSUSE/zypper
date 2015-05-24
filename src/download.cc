@@ -153,6 +153,7 @@ namespace
     //packageCache.setCommitList( steps.begin(), steps.end() );
 
     unsigned current = 0;
+    _zypper.runtimeData().commit_pkgs_total = total; // fix DownloadResolvableReport total counter
     for ( const auto & ent : collect )
     {
       for ( const auto & pi : ent.second )
@@ -176,6 +177,10 @@ namespace
 	    catch ( const Out::Error & error_r )
 	    {
 	      error_r.report( _zypper );
+	    }
+	    catch ( const AbortRequestException & exp )
+	    {
+	      ZYPP_RETHROW(exp);
 	    }
 	    catch ( const Exception & exp )
 	    {

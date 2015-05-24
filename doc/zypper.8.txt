@@ -32,6 +32,14 @@ Libzypp works with package metadata, that is information about packages and thei
 
 There is a special set of commands in zypper intended to manipulate repositories. Also many commands and options take a repository as an argument. See section *COMMANDS*, subsection *Repository Management* for more details.
 
+GPG checks
+~~~~~~~~~~
+Zypp verifies the authenticity of repository metadata by checking their GPG signature. If the repository metadata are signed with a trusted key and and successfully verified, packages from that repository are accepted for installation if they match the checksum provided in the metadata. If the repository metadata  are not signed, the signature of each downloaded rpm package is checked before accepting it for installation.
+
+This default behavior can be tuned by explicitly setting the variables *repo_gpgcheck* and/or *pkg_gpgcheck* in the ZYpp configuration file (*/etc/zypp/zypp.conf*) to perform those checks always (if 'on') or never (if 'off').
+
+*Disabling GPG checks is not recommended.* Signing data enables the recipient to verify that no modifications occurred after the data were signed. Accepting data with no, wrong or unknown signature can lead to a corrupted system and in extreme cases even to a system compromise.
+
 Resource Identifiers (URI)
 ~~~~~~~~~~~~~~~~~~~~~~~~~~
 To specify locations of repositories or other resources (RPM files, .repo files) you can use any type of URIs supported by libzypp. See section *COMMANDS*, subsection *Repository Management* for a complete list and usage examples.
@@ -944,7 +952,7 @@ Supported URI formats:
 *repos* (*lr*) ['options'] ['repo']...::
 	List all defined repositories or show detailed information about those specified as arguments
 	+
-	The following data can be printed for each repository found on the system: '#' (repository number), 'Alias' (unique identifier), 'Name', 'Enabled' (whether the repository is enabled), 'Refresh' (whether auto-refresh is enabled for the repository), 'Priority', 'Type' (repository meta-data type: rpm-md, yast2, plaindir). Which of the data is shown is determined by command line options listed below and the main.repoListColumns setting from zypper.conf. By default, #, Alias, Name, Enabled, and Refresh is shown.
+	The following data can be printed for each repository found on the system: '#' (repository number), 'Alias' (unique identifier), 'Name', 'Enabled' (whether the repository is enabled), 'GPG Check' (whether GPG check for repository metadata (*r*) and/or downloaded rpm packages (*p*) is enabled), 'Refresh' (whether auto-refresh is enabled for the repository), 'Priority', 'Type' (repository meta-data type: rpm-md, yast2, plaindir). Which of the data is shown is determined by command line options listed below and the main.repoListColumns setting from zypper.conf. By default, #, Alias, Name, Enabled, GPG Check and Refresh is shown.
 	+
 	Repository number is a unique identifier of the repository in current set of repositories. If you add, remove or change a repository, the numbers may change. Keep that in mind when using the numbers with the repository handling commands. On the other hand, using the alias instead of the number is always safe.
 	+
@@ -1430,7 +1438,7 @@ GLOBAL OPTIONS
 Repository Options: :: {nop}
 
 *--no-gpg-checks*::
-	Ignore GPG check failures and continue. If a GPG issue occurs when using this option zypper prints and logs a warning and automatically continues without interrupting the operation. Use this option with caution, as you can easily overlook security problems by using it.
+	Ignore GPG check failures and continue. If a GPG issue occurs when using this option zypper prints and logs a warning and automatically continues without interrupting the operation. Use this option with caution, as you can easily overlook security problems by using it. (see section *GPG checks*)
 
 *--gpg-auto-import-keys*::
 	If new repository signing key is found, do not ask what to do; trust and import it automatically. This option causes that the new key is imported also in non-interactive mode, where it would otherwise got rejected.
