@@ -30,6 +30,9 @@ class Zypper;
 
 #define OSD ColorStream( std::cout, ColorContext::OSDEBUG )
 
+inline char * asYesNo( bool val_r )
+{ return val_r ? _("Yes") : _("No"); }
+
 ///////////////////////////////////////////////////////////////////
 namespace out
 {
