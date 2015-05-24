@@ -1,4 +1,12 @@
 -------------------------------------------------------------------
+Sun May 24 18:17:38 CEST 2015 - ma@suse.de
+
+- Downloader: Accept unsigned repository if pkgGpgCheck is ON.
+- FindFileConflicts: avoid nested exception on user abort (bnc#931601)
+- Support for *.check files in the systemCheck.d directory (#45)
+- version 15.3.0 (3)
+
+-------------------------------------------------------------------
 Sun May 24 01:13:19 CEST 2015 - ma@suse.de
 
 - Update zypp-po.tar.bz2
