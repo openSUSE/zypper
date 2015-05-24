@@ -337,7 +337,7 @@ namespace zypp
 		{
 		  resolveSignatureErrorAction( userData.get( "Action", repo::DownloadResolvableReport::ABORT ) );
 		}
-		else if ( userData.haskey( "Action" ) )	// pkgGpgCheck reportrequests the default problem report
+		else if ( userData.haskey( "Action" ) )	// pkgGpgCheck requests the default problem report
 		{
 		  defaultReportSignatureError( res );
 		}
@@ -350,12 +350,10 @@ namespace zypp
 
 		    case RpmDb::CHK_NOKEY:	// Public key is unavailable
 		    case RpmDb::CHK_NOTFOUND:	// Signature is unknown type
-		    case RpmDb::CHK_NOTTRUSTED:	// Signature is OK, but key is not trusted
-		      // should fail in future versions.
-		      break;
-
 		    case RpmDb::CHK_FAIL:	// Signature does not verify
+		    case RpmDb::CHK_NOTTRUSTED:	// Signature is OK, but key is not trusted
 		    case RpmDb::CHK_ERROR:	// File does not exist or can't be opened
+		    default:
 		      // report problem, throw if to abort, else retry/ignore
 		      defaultReportSignatureError( res );
 		      break;
