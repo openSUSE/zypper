@@ -1,4 +1,17 @@
 -------------------------------------------------------------------
+Sun May 24 18:21:03 CEST 2015 - ma@suse.de
+
+- man: add section about GPG checks
+- repos/services: Show GPG Check status
+- Handle pkgGpgCheck callback (fate#314603)
+- BuildRequires:  libzypp-devel >= 15.3.0
+- download: fix wrong total (=0) counter in download message
+- download: actually abort on user request.
+- Clarify 'zypper lp --date' description (bnc#929593)
+- Allow to overlay the default translation set.
+- version 1.12.2
+
+-------------------------------------------------------------------
 Sun May 24 01:13:29 CEST 2015 - ma@suse.de
 
 - Update zypper-po.tar.bz2
