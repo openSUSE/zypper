@@ -24,7 +24,6 @@ _strip()
 }
 
 _zypper() {
-        ZYPPER_CMDLIST=()
 	ZYPPER="$(type -p zypper)"
 
 	local noglob=$(shopt -po noglob)
