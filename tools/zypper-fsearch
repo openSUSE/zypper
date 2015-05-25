@@ -1,0 +1,15 @@
+#!/usr/bin/perl -w
+use strict;
+
+my $pattern=shift;
+chdir("/var/cache/zypp/solv") or die;
+my @idx=<*/solv.idx> or die "no solv.idx files";
+open(my $pipe, "-|", "grep", "--with-filename", "--", $pattern, @idx) or die $!;
+
+print "Name\t\tVersion\t\tArch\tRepository\n" if -t STDOUT;
+while(<$pipe>) {
+	chop;
+	s{^([^/]+)/solv.idx:}{};
+	print "$_\t$1\n";
+}
+

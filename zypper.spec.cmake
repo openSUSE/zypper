@@ -143,6 +143,7 @@ rm -rf "$RPM_BUILD_ROOT"
 %config(noreplace) %{_sysconfdir}/logrotate.d/zypp-refresh.lr
 %{_sysconfdir}/bash_completion.d/zypper.sh
 %{_bindir}/zypper
+%{_bindir}/zypper-fsearch
 %{_bindir}/yzpper
 %{_bindir}/installation_sources
 %{_sbindir}/zypp-refresh

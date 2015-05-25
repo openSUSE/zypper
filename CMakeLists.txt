@@ -98,7 +98,7 @@ INSTALL(
 
 # zypper-aptitude compat tool
 INSTALL(
-  PROGRAMS tools/aptitude tools/apt-get
+  PROGRAMS tools/aptitude tools/apt-get tools/zypper-fsearch
   DESTINATION ${INSTALL_PREFIX}/bin
 )
 INSTALL(
