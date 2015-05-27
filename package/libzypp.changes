@@ -1,4 +1,9 @@
 -------------------------------------------------------------------
+Thu May 28 01:13:23 CEST 2015 - ma@suse.de
+
+- Update zypp-po.tar.bz2
+
+-------------------------------------------------------------------
 Sun May 24 18:17:38 CEST 2015 - ma@suse.de
 
 - Downloader: Accept unsigned repository if pkgGpgCheck is ON.
