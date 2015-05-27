@@ -1046,33 +1046,40 @@ namespace zypp
         // Take care we unlink the solvfile on exception
         ManagedFile guard( base, filesystem::recursive_rmdir );
 
-        std::ostringstream cmd;
-        cmd << "rpmdb2solv";
-        if ( ! _root.empty() )
-          cmd << " -r '" << _root << "'";
-	cmd << " -X";	// autogenerate pattern/product/... from -package
-	cmd << " -A";	// autogenerate application pseudo packages
-        cmd << " -p '" << Pathname::assertprefix( _root, "/etc/products.d" ) << "'";
+        ExternalProgram::Arguments cmd;
+        cmd.push_back( "rpmdb2solv" );
+        if ( ! _root.empty() ) {
+          cmd.push_back( "-r" );
+          cmd.push_back( _root.asString() );
+        }
+        cmd.push_back( "-X" );	// autogenerate pattern/product/... from -package
+        cmd.push_back( "-A" );	// autogenerate application pseudo packages
+        cmd.push_back( "-p" );
+        cmd.push_back( Pathname::assertprefix( _root, "/etc/products.d" ).asString() );
 
         if ( ! oldSolvFile.empty() )
-          cmd << " '" << oldSolvFile << "'";
+          cmd.push_back( oldSolvFile.asString() );
 
-        cmd << "  > '" << tmpsolv.path() << "'";
+        cmd.push_back( "-o" );
+        cmd.push_back( tmpsolv.path().asString() );
 
-        MIL << "Executing: " << cmd.str() << endl;
-        ExternalProgram prog( cmd.str(), ExternalProgram::Stderr_To_Stdout );
+        ExternalProgram prog( cmd, ExternalProgram::Stderr_To_Stdout );
+	std::string errdetail;
 
-        cmd << endl;
         for ( std::string output( prog.receiveLine() ); output.length(); output = prog.receiveLine() ) {
           WAR << "  " << output;
-          cmd << "     " << output;
+          if ( errdetail.empty() ) {
+            errdetail = prog.command();
+            errdetail += '\n';
+          }
+          errdetail += output;
         }
 
         int ret = prog.close();
         if ( ret != 0 )
         {
           Exception ex(str::form("Failed to cache rpm database (%d).", ret));
-          ex.remember( cmd.str() );
+          ex.remember( errdetail );
           ZYPP_THROW(ex);
         }
 
