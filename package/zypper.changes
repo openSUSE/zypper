@@ -1,4 +1,10 @@
 -------------------------------------------------------------------
+Mon Jun  1 16:17:02 CEST 2015 - ma@suse.de
+
+- removerepo: Warn user that deleting a service repo is a volatile change (bnc#929990)
+- version 1.11.30
+
+-------------------------------------------------------------------
 Wed May  6 12:44:02 CEST 2015 - ma@suse.de
 
 - Clarify 'zypper lp --date' description (bnc#929593)
