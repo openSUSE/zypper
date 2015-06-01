@@ -46,6 +46,21 @@ static bool refresh_service(Zypper & zypper, const ServiceInfo & service);
 
 // ----------------------------------------------------------------------------
 
+inline std::string volatileTag()
+{
+  // translators: used as 'XYZ changed to SOMETHING [volatile]' to tag specific property changes.
+  return std::string( " [" + ColorString( ColorContext::MSG_WARNING, _("volatile") ).str() + "]" );
+}
+
+inline std::string volatileServiceRepoChange( const RepoInfo & repo_r )
+{
+  return boost::str(format(
+    // translators: 'Volatile' refers to changes we previously tagged as 'XYZ changed to SOMETHING [volatile]'
+    _("Repo '%1%' is managed by service '%2%'. Volatile changes are reset by the next service refresh!")
+  ) % repo_r.alias() % repo_r.service() );
+}
+
+
 template <typename Target, typename Source>
 void safe_lexical_cast (Source s, Target &tr) {
   try {
@@ -1941,11 +1956,20 @@ ostream& operator << (ostream& s, const vector<T>& v) {
 
 void remove_repo(Zypper & zypper, const RepoInfo & repoinfo)
 {
+  bool isServiceRepo = !repoinfo.service().empty();
+
   RepoManager & manager = zypper.repoManager();
   manager.removeRepository(repoinfo);
-  zypper.out().info(boost::str(
-    format(_("Repository '%s' has been removed.")) % repoinfo.asUserString()));
+
+  std::string msg(boost::str(format(_("Repository '%s' has been removed.")) % repoinfo.asUserString()));
+  if ( isServiceRepo )
+    msg += volatileTag();	// '[volatile]'
+
+  zypper.out().info( msg );
   MIL << format("Repository '%s' has been removed.") % repoinfo.alias() << endl;
+
+  if ( isServiceRepo )
+    zypper.out().warning( volatileServiceRepoChange( repoinfo ) );
 }
 
 
@@ -2167,8 +2191,7 @@ void modify_repo(Zypper & zypper, const string & alias)
       std::string volatileNote;	// service repos changes may be volatile
       if (  ! repo.service().empty() )
       {
-	// translators: used as 'XYZ changed to SOMETHING [volatile]' to tag specific property changes.
-	volatileNote = std::string( " [" + ColorString( ColorContext::MSG_WARNING, _("volatile") ).str() + "]" );
+	volatileNote = volatileTag();	// '[volatile]'
       }
       bool didVolatileChanges = false;
 
@@ -2234,10 +2257,7 @@ void modify_repo(Zypper & zypper, const string & alias)
 
       if ( didVolatileChanges )
       {
-	zypper.out().warning(boost::str(format(
-	  // translators: 'Volatile' refers to changes we previously tagged as 'XYZ changed to SOMETHING [volatile]'
-	  _("Repo '%1%' is managed by service '%2%'. Volatile changes are reset by the next service refresh!")
-	) % alias % repo.service() ));
+	zypper.out().warning( volatileServiceRepoChange( repo ) );
       }
     }
     else
