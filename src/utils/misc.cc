@@ -17,6 +17,8 @@
 #include <zypp/misc/CheckAccessDeleted.h>
 #include <zypp/ExternalProgram.h>
 
+#include <zypp/ZYpp.h>
+#include <zypp/Target.h>
 #include <zypp/PoolItem.h>
 #include <zypp/Product.h>
 #include <zypp/Pattern.h>
@@ -30,6 +32,21 @@
 
 using namespace std;
 using namespace zypp;
+
+extern ZYpp::Ptr God;
+
+bool runningOnEnterprise()
+{
+  bool ret = false;
+  if ( Target_Ptr target = God->getTarget() )
+    if ( Product::constPtr platform = target->baseProduct() )
+    {
+      static const CpeId enterprise( "cpe:/o:suse:sle%02" );
+      if ( compare( platform->cpeId(), enterprise, SetRelation::subset ) )
+	ret = true;
+    }
+  return ret;
+}
 
 // ----------------------------------------------------------------------------
 

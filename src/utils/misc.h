@@ -32,6 +32,11 @@ using namespace zypp;
 
 typedef std::set<zypp::ResKind> ResKindSet;
 
+/** Whether running on SLE.
+ * If so, report e.g. unsupported packages per default.
+ */
+bool runningOnEnterprise();
+
 bool is_changeable_media(const zypp::Url & url);
 
 /** Converts user-supplied kind to zypp::ResKind object.
