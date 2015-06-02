@@ -264,6 +264,16 @@ public:
    */
   void setClientCertificatePath( const zypp::Pathname &path );
 
+  /**
+   * SSL client key file
+   */
+  Pathname clientKeyPath() const;
+
+  /**
+   * Sets the SSL client key file
+   */
+  void setClientKeyPath( const zypp::Pathname &path );
+
 protected:
   class Impl;
   RWCOW_pointer<Impl> _impl;

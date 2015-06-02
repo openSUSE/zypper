@@ -409,7 +409,9 @@ namespace zypp
      *         server is authentic against the chain of digital signatures
      *         found in <tt>ssl_capath</tt>.
      *     - <tt>ssl_clientcert</tt>
-     *       Path to a ssl client certificate for authentication to a repo.
+     *       Path to the ssl client certificate for authentication to a repo (CURLOPT_SSLCERT).
+     *     - <tt>ssl_clientkey</tt>
+     *       Path to the ssl client key for authentication to a repo (CURLOPT_SSLKEY).
      *     - <tt>timeout</tt>:
      *       Transfer timeout in seconds between 0 and 3600, 0 disables
      *       the timeout, default timeout is 180 seconds.
