@@ -204,8 +204,7 @@ void printPkgInfo(Zypper & zypper, const ui::Selectable & s)
   printNVA(theone.resolvable());
 
   // if running on SUSE Linux Enterprise, report unsupported packages
-  Product::constPtr platform = God->target()->baseProduct();
-  if (platform && platform->name().find("SUSE_SLE") != string::npos)
+  if ( runningOnEnterprise() )
   {
     Package::constPtr pkg = asKind<Package>(theone.resolvable());
     cout << _("Support Level: ") << asUserString(pkg->vendorSupport()) << endl;

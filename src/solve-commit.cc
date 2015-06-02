@@ -580,8 +580,7 @@ void solve_and_commit (Zypper & zypper)
     }
 
     // if running on SUSE Linux Enterprise, report unsupported packages
-    Product::constPtr platform = God->target()->baseProduct();
-    if (platform && platform->name().find("SUSE_SLE") != string::npos)
+    if ( runningOnEnterprise() )
       summary.setViewOption(Summary::SHOW_UNSUPPORTED);
     else
       summary.unsetViewOption(Summary::SHOW_UNSUPPORTED);
