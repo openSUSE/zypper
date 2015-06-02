@@ -1,7 +1,14 @@
 -------------------------------------------------------------------
+Tue Jun  2 19:52:45 CEST 2015 - ma@suse.de
+
+- Adapt enterprise product detection (bnc#933277)
+- version 1.11.31
+
+-------------------------------------------------------------------
 Mon Jun  1 16:17:02 CEST 2015 - ma@suse.de
 
-- removerepo: Warn user that deleting a service repo is a volatile change (bnc#929990)
+- removerepo: Warn user that deleting a service repo is a 
+  volatile change (bnc#929990)
 - version 1.11.30
 
 -------------------------------------------------------------------
