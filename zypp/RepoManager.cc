@@ -1782,6 +1782,14 @@ namespace zypp
             newinfo.dumpAsIniOn(file);
       }
 
+      if ( toedit.enabled() && !newinfo.enabled() )
+      {
+	// On the fly remove solv.idx files for bash completion if a repo gets disabled.
+	const Pathname & solvidx = solv_path_for_repoinfo(_options, newinfo)/"solv.idx";
+	if ( PathInfo(solvidx).isExist() )
+	  filesystem::unlink( solvidx );
+      }
+
       newinfo.setFilepath(toedit.filepath());
       reposManip().erase(toedit);
       reposManip().insert(newinfo);
