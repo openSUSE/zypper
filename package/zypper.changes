@@ -1,4 +1,14 @@
 -------------------------------------------------------------------
+Wed Jun  3 13:05:29 CEST 2015 - ma@suse.de
+
+- Tab completion for package names in install+remove+update 
+  commands (bnc#928650)
+- Adapt enterprise product detection (bnc#933277)
+- removerepo: Warn user that deleting a service repo is a volatile 
+  change (bnc#929990)
+- version 1.12.3
+
+-------------------------------------------------------------------
 Sun May 31 01:13:12 CEST 2015 - ma@suse.de
 
 - Update zypper-po.tar.bz2
