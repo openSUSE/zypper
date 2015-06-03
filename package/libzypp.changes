@@ -1,4 +1,9 @@
 -------------------------------------------------------------------
+Thu Jun  4 01:13:22 CEST 2015 - ma@suse.de
+
+- Update zypp-po.tar.bz2
+
+-------------------------------------------------------------------
 Wed Jun  3 13:00:59 CEST 2015 - ma@suse.de
 
 - Enhance solv.idx file handling to support zypper bash completion
