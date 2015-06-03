@@ -1,4 +1,9 @@
 -------------------------------------------------------------------
+Thu Jun  4 01:14:09 CEST 2015 - ma@suse.de
+
+- Update zypper-po.tar.bz2
+
+-------------------------------------------------------------------
 Wed Jun  3 13:05:29 CEST 2015 - ma@suse.de
 
 - Tab completion for package names in install+remove+update 
