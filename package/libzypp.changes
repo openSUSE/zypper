@@ -1,4 +1,12 @@
 -------------------------------------------------------------------
+Wed Jun  3 13:00:59 CEST 2015 - ma@suse.de
+
+- Enhance solv.idx file handling to support zypper bash completion
+- Fix SSL client certificate authentication via URL option 
+  ssl_clientcert/ssl_clientkey (bnc#932393)
+- version 15.4.0 (3)
+
+-------------------------------------------------------------------
 Thu May 28 01:13:23 CEST 2015 - ma@suse.de
 
 - Update zypp-po.tar.bz2
