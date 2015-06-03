@@ -24,14 +24,14 @@ _strip()
 
 _installed_packages() {
 	! [[ $cur =~ / ]] || return
-	grep --no-filename "^$cur" "/var/cache/zypp/solv/@System/solv.idx" | cut -f1
+	grep -s --no-filename "^$cur" "/var/cache/zypp/solv/@System/solv.idx" | cut -f1
 }
 
 _available_solvables2() {
 	local lcur=$1
 	! [[ $cur =~ / ]] || return # for installing local packages
 	set +o noglob
-	grep --no-filename "^$lcur" /var/cache/zypp/solv/*/solv.idx |\
+	grep -s --no-filename "^$lcur" /var/cache/zypp/solv/*/solv.idx |\
 		cut -f1 | sort --unique
 	set -o noglob
 }
