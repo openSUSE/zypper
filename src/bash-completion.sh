@@ -2,10 +2,9 @@
 #
 # A hackweek gift from Marek Stopka <mstopka@opensuse.org>
 # Major rewrite by Josef Reidinger <jreidinger@suse.cz>
-# 2009/02/19 Allow empty spaces in repos names, Werner Fink <werner@suse.de>
+# 2009-02-19 Allow empty spaces in repos names, Werner Fink <werner@suse.de>
+# 2015-04-26 add completion for install+remove+update commands, Bernhard M. Wiedemann <bwiedemann@suse.de>
 #
-# some TODOs:
-# - complete package names for install/remove/update
 
 _strip()
 {
@@ -23,8 +22,28 @@ _strip()
 	fi
 }
 
+_installed_packages() {
+	! [[ $cur =~ / ]] || return
+	grep --no-filename "^$cur" "/var/cache/zypp/solv/@System/solv.idx" | cut -f1
+}
+
+_available_solvables2() {
+	local lcur=$1
+	! [[ $cur =~ / ]] || return # for installing local packages
+	set +o noglob
+	grep --no-filename "^$lcur" /var/cache/zypp/solv/*/solv.idx |\
+		cut -f1 | sort --unique
+	set -o noglob
+}
+_available_solvables() {
+	_available_solvables2 "$1:$cur" | sed -e "s/^$1://"
+}
+_available_packages() {
+	[[ $cur ]] || return # this case is too slow with tenthousands of completions
+	_available_solvables2 $cur
+}
+
 _zypper() {
-        ZYPPER_CMDLIST=()
 	ZYPPER="$(type -p zypper)"
 
 	local noglob=$(shopt -po noglob)
@@ -112,9 +131,12 @@ _zypper() {
 	fi
 
 	if test -n "$command" ; then
-      		opts=$(LC_ALL=POSIX $ZYPPER -q help $command 2>&1 | sed -e "1,/$magic_string/d" -e 's/.*--/--/' -e 's/ .*//')
+		if ! [[ $cur =~ ^[^-] ]] ; then
+			opts=$(LC_ALL=POSIX $ZYPPER -q help $command 2>&1 | sed -e "1,/$magic_string/d" -e 's/.*--/--/' -e 's/ .*//')
+		fi
 
 		#handling individual commands if they need more then we can dig from help
+		if ! [[ $cur =~ ^- ]] ; then
 		case "$command" in
 			help | \?)
 				opts=(${ZYPPER_CMDLIST[@]})
@@ -146,7 +168,23 @@ _zypper() {
 						p
 					}'))
 			;;
+			product-info)
+				opts=(${opts[@]}$(echo; _available_solvables product ))
+			;;
+			pattern-info)
+				opts=(${opts[@]}$(echo; _available_solvables pattern ))
+			;;
+			patch-info )
+				opts=(${opts[@]}$(echo; _available_solvables patch ))
+			;;
+			remove | rm | update | up)
+				opts=(${opts[@]}$(echo; _installed_packages ))
+			;;
+			install | in | source-install | si | download | info | if)
+				opts=(${opts[@]}$(echo; _available_packages ))
+			;;
 		esac
+		fi
 		IFS=$'\n'
 		COMPREPLY=($(compgen -W "${opts[*]}" -- ${cur}))
 		_strip
