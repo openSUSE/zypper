@@ -1188,8 +1188,14 @@ namespace zypp
       if ( cache_status == raw_metadata_status )
       {
         MIL << info.alias() << " cache is up to date with metadata." << endl;
-        if ( policy == BuildIfNeeded ) {
-          return;
+        if ( policy == BuildIfNeeded )
+	{
+	  // On the fly add missing solv.idx files for bash completion.
+	  const Pathname & base = solv_path_for_repoinfo( _options, info);
+	  if ( ! PathInfo(base/"solv.idx").isExist() )
+	    sat::updateSolvFileIndex( base/"solv" );
+
+	  return;
         }
         else {
           MIL << info.alias() << " cache rebuild is forced" << endl;

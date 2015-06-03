@@ -1111,6 +1111,12 @@ namespace zypp
 	    }
 	}
       }
+      else
+      {
+	// On the fly add missing solv.idx files for bash completion.
+	if ( ! PathInfo(base/"solv.idx").isExist() )
+	  sat::updateSolvFileIndex( rpmsolv );
+      }
       return build_rpm_solv;
     }
 
