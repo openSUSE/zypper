@@ -263,7 +263,7 @@ namespace zypp
      *
      * The UrlBase class implements default behaviour for URL
      * manipulations and a base for implementation of scheme-
-     * specialized URL's for the Url class.
+     * specialized URLs for the Url class.
      *
      */
     class UrlBase
@@ -354,11 +354,11 @@ namespace zypp
        * or compatible to).
        *
        * For example, if your derived class implements special
-       * features of LDAP URL's, this method may return "ldap"
+       * features of LDAP URLs, this method may return "ldap"
        * and "ldaps" scheme names.
        *
        * The UrlBase class returns an empty vector, that signals
-       * that it is useable with all URL's.
+       * that it is useable with all URLs.
        *
        * \return A vector with scheme names known by this object.
        */
@@ -586,7 +586,7 @@ namespace zypp
        * Returns the encoded query string component of the URL.
        *
        * The query string is returned without first "?" (separator)
-       * character. Further "?" characters as in e.g. LDAP URL's
+       * character. Further "?" characters as in e.g. LDAP URLs
        * remains in the returned string.
        *
        * \return The encoded query string component of the URL.

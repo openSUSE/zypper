@@ -123,7 +123,7 @@ namespace zypp {
      *   or the user will be promted for them via AuthenticationReport callback.
      *
      * \note The implementation currently serves both, "smb" and
-     *      and "cifs" URL's, but passes "cifs" to the mount command
+     *      and "cifs" URLs, but passes "cifs" to the mount command
      *      in any case.
      */
     void MediaCIFS::attachTo(bool next)

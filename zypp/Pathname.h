@@ -76,11 +76,11 @@ namespace zypp
       Pathname & operator=( Pathname rhs )
       { swap( *this, rhs ); return *this; }
 
-      /** Concatenate and assing. \see cat */
+      /** Concatenate and assign. \see cat */
       Pathname & operator/=( const Pathname & path_tv )
       { return( *this = cat( *this, path_tv ) ); }
 
-      /** Concatenate and assing. \see cat
+      /** Concatenate and assign. \see cat
        * \deprecated: use /=
       */
       Pathname & operator+=( const Pathname & path_tv )
