@@ -382,7 +382,7 @@ namespace zypp
     //	METHOD NAME : recursive_rmdir
     //	METHOD TYPE : int
     //
-    static int recursive_rmdir_1( const Pathname & dir )
+    static int recursive_rmdir_1( const Pathname & dir, bool removeDir = true )
     {
       DIR * dp;
       struct dirent * d;
@@ -408,7 +408,7 @@ namespace zypp
       }
       closedir( dp );
 
-      if ( ::rmdir( dir.c_str() ) < 0 )
+      if ( removeDir && ::rmdir( dir.c_str() ) < 0 )
         return errno;
 
       return 0;
@@ -448,13 +448,7 @@ namespace zypp
         return _Log_Result( ENOTDIR );
       }
 
-      string cmd( str::form( "cd '%s' && rm -rf --preserve-root -- *", path.asString().c_str() ) );
-      ExternalProgram prog( cmd, ExternalProgram::Stderr_To_Stdout );
-      for ( string output( prog.receiveLine() ); output.length(); output = prog.receiveLine() ) {
-        MIL << "  " << output;
-      }
-      int ret = prog.close();
-      return _Log_Result( ret, "returned" );
+      return _Log_Result( recursive_rmdir_1( path, false/* don't remove path itself */ ) );
     }
 
     ///////////////////////////////////////////////////////////////////
