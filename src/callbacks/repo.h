@@ -99,9 +99,9 @@ struct DownloadResolvableReportReceiver : public zypp::callback::ReceiveReport<z
 		 << "/" << zypper_r.runtimeData().commit_pkgs_total << ")";
     if ( pkg_r )
     {
-      outstr_r.rhs << ", " << pkg_r->downloadSize().asString( 5 ) << " "
+      outstr_r.rhs << ", " << pkg_r->downloadSize().asString( 5, 3 ) << " "
 		   // TranslatorExplanation %s is package size like "5.6 M"
-		   << boost::format(_("(%s unpacked)")) % pkg_r->installSize().asString( 5 );
+		   << boost::format(_("(%s unpacked)")) % pkg_r->installSize().asString( 5, 3 );
     }
   }
 
