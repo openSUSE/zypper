@@ -207,6 +207,11 @@ BOOST_AUTO_TEST_CASE(replace_text)
   /* check RepoVariablesUrlReplacer */
   repo::RepoVariablesUrlReplacer replacer2;
 
+//   // first of all url with {} must be accepted:
+  BOOST_CHECK_NO_THROW( Url("ftp://site.org/${arch}/?arch=${arch}") );
+  BOOST_CHECK_NO_THROW( Url("ftp://site.org/${arch:-noarch}/?arch=${arch:-noarch}") );
+  BOOST_CHECK_NO_THROW( Url("ftp://site.org/${arch:+somearch}/?arch=${arch:+somearch}") );
+
   BOOST_CHECK_EQUAL(replacer2(Url("ftp://user:secret@site.org/$arch/")).asCompleteString(),
 		    "ftp://user:secret@site.org/i686/");
 

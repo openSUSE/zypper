@@ -35,7 +35,7 @@ namespace zypp
       std::string skip("ABCDEFGHIJKLMNOPQRSTUVWXYZ"
                        "abcdefghijklmnopqrstuvwxyz"
                        "0123456789.~_-");
-      std::string more(":/?#[]@!$&'()*+,;=");
+      static const std::string more(URL_SAFE_CHARS);	// ":/?#[]@!$&'()*+,;="
       size_t      beg, pos, len;
       std::string out;
 
