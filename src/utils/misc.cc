@@ -16,6 +16,7 @@
 #include <zypp/media/MediaManager.h>
 #include <zypp/misc/CheckAccessDeleted.h>
 #include <zypp/ExternalProgram.h>
+#include "zypp/parser/ProductFileReader.h"
 
 #include <zypp/ZYpp.h>
 #include <zypp/Target.h>
@@ -25,6 +26,7 @@
 
 #include "main.h"
 #include "Zypper.h"
+#include "repos.h"
 #include "Table.h"             // for process list in suggest_restart_services
 
 #include "utils/misc.h"
@@ -226,6 +228,29 @@ Url make_url (const string & url_s)
 // http://gitorious.org/opensuse/build-service/blobs/master/src/webui/app/controllers/application_controller.rb
 #define OBS_PROJECT_NAME_RX "[" ALNUM "][-+" ALNUM "\\.:]+"
 
+///////////////////////////////////////////////////////////////////
+namespace {
+  parser::ProductFileData baseproductdata( const Pathname & root_r )
+  {
+    parser::ProductFileData ret;
+    PathInfo baseproduct( Pathname::assertprefix( root_r, "/etc/products.d/baseproduct" ) );
+
+    if ( baseproduct.isFile() )
+    {
+      try
+      {
+	ret = parser::ProductFileReader::scanFile( baseproduct.path() );
+      }
+      catch ( const Exception & excpt )
+      {
+	ZYPP_CAUGHT( excpt );
+      }
+    }
+    return ret;
+  }
+
+} // namespace
+///////////////////////////////////////////////////////////////////
 
 Url make_obs_url( const string & obsuri, const Url & base_url, const string & default_platform )
 {
@@ -264,7 +289,43 @@ Url make_obs_url( const string & obsuri, const Url & base_url, const string & de
 
     Pathname path( ret.getPathName() );
     path /= str::gsub( project, ":", ":/" );
-    path /= ( platform.empty() ? default_platform : platform );
+
+    if ( platform.empty() )
+    {
+      Zypper & zypper( *Zypper::instance() );
+
+      if ( default_platform.empty() )
+      {
+	// Try to guess platform from baseproduct....
+	const parser::ProductFileData & pdata( baseproductdata( zypper.globalOpts().root_dir ) );
+	if ( pdata.empty() )
+	{
+	  // Guess failed:
+			     // translators: don't translate '<platform>'
+	  zypper.out().error(_("Unable to guess a value for <platform>."),
+			     _("Please use obs://<project>/<platform>") );
+	  zypper.out().info(str::form(_("Example: %s"), "obs://server:http/openSUSE_11.3"));
+	  return Url();	// FAIL!
+	}
+
+	platform = pdata.name().asString();
+	if ( platform == "openSUSE" && str::containsCI( pdata.summary(), "Tumbleweed" ) )
+	  platform += "_Tumbleweed";
+	else
+	  platform += "_$releasever";
+
+	zypper.out().info( "Guessed: platform = " + platform );
+	path /= platform;
+      }
+      else
+      {
+	zypper.out().info( "zypper.conf: obs.platform = " + default_platform );
+	path /= default_platform;
+      }
+    }
+    else
+      path /= platform;
+
     ret.setPathName( path.asString() );
 
     return ret;

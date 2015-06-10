@@ -877,6 +877,15 @@ Supported URI formats:
 		;; *cifs://usern:passw@servername/share/path/on/the/share*'?workgroup=mygroup'
 		;; *cifs://servername/share/path/on/the/share*'?user=usern&pass=passw'
 
+	OpenSUSE Build Build Service (OBS) repositories:::
+		Zypper also accepts special URIs identifying openSUSE Build Service (OBS) repositories in the *addrepo* command. These URIs have the form of *obs://*'project'*/*['platform'], where 'project' is the name of the OBS project and 'platform' is the target platform (OS) for which the repository is intended.
+		+
+		If 'platform' is omitted, *openSUSE_$releasever* is used unless a value for *obs.platform* is defined in zypper.conf. If you are following *openSUSE_Factory* or *openSUSE_Tumbleweed* you may need to set these as your default platform. But we can only guess, how the directory containing the repository that fits your distribution is named on the server. In case of doubt you need to look up the right URL in a browser.
+[horizontal]
+		;; *obs://zypp:Head/*
+		;; *obs://zypp:Head/openSUSE_Factory*
+		;; *obs://zypp:Head/openSUSE_Factory_Staging_Gcc49_standard*
+
 {nop}
 ~~~~~
 
