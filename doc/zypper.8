@@ -2,12 +2,12 @@
 .\"     Title: zypper
 .\"    Author: [see the "AUTHORS" section]
 .\" Generator: DocBook XSL Stylesheets v1.78.1 <http://docbook.sf.net/>
-.\"      Date: 05/24/2015
+.\"      Date: 06/09/2015
 .\"    Manual: ZYPPER
 .\"    Source: zypper
 .\"  Language: English
 .\"
-.TH "ZYPPER" "8" "05/24/2015" "zypper" "ZYPPER"
+.TH "ZYPPER" "8" "06/09/2015" "zypper" "ZYPPER"
 .\" -----------------------------------------------------------------
 .\" * Define some portability stuff
 .\" -----------------------------------------------------------------
@@ -1711,6 +1711,52 @@ T{
 
 T}:T{
 \fBcifs://servername/share/path/on/the/share\fR\fI?user=usern&pass=passw\fR
+T}
+.TE
+.sp 1
+.RE
+.PP
+OpenSUSE Build Build Service (OBS) repositories
+.RS 4
+Zypper also accepts special URIs identifying openSUSE Build Service (OBS) repositories in the
+\fBaddrepo\fR
+command\&. These URIs have the form of
+\fBobs://\fR\fIproject\fR\fB/\fR[\fIplatform\fR], where
+\fIproject\fR
+is the name of the OBS project and
+\fIplatform\fR
+is the target platform (OS) for which the repository is intended\&.
+
+If
+\fIplatform\fR
+is omitted,
+\fBopenSUSE_$releasever\fR
+is used unless a value for
+\fBobs\&.platform\fR
+is defined in zypper\&.conf\&. If you are following
+\fBopenSUSE_Factory\fR
+or
+\fBopenSUSE_Tumbleweed\fR
+you may need to set these as your default platform\&. But we can only guess, how the directory containing the repository that fits your distribution is named on the server\&. In case of doubt you need to look up the right URL in a browser\&.
+.TS
+tab(:);
+lt lt
+lt lt
+lt lt.
+T{
+
+T}:T{
+\fBobs://zypp:Head/\fR
+T}
+T{
+
+T}:T{
+\fBobs://zypp:Head/openSUSE_Factory\fR
+T}
+T{
+
+T}:T{
+\fBobs://zypp:Head/openSUSE_Factory_Staging_Gcc49_standard\fR
 T}
 .TE
 .sp 1

@@ -186,7 +186,7 @@ Config::Config()
   , color_pkglistHighlight(true)
   , color_pkglistHighlightAttribute(ansi::Color::nocolor())
   , obs_baseUrl("http://download.opensuse.org/repositories/")
-  , obs_platform("openSUSE_Factory")
+  , obs_platform("")	// guess
 {}
 
 void Config::read( const std::string & file )
