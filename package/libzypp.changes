@@ -1,4 +1,12 @@
 -------------------------------------------------------------------
+Fri Jun 12 12:14:04 CEST 2015 - ma@suse.de
+
+- Add details to the default signature verification problem report
+- PathInfo: Avoid ExternalProgram in clean_dir
+- call rpmdb2solv without executing user-supplied scripts (bnc#926853)
+- version 15.4.1 (3)
+
+-------------------------------------------------------------------
 Thu Jun 11 01:13:31 CEST 2015 - ma@suse.de
 
 - Update zypp-po.tar.bz2
