@@ -1,4 +1,12 @@
 -------------------------------------------------------------------
+Fri Jun 12 12:17:34 CEST 2015 - ma@suse.de
+
+- Use 'openSUSE_$releasever' as default OBS platform (bnc#796689)
+- Clarify comment in zypper.conf (bnc#820693)
+- Fix format of sizes in output (bnc#897301)
+- version 1.12.4
+
+-------------------------------------------------------------------
 Thu Jun 11 01:14:10 CEST 2015 - ma@suse.de
 
 - Update zypper-po.tar.bz2
