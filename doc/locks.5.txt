@@ -1,7 +1,7 @@
-locks(5)
+LOCKS(5)
 ========
 :man manual: LIBZYPP
-:man source: libzypp
+:man source: SUSE Linux
 
 
 NAME

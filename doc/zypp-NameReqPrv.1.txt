@@ -1,7 +1,7 @@
-zypp-NameReqPrv(1)
+ZYPP-NAMEREQPRV(1)
 ==================
 :man manual: LIBZYPP
-:man source: libzypp
+:man source: SUSE Linux
 
 
 NAME
