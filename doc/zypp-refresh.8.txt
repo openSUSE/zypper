@@ -1,7 +1,7 @@
-zypp-refresh(8)
+ZYPP-REFRESH(8)
 =============
 :man manual: ZYPPER
-:man source: zypp-refresh
+:man source: SUSE Linux
 
 
 NAME

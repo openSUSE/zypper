@@ -1,7 +1,7 @@
-zypper(8)
+ZYPPER(8)
 =========
 :man manual: ZYPPER
-:man source: zypper
+:man source: SUSE Linux
 :nop:
 
 
