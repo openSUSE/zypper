@@ -1,4 +1,17 @@
 -------------------------------------------------------------------
+Fri Jun 12 14:49:55 CEST 2015 - ma@suse.de
+
+- man: add section about GPG checks
+- repos/services: Show GPG Check status
+- Handle pkgGpgCheck callback (fate#314603)
+- BuildRequires:  libzypp-devel >= 14.39.0
+- download: fix wrong total (=0) counter in download message
+- download: actually abort on user request.
+- Clarify comment in zypper.conf (bnc#820693)
+- Fix format of sizes in output (bnc#897301)
+- version 1.11.32
+
+-------------------------------------------------------------------
 Tue Jun  2 19:52:45 CEST 2015 - ma@suse.de
 
 - Adapt enterprise product detection (bnc#933277)
