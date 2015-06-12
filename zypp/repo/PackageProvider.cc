@@ -210,10 +210,13 @@ namespace zypp
       }
 
       /** Default signature verrification error handling. */
-      void defaultReportSignatureError( RpmDb::CheckPackageResult ret ) const
+      void defaultReportSignatureError( RpmDb::CheckPackageResult ret, const std::string & detail_r = std::string() ) const
       {
-	std::string msg( str::Str() << _package->asUserString() << ": " << _("Signature verification failed") << " " << ret );
-	resolveSignatureErrorAction( report()->problem( _package, repo::DownloadResolvableReport::INVALID, msg ) );
+	str::Str msg;
+	msg << _package->asUserString() << ": " << _("Signature verification failed") << " " << ret;
+	if ( ! detail_r.empty() )
+	  msg << "\n" << detail_r;
+	resolveSignatureErrorAction( report()->problem( _package, repo::DownloadResolvableReport::INVALID, msg.str() ) );
       }
 
     protected:
@@ -318,7 +321,7 @@ namespace zypp
 	  ret.reset();
 	}
         report()->start( _package, url );
-        try  // ELIMINATE try/catch by providing a log-guard
+        try
           {
             ret = doProvidePackage();
 
@@ -337,7 +340,7 @@ namespace zypp
 		{
 		  resolveSignatureErrorAction( userData.get( "Action", repo::DownloadResolvableReport::ABORT ) );
 		}
-		else if ( userData.haskey( "Action" ) )	// pkgGpgCheck requests the default problem report
+		else if ( userData.haskey( "Action" ) )	// pkgGpgCheck requests the default problem report (wo. details)
 		{
 		  defaultReportSignatureError( res );
 		}
@@ -354,8 +357,8 @@ namespace zypp
 		    case RpmDb::CHK_NOTTRUSTED:	// Signature is OK, but key is not trusted
 		    case RpmDb::CHK_ERROR:	// File does not exist or can't be opened
 		    default:
-		      // report problem, throw if to abort, else retry/ignore
-		      defaultReportSignatureError( res );
+		      // report problem (w. details), throw if to abort, else retry/ignore
+		      defaultReportSignatureError( res, str::Str() << userData.get<RpmDb::CheckPackageDetail>( "CheckPackageDetail" ) );
 		      break;
 		  }
 		}
