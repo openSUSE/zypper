@@ -45,6 +45,13 @@ Most of the following concepts are common for all applications based on the libz
 Libzypp works with package metadata, that is information about packages and their relations extracted from RPM packages and other data like patch information, pattern definitions, etc\&. These data are stored together with the RPM files in folders called \fIrepositories\fR\&. Repositories can be placed on various media like an HTTP or FTP server, DVD, or a folder on a local disc\&.
 .sp
 There is a special set of commands in zypper intended to manipulate repositories\&. Also many commands and options take a repository as an argument\&. See section \fBCOMMANDS\fR, subsection \fBRepository Management\fR for more details\&.
+.SS "GPG checks"
+.sp
+Zypp verifies the authenticity of repository metadata by checking their GPG signature\&. If the repository metadata are signed with a trusted key and and successfully verified, packages from that repository are accepted for installation if they match the checksum provided in the metadata\&. If the repository metadata are not signed, the signature of each downloaded rpm package is checked before accepting it for installation\&.
+.sp
+This default behavior can be tuned by explicitly setting the variables \fBrepo_gpgcheck\fR and/or \fBpkg_gpgcheck\fR in the ZYpp configuration file (\fB/etc/zypp/zypp\&.conf\fR) to perform those checks always (if \fIon\fR) or never (if \fIoff\fR)\&.
+.sp
+\fBDisabling GPG checks is not recommended\&.\fR Signing data enables the recipient to verify that no modifications occurred after the data were signed\&. Accepting data with no, wrong or unknown signature can lead to a corrupted system and in extreme cases even to a system compromise\&.
 .SS "Resource Identifiers (URI)"
 .sp
 To specify locations of repositories or other resources (RPM files, \&.repo files) you can use any type of URIs supported by libzypp\&. See section \fBCOMMANDS\fR, subsection \fBRepository Management\fR for a complete list and usage examples\&.
@@ -1895,11 +1902,13 @@ The following data can be printed for each repository found on the system:
 \fIName\fR,
 \fIEnabled\fR
 (whether the repository is enabled),
+\fIGPG Check\fR
+(whether GPG check for repository metadata (\fBr\fR) and/or downloaded rpm packages (\fBp\fR) is enabled),
 \fIRefresh\fR
 (whether auto\-refresh is enabled for the repository),
 \fIPriority\fR,
 \fIType\fR
-(repository meta\-data type: rpm\-md, yast2, plaindir)\&. Which of the data is shown is determined by command line options listed below and the main\&.repoListColumns setting from zypper\&.conf\&. By default, #, Alias, Name, Enabled, and Refresh is shown\&.
+(repository meta\-data type: rpm\-md, yast2, plaindir)\&. Which of the data is shown is determined by command line options listed below and the main\&.repoListColumns setting from zypper\&.conf\&. By default, #, Alias, Name, Enabled, GPG Check and Refresh is shown\&.
 
 Repository number is a unique identifier of the repository in current set of repositories\&. If you add, remove or change a repository, the numbers may change\&. Keep that in mind when using the numbers with the repository handling commands\&. On the other hand, using the alias instead of the number is always safe\&.
 
@@ -2766,7 +2775,8 @@ Repository Options:
 .PP
 \fB\-\-no\-gpg\-checks\fR
 .RS 4
-Ignore GPG check failures and continue\&. If a GPG issue occurs when using this option zypper prints and logs a warning and automatically continues without interrupting the operation\&. Use this option with caution, as you can easily overlook security problems by using it\&.
+Ignore GPG check failures and continue\&. If a GPG issue occurs when using this option zypper prints and logs a warning and automatically continues without interrupting the operation\&. Use this option with caution, as you can easily overlook security problems by using it\&. (see section
+\fBGPG checks\fR)
 .RE
 .PP
 \fB\-\-gpg\-auto\-import\-keys\fR

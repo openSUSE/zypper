@@ -15,6 +15,7 @@
 #include <zypp/ZYppCallbacks.h>
 #include <zypp/Pathname.h>
 #include <zypp/Url.h>
+#include <zypp/target/rpm/RpmDb.h>
 
 #include "Zypper.h"
 #include "utils/prompt.h"
@@ -153,6 +154,95 @@ struct DownloadResolvableReportReceiver : public zypp::callback::ReceiveReport<z
     else
       Zypper::instance()->runtimeData().action_rpm_download = false;
     return action;
+  }
+
+  virtual void pkgGpgCheck( const UserData & userData_r )
+  {
+    Zypper & zypper = *Zypper::instance();
+    // "Package"		Package::constPtr of the package
+    // "Localpath"		Pathname to downloaded package on disk
+    // "CheckPackageResult"	RpmDb::CheckPackageResult of signature check
+    // "CheckPackageDetail"	RpmDb::CheckPackageDetail logmessages of rpm signature check
+    //
+    //   Userdata accepted:
+    // "Action"			DownloadResolvableReport::Action user advice how to behave on error (ABORT).
+    using target::rpm::RpmDb;
+    RpmDb::CheckPackageResult result		( userData_r.get<RpmDb::CheckPackageResult>( "CheckPackageResult" ) );
+
+
+    if ( result == RpmDb::CHK_OK )	// quiet about good sigcheck unless verbose.
+    {
+      if ( zypper.out().verbosity() >= Out::HIGH )
+      {
+	const RpmDb::CheckPackageDetail & details	( userData_r.get<RpmDb::CheckPackageDetail>( "CheckPackageDetail" ) );
+	if ( ! details.empty() )
+	{
+	  zypper.out().info( details.begin()->second, Out::HIGH );
+	}
+      }
+      return;
+    }
+
+
+    // report problems in individual checks...
+    const Pathname & localpath			( userData_r.get<Pathname>( "Localpath" ) );
+    const std::string & rpmname			( localpath.basename() );
+    const RpmDb::CheckPackageDetail & details	( userData_r.get<RpmDb::CheckPackageDetail>( "CheckPackageDetail" ) );
+
+    str::Str msg;
+    msg << rpmname << ":" << "\n";
+    for ( const auto & el : details )
+    {
+      switch ( el.first )
+      {
+	case RpmDb::CHK_OK:
+	  if ( zypper.out().verbosity() >= Out::HIGH )
+	    msg << el.second << "\n";
+	  break;
+	case RpmDb::CHK_NOKEY:		// can't check
+	case RpmDb::CHK_NOTFOUND:
+	  msg << ( ColorContext::MSG_WARNING << el.second ) << "\n";
+	  break;
+	case RpmDb::CHK_FAIL:		// failed check
+	case RpmDb::CHK_NOTTRUSTED:
+	case RpmDb::CHK_ERROR:
+	  msg << ( ColorContext::MSG_ERROR << el.second ) << "\n";
+	  break;
+      }
+    }
+    // determine action
+    if ( zypper.globalOpts().no_gpg_checks )
+    {
+      // report and continue
+      Package::constPtr pkg	( userData_r.get<Package::constPtr>( "Package" ) );
+      std::string err( str::Str() << pkg->asUserString() << ": " << _("Signature verification failed") << " " << result );
+      switch ( result )
+      {
+	case RpmDb::CHK_OK:
+	  // Can't happen; already handled above
+	  break;
+
+	case RpmDb::CHK_NOKEY:		// can't check
+	case RpmDb::CHK_NOTFOUND:
+	  msg << ( ColorContext::MSG_WARNING << err ) << "\n";
+	  break;
+
+	case RpmDb::CHK_FAIL:		// failed check
+	case RpmDb::CHK_ERROR:
+	case RpmDb::CHK_NOTTRUSTED:
+	default:
+	  msg << ( ColorContext::MSG_ERROR << err ) << "\n";
+	  break;
+      }
+      msg << _("Accepting package despite the error.") << " (--no-gpg-checks)" << "\n";
+      userData_r.set( "Action", IGNORE );
+    }
+    else
+    {
+      // error -> requests the default problem report
+      userData_r.reset( "Action" );
+    }
+    zypper.out().info( msg );
   }
 
   // implementation not needed prehaps - the media backend reports the download progress

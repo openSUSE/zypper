@@ -144,10 +144,8 @@ string Augeas::get(const string & augpath) const
     DBG << "Got " << augpath << " = " << value[0] << endl;
     return value[0];
   }
-  else if (_last_get_result == 0)
-    DBG << "No match for " << augpath << endl;
-  else
-    DBG << "Multiple matches for " << augpath << endl;
+  else if (_last_get_result > 1)
+    WAR << "Multiple matches for " << augpath << endl;
 
   return string();
 }

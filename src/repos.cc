@@ -70,6 +70,65 @@ void safe_lexical_cast (Source s, Target &tr) {
   }
 }
 
+// | Enabled | GPG Check |  Colored strings for enabled and GPG Check status
+// +---------+-----------+
+// | Yes     | (  ) No   |
+// | Yes     | (rp) Yes  |
+// | No      | ----      |
+struct RepoGpgCheckStrings
+{
+  RepoGpgCheckStrings()
+  : _tagColor( ColorContext::DEFAULT )
+  {}
+
+  RepoGpgCheckStrings( const ServiceInfo & service_r )
+  {
+    if ( service_r.enabled() )
+    {
+       _tagColor = ColorContext::DEFAULT;
+      _enabledYN = ColorString( _tagColor, _("Yes") );
+      _gpgCheckYN = ColorString( _tagColor, "----" );
+    }
+    else
+    {
+      _tagColor = ColorContext::LOWLIGHT;
+      _enabledYN = ColorString( _tagColor, _("No") );
+      _gpgCheckYN = ColorString( _tagColor, "----" );
+    }
+  }
+
+  RepoGpgCheckStrings( const RepoInfo & repo_r )
+  {
+    if ( repo_r.enabled() )
+    {
+      bool gpgOK = false;
+      std::string tagStr( "(  ) " );
+      if ( repo_r.validRepoSignature() )	// is TriBool!
+      {
+	gpgOK = true;
+	tagStr[1] = 'r';
+      }
+      if ( repo_r.pkgGpgCheck() )
+      {
+	gpgOK = true;
+	tagStr[2] = 'p';
+      }
+      _tagColor = gpgOK ? ColorContext::DEFAULT : ColorContext::NEGATIVE;
+      _enabledYN = ColorString( ColorContext::DEFAULT, _("Yes") );
+      _gpgCheckYN = ColorString( _tagColor, tagStr+asYesNo(gpgOK) );
+    }
+    else
+    {
+      _tagColor = ColorContext::LOWLIGHT;
+      _enabledYN = ColorString( _tagColor, _("No") );
+      _gpgCheckYN = ColorString( _tagColor, "----" );
+    }
+  }
+  ColorContext _tagColor;	///< color according to enabled and GPG Check status
+  ColorString _enabledYN;	///< colored enabled Yes/No
+  ColorString _gpgCheckYN;	///< colored GPG Check status if enabled else "----"
+};
+
 // ----------------------------------------------------------------------------
 
 static bool refresh_raw_metadata(Zypper & zypper,
@@ -118,8 +177,12 @@ static bool refresh_raw_metadata(Zypper & zypper,
               switch (stat)
               {
               case RepoManager::REPO_UP_TO_DATE:
-                zypper.out().info(boost::str(format(
-		  _("Repository '%s' is up to date.")) % repo.asUserString()));
+	      {
+		TermLine outstr( TermLine::SF_SPLIT | TermLine::SF_EXPAND );
+		outstr.lhs << boost::str(format(_("Repository '%s' is up to date.")) % repo.asUserString());
+		//outstr.rhs << repoGpgCheckStatus( repo );
+		zypper.out().infoLine( outstr );
+	      }
               break;
               case RepoManager::REPO_CHECK_DELAYED:
                 zypper.out().info(boost::str(format(
@@ -163,6 +226,7 @@ static bool refresh_raw_metadata(Zypper & zypper,
               RepoManager::RefreshIfNeededIgnoreDelay :
               RepoManager::RefreshIfNeeded);
 
+      //plabel += repoGpgCheckStatus( repo );
       zypper.out().progressEnd("raw-refresh", plabel);
       plabel.clear();
     }
@@ -967,6 +1031,10 @@ static void print_repo_list(Zypper & zypper,
   th << _("Enabled");
   ++index;
 
+  // GPG Check
+  th << _("GPG Check");
+  ++index;
+
   // 'autorefresh' flag
   if (all || showrefresh)
   {
@@ -1027,17 +1095,20 @@ static void print_repo_list(Zypper & zypper,
       continue;
 
     TableRow tr(index);
+    RepoGpgCheckStrings repoGpgCheck( repo );	// color strings for tag/enabled/gpgcheck
 
     // number
-    tr << str::numstring (i, nindent);
+    tr << ColorString( repoGpgCheck._tagColor, str::numstring(i, nindent) ).str();
     // alias
     if (all || showalias) tr << repo.alias();
     // name
     if (all || showname) tr << repo.name();
     // enabled?
-    tr << (repo.enabled() ? _("Yes") : _("No"));
+    tr << repoGpgCheck._enabledYN.str();
+    // GPG Check
+    tr << repoGpgCheck._gpgCheckYN.str();
     // autorefresh?
-    if (all || showrefresh) tr << (repo.autorefresh() ? _("Yes") : _("No"));
+    if (all || showrefresh) tr << asYesNo(repo.autorefresh());
     // priority
     if (all || showprio)
       // output flush right; looks nicer and sorts correctly
@@ -1082,6 +1153,8 @@ static void print_repo_details(Zypper & zypper, list<RepoInfo> & repos)
       cout << endl;
 
     RepoInfo repo = *it;
+    RepoGpgCheckStrings repoGpgCheck( repo );
+
     Table t;
     t.lineStyle(::Colon);
     t.allowAbbrev(1);
@@ -1093,12 +1166,12 @@ static void print_repo_details(Zypper & zypper, list<RepoInfo> & repos)
 						    : (repo.mirrorListUrl().asString().empty()
 						       ? "n/a"
 						       : repo.mirrorListUrl().asString())) )
-      << (  TableRow() << _("Enabled")		<< (repo.enabled() ? _("Yes") : _("No")) )
+      << (  TableRow() << _("Enabled")		<< repoGpgCheck._enabledYN.str() )
+      << (  TableRow() << _("GPG Check")	<< repoGpgCheck._gpgCheckYN.str() )
       << (  TableRow() << _("Priority")		<< str::form("%d", repo.priority()) )
       << (  TableRow() << _("Auto-refresh")	<< (repo.autorefresh() ? _("On") : _("Off")) )
       << (  TableRow() << _("Keep Packages")	<< (repo.keepPackages() ? _("On") : _("Off")) )
       << (  TableRow() << _("Type")		<< repo.type().asString() )
-      << (  TableRow() << _("GPG Check")	<< (repo.gpgCheck() ? _("On") : _("Off")) )
       << (  TableRow() << _("GPG Key URI")	<< repo.gpgKeyUrl() )
       << (  TableRow() << _("Path Prefix")	<< repo.path() )
       << (  TableRow() << _("Parent Service")	<< repo.service() )
@@ -1721,7 +1794,7 @@ void add_repo(Zypper & zypper, RepoInfo & repo)
     // translators: property name; short; used like "Name: value"
     p.add( _("Autorefresh"),	repo.autorefresh() );
     // translators: property name; short; used like "Name: value"
-    p.add( _("GPG check"), 	repo.gpgCheck() ).paint( ColorContext::MSG_WARNING, repo.gpgCheck() == false );
+    p.add( _("GPG Check"), 	repo.gpgCheck() ).paint( ColorContext::MSG_WARNING, repo.gpgCheck() == false );
     // translators: property name; short; used like "Name: value"
     p.add( _("URI"),		repo.baseUrlsBegin(), repo.baseUrlsEnd() );
     s << p;
@@ -2449,29 +2522,33 @@ static void service_list_tr(
     unsigned int reponumber,
     const ServiceListFlags & flags)
 {
-  ServiceInfo_Ptr service;
+  ServiceInfo_Ptr service = dynamic_pointer_cast<ServiceInfo>(srv);
   RepoInfo_Ptr repo;
+  if ( ! service )
+    repo = dynamic_pointer_cast<RepoInfo>(srv);
+  RepoGpgCheckStrings repoGpgCheck( service ? RepoGpgCheckStrings(*service) : RepoGpgCheckStrings(*repo) );
 
   TableRow tr(8);
 
   // number
   if (flags & SF_SERVICE_REPO)
-    tr << "";
+    if ( repo && ! repo->enabled() )
+      tr << ColorString( repoGpgCheck._tagColor, "-" ).str();
+    else
+      tr << "";
   else
-    tr << str::numstring (reponumber);
+    tr << ColorString( repoGpgCheck._tagColor, str::numstring(reponumber) ).str();
 
   // alias
   tr << srv->alias();
   // name
   tr << srv->name();
   // enabled?
-  tr << (srv->enabled() ? _("Yes") : _("No"));
+  tr << repoGpgCheck._enabledYN.str();
+  // GPG Check
+  tr << repoGpgCheck._gpgCheckYN.str();
   // autorefresh?
   tr << (srv->autorefresh() ? _("Yes") : _("No"));
-
-  service = dynamic_pointer_cast<ServiceInfo>(srv);
-  if (!service)
-    repo = dynamic_pointer_cast<RepoInfo>(srv);
 
   // priority
   if (flags & SF_SHOW_PRIO)
@@ -2534,6 +2611,7 @@ static void print_service_list(Zypper & zypper,
      << _("Alias")
      << _("Name")
      << _("Enabled")
+     << _("GPG Check")
      // translators: 'zypper repos' column - whether autorefresh is enabled for the repository
      << _("Refresh");
   // optional columns
