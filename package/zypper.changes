@@ -1,4 +1,9 @@
 -------------------------------------------------------------------
+Sun Jun 14 01:14:00 CEST 2015 - ma@suse.de
+
+- Update zypper-po.tar.bz2
+
+-------------------------------------------------------------------
 Fri Jun 12 12:17:34 CEST 2015 - ma@suse.de
 
 - Use 'openSUSE_$releasever' as default OBS platform (bnc#796689)
