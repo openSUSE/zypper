@@ -241,7 +241,7 @@ void remove_locks(Zypper & zypper, const Zypper::ArgList & args, const ResKindSe
     else
       zypper.out().info(str::form(_PL(
         "%zu lock has been successfully removed.",
-        "%zu locks have been succesfully removed.",
+        "%zu locks have been successfully removed.",
         start - locks.size()), start - locks.size()));
   }
   catch(const Exception & e)

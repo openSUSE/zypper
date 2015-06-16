@@ -2,12 +2,12 @@
 .\"     Title: zypper
 .\"    Author: [see the "AUTHORS" section]
 .\" Generator: DocBook XSL Stylesheets v1.78.1 <http://docbook.sf.net/>
-.\"      Date: 06/12/2015
+.\"      Date: 06/16/2015
 .\"    Manual: ZYPPER
 .\"    Source: SUSE Linux
 .\"  Language: English
 .\"
-.TH "ZYPPER" "8" "06/12/2015" "SUSE Linux" "ZYPPER"
+.TH "ZYPPER" "8" "06/16/2015" "SUSE Linux" "ZYPPER"
 .\" -----------------------------------------------------------------
 .\" * Define some portability stuff
 .\" -----------------------------------------------------------------
@@ -2179,7 +2179,7 @@ Newly added services are not refreshed automatically\&. Use the
 \fBrefresh\-services\fR
 command to refresh them\&. Zypper does not access the service URI when adding the service, so the type of the services is unknown until it is refreshed\&.
 
-This command also allows to add also ordinary repositories when used with
+This command also allows one to add also ordinary repositories when used with
 \fB\-\-type\fR
 option, where you specify the type of the repository\&. See the addrepo command for the list of supported repository types\&.
 .PP
@@ -2544,7 +2544,7 @@ subnode (xpath:
             <arch>x86_64</arch>
             <repository name="repo\-oss\-update (13\&.1)" alias="openSUSE:repo\-oss\-update"/>
           </solvable>
-          <localfile path="/var/cache/zypp/packages/openSUSE:repo\-oss\-update/x86_64/zypper\-1\&.9\&.17\-26\&.1\&.x86_64\&.rpm"/>
+          <localfile path="/var/cache/zypp/pac\&.\&.\&./zypper\-1\&.9\&.17\-26\&.1\&.x86_64\&.rpm"/>
         </download\-result>
 .fi
 .if n \{\

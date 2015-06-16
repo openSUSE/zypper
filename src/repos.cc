@@ -3165,10 +3165,10 @@ void modify_service(Zypper & zypper, const string & alias)
       {
         if (srv.enabled())
           zypper.out().info(boost::str(format(
-            _("Service '%s' has been sucessfully enabled.")) % alias));
+            _("Service '%s' has been successfully enabled.")) % alias));
         else
           zypper.out().info(boost::str(format(
-            _("Service '%s' has been sucessfully disabled.")) % alias));
+            _("Service '%s' has been successfully disabled.")) % alias));
       }
 
       if (changed_autoref)
@@ -3316,7 +3316,7 @@ void modify_services_by_option( Zypper & zypper )
 void load_resolvables(Zypper & zypper)
 {
   static bool done = false;
-  // don't call this fuction more than once for a single ZYpp instance
+  // don't call this function more than once for a single ZYpp instance
   // (e.g. in shell)
   if (done)
     return;
@@ -3396,7 +3396,7 @@ void load_repo_resolvables(Zypper & zypper)
       // feature #301904
       // ma@: Using God->pool() here would always rebuild the pools index tables,
       // because loading a new repo invalidates them. Rebuilding the whatprovides
-      // index is sometimes slow, so we avoid this overhead by directly acesssing
+      // index is sometimes slow, so we avoid this overhead by directly accessing
       // the sat::Pool.
       Repository robj = zypp::sat::Pool::instance().reposFind(repo.alias());
       if ( robj != Repository::noRepository &&
@@ -3438,7 +3438,7 @@ void load_target_resolvables(Zypper & zypper)
   {
     ZYPP_CAUGHT(e);
     zypper.out().error(e,
-        _("Problem occured while reading the installed packages:"),
+        _("Problem occurred while reading the installed packages:"),
         _("Please see the above error message for a hint."));
     zypper.setExitCode(ZYPPER_EXIT_ERR_ZYPP);
   }
