@@ -52,6 +52,7 @@ namespace zypp
       CheckSum real_checksum( _checksum.type(), filesystem::checksum( file, _checksum.type() ));
       if ( (real_checksum != _checksum) )
       {
+	WAR << "File " <<  file << " has wrong checksum " << real_checksum << " (expected " << _checksum << ")" << endl;
         if ( report->askUserToAcceptWrongDigest( file, _checksum.checksum(), real_checksum.checksum() ) )
         {
           WAR << "User accepted " <<  file << " with WRONG CHECKSUM." << std::endl;
