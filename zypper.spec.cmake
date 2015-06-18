@@ -131,6 +131,9 @@ cd build
 make install DESTDIR=$RPM_BUILD_ROOT
 make -C po install DESTDIR=$RPM_BUILD_ROOT
 
+mkdir -p $RPM_BUILD_ROOT%{_prefix}/lib/zypper
+mkdir -p $RPM_BUILD_ROOT%{_prefix}/lib/zypper/commands
+
 # yzpper symlink
 ln -s zypper $RPM_BUILD_ROOT%{_bindir}/yzpper
 
@@ -157,6 +160,7 @@ rm -rf "$RPM_BUILD_ROOT"
 %{_datadir}/zypper/zypper.aug
 %dir %{_datadir}/zypper/xml
 %{_datadir}/zypper/xml/xmlout.rnc
+%{_prefix}/lib/zypper
 %doc %{_mandir}/man8/zypper.8*
 %doc %{_mandir}/man8/zypp-refresh.8*
 %doc %dir %{_datadir}/doc/packages/zypper
