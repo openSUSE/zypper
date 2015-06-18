@@ -30,6 +30,7 @@ namespace
     {
 #define _T(C) _table( ZypperCommand::C )
       _T( NONE_e )		| "NONE"		| "none" | "";
+      _T( SUBCOMMAND_e)		| "subcommand";
 
       _T( ADD_SERVICE_e )	| "addservice"		| "as" | "service-add" | "sa";
       _T( REMOVE_SERVICE_e )	| "removeservice"	| "rs" | "service-delete" | "sd";
@@ -108,6 +109,9 @@ namespace
 ///////////////////////////////////////////////////////////////////
 
 #define DEF_ZYPPER_COMMAND(C) const ZypperCommand ZypperCommand::C( ZypperCommand::C##_e )
+DEF_ZYPPER_COMMAND( NONE );
+DEF_ZYPPER_COMMAND( SUBCOMMAND );
+
 DEF_ZYPPER_COMMAND( ADD_SERVICE );
 DEF_ZYPPER_COMMAND( REMOVE_SERVICE );
 DEF_ZYPPER_COMMAND( MODIFY_SERVICE );
@@ -161,7 +165,6 @@ DEF_ZYPPER_COMMAND( SOURCE_DOWNLOAD );
 DEF_ZYPPER_COMMAND( HELP );
 DEF_ZYPPER_COMMAND( SHELL );
 DEF_ZYPPER_COMMAND( SHELL_QUIT );
-DEF_ZYPPER_COMMAND( NONE );
 DEF_ZYPPER_COMMAND( MOO );
 
 DEF_ZYPPER_COMMAND( RUG_PATCH_INFO );
@@ -186,15 +189,18 @@ ZypperCommand::ZypperCommand( const std::string & strval_r )
 
 ZypperCommand::Command ZypperCommand::parse( const std::string & strval_r ) const
 {
-  ZypperCommand::Command cmd;
+  ZypperCommand::Command cmd = SUBCOMMAND_e;	// Exception if not true
   if ( ! table().getValue( strval_r, cmd ) )
   {
-    ZYPP_THROW( zypp::Exception( zypp::str::form(_("Unknown command '%s'"), strval_r.c_str() ) ) );
+    bool isSubcommand( const std::string & strval_r );	// in subcommand.cc
+
+    if ( ! isSubcommand( strval_r ) )
+    {
+      ZYPP_THROW( zypp::Exception( zypp::str::form(_("Unknown command '%s'"), strval_r.c_str() ) ) );
+    }
   }
   return cmd;
 }
 
 const std::string & ZypperCommand::asString() const
-{
-  return table().getName( _command );
-}
+{ return table().getName( _command ); }

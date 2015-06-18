@@ -59,6 +59,7 @@
 #include "download.h"
 #include "source-download.h"
 #include "configtest.h"
+#include "subcommand.h"
 
 #include "output/OutNormal.h"
 #include "output/OutXML.h"
@@ -182,6 +183,10 @@ int Zypper::main(int argc, char ** argv)
   case ZypperCommand::SHELL_e:
     commandShell();
     cleanup();
+    return exitCode();
+
+  case ZypperCommand::SUBCOMMAND_e:
+    subcommand( *this );
     return exitCode();
 
   case ZypperCommand::NONE_e:
@@ -336,9 +341,14 @@ void print_main_help(Zypper & zypper)
     "\t\t\t\tto a local directory.\n"
   );
 
+  static string help_subcommands = _("     Subcommands:\n"
+    "\tsubcommand\t\tLists available subcommands.\n"
+  );
+
   static string help_usage = _(
     "  Usage:\n"
     "\tzypper [--global-options] <command> [--command-options] [arguments]\n"
+    "\tzypper <subcommand> [--command-options] [arguments]\n"
   );
 
   zypper.out().info(help_usage, Out::QUIET);
@@ -354,6 +364,7 @@ void print_main_help(Zypper & zypper)
   zypper.out().info(help_query_commands, Out::QUIET);
   zypper.out().info(help_lock_commands, Out::QUIET);
   zypper.out().info(help_other_commands, Out::QUIET);
+  zypper.out().info(help_subcommands, Out::QUIET);
 
   print_command_help_hint(zypper);
 }
@@ -656,6 +667,37 @@ void Zypper::processGlobalOptions()
       ZYPP_THROW(ExitRequestException("invalid args"));
     }
   }
+  else if ( command() == ZypperCommand::SUBCOMMAND )
+  {
+    // subcommand command args are handled here because
+    // the command is treated differently in main.
+    shared_ptr<SubcommandOptions> myOpts( assertCommandOptions<SubcommandOptions>() );
+    myOpts->loadDetected();
+
+    if ( myOpts->_detected._name.empty() )
+    {
+      // Command name is the builtin 'subcommand', no executable.
+      // For now we turn on the help.
+      setRunningHelp( true );
+    }
+    else
+    {
+      if ( optind > 2 )
+      {
+	out().error(boost::str(format(
+	  // translators: %1%  - is the name of a subcommand
+	  _("Subcommand %1% does not support zypper global options."))
+	  % myOpts->_detected._name
+	));
+	print_command_help_hint( *this );
+	setExitCode( ZYPPER_EXIT_ERR_INVALID_ARGS );
+	ZYPP_THROW(ExitRequestException("invalid args"));
+      }
+      // save args (incl. the command itself as argv[0])
+      myOpts->args( _argv+(optind-1), _argv+_argc );
+    }
+  }
+
   // ======== other global options ========
 
   if ( (it = gopts.find( "releasever" )) != gopts.end() )
@@ -975,6 +1017,11 @@ void Zypper::commandShell()
         break;
       else if (command() == ZypperCommand::NONE)
         print_unknown_command_hint(*this);
+      else if (command() == ZypperCommand::SUBCOMMAND)
+      {
+	// Currently no concept how to handle global options and ZYPPlock
+	out().error("Zypper shell does not support execution of subcommands.");
+      }
       else
         safeDoCommand();
     }
@@ -2823,6 +2870,25 @@ void Zypper::processCommandOptions()
     break;
   }
 
+  case ZypperCommand::SUBCOMMAND_e:
+  {
+    // This is different from other commands: Executed in main;
+    // here we are prepared for showing help only.
+    if ( ! runningHelp() )
+      setRunningHelp( true );
+
+    static struct option options[] = {
+      {0, 0, 0, 0}
+    };
+    specific_options = options;
+
+    shared_ptr<SubcommandOptions> myOpts( assertCommandOptions<SubcommandOptions>() );
+    myOpts->loadDetected();
+    // the following will either pop up a manpage or return a string to be displayed.
+    _command_help = assertCommandOptions<SubcommandOptions>()->helpString();
+    break;
+  }
+
   default:
   {
     if (runningHelp())
@@ -2846,7 +2912,6 @@ void Zypper::processCommandOptions()
     ERR << "Unknown option or missing argument, returning." << endl;
     return;
   }
-
   // RUG TRANSLATE sort-by-catalog into sort-by-repo
   if ( _copts.count("sort-by-catalog") )
   {
@@ -2901,6 +2966,7 @@ void Zypper::doCommand()
   switch ( command().toEnum() )
   {
     case ZypperCommand::PS_e:
+    case ZypperCommand::SUBCOMMAND_e:
       // bnc#703598: Quick fix as few commands do not need a zypp lock
       break;
 
@@ -5194,6 +5260,7 @@ void Zypper::doCommand()
     break;
   }
 
+  case ZypperCommand::SUBCOMMAND_e:	// subcommands are not expected to be executed here!
   default:
     // if the program reaches this line, something went wrong
     setExitCode(ZYPPER_EXIT_ERR_BUG);

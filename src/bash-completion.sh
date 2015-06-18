@@ -38,13 +38,13 @@ _zypper() {
 	set -o noglob
 
 	if test ${#ZYPPER_CMDLIST[@]} -eq 0; then
-		ZYPPER_CMDLIST=($(LC_ALL=POSIX $ZYPPER -q -h | \
+		ZYPPER_CMDLIST=($({ LC_ALL=POSIX $ZYPPER -q -h; $ZYPPER -q subcommand; } | \
 				sed -rn '/^[[:blank:]]*Commands:/,$ {
 					/[\t]{4}/d
 					s/^[[:blank:]]*//
 					s/^[[:upper:]].*://
 					s/[[:blank:]]+[[:upper:]].*$//
-					s/,[[:blank:]]+/\n/
+					s/,[[:blank:]]+/\n/g
 					s/\?/\\?/
 					/^$/d
 					p
