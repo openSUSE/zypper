@@ -1,4 +1,12 @@
 -------------------------------------------------------------------
+Thu Jun 18 19:02:32 CEST 2015 - ma@suse.de
+
+- Add git-like subcommand support for zypper.
+  Zypper subcommands are standalone executables that live in the
+  zypper exec dir or are available in your $PATH (see zypper(8)). 
+- version 1.11.33
+
+-------------------------------------------------------------------
 Fri Jun 12 14:49:55 CEST 2015 - ma@suse.de
 
 - man: add section about GPG checks
