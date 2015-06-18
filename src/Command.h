@@ -19,6 +19,7 @@ struct ZypperCommand
 {
   /** Special void command value meaning <b>not set</b> */
   static const ZypperCommand NONE;
+  static const ZypperCommand SUBCOMMAND;
 
   static const ZypperCommand ADD_SERVICE;
   static const ZypperCommand REMOVE_SERVICE;
@@ -96,6 +97,7 @@ struct ZypperCommand
   enum Command
   {
     NONE_e,
+    SUBCOMMAND_e,
 
     ADD_SERVICE_e,
     REMOVE_SERVICE_e,
@@ -174,10 +176,11 @@ struct ZypperCommand
 
   Command toEnum() const { return _command; }
 
-  ZypperCommand::Command parse(const std::string & strval_r) const;
-
   const std::string & asString() const;
 
+private:
+  /** Fills SubcommandOptions::Detected on the fly if SUBCOMMAND */
+  Command parse(const std::string & strval_r) const;
   Command _command;
 };
 
@@ -185,13 +188,13 @@ inline std::ostream & operator<<( std::ostream & str, const ZypperCommand & obj 
 { return str << obj.asString(); }
 
 inline bool operator==(const ZypperCommand & obj1, const ZypperCommand & obj2)
-{ return obj1._command == obj2._command; }
+{ return obj1.toEnum() == obj2.toEnum(); }
 
 inline bool operator!=(const ZypperCommand & obj1, const ZypperCommand & obj2)
-{ return obj1._command != obj2._command; }
+{ return obj1.toEnum() != obj2.toEnum(); }
 
 // for use in std::set
 inline bool operator<(const ZypperCommand & obj1, const ZypperCommand & obj2)
-{ return obj1._command < obj2._command; }
+{ return obj1.toEnum() < obj2.toEnum(); }
 
 #endif /*ZYPPERCOMMAND_H_*/

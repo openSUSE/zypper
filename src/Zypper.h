@@ -38,12 +38,11 @@ using std::cout;
 using std::cerr;
 using std::endl;
 
+struct Options;
+
 /** directory for storing manually installed (zypper install foo.rpm) RPM files
  */
 #define ZYPPER_RPM_CACHE_DIR "/var/cache/zypper/RPMS"
-
-/** Base class for command specific option classes. */
-struct Options { virtual ~Options() {} };
 
 /**
  * Structure for holding global options.
@@ -308,6 +307,132 @@ void print_main_help(const Zypper & zypper);
 void print_unknown_command_hint(Zypper & zypper);
 void print_command_help_hint(Zypper & zypper);
 
+///////////////////////////////////////////////////////////////////
+/// \brief Base class for command specific option classes.
+///////////////////////////////////////////////////////////////////
+struct Options
+{
+  //Options() : _command( "" ) {}	// FIXME: DefaultCtor is actually undesired!
+  Options( const ZypperCommand & command_r ) : _command( command_r ) {}
+  virtual ~Options() {}
+
+  /** The command. */
+  const ZypperCommand & command() const
+  { return _command; }
+
+  /** The command name (optionally suffixed). */
+  std::string commandName( const std::string & suffix_r = std::string() ) const
+  { std::string ret( _command.asString() ); if ( ! suffix_r.empty() ) ret += suffix_r; return ret; }
+
+  /** The command help text written to a stream. */
+  virtual std::ostream & showHelpOn( std::ostream & out ) const	// FIXME: become pure virtual
+  {
+    out
+      << _command << " ...?\n"
+      << "This is just a placeholder for a commands help.\n"
+      << "Please file a bug report if this text is displayed.\n"
+      ;
+    return out;
+  }
+
+  /** The command help as string. */
+  std::string helpString() const
+  { std::ostringstream str; showHelpOn( str ); return str.str(); }
+
+  /** Show user help on command. */
+  void showUserHelp( Zypper & zypper_r ) const
+  { zypper_r.out().info( helpString(), Out::QUIET ); }	// always visible
+
+private:
+  ZypperCommand _command;	//< my command
+};
+
+///////////////////////////////////////////////////////////////////
+/// \brief Base class for command specific implementation classes.
+///////////////////////////////////////////////////////////////////
+template <class _Derived, class _Options>
+struct CommandBase
+{
+  CommandBase( Zypper & zypper_r )
+  : CommandBase( zypper_r, zypper_r.commandOptionsAs<_Options>() )
+  {}
+
+  CommandBase( Zypper & zypper_r, shared_ptr<_Options> options_r )
+  : _zypper( zypper_r )
+  , _options( options_r )
+  {
+    if ( ! _options )
+    {
+      _options.reset( new _Options() );
+      MIL << commandName() << "( no options provided )" << endl;
+    }
+  }
+
+  _Options & options() { return *_options; }
+
+  const _Options & options() const { return *_options; }
+
+ /** Command name (optionally suffixed). */
+  std::string commandName( const std::string & suffix_r = std::string() ) const
+  { return _options->commandName( std::move(suffix_r) ); }
+
+  /** The Command help text written to a stream. */
+  std::ostream & showHelpOn( std::ostream & out ) const
+  { return _options->showHelpOn( out ); }
+
+  /** Show user help on command. */
+  void showHelp() const
+  { _options->showHelp( _zypper ); }
+
+  /** Run a command action.
+   * \code
+   *   void action()
+   *   {
+   *      throw( Out::Error( ZYPPER_EXIT_ERR_ZYPP, "error", "detail" ) );
+   *      _zypper.setExitCode( ZYPPER_EXIT_ERR_ZYPP );
+   *   }
+   * \endcode
+   * Thrown Out::Error and zypper are evaluated and reported to the user.
+   * Other exceptions pass by.
+   * \return zypper exitCode
+   */
+  int run( void (_Derived::*action_r)() = &_Derived::action )
+  {
+    MIL << "run: " << commandName() << " action " << action_r << endl;
+    try
+    {
+      (self().*(action_r))();
+    }
+    catch ( const Out::Error & error_r )
+    {
+      error_r.report( _zypper );
+    }
+    return _zypper.exitCode();
+  }
+  /** Execute a command action (run + final "Done"/"Finished with error." message).
+   * \return zypper exitCode
+   */
+  int execute( void (_Derived::*action_r)() = &_Derived::action )
+  {
+    run( action_r );
+    // finished
+    _zypper.out().gap();
+    if ( _zypper.exitCode() != ZYPPER_EXIT_OK )
+      _zypper.out().info( _options->commandName(": ")+ColorString(ColorContext::MSG_WARNING,  _("Finished with error.") ).str() );
+    else
+      _zypper.out().info( _options->commandName(": ")+_("Done.") );
+    return _zypper.exitCode();
+  }
+
+protected:
+  ~CommandBase() {}
+  Zypper & 		_zypper;	//< my Zypper
+  shared_ptr<_Options>	_options;	//< my Options
+private:
+  _Derived &       self()       { return *static_cast<_Derived*>( this ); }
+  const _Derived & self() const { return *static_cast<const _Derived*>( this ); }
+};
+///////////////////////////////////////////////////////////////////
 
 class ExitRequestException : public zypp::Exception
 {

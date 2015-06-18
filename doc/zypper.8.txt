@@ -14,6 +14,8 @@ SYNOPSIS
 --------
 *zypper* ['--global-opts'] 'command' ['--command-opts'] ['command-arguments']
 
+*zypper* 'subcommand' ['--command-opts'] ['command-arguments']
+
 *zypper* *help* 'command'
 
 
@@ -100,6 +102,8 @@ As the reason for file conflicts usually is a poor package design or lack of coo
 COMMANDS
 --------
 zypper provides a number of 'commands'. Each command accepts the options listed in the *GLOBAL OPTIONS* section. These options must be specified 'before' the command name. In addition, many commands have specific options, which are listed in this section. These command-specific options must be specified 'after' the name of the command and 'before' any of the command arguments.
+
+Zypper also provides limited support for writing extensions/subcommands in any language. See section *SUBCOMMANDS* for details.
 
 General Commands
 ~~~~~~~~~~~~~~~~
@@ -1368,6 +1372,12 @@ Other Commands
 	*Files*;;	The list of the deleted files
 
 
+Subommands
+~~~~~~~~~~
+*subcommand*::
+	Lists available subcommands in */usr/lib/zypper/commands* and from elsewhere on your *$PATH*. See section *SUBCOMMANDS* for details.
+
+
 GLOBAL OPTIONS
 --------------
 
@@ -1406,7 +1416,7 @@ GLOBAL OPTIONS
 	Specifies table style to use. Table style is identified by an integer number. TODO
 
 *-n*, *--non-interactive*::
-	Switches to non-interactive mode. In this mode zypper doesn't ask user to type answers to various prompts, but uses default answers automatically. The behaviour of this option is somewhat different than that of options like *--yes*, since zypper can answer different answers to different questions. The answers also depend on other options like *--no-gpg-checks*.
+	Switches to non-interactive mode. In this mode zypper doesn't ask user to type answers to various prompts, but uses default answers automatically. The behavior of this option is somewhat different than that of options like *--yes*, since zypper can answer different answers to different questions. The answers also depend on other options like *--no-gpg-checks*.
 
 *-x*, *--xmlout*::
 	Switches to XML output. This option is useful for scripts or graphical frontends using zypper.
@@ -1473,6 +1483,27 @@ Target Options: :: {nop}
 	This option serves mainly for testing purposes. It will cause zypper to act as if there were no packages installed in the system. Use with caution as you can damage your system using this option.
 
 
+SUBCOMMANDS
+-----------
+Zypper subcommands are inspired by *git*(1). Subcommands are standalone executables that live in the zypper_execdir (*/usr/lib/zypper/commands*). For subcommands zypper provides a wrapper that knows where the subcommands live, and runs them by passing command options and arguments to them.  If a subcommand is not found in the zypper_execdir, the wrapper will look in the rest of your *$PATH* for it. Thus, it’s possible to write local zypper extensions that don’t live in system space.
+
+This is how to add your own subcommand *zypper 'mytask'*:
+
+- The executable must be named *zypper-*'mytask'.
+
+- The executable must be located your *$PATH*.
+
+- A manpage for *zypper-*'mytask' should be provided and explaining the commands options and return values. It will be shown when calling *zypper help 'mytask'*.
+
+- Zypper built-in commands take precedence over subcommands with the same name.
+
+- It's fine to call zypper or use libzypp from within your subcommand.
+
+You can use the built-in *zypper subcommand* command to get a list of all subcommands in zypper_execdir and from elsewhere on your $PATH.
+
+Using zypper 'global-options' together with subcommands, as well as executing subcommands in *zypper shell* is currently not supported.
+
+
 FILES
 -----
 */etc/zypp/zypper.conf*, *$HOME/.zypper.conf*::
@@ -1509,6 +1540,9 @@ FILES
 	+
 	This directory is used by all ZYpp-based applications.
 
+*/usr/lib/zypper/commands*::
+	System directory containing zypper extensions (see section *SUBCOMMANDS*)
+
 */var/cache/zypp/raw*::
 	Directory for storing raw metadata contained in repositories. Use the *--raw-cache-dir* global option to use an alternative directory for this purpose or the *--root* option to make this directory relative to the specified root directory.
 	+
@@ -1533,7 +1567,7 @@ FILES
 
 EXIT CODES
 ----------
-There are several exit codes defined for zypper for use e.g. within scripts. These codes are defined in header file src/zypper-main.h found in zypper source package. Codes from interval (1-5) denote an error, numbers (100-105) provide a specific information, 0 represents a normal successful run. Following is a list of these codes with descriptions.
+There are several exit codes defined for zypper built-in commands for use e.g. within scripts. These codes are defined in header file src/zypper-main.h found in zypper source package. Codes from interval (1-5) denote an error, numbers (100-105) provide a specific information, 0 represents a normal successful run. Following is a list of these codes with descriptions:
 
 *0* - *ZYPPER_EXIT_OK*::
 	Successful run of zypper with no special info.
@@ -1564,6 +1598,7 @@ There are several exit codes defined for zypper for use e.g. within scripts. The
 *105* - *ZYPPER_EXIT_ON_SIGNAL*::
 	Returned upon exiting after receiving a SIGINT or SIGTERM.
 
+Zypper subcommands (see section *SUBCOMMANDS*) may return *different codes* which should be described in the commands man page. Call *zypper help 'subcommand'* to see the subcommands man page if one is provided.
 
 HOMEPAGE
 --------

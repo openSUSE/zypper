@@ -43,12 +43,12 @@ namespace
   /// \class SourceDownloadImpl
   /// \brief Implementation of source-download commands.
   ///////////////////////////////////////////////////////////////////
-  class SourceDownloadImpl
+  class SourceDownloadImpl : public CommandBase<SourceDownloadImpl,SourceDownloadOptions>
   {
+    typedef CommandBase<SourceDownloadImpl,SourceDownloadOptions> CommandBase;
   public:
     SourceDownloadImpl( Zypper & zypper_r )
-    : _zypper( zypper_r )
-    , _options( _zypper.commandOptionsAs<SourceDownloadOptions>() )
+    : CommandBase( zypper_r )
     , _dnlDir( Pathname::assertprefix( _zypper.globalOpts().root_dir, _options->_directory ) )
     { MIL << "SourceDownload " << _options << endl; }
 
@@ -153,9 +153,6 @@ namespace
     std::ostream & dumpManifestSumary( std::ostream & str, Manifest::StatusMap & status );
     std::ostream & dumpManifestTable( std::ostream & str );
 
-  private:
-    Zypper & _zypper;				//< my Zypper
-    shared_ptr<SourceDownloadOptions> _options;	//< my Options
   private:
     Pathname _dnlDir;	//< download directory (incl. root prefix)
     Manifest _manifest;
@@ -478,13 +475,6 @@ namespace
     {
       _zypper.out().info(_("No source packages to download.") );
     }
-
-    // finished
-    cout << endl;
-    if ( _zypper.exitCode() != ZYPPER_EXIT_OK )
-      _zypper.out().info(_("Finished with error.") );
-    else
-      _zypper.out().info(_("Done.") );
   }
 
 } // namespace
@@ -492,13 +482,5 @@ namespace
 
 int sourceDownload( Zypper & zypper_r )
 {
-  try
-  {
-    SourceDownloadImpl( zypper_r ).sourceDownload();
-  }
-  catch ( const Out::Error & error_r )
-  {
-    return error_r.report( zypper_r );
-  }
-  return zypper_r.exitCode();
+  return SourceDownloadImpl( zypper_r ).execute( &SourceDownloadImpl::sourceDownload );
 }
