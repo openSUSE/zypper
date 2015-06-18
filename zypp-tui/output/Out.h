@@ -692,6 +692,10 @@ public:
   /** \overload test for TPE_XML */
   bool typeXML() const { return type( TYPE_XML ); }
 
+  /** Terminal width or 80 if unlimited. */
+  unsigned defaultFormatWidth() const
+  { unsigned ret = termwidth(); if ( ret == out::termwidthUnlimited ) ret = 80U; return ret; }
+
 protected:
   /** Width for formated output [0==unlimited]. */
   virtual unsigned termwidth() const { return out::termwidthUnlimited; }
