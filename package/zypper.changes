@@ -1,4 +1,13 @@
 -------------------------------------------------------------------
+Thu Jun 18 17:40:35 CEST 2015 - ma@suse.de
+
+- Add git-like subcommand support for zypper.
+  Zypper subcommands are standalone executables that live in the
+  zypper exec dir or are available in your $PATH (see zypper(8)). 
+- Typos fixed (fixes #74)
+- version 1.12.5
+
+-------------------------------------------------------------------
 Thu Jun 18 01:14:06 CEST 2015 - ma@suse.de
 
 - Update zypper-po.tar.bz2
