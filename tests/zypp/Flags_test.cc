@@ -75,10 +75,11 @@ BOOST_AUTO_TEST_CASE(flags)
 
 
   t = T_3;
+  BOOST_CHECK( ! t.testFlag( T_0 ) );	// fails as T_3 != 0
   BOOST_CHECK( t.testFlag( T_1 ) );
   BOOST_CHECK( t.testFlag( T_2 ) );
   BOOST_CHECK( t.testFlag( T_3 ) );
   t.unsetFlag( T_2 ); 		BOOST_CHECK( t.testFlag( T_1 ) );
-  t.setFlag( T_1, false );	BOOST_CHECK( t.testFlag( T_0 ) );
+  t.setFlag( T_1, false );	BOOST_CHECK( t.testFlag( T_0 ) );		// succeed as T_3 == 0
   t.setFlag( T_3, true );	BOOST_CHECK( t.testFlag( T_3 ) );
 }
