@@ -86,10 +86,14 @@ namespace zypp
 
   bool Package::maybeUnsupported() const
   {
-    static const VendorSupportOptions unsupportedOpts( VendorSupportUnknown
-						     | VendorSupportUnsupported
-						     | VendorSupportACC );
-    return unsupportedOpts.testFlag( vendorSupport() );
+    switch ( vendorSupport() )
+    {
+      case VendorSupportUnknown:
+      case VendorSupportUnsupported:
+      case VendorSupportACC:
+	return true;
+    }
+    return false;
   }
 
   Changelog Package::changelog() const
