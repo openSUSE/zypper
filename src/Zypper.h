@@ -11,6 +11,8 @@
 #include <string>
 #include <vector>
 
+#include <boost/utility/string_ref.hpp>
+
 #include <zypp/base/Exception.h>
 #include <zypp/base/NonCopyable.h>
 #include <zypp/base/PtrTypes.h>
@@ -196,7 +198,23 @@ public:
   Config & config() { return _config; }
   const GlobalOptions & globalOpts() const { return _gopts; }
   GlobalOptions & globalOptsNoConst() { return _gopts; }
+
   const parsed_opts & cOpts() const { return _copts; }
+
+  /** Leightweight string_ref vector to \a option_r args */
+  std::vector<boost::string_ref> cOptValues( const std::string & option_r ) const
+  {
+    std::vector<boost::string_ref> ret;
+    const parsed_opts & copts( cOpts() );
+    parsed_opts::const_iterator it = copts.find( option_r );
+    if ( it != copts.end() )
+    {
+      for_( v, it->second.begin(), it->second.end() )
+      {	ret.push_back( *v ); }
+    }
+    return ret;
+  }
+
   const ZypperCommand & command() const { return _command; }
   const std::string & commandHelp() const { return _command_help; }
   const ArgList & arguments() const { return _arguments; }
