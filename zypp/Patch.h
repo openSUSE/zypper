@@ -45,13 +45,14 @@ namespace zypp
       typedef sat::SolvableSet Contents;
 
       enum Category {
-        CAT_OTHER,
-        CAT_YAST,
-        CAT_SECURITY,
-        CAT_RECOMMENDED,
-        CAT_OPTIONAL,
-        CAT_DOCUMENT
+        CAT_OTHER	= 1,	//!< unknown value specified
+        CAT_YAST	= 1<<1,	//!<
+        CAT_SECURITY	= 1<<2,	//!<
+        CAT_RECOMMENDED	= 1<<3,	//!<
+        CAT_OPTIONAL	= 1<<4,	//!<
+        CAT_DOCUMENT	= 1<<5	//!<
       };
+      ZYPP_DECLARE_FLAGS(Categories, Category);
 
       /**
        * Flags defining if and why this
@@ -72,12 +73,12 @@ namespace zypp
        * \ref asSring( const Patch::SeverityFlag & ).
        */
       enum SeverityFlag {
-	SEV_NONE	= 0,	//!< no value specified
 	SEV_OTHER	= 1,	//!< unknown value specified
-	SEV_LOW		= 1<<1,	//!< Low
-	SEV_MODERATE	= 1<<2,	//!< Moderate
-	SEV_IMPORTANT	= 1<<3,	//!< Important
-	SEV_CRITICAL	= 1<<4	//!< Critical
+	SEV_NONE	= 1<<1,	//!< no value specified
+	SEV_LOW		= 1<<2,	//!< Low
+	SEV_MODERATE	= 1<<3,	//!< Moderate
+	SEV_IMPORTANT	= 1<<4,	//!< Important
+	SEV_CRITICAL	= 1<<5	//!< Critical
       };
       ZYPP_DECLARE_FLAGS(SeverityFlags, SeverityFlag);
 
@@ -103,6 +104,16 @@ namespace zypp
 
       /** Whether this patch's category matches \a category_r */
       bool isCategory( const std::string & category_r ) const;
+      /** \overload taking OR'ed \ref Categories */
+      bool isCategory( Categories category_r ) const;
+      /** \overload taking container of category strings */
+      template <class _Container>
+      bool isCategory( const _Container & categories_r ) const
+      {
+	for ( const std::string & el : categories_r )
+	{ if ( isCategory( el ) ) return true; }
+	return false;
+      }
 
       /** Patch category as enum of wellknown categories.
        * Unknown values are mapped to \ref CAT_OTHER.
@@ -126,6 +137,16 @@ namespace zypp
 
       /** Whether this patch's severity matches \a severity_r */
       bool isSeverity( const std::string & severity_r ) const;
+      /** \overload taking OR'ed \ref SeverityFlags */
+      bool isSeverity( SeverityFlags severity_r ) const;
+      /** \overload taking container of severity strings */
+      template <class _Container>
+      bool isSeverity( const _Container & severities_r ) const
+      {
+	for ( const std::string & el : severities_r )
+	{ if ( isSeverity( el ) ) return true; }
+	return false;
+      }
 
       /** Severity string mapped to an enum.
        * Unknown string values are mapped to \ref SEV_OTHER
@@ -205,6 +226,7 @@ namespace zypp
       /** Dtor */
       virtual ~Patch();
   };
+  ZYPP_DECLARE_OPERATORS_FOR_FLAGS(Patch::Categories);
   ZYPP_DECLARE_OPERATORS_FOR_FLAGS(Patch::InteractiveFlags);
   ZYPP_DECLARE_OPERATORS_FOR_FLAGS(Patch::SeverityFlags);
 

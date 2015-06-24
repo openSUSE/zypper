@@ -52,6 +52,9 @@ namespace zypp
   bool Patch::isCategory( const std::string & category_r ) const
   { return( str::compareCI( category_r, category() ) == 0 ); }
 
+  bool Patch::isCategory( Categories category_r ) const
+  { return category_r.testFlag( categoryEnum() ); }
+
   Patch::Category Patch::categoryEnum( const std::string & category_r )
   {
     switch ( category_r[0] )
@@ -107,6 +110,7 @@ namespace zypp
 	break;
     }
     // default:
+    INT << "Unrecognized Patch::Category string '" << category_r << "'" << endl;
     return CAT_OTHER;
   }
 
@@ -120,6 +124,9 @@ namespace zypp
 
   bool Patch::isSeverity( const std::string & severity_r ) const
   { return( str::compareCI( severity_r, severity() ) == 0 ); }
+
+  bool Patch::isSeverity( SeverityFlags severity_r ) const
+  { return severity_r.testFlag( severityFlag() ); }
 
   Patch::SeverityFlag Patch::severityFlag( const std::string & severity_r )
   {
@@ -160,6 +167,7 @@ namespace zypp
 	break;
     }
     // default:
+    INT << "Unrecognized Patch::Severity string '" << severity_r << "'" << endl;
     return SEV_OTHER;
   }
 
@@ -167,8 +175,8 @@ namespace zypp
   {
     switch ( obj )
     {
-      case Patch::SEV_NONE:	return std::string( "unspecified" );	break;
       case Patch::SEV_OTHER:	return std::string( "unknown" );	break;
+      case Patch::SEV_NONE:	return std::string( "unspecified" );	break;
       case Patch::SEV_LOW:	return std::string( "low" );		break;
       case Patch::SEV_MODERATE:	return std::string( "moderate" );	break;
       case Patch::SEV_IMPORTANT:return std::string( "important" );	break;
