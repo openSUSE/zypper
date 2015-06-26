@@ -161,11 +161,11 @@ namespace zypp
     /**
      * Global asString() that works with std::string too
      */
-    inline std::string asString( const std::string &t )
+    inline const std::string & asString( const std::string & t )
     { return t; }
 
 #ifndef SWIG // Swig treats it as syntax error
-    inline std::string asString( std::string && t )
+    inline std::string && asString( std::string && t )
     { return std::move(t); }
 #endif
 
