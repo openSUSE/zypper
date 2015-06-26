@@ -19,6 +19,7 @@
 #include <string>
 #include <sstream>
 #include <boost/format.hpp>
+#include <boost/utility/string_ref.hpp>
 
 #include "zypp/base/Easy.h"
 #include "zypp/base/PtrTypes.h"
@@ -111,6 +112,8 @@ namespace zypp
    * bool hasPrefix( const C_Str & str_r, const C_Str & prefix_r )
    * { return( ::strncmp( str_r, prefix_r, prefix_r.size() ) == 0 ); }
    * \endcode
+   *
+   * \todo Check whether to replace by boost::string_ref
    */
   class C_Str
   {
@@ -122,6 +125,7 @@ namespace zypp
       C_Str( char * c_str_r )            : _val( c_str_r ),       _sze( std::string::npos ) {}
       C_Str( const char * c_str_r )      : _val( c_str_r ),       _sze( std::string::npos ) {}
       C_Str( const std::string & str_r ) : _val( str_r.c_str() ), _sze( str_r.size() ) {}
+      C_Str( const boost::string_ref & str_r ) : _val( str_r.data() ), _sze( str_r.size() ) {}
 
     public:
       bool      isNull()       const { return !_val; }
