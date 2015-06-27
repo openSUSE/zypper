@@ -1,4 +1,10 @@
 -------------------------------------------------------------------
+Sat Jun 27 17:07:32 CEST 2015 - ma@suse.de
+
+- Patch: fixup testing Category and Severity flags (FATE#318760)
+- version 15.5.0 (5)
+
+-------------------------------------------------------------------
 Fri Jun 12 12:14:04 CEST 2015 - ma@suse.de
 
 - Add details to the default signature verification problem report
