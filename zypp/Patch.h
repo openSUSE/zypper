@@ -106,6 +106,7 @@ namespace zypp
       bool isCategory( const std::string & category_r ) const;
       /** \overload taking OR'ed \ref Categories */
       bool isCategory( Categories category_r ) const;
+#ifndef SWIG // Swig treats it as syntax error
       /** \overload taking container of category strings
        * 2nd template arg just to prevent instantiation for Category
        */
@@ -116,7 +117,7 @@ namespace zypp
 	{ if ( isCategory( el ) ) return true; }
 	return false;
       }
-
+#endif
       /** Patch category as enum of wellknown categories.
        * Unknown values are mapped to \ref CAT_OTHER.
        */
@@ -141,6 +142,7 @@ namespace zypp
       bool isSeverity( const std::string & severity_r ) const;
       /** \overload taking OR'ed \ref SeverityFlags */
       bool isSeverity( SeverityFlags severity_r ) const;
+#ifndef SWIG // Swig treats it as syntax error
       /** \overload taking container of severity strings
        * 2nd template arg just to prevent instantiation for SeverityFlag
        */
@@ -151,7 +153,7 @@ namespace zypp
 	{ if ( isSeverity( el ) ) return true; }
 	return false;
       }
-
+#endif
       /** Severity string mapped to an enum.
        * Unknown string values are mapped to \ref SEV_OTHER
        */
