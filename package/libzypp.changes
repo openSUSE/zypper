@@ -1,4 +1,11 @@
 -------------------------------------------------------------------
+Mon Jun 29 17:43:00 CEST 2015 - ma@suse.de
+
+- Fix lost pathname when importing repo keys (bnc#936373)
+- Disable code swig does not understand
+- version 15.6.0 (5)
+
+-------------------------------------------------------------------
 Sat Jun 27 17:07:32 CEST 2015 - ma@suse.de
 
 - Patch: fixup testing Category and Severity flags (FATE#318760)
