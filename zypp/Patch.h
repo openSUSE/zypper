@@ -106,8 +106,10 @@ namespace zypp
       bool isCategory( const std::string & category_r ) const;
       /** \overload taking OR'ed \ref Categories */
       bool isCategory( Categories category_r ) const;
-      /** \overload taking container of category strings */
-      template <class _Container>
+      /** \overload taking container of category strings
+       * 2nd template arg just to prevent instantiation for Category
+       */
+      template <class _Container, typename = typename _Container::value_type>
       bool isCategory( const _Container & categories_r ) const
       {
 	for ( const std::string & el : categories_r )
@@ -139,8 +141,10 @@ namespace zypp
       bool isSeverity( const std::string & severity_r ) const;
       /** \overload taking OR'ed \ref SeverityFlags */
       bool isSeverity( SeverityFlags severity_r ) const;
-      /** \overload taking container of severity strings */
-      template <class _Container>
+      /** \overload taking container of severity strings
+       * 2nd template arg just to prevent instantiation for SeverityFlag
+       */
+      template <class _Container, typename = typename _Container::value_type>
       bool isSeverity( const _Container & severities_r ) const
       {
 	for ( const std::string & el : severities_r )
