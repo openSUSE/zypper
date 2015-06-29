@@ -1108,7 +1108,8 @@ void RpmDb::importPubkey( const PublicKey & pubkey_r )
   RpmArgVec opts;
   opts.push_back ( "--import" );
   opts.push_back ( "--" );
-  opts.push_back ( pubkey_r.path().asString().c_str() );
+  std::string pubkeypath( pubkey_r.path().asString() );
+  opts.push_back ( pubkeypath.c_str() );
 
   // don't call modifyDatabase because it would remove the old
   // rpm3 database, if the current database is a temporary one.
