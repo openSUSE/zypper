@@ -48,40 +48,54 @@ enum TableLineStyle {
 
 class Table;
 
-class TableRow {
+class TableRow
+{
 private:
-  void dumpDetails(ostream &stream, const Table & parent) const;
+  std::ostream & dumpDetails( std::ostream & stream, const Table & parent ) const;
 
 public:
   //! Constructor. Reserve place for c columns.
-  TableRow (unsigned c = 0) {
-    _columns.reserve (c);
-  }
+  TableRow( unsigned c = 0U )
+  { _columns.reserve (c); }
 
-  TableRow & add (const string& s);
 
-  TableRow & addDetail (const string& s);
+  TableRow & add( std::string s );
+
+  template<class _Tp>
+  TableRow & add( const _Tp & val_r )
+  { return add( zypp::str::asString( val_r ) ); }
+
+
+  TableRow & addDetail( std::string s );
 
   template<class _Tp>
   TableRow & addDetail( const _Tp & val_r )
   { return addDetail( zypp::str::asString( val_r ) ); }
 
+
   // return number of columns
-  unsigned int cols( void ) const;
+  unsigned size() const
+  { return _columns.size(); }
+
+  unsigned cols() const
+  { return size(); }
+
 
   //! tab separated output
-  void dumbDumpTo (ostream &stream) const;
+  std::ostream & dumbDumpTo( std::ostream & stream ) const;
   //! output with \a parent table attributes
-  void dumpTo (ostream & stream, const Table & parent) const;
+  std::ostream & dumpTo( std::ostream & stream, const Table & parent ) const;
 
   typedef vector<string> container;
 
   // BinaryPredicate
-  struct Less {
+  struct Less
+  {
     unsigned _by_column;
     Less (unsigned by_column): _by_column (by_column) {}
 
-    bool operator ()(const TableRow& a, const TableRow& b) const {
+    bool operator()( const TableRow & a, const TableRow & b ) const
+    {
       bool noL = _by_column >= a._columns.size();
       bool noR = _by_column >= b._columns.size();
       if ( noL || noR )
@@ -98,25 +112,19 @@ public:
 
 private:
   container _columns;
-
   container _details;
-
   friend class Table;
 };
 
 /** \relates TableRow Add colummn. */
 template<class _Tp>
-TableRow & operator<<( TableRow & tr, const _Tp & val )
-{
-  return tr.add( zypp::str::asString( val ) );
-}
-
-/** \relates TableRow Add colummn. */
+TableRow & operator<<( TableRow & tr, _Tp && val )
+{ return tr.add( zypp::str::asString( std::forward<_Tp>(val) ) ); }
+/** \overload preserving TableRow rvalue reference. */
 template<class _Tp>
-TableRow & operator<<( TableRow && tr, const _Tp & val )
-{
-  return tr.add( zypp::str::asString( val ) );
-}
+TableRow && operator<<( TableRow && tr, _Tp && val )
+{ return std::move( tr << std::forward<_Tp>(val) ); }
+
 
 class TableHeader : public TableRow {
 public:
@@ -126,8 +134,13 @@ public:
 
 /** \relates TableHeader  Add colummn. */
 template<class _Tp>
-TableHeader & operator<<( TableHeader & th, const _Tp & val )
-{ static_cast<TableRow&>( th ) << val; return th; }
+TableHeader & operator<<( TableHeader & th, _Tp && val )
+{ static_cast<TableRow&>(th) << std::forward<_Tp>(val); return th; }
+/** \overload preserving TableHeader rvalue reference. */
+template<class _Tp>
+TableHeader && operator<<( TableHeader && th, _Tp && val )
+{ return std::move( th << std::forward<_Tp>(val) ); }
+
 
 /** \todo nice idea but poor interface */
 class Table {
@@ -136,9 +149,12 @@ public:
 
   static TableLineStyle defaultStyle;
 
-  Table & add (const TableRow& tr);
-  Table & setHeader (const TableHeader& tr);
-  void dumpTo (ostream& stream) const;
+  Table & add( TableRow tr );
+
+  Table & setHeader( TableHeader tr );
+
+
+  std::ostream & dumpTo( std::ostream & stream ) const;
   bool empty () const { return _rows.empty(); }
   void sort (unsigned by_column);       // columns start with 0...
 
@@ -201,39 +217,41 @@ namespace table
   /** TableHeader manipulator */
   struct EditionStyleSetter
   {
-    EditionStyleSetter( Table & table_r, const std::string & header_r )
+    EditionStyleSetter( Table & table_r, std::string header_r )
     : _table( table_r )
-    , _header( header_r )
+    , _header( std::move(header_r) )
     {}
     Table & _table;
     std::string _header;
   };
 
+  // NOTE: Overloading TableHeader operator<< which uses a universal-reference
+  // requires excact matches for the EditionStyleSetter arg! Missing overloads
+  // result in compiler complaining about missing EditionStyleSetter::asString.
+
   /** \relates table::EditionStyleSetter */
-  inline TableHeader & operator<< ( TableHeader & th, const EditionStyleSetter & obj )
+  inline TableHeader & operator<<( TableHeader & th, EditionStyleSetter && obj )
   {
     obj._table.setEditionStyle( th.cols() );
-    th.add( obj._header );
+    th.add( std::move(obj._header) );
     return th;
   }
+  /** \overload preserving TableHeader rvalue reference. */
+  inline TableHeader && operator<<( TableHeader && th, EditionStyleSetter && obj )
+  { return std::move( th << std::move(obj) ); }
 }
 
 
-inline
-Table& operator << (Table& table, const TableRow& tr) {
-  return table.add (tr);
-}
+inline Table & operator<<( Table & table, TableRow tr )
+{ return table.add( std::move(tr) ); }
 
-inline
-Table& operator << (Table& table, const TableHeader& tr) {
-  return table.setHeader (tr);
-}
+inline Table & operator<<( Table & table, TableHeader tr )
+{ return table.setHeader( std::move(tr) ); }
 
-inline
-ostream& operator << (ostream& stream, const Table& table) {
-  table.dumpTo (stream);
-  return stream;
-}
+
+inline std::ostream & operator<<( std::ostream & stream, const Table & table )
+{ return table.dumpTo( stream ); }
+
 
 ///////////////////////////////////////////////////////////////////
 /// \class PropertyTable

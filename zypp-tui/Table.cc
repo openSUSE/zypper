@@ -37,23 +37,21 @@ const char * lines[][3] = {
   { ":", "-", "+" },                                 ///< colon separated values
 };
 
-TableRow & TableRow::add (const string& s) {
-  _columns.push_back (s);
-  return *this;
-}
-
-TableRow & TableRow::addDetail(const string& s)
+TableRow & TableRow::add( std::string s )
 {
-  _details.push_back(s);
+  _columns.push_back( std::move(s) );
   return *this;
 }
 
-unsigned int TableRow::cols( void ) const {
-  return _columns.size();
+TableRow & TableRow::addDetail( string s )
+{
+  _details.push_back( std::move(s) );
+  return *this;
 }
 
 // 1st implementation: no width calculation, just tabs
-void TableRow::dumbDumpTo (ostream &stream) const {
+std::ostream & TableRow::dumbDumpTo( std::ostream & stream ) const
+{
   bool seen_first = false;
   for (container::const_iterator i = _columns.begin (); i != _columns.end (); ++i) {
     if (seen_first)
@@ -62,10 +60,10 @@ void TableRow::dumbDumpTo (ostream &stream) const {
 
     stream << *i;
   }
-  stream << endl;
+  return stream << endl;
 }
 
-void TableRow::dumpDetails(ostream &stream, const Table & parent) const
+std::ostream & TableRow::dumpDetails( std::ostream & stream, const Table & parent ) const
 {
   unsigned width = parent._screen_width;
   //string indent( parent._max_width[0] + (parent._style == none ? 2 : 3), ' ' );
@@ -100,9 +98,10 @@ void TableRow::dumpDetails(ostream &stream, const Table & parent) const
       }
     }
   }
+  return stream;
 }
 
-void TableRow::dumpTo (ostream &stream, const Table & parent) const
+std::ostream & TableRow::dumpTo( std::ostream & stream, const Table & parent ) const
 {
   const char * vline = parent._style == none ? "" : lines[parent._style][0];
 
@@ -218,6 +217,7 @@ void TableRow::dumpTo (ostream &stream, const Table & parent) const
   {
     dumpDetails( stream, parent );
   }
+  return stream;
 }
 
 // ----------------------( Table )---------------------------------------------
@@ -235,14 +235,16 @@ Table::Table()
   , _inHeader( false )
 {}
 
-Table & Table::add (const TableRow& tr) {
-  _rows.push_back (tr);
+Table & Table::add( TableRow tr )
+{
+  _rows.push_back( std::move(tr) );
   return *this;
 }
 
-Table & Table::setHeader (const TableHeader& tr) {
+Table & Table::setHeader( TableHeader tr )
+{
   _has_header = true;
-  _header = tr;
+  _header = std::move(tr);
   return *this;
 }
 
@@ -304,7 +306,8 @@ void Table::dumpRule (ostream &stream) const {
   stream << endl;
 }
 
-void Table::dumpTo (ostream &stream) const {
+std::ostream & Table::dumpTo( std::ostream & stream ) const
+{
   // compute column sizes
   if ( _has_header )
     updateColWidths( _header );
@@ -330,12 +333,14 @@ void Table::dumpTo (ostream &stream) const {
   if (_has_header) {
     zypp::DtorReset inHeader( _inHeader, false );
     _inHeader = true;
-    _header.dumpTo (stream, *this);
+    _header.dumpTo( stream, *this );
     dumpRule (stream);
   }
 
   for ( const auto & row : _rows )
     row.dumpTo( stream, *this );
+
+  return stream;
 }
 
 void Table::wrap(int force_break_after)
