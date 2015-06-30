@@ -1,4 +1,10 @@
 -------------------------------------------------------------------
+Tue Jun 30 15:37:17 CEST 2015 - ma@suse.de
+
+- patch: add option to list/install by --severity (FATE#318760)
+- version 1.12.6
+
+-------------------------------------------------------------------
 Thu Jun 18 17:40:35 CEST 2015 - ma@suse.de
 
 - Add git-like subcommand support for zypper.
