@@ -76,6 +76,8 @@ Zypper works with several types of resource objects, called 'resolvables'. A res
 	An ordinary RPM package.
 *patch*::
 	A released patch conflicts with the affected/vulnerable versions of a collection of packages. As long as any of these affected/vulnerable versions are installed, the conflict triggers and the patch is classified as *needed*. Selecting the patch, the conflict is resolved by updating all installed and affected/vulnerable packages to a version providing the fix. When updating the packages zypper always aims for the latest available version.
+	+
+	Depending on the kind of defect, patches are classified by 'category' and 'severity'. Commonly used values for 'category' are *security*, *recommended*, *optional*, *feature*, *document* or *yast*. Commonly used values for 'severity' are *critical*, *important*, *moderate*, *low* or *unspecified*.	
 *pattern*::
 	A group of packages required or recommended to install some functionality.
 *product*::
@@ -490,19 +492,22 @@ Update Management Commands
 	Note that 'optional arguments' of some of the following options must be specified using *=* instead of a space.
 +
 --
-	*-b*, *--bugzilla*[*=*'#']::
+	*-b*, *--bugzilla*[*=*'#'[,'...']]::
 		List available needed patches for all Bugzilla issues, or issues whose number matches the given string.
 
-	*--cve*[*=*'#']::
+	*--cve*[*=*'#'[,'...']]::
 		List available needed patches for all CVE issues, or issues whose number matches the given string.
 
-	*--date* 'YYYY-MM-DD'::
-		List patches issued up to, but not including, the specified date.
+	*--date* 'YYYY-MM-DD'[,'...']::
+		List only patches issued up to, but not including, the specified date.
 
-	*-g*, *--category* 'category'::
-		List available patches in the specified category.
+	*-g*, *--category* 'category'[,'...']::
+		List only patches with this category. See section *Package Types* for a list of commonly used 'category' values.
 
-	*--issues*[*=*'string']::
+	*--severity* 'severity'[,'...']::
+		List only patches with this severity. See section *Package Types* for a list of commonly used 'severity' values.
+
+	*--issues*[*=*'string'[,'...']]::
 		Look for issues whose number, summary, or description matches the specified 'string'. Issues found by number are displayed separately from those found by descriptions. In the latter case, use '*zypper patch-info* patchname' to get information about issues the patch fixes.
 
 	*-a*, *--all::
@@ -531,17 +536,20 @@ Update Management Commands
 	This command is similar to *zypper update -t patch*.
 +
 --
-	*-b*, *--bugzilla* '#'::
+	*-b*, *--bugzilla* '#'[,'...']::
 		Install patch fixing a Bugzilla issue specified by number. Use *list-patches --bugzilla* command to get a list of available needed patches for specific issues.
 
-	*--cve* '#'::
+	*--cve* '#'[,'...']::
 		Install patch fixing a MITRE's CVE issue specified by number. Use *list-patches --cve* command to get a list of available needed patches for specific issues.
 
-	*--date* 'YYYY-MM-DD'::
-		Install patches issued up to, but not including, the specified date.
+	*--date* 'YYYY-MM-DD'[,'...']::
+		Install only patches issued up to, but not including, the specified date.
 
-	*-g*, *--category* 'category'::
-		Install all patches in the specified category. Use *list-patches --category* command to get a list of available patches for a specific category.
+	*-g*, *--category* 'category'[,'...']::
+		Install only patches with this category. Use *list-patches --category* command to get a list of available patches with a specific category. See section *Package Types* for a list of commonly used 'category' values.
+
+	*--severity* 'severity'[,'...']::
+		Install only patches with this severity. Use *list-patches --severity* command to get a list of available patches with a specific severity. See section *Package Types* for a list of commonly used 'severity' values.
 
 	*-r*, *--repo* 'alias'|'name'|'#'|'URI'::
 		Work only with the repository specified by the alias, name, number, or URI. This option can be used multiple times.
@@ -684,7 +692,7 @@ Query Commands
 		Show only packages that are not currently installed.
 
 	*-t*, *--type* 'type'::
-		Search only for packages of specified type. See section *Package Types* for list of available package types. Multiple *--type* options are allowed.
+		Search only for packages of specified type. See section *Package Types* for a list of available package types. Multiple *--type* options are allowed.
 		+
 		See also the type-specific query commands like *packages*, *patterns*, etc.
 

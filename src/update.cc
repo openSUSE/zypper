@@ -2,7 +2,7 @@
 #include <sstream>
 #include <boost/format.hpp>
 
-#include <zypp/base/Logger.h>
+#include <zypp/base/LogTools.h>
 #include <zypp/ZYppFactory.h>
 #include <zypp/base/Algorithm.h>
 #include <zypp/PoolQuery.h>
@@ -14,6 +14,11 @@
 #include "update.h"
 #include "main.h"
 
+namespace std
+{
+  // std::container stream output
+  using zypp::operator<<;
+}
 using namespace std;
 using namespace zypp;
 using namespace boost;
@@ -24,6 +29,74 @@ typedef set<PoolItem> Candidates;
 
 static void
 find_updates( const ResKindSet & kinds, Candidates & candidates );
+
+///////////////////////////////////////////////////////////////////
+/// \class Issues
+/// \brief An issue (Type,Id) pair
+///////////////////////////////////////////////////////////////////
+struct Issue : std::pair<std::string, std::string>
+{
+  Issue( std::string issueType_r, std::string issueId_r )
+  : std::pair<std::string, std::string>( std::move(issueType_r), std::move(issueId_r) )
+  {}
+
+  std::string &       type()			{ return first; }
+  const std::string & type()		const	{ return first; }
+  bool                anyType()		const	{ return type().empty(); }
+  bool                specificType()	const	{ return !anyType(); }
+
+  std::string &       id()			{ return second; }
+  const std::string & id()		const	{ return second; }
+  bool                anyId()		const 	{ return id().empty(); }
+  bool                specificId()	const	{ return !anyId(); }
+};
+
+///////////////////////////////////////////////////////////////////
+/// \class CliScanIssues
+/// \brief Setup issue (Type,Id) pairs from CLI
+///////////////////////////////////////////////////////////////////
+struct CliScanIssues : public std::set<Issue>
+{
+  CliScanIssues()
+  {
+    checkCLI( "issues",   ""/*any*/ );
+    checkCLI( "bugzilla", "bugzilla" );
+    checkCLI( "bz",       "bugzilla" );
+    checkCLI( "cve",      "cve" );
+  }
+
+private:
+  void checkCLI( const std::string & cliOption_r, const std::string & issueType_r )
+  {
+    Zypper & zypper( *Zypper::instance() );
+
+    bool anyId = false;	// plain option without opt. args
+    std::vector<std::string> issueIds;
+
+    for ( const auto & val : zypper.cOptValues( cliOption_r ) )
+    {
+      if ( str::split( val, std::back_inserter(issueIds), "," ) == 0 )
+      {	anyId = true; }
+    }
+
+    if ( issueIds.empty() )
+    {
+      if ( anyId )
+      { insert( value_type( issueType_r, std::string() ) ); }
+    }
+    else
+    {
+      if ( anyId )
+      {
+	zypper.out().warning(str::form(
+	  _("Ignoring %s without argument because similar option with an argument has been specified."),
+	  ("--" + cliOption_r).c_str() ));
+      }
+      for ( auto & val : issueIds )
+      { insert( value_type( issueType_r, std::move(val) ) ); }
+    }
+  }
+};
 
 // ----------------------------------------------------------------------------
 //
@@ -204,93 +277,44 @@ static void xml_list_updates(const ResKindSet & kinds)
 
 // ----------------------------------------------------------------------------
 
-static bool list_patch_updates(Zypper & zypper)
+static bool list_patch_updates( Zypper & zypper )
 {
-  bool all = zypper.cOpts().count("all");
-  // if --date is specified
-  Date date_limit;
-  {
-    parsed_opts::const_iterator it;
-    it = zypper.cOpts().find("date");
-    if (it != zypper.cOpts().end())
-    {
-      for_(i, it->second.begin(), it->second.end())
-      {
-        // ISO 8601 format
-          date_limit = Date(*i, "%F");
-          break;
-      }
-    }
-  }
-
-  // if --category is specified
-  string category;
-  {
-    parsed_opts::const_iterator it;
-    it = zypper.cOpts().find("category");
-    if (it != zypper.cOpts().end())
-    {
-      for_(i, it->second.begin(), it->second.end())
-      {
-        category = *i;
-        break;
-      }
-    }
-    else {
-      it = zypper.cOpts().find("g");
-      if (it != zypper.cOpts().end())
-      {
-        for_(i, it->second.begin(), it->second.end())
-        {
-          category = *i;
-          break;
-        }
-      }
-    }
-  }
-
   Table tbl;
   if (!Zypper::instance()->globalOpts().no_abbrev)
     tbl.allowAbbrev(5);
+
   Table pm_tbl; // only those that affect packagemanager (restartSuggested()), they have priority
   if (!Zypper::instance()->globalOpts().no_abbrev)
     pm_tbl.allowAbbrev(5);
-  TableHeader th;
-  unsigned cols;
 
+  TableHeader th;
   th << _("Repository")
      << _("Name") << _("Category") << _("Severity") << _("Status") << _("Summary");
-  cols = 6;
   tbl << th;
   pm_tbl << th;
+  unsigned cols = th.cols();
+
+  CliMatchPatch cliMatchPatch( zypper );
+  bool all = zypper.cOpts().count("all");
+
   const zypp::ResPool& pool = God->pool();
-  ResPool::byKind_iterator
-    it = pool.byKindBegin(ResKind::patch),
-    e  = pool.byKindEnd(ResKind::patch);
-  for (; it != e; ++it )
+  for_( it, pool.byKindBegin(ResKind::patch), pool.byKindEnd(ResKind::patch) )
   {
-    ResObject::constPtr res = it->resolvable();
+    Patch::constPtr patch = asKind<Patch>(*it);
 
     // show only needed and wanted/unlocked (bnc #420606) patches unless --all
-    if (all || (it->isBroken() && !it->isUnwanted()))
+    if ( all || (it->isBroken() && !it->isUnwanted()) )
     {
-      Patch::constPtr patch = asKind<Patch>(res);
-      if (date_limit != Date() && patch->timestamp() > date_limit ) {
-          DBG << patch->ident() << " skipped. (too new and date limit specified)" << endl;
-          continue;
-      }
-
-      if ( ! ( category.empty() || patch->isCategory( category ) ) )
+      if ( ! cliMatchPatch( patch ) )
       {
-        DBG << "candidate patch " << patch << " is not in the specified category" << endl;
-        continue;
+	DBG << patch->ident() << " skipped. (not matching CLI filter)" << endl;
+	continue;
       }
-
       // table
       {
         TableRow tr (cols);
         tr << patch->repoInfo().asUserString();
-        tr << res->name ();
+        tr << patch->name ();
         tr << patch->category();
         tr << patch->severity();
         tr << (it->isBroken() ? _("needed") : _("not needed"));
@@ -563,183 +587,131 @@ void list_updates(Zypper & zypper, const ResKindSet & kinds, bool best_effort)
 
 // ----------------------------------------------------------------------------
 
-void list_patches_by_issue(Zypper & zypper)
+void list_patches_by_issue( Zypper & zypper )
 {
-  // lp --issues               - list all issues which need to be fixed
-  // lp --issues=foo           - look for foo in issue # or description
-  // lp --bz, --bugzilla       - list all bugzilla issues
-  // lp --cve                  - list all CVE issues
-  // lp --bz=foo --cve=foo     - look for foo in bugzillas or CVEs
-  // lp --all                  - list all, not only needed patches
-
   // --bz, --cve can't be used together with --issue; this case is ruled out
   // in the initial arguments validation in Zypper.cc
-
-  typedef set<pair<string, string> > Issues;
-  bool only_needed = !zypper.cOpts().count("all");
-  bool specific = false; // whether specific issue numbers were given
-
   Table t;
-  TableHeader th;
-  th << _("Issue") << _("No.") << _("Patch") << _("Category") << _("Severity") << _("Status");
-  t << th;
+  t << ( TableHeader() << _("Issue") << _("No.") << _("Patch") << _("Category") << _("Severity") << _("Status") );
 
-#define FILL_ISSUES(TYPE, ID) \
-  it = zypper.cOpts().find(TYPE); \
-  if (it != zypper.cOpts().end()) \
-    for_(i, it->second.begin(), it->second.end()) \
-    { \
-      issues.insert(pair<string, string>(ID, *i)); \
-      if (!i->empty()) \
-        specific = true; \
-    } \
+  CliScanIssues issues;
+  CliMatchPatch cliMatchPatch( zypper );
+  bool only_needed = !zypper.cOpts().count("all");
 
-  // make a set of unique issues
-  Issues issues;
-  parsed_opts::const_iterator it;
-  FILL_ISSUES("bugzilla", "bugzilla");
-  FILL_ISSUES("bz", "bugzilla");
-  FILL_ISSUES("cve", "cve");
-  FILL_ISSUES("issues", "issues");
+  // Basic PoolQuery tuned for each argument
+  PoolQuery basicQ;
+  basicQ.setMatchSubstring();
+  basicQ.setCaseSensitive( false );
+  basicQ.addKind( ResKind::patch );
 
-  // remove those without arguments if there are any with arguments
-  // (will show only the specified ones)
-  if (specific)
-    for (Issues::const_iterator i = issues.begin(); i != issues.end(); )
-    {
-      if (i->second.empty())
-      {
-        zypper.out().warning(str::form(_(
-            "Ignoring %s without argument because similar option with"
-            " an argument has been specified."),
-            ("--" + i->first).c_str()));
-        issues.erase(i++);
-      }
-      else
-        ++i;
-    }
+  std::vector<const Issue*> pass2; // on the fly remember anyType issues for pass2
 
-  // construct a PoolQuery for each argument separately and add the results
-  // to the Table.
-  string issuesstr;
-  for_(issue, issues.begin(), issues.end())
+  for ( const Issue & issue : issues )
   {
-    DBG << "querying: " << issue->first << " = " << issue->second << endl;
-    PoolQuery q;
-    q.setMatchSubstring();
-    q.setCaseSensitive(false);
-    q.addKind(ResKind::patch); // is this unnecessary? only patches should have updateReference* attributes
-
-    // specific bugzilla or CVE
-    if (specific)
-    {
-      if (issue->first == "bugzilla" || issue->first == "cve")
-        q.addAttribute(sat::SolvAttr::updateReferenceId, issue->second);
-    }
-    // all bugzillas or CVEs
+    DBG << "querying: " << issue.type() << " = " << issue.id() << endl;
+    PoolQuery q( basicQ );
+    // PoolQuery ORs attributes but we need AND.
+    // Post processing the match must assert correct type of specific IDs!
+    if ( issue.specificType() && issue.anyId() )
+    { q.addAttribute(sat::SolvAttr::updateReferenceType, issue.type() ); }
     else
     {
-      if (issue->first == "bugzilla")
-        q.addAttribute(sat::SolvAttr::updateReferenceType, "bugzilla");
-      else if (issue->first == "cve")
-        q.addAttribute(sat::SolvAttr::updateReferenceType, "cve");
-    }
-    // look for substring in description and reference ID (issue number)
-    if (issue->first == "issues")
-    {
-      // whether argument was given or not, it does not matter; without
-      // argument, all issues will be found
-      q.addAttribute(sat::SolvAttr::updateReferenceId, issue->second);
-      issuesstr = issue->second;
+      q.addAttribute( sat::SolvAttr::updateReferenceId, issue.id() );
+      if ( issue.anyType() && issue.specificId() ) // remember for pass2
+      { pass2.push_back( &issue ); }
     }
 
-    for_(it, q.begin(), q.end())
+    for_( it, q.begin(), q.end() )
     {
-      PoolItem pi(*it);
-      if (only_needed && (!pi.isBroken() || pi.isUnwanted()))
-        continue;
+      PoolItem pi( *it );
+      Patch::constPtr patch = asKind<Patch>(pi);
 
-      Patch::constPtr patch = asKind<Patch>(pi.resolvable());
-      DBG << "got: " << patch << endl;
+      if ( only_needed && ( !pi.isBroken() || pi.isUnwanted() ) )
+	continue;
+
+      if ( ! cliMatchPatch( patch ) )
+      {
+	DBG << patch->ident() << " skipped. (not matching CLI filter)" << endl;
+	continue;
+      }
 
       // Print details about each match in that solvable:
       for_( d, it.matchesBegin(), it.matchesEnd() )
       {
-        string itype =
-          d->subFind(sat::SolvAttr::updateReferenceType).asString();
-        if (issue->first != "issues" && itype != issue->first)
-          continue;
+        const std::string & itype = d->subFind( sat::SolvAttr::updateReferenceType ).asString();
 
-        TableRow tr;
-        tr << itype;
-        tr << d->subFind(sat::SolvAttr::updateReferenceId).asString();
-        tr << patch->name();
-        tr << patch->category();
-        tr << patch->severity();
-        tr << (pi.isBroken() ? _("needed") : _("not needed"));
-        t << tr;
+	if ( issue.specificType() && itype != issue.type() )
+	  continue;	// assert correct type of specific IDs
+
+	t << ( TableRow()
+	  << itype
+	  << d->subFind( sat::SolvAttr::updateReferenceId ).asString()
+	  << patch->name()
+	  << patch->category()
+	  << patch->severity()
+	  << (pi.isBroken() ? _("needed") : _("not needed")) );
       }
     }
   }
 
-  // look for matches in patch descriptions
+  // pass2: look for matches in patch summary/description
+  //
   Table t1;
-  TableHeader th1;
-  th1 << _("Name") << _("Category") << _("Severity") << _("Summary");
-  t1 << th1;
-  if (!issuesstr.empty())
+  t1 << ( TableHeader() << _("Name") << _("Category") << _("Severity") << _("Summary") );
+
+  for ( const Issue* _issue : pass2 )
   {
-    PoolQuery q;
-    q.setMatchSubstring();
-    q.setCaseSensitive(false);
-    q.addKind(ResKind::patch);
-    q.addAttribute(sat::SolvAttr::summary, issuesstr);
-    q.addAttribute(sat::SolvAttr::description, issuesstr);
+    const Issue & issue( *_issue );
+    PoolQuery q( basicQ );
+    q.addAttribute(sat::SolvAttr::summary, issue.id() );
+    q.addAttribute(sat::SolvAttr::description, issue.id() );
 
-    for_(it, q.begin(), q.end())
+    for_( it, q.begin(), q.end() )
     {
-      PoolItem pi(*it);
-      if (only_needed && (!pi.isBroken() || pi.isUnwanted()))
-        continue;
-      Patch::constPtr patch = asKind<Patch>(pi.resolvable());
+      PoolItem pi( *it );
+      Patch::constPtr patch = asKind<Patch>(pi);
 
-      TableRow tr;
-      tr << patch->name() << patch->category() << patch->severity();
+      if ( only_needed && ( !pi.isBroken() || pi.isUnwanted() ) )
+	continue;
+
+      if ( ! cliMatchPatch( patch ) )
+      {
+	DBG << patch->ident() << " skipped. (not matching CLI filter)" << endl;
+	continue;
+      }
+
+      t1 << ( TableRow()
+         << patch->name() << patch->category() << patch->severity() << patch->summary() );
       //! \todo could show a highlighted match with a portion of surrounding
       //! text. Needs case-insensitive find.
-      tr << patch->summary();
-      t1 << tr;
     }
   }
 
-  if (!zypper.globalOpts().no_abbrev)
+  // print result
+  if ( !zypper.globalOpts().no_abbrev )
     t1.allowAbbrev(3);
   t.sort(3);
   t1.sort(0);
 
-  if (t.empty() && t1.empty())
-    zypper.out().info(_("No matching issues found."));
+  if ( t.empty() && t1.empty() )
+  {  zypper.out().info(_("No matching issues found.")); }
   else
   {
-    if (!t.empty())
+    if ( !t.empty() )
     {
-      if (!issuesstr.empty())
+      if ( !pass2.empty() )
       {
         cout << endl;
-        zypper.out().info(_(
-            "The following matches in issue numbers have been found:"));
+        zypper.out().info(_("The following matches in issue numbers have been found:"));
       }
-
       cout << endl << t;
     }
 
-    if (!t1.empty())
+    if ( !t1.empty() )
     {
-      if (!t.empty())
-        cout << endl;
-      zypper.out().info(_(
-          "Matches in patch descriptions of the following patches have been"
-          " found:"));
+      if ( !t.empty() )
+      { cout << endl; }
+      zypper.out().info(_( "Matches in patch descriptions of the following patches have been found:"));
       cout << endl << t1;
     }
   }
@@ -747,83 +719,73 @@ void list_patches_by_issue(Zypper & zypper)
 
 // ----------------------------------------------------------------------------
 
-void mark_updates_by_issue(Zypper & zypper)
+void mark_updates_by_issue( Zypper & zypper )
 {
-  typedef set<pair<string, string> > Issues;
-  Issues issues;
-  parsed_opts::const_iterator it = zypper.cOpts().find("bugzilla");
-  if (it != zypper.cOpts().end())
-    for_(i, it->second.begin(), it->second.end())
-      issues.insert(pair<string, string>("b", *i));
-  it = zypper.cOpts().find("bz");
-  if (it != zypper.cOpts().end())
-    for_(i, it->second.begin(), it->second.end())
-      issues.insert(pair<string, string>("b", *i));
-  it = zypper.cOpts().find("cve");
-  if (it != zypper.cOpts().end())
-    for_(i, it->second.begin(), it->second.end())
-      issues.insert(pair<string, string>("c", *i));
+  CliScanIssues issues;
 
-  SolverRequester::Options sropts;
-  sropts.skip_interactive = zypper.cOpts().count("skip-interactive");
-  sropts.force = zypper.cOpts().count("force");
+  // Basic PoolQuery tuned for each argument
+  PoolQuery basicQ;
+  basicQ.setMatchExact();
+  basicQ.setCaseSensitive( false );
+  basicQ.addKind( ResKind::patch );
 
-  for_(issue, issues.begin(), issues.end())
+  SolverRequester::Options srOpts;
+  srOpts.force = zypper.cOpts().count("force");
+  srOpts.skip_interactive = zypper.cOpts().count("skip-interactive");
+  srOpts.cliMatchPatch = CliMatchPatch( zypper );
+
+  for ( const Issue & issue : issues )
   {
-    PoolQuery q;
-    q.setMatchExact();
-    q.setCaseSensitive(false);
-    q.addKind(ResKind::patch); // is this unnecessary?
-    if (issue->first == "b")
-      q.addAttribute(sat::SolvAttr::updateReferenceId, issue->second);
-    else if (issue->first == "c")
-      q.addAttribute(sat::SolvAttr::updateReferenceId, issue->second);
+    PoolQuery q( basicQ );
+    // PoolQuery ORs attributes but we need AND.
+    // Post processing the match must assert correct type of specific IDs!
+    if ( issue.specificType() && issue.anyId() )
+    { q.addAttribute(sat::SolvAttr::updateReferenceType, issue.type() ); }
+    else
+    { q.addAttribute( sat::SolvAttr::updateReferenceId, issue.id() ); }
 
-    SolverRequester sr(sropts);
-
+    SolverRequester sr( srOpts );
     bool found = false;
-    for_(sit, q.begin(), q.end()) // can't use poolItem iterator, since that
-    {                             // does not have matches iterator used below
-      PoolItem pi(*sit);
-      if (!pi.isBroken()) // not needed
-        continue;
 
-      DBG << "got: " << *sit << endl;
+    for_( it, q.begin(), q.end() )
+    {
+      PoolItem pi( *it );
+      Patch::constPtr patch = asKind<Patch>(pi);
 
-      for_( d, sit.matchesBegin(), sit.matchesEnd() )
+      if ( !pi.isBroken() ) // not needed
+	continue;
+
+      // CliMatchPatch not needed, it's fed into srOpts!
+
+      DBG << "got: " << *it << endl;
+
+      for_( d, it.matchesBegin(), it.matchesEnd() )
       {
-        if (issue->first == "b" &&
-            d->subFind(sat::SolvAttr::updateReferenceType).asString() == "bugzilla")
-        {
-          if (sr.installPatch(pi))
-            found = true;
-          else
-            DBG << str::form("fix for bugzilla issue number %s was not marked.",
-                issue->second.c_str());
-        }
-        else if (issue->first == "c" &&
-            d->subFind(sat::SolvAttr::updateReferenceType).asString() == "cve")
-        {
-          if (sr.installPatch(pi))
-            found = true;
-          else
-            DBG << str::form("fix for CVE issue number %s was not marked.",
-                issue->second.c_str());
-        }
+	const std::string & itype = d->subFind( sat::SolvAttr::updateReferenceType ).asString();
+
+	if ( issue.specificType() && itype != issue.type() )
+	  continue;	// assert correct type of specific IDs
+
+	if ( sr.installPatch( pi ) )
+	  found = true;
+	else
+	  DBG << str::form("fix for %s issue number %s was not marked.",
+			   issue.type().c_str(), issue.id().c_str() );
       }
     }
-    sr.printFeedback(zypper.out());
-    if (!found)
+
+    sr.printFeedback( zypper.out() );
+    if ( ! found )
     {
-      if (issue->first == "b")
-        zypper.out().info(str::form(_(
-            "Fix for bugzilla issue number %s was not found or is not needed."),
-            issue->second.c_str()));
-      else if (issue->first == "c")
-        zypper.out().info(str::form(_(
-            "Fix for CVE issue number %s was not found or is not needed."),
-            issue->second.c_str()));
-      zypper.setExitCode(ZYPPER_EXIT_INF_CAP_NOT_FOUND);
+      const std::string & itype( issue.type() );
+      if ( itype == "bugzilla" )
+	zypper.out().info(str::form(_("Fix for bugzilla issue number %s was not found or is not needed."), issue.id().c_str() ));
+      else if ( itype == "cve" )
+	zypper.out().info(str::form(_("Fix for CVE issue number %s was not found or is not needed."), issue.id().c_str() ));
+      else
+	// translators: keep '%s issue' together, it's something like 'CVE issue' or 'Bugzilla issue'
+	zypper.out().info(str::form(_("Fix for %s issue number %s was not found or is not needed."), itype.c_str(), issue.id().c_str() ));
+      zypper.setExitCode( ZYPPER_EXIT_INF_CAP_NOT_FOUND );
     }
   } // next issue from --bz --cve
 }

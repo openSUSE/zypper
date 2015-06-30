@@ -1911,9 +1911,6 @@ void Zypper::processCommandOptions()
       {"download-in-advance",       no_argument,       0,  0 },
       {"download-in-heaps",         no_argument,       0,  0 },
       {"download-as-needed",        no_argument,       0,  0 },
-      // rug-compatibility - dummy for now
-      //! \todo category can now be implemented in 'patch' using PoolQuery
-      {"category",                  no_argument,       0, 'g'},
       {"help", no_argument, 0, 'h'},
       {0, 0, 0, 0}
     };
@@ -1986,6 +1983,7 @@ void Zypper::processCommandOptions()
       {"bz",                        required_argument, 0,  0 },
       {"cve",                       required_argument, 0,  0 },
       {"category",                  required_argument, 0, 'g'},
+      {"severity",                  required_argument, 0,  0 },
       {"date",                      required_argument, 0,  0 },
       {"help", no_argument, 0, 'h'},
       {0, 0, 0, 0}
@@ -2006,8 +2004,9 @@ void Zypper::processCommandOptions()
       "                            See man zypper for more details.\n"
       "-b, --bugzilla #            Install patch fixing the specified bugzilla issue.\n"
       "    --cve #                 Install patch fixing the specified CVE issue.\n"
-      "-g  --category <category>   Install all patches in this category.\n"
-      "    --date <YYYY-MM-DD>     Install patches issued up to, but not including, the specified date\n"
+      "-g  --category <category>   Install only patches with this category.\n"
+      "    --severity <severity>   Install only patches with this severity.\n"
+      "    --date <YYYY-MM-DD>     Install only patches issued up to, but not including, the specified date\n"
       "    --debug-solver          Create solver test case for debugging.\n"
       "    --no-recommends         Do not install recommended packages, only required.\n"
       "    --recommends            Install also recommended packages in addition\n"
@@ -2033,6 +2032,7 @@ void Zypper::processCommandOptions()
       {"bz",          optional_argument, 0,  0 },
       {"cve",         optional_argument, 0,  0 },
       {"category",    required_argument, 0, 'g'},
+      {"severity",    required_argument, 0,  0 },
       {"date",        required_argument, 0,  0 },
       {"issues",      optional_argument, 0,  0 },
       {"all",         no_argument,       0, 'a'},
@@ -2048,11 +2048,12 @@ void Zypper::processCommandOptions()
       "  Command options:\n"
       "-b, --bugzilla[=#]         List needed patches for Bugzilla issues.\n"
       "    --cve[=#]              List needed patches for CVE issues.\n"
-      "-g  --category <category>  List all patches in this category.\n"
       "    --issues[=string]      Look for issues matching the specified string.\n"
       "-a, --all                  List all patches, not only the needed ones.\n"
+      "-g  --category <category>  List only patches with this category.\n"
+      "    --severity <severity>  List only patches with this severity.\n"
       "-r, --repo <alias|#|URI>   List only patches from the specified repository.\n"
-      "    --date <YYYY-MM-DD>    List patches issued up to, but not including, the specified date\n"
+      "    --date <YYYY-MM-DD>    List only patches issued up to, but not including, the specified date\n"
     );
     break;
   }
@@ -4658,36 +4659,7 @@ void Zypper::doCommand()
         sropts.force = true;
       sropts.best_effort = best_effort;
       sropts.skip_interactive = skip_interactive; // bcn #647214
-
-      // if --category is specified
-      {
-	parsed_opts::const_iterator optit;
-	optit = copts.find("category");
-	if (optit != copts.end())
-	{
-	  for_(i, optit->second.begin(), optit->second.end())
-	  {
-	    sropts.category = *i;
-	    break;
-	  }
-	}
-      }
-
-      // if --date is specified
-      {
-        parsed_opts::const_iterator optit;
-        optit = copts.find("date");
-        if (optit != copts.end())
-        {
-          for_(i, optit->second.begin(), optit->second.end())
-          {
-            // ISO 8601 format
-            sropts.date_limit = Date(*i, "%F");
-            break;
-          }
-        }
-
-      }
+      sropts.cliMatchPatch = CliMatchPatch( *this );
 
       SolverRequester sr(sropts);
       if (arguments().empty())
@@ -4697,7 +4669,7 @@ void Zypper::doCommand()
           if (*kit == ResKind::package)
           {
             MIL << "Computing package update..." << endl;
-            // this will do a complete pacakge update as far as possible
+            // this will do a complete package update as far as possible
             // while respecting solver policies
             zypp::getZYpp()->resolver()->doUpdate();
             // no need to call Resolver::resolvePool() afterwards

@@ -2,12 +2,12 @@
 .\"     Title: zypper
 .\"    Author: [see the "AUTHORS" section]
 .\" Generator: DocBook XSL Stylesheets v1.78.1 <http://docbook.sf.net/>
-.\"      Date: 06/18/2015
+.\"      Date: 06/30/2015
 .\"    Manual: ZYPPER
 .\"    Source: SUSE Linux
 .\"  Language: English
 .\"
-.TH "ZYPPER" "8" "06/18/2015" "SUSE Linux" "ZYPPER"
+.TH "ZYPPER" "8" "06/30/2015" "SUSE Linux" "ZYPPER"
 .\" -----------------------------------------------------------------
 .\" * Define some portability stuff
 .\" -----------------------------------------------------------------
@@ -90,6 +90,28 @@ An ordinary RPM package\&.
 .RS 4
 A released patch conflicts with the affected/vulnerable versions of a collection of packages\&. As long as any of these affected/vulnerable versions are installed, the conflict triggers and the patch is classified as
 \fBneeded\fR\&. Selecting the patch, the conflict is resolved by updating all installed and affected/vulnerable packages to a version providing the fix\&. When updating the packages zypper always aims for the latest available version\&.
+
+Depending on the kind of defect, patches are classified by
+\fIcategory\fR
+and
+\fIseverity\fR\&. Commonly used values for
+\fIcategory\fR
+are
+\fBsecurity\fR,
+\fBrecommended\fR,
+\fBoptional\fR,
+\fBfeature\fR,
+\fBdocument\fR
+or
+\fByast\fR\&. Commonly used values for
+\fIseverity\fR
+are
+\fBcritical\fR,
+\fBimportant\fR,
+\fBmoderate\fR,
+\fBlow\fR
+or
+\fBunspecified\fR\&.
 .RE
 .PP
 \fBpattern\fR
@@ -851,27 +873,40 @@ of some of the following options must be specified using
 \fB=\fR
 instead of a space\&.
 .PP
-\fB\-b\fR, \fB\-\-bugzilla\fR[\fB=\fR\fI#\fR]
+\fB\-b\fR, \fB\-\-bugzilla\fR[\fB=\fR\fI#\fR[,\fI\&...\fR]]
 .RS 4
 List available needed patches for all Bugzilla issues, or issues whose number matches the given string\&.
 .RE
 .PP
-\fB\-\-cve\fR[\fB=\fR\fI#\fR]
+\fB\-\-cve\fR[\fB=\fR\fI#\fR[,\fI\&...\fR]]
 .RS 4
 List available needed patches for all CVE issues, or issues whose number matches the given string\&.
 .RE
 .PP
-\fB\-\-date\fR \fIYYYY\-MM\-DD\fR
+\fB\-\-date\fR \fIYYYY\-MM\-DD\fR[,\fI\&...\fR]
 .RS 4
-List patches issued up to, but not including, the specified date\&.
+List only patches issued up to, but not including, the specified date\&.
 .RE
 .PP
-\fB\-g\fR, \fB\-\-category\fR \fIcategory\fR
+\fB\-g\fR, \fB\-\-category\fR \fIcategory\fR[,\fI\&...\fR]
 .RS 4
-List available patches in the specified category\&.
+List only patches with this category\&. See section
+\fBPackage Types\fR
+for a list of commonly used
+\fIcategory\fR
+values\&.
 .RE
 .PP
-\fB\-\-issues\fR[\fB=\fR\fIstring\fR]
+\fB\-\-severity\fR \fIseverity\fR[,\fI\&...\fR]
+.RS 4
+List only patches with this severity\&. See section
+\fBPackage Types\fR
+for a list of commonly used
+\fIseverity\fR
+values\&.
+.RE
+.PP
+\fB\-\-issues\fR[\fB=\fR\fIstring\fR[,\fI\&...\fR]]
 .RS 4
 Look for issues whose number, summary, or description matches the specified
 \fIstring\fR\&. Issues found by number are displayed separately from those found by descriptions\&. In the latter case, use
@@ -921,30 +956,45 @@ command again\&.
 This command is similar to
 \fBzypper update \-t patch\fR\&.
 .PP
-\fB\-b\fR, \fB\-\-bugzilla\fR \fI#\fR
+\fB\-b\fR, \fB\-\-bugzilla\fR \fI#\fR[,\fI\&...\fR]
 .RS 4
 Install patch fixing a Bugzilla issue specified by number\&. Use
 \fBlist\-patches \-\-bugzilla\fR
 command to get a list of available needed patches for specific issues\&.
 .RE
 .PP
-\fB\-\-cve\fR \fI#\fR
+\fB\-\-cve\fR \fI#\fR[,\fI\&...\fR]
 .RS 4
 Install patch fixing a MITRE\(cqs CVE issue specified by number\&. Use
 \fBlist\-patches \-\-cve\fR
 command to get a list of available needed patches for specific issues\&.
 .RE
 .PP
-\fB\-\-date\fR \fIYYYY\-MM\-DD\fR
+\fB\-\-date\fR \fIYYYY\-MM\-DD\fR[,\fI\&...\fR]
 .RS 4
-Install patches issued up to, but not including, the specified date\&.
+Install only patches issued up to, but not including, the specified date\&.
 .RE
 .PP
-\fB\-g\fR, \fB\-\-category\fR \fIcategory\fR
+\fB\-g\fR, \fB\-\-category\fR \fIcategory\fR[,\fI\&...\fR]
 .RS 4
-Install all patches in the specified category\&. Use
+Install only patches with this category\&. Use
 \fBlist\-patches \-\-category\fR
-command to get a list of available patches for a specific category\&.
+command to get a list of available patches with a specific category\&. See section
+\fBPackage Types\fR
+for a list of commonly used
+\fIcategory\fR
+values\&.
+.RE
+.PP
+\fB\-\-severity\fR \fIseverity\fR[,\fI\&...\fR]
+.RS 4
+Install only patches with this severity\&. Use
+\fBlist\-patches \-\-severity\fR
+command to get a list of available patches with a specific severity\&. See section
+\fBPackage Types\fR
+for a list of commonly used
+\fIseverity\fR
+values\&.
 .RE
 .PP
 \fB\-r\fR, \fB\-\-repo\fR \fIalias\fR|\fIname\fR|\fI#\fR|\fIURI\fR
@@ -1237,7 +1287,7 @@ Show only packages that are not currently installed\&.
 .RS 4
 Search only for packages of specified type\&. See section
 \fBPackage Types\fR
-for list of available package types\&. Multiple
+for a list of available package types\&. Multiple
 \fB\-\-type\fR
 options are allowed\&.
 

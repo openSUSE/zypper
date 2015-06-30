@@ -19,12 +19,76 @@
 #include <zypp/Date.h>
 #include <zypp/PoolItem.h>
 
-#include "Command.h"
+#include "Zypper.h"
 #include "PackageArgs.h"
 #include "utils/misc.h" // for ResKindSet; might make sense to move this elsewhere
 
 
 class Out;
+
+///////////////////////////////////////////////////////////////////
+/// \class CliMatchPatch
+/// \brief Functor testing whether a Patch matches CLI options (non-patches pass)
+///////////////////////////////////////////////////////////////////
+struct CliMatchPatch
+{
+  /** Default Ctor: No filter */
+  CliMatchPatch()
+  {}
+
+  /** Ctor: Filter according to zypper CLI options */
+  CliMatchPatch( const Zypper & zypper )
+  {
+    for ( const auto & val : zypper.cOptValues( "date" ) )
+    {
+      // ISO 8601 format
+      Date v( std::string(val), "%F");
+      if ( v && ( !_dateBefore || v < _dateBefore ) )
+      {
+	_dateBefore = v;
+      }
+    }
+    for ( const auto & val : zypper.cOptValues( "category" ) )
+    {
+      str::split( val, std::back_inserter(_categories), "," );
+    }
+    for ( const auto & val : zypper.cOptValues( "severity" ) )
+    {
+      str::split( val, std::back_inserter(_severities), "," );
+    }
+  }
+
+  enum class Missmatch
+  {
+    None	= 0,
+    Date	= 1<<0,
+    Category	= 1<<1,
+    Severity	= 1<<2,
+  };
+
+  Missmatch missmatch( const Patch::constPtr & patch_r ) const
+  {
+    if ( patch_r )	// non-patches pass
+    {
+      if ( _dateBefore && patch_r->timestamp() > _dateBefore )
+	return Missmatch::Date;
+      if ( ! ( _categories.empty() || patch_r->isCategory( _categories ) ) )
+	return Missmatch::Category;
+      if ( ! ( _severities.empty() || patch_r->isSeverity( _severities ) ) )
+	return Missmatch::Severity;
+    }
+    return Missmatch::None;
+  }
+
+  bool operator()( const Patch::constPtr & patch_r ) const
+  { return missmatch( patch_r ) == Missmatch::None; }
+
+public:
+  Date _dateBefore;
+  std::vector<std::string> _categories;
+  std::vector<std::string> _severities;
+};
+
 
 /**
  * Issue various requests to the dependency resolver, based on given
@@ -99,15 +163,8 @@ public:
      */
     bool skip_interactive;
 
-    /**
-     * Whether to skip patches not in this category
-     */
-    std::string category;
-
-    /**
-     * Whether to skip updates issued later than this date
-     */
-    zypp::Date date_limit;
+    /** Patch specific CLI option filter */
+    CliMatchPatch cliMatchPatch;
 
     /** Whether to ignore vendor when selecting packages */
     bool allow_vendor_change;
@@ -195,6 +252,10 @@ public:
        * Patch is not in the specified category
        */
       PATCH_WRONG_CAT,
+      /**
+       * Patch is not in the specified severity
+       */
+      PATCH_WRONG_SEV,
 
       /**
        * Patch is too new and a date limit was specified

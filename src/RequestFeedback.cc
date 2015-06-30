@@ -219,6 +219,14 @@ string SolverRequester::Feedback::asUserString(
 	pname.str().c_str());
   }
 
+  case PATCH_WRONG_SEV:
+  {
+    ostringstream pname;
+    pname << _objsel->name() << "-" << _objsel->edition();
+    return str::form(_("Patch '%s' has not the specified severity."),
+	pname.str().c_str());
+  }
+
   case PATCH_TOO_NEW:
   {
     ostringstream pname;
@@ -289,6 +297,7 @@ void SolverRequester::Feedback::print(
   case PATCH_NOT_NEEDED:
   case PATCH_UNWANTED:
   case PATCH_WRONG_CAT:
+  case PATCH_WRONG_SEV:
   case PATCH_TOO_NEW:
   case FORCED_INSTALL:
     out.info(asUserString(opts));

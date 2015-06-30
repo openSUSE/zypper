@@ -353,7 +353,7 @@ void SolverRequester::updatePatches()
   // search twice: if there are none with restartSuggested(), retry on all
   // (in the first run, ignore_pkgmgmt == 0, in the second it is 1)
   bool any_marked = false;
-  bool dateLimit = ( _opts.date_limit != Date() );
+  bool dateLimit = ( _opts.cliMatchPatch._dateBefore != Date() );
   for (unsigned ignore_pkgmgmt = 0;
        !any_marked && ignore_pkgmgmt < 2; ++ignore_pkgmgmt)
   {
@@ -366,11 +366,11 @@ void SolverRequester::updatePatches()
 
       // bnc#919709: a date limit must ignore newer patch candidates
       zypp::PoolItem candidateObj( (*it)->candidateObj() );
-      if ( dateLimit && asKind<Patch>(candidateObj)->timestamp() > _opts.date_limit )
+      if ( dateLimit && asKind<Patch>(candidateObj)->timestamp() > _opts.cliMatchPatch._dateBefore )
       {
 	for_( iit, (*it)->availableBegin(), (*it)->availableEnd() )
 	{
-	  if ( asKind<Patch>(*iit)->timestamp() <= _opts.date_limit )
+	  if ( asKind<Patch>(*iit)->timestamp() <= _opts.cliMatchPatch._dateBefore )
 	  {
 	    candidateObj = *iit;
 	    break;
@@ -429,31 +429,36 @@ bool SolverRequester::installPatch(
         addFeedback(Feedback::PATCH_INTERACTIVE_SKIPPED, patchspec, selected);
         return false;
       }
-      else if (selected.isUnwanted())
+
+      if (selected.isUnwanted())
       {
         DBG << "candidate patch " << patch << " is locked" << endl;
         addFeedback(Feedback::PATCH_UNWANTED, patchspec, selected, selected);
+        return false;
       }
 
-      else if ( ! ( _opts.category.empty() || patch->isCategory( _opts.category ) ) )
       {
-	DBG << "candidate patch " << patch << " is not in the specified category" << endl;
-	addFeedback(Feedback::PATCH_WRONG_CAT, patchspec, selected, selected);
+	CliMatchPatch::Missmatch missmatch = _opts.cliMatchPatch.missmatch( patch );
+	if ( missmatch != CliMatchPatch::Missmatch::None )
+	{
+	  Feedback::Id id = Feedback::INVALID_REQUEST;
+	  switch ( missmatch )
+	  {
+	    case CliMatchPatch::Missmatch::Date:	id = Feedback::PATCH_TOO_NEW;	break;
+	    case CliMatchPatch::Missmatch::Category:	id = Feedback::PATCH_WRONG_CAT;	break;
+	    case CliMatchPatch::Missmatch::Severity:	id = Feedback::PATCH_WRONG_SEV;	break;
+	  }
+	  DBG << "candidate patch " << patch << " does not pass CLI filter (" << static_cast<unsigned>(missmatch) << ")" << endl;
+	  addFeedback( id, patchspec, selected, selected );
+	  return false;
+	}
       }
 
-      else if (_opts.date_limit != Date()
-               && patch->timestamp() > _opts.date_limit)
-      {
-        DBG << "candidate patch " << patch << " is newer than specified date" << endl;
-        addFeedback(Feedback::PATCH_TOO_NEW, patchspec, selected, selected);
-      }
-      else
-      {
-        // TODO use _opts.force
-        setToInstall(selected);
-        MIL << "installing " << selected << endl;
-        return true;
-      }
+      // passed:
+      // TODO use _opts.force
+      setToInstall( selected );
+      MIL << "installing " << selected << endl;
+      return true;
     }
   }
   else if (selected.status().isSatisfied())
