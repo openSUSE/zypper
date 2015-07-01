@@ -1,4 +1,10 @@
 -------------------------------------------------------------------
+Wed Jul  1 14:00:42 CEST 2015 - ma@suse.de
+
+- add asString for Patch::Category
+- version 15.7.0 (5)
+
+-------------------------------------------------------------------
 Mon Jun 29 17:43:00 CEST 2015 - ma@suse.de
 
 - Fix lost pathname when importing repo keys (bnc#936373)
