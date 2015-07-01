@@ -114,6 +114,21 @@ namespace zypp
     return CAT_OTHER;
   }
 
+  std::string asString( const Patch::Category & obj )
+  {
+    switch ( obj )
+    {
+      case Patch::CAT_OTHER:		return std::string( "other" );		break;
+      case Patch::CAT_YAST:		return std::string( "yast" );		break;
+      case Patch::CAT_SECURITY:		return std::string( "security" );	break;
+      case Patch::CAT_RECOMMENDED:	return std::string( "recommended" );	break;
+      case Patch::CAT_OPTIONAL:		return std::string( "optional" );	break;
+      case Patch::CAT_DOCUMENT:		return std::string( "document" );	break;
+    }
+    // make gcc happy:
+    return std::string( "other" );
+  }
+
   ///////////////////////////////////////////////////////////////////
 
   std::string Patch::severity() const

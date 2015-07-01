@@ -236,6 +236,9 @@ namespace zypp
   ZYPP_DECLARE_OPERATORS_FOR_FLAGS(Patch::InteractiveFlags);
   ZYPP_DECLARE_OPERATORS_FOR_FLAGS(Patch::SeverityFlags);
 
+  /** \relates Patch::Category string representation.*/
+  std::string asString( const Patch::Category & obj );
+
   /** \relates Patch::SeverityFlag string representation.*/
   std::string asString( const Patch::SeverityFlag & obj );
 
