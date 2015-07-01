@@ -239,6 +239,9 @@ namespace zypp
   /** \relates Patch::Category string representation.*/
   std::string asString( const Patch::Category & obj );
 
+  /** \relates Patch::InteractiveFlag string representation.*/
+  std::string asString( const Patch::InteractiveFlag & obj );
+
   /** \relates Patch::SeverityFlag string representation.*/
   std::string asString( const Patch::SeverityFlag & obj );
 

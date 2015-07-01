@@ -202,8 +202,8 @@ namespace zypp
   }
 
   ///////////////////////////////////////////////////////////////////
-
-  std::string Patch::message( const Locale & lang_r ) const
+  //
+std::string Patch::message( const Locale & lang_r ) const
   { return lookupStrAttribute( sat::SolvAttr::message, lang_r ); }
 
   bool Patch::rebootSuggested() const
@@ -254,6 +254,18 @@ namespace zypp
   bool Patch::interactive() const
   {
     return interactiveWhenIgnoring();
+  }
+
+  std::string asString( const Patch::InteractiveFlag & obj )
+  {
+    switch ( obj )
+    {
+      case Patch::NoFlags:	return "";		break;
+      case Patch::Reboot:	return "reboot";	break;
+      case Patch::Message:	return "message";	break;
+      case Patch::License:	return "license";	break;
+    }
+    return str::hexstring(obj);
   }
 
   Patch::Contents Patch::contents() const
