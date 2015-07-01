@@ -98,6 +98,18 @@ private:
   }
 };
 
+
+std::string patchHighlight( std::string && val_r )
+{
+  static std::vector<std::string> _high = { asString(Patch::CAT_SECURITY), asString(Patch::SEV_CRITICAL) };
+  for ( const std::string & high : _high )
+  {
+    if ( high == val_r )
+      return ColorString( std::move(val_r), ColorContext::HIGHLIGHT ).str();
+  }
+  return std::move(val_r);
+}
+
 // ----------------------------------------------------------------------------
 //
 // Updates
@@ -315,8 +327,8 @@ static bool list_patch_updates( Zypper & zypper )
         TableRow tr (cols);
         tr << patch->repoInfo().asUserString();
         tr << patch->name ();
-        tr << patch->category();
-        tr << patch->severity();
+        tr << patchHighlight(patch->category());
+        tr << patchHighlight(patch->severity());
         tr << (it->isBroken() ? _("needed") : _("not needed"));
         tr << patch->summary();
 
@@ -647,8 +659,8 @@ void list_patches_by_issue( Zypper & zypper )
 	  << itype
 	  << d->subFind( sat::SolvAttr::updateReferenceId ).asString()
 	  << patch->name()
-	  << patch->category()
-	  << patch->severity()
+	  << patchHighlight(patch->category())
+	  << patchHighlight(patch->severity())
 	  << (pi.isBroken() ? _("needed") : _("not needed")) );
       }
     }
@@ -681,7 +693,7 @@ void list_patches_by_issue( Zypper & zypper )
       }
 
       t1 << ( TableRow()
-         << patch->name() << patch->category() << patch->severity() << patch->summary() );
+         << patch->name() << patchHighlight(patch->category()) << patchHighlight(patch->severity()) << patch->summary() );
       //! \todo could show a highlighted match with a portion of surrounding
       //! text. Needs case-insensitive find.
     }
