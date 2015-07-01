@@ -76,7 +76,45 @@ namespace
     return str << " " << word_r;
   }
 
-} // namespace out
+} // namespace
+///////////////////////////////////////////////////////////////////
+
+///////////////////////////////////////////////////////////////////
+namespace
+{
+  ///////////////////////////////////////////////////////////////////
+  /// \class KNSplit
+  /// \brief Use the right kind and name.
+  /// Prefer \ref ResKind explicitly specified in \a ident_r,
+  /// else use the provided \a defaultKind_r.
+  ///////////////////////////////////////////////////////////////////
+  struct KNSplit
+  {
+    KNSplit( const std::string & ident_r, const ResKind & defaultKind_r = ResKind::nokind )
+    : _kind( ResKind::explicitBuiltin( ident_r ) )
+    {
+      if ( ! _kind )
+      {
+	if ( defaultKind_r )
+	  _kind = defaultKind_r;
+	_name = ident_r;
+      }
+      else
+      {
+	// strip kind spec from name; ':' after kind is asserted
+	_name = ident_r.substr( _kind.size()+1 );
+      }
+    }
+
+    ResKind     _kind;
+    std::string _name;
+  };
+
+  /** \relates KNSplit Stream output */
+  std::ostream & operator<<( std::ostream & str, const KNSplit & obj )
+  { return str << "[{" << obj._kind << "}{" << obj._name << "}]"; }
+
+} // namespace
 ///////////////////////////////////////////////////////////////////
 
 void printNVA(const ResObject::constPtr & res)
@@ -94,70 +132,85 @@ void printSummaryDesc(const ResObject::constPtr & res)
   Zypper::instance()->out().printRichText( res->description(), 2/*indented*/ );
 }
 
-/**
- *
- */
-void printInfo(Zypper & zypper, const ResKind & kind)
-{
-  ResPool pool = God->pool();
-
-  cout << endl;
-
-  for(vector<string>::const_iterator nameit = zypper.arguments().begin();
-      nameit != zypper.arguments().end(); ++nameit )
+///////////////////////////////////////////////////////////////////
+namespace {
+  void logOtherKindMatches( const PoolQuery & q_r, const std::string & name_r )
   {
+    std::map<ResKind,DefaultIntegral<unsigned,0U>> count;
+    for_( it, q_r.selectableBegin(), q_r.selectableEnd() )
+    { ++count[(*it)->kind()]; }
+    for ( const auto & pair : count )
+    {
+      cout << boost::format(_PL("There would be %1% match for '%2%'."
+			      ,"There would be %1% matches for '%2%'."
+			      ,pair.second))
+			    % pair.second
+			    % (pair.first.asString()+":"+name_r)
+	   << endl;
+    }
+  }
+} // namespace
+///////////////////////////////////////////////////////////////////
+void printInfo( Zypper & zypper, const ResKind & kind_r )
+{
+  zypper.out().gap();
+
+  for ( const std::string & rawarg : zypper.arguments() )
+  {
+    // Use the right kind!
+    KNSplit kn( rawarg, kind_r );
+
     PoolQuery q;
-    q.addKind(kind);
-    q.addAttribute(sat::SolvAttr::name, *nameit);
+    q.addKind( kn._kind );
+    q.addAttribute( sat::SolvAttr::name, kn._name );
 
-    if ( !zypper.cOpts().count("match-substrings") )
-    {
-      q.setMatchExact();
-    }
+    if ( zypper.cOpts().count("match-substrings") )
+    { q.setMatchSubstring(); }
+    else
+    { q.setMatchGlob(); }	// is Exact if no glob chars included in name
 
-    if ( (*nameit).find_first_of("?*") != string::npos )
-    {
-      q.setMatchGlob();
-    }
-
-    if (q.empty())
+    if ( q.empty() )
     {
       // TranslatorExplanation E.g. "package 'zypper' not found."
-      //! \todo use a separate string for each kind so that it is translatable.
-      cout << "\n" << format(_("%s '%s' not found."))
-          % kind_to_string_localized(kind, 1) % *nameit
-          << endl;
-    }
-    else
-    {
-      for ( zypp::PoolQuery::Selectable_iterator it = q.selectableBegin();
-	     it != q.selectableEnd(); it++)
+      cout << "\n" << format(_("%s '%s' not found.")) % kind_to_string_localized( kn._kind, 1 ) % rawarg << endl;
       {
-        // print info
-        // TranslatorExplanation E.g. "Information for package zypper:"
+	// hint to matches of different kind
+	PoolQuery q;
+	q.addAttribute( sat::SolvAttr::name, kn._name );
+	if ( zypper.cOpts().count("match-substrings") )
+	{ q.setMatchSubstring(); }
+	else
+	{ q.setMatchGlob(); }	// is Exact if no glob chars included in name
+	if ( ! q.empty() )
+	  logOtherKindMatches( q, kn._name );
+      }
+      continue;
+    }
 
-        if (zypper.out().type() != Out::TYPE_XML)
-        {
-          string info = boost::str( format(_("Information for %s %s:"))
-                                    % kind_to_string_localized(kind, 1)
-                                    % (*it)->name() );
+    for_( it, q.selectableBegin(), q.selectableEnd() )
+    {
+      // print info
+      // TranslatorExplanation E.g. "Information for package zypper:"
 
-          cout << endl << info << endl;
-          cout << string( mbs_width(info), '-' ) << endl;
-        }
+      if ( zypper.out().type() != Out::TYPE_XML )
+      {
+	string info = boost::str( format(_("Information for %s %s:"))
+	% kind_to_string_localized( kn._kind, 1 )
+	% (*it)->name() );
 
-        if (kind == ResKind::package)
-          printPkgInfo(zypper, *(*it));
-        else if (kind == ResKind::patch)
-          printPatchInfo(zypper, *(*it));
-        else if (kind == ResKind::pattern)
-          printPatternInfo(zypper, *(*it));
-        else if (kind == ResKind::product)
-          printProductInfo(zypper, *(*it));
-        else
-          // TranslatorExplanation %s = resolvable type (package, patch, pattern, etc - untranslated).
-          zypper.out().info(
-                            boost::str(format(_("Info for type '%s' not implemented.")) % kind));
+	cout << endl << info << endl;
+	cout << string( mbs_width(info), '-' ) << endl;
+      }
+
+
+      if ( kn._kind == ResKind::package )	{ printPkgInfo( zypper, *(*it) ); }
+      else if ( kn._kind == ResKind::patch )	{ printPatchInfo( zypper, *(*it) ); }
+      else if ( kn._kind == ResKind::pattern )	{ printPatternInfo( zypper, *(*it) ); }
+      else if ( kn._kind == ResKind::product )	{ printProductInfo( zypper, *(*it) ); }
+      else
+      {
+	// TranslatorExplanation %s = resolvable type (package, patch, pattern, etc - untranslated).
+	zypper.out().info(boost::str(format(_("Info for type '%s' not implemented.")) % kn._kind ));
       }
     }
   }
