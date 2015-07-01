@@ -107,6 +107,46 @@ namespace zypp
     };
     ///////////////////////////////////////////////////////////////////
 
+    /** \relates Flags Stringify
+     * Build a string of OR'ed names of each flag value set in \a flag_r.
+     * Remaining bits in \a flag_r are added as hexstring.
+     * \code
+     * 	 enum E { a=1, b=2, c=4 };
+     *   ZYPP_DECLARE_FLAGS( E, MyFlags );
+     *
+     *   MyFlags f = a|b|c;
+     *   cout << f << " = " << stringify( f, { {a,"A"}, {b,"B"} } ) << endl;
+     *   // prints: 0x0007 = [A|B|0x4]
+     * \endcode
+     */
+    template<typename Enum>
+    std::string stringify( const Flags<Enum> & flag_r, const std::initializer_list<std::pair<Flags<Enum>,std::string>> & flaglist_r = {} )
+    {
+      std::string ret( "[" );
+      std::string sep;
+
+      Flags<Enum> mask;
+      for ( const auto & pair : flaglist_r )
+      {
+	if ( flag_r.testFlag( pair.first ) )
+	{
+	  mask |= pair.first;
+	  ret += sep;
+	  ret += pair.second;
+	  if ( sep.empty() )
+	  { sep = "|"; }
+	}
+      }
+      mask = flag_r & ~mask;
+      if ( mask )
+      {
+	ret += sep;
+	ret += str::hexstring( mask, 0 );
+      }
+      ret += "]";
+      return ret;
+    }
+
     template<typename Enum>
     inline std::ostream & operator<<( std::ostream & str, const Flags<Enum> & obj )
     { return str << str::hexstring(obj); }
