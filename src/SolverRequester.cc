@@ -447,6 +447,7 @@ bool SolverRequester::installPatch(
 	    case CliMatchPatch::Missmatch::Date:	id = Feedback::PATCH_TOO_NEW;	break;
 	    case CliMatchPatch::Missmatch::Category:	id = Feedback::PATCH_WRONG_CAT;	break;
 	    case CliMatchPatch::Missmatch::Severity:	id = Feedback::PATCH_WRONG_SEV;	break;
+	    case CliMatchPatch::Missmatch::None:	/* make gcc happy */		break;
 	  }
 	  DBG << "candidate patch " << patch << " does not pass CLI filter (" << static_cast<unsigned>(missmatch) << ")" << endl;
 	  addFeedback( id, patchspec, selected, selected );
