@@ -150,9 +150,6 @@ void Summary::readPool(const zypp::ResPool & pool)
 */
 
   // iterate the to_be_installed to find installs/upgrades/downgrades + size info
-
-  ResObject::constPtr nullres;
-
   for (KindToResObjectSet::const_iterator it = to_be_installed.begin();
       it != to_be_installed.end(); ++it)
   {
@@ -165,9 +162,9 @@ void Summary::readPool(const zypp::ResPool & pool)
       if (pkg)
       {
         if (pkg->vendorSupport() & VendorSupportACC)
-          _support_needacc[res->kind()].insert(ResPair(nullres, res));
+          _support_needacc[res->kind()].insert(ResPair(nullptr, res));
         else if (pkg->maybeUnsupported())
-          _unsupported[res->kind()].insert(ResPair(nullres, res));
+          _unsupported[res->kind()].insert(ResPair(nullptr, res));
       }
 
       // find in to_be_removed:
@@ -229,7 +226,7 @@ void Summary::readPool(const zypp::ResPool & pool)
 
       if (!upgrade_downgrade)
       {
-        _toinstall[res->kind()].insert(ResPair(NULL, res));
+        _toinstall[res->kind()].insert(ResPair(nullptr, res));
         _inst_size_change += res->installSize();
       }
 
@@ -258,7 +255,7 @@ void Summary::readPool(const zypp::ResPool & pool)
         if (pi.status() == ResStatus::SOLVER)
           _toremove_by_solver = true;
       }*/
-      _toremove[it->first].insert(ResPair(nullres, *resit));
+      _toremove[it->first].insert(ResPair(nullptr, *resit));
       _inst_size_change -= (*resit)->installSize();
     }
 
@@ -297,7 +294,7 @@ void Summary::readPool(const zypp::ResPool & pool)
           && candidate->poolItem().status().isToBeInstalled())
         continue;
 
-      candidates[*kit].insert(ResPair(nullres, candidate));
+      candidates[*kit].insert(ResPair(nullptr, candidate));
     }
     MIL << *kit << " update candidates: " << candidates[*kit].size() << endl;
     MIL << "to be actually updated: " << _toupgrade[*kit].size() << endl;
@@ -713,9 +710,6 @@ void Summary::writeReinstalled(ostream & out)
 
 void Summary::collectInstalledRecommends(const ResObject::constPtr & obj)
 {
-  XXX << obj << endl;
-  ResObject::constPtr nullres;
-
   Capabilities rec = obj->recommends();
   for_(capit, rec.begin(), rec.end())
   {
@@ -732,7 +726,7 @@ void Summary::collectInstalledRecommends(const ResObject::constPtr & obj)
       XXX << "rec: " << *sit << endl;
       ResObject::constPtr recobj = makeResObject(*sit);
       ResPairSet::const_iterator match =
-        _toinstall[sit->kind()].find(ResPair(nullres, recobj));
+        _toinstall[sit->kind()].find(ResPair(nullptr, recobj));
       if (match != _toinstall[sit->kind()].end())
       {
         if (_recommended[sit->kind()].insert(*match).second)
@@ -755,7 +749,7 @@ void Summary::collectInstalledRecommends(const ResObject::constPtr & obj)
       XXX << "req: " << *sit << endl;
       ResObject::constPtr reqobj = makeResObject(*sit);
       ResPairSet::const_iterator match =
-        _toinstall[sit->kind()].find(ResPair(nullres, reqobj));
+        _toinstall[sit->kind()].find(ResPair(nullptr, reqobj));
       if (match != _toinstall[sit->kind()].end())
       {
         if (_required[sit->kind()].insert(*match).second)
@@ -1188,9 +1182,9 @@ void Summary::writeLocked(std::ostream & out)
     {
       if ( (*it)->hasInstalledObj() )
        for_( iit, (*it)->installedBegin(), (*it)->installedEnd() )
-         instlocks.insert( ResPair( NULL, *iit ) );
+         instlocks.insert( ResPair( nullptr, *iit ) );
       else
-       ;//avidents.insert( ResPair( NULL, (*it)->theObj() ) );
+       ;//avidents.insert( ResPair( nullptr, (*it)->theObj() ) );
     }
   }
   if ( ! ( instlocks.empty() && avidents.empty() ) )
