@@ -110,6 +110,22 @@ std::string patchHighlight( std::string && val_r )
   return std::move(val_r);
 }
 
+
+std::string interactiveFlags( const Patch & patch_r )
+{
+  std::string ret;
+  Patch::InteractiveFlags flags = patch_r.interactiveFlags();
+  if (flags )
+  {
+    ret = stringify( flags, { { Patch::Reboot, "reboot" }, { Patch::Message, "message" }, { Patch::License, "licence" } }, "", ",", "" );
+  }
+  else
+  {
+    ret = "---";
+  }
+  return ret;
+}
+
 // ----------------------------------------------------------------------------
 //
 // Updates
@@ -301,7 +317,7 @@ static bool list_patch_updates( Zypper & zypper )
 
   TableHeader th;
   th << _("Repository")
-     << _("Name") << _("Category") << _("Severity") << _("Status") << _("Summary");
+     << _("Name") << _("Category") << _("Severity") << _("Interactive") << _("Status") << _("Summary");
   tbl << th;
   pm_tbl << th;
   unsigned cols = th.cols();
@@ -329,6 +345,7 @@ static bool list_patch_updates( Zypper & zypper )
         tr << patch->name ();
         tr << patchHighlight(patch->category());
         tr << patchHighlight(patch->severity());
+	tr << interactiveFlags(*patch);
         tr << (it->isBroken() ? _("needed") : _("not needed"));
         tr << patch->summary();
 
@@ -604,7 +621,7 @@ void list_patches_by_issue( Zypper & zypper )
   // --bz, --cve can't be used together with --issue; this case is ruled out
   // in the initial arguments validation in Zypper.cc
   Table t;
-  t << ( TableHeader() << _("Issue") << _("No.") << _("Patch") << _("Category") << _("Severity") << _("Status") );
+  t << ( TableHeader() << _("Issue") << _("No.") << _("Patch") << _("Category") << _("Severity") << _("Interactive") << _("Status") );
 
   CliScanIssues issues;
   CliMatchPatch cliMatchPatch( zypper );
@@ -661,6 +678,7 @@ void list_patches_by_issue( Zypper & zypper )
 	  << patch->name()
 	  << patchHighlight(patch->category())
 	  << patchHighlight(patch->severity())
+	  << interactiveFlags(*patch)
 	  << (pi.isBroken() ? _("needed") : _("not needed")) );
       }
     }
@@ -669,7 +687,7 @@ void list_patches_by_issue( Zypper & zypper )
   // pass2: look for matches in patch summary/description
   //
   Table t1;
-  t1 << ( TableHeader() << _("Name") << _("Category") << _("Severity") << _("Summary") );
+  t1 << ( TableHeader() << _("Name") << _("Category") << _("Severity") << _("Interactive") << _("Summary") );
 
   for ( const Issue* _issue : pass2 )
   {
@@ -693,7 +711,11 @@ void list_patches_by_issue( Zypper & zypper )
       }
 
       t1 << ( TableRow()
-         << patch->name() << patchHighlight(patch->category()) << patchHighlight(patch->severity()) << patch->summary() );
+         << patch->name()
+	 << patchHighlight(patch->category())
+	 << patchHighlight(patch->severity())
+	 << interactiveFlags(*patch)
+	 << patch->summary() );
       //! \todo could show a highlighted match with a portion of surrounding
       //! text. Needs case-insensitive find.
     }
