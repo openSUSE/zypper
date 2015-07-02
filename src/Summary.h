@@ -149,7 +149,7 @@ private:
   KindToResPairSet _support_needacc;
 
   /** names of packages which have multiple versions (to-be-)installed */
-  std::set<std::string> multi_installed;
+  std::set<std::string> _multiInstalled;
 
 
   /** \name For weak deps info.

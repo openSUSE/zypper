@@ -93,7 +93,7 @@ void Summary::readPool(const zypp::ResPool & pool)
         s->installedSize() > 1 ||
         (s->installedSize() == 1 && s->toInstall()) );
     if (got_multi)
-      multi_installed.insert( s->name() );
+      _multiInstalled.insert( s->name() );
   }
   // collect resolvables to be installed/removed
 
@@ -181,7 +181,7 @@ void Summary::readPool(const zypp::ResPool & pool)
           {
             // don't put multiversion packages to '_toupgrade', they will
             // always be reported as newly installed (and removed)
-            if (multi_installed.find(res->name()) != multi_installed.end())
+            if (_multiInstalled.find(res->name()) != _multiInstalled.end())
               continue;
 
             _toupgrade[res->kind()].insert(rp);
@@ -205,7 +205,7 @@ void Summary::readPool(const zypp::ResPool & pool)
           {
             // don't put multiversion packages to '_todowngrade', they will
             // always be reported as newly installed (and removed)
-            if (multi_installed.find(res->name()) != multi_installed.end())
+            if (_multiInstalled.find(res->name()) != _multiInstalled.end())
               continue;
 
             _todowngrade[res->kind()].insert(rp);
@@ -290,7 +290,7 @@ void Summary::readPool(const zypp::ResPool & pool)
         continue;
       // mutliversion packages do not end up in _toupgrade, so we need to remove
       // them from candidates if the candidate actually installs (bnc #629197)
-      if (multi_installed.find(candidate->name()) != multi_installed.end()
+      if (_multiInstalled.find(candidate->name()) != _multiInstalled.end()
           && candidate->poolItem().status().isToBeInstalled())
         continue;
 
@@ -424,7 +424,7 @@ void Summary::writeResolvableList(ostream & out, const ResPairSet & resolvables,
       if ( quote ) s << quoteCh;
 
       // version (if multiple versions are present)
-      if (multi_installed.find(resit->second->name()) != multi_installed.end())
+      if (_multiInstalled.find(resit->second->name()) != _multiInstalled.end())
       {
         if (resit->first && resit->first->edition() != resit->second->edition())
           s << "-" << resit->first->edition().asString()
@@ -450,7 +450,7 @@ void Summary::writeResolvableList(ostream & out, const ResPairSet & resolvables,
     string name = ResPair2Name( *resit );
 
     // version (if multiple versions are present)
-    if (!(_viewop & SHOW_VERSION) && multi_installed.find(resit->second->name()) != multi_installed.end())
+    if (!(_viewop & SHOW_VERSION) && _multiInstalled.find(resit->second->name()) != _multiInstalled.end())
     {
       if (resit->first && resit->first->edition() != resit->second->edition())
         name += string("-") + resit->first->edition().asString()
