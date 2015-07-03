@@ -113,7 +113,7 @@ namespace zypp
 
 
     /**
-     * Do an distribution upgrade
+     * Do an distribution upgrade (DUP)
      *
      * Perform a distribution upgrade. This performs an update of
      * all packages with a special resolver algorithm which takes
@@ -239,6 +239,32 @@ namespace zypp
     void setCleandepsOnRemove( bool yesno_r );
     void setDefaultCleandepsOnRemove(); // set back to default (in zypp.conf)
     bool cleandepsOnRemove() const;
+
+    /** \name  Solver flags for DUP mode.
+     * DUP mode default settings differ from 'ordinary' ones. Default for
+     * all DUP flags is \c true.
+     */
+    //@{
+    /** dup mode: allow to downgrade installed solvable */
+    void dupSetAllowDowngrade( bool yesno_r );
+    void dupSetDefaultAllowDowngrade();	// Set back to default
+    bool dupAllowDowngrade() const;
+
+    /** dup mode: allow to change name of installed solvable */
+    void dupSetAllowNameChange( bool yesno_r );
+    void dupSetDefaultAllowNameChange();	// Set back to default
+    bool dupAllowNameChange() const;
+
+    /** dup mode: allow to change architecture of installed solvables */
+    void dupSetAllowArchChange( bool yesno_r );
+    void dupSetDefaultAllowArchChange();	// Set back to default
+    bool dupAllowArchChange() const;
+
+    /**  dup mode: allow to change vendor of installed solvables*/
+    void dupSetAllowVendorChange( bool yesno_r );
+    void dupSetDefaultAllowVendorChange();	// Set back to default
+    bool dupAllowVendorChange() const;
+    //@}
 
     /** \name Upgrade to content of a specific repository.
      * \note This is an ordinary solver request. You should simply

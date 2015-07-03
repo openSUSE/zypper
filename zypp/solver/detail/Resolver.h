@@ -223,6 +223,17 @@ class Resolver : public base::ReferenceCounted, private base::NonCopyable {
     void setCleandepsOnRemove( TriBool state_r );
     //@}
 
+#define ZOLV_FLAG_TRIBOOL( ZSETTER, ZGETTER )	\
+    void ZSETTER( TriBool state_r );		\
+    bool ZGETTER() const;			\
+
+    ZOLV_FLAG_TRIBOOL( dupSetAllowDowngrade,	dupAllowDowngrade )
+    ZOLV_FLAG_TRIBOOL( dupSetAllowNameChange,	dupAllowNameChange )
+    ZOLV_FLAG_TRIBOOL( dupSetAllowArchChange,	dupAllowArchChange )
+    ZOLV_FLAG_TRIBOOL( dupSetAllowVendorChange,	dupAllowVendorChange )
+
+#undef ZOLV_FLAG_TRIBOOL
+
     ResolverProblemList problems() const;
     void applySolutions( const ProblemSolutionList & solutions );
 

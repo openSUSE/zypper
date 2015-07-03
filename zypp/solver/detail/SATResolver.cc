@@ -176,6 +176,10 @@ SATResolver::SATResolver (const ResPool & pool, Pool *SATPool)
     , _allowarchchange(false)
     , _allowvendorchange(ZConfig::instance().solver_allowVendorChange())
     , _allowuninstall(false)
+    , _dup_allowdowngrade( true )
+    , _dup_allownamechange( true )
+    , _dup_allowarchchange( true )
+    , _dup_allowvendorchange( true )
     , _updatesystem(false)
     , _noupdateprovide(false)
     , _dosplitprovides(true)
@@ -480,14 +484,20 @@ SATResolver::solving(const CapabilitySet & requires_caps,
     solver_set_flag(_solv, SOLVER_FLAG_SPLITPROVIDES, _dosplitprovides);
     solver_set_flag(_solv, SOLVER_FLAG_NO_UPDATEPROVIDE, _noupdateprovide);
     solver_set_flag(_solv, SOLVER_FLAG_IGNORE_RECOMMENDED, _onlyRequires);
-
+    DBG << "main.cc: " << _dup_allowdowngrade << " / " << solver_get_flag(_solv, SOLVER_FLAG_DUP_ALLOW_DOWNGRADE ) << endl;
+    solver_set_flag(_solv, SOLVER_FLAG_DUP_ALLOW_DOWNGRADE,	_dup_allowdowngrade );
+    solver_set_flag(_solv, SOLVER_FLAG_DUP_ALLOW_ARCHCHANGE,	_dup_allownamechange );
+    solver_set_flag(_solv, SOLVER_FLAG_DUP_ALLOW_VENDORCHANGE,	_dup_allowarchchange );
+    solver_set_flag(_solv, SOLVER_FLAG_DUP_ALLOW_NAMECHANGE,	_dup_allowvendorchange );
+    DBG << "main.cc: " << _dup_allowdowngrade << " / " << solver_get_flag(_solv, SOLVER_FLAG_DUP_ALLOW_DOWNGRADE ) << endl;
+#if 1
 #define HACKENV(X,D) solver_set_flag(_solv, X, env::HACKENV( #X, D ) );
-    HACKENV( SOLVER_FLAG_DUP_ALLOW_DOWNGRADE,	true );
-    HACKENV( SOLVER_FLAG_DUP_ALLOW_ARCHCHANGE,	true );
-    HACKENV( SOLVER_FLAG_DUP_ALLOW_VENDORCHANGE,true );
-    HACKENV( SOLVER_FLAG_DUP_ALLOW_NAMECHANGE,	true );
+    HACKENV( SOLVER_FLAG_DUP_ALLOW_DOWNGRADE,	_dup_allowdowngrade );
+    HACKENV( SOLVER_FLAG_DUP_ALLOW_ARCHCHANGE,	_dup_allownamechange );
+    HACKENV( SOLVER_FLAG_DUP_ALLOW_VENDORCHANGE,_dup_allowarchchange );
+    HACKENV( SOLVER_FLAG_DUP_ALLOW_NAMECHANGE,	_dup_allowvendorchange );
 #undef HACKENV
-
+#endif
     sat::Pool::instance().prepareForSolving();
 
     // Solve !

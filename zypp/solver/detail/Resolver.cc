@@ -104,6 +104,20 @@ Resolver::~Resolver()
 }
 
 //---------------------------------------------------------------------------
+// forward flags too SATResolver
+#define ZOLV_FLAG_TRIBOOL( ZSETTER, ZGETTER, ZVARNAME, ZVARDEFAULT )			\
+    void Resolver::ZSETTER( TriBool state_r )						\
+    { _satResolver->ZVARNAME = indeterminate(state_r) ? ZVARDEFAULT : bool(state_r); }	\
+    bool Resolver::ZGETTER() const							\
+    { return _satResolver->ZVARNAME; }							\
+
+ZOLV_FLAG_TRIBOOL( dupSetAllowDowngrade,	dupAllowDowngrade,	_dup_allowdowngrade,	true )
+ZOLV_FLAG_TRIBOOL( dupSetAllowNameChange,	dupAllowNameChange,	_dup_allownamechange,	true )
+ZOLV_FLAG_TRIBOOL( dupSetAllowArchChange,	dupAllowArchChange,	_dup_allowarchchange,	true )
+ZOLV_FLAG_TRIBOOL( dupSetAllowVendorChange,	dupAllowVendorChange,	_dup_allowvendorchange,	true )
+
+#undef ZOLV_FLAG_TRIBOOL
+//---------------------------------------------------------------------------
 
 void Resolver::setAllowVendorChange( TriBool state_r )
 {
@@ -255,7 +269,6 @@ bool Resolver::verifySystem()
 
 //----------------------------------------------------------------------------
 // undo
-
 void Resolver::undo()
 {
     UndoTransact info(ResStatus::APPL_LOW);

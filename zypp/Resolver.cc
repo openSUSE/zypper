@@ -106,6 +106,22 @@ namespace zypp
   void Resolver::setDefaultCleandepsOnRemove()		{ _pimpl->setCleandepsOnRemove( indeterminate ); }
   bool Resolver::cleandepsOnRemove() const		{ return _pimpl->cleandepsOnRemove(); }
 
+#define ZOLV_FLAG_BOOL( ZSETTER, ZGETTER )					\
+  void Resolver::ZSETTER( bool yesno_r ){ _pimpl->ZSETTER( yesno_r ); }		\
+  bool Resolver::ZGETTER() const	{ return _pimpl->ZGETTER(); }		\
+
+#define ZOLV_FLAG_TRIBOOL( ZSETTER, ZDEFAULT, ZGETTER )				\
+  ZOLV_FLAG_BOOL( ZSETTER , ZGETTER )						\
+  void Resolver::ZDEFAULT()		{ _pimpl->ZSETTER( indeterminate ); }	\
+
+  ZOLV_FLAG_TRIBOOL( dupSetAllowDowngrade,	dupSetDefaultAllowDowngrade,	dupAllowDowngrade )
+  ZOLV_FLAG_TRIBOOL( dupSetAllowNameChange,	dupSetDefaultAllowNameChange,	dupAllowNameChange )
+  ZOLV_FLAG_TRIBOOL( dupSetAllowArchChange,	dupSetDefaultAllowArchChange,	dupAllowArchChange )
+  ZOLV_FLAG_TRIBOOL( dupSetAllowVendorChange,	dupSetDefaultAllowVendorChange,	dupAllowVendorChange )
+
+#undef ZOLV_FLAG_BOOL
+#undef ZOLV_FLAG_TRIBOOL
+
   void Resolver::addUpgradeRepo( Repository repo_r )	{ _pimpl->addUpgradeRepo( repo_r ); }
   bool Resolver::upgradingRepo( Repository repo_r ) const { return _pimpl->upgradingRepo( repo_r ); }
   void Resolver::removeUpgradeRepo( Repository repo_r )	{ _pimpl->removeUpgradeRepo( repo_r ); }
