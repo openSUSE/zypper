@@ -1,4 +1,11 @@
 -------------------------------------------------------------------
+Fri Jul  3 08:23:04 CEST 2015 - ma@suse.de
+
+- Flags<Enum>: add stringify
+- add asString for Patch::InteractiveFlag
+- version 15.8.0 (5)
+
+-------------------------------------------------------------------
 Thu Jul  2 01:13:24 CEST 2015 - ma@suse.de
 
 - Update zypp-po.tar.bz2
