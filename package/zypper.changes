@@ -1,4 +1,14 @@
 -------------------------------------------------------------------
+Fri Jul  3 08:23:48 CEST 2015 - ma@suse.de
+
+- summary: show patches requiring reboot (FATE#317872)
+- patch: add column showing required interactive actions
+  (required reboot, license or message to be confirmed )
+- patch: highlight security and critical iptches in tables
+- info: arguments explicitly specifying 'kind:name' overrule '-t kind'
+- version 1.12.7
+
+-------------------------------------------------------------------
 Tue Jun 30 15:37:17 CEST 2015 - ma@suse.de
 
 - patch: add option to list/install by --severity (FATE#318760)
