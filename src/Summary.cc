@@ -114,9 +114,12 @@ void Summary::readPool(const zypp::ResPool & pool)
         Patch::constPtr patch = asKind<Patch>(it->resolvable());
 
         // set the 'need reboot' flag
-        if (patch->rebootSuggested())
+        if ( patch->rebootSuggested() )
+	{
           _need_reboot = true;
-        else if (patch->restartSuggested())
+	  _rebootNeeded.insert( ResPair( nullptr, patch ) );
+	}
+        else if ( patch->restartSuggested() )
           _need_restart = true;
       }
 
@@ -1214,6 +1217,19 @@ void Summary::writeLocked(std::ostream & out)
   }
 }
 
+void Summary::writeRebootNeeded( std::ostream & out )
+{
+  if ( _rebootNeeded.empty() )
+    return;
+
+  const std::string & label( str::form(_PL("The following patch requires a system reboot:",
+					   "The following %d patches require a system reboot:",
+					   _rebootNeeded.size()),
+				       _rebootNeeded.size()) );
+  out << endl << ( ColorContext::MSG_WARNING << label ) << endl;
+  writeResolvableList(out, _rebootNeeded, ColorContext::MSG_WARNING);
+}
+
 // --------------------------------------------------------------------------
 
 void Summary::writeDownloadAndInstalledSizeSummary(ostream & out)
@@ -1224,7 +1240,7 @@ void Summary::writeDownloadAndInstalledSizeSummary(ostream & out)
   // download size info
   ostringstream s;
   if (_todownload || _incache )
-    s << format(_("Overall download size: %1%. Already cached: %2% ")) % _todownload % _incache << " ";
+    s << format(_("Overall download size: %1%. Already cached: %2%.")) % _todownload % _incache << " ";
 
   if (_download_only)
     s << _("Download only.");
@@ -1367,7 +1383,7 @@ void Summary::writePackageCounts(ostream & out)
       s << _PL("source package to install", "source packages to install", count);
     gotcha = true;
   }
-  s << "." <<  endl;
+  s << "." << endl;
   mbs_write_wrapped(out, s.str(), 0, _wrap_width);
 }
 
@@ -1406,9 +1422,13 @@ void Summary::dumpTo(ostream & out)
     writeNeedACC(out);
     writeUnsupported(out);
   }
+  writeRebootNeeded(out);
   out << endl;
   writePackageCounts(out);
   writeDownloadAndInstalledSizeSummary(out);
+  if ( _need_reboot )
+  { out << ( ColorContext::MSG_WARNING << _("System reboot required.") ) << endl; }
+
 }
 
 // --------------------------------------------------------------------------

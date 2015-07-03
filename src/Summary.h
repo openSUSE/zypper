@@ -84,7 +84,7 @@ public:
   void writePackageCounts(std::ostream & out);
   void writeDownloadAndInstalledSizeSummary(std::ostream & out);
   void writeLocked(std::ostream & out);
-
+  void writeRebootNeeded( std::ostream & out );
 
   unsigned packagesToGetAndInstall() const
   { return _inst_pkg_total; }
@@ -147,10 +147,11 @@ private:
   KindToResPairSet _unsupported;
   /** objects from previous lists that need additional customer contract */
   KindToResPairSet _support_needacc;
+  /** Patches which require a reboot */
+  ResPairSet       _rebootNeeded;
 
   /** names of packages which have multiple versions (to-be-)installed */
   std::set<std::string> _multiInstalled;
-
 
   /** \name For weak deps info.
    * @{
