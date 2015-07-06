@@ -1225,7 +1225,7 @@ void Summary::writeRebootNeeded( std::ostream & out )
   const std::string & label( str::form(_PL("The following patch requires a system reboot:",
 					   "The following %d patches require a system reboot:",
 					   _rebootNeeded.size()),
-				       _rebootNeeded.size()) );
+				       (int)_rebootNeeded.size()) );
   out << endl << ( ColorContext::MSG_WARNING << label ) << endl;
   writeResolvableList(out, _rebootNeeded, ColorContext::MSG_WARNING);
 }
