@@ -1,4 +1,10 @@
 -------------------------------------------------------------------
+Thu Jul  9 16:44:20 CEST 2015 - ma@suse.de
+
+- Options to allow vendor locking for zypper dup (FATE#319128)
+- version 1.12.8
+
+-------------------------------------------------------------------
 Fri Jul  3 08:23:48 CEST 2015 - ma@suse.de
 
 - summary: show patches requiring reboot (FATE#317872)
