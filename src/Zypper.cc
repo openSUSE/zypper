@@ -2107,6 +2107,8 @@ void Zypper::processCommandOptions()
 
   case ZypperCommand::DIST_UPGRADE_e:
   {
+    shared_ptr<DupOptions> myOpts( new DupOptions() );
+    _commandOptions = myOpts;
     static struct option dupdate_options[] = {
       {"repo",                      required_argument, 0, 'r'},
       {"from",                      required_argument, 0,  0 },
@@ -2126,11 +2128,21 @@ void Zypper::processCommandOptions()
       {"download-in-advance",       no_argument,       0,  0 },
       {"download-in-heaps",         no_argument,       0,  0 },
       {"download-as-needed",        no_argument,       0,  0 },
+      // dup solver flags
+      {"allow-downgrade",           no_argument,       &myOpts->_dupAllowDowngrade, 1 },
+      {"no-allow-downgrade",        no_argument,       &myOpts->_dupAllowDowngrade, 0 },
+      {"allow-name-change",         no_argument,       &myOpts->_dupAllowNameChange, 1 },
+      {"no-allow-name-change",      no_argument,       &myOpts->_dupAllowNameChange, 0 },
+      {"allow-arch-change",         no_argument,       &myOpts->_dupAllowArchChange, 1 },
+      {"no-allow-arch-change",      no_argument,       &myOpts->_dupAllowArchChange, 0 },
+      {"allow-vendor-change",       no_argument,       &myOpts->_dupAllowVendorChange, 1 },
+      {"no-allow-vendor-change",    no_argument,       &myOpts->_dupAllowVendorChange, 0 },
       {"help", no_argument, 0, 'h'},
       {0, 0, 0, 0}
     };
     specific_options = dupdate_options;
-    _command_help = str::form(_(
+    _command_help = ( CommandHelpFormater()
+      << str::form(_(
       "dist-upgrade (dup) [options]\n"
       "\n"
       "Perform a distribution upgrade.\n"
@@ -2155,7 +2167,13 @@ void Zypper::processCommandOptions()
       "    --download              Set the download-install mode. Available modes:\n"
       "                            %s\n"
       "-d, --download-only         Only download the packages, do not install.\n"
-    ), "only, in-advance, in-heaps, as-needed");
+      ), "only, in-advance, in-heaps, as-needed") )
+      .optionSection(_("Expert options:") )
+      .option( "--[no-]allow-downgrade",	_("Whether to allow downgrading installed resolvables [yes].") )
+      .option( "--[no-]allow-name-change",	_("Whether to allow changing the names of installed resolvables [yes].") )
+      .option( "--[no-]allow-arch-change",	_("Whether to allow changing the architecture of installed resolvables [yes].") )
+      .option( "--[no-]allow-vendor-change",	_("Whether to allow changing the vendor of installed resolvables [yes].") )
+      ;
     break;
   }
 

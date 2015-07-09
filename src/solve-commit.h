@@ -17,6 +17,21 @@
 
 #include "Zypper.h"
 
+/** dup specific options */
+struct DupOptions : public Options
+{
+  DupOptions()
+    : Options( ZypperCommand::DIST_UPGRADE )
+    , _dupAllowDowngrade( -1 )
+    , _dupAllowNameChange( -1 )
+    , _dupAllowArchChange( -1 )
+    , _dupAllowVendorChange( -1 )
+  {}
+  int _dupAllowDowngrade;
+  int _dupAllowNameChange;
+  int _dupAllowArchChange;
+  int _dupAllowVendorChange;
+};
 
 /**
  * Run the solver.

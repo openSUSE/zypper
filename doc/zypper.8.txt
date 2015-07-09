@@ -612,6 +612,21 @@ Update Management Commands
 
 	This command also accepts the download-and-install mode options described in the *install* command description.:: {nop}
 
+	*Expert Options:* :: Don't use them unless you know you need them.
+
+	*--*[*no-*]*allow-downgrade*::
+		Whether to allow downgrading installed resolvables [yes].
+
+	*--*[*no-*]*allow-name-change*::
+		Whether to allow changing the names of installed resolvables [yes]. Setting this to *no* will not replace packages which have been renamed.
+
+	*--*[*no-*]*allow-arch-change*::
+		Whether to allow changing the architecture of installed resolvables [yes].
+
+	*--*[*no-*]*allow-vendor-change*::
+		Whether to allow changing the vendor of installed resolvables [yes]. Setting this to *no* might be useful if you do not want packages from foreign repos being dup'ed to the distributions version (or vice versa ).
+
+
 	Examples: :: {nop}
 
 		$ *zypper dup --from factory --from packman*;;
