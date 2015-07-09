@@ -44,6 +44,7 @@
 #include "SolverRequester.h"
 
 #include "Table.h"
+#include "utils/text.h"
 #include "utils/misc.h"
 #include "utils/messages.h"
 #include "utils/getopt.h"
@@ -123,6 +124,53 @@ namespace env {
     return ret;
   }
 } //namespace env
+///////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////
+namespace
+{
+  ///////////////////////////////////////////////////////////////////
+  /// \class CommandHelpFormater
+  /// \brief Class for command help formating
+  ///////////////////////////////////////////////////////////////////
+  struct CommandHelpFormater
+  {
+    CommandHelpFormater()
+    : _mww( _str, Zypper::instance()->out().defaultFormatWidth( 150 ) )
+    {}
+
+    /** Allow using the underlying steam directly. */
+    template<class _Tp>
+    CommandHelpFormater & operator<<( _Tp && val )
+    { _str << std::forward<_Tp>(val); return *this; }
+
+    /** Conversion to std::string */
+    operator std::string() const { return _str.str(); }
+
+    /** Option section title
+     * \code
+     * ""
+     * "  <text_r:>"
+     * ""
+     * \endcode
+     */
+    CommandHelpFormater & optionSection( boost::string_ref text_r )
+    { _mww.gotoNextPar(); _mww.writePar( text_r, 2 ); _mww.gotoNextPar(); return *this; }
+
+    /** Option definition
+     * \code
+     * "123456789012345678901234567890123456789
+     * "-o, --long-name             <text_r> starts on 29 maybe on next line"
+     * "                            if long-name is too long.
+     * \endcode
+     */
+    CommandHelpFormater & option( boost::string_ref option_r, boost::string_ref text_r )
+    { _mww.writeDefinition( option_r , text_r, (option_r.starts_with( "--" )?4:0), 28 ); return *this; }
+
+  private:
+    std::ostringstream   _str;
+    mbs::MbsWriteWrapped _mww;
+  };
+} //namespace
 ///////////////////////////////////////////////////////////////////
 
 
