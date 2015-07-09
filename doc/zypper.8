@@ -2,12 +2,12 @@
 .\"     Title: zypper
 .\"    Author: [see the "AUTHORS" section]
 .\" Generator: DocBook XSL Stylesheets v1.78.1 <http://docbook.sf.net/>
-.\"      Date: 06/30/2015
+.\"      Date: 07/09/2015
 .\"    Manual: ZYPPER
 .\"    Source: SUSE Linux
 .\"  Language: English
 .\"
-.TH "ZYPPER" "8" "06/30/2015" "SUSE Linux" "ZYPPER"
+.TH "ZYPPER" "8" "07/09/2015" "SUSE Linux" "ZYPPER"
 .\" -----------------------------------------------------------------
 .\" * Define some portability stuff
 .\" -----------------------------------------------------------------
@@ -1134,6 +1134,35 @@ Show the detailed installation summary\&.
 .PP
 This command also accepts the download\-and\-install mode options described in the \fBinstall\fR command description\&.
 .RS 4
+.RE
+.PP
+\fBExpert Options:\fR
+.RS 4
+Don\(cqt use them unless you know you need them\&.
+.RE
+.PP
+\fB\-\-\fR[\fBno\-\fR]\fBallow\-downgrade\fR
+.RS 4
+Whether to allow downgrading installed resolvables [yes]\&.
+.RE
+.PP
+\fB\-\-\fR[\fBno\-\fR]\fBallow\-name\-change\fR
+.RS 4
+Whether to allow changing the names of installed resolvables [yes]\&. Setting this to
+\fBno\fR
+will not replace packages which have been renamed\&.
+.RE
+.PP
+\fB\-\-\fR[\fBno\-\fR]\fBallow\-arch\-change\fR
+.RS 4
+Whether to allow changing the architecture of installed resolvables [yes]\&.
+.RE
+.PP
+\fB\-\-\fR[\fBno\-\fR]\fBallow\-vendor\-change\fR
+.RS 4
+Whether to allow changing the vendor of installed resolvables [yes]\&. Setting this to
+\fBno\fR
+might be useful if you do not want packages from foreign repos being dup\(cqed to the distributions version (or vice versa )\&.
 .RE
 .PP
 Examples:

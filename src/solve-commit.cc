@@ -27,12 +27,14 @@
 
 #include "solve-commit.h"
 
-using namespace std;
 using namespace zypp;
-using namespace boost;
-
 extern ZYpp::Ptr God;
 
+using std::list;
+using std::string;
+using std::ostringstream;
+
+using boost::format;
 
 //! @return true to retry solving now, false to cancel, indeterminate to continue
 static TriBool show_problem (Zypper & zypper,
@@ -311,6 +313,15 @@ static void set_solver_flags(Zypper & zypper)
   set_clean_deps(zypper);
   set_no_recommends(zypper);
   set_ignore_recommends_of_installed(zypper);
+
+  shared_ptr<DupOptions> dupOptions = zypper.commandOptionsAs<DupOptions>();
+  if ( dupOptions )
+  {
+    if ( dupOptions->_dupAllowDowngrade != -1 ) God->resolver()->dupSetAllowDowngrade( dupOptions->_dupAllowDowngrade );
+    if ( dupOptions->_dupAllowNameChange != -1 ) God->resolver()->dupSetAllowNameChange( dupOptions->_dupAllowNameChange );
+    if ( dupOptions->_dupAllowArchChange != -1 ) God->resolver()->dupSetAllowArchChange( dupOptions->_dupAllowArchChange );
+    if ( dupOptions->_dupAllowVendorChange != -1 ) God->resolver()->dupSetAllowVendorChange( dupOptions->_dupAllowVendorChange );
+  }
 }
 
 
