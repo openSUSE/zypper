@@ -1,4 +1,10 @@
 -------------------------------------------------------------------
+Thu Jul  9 16:43:12 CEST 2015 - ma@suse.de
+
+- Resolver allow tuning DUP mode solver flags (FATE#319128)
+- version 15.9.0 (5)
+
+-------------------------------------------------------------------
 Fri Jul  3 08:23:04 CEST 2015 - ma@suse.de
 
 - Flags<Enum>: add stringify
