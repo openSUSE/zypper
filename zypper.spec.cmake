@@ -22,7 +22,7 @@ BuildRequires:  boost-devel >= 1.33.1
 BuildRequires:  cmake >= 2.4.6
 BuildRequires:  gcc-c++ >= 4.7
 BuildRequires:  gettext-devel >= 0.15
-BuildRequires:  libzypp-devel >= 15.7.0
+BuildRequires:  libzypp-devel >= 15.9.0
 BuildRequires:  readline-devel >= 5.1
 Requires:       procps
 %if 0%{?suse_version}
