@@ -19,6 +19,7 @@
 #include <zypp/ZYppCallbacks.h>
 #include <zypp/base/LogTools.h>
 
+#include "utils/colors.h"
 #include "utils/prompt.h"
 #include "utils/richtext.h"
 #include "output/prompt.h"
@@ -692,9 +693,19 @@ public:
   /** \overload test for TPE_XML */
   bool typeXML() const { return type( TYPE_XML ); }
 
-  /** Terminal width or 80 if unlimited. */
-  unsigned defaultFormatWidth() const
-  { unsigned ret = termwidth(); if ( ret == out::termwidthUnlimited ) ret = 80U; return ret; }
+  /** Terminal width or 150 if unlimited.
+   * If a \a desired_r value is given, return the
+   * closest width that fits the terminal.
+   */
+  unsigned defaultFormatWidth( unsigned desired_r = 0 ) const
+  {
+    unsigned ret = termwidth();
+    if ( ret == out::termwidthUnlimited )
+      ret = desired_r ? desired_r : 150U;
+    else if ( desired_r < ret )
+      ret = desired_r;
+    return ret;
+  }
 
 protected:
   /** Width for formated output [0==unlimited]. */
