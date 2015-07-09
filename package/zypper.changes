@@ -1,4 +1,11 @@
 -------------------------------------------------------------------
+Thu Jul  9 16:38:49 CEST 2015 - ma@suse.de
+
+- Options to allow vendor locking for zypper dup (FATE#319128)
+- fix handling of wchar errors
+- version 1.11.34
+
+-------------------------------------------------------------------
 Thu Jun 18 19:02:32 CEST 2015 - ma@suse.de
 
 - Add git-like subcommand support for zypper.
