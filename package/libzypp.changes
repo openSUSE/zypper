@@ -1,4 +1,9 @@
 -------------------------------------------------------------------
+Sun Jul 12 01:13:20 CEST 2015 - ma@suse.de
+
+- Update zypp-po.tar.bz2
+
+-------------------------------------------------------------------
 Thu Jul  9 16:43:12 CEST 2015 - ma@suse.de
 
 - Resolver allow tuning DUP mode solver flags (FATE#319128)
