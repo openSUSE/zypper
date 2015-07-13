@@ -137,6 +137,13 @@ void Summary::readPool(const zypp::ResPool & pool)
     }
   }
 
+  Zypper& zypper = *Zypper::instance();
+  for_(it, zypper.runtimeData().srcpkgs_to_install.begin(), zypper.runtimeData().srcpkgs_to_install.end())
+  {
+    _toinstall[ResKind::srcpackage].insert(ResPair(nullptr, *it));
+    to_be_installed[ResKind::srcpackage].insert(*it);
+  }
+
   // total packages to download & install
   // (packages & srcpackages only - patches, patterns, and products are virtual)
   _inst_pkg_total =
