@@ -48,9 +48,6 @@
 #include "zypp/target/RpmPostTransCollector.h"
 
 #include "zypp/parser/ProductFileReader.h"
-
-#include "zypp/solver/detail/Testcase.h"
-
 #include "zypp/repo/SrcPackageProvider.h"
 
 #include "zypp/sat/Pool.h"
