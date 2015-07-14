@@ -21,11 +21,7 @@
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA
  * 02111-1307, USA.
  */
-
-#include <sstream>
-
-#include "zypp/base/String.h"
-#include "zypp/base/Gettext.h"
+#define ZYPP_USE_RESOLVER_INTERNALS
 
 #include "zypp/solver/detail/ProblemSolutionCombi.h"
 
@@ -33,90 +29,28 @@ using namespace std;
 
 /////////////////////////////////////////////////////////////////////////
 namespace zypp
-{ ///////////////////////////////////////////////////////////////////////
+{
   ///////////////////////////////////////////////////////////////////////
   namespace solver
-  { /////////////////////////////////////////////////////////////////////
+  {
     /////////////////////////////////////////////////////////////////////
     namespace detail
-    { ///////////////////////////////////////////////////////////////////
+    {
+      ProblemSolutionCombi::ProblemSolutionCombi()
+      {}
 
-IMPL_PTR_TYPE(ProblemSolutionCombi);
+      void ProblemSolutionCombi::addSingleAction( Capability capability, TransactionKind action)
+      { addAction( new TransactionSolutionAction( capability, action ) ); }
 
-//---------------------------------------------------------------------------
+      void ProblemSolutionCombi::addSingleAction( PoolItem item, TransactionKind action )
+      { addAction( new TransactionSolutionAction( item, action ) ); }
 
-ProblemSolutionCombi::ProblemSolutionCombi( ResolverProblem_Ptr parent)
-    : ProblemSolution (parent, "", "")
-      , actNumber(0)
-{
-    _description = "";
-    _details = "";
-}
+      void ProblemSolutionCombi::addSingleAction( SolverQueueItem_Ptr item, TransactionKind action )
+      { addAction( new TransactionSolutionAction( item, action ) ); }
 
-void ProblemSolutionCombi::addSingleAction( Capability capability, const TransactionKind action)
-{
-    addAction (new TransactionSolutionAction(capability, action));
-    actNumber++;
-}
-
-void ProblemSolutionCombi::addSingleAction( PoolItem item, const TransactionKind action)
-{
-    addAction (new TransactionSolutionAction(item, action));
-    actNumber++;
-}
-
-void ProblemSolutionCombi::addSingleAction( SolverQueueItem_Ptr item, const TransactionKind action)
-{
-    addAction (new TransactionSolutionAction(item, action));
-    actNumber++;
-}
-
-void ProblemSolutionCombi::addDescription( const std::string description)
-{
-    if ( _description.size() == 0
-	 && _details.size() == 0) {
-	 // first entry
-	_description = description;
-    } else {
-	if ( _description.size() > 0
-	     && _details.size() == 0) {
-	    // second entry
-	    _details = _description;
-	    _description = _("Following actions will be done:");
-	}
-	// all other
-	_details += "\n";
-	_details += description;
-    }
-}
-
-void ProblemSolutionCombi::addFrontDescription( const std::string & description )
-{
-    if ( _description.size() == 0
-	 && _details.size() == 0) {
-	 // first entry
-	_description = description;
-    } else {
-	if ( _description.size() > 0
-	     && _details.size() == 0) {
-	    // second entry
-	    _details = _description;
-	    _description = _("Following actions will be done:");
-	}
-	// all other
-        std::string tmp( _details );
-	_details = description;
-	_details += "\n";
-        _details += tmp;
-    }
-}
-
-      ///////////////////////////////////////////////////////////////////
-    };// namespace detail
+    } // namespace detail
     /////////////////////////////////////////////////////////////////////
-    /////////////////////////////////////////////////////////////////////
-  };// namespace solver
+  } // namespace solver
   ///////////////////////////////////////////////////////////////////////
-  ///////////////////////////////////////////////////////////////////////
-};// namespace zypp
+} // namespace zypp
 /////////////////////////////////////////////////////////////////////////

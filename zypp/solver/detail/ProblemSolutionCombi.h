@@ -21,78 +21,77 @@
 
 #ifndef ZYPP_SOLVER_DETAIL_PROBLEMSOLUTIONINSTALL_H
 #define ZYPP_SOLVER_DETAIL_PROBLEMSOLUTIONINSTALL_H
+#ifndef ZYPP_USE_RESOLVER_INTERNALS
+#error Do not directly include this file!
+#else
 
 #include <string>
+
 #include "zypp/ProblemSolution.h"
-#include "zypp/solver/detail/Types.h"
-#include "zypp/solver/detail/SolverQueueItem.h"
+#include "zypp/solver/detail/SolutionAction.h" // TransactionKind
 
 /////////////////////////////////////////////////////////////////////////
 namespace zypp
-{ ///////////////////////////////////////////////////////////////////////
+{
   ///////////////////////////////////////////////////////////////////////
   namespace solver
-  { /////////////////////////////////////////////////////////////////////
+  {
     /////////////////////////////////////////////////////////////////////
     namespace detail
-    { ///////////////////////////////////////////////////////////////////
+    {
+      /////////////////////////////////////////////////////////////////////////
+      /// \class ProblemSolutionCombi
+      /// \brief Class representing one possible solution to one problem found during resolving.
+      ///
+      /// This problem solution is a combination of different actions,
+      /// e.G. install, delete, keep different resolvables.
+      /////////////////////////////////////////////////////////////////////////
+      class ProblemSolutionCombi : public ProblemSolution
+      {
+      public:
+	/** Constructor. */
+	ProblemSolutionCombi();
 
 	/**
-	 * Class representing one possible solution to one problem found during resolving
-	 * This problem solution is a combination of different actions.
-	 * e.G. install, delete, keep different resolvables.
-	 *
-	 **/
-	class ProblemSolutionCombi : public ProblemSolution
-	{
-        protected:
-	    int actNumber; // number of actions
-	public:
+	 * Add a single action of an item
+	 */
+	void addSingleAction( PoolItem item, TransactionKind action );
 
-	    /**
-	     * Constructor.
-	     **/
-	    ProblemSolutionCombi( ResolverProblem_Ptr parent );
-	    /**
-	     * Add a single action of an item
-	     */
-	    void addSingleAction( PoolItem item, const TransactionKind action);
+	/**
+	 * Add a single action of a capability
+	 */
+	void addSingleAction( Capability capability, TransactionKind action );
 
-	    /**
-	     * Add a single action of a capability
-	     */
-	    void addSingleAction( Capability capability, const TransactionKind action);
+	/**
+	 * Add a single action of a SolverQueueItem
+	 */
+	void addSingleAction( SolverQueueItem_Ptr item, TransactionKind action );
 
-	    /**
-	     * Add a single action of a SolverQueueItem
-	     */
-	    void addSingleAction( SolverQueueItem_Ptr item, const TransactionKind action);
+	/**
+	 * returns the number of actions
+	 */
+	size_t actionCount()
+	{ return actions().size(); }
 
-	    /**
-	     * returns the number of actions
-	     */
-	    int actionCount() { return actNumber;}
+	/**
+	 * Set description text (append)
+	 */
+	void addDescription( std::string description )
+	{ pushDescriptionDetail( std::move(description) ); }
 
-	    /**
-	     * Set description text (append)
-	     */
-	    void addDescription( const std::string description);
+	/**
+	 * Set description text (prepend)
+	 */
+	void addFrontDescription( std::string description )
+	{ pushDescriptionDetail( std::move(description), /*front*/true ); }
+      };
 
-	    /**
-	     * Set description text (prepend)
-	     */
-	    void addFrontDescription( const std::string & description );
-	};
-
-      ///////////////////////////////////////////////////////////////////
-    };// namespace detail
+    } // namespace detail
     /////////////////////////////////////////////////////////////////////
-    /////////////////////////////////////////////////////////////////////
-  };// namespace solver
+  } // namespace solver
   ///////////////////////////////////////////////////////////////////////
-  ///////////////////////////////////////////////////////////////////////
-};// namespace zypp
+} // namespace zypp
 /////////////////////////////////////////////////////////////////////////
-
+#endif // ZYPP_USE_RESOLVER_INTERNALS
 #endif // ZYPP_SOLVER_DETAIL_PROBLEMSOLUTIONAINSTALL_H
 

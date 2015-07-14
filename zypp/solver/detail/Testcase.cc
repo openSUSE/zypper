@@ -14,6 +14,8 @@
 #include <sstream>
 #include <streambuf>
 
+#define ZYPP_USE_RESOLVER_INTERNALS
+
 #include "zypp/solver/detail/Testcase.h"
 #include "zypp/base/Logger.h"
 #include "zypp/base/LogControl.h"
@@ -32,6 +34,7 @@
 #include "zypp/target/modalias/Modalias.h"
 
 #include "zypp/sat/detail/PoolImpl.h"
+#include "zypp/solver/detail/Resolver.h"
 #include "zypp/solver/detail/SystemCheck.h"
 
 /////////////////////////////////////////////////////////////////////////

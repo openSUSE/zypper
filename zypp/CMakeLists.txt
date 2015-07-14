@@ -508,6 +508,7 @@ SET( zypp_solver_detail_HEADERS
   solver/detail/SolverQueueItemUpdate.h
   solver/detail/SolverQueueItemInstallOneOf.h
   solver/detail/SolverQueueItemLock.h
+  solver/detail/ItemCapKind.h
   solver/detail/SATResolver.h
   solver/detail/SystemCheck.h
 )

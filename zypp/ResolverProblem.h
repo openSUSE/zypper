@@ -12,109 +12,87 @@
 #include <list>
 #include <string>
 
-#include "zypp/base/ReferenceCounted.h"
-#include "zypp/base/PtrTypes.h"
+#include "zypp/ProblemTypes.h"
 #include "zypp/ProblemSolution.h"
 
 /////////////////////////////////////////////////////////////////////////
 namespace zypp
-{ ///////////////////////////////////////////////////////////////////////
+{
+  ///////////////////////////////////////////////////////////////////////
+  /// \class ResolverProblem
+  /// \brief Describe a solver problem and offer solutions.
+  ///////////////////////////////////////////////////////////////////////
+  class ResolverProblem : public base::ReferenceCounted
+  {
+  public:
+    /** Constructor. */
+    ResolverProblem();
+    /** Constructor. */
+    ResolverProblem( std::string description );
+    /** Constructor. */
+    ResolverProblem( std::string description, std::string details );
+
+    /** Destructor. */
+    ~ResolverProblem();
 
 
-    class ResolverProblem : public base::ReferenceCounted
-    {
-    private:
+    /**
+     * Return a one-line description of the problem.
+     **/
+    const std::string & description() const;
 
-	/**
-	 * Clear all data.
-	 * In particular, delete all members of _solutions.
-	 **/
-	void clear();
+    /**
+     * Return a (possibly muti-line) detailed description of the problem
+     * or an empty string if there are no useful details.
+     **/
+    const std::string & details() const;
+
+    /**
+     * Return the possible solutions to this problem.
+     * All problems should have at least 2-3 (mutually exclusive) solutions:
+     *
+     *	  -  Undo: Do not perform the offending transaction
+     *	 (do not install the package that had unsatisfied requirements,
+     *	  do not remove	 the package that would break other packages' requirements)
+     *
+     *	  - Remove referrers: Remove all packages that would break because
+     *	they depend on the package that is requested to be removed
+     *
+     *	  - Ignore: Inject artificial "provides" for a missing requirement
+     *	(pretend that requirement is satisfied)
+     **/
+    const ProblemSolutionList & solutions() const;
 
 
-	//
-	// Data members
-	//
+    /**
+     * Set description of the problem.
+     **/
+    void setDescription( std::string description );
 
-	Resolver_constPtr	_resolver;
-	std::string		_description;
-	std::string		_details;
-	ProblemSolutionList	_solutions;
+    /**
+     * Set detail description of the problem.
+     **/
+    void setDetails( std::string details );
 
-    public:
+    /**
+     * Add a solution to this problem. This class takes over ownership of
+     * the problem and will delete it when neccessary.
+     **/
+    void addSolution( ProblemSolution_Ptr solution, bool inFront = false );
 
-	/**
-	 * Constructor.
-	 **/
-	ResolverProblem( const std::string & description, const std::string & details );
+  private:
+    class Impl;
+    RWCOW_pointer<Impl> _pimpl;
+  };
 
-	/**
-	 * Destructor.
-	 **/
-	~ResolverProblem();
+  /** \relates ResolverProblem Stream output */
+  std::ostream & operator<<( std::ostream &, const ResolverProblem & obj );
 
-	// ---------------------------------- I/O
+  /** \relates ResolverProblem Stream output */
+  std::ostream & operator<<( std::ostream &, const ResolverProblemList & obj );
 
-	friend std::ostream& operator<<(std::ostream&, const ResolverProblem & problem);
 
-	// ---------------------------------- accessors
-
-	/**
-	 * Return a one-line description of the problem.
-	 **/
-	std::string description() const { return _description; }
-
-	/**
-	 * Return a (possibly muti-line) detailed description of the problem
-	 * or an empty string if there are no useful details.
-	 **/
-	std::string details() const { return _details; }
-
-	/**
-	 * Set description of the problem.
-	 **/
-	void setDescription(const std::string & description)
-	    { _description=description; }
-
-	/**
-	 * Set detail description of the problem.
-	 **/
-	void setDetails(const std::string & detail)
-	    { _details=detail; }
-
-	/**
-	 * Return the possible solutions to this problem.
-	 * All problems should have at least 2-3 (mutually exclusive) solutions:
-	 *
-	 *	  -  Undo: Do not perform the offending transaction
-	 *	 (do not install the package that had unsatisfied requirements,
-	 *	  do not remove	 the package that would break other packages' requirements)
-	 *
-	 *	  - Remove referrers: Remove all packages that would break because
-	 *	they depend on the package that is requested to be removed
-	 *
-	 *	  - Ignore: Inject artificial "provides" for a missing requirement
-	 *	(pretend that requirement is satisfied)
-	 **/
-	ProblemSolutionList solutions() const;
-
-	/**
-	 * Return the parent dependency resolver.
-	 **/
-	Resolver_constPtr resolver() const { return _resolver; }
-
-	// ---------------------------------- methods
-
-	/**
-	 * Add a solution to this problem. This class takes over ownership of
-	 * the problem and will delete it when neccessary.
-	 **/
-	void addSolution( ProblemSolution_Ptr solution, bool inFront = false );
-
-    };
-    ///////////////////////////////////////////////////////////////////////
-};// namespace zypp
+} // namespace zypp
 /////////////////////////////////////////////////////////////////////////
-
 #endif // ZYPP_RESOLVERPROBLEM_H
 

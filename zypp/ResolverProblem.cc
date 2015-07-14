@@ -21,105 +21,103 @@
  * 02111-1307, USA.
  */
 
+#include "zypp/base/LogTools.h"
+
 #include "zypp/ResolverProblem.h"
 #include "zypp/ProblemSolution.h"
 
-using namespace std;
+using std::endl;
 
 /////////////////////////////////////////////////////////////////////////
 namespace zypp
-{ ///////////////////////////////////////////////////////////////////////
-
-IMPL_PTR_TYPE(ResolverProblem);
-
-//---------------------------------------------------------------------------
-
-ostream&
-operator<<( ostream& os, const ResolverProblem & problem)
 {
+  IMPL_PTR_TYPE(ResolverProblem);
+
+  ///////////////////////////////////////////////////////////////////
+  /// \class ResolverProblem::Impl
+  /// \brief ResolverProblem implementation.
+  ///////////////////////////////////////////////////////////////////
+  struct ResolverProblem::Impl
+  {
+    Impl()
+    {}
+
+    Impl( std::string && description )
+    : _description( std::move(description) )
+    {}
+
+    Impl( std::string && description, std::string && details )
+    : _description( std::move(description) )
+    , _details( std::move(details) )
+    {}
+
+    std::string		_description;
+    std::string		_details;
+    ProblemSolutionList	_solutions;
+
+  private:
+    friend Impl * rwcowClone<Impl>( const Impl * rhs );
+    /** clone for RWCOW_pointer */
+    Impl * clone() const
+    { return new Impl( *this ); }
+  };
+  ///////////////////////////////////////////////////////////////////
+
+  ResolverProblem::ResolverProblem()
+  : _pimpl( new Impl() )
+  {}
+
+  ResolverProblem::ResolverProblem( std::string description )
+  : _pimpl( new Impl( std::move(description) ) )
+  {}
+
+  ResolverProblem::ResolverProblem( std::string description, std::string details )
+  : _pimpl( new Impl( std::move(description), std::move(details) ) )
+  {}
+
+  ResolverProblem::~ResolverProblem()
+  {}
+
+
+  const std::string & ResolverProblem::description() const
+  { return _pimpl->_description; }
+
+  const std::string & ResolverProblem::details() const
+  { return _pimpl->_details; }
+
+  const ProblemSolutionList & ResolverProblem::solutions() const
+  { return _pimpl->_solutions; }
+
+
+  void ResolverProblem::setDescription( std::string description )
+  { _pimpl->_description = std::move(description); }
+
+  void ResolverProblem::setDetails( std::string details )
+  { _pimpl->_details = std::move(details); }
+
+  void ResolverProblem::addSolution( ProblemSolution_Ptr solution, bool inFront )
+  {
+    if (inFront)
+    { _pimpl->_solutions.push_front( solution ); }
+    else
+    { _pimpl->_solutions.push_back( solution ); }
+  }
+
+
+  std::ostream & operator<<( std::ostream & os, const ResolverProblem & obj )
+  {
     os << "Problem:" << endl;
     os << "==============================" << endl;
-    os << problem._description << endl;
-    os << problem._details << endl;
+    os << obj.description() << endl;
+    os << obj.details() << endl;
     os << "------------------------------" << endl;
-    os << problem._solutions;
+    os << obj.solutions();
     os << "==============================" << endl;
     return os;
-}
+  }
 
+  std::ostream & operator<<( std::ostream & os, const ResolverProblemList & obj )
+  { return dumpRange( os, obj.begin(), obj.end(), "", "", ", ", "", "" ); }
 
-ostream&
-operator<<( ostream& os, const ResolverProblemList & problemlist)
-{
-    for (ResolverProblemList::const_iterator iter = problemlist.begin(); iter != problemlist.end(); ++iter) {
-	if (iter != problemlist.begin())
-	    os << ", ";
-	os << (*iter);
-    }
-    return os;
-}
-
-//---------------------------------------------------------------------------
-
-/**
- * Constructor.
- **/
-ResolverProblem::ResolverProblem( const string & description, const string & details )
-    : _description (description)
-    , _details (details)
-{
-}
-
-/**
- * Destructor.
- **/
-ResolverProblem::~ResolverProblem()
-{
-}
-
-/**
- * Return the possible solutions to this problem.
- * All problems should have at least 2-3 (mutually exclusive) solutions:
- *
- *	  -  Undo: Do not perform the offending transaction
- *	 (do not install the package that had unsatisfied requirements,
- *	  do not remove	 the package that would break other packages' requirements)
- *
- *	  - Remove referrers: Remove all packages that would break because
- *	they depend on the package that is requested to be removed
- *
- *	  - Ignore: Inject artificial "provides" for a missing requirement
- *	(pretend that requirement is satisfied)
- **/
-
-ProblemSolutionList
-ResolverProblem::solutions() const
-{
-    return _solutions;
-}
-
-/**
- * Add a solution to this problem. This class takes over ownership of
- * the problem and will delete it when neccessary.
- **/
-
-void
-ResolverProblem::addSolution( ProblemSolution_Ptr solution,
-			      bool inFront )
-{
-    if (inFront) {
-	_solutions.push_front (solution);
-    } else {
-	_solutions.push_back (solution);
-    }
-}
-
-void
-ResolverProblem::clear()
-{
-    _solutions.clear();
-}
-
-  ///////////////////////////////////////////////////////////////////////
-};// namespace zypp
+} // namespace zypp
 /////////////////////////////////////////////////////////////////////////

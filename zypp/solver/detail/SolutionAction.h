@@ -8,6 +8,9 @@
 
 #ifndef ZYPP_SOLVER_DETAIL_SOLUTIONACTION_H
 #define ZYPP_SOLVER_DETAIL_SOLUTIONACTION_H
+#ifndef ZYPP_USE_RESOLVER_INTERNALS
+#error Do not directly include this file!
+#else
 
 #include <list>
 #include <string>
@@ -15,12 +18,7 @@
 #include "zypp/base/ReferenceCounted.h"
 #include "zypp/base/PtrTypes.h"
 
-#include "zypp/Dep.h"
-#include "zypp/Capability.h"
-
-#include "zypp/solver/detail/Types.h"
-#include "zypp/solver/detail/Resolver.h"
-#include "zypp/solver/detail/SolverQueueItem.h"
+#include "zypp/PoolItem.h"
 
 /////////////////////////////////////////////////////////////////////////
 namespace zypp
@@ -32,12 +30,20 @@ namespace zypp
     namespace detail
     { ///////////////////////////////////////////////////////////////////
 
+      class Resolver;
+
+      DEFINE_PTR_TYPE(SolverQueueItem);
+
+      DEFINE_PTR_TYPE(SolutionAction);
+      typedef std::list<SolutionAction_Ptr> SolutionActionList;
+
 	/**
 	 * Abstract base class for one action of a problem solution.
 	 **/
 	class SolutionAction : public base::ReferenceCounted
 	{
 	protected:
+	    typedef Resolver ResolverInternal;
 	    SolutionAction ();
 	public:
 	    virtual ~SolutionAction();
@@ -47,14 +53,13 @@ namespace zypp
 	    friend std::ostream& operator<<(std::ostream & str, const SolutionAction & action)
 		{ return action.dumpOn (str); }
 	    friend std::ostream& operator<<(std::ostream & str, const SolutionActionList & actionlist);
-	    friend std::ostream& operator<<(std::ostream & str, const CSolutionActionList & actionlist);
 
 	    // ---------------------------------- methods
 	    /**
 	     * Execute this action.
 	     * Returns 'true' on success, 'false' on error.
 	     **/
-	    virtual bool execute (Resolver & resolver) const = 0;
+	    virtual bool execute (ResolverInternal & resolver) const = 0;
 	};
 
 
@@ -112,7 +117,7 @@ namespace zypp
 	  TransactionKind action() const { return _action; }
 
 	  // ---------------------------------- methods
-	    virtual bool execute(Resolver & resolver) const;
+	    virtual bool execute(ResolverInternal & resolver) const;
 
 	protected:
 
@@ -160,7 +165,7 @@ namespace zypp
 	    const PoolItem item() const { return _item; }
 
 	  // ---------------------------------- methods
-	    virtual bool execute(Resolver & resolver) const;
+	    virtual bool execute(ResolverInternal & resolver) const;
 
 	protected:
 	    PoolItem _item;
@@ -177,6 +182,6 @@ namespace zypp
   ///////////////////////////////////////////////////////////////////////
 };// namespace zypp
 /////////////////////////////////////////////////////////////////////////
-
+#endif // ZYPP_USE_RESOLVER_INTERNALS
 #endif // ZYPP_SOLVER_DETAIL_SOLUTIONACTION_H
 

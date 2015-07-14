@@ -19,9 +19,15 @@
 #include "zypp/base/PtrTypes.h"
 
 #include "zypp/ResPool.h"
-#include "zypp/solver/detail/Resolver.h"
-#include "zypp/solver/detail/SolverQueueItem.h"
+#include "zypp/PoolItem.h"
+#include "zypp/Capabilities.h"
+#include "zypp/Capability.h"
+
+#include "zypp/solver/detail/Types.h"
+
 #include "zypp/ProblemTypes.h"
+#include "zypp/ResolverProblem.h"
+#include "zypp/ProblemSolution.h"
 
 ///////////////////////////////////////////////////////////////////
 namespace zypp
@@ -407,9 +413,7 @@ namespace zypp
 
   private:
     friend std::ostream & operator<<( std::ostream & str, const Resolver & obj );
-
-    typedef solver::detail::Resolver Impl;
-    zypp::RW_pointer<Impl,rw_pointer::Intrusive<Impl> > _pimpl;
+    zypp::RW_pointer<solver::detail::ResolverInternal> _pimpl;
   };
   ///////////////////////////////////////////////////////////////////
 

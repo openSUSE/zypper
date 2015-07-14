@@ -29,6 +29,8 @@ extern "C"
 #include <solv/queue.h>
 }
 
+#define ZYPP_USE_RESOLVER_INTERNALS
+
 #include "zypp/base/String.h"
 #include "zypp/Product.h"
 #include "zypp/Capability.h"
@@ -44,14 +46,19 @@ extern "C"
 #include "zypp/sat/Pool.h"
 #include "zypp/sat/WhatProvides.h"
 #include "zypp/sat/WhatObsoletes.h"
+#include "zypp/solver/detail/Resolver.h"
 #include "zypp/solver/detail/SATResolver.h"
 #include "zypp/solver/detail/ProblemSolutionCombi.h"
 #include "zypp/solver/detail/ProblemSolutionIgnore.h"
 #include "zypp/solver/detail/SolverQueueItemInstall.h"
 #include "zypp/solver/detail/SolverQueueItemDelete.h"
 #include "zypp/solver/detail/SystemCheck.h"
+#include "zypp/solver/detail/SolutionAction.h"
+#include "zypp/solver/detail/SolverQueueItem.h"
 #include "zypp/sat/Transaction.h"
 #include "zypp/sat/Queue.h"
+
+#define _XDEBUG(x) do { if (base::logger::isExcessive()) XXX << x << std::endl;} while (0)
 
 /////////////////////////////////////////////////////////////////////////
 namespace zypp
@@ -175,10 +182,6 @@ SATResolver::SATResolver (const ResPool & pool, Pool *SATPool)
     , _allowarchchange(false)
     , _allowvendorchange(ZConfig::instance().solver_allowVendorChange())
     , _allowuninstall(false)
-    , _dup_allowdowngrade( true )
-    , _dup_allownamechange( true )
-    , _dup_allowarchchange( true )
-    , _dup_allowvendorchange( true )
     , _updatesystem(false)
     , _noupdateprovide(false)
     , _dosplitprovides(true)
@@ -186,6 +189,10 @@ SATResolver::SATResolver (const ResPool & pool, Pool *SATPool)
     , _ignorealreadyrecommended(true)
     , _distupgrade(false)
     , _distupgrade_removeunsupported(false)
+    , _dup_allowdowngrade( true )
+    , _dup_allownamechange( true )
+    , _dup_allowarchchange( true )
+    , _dup_allowvendorchange( true )
     , _solveSrcPackages(false)
     , _cleandepsOnRemove(ZConfig::instance().solver_cleandepsOnRemove())
 {
@@ -1195,7 +1202,7 @@ SATResolver::problems ()
 	    solution = 0;
 	    while ((solution = solver_next_solution(_solv, problem, solution)) != 0) {
 		element = 0;
-		ProblemSolutionCombi *problemSolution = new ProblemSolutionCombi(resolverProblem);
+		ProblemSolutionCombi *problemSolution = new ProblemSolutionCombi;
 		while ((element = solver_next_solutionelement(_solv, problem, solution, element, &p, &rp)) != 0) {
 		    if (p == SOLVER_SOLUTION_JOB) {
 			/* job, rp is index into job queue */
@@ -1437,7 +1444,7 @@ SATResolver::problems ()
 	    if (ignoreId > 0) {
 		// There is a possibility to ignore this error by setting weak dependencies
 		PoolItem item = _pool.find (sat::Solvable(ignoreId));
-		ProblemSolutionIgnore *problemSolution = new ProblemSolutionIgnore(resolverProblem, item);
+		ProblemSolutionIgnore *problemSolution = new ProblemSolutionIgnore(item);
 		resolverProblem->addSolution (problemSolution,
 					      false); // Solutions will be shown at the end
 		MIL << "ignore some dependencies of " << item << endl;
@@ -1451,17 +1458,8 @@ SATResolver::problems ()
     return resolverProblems;
 }
 
-void
-SATResolver::applySolutions (const ProblemSolutionList & solutions)
-{
-    for (ProblemSolutionList::const_iterator iter = solutions.begin();
-	 iter != solutions.end(); ++iter) {
-	ProblemSolution_Ptr solution = *iter;
-	Resolver dummyResolver(_pool);
-	if (!solution->apply (dummyResolver))
-	    break;
-    }
-}
+void SATResolver::applySolutions( const ProblemSolutionList & solutions )
+{ Resolver( _pool ).applySolutions( solutions ); }
 
 void SATResolver::setLocks()
 {

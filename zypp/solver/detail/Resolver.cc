@@ -20,9 +20,14 @@
  */
 #include <boost/static_assert.hpp>
 
+#define ZYPP_USE_RESOLVER_INTERNALS
+
 #include "zypp/solver/detail/Resolver.h"
 #include "zypp/solver/detail/Testcase.h"
 #include "zypp/solver/detail/SATResolver.h"
+#include "zypp/solver/detail/ItemCapKind.h"
+#include "zypp/solver/detail/SolutionAction.h"
+#include "zypp/solver/detail/SolverQueueItem.h"
 
 #include "zypp/Capabilities.h"
 #include "zypp/ZConfig.h"
@@ -39,6 +44,9 @@
 
 #define MAXSOLVERRUNS 5
 
+using std::endl;
+using std::make_pair;
+
 /////////////////////////////////////////////////////////////////////////
 namespace zypp
 { ///////////////////////////////////////////////////////////////////////
@@ -49,10 +57,7 @@ namespace zypp
     namespace detail
     { ///////////////////////////////////////////////////////////////////
 
-using namespace std;
-
-IMPL_PTR_TYPE(Resolver);
-
+      //using namespace std;
 
 //---------------------------------------------------------------------------
 
@@ -254,7 +259,7 @@ bool Resolver::verifySystem()
 {
     UndoTransact resetting (ResStatus::APPL_HIGH);
 
-    _DEBUG ("Resolver::verifySystem() ");
+    DBG << "Resolver::verifySystem()" << endl;
 
     _verifying = true;
 
@@ -391,13 +396,30 @@ ResolverProblemList Resolver::problems() const
 
 void Resolver::applySolutions( const ProblemSolutionList & solutions )
 {
-  for_( iter, solutions.begin(), solutions.end() )
+  for ( ProblemSolution_Ptr solution : solutions )
   {
-    ProblemSolution_Ptr solution = *iter;
-    if ( !solution->apply( *this ) )
+    if ( ! applySolution( *solution ) )
       break;
   }
 }
+
+bool Resolver::applySolution( const ProblemSolution & solution )
+{
+  bool ret = true;
+  DBG << "apply solution " << solution << endl;
+  for ( SolutionAction_Ptr action : solution.actions() )
+  {
+    if ( ! action->execute( *this ) )
+    {
+      WAR << "apply solution action failed: " << action << endl;
+      ret = false;
+      break;
+    }
+  }
+  return ret;
+}
+
+//----------------------------------------------------------------------------
 
 void Resolver::collectResolverInfo()
 {
@@ -426,7 +448,7 @@ void Resolver::collectResolverInfo()
 			   && !found) {
 			alreadySetForInstallation = true;
 			ItemCapKind capKind = pos->second;
-			if (capKind.item == *instIter)  found = true;
+			if (capKind.item() == *instIter)  found = true;
 			pos++;
 		    }
 
@@ -471,7 +493,7 @@ void Resolver::collectResolverInfo()
 			       && !found) {
 			    alreadySetForInstallation = true;
 			    ItemCapKind capKind = pos->second;
-			    if (capKind.item == *instIter)  found = true;
+			    if (capKind.item() == *instIter)  found = true;
 			    pos++;
 			}
 
@@ -514,7 +536,7 @@ void Resolver::collectResolverInfo()
 			       && !found) {
 			    alreadySetForInstallation = true;
 			    ItemCapKind capKind = pos->second;
-			    if (capKind.item == provider)  found = true;
+			    if (capKind.item() == provider)  found = true;
 			    pos++;
 			}
 

@@ -21,49 +21,45 @@
 
 #ifndef ZYPP_SOLVER_DETAIL_PROBLEMSOLUTIONIGNORE_H
 #define ZYPP_SOLVER_DETAIL_PROBLEMSOLUTIONIGNORE_H
+#ifndef ZYPP_USE_RESOLVER_INTERNALS
+#error Do not directly include this file!
+#else
 
-#include "zypp/solver/detail/Types.h"
+#include <list>
+
 #include "zypp/ProblemSolution.h"
+#include "zypp/PoolItem.h"
 
 /////////////////////////////////////////////////////////////////////////
 namespace zypp
-{ ///////////////////////////////////////////////////////////////////////
+{
   ///////////////////////////////////////////////////////////////////////
   namespace solver
-  { /////////////////////////////////////////////////////////////////////
+  {
     /////////////////////////////////////////////////////////////////////
     namespace detail
-    { ///////////////////////////////////////////////////////////////////
+    {
+      /////////////////////////////////////////////////////////////////////////
+      /// \class ProblemSolutionIgnore
+      /// \brief Class representing one possible solution to one problem found during resolving.
+      ///
+      /// This problem solution ignores one or more items by setting their
+      ///  dependencies to weak
+      /////////////////////////////////////////////////////////////////////////
+      class ProblemSolutionIgnore : public ProblemSolution
+      {
+      public:
+	typedef std::list<PoolItem> PoolItemList;
 
-	/**
-	 * Class representing one possible solution to one problem found during resolving
-	 * This problem solution ignores one or more items by setting his dependencies
-	 * to weak
-	 **/
-	class ProblemSolutionIgnore : public ProblemSolution
-	{
-	public:
+	ProblemSolutionIgnore( PoolItem item );
+	ProblemSolutionIgnore( PoolItemList itemList );
+      };
 
-	    /**
-	     * Constructor.
-	     **/
-	    ProblemSolutionIgnore( ResolverProblem_Ptr parent,
-				   PoolItem item );
-	    ProblemSolutionIgnore( ResolverProblem_Ptr parent,
-				   PoolItemList itemList);	    
-	};
-
-	
-
-      ///////////////////////////////////////////////////////////////////
-    };// namespace detail
+    } // namespace detail
     /////////////////////////////////////////////////////////////////////
-    /////////////////////////////////////////////////////////////////////
-  };// namespace solver
+  } // namespace solver
   ///////////////////////////////////////////////////////////////////////
-  ///////////////////////////////////////////////////////////////////////
-};// namespace zypp
+} // namespace zypp
 /////////////////////////////////////////////////////////////////////////
-
+#endif // ZYPP_USE_RESOLVER_INTERNALS
 #endif // ZYPP_SOLVER_DETAIL_PROBLEMSOLUTIONIGNORE_H
-

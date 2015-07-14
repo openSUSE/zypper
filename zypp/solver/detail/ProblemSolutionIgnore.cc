@@ -21,55 +21,39 @@
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA
  * 02111-1307, USA.
  */
+#define ZYPP_USE_RESOLVER_INTERNALS
 
 #include "zypp/base/String.h"
 #include "zypp/base/Gettext.h"
-#include "zypp/base/Logger.h"
 #include "zypp/solver/detail/ProblemSolutionIgnore.h"
-
-using namespace std;
+#include "zypp/solver/detail/SolutionAction.h"
 
 /////////////////////////////////////////////////////////////////////////
 namespace zypp
-{ ///////////////////////////////////////////////////////////////////////
+{
   ///////////////////////////////////////////////////////////////////////
   namespace solver
-  { /////////////////////////////////////////////////////////////////////
+  {
     /////////////////////////////////////////////////////////////////////
     namespace detail
-    { ///////////////////////////////////////////////////////////////////
+    {
+      ProblemSolutionIgnore::ProblemSolutionIgnore( PoolItem item )
+      // TranslatorExplanation %s = name of package, patch, selection ...
+      : ProblemSolution( str::form(_("break %s by ignoring some of its dependencies"), item.satSolvable().asString().c_str() ) )
+      {
+	addAction( new InjectSolutionAction( item, WEAK ) );
+      }
 
-IMPL_PTR_TYPE(ProblemSolutionIgnore);
+      ProblemSolutionIgnore::ProblemSolutionIgnore( PoolItemList itemList )
+      : ProblemSolution( _("generally ignore of some dependencies") )
+      {
+	for ( const auto & item : itemList)
+	{ addAction( new InjectSolutionAction( item, WEAK ) ); }
+      }
 
-//---------------------------------------------------------------------------
-
-ProblemSolutionIgnore::ProblemSolutionIgnore( ResolverProblem_Ptr parent,
-					      PoolItem item )
-    : ProblemSolution (parent, "", "")
-{
-    // TranslatorExplanation %s = name of package, patch, selection ...
-    _description = str::form (_("break %s by ignoring some of its dependencies"), item.satSolvable().asString().c_str() );
-
-    addAction ( new InjectSolutionAction (item, WEAK));
-}
-
-ProblemSolutionIgnore::ProblemSolutionIgnore( ResolverProblem_Ptr parent,
-					      PoolItemList itemList )
-    : ProblemSolution (parent, "", "")
-{
-	_description = _("generally ignore of some dependecies");
-	for (PoolItemList::const_iterator iter = itemList.begin();
-	     iter != itemList.end(); iter++) {
-	    addAction ( new InjectSolutionAction (*iter, WEAK));
-	}
-}
-
-      ///////////////////////////////////////////////////////////////////
-    };// namespace detail
+    } // namespace detail
     /////////////////////////////////////////////////////////////////////
-    /////////////////////////////////////////////////////////////////////
-  };// namespace solver
+  } // namespace solver
   ///////////////////////////////////////////////////////////////////////
-  ///////////////////////////////////////////////////////////////////////
-};// namespace zypp
+} // namespace zypp
 /////////////////////////////////////////////////////////////////////////

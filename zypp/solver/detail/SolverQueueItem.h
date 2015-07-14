@@ -20,12 +20,14 @@
 
 #ifndef ZYPP_SOLVER_DETAIL_QUEUEITEM_H
 #define ZYPP_SOLVER_DETAIL_QUEUEITEM_H
+#ifndef ZYPP_USE_RESOLVER_INTERNALS
+#error Do not directly include this file!
+#else
 
 #include <iosfwd>
 #include <list>
 #include <string>
 
-#include "zypp/solver/detail/Types.h"
 #include "zypp/base/ReferenceCounted.h"
 #include "zypp/base/NonCopyable.h"
 #include "zypp/base/PtrTypes.h"
@@ -34,7 +36,6 @@
 extern "C" {
   struct _Queue;
 }
-
 
 /////////////////////////////////////////////////////////////////////////
 namespace zypp
@@ -45,6 +46,15 @@ namespace zypp
     /////////////////////////////////////////////////////////////////////
     namespace detail
     { ///////////////////////////////////////////////////////////////////
+
+DEFINE_PTR_TYPE(SolverQueueItem);
+
+DEFINE_PTR_TYPE(SolverQueueItemUpdate);
+DEFINE_PTR_TYPE(SolverQueueItemDelete);
+DEFINE_PTR_TYPE(SolverQueueItemInstall);
+DEFINE_PTR_TYPE(SolverQueueItemInstallOneOf);
+DEFINE_PTR_TYPE(SolverQueueItemLock);
+
 
 typedef enum {
     QUEUE_ITEM_TYPE_UNKNOWN = 0,
@@ -118,5 +128,5 @@ class SolverQueueItem : public base::ReferenceCounted, private base::NonCopyable
   ///////////////////////////////////////////////////////////////////////
 };// namespace zypp
 /////////////////////////////////////////////////////////////////////////
-
+#endif // ZYPP_USE_RESOLVER_INTERNALS
 #endif // ZYPP_SOLVER_DETAIL_QUEUEITEM_H

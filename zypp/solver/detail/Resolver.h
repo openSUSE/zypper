@@ -21,21 +21,19 @@
 
 #ifndef ZYPP_SOLVER_DETAIL_RESOLVER_H
 #define ZYPP_SOLVER_DETAIL_RESOLVER_H
+#ifndef ZYPP_USE_RESOLVER_INTERNALS
+#error Do not directly include this file!
+#else
 
 #include <iosfwd>
+#include <string>
 #include <list>
 #include <map>
-#include <string>
-
-#include "zypp/base/ReferenceCounted.h"
-#include "zypp/base/PtrTypes.h"
 
 #include "zypp/ResPool.h"
 #include "zypp/TriBool.h"
 #include "zypp/base/SerialNumber.h"
-
-#include "zypp/solver/detail/Types.h"
-#include "zypp/solver/detail/SolverQueueItem.h"
+#include "zypp/base/NonCopyable.h"
 
 #include "zypp/ProblemTypes.h"
 #include "zypp/ResolverProblem.h"
@@ -43,50 +41,22 @@
 #include "zypp/Capabilities.h"
 #include "zypp/Capability.h"
 
-
 /////////////////////////////////////////////////////////////////////////
 namespace zypp
-{ ///////////////////////////////////////////////////////////////////////
-
+{
   namespace sat
   {
     class Transaction;
   }
-
   ///////////////////////////////////////////////////////////////////////
   namespace solver
-  { /////////////////////////////////////////////////////////////////////
+  {
     /////////////////////////////////////////////////////////////////////
     namespace detail
-    { ///////////////////////////////////////////////////////////////////
-
-    class SATResolver;
-
-    ///////////////////////////////////////////////////////////////////
-    //
-    //	CLASS NAME : ItemCapKind
-    //
-    /** */
-    struct ItemCapKind
     {
-	public:
-	Capability cap; //Capability which has triggerd this selection
-	Dep capKind; //Kind of that capability
-	PoolItem item; //Item which has triggered this selection
-	bool initialInstallation; //This item has triggered the installation
-	                          //Not already fullfilled requierement only.
-
-    ItemCapKind() : capKind(Dep::PROVIDES) {}
-	    ItemCapKind( PoolItem i, Capability c, Dep k, bool initial)
-		: cap( c )
-		, capKind( k )
-		, item( i )
-		, initialInstallation( initial )
-	    { }
-    };
-    typedef std::multimap<PoolItem,ItemCapKind> ItemCapKindMap;
-    typedef std::list<ItemCapKind> ItemCapKindList;
-
+      class SATResolver;
+      typedef std::list<PoolItem> PoolItemList;
+      typedef std::set<PoolItem> PoolItemSet;
 
 ///////////////////////////////////////////////////////////////////
 //
@@ -98,8 +68,9 @@ namespace zypp
  * all the solver logic and problem handling goes here; or completely merge
  * both classes.
  */
-class Resolver : public base::ReferenceCounted, private base::NonCopyable {
-
+class Resolver : private base::NonCopyable
+{
+  typedef std::multimap<PoolItem,ItemCapKind> ItemCapKindMap;
   private:
     ResPool _pool;
     SATResolver *_satResolver;
@@ -158,7 +129,8 @@ class Resolver : public base::ReferenceCounted, private base::NonCopyable {
 
     // ---------------------------------- I/O
 
-    virtual std::ostream & dumpOn( std::ostream & str ) const;
+    std::ostream & dumpOn( std::ostream & str ) const;
+
     friend std::ostream& operator<<( std::ostream& str, const Resolver & obj )
     { return obj.dumpOn (str); }
 
@@ -235,7 +207,9 @@ class Resolver : public base::ReferenceCounted, private base::NonCopyable {
 #undef ZOLV_FLAG_TRIBOOL
 
     ResolverProblemList problems() const;
+
     void applySolutions( const ProblemSolutionList & solutions );
+    bool applySolution( const ProblemSolution & solution );
 
     // Return the Transaction computed by the last solver run.
     sat::Transaction getTransaction();
@@ -264,5 +238,5 @@ class Resolver : public base::ReferenceCounted, private base::NonCopyable {
   ///////////////////////////////////////////////////////////////////////
 };// namespace zypp
 /////////////////////////////////////////////////////////////////////////
-
+#endif // ZYPP_USE_RESOLVER_INTERNALS
 #endif // ZYPP_SOLVER_DETAIL_RESOLVER_H

@@ -21,7 +21,9 @@
 
 #ifndef ZYPP_SOLVER_DETAIL_SAT_RESOLVER_H
 #define ZYPP_SOLVER_DETAIL_SAT_RESOLVER_H
-
+#ifndef ZYPP_USE_RESOLVER_INTERNALS
+#error Do not directly include this file!
+#else
 extern "C"
 {
 #include <solv/solver.h>
@@ -234,5 +236,5 @@ class SATResolver : public base::ReferenceCounted, private base::NonCopyable {
   ///////////////////////////////////////////////////////////////////////
 };// namespace zypp
 /////////////////////////////////////////////////////////////////////////
-
+#endif // ZYPP_USE_RESOLVER_INTERNALS
 #endif // ZYPP_SOLVER_DETAIL_SAT_RESOLVER_H

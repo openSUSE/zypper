@@ -21,58 +21,36 @@
 #ifndef ZYPP_SOLVER_DETAIL_TYPES_H
 #define ZYPP_SOLVER_DETAIL_TYPES_H
 
-#include <iosfwd>
 #include <list>
-#include <set>
-#include <map>
-#include <string>
-
-#include "zypp/base/ReferenceCounted.h"
-#include "zypp/base/NonCopyable.h"
 #include "zypp/base/PtrTypes.h"
-#include "zypp/base/Functional.h"
-
-#include "zypp/PoolItem.h"
-
-#define _DEBUG(x) DBG << x << std::endl;
-#define _XDEBUG(x) do { if (base::logger::isExcessive()) XXX << x << std::endl;} while (0)
-//#define _DEBUG(x)
 
 /////////////////////////////////////////////////////////////////////////
 namespace zypp 
-{ ///////////////////////////////////////////////////////////////////////
+{
   ///////////////////////////////////////////////////////////////////////
   namespace solver
-  { /////////////////////////////////////////////////////////////////////
+  {
     /////////////////////////////////////////////////////////////////////
     namespace detail
-    { ///////////////////////////////////////////////////////////////////
+    {
+      // A few type names exposed in the public API
+      //
+      class Resolver;
+      typedef Resolver ResolverInternal;	///< Preferred name in API
 
-typedef std::list<PoolItem> PoolItemList;
-typedef std::set<PoolItem> PoolItemSet;
-      
-DEFINE_PTR_TYPE(Resolver);
+      class ItemCapKind;
+      typedef std::list<ItemCapKind> ItemCapKindList;
 
-DEFINE_PTR_TYPE(SolutionAction);
-typedef std::list<SolutionAction_Ptr> SolutionActionList;
-typedef std::list<SolutionAction_constPtr> CSolutionActionList;
-DEFINE_PTR_TYPE(TransactionSolutionAction);
-DEFINE_PTR_TYPE(InjectSolutionAction);
-DEFINE_PTR_TYPE(SolverQueueItem);
-DEFINE_PTR_TYPE(SolverQueueItemUpdate);
-DEFINE_PTR_TYPE(SolverQueueItemDelete);
-DEFINE_PTR_TYPE(SolverQueueItemInstall);	
-DEFINE_PTR_TYPE(SolverQueueItemInstallOneOf);
-DEFINE_PTR_TYPE(SolverQueueItemLock);		
-      
-      ///////////////////////////////////////////////////////////////////
-    };// namespace detail
+      DEFINE_PTR_TYPE(SolverQueueItem);
+      typedef std::list<SolverQueueItem_Ptr> SolverQueueItemList;
+
+      DEFINE_PTR_TYPE(SolutionAction);
+      typedef std::list<SolutionAction_Ptr> SolutionActionList;
+
+    } // namespace detail
     /////////////////////////////////////////////////////////////////////
-    /////////////////////////////////////////////////////////////////////
-  };// namespace solver
+  } // namespace solver
   ///////////////////////////////////////////////////////////////////////
-  ///////////////////////////////////////////////////////////////////////
-};// namespace zypp
+} // namespace zypp
 /////////////////////////////////////////////////////////////////////////
-
 #endif // ZYPP_SOLVER_DETAIL_TYPES_H

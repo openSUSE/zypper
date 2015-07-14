@@ -11,6 +11,9 @@
 */
 #ifndef ZYPP_TARGET_SYSTEMCHECK_H
 #define ZYPP_TARGET_SYSTEMCHECK_H
+#ifndef ZYPP_USE_RESOLVER_INTERNALS
+#error Do not directly include this file!
+#else
 
 #include <iosfwd>
 
@@ -74,4 +77,5 @@ namespace zypp
   /////////////////////////////////////////////////////////////////
 } // namespace zypp
 ///////////////////////////////////////////////////////////////////
+#endif // ZYPP_USE_RESOLVER_INTERNALS
 #endif // ZYPP_TARGET_SYSTEMCHECK_H

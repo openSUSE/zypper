@@ -11,11 +11,14 @@
 */
 #include <iostream>
 
+#define ZYPP_USE_RESOLVER_INTERNALS
+
 #include "zypp/Resolver.h"
 #include "zypp/ZConfig.h"
 #include "zypp/TriBool.h"
 #include "zypp/solver/detail/Resolver.h"
 #include "zypp/solver/detail/Testcase.h"
+#include "zypp/solver/detail/ItemCapKind.h"
 #include "zypp/sat/Transaction.h"
 
 using namespace std;
@@ -34,7 +37,7 @@ namespace zypp
   //	METHOD TYPE : Ctor
   //
   Resolver::Resolver( const ResPool & pool )
-  : _pimpl( new Impl(pool) )
+  : _pimpl( new solver::detail::ResolverInternal(pool) )
   {}
 
   ///////////////////////////////////////////////////////////////////

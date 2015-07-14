@@ -21,107 +21,126 @@
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA
  * 02111-1307, USA.
  */
-#include "zypp/solver/detail/Types.h"
+
+#define ZYPP_USE_RESOLVER_INTERNALS
+
+#include "zypp/base/Gettext.h"
 #include "zypp/solver/detail/SolutionAction.h"
 #include "zypp/ProblemSolution.h"
 #include "zypp/base/Logger.h"
 #include "zypp/solver/detail/Resolver.h"
 
-using namespace std;
+using std::endl;
 
 /////////////////////////////////////////////////////////////////////////
 namespace zypp
-{ ///////////////////////////////////////////////////////////////////////
-
-IMPL_PTR_TYPE(ProblemSolution);
-
-//---------------------------------------------------------------------------
-
-ostream&
-operator<<( ostream& os, const ProblemSolution & solution)
 {
+  IMPL_PTR_TYPE(ProblemSolution);
+
+  ///////////////////////////////////////////////////////////////////
+  /// \class ProblemSolution::Impl
+  /// \brief ProblemSolution implementation.
+  ///////////////////////////////////////////////////////////////////
+  struct ProblemSolution::Impl
+  {
+    Impl()
+    {}
+
+    Impl( std::string && description )
+    : _description( std::move(description) )
+    {}
+
+     Impl( std::string && description, std::string && details )
+    : _description( std::move(description) )
+    , _details( std::move(details) )
+    {}
+
+    std::string		_description;
+    std::string		_details;
+    SolutionActionList	_actions;
+
+  private:
+    friend Impl * rwcowClone<Impl>( const Impl * rhs );
+    /** clone for RWCOW_pointer */
+    Impl * clone() const
+    { return new Impl( *this ); }
+  };
+  ///////////////////////////////////////////////////////////////////
+
+  ProblemSolution::ProblemSolution()
+  : _pimpl( new Impl() )
+  {}
+
+  ProblemSolution::ProblemSolution( std::string description )
+  : _pimpl( new Impl( std::move(description) ) )
+  {}
+
+  ProblemSolution::ProblemSolution( std::string description, std::string details )
+  : _pimpl( new Impl( std::move(description), std::move(details) ) )
+  {}
+
+  ProblemSolution::~ProblemSolution()
+  {}
+
+
+  const std::string & ProblemSolution::description() const
+  { return _pimpl->_description; }
+
+  const std::string & ProblemSolution::details() const
+  { return _pimpl->_details; }
+
+  const ProblemSolution::SolutionActionList & ProblemSolution::actions() const
+  { return _pimpl->_actions; }
+
+
+  void ProblemSolution::setDescription( std::string description )
+  { _pimpl->_description = std::move(description); }
+
+  void ProblemSolution::setDetails( std::string details )
+  { _pimpl->_details += "\n"; _pimpl->_details += std::move(details); }
+
+  void ProblemSolution::pushDescriptionDetail( std::string description, bool front )
+  {
+    if ( _pimpl->_details.empty() )
+    {
+      if ( _pimpl->_description.empty() )	// first entry
+      {
+	_pimpl->_description = std::move(description);
+	return;
+      }
+      else					// second entry: form headline in _description
+      {
+	_pimpl->_description.swap( _pimpl->_details );
+	_pimpl->_description = _("Following actions will be done:");
+      }
+    }
+    if ( front )
+    { _pimpl->_details.swap( description ); }
+    _pimpl->_details += "\n";
+    _pimpl->_details += std::move(description);
+  }
+
+  void ProblemSolution::addAction( solver::detail::SolutionAction_Ptr action )
+  { _pimpl->_actions.push_back( action ); }
+
+
+
+  std::ostream & operator<<( std::ostream & os, const ProblemSolution & obj )
+  {
     os << "Solution:" << endl;
-    os << solution._description << endl;
-    if ( ! solution._details.empty() )
-      os << solution._details << endl;
-    os << solution._actions;
+    os << obj.description() << endl;
+    if ( ! obj.details().empty() )
+      os << obj.details() << endl;
+    os << obj.actions();
     return os;
-}
+  }
 
-ostream&
-operator<<( ostream& os, const ProblemSolutionList & solutionlist)
-{
-    for (ProblemSolutionList::const_iterator iter = solutionlist.begin(); iter != solutionlist.end(); ++iter) {
-	os << *(*iter);
-    }
+  std::ostream & operator<<( std::ostream & os, const ProblemSolutionList & obj )
+  {
+    for ( const auto & ptr: obj )
+    { os << ptr; }
     return os;
-}
+  }
 
-ostream&
-operator<<( ostream& os, const CProblemSolutionList & solutionlist)
-{
-    for (CProblemSolutionList::const_iterator iter = solutionlist.begin(); iter != solutionlist.end(); ++iter) {
-	os << *(*iter) << endl;
-    }
-    return os;
-}
-
-//---------------------------------------------------------------------------
-
-ProblemSolution::ProblemSolution( ResolverProblem_Ptr parent, const string & description, const string & details )
-    : _problem (parent)
-    , _description (description)
-    , _details (details)
-{
-}
-
-
-ProblemSolution::~ProblemSolution()
-{
-}
-
-
-/**
- * Apply this solution, i.e. execute all of its actions.
- *
- * Returns 'true' on success, 'false' if actions could not be performed.
- **/
-
-bool
-ProblemSolution::apply (solver::detail::Resolver & resolver)
-{
-    DBG << "apply solution " << *this << endl;
-    bool ret = true;
-    for (solver::detail::CSolutionActionList::const_iterator iter = _actions.begin();
-	 iter != _actions.end(); ++iter) {
-	solver::detail::SolutionAction_constPtr action = *iter;
-	if (! action->execute (resolver))
-	{
-	    WAR << "apply solution action failed: " << action << endl;
-	    ret = false;
-	    break;
-	}
-    }
-    return ret;
-}
-
-
-/**
- * Add an action to the actions list.
- **/
-void
-ProblemSolution::addAction (solver::detail::SolutionAction_constPtr action)
-{
-    _actions.push_back (action);
-}
-
-
-void
-ProblemSolution::clear()
-{
-    _actions.clear();
-}
-
-  ///////////////////////////////////////////////////////////////////////
-};// namespace zypp
+} // namespace zypp
 /////////////////////////////////////////////////////////////////////////

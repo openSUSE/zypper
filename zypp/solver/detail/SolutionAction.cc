@@ -21,8 +21,11 @@
  * 02111-1307, USA.
  */
 
+#define ZYPP_USE_RESOLVER_INTERNALS
+
 #include "zypp/solver/detail/Resolver.h"
 #include "zypp/solver/detail/SolutionAction.h"
+#include "zypp/solver/detail/SolverQueueItem.h"
 #include "zypp/Capabilities.h"
 #include "zypp/base/Logger.h"
 
@@ -39,8 +42,6 @@ namespace zypp
 using namespace std;
 
 IMPL_PTR_TYPE(SolutionAction);
-IMPL_PTR_TYPE(TransactionSolutionAction);
-IMPL_PTR_TYPE(InjectSolutionAction);
 
 //---------------------------------------------------------------------------
 
@@ -85,17 +86,6 @@ operator<<( ostream& os, const SolutionActionList & actionlist)
     return os;
 }
 
-
-ostream&
-operator<<( ostream& os, const CSolutionActionList & actionlist)
-{
-    for (CSolutionActionList::const_iterator iter = actionlist.begin(); iter != actionlist.end(); ++iter) {
-	os << *(*iter);
-	os << endl;
-    }
-    return os;
-}
-
 //---------------------------------------------------------------------------
 
 ostream &
@@ -125,7 +115,7 @@ SolutionAction::dumpOn( std::ostream & os ) const
 
 
 bool
-TransactionSolutionAction::execute(Resolver & resolver) const
+TransactionSolutionAction::execute(ResolverInternal & resolver) const
 {
     bool ret = true;
     switch (action()) {
@@ -177,7 +167,7 @@ TransactionSolutionAction::execute(Resolver & resolver) const
 }
 
 bool
-InjectSolutionAction::execute(Resolver & resolver) const
+InjectSolutionAction::execute(ResolverInternal & resolver) const
 {
     switch (_kind) {
         case WEAK:

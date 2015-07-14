@@ -22,32 +22,29 @@
 #define ZYPP_PROBLEMTYPES_H
 
 #include <iosfwd>
+#include <string>
 #include <list>
 #include <set>
 #include <map>
-#include <string>
 
 #include "zypp/base/ReferenceCounted.h"
 #include "zypp/base/NonCopyable.h"
 #include "zypp/base/PtrTypes.h"
 #include "zypp/base/Functional.h"
 
+#include "zypp/solver/detail/Types.h"	// SolutionAction type
+
 /////////////////////////////////////////////////////////////////////////
 namespace zypp 
-{ ///////////////////////////////////////////////////////////////////////
-    
-    DEFINE_PTR_TYPE(Resolver);
-    
-    DEFINE_PTR_TYPE(ProblemSolution);
-    typedef std::list<ProblemSolution_Ptr> ProblemSolutionList;
-    typedef std::list<ProblemSolution_constPtr> CProblemSolutionList;
-    
-    DEFINE_PTR_TYPE(ResolverProblem);
-    typedef std::list<ResolverProblem_Ptr> ResolverProblemList;
-    typedef std::list<ResolverProblem_constPtr> CResolverProblemList;
+{
+  DEFINE_PTR_TYPE(Resolver);
 
-  ///////////////////////////////////////////////////////////////////////
-};// namespace zypp
+  DEFINE_PTR_TYPE(ProblemSolution);
+  typedef std::list<ProblemSolution_Ptr> ProblemSolutionList;
+
+  DEFINE_PTR_TYPE(ResolverProblem);
+  typedef std::list<ResolverProblem_Ptr> ResolverProblemList;
+
+} // namespace zypp
 /////////////////////////////////////////////////////////////////////////
-
 #endif // ZYPP_SOLVER_DETAIL_TYPES_H

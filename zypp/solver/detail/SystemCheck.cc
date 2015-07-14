@@ -13,6 +13,8 @@
 #include <fstream>
 #include <vector>
 
+#define ZYPP_USE_RESOLVER_INTERNALS
+
 #include "zypp/base/LogTools.h"
 #include "zypp/base/IOStream.h"
 #include "zypp/base/String.h"
