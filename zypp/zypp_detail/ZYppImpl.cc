@@ -16,7 +16,6 @@
 #include "zypp/base/String.h"
 
 #include "zypp/zypp_detail/ZYppImpl.h"
-#include "zypp/solver/detail/Helper.h"
 #include "zypp/target/TargetImpl.h"
 #include "zypp/ZYpp.h"
 #include "zypp/DiskUsageCounter.h"

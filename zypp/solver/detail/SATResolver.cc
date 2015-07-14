@@ -29,7 +29,6 @@ extern "C"
 #include <solv/queue.h>
 }
 
-#include "zypp/solver/detail/Helper.h"
 #include "zypp/base/String.h"
 #include "zypp/Product.h"
 #include "zypp/Capability.h"

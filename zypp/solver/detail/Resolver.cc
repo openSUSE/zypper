@@ -21,7 +21,6 @@
 #include <boost/static_assert.hpp>
 
 #include "zypp/solver/detail/Resolver.h"
-#include "zypp/solver/detail/Helper.h"
 #include "zypp/solver/detail/Testcase.h"
 #include "zypp/solver/detail/SATResolver.h"
 

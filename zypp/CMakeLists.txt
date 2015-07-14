@@ -480,7 +480,6 @@ INSTALL(  FILES
 )
 
 SET( zypp_solver_detail_SRCS
-  solver/detail/Helper.cc
   solver/detail/ProblemSolutionIgnore.cc
   solver/detail/ProblemSolutionCombi.cc
   solver/detail/Resolver.cc
@@ -497,7 +496,6 @@ SET( zypp_solver_detail_SRCS
 )
 
 SET( zypp_solver_detail_HEADERS
-  solver/detail/Helper.h
   solver/detail/ProblemSolutionIgnore.h
   solver/detail/ProblemSolutionCombi.h
   solver/detail/Resolver.h

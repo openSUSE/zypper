@@ -26,7 +26,6 @@
 #include "zypp/base/Gettext.h"
 #include "zypp/base/Logger.h"
 #include "zypp/solver/detail/ProblemSolutionIgnore.h"
-#include "zypp/solver/detail/Helper.h"
 
 using namespace std;
 
