@@ -66,7 +66,7 @@ namespace zypp
     */
     struct TraceCADBase
     {
-      enum What { CTOR, COPYCTOR, ASSIGN, DTOR, PING };
+      enum What { CTOR, COPYCTOR, MOVECTOR, ASSIGN, MOVEASSIGN, DTOR, PING };
       std::string _ident;
     };
 
@@ -75,11 +75,13 @@ namespace zypp
     {
       switch( obj )
         {
-        case TraceCADBase::CTOR:     return str << "CTOR";
-        case TraceCADBase::COPYCTOR: return str << "COPYCTOR";
-        case TraceCADBase::ASSIGN:   return str << "ASSIGN";
-        case TraceCADBase::DTOR:     return str << "DTOR";
-        case TraceCADBase::PING:     return str << "PING";
+        case TraceCADBase::CTOR:	return str << "CTOR";
+        case TraceCADBase::COPYCTOR:	return str << "COPYCTOR";
+        case TraceCADBase::MOVECTOR:	return str << "MOVECTOR";
+        case TraceCADBase::ASSIGN:	return str << "ASSIGN";
+        case TraceCADBase::MOVEASSIGN:	return str << "MOVEASSIGN";
+        case TraceCADBase::DTOR:	return str << "DTOR";
+        case TraceCADBase::PING:	return str << "PING";
         }
       return str;
     }
@@ -122,8 +124,15 @@ namespace zypp
         { ++_totalTraceCAD();
           traceCAD( COPYCTOR, *this, rhs ); }
 
+        TraceCAD( TraceCAD && rhs )
+        { ++_totalTraceCAD();
+	  traceCAD( MOVECTOR, *this, rhs ); }
+
         TraceCAD & operator=( const TraceCAD & rhs )
         { traceCAD( ASSIGN, *this, rhs ); return *this; }
+
+        TraceCAD & operator=( TraceCAD && rhs )
+        { traceCAD( MOVEASSIGN, *this, rhs ); return *this; }
 
         virtual ~TraceCAD()
         { --_totalTraceCAD();
@@ -156,7 +165,9 @@ namespace zypp
             break;
 
           case TraceCADBase::COPYCTOR:
+          case TraceCADBase::MOVECTOR:
           case TraceCADBase::ASSIGN:
+          case TraceCADBase::MOVEASSIGN:
             _DBG("DEBUG") << what_r << self_r << "( " << rhs_r << ")" << " (" << self_r._ident << ")" << std::endl;
             break;
           }
