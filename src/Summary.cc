@@ -137,6 +137,9 @@ void Summary::readPool(const zypp::ResPool & pool)
     }
   }
 
+  for ( const auto & spkg : Zypper::instance()->runtimeData().srcpkgs_to_install )
+  { to_be_installed[ResKind::srcpackage].insert(spkg); }
+
   // total packages to download & install
   // (packages & srcpackages only - patches, patterns, and products are virtual)
   _inst_pkg_total =
@@ -144,13 +147,6 @@ void Summary::readPool(const zypp::ResPool & pool)
     to_be_installed[ResKind::srcpackage].size();
 
   m.elapsed();
-
-/* This will work again after commit refactoring: all the srcpackages will be in the pool
-
-  for (list<SrcPackage::constPtr>::const_iterator it = zypper.runtimeData().srcpkgs_to_install.begin();
-      it != zypper.runtimeData().srcpkgs_to_install.end(); ++it)
-    _toinstall[ResKind::srcpackage].insert(*it);
-*/
 
   // iterate the to_be_installed to find installs/upgrades/downgrades + size info
   for (KindToResObjectSet::const_iterator it = to_be_installed.begin();
