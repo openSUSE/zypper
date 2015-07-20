@@ -198,20 +198,23 @@ static bool show_problems(Zypper & zypper)
 
 static void dump_pool ()
 {
+  if ( ! base::logger::isExcessive() )
+    return;
+
   int count = 1;
   static bool full_pool_shown = false;
 
-  _XDEBUG( "---------------------------------------" );
+  XXX << "---------------------------------------" << endl;
   for (ResPool::const_iterator it =   God->pool().begin(); it != God->pool().end(); ++it, ++count) {
 
     if (!full_pool_shown                                    // show item if not shown all before
         || it->status().transacts()                         // or transacts
         || !it->isBroken())                                 // or broken status
     {
-      _XDEBUG( count << ": " << *it );
+      XXX << count << ": " << *it << endl;
     }
   }
-  _XDEBUG( "---------------------------------------" );
+  XXX << "---------------------------------------" << endl;
   full_pool_shown = true;
 }
 
