@@ -1,4 +1,10 @@
 -------------------------------------------------------------------
+Thu Jul 16 18:01:05 CEST 2015 - ma@suse.de
+
+- Show installed packages in Summary when --no-build-deps is used 
+  for source-install (fixes #75) (bnc#937770)
+
+-------------------------------------------------------------------
 Thu Jul  9 16:44:20 CEST 2015 - ma@suse.de
 
 - Options to allow vendor locking for zypper dup (FATE#319128)
