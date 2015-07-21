@@ -62,47 +62,61 @@ namespace zypp
         typedef typename std::underlying_type<Enum>::type Integral;	///< The underlying integral type
 
       public:
-        constexpr Flags()                               : _val( 0 ) {}
-        constexpr Flags( Enum flag_r )                  : _val( flag_r ) {}
-        explicit constexpr Flags( Integral flag_r )     : _val( flag_r ) {}
+        constexpr Flags()				: _val( 0 ) {}
+        constexpr Flags( Enum flag_r )			: _val( integral(flag_r) ) {}
+        constexpr explicit Flags( Integral flag_r )	: _val( flag_r ) {}
 
-        Flags & operator&=( Flags rhs )       { _val &= rhs._val; return *this; }
-        Flags & operator&=( Enum rhs )        { _val &= rhs;      return *this; }
+        constexpr static Flags none()			{ return Flags( Integral(0) ); }
+        constexpr static Flags all()			{ return Flags( ~Integral(0) ); }
 
-        Flags & operator|=( Flags rhs )       { _val |= rhs._val; return *this; }
-        Flags & operator|=( Enum rhs )        { _val |= rhs;      return *this; }
+        constexpr bool isNone() const			{ return _val == Integral(0); }
+        constexpr bool isAll() const			{ return _val == ~Integral(0); }
 
-        Flags & operator^=( Flags rhs )       { _val ^= rhs._val; return *this; }
-        Flags & operator^=( Enum rhs )        { _val ^= rhs;      return *this; }
+        Flags & operator&=( Flags rhs )			{ _val &= integral(rhs); return *this; }
+        Flags & operator&=( Enum rhs )			{ _val &= integral(rhs); return *this; }
 
-      public:
-        constexpr operator Integral() const             { return _val; }
+        Flags & operator|=( Flags rhs )			{ _val |= integral(rhs); return *this; }
+        Flags & operator|=( Enum rhs )			{ _val |= integral(rhs); return *this; }
 
-        constexpr Flags operator&( Flags rhs ) const    { return Flags( _val & rhs._val ); }
-        constexpr Flags operator&( Enum rhs ) const     { return Flags( _val & rhs ); }
-
-        constexpr Flags operator|( Flags rhs ) const    { return Flags( _val | rhs._val ); }
-        constexpr Flags operator|( Enum rhs ) const     { return Flags( _val | rhs ); }
-
-        constexpr Flags operator^( Flags rhs ) const    { return Flags( _val ^ rhs._val ); }
-        constexpr Flags operator^( Enum rhs ) const     { return Flags( _val ^ rhs ); }
-
-        constexpr Flags operator~() const               { return Flags( ~_val ); }
+        Flags & operator^=( Flags rhs )			{ _val ^= integral(rhs); return *this; }
+        Flags & operator^=( Enum rhs )			{ _val ^= integral(rhs); return *this; }
 
       public:
-        Flags & setFlag( Flags flag_r, bool newval_r ) { return( newval_r ? setFlag(flag_r) : unsetFlag(flag_r) ); }
-        Flags & setFlag( Enum flag_r, bool newval_r )  { return( newval_r ? setFlag(flag_r) : unsetFlag(flag_r) ); }
+        constexpr operator Integral() const		{ return _val; }
 
-        Flags & setFlag( Flags flag_r )       { _val |= flag_r; return *this; }
-        Flags & setFlag( Enum flag_r )        { _val |= flag_r; return *this; }
+        constexpr Flags operator&( Flags rhs ) const	{ return Flags( _val & integral(rhs) ); }
+        constexpr Flags operator&( Enum rhs ) const	{ return Flags( _val & integral(rhs) ); }
 
-        Flags & unsetFlag( Flags flag_r )     { _val &= ~flag_r; return *this; }
-        Flags & unsetFlag( Enum flag_r )      { _val &= ~flag_r; return *this; }
+        constexpr Flags operator|( Flags rhs ) const	{ return Flags( _val | integral(rhs) ); }
+        constexpr Flags operator|( Enum rhs ) const	{ return Flags( _val | integral(rhs) ); }
 
-        bool testFlag( Flags flag_r ) const   { return flag_r ? ( _val & flag_r ) == flag_r : !_val; }
-        bool testFlag( Enum flag_r ) const    { return flag_r ? ( _val & flag_r ) == flag_r : !_val; }
+        constexpr Flags operator^( Flags rhs ) const	{ return Flags( _val ^ integral(rhs) ); }
+        constexpr Flags operator^( Enum rhs ) const	{ return Flags( _val ^ integral(rhs) ); }
+
+        constexpr Flags operator~() const		{ return Flags( ~_val ); }
+
+        constexpr bool operator==( Enum rhs ) const	{  return( _val == integral(rhs) ); }
+        constexpr bool operator!=( Enum rhs ) const	{  return( _val != integral(rhs) ); }
+
+      public:
+        Flags & setFlag( Flags flag_r, bool newval_r )	{ return( newval_r ? setFlag(flag_r) : unsetFlag(flag_r) ); }
+        Flags & setFlag( Enum flag_r, bool newval_r )	{ return( newval_r ? setFlag(flag_r) : unsetFlag(flag_r) ); }
+
+        Flags & setFlag( Flags flag_r )			{ _val |= integral(flag_r); return *this; }
+        Flags & setFlag( Enum flag_r )			{ _val |= integral(flag_r); return *this; }
+
+        Flags & unsetFlag( Flags flag_r )		{ _val &= ~integral(flag_r); return *this; }
+        Flags & unsetFlag( Enum flag_r )		{ _val &= ~integral(flag_r); return *this; }
+
+        constexpr bool testFlag( Flags flag_r ) const	{ return testFlag( integral(flag_r) ); }
+        constexpr bool testFlag( Enum flag_r ) const	{ return testFlag( integral(flag_r) ); }
 
       private:
+	constexpr bool testFlag( Integral flag )	{ return flag ? ( _val & flag ) == flag : !_val; }
+
+	constexpr static Integral integral( Flags obj )	{ return obj._val; }
+	constexpr static Integral integral( Enum obj )	{ return static_cast<Integral>(obj); }
+
         Integral _val;
     };
     ///////////////////////////////////////////////////////////////////
@@ -148,15 +162,21 @@ namespace zypp
       return ret;
     }
 
-    template<typename Enum>
-    inline std::ostream & operator<<( std::ostream & str, const Flags<Enum> & obj )
+    template<typename _Enum>
+    inline std::ostream & operator<<( std::ostream & str, const Flags<_Enum> & obj )
     { return str << str::hexstring(obj); }
+
+    template<typename _Enum>
+    inline std::ostream & operator<<( std::ostream & str, const typename Flags<_Enum>::Enum & obj )
+    { return str << Flags<_Enum>(obj); }
 
     /** \relates Flags */
 #define ZYPP_DECLARE_FLAGS(Name,Enum) typedef zypp::base::Flags<Enum> Name
 
     /** \relates Flags */
 #define ZYPP_DECLARE_OPERATORS_FOR_FLAGS(Name) \
+inline constexpr bool operator==( Name::Enum lhs, Name rhs )		{ return( rhs == lhs ); }	\
+inline constexpr bool operator!=(Name:: Enum lhs, Name rhs )		{ return( rhs != lhs ); }	\
 inline constexpr Name operator&( Name::Enum lhs, Name::Enum rhs )	{ return Name( lhs ) & rhs; }	\
 inline constexpr Name operator&( Name::Enum lhs, Name rhs )		{ return rhs & lhs; }		\
 inline constexpr Name operator|( Name::Enum lhs, Name::Enum rhs )	{ return Name( lhs ) | rhs; }	\
