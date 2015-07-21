@@ -43,10 +43,10 @@ namespace zypp
 
     public:
       /** Default ctor, empty string. */
-      IdString() : _id( sat::detail::emptyId ) {}
+      constexpr IdString() : _id( sat::detail::emptyId ) {}
 
       /** Ctor from id. */
-      explicit IdString( IdType id_r ) : _id( id_r ) {}
+      constexpr explicit IdString( IdType id_r ) : _id( id_r ) {}
 
       /** Ctor from string. */
       explicit IdString( const char * str_r );
@@ -63,13 +63,13 @@ namespace zypp
 
     public:
       /** Evaluate in a boolean context <tt>( != \c Null )</tt>. */
-      explicit operator bool() const
+      constexpr explicit operator bool() const
       { return _id; }
 
       /** Whether the string is empty.
        * This is true for \ref Null and \ref Empty.
        */
-      bool empty() const
+      constexpr bool empty() const
       { return( _id == sat::detail::emptyId || _id == sat::detail::noId ); }
 
       /** The strings size. */
