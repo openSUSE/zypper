@@ -88,6 +88,11 @@ namespace zypp
       */
       static const IdType solvablePrereqMarker( 15 );
       static const IdType solvableFileMarker  ( 16 );
+
+      static const IdType namespaceModalias	( 18 );
+      static const IdType namespaceLanguage	( 20 );
+      static const IdType namespaceFilesystem	( 21 );
+
       /** Test for internal ids satlib includes in dependencies. */
       inline bool isDepMarkerId( IdType id_r )
       { return( id_r == solvablePrereqMarker || id_r == solvableFileMarker ); }

@@ -84,7 +84,11 @@ namespace zypp
       BOOST_MPL_ASSERT_RELATION( CapDetail::CAP_NAMESPACE, ==, REL_NAMESPACE );
       BOOST_MPL_ASSERT_RELATION( CapDetail::CAP_ARCH,      ==, REL_ARCH );
 
-     /////////////////////////////////////////////////////////////////
+      BOOST_MPL_ASSERT_RELATION( namespaceModalias,	==, NAMESPACE_MODALIAS );
+      BOOST_MPL_ASSERT_RELATION( namespaceLanguage,	==, NAMESPACE_LANGUAGE );
+      BOOST_MPL_ASSERT_RELATION( namespaceFilesystem,	==, NAMESPACE_FILESYSTEM );
+
+      /////////////////////////////////////////////////////////////////
 
       const std::string & PoolImpl::systemRepoAlias()
       {
