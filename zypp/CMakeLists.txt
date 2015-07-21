@@ -167,6 +167,7 @@ SET( zypp_HEADERS
   ResObjects.h
   Resolvable.h
   Resolver.h
+  ResolverNamespace.h
   ResolverProblem.h
   ResPool.h
   ResPoolProxy.h
