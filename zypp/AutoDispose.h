@@ -189,7 +189,7 @@ namespace zypp
     };
   ///////////////////////////////////////////////////////////////////
 
-  /** \relates AutoDispose<_Tp> Stream output of the \c _Tp object. */
+  /** \relates AutoDispose Stream output of the \c _Tp object. */
   template<class _Tp>
     inline std::ostream & operator<<( std::ostream & str, const AutoDispose<_Tp> & obj )
     { return str << obj.value(); }

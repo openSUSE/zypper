@@ -131,7 +131,7 @@ namespace zypp
   namespace base
   {
     ///////////////////////////////////////////////////////////////////
-    /// \class SetRelationMixin<Derived>
+    /// \class SetRelationMixin
     /// \brief Provide set relation methods based on Derived::setRelationMixinCompare
     /// A class using this mixin must provide:
     /// \code
