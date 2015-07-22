@@ -21,7 +21,7 @@
 #include "zypp/Edition.h"
 #include "zypp/Rel.h"
 #include "zypp/ResTraits.h"
-
+#include "zypp/ResolverNamespace.h"
 #include "zypp/CapMatch.h"
 
 ///////////////////////////////////////////////////////////////////
@@ -123,6 +123,15 @@ namespace zypp
       Capability( const Arch & arch_r, const std::string & name_r, Rel op_r, const Edition & ed_r, const ResKind & prefix_r = ResKind() );
       //@}
 
+      /** \name Ctor creating a namespace: capability.
+       * An empty \a value_r (std::string or IdString) will also be mapped to IdString::Null,
+       * creating a namespace: capability which in most contexts matches all members of this namespace.
+       */
+      //@{
+      Capability( ResolverNamespace namespace_r, IdString value_r = IdString::Null );
+      Capability( ResolverNamespace namespace_r, const char * value_r )		: Capability( namespace_r, IdString(value_r) ) {}
+      Capability( ResolverNamespace namespace_r, const std::string & value_r )	: Capability( namespace_r, IdString(value_r) ) {}
+      //@}
     public:
       /** No or Null \ref Capability ( Id \c 0 ). */
       static const Capability Null;
