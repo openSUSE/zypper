@@ -131,7 +131,7 @@ namespace zypp
           case NAMESPACE_LANGUAGE:
           {
             static IdString en( "en" );
-            const std::tr1::unordered_set<IdString> & locale2Solver( reinterpret_cast<PoolImpl*>(data)->_locale2Solver );
+            const std::unordered_set<IdString> & locale2Solver( reinterpret_cast<PoolImpl*>(data)->_locale2Solver );
             if ( locale2Solver.empty() )
             {
               return rhs == en.id() ? RET_systemProperty : RET_unsupported;
@@ -408,9 +408,9 @@ namespace zypp
 
       // need on demand and id based Locale
       void _locale_hack( const LocaleSet & locales_r,
-                         std::tr1::unordered_set<IdString> & locale2Solver )
+                         std::unordered_set<IdString> & locale2Solver )
       {
-        std::tr1::unordered_set<IdString>( 2*locales_r.size() ).swap( locale2Solver );
+        std::unordered_set<IdString>( 2*locales_r.size() ).swap( locale2Solver );
         for_( it, locales_r.begin(),locales_r.end() )
         {
           for ( Locale l( *it ); l != Locale::noCode; l = l.fallback() )
@@ -466,7 +466,7 @@ namespace zypp
         return false;
       }
 
-      static void _getLocaleDeps( Capability cap_r, std::tr1::unordered_set<sat::detail::IdType> & store_r )
+      static void _getLocaleDeps( Capability cap_r, std::unordered_set<sat::detail::IdType> & store_r )
       {
         // Collect locales from any 'namespace:language(lang)' dependency
         CapDetail detail( cap_r );
@@ -501,7 +501,7 @@ namespace zypp
         if ( !_availableLocalesPtr )
         {
           // Collect any 'namespace:language(ja)' dependencies
-          std::tr1::unordered_set<sat::detail::IdType> tmp;
+          std::unordered_set<sat::detail::IdType> tmp;
           Pool pool( Pool::instance() );
           for_( it, pool.solvablesBegin(), pool.solvablesEnd() )
           {

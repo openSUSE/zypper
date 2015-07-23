@@ -21,7 +21,7 @@ extern "C"
 }
 #include <iosfwd>
 
-#include "zypp/base/Tr1hash.h"
+#include "zypp/base/Hash.h"
 #include "zypp/base/NonCopyable.h"
 #include "zypp/base/SerialNumber.h"
 #include "zypp/sat/detail/PoolMember.h"
@@ -293,7 +293,7 @@ namespace zypp
           /**  */
           LocaleSet _requestedLocales;
           mutable scoped_ptr<LocaleSet> _availableLocalesPtr;
-          mutable std::tr1::unordered_set<IdString> _locale2Solver;
+          mutable std::unordered_set<IdString> _locale2Solver;
 
           /**  */
           void multiversionListInit() const;

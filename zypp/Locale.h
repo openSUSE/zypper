@@ -15,7 +15,7 @@
 #include <iosfwd>
 
 #include "zypp/base/PtrTypes.h"
-#include "zypp/base/Tr1hash.h"
+#include "zypp/base/Hash.h"
 
 #include "zypp/IdString.h"
 #include "zypp/LanguageCode.h"
@@ -26,7 +26,7 @@ namespace zypp
 { /////////////////////////////////////////////////////////////////
 
   class Locale;
-  typedef std::tr1::unordered_set<Locale> LocaleSet;
+  typedef std::unordered_set<Locale> LocaleSet;
 
   ///////////////////////////////////////////////////////////////////
   //

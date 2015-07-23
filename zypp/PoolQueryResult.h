@@ -14,7 +14,7 @@
 
 #include <iosfwd>
 
-#include "zypp/base/Tr1hash.h"
+#include "zypp/base/Hash.h"
 #include "zypp/base/Exception.h"
 #include "zypp/sat/SolvIterMixin.h"
 
@@ -72,10 +72,10 @@ namespace zypp
    *   MIL << result << endl;
    * \endcode
    */
-  class PoolQueryResult : public sat::SolvIterMixin<PoolQueryResult,std::tr1::unordered_set<sat::Solvable>::const_iterator>
+  class PoolQueryResult : public sat::SolvIterMixin<PoolQueryResult,std::unordered_set<sat::Solvable>::const_iterator>
   {
     public:
-      typedef std::tr1::unordered_set<sat::Solvable>	ResultSet;
+      typedef std::unordered_set<sat::Solvable>	ResultSet;
       typedef ResultSet::size_type                      size_type;
       typedef ResultSet::const_iterator                 const_iterator;
 

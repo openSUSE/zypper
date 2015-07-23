@@ -93,7 +93,7 @@ namespace zypp
     friend std::ostream & operator<<( std::ostream & str, const Impl & obj );
     friend std::ostream & dumpOn( std::ostream & str, const Impl & obj );
 
-    typedef std::tr1::unordered_map<sat::detail::IdType,ui::Selectable::Ptr> SelectableIndex;
+    typedef std::unordered_map<sat::detail::IdType,ui::Selectable::Ptr> SelectableIndex;
     typedef ResPoolProxy::const_iterator const_iterator;
 
   public:

@@ -19,7 +19,7 @@
 #include <set>
 #include <map>
 
-#include "zypp/base/Tr1hash.h"
+#include "zypp/base/Hash.h"
 #include "zypp/base/Logger.h"
 #include "zypp/base/Iterator.h"
 #include "zypp/APIConfig.h"
@@ -125,7 +125,7 @@ namespace zypp
     { return dumpRange( str, obj.begin(), obj.end() ); }
 
   template<class _Tp>
-    std::ostream & operator<<( std::ostream & str, const std::tr1::unordered_set<_Tp> & obj )
+    std::ostream & operator<<( std::ostream & str, const std::unordered_set<_Tp> & obj )
     { return dumpRange( str, obj.begin(), obj.end() ); }
 
   template<class _Tp>
@@ -334,7 +334,7 @@ namespace zypp
     { return str << dumpMap( obj ); }
 
   template<class _Key, class _Tp>
-    std::ostream & operator<<( std::ostream & str, const std::tr1::unordered_map<_Key, _Tp> & obj )
+    std::ostream & operator<<( std::ostream & str, const std::unordered_map<_Key, _Tp> & obj )
     { return str << dumpMap( obj ); }
 
   template<class _Key, class _Tp>

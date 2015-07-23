@@ -14,7 +14,7 @@
 #include "zypp/base/Logger.h"
 #include "zypp/base/String.h"
 #include "zypp/base/Gettext.h"
-#include "zypp/base/Tr1hash.h"
+#include "zypp/base/Hash.h"
 
 #include "zypp/LanguageCode.h"
 
@@ -31,7 +31,7 @@ namespace zypp
     /** Wrap static codemap data. */
     struct CodeMaps // singleton
     {
-      typedef std::tr1::unordered_map<std::string,std::string> CodeMap;
+      typedef std::unordered_map<std::string,std::string> CodeMap;
       typedef CodeMap::const_iterator Index;
 
       /** Return the CodeMap Index for \a code_r. */

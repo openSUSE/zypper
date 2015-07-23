@@ -16,7 +16,7 @@
 #include "zypp/base/Logger.h"
 #include "zypp/base/Exception.h"
 #include "zypp/base/NonCopyable.h"
-#include "zypp/base/Tr1hash.h"
+#include "zypp/base/Hash.h"
 #include "zypp/Arch.h"
 #include "zypp/Bit.h"
 
@@ -233,7 +233,7 @@ namespace zypp
       typedef Arch::CompatEntry       CompatEntry;
       typedef CompatEntry::CompatBits CompatBits;
 
-      typedef std::tr1::unordered_set<CompatEntry> Set;
+      typedef std::unordered_set<CompatEntry> Set;
       typedef Set::iterator           iterator;
       typedef Set::const_iterator     const_iterator;
 

@@ -59,7 +59,7 @@ namespace zypp
   namespace
   { /////////////////////////////////////////////////////////////////
     typedef DefaultIntegral<int,0>				VendorMatchEntry;
-    typedef std::tr1::unordered_map<IdString, VendorMatchEntry>	VendorMatch;
+    typedef std::unordered_map<IdString, VendorMatchEntry>	VendorMatch;
     int         _nextId = -1;
     VendorMatch _vendorMatch;
 
