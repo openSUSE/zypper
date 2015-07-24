@@ -206,6 +206,17 @@ namespace zypp
         /** Whether this \ref Locale is in the set of requested locales. */
         bool isRequestedLocale( const Locale & locale_r ) const;
 
+
+	/** Start tracking changes based on this \a locales_r. */
+	void initRequestedLocales( const LocaleSet & locales_r );
+
+	/** Added since last initRequestedLocales. */
+	const LocaleSet & getAddedRequestedLocales() const;
+
+	/** Removed since last initRequestedLocales.*/
+	const LocaleSet & getRemovedRequestedLocales() const;
+
+
         /** Get the set of available locales.
          * This is computed from the package data so it actually
          * represents all locales packages claim to support.

@@ -1192,7 +1192,7 @@ namespace zypp
         const LocaleSet & requestedLocales( _requestedLocalesFile.locales() );
         if ( ! requestedLocales.empty() )
         {
-          satpool.setRequestedLocales( requestedLocales );
+          satpool.initRequestedLocales( requestedLocales );
         }
       }
       {

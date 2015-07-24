@@ -130,13 +130,8 @@ namespace zypp
         {
           case NAMESPACE_LANGUAGE:
           {
-            static IdString en( "en" );
-            const std::unordered_set<IdString> & locale2Solver( reinterpret_cast<PoolImpl*>(data)->_locale2Solver );
-            if ( locale2Solver.empty() )
-            {
-              return rhs == en.id() ? RET_systemProperty : RET_unsupported;
-            }
-            return locale2Solver.find( IdString(rhs) ) != locale2Solver.end() ? RET_systemProperty : RET_unsupported;
+	    const TrackedLocaleIds & localeIds( reinterpret_cast<PoolImpl*>(data)->trackedLocaleIds() );
+	    return localeIds.contains( IdString(rhs) ) ? RET_systemProperty : RET_unsupported;
           }
           break;
 
@@ -236,8 +231,19 @@ namespace zypp
         _availableLocalesPtr.reset(); // available locales may change
         _multiversionListPtr.reset(); // re-evaluate ZConfig::multiversionSpec.
 
-        // invaldate dependency/namespace related indices:
-        depSetDirty();
+        depSetDirty();	// invaldate dependency/namespace related indices
+      }
+
+      void PoolImpl::localeSetDirty( const char * a1, const char * a2, const char * a3 )
+      {
+        if ( a1 )
+        {
+          if      ( a3 ) MIL << a1 << " " << a2 << " " << a3 << endl;
+          else if ( a2 ) MIL << a1 << " " << a2 << endl;
+          else           MIL << a1 << endl;
+        }
+        _trackedLocaleIdsPtr.reset();	// requested locales changed
+        depSetDirty();	// invaldate dependency/namespace related indices
       }
 
       void PoolImpl::depSetDirty( const char * a1, const char * a2, const char * a3 )
@@ -250,6 +256,7 @@ namespace zypp
         }
         ::pool_freewhatprovides( _pool );
       }
+
 
       void PoolImpl::prepare() const
       {
@@ -406,19 +413,6 @@ namespace zypp
 
       ///////////////////////////////////////////////////////////////////
 
-      // need on demand and id based Locale
-      void _locale_hack( const LocaleSet & locales_r,
-                         std::unordered_set<IdString> & locale2Solver )
-      {
-        std::unordered_set<IdString>( 2*locales_r.size() ).swap( locale2Solver );
-        for_( it, locales_r.begin(),locales_r.end() )
-        {
-          for ( Locale l( *it ); l != Locale::noCode; l = l.fallback() )
-            locale2Solver.insert( IdString( l.code() ) );
-        }
-        MIL << "New Solver Locales: " << locale2Solver << endl;
-      }
-
       void PoolImpl::setTextLocale( const Locale & locale_r )
       {
 	std::vector<std::string> fallbacklist;
@@ -436,35 +430,87 @@ namespace zypp
 	::pool_set_languages( _pool, &fallbacklist_cstr.front(), fallbacklist_cstr.size() );
       }
 
+      void PoolImpl::initRequestedLocales( const LocaleSet & locales_r )
+      {
+	if ( _requestedLocalesTracker.setInitial( locales_r ) )
+	{
+	  localeSetDirty( "initRequestedLocales" );
+	  MIL << "Init RequestedLocales: " << _requestedLocalesTracker << " =" << locales_r << endl;
+	}
+      }
+
       void PoolImpl::setRequestedLocales( const LocaleSet & locales_r )
       {
-        depSetDirty( "setRequestedLocales" );
-        _requestedLocales = locales_r;
-        MIL << "New RequestedLocales: " << locales_r << endl;
-        _locale_hack( _requestedLocales, _locale2Solver );
+	if ( _requestedLocalesTracker.set( locales_r ) )
+	{
+	  localeSetDirty( "setRequestedLocales" );
+	  MIL << "New RequestedLocales: " << _requestedLocalesTracker << " =" << locales_r << endl;
+	}
       }
 
       bool PoolImpl::addRequestedLocale( const Locale & locale_r )
       {
-        if ( _requestedLocales.insert( locale_r ).second )
+	bool done = _requestedLocalesTracker.add( locale_r );
+        if ( done )
         {
-          depSetDirty( "addRequestedLocale", locale_r.code().c_str() );
-          _locale_hack( _requestedLocales, _locale2Solver );
-          return true;
+          localeSetDirty( "addRequestedLocale", locale_r.code().c_str() );
+	  MIL << "New RequestedLocales: " << _requestedLocalesTracker << " +" << locale_r << endl;
         }
-        return false;
+        return done;
       }
 
       bool PoolImpl::eraseRequestedLocale( const Locale & locale_r )
       {
-        if ( _requestedLocales.erase( locale_r ) )
+	bool done = _requestedLocalesTracker.remove( locale_r );
+        if ( done )
         {
-          depSetDirty( "addRequestedLocale", locale_r.code().c_str() );
-          _locale_hack( _requestedLocales, _locale2Solver );
-          return true;
+          localeSetDirty( "addRequestedLocale", locale_r.code().c_str() );
+	  MIL << "New RequestedLocales: " << _requestedLocalesTracker << " -" << locale_r << endl;
         }
-        return false;
+        return done;
       }
+
+
+      const PoolImpl::TrackedLocaleIds & PoolImpl::trackedLocaleIds() const
+      {
+	if ( ! _trackedLocaleIdsPtr )
+	{
+	  _trackedLocaleIdsPtr.reset( new TrackedLocaleIds );
+
+	  const base::SetTracker<LocaleSet> &	localesTracker( _requestedLocalesTracker );
+	  TrackedLocaleIds &			localeIds( *_trackedLocaleIdsPtr );
+
+	  // Add current locales+fallback except for added ones
+	  for ( Locale lang: localesTracker.current() )
+	  {
+	    if ( localesTracker.wasAdded( lang ) )
+	      continue;
+	    for ( ; lang; lang = lang.fallback() )
+	    { localeIds.current().insert( IdString(lang) ); }
+	  }
+
+	  // Add added locales+fallback except they are already in current
+	  for ( Locale lang: localesTracker.added() )
+	  {
+	    for ( ; lang && localeIds.current().insert( IdString(lang) ).second; lang = lang.fallback() )
+	    { localeIds.added().insert( IdString(lang) ); }
+	  }
+
+	  // Add removed locales+fallback except they are still in current
+	  for ( Locale lang: localesTracker.removed() )
+	  {
+	    for ( ; lang && ! localeIds.current().count( IdString(lang) ); lang = lang.fallback() )
+	    { localeIds.removed().insert( IdString(lang) ); }
+	  }
+
+	  // Assert that TrackedLocaleIds::current is not empty.
+	  // If, so fill in LanguageCode::enCode as last resort.
+	  if ( localeIds.current().empty() )
+	  { localeIds.current().insert( IdString(Locale::enCode) ); }
+	}
+	return *_trackedLocaleIdsPtr;
+      }
+
 
       static void _getLocaleDeps( Capability cap_r, std::unordered_set<sat::detail::IdType> & store_r )
       {
