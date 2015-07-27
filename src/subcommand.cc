@@ -384,7 +384,7 @@ std::ostream & SubcommandOptions::showHelpOn( std::ostream & out ) const
 
       // translators: %1% is a directory name
       out << boost::format(_(
-	"Zypper subcommands are standalone executables that live in the\n"
+        "Zypper subcommands are standalone executables that live in the\n"
 	"zypper_execdir ('%1%').\n"
 	"\n"
 	"For subcommands zypper provides a wrapper that knows where the\n"
@@ -392,8 +392,8 @@ std::ostream & SubcommandOptions::showHelpOn( std::ostream & out ) const
 	"to them.\n"
 	"\n"
 	"If a subcommand is not found in the zypper_execdir, the wrapper\n"
-	"will look in the rest of your $PATH for it. Thus, it’s possible\n"
-	"to write local zypper extensions that don’t live in system space.\n"
+	"will look in the rest of your $PATH for it. Thus, it's possible\n"
+	"to write local zypper extensions that don't live in system space.\n"
       ) ) % _execdir;
       out << endl;
 
