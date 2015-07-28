@@ -1,4 +1,9 @@
 -------------------------------------------------------------------
+Tue Jul 28 14:10:11 CEST 2015 - ma@suse.de
+
+- Update zypper-po.tar.bz2
+
+-------------------------------------------------------------------
 Thu Apr  2 18:26:53 CEST 2015 - ma@suse.de
 
 - Fix prompt returning undefined default value after wrong input
