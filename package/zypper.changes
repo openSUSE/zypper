@@ -1,4 +1,9 @@
 -------------------------------------------------------------------
+Tue Jul 28 14:09:32 CEST 2015 - ma@suse.de
+
+- Update zypper-po.tar.bz2
+
+-------------------------------------------------------------------
 Thu Jul  9 16:38:49 CEST 2015 - ma@suse.de
 
 - Options to allow vendor locking for zypper dup (FATE#319128)
