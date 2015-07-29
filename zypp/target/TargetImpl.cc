@@ -1181,7 +1181,7 @@ namespace zypp
 
         system.addSolv( rpmsolv );
       }
-      sat::Pool::instance().rootDir( _root );
+      satpool.rootDir( _root );
 
       // (Re)Load the requested locales et al.
       // If the requested locales are empty, we leave the pool untouched

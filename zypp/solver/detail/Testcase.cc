@@ -356,7 +356,7 @@ HelixControl::HelixControl(const std::string & controlPath,
     }
 
     for (LocaleSet::const_iterator iter = languages.begin(); iter != languages.end(); iter++) {
-	*file << TAB << "<locale name=\"" <<  iter->code()
+	*file << TAB << "<locale name=\"" <<  *iter
 	      << "\" />" << endl;
     }
 

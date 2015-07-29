@@ -422,7 +422,7 @@ namespace zypp
       void PoolImpl::setTextLocale( const Locale & locale_r )
       {
 	std::vector<std::string> fallbacklist;
-	for ( Locale l( locale_r ); l != Locale::noCode; l = l.fallback() )
+	for ( Locale l( locale_r ); l; l = l.fallback() )
 	{
 	  fallbacklist.push_back( l.code() );
 	}
