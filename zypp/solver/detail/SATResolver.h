@@ -45,6 +45,8 @@ extern "C"
 #include "zypp/Capability.h"
 #include "zypp/solver/detail/SolverQueueItem.h"
 
+#include "zypp/sat/detail/PoolMember.h"
+
 /////////////////////////////////////////////////////////////////////////
 namespace zypp
 { ///////////////////////////////////////////////////////////////////////
@@ -70,7 +72,8 @@ namespace zypp
  * via solver::detail::Resolver to SATResolver is pedestrian and error prone.
  * Introdce a dedicated solver option structure which is passed down as a whole.
 */
-class SATResolver : public base::ReferenceCounted, private base::NonCopyable {
+class SATResolver : public base::ReferenceCounted, private base::NonCopyable, private sat::detail::PoolMember
+{
 
   private:
     ResPool _pool;

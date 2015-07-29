@@ -282,7 +282,6 @@ class  HelixControl {
     HelixControl (const std::string & controlPath,
 		  const RepositoryTable & sourceTable,
 		  const Arch & systemArchitecture,
-		  const LocaleSet &languages,
 		  const target::Modalias::ModaliasList & modaliasList,
 		  const std::set<std::string> & multiversionSpec,
 		  const std::string & systemPath,
@@ -313,7 +312,6 @@ class  HelixControl {
 HelixControl::HelixControl(const std::string & controlPath,
 			   const RepositoryTable & repoTable,
 			   const Arch & systemArchitecture,
-			   const LocaleSet &languages,
 			   const target::Modalias::ModaliasList & modaliasList,
 			   const std::set<std::string> & multiversionSpec,
 			   const std::string & systemPath,
@@ -355,10 +353,24 @@ HelixControl::HelixControl(const std::string & controlPath,
 	      << "\" />" << endl << endl;
     }
 
-    for (LocaleSet::const_iterator iter = languages.begin(); iter != languages.end(); iter++) {
-	*file << TAB << "<locale name=\"" <<  *iter
-	      << "\" />" << endl;
+    // HACK: directly access sat::pool
+    const sat::Pool & satpool( sat::Pool::instance() );
+
+    // RequestedLocales
+    const LocaleSet & addedLocales( satpool.getAddedRequestedLocales() );
+    const LocaleSet & removedLocales( satpool.getRemovedRequestedLocales() );
+    const LocaleSet & requestedLocales( satpool.getRequestedLocales() );
+
+    for ( Locale l : requestedLocales )
+    {
+      const char * fate = ( addedLocales.count(l) ? "\" fate=\"added" : "" );
+      *file << TAB << "<locale name=\"" << l << fate << "\" />" << endl;
     }
+    for ( Locale l : removedLocales )
+    {
+      *file << TAB << "<locale name=\"" << l << "\" fate=\"removed\" />" << endl;
+    }
+
 
     for_( it, modaliasList.begin(), modaliasList.end() ) {
 	*file << TAB << "<modalias name=\"" <<  *it
@@ -559,7 +571,6 @@ bool Testcase::createTestcase(Resolver & resolver, bool dumpPool, bool runSolver
     HelixControl control (dumpPath + "/solver-test.xml",
 			  repoTable,
 			  ZConfig::instance().systemArchitecture(),
-			  pool.getRequestedLocales(),
 			  target::Modalias::instance().modaliasList(),
 			  ZConfig::instance().multiversionSpec(),
 			  "solver-system.xml.gz",
