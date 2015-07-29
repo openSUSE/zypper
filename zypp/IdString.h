@@ -15,6 +15,8 @@
 #include <iosfwd>
 #include <string>
 
+#include <boost/utility/string_ref_fwd.hpp>
+
 #include "zypp/sat/detail/PoolMember.h"
 
 ///////////////////////////////////////////////////////////////////
@@ -51,8 +53,14 @@ namespace zypp
       /** Ctor from string. */
       explicit IdString( const char * str_r );
 
+      /** Ctor from string (pointer,length). */
+      IdString( const char * str_r, unsigned len_r );
+
       /** Ctor from string. */
       explicit IdString( const std::string & str_r );
+
+      /** Ctor from boost::string_ref. */
+      explicit IdString( boost::string_ref str_r );
 
     public:
       /** No or Null string ( Id \c 0 ). */
@@ -82,6 +90,10 @@ namespace zypp
       /** Conversion to <tt>std::string</tt> */
       std::string asString() const
       { return c_str(); }
+
+      /** Explicit conversion to std::string */
+      explicit operator std::string() const
+      { return asString(); }
 
     public:
       /** Fast compare equal. */

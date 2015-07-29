@@ -32,8 +32,16 @@ namespace zypp
   : _id( ::pool_str2id( myPool().getPool(), str_r, /*create*/true ) )
   {}
 
+  IdString::IdString( const char * str_r, unsigned len_r )
+  : _id( ::pool_strn2id( myPool().getPool(), str_r, len_r, /*create*/true ) )
+  {}
+
   IdString::IdString( const std::string & str_r )
-  : _id( ::pool_str2id( myPool().getPool(), str_r.c_str(), /*create*/true ) )
+  : IdString( str_r.c_str(), str_r.length() )
+  {}
+
+  IdString::IdString( boost::string_ref str_r )
+  : IdString( str_r.data(), str_r.length() )
   {}
 
   unsigned IdString::size() const
