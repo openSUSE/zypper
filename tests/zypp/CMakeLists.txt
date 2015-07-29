@@ -21,6 +21,7 @@ ADD_TESTS(
   Flags
   InstanceId
   KeyRing
+  Locale
   Locks
   MediaSetAccess
   PathInfo

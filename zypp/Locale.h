@@ -13,53 +13,56 @@
 #define ZYPP_LOCALE_H
 
 #include <iosfwd>
+#include <string>
 
-#include "zypp/base/PtrTypes.h"
 #include "zypp/base/Hash.h"
 
-#include "zypp/IdString.h"
+#include "zypp/IdStringType.h"
 #include "zypp/LanguageCode.h"
 #include "zypp/CountryCode.h"
 
 ///////////////////////////////////////////////////////////////////
 namespace zypp
-{ /////////////////////////////////////////////////////////////////
-
+{
   class Locale;
   typedef std::unordered_set<Locale> LocaleSet;
 
   ///////////////////////////////////////////////////////////////////
-  //
-  //	CLASS NAME : Locale
-  //
-  /**
-   * \todo migrate to IdString
-  */
-  class Locale
+  /// \class Locale
+  /// \brief 'Language[_Country]' codes.
+  ///
+  /// In fact the class will not prevent to use a non iso code.
+  /// Just a warning will appear in the log. Construction from string
+  /// consider everything up to the first \c '.' or \c '@'.
+  /// \code
+  ///   Locale l( "de_DE.UTF-8" );
+  ///
+  ///   l.code()     == "de_DE";
+  ///   l.language() == "de";
+  ///   l.country()  == "DE";
+  ///
+  ///   l.fallback()                       == "de";
+  ///   l.fallback().fallback()            == Locale::enCode == "en";
+  ///   l.fallback().fallback().fallback() == Locale::noCode == "";
+  /// \endcode
+  ///////////////////////////////////////////////////////////////////
+  class Locale : public IdStringType<Locale>
   {
-    friend std::ostream & operator<<( std::ostream & str, const Locale & obj );
-
   public:
-    /** Implementation  */
-    class Impl;
-
-  public:
-    /** Default ctor */
+    /** Default Ctor: \ref noCode */
     Locale();
 
-    /** Ctor taking a string. */
-    explicit
-    Locale( IdString code_r );
+    /** Ctor from string. */
+    explicit Locale( IdString str_r );
 
-    explicit
-    Locale( const std::string & code_r );
+    /** Ctor from string. */
+    explicit Locale( const std::string & str_r );
 
-    explicit
-    Locale( const char * code_r );
+    /** Ctor from string. */
+    explicit Locale( const char * str_r );
 
     /** Ctor taking LanguageCode and optional CountryCode. */
-    Locale( const LanguageCode & language_r,
-            const CountryCode & country_r = CountryCode() );
+    Locale( LanguageCode language_r, CountryCode country_r = CountryCode() );
 
     /** Dtor */
     ~Locale();
@@ -67,97 +70,50 @@ namespace zypp
   public:
     /** \name Locale constants. */
     //@{
-    /** No or empty code. */
+    /** Empty code. */
     static const Locale noCode;
+
+    /** Last resort "en". */
+    static const Locale enCode;
     //@}
 
   public:
-    /** */
-    const LanguageCode & language() const;
-    /** */
-    const CountryCode & country() const;
+    /** The language part. */
+    LanguageCode language() const;
 
-    /** Return the locale code. */
-    std::string code() const;
+    /** The county part.*/
+    CountryCode country() const;
 
-    /** Return the name made of language and country name. */
+    /** Return the locale code asString. */
+    std::string code() const
+    { return std::string(_str); }
+
+    /** Return the translated locale name. */
     std::string name() const;
 
-    /** Return a fallback locale for this locale, when giving up, returns empty Locale() */
+  public:
+    /** Return the fallback locale for this locale, if no fallback exists the empty Locale::noCode.
+     * The usual fallback sequence is "language_COUNTRY" -> "language" -> Locale::enCode ("en")
+     * ->Locale::noCode (""). Some exceptions like "pt_BR"->"en"->"" do exist.
+     */
     Locale fallback() const;
 
-  public:
-
-    /** Return the best match for \ref Locale \c requested_r within the available \c avLocales_r.
+    /** Return the best match for \ref Locale \a requested_r within the available \a avLocales_r.
      *
-     * If \c requested_r is nor specified or equals \ref Locale::noCode,
-     * \ref ZConfig::textLocale is assumed.
+     * If \a requested_r is not specified \ref ZConfig::textLocale is assumed.
      *
-     * If neither \c requested_r nor any of it's \ref fallback locales
-     * are available, \ref Locale::noCode is returned.
-    */
-    static Locale bestMatch( const LocaleSet & avLocales_r, const Locale & requested_r = Locale() );
+     * If neither \c requested_r nor any of it's \ref fallback locales are available
+     * in \a avLocales_r, \ref Locale::noCode is returned.
+     */
+    static Locale bestMatch( const LocaleSet & avLocales_r, Locale requested_r = Locale() );
 
   private:
-    /** Pointer to implementation */
-    RW_pointer<Impl> _pimpl;
+    friend class IdStringType<Locale>;
+    IdString _str;
   };
-  ///////////////////////////////////////////////////////////////////
-
-  /** \relates Locale Stream output */
-  inline std::ostream & operator<<( std::ostream & str, const Locale & obj )
-  { return str << obj.code(); }
-
-  /** Comparison based on string value. */
-  //@{
-  /** \relates Locale */
-  inline bool operator==( const Locale & lhs, const Locale & rhs ) {
-    return( lhs.code() == rhs.code() );
-  }
-  /** \relates Locale */
-  inline bool operator==( const std::string & lhs, const Locale & rhs ) {
-    return( lhs == rhs.code() );
-  }
-  /** \relates Locale */
-  inline bool operator==( const Locale & lhs, const std::string & rhs ) {
-    return( lhs.code() == rhs );
-  }
-
-  /** \relates Locale */
-  inline bool operator!=( const Locale & lhs, const Locale & rhs ) {
-    return( ! operator==( lhs, rhs ) );
-  }
-  /** \relates Locale */
-  inline bool operator!=( const std::string & lhs, const Locale & rhs ) {
-    return( ! operator==( lhs, rhs ) );
-  }
-  /** \relates Locale */
-  inline bool operator!=( const Locale & lhs, const std::string & rhs ) {
-    return( ! operator==( lhs, rhs ) );
-  }
-  //@}
-
-  /////////////////////////////////////////////////////////////////
 } // namespace zypp
 ///////////////////////////////////////////////////////////////////
 
-namespace std { namespace tr1 {
-  /** \relates ::zypp::Locale hash function */
-  template<> struct hash< ::zypp::Locale>
-  {
-    size_t operator()( const ::zypp::Locale & __s ) const
-    { return hash<std::string>()(__s.code()); }
-  };
-}}
+ZYPP_DEFINE_ID_HASHABLE( ::zypp::Locale );
 
-///////////////////////////////////////////////////////////////////
-namespace std
-{ /////////////////////////////////////////////////////////////////
-  /** \relates zypp::Locale Default order for std::container based on code string value.*/
-  template<>
-    inline bool less<zypp::Locale>::operator()( const zypp::Locale & lhs, const zypp::Locale & rhs ) const
-    { return lhs.code() < rhs.code(); }
-  /////////////////////////////////////////////////////////////////
-} // namespace std
-///////////////////////////////////////////////////////////////////
 #endif // ZYPP_LOCALE_H

@@ -22,175 +22,130 @@ using std::endl;
 
 ///////////////////////////////////////////////////////////////////
 namespace zypp
-{ /////////////////////////////////////////////////////////////////
-
+{
   ///////////////////////////////////////////////////////////////////
   namespace
-  { /////////////////////////////////////////////////////////////////
-
+  {
     /** Wrap static codemap data. */
-    struct CodeMaps // singleton
+    struct CodeMaps
     {
-      typedef std::unordered_map<std::string,std::string> CodeMap;
-      typedef CodeMap::const_iterator Index;
-
-      /** Return the CodeMap Index for \a code_r. */
-      static Index getIndex( const std::string & code_r )
+      /** The singleton */
+      static CodeMaps & instance()
       {
-        static CodeMaps _maps; // the singleton instance
-        return _maps.lookup( code_r );
+	static CodeMaps _instance;
+	return _instance;
+      }
+
+      /** Lookup (translated) name for \a index_r.*/
+      std::string name( IdString index_r )
+      {
+	Link link( getIndex( index_r ) );
+
+	std::string ret;
+	if ( link->second )
+	{ ret = _(link->second); }
+	else
+	{
+	  ret = _("Unknown language: ");
+	  ret += "'";
+	  ret += index_r.c_str();
+	  ret += "'";
+	}
+	return ret;
       }
 
     private:
+      typedef std::unordered_map<std::string,const char *> CodeMap;
+      typedef CodeMap::const_iterator Link;
+
+      typedef std::unordered_map<IdString,Link> IndexMap;
+
       /** Ctor initializes the code maps.
        * http://www.loc.gov/standards/iso639-2/ISO-639-2_values_8bits.txt
       */
       CodeMaps();
 
-      /** Make shure the code is in the code maps and return it's index. */
-      inline Index lookup( const std::string & code_r );
+      /** Return \ref Link for \a index_r, creating it if necessary. */
+      Link getIndex( IdString index_r )
+      {
+	auto it = _indexMap.find( index_r );
+	return( it != _indexMap.end()
+	      ? it->second
+	      : newIndex( index_r, index_r.asString() ) );
+      }
+
+      /** Return the CodeMap Index for \a code_r. */
+      Link newIndex( IdString index_r, const std::string & code_r )
+      {
+	Link link = _codeMap.find( code_r );
+	if ( link != _codeMap.end() )
+	  return (_indexMap[index_r] = link);
+
+	// not found: Remember a new code
+	CodeMap::value_type nval( code_r, nullptr );
+
+	if ( code_r.size() > 3 || code_r.size() < 2 )
+	  WAR << "Malformed LanguageCode '" << code_r << "' (expect 2 or 3-letter)" << endl;
+
+	std::string lcode( str::toLower( code_r ) );
+	if ( lcode != code_r )
+	{
+	  WAR << "Malformed LanguageCode '" << code_r << "' (not lower case)" << endl;
+	  // but maybe we're lucky with the lower case code
+	  // and find a language name.
+	  link = _codeMap.find( lcode );
+	  if ( link != _codeMap.end() )
+	  {
+	    nval.second = link->second;
+	  }
+	}
+	MIL << "Remember LanguageCode '" << code_r << "': '" << nval.second << "'" << endl;
+	return (_indexMap[index_r] = _codeMap.insert( nval ).first);
+      }
 
     private:
-      /** All the codes. */
-      CodeMap codes;
+      CodeMap _codeMap;
+      IndexMap _indexMap;
     };
-
-    inline CodeMaps::Index CodeMaps::lookup( const std::string & code_r )
-    {
-      Index it = codes.find( code_r );
-      if ( it != codes.end() )
-        return it;
-
-      // not found: Remember a new code
-      CodeMap::value_type nval( code_r, std::string() );
-
-      if ( code_r.size() > 3 || code_r.size() < 2 )
-        WAR << "Malformed LanguageCode '" << code_r << "' (expect 2 or 3-letter)" << endl;
-
-      std::string lcode( str::toLower( code_r ) );
-      if ( lcode != code_r )
-        {
-          WAR << "Malformed LanguageCode '" << code_r << "' (not lower case)" << endl;
-          // but maybe we're lucky with the lower case code
-          // and find a language name.
-          it = codes.find( lcode );
-          if ( it != codes.end() )
-            nval.second = it->second;
-        }
-
-      MIL << "Remember LanguageCode '" << code_r << "': '" << nval.second << "'" << endl;
-      return codes.insert( nval ).first;
-    }
-
-    /////////////////////////////////////////////////////////////////
   } // namespace
   ///////////////////////////////////////////////////////////////////
 
   ///////////////////////////////////////////////////////////////////
-  //
-  //	CLASS NAME : LanguageCode::Impl
-  //
-  /** LanguageCode implementation.
-   * \note CodeMaps contain the untranslated language names.
-   * Translation is done in \ref name.
-  */
-  struct LanguageCode::Impl
-  {
-    Impl()
-    : _index( CodeMaps::getIndex( std::string() ) )
-    {}
-
-    Impl( const std::string & code_r )
-    : _index( CodeMaps::getIndex( code_r ) )
-    {}
-
-    std::string code() const
-    { return _index->first; }
-
-    std::string name() const {
-      if ( _index->second.empty() )
-        {
-          std::string ret( _("Unknown language: ") );
-          ret += "'";
-          ret += _index->first;
-          ret += "'";
-          return ret;
-        }
-      return _( _index->second.c_str() );
-    }
-
-  private:
-    /** index into code map. */
-    CodeMaps::Index _index;
-
-  public:
-    /** Offer default Impl. */
-    static shared_ptr<Impl> nullimpl()
-    {
-      static shared_ptr<Impl> _nullimpl( new Impl );
-      return _nullimpl;
-    }
-  };
-  ///////////////////////////////////////////////////////////////////
-
-  ///////////////////////////////////////////////////////////////////
-  //
-  //	CLASS NAME : LanguageCode
-  //
+  //	class LanguageCode
   ///////////////////////////////////////////////////////////////////
 
   const LanguageCode LanguageCode::noCode;
+  //const LanguageCode LanguageCode::enCode("en");	in Locale.cc as Locale::enCode depends on it
 
-  ///////////////////////////////////////////////////////////////////
-  //
-  //	METHOD NAME : LanguageCode::LanguageCode
-  //	METHOD TYPE : Ctor
-  //
   LanguageCode::LanguageCode()
-  : _pimpl( Impl::nullimpl() )
   {}
 
-  ///////////////////////////////////////////////////////////////////
-  //
-  //	METHOD NAME : LanguageCode::LanguageCode
-  //	METHOD TYPE : Ctor
-  //
-  LanguageCode::LanguageCode( const std::string & code_r )
-  : _pimpl( new Impl( code_r ) )
+  LanguageCode::LanguageCode( IdString str_r )
+  : _str( str_r )
   {}
 
-  ///////////////////////////////////////////////////////////////////
-  //
-  //	METHOD NAME : LanguageCode::~LanguageCode
-  //	METHOD TYPE : Dtor
-  //
+  LanguageCode::LanguageCode( const std::string & str_r )
+  : _str( str_r )
+  {}
+
+  LanguageCode::LanguageCode( const char * str_r )
+  : _str( str_r )
+  {}
+
   LanguageCode::~LanguageCode()
   {}
 
-  ///////////////////////////////////////////////////////////////////
-  //
-  //	METHOD NAME : LanguageCode::code
-  //	METHOD TYPE : std::string
-  //
-  std::string LanguageCode::code() const
-  { return _pimpl->code(); }
 
-  ///////////////////////////////////////////////////////////////////
-  //
-  //	METHOD NAME : LanguageCode::name
-  //	METHOD TYPE : std::string
-  //
   std::string LanguageCode::name() const
-  { return _pimpl->name(); }
+  { return CodeMaps::instance().name( _str ); }
 
   ///////////////////////////////////////////////////////////////////
   namespace
-  { /////////////////////////////////////////////////////////////////
-
+  {
     CodeMaps::CodeMaps()
     {
       // Defined LanguageCode constants
-      codes[""]        = N_("No Code");
+      _codeMap[""]        = N_("No Code");
 
       struct LangInit
       {
@@ -1198,17 +1153,13 @@ namespace zypp
 
       for (const LangInit * i = langInit; i->iso639_2 != NULL; ++i)
       {
-	  std::string name( i->name );
-	  codes[i->iso639_2] = name;
+	  const char * name( i->name );
+	  _codeMap[i->iso639_2] = name;
 	  if (i->iso639_1 != NULL)
-	      codes[i->iso639_1] = name;
+	      _codeMap[i->iso639_1] = name;
       }
     }
-
-    /////////////////////////////////////////////////////////////////
   } // namespace
   ///////////////////////////////////////////////////////////////////
-
-  /////////////////////////////////////////////////////////////////
 } // namespace zypp
 ///////////////////////////////////////////////////////////////////

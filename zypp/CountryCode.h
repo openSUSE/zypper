@@ -15,40 +15,32 @@
 #include <iosfwd>
 #include <string>
 
-#include "zypp/base/PtrTypes.h"
+#include "zypp/IdStringType.h"
 
 ///////////////////////////////////////////////////////////////////
 namespace zypp
-{ /////////////////////////////////////////////////////////////////
-
-  class CountryCode;
-  inline bool operator==( const CountryCode & lhs, const CountryCode & rhs );
-  inline bool operator!=( const CountryCode & lhs, const CountryCode & rhs );
-
+{
   ///////////////////////////////////////////////////////////////////
-  //
-  //	CLASS NAME : CountryCode
-  //
-  /** Country codes (iso3166-1-alpha-2).
-   *
-   * In fact the class will not prevent to use a non iso country code.
-   * Just a warning will appear in the log.
-  */
-  class CountryCode
+  /// \class CountryCode
+  /// \brief Country codes (iso3166-1-alpha-2).
+  ///
+  /// In fact the class will not prevent to use a non iso country code.
+  /// Just a warning will appear in the log.
+  ///////////////////////////////////////////////////////////////////
+  class CountryCode : public IdStringType<CountryCode>
   {
-    friend std::ostream & operator<<( std::ostream & str, const CountryCode & obj );
-
   public:
-    /** Implementation  */
-    class Impl;
-
-  public:
-    /** Default ctor */
+    /** Default Ctor: \ref noCode */
     CountryCode();
 
-    /** Ctor taking a string. */
-    explicit
-    CountryCode( const std::string & code_r );
+    /** Ctor from string. */
+    explicit CountryCode( IdString str_r );
+
+    /** Ctor from string. */
+    explicit CountryCode( const std::string & str_r );
+
+    /** Ctor from string. */
+    explicit CountryCode( const char * str_r );
 
     /** Dtor */
     ~CountryCode();
@@ -57,72 +49,27 @@ namespace zypp
 
     /** \name CountryCode constants. */
     //@{
-    /** No or empty code. */
+    /** Empty code. */
     static const CountryCode noCode;
     //@}
 
   public:
-    /** Return the country code. */
-    std::string code() const;
+    /** Return the country code asString. */
+    std::string code() const
+    { return std::string(_str); }
 
-    /** Return the country name; if not available the country code. */
+    /** Return the translated country name; if unknown the country code. */
     std::string name() const;
 
-    /** <tt>*this != noCode</tt>. */
-    bool hasCode() const
-    { return *this != noCode; }
-
   private:
-    /** Pointer to implementation */
-    RW_pointer<Impl> _pimpl;
+    friend class IdStringType<CountryCode>;
+    IdString _str;
   };
-  ///////////////////////////////////////////////////////////////////
-
-  /** \relates CountryCode Stream output */
-  inline std::ostream & operator<<( std::ostream & str, const CountryCode & obj )
-  { return str << obj.code(); }
-
-  /** Comparison based on string value. */
-  //@{
-  /** \relates CountryCode */
-  inline bool operator==( const CountryCode & lhs, const CountryCode & rhs ) {
-    return( lhs.code() == rhs.code() );
-  }
-  /** \relates CountryCode */
-  inline bool operator==( const std::string & lhs, const CountryCode & rhs ) {
-    return( lhs == rhs.code() );
-  }
-  /** \relates CountryCode */
-  inline bool operator==( const CountryCode & lhs, const std::string & rhs ) {
-    return( lhs.code() == rhs );
-  }
-
-  /** \relates CountryCode */
-  inline bool operator!=( const CountryCode & lhs, const CountryCode & rhs ) {
-    return( ! operator==( lhs, rhs ) );
-  }
-  /** \relates CountryCode */
-  inline bool operator!=( const std::string & lhs, const CountryCode & rhs ) {
-    return( ! operator==( lhs, rhs ) );
-  }
-  /** \relates CountryCode */
-  inline bool operator!=( const CountryCode & lhs, const std::string & rhs ) {
-    return( ! operator==( lhs, rhs ) );
-  }
-  //@}
-
-  /////////////////////////////////////////////////////////////////
 } // namespace zypp
 ///////////////////////////////////////////////////////////////////
 
 ///////////////////////////////////////////////////////////////////
-namespace std
-{ /////////////////////////////////////////////////////////////////
-  /** \relates zypp::CountryCode Default order for std::container based on code string value.*/
-  template<>
-    inline bool less<zypp::CountryCode>::operator()( const zypp::CountryCode & lhs, const zypp::CountryCode & rhs ) const
-    { return lhs.code() < rhs.code(); }
-  /////////////////////////////////////////////////////////////////
-} // namespace std
-///////////////////////////////////////////////////////////////////
+
+ZYPP_DEFINE_ID_HASHABLE( ::zypp::CountryCode );
+
 #endif // ZYPP_COUNTRYCODE_H
