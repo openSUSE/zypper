@@ -17,7 +17,7 @@
 #include "zypp/base/PtrTypes.h"
 #include "zypp/base/Function.h"
 #include "zypp/base/Iterator.h"
-#include "zypp/base/Tr1hash.h"
+#include "zypp/base/Hash.h"
 
 #include "zypp/PoolItem.h"
 
@@ -59,7 +59,7 @@ namespace zypp
    */
   class PoolItemBest
   {
-      typedef std::tr1::unordered_map<IdString,PoolItem> Container;
+      typedef std::unordered_map<IdString,PoolItem> Container;
     public:
       /** Predicate returning \c True if \a lhs is a better choice. */
       typedef boost::function<bool ( const PoolItem & lhs, const PoolItem & rhs )> Predicate;

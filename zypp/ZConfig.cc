@@ -184,7 +184,7 @@ namespace zypp
      */
     Locale _autodetectTextLocale()
     {
-      Locale ret( "en" );
+      Locale ret( Locale::enCode );
       const char * envlist[] = { "LC_ALL", "LC_MESSAGES", "LANG", NULL };
       for ( const char ** envvar = envlist; *envvar; ++envvar )
       {
@@ -195,7 +195,7 @@ namespace zypp
           if ( envstr != "POSIX" && envstr != "C" )
           {
             Locale lang( envstr );
-            if ( ! lang.code().empty() )
+            if ( lang )
             {
               MIL << "Found " << *envvar << "=" << envstr << endl;
               ret = lang;

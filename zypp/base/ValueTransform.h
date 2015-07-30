@@ -22,12 +22,12 @@ namespace zypp
   namespace base
   {
     ///////////////////////////////////////////////////////////////////
-    /// \class ValueTransform<_Tp,_UnaryFunction>
+    /// \class ValueTransform
     /// \brief Helper managing raw values with transformed representation
     ///
-    /// This helper enforces to explicitly state wheter you are using
+    /// This helper enforces to explicitly state whether you are using
     /// the raw or the variable replaced value. Usually you set \c raw
-    /// and get \c transformed (uness writing \c raw to some config file).
+    /// and get \c transformed (unless writing \c raw to some config file).
     ///
     /// Used e.g. vor variable replaced config strings.
     ///////////////////////////////////////////////////////////////////
@@ -78,7 +78,7 @@ namespace zypp
     };
 
     ///////////////////////////////////////////////////////////////////
-    /// \class ContainerTransform<_Container,_UnaryFunction>
+    /// \class ContainerTransform
     /// \brief Helper managing a container of raw values with transformed representation
     ///
     /// This helper enforces to explicitly state wheter you are using

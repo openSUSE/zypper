@@ -15,6 +15,8 @@
 #include <iosfwd>
 #include <string>
 
+#include <boost/utility/string_ref_fwd.hpp>
+
 #include "zypp/sat/detail/PoolMember.h"
 
 ///////////////////////////////////////////////////////////////////
@@ -22,7 +24,7 @@ namespace zypp
 { /////////////////////////////////////////////////////////////////
 
   class IdString;
-  typedef std::tr1::unordered_set<IdString> IdStringSet;
+  typedef std::unordered_set<IdString> IdStringSet;
 
   ///////////////////////////////////////////////////////////////////
   //
@@ -43,16 +45,22 @@ namespace zypp
 
     public:
       /** Default ctor, empty string. */
-      IdString() : _id( sat::detail::emptyId ) {}
+      constexpr IdString() : _id( sat::detail::emptyId ) {}
 
       /** Ctor from id. */
-      explicit IdString( IdType id_r ) : _id( id_r ) {}
+      constexpr explicit IdString( IdType id_r ) : _id( id_r ) {}
 
       /** Ctor from string. */
       explicit IdString( const char * str_r );
 
+      /** Ctor from string (pointer,length). */
+      IdString( const char * str_r, unsigned len_r );
+
       /** Ctor from string. */
       explicit IdString( const std::string & str_r );
+
+      /** Ctor from boost::string_ref. */
+      explicit IdString( boost::string_ref str_r );
 
     public:
       /** No or Null string ( Id \c 0 ). */
@@ -63,13 +71,13 @@ namespace zypp
 
     public:
       /** Evaluate in a boolean context <tt>( != \c Null )</tt>. */
-      explicit operator bool() const
+      constexpr explicit operator bool() const
       { return _id; }
 
       /** Whether the string is empty.
        * This is true for \ref Null and \ref Empty.
        */
-      bool empty() const
+      constexpr bool empty() const
       { return( _id == sat::detail::emptyId || _id == sat::detail::noId ); }
 
       /** The strings size. */
@@ -82,6 +90,10 @@ namespace zypp
       /** Conversion to <tt>std::string</tt> */
       std::string asString() const
       { return c_str(); }
+
+      /** Explicit conversion to std::string */
+      explicit operator std::string() const
+      { return asString(); }
 
     public:
       /** Fast compare equal. */

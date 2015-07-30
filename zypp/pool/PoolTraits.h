@@ -18,7 +18,7 @@
 #include <vector>
 
 #include "zypp/base/Iterator.h"
-#include "zypp/base/Tr1hash.h"
+#include "zypp/base/Hash.h"
 
 #include "zypp/PoolItem.h"
 #include "zypp/pool/ByIdent.h"
@@ -75,7 +75,7 @@ namespace zypp
       typedef ItemContainerT::size_type			size_type;
 
       /** ident index */
-      typedef std::tr1::unordered_multimap<sat::detail::IdType, PoolItem>
+      typedef std::unordered_multimap<sat::detail::IdType, PoolItem>
                                                         Id2ItemT;
       typedef P_Select2nd<Id2ItemT::value_type>         Id2ItemValueSelector;
       typedef transform_iterator<Id2ItemValueSelector, Id2ItemT::const_iterator>

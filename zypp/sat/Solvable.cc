@@ -152,14 +152,14 @@ namespace zypp
     {
       NO_SOLVABLE_RETURN( std::string() );
       const char * s = 0;
-      if ( lang_r == Locale::noCode )
+      if ( !lang_r )
       {
         s = ::solvable_lookup_str_poollang( _solvable, attr.id() );
       }
       else
       {
-	for ( Locale l( lang_r ); l != Locale::noCode; l = l.fallback() )
-	  if ( (s = ::solvable_lookup_str_lang( _solvable, attr.id(), l.code().c_str(), 0 )) )
+	for ( Locale l( lang_r ); l; l = l.fallback() )
+	  if ( (s = ::solvable_lookup_str_lang( _solvable, attr.id(), l.c_str(), 0 )) )
 	    return s;
 	  // here: no matching locale, so use default
 	  s = ::solvable_lookup_str_lang( _solvable, attr.id(), 0, 0 );

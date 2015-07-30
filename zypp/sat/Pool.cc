@@ -227,6 +227,10 @@ namespace zypp
     bool Pool::isRequestedLocale( const Locale & locale_r ) const
     { return myPool().isRequestedLocale( locale_r ); }
 
+    void Pool::initRequestedLocales( const LocaleSet & locales_r )	{ myPool().initRequestedLocales( locales_r ); }
+    const LocaleSet & Pool::getAddedRequestedLocales() const		{ return myPool().getAddedRequestedLocales(); }
+    const LocaleSet & Pool::getRemovedRequestedLocales() const		{ return myPool().getRemovedRequestedLocales(); }
+
     const LocaleSet & Pool::getAvailableLocales() const
     {  return myPool().getAvailableLocales(); }
 

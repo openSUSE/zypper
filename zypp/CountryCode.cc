@@ -14,7 +14,7 @@
 #include "zypp/base/Logger.h"
 #include "zypp/base/String.h"
 #include "zypp/base/Gettext.h"
-#include "zypp/base/Tr1hash.h"
+#include "zypp/base/Hash.h"
 
 #include "zypp/CountryCode.h"
 
@@ -22,166 +22,122 @@ using std::endl;
 
 ///////////////////////////////////////////////////////////////////
 namespace zypp
-{ /////////////////////////////////////////////////////////////////
-
+{
   ///////////////////////////////////////////////////////////////////
   namespace
-  { /////////////////////////////////////////////////////////////////
+  {
 
     /** Wrap static codemap data. */
     struct CodeMaps // singleton
     {
-      typedef std::tr1::unordered_map<std::string,std::string> CodeMap;
-      typedef CodeMap::const_iterator Index;
-
-      /** Return the CodeMap Index for \a code_r. */
-      static Index getIndex( const std::string & code_r )
+      /** The singleton */
+      static CodeMaps & instance()
       {
-        static CodeMaps _maps; // the singleton instance
-        return _maps.lookup( code_r );
+	static CodeMaps _instance;
+	return _instance;
+      }
+
+      /** Lookup (translated) name for \a index_r.*/
+      std::string name( IdString index_r )
+      {
+	Link link( getIndex( index_r ) );
+
+	std::string ret;
+	if ( link->second )
+	{ ret = _(link->second); }
+	else
+	{
+	  ret = _("Unknown country: ");
+	  ret += "'";
+	  ret += index_r.c_str();
+	  ret += "'";
+	}
+	return ret;
       }
 
     private:
+      typedef std::unordered_map<std::string,const char *> CodeMap;
+      typedef CodeMap::const_iterator Link;
+
+      typedef std::unordered_map<IdString,Link> IndexMap;
+
       /** Ctor initializes the code maps.
        * http://www.iso.org/iso/en/prods-services/iso3166ma/02iso-3166-code-lists/list-en1.html
-      */
+       */
       CodeMaps();
 
-      /** Make shure the code is in the code maps and return it's index. */
-      inline Index lookup( const std::string & code_r );
+      /** Return \ref Link for \a index_r, creating it if necessary. */
+      Link getIndex( IdString index_r )
+      {
+	auto it = _indexMap.find( index_r );
+	return( it != _indexMap.end()
+	      ? it->second
+	      : newIndex( index_r, index_r.asString() ) );
+      }
+
+      /** Return the CodeMap Index for \a code_r. */
+      Link newIndex( IdString index_r, const std::string & code_r )
+      {
+	Link link = _codeMap.find( code_r );
+	if ( link != _codeMap.end() )
+	  return (_indexMap[index_r] = link);
+
+	// not found: Remember a new code
+	CodeMap::value_type nval( code_r, nullptr );
+
+	if ( code_r.size() != 2 )
+	  WAR << "Malformed CountryCode '" << code_r << "' (expect 2-letter)" << endl;
+
+	std::string ucode( str::toUpper( code_r ) );
+	if ( ucode != code_r )
+	{
+	  WAR << "Malformed CountryCode '" << code_r << "' (not upper case)" << endl;
+	  // but maybe we're lucky with the lower case code
+	  // and find a language name.
+	  link = _codeMap.find( ucode );
+	  if ( link != _codeMap.end() )
+	  {
+	    nval.second = link->second;
+	  }
+	}
+	MIL << "Remember CountryCode '" << code_r << "': '" << nval.second << "'" << endl;
+	return (_indexMap[index_r] = _codeMap.insert( nval ).first);
+      }
 
     private:
-      /** All the codes. */
-      CodeMap codes;
+      CodeMap _codeMap;
+      IndexMap _indexMap;
     };
-
-    inline CodeMaps::Index CodeMaps::lookup( const std::string & code_r )
-    {
-      Index it = codes.find( code_r );
-      if ( it != codes.end() )
-        return it;
-
-      // not found: Remember a new code
-      CodeMap::value_type nval( code_r, std::string() );
-
-      if ( code_r.size() != 2 )
-        WAR << "Malformed CountryCode '" << code_r << "' (expect 2-letter)" << endl;
-
-      std::string lcode( str::toUpper( code_r ) );
-      if ( lcode != code_r )
-        {
-          WAR << "Malformed CountryCode '" << code_r << "' (not upper case)" << endl;
-          // but maybe we're lucky with the upper case code
-          // and find a country name.
-          it = codes.find( lcode );
-          if ( it != codes.end() )
-            nval.second = it->second;
-        }
-
-      MIL << "Remember CountryCode '" << code_r << "': '" << nval.second << "'" << endl;
-      return codes.insert( nval ).first;
-    }
-
-    /////////////////////////////////////////////////////////////////
   } // namespace
   ///////////////////////////////////////////////////////////////////
 
   ///////////////////////////////////////////////////////////////////
-  //
-  //	CLASS NAME : CountryCode::Impl
-  //
-  /** CountryCode implementation.
-   * \note CodeMaps contain the untranslated country names.
-   * Translation is done in \ref name.
-  */
-  struct CountryCode::Impl
-  {
-    Impl()
-    : _index( CodeMaps::getIndex( std::string() ) )
-    {}
-
-    Impl( const std::string & code_r )
-    : _index( CodeMaps::getIndex( code_r ) )
-    {}
-
-    std::string code() const
-    { return _index->first; }
-
-    std::string name() const {
-      if ( _index->second.empty() )
-        {
-          std::string ret( _("Unknown country: ") );
-          ret += "'";
-          ret += _index->first;
-          ret += "'";
-          return ret;
-        }
-      return _( _index->second.c_str() );
-    }
-
-  private:
-    /** index into code map. */
-    CodeMaps::Index _index;
-
-  public:
-    /** Offer default Impl. */
-    static shared_ptr<Impl> nullimpl()
-    {
-      static shared_ptr<Impl> _nullimpl( new Impl );
-      return _nullimpl;
-    }
-  };
-  ///////////////////////////////////////////////////////////////////
-
-  ///////////////////////////////////////////////////////////////////
-  //
-  //	CLASS NAME : CountryCode
-  //
+  //	class CountryCode
   ///////////////////////////////////////////////////////////////////
 
   const CountryCode CountryCode::noCode;
 
-  ///////////////////////////////////////////////////////////////////
-  //
-  //	METHOD NAME : CountryCode::CountryCode
-  //	METHOD TYPE : Ctor
-  //
   CountryCode::CountryCode()
-  : _pimpl( Impl::nullimpl() )
   {}
 
-  ///////////////////////////////////////////////////////////////////
-  //
-  //	METHOD NAME : CountryCode::CountryCode
-  //	METHOD TYPE : Ctor
-  //
-  CountryCode::CountryCode( const std::string & code_r )
-  : _pimpl( new Impl( code_r ) )
+  CountryCode::CountryCode( IdString str_r )
+  : _str( str_r )
   {}
 
-  ///////////////////////////////////////////////////////////////////
-  //
-  //	METHOD NAME : CountryCode::~CountryCode
-  //	METHOD TYPE : Dtor
-  //
+  CountryCode::CountryCode( const std::string & str_r )
+  : _str( str_r )
+  {}
+
+  CountryCode::CountryCode( const char * str_r )
+  : _str( str_r )
+  {}
+
   CountryCode::~CountryCode()
   {}
 
-  ///////////////////////////////////////////////////////////////////
-  //
-  //	METHOD NAME : CountryCode::code
-  //	METHOD TYPE : std::string
-  //
-  std::string CountryCode::code() const
-  { return _pimpl->code(); }
 
-  ///////////////////////////////////////////////////////////////////
-  //
-  //	METHOD NAME : CountryCode::name
-  //	METHOD TYPE : std::string
-  //
   std::string CountryCode::name() const
-  { return _pimpl->name(); }
+  { return CodeMaps::instance().name( _str ); }
 
   ///////////////////////////////////////////////////////////////////
   namespace
@@ -190,7 +146,7 @@ namespace zypp
     CodeMaps::CodeMaps()
     {
       // Defined CountryCode constants
-      codes[""]        = N_( "No Code" );
+      _codeMap[""]        = N_( "No Code" );
 
       struct Init
       {
@@ -450,7 +406,7 @@ namespace zypp
       };
 
       for (const Init * i = init; i->iso3166 != NULL; ++i)
-	  codes[i->iso3166] = i->name;
+	  _codeMap[i->iso3166] = i->name;
     }
 
     /////////////////////////////////////////////////////////////////

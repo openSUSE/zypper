@@ -12,7 +12,7 @@
 #include <iostream>
 
 #include "zypp/base/LogTools.h"
-#include "zypp/base/Tr1hash.h"
+#include "zypp/base/Hash.h"
 #include "zypp/sat/WhatObsoletes.h"
 #include "zypp/sat/detail/PoolImpl.h"
 #include "zypp/PoolItem.h"
@@ -38,7 +38,7 @@ namespace zypp
     namespace
     { /////////////////////////////////////////////////////////////////
 
-      typedef std::tr1::unordered_set<detail::IdType> set_type;
+      typedef std::unordered_set<detail::IdType> set_type;
       typedef std::vector<sat::detail::IdType>        vector_type;
 
       /////////////////////////////////////////////////////////////////

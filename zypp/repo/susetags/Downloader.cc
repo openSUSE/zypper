@@ -165,7 +165,7 @@ void Downloader::download( MediaSetAccess &media,
   // check whether to download more package translations:
   {
     auto fnc_checkTransaltions( [&]( const Locale & locale_r ) {
-      for ( Locale toGet( locale_r ); toGet != Locale::noCode; toGet = toGet.fallback() )
+      for ( Locale toGet( locale_r ); toGet; toGet = toGet.fallback() )
       {
 	auto it( availablePackageTranslations.find( toGet.code() ) );
 	if ( it != availablePackageTranslations.end() )

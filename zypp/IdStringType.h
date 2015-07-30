@@ -98,7 +98,7 @@ namespace zypp
       const Derived & self() const { return *static_cast<const Derived*>( this ); }
 
     public:
-      const IdString & idStr()    const { return self()._str; }
+      IdString      idStr()       const { return self()._str; }
 
       bool          empty()       const { return idStr().empty(); }
       unsigned      size()        const { return idStr().size(); }
@@ -111,6 +111,14 @@ namespace zypp
       /** Evaluate in a boolean context <tt>( ! empty() )</tt>. */
       explicit operator bool() const
       { return ! empty(); }
+
+      /** Explicit conversion to IdString */
+      explicit operator IdString() const
+      { return idStr(); }
+
+      /** Explicit conversion to std::string */
+      explicit operator std::string() const
+      { return asString(); }
 
     public:
       // - break it down to idString/const char* <=> idString/cont char*

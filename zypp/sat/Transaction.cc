@@ -18,7 +18,7 @@ extern "C"
 #include "zypp/base/SerialNumber.h"
 #include "zypp/base/DefaultIntegral.h"
 #include "zypp/base/NonCopyable.h"
-#include "zypp/base/Tr1hash.h"
+#include "zypp/base/Hash.h"
 
 #include "zypp/sat/detail/PoolImpl.h"
 #include "zypp/sat/Transaction.h"
@@ -50,8 +50,8 @@ namespace zypp
       friend std::ostream & operator<<( std::ostream & str, const Impl & obj );
 
       public:
-	typedef std::tr1::unordered_set<detail::IdType> set_type;
-	typedef std::tr1::unordered_map<detail::IdType,detail::IdType> map_type;
+	typedef std::unordered_set<detail::IdType> set_type;
+	typedef std::unordered_map<detail::IdType,detail::IdType> map_type;
 
 	struct PostMortem
 	{
@@ -67,7 +67,7 @@ namespace zypp
 	  Edition  _edition;
 	  Arch     _arch;
 	};
-	typedef std::tr1::unordered_map<detail::IdType,PostMortem> pmmap_type;
+	typedef std::unordered_map<detail::IdType,PostMortem> pmmap_type;
 
       public:
 	Impl()

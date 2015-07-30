@@ -21,7 +21,7 @@ namespace zypp
 {
 
   ///////////////////////////////////////////////////////////////////
-  /// \class NamedValue<_Tp>
+  /// \class NamedValue
   /// \brief Simple value<>name mapping supporting aliases.
   /// \code
   ///   enum Commands {

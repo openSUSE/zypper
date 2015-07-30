@@ -58,6 +58,8 @@ extern "C"
 #include "zypp/sat/Transaction.h"
 #include "zypp/sat/Queue.h"
 
+#include "zypp/sat/detail/PoolImpl.h"
+
 #define _XDEBUG(x) do { if (base::logger::isExcessive()) XXX << x << std::endl;} while (0)
 
 /////////////////////////////////////////////////////////////////////////
@@ -708,6 +710,20 @@ SATResolver::solverInit(const PoolItemList & weakItems)
 	MIL << "Weaken dependencies of " << *iter << endl;
 	queue_push( &(_jobQueue), SOLVER_WEAKENDEPS | SOLVER_SOLVABLE );
         queue_push( &(_jobQueue), id );
+    }
+
+    // Ad rules for changed requestedLocales
+    const auto & trackedLocaleIds( myPool().trackedLocaleIds() );
+    for ( const auto & locale : trackedLocaleIds.added() )
+    {
+      queue_push( &(_jobQueue), SOLVER_INSTALL | SOLVER_SOLVABLE_PROVIDES );
+      queue_push( &(_jobQueue), Capability( ResolverNamespace::language, IdString(locale) ).id() );
+    }
+
+    for ( const auto & locale : trackedLocaleIds.removed() )
+    {
+      queue_push( &(_jobQueue), SOLVER_ERASE | SOLVER_SOLVABLE_PROVIDES | SOLVER_CLEANDEPS );	// needs uncond. SOLVER_CLEANDEPS!
+      queue_push( &(_jobQueue), Capability( ResolverNamespace::language, IdString(locale) ).id() );
     }
 
     // Add rules for parallel installable resolvables with different versions

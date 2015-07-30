@@ -264,7 +264,7 @@ namespace zypp
           // Now diff to the pool collecting names only.
           // Thus added and removed locks are not necessarily
           // disjoint. Added locks win.
-          typedef std::tr1::unordered_set<IdString> IdentSet;
+          typedef std::unordered_set<IdString> IdentSet;
           IdentSet addedLocks;
           IdentSet removedLocks;
           for_( it, begin(), end() )

@@ -167,6 +167,7 @@ SET( zypp_HEADERS
   ResObjects.h
   Resolvable.h
   Resolver.h
+  ResolverNamespace.h
   ResolverProblem.h
   ResPool.h
   ResPoolProxy.h
@@ -258,6 +259,7 @@ SET( zypp_base_HEADERS
   base/PtrTypes.h
   base/ReferenceCounted.h
   base/SetRelationMixin.h
+  base/SetTracker.h
   base/Signal.h
   base/String.h
   base/StrMatcher.h

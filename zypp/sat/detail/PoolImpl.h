@@ -21,9 +21,10 @@ extern "C"
 }
 #include <iosfwd>
 
-#include "zypp/base/Tr1hash.h"
+#include "zypp/base/Hash.h"
 #include "zypp/base/NonCopyable.h"
 #include "zypp/base/SerialNumber.h"
+#include "zypp/base/SetTracker.h"
 #include "zypp/sat/detail/PoolMember.h"
 #include "zypp/sat/Queue.h"
 #include "zypp/RepoInfo.h"
@@ -76,6 +77,10 @@ namespace zypp
            *  pools content changed.
            */
           void setDirty( const char * a1 = 0, const char * a2 = 0, const char * a3 = 0 );
+
+          /** Invalidate locale related housekeeping data.
+           */
+          void localeSetDirty( const char * a1 = 0, const char * a2 = 0, const char * a3 = 0 );
 
           /** Invalidate housekeeping data (e.g. whatprovides) if dependencies changed.
            */
@@ -216,22 +221,45 @@ namespace zypp
           { prepare(); return ::pool_whatprovides( _pool, cap_r.id() ); }
 
         public:
-          /** \name Requested locales. */
+          /// \name Requested locales.
+	  /// The requested LocaleSets managed in _requestedLocalesTracker
+	  /// are unexpanded; i.e. they contain just the pure user selection.
+	  /// The resolver however uses expanded sets ('de_DE' will also
+	  /// include its fallback locales 'de', (en); here in the namespace:
+	  /// callback and in the Resolver itself).
           //@{
+	  /** */
 	  void setTextLocale( const Locale & locale_r );
-          void setRequestedLocales( const LocaleSet & locales_r );
-          bool addRequestedLocale( const Locale & locale_r );
-          bool eraseRequestedLocale( const Locale & locale_r );
 
+
+	  /** Start tracking changes based on this \a locales_r.
+	   * Usually called on TargetInit.
+	   */
+	  void initRequestedLocales( const LocaleSet & locales_r );
+
+          /** Added since last initRequestedLocales. */
+          const LocaleSet & getAddedRequestedLocales() const
+          { return _requestedLocalesTracker.added(); }
+
+          /** Removed since last initRequestedLocales. */
+          const LocaleSet & getRemovedRequestedLocales() const
+          { return _requestedLocalesTracker.removed(); }
+
+          /** Current set of requested Locales. */
           const LocaleSet & getRequestedLocales() const
-          { return _requestedLocales; }
+          { return _requestedLocalesTracker.current(); }
 
           bool isRequestedLocale( const Locale & locale_r ) const
-          {
-            LocaleSet::const_iterator it( _requestedLocales.find( locale_r ) );
-            return it != _requestedLocales.end();
-          }
+          { return _requestedLocalesTracker.contains( locale_r ); }
 
+          /** User change (tracked). */
+          void setRequestedLocales( const LocaleSet & locales_r );
+          /** User change (tracked). */
+          bool addRequestedLocale( const Locale & locale_r );
+          /** User change (tracked). */
+          bool eraseRequestedLocale( const Locale & locale_r );
+
+	  /** All Locales occurring in any repo. */
           const LocaleSet & getAvailableLocales() const;
 
           bool isAvailableLocale( const Locale & locale_r ) const
@@ -240,6 +268,11 @@ namespace zypp
             LocaleSet::const_iterator it( avl.find( locale_r ) );
             return it != avl.end();
           }
+
+          typedef base::SetTracker<IdStringSet> TrackedLocaleIds;
+
+          /** Expanded _requestedLocalesTracker for solver.*/
+          const TrackedLocaleIds & trackedLocaleIds() const;
           //@}
 
         public:
@@ -291,9 +324,10 @@ namespace zypp
           std::map<RepoIdType,RepoInfo> _repoinfos;
 
           /**  */
-          LocaleSet _requestedLocales;
+	  base::SetTracker<LocaleSet> _requestedLocalesTracker;
+	  mutable scoped_ptr<TrackedLocaleIds> _trackedLocaleIdsPtr;
+
           mutable scoped_ptr<LocaleSet> _availableLocalesPtr;
-          mutable std::tr1::unordered_set<IdString> _locale2Solver;
 
           /**  */
           void multiversionListInit() const;

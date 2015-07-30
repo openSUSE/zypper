@@ -466,8 +466,7 @@ namespace zypp
       return std::string();
 
     Locale getLang( Locale::bestMatch( avlocales, lang_r ) );
-    if ( getLang == Locale::noCode
-         && avlocales.find( Locale::noCode ) == avlocales.end() )
+    if ( !getLang && avlocales.find( Locale::noCode ) == avlocales.end() )
     {
       WAR << "License.tar.gz contains no fallback text! " << *this << endl;
       // Using the fist locale instead of returning no text at all.
@@ -478,9 +477,8 @@ namespace zypp
 
     // now extract the license file.
     static const std::string licenseFileFallback( "license.txt" );
-    std::string licenseFile( getLang == Locale::noCode
-                             ? licenseFileFallback
-                             : str::form( "license.%s.txt", getLang.code().c_str() ) );
+    std::string licenseFile( !getLang ? licenseFileFallback
+				      : str::form( "license.%s.txt", getLang.c_str() ) );
 
     ExternalProgram::Arguments cmd;
     cmd.push_back( "tar" );

@@ -49,7 +49,7 @@ namespace zypp
         : _offset( offset_r ), _private( 0 )
         {}
 
-        Impl( const std::tr1::unordered_set<detail::IdType> & ids_r )
+        Impl( const std::unordered_set<detail::IdType> & ids_r )
         : _offset( 0 ), _private( 0 )
         {
            // use private data to store the result (incl. trailing NULL)
@@ -75,7 +75,7 @@ namespace zypp
 
       /** WhatProvides ctor helper collecting providers from Capabilies. */
       template <class Iterator>
-      void collectProviders( Iterator begin_r, Iterator end_r, std::tr1::unordered_set<detail::IdType> & collect_r )
+      void collectProviders( Iterator begin_r, Iterator end_r, std::unordered_set<detail::IdType> & collect_r )
       {
         for_( it, begin_r, end_r )
         {
@@ -106,7 +106,7 @@ namespace zypp
 
     WhatProvides::WhatProvides( Capabilities caps_r )
     {
-      std::tr1::unordered_set<detail::IdType> ids;
+      std::unordered_set<detail::IdType> ids;
       collectProviders( caps_r.begin(), caps_r.end(), ids );
       if ( ! ids.empty() )
       {
@@ -117,7 +117,7 @@ namespace zypp
 
     WhatProvides::WhatProvides( const CapabilitySet & caps_r )
     {
-      std::tr1::unordered_set<detail::IdType> ids;
+      std::unordered_set<detail::IdType> ids;
       collectProviders( caps_r.begin(), caps_r.end(), ids );
       if ( ! ids.empty() )
       {

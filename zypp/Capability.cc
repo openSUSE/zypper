@@ -299,6 +299,15 @@ namespace zypp
   : _id( relFromStr( myPool().getPool(), arch_r, name_r, op_r, ed_r, prefix_r ) )
   {}
 
+  ///////////////////////////////////////////////////////////////////
+  // Ctor creating a namespace: capability.
+  ///////////////////////////////////////////////////////////////////
+
+  Capability::Capability( ResolverNamespace namespace_r, IdString value_r )
+  : _id( ::pool_rel2id( myPool().getPool(), asIdString(namespace_r).id(), (value_r.empty() ? STRID_NULL : value_r.id() ), REL_NAMESPACE, /*create*/true ) )
+  {}
+
+
   const char * Capability::c_str() const
   { return( _id ? ::pool_dep2str( myPool().getPool(), _id ) : "" ); }
 

@@ -14,7 +14,7 @@
 
 #include "zypp/base/PtrTypes.h"
 #include "zypp/base/Function.h"
-#include "zypp/base/Tr1hash.h"
+#include "zypp/base/Hash.h"
 #include "zypp/base/String.h"
 #include "zypp/base/DefaultIntegral.h"
 
@@ -259,7 +259,7 @@ namespace zypp
           }
 
         private:
-          std::tr1::unordered_map<std::string, std::vector<AssignerRef> > _attr;
+          std::unordered_map<std::string, std::vector<AssignerRef> > _attr;
           std::vector<AssignerRef>                                        _text;
           function<void ( const Node & )>                                 _pre;
           function<void ( const Node & )>                                 _post;

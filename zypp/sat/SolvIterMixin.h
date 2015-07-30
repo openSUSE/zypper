@@ -16,7 +16,7 @@
 
 #include "zypp/base/PtrTypes.h"
 #include "zypp/base/Iterator.h"
-#include "zypp/base/Tr1hash.h"
+#include "zypp/base/Hash.h"
 
 #include "zypp/sat/Solvable.h"
 
@@ -50,7 +50,7 @@ namespace zypp
       {
         bool operator()( const Solvable & solv_r ) const;
 
-        typedef std::tr1::unordered_set<unsigned> Uset;
+        typedef std::unordered_set<unsigned> Uset;
         UnifyByIdent()
           : _uset( new Uset )
         {}
