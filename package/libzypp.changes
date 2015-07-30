@@ -1,4 +1,16 @@
 -------------------------------------------------------------------
+Thu Jul 30 16:13:49 CEST 2015 - ma@suse.de
+
+- Resolver: Track changed requested locales and adjust installed 
+  packages accordingly. (part of FATE#318099)
+- Testcase: Store autoinstalled packages
+- Locale: Make it IdString based
+- Get rid of std::tr1:: hashes
+- Flags: Fix to work with 'enum class'
+- Hide away resolver internals
+- version 15.10.0 (10)
+
+-------------------------------------------------------------------
 Thu Jul 30 01:13:30 CEST 2015 - ma@suse.de
 
 - Update zypp-po.tar.bz2
