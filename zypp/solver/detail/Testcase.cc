@@ -371,6 +371,13 @@ HelixControl::HelixControl(const std::string & controlPath,
       *file << TAB << "<locale name=\"" << l << "\" fate=\"removed\" />" << endl;
     }
 
+    // AutoInstalled
+    for ( IdString::IdType n : satpool.autoInstalled() )
+    {
+      *file << TAB << "<autoinst name=\"" << IdString(n) << "\" />" << endl;
+    }
+
+
 
     for_( it, modaliasList.begin(), modaliasList.end() ) {
 	*file << TAB << "<modalias name=\"" <<  *it
