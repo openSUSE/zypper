@@ -344,9 +344,13 @@ namespace zypp
       void resetSolverUpgradeRemoveDroppedPackages();
 
       /** \name Packages which can be installed in different versions at the same time.
-       * This returns the config file values (\c names or \c provides:...). For the corresponding
-       * packages use e.g \ref sat::Pool::multiversionBegin, or \ref sat::Solbale::multiversionInstall
-       * (\ref ui::Selectable::multiversionInstall).
+       *
+       * This returns the config file values (\c names or \c provides:...). The
+       * corresponding packages have the \c multiversionInstall property set. Those
+       * packages will be installed using 'rpm -i', so they will not implicitly obsolete
+       * other installed versions.
+       *
+       * \see \ref sat::SolvableType
        */
       //@{
       const std::set<std::string> & multiversionSpec() const;
