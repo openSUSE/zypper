@@ -1,4 +1,9 @@
 -------------------------------------------------------------------
+Sun Aug  2 01:13:27 CEST 2015 - ma@suse.de
+
+- Update zypp-po.tar.bz2
+
+-------------------------------------------------------------------
 Thu Jul 30 16:13:49 CEST 2015 - ma@suse.de
 
 - Resolver: Track changed requested locales and adjust installed 
