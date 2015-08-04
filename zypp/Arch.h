@@ -265,6 +265,15 @@ namespace zypp
 
   /** \relates Arch */
   extern const Arch Arch_m68k;
+
+  /** \relates Arch */
+  extern const Arch Arch_mips;
+  /** \relates Arch */
+  extern const Arch Arch_mipsel;
+  /** \relates Arch */
+  extern const Arch Arch_mips64;
+  /** \relates Arch */
+  extern const Arch Arch_mips64el;
   //@}
 
   ///////////////////////////////////////////////////////////////////

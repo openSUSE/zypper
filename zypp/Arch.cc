@@ -210,7 +210,12 @@ namespace zypp
   DEF_BUILTIN( sh4 );
   DEF_BUILTIN( sh4a );
 
-  DEF_BUILTIN(m68k);
+  DEF_BUILTIN( m68k );
+
+  DEF_BUILTIN( mips );
+  DEF_BUILTIN( mipsel );
+  DEF_BUILTIN( mips64 );
+  DEF_BUILTIN( mips64el );
 #undef DEF_BUILTIN
 
   ///////////////////////////////////////////////////////////////////
@@ -347,7 +352,12 @@ namespace zypp
         defCompatibleWith( _sh4(),		_noarch() );
         defCompatibleWith( _sh4a(),		_noarch(),_sh4() );
 
-        defCompatibleWith(_m68k(),		_noarch());
+        defCompatibleWith( _m68k(),		_noarch() );
+
+	defCompatibleWith( _mips(),		_noarch() );
+	defCompatibleWith( _mipsel(),		_noarch() );
+	defCompatibleWith( _mips64(),		_noarch() );
+	defCompatibleWith( _mips64el(),		_noarch() );
         //
         ///////////////////////////////////////////////////////////////////
         // dumpOn( USR ) << endl;
