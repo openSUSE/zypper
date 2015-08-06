@@ -111,7 +111,7 @@ SolverQueueItemLock::cmp (SolverQueueItem_constPtr item) const
     if (cmp != 0)
         return cmp;
     SolverQueueItemLock_constPtr lock = dynamic_pointer_cast<const SolverQueueItemLock>(item);
-    return compareByNVRA (_item.resolvable(), lock->_item.resolvable());
+    return compareByNVRA (_item, lock->_item);
 }
 
 

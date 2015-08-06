@@ -291,14 +291,10 @@ class  HelixControl {
     HelixControl ();
     ~HelixControl ();
 
-    void installResolvable (const ResObject::constPtr &resObject,
-			    const ResStatus &status);
-    void lockResolvable (const ResObject::constPtr &resObject,
-			 const ResStatus &status);
-    void keepResolvable (const ResObject::constPtr &resObject,
-			 const ResStatus &status);
-    void deleteResolvable (const ResObject::constPtr &resObject,
-			   const ResStatus &status);
+    void installResolvable( const PoolItem & pi_r );
+    void lockResolvable( const PoolItem & pi_r );
+    void keepResolvable( const PoolItem & pi_r );
+    void deleteResolvable( const PoolItem & pi_r );
     void addDependencies (const CapabilitySet &capRequire, const CapabilitySet &capConflict);
     void addUpgradeRepos( const std::set<Repository> & upgradeRepos_r );
 
@@ -413,42 +409,47 @@ HelixControl::~HelixControl()
     delete(file);
 }
 
-void HelixControl::installResolvable(const ResObject::constPtr &resObject,
-				     const ResStatus &status)
+void HelixControl::installResolvable( const PoolItem & pi_r )
 {
-    *file << "<install channel=\"" << resObject->repoInfo().alias() << "\" kind=\"" << toLower (resObject->kind().asString()) << "\""
-	  << " name=\"" << resObject->name() << "\"" << " arch=\"" << resObject->arch().asString() << "\""
-	  << " version=\"" << resObject->edition().version() << "\"" << " release=\"" << resObject->edition().release() << "\""
-	  << " status=\"" << status << "\""
+    *file << "<install channel=\"" << pi_r.repoInfo().alias() << "\""
+          << " kind=\"" << pi_r.kind() << "\""
+	  << " name=\"" << pi_r.name() << "\""
+	  << " arch=\"" << pi_r.arch() << "\""
+	  << " version=\"" << pi_r.edition().version() << "\""
+	  << " release=\"" << pi_r.edition().release() << "\""
+	  << " status=\"" << pi_r.status() << "\""
 	  << "/>" << endl;
 }
 
-void HelixControl::lockResolvable(const ResObject::constPtr &resObject,
-				  const ResStatus &status)
+void HelixControl::lockResolvable( const PoolItem & pi_r )
 {
-    *file << "<lock channel=\"" << resObject->repoInfo().alias() << "\" kind=\"" << toLower (resObject->kind().asString()) << "\""
-	  << " name=\"" << resObject->name() << "\"" << " arch=\"" << resObject->arch().asString() << "\""
-	  << " version=\"" << resObject->edition().version() << "\"" << " release=\"" << resObject->edition().release() << "\""
-	  << " status=\"" << status << "\""
+    *file << "<lock channel=\"" << pi_r.repoInfo().alias() << "\""
+          << " kind=\"" << pi_r.kind() << "\""
+	  << " name=\"" << pi_r.name() << "\""
+	  << " arch=\"" << pi_r.arch() << "\""
+	  << " version=\"" << pi_r.edition().version() << "\""
+	  << " release=\"" << pi_r.edition().release() << "\""
+	  << " status=\"" << pi_r.status() << "\""
 	  << "/>" << endl;
 }
 
-void HelixControl::keepResolvable(const ResObject::constPtr &resObject,
-				  const ResStatus &status)
+void HelixControl::keepResolvable( const PoolItem & pi_r )
 {
-    *file << "<keep channel=\"" << resObject->repoInfo().alias() << "\" kind=\"" << toLower (resObject->kind().asString()) << "\""
-	  << " name=\"" << resObject->name() << "\"" << " arch=\"" << resObject->arch().asString() << "\""
-	  << " version=\"" << resObject->edition().version() << "\"" << " release=\"" << resObject->edition().release() << "\""
-	  << " status=\"" << status << "\""
+    *file << "<keep channel=\"" << pi_r.repoInfo().alias() << "\""
+          << " kind=\"" << pi_r.kind() << "\""
+	  << " name=\"" << pi_r.name() << "\""
+	  << " arch=\"" << pi_r.arch() << "\""
+	  << " version=\"" << pi_r.edition().version() << "\""
+	  << " release=\"" << pi_r.edition().release() << "\""
+	  << " status=\"" << pi_r.status() << "\""
 	  << "/>" << endl;
 }
 
-void HelixControl::deleteResolvable(const ResObject::constPtr &resObject,
-				    const ResStatus &status)
+void HelixControl::deleteResolvable( const PoolItem & pi_r )
 {
-    *file << "<uninstall " << " kind=\"" << toLower (resObject->kind().asString()) << "\""
-	  << " name=\"" << resObject->name() << "\""
-	  << " status=\"" << status << "\""
+    *file << "<uninstall  kind=\"" << pi_r.kind() << "\""
+	  << " name=\"" << pi_r.name() << "\""
+	  << " status=\"" << pi_r.status() << "\""
 	  << "/>" << endl;
 }
 
@@ -585,21 +586,17 @@ bool Testcase::createTestcase(Resolver & resolver, bool dumpPool, bool runSolver
 			  resolver.onlyRequires(),
 			  resolver.ignoreAlreadyRecommended() );
 
-    for (PoolItemList::const_iterator iter = items_to_install.begin(); iter != items_to_install.end(); iter++) {
-	control.installResolvable (iter->resolvable(), iter->status());
-    }
+    for ( const PoolItem & pi : items_to_install )
+    { control.installResolvable( pi ); }
 
-    for (PoolItemList::const_iterator iter = items_locked.begin(); iter != items_locked.end(); iter++) {
-	control.lockResolvable (iter->resolvable(), iter->status());
-    }
+    for ( const PoolItem & pi : items_locked )
+    { control.lockResolvable( pi ); }
 
-    for (PoolItemList::const_iterator iter = items_keep.begin(); iter != items_keep.end(); iter++) {
-	control.keepResolvable (iter->resolvable(), iter->status());
-    }
+    for ( const PoolItem & pi : items_keep )
+    { control.keepResolvable( pi ); }
 
-    for (PoolItemList::const_iterator iter = items_to_remove.begin(); iter != items_to_remove.end(); iter++) {
-	control.deleteResolvable (iter->resolvable(), iter->status());
-    }
+    for ( const PoolItem & pi : items_to_remove )
+    { control.deleteResolvable( pi ); }
 
     control.addDependencies (resolver.extraRequires(), resolver.extraConflicts());
     control.addDependencies (SystemCheck::instance().requiredSystemCap(),
