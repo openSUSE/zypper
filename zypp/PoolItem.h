@@ -17,50 +17,51 @@
 
 #include "zypp/base/PtrTypes.h"
 #include "zypp/ResObject.h"
+
+#include "zypp/sat/SolvableType.h"
 #include "zypp/ResStatus.h"
 
 ///////////////////////////////////////////////////////////////////
 namespace zypp
-{ /////////////////////////////////////////////////////////////////
-
+{
   class ResPool;
-
   namespace pool
   {
     class PoolImpl;
   }
-
   ///////////////////////////////////////////////////////////////////
-  //
-  //	CLASS NAME : PoolItem
-  //
-  /** Reference to a PoolItem connecting ResObject and ResStatus.
-   *
-   * The "real" PoolItem is usg. somewhere in the ResPool. This is
-   * a reference to it. All copies made will reference (and modify)
-   * the same PoolItem. All changes via a PoolItem are immediately
-   * visible in all copies (now COW).
-   *
-   * \note Constness: Like pointer types, a <tt>const PoolItem</tt>
-   * does \b not refer to a <tt>const PoolItem</tt>. The reference is
-   * \c const, i.e. you can't change the refered PoolItem. The PoolItem
-   * (i.e. the status) is always mutable.
-   *
-  */
-  class PoolItem
+  /// \class PoolItem
+  /// \brief Combining \ref sat::Solvable and \ref ResStatus.
+  ///
+  /// The "real" PoolItem is usually somewhere in the ResPool. This is
+  /// a reference to it. All copies made will reference (and modify)
+  /// the same PoolItem. All changes via a PoolItem are immediately
+  /// visible in all copies (now COW).
+  ///
+  /// \note PoolItem is a SolvableType, which provides direct access to
+  /// many of the underlying sat::Solvables properties.
+  /// \see \ref sat::SolvableType
+  ///
+  /// \note Constness: Like pointer types, a <tt>const PoolItem</tt>
+  /// does \b not refer to a <tt>const PoolItem</tt>. The reference is
+  /// \c const, i.e. you can't change the refered PoolItem. The PoolItem
+  /// (i.e. the status) is always mutable.
+  ///////////////////////////////////////////////////////////////////
+  class PoolItem : public sat::SolvableType<PoolItem>
   {
     friend std::ostream & operator<<( std::ostream & str, const PoolItem & obj );
-
-    public:
-      /** Implementation */
-      class Impl;
-
     public:
       /** Default ctor for use in std::container. */
       PoolItem();
 
       /** Ctor looking up the \ref sat::Solvable in the \ref ResPool. */
       explicit PoolItem( const sat::Solvable & solvable_r );
+
+      /** Ctor looking up the \ref sat::Solvable in the \ref ResPool. */
+      template <class Derived>
+      explicit PoolItem( const SolvableType<Derived> & solvable_r )
+      : PoolItem( solvable_r.satSolvable() )
+      {}
 
       /** Ctor looking up the \ref ResObject in the \ref ResPool. */
       explicit PoolItem( const ResObject::constPtr & resolvable_r );
@@ -110,13 +111,13 @@ namespace zypp
       /** Return the \ref ResPool the item belongs to. */
       ResPool pool() const;
 
-      /** Return the corresponding \ref sat::Solvable. */
-      sat::Solvable satSolvable() const
+      /** This is a \ref sat::SolvableType. */
+      explicit operator sat::Solvable() const
       { return resolvable() ? resolvable()->satSolvable() : sat::Solvable::noSolvable; }
 
       /** Return the buddy we share our status object with.
        * A \ref Product e.g. may share it's status with an associated reference \ref Package.
-      */
+       */
       sat::Solvable buddy() const;
 
     public:
@@ -135,19 +136,16 @@ namespace zypp
       ResObject::constPtr operator->() const
       { return resolvable(); }
 
-      /** Conversion to bool to allow pointer style tests
-       *  for nonNULL \ref resolvable. */
-      explicit operator bool() const
-      { return bool(resolvable()); }
-
     private:
-      friend class Impl;
       friend class pool::PoolImpl;
       /** \ref PoolItem generator for \ref pool::PoolImpl. */
       static PoolItem makePoolItem( const sat::Solvable & solvable_r );
       /** Buddies are set by \ref pool::PoolImpl.*/
-      void setBuddy( sat::Solvable solv_r );
+      void setBuddy( const sat::Solvable & solv_r );
       /** internal ctor */
+    public:
+      class Impl;	///< Expose type only
+    private:
       explicit PoolItem( Impl * implptr_r );
       /** Pointer to implementation */
       RW_pointer<Impl> _pimpl;
@@ -167,57 +165,6 @@ namespace zypp
   /** \relates PoolItem Stream output */
   std::ostream & operator<<( std::ostream & str, const PoolItem & obj );
 
-  /** \relates PoolItem */
-  inline bool operator==( const PoolItem & lhs, const PoolItem & rhs )
-  { return lhs.resolvable() == rhs.resolvable(); }
-
-  /** \relates PoolItem */
-  inline bool operator==( const PoolItem & lhs, const ResObject::constPtr & rhs )
-  { return lhs.resolvable() == rhs; }
-
-  /** \relates PoolItem */
-  inline bool operator==( const ResObject::constPtr & lhs, const PoolItem & rhs )
-  { return lhs == rhs.resolvable(); }
-
-
-  /** \relates PoolItem */
-  inline bool operator!=( const PoolItem & lhs, const PoolItem & rhs )
-  { return ! (lhs==rhs); }
-
-  /** \relates PoolItem */
-  inline bool operator!=( const PoolItem & lhs, const ResObject::constPtr & rhs )
-  { return ! (lhs==rhs); }
-
-  /** \relates PoolItem */
-  inline bool operator!=( const ResObject::constPtr & lhs, const PoolItem & rhs )
-  { return ! (lhs==rhs); }
-
-
-  /** \relates PoolItem Test for same content. */
-  inline bool identical( const PoolItem & lhs, const PoolItem & rhs )
-  { return lhs == rhs || lhs.satSolvable().identical( rhs.satSolvable() ); }
-
-  /** \relates PoolItem Test for same content. */
-  inline bool identical( const PoolItem & lhs, sat::Solvable rhs )
-  { return lhs.satSolvable().identical( rhs ); }
-
-  /** \relates PoolItem Test for same content. */
-  inline bool identical( sat::Solvable lhs, const PoolItem & rhs )
-  { return lhs.identical( rhs.satSolvable() ); }
-
-
-  /** \relates PoolItem Test for same name version release and arch. */
-  inline bool sameNVRA( const PoolItem & lhs, const PoolItem & rhs )
-  { return lhs == rhs || lhs.satSolvable().sameNVRA( rhs.satSolvable() ); }
-
-  /** \relates PoolItem Test for same name version release and arch. */
-  inline bool sameNVRA( const PoolItem & lhs, sat::Solvable rhs )
-  { return lhs.satSolvable().sameNVRA( rhs ); }
-
-  /** \relates PoolItem Test for same name version release and arch. */
-  inline bool sameNVRA( sat::Solvable lhs, const PoolItem & rhs )
-  { return lhs.sameNVRA( rhs.satSolvable() ); }
-
   /** Solvable to PoolItem transform functor.
    * \relates PoolItem
    * \relates sat::SolvIterMixin
@@ -230,19 +177,6 @@ namespace zypp
     { return PoolItem( solv_r ); }
   };
 
-  /////////////////////////////////////////////////////////////////
-} // namespace zypp
-///////////////////////////////////////////////////////////////////
-///////////////////////////////////////////////////////////////////
-namespace std
-{ /////////////////////////////////////////////////////////////////
-
-  /** \relates zypp::PoolItem Order in std::container follows ResObject::constPtr.*/
-  template<>
-    inline bool less<zypp::PoolItem>::operator()( const zypp::PoolItem & lhs, const zypp::PoolItem & rhs ) const
-    { return lhs.resolvable() < rhs.resolvable(); }
-
-  /////////////////////////////////////////////////////////////////
 } // namespace zypp
 ///////////////////////////////////////////////////////////////////
 #endif // ZYPP_POOLITEM_H

@@ -540,6 +540,7 @@ SET( zypp_sat_HEADERS
   sat/Pool.h
   sat/Solvable.h
   sat/SolvableSet.h
+  sat/SolvableType.h
   sat/SolvIterMixin.h
   sat/Map.h
   sat/Queue.h
