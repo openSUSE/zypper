@@ -66,7 +66,7 @@ namespace zypp
 	/** */
 	template<class _Solv>
 	bool contains( const _Solv & solv_r ) const
-	{ return( get().find( asSolvable()( solv_r ) ) != end() ); }
+	{ return( get().count( asSolvable()( solv_r ) ) ); }
 
         /** Iterator pointing to the first \ref Solvable. */
         const_iterator begin() const
