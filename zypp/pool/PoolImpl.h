@@ -179,9 +179,9 @@ namespace zypp
       public:
         /** \name Save and restore state. */
         //@{
-        void SaveState( const ResObject::Kind & kind_r );
+        void SaveState( const ResKind & kind_r );
 
-        void RestoreState( const ResObject::Kind & kind_r );
+        void RestoreState( const ResKind & kind_r );
         //@}
 
         ///////////////////////////////////////////////////////////////////

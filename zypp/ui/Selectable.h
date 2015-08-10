@@ -114,7 +114,7 @@ namespace zypp
       IdString ident() const;
 
       /** The ResObjects kind. */
-      ResObject::Kind kind() const;
+      ResKind kind() const;
 
       /** The ResObjects name.  */
       const std::string & name() const;

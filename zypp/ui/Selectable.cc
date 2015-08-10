@@ -55,7 +55,7 @@ namespace zypp
     IdString Selectable::ident() const
     { return _pimpl->ident(); }
 
-    ResObject::Kind Selectable::kind() const
+    ResKind Selectable::kind() const
     { return _pimpl->kind(); }
 
     const std::string & Selectable::name() const

@@ -57,7 +57,7 @@ namespace zypp
 
     public:
       template <class _Iterator>
-      Impl( const ResObject::Kind & kind_r,
+      Impl( const ResKind & kind_r,
             const std::string & name_r,
             _Iterator begin_r,
             _Iterator end_r )
@@ -80,7 +80,7 @@ namespace zypp
       { return _ident; }
 
       /**  */
-      ResObject::Kind kind() const
+      ResKind kind() const
       { return _kind; }
 
       /**  */
@@ -428,7 +428,7 @@ namespace zypp
 
     private:
       const IdString         _ident;
-      const ResObject::Kind  _kind;
+      const ResKind          _kind;
       const std::string      _name;
       InstalledItemSet       _installedItems;
       AvailableItemSet       _availableItems;

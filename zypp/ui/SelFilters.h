@@ -32,7 +32,7 @@ namespace zypp
       /** */
       struct ByKind : public SelectableFilterFunctor
       {
-        ByKind( const ResObject::Kind & kind_r )
+        ByKind( const ResKind & kind_r )
         : _kind( kind_r )
         {}
 
@@ -41,7 +41,7 @@ namespace zypp
           return obj && obj->kind() == _kind;
         }
 
-        ResObject::Kind _kind;
+        ResKind _kind;
       };
 
       /** */
