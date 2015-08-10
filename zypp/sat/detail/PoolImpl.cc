@@ -512,7 +512,7 @@ namespace zypp
       }
 
 
-      static void _getLocaleDeps( Capability cap_r, std::unordered_set<sat::detail::IdType> & store_r )
+      static void _getLocaleDeps( const Capability & cap_r, LocaleSet & store_r )
       {
         // Collect locales from any 'namespace:language(lang)' dependency
         CapDetail detail( cap_r );
@@ -530,7 +530,7 @@ namespace zypp
             case CapDetail::CAP_NAMESPACE:
               if ( detail.lhs().id() == NAMESPACE_LANGUAGE )
               {
-                store_r.insert( detail.rhs().id() );
+                store_r.insert( Locale( IdString(detail.rhs().id()) ) );
               }
               break;
 
@@ -546,23 +546,16 @@ namespace zypp
       {
         if ( !_availableLocalesPtr )
         {
-          // Collect any 'namespace:language(ja)' dependencies
-          std::unordered_set<sat::detail::IdType> tmp;
-          Pool pool( Pool::instance() );
-          for_( it, pool.solvablesBegin(), pool.solvablesEnd() )
-          {
-            Capabilities cap( it->supplements() );
-            for_( cit, cap.begin(), cap.end() )
-            {
-              _getLocaleDeps( *cit, tmp );
+	  _availableLocalesPtr.reset( new LocaleSet );
+	  LocaleSet & localeSet( *_availableLocalesPtr );
+
+	  for ( const Solvable & pi : Pool::instance().solvables() )
+	  {
+	    for ( const Capability & cap : pi.supplements() )
+	    {
+	      _getLocaleDeps( cap, localeSet );
             }
-          }
-#warning immediately build LocaleSet as soon as Loale is an Id based type
-          _availableLocalesPtr.reset( new LocaleSet(tmp.size()) );
-          for_( it, tmp.begin(), tmp.end() )
-          {
-            _availableLocalesPtr->insert( Locale( IdString(*it) ) );
-          }
+	  }
         }
         return *_availableLocalesPtr;
       }
