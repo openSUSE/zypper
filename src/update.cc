@@ -151,18 +151,13 @@ void patch_check ()
   DBG << "patch check" << endl;
   gData.patches_count = gData.security_patches_count = 0;
 
-  ResPool::byKind_iterator
-    it = God->pool().byKindBegin(ResKind::patch),
-    e = God->pool().byKindEnd(ResKind::patch);
-  for (; it != e; ++it )
+  for_( it, God->pool().byKindBegin(ResKind::patch), God->pool().byKindEnd(ResKind::patch) )
   {
-    ResObject::constPtr res = it->resolvable();
-    Patch::constPtr patch = asKind<Patch>(res);
-
-    if (it->isRelevant() && !it->isSatisfied())
+    const PoolItem & pi( *it );
+    if ( pi.isRelevant() && !pi.isSatisfied())
     {
       gData.patches_count++;
-      if (patch->categoryEnum() == Patch::CAT_SECURITY)
+      if (pi->asKind<Patch>()->categoryEnum() == Patch::CAT_SECURITY)
         gData.security_patches_count++;
     }
   }
@@ -201,40 +196,34 @@ static bool xml_list_patches (Zypper & zypper)
 {
   const zypp::ResPool& pool = God->pool();
 
-  unsigned int patchcount=0;
-  bool pkg_mgr_available = false;
-  Patch::constPtr patch;
-
-  ResPool::byKind_iterator
-    it = pool.byKindBegin(ResKind::patch),
-    e  = pool.byKindEnd(ResKind::patch);
-
   // check whether there are packages affecting the update stack
-  for (; it != e; ++it)
+  bool pkg_mgr_available = false;
+  for_( it, pool.byKindBegin(ResKind::patch), pool.byKindEnd(ResKind::patch) )
   {
-    patch = asKind<Patch>(it->resolvable());
-    if (it->isRelevant() && !it->isSatisfied() && patch->restartSuggested())
+    const PoolItem & pi( *it );
+
+    if ( pi.isRelevant() && !pi.isSatisfied() && pi->asKind<Patch>()->restartSuggested() )
     {
       pkg_mgr_available = true;
       break;
     }
   }
 
-  it = pool.byKindBegin(ResKind::patch);
-  for (; it != e; ++it, ++patchcount)
+  unsigned patchcount = 0;
+  for_( it, pool.byKindBegin(ResKind::patch), pool.byKindEnd(ResKind::patch) )
   {
     if (zypper.cOpts().count("all") || it->isBroken())
     {
-      ResObject::constPtr res = it->resolvable();
-      Patch::constPtr patch = asKind<Patch>(res);
+      const PoolItem & pi( *it );
+      Patch::constPtr patch = pi->asKind<Patch>();
 
       // if updates stack patches are available, show only those
       if ((pkg_mgr_available && patch->restartSuggested()) || !pkg_mgr_available)
       {
         cout << " <update ";
-        cout << "name=\"" << res->name () << "\" ";
-        cout << "edition=\""  << res->edition ().asString() << "\" ";
-	cout << "arch=\""  << res->arch().asString() << "\" ";
+        cout << "name=\"" << pi.name () << "\" ";
+        cout << "edition=\""  << pi.edition() << "\" ";
+	cout << "arch=\""  << pi.arch() << "\" ";
 	cout << "status=\""  << patchStatusAsString( *it ) << "\" ";
         cout << "category=\"" <<  patch->category() << "\" ";
         cout << "severity=\"" <<  patch->severity() << "\" ";
@@ -250,18 +239,19 @@ static bool xml_list_patches (Zypper & zypper)
         cout << "interactive=\"" << (patch->interactiveWhenIgnoring(ignoreFlags) ? "true" : "false") << "\" ";
         cout << "kind=\"patch\"";
         cout << ">" << endl;
-        cout << "  <summary>" << xml::escape(patch->summary()) << "  </summary>" << endl;
-        cout << "  <description>" << xml::escape(patch->description()) << "</description>" << endl;
-        cout << "  <license>" << xml::escape(patch->licenseToConfirm()) << "</license>" << endl;
+        cout << "  <summary>" << xml::escape(pi.summary()) << "  </summary>" << endl;
+        cout << "  <description>" << xml::escape(pi.description()) << "</description>" << endl;
+        cout << "  <license>" << xml::escape(pi.licenseToConfirm()) << "</license>" << endl;
 
-        if ( !patch->repoInfo().alias().empty() )
+        if ( !pi.repoInfo().alias().empty() )
         {
-          cout << "  <source url=\"" << xml::escape(patch->repoInfo().url().asString());
-          cout << "\" alias=\"" << xml::escape(patch->repoInfo().alias()) << "\"/>" << endl;
+          cout << "  <source url=\"" << xml::escape(pi.repoInfo().url().asString());
+          cout << "\" alias=\"" << xml::escape(pi.repoInfo().alias()) << "\"/>" << endl;
         }
 
         cout << " </update>" << endl;
       }
+      ++patchcount;
     }
   }
 
@@ -277,26 +267,24 @@ static bool xml_list_patches (Zypper & zypper)
 static void xml_list_updates(const ResKindSet & kinds)
 {
   Candidates candidates;
-  find_updates (kinds, candidates);
+  find_updates( kinds, candidates );
 
-  Candidates::iterator cb = candidates.begin (), ce = candidates.end (), ci;
-  for (ci = cb; ci != ce; ++ci) {
-    ResObject::constPtr res = ci->resolvable();
-
+  for( const PoolItem & pi : candidates )
+  {
     cout << " <update ";
-    cout << "name=\"" << res->name () << "\" " ;
-    cout << "edition=\""  << res->edition ().asString() << "\" ";
-    cout << "arch=\""  << res->arch().asString() << "\" ";
-    cout << "kind=\"" << res->kind() << "\" ";
+    cout << "name=\"" << pi.name () << "\" " ;
+    cout << "edition=\""  << pi.edition() << "\" ";
+    cout << "arch=\""  << pi.arch() << "\" ";
+    cout << "kind=\"" << pi.kind() << "\" ";
     cout << ">" << endl;
-    cout << "  <summary>" << xml::escape(res->summary()) << "  </summary>" << endl;
-    cout << "  <description>" << xml::escape(res->description()) << "</description>" << endl;
-    cout << "  <license>" << xml::escape(res->licenseToConfirm()) << "</license>" << endl;
+    cout << "  <summary>" << xml::escape(pi.summary()) << "  </summary>" << endl;
+    cout << "  <description>" << xml::escape(pi.description()) << "</description>" << endl;
+    cout << "  <license>" << xml::escape(pi.licenseToConfirm()) << "</license>" << endl;
 
-    if ( !res->repoInfo().alias().empty() )
+    if ( !pi.repoInfo().alias().empty() )
     {
-        cout << "  <source url=\"" << xml::escape(res->repoInfo().url().asString());
-        cout << "\" alias=\"" << xml::escape(res->repoInfo().alias()) << "\"/>" << endl;
+        cout << "  <source url=\"" << xml::escape(pi.repoInfo().url().asString());
+        cout << "\" alias=\"" << xml::escape(pi.repoInfo().alias()) << "\"/>" << endl;
     }
 
     cout << " </update>" << endl;
@@ -436,7 +424,7 @@ find_updates( const ResKind & kind, Candidates & candidates )
     PoolItem candidate = (*it)->highestAvailableVersionObj(); // bnc #557557
     if (!candidate)
       continue;
-    if (compareByNVRA((*it)->installedObj().resolvable(), candidate.resolvable()) >= 0)
+    if (compareByNVRA((*it)->installedObj(), candidate) >= 0)
       continue;
 
     DBG << "selectable: " << **it << endl;
@@ -570,17 +558,16 @@ void list_updates(Zypper & zypper, const ResKindSet & kinds, bool best_effort)
     Candidates candidates;
     find_updates( *it, candidates );
 
-    Candidates::iterator cb = candidates.begin (), ce = candidates.end (), ci;
-    for (ci = cb; ci != ce; ++ci) {
-      ResObject::constPtr res = ci->resolvable();
+    for ( const PoolItem & pi : candidates )
+    {
       TableRow tr (cols);
       tr << "v";
       if (!hide_repo) {
-        tr << res->repoInfo().asUserString();
+        tr << pi.repoInfo().asUserString();
       }
       if (zypper.globalOpts().is_rug_compatible)
         tr << "";               // Bundle
-      tr << res->name ();
+      tr << pi.name ();
 
       // strictly speaking, we could show version and arch even in best_effort
       //  iff there is only one candidate. But we don't know the number of candidates here.
@@ -589,12 +576,12 @@ void list_updates(Zypper & zypper, const ResKindSet & kinds, bool best_effort)
         // for packages show also the current installed version (bnc #466599)
         if (*it == ResKind::package)
         {
-          ui::Selectable::Ptr sel( uipool.lookup( *ci ) );
+          ui::Selectable::Ptr sel( uipool.lookup( pi ) );
           if ( sel->hasInstalledObj() )
-            tr << sel->installedObj()->edition().asString();
+            tr << sel->installedObj()->edition();
         }
-        tr << res->edition ().asString ()
-          << res->arch ().asString ();
+        tr << pi.edition()
+          << pi.arch();
       }
       tbl << tr;
     }

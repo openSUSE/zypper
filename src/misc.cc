@@ -85,14 +85,15 @@ void remove_selections(Zypper & zypper)
 }
 
 // ----------------------------------------------------------------------------
-
-static string get_display_name(const ResObject::constPtr & obj)
-{
-  // in most cases we want to display full product name (bnc #589333)
-  if (obj->kind() == ResKind::product)
-    return obj->summary();
-  return obj->name();
-}
+namespace {
+  inline std::string get_display_name( const PoolItem & obj )
+  {
+    // in most cases we want to display full product name (bnc #589333)
+    if ( obj.isKind<Product>() )
+      return obj.summary();
+    return obj.name();
+  }
+} // namespace
 
 /* debugging
 static
@@ -117,15 +118,15 @@ bool confirm_licenses(Zypper & zypper)
     zypper.cOpts().count("auto-agree-with-licenses")
     || zypper.cOpts().count("agree-to-third-party-licenses");
 
-  for (ResPool::const_iterator it = God->pool().begin(); it != God->pool().end(); ++it)
+  for ( const PoolItem & pi : God->pool() )
   {
     bool to_accept = true;
 
-    if (it->status().isToBeInstalled() &&
-        !it->resolvable()->licenseToConfirm().empty())
+    if (pi.status().isToBeInstalled() &&
+        !pi.licenseToConfirm().empty())
     {
       ui::Selectable::Ptr selectable =
-          God->pool().proxy().lookup(it->resolvable()->kind(), it->resolvable()->name());
+          God->pool().proxy().lookup(pi.kind(), pi.name());
 
       // this is an upgrade, check whether the license changed
       // for now we only do dumb string comparison (bnc #394396)
@@ -133,16 +134,16 @@ bool confirm_licenses(Zypper & zypper)
       {
         bool differ = false;
         for_(inst, selectable->installedBegin(), selectable->installedEnd())
-          if (inst->resolvable()->licenseToConfirm() != it->resolvable()->licenseToConfirm())
+          if (inst->resolvable()->licenseToConfirm() != pi.licenseToConfirm())
           { differ = true; break; }
 
         if (!differ)
         {
           DBG << "old and new license does not differ for "
-              << it->resolvable()->name() << endl;
+              << pi.name() << endl;
           continue;
         }
-        DBG << "new license for " << it->resolvable()->name()
+        DBG << "new license for " << pi.name()
             << " is different, needs confirmation " << endl;
       }
 
@@ -152,11 +153,11 @@ bool confirm_licenses(Zypper & zypper)
             // translators: the first %s is name of the resolvable,
       	    // the second is its kind (e.g. 'zypper package')
       	    format(_("Automatically agreeing with %s %s license."))
-            % get_display_name(it->resolvable())
-            % kind_to_string_localized(it->resolvable()->kind(),1)));
+            % get_display_name( pi )
+            % kind_to_string_localized(pi.kind(),1)));
 
         MIL << format("Automatically agreeing with %s %s license.")
-            % it->resolvable()->name() % it->resolvable()->kind().asString()
+            % pi.name() % pi.kind().asString()
             << endl;
 
         continue;
@@ -164,11 +165,11 @@ bool confirm_licenses(Zypper & zypper)
 
       ostringstream s;
       string kindstr =
-        it->resolvable()->kind() != ResKind::package ?
-          " (" + kind_to_string_localized(it->resolvable()->kind(), 1) + ")" :
+        pi.kind() != ResKind::package ?
+          " (" + kind_to_string_localized(pi.kind(), 1) + ")" :
           string();
 
-      if ( !it->resolvable()->needToAcceptLicense() )
+      if ( !pi.needToAcceptLicense() )
         to_accept = false;
 
       if (to_accept)
@@ -179,11 +180,11 @@ bool confirm_licenses(Zypper & zypper)
                        // is " (package-type)" if other than "package" (patch/product/pattern)
                        _("In order to install '%s'%s, you must agree"
                          " to terms of the following license agreement:"),
-                       get_display_name(it->resolvable()).c_str(), kindstr.c_str());
+                       get_display_name( pi ).c_str(), kindstr.c_str());
         s << endl << endl;
       }
       // license text
-      printRichText( s, it->resolvable()->licenseToConfirm() );
+      printRichText( s, pi.licenseToConfirm() );
 
       // show in pager unless we are read by a machine or the pager fails
       if (zypper.globalOpts().machine_readable || !show_text_in_pager(s.str()))
@@ -219,8 +220,8 @@ bool confirm_licenses(Zypper & zypper)
                                                 // translators: e.g. "... with flash package license."
                                                 //! \todo fix this to allow proper translation
                                                 _("Aborting installation due to user disagreement with %s %s license."))
-                                         % get_display_name(it->resolvable())
-                                         % kind_to_string_localized(it->resolvable()->kind(), 1)),
+                                         % get_display_name( pi )
+                                         % kind_to_string_localized(pi.kind(), 1)),
                               Out::QUIET);
             MIL << "License(s) NOT confirmed (interactive)" << endl;
           }
@@ -240,57 +241,53 @@ void report_licenses(Zypper & zypper)
 {
   PoolQuery q;
 
-  ui::Selectable::constPtr s;
-  PoolItem inst;
   PoolItem inst_with_repo;
 
   unsigned count_installed = 0, count_installed_repo = 0, count_installed_eula = 0;
   set<string> unique_licenses;
 
-  for_(pit, q.selectableBegin(), q.selectableEnd())
+  for ( ui::Selectable::constPtr s : q.selectable() )
   {
-    s = *pit;
-    if (!s)  // FIXME this must not be necessary!
+    if ( !s )  // FIXME this must not be necessary!
       continue;
 
-    for_(iit, s->installedBegin(), s->installedEnd())
+    for ( const PoolItem & inst : s->installed() )
     {
-      inst = *iit;
       ++count_installed;
 
       cout
-        << s->name() << "-" << inst.resolvable()->edition()
+        << s->name() << "-" << inst.edition()
         << " (" << kind_to_string_localized(s->kind(), 1) << ")"
         << endl;
 
-      if (s->kind() == ResKind::package)
+      if ( s->kind() == ResKind::package )
       {
         cout
           << _("License") << ": "
-          << asKind<Package>(inst.resolvable())->license()
+          << asKind<Package>(inst)->license()
           << endl;
-        unique_licenses.insert(asKind<Package>(inst.resolvable())->license());
+        unique_licenses.insert(asKind<Package>(inst)->license());
       }
 
-      for_(it, s->availableBegin(), s->availableEnd())
+      for ( const PoolItem & api : s->available() )
       {
-        if (identical(*it, inst))
+        if ( identical(api, inst) )
         {
-          inst_with_repo = *it;
+          inst_with_repo = api;
           ++count_installed_repo;
           break;
         }
       }
 
-      if (inst_with_repo && !inst_with_repo.resolvable()->licenseToConfirm().empty())
+      if ( inst_with_repo && !inst_with_repo.licenseToConfirm().empty() )
       {
         cout << _("EULA") << ":" << endl;
-	printRichText( cout, inst_with_repo.resolvable()->licenseToConfirm() );
+	printRichText( cout, inst_with_repo.licenseToConfirm() );
         cout << endl;
 
         ++count_installed_eula;
       }
-      else if (!inst.resolvable()->licenseToConfirm().empty())
+      else if ( !inst.licenseToConfirm().empty() )
         cout << "look! got an installed-only item and it has EULA! he?" << inst << endl;
       cout << "-" << endl;
     }
@@ -503,18 +500,6 @@ get_installed_providers(const Capability & cap)
   }
 
   return providers;
-}
-
-string poolitem_user_string(const PoolItem & pi)
-{
-  return resolvable_user_string(*pi.resolvable());
-}
-
-string resolvable_user_string(const Resolvable & res)
-{
-  ostringstream str;
-  str << res.name() << "-" << res.edition() << "." << res.arch();
-  return str.str();
 }
 
 zypp::PoolItem get_installed_obj(zypp::ui::Selectable::Ptr & s)

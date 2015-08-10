@@ -279,7 +279,7 @@ bool FillSearchTableSelectable::operator()(const zypp::ui::Selectable::constPtr 
     for_(ait, s->availableBegin(), s->availableEnd())
       for_(iit, s->installedBegin(), s->installedEnd())
         if (identical(*ait, *iit) &&
-            _repos.find(ait->resolvable()->repoInfo().alias()) != _repos.end())
+            _repos.find(ait->repoInfo().alias()) != _repos.end())
         {
           installed = true;
           break;
@@ -364,8 +364,8 @@ bool FillPatchesTable::operator()(const zypp::PoolItem & pi) const
   zypp::Patch::constPtr patch = zypp::asKind<zypp::Patch>(pi.resolvable());
 
   row
-    << pi->repository().asUserString()
-    << pi->name()
+    << pi.repository().asUserString()
+    << pi.name()
     << patch->category()
     << patch->severity()
     << string_patch_status(pi);
@@ -469,26 +469,26 @@ static void list_pattern_table(Zypper & zypper)
   bool installed_only = zypper.cOpts().count("installed-only");
   bool notinst_only = zypper.cOpts().count("uninstalled-only");
 
-  for_( it, God->pool().byKindBegin<Pattern>(), God->pool().byKindEnd<Pattern>() )
+  for( const PoolItem & pi : God->pool().byKind<Pattern>() )
   {
-    bool isInstalled = it->status().isInstalled();
+    bool isInstalled = pi.status().isInstalled();
     if ( isInstalled && notinst_only && !installed_only )
       continue;
     else if ( !isInstalled && installed_only && !notinst_only )
       continue;
 
-    Pattern::constPtr pattern = asKind<Pattern>(it->resolvable());
+    Pattern::constPtr pattern = asKind<Pattern>(pi.resolvable());
     // hide patterns with user visible flag not set (bnc #538152)
     if (!pattern->userVisible())
       continue;
 
     TableRow tr;
     tr << (isInstalled ? "i" : "");
-    tr << pattern->name () << pattern->edition().asString();
+    tr << pi.name() << pi.edition();
     if (!zypper.globalOpts().is_rug_compatible)
     {
-      tr << pattern->repoInfo().name();
-      tr << string_weak_status(it->status ());
+      tr << pi.repoInfo().name();
+      tr << string_weak_status(pi.status());
     }
     tbl << tr;
   }

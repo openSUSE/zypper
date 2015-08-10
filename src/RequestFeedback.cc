@@ -106,7 +106,7 @@ string SolverRequester::Feedback::asUserString(
       return str::form(
           _("No update candidate for '%s'."
             " The highest available version is already installed."),
-          poolitem_user_string(_objinst).c_str());
+          _objinst.asString().c_str() );
     else
       return
         str::form(_("No update candidate for '%s'."), _objinst->name().c_str());
@@ -118,15 +118,15 @@ string SolverRequester::Feedback::asUserString(
     return str::form(
         _("There is an update candidate '%s' for '%s', but it does not match"
           " the specified version, architecture, or repository."),
-        poolitem_user_string(highest).c_str(),
-        poolitem_user_string(_objinst).c_str());
+        highest.asString().c_str(),
+        _objinst.asString().c_str());
   }
 
   case UPD_CANDIDATE_CHANGES_VENDOR:
   {
     PoolItem highest = asSelectable()(_objinst)->highestAvailableVersionObj();
     ostringstream cmdhint;
-    cmdhint << "zypper install " << poolitem_user_string(highest);
+    cmdhint << "zypper install " << highest.asString();
 
     return str::form(
       _("There is an update candidate for '%s', but it is from a different"
@@ -177,8 +177,8 @@ string SolverRequester::Feedback::asUserString(
     msg << str::form(_(
       "The selected package '%s' from repository '%s' has lower"
       " version than the installed one."),
-      resolvable_user_string(*_objsel.resolvable()).c_str(),
-      _objsel->repoInfo().asUserString().c_str() );
+      _objsel.asString().c_str(),
+      _objsel.repoInfo().asUserString().c_str() );
     msg << " ";
     msg << str::form(
         // translators: %s = "zypper install --oldpackage package-version.arch"
@@ -238,18 +238,18 @@ string SolverRequester::Feedback::asUserString(
   case SET_TO_INSTALL:
     return str::form(
         _("Selecting '%s' from repository '%s' for installation."),
-        resolvable_user_string(*_objsel.resolvable()).c_str(),
-        _objsel->repoInfo().asUserString().c_str() );
+        _objsel.asString().c_str(),
+        _objsel.repoInfo().asUserString().c_str() );
 
   case FORCED_INSTALL:
     return str::form(
         _("Forcing installation of '%s' from repository '%s'."),
-        resolvable_user_string(*_objsel.resolvable()).c_str(),
-        _objsel->repoInfo().asUserString().c_str() );
+        _objsel.asString().c_str(),
+        _objsel.repoInfo().asUserString().c_str() );
 
   case SET_TO_REMOVE:
     return str::form(_("Selecting '%s' for removal."),
-        resolvable_user_string(*_objsel.resolvable()).c_str());
+        _objsel.asString().c_str() );
 
   case INSTALLED_LOCKED:
   {

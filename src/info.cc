@@ -117,19 +117,19 @@ namespace
 } // namespace
 ///////////////////////////////////////////////////////////////////
 
-void printNVA(const ResObject::constPtr & res)
+void printNVA( const PoolItem & pi_r )
 {
-  cout << _("Name: ") << res->name() << endl;
-  cout << _("Version: ") << res->edition().asString() << endl;
-  cout << _("Arch: ") << res->arch().asString() << endl;
-  cout << _("Vendor: ") << res->vendor() << endl;
+  cout << _("Name: ") << pi_r.name() << endl;
+  cout << _("Version: ") << pi_r.edition().asString() << endl;
+  cout << _("Arch: ") << pi_r.arch().asString() << endl;
+  cout << _("Vendor: ") << pi_r.vendor() << endl;
 }
 
-void printSummaryDesc(const ResObject::constPtr & res)
+void printSummaryDesc( const PoolItem & pi_r )
 {
-  cout << _("Summary: ") << res->summary() << endl;
+  cout << _("Summary: ") << pi_r.summary() << endl;
   cout << _("Description: ") << endl;
-  Zypper::instance()->out().printRichText( res->description(), 2/*indented*/ );
+  Zypper::instance()->out().printRichText( pi_r.description(), 2/*indented*/ );
 }
 
 ///////////////////////////////////////////////////////////////////
@@ -251,10 +251,9 @@ void printPkgInfo(Zypper & zypper, const ui::Selectable & s)
       theone = installed;
   }
 
-  cout << _("Repository: ")
-       << theone.resolvable()->repository().asUserString() << endl;
+  cout << _("Repository: ") << theone.repository().asUserString() << endl;
 
-  printNVA(theone.resolvable());
+  printNVA( theone );
 
   // if running on SUSE Linux Enterprise, report unsupported packages
   if ( runningOnEnterprise() )
@@ -270,9 +269,7 @@ void printPkgInfo(Zypper & zypper, const ui::Selectable & s)
   {
     if ( updateCand )
     {
-      cout << str::form(_("out-of-date (version %s installed)"),
-			installed.resolvable()->edition().asString().c_str())
-           << endl;
+      cout << str::form(_("out-of-date (version %s installed)"), installed.edition().c_str()) << endl;
     }
     else
     {
@@ -282,9 +279,9 @@ void printPkgInfo(Zypper & zypper, const ui::Selectable & s)
   else
     cout << _("not installed") << endl;
 
-  cout << _("Installed Size: ") << theone.resolvable()->installSize() << endl;
+  cout << _("Installed Size: ") << theone.installSize() << endl;
 
-  printSummaryDesc(theone.resolvable());
+  printSummaryDesc( theone );
 
   // Print dependency lists if CLI requests it
   for ( auto && dep : cliSupportedDepTypes() )
@@ -318,7 +315,7 @@ atom: xv = 3.10a-1091.2
 void printPatchInfo(Zypper & zypper, const ui::Selectable & s )
 {
   const PoolItem & pool_item = s.theObj();
-  printNVA(pool_item.resolvable());
+  printNVA( pool_item );
 
   cout << _("Status: ") << string_patch_status(pool_item) << endl;
 
@@ -342,7 +339,7 @@ void printPatchInfo(Zypper & zypper, const ui::Selectable & s )
 
   cout << _("Interactive: ") << (patch->interactiveWhenIgnoring(ignoreFlags) ? _("Yes") : _("No")) << endl;
 
-  printSummaryDesc(pool_item.resolvable());
+  printSummaryDesc( pool_item );
 
   // Print dependency lists if CLI requests it
   for ( auto && dep : cliSupportedDepTypes() )
@@ -390,19 +387,19 @@ This pattern provides a graphical application and a command line tool for keepin
 void printPatternInfo(Zypper & zypper, const ui::Selectable & s)
 {
   const PoolItem & pool_item = s.theObj();
+  Pattern::constPtr pattern = asKind<Pattern>(pool_item.resolvable());
 
-  if ( !pool_item.resolvable()->isKind<Pattern>() )
+  if ( !pattern )
     return;
 
-  cout << _("Repository: ")
-       << pool_item.resolvable()->repository().asUserString() << endl;
+  cout << _("Repository: ") << pool_item.repository().asUserString() << endl;
 
-  printNVA(pool_item.resolvable());
+  printNVA( pool_item );
 
   cout << _("Installed: ") << (s.hasInstalledObj() ? _("Yes") : _("No")) << endl;
-  cout << _("Visible to User: ") << (pool_item.resolvable()->asKind<Pattern>()->userVisible() ? _("Yes") : _("No")) << endl;
+  cout << _("Visible to User: ") << (pattern->userVisible() ? _("Yes") : _("No")) << endl;
 
-  printSummaryDesc(pool_item.resolvable());
+  printSummaryDesc( pool_item );
 
   if (zypper.globalOpts().is_rug_compatible)
     return;
@@ -417,9 +414,6 @@ void printPatternInfo(Zypper & zypper, const ui::Selectable & s)
   th << _("S") << _("Name") << _("Type") << _("Dependency");
   t << th;
 
-  //God->resolver()->solve();
-
-  Pattern::constPtr pattern = asKind<Pattern>(pool_item.resolvable());
   Pattern::Contents contents = pattern->contentsNoSuggests();	// (bnc#857671) don't include suggests as we can not deal with them .
   for_(sit, contents.selectableBegin(), contents.selectableEnd())
   {
@@ -473,10 +467,9 @@ void printProductInfo(Zypper & zypper, const ui::Selectable & s)
   }
   else
   {
-    cout << _("Repository: ")
-         << pool_item.resolvable()->repository().asUserString() << endl;
+    cout << _("Repository: ") << pool_item.repository().asUserString() << endl;
 
-    printNVA(pool_item.resolvable());
+    printNVA( pool_item );
 
     PoolItem installed;
     if (!s.installedEmpty())
@@ -543,7 +536,7 @@ void printProductInfo(Zypper & zypper, const ui::Selectable & s)
 	cout << ": " << _("undefined") << endl;
     }
 
-    printSummaryDesc(pool_item.resolvable());
+    printSummaryDesc( pool_item );
 
     // Print dependency lists if CLI requests it
     for ( auto && dep : cliSupportedDepTypes() )

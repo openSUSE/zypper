@@ -86,13 +86,11 @@ void Summary::readPool(const zypp::ResPool & pool)
   _inst_size_change = ByteCount();
 
   // find multi-version packages, which actually have mult. versions installed
-  for_( ident, sat::Pool::instance().multiversionBegin(), sat::Pool::instance().multiversionEnd() )
+  for ( ui::Selectable::Ptr s : sat::Pool::instance().multiversion().selectable() )
   {
-    ui::Selectable::Ptr s = pool.proxy().lookup(*ident);
-    bool got_multi = s && (
-        s->installedSize() > 1 ||
-        (s->installedSize() == 1 && s->toInstall()) );
-    if (got_multi)
+    if ( !s )
+      continue;
+    if ( s->installedSize() > 1 || ( s->installedSize() == 1 && s->toInstall() ) )
       _multiInstalled.insert( s->name() );
   }
   // collect resolvables to be installed/removed
@@ -109,7 +107,7 @@ void Summary::readPool(const zypp::ResPool & pool)
   {
     if (it->status().isToBeInstalled() || it->status().isToBeUninstalled())
     {
-      if (it->resolvable()->kind() == ResKind::patch)
+      if ( it->isKind( ResKind::patch ) )
       {
         Patch::constPtr patch = asKind<Patch>(it->resolvable());
 
@@ -126,12 +124,12 @@ void Summary::readPool(const zypp::ResPool & pool)
       if (it->status().isToBeInstalled())
       {
         DBG << "<install>   ";
-        to_be_installed[it->resolvable()->kind()].insert(it->resolvable());
+        to_be_installed[it->kind()].insert(it->resolvable());
       }
       if (it->status().isToBeUninstalled())
       {
         DBG << "<uninstall> ";
-        to_be_removed[it->resolvable()->kind()].insert(it->resolvable());
+        to_be_removed[it->kind()].insert(it->resolvable());
       }
       DBG << *it << endl;
     }
@@ -275,25 +273,24 @@ void Summary::readPool(const zypp::ResPool & pool)
       if (!(*it)->hasInstalledObj())
         continue;
 
-      ResObject::constPtr candidate =
-        (*it)->highestAvailableVersionObj().resolvable();
+      PoolItem candidate = (*it)->highestAvailableVersionObj();
 
       if (!candidate)
         continue;
-      if (compareByNVRA((*it)->installedObj().resolvable(), candidate) >= 0)
+      if (compareByNVRA((*it)->installedObj(), candidate) >= 0)
         continue;
       // ignore higher versions with different arch (except noarch) bnc #646410
-      if ((*it)->installedObj()->arch() != candidate->arch()
-          && (*it)->installedObj()->arch() != Arch_noarch
-          && candidate->arch() != Arch_noarch)
+      if ((*it)->installedObj().arch() != candidate.arch()
+          && (*it)->installedObj().arch() != Arch_noarch
+          && candidate.arch() != Arch_noarch)
         continue;
       // mutliversion packages do not end up in _toupgrade, so we need to remove
       // them from candidates if the candidate actually installs (bnc #629197)
-      if (_multiInstalled.find(candidate->name()) != _multiInstalled.end()
-          && candidate->poolItem().status().isToBeInstalled())
+      if (_multiInstalled.find(candidate.name()) != _multiInstalled.end()
+          && candidate.status().isToBeInstalled())
         continue;
 
-      candidates[*kit].insert(ResPair(nullptr, candidate));
+      candidates[*kit].insert(ResPair(nullptr, candidate.resolvable()));
     }
     MIL << *kit << " update candidates: " << candidates[*kit].size() << endl;
     MIL << "to be actually updated: " << _toupgrade[*kit].size() << endl;
