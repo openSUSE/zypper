@@ -57,7 +57,7 @@ namespace zypp
         return sat::Solvable( _buddy );
       }
 
-      void setBuddy( sat::Solvable solv_r );
+      void setBuddy( const sat::Solvable & solv_r );
 
       ResObject::constPtr resolvable() const
       { return _resolvable; }
@@ -153,7 +153,7 @@ namespace zypp
     return str;
   }
 
-  inline void PoolItem::Impl::setBuddy( sat::Solvable solv_r )
+  inline void PoolItem::Impl::setBuddy( const sat::Solvable & solv_r )
   {
     PoolItem myBuddy( solv_r );
     if ( myBuddy )
@@ -165,131 +165,55 @@ namespace zypp
   }
 
   ///////////////////////////////////////////////////////////////////
-  //
-  //	CLASS NAME : PoolItem
-  //
+  //	class PoolItem
   ///////////////////////////////////////////////////////////////////
 
-  ///////////////////////////////////////////////////////////////////
-  //
-  //	METHOD NAME : PoolItem::PoolItem
-  //	METHOD TYPE : Ctor
-  //
   PoolItem::PoolItem()
   : _pimpl( Impl::nullimpl() )
   {}
 
-  ///////////////////////////////////////////////////////////////////
-  //
-  //	METHOD NAME : PoolItem::PoolItem
-  //	METHOD TYPE : Ctor
-  //
   PoolItem::PoolItem( const sat::Solvable & solvable_r )
   : _pimpl( ResPool::instance().find( solvable_r )._pimpl )
   {}
 
-  ///////////////////////////////////////////////////////////////////
-  //
-  //	METHOD NAME : PoolItem::PoolItem
-  //	METHOD TYPE : Ctor
-  //
   PoolItem::PoolItem( const ResObject::constPtr & resolvable_r )
   : _pimpl( ResPool::instance().find( resolvable_r )._pimpl )
   {}
 
-  ///////////////////////////////////////////////////////////////////
-  //
-  //	METHOD NAME : PoolItem::PoolItem
-  //	METHOD TYPE : Ctor
-  //
   PoolItem::PoolItem( Impl * implptr_r )
   : _pimpl( implptr_r )
   {}
 
-  ///////////////////////////////////////////////////////////////////
-  //
-  //	METHOD NAME : PoolItem::makePoolItem
-  //	METHOD TYPE : PoolItem
-  //
   PoolItem PoolItem::makePoolItem( const sat::Solvable & solvable_r )
   {
     return PoolItem( new Impl( makeResObject( solvable_r ), solvable_r.isSystem() ) );
   }
 
-  ///////////////////////////////////////////////////////////////////
-  //
-  //	METHOD NAME : PoolItem::~PoolItem
-  //	METHOD TYPE : Dtor
-  //
   PoolItem::~PoolItem()
   {}
 
-  ///////////////////////////////////////////////////////////////////
-  //
-  //	METHOD NAME : PoolItem::pool
-  //	METHOD TYPE : ResPool
-  //
   ResPool PoolItem::pool() const
   { return ResPool::instance(); }
 
-  ///////////////////////////////////////////////////////////////////
-  //
-  //	Forward to Impl:
-  //
-  ///////////////////////////////////////////////////////////////////
 
-  ResStatus & PoolItem::status() const
-  { return _pimpl->status(); }
+  ResStatus & PoolItem::status() const			{ return _pimpl->status(); }
+  ResStatus & PoolItem::statusReset() const		{ return _pimpl->statusReset(); }
+  sat::Solvable PoolItem::buddy() const			{ return _pimpl->buddy(); }
+  void PoolItem::setBuddy( const sat::Solvable & solv_r )	{ _pimpl->setBuddy( solv_r ); }
+  bool PoolItem::isUndetermined() const			{ return _pimpl->isUndetermined(); }
+  bool PoolItem::isRelevant() const			{ return _pimpl->isRelevant(); }
+  bool PoolItem::isSatisfied() const			{ return _pimpl->isSatisfied(); }
+  bool PoolItem::isBroken() const			{ return _pimpl->isBroken(); }
+  bool PoolItem::isNeeded() const			{ return _pimpl->isNeeded(); }
+  bool PoolItem::isUnwanted() const			{ return _pimpl->isUnwanted(); }
+  void PoolItem::saveState() const			{ _pimpl->saveState(); }
+  void PoolItem::restoreState() const			{ _pimpl->restoreState(); }
+  bool PoolItem::sameState() const			{ return _pimpl->sameState(); }
+  ResObject::constPtr PoolItem::resolvable() const	{ return _pimpl->resolvable(); }
 
-  ResStatus & PoolItem::statusReset() const
-  { return _pimpl->statusReset(); }
 
-  sat::Solvable PoolItem::buddy() const
-  { return _pimpl->buddy(); }
-
-  void PoolItem::setBuddy( sat::Solvable solv_r )
-  { _pimpl->setBuddy( solv_r ); }
-
-  bool PoolItem::isUndetermined() const
-  { return _pimpl->isUndetermined(); }
-
-  bool PoolItem::isRelevant() const
-  { return _pimpl->isRelevant(); }
-
-  bool PoolItem::isSatisfied() const
-  { return _pimpl->isSatisfied(); }
-
-  bool PoolItem::isBroken() const
-  { return _pimpl->isBroken(); }
-
-  bool PoolItem::isNeeded() const
-  { return _pimpl->isNeeded(); }
-
-  bool PoolItem::isUnwanted() const
-  { return _pimpl->isUnwanted(); }
-
-  void PoolItem::saveState() const
-  { _pimpl->saveState(); }
-
-  void PoolItem::restoreState() const
-  { _pimpl->restoreState(); }
-
-  bool PoolItem::sameState() const
-  { return _pimpl->sameState(); }
-
-  ResObject::constPtr PoolItem::resolvable() const
-  { return _pimpl->resolvable(); }
-
-  /******************************************************************
-   **
-   **	FUNCTION NAME : operator<<
-   **	FUNCTION TYPE : std::ostream &
-  */
   std::ostream & operator<<( std::ostream & str, const PoolItem & obj )
-  {
-    return str << *obj._pimpl;
-  }
+  { return str << *obj._pimpl; }
 
-  /////////////////////////////////////////////////////////////////
 } // namespace zypp
 ///////////////////////////////////////////////////////////////////

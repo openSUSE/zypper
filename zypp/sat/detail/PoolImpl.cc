@@ -25,6 +25,7 @@
 #include "zypp/ZConfig.h"
 
 #include "zypp/sat/detail/PoolImpl.h"
+#include "zypp/sat/SolvableSet.h"
 #include "zypp/sat/Pool.h"
 #include "zypp/Capability.h"
 #include "zypp/Locale.h"
@@ -512,7 +513,7 @@ namespace zypp
       }
 
 
-      static void _getLocaleDeps( Capability cap_r, std::unordered_set<sat::detail::IdType> & store_r )
+      static void _getLocaleDeps( const Capability & cap_r, LocaleSet & store_r )
       {
         // Collect locales from any 'namespace:language(lang)' dependency
         CapDetail detail( cap_r );
@@ -530,7 +531,7 @@ namespace zypp
             case CapDetail::CAP_NAMESPACE:
               if ( detail.lhs().id() == NAMESPACE_LANGUAGE )
               {
-                store_r.insert( detail.rhs().id() );
+                store_r.insert( Locale( IdString(detail.rhs().id()) ) );
               }
               break;
 
@@ -546,59 +547,56 @@ namespace zypp
       {
         if ( !_availableLocalesPtr )
         {
-          // Collect any 'namespace:language(ja)' dependencies
-          std::unordered_set<sat::detail::IdType> tmp;
-          Pool pool( Pool::instance() );
-          for_( it, pool.solvablesBegin(), pool.solvablesEnd() )
-          {
-            Capabilities cap( it->supplements() );
-            for_( cit, cap.begin(), cap.end() )
-            {
-              _getLocaleDeps( *cit, tmp );
+	  _availableLocalesPtr.reset( new LocaleSet );
+	  LocaleSet & localeSet( *_availableLocalesPtr );
+
+	  for ( const Solvable & pi : Pool::instance().solvables() )
+	  {
+	    for ( const Capability & cap : pi.supplements() )
+	    {
+	      _getLocaleDeps( cap, localeSet );
             }
-          }
-#warning immediately build LocaleSet as soon as Loale is an Id based type
-          _availableLocalesPtr.reset( new LocaleSet(tmp.size()) );
-          for_( it, tmp.begin(), tmp.end() )
-          {
-            _availableLocalesPtr->insert( Locale( IdString(*it) ) );
-          }
+	  }
         }
         return *_availableLocalesPtr;
       }
+
 
       void PoolImpl::multiversionListInit() const
       {
         _multiversionListPtr.reset( new MultiversionList );
         MultiversionList & multiversionList( *_multiversionListPtr );
+	
+	MultiversionList::size_type size = 0;
+        for ( const std::string & spec : ZConfig::instance().multiversionSpec() )
+	{
+	  static const std::string prefix( "provides:" );
+	  bool provides = str::hasPrefix( spec, prefix );
 
-        const std::set<std::string> & multiversionSpec( ZConfig::instance().multiversionSpec() );
-        for_( it, multiversionSpec.begin(), multiversionSpec.end() )
-        {
-          static const std::string prefix( "provides:" );
-          if ( str::hasPrefix( *it, prefix ) )
-          {
-            WhatProvides provides( Capability( it->c_str() + prefix.size() ) );
-            if ( provides.empty() )
-            {
-              MIL << "Multiversion install not provided (" << *it << ")" << endl;
-            }
-            else
-            {
-              for_( pit, provides.begin(), provides.end() )
-              {
-                if ( multiversionList.insert( pit->ident() ).second )
-                  MIL << "Multiversion install " << pit->ident() << " (" << *it << ")" << endl;
-              }
-            }
-          }
-          else
-          {
-            MIL << "Multiversion install " << *it << endl;
-            multiversionList.insert( IdString( *it ) );
-          }
+	  for ( Solvable solv : WhatProvides( Capability( provides ? spec.c_str() + prefix.size() : spec.c_str() ) ) )
+	  {
+	    if ( solv.isSystem() )
+	      continue;
+	    if ( provides || solv.ident() == spec )
+	      multiversionList.insert( solv );
+	  }
+
+	  MultiversionList::size_type nsize = multiversionList.size();
+	  MIL << "Multiversion install " << spec << ": " << (nsize-size) << " matches" << endl;
+	  size = nsize;
         }
       }
+
+      const PoolImpl::MultiversionList & PoolImpl::multiversionList() const
+      {
+	if ( ! _multiversionListPtr )
+	  multiversionListInit();
+	return *_multiversionListPtr;
+      }
+
+      bool PoolImpl::isMultiversion( const Solvable & solv_r ) const
+      { return multiversionList().contains( solv_r ); }
+
 
       const std::set<std::string> & PoolImpl::requiredFilesystems() const
       {

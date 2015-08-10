@@ -99,7 +99,7 @@ SolverQueueItemUpdate::cmp (SolverQueueItem_constPtr item) const
     if (cmp != 0)
         return cmp;
     SolverQueueItemUpdate_constPtr update = dynamic_pointer_cast<const SolverQueueItemUpdate>(item);
-    return compareByNVRA (_item.resolvable(), update->_item.resolvable());
+    return compareByNVRA (_item, update->_item);
 }
 
 

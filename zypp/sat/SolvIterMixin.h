@@ -158,6 +158,8 @@ namespace zypp
         { return self().begin(); }
         Solvable_iterator solvableEnd() const
         { return self().end(); }
+	Iterable<Solvable_iterator> solvable() const
+	{ return makeIterable( solvableBegin(), solvableEnd() ); }
         //@}
 
         /** \name Iterate as PoolItem */
@@ -167,6 +169,8 @@ namespace zypp
         { return make_transform_iterator( solvableBegin(), asPoolItem() ); }
         PoolItem_iterator poolItemEnd() const
         { return make_transform_iterator( solvableEnd(), asPoolItem() ); }
+	Iterable<PoolItem_iterator> poolItem() const
+	{ return makeIterable( poolItemBegin(), poolItemEnd() ); }
         //@}
 
       private:
@@ -179,6 +183,8 @@ namespace zypp
         { return make_transform_iterator( unifiedSolvableBegin(), ui::asSelectable() ); }
         Selectable_iterator selectableEnd() const
         { return make_transform_iterator( unifiedSolvableEnd(), ui::asSelectable() ); }
+	Iterable<Selectable_iterator> selectable() const
+	{ return makeIterable( selectableBegin(), selectableEnd() ); }
         //@}
 
       private:
@@ -187,7 +193,9 @@ namespace zypp
         UnifiedSolvable_iterator unifiedSolvableBegin() const
         { return make_filter_iterator( solvitermixin_detail::UnifyByIdent(), solvableBegin(), solvableEnd() ); }
         UnifiedSolvable_iterator unifiedSolvableEnd() const
-        { return make_filter_iterator( solvitermixin_detail::UnifyByIdent(), solvableEnd(), solvableEnd() );; }
+        { return make_filter_iterator( solvitermixin_detail::UnifyByIdent(), solvableEnd(), solvableEnd() ); }
+	Iterable<UnifiedSolvable_iterator> unifiedSolvable() const
+	{ return makeIterable( unifiedSolvableBegin(), unifiedSolvableEnd() ); }
         //@}
       private:
         const Derived & self() const

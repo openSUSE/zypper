@@ -43,6 +43,18 @@ namespace zypp
    * an ordinary filter iterator. Do not provide filter iterators
    * here, if there is no index table for it.
    *
+   * For most (*Begin,*End) iterator-pairs there's also an \ref Iterable
+   * provided, so you can use then in range-based for loops:
+   * \code
+   *   // classic:
+   *   for_( it, pool.filterBegin(myfilter), pool.filterEnd(myfilter) )
+   *   { ... }
+   *
+   *   // range based:
+   *   for ( const PoolItem & pi : pool.filter(myfilter) )
+   *   { ... }
+   * \endcode
+   *
    * \include n_ResPool_nomorenameiter
   */
   class ResPool
@@ -110,6 +122,10 @@ namespace zypp
       template<class _Filter>
       filter_iterator<_Filter,const_iterator> filterEnd( const _Filter & filter_r ) const
       { return make_filter_end( filter_r, *this ); }
+
+      template<class _Filter>
+      Iterable<filter_iterator<_Filter,const_iterator>> filter( const _Filter & filter_r ) const
+      { return makeIterable( filterBegin( filter_r ), filterEnd( filter_r ) ); }
       //@}
 
       /** \name Iterate over all PoolItems by status.
@@ -136,6 +152,9 @@ namespace zypp
 
       filter_iterator<filter::ByStatus,const_iterator> byStatusEnd( const filter::ByStatus & filter_r ) const
       { return make_filter_end( filter_r, *this ); }
+
+      Iterable<filter_iterator<filter::ByStatus,const_iterator>> byStatus( const filter::ByStatus & filter_r ) const
+      { return makeIterable( byStatusBegin( filter_r ), byStatusEnd( filter_r ) ); }
       //@}
 
     public:
@@ -204,6 +223,33 @@ namespace zypp
       /** Takes a \ref sat::Solvable::ident string. */
       byIdent_iterator byIdentEnd( IdString ident_r ) const
       { return byIdentEnd( ByIdent(ident_r) ); }
+
+
+      Iterable<byIdent_iterator> byIdent( const ByIdent & ident_r ) const
+      { return makeIterable( byIdentBegin( ident_r ), byIdentEnd( ident_r ) ); }
+
+      Iterable<byIdent_iterator> byIdent( ResKind kind_r, IdString name_r ) const
+      { return makeIterable( byIdentBegin( kind_r, name_r ), byIdentEnd(  kind_r, name_r ) ); }
+
+      Iterable<byIdent_iterator> byIdent( ResKind kind_r, const C_Str & name_r ) const
+      { return makeIterable( byIdentBegin(  kind_r, name_r ), byIdentEnd(  kind_r, name_r ) ); }
+
+      template<class _Res>
+      Iterable<byIdent_iterator> byIdent( IdString name_r ) const
+      { return makeIterable( byIdentBegin<_Res>( name_r ), byIdentEnd<_Res>( name_r ) ); }
+
+      template<class _Res>
+      Iterable<byIdent_iterator> byIdent( const C_Str & name_r ) const
+      { return makeIterable( byIdentBegin<_Res>( name_r ), byIdentEnd<_Res>( name_r ) ); }
+
+      Iterable<byIdent_iterator> byIdent( const PoolItem & pi_r ) const
+      { return makeIterable( byIdentBegin( pi_r ), byIdentEnd( pi_r ) ); }
+
+      Iterable<byIdent_iterator> byIdent(sat::Solvable slv_r ) const
+      { return makeIterable( byIdentBegin( slv_r ), byIdentEnd( slv_r ) ); }
+
+      Iterable<byIdent_iterator> byIdent( IdString ident_r ) const
+      { return makeIterable( byIdentBegin( ident_r ), byIdentEnd( ident_r ) ); }
      //@}
 
     public:
@@ -225,6 +271,13 @@ namespace zypp
       template<class _Res>
           byKind_iterator byKindEnd() const
       { return make_filter_end( resfilter::byKind<_Res>(), *this ); }
+
+      Iterable<byKind_iterator> byKind( const ResKind & kind_r ) const
+      { return makeIterable( byKindBegin( kind_r ), byKindEnd( kind_r ) ); }
+
+      template<class _Res>
+      Iterable<byKind_iterator> byKind() const
+      { return makeIterable( byKindBegin<_Res>(), byKindEnd<_Res>() ); }
       //@}
 
     public:
@@ -238,6 +291,9 @@ namespace zypp
 
       byName_iterator byNameEnd( const std::string & name_r ) const
       { return make_filter_end( ByName(name_r), *this ); }
+
+      Iterable<byName_iterator> byName( const std::string & name_r ) const
+      { return makeIterable( byNameBegin( name_r ), byNameEnd( name_r ) ); }
       //@}
 
     public:
@@ -259,6 +315,9 @@ namespace zypp
        * Returns \ref Repository::norepository if there is no such \ref Repository.
        */
       Repository reposFind( const std::string & alias_r ) const;
+
+      Iterable<repository_iterator> knownRepositories() const
+      { return makeIterable( knownRepositoriesBegin(), knownRepositoriesEnd() ); }
       //@}
 
     public:
@@ -335,6 +394,9 @@ namespace zypp
       size_type hardLockQueriesSize() const;
       hardLockQueries_iterator hardLockQueriesBegin() const;
       hardLockQueries_iterator hardLockQueriesEnd() const;
+
+      Iterable<hardLockQueries_iterator> hardLockQueries() const
+      { return makeIterable( hardLockQueriesBegin(), hardLockQueriesEnd() ); }
 
       /** Set a new set of queries.
        * The hard-locks of existing PoolItems are adjusted according

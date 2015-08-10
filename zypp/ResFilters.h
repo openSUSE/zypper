@@ -159,6 +159,9 @@ namespace zypp
     /** Select ResObject by name. */
     struct ByName : public ResObjectFilterFunctor
     {
+      ByName()
+      {}
+
       ByName( const std::string & name_r )
       : _name( name_r )
       {}

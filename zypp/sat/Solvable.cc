@@ -27,15 +27,17 @@
 #include "zypp/OnMediaLocation.h"
 #include "zypp/ZConfig.h"
 
+#include "zypp/ui/Selectable.h"
+
 using std::endl;
 
 ///////////////////////////////////////////////////////////////////
 namespace zypp
-{ /////////////////////////////////////////////////////////////////
+{
   ///////////////////////////////////////////////////////////////////
   namespace sat
-  { /////////////////////////////////////////////////////////////////
-
+  {
+    ///////////////////////////////////////////////////////////////////
     namespace
     {
       void _doSplit( IdString & _ident, ResKind & _kind, IdString & _name )
@@ -64,7 +66,8 @@ namespace zypp
 	}
 	return;
       }
-    }
+    } // namespace
+    ///////////////////////////////////////////////////////////////////
 
     Solvable::SplitIdent::SplitIdent( IdString ident_r )
     : _ident( ident_r )
@@ -88,6 +91,8 @@ namespace zypp
     , _kind( kind_r )
     { _doSplit( _ident, _kind, _name ); }
 
+    /////////////////////////////////////////////////////////////////
+    //	class Solvable
     /////////////////////////////////////////////////////////////////
 
     const Solvable Solvable::noSolvable;
@@ -116,29 +121,6 @@ namespace zypp
         }
       }
       return noSolvable;
-    }
-
-    Repository Solvable::repository() const
-    {
-      NO_SOLVABLE_RETURN( Repository::noRepository );
-      return Repository( _solvable->repo );
-    }
-
-    bool Solvable::isSystem() const
-    {
-      NO_SOLVABLE_RETURN( _id == detail::systemSolvableId );
-      return myPool().isSystemRepo( _solvable->repo );
-    }
-
-    bool Solvable::onSystemByUser() const
-    {
-      return isSystem() && myPool().isOnSystemByUser( ident() );
-    }
-
-    IdString Solvable::ident() const
-    {
-      NO_SOLVABLE_RETURN( IdString() );
-      return IdString( _solvable->name );
     }
 
     std::string Solvable::lookupStrAttribute( const SolvAttr & attr ) const
@@ -209,22 +191,22 @@ namespace zypp
     {
       inline Pathname lookupDatadirIn( Repository repor_r )
       {
-        static const sat::SolvAttr susetagsDatadir( "susetags:datadir" );
+        static const SolvAttr susetagsDatadir( "susetags:datadir" );
         Pathname ret;
         // First look for repo attribute "susetags:datadir". If not found,
         // look into the solvables as Code11 libsolv placed it there.
-        sat::LookupRepoAttr datadir( susetagsDatadir, repor_r );
+        LookupRepoAttr datadir( susetagsDatadir, repor_r );
         if ( ! datadir.empty() )
           ret = datadir.begin().asString();
         else
         {
-          sat::LookupAttr datadir( susetagsDatadir, repor_r );
+          LookupAttr datadir( susetagsDatadir, repor_r );
           if ( ! datadir.empty() )
             ret = datadir.begin().asString();
         }
         return ret;
       }
-    }
+    } // namespace
     ///////////////////////////////////////////////////////////////////
 
     OnMediaLocation Solvable::lookupLocation() const
@@ -271,7 +253,14 @@ namespace zypp
       return ret;
     }
 
-    ResKind Solvable::kind() const
+
+    IdString Solvable::ident() const
+    {
+      NO_SOLVABLE_RETURN( IdString() );
+      return IdString( _solvable->name );
+    }
+
+     ResKind Solvable::kind() const
     {
       NO_SOLVABLE_RETURN( ResKind() );
       // detect srcpackages by 'arch'
@@ -353,38 +342,87 @@ namespace zypp
       //return ArchId( _solvable->arch );
     }
 
-    bool Solvable::multiversionInstall() const
-    {
-      return myPool().isMultiversion( ident() );
-    }
-
     IdString Solvable::vendor() const
     {
       NO_SOLVABLE_RETURN( IdString() );
       return IdString( _solvable->vendor );
     }
 
-    Capabilities Solvable::operator[]( Dep which_r ) const
+   Repository Solvable::repository() const
     {
-      switch( which_r.inSwitch() )
-      {
-        case Dep::PROVIDES_e:    return provides();    break;
-        case Dep::REQUIRES_e:    return requires();    break;
-        case Dep::CONFLICTS_e:   return conflicts();   break;
-        case Dep::OBSOLETES_e:   return obsoletes();   break;
-        case Dep::RECOMMENDS_e:  return recommends();  break;
-        case Dep::SUGGESTS_e:    return suggests();    break;
-        case Dep::ENHANCES_e:    return enhances();    break;
-        case Dep::SUPPLEMENTS_e: return supplements(); break;
-        case Dep::PREREQUIRES_e: return prerequires(); break;
-      }
-      return Capabilities();
+      NO_SOLVABLE_RETURN( Repository::noRepository );
+      return Repository( _solvable->repo );
     }
 
-    inline Capabilities _getCapabilities( detail::IdType * idarraydata_r, ::Offset offs_r )
+    RepoInfo Solvable::repoInfo() const
+    { return repository().info(); }
+
+
+    bool Solvable::isSystem() const
     {
-      return offs_r ? Capabilities( idarraydata_r + offs_r ) : Capabilities();
+      NO_SOLVABLE_RETURN( _id == detail::systemSolvableId );
+      return myPool().isSystemRepo( _solvable->repo );
     }
+
+    bool Solvable::onSystemByUser() const
+    {
+      return isSystem() && myPool().isOnSystemByUser( ident() );
+    }
+
+    bool Solvable::multiversionInstall() const
+    {
+      NO_SOLVABLE_RETURN( false );
+      return myPool().isMultiversion( *this );
+    }
+
+    Date Solvable::buildtime() const
+    {
+      NO_SOLVABLE_RETURN( Date() );
+      return Date( lookupNumAttribute( SolvAttr::buildtime ) );
+    }
+
+    Date Solvable::installtime() const
+    {
+      NO_SOLVABLE_RETURN( Date() );
+      return Date( lookupNumAttribute( SolvAttr::installtime ) );
+    }
+
+    std::string Solvable::asString() const
+    {
+      NO_SOLVABLE_RETURN( (_id == detail::systemSolvableId ? "systemSolvable" : "noSolvable") );
+      return str::form( "%s-%s.%s",
+                        IdString( _solvable->name ).c_str(),
+                        IdString( _solvable->evr ).c_str(),
+                        IdString( _solvable->arch ).c_str() );
+    }
+
+    std::string Solvable::asUserString() const\
+    {
+      NO_SOLVABLE_RETURN( (_id == detail::systemSolvableId ? "systemSolvable" : "noSolvable") );
+      return str::form( "%s-%s.%s(%s)",
+                        IdString( _solvable->name ).c_str(),
+                        IdString( _solvable->evr ).c_str(),
+                        IdString( _solvable->arch ).c_str(),
+                        repository().asUserString().c_str() );
+    }
+
+    bool Solvable::identical( const Solvable & rhs ) const
+    {
+      NO_SOLVABLE_RETURN( ! rhs.get() );
+      ::_Solvable * rhssolvable( rhs.get() );
+      return rhssolvable && ( _solvable == rhssolvable || ::solvable_identical( _solvable, rhssolvable ) );
+    }
+
+    ///////////////////////////////////////////////////////////////////
+    namespace
+    {
+      inline Capabilities _getCapabilities( detail::IdType * idarraydata_r, ::Offset offs_r )
+      {
+	return offs_r ? Capabilities( idarraydata_r + offs_r ) : Capabilities();
+      }
+    } // namespace
+    ///////////////////////////////////////////////////////////////////
+
     Capabilities Solvable::provides() const
     {
       NO_SOLVABLE_RETURN( Capabilities() );
@@ -446,7 +484,7 @@ namespace zypp
           ret.insert( *it );
       }
       return ret;
-   }
+    }
 
     CapabilitySet Solvable::valuesOfNamespace( const std::string & namespace_r ) const
     {
@@ -466,36 +504,9 @@ namespace zypp
       return ret;
     }
 
-
-    std::string Solvable::asString() const
-    {
-      NO_SOLVABLE_RETURN( (_id == detail::systemSolvableId ? "systemSolvable" : "noSolvable") );
-      return str::form( "%s-%s.%s",
-                        IdString( _solvable->name ).c_str(),
-                        IdString( _solvable->evr ).c_str(),
-                        IdString( _solvable->arch ).c_str() );
-    }
-
-    std::string Solvable::asUserString() const\
-    {
-      NO_SOLVABLE_RETURN( (_id == detail::systemSolvableId ? "systemSolvable" : "noSolvable") );
-      return str::form( "%s-%s.%s(%s)",
-                        IdString( _solvable->name ).c_str(),
-                        IdString( _solvable->evr ).c_str(),
-                        IdString( _solvable->arch ).c_str(),
-                        repository().asUserString().c_str() );
-    }
-
-    bool Solvable::identical( Solvable rhs ) const
-    {
-      NO_SOLVABLE_RETURN( ! rhs.get() );
-      ::_Solvable * rhssolvable( rhs.get() );
-      return rhssolvable && ( _solvable == rhssolvable || ::solvable_identical( _solvable, rhssolvable ) );
-    }
-
     ///////////////////////////////////////////////////////////////////
     namespace
-    { /////////////////////////////////////////////////////////////////
+    {
       /** Expand \ref Capability and call \c fnc_r for each namescpace:language
        * dependency. Return #invocations of fnc_r, negative if fnc_r returned
        * false to indicate abort.
@@ -541,7 +552,7 @@ namespace zypp
        * dependency. Return #invocations of fnc_r, negative if fnc_r returned
        * false to indicate abort.
        */
-      inline int invokeOnEachSupportedLocale( Capabilities cap_r, function<bool (const Locale &)> fnc_r )
+      inline int invokeOnEachSupportedLocale( Capabilities cap_r, function<bool (Locale)> fnc_r )
       {
         int cnt = 0;
         for_( cit, cap_r.begin(), cap_r.end() )
@@ -567,8 +578,8 @@ namespace zypp
 
         const LocaleSet & _locales;
       };
-
-    } /////////////////////////////////////////////////////////////////
+    } // namespace
+    ///////////////////////////////////////////////////////////////////
 
     bool Solvable::supportsLocales() const
     {
@@ -593,17 +604,87 @@ namespace zypp
     bool Solvable::supportsRequestedLocales() const
     { return supportsLocale( myPool().getRequestedLocales() ); }
 
-    void Solvable::getSupportedLocales( LocaleSet & locales_r ) const
+    LocaleSet Solvable::getSupportedLocales() const
     {
-      invokeOnEachSupportedLocale( supplements(),
-                                   functor::Collector( std::inserter( locales_r, locales_r.begin() ) ) );
+      LocaleSet ret;
+      invokeOnEachSupportedLocale( supplements(), functor::Collector( std::inserter( ret, ret.begin() ) ) );
+      return ret;
     }
 
-    /******************************************************************
-    **
-    **	FUNCTION NAME : operator<<
-    **	FUNCTION TYPE : std::ostream &
-    */
+    CpeId Solvable::cpeId() const
+    {
+      NO_SOLVABLE_RETURN( CpeId() );
+      return CpeId( lookupStrAttribute( SolvAttr::cpeid ), CpeId::noThrow );
+    }
+
+    unsigned Solvable::mediaNr() const
+    {
+      NO_SOLVABLE_RETURN( 0U );
+      return lookupNumAttribute( SolvAttr::medianr );
+    }
+
+    ByteCount Solvable::installSize() const
+    {
+      NO_SOLVABLE_RETURN( ByteCount() );
+      return ByteCount( lookupNumAttribute( SolvAttr::installsize ) );
+    }
+
+    ByteCount Solvable::downloadSize() const
+    {
+      NO_SOLVABLE_RETURN( ByteCount() );
+      return ByteCount( lookupNumAttribute( SolvAttr::downloadsize ) );
+    }
+
+    std::string Solvable::distribution() const
+    {
+      NO_SOLVABLE_RETURN( std::string() );
+      return lookupStrAttribute( SolvAttr::distribution );
+    }
+
+    std::string	Solvable::summary( const Locale & lang_r ) const
+    {
+      NO_SOLVABLE_RETURN( std::string() );
+      return lookupStrAttribute( SolvAttr::summary, lang_r );
+    }
+
+    std::string	Solvable::description( const Locale & lang_r ) const
+    {
+      NO_SOLVABLE_RETURN( std::string() );
+      return lookupStrAttribute( SolvAttr::description, lang_r );
+    }
+
+    std::string	Solvable::insnotify( const Locale & lang_r ) const
+    {
+      NO_SOLVABLE_RETURN( std::string() );
+      return lookupStrAttribute( SolvAttr::insnotify, lang_r );
+    }
+
+    std::string	Solvable::delnotify( const Locale & lang_r ) const
+    {
+      NO_SOLVABLE_RETURN( std::string() );
+      return lookupStrAttribute( SolvAttr::delnotify, lang_r );
+    }
+
+    std::string	Solvable::licenseToConfirm( const Locale & lang_r ) const
+    {
+      NO_SOLVABLE_RETURN( std::string() );
+      std::string ret = lookupStrAttribute( SolvAttr::eula, lang_r );
+      if ( ret.empty() && isKind<Product>() )
+      {
+	const RepoInfo & ri( repoInfo() );
+	if ( ri.needToAcceptLicense() || ! ui::Selectable::get( *this )->hasInstalledObj() )
+	  ret = ri.getLicense( lang_r ); // bnc#908976: suppress informal license upon update
+      }
+      return ret;
+    }
+
+    bool Solvable::needToAcceptLicense() const
+    {
+      NO_SOLVABLE_RETURN( false );
+      return ( isKind<Product>() ? repoInfo().needToAcceptLicense() : true );
+    }
+
+
     std::ostream & operator<<( std::ostream & str, const Solvable & obj )
     {
       if ( ! obj )
@@ -615,11 +696,6 @@ namespace zypp
           << obj.repository().alias() << ")";
     }
 
-    /******************************************************************
-    **
-    **	FUNCTION NAME : dumpOn
-    **	FUNCTION TYPE : std::ostream &
-    */
     std::ostream & dumpOn( std::ostream & str, const Solvable & obj )
     {
       str << obj;
@@ -652,9 +728,7 @@ namespace zypp
       return str;
     }
 
-    /////////////////////////////////////////////////////////////////
   } // namespace sat
   ///////////////////////////////////////////////////////////////////
-  /////////////////////////////////////////////////////////////////
 } // namespace zypp
 ///////////////////////////////////////////////////////////////////

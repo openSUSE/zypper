@@ -247,6 +247,7 @@ SET( zypp_base_HEADERS
   base/Hash.h
   base/IOStream.h
   base/InputStream.h
+  base/Iterable.h
   base/Iterator.h
   base/Json.h
   base/LogControl.h
@@ -540,6 +541,7 @@ SET( zypp_sat_HEADERS
   sat/Pool.h
   sat/Solvable.h
   sat/SolvableSet.h
+  sat/SolvableType.h
   sat/SolvIterMixin.h
   sat/Map.h
   sat/Queue.h

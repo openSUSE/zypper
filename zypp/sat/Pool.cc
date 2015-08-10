@@ -237,11 +237,8 @@ namespace zypp
     bool Pool::isAvailableLocale( const Locale & locale_r ) const
     { return myPool().isAvailableLocale( locale_r ); }
 
-    bool Pool::multiversionEmpty() const			{ return myPool().multiversionList().empty(); }
-    size_t Pool::multiversionSize() const			{ return myPool().multiversionList().size(); }
-    Pool::MultiversionIterator Pool::multiversionBegin() const	{ return myPool().multiversionList().begin(); }
-    Pool::MultiversionIterator Pool::multiversionEnd() const	{ return myPool().multiversionList().end(); }
-    bool Pool::isMultiversion( IdString ident_r ) const		{ return myPool().isMultiversion( ident_r ); }
+    const  Pool::MultiversionList &  Pool::multiversion() const
+    { return myPool().multiversionList(); }
 
     Queue Pool::autoInstalled() const				{ return myPool().autoInstalled(); }
     void Pool::setAutoInstalled( const Queue & autoInstalled_r ){ myPool().setAutoInstalled( autoInstalled_r ); }

@@ -127,10 +127,10 @@ namespace zypp
        */
       PoolItem candidateObjFrom( Repository repo_r ) const
       {
-        for_( it, availableBegin(), availableEnd() )
+        for ( const PoolItem & pi : available() )
         {
-          if ( (*it)->repository() == repo_r )
-            return *it;
+          if ( pi.repository() == repo_r )
+            return pi;
         }
         return PoolItem();
       }
@@ -175,10 +175,10 @@ namespace zypp
       PoolItem highestAvailableVersionObj() const
       {
         PoolItem ret;
-        for_( it, availableBegin(), availableEnd() )
+        for ( const PoolItem & pi : available() )
         {
-          if ( !ret || (*it).satSolvable().edition() > ret.satSolvable().edition() )
-            ret = *it;
+          if ( !ret || pi.edition() > ret.edition() )
+            ret = pi;
         }
         return ret;
       }
@@ -236,11 +236,14 @@ namespace zypp
       available_size_type availableSize() const
       { return _availableItems.size(); }
 
-      available_const_iterator availableBegin() const
+      available_iterator availableBegin() const
       { return _availableItems.begin(); }
 
-      available_const_iterator availableEnd() const
+      available_iterator availableEnd() const
       { return _availableItems.end(); }
+
+      inline Iterable<available_iterator>  available() const
+      { return makeIterable( availableBegin(), availableEnd() ); }
 
       ////////////////////////////////////////////////////////////////////////
 
@@ -256,6 +259,9 @@ namespace zypp
       installed_iterator installedEnd() const
       { return _installedItems.end(); }
 
+      inline Iterable<installed_iterator>  installed() const
+      { return makeIterable( installedBegin(), installedEnd() ); }
+
       ////////////////////////////////////////////////////////////////////////
 
       const PickList & picklist() const
@@ -264,10 +270,10 @@ namespace zypp
         {
           _picklistPtr.reset( new PickList );
           // installed without identical avaialble first:
-          for_( it, _installedItems.begin(), _installedItems.end() )
+          for ( const PoolItem & pi : installed() )
           {
-            if ( ! identicalAvailable( *it ) )
-              _picklistPtr->push_back( *it );
+            if ( ! identicalAvailable( pi ) )
+              _picklistPtr->push_back( pi );
           }
           _picklistPtr->insert( _picklistPtr->end(), availableBegin(), availableEnd() );
         }
@@ -292,7 +298,14 @@ namespace zypp
       { return availableEmpty(); }
 
       bool multiversionInstall() const
-      { return sat::Pool::instance().isMultiversion( ident() ); }
+      {
+	for ( const PoolItem & pi : available() )
+	{
+	  if ( pi.multiversionInstall() )
+	    return true;
+	}
+	return false;
+      }
 
       bool pickInstall( const PoolItem & pi_r, ResStatus::TransactByValue causer_r, bool yesno_r );
 
@@ -339,20 +352,20 @@ namespace zypp
     private:
       PoolItem transactingInstalled() const
       {
-        for_( it, installedBegin(), installedEnd() )
+        for ( const PoolItem & pi : installed() )
           {
-            if ( (*it).status().transacts() )
-              return (*it);
+            if ( pi.status().transacts() )
+              return pi;
           }
         return PoolItem();
       }
 
       PoolItem transactingCandidate() const
       {
-        for_( it, availableBegin(), availableEnd() )
+        for ( const PoolItem & pi : available() )
           {
-            if ( (*it).status().transacts() )
-              return (*it);
+            if ( pi.status().transacts() )
+              return pi;
           }
         return PoolItem();
       }
@@ -363,25 +376,23 @@ namespace zypp
         {
           // prefer the installed objects arch and vendor
           bool solver_allowVendorChange( ResPool::instance().resolver().allowVendorChange() );
-          for ( installed_const_iterator iit = installedBegin();
-                iit != installedEnd(); ++iit )
+          for ( const PoolItem & ipi : installed() )
           {
             PoolItem sameArch; // in case there's no same vendor at least stay with same arch.
-            for ( available_const_iterator it = availableBegin();
-                  it != availableEnd(); ++it )
+            for (  const PoolItem & api : available() )
             {
               // 'same arch' includes allowed changes to/from noarch.
-              if ( (*iit)->arch() == (*it)->arch() || (*iit)->arch() == Arch_noarch || (*it)->arch() == Arch_noarch )
+              if ( ipi.arch() == api.arch() || ipi.arch() == Arch_noarch || api.arch() == Arch_noarch )
               {
                 if ( ! solver_allowVendorChange )
                 {
-                  if ( VendorAttr::instance().equivalent( (*iit), (*it) ) )
-                    return *it;
+                  if ( VendorAttr::instance().equivalent( ipi, api ) )
+                    return api;
                   else if ( ! sameArch ) // remember best same arch in case no same vendor found
-                     sameArch = *it;
+                     sameArch = api;
                 }
                 else // same arch is sufficient
-                  return *it;
+                  return api;
               }
             }
             if ( sameArch )
@@ -396,10 +407,9 @@ namespace zypp
 
       bool allCandidatesLocked() const
       {
-        for ( available_const_iterator it = availableBegin();
-              it != availableEnd(); ++it )
+        for ( const PoolItem & pi : available() )
           {
-            if ( ! (*it).status().isLocked() )
+            if ( ! pi.status().isLocked() )
               return false;
           }
         return( ! _availableItems.empty() );
@@ -407,10 +417,9 @@ namespace zypp
 
       bool allInstalledLocked() const
       {
-        for ( installed_const_iterator it = installedBegin();
-              it != installedEnd(); ++it )
+        for ( const PoolItem & pi : installed() )
           {
-            if ( ! (*it).status().isLocked() )
+            if ( ! pi.status().isLocked() )
               return false;
           }
         return( ! _installedItems.empty() );
@@ -451,14 +460,14 @@ namespace zypp
       {
         PoolItem icand( obj.installedObj() );
         str << "   (I " << obj.installedSize() << ") {" << endl;
-        for_( it, obj.installedBegin(), obj.installedEnd() )
+        for ( const PoolItem & pi : obj.installed() )
         {
           char t = ' ';
-          if ( *it == icand )
+          if ( pi == icand )
           {
             t = 'i';
           }
-          str << " " << t << " " << *it << endl;
+          str << " " << t << " " << pi << endl;
         }
         str << "}  ";
       }
@@ -472,18 +481,18 @@ namespace zypp
         PoolItem cand( obj.candidateObj() );
         PoolItem up( obj.updateCandidateObj() );
         str << "(A " << obj.availableSize() << ") {" << endl;
-        for_( it, obj.availableBegin(), obj.availableEnd() )
+        for ( const PoolItem & pi : obj.available() )
         {
           char t = ' ';
-          if ( *it == cand )
+          if ( pi == cand )
           {
-            t = *it == up ? 'C' : 'c';
+            t = pi == up ? 'C' : 'c';
           }
-          else if ( *it == up )
+          else if ( pi == up )
           {
             t = 'u';
           }
-          str << " " << t << " " << *it << endl;
+          str << " " << t << " " << pi << endl;
         }
         str << "}  ";
       }
@@ -497,18 +506,18 @@ namespace zypp
         PoolItem cand( obj.candidateObj() );
         PoolItem up( obj.updateCandidateObj() );
         str << "(P " << obj.picklistSize() << ") {" << endl;
-        for_( it, obj.picklistBegin(), obj.picklistEnd() )
+        for ( const PoolItem & pi : obj.picklist() )
         {
           char t = ' ';
-          if ( *it == cand )
+          if ( pi == cand )
           {
-            t = *it == up ? 'C' : 'c';
+            t = pi == up ? 'C' : 'c';
           }
-          else if ( *it == up )
+          else if ( pi == up )
           {
             t = 'u';
           }
-          str << " " << t << " " << *it << "\t" << obj.pickStatus( *it ) << endl;
+          str << " " << t << " " << pi << "\t" << obj.pickStatus( pi ) << endl;
         }
         str << "}  ";
       }

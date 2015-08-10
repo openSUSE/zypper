@@ -15,32 +15,26 @@
 #include "zypp/APIConfig.h"
 
 #include "zypp/Resolvable.h"
-#include "zypp/Date.h"
-#include "zypp/Locale.h"
 #include "zypp/Vendor.h"
-#include "zypp/ByteCount.h"
-#include "zypp/OnMediaLocation.h"
-#include "zypp/Repository.h"
-#include "zypp/CpeId.h"
 
 #include "zypp/sat/LookupAttr.h"
 #include "zypp/sat/SolvableSet.h"
 
 ///////////////////////////////////////////////////////////////////
 namespace zypp
-{ /////////////////////////////////////////////////////////////////
-
+{
   ///////////////////////////////////////////////////////////////////
-  //
-  //	CLASS NAME : ResObject
-  //
-  /**
-   * Interface base for resolvable objects (common data).
-   * That is, all data not needed for solving, but common
-   * across all Resolvable kinds.
-   *
-   * \see \ref makeResObject for how to construct ResObjects.
-  */
+  /// \class ResObject
+  /// \brief Base for resolvable objects
+  ///
+  /// \note \ref Resolvable is a SolvableType, which provides direct
+  /// access to many of the underlying sat::Solvables properties.
+  /// Don't add common properties here, but in \ref sat::Solvable
+  /// and extend \ref sat::SolvableType.
+  ///
+  /// \see \ref makeResObject for how to construct ResObjects.
+  /// \todo Merge with Resolvable
+  ///////////////////////////////////////////////////////////////////
   class ResObject : public Resolvable
   {
   public:
@@ -50,7 +44,6 @@ namespace zypp
     typedef TraitsType::constPtrType constPtr;
 
   public:
-
     /** Convert \c this into a Ptr of a certain Kind.
      * This is a convenience to access type specific
      * attributes.
@@ -70,142 +63,12 @@ namespace zypp
     inline typename ResTraits<_Res>::PtrType asKind();
 
   public:
-    /** \name Locale support.
-     * \see \ref sat::Solvable
-     */
-    //@{
-    /** \see \ref sat::Solvable::supportsLocales */
-    bool supportsLocales() const
-    { return sat::Solvable::supportsLocales(); }
-
-    /** \see \ref sat::Solvable::supportsLocale */
-    bool supportsLocale( const Locale & locale_r ) const
-    { return sat::Solvable::supportsLocale( locale_r ); }
-
-    bool supportsLocale( const LocaleSet & locales_r ) const
-    { return sat::Solvable::supportsLocale( locales_r ); }
-
-    /** \see \ref sat::Solvable::supportsRequestedLocales */
-    bool supportsRequestedLocales() const
-    { return sat::Solvable::supportsRequestedLocales(); }
-
-    /** \see \ref sat::Solvable::getSupportedLocales */
-    LocaleSet getSupportedLocales() const
-    { return sat::Solvable::getSupportedLocales(); }
-    //@}
-
-  public:
-    /**
-     * \short Short text describing the resolvable.
-     * This attribute is usually displayed in columns.
-     */
-    std::string summary( const Locale & lang_r = Locale() ) const;
-
-    /**
-     * \short Long text describing the resolvable.
-     */
-    std::string description( const Locale & lang_r = Locale() ) const;
-
-    /**
-     * \short Installation Notification
-     *
-     * This text can be used to tell the user some notes
-     * When he selects the resovable for installation.
-     */
-    std::string insnotify( const Locale & lang_r = Locale() ) const;
-
-    /**
-     * \short De-Installation Notification
-     *
-     * This text can be used to tell the user some notes
-     * When he selects the resovable for deinstall.
-     */
-    std::string delnotify( const Locale & lang_r = Locale() ) const;
-
-    /**
-     * \short License or agreement to accept
-     *
-     * Agreement, warning or license the user should
-     * accept before installing the resolvable.
-     */
-    std::string licenseToConfirm( const Locale & lang_r = Locale() ) const;
-
-   /**
-     * \short Acceptance of Product License needed?
-     *
-     * Returns whether a product license has to be accepted
-     * (no acceptance is needed for openSUSE)
-     */
-    bool needToAcceptLicense() const;
-
     /**
      * \short Vendor
-     *
-     * For example "Novell Inc."
+     * \deprecated Though typedef'ed to std::string, Vendor is actually an \ref IdString.
      */
     Vendor vendor() const
     { return Resolvable::vendor().asString(); }
-
-    /** The distribution string.
-     * E.g. \c code-11.
-    */
-    std::string distribution() const;
-
-    /** The Common Platform Enumeration name for this product. */
-    CpeId cpeId() const;
-
-    /** Installed (unpacked) size.
-     * This is just a total number. Many objects provide even more detailed
-     * disk usage data. You can use \ref DiskUsageCounter to find out
-     * how objects data are distributed across partitions/directories.
-     * \code
-     *   // Load directory set into ducounter
-     *   DiskUsageCounter ducounter( { "/", "/usr", "/var" } );
-     *
-     *   // see how noch space the packages use
-     *   for ( const PoolItem & pi : pool )
-     *   {
-     *     cout << pi << ducounter.disk_usage( pi ) << endl;
-     *     // I__s_(7)GeoIP-1.4.8-3.1.2.x86_64(@System) {
-     *     // dir:[/] [ bs: 0 B ts: 0 B us: 0 B (+-: 1.0 KiB)]
-     *     // dir:[/usr] [ bs: 0 B ts: 0 B us: 0 B (+-: 133.0 KiB)]
-     *     // dir:[/var] [ bs: 0 B ts: 0 B us: 0 B (+-: 1.1 MiB)]
-     *     // }
-     *   }
-     * \endcode
-     * \see \ref DiskUsageCounter
-     */
-    ByteCount installSize() const;
-
-    /** Download size. */
-    ByteCount downloadSize() const;
-
-    /** \see \ref sat::Solvable::repository */
-    Repository repository() const
-    { return sat::Solvable::repository(); }
-
-     /** \ref RepoInfo associated with the repository
-      *  providing this resolvable.
-      */
-    RepoInfo repoInfo() const
-    { return repository().info(); }
-
-    /**
-     * Media number where the resolvable is located
-     * 0 if no media access is required.
-     */
-    unsigned mediaNr() const;
-
-    /**
-     * \short build time of the resolvable
-     */
-    Date buildtime() const;
-
-    /**
-     * \short Installation time
-     * 0 if the resolvable is not installed.
-     */
-    Date installtime() const;
 
   protected:
     friend ResObject::Ptr makeResObject( const sat::Solvable & solvable_r );
@@ -215,6 +78,9 @@ namespace zypp
     virtual ~ResObject();
     /** Helper for stream output */
     virtual std::ostream & dumpOn( std::ostream & str ) const;
+    /** This is a \ref sat::SolvableType (allow implicit conversion in derived classes). */
+    operator sat::Solvable() const
+    { return satSolvable(); }
   };
   ///////////////////////////////////////////////////////////////////
 
@@ -286,7 +152,6 @@ namespace zypp
   inline typename ResTraits<_Res>::PtrType ResObject::asKind()
   { return dynamic_cast<_Res *>( this ); }
 
-  /////////////////////////////////////////////////////////////////
 } // namespace zypp
 ///////////////////////////////////////////////////////////////////
 #endif // ZYPP_RESOBJECT_H

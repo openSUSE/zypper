@@ -243,6 +243,8 @@ namespace zypp
       available_size_type availableSize() const;
       available_iterator availableBegin() const;
       available_iterator availableEnd() const;
+      inline Iterable<available_iterator>  available() const
+      { return makeIterable( availableBegin(), availableEnd() ); }
       //@}
 
       ////////////////////////////////////////////////////////////////////////
@@ -255,7 +257,9 @@ namespace zypp
       installed_size_type installedSize() const;
       installed_iterator installedBegin() const;
       installed_iterator installedEnd() const;
-      //}
+      inline Iterable<installed_iterator> installed() const
+      { return makeIterable( installedBegin(), installedEnd() ); }
+      //@}
 
       ////////////////////////////////////////////////////////////////////////
 
@@ -268,7 +272,9 @@ namespace zypp
       picklist_size_type picklistSize() const;
       picklist_iterator picklistBegin() const;
       picklist_iterator picklistEnd() const;
-      //}
+      inline Iterable<picklist_iterator> picklist() const
+      { return makeIterable( picklistBegin(), picklistEnd() ); }
+      //@}
 
       ////////////////////////////////////////////////////////////////////////
 
@@ -314,8 +320,9 @@ namespace zypp
        * install will deselect any other.
        */
       //@{
-      /** Whether different versions of this package can be installed at the same time.
-       * Per default \c false. \see also \ref ZConfig::multiversion.
+      /** Whether at least one of the available packages has multiversionInstall set.
+       * \see \ref Solvable::multiversionInstall
+       * \see also \ref ZConfig::multiversion.
        */
       bool multiversionInstall() const;
 

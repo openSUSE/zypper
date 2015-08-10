@@ -105,6 +105,9 @@ namespace zypp
     class ByKind
     {
       public:
+        ByKind()
+        {}
+
         ByKind( const ResKind & kind_r )
         : _kind( kind_r )
         {}

@@ -493,7 +493,7 @@ namespace zypp
                 }
                 else if ( entry == "multiversion" )
                 {
-                  str::split( value, inserter( _multiversion, _multiversion.end() ), ", \t" );
+                  str::splitEscaped( value, inserter( _multiversion, _multiversion.end() ), ", \t" );
                 }
                 else if ( entry == "locksfile.path" )
                 {

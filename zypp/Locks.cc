@@ -73,11 +73,10 @@ struct ApplyLock
 {
   void operator()(const PoolQuery& query) const
   {
-    for_( it,query.begin(),query.end() )
+    for ( const PoolItem & item : query.poolItem() )
     {
-      PoolItem item(*it);
       item.status().setLock(true,ResStatus::USER);
-      DBG << "lock "<< item.resolvable()->name();
+      DBG << "lock "<< item.name();
     }
   }
 };

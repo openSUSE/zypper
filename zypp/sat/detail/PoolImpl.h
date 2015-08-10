@@ -38,6 +38,7 @@ namespace zypp
   ///////////////////////////////////////////////////////////////////
   namespace sat
   { /////////////////////////////////////////////////////////////////
+    class SolvableSet;
     ///////////////////////////////////////////////////////////////////
     namespace detail
     { /////////////////////////////////////////////////////////////////
@@ -278,20 +279,11 @@ namespace zypp
         public:
           /** \name Multiversion install. */
           //@{
-          typedef IdStringSet MultiversionList;
+          typedef SolvableSet MultiversionList;
 
-          const MultiversionList & multiversionList() const
-          {
-            if ( ! _multiversionListPtr )
-              multiversionListInit();
-            return *_multiversionListPtr;
-          }
+          const MultiversionList & multiversionList() const;
 
-          bool isMultiversion( IdString ident_r ) const
-          {
-            const MultiversionList & l( multiversionList() );
-            return l.find( ident_r ) != l.end();
-          }
+          bool isMultiversion( const Solvable & solv_r ) const;
           //@}
 
         public:
