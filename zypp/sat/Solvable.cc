@@ -372,7 +372,7 @@ namespace zypp
     bool Solvable::multiversionInstall() const
     {
       NO_SOLVABLE_RETURN( false );
-      return myPool().isMultiversion( ident() );
+      return myPool().isMultiversion( *this );
     }
 
     Date Solvable::buildtime() const

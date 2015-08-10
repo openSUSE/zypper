@@ -427,10 +427,10 @@ namespace zypp
 
     bool Selectable::Impl::setPickStatus( const PoolItem & pi_r, Status state_r, ResStatus::TransactByValue causer_r )
     {
-      if ( pi_r.satSolvable().ident() != ident() )
+      if ( pi_r.ident() != ident() )
         return false;  // not my PoolItem
 
-      if ( ! multiversionInstall() )
+      if ( ! pi_r.multiversionInstall() )
         return false;  // We're not yet ready for this.
       // TODO: Without multiversionInstall take care at most ONE available is set
       // to install. Upon install ALL installed get deleted. Only upon deletetion

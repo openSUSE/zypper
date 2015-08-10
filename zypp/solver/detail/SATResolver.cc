@@ -727,10 +727,10 @@ SATResolver::solverInit(const PoolItemList & weakItems)
     }
 
     // Add rules for parallel installable resolvables with different versions
-    for_( it, sat::Pool::instance().multiversionBegin(), sat::Pool::instance().multiversionEnd() )
+    for ( const sat::Solvable & solv : myPool().multiversionList() )
     {
-      queue_push( &(_jobQueue), SOLVER_NOOBSOLETES | SOLVER_SOLVABLE_NAME );
-      queue_push( &(_jobQueue), it->id() );
+      queue_push( &(_jobQueue), SOLVER_NOOBSOLETES | SOLVER_SOLVABLE );
+      queue_push( &(_jobQueue), solv.id() );
     }
 
     ::pool_add_userinstalled_jobs(_SATPool, sat::Pool::instance().autoInstalled(), &(_jobQueue), GET_USERINSTALLED_NAMES|GET_USERINSTALLED_INVERTED);

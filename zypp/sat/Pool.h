@@ -19,6 +19,7 @@
 #include "zypp/sat/detail/PoolMember.h"
 #include "zypp/Repository.h"
 #include "zypp/sat/WhatProvides.h"
+#include "zypp/sat/SolvableSet.h"
 #include "zypp/sat/Queue.h"
 
 ///////////////////////////////////////////////////////////////////
@@ -236,20 +237,17 @@ namespace zypp
         //@}
 
       public:
-        /** \name Multiversion install.
-         * Ident list of all packages that can be installed in different version
-         * at the same time. (\see \ref ZConfig::multiversionSpec)
-         */
-        //@{
-        typedef IdStringSet::const_iterator MultiversionIterator;
-
-        bool multiversionEmpty() const;
-        size_t multiversionSize() const;
-        MultiversionIterator multiversionBegin() const;
-        MultiversionIterator multiversionEnd() const;
-
-        bool isMultiversion( IdString ident_r ) const;
-        //@}
+	/** \name Multiversion install.
+	 * Whether the pool contains packages which are multiversion installable.
+	 * \see \ref Solvable::multiversionInstall
+	 * \see \ref ZConfig::multiversionSpec
+	 */
+	//@{
+	typedef SolvableSet MultiversionList;
+	const MultiversionList & multiversion() const;
+	/** \deprecated Legacy, use multiversion().empty() instead. */
+	ZYPP_DEPRECATED bool multiversionEmpty() const { return multiversion().empty(); }
+	//@}
 
       public:
         /** \name Autoinstalled */

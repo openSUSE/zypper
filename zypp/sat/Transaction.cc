@@ -79,18 +79,17 @@ namespace zypp
 	  , _trans( nullptr )
 	{
 	  Queue decisionq;
-	  for_( it, ResPool::instance().begin(), ResPool::instance().end() )
+	  for ( const PoolItem & pi : ResPool::instance() )
 	  {
-	    if ( ! (*it).status().transacts() )
+	    if ( ! pi.status().transacts() )
 	      continue;
-	    sat::Solvable solv( (*it).satSolvable() );
-	    decisionq.push( solv.isSystem() ? -solv.id() : solv.id() );
+	    decisionq.push( pi.isSystem() ? -pi.id() : pi.id() );
 	  }
 	  Queue noobsq;
-	  for_( it, sat::Pool::instance().multiversionBegin(), sat::Pool::instance().multiversionEnd() )
+	  for ( const Solvable & solv : myPool().multiversionList() )
 	  {
-	    noobsq.push( SOLVER_NOOBSOLETES | SOLVER_SOLVABLE_NAME );
-	    noobsq.push( it->id() );
+	    noobsq.push( SOLVER_NOOBSOLETES | SOLVER_SOLVABLE );
+	    noobsq.push( solv.id() );
 	  }
 	  Map noobsmap;
 	  ::solver_calculate_noobsmap( myPool().getPool(), noobsq, noobsmap );

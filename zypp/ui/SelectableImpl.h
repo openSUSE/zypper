@@ -298,7 +298,14 @@ namespace zypp
       { return availableEmpty(); }
 
       bool multiversionInstall() const
-      { return sat::Pool::instance().isMultiversion( ident() ); }
+      {
+	for ( const PoolItem & pi : available() )
+	{
+	  if ( pi.multiversionInstall() )
+	    return true;
+	}
+	return false;
+      }
 
       bool pickInstall( const PoolItem & pi_r, ResStatus::TransactByValue causer_r, bool yesno_r );
 

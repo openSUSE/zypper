@@ -320,8 +320,9 @@ namespace zypp
        * install will deselect any other.
        */
       //@{
-      /** Whether different versions of this package can be installed at the same time.
-       * Per default \c false. \see also \ref ZConfig::multiversion.
+      /** Whether at least one of the available packages has multiversionInstall set.
+       * \see \ref Solvable::multiversionInstall
+       * \see also \ref ZConfig::multiversion.
        */
       bool multiversionInstall() const;
 
