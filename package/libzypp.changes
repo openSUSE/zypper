@@ -1,4 +1,12 @@
 -------------------------------------------------------------------
+Mon Aug 10 16:22:06 CEST 2015 - ma@suse.de
+
+- Make multiversion an individual solvables property (FATE#318778)
+- SolvableType: common api to access solvable properties
+- Support for MIPS architectures
+- version 15.11.0 (11)
+
+-------------------------------------------------------------------
 Sun Aug  9 01:13:24 CEST 2015 - ma@suse.de
 
 - Update zypp-po.tar.bz2
