@@ -13,6 +13,7 @@
 #define ZYPP_SAT_REPOSITORY_H
 
 #include <iosfwd>
+#include "zypp/base/Iterator.h"
 #include "zypp/Pathname.h"
 #include "zypp/sat/detail/PoolMember.h"
 #include "zypp/sat/LookupAttr.h"     // LookupAttrTools.h included at EOF
@@ -196,6 +197,9 @@ namespace zypp
         /** Iterator behind the last \ref Solvable. */
         SolvableIterator solvablesEnd() const;
 
+	/** Iterate the repositories Solvables. */
+	Iterable<SolvableIterator> solvables() const;
+
     public:
 
       /** Query class for Repository related products */
@@ -217,6 +221,10 @@ namespace zypp
        */
       ProductInfoIterator compatibleWithProductEnd() const;
 
+      /** Iterate the repository compatible distros. */
+      Iterable<ProductInfoIterator> compatibleWithProduct() const;
+
+
       /**
        * Get an iterator to the beginning of distos the repository
        * provides upadates for.
@@ -233,6 +241,9 @@ namespace zypp
        * \see Repository::ProductInfoIterator
        */
       ProductInfoIterator updatesProductEnd() const;
+
+      /** Iterate distos the repository provides upadates for. */
+      Iterable<ProductInfoIterator> updatesProduct() const;
 
     public:
         /** Return any associated \ref RepoInfo. */
@@ -378,6 +389,14 @@ namespace zypp
     };
     ///////////////////////////////////////////////////////////////////
 
+    /** Iterate the repository compatible distros. */
+    inline Iterable<Repository::ProductInfoIterator> Repository::compatibleWithProduct() const
+    { return makeIterable( compatibleWithProductBegin(), compatibleWithProductEnd() ); }
+
+    /** Iterate distos the repository provides upadates for. */
+    inline Iterable<Repository::ProductInfoIterator> Repository::updatesProduct() const
+    { return makeIterable( updatesProductBegin(), updatesProductEnd() ); }
+
     ///////////////////////////////////////////////////////////////////
     //
     //	CLASS NAME : Repository::EraseFromPool
@@ -471,6 +490,10 @@ namespace zypp
       /////////////////////////////////////////////////////////////////
     } // namespace detail
     ///////////////////////////////////////////////////////////////////
+
+    inline Iterable<Repository::SolvableIterator> Repository::solvables() const
+    { return makeIterable( solvablesBegin(), solvablesEnd() ); }
+
   /////////////////////////////////////////////////////////////////
 } // namespace zypp
 ///////////////////////////////////////////////////////////////////

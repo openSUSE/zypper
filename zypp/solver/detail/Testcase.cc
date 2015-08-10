@@ -179,43 +179,42 @@ std::string helixXML( const CapabilitySet &caps )
     return str.str();
 }
 
-inline string helixXML( const Resolvable::constPtr &obj, Dep deptag_r )
+inline string helixXML( const PoolItem & obj, Dep deptag_r )
 {
   stringstream out;
-  Capabilities caps( obj->dep(deptag_r) );
+  Capabilities caps( obj[deptag_r] );
   if ( ! caps.empty() )
     out << TAB << xml_tag_enclose(helixXML(caps), deptag_r.asString()) << endl;
   return out.str();
 }
 
-std::string helixXML( const PoolItem &item )
+std::string helixXML( const PoolItem & item )
 {
-  const Resolvable::constPtr resolvable = item.resolvable();
   stringstream str;
-  str << "<" << toLower (resolvable->kind().asString()) << ">" << endl;
-  str << TAB << xml_tag_enclose (resolvable->name(), "name", true) << endl;
-  str << TAB << xml_tag_enclose (item->vendor(), "vendor", true) << endl;
-  str << TAB << xml_tag_enclose (item->buildtime().asSeconds(), "buildtime", true) << endl;
-  if ( isKind<Package>(resolvable) ) {
+  str << "<" << item.kind() << ">" << endl;
+  str << TAB << xml_tag_enclose( item.name(), "name", true ) << endl;
+  str << TAB << xml_tag_enclose( item.vendor().asString(), "vendor", true ) << endl;
+  str << TAB << xml_tag_enclose( item.buildtime().asSeconds(), "buildtime", true ) << endl;
+  if ( isKind<Package>( item ) ) {
       str << TAB << "<history>" << endl << TAB << "<update>" << endl;
-      str << TAB2 << helixXML (resolvable->arch()) << endl;
-      str << TAB2 << helixXML (resolvable->edition()) << endl;
+      str << TAB2 << helixXML( item.arch() ) << endl;
+      str << TAB2 << helixXML( item.edition() ) << endl;
       str << TAB << "</update>" << endl << TAB << "</history>" << endl;
   } else {
-      str << TAB << helixXML (resolvable->arch()) << endl;
-      str << TAB << helixXML (resolvable->edition()) << endl;
+      str << TAB << helixXML( item.arch() ) << endl;
+      str << TAB << helixXML( item.edition() ) << endl;
   }
-  str << helixXML( resolvable, Dep::PROVIDES);
-  str << helixXML( resolvable, Dep::PREREQUIRES);
-  str << helixXML( resolvable, Dep::CONFLICTS);
-  str << helixXML( resolvable, Dep::OBSOLETES);
-  str << helixXML( resolvable, Dep::REQUIRES);
-  str << helixXML( resolvable, Dep::RECOMMENDS);
-  str << helixXML( resolvable, Dep::ENHANCES);
-  str << helixXML( resolvable, Dep::SUPPLEMENTS);
-  str << helixXML( resolvable, Dep::SUGGESTS);
+  str << helixXML( item, Dep::PROVIDES );
+  str << helixXML( item, Dep::PREREQUIRES );
+  str << helixXML( item, Dep::CONFLICTS );
+  str << helixXML( item, Dep::OBSOLETES );
+  str << helixXML( item, Dep::REQUIRES );
+  str << helixXML( item, Dep::RECOMMENDS );
+  str << helixXML( item, Dep::ENHANCES );
+  str << helixXML( item, Dep::SUPPLEMENTS );
+  str << helixXML( item, Dep::SUGGESTS );
 
-  str << "</" << toLower (resolvable->kind().asString()) << ">" << endl;
+  str << "</" << item.kind() << ">" << endl;
   return str.str();
 }
 
@@ -537,41 +536,39 @@ bool Testcase::createTestcase(Resolver & resolver, bool dumpPool, bool runSolver
     if (dumpPool)
 	system = new HelixResolvable(dumpPath + "/solver-system.xml.gz");
 
-    for ( ResPool::const_iterator it = pool.begin(); it != pool.end(); ++it )
+    for ( const PoolItem & pi : pool )
     {
-	Resolvable::constPtr res = it->resolvable();
-
-	if ( system && it->status().isInstalled() ) {
+	if ( system && pi.status().isInstalled() ) {
 	    // system channel
-	    system->addResolvable (*it);
+	    system->addResolvable( pi );
 	} else {
 	    // repo channels
-	    Repository repo  = it->resolvable()->satSolvable().repository();
+	    Repository repo  = pi.repository();
 	    if (dumpPool) {
 		if (repoTable.find (repo) == repoTable.end()) {
 		    repoTable[repo] = new HelixResolvable(dumpPath + "/"
 							  + str::numstring((long)repo.id())
 							  + "-package.xml.gz");
 		}
-		repoTable[repo]->addResolvable (*it);
+		repoTable[repo]->addResolvable( pi );
 	    }
 	}
 
-	if ( it->status().isToBeInstalled()
-	     && !(it->status().isBySolver())) {
-	    items_to_install.push_back (*it);
+	if ( pi.status().isToBeInstalled()
+	     && !(pi.status().isBySolver())) {
+	    items_to_install.push_back( pi );
 	}
-	if ( it->status().isKept()
-	     && !(it->status().isBySolver())) {
-	    items_keep.push_back (*it);
+	if ( pi.status().isKept()
+	     && !(pi.status().isBySolver())) {
+	    items_keep.push_back( pi );
 	}
-	if ( it->status().isToBeUninstalled()
-	     && !(it->status().isBySolver())) {
-	    items_to_remove.push_back (*it);
+	if ( pi.status().isToBeUninstalled()
+	     && !(pi.status().isBySolver())) {
+	    items_to_remove.push_back( pi );
 	}
-	if ( it->status().isLocked()
-	     && !(it->status().isBySolver())) {
-	    items_locked.push_back (*it);
+	if ( pi.status().isLocked()
+	     && !(pi.status().isBySolver())) {
+	    items_locked.push_back( pi );
 	}
     }
 

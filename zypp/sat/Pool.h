@@ -88,6 +88,10 @@ namespace zypp
         /** Iterator behind the last \ref Repository. */
         RepositoryIterator reposEnd() const;
 
+	/** Iterate the repositories. */
+	Iterable<RepositoryIterator> repos() const
+	{ return makeIterable( reposBegin(), reposEnd() ); }
+
         /** Return a \ref Repository named \c alias_r.
          * It a such a \ref Repository does not already exist
          * a new empty \ref Repository is created.
@@ -156,6 +160,10 @@ namespace zypp
 
         /** Iterator behind the last \ref Solvable. */
         SolvableIterator solvablesEnd() const;
+
+	/** Iterate the solvables. */
+	Iterable<SolvableIterator> solvables() const
+	{ return makeIterable( solvablesBegin(), solvablesEnd() ); }
 
       public:
         /** \name Iterate all Solvables matching a \c _Filter. */
