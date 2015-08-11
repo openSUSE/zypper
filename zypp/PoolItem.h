@@ -165,6 +165,32 @@ namespace zypp
   /** \relates PoolItem Stream output */
   std::ostream & operator<<( std::ostream & str, const PoolItem & obj );
 
+
+  /** \relates PoolItem Required to disambiguate vs. (PoolItem,ResObject::constPtr) due to implicit PoolItem::operator ResObject::constPtr  */
+  inline bool operator==( const PoolItem & lhs, const PoolItem & rhs )
+  { return lhs.resolvable() == rhs.resolvable(); }
+
+  /** \relates PoolItem Convenience compare */
+  inline bool operator==( const PoolItem & lhs, const ResObject::constPtr & rhs )
+  { return lhs.resolvable() == rhs; }
+
+  /** \relates PoolItem Convenience compare */
+  inline bool operator==( const ResObject::constPtr & lhs, const PoolItem & rhs )
+  { return lhs == rhs.resolvable(); }
+
+
+  /** \relates PoolItem Required to disambiguate vs. (PoolItem,ResObject::constPtr) due to implicit PoolItem::operator ResObject::constPtr */
+  inline bool operator!=( const PoolItem & lhs, const PoolItem & rhs )
+  { return ! (lhs==rhs); }
+
+  /** \relates PoolItem Convenience compare */
+  inline bool operator!=( const PoolItem & lhs, const ResObject::constPtr & rhs )
+  { return ! (lhs==rhs); }
+
+  /** \relates PoolItem Convenience compare */
+  inline bool operator!=( const ResObject::constPtr & lhs, const PoolItem & rhs )
+  { return ! (lhs==rhs); }
+
   /** Solvable to PoolItem transform functor.
    * \relates PoolItem
    * \relates sat::SolvIterMixin
