@@ -124,7 +124,7 @@ namespace zypp
       { return make_filter_end( filter_r, *this ); }
 
       template<class _Filter>
-      Iterable<filter_iterator<_Filter,const_iterator>> filter( const _Filter & filter_r ) const
+      Iterable<filter_iterator<_Filter,const_iterator> > filter( const _Filter & filter_r ) const
       { return makeIterable( filterBegin( filter_r ), filterEnd( filter_r ) ); }
       //@}
 
@@ -153,7 +153,7 @@ namespace zypp
       filter_iterator<filter::ByStatus,const_iterator> byStatusEnd( const filter::ByStatus & filter_r ) const
       { return make_filter_end( filter_r, *this ); }
 
-      Iterable<filter_iterator<filter::ByStatus,const_iterator>> byStatus( const filter::ByStatus & filter_r ) const
+      Iterable<filter_iterator<filter::ByStatus,const_iterator> > byStatus( const filter::ByStatus & filter_r ) const
       { return makeIterable( byStatusBegin( filter_r ), byStatusEnd( filter_r ) ); }
       //@}
 
