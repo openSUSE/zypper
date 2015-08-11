@@ -10,3 +10,4 @@
 2010-06-01 16:11:17|bad |unknown action field
 discard\|one field
 discard|to fields but bad date
+2015-08-11 18:42:49|command|root@fibonacci|'/Local/ma/zypp/BUILD/zypper/src/zypper' 'in' '-f' 'xteddy'|

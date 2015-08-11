@@ -39,6 +39,7 @@ namespace zypp
   const HistoryActionID HistoryActionID::REPO_REMOVE		(HistoryActionID::REPO_REMOVE_e);
   const HistoryActionID HistoryActionID::REPO_CHANGE_ALIAS	(HistoryActionID::REPO_CHANGE_ALIAS_e);
   const HistoryActionID HistoryActionID::REPO_CHANGE_URL	(HistoryActionID::REPO_CHANGE_URL_e);
+  const HistoryActionID HistoryActionID::STAMP_COMMAND		(HistoryActionID::STAMP_COMMAND_e);
 
   HistoryActionID::HistoryActionID(const std::string & strval_r)
     : _id(parse(strval_r))
@@ -57,6 +58,7 @@ namespace zypp
       _table["rremove"]	= REPO_REMOVE_e;
       _table["ralias"]	= REPO_CHANGE_ALIAS_e;
       _table["rurl"]	= REPO_CHANGE_URL_e;
+      _table["command"]	= STAMP_COMMAND_e;
       _table["NONE"]	= _table["none"] = NONE_e;
     }
 
@@ -83,6 +85,7 @@ namespace zypp
       _table[REPO_REMOVE_e]       = PairType( "rremove"	, "rremove" );
       _table[REPO_CHANGE_ALIAS_e] = PairType( "ralias"	, "ralias " );
       _table[REPO_CHANGE_URL_e]   = PairType( "rurl"	, "rurl   " );
+      _table[STAMP_COMMAND_e]     = PairType( "command"	, "command" );
       _table[NONE_e]              = PairType( "NONE"	, "NONE   " );
     }
 
@@ -188,6 +191,7 @@ namespace zypp
 	OUTS( REPO_REMOVE_e,		HistoryLogDataRepoRemove );
 	OUTS( REPO_CHANGE_ALIAS_e,	HistoryLogDataRepoAliasChange );
 	OUTS( REPO_CHANGE_URL_e,	HistoryLogDataRepoUrlChange );
+	OUTS( STAMP_COMMAND_e,		HistoryLogDataStampCommand );
 #undef OUTS
 	// intentionally no default:
 	case HistoryActionID::NONE_e:
@@ -294,6 +298,16 @@ namespace zypp
     std::string	HistoryLogDataRepoUrlChange::alias()	const { return optionalAt( ALIAS_INDEX ); }
     Url		HistoryLogDataRepoUrlChange::newUrl()	const { return optionalAt( NEWURL_INDEX ); }
     std::string	HistoryLogDataRepoUrlChange::userdata()	const { return optionalAt( USERDATA_INDEX ); }
+
+  ///////////////////////////////////////////////////////////////////
+  //	class HistoryLogDataStampCommand
+  ///////////////////////////////////////////////////////////////////
+    HistoryLogDataStampCommand::HistoryLogDataStampCommand( FieldVector & fields_r )
+    : HistoryLogData( fields_r )
+    {}
+    std::string	HistoryLogDataStampCommand::executedBy()	const { return optionalAt( USER_INDEX ); }
+    std::string HistoryLogDataStampCommand::command()		const { return optionalAt( COMMAND_INDEX ); }
+    std::string	HistoryLogDataStampCommand::userdata()		const { return optionalAt( USERDATA_INDEX ); }
 
 } // namespace zypp
 ///////////////////////////////////////////////////////////////////

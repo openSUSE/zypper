@@ -1518,6 +1518,8 @@ namespace zypp
       ZYppCommitResult::TransactionStepList & steps( result_r.rTransactionStepList() );
       MIL << "TargetImpl::commit(<list>" << policy_r << ")" << steps.size() << endl;
 
+      HistoryLog().stampCommand();
+
       bool abort = false;
       RpmPostTransCollector postTransCollector( _root );
       std::vector<sat::Solvable> successfullyInstalledPackages;

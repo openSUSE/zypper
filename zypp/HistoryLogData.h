@@ -43,6 +43,7 @@ namespace zypp
     static const HistoryActionID REPO_REMOVE;
     static const HistoryActionID REPO_CHANGE_ALIAS;
     static const HistoryActionID REPO_CHANGE_URL;
+    static const HistoryActionID STAMP_COMMAND;
 
     enum ID
     {
@@ -53,7 +54,8 @@ namespace zypp
       REPO_ADD_e,
       REPO_REMOVE_e,
       REPO_CHANGE_ALIAS_e,
-      REPO_CHANGE_URL_e
+      REPO_CHANGE_URL_e,
+      STAMP_COMMAND_e
     };
 
     HistoryActionID() : _id(NONE_e) {}
@@ -380,6 +382,38 @@ namespace zypp
     std::string	alias()		const;	///< repository alias
     Url		newUrl()	const;	///< repositories new url
     std::string	userdata()	const;	///< userdata/transactionID
+  };
+
+  ///////////////////////////////////////////////////////////////////
+  /// \class HistoryLogDataStampCommand
+  /// \brief A zypp history log line identifying the program that
+  /// triggered the following commit.
+  /// \ingroup g_ZyppHistory
+  ///////////////////////////////////////////////////////////////////
+  class HistoryLogDataStampCommand : public HistoryLogData
+  {
+  public:
+    typedef shared_ptr<HistoryLogDataStampCommand>		Ptr;
+    typedef shared_ptr<const HistoryLogDataStampCommand>	constPtr;
+    /** Ctor \b moving \a FieldVector (via swap).
+     * \throws ParseException if \a fields_r has the wrong \ref HistoryActionID or number of fields.
+     */
+    HistoryLogDataStampCommand( FieldVector & fields_r );
+
+  public:
+    enum Index			///< indices of known fields
+    {
+      DATE_INDEX	= HistoryLogData::DATE_INDEX,
+      ACTION_INDEX	= HistoryLogData::ACTION_INDEX,
+      USER_INDEX,		///< executed by user@hostname
+      COMMAND_INDEX,		///< the commandline executed
+      USERDATA_INDEX,		///< userdata/transactionID
+   };
+
+  public:
+    std::string	executedBy()		const;	///< executed by user@hostname
+    std::string command()		const;	///< the commandline executed
+    std::string	userdata()		const;	///< userdata/transactionID
   };
 
 } // namespace zypp

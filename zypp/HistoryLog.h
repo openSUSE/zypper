@@ -88,6 +88,9 @@ namespace zypp
      */
     void comment( const std::string & comment, bool timestamp = false );
 
+    /** Log info about the current process.  */
+    void stampCommand();
+
     /**
      * Log installation (or update) of a package.
      */

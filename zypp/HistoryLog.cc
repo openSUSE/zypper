@@ -16,6 +16,7 @@
 #include "zypp/ZConfig.h"
 #include "zypp/base/String.h"
 #include "zypp/base/Logger.h"
+#include "zypp/base/IOStream.h"
 
 #include "zypp/PathInfo.h"
 #include "zypp/Date.h"
@@ -30,44 +31,75 @@
 using std::endl;
 using std::string;
 
-namespace
-{
-  inline string timestamp()
-  { return zypp::Date::now().form( HISTORY_LOG_DATE_FORMAT ); }
-
-  inline string userAtHostname()
-  {
-    static char buf[256];
-    string result;
-    char * tmp = ::cuserid(buf);
-    if (tmp)
-    {
-      result = string(tmp);
-      if (!::gethostname(buf, 255))
-        result += "@" + string(buf);
-    }
-    return result;
-  }
-
-  static std::string pidAndAppname()
-  {
-    static std::string _val;
-    if ( _val.empty() )
-    {
-      pid_t mypid = getpid();
-      zypp::Pathname p( "/proc/"+zypp::str::numstring(mypid)+"/exe" );
-      zypp::Pathname myname( zypp::filesystem::readlink( p ) );
-
-      _val += zypp::str::numstring(mypid);
-      _val += ":";
-      _val += myname.basename();
-    }
-    return _val;
-  }
-}
-
 namespace zypp
 {
+  namespace
+  {
+    inline string timestamp()
+    { return zypp::Date::now().form( HISTORY_LOG_DATE_FORMAT ); }
+
+    inline string userAtHostname()
+    {
+      static char buf[256];
+      string result;
+      char * tmp = ::cuserid(buf);
+      if (tmp)
+      {
+	result = string(tmp);
+	if (!::gethostname(buf, 255))
+	  result += "@" + string(buf);
+      }
+      return result;
+    }
+
+    static std::string pidAndAppname()
+    {
+      static std::string _val;
+      if ( _val.empty() )
+      {
+	pid_t mypid = getpid();
+	zypp::Pathname p( "/proc/"+zypp::str::numstring(mypid)+"/exe" );
+	zypp::Pathname myname( zypp::filesystem::readlink( p ) );
+
+	_val += zypp::str::numstring(mypid);
+	_val += ":";
+	_val += myname.basename();
+      }
+      return _val;
+    }
+
+    static std::string cmdline()
+    {
+      static std::string _val;
+      if ( _val.empty() )
+      {
+	pid_t mypid = getpid();
+	{
+	  std::ifstream cmdlineStr( Pathname("/proc/"+zypp::str::numstring(mypid)+"/cmdline").c_str() );
+	  char ch;
+ 	  const char * sep = "'";
+	  while ( cmdlineStr && cmdlineStr.get( ch ) )
+	  {
+	    if ( sep )
+	    {
+	      _val += sep;
+	      sep = nullptr;
+	    }
+	    switch ( ch )
+	    {
+	      case '\0':	_val += '\''; sep = " '"; break;
+	      case '\n':	_val += ' '; break;
+	      case '\\':	_val += '\\'; _val += '\\'; break;
+	      case '|':		_val += '\\'; _val += '|'; break;
+	      default:		_val += ch; break;
+	    }
+	  }
+	}
+      }
+      return _val;
+    }
+  } // namespace
+
   namespace
   {
     const char		_sep = '|';
@@ -109,7 +141,7 @@ namespace zypp
       if ( !_refcnt )
         closeLog();
     }
-  }
+  } // namespace
 
   ///////////////////////////////////////////////////////////////////
   //
@@ -153,14 +185,14 @@ namespace zypp
 
   /////////////////////////////////////////////////////////////////////////
 
-  void HistoryLog::comment( const string & comment, bool timestamp )
+  void HistoryLog::comment( const string & comment, bool timestamp_r )
   {
     if (comment.empty())
       return;
 
     _log << "# ";
-    if ( timestamp )
-      _log << ::timestamp() << " ";
+    if ( timestamp_r )
+      _log << timestamp() << " ";
 
     const char * s = comment.c_str();
     const char * c = s;
@@ -185,6 +217,18 @@ namespace zypp
 
   /////////////////////////////////////////////////////////////////////////
 
+  void HistoryLog::stampCommand()
+  {
+    _log
+      << timestamp()							// 1 timestamp
+      << _sep << HistoryActionID::STAMP_COMMAND.asString(true)		// 2 action
+      << _sep << userAtHostname()					// 3 requested by
+      << _sep << cmdline()						// 4 command
+      << _sep << str::escape(ZConfig::instance().userData(), _sep)	// 6 userdata
+      << endl;
+
+  }
+
   void HistoryLog::install( const PoolItem & pi )
   {
     const Package::constPtr p = asKind<Package>(pi.resolvable());
@@ -200,7 +244,7 @@ namespace zypp
 
     // ApplLow is what the solver selected on behalf of the user.
     if (pi.status().isByUser() || pi.status().isByApplLow() )
-      _log << _sep << userAtHostname();					// 6 reqested by
+      _log << _sep << userAtHostname();					// 6 requested by
     else if (pi.status().isByApplHigh())
       _log << _sep << pidAndAppname();
     else
@@ -229,7 +273,7 @@ namespace zypp
 
     // ApplLow is what the solver selected on behalf of the user.
     if ( pi.status().isByUser() || pi.status().isByApplLow() )
-      _log << _sep << userAtHostname();					// 6 reqested by
+      _log << _sep << userAtHostname();					// 6 requested by
     else if (pi.status().isByApplHigh())
       _log << _sep << pidAndAppname();
     else
