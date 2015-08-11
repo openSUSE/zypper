@@ -1,4 +1,15 @@
 -------------------------------------------------------------------
+Tue Aug 11 18:48:57 CEST 2015 - ma@suse.de
+
+- History: Add 'command' tag showing who triggered the commit.
+  The corresponding HistoryLogData class for parsing is
+  HistoryLogDataStampCommand. Available data are the commandline 
+  executed, user@hostname and userdata/transactionID. (FATE#312298)
+- Add convenience comparison PoolItem<>ResObject::constPtr
+- Fixes for SWIG 2.x
+- version 15.12.0 (11)
+
+-------------------------------------------------------------------
 Mon Aug 10 16:22:06 CEST 2015 - ma@suse.de
 
 - Make multiversion an individual solvables property (FATE#318778)
