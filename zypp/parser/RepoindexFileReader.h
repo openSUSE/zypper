@@ -48,9 +48,7 @@ namespace zypp
     * First parameter is a \ref RepoInfo object with the resource
     * FIXME return value is ignored
     */
-    typedef function< bool(
-        const RepoInfo & )>
-      ProcessResource;
+    typedef function< bool( const RepoInfo & )> ProcessResource;
 
    /**
     * CTOR. Creates also \ref xml::Reader and starts reading.

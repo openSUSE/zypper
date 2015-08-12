@@ -35,33 +35,30 @@ namespace zypp
     typedef ServiceInfo::ReposToDisable ReposToDisable;
 
   public:
-    RepoVariablesReplacedUrl url;
-    repo::ServiceType type;
-    ReposToEnable  reposToEnable;
-    ReposToDisable reposToDisable;
-    RepoStates     repoStates;
-
+    RepoVariablesReplacedUrl _url;
+    repo::ServiceType _type;
+    ReposToEnable _reposToEnable;
+    ReposToDisable _reposToDisable;
+    RepoStates _repoStates;
 
   public:
     Impl()
-      : type(repo::ServiceType::NONE_e)
     {}
 
-    Impl(const Url & url_)
-      : url(url_)
-      , type(repo::ServiceType::NONE_e)
+    Impl( const Url & url_r )
+    : _url( url_r )
     {}
 
     ~Impl()
     {}
 
-    void setProbedType( const repo::ServiceType & t ) const
+    void setProbedType( const repo::ServiceType & type_r ) const
     {
-      if ( type == repo::ServiceType::NONE
-           && t != repo::ServiceType::NONE )
+      if ( _type == repo::ServiceType::NONE
+           && type_r != repo::ServiceType::NONE )
       {
         // lazy init!
-        const_cast<Impl*>(this)->type = t;
+        const_cast<Impl*>(this)->_type = type_r;
       }
     }
 
@@ -97,82 +94,63 @@ namespace zypp
   {}
 
   Url ServiceInfo::url() const			// Variables replaced
-  { return _pimpl->url.transformed(); }
+  { return _pimpl->_url.transformed(); }
 
   Url ServiceInfo::rawUrl() const		// Raw
-  { return _pimpl->url.raw(); }
+  { return _pimpl->_url.raw(); }
 
   void ServiceInfo::setUrl( const Url& url )	// Raw
-  { _pimpl->url.raw() = url; }
+  { _pimpl->_url.raw() = url; }
 
-  repo::ServiceType ServiceInfo::type() const
-  { return _pimpl->type; }
-  void ServiceInfo::setType( const repo::ServiceType & type )
-  { _pimpl->type = type; }
+  repo::ServiceType ServiceInfo::type() const				{ return _pimpl->_type; }
+  void ServiceInfo::setType( const repo::ServiceType & type )		{ _pimpl->_type = type; }
+  void ServiceInfo::setProbedType( const repo::ServiceType &t ) const	{ _pimpl->setProbedType( t ); }
 
-  void ServiceInfo::setProbedType( const repo::ServiceType &t ) const
-  { _pimpl->setProbedType( t ); }
-
-  bool ServiceInfo::reposToEnableEmpty() const
-  { return _pimpl->reposToEnable.empty(); }
-
-  ServiceInfo::ReposToEnable::size_type ServiceInfo::reposToEnableSize() const
-  { return _pimpl->reposToEnable.size(); }
-
-  ServiceInfo::ReposToEnable::const_iterator ServiceInfo::reposToEnableBegin() const
-  { return _pimpl->reposToEnable.begin(); }
-
-  ServiceInfo::ReposToEnable::const_iterator ServiceInfo::reposToEnableEnd() const
-  { return _pimpl->reposToEnable.end(); }
+  bool ServiceInfo::reposToEnableEmpty() const						{ return _pimpl->_reposToEnable.empty(); }
+  ServiceInfo::ReposToEnable::size_type ServiceInfo::reposToEnableSize() const		{ return _pimpl->_reposToEnable.size(); }
+  ServiceInfo::ReposToEnable::const_iterator ServiceInfo::reposToEnableBegin() const	{ return _pimpl->_reposToEnable.begin(); }
+  ServiceInfo::ReposToEnable::const_iterator ServiceInfo::reposToEnableEnd() const	{ return _pimpl->_reposToEnable.end(); }
 
   bool ServiceInfo::repoToEnableFind( const std::string & alias_r ) const
-  { return( _pimpl->reposToEnable.find( alias_r ) != _pimpl->reposToEnable.end() ); }
+  { return( _pimpl->_reposToEnable.find( alias_r ) != _pimpl->_reposToEnable.end() ); }
 
   void ServiceInfo::addRepoToEnable( const std::string & alias_r )
   {
-    _pimpl->reposToEnable.insert( alias_r );
-    _pimpl->reposToDisable.erase( alias_r );
+    _pimpl->_reposToEnable.insert( alias_r );
+    _pimpl->_reposToDisable.erase( alias_r );
   }
 
   void ServiceInfo::delRepoToEnable( const std::string & alias_r )
-  { _pimpl->reposToEnable.erase( alias_r ); }
+  { _pimpl->_reposToEnable.erase( alias_r ); }
 
   void ServiceInfo::clearReposToEnable()
-  { _pimpl->reposToEnable.clear(); }
+  { _pimpl->_reposToEnable.clear(); }
 
 
-  bool ServiceInfo::reposToDisableEmpty() const
-  { return _pimpl->reposToDisable.empty(); }
-
-  ServiceInfo::ReposToDisable::size_type ServiceInfo::reposToDisableSize() const
-  { return _pimpl->reposToDisable.size(); }
-
-  ServiceInfo::ReposToDisable::const_iterator ServiceInfo::reposToDisableBegin() const
-  { return _pimpl->reposToDisable.begin(); }
-
-  ServiceInfo::ReposToDisable::const_iterator ServiceInfo::reposToDisableEnd() const
-  { return _pimpl->reposToDisable.end(); }
+  bool ServiceInfo::reposToDisableEmpty() const						{ return _pimpl->_reposToDisable.empty(); }
+  ServiceInfo::ReposToDisable::size_type ServiceInfo::reposToDisableSize() const	{ return _pimpl->_reposToDisable.size(); }
+  ServiceInfo::ReposToDisable::const_iterator ServiceInfo::reposToDisableBegin() const	{ return _pimpl->_reposToDisable.begin(); }
+  ServiceInfo::ReposToDisable::const_iterator ServiceInfo::reposToDisableEnd() const	{ return _pimpl->_reposToDisable.end(); }
 
   bool ServiceInfo::repoToDisableFind( const std::string & alias_r ) const
-  { return( _pimpl->reposToDisable.find( alias_r ) != _pimpl->reposToDisable.end() ); }
+  { return( _pimpl->_reposToDisable.find( alias_r ) != _pimpl->_reposToDisable.end() ); }
 
   void ServiceInfo::addRepoToDisable( const std::string & alias_r )
   {
-    _pimpl->reposToDisable.insert( alias_r );
-    _pimpl->reposToEnable.erase( alias_r );
+    _pimpl->_reposToDisable.insert( alias_r );
+    _pimpl->_reposToEnable.erase( alias_r );
   }
 
   void ServiceInfo::delRepoToDisable( const std::string & alias_r )
-  { _pimpl->reposToDisable.erase( alias_r ); }
+  { _pimpl->_reposToDisable.erase( alias_r ); }
 
   void ServiceInfo::clearReposToDisable()
-  { _pimpl->reposToDisable.clear(); }
+  { _pimpl->_reposToDisable.clear(); }
 
-  const ServiceInfo::RepoStates & ServiceInfo::repoStates() const
-  { return _pimpl->repoStates; }
 
-  void ServiceInfo::setRepoStates( RepoStates newStates_r )
-  { swap( _pimpl->repoStates, newStates_r ); }
+  const ServiceInfo::RepoStates & ServiceInfo::repoStates() const	{ return _pimpl->_repoStates; }
+  void ServiceInfo::setRepoStates( RepoStates newStates_r )		{ swap( _pimpl->_repoStates, newStates_r ); }
+
 
   std::ostream & operator<<( std::ostream & str, const ServiceInfo::RepoState & obj )
   {
