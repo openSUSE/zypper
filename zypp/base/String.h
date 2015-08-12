@@ -240,6 +240,9 @@ namespace zypp
       Str & operator<<( const _Tp & val )
       { _str << val; return *this; }
 
+      Str & operator<<( std::ostream& (*iomanip)( std::ostream& ) )
+      { _str << iomanip; return *this; }
+
       operator std::string() const
       { return _str.str(); }
 
