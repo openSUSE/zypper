@@ -273,6 +273,13 @@ BOOST_AUTO_TEST_CASE( test_url4)
   }
 }
 
+BOOST_AUTO_TEST_CASE( test_url5)
+{
+  std::string str( "file:/some/${var:+path}/${var:-with}/${vars}" );
+  BOOST_CHECK_EQUAL( Url(str).asString(), str );
+  BOOST_CHECK_EQUAL( Url(zypp::url::encode( str, URL_SAFE_CHARS )).asString(), str );
+}
+
 BOOST_AUTO_TEST_CASE(plugin_querystring_args)
 {
   // url querysting options without value must be possible
