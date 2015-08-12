@@ -2851,12 +2851,14 @@ static bool refresh_service(Zypper & zypper, const ServiceInfo & service)
   bool error = true;
   try
   {
-    zypper.out().info(
-        str::form(_("Refreshing service '%s'."), service.asUserString().c_str()));
+    zypper.out().info( str::form(_("Refreshing service '%s'."), service.asUserString().c_str() ) );
 
     RepoManager::RefreshServiceOptions opts;
     if ( zypper.cOpts().count("restore-status") )
       opts |= RepoManager::RefreshService_restoreStatus;
+    if ( zypper.cOpts().count("force")
+      && ( zypper.command() == ZypperCommand::REFRESH || zypper.command() == ZypperCommand::REFRESH_SERVICES ) )
+      opts |= RepoManager::RefreshService_forceRefresh;
 
     manager.refreshService( service, opts );
     error = false;
