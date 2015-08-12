@@ -493,15 +493,15 @@ SATResolver::solving(const CapabilitySet & requires_caps,
     solver_set_flag(_solv, SOLVER_FLAG_NO_UPDATEPROVIDE, _noupdateprovide);
     solver_set_flag(_solv, SOLVER_FLAG_IGNORE_RECOMMENDED, _onlyRequires);
     solver_set_flag(_solv, SOLVER_FLAG_DUP_ALLOW_DOWNGRADE,	_dup_allowdowngrade );
-    solver_set_flag(_solv, SOLVER_FLAG_DUP_ALLOW_ARCHCHANGE,	_dup_allownamechange );
-    solver_set_flag(_solv, SOLVER_FLAG_DUP_ALLOW_VENDORCHANGE,	_dup_allowarchchange );
-    solver_set_flag(_solv, SOLVER_FLAG_DUP_ALLOW_NAMECHANGE,	_dup_allowvendorchange );
+    solver_set_flag(_solv, SOLVER_FLAG_DUP_ALLOW_NAMECHANGE,	_dup_allownamechange );
+    solver_set_flag(_solv, SOLVER_FLAG_DUP_ALLOW_ARCHCHANGE,	_dup_allowarchchange );
+    solver_set_flag(_solv, SOLVER_FLAG_DUP_ALLOW_VENDORCHANGE,	_dup_allowvendorchange );
 #if 1
 #define HACKENV(X,D) solver_set_flag(_solv, X, env::HACKENV( #X, D ) );
     HACKENV( SOLVER_FLAG_DUP_ALLOW_DOWNGRADE,	_dup_allowdowngrade );
-    HACKENV( SOLVER_FLAG_DUP_ALLOW_ARCHCHANGE,	_dup_allownamechange );
-    HACKENV( SOLVER_FLAG_DUP_ALLOW_VENDORCHANGE,_dup_allowarchchange );
-    HACKENV( SOLVER_FLAG_DUP_ALLOW_NAMECHANGE,	_dup_allowvendorchange );
+    HACKENV( SOLVER_FLAG_DUP_ALLOW_NAMECHANGE,	_dup_allownamechange );
+    HACKENV( SOLVER_FLAG_DUP_ALLOW_ARCHCHANGE,	_dup_allowarchchange );
+    HACKENV( SOLVER_FLAG_DUP_ALLOW_VENDORCHANGE,_dup_allowvendorchange );
 #undef HACKENV
 #endif
     sat::Pool::instance().prepareForSolving();
