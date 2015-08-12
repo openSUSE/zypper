@@ -17,6 +17,7 @@
 
 #include "zypp/Url.h"
 
+#include "zypp/base/Iterable.h"
 #include "zypp/repo/ServiceType.h"
 #include "zypp/RepoInfo.h"
 
@@ -94,6 +95,8 @@ namespace zypp
     ReposToEnable::size_type      reposToEnableSize() const;
     ReposToEnable::const_iterator reposToEnableBegin() const;
     ReposToEnable::const_iterator reposToEnableEnd() const;
+    Iterable<ReposToEnable::const_iterator> reposToEnable() const
+    { return makeIterable( reposToEnableBegin(), reposToEnableEnd() ); }
 
     /** Whether \c alias_r is mentioned in ReposToEnable. */
     bool repoToEnableFind( const std::string & alias_r ) const;
@@ -118,6 +121,8 @@ namespace zypp
     ReposToDisable::size_type      reposToDisableSize() const;
     ReposToDisable::const_iterator reposToDisableBegin() const;
     ReposToDisable::const_iterator reposToDisableEnd() const;
+    Iterable<ReposToDisable::const_iterator> reposToDisable() const
+    { return makeIterable( reposToDisableBegin(), reposToDisableEnd() ); }
 
     /** Whether \c alias_r is mentioned in ReposToDisable. */
     bool repoToDisableFind( const std::string & alias_r ) const;
