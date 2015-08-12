@@ -1,4 +1,9 @@
 -------------------------------------------------------------------
+Thu Aug 13 01:13:43 CEST 2015 - ma@suse.de
+
+- Update zypp-po.tar.bz2
+
+-------------------------------------------------------------------
 Tue Aug 11 18:48:57 CEST 2015 - ma@suse.de
 
 - History: Add 'command' tag showing who triggered the commit.
