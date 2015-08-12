@@ -36,6 +36,7 @@ namespace zypp
   public:
 
     typedef time_t ValueType;
+    typedef time_t Duration;
 
     static const ValueType second	= 1;
     static const ValueType minute	= 60;
