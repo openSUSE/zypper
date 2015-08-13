@@ -1,4 +1,14 @@
 -------------------------------------------------------------------
+Thu Aug 13 18:16:52 CEST 2015 - ma@suse.de
+
+- Support caching of service metadata. A TTL for the service 
+  metadata may be provided in the repoindex.xml itself. The 
+  default is 'no caching'. (FATE#318136)
+- Fix setting dup_allow* solver options (bnc#941463)
+- Don't make zypper encode {} around repo vars (bnc#941453)
+- version 15.13.0 (11)
+
+-------------------------------------------------------------------
 Thu Aug 13 01:13:43 CEST 2015 - ma@suse.de
 
 - Update zypp-po.tar.bz2
