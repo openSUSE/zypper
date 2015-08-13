@@ -16,6 +16,7 @@
 #include "zypp/base/Logger.h"
 #include "zypp/base/Gettext.h"
 #include "zypp/base/InputStream.h"
+#include "zypp/base/DefaultIntegral.h"
 
 #include "zypp/Pathname.h"
 
@@ -48,9 +49,9 @@ namespace zypp
 	/** */
 	void setVar( const std::string & key_r, const std::string & val_r )
 	{
-	  MIL << "*** Inject " << key_r << " = " << val_r;
+	  //MIL << "*** Inject " << key_r << " = " << val_r;
 	  _vars[key_r] = replace( val_r );
-	  MIL << " (" << _vars[key_r] << ")" << endl;
+	  //MIL << " (" << _vars[key_r] << ")" << endl;
 	}
 
 	std::string replace( const std::string & val_r ) const
@@ -112,6 +113,8 @@ namespace zypp
      */
     bool consumeNode( Reader & reader_r );
 
+    DefaultIntegral<Date::Duration,2> _ttl;
+
   private:
     bool getAttrValue( const std::string & key_r, Reader & reader_r, std::string & value_r )
     {
@@ -162,7 +165,14 @@ namespace zypp
       if ( reader_r->name() == "repoindex" )
       {
 	while ( reader_r.nextNodeAttribute() )
-	  _replacer.setVar( reader_r->localName().asString(), reader_r->value().asString() );
+	{
+	  const std::string & name( reader_r->localName().asString() );
+	  const std::string & value( reader_r->value().asString() );
+	  _replacer.setVar( name, value );
+	  // xpath: /repoindex@ttl
+	  if ( name == "ttl" )
+	    _ttl = str::strtonum<Date::Duration>(value);
+	}
         return true;
       }
 
@@ -252,20 +262,18 @@ namespace zypp
   //
   ///////////////////////////////////////////////////////////////////
 
-  RepoindexFileReader::RepoindexFileReader(
-      const Pathname & repoindex_file, const ProcessResource & callback)
-    :
-      _pimpl(new Impl(InputStream(repoindex_file), callback))
+  RepoindexFileReader::RepoindexFileReader( const Pathname & repoindex_file, const ProcessResource & callback )
+  : _pimpl(new Impl(InputStream(repoindex_file), callback))
   {}
 
-  RepoindexFileReader::RepoindexFileReader(
-       const InputStream &is, const ProcessResource & callback )
-    : _pimpl(new Impl(is, callback))
+  RepoindexFileReader::RepoindexFileReader( const InputStream &is, const ProcessResource & callback )
+  : _pimpl(new Impl(is, callback))
   {}
 
   RepoindexFileReader::~RepoindexFileReader()
   {}
 
+  Date::Duration RepoindexFileReader::ttl() const	{ return _pimpl->_ttl; }
 
   } // ns parser
 } // ns zypp

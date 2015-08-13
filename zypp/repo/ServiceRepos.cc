@@ -40,6 +40,7 @@ namespace zypp
 	mediamanager.provideFile( mid, "repo/repoindex.xml" );
 	Pathname path = mediamanager.localPath(mid, "repo/repoindex.xml" );
 	parser::RepoindexFileReader reader(path, callback);
+	service.setProbedTtl( reader.ttl() );	// hack! Modifying the const Service to set parsed TTL
 	mediamanager.release( mid );
 	mediamanager.close( mid );
       }

@@ -17,6 +17,7 @@
 #include "zypp/base/Function.h"
 #include "zypp/base/InputStream.h"
 #include "zypp/Pathname.h"
+#include "zypp/Date.h"
 
 namespace zypp
 {
@@ -76,6 +77,9 @@ namespace zypp
      * DTOR
      */
     ~RepoindexFileReader();
+
+    /** Metadata TTL (repoindex.xml:xpath:/repoindex@ttl or 0). */
+    Date::Duration ttl() const;
 
   private:
     class Impl;

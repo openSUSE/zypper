@@ -20,7 +20,7 @@
 #include "zypp/base/Iterable.h"
 #include "zypp/repo/ServiceType.h"
 #include "zypp/RepoInfo.h"
-
+#include "zypp/Date.h"
 
 ///////////////////////////////////////////////////////////////////
 namespace zypp
@@ -81,7 +81,29 @@ namespace zypp
     /** Lazy init service type */
     void setProbedType( const repo::ServiceType & t ) const;
 
+    /** \name Housekeeping data
+     * You don't want to use the setters unless you are a \ref RepoManager.
+     */
+    //@{
+    /** Sugested TTL between two metadata auto-refreshs.
+     * The value (in seconds) may be provided in repoindex.xml:xpath:/repoindex@ttl.
+     * Default is \a 0 - perform each auto-refresh request.
+     */
+    Date::Duration ttl() const;
 
+    /** Set sugested TTL. */
+    void setTtl( Date::Duration ttl_r );
+
+    /** Lazy init sugested TTL. */
+    void setProbedTtl( Date::Duration ttl_r ) const;
+
+    /** Date of last refresh (if known). */
+    Date lrf() const;
+
+    /** Set date of last refresh. */
+    void setLrf( Date lrf_r );
+    //@}
+    //
     /** \name Set of repos (repository aliases) to enable on next refresh.
      *
      * Per default new repositories are created in disabled state. But repositories

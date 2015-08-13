@@ -13,6 +13,7 @@
 #include <iostream>
 
 #include "zypp/base/String.h"
+#include "zypp/base/DefaultIntegral.h"
 #include "zypp/parser/xml/XmlEscape.h"
 
 #include "zypp/RepoInfo.h"
@@ -40,6 +41,8 @@ namespace zypp
     ReposToEnable _reposToEnable;
     ReposToDisable _reposToDisable;
     RepoStates _repoStates;
+    DefaultIntegral<Date::Duration,0> _ttl;
+    Date _lrf;
 
   public:
     Impl()
@@ -106,6 +109,13 @@ namespace zypp
   void ServiceInfo::setType( const repo::ServiceType & type )		{ _pimpl->_type = type; }
   void ServiceInfo::setProbedType( const repo::ServiceType &t ) const	{ _pimpl->setProbedType( t ); }
 
+  Date::Duration ServiceInfo::ttl() const			{ return _pimpl->_ttl; }
+  void ServiceInfo::setTtl( Date::Duration ttl_r )		{ _pimpl->_ttl = ttl_r; }
+  void ServiceInfo::setProbedTtl( Date::Duration ttl_r ) const	{ const_cast<ServiceInfo*>(this)->setTtl( ttl_r ); }
+
+  Date ServiceInfo::lrf() const					{ return _pimpl->_lrf; }
+  void ServiceInfo::setLrf( Date lrf_r )			{ _pimpl->_lrf = lrf_r; }
+
   bool ServiceInfo::reposToEnableEmpty() const						{ return _pimpl->_reposToEnable.empty(); }
   ServiceInfo::ReposToEnable::size_type ServiceInfo::reposToEnableSize() const		{ return _pimpl->_reposToEnable.size(); }
   ServiceInfo::ReposToEnable::const_iterator ServiceInfo::reposToEnableBegin() const	{ return _pimpl->_reposToEnable.begin(); }
@@ -166,6 +176,12 @@ namespace zypp
       << "url = " << rawUrl() << endl
       << "type = " << type() << endl;
 
+    if ( ttl() )
+      str << "ttl_sec = " << ttl() << endl;
+
+    if ( lrf() )
+      str << "lrf_dat = " << lrf().asSeconds() << endl;
+
     if ( ! repoStates().empty() )
     {
       unsigned cnt = 0U;
@@ -200,7 +216,8 @@ namespace zypp
       << " enabled=\"" << enabled() << "\""
       << " autorefresh=\"" << autorefresh() << "\""
       << " url=\"" << escape(url().asString()) << "\""
-      << " type=\"" << type().asString() << "\"";
+      << " type=\"" << type().asString() << "\""
+      << " ttl_sec\"" << ttl() << "\"";
 
     if (content.empty())
       str << "/>" << endl;
