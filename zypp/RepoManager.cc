@@ -1940,13 +1940,34 @@ namespace zypp
     ServiceInfo service( getService( alias ) );
     assert_alias( service );
     assert_url( service );
+    MIL << "Going to refresh service '" << service.alias() <<  "', url: " << service.url() << ", opts: " << options_r << endl;
+
+    if ( service.ttl() && !options_r.testFlag( RefreshService_forceRefresh ) )
+    {
+      // Service defines a TTL; maybe we can re-use existing data without refresh.
+      Date lrf = service.lrf();
+      if ( lrf )
+      {
+	Date now( Date::now() );
+	if ( lrf <= now )
+	{
+	  if ( (lrf+=service.ttl()) > now ) // lrf+= !
+	  {
+	    MIL << "Skip: '" << service.alias() << "' metadata valid until " << lrf << endl;
+	    return;
+	  }
+	}
+	else
+	  WAR << "Force: '" << service.alias() << "' metadata last refresh in the future: " << lrf << endl;
+      }
+    }
+
     // NOTE: It might be necessary to modify and rewrite the service info.
     // Either when probing the type, or when adjusting the repositories
     // enable/disable state.:
     bool serviceModified = false;
-    MIL << "Going to refresh service '" << service.alias() << "', url: "<< service.url() << ", opts: " << options_r << endl;
 
-    //! \todo add callbacks for apps (start, end, repo removed, repo added, repo changed)
+    //! \todo add callbacks for apps (start, end, repo removed, repo added, repo changed)?
 
     // if the type is unknown, try probing.
     if ( service.type() == repo::ServiceType::NONE )
@@ -1968,6 +1989,7 @@ namespace zypp
     DBG << "ServicesTargetDistro: " << servicesTargetDistro << endl;
 
     // parse it
+    Date::Duration origTtl = service.ttl();	// FIXME Ugly hack: const service.ttl modified when parsing
     RepoCollector collector(servicesTargetDistro);
     // FIXME Ugly hack: ServiceRepos may throw ServicePluginInformalException
     // which is actually a notification. Using an exception for this
@@ -1975,7 +1997,7 @@ namespace zypp
     // and in zypper.
     std::pair<DefaultIntegral<bool,false>, repo::ServicePluginInformalException> uglyHack;
     try {
-      ServiceRepos repos(service, bind( &RepoCollector::collect, &collector, _1 ));
+      ServiceRepos( service, bind( &RepoCollector::collect, &collector, _1 ) );
     }
     catch ( const repo::ServicePluginInformalException & e )
     {
@@ -1983,7 +2005,12 @@ namespace zypp
       uglyHack.first = true;
       uglyHack.second = e;
     }
-
+    if ( service.ttl() != origTtl )	// repoindex.xml changed ttl
+    {
+      if ( !service.ttl() )
+	service.setLrf( Date() );	// don't need lrf when zero ttl
+      serviceModified = true;
+    }
     ////////////////////////////////////////////////////////////////////////////
     // On the fly remember the new repo states as defined the reopoindex.xml.
     // Move into ServiceInfo later.
@@ -2214,10 +2241,19 @@ namespace zypp
 
     ////////////////////////////////////////////////////////////////////////////
     // save service if modified: (unless a plugin service)
-    if ( serviceModified && service.type() != ServiceType::PLUGIN )
+    if ( service.type() != ServiceType::PLUGIN )
     {
-      // write out modified service file.
-      modifyService( service.alias(), service );
+      if ( service.ttl() )
+      {
+	service.setLrf( Date::now() );	// remember last refresh
+	serviceModified =  true;	// or use a cookie file
+      }
+
+      if ( serviceModified )
+      {
+	// write out modified service file.
+	modifyService( service.alias(), service );
+      }
     }
 
     if ( uglyHack.first )
