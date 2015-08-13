@@ -20,30 +20,24 @@ namespace zypp
   namespace repo
   {
     /**
-     * Retrieval of repository list for
-     * a service
+     * Retrieval of repository list for a service.
      */
     class ServiceRepos : private base::NonCopyable
     {
     public:
-
      /**
-      * Callback definition.
-      * First parameter is a \ref RepoInfo object with the resource
-      * second parameter is the resource type.
-      *
       * Return false from the callback to get a \ref AbortRequestException
       * to be thrown and the processing to be cancelled.
       */
       typedef function< bool( const RepoInfo & )> ProcessRepo;
 
-      ServiceRepos(const ServiceInfo &service,
-                   const ProcessRepo & callback,
-                   const ProgressData::ReceiverFnc &progress = ProgressData::ReceiverFnc() );
+      ServiceRepos( const ServiceInfo & service,
+                    const ProcessRepo & callback,
+                    const ProgressData::ReceiverFnc &progress = ProgressData::ReceiverFnc() );
       ~ServiceRepos();
 
-      /** Implementation  */
-      class Impl;
+    public:
+      class Impl;	//!< Expose type only
     private:
       RW_pointer<Impl> _impl;
     };

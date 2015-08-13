@@ -141,7 +141,8 @@ namespace zypp
     /** Flags for tuning RefreshService */
     enum RefreshServiceBit
     {
-      RefreshService_restoreStatus	= (1<<0)	///< Force restoring repo enabled/disabled staus
+      RefreshService_restoreStatus	= (1<<0),	///< Force restoring repo enabled/disabled status
+      RefreshService_forceRefresh	= (1<<1),	///< Force refresh even if TTL is not reached
     };
     ZYPP_DECLARE_FLAGS(RefreshServiceFlags,RefreshServiceBit);
 

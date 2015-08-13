@@ -17,6 +17,7 @@
 #include "zypp/base/Function.h"
 #include "zypp/base/InputStream.h"
 #include "zypp/Pathname.h"
+#include "zypp/Date.h"
 
 namespace zypp
 {
@@ -48,9 +49,7 @@ namespace zypp
     * First parameter is a \ref RepoInfo object with the resource
     * FIXME return value is ignored
     */
-    typedef function< bool(
-        const RepoInfo & )>
-      ProcessResource;
+    typedef function< bool( const RepoInfo & )> ProcessResource;
 
    /**
     * CTOR. Creates also \ref xml::Reader and starts reading.
@@ -78,6 +77,9 @@ namespace zypp
      * DTOR
      */
     ~RepoindexFileReader();
+
+    /** Metadata TTL (repoindex.xml:xpath:/repoindex@ttl or 0). */
+    Date::Duration ttl() const;
 
   private:
     class Impl;

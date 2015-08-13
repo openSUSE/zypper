@@ -72,6 +72,10 @@ namespace zypp
             service.setAutorefresh( str::strToTrue( it->second ) );
           else if ( it->first == "type" )
             service.setType( repo::ServiceType(it->second) );
+	  else if ( it->first == "ttl_sec" )
+	    service.setTtl( str::strtonum<Date::Duration>(it->second) );
+	  else if ( it->first == "lrf_dat" )
+	    service.setLrf( Date( it->second ) );
           else if ( it->first == "repostoenable" )
           {
             std::vector<std::string> aliases;
