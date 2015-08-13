@@ -1,4 +1,11 @@
 -------------------------------------------------------------------
+Thu Aug 13 17:07:10 CEST 2015 - ma@suse.de
+
+- Support caching of service metadata (FATE#318136)
+- BuildRequires:  libzypp-devel >= 15.13.0
+- version 1.12.11
+
+-------------------------------------------------------------------
 Thu Aug 13 01:14:22 CEST 2015 - ma@suse.de
 
 - Update zypper-po.tar.bz2
