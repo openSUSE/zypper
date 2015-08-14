@@ -1,4 +1,11 @@
 -------------------------------------------------------------------
+Fri Aug 14 15:30:37 CEST 2015 - ma@suse.de
+
+- lp: Let '--issue=string' also look for matches in IssueType 
+  (bnc#941309)
+- version 1.12.12
+
+-------------------------------------------------------------------
 Thu Aug 13 17:07:10 CEST 2015 - ma@suse.de
 
 - Support caching of service metadata (FATE#318136)
