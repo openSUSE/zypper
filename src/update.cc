@@ -59,6 +59,7 @@ struct CliScanIssues : public std::set<Issue>
 {
   CliScanIssues()
   {
+    //        cliOption   issueType
     checkCLI( "issues",   ""/*any*/ );
     checkCLI( "bugzilla", "bugzilla" );
     checkCLI( "bz",       "bugzilla" );
@@ -633,8 +634,11 @@ void list_patches_by_issue( Zypper & zypper )
     else
     {
       q.addAttribute( sat::SolvAttr::updateReferenceId, issue.id() );
-      if ( issue.anyType() && issue.specificId() ) // remember for pass2
-      { pass2.push_back( &issue ); }
+      if ( issue.anyType() && issue.specificId() ) 				// remember for pass2
+      {
+	q.addAttribute( sat::SolvAttr::updateReferenceType, issue.id() );	// bnc#941309: let '--issue-bugzilla' also match the type
+	pass2.push_back( &issue );
+      }
     }
 
     for_( it, q.begin(), q.end() )
