@@ -1,4 +1,9 @@
 -------------------------------------------------------------------
+Sun Aug 16 01:14:12 CEST 2015 - ma@suse.de
+
+- Update zypper-po.tar.bz2
+
+-------------------------------------------------------------------
 Fri Aug 14 15:30:37 CEST 2015 - ma@suse.de
 
 - lp: Let '--issue=string' also look for matches in IssueType 
