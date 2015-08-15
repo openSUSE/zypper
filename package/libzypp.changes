@@ -1,4 +1,9 @@
 -------------------------------------------------------------------
+Sun Aug 16 01:13:23 CEST 2015 - ma@suse.de
+
+- Update zypp-po.tar.bz2
+
+-------------------------------------------------------------------
 Thu Aug 13 18:16:52 CEST 2015 - ma@suse.de
 
 - Support caching of service metadata. A TTL for the service 
