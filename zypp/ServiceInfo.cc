@@ -217,7 +217,7 @@ namespace zypp
       << " autorefresh=\"" << autorefresh() << "\""
       << " url=\"" << escape(url().asString()) << "\""
       << " type=\"" << type().asString() << "\""
-      << " ttl_sec\"" << ttl() << "\"";
+      << " ttl_sec=\"" << ttl() << "\"";
 
     if (content.empty())
       str << "/>" << endl;
