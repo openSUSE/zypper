@@ -1,4 +1,13 @@
 -------------------------------------------------------------------
+Tue Sep  1 18:19:27 CEST 2015 - ma@suse.de
+
+- zypp.conf: add solver.dupAllow{Downgrade,NameChange,ArchChange,
+  VendorChange} default options for tuning distribution upgrades.
+- Remove obsolete method (bsc#941398) (fixes #50)
+- fix invalid XML (bnc#942518)
+- version 15.14.0 (14)
+
+-------------------------------------------------------------------
 Sun Aug 30 01:13:07 CEST 2015 - ma@suse.de
 
 - Update zypp-po.tar.bz2
