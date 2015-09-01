@@ -20,7 +20,7 @@ namespace zypp
 {
   /////////////////////////////////////////////////////////////////////////
   /// \class ProblemSolution
-  /// \brief Class representing one possible solution to one problem found during resolving
+  /// \brief Class representing one possible solution to a problem found during resolving
   ///
   /// All problems should have at least 2-3 (mutually exclusive) solutions:
   ///
@@ -70,12 +70,12 @@ namespace zypp
     const SolutionActionList & actions() const;
 
     /**
-     * Set description of the problem.
+     * Set description of the solution.
      **/
     void setDescription( std::string description );
 
     /**
-     * Set detail description of the problem.
+     * Set detail description of the solution.
      **/
     void setDetails( std::string details );
 
