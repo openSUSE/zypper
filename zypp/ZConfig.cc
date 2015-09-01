@@ -310,6 +310,10 @@ namespace zypp
 	, pkgGpgCheck			( indeterminate )
         , solver_onlyRequires		( false )
         , solver_allowVendorChange	( false )
+	, solver_dupAllowDowngrade	( true )
+	, solver_dupAllowNameChange	( true )
+	, solver_dupAllowArchChange	( true )
+	, solver_dupAllowVendorChange	( true )
         , solver_cleandepsOnRemove	( false )
         , solver_upgradeTestcasesToKeep	( 2 )
         , solverUpgradeRemoveDroppedPackages( true )
@@ -471,6 +475,22 @@ namespace zypp
                 {
                   solver_allowVendorChange.set( str::strToBool( value, solver_allowVendorChange ) );
                 }
+                else if ( entry == "solver.dupAllowDowngrade" )
+		{
+		  solver_dupAllowDowngrade.set( str::strToBool( value, solver_dupAllowDowngrade ) );
+		}
+		else if ( entry == "solver.dupAllowNameChange" )
+		{
+		  solver_dupAllowNameChange.set( str::strToBool( value, solver_dupAllowNameChange ) );
+		}
+		else if ( entry == "solver.dupAllowArchChange" )
+		{
+		  solver_dupAllowArchChange.set( str::strToBool( value, solver_dupAllowArchChange ) );
+		}
+		else if ( entry == "solver.dupAllowVendorChange" )
+		{
+		  solver_dupAllowVendorChange.set( str::strToBool( value, solver_dupAllowVendorChange ) );
+		}
                 else if ( entry == "solver.cleandepsOnRemove" )
                 {
                   solver_cleandepsOnRemove.set( str::strToBool( value, solver_cleandepsOnRemove ) );
@@ -610,6 +630,10 @@ namespace zypp
 
     Option<bool>	solver_onlyRequires;
     Option<bool>	solver_allowVendorChange;
+    Option<bool>	solver_dupAllowDowngrade;
+    Option<bool>	solver_dupAllowNameChange;
+    Option<bool>	solver_dupAllowArchChange;
+    Option<bool>	solver_dupAllowVendorChange;
     Option<bool>	solver_cleandepsOnRemove;
     Option<unsigned>	solver_upgradeTestcasesToKeep;
     DefaultOption<bool> solverUpgradeRemoveDroppedPackages;
@@ -904,6 +928,11 @@ namespace zypp
 
   bool ZConfig::solver_allowVendorChange() const
   { return _pimpl->solver_allowVendorChange; }
+
+  bool ZConfig::solver_dupAllowDowngrade() const	{ return _pimpl->solver_dupAllowDowngrade; }
+  bool ZConfig::solver_dupAllowNameChange() const	{ return _pimpl->solver_dupAllowNameChange; }
+  bool ZConfig::solver_dupAllowArchChange() const	{ return _pimpl->solver_dupAllowArchChange; }
+  bool ZConfig::solver_dupAllowVendorChange() const	{ return _pimpl->solver_dupAllowVendorChange; }
 
   bool ZConfig::solver_cleandepsOnRemove() const
   { return _pimpl->solver_cleandepsOnRemove; }

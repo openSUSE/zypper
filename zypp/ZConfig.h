@@ -310,6 +310,18 @@ namespace zypp
        */
       bool solver_allowVendorChange() const;
 
+      /** DUP tune: Whether to allow version downgrades upon DUP. */
+      bool solver_dupAllowDowngrade() const;
+
+      /** DUP tune: Whether to follow package renames upon DUP. */
+      bool solver_dupAllowNameChange() const;
+
+      /** DUP tune: Whether to allow package arch changes upon DUP. */
+      bool solver_dupAllowArchChange() const;
+
+      /** DUP tune: Whether to allow package vendor changes upon DUP. */
+      bool solver_dupAllowVendorChange() const;
+
       /**
        * Whether removing a package should also remove no longer needed requirements.
        */

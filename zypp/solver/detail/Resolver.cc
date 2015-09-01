@@ -115,10 +115,10 @@ Resolver::~Resolver()
     bool Resolver::ZGETTER() const							\
     { return _satResolver->ZVARNAME; }							\
 
-ZOLV_FLAG_TRIBOOL( dupSetAllowDowngrade,	dupAllowDowngrade,	_dup_allowdowngrade,	true )
-ZOLV_FLAG_TRIBOOL( dupSetAllowNameChange,	dupAllowNameChange,	_dup_allownamechange,	true )
-ZOLV_FLAG_TRIBOOL( dupSetAllowArchChange,	dupAllowArchChange,	_dup_allowarchchange,	true )
-ZOLV_FLAG_TRIBOOL( dupSetAllowVendorChange,	dupAllowVendorChange,	_dup_allowvendorchange,	true )
+ZOLV_FLAG_TRIBOOL( dupSetAllowDowngrade,	dupAllowDowngrade,	_dup_allowdowngrade,	ZConfig::instance().solver_dupAllowDowngrade() )
+ZOLV_FLAG_TRIBOOL( dupSetAllowNameChange,	dupAllowNameChange,	_dup_allownamechange,	ZConfig::instance().solver_dupAllowNameChange() )
+ZOLV_FLAG_TRIBOOL( dupSetAllowArchChange,	dupAllowArchChange,	_dup_allowarchchange,	ZConfig::instance().solver_dupAllowArchChange() )
+ZOLV_FLAG_TRIBOOL( dupSetAllowVendorChange,	dupAllowVendorChange,	_dup_allowvendorchange,	ZConfig::instance().solver_dupAllowVendorChange() )
 
 #undef ZOLV_FLAG_TRIBOOL
 //---------------------------------------------------------------------------
