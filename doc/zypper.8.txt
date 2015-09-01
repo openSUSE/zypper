@@ -623,16 +623,16 @@ Update Management Commands
 	*Expert Options:* :: Don't use them unless you know you need them.
 
 	*--*[*no-*]*allow-downgrade*::
-		Whether to allow downgrading installed resolvables [yes].
+		Whether to allow downgrading installed resolvables [zypp.conf:solver.dupAllowDowngrade].
 
 	*--*[*no-*]*allow-name-change*::
-		Whether to allow changing the names of installed resolvables [yes]. Setting this to *no* will not replace packages which have been renamed.
+		Whether to allow changing the names of installed resolvables [zypp.conf:solver.dupAllowNameChange]. Setting this to *no* will not replace packages which have been renamed.
 
 	*--*[*no-*]*allow-arch-change*::
-		Whether to allow changing the architecture of installed resolvables [yes].
+		Whether to allow changing the architecture of installed resolvables [zypp.conf:solver.dupAllowArchChange].
 
 	*--*[*no-*]*allow-vendor-change*::
-		Whether to allow changing the vendor of installed resolvables [yes]. Setting this to *no* might be useful if you do not want packages from foreign repos being dup'ed to the distributions version (or vice versa ).
+		Whether to allow changing the vendor of installed resolvables [zypp.conf:solver.dupAllowVendorChange]. Setting this to *no* might be useful if you do not want packages from foreign repos being dup'ed to the distributions version (or vice versa).
 
 
 	Examples: :: {nop}

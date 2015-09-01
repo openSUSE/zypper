@@ -2,12 +2,12 @@
 .\"     Title: zypper
 .\"    Author: [see the "AUTHORS" section]
 .\" Generator: DocBook XSL Stylesheets v1.78.1 <http://docbook.sf.net/>
-.\"      Date: 07/09/2015
+.\"      Date: 09/01/2015
 .\"    Manual: ZYPPER
 .\"    Source: SUSE Linux
 .\"  Language: English
 .\"
-.TH "ZYPPER" "8" "07/09/2015" "SUSE Linux" "ZYPPER"
+.TH "ZYPPER" "8" "09/01/2015" "SUSE Linux" "ZYPPER"
 .\" -----------------------------------------------------------------
 .\" * Define some portability stuff
 .\" -----------------------------------------------------------------
@@ -1143,26 +1143,26 @@ Don\(cqt use them unless you know you need them\&.
 .PP
 \fB\-\-\fR[\fBno\-\fR]\fBallow\-downgrade\fR
 .RS 4
-Whether to allow downgrading installed resolvables [yes]\&.
+Whether to allow downgrading installed resolvables [zypp\&.conf:solver\&.dupAllowDowngrade]\&.
 .RE
 .PP
 \fB\-\-\fR[\fBno\-\fR]\fBallow\-name\-change\fR
 .RS 4
-Whether to allow changing the names of installed resolvables [yes]\&. Setting this to
+Whether to allow changing the names of installed resolvables [zypp\&.conf:solver\&.dupAllowNameChange]\&. Setting this to
 \fBno\fR
 will not replace packages which have been renamed\&.
 .RE
 .PP
 \fB\-\-\fR[\fBno\-\fR]\fBallow\-arch\-change\fR
 .RS 4
-Whether to allow changing the architecture of installed resolvables [yes]\&.
+Whether to allow changing the architecture of installed resolvables [zypp\&.conf:solver\&.dupAllowArchChange]\&.
 .RE
 .PP
 \fB\-\-\fR[\fBno\-\fR]\fBallow\-vendor\-change\fR
 .RS 4
-Whether to allow changing the vendor of installed resolvables [yes]\&. Setting this to
+Whether to allow changing the vendor of installed resolvables [zypp\&.conf:solver\&.dupAllowVendorChange]\&. Setting this to
 \fBno\fR
-might be useful if you do not want packages from foreign repos being dup\(cqed to the distributions version (or vice versa )\&.
+might be useful if you do not want packages from foreign repos being dup\(cqed to the distributions version (or vice versa)\&.
 .RE
 .PP
 Examples:
