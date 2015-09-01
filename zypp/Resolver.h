@@ -253,22 +253,22 @@ namespace zypp
     //@{
     /** dup mode: allow to downgrade installed solvable */
     void dupSetAllowDowngrade( bool yesno_r );
-    void dupSetDefaultAllowDowngrade();	// Set back to default
+    void dupSetDefaultAllowDowngrade();		// Set back to default (in zypp.conf)
     bool dupAllowDowngrade() const;
 
     /** dup mode: allow to change name of installed solvable */
     void dupSetAllowNameChange( bool yesno_r );
-    void dupSetDefaultAllowNameChange();	// Set back to default
+    void dupSetDefaultAllowNameChange();	// Set back to default (in zypp.conf)
     bool dupAllowNameChange() const;
 
     /** dup mode: allow to change architecture of installed solvables */
     void dupSetAllowArchChange( bool yesno_r );
-    void dupSetDefaultAllowArchChange();	// Set back to default
+    void dupSetDefaultAllowArchChange();	// Set back to default (in zypp.conf)
     bool dupAllowArchChange() const;
 
     /**  dup mode: allow to change vendor of installed solvables*/
     void dupSetAllowVendorChange( bool yesno_r );
-    void dupSetDefaultAllowVendorChange();	// Set back to default
+    void dupSetDefaultAllowVendorChange();	// Set back to default (in zypp.conf)
     bool dupAllowVendorChange() const;
     //@}
 

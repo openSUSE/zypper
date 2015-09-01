@@ -43,6 +43,8 @@ namespace zypp
       typedef DataType::value_type value_type;
       typedef DataType::const_iterator const_iterator;
     public:
+      typedef zypp::ContentType ContentType;
+    public:
       /** Default ctor. */
       UserData()
       {}

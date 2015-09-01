@@ -32,7 +32,7 @@ namespace zypp
    * \par The task report structure (SENDER SIDE).
    *
    * A default constructible struct derived from callback::ReportBase.
-   * It \b must \b not conatin any data, just virtual methods.
+   * It \b must \b not contain any data, just virtual methods.
    *
    * These are the functions the sender invokes, and which will be forwarded
    * to some receiver. If no receiver is present, the defined default
@@ -130,6 +130,17 @@ namespace zypp
    *
    * For typesafe passing of user data via callbacks \see \ref UserData.
    *
+   * ReportBase provides a generic \ref callback::ReportBase:report method
+   * which can be used to communicate by encoding everything in its \a UserData
+   * argument.
+   *
+   * Convenient sending can be achieved by installing non-virtual methods
+   * in the _Report class, which encode the arguments in UserData and send
+   * them via ReportBase::report().
+   *
+   * Convenient receiving can be achieved by installing virtual methods in
+   * the _Report class, which can be simply overloaded by the receiver. Downside
+   * of this is that adding virtual methods breaks binary compatibility.
    */
   namespace callback
   { /////////////////////////////////////////////////////////////////
@@ -138,6 +149,12 @@ namespace zypp
     struct ReportBase
     {
       typedef callback::UserData UserData;
+      typedef UserData::ContentType ContentType;
+
+      /** The most generic way of sending/receiving data. */
+      virtual void report( const UserData & userData_r = UserData() )
+      {}
+
       virtual ~ReportBase()
       {}
     };
@@ -151,7 +168,6 @@ namespace zypp
       struct ReceiveReport : public _Report
       {
 	typedef _Report                   ReportType;
-	typedef typename ReportType::UserData UserData;
 	typedef ReceiveReport<_Report>    Receiver;
         typedef DistributeReport<_Report> Distributor;
 
@@ -182,7 +198,6 @@ namespace zypp
       {
        public:
 	typedef _Report                   ReportType;
-	typedef typename ReportType::UserData UserData;
 	typedef ReceiveReport<_Report>    Receiver;
 	typedef DistributeReport<_Report> Distributor;
 
@@ -221,7 +236,6 @@ namespace zypp
       struct SendReport : private zypp::base::NonCopyable
       {
 	typedef _Report                   ReportType;
-	typedef typename ReportType::UserData UserData;
         typedef ReceiveReport<_Report>    Receiver;
         typedef DistributeReport<_Report> Distributor;
 
@@ -270,7 +284,6 @@ namespace zypp
       struct TempConnect
       {
 	typedef _Report                   ReportType;
-	typedef typename ReportType::UserData UserData;
         typedef ReceiveReport<_Report>    Receiver;
         typedef DistributeReport<_Report> Distributor;
 
