@@ -69,13 +69,6 @@ namespace zypp
      **/
     const SolutionActionList & actions() const;
 
-
-    /**
-     * Return the parent dependency problem.
-     **/
-    ResolverProblem_Ptr problem() const { return nullptr; }
-
-
     /**
      * Set description of the problem.
      **/
