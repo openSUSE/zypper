@@ -180,7 +180,7 @@ namespace zypp
       /** \overload */
       static std::string targetDistributionFlavor( const Pathname & root_r );
 
-      /** \copydoc Target::distributionVersion()*/
+      /** \copydoc Target::distributionLabel()*/
       Target::DistributionLabel distributionLabel() const;
       /** \overload */
       static Target::DistributionLabel distributionLabel( const Pathname & root_r );
