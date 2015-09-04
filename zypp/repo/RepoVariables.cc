@@ -21,6 +21,7 @@ using std::endl;
 #include "zypp/base/String.h"
 #include "zypp/base/Regex.h"
 
+#include "zypp/ZYppFactory.h"
 #include "zypp/ZConfig.h"
 #include "zypp/Target.h"
 #include "zypp/Arch.h"
@@ -389,6 +390,23 @@ namespace zypp
     ///////////////////////////////////////////////////////////////////
     namespace
     {
+      inline std::string getReleaseverString()
+      {
+	std::string ret( env::ZYPP_REPO_RELEASEVER() );
+	if( ret.empty() )
+	{
+	  Target_Ptr trg( getZYpp()->getTarget() );
+	  if ( trg )
+	    ret = trg->distributionVersion();
+	  else
+	    ret = Target::distributionVersion( Pathname()/*guess*/ );
+	}
+	else
+	  WAR << "ENV overwrites $releasever=" << ret << endl;
+
+	return ret;
+      }
+
       /** \brief Provide lazy initialized repo variables
        */
       struct RepoVars : private zypp::base::NonCopyable
@@ -438,14 +456,11 @@ namespace zypp
 
 	void assertReleaseverStr() const
 	{
-	  if ( _releasever.empty() )
+	  // check for changing releasever (bnc#943563)
+	  std::string check( getReleaseverString() );
+	  if ( check != _releasever )
 	  {
-	    _releasever = env::ZYPP_REPO_RELEASEVER();
-	    if( _releasever.empty() )
-	      _releasever = Target::distributionVersion( Pathname()/*guess*/ );
-	    else
-	      WAR << "ENV overwrites $releasever=" << _releasever << endl;
-
+	    _releasever = std::move(check);
 	    // split major/minor for SLE
 	    std::string::size_type pos = _releasever.find( "." );
 	    if ( pos == std::string::npos )
