@@ -147,12 +147,14 @@ namespace zypp
 
   public:
     /** \name Save and restore state per kind of resolvable.
-     * Simple version, no savety net. So don't restore or diff,
+     * Simple version, no safety net. So don't restore or diff,
      * if you didn't save before.
      *
      * Diff returns true, if current stat differs from the saved
      * state.
-    */
+     *
+     * Use \ref scopedSaveState for exception safe scoped save/restore
+     */
     //@{
     void saveState() const;
 
@@ -177,6 +179,24 @@ namespace zypp
     template<class _Res>
       bool diffState() const
       { return diffState( ResTraits<_Res>::kind ); }
+
+    /**
+     * \class ScopedSaveState
+     * \brief Exception safe scoped save/restore state.
+     * Call \ref acceptState to prevent the class from restoring
+     * the remembered state.
+     * \ingroup g_RAII
+     */
+    struct ScopedSaveState;
+
+    ScopedSaveState scopedSaveState() const;
+
+    ScopedSaveState scopedSaveState( const ResKind & kind_r ) const;
+
+    template<class _Res>
+      ScopedSaveState && scopedSaveState() const
+      { return scopedSaveState( ResTraits<_Res>::kind ); }
+
     //@}
 
   private:
@@ -225,6 +245,52 @@ namespace zypp
 
   /** \relates ResPoolProxy Verbose stream output */
   std::ostream & dumpOn( std::ostream & str, const ResPoolProxy & obj );
+
+  ///////////////////////////////////////////////////////////////////
+
+  struct ResPoolProxy::ScopedSaveState
+  {
+    NON_COPYABLE_BUT_MOVE( ScopedSaveState );
+
+    ScopedSaveState( const ResPoolProxy & pool_r )
+    : _pimpl( new Impl( pool_r ) )
+    { _pimpl->saveState(); }
+
+    ScopedSaveState( const ResPoolProxy & pool_r, const ResKind & kind_r )
+    : _pimpl( new Impl( pool_r, kind_r ) )
+    { _pimpl->saveState(); }
+
+    ~ScopedSaveState()
+    { if ( _pimpl ) _pimpl->restoreState(); }
+
+    void acceptState()
+    { _pimpl.reset(); }
+
+  private:
+    struct Impl
+    {
+      Impl( const ResPoolProxy & pool_r )
+      : _pool( pool_r )
+      {}
+      Impl( const ResPoolProxy & pool_r, const ResKind & kind_r )
+      : _pool( pool_r ), _kind( new ResKind( kind_r ) )
+      {}
+      void saveState()
+      { if ( _kind ) _pool.saveState( *_kind ); else _pool.saveState(); }
+      void restoreState()
+      { if ( _kind ) _pool.restoreState( *_kind ); else _pool.restoreState(); }
+      ResPoolProxy _pool;
+      scoped_ptr<ResKind> _kind;
+
+    };
+    std::unique_ptr<Impl> _pimpl;
+  };
+
+  inline ResPoolProxy::ScopedSaveState ResPoolProxy::scopedSaveState() const
+  { return ScopedSaveState( *this ); }
+
+  inline ResPoolProxy::ScopedSaveState ResPoolProxy::scopedSaveState( const ResKind & kind_r ) const
+  { return ScopedSaveState( *this, kind_r ); }
 
   /////////////////////////////////////////////////////////////////
 } // namespace zypp

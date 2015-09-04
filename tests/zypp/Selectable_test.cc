@@ -296,11 +296,11 @@ void testStatusTable( ui::Selectable::Ptr sel )
   } while ( comb.next() );
 }
 
-BOOST_AUTO_TEST_CASE(status_change)
+BOOST_AUTO_TEST_CASE(status_verify)
 {
   // this verifies the Selectables computes ui::Status
   ResPoolProxy poolProxy( test.poolProxy() );
-  poolProxy.saveState();
+  ResPoolProxy::ScopedSaveState saveState( poolProxy );
   {
     ui::Selectable::Ptr sel( poolProxy.lookup( ResKind::package, "installed_only" ) );
     BOOST_REQUIRE( !sel->installedEmpty() );
@@ -328,4 +328,3 @@ BOOST_AUTO_TEST_CASE(status_change)
 }
 
 /////////////////////////////////////////////////////////////////////////////
-
