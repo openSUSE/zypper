@@ -328,3 +328,21 @@ BOOST_AUTO_TEST_CASE(status_verify)
 }
 
 /////////////////////////////////////////////////////////////////////////////
+
+BOOST_AUTO_TEST_CASE(pickstatus_cycle)
+{
+  return;
+  // TODO: automate it
+  ResPoolProxy poolProxy( test.poolProxy() );
+  ResPoolProxy::ScopedSaveState saveState( poolProxy );
+  ui::Selectable::Ptr sel( poolProxy.lookup( ResKind::package, "installed_and_available" ) );
+
+  USR << dump(sel) << endl;
+  for ( const PoolItem & pi : sel->picklist() )
+  {
+    (sel->pickInstall( pi, ResStatus::USER ) ? WAR : ERR) << (pi.multiversionInstall() ? "M " : "  " ) << pi << endl;
+    USR << dump(sel) << endl;
+  }
+}
+
+/////////////////////////////////////////////////////////////////////////////

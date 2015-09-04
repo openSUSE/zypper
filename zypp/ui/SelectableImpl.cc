@@ -102,6 +102,28 @@ namespace zypp
           return true;
         }
 
+        /** highlevel remove transact from non-multiversion packages. */
+        bool unsetNonMultiTransact(  const PoolItem & pi_r, Causer causer_r )
+	{
+	  ResStatus & status( backup( pi_r ) );
+	  if ( status.transacts() && ! pi_r.multiversionInstall() )
+	  {
+	    if ( ! status.setTransact( false, causer_r ) ) return false;
+	  }
+	  return true;
+	}
+
+        /** highlevel remove transact from multiversion packages. */
+        bool unsetMultiTransact(  const PoolItem & pi_r, Causer causer_r )
+	{
+	  ResStatus & status( backup( pi_r ) );
+	  if ( status.transacts() && pi_r.multiversionInstall() )
+	  {
+	    if ( ! status.setTransact( false, causer_r ) ) return false;
+	  }
+	  return true;
+	}
+
         /** Highlevel action. */
         typedef bool (StatusBackup::*Action)( const PoolItem &, Causer );
 
@@ -430,12 +452,6 @@ namespace zypp
       if ( pi_r.ident() != ident() )
         return false;  // not my PoolItem
 
-      if ( ! pi_r.multiversionInstall() )
-        return false;  // We're not yet ready for this.
-      // TODO: Without multiversionInstall take care at most ONE available is set
-      // to install. Upon install ALL installed get deleted. Only upon deletetion
-      // one might pick individual versions (but more than one would be an error here).
-
       StatusBackup backup;
       std::vector<PoolItem> i;
       std::vector<PoolItem> a;
@@ -482,29 +498,57 @@ namespace zypp
           }
           break;
 
-        case S_Install:
-          if ( i.empty() && ! a.empty() )
-          {
-            // maybe unlock candidate only?
-            if ( ! backup.forEach( a.begin(), a.end(), &StatusBackup::unlock, causer_r ) ) return backup.restore();
-            const PoolItem & cand( pi_r.status().isInstalled() ? *a.begin() : pi_r ); // status already backed up above
-            if ( ! cand.status().setTransact( true, causer_r ) ) return backup.restore();
-            return true;
-          }
-          break;
+	case S_Install:
+	  if ( i.empty() && ! a.empty() )
+	  {
+	    const PoolItem & cand( pi_r.status().isInstalled() ? *a.begin() : pi_r );
+	    if ( cand.multiversionInstall() )
+	    {
+	      if ( ! backup.forEach( availableBegin(), availableEnd(), &StatusBackup::unsetNonMultiTransact, causer_r ) ) return backup.restore();
+	      // maybe unlock candidate only?
+	      if ( ! backup.forEach( a.begin(), a.end(), &StatusBackup::unlock, causer_r ) ) return backup.restore();
+	      if ( ! cand.status().setTransact( true, causer_r ) ) return backup.restore();
+	      return true;
+	    }
+	    else
+	    {
+	      // For non-multiversion use ordinary setStatus
+	      // NOTE that S_Update/S_Install here depends on !installedEmpty()
+	      // and not on picklists identicalInstalled.
+	      if ( ! backup.forEach( availableBegin(), availableEnd(), &StatusBackup::unsetMultiTransact, causer_r ) ) return backup.restore();
+	      if ( ! setCandidate( cand, causer_r ) )  return backup.restore();
+	      if ( ! setStatus( installedEmpty() ? S_Install : S_Update, causer_r ) )  return backup.restore();
+	      return true;
+	    }
+	  }
+	  break;
 
-        case S_Update:
-          if ( ! i.empty() && ! a.empty() )
-          {
-            if ( ! backup.forEach( i.begin(), i.end(), &StatusBackup::unlock, causer_r ) ) return backup.restore();
-            if ( ! backup.forEach( i.begin(), i.end(), &StatusBackup::setTransactTrue, ResStatus::SOLVER ) ) return backup.restore();
-            // maybe unlock candidate only?
-            if ( ! backup.forEach( a.begin(), a.end(), &StatusBackup::unlock, causer_r ) ) return backup.restore();
-            const PoolItem & cand( pi_r.status().isInstalled() ? *a.begin() : pi_r ); // status already backed up above
-            if ( ! cand.status().setTransact( true, causer_r ) ) return backup.restore();
-            return true;
-          }
-          break;
+	case S_Update:
+	  if ( ! i.empty() && ! a.empty() )
+	  {
+	    const PoolItem & cand( pi_r.status().isInstalled() ? *a.begin() : pi_r );
+	    if ( cand.multiversionInstall() )
+	    {
+	      if ( ! backup.forEach( i.begin(), i.end(), &StatusBackup::unlock, causer_r ) ) return backup.restore();
+	      if ( ! backup.forEach( i.begin(), i.end(), &StatusBackup::setTransactTrue, ResStatus::SOLVER ) ) return backup.restore();
+	      if ( ! backup.forEach( availableBegin(), availableEnd(), &StatusBackup::unsetNonMultiTransact, causer_r ) ) return backup.restore();
+	      // maybe unlock candidate only?
+	      if ( ! backup.forEach( a.begin(), a.end(), &StatusBackup::unlock, causer_r ) ) return backup.restore();
+	      if ( ! cand.status().setTransact( true, causer_r ) ) return backup.restore();
+	      return true;
+	    }
+	    else
+	    {
+	      // For non-multiversion use ordinary setStatus
+	      // NOTE that S_Update/S_Install here depends on !installedEmpty()
+	      // and not on picklists identicalInstalled.
+	      if ( ! backup.forEach( availableBegin(), availableEnd(), &StatusBackup::unsetMultiTransact, causer_r ) ) return backup.restore();
+	      if ( ! setCandidate( cand, causer_r ) )  return backup.restore();
+	      if ( ! setStatus( installedEmpty() ? S_Install : S_Update, causer_r ) )  return backup.restore();
+	      return true;
+	    }
+	  }
+	  break;
 
         case S_KeepInstalled:
           if ( ! i.empty()  )
