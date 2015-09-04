@@ -1,4 +1,13 @@
 -------------------------------------------------------------------
+Fri Sep  4 13:49:33 CEST 2015 - ma@suse.de
+
+- Don't cache repo releasever (bnc#943563)
+- Selectable: allow setPickStatus for non-multiversion packages
+  (bnc#943870)
+- ResPoolProxy: add ScopedSaveState
+- version 15.15.0 (14)
+
+-------------------------------------------------------------------
 Tue Sep  1 18:19:27 CEST 2015 - ma@suse.de
 
 - zypp.conf: add solver.dupAllow{Downgrade,NameChange,ArchChange,
