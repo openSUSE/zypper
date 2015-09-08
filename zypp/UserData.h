@@ -29,7 +29,7 @@ namespace zypp
     /// \class UserData
     /// \brief Typesafe passing of user data via callbacks
     ///
-    /// Basically a <tt>std::map<std::string,boost::any></tt> plus
+    /// Basically a <tt>std::map<std::string,AnyType></tt> plus
     /// associated \ref ContentType.
     ///
     /// Constness protects non-empty values from being modified.
@@ -37,13 +37,18 @@ namespace zypp
     ///////////////////////////////////////////////////////////////////
     class UserData
     {
-      typedef std::map<std::string,boost::any> DataType;
-      typedef DataType::size_type size_type;
-      typedef DataType::key_type key_type;
-      typedef DataType::value_type value_type;
-      typedef DataType::const_iterator const_iterator;
     public:
-      typedef zypp::ContentType ContentType;
+      typedef boost::any			AnyType;
+      typedef boost::bad_any_cast		bad_AnyType_cast;
+
+      typedef std::map<std::string,AnyType>	DataType;
+      typedef DataType::size_type		size_type;
+      typedef DataType::key_type		key_type;
+      typedef DataType::value_type		value_type;
+      typedef DataType::const_iterator		const_iterator;
+
+      typedef zypp::ContentType			ContentType;
+
     public:
       /** Default ctor. */
       UserData()
@@ -110,13 +115,13 @@ namespace zypp
       /** Set the value for key (nonconst version always returns true).
        * Const version is allowed to set empty values or to add new ones only.
        */
-      bool set( const std::string & key_r, boost::any val_r )
+      bool set( const std::string & key_r, AnyType val_r )
       { dataRef()[key_r] = std::move(val_r); return true; }
       /** \overload const version */
-      bool set( const std::string & key_r, boost::any val_r ) const
+      bool set( const std::string & key_r, AnyType val_r ) const
       {
 	bool ret = false;
-	boost::any & val( dataRef()[key_r] );
+	AnyType & val( dataRef()[key_r] );
 	if ( val.empty() )
 	{
 	  val = std::move(val_r);
@@ -127,17 +132,17 @@ namespace zypp
 
       /** Set an empty value for \a key_r (if possible). */
       bool reset( const std::string & key_r )
-      { return set( key_r, boost::any() ); }
+      { return set( key_r, AnyType() ); }
       /** \overload const version */
       bool reset( const std::string & key_r ) const
-      { return set( key_r, boost::any() ); }
+      { return set( key_r, AnyType() ); }
 
       /** Remove key from data.*/
       void erase( const std::string & key_r )
       { if ( _dataP ) _dataP->erase( key_r ); }
 
-      /** Return the keys boost::any value or an empty value if key does not exist. */
-      const boost::any & getvalue( const std::string & key_r ) const
+      /** \ref get helper returning the keys AnyType value or an empty value if key does not exist. */
+      const AnyType & getvalue( const std::string & key_r ) const
       {
 	if ( _dataP )
 	{
@@ -147,12 +152,12 @@ namespace zypp
 	    return it->second;
 	  }
 	}
-	static const boost::any none;
+	static const AnyType none;
 	return none;
       }
 
       /** Pass back a <tt>const Tp &</tt> reference to \a key_r value.
-       * \throws boost::bad_any_cast if key is not set or value is not of appropriate type
+       * \throws bad_AnyType_cast if key is not set or value is not of appropriate type
        * \code
        *   UserData data;
        *   std::string value( "defaultvalue" );
@@ -160,7 +165,7 @@ namespace zypp
        *   {
        *     value = data.get<std::string>( "mykey" );
        *   }
-       *   catch ( const boost::bad_any_cast & )
+       *   catch ( const UserData::bad_AnyType_cast & )
        *   {
        *     // no "mykey" or not a std::sting
        *   }
@@ -171,7 +176,7 @@ namespace zypp
       { return boost::any_cast<const Tp &>( getvalue( key_r ) ); }
 
       /** Pass back a \a Tp copy of \a key_r value.
-       * \throws boost::bad_any_cast if key is not set or value is not of appropriate type
+       * \throws bad_AnyType_cast if key is not set or value is not of appropriate type
        * \code
        *   UserData data;
        *   std::string value = data.get<std::string>( "mykey", "defaultvalue" );
