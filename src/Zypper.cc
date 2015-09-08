@@ -103,6 +103,10 @@ namespace {
 		     % old_r
 		     % new_r );
   }
+
+  inline std::string dashdash( std::string optname_r )
+  { return std::move(optname_r.insert( 0, "--" )); }
+
 } //namespace
 ///////////////////////////////////////////////////////////////////
 ///////////////////////////////////////////////////////////////////
@@ -2011,6 +2015,7 @@ void Zypper::processCommandOptions()
   {
     static struct option update_options[] = {
       {"repo",                      required_argument, 0, 'r'},
+      {"updatestack-only",	    no_argument,       0,  0 },
       {"skip-interactive",          no_argument,       0,  0 },
       {"with-interactive",          no_argument,       0,  0 },
       {"auto-agree-with-licenses",  no_argument,       0, 'l'},
@@ -2037,7 +2042,8 @@ void Zypper::processCommandOptions()
       {0, 0, 0, 0}
     };
     specific_options = update_options;
-    _command_help = str::form(_(
+    _command_help = ( CommandHelpFormater()
+      << str::form(_(
       "patch [options]\n"
       "\n"
       "Install all available needed patches.\n"
@@ -2068,7 +2074,9 @@ void Zypper::processCommandOptions()
       "    --download              Set the download-install mode. Available modes:\n"
       "                            %s\n"
       "-d, --download-only         Only download the packages, do not install.\n"
-    ), "only, in-advance, in-heaps, as-needed");
+      ), "only, in-advance, in-heaps, as-needed") )
+      .option("--updatestack-only",	_("Install only patches which affect the package management itself.") )
+      ;
     break;
   }
 
@@ -4618,6 +4626,21 @@ void Zypper::doCommand()
       report_too_many_arguments(_command_help);
       setExitCode(ZYPPER_EXIT_ERR_INVALID_ARGS);
       return;
+    }
+
+    if ( copts.count("updatestack-only") )
+    {
+      for ( const char * opt : { "bugzilla", "bz", "cve" } )
+      {
+	if ( copts.count( opt ) )
+	{
+	  out().error(str::form(_("Cannot use %s together with %s."),
+				dashdash("updatestack-only").c_str(),
+				dashdash(opt).c_str() ) );
+	  setExitCode(ZYPPER_EXIT_ERR_INVALID_ARGS);
+	  return;
+	}
+      }
     }
 
     bool skip_interactive = false;
