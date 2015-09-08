@@ -42,6 +42,7 @@ Provides:       y2pmsh
 Obsoletes:      y2pmsh
 
 Provides:       zypper(oldpackage)
+Provides:	zypper(updatestack-only)
 
 %description
 Zypper is a command line tool for managing software. It can be used to add

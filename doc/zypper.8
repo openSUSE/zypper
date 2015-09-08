@@ -2,12 +2,12 @@
 .\"     Title: zypper
 .\"    Author: [see the "AUTHORS" section]
 .\" Generator: DocBook XSL Stylesheets v1.78.1 <http://docbook.sf.net/>
-.\"      Date: 07/09/2015
+.\"      Date: 09/09/2015
 .\"    Manual: ZYPPER
 .\"    Source: SUSE Linux
 .\"  Language: English
 .\"
-.TH "ZYPPER" "8" "07/09/2015" "SUSE Linux" "ZYPPER"
+.TH "ZYPPER" "8" "09/09/2015" "SUSE Linux" "ZYPPER"
 .\" -----------------------------------------------------------------
 .\" * Define some portability stuff
 .\" -----------------------------------------------------------------
@@ -920,6 +920,11 @@ command again\&.
 
 This command is similar to
 \fBzypper update \-t patch\fR\&.
+.PP
+\fB\-\-updatestack\-only\fR
+.RS 4
+Install only patches which affect the package management itself and exit\&.
+.RE
 .PP
 \fB\-b\fR, \fB\-\-bugzilla\fR \fI#\fR
 .RS 4

@@ -531,6 +531,9 @@ Update Management Commands
 	This command is similar to *zypper update -t patch*.
 +
 --
+	*--updatestack-only*::
+		Install only patches which affect the package management itself and exit.
+
 	*-b*, *--bugzilla* '#'::
 		Install patch fixing a Bugzilla issue specified by number. Use *list-patches --bugzilla* command to get a list of available needed patches for specific issues.
 

@@ -351,6 +351,7 @@ void SolverRequester::updatePatches()
   DBG << "going to mark needed patches for installation" << endl;
 
   // search twice: if there are none with restartSuggested(), retry on all
+  // unless --updatestack-only.
   // (in the first run, ignore_pkgmgmt == 0, in the second it is 1)
   bool any_marked = false;
   bool dateLimit = ( _opts.date_limit != Date() );
@@ -382,8 +383,17 @@ void SolverRequester::updatePatches()
         any_marked = true;
     }
 
-    if (any_marked && !ignore_pkgmgmt)
-      MIL << "got some pkgmgmt patches, will install these first" << endl;
+    if ( ! ignore_pkgmgmt )	// just checked the update stack
+    {
+      if ( any_marked )
+	MIL << "got some pkgmgmt patches, will install these first" << endl;
+
+      if ( Zypper::instance()->cOpts().count("updatestack-only") )
+      {
+	MIL << "updatestack-only: will stop here!" << endl;
+	break;
+      }
+    }
   }
 }
 
