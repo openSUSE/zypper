@@ -886,7 +886,7 @@ void solve_and_commit (Zypper & zypper)
         }
 
         // check for running services (fate #300763)
-        if ( zypper.cOpts().find("download-only") == zypper.cOpts().end()
+        if ( ! ( zypper.cOpts().count("download-only") || zypper.cOpts().count("dry-run") )
 	  && ( summary.packagesToRemove()
 	    || summary.packagesToUpgrade()
 	    || summary.packagesToDowngrade() ) )
