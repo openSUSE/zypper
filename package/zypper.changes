@@ -1,4 +1,11 @@
 -------------------------------------------------------------------
+Tue Sep  8 19:01:25 CEST 2015 - ma@suse.de
+
+- patch --updatestack-only: Install only patches which affect the
+  package management itself (FATE#319407)
+- version 1.12.14
+
+-------------------------------------------------------------------
 Sun Sep  6 01:15:00 CEST 2015 - ma@suse.de
 
 - Update sle-zypper-po.tar.bz2
