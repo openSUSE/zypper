@@ -2,12 +2,12 @@
 .\"     Title: zypper
 .\"    Author: [see the "AUTHORS" section]
 .\" Generator: DocBook XSL Stylesheets v1.78.1 <http://docbook.sf.net/>
-.\"      Date: 09/08/2015
+.\"      Date: 09/09/2015
 .\"    Manual: ZYPPER
 .\"    Source: SUSE Linux
 .\"  Language: English
 .\"
-.TH "ZYPPER" "8" "09/08/2015" "SUSE Linux" "ZYPPER"
+.TH "ZYPPER" "8" "09/09/2015" "SUSE Linux" "ZYPPER"
 .\" -----------------------------------------------------------------
 .\" * Define some portability stuff
 .\" -----------------------------------------------------------------
@@ -938,6 +938,11 @@ section for details on exit status of
 \fB100\fR, and
 \fB101\fR
 returned by this command\&.
+.PP
+\fB\-\-updatestack\-only\fR
+.RS 4
+Check only for patches which affect the package management itself\&.
+.RE
 .PP
 \fB\-r\fR, \fB\-\-repo\fR \fIalias\fR|\fIname\fR|\fI#\fR|\fIURI\fR
 .RS 4

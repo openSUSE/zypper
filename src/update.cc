@@ -151,15 +151,20 @@ void patch_check ()
   RuntimeData & gData = Zypper::instance()->runtimeData();
   DBG << "patch check" << endl;
   gData.patches_count = gData.security_patches_count = 0;
+  bool updatestackOnly = Zypper::instance()->cOpts().count("updatestack-only");
 
   for_( it, God->pool().byKindBegin(ResKind::patch), God->pool().byKindEnd(ResKind::patch) )
   {
     const PoolItem & pi( *it );
-    if ( pi.isRelevant() && !pi.isSatisfied())
+    if ( pi.isBroken() )
     {
-      gData.patches_count++;
-      if (pi->asKind<Patch>()->categoryEnum() == Patch::CAT_SECURITY)
-        gData.security_patches_count++;
+      Patch::constPtr patch( pi->asKind<Patch>() );
+      if ( !updatestackOnly || patch->restartSuggested() )
+      {
+	++gData.patches_count;
+	if ( patch->categoryEnum() == Patch::CAT_SECURITY )
+	  ++gData.security_patches_count;
+      }
     }
   }
 
@@ -203,7 +208,7 @@ static bool xml_list_patches (Zypper & zypper)
   {
     const PoolItem & pi( *it );
 
-    if ( pi.isRelevant() && !pi.isSatisfied() && pi->asKind<Patch>()->restartSuggested() )
+    if ( pi.isBroken() && pi->asKind<Patch>()->restartSuggested() )
     {
       pkg_mgr_available = true;
       break;

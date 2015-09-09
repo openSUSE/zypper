@@ -523,6 +523,9 @@ Update Management Commands
 	See also the *EXIT CODES* section for details on exit status of *0*, *100*, and *101* returned by this command.
 +
 --
+	*--updatestack-only*::
+		Check only for patches which affect the package management itself.
+
 	*-r*, *--repo* 'alias'|'name'|'#'|'URI'::
 		Check for patches only in the repository specified by the alias, name, number, or URI. This option can be used multiple times.
 --

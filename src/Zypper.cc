@@ -160,6 +160,12 @@ namespace
     CommandHelpFormater & optionSection( boost::string_ref text_r )
     { _mww.gotoNextPar(); _mww.writePar( text_r, 2 ); _mww.gotoNextPar(); return *this; }
 
+    CommandHelpFormater & optionSectionCommandOptions()
+    { return optionSection(_("Command options:") ); }
+
+    CommandHelpFormater & optionSectionExpertOptions()
+    { return optionSection(_("Expert options:") ); }
+
     /** Option definition
      * \code
      * "123456789012345678901234567890123456789
@@ -169,6 +175,10 @@ namespace
      */
     CommandHelpFormater & option( boost::string_ref option_r, boost::string_ref text_r )
     { _mww.writeDefinition( option_r , text_r, (option_r.starts_with( "--" )?4:0), 28 ); return *this; }
+
+    /** \todo eliminate legacy indentation */
+    CommandHelpFormater & option26( boost::string_ref option_r, boost::string_ref text_r )
+    { _mww.writeDefinition( option_r , text_r, (option_r.starts_with( "--" )?4:0), 26 ); return *this; }
 
   private:
     std::ostringstream   _str;
@@ -2261,11 +2271,13 @@ void Zypper::processCommandOptions()
       {"repo", required_argument, 0, 'r'},
       // rug compatibility option, we have --repo
       {"catalog", required_argument, 0, 'c'},
+      {"updatestack-only",         no_argument,       0,  0 },
       {"help", no_argument, 0, 'h'},
       {0, 0, 0, 0}
     };
     specific_options = patch_check_options;
-    _command_help = _(
+    _command_help = ( CommandHelpFormater()
+      << _(
       "patch-check (pchk) [options]\n"
       "\n"
       "Check for available patches.\n"
@@ -2273,7 +2285,9 @@ void Zypper::processCommandOptions()
       "  Command options:\n"
       "\n"
       "-r, --repo <alias|#|URI>  Check for patches only in the specified repository.\n"
-    );
+      ) )
+      .option26("--updatestack-only",	_("Check only for patches which affect the package management itself.") )
+      ;
     break;
   }
 
