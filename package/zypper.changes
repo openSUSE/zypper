@@ -1,4 +1,11 @@
 -------------------------------------------------------------------
+Wed Sep  9 16:04:54 CEST 2015 - ma@suse.de
+
+- patch-check --updatestack-only: Check only for patches which
+  affect the package management itself (FATE#319407)
+- version 1.12.15
+
+-------------------------------------------------------------------
 Tue Sep  8 19:01:25 CEST 2015 - ma@suse.de
 
 - patch --updatestack-only: Install only patches which affect the
