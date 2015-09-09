@@ -1,4 +1,11 @@
 -------------------------------------------------------------------
+Wed Sep  9 08:24:29 CEST 2015 - ma@suse.de
+
+- patch --updatestack-only: Install only patches which affect the
+  package management itself (FATE#319407)
+- version 1.11.35
+
+-------------------------------------------------------------------
 Sun Sep  6 01:13:45 CEST 2015 - ma@suse.de
 
 - Update zypper-po.tar.bz2
