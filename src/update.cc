@@ -49,20 +49,20 @@ void patch_check ()
   RuntimeData & gData = Zypper::instance()->runtimeData();
   DBG << "patch check" << endl;
   gData.patches_count = gData.security_patches_count = 0;
+  bool updatestackOnly = Zypper::instance()->cOpts().count("updatestack-only");
 
-  ResPool::byKind_iterator
-    it = God->pool().byKindBegin(ResKind::patch),
-    e = God->pool().byKindEnd(ResKind::patch);
-  for (; it != e; ++it )
+  for_( it, God->pool().byKindBegin(ResKind::patch), God->pool().byKindEnd(ResKind::patch) )
   {
-    ResObject::constPtr res = it->resolvable();
-    Patch::constPtr patch = asKind<Patch>(res);
-
-    if (it->isRelevant() && !it->isSatisfied())
+    const PoolItem & pi( *it );
+    if ( pi.isBroken() )
     {
-      gData.patches_count++;
-      if (patch->categoryEnum() == Patch::CAT_SECURITY)
-        gData.security_patches_count++;
+      Patch::constPtr patch( pi->asKind<Patch>() );
+      if ( !updatestackOnly || patch->restartSuggested() )
+      {
+	++gData.patches_count;
+	if ( patch->categoryEnum() == Patch::CAT_SECURITY )
+	  ++gData.security_patches_count;
+      }
     }
   }
 
@@ -104,23 +104,18 @@ static bool xml_list_patches (Zypper & zypper)
   bool pkg_mgr_available = false;
   Patch::constPtr patch;
 
-  ResPool::byKind_iterator
-    it = pool.byKindBegin(ResKind::patch),
-    e  = pool.byKindEnd(ResKind::patch);
-
   // check whether there are packages affecting the update stack
-  for (; it != e; ++it)
+  for_( it, pool.byKindBegin(ResKind::patch), pool.byKindEnd(ResKind::patch) )
   {
-    patch = asKind<Patch>(it->resolvable());
-    if (it->isRelevant() && !it->isSatisfied() && patch->restartSuggested())
+    const PoolItem & pi( *it );
+    if ( pi.isBroken() && pi->asKind<Patch>()->restartSuggested())
     {
       pkg_mgr_available = true;
       break;
     }
   }
 
-  it = pool.byKindBegin(ResKind::patch);
-  for (; it != e; ++it, ++patchcount)
+  for_( it, pool.byKindBegin(ResKind::patch), pool.byKindEnd(ResKind::patch) )
   {
     if (zypper.cOpts().count("all") || it->isBroken())
     {
@@ -162,6 +157,7 @@ static bool xml_list_patches (Zypper & zypper)
         cout << " </update>" << endl;
       }
     }
+    ++patchcount;
   }
 
   //! \todo change this from appletinfo to something general, define in xmlout.rnc
