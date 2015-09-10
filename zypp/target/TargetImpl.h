@@ -67,9 +67,6 @@ namespace zypp
       /** Dtor. */
       virtual ~TargetImpl();
 
-      /** Null implementation */
-      static TargetImpl_Ptr nullimpl();
-
       /**
        * generates the unique anonymous id which is called
        * when creating the target
@@ -221,10 +218,6 @@ namespace zypp
       HardLocksFile _hardLocksFile;
       /** Cache distributionVersion */
       mutable std::string _distributionVersion;
-
-    private:
-      /** Null implementation */
-      static TargetImpl_Ptr _nullimpl;
     };
     ///////////////////////////////////////////////////////////////////
 

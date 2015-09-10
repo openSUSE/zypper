@@ -804,16 +804,6 @@ namespace zypp
 
     IMPL_PTR_TYPE(TargetImpl);
 
-    TargetImpl_Ptr TargetImpl::_nullimpl;
-
-    /** Null implementation */
-    TargetImpl_Ptr TargetImpl::nullimpl()
-    {
-      if (_nullimpl == 0)
-        _nullimpl = new TargetImpl;
-      return _nullimpl;
-    }
-
     ///////////////////////////////////////////////////////////////////
     //
     //	METHOD NAME : TargetImpl::TargetImpl

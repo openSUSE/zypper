@@ -78,9 +78,6 @@ namespace zypp
      */
     void unload();
 
-    /** Null implementation */
-    static Target_Ptr nullimpl();
-
     /** Refference to the RPM database */
     target::rpm::RpmDb & rpmDb();
 
@@ -223,8 +220,6 @@ namespace zypp
 
     /** Pointer to implementation */
     RW_pointer<Impl,rw_pointer::Intrusive<Impl> > _pimpl;
-
-    static Target_Ptr _nullimpl;
   };
   ///////////////////////////////////////////////////////////////////
 

@@ -45,18 +45,6 @@ namespace zypp
     assert( impl_r );
   }
 
-  Target_Ptr Target::_nullimpl;
-
-  /** Null implementation */
-  Target_Ptr Target::nullimpl()
-  {
-    if (! _nullimpl)
-    {
-      _nullimpl = new Target(target::TargetImpl::nullimpl());
-    }
-    return _nullimpl;
-  }
-
   std::ostream & operator<<( std::ostream & str, const Target::DistributionLabel & obj )
   {
     str << "summary=" << obj.summary << endl;
