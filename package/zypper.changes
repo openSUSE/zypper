@@ -1,4 +1,9 @@
 -------------------------------------------------------------------
+Sun Sep 13 01:14:21 CEST 2015 - ma@suse.de
+
+- Update zypper-po.tar.bz2
+
+-------------------------------------------------------------------
 Wed Sep  9 16:31:23 CEST 2015 - ma@suse.de
 
 - patch --updatestack-only: Install only patches which affect
