@@ -1,4 +1,10 @@
 -------------------------------------------------------------------
+Mon Sep 14 12:21:30 CEST 2015 - ma@suse.de
+
+- Reload multiversion setting from the target zypp.conf (bnc#906096)
+- version 15.16.0 (14)
+
+-------------------------------------------------------------------
 Sun Sep 13 01:15:26 CEST 2015 - ma@suse.de
 
 - Update sle-zypp-po.tar.bz2
