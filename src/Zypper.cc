@@ -212,8 +212,6 @@ Zypper::Ptr & Zypper::instance()
 
   if (!_instance)
     _instance.reset(new Zypper());
-  else
-    XXX << "Got an existing instance." << endl;
 
   return _instance;
 }
@@ -5344,8 +5342,6 @@ void Zypper::doCommand()
 
 void Zypper::cleanup()
 {
-  MIL << "START" << endl;
-
   // remove the additional repositories specified by --plus-repo
   for (list<RepoInfo>::const_iterator it = _rdata.additional_repos.begin();
          it != _rdata.additional_repos.end(); ++it)
