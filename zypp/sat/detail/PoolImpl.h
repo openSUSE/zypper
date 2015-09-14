@@ -284,6 +284,8 @@ namespace zypp
           const MultiversionList & multiversionList() const;
 
           bool isMultiversion( const Solvable & solv_r ) const;
+
+	  void multiversionSpecChanged();
           //@}
 
         public:

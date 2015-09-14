@@ -21,10 +21,11 @@ extern "C"
 }
 #include <iostream>
 #include <fstream>
-#include "zypp/base/Logger.h"
+#include "zypp/base/LogTools.h"
 #include "zypp/base/IOStream.h"
 #include "zypp/base/InputStream.h"
 #include "zypp/base/String.h"
+#include "zypp/base/Regex.h"
 
 #include "zypp/ZConfig.h"
 #include "zypp/ZYppFactory.h"
@@ -32,6 +33,7 @@ extern "C"
 #include "zypp/parser/IniDict.h"
 
 #include "zypp/sat/Pool.h"
+#include "zypp/sat/detail/PoolImpl.h"
 
 using namespace std;
 using namespace zypp::filesystem;
@@ -210,6 +212,19 @@ namespace zypp
       return ret;
     }
 
+
+    inline Pathname _autodetectSystemRoot()
+    {
+      Target_Ptr target( getZYpp()->getTarget() );
+      return target ? target->root() : Pathname();
+    }
+
+    inline Pathname _autodetectZyppConfPath()
+    {
+      const char *env_confpath = getenv( "ZYPP_CONF" );
+      return env_confpath ? env_confpath : "/etc/zypp/zypp.conf";
+    }
+
    /////////////////////////////////////////////////////////////////
   } // namespace zypp
   ///////////////////////////////////////////////////////////////////
@@ -287,6 +302,8 @@ namespace zypp
   */
   class ZConfig::Impl
   {
+    typedef std::set<std::string> MultiversionSpec;
+
     public:
       Impl( const Pathname & override_r = Pathname() )
         : _parsedZyppConf         	( override_r )
@@ -325,8 +342,7 @@ namespace zypp
         // ZYPP_CONF might override /etc/zypp/zypp.conf
         if ( _parsedZyppConf.empty() )
         {
-          const char *env_confpath = getenv( "ZYPP_CONF" );
-          _parsedZyppConf = env_confpath ? env_confpath : "/etc/zypp/zypp.conf";
+          _parsedZyppConf = _autodetectZyppConfPath();
         }
         else
         {
@@ -513,7 +529,8 @@ namespace zypp
                 }
                 else if ( entry == "multiversion" )
                 {
-                  str::splitEscaped( value, inserter( _multiversion, _multiversion.end() ), ", \t" );
+		  MultiversionSpec & defSpec( _multiversionMap.getDefaultSpec() );
+                  str::splitEscaped( value, std::inserter( defSpec, defSpec.end() ), ", \t" );
                 }
                 else if ( entry == "locksfile.path" )
                 {
@@ -559,6 +576,8 @@ namespace zypp
               }
             }
           }
+          //
+
         }
         else
         {
@@ -641,8 +660,8 @@ namespace zypp
     Pathname solver_checkSystemFile;
     Pathname solver_checkSystemFileDir;
 
-    std::set<std::string> &		multiversion()		{ return getMultiversion(); }
-    const std::set<std::string> &	multiversion() const	{ return getMultiversion(); }
+    MultiversionSpec &		multiversion()		{ return getMultiversion(); }
+    const MultiversionSpec &	multiversion() const	{ return getMultiversion(); }
 
     bool apply_locks_file;
 
@@ -657,33 +676,91 @@ namespace zypp
     Option<Pathname> pluginsPath;
 
   private:
-    std::set<std::string> & getMultiversion() const
+    // HACK for bnc#906096: let pool re-evaluate multiversion spec
+    // if target root changes. ZConfig returns data sensitive to
+    // current target root.
+    // TODO Actually we'd need to scan the target systems zypp.conf and
+    // overlay all system specific values.
+    struct MultiversionMap
     {
-      if ( ! _multiversionInitialized )
-      {
-	Pathname multiversionDir( cfg_multiversion_path );
-	if ( multiversionDir.empty() )
-	  multiversionDir = ( cfg_config_path.empty() ? Pathname("/etc/zypp") : cfg_config_path ) / "multiversion.d";
+      typedef std::map<Pathname,MultiversionSpec> SpecMap;
 
-	filesystem::dirForEach( multiversionDir,
-				[this]( const Pathname & dir_r, const char *const & name_r )->bool
+      MultiversionSpec & getSpec( Pathname root_r, const Impl & zConfImpl_r )	// from system at root
+      {
+	// _specMap[]     - the plain zypp.conf value
+	// _specMap[/]    - combine [] and multiversion.d scan
+	// _specMap[root] - scan root/zypp.conf and root/multiversion.d
+
+	if ( root_r.empty() )
+	  root_r == "/";
+	bool cacheHit = _specMap.count( root_r );
+	MultiversionSpec & ret( _specMap[root_r] );	// creates new entry on the fly
+
+	if ( ! cacheHit )
+	{
+	  if ( root_r == "/" )
+	    ret.swap( _specMap[Pathname()] );		// original zypp.conf
+	  else
+	    scanConfAt( root_r, ret, zConfImpl_r );	// scan zypp.conf at root_r
+	  scanDirAt( root_r, ret, zConfImpl_r );	// add multiversion.d at root_r
+	  using zypp::operator<<;
+	  MIL << "MultiversionSpec '" << root_r << "' = " << ret << endl;
+	}
+	return ret;
+      }
+
+      MultiversionSpec & getDefaultSpec()	// Spec from zypp.conf parsing; called before any getSpec
+      {	return _specMap[Pathname()]; }
+
+    private:
+      void scanConfAt( const Pathname root_r, MultiversionSpec & spec_r, const Impl & zConfImpl_r )
+      {
+	static const str::regex rx( "^multiversion *= *(.*)" );
+	str::smatch what;
+	iostr::simpleParseFile( InputStream( Pathname::assertprefix( root_r, _autodetectZyppConfPath() ) ),
+				[&]( int num_r, std::string line_r )->bool
+				{
+				  if ( line_r[0] == 'm' && str::regex_match( line_r, what, rx ) )
+				  {
+				    str::splitEscaped( what[1], std::inserter( spec_r, spec_r.end() ), ", \t" );
+				    return false;	// stop after match
+				  }
+				  return true;
+				} );
+      }
+
+      void scanDirAt( const Pathname root_r, MultiversionSpec & spec_r, const Impl & zConfImpl_r )
+      {
+	// NOTE:  Actually we'd need to scan and use the root_r! zypp.conf values.
+	Pathname multiversionDir( zConfImpl_r.cfg_multiversion_path );
+	if ( multiversionDir.empty() )
+	  multiversionDir = ( zConfImpl_r.cfg_config_path.empty()
+			    ? Pathname("/etc/zypp")
+			    : zConfImpl_r.cfg_config_path ) / "multiversion.d";
+
+	filesystem::dirForEach( Pathname::assertprefix( root_r, multiversionDir ),
+				[&spec_r]( const Pathname & dir_r, const char *const & name_r )->bool
 				{
 				  MIL << "Parsing " << dir_r/name_r << endl;
 				  iostr::simpleParseFile( InputStream( dir_r/name_r ),
-							  [this]( int num_r, std::string line_r )->bool
+							  [&spec_r]( int num_r, std::string line_r )->bool
 							  {
 							    DBG << "  found " << line_r << endl;
-							   _multiversion.insert( line_r );
+							    spec_r.insert( std::move(line_r) );
 							    return true;
 							  } );
 				  return true;
 				} );
-	_multiversionInitialized = true;
       }
-      return _multiversion;
-    }
-    mutable std::set<std::string> 	_multiversion;
-    mutable DefaultIntegral<bool,false>	_multiversionInitialized;
+
+    private:
+      SpecMap _specMap;
+    };
+
+    MultiversionSpec & getMultiversion() const
+    { return _multiversionMap.getSpec( _autodetectSystemRoot(), *this ); }
+
+    mutable MultiversionMap _multiversionMap;
   };
   ///////////////////////////////////////////////////////////////////
 
@@ -726,10 +803,7 @@ namespace zypp
   {}
 
   Pathname ZConfig::systemRoot() const
-  {
-    Target_Ptr target( getZYpp()->getTarget() );
-    return target ? target->root() : Pathname();
-  }
+  { return _autodetectSystemRoot(); }
 
   ///////////////////////////////////////////////////////////////////
   //
@@ -952,11 +1026,19 @@ namespace zypp
   void ZConfig::setSolverUpgradeRemoveDroppedPackages( bool val_r )	{ _pimpl->solverUpgradeRemoveDroppedPackages.set( val_r ); }
   void ZConfig::resetSolverUpgradeRemoveDroppedPackages()		{ _pimpl->solverUpgradeRemoveDroppedPackages.restoreToDefault(); }
 
+  namespace
+  {
+    inline void sigMultiversionSpecChanged()
+    {
+      sat::detail::PoolMember::myPool().multiversionSpecChanged();
+    }
+  }
+
   const std::set<std::string> & ZConfig::multiversionSpec() const	{ return _pimpl->multiversion(); }
-  void ZConfig::multiversionSpec( std::set<std::string> new_r )		{ _pimpl->multiversion().swap( new_r ); }
-  void ZConfig::clearMultiversionSpec()					{ _pimpl->multiversion().clear(); }
-  void ZConfig::addMultiversionSpec( const std::string & name_r )	{ _pimpl->multiversion().insert( name_r ); }
-  void ZConfig::removeMultiversionSpec( const std::string & name_r )	{ _pimpl->multiversion().erase( name_r ); }
+  void ZConfig::multiversionSpec( std::set<std::string> new_r )		{ _pimpl->multiversion().swap( new_r );		sigMultiversionSpecChanged(); }
+  void ZConfig::clearMultiversionSpec()					{ _pimpl->multiversion().clear();		sigMultiversionSpecChanged(); }
+  void ZConfig::addMultiversionSpec( const std::string & name_r )	{ _pimpl->multiversion().insert( name_r );	sigMultiversionSpecChanged(); }
+  void ZConfig::removeMultiversionSpec( const std::string & name_r )	{ _pimpl->multiversion().erase( name_r );	sigMultiversionSpecChanged(); }
 
   bool ZConfig::apply_locks_file() const
   { return _pimpl->apply_locks_file; }

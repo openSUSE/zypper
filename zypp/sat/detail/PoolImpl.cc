@@ -561,6 +561,7 @@ namespace zypp
         return *_availableLocalesPtr;
       }
 
+      ///////////////////////////////////////////////////////////////////
 
       void PoolImpl::multiversionListInit() const
       {
@@ -587,6 +588,9 @@ namespace zypp
         }
       }
 
+      void PoolImpl::multiversionSpecChanged()
+      { _multiversionListPtr.reset(); }
+
       const PoolImpl::MultiversionList & PoolImpl::multiversionList() const
       {
 	if ( ! _multiversionListPtr )
@@ -597,6 +601,7 @@ namespace zypp
       bool PoolImpl::isMultiversion( const Solvable & solv_r ) const
       { return multiversionList().contains( solv_r ); }
 
+      ///////////////////////////////////////////////////////////////////
 
       const std::set<std::string> & PoolImpl::requiredFilesystems() const
       {

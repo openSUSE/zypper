@@ -51,6 +51,7 @@
 #include "zypp/repo/SrcPackageProvider.h"
 
 #include "zypp/sat/Pool.h"
+#include "zypp/sat/detail/PoolImpl.h"
 #include "zypp/sat/Transaction.h"
 
 #include "zypp/PluginScript.h"
@@ -59,7 +60,20 @@ using namespace std;
 
 ///////////////////////////////////////////////////////////////////
 namespace zypp
-{ /////////////////////////////////////////////////////////////////
+{
+  /////////////////////////////////////////////////////////////////
+  namespace
+  {
+    // HACK for bnc#906096: let pool re-evaluate multiversion spec
+    // if target root changes. ZConfig returns data sensitive to
+    // current target root.
+    inline void sigMultiversionSpecChanged()
+    {
+      sat::detail::PoolMember::myPool().multiversionSpecChanged();
+    }
+  } //namespace
+  /////////////////////////////////////////////////////////////////
+
   ///////////////////////////////////////////////////////////////////
   namespace json
   {
@@ -820,7 +834,7 @@ namespace zypp
       HistoryLog::setRoot(_root);
 
       createAnonymousId();
-
+      sigMultiversionSpecChanged();	// HACK: see sigMultiversionSpecChanged
       MIL << "Initialized target on " << _root << endl;
     }
 
@@ -937,6 +951,7 @@ namespace zypp
     TargetImpl::~TargetImpl()
     {
       _rpm.closeDatabase();
+      sigMultiversionSpecChanged();	// HACK: see sigMultiversionSpecChanged
       MIL << "Targets closed" << endl;
     }
 
