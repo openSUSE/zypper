@@ -1,4 +1,10 @@
 -------------------------------------------------------------------
+Tue Sep 15 15:02:45 CEST 2015 - ma@suse.de
+
+- CheckAccessDeleted: Identify services by systemd cgroup (FATE#318827)
+- version 15.16.1 (14)
+
+-------------------------------------------------------------------
 Mon Sep 14 12:21:30 CEST 2015 - ma@suse.de
 
 - Reload multiversion setting from the target zypp.conf (bnc#906096)
