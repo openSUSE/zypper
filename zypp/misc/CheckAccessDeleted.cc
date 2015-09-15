@@ -18,6 +18,9 @@
 
 #include "zypp/PathInfo.h"
 #include "zypp/ExternalProgram.h"
+#include "zypp/base/Regex.h"
+#include "zypp/base/IOStream.h"
+#include "zypp/base/InputStream.h"
 
 #include "zypp/misc/CheckAccessDeleted.h"
 
@@ -35,7 +38,7 @@ namespace zypp
   { /////////////////////////////////////////////////////////////////
     //
     // lsof output lines are a sequence of NUL terminated fields,
-    // where the 1st char determines the fiels type.
+    // where the 1st char determines the fields type.
     //
     // (pcuL) pid command userid loginname
     // (ftkn).filedescriptor type linkcount filename
@@ -252,20 +255,12 @@ namespace zypp
     return _data.size();
   }
 
-  std::string CheckAccessDeleted::findService( const Pathname & command_r )
+  std::string CheckAccessDeleted::findService( pid_t pid_r )
   {
     ProcInfo p;
-    p.command = command_r.basename();
+    p.pid = str::numstring( pid_r );
     return p.service();
   }
-  std::string CheckAccessDeleted::findService( const char * command_r )
-  { return findService( Pathname( command_r ) ); }
-
-  std::string CheckAccessDeleted::findService( const std::string & command_r )
-  { return findService( Pathname( command_r ) ); }
-
-  std::string CheckAccessDeleted::findService( pid_t pid_r )
-  { return findService( filesystem::readlink( Pathname("/proc")/str::numstring(pid_r)/"exe" ) ); }
 
   ///////////////////////////////////////////////////////////////////
   namespace
@@ -276,33 +271,20 @@ namespace zypp
 
   std::string CheckAccessDeleted::ProcInfo::service() const
   {
-    if ( command.empty() )
-      return std::string();
-    // TODO: This needs to be implemented smarter... be carefull
-    // as we don't know whether the target is up.
-
-    static const Pathname initD( "/etc/init.d" );
-    { // init.d script with same name
-      PathInfo pi( initD/command );
-      if ( pi.isFile() && pi.isX() )
-        return command;
-    }
-    { // init.d script with name + 'd'
-      std::string alt( command+"d" );
-      PathInfo pi( initD/alt );
-      if ( pi.isFile() && pi.isX() )
-        return alt;
-    }
-    if ( *command.rbegin() == 'd' )
-    { // init.d script with name - trailing'd'
-      std::string alt( command );
-      alt.erase( alt.size()-1 );
-      PathInfo pi( initD/alt );
-      WAR <<pi << endl;
-      if ( pi.isFile() && pi.isX() )
-        return alt;
-    }
-    return std::string();
+    static const str::regex rx( "[0-9]+:name=systemd:/system.slice/(.*/)?(.*).service$" );
+    str::smatch what;
+    std::string ret;
+    iostr::simpleParseFile( InputStream( Pathname("/proc")/pid/"cgroup" ),
+			    [&]( int num_r, std::string line_r )->bool
+			    {
+			      if ( str::regex_match( line_r, what, rx ) )
+			      {
+				ret = what[2];
+				return false;	// stop after match
+			      }
+			      return true;
+			    } );
+    return ret;
   }
 
   /******************************************************************

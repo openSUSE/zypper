@@ -26,7 +26,7 @@ namespace zypp
    * Executed after commit, this gives a hint which processes/services
    * need to be restarted.
    *
-   * Per default upon construtcion or explicit call to \ref check,
+   * Per default upon construction or explicit call to \ref check,
    * information about running processes which access deleted files
    * or libraries is collected and provided as a \ref ProcInfo
    * container.
@@ -47,15 +47,14 @@ namespace zypp
         std::string command;		//!< process command name
         std::vector<std::string> files;	//!< list of deleted executables or libraries accessed
 
-        /** Guess if command was started by an \c /etc/init.d/ script.
-         * The name of an \c /etc/init.d/ script that might be used to restart the
-         * command.
+        /** Guess if command was started by a systemd service script.
+         * The service name  might be used to restart the service.
          * \warning This is just a guess.
         */
         std::string service() const;
       };
 
-      typedef size_t   					size_type;
+      typedef size_t					size_type;
       typedef ProcInfo					value_type;
       typedef std::vector<ProcInfo>::const_iterator	const_iterator;
 
@@ -75,7 +74,7 @@ namespace zypp
        * libraries only by looking at the files path and name. (e.g named
        * \c lib* or located in \c *bin/).
        *
-       * A verbose check will omit this test and collect all processes uning
+       * A verbose check will omit this test and collect all processes using
        * any deleted file.
        *
        * \return the number of processes found.
@@ -89,17 +88,10 @@ namespace zypp
       const_iterator end() const	{ return _data.end(); }
 
     public:
-      /** Guess if \c command was started by an \c /etc/init.d/ script.
-       * The name of an \c /etc/init.d/ script that might be used to restart the
-       * command. \c command may be specifies by name, full path or pid.
+      /** Guess if pid was started by a systemd service script.
+       * The service name  might be used to restart the service.
        * \warning This is just a guess.
        */
-      static std::string findService( const char * command_r );
-      /** \overload Taking a string.*/
-      static std::string findService( const std::string & command_r );
-      /** \overload Taking a pathname. */
-      static std::string findService( const Pathname & command_r );
-      /** \overload taking the pid. */
       static std::string findService( pid_t pid_r );
 
     private:
