@@ -129,3 +129,19 @@ int Out::Error::report( Zypper & zypper_r ) const
     zypper_r.setExitCode( _exitcode );
   return zypper_r.exitCode();
 }
+
+std::string Out::Error::combine( std::string && msg_r, const zypp::Exception & ex_r )
+{
+  if ( msg_r.empty() )
+  {
+    msg_r = combine( ex_r );
+  }
+  else
+  {
+    msg_r += "\n";
+    msg_r += combine( ex_r );
+  }
+  return std::move(msg_r);
+}
+std::string Out::Error::combine( const zypp::Exception & ex_r )
+{ return Zypper::instance()->out().zyppExceptionReport( ex_r ); }
