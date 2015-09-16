@@ -34,7 +34,7 @@ namespace
     // CommandBase::options;	// access/manip command options
     // CommandBase::run;	// action + catch and repost Out::Error
     // CommandBase::execute;	// run + final "Done"/"Finished with error" message
-    // CommandBase::showHelp;// Show user help on command
+    // CommandBase::showHelp;	// Show user help on command
   public:
     /** default action */
     void action();

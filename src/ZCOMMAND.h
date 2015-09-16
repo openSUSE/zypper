@@ -4,10 +4,6 @@
                          /__|\_, | .__/ .__/\___|_|
                              |__/|_|  |_|
 \*---------------------------------------------------------------------------*/
-#define @COMMAND@
-#define @Command@
-#define @command@
-
 #ifndef ZYPPER_@COMMAND@_H
 #define ZYPPER_@COMMAND@_H
 
@@ -19,13 +15,13 @@ class Zypper;
 */
 
 /** @command@ specific options */
-struct @Command@ptions : public Options
+struct @Command@Options : public Options
 {
   @Command@Options() : Options( ZypperCommand::@COMMAND@ )
   {}
 
-  /** @Command@ user help (translated). */
-  virtual std::ostream & showHelpOn( std::ostream & out ) const;
+  //** @Command@ user help (translated). */
+  //virtual std::ostream & showHelpOn( std::ostream & out ) const;
 
   bool	_myopt;	//< opts go here...
 };
