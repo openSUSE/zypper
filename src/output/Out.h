@@ -1027,23 +1027,58 @@ struct Out::Error
   Error( int exitcode_r )
   : _exitcode( exitcode_r ) {}
 
-  Error( int exitcode_r, const std::string & msg_r, const std::string & hint_r = std::string() )
-  : _exitcode( exitcode_r ) , _msg( msg_r ) , _hint( hint_r ) {}
-  Error( int exitcode_r, const boost::format & msg_r, const std::string & hint_r = std::string() )
-  : _exitcode( exitcode_r ) , _msg( boost::str( msg_r ) ) , _hint( hint_r ) {}
-  Error( int exitcode_r, const std::string & msg_r, const boost::format & hint_r )
-  : _exitcode( exitcode_r ) , _msg( msg_r ) , _hint(  boost::str( hint_r ) ) {}
+  // basic: code msg hint
+  Error( int exitcode_r, std::string msg_r, std::string hint_r = std::string() )
+  : _exitcode( exitcode_r ), _msg( std::move(msg_r) ), _hint( std::move(hint_r) ) {}
+  Error( int exitcode_r, const boost::format & msg_r, std::string hint_r = std::string() )
+  : _exitcode( exitcode_r ), _msg( boost::str( msg_r ) ), _hint( std::move(hint_r) ) {}
+  Error( int exitcode_r, std::string msg_r, const boost::format & hint_r )
+  : _exitcode( exitcode_r ), _msg( std::move(msg_r) ), _hint( boost::str( hint_r ) ) {}
   Error( int exitcode_r, const boost::format & msg_r, const boost::format & hint_r )
-  : _exitcode( exitcode_r ) , _msg( boost::str( msg_r ) ) , _hint( boost::str( hint_r ) ) {}
+  : _exitcode( exitcode_r ), _msg( boost::str( msg_r ) ), _hint( boost::str( hint_r ) ) {}
 
-  Error( const std::string & msg_r, const std::string & hint_r = std::string() )
-  : _exitcode( ZYPPER_EXIT_OK ) , _msg( msg_r ) , _hint( hint_r ) {}
-  Error( const boost::format & msg_r, const std::string & hint_r = std::string() )
-  : _exitcode( ZYPPER_EXIT_OK ) , _msg( boost::str( msg_r ) ) , _hint( hint_r ) {}
-  Error( const std::string & msg_r, const boost::format & hint_r )
-  : _exitcode( ZYPPER_EXIT_OK ) , _msg( msg_r ) , _hint(  boost::str( hint_r ) ) {}
+  // code exception hint
+  Error( int exitcode_r, const zypp::Exception & ex_r, std::string hint_r = std::string() )
+  : _exitcode( exitcode_r ), _msg( combine( ex_r ) ), _hint( std::move(hint_r) ) {}
+  Error( int exitcode_r, const zypp::Exception & ex_r, const boost::format & hint_r )
+  : _exitcode( exitcode_r ), _msg( combine( ex_r ) ), _hint( boost::str( hint_r ) ) {}
+
+  // code (msg exception) hint
+  Error( int exitcode_r, std::string msg_r, const zypp::Exception & ex_r, std::string hint_r = std::string() )
+  : _exitcode( exitcode_r ), _msg( combine( std::move(msg_r), ex_r ) ), _hint( std::move(hint_r) ) {}
+  Error( int exitcode_r, const boost::format & msg_r, const zypp::Exception & ex_r, std::string hint_r = std::string() )
+  : _exitcode( exitcode_r ), _msg( combine( boost::str( msg_r ), ex_r ) ), _hint( std::move(hint_r) ) {}
+  Error( int exitcode_r, std::string msg_r, const zypp::Exception & ex_r, const boost::format & hint_r )
+  : _exitcode( exitcode_r ), _msg( combine( std::move(msg_r), ex_r ) ), _hint( boost::str( hint_r ) ) {}
+  Error( int exitcode_r, const boost::format & msg_r, const zypp::Exception & ex_r, const boost::format & hint_r )
+  : _exitcode( exitcode_r ), _msg( combine( boost::str( msg_r ), ex_r ) ), _hint( boost::str( hint_r ) ) {}
+
+
+  // as above but without code	ZYPPER_EXIT_OK
+  Error( std::string msg_r, std::string hint_r = std::string() )
+  : _exitcode( ZYPPER_EXIT_OK ), _msg( std::move(msg_r) ), _hint( std::move(hint_r) ) {}
+  Error( const boost::format & msg_r, std::string hint_r = std::string() )
+  : _exitcode( ZYPPER_EXIT_OK ), _msg( boost::str( msg_r ) ), _hint( std::move(hint_r) ) {}
+  Error( std::string msg_r, const boost::format & hint_r )
+  : _exitcode( ZYPPER_EXIT_OK ), _msg( std::move(msg_r) ), _hint( boost::str( hint_r ) ) {}
   Error( const boost::format & msg_r, const boost::format & hint_r )
-  : _exitcode( ZYPPER_EXIT_OK ) , _msg( boost::str( msg_r ) ) , _hint( boost::str( hint_r ) ) {}
+  : _exitcode( ZYPPER_EXIT_OK ), _msg( boost::str( msg_r ) ), _hint( boost::str( hint_r ) ) {}
+
+  Error( const zypp::Exception & ex_r, std::string hint_r = std::string() )
+  : _exitcode( ZYPPER_EXIT_OK ), _msg( combine( ex_r ) ), _hint( std::move(hint_r) ) {}
+  Error( const zypp::Exception & ex_r, const boost::format & hint_r )
+  : _exitcode( ZYPPER_EXIT_OK ), _msg( combine( ex_r ) ), _hint( boost::str( hint_r ) ) {}
+
+  Error( std::string msg_r, const zypp::Exception & ex_r, std::string hint_r = std::string() )
+  : _exitcode( ZYPPER_EXIT_OK ), _msg( combine( std::move(msg_r), ex_r ) ), _hint( std::move(hint_r) ) {}
+  Error( const boost::format & msg_r, const zypp::Exception & ex_r, std::string hint_r = std::string() )
+  : _exitcode( ZYPPER_EXIT_OK ), _msg( combine( boost::str( msg_r ), ex_r ) ), _hint( std::move(hint_r) ) {}
+  Error( std::string msg_r, const zypp::Exception & ex_r, const boost::format & hint_r )
+  : _exitcode( ZYPPER_EXIT_OK ), _msg( combine( std::move(msg_r), ex_r ) ), _hint( boost::str( hint_r ) ) {}
+  Error( const boost::format & msg_r, const zypp::Exception & ex_r, const boost::format & hint_r )
+  : _exitcode( ZYPPER_EXIT_OK ), _msg( combine( boost::str( msg_r ), ex_r ) ), _hint( boost::str( hint_r ) ) {}
+
+
 
   /** Default way of processing a caught \ref Error exception.
    * \li Write error message and optional hint to screen.
@@ -1055,6 +1090,10 @@ struct Out::Error
   int _exitcode;	//< ZYPPER_EXIT_OK indicates exitcode is already set.
   std::string _msg;
   std::string _hint;
+
+private:
+  static std::string combine( std::string && msg_r, const zypp::Exception & ex_r );
+  static std::string combine( const zypp::Exception & ex_r );
 };
 ///////////////////////////////////////////////////////////////////
 
