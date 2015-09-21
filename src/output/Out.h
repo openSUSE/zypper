@@ -45,12 +45,12 @@ namespace out
 namespace out
 {
   /** \relates ListFormater NORMAL representation of types in lists [no default] */
-  template <class _Tp>
-  std::string asListElement( const _Tp & val_r );
+  template <class Tp_>
+  std::string asListElement( const Tp_ & val_r );
 
   /** \relates ListFormater XML representation of types in lists [no default] */
-  template <class _Tp>
-  std::string asXmlListElement( const _Tp & val_r );
+  template <class Tp_>
+  std::string asXmlListElement( const Tp_ & val_r );
 
   ///////////////////////////////////////////////////////////////////
   /// \class ListLayout
@@ -73,8 +73,8 @@ namespace out
 
   namespace detail
   {
-    template <bool _Singleline, bool _Wrapline, bool _Gaped, unsigned _Indent>
-    struct ListLayoutInit : public ListLayout { ListLayoutInit() : ListLayout( _Singleline, _Wrapline, _Gaped, _Indent ) {} };
+    template <bool singleline_, bool wrapline_, bool gaped_, unsigned indent_>
+    struct ListLayoutInit : public ListLayout { ListLayoutInit() : ListLayout( singleline_, wrapline_, gaped_, indent_ ) {} };
   }
   typedef detail::ListLayoutInit<true, false,false, 0U>	XmlListLayout;
   typedef detail::ListLayoutInit<true, true, false, 0U>	DefaultListLayout;	///< one element per line, no indent
@@ -93,13 +93,13 @@ namespace out
 
     struct XmlFormater				//< XML representation of element
     {
-      template <class _Tp>
-      std::string operator()( const _Tp & val_r ) const
+      template <class Tp_>
+      std::string operator()( const Tp_ & val_r ) const
       { return asXmlListElement( val_r ); }
     };
 
-    template <class _Tp>			//< NORMAL representation of element
-    std::string operator()( const _Tp & val_r ) const
+    template <class Tp_>			//< NORMAL representation of element
+    std::string operator()( const Tp_ & val_r ) const
     { return asListElement( val_r ); }
 
     std::string operator()( const std::string & val_r ) const
@@ -364,39 +364,39 @@ public:
   /// \class List<ListFormater>
   /// \brief Printing a list
   ///////////////////////////////////////////////////////////////////
-  template <class _ListFormater = out::ListFormater>
+  template <class ListFormater_ = out::ListFormater>
   struct List : protected ParentOut
   {
-    List( Out & out_r, _ListFormater formater_r, out::ListLayout layout_r = typename _ListFormater::ListLayout() )
+    List( Out & out_r, ListFormater_ formater_r, out::ListLayout layout_r = typename ListFormater_::ListLayout() )
     : ParentOut( out_r ), _formater( std::move(formater_r) ), _base( std::move(layout_r), out_r.termwidth() )
     {}
 
-    template <class _Tp>
-    List & operator<<( _Tp && val_r )
-    { _base.print( _formater( std::forward<_Tp>(val_r) ) ); return *this; }
+    template <class Tp_>
+    List & operator<<( Tp_ && val_r )
+    { _base.print( _formater( std::forward<Tp_>(val_r) ) ); return *this; }
 
   private:
-    _ListFormater _formater;
+    ListFormater_ _formater;
     out::detail::BasicList _base;
   };
   ///////////////////////////////////////////////////////////////////
 
 public:
   /** Write list from iterator pair */
-  template <class _Iterator, class _ListFormater = out::ListFormater>
-  void list( _Iterator begin_r, _Iterator end_r, _ListFormater && formater_r = _ListFormater() )
+  template <class Iterator_, class ListFormater_ = out::ListFormater>
+  void list( Iterator_ begin_r, Iterator_ end_r, ListFormater_ && formater_r = ListFormater_() )
   {
     switch ( type() )
     {
       case TYPE_NORMAL:
       {
-	List<_ListFormater> mlist( *this, std::forward<_ListFormater>(formater_r) );
+	List<ListFormater_> mlist( *this, std::forward<ListFormater_>(formater_r) );
 	for_( it, begin_r, end_r ) mlist << ( *it );
       }
       break;
       case TYPE_XML:
       {
-	typedef typename _ListFormater::XmlFormater XmlFormater;
+	typedef typename ListFormater_::XmlFormater XmlFormater;
 	List<XmlFormater> mlist( *this, XmlFormater(), out::XmlListLayout() );
 	for_( it, begin_r, end_r ) mlist << ( *it );
       }
@@ -405,28 +405,28 @@ public:
   }
 
   /** Write list from constainer */
-  template <class _Container, class _ListFormater = out::ListFormater>
-  void list( const _Container & container_r, _ListFormater && formater_r = _ListFormater() )
-  { list( container_r.begin(), container_r.end(), std::forward<_ListFormater>(formater_r) ); }
+  template <class Container_, class ListFormater_ = out::ListFormater>
+  void list( const Container_ & container_r, ListFormater_ && formater_r = ListFormater_() )
+  { list( container_r.begin(), container_r.end(), std::forward<ListFormater_>(formater_r) ); }
 
   /** Write list from iterator pair enclosed by a \ref Node */
-  template <class _Iterator, class _ListFormater = out::ListFormater>
-  void list( XmlNode && node_r, _Iterator begin_r, _Iterator end_r, _ListFormater && formater_r = _ListFormater() )
-  { XmlNode guard( std::move(node_r) ); list( begin_r, end_r, std::forward<_ListFormater>(formater_r) ); }
+  template <class Iterator_, class ListFormater_ = out::ListFormater>
+  void list( XmlNode && node_r, Iterator_ begin_r, Iterator_ end_r, ListFormater_ && formater_r = ListFormater_() )
+  { XmlNode guard( std::move(node_r) ); list( begin_r, end_r, std::forward<ListFormater_>(formater_r) ); }
 
   /** Write list from constainer enclosed by a \ref Node */
-  template <class _Container, class _ListFormater = out::ListFormater>
-  void list( XmlNode && node_r, const _Container & container_r, _ListFormater && formater_r = _ListFormater() )
-  { XmlNode guard( std::move(node_r) ); list( container_r.begin(), container_r.end(), std::forward<_ListFormater>(formater_r) ); }
+  template <class Container_, class ListFormater_ = out::ListFormater>
+  void list( XmlNode && node_r, const Container_ & container_r, ListFormater_ && formater_r = ListFormater_() )
+  { XmlNode guard( std::move(node_r) ); list( container_r.begin(), container_r.end(), std::forward<ListFormater_>(formater_r) ); }
 
   /** Write list from container creating a TitleNode with \c size="nnn" attribue and
    * replacing optional \c %1% in \a title_r with size. */
-  template <class _Container, class _ListFormater = out::ListFormater>
-  void list( const std::string & nodeName_r, const std::string & title_r, const _Container & container_r, _ListFormater && formater_r = _ListFormater() )
+  template <class Container_, class ListFormater_ = out::ListFormater>
+  void list( const std::string & nodeName_r, const std::string & title_r, const Container_ & container_r, ListFormater_ && formater_r = ListFormater_() )
   {
     TitleNode guard( XmlNode( *this, nodeName_r, XmlNode::Attr( "size", str::numstring( container_r.size() ) ) ),
 		     (boost::formatNAC( title_r ) % container_r.size()).str() );
-    list( container_r, std::forward<_ListFormater>(formater_r) );
+    list( container_r, std::forward<ListFormater_>(formater_r) );
   }
 
 public:
@@ -481,8 +481,8 @@ public:
     ~Info()
     { out().info( _str->str() ); }
 
-    template<class _Tp>
-    std::ostream & operator<<( const _Tp & val )
+    template<class Tp_>
+    std::ostream & operator<<( const Tp_ & val )
     { return (*_str) << val; /*return *this;*/ }
 
    private:

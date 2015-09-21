@@ -66,8 +66,8 @@ public:
   void loadDetected();
 
   /** Store new command args */
-  template <class _Iterator>
-  void args( _Iterator begin, _Iterator end )
+  template <class Iterator_>
+  void args( Iterator_ begin, Iterator_ end )
   { _args = Arglist( begin, end ); }
 };
 

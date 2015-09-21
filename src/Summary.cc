@@ -500,32 +500,32 @@ void Summary::writeNewlyInstalled(ostream & out)
   {
     string label("%d");
     if (it->first == ResKind::package)
-      label = _PL(
+      label = PL_(
         "The following NEW package is going to be installed:",
         "The following %d NEW packages are going to be installed:",
         it->second.size());
     else if (it->first == ResKind::patch)
-      label = _PL(
+      label = PL_(
         "The following NEW patch is going to be installed:",
         "The following %d NEW patches are going to be installed:",
         it->second.size());
     else if (it->first == ResKind::pattern)
-      label = _PL(
+      label = PL_(
         "The following NEW pattern is going to be installed:",
         "The following %d NEW patterns are going to be installed:",
         it->second.size());
     else if (it->first == ResKind::product)
-      label = _PL(
+      label = PL_(
         "The following NEW product is going to be installed:",
         "The following %d NEW products are going to be installed:",
         it->second.size());
     else if (it->first == ResKind::srcpackage)
-      label = _PL(
+      label = PL_(
         "The following source package is going to be installed:",
         "The following %d source packages are going to be installed:",
         it->second.size());
     else if (it->first == ResKind::application)
-      label = _PL(
+      label = PL_(
         "The following application is going to be installed:",
         "The following %d applications are going to be installed:",
         it->second.size());
@@ -546,27 +546,27 @@ void Summary::writeRemoved(ostream & out)
   {
     string label("%d");
     if (it->first == ResKind::package)
-      label = _PL(
+      label = PL_(
         "The following package is going to be REMOVED:",
         "The following %d packages are going to be REMOVED:",
         it->second.size());
     else if (it->first == ResKind::patch)
-      label = _PL(
+      label = PL_(
         "The following patch is going to be REMOVED:",
         "The following %d patches are going to be REMOVED:",
         it->second.size());
     else if (it->first == ResKind::pattern)
-      label = _PL(
+      label = PL_(
         "The following pattern is going to be REMOVED:",
         "The following %d patterns are going to be REMOVED:",
         it->second.size());
     else if (it->first == ResKind::product)
-      label = _PL(
+      label = PL_(
         "The following product is going to be REMOVED:",
         "The following %d products are going to be REMOVED:",
         it->second.size());
     else if (it->first == ResKind::application)
-      label = _PL(
+      label = PL_(
         "The following application is going to be REMOVED:",
         "The following %d applications are going to be REMOVED:",
         it->second.size());
@@ -585,27 +585,27 @@ void Summary::writeUpgraded(ostream & out)
   {
     string label("%d");
     if (it->first == ResKind::package)
-      label = _PL(
+      label = PL_(
         "The following package is going to be upgraded:",
         "The following %d packages are going to be upgraded:",
         it->second.size());
     else if (it->first == ResKind::patch)
-      label = _PL(
+      label = PL_(
         "The following patch is going to be upgraded:",
         "The following %d patches are going to be upgraded:",
         it->second.size());
     else if (it->first == ResKind::pattern)
-      label = _PL(
+      label = PL_(
         "The following pattern is going to be upgraded:",
         "The following %d patterns are going to be upgraded:",
         it->second.size());
     else if (it->first == ResKind::product)
-      label = _PL(
+      label = PL_(
         "The following product is going to be upgraded:",
         "The following %d products are going to be upgraded:",
         it->second.size());
     else if (it->first == ResKind::application)
-      label = _PL(
+      label = PL_(
         "The following application is going to be upgraded:",
         "The following %d applications are going to be upgraded:",
         it->second.size());
@@ -624,27 +624,27 @@ void Summary::writeDowngraded(ostream & out)
   {
     string label("%d");
     if (it->first == ResKind::package)
-      label = _PL(
+      label = PL_(
         "The following package is going to be downgraded:",
         "The following %d packages are going to be downgraded:",
         it->second.size());
     else if (it->first == ResKind::patch)
-      label = _PL(
+      label = PL_(
         "The following patch is going to be downgraded:",
         "The following %d patches are going to be downgraded:",
         it->second.size());
     else if (it->first == ResKind::pattern)
-      label = _PL(
+      label = PL_(
         "The following pattern is going to be downgraded:",
         "The following %d patterns are going to be downgraded:",
         it->second.size());
     else if (it->first == ResKind::product)
-      label = _PL(
+      label = PL_(
         "The following product is going to be downgraded:",
         "The following %d products are going to be downgraded:",
         it->second.size());
     else if (it->first == ResKind::application)
-      label = _PL(
+      label = PL_(
         "The following application is going to be downgraded:",
         "The following %d applications are going to be downgraded:",
         it->second.size());
@@ -663,22 +663,22 @@ void Summary::writeReinstalled(ostream & out)
   {
     string label("%d");
     if (it->first == ResKind::package)
-      label = _PL(
+      label = PL_(
         "The following package is going to be reinstalled:",
         "The following %d packages are going to be reinstalled:",
         it->second.size());
     else if (it->first == ResKind::patch)
-      label = _PL(
+      label = PL_(
         "The following patch is going to be reinstalled:",
         "The following %d patches are going to be reinstalled:",
         it->second.size());
     else if (it->first == ResKind::pattern)
-      label = _PL(
+      label = PL_(
         "The following pattern is going to be reinstalled:",
         "The following %d patterns are going to be reinstalled:",
         it->second.size());
     else if (it->first == ResKind::product)
-      label = _PL(
+      label = PL_(
         "The following product is going to be reinstalled:",
         "The following %d products are going to be reinstalled:",
         it->second.size());
@@ -690,7 +690,7 @@ void Summary::writeReinstalled(ostream & out)
       // is an 'application reinstall', because the providing package
       // changes.
       return;
-      label = _PL(
+      label = PL_(
         "The following application is going to be reinstalled:",
         "The following %d applications are going to be reinstalled:",
         it->second.size());
@@ -829,32 +829,32 @@ void Summary::writeRecommended(ostream & out)
   {
     string label( "%d" );
     if (it->first == ResKind::package)
-      label = _PL(
+      label = PL_(
         "The following recommended package was automatically selected:",
         "The following %d recommended packages were automatically selected:",
         it->second.size());
     else if (it->first == ResKind::patch)
-      label = _PL(
+      label = PL_(
         "The following recommended patch was automatically selected:",
         "The following %d recommended patches were automatically selected:",
         it->second.size());
     else if (it->first == ResKind::pattern)
-      label = _PL(
+      label = PL_(
         "The following recommended pattern was automatically selected:",
         "The following %d recommended patterns were automatically selected:",
         it->second.size());
     else if (it->first == ResKind::product)
-      label = _PL(
+      label = PL_(
         "The following recommended product was automatically selected:",
         "The following %d recommended products were automatically selected:",
         it->second.size());
     else if (it->first == ResKind::srcpackage)
-      label = _PL(
+      label = PL_(
         "The following recommended source package was automatically selected:",
         "The following %d recommended source packages were automatically selected:",
         it->second.size());
     else if (it->first == ResKind::application)
-      label = _PL(
+      label = PL_(
         "The following recommended application was automatically selected:",
         "The following %d recommended applications were automatically selected:",
         it->second.size());
@@ -899,7 +899,7 @@ void Summary::writeRecommended(ostream & out)
 
       if ( resolver->onlyRequires() )
       {
-	label = _PL( "The following package is recommended, but will not be installed (only required packages will be installed):",
+	label = PL_( "The following package is recommended, but will not be installed (only required packages will be installed):",
 		     "The following %d packages are recommended, but will not be installed (only required packages will be installed):",
 		     it->second.size() );
 	label = str::form( label.c_str(), it->second.size() );
@@ -911,7 +911,7 @@ void Summary::writeRecommended(ostream & out)
       {
         if ( !softLocked.empty() )
         {
-	  label = _PL( "The following package is recommended, but will not be installed because it's unwanted (was manually removed before):",
+	  label = PL_( "The following package is recommended, but will not be installed because it's unwanted (was manually removed before):",
 		       "The following %d packages are recommended, but will not be installed because they are unwanted (were manually removed before):",
 		       it->second.size() );
 	  label = str::form( label.c_str(), it->second.size() );
@@ -921,7 +921,7 @@ void Summary::writeRecommended(ostream & out)
         }
         if ( !conflicts.empty() )
         {
-	  label = _PL( "The following package is recommended, but will not be installed due to conflicts or dependency issues:",
+	  label = PL_( "The following package is recommended, but will not be installed due to conflicts or dependency issues:",
 		       "The following %d packages are recommended, but will not be installed due to conflicts or dependency issues:",
 		       it->second.size() );
 	  label = str::form( label.c_str(), it->second.size() );
@@ -934,19 +934,19 @@ void Summary::writeRecommended(ostream & out)
     else
     {
       if (it->first == ResKind::patch)
-        label = _PL( "The following patch is recommended, but will not be installed:",
+        label = PL_( "The following patch is recommended, but will not be installed:",
 		     "The following %d patches are recommended, but will not be installed:",
 		     it->second.size() );
       else if (it->first == ResKind::pattern)
-        label = _PL( "The following pattern is recommended, but will not be installed:",
+        label = PL_( "The following pattern is recommended, but will not be installed:",
 		     "The following %d patterns are recommended, but will not be installed:",
 		     it->second.size() );
       else if (it->first == ResKind::product)
-	label = _PL( "The following product is recommended, but will not be installed:",
+	label = PL_( "The following product is recommended, but will not be installed:",
 		     "The following %d products are recommended, but will not be installed:",
 		     it->second.size() );
       else if (it->first == ResKind::application)
-	label = _PL( "The following application is recommended, but will not be installed:",
+	label = PL_( "The following application is recommended, but will not be installed:",
 		     "The following %d applications are recommended, but will not be installed:",
 		     it->second.size() );
       label = str::form( label.c_str(), it->second.size() );
@@ -985,27 +985,27 @@ void Summary::writeSuggested(ostream & out)
   {
     string label("%d");
     if (it->first == ResKind::package)
-      label = _PL(
+      label = PL_(
         "The following package is suggested, but will not be installed:",
         "The following %d packages are suggested, but will not be installed:",
         it->second.size());
     else if (it->first == ResKind::patch)
-      label = _PL(
+      label = PL_(
         "The following patch is suggested, but will not be installed:",
         "The following %d patches are suggested, but will not be installed:",
         it->second.size());
     else if (it->first == ResKind::pattern)
-      label = _PL(
+      label = PL_(
         "The following pattern is suggested, but will not be installed:",
         "The following %d patterns are suggested, but will not be installed:",
         it->second.size());
     else if (it->first == ResKind::product)
-      label = _PL(
+      label = PL_(
         "The following product is suggested, but will not be installed:",
         "The following %d products are suggested, but will not be installed:",
         it->second.size());
     else if (it->first == ResKind::application)
-      label = _PL(
+      label = PL_(
         "The following application is suggested, but will not be installed:",
         "The following %d applications are suggested, but will not be installed:",
         it->second.size());
@@ -1026,27 +1026,27 @@ void Summary::writeChangedArch(ostream & out)
   {
     string label("%d");
     if (it->first == ResKind::package)
-      label = _PL(
+      label = PL_(
         "The following package is going to change architecture:",
         "The following %d packages are going to change architecture:",
         it->second.size());
     else if (it->first == ResKind::patch)
-      label = _PL(
+      label = PL_(
         "The following patch is going to change architecture:",
         "The following %d patches are going to change architecture:",
         it->second.size());
     else if (it->first == ResKind::pattern)
-      label = _PL(
+      label = PL_(
         "The following pattern is going to change architecture:",
         "The following %d patterns are going to change architecture:",
         it->second.size());
     else if (it->first == ResKind::product)
-      label = _PL(
+      label = PL_(
         "The following product is going to change architecture:",
         "The following %d products are going to change architecture:",
         it->second.size());
     else if (it->first == ResKind::application)
-      label = _PL(
+      label = PL_(
         "The following application is going to change architecture:",
         "The following %d applications are going to change architecture:",
         it->second.size());
@@ -1067,27 +1067,27 @@ void Summary::writeChangedVendor(ostream & out)
   {
     string label("%d");
     if (it->first == ResKind::package)
-      label = _PL(
+      label = PL_(
         "The following package is going to change vendor:",
         "The following %d packages are going to change vendor:",
         it->second.size());
     else if (it->first == ResKind::patch)
-      label = _PL(
+      label = PL_(
         "The following patch is going to change vendor:",
         "The following %d patches are going to change vendor:",
         it->second.size());
     else if (it->first == ResKind::pattern)
-      label = _PL(
+      label = PL_(
         "The following pattern is going to change vendor:",
         "The following %d patterns are going to change vendor:",
         it->second.size());
     else if (it->first == ResKind::product)
-      label = _PL(
+      label = PL_(
         "The following product is going to change vendor:",
         "The following %d products are going to change vendor:",
         it->second.size());
     else if (it->first == ResKind::application)
-      label = _PL(
+      label = PL_(
         "The following application is going to change vendor:",
         "The following %d applications are going to change vendor:",
         it->second.size());
@@ -1107,7 +1107,7 @@ void Summary::writeUnsupported(ostream & out)
     string label("%d");
     // we only look at vendor support in packages
     if (it->first == ResKind::package)
-      label = _PL(
+      label = PL_(
         "The following package is not supported by its vendor:",
         "The following %d packages are not supported by their vendor:",
         it->second.size());
@@ -1127,7 +1127,7 @@ void Summary::writeNeedACC(ostream & out)
     string label("%d");
     // we only look at vendor support in packages
     if (it->first == ResKind::package)
-      label = _PL(
+      label = PL_(
         "The following package needs additional customer contract to get support:",
         "The following %d packages need additional customer contract to get support:",
         it->second.size());
@@ -1145,17 +1145,17 @@ void Summary::writeNotUpdated(std::ostream & out)
     string label("%d");
     // we only look at update candidates for packages and products
     if (it->first == ResKind::package)
-      label = _PL(
+      label = PL_(
         "The following package update will NOT be installed:",
         "The following %d package updates will NOT be installed:",
         it->second.size());
     else if (it->first == ResKind::product)
-      label = _PL(
+      label = PL_(
         "The following product update will NOT be installed:",
         "The following %d product updates will NOT be installed:",
         it->second.size());
     else if (it->first == ResKind::application)
-      label = _PL(
+      label = PL_(
         "The following application update will NOT be installed:",
         "The following %d application updates will NOT be installed:",
         it->second.size());
@@ -1185,7 +1185,7 @@ void Summary::writeLocked(std::ostream & out)
   }
   if ( ! ( instlocks.empty() && avidents.empty() ) )
   {
-    string label = _PL(
+    string label = PL_(
       "The following item is locked and will not be changed by any action:",
       "The following %d items are locked and will not be changed by any action:",
       ( instlocks.size() + avidents.size() )
@@ -1215,7 +1215,7 @@ void Summary::writeRebootNeeded( std::ostream & out )
   if ( _rebootNeeded.empty() )
     return;
 
-  const std::string & label( str::form(_PL("The following patch requires a system reboot:",
+  const std::string & label( str::form(PL_("The following patch requires a system reboot:",
 					   "The following %d patches require a system reboot:",
 					   _rebootNeeded.size()),
 				       (int)_rebootNeeded.size()) );
@@ -1275,7 +1275,7 @@ void Summary::writePackageCounts(ostream & out)
   {
     s << ( ColorContext::POSITIVE << count ) << " ";
     // translators: this text will be preceded by a number e.g. "5 packages to ..."
-    s << _PL("package to upgrade", "packages to upgrade", count);
+    s << PL_("package to upgrade", "packages to upgrade", count);
     gotcha = true;
   }
   i = _todowngrade.find(ResKind::package);
@@ -1286,10 +1286,10 @@ void Summary::writePackageCounts(ostream & out)
     s << ( ColorContext::NEGATIVE << count ) << " ";
     if (gotcha)
       // translators: this text will be preceded by a number e.g. "5 to ..."
-      s << _PL("to downgrade", "to downgrade", count);
+      s << PL_("to downgrade", "to downgrade", count);
     else
       // translators: this text will be preceded by a number e.g. "5 packages to ..."
-      s << _PL("package to downgrade", "packages to downgrade", count);
+      s << PL_("package to downgrade", "packages to downgrade", count);
     gotcha = true;
   }
   i = _toinstall.find(ResKind::package);
@@ -1300,10 +1300,10 @@ void Summary::writePackageCounts(ostream & out)
     s << ( ColorContext::POSITIVE << count ) << " ";
     if (gotcha)
       // translators: this text will be preceded by a number e.g. "5 new"
-      s << _PL("new", "new", count);
+      s << PL_("new", "new", count);
     else
       // translators: this text will be preceded by a number e.g. "5 new to install"
-      s << _PL("new package to install", "new packages to install", count);
+      s << PL_("new package to install", "new packages to install", count);
     gotcha = true;
   }
   i = _toreinstall.find(ResKind::package);
@@ -1314,10 +1314,10 @@ void Summary::writePackageCounts(ostream & out)
     s << ( ColorContext::CHANGE << count ) << " ";
     if (gotcha)
       // translators: this text will be preceded by a number e.g. "5 to ..."
-      s << _PL("to reinstall", "to reinstall", count);
+      s << PL_("to reinstall", "to reinstall", count);
     else
       // translators: this text will be preceded by a number e.g. "5 packages to ..."
-      s << _PL("package to reinstall", "packages to reinstall", count);
+      s << PL_("package to reinstall", "packages to reinstall", count);
     gotcha = true;
   }
   i = _toremove.find(ResKind::package);
@@ -1328,10 +1328,10 @@ void Summary::writePackageCounts(ostream & out)
     s << ( ColorContext::NEGATIVE << count ) << " ";
     if (gotcha)
       // translators: this text will be preceded by a number e.g. "5 to ..."
-      s << _PL("to remove", "to remove", count);
+      s << PL_("to remove", "to remove", count);
     else
       // translators: this text will be preceded by a number e.g. "5 packages to ..."
-      s << _PL("package to remove", "packages to remove", count);
+      s << PL_("package to remove", "packages to remove", count);
     gotcha = true;
   }
   i = _tochangevendor.find(ResKind::package);
@@ -1342,10 +1342,10 @@ void Summary::writePackageCounts(ostream & out)
     s << ( ColorContext::CHANGE << count ) << " ";
     if (gotcha)
       // translators: this text will be preceded by a number e.g. "5 to ..."
-      s << _PL("to change vendor", " to change vendor", count);
+      s << PL_("to change vendor", " to change vendor", count);
     else
       // translators: this text will be preceded by a number e.g. "5 packages ..."
-      s << _PL("package will change vendor", "packages will change vendor", count);
+      s << PL_("package will change vendor", "packages will change vendor", count);
     gotcha = true;
   }
   i = _tochangearch.find(ResKind::package);
@@ -1356,10 +1356,10 @@ void Summary::writePackageCounts(ostream & out)
     s << ( ColorContext::CHANGE << count ) << " ";
     if (gotcha)
       // translators: this text will be preceded by a number e.g. "5 to ..."
-      s << _PL("to change arch", "to change arch", count);
+      s << PL_("to change arch", "to change arch", count);
     else
       // translators: this text will be preceded by a number e.g. "5 packages ..."
-      s << _PL("package will change arch", "packages will change arch", count);
+      s << PL_("package will change arch", "packages will change arch", count);
     gotcha = true;
   }
   i = _toinstall.find(ResKind::srcpackage);
@@ -1370,10 +1370,10 @@ void Summary::writePackageCounts(ostream & out)
     s << ( ColorContext::POSITIVE << count ) << " ";
     if (gotcha)
       // translators: this text will be preceded by a number e.g. "5 new"
-      s << _PL("source package", "source packages", count);
+      s << PL_("source package", "source packages", count);
     else
       // translators: this text will be preceded by a number e.g. "5 new to install"
-      s << _PL("source package to install", "source packages to install", count);
+      s << PL_("source package to install", "source packages to install", count);
     gotcha = true;
   }
   s << "." << endl;

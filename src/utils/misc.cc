@@ -113,19 +113,19 @@ ResKindSet kindset_from(const std::list<std::string> & kindstrings)
 string kind_to_string_localized(const zypp::ResKind & kind, unsigned long count)
 {
   if (kind == ResKind::package)
-    return _PL("package", "packages", count);
+    return PL_("package", "packages", count);
   if (kind == ResKind::pattern)
-    return _PL("pattern", "patterns", count);
+    return PL_("pattern", "patterns", count);
   if (kind == ResKind::product)
-    return _PL("product", "product", count);
+    return PL_("product", "product", count);
   if (kind == ResKind::patch)
-    return _PL("patch", "patches", count);
+    return PL_("patch", "patches", count);
   if (kind == ResKind::srcpackage)
-    return _PL("srcpackage", "srcpackages", count);
+    return PL_("srcpackage", "srcpackages", count);
   if (kind == ResKind::application)
-    return _PL("application", "applications", count);
+    return PL_("application", "applications", count);
   // default
-  return _PL("resolvable", "resolvables", count);
+  return PL_("resolvable", "resolvables", count);
 }
 
 // ----------------------------------------------------------------------------

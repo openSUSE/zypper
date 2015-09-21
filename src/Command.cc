@@ -28,80 +28,80 @@ namespace
     static zypp::NamedValue<ZypperCommand::Command> _table;
     if ( _table.empty() )
     {
-#define _T(C) _table( ZypperCommand::C )
-      _T( NONE_e )		| "NONE"		| "none" | "";
-      _T( SUBCOMMAND_e)		| "subcommand";
+#define _t(C) _table( ZypperCommand::C )
+      _t( NONE_e )		| "NONE"		| "none" | "";
+      _t( SUBCOMMAND_e)		| "subcommand";
 
-      _T( ADD_SERVICE_e )	| "addservice"		| "as" | "service-add" | "sa";
-      _T( REMOVE_SERVICE_e )	| "removeservice"	| "rs" | "service-delete" | "sd";
-      _T( MODIFY_SERVICE_e )	| "modifyservice"	| "ms";
-      _T( LIST_SERVICES_e )	| "services"		| "ls" | "service-list" | "sl";
-      _T( REFRESH_SERVICES_e )	| "refresh-services"	| "refs";
+      _t( ADD_SERVICE_e )	| "addservice"		| "as" | "service-add" | "sa";
+      _t( REMOVE_SERVICE_e )	| "removeservice"	| "rs" | "service-delete" | "sd";
+      _t( MODIFY_SERVICE_e )	| "modifyservice"	| "ms";
+      _t( LIST_SERVICES_e )	| "services"		| "ls" | "service-list" | "sl";
+      _t( REFRESH_SERVICES_e )	| "refresh-services"	| "refs";
 
-      _T( ADD_REPO_e )		| "addrepo" 		| "ar";
-      _T( REMOVE_REPO_e )	| "removerepo"		| "rr";
-      _T( RENAME_REPO_e )	| "renamerepo"		| "nr";
-      _T( MODIFY_REPO_e )	| "modifyrepo"		| "mr";
-      _T( LIST_REPOS_e )	| "repos"		| "lr" | "catalogs" | "ca";
-      _T( REFRESH_e )		| "refresh"		| "ref";
-      _T( CLEAN_e )		| "clean"		| "cc" | "clean-cache" | "you-clean-cache" | "yc";
+      _t( ADD_REPO_e )		| "addrepo" 		| "ar";
+      _t( REMOVE_REPO_e )	| "removerepo"		| "rr";
+      _t( RENAME_REPO_e )	| "renamerepo"		| "nr";
+      _t( MODIFY_REPO_e )	| "modifyrepo"		| "mr";
+      _t( LIST_REPOS_e )	| "repos"		| "lr" | "catalogs" | "ca";
+      _t( REFRESH_e )		| "refresh"		| "ref";
+      _t( CLEAN_e )		| "clean"		| "cc" | "clean-cache" | "you-clean-cache" | "yc";
 
-      _T( INSTALL_e )		| "install"		| "in";
-      _T( REMOVE_e )		| "remove"		| "rm";
-      _T( SRC_INSTALL_e )	| "source-install"	| "si";
-      _T( VERIFY_e )		| "verify"		| "ve";
-      _T( INSTALL_NEW_RECOMMENDS_e )| "install-new-recommends" | "inr";
+      _t( INSTALL_e )		| "install"		| "in";
+      _t( REMOVE_e )		| "remove"		| "rm";
+      _t( SRC_INSTALL_e )	| "source-install"	| "si";
+      _t( VERIFY_e )		| "verify"		| "ve";
+      _t( INSTALL_NEW_RECOMMENDS_e )| "install-new-recommends" | "inr";
 
-      _T( UPDATE_e )		| "update"		| "up";
-      _T( LIST_UPDATES_e )	| "list-updates"	| "lu";
-      _T( PATCH_e )		| "patch";
-      _T( LIST_PATCHES_e )	| "list-patches"	| "lp";
-      _T( PATCH_CHECK_e )	| "patch-check"		| "pchk";
-      _T( DIST_UPGRADE_e )	| "dist-upgrade"	| "dup";
+      _t( UPDATE_e )		| "update"		| "up";
+      _t( LIST_UPDATES_e )	| "list-updates"	| "lu";
+      _t( PATCH_e )		| "patch";
+      _t( LIST_PATCHES_e )	| "list-patches"	| "lp";
+      _t( PATCH_CHECK_e )	| "patch-check"		| "pchk";
+      _t( DIST_UPGRADE_e )	| "dist-upgrade"	| "dup";
 
-      _T( SEARCH_e )		| "search"		| "se";
-      _T( INFO_e )		| "info"		| "if";
-      _T( PACKAGES_e )		| "packages"		| "pa" | "pkg";
-      _T( PATCHES_e )		| "patches"		| "pch";
-      _T( PATTERNS_e )		| "patterns"		| "pt";
-      _T( PRODUCTS_e )		| "products"		| "pd";
+      _t( SEARCH_e )		| "search"		| "se";
+      _t( INFO_e )		| "info"		| "if";
+      _t( PACKAGES_e )		| "packages"		| "pa" | "pkg";
+      _t( PATCHES_e )		| "patches"		| "pch";
+      _t( PATTERNS_e )		| "patterns"		| "pt";
+      _t( PRODUCTS_e )		| "products"		| "pd";
 
-      _T( WHAT_PROVIDES_e )	| "what-provides"	| "wp";
-      //_T( WHAT_REQUIRES_e )	| "what-requires"	| "wr";
-      //_T( WHAT_CONFLICTS_e )	| "what-conflicts"	| "wc";
+      _t( WHAT_PROVIDES_e )	| "what-provides"	| "wp";
+      //_t( WHAT_REQUIRES_e )	| "what-requires"	| "wr";
+      //_t( WHAT_CONFLICTS_e )	| "what-conflicts"	| "wc";
 
-      _T( ADD_LOCK_e )		| "addlock"		| "al" | "lock-add" | "la";
-      _T( REMOVE_LOCK_e )	| "removelock"		| "rl" | "lock-delete" | "ld";
-      _T( LIST_LOCKS_e )	| "locks"		| "ll" | "lock-list";
-      _T( CLEAN_LOCKS_e )	| "cleanlocks"		| "cl" | "lock-clean";
+      _t( ADD_LOCK_e )		| "addlock"		| "al" | "lock-add" | "la";
+      _t( REMOVE_LOCK_e )	| "removelock"		| "rl" | "lock-delete" | "ld";
+      _t( LIST_LOCKS_e )	| "locks"		| "ll" | "lock-list";
+      _t( CLEAN_LOCKS_e )	| "cleanlocks"		| "cl" | "lock-clean";
 
-      _T( TARGET_OS_e )		| "targetos"		| "tos";
-      _T( VERSION_CMP_e )	| "versioncmp"		| "vcmp";
-      _T( LICENSES_e )		| "licenses";
-      _T( PS_e )		| "ps";
-      _T( DOWNLOAD_e )		| "download";
-      _T( SOURCE_DOWNLOAD_e )	| "source-download";
+      _t( TARGET_OS_e )		| "targetos"		| "tos";
+      _t( VERSION_CMP_e )	| "versioncmp"		| "vcmp";
+      _t( LICENSES_e )		| "licenses";
+      _t( PS_e )		| "ps";
+      _t( DOWNLOAD_e )		| "download";
+      _t( SOURCE_DOWNLOAD_e )	| "source-download";
 
-      _T( HELP_e )		| "help"		| "?";
-      _T( SHELL_e )		| "shell"		| "sh";
-      _T( SHELL_QUIT_e )	| "quit"		| "exit" | "\004";
-      _T( MOO_e )		| "moo";
+      _t( HELP_e )		| "help"		| "?";
+      _t( SHELL_e )		| "shell"		| "sh";
+      _t( SHELL_QUIT_e )	| "quit"		| "exit" | "\004";
+      _t( MOO_e )		| "moo";
 
-      _T( CONFIGTEST_e)		|  "configtest";
+      _t( CONFIGTEST_e)		|  "configtest";
 
-      _T( RUG_PATCH_INFO_e )	| "patch-info";
-      _T( RUG_PATTERN_INFO_e )	| "pattern-info";
-      _T( RUG_PRODUCT_INFO_e )	| "product-info";
-      _T( RUG_SERVICE_TYPES_e )	| "service-types"	| "st";
-      _T( RUG_LIST_RESOLVABLES_e )| "list-resolvables";	// "lr" CONFLICT with repos
-      _T( RUG_MOUNT_e )		| "mount";
-      //_T( RUG_INFO_PROVIDES_e )| "info-provides"	| "ip";
-      //_T( RUG_INFO_CONFLICTS_e )| "info-requirements"	| "ir";
-      //_T( RUG_INFO_OBSOLETES_e )| "info-conflicts"	| "ic";
-      //_T( RUG_INFO_REQUIREMENTS_e )| "info-obsoletes"	| "io";
-      _T( RUG_PATCH_SEARCH_e )	| "patch-search" | "pse";
-      _T( RUG_PING_e )		| "ping";
-#undef _T
+      _t( RUG_PATCH_INFO_e )	| "patch-info";
+      _t( RUG_PATTERN_INFO_e )	| "pattern-info";
+      _t( RUG_PRODUCT_INFO_e )	| "product-info";
+      _t( RUG_SERVICE_TYPES_e )	| "service-types"	| "st";
+      _t( RUG_LIST_RESOLVABLES_e )| "list-resolvables";	// "lr" CONFLICT with repos
+      _t( RUG_MOUNT_e )		| "mount";
+      //_t( RUG_INFO_PROVIDES_e )| "info-provides"	| "ip";
+      //_t( RUG_INFO_CONFLICTS_e )| "info-requirements"	| "ir";
+      //_t( RUG_INFO_OBSOLETES_e )| "info-conflicts"	| "ic";
+      //_t( RUG_INFO_REQUIREMENTS_e )| "info-obsoletes"	| "io";
+      _t( RUG_PATCH_SEARCH_e )	| "patch-search" | "pse";
+      _t( RUG_PING_e )		| "ping";
+#undef _t
     }
     return _table;
   }

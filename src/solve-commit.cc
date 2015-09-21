@@ -75,12 +75,12 @@ static TriBool show_problem (Zypper & zypper,
 
   string prompt_text;
   if (problem_count > 1)
-    prompt_text = _PL(
+    prompt_text = PL_(
       "Choose the above solution using '1' or skip, retry or cancel",
       "Choose from above solutions by number or skip, retry or cancel",
       solution_count);
   else
-    prompt_text = _PL(
+    prompt_text = PL_(
       // translators: translate 'c' to whatever you translated the 'c' in
       // "c" and "s/r/c" strings
       "Choose the above solution using '1' or cancel using 'c'",
@@ -160,7 +160,7 @@ static bool show_problems(Zypper & zypper)
   // display the number of problems
   if (rproblems.size() > 1)
     zypper.out().info(boost::str(format(
-      _PL("%d Problem:", "%d Problems:", rproblems.size())) % rproblems.size()));
+      PL_("%d Problem:", "%d Problems:", rproblems.size())) % rproblems.size()));
   else if (rproblems.empty())
   {
     // should not happen! If solve() failed at least one problem must be set!

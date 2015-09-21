@@ -24,7 +24,7 @@
 #define ZYPPER_EXIT_INF_CAP_NOT_FOUND      104 // given capability not found (for install/remove)
 #define ZYPPER_EXIT_ON_SIGNAL              105 // SIGINT or SIGTERM received
 
-// undefine _, N_ and _PL macros from libzypp
+// undefine _, N_ and PL_ macros from libzypp
 #ifdef _
 #undef _
 #endif
@@ -35,10 +35,10 @@
 #endif
 #define N_(MSG) MSG
 
-#ifdef _PL
-#undef _PL
+#ifdef PL_
+#undef PL_
 #endif
-#define _PL(MSG1,MSG2,N) ::ngettext(MSG1,MSG2,N)
+#define PL_(MSG1,MSG2,N) ::ngettext(MSG1,MSG2,N)
 
 // libzypp logger settings
 #define ZYPPER_LOG "/var/log/zypper.log"

@@ -141,7 +141,7 @@ namespace {
     { ++count[(*it)->kind()]; }
     for ( const auto & pair : count )
     {
-      cout << boost::format(_PL("There would be %1% match for '%2%'."
+      cout << boost::format(PL_("There would be %1% match for '%2%'."
 			      ,"There would be %1% matches for '%2%'."
 			      ,pair.second))
 			    % pair.second

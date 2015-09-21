@@ -170,11 +170,11 @@ void patch_check ()
 
   ostringstream s;
   // translators: %d is the number of needed patches
-  s << format(_PL("%d patch needed", "%d patches needed", gData.patches_count))
+  s << format(PL_("%d patch needed", "%d patches needed", gData.patches_count))
       % gData.patches_count
     << " ("
     // translators: %d is the number of security patches
-    << format(_PL("%d security patch", "%d security patches", gData.security_patches_count))
+    << format(PL_("%d security patch", "%d security patches", gData.security_patches_count))
       % gData.security_patches_count
     << ")";
   out.info(s.str(), Out::QUIET);

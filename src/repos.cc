@@ -3192,7 +3192,7 @@ void modify_service(Zypper & zypper, const string & alias)
       if (!artoenable.empty())
       {
         zypper.out().info(boost::str(format(
-            _PL("Repository '%s' has been added to enabled repositories of service '%s'",
+            PL_("Repository '%s' has been added to enabled repositories of service '%s'",
                 "Repositories '%s' have been added to enabled repositories of service '%s'",
                 artoenable.size()))
             % str::join(artoenable.begin(), artoenable.end(), ", ") % alias));
@@ -3200,7 +3200,7 @@ void modify_service(Zypper & zypper, const string & alias)
       if (!artodisable.empty())
       {
         zypper.out().info(boost::str(format(
-            _PL("Repository '%s' has been added to disabled repositories of service '%s'",
+            PL_("Repository '%s' has been added to disabled repositories of service '%s'",
                 "Repositories '%s' have been added to disabled repositories of service '%s'",
                 artodisable.size()))
             % str::join(artodisable.begin(), artodisable.end(), ", ") % alias));
@@ -3208,7 +3208,7 @@ void modify_service(Zypper & zypper, const string & alias)
       if (!rrtoenable.empty())
       {
         zypper.out().info(boost::str(format(
-            _PL("Repository '%s' has been removed from enabled repositories of service '%s'",
+            PL_("Repository '%s' has been removed from enabled repositories of service '%s'",
                 "Repositories '%s' have been removed from enabled repositories of service '%s'",
                 rrtoenable.size()))
             % str::join(rrtoenable.begin(), rrtoenable.end(), ", ") % alias));
@@ -3216,7 +3216,7 @@ void modify_service(Zypper & zypper, const string & alias)
       if (!rrtodisable.empty())
       {
         zypper.out().info(boost::str(format(
-            _PL("Repository '%s' has been removed from disabled repositories of service '%s'",
+            PL_("Repository '%s' has been removed from disabled repositories of service '%s'",
                 "Repositories '%s' have been removed from disabled repositories of service '%s'",
                 rrtodisable.size()))
             % str::join(rrtodisable.begin(), rrtodisable.end(), ", ") % alias));

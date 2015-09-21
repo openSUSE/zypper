@@ -46,8 +46,8 @@ namespace out
   ///////////////////////////////////////////////////////////////////
 
   /** \relates SolvableListFormater Conversion to sat::Solvable */
-  template <class _Tp>
-  sat::Solvable asSolvable( const _Tp & val_r )
+  template <class Tp_>
+  sat::Solvable asSolvable( const Tp_ & val_r )
   { return sat::asSolvable( val_r ); }
 
   sat::Solvable asSolvable( int val_r )		// e.g. satQueues use int as SolvabeId
@@ -63,8 +63,8 @@ namespace out
 
     struct XmlFormater
     {
-      template <class _Tp>
-      std::string operator()( const _Tp & val_r ) const
+      template <class Tp_>
+      std::string operator()( const Tp_ & val_r ) const
       { return operator()( makeResObject( asSolvable( val_r ) ) ); }
 
       std::string operator()( ResObject::Ptr val_r, ResObject::Ptr old_r = nullptr ) const
@@ -91,8 +91,8 @@ namespace out
       }
     };
 
-    template <class _Tp>
-    std::string operator()( const _Tp & val_r ) const
+    template <class Tp_>
+    std::string operator()( const Tp_ & val_r ) const
     { return operator()( makeResObject( asSolvable( val_r ) ) ); }
 
     std::string operator()( ResObject::Ptr val_r, ResObject::Ptr old_r = nullptr ) const
@@ -376,7 +376,7 @@ struct FindFileConflictstReportReceiver : public zypp::callback::ReceiveReport<z
 
 	out.list( "no-filelist",
 		  // TranslatorExplanation %1%(number of packages); detailed list follows
-		  _PL("The following package had to be excluded from file conflicts check because it is not yet downloaded:",
+		  PL_("The following package had to be excluded from file conflicts check because it is not yet downloaded:",
 		      "The following %1% packages had to be excluded from file conflicts check because they are not yet downloaded:",
 		      noFilelist_r.size() ),
 		  noFilelist_r, out::SolvableListFormater() );
@@ -387,7 +387,7 @@ struct FindFileConflictstReportReceiver : public zypp::callback::ReceiveReport<z
       {
 	out.list( "fileconflicts",
 		  // TranslatorExplanation %1%(number of conflicts); detailed list follows
-		  _PL("Detected %1% file conflict:",
+		  PL_("Detected %1% file conflict:",
 		      "Detected %1% file conflicts:",
 		      conflicts_r.size() ),
 		  conflicts_r, out::FileConflictsListFormater() );

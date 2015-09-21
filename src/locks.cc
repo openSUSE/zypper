@@ -159,7 +159,7 @@ void add_locks(Zypper & zypper, const Zypper::ArgList & args, const ResKindSet &
     locks.save(Pathname::assertprefix
         (zypper.globalOpts().root_dir, ZConfig::instance().locksFile()));
     if ( start != Locks::instance().size() )
-      zypper.out().info(_PL(
+      zypper.out().info(PL_(
         "Specified lock has been successfully added.",
         "Specified locks have been successfully added.",
         Locks::instance().size() - start));
@@ -239,7 +239,7 @@ void remove_locks(Zypper & zypper, const Zypper::ArgList & args, const ResKindSe
       zypper.out().info(_("No lock has been removed."));
     //removed something
     else
-      zypper.out().info(str::form(_PL(
+      zypper.out().info(str::form(PL_(
         "%zu lock has been successfully removed.",
         "%zu locks have been successfully removed.",
         start - locks.size()), start - locks.size()));

@@ -72,7 +72,7 @@ namespace zypp
 	else if ( keyData_r.daysToLive() < 15 )
 	{
 	  Zypper::instance()->out().info( boost::format(
-	    _PL( "The gpg key signing file '%1%' will expire in %2% day.",
+	    PL_( "The gpg key signing file '%1%' will expire in %2% day.",
 		 "The gpg key signing file '%1%' will expire in %2% days.",
 		 keyData_r.daysToLive() )) % file_r %  keyData_r.daysToLive() );
 	  dumpKeyInfo( std::cout, keyData_r, context );

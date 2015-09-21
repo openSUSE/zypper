@@ -43,7 +43,7 @@ enum TableLineStyle {
   DoubleLight,
   Colon,
   none,
-  _End,			       ///< sentinel
+  TLS_End,			       ///< sentinel
 };
 
 class Table;
@@ -61,15 +61,15 @@ public:
 
   TableRow & add( std::string s );
 
-  template<class _Tp>
-  TableRow & add( const _Tp & val_r )
+  template<class Tp_>
+  TableRow & add( const Tp_ & val_r )
   { return add( zypp::str::asString( val_r ) ); }
 
 
   TableRow & addDetail( std::string s );
 
-  template<class _Tp>
-  TableRow & addDetail( const _Tp & val_r )
+  template<class Tp_>
+  TableRow & addDetail( const Tp_ & val_r )
   { return addDetail( zypp::str::asString( val_r ) ); }
 
 
@@ -117,13 +117,13 @@ private:
 };
 
 /** \relates TableRow Add colummn. */
-template<class _Tp>
-TableRow & operator<<( TableRow & tr, _Tp && val )
-{ return tr.add( zypp::str::asString( std::forward<_Tp>(val) ) ); }
+template<class Tp_>
+TableRow & operator<<( TableRow & tr, Tp_ && val )
+{ return tr.add( zypp::str::asString( std::forward<Tp_>(val) ) ); }
 /** \overload preserving TableRow rvalue reference. */
-template<class _Tp>
-TableRow && operator<<( TableRow && tr, _Tp && val )
-{ return std::move( tr << std::forward<_Tp>(val) ); }
+template<class Tp_>
+TableRow && operator<<( TableRow && tr, Tp_ && val )
+{ return std::move( tr << std::forward<Tp_>(val) ); }
 
 
 class TableHeader : public TableRow {
@@ -133,13 +133,13 @@ public:
 };
 
 /** \relates TableHeader  Add colummn. */
-template<class _Tp>
-TableHeader & operator<<( TableHeader & th, _Tp && val )
-{ static_cast<TableRow&>(th) << std::forward<_Tp>(val); return th; }
+template<class Tp_>
+TableHeader & operator<<( TableHeader & th, Tp_ && val )
+{ static_cast<TableRow&>(th) << std::forward<Tp_>(val); return th; }
 /** \overload preserving TableHeader rvalue reference. */
-template<class _Tp>
-TableHeader && operator<<( TableHeader && th, _Tp && val )
-{ return std::move( th << std::forward<_Tp>(val) ); }
+template<class Tp_>
+TableHeader && operator<<( TableHeader && th, Tp_ && val )
+{ return std::move( th << std::forward<Tp_>(val) ); }
 
 
 /** \todo nice idea but poor interface */
@@ -283,14 +283,14 @@ public:
 
   ///////////////////////////////////////////////////////////////////
   // Key / Container<Value>
-  template <class KeyType, class _Iterator >
-  PropertyTable & add( const KeyType & key_r, _Iterator begin_r, _Iterator end_r )
+  template <class KeyType, class Iterator_ >
+  PropertyTable & add( const KeyType & key_r, Iterator_ begin_r, Iterator_ end_r )
   {
     TableRow r;
     r << key_r;
     if ( begin_r != end_r )
     {
-      _Iterator first = begin_r++;
+      Iterator_ first = begin_r++;
       if ( begin_r != end_r )
       {
 	unsigned cnt = 1;

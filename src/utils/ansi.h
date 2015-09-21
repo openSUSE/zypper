@@ -27,7 +27,7 @@ namespace ansi
 {
 #define ZYPPER_TRACE_SGR 0
   ///////////////////////////////////////////////////////////////////
-  /// \class ColorTraits<_Tp>
+  /// \class ColorTraits<Tp_>
   /// \brief Traits class to enable custom \ref Color construction
   ///
   /// This enables using user types (usaually enums) to be used as \ref Color
@@ -69,18 +69,18 @@ namespace ansi
   ///  { return str << ansi::Color( obj ); }
   /// \endcode
   ///////////////////////////////////////////////////////////////////
-  template<class _Tp>
+  template<class Tp_>
   struct ColorTraits
   { enum { customColorCtor = false }; };
 
   // enabled via ctor Color::Constant -> Color
-  /** \relates ColorTraits<_Tp> SFINAE: hide template signatures unless enum is enabled in \ref ColorTraits */
-  template <typename _CCC>
-  using EnableIfCustomColorCtor = typename std::enable_if< ansi::ColorTraits<typename std::decay<_CCC>::type>::customColorCtor >::type;
+  /** \relates ColorTraits<Tp_> SFINAE: hide template signatures unless enum is enabled in \ref ColorTraits */
+  template <typename CCC_>
+  using EnableIfCustomColorCtor = typename std::enable_if< ansi::ColorTraits<typename std::decay<CCC_>::type>::customColorCtor >::type;
 
-  /** \relates ColorTraits<_Tp> SFINAE: hide template signatures unless enum is enabled in \ref ColorTraits */
-  template <typename _CCC>
-  using DisableIfCustomColorCtor = typename std::enable_if< !ansi::ColorTraits<typename std::decay<_CCC>::type>::customColorCtor >::type;
+  /** \relates ColorTraits<Tp_> SFINAE: hide template signatures unless enum is enabled in \ref ColorTraits */
+  template <typename CCC_>
+  using DisableIfCustomColorCtor = typename std::enable_if< !ansi::ColorTraits<typename std::decay<CCC_>::type>::customColorCtor >::type;
 
   ///////////////////////////////////////////////////////////////////
   /// \class Color
@@ -182,9 +182,9 @@ namespace ansi
     }
 
     /** Custom ctor from ColorTraits enabled type */
-    template<class _CCC, typename = EnableIfCustomColorCtor<_CCC>>
-    Color( _CCC && color_r )
-    : Color( customColorCtor( std::forward<_CCC>(color_r) ) )
+    template<class CCC_, typename = EnableIfCustomColorCtor<CCC_>>
+    Color( CCC_ && color_r )
+    : Color( customColorCtor( std::forward<CCC_>(color_r) ) )
     {}
 
   public:
@@ -570,7 +570,7 @@ namespace ansi
   /// \note Printing directly to a stream, the color is active throughout the
   /// ColorStreams lifetime (set in ctor, reset in dtor).
   ///
-  /// \see \ref ColorTraits<_Tp> for how to enable convenient \class ColorStream
+  /// \see \ref ColorTraits<Tp_> for how to enable convenient \class ColorStream
   /// handling via an enum type.
   /// \code
   ///   ColorStream cstr( std::move( ColorContext::Red << "Error " << 42 ) );
@@ -682,8 +682,8 @@ namespace ansi
 #endif
 
     /** All other types are printed via std::ostream */
-    template<class _Tp, typename = DisableIfCustomColorCtor<_Tp>>
-    ColorStream & operator<<( const _Tp & val_r )	// ! Universal reference here would be too greedy
+    template<class Tp_, typename = DisableIfCustomColorCtor<Tp_>>
+    ColorStream & operator<<( const Tp_ & val_r )	// ! Universal reference here would be too greedy
     { stream() << val_r; return *this; }
 
     /** \overload for omaip */
@@ -747,31 +747,31 @@ using ansi::ColorString;
 using ansi::ColorStream;
 
 /** \relates ColorStream Create \ref ColorStream via \ref Color */
-template<class _Tp>
-inline ansi::ColorStream operator<<( ansi::Color color_r, _Tp && val_r )
-{ return std::move( ansi::ColorStream( color_r ) << std::forward<_Tp>(val_r) ); }
+template<class Tp_>
+inline ansi::ColorStream operator<<( ansi::Color color_r, Tp_ && val_r )
+{ return std::move( ansi::ColorStream( color_r ) << std::forward<Tp_>(val_r) ); }
 /** \overload for omanip */
 inline ansi::ColorStream operator<<( ansi::Color color_r, std::ostream & (*omanip)( std::ostream & ) )
 { return std::move( ansi::ColorStream( color_r ) << omanip ); }
 
 /** \relates ColorStream Create \ref ColorStream via <tt>enum << expr</tt> */
-template<class _CCC, class _Tp, typename = ansi::EnableIfCustomColorCtor<_CCC> >
-inline ansi::ColorStream operator<<( _CCC && color_r, _Tp && val_r )
-{ return std::move( ansi::ColorStream( std::forward<_CCC>(color_r) ) << std::forward<_Tp>(val_r) ); }
+template<class CCC_, class Tp_, typename = ansi::EnableIfCustomColorCtor<CCC_> >
+inline ansi::ColorStream operator<<( CCC_ && color_r, Tp_ && val_r )
+{ return std::move( ansi::ColorStream( std::forward<CCC_>(color_r) ) << std::forward<Tp_>(val_r) ); }
 /** \overload for omanip */
-template<class _CCC, typename = ansi::EnableIfCustomColorCtor<_CCC> >
-inline ansi::ColorStream operator<<( _CCC && color_r, std::ostream & (*omanip)( std:: ostream & ) )
-{ return std::move( ansi::ColorStream( std::forward<_CCC>(color_r) ) << omanip ); }
+template<class CCC_, typename = ansi::EnableIfCustomColorCtor<CCC_> >
+inline ansi::ColorStream operator<<( CCC_ && color_r, std::ostream & (*omanip)( std:: ostream & ) )
+{ return std::move( ansi::ColorStream( std::forward<CCC_>(color_r) ) << omanip ); }
 
 ///////////////////////////////////////////////////////////////////
 namespace std
 {
   /** \relates ansi::Color Stream oputput for ColorTraits enabled types
-   * Defined in namespace 'std' because namespace of '_CCC' may vary
+   * Defined in namespace 'std' because namespace of 'CCC_' may vary
    */
-  template<class _CCC, typename = ansi::EnableIfCustomColorCtor<_CCC>>
-  inline ostream & operator<<( ostream & str, _CCC && color_r )
-  { return str << ansi::Color( forward<_CCC>(color_r) ); }
+  template<class CCC_, typename = ansi::EnableIfCustomColorCtor<CCC_>>
+  inline ostream & operator<<( ostream & str, CCC_ && color_r )
+  { return str << ansi::Color( forward<CCC_>(color_r) ); }
 } // namespace std
 ///////////////////////////////////////////////////////////////////
 #endif // ZYPPER_UTILS_ANSI_H

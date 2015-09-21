@@ -351,7 +351,7 @@ void Table::wrap(int force_break_after)
 }
 
 void Table::lineStyle (TableLineStyle st) {
-  if (st < _End)
+  if (st < TLS_End)
     _style = st;
 }
 

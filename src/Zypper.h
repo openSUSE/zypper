@@ -240,13 +240,13 @@ public:
 
 public:
    /** Flags for tuning \ref defaultLoadSystem. */
-  enum _LoadSystemFlags
+  enum LoadSystemBits
   {
     NO_TARGET		= (1 << 0),		//< don't load target to pool
     NO_REPOS		= (1 << 1),		//< don't load repos to pool
     NO_POOL		= NO_TARGET | NO_REPOS	//< no pool at all
   };
-  ZYPP_DECLARE_FLAGS( LoadSystemFlags, _LoadSystemFlags );
+  ZYPP_DECLARE_FLAGS( LoadSystemFlags, LoadSystemBits );
 
   /** Prepare repos and pool according to \a flags_r.
    * Defaults to load target and repos and in this case also adjusts
@@ -256,18 +256,18 @@ public:
 
 public:
   /** Convenience to return properly casted _commandOptions. */
-  template<class _Opt>
-  shared_ptr<_Opt> commandOptionsAs() const
-  { return dynamic_pointer_cast<_Opt>( _commandOptions ); }
+  template<class Opt_>
+  shared_ptr<Opt_> commandOptionsAs() const
+  { return dynamic_pointer_cast<Opt_>( _commandOptions ); }
 
-  /** Convenience to return command options for \c _Op, either casted from _commandOptions or newly created. */
-  template<class _Opt>
-  shared_ptr<_Opt> assertCommandOptions()
+  /** Convenience to return command options for \c Opt_, either casted from _commandOptions or newly created. */
+  template<class Opt_>
+  shared_ptr<Opt_> assertCommandOptions()
   {
-    shared_ptr<_Opt> myopt( commandOptionsAs<_Opt>() );
+    shared_ptr<Opt_> myopt( commandOptionsAs<Opt_>() );
     if ( ! myopt )
     {
-      myopt.reset( new _Opt() );
+      myopt.reset( new Opt_() );
       _commandOptions = myopt;
     }
     return myopt;
@@ -368,27 +368,27 @@ private:
 ///////////////////////////////////////////////////////////////////
 /// \brief Base class for command specific implementation classes.
 ///////////////////////////////////////////////////////////////////
-template <class _Derived, class _Options>
+template <class Derived_, class Options_>
 struct CommandBase
 {
   CommandBase( Zypper & zypper_r )
-  : CommandBase( zypper_r, zypper_r.commandOptionsAs<_Options>() )
+  : CommandBase( zypper_r, zypper_r.commandOptionsAs<Options_>() )
   {}
 
-  CommandBase( Zypper & zypper_r, shared_ptr<_Options> options_r )
+  CommandBase( Zypper & zypper_r, shared_ptr<Options_> options_r )
   : _zypper( zypper_r )
   , _options( options_r )
   {
     if ( ! _options )
     {
-      _options.reset( new _Options() );
+      _options.reset( new Options_() );
       MIL << commandName() << "( no options provided )" << endl;
     }
   }
 
-  _Options & options() { return *_options; }
+  Options_ & options() { return *_options; }
 
-  const _Options & options() const { return *_options; }
+  const Options_ & options() const { return *_options; }
 
  /** Command name (optionally suffixed). */
   std::string commandName( const std::string & suffix_r = std::string() ) const
@@ -414,7 +414,7 @@ struct CommandBase
    * Other exceptions pass by.
    * \return zypper exitCode
    */
-  int run( void (_Derived::*action_r)() = &_Derived::action )
+  int run( void (Derived_::*action_r)() = &Derived_::action )
   {
     MIL << "run: " << commandName() << " action " << action_r << endl;
     try
@@ -430,7 +430,7 @@ struct CommandBase
   /** Execute a command action (run + final "Done"/"Finished with error." message).
    * \return zypper exitCode
    */
-  int execute( void (_Derived::*action_r)() = &_Derived::action )
+  int execute( void (Derived_::*action_r)() = &Derived_::action )
   {
     run( action_r );
     // finished
@@ -445,10 +445,10 @@ struct CommandBase
 protected:
   ~CommandBase() {}
   Zypper & 		_zypper;	//< my Zypper
-  shared_ptr<_Options>	_options;	//< my Options
+  shared_ptr<Options_>	_options;	//< my Options
 private:
-  _Derived &       self()       { return *static_cast<_Derived*>( this ); }
-  const _Derived & self() const { return *static_cast<const _Derived*>( this ); }
+  Derived_ &       self()       { return *static_cast<Derived_*>( this ); }
+  const Derived_ & self() const { return *static_cast<const Derived_*>( this ); }
 };
 ///////////////////////////////////////////////////////////////////
 

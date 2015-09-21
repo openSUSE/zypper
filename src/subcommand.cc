@@ -94,8 +94,8 @@ namespace
     return str;
   }
 
-  template <class _Container>
-  std::ostream & dumpNameTableOn( std::ostream & str, const _Container & container_r )
+  template <class Container_>
+  std::ostream & dumpNameTableOn( std::ostream & str, const Container_ & container_r )
   { return dumpNameTableOn( str, std::vector<boost::string_ref>( container_r.begin(), container_r.end() ) ); }
 
 } // namespace env
@@ -144,8 +144,8 @@ namespace	// subcommand detetction
     return false;
   }
 
-  template <class _OutputIterator>
-  unsigned collectSubommandsIn( const Pathname & dir_r, _OutputIterator result_r )
+  template <class OutputIterator_>
+  unsigned collectSubommandsIn( const Pathname & dir_r, OutputIterator_ result_r )
   {
     unsigned cnt = 0;
     filesystem::dirForEach( dir_r,

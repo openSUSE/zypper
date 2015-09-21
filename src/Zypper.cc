@@ -144,9 +144,9 @@ namespace
     {}
 
     /** Allow using the underlying steam directly. */
-    template<class _Tp>
-    CommandHelpFormater & operator<<( _Tp && val )
-    { _str << std::forward<_Tp>(val); return *this; }
+    template<class Tp_>
+    CommandHelpFormater & operator<<( Tp_ && val )
+    { _str << std::forward<Tp_>(val); return *this; }
 
     /** Conversion to std::string */
     operator std::string() const { return _str.str(); }
@@ -654,7 +654,7 @@ void Zypper::processGlobalOptions()
   {
     unsigned s;
     str::strtonum (it->second.front(), s);
-    if (s < _End)
+    if (s < TLS_End)
       Table::defaultStyle = (TableLineStyle) s;
     else
       out().error(str::form(_("Invalid table style %d."), s),
@@ -5093,7 +5093,7 @@ void Zypper::doCommand()
 
     Locks::size_type diff = start - Locks::instance().size();
     out().info(str::form(
-        _PL("Removed %lu lock.","Removed %lu locks.", diff),
+        PL_("Removed %lu lock.","Removed %lu locks.", diff),
         (long unsigned) diff));
 
     break;

@@ -216,7 +216,7 @@ read_action_ari_with_timeout(PromptId pid, unsigned timeout, int default_action)
 
     string msg = boost::str(
       format(
-        _PL("Autoselecting '%s' after %u second.",
+        PL_("Autoselecting '%s' after %u second.",
             "Autoselecting '%s' after %u seconds.",
             timeout))
       % poptions.options()[default_action] % timeout
