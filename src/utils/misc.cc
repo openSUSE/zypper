@@ -14,7 +14,6 @@
 #include <zypp/base/Easy.h>
 #include <zypp/base/Regex.h>
 #include <zypp/media/MediaManager.h>
-#include <zypp/misc/CheckAccessDeleted.h>
 #include <zypp/ExternalProgram.h>
 #include "zypp/parser/ProductFileReader.h"
 
@@ -27,7 +26,6 @@
 #include "main.h"
 #include "Zypper.h"
 #include "repos.h"
-#include "Table.h"             // for process list in suggest_restart_services
 
 #include "utils/misc.h"
 
@@ -473,82 +471,6 @@ string asXML(const Pattern & p, bool is_installed)
     }
   }
   return str.str();
-}
-
-// ----------------------------------------------------------------------------
-
-void list_processes_using_deleted_files(Zypper & zypper)
-{
-  zypper.out().info(
-      _("Checking for running processes using deleted libraries..."), Out::HIGH);
-  zypp::CheckAccessDeleted checker(false); // wait for explicit call to check()
-  try
-  {
-    checker.check();
-  }
-  catch(const zypp::Exception & e)
-  {
-    zypper.out().error(e, _("Check failed:"));
-    return;
-  }
-
-  Table t;
-  t.allowAbbrev(6);
-  TableHeader th;
-  // process ID
-  th << _("PID");
-  // parent process ID
-  th << _("PPID");
-  // process user ID
-  th << _("UID");
-  // process login name
-  th << _("User");
-  // process command name
-  th << _("Command");
-  // "/etc/init.d/ script that might be used to restart the command (guessed)
-  th << _("Service");
-  // "list of deleted files or libraries accessed"
-  th << _("Files");
-  t << th;
-
-  for_( it, checker.begin(), checker.end() )
-  {
-    TableRow tr;
-    vector<string>::const_iterator fit = it->files.begin();
-    tr << it->pid << it->ppid << it->puid << it->login << it->command
-      << it->service() << (fit != it->files.end() ? *fit : "");
-    t << tr;
-    for (++fit; fit != it->files.end(); ++fit)
-    {
-      TableRow tr1;
-      tr1 << "" << "" << "" << "" << "" << "" << *fit;
-      t << tr1;
-    }
-  }
-
-  if (t.empty())
-  {
-    zypper.out().info(_("No processes using deleted files found."));
-  }
-  else
-  {
-    zypper.out().info(_("The following running processes use deleted files:"));
-    cout << endl;
-    cout << t << endl;
-    zypper.out().info(_("You may wish to restart these processes."));
-    zypper.out().info(str::form(
-        _("See '%s' for information about the meaning of values"
-          " in the above table."),
-        "man zypper"));
-  }
-
-  if ( geteuid() != 0 )
-  {
-    zypper.out().info("");
-    zypper.out().info(_("Note: Not running as root you are limited to searching for files"
-                        " you have permission to examine with the system stat(2) function."
-                        " The result might be incomplete."));
-  }
 }
 
 // ----------------------------------------------------------------------------

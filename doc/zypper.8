@@ -2,12 +2,12 @@
 .\"     Title: zypper
 .\"    Author: [see the "AUTHORS" section]
 .\" Generator: DocBook XSL Stylesheets v1.78.1 <http://docbook.sf.net/>
-.\"      Date: 09/09/2015
+.\"      Date: 09/21/2015
 .\"    Manual: ZYPPER
 .\"    Source: SUSE Linux
 .\"  Language: English
 .\"
-.TH "ZYPPER" "8" "09/09/2015" "SUSE Linux" "ZYPPER"
+.TH "ZYPPER" "8" "09/21/2015" "SUSE Linux" "ZYPPER"
 .\" -----------------------------------------------------------------
 .\" * Define some portability stuff
 .\" -----------------------------------------------------------------
@@ -2722,7 +2722,7 @@ T}
 T{
 \fBService\fR
 T}:T{
-Guessed name of the service\&. If an init script exists for this service, you can do "rcservicename restart" to restart it\&.
+Service name, if command is associated with a system service
 T}
 T{
 \fBFiles\fR
@@ -2731,6 +2731,42 @@ The list of the deleted files
 T}
 .TE
 .sp 1
+.PP
+\fB\-s\fR, \fB\-\-short\fR
+.RS 4
+Create a short table not showing the deleted files\&. Given twice, show only processes which are associated with a system service\&. Given three times, list the associated system service names only\&.
+.RE
+.PP
+\fB\-\-print\fR \fIformat\fR
+.RS 4
+For each associated system service print
+\fIformat\fR
+on the standard output, followed by a newline\&. Any
+\fB%s\fR
+directive in
+\fIformat\fR
+is replaced by the the system service name\&.
+.RE
+.PP
+Examples:
+.RS 4
+.PP
+$ \fBzypper ps \-ss\fR
+.RS 4
+Show only processes associated with a system service\&.
+.RE
+.PP
+$ \fBzypper ps \-sss\fR
+.RS 4
+Short for
+\fBzypper ps \-\-print "%s"\fR; list services which might need a restart\&.
+.RE
+.PP
+$ \fBzypper ps \-\-print "systemctl status %s"\fR
+.RS 4
+Let zypper print the commands to retrieve status information for services which might need a restart\&.
+.RE
+.RE
 .RE
 .SS "Subommands"
 .PP

@@ -57,6 +57,7 @@
 #include "locks.h"
 #include "search.h"
 #include "info.h"
+#include "ps.h"
 #include "download.h"
 #include "source-download.h"
 #include "configtest.h"
@@ -150,6 +151,24 @@ namespace
     /** Conversion to std::string */
     operator std::string() const { return _str.str(); }
 
+    /** Synopsis
+     * \code
+     * "<singleline text_r>"
+     * \endcode
+     */
+    CommandHelpFormater & synopsis( boost::string_ref text_r )
+    { _mww.writePar( text_r ); return *this; }
+
+    /** Description block with leading gap
+     * \code
+     *
+     * "<multiline text_r>"
+     * \endcode
+     */
+    CommandHelpFormater & description( boost::string_ref text_r )
+    { _mww.gotoNextPar(); _mww.writePar( text_r ); return *this; }
+
+
     /** Option section title
      * \code
      * ""
@@ -165,6 +184,9 @@ namespace
 
     CommandHelpFormater & optionSectionExpertOptions()
     { return optionSection(_("Expert options:") ); }
+
+    CommandHelpFormater & noOptionSection()
+    { return optionSection(_("This command has no additional options.") ); }
 
     /** Option definition
      * \code
@@ -2726,19 +2748,29 @@ void Zypper::processCommandOptions()
 
   case ZypperCommand::PS_e:
   {
+    shared_ptr<PsOptions> myOpts( new PsOptions() );
+    _commandOptions = myOpts;
     static struct option options[] =
     {
-      {"help", no_argument, 0, 'h'},
+      {"help",		no_argument,		0, 'h'},
+      {"short",		no_argument,		0, 's'},
+      {"print",		required_argument,	0,  0 },
       {0, 0, 0, 0}
     };
     specific_options = options;
-    _command_help = _(
-      "ps\n"
-      "\n"
-      "List running processes which might use files deleted by recent upgrades.\n"
-      "\n"
-      "This command has no additional options.\n"
-    );
+    _command_help = CommandHelpFormater()
+    .synopsis(	// translators: command synopsis; do not translate the command 'name (abbreviations)' or '-option' names
+      _("ps [options]")
+    )
+    .description(	// translators: command description
+      _("List running processes which might still use files and libraries deleted by recent upgrades.")
+    )
+    .optionSectionCommandOptions()
+    .option( "-s, --short",	// translators: -s, --short
+	     _("Create a short table not showing the deleted files. Given twice, show only processes which are associated with a system service. Given three times, list the associated system service names only.") )
+    .option( "--print <format>",	// translators: --print <format>
+	     _("For each associated system service print <format> on the standard output, followed by a newline. Any '%s' directive in <format> is replaced by the the system service name.") )
+    ;
     break;
   }
 
@@ -5183,8 +5215,19 @@ void Zypper::doCommand()
       return;
     }
 
-    list_processes_using_deleted_files(*this);
+    shared_ptr<PsOptions> myOpts( assertCommandOptions<PsOptions>() );
+    if ( _copts.count( "print" ) )
+    {
+      // implies -sss
+      myOpts->_shortness = 3;
+      myOpts->_format = _copts["print"].back();	// last wins
+    }
+    else if ( _copts.count( "short" ) )
+    {
+      myOpts->_shortness = _copts["short"].size();
+    }
 
+    ps( *this );
     break;
   }
 

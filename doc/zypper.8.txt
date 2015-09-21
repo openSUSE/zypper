@@ -1402,16 +1402,34 @@ Other Commands
 
 *ps*::
 	After each upgrade or removal of packages, there may be running processes on the system which continue to use meanwhile deleted files. *zypper ps* lists all processes using deleted files, together with the corresponding files, and a service name hint, in case it's a known service. This gives a hint which services may need to be restarted after an update. Usually programs which continue to use deleted shared libraries. The list contains the following information:
-
++
+--
 [horizontal]
 	*PID*;;		ID of the process
 	*PPID*;;	ID of the parent process
 	*UID*;;		ID of the user running the process
 	*Login*;;	Login name of the user running the process
 	*Command*;;	Command used to execute the process
-	*Service*;;	Guessed name of the service. If an init script exists for this service, you can do "rcservicename restart" to restart it.
+	*Service*;;	Service name, if command is associated with a system service
 	*Files*;;	The list of the deleted files
 
+	*-s*, *--short*::
+		Create a short table not showing the deleted files. Given twice, show only processes which are associated with a system service. Given three times, list the associated system service names only.
+
+	*--print* 'format'::
+		For each associated system service print 'format' on the standard output, followed by a newline. Any *%s* directive in 'format' is replaced by the the system service name.
+
+	Examples: :: {nop}
+
+		$ *zypper ps -ss*;;
+		Show only processes associated with a system service.
+
+		$ *zypper ps -sss*;;
+		Short for *zypper ps --print "%s"*; list services which might need a restart.
+
+		$ *zypper ps --print "systemctl status %s"* ;;
+		Let zypper print the commands to retrieve status information for services which might need a restart.
+--
 
 Subommands
 ~~~~~~~~~~
