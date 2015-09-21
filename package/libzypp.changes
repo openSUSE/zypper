@@ -1,4 +1,10 @@
 -------------------------------------------------------------------
+Mon Sep 21 16:57:45 CEST 2015 - ma@suse.de
+
+- Dummy (FATE#318827) to make Sles-changelog-checker stop whining.
+- version 15.17.0 (14)
+
+-------------------------------------------------------------------
 Mon Sep 21 16:09:50 CEST 2015 - ma@suse.de
 
 - Glob: fix reserved identifier violation
