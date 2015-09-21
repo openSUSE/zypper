@@ -1,4 +1,10 @@
 -------------------------------------------------------------------
+Mon Sep 21 16:09:50 CEST 2015 - ma@suse.de
+
+- Glob: fix reserved identifier violation
+- version 15.16.2 (14)
+
+-------------------------------------------------------------------
 Tue Sep 15 15:02:45 CEST 2015 - ma@suse.de
 
 - CheckAccessDeleted: Identify services by systemd cgroup (FATE#318827)
