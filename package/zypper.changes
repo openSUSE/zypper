@@ -1,4 +1,13 @@
 -------------------------------------------------------------------
+Mon Sep 21 16:11:44 CEST 2015 - ma@suse.de
+
+- ps: add options --short/--print to retrieve services which may 
+  need to be restarted (FATE#318827)
+- fix reserved identifier violation (fixes #79)
+- BuildRequires:  libzypp-devel >= 15.17.0
+- version 1.12.16
+
+-------------------------------------------------------------------
 Thu Sep 17 01:15:48 CEST 2015 - ma@suse.de
 
 - Update sle-zypper-po.tar.bz2
