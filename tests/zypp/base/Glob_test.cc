@@ -24,11 +24,11 @@ BOOST_AUTO_TEST_CASE(Glob_default)
   BOOST_CHECK_NE( q.begin(), q.end() );
   BOOST_CHECK_EQUAL( *q.begin(), TEST_ROOT/"file" );
 
-  q.reset( Glob::_BRACE );
+  q.reset( Glob::kBrace );
   BOOST_CHECK( q.empty() );
   BOOST_CHECK( q.size() == 0 );
   BOOST_CHECK_EQUAL( q.begin(), q.end() );
-  BOOST_CHECK( q.defaultFlags() == Glob::_BRACE );
+  BOOST_CHECK( q.defaultFlags() == Glob::kBrace );
 
   q.add( TEST_ROOT/"file*" );
   BOOST_CHECK( q.size() == 3 );
@@ -36,13 +36,13 @@ BOOST_AUTO_TEST_CASE(Glob_default)
   q.add( TEST_ROOT/"*{.xml,.xml.gz}" );
   BOOST_CHECK( q.size() == 5 );
 
-  q.clear(); // no flags reset: Glob::_BRACE active
+  q.clear(); // no flags reset: Glob::kBrace active
   BOOST_CHECK( q.size() == 0 );
 
   q.add( TEST_ROOT/"*{.xml,.xml.gz}" );
   BOOST_CHECK( q.size() == 2 );
 
-  q.reset(); // flags reset: Glob::_BRACE off
+  q.reset(); // flags reset: Glob::kBrace off
   BOOST_CHECK( q.size() == 0 );
 
   q.add( TEST_ROOT/"*{.xml,.xml.gz}" );
@@ -52,7 +52,7 @@ BOOST_AUTO_TEST_CASE(Glob_default)
 BOOST_AUTO_TEST_CASE(Glob_static)
 {
   std::set<Pathname> q;
-  Glob::collect( TEST_ROOT/"*{.xml,.xml.gz}", Glob::_BRACE, std::inserter( q, q.begin() ) );
+  Glob::collect( TEST_ROOT/"*{.xml,.xml.gz}", Glob::kBrace, std::inserter( q, q.begin() ) );
   BOOST_REQUIRE( q.size() == 2 );
   BOOST_CHECK_EQUAL( *q.begin(), TEST_ROOT/"file.xml" );
   BOOST_CHECK_EQUAL( *++q.begin(), TEST_ROOT/"file.xml.gz" );

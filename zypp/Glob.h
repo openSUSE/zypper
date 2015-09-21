@@ -41,7 +41,7 @@ namespace zypp
     //
     /** Find pathnames matching a pattern.
      * \code
-     * Glob glob( Glob::_BRACE );
+     * Glob glob( Glob::kBrace );
      * glob.add( "/somewhere/solverTestcase/ *{.xml,.xml.gz}" );
      * glob.add( "/somewhere/else/a*" );
      * for_( it, glob.begin(), glob.end() )
@@ -49,7 +49,7 @@ namespace zypp
      * \endcode
      * \code
      * std::list<Pathname> plist;
-     * Glob::collect( "/somewherre/solverTestcase/ *{.xml,.xml.gz}", Glob::_BRACE,
+     * Glob::collect( "/somewherre/solverTestcase/ *{.xml,.xml.gz}", Glob::kBrace,
      *                std::back_inserter( plist ) );
      * \endcode
      * \see Manual page glob(3)
@@ -93,21 +93,21 @@ namespace zypp
       public:
         /** Individual bits to combine in \ref Flags. */
         enum Bits {
-          _ERR		= GLOB_ERR,		//!< Return on read errors.
-          _MARK		= GLOB_MARK,		//!< Append a slash to each name.
-          _NOSORT	= GLOB_NOSORT,		//!< Don't sort the names.
+          kErr		= GLOB_ERR,		//!< Return on read errors.
+          kMark		= GLOB_MARK,		//!< Append a slash to each name.
+          kNoSort	= GLOB_NOSORT,		//!< Don't sort the names.
           // unsupported _DOOFFS = GLOB_DOOFFS,	//!< Insert PGLOB->gl_offs NULLs.
-          _NOCHECK	= GLOB_NOCHECK,		//!< If nothing matches, return the pattern.
+          kNoCheck	= GLOB_NOCHECK,		//!< If nothing matches, return the pattern.
           // autoapplied _APPEND = GLOB_APPEND,	//!< Append to results of a previous call.
-          _NOESCAPE	= GLOB_NOESCAPE,	//!< Backslashes don't quote metacharacters.
-          _PERIOD	= GLOB_PERIOD,		//!< Leading `.' can be matched by metachars.
+          kNoEscape	= GLOB_NOESCAPE,	//!< Backslashes don't quote metacharacters.
+          kPeriod	= GLOB_PERIOD,		//!< Leading `.' can be matched by metachars.
           // unsupported _MAGCHAR = GLOB_MAGCHAR,//!< Set in gl_flags if any metachars seen.
-          _ALTDIRFUNC	= GLOB_ALTDIRFUNC,	//!< Use gl_opendir et al functions.
-          _BRACE	= GLOB_BRACE,		//!< Expand "{a,b}" to "a" "b".
-          _NOMAGIC	= GLOB_NOMAGIC,		//!< If no magic chars, return the pattern.
-          _TILDE	= GLOB_TILDE,		//!< Expand ~user and ~ to home directories.
-          _ONLYDIR	= GLOB_ONLYDIR,		//!< Match only directories.
-          _TILDE_CHECK	= GLOB_TILDE_CHECK,	//!< Like GLOB_TILDE but return an error if the user name is not available.
+          kAltDirFunc	= GLOB_ALTDIRFUNC,	//!< Use gl_opendir et al functions.
+          kBrace	= GLOB_BRACE,		//!< Expand "{a,b}" to "a" "b".
+          kNoMagic	= GLOB_NOMAGIC,		//!< If no magic chars, return the pattern.
+          kTilde	= GLOB_TILDE,		//!< Expand ~user and ~ to home directories.
+          kOnlyDir	= GLOB_ONLYDIR,		//!< Match only directories.
+          kTildeCheck	= GLOB_TILDE_CHECK,	//!< Like GLOB_TILDE but return an error if the user name is not available.
         };
 
         /** type Flags: Type-safe OR-combination of \ref Bits. */

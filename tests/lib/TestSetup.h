@@ -252,7 +252,7 @@ class TestSetup
       }
 
       //
-      filesystem::Glob files( path_r/"*{.xml,.xml.gz}", filesystem::Glob::_BRACE );
+      filesystem::Glob files( path_r/"*{.xml,.xml.gz}", filesystem::Glob::kBrace );
       for_( it, files.begin(), files.end() )
       {
         std::string basename( Pathname::basename( *it ) );
