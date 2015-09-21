@@ -34,7 +34,7 @@ enum tags {
   UNKNOWN
 };
 
-std::map<string,tags> _RTtagmap;
+std::map<string,tags> _rtTagmap;
 
 bool pre;
 bool ordered;
@@ -42,32 +42,32 @@ unsigned count_list_items;
 
 void fillTagmap()
 {
-  _RTtagmap["p"] = PARAGRAPH;
-  _RTtagmap["a"] = ANCHOR;
-  _RTtagmap["b"] = BOLD;
-  _RTtagmap["u"] = UNDERLINED;
-  _RTtagmap["i"] = ITALIC;
-  _RTtagmap["br"] = BREAK_LINE;
-  _RTtagmap["em"] = EM;
-  _RTtagmap["h1"] = HEADER1;
-  _RTtagmap["h2"] = HEADER2;
-  _RTtagmap["h3"] = HEADER3;
-  _RTtagmap["hr"] = HR;
-  _RTtagmap["li"] = LI;
-  _RTtagmap["ol"] = OL;
-  _RTtagmap["ul"] = UL;
-  _RTtagmap["qt"] = QT;
-  _RTtagmap["tt"] = TT;
-  _RTtagmap["big"] = BIG;
-  _RTtagmap["pre"] = PRE;
-  _RTtagmap["bold"] = BOLD;
-  _RTtagmap["code"] = CODE;
-  _RTtagmap["font"] = UNKNOWN; //not parsed in parser
-  _RTtagmap["large"] = UNKNOWN; //same as ncurses
-  _RTtagmap["small"] = UNKNOWN; // same as necurses
-  _RTtagmap["center"] = CENTER;
-  _RTtagmap["strong"] = BOLD; // same as necurses
-  _RTtagmap["blockquote"] = BLOCKQUOTE; // same as necurses
+  _rtTagmap["p"] = PARAGRAPH;
+  _rtTagmap["a"] = ANCHOR;
+  _rtTagmap["b"] = BOLD;
+  _rtTagmap["u"] = UNDERLINED;
+  _rtTagmap["i"] = ITALIC;
+  _rtTagmap["br"] = BREAK_LINE;
+  _rtTagmap["em"] = EM;
+  _rtTagmap["h1"] = HEADER1;
+  _rtTagmap["h2"] = HEADER2;
+  _rtTagmap["h3"] = HEADER3;
+  _rtTagmap["hr"] = HR;
+  _rtTagmap["li"] = LI;
+  _rtTagmap["ol"] = OL;
+  _rtTagmap["ul"] = UL;
+  _rtTagmap["qt"] = QT;
+  _rtTagmap["tt"] = TT;
+  _rtTagmap["big"] = BIG;
+  _rtTagmap["pre"] = PRE;
+  _rtTagmap["bold"] = BOLD;
+  _rtTagmap["code"] = CODE;
+  _rtTagmap["font"] = UNKNOWN; //not parsed in parser
+  _rtTagmap["large"] = UNKNOWN; //same as ncurses
+  _rtTagmap["small"] = UNKNOWN; // same as necurses
+  _rtTagmap["center"] = CENTER;
+  _rtTagmap["strong"] = BOLD; // same as necurses
+  _rtTagmap["blockquote"] = BLOCKQUOTE; // same as necurses
 
 }
 
@@ -96,9 +96,9 @@ string closeTag(vector<tags>& tagStack)
 string openTag(vector<tags>& tagStack, string& tag)
 {
   tag = zypp::str::trim(tag);
-  std::map<string,tags>::const_iterator it = _RTtagmap.find(tag);
+  std::map<string,tags>::const_iterator it = _rtTagmap.find(tag);
   tags t;
-  if (it == _RTtagmap.end())
+  if (it == _rtTagmap.end())
   {
     if (tag.size()>3 && tag[0]=='!' && tag[1]=='-' && tag[2]=='-')
       return ""; //comment
@@ -190,7 +190,7 @@ string getStringFromAmpr(const string& str)
 
 std::string processRichText(const std::string& text)
 {
-  if (_RTtagmap.empty())
+  if (_rtTagmap.empty())
     fillTagmap();
   //state machine vars
   pre = false;
