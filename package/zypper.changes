@@ -1,4 +1,9 @@
 -------------------------------------------------------------------
+Thu Sep 24 01:13:32 CEST 2015 - ma@suse.de
+
+- Update zypper-po.tar.bz2
+
+-------------------------------------------------------------------
 Mon Sep 21 16:11:44 CEST 2015 - ma@suse.de
 
 - ps: add options --short/--print to retrieve services which may 
