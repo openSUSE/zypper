@@ -520,6 +520,7 @@ namespace zypp
     void buildCache( const RepoInfo & info, CacheBuildPolicy policy, OPT_PROGRESS );
 
     repo::RepoType probe( const Url & url, const Pathname & path = Pathname() ) const;
+    repo::RepoType probeCache( const Pathname & path_r ) const;
 
     void cleanCacheDirGarbage( OPT_PROGRESS );
 
@@ -812,7 +813,7 @@ namespace zypp
     RepoType repokind = info.type();
     // If unknown, probe the local metadata
     if ( repokind == RepoType::NONE )
-      repokind = probe( productdatapath.asUrl() );
+      repokind = probeCache( productdatapath );
 
     RepoStatus status;
     switch ( repokind.toEnum() )
@@ -846,7 +847,7 @@ namespace zypp
     RepoType repokind = info.type();
     if ( repokind.toEnum() == RepoType::NONE_e )
       // unknown, probe the local metadata
-      repokind = probe( productdatapath.asUrl() );
+      repokind = probeCache( productdatapath );
     // if still unknown, just return
     if (repokind == RepoType::NONE_e)
       return;
@@ -1241,7 +1242,7 @@ namespace zypp
     {
       case RepoType::NONE_e:
         // unknown, probe the local metadata
-        repokind = probe( productdatapath.asUrl() );
+        repokind = probeCache( productdatapath );
       break;
       default:
       break;
@@ -1314,6 +1315,13 @@ namespace zypp
 
   ////////////////////////////////////////////////////////////////////////////
 
+
+  /** Probe the metadata type of a repository located at \c url.
+   * Urls here may be rewritten by \ref MediaSetAccess to reflect the correct media number.
+   *
+   * \note Metadata in local cache directories must be probed using \ref probeCache as
+   * a cache path must not be rewritten (bnc#946129)
+   */
   repo::RepoType RepoManager::Impl::probe( const Url & url, const Pathname & path  ) const
   {
     MIL << "going to probe the repo type at " << url << " (" << path << ")" << endl;
@@ -1396,6 +1404,28 @@ namespace zypp
 
     MIL << "Probed type NONE at " << url << " (" << path << ")" << endl;
     return repo::RepoType::NONE;
+  }
+
+  /** Probe Metadata in a local cache directory
+   *
+   * \note Metadata in local cache directories must not be probed using \ref probe as
+   * a cache path must not be rewritten (bnc#946129)
+   */
+  repo::RepoType RepoManager::Impl::probeCache( const Pathname & path_r ) const
+  {
+    MIL << "going to probe the cached repo at " << path_r << endl;
+
+    repo::RepoType ret = repo::RepoType::NONE;
+
+    if ( PathInfo(path_r/"/repodata/repomd.xml").isFile() )
+    { ret = repo::RepoType::RPMMD; }
+    else if ( PathInfo(path_r/"/content").isFile() )
+    { ret = repo::RepoType::YAST2; }
+    else if ( PathInfo(path_r).isDir() )
+    { ret = repo::RepoType::RPMPLAINDIR; }
+
+    MIL << "Probed cached type " << ret << " at " << path_r << endl;
+    return ret;
   }
 
   ////////////////////////////////////////////////////////////////////////////
