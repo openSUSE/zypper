@@ -464,7 +464,7 @@ static void notify_processes_using_deleted_files(Zypper & zypper)
     zypper.out().info(str::form(
         _("There are some running programs that might use files deleted by recent upgrade."
           " You may wish to check and restart some of them. Run '%s' to list these programs."),
-        "zypper ps"));
+        "zypper ps -s"));
   }
 }
 
