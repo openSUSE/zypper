@@ -1,4 +1,14 @@
 -------------------------------------------------------------------
+Thu Sep 24 15:11:01 CEST 2015 - ma@suse.de
+
+- zypper.conf: new option commit/psCheckAccessDeleted to avoid 'lsof'
+  call after commit. On some systems 'lsof' seems to perform very
+  slow, and the check takes up to several minutes. Due to this it's
+  possible to disable the automatic check after each commit. Explicit
+  calls to 'zypper ps' are not affected by this option. (bsc#945169)
+- version 1.11.37
+
+-------------------------------------------------------------------
 Thu Sep 17 01:16:20 CEST 2015 - ma@suse.de
 
 - Update sle-zypper-po.tar.bz2
