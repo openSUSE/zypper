@@ -100,6 +100,8 @@ namespace
     SOLVER_INSTALL_RECOMMENDS,
     SOLVER_FORCE_RESOLUTION_COMMANDS,
 
+    COMMIT_PS_CHECK_ACCESS_DELETED,
+
     COLOR_USE_COLORS,
     COLOR_RESULT,
     COLOR_MSG_STATUS,
@@ -128,6 +130,8 @@ namespace
       { "main/repoListColumns",			ConfigOption::MAIN_REPO_LIST_COLUMNS		},
       { "solver/installRecommends",		ConfigOption::SOLVER_INSTALL_RECOMMENDS		},
       { "solver/forceResolutionCommands",	ConfigOption::SOLVER_FORCE_RESOLUTION_COMMANDS	},
+
+      { "commit/psCheckAccessDeleted",		ConfigOption::COMMIT_PS_CHECK_ACCESS_DELETED	},
 
       { "color/useColors",			ConfigOption::COLOR_USE_COLORS			},
       //"color/background"			LEGACY
@@ -169,6 +173,7 @@ namespace
 Config::Config()
   : repo_list_columns("anr")
   , solver_installRecommends(!ZConfig::instance().solver_onlyRequires())
+  , psCheckAccessDeleted(true)
   , do_colors		(false)
   , color_useColors	("autodetect")
   , color_result	(namedColor("default"))
@@ -232,6 +237,11 @@ void Config::read( const std::string & file )
         solver_forceResolutionCommands.insert(ZypperCommand(str::trim(*c)));
     }
 
+    // ---------------[ commit ]------------------------------------------------
+
+    s = augeas.getOption(asString( ConfigOption::COMMIT_PS_CHECK_ACCESS_DELETED ));
+    if ( ! s.empty() )
+      psCheckAccessDeleted = str::strToBool( s, psCheckAccessDeleted );
 
     // ---------------[ colors ]------------------------------------------------
 

@@ -33,6 +33,8 @@ struct Config
   bool solver_installRecommends;
   std::set<ZypperCommand> solver_forceResolutionCommands;
 
+  bool psCheckAccessDeleted;	///< do post commit 'zypper ps' check?
+
   /**
    * Whether to colorize the output. This is evaluated according to
    * color_useColors and has_colors()

@@ -445,6 +445,13 @@ ZYppCommitPolicy get_commit_policy(Zypper & zypper)
  */
 static void notify_processes_using_deleted_files(Zypper & zypper)
 {
+  if ( ! zypper.config().psCheckAccessDeleted )
+  {
+    zypper.out().info( str::form(_("Check for running processes using deleted libraries is disabled in zypper.conf. Run '%s' to check manually."),
+				 "zypper ps -s" ) );
+    return;	// disabled in config
+  }
+
   zypper.out().info(
       _("Checking for running processes using deleted libraries..."), Out::HIGH);
   zypp::CheckAccessDeleted checker(false); // wait for explicit call to check()
