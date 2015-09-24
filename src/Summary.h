@@ -88,9 +88,13 @@ public:
 
   unsigned packagesToGetAndInstall() const
   { return _inst_pkg_total; }
-  unsigned packagesToRemove() const;
+
+  unsigned packagesToInstall() const;
   unsigned packagesToUpgrade() const;
   unsigned packagesToDowngrade() const;
+  unsigned packagesToReInstall() const;
+  unsigned packagesToRemove() const;
+
   const zypp::ByteCount & toDownload() const
   { return _todownload; }
   const zypp::ByteCount & inCache() const

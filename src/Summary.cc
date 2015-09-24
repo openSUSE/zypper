@@ -330,39 +330,22 @@ void Summary::readPool(const zypp::ResPool & pool)
 
 // --------------------------------------------------------------------------
 
-unsigned Summary::packagesToRemove() const
+namespace
 {
-  // total packages to remove (packages only - patches, patterns, and products
-  // are virtual; srcpackages do not get removed by zypper)
-  KindToResPairSet::const_iterator it = _toremove.find(ResKind::package);
-  if (it != _toremove.end())
-    return it->second.size();
-  return 0;
-}
+  inline unsigned numberOfPackagesIn( const Summary::KindToResPairSet & map_r )
+  {
+    // packages only - patches, patterns, and products
+    // are virtual; srcpackages do not get removed
+    auto it = map_r.find( ResKind::package );
+    return( it == map_r.end() ? 0 : it->second.size() );
+  }
+} // namespace
 
-// --------------------------------------------------------------------------
-
-unsigned Summary::packagesToUpgrade() const
-{
-  // total packages to remove (packages only - patches, patterns, and products
-  // are virtual; srcpackages do not get removed by zypper)
-  KindToResPairSet::const_iterator it = _toupgrade.find(ResKind::package);
-  if (it != _toupgrade.end())
-    return it->second.size();
-  return 0;
-}
-
-// --------------------------------------------------------------------------
-
-unsigned Summary::packagesToDowngrade() const
-{
-  // total packages to remove (packages only - patches, patterns, and products
-  // are virtual; srcpackages do not get removed by zypper)
-  KindToResPairSet::const_iterator it = _todowngrade.find(ResKind::package);
-  if (it != _todowngrade.end())
-    return it->second.size();
-  return 0;
-}
+unsigned Summary::packagesToInstall()	const	{ return numberOfPackagesIn( _toinstall ); }
+unsigned Summary::packagesToUpgrade()	const	{ return numberOfPackagesIn( _toupgrade ); }
+unsigned Summary::packagesToDowngrade()	const	{ return numberOfPackagesIn( _todowngrade ); }
+unsigned Summary::packagesToReInstall()	const	{ return numberOfPackagesIn( _toreinstall ); }
+unsigned Summary::packagesToRemove()	const	{ return numberOfPackagesIn( _toremove ); }
 
 // --------------------------------------------------------------------------
 ///////////////////////////////////////////////////////////////////
