@@ -437,7 +437,7 @@ private:
 class ExitRequestException : public zypp::Exception
 {
 public:
-  ExitRequestException(const std::string & msg = "") : zypp::Exception(msg) {}
+  ExitRequestException(const std::string & msg ) : zypp::Exception(msg) {}
 };
 
 #endif /*ZYPPER_H*/

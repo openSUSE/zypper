@@ -916,8 +916,7 @@ void init_target (Zypper & zypper)
       );
 
       zypper.setExitCode(ZYPPER_EXIT_ERR_ZYPP);
-      throw ExitRequestException(
-        "Target initialization failed: " + e.msg());
+      ZYPP_THROW( ExitRequestException("Target initialization failed: " + e.msg()) );
     }
 
     done = true;

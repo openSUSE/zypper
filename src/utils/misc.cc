@@ -590,7 +590,7 @@ DownloadMode get_download_option(Zypper & zypper, bool quiet)
     zypper.out().info(str::form(_("Available download modes: %s"),
           "only, in-advance, in-heaps, as-needed"));
     zypper.setExitCode(ZYPPER_EXIT_ERR_INVALID_ARGS);
-    throw ExitRequestException("Unknown download mode");
+    ZYPP_THROW( ExitRequestException("Unknown download mode") );
   }
 
   // warn about the override, both were specified

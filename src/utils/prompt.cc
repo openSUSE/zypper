@@ -356,7 +356,8 @@ unsigned int get_prompt_reply(Zypper & zypper,
 "If you run zypper without a terminal, use '%s' global\n"
 "option to make zypper use default answers to prompts."
         ), "--non-interactive"));
-    throw ExitRequestException("Cannot read input. Bad stream or EOF.");
+    zypper.setExitCode(ZYPPER_EXIT_ERR_ZYPP);
+    ZYPP_THROW( ExitRequestException("Cannot read input. Bad stream or EOF.") );
   }
 
   if (reply.empty())
