@@ -1,4 +1,11 @@
 -------------------------------------------------------------------
+Fri Sep 25 11:42:28 CEST 2015 - ma@suse.de
+
+- Pattern: support dynamic computation of pattern visibility (bsc#900769)
+- Avoid URL rewrite if probing local cache directories (bsc#946129)
+- version 15.17.1 (14)
+
+-------------------------------------------------------------------
 Mon Sep 21 16:57:45 CEST 2015 - ma@suse.de
 
 - Dummy (FATE#318827) to make Sles-changelog-checker stop whining.
