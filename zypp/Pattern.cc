@@ -181,7 +181,13 @@ namespace zypp
   { return lookupBoolAttribute( sat::SolvAttr::isdefault ); }
 
   bool Pattern::userVisible() const
-  { return lookupBoolAttribute( sat::SolvAttr::isvisible ); }
+  {
+    // bsc#900769: If visibility is a string(solvable ident) the pattern
+    // is visible IFF ident is available in the pool.
+    IdString ident( lookupStrAttribute( sat::SolvAttr::isvisible ) );
+    return( ident.empty() ? lookupBoolAttribute( sat::SolvAttr::isvisible )
+			  : ! ResPool::instance().byIdent( ident ).empty() );
+  }
 
   std::string Pattern::category( const Locale & lang_r ) const
   { return lookupStrAttribute( sat::SolvAttr::category, lang_r ); }
