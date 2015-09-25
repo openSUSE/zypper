@@ -367,7 +367,10 @@ static bool dist_upgrade(Zypper & zypper)
   report_unknown_repos(zypper.out(), not_found);
 
   if (!not_found.empty())
-    throw ExitRequestException("Some of specified repositories were not found.");
+  {
+    zypper.setExitCode(ZYPPER_EXIT_ERR_INVALID_ARGS);
+    ZYPP_THROW( ExitRequestException("Some of specified repositories were not found.") );
+  }
 
   if ( ! specified.empty() )
   {
@@ -571,7 +574,7 @@ void solve_and_commit (Zypper & zypper)
     if (zypper.cOpts().count("debug-solver"))
     {
       make_solver_test_case(zypper);
-      return;
+      return;	// ZYPPER_EXIT_OK
     }
 
     MIL << "got solution, showing summary" << endl;
@@ -644,7 +647,6 @@ void solve_and_commit (Zypper & zypper)
         (summary.packagesToGetAndInstall() &&
           zypper.command() == ZypperCommand::REMOVE);
 
-      bool do_commit = false;
       PromptOptions popts;
       // translators: These are the "Continue?" prompt options corresponding to
       // "Yes / No / show Problems / Versions / Arch / Repository /
@@ -683,6 +685,7 @@ void solve_and_commit (Zypper & zypper)
 
       string prompt_text = _("Continue?");
 
+      bool do_commit = false;
       unsigned int reply;
       do
       {
@@ -755,12 +758,20 @@ void solve_and_commit (Zypper & zypper)
       if (need_another_solver_run)
         continue;
 
-      // COMMIT
-
-      if (do_commit)
+      if ( ! do_commit )
       {
+	zypper.setExitCode(ZYPPER_EXIT_ERR_ZYPP);
+	return;
+      }
+      else
+      {
+	// COMMIT
+
         if (!confirm_licenses(zypper))
+	{
+	  zypper.setExitCode(ZYPPER_EXIT_ERR_ZYPP);
           return;
+	}
 
         try
         {

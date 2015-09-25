@@ -248,7 +248,7 @@ void PackageArgs::argsToCaps(const zypp::ResKind & kind)
       zypper.out().error(str::form(
           _("'%s' is not a package name or capability."), arg.c_str()));
       zypper.setExitCode(ZYPPER_EXIT_ERR_INVALID_ARGS);
-      ZYPP_THROW(ExitRequestException());
+      ZYPP_THROW(ExitRequestException("cli option given after args"));
     }
 
     MIL << "got " << (dont?"un":"") << "wanted '" << parsedcap << "'";

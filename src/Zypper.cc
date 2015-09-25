@@ -858,7 +858,7 @@ void Zypper::processGlobalOptions()
     {
       out().error(
         _("The path specified in the --root option must be absolute."));
-      _exit_code = ZYPPER_EXIT_ERR_INVALID_ARGS;
+      setExitCode( ZYPPER_EXIT_ERR_INVALID_ARGS );
       return;
     }
 
@@ -1197,13 +1197,13 @@ void Zypper::safeDoCommand()
   catch (const AbortRequestException & ex)
   {
     ZYPP_CAUGHT(ex);
-
     // << _("User requested to abort.") << endl;
     out().error(ex.asUserString());
   }
   catch (const ExitRequestException & e)
   {
-    MIL << "Caught exit request:" << endl << e.msg() << endl;
+    ZYPP_CAUGHT(e);
+    MIL << "Caught exit request: exitCode " << exitCode() << endl;
   }
   catch (const Exception & ex)
   {
@@ -3151,7 +3151,7 @@ void Zypper::doCommand()
 	  out().error(excpt_r.asString());
 
 	  setExitCode(ZYPPER_EXIT_ZYPP_LOCKED);
-	  throw (ExitRequestException("ZYpp locked"));
+	  ZYPP_THROW( ExitRequestException("ZYpp locked") );
 	}
 	else
 	{
@@ -3164,7 +3164,7 @@ void Zypper::doCommand()
 	    out().error(e.asString());
 
 	    setExitCode(ZYPPER_EXIT_ZYPP_LOCKED);
-	    throw (ExitRequestException("ZYpp locked"));
+	    ZYPP_THROW( ExitRequestException("ZYpp locked") );
 	  }
 	}
       }
@@ -3173,7 +3173,7 @@ void Zypper::doCommand()
 	ZYPP_CAUGHT (excpt_r);
 	out().error(excpt_r.msg());
 	setExitCode(ZYPPER_EXIT_ERR_ZYPP);
-	throw (ExitRequestException("ZYpp error, cannot get ZYpp lock"));
+	ZYPP_THROW( ExitRequestException("ZYpp error, cannot get ZYpp lock") );
       }
   }
   // === execute command ===
@@ -3912,7 +3912,7 @@ void Zypper::doCommand()
             "Patches are not installed in sense of copied files, database records,\n"
             "or similar."));
       setExitCode(ZYPPER_EXIT_ERR_INVALID_ARGS);
-      throw ExitRequestException("not implemented");
+      ZYPP_THROW( ExitRequestException("not implemented") );
     }
 
      // can't remove source package
@@ -3921,7 +3921,7 @@ void Zypper::doCommand()
       out().error(
           _("Uninstallation of a source package not defined and implemented."));
       setExitCode(ZYPPER_EXIT_ERR_INVALID_ARGS);
-      throw ExitRequestException("not implemented");
+      ZYPP_THROW( ExitRequestException("not implemented") );
     }
 
     // parse the download options to check for errors
@@ -4075,7 +4075,7 @@ void Zypper::doCommand()
       out().error(str::form(_("%s contradicts %s"),
           "--capability", (sropts.force ? "--force" : "--name")));
       setExitCode(ZYPPER_EXIT_ERR_INVALID_ARGS);
-      ZYPP_THROW(ExitRequestException());
+      ZYPP_THROW(ExitRequestException("invalid args"));
     }
 
     if (install_not_remove && sropts.force_by_cap && sropts.force)
@@ -4084,7 +4084,7 @@ void Zypper::doCommand()
       out().error(str::form(_("%s cannot currently be used with %s"),
           "--force", "--capability"));
       setExitCode(ZYPPER_EXIT_ERR_INVALID_ARGS);
-      ZYPP_THROW(ExitRequestException());
+      ZYPP_THROW(ExitRequestException("invalid args"));
     }
 
     if (install_not_remove && (optit = copts.find("from")) != copts.end())
@@ -4106,7 +4106,7 @@ void Zypper::doCommand()
     {
       setExitCode(ZYPPER_EXIT_INF_CAP_NOT_FOUND);
       if (globalOpts().non_interactive)
-        ZYPP_THROW(ExitRequestException());
+        ZYPP_THROW(ExitRequestException("name or capability not found"));
     }
 
     // give user feedback from package selection
@@ -4839,7 +4839,7 @@ void Zypper::doCommand()
       {
         setExitCode(ZYPPER_EXIT_INF_CAP_NOT_FOUND);
         if (globalOpts().non_interactive)
-          ZYPP_THROW(ExitRequestException());
+          ZYPP_THROW(ExitRequestException("name or capability not found"));
       }
     }
 
