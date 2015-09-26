@@ -1,4 +1,9 @@
 -------------------------------------------------------------------
+Sun Sep 27 01:13:37 CEST 2015 - ma@suse.de
+
+- Update zypper-po.tar.bz2
+
+-------------------------------------------------------------------
 Thu Sep 24 16:01:05 CEST 2015 - ma@suse.de
 
 - zypper.conf: new option commit/psCheckAccessDeleted to avoid 'lsof'
