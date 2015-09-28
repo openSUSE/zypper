@@ -80,21 +80,16 @@ namespace zypp
 	bool changed = ( new_r != _current );
 	if ( changed )
 	{
-	  setInitial();	// clear added/removed
-	  if ( new_r.empty() )
-	  {
-	    _removed.swap( _current );
-	  }
-	  else if ( _current.empty() )
-	  {
-	    _added.swap( _current );
-	  }
-	  else
-	  {
-	    setDifference( new_r, _current, _added );
-	    setDifference( _current, new_r, _removed );
-	    _current = std::move(new_r);
-	  }
+	  // build the initial (cur-add+rem) set in _current
+	  setDifference( _current, _added, _removed );
+	  _current.swap( _removed );
+	  _added.clear();
+	  _removed.clear();
+
+	  const set_type & initial( _current );
+	  setDifference( initial, new_r, _removed );
+	  setDifference( new_r, initial, _added );
+	  _current.swap( new_r );
 	}
 	return changed;
       }
@@ -107,8 +102,8 @@ namespace zypp
 	bool done = _current.insert( val_r ).second;
 	if ( done )
 	{
-	  _added.insert( val_r );
-	  _removed.erase( val_r );
+	  if ( ! _removed.erase( val_r ) )
+	    _added.insert( val_r );
 	}
 	return done;
       }
@@ -121,8 +116,8 @@ namespace zypp
 	bool done = _current.erase( val_r );
 	if ( done )
 	{
-	  _added.erase( val_r );
-	  _removed.insert( val_r );
+	  if ( ! _added.erase( val_r ) )
+	    _removed.insert( val_r );
 	}
 	return done;
       }
@@ -163,6 +158,7 @@ namespace zypp
       //@}
 
     private:
+
       static bool find( const set_type & set_r, const key_type & key_r )
       { return set_r.find( key_r ) != set_r.end(); }
 

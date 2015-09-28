@@ -39,6 +39,7 @@ ADD_TESTS(
   ResStatus
   Selectable
   SetRelationMixin
+  SetTracker
   StrMatcher
   Target
   Url
