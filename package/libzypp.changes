@@ -1,4 +1,10 @@
 -------------------------------------------------------------------
+Mon Sep 28 12:19:26 CEST 2015 - ma@suse.de
+
+- SetTracker: fix computation of change sets (bsc#946898)
+- version 15.17.2 (14)
+
+-------------------------------------------------------------------
 Fri Sep 25 11:42:28 CEST 2015 - ma@suse.de
 
 - Pattern: support dynamic computation of pattern visibility (bsc#900769)
