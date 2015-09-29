@@ -1,4 +1,13 @@
 -------------------------------------------------------------------
+Tue Sep 29 17:51:48 CEST 2015 - ma@suse.de
+
+- solver verify: multiversion property needs to be assigned to
+  installed items too.
+- ZYppCommitResult: add attemptToModify to indicate an attempt to
+  actually install/remove was made (bsc#946750, FATE#319467)
+- version 15.18.0 (14)
+
+-------------------------------------------------------------------
 Mon Sep 28 12:19:26 CEST 2015 - ma@suse.de
 
 - SetTracker: fix computation of change sets (bsc#946898)
@@ -91,8 +100,8 @@ Sun Aug 16 01:13:23 CEST 2015 - ma@suse.de
 -------------------------------------------------------------------
 Thu Aug 13 18:16:52 CEST 2015 - ma@suse.de
 
-- Support caching of service metadata. A TTL for the service 
-  metadata may be provided in the repoindex.xml itself. The 
+- Support caching of service metadata. A TTL for the service
+  metadata may be provided in the repoindex.xml itself. The
   default is 'no caching'. (FATE#318136)
 - Fix setting dup_allow* solver options (bnc#941463)
 - Don't make zypper encode {} around repo vars (bnc#941453)
@@ -108,7 +117,7 @@ Tue Aug 11 18:48:57 CEST 2015 - ma@suse.de
 
 - History: Add 'command' tag showing who triggered the commit.
   The corresponding HistoryLogData class for parsing is
-  HistoryLogDataStampCommand. Available data are the commandline 
+  HistoryLogDataStampCommand. Available data are the commandline
   executed, user@hostname and userdata/transactionID. (FATE#312298)
 - Add convenience comparison PoolItem<>ResObject::constPtr
 - Fixes for SWIG 2.x
@@ -135,7 +144,7 @@ Sun Aug  2 01:13:27 CEST 2015 - ma@suse.de
 -------------------------------------------------------------------
 Thu Jul 30 16:13:49 CEST 2015 - ma@suse.de
 
-- Resolver: Track changed requested locales and adjust installed 
+- Resolver: Track changed requested locales and adjust installed
   packages accordingly. (part of FATE#318099)
 - Testcase: Store autoinstalled packages
 - Locale: Make it IdString based
@@ -233,7 +242,7 @@ Thu Jun  4 01:13:22 CEST 2015 - ma@suse.de
 Wed Jun  3 13:00:59 CEST 2015 - ma@suse.de
 
 - Enhance solv.idx file handling to support zypper bash completion
-- Fix SSL client certificate authentication via URL option 
+- Fix SSL client certificate authentication via URL option
   ssl_clientcert/ssl_clientkey (bnc#932393)
 - version 15.4.0 (3)
 
@@ -258,15 +267,15 @@ Sun May 24 01:13:19 CEST 2015 - ma@suse.de
 -------------------------------------------------------------------
 Mon May 18 10:46:10 CEST 2015 - ma@suse.de
 
-- zypp.conf: Add config values for gpgcheck, repo_gpgcheck 
+- zypp.conf: Add config values for gpgcheck, repo_gpgcheck
   and pkg_gpgcheck. The default behavior 'gpgcheck=On' will
-  automatically turn on the gpg signature check for packages 
+  automatically turn on the gpg signature check for packages
   downloaded from repository with unsigned metadata. If the
   repo metadata are signed, a faster comparison via checksums
   is done. By explicitly setting repo_gpgcheck or pkg_gpgcheck
   you can enforce the signature check of repository metadata
-  or downloaded packages to be always performed. Those defaults 
-  can be overwritten per repository. (FATE#314603) 
+  or downloaded packages to be always performed. Those defaults
+  can be overwritten per repository. (FATE#314603)
 - version 15.2.0 (2)
 
 -------------------------------------------------------------------
@@ -297,7 +306,7 @@ Thu Apr 23 01:13:15 CEST 2015 - ma@suse.de
 -------------------------------------------------------------------
 Wed Apr 22 10:50:00 CEST 2015 - ma@suse.de
 
-- ZYpp: Changed ZYpp::Ptr to be a shared_ptr; 
+- ZYpp: Changed ZYpp::Ptr to be a shared_ptr;
   a precondition for fixing bnc-899755
 - rpmmd: support 'metalink=' in .repo (for zypper#63)
 - RepoMirrorList: ignore comments and malformed urls in mirrorlist
@@ -336,13 +345,13 @@ Mon Mar 16 14:05:28 CET 2015 - ma@suse.de
 -------------------------------------------------------------------
 Wed Mar 11 09:22:46 CET 2015 - ma@suse.de
 
-- New RepoVarExpand: Functor expanding repo variables in a 
+- New RepoVarExpand: Functor expanding repo variables in a
   string . Supports bash style default ${v:-w}' and alternate ${v:+w}
   values (FATE#318354)
 - Easy.h: Use __typeof__ rather than typeof in header
 - Support repo variable replacement in service url
 - Support repo variable replacement in gpg url
-- Gettext.h: Fallback to ::gettext if accidentally included 
+- Gettext.h: Fallback to ::gettext if accidentally included
   outside libzypp
 - version 14.37.0 (30)
 
@@ -369,10 +378,10 @@ Thu Feb 12 01:13:34 CET 2015 - ma@suse.de
 -------------------------------------------------------------------
 Mon Feb  9 16:05:38 CET 2015 - ma@suse.de
 
-- Don't execute scripts in /tmp or /var/tmp, as they could be 
+- Don't execute scripts in /tmp or /var/tmp, as they could be
   mounted noexec for security reasons (bnc#915928)
 - zypp/PublicKey.cc: Use GPG_BINARY from KeyRing
-- Support $releasever_major/$releasever_minor repo variables 
+- Support $releasever_major/$releasever_minor repo variables
   (FATE#318354)
 - version 14.36.0 (30)
 
@@ -422,7 +431,7 @@ Thu Jan 15 01:13:12 CET 2015 - ma@suse.de
 Mon Jan 12 15:04:17 CET 2015 - ma@suse.de
 
 - Properly propagate repo variables in service refresh.
-- Let $ZYPP_REPO_RELEASEVER overwrite $releasever in .repo files 
+- Let $ZYPP_REPO_RELEASEVER overwrite $releasever in .repo files
   (bnc#911658)
 - Call pool_set_rootdir to properly check for file conflicts.
 - Use xgettext --boost to support boost-format (%N%)
