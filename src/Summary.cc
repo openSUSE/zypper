@@ -672,7 +672,7 @@ void Summary::writeReinstalled(ostream & out)
       // if the package updates. Technically every app-package update
       // is an 'application reinstall', because the providing package
       // changes.
-      return;
+      continue;
       label = PL_(
         "The following application is going to be reinstalled:",
         "The following %d applications are going to be reinstalled:",
