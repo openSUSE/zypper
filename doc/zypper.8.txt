@@ -1644,6 +1644,8 @@ There are several exit codes defined for zypper built-in commands for use e.g. w
 	No repositories are defined.
 *7* - *ZYPPER_EXIT_ZYPP_LOCKED*::
 	The ZYPP library is locked, e.g. packagekit is running.
+*8* - *ZYPPER_EXIT_ERR_COMMIT*::
+	An error occurred during installation or removal of packages. You may run *zypper verify* to repair any dependency problems.
 *100* - *ZYPPER_EXIT_INF_UPDATE_NEEDED*::
 	Returned by the patch-check command if there are patches available for installation.
 *101* - *ZYPPER_EXIT_INF_SEC_UPDATE_NEEDED*::

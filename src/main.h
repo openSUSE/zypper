@@ -15,6 +15,7 @@
 #define ZYPPER_EXIT_ERR_PRIVILEGES         5 // unsufficient privileges for the operation
 #define ZYPPER_EXIT_NO_REPOS               6 // no repositories defined
 #define ZYPPER_EXIT_ZYPP_LOCKED            7 // libzypp is locked, e.g. packagekit is running 
+#define ZYPPER_EXIT_ERR_COMMIT             8 // an error occurred during commit.
 
 // info
 #define ZYPPER_EXIT_INF_UPDATE_NEEDED      100 // update needed
