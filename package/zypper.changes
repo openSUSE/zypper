@@ -1,4 +1,14 @@
 -------------------------------------------------------------------
+Tue Sep 29 18:51:22 CEST 2015 - ma@suse.de
+
+- Return ZYPPER_EXIT_ERR_COMMIT if an error occurred during commit
+  (bsc#946750, FATE#319467)
+- Do not return 0 if a commit was not performed (bsc#946750,
+  FATE#319467)
+- BuildRequires:  libzypp-devel >= 14.42.0
+- version 1.11.38
+
+-------------------------------------------------------------------
 Thu Sep 24 15:11:01 CEST 2015 - ma@suse.de
 
 - zypper.conf: new option commit/psCheckAccessDeleted to avoid 'lsof'
@@ -109,7 +119,7 @@ Thu Jun 18 19:02:32 CEST 2015 - ma@suse.de
 
 - Add git-like subcommand support for zypper.
   Zypper subcommands are standalone executables that live in the
-  zypper exec dir or are available in your $PATH (see zypper(8)). 
+  zypper exec dir or are available in your $PATH (see zypper(8)).
 - version 1.11.33
 
 -------------------------------------------------------------------
@@ -134,7 +144,7 @@ Tue Jun  2 19:52:45 CEST 2015 - ma@suse.de
 -------------------------------------------------------------------
 Mon Jun  1 16:17:02 CEST 2015 - ma@suse.de
 
-- removerepo: Warn user that deleting a service repo is a 
+- removerepo: Warn user that deleting a service repo is a
   volatile change (bnc#929990)
 - version 1.11.30
 
@@ -165,7 +175,7 @@ Tue Apr  7 12:12:51 CEST 2015 - ma@suse.de
 -------------------------------------------------------------------
 Thu Apr  2 18:25:19 CEST 2015 - ma@suse.de
 
-- Fix prompt returning undefined default value after wrong input 
+- Fix prompt returning undefined default value after wrong input
   (bnc#925696)
 - man: fix typo (bnc#923800)
 - version 1.11.25
@@ -299,7 +309,7 @@ Sun Jan 18 01:13:20 CET 2015 - ma@suse.de
 Wed Jan 14 11:30:43 CET 2015 - ma@suse.de
 
 - New global option --releasever: Set the value of the $releasever
-  variable in all .repo files. This can be used to switch to new 
+  variable in all .repo files. This can be used to switch to new
   distribution repositories when performing a distribution upgrade.
   (bnc#911658)
 - BuildRequires:  libzypp-devel >= 14.34.0
@@ -449,7 +459,7 @@ Thu Sep  4 01:14:52 CEST 2014 - ma@suse.de
 -------------------------------------------------------------------
 Fri Aug 29 15:06:07 CEST 2014 - ma@suse.de
 
-- download: use $XDG_CACHE_HOME/zypp/packages for non-root user 
+- download: use $XDG_CACHE_HOME/zypp/packages for non-root user
   (bnc#891515)
 - download --dry-run: list packages we would download
 - Accept -f,--force option with refresh-services(refs)
@@ -479,7 +489,7 @@ Fri Jul 25 13:08:33 CEST 2014 - ma@suse.de
 -------------------------------------------------------------------
 Mon Jul 14 17:49:48 CEST 2014 - ma@suse.de
 
-- refresh-services: add option --restore-status to undo user 
+- refresh-services: add option --restore-status to undo user
   modifications applied to service repositories
 - drop rug compatibility in manpage docs and help output
   (FATE#317708)
@@ -510,7 +520,7 @@ Wed May 14 13:58:10 CEST 2014 - ma@suse.de
 -------------------------------------------------------------------
 Thu May  8 19:01:49 CEST 2014 - ma@suse.de
 
-- Notify user about expiring trusted keys; show trusted keys in 
+- Notify user about expiring trusted keys; show trusted keys in
   verbose mode.
 - Enable --with-interactive for update too (bnc#827953)
 - Highlight missing update repos in product info
@@ -616,7 +626,7 @@ Thu Jan 30 01:14:17 CET 2014 - ma@suse.de
 -------------------------------------------------------------------
 Wed Jan 29 10:57:54 CET 2014 - ma@suse.de
 
-- Don't treat missing packages due to download mode as error in 
+- Don't treat missing packages due to download mode as error in
   fileconflict check.
 - Add --replacefiles option to resolve file conflicts (bnc#673720)
 - version 1.10.4
@@ -905,11 +915,11 @@ Tue Mar 26 08:55:59 CET 2013 - ma@suse.de
 Tue Mar 19 13:55:03 CET 2013 - ma@suse.de
 
 - disable repo permanently if required by user
-- also search in file list when searching for a path name in 
+- also search in file list when searching for a path name in
   provides (bnc #798290)
 - add option --verbose to search command (show details about matches)
 - enable substrings and wildcards for 'info' (bnc #741758)
-- add search for provides, requires, conflicts, suggests and obsoletes, 
+- add search for provides, requires, conflicts, suggests and obsoletes,
   search for capabilities
 - version 1.8.13
 
@@ -970,7 +980,7 @@ Sun Feb 10 01:13:38 CET 2013 - ma@suse.de
 -------------------------------------------------------------------
 Thu Feb  7 14:30:47 CET 2013 - ma@suse.de
 
-- zypper commandline args must not silently overrule locks 
+- zypper commandline args must not silently overrule locks
   (bnc#742633,bnc#788863)
 - version 1.8.10
 
@@ -987,7 +997,7 @@ Mon Feb  4 12:36:21 CET 2013 - ma@suse.de
 -------------------------------------------------------------------
 Wed Jan 30 12:32:41 CET 2013 - ma@suse.de
 
-- Add '--oldpackage' to allow rollback without malicious --force 
+- Add '--oldpackage' to allow rollback without malicious --force
   (bnc#795076)
 - Add missing --recommends to verify command (bnc#722551)
 - version 1.8.9
@@ -996,7 +1006,7 @@ Wed Jan 30 12:32:41 CET 2013 - ma@suse.de
 Fri Jan 18 21:17:52 CET 2013 - ma@suse.de
 
 - Add source-download command (fate#313445)
-- Fixing permissions is obsolete since zypper refresh wrapper has 
+- Fixing permissions is obsolete since zypper refresh wrapper has
   been dropped (bnc#764119)
 - Fix excess whitespace in install counter (bnc#674572)
 - version 1.8.8
@@ -1090,7 +1100,7 @@ Sun Oct 28 01:14:13 CEST 2012 - ma@suse.de
 -------------------------------------------------------------------
 Thu Oct 25 18:08:59 CEST 2012 - ma@suse.de
 
-- Fix source-install to accept package names and lookup their 
+- Fix source-install to accept package names and lookup their
   source package (bnc#785832)
 - version 1.8.5
 
@@ -1208,7 +1218,7 @@ Mon Jun 25 10:29:19 CEST 2012 - ma@suse.de
 
 - Fix spacing bug in progress bar (bnc#674572)
 - consider dual width fonts in output (bnc#766443)
-- Don't treat patches with licensed packages as interactive if 
+- Don't treat patches with licensed packages as interactive if
   --auto-agree-with-licenses is used (bnc#730824)
 - version 1.7.3
 
@@ -1403,7 +1413,7 @@ Tue Jan 10 18:32:11 CET 2012 - ma@suse.de
 -------------------------------------------------------------------
 Tue Jan 10 13:52:48 CET 2012 - ma@suse.de
 
-- Return nonzero (104 - INF_CAP_NOT_FOUND) when query matches no 
+- Return nonzero (104 - INF_CAP_NOT_FOUND) when query matches no
   package (bnc#719690)
 
 -------------------------------------------------------------------
@@ -1771,7 +1781,7 @@ Wed May 18 10:28:13 CEST 2011 - dheidler@suse.de
 -------------------------------------------------------------------
 Fri May 13 11:38:30 CEST 2011 - ma@suse.de
 
-- fix get_installed_providers by capability not to use selectables 
+- fix get_installed_providers by capability not to use selectables
   (bnc#693576)
 - 1.6.3
 
@@ -1795,7 +1805,7 @@ Mon Apr 18 08:27:15 UTC 2011 - dmacvicar@suse.de
 -------------------------------------------------------------------
 Fri Apr 15 21:50:24 CEST 2011 - ma@suse.de
 
-- Fix list-patches/updates xml output to include architecture and 
+- Fix list-patches/updates xml output to include architecture and
   patch status information (bnc#687529)
 - Fix search xml output to actually write xml. (bnc#687529)
 - 1.5.8
@@ -1834,7 +1844,7 @@ Mon Jan 17 11:38:05 CET 2011 - ma@suse.de
 -------------------------------------------------------------------
 Fri Jan 14 12:48:51 CET 2011 - ma@suse.de
 
-- Report service plugin excetions during refresh, but continue. 
+- Report service plugin excetions during refresh, but continue.
 
 -------------------------------------------------------------------
 Thu Dec 23 14:49:05 CET 2010 - dheidler@suse.de
@@ -2035,7 +2045,7 @@ Thu May  6 18:51:03 CEST 2010 - jkupec@suse.cz
 -------------------------------------------------------------------
 Mon May  3 13:26:06 CEST 2010 - ma@suse.de
 
-- Don't suggest "zypper ps" after update, if zypper itself is the only 
+- Don't suggest "zypper ps" after update, if zypper itself is the only
   process with deleted files open.
 
 -------------------------------------------------------------------
@@ -2159,7 +2169,7 @@ Fri Feb 19 12:01:39 CET 2010 - jkupec@suse.cz
 -------------------------------------------------------------------
 Wed Feb 10 16:01:15 CET 2010 - ma@suse.de
 
-- Fix 'zypper products' failing to list installed products under 
+- Fix 'zypper products' failing to list installed products under
   certain conditions (bnc #578721)
 - Fix SEGV if $HOME or $PWD are unset in the environment (bnc #578684)
 - 1.2.17
@@ -2295,7 +2305,7 @@ Fri Nov  6 15:35:46 CET 2009 - jkupec@suse.cz
 -------------------------------------------------------------------
 Fri Nov  6 15:24:22 CET 2009 - ma@suse.de
 
-- al/rl: Support 'kind:name' notation if -t is not given. Also required 
+- al/rl: Support 'kind:name' notation if -t is not given. Also required
   to remove a specific lock as rl does not yet support -t. (bnc 551956)
 
 -------------------------------------------------------------------
