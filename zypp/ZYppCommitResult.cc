@@ -33,6 +33,7 @@ namespace zypp
 
     public:
       Pathname			_root;
+      FalseBool			_attemptToModify;
       sat::Transaction          _transaction;
       TransactionStepList       _transactionStepList;
       UpdateNotifications	_updateMessages;
@@ -66,6 +67,12 @@ namespace zypp
 
   const Pathname & ZYppCommitResult::root() const
   { return _pimpl->_root; }
+
+  bool ZYppCommitResult::attemptToModify() const
+  { return _pimpl->_attemptToModify; }
+
+  void ZYppCommitResult::attemptToModify( bool yesno_r )
+  { _pimpl->_attemptToModify = yesno_r; }
 
   const sat::Transaction & ZYppCommitResult::transaction() const
   { return _pimpl->_transaction; }

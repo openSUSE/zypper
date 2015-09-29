@@ -77,6 +77,16 @@ namespace zypp
       */
       const Pathname & root() const;
 
+      /** \c True if at least one attempt to actually install/remove packages was made.
+       * While this is false there should have been no serious modifications to the system.
+       * Mainly used to detect whether commit failed while preloading the caches or within
+       * the real action.
+       */
+      bool attemptToModify() const;
+
+      /** Set \ref attemptToModify */
+      void attemptToModify( bool yesno_r );
+
       /** The full transaction list.
        * The complete list including transaction steps that do not require
        * any action (like obsoletes or non-package actions). Depending on

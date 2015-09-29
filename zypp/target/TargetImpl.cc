@@ -1515,6 +1515,20 @@ namespace zypp
     // COMMIT internal
     //
     ///////////////////////////////////////////////////////////////////
+    namespace
+    {
+      struct NotifyAttemptToModify
+      {
+	NotifyAttemptToModify( ZYppCommitResult & result_r ) : _result( result_r ) {}
+
+	void operator()()
+	{ if ( _guard ) { _result.attemptToModify( true ); _guard = false; } }
+
+	TrueBool           _guard;
+	ZYppCommitResult & _result;
+      };
+    } // namespace
+
     void TargetImpl::commit( const ZYppCommitPolicy & policy_r,
 			     CommitPackageCache & packageCache_r,
 			     ZYppCommitResult & result_r )
@@ -1525,7 +1539,11 @@ namespace zypp
 
       HistoryLog().stampCommand();
 
+      // Send notification once upon 1st call to rpm
+      NotifyAttemptToModify attemptToModify( result_r );
+
       bool abort = false;
+
       RpmPostTransCollector postTransCollector( _root );
       std::vector<sat::Solvable> successfullyInstalledPackages;
       TargetImpl::PoolItemList remaining;
@@ -1600,6 +1618,7 @@ namespace zypp
             if (policy_r.rpmExcludeDocs()) flags |= rpm::RPMINST_EXCLUDEDOCS;
             if (policy_r.rpmNoSignature()) flags |= rpm::RPMINST_NOSIGNATURE;
 
+	    attemptToModify();
             try
             {
               progress.tryLevel( target::rpm::InstallResolvableReport::RPM_NODEPS_FORCE );
@@ -1663,6 +1682,8 @@ namespace zypp
             rpm::RpmInstFlags flags( policy_r.rpmInstFlags() & rpm::RPMINST_JUSTDB );
             flags |= rpm::RPMINST_NODEPS;
             if (policy_r.dryRun()) flags |= rpm::RPMINST_TEST;
+
+	    attemptToModify();
             try
             {
 	      rpm().removePackage( p, flags );
