@@ -81,6 +81,16 @@ namespace zypp
       _Tp _val;
     };
 
+    /** \relates DefaultIntegral \c true initialized \c bool  */
+    typedef DefaultIntegral<bool,true>  TrueBool;
+
+    /** \relates DefaultIntegral \c false initialized \c bool */
+    typedef DefaultIntegral<bool,false> FalseBool;
+
+    /** \relates DefaultIntegral \c zero initialized \c integral */
+    template<typename TIntegral>
+    using ZeroInit = DefaultIntegral<TIntegral,TIntegral(0)>;
+
   /////////////////////////////////////////////////////////////////
 } // namespace zypp
 ///////////////////////////////////////////////////////////////////
