@@ -48,7 +48,13 @@ esac
 
 export LC_ALL=""
 export LANG="en"
-EDITOR=${EDITOR:-vi}
+
+function Edit()
+{
+  local FILE="$1"
+  vi "$FILE"
+  sed -i 's/ \+$//' "$FILE"
+}
 
 EMAIL="$(git config --get user.email)"
 
@@ -165,7 +171,7 @@ while true; do
     echo
     case "${RES:-e}" in
       [eE]*)
-	$EDITOR $VERSIONFILE
+	Edit $VERSIONFILE
 	eval $(getversion)
 	continue
 	;;
@@ -207,7 +213,7 @@ trap " [ -f \"$TMPFILE\" ] && /bin/rm -f -- \"$TMPFILE\" " 0 1 2 3 13 15
 
 RES=e
 while [ "$RES" == "e" ]; do
-  $EDITOR $TMPFILE
+  Edit $TMPFILE
   echo
   awk '{print}/^----------/{n=n+1; if ( n == 2 ) exit 0; }' $TMPFILE
   read -n 1 -p "$(Gecho "(a)bort, (c)ontinue, (s)ubmitt, (e)dit [e]: ")" RES
