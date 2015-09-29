@@ -576,8 +576,6 @@ namespace zypp
 
 	  for ( Solvable solv : WhatProvides( Capability( provides ? spec.c_str() + prefix.size() : spec.c_str() ) ) )
 	  {
-	    if ( solv.isSystem() )
-	      continue;
 	    if ( provides || solv.ident() == spec )
 	      multiversionList.insert( solv );
 	  }

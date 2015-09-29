@@ -418,22 +418,20 @@ class CheckIfUpdate : public resfilter::PoolItemFilterFunctor
 {
   public:
     bool is_updated;
-    bool multiversion;
     sat::Solvable _installed;
 
-    CheckIfUpdate( sat::Solvable installed_r )
-	: is_updated( false )
-        , multiversion( installed_r.multiversionInstall() )
-        , _installed( installed_r )
+    CheckIfUpdate( const sat::Solvable & installed_r )
+    : is_updated( false )
+    , _installed( installed_r )
     {}
 
     // check this item will be updated
 
-    bool operator()( PoolItem item )
+    bool operator()( const PoolItem & item )
     {
 	if ( item.status().isToBeInstalled() )
         {
-          if ( ! multiversion || sameNVRA( _installed, item ) )
+          if ( ! item.multiversionInstall() || sameNVRA( _installed, item ) )
           {
             is_updated = true;
             return false;

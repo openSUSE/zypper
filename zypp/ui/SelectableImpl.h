@@ -299,7 +299,7 @@ namespace zypp
 
       bool multiversionInstall() const
       {
-	for ( const PoolItem & pi : available() )
+	for ( const PoolItem & pi : picklist() )
 	{
 	  if ( pi.multiversionInstall() )
 	    return true;
