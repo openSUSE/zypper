@@ -2,12 +2,12 @@
 .\"     Title: zypper
 .\"    Author: [see the "AUTHORS" section]
 .\" Generator: DocBook XSL Stylesheets v1.78.1 <http://docbook.sf.net/>
-.\"      Date: 09/09/2015
+.\"      Date: 09/29/2015
 .\"    Manual: ZYPPER
 .\"    Source: SUSE Linux
 .\"  Language: English
 .\"
-.TH "ZYPPER" "8" "09/09/2015" "SUSE Linux" "ZYPPER"
+.TH "ZYPPER" "8" "09/29/2015" "SUSE Linux" "ZYPPER"
 .\" -----------------------------------------------------------------
 .\" * Define some portability stuff
 .\" -----------------------------------------------------------------
@@ -3176,6 +3176,13 @@ No repositories are defined\&.
 \fB7\fR \- \fBZYPPER_EXIT_ZYPP_LOCKED\fR
 .RS 4
 The ZYPP library is locked, e\&.g\&. packagekit is running\&.
+.RE
+.PP
+\fB8\fR \- \fBZYPPER_EXIT_ERR_COMMIT\fR
+.RS 4
+An error occurred during installation or removal of packages\&. You may run
+\fBzypper verify\fR
+to repair any dependency problems\&.
 .RE
 .PP
 \fB100\fR \- \fBZYPPER_EXIT_INF_UPDATE_NEEDED\fR

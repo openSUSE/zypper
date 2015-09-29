@@ -782,23 +782,30 @@ void solve_and_commit (Zypper & zypper)
           gData.rpm_pkgs_total = God->resolver()->getTransaction().actionSize();
           gData.rpm_pkg_current = 0;
 
-          ostringstream s;
-          s << _("committing"); MIL << "committing...";
-          if (copts.count("dry-run"))
-            s << " " << _("(dry run)") << endl;
-          zypper.out().info(s.str(), Out::HIGH);
+	  MIL << "committing..." << endl;
+	  if ( zypper.out().verbosity() >= Out::HIGH )
+	  {
+	    ostringstream s;
+	    s << _("committing");
+	    if ( copts.count("dry-run") )
+	      s << " " << _("(dry run)");
+	    zypper.out().info( s.str(), Out::HIGH );
+	  }
 
           ZYppCommitResult result = God->commit(get_commit_policy(zypper));
-
-          MIL << endl << "DONE" << endl;
-
           gData.show_media_progress_hack = false;
 
-          if ( ! result.noError() )
-            zypper.setExitCode(ZYPPER_EXIT_ERR_ZYPP);
+	  USR << dump(result.transaction()) << endl;
+	  if ( !result.allDone() && !( copts.count("dry-run") && result.noError() ) )
+	  { zypper.setExitCode( result.attemptToModify() ? ZYPPER_EXIT_ERR_COMMIT : ZYPPER_EXIT_ERR_ZYPP ); }	// error message comes later....
 
-          s.clear(); s << result;
-          zypper.out().info(s.str(), Out::HIGH);
+          MIL << endl << "DONE" << endl;
+	  if ( zypper.out().verbosity() >= Out::HIGH )
+	  {
+	    ostringstream s;
+	    s << result;
+	    zypper.out().info( s.str(), Out::HIGH );
+	  }
 
           show_update_messages(zypper, result.updateMessages());
         }
@@ -808,7 +815,7 @@ void solve_and_commit (Zypper & zypper)
           zypper.out().error(e,
               _("Problem retrieving the package file from the repository:"),
               _("Please see the above error message for a hint."));
-          zypper.setExitCode(ZYPPER_EXIT_ERR_ZYPP);
+          zypper.setExitCode(ZYPPER_EXIT_ERR_COMMIT);
           return;
         }
         catch ( zypp::repo::RepoException & e )
@@ -851,7 +858,7 @@ void solve_and_commit (Zypper & zypper)
           zypper.out().error(e,
               _("Problem retrieving the package file from the repository:"),
               hint);
-          zypper.setExitCode(ZYPPER_EXIT_ERR_ZYPP);
+          zypper.setExitCode(ZYPPER_EXIT_ERR_COMMIT);
           return;
         }
         catch ( const zypp::FileCheckException & e )
@@ -865,7 +872,7 @@ void solve_and_commit (Zypper & zypper)
               "- refresh the repositories using 'zypper refresh'\n"
               "- use another installation medium (if e.g. damaged)\n"
               "- use another repository"));
-          zypper.setExitCode(ZYPPER_EXIT_ERR_ZYPP);
+          zypper.setExitCode(ZYPPER_EXIT_ERR_COMMIT);
           return;
         }
         catch ( const Exception & e )
@@ -874,34 +881,44 @@ void solve_and_commit (Zypper & zypper)
           zypper.out().error(e,
               _("Problem occured during or after installation or removal of packages:"),
               _("Please see the above error message for a hint."));
-          zypper.setExitCode(ZYPPER_EXIT_ERR_ZYPP);
+          zypper.setExitCode(ZYPPER_EXIT_ERR_COMMIT);
+          return;
         }
 
-        // install any pending source packages
-        //! \todo This won't be necessary once we get a new solver flag
-        //! for installing source packages without their build deps
-        if (!zypper.runtimeData().srcpkgs_to_install.empty())
-          install_src_pkgs(zypper);
+        if ( zypper.exitCode() != ZYPPER_EXIT_OK )
+	{
+	  zypper.out().error(_("Installation has completed with error.") );
+	  if ( zypper.exitCode() == ZYPPER_EXIT_ERR_COMMIT )
+	    zypper.out().error( boost::format( _("You may run '%1%' to repair any dependency problems.") ) % "zypper verify" );
+	}
+	else
+	{
+	  // install any pending source packages
+	  //! \todo This won't be necessary once we get a new solver flag
+	  //! for installing source packages without their build deps
+	  if (!zypper.runtimeData().srcpkgs_to_install.empty())
+	    install_src_pkgs(zypper);
 
-        // set return value to 'reboot needed'
-        if (summary.needMachineReboot())
-        {
-          zypper.setExitCode(ZYPPER_EXIT_INF_REBOOT_NEEDED);
-          zypper.out().warning(
-            _("One of installed patches requires reboot of"
-              " your machine. Reboot as soon as possible."), Out::QUIET);
-        }
-        // set return value to 'restart needed' (restart of package manager)
-        // however, 'reboot needed' takes precedence
-        else if (zypper.exitCode() != ZYPPER_EXIT_INF_REBOOT_NEEDED && summary.needPkgMgrRestart())
-        {
-          zypper.setExitCode(ZYPPER_EXIT_INF_RESTART_NEEDED);
-          zypper.out().warning(
-            _("One of installed patches affects the package"
-              " manager itself. Run this command once more to install any other"
-              " needed patches."),
-            Out::QUIET, Out::TYPE_NORMAL); // don't show this to machines
-        }
+	  // set return value to 'reboot needed'
+	  if (summary.needMachineReboot())
+	  {
+	    zypper.setExitCode(ZYPPER_EXIT_INF_REBOOT_NEEDED);
+	    zypper.out().warning(
+	      _("One of installed patches requires reboot of"
+	      " your machine. Reboot as soon as possible."), Out::QUIET);
+	  }
+	  // set return value to 'restart needed' (restart of package manager)
+	  // however, 'reboot needed' takes precedence
+	  else if (zypper.exitCode() != ZYPPER_EXIT_INF_REBOOT_NEEDED && summary.needPkgMgrRestart())
+	  {
+	    zypper.setExitCode(ZYPPER_EXIT_INF_RESTART_NEEDED);
+	    zypper.out().warning(
+	      _("One of installed patches affects the package"
+	      " manager itself. Run this command once more to install any other"
+	      " needed patches."),
+	      Out::QUIET, Out::TYPE_NORMAL); // don't show this to machines
+	  }
+	}
 
         // check for running services (fate #300763)
         if ( ! ( zypper.cOpts().count("download-only") || zypper.cOpts().count("dry-run") )
