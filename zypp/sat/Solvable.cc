@@ -607,7 +607,7 @@ namespace zypp
     LocaleSet Solvable::getSupportedLocales() const
     {
       LocaleSet ret;
-      invokeOnEachSupportedLocale( supplements(), functor::Collector( std::inserter( ret, ret.begin() ) ) );
+      invokeOnEachSupportedLocale( supplements(), functor::collector( std::inserter( ret, ret.begin() ) ) );
       return ret;
     }
 

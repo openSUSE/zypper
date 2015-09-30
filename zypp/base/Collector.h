@@ -21,39 +21,39 @@ namespace functor
 
   ///////////////////////////////////////////////////////////////////
   //
-  //	CLASS NAME : _Collector<_OutputIterator>
+  //	CLASS NAME : Collector<TOutputIterator>
   //
   /** Functor feeding values to an output_iterator.
    *
    * \code
    * LocaleSet locales;
    * for_each( begin(), end(),
-   *           Collector( std::inserter( locales_r, locales_r.begin() ) ) );
+   *           collector( std::inserter( locales_r, locales_r.begin() ) ) );
    * \endcode
    *
-   * \see Convenience constructor \ref Collector.
+   * \see Convenience constructor \ref collector.
    */
-  template<class _OutputIterator>
-  struct _Collector
+  template<class TOutputIterator>
+  struct Collector
   {
-    _Collector( _OutputIterator iter_r ) : _iter( iter_r ) {}
+    Collector( TOutputIterator iter_r ) : _iter( iter_r ) {}
 
-    template<class _Tp>
-    bool operator()( const _Tp & value_r ) const
+    template<class Tp>
+    bool operator()( const Tp & value_r ) const
     {
       *_iter++ = value_r;
       return true;
     }
 
     private:
-      mutable _OutputIterator _iter;
+      mutable TOutputIterator _iter;
   };
   ///////////////////////////////////////////////////////////////////
 
-  /** \relates _Collector Convenience constructor. */
-  template<class _OutputIterator>
-  inline _Collector<_OutputIterator> Collector( _OutputIterator iter_r )
-  { return _Collector<_OutputIterator>( iter_r ); }
+  /** \relates Collector Convenience constructor. */
+  template<class TOutputIterator>
+  inline Collector<TOutputIterator> collector( TOutputIterator iter_r )
+  { return Collector<TOutputIterator>( iter_r ); }
 
   ///////////////////////////////////////////////////////////////////
 
