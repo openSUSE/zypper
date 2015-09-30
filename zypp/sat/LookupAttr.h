@@ -163,7 +163,7 @@ namespace zypp
 
         /** TransformIterator returning an \ref iterator vaue of type \c TResult. */
         template<class TResult, class TAttr = TResult>
-	class transformIterator;
+	class TransformIterator;
         //@}
 
       public:

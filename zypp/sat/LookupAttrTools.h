@@ -24,7 +24,7 @@ namespace zypp
 
     ///////////////////////////////////////////////////////////////////
     //
-    //	CLASS NAME : LookupAttr::transformIterator
+    //	CLASS NAME : LookupAttr::TransformIterator
     //
     /** TransformIterator returning an \ref iterator value of type \c TResult.
      *
@@ -40,7 +40,7 @@ namespace zypp
      *       {}
      *
      *     public:
-     *       typedef sat::LookupAttr::transformIterator<PackageKeyword,IdString> iterator;
+     *       typedef sat::LookupAttr::TransformIterator<PackageKeyword,IdString> iterator;
      *
      *       iterator begin() const { return iterator( _q.begin() ); }
      *       iterator end() const   { return iterator( _q.end() ); }
@@ -53,8 +53,8 @@ namespace zypp
      * \see \ref ArrayAttr.
      */
     template<class TResult, class TAttr>
-    class LookupAttr::transformIterator : public boost::iterator_adaptor<
-          transformIterator<TResult,TAttr> // Derived
+    class LookupAttr::TransformIterator : public boost::iterator_adaptor<
+          TransformIterator<TResult,TAttr> // Derived
           , LookupAttr::iterator         // Base
           , TResult                      // Value
           , boost::forward_traversal_tag // CategoryOrTraversal
@@ -62,11 +62,11 @@ namespace zypp
     >
     {
       public:
-        transformIterator()
+        TransformIterator()
         {}
 
         explicit
-        transformIterator( const LookupAttr::iterator & val_r )
+        TransformIterator( const LookupAttr::iterator & val_r )
         { this->base_reference() = val_r; }
 
       public:
@@ -134,7 +134,7 @@ namespace zypp
     //
     //	CLASS NAME : ArrayAttr
     //
-    /** \ref LookupAttr::transformIterator based container to retrieve list attributes.
+    /** \ref LookupAttr::TransformIterator based container to retrieve list attributes.
      *
      * You may pass \ref LookupAttr::REPO_ATTR as \ref LookupAttr::Location argument,
      * to lookup attributes associated with the \ref Repository as a whole
@@ -172,7 +172,7 @@ namespace zypp
         {}
 
       public:
-        typedef LookupAttr::transformIterator<TResult,TAttr> iterator;
+        typedef LookupAttr::TransformIterator<TResult,TAttr> iterator;
         typedef LookupAttr::size_type size_type;
 
         iterator begin() const
