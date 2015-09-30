@@ -233,7 +233,7 @@ namespace zypp {
     };
 
 
-  namespace _ExternalProgram
+  namespace externalprogram
   {
     /** Helper providing pipe FDs for \ref ExternalProgramWithStderr.
      * Moved to a basse class because the pipe needs to be initialized
@@ -251,12 +251,12 @@ namespace zypp {
 	FILE * _stderr;
 	int _fds[2];
     };
-  }
+  } // namespace externalprogram
 
   /** ExternalProgram extended to offer reading programs stderr.
    * \see \ref ExternalProgram
    */
-  class ExternalProgramWithStderr : private _ExternalProgram::EarlyPipe, public ExternalProgram
+  class ExternalProgramWithStderr : private externalprogram::EarlyPipe, public ExternalProgram
   {
     public:
       ExternalProgramWithStderr( const Arguments & argv_r )
@@ -269,7 +269,7 @@ namespace zypp {
 
     public:
       /** Return \c FILE* to read programms stderr (O_NONBLOCK set). */
-      using _ExternalProgram::EarlyPipe::stderr;
+      using externalprogram::EarlyPipe::stderr;
 
       /** Read data up to \c delim_r from stderr (nonblocking).
        * \note If \c delim_r is '\0', we read as much data as possible.

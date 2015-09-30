@@ -598,7 +598,7 @@ namespace zypp {
     //
     //////////////////////////////////////////////////////////////////////
 
-    namespace _ExternalProgram
+    namespace externalprogram
     {
       EarlyPipe::EarlyPipe()
       {
@@ -619,7 +619,7 @@ namespace zypp {
 	if ( _stderr )
 	  ::fclose( _stderr );
       }
-    }
+    } // namespace externalprogram
 
     bool ExternalProgramWithStderr::stderrGetUpTo( std::string & retval_r, const char delim_r, bool returnDelim_r )
     {
