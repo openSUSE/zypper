@@ -1,4 +1,9 @@
 -------------------------------------------------------------------
+Thu Oct  1 01:14:25 CEST 2015 - ma@suse.de
+
+- Update zypper-po.tar.bz2
+
+-------------------------------------------------------------------
 Tue Sep 29 18:26:25 CEST 2015 - ma@suse.de
 
 - Return ZYPPER_EXIT_ERR_COMMIT if an error occurred during commit
