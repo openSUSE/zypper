@@ -107,8 +107,8 @@ namespace zypp
      *
      * \see \c Example.COW_debug.cc.
      */
-    template<class _Tp>
-      struct TraceCAD : public base::ProvideNumericId<TraceCAD<_Tp>, unsigned long>
+    template<class Tp>
+      struct TraceCAD : public base::ProvideNumericId<TraceCAD<Tp>, unsigned long>
                       , public TraceCADBase
       {
         static unsigned long & _totalTraceCAD()
@@ -143,18 +143,18 @@ namespace zypp
       };
 
     /** \relates TraceCAD Stream output. */
-    template<class _Tp>
-      inline std::ostream & operator<<( std::ostream & str, const TraceCAD<_Tp> & obj )
+    template<class Tp>
+      inline std::ostream & operator<<( std::ostream & str, const TraceCAD<Tp> & obj )
       { return str << "(ID " << obj.numericId() << ", TOTAL " << obj._totalTraceCAD()
                    << ") [" << &obj << "] "; }
 
     /** Drop a log line about the traced method. Overload to
      * fit your needs.
     */
-    template<class _Tp>
+    template<class Tp>
       void traceCAD( TraceCADBase::What what_r,
-                     const TraceCAD<_Tp> & self_r,
-                     const TraceCAD<_Tp> & rhs_r )
+                     const TraceCAD<Tp> & self_r,
+                     const TraceCAD<Tp> & rhs_r )
       {
         switch( what_r )
           {

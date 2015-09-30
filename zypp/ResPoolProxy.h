@@ -95,29 +95,29 @@ namespace zypp
     /** True if there are items of a certain kind. */
     bool empty( const ResKind & kind_r ) const;
 
-    template<class _Res>
+    template<class TRes>
       bool empty() const
-      { return empty( ResTraits<_Res>::kind ); }
+      { return empty( ResTraits<TRes>::kind ); }
 
     /** Number of Items of a certain kind.  */
     size_type size( const ResKind & kind_r ) const;
 
-    template<class _Res>
+    template<class TRes>
       size_type size() const
-      { return size( ResTraits<_Res>::kind ); }
+      { return size( ResTraits<TRes>::kind ); }
 
     const_iterator byKindBegin( const ResKind & kind_r ) const;
 
-    template<class _Res>
+    template<class TRes>
       const_iterator byKindBegin() const
-      { return byKindBegin( ResTraits<_Res>::kind ); }
+      { return byKindBegin( ResTraits<TRes>::kind ); }
 
 
     const_iterator byKindEnd( const ResKind & kind_r ) const;
 
-    template<class _Res>
+    template<class TRes>
       const_iterator byKindEnd() const
-      { return byKindEnd( ResTraits<_Res>::kind ); }
+      { return byKindEnd( ResTraits<TRes>::kind ); }
     //@}
 
  public:
@@ -141,9 +141,9 @@ namespace zypp
               != make_end<ui::selfilter::ByHasInstalledObj>( kind_r ) );
     }
 
-    template<class _Res>
+    template<class TRes>
       bool hasInstalledObj() const
-      { return hasInstalledObj( ResTraits<_Res>::kind ); }
+      { return hasInstalledObj( ResTraits<TRes>::kind ); }
 
   public:
     /** \name Save and restore state per kind of resolvable.
@@ -160,25 +160,25 @@ namespace zypp
 
     void saveState( const ResKind & kind_r ) const;
 
-    template<class _Res>
+    template<class TRes>
       void saveState() const
-      { return saveState( ResTraits<_Res>::kind ); }
+      { return saveState( ResTraits<TRes>::kind ); }
 
     void restoreState() const;
 
     void restoreState( const ResKind & kind_r ) const;
 
-    template<class _Res>
+    template<class TRes>
       void restoreState() const
-      { return restoreState( ResTraits<_Res>::kind ); }
+      { return restoreState( ResTraits<TRes>::kind ); }
 
     bool diffState() const;
 
     bool diffState( const ResKind & kind_r ) const;
 
-    template<class _Res>
+    template<class TRes>
       bool diffState() const
-      { return diffState( ResTraits<_Res>::kind ); }
+      { return diffState( ResTraits<TRes>::kind ); }
 
     /**
      * \class ScopedSaveState
@@ -193,42 +193,42 @@ namespace zypp
 
     ScopedSaveState scopedSaveState( const ResKind & kind_r ) const;
 
-    template<class _Res>
+    template<class TRes>
       ScopedSaveState && scopedSaveState() const
-      { return scopedSaveState( ResTraits<_Res>::kind ); }
+      { return scopedSaveState( ResTraits<TRes>::kind ); }
 
     //@}
 
   private:
-    template<class _Filter>
-      filter_iterator<_Filter,const_iterator>
-      make_begin( _Filter filter_r, const ResKind & kind_r ) const
+    template<class TFilter>
+      filter_iterator<TFilter,const_iterator>
+      make_begin( TFilter filter_r, const ResKind & kind_r ) const
       {
         return make_filter_iterator( filter_r,
                                      byKindBegin(kind_r),
                                      byKindEnd(kind_r) );
       }
-    template<class _Filter>
-      filter_iterator<_Filter,const_iterator>
+    template<class TFilter>
+      filter_iterator<TFilter,const_iterator>
       make_begin( const ResKind & kind_r ) const
       {
-        return make_begin( _Filter(), kind_r );
+        return make_begin( TFilter(), kind_r );
       }
 
 
-    template<class _Filter>
-      filter_iterator<_Filter,const_iterator>
-      make_end( _Filter filter_r, const ResKind & kind_r ) const
+    template<class TFilter>
+      filter_iterator<TFilter,const_iterator>
+      make_end( TFilter filter_r, const ResKind & kind_r ) const
       {
         return make_filter_iterator( filter_r,
                                      byKindEnd(kind_r),
                                      byKindEnd(kind_r) );
       }
-    template<class _Filter>
-      filter_iterator<_Filter,const_iterator>
+    template<class TFilter>
+      filter_iterator<TFilter,const_iterator>
       make_end( const ResKind & kind_r ) const
       {
-        return make_end( _Filter(), kind_r );
+        return make_end( TFilter(), kind_r );
       }
 
   private:

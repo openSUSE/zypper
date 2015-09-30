@@ -167,14 +167,14 @@ namespace zypp
 	{ return makeIterable( solvablesBegin(), solvablesEnd() ); }
 
       public:
-        /** \name Iterate all Solvables matching a \c _Filter. */
+        /** \name Iterate all Solvables matching a \c TFilter. */
         //@{
-        template<class _Filter>
-        filter_iterator<_Filter,SolvableIterator> filterBegin( const _Filter & filter_r ) const
+        template<class TFilter>
+        filter_iterator<TFilter,SolvableIterator> filterBegin( const TFilter & filter_r ) const
         { return make_filter_iterator( filter_r, solvablesBegin(), solvablesEnd() ); }
 
-        template<class _Filter>
-        filter_iterator<_Filter,SolvableIterator> filterEnd( const _Filter & filter_r ) const
+        template<class TFilter>
+        filter_iterator<TFilter,SolvableIterator> filterEnd( const TFilter & filter_r ) const
         { return make_filter_iterator( filter_r, solvablesEnd(), solvablesEnd() ); }
         //@}
 

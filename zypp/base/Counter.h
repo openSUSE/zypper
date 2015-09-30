@@ -24,22 +24,22 @@ namespace zypp
   //
   /** Integral type with initial value \c 0.
   */
-  template<class _IntT>
+  template<class TInt>
     class Counter
     {
     public:
-      Counter( _IntT value_r = _IntT(0) )
-      : _value( _IntT( value_r ) )
+      Counter( TInt value_r = TInt(0) )
+      : _value( TInt( value_r ) )
       {}
 
-      operator _IntT &()
+      operator TInt &()
       { return _value; }
 
-      operator const _IntT &() const
+      operator const TInt &() const
       { return _value; }
 
     public:
-      _IntT _value;
+      TInt _value;
     };
   ///////////////////////////////////////////////////////////////////
 

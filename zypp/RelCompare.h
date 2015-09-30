@@ -36,10 +36,10 @@ namespace zypp
    * \code
    *     // Compare two elements returning -1, 0, 1
    *     //  if the elemants compare <,==,>.
-   *     static int compare( const _Tp & lhs, const _Tp & rhs );
+   *     static int compare( const Tp & lhs, const Tp & rhs );
    * \endcode
    *
-   * <tt>Compare\<_Tp\></tt> provides a functor wrapping \c compare.
+   * <tt>Compare\<Tp\></tt> provides a functor wrapping \c compare.
    * In case the general comparison method is named differently, the
    * class, or you, have to provide an approriate functor.
    *
@@ -54,7 +54,7 @@ namespace zypp
    *
    * Furthermore a bunch of functors using a certain opertator is
    * defined. All templated by type and general comparison
-   * method (defaults to Compare\<_Tp\>).
+   * method (defaults to Compare\<Tp\>).
    * \code
    * // Editions sets use lexicographical order per default:
    * std::set<Edition>
@@ -78,25 +78,25 @@ namespace zypp
   //@{
 
   /** General compare functor returning <tt>-1, 0, 1</tt>.
-   * Expects _Tp::compare to be a static comaprison method
+   * Expects Tp::compare to be a static comaprison method
    * returning <tt>-1, 0, 1</tt> if the elements compare
    * <tt>\<,==,\></tt>.
   */
-  template<class _Tp>
-    struct Compare : public std::binary_function<_Tp,_Tp,int>
+  template<class Tp>
+    struct Compare : public std::binary_function<Tp,Tp,int>
     {
-      int operator()( const _Tp & lhs, const _Tp & rhs ) const
-      { return _Tp::compare( lhs, rhs ); }
+      int operator()( const Tp & lhs, const Tp & rhs ) const
+      { return Tp::compare( lhs, rhs ); }
     };
 
   ///////////////////////////////////////////////////////////////////
 
   /** Comparison of two elements using relational operator \a op.
-   * Expects \a _Compare to be a binary operator returning
+   * Expects \a TCompare to be a binary operator returning
    * <tt>-1, 0, 1</tt> if the elemants compare <tt>\<,==,\></tt>.
    * \code
    *     // Signature of compare function or functor:
-   *     int compare( const _Tp & lhs, const _Tp & rhs );
+   *     int compare( const Tp & lhs, const Tp & rhs );
    * \endcode
    * \li If \a op is Rel::ANY, the expression is always \c true.
    * \li If \a op is Rel::NONE, the expression is always \c false.
@@ -104,9 +104,8 @@ namespace zypp
    *
    * \ingroup RelCompare
   */
-  template<class _Tp, class _Compare>
-    inline bool compareByRel( Rel op, const _Tp & lhs, const _Tp & rhs,
-                              _Compare compare )
+  template<class Tp, class TCompare>
+    inline bool compareByRel( Rel op, const Tp & lhs, const Tp & rhs, TCompare compare )
     {
       switch ( op.inSwitch() )
       {
@@ -138,90 +137,90 @@ namespace zypp
       return false;
     }
 
-  /** \ref compareByRel convenience using Compare<_Tp> as general compare
+  /** \ref compareByRel convenience using Compare<Tp> as general compare
    *  functor.
   */
-  template<class _Tp>
-    inline bool compareByRel( Rel op, const _Tp & lhs, const _Tp & rhs )
-    { return compareByRel( op, lhs, rhs, Compare<_Tp>() ); }
+  template<class Tp>
+    inline bool compareByRel( Rel op, const Tp & lhs, const Tp & rhs )
+    { return compareByRel( op, lhs, rhs, Compare<Tp>() ); }
 
   ///////////////////////////////////////////////////////////////////
 
   ///////////////////////////////////////////////////////////////////
 
   /** Functor to compare two elements by \ref Rel based on
-   * a general \a _Compare functor.
+   * a general \a TCompare functor.
    *
-   * Expects \a _Compare to be suitable for use in \ref compareByRel.
-   * Defaults to Compare\<_Tp\>.
+   * Expects \a TCompare to be suitable for use in \ref compareByRel.
+   * Defaults to Compare\<Tp\>.
   */
-  template<class _Tp, class _Compare = Compare<_Tp> >
-    struct CompareBy : public std::binary_function<_Tp,_Tp,bool>
+  template<class Tp, class TCompare = Compare<Tp> >
+    struct CompareBy : public std::binary_function<Tp,Tp,bool>
     {
       CompareBy( Rel op_r )
       : _op( op_r )
       {}
 
-      bool operator()( const _Tp & lhs, const _Tp & rhs ) const
-      { return compareByRel( _op, lhs, rhs, _Compare() ); }
+      bool operator()( const Tp & lhs, const Tp & rhs ) const
+      { return compareByRel( _op, lhs, rhs, TCompare() ); }
 
       Rel _op;
     };
 
-  template<class _Tp, class _Compare = Compare<_Tp> >
-    struct CompareByEQ : public std::binary_function<_Tp,_Tp,bool>
+  template<class Tp, class TCompare = Compare<Tp> >
+    struct CompareByEQ : public std::binary_function<Tp,Tp,bool>
     {
-      bool operator()( const _Tp & lhs, const _Tp & rhs ) const
-      { return compareByRel( Rel::EQ, lhs, rhs, _Compare() ); }
+      bool operator()( const Tp & lhs, const Tp & rhs ) const
+      { return compareByRel( Rel::EQ, lhs, rhs, TCompare() ); }
     };
 
-  template<class _Tp, class _Compare = Compare<_Tp> >
-    struct CompareByNE : public std::binary_function<_Tp,_Tp,bool>
+  template<class Tp, class TCompare = Compare<Tp> >
+    struct CompareByNE : public std::binary_function<Tp,Tp,bool>
     {
-      bool operator()( const _Tp & lhs, const _Tp & rhs ) const
-      { return compareByRel( Rel::NE, lhs, rhs, _Compare() ); }
+      bool operator()( const Tp & lhs, const Tp & rhs ) const
+      { return compareByRel( Rel::NE, lhs, rhs, TCompare() ); }
     };
 
-  template<class _Tp, class _Compare = Compare<_Tp> >
-    struct CompareByLT : public std::binary_function<_Tp,_Tp,bool>
+  template<class Tp, class TCompare = Compare<Tp> >
+    struct CompareByLT : public std::binary_function<Tp,Tp,bool>
     {
-      bool operator()( const _Tp & lhs, const _Tp & rhs ) const
-      { return compareByRel( Rel::LT, lhs, rhs, _Compare() ); }
+      bool operator()( const Tp & lhs, const Tp & rhs ) const
+      { return compareByRel( Rel::LT, lhs, rhs, TCompare() ); }
     };
 
-  template<class _Tp, class _Compare = Compare<_Tp> >
-    struct CompareByLE : public std::binary_function<_Tp,_Tp,bool>
+  template<class Tp, class TCompare = Compare<Tp> >
+    struct CompareByLE : public std::binary_function<Tp,Tp,bool>
     {
-      bool operator()( const _Tp & lhs, const _Tp & rhs ) const
-      { return compareByRel( Rel::LE, lhs, rhs, _Compare() ); }
+      bool operator()( const Tp & lhs, const Tp & rhs ) const
+      { return compareByRel( Rel::LE, lhs, rhs, TCompare() ); }
     };
 
-  template<class _Tp, class _Compare = Compare<_Tp> >
-    struct CompareByGT : public std::binary_function<_Tp,_Tp,bool>
+  template<class Tp, class TCompare = Compare<Tp> >
+    struct CompareByGT : public std::binary_function<Tp,Tp,bool>
     {
-      bool operator()( const _Tp & lhs, const _Tp & rhs ) const
-      { return compareByRel( Rel::GT, lhs, rhs, _Compare() ); }
+      bool operator()( const Tp & lhs, const Tp & rhs ) const
+      { return compareByRel( Rel::GT, lhs, rhs, TCompare() ); }
     };
 
-  template<class _Tp, class _Compare = Compare<_Tp> >
-    struct CompareByGE : public std::binary_function<_Tp,_Tp,bool>
+  template<class Tp, class TCompare = Compare<Tp> >
+    struct CompareByGE : public std::binary_function<Tp,Tp,bool>
     {
-      bool operator()( const _Tp & lhs, const _Tp & rhs ) const
-      { return compareByRel( Rel::GE, lhs, rhs, _Compare() ); }
+      bool operator()( const Tp & lhs, const Tp & rhs ) const
+      { return compareByRel( Rel::GE, lhs, rhs, TCompare() ); }
     };
 
-  template<class _Tp, class _Compare = Compare<_Tp> >
-    struct CompareByANY : public std::binary_function<_Tp,_Tp,bool>
+  template<class Tp, class TCompare = Compare<Tp> >
+    struct CompareByANY : public std::binary_function<Tp,Tp,bool>
     {
-      bool operator()( const _Tp & lhs, const _Tp & rhs ) const
-      { return compareByRel( Rel::ANY, lhs, rhs, _Compare() ); }
+      bool operator()( const Tp & lhs, const Tp & rhs ) const
+      { return compareByRel( Rel::ANY, lhs, rhs, TCompare() ); }
     };
 
-  template<class _Tp, class _Compare = Compare<_Tp> >
-    struct CompareByNONE : public std::binary_function<_Tp,_Tp,bool>
+  template<class Tp, class TCompare = Compare<Tp> >
+    struct CompareByNONE : public std::binary_function<Tp,Tp,bool>
     {
-      bool operator()( const _Tp & lhs, const _Tp & rhs ) const
-      { return compareByRel( Rel::NONE, lhs, rhs, _Compare() ); }
+      bool operator()( const Tp & lhs, const Tp & rhs ) const
+      { return compareByRel( Rel::NONE, lhs, rhs, TCompare() ); }
     };
 
   ///////////////////////////////////////////////////////////////////

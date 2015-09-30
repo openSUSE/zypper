@@ -54,11 +54,11 @@ namespace zypp
      *  }
      * \endcode
      */
-    template<typename _Enum>
+    template<typename TEnum>
     class Flags
     {
       public:
-        typedef _Enum Enum;	///< The underlying enum type
+        typedef TEnum Enum;	///< The underlying enum type
         typedef typename std::underlying_type<Enum>::type Integral;	///< The underlying integral type
 
       public:
@@ -162,13 +162,13 @@ namespace zypp
       return ret;
     }
 
-    template<typename _Enum>
-    inline std::ostream & operator<<( std::ostream & str, const Flags<_Enum> & obj )
+    template<typename TEnum>
+    inline std::ostream & operator<<( std::ostream & str, const Flags<TEnum> & obj )
     { return str << str::hexstring(obj); }
 
-    template<typename _Enum>
-    inline std::ostream & operator<<( std::ostream & str, const typename Flags<_Enum>::Enum & obj )
-    { return str << Flags<_Enum>(obj); }
+    template<typename TEnum>
+    inline std::ostream & operator<<( std::ostream & str, const typename Flags<TEnum>::Enum & obj )
+    { return str << Flags<TEnum>(obj); }
 
     /** \relates Flags */
 #define ZYPP_DECLARE_FLAGS(Name,Enum) typedef zypp::base::Flags<Enum> Name

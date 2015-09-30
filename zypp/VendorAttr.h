@@ -61,8 +61,8 @@ class VendorAttr
     /**
      * Adding new equivalent vendor set from list
      **/
-    template <class _Iterator>
-    void addVendorList( _Iterator begin, _Iterator end ) const
+    template <class TIterator>
+    void addVendorList( TIterator begin, TIterator end ) const
     { VendorList tmp( begin, end ); _addVendorList( tmp ); }
 
     /** Return whether two vendor strings shold be treated as the same vendor.

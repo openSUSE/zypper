@@ -96,12 +96,12 @@ namespace zypp
           kErr		= GLOB_ERR,		//!< Return on read errors.
           kMark		= GLOB_MARK,		//!< Append a slash to each name.
           kNoSort	= GLOB_NOSORT,		//!< Don't sort the names.
-          // unsupported _DOOFFS = GLOB_DOOFFS,	//!< Insert PGLOB->gl_offs NULLs.
+          // unsupported kDOOFFS = GLOB_DOOFFS,	//!< Insert PGLOB->gl_offs NULLs.
           kNoCheck	= GLOB_NOCHECK,		//!< If nothing matches, return the pattern.
-          // autoapplied _APPEND = GLOB_APPEND,	//!< Append to results of a previous call.
+          // autoapplied kAPPEND = GLOB_APPEND,	//!< Append to results of a previous call.
           kNoEscape	= GLOB_NOESCAPE,	//!< Backslashes don't quote metacharacters.
           kPeriod	= GLOB_PERIOD,		//!< Leading `.' can be matched by metachars.
-          // unsupported _MAGCHAR = GLOB_MAGCHAR,//!< Set in gl_flags if any metachars seen.
+          // unsupported kMAGCHAR = GLOB_MAGCHAR,//!< Set in gl_flags if any metachars seen.
           kAltDirFunc	= GLOB_ALTDIRFUNC,	//!< Use gl_opendir et al functions.
           kBrace	= GLOB_BRACE,		//!< Expand "{a,b}" to "a" "b".
           kNoMagic	= GLOB_NOMAGIC,		//!< If no magic chars, return the pattern.
@@ -203,43 +203,43 @@ namespace zypp
 
       public:
 
-        /** \name Collecting Glob results to some _OutputIterator
+        /** \name Collecting Glob results to some TOutputIterator
          * \code
          * std::list<Pathname> p;
          * Glob::collect( "/bin/a*.dat}", std::back_inserter(p) );
-         * Glob::collect( "/bin/a*{.xml,.xml.gz}", Glob::_BRACE, std::back_inserter(p) );
+         * Glob::collect( "/bin/a*{.xml,.xml.gz}", Glob::kBrace, std::back_inserter(p) );
          * \endcode
          */
         //@{
         /** Write glob result to some \c OutputIterator. */
-        template<class _OutputIterator>
-        static int collect( const Pathname & pattern_r, _OutputIterator result_r )
+        template<class TOutputIterator>
+        static int collect( const Pathname & pattern_r, TOutputIterator result_r )
         { return collect( pattern_r.c_str(), Flags(), result_r ); }
         /** \overload */
-        template<class _OutputIterator>
-        static int collect( const std::string & pattern_r, _OutputIterator result_r )
+        template<class TOutputIterator>
+        static int collect( const std::string & pattern_r, TOutputIterator result_r )
         { return collect( pattern_r.c_str(), Flags(), result_r ); }
         /** \overload */
-        template<class _OutputIterator>
-        static int collect( const char * pattern_r, _OutputIterator result_r )
+        template<class TOutputIterator>
+        static int collect( const char * pattern_r, TOutputIterator result_r )
         { return collect( pattern_r, Flags(), result_r ); }
 
         /** \overload With \ref Flags */
-        template<class _OutputIterator>
-        static int collect( const Pathname & pattern_r, Flags flags_r, _OutputIterator result_r )
+        template<class TOutputIterator>
+        static int collect( const Pathname & pattern_r, Flags flags_r, TOutputIterator result_r )
         { return collect( pattern_r.c_str(), flags_r, result_r ); }
         /** \overload */
-        template<class _OutputIterator>
-        static int collect( const std::string & pattern_r, Flags flags_r, _OutputIterator result_r )
+        template<class TOutputIterator>
+        static int collect( const std::string & pattern_r, Flags flags_r, TOutputIterator result_r )
         { return collect( pattern_r.c_str(), flags_r, result_r ); }
         /** \overload */
-        template<class _OutputIterator>
-        static int collect( const char * pattern_r, Flags flags_r, _OutputIterator result_r )
+        template<class TOutputIterator>
+        static int collect( const char * pattern_r, Flags flags_r, TOutputIterator result_r )
         {
           Glob glob( pattern_r, flags_r );
           if ( glob.lastGlobReturn() == 0 )
             for_( it, glob.begin(), glob.end() )
-              (*result_r)++ = typename _OutputIterator::container_type::value_type(*it);
+              (*result_r)++ = typename TOutputIterator::container_type::value_type(*it);
           return glob.lastGlobReturn();
         }
         //@}

@@ -346,12 +346,12 @@ namespace zypp
       /** Add content keywords */
       void addContent( const std::string & keyword_r );
       /** \overload add keywords from container */
-      template <class _Iterator>
-      void addContentFrom( _Iterator begin_r, _Iterator end_r )
+      template <class TIterator>
+      void addContentFrom( TIterator begin_r, TIterator end_r )
       { for_( it, begin_r, end_r ) addContent( *it ); }
       /** \overload  */
-      template <class _Container>
-      void addContentFrom( const _Container & container_r )
+      template <class TContainer>
+      void addContentFrom( const TContainer & container_r )
       { addContentFrom( container_r.begin(), container_r.end() ); }
 
       /** Check for content keywords.
@@ -361,20 +361,20 @@ namespace zypp
        */
       bool hasContent( const std::string & keyword_r = std::string() ) const;
       /** \overload check for \b all keywords being present */
-      template <class _Iterator>
-      bool hasContentAll( _Iterator begin_r, _Iterator end_r ) const
+      template <class TIterator>
+      bool hasContentAll( TIterator begin_r, TIterator end_r ) const
       { for_( it, begin_r, end_r ) if ( ! hasContent( *it ) ) return false; return true; }
       /** \overload  */
-      template <class _Container>
-      bool hasContentAll( const _Container & container_r ) const
+      template <class TContainer>
+      bool hasContentAll( const TContainer & container_r ) const
       { return hasContentAll( container_r.begin(), container_r.end() ); }
       /** \overload check for \b any keyword being present */
-      template <class _Iterator>
-      bool hasContentAny( _Iterator begin_r, _Iterator end_r ) const
+      template <class TIterator>
+      bool hasContentAny( TIterator begin_r, TIterator end_r ) const
       { for_( it, begin_r, end_r ) if ( hasContent( *it ) ) return true; return false; }
       /** \overload  */
-      template <class _Container>
-      bool hasContentAny( const _Container & container_r ) const
+      template <class TContainer>
+      bool hasContentAny( const TContainer & container_r ) const
       { return hasContentAny( container_r.begin(), container_r.end() ); }
 
     public:

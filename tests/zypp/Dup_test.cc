@@ -10,8 +10,8 @@
 
 static TestSetup test;
 
-template <class _Iterator>
-std::ostream & vdumpPoolStats( std::ostream & str, _Iterator begin_r, _Iterator end_r )
+template <class TIterator>
+std::ostream & vdumpPoolStats( std::ostream & str, TIterator begin_r, TIterator end_r )
 {
   pool::PoolStats stats;
   for_( it, begin_r, end_r )

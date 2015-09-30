@@ -51,11 +51,11 @@ namespace zypp { using boost::formatNAC; }
 ///////////////////////////////////////////////////////////////////
 namespace zypp
 {
-  /** Request a human readable (translated) string representation of _Tp [_Tp.asUserString()]
+  /** Request a human readable (translated) string representation of Tp [Tp.asUserString()]
    * Classes may implement a default as member function.
    */
-  template <class _Tp>
-  std::string asUserString( const _Tp & val_r )
+  template <class Tp>
+  std::string asUserString( const Tp & val_r )
   { return val_r.asUserString(); }
 
 }// namespace zypp
@@ -71,8 +71,8 @@ namespace zypp
     MessageString( const char * str_r ) 		: std::string( str_r ? str_r : "" ) {}
     MessageString( const std::string & str_r )		: std::string( str_r ) {}
     // boost::format, std::ostringstream, str::Str ...
-    template<class _Str>
-    MessageString( const _Str & str_r )	: std::string( str_r.str() ) {}
+    template<class TStr>
+    MessageString( const TStr & str_r )	: std::string( str_r.str() ) {}
   };
 
   /** Convenience \c char* constructible from \c std::string and \c char*,
@@ -175,16 +175,16 @@ namespace zypp
     inline std::string asString( char * t )
     { return t; }
 
-    template<class _T>
-        inline std::string asString( const _T &t )
+    template<class Tp>
+        inline std::string asString( const Tp &t )
         { return t.asString(); }
 
-    template<class _T>
-        inline std::string asString( const intrusive_ptr<_T> &p )
+    template<class Tp>
+        inline std::string asString( const intrusive_ptr<Tp> &p )
         { return p->asString(); }
 
-    template<class _T>
-        inline std::string asString( const weak_ptr<_T> &p )
+    template<class Tp>
+        inline std::string asString( const weak_ptr<Tp> &p )
         { return p->asString(); }
 
     template<>
@@ -236,8 +236,8 @@ namespace zypp
     */
     struct Str
     {
-      template<class _Tp>
-      Str & operator<<( const _Tp & val )
+      template<class Tp>
+      Str & operator<<( const Tp & val )
       { _str << val; return *this; }
 
       Str & operator<<( std::ostream& (*iomanip)( std::ostream& ) )
@@ -356,8 +356,8 @@ namespace zypp
      * time_t t = strtonum<time_t>( "42" );
      * \endcode
     */
-    template<typename _It>
-      _It strtonum( const C_Str & str );
+    template<typename TInt>
+      TInt strtonum( const C_Str & str );
 
     template<>
       inline short              strtonum( const C_Str & str ) { return ::strtol  ( str, NULL, 0 ); }
@@ -382,9 +382,9 @@ namespace zypp
      * time_t t; strtonum( "42", t );
      * \endcode
     */
-    template<typename _It>
-      inline _It strtonum( const C_Str & str, _It & i )
-      { return i = strtonum<_It>( str ); }
+    template<typename TInt>
+      inline TInt strtonum( const C_Str & str, TInt & i )
+      { return i = strtonum<TInt>( str ); }
     //@}
 
     ///////////////////////////////////////////////////////////////////
@@ -474,10 +474,8 @@ namespace zypp
      * \endcode
      *
     */
-    template<class _OutputIterator>
-      unsigned split( const C_Str &   line_r,
-                      _OutputIterator result_r,
-                      const C_Str &   sepchars_r = " \t" )
+    template<class TOutputIterator>
+      unsigned split( const C_Str & line_r, TOutputIterator result_r, const C_Str & sepchars_r = " \t" )
       {
         const char * beg = line_r;
         const char * cur = beg;
@@ -535,11 +533,8 @@ namespace zypp
      *
      * \endcode
      */
-    template<class _OutputIterator>
-      unsigned splitEscaped( const C_Str &   line_r,
-                      _OutputIterator result_r,
-                      const C_Str &   sepchars_r = " \t",
-                      bool withEmpty = false)
+    template<class TOutputIterator>
+      unsigned splitEscaped( const C_Str & line_r, TOutputIterator result_r, const C_Str & sepchars_r = " \t", bool withEmpty = false)
       {
         const char * beg = line_r;
         const char * cur = beg;
@@ -668,10 +663,8 @@ namespace zypp
      * \endcode
      *
     */
-    template<class _OutputIterator>
-      unsigned splitFields( const C_Str &   line_r,
-                            _OutputIterator result_r,
-                            const C_Str &   sepchars_r = ":" )
+    template<class TOutputIterator>
+      unsigned splitFields( const C_Str & line_r, TOutputIterator result_r, const C_Str & sepchars_r = ":" )
       {
         const char * beg = line_r;
         const char * cur = beg;
@@ -709,13 +702,10 @@ namespace zypp
      * \see splitFields()
      * \see splitEscaped()
      */
-    template<class _OutputIterator>
-      unsigned splitFieldsEscaped( const C_Str &   line_r,
-                            _OutputIterator result_r,
-                            const C_Str &   sepchars_r = ":" )
+    template<class TOutputIterator>
+      unsigned splitFieldsEscaped( const C_Str & line_r, TOutputIterator result_r, const C_Str & sepchars_r = ":" )
       {
-        return
-          splitEscaped( line_r, result_r, sepchars_r, true /* withEmpty */ );
+        return splitEscaped( line_r, result_r, sepchars_r, true /* withEmpty */ );
       }
 
     //@}
@@ -724,12 +714,11 @@ namespace zypp
     /** \name Join. */
     //@{
     /** Join strings using separator \a sep_r (defaults to BLANK). */
-    template <class _Iterator>
-      std::string join( _Iterator begin, _Iterator end,
-                        const C_Str & sep_r = " " )
+    template <class TIterator>
+      std::string join( TIterator begin, TIterator end, const C_Str & sep_r = " " )
       {
         std::string res;
-        for ( _Iterator iter = begin; iter != end; ++ iter )
+        for ( TIterator iter = begin; iter != end; ++ iter )
           {
             if ( iter != begin )
               res += sep_r;
@@ -739,21 +728,19 @@ namespace zypp
       }
 
     /** Join strings using separator \a sep_r (defaults to BLANK). */
-    template <class _Container>
-      std::string join( const _Container & cont_r,
-                        const C_Str & sep_r = " " )
+    template <class TContainer>
+      std::string join( const TContainer & cont_r, const C_Str & sep_r = " " )
       { return join( cont_r.begin(), cont_r.end(), sep_r ); }
 
     /** Join strings using separator \a sep_r, quoting or escaping the values.
      * Separator defaults to BLANK. Use \ref splitEscaped to restore the
      * values.
      */
-    template <class _Iterator>
-      std::string joinEscaped( _Iterator begin, _Iterator end,
-                               const char sep_r = ' ' )
+    template <class TIterator>
+      std::string joinEscaped( TIterator begin, TIterator end, const char sep_r = ' ' )
       {
         std::vector<char> buf;
-        for ( _Iterator iter = begin; iter != end; ++ iter )
+        for ( TIterator iter = begin; iter != end; ++ iter )
         {
           if ( iter != begin )
             buf.push_back( sep_r );

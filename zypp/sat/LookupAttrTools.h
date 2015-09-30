@@ -26,9 +26,9 @@ namespace zypp
     //
     //	CLASS NAME : LookupAttr::transformIterator
     //
-    /** TransformIterator returning an \ref iterator value of type \c _ResultT.
+    /** TransformIterator returning an \ref iterator value of type \c TResult.
      *
-     * The underlying LookupAttr::iterators value is retrieved \ref asType<_AttrT>
+     * The underlying LookupAttr::iterators value is retrieved \ref asType<TAttr>
      * and the returned \ref ResultT is constructed fron that value.
      *
      * \code
@@ -52,13 +52,13 @@ namespace zypp
      *
      * \see \ref ArrayAttr.
      */
-    template<class _ResultT, class _AttrT>
+    template<class TResult, class TAttr>
     class LookupAttr::transformIterator : public boost::iterator_adaptor<
-          transformIterator<_ResultT,_AttrT> // Derived
+          transformIterator<TResult,TAttr> // Derived
           , LookupAttr::iterator         // Base
-          , _ResultT                     // Value
+          , TResult                      // Value
           , boost::forward_traversal_tag // CategoryOrTraversal
-          , _ResultT                     // Reference
+          , TResult                      // Reference
     >
     {
       public:
@@ -116,19 +116,19 @@ namespace zypp
       private:
         friend class boost::iterator_core_access;
 
-        _ResultT dereference() const
+        TResult dereference() const
         {
           const LookupAttr::iterator lit( this->base_reference() );
-          return _ResultT( lit.asType<_AttrT>() );
+          return TResult( lit.asType<TAttr>() );
         }
     };
     ///////////////////////////////////////////////////////////////////
 
-    template<class _ResultT, class _AttrT>
+    template<class TResult, class TAttr>
     class ArrayAttr;
 
-    template<class _ResultT, class _AttrT>
-    std::ostream & operator<<( std::ostream & str, const ArrayAttr<_ResultT,_AttrT> & obj );
+    template<class TResult, class TAttr>
+    std::ostream & operator<<( std::ostream & str, const ArrayAttr<TResult,TAttr> & obj );
 
     ///////////////////////////////////////////////////////////////////
     //
@@ -150,10 +150,10 @@ namespace zypp
      *
      * \todo Maybe add some way to unify the result.
      */
-    template<class _ResultT, class _AttrT>
+    template<class TResult, class TAttr>
     class ArrayAttr
     {
-      friend std::ostream & operator<< <_ResultT,_AttrT>( std::ostream & str, const ArrayAttr<_ResultT,_AttrT> & obj );
+      friend std::ostream & operator<< <TResult,TAttr>( std::ostream & str, const ArrayAttr<TResult,TAttr> & obj );
 
       public:
         ArrayAttr()
@@ -172,7 +172,7 @@ namespace zypp
         {}
 
       public:
-        typedef LookupAttr::transformIterator<_ResultT,_AttrT> iterator;
+        typedef LookupAttr::transformIterator<TResult,TAttr> iterator;
         typedef LookupAttr::size_type size_type;
 
         iterator begin() const
@@ -194,7 +194,7 @@ namespace zypp
 
       public:
 
-        iterator find( const _ResultT & key_r ) const
+        iterator find( const TResult & key_r ) const
         {
           for_( it, begin(), end() )
           {
@@ -210,8 +210,8 @@ namespace zypp
     ///////////////////////////////////////////////////////////////////
 
     /** \relates LookupAttr::iterator Stream output. */
-    template<class _ResultT, class _AttrT>
-    inline std::ostream & operator<<( std::ostream & str, const ArrayAttr<_ResultT,_AttrT> & obj )
+    template<class TResult, class TAttr>
+    inline std::ostream & operator<<( std::ostream & str, const ArrayAttr<TResult,TAttr> & obj )
     { return dumpOn( str, obj._q ); }
 
     /////////////////////////////////////////////////////////////////

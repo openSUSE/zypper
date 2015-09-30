@@ -25,7 +25,7 @@
  */
 #define ZYPP_DEFINE_ID_HASHABLE(C)		\
 namespace std {					\
-  template<class _Tp> struct hash;		\
+  template<class Tp> struct hash;		\
   template<> struct hash<C>			\
   {						\
     size_t operator()( const C & __s ) const	\
@@ -37,14 +37,14 @@ namespace std {					\
 namespace std
 {
   /** clone function for RW_pointer */
-  template<class _D>
-  inline unordered_set<_D> * rwcowClone( const std::unordered_set<_D> * rhs )
-  { return new std::unordered_set<_D>( *rhs ); }
+  template<class D>
+  inline unordered_set<D> * rwcowClone( const std::unordered_set<D> * rhs )
+  { return new std::unordered_set<D>( *rhs ); }
 
   /** clone function for RW_pointer */
-  template<class _K, class _V>
-  inline std::unordered_map<_K,_V> * rwcowClone( const std::unordered_map<_K,_V> * rhs )
-  { return new std::unordered_map<_K,_V>( *rhs ); }
+  template<class K, class V>
+  inline std::unordered_map<K,V> * rwcowClone( const std::unordered_map<K,V> * rhs )
+  { return new std::unordered_map<K,V>( *rhs ); }
 } // namespace std
 ///////////////////////////////////////////////////////////////////
 #endif // ZYPP_BASE_HASH_H

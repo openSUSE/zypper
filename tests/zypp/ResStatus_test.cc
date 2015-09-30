@@ -24,15 +24,15 @@ BOOST_AUTO_TEST_CASE(Default)
 ////////////////////////////////////////////////////////////////////////////////
 // tools
 ////////////////////////////////////////////////////////////////////////////////
-template<class _Tp>
-inline const _Tp & max( const _Tp & lhs, const _Tp & rhs )
+template<class Tp>
+inline const Tp & max( const Tp & lhs, const Tp & rhs )
 { return lhs < rhs ? rhs : lhs; }
 
-template<class _Tp, int N>
-inline _Tp * begin( _Tp (& _array)[N] ) { return _array; }
+template<class Tp, int N>
+inline Tp * begin( Tp (& _array)[N] ) { return _array; }
 
-template<class _Tp, int N>
-inline _Tp * end( _Tp (& _array)[N] ) { return _array + (sizeof(_array)/sizeof(_Tp)); }
+template<class Tp, int N>
+inline Tp * end( Tp (& _array)[N] ) { return _array + (sizeof(_array)/sizeof(Tp)); }
 
 ResStatus::TransactByValue transactByValues[] = {
   ResStatus::USER, ResStatus::APPL_HIGH, ResStatus::APPL_LOW, ResStatus::SOLVER

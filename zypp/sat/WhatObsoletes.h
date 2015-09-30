@@ -59,8 +59,8 @@ namespace zypp
         WhatObsoletes( const ResObject_constPtr item_r );
 
         /** Ctor from a range of \ref Solvable, \ref PoolItem or \ref ResObject::constPtr. */
-        template <class _Iterator>
-        WhatObsoletes( _Iterator begin, _Iterator end )
+        template <class TIterator>
+        WhatObsoletes( TIterator begin, TIterator end )
         : _begin( 0 )
         {
           for_( it, begin, end )

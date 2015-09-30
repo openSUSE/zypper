@@ -161,8 +161,9 @@ namespace zypp
         */
         size_type size() const;
 
-        /** TransformIterator returning an \ref iterator vaue of type \c _ResultT. */
-        template<class _ResultT, class _AttrT = _ResultT> class transformIterator;
+        /** TransformIterator returning an \ref iterator vaue of type \c TResult. */
+        template<class TResult, class TAttr = TResult>
+	class transformIterator;
         //@}
 
       public:
@@ -528,7 +529,7 @@ namespace zypp
          *
          * Should be specialized for supported types above.
         */
-        template<class _Tp> _Tp asType() const { return _Tp(id()); }
+        template<class Tp> Tp asType() const { return Tp(id()); }
         //@}
 
         ///////////////////////////////////////////////////////////////////
@@ -591,7 +592,7 @@ namespace zypp
     template<> inline IdString     LookupAttr::iterator::asType<IdString>()     const { return idStr(); }
     template<>        CheckSum     LookupAttr::iterator::asType<CheckSum>()     const;
 
-    template<class _ResultT, class _AttrT>
+    template<class TResult, class TAttr>
     class ArrayAttr;
     //@}
 

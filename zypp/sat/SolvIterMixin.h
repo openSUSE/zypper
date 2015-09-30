@@ -139,8 +139,8 @@ namespace zypp
         { size_type s = 0; for_( it, self().begin(), self().end() ) ++s; return s;}
 
 	/** Whether collection contains a specific \ref Solvable. */
-	template<class _Solv>
-	bool contains( const _Solv & solv_r ) const
+	template<class TSolv>
+	bool contains( const TSolv & solv_r ) const
 	{
 	  Solvable solv( asSolvable()( solv_r ) );
 	  for_( it, self().begin(), self().end() )

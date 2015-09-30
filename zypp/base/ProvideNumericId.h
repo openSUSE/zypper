@@ -41,12 +41,12 @@ namespace zypp
      * foo.numericId(); // returns foo's NumericId.
      * \endcode
     */
-    template<class _Derived, class _NumericIdType>
+    template<class TDerived, class TNumericIdType>
       struct ProvideNumericId
       {
       public:
         /** \return The objects numeric Id. */
-        _NumericIdType numericId() const
+        TNumericIdType numericId() const
         { return _numericId; }
 
       protected:
@@ -73,14 +73,14 @@ namespace zypp
         {}
       private:
         /** Provide the next Id to use. */
-        static _NumericIdType nextId()
+        static TNumericIdType nextId()
         {
-          static _NumericIdType _staticCounter = 0;
+          static TNumericIdType _staticCounter = 0;
           // Assert not returning 0
           return ++_staticCounter;
         }
         /**  */
-        const _NumericIdType _numericId;
+        const TNumericIdType _numericId;
       };
     ///////////////////////////////////////////////////////////////////
 

@@ -56,11 +56,11 @@ namespace zypp
       typedef SelectableTraits::PickList		PickList;
 
     public:
-      template <class _Iterator>
+      template <class TIterator>
       Impl( const ResKind & kind_r,
             const std::string & name_r,
-            _Iterator begin_r,
-            _Iterator end_r )
+            TIterator begin_r,
+            TIterator end_r )
       : _ident( sat::Solvable::SplitIdent( kind_r, name_r ).ident() )
       , _kind( kind_r )
       , _name( name_r )

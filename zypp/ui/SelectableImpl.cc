@@ -128,8 +128,8 @@ namespace zypp
         typedef bool (StatusBackup::*Action)( const PoolItem &, Causer );
 
         /** Highlevel action on range of items. */
-        template <class _Iter>
-        bool forEach( _Iter begin_r, _Iter end_r, Action action_r, Causer causer_r )
+        template <class TIter>
+        bool forEach( TIter begin_r, TIter end_r, Action action_r, Causer causer_r )
         {
           for_( it, begin_r, end_r )
             if ( ! (this->*action_r)( *it, causer_r ) )

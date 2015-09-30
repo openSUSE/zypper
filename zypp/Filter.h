@@ -87,8 +87,8 @@ namespace zypp
         { return _sel && _sel( solv_r ); }
 
         /** Filter fitting PoolItem/ResObject. */
-        template<class _Solv>
-        bool operator()( const _Solv & solv_r ) const
+        template<class TSolv>
+        bool operator()( const TSolv & solv_r ) const
         { return operator()( solv_r.satSolvable() ); }
 
       private:
@@ -118,8 +118,8 @@ namespace zypp
         { return solv_r.isKind( _kind ); }
 
         /** Filter fitting PoolItem/ResObject. */
-        template<class _Solv>
-        bool operator()( const _Solv & solv_r ) const
+        template<class TSolv>
+        bool operator()( const TSolv & solv_r ) const
         { return operator()( solv_r.satSolvable() ); }
 
       private:
@@ -127,9 +127,9 @@ namespace zypp
     };
 
     /** \relates ByKind templated convenience ctor. */
-    template<class _Res>
+    template<class TRes>
     inline ByKind byKind()
-    { return ByKind( ResTraits<_Res>::kind ); }
+    { return ByKind( ResTraits<TRes>::kind ); }
     ///////////////////////////////////////////////////////////////////
 
     ///////////////////////////////////////////////////////////////////
@@ -154,8 +154,8 @@ namespace zypp
         { return _pred && (pi_r.status().*_pred)(); }
 
         /** Filter fitting sat::Solvable/ResObject. */
-        template<class _Solv>
-        bool operator()( const _Solv & solv_r ) const
+        template<class TSolv>
+        bool operator()( const TSolv & solv_r ) const
         { return operator()( PoolItem(solv_r) ); }
 
       private:
@@ -180,8 +180,8 @@ namespace zypp
         {}
 
         /** Fitting PoolItem/ResObject. */
-        template<class _Solv>
-        SameItemAs( const _Solv & solv_r )
+        template<class TSolv>
+        SameItemAs( const TSolv & solv_r )
         : _item( solv_r.satSolvable() )
         {}
 
@@ -196,8 +196,8 @@ namespace zypp
         }
 
         /** Filter fitting PoolItem/ResObject. */
-        template<class _Solv>
-        bool operator()( const _Solv & solv_r ) const
+        template<class TSolv>
+        bool operator()( const TSolv & solv_r ) const
         { return operator()( solv_r.satSolvable() ); }
 
       private:

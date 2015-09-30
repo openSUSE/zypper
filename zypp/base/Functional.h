@@ -33,7 +33,7 @@ namespace zypp
   namespace functor
   { /////////////////////////////////////////////////////////////////
 
-    /** An unary functor forwarding to some other <tt>_Functor &</tt>.
+    /** An unary functor forwarding to some other <tt>TFunctor &</tt>.
      * \ingroup g_Functor
      *
      * Most algorithms take functor arguments by value. That's inconvenient
@@ -42,10 +42,10 @@ namespace zypp
      *
      * \code
      *   // Counts invokations of operator().
-     *   template<class _Tp>
-     *     struct Counter : public std::unary_function<_Tp, void>
+     *   template<class Tp>
+     *     struct Counter : public std::unary_function<Tp, void>
      *     {
-     *       void operator()( _Tp )
+     *       void operator()( Tp )
      *       { ++_value; }
      *
      *       Counter() : _value( 0 ) {}
@@ -64,7 +64,7 @@ namespace zypp
      * \endcode
      *
      * \note FunctorRef must be able to deduce the signature of
-     * \c _Functor::operator(). This is currently not automated,
+     * \c TFunctor::operator(). This is currently not automated,
      * so you must specify the operator() signature as template
      * arguments.
      *
@@ -77,10 +77,10 @@ namespace zypp
     /////////////////////////////////////////////////////////////////
     namespace functor_detail
     {
-      template <class _Functor, class res_type>
+      template <class TFunctor, class res_type>
         struct FunctorRef0
         {
-          FunctorRef0( _Functor & f_r )
+          FunctorRef0( TFunctor & f_r )
           : _f( f_r )
           {}
 
@@ -90,13 +90,13 @@ namespace zypp
           }
 
         private:
-          _Functor & _f;
+          TFunctor & _f;
         };
 
-      template <class _Functor, class res_type, class arg1_type>
+      template <class TFunctor, class res_type, class arg1_type>
         struct FunctorRef1 : public std::unary_function<arg1_type, res_type>
         {
-          FunctorRef1( _Functor & f_r )
+          FunctorRef1( TFunctor & f_r )
           : _f( f_r )
           {}
 
@@ -106,13 +106,13 @@ namespace zypp
           }
 
         private:
-          _Functor & _f;
+          TFunctor & _f;
         };
 
-      template <class _Functor, class res_type, class arg1_type, class arg2_type>
+      template <class TFunctor, class res_type, class arg1_type, class arg2_type>
         struct FunctorRef2 : public std::binary_function<arg1_type, arg2_type, res_type>
         {
-          FunctorRef2( _Functor & f_r )
+          FunctorRef2( TFunctor & f_r )
           : _f( f_r )
           {}
 
@@ -122,7 +122,7 @@ namespace zypp
           }
 
         private:
-          _Functor & _f;
+          TFunctor & _f;
         };
 
       struct nil
@@ -133,53 +133,53 @@ namespace zypp
     /** A binary \ref FunctorRef.
      * Create it using \ref functorRef convenience function.
     */
-    template <class _Functor, class res_type, class arg1_type = functor_detail::nil,
+    template <class TFunctor, class res_type, class arg1_type = functor_detail::nil,
                                               class arg2_type = functor_detail::nil>
       struct FunctorRef
-      : public functor_detail::FunctorRef2<_Functor, res_type, arg1_type, arg2_type>
+      : public functor_detail::FunctorRef2<TFunctor, res_type, arg1_type, arg2_type>
       {
-        FunctorRef( _Functor & f_r )
-        : functor_detail::FunctorRef2<_Functor, res_type, arg1_type, arg2_type>( f_r )
+        FunctorRef( TFunctor & f_r )
+        : functor_detail::FunctorRef2<TFunctor, res_type, arg1_type, arg2_type>( f_r )
         {}
       };
 
     /** A unary \ref FunctorRef.
      * Create it using \ref functorRef convenience function.
     */
-    template <class _Functor, class res_type, class arg1_type>
-      struct FunctorRef<_Functor, res_type, arg1_type>
-      : public functor_detail::FunctorRef1<_Functor, res_type, arg1_type>
+    template <class TFunctor, class res_type, class arg1_type>
+      struct FunctorRef<TFunctor, res_type, arg1_type>
+      : public functor_detail::FunctorRef1<TFunctor, res_type, arg1_type>
       {
-        FunctorRef( _Functor & f_r )
-        : functor_detail::FunctorRef1<_Functor, res_type, arg1_type>( f_r )
+        FunctorRef( TFunctor & f_r )
+        : functor_detail::FunctorRef1<TFunctor, res_type, arg1_type>( f_r )
         {}
       };
 
     /** A nullary \ref FunctorRef.
      * Create it using \ref functorRef convenience function.
     */
-    template <class _Functor, class res_type>
-      struct FunctorRef<_Functor, res_type>
-      : public functor_detail::FunctorRef0<_Functor, res_type>
+    template <class TFunctor, class res_type>
+      struct FunctorRef<TFunctor, res_type>
+      : public functor_detail::FunctorRef0<TFunctor, res_type>
       {
-        FunctorRef( _Functor & f_r )
-        : functor_detail::FunctorRef0<_Functor, res_type>( f_r )
+        FunctorRef( TFunctor & f_r )
+        : functor_detail::FunctorRef0<TFunctor, res_type>( f_r )
         {}
       };
 
     /** Convenience function creating a binary \ref FunctorRef. */
-    template <class res_type, class arg1_type, class arg2_type, class _Functor>
-      FunctorRef<_Functor, res_type, arg1_type, arg2_type>
-      functorRef( _Functor & f_r )
-      { return FunctorRef<_Functor, res_type, arg1_type, arg2_type>( f_r ); }
-    template <class res_type, class arg1_type, class _Functor>
-      FunctorRef<_Functor, res_type, arg1_type>
-      functorRef( _Functor & f_r )
-      { return FunctorRef<_Functor, res_type, arg1_type>( f_r ); }
-    template <class res_type, class _Functor>
-      FunctorRef<_Functor, res_type>
-      functorRef( _Functor & f_r )
-      { return FunctorRef<_Functor, res_type>( f_r ); }
+    template <class res_type, class arg1_type, class arg2_type, class TFunctor>
+      FunctorRef<TFunctor, res_type, arg1_type, arg2_type>
+      functorRef( TFunctor & f_r )
+      { return FunctorRef<TFunctor, res_type, arg1_type, arg2_type>( f_r ); }
+    template <class res_type, class arg1_type, class TFunctor>
+      FunctorRef<TFunctor, res_type, arg1_type>
+      functorRef( TFunctor & f_r )
+      { return FunctorRef<TFunctor, res_type, arg1_type>( f_r ); }
+    template <class res_type, class TFunctor>
+      FunctorRef<TFunctor, res_type>
+      functorRef( TFunctor & f_r )
+      { return FunctorRef<TFunctor, res_type>( f_r ); }
 
     /////////////////////////////////////////////////////////////////
 
@@ -190,10 +190,10 @@ namespace zypp
      *
      * \li \ref True and \ref False. No supprise, they always return
      *     \c true or \c false.
-     * \li \ref Not\<_Condition\>. _Condition is a functor, and
+     * \li \ref Not\<TCondition\>. TCondition is a functor, and
      *     it's result is inverted.
-     * \li \ref Chain\<_ACondition,_BCondition\>. \c _ACondition and \c _BCondition
-     *     are functors, and Chain evaluates <tt>_ACondition && _BCondition</tt>.
+     * \li \ref Chain\<TACondition,TBCondition\>. \c TACondition and \c TBCondition
+     *     are functors, and Chain evaluates <tt>TACondition && TBCondition</tt>.
      *
      * As it's no fun to get and write the correct template arguments,
      * convenience functions creating the correct functor are provided.
@@ -214,35 +214,33 @@ namespace zypp
     */
     //@{
 
-    /* functor that always returns a copied
-       value */
-    template<class T>
+    /* functor that always returns a copied value */
+    template<class TConst>
     struct Constant
     {
-      Constant( const T &value )
+      Constant( const TConst &value )
         : _value(value)
       {}
 
-      template<class _Tp>
-      T operator()( _Tp ) const
+      template<class Tp>
+      TConst operator()( Tp ) const
       { return _value; }
 
-      T operator()() const
+      TConst operator()() const
       { return _value; }
 
-      T _value;
+      TConst _value;
     };
 
-    template<class T>
-    inline Constant<T> constant( const T &value )
-    { return Constant<T>(value); }
+    template<class TConst>
+    inline Constant<TConst> constant( const TConst &value )
+    { return Constant<TConst>(value); }
 
-    /** Logical functor always \c true.
-    */
+    /** Logical functor always \c true. */
     struct True
     {
-      template<class _Tp>
-        bool operator()( _Tp ) const
+      template<class Tp>
+        bool operator()( Tp ) const
         {
           return true;
         }
@@ -256,8 +254,8 @@ namespace zypp
     */
     struct False
     {
-      template<class _Tp>
-        bool operator()( _Tp ) const
+      template<class Tp>
+        bool operator()( Tp ) const
         {
           return false;
         }
@@ -267,87 +265,87 @@ namespace zypp
     inline False false_c()
     { return False(); }
 
-    /** Logical functor inverting \a _Condition.
+    /** Logical functor inverting \a TCondition.
     */
-    template<class _Condition>
+    template<class TCondition>
       struct Not
       {
-        Not( _Condition cond_r )
+        Not( TCondition cond_r )
         : _cond( cond_r )
         {}
 
-        template<class _Tp>
-          bool operator()( _Tp t ) const
+        template<class Tp>
+          bool operator()( Tp t ) const
           {
             return ! _cond( t );
           }
 
-        _Condition _cond;
+        TCondition _cond;
       };
 
-    /** Convenience function for creating a Not from \a _Condition. */
-    template<class _Condition>
-      inline Not<_Condition> not_c( _Condition cond_r )
+    /** Convenience function for creating a Not from \a TCondition. */
+    template<class TCondition>
+      inline Not<TCondition> not_c( TCondition cond_r )
       {
-        return Not<_Condition>( cond_r );
+        return Not<TCondition>( cond_r );
       }
 
-    /** Logical functor chaining \a _ACondition \c OR \a _BCondition.
+    /** Logical functor chaining \a TACondition \c OR \a TBCondition.
     */
-    template<class _ACondition, class _BCondition>
+    template<class TACondition, class TBCondition>
       struct Or
       {
-        Or( _ACondition conda_r, _BCondition condb_r )
+        Or( TACondition conda_r, TBCondition condb_r )
         : _conda( conda_r )
         , _condb( condb_r )
         {}
 
-        template<class _Tp>
-          bool operator()( _Tp t ) const
+        template<class Tp>
+          bool operator()( Tp t ) const
           {
             return _conda( t ) || _condb( t );
           }
 
-        _ACondition _conda;
-        _BCondition _condb;
+        TACondition _conda;
+        TBCondition _condb;
       };
 
     /** Convenience function for creating a Or from two conditions
      *  \a conda_r OR \a condb_r.
     */
-    template<class _ACondition, class _BCondition>
-      inline Or<_ACondition, _BCondition> or_c( _ACondition conda_r, _BCondition condb_r )
+    template<class TACondition, class TBCondition>
+      inline Or<TACondition, TBCondition> or_c( TACondition conda_r, TBCondition condb_r )
       {
-        return Or<_ACondition, _BCondition>( conda_r, condb_r );
+        return Or<TACondition, TBCondition>( conda_r, condb_r );
       }
 
-    /** Logical functor chaining \a _ACondition \c AND \a _BCondition.
+    /** Logical functor chaining \a TACondition \c AND \a TBCondition.
     */
-    template<class _ACondition, class _BCondition>
+    template<class TACondition, class TBCondition>
       struct Chain
       {
-        Chain( _ACondition conda_r, _BCondition condb_r )
+        Chain( TACondition conda_r, TBCondition condb_r )
         : _conda( conda_r )
         , _condb( condb_r )
         {}
 
-        template<class _Tp>
-          bool operator()( _Tp t ) const
+        template<class Tp>
+          bool operator()( Tp t ) const
           {
             return _conda( t ) && _condb( t );
           }
 
-        _ACondition _conda;
-        _BCondition _condb;
+        TACondition _conda;
+        TBCondition _condb;
       };
 
     /** Convenience function for creating a Chain from two conditions
      *  \a conda_r and \a condb_r.
     */
-    template<class _ACondition, class _BCondition>
-      inline Chain<_ACondition, _BCondition> chain( _ACondition conda_r, _BCondition condb_r )
+    template<class TACondition, class TBCondition>
+      inline Chain<TACondition, TBCondition> chain( TACondition conda_r, TBCondition condb_r )
       {
-        return Chain<_ACondition, _BCondition>( conda_r, condb_r );
+        return Chain<TACondition, TBCondition>( conda_r, condb_r );
       }
 
     //@}
@@ -366,44 +364,44 @@ namespace zypp
      *                 getFirst( result ) );
      * \endcode
      */
-    template<class _Tp>
+    template<class Tp>
     struct GetFirst
     {
-      GetFirst( _Tp & result_r )
+      GetFirst( Tp & result_r )
         : _result( &result_r )
       {}
-      bool operator()( const _Tp & val_r )
+      bool operator()( const Tp & val_r )
       { *_result = val_r; return false; }
 
       private:
-        _Tp * _result;
+        Tp * _result;
     };
 
     /** Convenience function for creating \ref GetFirst. */
-    template<class _Tp>
-    GetFirst<_Tp> getFirst( _Tp & result_r )
-    { return GetFirst<_Tp>( result_r ); }
+    template<class Tp>
+    GetFirst<Tp> getFirst( Tp & result_r )
+    { return GetFirst<Tp>( result_r ); }
 
 
     /** Strore the last result found in the variable passed to the ctor.
      */
-    template<class _Tp>
+    template<class Tp>
     struct GetLast
     {
-      GetLast( _Tp & result_r )
+      GetLast( Tp & result_r )
         : _result( &result_r )
       {}
-      bool operator()( const _Tp & val_r )
+      bool operator()( const Tp & val_r )
       { *_result = val_r; return true; }
 
       private:
-        _Tp * _result;
+        Tp * _result;
     };
 
     /** Convenience function for creating \ref GetLast. */
-    template<class _Tp>
-    GetLast<_Tp> getLast( _Tp & result_r )
-    { return GetLast<_Tp>( result_r ); }
+    template<class Tp>
+    GetLast<Tp> getLast( Tp & result_r )
+    { return GetLast<Tp>( result_r ); }
 
 
     /** Store all results found to some output_iterator.
@@ -413,25 +411,25 @@ namespace zypp
                                            sysRoot / "etc/products.d" );
      * \endcode
      */
-    template<class _OutputIterator>
+    template<class TOutputIterator>
     struct GetAll
     {
-      GetAll( _OutputIterator result_r )
+      GetAll( TOutputIterator result_r )
         : _result( result_r )
       {}
 
-      template<class _Tp>
-      bool operator()(  const _Tp & val_r ) const
+      template<class Tp>
+      bool operator()(  const Tp & val_r ) const
       { *(_result++) = val_r; return true; }
 
       private:
-        mutable _OutputIterator _result;
+        mutable TOutputIterator _result;
     };
 
     /** Convenience function for creating \ref GetAll. */
-    template<class _OutputIterator>
-    GetAll<_OutputIterator> getAll( _OutputIterator result_r )
-    { return GetAll<_OutputIterator>( result_r ); }
+    template<class TOutputIterator>
+    GetAll<TOutputIterator> getAll( TOutputIterator result_r )
+    { return GetAll<TOutputIterator>( result_r ); }
 
     //@}
     ///////////////////////////////////////////////////////////////////

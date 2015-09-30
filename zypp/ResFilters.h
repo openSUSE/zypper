@@ -152,9 +152,9 @@ namespace zypp
     typedef boost::function<bool ( ResObject::constPtr )> ResFilter;
 
     /** */
-    template<class _Res>
+    template<class TRes>
       inline filter::ByKind byKind()
-      { return filter::ByKind( ResTraits<_Res>::kind ); }
+      { return filter::ByKind( ResTraits<TRes>::kind ); }
 
     /** Select ResObject by name. */
     struct ByName : public ResObjectFilterFunctor
@@ -193,9 +193,9 @@ namespace zypp
       std::string _alias;
     };
 
-    /** Select ResObject by Edition using \a _Compare functor.
+    /** Select ResObject by Edition using \a TCompare functor.
      *
-     * Selects ResObject if <tt>_Compare( ResObject->edition(), _edition )</tt>
+     * Selects ResObject if <tt>TCompare( ResObject->edition(), _edition )</tt>
      * is \c true.
      * \code
      * // use the convenience funktions to create ByEdition:
@@ -205,11 +205,10 @@ namespace zypp
      * byEdition( someedition, CompareByGT<Edition>() ) //  edition >  someedition
      * \endcode
     */
-    template<class _Compare = CompareByEQ<Edition> >
+    template<class TCompare = CompareByEQ<Edition> >
       struct ByEdition : public ResObjectFilterFunctor
       {
-        ByEdition( const Edition & edition_r,
-                   _Compare cmp_r )
+        ByEdition( const Edition & edition_r, TCompare cmp_r )
         : _edition( edition_r )
         , _cmp( cmp_r )
         {}
@@ -220,23 +219,23 @@ namespace zypp
         }
 
         Edition  _edition;
-        _Compare _cmp;
+        TCompare _cmp;
       };
 
     /** */
-    template<class _Compare>
-      ByEdition<_Compare> byEdition( const Edition & edition_r, _Compare cmp_r )
-      { return ByEdition<_Compare>( edition_r, cmp_r ); }
+    template<class TCompare>
+      ByEdition<TCompare> byEdition( const Edition & edition_r, TCompare cmp_r )
+      { return ByEdition<TCompare>( edition_r, cmp_r ); }
 
     /** */
-    template<class _Compare>
-      ByEdition<_Compare> byEdition( const Edition & edition_r )
-      { return byEdition( edition_r, _Compare() ); }
+    template<class TCompare>
+      ByEdition<TCompare> byEdition( const Edition & edition_r )
+      { return byEdition( edition_r, TCompare() ); }
 
 
-    /** Select ResObject by Arch using \a _Compare functor.
+    /** Select ResObject by Arch using \a TCompare functor.
      *
-     * Selects ResObject if <tt>_Compare( ResObject->arch(), _arch )</tt>
+     * Selects ResObject if <tt>TCompare( ResObject->arch(), _arch )</tt>
      * is \c true.
      * \code
      * // use the convenience funktions to create ByArch:
@@ -246,11 +245,10 @@ namespace zypp
      * byArch( somearch, CompareByGT<Arch>() ) //  arch >  somearch
      * \endcode
     */
-    template<class _Compare = CompareByEQ<Arch> >
+    template<class TCompare = CompareByEQ<Arch> >
       struct ByArch : public ResObjectFilterFunctor
       {
-        ByArch( const Arch & arch_r,
-                   _Compare cmp_r )
+        ByArch( const Arch & arch_r, TCompare cmp_r )
         : _arch( arch_r )
         , _cmp( cmp_r )
         {}
@@ -261,18 +259,18 @@ namespace zypp
         }
 
         Arch  _arch;
-        _Compare _cmp;
+        TCompare _cmp;
       };
 
     /** */
-    template<class _Compare>
-      ByArch<_Compare> byArch( const Arch & arch_r, _Compare cmp_r )
-      { return ByArch<_Compare>( arch_r, cmp_r ); }
+    template<class TCompare>
+      ByArch<TCompare> byArch( const Arch & arch_r, TCompare cmp_r )
+      { return ByArch<TCompare>( arch_r, cmp_r ); }
 
     /** */
-    template<class _Compare>
-      ByArch<_Compare> byArch( const Arch & arch_r )
-      { return byArch( arch_r, _Compare() ); }
+    template<class TCompare>
+      ByArch<TCompare> byArch( const Arch & arch_r )
+      { return byArch( arch_r, TCompare() ); }
 
 
     ///////////////////////////////////////////////////////////////////
@@ -293,7 +291,6 @@ namespace zypp
       {
 	return p.status().isInstalled();
       }
-
     };
 
     /** Select PoolItem by uninstalled. */

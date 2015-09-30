@@ -37,11 +37,11 @@ namespace zypp
   ///   Commands    cmd( clist.getValue( "second" ) );
   /// \endcode
   ///////////////////////////////////////////////////////////////////
-  template< class _Tp, const bool _WithAlias = true >
+  template< class Tp, const bool _tWithAlias = true >
   class NamedValue
   {
-    typedef std::map< std::string, _Tp > NameMap;
-    typedef std::map< _Tp, std::string > ValueMap;
+    typedef std::map< std::string, Tp > NameMap;
+    typedef std::map< Tp, std::string > ValueMap;
 
   public:
     /** Whether not initialized (no (name,value) pair remembered) */
@@ -62,7 +62,7 @@ namespace zypp
       /** Get value mapped for name or alias.
        * \return \c true if name or alias was found.
        */
-      bool getValue( const std::string & name_r, _Tp & value_r ) const
+      bool getValue( const std::string & name_r, Tp & value_r ) const
       {
 	typename NameMap::const_iterator it( _nameMap.find( name_r ) );
 	if ( it == _nameMap.end() )
@@ -71,7 +71,7 @@ namespace zypp
 	return true;
       }
       /** \overload \throws std::out_of_range exception if \a name_r was not found. */
-      const _Tp & getValue( const std::string & name_r ) const
+      const Tp & getValue( const std::string & name_r ) const
       { return _nameMap.at( name_r ); }
     //@}
 
@@ -89,7 +89,7 @@ namespace zypp
       /** Get name of value.
        * \return \c true if name or alias was found.
        */
-      bool getName( const _Tp & value_r, std::string & name_r ) const
+      bool getName( const Tp & value_r, std::string & name_r ) const
       {
 	typename ValueMap::const_iterator it( _valueMap.find( value_r ) );
 	if ( it == _valueMap.end() )
@@ -98,7 +98,7 @@ namespace zypp
 	return true;
       }
       /** \overload \throws std::out_of_range exception if \a value_r was not found. */
-      const std::string & getName( const _Tp & value_r ) const
+      const std::string & getName( const Tp & value_r ) const
       { return _valueMap.at( value_r ); }
     //@}
 
@@ -106,30 +106,30 @@ namespace zypp
     /** \name Inserter
      */
     //@{
-      class _Inserter
+      class TInserter
       {
       public:
-	_Inserter( NamedValue & parent_r, const _Tp & value_r )
+	TInserter( NamedValue & parent_r, const Tp & value_r )
 	: _parent( &parent_r )
 	, _value( value_r )
 	{}
-	_Inserter & operator|( const std::string & name_r )
+	TInserter & operator|( const std::string & name_r )
 	{ _parent->insert( _value, name_r ); return *this; }
       private:
 	NamedValue * _parent;
-	_Tp _value;
+	Tp _value;
       };
 
-      _Inserter operator()( const _Tp & value_r )
-      { return _Inserter( *this, value_r ); }
+      TInserter operator()( const Tp & value_r )
+      { return TInserter( *this, value_r ); }
     //@}
 
     /** Remember name (1st call) or alias (subsequent calls).
      * \return \C true if this is the 1st call for \a value_r.
      * \throws std::logic_error if \a name_r is already used as name or alias.
-     * \throws std::logic_error if \c _WithAlias is \c false and a name for \a value_r is already defined.
+     * \throws std::logic_error if \c _tWithAlias is \c false and a name for \a value_r is already defined.
      */
-    bool insert( const _Tp & value_r, const std::string & name_r )
+    bool insert( const Tp & value_r, const std::string & name_r )
     {
       typename NameMap::const_iterator nit( _nameMap.find( name_r ) );
       if ( nit != _nameMap.end() )	// duplicate name
@@ -138,7 +138,7 @@ namespace zypp
       typename ValueMap::const_iterator tit( _valueMap.find( value_r ) );
       if ( tit != _valueMap.end() )	// duplicate value, i.e. an alias
       {
-	if ( !_WithAlias )
+	if ( !_tWithAlias )
 	  throw std::logic_error( "NamedValue::insert alias" );
 
 	_nameMap[name_r] = value_r;

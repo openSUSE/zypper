@@ -110,8 +110,8 @@ namespace zypp
       /** \overload taking container of category strings
        * 2nd template arg just to prevent instantiation for Category
        */
-      template <class _Container, typename = typename _Container::value_type>
-      bool isCategory( const _Container & categories_r ) const
+      template <class TContainer, typename = typename TContainer::value_type>
+      bool isCategory( const TContainer & categories_r ) const
       {
 	for ( const std::string & el : categories_r )
 	{ if ( isCategory( el ) ) return true; }
@@ -146,8 +146,8 @@ namespace zypp
       /** \overload taking container of severity strings
        * 2nd template arg just to prevent instantiation for SeverityFlag
        */
-      template <class _Container, typename = typename _Container::value_type>
-      bool isSeverity( const _Container & severities_r ) const
+      template <class TContainer, typename = typename TContainer::value_type>
+      bool isSeverity( const TContainer & severities_r ) const
       {
 	for ( const std::string & el : severities_r )
 	{ if ( isSeverity( el ) ) return true; }

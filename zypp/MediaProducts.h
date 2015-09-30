@@ -54,8 +54,8 @@ namespace zypp
   /**
    * FIXME: add a comment here...
    */
-  template <class _OutputIterator>
-  static void scanProductsFile( const Pathname & file_r, _OutputIterator result )
+  template <class TOutputIterator>
+  static void scanProductsFile( const Pathname & file_r, TOutputIterator result )
   {
     std::ifstream pfile( file_r.asString().c_str() );
     while ( pfile.good() ) {
@@ -84,8 +84,8 @@ namespace zypp
    * items will be inserted.
    * \throws MediaException If accessng the media fails
    */
-  template <class _OutputIterator>
-  void productsInMedia( const Url & url_r, _OutputIterator result )
+  template <class TOutputIterator>
+  void productsInMedia( const Url & url_r, TOutputIterator result )
   {
     media::MediaManager media_mgr;
     // open the media

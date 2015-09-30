@@ -25,15 +25,15 @@ namespace zypp
 
   ///////////////////////////////////////////////////////////////////
   //
-  //	CLASS NAME : AutoDispose<_Tp>
+  //	CLASS NAME : AutoDispose<Tp>
   //
-  /** Reference counted access to a \c _Tp object calling a custom
+  /** Reference counted access to a \c Tp object calling a custom
    *  \c Dispose function when the last AutoDispose handle to it is
    *  destroyed or reset.
    *
    * \note As with pointers, constness of an \c AutoDispose object does
-   * \b not apply to the stored \c _Tp object. If the stored \c _Tp object
-   * should be immutable, you should use <tt>AutoDispose\<const _Tp\></tt>.
+   * \b not apply to the stored \c Tp object. If the stored \c Tp object
+   * should be immutable, you should use <tt>AutoDispose\<const Tp\></tt>.
    *
    * Pass a filename to the application and provide the appropriate
    * code to be executed when the file is no longer needed:
@@ -88,15 +88,15 @@ namespace zypp
    * }
    * \endcode
   */
-  template<class _Tp>
+  template<class Tp>
     class AutoDispose
     {
     public:
-      typedef typename boost::call_traits<_Tp>::param_type       param_type;
-      typedef typename boost::call_traits<_Tp>::reference        reference;
-      typedef typename boost::call_traits<_Tp>::const_reference  const_reference;
-      typedef _Tp                                                value_type;
-      typedef typename boost::call_traits<_Tp>::value_type       result_type;
+      typedef typename boost::call_traits<Tp>::param_type       param_type;
+      typedef typename boost::call_traits<Tp>::reference        reference;
+      typedef typename boost::call_traits<Tp>::const_reference  const_reference;
+      typedef Tp                                                value_type;
+      typedef typename boost::call_traits<Tp>::value_type       result_type;
 
     public:
       /** Dispose function signatue. */
@@ -125,19 +125,19 @@ namespace zypp
 
     public:
 
-      /** Provide implicit conversion to \c _Tp\&. */
+      /** Provide implicit conversion to \c Tp\&. */
       operator reference() const
       { return _pimpl->_value; }
 
-      /** Reference to the \c _Tp object. */
+      /** Reference to the \c Tp object. */
       reference value() const
       { return _pimpl->_value; }
 
-      /** Reference to the \c _Tp object. */
+      /** Reference to the \c Tp object. */
       reference operator*() const
       { return _pimpl->_value; }
 
-      /** Pointer to the \c _Tp object (asserted to be <tt>!= NULL</tt>). */
+      /** Pointer to the \c Tp object (asserted to be <tt>!= NULL</tt>). */
       value_type * operator->() const
       { return & _pimpl->_value; }
 
@@ -189,9 +189,9 @@ namespace zypp
     };
   ///////////////////////////////////////////////////////////////////
 
-  /** \relates AutoDispose Stream output of the \c _Tp object. */
-  template<class _Tp>
-    inline std::ostream & operator<<( std::ostream & str, const AutoDispose<_Tp> & obj )
+  /** \relates AutoDispose Stream output of the \c Tp object. */
+  template<class Tp>
+    inline std::ostream & operator<<( std::ostream & str, const AutoDispose<Tp> & obj )
     { return str << obj.value(); }
 
   /////////////////////////////////////////////////////////////////

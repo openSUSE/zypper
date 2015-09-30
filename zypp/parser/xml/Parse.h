@@ -27,10 +27,10 @@ namespace zypp
 
     /** Parse xml \c input_r and store data in \c data_r.
      *
-     * \c _Data must be defaultconstructible and assignable.
+     * \c TData must be defaultconstructible and assignable.
      *
-     * \c _Data::RootNode must be a \ref xml::ParseDef constructible
-     * from \c _Data&.
+     * \c TData::RootNode must be a \ref xml::ParseDef constructible
+     * from \c TData&.
      *
      * \throws ParseDefException on parse errors.
      *
@@ -93,11 +93,11 @@ namespace zypp
      *  xmlData.parse( "/tmp/mytest.xml" );
      * \endcode
      */
-    template<class _Data>
-    inline void rnParse( const InputStream & input_r, _Data & data_r )
+    template<class TData>
+    inline void rnParse( const InputStream & input_r, TData & data_r )
     {
-      typedef typename _Data::RootNode RootNode;
-      _Data pdata;
+      typedef typename TData::RootNode RootNode;
+      TData pdata;
 
       xml::Reader reader( input_r );
       RootNode rootNode( pdata );

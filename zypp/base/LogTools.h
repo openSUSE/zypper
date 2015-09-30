@@ -87,9 +87,9 @@ namespace zypp
    * // (1, 2, 3)
    * \endcode
   */
-  template<class _Iterator>
+  template<class TIterator>
     std::ostream & dumpRange( std::ostream & str,
-                              _Iterator begin, _Iterator end,
+                              TIterator begin, TIterator end,
                               const std::string & intro = "{",
                               const std::string & pfx   = "\n  ",
                               const std::string & sep   = "\n  ",
@@ -110,30 +110,30 @@ namespace zypp
   /** Print range defined by iterators (single line style).
    * \see dumpRange
    */
-  template<class _Iterator>
+  template<class TIterator>
     std::ostream & dumpRangeLine( std::ostream & str,
-                                  _Iterator begin, _Iterator end )
+                                  TIterator begin, TIterator end )
     { return dumpRange( str, begin, end, "(", "", ", ", "", ")" ); }
 
 
-  template<class _Tp>
-    std::ostream & operator<<( std::ostream & str, const std::vector<_Tp> & obj )
+  template<class Tp>
+    std::ostream & operator<<( std::ostream & str, const std::vector<Tp> & obj )
     { return dumpRange( str, obj.begin(), obj.end() ); }
 
-  template<class _Tp, class _Cmp, class _Alloc>
-    std::ostream & operator<<( std::ostream & str, const std::set<_Tp,_Cmp,_Alloc> & obj )
+  template<class Tp, class TCmp, class TAlloc>
+    std::ostream & operator<<( std::ostream & str, const std::set<Tp,TCmp,TAlloc> & obj )
     { return dumpRange( str, obj.begin(), obj.end() ); }
 
-  template<class _Tp>
-    std::ostream & operator<<( std::ostream & str, const std::unordered_set<_Tp> & obj )
+  template<class Tp>
+    std::ostream & operator<<( std::ostream & str, const std::unordered_set<Tp> & obj )
     { return dumpRange( str, obj.begin(), obj.end() ); }
 
-  template<class _Tp>
-    std::ostream & operator<<( std::ostream & str, const std::multiset<_Tp> & obj )
+  template<class Tp>
+    std::ostream & operator<<( std::ostream & str, const std::multiset<Tp> & obj )
     { return dumpRange( str, obj.begin(), obj.end() ); }
 
-  template<class _Tp>
-    std::ostream & operator<<( std::ostream & str, const std::list<_Tp> & obj )
+  template<class Tp>
+    std::ostream & operator<<( std::ostream & str, const std::list<Tp> & obj )
     { return dumpRange( str, obj.begin(), obj.end() ); }
 
   ///////////////////////////////////////////////////////////////////
@@ -149,32 +149,32 @@ namespace zypp
      * used in a std::map. The mapped std::pair is printed as
      * <tt>[key] = value</tt>.
     */
-    template<class _Pair>
+    template<class TPair>
       class MapEntry
       {
       public:
-        MapEntry( const _Pair & pair_r )
+        MapEntry( const TPair & pair_r )
         : _pair( &pair_r )
         {}
 
-        const _Pair & pair() const
+        const TPair & pair() const
         { return *_pair; }
 
       private:
-        const _Pair *const _pair;
+        const TPair *const _pair;
       };
 
     /** \relates MapEntry Stream output. */
-    template<class _Pair>
-      std::ostream & operator<<( std::ostream & str, const MapEntry<_Pair> & obj )
+    template<class TPair>
+      std::ostream & operator<<( std::ostream & str, const MapEntry<TPair> & obj )
       {
         return str << '[' << obj.pair().first << "] = " << obj.pair().second;
       }
 
     /** \relates MapEntry Convenience function to create MapEntry from std::pair. */
-    template<class _Pair>
-      MapEntry<_Pair> mapEntry( const _Pair & pair_r )
-      { return MapEntry<_Pair>( pair_r ); }
+    template<class TPair>
+      MapEntry<TPair> mapEntry( const TPair & pair_r )
+      { return MapEntry<TPair>( pair_r ); }
 
     ///////////////////////////////////////////////////////////////////
     // dumpMap
@@ -184,12 +184,12 @@ namespace zypp
      * Uses a transform_iterator to wrap the std::pair into MapEntry.
      *
      */
-    template<class _Map>
+    template<class TMap>
       class DumpMap
       {
       public:
-        typedef _Map                        MapType;
-        typedef typename _Map::value_type   PairType;
+        typedef TMap                        MapType;
+        typedef typename TMap::value_type   PairType;
         typedef MapEntry<PairType>          MapEntryType;
 
         struct Transformer : public std::unary_function<PairType, MapEntryType>
@@ -202,11 +202,11 @@ namespace zypp
                 MapEntry_const_iterator;
 
       public:
-        DumpMap( const _Map & map_r )
+        DumpMap( const TMap & map_r )
         : _map( &map_r )
         {}
 
-        const _Map & map() const
+        const TMap & map() const
         { return *_map; }
 
         MapEntry_const_iterator begin() const
@@ -216,18 +216,18 @@ namespace zypp
         { return make_transform_iterator( map().end(), Transformer() );}
 
       private:
-        const _Map *const _map;
+        const TMap *const _map;
       };
 
     /** \relates DumpMap Stream output. */
-    template<class _Map>
-      std::ostream & operator<<( std::ostream & str, const DumpMap<_Map> & obj )
+    template<class TMap>
+      std::ostream & operator<<( std::ostream & str, const DumpMap<TMap> & obj )
       { return dumpRange( str, obj.begin(), obj.end() ); }
 
     /** \relates DumpMap Convenience function to create DumpMap from std::map. */
-    template<class _Map>
-      DumpMap<_Map> dumpMap( const _Map & map_r )
-      { return DumpMap<_Map>( map_r ); }
+    template<class TMap>
+      DumpMap<TMap> dumpMap( const TMap & map_r )
+      { return DumpMap<TMap>( map_r ); }
 
     ///////////////////////////////////////////////////////////////////
     // dumpKeys
@@ -240,18 +240,18 @@ namespace zypp
      * std::cout << dumpKeys(mymap) << std::endl;
      * \endcode
      */
-    template<class _Map>
+    template<class TMap>
       class DumpKeys
       {
       public:
-        typedef typename MapKVIteratorTraits<_Map>::Key_const_iterator MapKey_const_iterator;
+        typedef typename MapKVIteratorTraits<TMap>::Key_const_iterator MapKey_const_iterator;
 
       public:
-        DumpKeys( const _Map & map_r )
+        DumpKeys( const TMap & map_r )
         : _map( &map_r )
         {}
 
-        const _Map & map() const
+        const TMap & map() const
         { return *_map; }
 
         MapKey_const_iterator begin() const
@@ -261,18 +261,18 @@ namespace zypp
         { return make_map_key_end( map() ); }
 
       private:
-        const _Map *const _map;
+        const TMap *const _map;
       };
 
     /** \relates DumpKeys Stream output. */
-    template<class _Map>
-      std::ostream & operator<<( std::ostream & str, const DumpKeys<_Map> & obj )
+    template<class TMap>
+      std::ostream & operator<<( std::ostream & str, const DumpKeys<TMap> & obj )
       { return dumpRange( str, obj.begin(), obj.end() ); }
 
     /** \relates DumpKeys Convenience function to create DumpKeys from std::map. */
-    template<class _Map>
-      DumpKeys<_Map> dumpKeys( const _Map & map_r )
-      { return DumpKeys<_Map>( map_r ); }
+    template<class TMap>
+      DumpKeys<TMap> dumpKeys( const TMap & map_r )
+      { return DumpKeys<TMap>( map_r ); }
 
     ///////////////////////////////////////////////////////////////////
     // dumpValues
@@ -285,18 +285,18 @@ namespace zypp
      * std::cout << dumpValues(mymap) << std::endl;
      * \endcode
      */
-    template<class _Map>
+    template<class TMap>
       class DumpValues
       {
       public:
-        typedef typename MapKVIteratorTraits<_Map>::Value_const_iterator MapValue_const_iterator;
+        typedef typename MapKVIteratorTraits<TMap>::Value_const_iterator MapValue_const_iterator;
 
       public:
-        DumpValues( const _Map & map_r )
+        DumpValues( const TMap & map_r )
         : _map( &map_r )
         {}
 
-        const _Map & map() const
+        const TMap & map() const
         { return *_map; }
 
         MapValue_const_iterator begin() const
@@ -306,18 +306,18 @@ namespace zypp
         { return make_map_value_end( map() ); }
 
       private:
-        const _Map *const _map;
+        const TMap *const _map;
       };
 
     /** \relates DumpValues Stream output. */
-    template<class _Map>
-      std::ostream & operator<<( std::ostream & str, const DumpValues<_Map> & obj )
+    template<class TMap>
+      std::ostream & operator<<( std::ostream & str, const DumpValues<TMap> & obj )
       { return dumpRange( str, obj.begin(), obj.end() ); }
 
     /** \relates DumpValues Convenience function to create DumpValues from std::map. */
-    template<class _Map>
-      DumpValues<_Map> dumpValues( const _Map & map_r )
-      { return DumpValues<_Map>( map_r ); }
+    template<class TMap>
+      DumpValues<TMap> dumpValues( const TMap & map_r )
+      { return DumpValues<TMap>( map_r ); }
 
     /////////////////////////////////////////////////////////////////
   } // namespace _logtoolsdetail
@@ -329,16 +329,16 @@ namespace zypp
   using _logtoolsdetail::dumpKeys;   // dumpRange keys
   using _logtoolsdetail::dumpValues; // dumpRange values
 
-  template<class _Key, class _Tp>
-    std::ostream & operator<<( std::ostream & str, const std::map<_Key, _Tp> & obj )
+  template<class TKey, class Tp>
+    std::ostream & operator<<( std::ostream & str, const std::map<TKey, Tp> & obj )
     { return str << dumpMap( obj ); }
 
-  template<class _Key, class _Tp>
-    std::ostream & operator<<( std::ostream & str, const std::unordered_map<_Key, _Tp> & obj )
+  template<class TKey, class Tp>
+    std::ostream & operator<<( std::ostream & str, const std::unordered_map<TKey, Tp> & obj )
     { return str << dumpMap( obj ); }
 
-  template<class _Key, class _Tp>
-    std::ostream & operator<<( std::ostream & str, const std::multimap<_Key, _Tp> & obj )
+  template<class TKey, class Tp>
+    std::ostream & operator<<( std::ostream & str, const std::multimap<TKey, Tp> & obj )
     { return str << dumpMap( obj ); }
 
   /** Print stream status bits.
@@ -368,21 +368,21 @@ namespace zypp
 
   namespace detail
   {
-    template<class _Tp>
+    template<class Tp>
     struct Dump
     {
-      Dump( const _Tp & obj_r ) : _obj( obj_r ) {}
-      const _Tp & _obj;
+      Dump( const Tp & obj_r ) : _obj( obj_r ) {}
+      const Tp & _obj;
     };
 
-    template<class _Tp>
-    std::ostream & operator<<( std::ostream & str, const Dump<_Tp> & obj )
+    template<class Tp>
+    std::ostream & operator<<( std::ostream & str, const Dump<Tp> & obj )
     { return dumpOn( str, obj._obj ); }
   }
 
-  template<class _Tp>
-  detail::Dump<_Tp> dump( const _Tp & obj_r )
-  { return detail::Dump<_Tp>(obj_r); }
+  template<class Tp>
+  detail::Dump<Tp> dump( const Tp & obj_r )
+  { return detail::Dump<Tp>(obj_r); }
 
 
   /////////////////////////////////////////////////////////////////

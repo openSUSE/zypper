@@ -31,11 +31,11 @@ namespace zypp
     ///
     /// Used e.g. vor variable replaced config strings.
     ///////////////////////////////////////////////////////////////////
-    template<class _Tp, class _UnaryFunction>
+    template<class Tp, class TUnaryFunction>
     struct ValueTransform
     {
-      typedef _Tp RawType;
-      typedef _UnaryFunction Transformator;
+      typedef Tp RawType;
+      typedef TUnaryFunction Transformator;
       typedef typename Transformator::result_type TransformedType;
 
     public:
@@ -87,11 +87,11 @@ namespace zypp
     ///
     /// Offers iterating over transformed strings in the list.
     ///////////////////////////////////////////////////////////////////
-    template<class _Container, class _UnaryFunction>
+    template<class TContainer, class TUnaryFunction>
     struct ContainerTransform
     {
-      typedef _Container Container;
-      typedef _UnaryFunction Transformator;
+      typedef TContainer Container;
+      typedef TUnaryFunction Transformator;
       typedef typename Container::size_type size_type;
       typedef typename Container::value_type RawType;
       typedef typename Transformator::result_type TransformedType;

@@ -281,10 +281,10 @@ namespace zypp
   ///////////////////////////////////////////////////////////////////
 
   /** Helper for \ref ZYPP_THROW. */
-  template<class _Excpt>
-    void _ZYPP_THROW( const _Excpt & excpt_r, const exception_detail::CodeLocation & where_r ) __attribute__((noreturn));
-  template<class _Excpt>
-    void _ZYPP_THROW( const _Excpt & excpt_r, const exception_detail::CodeLocation & where_r )
+  template<class TExcpt>
+    void _ZYPP_THROW( const TExcpt & excpt_r, const exception_detail::CodeLocation & where_r ) __attribute__((noreturn));
+  template<class TExcpt>
+    void _ZYPP_THROW( const TExcpt & excpt_r, const exception_detail::CodeLocation & where_r )
     {
       excpt_r.relocate( where_r );
       Exception::log( excpt_r, where_r, "THROW:   " );
@@ -292,17 +292,17 @@ namespace zypp
     }
 
   /** Helper for \ref ZYPP_THROW. */
-  template<class _Excpt>
-    void _ZYPP_CAUGHT( const _Excpt & excpt_r, const exception_detail::CodeLocation & where_r )
+  template<class TExcpt>
+    void _ZYPP_CAUGHT( const TExcpt & excpt_r, const exception_detail::CodeLocation & where_r )
     {
       Exception::log( excpt_r, where_r, "CAUGHT:  " );
     }
 
   /** Helper for \ref ZYPP_THROW. */
-  template<class _Excpt>
-    void _ZYPP_RETHROW( const _Excpt & excpt_r, const exception_detail::CodeLocation & where_r ) __attribute__((noreturn));
-  template<class _Excpt>
-    void _ZYPP_RETHROW( const _Excpt & excpt_r, const exception_detail::CodeLocation & where_r )
+  template<class TExcpt>
+    void _ZYPP_RETHROW( const TExcpt & excpt_r, const exception_detail::CodeLocation & where_r ) __attribute__((noreturn));
+  template<class TExcpt>
+    void _ZYPP_RETHROW( const TExcpt & excpt_r, const exception_detail::CodeLocation & where_r )
     {
       Exception::log( excpt_r, where_r, "RETHROW: " );
       excpt_r.relocate( where_r );

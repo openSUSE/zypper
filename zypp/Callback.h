@@ -58,7 +58,7 @@ namespace zypp
    *
    * \par Sending a Task report (SENDER SIDE).
    *
-   * Simply create a callback::SendReport<_Report>, where _Report
+   * Simply create a callback::SendReport<TReport>, where TReport
    * is your task report structure. Invoke the callback functions
    * as needed. That's it.
    *
@@ -135,11 +135,11 @@ namespace zypp
    * argument.
    *
    * Convenient sending can be achieved by installing non-virtual methods
-   * in the _Report class, which encode the arguments in UserData and send
+   * in the TReport class, which encode the arguments in UserData and send
    * them via ReportBase::report().
    *
    * Convenient receiving can be achieved by installing virtual methods in
-   * the _Report class, which can be simply overloaded by the receiver. Downside
+   * the TReport class, which can be simply overloaded by the receiver. Downside
    * of this is that adding virtual methods breaks binary compatibility.
    */
   namespace callback
@@ -160,16 +160,16 @@ namespace zypp
     };
 
     /**  */
-    template<class _Report>
+    template<class TReport>
       class DistributeReport;
 
     /**  */
-    template<class _Report>
-      struct ReceiveReport : public _Report
+    template<class TReport>
+      struct ReceiveReport : public TReport
       {
-	typedef _Report                   ReportType;
-	typedef ReceiveReport<_Report>    Receiver;
-        typedef DistributeReport<_Report> Distributor;
+	typedef TReport                   ReportType;
+	typedef ReceiveReport<TReport>    Receiver;
+        typedef DistributeReport<TReport> Distributor;
 
         virtual ~ReceiveReport()
         { disconnect(); }
@@ -193,13 +193,13 @@ namespace zypp
       };
 
     /**  */
-    template<class _Report>
+    template<class TReport>
       struct DistributeReport
       {
        public:
-	typedef _Report                   ReportType;
-	typedef ReceiveReport<_Report>    Receiver;
-	typedef DistributeReport<_Report> Distributor;
+	typedef TReport                   ReportType;
+	typedef ReceiveReport<TReport>    Receiver;
+	typedef DistributeReport<TReport> Distributor;
 
          static DistributeReport & instance()
          {
@@ -232,12 +232,12 @@ namespace zypp
       };
 
     /**  */
-    template<class _Report>
+    template<class TReport>
       struct SendReport : private zypp::base::NonCopyable
       {
-	typedef _Report                   ReportType;
-        typedef ReceiveReport<_Report>    Receiver;
-        typedef DistributeReport<_Report> Distributor;
+	typedef TReport                   ReportType;
+        typedef ReceiveReport<TReport>    Receiver;
+        typedef DistributeReport<TReport> Distributor;
 
         SendReport()
         { Distributor::instance()->reportbegin(); }
@@ -280,12 +280,12 @@ namespace zypp
      *  ...// r receiving the report
      * \endcode
     */
-    template<class _Report>
+    template<class TReport>
       struct TempConnect
       {
-	typedef _Report                   ReportType;
-        typedef ReceiveReport<_Report>    Receiver;
-        typedef DistributeReport<_Report> Distributor;
+	typedef TReport                   ReportType;
+        typedef ReceiveReport<TReport>    Receiver;
+        typedef DistributeReport<TReport> Distributor;
 
         TempConnect()
         : _oldRec( Distributor::instance().getReceiver() )
