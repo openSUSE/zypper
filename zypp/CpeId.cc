@@ -930,7 +930,7 @@ namespace zypp
 #if WFN_STRICT_SPEC
   //SetCompare CpeId::Value::setRelationMixinCompare( const CpeId::Value & trg ) const
   {
-    static const SetCompare _NeedsCloserLook( SetCompare::Enum(-1) );	// artificial Compare value
+    static const SetCompare kNeedsCloserLook( SetCompare::Enum(-1) );	// artificial Compare value
     static const SetCompare matchTabel[4][4] = {{
       /* ANY,		ANY		*/ SetCompare::equal,
       /* ANY,		NA		*/ SetCompare::properSuperset,
@@ -944,19 +944,19 @@ namespace zypp
     },{
       /* wildcardfree,	ANY		*/ SetCompare::properSubset,
       /* wildcardfree,	NA		*/ SetCompare::disjoint,
-      /* wildcardfree,	wildcardfree	*/ _NeedsCloserLook,	// equal or disjoint
+      /* wildcardfree,	wildcardfree	*/ kNeedsCloserLook,	// equal or disjoint
       /* wildcardfree,	wildcarded	*/ SetCompare::uncomparable,
     },{
       /* wildcarded,	ANY		*/ SetCompare::properSubset,
       /* wildcarded,	NA		*/ SetCompare::disjoint,
-      /* wildcarded,	wildcardfree	*/ _NeedsCloserLook,	// superset or disjoint
+      /* wildcarded,	wildcardfree	*/ kNeedsCloserLook,	// superset or disjoint
       /* wildcarded,	wildcarded	*/ SetCompare::uncomparable,
     }};
 
     Type srcType = type();
     Type trgType = trg.type();
     SetCompare ret = matchTabel[srcType.asIntegral()][trgType.asIntegral()];
-    if ( ret == _NeedsCloserLook )
+    if ( ret == kNeedsCloserLook )
     {
       if ( srcType == Type::wildcardfree )	// trgType == Type::wildcardfree
       {

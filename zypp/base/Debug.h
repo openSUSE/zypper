@@ -92,15 +92,15 @@ namespace zypp
      * traced method, and traceCAD simply drops a line in the log.
      *
      * This tracer logs construction, copy construction, assignment,
-     * destruction and _PING.
+     * destruction and ping.
      *
      * assignment: In case the traced class defines an operator=
      * it must be altered to call TraceCAD::operator=, otherwise it
      * won't be triggered.
      *
-     * _PING: Completely up to you. Call _PING somewhere in the traced
+     * ping: Completely up to you. Call ping somewhere in the traced
      * class to indicate something. In case you overload traceCAD, do
-     * whatever is appropriate on _PING. It's just an offer to perform
+     * whatever is appropriate on ping. It's just an offer to perform
      * logging or actions here, and not in the traced code.
      *
      * But traceCAD may be overloaded to produce more stats.
@@ -138,7 +138,7 @@ namespace zypp
         { --_totalTraceCAD();
           traceCAD( DTOR, *this, *this ); }
 
-        void _PING() const
+        void ping() const
         { traceCAD( PING, *this, *this ); }
       };
 

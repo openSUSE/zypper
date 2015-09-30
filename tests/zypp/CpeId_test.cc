@@ -310,26 +310,26 @@ BOOST_AUTO_TEST_CASE(cpeid_compare)
 
   BOOST_CHECK( compare( wildcardfree,	Value::ANY,	SetCompare::properSubset	) );
   BOOST_CHECK( compare( wildcardfree,	Value::NA,	SetCompare::disjoint		) );
-  //BOOST_CHECK( compare( wildcardfree,	wildcardfree,	_NeedsCloserLook,	// equal or disjoint
+  //BOOST_CHECK( compare( wildcardfree,	wildcardfree,	kNeedsCloserLook,	// equal or disjoint
   BOOST_CHECK( compare( wildcardfree,	wildcardfree,	SetCompare::equal		) );
   BOOST_CHECK( compare( wildcardfree,	wildcardfree2,	SetCompare::disjoint		) );
 #if WFN_STRICT_SPEC
   BOOST_CHECK( compare( wildcardfree,	wildcarded,	SetCompare::uncomparable	) );
 #else
-  //BOOST_CHECK( compare( wildcardfree,	wildcarded,	_NeedsCloserLook,	// subset or disjoint
+  //BOOST_CHECK( compare( wildcardfree,	wildcarded,	kNeedsCloserLook,	// subset or disjoint
   BOOST_CHECK( compare( wildcardfree,	wildcarded,	SetCompare::properSubset	) );
   BOOST_CHECK( compare( wildcardfree,	wildcarded2,	SetCompare::disjoint		) );
 #endif
 
   BOOST_CHECK( compare( wildcarded,	Value::ANY,	SetCompare::properSubset	) );
   BOOST_CHECK( compare( wildcarded,	Value::NA,	SetCompare::disjoint		) );
-  //BOOST_CHECK( compare( wildcarded,	wildcardfree,	_NeedsCloserLook,	// superset or disjoint
+  //BOOST_CHECK( compare( wildcarded,	wildcardfree,	kNeedsCloserLook,	// superset or disjoint
   BOOST_CHECK( compare( wildcarded,	wildcardfree,	SetCompare::properSuperset	) );
   BOOST_CHECK( compare( wildcarded,	wildcardfree2,	SetCompare::disjoint		) );
 #if WFN_STRICT_SPEC
   BOOST_CHECK( compare( wildcarded,	wildcarded,	SetCompare::uncomparable	) );
 #else
-  //BOOST_CHECK( compare( wildcarded,	wildcarded,	_NeedsCloserLook,	// equal or uncomparable
+  //BOOST_CHECK( compare( wildcarded,	wildcarded,	kNeedsCloserLook,	// equal or uncomparable
   BOOST_CHECK( compare( wildcarded,	wildcarded,	SetCompare::equal		) );
   BOOST_CHECK( compare( wildcarded,	wildcarded2,	SetCompare::uncomparable	) );
 #endif

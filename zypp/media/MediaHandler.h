@@ -82,7 +82,7 @@ class MediaHandler {
 	 *
 	 *      dir, false => user specified attach point (not removed)
 	 */
-	AttachPoint     _AttachPointHint;
+	AttachPoint     _attachPointHint;
 
 	/**
 	 * The relative root directory of the data on the media.

@@ -56,7 +56,7 @@ MediaHandler::MediaHandler ( const Url &      url_r,
 			     const bool       does_download_r )
     : _mediaSource()
     , _attachPoint( new AttachPoint())
-    , _AttachPointHint()
+    , _attachPointHint()
     , _relativeRoot( urlpath_below_attachpoint_r)
     , _does_download( does_download_r )
     , _attach_mtime(0)
@@ -268,8 +268,8 @@ MediaHandler::setAttachPoint(const AttachPointRef &ref)
 void
 MediaHandler::attachPointHint(const Pathname &path, bool temporary)
 {
-  _AttachPointHint.path = path;
-  _AttachPointHint.temp = temporary;
+  _attachPointHint.path = path;
+  _attachPointHint.temp = temporary;
 }
 
 ///////////////////////////////////////////////////////////////////
@@ -283,7 +283,7 @@ MediaHandler::attachPointHint(const Pathname &path, bool temporary)
 AttachPoint
 MediaHandler::attachPointHint() const
 {
-  return _AttachPointHint;
+  return _attachPointHint;
 }
 
 ///////////////////////////////////////////////////////////////////
