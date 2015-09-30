@@ -18,17 +18,17 @@ using std::endl;
 
 struct Print
 {
-  template<class _Tp>
-    bool operator()( const _Tp & val_r ) const
+  template<class Tp>
+    bool operator()( const Tp & val_r ) const
     { USR << val_r << endl; return true; }
 };
 
 ///////////////////////////////////////////////////////////////////
 
-template<class _Tp>
-  struct PrintOn : public std::unary_function<_Tp, bool>
+template<class Tp>
+  struct PrintOn : public std::unary_function<Tp, bool>
   {
-    bool operator()( const _Tp & obj ) const
+    bool operator()( const Tp & obj ) const
     {
       if ( _leadNL )
         _str << std::endl << _prfx << obj;

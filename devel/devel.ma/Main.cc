@@ -86,7 +86,7 @@ try {
   ResPool   pool( ResPool::instance() );
   sat::Pool satpool( sat::Pool::instance() );
   ///////////////////////////////////////////////////////////////////
-  dumpRange( WAR << "satpool.multiversion " , satpool.multiversionBegin(), satpool.multiversionEnd() ) << endl;
+  dumpRange( WAR << "satpool.multiversion " , satpool.multiversion().begin(), satpool.multiversion().end() ) << endl;
   TestSetup::LoadSystemAt( sysRoot, Arch_i586 );
   ///////////////////////////////////////////////////////////////////
 
