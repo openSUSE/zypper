@@ -69,7 +69,7 @@ SolverQueueItemLock::~SolverQueueItemLock()
 
 //---------------------------------------------------------------------------
 
-bool SolverQueueItemLock::addRule (_Queue & q)
+bool SolverQueueItemLock::addRule (sat::detail::CQueue & q)
 {
     ::Id id = _item.satSolvable().id();
     if (id == ID_NULL) {

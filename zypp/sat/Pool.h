@@ -260,7 +260,7 @@ namespace zypp
 
       public:
         /** Expert backdoor. */
-        ::_Pool * get() const;
+        detail::CPool * get() const;
       private:
         /** Default ctor */
         Pool() {}

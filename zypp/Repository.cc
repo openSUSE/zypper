@@ -39,15 +39,15 @@ namespace zypp
 
     /////////////////////////////////////////////////////////////////
 
-    ::_Repo * Repository::get() const
+    sat::detail::CRepo * Repository::get() const
     { return myPool().getRepo( _id ); }
 
 #define NO_REPOSITORY_RETURN( VAL ) \
-    ::_Repo * _repo( get() ); \
+    sat::detail::CRepo * _repo( get() ); \
     if ( ! _repo ) return VAL
 
 #define NO_REPOSITORY_THROW( VAL ) \
-    ::_Repo * _repo( get() ); \
+    sat::detail::CRepo * _repo( get() ); \
     if ( ! _repo ) ZYPP_THROW( VAL )
 
     bool Repository::isSystemRepo() const
@@ -396,7 +396,7 @@ namespace zypp
       {
 	if ( base() )
 	{
-	  ::_Pool * satpool = sat::Pool::instance().get();
+	  sat::detail::CPool * satpool = sat::Pool::instance().get();
 	  do {
 	    ++base_reference();
 	  } while ( base() < satpool->repos+satpool->nrepos && !*base() );

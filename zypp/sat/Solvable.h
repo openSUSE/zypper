@@ -369,7 +369,7 @@ namespace zypp
       /** Return next Solvable in \ref Repo (or \ref noSolvable). */
       Solvable nextInRepo() const;
       /** Expert backdoor. */
-      ::_Solvable * get() const;
+      detail::CSolvable * get() const;
       /** Expert backdoor. */
       IdType id() const { return _id; }
 
@@ -453,7 +453,7 @@ namespace zypp
       /** */
       class SolvableIterator : public boost::iterator_adaptor<
           SolvableIterator                   // Derived
-          , ::_Solvable*                     // Base
+          , CSolvable*                       // Base
           , const Solvable                   // Value
           , boost::forward_traversal_tag     // CategoryOrTraversal
           , const Solvable                   // Reference

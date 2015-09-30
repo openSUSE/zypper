@@ -302,7 +302,7 @@ namespace zypp
 
     public:
         /** Expert backdoor. */
-        ::_Repo * get() const;
+        sat::detail::CRepo * get() const;
         /** Expert backdoor. */
         IdType id() const { return _id; }
         /** libsolv internal priorities.
@@ -444,7 +444,7 @@ namespace zypp
       /** */
       class RepositoryIterator : public boost::iterator_adaptor<
 	    RepositoryIterator                            // Derived
-			   , ::_Repo **                   // Base
+			   , sat::detail::CRepo **        // Base
                            , Repository                   // Value
 			   , boost::forward_traversal_tag // CategoryOrTraversal
 			   , Repository                   // Reference
@@ -455,7 +455,7 @@ namespace zypp
           : RepositoryIterator::iterator_adaptor_( 0 )
           {}
 
-          explicit RepositoryIterator( ::_Repo ** p )
+          explicit RepositoryIterator( sat::detail::CRepo ** p )
           : RepositoryIterator::iterator_adaptor_( p )
           {}
 

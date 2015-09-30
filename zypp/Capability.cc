@@ -134,7 +134,7 @@ namespace zypp
 
     /** Build \ref Capability from data. No parsing required.
     */
-    sat::detail::IdType relFromStr( ::_Pool * pool_r,
+    sat::detail::IdType relFromStr( sat::detail::CPool * pool_r,
                                     const Arch & arch_r,
                                     const std::string & name_r,
                                     Rel op_r,
@@ -170,7 +170,7 @@ namespace zypp
    /** Build \ref Capability from data, just parsing name for '[.arch]' and detect
     * 'kind srcpackage' (will be mapped to arch \c src).
     */
-    sat::detail::IdType relFromStr( ::_Pool * pool_r,
+    sat::detail::IdType relFromStr( sat::detail::CPool * pool_r,
                                     const std::string & name_r, Rel op_r, const Edition & ed_r,
                                     const ResKind & kind_r )
     {
@@ -202,7 +202,7 @@ namespace zypp
 
     /** Full parse from string, unless Capability::PARSED.
     */
-    sat::detail::IdType relFromStr( ::_Pool * pool_r,
+    sat::detail::IdType relFromStr( sat::detail::CPool * pool_r,
                                     const Arch & arch_r, // parse from name if empty
                                     const std::string & str_r, const ResKind & kind_r,
                                     Capability::CtorFlag flag_r )

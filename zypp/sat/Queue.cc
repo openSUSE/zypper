@@ -25,10 +25,10 @@ namespace zypp
 {
 
   template<>
-  struct ::_Queue * rwcowClone<struct ::_Queue>( const struct ::_Queue * rhs )
+  sat::detail::CQueue * rwcowClone<sat::detail::CQueue>( const sat::detail::CQueue * rhs )
   {
-    struct ::_Queue * ret = new ::_Queue;
-    ::queue_init_clone( ret, const_cast<struct ::_Queue *>(rhs) );
+    sat::detail::CQueue * ret = new sat::detail::CQueue;
+    ::queue_init_clone( ret, const_cast<sat::detail::CQueue *>(rhs) );
     return ret;
   }
 
@@ -37,7 +37,7 @@ namespace zypp
   {
 
     Queue::Queue()
-      : _pimpl( new ::_Queue )
+      : _pimpl( new detail::CQueue )
     { ::queue_init( _pimpl.get() ); }
 
     Queue::~Queue()
@@ -115,8 +115,8 @@ namespace zypp
     Queue::value_type Queue::pop_front()
     { return ::queue_shift( _pimpl.get() ); }
 
-    Queue::operator struct ::_Queue *()		// COW: nonconst version can't be inlined
-    { return _pimpl.get(); }			// without exposing struct ::_Queue
+    Queue::operator detail::CQueue *()		// COW: nonconst version can't be inlined
+    { return _pimpl.get(); }			// without exposing detail::CQueue
 
     std::ostream & operator<<( std::ostream & str, const Queue & obj )
     { return dumpRangeLine( str << "Queue ", obj.begin(), obj.end() );  }
@@ -135,8 +135,8 @@ namespace zypp
 
     bool operator==( const Queue & lhs, const Queue & rhs )
     {
-      const struct ::_Queue * l = lhs;
-      const struct ::_Queue * r = rhs;
+      const detail::CQueue * l = lhs;
+      const detail::CQueue * r = rhs;
       return( l == r || ( l->count == r->count && ::memcmp( l->elements, r->elements, l->count ) == 0 ) );
     }
 

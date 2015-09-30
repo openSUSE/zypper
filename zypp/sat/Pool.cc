@@ -46,7 +46,7 @@ namespace zypp
     const std::string & Pool::systemRepoAlias()
     { return detail::PoolImpl::systemRepoAlias(); }
 
-    ::_Pool * Pool::get() const
+    detail::CPool * Pool::get() const
     { return myPool().getPool(); }
 
     Pool::size_type Pool::capacity() const
@@ -288,12 +288,12 @@ namespace zypp
       std::ofstream idx( solvidxfile.c_str() );
 
 
-      ::_Pool * _pool = ::pool_create();
-      ::_Repo * _repo = ::repo_create( _pool, "" );
+      detail::CPool * _pool = ::pool_create();
+      detail::CRepo * _repo = ::repo_create( _pool, "" );
       if ( ::repo_add_solv( _repo, solv, 0 ) == 0 )
       {
 	int _id = 0;
-	::_Solvable * _solv = nullptr;
+	detail::CSolvable * _solv = nullptr;
 	FOR_REPO_SOLVABLES( _repo, _id, _solv )
 	{
 	  if ( _solv )

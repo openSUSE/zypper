@@ -8,10 +8,6 @@
 \---------------------------------------------------------------------*/
 /** \file	zypp/sat/Transaction.h
  */
-extern "C"
-{
-  struct _Transaction;
-}
 #ifndef ZYPP_SAT_TRANSACTION_H
 #define ZYPP_SAT_TRANSACTION_H
 

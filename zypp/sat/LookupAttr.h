@@ -12,10 +12,6 @@
 #ifndef ZYPP_SAT_LOOKUPATTR_H
 #define ZYPP_SAT_LOOKUPATTR_H
 
-extern "C"
-{
-struct _Dataiterator;
-}
 #include <iosfwd>
 
 #include "zypp/base/PtrTypes.h"
@@ -286,7 +282,7 @@ namespace zypp
 
     namespace detail
     {
-      /** Wrapper around sat \c ::_Dataiterator.
+      /** Wrapper around sat \c detail::CDataiterator.
        *
        * Manages copy and assign, and release of allocated
        * resources like datamatcher inside the dataiterator.
@@ -296,7 +292,7 @@ namespace zypp
       class DIWrap
       {
         public:
-          /** \c NULL \c ::_Dataiterator */
+          /** \c NULL \c detail::CDataiterator */
           DIWrap()
           : _dip( 0 )
           {}
@@ -331,12 +327,12 @@ namespace zypp
           { return _dip; }
 
         public:
-          ::_Dataiterator * operator->() const  { return _dip; }
-          ::_Dataiterator * get()        const  { return _dip; }
+          detail::CDataiterator * operator->() const  { return _dip; }
+          detail::CDataiterator * get()        const  { return _dip; }
           const std::string & getstr()   const  { return _mstring; }
 
 	private:
-          ::_Dataiterator * _dip;
+          detail::CDataiterator * _dip;
           std::string _mstring;
       };
       /** \relates DIWrap Stream output. */
@@ -353,7 +349,7 @@ namespace zypp
      */
     class LookupAttr::iterator : public boost::iterator_adaptor<
         iterator                       // Derived
-        , ::_Dataiterator *            // Base
+        , detail::CDataiterator *            // Base
         , detail::IdType               // Value
         , boost::forward_traversal_tag // CategoryOrTraversal
         , detail::IdType               // Reference
@@ -546,7 +542,7 @@ namespace zypp
 
       public:
         /**
-         * C-tor taking over ownership of the passed \c ::_Dataiterator
+         * C-tor taking over ownership of the passed \c detail::CDataiterator
          * and doing it's first iteration (::dataiterator_step)
          */
         iterator( detail::DIWrap & dip_r );
@@ -561,7 +557,7 @@ namespace zypp
               && ( ! base() || dip_equal( *base(), *rhs.base() ) );
         }
 
-        bool dip_equal( const ::_Dataiterator & lhs, const ::_Dataiterator & rhs ) const;
+        bool dip_equal( const detail::CDataiterator & lhs, const detail::CDataiterator & rhs ) const;
 
         detail::IdType dereference() const;
 
@@ -569,7 +565,7 @@ namespace zypp
 
       public:
         /** Expert backdoor. */
-        ::_Dataiterator * get() const
+        detail::CDataiterator * get() const
         { return _dip.get(); }
       private:
         detail::DIWrap _dip;
@@ -604,10 +600,10 @@ namespace zypp
 ///////////////////////////////////////////////////////////////////
 
 /** \relates LookupAttr::iterator Stream output of the underlying iterator for debug. */
-std::ostream & operator<<( std::ostream & str, const ::_Dataiterator * obj );
+std::ostream & operator<<( std::ostream & str, const zypp::sat::detail::CDataiterator * obj );
 
 /** \relates LookupAttr::iterator Stream output of the underlying iterator for debug. */
-inline std::ostream & operator<<( std::ostream & str, const ::_Dataiterator & obj )
+inline std::ostream & operator<<( std::ostream & str, const zypp::sat::detail::CDataiterator & obj )
 { return str << &obj; }
 
 #endif // ZYPP_SAT_LOOKUPATTR_H

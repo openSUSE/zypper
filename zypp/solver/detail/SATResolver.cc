@@ -101,7 +101,7 @@ IMPL_PTR_TYPE(SATResolver);
 // Callbacks for SAT policies
 //---------------------------------------------------------------------------
 
-int vendorCheck( Pool *pool, Solvable *solvable1, Solvable *solvable2 )
+int vendorCheck( sat::detail::CPool *pool, Solvable *solvable1, Solvable *solvable2 )
 {
   return VendorAttr::instance().equivalent( IdString(solvable1->vendor),
                                             IdString(solvable2->vendor) ) ? 0 : 1;
@@ -138,8 +138,8 @@ std::ostream &
 SATResolver::dumpOn( std::ostream & os ) const
 {
     os << "<resolver>" << endl;
-    if (_solv) {
-#define OUTS(X) os << "  " << #X << "\t= " << solver_get_flag(_solv, SOLVER_FLAG_##X) << endl
+    if (_satSolver) {
+#define OUTS(X) os << "  " << #X << "\t= " << solver_get_flag(_satSolver, SOLVER_FLAG_##X) << endl
 	OUTS( ALLOW_DOWNGRADE );
 	OUTS( ALLOW_ARCHCHANGE );
 	OUTS( ALLOW_VENDORCHANGE );
@@ -175,10 +175,10 @@ SATResolver::dumpOn( std::ostream & os ) const
 
 //---------------------------------------------------------------------------
 
-SATResolver::SATResolver (const ResPool & pool, Pool *SATPool)
-    : _pool (pool)
-    , _SATPool (SATPool)
-    , _solv(NULL)
+SATResolver::SATResolver (const ResPool & pool, sat::detail::CPool *satPool)
+    : _pool(pool)
+    , _satPool(satPool)
+    , _satSolver(NULL)
     , _fixsystem(false)
     , _allowdowngrade(false)
     , _allowarchchange(false)
@@ -374,8 +374,8 @@ bool
 SATResolver::solving(const CapabilitySet & requires_caps,
 		     const CapabilitySet & conflict_caps)
 {
-    _solv = solver_create( _SATPool );
-    ::pool_set_custom_vendorcheck( _SATPool, &vendorCheck );
+    _satSolver = solver_create( _satPool );
+    ::pool_set_custom_vendorcheck( _satPool, &vendorCheck );
     if (_fixsystem) {
 	queue_push( &(_jobQueue), SOLVER_VERIFY|SOLVER_SOLVABLE_ALL);
 	queue_push( &(_jobQueue), 0 );
@@ -392,20 +392,20 @@ SATResolver::solving(const CapabilitySet & requires_caps,
 	queue_push( &(_jobQueue), SOLVER_DROP_ORPHANED|SOLVER_SOLVABLE_ALL);
 	queue_push( &(_jobQueue), 0 );
     }
-    solver_set_flag(_solv, SOLVER_FLAG_ADD_ALREADY_RECOMMENDED, !_ignorealreadyrecommended);
-    solver_set_flag(_solv, SOLVER_FLAG_ALLOW_DOWNGRADE, _allowdowngrade);
-    solver_set_flag(_solv, SOLVER_FLAG_ALLOW_UNINSTALL, _allowuninstall);
-    solver_set_flag(_solv, SOLVER_FLAG_ALLOW_ARCHCHANGE, _allowarchchange);
-    solver_set_flag(_solv, SOLVER_FLAG_ALLOW_VENDORCHANGE, _allowvendorchange);
-    solver_set_flag(_solv, SOLVER_FLAG_SPLITPROVIDES, _dosplitprovides);
-    solver_set_flag(_solv, SOLVER_FLAG_NO_UPDATEPROVIDE, _noupdateprovide);
-    solver_set_flag(_solv, SOLVER_FLAG_IGNORE_RECOMMENDED, _onlyRequires);
-    solver_set_flag(_solv, SOLVER_FLAG_DUP_ALLOW_DOWNGRADE,	_dup_allowdowngrade );
-    solver_set_flag(_solv, SOLVER_FLAG_DUP_ALLOW_NAMECHANGE,	_dup_allownamechange );
-    solver_set_flag(_solv, SOLVER_FLAG_DUP_ALLOW_ARCHCHANGE,	_dup_allowarchchange );
-    solver_set_flag(_solv, SOLVER_FLAG_DUP_ALLOW_VENDORCHANGE,	_dup_allowvendorchange );
+    solver_set_flag(_satSolver, SOLVER_FLAG_ADD_ALREADY_RECOMMENDED, !_ignorealreadyrecommended);
+    solver_set_flag(_satSolver, SOLVER_FLAG_ALLOW_DOWNGRADE, _allowdowngrade);
+    solver_set_flag(_satSolver, SOLVER_FLAG_ALLOW_UNINSTALL, _allowuninstall);
+    solver_set_flag(_satSolver, SOLVER_FLAG_ALLOW_ARCHCHANGE, _allowarchchange);
+    solver_set_flag(_satSolver, SOLVER_FLAG_ALLOW_VENDORCHANGE, _allowvendorchange);
+    solver_set_flag(_satSolver, SOLVER_FLAG_SPLITPROVIDES, _dosplitprovides);
+    solver_set_flag(_satSolver, SOLVER_FLAG_NO_UPDATEPROVIDE, _noupdateprovide);
+    solver_set_flag(_satSolver, SOLVER_FLAG_IGNORE_RECOMMENDED, _onlyRequires);
+    solver_set_flag(_satSolver, SOLVER_FLAG_DUP_ALLOW_DOWNGRADE,	_dup_allowdowngrade );
+    solver_set_flag(_satSolver, SOLVER_FLAG_DUP_ALLOW_NAMECHANGE,	_dup_allownamechange );
+    solver_set_flag(_satSolver, SOLVER_FLAG_DUP_ALLOW_ARCHCHANGE,	_dup_allowarchchange );
+    solver_set_flag(_satSolver, SOLVER_FLAG_DUP_ALLOW_VENDORCHANGE,	_dup_allowvendorchange );
 #if 1
-#define HACKENV(X,D) solver_set_flag(_solv, X, env::HACKENV( #X, D ) );
+#define HACKENV(X,D) solver_set_flag(_satSolver, X, env::HACKENV( #X, D ) );
     HACKENV( SOLVER_FLAG_DUP_ALLOW_DOWNGRADE,	_dup_allowdowngrade );
     HACKENV( SOLVER_FLAG_DUP_ALLOW_NAMECHANGE,	_dup_allownamechange );
     HACKENV( SOLVER_FLAG_DUP_ALLOW_ARCHCHANGE,	_dup_allowarchchange );
@@ -417,7 +417,7 @@ SATResolver::solving(const CapabilitySet & requires_caps,
     // Solve !
     MIL << "Starting solving...." << endl;
     MIL << *this;
-    solver_solve( _solv, &(_jobQueue) );
+    solver_solve( _satSolver, &(_jobQueue) );
     MIL << "....Solver end" << endl;
 
     // copying solution back to zypp pool
@@ -428,7 +428,7 @@ SATResolver::solving(const CapabilitySet & requires_caps,
     /*  solvables to be installed */
     Queue decisionq;
     queue_init(&decisionq);
-    solver_get_decisionqueue(_solv, &decisionq);
+    solver_get_decisionqueue(_satSolver, &decisionq);
     for ( int i = 0; i < decisionq.count; ++i )
     {
       sat::Solvable slv( decisionq.elements[i] );
@@ -448,7 +448,7 @@ SATResolver::solving(const CapabilitySet & requires_caps,
       bool mustCheckObsoletes = false;
       for_( it, systemRepo.solvablesBegin(), systemRepo.solvablesEnd() )
       {
-	if (solver_get_decisionlevel(_solv, it->id()) > 0)
+	if (solver_get_decisionlevel(_satSolver, it->id()) > 0)
 	  continue;
 
 	// Check if this is an update
@@ -489,9 +489,9 @@ SATResolver::solving(const CapabilitySet & requires_caps,
     queue_init(&suggestions);
     queue_init(&orphaned);
     queue_init(&unneeded);
-    solver_get_recommendations(_solv, &recommendations, &suggestions, 0);
-    solver_get_orphaned(_solv, &orphaned);
-    solver_get_unneeded(_solv, &unneeded, 1);
+    solver_get_recommendations(_satSolver, &recommendations, &suggestions, 0);
+    solver_get_orphaned(_satSolver, &orphaned);
+    solver_get_unneeded(_satSolver, &unneeded, 1);
     /*  solvables which are recommended */
     for ( int i = 0; i < recommendations.count; ++i )
     {
@@ -537,7 +537,7 @@ SATResolver::solving(const CapabilitySet & requires_caps,
     invokeOnEach( _pool.begin(),
 		  _pool.end(),
 		  functor::functorRef<bool,PoolItem> (collectPseudoInstalled) );
-    solver_trivial_installable(_solv, &solvableQueue, &flags );
+    solver_trivial_installable(_satSolver, &solvableQueue, &flags );
     for (int i = 0; i < solvableQueue.count; i++) {
 	PoolItem item = _pool.find (sat::Solvable(solvableQueue.elements[i]));
 	item.status().setUndetermined();
@@ -581,7 +581,7 @@ SATResolver::solving(const CapabilitySet & requires_caps,
 	}
     }
 
-    if (solver_problem_count(_solv) > 0 )
+    if (solver_problem_count(_satSolver) > 0 )
     {
 	ERR << "Solverrun finished with an ERROR" << endl;
 	return false;
@@ -638,7 +638,7 @@ SATResolver::solverInit(const PoolItemList & weakItems)
       queue_push( &(_jobQueue), solv.id() );
     }
 
-    ::pool_add_userinstalled_jobs(_SATPool, sat::Pool::instance().autoInstalled(), &(_jobQueue), GET_USERINSTALLED_NAMES|GET_USERINSTALLED_INVERTED);
+    ::pool_add_userinstalled_jobs(_satPool, sat::Pool::instance().autoInstalled(), &(_jobQueue), GET_USERINSTALLED_NAMES|GET_USERINSTALLED_INVERTED);
 
     if ( _distupgrade )
     {
@@ -677,10 +677,10 @@ void
 SATResolver::solverEnd()
 {
   // cleanup
-  if ( _solv )
+  if ( _satSolver )
   {
-    solver_free(_solv);
-    _solv = NULL;
+    solver_free(_satSolver);
+    _satSolver = NULL;
     queue_free( &(_jobQueue) );
   }
 }
@@ -811,8 +811,8 @@ void SATResolver::doUpdate()
     // set locks for the solver
     setLocks();
 
-    _solv = solver_create( _SATPool );
-    ::pool_set_custom_vendorcheck( _SATPool, &vendorCheck );
+    _satSolver = solver_create( _satPool );
+    ::pool_set_custom_vendorcheck( _satPool, &vendorCheck );
     if (_fixsystem) {
 	queue_push( &(_jobQueue), SOLVER_VERIFY|SOLVER_SOLVABLE_ALL);
 	queue_push( &(_jobQueue), 0 );
@@ -829,21 +829,21 @@ void SATResolver::doUpdate()
 	queue_push( &(_jobQueue), SOLVER_DROP_ORPHANED|SOLVER_SOLVABLE_ALL);
 	queue_push( &(_jobQueue), 0 );
     }
-    solver_set_flag(_solv, SOLVER_FLAG_ADD_ALREADY_RECOMMENDED, !_ignorealreadyrecommended);
-    solver_set_flag(_solv, SOLVER_FLAG_ALLOW_DOWNGRADE, _allowdowngrade);
-    solver_set_flag(_solv, SOLVER_FLAG_ALLOW_UNINSTALL, _allowuninstall);
-    solver_set_flag(_solv, SOLVER_FLAG_ALLOW_ARCHCHANGE, _allowarchchange);
-    solver_set_flag(_solv, SOLVER_FLAG_ALLOW_VENDORCHANGE, _allowvendorchange);
-    solver_set_flag(_solv, SOLVER_FLAG_SPLITPROVIDES, _dosplitprovides);
-    solver_set_flag(_solv, SOLVER_FLAG_NO_UPDATEPROVIDE, _noupdateprovide);
-    solver_set_flag(_solv, SOLVER_FLAG_IGNORE_RECOMMENDED, _onlyRequires);
+    solver_set_flag(_satSolver, SOLVER_FLAG_ADD_ALREADY_RECOMMENDED, !_ignorealreadyrecommended);
+    solver_set_flag(_satSolver, SOLVER_FLAG_ALLOW_DOWNGRADE, _allowdowngrade);
+    solver_set_flag(_satSolver, SOLVER_FLAG_ALLOW_UNINSTALL, _allowuninstall);
+    solver_set_flag(_satSolver, SOLVER_FLAG_ALLOW_ARCHCHANGE, _allowarchchange);
+    solver_set_flag(_satSolver, SOLVER_FLAG_ALLOW_VENDORCHANGE, _allowvendorchange);
+    solver_set_flag(_satSolver, SOLVER_FLAG_SPLITPROVIDES, _dosplitprovides);
+    solver_set_flag(_satSolver, SOLVER_FLAG_NO_UPDATEPROVIDE, _noupdateprovide);
+    solver_set_flag(_satSolver, SOLVER_FLAG_IGNORE_RECOMMENDED, _onlyRequires);
 
     sat::Pool::instance().prepareForSolving();
 
     // Solve !
     MIL << "Starting solving for update...." << endl;
     MIL << *this;
-    solver_solve( _solv, &(_jobQueue) );
+    solver_solve( _satSolver, &(_jobQueue) );
     MIL << "....Solver end" << endl;
 
     // copying solution back to zypp pool
@@ -852,14 +852,14 @@ void SATResolver::doUpdate()
     /*  solvables to be installed */
     Queue decisionq;
     queue_init(&decisionq);
-    solver_get_decisionqueue(_solv, &decisionq);
+    solver_get_decisionqueue(_satSolver, &decisionq);
     for (int i = 0; i < decisionq.count; i++)
     {
       Id p;
       p = decisionq.elements[i];
       if (p < 0 || !sat::Solvable(p))
 	continue;
-      if (sat::Solvable(p).repository().get() == _solv->pool->installed)
+      if (sat::Solvable(p).repository().get() == _satSolver->pool->installed)
 	continue;
 
       PoolItem poolItem = _pool.find (sat::Solvable(p));
@@ -872,9 +872,9 @@ void SATResolver::doUpdate()
     queue_free(&decisionq);
 
     /* solvables to be erased */
-    for (int i = _solv->pool->installed->start; i < _solv->pool->installed->start + _solv->pool->installed->nsolvables; i++)
+    for (int i = _satSolver->pool->installed->start; i < _satSolver->pool->installed->start + _satSolver->pool->installed->nsolvables; i++)
     {
-      if (solver_get_decisionlevel(_solv, i) > 0)
+      if (solver_get_decisionlevel(_satSolver, i) > 0)
 	  continue;
 
       PoolItem poolItem( _pool.find( sat::Solvable(i) ) );
@@ -958,7 +958,7 @@ sat::Solvable SATResolver::mapSolvable ( const Id & id )
 string SATResolver::SATprobleminfoString(Id problem, string &detail, Id &ignoreId)
 {
   string ret;
-  Pool *pool = _solv->pool;
+  sat::detail::CPool *pool = _satSolver->pool;
   Id probr;
   Id dep, source, target;
   sat::Solvable s, s2;
@@ -967,8 +967,8 @@ string SATResolver::SATprobleminfoString(Id problem, string &detail, Id &ignoreI
 
   // FIXME: solver_findallproblemrules to get all rules for this problem
   // (the 'most relevabt' one returned by solver_findproblemrule is embedded
-  probr = solver_findproblemrule(_solv, problem);
-  switch (solver_ruleinfo(_solv, probr, &source, &target, &dep))
+  probr = solver_findproblemrule(_satSolver, problem);
+  switch (solver_ruleinfo(_satSolver, probr, &source, &target, &dep))
   {
       case SOLVER_RULE_DISTUPGRADE:
 	  s = mapSolvable (source);
@@ -1097,8 +1097,8 @@ ResolverProblemList
 SATResolver::problems ()
 {
     ResolverProblemList resolverProblems;
-    if (_solv && solver_problem_count(_solv)) {
-	Pool *pool = _solv->pool;
+    if (_satSolver && solver_problem_count(_satSolver)) {
+	sat::detail::CPool *pool = _satSolver->pool;
 	int pcnt;
 	Id p, rp, what;
 	Id problem, solution, element;
@@ -1110,7 +1110,7 @@ SATResolver::problems ()
 	MIL << "Encountered problems! Here are the solutions:\n" << endl;
 	pcnt = 1;
 	problem = 0;
-	while ((problem = solver_next_problem(_solv, problem)) != 0) {
+	while ((problem = solver_next_problem(_satSolver, problem)) != 0) {
 	    MIL << "Problem " <<  pcnt++ << ":" << endl;
 	    MIL << "====================================" << endl;
 	    string detail;
@@ -1121,10 +1121,10 @@ SATResolver::problems ()
 	    ResolverProblem_Ptr resolverProblem = new ResolverProblem (whatString, detail);
 
 	    solution = 0;
-	    while ((solution = solver_next_solution(_solv, problem, solution)) != 0) {
+	    while ((solution = solver_next_solution(_satSolver, problem, solution)) != 0) {
 		element = 0;
 		ProblemSolutionCombi *problemSolution = new ProblemSolutionCombi;
-		while ((element = solver_next_solutionelement(_solv, problem, solution, element, &p, &rp)) != 0) {
+		while ((element = solver_next_solutionelement(_satSolver, problem, solution, element, &p, &rp)) != 0) {
 		    if (p == SOLVER_SOLUTION_JOB) {
 			/* job, rp is index into job queue */
 			what = _jobQueue.elements[rp];
@@ -1309,7 +1309,7 @@ SATResolver::problems ()
 			    PoolItem itemTo = _pool.find (sd);
 			    if (itemFrom && itemTo) {
 				problemSolution->addSingleAction (itemTo, INSTALL);
-				int illegal = policy_is_illegal(_solv, s.get(), sd.get(), 0);
+				int illegal = policy_is_illegal(_satSolver, s.get(), sd.get(), 0);
 
 				if ((illegal & POLICY_ILLEGAL_DOWNGRADE) != 0)
 				{
@@ -1455,16 +1455,16 @@ void SATResolver::setSystemRequirements()
 sat::StringQueue SATResolver::autoInstalled() const
 {
   sat::StringQueue ret;
-  if ( _solv )
-    ::solver_get_userinstalled( _solv, ret, GET_USERINSTALLED_NAMES|GET_USERINSTALLED_INVERTED );
+  if ( _satSolver )
+    ::solver_get_userinstalled( _satSolver, ret, GET_USERINSTALLED_NAMES|GET_USERINSTALLED_INVERTED );
   return ret;
 }
 
 sat::StringQueue SATResolver::userInstalled() const
 {
   sat::StringQueue ret;
-  if ( _solv )
-    ::solver_get_userinstalled( _solv, ret, GET_USERINSTALLED_NAMES );
+  if ( _satSolver )
+    ::solver_get_userinstalled( _satSolver, ret, GET_USERINSTALLED_NAMES );
   return ret;
 }
 

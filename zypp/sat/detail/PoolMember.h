@@ -19,9 +19,16 @@
 
 extern "C"
 {
-struct _Solvable;
-struct _Repo;
-struct _Pool;
+  // Those _Type names are exposed as sat::detail::CType below!
+  struct _Dataiterator;
+  struct _Datamatcher;
+  struct _Map;
+  struct _Pool;
+  struct _Queue;
+  struct _Repo;
+  struct _Solvable;
+  struct _Solver;
+  struct _Transaction;
 }
 
 ///////////////////////////////////////////////////////////////////
@@ -44,6 +51,21 @@ namespace zypp
   ///////////////////////////////////////////////////////////////////
   namespace sat
   { /////////////////////////////////////////////////////////////////
+
+    ///////////////////////////////////////////////////////////////////
+    namespace detail
+    {
+      typedef ::_Dataiterator	CDataiterator;	///< Wrapped libsolv C data type exposed as backdoor
+      typedef ::_Datamatcher	CDatamatcher;	///< Wrapped libsolv C data type exposed as backdoor
+      typedef ::_Map		CMap;		///< Wrapped libsolv C data type exposed as backdoor
+      typedef ::_Pool		CPool;		///< Wrapped libsolv C data type exposed as backdoor
+      typedef ::_Queue		CQueue;		///< Wrapped libsolv C data type exposed as backdoor
+      typedef ::_Repo		CRepo;		///< Wrapped libsolv C data type exposed as backdoor
+      typedef ::_Solvable	CSolvable;	///< Wrapped libsolv C data type exposed as backdoor
+      typedef ::_Solver		CSolver;	///< Wrapped libsolv C data type exposed as backdoor
+      typedef ::_Transaction	CTransaction;	///< Wrapped libsolv C data type exposed as backdoor
+    } // namespace detail
+    ///////////////////////////////////////////////////////////////////
 
     class Pool;
     class Solvable;

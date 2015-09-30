@@ -106,7 +106,7 @@ namespace zypp
 
       /////////////////////////////////////////////////////////////////
 
-      static void logSat( struct _Pool *, void *data, int type, const char *logString )
+      static void logSat( CPool *, void *data, int type, const char *logString )
       {
 	  if ( type & (SOLV_FATAL|SOLV_ERROR) ) {
 	    L_ERR("libsolv") << logString;
@@ -117,7 +117,7 @@ namespace zypp
 	  }
       }
 
-      detail::IdType PoolImpl::nsCallback( struct _Pool *, void * data, detail::IdType lhs, detail::IdType rhs )
+      detail::IdType PoolImpl::nsCallback( CPool *, void * data, detail::IdType lhs, detail::IdType rhs )
       {
         // lhs:    the namespace identifier, e.g. NAMESPACE:MODALIAS
         // rhs:    the value, e.g. pci:v0000104Cd0000840[01]sv*sd*bc*sc*i*
@@ -296,16 +296,16 @@ namespace zypp
 
       ///////////////////////////////////////////////////////////////////
 
-      ::_Repo * PoolImpl::_createRepo( const std::string & name_r )
+      CRepo * PoolImpl::_createRepo( const std::string & name_r )
       {
         setDirty(__FUNCTION__, name_r.c_str() );
-        ::_Repo * ret = ::repo_create( _pool, name_r.c_str() );
+        CRepo * ret = ::repo_create( _pool, name_r.c_str() );
         if ( ret && name_r == systemRepoAlias() )
           ::pool_set_installed( _pool, ret );
         return ret;
       }
 
-      void PoolImpl::_deleteRepo( ::_Repo * repo_r )
+      void PoolImpl::_deleteRepo( CRepo * repo_r )
       {
         setDirty(__FUNCTION__, repo_r->name );
 	if ( isSystemRepo( repo_r ) )
@@ -314,7 +314,7 @@ namespace zypp
         ::repo_free( repo_r, /*reuseids*/false );
       }
 
-      int PoolImpl::_addSolv( ::_Repo * repo_r, FILE * file_r )
+      int PoolImpl::_addSolv( CRepo * repo_r, FILE * file_r )
       {
         setDirty(__FUNCTION__, repo_r->name );
         int ret = ::repo_add_solv( repo_r, file_r, 0 );
@@ -323,7 +323,7 @@ namespace zypp
         return ret;
       }
 
-      int PoolImpl::_addHelix( ::_Repo * repo_r, FILE * file_r )
+      int PoolImpl::_addHelix( CRepo * repo_r, FILE * file_r )
       {
         setDirty(__FUNCTION__, repo_r->name );
         int ret = ::repo_add_helix( repo_r, file_r, 0 );
@@ -332,7 +332,7 @@ namespace zypp
         return 0;
       }
 
-      void PoolImpl::_postRepoAdd( ::_Repo * repo_r )
+      void PoolImpl::_postRepoAdd( CRepo * repo_r )
       {
         if ( ! isSystemRepo( repo_r ) )
         {
@@ -352,7 +352,7 @@ namespace zypp
           unsigned       blockSize  = 0;
           for ( detail::IdType i = repo_r->start; i < repo_r->end; ++i )
           {
-              ::_Solvable * s( _pool->solvables + i );
+              CSolvable * s( _pool->solvables + i );
               if ( s->repo == repo_r && sysids.find( s->arch ) == sysids.end() )
               {
                 // Remember an unwanted arch entry:
@@ -376,7 +376,7 @@ namespace zypp
         }
       }
 
-      detail::SolvableIdType PoolImpl::_addSolvables( ::_Repo * repo_r, unsigned count_r )
+      detail::SolvableIdType PoolImpl::_addSolvables( CRepo * repo_r, unsigned count_r )
       {
         setDirty(__FUNCTION__, repo_r->name );
         return ::repo_add_solvable_block( repo_r, count_r );
@@ -384,7 +384,7 @@ namespace zypp
 
       void PoolImpl::setRepoInfo( RepoIdType id_r, const RepoInfo & info_r )
       {
-        ::_Repo * repo( getRepo( id_r ) );
+        CRepo * repo( getRepo( id_r ) );
         if ( repo )
         {
           bool dirty = false;

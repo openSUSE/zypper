@@ -77,9 +77,9 @@ class SATResolver : public base::ReferenceCounted, private base::NonCopyable, pr
 
   private:
     ResPool _pool;
-    Pool *_SATPool;
-    Solver *_solv;
-    Queue _jobQueue;
+    sat::detail::CPool *_satPool;
+    sat::detail::CSolver *_satSolver;
+    sat::detail::CQueue _jobQueue;
 
     // list of problematic items (orphaned)
     PoolItemList _problem_items;
@@ -141,7 +141,7 @@ class SATResolver : public base::ReferenceCounted, private base::NonCopyable, pr
 
   public:
 
-    SATResolver (const ResPool & pool, Pool *SATPool);
+    SATResolver (const ResPool & pool, sat::detail::CPool *satPool);
     virtual ~SATResolver();
 
     // ---------------------------------- I/O

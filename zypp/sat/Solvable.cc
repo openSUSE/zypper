@@ -99,11 +99,11 @@ namespace zypp
 
     /////////////////////////////////////////////////////////////////
 
-    ::_Solvable * Solvable::get() const
+    detail::CSolvable * Solvable::get() const
     { return myPool().getSolvable( _id ); }
 
 #define NO_SOLVABLE_RETURN( VAL ) \
-    ::_Solvable * _solvable( get() ); \
+    detail::CSolvable * _solvable( get() ); \
     if ( ! _solvable ) return VAL
 
     Solvable Solvable::nextInPool() const
@@ -114,7 +114,7 @@ namespace zypp
       NO_SOLVABLE_RETURN( noSolvable );
       for ( detail::SolvableIdType next = _id+1; next < unsigned(_solvable->repo->end); ++next )
       {
-        ::_Solvable * nextS( myPool().getSolvable( next ) );
+        detail::CSolvable * nextS( myPool().getSolvable( next ) );
         if ( nextS && nextS->repo == _solvable->repo )
         {
           return Solvable( next );
@@ -409,7 +409,7 @@ namespace zypp
     bool Solvable::identical( const Solvable & rhs ) const
     {
       NO_SOLVABLE_RETURN( ! rhs.get() );
-      ::_Solvable * rhssolvable( rhs.get() );
+      detail::CSolvable * rhssolvable( rhs.get() );
       return rhssolvable && ( _solvable == rhssolvable || ::solvable_identical( _solvable, rhssolvable ) );
     }
 
