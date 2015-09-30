@@ -1009,7 +1009,7 @@ namespace zypp
     assert_urls(info);
 
     // we will throw this later if no URL checks out fine
-    RepoException rexception( info, _PL("Valid metadata not found at specified URL",
+    RepoException rexception( info, PL_("Valid metadata not found at specified URL",
 					"Valid metadata not found at specified URLs",
 					info.baseUrlsSize() ) );
 

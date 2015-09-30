@@ -109,11 +109,11 @@ namespace zypp
       static void logSat( struct _Pool *, void *data, int type, const char *logString )
       {
 	  if ( type & (SOLV_FATAL|SOLV_ERROR) ) {
-	    _ERR("libsolv") << logString;
+	    L_ERR("libsolv") << logString;
 	  } else if ( type & SOLV_DEBUG_STATS ) {
-	    _DBG("libsolv") << logString;
+	    L_DBG("libsolv") << logString;
 	  } else {
-	    _MIL("libsolv") << logString;
+	    L_MIL("libsolv") << logString;
 	  }
       }
 

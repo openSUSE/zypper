@@ -60,7 +60,7 @@ extern "C"
 
 #include "zypp/sat/detail/PoolImpl.h"
 
-#define _XDEBUG(x) do { if (base::logger::isExcessive()) XXX << x << std::endl;} while (0)
+#define XDEBUG(x) do { if (base::logger::isExcessive()) XXX << x << std::endl;} while (0)
 
 /////////////////////////////////////////////////////////////////////////
 namespace zypp
@@ -231,15 +231,15 @@ SATSolutionToPool (PoolItem item, const ResStatus & status, const ResStatus::Tra
     // installation/deletion
     if (status.isToBeInstalled()) {
 	r = item.status().setToBeInstalled (causer);
-	_XDEBUG("SATSolutionToPool install returns " << item << ", " << r);
+	XDEBUG("SATSolutionToPool install returns " << item << ", " << r);
     }
     else if (status.isToBeUninstalledDueToUpgrade()) {
 	r = item.status().setToBeUninstalledDueToUpgrade (causer);
-	_XDEBUG("SATSolutionToPool upgrade returns " << item << ", " <<  r);
+	XDEBUG("SATSolutionToPool upgrade returns " << item << ", " <<  r);
     }
     else if (status.isToBeUninstalled()) {
 	r = item.status().setToBeUninstalled (causer);
-	_XDEBUG("SATSolutionToPool remove returns " << item << ", " <<  r);
+	XDEBUG("SATSolutionToPool remove returns " << item << ", " <<  r);
     }
 
     return;
@@ -544,13 +544,13 @@ SATResolver::solving(const CapabilitySet & requires_caps,
 
 	if (flags.elements[i] == -1) {
 	    item.status().setNonRelevant();
-	    _XDEBUG("SATSolutionToPool(" << item << " ) nonRelevant !");
+	    XDEBUG("SATSolutionToPool(" << item << " ) nonRelevant !");
 	} else if (flags.elements[i] == 1) {
 	    item.status().setSatisfied();
-	    _XDEBUG("SATSolutionToPool(" << item << " ) satisfied !");
+	    XDEBUG("SATSolutionToPool(" << item << " ) satisfied !");
 	} else if (flags.elements[i] == 0) {
 	    item.status().setBroken();
-	    _XDEBUG("SATSolutionToPool(" << item << " ) broken !");
+	    XDEBUG("SATSolutionToPool(" << item << " ) broken !");
 	}
     }
     queue_free(&(solvableQueue));

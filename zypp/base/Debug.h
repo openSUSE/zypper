@@ -161,14 +161,14 @@ namespace zypp
           case TraceCADBase::CTOR:
           case TraceCADBase::PING:
           case TraceCADBase::DTOR:
-            _DBG("DEBUG") << what_r << self_r << " (" << self_r._ident << ")" << std::endl;
+            L_DBG("DEBUG") << what_r << self_r << " (" << self_r._ident << ")" << std::endl;
             break;
 
           case TraceCADBase::COPYCTOR:
           case TraceCADBase::MOVECTOR:
           case TraceCADBase::ASSIGN:
           case TraceCADBase::MOVEASSIGN:
-            _DBG("DEBUG") << what_r << self_r << "( " << rhs_r << ")" << " (" << self_r._ident << ")" << std::endl;
+            L_DBG("DEBUG") << what_r << self_r << "( " << rhs_r << ")" << " (" << self_r._ident << ")" << std::endl;
             break;
           }
       }

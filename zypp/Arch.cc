@@ -403,10 +403,10 @@ namespace zypp
       {
         const CompatEntry & target( assertCompatSetEntry( targetArch_r ) );
         target.addCompatBit( assertCompatSetEntry( arch0_r )._idBit );
-#define _SETARG(N) if ( arch##N##_r.empty() ) return; target.addCompatBit( assertCompatSetEntry( arch##N##_r )._idBit )
-        _SETARG(1); _SETARG(2); _SETARG(3); _SETARG(4);
-        _SETARG(5); _SETARG(6); _SETARG(7); _SETARG(8); _SETARG(9);
-#undef _SETARG
+#define SETARG(N) if ( arch##N##_r.empty() ) return; target.addCompatBit( assertCompatSetEntry( arch##N##_r )._idBit )
+        SETARG(1); SETARG(2); SETARG(3); SETARG(4);
+        SETARG(5); SETARG(6); SETARG(7); SETARG(8); SETARG(9);
+#undef SETARG
       }
 
     private:

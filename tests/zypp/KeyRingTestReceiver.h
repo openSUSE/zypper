@@ -1,6 +1,6 @@
 
-#ifndef _ZYPP_KEYRING_TEST_RECEIVER_H
-#define _ZYPP_KEYRING_TEST_RECEIVER_H
+#ifndef ZYPP_KEYRING_TEST_RECEIVER_H
+#define ZYPP_KEYRING_TEST_RECEIVER_H
 
 #include "zypp/Callback.h"
 #include "zypp/KeyRing.h"

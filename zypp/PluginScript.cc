@@ -50,12 +50,12 @@ namespace zypp
 	{
 	  if ( _buffer.empty() )
 	  {
-	    _DBG("PLUGIN") << "< (empty)" << endl;
+	    L_DBG("PLUGIN") << "< (empty)" << endl;
 	  }
 	  else
 	  {
 	    std::istringstream datas( _buffer );
-	    iostr::copyIndent( datas, _DBG("PLUGIN"), "< "  ) << endl;
+	    iostr::copyIndent( datas, L_DBG("PLUGIN"), "< "  ) << endl;
 	  }
 	}
       }
@@ -72,7 +72,7 @@ namespace zypp
       {
 	std::string line;
 	while ( _prog.stderrGetline( line ) )
-	  _WAR("PLUGIN") << "! " << line << endl;
+	  L_WAR("PLUGIN") << "! " << line << endl;
       }
       ExternalProgramWithStderr & _prog;
     };
@@ -274,7 +274,7 @@ namespace zypp
     if ( PLUGIN_DEBUG )
     {
       std::istringstream datas( data );
-      iostr::copyIndent( datas, _DBG("PLUGIN") ) << endl;
+      iostr::copyIndent( datas, L_DBG("PLUGIN") ) << endl;
     }
 
     // try writing the pipe....
