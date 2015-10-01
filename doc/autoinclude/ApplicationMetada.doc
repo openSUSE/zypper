@@ -1,0 +1,88 @@
+/**
+
+\page zypp--appdata Code 12 Application Metadata
+
+\author Michael Andres <ma@suse.de>
+
+<HR><!-- ====================================================================== -->
+
+\section zypp-appdata_intro Intro
+
+Since Code12 we support \c application as new kind of resolvable object (see e.g. http://worldofgnome.org/gnome-software-on-opensuse). This is short abstract about how a \c package and it's associated \c application are connected metadata wise.
+
+\code
+# zypper download virt-manager
+...
+Retrieving package virt-manager-1.2.1-8.1.noarch            (1/1), 354.8 KiB (  2.6 MiB unpacked)
+(1/1) /var/cache/zypp/packages/server/suse/noarch/virt-manager-1.2.1-8.1.noarch.rpm .......[done]
+\endcode
+\code
+# rpm -qplv /var/cache/zypp/packages/server/suse/noarch/virt-manager-1.2.1-8.1.noarch.rpm | grep /usr/share/appdata
+-rw-r--r--   1 root root   1119 Sep 18 09:47 /usr/share/appdata/virt-manager.appdata.xml
+\endcode
+
+The <tt>package:virt-manager</tt> provides \c application metadata in its file <tt>/usr/share/appdata/virt-manager.appdata.xml</tt>. After installation the presence of <tt>/usr/share/appdata/virt-manager.appdata.xml</tt> indicates the installed <tt>application:'Virtual Machine Manager'</tt>. The connection is provided by the <tt>package:virt-manager</tt> \c appdata provides...
+
+\code
+# zypp-NameReqPrv -D virt-manager
+...
+(976)virt-manager-1.2.1-8.1.noarch(@System)
+ PROVIDES (5){
+  application()
+  appdata()
+  appdata(virt-manager.appdata.xml)
+          ^^^^^^^^^^^^
+\endcode
+
+...matching the content of \c /usr/share/appdata/virt-manager.appdata.xml:
+
+\code
+# less /usr/share/appdata/virt-manager.appdata.xml
+<application>
+ <id type="desktop">virt-manager.desktop</id>
+  ^^                ^^^^^^^^^^^^
+ <metadata_license>CC0-1.0</metadata_license>
+ <project_license>GPL-2.0+</project_license>
+ <name>Virtual Machine Manager</name>
+\endcode
+
+To establish this connection for uninstalled \c package/application pairs, the repository metadata must provide the \c appdata.xml files for the included packages. This is done in for \c susetags repos in \c suse/setup/descr/appdata.xml.gz, for \c rpmmd in <tt>repodata/CHCKSUM-appdata.xml.gz</tt>.
+
+
+\section zypp-appdata_wrong_appdata Missing or wrong appdata
+
+\code
+# zypper se -s -t application 'Virtual Machine Manager'
+...
+S | Name                    | Type        | Version | Arch   | Repository
+--+-------------------------+-------------+---------+--------+------------------
+i | Virtual Machine Manager | application |         | noarch | (System Packages)
+\endcode
+\code
+# zypper se -s virt-manager
+...
+S | Name                | Type       | Version   | Arch   | Repository
+--+---------------------+------------+-----------+--------+------------------
+i | virt-manager        | package    | 1.2.1-8.1 | noarch | SLE-12-SP1-Server
+\endcode
+
+\note While the <tt>package:virt-manager</tt> is installed and also available in the SLE-12-SP1-Server repository, <tt>(System Packages)</tt> indicates that the \c application is installed, but not provided by any repository. This usually happens if the repository provides wrong appdata, or no appdata at all.
+
+\code
+# zypper in -f virt-manager
+...
+Forcing installation of 'virt-manager-1.2.1-8.1.noarch' from repository 'SLE-12-SP1-Server'.
+Resolving package dependencies...
+
+The following application is going to be REMOVED:
+  "Virtual Machine Manager"
+
+The following package is going to be reinstalled:
+  virt-manager
+\endcode
+
+\c Zypper can not 'see' that the new package also transports a new application. Due to this \c zypper must assume the installed application gets deleted, when the package is reinstalled or updated.
+
+\code
+\endcode
+*/
