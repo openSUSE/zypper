@@ -126,6 +126,7 @@ struct RuntimeData
     , seen_verify_hint(false)
     , action_rpm_download(false)
     , waiting_for_input(false)
+    , entered_commit(false)
   {}
 
   std::list<zypp::RepoInfo> repos;
@@ -173,6 +174,7 @@ struct RuntimeData
 
   //! \todo move this to a separate Status struct
   bool waiting_for_input;
+  bool entered_commit;	// bsc#946750 - give ZYPPER_EXIT_ERR_COMMIT priority over ZYPPER_EXIT_ON_SIGNAL
 
   //! Temporary directory for any use. Used e.g. as packagesPath of TMP_RPM_REPO_ALIAS repository.
   zypp::filesystem::TmpDir tmpdir;
