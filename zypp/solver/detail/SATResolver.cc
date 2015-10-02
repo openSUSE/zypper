@@ -214,102 +214,6 @@ SATResolver::pool (void) const
     return _pool;
 }
 
-void
-SATResolver::resetItemTransaction (PoolItem item)
-{
-    bool found = false;
-    for (PoolItemList::const_iterator iter = _items_to_remove.begin();
-	 iter != _items_to_remove.end(); ++iter) {
-	if (*iter == item) {
-	    _items_to_remove.remove(*iter);
-	    found = true;
-	    break;
-	}
-    }
-    if (!found) {
-	for (PoolItemList::const_iterator iter = _items_to_install.begin();
-	     iter != _items_to_install.end(); ++iter) {
-	    if (*iter == item) {
-		_items_to_install.remove(*iter);
-		found = true;
-		break;
-	    }
-	}
-    }
-    if (!found) {
-	for (PoolItemList::const_iterator iter = _items_to_keep.begin();
-	     iter != _items_to_keep.end(); ++iter) {
-	    if (*iter == item) {
-		_items_to_keep.remove(*iter);
-		found = true;
-		break;
-	    }
-	}
-    }
-    if (!found) {
-	for (PoolItemList::const_iterator iter = _items_to_lock.begin();
-	     iter != _items_to_lock.end(); ++iter) {
-	    if (*iter == item) {
-		_items_to_lock.remove(*iter);
-		found = true;
-		break;
-	    }
-	}
-    }
-}
-
-
-void
-SATResolver::addPoolItemToInstall (PoolItem item)
-{
-    resetItemTransaction (item);
-    _items_to_install.push_back (item);
-    _items_to_install.unique ();
-}
-
-
-void
-SATResolver::addPoolItemsToInstallFromList (PoolItemList & rl)
-{
-    for (PoolItemList::const_iterator iter = rl.begin(); iter != rl.end(); iter++) {
-	addPoolItemToInstall (*iter);
-    }
-}
-
-
-void
-SATResolver::addPoolItemToRemove (PoolItem item)
-{
-    resetItemTransaction (item);
-    _items_to_remove.push_back (item);
-    _items_to_remove.unique ();
-}
-
-
-void
-SATResolver::addPoolItemsToRemoveFromList (PoolItemList & rl)
-{
-    for (PoolItemList::const_iterator iter = rl.begin(); iter != rl.end(); iter++) {
-	addPoolItemToRemove (*iter);
-    }
-}
-
-void
-SATResolver::addPoolItemToLock (PoolItem item)
-{
-    resetItemTransaction (item);
-    _items_to_lock.push_back (item);
-    _items_to_lock.unique ();
-}
-
-void
-SATResolver::addPoolItemToKeep (PoolItem item)
-{
-    resetItemTransaction (item);
-    _items_to_keep.push_back (item);
-    _items_to_keep.unique ();
-}
-
 //---------------------------------------------------------------------------
 
 // copy marked item from solution back to pool
@@ -346,65 +250,71 @@ SATSolutionToPool (PoolItem item, const ResStatus & status, const ResStatus::Tra
 // resolvePool
 //----------------------------------------------------------------------------
 //----------------------------------------------------------------------------
-
-//----------------------------------------------------------------------------
-// Helper functions for the ZYPP-Pool
-//----------------------------------------------------------------------------
-
-
-//------------------------------------------------------------------------------------------------------------
-//  This function loops over the pool and grabs all items
-//  It clears all previous bySolver() states also
-//
-//  Every toBeInstalled is passed to zypp::solver:detail::Resolver.addPoolItemToInstall()
-//  Every toBeUninstalled is passed to zypp::solver:detail::Resolver.addPoolItemToRemove()
-//
-//  Solver results must be written back to the pool.
-//------------------------------------------------------------------------------------------------------------
-
-
+/////////////////////////////////////////////////////////////////////////
+/// \class SATCollectTransact
+/// \brief Commit helper functor distributing PoolItem by status into lists
+///
+/// On the fly it clears all PoolItem bySolver/ByApplLow status.
+/// The lists are cleared in the Ctor, populated by \ref operator().
+/////////////////////////////////////////////////////////////////////////
 struct SATCollectTransact : public resfilter::PoolItemFilterFunctor
 {
-    SATResolver & resolver;
+  SATCollectTransact( PoolItemList & items_to_install_r,
+		      PoolItemList & items_to_remove_r,
+		      PoolItemList & items_to_lock_r,
+		      PoolItemList & items_to_keep_r,
+		      bool solveSrcPackages_r )
+  : _items_to_install( items_to_install_r )
+  , _items_to_remove( items_to_remove_r )
+  , _items_to_lock( items_to_lock_r )
+  , _items_to_keep( items_to_keep_r )
+  , _solveSrcPackages( solveSrcPackages_r )
+  {
+    _items_to_install.clear();
+    _items_to_remove.clear();
+    _items_to_lock.clear();
+    _items_to_keep.clear();
+  }
 
-    SATCollectTransact (SATResolver & r)
-	: resolver (r)
-    { }
+  bool operator()( const PoolItem & item_r )
+  {
 
-    bool operator()( PoolItem item )		// only transacts() items go here
+    ResStatus & itemStatus( item_r.status() );
+    bool by_solver = ( itemStatus.isBySolver() || itemStatus.isByApplLow() );
+
+    if ( by_solver )
     {
-	ResStatus status = item.status();
-	bool by_solver = (status.isBySolver() || status.isByApplLow());
-
-	if (by_solver) {
-	    item.status().resetTransact( ResStatus::APPL_LOW );// clear any solver/establish transactions
-	    return true;				// back out here, dont re-queue former solver result
-	}
-
-	if ( item.satSolvable().isKind<SrcPackage>() && ! resolver.solveSrcPackages() )
-	{
-	  // Later we may continue on a per source package base.
-	  return true; // dont process this source package.
-	}
-
-	if (status.isToBeInstalled()) {
-	    resolver.addPoolItemToInstall(item);	// -> install!
-	}
-	else if (status.isToBeUninstalled()) {
-	    resolver.addPoolItemToRemove(item);		// -> remove !
-	}
-        else if (status.isLocked()
-		 && !by_solver) {
-	    resolver.addPoolItemToLock (item);
-        }
-        else if (status.isKept()
-		 && !by_solver) {
-	    resolver.addPoolItemToKeep (item);
-        }
-
-	return true;
+      // Clear former solver/establish resultd
+      itemStatus.resetTransact( ResStatus::APPL_LOW );
+      return true;	// -> back out here, don't re-queue former results
     }
+
+    if ( !_solveSrcPackages && item_r.isKind<SrcPackage>() )
+    {
+      // Later we may continue on a per source package base.
+      return true; // dont process this source package.
+    }
+
+    switch ( itemStatus.getTransactValue() )
+    {
+      case ResStatus::TRANSACT:
+	itemStatus.isUninstalled() ?	_items_to_install.push_back( item_r )
+	                           :	_items_to_remove.push_back( item_r );	break;
+      case ResStatus::LOCKED:		_items_to_lock.push_back( item_r );	break;
+      case ResStatus::KEEP_STATE:	_items_to_keep.push_back( item_r );	break;
+    }
+    return true;
+  }
+
+private:
+  PoolItemList & _items_to_install;
+  PoolItemList & _items_to_remove;
+  PoolItemList & _items_to_lock;
+  PoolItemList & _items_to_keep;
+  bool _solveSrcPackages;
+
 };
+/////////////////////////////////////////////////////////////////////////
 
 
 //----------------------------------------------------------------------------
@@ -527,7 +437,7 @@ SATResolver::solving(const CapabilitySet & requires_caps,
 
       PoolItem poolItem( slv );
       SATSolutionToPool (poolItem, ResStatus::toBeInstalled, ResStatus::SOLVER);
-      _result_items_to_install.push_back (poolItem);
+      _result_items_to_install.push_back( poolItem );
     }
     queue_free(&decisionq);
 
@@ -684,21 +594,18 @@ SATResolver::solving(const CapabilitySet & requires_caps,
 void
 SATResolver::solverInit(const PoolItemList & weakItems)
 {
-    SATCollectTransact info (*this);
 
     MIL << "SATResolver::solverInit()" << endl;
 
     // remove old stuff
     solverEnd();
-
     queue_init( &_jobQueue );
-    _items_to_install.clear();
-    _items_to_remove.clear();
-    _items_to_lock.clear();
-    _items_to_keep.clear();
 
-    invokeOnEach ( _pool.begin(), _pool.end(),
-		   functor::functorRef<bool,PoolItem>(info) );
+    // clear and rebuild: _items_to_install, _items_to_remove, _items_to_lock, _items_to_keep
+    {
+      SATCollectTransact collector( _items_to_install, _items_to_remove, _items_to_lock, _items_to_keep, solveSrcPackages() );
+      invokeOnEach ( _pool.begin(), _pool.end(), functor::functorRef<bool,PoolItem>( collector ) );
+    }
 
     for (PoolItemList::const_iterator iter = weakItems.begin(); iter != weakItems.end(); iter++) {
 	Id id = (*iter)->satSolvable().id();

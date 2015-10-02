@@ -169,15 +169,6 @@ class SATResolver : public base::ReferenceCounted, private base::NonCopyable, pr
     ResolverProblemList problems ();
     void applySolutions (const ProblemSolutionList &solutions);
 
-    void addPoolItemToInstall (PoolItem item);
-    void addPoolItemsToInstallFromList (PoolItemList & rl);
-
-    void addPoolItemToLock (PoolItem item);
-    void addPoolItemToKeep (PoolItem item);
-
-    void addPoolItemToRemove (PoolItem item);
-    void addPoolItemsToRemoveFromList (PoolItemList & rl);
-
     bool fixsystem () const {return _fixsystem;}
     void setFixsystem ( const bool fixsystem) { _fixsystem = fixsystem;}
 
@@ -221,10 +212,10 @@ class SATResolver : public base::ReferenceCounted, private base::NonCopyable, pr
     void setCleandepsOnRemove( bool state_r )	{ _cleandepsOnRemove = state_r; }
 
     PoolItemList problematicUpdateItems( void ) const { return _problem_items; }
+    PoolItemList problematicUpdateItems() { return _problem_items; }
 
     PoolItemList resultItemsToInstall () { return _result_items_to_install; }
     PoolItemList resultItemsToRemove () { return _result_items_to_remove; }
-    PoolItemList problematicUpdateItems() { return _problem_items; }
 
     sat::StringQueue autoInstalled() const;
     sat::StringQueue userInstalled() const;
