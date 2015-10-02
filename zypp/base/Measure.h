@@ -90,6 +90,18 @@ namespace zypp
        * Timer keeps on running.
       */
       void elapsed() const;
+      /** \overload Tagging the time with some text
+       * \code
+       * elapsed( "after action foo..." );
+       * \endcode
+       */
+      void elapsed( const std::string & tag_r ) const;
+      /** \overload Tagging the time with e.g. a line number
+       * \code
+       * elapsed( __LINE__ );
+       * \endcode
+       */
+      void elapsed( long tag_r ) const;
 
       /** Stop a running timer. */
       void stop();

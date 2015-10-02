@@ -144,7 +144,7 @@ namespace zypp
       , _seq    ( 0 )
       {
 	_glevel += "..";
-        INT << _level << "START MEASURE(" << _ident << ")" << endl;
+        log() << _level << "START MEASURE(" << _ident << ")" << endl;
         _start.get();
       }
 
@@ -152,34 +152,40 @@ namespace zypp
       {
         _stop.get();
         ++_seq;
-        std::ostream & str( INT << _level << "MEASURE(" << _ident << ") " );
+        std::ostream & str( log() << _level << "MEASURE(" << _ident << ") " );
         dumpMeasure( str );
 	_glevel.erase( 0, 2 );
       }
 
       void restart()
       {
-        INT << _level << "RESTART MEASURE(" << _ident << ")" << endl;
+        log() << _level << "RESTART MEASURE(" << _ident << ")" << endl;
         _start = _stop;
       }
 
-      void elapsed() const
+      void elapsed( const std::string & tag_r = std::string() ) const
       {
         _stop.get();
         ++_seq;
-        std::ostream & str( INT << _level << "ELAPSED(" << _ident << ") " );
-        dumpMeasure( str );
+        std::ostream & str( log() << _level << "ELAPSED(" << _ident << ") " );
+        dumpMeasure( str, tag_r );
         _elapsed = _stop;
       }
 
     private:
-      std::ostream & dumpMeasure( std::ostream & str_r ) const
+      /** Return the log stream. */
+      std::ostream & log() const
+      { return INT; }
+
+      std::ostream & dumpMeasure( std::ostream & str_r, const std::string & tag_r = std::string() ) const
       {
         str_r << ( _stop - _start );
         if ( _seq > 1 ) // diff to previous _elapsed
           {
             str_r << " [" << ( _stop - _elapsed ) << "]";
           }
+	if ( ! tag_r.empty() )
+	  str_r << " - " << tag_r;
         return str_r << endl;
       }
 
@@ -215,26 +221,20 @@ namespace zypp
     {}
 
     void Measure::start( const std::string & ident_r )
-    {
-      stop();
-      _pimpl.reset( new Impl( ident_r ) );
-    }
+    { stop(); _pimpl.reset( new Impl( ident_r ) ); }
 
     void Measure::restart()
-    {
-      _pimpl->restart();
-    }
+    { _pimpl->restart(); }
 
     void Measure::elapsed() const
-    {
-      if ( _pimpl )
-        _pimpl->elapsed();
-    }
+    { if ( _pimpl ) _pimpl->elapsed(); }
+    void Measure::elapsed( const std::string & tag_r ) const
+    { if ( _pimpl ) _pimpl->elapsed( tag_r ); }
+    void Measure::elapsed( long tag_r ) const
+    { if ( _pimpl ) _pimpl->elapsed( asString( tag_r ) ); }
 
     void Measure::stop()
-    {
-      _pimpl.reset();
-    }
+    { _pimpl.reset(); }
 
     /////////////////////////////////////////////////////////////////
   } // namespace debug
