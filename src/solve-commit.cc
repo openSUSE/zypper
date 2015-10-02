@@ -784,6 +784,7 @@ void solve_and_commit (Zypper & zypper)
           // To be used to show overall progress of rpm transactions.
           gData.rpm_pkgs_total = God->resolver()->getTransaction().actionSize();
           gData.rpm_pkg_current = 0;
+	  gData.entered_commit = true;	// bsc#946750 - give ZYPPER_EXIT_ERR_COMMIT priority over ZYPPER_EXIT_ON_SIGNAL
 
 	  MIL << "committing..." << endl;
 	  if ( zypper.out().verbosity() >= Out::HIGH )
@@ -797,6 +798,7 @@ void solve_and_commit (Zypper & zypper)
 
           ZYppCommitResult result = God->commit(get_commit_policy(zypper));
           gData.show_media_progress_hack = false;
+	  gData.entered_commit = false;
 
 	  USR << dump(result.transaction()) << endl;
 	  if ( !result.allDone() && !( copts.count("dry-run") && result.noError() ) )
