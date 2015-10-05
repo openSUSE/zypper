@@ -109,8 +109,8 @@ inline bool initStatus( ResStatus::TransactValue fromState, ResStatus::TransactB
 //         TRANSACT   = bit::RangeValue<TransactField,2>::value  // transact according to state
 //       };
 
-template <class _Iter>
-inline bool _all( _Iter begin_r, _Iter end_r, ResStatus::TransactValue val_r )
+template <class TIter>
+inline bool _all( TIter begin_r, TIter end_r, ResStatus::TransactValue val_r )
 {
   for_( it, begin_r, end_r )
   {
@@ -120,8 +120,8 @@ inline bool _all( _Iter begin_r, _Iter end_r, ResStatus::TransactValue val_r )
   return true;
 }
 
-template <class _Iter>
-inline bool _none( _Iter begin_r, _Iter end_r, ResStatus::TransactValue val_r )
+template <class TIter>
+inline bool _none( TIter begin_r, TIter end_r, ResStatus::TransactValue val_r )
 {
   for_( it, begin_r, end_r )
   {
@@ -131,8 +131,8 @@ inline bool _none( _Iter begin_r, _Iter end_r, ResStatus::TransactValue val_r )
   return true;
 }
 
-template <class _Iter>
-inline bool _atLeastOne( _Iter begin_r, _Iter end_r, ResStatus::TransactValue val_r )
+template <class TIter>
+inline bool _atLeastOne( TIter begin_r, TIter end_r, ResStatus::TransactValue val_r )
 { return ! _none( begin_r, end_r, val_r ); }
 
 inline bool _allBySolver( ui::Selectable::Ptr sel )

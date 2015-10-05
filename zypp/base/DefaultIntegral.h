@@ -23,7 +23,7 @@ namespace zypp
 
   ///////////////////////////////////////////////////////////////////
   //
-  //  CLASS NAME : DefaultIntegral<_Tp,_Initial>
+  //  CLASS NAME : DefaultIntegral<Tp,TInitial>
   //
   /** Integral type with defined initial value when default constructed.
    *
@@ -35,40 +35,40 @@ namespace zypp
    * \endcode
    *
    * \todo maybe specialize for bool, add logical and bit operators
-   * \todo let _Initial default to 0 then remove base/Counter.h
+   * \todo let TInitial default to 0 then remove base/Counter.h
   */
-  template<class _Tp, _Tp _Initial>
+  template<class Tp, Tp TInitial>
     class DefaultIntegral
     {
     public:
-      typedef _Tp value_type;
+      typedef Tp value_type;
 
     public:
-      DefaultIntegral( _Tp val_r = _Initial )
+      DefaultIntegral( Tp val_r = TInitial )
       : _val( val_r )
-      { BOOST_STATIC_ASSERT(boost::is_integral<_Tp>::value); }
+      { BOOST_STATIC_ASSERT(boost::is_integral<Tp>::value); }
 
-      /** Conversion to _Tp. */
+      /** Conversion to Tp. */
       //@{
-      _Tp & get()       { return _val; }
-      _Tp   get() const { return _val; }
+      Tp & get()       { return _val; }
+      Tp   get() const { return _val; }
 
-      operator _Tp &()       { return get(); }
-      operator _Tp  () const { return get(); }
+      operator Tp &()       { return get(); }
+      operator Tp  () const { return get(); }
       //@}
 
       /** Reset to the defined initial value. */
-      DefaultIntegral & reset()	{ _val = _Initial; return *this; }
+      DefaultIntegral & reset()	{ _val = TInitial; return *this; }
 
       /** \name Arithmetic operations.
-       * \c + \c - \c * \c / are provided via conversion to _Tp.
+       * \c + \c - \c * \c / are provided via conversion to Tp.
       */
       //@{
-      DefaultIntegral & operator=( _Tp rhs )  {  _val = rhs; return *this; }
-      DefaultIntegral & operator+=( _Tp rhs ) { _val += rhs; return *this; }
-      DefaultIntegral & operator-=( _Tp rhs ) { _val -= rhs; return *this; }
-      DefaultIntegral & operator*=( _Tp rhs ) { _val *= rhs; return *this; }
-      DefaultIntegral & operator/=( _Tp rhs ) { _val /= rhs; return *this; }
+      DefaultIntegral & operator=( Tp rhs )  {  _val = rhs; return *this; }
+      DefaultIntegral & operator+=( Tp rhs ) { _val += rhs; return *this; }
+      DefaultIntegral & operator-=( Tp rhs ) { _val -= rhs; return *this; }
+      DefaultIntegral & operator*=( Tp rhs ) { _val *= rhs; return *this; }
+      DefaultIntegral & operator/=( Tp rhs ) { _val /= rhs; return *this; }
 
       DefaultIntegral & operator++(/*prefix*/) { ++_val; return *this; }
       DefaultIntegral & operator--(/*prefix*/) { --_val; return *this; }
@@ -78,7 +78,7 @@ namespace zypp
       //@}
 
     private:
-      _Tp _val;
+      Tp _val;
     };
 
     /** \relates DefaultIntegral \c true initialized \c bool  */

@@ -70,7 +70,7 @@ SolverQueueItemDelete::~SolverQueueItemDelete()
 
 //---------------------------------------------------------------------------
 
-bool SolverQueueItemDelete::addRule (_Queue & q)
+bool SolverQueueItemDelete::addRule (sat::detail::CQueue & q)
 {
 #define MAYBE_CLEANDEPS (pool().resolver().cleandepsOnRemove()?SOLVER_CLEANDEPS:0)
 

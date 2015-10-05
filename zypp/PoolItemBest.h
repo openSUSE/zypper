@@ -83,8 +83,8 @@ namespace zypp
       { _ctor_init(); add( pi_r ); }
 
       /** Ctor feeding a range of  \ref sat::Solvable or \ref PoolItem. */
-      template<class _Iterator>
-      PoolItemBest( _Iterator begin_r, _Iterator end_r )
+      template<class TIterator>
+      PoolItemBest( TIterator begin_r, TIterator end_r )
       { _ctor_init(); add( begin_r, end_r ); }
 
     public:
@@ -96,8 +96,8 @@ namespace zypp
       void add( const PoolItem & pi_r );
 
       /** Feed a range of  \ref sat::Solvable or \ref PoolItem. */
-      template<class _Iterator>
-      void add( _Iterator begin_r, _Iterator end_r )
+      template<class TIterator>
+      void add( TIterator begin_r, TIterator end_r )
       {
         for_( it, begin_r, end_r )
           add( *it );

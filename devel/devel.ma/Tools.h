@@ -8,9 +8,6 @@
 #include <map>
 #include <set>
 
-#include "Printing.h"
-#include "FakePool.h"
-
 #define INCLUDE_TESTSETUP_WITHOUT_BOOST
 #include "zypp/../tests/lib/TestSetup.h"
 #undef  INCLUDE_TESTSETUP_WITHOUT_BOOST
@@ -77,27 +74,27 @@ void mksrc( const std::string & url, const std::string & alias, RepoManager & re
 
 ///////////////////////////////////////////////////////////////////
 //
-template<class _Condition>
+template<class TCondition>
   struct SetTrue
   {
-    SetTrue( _Condition cond_r )
+    SetTrue( TCondition cond_r )
     : _cond( cond_r )
     {}
 
-    template<class _Tp>
-      bool operator()( _Tp t ) const
+    template<class Tp>
+      bool operator()( Tp t ) const
       {
         _cond( t );
         return true;
       }
 
-    _Condition _cond;
+    TCondition _cond;
   };
 
-template<class _Condition>
-  inline SetTrue<_Condition> setTrue_c( _Condition cond_r )
+template<class TCondition>
+  inline SetTrue<TCondition> setTrue_c( TCondition cond_r )
   {
-    return SetTrue<_Condition>( cond_r );
+    return SetTrue<TCondition>( cond_r );
   }
 
 struct PrintPoolItem
@@ -106,9 +103,9 @@ struct PrintPoolItem
   { USR << pi << endl; }
 };
 
-template <class _Iterator>
+template <class TIterator>
   std::ostream & vdumpPoolStats( std::ostream & str,
-                                 _Iterator begin_r, _Iterator end_r )
+                                 TIterator begin_r, TIterator end_r )
   {
     pool::PoolStats stats;
     std::for_each( begin_r, end_r,
@@ -125,8 +122,8 @@ template <class _Iterator>
 
 typedef zypp::pool::PoolStats Rstats;
 
-template<class _Iterator>
-  void rstats( _Iterator begin, _Iterator end )
+template<class TIterator>
+  void rstats( TIterator begin, TIterator end )
   {
     DBG << __PRETTY_FUNCTION__ << endl;
     Rstats stats;
@@ -134,8 +131,8 @@ template<class _Iterator>
     MIL << stats << endl;
   }
 
-template<class _Container>
-  void rstats( const _Container & c )
+template<class TContainer>
+  void rstats( const TContainer & c )
   {
     rstats( c.begin(), c.end() );
   }
@@ -150,11 +147,11 @@ inline RepoManager makeRepoManager( const Pathname & mgrdir_r )
 
 ///////////////////////////////////////////////////////////////////
 
-template<class _Res>
+template<class TRes>
 ui::Selectable::Ptr getSel( const std::string & name_r )
 {
   ResPoolProxy uipool( getZYpp()->poolProxy() );
-  for_(it, uipool.byKindBegin<_Res>(), uipool.byKindEnd<_Res>() )
+  for_(it, uipool.byKindBegin<TRes>(), uipool.byKindEnd<TRes>() )
   {
     if ( (*it)->name() == name_r )
       return (*it);
@@ -164,12 +161,12 @@ ui::Selectable::Ptr getSel( const std::string & name_r )
 
 
 
-template<class _Res>
+template<class TRes>
 PoolItem getPi( const std::string & alias_r, const std::string & name_r, const Edition & ed_r, const Arch & arch_r )
 {
   PoolItem ret;
   ResPool pool( getZYpp()->pool() );
-  for_(it, pool.byIdentBegin<_Res>(name_r), pool.byIdentEnd<_Res>(name_r) )
+  for_(it, pool.byIdentBegin<TRes>(name_r), pool.byIdentEnd<TRes>(name_r) )
   {
     if (    ( ed_r.empty()    || ed_r.match((*it)->edition()) == 0 )
          && ( arch_r.empty()  || arch_r == (*it)->arch()  )
@@ -192,25 +189,25 @@ PoolItem getPi( const std::string & alias_r, const std::string & name_r, const E
   }
   return ret;
 }
-template<class _Res>
+template<class TRes>
 PoolItem getPi( const std::string & name_r, const Edition & ed_r, const Arch & arch_r )
 {
-  return getPi<_Res>( "", name_r, ed_r, arch_r );
+  return getPi<TRes>( "", name_r, ed_r, arch_r );
 }
-template<class _Res>
+template<class TRes>
 PoolItem getPi( const std::string & name_r )
 {
-  return getPi<_Res>( name_r, Edition(), Arch_empty );
+  return getPi<TRes>( name_r, Edition(), Arch_empty );
 }
-template<class _Res>
+template<class TRes>
 PoolItem getPi( const std::string & name_r, const Edition & ed_r )
 {
-  return getPi<_Res>( name_r, ed_r, Arch_empty );
+  return getPi<TRes>( name_r, ed_r, Arch_empty );
 }
-template<class _Res>
+template<class TRes>
 PoolItem getPi( const std::string & name_r, const Arch & arch_r )
 {
-  return getPi<_Res>( name_r, Edition(), arch_r );
+  return getPi<TRes>( name_r, Edition(), arch_r );
 }
 
 ///////////////////////////////////////////////////////////////////

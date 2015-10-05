@@ -92,23 +92,23 @@ namespace zypp
      * traced method, and traceCAD simply drops a line in the log.
      *
      * This tracer logs construction, copy construction, assignment,
-     * destruction and _PING.
+     * destruction and ping.
      *
      * assignment: In case the traced class defines an operator=
      * it must be altered to call TraceCAD::operator=, otherwise it
      * won't be triggered.
      *
-     * _PING: Completely up to you. Call _PING somewhere in the traced
+     * ping: Completely up to you. Call ping somewhere in the traced
      * class to indicate something. In case you overload traceCAD, do
-     * whatever is appropriate on _PING. It's just an offer to perform
+     * whatever is appropriate on ping. It's just an offer to perform
      * logging or actions here, and not in the traced code.
      *
      * But traceCAD may be overloaded to produce more stats.
      *
      * \see \c Example.COW_debug.cc.
      */
-    template<class _Tp>
-      struct TraceCAD : public base::ProvideNumericId<TraceCAD<_Tp>, unsigned long>
+    template<class Tp>
+      struct TraceCAD : public base::ProvideNumericId<TraceCAD<Tp>, unsigned long>
                       , public TraceCADBase
       {
         static unsigned long & _totalTraceCAD()
@@ -138,37 +138,37 @@ namespace zypp
         { --_totalTraceCAD();
           traceCAD( DTOR, *this, *this ); }
 
-        void _PING() const
+        void ping() const
         { traceCAD( PING, *this, *this ); }
       };
 
     /** \relates TraceCAD Stream output. */
-    template<class _Tp>
-      inline std::ostream & operator<<( std::ostream & str, const TraceCAD<_Tp> & obj )
+    template<class Tp>
+      inline std::ostream & operator<<( std::ostream & str, const TraceCAD<Tp> & obj )
       { return str << "(ID " << obj.numericId() << ", TOTAL " << obj._totalTraceCAD()
                    << ") [" << &obj << "] "; }
 
     /** Drop a log line about the traced method. Overload to
      * fit your needs.
     */
-    template<class _Tp>
+    template<class Tp>
       void traceCAD( TraceCADBase::What what_r,
-                     const TraceCAD<_Tp> & self_r,
-                     const TraceCAD<_Tp> & rhs_r )
+                     const TraceCAD<Tp> & self_r,
+                     const TraceCAD<Tp> & rhs_r )
       {
         switch( what_r )
           {
           case TraceCADBase::CTOR:
           case TraceCADBase::PING:
           case TraceCADBase::DTOR:
-            _DBG("DEBUG") << what_r << self_r << " (" << self_r._ident << ")" << std::endl;
+            L_DBG("DEBUG") << what_r << self_r << " (" << self_r._ident << ")" << std::endl;
             break;
 
           case TraceCADBase::COPYCTOR:
           case TraceCADBase::MOVECTOR:
           case TraceCADBase::ASSIGN:
           case TraceCADBase::MOVEASSIGN:
-            _DBG("DEBUG") << what_r << self_r << "( " << rhs_r << ")" << " (" << self_r._ident << ")" << std::endl;
+            L_DBG("DEBUG") << what_r << self_r << "( " << rhs_r << ")" << " (" << self_r._ident << ")" << std::endl;
             break;
           }
       }

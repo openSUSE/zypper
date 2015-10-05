@@ -27,10 +27,10 @@ namespace zypp
 { /////////////////////////////////////////////////////////////////
 
   template<>
-  struct ::_Map * rwcowClone<struct ::_Map>( const struct ::_Map * rhs )
+  sat::detail::CMap * rwcowClone<sat::detail::CMap>( const sat::detail::CMap * rhs )
   {
-    struct ::_Map * ret = new ::_Map;
-    ::map_init_clone( ret, const_cast<struct ::_Map *>(rhs) );
+    sat::detail::CMap * ret = new sat::detail::CMap;
+    ::map_init_clone( ret, const_cast<sat::detail::CMap *>(rhs) );
     return ret;
   }
 
@@ -39,15 +39,15 @@ namespace zypp
   { /////////////////////////////////////////////////////////////////
 
     Map::Map()
-      : _pimpl( new ::_Map )
+      : _pimpl( new detail::CMap )
     { ::map_init( _pimpl.get(), 0 ); }
 
     Map::Map( size_type size_r )
-      : _pimpl( new ::_Map )
+      : _pimpl( new detail::CMap )
     { ::map_init( _pimpl.get(), size_r ); }
 
     Map::Map( PoolSizeType )
-      : _pimpl( new ::_Map )
+      : _pimpl( new detail::CMap )
     { ::map_init( _pimpl.get(), Pool::instance().capacity() ); }
 
     Map::~Map()
@@ -117,13 +117,13 @@ namespace zypp
       return ret;
     }
 
-    Map::operator struct ::_Map *()	// COW: nonconst version can't be inlined
-    { return _pimpl.get(); }		// without exposing struct ::_Map
+    Map::operator detail::CMap *()	// COW: nonconst version can't be inlined
+    { return _pimpl.get(); }		// without exposing detail::CMap
 
     bool operator==( const Map & lhs, const Map & rhs )
     {
-      const struct ::_Map * l = lhs;
-      const struct ::_Map * r = rhs;
+      const detail::CMap * l = lhs;
+      const detail::CMap * r = rhs;
       return( l == r || ( l->size == r->size && ::memcmp( l->map, r->map, l->size ) == 0 ) );
     }
 

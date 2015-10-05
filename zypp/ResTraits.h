@@ -75,12 +75,12 @@ namespace zypp
   class PoolItem;
 
   /** ResTraits. Defines common types and the ResKind value. */
-  template<typename _Res>
+  template<typename TRes>
     struct ResTraits
     {
       typedef ResKind                   KindType;
-      typedef intrusive_ptr<_Res>       PtrType;
-      typedef intrusive_ptr<const _Res> constPtrType;
+      typedef intrusive_ptr<TRes>       PtrType;
+      typedef intrusive_ptr<const TRes> constPtrType;
 
       static const ResKind              kind;	///< Defined in ResKind.cc
 
@@ -117,8 +117,8 @@ namespace zypp
    * ResKind packagekind = resKind<Package>();
    * \endcode
   */
-  template<typename _Res>
-    inline ResKind resKind() { return ResTraits<_Res>::kind; }
+  template<typename TRes>
+    inline ResKind resKind() { return ResTraits<TRes>::kind; }
 
   /** Convenient test for ResKinds.
    * \code
@@ -128,17 +128,17 @@ namespace zypp
    * if ( isKind<Package>( value ) )
    * \endcode
    */
-  template<typename _Res>
+  template<typename TRes>
     inline bool isKind( const ResKind & val_r )
-    { return( resKind<_Res>() == val_r ); }
+    { return( resKind<TRes>() == val_r ); }
   /** \overload */
-  template<typename _Res>
+  template<typename TRes>
     inline bool isKind( const std::string & val_r )
-    { return( resKind<_Res>() == val_r ); }
+    { return( resKind<TRes>() == val_r ); }
   /** \overload */
-  template<typename _Res>
+  template<typename TRes>
     inline bool isKind( const char * val_r )
-    { return( resKind<_Res>() == val_r ); }
+    { return( resKind<TRes>() == val_r ); }
 
 
   /////////////////////////////////////////////////////////////////

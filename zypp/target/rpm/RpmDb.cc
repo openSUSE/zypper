@@ -51,7 +51,7 @@ extern "C"
 #include "zypp/ZYppFactory.h"
 #include "zypp/ZConfig.h"
 
-using namespace std;
+using std::endl;
 using namespace zypp::filesystem;
 
 #define WARNINGMAILPATH		"/var/log/YaST2/"
@@ -77,11 +77,11 @@ const char* quoteInFilename_m = "\'\"";
 #else
 const char* quoteInFilename_m = " \t\'\"";
 #endif
-inline string rpmQuoteFilename( const Pathname & path_r )
+inline std::string rpmQuoteFilename( const Pathname & path_r )
 {
-  string path( path_r.asString() );
-  for ( string::size_type pos = path.find_first_of( quoteInFilename_m );
-        pos != string::npos;
+  std::string path( path_r.asString() );
+  for ( std::string::size_type pos = path.find_first_of( quoteInFilename_m );
+        pos != std::string::npos;
         pos = path.find_first_of( quoteInFilename_m, pos ) )
   {
     path.insert( pos, "\\" );
@@ -157,7 +157,7 @@ struct KeyRingSignalReceiver : callback::ReceiveReport<KeyRingSignals>
 
 static shared_ptr<KeyRingSignalReceiver> sKeyRingReceiver;
 
-unsigned diffFiles(const string file1, const string file2, string& out, int maxlines)
+unsigned diffFiles(const std::string file1, const std::string file2, std::string& out, int maxlines)
 {
   const char* argv[] =
     {
@@ -172,7 +172,7 @@ unsigned diffFiles(const string file1, const string file2, string& out, int maxl
   //if(!prog)
   //return 2;
 
-  string line;
+  std::string line;
   int count = 0;
   for (line = prog.receiveLine(), count=0;
        !line.empty();
@@ -191,9 +191,9 @@ unsigned diffFiles(const string file1, const string file2, string& out, int maxl
  **
  **
  **	FUNCTION NAME : stringPath
- **	FUNCTION TYPE : inline string
+ **	FUNCTION TYPE : inline std::string
 */
-inline string stringPath( const Pathname & root_r, const Pathname & sub_r )
+inline std::string stringPath( const Pathname & root_r, const Pathname & sub_r )
 {
   return librpmDb::stringPath( root_r, sub_r );
 }
@@ -202,9 +202,9 @@ inline string stringPath( const Pathname & root_r, const Pathname & sub_r )
  **
  **
  **	FUNCTION NAME : operator<<
- **	FUNCTION TYPE : ostream &
+ **	FUNCTION TYPE : std::ostream &
 */
-ostream & operator<<( ostream & str, const RpmDb::DbStateInfoBits & obj )
+std::ostream & operator<<( std::ostream & str, const RpmDb::DbStateInfoBits & obj )
 {
   if ( obj == RpmDb::DbSI_NO_INIT )
   {
@@ -297,9 +297,9 @@ Date RpmDb::timestamp() const
 //
 //
 //	METHOD NAME : RpmDb::dumpOn
-//	METHOD TYPE : ostream &
+//	METHOD TYPE : std::ostream &
 //
-ostream & RpmDb::dumpOn( ostream & str ) const
+std::ostream & RpmDb::dumpOn( std::ostream & str ) const
 {
   str << "RpmDb[";
 
@@ -818,8 +818,8 @@ void RpmDb::doRebuildDatabase(callback::SendReport<RebuildDBReport> & report)
                                                     process?process->getpid():0) )
                       + "Packages" );
 
-  string       line;
-  string       errmsg;
+  std::string       line;
+  std::string       errmsg;
 
   while ( systemReadLine( line ) )
   {
@@ -847,8 +847,7 @@ void RpmDb::doRebuildDatabase(callback::SendReport<RebuildDBReport> & report)
   if ( rpm_status != 0 )
   {
     //TranslatorExplanation after semicolon is error message
-    ZYPP_THROW(RpmSubprocessException(string(_("RPM failed: ") +
-               (errmsg.empty() ? error_message: errmsg))));
+    ZYPP_THROW(RpmSubprocessException(std::string(_("RPM failed: ")) + (errmsg.empty() ? error_message: errmsg) ) );
   }
   else
   {
@@ -984,12 +983,12 @@ void RpmDb::syncTrustedKeys( SyncTrustedKeyBits mode_r )
 
     TmpFile tmpfile( getZYpp()->tmpPath() );
     {
-      ofstream tmpos( tmpfile.path().c_str() );
+      std::ofstream tmpos( tmpfile.path().c_str() );
       for_( it, rpmKeys.begin(), rpmKeys.end() )
       {
 	// we export the rpm key into a file
 	RpmHeader::constPtr result;
-	getData( string("gpg-pubkey"), *it, result );
+	getData( "gpg-pubkey", *it, result );
 	tmpos << result->tag_description() << endl;
       }
     }
@@ -1048,7 +1047,7 @@ void RpmDb::importPubkey( const PublicKey & pubkey_r )
 
   // check if the key is already in the rpm database
   Edition keyEd( pubkey_r.gpgPubkeyVersion(), pubkey_r.gpgPubkeyRelease() );
-  set<Edition> rpmKeys = pubkeyEditions();
+  std::set<Edition> rpmKeys = pubkeyEditions();
   bool hasOldkeys = false;
 
   for_( it, rpmKeys.begin(), rpmKeys.end() )
@@ -1088,7 +1087,7 @@ void RpmDb::importPubkey( const PublicKey & pubkey_r )
     // rpm3 database, if the current database is a temporary one.
     run_rpm( opts, ExternalProgram::Stderr_To_Stdout );
 
-    string line;
+    std::string line;
     while ( systemReadLine( line ) )
     {
       ( str::startsWith( line, "error:" ) ? WAR : DBG ) << line << endl;
@@ -1115,7 +1114,7 @@ void RpmDb::importPubkey( const PublicKey & pubkey_r )
   // rpm3 database, if the current database is a temporary one.
   run_rpm( opts, ExternalProgram::Stderr_To_Stdout );
 
-  string line;
+  std::string line;
   while ( systemReadLine( line ) )
   {
     ( str::startsWith( line, "error:" ) ? WAR : DBG ) << line << endl;
@@ -1146,8 +1145,8 @@ void RpmDb::removePubkey( const PublicKey & pubkey_r )
 
   // check if the key is in the rpm database and just
   // return if it does not.
-  set<Edition> rpm_keys = pubkeyEditions();
-  set<Edition>::const_iterator found_edition = rpm_keys.end();
+  std::set<Edition> rpm_keys = pubkeyEditions();
+  std::set<Edition>::const_iterator found_edition = rpm_keys.end();
   std::string pubkeyVersion( pubkey_r.gpgPubkeyVersion() );
 
   for_( it, rpm_keys.begin(), rpm_keys.end() )
@@ -1166,7 +1165,7 @@ void RpmDb::removePubkey( const PublicKey & pubkey_r )
       return;
   }
 
-  string rpm_name("gpg-pubkey-" + found_edition->asString());
+  std::string rpm_name("gpg-pubkey-" + found_edition->asString());
 
   RpmArgVec opts;
   opts.push_back ( "-e" );
@@ -1177,7 +1176,7 @@ void RpmDb::removePubkey( const PublicKey & pubkey_r )
   // rpm3 database, if the current database is a temporary one.
   run_rpm( opts, ExternalProgram::Stderr_To_Stdout );
 
-  string line;
+  std::string line;
   while ( systemReadLine( line ) )
   {
     if ( line.substr( 0, 6 ) == "error:" )
@@ -1209,23 +1208,23 @@ void RpmDb::removePubkey( const PublicKey & pubkey_r )
 //
 //
 //	METHOD NAME : RpmDb::pubkeys
-//	METHOD TYPE : set<Edition>
+//	METHOD TYPE : std::set<Edition>
 //
-list<PublicKey> RpmDb::pubkeys() const
+std::list<PublicKey> RpmDb::pubkeys() const
 {
-  list<PublicKey> ret;
+  std::list<PublicKey> ret;
 
   librpmDb::db_const_iterator it;
-  for ( it.findByName( string( "gpg-pubkey" ) ); *it; ++it )
+  for ( it.findByName( "gpg-pubkey" ); *it; ++it )
   {
     Edition edition = it->tag_edition();
     if (edition != Edition::noedition)
     {
       // we export the rpm key into a file
       RpmHeader::constPtr result;
-      getData( string("gpg-pubkey"), edition, result );
+      getData( "gpg-pubkey", edition, result );
       TmpFile file(getZYpp()->tmpPath());
-      ofstream os;
+      std::ofstream os;
       try
       {
         os.open(file.path().asString().c_str());
@@ -1239,7 +1238,7 @@ list<PublicKey> RpmDb::pubkeys() const
         PublicKey key(file);
         ret.push_back(key);
       }
-      catch (exception &e)
+      catch ( std::exception & e )
       {
         ERR << "Could not dump key " << edition.asString() << " in tmp file " << file.path() << endl;
         // just ignore the key
@@ -1249,12 +1248,12 @@ list<PublicKey> RpmDb::pubkeys() const
   return ret;
 }
 
-set<Edition> RpmDb::pubkeyEditions() const
+std::set<Edition> RpmDb::pubkeyEditions() const
   {
-    set<Edition> ret;
+    std::set<Edition> ret;
 
     librpmDb::db_const_iterator it;
-    for ( it.findByName( string( "gpg-pubkey" ) ); *it; ++it )
+    for ( it.findByName( "gpg-pubkey" ); *it; ++it )
     {
       Edition edition = it->tag_edition();
       if (edition != Edition::noedition)
@@ -1272,10 +1271,10 @@ set<Edition> RpmDb::pubkeyEditions() const
 //
 //	DESCRIPTION :
 //
-list<FileInfo>
-RpmDb::fileList( const string & name_r, const Edition & edition_r ) const
+std::list<FileInfo>
+RpmDb::fileList( const std::string & name_r, const Edition & edition_r ) const
 {
-  list<FileInfo> result;
+  std::list<FileInfo> result;
 
   librpmDb::db_const_iterator it;
   bool found;
@@ -1302,7 +1301,7 @@ RpmDb::fileList( const string & name_r, const Edition & edition_r ) const
 //
 //	DESCRIPTION :
 //
-bool RpmDb::hasFile( const string & file_r, const string & name_r ) const
+bool RpmDb::hasFile( const std::string & file_r, const std::string & name_r ) const
 {
   librpmDb::db_const_iterator it;
   bool res;
@@ -1324,11 +1323,11 @@ bool RpmDb::hasFile( const string & file_r, const string & name_r ) const
 //
 //
 //	METHOD NAME : RpmDb::whoOwnsFile
-//	METHOD TYPE : string
+//	METHOD TYPE : std::string
 //
 //	DESCRIPTION :
 //
-string RpmDb::whoOwnsFile( const string & file_r) const
+std::string RpmDb::whoOwnsFile( const std::string & file_r) const
 {
   librpmDb::db_const_iterator it;
   if (it.findByFile( file_r ))
@@ -1346,7 +1345,7 @@ string RpmDb::whoOwnsFile( const string & file_r) const
 //
 //	DESCRIPTION :
 //
-bool RpmDb::hasProvides( const string & tag_r ) const
+bool RpmDb::hasProvides( const std::string & tag_r ) const
 {
   librpmDb::db_const_iterator it;
   return it.findByProvides( tag_r );
@@ -1360,7 +1359,7 @@ bool RpmDb::hasProvides( const string & tag_r ) const
 //
 //	DESCRIPTION :
 //
-bool RpmDb::hasRequiredBy( const string & tag_r ) const
+bool RpmDb::hasRequiredBy( const std::string & tag_r ) const
 {
   librpmDb::db_const_iterator it;
   return it.findByRequiredBy( tag_r );
@@ -1374,7 +1373,7 @@ bool RpmDb::hasRequiredBy( const string & tag_r ) const
 //
 //	DESCRIPTION :
 //
-bool RpmDb::hasConflicts( const string & tag_r ) const
+bool RpmDb::hasConflicts( const std::string & tag_r ) const
 {
   librpmDb::db_const_iterator it;
   return it.findByConflicts( tag_r );
@@ -1388,7 +1387,7 @@ bool RpmDb::hasConflicts( const string & tag_r ) const
 //
 //	DESCRIPTION :
 //
-bool RpmDb::hasPackage( const string & name_r ) const
+bool RpmDb::hasPackage( const std::string & name_r ) const
 {
   librpmDb::db_const_iterator it;
   return it.findPackage( name_r );
@@ -1402,7 +1401,7 @@ bool RpmDb::hasPackage( const string & name_r ) const
 //
 //	DESCRIPTION :
 //
-bool RpmDb::hasPackage( const string & name_r, const Edition & ed_r ) const
+bool RpmDb::hasPackage( const std::string & name_r, const Edition & ed_r ) const
 {
   librpmDb::db_const_iterator it;
   return it.findPackage( name_r, ed_r );
@@ -1416,7 +1415,7 @@ bool RpmDb::hasPackage( const string & name_r, const Edition & ed_r ) const
 //
 //	DESCRIPTION :
 //
-void RpmDb::getData( const string & name_r,
+void RpmDb::getData( const std::string & name_r,
                      RpmHeader::constPtr & result_r ) const
 {
   librpmDb::db_const_iterator it;
@@ -1434,7 +1433,7 @@ void RpmDb::getData( const string & name_r,
 //
 //	DESCRIPTION :
 //
-void RpmDb::getData( const string & name_r, const Edition & ed_r,
+void RpmDb::getData( const std::string & name_r, const Edition & ed_r,
                      RpmHeader::constPtr & result_r ) const
 {
   librpmDb::db_const_iterator it;
@@ -1579,7 +1578,7 @@ RpmDb::CheckPackageResult RpmDb::checkPackage( const Pathname & path_r )
 
 // determine changed files of installed package
 bool
-RpmDb::queryChangedFiles(FileList & fileList, const string& packageName)
+RpmDb::queryChangedFiles(FileList & fileList, const std::string& packageName)
 {
   bool ok = true;
 
@@ -1612,7 +1611,7 @@ RpmDb::queryChangedFiles(FileList & fileList, const string& packageName)
    M      Mode (includes permissions and file type)
   */
 
-  string line;
+  std::string line;
   while (systemReadLine(line))
   {
     if (line.length() > 12 &&
@@ -1620,7 +1619,7 @@ RpmDb::queryChangedFiles(FileList & fileList, const string& packageName)
          (line[0] == '.' && line[7] == 'T')))
     {
       // file has been changed
-      string filename;
+      std::string filename;
 
       filename.assign(line, 11, line.length() - 11);
       fileList.insert(filename);
@@ -1691,7 +1690,7 @@ RpmDb::run_rpm (const RpmArgVec& opts,
 /*--------------------------------------------------------------*/
 /* Read a line from the rpm process				*/
 /*--------------------------------------------------------------*/
-bool RpmDb::systemReadLine( string & line )
+bool RpmDb::systemReadLine( std::string & line )
 {
   line.erase();
 
@@ -1740,7 +1739,7 @@ bool RpmDb::systemReadLine( string & line )
 	  {
 	    if ( linebuffer[nread-1] == '\n' )
 	      --nread;
-	    line += string( linebuffer, nread );
+	    line += std::string( linebuffer, nread );
 	  }
 
 	  if ( ! ::ferror( inputfile ) || ::feof( inputfile ) )
@@ -1795,19 +1794,19 @@ RpmDb::systemKill()
 
 
 // generate diff mails for config files
-void RpmDb::processConfigFiles(const string& line, const string& name, const char* typemsg, const char* difffailmsg, const char* diffgenmsg)
+void RpmDb::processConfigFiles(const std::string& line, const std::string& name, const char* typemsg, const char* difffailmsg, const char* diffgenmsg)
 {
-  string msg = line.substr(9);
-  string::size_type pos1 = string::npos;
-  string::size_type pos2 = string::npos;
-  string file1s, file2s;
+  std::string msg = line.substr(9);
+  std::string::size_type pos1 = std::string::npos;
+  std::string::size_type pos2 = std::string::npos;
+  std::string file1s, file2s;
   Pathname file1;
   Pathname file2;
 
   pos1 = msg.find (typemsg);
   for (;;)
   {
-    if ( pos1 == string::npos )
+    if ( pos1 == std::string::npos )
       break;
 
     pos2 = pos1 + strlen (typemsg);
@@ -1827,7 +1826,7 @@ void RpmDb::processConfigFiles(const string& line, const string& name, const cha
       file2 = _root + file2;
     }
 
-    string out;
+    std::string out;
     int ret = diffFiles (file1.asString(), file2.asString(), out, 25);
     if (ret)
     {
@@ -1838,7 +1837,7 @@ void RpmDb::processConfigFiles(const string& line, const string& name, const cha
         break;
       }
       file += Date(Date::now()).form("config_diff_%Y_%m_%d.log");
-      ofstream notify(file.asString().c_str(), ios::out|ios::app);
+      std::ofstream notify(file.asString().c_str(), std::ios::out|std::ios::app);
       if (!notify)
       {
         ERR << "Could not open " <<  file << endl;
@@ -1866,8 +1865,8 @@ void RpmDb::processConfigFiles(const string& line, const string& name, const cha
           {
             out.replace(4, file1.asString().length(), file1s);
           }
-          string::size_type pos = out.find("\n+++ ");
-          if (pos != string::npos)
+          std::string::size_type pos = out.find("\n+++ ");
+          if (pos != std::string::npos)
           {
             out.replace(pos+5, file2.asString().length(), file2s);
           }
@@ -1980,15 +1979,15 @@ void RpmDb::doInstallPackage( const Pathname & filename, RpmInstFlags flags, cal
   opts.push_back("--");
 
   // rpm requires additional quoting of special chars:
-  string quotedFilename( rpmQuoteFilename( workaroundRpmPwdBug( filename ) ) );
+  std::string quotedFilename( rpmQuoteFilename( workaroundRpmPwdBug( filename ) ) );
   opts.push_back ( quotedFilename.c_str() );
 
   modifyDatabase(); // BEFORE run_rpm
   run_rpm( opts, ExternalProgram::Stderr_To_Stdout );
 
-  string line;
-  string rpmmsg;
-  vector<string> configwarnings;
+  std::string line;
+  std::string rpmmsg;
+  std::vector<std::string> configwarnings;
 
   unsigned linecnt = 0;
   while (systemReadLine(line))
@@ -2018,7 +2017,7 @@ void RpmDb::doInstallPackage( const Pathname & filename, RpmInstFlags flags, cal
   int rpm_status = systemStatus();
 
   // evaluate result
-  for (vector<string>::iterator it = configwarnings.begin();
+  for (std::vector<std::string>::iterator it = configwarnings.begin();
        it != configwarnings.end(); ++it)
   {
     processConfigFiles(*it, Pathname::basename(filename), " saved as ",
@@ -2038,19 +2037,18 @@ void RpmDb::doInstallPackage( const Pathname & filename, RpmInstFlags flags, cal
     historylog.comment(
         str::form("%s install failed", Pathname::basename(filename).c_str()),
         true /*timestamp*/);
-    ostringstream sstr;
+    std::ostringstream sstr;
     sstr << "rpm output:" << endl << rpmmsg << endl;
     historylog.comment(sstr.str());
     // TranslatorExplanation the colon is followed by an error message
-    ZYPP_THROW(RpmSubprocessException(string(_("RPM failed: ")) +
-               (rpmmsg.empty() ? error_message : rpmmsg)));
+    ZYPP_THROW(RpmSubprocessException(_("RPM failed: ") + (rpmmsg.empty() ? error_message : rpmmsg) ));
   }
   else if ( ! rpmmsg.empty() )
   {
     historylog.comment(
         str::form("%s installed ok", Pathname::basename(filename).c_str()),
         true /*timestamp*/);
-    ostringstream sstr;
+    std::ostringstream sstr;
     sstr << "Additional rpm output:" << endl << rpmmsg << endl;
     historylog.comment(sstr.str());
 
@@ -2081,7 +2079,7 @@ void RpmDb::removePackage( Package::constPtr package, RpmInstFlags flags )
 //	METHOD NAME : RpmDb::removePackage
 //	METHOD TYPE : PMError
 //
-void RpmDb::removePackage( const string & name_r, RpmInstFlags flags )
+void RpmDb::removePackage( const std::string & name_r, RpmInstFlags flags )
 {
   callback::SendReport<RpmRemoveReport> report;
 
@@ -2112,7 +2110,7 @@ void RpmDb::removePackage( const string & name_r, RpmInstFlags flags )
 }
 
 
-void RpmDb::doRemovePackage( const string & name_r, RpmInstFlags flags, callback::SendReport<RpmRemoveReport> & report )
+void RpmDb::doRemovePackage( const std::string & name_r, RpmInstFlags flags, callback::SendReport<RpmRemoveReport> & report )
 {
   FAILIFNOTINITIALIZED;
   HistoryLog historylog;
@@ -2159,8 +2157,8 @@ void RpmDb::doRemovePackage( const string & name_r, RpmInstFlags flags, callback
   modifyDatabase(); // BEFORE run_rpm
   run_rpm (opts, ExternalProgram::Stderr_To_Stdout);
 
-  string line;
-  string rpmmsg;
+  std::string line;
+  std::string rpmmsg;
 
   // got no progress from command, so we fake it:
   // 5  - command started
@@ -2185,19 +2183,18 @@ void RpmDb::doRemovePackage( const string & name_r, RpmInstFlags flags, callback
   {
     historylog.comment(
         str::form("%s remove failed", name_r.c_str()), true /*timestamp*/);
-    ostringstream sstr;
+    std::ostringstream sstr;
     sstr << "rpm output:" << endl << rpmmsg << endl;
     historylog.comment(sstr.str());
     // TranslatorExplanation the colon is followed by an error message
-    ZYPP_THROW(RpmSubprocessException(string(_("RPM failed: ")) +
-               (rpmmsg.empty() ? error_message: rpmmsg)));
+    ZYPP_THROW(RpmSubprocessException(_("RPM failed: ") + (rpmmsg.empty() ? error_message: rpmmsg) ));
   }
   else if ( ! rpmmsg.empty() )
   {
     historylog.comment(
         str::form("%s removed ok", name_r.c_str()), true /*timestamp*/);
 
-    ostringstream sstr;
+    std::ostringstream sstr;
     sstr << "Additional rpm output:" << endl << rpmmsg << endl;
     historylog.comment(sstr.str());
 
@@ -2228,7 +2225,7 @@ bool RpmDb::backupPackage( const Pathname & filename )
 //	METHOD NAME : RpmDb::backupPackage
 //	METHOD TYPE : bool
 //
-bool RpmDb::backupPackage(const string& packageName)
+bool RpmDb::backupPackage(const std::string& packageName)
 {
   HistoryLog progresslog;
   bool ret = true;
@@ -2286,7 +2283,7 @@ bool RpmDb::backupPackage(const string& packageName)
       return false;
     }
 
-    ofstream fp ( filestobackupfile.asString().c_str(), ios::out|ios::trunc );
+    std::ofstream fp ( filestobackupfile.asString().c_str(), std::ios::out|std::ios::trunc );
 
     if (!fp)
     {
@@ -2297,7 +2294,7 @@ bool RpmDb::backupPackage(const string& packageName)
     for (FileList::const_iterator cit = fileList.begin();
          cit != fileList.end(); ++cit)
     {
-      string name = *cit;
+      std::string name = *cit;
       if ( name[0] == '/' )
       {
         // remove slash, file must be relative to -C parameter of tar
@@ -2325,11 +2322,11 @@ bool RpmDb::backupPackage(const string& packageName)
     // execute tar in inst-sys (we dont know if there is a tar below _root !)
     ExternalProgram tar(argv, ExternalProgram::Stderr_To_Stdout, false, -1, true);
 
-    string tarmsg;
+    std::string tarmsg;
 
     // TODO: its probably possible to start tar with -v and watch it adding
     // files to report progress
-    for (string output = tar.receiveLine(); output.length() ;output = tar.receiveLine())
+    for (std::string output = tar.receiveLine(); output.length() ;output = tar.receiveLine())
     {
       tarmsg+=output;
     }

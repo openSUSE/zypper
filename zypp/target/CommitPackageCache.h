@@ -74,8 +74,8 @@ namespace zypp
       /** Download(commit) sequence of solvables to compute read ahead. */
       void setCommitList( std::vector<sat::Solvable> commitList_r );
       /** \overload */
-      template <class _Iterator>
-      void setCommitList( _Iterator begin_r, _Iterator end_r )
+      template <class TIterator>
+      void setCommitList( TIterator begin_r, TIterator end_r )
       { setCommitList( std::vector<sat::Solvable>( begin_r, end_r  ) ); }
 
       /** Provide a package. */

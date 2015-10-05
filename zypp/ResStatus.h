@@ -663,25 +663,25 @@ namespace zypp
 
     /** Return whether the corresponding Field has value \a val_r.
     */
-    template<class _Field>
+    template<class TField>
       bool fieldValueIs( FieldType val_r ) const
-    { return _bitfield.isEqual<_Field>( val_r ); }
+    { return _bitfield.isEqual<TField>( val_r ); }
 
     /** Set the corresponding Field to value \a val_r.
     */
-    template<class _Field>
+    template<class TField>
       void fieldValueAssign( FieldType val_r )
-    { _bitfield.assign<_Field>( val_r ); }
+    { _bitfield.assign<TField>( val_r ); }
 
     /** compare two values.
     */
-    template<class _Field>
+    template<class TField>
       bool isGreaterThan( FieldType val_r )
-    { return _bitfield.value<_Field>() > val_r; }
+    { return _bitfield.value<TField>() > val_r; }
 
-    template<class _Field>
+    template<class TField>
       bool isLessThan( FieldType val_r )
-    { return _bitfield.value<_Field>() < val_r; }
+    { return _bitfield.value<TField>() < val_r; }
 
   private:
     friend class resstatus::StatusBackup;

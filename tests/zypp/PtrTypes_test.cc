@@ -17,8 +17,8 @@ using namespace zypp::base;
 #define TRACE_TAG DBG << this->numericId() << " " << __PRETTY_FUNCTION__ << endl
 
 /** Logs Ctor, CopyCtor, Assign and Dtor. */
-template<class _Trace>
-  struct Trace : public ProvideNumericId<_Trace,unsigned>
+template<class TTrace>
+  struct Trace : public ProvideNumericId<TTrace,unsigned>
   {
     Trace()                            { TRACE_TAG; }
     Trace( const Trace & )             { TRACE_TAG; }
@@ -62,28 +62,28 @@ namespace zypp
 #define T_EQ(a,b)   assert( a == b ); assert( a == b.cgetPtr() ); assert( a.cgetPtr() == b ); assert( a.cgetPtr() == b.cgetPtr() );
 #define T_NE(a,b)   assert( a != b ); assert( a != b.cgetPtr() ); assert( a.cgetPtr() != b ); assert( a.cgetPtr() != b.cgetPtr() );
 
-template<class _RW>
+template<class RW>
   void test()
   {
     MIL << __PRETTY_FUNCTION__ << std::endl;
     // typedefs that should be provided:
-    typedef typename _RW::_Ptr               _Ptr;
-    typedef typename _RW::_constPtr          _constPtr;
-    typedef typename _Ptr::element_type      _Ptr_element_type;
-    typedef typename _constPtr::element_type _constPtr_element_type;
+    typedef typename RW::PtrType            Ptr;
+    typedef typename RW::constPtrType       constPtr;
+    typedef typename Ptr::element_type      Ptr_element_type;
+    typedef typename constPtr::element_type constPtr_element_type;
     // initial NULL
-    _RW ptr;
+    RW ptr;
     T_NULL;
     T_UNIQUE;
     T_EQ(ptr,ptr);
     // assign
-    ptr = _RW( new _Ptr_element_type );
+    ptr = RW( new Ptr_element_type );
     T_NOT_NULL;
     T_UNIQUE;
     T_EQ(ptr,ptr);
     {
       // share
-      _RW ptr2( ptr );
+      RW ptr2( ptr );
       T_NOT_NULL;
       T_NOT_UNIQUE;
       T_EQ(ptr,ptr2);
@@ -93,7 +93,7 @@ template<class _RW>
       T_UNIQUE;
       T_NE(ptr,ptr2);
       // different impl
-      ptr2.reset( new _Ptr_element_type );
+      ptr2.reset( new Ptr_element_type );
       T_NE(ptr,ptr2);
    }
     // assign
@@ -107,24 +107,24 @@ template<class _RW>
     ptr = nullptr;
     T_NULL;
     T_UNIQUE;
-    ptr = _RW( nullptr );
+    ptr = RW( nullptr );
     T_NULL;
     T_UNIQUE;
 
 
   }
 
-template<class _RW>
+template<class RW>
   void cowt()
   {
-    test<_RW>();
+    test<RW>();
     MIL << __PRETTY_FUNCTION__ << std::endl;
-    typedef typename _RW::_Ptr::element_type _Ptr_element_type;
+    typedef typename RW::PtrType::element_type Ptr_element_type;
     // create
-    _RW ptr( new _Ptr_element_type );
+    RW ptr( new Ptr_element_type );
     unsigned long ptrid = ptr->numericId();
     // share
-    _RW ptr2( ptr );
+    RW ptr2( ptr );
     // clone aon access
     unsigned long ptrid2 = ptr2->numericId();
     assert( ptrid != ptrid2 );

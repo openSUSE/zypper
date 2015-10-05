@@ -56,11 +56,11 @@ namespace zypp
      *     DBG << pi->asKind<Package>()->keywords() << endl;
      * \endcode
      */
-    template<class _Res>
-    inline typename ResTraits<_Res>::constPtrType asKind() const;
+    template<class TRes>
+    inline typename ResTraits<TRes>::constPtrType asKind() const;
 
-    template<class _Res>
-    inline typename ResTraits<_Res>::PtrType asKind();
+    template<class TRes>
+    inline typename ResTraits<TRes>::PtrType asKind();
 
   public:
     /**
@@ -115,18 +115,18 @@ namespace zypp
    * \todo make<> was a poor choice (AFAIR because gcc had some trouble with
    * asKind<>(sat::Solvable)). Remove it in favour of asKind<>(sat::Solvable)
   */
-  template<class _Res>
-  inline typename ResTraits<_Res>::PtrType make( const sat::Solvable & solvable_r )
-  { return( isKind<_Res>( solvable_r ) ? new _Res( solvable_r ) : 0 ); }
+  template<class TRes>
+  inline typename ResTraits<TRes>::PtrType make( const sat::Solvable & solvable_r )
+  { return( isKind<TRes>( solvable_r ) ? new TRes( solvable_r ) : 0 ); }
   /** \overload Specialisation for ResObject autodetecting the kind of resolvable. */
   template<>
   inline ResObject::Ptr make<ResObject>( const sat::Solvable & solvable_r )
   { return makeResObject( solvable_r ); }
 
   /** Directly create a certain kind of ResObject from \ref sat::Solvable. */
-  template<class _Res>
-  inline typename ResTraits<_Res>::PtrType asKind( const sat::Solvable & solvable_r )
-  { return make<_Res>( solvable_r ); }
+  template<class TRes>
+  inline typename ResTraits<TRes>::PtrType asKind( const sat::Solvable & solvable_r )
+  { return make<TRes>( solvable_r ); }
 
   /** Convert ResObject::Ptr into Ptr of a certain Kind.
    * \return \c NULL iff \a p is \c NULL or points to a Resolvable
@@ -136,21 +136,21 @@ namespace zypp
    * asKind<Package>(resPtr);
    * \endcode
   */
-  template<class _Res>
-  inline typename ResTraits<_Res>::PtrType asKind( const ResObject::Ptr & p )
-  { return dynamic_pointer_cast<_Res>(p); }
+  template<class TRes>
+  inline typename ResTraits<TRes>::PtrType asKind( const ResObject::Ptr & p )
+  { return dynamic_pointer_cast<TRes>(p); }
 
-  template<class _Res>
-  inline typename ResTraits<_Res>::constPtrType asKind( const ResObject::constPtr & p )
-  { return dynamic_pointer_cast<const _Res>(p); }
+  template<class TRes>
+  inline typename ResTraits<TRes>::constPtrType asKind( const ResObject::constPtr & p )
+  { return dynamic_pointer_cast<const TRes>(p); }
 
-  template<class _Res>
-  inline typename ResTraits<_Res>::constPtrType ResObject::asKind() const
-  { return dynamic_cast<const _Res *>( this ); }
+  template<class TRes>
+  inline typename ResTraits<TRes>::constPtrType ResObject::asKind() const
+  { return dynamic_cast<const TRes *>( this ); }
 
-  template<class _Res>
-  inline typename ResTraits<_Res>::PtrType ResObject::asKind()
-  { return dynamic_cast<_Res *>( this ); }
+  template<class TRes>
+  inline typename ResTraits<TRes>::PtrType ResObject::asKind()
+  { return dynamic_cast<TRes *>( this ); }
 
 } // namespace zypp
 ///////////////////////////////////////////////////////////////////

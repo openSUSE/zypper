@@ -30,63 +30,59 @@ namespace zypp
   /**
    *
   */
-  template<class _Tp, class _Compare = Compare<_Tp> >
+  template<class Tp, class TCompare = Compare<Tp> >
     struct Range
     {
       /** */
       Rel op;
       /** */
-      _Tp value;
+      Tp value;
 
       /** Default ctor: \ref Rel::ANY. */
       Range()
       : op( Rel::ANY )
       {}
 
-      /** Ctor taking \a _Tp (\ref Rel::EQ). */
-      Range( const _Tp & value_r )
+      /** Ctor taking \a Tp (\ref Rel::EQ). */
+      Range( const Tp & value_r )
       : op( Rel::EQ )
       , value( value_r )
       {}
 
-      /** Ctor taking \ref Rel and \a _Tp. */
-      Range( Rel op_r, const _Tp & value_r )
+      /** Ctor taking \ref Rel and \a Tp. */
+      Range( Rel op_r, const Tp & value_r )
       : op( op_r )
       , value( value_r )
       {}
 
       /** Return whether two Ranges overlap. */
       bool overlaps( const Range & rhs ) const
-      {
-        return range_detail::overlaps( op, rhs.op,
-                                       _Compare()( value, rhs.value ) );
-      }
+      { return range_detail::overlaps( op, rhs.op, TCompare()( value, rhs.value ) ); }
     };
   ///////////////////////////////////////////////////////////////////
 
-  template<class _Tp, class _Compare>
-    inline bool overlaps( const Range<_Tp,_Compare> & lhs,
-                          const Range<_Tp,_Compare> & rhs )
+  template<class Tp, class TCompare>
+    inline bool overlaps( const Range<Tp,TCompare> & lhs,
+                          const Range<Tp,TCompare> & rhs )
     { return lhs.overlaps( rhs ); }
 
   ///////////////////////////////////////////////////////////////////
 
-  template<class _Tp, class _Compare>
-    inline bool operator==( const Range<_Tp,_Compare> & lhs,
-                            const Range<_Tp,_Compare> & rhs )
+  template<class Tp, class TCompare>
+    inline bool operator==( const Range<Tp,TCompare> & lhs,
+                            const Range<Tp,TCompare> & rhs )
     {
       return( lhs.op == rhs.op
               && (    lhs.op == Rel::ANY
                    || lhs.op == Rel::NONE
-                   || relCompare( Rel::EQ, lhs.value, rhs.value,
-                                  _Compare() )
+                   || relCompare( Rel::EQ, lhs.value, rhs.value, TCompare() )
                  )
             );
     }
 
-  template<class _Tp, class _Compare>
-    inline bool operator!=( const Range<_Tp,_Compare> & lhs,
-                            const Range<_Tp,_Compare> & rhs )
+  template<class Tp, class TCompare>
+    inline bool operator!=( const Range<Tp,TCompare> & lhs,
+                            const Range<Tp,TCompare> & rhs )
     { return ! ( lhs == rhs ); }
 
   /////////////////////////////////////////////////////////////////

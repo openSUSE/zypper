@@ -33,8 +33,8 @@ namespace zypp
     using xml::unescape;
 
     /** \relates NodeAttr NODE ATTRIBUTE representation of types [asString] */
-    template <class _Tp>
-    std::string asXmlNodeAttr( const _Tp & val_r )
+    template <class Tp>
+    std::string asXmlNodeAttr( const Tp & val_r )
     { return asString( val_r ); }
 
     ///////////////////////////////////////////////////////////////////
@@ -44,8 +44,8 @@ namespace zypp
     {
       typedef std::pair<std::string,std::string> Pair;
 
-      template <typename _Type>
-      NodeAttr( std::string key_r, const _Type & val_r )
+      template <typename Tp>
+      NodeAttr( std::string key_r, const Tp & val_r )
       : Pair( std::move(key_r), asXmlNodeAttr(val_r) )
       {}
 
@@ -181,8 +181,8 @@ namespace zypp
   /// \name Default dumpAsXmlOn based on asString.
   ///
   //@{
-  template <class _Tp>
-  inline std::ostream & dumpAsXmlOn( std::ostream & str, const _Tp & obj, const std::string & name_r )
+  template <class Tp>
+  inline std::ostream & dumpAsXmlOn( std::ostream & str, const Tp & obj, const std::string & name_r )
   {
     xmlout::Node guard( str, name_r, xmlout::Node::optionalContent );
     const std::string & content( asString( obj ) );

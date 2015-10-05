@@ -33,8 +33,8 @@ namespace zypp
    * runTasks( tasks, 10 );
    * \endcode
    */
-  template <class _Function>
-  void runTasks( const std::vector<_Function>& tasks, size_t threadCount = 1 )
+  template <class TFunction>
+  void runTasks( const std::vector<TFunction>& tasks, size_t threadCount = 1 )
   {
     if ( threadCount )
     {

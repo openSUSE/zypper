@@ -279,36 +279,37 @@ namespace zypp
   std::ostream & operator<<( std::ostream & str, const Exception & obj );
 
   ///////////////////////////////////////////////////////////////////
-
-  /** Helper for \ref ZYPP_THROW. */
-  template<class _Excpt>
-    void _ZYPP_THROW( const _Excpt & excpt_r, const exception_detail::CodeLocation & where_r ) __attribute__((noreturn));
-  template<class _Excpt>
-    void _ZYPP_THROW( const _Excpt & excpt_r, const exception_detail::CodeLocation & where_r )
+  namespace exception_detail
+  {
+    /** Helper for \ref ZYPP_THROW. */
+    template<class TExcpt>
+    void do_ZYPP_THROW( const TExcpt & excpt_r, const CodeLocation & where_r ) __attribute__((noreturn));
+    template<class TExcpt>
+    void do_ZYPP_THROW( const TExcpt & excpt_r, const CodeLocation & where_r )
     {
       excpt_r.relocate( where_r );
       Exception::log( excpt_r, where_r, "THROW:   " );
       throw( excpt_r );
     }
 
-  /** Helper for \ref ZYPP_THROW. */
-  template<class _Excpt>
-    void _ZYPP_CAUGHT( const _Excpt & excpt_r, const exception_detail::CodeLocation & where_r )
+    /** Helper for \ref ZYPP_THROW. */
+    template<class TExcpt>
+    void do_ZYPP_CAUGHT( const TExcpt & excpt_r, const CodeLocation & where_r )
     {
       Exception::log( excpt_r, where_r, "CAUGHT:  " );
     }
 
-  /** Helper for \ref ZYPP_THROW. */
-  template<class _Excpt>
-    void _ZYPP_RETHROW( const _Excpt & excpt_r, const exception_detail::CodeLocation & where_r ) __attribute__((noreturn));
-  template<class _Excpt>
-    void _ZYPP_RETHROW( const _Excpt & excpt_r, const exception_detail::CodeLocation & where_r )
+    /** Helper for \ref ZYPP_THROW. */
+    template<class TExcpt>
+    void do_ZYPP_RETHROW( const TExcpt & excpt_r, const CodeLocation & where_r ) __attribute__((noreturn));
+    template<class TExcpt>
+    void do_ZYPP_RETHROW( const TExcpt & excpt_r, const CodeLocation & where_r )
     {
       Exception::log( excpt_r, where_r, "RETHROW: " );
       excpt_r.relocate( where_r );
       throw;
     }
-
+  } // namespace exception_detail
   ///////////////////////////////////////////////////////////////////
 
   /** \defgroup ZYPP_THROW ZYPP_THROW macros
@@ -318,15 +319,15 @@ namespace zypp
   //@{
   /** Drops a logline and throws the Exception. */
 #define ZYPP_THROW(EXCPT)\
-  _ZYPP_THROW( EXCPT, ZYPP_EX_CODELOCATION )
+  ::zypp::exception_detail::do_ZYPP_THROW( EXCPT, ZYPP_EX_CODELOCATION )
 
   /** Drops a logline telling the Exception was caught (in order to handle it). */
 #define ZYPP_CAUGHT(EXCPT)\
-  _ZYPP_CAUGHT( EXCPT, ZYPP_EX_CODELOCATION )
+  ::zypp::exception_detail::do_ZYPP_CAUGHT( EXCPT, ZYPP_EX_CODELOCATION )
 
   /** Drops a logline and rethrows, updating the CodeLocation. */
 #define ZYPP_RETHROW(EXCPT)\
-  _ZYPP_RETHROW( EXCPT, ZYPP_EX_CODELOCATION )
+  ::zypp::exception_detail::do_ZYPP_RETHROW( EXCPT, ZYPP_EX_CODELOCATION )
 
 
   /** Throw Exception built from a message string. */

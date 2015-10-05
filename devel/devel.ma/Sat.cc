@@ -20,7 +20,7 @@ using std::endl;
 using namespace zypp;
 
 #undef MIL
-#define MIL MilSync( _BASEFILE, __FUNCTION__, __LINE__ )._str
+#define MIL MilSync( L_BASEFILE, __FUNCTION__, __LINE__ )._str
 
 #ifdef _REENTRANT
 #warning _REENTRANT

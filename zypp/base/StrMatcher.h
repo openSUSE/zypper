@@ -334,8 +334,8 @@ namespace zypp
      * (\c std::string, \ref Pathname, \ref IdString, ...).
      * \Note \c NULL never matches.
      */
-    template<class _Tp>
-    bool operator()( const _Tp & string_r ) const
+    template<class Tp>
+    bool operator()( const Tp & string_r ) const
     { return doMatch( string_r.c_str() ); }
     /** \overload */
     bool operator()( const char * string_r ) const

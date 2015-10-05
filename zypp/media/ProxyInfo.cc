@@ -27,7 +27,7 @@ namespace zypp {
     shared_ptr<ProxyInfo::Impl> ProxyInfo::Impl::_nullimpl;
 
     ProxyInfo::ProxyInfo()
-#ifdef _WITH_LIBPROXY_SUPPORT_
+#ifdef WITH_LIBPROXY_SUPPORT
     : _pimpl( new ProxyInfoLibproxy() )
 #else
     : _pimpl( new ProxyInfoSysconfig("proxy") )

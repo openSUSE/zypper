@@ -36,7 +36,7 @@ namespace zypp
 
   public:
     /** WFN attributes (use like 'enum class \ref Attribute') */
-    struct _AttributeDef {
+    struct EAttributeDef {
       enum Enum {
 	part,		//< attribute (2.2)
 	vendor,		//< attribute (2.2)
@@ -53,7 +53,7 @@ namespace zypp
       static constexpr unsigned numAttributes = other+1;	///< number of attributes
       static const std::string & asString( Enum val_r );	///< string representantion
     };
-    typedef base::EnumClass<_AttributeDef> Attribute;	///< 'enum class Attribute'
+    typedef base::EnumClass<EAttributeDef> Attribute;	///< 'enum class Attribute'
 
   public:
     /** Indicator type for non-trowing ctor. */
@@ -204,7 +204,7 @@ namespace zypp
 
   public:
     /** Classification of \ref Value types mostly for \ref match (use like 'enum class \ref Type') */
-    struct _TypeDef {
+    struct ETypeDef {
       enum Enum {
 	ANY,
 	NA,
@@ -212,7 +212,7 @@ namespace zypp
 	wildcarded,
       };
     };
-    typedef base::EnumClass<_TypeDef> Type;	///< 'enum class Type'
+    typedef base::EnumClass<ETypeDef> Type;	///< 'enum class Type'
 
     /** Return the \ref Type of this \ref Value. */
     Type type() const

@@ -45,15 +45,15 @@ namespace zypp
 
     /** In CXX0X std::_Select2nd does no longer derive from std::unary_function
      */
-    template<typename _Pair>
-    struct P_Select2nd : public std::unary_function<_Pair, typename _Pair::second_type>
+    template<typename TPair>
+    struct P_Select2nd : public std::unary_function<TPair, typename TPair::second_type>
     {
-      typename _Pair::second_type&
-      operator()(_Pair& __x) const
+      typename TPair::second_type&
+      operator()(TPair& __x) const
       { return __x.second; }
 
-      const typename _Pair::second_type&
-      operator()(const _Pair& __x) const
+      const typename TPair::second_type&
+      operator()(const TPair& __x) const
       { return __x.second; }
     };
 

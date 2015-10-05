@@ -12,6 +12,7 @@
 #include <zypp/base/InputStream.h>
 #include <zypp/base/ProvideNumericId.h>
 #include <zypp/base/Flags.h>
+#include <zypp/base/StrMatcher.h>
 #include <zypp/AutoDispose.h>
 
 #include "zypp/ResPoolProxy.h"
@@ -38,7 +39,6 @@
 #include "zypp/sat/Pool.h"
 #include "zypp/sat/LocaleSupport.h"
 #include "zypp/sat/LookupAttr.h"
-#include "zypp/sat/AttrMatcher.h"
 #include "zypp/sat/SolvableSet.h"
 #include "zypp/sat/SolvIterMixin.h"
 #include "zypp/sat/detail/PoolImpl.h"
@@ -109,15 +109,15 @@ ManagedFile repoProvidePackage( const PoolItem & pi )
 
 namespace zypp
 {
-  template <class _LIterator, class _RIterator, class _Function>
-      inline int invokeOnEach( _LIterator lbegin_r, _LIterator lend_r,
-                               _RIterator rbegin_r, _RIterator rend_r,
-                               _Function fnc_r )
+  template <class TLIterator, class TRIterator, class TFunction>
+      inline int invokeOnEach( TLIterator lbegin_r, TLIterator lend_r,
+                               TRIterator rbegin_r, TRIterator rend_r,
+                               TFunction fnc_r )
       {
         int cnt = 0;
-        for ( _LIterator lit = lbegin_r; lit != lend_r; ++lit )
+        for ( TLIterator lit = lbegin_r; lit != lend_r; ++lit )
         {
-          for ( _RIterator rit = rbegin_r; rit != rend_r; ++rit )
+          for ( TRIterator rit = rbegin_r; rit != rend_r; ++rit )
           {
             ++cnt;
             if ( ! fnc_r( *lit, *rit ) )
@@ -128,22 +128,6 @@ namespace zypp
       }
 }
 
-
-void dbgDu( Selectable::Ptr sel )
-{
-  if ( sel->installedObj() )
-  {
-    DBG << "i: " << sel->installedObj() << endl
-        << sel->installedObj()->diskusage() << endl;
-  }
-  if ( sel->candidateObj() )
-  {
-    DBG << "c: " << sel->candidateObj() << endl
-        << sel->candidateObj()->diskusage() << endl;
-  }
-  INT << sel << endl
-      << getZYpp()->diskUsage() << endl;
-}
 
 ///////////////////////////////////////////////////////////////////
 
@@ -329,8 +313,8 @@ struct MediaChangeReceive : public callback::ReceiveReport<media::MediaChangeRep
 
 namespace container
 {
-  template<class _Tp>
-    bool isIn( const std::set<_Tp> & cont, const typename std::set<_Tp>::value_type & val )
+  template<class Tp>
+    bool isIn( const std::set<Tp> & cont, const typename std::set<Tp>::value_type & val )
     { return cont.find( val ) != cont.end(); }
 }
 ///////////////////////////////////////////////////////////////////
@@ -362,38 +346,38 @@ namespace zypp
 {
 namespace filter
 {
-  template <class _MemFun, class _Value>
+  template <class TMemFun, class TValue>
   class HasValue
   {
     public:
-      HasValue( _MemFun fun_r, _Value val_r )
+      HasValue( TMemFun fun_r, TValue val_r )
       : _fun( fun_r ), _val( val_r )
       {}
-      template <class _Tp>
-      bool operator()( const _Tp & obj_r ) const
+      template <class Tp>
+      bool operator()( const Tp & obj_r ) const
       { return( _fun && (obj_r.*_fun)() == _val ); }
     private:
-      _MemFun _fun;
-      _Value  _val;
+      TMemFun _fun;
+      TValue  _val;
   };
 
-  template <class _MemFun, class _Value>
-  HasValue<_MemFun, _Value> byValue( _MemFun fun_r, _Value val_r )
-  { return HasValue<_MemFun, _Value>( fun_r, val_r ); }
+  template <class TMemFun, class TValue>
+  HasValue<TMemFun, TValue> byValue( TMemFun fun_r, TValue val_r )
+  { return HasValue<TMemFun, TValue>( fun_r, val_r ); }
 }
 
 }
 
 template <class L>
-struct _TestO { _TestO( const L & lhs ) : _lhs( lhs ) {} const L & _lhs; };
+struct TestO { TestO( const L & lhs ) : _lhs( lhs ) {} const L & _lhs; };
 
 template <class L>
-std::ostream & operator<<( std::ostream & str, const _TestO<L> & obj )
+std::ostream & operator<<( std::ostream & str, const TestO<L> & obj )
 { const L & lhs( obj._lhs); return str << (lhs?'_':'*') << (lhs.empty()?'e':'_') << "'" << lhs << "'"; }
 
 template <class L>
-_TestO<L> testO( const L & lhs )
-{ return _TestO<L>( lhs ); }
+TestO<L> testO( const L & lhs )
+{ return TestO<L>( lhs ); }
 
 template <class L, class R>
 void testCMP( const L & lhs, const R & rhs )
@@ -459,7 +443,7 @@ void cut( const Capability & cap )
   }
   else
   {
-    MIL << "---???---" << endl;
+    MIL << "--- ??? ---" << endl;
   }
 }
 

@@ -11,14 +11,11 @@
 #ifndef ZYPP_SAT_MAP_H
 #define ZYPP_SAT_MAP_H
 
-extern "C"
-{
-  struct _Map;
-}
 #include <iosfwd>
 #include <string>
 
 #include "zypp/base/PtrTypes.h"
+#include "zypp/sat/detail/PoolMember.h"
 
 ///////////////////////////////////////////////////////////////////
 namespace zypp
@@ -108,11 +105,11 @@ namespace zypp
       std::string asString( const char on_r = '1', const char off_r = '0' ) const;
 
     public:
-      operator struct ::_Map *();		///< libsolv backdoor
-      operator const struct ::_Map *() const	///< libsolv backdoor
+      operator detail::CMap *();		///< libsolv backdoor
+      operator const detail::CMap *() const	///< libsolv backdoor
       { return _pimpl.get(); }
     private:
-      RWCOW_pointer<struct ::_Map> _pimpl;	///< Pointer to implementation
+      RWCOW_pointer<detail::CMap> _pimpl;	///< Pointer to implementation
     };
 
     /** \relates Map Stream output */
@@ -130,7 +127,7 @@ namespace zypp
   ///////////////////////////////////////////////////////////////////
 
   /** \relates Map Clone function for RWCOW_pointer */
-  template<> struct ::_Map * rwcowClone<struct ::_Map>( const struct ::_Map * rhs );
+  template<> sat::detail::CMap * rwcowClone<sat::detail::CMap>( const sat::detail::CMap * rhs );
 
   typedef sat::Map Bitmap;
 

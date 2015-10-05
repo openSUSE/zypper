@@ -282,25 +282,21 @@ namespace zypp
     //
     ///////////////////////////////////////////////////////////////////
 
-    /******************************************************************
-     **
-     **	FUNCTION NAME : _Log_Result
-     **	FUNCTION TYPE : int
-     **
-     **	DESCRIPTION : Helper function to log return values.
-    */
-#define _Log_Result MIL << endl, __Log_Result
-    inline int __Log_Result( const int res, const char * rclass = 0 /*errno*/ )
-    {
-      if ( res )
+#define logResult MIL << endl, doLogResult
+    namespace {
+      /**  Helper function to log return values. */
+      inline int doLogResult( const int res, const char * rclass = 0 /*errno*/ )
       {
-        if ( rclass )
-          WAR << " FAILED: " << rclass << " " << res << endl;
-        else
-          WAR << " FAILED: " << str::strerror( res ) << endl;
+	if ( res )
+	{
+	  if ( rclass )
+	    WAR << " FAILED: " << rclass << " " << res << endl;
+	  else
+	    WAR << " FAILED: " << str::strerror( res ) << endl;
+	}
+	return res;
       }
-      return res;
-    }
+    } // namespace
 
     ///////////////////////////////////////////////////////////////////
     //
@@ -311,9 +307,9 @@ namespace zypp
     {
       MIL << "mkdir " << path << ' ' << str::octstring( mode );
       if ( ::mkdir( path.asString().c_str(), mode ) == -1 ) {
-        return _Log_Result( errno );
+        return logResult( errno );
       }
-      return _Log_Result( 0 );
+      return logResult( 0 );
     }
 
     ///////////////////////////////////////////////////////////////////
@@ -372,9 +368,9 @@ namespace zypp
     {
       MIL << "rmdir " << path;
       if ( ::rmdir( path.asString().c_str() ) == -1 ) {
-        return _Log_Result( errno );
+        return logResult( errno );
       }
-      return _Log_Result( 0 );
+      return logResult( 0 );
     }
 
     ///////////////////////////////////////////////////////////////////
@@ -388,7 +384,7 @@ namespace zypp
       struct dirent * d;
 
       if ( ! (dp = opendir( dir.c_str() )) )
-        return _Log_Result( errno );
+        return logResult( errno );
 
       while ( (d = readdir(dp)) )
       {
@@ -420,14 +416,14 @@ namespace zypp
       PathInfo p( path );
 
       if ( !p.isExist() ) {
-        return _Log_Result( 0 );
+        return logResult( 0 );
       }
 
       if ( !p.isDir() ) {
-        return _Log_Result( ENOTDIR );
+        return logResult( ENOTDIR );
       }
 
-      return _Log_Result( recursive_rmdir_1( path ) );
+      return logResult( recursive_rmdir_1( path ) );
     }
 
     ///////////////////////////////////////////////////////////////////
@@ -441,14 +437,14 @@ namespace zypp
       PathInfo p( path );
 
       if ( !p.isExist() ) {
-        return _Log_Result( 0 );
+        return logResult( 0 );
       }
 
       if ( !p.isDir() ) {
-        return _Log_Result( ENOTDIR );
+        return logResult( ENOTDIR );
       }
 
-      return _Log_Result( recursive_rmdir_1( path, false/* don't remove path itself */ ) );
+      return logResult( recursive_rmdir_1( path, false/* don't remove path itself */ ) );
     }
 
     ///////////////////////////////////////////////////////////////////
@@ -462,17 +458,17 @@ namespace zypp
 
       PathInfo sp( srcpath );
       if ( !sp.isDir() ) {
-        return _Log_Result( ENOTDIR );
+        return logResult( ENOTDIR );
       }
 
       PathInfo dp( destpath );
       if ( !dp.isDir() ) {
-        return _Log_Result( ENOTDIR );
+        return logResult( ENOTDIR );
       }
 
       PathInfo tp( destpath + srcpath.basename() );
       if ( tp.isExist() ) {
-        return _Log_Result( EEXIST );
+        return logResult( EEXIST );
       }
 
 
@@ -489,7 +485,7 @@ namespace zypp
         MIL << "  " << output;
       }
       int ret = prog.close();
-      return _Log_Result( ret, "returned" );
+      return logResult( ret, "returned" );
     }
 
     ///////////////////////////////////////////////////////////////////
@@ -503,16 +499,16 @@ namespace zypp
 
       PathInfo sp( srcpath );
       if ( !sp.isDir() ) {
-        return _Log_Result( ENOTDIR );
+        return logResult( ENOTDIR );
       }
 
       PathInfo dp( destpath );
       if ( !dp.isDir() ) {
-        return _Log_Result( ENOTDIR );
+        return logResult( ENOTDIR );
       }
 
       if ( srcpath == destpath ) {
-        return _Log_Result( EEXIST );
+        return logResult( EEXIST );
       }
 
       std::string src( srcpath.asString());
@@ -530,7 +526,7 @@ namespace zypp
         MIL << "  " << output;
       }
       int ret = prog.close();
-      return _Log_Result( ret, "returned" );
+      return logResult( ret, "returned" );
     }
 
     ///////////////////////////////////////////////////////////////////////
@@ -553,7 +549,7 @@ namespace zypp
 
       MIL << "readdir " << dir_r << ' ';
       if ( ! dir )
-	return _Log_Result( errno );
+	return logResult( errno );
       MIL << endl; // close line before callbacks are invoked.
 
       int ret = 0;
@@ -658,9 +654,9 @@ namespace zypp
     {
       MIL << "unlink " << path;
       if ( ::unlink( path.asString().c_str() ) == -1 ) {
-        return _Log_Result( errno );
+        return logResult( errno );
       }
-      return _Log_Result( 0 );
+      return logResult( 0 );
     }
 
     ///////////////////////////////////////////////////////////////////
@@ -672,9 +668,9 @@ namespace zypp
     {
       MIL << "rename " << oldpath << " -> " << newpath;
       if ( ::rename( oldpath.asString().c_str(), newpath.asString().c_str() ) == -1 ) {
-        return _Log_Result( errno );
+        return logResult( errno );
       }
-      return _Log_Result( 0 );
+      return logResult( 0 );
     }
 
     ///////////////////////////////////////////////////////////////////
@@ -686,7 +682,7 @@ namespace zypp
     {
       MIL << "exchange " << lpath << " <-> " << rpath;
       if ( lpath.empty() || rpath.empty() )
-        return _Log_Result( EINVAL );
+        return logResult( EINVAL );
 
       PathInfo linfo( lpath );
       PathInfo rinfo( rpath );
@@ -694,16 +690,16 @@ namespace zypp
       if ( ! linfo.isExist() )
       {
         if ( ! rinfo.isExist() )
-          return _Log_Result( 0 ); // both don't exist.
+          return logResult( 0 ); // both don't exist.
 
         // just rename rpath -> lpath
         int ret = assert_dir( lpath.dirname() );
         if ( ret != 0 )
-          return _Log_Result( ret );
+          return logResult( ret );
         if ( ::rename( rpath.c_str(), lpath.c_str() ) == -1 ) {
-          return _Log_Result( errno );
+          return logResult( errno );
         }
-        return _Log_Result( 0 );
+        return logResult( 0 );
       }
 
       // HERE: lpath exists:
@@ -712,33 +708,33 @@ namespace zypp
         // just rename lpath -> rpath
         int ret = assert_dir( rpath.dirname() );
         if ( ret != 0 )
-          return _Log_Result( ret );
+          return logResult( ret );
         if ( ::rename( lpath.c_str(), rpath.c_str() ) == -1 ) {
-          return _Log_Result( errno );
+          return logResult( errno );
         }
-        return _Log_Result( 0 );
+        return logResult( 0 );
       }
 
       // HERE: both exist
       TmpFile tmpfile( TmpFile::makeSibling( rpath ) );
       if ( ! tmpfile )
-        return _Log_Result( errno );
+        return logResult( errno );
       Pathname tmp( tmpfile.path() );
       ::unlink( tmp.c_str() );
 
       if ( ::rename( lpath.c_str(), tmp.c_str() ) == -1 ) {
-        return _Log_Result( errno );
+        return logResult( errno );
       }
       if ( ::rename( rpath.c_str(), lpath.c_str() ) == -1 ) {
         ::rename( tmp.c_str(), lpath.c_str() );
-        return _Log_Result( errno );
+        return logResult( errno );
       }
       if ( ::rename( tmp.c_str(), rpath.c_str() ) == -1 ) {
         ::rename( lpath.c_str(), rpath.c_str() );
         ::rename( tmp.c_str(), lpath.c_str() );
-        return _Log_Result( errno );
+        return logResult( errno );
       }
-      return _Log_Result( 0 );
+      return logResult( 0 );
     }
 
     ///////////////////////////////////////////////////////////////////
@@ -752,12 +748,12 @@ namespace zypp
 
       PathInfo sp( file );
       if ( !sp.isFile() ) {
-        return _Log_Result( EINVAL );
+        return logResult( EINVAL );
       }
 
       PathInfo dp( dest );
       if ( dp.isDir() ) {
-        return _Log_Result( EISDIR );
+        return logResult( EISDIR );
       }
 
       const char *const argv[] = {
@@ -773,7 +769,7 @@ namespace zypp
         MIL << "  " << output;
       }
       int ret = prog.close();
-      return _Log_Result( ret, "returned" );
+      return logResult( ret, "returned" );
     }
 
     ///////////////////////////////////////////////////////////////////
@@ -785,9 +781,9 @@ namespace zypp
     {
       MIL << "symlink " << newpath << " -> " << oldpath;
       if ( ::symlink( oldpath.asString().c_str(), newpath.asString().c_str() ) == -1 ) {
-        return _Log_Result( errno );
+        return logResult( errno );
       }
-      return _Log_Result( 0 );
+      return logResult( 0 );
     }
 
     ///////////////////////////////////////////////////////////////////
@@ -799,9 +795,9 @@ namespace zypp
     {
       MIL << "hardlink " << newpath << " -> " << oldpath;
       if ( ::link( oldpath.asString().c_str(), newpath.asString().c_str() ) == -1 ) {
-        return _Log_Result( errno );
+        return logResult( errno );
       }
-      return _Log_Result( 0 );
+      return logResult( 0 );
     }
 
     ///////////////////////////////////////////////////////////////////
@@ -825,7 +821,7 @@ namespace zypp
       {
 	int res = unlink( newpath );
 	if ( res != 0 )
-	  return _Log_Result( res );
+	  return logResult( res );
       }
 
       // Here: no symlink, no newpath
@@ -838,9 +834,9 @@ namespace zypp
             return copy( oldpath, newpath );
             break;
         }
-        return _Log_Result( errno );
+        return logResult( errno );
       }
-      return _Log_Result( 0 );
+      return logResult( 0 );
     }
 
     ///////////////////////////////////////////////////////////////////
@@ -857,7 +853,7 @@ namespace zypp
       {
         target_r = Pathname();
         MIL << "readlink " << symlink_r;
-        return _Log_Result( errno );
+        return logResult( errno );
       }
       buf[ret] = '\0';
       target_r = buf;
@@ -920,12 +916,12 @@ namespace zypp
 
       PathInfo sp( file );
       if ( !sp.isFile() ) {
-        return _Log_Result( EINVAL );
+        return logResult( EINVAL );
       }
 
       PathInfo dp( dest );
       if ( !dp.isDir() ) {
-        return _Log_Result( ENOTDIR );
+        return logResult( ENOTDIR );
       }
 
       const char *const argv[] = {
@@ -940,7 +936,7 @@ namespace zypp
         MIL << "  " << output;
       }
       int ret = prog.close();
-      return _Log_Result( ret, "returned" );
+      return logResult( ret, "returned" );
     }
 
     ///////////////////////////////////////////////////////////////////
@@ -1020,9 +1016,9 @@ namespace zypp
     {
       MIL << "chmod " << path << ' ' << str::octstring( mode );
       if ( ::chmod( path.asString().c_str(), mode ) == -1 ) {
-        return _Log_Result( errno );
+        return logResult( errno );
       }
-      return _Log_Result( 0 );
+      return logResult( 0 );
     }
 
     int addmod( const Pathname & path, mode_t mode )
@@ -1109,18 +1105,18 @@ namespace zypp
       int ret = assert_dir( path.dirname() );
       MIL << "assert_file " << str::octstring( mode ) << " " << path;
       if ( ret != 0 )
-        return _Log_Result( ret );
+        return logResult( ret );
 
       PathInfo pi( path );
       if ( pi.isExist() )
-        return _Log_Result( pi.isFile() ? 0 : EEXIST );
+        return logResult( pi.isFile() ? 0 : EEXIST );
 
       int fd = ::creat( path.c_str(), mode );
       if ( fd == -1 )
-        return _Log_Result( errno );
+        return logResult( errno );
 
       ::close( fd );
-      return _Log_Result( 0 );
+      return logResult( 0 );
     }
 
     ///////////////////////////////////////////////////////////////////
@@ -1135,9 +1131,9 @@ namespace zypp
       times.actime = ::time( 0 );
       times.modtime = ::time( 0 );
       if ( ::utime( path.asString().c_str(), &times ) == -1 ) {
-        return _Log_Result( errno );
+        return logResult( errno );
       }
-      return _Log_Result( 0 );
+      return logResult( 0 );
     }
 
     /////////////////////////////////////////////////////////////////

@@ -66,9 +66,9 @@ namespace zypp
    *  number of ResObjects per Kind in a container.
    * Fits container of ResObject::Ptr or PoolItem.
   */
-  template <class _Iterator>
+  template <class TIterator>
     std::ostream & dumpPoolStats( std::ostream & str,
-                                  _Iterator begin_r, _Iterator end_r )
+                                  TIterator begin_r, TIterator end_r )
     {
       pool::PoolStats stats;
       std::for_each( begin_r, end_r,

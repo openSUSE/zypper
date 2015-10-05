@@ -68,7 +68,7 @@ class SolverQueueItemInstallOneOf : public SolverQueueItem {
     
     // ---------------------------------- methods
 
-    virtual bool addRule (_Queue & q);    
+    virtual bool addRule (sat::detail::CQueue & q);
     virtual SolverQueueItem_Ptr copy (void) const;
     virtual int cmp (SolverQueueItem_constPtr item) const;
 };

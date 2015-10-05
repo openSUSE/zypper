@@ -39,7 +39,7 @@ namespace zypp
  * to return the log stream.
  *
  * @code
- * _DBG("foo") << ....
+ * L_DBG("foo") << ....
  * @endcode
  * Logs a debug message for group @a "foo".
  *
@@ -59,29 +59,29 @@ namespace zypp
 #define ZYPP_BASE_LOGGER_LOGGROUP "DEFINE_LOGGROUP"
 #endif
 
-#define XXX _XXX( ZYPP_BASE_LOGGER_LOGGROUP )
-#define DBG _DBG( ZYPP_BASE_LOGGER_LOGGROUP )
-#define MIL _MIL( ZYPP_BASE_LOGGER_LOGGROUP )
-#define WAR _WAR( ZYPP_BASE_LOGGER_LOGGROUP )
-#define ERR _ERR( ZYPP_BASE_LOGGER_LOGGROUP )
-#define SEC _SEC( ZYPP_BASE_LOGGER_LOGGROUP )
-#define INT _INT( ZYPP_BASE_LOGGER_LOGGROUP )
-#define USR _USR( ZYPP_BASE_LOGGER_LOGGROUP )
+#define XXX L_XXX( ZYPP_BASE_LOGGER_LOGGROUP )
+#define DBG L_DBG( ZYPP_BASE_LOGGER_LOGGROUP )
+#define MIL L_MIL( ZYPP_BASE_LOGGER_LOGGROUP )
+#define WAR L_WAR( ZYPP_BASE_LOGGER_LOGGROUP )
+#define ERR L_ERR( ZYPP_BASE_LOGGER_LOGGROUP )
+#define SEC L_SEC( ZYPP_BASE_LOGGER_LOGGROUP )
+#define INT L_INT( ZYPP_BASE_LOGGER_LOGGROUP )
+#define USR L_USR( ZYPP_BASE_LOGGER_LOGGROUP )
 
-#define _XXX(GROUP) ZYPP_BASE_LOGGER_LOG( GROUP, zypp::base::logger::E_XXX )
-#define _DBG(GROUP) ZYPP_BASE_LOGGER_LOG( GROUP"++", zypp::base::logger::E_MIL )
-#define _MIL(GROUP) ZYPP_BASE_LOGGER_LOG( GROUP, zypp::base::logger::E_MIL )
-#define _WAR(GROUP) ZYPP_BASE_LOGGER_LOG( GROUP, zypp::base::logger::E_WAR )
-#define _ERR(GROUP) ZYPP_BASE_LOGGER_LOG( GROUP, zypp::base::logger::E_ERR )
-#define _SEC(GROUP) ZYPP_BASE_LOGGER_LOG( GROUP, zypp::base::logger::E_SEC )
-#define _INT(GROUP) ZYPP_BASE_LOGGER_LOG( GROUP, zypp::base::logger::E_INT )
-#define _USR(GROUP) ZYPP_BASE_LOGGER_LOG( GROUP, zypp::base::logger::E_USR )
+#define L_XXX(GROUP) ZYPP_BASE_LOGGER_LOG( GROUP, zypp::base::logger::E_XXX )
+#define L_DBG(GROUP) ZYPP_BASE_LOGGER_LOG( GROUP"++", zypp::base::logger::E_MIL )
+#define L_MIL(GROUP) ZYPP_BASE_LOGGER_LOG( GROUP, zypp::base::logger::E_MIL )
+#define L_WAR(GROUP) ZYPP_BASE_LOGGER_LOG( GROUP, zypp::base::logger::E_WAR )
+#define L_ERR(GROUP) ZYPP_BASE_LOGGER_LOG( GROUP, zypp::base::logger::E_ERR )
+#define L_SEC(GROUP) ZYPP_BASE_LOGGER_LOG( GROUP, zypp::base::logger::E_SEC )
+#define L_INT(GROUP) ZYPP_BASE_LOGGER_LOG( GROUP, zypp::base::logger::E_INT )
+#define L_USR(GROUP) ZYPP_BASE_LOGGER_LOG( GROUP, zypp::base::logger::E_USR )
 
-#define _BASEFILE ( *__FILE__ == '/' ? strrchr( __FILE__, '/' ) + 1 : __FILE__ )
+#define L_BASEFILE ( *__FILE__ == '/' ? strrchr( __FILE__, '/' ) + 1 : __FILE__ )
 
 /** Actual call to @ref getStream. */
 #define ZYPP_BASE_LOGGER_LOG(GROUP,LEVEL) \
-        zypp::base::logger::getStream( GROUP, LEVEL, _BASEFILE, __FUNCTION__, __LINE__ )
+        zypp::base::logger::getStream( GROUP, LEVEL, L_BASEFILE, __FUNCTION__, __LINE__ )
 
 /*@}*/
 

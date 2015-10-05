@@ -58,7 +58,7 @@ namespace zypp
           ~PoolImpl();
 
           /** Pointer style access forwarded to sat-pool. */
-          ::_Pool * operator->()
+          CPool * operator->()
           { return _pool; }
 
         public:
@@ -88,16 +88,16 @@ namespace zypp
           void depSetDirty( const char * a1 = 0, const char * a2 = 0, const char * a3 = 0 );
 
           /** Callback to resolve namespace dependencies (language, modalias, filesystem, etc.). */
-          static detail::IdType nsCallback( ::_Pool *, void * data, detail::IdType lhs, detail::IdType rhs );
+          static detail::IdType nsCallback( CPool *, void * data, detail::IdType lhs, detail::IdType rhs );
 
         public:
           /** Reserved system repository alias \c @System. */
           static const std::string & systemRepoAlias();
 
-          bool isSystemRepo( ::_Repo * repo_r ) const
+          bool isSystemRepo( CRepo * repo_r ) const
           { return repo_r && _pool->installed == repo_r; }
 
-          ::_Repo * systemRepo() const
+          CRepo * systemRepo() const
           { return _pool->installed; }
 
           /** Get rootdir (for file conflicts check) */
@@ -123,53 +123,53 @@ namespace zypp
            */
           //@{
           /** Creating a new repo named \a name_r. */
-          ::_Repo * _createRepo( const std::string & name_r );
+          CRepo * _createRepo( const std::string & name_r );
 
           /** Creating a new repo named \a name_r. */
-          void _deleteRepo( ::_Repo * repo_r );
+          void _deleteRepo( CRepo * repo_r );
 
           /** Adding solv file to a repo.
            * Except for \c isSystemRepo_r, solvables of incompatible architecture
            * are filtered out.
           */
-          int _addSolv( ::_Repo * repo_r, FILE * file_r );
+          int _addSolv( CRepo * repo_r, FILE * file_r );
 
           /** Adding helix file to a repo.
            * Except for \c isSystemRepo_r, solvables of incompatible architecture
            * are filtered out.
           */
-          int _addHelix( ::_Repo * repo_r, FILE * file_r );
+          int _addHelix( CRepo * repo_r, FILE * file_r );
 
           /** Adding Solvables to a repo. */
-          detail::SolvableIdType _addSolvables( ::_Repo * repo_r, unsigned count_r );
+          detail::SolvableIdType _addSolvables( CRepo * repo_r, unsigned count_r );
           //@}
 
           /** Helper postprocessing the repo after adding solv or helix files. */
-          void _postRepoAdd( ::_Repo * repo_r );
+          void _postRepoAdd( CRepo * repo_r );
 
         public:
           /** a \c valid \ref Solvable has a non NULL repo pointer. */
-          bool validSolvable( const ::_Solvable & slv_r ) const
+          bool validSolvable( const CSolvable & slv_r ) const
           { return slv_r.repo; }
           /** \overload Check also for id_r being in range of _pool->solvables. */
           bool validSolvable( SolvableIdType id_r ) const
           { return id_r < unsigned(_pool->nsolvables) && validSolvable( _pool->solvables[id_r] ); }
           /** \overload Check also for slv_r being in range of _pool->solvables. */
-          bool validSolvable( const ::_Solvable * slv_r ) const
+          bool validSolvable( const CSolvable * slv_r ) const
           { return _pool->solvables <= slv_r && slv_r <= _pool->solvables+_pool->nsolvables && validSolvable( *slv_r ); }
 
         public:
-          ::_Pool * getPool() const
+          CPool * getPool() const
           { return _pool; }
 
           /** \todo a quick check whether the repo was meanwhile deleted. */
-          ::_Repo * getRepo( RepoIdType id_r ) const
+          CRepo * getRepo( RepoIdType id_r ) const
           { return id_r; }
 
           /** Return pointer to the sat-solvable or NULL if it is not valid.
            * \see \ref validSolvable.
            */
-          ::_Solvable * getSolvable( SolvableIdType id_r ) const
+          CSolvable * getSolvable( SolvableIdType id_r ) const
           {
             if ( validSolvable( id_r ) )
               return &_pool->solvables[id_r];
@@ -309,7 +309,7 @@ namespace zypp
 
         private:
           /** sat-pool. */
-          ::_Pool * _pool;
+          CPool * _pool;
           /** Serial number. */
           SerialNumber _serial;
           /** Watch serial number. */

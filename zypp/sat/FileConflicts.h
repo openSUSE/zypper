@@ -65,8 +65,8 @@ namespace zypp
       const_iterator end() const	{ return reinterpret_cast<const_iterator>(Queue::end()); }
 
     public:
-      using Queue::operator struct ::_Queue *;		///< libsolv backdoor
-      using Queue::operator const struct ::_Queue *;	///< libsolv backdoor
+      using Queue::operator detail::CQueue *;		///< libsolv backdoor
+      using Queue::operator const detail::CQueue *;	///< libsolv backdoor
     };
 
     /** \relates FileConflicts Stream output */

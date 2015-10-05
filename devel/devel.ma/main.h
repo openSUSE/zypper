@@ -41,12 +41,12 @@ inline std::ostream & operator<<( std::ostream & str, const Resolvable & res )
 ///////////////////////////////////////////////////////////////////
 
 // connect resolvables interface and implementation.
-template<class _Res>
-  struct ResImplConnect : public _Res
+template<class TRes>
+  struct ResImplConnect : public TRes
   {
   public:
     typedef ResImplConnect               Self;
-    typedef typename _Res::Impl          Impl;
+    typedef typename TRes::Impl          Impl;
     typedef zypp::base::shared_ptr<Impl> ImplPtr;
     typedef zypp::base::intrusive_ptr<Self>       Ptr;
     typedef zypp::base::intrusive_ptr<const Self> constPtr;
@@ -62,12 +62,12 @@ template<class _Res>
   };
 
 
-template<class _Impl>
-  typename _Impl::ResType::Ptr
-  makeResolvable( /*NVRA*/ zypp::base::shared_ptr<_Impl> & impl_r )
+template<class TImpl>
+  typename TImpl::ResType::Ptr
+  makeResolvable( /*NVRA*/ zypp::base::shared_ptr<TImpl> & impl_r )
   {
-    impl_r.reset( new _Impl );
-    return new ResImplConnect<typename _Impl::ResType>( /*NVRA*/ impl_r );
+    impl_r.reset( new TImpl );
+    return new ResImplConnect<typename TImpl::ResType>( /*NVRA*/ impl_r );
   }
 
 ///////////////////////////////////////////////////////////////////
@@ -90,7 +90,7 @@ struct ObjectImpl
   virtual ~ObjectImpl() {};
 
   private:
-    template<class _Res>
+    template<class TRes>
       friend class ResImpl;
     Resolvable * _backRef;
 };

@@ -130,7 +130,7 @@ namespace zypp
       }
       else
       { // translators: an annotation to a gpg keys expiry date
-	ret += str::form( _PL("(expires in %d day)", "(expires in %d days)", ttl ), ttl );
+	ret += str::form( PL_("(expires in %d day)", "(expires in %d days)", ttl ), ttl );
       }
     }
     return ret;

@@ -230,10 +230,10 @@ namespace zypp
   ///////////////////////////////////////////////////////////////////
 
   /** Mutable option. */
-  template<class _Tp>
+  template<class Tp>
       struct Option
       {
-	typedef _Tp value_type;
+	typedef Tp value_type;
 
 	/** No default ctor, explicit initialisation! */
 	Option( const value_type & initial_r )
@@ -261,14 +261,14 @@ namespace zypp
       };
 
   /** Mutable option with initial value also remembering a config value. */
-  template<class _Tp>
-      struct DefaultOption : public Option<_Tp>
+  template<class Tp>
+      struct DefaultOption : public Option<Tp>
       {
-	typedef _Tp         value_type;
-	typedef Option<_Tp> option_type;
+	typedef Tp         value_type;
+	typedef Option<Tp> option_type;
 
         DefaultOption( const value_type & initial_r )
-          : Option<_Tp>( initial_r ), _default( initial_r )
+          : Option<Tp>( initial_r ), _default( initial_r )
         {}
 
 	/** Reset value to the current default. */

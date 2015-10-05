@@ -177,8 +177,8 @@ namespace zypp
          * TmpLineWriter mylw( new log::StderrLineWriter );
          * \endcode
         */
-        template<class _LineWriter>
-        TmpLineWriter( _LineWriter * _allocated_r )
+        template<class TLineWriter>
+        TmpLineWriter( TLineWriter * _allocated_r )
           : _writer( LogControl::instance().getLineWriter() )
         { LogControl::instance().setLineWriter( shared_ptr<LineWriter>( _allocated_r ) ); }
 

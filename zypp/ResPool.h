@@ -113,18 +113,18 @@ namespace zypp
       { return( resolvable_r ? find( resolvable_r->satSolvable() ) : PoolItem() ); }
 
     public:
-      /** \name Iterate over all PoolItems matching a \c _Filter. */
+      /** \name Iterate over all PoolItems matching a \c TFilter. */
       //@{
-      template<class _Filter>
-      filter_iterator<_Filter,const_iterator> filterBegin( const _Filter & filter_r ) const
+      template<class TFilter>
+      filter_iterator<TFilter,const_iterator> filterBegin( const TFilter & filter_r ) const
       { return make_filter_begin( filter_r, *this ); }
 
-      template<class _Filter>
-      filter_iterator<_Filter,const_iterator> filterEnd( const _Filter & filter_r ) const
+      template<class TFilter>
+      filter_iterator<TFilter,const_iterator> filterEnd( const TFilter & filter_r ) const
       { return make_filter_end( filter_r, *this ); }
 
-      template<class _Filter>
-      Iterable<filter_iterator<_Filter,const_iterator> > filter( const _Filter & filter_r ) const
+      template<class TFilter>
+      Iterable<filter_iterator<TFilter,const_iterator> > filter( const TFilter & filter_r ) const
       { return makeIterable( filterBegin( filter_r ), filterEnd( filter_r ) ); }
       //@}
 
@@ -175,13 +175,13 @@ namespace zypp
       byIdent_iterator byIdentBegin( ResKind kind_r, const C_Str & name_r ) const
       { return byIdentBegin( ByIdent(kind_r,name_r) ); }
 
-      template<class _Res>
+      template<class TRes>
       byIdent_iterator byIdentBegin( IdString name_r ) const
-      { return byIdentBegin( ByIdent(ResTraits<_Res>::kind,name_r) ); }
+      { return byIdentBegin( ByIdent(ResTraits<TRes>::kind,name_r) ); }
 
-      template<class _Res>
+      template<class TRes>
       byIdent_iterator byIdentBegin( const C_Str & name_r ) const
-      { return byIdentBegin( ByIdent(ResTraits<_Res>::kind,name_r) ); }
+      { return byIdentBegin( ByIdent(ResTraits<TRes>::kind,name_r) ); }
 
       /** Derive name and kind from \ref PoolItem. */
       byIdent_iterator byIdentBegin( const PoolItem & pi_r ) const
@@ -206,13 +206,13 @@ namespace zypp
       byIdent_iterator byIdentEnd( ResKind kind_r, const C_Str & name_r ) const
       { return byIdentEnd( ByIdent(kind_r,name_r) ); }
 
-      template<class _Res>
+      template<class TRes>
       byIdent_iterator byIdentEnd( IdString name_r ) const
-      { return byIdentEnd( ByIdent(ResTraits<_Res>::kind,name_r) ); }
+      { return byIdentEnd( ByIdent(ResTraits<TRes>::kind,name_r) ); }
 
-      template<class _Res>
+      template<class TRes>
       byIdent_iterator byIdentEnd( const C_Str & name_r ) const
-      { return byIdentEnd( ByIdent(ResTraits<_Res>::kind,name_r) ); }
+      { return byIdentEnd( ByIdent(ResTraits<TRes>::kind,name_r) ); }
 
       /** Derive name and kind from \ref PoolItem. */
       byIdent_iterator byIdentEnd( const PoolItem & pi_r ) const
@@ -234,13 +234,13 @@ namespace zypp
       Iterable<byIdent_iterator> byIdent( ResKind kind_r, const C_Str & name_r ) const
       { return makeIterable( byIdentBegin(  kind_r, name_r ), byIdentEnd(  kind_r, name_r ) ); }
 
-      template<class _Res>
+      template<class TRes>
       Iterable<byIdent_iterator> byIdent( IdString name_r ) const
-      { return makeIterable( byIdentBegin<_Res>( name_r ), byIdentEnd<_Res>( name_r ) ); }
+      { return makeIterable( byIdentBegin<TRes>( name_r ), byIdentEnd<TRes>( name_r ) ); }
 
-      template<class _Res>
+      template<class TRes>
       Iterable<byIdent_iterator> byIdent( const C_Str & name_r ) const
-      { return makeIterable( byIdentBegin<_Res>( name_r ), byIdentEnd<_Res>( name_r ) ); }
+      { return makeIterable( byIdentBegin<TRes>( name_r ), byIdentEnd<TRes>( name_r ) ); }
 
       Iterable<byIdent_iterator> byIdent( const PoolItem & pi_r ) const
       { return makeIterable( byIdentBegin( pi_r ), byIdentEnd( pi_r ) ); }
@@ -261,23 +261,23 @@ namespace zypp
       byKind_iterator byKindBegin( const ResKind & kind_r ) const
       { return make_filter_begin( ByKind(kind_r), *this ); }
 
-      template<class _Res>
+      template<class TRes>
           byKind_iterator byKindBegin() const
-      { return make_filter_begin( resfilter::byKind<_Res>(), *this ); }
+      { return make_filter_begin( resfilter::byKind<TRes>(), *this ); }
 
       byKind_iterator byKindEnd( const ResKind & kind_r ) const
       { return make_filter_end( ByKind(kind_r), *this ); }
 
-      template<class _Res>
+      template<class TRes>
           byKind_iterator byKindEnd() const
-      { return make_filter_end( resfilter::byKind<_Res>(), *this ); }
+      { return make_filter_end( resfilter::byKind<TRes>(), *this ); }
 
       Iterable<byKind_iterator> byKind( const ResKind & kind_r ) const
       { return makeIterable( byKindBegin( kind_r ), byKindEnd( kind_r ) ); }
 
-      template<class _Res>
+      template<class TRes>
       Iterable<byKind_iterator> byKind() const
-      { return makeIterable( byKindBegin<_Res>(), byKindEnd<_Res>() ); }
+      { return makeIterable( byKindBegin<TRes>(), byKindEnd<TRes>() ); }
       //@}
 
     public:

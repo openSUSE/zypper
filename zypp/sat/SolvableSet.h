@@ -49,8 +49,8 @@ namespace zypp
         {}
 
         /** Ctor building a set from a range. */
-        template<class _InputIterator>
-        SolvableSet( _InputIterator begin_r, _InputIterator end_r )
+        template<class TInputIterator>
+        SolvableSet( TInputIterator begin_r, TInputIterator end_r )
         : _pimpl( new Container( begin_r, end_r ) )
         {}
 
@@ -64,8 +64,8 @@ namespace zypp
         { return _pimpl->size(); }
 
 	/** */
-	template<class _Solv>
-	bool contains( const _Solv & solv_r ) const
+	template<class TSolv>
+	bool contains( const TSolv & solv_r ) const
 	{ return( get().count( asSolvable()( solv_r ) ) ); }
 
         /** Iterator pointing to the first \ref Solvable. */
@@ -81,8 +81,8 @@ namespace zypp
 	/** Insert a Solvable.
 	 * \return \c true if it was actually inserted, or \c false if already present.
 	*/
-	template<class _Solv>
-	bool insert( const _Solv & solv_r )
+	template<class TSolv>
+	bool insert( const TSolv & solv_r )
 	{ return get().insert( asSolvable()( solv_r ) ).second; }
 
       public:

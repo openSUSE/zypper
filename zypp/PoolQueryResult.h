@@ -97,8 +97,8 @@ namespace zypp
       { operator+=( query_r ); }
 
       /** Ctor adding a range of items for which \ref operator+= is defined. */
-      template<class _QueryResultIter>
-      PoolQueryResult( _QueryResultIter begin_r, _QueryResultIter end_r )
+      template<class TQueryResultIter>
+      PoolQueryResult( TQueryResultIter begin_r, TQueryResultIter end_r )
       {
         for_( it, begin_r, end_r )
         {

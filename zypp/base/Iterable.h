@@ -32,12 +32,12 @@ namespace zypp
   ///   };
   /// \endcode
   ///////////////////////////////////////////////////////////////////
-  template <class _Iterator>
+  template <class TIterator>
   class Iterable
   {
   public:
     typedef size_t size_type;
-    typedef _Iterator iterator_type;
+    typedef TIterator iterator_type;
     typedef typename std::iterator_traits<iterator_type>::value_type		value_type;
     typedef typename std::iterator_traits<iterator_type>::difference_type	difference_type;
     typedef typename std::iterator_traits<iterator_type>::pointer		pointer;
@@ -78,9 +78,9 @@ namespace zypp
   };
 
   /** \relates Iterable convenient construction. */
-  template <class _Iterator>
-  Iterable<_Iterator> makeIterable( _Iterator && begin_r, _Iterator && end_r )
-  { return Iterable<_Iterator>( std::forward<_Iterator>(begin_r), std::forward<_Iterator>(end_r) ); }
+  template <class TIterator>
+  Iterable<TIterator> makeIterable( TIterator && begin_r, TIterator && end_r )
+  { return Iterable<TIterator>( std::forward<TIterator>(begin_r), std::forward<TIterator>(end_r) ); }
 
 } // namespace zypp
 ///////////////////////////////////////////////////////////////////

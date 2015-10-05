@@ -25,37 +25,37 @@ namespace zypp
     /// \class EnumClass
     /// \brief Type safe enum (workaround SWIG not supporting enum class)
     /// \code
-    /// struct _ColorDef { enum Enum { R, G ,B }; };
-    /// typedef EnumClass<_ColorDef> Color;
+    /// struct EColorDef { enum Enum { R, G ,B }; };
+    /// typedef EnumClass<EColorDef> Color;
     /// \endcode
     /// Conversion to from string can be easily added, e.g. like this:
     /// \code
-    /// struct _ColorDef {
+    /// struct EColorDef {
     ///   enum Enum { R, G ,B };
     ///   static Enum fromString( const std::string & val_r );
     ///   static const std::string & asString( Enum val_r );
     /// };
-    /// std::ostream & operator<<( std::ostream & str, const _ColorDef & obj )
-    /// { return str << _ColorDef::asString( obj.inSwitch() ); }
+    /// std::ostream & operator<<( std::ostream & str, const EColorDef & obj )
+    /// { return str << EColorDef::asString( obj.inSwitch() ); }
     ///
-    /// typedef EnumClass<_ColorDef> Color;
+    /// typedef EnumClass<EColorDef> Color;
     /// Color red = Color::fromString("red");
     /// cout << red << endl; // "red"
     /// \endcode
     ///////////////////////////////////////////////////////////////////
-    template<typename _EnumDef>
-    class EnumClass : public _EnumDef
+    template<typename TEnumDef>
+    class EnumClass : public TEnumDef
     {
     public:
-      typedef typename _EnumDef::Enum Enum;		///< The underlying enum type
+      typedef typename TEnumDef::Enum Enum;		///< The underlying enum type
       typedef typename std::underlying_type<Enum>::type Integral;///< The underlying integral type
 
       EnumClass( Enum val_r ) : _val( val_r ) {}
 
       /** Underlying enum value for use in switch
        * \code
-       * struct _ColorDef { enum Enum { R, G ,B }; }
-       * typedef EnumClass<_ColorDef> Color;
+       * struct EColorDef { enum Enum { R, G ,B }; }
+       * typedef EnumClass<EColorDef> Color;
        *
        * Color a;
        * switch ( a.asEnum() )
@@ -65,8 +65,8 @@ namespace zypp
 
       /** Underlying integral value (e.g. array index)
        * \code
-       * struct _ColorDef { enum Enum { R, G ,B }; }
-       * typedef EnumClass<_ColorDef> Color;
+       * struct EColorDef { enum Enum { R, G ,B }; }
+       * typedef EnumClass<EColorDef> Color;
        *
        * Color a;
        * std::string table[] = { "red", "green", "blue" };

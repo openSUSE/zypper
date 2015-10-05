@@ -62,10 +62,10 @@ namespace zypp
 
       ResKind 		kind() const				{ return satSolvable().kind(); }
       bool		isKind( const ResKind & kind_r ) const	{ return satSolvable().isKind( kind_r ); }
-      template<class _Res>
-      bool		isKind() const				{ return satSolvable().isKind<_Res>(); }
-      template<class _Iterator>
-      bool isKind( _Iterator begin, _Iterator end ) const	{ return satSolvable().isKind( begin, end ); }
+      template<class TRes>
+      bool		isKind() const				{ return satSolvable().isKind<TRes>(); }
+      template<class TIterator>
+      bool isKind( TIterator begin, TIterator end ) const	{ return satSolvable().isKind( begin, end ); }
 
       std::string	name() const				{ return satSolvable().name(); }
       Edition		edition() const				{ return satSolvable().edition(); }
@@ -198,9 +198,9 @@ namespace zypp
     { return lhs < rhs.satSolvable(); }
 
     /** \relates SolvableType Test whether the \ref Solvable is of a certain \ref ResKind. */
-    template<class _Res, class Derived>
+    template<class TRes, class Derived>
     inline bool isKind( const SolvableType<Derived> & solvable_r )
-    { return isKind<_Res>( solvable_r.satSolvable() ); }
+    { return isKind<TRes>( solvable_r.satSolvable() ); }
 
     /** \relates SolvableType Test for same content. */
     template <class LDerived, class RDerived>

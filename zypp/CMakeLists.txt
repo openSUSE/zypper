@@ -36,7 +36,6 @@ SET( zypp_SRCS
   InstanceId.cc
   KeyRing.cc
   Locks.cc
-  MediaProducts.cc
   MediaSetAccess.cc
   OnMediaLocation.cc
   Package.cc

@@ -74,7 +74,7 @@ SolverQueueItemInstallOneOf::~SolverQueueItemInstallOneOf()
 
 //---------------------------------------------------------------------------
 
-bool SolverQueueItemInstallOneOf::addRule (_Queue & q)
+bool SolverQueueItemInstallOneOf::addRule (sat::detail::CQueue & q)
 {
     bool ret = true;
     MIL << "Install one of " << (_soft ? "(soft):" : ":")<< endl;

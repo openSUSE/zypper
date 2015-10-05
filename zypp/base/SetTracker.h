@@ -33,12 +33,12 @@ namespace zypp
     ///
     /// \note The tracking API expects the template arg to have set semantic.
     ///////////////////////////////////////////////////////////////////
-    template <class _Set>
+    template <class TSet>
     struct SetTracker
     {
-      typedef  _Set			set_type;
-      typedef typename _Set::key_type	key_type;
-      typedef typename _Set::value_type	value_type;
+      typedef  TSet			set_type;
+      typedef typename TSet::key_type	key_type;
+      typedef typename TSet::value_type	value_type;
 
       /** Default Ctor: empty set */
       SetTracker()
@@ -162,17 +162,17 @@ namespace zypp
       static bool find( const set_type & set_r, const key_type & key_r )
       { return set_r.find( key_r ) != set_r.end(); }
 
-      template <class _ORDERED_SET, typename enable_if = typename _ORDERED_SET::key_compare>
-      static void setDifference( const _ORDERED_SET & lhs, const _ORDERED_SET & rhs, _ORDERED_SET & result_r )
+      template <class TORDERED_SET, typename enable_if = typename TORDERED_SET::key_compare>
+      static void setDifference( const TORDERED_SET & lhs, const TORDERED_SET & rhs, TORDERED_SET & result_r )
       {
 	// std::set_difference requires ordered sets!
 	std::set_difference( lhs.begin(), lhs.end(), rhs.begin(), rhs.end(),
 			     std::inserter( result_r, result_r.end() ),
-			     typename _ORDERED_SET::key_compare() );
+			     typename TORDERED_SET::key_compare() );
       }
 
-      template <class _UNORDERED_SET, typename enable_if = typename _UNORDERED_SET::hasher, typename = void>
-      static void setDifference( const _UNORDERED_SET & lhs, const _UNORDERED_SET & rhs, _UNORDERED_SET & result_r )
+      template <class TUNORDERED_SET, typename enable_if = typename TUNORDERED_SET::hasher, typename = void>
+      static void setDifference( const TUNORDERED_SET & lhs, const TUNORDERED_SET & rhs, TUNORDERED_SET & result_r )
       {
 	// std::set_difference requires ordered sets!
 	for ( const auto & l : lhs )
@@ -186,8 +186,8 @@ namespace zypp
     };
 
     /** \relates SetTracker Stream output */
-    template <class _Set>
-    std::ostream & operator<<( std::ostream & str, const SetTracker<_Set> & obj )
+    template <class TSet>
+    std::ostream & operator<<( std::ostream & str, const SetTracker<TSet> & obj )
     { return str << "set(" << obj.current().size() << "|+" << obj.added().size() << "|-" << obj.removed().size() << ')'; }
 
   } // namespace base

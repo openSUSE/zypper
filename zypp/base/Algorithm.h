@@ -26,13 +26,13 @@ namespace zypp
    * \return Number of invokations of \a fnc_r, negative if
    * loop was aborted by \a fnc_.
   */
-  template <class _Iterator, class _Filter, class _Function>
-    inline int invokeOnEach( _Iterator begin_r, _Iterator end_r,
-                             _Filter filter_r,
-                             _Function fnc_r )
+  template <class TIterator, class TFilter, class TFunction>
+    inline int invokeOnEach( TIterator begin_r, TIterator end_r,
+                             TFilter filter_r,
+                             TFunction fnc_r )
     {
       int cnt = 0;
-      for ( _Iterator it = begin_r; it != end_r; ++it )
+      for ( TIterator it = begin_r; it != end_r; ++it )
         {
           if ( filter_r( *it ) )
             {
@@ -52,12 +52,12 @@ namespace zypp
    * \return Number of invokations of \a fnc_r, negative if
    * loop was aborted by \a fnc_.
   */
-  template <class _Iterator, class _Function>
-    inline int invokeOnEach( _Iterator begin_r, _Iterator end_r,
-                             _Function fnc_r )
+  template <class TIterator, class TFunction>
+    inline int invokeOnEach( TIterator begin_r, TIterator end_r,
+                             TFunction fnc_r )
     {
       int cnt = 0;
-      for ( _Iterator it = begin_r; it != end_r; ++it )
+      for ( TIterator it = begin_r; it != end_r; ++it )
         {
           ++cnt;
           if ( ! fnc_r( *it ) )

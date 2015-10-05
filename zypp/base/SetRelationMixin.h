@@ -21,11 +21,11 @@
 namespace zypp
 {
   ///////////////////////////////////////////////////////////////////
-  /// \class _SetCompareDef
+  /// \class ESetCompareDef
   /// \brief Result of set comparison (use like 'enum class \ref SetCompare')
   /// This is the type a \c compare function should return.
   ///////////////////////////////////////////////////////////////////
-  struct _SetCompareDef {
+  struct ESetCompareDef {
     enum Enum {
       uncomparable	= 0,		///< "{?}"
       equal		= (1<<0),	///< "{=}"
@@ -36,8 +36,8 @@ namespace zypp
     /** String representantion */
     static const std::string & asString( Enum val_r );
   };
-  /** \relates _SetCompareDef typedef 'enum class SetCompare' */
-  typedef base::EnumClass<_SetCompareDef> SetCompare;
+  /** \relates ESetCompareDef typedef 'enum class SetCompare' */
+  typedef base::EnumClass<ESetCompareDef> SetCompare;
 
   /** \relates SetCompare Stream output */
   inline std::ostream & operator<<( std::ostream & str, const SetCompare::Enum & obj )
@@ -47,14 +47,14 @@ namespace zypp
   { return str << obj.asEnum(); }
 
   ///////////////////////////////////////////////////////////////////
-  /// \class _SetRelationDef
+  /// \class ESetRelationDef
   /// \brief Set Relation based on \ref SetCompare (use like 'enum class \ref SetRelation')
   /// Comparison (\c== \c!=) between \ref SetRelation  and \ref SetCompare
   /// is defined to let \c SetRelation::subset match \c SetCompare::equal
   /// as well as \c SetCompare::properSubset. Accordingly \c SetRelation::subset
   /// matches \c SetCompare::equal as well as \c SetCompare::properSuperset.
   ///////////////////////////////////////////////////////////////////
-  struct _SetRelationDef {
+  struct ESetRelationDef {
     enum Enum {
       uncomparable	= SetCompare::uncomparable,	///< "{??}"
       equal		= SetCompare::equal,		///< "{==}"
@@ -67,8 +67,8 @@ namespace zypp
     /** String representantion */
     static const std::string & asString( Enum val_r );
   };
-  /** \relates _SetRelationDef typedef 'enum class SetRelation' */
-  typedef base::EnumClass<_SetRelationDef> SetRelation;
+  /** \relates ESetRelationDef typedef 'enum class SetRelation' */
+  typedef base::EnumClass<ESetRelationDef> SetRelation;
 
   /** \relates SetRelation Stream output */
   inline std::ostream & operator<<( std::ostream & str, const SetRelation::Enum & obj )

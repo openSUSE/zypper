@@ -125,13 +125,13 @@ namespace zypp
     /** \ref parseDefAssign exposed details */
     namespace parse_def_assign
     { /////////////////////////////////////////////////////////////////
-     template <class _Type> struct Assigner;
+      template <class Tp> struct Assigner;
 
       typedef shared_ptr<Assigner<void> > AssignerRef;
 
       /** Common interface to all Assigner types. */
       template <>
-          struct Assigner<void>
+      struct Assigner<void>
       {
         virtual ~Assigner()
         {}
@@ -140,20 +140,20 @@ namespace zypp
       };
 
       /** Assigner assigns text to types constructible from \c char*.
-       * \see \ref assigner consvenience constructor.
+       * \see \ref assigner convenience constructor.
       */
-      template <class _Type>
-          struct Assigner : public Assigner<void>
+      template <class Tp>
+      struct Assigner : public Assigner<void>
       {
-        Assigner(_Type & value_r )
+        Assigner( Tp & value_r )
           : _value( &value_r )
         {}
 
         virtual void assign( const char * text_r )
-        { *_value = _Type( text_r ); }
+        { *_value = Tp( text_r ); }
 
         private:
-          _Type * _value;
+          Tp * _value;
       };
 
       /** \name Assigner specialisation for numeric and boolean values.
@@ -176,20 +176,19 @@ namespace zypp
           inline void Assigner<unsigned long>::assign( const char * text_r )      { str::strtonum( text_r, *_value ); }
       template <>
           inline void Assigner<unsigned long long>::assign( const char * text_r ) { str::strtonum( text_r, *_value ); }
-
       template <>
-          inline void Assigner<bool>::assign( const char * text_r ) { str::strToBoolNodefault( text_r, *_value ); }
+          inline void Assigner<bool>::assign( const char * text_r )               { str::strToBoolNodefault( text_r, *_value ); }
       //@}
 
       /** \name \relates Assigner Convenience constructor */
       //@{
-      template <class _Type>
-          inline AssignerRef assigner( _Type & value_r )
-      { return AssignerRef( new Assigner<_Type>( value_r ) ); }
+      template <class Tp>
+          inline AssignerRef assigner( Tp & value_r )
+      { return AssignerRef( new Assigner<Tp>( value_r ) ); }
 
-      template <class _Tp, _Tp _Initial>
-          inline AssignerRef assigner( DefaultIntegral<_Tp,_Initial> & value_r )
-      { return AssignerRef( new Assigner<_Tp>( value_r.get() ) ); }
+      template <class Tp, Tp TInitial>
+          inline AssignerRef assigner( DefaultIntegral<Tp,TInitial> & value_r )
+      { return AssignerRef( new Assigner<Tp>( value_r.get() ) ); }
       //@}
 
 
@@ -260,9 +259,9 @@ namespace zypp
 
         private:
           std::unordered_map<std::string, std::vector<AssignerRef> > _attr;
-          std::vector<AssignerRef>                                        _text;
-          function<void ( const Node & )>                                 _pre;
-          function<void ( const Node & )>                                 _post;
+          std::vector<AssignerRef>                                   _text;
+          function<void ( const Node & )>                            _pre;
+          function<void ( const Node & )>                            _post;
       };
 
       /** Helper class to build a \ref Consumer.
@@ -286,25 +285,25 @@ namespace zypp
         {}
 
         /** Contruct \ref Consumer. */
-        template <class _Type>
-            Builder( _Type & value_r )
+        template <class Tp>
+            Builder( Tp & value_r )
           : _ptr( new Consumer )
         { operator()( value_r ); }
 
         /** Contruct \ref Consumer. */
-        template <class _Type>
-            Builder( const std::string & attr_r, _Type & value_r )
+        template <class Tp>
+            Builder( const std::string & attr_r, Tp & value_r )
           : _ptr( new Consumer )
         {  operator()( attr_r, value_r ); }
 
         /** Extend \ref Consumer. */
-        template <class _Type>
-            Builder & operator()( _Type & value_r )
+        template <class Tp>
+            Builder & operator()( Tp & value_r )
         { _ptr->add( assigner( value_r ) ); return *this; }
 
         /** Extend \ref Consumer. */
-        template <class _Type>
-            Builder & operator()( const std::string & attr_r, _Type & value_r )
+        template <class Tp>
+            Builder & operator()( const std::string & attr_r, Tp & value_r )
         { _ptr->add( attr_r, assigner( value_r ) ); return *this; }
 
         /** Set pre notification callback. */
@@ -356,12 +355,12 @@ namespace zypp
     inline parse_def_assign::Builder parseDefAssign()
     { return parse_def_assign::Builder(); }
 
-    template <class _Type>
-        inline parse_def_assign::Builder parseDefAssign( _Type & value_r )
+    template <class Tp>
+        inline parse_def_assign::Builder parseDefAssign( Tp & value_r )
     { return parse_def_assign::Builder( value_r ); }
 
-    template <class _Type>
-        inline parse_def_assign::Builder parseDefAssign( const std::string & attr_r, _Type & value_r )
+    template <class Tp>
+        inline parse_def_assign::Builder parseDefAssign( const std::string & attr_r, Tp & value_r )
     { return parse_def_assign::Builder( attr_r, value_r ); }
     //@}
 

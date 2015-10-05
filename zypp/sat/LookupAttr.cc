@@ -753,7 +753,7 @@ namespace zypp
 
     ///////////////////////////////////////////////////////////////////
 
-    bool LookupAttr::iterator::dip_equal( const ::_Dataiterator & lhs, const ::_Dataiterator & rhs ) const
+    bool LookupAttr::iterator::dip_equal( const detail::CDataiterator & lhs, const detail::CDataiterator & rhs ) const
     {
       // Iterator equal is same position in same container.
       // Here: same attribute in same solvable.
@@ -784,7 +784,7 @@ namespace zypp
 
     std::ostream & operator<<( std::ostream & str, const LookupAttr::iterator & obj )
     {
-      const ::_Dataiterator * dip = obj.get();
+      const detail::CDataiterator * dip = obj.get();
       if ( ! dip )
         return str << "EndOfQuery";
 
@@ -808,9 +808,9 @@ namespace zypp
 } // namespace zypp
 ///////////////////////////////////////////////////////////////////
 
-std::ostream & operator<<( std::ostream & str, const ::_Dataiterator * obj )
+std::ostream & operator<<( std::ostream & str, const zypp::sat::detail::CDataiterator * obj )
 {
-  str << "::_Dataiterator(";
+  str << "detail::CDataiterator(";
   if ( ! obj )
   {
     str << "NULL";

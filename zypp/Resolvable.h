@@ -95,9 +95,9 @@ namespace zypp
   * isKind<Package>(resPtr);
   * \endcode
   */
- template<class _Res>
+ template<class TRes>
  inline bool isKind( const Resolvable::constPtr & p )
- { return p && p->isKind<_Res>(); }
+ { return p && p->isKind<TRes>(); }
 
  // Specialization for Resolvable: Always true.
  template<>
@@ -118,13 +118,13 @@ namespace zypp
   * asKind<Package>(resPtr);
   * \endcode
   */
- template<class _Res>
- inline typename ResTraits<_Res>::PtrType asKind( const Resolvable::Ptr & p )
- { return dynamic_pointer_cast<_Res>(p); }
+ template<class TRes>
+ inline typename ResTraits<TRes>::PtrType asKind( const Resolvable::Ptr & p )
+ { return dynamic_pointer_cast<TRes>(p); }
 
- template<class _Res>
- inline typename ResTraits<_Res>::constPtrType asKind( const Resolvable::constPtr & p )
- { return dynamic_pointer_cast<const _Res>(p); }
+ template<class TRes>
+ inline typename ResTraits<TRes>::constPtrType asKind( const Resolvable::constPtr & p )
+ { return dynamic_pointer_cast<const TRes>(p); }
 
   ///////////////////////////////////////////////////////////////////
 

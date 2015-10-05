@@ -23,7 +23,7 @@ namespace zypp
 
   ///////////////////////////////////////////////////////////////////
   //
-  //    CLASS NAME : ExplicitMap<_Key, _Tp>
+  //    CLASS NAME : ExplicitMap<TKey, Tp>
   //
   /** A simple lookup map using default value for not existing entries.
    *
@@ -33,17 +33,17 @@ namespace zypp
    * \ref TmpUnset and \ref TmpSetDefault are provided to temporarily
    * change and automaticlly restore values.
    */
-  template<class _Key, class _Tp>
+  template<class TKey, class Tp>
     class ExplicitMap
     {
     public:
-      typedef typename boost::call_traits<_Tp>::value_type       value_type;
-      typedef typename boost::call_traits<_Tp>::reference        reference;
-      typedef typename boost::call_traits<_Tp>::const_reference  const_reference;
-      typedef typename boost::call_traits<_Tp>::param_type       param_type;
+      typedef typename boost::call_traits<Tp>::value_type       value_type;
+      typedef typename boost::call_traits<Tp>::reference        reference;
+      typedef typename boost::call_traits<Tp>::const_reference  const_reference;
+      typedef typename boost::call_traits<Tp>::param_type       param_type;
 
     private:
-      typedef typename std::map<_Key,value_type> map_type;
+      typedef typename std::map<TKey,value_type> map_type;
       typedef typename map_type::iterator        iterator;
 
     public:
@@ -60,13 +60,13 @@ namespace zypp
       : _mapDefault( mapDefault_r )
       {}
 
-      template <class _InputIterator>
-        ExplicitMap( _InputIterator first_r, _InputIterator last_r )
+      template <class TInputIterator>
+        ExplicitMap( TInputIterator first_r, TInputIterator last_r )
         : _map( first_r, last_r )
         {}
 
-      template <class _InputIterator>
-        ExplicitMap( _InputIterator first_r, _InputIterator last_r,
+      template <class TInputIterator>
+        ExplicitMap( TInputIterator first_r, TInputIterator last_r,
                      param_type mapDefault_r )
         : _map( first_r, last_r )
         , _mapDefault( mapDefault_r )
@@ -110,8 +110,8 @@ namespace zypp
       void set( const key_type & key_r, param_type value_r )
       { _map[key_r] = value_r; }
 
-      template <typename _InputIterator>
-        void set( _InputIterator first_r, _InputIterator last_r )
+      template <typename TInputIterator>
+        void set( TInputIterator first_r, TInputIterator last_r )
         { _map.insert( first_r, last_r ); }
 
       void unset( const key_type & key_r )
@@ -133,11 +133,11 @@ namespace zypp
 
   ///////////////////////////////////////////////////////////////////
   //
-  //    CLASS NAME : ExplicitMap<_Key, _Tp>::TmpSet
+  //    CLASS NAME : ExplicitMap<TKey, Tp>::TmpSet
   //
   /** Temporarily set a value. */
-  template<class _Key, class _Tp>
-    class ExplicitMap<_Key, _Tp>::TmpSet
+  template<class TKey, class Tp>
+    class ExplicitMap<TKey, Tp>::TmpSet
     {
     public:
       TmpSet( ExplicitMap & map_r, const key_type & key_r, param_type value_r )
@@ -179,11 +179,11 @@ namespace zypp
 
   ///////////////////////////////////////////////////////////////////
   //
-  //    CLASS NAME : ExplicitMap<_Key, _Tp>::TmpUnset
+  //    CLASS NAME : ExplicitMap<TKey, Tp>::TmpUnset
   //
   /** Temporarily unset a value. */
-  template<class _Key, class _Tp>
-    class ExplicitMap<_Key, _Tp>::TmpUnset
+  template<class TKey, class Tp>
+    class ExplicitMap<TKey, Tp>::TmpUnset
     {
     public:
       TmpUnset( ExplicitMap & map_r, const key_type & key_r )
@@ -221,11 +221,11 @@ namespace zypp
 
   ///////////////////////////////////////////////////////////////////
   //
-  //    CLASS NAME : ExplicitMap<_Key, _Tp>::TmpSetDefault
+  //    CLASS NAME : ExplicitMap<TKey, Tp>::TmpSetDefault
   //
   /** Temporarily change the default value. */
-  template<class _Key, class _Tp>
-    class ExplicitMap<_Key, _Tp>::TmpSetDefault
+  template<class TKey, class Tp>
+    class ExplicitMap<TKey, Tp>::TmpSetDefault
     {
     public:
       TmpSetDefault( ExplicitMap & map_r, param_type value_r )

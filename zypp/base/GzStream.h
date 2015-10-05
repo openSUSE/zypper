@@ -186,7 +186,7 @@ namespace zypp
 
     ///////////////////////////////////////////////////////////////////
     //
-    //	CLASS NAME : fXstream<class _BStr,class _SBuf>
+    //	CLASS NAME : fXstream<class TBStr,class TSBuf>
     /**
      * @short Common template to define ifgzstream/ofgzstream
      * reading/writing gzip files.
@@ -195,14 +195,14 @@ namespace zypp
      * @ref ofgzstream. fXstream is just to avoid almost
      * duplicate code.
      **/
-    template<class _BStream,class _StreamBuf>
-      class fXstream : public _BStream
+    template<class TBStream,class TStreamBuf>
+      class fXstream : public TBStream
       {
       public:
 
         typedef gzstream_detail::ZlibError ZlibError;
-        typedef _BStream                   stream_type;
-        typedef _StreamBuf                 streambuf_type;
+        typedef TBStream                   stream_type;
+        typedef TStreamBuf                 streambuf_type;
 
         fXstream()
         : stream_type( NULL )

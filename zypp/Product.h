@@ -107,8 +107,8 @@ namespace zypp
     bool hasUpdateContentIdentifier( const Repository::ContentIdentifier & cident_r ) const;
 
     /** Whether one of the ContentIdentifier is listed as required update repository. */
-    template <class _Iterator>
-    bool hasUpdateContentIdentifier( _Iterator begin, _Iterator end ) const
+    template <class TIterator>
+    bool hasUpdateContentIdentifier( TIterator begin, TIterator end ) const
     {
       for_( it, begin, end )
 	if ( hasUpdateContentIdentifier( *it ) )

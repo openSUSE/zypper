@@ -90,12 +90,12 @@ namespace zypp
        */
       bool isKind( const ResKind & kind_r ) const;
       /** \overload */
-      template<class _Res>
+      template<class TRes>
       bool isKind() const
-      { return isKind( resKind<_Res>() ); }
+      { return isKind( resKind<TRes>() ); }
       /** \overload Extend the test to a range of \ref ResKind. */
-      template<class _Iterator>
-      bool isKind( _Iterator begin, _Iterator end ) const
+      template<class TIterator>
+      bool isKind( TIterator begin, TIterator end ) const
       { for_( it, begin, end ) if ( isKind( *it ) ) return true; return false; }
 
       /** The name (without any ResKind prefix). */
@@ -369,7 +369,7 @@ namespace zypp
       /** Return next Solvable in \ref Repo (or \ref noSolvable). */
       Solvable nextInRepo() const;
       /** Expert backdoor. */
-      ::_Solvable * get() const;
+      detail::CSolvable * get() const;
       /** Expert backdoor. */
       IdType id() const { return _id; }
 
@@ -400,9 +400,9 @@ namespace zypp
     { return lhs.get() < rhs.get(); }
 
     /** \relates Solvable Test whether a \ref Solvable is of a certain Kind. */
-    template<class _Res>
+    template<class TRes>
     inline bool isKind( const Solvable & solvable_r )
-    { return solvable_r.isKind( ResTraits<_Res>::kind ); }
+    { return solvable_r.isKind( ResTraits<TRes>::kind ); }
 
     /** \relates Solvable Test for same content. */
     inline bool identical( const Solvable & lhs, const Solvable & rhs )
@@ -453,7 +453,7 @@ namespace zypp
       /** */
       class SolvableIterator : public boost::iterator_adaptor<
           SolvableIterator                   // Derived
-          , ::_Solvable*                     // Base
+          , CSolvable*                       // Base
           , const Solvable                   // Value
           , boost::forward_traversal_tag     // CategoryOrTraversal
           , const Solvable                   // Reference

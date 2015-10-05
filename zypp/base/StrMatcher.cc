@@ -22,6 +22,7 @@ extern "C"
 #include "zypp/base/String.h"
 
 #include "zypp/base/StrMatcher.h"
+#include "zypp/sat/detail/PoolMember.h"
 
 using std::endl;
 
@@ -185,7 +186,7 @@ namespace zypp
 	if ( _flags.mode() == Match::OTHER )
 	  ZYPP_THROW( MatchUnknownModeException( _flags, _search ) );
 
-	_matcher.reset( new ::_Datamatcher );
+	_matcher.reset( new sat::detail::CDatamatcher );
 	int res = ::datamatcher_init( _matcher.get(), _search.c_str(), _flags.get() );
 	if ( res )
 	{
@@ -237,7 +238,7 @@ namespace zypp
   private:
     std::string _search;
     Match       _flags;
-    mutable scoped_ptr< ::_Datamatcher> _matcher;
+    mutable scoped_ptr< sat::detail::CDatamatcher> _matcher;
 
   private:
     friend Impl * rwcowClone<Impl>( const Impl * rhs );

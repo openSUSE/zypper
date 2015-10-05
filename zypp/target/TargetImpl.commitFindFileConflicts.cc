@@ -50,12 +50,12 @@ namespace zypp
       /** libsolv::pool_findfileconflicts callback providing package header. */
       struct FileConflictsCB
       {
-	FileConflictsCB( ::_Pool * pool_r, ProgressData & progress_r )
+	FileConflictsCB( sat::detail::CPool * pool_r, ProgressData & progress_r )
 	: _progress( progress_r )
 	, _state( ::rpm_state_create( pool_r, ::pool_get_rootdir(pool_r) ), ::rpm_state_free )
 	{}
 
-	void * operator()( ::_Pool * pool_r, sat::detail::IdType id_r )
+	void * operator()( sat::detail::CPool * pool_r, sat::detail::IdType id_r )
 	{
 	  void * ret = lookup( id_r );
 
@@ -79,7 +79,7 @@ namespace zypp
 	const sat::Queue & noFilelist() const
 	{ return _noFilelist; }
 
-	static void * invoke( ::_Pool * pool_r, sat::detail::IdType id_r, void * cbdata_r )
+	static void * invoke( sat::detail::CPool * pool_r, sat::detail::IdType id_r, void * cbdata_r )
 	{ return (*reinterpret_cast<FileConflictsCB*>(cbdata_r))( pool_r, id_r ); }
 
       private:

@@ -209,8 +209,8 @@ namespace zypp
        * string representation instead. If you add new predicated, check the
        * deserialization code in \ref deserialize.
        */
-      template<class _Predicate>
-      void addPredicate( const _Predicate & predicate_r )
+      template<class TPredicate>
+      void addPredicate( const TPredicate & predicate_r )
       {
         predicate    = predicate_r;
         predicateStr = predicate_r.serialize();

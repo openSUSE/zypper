@@ -33,10 +33,6 @@
 #include "zypp/base/PtrTypes.h"
 #include "zypp/ResPool.h"
 
-extern "C" {
-  struct _Queue;
-}
-
 /////////////////////////////////////////////////////////////////////////
 namespace zypp
 { ///////////////////////////////////////////////////////////////////////
@@ -113,7 +109,7 @@ class SolverQueueItem : public base::ReferenceCounted, private base::NonCopyable
 
 
     virtual SolverQueueItem_Ptr copy (void) const = 0;
-    virtual bool addRule (_Queue & q) =0 ;
+    virtual bool addRule (sat::detail::CQueue & q) =0 ;
     virtual int cmp (SolverQueueItem_constPtr item) const = 0;
     int compare (SolverQueueItem_constPtr item) const { return CMP(_type, item->_type); }
 

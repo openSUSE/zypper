@@ -49,29 +49,29 @@ namespace zypp
   class DtorReset
   {
   public:
-    template<class _Var>
-      DtorReset( _Var & var_r )
-      : _pimpl( new Impl<_Var,_Var>( var_r, var_r ) )
+    template<class TVar>
+      DtorReset( TVar & var_r )
+      : _pimpl( new Impl<TVar,TVar>( var_r, var_r ) )
       {}
-    template<class _Var, class _Val>
-      DtorReset( _Var & var_r, const _Val & val_r )
-      : _pimpl( new Impl<_Var,_Val>( var_r, val_r ) )
+    template<class TVar, class TVal>
+      DtorReset( TVar & var_r, const TVal & val_r )
+      : _pimpl( new Impl<TVar,TVal>( var_r, val_r ) )
       {}
 
   private:
-    /** Requires _Val being copy constructible, and assignment
-     * <tt>_Var = _Val</tt> defined. */
-    template<class _Var, class _Val>
+    /** Requires TVal being copy constructible, and assignment
+     * <tt>TVar = TVal</tt> defined. */
+    template<class TVar, class TVal>
       struct Impl
       {
-        Impl( _Var & var_r, const _Val & val_r )
+        Impl( TVar & var_r, const TVal & val_r )
         : _var( var_r )
         , _val( val_r )
         {}
         ~Impl()
         { _var = _val; }
-        _Var & _var;
-        _Val   _val;
+        TVar & _var;
+        TVal   _val;
       };
     shared_ptr<void> _pimpl;
   };

@@ -11,10 +11,6 @@
 #ifndef ZYPP_SAT_QUEUE_H
 #define ZYPP_SAT_QUEUE_H
 
-extern "C"
-{
-  struct _Queue;
-}
 #include <iosfwd>
 
 #include "zypp/base/PtrTypes.h"
@@ -111,11 +107,11 @@ namespace zypp
 	value_type pop_front();
 
      public:
-	operator struct ::_Queue *();			///< libsolv backdoor
-	operator const struct ::_Queue *() const	///< libsolv backdoor
+	operator detail::CQueue *();			///< libsolv backdoor
+	operator const detail::CQueue *() const		///< libsolv backdoor
 	{ return _pimpl.get(); }
       private:
-	RWCOW_pointer<struct ::_Queue> _pimpl;		///< Pointer to implementation
+	RWCOW_pointer<detail::CQueue> _pimpl;		///< Pointer to implementation
     };
 
     /** \relates Queue Stream output */
@@ -135,7 +131,7 @@ namespace zypp
   ///////////////////////////////////////////////////////////////////
 
   /** \relates Queue Clone function for RWCOW_pointer */
-  template<> struct ::_Queue * rwcowClone<struct ::_Queue>( const struct ::_Queue * rhs );
+  template<> sat::detail::CQueue * rwcowClone<sat::detail::CQueue>( const sat::detail::CQueue * rhs );
 
 } // namespace zypp
 ///////////////////////////////////////////////////////////////////

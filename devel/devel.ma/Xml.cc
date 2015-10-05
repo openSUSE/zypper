@@ -20,7 +20,7 @@ using zypp::debug::Measure;
 ///////////////////////////////////////////////////////////////////
 
 /** Helper to detect an objects type. */
-template<class _Cl> void ti( const _Cl & c )
+template<class TCl> void ti( const TCl & c )
 {
   SEC << __PRETTY_FUNCTION__ << endl;
 }
