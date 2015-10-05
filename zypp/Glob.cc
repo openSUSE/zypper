@@ -25,11 +25,11 @@ namespace zypp
 
     int Glob::add( const char * pattern_r, Flags flags_r )
     {
-      static Flags _APPEND( GLOB_APPEND ); // not published
+      static Flags kAppend( GLOB_APPEND ); // not published
       if ( ! flags_r )
         flags_r = _defaultFlags;
       if ( _result )
-        flags_r |= _APPEND;
+        flags_r |= kAppend;
       else
         _result.reset( new ::glob_t );
       return( _lastGlobReturn = ::glob( pattern_r, flags_r, NULL, &(*_result) ) );

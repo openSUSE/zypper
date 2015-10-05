@@ -96,12 +96,12 @@ namespace zypp
           kErr		= GLOB_ERR,		//!< Return on read errors.
           kMark		= GLOB_MARK,		//!< Append a slash to each name.
           kNoSort	= GLOB_NOSORT,		//!< Don't sort the names.
-          // unsupported kDOOFFS = GLOB_DOOFFS,	//!< Insert PGLOB->gl_offs NULLs.
+          // unsupported kDoOffs = GLOB_DOOFFS,	//!< Insert PGLOB->gl_offs NULLs.
           kNoCheck	= GLOB_NOCHECK,		//!< If nothing matches, return the pattern.
-          // autoapplied kAPPEND = GLOB_APPEND,	//!< Append to results of a previous call.
+          // autoapplied kAppend = GLOB_APPEND,	//!< Append to results of a previous call.
           kNoEscape	= GLOB_NOESCAPE,	//!< Backslashes don't quote metacharacters.
           kPeriod	= GLOB_PERIOD,		//!< Leading `.' can be matched by metachars.
-          // unsupported kMAGCHAR = GLOB_MAGCHAR,//!< Set in gl_flags if any metachars seen.
+          // unsupported kMagChar = GLOB_MAGCHAR,//!< Set in gl_flags if any metachars seen.
           kAltDirFunc	= GLOB_ALTDIRFUNC,	//!< Use gl_opendir et al functions.
           kBrace	= GLOB_BRACE,		//!< Expand "{a,b}" to "a" "b".
           kNoMagic	= GLOB_NOMAGIC,		//!< If no magic chars, return the pattern.

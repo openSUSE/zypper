@@ -786,10 +786,10 @@ namespace zypp
   {
   public:
     /** message type (use like 'enum class \ref MsgType') */
-    struct _MsgTypeDef {
+    struct EMsgTypeDef {
       enum Enum { debug, info, warning, error, important, data };
     };
-    typedef base::EnumClass<_MsgTypeDef> MsgType;	///< 'enum class MsgType'
+    typedef base::EnumClass<EMsgTypeDef> MsgType;	///< 'enum class MsgType'
 
     /** typsafe map of userdata */
     typedef callback::UserData UserData;

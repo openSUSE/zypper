@@ -25,20 +25,20 @@ namespace zypp
     /// \class EnumClass
     /// \brief Type safe enum (workaround SWIG not supporting enum class)
     /// \code
-    /// struct TColorDef { enum Enum { R, G ,B }; };
-    /// typedef EnumClass<TColorDef> Color;
+    /// struct EColorDef { enum Enum { R, G ,B }; };
+    /// typedef EnumClass<EColorDef> Color;
     /// \endcode
     /// Conversion to from string can be easily added, e.g. like this:
     /// \code
-    /// struct TColorDef {
+    /// struct EColorDef {
     ///   enum Enum { R, G ,B };
     ///   static Enum fromString( const std::string & val_r );
     ///   static const std::string & asString( Enum val_r );
     /// };
-    /// std::ostream & operator<<( std::ostream & str, const TColorDef & obj )
-    /// { return str << TColorDef::asString( obj.inSwitch() ); }
+    /// std::ostream & operator<<( std::ostream & str, const EColorDef & obj )
+    /// { return str << EColorDef::asString( obj.inSwitch() ); }
     ///
-    /// typedef EnumClass<TColorDef> Color;
+    /// typedef EnumClass<EColorDef> Color;
     /// Color red = Color::fromString("red");
     /// cout << red << endl; // "red"
     /// \endcode
@@ -54,8 +54,8 @@ namespace zypp
 
       /** Underlying enum value for use in switch
        * \code
-       * struct TColorDef { enum Enum { R, G ,B }; }
-       * typedef EnumClass<TColorDef> Color;
+       * struct EColorDef { enum Enum { R, G ,B }; }
+       * typedef EnumClass<EColorDef> Color;
        *
        * Color a;
        * switch ( a.asEnum() )
@@ -65,8 +65,8 @@ namespace zypp
 
       /** Underlying integral value (e.g. array index)
        * \code
-       * struct TColorDef { enum Enum { R, G ,B }; }
-       * typedef EnumClass<TColorDef> Color;
+       * struct EColorDef { enum Enum { R, G ,B }; }
+       * typedef EnumClass<EColorDef> Color;
        *
        * Color a;
        * std::string table[] = { "red", "green", "blue" };

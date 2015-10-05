@@ -415,7 +415,7 @@ namespace zypp
   //	class CpeId::WfnAttribute
   ///////////////////////////////////////////////////////////////////
 
-  const std::string & CpeId::_AttributeDef::asString( Enum val_r )
+  const std::string & CpeId::EAttributeDef::asString( Enum val_r )
   {
     static std::map<Enum,std::string> _table = {
 #define OUTS(N) { N, #N }

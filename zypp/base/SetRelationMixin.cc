@@ -15,7 +15,7 @@
 ///////////////////////////////////////////////////////////////////
 namespace zypp
 {
-  const std::string & _SetCompareDef::asString( Enum val_r )
+  const std::string & ESetCompareDef::asString( Enum val_r )
   {
     static std::map<Enum,std::string> _table = {
       { uncomparable,		"{?}" },
@@ -27,7 +27,7 @@ namespace zypp
     return _table[val_r];
   }
 
-  const std::string & _SetRelationDef::asString( Enum val_r )
+  const std::string & ESetRelationDef::asString( Enum val_r )
   {
     static std::map<Enum,std::string> _table = {
       { uncomparable,		"{??}" },
