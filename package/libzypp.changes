@@ -1,4 +1,12 @@
 -------------------------------------------------------------------
+Mon Oct  5 12:27:49 CEST 2015 - ma@suse.de
+
+- fix reserved identifier violation (fixes #51)
+- solver: speed up collecting pool data to build the job queue
+- doc: short abstract about 'Code 12 Application Metadata'
+- version 15.19.0 (19)
+
+-------------------------------------------------------------------
 Tue Sep 29 17:51:48 CEST 2015 - ma@suse.de
 
 - solver verify: multiversion property needs to be assigned to
