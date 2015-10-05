@@ -180,7 +180,7 @@ namespace zypp
     //
     ///////////////////////////////////////////////////////////////////
     /**
-     * Don't forgett to provide versions for _Ptr and _constPtr,
+     * Don't forgett to provide versions for PtrType and constPtrType,
      * esp. if creation a of temporary is not acceptable (eg. when
      * checking the ref count value).
     */
@@ -189,51 +189,51 @@ namespace zypp
       template<class D>
         struct Shared
         {
-          typedef shared_ptr<D>       _Ptr;
-          typedef shared_ptr<const D> _constPtr;
+          typedef shared_ptr<D>       PtrType;
+          typedef shared_ptr<const D> constPtrType;
           /** Check whether pointer is not shared. */
-          bool unique( const _constPtr & ptr_r )
+          bool unique( const constPtrType & ptr_r )
           { return !ptr_r || ptr_r.unique(); }
-          bool unique( const _Ptr & ptr_r )
+          bool unique( const PtrType & ptr_r )
           { return !ptr_r || ptr_r.unique(); }
           /** Return number of references. */
-          long use_count( const _constPtr & ptr_r ) const
+          long use_count( const constPtrType & ptr_r ) const
           { return ptr_r.use_count(); }
-          long use_count( const _Ptr & ptr_r ) const
+          long use_count( const PtrType & ptr_r ) const
           { return ptr_r.use_count(); }
         };
 
       template<class D>
         struct Intrusive
         {
-          typedef intrusive_ptr<D>       _Ptr;
-          typedef intrusive_ptr<const D> _constPtr;
+          typedef intrusive_ptr<D>       PtrType;
+          typedef intrusive_ptr<const D> constPtrType;
           /** Check whether pointer is not shared. */
-          bool unique( const _constPtr & ptr_r )
+          bool unique( const constPtrType & ptr_r )
           { return !ptr_r || (ptr_r->refCount() <= 1); }
-          bool unique( const _Ptr & ptr_r )
+          bool unique( const PtrType & ptr_r )
           { return !ptr_r || (ptr_r->refCount() <= 1); }
           /** Return number of references. */
-          long use_count( const _constPtr & ptr_r ) const
+          long use_count( const constPtrType & ptr_r ) const
           { return ptr_r ? ptr_r->refCount() : 0; }
-          long use_count( const _Ptr & ptr_r ) const
+          long use_count( const PtrType & ptr_r ) const
           { return ptr_r ? ptr_r->refCount() : 0; }
         };
 
        template<class D>
         struct Scoped
         {
-          typedef scoped_ptr<D>       _Ptr;
-          typedef scoped_ptr<const D> _constPtr;
+          typedef scoped_ptr<D>       PtrType;
+          typedef scoped_ptr<const D> constPtrType;
           /** Check whether pointer is not shared. */
-          bool unique( const _constPtr & ptr_r )
+          bool unique( const constPtrType & ptr_r )
           { return true; }
-          bool unique( const _Ptr & ptr_r )
+          bool unique( const PtrType & ptr_r )
           { return true; }
           /** Return number of references. */
-          long use_count( const _constPtr & ptr_r ) const
+          long use_count( const constPtrType & ptr_r ) const
           { return ptr_r ? 1 : 0; }
-          long use_count( const _Ptr & ptr_r ) const
+          long use_count( const PtrType & ptr_r ) const
           { return ptr_r ? 1 : 0; }
         };
 
@@ -247,7 +247,7 @@ namespace zypp
     /** Wrapper for \c const correct access via \ref ZYPP_SMART_PTR.
      *
      * zypp::RW_pointer<tt>\<D,DTraits></tt> stores a \ref ZYPP_SMART_PTR
-     * of type \c DTraits::_Ptr, which must be convertible into a <tt>D *</tt>.
+     * of type \c DTraits::PtrType, which must be convertible into a <tt>D *</tt>.
      * Pointer style access (via \c -> and \c *) offers a <tt>const D *</tt> in const
      * a context, otherwise a <tt>D *</tt>. Thus \em RW_ means \em read/write,
      * as you get a different type, dependent on whether you're allowed to
@@ -284,8 +284,8 @@ namespace zypp
     template<class D, class DTraits = rw_pointer::Shared<D> >
       struct RW_pointer
       {
-        typedef typename DTraits::_Ptr               _Ptr;
-        typedef typename DTraits::_constPtr          _constPtr;
+        typedef typename DTraits::PtrType               PtrType;
+        typedef typename DTraits::constPtrType          constPtrType;
 
         RW_pointer()
         {}
@@ -294,12 +294,12 @@ namespace zypp
         {}
 
         explicit
-        RW_pointer( typename _Ptr::element_type * dptr )
+        RW_pointer( typename PtrType::element_type * dptr )
         : _dptr( dptr )
         {}
 
         explicit
-        RW_pointer( _Ptr dptr )
+        RW_pointer( PtrType dptr )
         : _dptr( dptr )
         {}
 
@@ -307,15 +307,15 @@ namespace zypp
 	{ reset(); return *this; }
 
         void reset()
-        { _Ptr().swap( _dptr ); }
+        { PtrType().swap( _dptr ); }
 
-        void reset( typename _Ptr::element_type * dptr )
-        { _Ptr( dptr ).swap( _dptr ); }
+        void reset( typename PtrType::element_type * dptr )
+        { PtrType( dptr ).swap( _dptr ); }
 
         void swap( RW_pointer & rhs )
         { _dptr.swap( rhs._dptr ); }
 
-        void swap( _Ptr & rhs )
+        void swap( PtrType & rhs )
         { _dptr.swap( rhs ); }
 
         explicit operator bool() const
@@ -346,17 +346,17 @@ namespace zypp
 	long use_count() const
 	{ return DTraits().use_count( _dptr ); }
 
-        _constPtr getPtr() const
+        constPtrType getPtr() const
         { return _dptr; }
 
-        _Ptr getPtr()
+        PtrType getPtr()
         { return _dptr; }
 
-        _constPtr cgetPtr()
+        constPtrType cgetPtr()
         { return _dptr; }
 
       private:
-        _Ptr _dptr;
+        PtrType _dptr;
       };
     ///////////////////////////////////////////////////////////////////
 
@@ -379,19 +379,19 @@ namespace zypp
       { return( lhs.get() == rhs.get() ); }
     /** \relates RW_pointer */
     template<class D, class DPtr>
-      inline bool operator==( const RW_pointer<D, DPtr> & lhs, const typename DPtr::_Ptr & rhs )
+      inline bool operator==( const RW_pointer<D, DPtr> & lhs, const typename DPtr::PtrType & rhs )
       { return( lhs.get() == rhs.get() ); }
     /** \relates RW_pointer */
     template<class D, class DPtr>
-      inline bool operator==( const typename DPtr::_Ptr & lhs, const RW_pointer<D, DPtr> & rhs )
+      inline bool operator==( const typename DPtr::PtrType & lhs, const RW_pointer<D, DPtr> & rhs )
       { return( lhs.get() == rhs.get() ); }
     /** \relates RW_pointer */
     template<class D, class DPtr>
-      inline bool operator==( const RW_pointer<D, DPtr> & lhs, const typename DPtr::_constPtr & rhs )
+      inline bool operator==( const RW_pointer<D, DPtr> & lhs, const typename DPtr::constPtrType & rhs )
       { return( lhs.get() == rhs.get() ); }
     /** \relates RW_pointer */
     template<class D, class DPtr>
-      inline bool operator==( const typename DPtr::_constPtr & lhs, const RW_pointer<D, DPtr> & rhs )
+      inline bool operator==( const typename DPtr::constPtrType & lhs, const RW_pointer<D, DPtr> & rhs )
       { return( lhs.get() == rhs.get() ); }
     /** \relates RW_pointer */
     template<class D, class DPtr>
@@ -409,19 +409,19 @@ namespace zypp
       { return ! ( lhs == rhs ); }
     /** \relates RW_pointer */
     template<class D, class DPtr>
-      inline bool operator!=( const RW_pointer<D, DPtr> & lhs, const typename DPtr::_Ptr & rhs )
+      inline bool operator!=( const RW_pointer<D, DPtr> & lhs, const typename DPtr::PtrType & rhs )
       { return ! ( lhs == rhs ); }
     /** \relates RW_pointer */
     template<class D, class DPtr>
-      inline bool operator!=( const typename DPtr::_Ptr & lhs, const RW_pointer<D, DPtr> & rhs )
+      inline bool operator!=( const typename DPtr::PtrType & lhs, const RW_pointer<D, DPtr> & rhs )
       { return ! ( lhs == rhs ); }
     /** \relates RW_pointer */
     template<class D, class DPtr>
-      inline bool operator!=( const RW_pointer<D, DPtr> & lhs, const typename DPtr::_constPtr & rhs )
+      inline bool operator!=( const RW_pointer<D, DPtr> & lhs, const typename DPtr::constPtrType & rhs )
       { return ! ( lhs == rhs ); }
     /** \relates RW_pointer */
     template<class D, class DPtr>
-      inline bool operator!=( const typename DPtr::_constPtr & lhs, const RW_pointer<D, DPtr> & rhs )
+      inline bool operator!=( const typename DPtr::constPtrType & lhs, const RW_pointer<D, DPtr> & rhs )
       { return ! ( lhs == rhs ); }
     /** \relates RW_pointer */
     template<class D, class DPtr>
@@ -457,8 +457,8 @@ namespace zypp
     template<class D, class DTraits = rw_pointer::Shared<D> >
       struct RWCOW_pointer
       {
-        typedef typename DTraits::_Ptr               _Ptr;
-        typedef typename DTraits::_constPtr          _constPtr;
+        typedef typename DTraits::PtrType               PtrType;
+        typedef typename DTraits::constPtrType          constPtrType;
 
 	RWCOW_pointer()
 	{}
@@ -467,12 +467,12 @@ namespace zypp
 	{}
 
         explicit
-        RWCOW_pointer( typename _Ptr::element_type * dptr )
+        RWCOW_pointer( typename PtrType::element_type * dptr )
         : _dptr( dptr )
         {}
 
         explicit
-        RWCOW_pointer( _Ptr dptr )
+        RWCOW_pointer( PtrType dptr )
         : _dptr( dptr )
         {}
 
@@ -480,15 +480,15 @@ namespace zypp
 	{ reset(); return *this; }
 
         void reset()
-        { _Ptr().swap( _dptr ); }
+        { PtrType().swap( _dptr ); }
 
-        void reset( typename _Ptr::element_type * dptr )
-        { _Ptr( dptr ).swap( _dptr ); }
+        void reset( typename PtrType::element_type * dptr )
+        { PtrType( dptr ).swap( _dptr ); }
 
         void swap( RWCOW_pointer & rhs )
         { _dptr.swap( rhs._dptr ); }
 
-        void swap( _Ptr & rhs )
+        void swap( PtrType & rhs )
         { _dptr.swap( rhs ); }
 
         explicit operator bool() const
@@ -519,13 +519,13 @@ namespace zypp
 	long use_count() const
 	{ return DTraits().use_count( _dptr ); }
 
-        _constPtr getPtr() const
+        constPtrType getPtr() const
         { return _dptr; }
 
-        _Ptr getPtr()
+        PtrType getPtr()
         { assertUnshared(); return _dptr; }
 
-        _constPtr cgetPtr()
+        constPtrType cgetPtr()
         { return _dptr; }
 
       private:
@@ -533,11 +533,11 @@ namespace zypp
         void assertUnshared()
         {
           if ( !unique() )
-            _Ptr( rwcowClone( _dptr.get() ) ).swap( _dptr );
+            PtrType( rwcowClone( _dptr.get() ) ).swap( _dptr );
         }
 
       private:
-        _Ptr _dptr;
+        PtrType _dptr;
       };
     ///////////////////////////////////////////////////////////////////
 
@@ -560,19 +560,19 @@ namespace zypp
       { return( lhs.get() == rhs.get() ); }
     /** \relates RWCOW_pointer */
     template<class D, class DPtr>
-      inline bool operator==( const RWCOW_pointer<D, DPtr> & lhs, const typename DPtr::_Ptr & rhs )
+      inline bool operator==( const RWCOW_pointer<D, DPtr> & lhs, const typename DPtr::PtrType & rhs )
       { return( lhs.get() == rhs.get() ); }
     /** \relates RWCOW_pointer */
     template<class D, class DPtr>
-      inline bool operator==( const typename DPtr::_Ptr & lhs, const RWCOW_pointer<D, DPtr> & rhs )
+      inline bool operator==( const typename DPtr::PtrType & lhs, const RWCOW_pointer<D, DPtr> & rhs )
       { return( lhs.get() == rhs.get() ); }
     /** \relates RWCOW_pointer */
     template<class D, class DPtr>
-      inline bool operator==( const RWCOW_pointer<D, DPtr> & lhs, const typename DPtr::_constPtr & rhs )
+      inline bool operator==( const RWCOW_pointer<D, DPtr> & lhs, const typename DPtr::constPtrType & rhs )
       { return( lhs.get() == rhs.get() ); }
     /** \relates RWCOW_pointer */
     template<class D, class DPtr>
-      inline bool operator==( const typename DPtr::_constPtr & lhs, const RWCOW_pointer<D, DPtr> & rhs )
+      inline bool operator==( const typename DPtr::constPtrType & lhs, const RWCOW_pointer<D, DPtr> & rhs )
       { return( lhs.get() == rhs.get() ); }
     /** \relates RWCOW_pointer */
     template<class D, class DPtr>
@@ -589,19 +589,19 @@ namespace zypp
       { return ! ( lhs == rhs ); }
     /** \relates RWCOW_pointer */
     template<class D, class DPtr>
-      inline bool operator!=( const RWCOW_pointer<D, DPtr> & lhs, const typename DPtr::_Ptr & rhs )
+      inline bool operator!=( const RWCOW_pointer<D, DPtr> & lhs, const typename DPtr::PtrType & rhs )
       { return ! ( lhs == rhs ); }
     /** \relates RWCOW_pointer */
     template<class D, class DPtr>
-      inline bool operator!=( const typename DPtr::_Ptr & lhs, const RWCOW_pointer<D, DPtr> & rhs )
+      inline bool operator!=( const typename DPtr::PtrType & lhs, const RWCOW_pointer<D, DPtr> & rhs )
       { return ! ( lhs == rhs ); }
     /** \relates RWCOW_pointer */
     template<class D, class DPtr>
-      inline bool operator!=( const RWCOW_pointer<D, DPtr> & lhs, const typename DPtr::_constPtr & rhs )
+      inline bool operator!=( const RWCOW_pointer<D, DPtr> & lhs, const typename DPtr::constPtrType & rhs )
       { return ! ( lhs == rhs ); }
     /** \relates RWCOW_pointer */
     template<class D, class DPtr>
-      inline bool operator!=( const typename DPtr::_constPtr & lhs, const RWCOW_pointer<D, DPtr> & rhs )
+      inline bool operator!=( const typename DPtr::constPtrType & lhs, const RWCOW_pointer<D, DPtr> & rhs )
       { return ! ( lhs == rhs ); }
     /** \relates RWCOW_pointer */
     template<class D, class DPtr>

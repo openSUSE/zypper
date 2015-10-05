@@ -67,17 +67,17 @@ template<class RW>
   {
     MIL << __PRETTY_FUNCTION__ << std::endl;
     // typedefs that should be provided:
-    typedef typename RW::_Ptr               _Ptr;
-    typedef typename RW::_constPtr          _constPtr;
-    typedef typename _Ptr::element_type      _Ptr_element_type;
-    typedef typename _constPtr::element_type _constPtr_element_type;
+    typedef typename RW::PtrType            Ptr;
+    typedef typename RW::constPtrType       constPtr;
+    typedef typename Ptr::element_type      Ptr_element_type;
+    typedef typename constPtr::element_type constPtr_element_type;
     // initial NULL
     RW ptr;
     T_NULL;
     T_UNIQUE;
     T_EQ(ptr,ptr);
     // assign
-    ptr = RW( new _Ptr_element_type );
+    ptr = RW( new Ptr_element_type );
     T_NOT_NULL;
     T_UNIQUE;
     T_EQ(ptr,ptr);
@@ -93,7 +93,7 @@ template<class RW>
       T_UNIQUE;
       T_NE(ptr,ptr2);
       // different impl
-      ptr2.reset( new _Ptr_element_type );
+      ptr2.reset( new Ptr_element_type );
       T_NE(ptr,ptr2);
    }
     // assign
@@ -119,9 +119,9 @@ template<class RW>
   {
     test<RW>();
     MIL << __PRETTY_FUNCTION__ << std::endl;
-    typedef typename RW::_Ptr::element_type _Ptr_element_type;
+    typedef typename RW::PtrType::element_type Ptr_element_type;
     // create
-    RW ptr( new _Ptr_element_type );
+    RW ptr( new Ptr_element_type );
     unsigned long ptrid = ptr->numericId();
     // share
     RW ptr2( ptr );
