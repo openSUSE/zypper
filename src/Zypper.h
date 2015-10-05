@@ -262,6 +262,16 @@ public:
   shared_ptr<Opt_> commandOptionsAs() const
   { return dynamic_pointer_cast<Opt_>( _commandOptions ); }
 
+  /** Convenience to return _commandOptions or default constructed Options. */
+  template<class Opt_>
+  shared_ptr<Opt_> commandOptionsOrDefaultAs() const
+  {
+    shared_ptr<Opt_> myopt = commandOptionsAs<Opt_>();
+    if ( ! myopt )
+      myopt.reset( new Opt_() );
+    return myopt;
+  }
+
   /** Convenience to return command options for \c Opt_, either casted from _commandOptions or newly created. */
   template<class Opt_>
   shared_ptr<Opt_> assertCommandOptions()
