@@ -324,11 +324,7 @@ void printPatchInfo(Zypper & zypper, const ui::Selectable & s )
   cout << _("Severity: ") << patch->severity() << endl;
   cout << _("Created On: ") << patch->timestamp().asString() << endl;
   cout << _("Reboot Required: ") << (patch->rebootSuggested() ? _("Yes") : _("No")) << endl;
-
-  if (!zypper.globalOpts().is_rug_compatible)
-    cout << _("Package Manager Restart Required") << ": ";
-  else
-    cout << _("Restart Required: ");
+  cout << _("Package Manager Restart Required") << ": ";
   cout << (patch->restartSuggested() ? _("Yes") : _("No")) << endl;
 
   Patch::InteractiveFlags ignoreFlags = Patch::NoFlags;
@@ -400,9 +396,6 @@ void printPatternInfo(Zypper & zypper, const ui::Selectable & s)
   cout << _("Visible to User: ") << (pattern->userVisible() ? _("Yes") : _("No")) << endl;
 
   printSummaryDesc( pool_item );
-
-  if (zypper.globalOpts().is_rug_compatible)
-    return;
 
   // Print dependency lists if CLI requests it
   for ( auto && dep : cliSupportedDepTypes() )

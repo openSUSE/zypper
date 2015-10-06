@@ -542,9 +542,6 @@ void list_updates(Zypper & zypper, const ResKindSet & kinds, bool best_effort)
     if (!hide_repo)
       th << _("Repository");
 
-    if (zypper.globalOpts().is_rug_compatible)
-      th << _("Bundle");
-
     name_col = th.cols();
     th << _("Name");
     // best_effort does not know version or arch yet
@@ -571,8 +568,6 @@ void list_updates(Zypper & zypper, const ResKindSet & kinds, bool best_effort)
       if (!hide_repo) {
         tr << pi.repoInfo().asUserString();
       }
-      if (zypper.globalOpts().is_rug_compatible)
-        tr << "";               // Bundle
       tr << pi.name ();
 
       // strictly speaking, we could show version and arch even in best_effort

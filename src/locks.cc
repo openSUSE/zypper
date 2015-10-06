@@ -37,11 +37,7 @@ void list_locks(Zypper & zypper)
     Table t;
 
     TableHeader th;
-    th << "#" << _("Name");
-    if (zypper.globalOpts().is_rug_compatible)
-      th << _("Repository") << _("Importance");
-    else
-      th << _("Type") << _("Repository");
+    th << "#" << _("Name") << _("Type") << _("Repository");
 
     t << th;
 
@@ -67,26 +63,15 @@ void list_locks(Zypper & zypper)
       else
         tr << *attr.begin();
 
-      set<string> strings;
-      if (zypper.globalOpts().is_rug_compatible)
-      {
-        // repository
-        copy(it->repos().begin(), it->repos().end(), inserter(strings, strings.end()));
-        tr << get_string_for_table(strings);
-        // importance
-        tr << _("(any)");
-      }
-      else
-      {
-        // type
-        for_(kit, it->kinds().begin(), it->kinds().end())
-          strings.insert(kit->asString());
-        tr << get_string_for_table(strings);
-        // repo
-        strings.clear();
-        copy(it->repos().begin(), it->repos().end(), inserter(strings, strings.end()));
-        tr << get_string_for_table(strings);
-      }
+      std::set<std::string> strings;
+      // type
+      for_(kit, it->kinds().begin(), it->kinds().end())
+	strings.insert(kit->asString());
+      tr << get_string_for_table(strings);
+      // repo
+      strings.clear();
+      copy(it->repos().begin(), it->repos().end(), inserter(strings, strings.end()));
+      tr << get_string_for_table(strings);
 
       t << tr;
       ++i;

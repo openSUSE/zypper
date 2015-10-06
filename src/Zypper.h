@@ -58,7 +58,6 @@ struct GlobalOptions
   verbosity(0),
   disable_system_sources(false),
   disable_system_resolvables(false),
-  is_rug_compatible(false),
   non_interactive(false),
   reboot_req_non_interactive(false),
   no_gpg_checks(false),
@@ -89,7 +88,6 @@ struct GlobalOptions
   int verbosity;
   bool disable_system_sources;
   bool disable_system_resolvables;
-  bool is_rug_compatible;
   bool non_interactive;
   bool reboot_req_non_interactive;
   bool no_gpg_checks;

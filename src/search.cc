@@ -38,46 +38,23 @@ FillSearchTableSolvable::FillSearchTableSolvable(
       _repos.insert(it->alias());
   }
 
-  TableHeader header;
-
   //
   // *** CAUTION: It's a mess, but adding/changing colums here requires
   //              adapting OutXML::searchResult !
   //
-  if (_gopts.is_rug_compatible)
-  {
-    header
-      // translators: S for 'installed Status'
-      << _("S")
-      // translators:  package's repository (header)
-      << _("Repository")
-      // translators: Bundle is a term used in rug. See rug for how to translate it.
-      << _("Bundle")
-      // translators: name (general header)
-      << _("Name")
-      // translators: package version (header)
-      << table::EditionStyleSetter( *_table, _("Version") )
-      // translators: package architecture (header)
-      << _("Arch");
-  }
-  else
-  {
-    header
-      // translators: S for 'installed Status'
-      << _("S")
-      // translators: name (general header)
-      << _("Name")
-      // translators: type (general header)
-      << _("Type")
-      // translators: package version (header)
-      << table::EditionStyleSetter( *_table, _("Version") )
-      // translators: package architecture (header)
-      << _("Arch")
-      // translators: package's repository (header)
-      << _("Repository");
-  }
-
-  *_table << header;
+  *_table << ( TableHeader()
+	  // translators: S for 'installed Status'
+	  << _("S")
+	  // translators: name (general header)
+	  << _("Name")
+	  // translators: type (general header)
+	  << _("Type")
+	  // translators: package version (header)
+	  << table::EditionStyleSetter( *_table, _("Version") )
+	  // translators: package architecture (header)
+	  << _("Arch")
+	  // translators: package's repository (header)
+	  << _("Repository") );
 }
 
 bool FillSearchTableSolvable::addPicklistItem( const ui::Selectable::constPtr & sel, const PoolItem & pi ) const
@@ -133,20 +110,7 @@ bool FillSearchTableSolvable::addPicklistItem( const ui::Selectable::constPtr & 
     }
   }
 
-  if ( _gopts.is_rug_compatible )
-  {
-    row
-    << ( pi->isSystem()
-       ? _("System Packages")
-       : pi->repository().asUserString() )
-    << ""
-    << pi->name()
-    << pi->edition().asString()
-    << pi->arch().asString();
-  }
-  else
-  {
-    row
+  row
     << pi->name()
     << kind_to_string_localized( pi->kind(), 1 )
     << pi->edition().asString()
@@ -154,7 +118,6 @@ bool FillSearchTableSolvable::addPicklistItem( const ui::Selectable::constPtr & 
     << ( pi->isSystem()
        ? (string("(") + _("System Packages") + ")")
        : pi->repository().asUserString() );
-  }
 
   *_table << row;
   return true;	// actually added a row
@@ -457,14 +420,14 @@ static void list_pattern_table(Zypper & zypper)
   MIL << "Going to list patterns." << std::endl;
 
   Table tbl;
-  TableHeader th;
 
   // translators: S for installed Status
-  th << _("S");
-  th << _("Name") << table::EditionStyleSetter( tbl, _("Version") );
-  if (!zypper.globalOpts().is_rug_compatible)
-    th << _("Repository") << _("Dependency");
-  tbl << th;
+  tbl << ( TableHeader()
+      << _("S")
+      << _("Name")
+      << table::EditionStyleSetter( tbl, _("Version") )
+      << _("Repository")
+      << _("Dependency") );
 
   bool installed_only = zypper.cOpts().count("installed-only");
   bool notinst_only = zypper.cOpts().count("uninstalled-only");
@@ -482,15 +445,12 @@ static void list_pattern_table(Zypper & zypper)
     if (!pattern->userVisible())
       continue;
 
-    TableRow tr;
-    tr << (isInstalled ? "i" : "");
-    tr << pi.name() << pi.edition();
-    if (!zypper.globalOpts().is_rug_compatible)
-    {
-      tr << pi.repoInfo().name();
-      tr << string_weak_status(pi.status());
-    }
-    tbl << tr;
+    tbl << ( TableRow()
+	<< (isInstalled ? "i" : "")
+	<< pi.name()
+	<< pi.edition()
+	<< pi.repoInfo().name()
+	<< string_weak_status(pi.status()) );
   }
   tbl.sort(1); // Name
 
@@ -582,7 +542,7 @@ void list_packages(Zypper & zypper)
       {
 	row << "";
       }
-      row << (zypper.globalOpts().is_rug_compatible ? "" : pi->repository().info().name())
+      row << pi->repository().info().name()
           << pi->name()
           << pi->edition().asString()
           << pi->arch().asString();
@@ -595,16 +555,13 @@ void list_packages(Zypper & zypper)
   else
   {
     // display the result, even if --quiet specified
-    TableHeader th;
-    // translators: S for installed Status
-    th << _("S");
-    if (zypper.globalOpts().is_rug_compatible)
-      // translators: Bundle is a term used in rug. See rug for how to translate it.
-    th << _("Bundle");
-    else
-      th << _("Repository");
-    th << _("Name") << table::EditionStyleSetter( tbl, _("Version") ) << _("Arch");
-    tbl << th;
+    tbl << ( TableHeader()
+	// translators: S for installed Status
+	<< _("S")
+	<< _("Repository")
+	<< _("Name")
+	<< table::EditionStyleSetter( tbl, _("Version") )
+	<< _("Arch") );
 
     if (zypper.cOpts().count("sort-by-repo"))
       tbl.sort(1); // Repo
@@ -641,24 +598,17 @@ static void list_products_xml(Zypper & zypper)
 static void add_product_table_row( Zypper & zypper, TableRow & tr,  const Product::constPtr & product )
 {
   // repository
-  if (!zypper.globalOpts().is_rug_compatible)
-    tr << product->repoInfo().name();
+  tr << product->repoInfo().name();
   // internal (unix) name
   tr << product->name ();
   // full name (bnc #589333)
   tr << product->summary();
   // version
   tr << product->edition().asString();
-  if (zypper.globalOpts().is_rug_compatible)
-    // rug 'Category'
-    tr << (product->isTargetDistribution() ? "base" : "");
-  else
-  {
-    // architecture
-    tr << product->arch().asString();
-    // is base
-    tr << (product->isTargetDistribution() ? _("Yes") : _("No"));
-  }
+  // architecture
+  tr << product->arch().asString();
+  // is base
+  tr << (product->isTargetDistribution() ? _("Yes") : _("No"));
 }
 
 static void list_product_table(Zypper & zypper)
@@ -666,26 +616,18 @@ static void list_product_table(Zypper & zypper)
   MIL << "Going to list products." << std::endl;
 
   Table tbl;
-  TableHeader th;
 
-  // translators: S for installed Status
-  th << _("S");
-  if (!zypper.globalOpts().is_rug_compatible)
-    th << _("Repository");
-  // translators: used in products. Internal Name is the unix name of the
-  // product whereas simply Name is the official full name of the product.
-  th << _("Internal Name");
-  th << _("Name");
-  th << table::EditionStyleSetter( tbl, _("Version") );
-  if (zypper.globalOpts().is_rug_compatible)
-     // translators: product category (base/addon), the rug term
-     th << _("Category");
-  else
-  {
-    th << _("Arch");
-    th << _("Is Base");
-  }
-  tbl << th;
+  tbl << ( TableHeader()
+      // translators: S for installed Status
+      << _("S")
+      << _("Repository")
+      // translators: used in products. Internal Name is the unix name of the
+      // product whereas simply Name is the official full name of the product.
+      << _("Internal Name")
+      << _("Name")
+      << table::EditionStyleSetter( tbl, _("Version") )
+      << _("Arch")
+      << _("Is Base") );
 
   bool installed_only = zypper.cOpts().count("installed-only");
   bool notinst_only = zypper.cOpts().count("uninstalled-only");

@@ -249,9 +249,7 @@ static void set_force_resolution(Zypper & zypper)
   // bnc #369980
   if (indeterminate(force_resolution))
   {
-    if (!zypper.globalOpts().non_interactive &&
-        (zypper.globalOpts().is_rug_compatible ||
-         zypper.command() == ZypperCommand::REMOVE))
+    if ( !zypper.globalOpts().non_interactive && zypper.command() == ZypperCommand::REMOVE )
       force_resolution = true;
     else
       force_resolution = false;

@@ -813,13 +813,13 @@ void Zypper::processGlobalOptions()
   // Rug options are removed from documantation(commit#53ffd419) but
   // will stay active in code for a while.
   string rug_test(_argv[0]);
-  if (gopts.count("rug-compatible") || Pathname::basename(_argv[0]) == "rug" )
+  if ( gopts.count("rug-compatible") || Pathname::basename(_argv[0]) == "rug" )
   {
-    _gopts.is_rug_compatible = true;
-    INT << "Switching to (no longer supported) rug-compatible mode." << endl;
     out().error("************************************************************************");
-    out().error("** Rug-compatible mode is deprecated and will vanish in a future version. [-r,--rug-compatible]");
+    out().error("** Rug-compatible mode is no longer available. [-r,--rug-compatible]");
     out().error("************************************************************************");
+    setExitCode(ZYPPER_EXIT_ERR_INVALID_ARGS);
+    ZYPP_THROW(ExitRequestException("rug-compatible"));
   }
   ///////////////////////////////////////////////////////////////////
 
@@ -1742,24 +1742,6 @@ void Zypper::processCommandOptions()
       {0, 0, 0, 0}
     };
     specific_options = service_list_options;
-
-    // handle the conflicting rug's lr here:
-    if (_gopts.is_rug_compatible)
-    {
-      static struct option options[] = {
-        {"help", no_argument, 0, 'h'},
-        {0, 0, 0, 0}
-      };
-      specific_options = options;
-
-      _command_help = _(
-        // translators: this is just a legacy command
-        "list-resolvables (lr)\n"
-        "\n"
-        "List available resolvable types.\n"
-      );
-      break;
-    }
 
     _command_help = _(
       "repos (lr) [options] [repo] ...\n"
@@ -3293,39 +3275,9 @@ void Zypper::doCommand()
     bool isservice = false;
     if (type.empty())
     {
-      // rug does not make difference between services and repos, so service-add
-      // must be able to handle them both (bnc #429620)
-      if (globalOpts().is_rug_compatible)
-      {
-        repo::ServiceType stype = rm.probeService(url);
-        // is it a service?
-        if (stype != repo::ServiceType::NONE)
-        {
-          isservice = true;
-          type = stype.asString();
-        }
-        // is it a repo?
-        else
-        {
-          repo::RepoType rtype = rm.probe(url);
-          if (rtype != repo::RepoType::NONE)
-            type = rtype.asString();
-          // complain & exit
-          else
-          {
-            out().error(
-              _("Can't find a valid repository at given location:"),
-              _("Could not determine the type of the repository."
-                " Check if the specified URI points to a valid repository."));
-            setExitCode(ZYPPER_EXIT_ERR_ZYPP);
-            return;
-          }
-        }
-      }
       // zypper does not access net when adding repos/services, thus for zypper
       // the URI is always service unless --type is explicitely specified.
-      else
-       isservice = true;
+      isservice = true;
     }
     else
     {
@@ -4228,8 +4180,6 @@ void Zypper::doCommand()
 
     if (command() == ZypperCommand::RUG_PATCH_SEARCH)
       query.addKind(ResKind::patch);
-    else if (globalOpts().is_rug_compatible)
-      query.addKind(ResKind::package);
     else if (copts.count("type") > 0)
     {
       std::list<std::string>::const_iterator it;
@@ -4372,7 +4322,7 @@ void Zypper::doCommand()
         FillPatchesTable callback(t, inst_notinst);
         invokeOnEach(query.poolItemBegin(), query.poolItemEnd(), callback);
       }
-      else if (_gopts.is_rug_compatible || details)
+      else if ( details )
       {
         FillSearchTableSolvable callback(t, inst_notinst);
 	if ( _copts.count("verbose") )
@@ -4401,13 +4351,6 @@ void Zypper::doCommand()
         cout << endl; //! \todo  out().separator()?
 
         if (command() == ZypperCommand::RUG_PATCH_SEARCH)
-        {
-          if (copts.count("sort-by-repo"))
-            t.sort(1);
-          else
-            t.sort(3); // sort by name
-        }
-        else if (_gopts.is_rug_compatible)
         {
           if (copts.count("sort-by-repo"))
             t.sort(1);
@@ -4615,15 +4558,6 @@ void Zypper::doCommand()
     //! for patches; just test with products and patterns
     bool best_effort = copts.count( "best-effort" );
 
-    if (globalOpts().is_rug_compatible && best_effort)
-    {
-      best_effort = false;
-      // translators: Running as 'rug', cannot use 'best-effort' option.
-      out().info(str::form(
-        _("Running as '%s', cannot use '%s' option."), "rug", "best-effort"),
-        Out::HIGH);
-    }
-
     if ((copts.count("bugzilla") || copts.count("bz") || copts.count("cve")) &&
         copts.count("issues"))
     {
@@ -4756,26 +4690,13 @@ void Zypper::doCommand()
     }
 
     bool best_effort = copts.count( "best-effort" );
-    if (globalOpts().is_rug_compatible && best_effort)
-    {
-      best_effort = false;
-      out().info(str::form(
-        // translators: Running as 'rug', cannot use 'best-effort' option.
-        _("Running as '%s', cannot use '%s' option."), "rug", "best-effort"),
-        Out::HIGH);
-    }
 
     // parse the download options to check for errors
     get_download_option(*this);
 
     init_target(*this);
     initRepoManager();
-
-    // rug compatibility - treat arguments as repos
-    if (_gopts.is_rug_compatible && !_arguments.empty())
-      init_repos(*this, _arguments);
-    else
-      init_repos(*this);
+    init_repos(*this);
     if (exitCode() != ZYPPER_EXIT_OK)
       return;
 
@@ -4976,21 +4897,6 @@ void Zypper::doCommand()
       setExitCode(ZYPPER_EXIT_ERR_INVALID_ARGS);
       return;
     }
-    // too many arguments
-    //TODO rug compatibility
-/*    else if (_arguments.size() > 1)
-    {
-      // rug compatibility
-      if (_gopts.is_rug_compatible)
-        // translators: 'zypper addlock foo' takes only one argument.
-        out().warning(_("Only the first command argument considered. Zypper currently does not support versioned locks."));
-      else
-      {
-        report_too_many_arguments(_command_help);
-        setExitCode(ZYPPER_EXIT_ERR_INVALID_ARGS);
-        return;
-      }
-    }*/
 
     ResKindSet kinds;
     if (copts.count("type"))

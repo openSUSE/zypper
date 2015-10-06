@@ -925,47 +925,6 @@ void init_target (Zypper & zypper)
 
 // ----------------------------------------------------------------------------
 
-static void print_rug_sources_list(const std::list<zypp::RepoInfo> &repos)
-{
-  Table tbl;
-
-  // header
-  TableHeader th;
-  th << "#" << _("Status") << _("Type") << _("Name") << "URI";
-  tbl << th;
-
-  int i = 1;
-
-  for (std::list<RepoInfo>::const_iterator it = repos.begin();
-       it !=  repos.end(); ++it)
-  {
-    RepoInfo repo = *it;
-    TableRow tr(5);
-
-    // number
-    tr << str::numstring(i);
-
-    // status
-    // rug's status (active, pending => active, disabled <= enabled, disabled)
-    // this is probably the closest possible compatibility arrangement
-    tr << (repo.enabled() ? _("Active") : _("Disabled"));
-
-    // type
-    tr << repo.type().asString();
-    // name
-    tr << repo.name();
-    // url
-    tr << (repo.baseUrlSet() ? repo.url().asString() : (repo.mirrorListUrl().asString().empty() ? "n/a" : repo.mirrorListUrl().asString() ));
-
-    tbl << tr;
-    i++;
-  }
-
-  cout << tbl;
-}
-
-// ----------------------------------------------------------------------------
-
 static void print_repo_list(Zypper & zypper,
                             const std::list<zypp::RepoInfo> &repos )
 {
@@ -1275,9 +1234,6 @@ void list_repos(Zypper & zypper)
   // print repo list as xml
   else if (zypper.out().type() == Out::TYPE_XML)
     print_xml_repo_list(zypper, repos);
-  // print repo list the rug's way
-  else if (zypper.globalOpts().is_rug_compatible)
-    print_rug_sources_list(repos);
   else if (!zypper.arguments().empty())
     print_repo_details(zypper, repos);
   // print repo list as table
@@ -1761,14 +1717,6 @@ void add_repo(Zypper & zypper, RepoInfo & repo)
   s << format(_("Repository '%s' successfully added")) % repo.asUserString();
   s << endl;
 
-  if (zypper.globalOpts().is_rug_compatible)
-  {
-    s << ( repo.enabled() ? "[x]" : "[ ]" )
-      << ( repo.autorefresh() ? "* " : "  " )
-      << repo.asUserString()
-      << " (" << (repo.baseUrlSet() ? repo.url().asString() : (repo.mirrorListUrl().asString().empty() ? "n/a" : repo.mirrorListUrl().asString() )) << ")" << endl;
-  }
-  else
   {
     PropertyTable p;
     // translators: property name; short; used like "Name: value"
@@ -2955,7 +2903,7 @@ void refresh_services(Zypper & zypper)
         error = refresh_service(zypper, *s);
 
         // refresh also service's repos
-        if (zypper.cOpts().count("with-repos") || zypper.globalOpts().is_rug_compatible)
+        if (zypper.cOpts().count("with-repos"))
         {
           RepoCollector collector;
           RepoManager & rm = zypper.repoManager();
@@ -2968,7 +2916,7 @@ void refresh_services(Zypper & zypper)
       }
       else
       {
-        if (!zypper.cOpts().count("with-repos") && !zypper.globalOpts().is_rug_compatible)
+        if (!zypper.cOpts().count("with-repos"))
         {
           DBG << str::form(
               "Skipping non-index service '%s' because '%s' is used.",
