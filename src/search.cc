@@ -494,6 +494,7 @@ static void list_pattern_table(Zypper & zypper)
 
   for_( it, God->pool().byKindBegin<Pattern>(), God->pool().byKindEnd<Pattern>() )
   {
+    const PoolItem & pi( *it );
     bool isInstalled = it->status().isInstalled();
     if ( isInstalled && notinst_only && !installed_only )
       continue;

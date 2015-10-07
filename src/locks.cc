@@ -29,6 +29,17 @@ namespace
     return ret;
   }
 
+  inline int compareByN( const sat::Solvable & lhs, const sat::Solvable & rhs )	// from zypp::sat::
+  {
+    int res = 0;
+    if ( lhs != rhs )
+    {
+      if ( (res = lhs.kind().compare( rhs.kind() )) == 0 )
+	res = lhs.name().compare( rhs.name() );
+    }
+    return res;
+  }
+
   inline std::string getLockDetails( const PoolQuery & q )
   {
     if ( q.empty() )
@@ -45,7 +56,7 @@ namespace
 	{
 	  // return zypp::sat::compareByNVRA( lhs, rhs );
 	  // do N(<) A(>) VR(>)
-	  int res = zypp::sat::compareByN( lhs, rhs );		// ascending  l<r
+	  int res = compareByN( lhs, rhs );		// ascending  l<r
 	  if ( res == 0 )
 	    res = rhs.arch().compare( lhs.arch() );		// descending r<l
 	  if ( res == 0 )
@@ -141,7 +152,7 @@ void list_locks(Zypper & zypper)
       if (zypper.globalOpts().is_rug_compatible)
       {
         // repository
-        copy(it->repos().begin(), it->repos().end(), inserter(strings, strings.end()));
+        copy(q.repos().begin(), q.repos().end(), inserter(strings, strings.end()));
         tr << get_string_for_table(strings);
         // importance
         tr << _("(any)");

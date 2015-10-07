@@ -446,7 +446,7 @@ bool Summary::writeResolvableList(ostream & out, const ResPairSet & resolvables,
       relevant_entries -= maxEntires_r;
       // translators: Appended when clipping a long enumeration:
       // "ConsoleKit-devel ConsoleKit-doc ... and 20828 more items."
-      s << ( color << format(PL_(
+      s << ( color << format(_PL(
 	"... and %1% more item.",
 	"... and %1% more items.",
 	relevant_entries) ) % relevant_entries );
@@ -517,7 +517,7 @@ bool Summary::writeResolvableList(ostream & out, const ResPairSet & resolvables,
     relevant_entries -= maxEntires_r;
     // translators: Appended when clipping a long enumeration:
     // "ConsoleKit-devel ConsoleKit-doc ... and 20828 more items."
-    out << ( color << format(PL_(
+    out << ( color << format(_PL(
       "... and %1% more item.",
       "... and %1% more items.",
       relevant_entries) ) % relevant_entries ) << endl;
@@ -1239,9 +1239,6 @@ void Summary::writeLocked(std::ostream & out)
       // translators: used as 'tag:' (i.e. followed by ':')
       out << " " << _("Available") << ':' << endl;
       wroteAll &= writeResolvableList( out, avidents, ColorContext::HIGHLIGHT, 100, /*withKind*/true );
-
-      // translators: %1% is a zypper command line
-      N_("Run '%1%' to see the complete list of locked items.");
     }
     if ( ! instlocks.empty() )
     {
