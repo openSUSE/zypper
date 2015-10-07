@@ -1,4 +1,16 @@
 -------------------------------------------------------------------
+Wed Oct  7 12:18:38 CEST 2015 - ma@suse.de
+
+- Show locked packages in summary of patch, up and dup command
+  (FATE#318299)
+- search: Append 'l' to a locked items status tag (FATE#318299)
+- list locks: new command options --matches and --solvables
+  to see the resolvables matched by each lock defintion
+  (FATE#318299)
+- Table: fix details layout to handle multibyte strings correctly
+- version 1.11.40
+
+-------------------------------------------------------------------
 Fri Oct  2 14:31:09 CEST 2015 - ma@suse.de
 
 - Give ZYPPER_EXIT_ERR_COMMIT priority over ZYPPER_EXIT_ON_SIGNAL
