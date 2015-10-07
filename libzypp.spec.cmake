@@ -201,8 +201,8 @@ unset EXTRA_CMAKE_OPTIONS
 # Same codebase, but SLES may use it's own translation set.
 #     suse_version
 # 	1110		SLES11
-# 	1315		SLES12
-%if 0%{?suse_version} == 1110 || 0%{?suse_version} == 1315
+# 	1315-1319	SLES12
+%if 0%{?suse_version} == 1110 || ( 0%{?suse_version} >= 1315 && 0%{?suse_version} <= 1319 )
 if [ -f ../po/sle-zypp-po.tar.bz2 ]; then
   export TRANSLATION_SET=sle-zypp
 fi
