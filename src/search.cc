@@ -24,6 +24,28 @@ using namespace std;
 
 extern ZYpp::Ptr God;
 
+///////////////////////////////////////////////////////////////////
+namespace
+{
+  inline const char * lockStatusTag( const char * tag_r, bool islocked_r )
+  {
+    if ( islocked_r )
+    {
+      if ( *tag_r == 'i' )
+	return "il";
+      else if ( *tag_r == 'v' )
+	return "vl";
+      else if ( *tag_r == '\0' || *tag_r == ' ' )
+	return " l";
+      INT << "unknown status tag '" << tag_r << "'" << endl;
+      return "?L";	// should not happen
+    }
+    return tag_r;
+  }
+
+} // namespace
+///////////////////////////////////////////////////////////////////
+
 FillSearchTableSolvable::FillSearchTableSolvable(
     Table & table, zypp::TriBool inst_notinst)
   : _table( &table )
@@ -72,12 +94,13 @@ bool FillSearchTableSolvable::addPicklistItem( const ui::Selectable::constPtr & 
   //   i  - exactly this version installed
   //   v  - installed, but in different version
   //      - not installed at all
+  bool isLocked = pi.status().isLocked();
   if ( pi->isSystem() )
   {
     // picklist: ==> not available
     if ( _inst_notinst == false )
       return false;	// show only not installed
-    row << "i";
+    row << lockStatusTag( "i", isLocked );
   }
   else
   {
@@ -88,7 +111,7 @@ bool FillSearchTableSolvable::addPicklistItem( const ui::Selectable::constPtr & 
     {
       if ( _inst_notinst == true )
 	return false;	// show only installed
-      row << "";
+      row << lockStatusTag( "", isLocked );
     }
     else
     {
@@ -99,13 +122,13 @@ bool FillSearchTableSolvable::addPicklistItem( const ui::Selectable::constPtr & 
       {
 	if ( _inst_notinst == false )
 	  return false;	// show only not installed
-	row << "i";
+	row << lockStatusTag( "i", isLocked );
       }
       else
       {
 	if ( _inst_notinst == true )
 	  return false;	// show only installed
-	row << "v";
+	row << lockStatusTag( "v", isLocked );
       }
     }
   }
@@ -253,7 +276,7 @@ bool FillSearchTableSelectable::operator()(const zypp::ui::Selectable::constPtr 
   else
     installed = !s->installedEmpty();
 
-
+  bool isLocked = s->locked();
   if (s->kind() != zypp::ResKind::srcpackage)
   {
     if (installed)
@@ -261,7 +284,7 @@ bool FillSearchTableSelectable::operator()(const zypp::ui::Selectable::constPtr 
       // not-installed only
       if (inst_notinst == false)
         return true;
-      row << "i";
+      row << lockStatusTag( "i", isLocked );
     }
     // this happens if the solvable has installed objects, but no counterpart
     // of them in specified repos
@@ -270,14 +293,14 @@ bool FillSearchTableSelectable::operator()(const zypp::ui::Selectable::constPtr 
       // not-installed only
       if (inst_notinst == true)
         return true;
-      row << "v";
+      row << lockStatusTag( "v", isLocked );
     }
     else
     {
       // installed only
       if (inst_notinst == true)
         return true;
-      row << "";
+      row << lockStatusTag( "", isLocked );
     }
   }
   else
@@ -285,7 +308,7 @@ bool FillSearchTableSelectable::operator()(const zypp::ui::Selectable::constPtr 
     // installed only
     if (inst_notinst == true)
       return true;
-    row << "";
+    row << lockStatusTag( "", isLocked );
   }
 
   row << s->name();
@@ -445,8 +468,9 @@ static void list_pattern_table(Zypper & zypper)
     if (!pattern->userVisible())
       continue;
 
+    bool isLocked = pi.status().isLocked();
     tbl << ( TableRow()
-	<< (isInstalled ? "i" : "")
+	<< (isInstalled ? lockStatusTag( "i", isLocked ) : lockStatusTag( "", isLocked ))
 	<< pi.name()
 	<< pi.edition()
 	<< pi.repoInfo().name()
@@ -534,13 +558,14 @@ void list_packages(Zypper & zypper)
       }
 
       TableRow row;
+      bool isLocked = pi.status().isLocked();
       if ( s->hasInstalledObj() )
       {
-	row << ( pi.status().isInstalled() || s->identicalInstalled( pi ) ? "i" : "v" );
+	row << ( pi.status().isInstalled() || s->identicalInstalled( pi ) ? lockStatusTag( "i", isLocked ) : lockStatusTag( "v", isLocked ) );
       }
       else
       {
-	row << "";
+	row << lockStatusTag( "", isLocked );
       }
       row << pi->repository().info().name()
           << pi->name()
@@ -652,6 +677,7 @@ static void list_product_table(Zypper & zypper)
       Product::constPtr product = asKind<Product>(it->resolvable());
       TableRow tr;
       zypp::PoolItem pi = *it;
+      bool isLocked = pi.status().isLocked();
 
       if (installed)
       {
@@ -659,7 +685,7 @@ static void list_product_table(Zypper & zypper)
         {
           if (notinst_only || !missedInstalled)
             continue;
-          tr << "i";
+          tr << lockStatusTag( "i", isLocked );
           // this is needed, other isTargetDistribution would not return
           // true for the installed base product
           product = asKind<Product>(installed);
@@ -673,14 +699,14 @@ static void list_product_table(Zypper & zypper)
         {
           if (installed_only)
             continue;
-          tr << "v";
+          tr << lockStatusTag( "v", isLocked );
         }
       }
       else
       {
         if (installed_only)
           continue;
-        tr << "";
+        tr << lockStatusTag( "", isLocked );
       }
       add_product_table_row( zypper, tr, product );
       tbl << tr;
@@ -688,12 +714,13 @@ static void list_product_table(Zypper & zypper)
 
     if ( missedInstalled ) // no available hit, we need to print it
     {
-      // show installed product in ablence of an available one:
+      // show installed product in absence of an available one:
       if (notinst_only)
         continue;
 
       TableRow tr;
-      tr << "i";
+      bool isLocked = installed.status().isLocked();
+      tr << lockStatusTag( "i", isLocked );
       add_product_table_row( zypper, tr, installed->asKind<Product>() );
       tbl << tr;
     }

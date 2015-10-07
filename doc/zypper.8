@@ -2,12 +2,12 @@
 .\"     Title: zypper
 .\"    Author: [see the "AUTHORS" section]
 .\" Generator: DocBook XSL Stylesheets v1.78.1 <http://docbook.sf.net/>
-.\"      Date: 09/29/2015
+.\"      Date: 10/07/2015
 .\"    Manual: ZYPPER
 .\"    Source: SUSE Linux
 .\"  Language: English
 .\"
-.TH "ZYPPER" "8" "09/29/2015" "SUSE Linux" "ZYPPER"
+.TH "ZYPPER" "8" "10/07/2015" "SUSE Linux" "ZYPPER"
 .\" -----------------------------------------------------------------
 .\" * Define some portability stuff
 .\" -----------------------------------------------------------------
@@ -1220,6 +1220,7 @@ column can contain the following values:
 tab(:);
 lt lt
 lt lt
+lt lt
 lt lt.
 T{
 \fBi\fR
@@ -1235,6 +1236,12 @@ T{
 \fIempty\fR
 T}:T{
 neither of the former cases
+T}
+T{
+\&.\fBl\fR
+T}:T{
+appended to the above status tags if the item is locked (see section
+\fBPackage Locks Management\fR)
 T}
 .TE
 .sp 1
