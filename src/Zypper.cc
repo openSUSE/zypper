@@ -150,6 +150,24 @@ namespace
     /** Conversion to std::string */
     operator std::string() const { return _str.str(); }
 
+    /** Synopsis
+     * \code
+     * "<singleline text_r>"
+     * \endcode
+     */
+    CommandHelpFormater & synopsis( boost::string_ref text_r )
+    { _mww.writePar( text_r ); return *this; }
+
+    /** Description block with leading gap
+     * \code
+     *
+     * "<multiline text_r>"
+     * \endcode
+     */
+    CommandHelpFormater & description( boost::string_ref text_r )
+    { _mww.gotoNextPar(); _mww.writePar( text_r ); return *this; }
+
+
     /** Option section title
      * \code
      * ""
@@ -165,6 +183,9 @@ namespace
 
     CommandHelpFormater & optionSectionExpertOptions()
     { return optionSection(_("Expert options:") ); }
+
+    CommandHelpFormater & noOptionSection()
+    { return optionSection(_("This command has no additional options.") ); }
 
     /** Option definition
      * \code
