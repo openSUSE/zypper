@@ -1,4 +1,10 @@
 -------------------------------------------------------------------
+Wed Oct  7 11:06:24 CEST 2015 - ma@suse.de
+
+- Locks: fix using namespaces (for FATE#318299)
+- version 15.19.1 (19)
+
+-------------------------------------------------------------------
 Mon Oct  5 12:27:49 CEST 2015 - ma@suse.de
 
 - fix reserved identifier violation (fixes #51)
