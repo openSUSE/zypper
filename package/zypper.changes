@@ -1,10 +1,16 @@
 -------------------------------------------------------------------
+Wed Oct  7 13:09:48 CEST 2015 - ma@suse.de
+
+- fix suse_version test (bsc#949046)
+- version 1.12.20
+
+-------------------------------------------------------------------
 Wed Oct  7 11:46:11 CEST 2015 - ma@suse.de
 
 - Show locked packages in summary of patch, up and dup command
   (FATE#318299)
 - search: Append 'l' to a locked items status tag (FATE#318299)
-- list locks: new command options --matches and --solvables 
+- list locks: new command options --matches and --solvables
   to see the resolvables matched by each lock defintion
   (FATE#318299)
 - Table: fix details layout to handle multibyte strings correctly
