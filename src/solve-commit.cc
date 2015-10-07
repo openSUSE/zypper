@@ -601,6 +601,13 @@ void solve_and_commit (Zypper & zypper)
       summary.setViewOption(Summary::SHOW_NOT_UPDATED);
     }
 
+    if ( zypper.command() == ZypperCommand::PATCH
+      || zypper.command() == ZypperCommand::UPDATE
+      || zypper.command() == ZypperCommand::DIST_UPGRADE )
+    {
+      summary.setViewOption(Summary::SHOW_LOCKS);
+    }
+
     // if running on SUSE Linux Enterprise, report unsupported packages
     if ( runningOnEnterprise() )
       summary.setViewOption(Summary::SHOW_UNSUPPORTED);

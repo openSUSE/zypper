@@ -44,6 +44,7 @@ public:
     SHOW_RECOMMENDED        = 0x0200,
     SHOW_UNSUPPORTED        = 0x0400,
     SHOW_NOT_UPDATED        = 0x0800,
+    SHOW_LOCKS              = 0x1000,
 
     SHOW_ALL                = 0xffff
   };
@@ -114,7 +115,11 @@ public:
 
 private:
   void readPool(const zypp::ResPool & pool);
-  void writeResolvableList(std::ostream & out, const ResPairSet & resolvables, ansi::Color = ansi::Color::nocolor() );
+
+  bool writeResolvableList(std::ostream & out, const ResPairSet & resolvables, ansi::Color = ansi::Color::nocolor(), unsigned maxEntries_r = 0U, bool withKind_r = false );
+  bool writeResolvableList(std::ostream & out, const ResPairSet & resolvables, unsigned maxEntries_r, bool withKind_r = false )
+  { return writeResolvableList( out, resolvables, ansi::Color::nocolor(), maxEntries_r, withKind_r ); }
+
   void writeXmlResolvableList(std::ostream & out, const KindToResPairSet & resolvables);
 
   void collectInstalledRecommends(const zypp::ResObject::constPtr & obj);

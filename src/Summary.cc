@@ -351,19 +351,21 @@ unsigned Summary::packagesToRemove()	const	{ return numberOfPackagesIn( _toremov
 ///////////////////////////////////////////////////////////////////
 namespace
 {
-  inline std::string ResPair2Name( const Summary::ResPairSet::value_type & resp_r )
+  inline std::string ResPair2Name( const Summary::ResPairSet::value_type & resp_r, bool withKind_r = false )
   {
     if ( resp_r.second->kind() == ResKind::product )
       // If two products are involved, show the old ones summary.
       // (The following product is going to be upgraded/downgraded:)
       return resp_r.first ? resp_r.first->summary() : resp_r.second->summary();
 
-    return resp_r.second->name();
+    return( withKind_r ? resp_r.second->ident().asString() : resp_r.second->name() );
   }
 } // namespace
 ///////////////////////////////////////////////////////////////////
-void Summary::writeResolvableList(ostream & out, const ResPairSet & resolvables, ansi::Color color)
+bool Summary::writeResolvableList(ostream & out, const ResPairSet & resolvables, ansi::Color color, unsigned maxEntires_r, bool withKind_r )
 {
+  bool ret = true;	// whether the complete list was written, or maxEntires_r clipped
+
   if ((_viewop & DETAILS) == 0)
   {
     static const ColorString quoteCh( "\"", ColorContext::HIGHLIGHT );
@@ -373,12 +375,13 @@ void Summary::writeResolvableList(ostream & out, const ResPairSet & resolvables,
     char firstCh = 0;
 
     ostringstream s;
-    for (ResPairSet::const_iterator resit = resolvables.begin();
-        resit != resolvables.end(); ++resit)
+    unsigned relevant_entries = 0;
+    for ( const ResPair & respair : resolvables )
     {
       // name
-      const std::string & name( ResPair2Name( *resit ) );
-      if ( name.empty() )
+      const std::string & name( ResPair2Name( respair, withKind_r ) );
+      ++relevant_entries;
+      if ( maxEntires_r && relevant_entries > maxEntires_r )
 	continue;
 
       // quote names with spaces
@@ -403,76 +406,102 @@ void Summary::writeResolvableList(ostream & out, const ResPairSet & resolvables,
       if ( quote ) s << quoteCh;
 
       // version (if multiple versions are present)
-      if (_multiInstalled.find(resit->second->name()) != _multiInstalled.end())
+      if (_multiInstalled.find(respair.second->name()) != _multiInstalled.end())
       {
-        if (resit->first && resit->first->edition() != resit->second->edition())
-          s << "-" << resit->first->edition().asString()
-            << "->" << resit->second->edition().asString();
+        if (respair.first && respair.first->edition() != respair.second->edition())
+          s << "-" << respair.first->edition().asString()
+            << "->" << respair.second->edition().asString();
         else
-          s << "-" << resit->second->edition().asString();
+          s << "-" << respair.second->edition().asString();
       }
 
       s << " ";
     }
+    if ( maxEntires_r && relevant_entries > maxEntires_r )
+    {
+      relevant_entries -= maxEntires_r;
+      // translators: Appended when clipping a long enumeration:
+      // "ConsoleKit-devel ConsoleKit-doc ... and 20828 more items."
+      s << ( color << format(PL_(
+	"... and %1% more item.",
+	"... and %1% more items.",
+	relevant_entries) ) % relevant_entries );
+      ret = false;
+    }
     mbs_write_wrapped(out, s.str(), 2, _wrap_width);
     out << endl;
-    return;
+    return ret;
   }
 
   Table t; t.lineStyle(none); t.wrap(0); t.margin(2);
+  unsigned relevant_entries = 0;
 
-  for (ResPairSet::const_iterator resit = resolvables.begin();
-      resit != resolvables.end(); ++resit)
+  for ( const ResPair & respair : resolvables )
   {
-    TableRow tr;
-
-    string name = ResPair2Name( *resit );
+    string name = ResPair2Name( respair, withKind_r );
+    ++relevant_entries;
+    if ( maxEntires_r && relevant_entries > maxEntires_r )
+      continue;
 
     // version (if multiple versions are present)
-    if (!(_viewop & SHOW_VERSION) && _multiInstalled.find(resit->second->name()) != _multiInstalled.end())
+    if (!(_viewop & SHOW_VERSION) && _multiInstalled.find(respair.second->name()) != _multiInstalled.end())
     {
-      if (resit->first && resit->first->edition() != resit->second->edition())
-        name += string("-") + resit->first->edition().asString()
-             + "->" + resit->second->edition().asString();
+      if (respair.first && respair.first->edition() != respair.second->edition())
+        name += string("-") + respair.first->edition().asString()
+             + "->" + respair.second->edition().asString();
       else
-        name += string("-") + resit->second->edition().asString();
+        name += string("-") + respair.second->edition().asString();
     }
 
+    TableRow tr;
     tr << name;
 
     if (_viewop & SHOW_VERSION)
     {
-      if (resit->first && resit->first->edition() != resit->second->edition())
-        tr << resit->first->edition().asString() + " -> " +
-              resit->second->edition().asString();
+      if (respair.first && respair.first->edition() != respair.second->edition())
+        tr << respair.first->edition().asString() + " -> " +
+              respair.second->edition().asString();
       else
-        tr << resit->second->edition().asString();
+        tr << respair.second->edition().asString();
     }
     if (_viewop & SHOW_ARCH)
     {
-      if (resit->first && resit->first->arch() != resit->second->arch())
-        tr << resit->first->arch().asString() + " -> " +
-              resit->second->arch().asString();
+      if (respair.first && respair.first->arch() != respair.second->arch())
+        tr << respair.first->arch().asString() + " -> " +
+              respair.second->arch().asString();
       else
-        tr << resit->second->arch().asString();
+        tr << respair.second->arch().asString();
     }
     if (_viewop & SHOW_REPO)
     {
       // we do not know about repository changes, only show the repo from
       // which the package will be installed
-      tr << resit->second->repoInfo().asUserString();
+      tr << respair.second->repoInfo().asUserString();
     }
     if (_viewop & SHOW_VENDOR)
     {
-      if (resit->first && ! VendorAttr::instance().equivalent(resit->first->vendor(), resit->second->vendor()))
-        tr << resit->first->vendor() + " -> " + resit->second->vendor();
+      if (respair.first && ! VendorAttr::instance().equivalent(respair.first->vendor(), respair.second->vendor()))
+        tr << respair.first->vendor() + " -> " + respair.second->vendor();
       else
-        tr << resit->second->vendor();
+        tr << respair.second->vendor();
     }
     t << tr;
   }
+  out << t;
+  if ( maxEntires_r && relevant_entries > maxEntires_r )
+  {
+    relevant_entries -= maxEntires_r;
+    // translators: Appended when clipping a long enumeration:
+    // "ConsoleKit-devel ConsoleKit-doc ... and 20828 more items."
+    out << ( color << format(PL_(
+      "... and %1% more item.",
+      "... and %1% more items.",
+      relevant_entries) ) % relevant_entries ) << endl;
+    ret = false;
+  }
+  out << endl;
 
-  out << t << endl;
+  return ret;
 }
 
 // --------------------------------------------------------------------------
@@ -1151,19 +1180,18 @@ void Summary::writeNotUpdated(std::ostream & out)
 
 void Summary::writeLocked(std::ostream & out)
 {
-  return;
   ResPairSet instlocks;	// locked + installed
   ResPairSet avidents;	// avaialble locked
   ResPoolProxy selPool( ResPool::instance().proxy() );
   for_( it, selPool.begin(), selPool.end() )
   {
-    if ( (*it)->locked() )
+    if ( (*it)->locked() )	// NOTE: this does not cover partial locks (not all instances locked)
     {
       if ( (*it)->hasInstalledObj() )
        for_( iit, (*it)->installedBegin(), (*it)->installedEnd() )
          instlocks.insert( ResPair( nullptr, *iit ) );
       else
-       ;//avidents.insert( ResPair( nullptr, (*it)->theObj() ) );
+       avidents.insert( ResPair( nullptr, (*it)->theObj() ) );
     }
   }
   if ( ! ( instlocks.empty() && avidents.empty() ) )
@@ -1176,19 +1204,27 @@ void Summary::writeLocked(std::ostream & out)
     label = str::form( label.c_str(), instlocks.size() + avidents.size() );
     out << endl << ( ColorContext::HIGHLIGHT << label ) << endl;
 
+    bool wroteAll = true;
     if ( ! avidents.empty() )
     {
       DtorReset guard( _viewop );
       _viewop = DEFAULT;	// always as plain name list
       // translators: used as 'tag:' (i.e. followed by ':')
       out << " " << _("Available") << ':' << endl;
-      writeResolvableList( out, avidents, ColorContext::HIGHLIGHT );
+      wroteAll &= writeResolvableList( out, avidents, ColorContext::HIGHLIGHT, 100, /*withKind*/true );
+
+      // translators: %1% is a zypper command line
+      N_("Run '%1%' to see the complete list of locked items.");
     }
     if ( ! instlocks.empty() )
     {
       // translators: used as 'tag:' (i.e. followed by ':')
       out << " " << _("Installed") << ':' << endl;
-      writeResolvableList( out, instlocks, ColorContext::HIGHLIGHT );
+      wroteAll &= writeResolvableList( out, instlocks, ColorContext::HIGHLIGHT, 100, /*withKind*/true );
+    }
+    if ( !wroteAll )
+    {
+      out << " " << format(_("Run '%1%' to see the complete list of locked items.")) % "zypper locks -s" << endl;
     }
   }
 }
@@ -1379,7 +1415,8 @@ void Summary::dumpTo(ostream & out)
 
   _wrap_width = get_screen_width();
 
-  writeLocked(out);
+  if (_viewop & SHOW_LOCKS )
+    writeLocked(out);
   if (_viewop & SHOW_NOT_UPDATED)
     writeNotUpdated(out);
   writeNewlyInstalled(out);

@@ -1205,6 +1205,11 @@ void Zypper::safeDoCommand()
     ZYPP_CAUGHT(e);
     MIL << "Caught exit request: exitCode " << exitCode() << endl;
   }
+  catch ( const Out::Error & error_r )
+  {
+    error_r.report( *this );
+    report_a_bug(out());
+ }
   catch (const Exception & ex)
   {
     ZYPP_CAUGHT(ex);
@@ -2630,19 +2635,29 @@ void Zypper::processCommandOptions()
 
   case ZypperCommand::LIST_LOCKS_e:
   {
+    shared_ptr<ListLocksOptions> myOpts( new ListLocksOptions() );
+    _commandOptions = myOpts;
     static struct option options[] =
     {
-      {"help", no_argument, 0, 'h'},
+      {"help",			no_argument,		0, 'h'},
+      {"matches",		no_argument,		0, 'm'},
+      {"solvables",		no_argument,		0, 's'},
       {0, 0, 0, 0}
     };
     specific_options = options;
-    _command_help = _(
-      "locks (ll)\n"
-      "\n"
-      "List current package locks.\n"
-      "\n"
-      "This command has no additional options.\n"
-    );
+    _command_help = CommandHelpFormater()
+    .synopsis(	// translators: command synopsis; do not translate the command 'name (abbreviations)' or '-option' names
+      _("locks (ll) [options]")
+    )
+    .description(	// translators: command description
+      _("List current package locks.")
+    )
+    .optionSectionCommandOptions()
+    .option( "-m, --matches",	// translators: -m, --matches
+	     _("Show the number of resolvables matched by each lock.") )
+    .option( "-s, --solvables",	// translators: -s, --solvables
+	     _("List the resolvables matched by each lock.") )
+    ;
     break;
   }
 
@@ -3266,7 +3281,7 @@ void Zypper::doCommand()
     }
 
     initRepoManager();
-    RepoManager & rm = repoManager();
+    RepoManager & rm = repoManager(); // ?? UNUSED VAR OR CALL NEEDED ??
 
     // force specific repository type.
     string type = copts.count("type") ? copts["type"].front() : "";
@@ -4971,6 +4986,26 @@ void Zypper::doCommand()
   case ZypperCommand::LIST_LOCKS_e:
   {
     if (runningHelp()) { out().info(_command_help, Out::QUIET); return; }
+
+    shared_ptr<ListLocksOptions> listLocksOptions = commandOptionsAs<ListLocksOptions>();
+    if ( !listLocksOptions )
+      throw( Out::Error( ZYPPER_EXIT_ERR_BUG, "Wrong or missing options struct." ) );
+
+    bool needLoadSystem = false;
+
+    if ( copts.count("matches") )
+    {
+      listLocksOptions->_withMatches = true;
+      needLoadSystem = true;
+    }
+    if ( copts.count("solvables") )
+    {
+      listLocksOptions->_withSolvables = true;
+      needLoadSystem = true;
+    }
+
+    if ( needLoadSystem )
+      defaultLoadSystem();
 
     list_locks(*this);
 

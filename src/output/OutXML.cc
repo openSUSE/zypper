@@ -227,9 +227,9 @@ void OutXML::searchResult( const Table & table_r )
 	cout << ' ' << (cidx < header.size() ? header[cidx] : "?" ) << "=\"";
 	if ( cidx == 0 )
 	{
-	  if ( *cit == "i" )
+	  if ( (*cit)[0] == 'i' )	// test 1st char as locked is "iL"
 	    cout << "installed\"";
-	  else if ( *cit == "v" )
+	  else if ( (*cit)[0] == 'v' )	// test 1st char as locked is "vL"
 	    cout << "other-version\"";
 	  else
 	    cout << "not-installed\"";
