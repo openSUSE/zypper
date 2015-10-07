@@ -1,4 +1,17 @@
 -------------------------------------------------------------------
+Wed Oct  7 11:46:11 CEST 2015 - ma@suse.de
+
+- Show locked packages in summary of patch, up and dup command
+  (FATE#318299)
+- search: Append 'l' to a locked items status tag (FATE#318299)
+- Table: fix details layout to handle multibyte strings correctly
+- Rug-compatible mode is no longer available.
+- Give ZYPPER_EXIT_ERR_COMMIT priority over ZYPPER_EXIT_ON_SIGNAL
+  (bsc#946750, FATE#319467)
+- BuildRequires:  libzypp-devel >= 15.19.1
+- version 1.12.19
+
+-------------------------------------------------------------------
 Thu Oct  1 01:16:01 CEST 2015 - ma@suse.de
 
 - Update sle-zypper-po.tar.bz2
