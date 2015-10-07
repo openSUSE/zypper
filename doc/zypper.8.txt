@@ -651,6 +651,7 @@ Query Commands
 	*i*;;	installed
 	*v*;;	a different version is installed
 	'empty';;	neither of the former cases
+	.*l*;;	appended to the above status tags if the item is locked (see section *Package Locks Management*)
 --
 +
 {nop}
