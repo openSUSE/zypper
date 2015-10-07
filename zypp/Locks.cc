@@ -29,9 +29,7 @@
 
 #include "zypp/Locks.h"
 
-using namespace std;
-using namespace zypp;
-using namespace zypp::str;
+using std::endl;
 
 namespace zypp
 {
@@ -108,9 +106,8 @@ void Locks::readAndApply( const Pathname& file )
   PathInfo pinfo(file);
   if ( pinfo.isExist() )
   {
-    insert_iterator<LockList> ii( _pimpl->locks,
-        _pimpl->locks.end() );
-    LockingOutputIterator<insert_iterator<LockList> > lout(ii);
+    std::insert_iterator<LockList> ii( _pimpl->locks, _pimpl->locks.end() );
+    LockingOutputIterator<std::insert_iterator<LockList> > lout(ii);
     readPoolQueriesFromFile( file, boost::make_function_output_iterator(lout) );
   }
   else
@@ -123,8 +120,7 @@ void Locks::read( const Pathname& file )
   MIL << "read locks from "<<file << endl;
   PathInfo pinfo(file);
   if ( pinfo.isExist() )
-    readPoolQueriesFromFile(
-       file, insert_iterator<LockList>(_pimpl->locks, _pimpl->locks.end()) );
+    readPoolQueriesFromFile( file, std::insert_iterator<LockList>(_pimpl->locks, _pimpl->locks.end()) );
   else 
     MIL << "file not exist(or cannot be stat), no lock added." << endl;
 }
