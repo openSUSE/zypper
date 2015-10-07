@@ -68,38 +68,13 @@ void TableRow::dumbDumpTo (ostream &stream) const {
 void TableRow::dumpDetails(ostream &stream, const Table & parent) const
 {
   unsigned width = parent._screen_width;
-  //string indent( parent._max_width[0] + (parent._style == none ? 2 : 3), ' ' );
-  string indent( 4, ' ' );
 
-  for ( vector<string>::const_iterator it = _details.begin(); it != _details.end(); ++it )
+  mbs::MbsWriteWrapped mww( stream, 4, parent._screen_width );
+  for ( const std::string & text : _details )
   {
-    vector<string> text;
-    zypp::str::split( *it, std::back_inserter(text), "\n" );
-
-    for_( line, text.begin(), text.end() )
-    {
-      unsigned int textSize = mbs_width( *line );
-      unsigned int startPos = 0;
-
-      while ( textSize > 0 )
-      {
-        unsigned int endPos;
-
-        if ( textSize + indent.length() <= width )
-        {
-          stream << indent << zypp::str::ltrim( (*line).substr(startPos)) << endl;
-          break;
-        }
-        else
-        {
-          stream << indent << zypp::str::ltrim( (*line).substr(startPos, width-indent.length()) ) << endl;
-          endPos = startPos + width - indent.length();
-          textSize = mbs_width( (*line).substr( endPos ) );
-          startPos = endPos;
-        }
-      }
-    }
+    mww.writePar( text );
   }
+  mww.gotoParBegin();
 }
 
 void TableRow::dumpTo (ostream &stream, const Table & parent) const
