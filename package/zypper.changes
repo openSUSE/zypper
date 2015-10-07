@@ -1,4 +1,9 @@
 -------------------------------------------------------------------
+Thu Oct  8 01:16:08 CEST 2015 - ma@suse.de
+
+- Update zypper-po.tar.bz2
+
+-------------------------------------------------------------------
 Wed Oct  7 12:18:38 CEST 2015 - ma@suse.de
 
 - Show locked packages in summary of patch, up and dup command
