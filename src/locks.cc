@@ -56,11 +56,13 @@ namespace
 	{
 	  // return zypp::sat::compareByNVRA( lhs, rhs );
 	  // do N(<) A(>) VR(>)
-	  int res = compareByN( lhs, rhs );		// ascending  l<r
+	  int res = compareByN( lhs, rhs );			// ascending  l<r
 	  if ( res == 0 )
 	    res = rhs.arch().compare( lhs.arch() );		// descending r<l
 	  if ( res == 0 )
 	    res = rhs.edition().compare( lhs.edition() );	// descending r<l
+	  if ( res == 0 )
+	    res = lhs.repository().asUserString().compare( rhs.repository().asUserString() );	// ascending  l<r
 	  return res;
 	}
       };
@@ -76,7 +78,7 @@ namespace
       {
 	//names.clear();
 	for ( const auto & solv : i )
-	{ names.push_back( solv.asString() ); }
+	{ names.push_back( solv.asUserString() ); }
 	// translators: property name; short; used like "Name: value"
 	p.add( _("Keep installed"), names );
       }
@@ -84,7 +86,7 @@ namespace
       {
 	names.clear();
 	for ( const auto & solv : a )
-	{ names.push_back( solv.asString() ); }
+	{ names.push_back( solv.asUserString() ); }
 	// translators: property name; short; used like "Name: value"
 	p.add( _("Do not install"), names );
       }
