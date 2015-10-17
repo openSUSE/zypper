@@ -1,4 +1,9 @@
 -------------------------------------------------------------------
+Sun Oct 18 01:14:59 CEST 2015 - ma@suse.de
+
+- Update zypper-po.tar.bz2
+
+-------------------------------------------------------------------
 Thu Oct 15 10:48:49 CEST 2015 - ma@suse.de
 
 - locks -s: show solvables repositories (bnc#949957)
