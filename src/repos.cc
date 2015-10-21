@@ -2188,9 +2188,13 @@ void modify_repo(Zypper & zypper, const string & alias)
         || changed_keeppackages || changed_gpgcheck || !name.empty())
     {
       std::string volatileNote;	// service repos changes may be volatile
+      std::string volatileNoteIfPlugin;	// plugin service repos changes may be volatile
       if (  ! repo.service().empty() )
       {
 	volatileNote = volatileTag();	// '[volatile]'
+	ServiceInfo si( manager.getService( repo.service() ) );
+	if ( si.type() == ServiceType::PLUGIN )
+	  volatileNoteIfPlugin = volatileNote;
       }
       bool didVolatileChanges = false;
 
@@ -2198,13 +2202,14 @@ void modify_repo(Zypper & zypper, const string & alias)
 
       if (chnaged_enabled)
       {
-	// the by now only persistent change for service repos.
+	if ( !volatileNoteIfPlugin.empty() ) didVolatileChanges = true;
+	// the by now only persistent change for (non plugin) service repos.
         if (repo.enabled())
           zypper.out().info(boost::str(format(
-            _("Repository '%s' has been successfully enabled.")) % alias));
+            _("Repository '%s' has been successfully enabled.")) % alias)+volatileNoteIfPlugin);
         else
           zypper.out().info(boost::str(format(
-            _("Repository '%s' has been successfully disabled.")) % alias));
+            _("Repository '%s' has been successfully disabled.")) % alias)+volatileNoteIfPlugin);
       }
 
       if (changed_autoref)
