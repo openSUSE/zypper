@@ -11,132 +11,54 @@
 
 using namespace std;
 
-namespace {
-  inline int wcwidth_without_ctrlseq(wchar_t wc, bool &in_ctrlseq)
-  {
-    // ignore the length of terminal control sequences in order
-    // to compute the length of colored text correctly
-    if (!in_ctrlseq && ::wcsncmp(&wc, L"\033", 1) == 0)
-      in_ctrlseq = true;
-    else if (in_ctrlseq && ::wcsncmp(&wc, L"m", 1) == 0)
-      in_ctrlseq = false;
-    else if (!in_ctrlseq)
-      return ::wcwidth(wc);
-    return 0;
-  }
-}
-
-// A non-ASCII string has 3 different lengths:
-// - bytes
-// - characters (non-ASCII ones have multiple bytes in UTF-8)
-// - columns (Chinese characters are 2 columns wide)
-// In #328918 see how confusing these leads to misalignment.
-
-// return the number of columns in str, or -1 if there's an error
-static
-int mbs_width_e (const string & str)
+std::string mbs_substr_by_width( boost::string_ref text_r, std::string::size_type colpos_r, std::string::size_type collen_r )
 {
-  // from smpppd.src.rpm/format.cc, thanks arvin
-
-  const char* ptr = str.c_str ();
-  size_t s_bytes = str.length ();
-  int s_cols = 0;
-  bool in_ctrlseq = false;
-
-  mbstate_t shift_state;
-  memset (&shift_state, 0, sizeof (shift_state));
-
-  wchar_t wc;
-  size_t c_bytes;
-
-  // mbrtowc produces one wide character from a multibyte string
-  while ((c_bytes = mbrtowc (&wc, ptr, s_bytes, &shift_state)) > 0)
+  std::string ret;
+  if ( collen_r )
   {
-    if (c_bytes >= (size_t) -2) // incomplete (-2) or invalid (-1) sequence
-      return -1;
+    const char * spos	= nullptr;
+    size_t slen		= 0;
 
-    s_cols += wcwidth_without_ctrlseq(wc, in_ctrlseq);
-
-    s_bytes -= c_bytes;
-    ptr += c_bytes;
-  }
-
-  return s_cols;
-}
-
-unsigned mbs_width (const string& str)
-{
-  int c = mbs_width_e(str);
-  if (c < 0)
-    return str.length();        // fallback if there was an error
-  else
-    return (unsigned) c;
-}
-
-// ---------------------------------------------------------------------------
-
-std::string mbs_substr_by_width(
-    const std::string & str,
-    std::string::size_type pos,
-    std::string::size_type n)
-{
-  if (n == 0)
-    return string();
-
-  const char * ptr = str.c_str();
-  const char * sptr = NULL;
-  const char * eptr = NULL;
-  size_t s_bytes = str.length();
-  int s_cols = 0, s_cols_prev;
-  bool in_ctrlseq = false;
-
-  mbstate_t shift_state;
-  memset (&shift_state, 0, sizeof (shift_state));
-
-  wchar_t wc;
-  size_t c_bytes;
-
-  // mbrtowc produces one wide character from a multibyte string
-  while ((c_bytes = mbrtowc (&wc, ptr, s_bytes, &shift_state)) > 0)
-  {
-    if (c_bytes >= (size_t) -2) // incomplete (-2) or invalid (-1) sequence
-      return str.substr(pos, n); // default to normal string substr
-
-    s_cols_prev = s_cols;
-    s_cols += wcwidth_without_ctrlseq(wc, in_ctrlseq);
-
-    // mark the beginning
-    if (sptr == NULL && (unsigned) s_cols >= pos)
+    size_t colend = ( collen_r == std::string::npos ? std::string::npos : colpos_r+collen_r ); // will exploit npos == size_t(-1)
+    size_t pos = 0;
+    for( mbs::MbsIterator it( text_r ); ! it.atEnd(); ++it )
     {
-      // cut at the right column, include also the current character
-      if ((unsigned) s_cols_prev == pos)
-        sptr = ptr;
-      // current character cut into pieces, don't include it
-      else
-        sptr = ptr + c_bytes;
-    }
-    // mark the end
-    if (n != string::npos && (unsigned) s_cols >= pos + n)
-    {
-      // cut at the right column, include also the current character
-      if ((unsigned) s_cols == pos + n)
-        eptr = ptr + c_bytes;
-      // current character cut into pieces, don't include it
-      else
-        eptr = ptr;
-      break;
-    }
+      // collect sequences [pos,end[ in [colpos_r,colend[
+      // partial overlaps are padded
+      size_t end = pos + it.columns();
 
-    s_bytes -= c_bytes;
-    ptr += c_bytes;
+      if ( pos < colpos_r )	// starts before range
+      {
+	if ( end > colpos_r )	// pad incomplete sequence at range begin
+	  ret += std::string( std::min(end,colend)-colpos_r, ' ' );
+      }
+      else 			// starts inside range (pos < colend by the way we loop)
+      {
+	if ( end <= colend )	// completely inside
+	{
+	  if ( !spos )
+	    spos = it.pos();
+	  slen += it.size();
+	}
+	else			// partial outside
+	{
+	  if ( spos )
+	  {
+	    ret += std::string( spos, slen );
+	    spos = nullptr;
+	    slen = 0;		// don't collect it after loop
+	  }
+	  ret += std::string( colend-pos, ' ' );
+	  break;		// done
+	}
+      }
+
+      if ( end >= colend )
+	break;
+      pos = end;
+    }
+    if ( spos )
+      ret += std::string( spos, slen );
   }
-
-  if (eptr == NULL)
-    eptr = ptr;
-
-  if (eptr == sptr)
-    return string();
-  return string(sptr, eptr - sptr);
+  return ret;
 }
-
-// ---------------------------------------------------------------------------

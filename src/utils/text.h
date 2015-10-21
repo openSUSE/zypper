@@ -24,7 +24,14 @@ namespace mbs
 #define ZYPPER_TRACE_MBS 0
   ///////////////////////////////////////////////////////////////////
   /// \class MbsIterator
-  /// \brief Iterate over chars and ANSI SGR in a multi-byte character string
+  /// \brief Iterate chars and ANSI SGR in a multi-byte character string
+  ///
+  /// The iterator offers (\ref pos, \ref size) of the current \c wchar
+  /// within the original \a text_r. Also the number of \ref columns the
+  /// current \c wchar occupies on the screen.
+  ///
+  /// \note: The iterator contents fakes all WS to either '\n' or ' '.
+  /// \note: \ref isCH includes SGR sequences
   ///////////////////////////////////////////////////////////////////
   struct MbsIterator
   {
@@ -36,7 +43,7 @@ namespace mbs
     , _wc( L'\0' )
     { memset( &_mbstate, 0, sizeof(_mbstate) ); operator++(); }
 
-    /** Use with care; all WS are  faked to either '\n' or ' ' */
+    /** Use with care; all WS are faked to either '\n' or ' ' */
     wchar_t & operator*()		{ return _wc; }
     const wchar_t & operator*() const	{ return _wc; }
 
@@ -506,23 +513,27 @@ namespace mbs
  * \param wrap      number of columns the text should be wrapped into
  * \param indentFix additional indent/outdent for the first line (default: \c 0)
  */
-inline void mbs_write_wrapped( std::ostream & out, const std::string & text_r, size_t indent_r, size_t wrap_r, int indentFix_r = 0 )
+inline void mbs_write_wrapped( std::ostream & out, boost::string_ref text_r, size_t indent_r, size_t wrap_r, int indentFix_r = 0 )
 {
   mbs::MbsWriteWrapped mww( out, indent_r, wrap_r, indentFix_r );
   mww.addString( text_r );
 }
 
-/** Returns the column width of a multi-byte character string \a str */
-unsigned mbs_width (const std::string & str);
+/** Returns the column width of a multi-byte character string \a text_r */
+inline size_t mbs_width( boost::string_ref text_r )
+{
+  size_t ret = 0;
+  for( mbs::MbsIterator it( text_r ); ! it.atEnd(); ++it )
+    ret += it.columns();
+  return ret;
+}
 
 /**
- * Returns a substring of a multi-byte character string \a str starting
- * at screen column \a pos and being \a n columns wide, as far as possible
- * according to the multi-column characters found in \a str.
+ * Returns a substring of a multi-byte character string \a text_r starting
+ * at screen column \a cpos_r and being at most \a clen_r columns wide.
+ * The string is ' ' padded if multicolumn characters are clipped at start
+ * or end.
  */
-std::string mbs_substr_by_width(
-    const std::string & str,
-    std::string::size_type pos,
-    std::string::size_type n = std::string::npos);
+std::string mbs_substr_by_width( boost::string_ref text_r, std::string::size_type colpos_r = 0, std::string::size_type collen_r = std::string::npos );
 
 #endif /* ZYPPER_UTILS_TEXT_H_ */
