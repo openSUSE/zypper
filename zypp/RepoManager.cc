@@ -2247,6 +2247,27 @@ namespace zypp
           oldRepoModified = true;
         }
 
+        // changed gpg check settings?
+	// ATM only plugin services can set GPG values.
+	if ( service.type() == ServiceType::PLUGIN )
+	{
+	  TriBool ogpg[3];	// Gpg RepoGpg PkgGpg
+	  TriBool ngpg[3];
+	  oldRepo->getRawGpgChecks( ogpg[0], ogpg[1], ogpg[2] );
+	  it->     getRawGpgChecks( ngpg[0], ngpg[1], ngpg[2] );
+#define Z_CHKGPG(I,N)										\
+	  if ( ! sameTriboolState( ogpg[I], ngpg[I] ) )						\
+	  {											\
+	    DBG << "Service repo " << it->alias() << " gets new "#N"Check " << ngpg[I] << endl;	\
+	    oldRepo->set##N##Check( ngpg[I] );							\
+	    oldRepoModified = true;								\
+	  }
+	  Z_CHKGPG( 0, Gpg );
+	  Z_CHKGPG( 1, RepoGpg );
+	  Z_CHKGPG( 2, PkgGpg );
+#undef Z_CHKGPG
+	}
+
         // save if modified:
         if ( oldRepoModified )
         {

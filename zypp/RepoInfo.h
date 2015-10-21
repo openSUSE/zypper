@@ -425,6 +425,10 @@ namespace zypp
 
       class Impl;
     private:
+      friend class RepoManager;
+      /** Raw values for RepoManager */
+      void getRawGpgChecks( TriBool & g_r, TriBool & r_r, TriBool & p_r ) const;
+
       /** Pointer to implementation */
       RWCOW_pointer<Impl> _pimpl;
   };

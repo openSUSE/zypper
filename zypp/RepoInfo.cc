@@ -294,6 +294,12 @@ namespace zypp
   void RepoInfo::setPkgGpgCheck( TriBool value_r )
   { _pimpl->_pkgGpgCheck = value_r; }
 
+  void RepoInfo::getRawGpgChecks( TriBool & g_r, TriBool & r_r, TriBool & p_r ) const
+  {
+    g_r = _pimpl->_gpgCheck;
+    r_r = _pimpl->_repoGpgCheck;
+    p_r = _pimpl->_pkgGpgCheck;
+  }
 
   TriBool RepoInfo::validRepoSignature() const
   {
