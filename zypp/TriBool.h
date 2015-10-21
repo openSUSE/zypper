@@ -65,6 +65,10 @@ namespace boost
       /** \relates TriBool stream output */
       inline std::ostream & operator<<(std::ostream & s, const tribool & obj)
       { return s << zypp::asString( obj ); }
+
+      /** \relates TriBool whether 2 tribool have the same state (this is NOT ==) */
+      inline bool sameTriboolState( tribool lhs, tribool rhs )
+      { return( ( indeterminate(lhs) && indeterminate(rhs) ) || ( lhs == rhs ) ); }
     }
 }
 #endif // ZYPP_TRIBOOL_H
