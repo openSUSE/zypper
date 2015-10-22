@@ -1,4 +1,14 @@
 -------------------------------------------------------------------
+Thu Oct 22 12:24:00 CEST 2015 - ma@suse.de
+
+- Use a uniform translation set for SLE and openSUSE (bnc#948924)
+- Issue 'volatile change' warning when modifying a plugin service
+  repo (bnc#951339)
+- Fix missaligned output due to changed mbrtowc return value in
+  glibc-2.22 (bnc#950869)
+- version 1.12.23
+
+-------------------------------------------------------------------
 Sun Oct 18 01:14:05 CEST 2015 - ma@suse.de
 
 - Update zypper-po.tar.bz2
