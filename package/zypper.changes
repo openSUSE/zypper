@@ -1,4 +1,11 @@
 -------------------------------------------------------------------
+Thu Oct 22 10:25:38 CEST 2015 - ma@suse.de
+
+- Issue 'volatile change' warning when modifying a plugin
+  service repo (bnc#951339)
+- version 1.11.42
+
+-------------------------------------------------------------------
 Sun Oct 18 01:14:59 CEST 2015 - ma@suse.de
 
 - Update zypper-po.tar.bz2
