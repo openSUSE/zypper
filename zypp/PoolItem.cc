@@ -158,6 +158,11 @@ namespace zypp
     PoolItem myBuddy( solv_r );
     if ( myBuddy )
     {
+      if ( myBuddy._pimpl->_buddy )
+      {
+	ERR <<  *this << " would be buddy2 in " << myBuddy << endl;
+	return;
+      }
       myBuddy._pimpl->_buddy = -resolvable()->satSolvable().id();
       _buddy = myBuddy.satSolvable().id();
       DBG << *this << " has buddy " << myBuddy << endl;

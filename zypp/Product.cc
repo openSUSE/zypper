@@ -79,20 +79,29 @@ namespace zypp
     // Look for a  provider of 'product(name) = version' of same
     // architecture and within the same repo.
     //
-    // bnc #497696: Update repos may have multiple release package versions
-    // providing the same product. As a workaround we link to the one with
-    // the highest version.
+    // Code12: Update repos may have multiple release package versions
+    // providing the same product. Prefer the one matching the buildtime,
+    // as the product buildtime is derived from the -release package.
     Capability identCap( str::form( "product(%s) = %s", name().c_str(), edition().c_str() ) );
 
     sat::Solvable found;
+    bool foundBuildTime = false;
     sat::WhatProvides providers( identCap );
     for_( it, providers.begin(), providers.end() )
     {
-      if ( it->repository() == repository()
-           && it->arch() == arch() )
+      if ( it->repository() == repository() && it->arch() == arch() )
       {
-        if ( ! found || found.edition() < it->edition() )
-          found = *it;
+	bool fitsBuildtime = ( it->buildtime() == buildtime() );
+	if ( found )
+	{
+	  bool lowerEdition = ( it->edition() <= found.edition() );
+	  if ( (  foundBuildTime && ( !fitsBuildtime || lowerEdition ) )
+	    || ( !foundBuildTime && ( !fitsBuildtime && lowerEdition ) ) )
+	    continue;
+	}
+	found = *it;
+	if ( fitsBuildtime )
+	  foundBuildTime = true;
       }
     }
 
