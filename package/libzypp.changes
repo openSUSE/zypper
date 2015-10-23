@@ -1,4 +1,10 @@
 -------------------------------------------------------------------
+Fri Oct 23 17:10:18 CEST 2015 - ma@suse.de
+
+- Fix broken product: <-> -release package relation (bnc#951782)
+- version 15.19.5 (19)
+
+-------------------------------------------------------------------
 Thu Oct 22 12:23:29 CEST 2015 - ma@suse.de
 
 - Use a uniform translation set for SLE and openSUSE (bnc#948924)
