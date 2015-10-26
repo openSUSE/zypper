@@ -674,7 +674,7 @@ Query Commands
 	*--match-words*::
 		Matches for search strings may only be whole words.
 
-	*--match-exact*::
+	*-x*, *--match-exact*::
 		Searches for an exact name of the package.
 
 	*--provides*::
