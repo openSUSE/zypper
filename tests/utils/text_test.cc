@@ -54,7 +54,7 @@ BOOST_AUTO_TEST_CASE(mbs_iterator)
   BOOST_CHECK_EQUAL( s.size(),		27 );
   BOOST_CHECK_EQUAL( mbs_width(s),	7 );
 
-  mbs::MbsIterator it( cs.str() );
+  mbs::MbsIterator it( s );
   BOOST_CHECK_EQUAL( *it,		L'\033' );
   BOOST_CHECK_EQUAL( it.size(),		14 );
   BOOST_CHECK_EQUAL( it.columns(),	0 );
