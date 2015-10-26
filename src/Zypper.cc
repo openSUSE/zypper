@@ -2212,7 +2212,7 @@ void Zypper::processCommandOptions()
       {"uninstalled-only", no_argument, 0, 'u'},
       {"match-substrings", no_argument, 0, 0},
       {"match-words", no_argument, 0, 0},
-      {"match-exact", no_argument, 0, 0},
+      {"match-exact", no_argument, 0, 'x'},
       {"provides", no_argument, 0, 0},
       {"requires", no_argument, 0, 0},
       {"recommends", no_argument, 0, 0},
@@ -2245,7 +2245,7 @@ void Zypper::processCommandOptions()
       "  Command options:\n"
       "    --match-substrings     Search for a match to partial words (default).\n"
       "    --match-words          Search for a match to whole words only.\n"
-      "    --match-exact          Searches for an exact match of the search strings.\n"
+      "-x, --match-exact          Searches for an exact match of the search strings.\n"
       "    --provides             Search for packages which provide the search strings.\n"
       "    --recommends           Search for packages which recommend the search strings.\n"
       "    --requires             Search for packages which require the search strings.\n"
