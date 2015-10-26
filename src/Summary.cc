@@ -1212,9 +1212,6 @@ void Summary::writeLocked(std::ostream & out)
       // translators: used as 'tag:' (i.e. followed by ':')
       out << " " << _("Available") << ':' << endl;
       wroteAll &= writeResolvableList( out, avidents, ColorContext::HIGHLIGHT, 100, /*withKind*/true );
-
-      // translators: %1% is a zypper command line
-      N_("Run '%1%' to see the complete list of locked items.");
     }
     if ( ! instlocks.empty() )
     {
