@@ -346,6 +346,20 @@ namespace zypp
     inline std::string octstring( unsigned long long n, int w = 0 ) { return form( "%#0*llo",  w, n ); }
     //@}
 
+
+    ///////////////////////////////////////////////////////////////////
+    /** String representation of number as bit-string with leading '0's. */
+    template <typename TInt>
+    std::string binstring( TInt val_r )
+    {
+      constexpr unsigned bits = sizeof(TInt)*8;
+      std::string ret( bits, ' ' );
+      TInt bit = 1;
+      for ( unsigned pos = bits; pos > 0; )
+      { --pos; ret[pos] = ((val_r & bit)?'1':'0'); bit = bit<<1; }
+      return ret;
+    }
+    
     ///////////////////////////////////////////////////////////////////
     /** Parsing numbers from string.
     */
