@@ -70,6 +70,27 @@ void safe_lexical_cast (Source s, Target &tr) {
   }
 }
 
+long long parse_priority(Zypper & zypper) {
+  long long prio = 0;
+  parsed_opts::const_iterator tmp1;
+  if ((tmp1 = zypper.cOpts().find("priority")) != zypper.cOpts().end())
+  {
+    //! \todo use some preset priorities (high, medium, low, ...)
+
+    string prio_str = *tmp1->second.begin();
+    safe_lexical_cast(prio_str, prio); // try to make an int out of the string
+    if (prio < 1)
+    {
+      zypper.out().error(boost::str(format(
+        _("Invalid priority '%s'. Use a positive integer number. The greater the number, the lower the priority."))
+        % prio_str));
+      zypper.setExitCode(ZYPPER_EXIT_ERR_INVALID_ARGS);
+    }
+  }
+
+  return prio;
+}
+
 // | Enabled | GPG Check |  Colored strings for enabled and GPG Check status
 // +---------+-----------+
 // | Yes     | (  ) No   |
@@ -1726,6 +1747,8 @@ void add_repo(Zypper & zypper, RepoInfo & repo)
     // translators: property name; short; used like "Name: value"
     p.add( _("GPG Check"), 	repo.gpgCheck() ).paint( ColorContext::MSG_WARNING, repo.gpgCheck() == false );
     // translators: property name; short; used like "Name: value"
+    p.add( _("Priority"),		repo.priority() );
+    // translators: property name; short; used like "Name: value"
     p.add( _("URI"),		repo.baseUrlsBegin(), repo.baseUrlsEnd() );
     s << p;
   }
@@ -1781,6 +1804,11 @@ void add_repo_by_url( Zypper & zypper,
   if (it != zypper.cOpts().end())
     repo.setName(it->second.front());
   repo.addBaseUrl(url);
+
+  long long prio = parse_priority(zypper);
+  if (prio > 1) {
+    repo.setPriority(prio);
+  }
 
   // enable the repo by default
   if ( indeterminate(enabled) )
@@ -1882,6 +1910,11 @@ void add_repo_from_file( Zypper & zypper,
 
     if ( !indeterminate(gpgCheck) )
       repo.setGpgCheck(gpgCheck);
+
+    long long prio = parse_priority(zypper);
+    if (prio > 1) {
+      repo.setPriority(prio);
+    }
 
     MIL << "to-be-added: enabled: " << repo.enabled() << " autorefresh: " << repo.autorefresh() << endl;
 
@@ -2096,23 +2129,8 @@ void modify_repo(Zypper & zypper, const string & alias)
       repo.setGpgCheck(gpgCheck);
     }
 
-    long long prio = 0;
-    parsed_opts::const_iterator tmp1;
-    if ((tmp1 = zypper.cOpts().find("priority")) != zypper.cOpts().end())
-    {
-      //! \todo use some preset priorities (high, medium, low, ...)
-
-      string prio_str = *tmp1->second.begin();
-      safe_lexical_cast(prio_str, prio); // try to make an int out of the string
-      if (prio < 1)
-      {
-        zypper.out().error(boost::str(format(
-          _("Invalid priority '%s'. Use a positive integer number. The greater the number, the lower the priority."))
-          % prio_str));
-        zypper.setExitCode(ZYPPER_EXIT_ERR_INVALID_ARGS);
-        return;
-      }
-
+    long long prio = parse_priority(zypper);
+    if (prio >= 1) {
       if (prio == (int) repo.priority())
         zypper.out().info(boost::str(format(
           _("Repository '%s' priority has been left unchanged (%d)"))
@@ -2125,6 +2143,7 @@ void modify_repo(Zypper & zypper, const string & alias)
     }
 
     string name;
+    parsed_opts::const_iterator tmp1;
     if ((tmp1 = zypper.cOpts().find("name")) != zypper.cOpts().end())
     {
       name = *tmp1->second.begin();
