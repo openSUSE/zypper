@@ -85,6 +85,10 @@ namespace zypp
        */
       static unsigned defaultPriority();
       /**
+       * The least priority (<tt>unsigned(-1)</tt>). 
+       */
+      static unsigned noPriority();
+      /**
        * Repository priority for solver.
        * Some number between \c 1 (highest priority) and \c 99 (\ref defaultPriority).
        */

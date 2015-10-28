@@ -58,6 +58,7 @@ namespace zypp
 
   public:
     static const unsigned defaultPriority = 99;
+    static const unsigned noPriority = unsigned(-1);
 
     void setProbedType( const repo::RepoType & t ) const
     {
@@ -257,6 +258,9 @@ namespace zypp
 
   unsigned RepoInfo::defaultPriority()
   { return Impl::defaultPriority; }
+
+  unsigned RepoInfo::noPriority()
+  { return Impl::noPriority; }
 
   void RepoInfo::setPriority( unsigned newval_r )
   { _pimpl->priority = newval_r ? newval_r : Impl::defaultPriority; }
