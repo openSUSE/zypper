@@ -1694,6 +1694,7 @@ void Zypper::processCommandOptions()
       {"check", no_argument, 0, 'c'},
       {"no-check", no_argument, 0, 'C'},
       {"name", required_argument, 0, 'n'},
+      {"priority", required_argument, 0, 'p'},
       {"keep-packages", no_argument, 0, 'k'},
       {"no-keep-packages", no_argument, 0, 'K'},
       {"gpgcheck", no_argument, 0, 'g'},
@@ -1711,17 +1712,18 @@ void Zypper::processCommandOptions()
       " or can be read from specified .repo file (even remote).\n"
       "\n"
       "  Command options:\n"
-      "-r, --repo <file.repo>  Just another means to specify a .repo file to read.\n"
-      "-t, --type <type>       Type of repository (%s).\n"
-      "-d, --disable           Add the repository as disabled.\n"
-      "-c, --check             Probe URI.\n"
-      "-C, --no-check          Don't probe URI, probe later during refresh.\n"
-      "-n, --name <name>       Specify descriptive name for the repository.\n"
-      "-k, --keep-packages     Enable RPM files caching.\n"
-      "-K, --no-keep-packages  Disable RPM files caching.\n"
-      "-g, --gpgcheck          Enable GPG check for this repository.\n"
-      "-G, --no-gpgcheck       Disable GPG check for this repository.\n"
-      "-f, --refresh           Enable autorefresh of the repository.\n"
+      "-r, --repo <file.repo>    Just another means to specify a .repo file to read.\n"
+      "-t, --type <type>         Type of repository (%s).\n"
+      "-d, --disable             Add the repository as disabled.\n"
+      "-c, --check               Probe URI.\n"
+      "-C, --no-check            Don't probe URI, probe later during refresh.\n"
+      "-n, --name <name>         Specify descriptive name for the repository.\n"
+      "-p, --priority <integer>  Set priority of the repository.\n"
+      "-k, --keep-packages       Enable RPM files caching.\n"
+      "-K, --no-keep-packages    Disable RPM files caching.\n"
+      "-g, --gpgcheck            Enable GPG check for this repository.\n"
+      "-G, --no-gpgcheck         Disable GPG check for this repository.\n"
+      "-f, --refresh             Enable autorefresh of the repository.\n"
     ), "yast2, rpm-md, plaindir");
     break;
   }
