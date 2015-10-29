@@ -22,6 +22,50 @@ using std::endl;
 namespace mbs
 {
 #define ZYPPER_TRACE_MBS 0
+
+  struct MbToWc
+  {
+    static const char _oooooooo = 0000;
+    static const char _Xooooooo = 0200;
+    static const char _XXoooooo = 0300;
+    static const char _XXXooooo = 0340;
+    static const char _XXXXoooo = 0360;
+    static const char _XXXXXooo = 0370;
+    static const char _ooXXXXXX = 0077;
+
+    MbToWc( char ch )
+    : _wc( ch )
+    , _cont( -1 )
+    {
+      if      ( (_wc & _XXXooooo) == _XXoooooo )	// '110xxxxx'
+      { _wc &= ~_XXXooooo; _cont = 1; }
+      else if ( (_wc & _XXXXoooo) == _XXXooooo )	// '1110xxxx'
+      { _wc &= ~_XXXXoooo; _cont = 2; }
+      else if ( (_wc & _XXXXXooo) == _XXXXoooo )	// '11110xxx'
+      { _wc &= ~_XXXXXooo; _cont = 3; }
+      else if ( (_wc & _Xooooooo) == _oooooooo )	// '0xxxxxxx'
+      { _cont = 0; }
+      else						// something broken
+      { _wc = L'?'; }
+    }
+
+    bool add( char ch ) // return whether ch is a continuation char
+    {
+      if ( (ch & _XXoooooo) == _Xooooooo )	// '10xxxxxx'
+      {
+	if ( _cont > 0 )
+	{ _wc = (_wc<<6)+(ch & _ooXXXXXX); --_cont; }
+	return true;
+      }
+      if ( _cont > 0 )				// error, else ignore excess chars
+      { _wc = L'?'; _cont = -1; }
+      return false;
+    }
+
+    wchar_t _wc;
+    char _cont;
+  };
+
   ///////////////////////////////////////////////////////////////////
   /// \class MbsIterator
   /// \brief Iterate chars and ANSI SGR in a multi-byte character string
@@ -40,6 +84,7 @@ namespace mbs
     , _tpos( _text.data() )
     , _trest( _text.size() )
     , _tread( 0 )
+    , _cols( size_t(-1) )
     , _wc( L'\0' )
     { memset( &_mbstate, 0, sizeof(_mbstate) ); operator++(); }
 
@@ -49,7 +94,21 @@ namespace mbs
 
     const char * pos() const		{ return _tpos; }
     size_t       size() const		{ return _tread; }
-    size_t       columns() const	{ size_t ret = ::wcwidth(_wc); if ( ret == size_t(-1) ) ret = 0; return ret; }
+    size_t       columns() const
+    {
+      if ( _cols == size_t(-1) )
+      {
+	if ( _wc < L' ' )
+	  _cols = 0;	// CTRLs
+	else
+	{
+	  _cols = ::wcwidth( _wc );
+	  if ( _cols == size_t(-1) )
+	    _cols = 1;	// -1 due to LC_CTYPE?
+	}
+      }
+      return _cols;
+    }
 
     boost::string_ref ref() const	{ return boost::string_ref( _tpos, _tread ); }
 
@@ -65,13 +124,26 @@ namespace mbs
 	_tpos += _tread;
 	_trest -= _tread;
 	_tread = ::mbrtowc( &_wc, _tpos, _trest, &_mbstate );
+	_cols = size_t(-1);
+
+	if ( _tread >= (size_t)-2 )
+	{
+	  // common case is -1 due to LC_CTYPE
+	  // skip this and continue with next mb
+	  memset( &_mbstate, 0, sizeof(_mbstate) );
+	  _tread = 1;
+	  MbToWc c( *_tpos );
+	  while ( c.add( *(_tpos+_tread) ) )
+	    _tread += 1;
+	  _wc = c._wc;
+	}
 
 	switch ( _tread )
 	{
-	  case (size_t)-2:
-	  case (size_t)-1:
-	    _tread = 0;
-	    // fall through
+// 	  case (size_t)-2:
+// 	  case (size_t)-1:
+// 	    _tread = 0;
+// 	    // fall through
 	  case 0:
 	    _trest = 0;	// atEnd
 	    _wc = L'\0';
@@ -120,6 +192,7 @@ namespace mbs
     const char *	_tpos;	// start of last ::mbrtowc
     size_t		_trest;	// _tpos to end of string
     size_t		_tread;	// consumed in last ::mbrtowc
+    mutable size_t	_cols;	// number of columns occupied on screen
 
     wchar_t		_wc;	// result of last ::mbrtowc
     mbstate_t		_mbstate;
