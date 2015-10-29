@@ -2,12 +2,12 @@
 .\"     Title: zypper
 .\"    Author: [see the "AUTHORS" section]
 .\" Generator: DocBook XSL Stylesheets v1.78.1 <http://docbook.sf.net/>
-.\"      Date: 10/26/2015
+.\"      Date: 10/29/2015
 .\"    Manual: ZYPPER
 .\"    Source: SUSE Linux
 .\"  Language: English
 .\"
-.TH "ZYPPER" "8" "10/26/2015" "SUSE Linux" "ZYPPER"
+.TH "ZYPPER" "8" "10/29/2015" "SUSE Linux" "ZYPPER"
 .\" -----------------------------------------------------------------
 .\" * Define some portability stuff
 .\" -----------------------------------------------------------------
@@ -1928,14 +1928,23 @@ Add the repository as disabled\&. Repositories are added as enabled by default\&
 Probe given URI\&.
 .RE
 .PP
-\fB\-C\fR, \fB\-\-nocheck\fR
+\fB\-C\fR, \fB\-\-no\-check\fR
 .RS 4
 Don\(cqt probe URI, probe later during refresh\&.
 .RE
 .PP
-\fB\-n\fR, \fB\-\-name\fR
+\fB\-n\fR, \fB\-\-name\fR \fIname\fR
 .RS 4
 Specify descriptive name for the repository\&.
+.RE
+.PP
+\fB\-p\fR, \fB\-\-priority\fR \fIpositive\-integer\fR
+.RS 4
+Set the priority of the repository\&. Priority of
+\fB1\fR
+is the highest, the higher the number the lower the priority\&.
+\fB\-p 0\fR
+will set the priority back to the default (\fB99\fR)\&. Packages from repositories with higher priority will be preferred even in case there is a higher installable version available in the repository with a lower priority\&.
 .RE
 .PP
 \fB\-k\fR, \fB\-\-keep\-packages\fR
@@ -1946,6 +1955,16 @@ Enable RPM files caching for the repository\&.
 \fB\-K\fR, \fB\-\-no\-keep\-packages\fR
 .RS 4
 Disable RPM files caching\&.
+.RE
+.PP
+\fB\-g\fR, \fB\-\-gpgcheck\fR
+.RS 4
+Enable GPG check for this repository\&.
+.RE
+.PP
+\fB\-G\fR, \fB\-\-no\-gpgcheck\fR
+.RS 4
+Disable GPG check for this repository\&.
 .RE
 .PP
 \fB\-f\fR, \fB\-\-refresh\fR
@@ -2140,14 +2159,18 @@ Enable auto\-refresh for the repository\&.
 Disable auto\-refresh for the repository\&.
 .RE
 .PP
-\fB\-p\fR, \fB\-\-priority\fR \fIpositive\-integer\fR
-.RS 4
-Set priority of the repository\&. Priority of 1 is the highest, the higher the number the lower the priority\&. Default priority is 99\&. Packages from repositories with higher priority will be preferred even in case there is a higher installable version available in the repository with a lower priority\&.
-.RE
-.PP
 \fB\-n\fR, \fB\-\-name\fR
 .RS 4
 Set a descriptive name for the repository\&.
+.RE
+.PP
+\fB\-p\fR, \fB\-\-priority\fR \fIpositive\-integer\fR
+.RS 4
+Set the priority of the repository\&. Priority of
+\fB1\fR
+is the highest, the higher the number the lower the priority\&.
+\fB\-p 0\fR
+will set the priority back to the default (\fB99\fR)\&. Packages from repositories with higher priority will be preferred even in case there is a higher installable version available in the repository with a lower priority\&.
 .RE
 .PP
 \fB\-k\fR, \fB\-\-keep\-packages\fR
@@ -2158,6 +2181,16 @@ Enable RPM files caching\&.
 \fB\-K\fR, \fB\-\-no\-keep\-packages\fR
 .RS 4
 Disable RPM files caching\&.
+.RE
+.PP
+\fB\-g\fR, \fB\-\-gpgcheck\fR
+.RS 4
+Enable GPG check for this repository\&.
+.RE
+.PP
+\fB\-G\fR, \fB\-\-no\-gpgcheck\fR
+.RS 4
+Disable GPG check for this repository\&.
 .RE
 .PP
 \fB\-a\fR, \fB\-\-all\fR

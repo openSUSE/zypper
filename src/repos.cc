@@ -70,17 +70,19 @@ void safe_lexical_cast (Source s, Target &tr) {
   }
 }
 
-unsigned parse_priority(Zypper & zypper) {
+unsigned parse_priority(Zypper & zypper)
+{
   //! \todo use some preset priorities (high, medium, low, ...)
+  unsigned ret = 0U;
   parsed_opts::const_iterator cArg = zypper.cOpts().find("priority");
   if ( cArg == zypper.cOpts().end() )
-    return 0U;     // 0: no --priority arg
+    return ret;     // 0: no --priority arg
 
   int prio = -1;
   std::string prio_str = *cArg->second.begin();
   safe_lexical_cast(prio_str, prio); // try to make an int out of the string
 
-  if ( prio < 1 )
+  if ( prio < 0 )
   {
     zypper.out().error(boost::str(format(
       _("Invalid priority '%s'. Use a positive integer number. The greater the number, the lower the priority."))
@@ -89,7 +91,8 @@ unsigned parse_priority(Zypper & zypper) {
     ZYPP_THROW(ExitRequestException("Invalid priority."));
   }
 
-  return unsigned(prio);
+  ret = ( prio ? unsigned(prio) : RepoInfo::defaultPriority() );
+  return ret;
 }
 
 // | Enabled | GPG Check |  Colored strings for enabled and GPG Check status
@@ -1843,6 +1846,8 @@ void add_repo_from_file( Zypper & zypper,
     return;
   }
 
+  unsigned prio = parse_priority(zypper);
+
   list<RepoInfo> repos;
 
   // read the repo file
@@ -1875,8 +1880,6 @@ void add_repo_from_file( Zypper & zypper,
     zypper.setExitCode(ZYPPER_EXIT_ERR_ZYPP);
     return;
   }
-
-  unsigned prio = parse_priority(zypper);
 
   // add repos
   for (list<RepoInfo>::const_iterator it = repos.begin();

@@ -956,17 +956,26 @@ Supported URI formats:
 	*-c*, *--check*::
 		Probe given URI.
 
-	*-C*, *--nocheck*::
+	*-C*, *--no-check*::
 		Don't probe URI, probe later during refresh.
 
-	*-n*, *--name*::
+	*-n*, *--name* 'name'::
 		Specify descriptive name for the repository.
+
+	*-p*, *--priority* 'positive-integer'::
+		Set the priority of the repository. Priority of *1* is the highest, the higher the number the lower the priority. *-p 0* will set the priority back to the default (*99*). Packages from repositories with higher priority will be preferred even in case there is a higher installable version available in the repository with a lower priority.
 
 	*-k*, *--keep-packages*::
 		Enable RPM files caching for the repository.
 
 	*-K*, *--no-keep-packages*::
 		Disable RPM files caching.
+
+	*-g*, *--gpgcheck*::
+		Enable GPG check for this repository.
+
+	*-G*, *--no-gpgcheck*::
+		Disable GPG check for this repository.
 
 	*-f*, *--refresh*::
 		Enable autorefresh of the repository. The autorefresh is disabled by default when adding new repositories.
@@ -1075,17 +1084,23 @@ Supported URI formats:
 	*-R*, *--no-refresh*::
 		Disable auto-refresh for the repository.
 
-	*-p*, *--priority* 'positive-integer'::
-		Set priority of the repository. Priority of 1 is the highest, the higher the number the lower the priority. Default priority is 99. Packages from repositories with higher priority will be preferred even in case there is a higher installable version available in the repository with a lower priority.
-
 	*-n*, *--name*::
 		Set a descriptive name for the repository.
+
+	*-p*, *--priority* 'positive-integer'::
+		Set the priority of the repository. Priority of *1* is the highest, the higher the number the lower the priority. *-p 0* will set the priority back to the default (*99*). Packages from repositories with higher priority will be preferred even in case there is a higher installable version available in the repository with a lower priority.
 
 	*-k*, *--keep-packages*::
 		Enable RPM files caching.
 
 	*-K*, *--no-keep-packages*::
 		Disable RPM files caching.
+
+	*-g*, *--gpgcheck*::
+		Enable GPG check for this repository.
+
+	*-G*, *--no-gpgcheck*::
+		Disable GPG check for this repository.
 
 	*-a*, *--all*::
 		Apply changes to all repositories.
