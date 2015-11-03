@@ -2768,7 +2768,7 @@ void Zypper::processCommandOptions()
     .option( "-s, --short",	// translators: -s, --short
 	     _("Create a short table not showing the deleted files. Given twice, show only processes which are associated with a system service. Given three times, list the associated system service names only.") )
     .option( "--print <format>",	// translators: --print <format>
-	     _("For each associated system service print <format> on the standard output, followed by a newline. Any '%s' directive in <format> is replaced by the the system service name.") )
+	     _("For each associated system service print <format> on the standard output, followed by a newline. Any '%s' directive in <format> is replaced by the system service name.") )
     ;
     break;
   }
