@@ -4816,11 +4816,35 @@ void Zypper::doCommand()
 
     if (!copts.count("repo") && !copts.count("from")
         && repoManager().knownRepositories().size() > 1)
+    {
       out().warning(str::form(_(
         "You are about to do a distribution upgrade with all enabled"
         " repositories. Make sure these repositories are compatible before you"
         " continue. See '%s' for more information about this command."),
         "man zypper"));
+
+      // check to see if all repos have the default priority
+      bool defaultPriority = true;
+      RepoInfoList repos = repoManager().knownRepositories();
+      for ( RepoInfoList::iterator it = repos.begin(); it != repos.end(); ++it )
+      {
+        RepoInfo & nrepo( *it );
+        if ( nrepo.priority() != RepoInfo::defaultPriority() )
+        {
+          defaultPriority = false;
+          break;
+        }
+      }
+
+      if ( defaultPriority )
+      {
+        out().warning(_(
+          "All repositories have the default priority."
+          " Use \"zypper modifyrepo --priority <integer> ...\" to set priorities,"
+          " lower numbers for repositories that replace default packages and higher"
+          " for missing packages."));
+      }
+    }
 
     init_target(*this);
     init_repos(*this);
