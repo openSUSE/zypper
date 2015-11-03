@@ -1,4 +1,9 @@
 -------------------------------------------------------------------
+Tue Nov  3 10:51:43 CET 2015 - ma@suse.de
+
+- Update zypp-po.tar.bz2
+
+-------------------------------------------------------------------
 Fri Oct 23 17:10:18 CEST 2015 - ma@suse.de
 
 - Fix broken product: <-> -release package relation (bnc#951782)
