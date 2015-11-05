@@ -73,7 +73,7 @@ _zypper() {
 
 	case "$prev" in
 		"--type" | "-t")
-			opts=(package patch pattern product)
+			opts=(package patch pattern product srcpackage application)
 			COMPREPLY=($(compgen -W "${opts[*]}" -- ${cur}))
 			_strip
 			eval $noglob
