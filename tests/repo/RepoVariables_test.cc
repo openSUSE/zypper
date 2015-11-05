@@ -225,4 +225,12 @@ BOOST_AUTO_TEST_CASE(replace_text)
 		    "http://site.org/update/13.2/?arch=i686");
 }
 
+BOOST_AUTO_TEST_CASE(uncached)
+{
+  ::setenv( "ZYPP_REPO_RELEASEVER", "13.2", 1 );
+  repo::RepoVariablesStringReplacer replacer1;
+  BOOST_CHECK_EQUAL( replacer1("${releasever}"),	"13.2" );
+  ::setenv( "ZYPP_REPO_RELEASEVER", "13.3", 1 );
+  BOOST_CHECK_EQUAL( replacer1("${releasever}"),	"13.3" );
+}
 // vim: set ts=2 sts=2 sw=2 ai et:
