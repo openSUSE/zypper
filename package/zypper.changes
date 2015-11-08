@@ -1,4 +1,9 @@
 -------------------------------------------------------------------
+Sun Nov  8 01:13:21 CET 2015 - ma@suse.de
+
+- Update zypper-po.tar.bz2
+
+-------------------------------------------------------------------
 Fri Nov  6 11:03:59 CET 2015 - ma@suse.de
 
 - Fix #83 incomplete bash completion for --type
