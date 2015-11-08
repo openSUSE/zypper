@@ -1,4 +1,9 @@
 -------------------------------------------------------------------
+Sun Nov  8 01:13:11 CET 2015 - ma@suse.de
+
+- Update zypp-po.tar.bz2
+
+-------------------------------------------------------------------
 Fri Nov  6 11:08:46 CET 2015 - ma@suse.de
 
 - Add testcase for uncached repo-variables.
