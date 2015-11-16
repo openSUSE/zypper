@@ -12,4 +12,4 @@ SRCFILES=`find src \
                                 -o -name "*.cpp"`
 
 #calling xgettext with the sourcefiles
-xgettext -L C++ --boost --no-wrap --add-comments --add-location --keyword=_ --keyword=_:1,2 --keyword=__ --keyword=N_ --keyword=_PL:1,2 --foreign-user --copyright-holder="SuSE Linux GmbH, Nuernberg" --package-name=zypper --default-domain=zypper --output="$POTFILE" $SRCFILES
+xgettext -L C++ --boost --no-wrap --add-comments --add-location --keyword=_ --keyword=_:1,2 --keyword=__ --keyword=N_ --keyword=PL_:1,2 --foreign-user --copyright-holder="SuSE Linux GmbH, Nuernberg" --package-name=zypper --default-domain=zypper --output="$POTFILE" $SRCFILES
