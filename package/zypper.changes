@@ -1,4 +1,10 @@
 -------------------------------------------------------------------
+Mon Nov 16 12:28:14 CET 2015 - ma@suse.de
+
+- createPot: Fix plural form detection (bsc#955053)
+- version 1.12.26
+
+-------------------------------------------------------------------
 Sun Nov 15 01:14:02 CET 2015 - ma@suse.de
 
 - Update zypper-po.tar.bz2
