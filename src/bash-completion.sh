@@ -44,7 +44,7 @@ _available_packages() {
 }
 
 _zypper() {
-	ZYPPER="$(type -p zypper)"
+	ZYPPER="$(type -P zypper)"
 
 	local noglob=$(shopt -po noglob)
 	local magic_string="Command options:"
