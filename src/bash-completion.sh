@@ -25,7 +25,7 @@ _strip()
 
 _zypper() {
         ZYPPER_CMDLIST=()
-	ZYPPER="$(type -p zypper)"
+	ZYPPER="$(type -P zypper)"
 
 	local noglob=$(shopt -po noglob)
 	local magic_string="Command options:"
