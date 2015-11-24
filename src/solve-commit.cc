@@ -805,7 +805,7 @@ void solve_and_commit (Zypper & zypper)
           gData.show_media_progress_hack = false;
 	  gData.entered_commit = false;
 
-	  if ( !result.allDone() && !( copts.count("dry-run") && result.noError() ) )
+	  if ( !result.allDone() && !( ( copts.count("dry-run") || zypper.cOpts().count("download-only") ) && result.noError() ) )
 	  { zypper.setExitCode( result.attemptToModify() ? ZYPPER_EXIT_ERR_COMMIT : ZYPPER_EXIT_ERR_ZYPP ); }	// error message comes later....
 
           MIL << endl << "DONE" << endl;
