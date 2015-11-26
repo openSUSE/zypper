@@ -19,13 +19,10 @@ namespace std
   // std::container stream output
   using zypp::operator<<;
 }
-using namespace std;
 using namespace zypp;
-using namespace boost;
+typedef std::set<PoolItem> Candidates;
 
 extern ZYpp::Ptr God;
-
-typedef set<PoolItem> Candidates;
 
 static void
 find_updates( const ResKindSet & kinds, Candidates & candidates );
@@ -168,13 +165,13 @@ void patch_check ()
     }
   }
 
-  ostringstream s;
+  std::ostringstream s;
   // translators: %d is the number of needed patches
-  s << format(PL_("%d patch needed", "%d patches needed", gData.patches_count))
+  s << boost::format(PL_("%d patch needed", "%d patches needed", gData.patches_count))
       % gData.patches_count
     << " ("
     // translators: %d is the number of security patches
-    << format(PL_("%d security patch", "%d security patches", gData.security_patches_count))
+    <<  boost::format(PL_("%d security patch", "%d security patches", gData.security_patches_count))
       % gData.security_patches_count
     << ")";
   out.info(s.str(), Out::QUIET);
@@ -467,7 +464,7 @@ string i18n_kind_updates(const ResKind & kind)
   else if (kind == ResKind::product)
     return _("Product updates");
 
-  return boost::str(format("%s updates") % kind);
+  return boost::str(boost::format("%s updates") % kind);
 }
 
 // ----------------------------------------------------------------------------
