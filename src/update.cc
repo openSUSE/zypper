@@ -111,11 +111,14 @@ std::string patchHighlight( std::string && val_r )
 
 std::string interactiveFlags( const Patch & patch_r )
 {
+  static const Patch::InteractiveFlags kRestart( 0x1000 ); // artifical flag to indicate update stack patches in 'Interactive'
   std::string ret;
   Patch::InteractiveFlags flags = patch_r.interactiveFlags();
-  if (flags )
+  if ( patch_r.restartSuggested() )
+    flags |= kRestart;
+  if ( flags )
   {
-    ret = stringify( flags, { { Patch::Reboot, "reboot" }, { Patch::Message, "message" }, { Patch::License, "licence" } }, "", ",", "" );
+    ret = stringify( flags, { { Patch::Reboot, "reboot" }, { Patch::Message, "message" }, { Patch::License, "licence" }, { kRestart, ColorString( "restart", ColorContext::HIGHLIGHT ).str() } }, "", ",", "" );
   }
   else
   {
