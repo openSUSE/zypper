@@ -199,7 +199,23 @@ void patch_check ()
 }
 
 // ----------------------------------------------------------------------------
-inline const char *const patchStatusAsString( const PoolItem & pi_r )
+inline std::string i18nPatchStatusAsString( const PoolItem & pi_r )
+{
+  switch ( pi_r.status().validate() )
+  {
+    case zypp::ResStatus::BROKEN:	return pi_r.isUnwanted() ? ColorString( _("unwanted"), ColorContext::HIGHLIGHT ).str()
+								 : _("needed");	break;
+    case zypp::ResStatus::SATISFIED:	return _("applied");	break;
+    case zypp::ResStatus::NONRELEVANT:	return _("not needed");	break;
+
+    case zypp::ResStatus::UNDETERMINED:	// fall through
+    default:
+      break;
+  }
+  return _("undetermined");
+}
+
+inline const char *const xml_patchStatusAsString( const PoolItem & pi_r )
 {
   switch ( pi_r.status().validate() )
   {
@@ -223,7 +239,7 @@ static void xml_print_patch( Zypper & zypper, const PoolItem & pi )
   cout << "name=\"" << patch->name () << "\" ";
   cout << "edition=\""  << patch->edition() << "\" ";
   cout << "arch=\""  << patch->arch() << "\" ";
-  cout << "status=\""  << patchStatusAsString( pi ) << "\" ";
+  cout << "status=\""  << xml_patchStatusAsString( pi ) << "\" ";
   cout << "category=\"" <<  patch->category() << "\" ";
   cout << "severity=\"" <<  patch->severity() << "\" ";
   cout << "pkgmanager=\"" << (patch->restartSuggested() ? "true" : "false") << "\" ";
@@ -403,7 +419,7 @@ static bool list_patch_updates( Zypper & zypper )
         tr << patchHighlight(patch->category());
         tr << patchHighlight(patch->severity());
 	tr << interactiveFlags(*patch);
-        tr << (it->isBroken() ? _("needed") : _("not needed"));
+        tr << i18nPatchStatusAsString( *it );
         tr << patch->summary();
 
         if (!all && patch->restartSuggested ())
@@ -736,7 +752,7 @@ void list_patches_by_issue( Zypper & zypper )
 	  << patchHighlight(patch->category())
 	  << patchHighlight(patch->severity())
 	  << interactiveFlags(*patch)
-	  << (pi.isBroken() ? _("needed") : _("not needed")) );
+	  << i18nPatchStatusAsString( pi ) );
       }
     }
   }

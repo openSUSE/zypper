@@ -2,12 +2,12 @@
 .\"     Title: zypper
 .\"    Author: [see the "AUTHORS" section]
 .\" Generator: DocBook XSL Stylesheets v1.78.1 <http://docbook.sf.net/>
-.\"      Date: 10/29/2015
+.\"      Date: 11/27/2015
 .\"    Manual: ZYPPER
 .\"    Source: SUSE Linux
 .\"  Language: English
 .\"
-.TH "ZYPPER" "8" "10/29/2015" "SUSE Linux" "ZYPPER"
+.TH "ZYPPER" "8" "11/27/2015" "SUSE Linux" "ZYPPER"
 .\" -----------------------------------------------------------------
 .\" * Define some portability stuff
 .\" -----------------------------------------------------------------
@@ -89,7 +89,12 @@ An ordinary RPM package\&.
 \fBpatch\fR
 .RS 4
 A released patch conflicts with the affected/vulnerable versions of a collection of packages\&. As long as any of these affected/vulnerable versions are installed, the conflict triggers and the patch is classified as
-\fBneeded\fR\&. Selecting the patch, the conflict is resolved by updating all installed and affected/vulnerable packages to a version providing the fix\&. When updating the packages zypper always aims for the latest available version\&.
+\fBneeded\fR, or as
+\fBunwanted\fR
+if the patch is locked\&. Selecting the patch, the conflict is resolved by updating all installed and affected/vulnerable packages to a version providing the fix\&. When updating the packages zypper always aims for the latest available version\&. Resolved patches are classified as either
+\fBapplied\fR
+or
+\fBnot needed\fR, depending on whether they refer to actually installed packages\&.
 
 Depending on the kind of defect, patches are classified by
 \fIcategory\fR
