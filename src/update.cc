@@ -151,6 +151,7 @@ void patch_check ()
   RuntimeData & gData = Zypper::instance()->runtimeData();
   DBG << "patch check" << endl;
   gData.patches_count = gData.security_patches_count = 0;
+  unsigned lockedPatches = 0;
   bool updatestackOnly = Zypper::instance()->cOpts().count("updatestack-only");
 
   for_( it, God->pool().byKindBegin(ResKind::patch), God->pool().byKindEnd(ResKind::patch) )
@@ -158,16 +159,25 @@ void patch_check ()
     const PoolItem & pi( *it );
     if ( pi.isBroken() )
     {
-      Patch::constPtr patch( pi->asKind<Patch>() );
-      if ( !updatestackOnly || patch->restartSuggested() )
+      if ( pi.isUnwanted() )
+      { ++lockedPatches; }
+      else
       {
-	++gData.patches_count;
-	if ( patch->categoryEnum() == Patch::CAT_SECURITY )
-	  ++gData.security_patches_count;
+	Patch::constPtr patch( pi->asKind<Patch>() );
+	if ( !updatestackOnly || patch->restartSuggested() )
+	{
+	  ++gData.patches_count;
+	  if ( patch->categoryEnum() == Patch::CAT_SECURITY )
+	    ++gData.security_patches_count;
+	}
       }
     }
   }
 
+  if ( lockedPatches )
+  {
+    out.info( ColorString( (boost::format(PL_("%d patch locked", "%d patches locked", lockedPatches )) % lockedPatches).str(), ColorContext::HIGHLIGHT ).str(), Out::QUIET);
+  }
   std::ostringstream s;
   // translators: %d is the number of needed patches
   s << boost::format(PL_("%d patch needed", "%d patches needed", gData.patches_count))
