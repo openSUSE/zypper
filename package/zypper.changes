@@ -1,4 +1,15 @@
 -------------------------------------------------------------------
+Fri Nov 27 17:03:29 CET 2015 - ma@suse.de
+
+- lu/lp: fix different data returned in xml and text output (bsc#793424)
+- lp: Indicate patches requiring a restart of the package manager itself.
+  Enhance 'lp -a' Status column.
+- pchk: also report needed but locked patches
+- download: fixed claiming an error after successful run (bsc#956480)
+- Fix tab-completion if zypper is defined as an alias (bsc#955615)
+- version 1.12.27
+
+-------------------------------------------------------------------
 Thu Nov 26 01:14:06 CET 2015 - ma@suse.de
 
 - Update zypper-po.tar.bz2
