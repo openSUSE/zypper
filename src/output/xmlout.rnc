@@ -77,6 +77,7 @@ update-status-element =
   element update-status {
     attribute version {xsd:string},
     element update-list { ( patch-update | other-update )* }
+    element blocked-update-list { ( patch-update )* }?	# applicable patches waiting for a pending software stack update to be installed first
   }
 
 update-commons =
@@ -95,6 +96,8 @@ other-update =
   element update {
     update-commons,
     attribute kind { "package" | "pattern" | "product" }
+    attribute edition-old { xsd:string }?, # currently installed version in case of upgrade
+    attribute arch-old { xsd:string }?,    # currently installed architecture if arch changed
   }
 
 patch-update =

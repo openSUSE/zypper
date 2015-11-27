@@ -127,6 +127,14 @@ std::string interactiveFlags( const Patch & patch_r )
   return ret;
 }
 
+///////////////////////////////////////////////////////////////////
+namespace
+{
+  inline bool patchIsApplicable( const PoolItem & pi )	///< Default content for all patch lists: needed and not locked
+  { return( pi.isBroken() && ! pi.isUnwanted() ); }
+} //namespace
+///////////////////////////////////////////////////////////////////
+
 // ----------------------------------------------------------------------------
 //
 // Updates
@@ -207,6 +215,43 @@ inline const char *const patchStatusAsString( const PoolItem & pi_r )
   return "undetermined";
 }
 
+static void xml_print_patch( Zypper & zypper, const PoolItem & pi )
+{
+  Patch::constPtr patch = pi->asKind<Patch>();
+
+  cout << " <update ";
+  cout << "name=\"" << patch->name () << "\" ";
+  cout << "edition=\""  << patch->edition() << "\" ";
+  cout << "arch=\""  << patch->arch() << "\" ";
+  cout << "status=\""  << patchStatusAsString( pi ) << "\" ";
+  cout << "category=\"" <<  patch->category() << "\" ";
+  cout << "severity=\"" <<  patch->severity() << "\" ";
+  cout << "pkgmanager=\"" << (patch->restartSuggested() ? "true" : "false") << "\" ";
+  cout << "restart=\"" << (patch->rebootSuggested() ? "true" : "false") << "\" ";
+
+  Patch::InteractiveFlags ignoreFlags = Patch::NoFlags;
+  if (zypper.globalOpts().reboot_req_non_interactive)
+    ignoreFlags |= Patch::Reboot;
+  if ( zypper.cOpts().count("auto-agree-with-licenses") || zypper.cOpts().count("agree-to-third-party-licenses") )
+    ignoreFlags |= Patch::License;
+
+  cout << "interactive=\"" << (patch->interactiveWhenIgnoring(ignoreFlags) ? "true" : "false") << "\" ";
+  cout << "kind=\"patch\"";
+  cout << ">" << endl;
+  cout << "  <summary>" << xml::escape(patch->summary()) << "  </summary>" << endl;
+  cout << "  <description>" << xml::escape(patch->description()) << "</description>" << endl;
+  cout << "  <license>" << xml::escape(patch->licenseToConfirm()) << "</license>" << endl;
+
+  if ( !patch->repoInfo().alias().empty() )
+  {
+    cout << "  <source url=\"" << xml::escape(patch->repoInfo().url().asString());
+    cout << "\" alias=\"" << xml::escape(patch->repoInfo().alias()) << "\"/>" << endl;
+  }
+
+  cout << " </update>" << endl;
+}
+
+
 // returns true if restartSuggested() patches are availble
 static bool xml_list_patches (Zypper & zypper)
 {
@@ -218,62 +263,59 @@ static bool xml_list_patches (Zypper & zypper)
   {
     const PoolItem & pi( *it );
 
-    if ( pi.isBroken() && pi->asKind<Patch>()->restartSuggested() )
+    if ( patchIsApplicable( pi ) && pi->asKind<Patch>()->restartSuggested() )
     {
       pkg_mgr_available = true;
       break;
     }
   }
 
+  //cout << "<update-list>" << endl;		// closed here or in xml_list_patches
+
+
   unsigned patchcount = 0;
+  bool all = zypper.cOpts().count("all");
   for_( it, pool.byKindBegin(ResKind::patch), pool.byKindEnd(ResKind::patch) )
   {
-    if (zypper.cOpts().count("all") || it->isBroken())
+    if ( all || patchIsApplicable( *it ) )
     {
       const PoolItem & pi( *it );
       Patch::constPtr patch = pi->asKind<Patch>();
 
       // if updates stack patches are available, show only those
-      if ((pkg_mgr_available && patch->restartSuggested()) || !pkg_mgr_available)
+      if ( all || !pkg_mgr_available || patch->restartSuggested() )
       {
-        cout << " <update ";
-        cout << "name=\"" << pi.name () << "\" ";
-        cout << "edition=\""  << pi.edition() << "\" ";
-	cout << "arch=\""  << pi.arch() << "\" ";
-	cout << "status=\""  << patchStatusAsString( *it ) << "\" ";
-        cout << "category=\"" <<  patch->category() << "\" ";
-        cout << "severity=\"" <<  patch->severity() << "\" ";
-        cout << "pkgmanager=\"" << (patch->restartSuggested() ? "true" : "false") << "\" ";
-        cout << "restart=\"" << (patch->rebootSuggested() ? "true" : "false") << "\" ";
-
-        Patch::InteractiveFlags ignoreFlags = Patch::NoFlags;
-        if (zypper.globalOpts().reboot_req_non_interactive)
-          ignoreFlags |= Patch::Reboot;
-	if ( zypper.cOpts().count("auto-agree-with-licenses") || zypper.cOpts().count("agree-to-third-party-licenses") )
-	  ignoreFlags |= Patch::License;
-
-        cout << "interactive=\"" << (patch->interactiveWhenIgnoring(ignoreFlags) ? "true" : "false") << "\" ";
-        cout << "kind=\"patch\"";
-        cout << ">" << endl;
-        cout << "  <summary>" << xml::escape(pi.summary()) << "  </summary>" << endl;
-        cout << "  <description>" << xml::escape(pi.description()) << "</description>" << endl;
-        cout << "  <license>" << xml::escape(pi.licenseToConfirm()) << "</license>" << endl;
-
-        if ( !pi.repoInfo().alias().empty() )
-        {
-          cout << "  <source url=\"" << xml::escape(pi.repoInfo().url().asString());
-          cout << "\" alias=\"" << xml::escape(pi.repoInfo().alias()) << "\"/>" << endl;
-        }
-
-        cout << " </update>" << endl;
+	xml_print_patch( zypper, pi );
       }
-      ++patchcount;
     }
+    ++patchcount;
   }
 
   //! \todo change this from appletinfo to something general, define in xmlout.rnc
   if (patchcount == 0)
     cout << "<appletinfo status=\"no-update-repositories\"/>" << endl;
+
+
+  if ( pkg_mgr_available )
+  {
+    // close <update-list> and write <blocked-update-list> if not all
+    cout << "</update-list>" << endl;
+    if ( ! all )
+    {
+    cout << "<blocked-update-list>" << endl;
+    for_( it, pool.byKindBegin(ResKind::patch), pool.byKindEnd(ResKind::patch) )
+    {
+      if ( patchIsApplicable( *it ) )
+      {
+	const PoolItem & pi( *it );
+	Patch::constPtr patch = pi->asKind<Patch>();
+	if ( ! patch->restartSuggested() )
+	  xml_print_patch( zypper, pi );
+      }
+    }
+    cout << "</blocked-update-list>" << endl;
+    }
+  }
 
   return pkg_mgr_available;
 }
@@ -292,8 +334,19 @@ static void xml_list_updates(const ResKindSet & kinds)
     cout << "edition=\""  << pi.edition() << "\" ";
     cout << "arch=\""  << pi.arch() << "\" ";
     cout << "kind=\"" << pi.kind() << "\" ";
+    // for packages show also the current installed version (bnc #466599)
+    {
+      const PoolItem & ipi( ui::Selectable::get(pi)->installedObj() );
+      if ( ipi )
+      {
+	if ( pi.edition() != ipi.edition() )
+	  cout << "edition-old=\""  << ipi.edition() << "\" ";
+	if ( pi.arch() != ipi.arch() )
+	  cout << "arch-old=\""  << ipi.arch() << "\" ";
+      }
+    }
     cout << ">" << endl;
-    cout << "  <summary>" << xml::escape(pi.summary()) << "  </summary>" << endl;
+    cout << "  <summary>" << xml::escape(pi.summary()) << "</summary>" << endl;
     cout << "  <description>" << xml::escape(pi.description()) << "</description>" << endl;
     cout << "  <license>" << xml::escape(pi.licenseToConfirm()) << "</license>" << endl;
 
@@ -335,7 +388,7 @@ static bool list_patch_updates( Zypper & zypper )
     Patch::constPtr patch = asKind<Patch>(*it);
 
     // show only needed and wanted/unlocked (bnc #420606) patches unless --all
-    if ( all || (it->isBroken() && !it->isUnwanted()) )
+    if ( all || patchIsApplicable( *it ) )
     {
       if ( ! cliMatchPatch( patch ) )
       {
@@ -488,6 +541,7 @@ void list_updates(Zypper & zypper, const ResKindSet & kinds, bool best_effort)
 {
   if (zypper.out().type() == Out::TYPE_XML)
   {
+    // TODO: go for XmlNode
     cout << "<update-status version=\"0.6\">" << endl;
     cout << "<update-list>" << endl;
   }
@@ -526,8 +580,10 @@ void list_updates(Zypper & zypper, const ResKindSet & kinds, bool best_effort)
   if (zypper.out().type() == Out::TYPE_XML)
   {
     if (!affects_pkgmgr)
+    {
       xml_list_updates(localkinds);
-    cout << "</update-list>" << endl;
+      cout << "</update-list>" << endl;		// otherwise closed in xml_list_patches
+    }
     cout << "</update-status>" << endl;
     return;
   }
@@ -656,7 +712,7 @@ void list_patches_by_issue( Zypper & zypper )
       PoolItem pi( *it );
       Patch::constPtr patch = asKind<Patch>(pi);
 
-      if ( only_needed && ( !pi.isBroken() || pi.isUnwanted() ) )
+      if ( only_needed && ! patchIsApplicable( pi ) )
 	continue;
 
       if ( ! cliMatchPatch( patch ) )
@@ -702,7 +758,7 @@ void list_patches_by_issue( Zypper & zypper )
       PoolItem pi( *it );
       Patch::constPtr patch = asKind<Patch>(pi);
 
-      if ( only_needed && ( !pi.isBroken() || pi.isUnwanted() ) )
+      if ( only_needed && ! patchIsApplicable( pi ) )
 	continue;
 
       if ( ! cliMatchPatch( patch ) )
