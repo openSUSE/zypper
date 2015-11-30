@@ -14,13 +14,10 @@
 #include "update.h"
 #include "main.h"
 
-using namespace std;
 using namespace zypp;
-using namespace boost;
+typedef std::set<PoolItem> Candidates;
 
 extern ZYpp::Ptr God;
-
-typedef set<PoolItem> Candidates;
 
 static void
 find_updates( const ResKindSet & kinds, Candidates & candidates );
@@ -66,13 +63,13 @@ void patch_check ()
     }
   }
 
-  ostringstream s;
+  std::ostringstream s;
   // translators: %d is the number of needed patches
-  s << format(_PL("%d patch needed", "%d patches needed", gData.patches_count))
+  s << boost::format(_PL("%d patch needed", "%d patches needed", gData.patches_count))
       % gData.patches_count
     << " ("
     // translators: %d is the number of security patches
-    << format(_PL("%d security patch", "%d security patches", gData.security_patches_count))
+    << boost::format(_PL("%d security patch", "%d security patches", gData.security_patches_count))
       % gData.security_patches_count
     << ")";
   out.info(s.str(), Out::QUIET);
@@ -416,7 +413,7 @@ string i18n_kind_updates(const ResKind & kind)
   else if (kind == ResKind::product)
     return _("Product updates");
 
-  return boost::str(format("%s updates") % kind);
+  return boost::str(boost::format("%s updates") % kind);
 }
 
 // ----------------------------------------------------------------------------
@@ -571,7 +568,7 @@ void list_patches_by_issue(Zypper & zypper)
   // --bz, --cve can't be used together with --issue; this case is ruled out
   // in the initial arguments validation in Zypper.cc
 
-  typedef set<pair<string, string> > Issues;
+  typedef std::set<std::pair<std::string, std::string> > Issues;
   bool only_needed = !zypper.cOpts().count("all");
   bool specific = false; // whether specific issue numbers were given
 
@@ -585,7 +582,7 @@ void list_patches_by_issue(Zypper & zypper)
   if (it != zypper.cOpts().end()) \
     for_(i, it->second.begin(), it->second.end()) \
     { \
-      issues.insert(pair<string, string>(ID, *i)); \
+      issues.insert(std::pair<std::string, std::string>(ID, *i)); \
       if (!i->empty()) \
         specific = true; \
     } \
@@ -745,20 +742,20 @@ void list_patches_by_issue(Zypper & zypper)
 
 void mark_updates_by_issue(Zypper & zypper)
 {
-  typedef set<pair<string, string> > Issues;
+  typedef std::set<std::pair<std::string, std::string> > Issues;
   Issues issues;
   parsed_opts::const_iterator it = zypper.cOpts().find("bugzilla");
   if (it != zypper.cOpts().end())
     for_(i, it->second.begin(), it->second.end())
-      issues.insert(pair<string, string>("b", *i));
+      issues.insert(std::pair<std::string, std::string>("b", *i));
   it = zypper.cOpts().find("bz");
   if (it != zypper.cOpts().end())
     for_(i, it->second.begin(), it->second.end())
-      issues.insert(pair<string, string>("b", *i));
+      issues.insert(std::pair<std::string, std::string>("b", *i));
   it = zypper.cOpts().find("cve");
   if (it != zypper.cOpts().end())
     for_(i, it->second.begin(), it->second.end())
-      issues.insert(pair<string, string>("c", *i));
+      issues.insert(std::pair<std::string, std::string>("c", *i));
 
   SolverRequester::Options sropts;
   sropts.skip_interactive = zypper.cOpts().count("skip-interactive");
