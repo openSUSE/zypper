@@ -1,4 +1,12 @@
 -------------------------------------------------------------------
+Tue Dec  1 16:16:15 CET 2015 - ma@suse.de
+
+- lu/lp: fix different data returned in xml and text output
+  (bsc#793424, bsc#893833)
+- pchk: also report needed but locked patches
+- version 1.6.327
+
+-------------------------------------------------------------------
 Sun May 17 01:15:34 CEST 2015 - ma@suse.de
 
 - Update sle-zypper-po.tar.bz2
