@@ -286,9 +286,6 @@ static bool xml_list_patches (Zypper & zypper)
     }
   }
 
-  //cout << "<update-list>" << endl;		// closed here or in xml_list_patches
-
-
   unsigned patchcount = 0;
   bool all = zypper.cOpts().count("all");
   for_( it, pool.byKindBegin(ResKind::patch), pool.byKindEnd(ResKind::patch) )
