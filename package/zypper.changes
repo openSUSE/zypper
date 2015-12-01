@@ -4,8 +4,6 @@ Tue Dec  1 12:39:25 CET 2015 - ma@suse.de
 - lu/lp: fix different data returned in xml and text output
   (bsc#793424, bsc#893833)
 - pchk: also report needed but locked patches
-- remove unused function
-- no using namespace std/boost
 - version 1.11.44
 
 -------------------------------------------------------------------
