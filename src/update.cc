@@ -46,23 +46,29 @@ void patch_check ()
   RuntimeData & gData = Zypper::instance()->runtimeData();
   DBG << "patch check" << endl;
   gData.patches_count = gData.security_patches_count = 0;
+  unsigned lockedPatches = 0;
 
-  ResPool::byKind_iterator
-    it = God->pool().byKindBegin(ResKind::patch),
-    e = God->pool().byKindEnd(ResKind::patch);
-  for (; it != e; ++it )
+  for_( it, God->pool().byKindBegin(ResKind::patch), God->pool().byKindEnd(ResKind::patch) )
   {
-    ResObject::constPtr res = it->resolvable();
-    Patch::constPtr patch = asKind<Patch>(res);
-
-    if (it->isRelevant() && !it->isSatisfied())
+    const PoolItem & pi( *it );
+    if ( pi.isBroken() )
     {
-      gData.patches_count++;
-      if (patch->categoryEnum() == Patch::CAT_SECURITY)
-        gData.security_patches_count++;
+      if ( pi.isUnwanted() )
+      { ++lockedPatches; }
+      else
+      {
+	Patch::constPtr patch( pi->asKind<Patch>() );
+	++gData.patches_count;
+	if ( patch->categoryEnum() == Patch::CAT_SECURITY )
+	  ++gData.security_patches_count;
+      }
     }
   }
 
+  if ( lockedPatches )
+  {
+    out.info( (boost::format(_PL("%d patch locked", "%d patches locked", lockedPatches )) % lockedPatches).str(), Out::QUIET);
+  }
   std::ostringstream s;
   // translators: %d is the number of needed patches
   s << boost::format(_PL("%d patch needed", "%d patches needed", gData.patches_count))
