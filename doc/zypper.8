@@ -1075,7 +1075,7 @@ Perform a distribution upgrade\&. This command applies the state of (specified) 
 
 If no repositories are specified via the
 \fB\-\-from\fR
-option, zypper will do the upgrade with all defined repositories\&. This can be a problem if the system contains conflicting repositories, like repositories for two different distribution releases\&. This often happens if one forgets to remove an older release repository after adding a new one, say openSUSE 13\&.1 and openSUSE 13\&.2\&.
+option, zypper will do a global upgrade with all defined repositories\&. This global form of dup will also consider unchanged installed packages and re\-evaluate their dependencies\&. This can be a problem if the system contains conflicting repositories, like repositories for two different distribution releases\&. This often happens if one forgets to remove an older release repository after adding a new one, say openSUSE 13\&.1 and openSUSE 13\&.2\&.
 
 For all repositories which have the distribution version within their URL (like
 http://download\&.opensuse\&.org/distribution/\fI13\&.1\fR/repo/oss) using the
@@ -1101,7 +1101,7 @@ at
 .PP
 \fB\-\-from\fR \fIalias\fR|\fIname\fR|\fI#\fR|\fIURI\fR
 .RS 4
-Restricts the upgrade to the specified repositories (the option can be used multiple times) only, but can satisfy dependencies also from the rest of enabled repositories\&.
+The option can be used multiple times and restricts the upgrade to the specified repositories only\&. Nevertheless all enabled repositories are visible to the resolver and will be considered to satisfy dependency problems\&.
 .RE
 .PP
 \-r, \-\-repo alias|name|#|URI
@@ -1110,7 +1110,10 @@ Work only with the repository specified by the alias, name, number, or URI\&.
 
 Using \-\-repo is
 \fIdiscouraged\fR
-as it currently hides unmentioned repositories from the resolver, leading to inexpertly decisions\&. In the future \-\-repo will become an alias for
+as it currently hides unmentioned repositories from the resolver, leading to inexpertly decisions\&. This is because packages originally installed from the hidden repos will now be treated as
+\fIorphaned\fR
+or
+\fIdropped\fR\&. They can be silently removed if involved in a dependency conflict\&. In the future \-\-repo will become an alias for
 \fB\-\-from\fR\&.
 .RE
 .PP

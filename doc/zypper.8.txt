@@ -595,7 +595,7 @@ Update Management Commands
 *dist-upgrade* (*dup*) ['options']::
 	Perform a distribution upgrade. This command applies the state of (specified) repositories onto the system; upgrades (or even downgrades) installed packages to versions found in repositories, removes packages that are no longer in the repositories and pose a dependency problem for the upgrade, handles package splits and renames, etc.
 	+
-	If no repositories are specified via the *--from* option, zypper will do the upgrade with all defined repositories. This can be a problem if the system contains conflicting repositories, like repositories for two different distribution releases. This often happens if one forgets to remove an older release repository after adding a new one, say openSUSE 13.1 and openSUSE 13.2.
+	If no repositories are specified via the *--from* option, zypper will do a global upgrade with all defined repositories. This global form of dup will also consider unchanged installed packages and re-evaluate their dependencies. This can be a problem if the system contains conflicting repositories, like repositories for two different distribution releases. This often happens if one forgets to remove an older release repository after adding a new one, say openSUSE 13.1 and openSUSE 13.2.
 	+
 	For all repositories which have the distribution version within their URL (like http://download.opensuse.org/distribution/'13.1'/repo/oss) using the *$releasever* variable instead may be helpful (http://download.opensuse.org/distribution/*$releasever*/repo/oss). The variable is per default substituted by the current distributions version ('13.1') This value can be overwritten using the *--releasever* global option. Calling *zypper --releasever 13.2*'...' will cause these repos to use the new location (http://download.opensuse.org/distribution/'13.2'/repo/oss) without need to add/remove anything. Once the *dup* is performed, *$releasever* will default to the new distribution version. See section *Repository Management* for more info about variable substitution.
 	+
@@ -603,12 +603,12 @@ Update Management Commands
 +
 --
 	*--from* 'alias'|'name'|'#'|'URI'::
-		Restricts the upgrade to the specified repositories (the option can be used multiple times) only, but can satisfy dependencies also from the rest of enabled repositories.
+		The option can be used multiple times and restricts the upgrade to the specified repositories only. Nevertheless all enabled repositories are visible to the resolver and will be considered to satisfy dependency problems.
 
 	-r, --repo alias|name|#|URI::
 		Work only with the repository specified by the alias, name, number, or URI.
 		+
-		Using --repo is 'discouraged' as it currently hides unmentioned repositories from the resolver, leading to inexpertly decisions. In the future --repo will become an alias for *--from*.
+		Using --repo is 'discouraged' as it currently hides unmentioned repositories from the resolver, leading to inexpertly decisions. This is because packages originally installed from the hidden repos will now be treated as 'orphaned' or 'dropped'. They can be silently removed if involved in a dependency conflict. In the future --repo will become an alias for *--from*.
 
 	*-l*, *--auto-agree-with-licenses*::
 		Automatically say 'yes' to third party license confirmation prompt. By using this option, you choose to agree with licenses of all third-party software this command will install. This option is particularly useful for administrators installing the same set of packages on multiple machines (by an automated process) and have the licenses confirmed before.
