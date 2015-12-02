@@ -2,12 +2,12 @@
 .\"     Title: zypper
 .\"    Author: [see the "AUTHORS" section]
 .\" Generator: DocBook XSL Stylesheets v1.78.1 <http://docbook.sf.net/>
-.\"      Date: 11/27/2015
+.\"      Date: 12/02/2015
 .\"    Manual: ZYPPER
 .\"    Source: SUSE Linux
 .\"  Language: English
 .\"
-.TH "ZYPPER" "8" "11/27/2015" "SUSE Linux" "ZYPPER"
+.TH "ZYPPER" "8" "12/02/2015" "SUSE Linux" "ZYPPER"
 .\" -----------------------------------------------------------------
 .\" * Define some portability stuff
 .\" -----------------------------------------------------------------
@@ -42,9 +42,12 @@ zypper is a command\-line interface to ZYpp system management library (libzypp)\
 .SH "CONCEPTS"
 .sp
 Most of the following concepts are common for all applications based on the libzypp package management library, but there are some zypper specifics\&.
+.SS "System Packages"
+.sp
+The set of installed packages on a system is sometimes denoted as repository \fB@System\fR or \fBSystem Packages\fR\&. In contrast to available repositories providing packages which can be installed, \fB@System\fR provides packages which can only be deleted\&. Installed packages which are not also provided by at least one of the available repositories are often denoted as being \fIunwanted\fR, \fIorphaned\fR or \fIdropped\fR\&.
 .SS "Repositories"
 .sp
-Libzypp works with package metadata, that is information about packages and their relations extracted from RPM packages and other data like patch information, pattern definitions, etc\&. These data are stored together with the RPM files in folders called \fIrepositories\fR\&. Repositories can be placed on various media like an HTTP or FTP server, DVD, or a folder on a local disc\&.
+Libzypp works with repository metadata, this is information about packages and their relations extracted from RPM packages and other data like patch information, pattern definitions, etc\&. These data are stored together with the RPM files in folders called \fIrepositories\fR\&. Repositories can be placed on various media like an HTTP or FTP server, DVD, or a folder on a local disc\&.
 .sp
 There is a special set of commands in zypper intended to manipulate repositories\&. Also many commands and options take a repository as an argument\&. See section \fBCOMMANDS\fR, subsection \fBRepository Management\fR for more details\&.
 .SS "GPG checks"
@@ -1210,15 +1213,33 @@ characters can be used within search strings\&. If the search string is enclosed
 command for details about how to specify a
 \fIcapability\fR\&.
 
-Results of the search are printed in a table\&. with columns
+Results of the search are printed in a table with columns
 \fBS\fRtatus,
 \fBName\fR,
+\fBSummary\fR
+and
 \fBType\fR
-of package,
+of package\&.
+
+In the detailed view (\fBse \-s\fR) all available instances of matching packages are shown; each version in each repository on a separate line, with columns
+\fBS\fRtatus,
+\fBName\fR,
+\fBType\fR,
 \fBVersion\fR,
 \fBArch\fRitecture
 and
-\fBRepository\fR\&. The
+\fBRepository\fR\&. For installed packages
+\fBRepository\fR
+shows either a repository that provides exactly the installed version of the package, or, if the exact version is not provided by any known repo,
+\fB(System Packages)\fR
+(or
+\fB@System\fR)\&. Those installed packages not provided by any repo are often denoted as being
+\fIunwanted\fR,
+\fIorphaned\fR
+or
+\fIdropped\fR\&.
+
+The
 \fBS\fRtatus
 column can contain the following values:
 .TS
@@ -1255,7 +1276,7 @@ The
 status is only shown if the version or the repository matters (see
 \fB\-\-details\fR
 or
-\fB\-\-repo\fR), and the installed version differs from the one listed or is from a repository other than specified\&.
+\fB\-\-repo\fR), and the installed instance differs from the one listed in version or repository\&.
 
 This command accepts the following options:
 .PP
