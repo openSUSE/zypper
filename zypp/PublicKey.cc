@@ -378,12 +378,15 @@ namespace zypp
         {
 	  scanner.scan( line );
 	}
-        prog.close();
+        int ret = prog.close();
 
 	switch ( scanner._keys.size() )
 	{
 	  case 0:
-	    ZYPP_THROW( BadKeyException( "File " + _dataFile.path().asString() + " doesn't contain public key data" , _dataFile.path() ) );
+	    if ( ret == 129 )
+	      ZYPP_THROW( Exception( std::string("Can't read public key data: ") + GPG_BINARY + " is not installed!" ) );
+	    else
+	      ZYPP_THROW( BadKeyException( "File " + _dataFile.path().asString() + " doesn't contain public key data" , _dataFile.path() ) );
 	    break;
 
 	  case 1:
