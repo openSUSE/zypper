@@ -28,9 +28,13 @@ CONCEPTS
 --------
 Most of the following concepts are common for all applications based on the libzypp package management library, but there are some zypper specifics.
 
+System Packages
+~~~~~~~~~~~~~~~
+The set of installed packages on a system is sometimes denoted as repository *@System* or *System Packages*. In contrast to available repositories providing packages which can be installed, *@System* provides packages which can only be deleted. Installed packages which are not also provided by at least one of the available repositories are often denoted as being 'unwanted', 'orphaned' or 'dropped'.
+
 Repositories
 ~~~~~~~~~~~~
-Libzypp works with package metadata, that is information about packages and their relations extracted from RPM packages and other data like patch information, pattern definitions, etc. These data are stored together with the RPM files in folders called 'repositories'. Repositories can be placed on various media like an HTTP or FTP server, DVD, or a folder on a local disc.
+Libzypp works with repository metadata, this is information about packages and their relations extracted from RPM packages and other data like patch information, pattern definitions, etc. These data are stored together with the RPM files in folders called 'repositories'. Repositories can be placed on various media like an HTTP or FTP server, DVD, or a folder on a local disc.
 
 There is a special set of commands in zypper intended to manipulate repositories. Also many commands and options take a repository as an argument. See section *COMMANDS*, subsection *Repository Management* for more details.
 
@@ -644,7 +648,11 @@ Query Commands
 *search* (*se*) ['options'] ['querystring'|'capability']...::
 	Search for packages matching any of the given search strings. *** and '*?* wildcard' characters can be used within search strings. If the search string is enclosed in */*  (e.g. */^k.*e$/*) it's interpreted as a 'regular expression'. See the *install* command for details about how to specify a 'capability'.
 	+
-	Results of the search are printed in a table. with columns *S*+tatus+, *Name*, *Type* of package, *Version*, *Arch*+itecture+ and *Repository*. The *S*+tatus+ column can contain the following values:
+	Results of the search are printed in a table with columns *S*+tatus+, *Name*, *Summary* and *Type* of package.
+	+
+	In the detailed view (*se -s*) all available instances of matching packages are shown; each version in each repository on a separate line, with columns *S*+tatus+, *Name*, *Type*, *Version*, *Arch*+itecture+ and *Repository*. For installed packages *Repository* shows either a repository that provides exactly the installed version of the package, or, if the exact version is not provided by any known repo, *(System Packages)* (or *@System*). Those installed packages not provided by any repo are often denoted as being 'unwanted', 'orphaned' or 'dropped'.
+	+
+	The *S*+tatus+ column can contain the following values:
 +
 --
 [horizontal]
@@ -655,7 +663,7 @@ Query Commands
 --
 +
 {nop}
-	The *v* status is only shown if the version or the repository matters (see *--details* or *--repo*), and the installed version 	differs from the one listed or is from a repository other than specified.
+	The *v* status is only shown if the version or the repository matters (see *--details* or *--repo*), and the installed instance differs from the one listed in version or repository.
 	+
 	This command accepts the following options:
 +
