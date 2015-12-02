@@ -549,7 +549,9 @@ Install specified source packages and their build dependencies\&. If the name of
 
 This command will try to find the newest available versions of the source packages and uses
 \fBrpm \-i\fR
-to install them and the packages that are required to build the source package\&.
+to install them, optionally together with all the packages that are required to build the source package\&. The default location where rpm installs source packages to is
+\fI/usr/src/packages/{SPECS,SOURCES}\fR, but the values can be changed in your local rpm configuration\&. In case of doubt try executing
+\fBrpm \-\-eval "%{_specdir} and %{_sourcedir}"\fR\&.
 
 Note that the source packages must be available in repositories you are using\&. You can check whether a repository contains any source packages using the following command:
 .PP

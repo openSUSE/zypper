@@ -1429,7 +1429,8 @@ void Zypper::processCommandOptions()
       {0, 0, 0, 0}
     };
     specific_options = src_install_options;
-    _command_help = _(
+    _command_help = ( CommandHelpFormater()
+    << _(
       "source-install (si) [options] <name> ...\n"
       "\n"
       "Install specified source packages and their build dependencies.\n"
@@ -1439,7 +1440,13 @@ void Zypper::processCommandOptions()
       "-D, --no-build-deps      Don't install build dependencies.\n"
       "-r, --repo <alias|#|URI> Install packages only from specified repositories.\n"
       "    --download-only      Only download the packages, do not install.\n"
-    );
+    ) )
+    .description(
+      boost::str(boost::format(_("The default location where rpm installs source packages to is '%1%', but the value can be changed in your local rpm configuration. In case of doubt try executing '%2%'."))
+      % "/usr/src/packages/{SPECS,SOURCES}"
+      % "rpm --eval \"%{_specdir} and %{_sourcedir}\"")
+    )
+    ;
     break;
   }
 

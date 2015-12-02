@@ -3,7 +3,8 @@ ZYPPER(8)
 :man manual: ZYPPER
 :man source: SUSE Linux
 :nop:
-
+:openbr: {
+:closebr: }
 
 NAME
 ----
@@ -302,7 +303,7 @@ Package Management Commands
 *source-install* (*si*) 'name'...::
 	Install specified source packages and their build dependencies. If the name of a binary package is given, the corresponding source package is looked up and installed instead.
 	+
-	This command will try to find the newest available versions of the source packages and uses *rpm -i* to install them and the packages that are required to build the source package.
+	This command will try to find the newest available versions of the source packages and uses *rpm -i* to install them, optionally together with all the packages that are required to build the source package. The default location where rpm installs source packages to is '/usr/src/packages/{SPECS,SOURCES}', but the values can be changed in your local rpm configuration. In case of doubt try executing *rpm --eval "%\{_specdir\} and %\{_sourcedir\}"*.
 	+
 	Note that the source packages must be available in repositories you are using. You can check whether a repository contains any source packages using the following command:
 
