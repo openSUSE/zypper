@@ -1755,6 +1755,13 @@ void add_repo(Zypper & zypper, RepoInfo & repo)
     // translators: property name; short; used like "Name: value"
     p.add( _("URI"),		repo.baseUrlsBegin(), repo.baseUrlsEnd() );
     s << p;
+
+    if ( repo.priority() == RepoInfo::defaultPriority() )
+    {
+      s << endl << "  " <<
+        _("(use \"zypper addrepo --priority <integer> ...\" to ensure repositories are utilized as desired,"
+          " lower numbers for repositories that replace default packages and higher for missing packages)");
+    }
   }
   zypper.out().info(s.str());
 
