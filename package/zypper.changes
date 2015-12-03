@@ -1,4 +1,9 @@
 -------------------------------------------------------------------
+Thu Dec  3 01:13:23 CET 2015 - ma@suse.de
+
+- Update zypper-po.tar.bz2
+
+-------------------------------------------------------------------
 Fri Nov 27 17:03:29 CET 2015 - ma@suse.de
 
 - lu/lp: fix different data returned in xml and text output (bsc#793424)
