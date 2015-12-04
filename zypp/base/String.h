@@ -224,42 +224,41 @@ namespace zypp
     };
 
     ///////////////////////////////////////////////////////////////////
-    /** Convenient building of std::string via std::ostream::operator<<.
-     * Basically this is an \ref ostringstream which is autocenvertible
-     * into a \ref string.
-     * \code
-     *  void fnc( const std::string & txt_r );
-     *  fnc( str::Str() << "Hello " << 13 );
-     *
-     *  std::string txt( str::Str() << 45 );
-     * \endcode
-    */
+    /// \class Str
+    /// \brief Convenient building of std::string via \ref std::ostringstream
+    /// Basically a \ref std::ostringstream autoconvertible to \ref std::string
+    /// for building string arguments.
+    /// \code
+    ///   void fnc( const std::string & txt_r );
+    ///   fnc( str::Str() << "Hello " << 13 );
+    ///
+    ///   std::string txt( str::Str() << 45 );
+    /// \endcode
+    ///////////////////////////////////////////////////////////////////
     struct Str
     {
       template<class Tp>
-      Str & operator<<( const Tp & val )
-      { _str << val; return *this; }
+      Str & operator<<( Tp && val )
+      { _str << std::forward<Tp>(val); return *this; }
 
       Str & operator<<( std::ostream& (*iomanip)( std::ostream& ) )
       { _str << iomanip; return *this; }
 
-      operator std::string() const
-      { return _str.str(); }
+      operator std::string() const		{ return _str.str(); }
+      std::string str() const			{ return _str.str(); }
 
-      std::string str() const
-      { return _str.str(); }
+      const std::ostream & stream() const	{ return _str; }
+      std::ostream & stream()			{ return _str; }
 
-      std::ostream & stream()
-      { return _str; }
+      void clear()				{ _str.str( std::string() ); }
 
-      void clear()
-      { _str.str( std::string() ); }
-
+    private:
       std::ostringstream _str;
     };
 
+    /** \relates Str Stream output */
     inline std::ostream & operator<<( std::ostream & str, const Str & obj )
-    { return str << (std::string)obj; }
+    { return str << obj.str(); }
 
     ///////////////////////////////////////////////////////////////////
     /** \name String representation of number.
