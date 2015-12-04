@@ -2,12 +2,12 @@
 .\"     Title: zypper
 .\"    Author: [see the "AUTHORS" section]
 .\" Generator: DocBook XSL Stylesheets v1.78.1 <http://docbook.sf.net/>
-.\"      Date: 12/02/2015
+.\"      Date: 12/04/2015
 .\"    Manual: ZYPPER
 .\"    Source: SUSE Linux
 .\"  Language: English
 .\"
-.TH "ZYPPER" "8" "12/02/2015" "SUSE Linux" "ZYPPER"
+.TH "ZYPPER" "8" "12/04/2015" "SUSE Linux" "ZYPPER"
 .\" -----------------------------------------------------------------
 .\" * Define some portability stuff
 .\" -----------------------------------------------------------------
@@ -472,6 +472,11 @@ option to the rpm commands run by the install command\&.
 Show the detailed installation summary\&.
 .RE
 .PP
+\fB\-y\fR, \fB\-\-no\-confirm\fR
+.RS 4
+Don\(cqt require user interaction\&. Alias for the \-\-non\-interactive global option\&.
+.RE
+.PP
 Download\-and\-install mode options:
 .RS 4
 .RE
@@ -620,6 +625,11 @@ Work only with the repository specified by the alias, name, number, or URI\&. Th
 .RS 4
 Create solver test case for debugging\&. See the install command for details\&.
 .RE
+.PP
+\fB\-y\fR, \fB\-\-no\-confirm\fR
+.RS 4
+Don\(cqt require user interaction\&. Alias for the \-\-non\-interactive global option\&.
+.RE
 .RE
 .PP
 \fBinstall\-new\-recommends\fR (\fBinr\fR) [\fIoptions\fR]
@@ -725,6 +735,11 @@ option to the rpm commands run by the remove command\&.
 \fB\-\-details\fR
 .RS 4
 Show the detailed installation summary\&.
+.RE
+.PP
+\fB\-y\fR, \fB\-\-no\-confirm\fR
+.RS 4
+Don\(cqt require user interaction\&. Alias for the \-\-non\-interactive global option\&.
 .RE
 .RE
 .SS "Update Management Commands"
@@ -863,6 +878,11 @@ Show the detailed installation summary\&.
 Do a
 \fIbest effort\fR
 approach to update\&. This method does not explicitly select packages with best version and architecture, but instead requests installation of a package with higher version than the installed one and leaves the rest on the dependency solver\&. This method is always used for packages, and is optional for products and patterns\&. It is not applicable to patches\&.
+.RE
+.PP
+\fB\-y\fR, \fB\-\-no\-confirm\fR
+.RS 4
+Don\(cqt require user interaction\&. Alias for the \-\-non\-interactive global option\&.
 .RE
 .PP
 This command also accepts the download\-and\-install mode options described in the \fBinstall\fR command description\&.
@@ -1064,6 +1084,11 @@ Test the update, do not actually update\&.
 \fB\-\-details\fR
 .RS 4
 Show the detailed installation summary\&.
+.RE
+.PP
+\fB\-y\fR, \fB\-\-no\-confirm\fR
+.RS 4
+Don\(cqt require user interaction\&. Alias for the \-\-non\-interactive global option\&.
 .RE
 .PP
 This command also accepts the \fBdownload\-and\-install\fR mode options described in the \fBinstall\fR command description\&.
@@ -2966,7 +2991,7 @@ Specifies table style to use\&. Table style is identified by an integer number\&
 \fB\-n\fR, \fB\-\-non\-interactive\fR
 .RS 4
 Switches to non\-interactive mode\&. In this mode zypper doesn\(cqt ask user to type answers to various prompts, but uses default answers automatically\&. The behavior of this option is somewhat different than that of options like
-\fB\-\-yes\fR, since zypper can answer different answers to different questions\&. The answers also depend on other options like
+\fI\-\-yes\fR, since zypper can answer different answers to different questions\&. The answers also depend on other options like
 \fB\-\-no\-gpg\-checks\fR\&.
 .RE
 .PP

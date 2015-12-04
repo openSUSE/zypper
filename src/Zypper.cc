@@ -1292,7 +1292,7 @@ void Zypper::processCommandOptions()
       {"oldpackage",                no_argument,       0,  0 },
       {"replacefiles",              no_argument,       0,  0 },
       {"capability",                no_argument,       0, 'C'},
-      {"no-confirm",                no_argument,       0, 'y'},	// rug legacy: use --non-interactive
+      {"no-confirm",                no_argument,       0, 'y'},	// pkg/apt/yum user convenience ==> --non-interactive
       {"auto-agree-with-licenses",  no_argument,       0, 'l'},
       // rug compatibility, we have --auto-agree-with-licenses
       {"agree-to-third-party-licenses",  no_argument,  0,  0 },
@@ -1318,7 +1318,8 @@ void Zypper::processCommandOptions()
       {0, 0, 0, 0}
     };
     specific_options = install_options;
-    _command_help = str::form(_(
+    _command_help = ( CommandHelpFormater()
+      << str::form(_(
       // translators: the first %s = "package, patch, pattern, product",
       // second %s = "package",
       // and the third %s = "only, in-advance, in-heaps, as-needed"
@@ -1362,7 +1363,9 @@ void Zypper::processCommandOptions()
       "-d, --download-only         Only download the packages, do not install.\n"
     ), "package, patch, pattern, product, srcpackage",
        "package",
-       "only, in-advance, in-heaps, as-needed");
+       "only, in-advance, in-heaps, as-needed") )
+    .option( "-y, --no-confirm",	_("Don't require user interaction. Alias for the --non-interactive global option.") )
+    ;
     break;
   }
 
@@ -1376,7 +1379,7 @@ void Zypper::processCommandOptions()
       // the default (ignored)
       {"name",       no_argument,       0, 'n'},
       {"capability", no_argument,       0, 'C'},
-      {"no-confirm", no_argument,       0, 'y'},	// rug legacy: use --non-interactive
+      {"no-confirm", no_argument,       0, 'y'},		// pkg/apt/yum user convenience ==> --non-interactive
       {"debug-solver", no_argument,     0, 0},
       {"no-force-resolution", no_argument, 0, 'R'},
       {"force-resolution", no_argument, 0,  0 },
@@ -1390,7 +1393,8 @@ void Zypper::processCommandOptions()
       {0, 0, 0, 0}
     };
     specific_options = remove_options;
-    _command_help = str::form(_(
+    _command_help = ( CommandHelpFormater()
+      << str::form(_(
       // TranslatorExplanation the first %s = "package, patch, pattern, product"
       //  and the second %s = "package"
       "remove (rm) [options] <capability> ...\n"
@@ -1414,7 +1418,9 @@ void Zypper::processCommandOptions()
       "-U, --no-clean-deps         No automatic removal of unneeded dependencies.\n"
       "-D, --dry-run               Test the removal, do not actually remove.\n"
       "    --details               Show the detailed installation summary.\n"
-    ), "package, patch, pattern, product", "package");
+      ), "package, patch, pattern, product", "package") )
+    .option( "-y, --no-confirm",	_("Don't require user interaction. Alias for the --non-interactive global option.") )
+    ;
     break;
   }
 
@@ -1453,7 +1459,7 @@ void Zypper::processCommandOptions()
   case ZypperCommand::VERIFY_e:
   {
     static struct option verify_options[] = {
-      {"no-confirm", no_argument, 0, 'y'},	// rug legacy: use --non-interactive
+      {"no-confirm", no_argument, 0, 'y'},			// pkg/apt/yum user convenience ==> --non-interactive
       {"dry-run", no_argument, 0, 'D'},
       // rug uses -N shorthand
       {"dry-run", no_argument, 0, 'N'},
@@ -1473,7 +1479,8 @@ void Zypper::processCommandOptions()
       {0, 0, 0, 0}
     };
     specific_options = verify_options;
-    _command_help = str::form(_(
+    _command_help = ( CommandHelpFormater()
+      << str::form(_(
       "verify (ve) [options]\n"
       "\n"
       "Check whether dependencies of installed packages are satisfied"
@@ -1491,7 +1498,9 @@ void Zypper::processCommandOptions()
       "    --download              Set the download-install mode. Available modes:\n"
       "                            %s\n"
       "-d, --download-only         Only download the packages, do not install.\n"
-    ), "only, in-advance, in-heaps, as-needed");
+      ), "only, in-advance, in-heaps, as-needed") )
+    .option( "-y, --no-confirm",	_("Don't require user interaction. Alias for the --non-interactive global option.") )
+    ;
     break;
   }
 
@@ -1967,7 +1976,7 @@ void Zypper::processCommandOptions()
       // rug compatibility option, we have --repo
       {"catalog",                   required_argument, 0, 'c'},
       {"type",                      required_argument, 0, 't'},
-      {"no-confirm",                no_argument,       0, 'y'},	// rug legacy: use --non-interactive
+      {"no-confirm",                no_argument,       0, 'y'},	// pkg/apt/yum user convenience ==> --non-interactive
       {"skip-interactive",          no_argument,       0,  0 },
       {"with-interactive",          no_argument,       0,  0 },
       {"auto-agree-with-licenses",  no_argument,       0, 'l'},
@@ -1995,7 +2004,8 @@ void Zypper::processCommandOptions()
       {0, 0, 0, 0}
     };
     specific_options = update_options;
-    _command_help = str::form(_(
+    _command_help = ( CommandHelpFormater()
+      << str::form(_(
       // translators: the first %s = "package, patch, pattern, product",
       // the second %s = "patch",
       // and the third %s = "only, in-avance, in-heaps, as-needed"
@@ -2033,9 +2043,11 @@ void Zypper::processCommandOptions()
       "    --download              Set the download-install mode. Available modes:\n"
       "                            %s\n"
       "-d, --download-only         Only download the packages, do not install.\n"
-    ), "package, patch, pattern, product, srcpackage",
-       "package",
-       "only, in-advance, in-heaps, as-needed");
+      ), "package, patch, pattern, product, srcpackage",
+         "package",
+         "only, in-advance, in-heaps, as-needed") )
+    .option( "-y, --no-confirm",	_("Don't require user interaction. Alias for the --non-interactive global option.") )
+    ;
     break;
   }
 
@@ -2044,6 +2056,7 @@ void Zypper::processCommandOptions()
     static struct option update_options[] = {
       {"repo",                      required_argument, 0, 'r'},
       {"updatestack-only",	    no_argument,       0,  0 },
+      {"no-confirm",                no_argument,       0, 'y'},	// pkg/apt/yum user convenience ==> --non-interactive
       {"skip-interactive",          no_argument,       0,  0 },
       {"with-interactive",          no_argument,       0,  0 },
       {"auto-agree-with-licenses",  no_argument,       0, 'l'},
@@ -2104,6 +2117,7 @@ void Zypper::processCommandOptions()
       "-d, --download-only         Only download the packages, do not install.\n"
       ), "only, in-advance, in-heaps, as-needed") )
       .option("--updatestack-only",	_("Install only patches which affect the package management itself.") )
+      .option( "-y, --no-confirm",	_("Don't require user interaction. Alias for the --non-interactive global option.") )
       ;
     break;
   }
@@ -3048,10 +3062,9 @@ void Zypper::processCommandOptions()
     _copts.erase("sort-by-catalog");
   }
 
-  // RUG TRANSLATE no-confirm into non-interactive mode
+  // bsc#957862: pkg/apt/yum user convenience: no-confirm  ==> --non-interactive
   if ( _copts.count("no-confirm") )
   {
-    out().warning( legacyCLI( "-y/--no-confirm", "-n/--non-interactive", true/*global option*/ ) );
     if ( ! _gopts.non_interactive )
     {
       out().info(_("Entering non-interactive mode."), Out::HIGH);

@@ -259,6 +259,9 @@ Package Management Commands
 	*--details*::
 		Show the detailed installation summary.
 
+	*-y*, *--no-confirm*::
+		Don't require user interaction. Alias for the --non-interactive global option.
+
 	Download-and-install mode options: :: {nop}
 
 	*-d*, *--download-only*::
@@ -349,6 +352,9 @@ Package Management Commands
 
 	*--debug-solver*::
 		Create solver test case for debugging. See the install command for details.
+
+	*-y*, *--no-confirm*::
+		Don't require user interaction. Alias for the --non-interactive global option.
 --
 
 *install-new-recommends* (*inr*) ['options']::
@@ -411,6 +417,9 @@ Package Management Commands
 
 	*--details*::
 		Show the detailed installation summary.
+
+	*-y*, *--no-confirm*::
+		Don't require user interaction. Alias for the --non-interactive global option.
 --
 
 Update Management Commands
@@ -485,6 +494,9 @@ Update Management Commands
 
 	*--best-effort*::
 		Do a 'best effort' approach to update. This method does not explicitly select packages with best version and architecture, but instead requests installation of a package with higher version than the installed one and leaves the rest on the dependency solver. This method is always used for packages, and is optional for products and patterns. It is not applicable to patches.
+
+	*-y*, *--no-confirm*::
+		Don't require user interaction. Alias for the --non-interactive global option.
 
 	This command also accepts the download-and-install mode options described in the *install* command description.:: {nop}
 --
@@ -589,6 +601,9 @@ Update Management Commands
 
 	*--details*::
 		Show the detailed installation summary.
+
+	*-y*, *--no-confirm*::
+		Don't require user interaction. Alias for the --non-interactive global option.
 
 	This command also accepts the *download-and-install* mode options described in the *install* command description.:: {nop}
 --
@@ -1507,7 +1522,7 @@ GLOBAL OPTIONS
 	Specifies table style to use. Table style is identified by an integer number. TODO
 
 *-n*, *--non-interactive*::
-	Switches to non-interactive mode. In this mode zypper doesn't ask user to type answers to various prompts, but uses default answers automatically. The behavior of this option is somewhat different than that of options like *--yes*, since zypper can answer different answers to different questions. The answers also depend on other options like *--no-gpg-checks*.
+	Switches to non-interactive mode. In this mode zypper doesn't ask user to type answers to various prompts, but uses default answers automatically. The behavior of this option is somewhat different than that of options like '--yes', since zypper can answer different answers to different questions. The answers also depend on other options like *--no-gpg-checks*.
 
 *-x*, *--xmlout*::
 	Switches to XML output. This option is useful for scripts or graphical frontends using zypper.
