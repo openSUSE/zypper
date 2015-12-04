@@ -57,6 +57,9 @@ namespace zypp
       operator Tp  () const { return get(); }
       //@}
 
+      /** The initial value. */
+      constexpr Tp initial() const { return TInitial; }
+
       /** Reset to the defined initial value. */
       DefaultIntegral & reset()	{ _val = TInitial; return *this; }
 
