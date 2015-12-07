@@ -806,27 +806,27 @@ namespace zypp
     static callback::SendReport<JobReport> & instance();	// impl in ZYppImpl.cc
 
     /** send debug message text */
-    static bool debug( const MessageString & msg_r, const UserData & userData_r = UserData() )
+    static bool debug( const std::string & msg_r, const UserData & userData_r = UserData() )
     { return instance()->message( MsgType::debug, msg_r, userData_r ); }
 
     /** send message text */
-    static bool info( const MessageString & msg_r, const UserData & userData_r = UserData() )
+    static bool info( const std::string & msg_r, const UserData & userData_r = UserData() )
     { return instance()->message( MsgType::info, msg_r, userData_r ); }
 
     /** send warning text */
-    static bool warning( const MessageString & msg_r, const UserData & userData_r = UserData() )
+    static bool warning( const std::string & msg_r, const UserData & userData_r = UserData() )
     { return instance()->message( MsgType::warning, msg_r, userData_r ); }
 
     /** send error text */
-    static bool error( const MessageString & msg_r, const UserData & userData_r = UserData() )
+    static bool error( const std::string & msg_r, const UserData & userData_r = UserData() )
     { return instance()->message( MsgType::error, msg_r, userData_r ); }
 
     /** send important message text */
-    static bool important( const MessageString & msg_r, const UserData & userData_r = UserData() )
+    static bool important( const std::string & msg_r, const UserData & userData_r = UserData() )
     { return instance()->message( MsgType::important, msg_r, userData_r ); }
 
     /** send data message */
-    static bool data( const MessageString & msg_r, const UserData & userData_r = UserData() )
+    static bool data( const std::string & msg_r, const UserData & userData_r = UserData() )
     { return instance()->message( MsgType::data, msg_r, userData_r ); }
     //@}
   };

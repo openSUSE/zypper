@@ -47,16 +47,6 @@ namespace zypp
 namespace zypp
 { /////////////////////////////////////////////////////////////////
 
-  struct MessageString : public std::string
-  {
-    MessageString() {}
-    MessageString( const char * str_r ) 		: std::string( str_r ? str_r : "" ) {}
-    MessageString( const std::string & str_r )		: std::string( str_r ) {}
-    // boost::format, std::ostringstream, str::Str ...
-    template<class TStr>
-    MessageString( const TStr & str_r )	: std::string( str_r.str() ) {}
-  };
-
   /** Convenience \c char* constructible from \c std::string and \c char*,
    *  it maps \c (char*)0 to an empty string.
    *
