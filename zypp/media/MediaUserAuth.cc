@@ -13,8 +13,6 @@
 #include <list>
 #include <curl/curl.h>
 
-#include <boost/format.hpp>
-
 #include "zypp/base/Gettext.h"
 #include "zypp/base/String.h"
 
@@ -132,10 +130,7 @@ long CurlAuthData::auth_type_str2long(std::string & auth_type_str)
     }
     else
     {
-      std::string msg = boost::str(
-        boost::format (_("Unsupported HTTP authentication method '%s'")) % *it);
-
-      ZYPP_THROW(MediaException(msg));
+      ZYPP_THROW(MediaException(str::Format(_("Unsupported HTTP authentication method '%s'")) % *it));
     }
   }
 

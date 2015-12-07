@@ -29,8 +29,6 @@ extern "C"
 #include <vector>
 #include <algorithm>
 
-#include <boost/format.hpp>
-
 #include "zypp/base/Logger.h"
 #include "zypp/base/String.h"
 #include "zypp/base/Gettext.h"
@@ -1123,9 +1121,9 @@ void RpmDb::importPubkey( const PublicKey & pubkey_r )
   if ( systemStatus() != 0 )
   {
     //TranslatorExplanation first %s is file name, second is error message
-    ZYPP_THROW(RpmSubprocessException(boost::str(boost::format(
-        _("Failed to import public key from file %s: %s"))
-        % pubkey_r.asString() % error_message)));
+    ZYPP_THROW(RpmSubprocessException( str::Format(_("Failed to import public key from file %s: %s"))
+				       % pubkey_r.asString()
+				       % error_message ));
   }
   else
   {
@@ -1194,9 +1192,9 @@ void RpmDb::removePubkey( const PublicKey & pubkey_r )
   if ( rpm_status != 0 )
   {
     //TranslatorExplanation first %s is key name, second is error message
-    ZYPP_THROW(RpmSubprocessException(boost::str(boost::format(
-        _("Failed to remove public key %s: %s")) % pubkey_r.asString()
-        % error_message)));
+    ZYPP_THROW(RpmSubprocessException( str::Format(_("Failed to remove public key %s: %s"))
+				       % pubkey_r.asString()
+				       % error_message ));
   }
   else
   {

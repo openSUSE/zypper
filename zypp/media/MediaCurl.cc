@@ -37,7 +37,6 @@
 #include <errno.h>
 #include <dirent.h>
 #include <unistd.h>
-#include <boost/format.hpp>
 
 #define  DETECT_DIR_INDEX       0
 #define  CONNECT_TIMEOUT        60
@@ -1687,9 +1686,7 @@ bool MediaCurl::authenticate(const string & availAuthTypes, bool firstTry) const
     // indicate we have no good credentials from CM
     cmcred.reset();
 
-    string prompt_msg = boost::str(boost::format(
-      //!\todo add comma to the message for the next release
-      _("Authentication required for '%s'")) % _url.asString());
+    string prompt_msg = str::Format(_("Authentication required for '%s'")) % _url.asString();
 
     // set available authentication types from the exception
     // might be needed in prompt

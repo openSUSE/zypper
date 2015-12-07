@@ -56,11 +56,10 @@ namespace zypp
 		"  conflicts with file from install of\n"
 		"     %3%" )
 	}};
-	return( boost::formatNAC( text[lhsSolvable().isSystem()?0:1][rhsSolvable().isSystem()?0:1] )
-		% lhsFilename()
-		% lhsSolvable().asUserString()
-		% rhsSolvable().asUserString()
-	      ).str();
+	return str::FormatNAC( text[lhsSolvable().isSystem()?0:1][rhsSolvable().isSystem()?0:1] )
+	       % lhsFilename()
+	       % lhsSolvable().asUserString()
+	       % rhsSolvable().asUserString();
       }
       else
       {
@@ -99,12 +98,11 @@ namespace zypp
 		"  from install of\n"
 		"     %4%" )
 	}};
-	return( boost::formatNAC( text[lhsSolvable().isSystem()?0:1][rhsSolvable().isSystem()?0:1] )
-		% lhsFilename()
-		% lhsSolvable().asUserString()
-		% rhsFilename()
-		% rhsSolvable().asUserString()
-	      ).str();
+	return str::FormatNAC( text[lhsSolvable().isSystem()?0:1][rhsSolvable().isSystem()?0:1] )
+	       % lhsFilename()
+	       % lhsSolvable().asUserString()
+	       % rhsFilename()
+	       % rhsSolvable().asUserString();
       }
     }
 
@@ -114,20 +112,20 @@ namespace zypp
     std::ostream & operator<<( std::ostream & str, const FileConflicts::Conflict & obj )
     {
       if ( obj.lhsFilename() == obj.rhsFilename() )
-	return str << boost::format( "%s:\n    %s[%s]\n    %s[%s]" )
-			  % obj.lhsFilename()
-			  % obj.lhsSolvable()
-			  % obj.lhsFilemd5()
-			  % obj.rhsSolvable()
-			  % obj.rhsFilemd5();
+	return str << str::Format( "%s:\n    %s[%s]\n    %s[%s]" )
+		      % obj.lhsFilename()
+		      % obj.lhsSolvable()
+		      % obj.lhsFilemd5()
+		      % obj.rhsSolvable()
+		      % obj.rhsFilemd5();
 
-      return str << boost::format( "%s - %s:\n    %s[%s]\n    %s[%s]" )
-			% obj.lhsFilename()
-			% obj.rhsFilename()
-			% obj.lhsSolvable()
-			% obj.lhsFilemd5()
-			% obj.rhsSolvable()
-			% obj.rhsFilemd5();
+      return str << str::Format( "%s - %s:\n    %s[%s]\n    %s[%s]" )
+		    % obj.lhsFilename()
+		    % obj.rhsFilename()
+		    % obj.lhsSolvable()
+		    % obj.lhsFilemd5()
+		    % obj.rhsSolvable()
+		    % obj.rhsFilemd5();
     }
 
 

@@ -15,8 +15,6 @@
 #include <cstdio>
 #include <unistd.h>
 
-#include <boost/format.hpp>
-
 #include "zypp/TmpPath.h"
 #include "zypp/ZYppFactory.h"
 #include "zypp/ZYpp.h"
@@ -521,9 +519,9 @@ namespace zypp
   {
     if ( ! PathInfo( keyfile ).isExist() )
       // TranslatorExplanation first %s is key name, second is keyring name
-      ZYPP_THROW(KeyRingException(boost::str(boost::format(
-          _("Tried to import not existent key %s into keyring %s"))
-          % keyfile.asString() % keyring.asString())));
+      ZYPP_THROW(KeyRingException( str::Format(_("Tried to import not existent key %s into keyring %s"))
+				   % keyfile.asString()
+				   % keyring.asString() ));
 
     const char* argv[] =
     {
@@ -574,8 +572,7 @@ namespace zypp
   std::string KeyRing::Impl::readSignatureKeyId( const Pathname & signature )
   {
     if ( ! PathInfo( signature ).isFile() )
-      ZYPP_THROW(Exception(boost::str(boost::format(
-          _("Signature file %s not found"))% signature.asString())));
+      ZYPP_THROW(Exception( str::Format(_("Signature file %s not found")) % signature.asString() ));
 
     MIL << "Determining key id if signature " << signature << endl;
     // HACK create a tmp keyring with no keys
