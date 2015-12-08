@@ -3,7 +3,6 @@
 
 #include <string>
 #include <sstream>
-#include <boost/format.hpp>
 #include <boost/smart_ptr.hpp>
 
 #include <zypp/base/Xml.h>
@@ -450,15 +449,9 @@ public:
    *                  types of output.
    */
   virtual void info(const std::string & msg, Verbosity verbosity = NORMAL, Type mask = TYPE_ALL) = 0;
-  /** \overload taking boost::format */
-  void info( const boost::format & msg, Verbosity verbosity = NORMAL, Type mask = TYPE_ALL )
-  { info( msg.str(), verbosity, mask ); }
   /** \overload concatenating 2 strings (e.g. translated and untranslated parts) */
   void info( std::string msg, const std::string & msg2, Verbosity verbosity = NORMAL, Type mask = TYPE_ALL )
   { info( (msg+=msg2), verbosity, mask ); }
-  /** \overload concatenating 2 strings (e.g. translated and untranslated parts) */
-  void info( const boost::format & msg, const std::string & msg2, Verbosity verbosity = NORMAL, Type mask = TYPE_ALL )
-  { info( msg.str(), msg2, verbosity, mask ); }
 
   /** \ref info taking a \ref TermLine */
   virtual void infoLine(const TermLine & msg_r, Verbosity verbosity_r = NORMAL, Type mask_r = TYPE_ALL)
@@ -505,8 +498,6 @@ public:
    *                  types of output.
    */
   virtual void warning(const std::string & msg, Verbosity verbosity = NORMAL, Type mask = TYPE_ALL) = 0;
-  void warning( const boost::format & msg, Verbosity verbosity = NORMAL, Type mask = TYPE_ALL )
-  { warning( msg.str(), verbosity, mask ); }
 
   /** Convenience class for error reporting. */
   class Error;
@@ -520,8 +511,6 @@ public:
    * \param hint         Hint for the user (what to do, or explanation)
    */
   virtual void error(const std::string & problem_desc, const std::string & hint = "") = 0;
-  void error( const boost::format & problem_desc, const std::string & hint = "")
-  { error( problem_desc.str(), hint ); }
 
   /**
    * Prints the problem description caused by an exception, its cause and,
@@ -795,18 +784,10 @@ public:
     _progress.name( label_r );
     _progress.sendTo( Print( *this ) );
   }
-  ProgressBar( Out & out_r, NoStartBar, const std::string & progressId_r, const boost::format & label_r, unsigned current_r = 0, unsigned total_r = 0 )
-  : ProgressBar( out_r, noStartBar, progressId_r, label_r.str(), current_r, total_r )
-  {}
 
   ProgressBar( Out & out_r,NoStartBar,  const std::string & label_r, unsigned current_r = 0, unsigned total_r = 0 )
   : ProgressBar( out_r, noStartBar, "", label_r, current_r, total_r )
   {}
-
-  ProgressBar( Out & out_r, NoStartBar, const boost::format & label_r, unsigned current_r = 0, unsigned total_r = 0 )
-  : ProgressBar( out_r, noStartBar, "", label_r.str(), current_r, total_r )
-  {}
-
 
   /** Ctor displays initial progress bar.
    * If non zero values for \a current_r or \a total_r are passed,
@@ -819,16 +800,8 @@ public:
     _out.progressStart( _progressId, outLabel( _progress.name() ) );
   }
 
-  ProgressBar( Out & out_r, const std::string & progressId_r, const boost::format & label_r, unsigned current_r = 0, unsigned total_r = 0 )
-  : ProgressBar( out_r, progressId_r, label_r.str(), current_r, total_r )
-  {}
-
   ProgressBar( Out & out_r, const std::string & label_r, unsigned current_r = 0, unsigned total_r = 0 )
   : ProgressBar( out_r, "", label_r, current_r, total_r )
-  {}
-
-  ProgressBar( Out & out_r, const boost::format & label_r, unsigned current_r = 0, unsigned total_r = 0 )
-  : ProgressBar( out_r, "", label_r.str(), current_r, total_r )
   {}
 
   /** Dtor displays final progress bar.
@@ -1030,55 +1003,24 @@ struct Out::Error
   // basic: code msg hint
   Error( int exitcode_r, std::string msg_r, std::string hint_r = std::string() )
   : _exitcode( exitcode_r ), _msg( std::move(msg_r) ), _hint( std::move(hint_r) ) {}
-  Error( int exitcode_r, const boost::format & msg_r, std::string hint_r = std::string() )
-  : _exitcode( exitcode_r ), _msg( boost::str( msg_r ) ), _hint( std::move(hint_r) ) {}
-  Error( int exitcode_r, std::string msg_r, const boost::format & hint_r )
-  : _exitcode( exitcode_r ), _msg( std::move(msg_r) ), _hint( boost::str( hint_r ) ) {}
-  Error( int exitcode_r, const boost::format & msg_r, const boost::format & hint_r )
-  : _exitcode( exitcode_r ), _msg( boost::str( msg_r ) ), _hint( boost::str( hint_r ) ) {}
 
   // code exception hint
   Error( int exitcode_r, const zypp::Exception & ex_r, std::string hint_r = std::string() )
   : _exitcode( exitcode_r ), _msg( combine( ex_r ) ), _hint( std::move(hint_r) ) {}
-  Error( int exitcode_r, const zypp::Exception & ex_r, const boost::format & hint_r )
-  : _exitcode( exitcode_r ), _msg( combine( ex_r ) ), _hint( boost::str( hint_r ) ) {}
 
   // code (msg exception) hint
   Error( int exitcode_r, std::string msg_r, const zypp::Exception & ex_r, std::string hint_r = std::string() )
   : _exitcode( exitcode_r ), _msg( combine( std::move(msg_r), ex_r ) ), _hint( std::move(hint_r) ) {}
-  Error( int exitcode_r, const boost::format & msg_r, const zypp::Exception & ex_r, std::string hint_r = std::string() )
-  : _exitcode( exitcode_r ), _msg( combine( boost::str( msg_r ), ex_r ) ), _hint( std::move(hint_r) ) {}
-  Error( int exitcode_r, std::string msg_r, const zypp::Exception & ex_r, const boost::format & hint_r )
-  : _exitcode( exitcode_r ), _msg( combine( std::move(msg_r), ex_r ) ), _hint( boost::str( hint_r ) ) {}
-  Error( int exitcode_r, const boost::format & msg_r, const zypp::Exception & ex_r, const boost::format & hint_r )
-  : _exitcode( exitcode_r ), _msg( combine( boost::str( msg_r ), ex_r ) ), _hint( boost::str( hint_r ) ) {}
-
 
   // as above but without code	ZYPPER_EXIT_OK
   Error( std::string msg_r, std::string hint_r = std::string() )
   : _exitcode( ZYPPER_EXIT_OK ), _msg( std::move(msg_r) ), _hint( std::move(hint_r) ) {}
-  Error( const boost::format & msg_r, std::string hint_r = std::string() )
-  : _exitcode( ZYPPER_EXIT_OK ), _msg( boost::str( msg_r ) ), _hint( std::move(hint_r) ) {}
-  Error( std::string msg_r, const boost::format & hint_r )
-  : _exitcode( ZYPPER_EXIT_OK ), _msg( std::move(msg_r) ), _hint( boost::str( hint_r ) ) {}
-  Error( const boost::format & msg_r, const boost::format & hint_r )
-  : _exitcode( ZYPPER_EXIT_OK ), _msg( boost::str( msg_r ) ), _hint( boost::str( hint_r ) ) {}
 
   Error( const zypp::Exception & ex_r, std::string hint_r = std::string() )
   : _exitcode( ZYPPER_EXIT_OK ), _msg( combine( ex_r ) ), _hint( std::move(hint_r) ) {}
-  Error( const zypp::Exception & ex_r, const boost::format & hint_r )
-  : _exitcode( ZYPPER_EXIT_OK ), _msg( combine( ex_r ) ), _hint( boost::str( hint_r ) ) {}
 
   Error( std::string msg_r, const zypp::Exception & ex_r, std::string hint_r = std::string() )
   : _exitcode( ZYPPER_EXIT_OK ), _msg( combine( std::move(msg_r), ex_r ) ), _hint( std::move(hint_r) ) {}
-  Error( const boost::format & msg_r, const zypp::Exception & ex_r, std::string hint_r = std::string() )
-  : _exitcode( ZYPPER_EXIT_OK ), _msg( combine( boost::str( msg_r ), ex_r ) ), _hint( std::move(hint_r) ) {}
-  Error( std::string msg_r, const zypp::Exception & ex_r, const boost::format & hint_r )
-  : _exitcode( ZYPPER_EXIT_OK ), _msg( combine( std::move(msg_r), ex_r ) ), _hint( boost::str( hint_r ) ) {}
-  Error( const boost::format & msg_r, const zypp::Exception & ex_r, const boost::format & hint_r )
-  : _exitcode( ZYPPER_EXIT_OK ), _msg( combine( boost::str( msg_r ), ex_r ) ), _hint( boost::str( hint_r ) ) {}
-
-
 
   /** Default way of processing a caught \ref Error exception.
    * \li Write error message and optional hint to screen.
